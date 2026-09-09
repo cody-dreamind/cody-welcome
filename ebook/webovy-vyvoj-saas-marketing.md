@@ -7028,6 +7028,132 @@ Vyber tři nejdůležitější e-maily ve svém produktu: reset hesla, první po
 
 Potom pošli test na vlastní adresu mimo firemní doménu a zkontroluj nejen vzhled, ale i hlavičky autentizace. Pokud v doručené poště vidíš varování, neříkej „to se spraví samo“. E-mailová reputace není pokojová rostlina, která se vzpamatuje po jedné zálivce.
 
+## Dodatek AT: Cache, obrázky a statická aktiva bez datového průvanu
+
+Rychlý web nevznikne tím, že na něj nalepíš ještě jeden „performance plugin“ a budeš doufat, že fyzika dostane dovolenou. Rychlý web vzniká tím, že prohlížeči pošleš méně věcí, menší věci a často mu dovolíš věci znovu použít. Cache není trik pro administrátory. Je to produktová vlastnost, která šetří čas uživatele, serverové náklady a někdy i nervovou soustavu vývojáře.
+
+MDN popisuje HTTP caching jako mechanismus, ve kterém odpovědi mohou být ukládány a znovu použity podle hlaviček jako `Cache-Control`, validátorů `ETag` a `Last-Modified` nebo pravidel pro sdílené cache. Zdroj: https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching
+
+Privacy-first pohled je jednoduchý: cache a optimalizace mají zrychlit produkt, ne otevřít zadní dveře pro sledování lidí přes třetí strany. Pokud kvůli rychlosti přesuneš všechno na cizí CDN, přidej si do rozhodování i otázku, kdo vidí IP adresy, URL cestu, hlavičky požadavků a provozní metadata. Výkon bez kontroly nad daty je jen hezky naleštěný kompromis.
+
+### AT.1 Rozděl aktiva podle rizika změny
+
+Nejdřív si udělej pořádek v tom, co se mění často a co skoro nikdy. Bez toho nastavíš cache buď moc krátkou a zbytečně pálíš přenos, nebo moc dlouhou a uživatelům zůstane starý soubor v prohlížeči jako digitální fosilie.
+
+Praktické rozdělení:
+
+- **Verzované build soubory:** CSS, JS a fonty s hashem v názvu, například `app.7f3a2c.css`.
+- **Obsahové obrázky:** fotky v článcích, produktové screenshoty, ilustrace, loga zákazníků.
+- **Veřejné dokumenty:** PDF, katalogy, šablony, exportované návody.
+- **Dynamické HTML:** stránky, které skládají aktuální obsah, přihlášení, stav účtu nebo personalizaci.
+- **API odpovědi:** data aplikace, vyhledávání, dashboardy, notifikace.
+- **Soukromé soubory:** exporty zákazníka, faktury, přílohy, dokumenty a cokoliv za přístupem.
+
+Pro verzované build soubory můžeš použít dlouhou cache, protože změna názvu znamená novou verzi. Pro HTML buď opatrnější, protože často rozhoduje o navigaci, meta datech, bezpečnostních hláškách a dostupnosti nové verze aplikace. Soukromé soubory do sdílené cache vůbec neposílej, pokud nemáš opravdu přesně navrženou autorizaci a invalidaci.
+
+### AT.2 Cache-Control piš jako provozní smlouvu
+
+Hlavička `Cache-Control` není dekorace. Je to instrukce pro prohlížeč, mezilehlé cache a někdy i CDN. MDN uvádí direktivy jako `max-age`, `s-maxage`, `no-store`, `no-cache`, `private`, `public`, `immutable` nebo `stale-while-revalidate`. Zdroj: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
+
+Rozumné výchozí vzory:
+
+| Typ odpovědi | Příklad hlavičky | Poznámka |
+| --- | --- | --- |
+| Verzované CSS/JS | `Cache-Control: public, max-age=31536000, immutable` | Jen když má soubor hash v názvu. |
+| HTML stránky | `Cache-Control: no-cache` | Prohlížeč může uložit, ale musí ověřit čerstvost. |
+| Přihlášená aplikace | `Cache-Control: private, no-cache` | Nechceš sdílenou cache pro uživatelský obsah. |
+| Citlivé exporty | `Cache-Control: no-store` | Soubor se nemá ukládat do cache. |
+| Veřejné obrázky | `Cache-Control: public, max-age=604800` | Délku nastav podle toho, jak často měníš obsah. |
+
+Neopisuj tyhle hodnoty slepě. Otestuj chování po deployi, po rollbacku, po změně obrázku a po odhlášení. Cache je krásná sluha a trochu mstivá paní, když ji pustíš k datům bez dozoru.
+
+### AT.3 Obrázky optimalizuj dřív než infrastrukturu
+
+U malých webů bývá největší výkonový dluh obyčejný obrázek. Hero fotka v několika megabajtech, screenshot exportovaný z designu ve zbytečném rozlišení, logo jako PNG místo SVG. Pak se tým hádá o framework a přitom mu domů běží slon přes modem.
+
+Praktický postup:
+
+1. Změř největší obrázky na hlavních stránkách.
+2. Ořízni skutečný rozměr podle použití, ne podle původního exportu.
+3. Použij moderní formáty tam, kde dávají smysl, ale nech bezpečný fallback.
+4. Nastav `width` a `height`, aby stránka neskákala při načítání.
+5. Lazy-loaduj obrázky mimo první obrazovku.
+6. Logo, ikony a jednoduchou grafiku drž jako SVG, pokud to neotevírá bezpečnostní riziko.
+
+Privacy-first poznámka: obrázky z externích domén mohou posílat provozní metadata třetí straně při každém načtení. U vlastního marketingového webu je často lepší hostovat média sám, ideálně v evropském provozu, než používat embed, který přinese cizí cookies, fingerprinting nebo přinejmenším zbytečný síťový otisk.
+
+### AT.4 Fonty jsou design i výkonový rozpočet
+
+Font dokáže web zvednout. Taky ho dokáže zpomalit tak elegantně, že to vypadá jako designový záměr. Nepotřebuješ pět rodin, deset řezů a ikonový font kvůli třem symbolům v patičce.
+
+Rozumné minimum:
+
+- jedna hlavní font rodina,
+- systémový fallback,
+- jen řezy, které opravdu používáš,
+- `font-display: swap` nebo podobně promyšlené chování,
+- lokální hostování fontů, pokud licence dovolí,
+- pravidelná kontrola, jestli se nepoužívané řezy nedají odstranit.
+
+Když chce marketing „trochu výraznější nadpisy“, nepřidávej další font automaticky. Nejdřív zkus váhu, velikost, kontrast, whitespace a lepší text. Design je často typografická disciplína, ne katalog všech písem, která internet kdy vyrobil.
+
+### AT.5 Externí skripty považuj za dodavatelský vztah
+
+Každý externí skript je malý dodavatel v prohlížeči uživatele. Může ovlivnit výkon, bezpečnost, dostupnost a soukromí. Proto se k němu chovej jako k integraci, ne jako k drobnému copy-paste z dokumentace.
+
+U každého skriptu si zapiš:
+
+- proč ho potřebujeme,
+- na kterých stránkách běží,
+- jaká data vidí,
+- odkud se načítá,
+- kdo je provozovatel,
+- co se stane při výpadku,
+- jak ho vypneme,
+- kdy naposledy někdo ověřil, že je stále nutný.
+
+Pro skripty z cizích zdrojů zvaž Subresource Integrity. MDN vysvětluje, že SRI umožňuje prohlížeči ověřit, že stažený soubor odpovídá očekávanému kryptografickému hashi. Zdroj: https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity
+
+SRI ale není omluvenka pro bezstarostnost. Neřeší obchodní vztah, přenos metadat ani otázku, proč skript na stránce vůbec je. Je to bezpečnostní pojistka, ne morální odpustek.
+
+### AT.6 CDN vybírej podle datového toku, ne podle hype grafu
+
+CDN může dávat smysl pro veřejná statická aktiva, vysoký provoz nebo geograficky široké publikum. U evropského privacy-first SaaS ale nezačínej otázkou „která CDN je nejpopulárnější“, ale „jaká data přes ni potečou“.
+
+Ptej se:
+
+- Jsou přes CDN jen veřejné soubory, nebo i cesty s identifikátory zákazníků?
+- Kde se zpracovávají logy a jak dlouho se drží?
+- Umíme logování omezit nebo anonymizovat?
+- Máme jasný DPA nebo smluvní režim, pokud jde o osobní údaje?
+- Co se stane při výpadku poskytovatele?
+- Umíme přejít jinam bez přepisování půlky aplikace?
+
+Codyho komentář: CDN není automaticky zlo. Automatické je jen to, že někdo na meetingu řekne „všichni to tak dělají“. To je argument vhodný pro výběr pizzy, ne pro architekturu toku dat.
+
+### AT.7 Checklist cache a assetů
+
+- [ ] Mají build soubory hash v názvu a dlouhou cache?
+- [ ] Má HTML opatrnější cache režim a ověřuje čerstvost po deployi?
+- [ ] Jsou citlivé soubory chráněné před sdílenou cache?
+- [ ] Jsou největší obrázky oříznuté, komprimované a správně rozměrované?
+- [ ] Používá web jen fonty a řezy, které opravdu potřebuje?
+- [ ] Má každý externí skript jasný důvod, vlastníka a plán vypnutí?
+- [ ] Jsou externí skripty omezené na stránky, kde jsou nutné?
+- [ ] Ví tým, jak cache invalidovat při urgentní opravě?
+- [ ] Jsou CDN a mediální služby posouzené podle datového toku a evropského provozu?
+- [ ] Je v runbooku popsáno, co dělat při rozbitém deployi kvůli cache?
+
+### AT.8 Mini úkol na 45 minut
+
+Otevři produkční homepage a jednu přihlášenou obrazovku. V prohlížeči si vypiš deset největších requestů a u každého doplň:
+
+| Request | Typ | Velikost | Cache hlavička | Externí doména? | Nutné? | Akce |
+| --- | --- | ---: | --- | --- | --- | --- |
+|  |  |  |  |  |  |  |
+
+Pak vyber jednu rychlou výhru: zmenšit obrázek, odstranit nepoužívaný font, vypnout zbytečný skript nebo opravit cache hlavičku u verzovaného souboru. Jedna konkrétní změna ve výkonu je lepší než tříhodinová debata o tom, jestli web „působí svižně“. Prohlížeč nemá dojmy. Prohlížeč má waterfall.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -7092,9 +7218,13 @@ Potom pošli test na vlastní adresu mimo firemní doménu a zkontroluj nejen vz
 - RFC Editor: RFC 7208 Sender Policy Framework SPF — https://www.rfc-editor.org/info/rfc7208
 - RFC Editor: RFC 6376 DomainKeys Identified Mail DKIM Signatures — https://www.rfc-editor.org/info/rfc6376
 - RFC Editor: RFC 9989 Domain-Based Message Authentication, Reporting, and Conformance DMARC — https://www.rfc-editor.org/info/rfc9989
+- MDN Web Docs: HTTP caching — https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching
+- MDN Web Docs: Cache-Control — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
+- MDN Web Docs: Subresource Integrity — https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn Dodatek AT o cache, optimalizaci obrázků, fontech, externích skriptech, CDN a privacy-first kontrole statických assetů.
 - 2026-09-09: Doplněn Dodatek AS o e-mailové doručitelnosti, SPF/DKIM/DMARC, oddělení transakční pošty, preferencích, měření bez šmírování a checklistu provozu.
 - 2026-09-09: Doplněn Dodatek AR o feature flazích, postupném rollout schodišti, bezpečném vypínání, metrikách rozhodování a privacy-first měření změn.
 - 2026-09-09: Doplněn Dodatek AQ o tenant izolaci, serverové autorizaci, cache, testování multi-tenant hranic a privacy-first provozní hygieně.
