@@ -4942,6 +4942,32 @@ Jedna opravená věc týdně porazí obří transformační projekt, který skon
 
 Prázdný stav je první rozhovor produktu s člověkem, který ještě nic nevytvořil, neimportoval ani nezměřil. Když na něj vyskočí jen šedá tabulka s textem „No data“, produkt promarní skvělou šanci vysvětlit hodnotu bez další dokumentace. Dobrá prázdná obrazovka říká, co se má stát, proč to dává smysl a jaký je nejmenší bezpečný další krok.
 
+### AD.1 Rozlišuj typy prázdna
+
+Ne každé prázdno má stejnou příčinu. Když všechny prázdné stavy napíšeš jednou větou „Zatím tu nic není“, bude produkt znít jako úředník, který právě zavřel okénko. Rozděl si je podle situace:
+
+- **Nový účet:** uživatel je tu poprvé a potřebuje pochopit první akci.
+- **Vyfiltrovaný seznam:** data existují, ale aktuální filtr je nenašel.
+- **Chybějící oprávnění:** obsah existuje, ale uživatel k němu nemá přístup.
+- **Čekání na data:** import, synchronizace nebo měření ještě nedoběhly.
+- **Skutečně prázdný výsledek:** produkt nemá co ukázat a je fér to říct.
+
+Každý typ potřebuje jiný tón. Nový účet má vést. Vyfiltrovaný seznam má nabídnout úpravu filtru. Chybějící oprávnění má vysvětlit, koho požádat. Čekání na data má dát časový odhad nebo další bezpečný krok.
+
+### AD.2 Prázdný stav má učit jednu věc
+
+Prázdná obrazovka není náhrada dokumentace, akademie produktu ani marketingový billboard. Vyber jednu věc, kterou má uživatel pochopit právě teď. Typicky:
+
+- co tahle část produktu dělá,
+- proč se vyplatí začít,
+- jak vypadá první dobrý výsledek,
+- co je nejmenší akce bez rizika,
+- kde najít pomoc, když si není jistý.
+
+Pokud chceš vysvětlit pět věcí najednou, nejspíš nemáš problém s prázdným stavem, ale s informační architekturou. Au. Ale lepší zjistit to tady než po třech měsících support tiketů.
+
+### AD.3 Používej konkrétní mikrokopii
+
 U malého SaaS stačí jednoduchý vzorec:
 
 - Jeden jasný nadpis: „Zatím tu nejsou žádné projekty.“
@@ -4950,9 +4976,82 @@ U malého SaaS stačí jednoduchý vzorec:
 - Jeden únikový odkaz: „Podívat se na ukázkový projekt“ nebo „Přečíst nápovědu“.
 - Žádné sbírání dat navíc jen proto, že je obrazovka prázdná.
 
-Prázdné stavy jsou zároveň dobré místo pro přístupnost. Text má být konkrétní, ovládací prvky pojmenované a cesta dál pochopitelná i bez vizuální nápovědy. WCAG 2.2 opakovaně řeší srozumitelnost, navigaci a popisky rozhraní; u prázdných stavů to není akademie, ale obyčejná použitelnost. Zdroj: https://www.w3.org/TR/WCAG22/
+Špatně:
+
+> Žádná data. Začněte přidáním položky.
+
+Lépe:
+
+> Zatím tu nejsou žádné faktury. Vytvoř první fakturu ručně, nebo nahraj CSV export ze stávajícího systému. Import můžeš kdykoliv smazat.
+
+Ještě lépe, pokud jde o privacy-first produkt:
+
+> Zatím tu nejsou žádné faktury. Pro test můžeš použít ukázkovou fakturu bez osobních údajů; reálná zákaznická data nahraj až ve chvíli, kdy víš, že ti workflow sedí.
+
+### AD.4 Nenahrazuj hodnotu sběrem údajů
+
+Častá chyba: produkt nemá co ukázat, tak začne vyžadovat onboardingový dotazník. Velikost firmy, role, obor, telefon, počet zaměstnanců, oblíbená barva faktury, krevní skupina účetní. Tohle není onboarding. To je formulářová turistika.
 
 Privacy-first pravidlo: nevynucuj onboardingový dotazník, když uživatel může začít s minimem údajů. Pokud potřebuješ kontext, ptej se postupně až ve chvíli, kdy pomůže dokončit konkrétní akci.
+
+Praktické pravidlo:
+
+- Když uživatel chce vytvořit první projekt, neptej se na marketingový segment.
+- Když chce pozvat kolegu, ptej se jen na e-mail a roli.
+- Když chce importovat data, vysvětli formát, rozsah a možnost smazání.
+- Když chce vyzkoušet demo, nabídni syntetická data bez osobních údajů.
+- Když potřebuješ profilaci pro lepší zkušenost, napiš proč a dovol přeskočení.
+
+### AD.5 Přístupnost není bonusový režim
+
+Prázdné stavy jsou zároveň dobré místo pro přístupnost. Text má být konkrétní, ovládací prvky pojmenované a cesta dál pochopitelná i bez vizuální nápovědy. WCAG 2.2 opakovaně řeší srozumitelnost, navigaci a popisky rozhraní; u prázdných stavů to není akademie, ale obyčejná použitelnost. Zdroj: https://www.w3.org/TR/WCAG22/
+
+Kontroluj hlavně:
+
+- CTA má srozumitelný text, ne jen „Pokračovat“.
+- Ikona není jediný nositel významu.
+- Stav lze pochopit i při čtení screen readerem.
+- Chybějící oprávnění říká, co se děje a kdo může pomoci.
+- Barva prázdného stavu není jediný rozdíl mezi informací, varováním a chybou.
+
+### AD.6 Konkrétní příklad: prázdný dashboard analytiky
+
+Představ si privacy-first analytiku pro menší B2B web. Nový uživatel otevře dashboard a zatím nemá žádné návštěvy. Špatný prázdný stav by ukázal jen prázdný graf a tlačítko „Nastavit tracking“. Lepší verze:
+
+**Nadpis:** Zatím nemáme návštěvy k zobrazení.
+
+**Text:** Jakmile vložíš měřicí skript na web, dashboard začne ukazovat agregované návštěvy, referrery a vlastní události bez reklamního profilování.
+
+**Primární CTA:** Zobrazit instalační postup.
+
+**Sekundární odkaz:** Otevřít ukázkový dashboard.
+
+**Privacy poznámka:** Nemusíš zapínat cookies ani sledovat konkrétní osoby, pokud ti stačí agregované měření.
+
+Tahle obrazovka dělá čtyři věci najednou, ale nepůsobí přeplácaně: vysvětluje hodnotu, vede k první akci, ukazuje bezpečnou alternativu a připomíná princip soukromí.
+
+### AD.7 Checklist prázdného stavu
+
+- [ ] Je jasné, proč je obrazovka prázdná?
+- [ ] Rozlišuje text nový účet, filtr, oprávnění, čekání a skutečný nulový výsledek?
+- [ ] Má obrazovka jedno hlavní CTA a maximálně jeden sekundární odkaz?
+- [ ] Vysvětluje text hodnotu konkrétní části produktu, ne celý produkt najednou?
+- [ ] Nabízí demo nebo ukázková data tam, kde by reálná data byla zbytečné riziko?
+- [ ] Lze pokračovat bez vyplnění údajů, které nejsou nutné pro první akci?
+- [ ] Je stav pochopitelný bez barvy, ikon a vizuálního kontextu?
+- [ ] Má prázdný stav vlastníka v produktu, ne jen náhodný text od vývojáře mezi dvěma deployi?
+
+### AD.8 Mini úkol na 45 minut
+
+Vyber tři nejdůležitější prázdné stavy ve svém produktu nebo webové administraci. Ke každému napiš:
+
+1. proč je prázdný,
+2. co má uživatel pochopit,
+3. jaká je jedna další bezpečná akce,
+4. jak se vyhneš zbytečnému sběru dat,
+5. jak bude stav čitelný pro člověka používajícího asistivní technologii.
+
+Potom jeden z nich rovnou přepiš v UI. Nečekej na velký redesign. Prázdný stav je malý text, ale velký signál, jestli produkt myslí na člověka, nebo jen na databázovou tabulku.
 
 > Codyho komentář: Prázdný stav nemá znít jako chyba systému. Má znít jako klidný člověk u recepce: „Jasně, jste tu poprvé, tudy prosím.“
 
@@ -5011,6 +5110,7 @@ Privacy-first pravidlo: nevynucuj onboardingový dotazník, když uživatel mů�
 
 ## Pracovní log
 
+- 2026-09-09: Rozšířen Dodatek AD o typy prázdných stavů, mikrokopii, privacy-first onboarding, přístupnost, příklad analytického dashboardu a checklist.
 - 2026-09-09: Doplněn Dodatek AC o lokalizaci, ověřování evropské expanze, fakturaci, DPH scénářích, podpoře a privacy-first komunikaci provozu.
 - 2026-09-09: Doplněn Dodatek AD o prázdných stavech, mikrokopii, přístupnosti a privacy-first onboardingu bez zbytečného sběru dat.
 - 2026-09-09: Doplněn Dodatek AB o předstartovním QA, kontrole zákaznických cest, formulářů, technickém runbooku a privacy-first kontrole před publikací.
