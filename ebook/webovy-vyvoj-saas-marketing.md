@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace a evropská expanze.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze a prázdné stavy.
 
 ---
 
@@ -4938,6 +4938,24 @@ Jedna opravená věc týdně porazí obří transformační projekt, který skon
 
 > Codyho komentář: Nejlepší SaaS není ten, který umí ukázat nejvíc grafů v dashboardu. Nejlepší SaaS je ten, kterému zákazník rozumí, tým ho zvládá provozovat a právník u něj nepije kafe se slzou v oku.
 
+## Dodatek AD: Prázdné stavy, které učí místo strašení
+
+Prázdný stav je první rozhovor produktu s člověkem, který ještě nic nevytvořil, neimportoval ani nezměřil. Když na něj vyskočí jen šedá tabulka s textem „No data“, produkt promarní skvělou šanci vysvětlit hodnotu bez další dokumentace. Dobrá prázdná obrazovka říká, co se má stát, proč to dává smysl a jaký je nejmenší bezpečný další krok.
+
+U malého SaaS stačí jednoduchý vzorec:
+
+- Jeden jasný nadpis: „Zatím tu nejsou žádné projekty.“
+- Krátké vysvětlení hodnoty: „Projekt spojí úkoly, poznámky a termíny na jedno místo.“
+- Jedno hlavní CTA: „Vytvořit první projekt.“
+- Jeden únikový odkaz: „Podívat se na ukázkový projekt“ nebo „Přečíst nápovědu“.
+- Žádné sbírání dat navíc jen proto, že je obrazovka prázdná.
+
+Prázdné stavy jsou zároveň dobré místo pro přístupnost. Text má být konkrétní, ovládací prvky pojmenované a cesta dál pochopitelná i bez vizuální nápovědy. WCAG 2.2 opakovaně řeší srozumitelnost, navigaci a popisky rozhraní; u prázdných stavů to není akademie, ale obyčejná použitelnost. Zdroj: https://www.w3.org/TR/WCAG22/
+
+Privacy-first pravidlo: nevynucuj onboardingový dotazník, když uživatel může začít s minimem údajů. Pokud potřebuješ kontext, ptej se postupně až ve chvíli, kdy pomůže dokončit konkrétní akci.
+
+> Codyho komentář: Prázdný stav nemá znít jako chyba systému. Má znít jako klidný člověk u recepce: „Jasně, jste tu poprvé, tudy prosím.“
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -4994,6 +5012,7 @@ Jedna opravená věc týdně porazí obří transformační projekt, který skon
 ## Pracovní log
 
 - 2026-09-09: Doplněn Dodatek AC o lokalizaci, ověřování evropské expanze, fakturaci, DPH scénářích, podpoře a privacy-first komunikaci provozu.
+- 2026-09-09: Doplněn Dodatek AD o prázdných stavech, mikrokopii, přístupnosti a privacy-first onboardingu bez zbytečného sběru dat.
 - 2026-09-09: Doplněn Dodatek AB o předstartovním QA, kontrole zákaznických cest, formulářů, technickém runbooku a privacy-first kontrole před publikací.
 - 2026-09-09: Doplněn Dodatek AA o nabídkách, rozsahu spolupráce, klientských vstupech, změnových požadavcích a privacy-first hranicích už ve fázi zadání.
 - 2026-09-09: Doplněn závěr e-booku s praktickým návodem, jak text používat dál, a finálním checklistem pro web, SaaS, marketing, provoz a privacy-first exporty.
