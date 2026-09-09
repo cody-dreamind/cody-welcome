@@ -6526,6 +6526,133 @@ Vyber jeden kritický nástroj: hosting, e-mail, support, platby nebo analytiku.
 Na konci vyber jednu konkrétní redukci dat. Ne „jednou zlepšíme privacy“. Konkrétně: odstranit e-mail z logů, omezit webhook payload, vypnout ukládání IP, zkrátit retenci příloh nebo přesunout zákaznický screenshot do interního úložiště v EU. Malá redukce dnes je lepší než velká compliance prezentace někdy po kvartálu.
 
 
+## Dodatek AP: Interní administrace bez superadmin džungle
+
+Interní administrace je často nejmocnější část SaaS a zároveň místo, které tým kreslí až nakonec. Zákaznické rozhraní dostane design review, onboarding, mikrokopii a tři meetingy o tlačítku. Interní admin panel mezitím vznikne v pátek večer jako tabulka, filtr a jedno tlačítko „Udělej magii“. Přesně tam pak leží exporty, ruční změny plánů, přístupy podpory, refundace, impersonace a data, která by se opravdu neměla potulovat po firmě jako ponožka po prádelně.
+
+OWASP ASVS dává bezpečnostním kontrolám pro webové aplikace praktický rámec: přístupová práva, autentizace, správa relací, logování a ověřitelnost nejsou kosmetika, ale součást vývoje. EDPB u data protection by design and by default připomíná stejný princip z pohledu osobních údajů: ochrana dat má být zabudovaná od návrhu a výchozí nastavení nemá odkrývat víc, než je nutné.
+
+Codyho komentář: Admin panel není zákulisí divadla, kam zákazník nevidí. Je to operační sál. A v operačním sále fakt nechceš tlačítko „zkusíme něco“ vedle tlačítka „smazat produkci“.
+
+### AP.1 Admin není jedna role
+
+Nejhorší model interní administrace je „kdo pracuje ve firmě, je admin“. Druhý nejhorší je „máme role, ale všichni mají tu nejvyšší, protože je to pohodlnější“. Role navrhuj podle práce, kterou člověk reálně dělá.
+
+Rozděl interní oprávnění minimálně takto:
+
+| Role | Typické akce | Co nesmí umět |
+| --- | --- | --- |
+| Podpora | najít účet, vidět stav předplatného, poslat odkaz na nápovědu | měnit fakturační údaje, mazat data, číst citlivý obsah bez důvodu |
+| Billing | řešit faktury, platby, refundace a daňové údaje | vstupovat do zákaznických projektů a technického obsahu |
+| Produkt | vidět agregované používání funkcí a feedback | exportovat osobní data bez schváleného účelu |
+| Technický provoz | diagnostikovat chyby, fronty a integrace | měnit obchodní podmínky účtu bez auditní stopy |
+| Vlastník systému | schvalovat rizikové akce a spravovat role | pracovat bez MFA a bez pravidelného review přístupů |
+
+Tohle není byrokracie. Je to prevence proti tomu, aby každý supportní dotaz automaticky znamenal plný přístup do cizího účtu.
+
+### AP.2 Rizikové akce dej za druhé rozhodnutí
+
+Nebezpečná akce nemá být jen červené tlačítko. Červené tlačítko je pořád tlačítko. Potřebuje kontext, potvrzení a někdy druhý pár očí.
+
+Za rizikové považuj hlavně:
+
+- změnu e-mailu vlastníka účtu,
+- změnu nebo ruční přepsání tarifu,
+- refundaci nebo storno faktury,
+- export zákaznických dat,
+- trvalé smazání dat,
+- impersonaci uživatele,
+- změnu integračních tokenů,
+- ruční zásah do webhooků, front nebo platebních stavů.
+
+Praktické pravidlo: pokud by špatné kliknutí způsobilo právní problém, finanční škodu nebo ztrátu důvěry, akce potřebuje jasný důvod, potvrzení konkrétní hodnoty a auditní záznam. U nejcitlivějších akcí přidej schvalování druhým člověkem nebo časové zpoždění.
+
+### AP.3 Impersonace musí být výjimka, ne teleport
+
+„Přihlásit se jako zákazník“ je lákavá funkce, protože zrychlí support. Je taky nebezpečná, protože rozmazává hranici mezi pomocí a přístupem k soukromým datům. Pokud impersonaci opravdu potřebuješ, navrhni ji jako omezený režim.
+
+Dobrá pravidla impersonace:
+
+- vyžaduje konkrétní důvod a odkaz na tiket,
+- je časově omezená,
+- viditelně označí, že nejsi běžný uživatel,
+- zakáže citlivé akce jako změnu hesla, export, smazání nebo platbu,
+- zapíše začátek, konec, člověka, účet a důvod,
+- ideálně zobrazí zákazníkovi historii supportních vstupů do účtu.
+
+Privacy-first varianta je ještě lepší: místo plné impersonace vytvoř diagnostický pohled. Podpora vidí stav účtu, poslední chyby, konfiguraci a bezpečné náhledy, ale nečte obsah zákaznické práce, pokud k tomu není jasný důvod.
+
+### AP.4 Audit log má být čitelný i za tři měsíce
+
+Auditní záznam typu `updated_user` je skoro k ničemu. Kdo? Co přesně? Proč? Z čeho na co? Z jakého rozhraní? Kterého zákazníka se to týkalo? Bez těchto odpovědí je audit log spíš psychologická podpora pro zakladatele než provozní nástroj.
+
+U interních akcí ukládej:
+
+- kdo akci provedl,
+- koho nebo čeho se týkala,
+- co se změnilo,
+- předchozí a novou hodnotu u bezpečných polí,
+- důvod nebo tiket,
+- čas,
+- zdroj akce, například admin panel, skript nebo automatizace,
+- korelační ID pro dohledání v technických logách.
+
+Pozor na obsah logů. Auditní stopa nemá být další databáze osobních údajů bez pravidel. U citlivých hodnot raději loguj typ změny, hash, poslední čtyři znaky identifikátoru nebo interní referenci. Smyslem je dohledatelnost, ne kopie celého zákaznického světa.
+
+### AP.5 Interní nástroje potřebují UX stejně jako produkt
+
+Špatný admin panel nevypadá jako bezpečnostní problém, ale je. Když lidé nevidí rozdíl mezi podobnými účty, nepoznají dopad akce nebo musí přeskakovat mezi pěti záložkami, dělají chyby. A chyby v adminu bývají dražší než chyby v běžném nastavení.
+
+Základní UX pravidla:
+
+- vždy ukaž prostředí: produkce, staging, testovací účet,
+- zvýrazni zákazníka, organizaci a tarif,
+- odděl čtení od zápisu,
+- u destruktivních akcí ukaž konkrétní dopad,
+- používej bezpečné prázdné stavy místo prázdných tabulek,
+- vyhledávání omez tak, aby nešlo pohodlně procházet databázi bez účelu,
+- citlivá data maskuj a odhaluj jen po explicitním kroku.
+
+Admin panel má být pomalejší tam, kde rychlost škodí. Tohle je jeden z mála případů, kdy „méně friction“ není automaticky výhra.
+
+### AP.6 Konkrétní příklad: ruční změna tarifu
+
+Představ si B2B SaaS, kde obchod potřebuje zákazníkovi dočasně navýšit tarif. Špatná verze: support otevře admin, přepíše plán z `Basic` na `Business`, uloží a jde dál. Nikdo neví proč, na jak dlouho, kdo to schválil a jestli billing vystaví správnou fakturu.
+
+Lepší flow:
+
+1. Admin vybere zákazníka a vidí aktuální tarif, cenu, fakturační období a vlastníka účtu.
+2. Klikne na „Dočasně změnit tarif“ místo obecného „Upravit účet“.
+3. Vyplní nový tarif, důvod, číslo obchodního případu a datum návratu.
+4. Systém ukáže dopad: nové limity, očekávaná fakturace, zákaznické upozornění a rizika.
+5. U větších změn žádá schválení druhým člověkem.
+6. Po uložení vytvoří audit log a naplánuje automatické připomenutí před koncem výjimky.
+
+Výsledek: obchod má flexibilitu, billing ví co se stalo, produkt má čistá data a zákazník není obětí interní improvizace.
+
+### AP.7 Checklist interní administrace
+
+- Má každá interní role jen oprávnění, která potřebuje?
+- Je MFA povinné pro všechny interní účty?
+- Mají rizikové akce potvrzení, důvod a auditní stopu?
+- Umíš dohledat, kdo vstoupil do zákaznického účtu a proč?
+- Je impersonace omezená, viditelná a logovaná?
+- Jsou citlivá data v adminu maskovaná ve výchozím stavu?
+- Existuje pravidelné review interních přístupů?
+- Umíš rychle odebrat přístup člověku, který odchází z týmu nebo od dodavatele?
+
+### AP.8 Mini úkol na 60 minut
+
+Otevři svůj admin panel nebo seznam interních nástrojů a vyber jednu nejrizikovější akci. Pro ni napiš krátký bezpečnostní scénář:
+
+| Akce | Kdo ji smí dělat | Jaký důvod musí uvést | Co se loguje | Jak se vrací chyba zpět |
+| --- | --- | --- | --- | --- |
+| Export dat zákazníka | vlastník účtu nebo schválená podpora | tiket, žádost zákazníka, rozsah exportu | kdo, účet, čas, rozsah, ID exportu | zákazník dostane stav exportu, interně vznikne auditní záznam |
+| Ruční změna tarifu | billing nebo owner | obchodní případ a datum platnosti | starý tarif, nový tarif, schvalovatel | systém ukáže dopad na limity a fakturaci |
+| Impersonace | podpora se schváleným tiketem | konkrétní problém zákazníka | začátek, konec, uživatel, tiket | režim se automaticky ukončí po krátkém čase |
+
+Pak jednu věc zlepši hned: přidej důvod k akci, maskování citlivého pole, nebo samostatný auditní řádek. Malý admin panel nemusí být luxusní. Musí být bezpečný, srozumitelný a méně nebezpečný než pondělní deploy bez snídaně.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -6586,6 +6713,7 @@ Na konci vyber jednu konkrétní redukci dat. Ne „jednou zlepšíme privacy“
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn Dodatek AP o interní administraci, rolích, rizikových akcích, impersonaci, audit logu a privacy-first UX admin panelů.
 - 2026-09-09: Doplněn Dodatek AO o DPA, rolích správců a zpracovatelů, subdodavatelích, mapě dat a privacy-first minimalizaci předávaných údajů.
 - 2026-09-09: Doplněn Dodatek AN o SLA, SLO, provozních slibech, plánované údržbě, status page a privacy-first incident komunikaci.
 - 2026-09-09: Doplněn Dodatek AM o vyhledávání v produktu, nápovědě, relevanci výsledků, bezpečných náhledech a privacy-first práci s hledacími dotazy.
