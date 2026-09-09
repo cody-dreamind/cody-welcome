@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy a postupné rollouty.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy, postupné rollouty a e-mailová doručitelnost.
 
 ---
 
@@ -6899,6 +6899,135 @@ Vyber jednu funkci, kterou plánuješ nasadit v příštích týdnech. Napiš pr
 
 Potom si polož nepříjemnou otázku: „Kdybych to musel vypnout v pátek v 16:30, umím to udělat bez paniky?“ Pokud odpověď zní ne, rollout ještě není připravený. A jestli zní ano, stejně to v pátek nepouštěj. Jsme odvážní, ne blázni.
 
+## Dodatek AS: E-mailová doručitelnost bez spamu a DNS šamanismu
+
+E-mail je pořád jeden z nejdůležitějších produktových kanálů. Posílá pozvánky, reset hesla, faktury, upozornění, exporty, onboarding i citlivé změny účtu. Když se nedoručí, uživatel nevidí „deliverability problém“. Vidí rozbitý produkt. A když se doručí jako spam, tvůj SaaS vypadá jako někdo, kdo prodává kryptoměnu z kufru.
+
+Google ve svých aktuálních pokynech pro odesílatele uvádí, že odesílatelé mají nastavit autentizaci e-mailů a u hromadných odesílatelů požaduje SPF, DKIM i DMARC. Zmiňuje také TLS, správnou identitu odesílatele a snadné odhlášení u marketingových zpráv. Zdroj: https://support.google.com/mail/answer/81126?hl=en
+
+Technické standardy za tím nejsou magie: SPF popisuje RFC 7208, DKIM RFC 6376 a DMARC má novější standardizační podobu v RFC 9989. Zdroje: https://www.rfc-editor.org/info/rfc7208, https://www.rfc-editor.org/info/rfc6376, https://www.rfc-editor.org/info/rfc9989
+
+### AS.1 Rozděl e-maily podle účelu
+
+První chyba malých produktů je házet všechno z jedné adresy a jedné šablony. Reset hesla, měsíční newsletter, faktura i „ahoj, dlouho ses nepřihlásil“ pak vypadají stejně. Když se marketingu něco pokazí, odnese to i transakční pošta.
+
+Praktické rozdělení:
+
+- **Transakční e-maily:** reset hesla, pozvánky, ověření e-mailu, bezpečnostní upozornění, potvrzení platby.
+- **Produktové e-maily:** onboarding, tipy k používání, shrnutí aktivity, upozornění na důležité změny.
+- **Fakturační e-maily:** faktury, upomínky, změny tarifu, potvrzení zrušení účtu.
+- **Marketingové e-maily:** novinky, obsah, kampaně, pozvánky na webináře, nabídky.
+- **Interní systémové e-maily:** alerty, reporty a provozní notifikace týmu.
+
+Každá skupina má mít vlastní pravidla, frekvenci, šablony a měření. Transakční e-maily mají prioritu a nesmí záviset na tom, jestli se marketing rozhodl rozeslat „jen malou kampaničku“ na celou databázi.
+
+### AS.2 Doména a DNS nejsou detail pro později
+
+E-mailovou identitu nastav ještě před první kampaní. Ne až po tom, co zákazníkům nepřijde ověřovací odkaz a support loví odpovědi v Gmail spamu.
+
+Minimum:
+
+- SPF obsahuje všechny služby, které smějí za doménu odesílat.
+- DKIM je zapnutý pro každou odesílací službu a používá dostatečně silný klíč.
+- DMARC začíná opatrně na monitorovacím režimu, ale má plán zpřísnění.
+- Odesílací doména je sladěná s tím, co uživatel vidí v poli „Od“.
+- Bounce a reply adresy jsou funkční, ne černá díra do digitálního sklepa.
+- DNS změny jsou dokumentované v provozním runbooku.
+
+Privacy-first poznámka: DMARC reporty mohou obsahovat provozní metadata o e-mailovém toku. Neposílej je bez rozmyslu do nástroje, u kterého nevíš, kde data končí. Pro evropský provoz preferuj řešení s EU zpracováním, krátkou retencí a jasným exportem.
+
+### AS.3 Nepoužívej jednu službu na všechno, pokud tím zvyšuješ riziko
+
+U malého SaaS dává smysl začít jednoduše, ale ne slepě. Někdy stačí jeden poskytovatel pro transakční i marketingové e-maily. Jindy je lepší oddělit kritické transakční zprávy od newsletteru.
+
+Ptej se:
+
+- Co se stane s resetem hesla, když marketingová rozesílka narazí na limity?
+- Umíme zastavit marketing, aniž bychom zastavili faktury?
+- Máme přístup k logům doručení bez zbytečného ukládání obsahu zpráv?
+- Je možné rychle změnit odesílací službu, když reputace spadne?
+- Umíme exportovat šablony, suppression listy a nastavení domén?
+
+Codyho komentář: E-mailový vendor lock-in je zvláštní druh pasti. Vypadá nudně, dokud nezjistíš, že tvůj onboarding, fakturace a support stojí na šablonách schovaných v cizím editoru, který se exportuje stylem „zkus screenshot“.
+
+### AS.4 Piš e-maily jako produktové rozhraní
+
+E-mail není odpadkový koš pro všechno, co se nevešlo do aplikace. Každý produktový e-mail má mít jasný důvod a jednu hlavní akci.
+
+Dobrá struktura:
+
+1. Co se stalo.
+2. Proč to uživatele zajímá.
+3. Co má udělat teď.
+4. Kam se obrátit, když něco nesedí.
+5. Jak změnit preference, pokud nejde o kritickou zprávu.
+
+Příklad pro export dat:
+
+> Tvůj export projektu „Jaro 2026“ je připravený. Soubor bude dostupný 7 dní. Stáhni ho z administrace účtu. Pokud export nepoznáváš, napiš nám a prověříme přístupový log.
+
+To je lepší než: „Export completed successfully.“ Gratuluju serveru, ale člověk stále netuší co, kde a proč.
+
+### AS.5 Odhlášení a preference řeš férově
+
+Marketingové a volitelné produktové zprávy musí jít snadno omezit. Neschovávej odhlášení do šedého textu velikosti právnického prachu. Uživatel, který nechce tvoje novinky, není zrádce. Je to člověk, kterému nechceš pokazit vztah zbytečným inboxovým hlukem.
+
+Rozumné preference:
+
+- bezpečnostní zprávy vždy zapnuté,
+- fakturační zprávy vždy zapnuté pro billing kontakt,
+- onboarding tipy volitelné,
+- produktové novinky volitelné,
+- marketing a obsah samostatně volitelné,
+- frekvence shrnutí nastavitelná tam, kde dává smysl.
+
+U každé kategorie napiš lidsky, co uživatel dostane. „Produktové aktualizace“ je lepší než „Engagement lifecycle communications“. Pokud musíš používat takové názvy, problém není v e-mailu, problém je v meetingu.
+
+### AS.6 Měř doručitelnost bez čtení pošty uživatelům přes rameno
+
+Potřebuješ měřit, jestli e-maily odcházejí, doručují se a plní účel. Nepotřebuješ vytvářet detailní profil každého čtenáře.
+
+Stačí sledovat:
+
+- počet odeslaných zpráv podle typu,
+- bounce rate podle domény nebo poskytovatele,
+- spam complaint signály, pokud je poskytovatel vrací,
+- úspěšnost kritických akcí po e-mailu,
+- support dotazy typu „nepřišel mi e-mail“,
+- technické chyby šablon a webhooků.
+
+Opatrně s open tracking pixely. U transakčních e-mailů jsou často zbytečné a u marketingu se ptej, jestli ti otevření opravdu mění rozhodnutí. Privacy-first alternativa je měřit serverovou akci po kliknutí, používat agregace a dávat uživateli jasné preference.
+
+### AS.7 Checklist e-mailového provozu
+
+- [ ] Má každý typ e-mailu jasný účel a vlastníka?
+- [ ] Jsou transakční e-maily oddělené od marketingových rizik?
+- [ ] Má doména nastavené SPF, DKIM a DMARC?
+- [ ] Existuje plán postupného zpřísnění DMARC politiky?
+- [ ] Jsou reply-to a bounce adresy funkční a monitorované?
+- [ ] Umí support dohledat stav odeslání bez čtení citlivého obsahu?
+- [ ] Má uživatel jednoduché preference pro volitelné zprávy?
+- [ ] Neobsahují šablony citlivá data, která v e-mailu být nemusí?
+- [ ] Jsou šablony verzované nebo aspoň exportovatelné?
+- [ ] Ví tým, co dělat při náhlém poklesu doručitelnosti?
+
+### AS.8 Mini úkol na 45 minut
+
+Vyber tři nejdůležitější e-maily ve svém produktu: reset hesla, první pozvánku a fakturu. Pro každý vyplň:
+
+| Otázka | Odpověď |
+| --- | --- |
+| Proč e-mail existuje? |  |
+| Kdo je příjemce? |  |
+| Jaká je hlavní akce? |  |
+| Jak poznáme nedoručení? |  |
+| Jaká data v e-mailu opravdu musí být? |  |
+| Dá se zpráva poslat znovu bezpečně? |  |
+| Kde je šablona uložená? |  |
+| Kdo ji může změnit? |  |
+
+Potom pošli test na vlastní adresu mimo firemní doménu a zkontroluj nejen vzhled, ale i hlavičky autentizace. Pokud v doručené poště vidíš varování, neříkej „to se spraví samo“. E-mailová reputace není pokojová rostlina, která se vzpamatuje po jedné zálivce.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -6959,9 +7088,14 @@ Potom si polož nepříjemnou otázku: „Kdybych to musel vypnout v pátek v 16
 - OWASP Cheat Sheet Series: Authorization Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Authorization Testing Automation Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Testing_Automation_Cheat_Sheet.html
 - Martin Fowler: Feature Toggles — https://martinfowler.com/articles/feature-toggles.html
+- Gmail Help: Email sender guidelines — https://support.google.com/mail/answer/81126?hl=en
+- RFC Editor: RFC 7208 Sender Policy Framework SPF — https://www.rfc-editor.org/info/rfc7208
+- RFC Editor: RFC 6376 DomainKeys Identified Mail DKIM Signatures — https://www.rfc-editor.org/info/rfc6376
+- RFC Editor: RFC 9989 Domain-Based Message Authentication, Reporting, and Conformance DMARC — https://www.rfc-editor.org/info/rfc9989
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn Dodatek AS o e-mailové doručitelnosti, SPF/DKIM/DMARC, oddělení transakční pošty, preferencích, měření bez šmírování a checklistu provozu.
 - 2026-09-09: Doplněn Dodatek AR o feature flazích, postupném rollout schodišti, bezpečném vypínání, metrikách rozhodování a privacy-first měření změn.
 - 2026-09-09: Doplněn Dodatek AQ o tenant izolaci, serverové autorizaci, cache, testování multi-tenant hranic a privacy-first provozní hygieně.
 - 2026-09-09: Doplněn Dodatek AP o interní administraci, rolích, rizikových akcích, impersonaci, audit logu a privacy-first UX admin panelů.
