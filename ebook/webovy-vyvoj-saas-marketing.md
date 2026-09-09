@@ -4539,6 +4539,39 @@ Tím neztratíš tvář. Naopak: odcházející zákazník si zapamatuje, že js
 
 Vyber jednu nejdůležitější tabulku, kolekci nebo datový typ v produktu. Napiš k ní exportní formát, příklad názvu souboru, kdo smí export spustit, jak dlouho je dostupný a jak bys ověřil obnovu ze zálohy. Pokud se během úkolu třikrát ozve „tohle bychom museli zjistit“, máš backlog. Hezký, provozní, dospělý backlog. Žádný confetti mód, ale zákazníci ho ocení.
 
+## Závěr: Postav menší digitální stroj, který vydrží
+
+Dobrá webovka nebo SaaS není sbírka nástrojů, trendů a náhodných automatizací. Je to malý digitální stroj, který má jasný účel: vysvětlit hodnotu, získat důvěru, doručit službu, chránit data a pomoct týmu rozhodovat se bez chaosu.
+
+Když si z tohohle e-booku odneseš jen jednu věc, ať je to tahle: méně šmírování, méně závislostí a méně teatrálních growth hacků často znamená lepší produkt. Ne pomalejší. Lepší. Produkt, který se dá provozovat, vysvětlit, auditovat a v klidu rozvíjet i ve chvíli, kdy zrovna nehoří LinkedIn s novým zaručeným rámcem pro „10x růst do pátku“.
+
+Privacy-first přístup není brzda podnikání. Je to filtr. Pomáhá odmítnout nástroje, které sbírají víc dat než hodnoty, marketing, který mate důvěru s nátlakem, a architekturu, která funguje jen do prvního exportu zákazníka. Evropský provoz, jasná dokumentace, přímé odkazy, RSS, rozumná analytika a poctivé formuláře nejsou retro. Jsou to základy digitální soběstačnosti.
+
+### Jak s e-bookem pracovat dál
+
+Nevracej se ke všem kapitolám najednou. Vyber jednu oblast podle největšího rizika:
+
+- Pokud web nevysvětluje hodnotu, začni kapitolou o nabídce, CTA, důvěře a výkonu.
+- Pokud produkt roste přes chaos, začni roadmapou, dokumentací rozhodnutí a provozním rytmem.
+- Pokud sbíráš data „pro jistotu“, začni mapou dat, retencí, exporty a auditními otázkami.
+- Pokud marketing závisí na platformách, posil RSS, vlastní obsah, přímé odkazy a dlouhodobé SEO.
+- Pokud tým neví, co se děje v produkci, začni runbookem, observabilitou a testem obnovy.
+
+Jedna opravená věc týdně porazí obří transformační projekt, který skončí v prezentaci. Malé firmy a SaaS týmy nepotřebují digitální katedrálu. Potřebují provozuschopný systém, který vydělává, nezrazuje zákazníky a dá se pochopit i po dovolené hlavního vývojáře.
+
+### Finální checklist Codyho
+
+- [ ] Umíš jednou větou říct, komu produkt pomáhá a jaký problém řeší.
+- [ ] Každý důležitý datový tok má vlastníka, účel, místo uložení a retenční pravidlo.
+- [ ] Web má jasné CTA, čitelné URL, dobré metadatové základy a funguje bez reklamního cirkusu.
+- [ ] Produkt má onboarding, který vede k první hodnotě, ne jen k vyplnění profilu.
+- [ ] Marketing má vlastní kanály: web, blog, dokumentaci, RSS, přímé odkazy a partnerské vztahy.
+- [ ] Tým má jednoduchý rytmus: týdenní review, WIP limity, rozhodovací záznamy a backlog podle problémů.
+- [ ] Provoz má zálohy, test obnovy, incidentní postup, monitoring a jasnou komunikaci při potížích.
+- [ ] Zákazník může odejít s daty důstojně, bezpečně a bez supportového escape roomu.
+
+> Codyho komentář: Nejlepší SaaS není ten, který umí ukázat nejvíc grafů v dashboardu. Nejlepší SaaS je ten, kterému zákazník rozumí, tým ho zvládá provozovat a právník u něj nepije kafe se slzou v oku.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -4591,6 +4624,7 @@ Vyber jednu nejdůležitější tabulku, kolekci nebo datový typ v produktu. Na
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn závěr e-booku s praktickým návodem, jak text používat dál, a finálním checklistem pro web, SaaS, marketing, provoz a privacy-first exporty.
 - 2026-09-09: Obnovena plná verze e-booku po chybně zkráceném commitu a doplněn Dodatek Z o exportech, obnově dat, RPO/RTO, testech záloh a privacy-first offboardingu zákazníka.
 - 2026-09-08: Doplněn Dodatek Y o práci s dodavateli, dočasných přístupech, předání výstupů a privacy-first pravidlech pro externí spolupráci.
 - 2026-09-08: Doplněn Dodatek X o privacy-first observabilitě, strukturovaných logách, retenci, alertech a debugování bez ukládání citlivých dat.
