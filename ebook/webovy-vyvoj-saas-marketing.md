@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu a mobilní UX.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání a nápověda.
 
 ---
 
@@ -6121,6 +6121,126 @@ Vyber jednu mobilní cestu: landing page → CTA, pozvánka → registrace, rese
 
 Pak oprav jednu překážku. Ne kompletní redesign. Jednu věc, která sníží tření nebo zvýší důvěru. Mobilní UX se zlepšuje nejlépe po malých dávkách, ne po velkém workshopu s třiceti sticky notes a jedním vybitým telefonem.
 
+## Dodatek AM: Vyhledávání a nápověda bez bloudění v digitálním skladu
+
+Vyhledávání v produktu a dokumentaci je často podceňované, protože nevypadá tak efektně jako nový dashboard. Jenže v praxi rozhoduje o tom, jestli uživatel najde fakturu, nastavení, odpověď na problém nebo důvod zůstat. Když se zákazník musí ptát podpory na věci, které už v systému máš, nešetříš prací. Jen přesouváš frustraci z rozhraní do inboxu.
+
+Privacy-first pohled je jednoduchý: dobré vyhledávání pomáhá najít informace bez toho, aby zbytečně profilovalo uživatele, posílalo dotazy do cizích reklamních systémů nebo ukládalo citlivé fráze navždy. Jinými slovy: najdi jehlu v kupce sena, ale nedělej z té kupky datové tržiště.
+
+### AM.1 Začni otázkami, které uživatel opravdu klade
+
+Nejhorší vyhledávání vzniká tak, že tým indexuje všechno a doufá, že algoritmus nějak pochopí produkt. Lepší začátek je seznam reálných otázek:
+
+- „Kde najdu fakturu za minulý měsíc?“
+- „Jak změním e-mail vlastníka účtu?“
+- „Proč se mi neodeslal webhook?“
+- „Jak exportuju data před zrušením účtu?“
+- „Kde nastavím notifikace pro klienta?“
+
+Tyto otázky rozděl podle záměru: navigace, řešení chyby, vysvětlení pojmu, změna nastavení, auditní informace, právní nebo fakturační odpověď. Pak teprve řeš, jestli to patří do globálního vyhledávání, kontextové nápovědy, FAQ, dokumentace nebo prázdného stavu.
+
+> Codyho komentář: Pokud uživatel do hledání píše „faktura“ a první výsledek je blogpost „Jak faktury mění budoucnost B2B“, systém si zaslouží tichou minutu. A potom opravu relevance.
+
+### AM.2 Vyhledávání není náhrada navigace
+
+Vyhledávání má zachraňovat složitější nebo vzácnější scénáře. Nemá omlouvat špatnou informační architekturu. Pokud každý druhý uživatel hledá „nastavení týmu“, problém pravděpodobně není v hledání, ale v tom, že nastavení týmu není najitelné.
+
+Praktické pravidlo:
+
+- Časté a kritické akce dej do navigace.
+- Méně časté akce dej do nastavení s jasnými názvy.
+- Vysvětlení a návody dej do dokumentace.
+- Hledání použij jako rychlou zkratku přes všechny vrstvy.
+
+U SaaS administrace dobře funguje vyhledávání, které vrací různé typy výsledků: stránky aplikace, dokumentaci, zákazníky, projekty, faktury a auditní události. Každý typ výsledku ale označ jasně. Uživatel má vědět, jestli kliká na nápovědu, nebo na živý záznam v produktu.
+
+### AM.3 Indexuj méně, ale lépe
+
+Index není skládka. Ne všechno, co existuje v databázi, má být vyhledatelné pro každého. Začni malým indexem s vysokou hodnotou:
+
+- názvy projektů, klientů a účtů,
+- čísla faktur a platební stavy,
+- názvy nastavení a integračních obrazovek,
+- nadpisy dokumentace a FAQ,
+- veřejné články a changelog,
+- interní identifikátory jen tam, kde je používá podpora nebo admin.
+
+U každé položky si napiš tři věci: kdo ji smí najít, co se zobrazí v náhledu a kam vede kliknutí. Náhled výsledku je důležitý. Když ukáže příliš málo, uživatel kliká naslepo. Když ukáže příliš mnoho, můžeš omylem odhalit citlivá data.
+
+### AM.4 Privacy-first pravidla pro hledací dotazy
+
+Hledací dotazy často obsahují věci, které by uživatel nikdy nedal do formuláře označeného „citlivá data“: e-maily, čísla faktur, jména zákazníků, chybové hlášky, interní poznámky nebo části API tokenů. Proto s nimi zacházej jako s potenciálně citlivými daty.
+
+Minimální pravidla:
+
+- Neukládej celé dotazy déle, než potřebuješ pro zlepšení produktu.
+- Pro analytiku agreguj dotazy do kategorií, ne do profilů jednotlivců.
+- Maskuj e-maily, tokeny, telefonní čísla a dlouhé identifikátory v logách.
+- Neposílej dotazy do externí služby bez jasného důvodu a smluvního rámce.
+- U interní podpory odděl hledání v dokumentaci od hledání v zákaznických datech.
+- U AI nápovědy jasně určuj, které části dotazu a kontextu se mohou poslat modelu.
+
+Pokud používáš externí vyhledávací službu, ověř region provozu, subzpracovatele, možnosti mazání indexu, export konfigurace a to, zda se dotazy nepoužívají k trénování nebo marketingové profilaci. Evropský provoz není jen položka v ceníku. Je to součást důvěry.
+
+### AM.5 Nápověda má být tam, kde vzniká otázka
+
+Dokumentace je skvělá, ale uživatel často nechce číst dokumentaci. Chce dokončit úkol. Proto je dobré kombinovat vyhledávání s kontextovou nápovědou:
+
+- U nastavení vysvětli dopad volby přímo vedle přepínače.
+- U integrací ukaž ukázkový payload a poslední chybu.
+- U faktur vysvětli stav: zaplaceno, čeká na platbu, selhalo, dobropisováno.
+- U exportu dat popiš formát, rozsah a očekávaný čas přípravy.
+- U mazání účtu vysvětli rozdíl mezi deaktivací, zrušením předplatného a výmazem.
+
+Nejlepší nápověda je často krátká věta a odkaz „Zjistit víc“. Nejhorší nápověda je modal s pěti odstavci, který se objeví přesně ve chvíli, kdy chce člověk kliknout jinam. Produktová rada dne: když pomoc překáží, není to pomoc. Je to pop-up v kostýmu dobrého úmyslu.
+
+### AM.6 Měř kvalitu hledání bez šmírování
+
+Vyhledávání můžeš zlepšovat i bez sledování jednotlivců. Sleduj agregované signály:
+
+- kolik dotazů nemá žádný výsledek,
+- které kategorie dotazů často končí bez kliknutí,
+- zda uživatel po hledání dokončí relevantní akci,
+- které články dokumentace řeší nejvíc problémů,
+- kde se lidé vracejí k hledání opakovaně během jedné relace.
+
+Ukládej co nejméně identifikátorů. Pro produktové rozhodování obvykle nepotřebuješ vědět, že konkrétní člověk hledal konkrétní frázi v konkrétní minutě. Stačí vědět, že za týden přibylo hodně neúspěšných dotazů k webhookům po vydání nové integrační verze.
+
+### AM.7 Konkrétní příklad: hledání v klientském portálu
+
+Představ si klientský portál pro agenturu. Zákazník v něm vidí projekty, faktury, dokumenty, schůzky a úkoly. Dobré vyhledávání může vracet:
+
+1. Projekt: „Redesign webu 2026“ s odkazem na detail.
+2. Fakturu: „Faktura 2026-014, splatnost 15. 9. 2026, stav čeká na platbu“.
+3. Dokument: „Předávací protokol“ s informací, kdo ho nahrál.
+4. Nápovědu: „Jak stáhnout faktury pro účetní“.
+5. Nastavení: „Notifikace k projektu“.
+
+Privacy-first detail: pokud má uživatel přístup jen k jednomu projektu, hledání mu nesmí našeptávat názvy ostatních projektů. Ani omylem. Autocomplete je také únikové místo. Našeptávač, který prozradí existenci klienta nebo dokumentu bez oprávnění, je bezpečnostní incident převlečený za pohodlí.
+
+### AM.8 Checklist vyhledávání a nápovědy
+
+- [ ] Máš seznam 20 nejčastějších otázek, které uživatelé opravdu kladou?
+- [ ] Jsou kritické akce dostupné i bez vyhledávání?
+- [ ] Každý výsledek jasně ukazuje typ, název, kontext a bezpečný náhled?
+- [ ] Respektuje vyhledávání stejná oprávnění jako zbytek aplikace?
+- [ ] Maskuješ citlivé části dotazů v logách a analytice?
+- [ ] Víš, jak dlouho držíš hledací dotazy a proč?
+- [ ] Má dokumentace přímé odkazy na konkrétní odpovědi, ne jen na dlouhou stránku?
+- [ ] Testuješ dotazy bez výsledku a převádíš je na opravy navigace, textů nebo nápovědy?
+
+### AM.9 Mini úkol na 45 minut
+
+Vezmi posledních deset dotazů na podporu nebo deset věcí, které zákazníci hledali v produktu. U každé napiš:
+
+| Otázka | Kde by měla být odpověď | Co dnes překáží | Privacy riziko | Jedna oprava |
+| --- | --- | --- | --- | --- |
+| Kde stáhnu fakturu? | Fakturace + nápověda | Fakturace je schovaná v nastavení | Žádné | Přidat odkaz do menu účtu |
+| Jak exportuju data? | Nastavení účtu + dokumentace | Chybí jasný postup | Nejasná retence exportu | Doplnit exportní stránku s časem mazání |
+| Proč selhal webhook? | Detail integrace | Chybí poslední chyba | Chybová hláška může obsahovat citlivá data | Maskovat payload a ukázat status |
+
+Vyber jednu opakovanou otázku a oprav ji v produktu nebo dokumentaci. Nezakládej hned nový vyhledávací engine. Nejprve odstraň bloudění tam, kde už teď vidíš ceduli „tady se lidi ztrácí“.
+
 
 ## Zdroje
 
@@ -6182,6 +6302,7 @@ Pak oprav jednu překážku. Ne kompletní redesign. Jednu věc, která sníží
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn Dodatek AM o vyhledávání v produktu, nápovědě, relevanci výsledků, bezpečných náhledech a privacy-first práci s hledacími dotazy.
 - 2026-09-09: Doplněn Dodatek AL o mobilním UX, scénářích, první obrazovce, formulářích, navigaci, výkonu a privacy-first mobilních cestách.
 - 2026-09-09: Doplněn Dodatek AK o ukončení účtu, exportu, retenčním plánu, mazání dat, revokaci přístupů a férovém privacy-first offboardingu.
 - 2026-09-09: Doplněn Dodatek AJ o platbách, fakturaci, neúspěšných platbách, grace period, dohledatelných fakturách a privacy-first platebních datech.
