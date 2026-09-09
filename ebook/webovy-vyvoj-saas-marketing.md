@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace a multi-tenant bezpečnost.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy a postupné rollouty.
 
 ---
 
@@ -6767,6 +6767,138 @@ Vyber jednu důležitou zákaznickou entitu: projekt, fakturu, dokument, report 
 
 Potom najdi v kódu jedno místo, kde se tato entita načítá podle ID. Ověř, jestli se tam kontroluje tenant a oprávnění. Pokud ne, máš další prioritu. Gratuluju, právě jsi našel bezpečnostní práci, která je nudná přesně tím správným způsobem.
 
+
+## Dodatek AR: Feature flagy a postupné rollouty bez výbušného pátečního releasu
+
+Feature flag není kouzelný vypínač, který opraví špatný release proces. Je to způsob, jak oddělit nasazení kódu od zapnutí chování pro uživatele. Martin Fowler popisuje feature toggles jako techniku, která umožňuje měnit chování systému bez změny kódu a nasazení, ale zároveň upozorňuje, že různé typy toggle mají různou životnost a riziko. Zdroj: https://martinfowler.com/articles/feature-toggles.html
+
+Pro malý SaaS tým je hlavní přínos jednoduchý: můžeš nasadit menší změny dřív, zapnout je nejdřív interně, potom vybraným zákazníkům a teprve nakonec všem. Méně dramat, méně nočních rollbacků, méně „jen rychle to pustíme, co by se mohlo stát“ momentů. Historie vývoje zná odpověď: všechno.
+
+### AR.1 Každý flag musí mít účel
+
+Nezakládej flag jen proto, že umíš vytvořit sloupec `enabled`. Před přidáním napiš jednu větu:
+
+> Tento flag existuje proto, abychom mohli bezpečně ověřit [změnu] u [skupiny uživatelů] a vypnout ji bez redeploye, pokud nastane [riziko].
+
+Když věta nejde napsat, flag pravděpodobně nepotřebuješ. Možná stačí konfigurace, role, beta program, oddělená větev nebo obyčejné rozhodnutí „ještě to nenasazujeme“.
+
+Praktické typy flagů:
+
+- **Release flag:** skryje novou funkci, dokud není připravená.
+- **Experiment flag:** pustí variantu části uživatelů a měří výsledek.
+- **Ops flag:** umožní vypnout náročnou nebo rizikovou část systému při incidentu.
+- **Permission flag:** zpřístupní funkci konkrétnímu tarifu, zákazníkovi nebo roli.
+- **Migration flag:** přepíná mezi starou a novou implementací během technické migrace.
+
+Každý typ potřebuje jiné zacházení. Experiment po vyhodnocení smaž. Release flag po dokončení smaž. Ops flag dokumentuj v runbooku. Permission flag možná patří spíš do produktového modelu oprávnění než do ad hoc seznamu přepínačů.
+
+### AR.2 Flag bez vlastníka je budoucí archeologie
+
+Feature flagy mají tendenci přežívat déle než původní feature. Po půl roce nikdo neví, jestli `new_dashboard_v2_final_final` pořád něco dělá, nebo je to digitální fosilie z minulého kvartálu.
+
+Ke každému flagu ukládej:
+
+- název čitelný pro člověka,
+- technický klíč,
+- vlastníka,
+- účel,
+- datum vytvoření,
+- plánované datum odstranění,
+- bezpečný výchozí stav,
+- co se stane při vypnutí.
+
+Tohle nemusí být drahý nástroj. Pro malý tým stačí tabulka v repozitáři, administrace produktu nebo jednoduchý konfigurační soubor. Důležité je, aby flagy nebyly tajná magie jednoho vývojáře.
+
+### AR.3 Rollout navrhni jako schodiště
+
+Nejhorší rollout je skok z nuly na sto procent bez možnosti návratu. Lepší rollout vypadá jako schodiště:
+
+1. Lokální a testovací prostředí.
+2. Interní tým.
+3. Jeden dobrovolný zákazník nebo sandbox účet.
+4. Malé procento reálného provozu.
+5. Větší skupina podle segmentu.
+6. Všichni uživatelé.
+7. Odstranění staré cesty a flagu.
+
+Každý stupeň má mít rozhodovací pravidlo. Ne „vypadá to dobře“, ale konkrétně: žádné nové chyby v logách, stabilní konverze kroku, žádný nárůst support dotazů, úspěšně dokončené kritické scénáře.
+
+Privacy-first poznámka: procentuální rollout neznamená, že musíš uživatele profilovat reklamním způsobem. Často stačí deterministické přiřazení podle interního ID účtu, tenantu nebo beta skupiny. Neukládej víc údajů jen proto, aby byl rollout „sofistikovanější“.
+
+### AR.4 Měř jen to, co rozhoduje o pokračování
+
+Experiment bez metriky je jen dražší pocit. Před zapnutím flagu si napiš:
+
+- co musí zůstat stabilní,
+- co se má zlepšit,
+- jak poznáš regresi,
+- kdo rozhodne o vypnutí nebo pokračování,
+- kdy rozhodnutí proběhne.
+
+U technických rolloutů měř hlavně chyby, latenci, zatížení a počet support dotazů. U produktových rolloutů měř dokončení klíčového scénáře, návrat uživatelů a ruční zpětnou vazbu. U marketingových experimentů měř kvalifikované poptávky, ne jen kliknutí.
+
+OWASP Logging Cheat Sheet doporučuje logovat bezpečnostně relevantní události tak, aby pomáhaly při detekci problémů a vyšetřování, ale zároveň upozorňuje na potřebu chránit citlivá data v logách. Zdroj: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+U flagů to znamená: loguj změnu konfigurace, kdo ji provedl, kdy, pro jaký rozsah a s jakým důvodem. Neloguj zbytečně obsah zákaznických dat, celé payloady ani osobní údaje jen proto, že se hodí při debugování.
+
+### AR.5 Vypnutí musí být opravdu bezpečné
+
+Flag, který nejde bezpečně vypnout, je jen dekorace v administraci. Před rolloutem otestuj obě cesty: zapnuto i vypnuto. Nestačí věřit, že `if` funguje. Ověř databázi, cache, background joby, notifikace, exporty a webhooky.
+
+Typické pasti:
+
+- Nová funkce zapisuje data ve formátu, který stará cesta neumí přečíst.
+- Background job běží podle staré logiky, i když UI už je přepnuté.
+- Cache drží výsledek pro zapnutý flag a zobrazí ho uživateli po vypnutí.
+- Notifikace pošle odkaz na stránku, kterou část uživatelů nemá dostupnou.
+- Export obsahuje pole z beta funkce bez vysvětlení.
+
+Bezpečný rollback se musí navrhovat předem. Pokud nová cesta mění data nevratně, neříkej tomu jednoduchý feature flag. Říkej tomu migrace a dej tomu odpovídající plán.
+
+### AR.6 Konkrétní příklad: nový dashboard v B2B SaaS
+
+Představ si SaaS pro agentury, který má starý dashboard projektů a nový přehled s metrikami kampaní. Chceš ho pustit postupně.
+
+Dobrý plán:
+
+1. Flag `dashboard_metrics_v2` je vypnutý pro všechny zákazníky.
+2. Interní tým ho zapne jen pro vlastní tenant a projde scénáře: načtení, filtry, export, prázdný stav, mobil.
+3. Dva dobrovolní zákazníci dostanou beta přístup po domluvě a možnost návratu na starou verzi.
+4. Sleduješ chybovost endpointů, čas načtení dashboardu, dokončení exportu a kvalitu zpětné vazby.
+5. Support má stručný návod, co se změnilo a jak flag vypnout pro konkrétní tenant.
+6. Po stabilizaci se nový dashboard zapne všem novým účtům.
+7. Po rozhodnutí se starý dashboard odstraní a flag zmizí z kódu i dokumentace.
+
+Privacy-first detail: pokud nový dashboard pracuje s kampaněmi, nepřidávej externí analytické skripty jen proto, abys pochopil chování uživatelů. Začni serverovou metrikou dokončení úkolu, agregovanou návštěvností obrazovky a krátkou zpětnou vazbou v produktu.
+
+### AR.7 Checklist feature flagů a rolloutů
+
+- [ ] Má každý flag jasný účel, vlastníka a plánované datum odstranění?
+- [ ] Je bezpečný výchozí stav zdokumentovaný a otestovaný?
+- [ ] Existuje rollout schodiště od interního testu po všechny uživatele?
+- [ ] Jsou metriky předem dané a navázané na rozhodnutí pokračovat, zastavit nebo vrátit změnu?
+- [ ] Umí support poznat, jestli má zákazník funkci zapnutou?
+- [ ] Loguje systém změny flagů bez ukládání citlivých zákaznických dat?
+- [ ] Je vypnutí funkce otestované včetně cache, jobů, webhooků, notifikací a exportů?
+- [ ] Maže tým staré flagy po dokončení, místo aby z nich dělal muzeum produktových ambicí?
+
+### AR.8 Mini úkol na 45 minut
+
+Vyber jednu funkci, kterou plánuješ nasadit v příštích týdnech. Napiš pro ni rollout kartu:
+
+| Pole | Odpověď |
+| --- | --- |
+| Název flagu |  |
+| Účel |  |
+| Vlastník |  |
+| První skupina |  |
+| Metriky pokračování |  |
+| Signály pro vypnutí |  |
+| Bezpečný rollback |  |
+| Datum odstranění flagu |  |
+
+Potom si polož nepříjemnou otázku: „Kdybych to musel vypnout v pátek v 16:30, umím to udělat bez paniky?“ Pokud odpověď zní ne, rollout ještě není připravený. A jestli zní ano, stejně to v pátek nepouštěj. Jsme odvážní, ne blázni.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -6826,9 +6958,11 @@ Potom najdi v kódu jedno místo, kde se tato entita načítá podle ID. Ověř,
 - IETF HTTPAPI: RateLimit header fields for HTTP — https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/
 - OWASP Cheat Sheet Series: Authorization Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Authorization Testing Automation Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Testing_Automation_Cheat_Sheet.html
+- Martin Fowler: Feature Toggles — https://martinfowler.com/articles/feature-toggles.html
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn Dodatek AR o feature flazích, postupném rollout schodišti, bezpečném vypínání, metrikách rozhodování a privacy-first měření změn.
 - 2026-09-09: Doplněn Dodatek AQ o tenant izolaci, serverové autorizaci, cache, testování multi-tenant hranic a privacy-first provozní hygieně.
 - 2026-09-09: Doplněn Dodatek AP o interní administraci, rolích, rizikových akcích, impersonaci, audit logu a privacy-first UX admin panelů.
 - 2026-09-09: Doplněn Dodatek AO o DPA, rolích správců a zpracovatelů, subdodavatelích, mapě dat a privacy-first minimalizaci předávaných údajů.
