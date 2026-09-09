@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace a multi-tenant bezpečnost.
 
 ---
 
@@ -6653,6 +6653,120 @@ Otevři svůj admin panel nebo seznam interních nástrojů a vyber jednu nejriz
 
 Pak jednu věc zlepši hned: přidej důvod k akci, maskování citlivého pole, nebo samostatný auditní řádek. Malý admin panel nemusí být luxusní. Musí být bezpečný, srozumitelný a méně nebezpečný než pondělní deploy bez snídaně.
 
+## Dodatek AQ: Tenant izolace bez sousedského okénka do dat
+
+Multi-tenant SaaS je krásná zkratka: jeden produkt, jedna infrastruktura, více zákazníků. Jenže zároveň je to architektura, kde chyba v jednom filtru může ukázat data cizí firmy. A to není drobný bug. To je moment, kdy se z interního „ups“ stává incident, právní problém a velmi nepříjemný telefonát.
+
+Tenant izolace není jen databázový sloupec `tenant_id`. Je to pravidlo, které se musí propsat do návrhu produktu, autorizace, testů, logů, podpory, importů, exportů i interní administrace. OWASP Authorization Cheat Sheet doporučuje mimo jiné nejmenší oprávnění, výchozí zamítnutí a kontrolu oprávnění při každém požadavku. Zdroj: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+
+### AQ.1 Tenant není filtr v UI
+
+Nejhorší varianta izolace je „v seznamu zákazníků zobrazíme jen ty se správným `tenant_id`“. To je užitečné pro UX, ale bezpečnost musí být na serveru. Klientský filtr, skryté tlačítko nebo disabled input nejsou ochrana. Jsou to jen cedule „prosím, nelezte sem“ na dveřích bez zámku.
+
+Praktické pravidlo: každá operace, která čte nebo mění data, musí vědět tři věci:
+
+- kdo akci provádí,
+- v jakém tenantovi ji provádí,
+- jestli má oprávnění k danému objektu a akci.
+
+Když endpoint dostane `project_id`, nestačí ověřit, že projekt existuje. Musí ověřit, že projekt patří do tenanta, ve kterém uživatel právě jedná. Když export dostane `customer_id`, nestačí ověřit vlastníka exportu. Musí ověřit celý řetězec: uživatel → členství → tenant → objekt → akce.
+
+### AQ.2 Izolaci navrhni podle rizika dat
+
+Ne každý SaaS potřebuje stejnou úroveň oddělení. Klientský portál pro agenturu, interní projektový nástroj a zdravotnický systém mají jiný rizikový profil. Ale každý potřebuje vědomé rozhodnutí, ne výchozí chaos.
+
+Základní varianty:
+
+- **Sdílená databáze, sdílené tabulky:** nejjednodušší provoz, ale největší nároky na správné filtry, testy a migrační disciplínu.
+- **Sdílená databáze, oddělená schémata:** lepší logické oddělení, složitější migrace a správa přístupů.
+- **Oddělené databáze podle zákazníka:** silnější izolace a jednodušší export/mazání, ale dražší provoz, monitoring a automatizace.
+- **Dedikovaná instance:** vhodná pro velké nebo regulované zákazníky, kteří potřebují vlastní provozní hranice.
+
+Privacy-first komentář: začni nejjednodušší variantou, kterou umíš bezpečně provozovat a vysvětlit. Neprodávej „enterprise izolaci“, pokud ji ve skutečnosti drží pohromadě jeden ORM scope a modlitba.
+
+### AQ.3 Kontext tenanta má být explicitní
+
+Tenant kontext nesmí náhodně prosakovat z poslední URL, cookie nebo lokálního stavu frontendu. V B2B produktu uživatel často patří do více organizací. Přepnutí tenanta proto musí být viditelné, auditovatelné a bezpečné.
+
+Dobrý návrh:
+
+- uživatel vidí aktivní organizaci v navigaci,
+- URL nebo serverový kontext jednoznačně říká, ve kterém tenantovi pracuje,
+- změna tenanta zneplatní nebo přepočítá relevantní cache,
+- API nebere tenant jen z klientského parametru bez ověření členství,
+- background joby mají tenant kontext uložený spolu s úlohou,
+- systémové operace používají servisní oprávnění s jasným rozsahem, ne „superuser všude“.
+
+Pozor na cache. Pokud cache klíč obsahuje jen `user_id` nebo `project_id`, ale ne tenant, může jeden uživatel se členstvím ve více organizacích dostat starý obsah z jiné organizace. To je přesně ten typ chyby, který se v testu „mám jeden účet a jedno demo“ krásně neukáže.
+
+### AQ.4 Testuj izolaci jako produktovou funkci
+
+Autorizace se láme hlavně při změnách: nová stránka, nový export, nový admin endpoint, nový background worker. OWASP Authorization Testing Automation Cheat Sheet popisuje praktický přístup s autorizační maticí a automatizovaným testováním oprávnění při releasu. Zdroj: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Testing_Automation_Cheat_Sheet.html
+
+Pro malý tým stačí začít jednoduše. Vytvoř testovací scénář se dvěma tenanty:
+
+- `Firma A` má uživatele Annu a projekt Alfa.
+- `Firma B` má uživatele Borise a projekt Beta.
+- Anna nesmí přečíst, upravit, exportovat ani smazat Betu.
+- Boris nesmí vidět Alfu ani přes přímou URL, API, vyhledávání, export nebo notifikaci.
+
+Pak tento scénář používej opakovaně. Nejen pro stránku projektu, ale i pro komentáře, přílohy, faktury, webhooky, audit logy, nápovědu, fulltext, importy a interní administraci. Tenant izolace není jeden test. Je to sada bezpečnostních očekávání napříč produktem.
+
+### AQ.5 Logy a podpora nesmí být zadní dveře
+
+I když je aplikace správně izolovaná, data mohou uniknout přes okolní systémy. Typicky přes logy, support, analytiku, vyhledávací index nebo interní dashboard. Pokud do logu zapíšeš celé tělo požadavku, můžeš mít tenant izolaci v databázi perfektní a stejně skončit s datovým gulášem.
+
+Bezpečnější pravidla:
+
+- loguj ID tenanta, typ akce, výsledek a korelační ID,
+- neloguj plný obsah dokumentů, zpráv, tokenů ani zákaznických vstupů,
+- supportní náhledy maskuj podle role,
+- interní vyhledávání omez účelem a audituj,
+- exporty označ tenantem a časově omez jejich dostupnost,
+- indexy a cache čisti při změně členství nebo smazání dat.
+
+Tenant izolace tedy není jen „nepustíme cizí query“. Je to provozní hygiena. Každý systém okolo aplikace musí respektovat stejnou hranici mezi zákazníky.
+
+### AQ.6 Konkrétní příklad: agenturní klientský portál
+
+Představ si portál pro digitální agenturu. Každý klient má projekty, faktury, soubory, komentáře a reporty kampaní. Jeden interní account manager pracuje pro více klientů. Klientský uživatel smí vidět jen svou firmu.
+
+Bezpečný návrh:
+
+1. Každá tabulka s klientskými daty obsahuje `tenant_id` nebo patří do schématu konkrétního tenanta.
+2. Každý API endpoint volá společnou autorizační vrstvu, která ověřuje členství a akci.
+3. Souborové úložiště používá cestu nebo metadata s tenantem a přístupové odkazy jsou krátkodobé.
+4. Fulltext index ukládá tenant a vrací výsledky jen po ověření členství.
+5. Admin panel zobrazuje aktivního klienta a rizikové přístupy loguje s důvodem.
+6. Export dat klienta běží jako tenant-scoped job a výsledek smí stáhnout jen oprávněný uživatel.
+7. Testy zkouší přímé URL i API volání mezi dvěma cizími tenanty.
+
+Když se později přidá nový typ souboru nebo reportu, nejde jen o „další model“. Je to další objekt, který musí projít stejnou tenantovou hranicí.
+
+### AQ.7 Checklist tenant izolace
+
+- Má každý zákaznický objekt jasného tenanta nebo jinou zdůvodněnou izolační hranici?
+- Probíhá autorizace na serveru při každém čtení, zápisu, exportu i mazání?
+- Existují testy se dvěma tenanty a pokusy o přímý přístup k cizím objektům?
+- Obsahují cache klíče, background joby a vyhledávací index tenant kontext?
+- Jsou soubory, přílohy a exporty chráněné stejně jako databázové záznamy?
+- Maskují logy a supportní nástroje citlivá data napříč tenanty?
+- Umíš zákazníkovi vysvětlit, jak jsou jeho data oddělená od ostatních?
+- Kontroluješ tenant izolaci při každé nové funkci, ne jen při bezpečnostním auditu?
+
+### AQ.8 Mini úkol na 60 minut
+
+Vyber jednu důležitou zákaznickou entitu: projekt, fakturu, dokument, report nebo konverzaci. Napiš pro ni mini autorizační matici:
+
+| Role | Vlastní tenant | Cizí tenant | Riziková akce |
+| --- | --- | --- | --- |
+| Owner | číst, upravit, exportovat | žádný přístup | smazání vyžaduje potvrzení |
+| Člen týmu | číst a upravit podle role | žádný přístup | export podle oprávnění |
+| Podpora | diagnostický náhled s důvodem | žádný přístup | impersonace jen omezeně |
+| Systémový job | jen určený tenant | žádný přístup | auditní záznam a korelační ID |
+
+Potom najdi v kódu jedno místo, kde se tato entita načítá podle ID. Ověř, jestli se tam kontroluje tenant a oprávnění. Pokud ne, máš další prioritu. Gratuluju, právě jsi našel bezpečnostní práci, která je nudná přesně tím správným způsobem.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -6710,9 +6824,12 @@ Pak jednu věc zlepši hned: přidej důvod k akci, maskování citlivého pole,
 - OWASP API10:2023 Unsafe Consumption of APIs — https://owasp.org/API-Security/editions/2023/en/0xaa-unsafe-consumption-of-apis/
 - IETF HTTPAPI: The Idempotency-Key HTTP Header Field — https://datatracker.ietf.org/doc/html/draft-ietf-httpapi-idempotency-key-header
 - IETF HTTPAPI: RateLimit header fields for HTTP — https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/
+- OWASP Cheat Sheet Series: Authorization Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP Cheat Sheet Series: Authorization Testing Automation Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Testing_Automation_Cheat_Sheet.html
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn Dodatek AQ o tenant izolaci, serverové autorizaci, cache, testování multi-tenant hranic a privacy-first provozní hygieně.
 - 2026-09-09: Doplněn Dodatek AP o interní administraci, rolích, rizikových akcích, impersonaci, audit logu a privacy-first UX admin panelů.
 - 2026-09-09: Doplněn Dodatek AO o DPA, rolích správců a zpracovatelů, subdodavatelích, mapě dat a privacy-first minimalizaci předávaných údajů.
 - 2026-09-09: Doplněn Dodatek AN o SLA, SLO, provozních slibech, plánované údržbě, status page a privacy-first incident komunikaci.
