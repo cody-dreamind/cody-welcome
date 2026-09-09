@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy, postupné rollouty a e-mailová doručitelnost.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy, postupné rollouty, e-mailová doručitelnost, cache, statická aktiva a API klíče.
 
 ---
 
@@ -7154,6 +7154,173 @@ Otevři produkční homepage a jednu přihlášenou obrazovku. V prohlížeči s
 
 Pak vyber jednu rychlou výhru: zmenšit obrázek, odstranit nepoužívaný font, vypnout zbytečný skript nebo opravit cache hlavičku u verzovaného souboru. Jedna konkrétní změna ve výkonu je lepší než tříhodinová debata o tom, jestli web „působí svižně“. Prohlížeč nemá dojmy. Prohlížeč má waterfall.
 
+## Dodatek AU: API klíče a přístupové tokeny bez tajného ohňostroje
+
+API klíč je malý řetězec s velkou mocí. Vypadá nevinně, často se kopíruje do nastavení integrace za tři vteřiny, ale když unikne, umí otevřít exporty, spustit drahé operace nebo poslat data tam, kam rozhodně neměla. Proto k API klíčům nepřistupuj jako k technické formalitě. Ber je jako produktovou funkci pro důvěru, provoz a bezpečnost.
+
+OWASP API Security Top 10 řadí chyby v autentizaci mezi zásadní rizika API a upozorňuje, že slabá práce s tokeny, credential stuffing, nedostatečné limity nebo nesprávná validace identity mohou vést k převzetí účtů a přístupu k datům. Zdroj: https://owasp.org/API-Security/editions/2023/en/0xa2-broken-authentication/
+
+Codyho komentář: Token, který nejde omezit, otočit, dohledat ani vypnout, není „jednoduché API“. Je to klíč od skladu nalepený zvenku na dveřích. Pohodlné? Ano. Moudré? No, stejně jako mazat produkční databázi v pátek večer.
+
+### AU.1 Navrhni klíč jako účet s pravidly
+
+API klíč nemá být anonymní technická věc. Má mít vlastníka, účel, oprávnění a historii použití. Pokud nevíš, kdo klíč vytvořil a k čemu slouží, nemůžeš bezpečně rozhodnout, jestli ho smíš vypnout.
+
+U každého klíče ukládej a zobrazuj:
+
+| Pole | Proč je důležité |
+| --- | --- |
+| Název klíče | Uživatel pozná, že jde třeba o `Fakturoid export` nebo `interní reporting`. |
+| Vlastník | Je jasné, kdo odpovídá za integraci. |
+| Datum vytvoření | Pomáhá při auditu a rotaci. |
+| Poslední použití | Staré neaktivní klíče lze bezpečněji rušit. |
+| Rozsahy oprávnění | Klíč nemusí umět všechno. |
+| Omezení prostředí | Odděl testovací a produkční provoz. |
+| Stav | Aktivní, pozastavený, zneplatněný, expirovaný. |
+
+Nezobrazuj celý klíč po vytvoření znovu. Ukaž ho jednou, jasně vysvětli, že ho musí bezpečně uložit, a potom zobrazuj jen prefix nebo posledních pár znaků. Tým nepotřebuje v administraci vidět celé tajemství jen proto, aby věděl, který klíč je který.
+
+### AU.2 Používej nejmenší potřebná oprávnění
+
+Jeden univerzální token pro všechno je lákavý, protože zjednoduší první implementaci. Zároveň ti ale zkomplikuje každý incident. Když unikne klíč s plnými právy, musíš řešit celou aplikaci. Když unikne klíč jen pro čtení faktur z jednoho tenantu, rozsah škody je menší a vyšetřování méně připomíná detektivku v serverovně.
+
+Praktické rozsahy oprávnění:
+
+- `read:customers` pro čtení zákazníků.
+- `write:customers` pro úpravy zákazníků.
+- `read:invoices` pro čtení faktur.
+- `write:webhooks` pro správu webhooků.
+- `read:analytics` pro agregované metriky.
+- `admin:billing` jen pro výjimečné provozní scénáře.
+
+U každého nového rozsahu si napiš jednu větu: „Tento scope existuje proto, aby integrace mohla…“ Pokud věta zní jako mlha, scope je moc široký nebo zbytečný.
+
+### AU.3 Odděl testovací a produkční klíče
+
+Sandbox a produkce nesmí sdílet stejné klíče, stejné webhook endpointy ani stejné datové předpoklady. Uživatelé potřebují bezpečně experimentovat, aniž by omylem poslali testovací objednávky do účetnictví nebo produkční osobní údaje do vývojářského notebooku.
+
+Dobrá praxe:
+
+- Testovací klíče mají jasný prefix, například `test_`.
+- Produkční klíče mají samostatné oprávnění a viditelné varování při vytvoření.
+- Dokumentace ukazuje testovací příklady bez reálných osobních údajů.
+- Sandbox obsahuje syntetická data, ne kopii produkce.
+- Webhooky pro test a produkci mají oddělené secret hodnoty.
+- Interní support nesmí zákazníkovi posílat produkční token přes chat.
+
+Privacy-first pravidlo je jednoduché: testování nemá být zkratka k tomu, aby se produkční data pohodlně válela po vývojových prostředích. Pokud potřebuješ realistická data, vytvoř anonymizovaný dataset se schváleným postupem a krátkou retencí.
+
+### AU.4 Rotace klíčů nesmí bolet
+
+Pokud výměna API klíče znamená půldenní odstávku integrace, lidé ji budou odkládat. Rotace musí být normální údržba, ne rituál s obětováním seniorního vývojáře.
+
+Navrhni rotaci takto:
+
+1. Uživatel vytvoří nový klíč se stejnými nebo upravenými oprávněními.
+2. Nasadí nový klíč do integrace.
+3. V administraci vidí, že nový klíč byl použit.
+4. Starý klíč pozastaví, ne rovnou smaže.
+5. Po krátkém ověření starý klíč zneplatní.
+6. Audit log zaznamená, kdo změnu provedl.
+
+Užitečný detail: umožni dočasné překrytí dvou klíčů. Rotace bez překryvu nutí uživatele trefit přesný okamžik mezi deployem, konfigurací a prvním API voláním. To není bezpečnost, to je provozní minové pole.
+
+### AU.5 Ukládej jen hash, ne celé tajemství
+
+S API klíči zacházej podobně jako s hesly: po vytvoření už nepotřebuješ znát původní hodnotu, potřebuješ jen ověřit, že příchozí klíč odpovídá uloženému záznamu. OWASP Secrets Management Cheat Sheet doporučuje řídit životní cyklus tajemství, omezovat přístup, automatizovat rotaci a minimalizovat místa, kde se tajemství objevují. Zdroj: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+
+Praktický model:
+
+- Vygeneruj dostatečně náhodný token.
+- Ulož jen bezpečný hash tokenu.
+- Do UI ulož pouze prefix nebo identifikátor klíče.
+- Secret nikdy neloguj v plné podobě.
+- V chybových hláškách nevracej, která část tokenu byla správně.
+- Při exportu nastavení nikdy nepřidávej hodnoty tokenů.
+
+Když ti unikne databáze s hashi, pořád je to incident, ale není to totéž jako databáze plná čitelných API klíčů. Obrana ve vrstvách není paranoia. Je to pojistka proti tomu, že jednou někdo unavený deployne něco, co neměl.
+
+### AU.6 Rate limiting je bezpečnost i UX
+
+Rate limit není jen ochrana před útokem. Je to dohoda s integrací, co je fér provoz. Bez limitů jeden špatně napsaný skript zvládne zpomalit službu ostatním zákazníkům a ještě vyrobit účet za infrastrukturu, ze kterého účetní začne mluvit latinsky.
+
+Rozumný limit popiš veřejně:
+
+| Typ limitu | Příklad | Proč existuje |
+| --- | --- | --- |
+| Počet požadavků za minutu | 120 požadavků | Chrání API před špičkami. |
+| Denní kvóta | 50 000 požadavků | Chrání náklady a férovost. |
+| Limit podle endpointu | Export max 10× za hodinu | Těžké operace stojí víc. |
+| Limit podle tenantu | Samostatně pro každý účet | Jeden zákazník nesmí shodit ostatní. |
+| Limit podle klíče | Odděleně pro integrace | Problém lze izolovat na konkrétní klíč. |
+
+Do odpovědí přidej srozumitelné informace: kolik limitu zbývá, kdy se obnoví a co má integrace dělat po překročení. Chyba `429 Too Many Requests` bez dalšího kontextu je jako cedule „něco se pokazilo“ na zamčených dveřích.
+
+### AU.7 Audit log piš pro vyšetřování, ne pro šmírování
+
+Audit log má odpovědět na otázky: kdo vytvořil klíč, kdo změnil oprávnění, kdy byl naposledy použit, odkud přišel podezřelý provoz a kdy byl klíč zneplatněn. Nemá se stát skladem všech payloadů, osobních údajů a tichým session replayem pro API.
+
+Do audit logu patří:
+
+- ID klíče nebo jeho bezpečný prefix.
+- ID tenantu a vlastníka změny.
+- Typ akce: vytvoření, změna scope, rotace, pozastavení, zneplatnění.
+- Čas a výsledek akce.
+- Technická metadata nezbytná pro bezpečnostní vyšetření.
+- Důvod změny, pokud šlo o ruční zásah supportu nebo administrátora.
+
+Do audit logu nepatří celé tokeny, celé request body, citlivé odpovědi, soukromé zprávy ani osobní údaje bez jasného účelu. Privacy-first audit log je jako dobrý svědek: řekne, co se stalo, ale nevyzradí celý životopis kolemjdoucích.
+
+### AU.8 Dokumentace musí učit bezpečné použití
+
+API dokumentace často ukazuje jen šťastnou cestu: vytvoř token, pošli požadavek, dostaneš `200 OK`, všichni se obejmou a integrace jede. Jenže dobrá dokumentace musí ukázat i limity, chyby, rotaci a bezpečné ukládání.
+
+Dokumentace k API klíčům má obsahovat:
+
+- Jak klíč vytvořit a kde se zobrazí jen jednou.
+- Jaké existují scopes a kdy je použít.
+- Jak oddělit testovací a produkční prostředí.
+- Jak bezpečně uložit klíč v serverové konfiguraci.
+- Jak rotovat klíč bez výpadku.
+- Jak poznat expirovaný nebo zneplatněný klíč.
+- Jak řešit `401`, `403`, `429` a podezřelé použití.
+- Koho kontaktovat při podezření na únik.
+
+Nepoužívej v ukázkách reálně vypadající osobní údaje. Stačí `jana.novakova@example.invalid`, fiktivní firma a syntetická ID. Dokumentace má snížit riziko, ne naučit vývojáře kopírovat produkční data do curl příkazů.
+
+### AU.9 Checklist API klíčů
+
+- [ ] Má každý API klíč název, vlastníka, účel a datum vytvoření?
+- [ ] Zobrazuje se secret hodnota jen jednou při vytvoření?
+- [ ] Ukládá aplikace hash tokenu místo celé hodnoty?
+- [ ] Existují oddělené testovací a produkční klíče?
+- [ ] Jsou oprávnění rozdělena podle nejmenšího potřebného rozsahu?
+- [ ] Lze klíč pozastavit bez okamžitého smazání?
+- [ ] Podporuje produkt rotaci s dočasným překryvem starého a nového klíče?
+- [ ] Jsou rate limity popsané v dokumentaci a viditelné v API odpovědích?
+- [ ] Audit log neobsahuje celé tokeny ani citlivé payloady?
+- [ ] Má support jasný postup pro podezření na únik klíče?
+
+### AU.10 Mini úkol na 50 minut
+
+Vyber jednu existující integraci ve svém produktu a vyplň krátký audit:
+
+| Otázka | Odpověď |
+| --- | --- |
+| K čemu integrace slouží? |  |
+| Kdo vlastní API klíč? |  |
+| Jaké scopes opravdu potřebuje? |  |
+| Kdy byl klíč vytvořen? |  |
+| Kdy byl naposledy použit? |  |
+| Kde je uložený? |  |
+| Jak se rotuje? |  |
+| Co uděláme při podezření na únik? |  |
+| Jaká data integrace posílá mimo produkt? |  |
+| Dá se integrace vypnout bez dopadu na ostatní zákazníky? |  |
+
+Na konci vyber jednu věc k opravě: zúžení scope, doplnění audit logu, oddělení sandboxu, nebo dokumentaci rotace. Jedna hotová oprava je lepší než velká bezpečnostní prezentace, po které tokeny pořád leží v poznámkách u supportu.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -7208,6 +7375,7 @@ Pak vyber jednu rychlou výhru: zmenšit obrázek, odstranit nepoužívaný font
 - Your Europe: Expanding across borders — https://europa.eu/youreurope/business/growing/expanding-across-borders/index_en.htm
 - OWASP API Security Top 10 2023 — https://owasp.org/API-Security/
 - OWASP API Security Top 10 2023 Introduction — https://owasp.org/API-Security/editions/2023/en/0x03-introduction/
+- OWASP API Security Top 10 2023 API2:2023 Broken Authentication — https://owasp.org/API-Security/editions/2023/en/0xa2-broken-authentication/
 - OWASP API10:2023 Unsafe Consumption of APIs — https://owasp.org/API-Security/editions/2023/en/0xaa-unsafe-consumption-of-apis/
 - IETF HTTPAPI: The Idempotency-Key HTTP Header Field — https://datatracker.ietf.org/doc/html/draft-ietf-httpapi-idempotency-key-header
 - IETF HTTPAPI: RateLimit header fields for HTTP — https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/
@@ -7224,6 +7392,7 @@ Pak vyber jednu rychlou výhru: zmenšit obrázek, odstranit nepoužívaný font
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn Dodatek AU o API klíčích, tokenech, scopes, rotaci, rate limitingu, audit logu a privacy-first dokumentaci integrací.
 - 2026-09-09: Doplněn Dodatek AT o cache, optimalizaci obrázků, fontech, externích skriptech, CDN a privacy-first kontrole statických assetů.
 - 2026-09-09: Doplněn Dodatek AS o e-mailové doručitelnosti, SPF/DKIM/DMARC, oddělení transakční pošty, preferencích, měření bez šmírování a checklistu provozu.
 - 2026-09-09: Doplněn Dodatek AR o feature flazích, postupném rollout schodišti, bezpečném vypínání, metrikách rozhodování a privacy-first měření změn.
