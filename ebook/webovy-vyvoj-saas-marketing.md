@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze a prázdné stavy.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení a importy dat.
 
 ---
 
@@ -5324,6 +5324,135 @@ Otevři nastavení svého produktu a napiš si deset nejrizikovějších voleb. 
 
 Potom vyber jednu destruktivní nebo veřejně viditelnou akci a přepiš její potvrzovací dialog tak, aby ukazoval konkrétní dopad. Jedna dobrá věta v nastavení může zabránit incidentu, který by jinak dostal vlastní Slack kanál, postmortem a tři nové šediny.
 
+## Dodatek AG: Importy a migrace dat bez chaosu v produkci
+
+Import dat vypadá jako nudné tlačítko „nahrát CSV“. Ve skutečnosti je to jedna z nejrizikovějších částí SaaS produktu: bereš cizí soubor, snažíš se mu porozumět, měníš produkční stav účtu a často opravuješ historický nepořádek zákazníka. Když se import povede, nikdo netleská. Když se nepovede, najednou máš ve firmě účetní duplikáty, špatné role, rozbité faktury a zákazníka, který se ptá, proč jeho systém připomíná archeologické naleziště po bouřce.
+
+Privacy-first import není o tom, že bude pomalejší. Je o tom, že je čitelný, vratný, omezený na nutná data a dobře vysvětlený.
+
+### AG.1 Import začíná schématem, ne uploadem
+
+Než uživateli dovolíš nahrát soubor, vysvětli mu, co přesně očekáváš. Nejhorší importní UI je prázdné pole na soubor a naděje, že „nějak to parsujeme“. Naděje není architektura. Je to jen exception handling s lepším PR.
+
+U každého importu popiš:
+
+- podporovaný formát souboru,
+- povinné sloupce,
+- volitelné sloupce,
+- maximální velikost dávky,
+- jak se řeší duplicity,
+- zda import vytváří nové záznamy, aktualizuje existující, nebo obojí,
+- co se po importu pošle e-mailem nebo zapíše do audit logu.
+
+Praktický detail: nabídni vzorový soubor ke stažení. Ne screenshot tabulky, ne větu „nahrajte CSV“. Skutečný soubor s ukázkovými řádky, který zákazník otevře, upraví a nahraje zpět. Tím ušetříš podporu, nervy i šanci, že někdo pošle osobní data do sloupce „poznámka“, protože tam zrovna zbylo místo.
+
+### AG.2 Validace má být předběžná a lidská
+
+Import rozděl na dvě fáze: nejdřív kontrola, potom potvrzení. Uživatel musí před zápisem do produkce vidět, co se stane.
+
+Dobrý náhled importu ukazuje:
+
+- počet nových záznamů,
+- počet aktualizovaných záznamů,
+- počet přeskočených řádků,
+- konkrétní chyby s číslem řádku,
+- varování u podezřelých hodnot,
+- dopad na existující data.
+
+Chybová hláška „Invalid row“ je vývojářský povzdech, ne pomoc. Lepší je: „Řádek 42: e-mail `jana@example` nemá platný formát. Opravte hodnotu nebo řádek smažte.“
+
+Pozor na privacy-first detail: v chybách nezobrazuj víc citlivých dat, než je nutné. Pokud validuješ rodná čísla, tokeny nebo interní identifikátory, ukaž raději zkrácenou hodnotu nebo jen název sloupce. Debug komfort týmu nesmí převálcovat důvěru zákazníka.
+
+### AG.3 Duplicity řeš pravidlem, ne intuicí
+
+Každý import potřebuje jasné pravidlo identity. Jinak se systém začne ptát sám sebe: „Je Jan Novák stejný Jan Novák jako Jan Novak bez háčku, nebo úplně jiný Jan Novák?“ A odpověď „asi jo“ je krásný způsob, jak rozbít CRM.
+
+Možná pravidla:
+
+- zákazník se páruje podle interního ID,
+- kontakt se páruje podle e-mailu v rámci jednoho workspace,
+- faktura se páruje podle čísla dokladu a roku,
+- produkt se páruje podle SKU,
+- člen týmu se nikdy automaticky neslučuje bez potvrzení správce.
+
+Ukaž pravidlo přímo v importu. Například: „Kontakty se spárují podle e-mailu. Pokud e-mail už existuje, aktualizujeme jméno a firmu, ale nezměníme roli ani historii komunikace.“
+
+Tohle je nudná věta. Tedy přesně ten typ věty, který v B2B SaaS vydělává peníze, protože brání zbytečným průšvihům.
+
+### AG.4 Každý větší import má mít možnost návratu
+
+Ne každý import musí mít velké tlačítko „vrátit zpět“, ale každý větší import musí mít plán návratu. Když zákazník nahraje 20 000 řádků špatně, nechce slyšet, že „technicky to nejde“. Chce vědět, co se dá zachránit.
+
+Před zápisem si ulož minimálně:
+
+- kdo import spustil,
+- kdy běžel,
+- jaký soubor nebo dávka byla použita,
+- kolik záznamů vzniklo,
+- kolik záznamů se změnilo,
+- identifikátory změněných záznamů,
+- verzi importního pravidla.
+
+U menšího produktu může stačit auditní záznam a možnost ruční opravy podle seznamu změn. U kritických dat chceš transakce, dávkové ID a rollback strategii. Není nutné z toho stavět vesmírnou loď. Stačí, aby zákaznická podpora nebyla při chybě odkázaná na rituální tanec nad databází.
+
+### AG.5 Import není výmluva pro nekonečnou retenci
+
+Nahraný soubor často obsahuje víc dat, než produkt potřebuje. Proto odděl data, která používáš, od souboru, který byl jen transportní obal.
+
+Privacy-first pravidla:
+
+- Po úspěšném importu smaž původní soubor, pokud ho nepotřebuješ pro audit nebo podporu.
+- Pokud soubor dočasně držíš, ukaž retenční dobu.
+- Nepřijímej sloupce, které nemají účel.
+- V náhledu upozorni na podezřelé osobní údaje ve volných poznámkách.
+- Do logů neukládej celé řádky importu.
+- Přístup k importovaným souborům omez na lidi, kteří ho opravdu potřebují.
+
+Dobrá věta do produktu: „Importní soubor po zpracování smažeme do 24 hodin. V účtu zůstane jen auditní záznam o výsledku importu.“ Pokud to tak neumíš slíbit, neslibuj to. Ale rozhodni se vědomě, ne omylem.
+
+### AG.6 Konkrétní příklad: migrace z tabulky do CRM
+
+Malá agentura používá tabulku s kontakty a chce přejít do jednoduchého CRM. Soubor má sloupce `Jméno`, `E-mail`, `Firma`, `Stav`, `Poznámka`, `Zdroj`.
+
+Bezpečný import může proběhnout takto:
+
+1. Uživatel stáhne vzorový CSV soubor a namapuje sloupce.
+2. Systém zkontroluje povinný e-mail, duplicity a neznámé stavy.
+3. Náhled ukáže: 312 nových kontaktů, 28 aktualizací, 9 řádků s chybou.
+4. Uživatel vidí, že poznámky delší než 500 znaků se neimportují bez ručního potvrzení.
+5. Import vytvoří dávkové ID a auditní záznam.
+6. Původní soubor se po zpracování smaže podle nastavené retence.
+7. CRM nabídne filtr „importováno dnes“, aby šlo rychle zkontrolovat výsledek.
+
+Tím se import stane kontrolovaným procesem, ne loterií. A loterie patří na vesnický ples, ne do zákaznických dat.
+
+### AG.7 Checklist importů a migrací
+
+- [ ] Import má vzorový soubor a jasný popis povinných sloupců.
+- [ ] Uživatel před zápisem vidí náhled změn, chyb a varování.
+- [ ] Pravidlo párování duplicit je napsané lidsky přímo v UI.
+- [ ] Citlivé hodnoty se v chybách a logách nezobrazují celé.
+- [ ] Každý import má dávkové ID, vlastníka, čas a auditní stopu.
+- [ ] U větších importů existuje rollback plán nebo seznam změn pro ruční obnovu.
+- [ ] Původní soubor má jasnou retenci a po zpracování se zbytečně nedrží.
+- [ ] Volné textové poznámky se kontrolují, protože často obsahují nečekaná osobní data.
+- [ ] Import respektuje role: ne každý člen týmu smí měnit produkční data hromadně.
+- [ ] Po importu jde výsledek snadno filtrovat, ověřit a opravit.
+
+### AG.8 Mini úkol na 60 minut
+
+Vyber jeden import ve svém produktu nebo interním procesu a napiš k němu jednostránkový importní kontrakt:
+
+1. jaký soubor přijímá,
+2. jaké sloupce jsou povinné,
+3. podle čeho se párují duplicity,
+4. jaké chyby uživatel uvidí před potvrzením,
+5. co se zapíše do audit logu,
+6. jak dlouho držíš původní soubor,
+7. jak vypadá plán návratu při špatném importu.
+
+Potom uprav jednu chybovou hlášku tak, aby člověku řekla přesně, co má opravit. Importy nejsou sexy funkce, ale dobrý import je jako dobrý výtah: nikdo o něm nemluví, dokud nezačne dělat divné zvuky mezi patry.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -5379,6 +5508,7 @@ Potom vyber jednu destruktivní nebo veřejně viditelnou akci a přepiš její 
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn Dodatek AG o importech a migracích dat, validaci, duplicitách, rollbacku, retenci souborů a privacy-first auditní stopě.
 - 2026-09-09: Doplněn Dodatek AF o nastavení produktu, bezpečných výchozích volbách, citlivých akcích, auditní stopě a privacy-first konfiguraci.
 - 2026-09-09: Doplněn Dodatek AE o účtech, rolích, oprávněních, pozvánkách, podpoře, audit logu a privacy-first správě přístupů.
 - 2026-09-09: Rozšířen Dodatek AD o typy prázdných stavů, mikrokopii, privacy-first onboarding, přístupnost, příklad analytického dashboardu a checklist.
