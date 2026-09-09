@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty a obnova dat.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat a předstartovní QA.
 
 ---
 
@@ -4668,6 +4668,139 @@ Takhle napsaná nabídka není méně ambiciózní. Je poctivější. A poctivos
 
 Vezmi poslední nabídku, brief nebo interní zadání a doplň do něj dvě sekce: „Není součástí“ a „Privacy-first pravidla“. Potom najdi jeden vstup, který dnes nemá vlastníka ani termín, a dopiš obojí. Pokud tě při tom začne bolet ego, je to normální. Právě jsi našel skryté riziko, ne osobní selhání.
 
+## Dodatek AB: Předstartovní QA bez paniky a heroických nocí
+
+Spuštění webu nebo SaaS funkce nemá být slavnostní skok ze skály. Má to být kontrolovaný přechod z „pracujeme na tom“ do „můžou to používat skuteční lidé“. Čím menší tým, tím víc potřebuješ jednoduchý předstartovní proces, protože nikdo nemá čas držet v hlavě DNS, formuláře, fakturaci, souhlasy, zálohy, metadata a poslední připomínku od klienta, která přišla v hlasovce ve 23:41.
+
+Předstartovní QA není o dokonalosti. Je o tom, aby se ven nedostala verze, která zbytečně rozbije důvěru: nefunkční formulář, prázdný ceník, tracker bez důvodu, špatný e-mail příjemce, neexistující export dat nebo stránka, která na mobilu vypadá jako rozlitý spreadsheet.
+
+### AB.1 Rozděl kontrolu podle rizika
+
+Ne všechny chyby bolí stejně. Překlep v patičce je nepříjemný. Nefunkční platba, unikající osobní data nebo formulář posílající poptávky do prázdna je obchodní průšvih s mašlí.
+
+Před spuštěním si rozděl kontrolu do čtyř vrstev:
+
+| Vrstva | Co kontroluješ | Příklad selhání | Priorita |
+| --- | --- | --- | --- |
+| Obchod | Nabídka, CTA, formuláře, platba, onboarding | Zákazník neví, co má udělat dál | Vysoká |
+| Provoz | nasazení, DNS, monitoring, zálohy, rollback | Web běží jen na lokálním optimismu | Vysoká |
+| Soukromí | data, souhlasy, analytika, přístupy, retence | Sbíráš víc dat, než umíš obhájit | Vysoká |
+| Obsah | texty, odkazy, metadata, obrázky, překlepy | Stránka působí nedodělaně | Střední |
+
+Začni vysokým rizikem. Když zbývá hodina do spuštění, neřeš odstín šedé v ikoně. Ověř, že objednávka, poptávka, registrace a odhlášení fungují. Designová pedanterie je krásná disciplína, ale fakturační formulář má přednost.
+
+### AB.2 Testuj hlavní cesty jako zákazník, ne jako autor
+
+Tvůrce produktu má prokletí znalosti. Ví, kde má kliknout, proč se něco jmenuje interní zkratkou a že chyba „E42“ znamená špatně vyplněný telefon. Zákazník to neví. Zákazník má jen obrazovku, náladu a omezenou chuť luštit digitální rébusy.
+
+Pro každou hlavní cestu napiš scénář obyčejnou řečí:
+
+1. Přijdu z vyhledávání na článek.
+2. Kliknu na související checklist.
+3. Otevřu stránku služby.
+4. Vyplním poptávkový formulář.
+5. Dostanu potvrzení, co se stane dál.
+
+Potom cestu projdi v anonymním okně a na mobilu. Ne jako vývojář. Jako unavený člověk ve vlaku, kterému zrovna padá signál. Pokud je cesta srozumitelná i takhle, máš dobrý základ.
+
+### AB.3 Před spuštěním ověř formuláře a e-maily
+
+Formulář, který se tváří jako odeslaný, ale nikam nedorazí, je tichý zabiják poptávek. Nejhorší na něm je, že dlouho vypadá jako nízký zájem trhu. Trh za to přitom nemůže. Jen jsi postavil digitální schránku bez dna.
+
+Minimální kontrola:
+
+- Odešli testovací poptávku s reálnou e-mailovou adresou.
+- Ověř, že interní oznámení dorazí správnému člověku.
+- Ověř, že zákazník dostane srozumitelné potvrzení.
+- Zkontroluj, že potvrzení neslibuje nereálný termín odpovědi.
+- Zkontroluj, že formulář neukládá citlivá data do logů.
+- Zkontroluj, že spam ochrana neblokuje běžné uživatele.
+
+Privacy-first detail: pokud formulář posílá data přes externí službu, musí být jasné proč, kde data končí a jak dlouho tam zůstávají. U jednoduché poptávky často stačí server-side odeslání e-mailu a krátký záznam v interním systému. Není nutné přilepit na formulář pět nástrojů jen proto, aby měl každý v marketingu vlastní graf.
+
+### AB.4 Obsah kontroluj proti rozhodnutí, ne proti náladě
+
+Před spuštěním se snadno zasekneš v nekonečném přepisování textů. Tomu pomůže jednoduchá otázka: „Pomáhá tahle úprava zákazníkovi rozhodnout se?“ Pokud ne, patří do pozdější iterace.
+
+Kontroluj hlavně:
+
+- Nadpis vysvětluje konkrétní hodnotu.
+- CTA říká, co se stane po kliknutí.
+- Ceník nebo poptávka neskrývá zásadní podmínky.
+- Reference, čísla a tvrzení jsou konkrétní a doložitelná.
+- FAQ odpovídá na skutečné námitky, ne na otázky, které by si firma přála slyšet.
+- Stránka „Soukromí“ nebo „Bezpečnost“ mluví lidsky, ne jen právnickým kouřem.
+
+Codyho komentář: Perfektní text neexistuje. Existuje text, který zákazník pochopí dost dobře na další krok. To je pro spuštění mnohem cennější než třetí debata o tom, jestli je „efektivní“ méně korporátní než „účinný“.
+
+### AB.5 Technické QA má mít krátký runbook
+
+Předstartovní technická kontrola nemá být hrdinský rituál hlavního vývojáře. Sepiš ji tak, aby ji dokázal projít i někdo jiný v týmu.
+
+Krátký runbook může vypadat takhle:
+
+| Kontrola | Jak ověřit | Kdo | Výsledek |
+| --- | --- | --- | --- |
+| Produkční URL | Otevřít homepage a klíčové stránky | Vývoj | OK / chyba |
+| DNS a HTTPS | Zkontrolovat doménu, certifikát a přesměrování | Vývoj | OK / chyba |
+| Formuláře | Odeslat testovací poptávku | Obchod | OK / chyba |
+| Analytika | Ověřit jen potřebné agregované události | Produkt | OK / chyba |
+| Zálohy | Ověřit poslední zálohu a postup obnovy | Vývoj | OK / chyba |
+| Rollback | Vědět, jak se vrátit na předchozí verzi | Vývoj | OK / chyba |
+
+Nečekej, že si tým všechno zapamatuje. Paměť je skvělá věc, dokud někdo není nemocný, na dovolené nebo zrovna neřeší incident s kávou v ruce a výrazem člověka, který viděl produkční databázi bez zálohy.
+
+### AB.6 Privacy-first QA před publikací
+
+Soukromí kontroluj stejně prakticky jako formuláře. Ne otázkou „máme GDPR?“, ale konkrétními scénáři.
+
+Před spuštěním si odpověz:
+
+- Jaká osobní data nová stránka nebo funkce sbírá?
+- Je každé pole nutné pro slíbený účel?
+- Kam data odcházejí po odeslání?
+- Kdo má k datům přístup a proč?
+- Jak dlouho data držíme?
+- Jde data exportovat nebo smazat bez ruční archeologie?
+- Přibyly nové externí skripty, fonty, widgety nebo měřicí nástroje?
+- Je souhlas vyžadován jen tam, kde opravdu dává smysl?
+
+Když na některou otázku neznáš odpověď, nespouštěj to jako „malou výjimku“. Malé výjimky mají talent stát se velkými incidenty. Dej jí vlastníka, rozhodnutí a termín vyřešení.
+
+### AB.7 Konkrétní příklad: spuštění landing page pro audit webu
+
+Představ si jednoduchou landing page na privacy-first audit webu. Cíl je získat poptávku od malé firmy.
+
+Před spuštěním projdi:
+
+- Homepage a landing page jasně říkají, co audit obsahuje a pro koho je.
+- CTA vede na formulář, ne do obecného kontaktu bez kontextu.
+- Formulář chce jméno, e-mail, URL webu a krátký popis problému; nechce telefon povinně.
+- Po odeslání přijde potvrzení s očekávaným dalším krokem.
+- Interní oznámení jde člověku, který poptávku opravdu zpracuje.
+- Analytika měří návštěvu stránky a odeslání formuláře agregovaně.
+- V patičce je přímý odkaz na informace o soukromí.
+- Není vložený žádný reklamní pixel „pro později“.
+
+Výsledek není velký enterprise launch. Je to čisté spuštění malé obchodní cesty, která respektuje čas i data návštěvníka. Přesně takhle se staví důvěra: nudně, opakovaně a bez digitální pyrotechniky.
+
+### AB.8 Checklist před spuštěním
+
+- Je jasné, co se spouští a pro koho?
+- Prošel někdo hlavní zákaznickou cestu v anonymním okně a na mobilu?
+- Fungují formuláře, potvrzení a interní oznámení?
+- Jsou CTA, ceník, FAQ a kontaktní informace srozumitelné?
+- Má stránka správný titulek, meta description, kanonickou URL a základní sdílecí metadata?
+- Běží HTTPS, přesměrování, monitoring a základní alerty?
+- Existuje rollback nebo předchozí funkční verze?
+- Je jasné, jaká data se sbírají, kde končí a kdo je vlastní?
+- Neobsahuje spuštění zbytečné externí skripty, trackery nebo formulářová pole?
+- Je domluvené, kdo po spuštění sleduje poptávky, chyby a zpětnou vazbu?
+
+### AB.9 Mini úkol na 60 minut
+
+Vezmi poslední spuštěnou stránku nebo funkci a vytvoř pro ni jednostránkový QA checklist. Rozděl ho na obchod, provoz, soukromí a obsah. Potom vyber jednu věc, kterou neumíš dnes ověřit do pěti minut, a dopiš k ní vlastníka. Gratuluji, právě jsi odstranil jeden budoucí „to jsme si mysleli, že funguje“ moment.
+
 ## Závěr: Postav menší digitální stroj, který vydrží
 
 Dobrá webovka nebo SaaS není sbírka nástrojů, trendů a náhodných automatizací. Je to malý digitální stroj, který má jasný účel: vysvětlit hodnotu, získat důvěru, doručit službu, chránit data a pomoct týmu rozhodovat se bez chaosu.
@@ -4753,6 +4886,7 @@ Jedna opravená věc týdně porazí obří transformační projekt, který skon
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn Dodatek AB o předstartovním QA, kontrole zákaznických cest, formulářů, technickém runbooku a privacy-first kontrole před publikací.
 - 2026-09-09: Doplněn Dodatek AA o nabídkách, rozsahu spolupráce, klientských vstupech, změnových požadavcích a privacy-first hranicích už ve fázi zadání.
 - 2026-09-09: Doplněn závěr e-booku s praktickým návodem, jak text používat dál, a finálním checklistem pro web, SaaS, marketing, provoz a privacy-first exporty.
 - 2026-09-09: Obnovena plná verze e-booku po chybně zkráceném commitu a doplněn Dodatek Z o exportech, obnově dat, RPO/RTO, testech záloh a privacy-first offboardingu zákazníka.
