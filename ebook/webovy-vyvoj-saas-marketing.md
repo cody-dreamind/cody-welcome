@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení a importy dat.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat a API integrace.
 
 ---
 
@@ -5453,6 +5453,153 @@ Vyber jeden import ve svém produktu nebo interním procesu a napiš k němu jed
 
 Potom uprav jednu chybovou hlášku tak, aby člověku řekla přesně, co má opravit. Importy nejsou sexy funkce, ale dobrý import je jako dobrý výtah: nikdo o něm nemluví, dokud nezačne dělat divné zvuky mezi patry.
 
+## Dodatek AH: API integrace a webhooky bez datového průvanu
+
+API integrace jsou v SaaS něco jako dveře do skladu. Bez nich zákazník tahá krabice ručně, s nimi může automatizovat práci a propojit nástroje. Jenže dveře bez zámku, inventáře a záznamu přístupů nejsou moderní architektura. Jsou pozvánka na problém, který přijde v pátek v 16:58, protože software má smysl pro drama.
+
+OWASP API Security Top 10 2023 uvádí mezi hlavními riziky například porušenou autorizaci na úrovni objektů, slabou autentizaci, neomezenou spotřebu zdrojů, špatnou konfiguraci a nebezpečné používání cizích API. Zdroj: https://owasp.org/API-Security/editions/2023/en/0x03-introduction/ a přehled rizik https://owasp.org/API-Security/
+
+### AH.1 API začíná inventářem, ne tokenem
+
+Než vytvoříš veřejné API, napiš si inventář. Ne pro auditní šanon, ale pro zdravý rozum týmu. Každý endpoint by měl mít vlastníka, účel a jasnou odpověď na otázku: „Kdo smí udělat co a s jakými daty?“
+
+Minimální API inventář:
+
+| Endpoint | Účel | Vlastník | Autorizace | Citlivost dat | Retence logů |
+| --- | --- | --- | --- | --- | --- |
+| `GET /contacts` | Seznam kontaktů pro CRM integraci | Produkt | workspace role + scope | osobní údaje | 30 dní metadata |
+| `POST /invoices` | Vytvoření faktury z externího systému | Finance | API token + idempotency key | účetní údaje | 90 dní audit |
+| `POST /webhooks/crm` | Příjem změn z CRM | Integrace | podpis payloadu | kontaktní data | 14 dní technické logy |
+
+Pokud endpoint nemá vlastníka, časem se z něj stane opuštěná sklepní místnost. Někdo ji kdysi postavil, nikdo neví proč, ale pořád je přístupná z internetu. To není nostalgie, to je technický dluh s Wi-Fi.
+
+### AH.2 Token není oprávnění ke všemu
+
+API tokeny často začínají jednoduše: jeden klíč pro všechno. To je pohodlné přesně do chvíle, kdy ho někdo vloží do špatného repozitáře, pošle dodavateli nebo nechá běžet ve staré integraci. Pak zjistíš, že „jeden klíč pro všechno“ znamenalo také „jedna nehoda pro všechno“.
+
+Dobré pravidlo:
+
+- token má název, vlastníka a datum vytvoření,
+- token má scope podle práce, kterou dělá,
+- token jde kdykoliv odvolat bez zásahu supportu,
+- token má poslední použití a základní auditní stopu,
+- produkční tokeny se nikdy neposílají e-mailem ani v chatu,
+- dokumentace ukazuje příklad s testovacím tokenem, ne skutečný klíč.
+
+Scope piš lidsky. Ne `rw_all`, ale „číst kontakty“, „vytvářet faktury“, „spravovat členy týmu“. Uživatel si má před uložením tokenu rozumět sám se sebou. Pokud mu dáš jen interní zkratky, odklikne všechno a bude doufat, že se vesmír zachová slušně.
+
+### AH.3 Webhooky musí být ověřené, opakovatelné a klidné
+
+Webhook není kouzelný telefon mezi aplikacemi. Je to příchozí požadavek zvenku, který může přijít dvakrát, pozdě, ve špatném pořadí nebo s daty, která nečekáš. Proto webhooky navrhuj jako frontu práce, ne jako okamžité kliknutí do databáze.
+
+U každého webhooku řeš:
+
+- podpis nebo jiný způsob ověření původu,
+- časové okno platnosti podpisu,
+- ochranu proti opakovanému doručení stejné události,
+- idempotentní zpracování,
+- frontu a retry pravidla,
+- jasné chování při chybě,
+- minimální log payloadu.
+
+IETF pracuje na specifikaci hlavičky `Idempotency-Key`, která slouží k tomu, aby server rozpoznal opakovaný požadavek stejné operace a neprovedl ji dvakrát. Zdroj: https://datatracker.ietf.org/doc/html/draft-ietf-httpapi-idempotency-key-header
+
+Prakticky: když integrace pošle „vytvoř fakturu“ dvakrát, systém nemá vytvořit dvě faktury jen proto, že síť škytla. Má rozpoznat stejnou operaci a vrátit bezpečný výsledek.
+
+### AH.4 Rate limiting chraň jako UX, ne jako trest
+
+Rate limiting není jen obrana proti útoku. Je to způsob, jak udržet službu stabilní pro všechny zákazníky a jak klientům říct: „Zpomal, za chvíli můžeš pokračovat.“ IETF návrh pro HTTP `RateLimit` hlavičky řeší standardizované předávání informací o kvótách a upozorňuje i na to, že klient nemá z těchto hlaviček dělat přehnané předpoklady o budoucím chování serveru. Zdroj: https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/
+
+Dobré API dokumentuje:
+
+- kolik požadavků lze poslat za časové okno,
+- zda limit platí na token, workspace, IP nebo endpoint,
+- co se stane po překročení limitu,
+- jak dlouho má klient čekat,
+- zda existuje dávkový endpoint pro větší objemy,
+- jak požádat o vyšší limit bez obchodního tance kolem ohně.
+
+Privacy-first detail: do limitů a logů neukládej zbytečné identifikátory. Často stačí token ID, workspace ID a agregované počty. IP adresa může být osobní údaj a rozhodně není univerzální odpověď na všechno.
+
+### AH.5 Cizí API je součást tvého rizika
+
+Když tvoje aplikace volá cizí službu, přebíráš část jejího rizika. OWASP v kategorii „Unsafe Consumption of APIs“ upozorňuje, že vývojáři někdy příliš důvěřují externím API a slabě validují odpovědi, autentizaci nebo transport. Zdroj: https://owasp.org/API-Security/editions/2023/en/0xaa-unsafe-consumption-of-apis/
+
+Před napojením si napiš krátký integrační kontrakt:
+
+- jaká data posíláš ven,
+- zda jsou osobní nebo obchodně citlivá,
+- kde služba data zpracovává,
+- co se stane při výpadku,
+- jak dlouho čekáš na odpověď,
+- jak validuješ odpověď,
+- jak integraci vypneš bez rozbití produktu,
+- jak zákazník pozná, že používáš třetí stranu.
+
+Codyho komentář: Integrace je jako host v kanceláři. Může být užitečný, ale pořád mu nedáš klíče od skladu, účetnictví a kávovaru jen proto, že má hezké logo.
+
+### AH.6 Dokumentace má šetřit support i bezpečnost
+
+Dobrá API dokumentace není jen seznam endpointů. Je to návod, jak integraci udělat bezpečně a bez hádání. Čím víc musí integrátor odhadovat, tím víc chyb vyrobí. A pak se všichni tváří překvapeně, že endpoint dostal `null`, `undefined`, datum v americkém formátu a emoji v identifikátoru objednávky.
+
+Dokumentace má obsahovat:
+
+- autentizaci a práci s tokeny,
+- scopes a příklady oprávnění,
+- idempotenci pro zápisové operace,
+- rate limiting a retry pravidla,
+- chybové kódy s příklady opravy,
+- verzování API,
+- testovací prostředí nebo sandbox,
+- ukázkové požadavky bez reálných osobních dat.
+
+Chybová odpověď má pomáhat, ne vyzrazovat. „Token nemá scope `invoices:write`“ je užitečné. „Uživatel jana.novakova@example.com nemá přístup k firmě ACME s interním ID 817263“ už může být zbytečně ukecané.
+
+### AH.7 Konkrétní příklad: fakturační integrace
+
+Malý SaaS chce umožnit zákazníkům vytvářet faktury z externího objednávkového systému.
+
+Bezpečný návrh:
+
+1. Zákazník vytvoří token se scope „vytvářet faktury“.
+2. API vyžaduje `Idempotency-Key` pro `POST /invoices`.
+3. Každá faktura se páruje podle externího ID v rámci workspace.
+4. Rate limit chrání endpoint před dávkovou chybou i útokem.
+5. API vrací srozumitelnou chybu u neplatného DIČ, částky nebo měny.
+6. Audit log ukáže, který token fakturu vytvořil.
+7. Logy neukládají celý fakturační payload, jen metadata nutná pro diagnostiku.
+8. Integrace má vypínač a testovací režim.
+
+Výsledek: zákazník automatizuje práci, ale pořád víš, kdo co poslal, proč se něco nepovedlo a jak to bezpečně zastavit.
+
+### AH.8 Checklist API integrace
+
+- [ ] Každý endpoint má vlastníka, účel a popsanou autorizaci.
+- [ ] Tokeny mají názvy, scopes, vlastníky, audit a snadné odvolání.
+- [ ] Zápisové operace používají idempotenci nebo jiné pravidlo proti duplicitám.
+- [ ] Webhooky ověřují původ, řeší retry a nezpracovávají stejnou událost dvakrát.
+- [ ] Rate limit je zdokumentovaný a chrání produkt bez zbytečného sběru dat.
+- [ ] Externí API má integrační kontrakt, timeouty, validaci odpovědí a vypínač.
+- [ ] Dokumentace obsahuje bezpečné příklady bez reálných osobních dat.
+- [ ] Logy API drží minimum payloadu a mají jasnou retenci.
+- [ ] Zákazník ví, kdy jeho data odcházejí do třetí služby.
+
+### AH.9 Mini úkol na 60 minut
+
+Vyber jednu existující nebo plánovanou integraci a napiš pro ni jednostránkový integrační kontrakt:
+
+1. jaký problém řeší,
+2. jaká data čte a zapisuje,
+3. jak se ověřuje přístup,
+4. jaké scopes potřebuje,
+5. co se stane při duplicitním požadavku,
+6. jak funguje rate limit,
+7. co se loguje,
+8. jak se integrace vypne,
+9. jak zákazník exportuje nebo smaže související data.
+
+Potom najdi jeden token, webhook nebo endpoint, který má příliš široká oprávnění, a zúž ho. Integrace má být pomocník, ne hladový vysavač na data s vlastním názorem na bezpečnost.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -5505,9 +5652,15 @@ Potom uprav jednu chybovou hlášku tak, aby člověku řekla přesně, co má o
 - Your Europe: Starting a business — https://europa.eu/youreurope/business/lifecycle/starting/index_en.htm
 - Your Europe: EU VAT One Stop Shop — https://europa.eu/youreurope/business/finance-and-tax/vat/one-stop-shop/index_en.htm
 - Your Europe: Expanding across borders — https://europa.eu/youreurope/business/growing/expanding-across-borders/index_en.htm
+- OWASP API Security Top 10 2023 — https://owasp.org/API-Security/
+- OWASP API Security Top 10 2023 Introduction — https://owasp.org/API-Security/editions/2023/en/0x03-introduction/
+- OWASP API10:2023 Unsafe Consumption of APIs — https://owasp.org/API-Security/editions/2023/en/0xaa-unsafe-consumption-of-apis/
+- IETF HTTPAPI: The Idempotency-Key HTTP Header Field — https://datatracker.ietf.org/doc/html/draft-ietf-httpapi-idempotency-key-header
+- IETF HTTPAPI: RateLimit header fields for HTTP — https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn Dodatek AH o API integracích, webhoocích, tokenech, idempotenci, rate limiting, externích API a privacy-first dokumentaci integrací.
 - 2026-09-09: Doplněn Dodatek AG o importech a migracích dat, validaci, duplicitách, rollbacku, retenci souborů a privacy-first auditní stopě.
 - 2026-09-09: Doplněn Dodatek AF o nastavení produktu, bezpečných výchozích volbách, citlivých akcích, auditní stopě a privacy-first konfiguraci.
 - 2026-09-09: Doplněn Dodatek AE o účtech, rolích, oprávněních, pozvánkách, podpoře, audit logu a privacy-first správě přístupů.
