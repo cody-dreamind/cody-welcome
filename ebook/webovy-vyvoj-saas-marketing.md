@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat a předstartovní QA.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace a evropská expanze.
 
 ---
 
@@ -4801,6 +4801,110 @@ Výsledek není velký enterprise launch. Je to čisté spuštění malé obchod
 
 Vezmi poslední spuštěnou stránku nebo funkci a vytvoř pro ni jednostránkový QA checklist. Rozděl ho na obchod, provoz, soukromí a obsah. Potom vyber jednu věc, kterou neumíš dnes ověřit do pěti minut, a dopiš k ní vlastníka. Gratuluji, právě jsi odstranil jeden budoucí „to jsme si mysleli, že funguje“ moment.
 
+## Dodatek AC: Lokalizace a evropská expanze bez překladatelského karnevalu
+
+Evropská expanze malého SaaS často nezačne pobočkou v Berlíně ani velkou kampaní v Paříži. Začne mnohem tišeji: někdo ze Slovenska se zeptá, jestli faktura umí jejich DIČ, zákazník z Německa chce anglickou smlouvu a návštěvník z Rakouska opustí ceník, protože neví, jestli cena obsahuje DPH. To není důkaz, že máš okamžitě „go international“. Je to signál, že produkt potřebuje expanzi navrhnout prakticky, ne marketingově.
+
+Lokalizace není jen překlad tlačítek. Je to kombinace jazyka, plateb, fakturace, podpory, právních textů, očekávání zákazníků a datového provozu. Pokud ji uděláš chaoticky, vyrobíš si tři polofunkční trhy místo jednoho stabilního. Pokud ji uděláš postupně, můžeš růst bez toho, aby každá nová země znamenala nový provozní požár.
+
+### AC.1 Nejdřív ověř poptávku, potom překládej produkt
+
+Než přeložíš celý produkt do dalšího jazyka, zjisti, jestli existuje dostatečně konkrétní poptávka. Jeden nadšený e-mail ze zahraničí není trh. Deset podobných dotazů ze stejného segmentu už stojí za zápis do backlogu.
+
+Začni lehce:
+
+- Vytvoř jednu anglickou nebo lokální landing page pro konkrétní segment.
+- Přidej jasnou informaci, odkud je služba provozovaná a jak pracuje s daty.
+- Otestuj poptávkový formulář nebo demo call, ne hned samoobslužný onboarding.
+- Sleduj agregované zdroje návštěvnosti, konverze a kvalitu poptávek.
+- Měř, kolik práce navíc přináší podpora v novém jazyce.
+
+Codyho komentář: Překlad celého rozhraní před ověřením trhu je krásný způsob, jak si vytvořit produktovou dekoraci. Vypadá to strategicky, ale často jen překládáš prázdnou místnost.
+
+### AC.2 Jazyk produktu rozděl podle rizika
+
+Ne každý text má stejnou váhu. Chybně přeložený slogan je trapas. Chybně přeložená fakturační podmínka, souhlas nebo nastavení mazání dat je problém.
+
+Rozděl texty do tří vrstev:
+
+| Vrstva | Příklady | Kontrola |
+| --- | --- | --- |
+| Marketing | homepage, články, kampaně, případovky | Rodilý mluvčí nebo člověk znalý trhu |
+| Produkt | navigace, onboarding, prázdné stavy, chyby | Produktový test se skutečným uživatelem |
+| Právní a provozní | obchodní podmínky, soukromí, fakturace, souhlasy | Odborná kontrola podle cílového trhu |
+
+První iterace nemusí být perfektní všude. Ale rizikové texty musí být přesné. Pokud neumíš právní nebo daňovou větu vysvětlit vlastními slovy, neposílej ji ven jen proto, že ji nástroj přeložil sebevědomě.
+
+### AC.3 Fakturace a DPH řeš dřív než reklamu
+
+U B2B SaaS se expanze často zasekne na věcech, které nejsou sexy: fakturační údaje, DIČ, reverse charge, sazby DPH, měna, účetní exporty a způsob platby. U B2C prodeje v EU se navíc může objevit povinnost řešit DPH podle země zákazníka. Systém VAT One Stop Shop podle Your Europe umožňuje u přeshraničního B2C prodeje v EU podávat jedno přiznání přes portál vybrané členské země a odvést DPH najednou, místo registrace ve více státech. Zdroj: https://europa.eu/youreurope/business/finance-and-tax/vat/one-stop-shop/index_en.htm
+
+Prakticky před expanzí ověř:
+
+- Umí fakturační systém zákazníka z jiné země EU?
+- Umí oddělit B2B a B2C scénáře?
+- Je jasné, kdy uvádíš cenu bez DPH a kdy s DPH?
+- Má účetní export všechny údaje, které budeš potřebovat?
+- Ví support, kam předat daňový dotaz místo improvizace v e-mailu?
+
+Tohle není účetní poradenství. Je to připomínka, že expanze bez fakturační přípravy je jako spustit e-shop a pak zjistit, že košík umí doručit jen do vlastní kuchyně.
+
+### AC.4 Evropský provoz komunikuj jako výhodu
+
+Pokud službu navrhuješ, stavíš a provozuješ v Evropě, neschovávej to do patičky. Pro část zákazníků je to obchodní argument: kratší datové řetězce, srozumitelnější jurisdikce, menší závislost na reklamních platformách a větší kontrola nad exporty.
+
+Na stránce pro nový trh napiš lidsky:
+
+- kde jsou primárně provozovaná data,
+- jaké analytické a support nástroje používáš,
+- zda používáš subdodavatele mimo EU a proč,
+- jak zákazník získá export dat,
+- jak může účet zrušit a co se stane s daty.
+
+Evropská komise v Your Europe připomíná, že při zakládání nebo rozšiřování podnikání v jiné zemi EU je potřeba znát národní pravidla pro registrace, povolení a licence; jednotlivé země se mohou lišit. Zdroj: https://europa.eu/youreurope/business/lifecycle/starting/index_en.htm
+
+### AC.5 Nepřidávej trh, který neumíš obsloužit
+
+Nová země není jen nový URL slug. Je to slib, že dokážeš zákazníkovi rozumně odpovědět, vystavit doklad, vysvětlit soukromí, vyřešit incident a předat data při odchodu.
+
+Před vstupem na další trh si dej rozhodovací bránu:
+
+| Otázka | Minimum pro zelenou |
+| --- | --- |
+| Máme konkrétní signál poptávky? | Opakované poptávky nebo validovaný pilot |
+| Umíme fakturovat a účtovat? | Ověřený proces s účetní nebo daňovým poradcem |
+| Umíme podporu v jazyce trhu? | Jasný kanál, SLA a šablony odpovědí |
+| Umíme vysvětlit data a soukromí? | Lokálně srozumitelné privacy texty |
+| Umíme trh opustit bez chaosu? | Exporty, ukončení, archivace a komunikace |
+
+Pokud odpověď na dvě nebo více otázek zní „nějak se to udělá“, expanzi odlož. Ne proto, že bys byl malý. Protože malý tým musí chránit fokus jako výrobní tajemství.
+
+### AC.6 Konkrétní příklad: český SaaS jde na Slovensko a do Německa
+
+Český B2B SaaS pro plánování servisních zakázek má první zákazníky v Česku. Občas přijde slovenská poptávka, dvě německé firmy si stáhly checklist a jeden partner nabízí distribuci.
+
+Rozumný postup:
+
+1. Slovensko: vytvořit slovenskou landing page, ověřit fakturaci, připravit podporu v češtině/slovenštině a přidat slovenské příklady v obsahu.
+2. Německo: nespouštět hned celý produkt německy; vytvořit anglickou nebo německou segmentovou stránku pro piloty, sbírat poptávky a ověřit právní/fakturační texty.
+3. Produkt: nejdřív přeložit onboarding, chybové stavy, fakturační obrazovky a e-mailové šablony; blog může počkat.
+4. Data: zachovat evropský hosting, minimum trackerů, jasný export a krátkou mapu subdodavatelů.
+5. Review: po 30 dnech rozhodnout, jestli trh přináší kvalitní poptávky, nebo jen pocit, že „jsme mezinárodní“.
+
+### AC.7 Checklist lokalizace a evropské expanze
+
+- Máme vybraný jeden konkrétní trh nebo segment, ne neurčité „EU“.
+- Máme ověřenou poptávku přes landing page, pilot nebo obchodní rozhovory.
+- Máme zkontrolovanou fakturaci, DPH scénáře, měnu a účetní export.
+- Máme přeložené rizikové produktové, právní a provozní texty.
+- Máme podporu, která umí odpovědět v rozumném jazyce a čase.
+- Máme privacy-first vysvětlení provozu, subdodavatelů, exportů a retence.
+- Máme rozhodovací datum, kdy expanzi vyhodnotíme a případně zastavíme.
+
+### AC.8 Mini úkol na 60 minut
+
+Vyber jednu zemi nebo segment, kam tě zákazníci přirozeně táhnou. Napiš jednostránkový expanzní brief: proč právě ten trh, jaký signál už máš, co musíš ověřit ve fakturaci, jaké tři texty musí být přesné a jak budeš měřit kvalitu poptávek bez nových trackerů. Pokud brief nedokážeš dokončit za hodinu, expanze ještě není připravená. To není selhání, to je levná prevence drahého chaosu.
+
 ## Závěr: Postav menší digitální stroj, který vydrží
 
 Dobrá webovka nebo SaaS není sbírka nástrojů, trendů a náhodných automatizací. Je to malý digitální stroj, který má jasný účel: vysvětlit hodnotu, získat důvěru, doručit službu, chránit data a pomoct týmu rozhodovat se bez chaosu.
@@ -4883,9 +4987,13 @@ Jedna opravená věc týdně porazí obří transformační projekt, který skon
 - GOV.UK Service Manual: Make the service simple to use — https://www.gov.uk/service-manual/service-standard/point-4-make-the-service-simple-to-use
 - FinOps Foundation: What is FinOps? — https://www.finops.org/introduction/what-is-finops/
 - EDPB: Data breaches — https://www.edpb.europa.eu/sme/assess-the-risks/data-breaches_en
+- Your Europe: Starting a business — https://europa.eu/youreurope/business/lifecycle/starting/index_en.htm
+- Your Europe: EU VAT One Stop Shop — https://europa.eu/youreurope/business/finance-and-tax/vat/one-stop-shop/index_en.htm
+- Your Europe: Expanding across borders — https://europa.eu/youreurope/business/growing/expanding-across-borders/index_en.htm
 
 ## Pracovní log
 
+- 2026-09-09: Doplněn Dodatek AC o lokalizaci, ověřování evropské expanze, fakturaci, DPH scénářích, podpoře a privacy-first komunikaci provozu.
 - 2026-09-09: Doplněn Dodatek AB o předstartovním QA, kontrole zákaznických cest, formulářů, technickém runbooku a privacy-first kontrole před publikací.
 - 2026-09-09: Doplněn Dodatek AA o nabídkách, rozsahu spolupráce, klientských vstupech, změnových požadavcích a privacy-first hranicích už ve fázi zadání.
 - 2026-09-09: Doplněn závěr e-booku s praktickým návodem, jak text používat dál, a finálním checklistem pro web, SaaS, marketing, provoz a privacy-first exporty.
