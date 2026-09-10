@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy, postupné rollouty, e-mailová doručitelnost, cache, statická aktiva, API klíče, auditní logy, stránka bezpečnosti a soukromí, souborové přílohy, hlášení zranitelností, retence dat, checkout, waitlisty a produktová dema.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy, postupné rollouty, e-mailová doručitelnost, cache, statická aktiva, API klíče, auditní logy, stránka bezpečnosti a soukromí, souborové přílohy, hlášení zranitelností, retence dat, checkout, waitlisty, produktová dema, trialy, piloty a produkční přechody.
 
 ---
 
@@ -9116,6 +9116,124 @@ Takhle má pilot hranice. Zákazník ví, co dostane. Tým ví, co sledovat. A p
 
 Vyber jeden aktuální trial nebo pilot a napiš jednostránkový pilot brief: cíl, rozsah, data, vlastníci, délka, kritéria úspěchu, konec a pravidla pro data. Pak označ všechny požadavky zákazníka jako nutné pro rozhodnutí, nutné pro ostré nasazení, příjemné zlepšení, zakázkový požadavek nebo rizikový požadavek. Pokud po hodině stále nevíš, co pilot ověřuje, nejspíš neřídíš pilot. Jen hostíš velmi zdvořilý chaos.
 
+## Dodatek BI: Přechod z pilotu do ostrého provozu bez produkčního úleku
+
+Pilot je slib. Ostrý provoz je závazek. Mezi nimi musí být kontrolovaný přechod, ne slavnostní kliknutí na „go live“ a následná modlitba k démonům DNS, fakturace a lidské zapomnětlivosti. U menšího SaaS bývá největší riziko v tom, že pilot dopadl „docela dobře“, tým je nadšený a začne zákazníka převádět do produkce bez jasného seznamu odpovědností.
+
+Přechod z pilotu do ostrého provozu není jen technické nasazení. Je to obchodní, produktové, bezpečnostní a podpůrné rozhodnutí najednou. Pokud ho neřídíš, zákazník dostane poloprodukční chaos s hezkým názvem „early access“. To zní moderně, ale podporu to nezachrání.
+
+### BI.1 Nejdřív rozhodni, jestli pilot opravdu uspěl
+
+Pilot nekončí pocitem. Končí rozhodnutím. Před přechodem do produkce si odpověz na tři otázky:
+
+1. Splnil pilot původní rozhodovací otázku?
+2. Ví zákazník, jak produkt zapadá do jeho běžné práce?
+3. Umíme produkt provozovat bez ručních obezliček, které by se v měřítku rozpadly?
+
+Pokud je odpověď na třetí otázku „zatím to budeme dělat ručně“, neznamená to automaticky stopku. Znamená to, že ruční část musí být pojmenovaná, naceněná a časově omezená. Jinak se z pilotu stane nekonečná servisní smlouva převlečená za SaaS.
+
+Dobré rozhodnutí po pilotu má jednu z těchto podob:
+
+- **Převést do produkce:** hodnota je potvrzená, rizika jsou známá a plán přechodu je připravený.
+- **Prodloužit pilot:** pouze pokud je jasné, jaká konkrétní otázka ještě chybí.
+- **Upravit produkt:** pilot ukázal hodnotu, ale produkční provoz potřebuje změnu v onboarding, oprávněních, exportu nebo podpoře.
+- **Ukončit spolupráci:** produkt problém neřeší dost dobře nebo zákazník není vhodný segment.
+
+Codyho komentář: „Ještě měsíc testování“ bez nové otázky je jen elegantní způsob, jak říct, že nikdo nechce udělat rozhodnutí. Produktové limbo má špatnou klimatizaci.
+
+### BI.2 Udělej produkční readiness checklist
+
+Před ostrým provozem potřebuješ jednoduchou kontrolu připravenosti. Ne audit na třicet stran. Spíš seznam věcí, které by bylo trapné řešit až po startu.
+
+Minimum pro produkční přechod:
+
+- **Účty a role:** kdo bude administrátor, kdo běžný uživatel, kdo má přístup k citlivým akcím.
+- **Data:** co se migruje z pilotu, co se smaže a co se založí čistě v produkci.
+- **Fakturace:** jaký tarif, limity, datum začátku, kontaktní e-mail pro faktury a interní objednávka, pokud ji zákazník potřebuje.
+- **Podpora:** kam zákazník píše, kdo odpovídá, jaká je očekávaná reakční doba.
+- **Export a mazání:** kde zákazník najde export, jak se ruší účet a jaké retenční lhůty platí.
+- **Incidenty:** kdo je kontaktní osoba při výpadku, bezpečnostním problému nebo chybě v datech.
+- **Dokumentace:** kde je krátký návod pro první běžný scénář, ne encyklopedie funkcí.
+
+Privacy-first přístup říká: nepřenášej z pilotu všechno jen proto, že to existuje. Přenes jen data, která zákazník potřebuje pro ostrou práci. Testovací účty, pokusné importy, demo soubory, staré screenshoty a interní poznámky mají jít pryč. Produkce není skládka hezkých vzpomínek na pilot.
+
+### BI.3 Migruj data jako produktový proces, ne jako noční rituál
+
+Migrace z pilotu do produkce často vypadá nevinně: „jen překlopíme data“. Jenže v datech bývá schovaný testovací nepořádek, dočasné e-maily, falešné projekty, duplicitní záznamy a oprávnění, která někdo přidal, aby se demo nezaseklo před klientem.
+
+Před migrací udělej čtyři kroky:
+
+1. **Inventura:** vypiš typy dat, která v pilotu vznikla.
+2. **Rozhodnutí:** u každého typu napiš přenést, smazat, anonymizovat nebo znovu vytvořit.
+3. **Validace:** ukaž zákazníkovi stručný seznam toho, co půjde do produkce.
+4. **Kontrola po migraci:** ověř počty, vazby, oprávnění a několik reálných scénářů.
+
+Pokud produkt pracuje se soubory, migrace nesmí řešit jen databázi. Zkontroluj i přílohy, náhledy, exporty, importní logy a dočasné odkazy. Přesně tam se rády schovávají pozůstatky pilotu, které později nikdo nechce vlastnit.
+
+### BI.4 Přepiš pilotní domluvy do produkční smlouvy
+
+Pilot je často neformální: pár callů, e-mail, sdílený dokument a dobrá vůle. Produkce potřebuje jasnější rámec. Nemusí to být právnický epos, ale zákazník musí vědět, co kupuje a co ne.
+
+Do produkční domluvy patří:
+
+- tarif, cena, fakturační období a limity;
+- rozsah podpory a komunikační kanály;
+- odpovědnost za uživatelské účty a správu rolí;
+- způsob exportu dat a pravidla ukončení;
+- odkaz na DPA, subdodavatele a stránku bezpečnosti;
+- případné placené práce mimo standardní produkt;
+- datum ostrého startu a kontaktní osoby na obou stranách.
+
+Největší past je nechat v produkci pilotní výjimky. Pokud zákazník během pilotu dostal ruční report každé pondělí, speciální import přes Slack nebo „dočasný“ admin přístup pro konzultanta, rozhodni, jestli to bude placená služba, produktová funkce, nebo to skončí. Výjimky bez ceny a vlastníka se množí rychleji než záložky v prohlížeči vývojáře před dovolenou.
+
+### BI.5 Nastav první produkční týden
+
+První týden po přechodu není čas na heroické mlčení. Zákazník si ověřuje, jestli produkt funguje v normálním provozu, a tým sbírá signály, které pilot často nezachytí.
+
+Dobrá kadence:
+
+- **Den 0:** potvrzení startu, odkazy na dokumentaci, kontakty a stručný seznam toho, co se změnilo proti pilotu.
+- **Den 1:** kontrola prvního běžného scénáře a rychlé zachycení blokátorů.
+- **Den 3:** krátké shrnutí otevřených bodů a rozhodnutí, co je chyba, co je zlepšení a co je mimo rozsah.
+- **Den 7:** produkční review: co funguje, co brzdí adopci, jaké jsou další kroky a jestli je potřeba upravit onboarding.
+
+Měř střídmě. Potřebuješ vědět, jestli zákazník používá klíčové scénáře, kde se zasekává a jestli vznikají incidenty. Nepotřebuješ sledovat každý pohyb myši ani stavět malý datový akvárium kolem každého uživatele. Když chybí kontext, zeptej se člověka. Ano, starý dobrý rozhovor. Funguje překvapivě i po vynálezu dashboardů.
+
+### BI.6 Konkrétní příklad: přechod klientského portálu do produkce
+
+Navážeme na pilot klientského portálu z předchozího dodatku. Pilot ověřil, že tři klienti zvládnou předávat podklady přes portál místo e-mailových vláken. Teď se má portál spustit pro všechny nové projekty agentury.
+
+Produkční plán může vypadat takto:
+
+- **Rozhodnutí:** portál se spouští pro nové projekty od 1. dne příštího měsíce, staré projekty se nemigrují plošně.
+- **Data:** pilotní testovací projekty se smažou, dva reálné pilotní projekty se po souhlasu klientů ponechají a označí jako produkční.
+- **Role:** projektový manažer je vlastník projektu, klient má přístup jen ke svému projektu, interní administrátor má auditovanou správu účtů.
+- **Podpora:** první měsíc řeší dotazy jeden určený člověk, ne celý tým v náhodném vlákně.
+- **Dokumentace:** klient dostane jednostránkový návod „Jak dodat podklady přes portál“.
+- **Retence:** přílohy se drží po dobu projektu a definovanou dobu po jeho uzavření, poté se mažou nebo archivují podle smlouvy.
+- **Review:** po měsíci se vyhodnotí počet e-mailových urgencí, chybějící podklady, spokojenost klientů a počet support dotazů.
+
+Všimni si, že plán neříká „nasadit portál“. Říká, kdo ho používá, s jakými daty, s jakými pravidly a jak poznáš, že to dává smysl. To je rozdíl mezi produkčním startem a digitálním ohňostrojem s příchutí podpory.
+
+### BI.7 Checklist přechodu do produkce
+
+- [ ] Je jasně rozhodnuto, jestli pilot uspěl, pokračuje, mění se nebo končí?
+- [ ] Existuje produkční readiness checklist s vlastníkem každé položky?
+- [ ] Víme, která pilotní data přenést, smazat, anonymizovat nebo vytvořit znovu?
+- [ ] Ověřili jsme po migraci oprávnění, počty záznamů, soubory a klíčové scénáře?
+- [ ] Jsou pilotní výjimky buď ukončené, naceněné, nebo převedené do roadmapy?
+- [ ] Má zákazník jasný tarif, limity, fakturaci, podporu a kontaktní osoby?
+- [ ] Je dokumentace dost krátká na to, aby ji někdo opravdu použil?
+- [ ] Má první produkční týden konkrétní rytmus kontroly a follow-upu?
+- [ ] Nesbíráme při produkčním startu víc dat, než potřebujeme pro provoz, podporu a bezpečnost?
+- [ ] Ví zákazník, jak exportovat data a jak účet ukončit, ještě než to bude potřebovat?
+
+### BI.8 Mini úkol na 45 minut
+
+Vyber jeden pilot, trial nebo „skoro hotové“ nasazení a napiš přechodovou tabulku se čtyřmi sloupci: oblast, rozhodnutí, vlastník, termín. Oblasti dej minimálně tyto: data, role, fakturace, podpora, dokumentace, export, mazání, první produkční týden. U každé oblasti dopiš jednu větu, podle které poznáš, že je připravená.
+
+Pokud některá oblast nemá vlastníka, není připravená. Pokud nemá termín, není připravená. Pokud má vlastníka „tým“, není připravená a navíc sis právě vytvořil malou mlhu s kalendářem.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -9197,6 +9315,7 @@ Vyber jeden aktuální trial nebo pilot a napiš jednostránkový pilot brief: c
 
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek BI o přechodu z pilotu do ostrého provozu, produkční připravenosti, migraci pilotních dat, smluvních hranicích a prvním produkčním týdnu.
 - 2026-09-10: Doplněn Dodatek BH o trialech a pilotních nasazeních, rozhodovací otázce, kritériích úspěchu, onboardingu, hranicích zakázkových požadavků a privacy-first úklidu dat.
 - 2026-09-10: Doplněn Dodatek BG o produktových demech, demo datech, registraci až po hodnotě, střídmém měření, trialu, pilotu a privacy-first retenci.
 - 2026-09-10: Doplněn Dodatek BF o případových studiích, výběru zákaznického příběhu, poctivých metrikách, souhlasu, citacích a privacy-first anonymizaci.
