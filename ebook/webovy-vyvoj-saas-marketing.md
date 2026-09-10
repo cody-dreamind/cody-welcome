@@ -7698,6 +7698,159 @@ Tým tím nezíská jen vyplněný dotazník. Získá lepší dokumentaci, jasn�
 Najdi poslední bezpečnostní nebo privacy otázku od zákazníka. Pokud žádnou nemáš, napiš si deset otázek, které by položil opatrný B2B zákazník před pilotem. Ke každé vytvoř krátkou odpověď ve třech větách: aktuální stav, omezení, kontakt nebo další krok. Potom označ, co může být veřejné, co jen pro zákazníka a co má zůstat interní. Tím právě vznikl základ tvé knihovny odpovědí — žádná magie, jen méně chaosu s hezčími okraji.
 
 
+## Dodatek AY: Datový model bez budoucí archeologie
+
+Datový model je jedna z věcí, která na začátku vypadá jako nudná technická tabulka, ale za rok rozhoduje o tom, jestli produkt umí růst, fakturovat, mazat data, exportovat zákazníka a vysvětlit incident bez detektivního seriálu. U malého SaaS týmu bývá největší riziko jednoduché: model vznikne podle první obrazovky v UI, ne podle reality byznysu.
+
+Dobrá databáze není ta, která má nejvíc chytrých relací. Dobrá databáze je ta, ve které tým za tři měsíce pořád pozná, komu data patří, proč existují, jak dlouho je má držet a co se stane, když zákazník odejde.
+
+> Codyho komentář: Databáze je firemní paměť. Když do ní zapisuješ chaos, nedostaneš „agilitu“. Dostaneš chaos s indexy.
+
+### AY.1 Modeluj vlastnictví dat dřív než obrazovky
+
+První otázka nemá být „jaké sloupce potřebuje tahle komponenta?“. První otázka má být „kdo tato data vlastní a v jakém kontextu dávají smysl?“ U SaaS se to typicky láme na několika úrovních:
+
+- `account` nebo `organization`: zákazník jako smluvní a fakturační jednotka.
+- `workspace` nebo `tenant`: pracovní prostor, kde vznikají produktová data.
+- `user`: člověk s přístupem, rolí a historií akcí.
+- `project`, `client`, `case`, `document` nebo jiný doménový objekt: věc, kvůli které si zákazník produkt platí.
+- `event` nebo `audit_log`: stopa důležité změny, ne skládka všeho, co se mihlo v aplikaci.
+
+Když vlastnictví není jasné, později se rozbije skoro všechno: oprávnění, export, mazání, fakturace, reporting i zákaznická podpora. Typický zápach je tabulka `users`, která obsahuje osobní profil, přihlášení, obchodní nastavení, billing kontakt, jazyk UI a poslední otevřený dashboard. To není model. To je digitální kredenc.
+
+Praktické pravidlo: každý důležitý záznam má mít odpověď na čtyři otázky:
+
+1. Ke kterému zákazníkovi nebo tenantovi patří?
+2. Kdo ho vytvořil nebo změnil?
+3. Proč existuje z pohledu produktu?
+4. Co se s ním stane při exportu, archivaci nebo výmazu?
+
+Pokud odpovědi nejsou jasné, nezakládej další tabulku naslepo. Zpomal na hodinu a pojmenuj hranice. Ano, je to méně sexy než nový modal. Ne, modal tě nezachrání, až budeš ručně lovit data zákazníka přes SQL.
+
+### AY.2 Odděl produktová, provozní a fakturační data
+
+Malý SaaS často začne jednou databází a to je v pořádku. Jedna databáze ale neznamená jeden mentální pytel. Minimálně si odděl tři druhy dat:
+
+- Produktová data: obsah, nastavení, projekty, dokumenty, položky, workflow.
+- Provozní data: auditní logy, technické události, fronty, stav importů, chybové záznamy.
+- Obchodní a fakturační data: tarif, limity, fakturační kontakt, objednávky, interní obchodní poznámky.
+
+Oddělení nemusí hned znamenat tři databáze. Často stačí jasné schéma, prefixy, dokumentace a pravidla přístupu. Důležité je, aby vývojář věděl, že například technický log importu nemá stejný životní cyklus jako uživatelem vytvořený dokument.
+
+Privacy-first pohled je jednoduchý: čím lépe oddělíš účel dat, tím snáz nastavíš retenci a přístup. Produktová data může zákazník potřebovat exportovat. Debug data možná stačí držet krátce. Fakturační data mohou mít jiný retenční režim než obsah pracovního prostoru. Když je všechno smíchané, tým se bojí mazat cokoli — a tím obvykle drží víc dat, než potřebuje.
+
+### AY.3 Migrace piš jako provozní scénář, ne jako kouzlo
+
+Migrace databáze není jen soubor, který projde lokálně. Je to provozní změna. Má dopad na data, aplikaci, rollback a někdy i zákazníky. Proto se vyplatí psát migrace tak, aby byly nudné:
+
+- Malé kroky místo jedné obří přestavby.
+- Nové sloupce nejdřív volitelné, teprve po doplnění dat povinné.
+- Backfill oddělený od změny schématu, pokud může trvat dlouho.
+- Bezpečné opakování tam, kde migrace pracuje s daty.
+- Jasný plán, co se stane při chybě uprostřed.
+
+Příklad bezpečnější změny: nechceš rovnou přejmenovat `company_id` na `organization_id` ve všem najednou. Nejdřív přidej nový sloupec, zapisuj do obou, doplň historická data, přepni čtení, ověř, že se hodnoty nerozcházejí, a až potom starý sloupec odstraň. Je to méně hrdinské. Přesně proto je to lepší.
+
+U každé větší migrace si napiš krátký runbook:
+
+- Jak poznáme, že migrace běží správně?
+- Jaké metriky nebo logy sledujeme?
+- Dá se změna zastavit bez ztráty dat?
+- Jak dlouho může běžet bez dopadu na zákazníka?
+- Kdo rozhodne o rollbacku nebo pokračování?
+
+Tento runbook nemusí být román. Stačí pět vět v issue nebo deploy poznámce. Hlavně ať existuje dřív, než produkce začne dělat věci, které v demu nikdy nedělala. Produkce je v tomhle velmi kreativní bestie.
+
+### AY.4 Pojmenování je dokumentace, kterou čte každý den
+
+Názvy tabulek, sloupců a stavů jsou malé produktové rozhodnutí. Když jsou přesné, šetří support, vývoj i onboarding nových lidí. Když jsou mlhavé, vznikají interní překlady typu „`active` vlastně znamená zaplacený, ale ne nutně dostupný“. To je přesně ten moment, kdy databáze začne mluvit klingonsky.
+
+Dobré názvy mají pár pravidel:
+
+- Stav pojmenuj podle významu, ne podle barvy tlačítka: `pending_review`, `trial_expired`, `export_ready`.
+- Vyhýbej se univerzálním slovům bez kontextu: `data`, `info`, `status2`, `misc`, `payload_final`.
+- Když ukládáš JSON, pojmenuj jeho účel a pravidla, ne jen `metadata`.
+- Rozlišuj `created_at`, `submitted_at`, `approved_at`, `deleted_at` — nejsou to stejné události.
+- Pokud používáš soft delete, popiš, co přesně znamená `deleted_at`: skryto v UI, připraveno k výmazu, nebo skutečně právně/produktově odstraněno?
+
+U stavů je dobré mít jeden zdroj pravdy. Stav objednávky, importu, exportu nebo onboardingu by neměl žít jako volný text. Použij explicitní hodnoty, dokumentuj přechody a ošetři nemožné kombinace. Když export může být zároveň `running`, `failed` a `ready`, nemáš flexibilitu. Máš Schrödingerův export.
+
+### AY.5 Export a mazání nejsou dodatečný plugin
+
+Privacy-first SaaS musí umět vysvětlit, jak zákazník dostane svá data ven a co se smaže při odchodu. To není jen právní nebo support téma. Je to vlastnost datového modelu.
+
+U každé nové tabulky si polož jednoduché otázky:
+
+- Patří tato data do zákaznického exportu?
+- Jsou to data vytvořená zákazníkem, odvozená aplikací, nebo interní provozní stopa?
+- Mají se mazat spolu s tenantem, anonymizovat, nebo držet jen agregovaně?
+- Obsahují osobní údaje, tajemství, obchodní citlivost nebo interní poznámky?
+- Existuje bezpečný způsob, jak je zobrazit supportu bez zbytečných detailů?
+
+Když tyto otázky řešíš až při prvním enterprise dotazníku, bude to bolet. Když je řešíš při návrhu tabulky, často přidáš jen jeden vztah, jeden stav nebo jednu poznámku do dokumentace. To je výrazně levnější než později vysvětlovat, proč export obsahuje půlku interního debug payloadu.
+
+Praktický vzor pro dokumentaci tabulky:
+
+```text
+Tabulka: project_documents
+Účel: Dokumenty vytvořené zákazníkem v rámci projektu.
+Vlastník: Tenant.
+Export: Ano, včetně obsahu a základních časových údajů.
+Mazání: Mazat při výmazu projektu nebo tenanta; auditní stopu držet odděleně bez obsahu dokumentu.
+Support přístup: Jen metadata, obsah pouze na explicitní žádost zákazníka.
+Retence: Podle retenčního nastavení tenanta a záloh.
+```
+
+Taková poznámka zabere tři minuty. Jednou ti ušetří tři hodiny a nervy, které by jinak skončily někde mezi Slackem, databází a kávovarem.
+
+### AY.6 Konkrétní příklad: klientský portál pro agenturu
+
+Představ si SaaS pro agenturu, která spravuje klientské projekty. Na začátku tým vytvoří tabulky `users`, `clients`, `projects`, `files`, `comments`. Vypadá to rozumně. Jenže za pár měsíců přijde realita:
+
+- Jeden klient má více kontaktních osob.
+- Agentura chce oddělit interní poznámky od komentářů viditelných klientovi.
+- Klient chce export všech souborů a komentářů k ukončenému projektu.
+- Support potřebuje vidět stav projektu, ale ne obsah citlivých příloh.
+- Fakturace běží na úrovni agentury, ne jednotlivého klienta.
+
+Lepší model by už od začátku rozlišil:
+
+- `organization`: agentura jako platící zákazník.
+- `client_account`: klient agentury v rámci jejího prostoru.
+- `project`: práce pro konkrétního klienta.
+- `project_member`: vazba lidí na projekt a role.
+- `client_visible_comment`: komentář viditelný klientovi.
+- `internal_note`: interní poznámka agentury, oddělená od klientské komunikace.
+- `file_asset`: soubor s jasným vlastníkem, viditelností a exportním pravidlem.
+- `audit_log`: stopa změn práv, nahrání souborů a exportů.
+
+To neznamená překomplikovat MVP. Znamená to nepředstírat, že interní poznámka a klientský komentář jsou totéž jen proto, že mají oba text. V UI možná vypadají podobně. Pro soukromí, export, support a důvěru jsou to úplně jiné věci.
+
+### AY.7 Checklist datového modelu
+
+- Má každá hlavní tabulka jasného vlastníka: tenant, uživatel, projekt, systém?
+- Je zřejmé, která data jsou zákaznická, provozní, fakturační a interní?
+- Umíš popsat, co se exportuje při odchodu zákazníka?
+- Umíš popsat, co se smaže, anonymizuje nebo zůstane v agregované podobě?
+- Jsou interní poznámky oddělené od zákaznického obsahu?
+- Mají důležité stavy omezené hodnoty a popsané přechody?
+- Existuje auditní stopa pro změny oprávnění, exporty a citlivé akce?
+- Neobsahují logy a `metadata` pole osobní údaje jen proto, že to bylo pohodlné?
+- Má každá větší migrace plán bezpečného nasazení a kontroly?
+- Dokáže nový vývojář během hodiny pochopit základní doménové entity?
+
+### AY.8 Mini úkol na 60 minut
+
+Vyber jednu část produktu, která pracuje se zákaznickými daty. Neřeš celou databázi. Jen jednu oblast.
+
+1. Napiš seznam hlavních tabulek nebo kolekcí.
+2. Ke každé doplň vlastníka, účel, exportní pravidlo a pravidlo mazání.
+3. Označ pole, která obsahují osobní nebo obchodně citlivá data.
+4. Najdi jednu tabulku, kde se míchají dva různé účely.
+5. Navrhni nejmenší změnu, která účely oddělí bez velkého refaktoru.
+
+Výstup může být obyčejná Markdown tabulka. Důležité je, aby tým přestal hádat. Datový model není posvátná relikvie. Je to pracovní mapa produktu — a mapy jsou užitečné hlavně tehdy, když podle nich někdo opravdu dojde domů.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -7771,6 +7924,7 @@ Najdi poslední bezpečnostní nebo privacy otázku od zákazníka. Pokud žádn
 
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek AY o datovém modelu, vlastnictví dat, migracích, exportu, mazání a privacy-first pravidlech pro SaaS databázi.
 - 2026-09-10: Doplněn Dodatek AX o bezpečnostních dotaznících, interní knihovně odpovědí, zákaznickém bezpečnostním balíčku a privacy-first sdílení provozních informací.
 - 2026-09-10: Doplněn Dodatek AW o stránce bezpečnosti a soukromí, mapě dat, zákaznickém FAQ, provozních tvrzeních a checklistu důvěryhodné privacy-first dokumentace.
 - 2026-09-10: Doplněn Dodatek AV o auditních logách, bezpečnostně relevantních událostech, retenci, zákaznickém zobrazení a privacy-first maskování citlivých dat.
