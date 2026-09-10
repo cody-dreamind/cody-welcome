@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy, postupné rollouty, e-mailová doručitelnost, cache, statická aktiva a API klíče.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy, postupné rollouty, e-mailová doručitelnost, cache, statická aktiva, API klíče a auditní logy.
 
 ---
 
@@ -7320,6 +7320,131 @@ Vyber jednu existující integraci ve svém produktu a vyplň krátký audit:
 
 Na konci vyber jednu věc k opravě: zúžení scope, doplnění audit logu, oddělení sandboxu, nebo dokumentaci rotace. Jedna hotová oprava je lepší než velká bezpečnostní prezentace, po které tokeny pořád leží v poznámkách u supportu.
 
+## Dodatek AV: Auditní logy bez šmírovací kroniky
+
+Auditní log není skládka všeho, co se v aplikaci pohnulo. Je to provozní paměť produktu: pomáhá vysvětlit, kdo udělal důležitou změnu, kdy se to stalo, jakého účtu nebo tenantu se to týkalo a jestli šlo o běžnou akci, nebo signál incidentu. Pokud auditní log navrhneš dobře, šetří supportu čas, vývojářům nervy a zákazníkům pomáhá věřit, že nad vlastními daty neztratili kontrolu.
+
+OWASP Logging Cheat Sheet doporučuje logovat bezpečnostně relevantní události, ale zároveň varuje před ukládáním citlivých údajů, tajemství, přístupových tokenů nebo dat, která v logu nejsou nutná. Zdroj: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+Codyho komentář: Auditní log má být jako dobrý svědek. Pamatuje si podstatné věci, nevypráví intimní detaily a při incidentu se nezhroutí do věty „něco se asi stalo, kámo“.
+
+### AV.1 Loguj rozhodnutí, ne každý dech aplikace
+
+Ne každá událost patří do auditního logu. Kliknutí na záložku, otevření modalu nebo přesunutí kurzoru nejsou audit. Změna role, export dat, úprava fakturačních údajů nebo smazání projektu audit jsou. Rozdíl je v dopadu: auditní log má zachytit akce, které mění práva, data, peníze, bezpečnost nebo provozní nastavení.
+
+Prakticky loguj hlavně:
+
+- Přihlášení, odhlášení, neúspěšné pokusy a změny MFA.
+- Vytvoření, pozvání, deaktivaci a smazání uživatele.
+- Změny rolí, oprávnění a přístupů podpory.
+- Exporty, importy, hromadné změny a mazání dat.
+- Změny fakturačních údajů, tarifu a platebního stavu.
+- Vytvoření, rotaci a zneplatnění API klíčů.
+- Změny integrací, webhooků, domén, SSO a bezpečnostních nastavení.
+
+U každé kategorie si napiš důvod, proč ji loguješ. Pokud důvod nezní jako „pomůže vyšetřit dopad nebo prokázat zákazníkovi změnu“, pravděpodobně patří do analytiky, technických logů nebo nikam.
+
+### AV.2 Každý záznam musí odpovědět na šest otázek
+
+Dobrý auditní záznam je nudně strukturovaný. Nechceš po incidentu číst poetické věty z backendu, chceš filtrovat, řadit a vysvětlovat.
+
+Minimální struktura:
+
+| Pole | Příklad | Poznámka |
+| --- | --- | --- |
+| Čas | `2026-09-10T08:15:21Z` | Používej UTC a přesný formát. |
+| Aktér | `user_123` | Kdo akci provedl, včetně podpory nebo systému. |
+| Tenant | `tenant_456` | U multi-tenant SaaS povinné. |
+| Akce | `role.updated` | Stabilní strojový název. |
+| Cíl | `user_789` | Čeho se akce týkala. |
+| Výsledek | `success` / `failed` | Neúspěšné pokusy jsou často důležité. |
+
+K tomu přidej rozumný kontext: původní a novou roli, název integrace, ID exportu nebo důvod zamítnutí. Kontext ale neznamená „ulož celý request body“. V auditním logu nemají být hesla, tokeny, celé adresy, obsah zpráv, čísla platebních karet ani kompletní osobní profily. Pokud potřebuješ dohledat detail, ulož odkaz na interní objekt s běžnou autorizací, ne kopii citlivých dat do logu.
+
+### AV.3 Odděl auditní log od technického debugování
+
+Technické logy pomáhají vývojářům opravit chybu. Auditní log pomáhá zákazníkovi nebo provozu pochopit významnou změnu. Když tyto světy smícháš, vznikne buď log tak technický, že mu nerozumí nikdo mimo backend, nebo tak upovídaný, že se v něm ztratí bezpečnostní signály.
+
+Rozděl si vrstvy:
+
+- Auditní log: stabilní produktové události s dopadem na účet, data a oprávnění.
+- Aplikační log: chyby, výjimky, latence, retry a provozní stavy.
+- Bezpečnostní log: podezřelé přístupy, anomálie, blokace a rate limit zásahy.
+- Analytika: agregované chování produktu bez identifikace zbytečných detailů.
+
+Privacy-first pravidlo: auditní log může být zákaznická funkce, ale debug log obvykle zákazníkovi neukazuj. Obsahuje příliš mnoho interního kontextu, který může být bezpečnostně citlivý nebo matoucí.
+
+### AV.4 Retence má být kratší než firemní paměť slona
+
+Auditní logy jsou užitečné, ale pořád mohou obsahovat osobní údaje nebo citlivé provozní informace. Proto potřebují retenci, export a mazací pravidla stejně jako ostatní data. ENISA v technickém guidance k NIS2 doporučuje udržovat logy pro uživatelské aktivity, výjimky a bezpečnostní incidenty, chránit je a nastavit monitoring podle rizika. Zdroj: https://www.enisa.europa.eu/publications/nis2-technical-implementation-guidance
+
+Praktická retence pro malý B2B SaaS může vypadat takto:
+
+| Typ události | Doporučená retence | Poznámka |
+| --- | ---: | --- |
+| Běžné změny nastavení | 12 měsíců | Stačí pro většinu supportních dotazů. |
+| Přístupy a role | 18–24 měsíců | Užitečné při auditu oprávnění. |
+| Exporty a hromadné mazání | 24 měsíců | Vyšší dopad na data. |
+| Technické debug logy | 7–30 dní | Krátce, pokud nejsou součást incidentu. |
+| Incidentní důkazy | Dle incident plánu | Odděleně, chráněně, s jasným vlastníkem. |
+
+Tato čísla nejsou právní rada. Jsou produktový výchozí návrh. Pro regulované obory si ověř konkrétní povinnosti s právníkem a hlavně je přepiš do dokumentace, ne jen do Slack vlákna, které zmizí rychleji než motivace po třetím standupu.
+
+### AV.5 Ukaž zákazníkovi to, co mu pomůže
+
+Auditní log není jen interní nástroj. V B2B SaaS je to často důležitá část důvěry: administrátor chce vědět, kdo přidal nového uživatele, kdo změnil tarif, kdo exportoval data a proč zmizela integrace. Když to najde sám, nemusí psát na support. Když to nenajde, support začne ručně lovit v databázi. A ruční lov v databázi je přesně ten typ sportu, který nechceš podporovat.
+
+Zákaznický auditní log navrhni takto:
+
+- Filtry podle času, aktéra, typu akce a cíle.
+- Lidský popis akce vedle strojového kódu.
+- Export jen pro administrátory a jen s oprávněním.
+- Maskování citlivých hodnot v detailu změny.
+- Odkaz na objekt, pokud k němu má uživatel stále přístup.
+- Vysvětlení, jak dlouho záznamy uchováváš.
+
+Nepiš „User updated entity“. Napiš „Jana Nováková změnila roli uživatele Petr Svoboda z Čtenář na Administrátor“. A pokud nemůžeš ukázat jméno kvůli smazanému účtu, ukaž stabilní anonymizovaný identifikátor a vysvětli proč.
+
+### AV.6 Konkrétní příklad: audit log pro změnu role
+
+Scénář: administrátor v klientském portálu povýší kolegu na správce fakturace. Dobře navržený auditní záznam může vypadat takto:
+
+```json
+{
+  "time": "2026-09-10T08:15:21Z",
+  "tenant_id": "tenant_456",
+  "actor_id": "user_123",
+  "actor_type": "user",
+  "action": "member.role_updated",
+  "target_type": "member",
+  "target_id": "user_789",
+  "result": "success",
+  "metadata": {
+    "previous_role": "viewer",
+    "new_role": "billing_admin",
+    "source": "account_settings"
+  }
+}
+```
+
+Co v něm není: heslo, session token, celé jméno v technickém payloadu, IP adresa bez jasného důvodu, kompletní request body ani poznámka podpory s osobními detaily. Pokud IP adresu potřebuješ kvůli bezpečnostnímu vyšetřování, ulož ji jen tam, kde máš jasný účel, retenci a přístupová pravidla.
+
+### AV.7 Checklist auditních logů
+
+- [ ] Umíme vyjmenovat události, které patří do auditního logu?
+- [ ] Má každý záznam čas, aktéra, tenant, akci, cíl a výsledek?
+- [ ] Neukládáme do auditního logu tokeny, hesla, celé requesty nebo zbytečná osobní data?
+- [ ] Rozlišujeme auditní, technické, bezpečnostní a analytické logy?
+- [ ] Máme retenci pro různé typy logů a víme, kdo ji schválil?
+- [ ] Umí zákazník filtrovat auditní log bez kontaktování supportu?
+- [ ] Jsou přístupy k interním logům omezené a auditované?
+- [ ] Testujeme, že citlivé hodnoty v logu skutečně maskujeme?
+- [ ] Má incident plán jasně řečeno, kdy se logy uchovají déle?
+
+### AV.8 Mini úkol na 50 minut
+
+Vezmi jednu rizikovou oblast produktu — role, exporty, API klíče nebo fakturaci — a napiš deset auditních událostí, které musí existovat. Ke každé doplň aktéra, cíl, výsledek, povolený kontext a zakázané hodnoty. Potom zkontroluj jeden reálný log z aplikace a škrtni všechno, co bys nechtěl vysvětlovat zákazníkovi při incidentu. Tohle je levnější než forenzní archeologie v produkci. A méně se u toho potíš.
+
 
 ## Zdroje
 
@@ -7389,9 +7514,12 @@ Na konci vyber jednu věc k opravě: zúžení scope, doplnění audit logu, odd
 - MDN Web Docs: HTTP caching — https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching
 - MDN Web Docs: Cache-Control — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
 - MDN Web Docs: Subresource Integrity — https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity
+- OWASP Cheat Sheet Series: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- ENISA: NIS2 Technical Implementation Guidance — https://www.enisa.europa.eu/publications/nis2-technical-implementation-guidance
 
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek AV o auditních logách, bezpečnostně relevantních událostech, retenci, zákaznickém zobrazení a privacy-first maskování citlivých dat.
 - 2026-09-09: Doplněn Dodatek AU o API klíčích, tokenech, scopes, rotaci, rate limitingu, audit logu a privacy-first dokumentaci integrací.
 - 2026-09-09: Doplněn Dodatek AT o cache, optimalizaci obrázků, fontech, externích skriptech, CDN a privacy-first kontrole statických assetů.
 - 2026-09-09: Doplněn Dodatek AS o e-mailové doručitelnosti, SPF/DKIM/DMARC, oddělení transakční pošty, preferencích, měření bez šmírování a checklistu provozu.
