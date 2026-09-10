@@ -9848,6 +9848,142 @@ Otevři svůj web nebo SaaS a napiš jednostránkový provozní slib:
 
 Na konci si polož nepříjemnou otázku: „Kdyby se tohle pokazilo dnes večer, dokážeme podle toho opravdu jednat?“ Pokud ne, neupravuj marketing. Uprav provoz.
 
+## Dodatek BO: Tenant izolace bez víry v jeden šťastný `tenant_id`
+
+Multi-tenant SaaS je krásný v tabulce nákladů a nebezpečný v tabulce databáze. Sdílíš infrastrukturu, aplikaci, fronty, cache, úložiště a často i tým podpory. To je v pořádku. Problém začíná ve chvíli, kdy izolace zákazníků existuje jen jako sloupec `tenant_id` a dobrý úmysl vývojáře.
+
+OWASP ve svém Multi-Tenant Application Security Cheat Sheet doporučuje odvozovat tenant kontext ze serverem ověřené identity, zahrnovat tenant scope do dotazů, cache, storage hranic a auditních logů a nevěřit interním službám jen proto, že jsou „uvnitř“. Zdroj: https://cheatsheetseries.owasp.org/cheatsheets/Multi_Tenant_Security_Cheat_Sheet.html
+
+> Codyho komentář: `WHERE tenant_id = ?` je dobrý začátek. Není to ale bezpečnostní architektura. Je to spíš lístek na dveřích serverovny s nápisem „prosím nekrást“.
+
+### BO.1 Tenant kontext nesmí přijít jen z URL nebo formuláře
+
+Uživatel může mít v URL `/app/acme/faktury/123`, ale aplikace z toho nesmí slepě vyvodit, že má právo pracovat za tenant `acme`. Tenant kontext má vzniknout z ověřené identity, členství, role a aktuálního oprávnění.
+
+Praktické pravidlo:
+
+- URL, hlavička nebo payload může říct, co uživatel chce.
+- Server musí ověřit, jestli to smí.
+- Každá citlivá operace musí pracovat s tenantem odvozeným z autorizace, ne s hodnotou, kterou klient poslal jako přáníčko Ježíškovi.
+
+V praxi to znamená, že po přihlášení načteš seznam tenantů, ke kterým má uživatel přístup. Při přepnutí workspace si server ověří členství a uloží nebo předá ověřený kontext. Každý dotaz, akce i background job pak používá tento ověřený kontext.
+
+### BO.2 Izolace musí být ve více vrstvách
+
+Jedna kontrola v controlleru nestačí. Stačí budoucí endpoint, zapomenutý export, nová admin akce nebo refaktor a dveře jsou pootevřené. Tenant izolaci stav jako vrstvenou obranu:
+
+- **Aplikační vrstva:** všechny operace mají explicitní tenant kontext a kontrolu oprávnění.
+- **Databázová vrstva:** dotazy mají tenant filtr, případně row-level security, oddělená schémata nebo jiné vynutitelné hranice podle rizika.
+- **Cache:** klíče obsahují tenant scope, pokud výsledek závisí na zákazníkovi, uživateli nebo oprávnění.
+- **Fronty a joby:** zpráva nese ověřený tenant kontext a worker znovu ověřuje, co se má provést.
+- **Úložiště souborů:** objekty mají tenant-aware cestu, bucket, policy nebo jinou hranici, ne jen náhodně dlouhý název.
+- **Logy a audit:** bezpečnostní události obsahují ověřený tenant identifikátor, ale ne citlivý obsah.
+
+OWASP Authorization Cheat Sheet k autorizaci zdůrazňuje princip nejmenších oprávnění, deny-by-default a validaci oprávnění při každém požadavku. Zdroj: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+
+### BO.3 Cache je nejtišší místo pro únik dat
+
+Databázové dotazy většinou někdo kontroluje. Cache bývá méně nápadná. A právě tam vznikají lahůdky typu `user:123:settings`, kde uživatelské ID není globálně unikátní, nebo `dashboard:monthly`, který jednomu tenantovi omylem vrátí agregaci jiného zákazníka.
+
+Bezpečnější názvy klíčů:
+
+- `tenant:{tenantId}:user:{userId}:settings`
+- `tenant:{tenantId}:dashboard:{period}:role:{roleVersion}`
+- `global:public:pricing:v3`
+
+Rozlišuj tři typy cache:
+
+1. **Globální:** veřejné ceníky, veřejná dokumentace, seznam zemí.
+2. **Tenantová:** dashboardy, nastavení workspace, šablony zákazníka.
+3. **Uživatelská:** preference, rozpracované filtry, notifikace.
+
+Pokud si nejsi jistý, nepovažuj data za globální. Sdílená cache bez tenant scope je v SaaS totéž jako společná lednice v kanceláři: chvíli to vypadá prakticky, pak někdo sní cizí oběd a začne incident.
+
+### BO.4 Background job není mimo bezpečnost
+
+Mnoho úniků nevznikne v hlavním requestu, ale v asynchronní práci: exporty, notifikace, synchronizace, přepočty metrik, importy a fakturace. Worker často běží s vyššími oprávněními než běžný uživatel, takže musí být nudně explicitní.
+
+Každý tenant-scoped job by měl mít:
+
+- kdo ho spustil nebo jaký systémový proces ho založil;
+- pro který tenant běží;
+- jaký typ operace dělá;
+- jaký rozsah dat smí číst a zapisovat;
+- idempotentní chování, aby opakování jobu nevytvořilo chaos;
+- auditní záznam pro důležité změny.
+
+Nepoužívej falešný tenant typu `system` jako univerzální kouzelnou propustku. Pokud má služba dělat cross-tenant akci, musí mít vlastní jasně popsaný servisní scope, omezený účel a audit.
+
+### BO.5 Podpora musí pomáhat, ne vidět všechno
+
+V menším SaaS je lákavé dát supportu plný admin přístup, protože „jsme přece malý tým“. Jenže i malý tým může omylem otevřít špatný účet, stáhnout citlivý export nebo poslat screenshot do špatného vlákna.
+
+Privacy-first varianta podpory:
+
+- Support vidí metadata účtu a stav problému, ne automaticky všechen obsah zákazníka.
+- Přístup do zákaznických dat je dočasný, odůvodněný a auditovaný.
+- Zákazník může přístup schválit nebo alespoň vidět, kdy k němu došlo.
+- Citlivá pole jsou maskovaná, pokud nejsou nutná pro řešení konkrétního incidentu.
+- Interní poznámky nikdy neobsahují hesla, tokeny, celé exporty ani osobní údaje navíc.
+
+Tohle není paranoia. Je to profesionální provoz. Zákazník nemusí doufat, že se nikdo nesplete. Má vidět, že systém chyby omezuje.
+
+### BO.6 Testuj izolaci jako funkci, ne jako pocit
+
+Tenant izolace má mít testy. Ne jen jednorázový security audit, ale regresní kontrolu při běžném vývoji. Minimální sada scénářů:
+
+- Uživatel z tenant A neotevře detail objektu z tenant B ani při znalosti ID.
+- Export pro tenant A neobsahuje data tenant B.
+- Search, filtry a autocomplete respektují tenant scope.
+- Cache nevrací hodnoty po přepnutí tenantů.
+- Background job pracuje jen s daty tenantů, pro které byl spuštěn.
+- Admin nebo support akce mají auditní záznam a omezený rozsah.
+- Mazání účtu nebo offboarding nezasáhne sdílená globální data.
+
+Testy piš i na „nudné“ endpointy. Únik často nevznikne v hlavní obrazovce faktur, ale v exportu CSV, náhledu přílohy, fulltextu, webhooku nebo starém endpointu, který všichni považovali za interní.
+
+### BO.7 Konkrétní příklad: klientský portál pro agenturu
+
+Představ si portál, kde agentura spravuje klientům kampaně, faktury a úkoly. Jeden uživatel může být členem více klientských workspace. Bezpečný model může vypadat takto:
+
+- Po přihlášení server vrátí jen tenanty, kde má uživatel aktivní členství.
+- Přepnutí workspace vytvoří ověřený tenant kontext na serveru.
+- Každý dotaz na úkoly, faktury a soubory filtruje podle tenant scope.
+- Cache dashboardu obsahuje tenant ID, roli a verzi oprávnění.
+- Soubory jsou v tenant-aware namespace a signed URL vzniká až po autorizaci konkrétního objektu.
+- Exporty běží jako job s tenant ID, autorem požadavku a omezeným rozsahem.
+- Support může otevřít účet jen přes auditovanou „impersonation“ akci s důvodem a časovým limitem.
+- Při odchodu klienta se spustí export, retenční plán a kontrola smazání tenant-scoped dat.
+
+Takový systém není nutně drahý. Drahé je až vysvětlovat zákazníkovi, proč ve svém exportu našel cizí faktury. To je druh B2B virality, kterou fakt nechceš.
+
+### BO.8 Checklist tenant izolace
+
+- [ ] Tenant kontext odvozujeme ze serverem ověřené identity a členství, ne jen z URL nebo payloadu.
+- [ ] Každý tenant-owned objekt má vynutitelnou vazbu na tenant nebo jinou izolovanou hranici.
+- [ ] Autorizace je deny-by-default a kontroluje se při každém citlivém požadavku.
+- [ ] Cache klíče rozlišují globální, tenantová a uživatelská data.
+- [ ] Background joby nesou ověřený tenant kontext a mají omezený scope.
+- [ ] Soubory, exporty a signed URL se autorizují před vydáním odkazu.
+- [ ] Support přístup je dočasný, odůvodněný, auditovaný a co nejméně invazivní.
+- [ ] Testy pokrývají IDOR, exporty, search, cache, joby a starší endpointy.
+- [ ] Logy obsahují ověřený tenant identifikátor, ale ne citlivý obsah.
+- [ ] Retence a mazání tenant dat jsou popsané a technicky proveditelné.
+
+### BO.9 Mini úkol na 60 minut
+
+Vyber jednu kritickou entitu ve svém SaaS: fakturu, soubor, projekt, objednávku nebo ticket. Projdi celý její životní cyklus:
+
+1. Kdo ji může vytvořit.
+2. Kdo ji může číst.
+3. Kdo ji může změnit nebo smazat.
+4. Kde se ukládá.
+5. Kde se cachuje.
+6. Jestli se objevuje v exportech, notifikacích, fulltextu nebo background jobech.
+7. Jak se smaže při offboardingu.
+
+Ke každému kroku napiš, odkud se bere tenant kontext a kde se autorizace vynucuje. Pokud u některého kroku odpovíš „nějak implicitně“, našel jsi práci na další sprint. Gratuluju, backlog právě zplodil bezpečnostní úkol. To umí i bez AI.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -9867,6 +10003,8 @@ Na konci si polož nepříjemnou otázku: „Kdyby se tohle pokazilo dnes večer
 - RSS Advisory Board: RSS 2.0 Specification — https://www.rssboard.org/rss-specification
 - OWASP Top 10:2021 — https://owasp.org/Top10/
 - OWASP Application Security Verification Standard — https://owasp.org/www-project-application-security-verification-standard/
+- OWASP Cheat Sheet Series: Multi-Tenant Application Security Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Multi_Tenant_Security_Cheat_Sheet.html
+- OWASP Cheat Sheet Series: Authorization Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Secrets Management Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - ENISA: Technical implementation guidance on cybersecurity risk-management measures, verze 1.0 — https://www.enisa.europa.eu/sites/default/files/2025-06/ENISA_Technical_implementation_guidance_on_cybersecurity_risk_management_measures_version_1.0.pdf
@@ -9936,6 +10074,7 @@ Na konci si polož nepříjemnou otázku: „Kdyby se tohle pokazilo dnes večer
 
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek BO o tenant izolaci, autorizaci, cache, background jobech, support přístupu, testech a privacy-first multi-tenant provozu.
 - 2026-09-10: Doplněn Dodatek BN o SLA, provozních slibech, status page, plánované údržbě, prioritách podpory a privacy-first komunikaci incidentů.
 - 2026-09-10: Doplněn Dodatek BM o zákaznickém zdraví, jednoduchém health score, prevenci churnu, férové retenci a privacy-first customer success signálech.
 - 2026-09-10: Doplněn Dodatek BL o nápovědě a dokumentaci, kontextové pomoci, přístupném vyhledávání, privacy-first feedbacku a propojení podpory s produktem.
