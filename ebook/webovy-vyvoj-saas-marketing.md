@@ -8160,6 +8160,137 @@ Tahle disciplína chrání zákazníky i tým. Ne proto, že by všichni byli pa
 
 Napiš do interní wiki jednu šablonu odpovědi na bezpečnostní hlášení: poděkování, potvrzení přijetí, očekávaný další krok a pravidlo, že se po nálezci nechce posílat produkční data. Je to nudné. Právě proto to funguje.
 
+
+## Dodatek BB: Retence dat bez digitálního syslení
+
+Každý SaaS dřív nebo později zjistí, že data se nemažou sama. Účty, logy, pozvánky, staré exporty, support přílohy, webové analytiky, rozpracované importy, nedoručené e-maily a dočasné tokeny mají tendenci zůstat někde v rohu databáze, protože „se to může hodit“. Jenže z pohledu privacy-first provozu není hromadění dat strategie. Je to technický dluh s právním kloboukem.
+
+EDPB ve své příručce pro malé firmy připomíná, že osobní údaje nelze uchovávat navždy a že organizace mají mít retenční pravidla, aby data po skončení účelu smazaly nebo anonymizovaly. Zdroj: https://www.edpb.europa.eu/sme/find-practical-info/faq_en?page=1
+
+Prakticky to znamená jednoduchou věc: ke každému typu dat napiš, proč existuje, kdo ho používá, kdy přestane být potřeba a co se s ním pak stane. Bez toho se z retence stane archeologická vrstva. A archeologie je krásná disciplína, jen ne v produkční databázi s osobními údaji zákazníků.
+
+### BB.1 Retence začíná účelem, ne cronem
+
+Nejčastější chyba je začít technicky: „napíšeme job, který maže staré řádky“. Správnější první otázka je: „k čemu tahle data vlastně potřebujeme?“ Evropská komise u principů GDPR popisuje minimalizaci a omezení uložení tak, že údaje mají být přiměřené, relevantní, omezené na nezbytné minimum a uchovávané jen po dobu nutnou pro účel sběru. Zdroj: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
+Udělej si jednoduchou retenční mapu:
+
+- `purpose`: proč data držíme;
+- `owner`: kdo rozhoduje, že data ještě potřebujeme;
+- `source`: odkud data vznikají;
+- `visibility`: kdo je vidí v produktu, supportu a administraci;
+- `retention`: jak dlouho je držíme v aktivním systému;
+- `action`: smazat, anonymizovat, agregovat nebo archivovat podle zákonné povinnosti;
+- `evidence`: jak poznáme, že pravidlo opravdu běží.
+
+Bez účelu se retence nedá obhájit. S účelem se dá vést normální produktová debata: fakt potřebujeme držet plné request payloady 180 dní, nebo stačí request ID, typ chyby a technická metadata na 14 dní?
+
+### BB.2 Rozděl data podle teploty
+
+Ne všechna data mají stejný život. Některá jsou horká a produkt bez nich nefunguje. Jiná jsou vlažná, protože pomáhají supportu nebo fakturaci. A některá jsou studená, protože existují jen kvůli auditu, zákonné povinnosti nebo řešení sporu.
+
+Praktické rozdělení:
+
+- **Produktová data:** projekty, nastavení, obsah uživatele, týmové role. Drž je po dobu aktivního účtu a zahrň do exportu.
+- **Provozní data:** logy, chybové události, fronty, webhook pokusy. Drž krátce, maskuj citlivý obsah a agreguj, pokud stačí trend.
+- **Bezpečnostní data:** audit logy, přihlášení, změny práv, API token události. Drž podle rizika a hodnoty pro vyšetření, ale bez zbytečných payloadů.
+- **Fakturační data:** objednávky, faktury, daňové údaje. Řiď se účetními a daňovými povinnostmi v konkrétní zemi, ne pocitem vývojáře po třetí kávě.
+- **Marketingová data:** souhlasy, preference, odhlášení, zdroj poptávky. Drž jen to, co umíš vysvětlit člověku i sobě za půl roku.
+- **Dočasná data:** reset tokeny, importní soubory, exportní balíky, preview odkazy. Tady má být retence krátká a automatická.
+
+Codyho komentář: čím citlivější nebo méně používaná data jsou, tím víc musí bojovat o právo zůstat. Databáze není hotel s all-inclusive pobytem navždy.
+
+### BB.3 Mazání musí být produktová funkce
+
+Mazání dat není jen údržbový skript. Je to součást zákaznické důvěry. Když zákazník zruší účet, požádá o výmaz, smaže projekt nebo odpojí integraci, produkt má vědět, co se stane dál.
+
+Dobré mazání má několik vrstev:
+
+- **Okamžitá změna v produktu:** uživatel data nevidí a systém je dál nepoužívá.
+- **Fronta na asynchronní úklid:** větší objemy, soubory a odvozené artefakty se mažou mimo request.
+- **Důkaz dokončení:** uloží se technický záznam bez obsahu smazaných dat, například čas, typ akce a anonymní identifikátor úkolu.
+- **Úklid v zálohách:** zálohy mají vlastní životní cyklus; neslibuj okamžité mazání ze všech historických snapshotů, pokud to neumíš splnit.
+- **Revokace přístupů:** tokeny, sdílené odkazy, pozvánky a session se ruší současně s daty.
+
+U každé mazací akce napiš uživateli pravdu. Například: „Projekt byl odstraněn z aplikace. Odvozené soubory a dočasné exporty smažeme do 24 hodin. Zálohy expirují podle retenční politiky.“ To je lepší než magická věta „vše jsme smazali“, která se rozbije při prvním dotazu auditora.
+
+### BB.4 Anonymizace není přejmenování sloupce na `anonymous`
+
+Anonymizace znamená, že už data nejde rozumně spojit zpět s konkrétní osobou. Pokud jen nahradíš e-mail hashem, ale vedle necháš tenant ID, časovou osu akcí, IP adresu a unikátní název projektu, možná jsi data jen převlékl do levného kostýmu.
+
+Používej tři praktická pravidla:
+
+- Pokud potřebuješ individuální historii kvůli bezpečnosti nebo fakturaci, je to spíš pseudonymizace než anonymizace.
+- Pokud potřebuješ dlouhodobé trendy, agreguj do skupin: den, plán, typ události, země na úrovni potřebné pro rozhodnutí.
+- Pokud si nejsi jistý, jestli by šla osoba znovu identifikovat, zacházej s daty jako s osobními.
+
+Privacy-first analytika má často lepší výsledek, když se osobní detail ztratí dřív. Pro rozhodnutí o produktu většinou nepotřebuješ vědět, že konkrétní člověk klikl na tlačítko v 9:43. Potřebuješ vědět, že noví uživatelé v tarifu `Team` nedokončují import kontaktů a support k tomu dostává opakované dotazy.
+
+### BB.5 Retenční automatizaci testuj stejně jako platby
+
+Mazací job, který potichu nefunguje, je jeden z nejzrádnějších bugů. Produkt běží, zákazník nic nevidí, monitoring je zelený a databáze pomalu nabírá historický sediment. Proto retenci testuj explicitně.
+
+Minimum testů a kontrol:
+
+- jednotkový test pro výpočet data expirace;
+- integrační test, že expirovaný export opravdu zmizí ze storage;
+- kontrola, že mazání respektuje tenant izolaci;
+- metrika počtu záznamů čekajících na smazání podle typu;
+- alert, když fronta mazání stojí déle než běžné okno;
+- měsíční report: co se mazalo, co se anonymizovalo a kde vznikla výjimka;
+- ruční scénář obnovy ze zálohy, aby bylo jasné, co se vrátí a co už ne.
+
+Do administrace nepřidávej tlačítko „smazat všechno“ bez ochrany. Rizikové mazání má mít potvrzení, oprávnění, auditní záznam a pokud možno dvoukrokový proces. Ne proto, že nevěříš týmu. Protože věříš gravitaci, únavě a pátečním deployům.
+
+### BB.6 Konkrétní příklad: dočasné exporty zákazníka
+
+Představ si B2B SaaS, kde si zákazník může stáhnout export projektů, členů týmu a fakturačních přehledů. Export se generuje asynchronně, uloží se do privátního storage a uživatel dostane odkaz v aplikaci.
+
+Špatná verze:
+
+- exportní ZIP zůstane ve storage navždy;
+- odkaz má dlouhý náhodný token, ale žádnou expiraci;
+- audit log říká jen „export created“;
+- support vidí název souboru i velikost, ale neví, kdy expiruje;
+- po smazání účtu zůstanou staré exporty dál dostupné.
+
+Lepší verze:
+
+- export expiruje třeba po 7 dnech, pokud konkrétní právní nebo smluvní důvod neříká jinak;
+- token je vázaný na uživatele, tenant a krátkou platnost;
+- ve storage je metadata záznam s `expires_at`, `tenant_id`, `created_by`, typem exportu a stavem smazání;
+- stažení exportu se zapíše do audit logu bez obsahu souboru;
+- po ukončení účtu se aktivní exporty zneplatní hned a fyzicky se smažou v úklidové frontě;
+- uživatel vidí jasnou hlášku: „Export bude dostupný do 17. září 2026.“
+
+Takový export je pořád pohodlný, ale nemění se v tajný sklad starých dat. To je přesně ten rozdíl mezi „máme export“ a „máme export, kterému může zákazník věřit“.
+
+### BB.7 Checklist retence a mazání
+
+- Má každý typ osobních dat přiřazený účel, vlastníka a retenční pravidlo?
+- Existuje rozdíl mezi aktivními daty, provozními logy, bezpečnostním auditem, fakturací a dočasnými soubory?
+- Mažou se po expiraci i odvozené artefakty: náhledy, cache, exporty, webhook payloady a importní chyby?
+- Umí produkt rozlišit smazání v UI, asynchronní fyzický úklid a expiraci záloh?
+- Je anonymizace opravdu anonymizace, nebo jen pseudonymizace se slunečními brýlemi?
+- Má mazací automatizace metriky, alerty a pravidelný report?
+- Je retenční politika napsaná lidsky v dokumentaci pro zákazníky?
+- Neuchovává marketing nebo analytika identifikátory déle, než potřebuje pro konkrétní rozhodnutí?
+- Umí support vysvětlit, co se stane po zrušení účtu, exportu nebo žádosti o výmaz?
+- Je každá výjimka z retence časově omezená a zdůvodněná?
+
+### BB.8 Mini úkol na 60 minut
+
+Vyber jeden datový tok, který se často přehlíží: reset hesla, export dat, import CSV, webhook payload, support příloha nebo produktová analytika.
+
+1. Napiš jednou větou účel dat.
+2. Najdi všechna místa, kde se data ukládají: databáze, storage, cache, logy, fronty, zálohy.
+3. Rozhodni, jak dlouho mají být aktivně dostupná.
+4. Rozhodni, jestli se po expiraci mažou, anonymizují nebo agregují.
+5. Přidej technický důkaz: metrika, auditní událost nebo pravidelný report.
+6. Ověř jeden scénář: data po expiraci nejdou stáhnout, zobrazit ani použít přes starý token.
+
+Výsledek je malá retenční karta. Když jich časem vznikne deset, máš skutečnou privacy-first provozní mapu. Ne dokonalý právní svitek na polici, ale živý návod, podle kterého produkt uklízí sám po sobě. Což je u softwaru podobně vzácné jako kuchyňka po firemní oslavě.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -8232,9 +8363,11 @@ Napiš do interní wiki jednu šablonu odpovědi na bezpečnostní hlášení: p
 - MDN Web Docs: Subresource Integrity — https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity
 - OWASP Cheat Sheet Series: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - ENISA: NIS2 Technical Implementation Guidance — https://www.enisa.europa.eu/publications/nis2-technical-implementation-guidance
+- EDPB: FAQ for small business — https://www.edpb.europa.eu/sme/find-practical-info/faq_en?page=1
 
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek BB o retenci dat, mazací automatizaci, anonymizaci, dočasných exportech a privacy-first pravidlech úklidu SaaS dat.
 - 2026-09-10: Rozšířen Dodatek BA o coordinated vulnerability disclosure, `security.txt`, triage zranitelností, runbook, šablony odpovědí a privacy-first validaci reportů.
 - 2026-09-10: Doplněn Dodatek AZ o souborech, přílohách, metadatech, privátních odkazech, náhledech, exportu, mazání a privacy-first pravidlech uploadů.
 - 2026-09-10: Doplněn Dodatek AY o datovém modelu, vlastnictví dat, migracích, exportu, mazání a privacy-first pravidlech pro SaaS databázi.
