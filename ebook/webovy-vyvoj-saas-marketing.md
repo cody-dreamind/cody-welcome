@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy, postupné rollouty, e-mailová doručitelnost, cache, statická aktiva, API klíče, auditní logy a stránka bezpečnosti a soukromí.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy, postupné rollouty, e-mailová doručitelnost, cache, statická aktiva, API klíče, auditní logy, stránka bezpečnosti a soukromí a souborové přílohy.
 
 ---
 
@@ -7851,6 +7851,153 @@ Vyber jednu část produktu, která pracuje se zákaznickými daty. Neřeš celo
 
 Výstup může být obyčejná Markdown tabulka. Důležité je, aby tým přestal hádat. Datový model není posvátná relikvie. Je to pracovní mapa produktu — a mapy jsou užitečné hlavně tehdy, když podle nich někdo opravdu dojde domů.
 
+## Dodatek AZ: Soubory, přílohy a média bez datového skladiště hrůzy
+
+Soubory vypadají nevinně. Jeden PDF report, jedna fotka profilu, jedna příloha k tiketu, jeden importní CSV soubor. Jenže právě soubory se v SaaS často změní v nejméně kontrolovanou část systému: leží bokem od databáze, mají vlastní oprávnění, vlastní životnost, vlastní náhledy, vlastní cache a někdy i vlastní cestu přes externí služby.
+
+Privacy-first přístup říká: soubor není „blob někde v cloudu“. Soubor je zákaznické aktivum s vlastníkem, účelem, pravidlem přístupu, pravidlem exportu a pravidlem mazání.
+
+> Codyho komentář: Databázi většinou někdo hlídá, protože má tabulky, migrace a vážně znějící slovo „schema“. Soubory často hlídá naděje. Naděje je skvělá v poezii, v provozu SaaS už méně.
+
+### AZ.1 Každý soubor musí mít metadata
+
+Pokud má aplikace upload, potřebuje vedle samotného objektu i záznam v databázi. Bez metadat později nevíš, komu soubor patří, proč existuje, jestli se smí zobrazit supportu, jestli patří do exportu a kdy se má smazat.
+
+Minimální metadata:
+
+- `id`: interní identifikátor souboru.
+- `tenant_id`: vlastník datového prostoru.
+- `uploaded_by_user_id`: kdo soubor nahrál.
+- `purpose`: proč soubor existuje, například `invoice_attachment`, `support_screenshot`, `profile_avatar`, `import_source`.
+- `visibility`: kdo ho může vidět, například `private`, `team`, `client_visible`, `support_metadata_only`.
+- `storage_key`: interní cesta v objektovém úložišti, ne veřejná URL.
+- `original_filename`: původní název, ideálně očištěný pro UI.
+- `content_type`: ověřený MIME typ.
+- `size_bytes`: velikost pro limity a audit.
+- `checksum`: kontrola integrity a deduplikace.
+- `created_at`, `deleted_at`: životní cyklus.
+- `retention_policy`: pravidlo držení nebo odkaz na retenční profil.
+
+Neukládej soubory jen pod cestou typu `uploads/final-final2.pdf`. To není architektura. To je digitální sklep po rekonstrukci, kterou nikdo nikdy nedokončil.
+
+### AZ.2 Veřejná URL není oprávnění
+
+Častá chyba: aplikace nahraje soubor do úložiště, dostane veřejnou URL a tu uloží do databáze. Funguje to rychle. Až moc rychle. Pokud je URL dlouhá a náhodná, neznamená to, že je bezpečnostní model hotový.
+
+Lepší výchozí pravidla:
+
+- Soubory drž privátně a vydávej krátkodobé podepsané odkazy jen po ověření oprávnění.
+- Náhledy generuj serverově a také je chraň podle stejného vlastníka jako originál.
+- Odděl veřejná marketingová média od zákaznických příloh.
+- Nepoužívej původní filename jako cestu v úložišti.
+- Nevracej interní `storage_key` do klientského JavaScriptu, pokud to není nutné.
+- Při každém stažení loguj bezpečnostně relevantní událost: kdo, kdy, který tenant, jaký účel.
+
+Veřejné soubory nejsou špatně. Logo, obrázek blogu nebo veřejná příloha dokumentace mohou být klidně dostupné přímo. Problém vzniká, když se stejný model použije i pro smlouvy, importy, screenshoty chyb, faktury nebo exporty zákaznických dat.
+
+### AZ.3 Upload je vstupní brána, ne odkladiště
+
+Uploadovaný soubor je nedůvěryhodný vstup. I když ho poslal platící zákazník. I když se jmenuje `report.pdf`. I když má hezkou ikonku. A ano, i když klient v e-mailu napsal „je to jen tabulka“.
+
+Praktická pravidla pro upload:
+
+- Nastav maximální velikost souboru podle účelu, ne univerzálně pro celou aplikaci.
+- Omez povolené typy souborů a ověř je na serveru.
+- U citlivých souborů vypni automatické veřejné náhledy.
+- U importů odděl původní soubor od zpracovaných dat.
+- Při chybě importu zobraz jen nezbytný výřez, ne celý obsah řádku s osobními údaji.
+- Po dokončení importu rozhodni, jestli původní soubor držet, smazat, nebo přesunout do omezené archivní zóny.
+
+Importní CSV je dobrý příklad. Zákazník nahraje soubor s kontakty, fakturami nebo produkty. Aplikace ho zpracuje a data uloží do doménových tabulek. Potřebuješ pak původní CSV? Někdy ano kvůli dohledání chyby. Často ale stačí krátká retenční lhůta, technický log importu a možnost znovu nahrát opravený soubor.
+
+Privacy-first volba není „všechno hned mazat bez rozmyslu“. Privacy-first volba je vědět, proč něco držíš, jak dlouho a kdo to uvidí.
+
+### AZ.4 Náhledy a transformace jsou nová data
+
+Když z PDF vytvoříš obrázkový náhled, z fotky miniaturu nebo z videa transkript, nevzniká jen technický pomocník. Vzniká další datový artefakt. Ten musí mít stejná nebo přísnější pravidla než originál.
+
+Ptej se:
+
+- Obsahuje náhled osobní údaje nebo citlivý obchodní obsah?
+- Držíme náhled ve stejné zemi nebo regionu jako originál?
+- Má náhled stejná oprávnění jako originální soubor?
+- Maže se náhled automaticky při smazání originálu?
+- Je transkript nebo OCR text zahrnutý do exportu?
+- Může se náhled dostat do externí cache nebo CDN?
+
+U médií bývá lákavé poslat transformace do nejpohodlnější externí služby. Než to uděláš, zastav se. Pokud služba vidí obsah zákaznických souborů, není to jen „image pipeline“. Je to subdodavatel s přístupem k datům. Musí projít stejným uvažováním jako analytika, support nástroj nebo e-mailing.
+
+### AZ.5 Soubory v exportu a offboardingu
+
+Export zákaznických dat nesmí končit u databázových tabulek. Pokud uživatel vytvořil dokumenty, nahrál přílohy nebo vygeneroval reporty, často očekává, že je dostane ven společně s ostatními daty.
+
+Dobrá exportní struktura může vypadat takto:
+
+```text
+export-2026-09-10/
+  README.md
+  data/
+    projects.json
+    users.json
+    audit-log-summary.json
+  files/
+    project-123/
+      smlouva.pdf
+      screenshot-problemu.png
+  manifest.json
+```
+
+`manifest.json` popisuje, co export obsahuje: identifikátor souboru, původní název, velikost, checksum, účel, datum nahrání a vztah k doménové entitě. Díky tomu export není jen hromada souborů, ale použitelný balík.
+
+Při mazání mysli na tři vrstvy:
+
+1. Databázový záznam o souboru.
+2. Objekt v úložišti.
+3. Odvozené artefakty: miniatury, OCR text, transkripty, dočasné exporty, cache.
+
+Když smažeš jen první vrstvu, UI sice vypadá čistě, ale data pořád někde jsou. To je kosmetika, ne mazání.
+
+### AZ.6 Konkrétní příklad: přílohy v support portálu
+
+Představ si support portál, kde zákazník může k tiketu přiložit screenshot. Na screenshotu může být e-mail zákazníka, interní číslo objednávky, osobní poznámka nebo kus administrace.
+
+Rozumné nastavení:
+
+- Příloha je privátní a patří konkrétnímu tenantovi.
+- Support vidí náhled jen v rámci tiketu, ke kterému má oprávnění.
+- Ve výchozím stavu se nezobrazuje celý původní obrázek v notifikačním e-mailu.
+- Odkazy v e-mailu vedou do aplikace, ne přímo na veřejnou URL souboru.
+- Po uzavření tiketu běží retenční pravidlo, například archivace metadat a pozdější smazání příloh.
+- Zákazník v exportu podpory dostane i své přílohy nebo jasné vysvětlení, proč některé provozní artefakty exportované nejsou.
+
+Tento model chrání zákazníka i support tým. Lidé nemusí řešit, jestli mohou screenshot bezpečně přeposlat. Produkt jim bezpečnou cestu nabídne automaticky.
+
+### AZ.7 Checklist souborů a příloh
+
+- Má každý zákaznický soubor vlastníka, účel, viditelnost a retenční pravidlo?
+- Jsou zákaznické přílohy ve výchozím stavu privátní?
+- Vydáváš krátkodobé odkazy až po serverové kontrole oprávnění?
+- Neobsahují URL, názvy souborů nebo cesty osobní údaje?
+- Mažou se při odstranění souboru i miniatury, transkripty, OCR texty a dočasné exporty?
+- Umíš soubory zahrnout do zákaznického exportu s manifestem?
+- Má importní soubor vlastní retenční pravidlo po dokončení zpracování?
+- Jsou chyby uploadu a importu napsané tak, aby neukazovaly zbytečně citlivý obsah?
+- Je jasné, které mediální transformace běží interně a které přes subdodavatele?
+- Má support přístup jen k tomu, co opravdu potřebuje k řešení případu?
+
+### AZ.8 Mini úkol na 45 minut
+
+Vyber jeden typ souboru v produktu: fakturační příloha, avatar, importní CSV, support screenshot nebo exportní balík.
+
+1. Najdi, kde se ukládá originál.
+2. Najdi, kde se ukládají metadata.
+3. Popiš, kdo soubor může zobrazit a stáhnout.
+4. Ověř, jestli existují odvozené artefakty: náhledy, cache, transkripty, dočasné odkazy.
+5. Napiš pravidlo exportu a mazání jednou větou.
+6. Přidej jeden test nebo kontrolní scénář, který ověří, že cizí tenant soubor neuvidí.
+
+Výsledek nemusí být perfektní diagram. Stačí, když po úkolu přestane být soubor „něco v bucketu“ a začne být normální součást produktu. Přesně v tom je rozdíl mezi aplikací, která nějak funguje, a SaaS, kterému zákazník může věřit i po třetím auditu.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -7924,6 +8071,7 @@ Výstup může být obyčejná Markdown tabulka. Důležité je, aby tým přest
 
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek AZ o souborech, přílohách, metadatech, privátních odkazech, náhledech, exportu, mazání a privacy-first pravidlech uploadů.
 - 2026-09-10: Doplněn Dodatek AY o datovém modelu, vlastnictví dat, migracích, exportu, mazání a privacy-first pravidlech pro SaaS databázi.
 - 2026-09-10: Doplněn Dodatek AX o bezpečnostních dotaznících, interní knihovně odpovědí, zákaznickém bezpečnostním balíčku a privacy-first sdílení provozních informací.
 - 2026-09-10: Doplněn Dodatek AW o stránce bezpečnosti a soukromí, mapě dat, zákaznickém FAQ, provozních tvrzeních a checklistu důvěryhodné privacy-first dokumentace.
