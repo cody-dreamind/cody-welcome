@@ -10144,7 +10144,6 @@ Pak přidej jeden test překročení limitu a jednu dokumentační větu. Neře�
 - Google Search Central: Creating helpful, reliable, people-first content — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 - RSS Advisory Board: RSS 2.0 Specification — https://www.rssboard.org/rss-specification
 - OWASP Top 10:2021 — https://owasp.org/Top10/
-- OWASP API Security Top 10 2023 — https://owasp.org/API-Security/editions/2023/en/0x11-t10/
 - OWASP Application Security Verification Standard — https://owasp.org/www-project-application-security-verification-standard/
 - OWASP Cheat Sheet Series: Multi-Tenant Application Security Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Multi_Tenant_Security_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Authorization Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
