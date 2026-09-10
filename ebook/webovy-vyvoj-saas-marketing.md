@@ -8291,6 +8291,154 @@ Vyber jeden datový tok, který se často přehlíží: reset hesla, export dat,
 
 Výsledek je malá retenční karta. Když jich časem vznikne deset, máš skutečnou privacy-first provozní mapu. Ne dokonalý právní svitek na polici, ale živý návod, podle kterého produkt uklízí sám po sobě. Což je u softwaru podobně vzácné jako kuchyňka po firemní oslavě.
 
+## Dodatek BC: Formuláře a checkout bez výslechové místnosti
+
+Formulář je místo, kde se hezký marketing potká s realitou. Uživatel už skoro chce udělat správnou věc: poslat poptávku, založit účet, zaplatit, stáhnout export nebo pozvat kolegu. A pak mu produkt položí třináct otázek, tři z nich jsou zbytečné, dvě mají nejasnou chybu a jedna se tváří jako souhlas, ale smrdí jako reklamní pastička. Gratuluji, právě jsme z konverze udělali únikovou hru.
+
+Privacy-first formulář má jinou ambici: získat jen data, která jsou potřeba pro další krok, vysvětlit proč, pomoct s chybami a neplést dohromady produktovou akci s marketingovým sledováním. Přístupnost do toho nepatří jako třešnička. WCAG 2.2 u vstupů mimo jiné řeší jasné instrukce, identifikaci chyb, návrhy oprav, omezení opakovaného zadávání a sémantický účel běžných polí pomocí technologií jako `autocomplete`. Zdroj: https://www.w3.org/TR/WCAG22/ a https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose
+
+Evropský kontext navíc postupně zpřísňuje očekávání u digitálních služeb. European Accessibility Act pokrývá mimo jiné e-commerce, bankovní služby, e-knihy a vybrané digitální služby; Komise popisuje, že vybrané produkty a služby prodávané v EU už musí plnit společné požadavky na přístupnost. Zdroj: https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en
+
+Codyho komentář: dobrý formulář je jako dobrý číšník. Zeptá se na to, co potřebuje k objednávce, zopakuje důležité věci a nenutí tě vyplnit rodokmen kvůli jednomu espressu.
+
+### BC.1 Každé pole musí obhájit svou existenci
+
+Než řešíš design polí, napiš si u každého z nich důvod. Formulář není sběrná nádoba na budoucí nápady marketingu. Pokud nevíš, co se s údajem stane po odeslání, pole smaž nebo ho přesuň do pozdější fáze.
+
+Praktické pravidlo pro audit:
+
+- **Nutné pro akci:** bez údaje nejde splnit požadavek uživatele, například e-mail pro odpověď na poptávku.
+- **Nutné pro bezpečnost:** údaj pomáhá chránit účet, například potvrzení aktuálního hesla před změnou fakturačního e-mailu.
+- **Nutné pro zákonnou povinnost:** údaj je potřeba pro fakturu, účetnictví nebo daňový scénář.
+- **Užitečné, ale ne nutné:** údaj může pomoct personalizaci, ale nesmí blokovat dokončení.
+- **Zvědavost:** údaj chce někdo „pro jistotu“. Tohle je většinou kandidát na smazání.
+
+U B2B SaaS poptávky často stačí jméno, pracovní e-mail, firma, krátká zpráva a dobrovolné telefonní číslo. Rozpočet, velikost týmu, název interního systému, plánovaný termín migrace a detailní popis současného dodavatele může přijít až v discovery hovoru. Čím dřív data sbíráš, tím slabší důvěru máš. Podle toho se chovej.
+
+### BC.2 Rozděl formulář podle rizika a úmyslu
+
+Některé formuláře jsou nízkorizikové: vyhledávání v nápovědě, přihlášení k RSS, jednoduchý kontakt. Jiné jsou vysokorizikové: checkout, změna e-mailu, přidání platební metody, export osobních dat, pozvánka administrátora nebo smazání účtu.
+
+Pro každý typ nastav jinou přísnost:
+
+- **Kontakt:** minimum polí, jasná informace, co se stane po odeslání, žádný předzaškrtnutý marketing.
+- **Registrace:** odděl vytvoření účtu od marketingových preferencí a nevynucuj profilová data, která nejsou potřeba pro první hodnotu.
+- **Checkout:** ukaž cenu, měnu, daňový režim, obnovování, storno a fakturační údaje před potvrzením.
+- **Bezpečnostní změny:** potvrzení, auditní záznam a možnost vrátit se zpět, kde to dává smysl.
+- **Mazání a export:** pomalý, jasný a ověřený tok; tady rychlost nesmí porazit jistotu.
+
+Jedna obrazovka může obsahovat více úmyslů. Třeba registrace a newsletter. Privacy-first řešení je nerozmazat je do jedné věty. Uživatel zakládá účet, protože chce produkt. Newsletter je volitelný kanál, ne vstupenka do aplikace.
+
+### BC.3 Chybové hlášky piš jako navigaci, ne jako rozsudek
+
+„Invalid input“ je technicky možná pravda, ale produktově je to kapitulace. WCAG 2.2 u vstupní pomoci říká, že automaticky zjištěná chyba má být identifikována a popsána textem; pokud jsou známé návrhy opravy, mají být uživateli nabídnuty, pokud to neohrozí bezpečnost nebo účel obsahu. Zdroj: https://www.w3.org/WAI/WCAG22/Understanding/input-assistance a https://www.w3.org/WAI/WCAG22/Understanding/error-suggestion.html
+
+Dobrá chyba má čtyři části:
+
+- kde problém je;
+- co se stalo;
+- jak to opravit;
+- jestli uživatel přišel o zadaná data.
+
+Příklad špatně:
+
+> Formulář obsahuje chyby.
+
+Příklad lépe:
+
+> DIČ nemá očekávaný formát. Zadej ho ve tvaru `CZ12345678`, nebo pole nech prázdné, pokud DIČ nemáš.
+
+Příklad privacy-first bezpečnostní chyby:
+
+> Přihlášení se nepovedlo. Zkontroluj e-mail a heslo, nebo použij obnovu hesla.
+
+Neříkej „e-mail neexistuje“, pokud tím útočníkovi pomáháš mapovat účty. U bezpečnostních toků má být text užitečný, ale ne výřečný jako ukecaný firewall.
+
+### BC.4 Automatické doplňování je přístupnost i produktivita
+
+U běžných osobních údajů používej správné typy polí a `autocomplete` hodnoty. Není to kosmetika. Pomáhá to prohlížečům, správcům hesel i asistivním technologiím poznat, co má pole znamenat. W3C vysvětluje, že programové určení účelu vstupu může lidem usnadnit vyplňování formulářů, zejména pokud jim samotný vizuální popisek nestačí. Zdroj: https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose
+
+Praktický základ:
+
+- `type="email"` a `autocomplete="email"` pro e-mail;
+- `autocomplete="name"`, `given-name`, `family-name` podle struktury formuláře;
+- `autocomplete="organization"` u firmy;
+- `autocomplete="current-password"` a `new-password` podle toku;
+- `inputmode="numeric"` tam, kde chceš čísla, ale ne nutně číselný typ se šipkami;
+- jasný `label` viditelný i pro čtečky, ne jen placeholder.
+
+Placeholder není label. Zmizí při psaní, často má horší kontrast a neumí nést celé vysvětlení. Pokud je pole důležité, zaslouží si trvalý popisek. Ano, zabere to pár pixelů. Pixelů máme dost, trpělivosti uživatelů méně.
+
+### BC.5 Checkout musí být účetní i lidský
+
+Checkout je právní, finanční a emoční moment. Člověk chce vědět, kolik zaplatí, za co, komu, kdy se platba obnoví a jak se dostane k faktuře. Pokud to schováš za malý šedý text, možná krátkodobě zvýšíš konverzi. Dlouhodobě zvýšíš počet tiketů, chargebacků a lidí, kteří tě budou v duchu proklínat při každém výpisu z karty.
+
+U SaaS checkoutu ukaž před potvrzením:
+
+- název plánu a hlavní limity;
+- cenu bez DPH i s DPH, pokud je to pro zákazníka relevantní;
+- měnu a fakturační období;
+- kdy proběhne další platba;
+- co se stane po zrušení;
+- kontakt na podporu a odkaz na obchodní podmínky;
+- stručné vysvětlení, jaká data předáváš platebnímu poskytovateli.
+
+Privacy-first neznamená, že všechno stavíš sám. U plateb je často rozumné použít specializovaného poskytovatele. Znamená to ale, že zákazníkovi i sobě umíš říct, jaká data tečou ven, proč a jak dlouho. V mapě dat má být checkout jeden z nejlépe popsaných toků, ne černá skříňka s logem karetní společnosti.
+
+### BC.6 Měř opuštění formuláře bez sledovacího seriálu
+
+Ano, formuláře je potřeba zlepšovat. Ne, nepotřebuješ k tomu nahrávat obrazovku, každý pohyb myši a osobní údaje z rozpracovaných polí. Měř agregovaně a střídmě.
+
+Stačí sledovat:
+
+- počet zobrazení formuláře;
+- počet úspěšných odeslání;
+- počet validačních chyb podle typu pole, bez hodnot;
+- krok checkoutu, kde lidé končí;
+- zařízení a prohlížeč v agregované podobě;
+- technické chyby odeslání s request ID, ne s celým obsahem formuláře.
+
+Nikdy neposílej do analytiky text zprávy, jména, e-maily, fakturační údaje, adresy ani platební metadata. Pokud chceš vědět, proč lidé odcházejí, přidej dobrovolný krátký dotaz po bezpečném přerušení toku: „Co ti chybělo k dokončení?“ A i tam sbírej jen odpověď, kterou opravdu čteš.
+
+### BC.7 Konkrétní příklad: poptávkový formulář pro agenturní web
+
+Špatná verze:
+
+- povinné jméno, příjmení, telefon, firma, IČO, rozpočet, termín, URL, počet zaměstnanců, zdroj kampaně, newsletter a souhlas se zpracováním;
+- jedna obecná chybová hláška nahoře;
+- po odeslání není jasné, kdy se někdo ozve;
+- data jdou do CRM, analytiky a reklamního pixelu.
+
+Lepší privacy-first verze:
+
+- povinný pracovní e-mail a krátký popis potřeby;
+- volitelné jméno, firma, web a telefon;
+- jasná věta: „Ozveme se obvykle do dvou pracovních dnů. Údaje použijeme jen pro odpověď na poptávku.“;
+- samostatná volba pro odběr novinek, vypnutá ve výchozím stavu;
+- validační chyby přímo u polí;
+- interní štítek zdroje návštěvy jen agregovaně, bez reklamního sledování;
+- automatické smazání nevyužitých poptávek po definované době.
+
+Výsledek není jen etičtější. Je i obchodně čistší. Do pipeline tečou lidé, kteří opravdu chtějí mluvit, support neřeší zmatky a právní dokumentace odpovídá tomu, co produkt skutečně dělá.
+
+### BC.8 Checklist formulářů a checkoutu
+
+- Má každé pole jasný účel a vlastníka?
+- Je pole povinné jen tehdy, když bez něj nejde dokončit aktuální krok?
+- Jsou souhlasy oddělené od hlavní akce a nejsou předem zaškrtnuté?
+- Mají pole viditelné popisky, správné typy a vhodné `autocomplete`?
+- Zůstávají hodnoty ve formuláři po validační chybě zachované?
+- Popisují chyby problém textem a nabízejí bezpečný další krok?
+- Je u checkoutu jasná cena, období, obnova, zrušení a fakturace?
+- Neposíláš hodnoty polí do analytiky, logů nebo reklamních nástrojů?
+- Existuje retenční pravidlo pro rozpracované formuláře, poptávky a checkout pokusy?
+- Umí tým vysvětlit, komu se data předávají a proč?
+
+### BC.9 Mini úkol na 60 minut
+
+Vyber jeden formulář, který vydělává nebo šetří nejvíc času: poptávka, registrace, checkout, pozvánka do týmu nebo export dat. Udělej tabulku se sloupci `pole`, `povinné`, `účel`, `kam se ukládá`, `kdo ho vidí`, `retenční pravidlo`, `lze odstranit`. Pak smaž alespoň jedno pole, přepiš dvě chybové hlášky a ověř, že se do analytiky neposílá žádná hodnota z formuláře. To je malý krok pro formulář, velký krok pro důvěru. NASA mi snad odpustí.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -8364,9 +8512,15 @@ Výsledek je malá retenční karta. Když jich časem vznikne deset, máš skut
 - OWASP Cheat Sheet Series: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - ENISA: NIS2 Technical Implementation Guidance — https://www.enisa.europa.eu/publications/nis2-technical-implementation-guidance
 - EDPB: FAQ for small business — https://www.edpb.europa.eu/sme/find-practical-info/faq_en?page=1
+- W3C: Web Content Accessibility Guidelines WCAG 2.2 — https://www.w3.org/TR/WCAG22/
+- W3C WAI: Understanding SC 1.3.5 Identify Input Purpose — https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose
+- W3C WAI: Understanding Guideline 3.3 Input Assistance — https://www.w3.org/WAI/WCAG22/Understanding/input-assistance
+- W3C WAI: Understanding SC 3.3.3 Error Suggestion — https://www.w3.org/WAI/WCAG22/Understanding/error-suggestion.html
+- European Commission: European Accessibility Act — https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en
 
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek BC o formulářích a checkoutu, minimalizaci polí, přístupnosti, chybových hláškách, bezpečném měření a privacy-first práci s konverzními daty.
 - 2026-09-10: Doplněn Dodatek BB o retenci dat, mazací automatizaci, anonymizaci, dočasných exportech a privacy-first pravidlech úklidu SaaS dat.
 - 2026-09-10: Rozšířen Dodatek BA o coordinated vulnerability disclosure, `security.txt`, triage zranitelností, runbook, šablony odpovědí a privacy-first validaci reportů.
 - 2026-09-10: Doplněn Dodatek AZ o souborech, přílohách, metadatech, privátních odkazech, náhledech, exportu, mazání a privacy-first pravidlech uploadů.
