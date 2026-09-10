@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy, postupné rollouty, e-mailová doručitelnost, cache, statická aktiva, API klíče, auditní logy, stránka bezpečnosti a soukromí a souborové přílohy.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy, postupné rollouty, e-mailová doručitelnost, cache, statická aktiva, API klíče, auditní logy, stránka bezpečnosti a soukromí, souborové přílohy a hlášení zranitelností.
 
 ---
 
@@ -7998,6 +7998,22 @@ Vyber jeden typ souboru v produktu: fakturační příloha, avatar, importní CS
 
 Výsledek nemusí být perfektní diagram. Stačí, když po úkolu přestane být soubor „něco v bucketu“ a začne být normální součást produktu. Přesně v tom je rozdíl mezi aplikací, která nějak funguje, a SaaS, kterému zákazník může věřit i po třetím auditu.
 
+## Dodatek BA: Hlášení zranitelností bez detektivky na blind
+
+U menšího SaaS nemusí být první bezpečnostní program velký bug bounty portál. Stačí jasně popsaná cesta, kam může vývojář, zákazník nebo etický hacker poslat podezření na zranitelnost, co má uvést a kdy dostane odpověď. ENISA popisuje coordinated vulnerability disclosure jako proces, ve kterém nálezci zranitelností spolupracují s relevantními stranami a veřejné zveřejnění přichází až po opravě nebo mitigaci. Zdroj: https://www.enisa.europa.eu/topics/vulnerability-disclosure
+
+Praktické minimum:
+
+- Přidej na stránku bezpečnosti kontakt typu `security@firma.cz` nebo jednoduchý formulář bez trackerů.
+- Napiš, jaké informace pomohou: URL, kroky reprodukce, dopad, screenshot bez citlivých dat a kontaktní e-mail.
+- Slib realistickou první reakci, například do tří pracovních dnů, a drž ji.
+- Nevyhrožuj lidem, kteří hlásí v dobré víře a bez zneužití dat.
+- Každé hlášení veď jako bezpečnostní tiket s vlastníkem, prioritou, opravou a krátkým poučením.
+
+### BA.1 Mini úkol na 30 minut
+
+Napiš do interní wiki jednu šablonu odpovědi na bezpečnostní hlášení: poděkování, potvrzení přijetí, očekávaný další krok a pravidlo, že se po nálezci nechce posílat produkční data. Je to nudné. Právě proto to funguje.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -8020,6 +8036,7 @@ Výsledek nemusí být perfektní diagram. Stačí, když po úkolu přestane b�
 - OWASP Cheat Sheet Series: Secrets Management Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - ENISA: Technical implementation guidance on cybersecurity risk-management measures, verze 1.0 — https://www.enisa.europa.eu/sites/default/files/2025-06/ENISA_Technical_implementation_guidance_on_cybersecurity_risk_management_measures_version_1.0.pdf
+- ENISA: Vulnerability Disclosure — https://www.enisa.europa.eu/topics/vulnerability-disclosure
 - European Commission: NIS2 Directive — https://digital-strategy.ec.europa.eu/en/policies/nis2-directive
 - Google Research: Measuring the User Experience on a Large Scale: User-Centered Metrics for Web Applications — https://research.google/pubs/measuring-the-user-experience-on-a-large-scale-user-centered-metrics-for-web-applications/
 - Google Cloud: Using the Four Keys to measure your DevOps performance — https://cloud.google.com/blog/products/devops-sre/using-the-four-keys-to-measure-your-devops-performance
@@ -8071,6 +8088,7 @@ Výsledek nemusí být perfektní diagram. Stačí, když po úkolu přestane b�
 
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek BA o hlášení zranitelností, bezpečnostním kontaktu, realistické první reakci a privacy-first příjmu reportů.
 - 2026-09-10: Doplněn Dodatek AZ o souborech, přílohách, metadatech, privátních odkazech, náhledech, exportu, mazání a privacy-first pravidlech uploadů.
 - 2026-09-10: Doplněn Dodatek AY o datovém modelu, vlastnictví dat, migracích, exportu, mazání a privacy-first pravidlech pro SaaS databázi.
 - 2026-09-10: Doplněn Dodatek AX o bezpečnostních dotaznících, interní knihovně odpovědí, zákaznickém bezpečnostním balíčku a privacy-first sdílení provozních informací.
