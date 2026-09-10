@@ -8002,7 +8002,13 @@ Výsledek nemusí být perfektní diagram. Stačí, když po úkolu přestane b�
 
 U menšího SaaS nemusí být první bezpečnostní program velký bug bounty portál. Stačí jasně popsaná cesta, kam může vývojář, zákazník nebo etický hacker poslat podezření na zranitelnost, co má uvést a kdy dostane odpověď. ENISA popisuje coordinated vulnerability disclosure jako proces, ve kterém nálezci zranitelností spolupracují s relevantními stranami a veřejné zveřejnění přichází až po opravě nebo mitigaci. Zdroj: https://www.enisa.europa.eu/topics/vulnerability-disclosure
 
-Praktické minimum:
+Praktické minimum není technicky složité. Složité je nenechat hlášení zapadnout mezi poptávky, newslettery, faktury a interní „mrkneme na to po obědě“. Bezpečnostní hlášení potřebuje samostatnou cestu, jasného vlastníka a pravidlo, že i nepříjemná zpráva je dobrá zpráva, pokud přijde dřív než incident.
+
+### BA.1 Udělej veřejnou cestu pro nahlášení
+
+Začni tím, že nálezce nemusí luštit, jestli má psát na info, support, LinkedIn zakladatele nebo do kontaktního formuláře s povinným telefonem. Veřejně ukaž alespoň jeden bezpečnostní kontakt a udržuj ho funkční.
+
+Dobré minimum:
 
 - Přidej na stránku bezpečnosti kontakt typu `security@firma.cz` nebo jednoduchý formulář bez trackerů.
 - Napiš, jaké informace pomohou: URL, kroky reprodukce, dopad, screenshot bez citlivých dat a kontaktní e-mail.
@@ -8010,7 +8016,147 @@ Praktické minimum:
 - Nevyhrožuj lidem, kteří hlásí v dobré víře a bez zneužití dat.
 - Každé hlášení veď jako bezpečnostní tiket s vlastníkem, prioritou, opravou a krátkým poučením.
 
-### BA.1 Mini úkol na 30 minut
+Pokud máš víc domén, nezapomeň na všechny veřejné vstupy: marketingový web, aplikaci, API dokumentaci, status page i help centrum. Nejhorší varianta je mít bezpečnostní kontakt schovaný v administraci, do které se člověk musí nejdřív přihlásit. To je jako dát hasicí přístroj do trezoru a klíč poslat poštou.
+
+### BA.2 Přidej `security.txt`
+
+RFC 9116 definuje soubor `security.txt`, který organizacím pomáhá strojově čitelně popsat, jak hlásit zranitelnosti. Dokument uvádí známé umístění `/.well-known/security.txt` a povinné pole `Contact`. Zdroj: https://www.rfc-editor.org/rfc/rfc9116
+
+Pro malý SaaS může soubor vypadat jednoduše:
+
+```txt
+Contact: mailto:security@example.com
+Policy: https://example.com/security
+Preferred-Languages: cs, en
+Canonical: https://example.com/.well-known/security.txt
+```
+
+Praktická pravidla:
+
+- `Contact` musí vést na adresu nebo formulář, který někdo opravdu čte.
+- `Policy` odkaž na lidskou stránku s pravidly hlášení, rozsahem a očekáváním.
+- `Preferred-Languages` nastav podle toho, v jakých jazycích umíš rychle reagovat.
+- `Canonical` používej pro jasnou identitu souboru, hlavně když máš víc hostů nebo přesměrování.
+- Soubor dej do deploy checklistu stejně jako `robots.txt`, sitemapu a status page.
+
+Codyho komentář: `security.txt` není bezpečnostní štít. Je to směrovka. Ale směrovky jsou překvapivě užitečné, když nechceš, aby ti někdo hlásil XSS přes formulář „Napište nám, jakou službu poptáváte“.
+
+### BA.3 Popiš rozsah a pravidla bezpečného testování
+
+Bez pravidel si každý domyslí něco jiného. Jeden člověk pošle slušný report se screenshotem, druhý začne skenovat produkci tak agresivně, že ti monitoring dostane škytavku. Proto napiš krátký disclosure policy text.
+
+Měl by obsahovat:
+
+- které domény, API a aplikace jsou v rozsahu;
+- co v rozsahu není, například třetí strany, sociální profily nebo demo prostředí bez produkčních dat;
+- co je zakázané: exfiltrace dat, destruktivní testy, spam, DDoS, sociální inženýrství a přístup k cizím účtům;
+- jak nález bezpečně doložit bez posílání osobních údajů zákazníků;
+- jestli firma nabízí odměny, veřejné poděkování, nebo jen potvrzení přijetí;
+- jak bude probíhat komunikace a kdy je rozumné očekávat další update.
+
+Privacy-first pravidlo: nálezce nikdy nežádej o celé databázové dumpy, seznamy uživatelů, kopie dokumentů nebo produkční exporty. Pokud potřebuješ důkaz, požádej o minimální reprodukci na vlastním účtu, redigovaný screenshot, request ID, čas události a přesné kroky. Stejná zranitelnost se dá většinou potvrdit bez toho, aby někdo posílal cizí data přes e-mail.
+
+### BA.4 Triage musí být rychlá, ne dokonalá
+
+První odpověď není finální verdikt. Je to signál, že hlášení dorazilo a někdo ho vlastní. Interně si pro každý report poznamenej:
+
+| Pole | Příklad |
+| --- | --- |
+| Kanál | `security@example.com` |
+| Produktová oblast | Přihlášení, API, administrace, billing |
+| Dopad | Únik dat, eskalace práv, obejití limitu, dostupnost |
+| Pravděpodobnost | Nízká, střední, vysoká |
+| Priorita | P0 až P3 |
+| Vlastník | Konkrétní člověk, ne „tým“ |
+| Další update | Datum a očekávaný krok |
+
+Jednoduché triage pravidlo:
+
+- `P0`: aktivně zneužitelné, únik dat, plošné obejití autentizace nebo zásah do více tenantů.
+- `P1`: významný dopad, ale omezený rozsah nebo nutnost specifických podmínek.
+- `P2`: opravitelné bezpečnostní riziko bez okamžitého kritického dopadu.
+- `P3`: hardening, chybějící hlavičky, informace navíc, dokumentační mezery.
+
+U každé priority dopředu napiš očekávání. Například P0 řešíš okamžitě, P1 v nejbližším pracovním okně, P2 v běžném backlogu bezpečnostních oprav a P3 při plánované údržbě. Bez tohoto rámce se každý report tváří jako požár, a pak už nikdo nerozezná, kdy opravdu hoří.
+
+### BA.5 Komunikuj jako partner, ne jako právní minové pole
+
+Bezpečnostní komunikace má být stručná, vděčná a přesná. Nálezce často věnuje svůj čas tomu, aby ti pomohl. I když report není validní, odpověz slušně a věcně.
+
+Šablona první odpovědi:
+
+```txt
+Dobrý den,
+
+díky za hlášení. Přijali jsme ho pod ID SEC-123 a ověříme dopad.
+Prosíme neposílejte žádná produkční osobní data ani další citlivé údaje.
+Pokud budeme potřebovat doplnění, ozveme se s konkrétními otázkami.
+Další update pošleme nejpozději do tří pracovních dnů.
+
+Díky,
+bezpečnostní tým
+```
+
+Když zranitelnost opravíš, napiš krátce:
+
+- co bylo potvrzeno;
+- jestli došlo k přístupu k datům nebo ne;
+- co bylo opraveno;
+- jestli je potřeba koordinované zveřejnění;
+- zda může být nálezce veřejně uveden v poděkování.
+
+Neposílej interní stack traces, jména zákazníků ani detailní exploitační návod dřív, než je oprava venku. Transparentnost není totéž co rozdávání munice.
+
+### BA.6 Připrav interní runbook
+
+Veřejná stránka řeší příjem reportu. Interní runbook řeší, co se stane potom. Stačí jedna stránka v interní dokumentaci.
+
+Runbook by měl říkat:
+
+1. Kdo čte bezpečnostní schránku a jak často.
+2. Kde vzniká tiket a kdo dostane upozornění.
+3. Jak se potvrzuje dopad bez zbytečného čtení zákaznických dat.
+4. Kdy se zapojuje vedení, právník, DPO nebo zákaznická podpora.
+5. Jak se rozhoduje o hotfixu, mitigaci, komunikaci a postmortem.
+6. Kde se ukládá poučení a jak se dostane do backlogu.
+
+Privacy-first detail: pokud při ověřování potřebuješ sáhnout do produkčních dat, použij stejná pravidla jako u incidentu — nejmenší nutný rozsah, auditní stopu, časové omezení a jasný důvod. Bezpečnostní report není omluvenka pro detektivní výlet po databázi.
+
+### BA.7 Konkrétní příklad: B2B klientský portál
+
+Představ si portál, kde agentura sdílí reporty s klienty. Někdo napíše, že změnou `client_id` v URL vidí dokumenty jiného klienta.
+
+Špatná reakce:
+
+- report zapadne na supportu;
+- vývojář odpoví „u nás nereprodukovatelné“ bez dotazu na kroky;
+- tým potichu opraví frontendový odkaz, ale ne serverovou autorizaci;
+- nikdo nezkontroluje logy ani další podobné endpointy.
+
+Dobrá reakce:
+
+1. Support přepošle hlášení na bezpečnostní kanál a report dostane ID.
+2. Tým potvrdí příjem a požádá jen o minimální reprodukční kroky bez cizích dat.
+3. Vývoj ověří serverovou autorizaci na dokumentech, API i náhledech souborů.
+4. Dočasně zablokuje rizikový endpoint nebo zpřísní kontrolu tenanta.
+5. Opraví root cause, přidá regresní test na cizí tenant a projde auditní log.
+6. Vyhodnotí, jestli došlo k reálnému přístupu k datům a zda je nutná zákaznická komunikace.
+7. Nálezci pošle uzavření s poděkováním a bez zbytečných interních detailů.
+
+Tahle disciplína chrání zákazníky i tým. Ne proto, že by všichni byli paranoidní. Protože multi-tenant SaaS bez jasné cesty pro hlášení zranitelností je trochu jako hotel bez recepce: možná tam někdo je, ale když teče voda ze stropu, nikdo neví, komu zavolat.
+
+### BA.8 Checklist hlášení zranitelností
+
+- Máme veřejný bezpečnostní kontakt, který někdo pravidelně čte.
+- Máme `/.well-known/security.txt` s funkčním `Contact`, `Policy` a `Canonical`.
+- Máme krátkou disclosure policy s rozsahem, pravidly testování a očekávanou reakcí.
+- Máme interní triage podle dopadu, pravděpodobnosti a vlastnictví.
+- Máme šablonu první odpovědi bez požadavku na produkční osobní data.
+- Máme runbook pro P0/P1 reporty, hotfix a zákaznickou komunikaci.
+- Máme pravidlo, jak validovat report s minimálním přístupem k datům.
+- Máme místo, kam ukládáme poučení po opravě a převádíme ho do testů nebo backlogu.
+
+### BA.9 Mini úkol na 30 minut
 
 Napiš do interní wiki jednu šablonu odpovědi na bezpečnostní hlášení: poděkování, potvrzení přijetí, očekávaný další krok a pravidlo, že se po nálezci nechce posílat produkční data. Je to nudné. Právě proto to funguje.
 
@@ -8037,6 +8183,7 @@ Napiš do interní wiki jednu šablonu odpovědi na bezpečnostní hlášení: p
 - OWASP Cheat Sheet Series: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - ENISA: Technical implementation guidance on cybersecurity risk-management measures, verze 1.0 — https://www.enisa.europa.eu/sites/default/files/2025-06/ENISA_Technical_implementation_guidance_on_cybersecurity_risk_management_measures_version_1.0.pdf
 - ENISA: Vulnerability Disclosure — https://www.enisa.europa.eu/topics/vulnerability-disclosure
+- RFC Editor: RFC 9116 A File Format to Aid in Security Vulnerability Disclosure — https://www.rfc-editor.org/rfc/rfc9116
 - European Commission: NIS2 Directive — https://digital-strategy.ec.europa.eu/en/policies/nis2-directive
 - Google Research: Measuring the User Experience on a Large Scale: User-Centered Metrics for Web Applications — https://research.google/pubs/measuring-the-user-experience-on-a-large-scale-user-centered-metrics-for-web-applications/
 - Google Cloud: Using the Four Keys to measure your DevOps performance — https://cloud.google.com/blog/products/devops-sre/using-the-four-keys-to-measure-your-devops-performance
@@ -8088,7 +8235,7 @@ Napiš do interní wiki jednu šablonu odpovědi na bezpečnostní hlášení: p
 
 ## Pracovní log
 
-- 2026-09-10: Doplněn Dodatek BA o hlášení zranitelností, bezpečnostním kontaktu, realistické první reakci a privacy-first příjmu reportů.
+- 2026-09-10: Rozšířen Dodatek BA o coordinated vulnerability disclosure, `security.txt`, triage zranitelností, runbook, šablony odpovědí a privacy-first validaci reportů.
 - 2026-09-10: Doplněn Dodatek AZ o souborech, přílohách, metadatech, privátních odkazech, náhledech, exportu, mazání a privacy-first pravidlech uploadů.
 - 2026-09-10: Doplněn Dodatek AY o datovém modelu, vlastnictví dat, migracích, exportu, mazání a privacy-first pravidlech pro SaaS databázi.
 - 2026-09-10: Doplněn Dodatek AX o bezpečnostních dotaznících, interní knihovně odpovědí, zákaznickém bezpečnostním balíčku a privacy-first sdílení provozních informací.
