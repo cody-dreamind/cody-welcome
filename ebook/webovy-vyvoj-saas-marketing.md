@@ -9481,6 +9481,136 @@ Tahle verze nevyhraje cenu za „nejvíc AI v názvu funkce“, ale zákazníků
 
 Vezmi svůj web nebo SaaS a napiš dvacet posledních dotazů, které by zákazník mohl hledat. Nemusíš je mít z analytiky; klidně použij support e-maily, sales schůzky a vlastní zkušenost. Rozděl je do pěti skupin: cena, nápověda, bezpečnost, účet a technické nastavení. Pak pro každou skupinu vyber jednu stránku, která má být první výsledek. Pokud taková stránka neexistuje, právě jsi našel obsahový backlog. Gratuluju, vyhledávání ti právě udělalo produktovou práci bez toho, aby někoho sledovalo přes půl internetu.
 
+
+## Dodatek BL: Nápověda, která pomáhá dřív než support začne hořet
+
+Nápověda není skladiště článků, kam produktový tým odkládá výčitky svědomí. Dobrá nápověda je součást produktu: vysvětlí rozhodnutí, sníží nejistotu, zrychlí onboarding a pomůže zákazníkovi vyřešit problém bez čekání na člověka. Privacy-first verze k tomu přidává ještě jednu věc: uživatel nemusí zaplatit svými daty jen proto, že hledá odpověď.
+
+Cílem není mít dokumentaci delší než Tolkienova trilogie. Cílem je mít správné odpovědi ve správnou chvíli, napsané jazykem zákazníka a propojené s produktem.
+
+### BL.1 Začni otázkami, které už existují
+
+Nejhorší první krok je napsat dokumentaci podle menu aplikace. „Sekce Nastavení obsahuje záložku Integrace“ je technicky pravda, ale uživatel většinou nepřichází s otázkou „co obsahuje sekce Nastavení“. Přichází s otázkou: „Jak připojím účetní systém?“, „Kdo uvidí faktury?“, „Jak smažu data klienta?“
+
+GOV.UK Service Manual doporučuje začínat porozuměním potřebám uživatelů a dělat službu jednoduše použitelnou. Zdroj: https://www.gov.uk/service-manual/user-research/start-by-learning-user-needs a https://www.gov.uk/service-manual/service-standard/point-4-make-the-service-simple-to-use
+
+Praktický postup:
+
+1. Vezmi posledních 30 support dotazů.
+2. Označ otázky, které se opakují.
+3. Ke každé napiš ideální článek ve tvaru „Jak…“, „Co se stane když…“ nebo „Proč…“.
+4. Spoj články s místem v produktu, kde otázka vzniká.
+5. Pokud otázka vzniká pořád, nepiš jen článek. Oprav produkt, text v UI nebo onboarding.
+
+> Codyho komentář: Dokumentace je skvělá. Ale pokud musí uživatel číst návod k tlačítku „Pokračovat“, tlačítko právě podalo výpověď.
+
+### BL.2 Nápověda má tři vrstvy
+
+Jedna znalostní báze nevyřeší všechno. Rozděl nápovědu podle toho, kdy ji člověk potřebuje.
+
+**1. Kontextová nápověda v produktu**
+
+Krátký text přímo u formuláře, nastavení nebo prázdného stavu. Má odpovědět na jednu otázku bez odchodu ze stránky.
+
+Příklad: u role „Správce“ napiš „Správce může zvát členy týmu, měnit fakturační údaje a exportovat data.“ Ne „Role s rozšířenými oprávněními“ — to je popis do interní databáze, ne pomoc člověku.
+
+**2. Články pro konkrétní úkoly**
+
+Stručné postupy pro časté akce: export dat, nastavení integrace, změna tarifu, pozvání člena, zrušení účtu. Každý článek má mít jasný výsledek: „Po dokončení budeš mít…“
+
+**3. Referenční dokumentace**
+
+Detailní pravidla, limity, API parametry, role, bezpečnostní informace a procesy. Sem patří přesnost. Uživatel ji nepotřebuje číst každý den, ale když ji potřebuje, musí být kompletní.
+
+Privacy-first pravidlo: pokud článek řeší data, oprávnění, export, mazání nebo integrace, vždy uveď, co se ukládá, kde to vzniká a kdo to může vidět.
+
+### BL.3 Piš tak, aby text unesl stres
+
+Nápovědu často čte člověk, který je zaseknutý. Není v režimu „relaxační četba u kávy“. Je v režimu „proč mi nejde faktura a zákazník už píše caps lockem“. Proto piš jednoduše.
+
+W3C WAI ve svých tipech pro psaní přístupného webového obsahu doporučuje jasné nadpisy, popisné odkazy, srozumitelný jazyk a obsah, který se dá snadno skenovat. Zdroj: https://www.w3.org/WAI/tips/writing/
+
+Použij tento vzor:
+
+- **Nadpis:** „Jak exportovat všechna data klienta“.
+- **Krátký úvod:** kdo může akci udělat a co vznikne.
+- **Kroky:** očíslovaný postup, jedna akce na krok.
+- **Pozor:** omezení, oprávnění, dopad na data.
+- **Co dál:** odkaz na navazující článek nebo kontakt.
+
+Špatně:
+
+> Exportní funkcionalita umožňuje uživateli realizovat datovou extrakci entit v rámci pracovního prostoru.
+
+Líp:
+
+> Export stáhne data vybraného klienta do souboru ZIP. Export může spustit jen správce účtu. Soubor je dostupný 24 hodin a potom se automaticky smaže.
+
+Vidíš? Stejná informace, méně mlhy. Právníci nepláčou, uživatel taky ne. Vzácný okamžik harmonie.
+
+### BL.4 Propoj nápovědu s produktem, ale nesleduj každý krok
+
+Moderní SaaS často řeší nápovědu tak, že do aplikace nalepí widget třetí strany, který sleduje stránky, kliky, session historii a někdy i obsah formulářů. Technicky pohodlné. Privacy-first optikou: datový vysavač v rohu obrazovky, který se tváří jako roztomilá bublina.
+
+Lepší varianta:
+
+- Používej přímé odkazy na články podle obrazovky nebo funkce.
+- Ukládej agregované signály: „článek pomohl/nepomohl“, ne kompletní trasu člověka aplikací.
+- U přihlášené nápovědy nikdy neposílej obsah zákaznických dat do externího vyhledávání.
+- U feedbacku napiš, co se stane po odeslání: kdo ho čte, jak dlouho ho držíš a jestli se používá pro produktové zlepšení.
+- Pokud používáš externí helpdesk, zkontroluj zpracovatelskou smlouvu, umístění dat a exportní možnosti.
+
+Evropská komise vysvětluje, že když za organizaci zpracovává osobní údaje jiný subjekt, jde o vztah správce a zpracovatele, který má být smluvně ošetřen. Zdroj: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations/controllerprocessor/can-someone-else-process-data-my-organisations-behalf_en
+
+### BL.5 Prázdný stav nápovědy je produktový signál
+
+Když uživatel nic nenajde, není to jeho selhání. Je to signál, že dokumentace, vyhledávání, slovník nebo produkt nedokázaly navázat na jeho potřebu.
+
+Dobrý prázdný stav obsahuje:
+
+- potvrzení, že výsledky nejsou,
+- návrh jednoduššího dotazu,
+- odkazy na nejčastější témata,
+- kontakt na podporu,
+- informaci, co se stane s odeslaným dotazem,
+- možnost poslat dotaz bez přiložení zbytečných osobních dat.
+
+Pro přístupnost dynamických výsledků je potřeba myslet i na oznámení změn asistivním technologiím. MDN popisuje použití ARIA live regions pro situace, kdy se obsah na stránce mění a má být oznámen uživateli asistivní technologie. Zdroj: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions
+
+Prakticky: když se po hledání zobrazí „0 výsledků“, uživatel se screen readerem se to má dozvědět. Ne že stránka tiše změní obsah a tváří se jako ninja.
+
+### BL.6 Konkrétní příklad: nápověda pro správu rolí
+
+SaaS má týmové účty a tři role: vlastník, správce, člen. Support dostává pořád stejné otázky: kdo může vidět faktury, kdo může zvát lidi a kdo může exportovat data.
+
+První kvalitní iterace nápovědy:
+
+1. **Kontext přímo v UI:** u výběru role je krátké shrnutí oprávnění.
+2. **Článek „Jak fungují role v týmu“:** tabulka oprávnění a příklady použití.
+3. **Článek „Jak změnit vlastníka účtu“:** jasný postup, upozornění na dopady a kontakt pro podporu.
+4. **Bezpečnostní poznámka:** změny rolí se zapisují do auditního logu a vidí je vlastník účtu.
+5. **Privacy poznámka:** člen týmu neuvidí fakturační údaje ani exporty, pokud mu to role nedovolí.
+6. **Support makro:** pokud někdo napíše dotaz na role, odpověď odkazuje na článek a doplní konkrétní kontext účtu.
+
+Výsledek: méně support dotazů, rychlejší onboarding, méně chyb v oprávněních a jasnější důvěra v produkt.
+
+### BL.7 Checklist nápovědy a dokumentace
+
+- [ ] Každý článek odpovídá na reálnou otázku uživatele.
+- [ ] Nápověda je rozdělená na kontextové texty, návody a referenci.
+- [ ] Nadpisy používají jazyk zákazníka, ne interní názvy funkcí.
+- [ ] Důležité postupy mají očíslované kroky a jasný očekávaný výsledek.
+- [ ] Články o datech vysvětlují oprávnění, ukládání, export a mazání.
+- [ ] Vyhledávání nápovědy neindexuje zákaznická ani neveřejná data.
+- [ ] Feedback k článkům se ukládá minimálně, ideálně agregovaně.
+- [ ] Prázdný stav nápovědy nabízí další krok a kontakt.
+- [ ] Dynamické změny výsledků jsou přístupné i pro asistivní technologie.
+- [ ] Support používá články jako živý zdroj, ne jako archiv minulých slibů.
+
+### BL.8 Mini úkol na 60 minut
+
+Vyber jednu funkci, na kterou se zákazníci ptají opakovaně. Napiš k ní jeden článek podle šablony: výsledek, kdo může akci udělat, kroky, omezení, dopad na data a co dělat při problému. Pak do produktu přidej jeden přímý odkaz na tento článek přesně tam, kde otázka vzniká. Pokud tím ušetříš jen pět support dotazů měsíčně, právě sis koupil čas bez dalšího nástroje, dashboardu a meetingu s názvem „Documentation Alignment Sync“. Fuj, to znělo draze.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -9564,8 +9694,11 @@ Vezmi svůj web nebo SaaS a napiš dvacet posledních dotazů, které by zákazn
 - W3C WAI: Labeling Controls — https://www.w3.org/WAI/tutorials/forms/labels/
 - Schema.org: SearchAction — https://schema.org/SearchAction
 
+- W3C WAI: Writing for Web Accessibility — https://www.w3.org/WAI/tips/writing/
+- MDN Web Docs: ARIA live regions — https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek BL o nápovědě a dokumentaci, kontextové pomoci, přístupném vyhledávání, privacy-first feedbacku a propojení podpory s produktem.
 - 2026-09-10: Doplněn Dodatek BK o privacy-first vyhledávání, bezpečném našeptávači, prázdných výsledcích, agregovaném měření, přístupnosti a nápovědě bez datového vysavače.
 - 2026-09-10: Doplněn Dodatek BJ o mobilním UX, responzivním obsahu, palcem ovladatelných CTA, kratších formulářích, médiích a privacy-first mobilním SEO.
 - 2026-09-10: Doplněn Dodatek BI o přechodu z pilotu do ostrého provozu, produkční připravenosti, migraci pilotních dat, smluvních hranicích a prvním produkčním týdnu.
