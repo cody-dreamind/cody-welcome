@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy, postupné rollouty, e-mailová doručitelnost, cache, statická aktiva, API klíče, auditní logy, stránka bezpečnosti a soukromí, souborové přílohy a hlášení zranitelností.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy, postupné rollouty, e-mailová doručitelnost, cache, statická aktiva, API klíče, auditní logy, stránka bezpečnosti a soukromí, souborové přílohy, hlášení zranitelností, retence dat, checkout a waitlisty.
 
 ---
 
@@ -8439,6 +8439,152 @@ Výsledek není jen etičtější. Je i obchodně čistší. Do pipeline tečou 
 Vyber jeden formulář, který vydělává nebo šetří nejvíc času: poptávka, registrace, checkout, pozvánka do týmu nebo export dat. Udělej tabulku se sloupci `pole`, `povinné`, `účel`, `kam se ukládá`, `kdo ho vidí`, `retenční pravidlo`, `lze odstranit`. Pak smaž alespoň jedno pole, přepiš dvě chybové hlášky a ověř, že se do analytiky neposílá žádná hodnota z formuláře. To je malý krok pro formulář, velký krok pro důvěru. NASA mi snad odpustí.
 
 
+## Dodatek BD: Waitlist a předprodej bez lead magnet cirkusu
+
+Waitlist je užitečný nástroj, pokud ověřuje reálný zájem. Je nebezpečný, pokud se z něj stane sběr e-mailů „do budoucna“, protože budoucno je v malém týmu často jen hezčí název pro zapomenutý CSV export. Privacy-first přístup říká: sbírej jen to, co potřebuješ pro konkrétní rozhodnutí, vysvětli proč a po skončení experimentu data ukliď.
+
+Evropská komise u principů GDPR připomíná minimalizaci údajů a omezení uložení: zpracovávej jen osobní údaje nezbytné pro účel a nenechávej je ležet déle, než je potřeba. Zdroj: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
+Codyho komentář: waitlist nemá být marketingová klec na kontakty. Má být slušná fronta u dveří produktu, kde každý ví, proč tam stojí a kdy se dveře otevřou.
+
+### BD.1 Nejdřív napiš rozhodnutí, které chceš udělat
+
+Před formulářem si napiš jednu větu: „Po waitlistu rozhodneme, zda…“ Bez ní sbíráš kontakty jen proto, že to dělají všichni. A když něco dělají všichni, je slušná šance, že polovina netuší proč.
+
+Příklady dobrých rozhodnutí:
+
+- zda má smysl stavět placený modul pro účetní kanceláře;
+- zda český trh chápe problém bez dlouhého vysvětlování;
+- zda lidé chtějí první verzi jako samoobsluhu, nebo raději asistovaný onboarding;
+- zda cena od 990 Kč měsíčně odpovídá vnímané hodnotě;
+- zda poptávka přichází od cílového segmentu, ne od náhodných zvědavců.
+
+Špatné rozhodnutí zní: „Uvidíme, kolik lidí se zapíše.“ Samotný počet přihlášení je metrika ega. Lepší je kombinace: segment, naléhavost problému, ochota mluvit, ochota zaplatit a konkrétní use case.
+
+### BD.2 Formulář zkrať na minimum
+
+Waitlist formulář má být krátký, protože ještě nemáš vztah. Člověk ti dává důvěru předtím, než produkt existuje nebo je dostupný. Neodpovídej na to výslechem.
+
+Minimum pro B2B SaaS:
+
+- e-mail pro pozvánku;
+- typ firmy nebo role, pokud podle toho vybíráš pilotní uživatele;
+- jedna volitelná otázka na hlavní problém;
+- souhlas se zasláním informací k danému produktu, pokud budeš posílat i marketingové aktualizace;
+- jasná informace, kdy a proč se ozveš.
+
+Co většinou nepotřebuješ hned:
+
+- telefon;
+- celé jméno;
+- velikost obratu;
+- detailní popis interních procesů;
+- přístup k existujícím nástrojům;
+- povinné „jak jste se o nás dozvěděli“, pokud bez toho neumíš slušně pozvat člověka dál.
+
+Praktická mikrokopie pod formulář: „E-mail použijeme jen pro informace k early access programu. Pokud se do pilotu nevejdete, dáme vědět a kontakt smažeme nebo se zeptáme, zda chcete zůstat na seznamu novinek.“ To není právní disertace, ale je to srozumitelné.
+
+### BD.3 Nabídni hodnotu už před spuštěním
+
+Waitlist nesmí být jen „nechte nám e-mail a čekejte“. Pokud žádáš o pozornost, vrať něco užitečného: krátký audit, šablonu, checklist, demo video, transparentní roadmapu nebo pozvánku na rozhovor.
+
+Dobré varianty:
+
+- **Checklist:** „10 bodů, které zkontrolovat před spuštěním zákaznického portálu.“
+- **Ukázka workflow:** „Jak bude vypadat první dokončená práce v produktu.“
+- **Mini audit:** „Pošlete URL a odpovíme třemi návrhy na zlepšení.“
+- **Veřejný changelog:** „Každý týden ukážeme, co vzniklo.“
+- **Pilotní rozhovor:** „Vybereme 10 firem, se kterými postavíme první verzi.“
+
+Tahle hodnota má být úzce spojená s produktem. Obecný PDF magnet „100 growth triků“ sice možná nasbírá e-maily, ale přivede lidi, kteří chtějí PDF zdarma, ne produkt. Gratuluju, vyrobil sis publikum na stahování PDF. Nobelovka za SaaS z toho nebude.
+
+### BD.4 Předprodej formuluj jako férový závazek
+
+Předprodej je silnější signál než waitlist, ale taky větší odpovědnost. Pokud bereš peníze před dokončením produktu, napiš jasně, co zákazník dostane, kdy, za jakých podmínek a co se stane, když termín nedodržíš.
+
+Na stránce předprodeje uveď:
+
+- co přesně je součástí první verze;
+- co součástí není, i když to lidé mohou očekávat;
+- očekávaný termín přístupu;
+- cenu po spuštění a výhodu pro early zákazníky;
+- podmínky vrácení peněz;
+- jak často budeš posílat update;
+- jaká data potřebuješ pro zřízení účtu a fakturaci.
+
+Příklad férové věty: „Kupujete early access k modulu pro správu klientských podkladů. První verzi plánujeme otevřít v listopadu 2026. Pokud do 30 dnů od pozvánky zjistíte, že modul neřeší váš use case, vrátíme platbu bez divadla.“
+
+### BD.5 Segmentuj podle potřeb, ne podle šmírování
+
+Pro výběr pilotních uživatelů nepotřebuješ invazivní profilování. Potřebuješ pár signálů, které souvisí s hodnotou produktu.
+
+Lepší segmentační otázky:
+
+- „Jaký typ firmy zastupujete?“
+- „Kolik lidí bude produkt přibližně používat?“
+- „Jak dnes problém řešíte?“
+- „Jak naléhavé je pro vás řešení v příštích 30 dnech?“
+- „Chcete se zapojit do 30minutového rozhovoru?“
+
+Horší segmentační otázky:
+
+- „Jaký máte rozpočet na software?“ jako povinné pole hned na začátku;
+- „Nahrajte export z vašeho systému,“ když teprve validuješ zájem;
+- „Přihlaste se přes pracovní účet,“ když stačí e-mail;
+- skryté obohacování kontaktů přes externí marketingové databáze bez jasného důvodu.
+
+Privacy-first segmentace je nudnější, ale přesnější. Ptáš se na problém, ne na všechno okolo člověka.
+
+### BD.6 Udělej z waitlistu operační systém, ne hromádku kontaktů
+
+Každý kontakt na waitlistu musí mít stav. Jinak se seznam po dvou týdnech změní na skládku, kde nikdo neví, komu se odpovědělo, kdo čeká a kdo už dávno ztratil zájem.
+
+Jednoduché stavy:
+
+- `new`: přišel nový zájem;
+- `qualified`: odpovídá cílovému segmentu;
+- `interview_requested`: požádal jsi o rozhovor;
+- `pilot_invited`: dostal pozvánku do pilotu;
+- `not_fit_now`: není vhodný pro první verzi;
+- `closed_deleted`: kontakt byl po experimentu smazán;
+- `newsletter_opt_in`: výslovně chce dál dostávat novinky.
+
+Ke každému stavu přidej další krok a vlastníka. Pokud nikdo nevlastní waitlist, nevlastní ho produkt. Vlastní ho chaos v převleku za tabulku.
+
+### BD.7 Konkrétní příklad: privacy-first waitlist pro nový SaaS modul
+
+Představ si tým, který staví modul pro bezpečné předávání účetních podkladů mezi klientem a účetní kanceláří.
+
+Landing page může mít tuto strukturu:
+
+1. Nadpis: „Klientské podklady bez ztracených příloh v e-mailu.“
+2. Krátké vysvětlení: bezpečný portál, role, termíny, auditní stopa, export.
+3. Tři konkrétní scénáře: měsíční doklady, chybějící faktury, předání klienta jiné účetní.
+4. Ukázka obrazovky nebo jednoduchý diagram workflow.
+5. Waitlist formulář: e-mail, typ firmy, počet klientů, hlavní problém.
+6. Privacy poznámka: data z formuláře slouží jen k výběru pilotu a pozvánce.
+7. Co bude dál: potvrzení, možný rozhovor, pilotní pozvánka, úklid kontaktů po validaci.
+
+Po 30 dnech tým nehodnotí jen počet e-mailů. Hodnotí, kolik účetních kanceláří má problém teď, kolik z nich chce rozhovor, jaké procesy se opakují a zda jsou ochotné zaplatit za bezpečnější předávání dat. To je validace. Ne ohňostroj v tabulce.
+
+### BD.8 Checklist waitlistu a předprodeje
+
+Před spuštěním si odškrtni:
+
+- máme napsané rozhodnutí, které waitlist ověřuje;
+- formulář sbírá jen data potřebná pro pozvánku a segmentaci;
+- text vysvětluje, co se stane po odeslání;
+- máme retenční pravidlo pro kontakty, které se do pilotu nevejdou;
+- marketingové novinky posíláme jen lidem, kteří o ně stojí;
+- předprodej jasně popisuje rozsah, termín, cenu a refundaci;
+- každý kontakt má stav, vlastníka a další krok;
+- po experimentu smažeme nebo anonymizujeme data, která už nepotřebujeme.
+
+### BD.9 Mini úkol na 45 minut
+
+Otevři svoji nejbližší produktovou hypotézu a napiš k ní jednu waitlist stránku: nadpis, tři scénáře, čtyři pole formuláře, privacy poznámku a pravidlo, kdy kontakty smažeš. Pak smaž jedno pole formuláře. Skoro vždycky tam jedno zbytečné bude. Formuláře mají rády tuk, produkt ne.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -8520,6 +8666,7 @@ Vyber jeden formulář, který vydělává nebo šetří nejvíc času: poptávk
 
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek BD o waitlistech, předprodeji, minimálním sběru dat, segmentaci pilotu, retenčních pravidlech a privacy-first validaci zájmu.
 - 2026-09-10: Doplněn Dodatek BC o formulářích a checkoutu, minimalizaci polí, přístupnosti, chybových hláškách, bezpečném měření a privacy-first práci s konverzními daty.
 - 2026-09-10: Doplněn Dodatek BB o retenci dat, mazací automatizaci, anonymizaci, dočasných exportech a privacy-first pravidlech úklidu SaaS dat.
 - 2026-09-10: Rozšířen Dodatek BA o coordinated vulnerability disclosure, `security.txt`, triage zranitelností, runbook, šablony odpovědí a privacy-first validaci reportů.
