@@ -10126,6 +10126,155 @@ Vyber jeden endpoint nebo akci, která může být drahá: export, import, webho
 
 Pak přidej jeden test překročení limitu a jednu dokumentační větu. Neřeš celý abuse systém najednou. Začni jednou akcí, která dnes může ublížit provozu. Malé brzdy instalované včas jsou lepší než velký incidentový padák šitý za letu.
 
+## Dodatek BQ: API klíče bez univerzálního klíče od celé budovy
+
+API klíč v SaaS není jen dlouhý řetězec, který si zákazník zkopíruje do integrace a pak na něj všichni tři roky zapomenou. Je to přístupová cesta do produktu, často bez interaktivního přihlášení, bez MFA a bez člověka, který by si všiml podezřelého kliknutí. Proto si zaslouží stejnou péči jako role, hesla, exporty a administrace.
+
+Privacy-first přístup tady neznamená „nedávat API“. Znamená dát API tak, aby zákazník mohl automatizovat práci, ale aby jeden uniklý token neotevřel celý firemní trezor. OWASP v Authorization Cheat Sheet doporučuje mimo jiné odmítat přístup ve výchozím stavu a ověřovat oprávnění na každém požadavku; Secrets Management Cheat Sheet zase připomíná, že tajemství mají mít jasný životní cyklus, omezený přístup a bezpečné ukládání. Zdroje: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html a https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+
+### BQ.1 API klíč není uživatel, ale oprávnění pro konkrétní práci
+
+Nejhorší varianta je jeden globální klíč typu „Admin API“, který umí všechno, nemá expiraci, používá se ve všech integracích a jeho název je `production`. To není integrace. To je horor s hezkým prefixem.
+
+Lepší návrh začíná otázkou: co přesně má integrace dělat?
+
+- číst faktury,
+- zakládat objednávky,
+- synchronizovat kontakty,
+- číst stav projektů,
+- posílat webhook test,
+- vytvářet report,
+- importovat data z jiného systému.
+
+Každý klíč má mít název, vlastníka, účel, rozsah oprávnění, datum vytvoření a poslední použití. Název typu „Zapier integrace pro faktury“ je lepší než „key2“. Vlastník nemusí být právní vlastník firmy; stačí interní odpovědná osoba, která ví, proč klíč existuje a kdo ho používá.
+
+### BQ.2 Scope musí být srozumitelný člověku i backendu
+
+Scope není místo, kde si vývojář splní touhu psát tajemné zkratky. Má být jasný v UI, dokumentaci i serverové kontrole. Zákazník musí poznat rozdíl mezi čtením, zápisem a destruktivní akcí.
+
+Použitelné členění:
+
+- `invoices:read` pro čtení faktur,
+- `invoices:write` pro vytváření nebo úpravy faktur,
+- `customers:read` pro čtení zákazníků,
+- `customers:write` pro zápis zákazníků,
+- `exports:create` pro spouštění exportů,
+- `webhooks:manage` pro správu webhooků,
+- `audit_log:read` jen pro vybrané role.
+
+V UI to nepřekládej jako interní kódy, ale jako věty: „Může číst faktury“, „Může vytvářet exporty“, „Může měnit webhooky“. Backend pak nesmí věřit jen tomu, že token má správný tvar. Každý endpoint musí ověřit tenant, scope, stav klíče a konkrétní oprávnění k datům. Jinak se z API klíče stane VIP páska na všechny dveře.
+
+### BQ.3 Klíč ukaž jen jednou a ukládej jen bezpečný otisk
+
+API klíč zobraz uživateli pouze při vytvoření. Potom už jen jeho prefix, název, datum vytvoření, poslední použití a oprávnění. V databázi drž hash nebo jiný bezpečný verifikační otisk, ne plaintext. Pokud klíč unikne, nechceš zjistit, že útočník nepotřeboval prolomit systém; stačilo mu přečíst tabulku `api_keys`.
+
+Praktické pravidlo:
+
+1. Vygeneruj dostatečně náhodný token na serveru.
+2. Přidej rozpoznatelný prefix, třeba `dw_live_`, aby se dal najít v logách a tajemstvích bez odhalení celé hodnoty.
+3. Ulož jen hash tokenu a krátký veřejný prefix.
+4. Celý token ukaž jen jednou při vytvoření.
+5. Nabídni tlačítko pro rotaci, ne pro zobrazení starého klíče.
+6. Při zrušení okamžitě odmítej nové požadavky s tímto tokenem.
+
+Codyho komentář: „Zobrazit API klíč znovu“ je pohodlné asi jako nechat náhradní klíč pod rohožkou s cedulkou „prosím nezneužít“. Funguje to, dokud přesně nefunguje.
+
+### BQ.4 Rotace nesmí být trest za dobré chování
+
+Rotace klíčů často vypadá jako bezpečnostní funkce, kterou nikdo nepoužívá, protože rozbije integraci ve tři ráno. Udělej ji tak, aby šla provést bez dramatu.
+
+Dobrá rotace má přechodové období:
+
+- uživatel vytvoří nový klíč se stejnými nebo užšími oprávněními,
+- integrace začne používat nový klíč,
+- starý klíč se označí jako „bude zrušen“ s datem,
+- systém ukazuje poslední použití obou klíčů,
+- po ověření provozu se starý klíč vypne,
+- audit log uloží vytvoření, změnu i revokaci.
+
+U citlivých klíčů můžeš mít kratší expiraci. U běžných server-to-server integrací ale expirace sama o sobě nestačí; pokud zákazník nemá dobrý proces rotace, bude jen pravidelně panikařit. Bezpečnost má snižovat riziko, ne generovat kalendářní horory.
+
+### BQ.5 Omez klíč tenantem, prostředím a zdrojem
+
+API klíč musí být svázaný s tenantem a ideálně i prostředím. Testovací klíč nesmí sahat do produkce a produkční klíč nemá co dělat v sandboxu. Pokud produkt podporuje více pracovních prostorů, organizací nebo klientů, klíč má patřit ke konkrétnímu kontextu.
+
+Další bezpečné brzdy:
+
+- oddělené `test` a `live` prefixy,
+- volitelný allowlist IP pro serverové integrace,
+- rate limit podle klíče, tenantů a typu akce,
+- zákaz použití klíče v prohlížeči, pokud je určený pro server,
+- CORS pravidla, která nepředstírají autorizaci,
+- samostatné klíče pro čtení a zápis,
+- okamžité vypnutí při podezření na únik.
+
+IP allowlist není kouzelný štít. Mobilní sítě, cloudové NATy a dodavatelé ho umí znepříjemnit. Ber ho jako další vrstvu, ne jako náhradu scope, tenant kontroly a audit logu.
+
+### BQ.6 Loguj použití klíče bez ukládání citlivých payloadů
+
+Zákazník potřebuje vědět, jestli se klíč používá a odkud přibližně přichází provoz. Podpora potřebuje dohledat chyby. Bezpečnost potřebuje vidět podezřelé vzory. Nikdo ale nepotřebuje navždy skladovat celé request body, faktury, texty zpráv nebo importované soubory.
+
+Do auditního a provozního záznamu stačí často uložit:
+
+- ID klíče nebo jeho bezpečný prefix,
+- tenant,
+- endpoint nebo typ akce,
+- čas,
+- výsledek,
+- HTTP status,
+- request ID,
+- přibližný zdroj, pokud je potřeba,
+- počet záznamů nebo velikost operace,
+- nikoli obsah citlivých polí.
+
+Pro zákazníka udělej jednoduchý přehled: poslední použití, počet požadavků za den, poslední chyby a možnost klíč okamžitě vypnout. Privacy-first provoz není slepý provoz. Je to provoz, který vidí metriky a incidenty, ale nesbírá zbytečné detaily jen proto, že disk byl zrovna levný.
+
+### BQ.7 Konkrétní příklad: API klíč pro účetní integraci
+
+Představ si B2B SaaS, který posílá faktury do účetního systému. Zákazník potřebuje automatizaci, ale nechce dát integraci přístup ke všem datům.
+
+Rozumný návrh:
+
+1. Administrátor vytvoří klíč „Účetní integrace — faktury“.
+2. Vybere scope `invoices:read` a `exports:create`.
+3. Klíč patří jen produkčnímu tenantovi dané firmy.
+4. UI zobrazí klíč jednou a doporučí uložit ho do secret manageru, ne do tabulky v cloudu sdílené s půlkou firmy.
+5. Backend při každém požadavku ověří hash tokenu, stav klíče, tenant a scope.
+6. Export faktur běží ve frontě s rate limitem a expirací dočasného souboru.
+7. Audit log uloží, kdo klíč vytvořil, kdy byl použit a jaký export spustil.
+8. Zákazník vidí poslední použití a může klíč zrušit bez zásahu podpory.
+
+Výsledek: integrace funguje, účetní dostane data, zákazník má kontrolu a produkt nemusí doufat, že jeden token nikdy nikdo nevloží do veřejného repozitáře. Naděje je krásná věc, ale do bezpečnostního modelu ji nepiš.
+
+### BQ.8 Checklist API klíčů
+
+- [ ] Každý API klíč má název, vlastníka, účel a datum vytvoření.
+- [ ] Klíč je svázaný s konkrétním tenantem a prostředím.
+- [ ] Scope jsou jemnozrnné, čitelné v UI a ověřované na serveru.
+- [ ] Backend používá výchozí odmítnutí přístupu a ověřuje oprávnění na každém endpointu.
+- [ ] Celý token se zobrazí jen jednou a v databázi není uložený v plaintextu.
+- [ ] Rotace umožňuje přechodové období bez rozbití integrace.
+- [ ] Revokace klíče funguje okamžitě a bez podpory.
+- [ ] API klíče mají samostatné rate limity a bezpečné chybové odpovědi.
+- [ ] Audit log ukládá použití klíče bez citlivých payloadů.
+- [ ] Zákazník má přehled posledního použití a jasný postup při podezření na únik.
+
+### BQ.9 Mini úkol na 60 minut
+
+Otevři svůj produkt nebo návrh API a vyber jednu existující integraci. Napiš pro ni kartu API klíče:
+
+1. Jak se klíč jmenuje.
+2. Kdo je jeho vlastník.
+3. Který tenant a prostředí smí používat.
+4. Jaké tři až pět scope opravdu potřebuje.
+5. Které akce výslovně nesmí dělat.
+6. Jak poznáš poslední použití.
+7. Jak zákazník klíč zrotuje.
+8. Co se stane při podezření na únik.
+9. Jak dlouho držíš provozní a auditní záznamy.
+
+Pak jednu věc rovnou zlepši: přejmenuj anonymní klíč, rozděl čtení a zápis, přidej poslední použití do UI, nebo napiš dokumentační odstavec. API bezpečnost se nestaví jedním hero refaktorem. Staví se sérií malých dveří, které se konečně zamykají správným klíčem.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -10216,6 +10365,7 @@ Pak přidej jeden test překročení limitu a jednu dokumentační větu. Neře�
 
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek BQ o API klíčích, scope, bezpečném ukládání, rotaci, tenant vazbě, audit logu a privacy-first provozu integrací.
 - 2026-09-10: Doplněn Dodatek BP o rate limitingu, abuse ochraně, frontách drahých akcí, bezpečných chybových odpovědích, dokumentaci limitů a privacy-first měření zneužití.
 - 2026-09-10: Doplněn Dodatek BO o tenant izolaci, autorizaci, cache, background jobech, support přístupu, testech a privacy-first multi-tenant provozu.
 - 2026-09-10: Doplněn Dodatek BN o SLA, provozních slibech, status page, plánované údržbě, prioritách podpory a privacy-first komunikaci incidentů.
