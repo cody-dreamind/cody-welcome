@@ -8585,6 +8585,139 @@ Před spuštěním si odškrtni:
 Otevři svoji nejbližší produktovou hypotézu a napiš k ní jednu waitlist stránku: nadpis, tři scénáře, čtyři pole formuláře, privacy poznámku a pravidlo, kdy kontakty smažeš. Pak smaž jedno pole formuláře. Skoro vždycky tam jedno zbytečné bude. Formuláře mají rády tuk, produkt ne.
 
 
+## Dodatek BE: Doporučení a referral program bez pyramidového cirkusu
+
+Doporučení od spokojeného zákazníka je jedna z nejlepších forem růstu. Ne proto, že by algoritmus dostal další proteinový koktejl, ale protože důvěra se přenáší rychleji než reklamní banner. Problém nastane ve chvíli, kdy se z doporučení stane manipulativní referral program, který sbírá kontakty bez jasného souhlasu, tlačí lidi do spamování známých a měří víc sociálních vazeb než skutečnou hodnotu produktu.
+
+Privacy-first referral má jednoduché pravidlo: odměňuj férové doporučení, ale nenuť zákazníka předávat osobní údaje třetích osob. Dej mu odkaz, jasné podmínky, kontrolu nad sdílením a minimum sledování. Marketingový růst není omluva pro datový vysavač na kamarády, kolegy a účetní poradce tety z Brna.
+
+Codyho komentář: nejlepší referral program je tak nudně slušný, že by ho šlo vysvětlit u oběda bez věty „ono je to trochu growth hack“. Jakmile musíš používat kouřovou clonu, pravděpodobně už prodáváš mlhu.
+
+### BE.1 Začni produktem, ne provizí
+
+Referral nevyřeší slabý produkt. Jen rychleji rozšíří informaci, že je slabý. Před spuštěním programu si ověř, že zákazníci mají konkrétní důvod doporučovat: ušetřený čas, menší riziko, lepší spolupráci, rychlejší reporting, jednodušší fakturaci nebo klidnější provoz.
+
+Dobré otázky před startem:
+
+- „Který moment v produktu zákazník přirozeně pochválí kolegovi?“
+- „Jak poznáme, že doporučení vedlo ke kvalitnímu zákazníkovi, ne jen k levné registraci?“
+- „Komu se produkt doporučuje nejsnáze a proč?“
+- „Jaká odměna podporuje správné chování, ne hon na kontakty?“
+- „Co se stane, když doporučený člověk nechce nic kupovat?“
+
+Pokud na tyhle otázky neznáš odpověď, začni obyčejnou prosbou o referenci u zákazníků, kteří už měli měřitelný výsledek. Referral program je zesilovač. Ne náhrada hodnoty.
+
+### BE.2 Neptej se na kontakty lidí, kteří o tom nevědí
+
+Temný referral vypadá takhle: „Nahrajte kontakty, pozvěte celý adresář, my už jim něco hezkého pošleme.“ V B2B SaaS je to skoro vždy špatný nápad. Zákazník ti předává osobní údaje lidí, kteří s tebou ještě nemají vztah, a ty vytváříš marketingový problém dřív, než vůbec vznikla důvěra.
+
+Lepší model je sdílený odkaz:
+
+- zákazník dostane vlastní referral URL;
+- sám rozhodne, komu ji pošle;
+- na landing page je jasně vysvětlené, kdo doporučuje a proč;
+- doporučený člověk vyplní formulář dobrovolně;
+- systém neukládá sociální graf, jen vztah „registrace přišla přes tento odkaz“;
+- odkaz jde kdykoliv deaktivovat.
+
+Pokud potřebuješ pozvat konkrétní kolegy do pracovního prostoru, je to jiný scénář než marketingový referral. Tam řeš pozvánky v produktu, role, oprávnění a audit log. Nemíchej to do kampaně, jinak si vyrobíš krásný guláš z důvěry, souhlasů a support ticketů.
+
+### BE.3 Odměna má být férová a srozumitelná
+
+Odměna nemusí být vysoká. Musí být jasná. U B2B produktů často funguje kredit na fakturu, měsíc služby navíc, rozšířený limit, odborná konzultace nebo dar na veřejně prospěšný účel. Peníze za každou registraci mohou přitáhnout špatné motivace, hlavně když platíš dřív, než doporučený zákazník reálně aktivuje produkt.
+
+Praktická pravidla:
+
+- odměnu přiznej až po smysluplné aktivaci, například po první zaplacené faktuře nebo dokončeném onboardingu;
+- napiš, zda se odměna vztahuje na nové zákazníky, nové týmy nebo nové pracovní prostory;
+- omez vlastní doporučování mezi účty stejné firmy;
+- vysvětli, kdy nárok nevzniká, třeba při zneužití nebo duplicitní registraci;
+- ukaž stav doporučení v účtu bez nutnosti psát podpoře;
+- nevytvářej časový nátlak typu „pozvi 20 lidí do půlnoci“, pokud nechceš vypadat jako teleshopping s databází.
+
+Dobrá věta do podmínek: „Odměnu připíšeme, když doporučený zákazník dokončí první placený měsíc. Pokud registrace nevznikne, doporučení po 90 dnech smažeme z měřicí tabulky.“ Je to obyčejné, čitelné a provozně zdravé.
+
+### BE.4 Měř jen to, co potřebuješ pro vyhodnocení
+
+Referral analytika svádí k tomu měřit všechno: kdo komu poslal odkaz, kdy klikl, odkud přišel, kolikrát se vrátil, co četl, jak dlouho váhal a jestli mezitím uvařil kávu. Většina toho je k ničemu. Potřebuješ vědět, jestli doporučení přivádí správné zákazníky a jestli je ekonomika programu zdravá.
+
+Stačí tyhle metriky:
+
+- počet aktivních doporučujících zákazníků;
+- počet návštěv referral landing page;
+- počet dobrovolných registrací přes referral odkaz;
+- aktivační poměr doporučených účtů;
+- konverze na placený tarif;
+- vyplacené nebo připsané odměny;
+- kvalita zákazníka po 30 až 90 dnech podle produktové hodnoty, ne podle šmírovacího skóre.
+
+Neskladuj detailní clickstream doporučeného člověka, pokud ho nepotřebuješ. Neobohacuj kontakty externími databázemi jen proto, že to nástroj umí. A hlavně: referral identifikátor nepoužívej jako univerzální sledovací ID napříč celým produktem.
+
+### BE.5 Landing page musí chránit důvěru doporučujícího
+
+Když někdo doporučí tvůj produkt, půjčuje ti část své reputace. Nepoužívej ji jako rekvizitu. Na referral landing page stačí lidská věta: „Přišli jste přes doporučení od firmy Novák & partneři.“ Pokud nemáš souhlas se zveřejněním jména doporučujícího, použij neutrální text: „Přišli jste přes zákaznické doporučení.“
+
+Landing page by měla obsahovat:
+
+- stručné vysvětlení problému a hodnoty;
+- informaci, že doporučující může získat odměnu;
+- jasné podmínky, co se stane po registraci;
+- minimum polí ve formuláři;
+- odkaz na informace o soukromí a zpracování údajů;
+- možnost pokračovat i bez referral parametru, pokud člověk nechce být přiřazen.
+
+Nezobrazuj interní detaily typu „Jan už doporučil 17 lidí a vydělal 12 000 Kč“. To možná zvedne kliky, ale zároveň to promění důvěru v aukční ceduli. Elegantní? Asi jako neonový nápis „věříte nám, protože platíme“.
+
+### BE.6 Připrav ruční variantu pro první měsíc
+
+Než stavět složitý referral systém, začni ručně. Vybereš 10 spokojených zákazníků, pošleš jim osobní zprávu, připravíš jednoduchý odkaz nebo kód a jednou týdně vyhodnotíš výsledky. Ruční provoz tě naučí, jak lidé doporučení formulují, komu produkt posílají a kde vzniká tření.
+
+První verze může být velmi jednoduchá:
+
+- tabulka s doporučujícím zákazníkem, kódem, datem vytvoření a stavem;
+- landing page s parametrem `ref`;
+- formulář, který uloží jen kód doporučení a e-mail nového zájemce;
+- ruční kontrola aktivace před připsáním odměny;
+- měsíční export pro účetnictví;
+- retenční pravidlo pro smazání neaktivních doporučení.
+
+Až když program funguje ručně, automatizuj. Automatizace špatného programu je jen rychlejší způsob, jak škálovat trapas.
+
+### BE.7 Konkrétní příklad: referral pro účetní SaaS
+
+Představ si SaaS pro účetní kanceláře, který klientům připomíná chybějící podklady. Nejlepší doporučující nejsou náhodní uživatelé, ale kanceláře, které díky produktu snížily počet ručních upomínek.
+
+Praktický návrh:
+
+- zákazník dostane v administraci odkaz „Doporučit jiné účetní kanceláři“;
+- text jasně říká, že za aktivovaného zákazníka získá kredit na další fakturu;
+- doporučený člověk vyplní jen e-mail, typ kanceláře a volitelně hlavní problém;
+- po registraci se v systému uloží pouze referral kód, zdroj a stav aktivace;
+- pokud doporučený účet nezaplatí do 90 dnů, vazba se smaže;
+- doporučující vidí stavy „čeká na registraci“, „v onboardingu“, „odměna připsána“;
+- podpora má interní poznámku, ale nevidí zbytečné osobní detaily doporučeného člověka.
+
+Takový program roste pomaleji než spamovací pozvánky, ale přivádí lepší konverzace. A lepší konverzace jsou v B2B často dražší než kliky, jen se na ně hůř kreslí ohňostroj v dashboardu.
+
+### BE.8 Checklist referral programu
+
+Před spuštěním si odškrtni:
+
+- máme jasný důvod, proč by zákazník produkt doporučil;
+- nesbíráme kontakty lidí bez jejich vlastní akce;
+- používáme sdílený odkaz nebo kód místo importu adresáře;
+- odměna je popsaná jednoduše a účetně zvládnutelně;
+- měříme aktivaci a platbu, ne detailní sociální graf;
+- referral identifikátor má omezený účel a retenci;
+- landing page vysvětluje odměnu i soukromí;
+- zákazník může odkaz deaktivovat;
+- máme pravidla pro zneužití, duplicity a vlastní registrace;
+- první měsíc umíme program provozovat ručně.
+
+### BE.9 Mini úkol na 45 minut
+
+Vyber tři zákazníky, kteří už získali konkrétní výsledek. Ke každému napiš jednu větu, proč by mohl produkt doporučit, a jednu větu, komu přesně. Pak navrhni referral pravidlo v podobě: „Když doporučený zákazník dokončí X, doporučující získá Y.“ Nakonec škrtni všechna data, která pro to nepotřebuješ. Ano, škrtání dat je produktová práce. Jen se u toho méně pózuje na LinkedInu.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -8666,6 +8799,7 @@ Otevři svoji nejbližší produktovou hypotézu a napiš k ní jednu waitlist s
 
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek BE o referral programech, férových odměnách, sdílených odkazech, měření bez sociálního grafu a privacy-first retenci doporučení.
 - 2026-09-10: Doplněn Dodatek BD o waitlistech, předprodeji, minimálním sběru dat, segmentaci pilotu, retenčních pravidlech a privacy-first validaci zájmu.
 - 2026-09-10: Doplněn Dodatek BC o formulářích a checkoutu, minimalizaci polí, přístupnosti, chybových hláškách, bezpečném měření a privacy-first práci s konverzními daty.
 - 2026-09-10: Doplněn Dodatek BB o retenci dat, mazací automatizaci, anonymizaci, dočasných exportech a privacy-first pravidlech úklidu SaaS dat.
