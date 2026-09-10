@@ -9725,6 +9725,129 @@ Vyber jeden existující produkt, službu nebo webový projekt. Napiš jednu vě
 
 ---
 
+## Dodatek BN: SLA a provozní sliby bez kouzelné garance
+
+SLA není marketingová věta „fungujeme pořád“. Je to dohoda o tom, co zákazník může rozumně čekat, jak rychle tým reaguje, co se stane při výpadku a kde končí slib produktu. Malý SaaS nepotřebuje hned právnický dokument na třicet stran. Potřebuje srozumitelný provozní slib, který tým opravdu umí splnit i v pátek večer, když se databáze rozhodne meditovat.
+
+Privacy-first SLA má ještě jednu vrstvu: neslibuje jen dostupnost, ale i zacházení s daty. Zákazník nechce slyšet pouze „aplikace poběží“. Chce vědět, kde zjistí stav služby, jak se dozví o incidentu, jak se chrání jeho data a co může udělat, když potřebuje auditní stopu nebo export.
+
+### BN.1 Odděl dostupnost, podporu a bezpečnost
+
+Nejčastější chyba je nacpat všechno do jedné věty: „Máme SLA 99,9 % a rychlou podporu.“ To zní dobře, dokud se zákazník nezeptá, co přesně znamená rychlá podpora, jestli se počítá plánovaná údržba a kdo mu napíše při bezpečnostním incidentu.
+
+Rozděl provozní sliby na tři vrstvy:
+
+| Oblast | Co slibuješ | Co neslibuješ | Praktický důkaz |
+| --- | --- | --- | --- |
+| Dostupnost | Kdy má být služba použitelná | Že nikdy nenastane výpadek | Status page, incident log, monitoring |
+| Podpora | Kdy odpovíš a jak eskaluješ problém | Okamžité řešení každého dotazu | Kategorie priorit, pracovní doba, kontakty |
+| Bezpečnost a data | Jak chráníš přístupy, zálohy a incidenty | Absolutní nemožnost chyby | Auditní log, zálohy, přístupová pravidla |
+
+Tahle tabulka je jednoduchá, ale chrání obě strany. Zákazník ví, co kupuje. Tým ví, co musí doručit. A nikdo nemusí předstírat, že jedna devítka v procentech vyřeší špatnou komunikaci.
+
+### BN.2 Slibuj podle reálné provozní kapacity
+
+SLA má vycházet z toho, jak produkt skutečně provozuješ. Pokud máš malý tým bez nonstop služby, neslibuj reakci do patnácti minut ve tři ráno. Místo toho jasně napiš pracovní dobu podpory, nouzový kanál pro kritické incidenty a rozdíl mezi incidentem, dotazem a požadavkem na novou funkci.
+
+Příklad priorit:
+
+- **P1 — služba je nedostupná nebo hrozí ztráta dat:** tým reaguje co nejdříve, komunikuje na status page a průběžně aktualizuje stav.
+- **P2 — klíčová funkce nefunguje pro část zákazníků:** tým potvrdí přijetí, navrhne workaround a zařadí opravu podle dopadu.
+- **P3 — chyba s omezeným dopadem:** tým ji zapíše, prioritizuje a spojí s nejbližším vhodným release cyklem.
+- **P4 — dotaz, nápad nebo kosmetika:** patří do podpory, dokumentace nebo roadmapy, ne do krizového režimu.
+
+> Codyho komentář: Slib, který neumíš splnit, není ambice. Je to budoucí omluvný e-mail s potem na čele.
+
+### BN.3 Dostupnost piš lidsky, ne jen procentem
+
+Číslo dostupnosti bez kontextu je skoro dekorace. Uveď, co se počítá jako výpadek, jestli se do dostupnosti započítává plánovaná údržba, jak zákazník dostane informaci a jak se bude řešit náhrada, pokud nějakou nabízí smlouva nebo vyšší tarif.
+
+Dobrá formulace pro menší B2B SaaS může vypadat takhle:
+
+> Cílem služby je vysoká dostupnost během pracovních dní. Plánovanou údržbu oznamujeme předem, kritické incidenty komunikujeme přes status page a kontaktní e-mail. Pokud je služba nedostupná, prioritou je obnova provozu, ochrana dat a následné vysvětlení příčiny.
+
+Tohle není univerzální právní text. Je to praktická kostra. Doplníš ji podle produktu, smlouvy, zákaznického segmentu a toho, jestli prodáváš jednoduchý nástroj pro malé firmy, nebo kritický systém pro větší provoz.
+
+### BN.4 Status page není divadlo pro investory
+
+Status page má pomáhat zákazníkům v okamžiku nejistoty. Nemá být schovaná v patičce tak hluboko, že ji najde jen archeolog s VPNkou. Uveď na ní aktuální stav, historii incidentů, plánované údržby a kontaktní cestu pro dopady na konkrétní účet.
+
+Minimum status page:
+
+- stav hlavních částí služby: aplikace, API, přihlášení, e-mailové odesílání, platby, importy nebo jiné kritické části;
+- čas poslední aktualizace;
+- stručný popis incidentu bez citlivých údajů;
+- jasná kadence dalších aktualizací;
+- závěrečné shrnutí po vyřešení;
+- RSS nebo e-mailové odběry pro zákazníky, ideálně bez marketingového trackingu.
+
+Privacy-first poznámka: status page nesmí prozradit interní infrastrukturu, konkrétní zákazníky ani citlivé provozní detaily. Mluv jasně, ale nepiš útočníkům návod na další krok.
+
+### BN.5 Plánovaná údržba musí být nudná a předvídatelná
+
+Nejlepší plánovaná údržba je taková, která nikoho nepřekvapí. Vyber opakující se okna, oznamuj je předem a u každé údržby napiš, koho se týká, jak dlouho má trvat a jestli zákazník musí něco udělat.
+
+Šablona oznámení:
+
+- **Co se děje:** aktualizace databáze, infrastruktury nebo hlavní aplikace.
+- **Kdy:** datum, čas a časové pásmo.
+- **Dopad:** služba bude nedostupná, zpomalená nebo bez dopadu.
+- **Proč:** bezpečnost, výkon, stabilita nebo nová infrastruktura.
+- **Co má zákazník udělat:** většinou nic, případně naplánovat práci mimo okno.
+- **Kontakt:** kam napsat, pokud má údržba zásadní dopad na provoz.
+
+Když údržba ovlivňuje zákaznická data, napiš to konkrétně: jestli se data migrují, jestli jsou zálohovaná, jestli hrozí dočasné omezení exportů a kdy bude možné ověřit výsledek.
+
+### BN.6 Provozní sliby patří i do produktu
+
+SLA není jen PDF v obchodním šuplíku. Některé provozní informace mají být přímo v produktu:
+
+- odkaz na status page v patičce, nápovědě nebo nastavení;
+- viditelný kontakt pro podporu a bezpečnostní hlášení;
+- informace o exportu dat a retenčních pravidlech;
+- auditní log důležitých akcí pro administrátory;
+- upozornění na plánovanou údržbu v místech, kde ovlivní práci;
+- historie faktur, plánů a limitů bez nutnosti psát supportu.
+
+Tím šetříš podporu a zároveň zvyšuješ důvěru. Zákazník nemusí lovit odpovědi v obchodních e-mailech z doby, kdy si produkt teprve kupoval. Provozní realita je součástí UX.
+
+### BN.7 Konkrétní příklad: provozní slib pro menší SaaS
+
+Představ si nástroj pro správu klientských požadavků. Zákazníci ho používají denně, ale nejde o zdravotnický nebo platební systém. Praktický provozní slib může vypadat takto:
+
+- Aplikace má veřejnou status page s historií incidentů a plánovaných údržeb.
+- Kritické výpadky aplikace nebo API se komunikují na status page a e-mailem správcům účtu, pokud dopad trvá déle než krátké ověření problému.
+- Podpora rozlišuje kritické incidenty, běžné chyby, dotazy a návrhy funkcí.
+- Zálohy se pravidelně testují obnovou, ne jen tím, že „někde existují“.
+- Export dat je dostupný administrátorům bez ručního schvalování supportem.
+- Přístup podpory k zákaznickým datům je omezený, auditovaný a používá se jen při řešení konkrétního požadavku.
+
+Takhle formulovaný slib je méně sexy než „enterprise-grade reliability“. Ale je mnohem užitečnější. A hlavně se dá plnit.
+
+### BN.8 Checklist SLA a provozních slibů
+
+- Máme popsané, co znamená dostupnost služby a co se do ní nepočítá.
+- Rozlišujeme incident, chybu, dotaz a požadavek na funkci.
+- Máme jasné priority podpory a víme, kdo je vlastní.
+- Máme status page nebo alespoň veřejně dostupný provozní kanál.
+- Umíme oznámit plánovanou údržbu předem a srozumitelně.
+- Víme, jak komunikovat incident bez zveřejnění citlivých dat.
+- Provozní informace jsou dostupné i v produktu nebo nápovědě.
+- Export, retence a přístup podpory k datům jsou popsané bez právnické mlhy.
+
+### BN.9 Mini úkol na 60 minut
+
+Otevři svůj web nebo SaaS a napiš jednostránkový provozní slib:
+
+1. Jaké části služby jsou pro zákazníka kritické.
+2. Jak pozná, že je problém.
+3. Kde najde stav služby.
+4. Jak rychle a jakým kanálem reaguješ podle priority.
+5. Jak chráníš zákaznická data během incidentu nebo zásahu podpory.
+6. Co zákazníkovi neslibuješ, protože by to nebylo poctivé.
+
+Na konci si polož nepříjemnou otázku: „Kdyby se tohle pokazilo dnes večer, dokážeme podle toho opravdu jednat?“ Pokud ne, neupravuj marketing. Uprav provoz.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -9813,6 +9936,7 @@ Vyber jeden existující produkt, službu nebo webový projekt. Napiš jednu vě
 
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek BN o SLA, provozních slibech, status page, plánované údržbě, prioritách podpory a privacy-first komunikaci incidentů.
 - 2026-09-10: Doplněn Dodatek BM o zákaznickém zdraví, jednoduchém health score, prevenci churnu, férové retenci a privacy-first customer success signálech.
 - 2026-09-10: Doplněn Dodatek BL o nápovědě a dokumentaci, kontextové pomoci, přístupném vyhledávání, privacy-first feedbacku a propojení podpory s produktem.
 - 2026-09-10: Doplněn Dodatek BK o privacy-first vyhledávání, bezpečném našeptávači, prázdných výsledcích, agregovaném měření, přístupnosti a nápovědě bez datového vysavače.
