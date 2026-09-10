@@ -9611,6 +9611,120 @@ Výsledek: méně support dotazů, rychlejší onboarding, méně chyb v oprávn
 
 Vyber jednu funkci, na kterou se zákazníci ptají opakovaně. Napiš k ní jeden článek podle šablony: výsledek, kdo může akci udělat, kroky, omezení, dopad na data a co dělat při problému. Pak do produktu přidej jeden přímý odkaz na tento článek přesně tam, kde otázka vzniká. Pokud tím ušetříš jen pět support dotazů měsíčně, právě sis koupil čas bez dalšího nástroje, dashboardu a meetingu s názvem „Documentation Alignment Sync“. Fuj, to znělo draze.
 
+## Dodatek BM: Zákaznické zdraví bez sledovacího horoskopu
+
+Zákaznické zdraví není skóre, které magicky ví, kdo odejde. Je to dohoda týmu, podle čeho pozná, že zákazník dostává slíbenou hodnotu, chápe další krok a nepotřebuje každý týden znovu přesvědčovat, proč za produkt platí. Špatně postavený health score je věštecká koule v dashboardu. Dobře postavený health score je obyčejný provozní semafor, který říká: „Tady se někdo zasekl, pomoz mu dřív, než napíše výpověď.“
+
+Privacy-first přístup je v tomhle tématu důležitý dvojnásob. Snadno sklouzneš k tomu, že budeš sledovat každý klik, každou stránku a každý pohyb myši, jen abys měl „customer success data“. Jenže zákaznické zdraví se dá řídit i bez toho, aby se produkt změnil na digitální stetoskop přilepený na uživateli.
+
+### BM.1 Nejdřív definuj zdravého zákazníka
+
+Zdravý zákazník není ten, kdo se každý den přihlásí. U některých SaaS produktů je denní používání skvělý signál. U jiných je to signál, že produkt nešetří čas, ale vyrábí práci. Proto nezačínej aktivitou. Začni výsledkem.
+
+Napiš si tři věty:
+
+1. Zákazník si nás koupil proto, aby dosáhl tohoto výsledku.
+2. První důkaz hodnoty nastane, když udělá tuto akci.
+3. Dlouhodobě zdravý účet poznáme podle těchto dvou až pěti signálů.
+
+Příklad pro klientský portál:
+
+- Zákazník si produkt koupil, aby měl méně e-mailového chaosu kolem klientských požadavků.
+- První hodnota nastane, když pozve prvního klienta a uzavře s ním první požadavek.
+- Zdravý účet má aktivního správce, alespoň jednoho pozvaného klienta, pravidelné dokončování požadavků a minimum ručních obcházek mimo portál.
+
+Všimni si, že nepotřebuješ vědět, na jaký pixel zákazník klikl v úterý ve 14:03. Potřebuješ vědět, jestli produkt plní práci, kvůli které vznikl.
+
+### BM.2 Vyber malé množství signálů
+
+Health score se často pokazí tím, že do něj tým nasype všechno, co umí měřit. Přihlášení, kliky, počet stránek, otevření e-mailů, počet ticketů, poslední faktura, sentiment z hovoru, aktivita admina, fáze měsíce a pravděpodobně i počasí v Brně. Výsledek je číslo, kterému nikdo nevěří.
+
+Lepší je jednoduchý model:
+
+| Oblast | Signál | Proč na něm záleží | Privacy-first poznámka |
+| --- | --- | --- | --- |
+| Aktivace | Dokončený první klíčový úkol | Zákazník viděl první hodnotu | Ukládej stav úkolu, ne detailní session |
+| Používání | Opakované dokončené workflow | Produkt se stal součástí práce | Agreguj po účtu nebo týmu |
+| Riziko | Dlouhá pauza po onboardingu | Možná se zasekl nebo nemá čas | Neautomatizuj paniku po jednom dni |
+| Podpora | Opakované dotazy ke stejné části | Funkce nebo dokumentace je nejasná | Třiď témata, ne citlivý obsah zpráv |
+| Obchod | Blížící se obnova bez jasné hodnoty | Je potřeba shrnout přínos | Použij fakta ze spolupráce, ne šmírování |
+
+Google ve frameworku HEART pracuje mimo jiné s kategoriemi jako happiness, engagement, adoption, retention a task success. Zdroj je užitečný hlavně jako připomínka, že dobré produktové metriky mají být navázané na uživatelskou zkušenost, ne jen na interní touhu mít barevnější dashboard: https://research.google/pubs/measuring-the-user-experience-on-a-large-scale-user-centered-metrics-for-web-applications/
+
+### BM.3 Signály rozděl podle akce, kterou spustí
+
+Metrika bez dalšího kroku je dekorace. Každý signál v health score musí mít vlastníka a reakci.
+
+Příklad:
+
+- **Nový účet nedokončil první úkol do 7 dní:** pošli osobní e-mail s nabídkou krátké pomoci.
+- **Správce pozval tým, ale nikdo nepoužívá hlavní workflow:** uprav onboarding nebo nabídni šablonu nastavení.
+- **Účet používá produkt, ale pořád otevírá stejnou nápovědu:** oprav text v UI, ne jen piš další článek.
+- **Blíží se obnova a účet nemá viditelný úspěšný výsledek:** připrav hodnoticí call, kde se férově rozhodne, jestli pokračovat.
+- **Účet exportuje všechna data a ruší integrace:** nepřekážej. Nabídni bezpečný offboarding a zeptej se na důvod.
+
+> Codyho komentář: Nejhorší automatizace je ta, která si plete „zákazník je v riziku“ s „pošleme mu pět e-mailů a doufáme, že zapomene odejít“. To není customer success. To je digitální lepící páska.
+
+### BM.4 Retence není držení zákazníka za kotník
+
+Retence má být důsledek hodnoty, ne překážek. Pokud zákazník chce odejít, měl by umět najít export, zrušení účtu a jasné vysvětlení dopadů. Férový produkt může při odchodu nabídnout pomoc, shrnutí nevyužité hodnoty nebo levnější plán, ale nemá stavět labyrint.
+
+Privacy-first SaaS by měl mít odchod stejně promyšlený jako onboarding:
+
+- export dat ve srozumitelném formátu;
+- informace, co se smaže hned a co zůstává kvůli právním povinnostem;
+- revokaci API klíčů a integrací;
+- potvrzení e-mailem bez marketingového divadla;
+- možnost říct důvod odchodu dobrovolně, krátce a bez nátlaku.
+
+Evropská komise u práv subjektů údajů popisuje mimo jiné právo na přístup k údajům a právo na výmaz v případech, kdy pro další zpracování neexistuje důvod. Zdroj: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+
+### BM.5 Customer success začíná v produktu
+
+Malý tým často nemá samostatného customer success manažera. To nevadí. Customer success není pozice na LinkedInu, ale disciplína: produkt pomáhá zákazníkovi dojít k výsledku a tým vidí, kde to drhne.
+
+Začni těmito provozními rituály:
+
+1. Jednou týdně projdi nové účty a jejich první klíčový úkol.
+2. Jednou týdně projdi zákazníky, kteří se zasekli po onboardingu.
+3. Jednou měsíčně se podívej na top support témata a oprav jednu příčinu.
+4. Před obnovou tarifu připrav krátké shrnutí hodnoty pro zákazníka.
+5. Po odchodu zákazníka zkontroluj, jestli proběhl export, mazání a uzavření přístupů.
+
+Když tyhle kroky děláš ručně, získáš cit pro realitu. Až potom automatizuj. Automatizace bez porozumění jen škáluje zmatek rychleji. Úžasné, pokud prodáváš chaos jako službu. Horší, pokud chceš mít zákazníky.
+
+### BM.6 Konkrétní příklad: health score pro B2B SaaS
+
+Představ si SaaS pro malé účetní kanceláře. Cílem je sbírat podklady od klientů bez nekonečných e-mailových vláken.
+
+Jednoduché health score může vypadat takto:
+
+| Signál | Zelená | Žlutá | Červená | Akce |
+| --- | --- | --- | --- | --- |
+| První hodnota | první klient pozván do 3 dnů | pozván do 10 dnů | nikdo pozván po 10 dnech | osobní onboarding |
+| Aktivní workflow | požadavky se uzavírají každý týden | workflow běží nepravidelně | požadavky stojí déle než 14 dní | zkontrolovat nastavení a šablony |
+| Podpora | dotazy jsou jednorázové | opakuje se stejné téma | zákazník neví, jak pokračovat | opravit nápovědu nebo UI |
+| Obnova | jasný přínos před koncem období | přínos není zdokumentovaný | zákazník nekomunikuje | hodnoticí call nebo férový offboarding |
+
+Každý signál je srozumitelný, akční a vysvětlitelný zákazníkovi. Kdyby se zákazník zeptal „co o nás sledujete?“, nemusíš začít nervózně schovávat tabulku pod koberec.
+
+### BM.7 Checklist zákaznického zdraví
+
+- [ ] Máš jasně popsanou první hodnotu produktu.
+- [ ] Health score obsahuje maximálně několik signálů, kterým tým rozumí.
+- [ ] Každý signál má vlastníka a konkrétní další krok.
+- [ ] Měříš agregované produktové události, ne zbytečné osobní sledování.
+- [ ] Rizikový zákazník dostává pomoc, ne automatizovanou e-mailovou sprchu.
+- [ ] Obnova tarifu stojí na doložené hodnotě, ne na zapomenuté kartě.
+- [ ] Odchod zákazníka má jasný export, mazání a revokaci přístupů.
+- [ ] Důvody churnu sbíráš dobrovolně a používáš je pro zlepšení produktu.
+
+### BM.8 Mini úkol na 60 minut
+
+Vyber jeden existující produkt, službu nebo webový projekt. Napiš jednu větu, jak vypadá první hodnota pro zákazníka. Potom vyber tři signály, podle kterých poznáš, že se zákazník k této hodnotě přibližuje nebo se od ní vzdaluje. Ke každému signálu dopiš jednu akci týmu. Pokud u signálu neumíš napsat akci, vyhoď ho. Dashboard bez rozhodnutí je jen akvárium pro metriky.
+
+---
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -9696,8 +9810,10 @@ Vyber jednu funkci, na kterou se zákazníci ptají opakovaně. Napiš k ní jed
 
 - W3C WAI: Writing for Web Accessibility — https://www.w3.org/WAI/tips/writing/
 - MDN Web Docs: ARIA live regions — https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions
+
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek BM o zákaznickém zdraví, jednoduchém health score, prevenci churnu, férové retenci a privacy-first customer success signálech.
 - 2026-09-10: Doplněn Dodatek BL o nápovědě a dokumentaci, kontextové pomoci, přístupném vyhledávání, privacy-first feedbacku a propojení podpory s produktem.
 - 2026-09-10: Doplněn Dodatek BK o privacy-first vyhledávání, bezpečném našeptávači, prázdných výsledcích, agregovaném měření, přístupnosti a nápovědě bez datového vysavače.
 - 2026-09-10: Doplněn Dodatek BJ o mobilním UX, responzivním obsahu, palcem ovladatelných CTA, kratších formulářích, médiích a privacy-first mobilním SEO.
