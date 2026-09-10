@@ -7584,6 +7584,120 @@ Tahle stránka není finální právní dokument. Je to srozumitelný rozcestní
 Vytvoř první verzi stránky „Bezpečnost a soukromí“ pro svůj produkt. Nepiš víc než jednu obrazovku na sekci. Začni hostingem, daty, přístupy, exportem, mazáním, subdodavateli a kontaktem. Potom označ tři věty, které musí ověřit někdo z provozu nebo práva. Nečekej na dokonalost: první pravdivá verze je lepší než prázdné místo, kde zákazník slyší jen tiché šustění nejistoty.
 
 
+## Dodatek AX: Bezpečnostní dotazníky bez paniky a ručního opisování
+
+Jakmile prodáváš SaaS firmám, dřív nebo později přijde bezpečnostní dotazník. Někdy má deset otázek, jindy sto padesát řádků v Excelu, který vypadá jako artefakt z doby, kdy se hesla posílala faxem. Pro malý tým to může být otrava, ale ve skutečnosti je to signál: zákazník bere riziko vážně a potřebuje interně obhájit, že tvůj produkt může používat.
+
+Dobře připravený privacy-first SaaS neodpovídá na každý dotazník od nuly. Má vlastní zdroj pravdy: stránku bezpečnosti a soukromí, mapu dat, seznam subdodavatelů, krátký popis architektury, retenční pravidla a interní vlastníky odpovědí. Dotazník se pak mění z panického „kdo ví, kde máme zálohy?“ na rutinní obchodní krok.
+
+Codyho komentář: Bezpečnostní dotazník není nepřítel. Nepřítel je moment, kdy na otázku „kdo má přístup k produkční databázi?“ odpoví firma skupinovým mlčením a zvukem klávesnice z vedlejší místnosti.
+
+### AX.1 Udělej si interní knihovnu odpovědí
+
+Nejhorší způsob práce s dotazníkem je vyplnit ho jednorázově, poslat zákazníkovi a nechat odpovědi zmizet v e-mailu. Za měsíc přijde podobný dotazník a tým začne znovu. Tím vznikají rozpory: jednou napíšeš „zálohy testujeme měsíčně“, podruhé „čtvrtletně“, potřetí „podle potřeby“. Gratuluju, právě sis vyrobil auditní konfety.
+
+Vytvoř si jednoduchý interní dokument s odpověďmi podle oblastí:
+
+- Hosting a regiony.
+- Databáze, zálohy a obnova.
+- Autentizace, role a přístupy.
+- Šifrování při přenosu a uložení.
+- Logy, monitoring a retence.
+- Subdodavatelé a účel zpracování.
+- Export, mazání a ukončení účtu.
+- Incidenty, kontakt a komunikační postup.
+
+Ke každé odpovědi přidej vlastníka. Ne „tým“, ale konkrétní roli: technický lead, produkt, provoz, právní kontakt, zakladatel. Když se realita změní, víš, kdo má aktualizovat text.
+
+### AX.2 Odpovídej pravdivě, ne heroicky
+
+Dotazníky svádějí k tomu vypadat větší, než jsi. Jenže bezpečnostní slib není marketingová metafora. Pokud napíšeš, že máš nepřetržitý bezpečnostní dohled, automatizované penetrační testy každý týden a formální proces dodavatelského rizika pro každou integraci, zákazník může čekat, že to při auditu doložíš.
+
+Praktické pravidlo: odpověď má být krátká, konkrétní a doložitelná.
+
+Místo:
+
+> Používáme industry-leading security practices.
+
+Napiš:
+
+> Produkční přístupy jsou omezené na role, které je potřebují pro provoz. Administrátorské účty používají vícefaktorové ověření. Přístupy revidujeme při změně role a při odchodu člověka z týmu.
+
+Pokud něco ještě nemáš hotové, nepanikař. Napiš aktuální stav a plán. Například: „Formální čtvrtletní review subdodavatelů zavádíme; nyní máme evidovaný seznam subdodavatelů s účelem, regionem a typem dat.“ Pravdivá dospělost je důvěryhodnější než enterprise cosplay.
+
+### AX.3 Rozlišuj veřejné, zákaznické a interní informace
+
+Ne každá bezpečnostní informace patří na veřejný web a ne každá patří do každého dotazníku. Potřebuješ tři úrovně:
+
+| Úroveň | Co sem patří | Příklad |
+| --- | --- | --- |
+| Veřejné | Obecný provozní model a kontakt | EU hosting, typy dat, export, mazání, subdodavatelé podle účelu |
+| Zákaznické | Detailnější odpovědi pro schvalování | Retence logů, obnova záloh, role podpory, incidentní postup |
+| Interní | Citlivé implementační detaily | Přesné názvy služeb, síťové nastavení, interní runbooky, seznam admin účtů |
+
+Když zákazník žádá citlivý detail, zeptej se, jaký interní požadavek tím řeší. Často nepotřebuje přesný název databázového clusteru, ale potvrzení, že data leží v EU, zálohují se a přístup je omezený. Dej mu odpověď, která řeší riziko, ne mapu k trezoru.
+
+Privacy-first tip: u sdílených dotazníků nepřidávej osobní údaje interních lidí, pokud nejsou nutné. Bezpečnostní kontakt může být role nebo skupinový e-mail. Interní jména, telefonní čísla a přímé kontakty patří jen tam, kde mají jasný účel.
+
+### AX.4 Připrav si zákaznický bezpečnostní balíček
+
+Pro B2B prodej si vytvoř malý balíček, který může obchod nebo zakladatel poslat hned po prvním vážném dotazu. Nemusí to být portál s certifikáty a ohňostrojem. Stačí sada odkazů a dokumentů:
+
+- Veřejná stránka „Bezpečnost a soukromí“.
+- Stručná mapa dat a subdodavatelů.
+- Vzor DPA nebo informace, jak ji zákazník získá.
+- Popis exportu a mazání dat.
+- Bezpečnostní kontakt a očekávaná doba odpovědi.
+- Krátký changelog provozních změn, pokud se mění subdodavatel nebo datový tok.
+
+Výhoda je obrovská: zákazník vidí, že nejsi improvizace v mikině. A ty nemusíš pokaždé lovit odpovědi v chatu, kde někdo před třemi měsíci napsal „myslím, že zálohy jsou asi denně“. Slovo „asi“ do bezpečnostního balíčku nepatří. Patří do věty „asi už je čas na kafe“.
+
+### AX.5 Sleduj opakované otázky jako produktový backlog
+
+Bezpečnostní dotazníky nejsou jen administrativní nutnost. Jsou zdroj produktové zpětné vazby. Když se zákazníci opakovaně ptají na SSO, audit log, exporty, evropský hosting, role nebo retenční lhůty, neznamená to jen „zase právní oddělení“. Znamená to, že tyto vlastnosti ovlivňují nákupní rozhodnutí.
+
+Vytvoř jednoduchou tabulku:
+
+| Otázka | Kolikrát přišla | Typ zákazníka | Dopad na obchod | Akce |
+| --- | ---: | --- | --- | --- |
+| Máte audit log změn rolí? | 4 | B2B SaaS, agentury | Blokuje větší tým | Navrhnout MVP audit logu |
+| Kde běží analytika? | 6 | EU firmy | Zvyšuje důvěru | Doplnit veřejnou stránku |
+| Umíte export všech dat? | 3 | regulovanější obory | Podmínka pilotu | Přidat exportní checklist |
+
+Tohle je marketing, produkt i privacy najednou. Když odpověď na častou otázku přesuneš z ručního e-mailu na veřejnou dokumentaci nebo přímo do produktu, šetříš obchodní čas a zvyšuješ důvěru.
+
+### AX.6 Konkrétní příklad: dotazník před pilotem
+
+Představ si malý SaaS pro správu klientských portálů. Potenciální zákazník chce pilot pro deset lidí, ale pošle dotazník s 42 otázkami.
+
+Rozumný postup:
+
+1. Obchod označí otázky podle oblastí: technika, právní, provoz, produkt.
+2. Technický lead odpoví jen na otázky, které se týkají architektury, přístupů a záloh.
+3. Produkt doplní exporty, mazání, role a plánované funkce.
+4. Zakladatel zkontroluje sliby, které mohou mít obchodní nebo právní dopad.
+5. Hotové odpovědi se přidají do interní knihovny odpovědí.
+6. Veřejná stránka bezpečnosti se aktualizuje o otázky, které se budou opakovat.
+
+Tým tím nezíská jen vyplněný dotazník. Získá lepší dokumentaci, jasnější odpovědnosti a seznam věcí, které opravdu pomáhají prodeji. To je mnohem lepší výsledek než jen „odesláno, přežili jsme“.
+
+### AX.7 Checklist bezpečnostních dotazníků
+
+- [ ] Máme interní knihovnu ověřených odpovědí podle oblastí?
+- [ ] Každá odpověď má vlastníka a datum poslední aktualizace?
+- [ ] Rozlišujeme veřejné, zákaznické a interní bezpečnostní informace?
+- [ ] Neuvádíme sliby, které neumíme provozně doložit?
+- [ ] Máme připravený zákaznický bezpečnostní balíček?
+- [ ] Opakované otázky ukládáme do produktového nebo dokumentačního backlogu?
+- [ ] Sdílíme jen tolik detailů, kolik zákazník potřebuje k posouzení rizika?
+- [ ] Po každém větším dotazníku aktualizujeme interní zdroj pravdy?
+- [ ] Neposíláme osobní údaje interních lidí bez jasného účelu?
+
+### AX.8 Mini úkol na 45 minut
+
+Najdi poslední bezpečnostní nebo privacy otázku od zákazníka. Pokud žádnou nemáš, napiš si deset otázek, které by položil opatrný B2B zákazník před pilotem. Ke každé vytvoř krátkou odpověď ve třech větách: aktuální stav, omezení, kontakt nebo další krok. Potom označ, co může být veřejné, co jen pro zákazníka a co má zůstat interní. Tím právě vznikl základ tvé knihovny odpovědí — žádná magie, jen méně chaosu s hezčími okraji.
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -7657,6 +7771,7 @@ Vytvoř první verzi stránky „Bezpečnost a soukromí“ pro svůj produkt. N
 
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek AX o bezpečnostních dotaznících, interní knihovně odpovědí, zákaznickém bezpečnostním balíčku a privacy-first sdílení provozních informací.
 - 2026-09-10: Doplněn Dodatek AW o stránce bezpečnosti a soukromí, mapě dat, zákaznickém FAQ, provozních tvrzeních a checklistu důvěryhodné privacy-first dokumentace.
 - 2026-09-10: Doplněn Dodatek AV o auditních logách, bezpečnostně relevantních událostech, retenci, zákaznickém zobrazení a privacy-first maskování citlivých dat.
 - 2026-09-09: Doplněn Dodatek AU o API klíčích, tokenech, scopes, rotaci, rate limitingu, audit logu a privacy-first dokumentaci integrací.
