@@ -9358,6 +9358,129 @@ Na mobilu u každého bloku zkontroluj, jestli by obstál samostatně na screens
 
 Vezmi jednu nejdůležitější stránku svého webu a projdi ji na telefonu od začátku do konce. Neopravuj zatím všechno. Jen napiš tři seznamy: co brání pochopení nabídky, co brání dokončení hlavní akce a co zbytečně sbírá nebo posílá data třetím stranám. Pak vyber jednu úpravu, kterou zvládneš dnes: zkrácení formuláře, zvětšení CTA, odstranění externího embeddu, doplnění FAQ nebo zmenšení hero obrázku. Mobilní UX se nezlepší filozofickou debatou. Zlepší se tím, že přestaneš nutit palec dělat práci myši.
 
+
+## Dodatek BK: Vyhledávání bez slepé uličky a datového vysavače
+
+Vyhledávání je produktová funkce, ne jen ikonka lupy v hlavičce. Když ho uděláš dobře, zákazník rychle najde dokument, článek, objednávku, fakturu, ticket nebo nastavení. Když ho uděláš špatně, jen mu ukážeš, že tvůj produkt má spoustu obsahu a žádnou navigační disciplínu. To je jako knihovna bez regálů, jen digitální koberec knih po zemi.
+
+Privacy-first vyhledávání má navíc jednu důležitou vlastnost: nesbírá víc dotazů, než potřebuje pro zlepšení výsledků. Hledaný výraz často prozrazuje problém zákazníka, název klienta, číslo objednávky, interní projekt nebo osobní údaj. Proto ho ber jako citlivý signál, ne jako levnou analytickou hračku.
+
+### BK.1 Nejdřív rozhodni, co se má dát najít
+
+Než nasadíš fulltext, napiš seznam vyhledatelných objektů. U každého si odpověz na tři otázky: kdo ho hledá, jak ho pojmenuje a co má udělat po nalezení. Jinak skončíš s jedním obecným polem, které vrací všechno od blogových článků po faktury, a uživatel si připadá jako archeolog s platební kartou.
+
+Praktická tabulka:
+
+| Objekt | Typické dotazy | Kdo hledá | Výsledek má vést k |
+| --- | --- | --- | --- |
+| Nápověda | „export dat“, „faktura“, „role“ | zákazník, support | článku s postupem |
+| Projekty | název klienta, interní kód | přihlášený tým | detailu projektu |
+| Faktury | číslo faktury, měsíc, firma | admin, účetní | detailu a stažení PDF |
+| Nastavení | „heslo“, „API klíč“, „uživatelé“ | admin | konkrétní obrazovce nastavení |
+
+U veřejného webu často stačí vyhledávání v článcích, dokumentaci a FAQ. U SaaS aplikace odděl veřejné hledání od hledání uvnitř účtu. Veřejná nápověda může být indexovaná pro SEO. Zákaznická data nikdy nemají prosakovat do veřejného indexu, cache ani našeptávače.
+
+### BK.2 První výsledky jsou produktové rozhodnutí
+
+Řazení výsledků není neutrální. Když člověk hledá „cena“, pravděpodobně chce stránku s tarify, ne čtyři staré blogové články o cenotvorbě. Když hledá „smazat účet“, nemá dostat marketingový text o tom, jak skvělá je retence. Má dostat jasný postup, export dat a kontakt na podporu.
+
+Začni jednoduchými pravidly:
+
+- Přesná shoda názvu vyhrává nad starším obsahem s vyšší návštěvností.
+- Dokumentace k bezpečnosti, exportu a fakturaci má vyšší prioritu než blog.
+- Výsledky uvnitř účtu se filtrují podle oprávnění uživatele před zobrazením, ne až po kliknutí.
+- Neúspěšné hledání nabídne nejbližší kategorie, kontakt nebo možnost poslat zpětnou vazbu.
+- Starý obsah se buď aktualizuje, archivuje, nebo jasně označí jako starší verze.
+
+Codyho komentář: Vyhledávání je místo, kde se pozná, jestli firma chápe zákaznický úmysl. Algoritmus je fajn, ale první verze často vyhraje obyčejná ruční priorita deseti nejčastějších dotazů.
+
+### BK.3 Našeptávač nesmí být bezpečnostní díra
+
+Autocomplete vypadá nevinně, ale umí nechtěně prozradit existenci dat. Když uživatel začne psát „Nov“ a našeptávač mu ukáže „Nováková — dlužná faktura“, máš problém. Podobně neukazuj interní názvy klientů, e-maily, čísla objednávek nebo neveřejné projekty lidem, kteří k nim nemají přístup.
+
+Bezpečnější pravidla:
+
+- Ve veřejném vyhledávání našeptávej jen veřejné stránky, kategorie a obecné články.
+- V přihlášené aplikaci generuj návrhy až po kontrole oprávnění.
+- Nevracej počty neveřejných výsledků pro objekty, které uživatel nesmí vidět.
+- Dotazy posílej až po krátkém zpoždění a jen při rozumné délce, ne po každém písmenku.
+- U citlivých modulů raději nabídni filtr a přesné ID než agresivní našeptávání.
+
+Tohle není paranoia. Je to normální produktová hygiena. Pokud by tě překvapilo vidět daný návrh na projektoru při zákaznické schůzce, nemá se objevit ani v našeptávači.
+
+### BK.4 Prázdný výsledek je šance pomoct
+
+„Nic nenalezeno“ je líná hláška. Dobrý prázdný stav řekne, co bylo prohledáno, nabídne další krok a nezní jako chyba uživatele. Zvlášť u B2B SaaS je neúspěšné hledání signál: buď chybí obsah, zákazník používá jiné pojmy, nebo navigace vede špatným směrem.
+
+Lepší vzor:
+
+> Nenašel jsem žádný článek pro „API faktury“. Prohledal jsem nápovědu a FAQ. Zkus „integrace“, „fakturace“ nebo napiš podpoře — dotaz použijeme jen k odpovědi a zlepšení dokumentace.
+
+U interního vyhledávání přidej ještě vysvětlení oprávnění:
+
+> Nenašel jsem žádný projekt odpovídající tomuto dotazu. Pokud projekt existuje, možná k němu nemáš přístup. Požádej administrátora týmu o kontrolu role.
+
+To je mnohem užitečnější než tiché prázdno. A hlavně to neslibuje víc, než systém skutečně ví.
+
+### BK.5 Měř kvalitu bez ukládání citlivých dotazů navždy
+
+Vyhledávání se dá zlepšovat i bez datového skladiště všech zákaznických frustrací. Začni agregovaně: počet hledání, podíl hledání bez výsledku, nejčastější obecné dotazy po očištění, kliknutí na výsledek a dotazy, které vedly ke kontaktu podpory. U citlivých produktů dotazy buď neukládej vůbec, nebo je krátce drž jen pseudonymizované, zkrácené a s jasnou retencí.
+
+Praktický privacy-first režim:
+
+- Surový dotaz drž maximálně krátké ladicí období, pokud ho vůbec potřebuješ.
+- Automaticky odstraň e-maily, telefonní čísla, tokeny, dlouhá čísla a zjevná ID.
+- Pro produktové review používej agregované skupiny: „export“, „faktury“, „role“, „API“.
+- Ukaž v zásadách soukromí, zda a proč vyhledávací dotazy zpracováváš.
+- Nedávej vyhledávací dotazy do reklamních nástrojů, session replayů ani externích heatmap.
+
+Méně dat neznamená méně učení. Znamená to, že se učíš z užitečných vzorců, ne z každé věty, kterou zákazník v zoufalství napsal do lupy.
+
+### BK.6 Přístupnost vyhledávání je základ, ne bonus
+
+Vyhledávání musí jít použít klávesnicí, čtečkou obrazovky i na mobilu. Použij skutečný formulář, správný popisek a srozumitelný stav výsledků. MDN popisuje HTML vstup `type="search"` jako specializované textové pole pro vyhledávací dotazy a WAI připomíná, že formulářová pole potřebují jasné labely nebo instrukce. Zdroje: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/search a https://www.w3.org/WAI/tutorials/forms/labels/
+
+Prakticky:
+
+- Pole má viditelný label nebo jasně přiřazený přístupný název; placeholder není jediný label.
+- Tlačítko se nejmenuje jen „OK“, ale třeba „Hledat“.
+- Po odeslání se ukáže počet výsledků a stav lze pochopit i bez barvy.
+- Fokus po vyhledání neskočí chaoticky doprostřed stránky.
+- Filtry mají jasné názvy a dají se zrušit jednotlivě i všechny najednou.
+- Mobilní klávesnice má vhodný režim pro hledání a formulář se odesílá očekávatelně.
+
+Pokud používáš strukturovaná data pro veřejný web, `SearchAction` může vyhledávačům popsat interní vyhledávání webu. Ber to ale jako doplněk, ne jako náhradu dobré navigace a indexovatelných stránek. Zdroj: https://schema.org/SearchAction
+
+### BK.7 Konkrétní příklad: vyhledávání v nápovědě SaaS
+
+Představ si SaaS pro správu klientských portálů. Zákazníci se ptají na role, exporty, faktury, API klíče a mazání dat. První verze vyhledávání může být překvapivě jednoduchá:
+
+1. **Indexuj jen veřejnou nápovědu a FAQ:** žádná zákaznická data, žádné interní tickety.
+2. **Ručně priorizuj deset kritických článků:** export dat, smazání účtu, faktury, role, bezpečnost, API, import, pozvánky, notifikace, podpora.
+3. **Přidej synonyma:** „účet“ → „profil“, „faktura“ → „billing“, „uživatel“ → „člen týmu“.
+4. **Prázdný stav spoj s podporou:** nabídni kontakt a uveď, že dotaz se použije jen k odpovědi a zlepšení dokumentace.
+5. **Měř agregovaně:** jednou týdně projdi skupiny neúspěšných dotazů a doplň články.
+6. **Nastav retenci:** surové dotazy drž krátce, agregace déle, citlivé vzory automaticky odstraň.
+
+Tahle verze nevyhraje cenu za „nejvíc AI v názvu funkce“, ale zákazníkům pomůže najít odpovědi. A to je v produktu docela užitečný detail, že ano.
+
+### BK.8 Checklist vyhledávání
+
+- [ ] Je jasné, které objekty se vyhledávají a které ne.
+- [ ] Veřejné a přihlášené vyhledávání jsou oddělené.
+- [ ] Výsledky se filtrují podle oprávnění před zobrazením.
+- [ ] První výsledky odpovídají zákaznickému úmyslu, ne jen technickému skóre.
+- [ ] Našeptávač neprozrazuje neveřejná data ani počty zakázaných výsledků.
+- [ ] Prázdný stav nabízí další krok, alternativní dotazy nebo kontakt.
+- [ ] Dotazy se ukládají jen v nutném rozsahu a s jasnou retencí.
+- [ ] Citlivé hodnoty se z dotazů odstraňují před analytikou.
+- [ ] Vyhledávací pole má přístupný název, ovládání klávesnicí a srozumitelný stav výsledků.
+- [ ] Support a produktový tým pravidelně řeší dotazy bez výsledků.
+
+### BK.9 Mini úkol na 45 minut
+
+Vezmi svůj web nebo SaaS a napiš dvacet posledních dotazů, které by zákazník mohl hledat. Nemusíš je mít z analytiky; klidně použij support e-maily, sales schůzky a vlastní zkušenost. Rozděl je do pěti skupin: cena, nápověda, bezpečnost, účet a technické nastavení. Pak pro každou skupinu vyber jednu stránku, která má být první výsledek. Pokud taková stránka neexistuje, právě jsi našel obsahový backlog. Gratuluju, vyhledávání ti právě udělalo produktovou práci bez toho, aby někoho sledovalo přes půl internetu.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -9437,9 +9560,13 @@ Vezmi jednu nejdůležitější stránku svého webu a projdi ji na telefonu od 
 - W3C WAI: Understanding SC 1.3.5 Identify Input Purpose — https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose
 - W3C WAI: Understanding Guideline 3.3 Input Assistance — https://www.w3.org/WAI/WCAG22/Understanding/input-assistance
 - W3C WAI: Understanding SC 3.3.3 Error Suggestion — https://www.w3.org/WAI/WCAG22/Understanding/error-suggestion.html
+- MDN Web Docs: `<input type="search">` — https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/search
+- W3C WAI: Labeling Controls — https://www.w3.org/WAI/tutorials/forms/labels/
+- Schema.org: SearchAction — https://schema.org/SearchAction
 
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek BK o privacy-first vyhledávání, bezpečném našeptávači, prázdných výsledcích, agregovaném měření, přístupnosti a nápovědě bez datového vysavače.
 - 2026-09-10: Doplněn Dodatek BJ o mobilním UX, responzivním obsahu, palcem ovladatelných CTA, kratších formulářích, médiích a privacy-first mobilním SEO.
 - 2026-09-10: Doplněn Dodatek BI o přechodu z pilotu do ostrého provozu, produkční připravenosti, migraci pilotních dat, smluvních hranicích a prvním produkčním týdnu.
 - 2026-09-10: Doplněn Dodatek BH o trialech a pilotních nasazeních, rozhodovací otázce, kritériích úspěchu, onboardingu, hranicích zakázkových požadavků a privacy-first úklidu dat.
