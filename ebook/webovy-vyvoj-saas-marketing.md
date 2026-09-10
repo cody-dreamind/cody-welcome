@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy, postupné rollouty, e-mailová doručitelnost, cache, statická aktiva, API klíče, auditní logy, stránka bezpečnosti a soukromí, souborové přílohy, hlášení zranitelností, retence dat, checkout a waitlisty.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy, postupné rollouty, e-mailová doručitelnost, cache, statická aktiva, API klíče, auditní logy, stránka bezpečnosti a soukromí, souborové přílohy, hlášení zranitelností, retence dat, checkout, waitlisty a produktová dema.
 
 ---
 
@@ -8849,6 +8849,136 @@ Před publikací si odškrtni:
 
 Vyber jeden dokončený projekt a napiš k němu kostru studie v sedmi odrážkách: kontext, problém, cíl, postup, výsledek, soukromí, poučení. Pak označ všechny údaje zeleně, žlutě nebo červeně: zelené lze zveřejnit, žluté jen se souhlasem, červené nikdy. Nakonec napiš zákazníkovi krátký návrh rámce ke schválení. Pokud se bojíš zeptat, je to přesně důvod začít rámcem, ne hotovým textem.
 
+## Dodatek BG: Produktové demo bez povinného účtu a špionážního kukátka
+
+Produktové demo má zákazníkovi ukázat, jestli produkt řeší jeho problém. Nemá ho přivítat formulářem na šest polí, cookie lištou velikosti menší hypotéky a kalendářem, který nejdřív vynutí registraci do další služby. Demo je prodejní zkratka: když funguje, zkrátí vysvětlování. Když nefunguje, jen elegantně ukáže, že produkt zatím neumíš popsat.
+
+Privacy-first demo má jednoduchý princip: ukaž hodnotu dřív, než si řekneš o data. Zní to samozřejmě, takže to polovina SaaS webů statečně ignoruje. Klasika.
+
+### BG.1 Vyber správný typ dema
+
+Ne každé demo musí být hodinový call. Naopak: čím menší závazek pro zákazníka, tím rychleji zjistíš, co opravdu potřebuje. Vybírej podle složitosti produktu a rizika nákupu:
+
+- **Veřejné klikací demo:** vhodné pro jednoduchý produkt, šablonu, portál nebo funkci, kterou lze bezpečně ukázat na ukázkových datech.
+- **Video demo:** dobré pro první vysvětlení hodnoty, hlavně když zákazník nechce zakládat účet.
+- **Interaktivní sandbox:** vhodný pro B2B SaaS, kde uživatel potřebuje vyzkoušet proces, ale nesmí vidět reálná data.
+- **Řízené demo na callu:** nejlepší pro komplexní prodej, integrace, enterprise bezpečnost nebo silně oborový workflow.
+- **Pilotní prostředí:** použij až ve chvíli, kdy má zákazník jasný případ použití, vlastní data a interní vlastníky.
+
+Nejhorší varianta je tvářit se, že jedno demo vyřeší všechno. Zakladatel chce vidět obchodní dopad, administrátor bezpečnost a koncový uživatel tři konkrétní kliky. Když jim ukážeš stejnou dvacetiminutovou tour, spokojení budou hlavně fanoušci utrpení.
+
+### BG.2 Demo stav na ukázkových datech
+
+Demo data nejsou odpad z produkce. Jsou součást produktu. Připrav je tak, aby ukazovala reálný scénář, ale neobsahovala žádné osobní údaje skutečných zákazníků, interní poznámky ani historické exporty.
+
+Dobrá demo data mají:
+
+- smyšlené firmy, lidi a e-maily;
+- realistické stavy objednávek, projektů, faktur nebo úkolů;
+- ukázkové chyby, prázdné stavy a dokončené workflow;
+- jasně oddělený demo tenant nebo demo databázi;
+- reset po každém veřejném použití nebo časově omezenou platnost;
+- vlastní pravidla pro logování a mazání.
+
+Nikdy neklonuj produkční databázi „jen na rychlo“. I když ji pak údajně anonymizuješ. Údajně je v provozu jedno z nejdražších slov, hned po „dočasně“.
+
+### BG.3 Nechtěj registraci moc brzy
+
+Registrace je tření. Někdy je nutná, ale často ji produkt používá jen proto, že tým neumí rozlišit zájem od kvalifikovaného leadu. U veřejného dema zvaž postupné úrovně:
+
+- stránka s jasným scénářem a screenshoty bez formuláře;
+- krátké video nebo GIF s jedním use casem;
+- veřejné klikací demo bez ukládání osobních dat;
+- volitelný e-mail pro zaslání shrnutí nebo odkazu;
+- až poté účet, pilot nebo call.
+
+Pokud e-mail potřebuješ, řekni proč: „Pošleme vám odkaz na demo a dvě otázky k vašemu scénáři.“ To je férovější než „Získejte přístup“, když ve skutečnosti chceš jen další řádek do CRM. Malé firmy poznají rozdíl. Velké firmy taky, jen na to mají komisi.
+
+### BG.4 Měř zájem bez sledovací detektivky
+
+U dema chceš vědět, jestli lidé chápou hodnotu a kde se zaseknou. Nepotřebuješ z toho stavět behaviorální profil každého návštěvníka. Praktické privacy-first metriky:
+
+- počet otevření demo stránky;
+- kliknutí na hlavní scénáře;
+- dokončení klíčového demo flow;
+- dobrovolné odeslání otázky;
+- žádost o call nebo pilot;
+- technické chyby a pomalé načítání;
+- agregovaný zdroj návštěvy, pokud ho opravdu používáš pro rozhodnutí.
+
+Měř agregovaně, krátce a srozumitelně. Session replay a heatmapy nech až na situace, kdy máš konkrétní problém, jasný právní základ a rozumné omezení rozsahu. U většiny malých SaaS je lepší přidat na konec dema jednu otázku: „Co vám chybělo, abyste se rozhodli?“ Odpověď možná nebude v krásném grafu, ale bude užitečná. Otravné, já vím.
+
+### BG.5 Připrav demo scénář jako prodejní dokument
+
+Demo nemá být seznam funkcí. Má být příběh rozhodnutí. Před každým významnějším demem si napiš tři věci:
+
+1. Jaký problém zákazník pravděpodobně řeší.
+2. Jaký výsledek chce vidět během prvních pěti minut.
+3. Jaký další krok dává smysl, pokud demo zaujme.
+
+Struktura dema může být jednoduchá:
+
+- **Situace:** „Typická agentura řeší podklady od klientů ve třech kanálech.“
+- **Bolest:** „Tým neví, co už klient dodal a co chybí.“
+- **Akce:** „V portálu vidíte projekt, chybějící položky a bezpečné sdílení dokumentů.“
+- **Výsledek:** „Klient i tým mají jeden aktuální stav.“
+- **Důvěra:** „Data běží v EU, export je dostupný a audit log ukazuje rizikové akce.“
+- **Další krok:** „Vybereme jeden pilotní projekt a změříme počet ručních follow-upů.“
+
+Tahle struktura chrání před funkcionalitidou: nemocí, kdy ve dvacáté minutě vysvětluješ barvu štítku, zatímco zákazník pořád neví, proč má produkt koupit.
+
+### BG.6 Odděl demo, trial a pilot
+
+Tyhle tři věci se často hází do jednoho pytle, ale mají jiný účel:
+
+- **Demo** vysvětluje hodnotu a snižuje nejistotu.
+- **Trial** umožňuje samostatně vyzkoušet produkt na omezeném rozsahu.
+- **Pilot** ověřuje konkrétní obchodní nebo provozní výsledek u zákazníka.
+
+Pro privacy-first provoz je rozdíl zásadní. Demo má běžet na ukázkových datech. Trial může ukládat omezená zákaznická data s jasnou dobou retence. Pilot už obvykle potřebuje dohodu o rozsahu, odpovědnosti, exportu a mazání po skončení.
+
+Do produktové dokumentace si napiš, co se děje po konci každé fáze:
+
+- kdy demo session expiruje;
+- kdy se maže trial účet;
+- jak zákazník získá export;
+- kdo schvaluje prodloužení pilotu;
+- co se stane s importovanými daty;
+- jak se oddělí pilotní data od produkce.
+
+Když to nepopíšeš, bude se to řešit až ve chvíli, kdy zákazník napíše „prosím smažte všechno“. To je technický ekvivalent hledání hasicího přístroje po požáru.
+
+### BG.7 Konkrétní příklad: demo klientského portálu
+
+Malý tým prodává klientský portál pro účetní kanceláře. Místo obecného dema připraví tři scénáře:
+
+- **Majitel kanceláře:** vidí přehled klientů, stav podkladů a kolik ručních připomínek odpadá.
+- **Účetní:** otevře konkrétního klienta, zkontroluje chybějící doklady a pošle bezpečnou žádost.
+- **Klient:** nahraje dokument, vidí potvrzení a později si stáhne export.
+
+Demo běží na smyšlených firmách, například „Javorová kavárna s.r.o.“ a „Severní servis s.r.o.“. E-maily používají doménu `example.com`, dokumenty jsou ukázkové PDF bez reálných údajů a každá demo session se po 24 hodinách resetuje.
+
+Měření je střídmé: tým sleduje dokončení tří scénářů, žádosti o pilot a dobrovolné odpovědi na otázku, co nebylo jasné. Do CRM se ukládá jen firma, kontaktní osoba, zdroj zájmu a domluvený další krok. Žádný sociální graf, žádné nahrávání obrazovky, žádné „náhodou jsme si schovali všechny kliky pro později“.
+
+### BG.8 Checklist produktového dema
+
+Před zveřejněním nebo prodejním použitím si odškrtni:
+
+- demo ukazuje konkrétní rozhodovací scénář, ne katalog funkcí;
+- demo data jsou smyšlená, realistická a oddělená od produkce;
+- uživatel vidí hodnotu před registrací nebo předáním kontaktu;
+- formulář sbírá jen údaje nutné pro další krok;
+- demo má jasný konec, expiraci nebo reset;
+- měření je agregované a navázané na rozhodnutí týmu;
+- trial a pilot mají samostatná retenční pravidla;
+- obchodní tým ví, jak demo použít v nabídce a follow-upu;
+- zákazník dostane jasnou odpověď, co se děje s jeho daty;
+- technické chyby v demu se logují bez citlivého obsahu.
+
+### BG.9 Mini úkol na 45 minut
+
+Vyber jednu funkci svého produktu a napiš pro ni demo scénář ve formátu: situace, bolest, akce, výsledek, důvěra, další krok. Pak označ, která data jsou ukázková, která by vznikla v trialu a která smí přijít až v pilotu. Nakonec smaž z demo formuláře všechno, co nepotřebuješ pro další smysluplnou reakci. Ano, i pole „telefon“, pokud nikomu volat nebudeš. Formuláře nejsou sbírka suvenýrů.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -8930,6 +9060,7 @@ Vyber jeden dokončený projekt a napiš k němu kostru studie v sedmi odrážk�
 
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek BG o produktových demech, demo datech, registraci až po hodnotě, střídmém měření, trialu, pilotu a privacy-first retenci.
 - 2026-09-10: Doplněn Dodatek BF o případových studiích, výběru zákaznického příběhu, poctivých metrikách, souhlasu, citacích a privacy-first anonymizaci.
 - 2026-09-10: Doplněn Dodatek BE o referral programech, férových odměnách, sdílených odkazech, měření bez sociálního grafu a privacy-first retenci doporučení.
 - 2026-09-10: Doplněn Dodatek BD o waitlistech, předprodeji, minimálním sběru dat, segmentaci pilotu, retenčních pravidlech a privacy-first validaci zájmu.
