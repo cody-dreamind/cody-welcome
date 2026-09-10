@@ -8979,6 +8979,143 @@ Před zveřejněním nebo prodejním použitím si odškrtni:
 
 Vyber jednu funkci svého produktu a napiš pro ni demo scénář ve formátu: situace, bolest, akce, výsledek, důvěra, další krok. Pak označ, která data jsou ukázková, která by vznikla v trialu a která smí přijít až v pilotu. Nakonec smaž z demo formuláře všechno, co nepotřebuješ pro další smysluplnou reakci. Ano, i pole „telefon“, pokud nikomu volat nebudeš. Formuláře nejsou sbírka suvenýrů.
 
+## Dodatek BH: Trial a pilot bez nekonečného „ještě to testujeme“
+
+Trial a pilot jsou dvě různé věci, které se v malých SaaS často tváří jako jedno roztomilé klubko nejistoty. Trial má rychle ukázat, jestli si zákazník umí produkt představit ve svém běžném provozu. Pilot má ověřit konkrétní nasazení, rizika, integrace a procesní dopad. Když je smícháš, vznikne období, kde zákazník „zkouší“, tým „pomáhá“ a nikdo neví, kdy se vlastně rozhoduje. Krásná mlha. Jen trochu drahá.
+
+Privacy-first přístup tu znamená jednoduchou věc: i dočasné testování má mít jasný účel, rozsah, vlastníka, data a konec. Trial není výmluva pro bezedný sběr událostí. Pilot není povolenka nahrát zákazníkova ostrá data do vedlejšího prostředí bez pravidel. A „uvidíme po měsíci“ není plán, ale kalendářní horoskop.
+
+### BH.1 Nejdřív rozhodni, co chceš ověřit
+
+Před spuštěním trialu nebo pilotu napiš jednu rozhodovací otázku. Ne seznam přání, ne roadmapu převlečenou za experiment. Jednu otázku.
+
+Příklady dobrých otázek:
+
+- Zvládne účetní tým vystavit první dávku dokladů bez školení delšího než 30 minut?
+- Umí servisní firma převést zakázku od poptávky po fakturaci v jednom workflow?
+- Pomůže klientský portál snížit počet e-mailů s přílohami u konkrétního typu projektu?
+- Dokáže administrátor nastavit role bez zásahu vývojáře?
+- Je hodnota produktu jasná dřív, než zákazník začne řešit integrace?
+
+Špatná otázka zní: „Bude se jim to líbit?“ Líbí se jim možná i pěkný dashboard. Platí se za vyřešený problém, ne za estetické mručení nad grafem.
+
+### BH.2 Trial má vést k první hodnotě, ne k prohlídce skladu funkcí
+
+Trial navrhuj jako krátkou cestu k prvnímu užitečnému výsledku. Ne jako muzeum všech funkcí, kde návštěvník dostane mapu, audioprůvodce a po třiceti minutách stále hledá východ.
+
+První hodnota může být:
+
+- vytvořený projekt s jasným dalším krokem;
+- importovaný ukázkový seznam položek;
+- první vygenerovaný report;
+- bezpečně sdílený dokument;
+- nastavený tým a role;
+- vyřešený konkrétní úkol, který zákazník předtím dělal ručně.
+
+V trialu měř hlavně dokončení těchto kroků. Počet přihlášení je slabá metrika, pokud nevíš, jestli člověk něco vyřešil. Zákazník se může přihlásit pětkrát jen proto, že hledá, kde se ruší účet. To není engagement, to je digitální úniková hra.
+
+### BH.3 Pilot musí mít start, konec a kritéria úspěchu
+
+Pilot bez konce je levná implementace převlečená za obchodní proces. Před startem si se zákazníkem potvrď:
+
+- kdo je vlastník pilotu na straně zákazníka;
+- kdo je vlastník pilotu na tvé straně;
+- jaký use case se testuje a co se netestuje;
+- jaká data se použijí;
+- jak dlouho pilot poběží;
+- podle čeho se rozhodne pokračování;
+- co se stane s daty po skončení.
+
+Jednoduchá šablona:
+
+| Oblast | Dohoda |
+| --- | --- |
+| Cíl pilotu | Ověřit, jestli portál nahradí e-mailové předávání podkladů u měsíčních účetních závěrek. |
+| Rozsah | Jeden tým, pět klientů, jeden typ workflow. |
+| Data | Testovací klienti nebo zákazníkem vybraná omezená sada reálných dat. |
+| Délka | 21 dní od prvního aktivního použití. |
+| Úspěch | Aspoň 80 % podkladů projde portálem a tým chce pokračovat bez paralelního e-mailového procesu. |
+| Konec | Rozhodnutí o placeném tarifu, prodloužení s novým cílem, nebo smazání/export dat. |
+
+Čísla si nastav podle svého produktu, ne podle toho, co zní hezky na prezentaci. Důležité je, aby byla předem známá a aby se podle nich dalo jednat.
+
+### BH.4 Neber pilot jako zákaznickou vývojovou pobočku
+
+Pilot často odhalí požadavky. To je dobře. Problém nastane, když každé „šlo by ještě“ automaticky změníš v zakázkový vývoj zdarma. Pilot má ověřit hodnotu jádra produktu, ne přepsat roadmapu podle nejhlasitějšího účastníka callu.
+
+Rozlišuj požadavky takhle:
+
+- **Nutné pro rozhodnutí:** bez toho zákazník produkt nedokáže férově vyhodnotit.
+- **Nutné pro ostré nasazení:** neblokuje pilot, ale patří do implementačního plánu.
+- **Příjemné zlepšení:** může zvýšit adopci, ale není důvod zastavit prodej.
+- **Zakázkový požadavek:** řeš jen s cenou, termínem a dopadem na roadmapu.
+- **Rizikový požadavek:** zvyšuje sběr dat, komplikuje oprávnění nebo oslabuje bezpečnost.
+
+Privacy-first filtr přidej ke každému požadavku: jaká nová data by se sbírala, kdo by k nim měl přístup, jak dlouho by ležela v systému a zda jde stejný výsledek udělat s menším zásahem. Pokud odpověď zní „zatím to nějak uložíme“, zastav se. To je věta, ze které později roste migrační bažina.
+
+### BH.5 Onboarding během trialu má učit rozhodnutí
+
+Trial onboarding není jen produktová nápověda. Je to série malých důkazů, že zákazník chápe hodnotu a umí pokračovat. Neposílej mu pět generických e-mailů typu „Tip číslo 4: objevte nastavení“. Raději navrhni cestu podle scénáře.
+
+Praktická sekvence pro B2B SaaS:
+
+1. **Den 0:** potvrzení cíle trialu a první doporučený krok.
+2. **Den 1:** krátký návod k první hodnotě, ideálně bez videa delšího než káva.
+3. **Den 3:** otázka, co blokuje další krok, ne marketingový monolog.
+4. **Den 7:** shrnutí dosaženého stavu a doporučení dalšího scénáře.
+5. **Den 14:** rozhodovací checklist: pokračovat, rozšířit, ukončit.
+
+Každý kontakt musí mít důvod. Pokud nevíš, proč zprávu posíláš, neposílej ji. Inbox zákazníka není tvoje nástěnka pro existenciální produktovou poezii.
+
+### BH.6 Data z trialu uklízej automaticky
+
+Trialová data mají být dočasná, pokud se zákazník nerozhodne pokračovat. Už při návrhu trialu si napiš retenční pravidla:
+
+- kdy se neaktivní trial označí k uzavření;
+- jak dlouho držíš účet po skončení;
+- kdy pošleš upozornění před smazáním;
+- co si zákazník může exportovat;
+- co se anonymizuje pro agregované učení produktu;
+- kdo může ručně prodloužit retenci a proč;
+- jak ověříš, že mazání skutečně proběhlo.
+
+Dobrá praxe je oddělit produktové učení od osobních údajů. Například si můžeš ponechat agregované poznání typu „většina trialů se zasekne u importu dat“, ale nepotřebuješ navždy držet konkrétní import zákazníka, jeho interní názvy projektů a přílohy. Produkt se učí i bez digitálního syslení. Překvapivé, ale příjemné.
+
+### BH.7 Konkrétní příklad: pilot klientského portálu
+
+Představ si malou agenturu, která chce klientům nabízet portál pro podklady, schvalování a stav projektu. Cílem pilotu není „vyzkoušet portál“. To je moc široké. Cíl zní:
+
+> Ověřit, jestli tři aktivní klienti zvládnou během jednoho měsíce předávat podklady přes portál místo e-mailových vláken.
+
+Pilot nastav takto:
+
+- **Rozsah:** tři klienti, jeden typ projektu, jeden projektový manažer.
+- **Start:** 20min call, ukázka workflow, potvrzení kontaktních osob.
+- **Data:** nové projekty nebo ručně vybrané aktuální podklady, žádný hromadný import starých e-mailů.
+- **Metriky:** počet dodaných podkladů přes portál, počet chybějících položek, počet ručních e-mailových urgencí.
+- **Kvalitativní signál:** krátký rozhovor s projektovým manažerem a jedním klientem.
+- **Konec:** rozhodnutí, zda portál rozšířit na další typ projektu, upravit onboarding nebo pilot ukončit.
+- **Soukromí:** po skončení se exportují potřebné podklady, testovací účty se zavřou a nepotřebné soubory smažou podle předem domluveného pravidla.
+
+Takhle má pilot hranice. Zákazník ví, co dostane. Tým ví, co sledovat. A produkt nedostane další „dočasný“ adresář plný souborů s názvem `final_final_v3_opravdu_final.zip`.
+
+### BH.8 Checklist trialu a pilotu
+
+- [ ] Má trial nebo pilot jednu jasnou rozhodovací otázku?
+- [ ] Ví zákazník, jak vypadá první hodnota produktu?
+- [ ] Je jasně řečeno, co je součástí pilotu a co už ne?
+- [ ] Má pilot vlastníka na obou stranách?
+- [ ] Jsou předem definovaná kritéria úspěchu, délka a další krok?
+- [ ] Používáme jen data nutná pro ověření daného scénáře?
+- [ ] Jsou demo, trial a pilot oddělené od produkčních dat?
+- [ ] Existuje pravidlo pro export, smazání nebo anonymizaci dat po konci?
+- [ ] Neřešíme každý požadavek jako bezplatný zakázkový vývoj?
+- [ ] Onboardingové zprávy pomáhají rozhodnutí, ne jen připomínají, že umíme posílat e-maily?
+
+### BH.9 Mini úkol na 60 minut
+
+Vyber jeden aktuální trial nebo pilot a napiš jednostránkový pilot brief: cíl, rozsah, data, vlastníci, délka, kritéria úspěchu, konec a pravidla pro data. Pak označ všechny požadavky zákazníka jako nutné pro rozhodnutí, nutné pro ostré nasazení, příjemné zlepšení, zakázkový požadavek nebo rizikový požadavek. Pokud po hodině stále nevíš, co pilot ověřuje, nejspíš neřídíš pilot. Jen hostíš velmi zdvořilý chaos.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -9060,6 +9197,7 @@ Vyber jednu funkci svého produktu a napiš pro ni demo scénář ve formátu: s
 
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek BH o trialech a pilotních nasazeních, rozhodovací otázce, kritériích úspěchu, onboardingu, hranicích zakázkových požadavků a privacy-first úklidu dat.
 - 2026-09-10: Doplněn Dodatek BG o produktových demech, demo datech, registraci až po hodnotě, střídmém měření, trialu, pilotu a privacy-first retenci.
 - 2026-09-10: Doplněn Dodatek BF o případových studiích, výběru zákaznického příběhu, poctivých metrikách, souhlasu, citacích a privacy-first anonymizaci.
 - 2026-09-10: Doplněn Dodatek BE o referral programech, férových odměnách, sdílených odkazech, měření bez sociálního grafu a privacy-first retenci doporučení.
