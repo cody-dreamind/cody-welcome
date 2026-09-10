@@ -8718,6 +8718,137 @@ Před spuštěním si odškrtni:
 
 Vyber tři zákazníky, kteří už získali konkrétní výsledek. Ke každému napiš jednu větu, proč by mohl produkt doporučit, a jednu větu, komu přesně. Pak navrhni referral pravidlo v podobě: „Když doporučený zákazník dokončí X, doporučující získá Y.“ Nakonec škrtni všechna data, která pro to nepotřebuješ. Ano, škrtání dat je produktová práce. Jen se u toho méně pózuje na LinkedInu.
 
+## Dodatek BF: Případové studie bez korporátního divadla
+
+Případová studie není oslavná báseň na vlastní genialitu. Je to důkaz, že tvůj produkt nebo služba umí v konkrétním kontextu vyřešit konkrétní problém. U webů, SaaS a B2B služeb často prodává lépe než deset obecných claimů, protože ukazuje cestu: co bolelo, co se změnilo, jak jste postupovali a co z toho zákazník měl.
+
+Špatná případová studie říká: „Klient byl nadšený a výsledky překonaly očekávání.“ Dobrá případová studie říká: „Účetní kancelář měla ruční sběr podkladů přes e-mail, týdně ztrácela 6 hodin urgencemi, po 30 dnech používala klientský portál u 42 klientů a ruční upomínky klesly na polovinu.“ První je mlha. Druhé je materiál, se kterým může zákazník přemýšlet.
+
+Codyho komentář: jestli se případová studie dá přepsat na jakýkoliv produkt v jakémkoliv oboru, není to případová studie. Je to reklamní polystyren. Lehký, bílý a všude po místnosti.
+
+### BF.1 Vyber případ podle rozhodnutí zákazníka
+
+Nejlepší případové studie nejsou vždy ty s největším logem. Jsou to ty, které pomáhají dalšímu zákazníkovi udělat rozhodnutí. Pokud prodáváš menším firmám, anonymizovaná studie z podobně velké firmy může být hodnotnější než slavná značka, která má úplně jiné procesy, rozpočet a schvalování.
+
+Před výběrem případu si napiš:
+
+- komu má studie pomoct;
+- jakou námitku má odstranit;
+- jaký typ problému ukazuje;
+- jaký výsledek lze doložit;
+- jestli zákazník souhlasí se zveřejněním rozsahu detailů;
+- co musí zůstat anonymní nebo agregované.
+
+Dobrá studie má jasný prodejní úkol. Například: ukázat, že onboarding nemusí trvat tři měsíce, že privacy-first analytika stačí pro rozhodování, že interní administrace může být bezpečná bez superadmin chaosu, nebo že menší web po zjednodušení konvertuje lépe než drahý vizuální ohňostroj.
+
+### BF.2 Struktura má být nudně jasná
+
+Čtenář případové studie nechce luštit kreativní labyrint. Chce rychle poznat, jestli je situace podobná jeho realitě. Drž jednoduchou strukturu:
+
+1. **Kontext:** kdo je zákazník, jak velký tým, jaký segment, jaký provozní limit.
+2. **Problém:** co nefungovalo, co to stálo, proč to nešlo ignorovat.
+3. **Cíl:** jak poznáme úspěch a co naopak není cílem.
+4. **Postup:** co se udělalo v jednotlivých krocích.
+5. **Výsledek:** konkrétní změny, čísla, kvalitativní dopady a omezení.
+6. **Poučení:** co by šlo příště udělat lépe.
+7. **Soukromí:** jaká data byla použita, co bylo anonymizováno a co se nesbíralo.
+
+Sekce „Soukromí“ není právnický přívěsek. U privacy-first značky je to součást důvěry. Když ukážeš, že umíš vyprávět příběh bez zbytečného zveřejnění dat, zároveň ukazuješ, jak budeš zacházet s daty budoucího zákazníka.
+
+### BF.3 Čísla používej poctivě, ne divadelně
+
+Případová studie nemusí mít vždy bombastické metriky. Někdy je férovější napsat „první verze zkrátila ruční kontrolu ze 40 minut na 15 minut“ než „efektivita vzrostla o 166 %“, protože první formulace si člověk umí představit. Druhá zní jako prezentace, kterou někdo dělal ve dvě ráno s kávou a kalkulačkou na steroidech.
+
+Praktická pravidla pro metriky:
+
+- vždy napiš období měření;
+- rozlišuj odhad, měření a zákaznické tvrzení;
+- nepoužívej procenta bez absolutního kontextu;
+- nevybírej jen nejlepší den, pokud běžný provoz vypadal jinak;
+- u malých vzorků raději mluv o signálu než o definitivním důkazu;
+- citlivá data agreguj nebo anonymizuj.
+
+Příklad poctivé věty: „Během prvních 30 dnů se počet ručních e-mailových urgencí snížil ze zhruba 80 týdně na 35 až 45 týdně podle vytížení kanceláře. Data vycházejí z interního počítadla odeslaných upomínek a ruční kontroly týmu.“ Není to sexy jako billboard, ale dá se tomu věřit.
+
+### BF.4 Souhlas zákazníka řeš před psaním
+
+Nikdy nezačínej tím, že napíšeš detailní studii a pak zákazníkovi pošleš hotový text s větou „jen nám to prosím schvalte“. To je skvělý způsob, jak vyrobit zbytečný stres. Domluv rámec předem.
+
+Mini dohoda by měla obsahovat:
+
+- zda bude studie veřejná, neveřejná pro obchodní schůzky, nebo interní;
+- jestli se použije název firmy, logo, jméno člověka a citace;
+- která čísla lze zveřejnit přesně, která jen v rozsahu a která vůbec;
+- kdo text schvaluje a do kdy;
+- jak zákazník může požádat o úpravu nebo stažení;
+- jestli lze studii použít v prezentaci, na webu, v newsletteru nebo nabídce.
+
+Privacy-first přístup tady znamená respektovat kontext. Některé firmy nechtějí ukazovat interní problémy, i když výsledek dopadl dobře. To neznamená, že studie nejde napsat. Znamená to, že použiješ anonymizovaný segment, agregovaná čísla a popis problému bez detailů, které by firmu zbytečně odhalily.
+
+### BF.5 Citace mají znít jako člověk
+
+„Spolupráce byla profesionální a přinesla výjimečnou hodnotu“ je citace, kterou mohl napsat robot v obleku. Lepší citace říká konkrétní změnu: „Přestali jsme lovit podklady ve třech e-mailových vláknech a kolegyně konečně vidí, kdo co dodal.“
+
+Jak získat lepší citaci:
+
+- ptej se na situaci před změnou;
+- ptej se na první moment, kdy zákazník poznal rozdíl;
+- ptej se, co by řekl kolegovi v podobné firmě;
+- nepřepisuj citaci do reklamního newspeaku;
+- nech zákazníka schválit finální znění;
+- pokud citace obsahuje citlivé údaje, zkrať ji nebo anonymizuj kontext.
+
+Jedna lidská citace je lepší než pět sterilních vět. Důvěra často stojí na detailu, který by marketér v generickém textu vyhodil, protože „není dost enterprise“. Ano, právě proto funguje.
+
+### BF.6 Udělej z případové studie obchodní nástroj
+
+Publikovat studii na blog a čekat je málo. Případová studie má žít v prodeji, onboardingu i produktu. Rozděl ji na menší části:
+
+- krátký odstavec na landing page;
+- PDF nebo Markdown verze pro obchodní follow-up;
+- anonymizovaný screenshot procesu;
+- tři věty do nabídky;
+- interní poznámka pro support a sales tým;
+- checklist „co si odnést pro podobný projekt“;
+- odkaz z relevantní dokumentace nebo nápovědy.
+
+Nepřidávej kvůli tomu sledovací armádu. U obchodního použití často stačí přímý odkaz, vlastní CRM poznámka a rozumná evidence, komu byla studie poslaná. Pokud měříš otevření dokumentu, řekni si, jestli to opravdu ovlivní další krok. Někdy je lepší zeptat se zákazníka na callu: „Byla ta studie podobná vaší situaci?“ Staromódní, ale překvapivě funkční. Skoro až podezřelé.
+
+### BF.7 Konkrétní příklad: anonymizovaná studie pro B2B portál
+
+Představ si malou agenturu, která klientům posílá reporty, podklady a úkoly přes e-mail, sdílené disky a chat. Cílem projektu bylo vytvořit klientský portál s bezpečným přihlášením, rolemi a exportem dokumentů.
+
+Studie může vypadat takto:
+
+- **Kontext:** agentura o 12 lidech, 35 aktivních klientů, hodně opakované komunikace;
+- **Problém:** podklady byly ve více kanálech a nový kolega těžko dohledával historii;
+- **Cíl:** jeden klientský prostor, přehled stavů a méně ručního přeposílání;
+- **Postup:** mapa dat, role klientů, MVP portálu, import posledních aktivních projektů, interní administrace;
+- **Výsledek:** rychlejší dohledání podkladů, méně duplicitních dotazů, klidnější předávky mezi kolegy;
+- **Soukromí:** studie neukazuje jména klientů, konkrétní smlouvy ani screenshoty s reálnými dokumenty;
+- **Poučení:** další iterace má řešit šablony úkolů a jasnější notifikace.
+
+Všimni si, že i bez přesných citlivých čísel může studie dobře fungovat. Ukazuje situaci, postup a výsledek, ale nevystavuje klientská data jako trofej. To je přesně ten rozdíl mezi důkazem a exhibicí.
+
+### BF.8 Checklist případové studie
+
+Před publikací si odškrtni:
+
+- studie pomáhá konkrétnímu typu zákazníka udělat rozhodnutí;
+- problém je popsaný jazykem zákazníka, ne interním žargonem;
+- výsledek obsahuje měřitelný nebo aspoň ověřitelný dopad;
+- čísla mají období, kontext a férové omezení;
+- zákazník schválil název, citace, logo i rozsah detailů;
+- citlivá data jsou anonymizovaná nebo vynechaná;
+- studie obsahuje praktické poučení, ne jen oslavný konec;
+- existuje krátká verze pro landing page a obchodní follow-up;
+- v textu je jasné, jak se pracovalo se soukromím;
+- po publikaci ví tým, kde studii použít.
+
+### BF.9 Mini úkol na 60 minut
+
+Vyber jeden dokončený projekt a napiš k němu kostru studie v sedmi odrážkách: kontext, problém, cíl, postup, výsledek, soukromí, poučení. Pak označ všechny údaje zeleně, žlutě nebo červeně: zelené lze zveřejnit, žluté jen se souhlasem, červené nikdy. Nakonec napiš zákazníkovi krátký návrh rámce ke schválení. Pokud se bojíš zeptat, je to přesně důvod začít rámcem, ne hotovým textem.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -8799,6 +8930,7 @@ Vyber tři zákazníky, kteří už získali konkrétní výsledek. Ke každému
 
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek BF o případových studiích, výběru zákaznického příběhu, poctivých metrikách, souhlasu, citacích a privacy-first anonymizaci.
 - 2026-09-10: Doplněn Dodatek BE o referral programech, férových odměnách, sdílených odkazech, měření bez sociálního grafu a privacy-first retenci doporučení.
 - 2026-09-10: Doplněn Dodatek BD o waitlistech, předprodeji, minimálním sběru dat, segmentaci pilotu, retenčních pravidlech a privacy-first validaci zájmu.
 - 2026-09-10: Doplněn Dodatek BC o formulářích a checkoutu, minimalizaci polí, přístupnosti, chybových hláškách, bezpečném měření a privacy-first práci s konverzními daty.
