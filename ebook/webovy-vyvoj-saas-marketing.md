@@ -10275,6 +10275,141 @@ Otevři svůj produkt nebo návrh API a vyber jednu existující integraci. Napi
 
 Pak jednu věc rovnou zlepši: přejmenuj anonymní klíč, rozděl čtení a zápis, přidej poslední použití do UI, nebo napiš dokumentační odstavec. API bezpečnost se nestaví jedním hero refaktorem. Staví se sérií malých dveří, které se konečně zamykají správným klíčem.
 
+
+## Dodatek BR: Webhooky bez opakovaného ping-pongu a datových úniků
+
+Webhook je slib: „Až se něco stane, dám ti vědět.“ Vypadá jednoduše, dokud nezačneš řešit výpadky příjemce, duplicitní doručení, podepisování zpráv, změny schématu, citlivé payloady a zákazníka, který si endpoint nasměruje na testovací server pod stolem. Pak se z nevinného HTTP POSTu stane malý distribuovaný systém s náladou pondělní fakturace.
+
+Privacy-first webhooky nejsou o tom, že nesmíš posílat žádná data. Jsou o tom, že posíláš jen nutný signál, bezpečně ho podepíšeš, zákazník ho umí zpracovat opakovaně bez škody a obě strany mají jasný provozní deník. OWASP API Security Top 10 připomíná rizika rozbité autentizace a nebezpečné konzumace API; u webhooků platí obě strany najednou, protože jednou API poskytuješ a zároveň spoléháš na cizí endpoint. Zdroj: https://owasp.org/API-Security/
+
+### BR.1 Posílej událost, ne celý sklad dat
+
+Začni rozhodnutím, co webhook opravdu oznamuje. Dobrá událost není „něco se změnilo v zákazníkovi“. Dobrá událost je konkrétní:
+
+- `invoice.paid`,
+- `invoice.payment_failed`,
+- `subscription.cancelled`,
+- `export.ready`,
+- `user.invited`,
+- `project.archived`,
+- `ticket.created`.
+
+Payload má obsahovat minimum potřebné pro navazující akci: ID objektu, typ události, čas vzniku, tenant nebo workspace kontext, verzi schématu a případně pár bezpečných atributů. Pokud integrace potřebuje detail faktury, ať si ho načte přes autorizované API se správným scope. Webhook nemá být tajná expresní linka, která obchází autorizaci jen proto, že je pohodlná.
+
+Privacy-first pravidlo: do webhooku neposílej obsah zpráv, celé dokumenty, osobní poznámky, interní komentáře ani citlivé údaje, pokud to není nezbytné. Většinou stačí referenční ID a bezpečný následný dotaz. Ano, je to o jeden request víc. Ne, civilizace se kvůli tomu nezhroutí.
+
+### BR.2 Každou zprávu podepiš a ověřuj čas
+
+Webhook bez podpisu je jako balíček před dveřmi bez adresy odesílatele. Možná je v něm faktura. Možná konfety. Možná problém. Podepisování pomáhá příjemci ověřit, že zpráva opravdu přišla od tvého systému a že se cestou nezměnila.
+
+Praktický model:
+
+1. Každý webhook endpoint má vlastní tajemství.
+2. Server vypočítá HMAC podpis z časového razítka a surového těla požadavku.
+3. Podpis pošle v hlavičce, například `X-Dreamind-Signature`.
+4. Příjemce ověří podpis nad přesně stejným raw body.
+5. Příjemce odmítne zprávu mimo krátké časové okno, třeba pět minut.
+6. Staré tajemství lze po rotaci krátce akceptovat vedle nového.
+
+HTTP Message Signatures jsou standardizovaný způsob, jak podepisovat části HTTP zpráv; i když použiješ jednodušší HMAC schéma, princip je stejný: podepisuj konkrétní obsah a čas, ne jen hezký pocit, že URL je dost náhodná. Zdroj: https://www.rfc-editor.org/rfc/rfc9421.html
+
+Codyho komentář: Tajná webhook URL není autentizace. Je to jen heslo nalepené do adresního řádku. A adresní řádky mají překvapivě společenský život v logách, ticketech a screenshotích.
+
+### BR.3 Počítej s duplicitami a doručuj alespoň jednou
+
+Webhooky se v reálném světě nedoručují jako ručně psané pozvánky na zahradní slavnost. Síť spadne, příjemce vrátí `500`, DNS má špatný den, zákazník nasadí novou verzi a fronta začne pokašlávat. Proto navrhni doručení jako „alespoň jednou“, ne jako „přesně jednou“.
+
+To znamená:
+
+- každá událost má stabilní `event_id`,
+- příjemce může stejnou událost bezpečně zpracovat opakovaně,
+- změny stavu jsou idempotentní,
+- timeouty jsou krátké a rozumné,
+- retry používá exponenciální backoff,
+- po opakovaném selhání se endpoint dočasně pozastaví,
+- zákazník vidí historii doručení a může spustit ruční opakování.
+
+Idempotence není akademická ozdoba. Když pošleš `invoice.paid` dvakrát, zákazník nesmí vytvořit dvě objednávky, dvě faktury nebo dvě gratulační e-mailové fanfáry. Každý příjemce má ukládat zpracovaná `event_id` a rozhodovat podle nich.
+
+### BR.4 Stav doručení ukaž zákazníkovi, ale ne payload jako výkladní skříň
+
+Webhooky bez UI se špatně debugují. Zákazník potřebuje vidět, co se stalo: kdy byla událost vytvořena, kam se posílala, jaký status endpoint vrátil a kdy přijde další pokus. Nemusí ale vidět věčný archiv celého payloadu s osobními údaji.
+
+Dobrá stránka webhooku ukazuje:
+
+- název endpointu a cílovou doménu,
+- aktivní události,
+- poslední úspěšné a neúspěšné doručení,
+- HTTP status a krátkou bezpečnou chybovou zprávu,
+- počet pokusů a čas dalšího retry,
+- verzi schématu payloadu,
+- tlačítko pro testovací událost,
+- možnost rotace tajemství a vypnutí endpointu.
+
+Payload v logu drž krátce, maskuj citlivé hodnoty a nabídni spíš stažení poslední testovací ukázky než nekonečnou historii všeho. Provozní debug má pomáhat, ne vyrábět druhou databázi zákaznických dat ve formě logů.
+
+### BR.5 Verze schématu měň jako produktovou smlouvu
+
+Webhook payload je veřejné rozhraní. Když přejmenuješ pole bez varování, nerozbiješ jen „nějakou integraci“. Rozbiješ zákazníkovi automatizaci, kterou často nikdo nehlídá, dokud nezačne chybět účetní export, onboarding nebo notifikace.
+
+Bezpečný vývoj schématu:
+
+1. Přidej nová pole bez rušení starých.
+2. Do payloadu dej `schema_version`.
+3. Breaking změny oznam dopředu v changelogu a RSS.
+4. Starou verzi nech běžet dost dlouho na migraci.
+5. Ukaž zákazníkovi, které endpointy používají staré schéma.
+6. Po ukončení staré verze ulož jasnou chybu do historie doručení.
+
+Nepoužívej webhook jako interní objekt převlečený do JSONu. Interní model se mění podle produktu. Webhook model se mění podle slibu zákazníkům. To jsou dvě různé věci a jejich smíchání voní refaktorem přes víkend.
+
+### BR.6 Konkrétní příklad: `export.ready` pro účetní integraci
+
+Představ si SaaS, který připravuje export faktur pro účetní systém. Špatná varianta webhooku pošle celý soubor, kontaktní údaje, položky faktur a dočasný veřejný odkaz přímo v payloadu. Když se endpoint poplete, citlivá data odletí tam, kam neměla.
+
+Lepší varianta:
+
+1. Zákazník vytvoří endpoint „Účetní exporty“ a vybere jen událost `export.ready`.
+2. Systém vygeneruje samostatné tajemství pro podpis.
+3. Po dokončení exportu odešle payload s `event_id`, `tenant_id`, `export_id`, časem, typem exportu a expirací.
+4. Integrace ověří podpis a časové okno.
+5. Integrace zavolá API s klíčem se scope `exports:read`.
+6. API ověří tenant, scope a platnost exportu.
+7. Exportní soubor má krátkou expiraci a jeho stažení je v audit logu.
+8. Při selhání webhooku se událost opakuje podle backoffu, ale export se nevytváří znovu.
+
+Výsledek: zákazník dostane automatizaci, účetní systém dostane data až po autorizovaném dotazu a webhook sám nenese víc osobních údajů, než musí. To je přesně ten typ „nudné“ architektury, která v noci nevolá.
+
+### BR.7 Checklist webhooků
+
+- [ ] Každý endpoint má název, vlastníka, cílovou URL a vybrané typy událostí.
+- [ ] Payload obsahuje `event_id`, typ události, čas, verzi schématu a minimum dat.
+- [ ] Citlivé detaily se načítají přes autorizované API, ne posílají přímo webhookem.
+- [ ] Každý endpoint má vlastní podpisové tajemství a podporu rotace.
+- [ ] Příjemce může ověřit podpis, raw body a časové okno zprávy.
+- [ ] Doručení počítá s duplicitami a příjemce používá idempotentní zpracování.
+- [ ] Retry má backoff, limit pokusů a srozumitelný stav v UI.
+- [ ] Historie doručení neukládá citlivé payloady déle, než je nutné.
+- [ ] Breaking změny mají verzi, changelog, RSS oznámení a migrační okno.
+- [ ] Testovací webhook používá bezpečná ukázková data, ne kopii produkce.
+
+### BR.8 Mini úkol na 45 minut
+
+Vyber jeden webhook ve svém produktu nebo návrhu a napiš jeho kartu:
+
+1. Jaký problém řeší.
+2. Kdo je vlastník na straně zákazníka.
+3. Jaké události endpoint přijímá.
+4. Jak vypadá minimální payload.
+5. Které detaily se musí načíst přes API.
+6. Jak se ověřuje podpis.
+7. Jak dlouho platí časové okno zprávy.
+8. Co se stane při třetím, pátém a desátém selhání.
+9. Jak zákazník uvidí historii doručení.
+10. Jak endpoint bezpečně vypne nebo zrotuje tajemství.
+
+Pak smaž jedno pole z payloadu, které tam je jen „pro pohodlí“, a nahraď ho odkazem na autorizovaný API dotaz. Webhook má být zvonek u dveří, ne stěhovací dodávka plná osobních dat.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -10335,6 +10470,7 @@ Pak jednu věc rovnou zlepši: přejmenuj anonymní klíč, rozděl čtení a z�
 - Your Europe: EU VAT One Stop Shop — https://europa.eu/youreurope/business/finance-and-tax/vat/one-stop-shop/index_en.htm
 - Your Europe: Expanding across borders — https://europa.eu/youreurope/business/growing/expanding-across-borders/index_en.htm
 - OWASP API Security Top 10 2023 — https://owasp.org/API-Security/
+- RFC Editor: RFC 9421 HTTP Message Signatures — https://www.rfc-editor.org/rfc/rfc9421.html
 - OWASP API Security Top 10 2023 Introduction — https://owasp.org/API-Security/editions/2023/en/0x03-introduction/
 - OWASP API Security Top 10 2023 API2:2023 Broken Authentication — https://owasp.org/API-Security/editions/2023/en/0xa2-broken-authentication/
 - OWASP API10:2023 Unsafe Consumption of APIs — https://owasp.org/API-Security/editions/2023/en/0xaa-unsafe-consumption-of-apis/
@@ -10365,6 +10501,7 @@ Pak jednu věc rovnou zlepši: přejmenuj anonymní klíč, rozděl čtení a z�
 
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek BR o webhoocích, minimálních payloadech, podpisech, retry, idempotenci, verzování schématu a privacy-first doručování událostí.
 - 2026-09-10: Doplněn Dodatek BQ o API klíčích, scope, bezpečném ukládání, rotaci, tenant vazbě, audit logu a privacy-first provozu integrací.
 - 2026-09-10: Doplněn Dodatek BP o rate limitingu, abuse ochraně, frontách drahých akcí, bezpečných chybových odpovědích, dokumentaci limitů a privacy-first měření zneužití.
 - 2026-09-10: Doplněn Dodatek BO o tenant izolaci, autorizaci, cache, background jobech, support přístupu, testech a privacy-first multi-tenant provozu.
