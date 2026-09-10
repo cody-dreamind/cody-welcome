@@ -9234,6 +9234,130 @@ Vyber jeden pilot, trial nebo „skoro hotové“ nasazení a napiš přechodovo
 
 Pokud některá oblast nemá vlastníka, není připravená. Pokud nemá termín, není připravená. Pokud má vlastníka „tým“, není připravená a navíc sis právě vytvořil malou mlhu s kalendářem.
 
+## Dodatek BJ: Mobilní UX bez palcového utrpení
+
+Mobilní verze webu není zmenšený desktop. Je to často první kontakt zákazníka s produktem, rychlá kontrola před schůzkou, přihlášení z vlaku, potvrzení faktury mezi dvěma hovory nebo nouzové řešení problému, když notebook leží někde mimo dosah. Pokud mobilní UX bolí, zákazník si neřekne „to je asi složité kvůli responzivitě“. Řekne si „tohle je otravné“ a odejde. Velmi vědecké, velmi kruté.
+
+Google ve svých doporučeních pro mobile-first indexing popisuje, že pro indexaci a hodnocení používá mobilní verzi obsahu a doporučuje responzivní web jako nejjednodušší model na implementaci a údržbu. W3C WCAG 2.2 zároveň přidává kritérium pro minimální velikost cíle ovládaného ukazatelem: běžné ovládací prvky mají mít alespoň 24 × 24 CSS pixelů, případně splnit některou z výjimek. To nejsou módní tipy z UX Twitteru. To jsou praktické mantinely pro web, který se dá používat i mimo klidný kancelářský monitor.
+
+### BJ.1 Navrhuj pro jednu hlavní akci na obrazovce
+
+Na mobilu je pozornost drahá. Uživatel nemá před sebou široký dashboard, stabilní židli a náladu číst hero sekci jako literární kritiku. Potřebuje vědět, co má udělat dál.
+
+Pro každou důležitou mobilní obrazovku si napiš jednu větu:
+
+> Po otevření této obrazovky má uživatel udělat hlavně __________.
+
+Příklady:
+
+- Na landing page má pochopit nabídku a otevřít krátké demo.
+- V trialu má dokončit první import nebo vytvořit první projekt.
+- V checkoutu má bezpečně vybrat tarif a zaplatit bez zbytečných polí.
+- V administraci má najít stav účtu, faktury, export dat nebo nastavení členů.
+
+Když větu neumíš doplnit, obrazovka pravděpodobně míchá marketing, navigaci, podporu, produktový onboarding a interní ambice do jedné palcové polévky. V tu chvíli neřeš barvu tlačítka. Nejdřív vyhoď věci, které nepomáhají hlavní akci.
+
+### BJ.2 Navigace má být krátká, předvídatelná a bez schovávané podstaty
+
+Mobilní menu není sklad všech stránek, které se nevešly do hlavičky. Je to zkratka k rozhodnutím. Pro menší SaaS většinou stačí:
+
+- Produkt nebo řešení.
+- Ceník.
+- Případové studie nebo reference.
+- Dokumentace nebo nápověda.
+- Přihlášení.
+- Výrazné CTA pro demo, trial nebo kontakt.
+
+Pokud máš víc položek, seskup je podle zákaznického úmyslu, ne podle interní organizační struktury. Uživatel nehledá „oddělení growth“. Hledá, jestli produkt řeší jeho problém, kolik stojí a jestli mu může věřit.
+
+Privacy-first detail: do mobilního menu nepřidávej externí sociální widgety, share skripty ani trackingové prvky jen proto, že „to tak bývá“. Přímý odkaz na profil nebo RSS je lepší než malý JavaScriptový karneval třetích stran.
+
+### BJ.3 Tlačítka a odkazy musí přežít reálný palec
+
+Na desktopu se dá trefit skoro všechno. Na mobilu máš palec, pohybující se tramvaj, slunce na displeji a notifikaci od banky. Proto je potřeba navrhovat ovládací prvky jako reálné cíle, ne jako dekorativní tečky.
+
+Praktická pravidla:
+
+- Primární CTA dej samostatně a nech kolem něj prostor.
+- Ikony bez textu používej jen tam, kde je význam opravdu jasný.
+- Destruktivní akce odděl od běžných akcí a potvrzuj je lidsky.
+- Textové odkazy v odstavci nedávej těsně vedle sebe, pokud vedou k různým akcím.
+- Důležité formulářové prvky testuj na skutečném telefonu, ne jen v úzkém okně prohlížeče.
+
+WCAG 2.2 pracuje u minimální velikosti cíle s hranicí 24 × 24 CSS pixelů, ale Codyho praktický komentář zní: pokud jde o hlavní byznysovou akci, míř raději výš. Ne proto, že větší tlačítko magicky prodává. Protože menší frustrace méně kazí rozhodnutí.
+
+### BJ.4 Formuláře zkrať dřív, než začneš ladit validaci
+
+Mobilní formulář je detektor zbytečností. Co na desktopu vypadá jako „ještě jedno políčko“, je na mobilu další klávesnice, další přepnutí, další šance na chybu a další důvod odložit akci.
+
+Před každým polem se ptej:
+
+- Potřebujeme údaj hned teď, nebo až později?
+- Umíme ho odvodit z fakturace, účtu nebo následného onboardingu?
+- Je jasné, proč ho chceme?
+- Je pole správně pojmenované a má vhodný typ klávesnice?
+- Dá se chyba opravit bez mazání celé práce?
+
+Příklad: u poptávkového formuláře často stačí jméno, e-mail, typ projektu a krátký popis problému. Telefon, firma, IČO, rozpočet, termín, počet zaměstnanců a oblíbená barva administrátora patří až do další fáze, pokud pro ně existuje dobrý důvod. Ano, i „obchod by to chtěl“ musí projít přes „zákazník to chápe“.
+
+### BJ.5 Obrázky a média nesmí trestat mobilní síť
+
+Mobilní UX není jen layout. Je to i datová velikost, rychlost, stabilita a pocit, že web nepožírá baterku jako hladový kombajn. MDN popisuje použití `srcset` a `sizes`, aby prohlížeč mohl vybrat vhodný obrázek podle velikosti viewportu, hustoty pixelů a dalších podmínek. Prakticky: neposílej telefonu obří desktopový obrázek jen proto, že vypadá ostře na 5K monitoru.
+
+Minimum pro média:
+
+- Hero obrázek exportuj ve více velikostech.
+- U obrázků nastav `width`, `height` a smysluplný `alt`.
+- Dekorativní obrázky necpěj do obsahu jako důkaz inovace.
+- Video nepouštěj automaticky se zvukem a nenahrazuj jím důležitý text.
+- U kritického obsahu nespoléhej jen na carousel, swipe nebo hover.
+
+Privacy-first detail: video embed z velké platformy často znamená externí požadavky, cookies nebo fingerprintingové signály. Pokud video není nezbytné, dej raději vlastní náhled, přímý odkaz a jasné upozornění, kam uživatel odchází.
+
+### BJ.6 Mobilní SEO znamená stejný obsah, metadata a důvěra
+
+Mobile-first indexing bolí hlavně weby, které mají mobilní verzi chudší než desktop. Pokud na mobilu schováš text, FAQ, strukturovaná data nebo interní odkazy, nešetříš uživatele. Bereš mu kontext a sobě dohledatelnost.
+
+Kontroluj:
+
+- Mobilní stránka obsahuje stejnou hlavní nabídku jako desktop.
+- Nadpisy, meta title, description, kanonická URL a strukturovaná data dávají smysl i na mobilu.
+- Primární obsah není načítaný až po kliknutí, které crawler ani uživatel nemusí udělat.
+- Interní odkazy k ceníku, dokumentaci, bezpečnosti a kontaktu jsou dostupné bez hledání pokladu.
+- Cookie nebo consent vrstva nezakrývá hlavní obsah tak, že nejde normálně číst.
+
+Mobilní SEO není trik. Je to disciplína „ukaž totéž, jen použitelněji“. Pokud desktop slibuje bezpečný evropský provoz a mobilní web ukazuje jen slogan a tlačítko, důvěra odtéká rychleji než baterka při špatně optimalizovaném videu.
+
+### BJ.7 Konkrétní příklad: SaaS landing page na telefonu
+
+Představ si SaaS pro správu klientských požadavků v malé agentuře. Mobilní landing page by neměla začínat třemi abstraktními claimy a animací, která se načítá déle než první schůzka. Lepší struktura:
+
+1. **Hero:** jedna věta problému, jedna věta výsledku, jedno CTA „Ukázat demo“.
+2. **Důkaz:** krátký příklad situace: „Klient pošle požadavek, tým ho zařadí, zákazník vidí stav.“
+3. **Proces:** tři kroky od požadavku po vyřešení.
+4. **Důvěra:** evropský provoz, export dat, minimální tracking, bezpečnostní stránka.
+5. **Cena nebo další krok:** jasný tarif, demo nebo pilot s kritérii úspěchu.
+6. **FAQ:** data, migrace, role, ukončení, podpora.
+
+Na mobilu u každého bloku zkontroluj, jestli by obstál samostatně na screenshotu. Pokud by zákazník z náhodného výřezu stránky nepoznal, co produkt dělá nebo proč má pokračovat, blok je moc vágní.
+
+### BJ.8 Checklist mobilního UX
+
+- [ ] Každá klíčová obrazovka má jednu hlavní akci.
+- [ ] Navigace vede k produktu, ceně, důvěře, nápovědě a kontaktu bez lovení.
+- [ ] Primární tlačítka a důležité odkazy jsou pohodlně trefitelné.
+- [ ] Formuláře sbírají jen údaje nutné pro aktuální krok.
+- [ ] Chybové stavy vysvětlují opravu a nemažou hotovou práci.
+- [ ] Obrázky mají responzivní varianty, rozměry a alternativní text.
+- [ ] Mobilní stránka má stejný hlavní obsah, metadata a strukturovaná data jako desktop.
+- [ ] Externí embedy, sociální prvky a analytika jsou omezené na skutečně potřebné minimum.
+- [ ] Cookie nebo consent vrstva neblokuje použití webu víc, než je nutné.
+- [ ] Web je ručně otestovaný na skutečném telefonu, ne jen v DevTools.
+
+### BJ.9 Mini úkol na 45 minut
+
+Vezmi jednu nejdůležitější stránku svého webu a projdi ji na telefonu od začátku do konce. Neopravuj zatím všechno. Jen napiš tři seznamy: co brání pochopení nabídky, co brání dokončení hlavní akce a co zbytečně sbírá nebo posílá data třetím stranám. Pak vyber jednu úpravu, kterou zvládneš dnes: zkrácení formuláře, zvětšení CTA, odstranění externího embeddu, doplnění FAQ nebo zmenšení hero obrázku. Mobilní UX se nezlepší filozofickou debatou. Zlepší se tím, že přestaneš nutit palec dělat práci myši.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -9265,6 +9389,9 @@ Pokud některá oblast nemá vlastníka, není připravená. Pokud nemá termín
 - European Commission: AI Act — https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
 - European Commission: Data Act — https://digital-strategy.ec.europa.eu/en/policies/data-act
 - European Commission: European Accessibility Act — https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en
+- W3C WAI: Understanding SC 2.5.8 Target Size Minimum — https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum
+- MDN Web Docs: Using responsive images in HTML — https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Responsive_images
+- Google Search Central: Mobile-first indexing best practices — https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing
 - European Commission: The EU becomes more accessible for all — https://commission.europa.eu/news-and-media/news/eu-becomes-more-accessible-all-2025-07-31_en
 - W3C WAI: Web Content Accessibility Guidelines WCAG 2.2 — https://www.w3.org/TR/WCAG22/
 - W3C WAI: What's New in WCAG 2.2 — https://www.w3.org/WAI/standards-guidelines/wcag/new-in-22/
@@ -9304,17 +9431,16 @@ Pokud některá oblast nemá vlastníka, není připravená. Pokud nemá termín
 - MDN Web Docs: HTTP caching — https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching
 - MDN Web Docs: Cache-Control — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
 - MDN Web Docs: Subresource Integrity — https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity
-- OWASP Cheat Sheet Series: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - ENISA: NIS2 Technical Implementation Guidance — https://www.enisa.europa.eu/publications/nis2-technical-implementation-guidance
 - EDPB: FAQ for small business — https://www.edpb.europa.eu/sme/find-practical-info/faq_en?page=1
 - W3C: Web Content Accessibility Guidelines WCAG 2.2 — https://www.w3.org/TR/WCAG22/
 - W3C WAI: Understanding SC 1.3.5 Identify Input Purpose — https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose
 - W3C WAI: Understanding Guideline 3.3 Input Assistance — https://www.w3.org/WAI/WCAG22/Understanding/input-assistance
 - W3C WAI: Understanding SC 3.3.3 Error Suggestion — https://www.w3.org/WAI/WCAG22/Understanding/error-suggestion.html
-- European Commission: European Accessibility Act — https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en
 
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek BJ o mobilním UX, responzivním obsahu, palcem ovladatelných CTA, kratších formulářích, médiích a privacy-first mobilním SEO.
 - 2026-09-10: Doplněn Dodatek BI o přechodu z pilotu do ostrého provozu, produkční připravenosti, migraci pilotních dat, smluvních hranicích a prvním produkčním týdnu.
 - 2026-09-10: Doplněn Dodatek BH o trialech a pilotních nasazeních, rozhodovací otázce, kritériích úspěchu, onboardingu, hranicích zakázkových požadavků a privacy-first úklidu dat.
 - 2026-09-10: Doplněn Dodatek BG o produktových demech, demo datech, registraci až po hodnotě, střídmém měření, trialu, pilotu a privacy-first retenci.
