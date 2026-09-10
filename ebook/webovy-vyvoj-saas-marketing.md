@@ -9984,6 +9984,148 @@ Vyber jednu kritickou entitu ve svém SaaS: fakturu, soubor, projekt, objednávk
 
 Ke každému kroku napiš, odkud se bere tenant kontext a kde se autorizace vynucuje. Pokud u některého kroku odpovíš „nějak implicitně“, našel jsi práci na další sprint. Gratuluju, backlog právě zplodil bezpečnostní úkol. To umí i bez AI.
 
+## Dodatek BP: Rate limiting bez trestání poctivých zákazníků
+
+Rate limiting je jedna z těch bezpečnostních věcí, která vypadá jednoduše, dokud ji někdo nezapne plošně a půlka legitimních zákazníků začne dostávat `429 Too Many Requests`. Ochrana proti zneužití nemá být digitální obušek. Má být dopravní značení, brzda a airbag zároveň.
+
+OWASP API Security Top 10 2023 řadí neomezenou spotřebu zdrojů mezi významná API rizika. Prakticky to znamená: API nesmí dovolit, aby jeden uživatel, bot, integrace nebo chyba v klientovi sežrala CPU, paměť, databázové dotazy, frontu e-mailů nebo peníze za externí API. Privacy-first pointa je jednoduchá: nepotřebuješ sledovat člověka napříč internetem, abys chránil vlastní službu. Stačí měřit férově, lokálně a účelově.
+
+### BP.1 Neomezuj jen requesty, omezuj zdroje
+
+Limit „100 requestů za minutu“ je začátek, ne strategie. Jeden request může být levný ping, nebo export všech faktur za tři roky. Pokud omezuješ jen počet požadavků, chráníš hezky vypadající graf, ale ne systém.
+
+Rozděl limity podle nákladů:
+
+- lehké čtení: detail záznamu, seznam s malým stránkováním, kontrola stavu,
+- drahé čtení: fulltext, agregace, export, report přes velký časový rozsah,
+- zápisy: vytvoření objednávky, pozvánka uživatele, změna oprávnění,
+- externí efekty: e-mail, SMS, webhook, platba, volání AI nebo cizího API,
+- administrační akce: hromadný import, mazání, regenerace tokenů.
+
+Každá skupina má mít vlastní rozpočet. U exportu neřešíš jen počet requestů, ale velikost výstupu, rozsah dat a frekvenci opakování. U e-mailů neřešíš jen endpoint, ale počet skutečně odeslaných zpráv. U AI neřešíš jen HTTP, ale tokeny a cenu. Ano, peníze jsou také observabilita. Jen mají tendenci posílat fakturu místo alertu.
+
+### BP.2 Limit musí mít správný klíč
+
+Špatný klíč limitu vytvoří buď díru, nebo zbytečnou bolest. IP adresa je užitečný signál, ale sama o sobě nestačí: firemní síť může sdílet jednu IP pro stovky lidí a mobilní sítě se chovají ještě veseleji. Naopak útočník IP adresy střídá snadněji než identitu v produktu.
+
+Praktická kombinace:
+
+- veřejný endpoint bez účtu: IP + fingerprint požadavku bez invazivního trackingu + krátké okno,
+- login: IP + e-mail nebo uživatelské jméno po normalizaci + globální brzda pro celý endpoint,
+- přihlášený uživatel: user ID + tenant ID + typ akce,
+- API token: token ID + tenant ID + scope,
+- webhook příjem: zdroj integrace + tenant + podpisový klíč,
+- drahé úlohy: tenant + typ jobu + souběžnost ve frontě.
+
+Nikdy nepoužívej jen hodnotu z klienta. Pokud request obsahuje `tenant_id`, limituj podle tenant kontextu, který jsi ověřil na serveru. Jinak máš rate limiting, který útočník přepíná jako televizní kanál. A některé kanály fakt nechceš sledovat.
+
+### BP.3 Připrav měkké a tvrdé brzdy
+
+Ne každý limit musí okamžitě vracet chybu. Lepší systém umí zpomalit, zařadit do fronty, vyžádat potvrzení nebo nabídnout menší rozsah. Tvrdá chyba má přijít až ve chvíli, kdy je požadavek opravdu rizikový nebo technicky neudržitelný.
+
+Používej vrstvy:
+
+- soft limit: zobraz upozornění, že akce je neobvykle častá,
+- fronta: drahé exporty a importy zpracuj postupně,
+- cooldown: opakované e-maily, SMS a pozvánky omez časovým odstupem,
+- quota: měsíční nebo denní rozpočet pro API, AI a exporty,
+- hard stop: blokuj útoky, bruteforce, smyčky a podezřelé hromadné akce,
+- manuální review: u extrémních akcí nabídni kontakt na podporu místo tiché blokace.
+
+Pro zákazníka je rozdíl mezi „nefunguje to“ a „export jsme zařadili do fronty, bude hotový přibližně za 3 minuty“. První zpráva vyrábí ticket. Druhá vyrábí důvěru. A méně ticketů znamená více času na kávu, což je neformální, ale velmi přesná metrika provozní kvality.
+
+### BP.4 Chybová odpověď má učit, ne prozrazovat
+
+Odpověď `429` má být srozumitelná pro člověka i pro integraci. Zároveň nesmí útočníkovi kreslit mapu ochrany. Neříkej: „Zbývá ti přesně 12 pokusů na kombinaci této IP, účtu a tokenu.“ Říkej dost na to, aby legitimní klient věděl, co má udělat.
+
+Dobrá odpověď pro API obsahuje:
+
+- stabilní status `429`,
+- obecný kód chyby, třeba `rate_limit_exceeded`,
+- bezpečný `Retry-After`, pokud dává smysl,
+- odkaz na dokumentaci limitů,
+- request ID pro podporu,
+- žádné citlivé detaily o interním scoringu.
+
+Dobrá odpověď v UI říká: „Tuhle akci teď nejde opakovat tak rychle. Zkuste to za chvíli, nebo zmenšete rozsah exportu.“ U přihlašování buď ještě opatrnější: chyba nesmí potvrzovat, jestli e-mail existuje. Bezpečnostní UX má chránit systém i člověka, ne hrát únikovou místnost pro útočníky.
+
+### BP.5 Abuse ochrana nesmí být skrytý tracking systém
+
+Je lákavé řešit zneužití velkým externím anti-fraud nástrojem, který sbírá otisky zařízení, chování myši, historii prohlížeče a možná i náladu křečka v kanceláři. Privacy-first SaaS má začít menším a transparentnějším řešením.
+
+Preferuj signály, které vznikají přímo v produktu:
+
+- počet pokusů o přihlášení,
+- počet drahých akcí za tenant,
+- počet neúspěšných validací,
+- objem exportovaných dat,
+- počet odeslaných pozvánek nebo e-mailů,
+- poměr úspěšných a chybových API odpovědí,
+- souběžnost jobů a délka front.
+
+Retenci drž krátkou. Detailní bezpečnostní signály často stačí uchovat dny nebo týdny podle rizika a provozní potřeby; agregace mohou žít déle. Do logů nedávej hesla, tokeny, celé payloady, osobní poznámky zákazníka ani obsah dokumentů. Když potřebuješ vyšší ochranu pro veřejné formuláře, začni honeypot polem, časovým limitem, serverovou validací a postupným zpřísněním. CAPTCHA je někdy nutná, ale není to první kapitola románu. Spíš nouzové intermezzo.
+
+### BP.6 Dokumentuj limity jako součást produktu
+
+Limit, o kterém ví jen backend, je budoucí support ticket. Zákazník nemusí znát interní algoritmus, ale má rozumět tomu, co je férové použití a co už je dávkový provoz. U B2B SaaS je to zvlášť důležité pro integrace: špatně napsaný skript u zákazníka může vypadat jako útok, i když je to jen páteční deploy bez dozoru. Klasika.
+
+Do dokumentace dej:
+
+- základní API limity podle tarifu nebo typu tokenu,
+- doporučené používání stránkování, filtrů a incremental syncu,
+- chování při `429`, včetně retry strategie,
+- limity pro exporty, importy a webhooky,
+- kontakt pro navýšení limitu,
+- pravidlo, že vyšší limit neznamená vyšší přístup k datům.
+
+U enterprise zákazníků může být vyšší limit obchodní funkce, ale ne bezpečnostní výjimka. Navýšení patří do audit logu a mělo by mít důvod, vlastníka a datum revize. „Navždy, protože to chtěl velký klient“ je spíš kouzelná formule pro budoucí incident.
+
+### BP.7 Konkrétní příklad: ochrana exportu faktur
+
+Představ si SaaS, kde si firma může vyexportovat faktury za vybrané období. Endpoint je legitimní, ale drahý: čte hodně dat, generuje soubor, ukládá dočasný odkaz a posílá notifikaci. Bez limitů může jeden člověk omylem naklikat deset exportů za rok zpátky. Nebo integrace spustí export každých pět minut, protože někdo zaměnil cron výraz. Ano, `*/5 * * * *` je malý řádek s velkou osobností.
+
+Lepší návrh:
+
+1. Uživatel vybere období a systém ukáže odhad velikosti.
+2. Server ověří oprávnění k fakturám pro daný tenant.
+3. Export se zařadí do fronty s klíčem `tenant + export_type`.
+4. Tenant může mít například jen jeden aktivní export faktur najednou.
+5. Opakovaný export stejného období se nabídne jako stažení existujícího souboru, pokud je ještě platný.
+6. Dočasný soubor má krátkou expiraci a je dostupný jen po nové autorizaci.
+7. Audit log uloží, kdo export spustil, jaký rozsah zvolil a kdy soubor expiroval.
+8. Metrika sleduje počet exportů, velikost a chyby, ne obsah faktur.
+
+Výsledek: zákazník dostane data, systém nespadne, účetní nemá infarkt a privacy-first zásada zůstane celá. To je hezký den v kanceláři.
+
+### BP.8 Checklist rate limitingu a abuse ochrany
+
+- [ ] Máme oddělené limity pro levné čtení, drahé čtení, zápisy, externí efekty a administrační akce.
+- [ ] Limity používají serverem ověřenou identitu, tenant, token nebo integraci; ne jen hodnoty poslané klientem.
+- [ ] Přihlašování a reset hesla mají ochranu proti bruteforce bez prozrazování existence účtu.
+- [ ] Drahé exporty, importy a reporty běží ve frontě se souběžnostními limity.
+- [ ] API vrací srozumitelné `429` s bezpečným `Retry-After`, request ID a odkazem na dokumentaci.
+- [ ] UI vysvětluje omezení lidsky a nabízí další krok.
+- [ ] Abuse signály mají jasný účel, krátkou retenci a neobsahují citlivé payloady.
+- [ ] Navýšení limitů je auditované, odůvodněné a pravidelně revidované.
+- [ ] Dokumentace popisuje retry strategii, stránkování, exporty a férové použití.
+- [ ] Testy ověřují běžné chování, překročení limitu, paralelní requesty a tenant izolaci limitů.
+
+### BP.9 Mini úkol na 60 minut
+
+Vyber jeden endpoint nebo akci, která může být drahá: export, import, webhook, hromadné pozvánky, AI shrnutí, fulltext nebo report. Napiš si krátkou kartu:
+
+1. Co přesně stojí zdroje nebo peníze.
+2. Kdo smí akci spustit.
+3. Podle čeho se má limitovat.
+4. Jaký je měkký limit.
+5. Jaký je tvrdý stop.
+6. Co uvidí uživatel.
+7. Co dostane API klient.
+8. Jak dlouho se uchovají bezpečnostní signály.
+9. Jak podporák pozná legitimní navýšení limitu.
+
+Pak přidej jeden test překročení limitu a jednu dokumentační větu. Neřeš celý abuse systém najednou. Začni jednou akcí, která dnes může ublížit provozu. Malé brzdy instalované včas jsou lepší než velký incidentový padák šitý za letu.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -10002,6 +10144,7 @@ Ke každému kroku napiš, odkud se bere tenant kontext a kde se autorizace vynu
 - Google Search Central: Creating helpful, reliable, people-first content — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 - RSS Advisory Board: RSS 2.0 Specification — https://www.rssboard.org/rss-specification
 - OWASP Top 10:2021 — https://owasp.org/Top10/
+- OWASP API Security Top 10 2023 — https://owasp.org/API-Security/editions/2023/en/0x11-t10/
 - OWASP Application Security Verification Standard — https://owasp.org/www-project-application-security-verification-standard/
 - OWASP Cheat Sheet Series: Multi-Tenant Application Security Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Multi_Tenant_Security_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Authorization Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
@@ -10074,6 +10217,7 @@ Ke každému kroku napiš, odkud se bere tenant kontext a kde se autorizace vynu
 
 ## Pracovní log
 
+- 2026-09-10: Doplněn Dodatek BP o rate limitingu, abuse ochraně, frontách drahých akcí, bezpečných chybových odpovědích, dokumentaci limitů a privacy-first měření zneužití.
 - 2026-09-10: Doplněn Dodatek BO o tenant izolaci, autorizaci, cache, background jobech, support přístupu, testech a privacy-first multi-tenant provozu.
 - 2026-09-10: Doplněn Dodatek BN o SLA, provozních slibech, status page, plánované údržbě, prioritách podpory a privacy-first komunikaci incidentů.
 - 2026-09-10: Doplněn Dodatek BM o zákaznickém zdraví, jednoduchém health score, prevenci churnu, férové retenci a privacy-first customer success signálech.
