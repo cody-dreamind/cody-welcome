@@ -12493,7 +12493,162 @@ Vyber jeden starý nástroj, tabulku, databázi nebo interní systém, který u�
 
 Když plán nevejde na jednu stránku, nevadí. Když nejde určit vlastník, vadí hodně. Starý systém bez vlastníka je firemní půda bez světla: možná je prázdná, možná tam bydlí netopýr s produkčním heslem.
 
+## Dodatek CF: Hypercare po spuštění bez permanentního krizového štábu
+
+Go-live není konec projektu. Je to chvíle, kdy produkt poprvé potká realitu v plné síle: skutečné účty, skutečné integrace, skutečné faktury, skutečné pondělní ráno a skutečné lidi, kteří nemají náladu číst dlouhý changelog. První dny po spuštění rozhodují o důvěře víc než elegantní prezentace před releasem.
+
+Hypercare je krátké období zvýšené pozornosti po nasazení. Není to výmluva pro chaos ani nekonečný režim „všichni jsou pořád online“. Je to řízený provozní režim s jasným koncem, vlastníky, prioritami a komunikačním rytmem.
+
+> Codyho komentář: Pokud hypercare nemá konec, není to hypercare. Je to nový normál v reflexní vestě a s hrnkem studené kávy.
+
+### CF.1 Definuj, co hypercare chrání
+
+Nejdřív si napiš, co přesně chceš po spuštění hlídat. „Aby všechno fungovalo“ je hezké přání, ale špatný provozní plán. Hypercare má chránit konkrétní uživatelské cesty, datové toky a obchodní dopady.
+
+Typické oblasti:
+
+- přihlášení a správa účtu,
+- vytvoření objednávky, projektu nebo hlavního zákaznického objektu,
+- platba, fakturace a e-mailové potvrzení,
+- importy, exporty a integrace,
+- migrace historických dat,
+- výkon klíčových obrazovek,
+- supportní fronta a opakující se dotazy,
+- bezpečnostní signály a neobvyklé přístupy.
+
+Ke každé oblasti napiš jednoduchou větu: „Když selže X, dopad je Y.“ Tím oddělíš důležité signály od šumu. Jeden překlep v administraci není stejný problém jako rozbitá fakturace. Oba se mají opravit, ale ne oba mají probudit celý tým.
+
+### CF.2 Nastav krátké období a jasná kritéria ukončení
+
+Hypercare by měl být časově omezený. Pro menší web nebo SaaS často stačí několik pracovních dnů až dva týdny podle rizika změny. Důležitější než přesná délka je podmínka ukončení.
+
+Příklad ukončovacích kritérií:
+
+- žádný otevřený incident s vysokou prioritou,
+- žádný opakující se blokující problém v hlavní uživatelské cestě,
+- reconciliační kontrola dat nemá nevysvětlené rozdíly,
+- support má připravené odpovědi na nejčastější dotazy,
+- monitoring a alerty zachytávají známé rizikové stavy,
+- produktový vlastník potvrdil, že zbytek jde do běžného backlogu.
+
+Když kritéria nesplníš, hypercare neprodlužuj automaticky o další neurčitý týden. Napiš, co přesně brání ukončení, kdo to řeší a kdy proběhne další rozhodnutí. Jinak se z mimořádného režimu stane provozní bažina.
+
+### CF.3 Rozliš incident, support dotaz a běžný backlog
+
+Po spuštění bude přicházet všechno najednou: bugy, nápady, zmatené otázky, změnové požadavky i skutečné incidenty. Pokud je hodíš do jedné hromady, tým začne hasit podle hlasitosti, ne podle dopadu.
+
+Použij jednoduché třídění:
+
+| Typ signálu | Příklad | Reakce |
+| --- | --- | --- |
+| Incident | zákazníci se nepřihlásí, platby padají, unikají data | okamžitý vlastník, status, oprava nebo rollback |
+| Blokující bug | uživatel nedokončí klíčový proces, ale existuje bezpečná obezlička | oprava v hypercare okně |
+| Support dotaz | uživatel neví, kde najde novou funkci | odpověď, úprava nápovědy, případně mikrokopie |
+| Produktový požadavek | „šlo by přidat ještě tento filtr?“ | backlog, prioritizace mimo krizový režim |
+| Datová nejasnost | chybí položka, nesedí počet, zákazník vidí starý stav | ověření v reconciliačním postupu |
+
+Privacy-first pravidlo: při triáži nevyžaduj screenshoty plné osobních údajů. Dej lidem bezpečný způsob, jak poslat identifikátor záznamu, čas chyby, roli uživatele a popis kroku. Méně dat, lepší diagnostika. Ano, jde to. Magie? Ne, disciplína.
+
+### CF.4 Udělej denní hypercare rytmus
+
+Krátký rytmus je lepší než neustálé vyrušování. Pro malý tým často funguje jeden ranní a jeden odpolední blok.
+
+Ranní kontrola:
+
+1. Co se stalo od poslední kontroly?
+2. Jsou otevřené incidenty nebo blokující bugy?
+3. Které signály se opakují?
+4. Co musí být opraveno dnes?
+5. Co patří do backlogu a nemá rušit provoz?
+
+Odpolední kontrola:
+
+1. Co jsme opravili?
+2. Co čeká na rozhodnutí?
+3. Je potřeba zákaznická nebo interní komunikace?
+4. Mění se riziko pro další den?
+5. Je pořád reálné ukončit hypercare v plánovaném termínu?
+
+Mezi bloky nech tým pracovat. Permanentní chatový poplach umí zabít soustředění rychleji než špatně napsaný SQL dotaz bez indexu.
+
+### CF.5 Připrav zákaznickou komunikaci předem
+
+Nejhorší komunikace po spuštění vzniká ve chvíli, kdy už hoří. Připrav si krátké šablony dřív: pro potvrzení známého problému, pro workaround, pro opravený stav a pro požadavek na doplňující informace.
+
+Dobrá zpráva zákazníkovi obsahuje:
+
+- co se děje,
+- koho se to týká,
+- jaký je dopad,
+- co má zákazník udělat teď,
+- kdy pošleš další update,
+- jaký identifikátor má uvést při kontaktu se supportem,
+- jak chráníš jeho data během řešení.
+
+Nevysvětluj interní technické detaily, pokud zákazníkovi nepomohou. „Redis cache neinvalidovala tenantový scope“ může být pravda, ale pro většinu lidí je to zaklínadlo. Lepší je: „Některým uživatelům se po změně oprávnění krátce zobrazoval starý stav. Opravili jsme obnovování dat a kontrolujeme dotčené účty.“
+
+### CF.6 Sleduj minimum metrik, které opravdu rozhodují
+
+V hypercare není cílem vytvořit analytickou katedrálu. Cílem je rychle poznat, jestli nový provoz drží. Stačí malý panel signálů.
+
+Praktické minimum:
+
+- počet úspěšných a neúspěšných přihlášení,
+- chybovost hlavních API endpointů,
+- doba odezvy klíčových obrazovek,
+- počet nedokončených plateb nebo objednávek,
+- fronta support tiketů podle priority,
+- počet datových reklamací po migraci,
+- počet ručních zásahů supportu,
+- stav integračních jobů a webhooků.
+
+Data agreguj. Nehledej produktovou pravdu v session replayi každého zákazníka. Privacy-first hypercare znamená, že sleduješ zdraví systému, ne životopis uživatele.
+
+### CF.7 Konkrétní příklad: nový zákaznický portál po migraci
+
+Firma spustila nový zákaznický portál. Hlavní rizika byla přihlášení, faktury, historie požadavků a export příloh. Tým nastavil sedmidenní hypercare.
+
+Plán vypadal takto:
+
+1. Každé ráno kontrola přihlášení, chyb API, support tiketů a rozdílů v počtech faktur.
+2. Každé odpoledne rozhodnutí, které opravy jdou do rychlého releasu a co jde do backlogu.
+3. Support měl připravenou odpověď pro chybějící přílohu: zákazník posílal ID projektu, ne celý dokument e-mailem.
+4. Produktový vlastník měl právo odmítnout nové nápady z hypercare režimu a přesunout je do roadmapy.
+5. Po sedmi dnech tým uzavřel hypercare, sepsal pět ponaučení a nechal otevřený běžný provozní monitoring.
+
+Výsledek nebyl nulový počet problémů. To je pohádka pro prodejní slidy. Výsledek byl, že tým věděl, co je důležité, zákazníci dostávali jasné odpovědi a nikdo kvůli každému drobnému požadavku nepřepisoval roadmapu uprostřed noci.
+
+### CF.8 Checklist hypercare po spuštění
+
+- [ ] Je jasné, které uživatelské cesty a datové toky hypercare chrání.
+- [ ] Existuje časové okno hypercare a kritéria ukončení.
+- [ ] Tým rozlišuje incidenty, blokující bugy, support dotazy a backlog.
+- [ ] Každý kritický signál má vlastníka a reakční postup.
+- [ ] Support ví, jak sbírat diagnostiku bez zbytečných osobních údajů.
+- [ ] Existují krátké šablony zákaznické komunikace.
+- [ ] Denní rytmus má pevné kontroly a nevyžaduje permanentní chatovou paniku.
+- [ ] Monitoring pokrývá přihlášení, platby, API, integrace a support frontu.
+- [ ] Datové reklamace po migraci mají samostatný postup.
+- [ ] Po ukončení hypercare vznikne krátké shrnutí ponaučení.
+
+### CF.9 Mini úkol na 60 minut
+
+Vyber jeden nedávný nebo plánovaný release a napiš pro něj jednostránkový hypercare plán:
+
+1. jak dlouho bude trvat,
+2. které tři až pět oblastí chrání,
+3. jak poznáš incident,
+4. kdo rozhoduje o rychlé opravě,
+5. co se měří každý den,
+6. jak support sbírá bezpečnou diagnostiku,
+7. jaké zákaznické zprávy musí být připravené,
+8. kdy hypercare skončí,
+9. co se po skončení zapíše jako ponaučení.
+
+Když plán potřebuje víc než stránku, pravděpodobně neplánuješ hypercare, ale opisuješ celou firmu do tabulky. Zkrať ho. Po spuštění potřebuješ jasnost, ne román s přílohami.
+
 ## Pracovní log
+- 2026-09-11: Doplněn Dodatek CF o hypercare po spuštění, třídění incidentů, denním provozním rytmu, zákaznické komunikaci, minimálních metrikách a privacy-first diagnostice bez zbytečného sběru dat.
 - 2026-09-11: Doplněn Dodatek CE o vypínání starých systémů po migraci, režimu pouze pro čtení, inventuře dat, retenčním plánu, rušení přístupů a privacy-first komunikaci archivu.
 - 2026-09-11: Doplněn Dodatek CD o datové kvalitě po spuštění, reconciliačních reportech, auditovaných opravách a privacy-first validaci napříč importy, API a administrací.
 
