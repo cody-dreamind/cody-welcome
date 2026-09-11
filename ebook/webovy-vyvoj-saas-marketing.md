@@ -11221,6 +11221,9 @@ Výstupem nemá být krásný diagram. Stačí tabulka, kterou pochopí vývojá
 - OWASP Cheat Sheet Series: Multi-Tenant Application Security Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Multi_Tenant_Security_Cheat_Sheet.html
 - Stripe Docs: API upgrades — https://docs.stripe.com/upgrades
 - Semantic Versioning 2.0.0 — https://semver.org/
+- OpenAPI Specification — https://spec.openapis.org/oas/latest.html
+- SPDX License List — https://spdx.org/licenses/
+- CycloneDX Specification Overview — https://cyclonedx.org/specification/overview/
 - OWASP Cheat Sheet Series: Authorization Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Secrets Management Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
@@ -11763,8 +11766,156 @@ Vyber jeden nákladný endpoint a navrhni k němu limit:
 > Codyho komentář: Dobrý rate limit není „brzda“. Je to semafor. Když svítí červená, má být jasné proč, jak dlouho a kudy jet příště. Bez toho je to jen digitální závora s náladou.
 
 
+## Dodatek CA: Release balíček pro integrátory bez detektivní práce
+
+Když vydáš novou verzi API, SDK nebo integračního konektoru, zákazník nepotřebuje jen vědět, že „něco vyšlo“. Potřebuje bezpečně rozhodnout, jestli má aktualizovat hned, naplánovat migraci, upravit testy, nebo se změny vůbec netýkají jeho provozu. Release balíček je sada informací, která z novinky udělá použitelnou instrukci.
+
+Pro malý SaaS tým to nezní sexy. Jasně, protože „release notes“ nemají tak hezké demo jako nový dashboard. Jenže integrátoři, partneři a enterprise zákazníci podle nich plánují práci. Když jim dáš mlhu, vrátí se ti ve formě ticketů, opatrnosti a slušně maskované nedůvěry.
+
+### CA.1 Release balíček není changelog od stolu vývojáře
+
+Changelog říká, co se změnilo. Release balíček říká, co má zákazník udělat. To je rozdíl mezi „přidali jsme podporu `invoice.tax_mode`“ a „pokud používáte režim přenesené daňové povinnosti, od verze 2026-09 můžete posílat `invoice.tax_mode = reverse_charge`; staré pole funguje dál do 2027-03“.
+
+Minimální release balíček pro API změnu obsahuje:
+
+- název a datum vydání,
+- typ změny: oprava, kompatibilní rozšíření, bezpečnostní oprava, deprekace, breaking change,
+- dopad na zákazníka,
+- konkrétní migrační kroky,
+- ukázku před a po,
+- odkazy na dokumentaci, OpenAPI schéma a testovací prostředí,
+- kontakt nebo postup pro podporu.
+
+Pokud používáš verzování knihoven, drž se srozumitelných pravidel. Semantic Versioning 2.0.0 definuje význam verzí `MAJOR.MINOR.PATCH`: major pro nekompatibilní změny, minor pro zpětně kompatibilní funkcionalitu a patch pro zpětně kompatibilní opravy. Zdroj: https://semver.org/
+
+U API ale nebuď otrok čísel. Pokud máš jednu stabilní verzi API a změny komunikuješ deprekacemi, pořád můžeš používat semver pro SDK, CLI nebo integrační balíčky. Hlavní je, aby zákazník věděl, co je bezpečné aktualizovat automaticky a co vyžaduje člověka.
+
+### CA.2 Každá změna potřebuje mapu dopadu
+
+Release poznámka typu „improved validation“ je krásná ukázka věty, která vypadá užitečně a přitom neříká skoro nic. Validace čeho? Pro koho? Co se nově odmítne? Jaký error přijde? Dá se změna otestovat v sandboxu?
+
+U každé větší změny napiš mapu dopadu:
+
+| Otázka | Dobrá odpověď |
+| --- | --- |
+| Koho se změna týká? | „Pouze účty používající endpoint `POST /invoices/import`." |
+| Co se změní technicky? | „Pole `due_date` nově nesmí být před `issue_date`." |
+| Co se stane starým klientům? | „Do 2026-12 vracíme warning, od 2027-01 validační chybu `invoice.invalid_due_date`." |
+| Jak to otestovat? | „Sandbox obsahuje testovací scénář `late_due_date_warning`." |
+| Co má zákazník udělat? | „Přidejte kontrolu datumu před odesláním importu." |
+
+Tahle tabulka je nudná jen do chvíle, než máš prvního zákazníka s účetní závěrkou, který se ptá, proč mu integrace přestala importovat faktury. Pak je to najednou literární žánr roku.
+
+### CA.3 OpenAPI schéma je součást release, ne příloha někde v koutě
+
+Pokud změna mění API kontrakt, release balíček má obsahovat odkaz na aktuální OpenAPI schéma a ideálně i diff oproti předchozí verzi. OpenAPI Specification popisuje strojově čitelný kontrakt API, takže z něj můžeš generovat dokumentaci, validovat requesty, vytvářet klienty a spouštět kontraktové testy. Zdroj: https://spec.openapis.org/oas/latest.html
+
+Praktický postup:
+
+1. Při každém release vygeneruj OpenAPI schéma ze stejného zdroje jako aplikace.
+2. Ulož verzi schématu k release tagu.
+3. V CI zkontroluj, jestli změny odpovídají typu release.
+4. Pro breaking změny připrav samostatný migrační návod.
+5. V dokumentaci nech viditelně dostupné starší schéma, dokud podporuješ starší klienty.
+
+U menšího týmu nemusíš hned stavět dokonalý portál. Stačí veřejný soubor `openapi.json`, krátký changelog a test, který zabrání tomu, aby někdo omylem přejmenoval pole v produkčním endpointu jen proto, že se mu v úterý nelíbilo slovo `status`.
+
+### CA.4 SDK a integrační balíčky popiš jako software, ne jako zip s nadějí
+
+Pokud zákazníkům dáváš SDK, konektor, CLI nebo plugin, chovej se k tomu jako k produktu. Nestačí napsat „stáhněte si novou verzi“. Uveď:
+
+- podporované runtime verze,
+- minimální kompatibilní verzi API,
+- seznam oprav a nových funkcí,
+- změny konfigurace,
+- bezpečnostní poznámky,
+- způsob ověření po aktualizaci,
+- licenční informaci a odkaz na zdrojový kód, pokud je veřejný.
+
+Licenci piš jednoznačně. SPDX License List poskytuje standardizované identifikátory licencí, například `MIT`, `Apache-2.0` nebo `GPL-3.0-only`, takže se v balíčcích a dokumentaci nemusí hádat, co autor myslel „open licencí“. Zdroj: https://spdx.org/licenses/
+
+Privacy-first detail: pokud SDK posílá telemetrii, musí být jasně popsáno co, kam, proč a jak ji vypnout. Výchozí stav by měl být střídmý. Integrační knihovna nemá být tajný vysavač provozních dat, který se tváří jako pomocná třída.
+
+### CA.5 Bezpečnostní release komunikuj rychle, ale ne hystericky
+
+Bezpečnostní oprava potřebuje jiný tón než běžné vydání. Má být jasná, stručná a akční. Neprozrazuj exploitační návod dřív, než mají zákazníci realistickou šanci aktualizovat, ale zároveň neskrývej dopad za marketingovou mlhu.
+
+Dobrá bezpečnostní release poznámka obsahuje:
+
+- postižené verze,
+- opravenou verzi,
+- závažnost a typ dopadu,
+- doporučený termín aktualizace,
+- dočasné mitigace,
+- informaci, jestli existuje známé zneužití,
+- datum další aktualizace, pokud vyšetřování pokračuje.
+
+Pokud distribuujete software nebo konektory, zvaž SBOM aspoň pro interní přehled. CycloneDX definuje standard pro software bill of materials a další typy BOM, tedy strojově čitelný seznam komponent, ze kterých se software skládá. Zdroj: https://cyclonedx.org/specification/overview/
+
+SBOM není kouzelný štít. Je to inventář. Ale když se objeví zranitelnost v knihovně, inventář je rozdíl mezi „víme, koho se to týká“ a „někdo otevřete grep a modlete se“.
+
+### CA.6 Release kanály drž přímé a dohledatelné
+
+U privacy-first provozu nepodmiňuj důležité informace sledováním sociálních sítí nebo marketingovým newsletterem. Release informace mají být dostupné přes vlastní kanály:
+
+- veřejný changelog na webu,
+- RSS feed pro technické novinky,
+- e-mailové bezpečnostní upozornění pro administrátory,
+- API status stránka pro incidenty a údržbu,
+- dokumentace s historií změn,
+- Git tagy a release stránky u veřejných knihoven.
+
+Sociální síť může být sekundární amplifikace, ne zdroj pravdy. Zákazník, který provozuje integraci, potřebuje stabilní URL, ne algoritmus, který se rozhodne, že dnes raději ukáže video s kočkou v krabici.
+
+### CA.7 Konkrétní příklad: release API pro nové daňové pole
+
+Představ si účetní SaaS, který přidává nové pole `tax_mode` pro faktury.
+
+Release balíček může vypadat takhle:
+
+1. Název: `API 2026-09: rozšíření daňového režimu faktur`.
+2. Typ: zpětně kompatibilní rozšíření.
+3. Dopad: týká se integrací, které vytvářejí faktury přes `POST /invoices`.
+4. Staré chování: pokud pole chybí, systém použije dosavadní výchozí režim.
+5. Nové chování: integrace může poslat `tax_mode = standard | reverse_charge | exempt`.
+6. Sandbox: dostupný testovací účet se třemi ukázkovými fakturami.
+7. OpenAPI: odkaz na nové schéma a diff pole `invoice.tax_mode`.
+8. SDK: nová verze `cody-accounting-sdk 1.8.0` s enum hodnotami.
+9. Migrace: žádný povinný krok, doporučené doplnění validace do 60 dnů.
+10. Privacy poznámka: změna nepřidává nové osobní údaje ani nové logování payloadů.
+
+Takhle napsaný release se dá předat vývojáři, účetnímu konzultantovi i zákaznické podpoře. Každý si v něm najde svůj další krok. To je cílem. Ne literární Nobelovka, ale méně chaosu.
+
+### CA.8 Checklist release balíčku
+
+- Je jasné, koho se release týká?
+- Rozlišuje text opravu, kompatibilní rozšíření, deprekaci a breaking change?
+- Obsahuje dopad na stávající klienty?
+- Jsou uvedené migrační kroky a ukázka před/po?
+- Je přiložené aktuální OpenAPI schéma nebo odkaz na něj?
+- Mají SDK, CLI nebo konektory vlastní verzi, podporované runtime a licenční informaci?
+- Je bezpečnostní dopad popsán bez zbytečného strašení i bez mlžení?
+- Existuje RSS nebo stabilní changelog URL?
+- Neposílá SDK novou telemetrii bez jasného popisu a možnosti vypnutí?
+- Umí support podle release poznámek odpovědět zákazníkovi bez ping-pongu s vývojem?
+
+### CA.9 Mini úkol na 60 minut
+
+Vyber poslední větší API nebo integrační změnu a udělej z ní release balíček:
+
+1. Napiš název, datum a typ změny.
+2. Sepiš mapu dopadu v pěti otázkách: koho, co, kdy, jak otestovat, co udělat.
+3. Přidej ukázku requestu nebo konfigurace před a po.
+4. Odkazuj na dokumentaci, OpenAPI schéma a sandbox scénář.
+5. Doplň privacy poznámku: jaká data se nově zpracují, logují nebo neposílají vůbec.
+6. Pošli text jednomu člověku ze supportu a jednomu vývojáři. Pokud oba pochopí další krok, release je použitelný.
+
+> Codyho komentář: Release poznámky nejsou povinný domácí úkol pro produktového manažera. Jsou to provozní brzdy proti chaosu. A chaos je nejdražší framework, který si malý SaaS může omylem nainstalovat.
+
+
 ## Pracovní log
 
+- 2026-09-11: Doplněn Dodatek CA o release balíčcích pro API, SDK a integrátory, mapě dopadu změn, OpenAPI schématech, bezpečnostní komunikaci, SBOM a privacy-first release kanálech.
 - 2026-09-11: Doplněn Dodatek BZ o rate limitingu, tarifních kvótách, srozumitelných chybách `429`, viditelnosti limitů v administraci a privacy-first logování bez payloadů.
 - 2026-09-11: Doplněn Dodatek BY o sandboxu, testovacích API klíčích, syntetických datech, webhook testování a bezpečném přechodu do produkce.
 - 2026-09-11: Doplněn Dodatek BX o API dokumentaci, rychlém startu, OpenAPI kontraktu, spustitelných příkladech, retry pravidlech a privacy-first API portálu.
