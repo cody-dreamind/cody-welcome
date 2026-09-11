@@ -10608,6 +10608,170 @@ Vyber jeden zápisový endpoint, třeba vytvoření faktury, import kontaktů ne
 
 Pak otevři produkční logy nebo návrh logování a najdi jedno místo, kde se zbytečně ukládá obsah požadavku. Nahraď ho `request_id`, kódem chyby a bezpečným technickým shrnutím. Chyby mají pomáhat opravovat produkt, ne sbírat deníček cizí firmy.
 
+## Dodatek BT: Verzování API bez lámání integrací a nočních omluv
+
+API není jen technický vstup do produktu. Je to slib vůči zákazníkovi, integrátorovi a často i internímu týmu, který na něm staví automatizaci. Když bez varování přejmenuješ pole, změníš význam statusu nebo zahodíš starý endpoint, nerozbiješ „nějaký request“. Rozbiješ cizí proces, fakturaci, reporting nebo páteční odpoledne někoho, kdo si chtěl naivně udělat čaj.
+
+Dobré verzování API není o tom mít v URL co nejvíc písmenek `v`. Je o jasném kontraktu, zpětné kompatibilitě, komunikaci změn a důstojném ukončování starých verzí. Stripe ve své dokumentaci k API verzím rozlišuje zpětně kompatibilní změny od major releasů s breaking changes a doporučuje testovat upgrade explicitním nastavením verze v požadavku. Zdroj: https://docs.stripe.com/upgrades
+
+### BT.1 Nejdřív definuj veřejný kontrakt
+
+Verzovat můžeš jen to, co je veřejný kontrakt. Pokud tým neví, co zákazník smí považovat za stabilní, začne se za API vydávat všechno: náhodné pole v odpovědi, interní enum, detail chybové zprávy i pořadí položek v JSONu. A pak každá údržba vypadá jako rozvod s integrátory.
+
+Do veřejného kontraktu patří hlavně:
+
+- endpointy a HTTP metody,
+- povinné a volitelné parametry,
+- struktura odpovědí,
+- stabilní chybové kódy,
+- autentizace a scopy,
+- rate limity a retry pravidla,
+- webhook eventy a jejich schémata,
+- garance retence, stránkování a idempotence.
+
+Naopak se snaž nedělat kontrakt z věcí, které chceš mít možnost měnit: lidské texty chyb, interní pořadí polí, debug hlášky, nepopsané atributy nebo experimentální endpointy. Pokud něco není stabilní, napiš to přímo do dokumentace a názvu. Slovo `beta` není ostuda. Ostuda je tvářit se stabilně a pak všem podtrhnout koberec.
+
+### BT.2 Zpětně kompatibilní změny jsou tvůj nejlepší kamarád
+
+Nejlevnější změna API je ta, kterou starý klient nemusí řešit. Přidání volitelného pole, nového endpointu nebo nového typu události bývá bezpečné, pokud klienti ignorují neznámé hodnoty a neparsují odpovědi jako křišťálovou kouli.
+
+Před každou změnou si polož tři otázky:
+
+1. Přestane starý klient fungovat?
+2. Změní se význam existujícího pole?
+3. Musí zákazník nasadit nový kód, aby přežil běžný provoz?
+
+Pokud je odpověď ano, pravděpodobně nejde o kompatibilní změnu. SemVer shrnuje stejnou myšlenku jednoduše: major verze značí nekompatibilní změny, minor zpětně kompatibilní funkcionalitu a patch kompatibilní opravy. Zdroj: https://semver.org/
+
+U SaaS API ale nepřenášej SemVer slepě. Číselná verze sama o sobě zákazníka nezachrání. Potřebuje dokumentaci, changelog, testovací prostředí a čas na přechod.
+
+### BT.3 Vyber jeden model verzování a drž ho
+
+Malý SaaS nepotřebuje akademickou sbírku verzovacích strategií. Potřebuje jeden srozumitelný model. Nejčastější varianty:
+
+| Model | Příklad | Kdy dává smysl | Pozor na |
+| --- | --- | --- | --- |
+| Verze v URL | `/api/v1/invoices` | Jednoduché veřejné REST API | Hrubé přepínání celé API vrstvy |
+| Verze v hlavičce | `API-Version: 2026-09-11` | Jemnější kontrola chování klienta | Hůř viditelné pro ruční testování |
+| Datum vydání | `2026-09-11` | API s častými kompatibilními změnami | Vyžaduje velmi dobrý changelog |
+| Verze schématu u webhooku | `schema_version: 2` | Události a asynchronní integrace | Klient musí umět ignorovat neznámé eventy |
+
+Pro menší B2B SaaS je často nejlepší začít jednoduše: hlavní verze v URL pro velké breaking changes a `schema_version` v eventech. Pokud máš hodně integrací, přidej explicitní hlavičku pro testování novější verze bez změny produkčního účtu.
+
+Codyho komentář: Nejhorší model verzování je „nějak to poznáme podle data deploye“. To není strategie, to je archeologie s pagerem.
+
+### BT.4 Deprecace není věta v patičce dokumentace
+
+Ukončení staré verze API je produktový proces. Nestačí napsat „deprecated“ a doufat, že si toho někdo všimne mezi třetí kávou a build logem. Potřebuješ vědět, kdo starou verzi používá, jak často, k čemu a jak ho bezpečně převést.
+
+Dobrá deprekační komunikace obsahuje:
+
+- co se mění,
+- proč se to mění,
+- koho se změna týká,
+- přesné datum konce podpory,
+- migrační návod před a po,
+- testovací endpoint nebo sandbox,
+- kontaktní kanál pro problémy,
+- varování přímo v odpovědi API,
+- možnost dočasné výjimky jen s jasným koncem.
+
+U enterprise zákazníků přidej i seznam dotčených API klíčů, tenantů nebo webhook endpointů. Ne ve stylu „někdo u vás něco používá“. Konkrétně: který klíč, poslední použití, endpoint, návrh náhrady. Privacy-first pravidlo: ukazuj provozní metadata, ne citlivé payloady.
+
+### BT.5 Changelog musí být čitelný pro lidi, kteří mají práci
+
+Changelog není výpis commitů. Changelog je mapa rizika pro integrátory. Každý záznam by měl říct, jestli jde o kompatibilní změnu, novou funkci, opravu chyby, deprecaci nebo breaking change.
+
+Používej jednoduché štítky:
+
+- `Added`: nová kompatibilní věc,
+- `Changed`: změna chování,
+- `Deprecated`: stará věc končí,
+- `Removed`: věc už není dostupná,
+- `Fixed`: oprava chyby,
+- `Security`: bezpečnostní oprava nebo zpřísnění.
+
+U každého záznamu napiš dopad na klienta. „Upravili jsme endpoint faktur“ je mlha. „Endpoint `POST /api/v1/invoices/import` nově vrací `field_errors[]`; staré klienty to nerozbije, pokud ignorují neznámá pole“ je informace.
+
+RSS nebo statická changelog stránka je privacy-first výhra. Integrátoři mohou sledovat změny bez marketingového pixelu, newsletterového cirkusu a „community platformy“, která chce profilovou fotku dřív než přečteš release note.
+
+### BT.6 Testuj staré klienty, nejen nový happy path
+
+Při změně API otestuj minimálně tři vrstvy:
+
+1. Nový klient proti nové verzi.
+2. Starý klient proti nové implementaci.
+3. Migrační scénář ze staré verze na novou.
+
+Prakticky to znamená držet ukázkové requesty a odpovědi jako kontraktové testy. U webhooků si ulož vzorové eventy staré i nové verze. U importů drž malé anonymizované soubory, které reprezentují běžné zákaznické scénáře. U chybových stavů testuj nejen `200`, ale i validaci, konflikt, rate limit a dočasnou chybu.
+
+Když nemáš čas na velký testovací framework, začni složkou `api-contracts/` v repozitáři:
+
+```text
+api-contracts/
+  invoices.create.v1.request.json
+  invoices.create.v1.response.json
+  invoices.import.validation-error.v1.json
+  webhooks.export-ready.v1.json
+  webhooks.export-ready.v2.json
+```
+
+Není to dokonalé, ale nutí tým přemýšlet nad tím, co se opravdu změnilo. A to je přesně ten druh nudné disciplíny, která šetří ostré incidenty.
+
+### BT.7 Konkrétní příklad: konec starého import endpointu
+
+Představ si SaaS pro účetní kanceláře. Starý endpoint `POST /api/v1/imports/invoices` přijímá CSV a vrací jen `import_id`. Nový endpoint `POST /api/v2/imports/invoices` vrací navíc předběžnou validaci, počet řádků, seznam varování a lepší chybové kódy.
+
+Špatný postup:
+
+- v pondělí nasadit `v2`,
+- ve středu vypnout `v1`,
+- v pátek se divit, že zákazníkům stojí měsíční závěrka,
+- napsat omluvu s titulkem „drobné technické komplikace“.
+
+Lepší postup:
+
+1. Přidat `v2` vedle `v1`.
+2. Do dokumentace dát srovnání requestů a odpovědí.
+3. Do `v1` odpovědí přidat bezpečnou deprekační hlavičku, například `Deprecation: true` a odkaz na migrační návod.
+4. V administraci ukázat zákazníkům poslední použití `v1` podle API klíče.
+5. Poslat cílenou zprávu jen účtům, které `v1` opravdu používají.
+6. Nabídnout sandbox a testovací CSV bez citlivých dat.
+7. Držet `v1` jen pro čtení nebo omezený provoz po oznámené období.
+8. Po vypnutí ponechat jasnou chybu s odkazem na migraci.
+
+Výsledek: zákazník má čas, ty máš přehled a podpora neřeší detektivku z access logů. To je přesně ta méně sexy část produktu, která rozhoduje, jestli tě integrátoři doporučí, nebo proklejí v interním Slacku.
+
+### BT.8 Checklist verzování API
+
+- [ ] Veřejný API kontrakt je popsán v dokumentaci nebo OpenAPI schématu.
+- [ ] Tým ví, které změny jsou kompatibilní a které vyžadují novou verzi.
+- [ ] API používá jeden jasný model verzování místo několika historických náhod.
+- [ ] Webhooky mají vlastní `schema_version` a klienti umí ignorovat neznámé eventy.
+- [ ] Breaking changes mají migrační návod, datum konce podpory a testovací scénář.
+- [ ] Deprecace se komunikuje cíleně zákazníkům, kteří starou verzi opravdu používají.
+- [ ] Changelog rozlišuje přidání, změnu, deprecaci, odstranění, opravu a bezpečnostní dopad.
+- [ ] Staré klienty testuješ proti nové implementaci před nasazením.
+- [ ] UI ukazuje zákazníkovi poslední použití staré verze bez ukládání citlivých payloadů.
+- [ ] Po vypnutí staré verze API vrací jasnou chybu s dalším krokem, ne tajemné `404`.
+
+### BT.9 Mini úkol na 60 minut
+
+Vyber jedno API, webhook nebo importní rozhraní a napiš krátkou „kartu kontraktu“:
+
+1. Kdo ho používá.
+2. Jaké endpointy nebo eventy jsou veřejné.
+3. Co je stabilní kontrakt.
+4. Co se může změnit bez nové verze.
+5. Jak se značí verze.
+6. Kde je changelog.
+7. Jak poznáš poslední použití.
+8. Jak bude vypadat deprekace.
+9. Jak dlouho necháš starou verzi běžet.
+10. Jaký test ověří, že starý klient pořád funguje.
+
+Pak najdi jednu existující změnu v backlogu a označ ji jako kompatibilní, deprekační nebo breaking. Pokud to nejde rozhodnout během pěti minut, problém není v tobě. Problém je v tom, že API kontrakt zatím žije v kolektivní intuici. A kolektivní intuice je fajn na výběr oběda, horší na provoz zákaznických integrací.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -10628,6 +10792,8 @@ Pak otevři produkční logy nebo návrh logování a najdi jedno místo, kde se
 - OWASP Top 10:2021 — https://owasp.org/Top10/
 - OWASP Application Security Verification Standard — https://owasp.org/www-project-application-security-verification-standard/
 - OWASP Cheat Sheet Series: Multi-Tenant Application Security Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Multi_Tenant_Security_Cheat_Sheet.html
+- Stripe Docs: API upgrades — https://docs.stripe.com/upgrades
+- Semantic Versioning 2.0.0 — https://semver.org/
 - OWASP Cheat Sheet Series: Authorization Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Secrets Management Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
 - OWASP Cheat Sheet Series: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
@@ -10701,6 +10867,7 @@ Pak otevři produkční logy nebo návrh logování a najdi jedno místo, kde se
 
 ## Pracovní log
 
+- 2026-09-11: Doplněn Dodatek BT o verzování API, veřejném kontraktu, zpětné kompatibilitě, deprekacích, changelogu, kontraktových testech a privacy-first migraci integrací.
 - 2026-09-11: Doplněn Dodatek BS o chybových stavech API, jednotném formátu chyb, request ID, bezpečném logování a privacy-first diagnostice bez úniku dat.
 - 2026-09-10: Doplněn Dodatek BR o webhoocích, minimálních payloadech, podpisech, retry, idempotenci, verzování schématu a privacy-first doručování událostí.
 - 2026-09-10: Doplněn Dodatek BQ o API klíčích, scope, bezpečném ukládání, rotaci, tenant vazbě, audit logu a privacy-first provozu integrací.
