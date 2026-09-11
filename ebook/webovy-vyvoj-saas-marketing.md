@@ -10410,6 +10410,204 @@ Vyber jeden webhook ve svém produktu nebo návrhu a napiš jeho kartu:
 
 Pak smaž jedno pole z payloadu, které tam je jen „pro pohodlí“, a nahraď ho odkazem na autorizovaný API dotaz. Webhook má být zvonek u dveří, ne stěhovací dodávka plná osobních dat.
 
+
+## Dodatek BS: Chybové stavy API bez mlžení a úniku dat
+
+Dobré API se nepozná jen podle toho, že vrací data, když je všechno růžové. Pozná se podle toho, co udělá, když zákazník pošle špatný vstup, vyprší token, dojde limit, selže integrace nebo se uvnitř systému pokazí něco, co mělo být nudně spolehlivé. Chybový stav je produktový text, diagnostický signál i bezpečnostní hranice najednou.
+
+Privacy-first přístup tady znamená dvě věci: uživateli dáš dost informací, aby chybu dokázal opravit, ale do odpovědi, logů ani analytiky nevyliješ osobní údaje, interní stack trace, tajemství nebo cizí tenant kontext. API chyba nemá být detektivka, ale nemá být ani věta „něco se pokazilo“, která vývojáře pošle meditovat do serverovny.
+
+### BS.1 Chyba má pomáhat dalšímu kroku
+
+Každá chyba by měla odpovědět na tři otázky:
+
+1. **Co se stalo?** Například validace vstupu, chybějící oprávnění, dočasný limit nebo nedostupná závislost.
+2. **Co může klient udělat?** Opravit pole, obnovit token, zpomalit požadavky, opakovat později nebo kontaktovat podporu s ID chyby.
+3. **Co nesmí API prozradit?** Interní cestu k souboru, SQL dotaz, stack trace, existenci cizího záznamu nebo hodnotu tajného klíče.
+
+MDN u HTTP stavových kódů popisuje rozdíl mezi třídami odpovědí: klientské chyby `4xx` signalizují problém na straně požadavku, serverové `5xx` problém na straně služby. Zdroj: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status
+
+Prakticky:
+
+- `400 Bad Request` použij pro nevalidní syntaxi nebo špatně složený požadavek.
+- `401 Unauthorized` použij pro chybějící nebo neplatné ověření.
+- `403 Forbidden` použij, když je uživatel ověřený, ale nemá právo.
+- `404 Not Found` použij pro neexistující nebo nepřístupný zdroj, pokud nechceš prozradit jeho existenci.
+- `409 Conflict` použij pro konflikt stavu, třeba duplicitní slug nebo již zpracovanou operaci.
+- `422 Unprocessable Content` použij pro doménovou validaci, pokud požadavek syntakticky dává smysl.
+- `429 Too Many Requests` použij pro rate limit a přidej informaci, kdy zkusit znovu.
+- `503 Service Unavailable` použij pro dočasnou nedostupnost a jasné retry pravidlo.
+
+Codyho komentář: Status kód není dekorace. Když všechno vrací `200` s polem `success: false`, vytvořil jsi si vlastní malý protokol. Gratuluju, teď ho musíš dokumentovat, debugovat a litovat.
+
+### BS.2 Jednotný formát šetří podporu i nervy
+
+Chybová odpověď má být předvídatelná. Klient nemá hádat, jestli dnes přijde `message`, zítra `error`, pozítří HTML stránka a o víkendu prázdný string. Zaveď jeden tvar a drž ho všude.
+
+Jednoduchý formát může vypadat takhle:
+
+```json
+{
+  "error": {
+    "code": "invoice_number_already_exists",
+    "message": "Číslo faktury už v tomto období existuje.",
+    "request_id": "req_01JABCDEF23456789",
+    "field_errors": [
+      {
+        "field": "invoice_number",
+        "code": "duplicate",
+        "message": "Zvol jiné číslo faktury."
+      }
+    ]
+  }
+}
+```
+
+Drž odděleně:
+
+- **Stabilní `code`:** pro aplikace, integrace, dokumentaci a překlady.
+- **Lidský `message`:** pro vývojáře nebo UI, ale bez citlivých detailů.
+- **`request_id`:** pro podporu, logy a incidenty.
+- **`field_errors`:** pro formuláře, importy a API validaci.
+- **`retry_after`:** pro dočasné limity a výpadky, pokud má klient opakovat požadavek.
+
+Nikdy do veřejné chyby nedávej celé hodnoty polí, tokeny, SQL, stack trace, interní hostnames, cestu k bucketu nebo detail „uživatel s tímto e-mailem existuje v jiném tenantu“. To patří do interních logů, a i tam jen v minimální, redigované podobě.
+
+### BS.3 Validace má být konkrétní, ne povýšená
+
+Formulářové a API validace jsou jedno z míst, kde produkt zní buď jako pomocník, nebo jako protivný úředník. Dobrá chyba říká, co opravit a proč. Špatná chyba říká „Invalid input“ a tváří se, že zákazník měl telepaticky znát datový model.
+
+Příklady:
+
+| Špatně | Lépe |
+| --- | --- |
+| `Invalid email` | „Zadej e-mail ve tvaru `jmeno@firma.cz`. Použijeme ho jen pro přihlášení a provozní zprávy.“ |
+| `Permission denied` | „Nemáš oprávnění exportovat faktury. Požádej správce účtu o roli `Fakturace: export`.“ |
+| `Upload failed` | „Soubor je větší než 20 MB. Nahraj menší CSV nebo ho rozděl na více částí.“ |
+| `Server error` | „Import se teď nepodařilo zpracovat. Zkus to za pár minut. Pokud problém trvá, pošli podpoře ID chyby.“ |
+
+Privacy-first detail: nepřidávej validaci, která zbytečně odhaluje existenci účtu, projektu nebo zákazníka. U veřejného resetu hesla například vrať stejnou odpověď pro existující i neexistující e-mail: „Pokud u nás účet existuje, poslali jsme instrukce.“ U interní administrace můžeš být konkrétnější, ale jen pro oprávněné role.
+
+### BS.4 `request_id` je most mezi zákazníkem a logy
+
+Když zákazník napíše „nejde mi uložit faktura“, nechceš po něm chtít screenshot konzole, čas podle atomových hodin a horoskop browseru. Každá odpověď API by měla mít korelační identifikátor v hlavičce i v chybovém těle, například `X-Request-Id` a `request_id`.
+
+W3C Trace Context definuje standardní hlavičky pro předávání trace kontextu mezi službami, zejména `traceparent` a `tracestate`. Zdroj: https://www.w3.org/TR/trace-context/
+
+Pro malý SaaS stačí jednoduchý model:
+
+- Na vstupu přijmi existující bezpečný request ID nebo vygeneruj nové.
+- Předej ho přes API gateway, aplikaci, worker a frontu.
+- Ulož ho do strukturovaných logů.
+- Vrať ho klientovi v chybové odpovědi.
+- V support nástroji podle něj najdi relevantní logy bez hledání podle e-mailu.
+
+Request ID nesmí obsahovat osobní údaje, tenant název ani interní význam. Má být náhodné nebo dostatečně neuhodnutelné. `req_petr_novak_faktura_leden` není korelace. To je únik dat ve falešném kníru.
+
+### BS.5 Loguj diagnostiku, ne obsah zákazníkova života
+
+OWASP Logging Cheat Sheet doporučuje logovat bezpečnostně relevantní události, ale zároveň varuje před ukládáním citlivých dat, jako jsou hesla, tokeny, osobní údaje nebo platební data. Zdroj: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+U API chyb loguj typicky:
+
+- čas, endpoint, metodu a status,
+- tenant nebo účet v interním identifikátoru,
+- ověřeného uživatele v interním identifikátoru, pokud je to nutné,
+- `request_id` nebo trace ID,
+- stabilní kód chyby,
+- délku zpracování,
+- typ klienta nebo verzi integrace,
+- bezpečně zkrácený technický detail pro interní tým.
+
+Neloguji automaticky:
+
+- celé request a response body,
+- hesla, tokeny, API klíče a podpisová tajemství,
+- obsah zpráv, dokumentů, poznámek a příloh,
+- platební údaje,
+- raw hlavičky bez redakce,
+- URL query parametry s e-mailem, tokenem nebo osobním údajem.
+
+Pokud potřebuješ dočasně zvýšit detail logů kvůli incidentu, nastav krátkou expiraci, omezený přístup a jasné vypnutí. Debug režim bez konce je jen pomalá cesta k tomu, že se z logů stane druhá databáze. Horší databáze. Bez schématu. S větším stresem.
+
+### BS.6 Dokumentace chyb je součást API kontraktu
+
+Vývojáři integrací potřebují vědět, které chyby mohou čekat a co s nimi. Dokumentace API proto nemá končit u „happy path“ příkladů. U každého endpointu popiš nejčastější chybové scénáře:
+
+- neplatný vstup,
+- chybějící scope,
+- neexistující nebo nepřístupný zdroj,
+- konflikt stavu,
+- rate limit,
+- dočasná nedostupnost,
+- opakování požadavku po timeoutu,
+- idempotenci u zápisových operací.
+
+K dobré dokumentaci patří i testovací chybové příklady. Umožni integrátorům bezpečně vyvolat validaci, limit nebo odmítnuté oprávnění v sandboxu. Je lepší, když si chybové větve vyzkouší v úterý odpoledne, než když je poprvé potkají v pátek večer u produkční migrace.
+
+### BS.7 Konkrétní příklad: chyba při importu CSV
+
+Představ si SaaS, který importuje faktury z CSV. Špatná chyba vypadá takhle:
+
+```json
+{
+  "error": "Import failed: duplicate key value violates unique constraint invoices_tenant_id_invoice_number_key at /app/src/importer.ts:184"
+}
+```
+
+Problém: zákazník neví, co opravit, API prozradilo interní constraint, cestu v aplikaci a technický detail, který patří maximálně do redigovaného logu.
+
+Lepší odpověď:
+
+```json
+{
+  "error": {
+    "code": "csv_invoice_number_duplicate",
+    "message": "Import obsahuje číslo faktury, které už v tomto období existuje.",
+    "request_id": "req_01JIMPORT9K3F7Q2M",
+    "field_errors": [
+      {
+        "field": "rows[18].invoice_number",
+        "code": "duplicate",
+        "message": "Změň číslo faktury nebo přeskoč duplicitní řádek."
+      }
+    ]
+  }
+}
+```
+
+Interní log k tomu může mít `request_id`, endpoint, tenant ID, kód chyby, interní constraint a technický stack trace s omezenou retencí. Zákazník dostal konkrétní další krok. Podpora dostala most do logů. Útočník nedostal mapu sklepa.
+
+### BS.8 Checklist chybových stavů API
+
+- [ ] API používá správné HTTP status kódy místo univerzálního `200` nebo `500`.
+- [ ] Chybové odpovědi mají jednotný formát napříč endpointy.
+- [ ] Každá chyba má stabilní strojový `code` a srozumitelný lidský `message`.
+- [ ] Odpověď obsahuje `request_id`, které neobsahuje osobní ani tenant data.
+- [ ] Validace říká, které pole opravit a jaký je další krok.
+- [ ] Veřejné chyby neprozrazují stack trace, SQL, tokeny, interní cesty ani existenci cizích záznamů.
+- [ ] Logy redigují citlivé údaje a neukládají celé request/response body bez důvodu.
+- [ ] Rate limit a dočasné chyby říkají, jestli a kdy má klient opakovat požadavek.
+- [ ] Dokumentace API obsahuje chybové příklady a doporučené reakce klienta.
+- [ ] Sandbox umí bezpečně vyvolat typické chyby pro testování integrací.
+
+### BS.9 Mini úkol na 45 minut
+
+Vyber jeden zápisový endpoint, třeba vytvoření faktury, import kontaktů nebo pozvání uživatele. Napiš pro něj „chybovou kartu“:
+
+1. Tři nejčastější chyby klienta.
+2. Jeden konflikt stavu.
+3. Jednu chybu oprávnění.
+4. Jeden dočasný technický problém.
+5. HTTP status pro každý scénář.
+6. Stabilní `code` pro každý scénář.
+7. Lidskou zprávu bez citlivých detailů.
+8. Co se zapíše do logu.
+9. Co se vrátí zákazníkovi.
+10. Co má klient udělat jako další krok.
+
+Pak otevři produkční logy nebo návrh logování a najdi jedno místo, kde se zbytečně ukládá obsah požadavku. Nahraď ho `request_id`, kódem chyby a bezpečným technickým shrnutím. Chyby mají pomáhat opravovat produkt, ne sbírat deníček cizí firmy.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -10438,6 +10636,8 @@ Pak smaž jedno pole z payloadu, které tam je jen „pro pohodlí“, a nahraď
 - RFC Editor: RFC 9116 A File Format to Aid in Security Vulnerability Disclosure — https://www.rfc-editor.org/rfc/rfc9116
 - European Commission: NIS2 Directive — https://digital-strategy.ec.europa.eu/en/policies/nis2-directive
 - Google Research: Measuring the User Experience on a Large Scale: User-Centered Metrics for Web Applications — https://research.google/pubs/measuring-the-user-experience-on-a-large-scale-user-centered-metrics-for-web-applications/
+- MDN Web Docs: HTTP response status codes — https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status
+- W3C Recommendation: Trace Context — https://www.w3.org/TR/trace-context/
 - Google Cloud: Using the Four Keys to measure your DevOps performance — https://cloud.google.com/blog/products/devops-sre/using-the-four-keys-to-measure-your-devops-performance
 - Google Cloud: Supercharge your DevOps practice with SRE principles — https://cloud.google.com/blog/products/devops-sre/supercharge-your-devops-practice-with-sre-principles
 - European Commission: AI Act — https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
@@ -10501,6 +10701,7 @@ Pak smaž jedno pole z payloadu, které tam je jen „pro pohodlí“, a nahraď
 
 ## Pracovní log
 
+- 2026-09-11: Doplněn Dodatek BS o chybových stavech API, jednotném formátu chyb, request ID, bezpečném logování a privacy-first diagnostice bez úniku dat.
 - 2026-09-10: Doplněn Dodatek BR o webhoocích, minimálních payloadech, podpisech, retry, idempotenci, verzování schématu a privacy-first doručování událostí.
 - 2026-09-10: Doplněn Dodatek BQ o API klíčích, scope, bezpečném ukládání, rotaci, tenant vazbě, audit logu a privacy-first provozu integrací.
 - 2026-09-10: Doplněn Dodatek BP o rate limitingu, abuse ochraně, frontách drahých akcí, bezpečných chybových odpovědích, dokumentaci limitů a privacy-first měření zneužití.
