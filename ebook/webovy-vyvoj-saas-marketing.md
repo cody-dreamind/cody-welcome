@@ -10916,6 +10916,158 @@ Vezmi jednu citlivou část produktu: role, API klíče, exporty nebo fakturaci.
 
 Pak vyber jednu existující akci v aplikaci a doplň auditní záznam do návrhu. Nezačínej refaktorem celého log systému. Začni jednou událostí s vysokou hodnotou. Auditní log se nejlépe staví stejně jako důvěra: konzistentně, po malých krocích a bez dramatického orchestru v pozadí.
 
+
+## Dodatek BV: Supportní přístup a impersonace bez tajného kukátka
+
+Supportní přístup je jedna z těch funkcí, které vypadají nevinně, dokud se nezeptáš: „Kdo se může dívat do zákaznického účtu a kdo se o tom dozví?“ Malý SaaS dřív nebo později potřebuje pomoci zákazníkovi přímo v jeho kontextu: zkontrolovat nastavení, dohledat chybový stav, ověřit integraci, vysvětlit fakturaci nebo opravit špatně založený účet. To je normální. Nenormální je, když se z toho stane neviditelný superadmin tunel do všech dat.
+
+OWASP Authorization Cheat Sheet doporučuje princip nejmenších oprávnění, výchozí zamítnutí přístupu a testování autorizační logiky. Zdroj: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+
+> Codyho komentář: Impersonace není kouzelný plášť neviditelnosti pro support. Je to pracovní nástroj s brzdami, světly a tachografem. Ano, i digitální dodávka má mít tachograf.
+
+### BV.1 Nejdřív rozliš pohled, zásah a impersonaci
+
+Ne každý supportní scénář vyžaduje přihlášení „jako zákazník“. Často stačí bezpečnější režim.
+
+Rozděl si přístupy na tři úrovně:
+
+| Režim | Co dovoluje | Kdy stačí | Hlavní riziko |
+| --- | --- | --- | --- |
+| Diagnostický pohled | Metadata, stav účtu, chyby, konfiguraci bez citlivého obsahu | Běžná podpora, fakturační dotaz, kontrola integrace | Příliš široké interní zobrazení |
+| Řízený zásah | Konkrétní akce jménem podpory, ne jménem zákazníka | Oprava nastavení, znovuodeslání pozvánky, reset webhooku | Nejasná odpovědnost za změnu |
+| Impersonace | Dočasný vstup do uživatelského UI v omezeném režimu | Reprodukce problému, který nejde popsat jinak | Skrytý přístup k datům a akcím |
+
+Výchozí pravidlo: začni diagnostickým pohledem. Pokud nestačí, použij řízený zásah. Impersonaci nech jako poslední možnost pro případy, kde opravdu potřebuješ vidět cestu uživatele v produktu. Jinak si jen vyrábíš bezpečnostní dluh v kabátě „lepší podpory“.
+
+### BV.2 Supportní přístup musí mít důvod, čas a rozsah
+
+Každý vstup podpory do zákaznického kontextu má mít tři povinné parametry:
+
+- **Důvod:** číslo tiketu, odkaz na zákaznický požadavek nebo interní incident.
+- **Čas:** jasná expirace přístupu, ideálně minuty nebo hodiny, ne „dokud si někdo vzpomene“.
+- **Rozsah:** konkrétní tenant, uživatel, modul nebo akce.
+
+Praktický interní dialog před vstupem může vypadat takto:
+
+```text
+Zákazník: Firma Novák s.r.o.
+Tenant: ten_123
+Důvod: tiket SUP-4821, nefunkční export faktur
+Režim: diagnostický pohled + reprodukce exportu
+Platnost: 30 minut
+Zakázané akce: mazání dat, změna rolí, změna fakturace
+```
+
+Tohle není byrokracie pro radost. Je to způsob, jak později vysvětlit, proč se někdo díval do účtu a co přesně mohl udělat. Když odpověď zní „nevím, asi řešil podporu“, nemáš proces. Máš kouřovou clonu s hezkým interním UI.
+
+### BV.3 Impersonace nesmí být obyčejné přihlášení
+
+Nejhorší varianta je uložit si možnost „přihlásit se jako kdokoliv“ a tvářit se, že auditní log to nějak zachrání. Impersonace má být samostatný technický režim s vlastními omezeními.
+
+Bezpečnější návrh:
+
+- supportní pracovník se přihlásí vlastním účtem a s MFA,
+- systém vytvoří dočasnou support session s vlastním `support_session_id`,
+- UI viditelně ukazuje banner „Support režim“;
+- destruktivní nebo citlivé akce jsou vypnuté,
+- exporty dat, změny rolí, API klíče a fakturace vyžadují samostatné oprávnění nebo jsou blokované,
+- zákazník vidí záznam o vstupu podpory v auditním logu,
+- po expiraci session skončí bez možnosti tichého prodloužení.
+
+Technický detail: support session nesmí sdílet běžnou session cookie zákazníka. Nepotřebuješ být zákazník. Potřebuješ dočasně zobrazit produkt v jeho kontextu s jasně označeným aktérem. V auditním logu proto ukládej obě identity: `support_actor_id` i `viewed_user_id` nebo `tenant_id`. Pokud uložíš jen zákazníka, ztrácíš odpovědnost. Pokud uložíš jen support, ztrácíš kontext.
+
+### BV.4 Zákazník má vědět, co se stalo
+
+Privacy-first support není o tom, že zákazníka zasypeš notifikacemi pokaždé, když někdo otevře tiket. Je o tom, že přístup k jeho datům není tajný rituál za závěsem.
+
+Zákaznický auditní log může ukazovat:
+
+| Čas | Událost | Důvod | Rozsah |
+| --- | --- | --- | --- |
+| 11. 9. 2026 03:40 | Podpora Dreamind otevřela diagnostický pohled | SUP-4821 | Nastavení exportu faktur |
+| 11. 9. 2026 03:47 | Podpora spustila test exportu | SUP-4821 | Export bez stažení dat |
+| 11. 9. 2026 04:10 | Support session expirovala | SUP-4821 | Přístup ukončen |
+
+U vyšších tarifů můžeš přidat nastavení: „vyžadovat souhlas administrátora před supportním vstupem“. Pro menší zákazníky často stačí transparentní log a jasná bezpečnostní stránka. Důležité je, aby si zákazník nemusel říkat, jestli se někdo díval do jeho účtu potichu. Potichu patří leda lednička ve správně navržené kuchyni, ne přístup k datům.
+
+### BV.5 Interní role podpory drž úzké
+
+Support tým nemá automaticky potřebovat všechno. Role rozděl podle práce, ne podle organizačního optimismu.
+
+Příklad rolí:
+
+- **Support reader:** vidí stav účtu, tarif, základní konfiguraci a auditní výpis bez citlivého obsahu.
+- **Support operator:** může spustit bezpečné opakované akce, například znovuodeslat pozvánku nebo test webhooku.
+- **Billing support:** vidí fakturační stav a může řešit platby, ale nečte produktová data.
+- **Security operator:** řeší incidenty, přístupy a revokace, ale jeho zásahy vyžadují silnější audit.
+- **Break-glass admin:** nouzová role s krátkou expirací, schválením a povinným postmortem.
+
+Role „všichni supportáci všechno“ je rychlá jen na začátku. Později je rychlá hlavně cesta k incidentu, trapnému vysvětlování a ručnímu procházení logů v pátek večer. Romantika jak z katalogu špatných rozhodnutí.
+
+### BV.6 Co nikdy nedělej
+
+U supportního přístupu jsou některé zkratky tak lákavé, že si zaslouží vlastní červenou ceduli.
+
+Nedělej tohle:
+
+- nesdílej zákaznická hesla ani dočasná univerzální hesla,
+- neposílej si screenshoty s osobními údaji do interního chatu bez pravidel,
+- nepoužívej produkční databázi jako supportní vyhledávač,
+- nedovol impersonaci bez auditního záznamu,
+- nenechávej supportní přístup bez expirace,
+- nemíchej supportní zásahy a zákaznické akce pod jednou identitou,
+- neschovávej vstupy podpory před zákazníkem jen proto, že je to pohodlnější,
+- nedávej vendorům nebo freelancerům stejný přístup jako interní podpoře.
+
+Pokud potřebuješ výjimku, napiš ji jako výjimku: proč vznikla, kdo ji schválil, kdy vyprší a jak ji zrušíš. Výjimka bez data konce není výjimka. Je to nový standard, který se stydíš pojmenovat.
+
+### BV.7 Konkrétní příklad: chyba v exportu faktur
+
+Zákazník píše, že export faktur padá na chybě. Špatný postup: support se přihlásí jako administrátor zákazníka, kliká po účtu, stáhne export a pošle vývojáři soubor do chatu. Gratuluji, právě vznikl menší privacy horor s CSV přílohou.
+
+Lepší postup:
+
+1. Support otevře tiket a diagnostický pohled pro konkrétní tenant.
+2. Vidí poslední exporty, stav jobu, `request_id`, počet položek a typ chyby.
+3. Nevidí obsah faktur ani osobní údaje z exportu.
+4. Spustí test exportu v režimu „bez stažení dat“.
+5. Vývojář dostane `request_id`, chybu parseru a anonymizovaný vzorek struktury.
+6. Pokud je potřeba reálný soubor, zákazník ho nahraje vědomě přes bezpečný kanál s expirací.
+7. Auditní log zapíše vstup podpory, test exportu i ukončení session.
+8. Po opravě support pošle zákazníkovi stručné shrnutí, co bylo kontrolováno.
+
+Výsledek: problém se řeší v kontextu, ale data necestují po náhodných kanálech. Support pomohl. Produkt zůstal důvěryhodný. CSV soubor nezaložil nový život v pěti inboxech.
+
+### BV.8 Checklist supportního přístupu
+
+- [ ] Máš rozlišený diagnostický pohled, řízený zásah a impersonaci.
+- [ ] Každý supportní vstup vyžaduje důvod, rozsah a expiraci.
+- [ ] Support session má vlastní identitu a nesplývá se session zákazníka.
+- [ ] Zákazník vidí supportní vstupy v auditním logu nebo bezpečnostním přehledu.
+- [ ] Destruktivní akce, exporty, role, API klíče a fakturace jsou v impersonaci blokované nebo samostatně chráněné.
+- [ ] Interní support role jsou rozdělené podle skutečné práce.
+- [ ] Break-glass přístup má schválení, krátkou platnost a následné vyhodnocení.
+- [ ] Screenshoty, exporty a ladicí podklady mají bezpečný kanál a expiraci.
+- [ ] Vendor nebo freelancer nemá stejný přístup jako interní zaměstnanec bez zvláštního schválení.
+- [ ] Testuješ, že support nevidí data mimo svůj tenant, tiket nebo přidělený rozsah.
+
+### BV.9 Mini úkol na 60 minut
+
+Vyber jeden reálný supportní scénář, který řešíš často: nefunkční export, problém s pozvánkou, platbu, webhook, import nebo nastavení rolí. Napiš k němu supportní kartu:
+
+1. Jaký problém zákazník hlásí.
+2. Jaká metadata support potřebuje vidět.
+3. Jaká data support vidět nesmí.
+4. Jaký režim stačí: diagnostika, zásah nebo impersonace.
+5. Jak dlouho má přístup trvat.
+6. Jaký důvod se uloží do auditního logu.
+7. Co uvidí zákazník po zásahu.
+8. Jaký bezpečný výstup dostane vývojář.
+9. Kdo smí scénář provést.
+10. Jak poznáš, že přístup po vyřešení opravdu zmizel.
+
+Pak vezmi jednu existující supportní akci a doplň jí expiraci, důvod a auditní záznam. Nemusíš za hodinu postavit dokonalý interní portál. Stačí odstranit jeden tajný průchod. Tajné průchody jsou skvělé v hradech, horší v SaaS, kde zákazník věří, že jeho účet není veřejná prohlídková trasa.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -11005,12 +11157,14 @@ Pak vyber jednu existující akci v aplikaci a doplň auditní záznam do návrh
 - MDN Web Docs: `<input type="search">` — https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/search
 - W3C WAI: Labeling Controls — https://www.w3.org/WAI/tutorials/forms/labels/
 - Schema.org: SearchAction — https://schema.org/SearchAction
+- OWASP Cheat Sheet Series: Authorization Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
 
 - W3C WAI: Writing for Web Accessibility — https://www.w3.org/WAI/tips/writing/
 - MDN Web Docs: ARIA live regions — https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions
 
 ## Pracovní log
 
+- 2026-09-11: Doplněn Dodatek BV o supportním přístupu, impersonaci, dočasných session, zákaznickém auditním pohledu, interních rolích a privacy-first řešení podpory bez tajných průchodů.
 - 2026-09-11: Doplněn Dodatek BU o auditních logách, bezpečných metadatech, odolnosti proti úpravám, retenčních pravidlech a privacy-first zákaznickém pohledu.
 - 2026-09-11: Doplněn Dodatek BT o verzování API, veřejném kontraktu, zpětné kompatibilitě, deprekacích, changelogu, kontraktových testech a privacy-first migraci integrací.
 - 2026-09-11: Doplněn Dodatek BS o chybových stavech API, jednotném formátu chyb, request ID, bezpečném logování a privacy-first diagnostice bez úniku dat.
