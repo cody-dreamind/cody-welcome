@@ -137,6 +137,143 @@ Pokud většina odpovědí není jasné „ano“, nepiš ještě kód. Piš ot�
 
 ---
 
+
+## 2. Web jako obchodní systém
+
+Web není digitální vizitka, kterou jednou za tři roky oprášíš a pak se divíš, že nic neprodává. Dobrý web je obchodní systém: přivádí správné lidi, rychle jim vysvětlí hodnotu, odstraní nejistotu a nabídne jasný další krok. Design je důležitý, ale jen jako služebník srozumitelnosti. Když návštěvník nepochopí během pár vteřin, pro koho web je a co má udělat, krásný gradient ho nezachrání.
+
+Web malého SaaS nebo B2B služby má typicky tři úkoly:
+
+1. **Vysvětlit nabídku** jednodušeji než obchodník na prvním hovoru.
+2. **Vybudovat důvěru** dřív, než člověk vytáhne kalendář nebo kartu.
+3. **Změřit zájem** bez datového cirkusu a invazivních trackerů.
+
+### Domovská stránka jako filtr, ne nástěnka
+
+Homepage nemá říct všechno. Má správného člověka poslat dál a nesprávnému ušetřit čas. To je dobrá věc. Když se snažíš mluvit ke všem, vznikne text typu „inovativní řešení pro moderní firmy“. To neprodává, to uspává i kávovar.
+
+První obrazovka by měla odpovědět na čtyři otázky:
+
+- **Co to je?** Jedna věta bez žargonu.
+- **Pro koho to je?** Segment, role nebo situace.
+- **Jaký výsledek slibujeme?** Ne funkce, ale změna v realitě zákazníka.
+- **Co mám udělat teď?** Demo, konzultace, trial, checklist, přímý kontakt.
+
+Příklad slabého hero textu:
+
+> „Komplexní platforma pro optimalizaci firemních procesů.“
+
+Příklad silnějšího textu:
+
+> „Plánování zakázek pro servisní týmy, které už nechtějí řídit práci v tabulkách.“
+
+Druhá varianta není literární ohňostroj. Ale návštěvník ví, jestli je doma. To je cíl.
+
+### Struktura, která vede k rozhodnutí
+
+U menšího SaaS webu často stačí jednoduchá informační architektura:
+
+- **Homepage:** problém, výsledek, důkaz, hlavní CTA.
+- **Produkt:** jak to funguje, hlavní scénáře použití, screenshoty nebo krátké video.
+- **Pro koho:** konkrétní segmenty a situace, ne obecné persony ze šuplíku.
+- **Ceník nebo pilot:** transparentní další krok, i když cena začíná konzultací.
+- **Obsah:** články, návody, checklisty, případové studie, RSS feed.
+- **Kontakt:** přímý způsob domluvy bez schovaného formuláře na sedm povinných polí.
+- **Privacy a podmínky:** stručně, lidsky a dohledatelně.
+
+Každá stránka by měla mít jeden primární účel. Produktová stránka nemá být zároveň blog, kariéra, tisková zpráva a powerpoint pro investora. Když chceš více cílů, rozděl stránku na jasné sekce nebo vytvoř samostatné vstupní stránky pro konkrétní kampaně.
+
+### Důvěra se staví konkrétností
+
+Důvěra nevznikne tím, že napíšeš „jsme spolehliví“. To je jako kdyby restaurace měla na dveřích ceduli „jídlo pravděpodobně neotráví“. Důvěru budují konkrétní signály:
+
+- **Ukázky produktu:** reálné screenshoty, krátké demo, popis workflow krok za krokem.
+- **Důkazy výsledků:** případová studie, citace zákazníka, měřitelná změna, srovnání před a po.
+- **Transparentní provoz:** kdo za produktem stojí, kde běží data, jak funguje podpora.
+- **Jasné limity:** pro koho produkt není, co zatím neumí, kdy je lepší jiné řešení.
+- **Rychlá cesta ke člověku:** e-mail, kalendář nebo přímý kontakt bez bludiště.
+
+U privacy-first produktů je dobrý důkaz i to, že se nechlubíš tisícem integrací jen proto, že můžeš. Napiš, které služby používáš pro hosting, e-mail, analytiku a podporu, jaký je účel zpracování a jak dlouho data držíš. Nemusí z toho být právnická opera. Stačí srozumitelný provozní popis a odkaz na plné dokumenty.
+
+### Konverze bez manipulace
+
+Konverzní optimalizace neznamená temné vzory. Znamená odstranit tření mezi zájmem a akcí. Když člověk chce demo, nemá vyplňovat velikost firmy, počet zaměstnanců, krevní skupinu a oblíbený typ housky. Ptej se jen na to, co potřebuješ pro další krok.
+
+Praktická pravidla:
+
+- **Jedno hlavní CTA na stránku.** Sekundární akce může existovat, ale nesmí soupeřit s hlavním rozhodnutím.
+- **Formuláře zkracuj na minimum.** U prvního kontaktu často stačí jméno, e-mail a krátká zpráva.
+- **Mikrocopy vysvětluje obavy.** „Ozveme se do jednoho pracovního dne“ je lepší než anonymní „Odeslat“.
+- **Cenu neskrývej zbytečně.** Pokud nejde dát přesný ceník, popiš aspoň rozpětí, model nebo podmínky pilotu.
+- **Nenuť účet před hodnotou.** Ukaž příklad, demo nebo checklist dřív, než žádáš registraci.
+
+> Codyho komentář: Nejlepší konverzní trik je často ten nejméně sexy: napiš jasnější větu, zkrať formulář a přestaň návštěvníka honit vyskakovacím oknem jako prodavač parfémů v obchodním centru.
+
+### Měření privacy-first
+
+Web potřebuje zpětnou vazbu. Bez měření nevíš, jestli lidé čtou správné stránky, kde odchází a co je zajímá. Privacy-first měření ale nezačíná otázkou „kolik dat umíme nasbírat“. Začíná otázkou „jaké rozhodnutí tím chceme zlepšit“.
+
+Pro většinu menších webů stačí měřit:
+
+- návštěvnost klíčových stránek,
+- zdroje návštěv v hrubé podobě,
+- kliknutí na hlavní CTA,
+- odeslání formuláře nebo rezervaci hovoru,
+- zájem o obsah podle témat,
+- technické chyby a pomalé stránky.
+
+Naopak často nepotřebuješ individuální profily návštěvníků, agresivní retargeting, session replay na každého člověka ani desítky marketingových pixelů. Pokud nástroj nejde rozumně vysvětlit v privacy dokumentaci, možná na web nepatří.
+
+Dobrá praxe je oddělit **produktová rozhodnutí** od **reklamního sledování**. Produktová analytika pomáhá zlepšit web a službu. Reklamní sledování má vyšší riziko pro důvěru, souhlas i datové toky, takže musí mít opravdu jasný důvod.
+
+### Obsah jako dlouhodobé aktivum
+
+Blog nebo znalostní báze nejsou jen SEO krmivo. Jsou způsob, jak ukázat přemýšlení firmy před prvním hovorem. V evropském privacy-first kontextu má obsah ještě jednu výhodu: funguje bez toho, aby musel návštěvníka pronásledovat po internetu.
+
+Dobrý obsah pro SaaS web:
+
+- řeší konkrétní problém zákazníka,
+- používá jazyk cílové skupiny,
+- obsahuje postup, šablonu, checklist nebo příklad,
+- přirozeně vede k produktu, ale není převlečená reklama,
+- má přímý odkaz, RSS a sdílitelný nadpis,
+- dá se aktualizovat, když se změní realita.
+
+Místo „5 důvodů, proč digitalizovat procesy“ napiš raději „Jak servisní firma předá zakázku technikovi bez tří telefonátů“. První nadpis je mlha. Druhý má scénu, bolest a slib.
+
+### Rychlost a přístupnost jako obchodní disciplína
+
+Rychlý a přístupný web není technická paráda pro Lighthouse screenshot. Je to respekt k návštěvníkovi. Každá zbytečná knihovna, obří obrázek a blikající widget zvyšuje šanci, že člověk odejde dřív, než pochopí nabídku.
+
+Praktický základ:
+
+- komprimuj a správně velikostně připrav obrázky,
+- nepřidávej skripty „pro jistotu“,
+- používej sémantické HTML a čitelné nadpisy,
+- hlídej kontrast textu a ovladatelnost klávesnicí,
+- piš popisky odkazů tak, aby dávaly smysl i mimo kontext,
+- testuj web na mobilu a pomalejším připojení,
+- udržuj formuláře jednoduché a chybové hlášky lidské.
+
+Přístupnost není jen pro „někoho jiného“. Je to lepší UX pro všechny: člověka na mobilu na slunci, unaveného manažera v pátek večer i zákazníka, který nechce luštit světle šedý text na ještě světlejším pozadí.
+
+### Checklist: web připravený na obchod
+
+- [ ] První obrazovka jasně říká, co nabízíme, komu a proč.
+- [ ] Každá klíčová stránka má jeden primární další krok.
+- [ ] Nabídka popisuje výsledek, ne jen seznam funkcí.
+- [ ] Formuláře sbírají jen data nutná pro daný účel.
+- [ ] Web obsahuje konkrétní důkazy: ukázky, reference, případové studie nebo transparentní limity.
+- [ ] Privacy informace jsou dohledatelné, lidské a konzistentní s reálnými nástroji.
+- [ ] Analytika měří rozhodnutí, ne všechno, co technicky jde.
+- [ ] Obsah má přímé odkazy, ideálně RSS, a není závislý jen na sociálních sítích.
+- [ ] Stránky jsou rychlé, čitelné na mobilu a použitelné klávesnicí.
+- [ ] Víme, jak poznáme úspěch webu: leady, demo hovory, trialy, stažení checklistu nebo jiné konkrétní signály.
+
+Web nemusí být velký. Musí být ostrý. Když každá stránka pomáhá návštěvníkovi udělat lepší rozhodnutí a týmu přináší čistý signál zájmu, web přestává být náklad a začíná být obchodní infrastruktura.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -148,3 +285,4 @@ Pokud většina odpovědí není jasné „ano“, nepiš ještě kód. Piš ot�
 ## Pracovní log
 
 - **2026-09-11:** Založena struktura e-booku, osnova a dokončená kapitola 1 o validaci produktu před vývojem, včetně privacy-first doporučení a zdrojů ke GDPR/ePrivacy.
+- **2026-09-11:** Dopsána kapitola 2 o webu jako obchodním systému: struktura stránek, důvěra, konverze bez manipulace, privacy-first měření, obsah, rychlost a checklist.
