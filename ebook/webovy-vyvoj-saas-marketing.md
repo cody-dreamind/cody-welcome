@@ -11292,7 +11292,173 @@ Výstupem nemá být krásný diagram. Stačí tabulka, kterou pochopí vývojá
 - W3C WAI: Writing for Web Accessibility — https://www.w3.org/WAI/tips/writing/
 - MDN Web Docs: ARIA live regions — https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions
 
+
+## Dodatek BX: API dokumentace bez hádanek, screenshotů a supportového ping-pongu
+
+Dobrá API dokumentace není „někde máme Swagger, hodně štěstí“. Je to produktové rozhraní pro lidi, kteří chtějí propojit tvůj SaaS s vlastním provozem, účetnictvím, reportingem nebo automatizací. Když dokumentace chybí, zákazník netestuje API. Testuje tvoji trpělivost na supportu a svoji schopnost číst zdroják přes zavřené dveře.
+
+API dokumentace má tři cíle: vysvětlit model produktu, ukázat bezpečné použití a zkrátit cestu od prvního requestu k funkční integraci. Specifikace OpenAPI popisuje strojově čitelný kontrakt REST API, který lze použít pro dokumentaci, validaci, klienty i testy. Zdroj: https://spec.openapis.org/oas/latest.html
+
+### BX.1 Dokumentuj úkol zákazníka, ne jen endpoint
+
+Integrátor většinou nepřemýšlí stylem „chci zavolat `POST /v1/events`“. Přemýšlí stylem „potřebuju po vystavení faktury založit záznam v účetním systému“. Pokud dokumentace začíná jen abecedním seznamem endpointů, nutíš člověka skládat produktovou mapu z technických drobků.
+
+Začni dokumentaci scénáři:
+
+- vytvoření účtu nebo tenantu,
+- založení zákazníka,
+- vytvoření objednávky nebo faktury,
+- export dat,
+- příjem webhooku,
+- rotace API klíče,
+- řešení chyby a opakování požadavku,
+- ukončení integrace a smazání přístupu.
+
+Každý scénář by měl mít krátký popis, minimální oprávnění, doporučený tok requestů, ukázkové odpovědi, typické chyby a privacy poznámku. Ne „tady je endpoint“. Spíš „takhle bezpečně uděláš práci“.
+
+### BX.2 Specifikace je základ, ale nestačí
+
+OpenAPI soubor je výborný kontrakt, jenže sám o sobě neumí vysvětlit, proč věci existují. Potřebuje doprovodný text. Ideální kombinace pro menší SaaS:
+
+| Vrstva | Co obsahuje | Proč existuje |
+| --- | --- | --- |
+| Rychlý start | Jeden funkční scénář do 15 minut | První úspěch bez čtení celé dokumentace |
+| Koncepty | Tenant, uživatel, role, faktura, export | Integrátor chápe produktový model |
+| Reference | Endpointy, parametry, schémata, chybové kódy | Přesný kontrakt pro implementaci |
+| Návody | Webhooky, retry, stránkování, idempotence | Bezpečné používání v produkci |
+| Changelog | Novinky, deprecace, breaking changes | Předvídatelné aktualizace |
+
+Codyho komentář: Specifikace bez návodů je jako mapa metra bez názvů zastávek. Technicky tam něco je, prakticky přeješ hodně štěstí.
+
+### BX.3 Ukázky musí být spustitelné a bezpečné
+
+Ukázkový request, který nejde zkopírovat, je dekorace. Ukázkový request s produkčním tokenem je průšvih v kravatě. Každý příklad by měl být:
+
+- krátký,
+- kopírovatelný,
+- s jasnou proměnnou pro token,
+- bez reálných osobních údajů,
+- s očekávanou odpovědí,
+- s jednou typickou chybou,
+- aktualizovaný stejným procesem jako API.
+
+Příklad:
+
+```bash
+curl -X POST "https://api.example.com/v1/customers" \
+  -H "Authorization: Bearer $API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: demo-2026-09-11-001" \
+  -d '{
+    "external_id": "demo-customer-123",
+    "email": "zakaznik@example.test",
+    "name": "Demo zákazník"
+  }'
+```
+
+Používej domény typu `example.test`, demo identifikátory a testovací tokeny. Do dokumentace nedávej skutečné e-maily klientů, screenshoty interní administrace ani payloady z produkce. Privacy-first dokumentace má učit bez toho, aby omylem publikovala cizí data.
+
+### BX.4 Vysvětli retry, idempotenci a limity lidsky
+
+Produkční integrace padají hlavně na detailech: timeout, duplicitní webhook, stránkování, expirovaný token, příliš mnoho požadavků. Proto dokumentace nesmí končit u šťastné cesty.
+
+HTTP sémantika rozlišuje mimo jiné bezpečné a idempotentní metody; RFC 9110 popisuje, že idempotentní požadavek má mít při opakování stejný zamýšlený efekt na serveru jako při jednom provedení. Zdroj: https://www.rfc-editor.org/rfc/rfc9110.html
+
+V dokumentaci proto napiš:
+
+- které operace lze bezpečně opakovat,
+- kde je povinný `Idempotency-Key`,
+- jak dlouho klíč držíš,
+- jak klient pozná duplicitní požadavek,
+- kdy má retry použít exponenciální backoff,
+- které chyby nikdy nemá opakovat naslepo,
+- jak funguje stránkování a stabilní řazení,
+- jak vypadají rate limit hlavičky.
+
+Nečekej, že integrátor bude správně hádat rozdíl mezi `409`, `422` a `429`. Napiš mu, co má udělat dál. Dokumentace je levnější než supportní archeologie.
+
+### BX.5 API portál nesmí být sledovací past
+
+API portál často láká k pohodlným věcem: login přes třetí stranu, analytika každého kliknutí, session replay, chat widget, externí fonty, hromada CDN skriptů. Jenže dokumentace je součást bezpečnostního a privacy příběhu produktu. Pokud stránka o ochraně dat natahuje pět trackerů, sama sobě hází banánovou slupku pod nohy.
+
+Privacy-first API portál drž jednoduše:
+
+- bez reklamních pixelů,
+- s agregovanou analytikou nebo logy serveru,
+- s přímými odkazy na RSS/changelog,
+- s exportovatelnou OpenAPI specifikací,
+- s jasným kontaktem na podporu,
+- s verzovanou dokumentací pro starší API,
+- s možností stáhnout příklady bez přihlášení,
+- s přihlášením jen tam, kde je potřeba spravovat klíče.
+
+Pokud měříš hledání v dokumentaci, ukládej agregované dotazy krátce a maskuj citlivé hodnoty. Lidé občas do vyhledávání vloží token, e-mail nebo celé ID zákazníka. Portál nesmí být vysavač na omyly.
+
+### BX.6 Dokumentace patří do release procesu
+
+Největší lež v API týmu zní: „Dokumentaci doplníme potom.“ Potom znamená nikdy, případně tři týdny po incidentu, kdy už má zákazník vlastní workaround a mírnou nenávist v očích.
+
+Do Definition of Done dej:
+
+- OpenAPI schéma je aktualizované,
+- příklad requestu prošel automatickým testem nebo ručním smoke testem,
+- chybové kódy jsou v referenci,
+- changelog obsahuje dopad na integrátory,
+- migration note existuje u breaking změny,
+- starší verze dokumentace zůstává dostupná,
+- support ví, co se změnilo,
+- interní runbook obsahuje diagnostiku podle `request_id`.
+
+U menšího týmu stačí jednoduchý proces: každá API změna má v pull requestu checkbox „docs updated“. Pokud checkbox nejde odškrtnout, změna není hotová. Ano, je to nudné. Nudné je u API kompliment.
+
+### BX.7 Konkrétní příklad: dokumentace exportu faktur
+
+Představ si SaaS, který umožňuje export faktur do účetního systému. Špatná dokumentace ukáže endpoint `GET /invoices` a parametr `page`. Dobrá dokumentace popíše celý tok:
+
+1. Vytvoř API klíč se scope `invoices:read`.
+2. Získej seznam faktur přes stránkování podle `created_at` a stabilního kurzoru.
+3. Ulož poslední zpracovaný kurzor.
+4. Při `429` počkej podle `Retry-After`.
+5. Při `5xx` opakuj požadavek s backoffem.
+6. Při `401` zastav synchronizaci a upozorni správce.
+7. Neexportuj smazané nebo anonymizované záznamy bez zvláštního režimu.
+8. Loguj jen `request_id`, tenant, čas a výsledek synchronizace.
+
+Do příkladu přidej ukázkový JSON faktury, ale bez reálných osobních údajů. Vysvětli, jak zákazník export vypne, jak revokuje klíč a jak pozná poslední úspěšnou synchronizaci. Integrace má mít i brzdu, nejen plyn.
+
+### BX.8 Checklist API dokumentace
+
+Před publikací API dokumentace si odškrtni:
+
+- Existuje rychlý start s jedním funkčním scénářem.
+- Veřejný kontrakt je popsaný ve strojově čitelné specifikaci.
+- Každý endpoint má účel, scope, vstup, výstup a typické chyby.
+- Příklady neobsahují reálná zákaznická data.
+- Retry, idempotence, stránkování a rate limity jsou vysvětlené lidsky.
+- Webhooky mají samostatný návod pro podpis, duplicity a testování.
+- Changelog je dostupný přes přímý odkaz nebo RSS.
+- Starší verze dokumentace nezmizí v den vydání nové verze.
+- API portál nepoužívá zbytečné trackery.
+- Support má runbook pro diagnostiku podle `request_id`.
+
+### BX.9 Mini úkol na 60 minut
+
+Vyber jeden API scénář, který zákazníci nebo interní tým používají nejčastěji. Napiš k němu jednostránkový návod:
+
+1. Cíl scénáře jednou větou.
+2. Potřebný scope nebo role.
+3. Tři requesty v pořadí.
+4. Ukázkovou úspěšnou odpověď.
+5. Dvě nejčastější chyby.
+6. Retry pravidlo.
+7. Privacy poznámku: jaká data se posílají a jak je minimalizovat.
+8. Odkaz na changelog nebo verzi API.
+
+Pak požádej někoho mimo tým, aby podle návodu poslal první testovací request. Pokud se zasekne, neopravuj člověka. Oprav dokumentaci. Člověk je v tomhle testovací runner s očima a kávou.
+
 ## Pracovní log
+
+- 2026-09-11: Doplněn Dodatek BX o API dokumentaci, rychlém startu, OpenAPI kontraktu, spustitelných příkladech, retry pravidlech a privacy-first API portálu.
 
 - 2026-09-11: Doplněn Dodatek BW o zákaznických rolích, oprávněních, backendové autorizaci, pozvánkách, externistech a privacy-first správě přístupů.
 - 2026-09-11: Doplněn Dodatek BV o supportním přístupu, impersonaci, dočasných session, zákaznickém auditním pohledu, interních rolích a privacy-first řešení podpory bez tajných průchodů.
