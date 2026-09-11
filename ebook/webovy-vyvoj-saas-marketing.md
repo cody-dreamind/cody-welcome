@@ -13068,7 +13068,126 @@ Vyber jeden produktový dluh, o kterém tým mluví déle než měsíc. Nepřepi
 
 Pokud žádný dluh nenajdeš, zeptej se supportu nebo člověka, který nejčastěji onboarduje zákazníky. Oni ho najdou. Pravděpodobně i se seznamem příkladů a lehce unaveným výrazem.
 
+## Dodatek CJ: Údržbové sprinty bez zamrzlého produktu
+
+Údržba produktu není trest za to, že tým neumí plánovat. Je to normální součást života SaaS. Každý týden přibývají nové požadavky, nové integrace, nové edge-casy, nové drobné kompromisy a občas i nové „tohle přece nemůže nikdo udělat“ scénáře, které zákazník udělá hned v pondělí v 8:07.
+
+Problém není samotná údržba. Problém je, když se tváří jako neviditelná práce. Pak se nedostane do roadmapy, nemá vlastníka, zákazník ji nevidí a tým ji dělá po večerech mezi feature requesty. Výsledek? Produkt se chvíli tváří rychlejší, ale pod kapotou roste vrstva drobných rizik, které jednou sečtou úroky. A úroky u produktového dluhu nejsou roztomilé. Spíš připomínají fakturu za server, který nikdo neumí vypnout.
+
+> Codyho komentář: Údržbový sprint není „týden, kdy nic nedodáváme“. Je to týden, kdy dodáváme stabilitu, rychlejší budoucí vývoj a méně supportového funění. Jen to nemá tak sexy demo jako nový graf s gradientem.
+
+### CJ.1 Dej údržbě jasný produktový cíl
+
+Údržbový sprint nezačínej větou „opravíme bordel“. To je pocit, ne plán. Začni konkrétním cílem, který jde vysvětlit zákazníkovi, supportu i obchodu.
+
+Dobré cíle zní například:
+
+- zkrátit čas řešení importních ticketů o polovinu,
+- snížit počet ručních zásahů při fakturační synchronizaci,
+- zpřehlednit role tak, aby zákazník nemusel psát na support kvůli každé změně oprávnění,
+- odstranit staré diagnostické logy s citlivými daty,
+- zrychlit nejpomalejší administrátorskou stránku,
+- připravit produkt na bezpečný export dat před enterprise pilotem.
+
+Špatný cíl zní „refaktor backendu“. Možná je potřeba, ale sám o sobě nic neříká o dopadu. Lepší formulace je: „Oddělit fakturační synchronizaci od ručního admin zásahu, aby support nemusel vstupovat do zákaznického účtu.“ Najednou je jasné, proč to existuje, komu to pomáhá a jak poznáš, že hotovo opravdu znamená hotovo.
+
+### CJ.2 Vyber malé téma, ne technickou poušť
+
+Údržbový sprint by měl mít ostré hranice. Když do něj naložíš cache, oprávnění, design systém, migrace, e-maily a „ještě trochu ten starý modul“, vznikne interní festival rozdělanosti. Tým se na konci týdne podívá na board a zjistí, že všechno je skoro hotové. Skoro hotové je v provozu elegantní označení pro nehotové.
+
+Praktické velikosti témat:
+
+| Téma sprintu | Dobrý rozsah | Nebezpečný rozsah |
+| --- | --- | --- |
+| Importy | Validace, preview chyb, šablona souboru. | Přepsat všechny datové vstupy v produktu. |
+| Role | Upravit dvě nejrizikovější role a auditní stopu. | Navrhnout kompletní nový permission engine bez migrace. |
+| Výkon | Zrychlit tři nejpomalejší obrazovky podle logů. | „Optimalizovat aplikaci“. |
+| Logování | Odstranit citlivé payloady a doplnit bezpečné `request_id`. | Přepsat observabilitu i alerting najednou. |
+| Dokumentace | Doplnit runbook pro jednu častou operaci. | Přepsat celou interní wiki, protože už jsme v tom. |
+
+Malý rozsah není nedostatek ambice. Je to obrana proti tomu, aby údržba sama nevytvořila další dluh.
+
+### CJ.3 Údržbu plánuj z reálných signálů
+
+Nejlepší údržbová témata nevznikají z dojmu, ale ze signálů. Nemusíš kvůli tomu sledovat každé kliknutí uživatele. Stačí ti kombinace provozních dat, supportu, review a krátké zpětné vazby od lidí, kteří s produktem pracují každý den.
+
+Zdroje signálů:
+
+- opakované support tickety ke stejné části produktu,
+- incidenty a drobné provozní výpadky,
+- ruční zásahy, které se opakují každý týden,
+- pomalé nebo chybové endpointy podle agregovaných logů,
+- místa, kde zákazník posílá citlivá data mimo produkt,
+- části administrace, kde se často pletou role nebo stavy,
+- interní úkoly, které mají v názvu „dočasně“, ale slaví narozeniny.
+
+Privacy-first pravidlo je jednoduché: údržbový signál má popisovat problém, ne člověka. Nepotřebuješ vědět, že konkrétní uživatel desetkrát klikl do stejného pole. Potřebuješ vědět, že pole generuje chyby, support dotazy nebo nejasné importy. To je rozdíl mezi řízením produktu a šmírováním s lepším dashboardem.
+
+### CJ.4 Udělej údržbový sprint viditelný zákazníkům
+
+Spousta týmů se bojí údržbu komunikovat, protože „zákazníka nezajímá interní refaktor“. To je pravda. Zákazníka nezajímá název databázové tabulky. Zajímá ho, že import je spolehlivější, role bezpečnější, export rychlejší a support nepotřebuje ručně sahat do účtu.
+
+Komunikuj výsledek jazykem přínosu:
+
+- „Zpřesnili jsme validaci importu, aby šly chyby opravit před nahráním dat.“
+- „Administrátoři teď vidí jasnější přehled rolí a změn oprávnění.“
+- „Exporty nově ukazují stav zpracování a bezpečný identifikátor dávky.“
+- „Zkrátili jsme dobu načítání přehledu faktur.“
+- „Omezili jsme interní diagnostiku tak, aby neukládala zbytečný obsah zákaznických dat.“
+
+Nemusíš z toho dělat velký launch. Stačí changelog, RSS položka, krátká poznámka v administraci nebo zpráva zákazníkům, kterých se změna týká. Přímé kanály jsou lepší než algoritmický ohňostroj. Tady fakt nepotřebujeme konfety z reklamního pixelu.
+
+### CJ.5 Sprint musí končit důkazem, ne pocitem
+
+Údržbový sprint bez měřitelného konce se snadno promění v pocitové „snad je to lepší“. Na konci proto napiš krátký výstup: co se změnilo, co se ověřilo, co zůstalo a jaký signál bude tým sledovat dál.
+
+Minimální závěrečný zápis:
+
+- **Cíl sprintu:** jakou bolest jsme řešili.
+- **Hotovo:** konkrétní změny v produktu, dokumentaci, testech nebo provozu.
+- **Ověření:** jak víme, že změna funguje.
+- **Dopad na zákazníka:** co je pro něj jednodušší, bezpečnější nebo rychlejší.
+- **Privacy kontrola:** jestli změna nesbírá víc dat, než potřebuje.
+- **Zbytky:** co záměrně zůstalo mimo rozsah.
+- **Další signál:** kdy se k tématu vrátíme.
+
+Tenhle zápis nemusí být dlouhý. Má být dohledatelný. Za tři měsíce nechceš řešit archeologii v chatu, kde někdo napsal „jo, to jsme tehdy nějak opravili“.
+
+### CJ.6 Konkrétní příklad: údržba importů bez velkého přepisu
+
+SaaS pro správu členství má import kontaktů. Produkt funguje, ale support každý týden řeší nejasné chyby a zákazníci posílají CSV soubory e-mailem, protože nerozumí, co se pokazilo. Tým by mohl navrhnout velký importní redesign. To je lákavé. A možná správné později. Teď ale stačí údržbový sprint s jasným cílem: „Snížit počet importních ticketů a zabránit posílání souborů mimo produkt.“
+
+Rozsah sprintu:
+
+1. přidat kontrolu povinných sloupců před nahráním,
+2. zobrazit prvních 10 chyb jako náhled bez ukládání celého souboru,
+3. připravit CSV šablonu ke stažení,
+4. přidat bezpečný `import_batch_id` pro support,
+5. doplnit nápovědu s příklady častých chyb,
+6. odstranit staré logování celých řádků,
+7. přidat testy na tři nejčastější chyby.
+
+Výsledek: zákazník opraví problém sám, support neprosí o soubor e-mailem a produkt neukládá citlivější diagnostiku, než potřebuje. To je údržba, která má produktový, obchodní i privacy-first smysl.
+
+### CJ.7 Checklist údržbového sprintu
+
+- [ ] Sprint má jeden jasný cíl formulovaný jako zákaznický, provozní nebo bezpečnostní přínos.
+- [ ] Rozsah je omezený na jednu oblast produktu nebo jeden typ provozního problému.
+- [ ] Téma vychází z reálných signálů: support, incidenty, ruční práce, agregované logy nebo review.
+- [ ] Každá změna má ověření: test, checklist, runbook, metrika nebo krátká zákaznická kontrola.
+- [ ] Údržba nevyžaduje nové plošné sledování uživatelů.
+- [ ] Výsledek je popsaný v changelogu, interním zápisu nebo zákaznické poznámce.
+- [ ] Zbytky mimo rozsah jsou explicitně zapsané, aby se netvářily jako zapomenuté.
+- [ ] Po sprintu se odstraní dočasné přístupy, exporty, debug režimy a diagnostické výjimky.
+
+### CJ.8 Mini úkol na 45 minut
+
+Vyber jednu oblast produktu, která poslední měsíc generovala support práci nebo ruční zásahy. Napiš k ní údržbový sprint na jeden týden: cíl, rozsah, tři až pět konkrétních úkolů, ověření a privacy kontrolu. Pak jednu věc z toho zmenši tak, aby šla udělat ještě tento týden.
+
+Pokud se ti zdá, že žádná údržba není potřeba, otevři posledních deset support dotazů. Produkt ti obvykle napoví sám. Jen nemluví v roadmapových bublinách, ale v opakovaných bolestech.
+
 ## Pracovní log
+- 2026-09-11: Doplněn Dodatek CJ o údržbových sprintech, jasném cíli údržby, omezení rozsahu, práci se signály, zákaznické komunikaci výsledků a privacy-first kontrole.
 - 2026-09-11: Doplněn Dodatek CI o řízeném produktovém dluhu, rozlišování zkratek od rizik, privacy-first pohledu na data a checklistu pro malé SaaS týmy.
 - 2026-09-11: Doplněn Dodatek CH o kontinuálním zlepšování, improvement backlogu, převodu ponaučení do checklistů, testů, dokumentace a privacy-first měření účinku bez plošného sledování.
 - 2026-09-11: Doplněn Dodatek CG o post-release review, oddělení faktů od interpretací, slabé signály, systémová ponaučení, obchodní využití výstupů a privacy-first práci s daty při retrospektivě.
