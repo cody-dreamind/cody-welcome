@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy, postupné rollouty, e-mailová doručitelnost, cache, statická aktiva, API klíče, auditní logy, stránka bezpečnosti a soukromí, souborové přílohy, hlášení zranitelností, retence dat, checkout, waitlisty, produktová dema, trialy, piloty a produkční přechody.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy, postupné rollouty, e-mailová doručitelnost, cache, statická aktiva, API klíče, auditní logy, stránka bezpečnosti a soukromí, souborové přílohy, hlášení zranitelností, retence dat, checkout, waitlisty, produktová dema, trialy, piloty, produkční přechody, sandbox a testovací integrace.
 
 ---
 
@@ -11456,8 +11456,156 @@ Vyber jeden API scénář, který zákazníci nebo interní tým používají ne
 
 Pak požádej někoho mimo tým, aby podle návodu poslal první testovací request. Pokud se zasekne, neopravuj člověka. Oprav dokumentaci. Člověk je v tomhle testovací runner s očima a kávou.
 
+## Dodatek BY: Sandbox a testovací prostředí bez falešného pocitu bezpečí
+
+Sandbox je slib: „Můžeš si mě bezpečně vyzkoušet, aniž bys rozbil produkci.“ Jenže spousta sandboxů je ve skutečnosti jen produkce s jinou barvou tlačítka a trochou naděje. To je pěkné pro demo, ale mizerné pro zákazníka, který si napojuje účetnictví, platby, exporty nebo interní automatizace.
+
+Dobré testovací prostředí má tři úkoly: chránit produkční data, věrně ukázat chování API a dát vývojáři rychlou zpětnou vazbu. Když chybí první bod, riskuješ únik dat. Když chybí druhý, zákazník otestuje něco, co v ostrém provozu neplatí. Když chybí třetí, integrace skončí v support frontě vedle dotazu „a proč mi to včera fungovalo?“.
+
+### BY.1 Odděl sandbox jako prostředí, ne jako přepínač v UI
+
+Sandbox musí mít vlastní API základnu, vlastní klíče, vlastní webhook endpointy a jasné označení v administraci. Nestačí parametr `mode=test`, který někdo zapomene poslat. U malého SaaS je rozumný začátek:
+
+- `https://api.example.com` pro produkci.
+- `https://sandbox-api.example.com` pro testy.
+- Samostatné API klíče s prefixem, třeba `sk_live_` a `sk_test_`.
+- Viditelný štítek prostředí v každé stránce, logu a webhook pokusu.
+- Nemožnost použít testovací klíč v produkčním endpointu a naopak.
+
+Tohle není kosmetika. Je to pojistka proti tomu, aby juniorní skript, cron nebo účetní integrace neposlala testovací faktury reálným lidem. Ano, i to se děje. Software je kreativní tvor, když mu necháš otevřené dveře.
+
+### BY.2 Testovací data mají být realistická, ale ne osobní
+
+Největší chyba sandboxu je kopie produkční databáze „jen pro interní test“. Pokud obsahuje jména, e-maily, faktury, poznámky podpory nebo obchodní historii, není to sandbox. Je to produkční riziko v převleku.
+
+Privacy-first pravidlo je jednoduché: sandbox plň syntetickými nebo anonymizovanými daty. Testovací zákazník může být „Firma Borůvka s.r.o.“, testovací e-mail `ucetni@example.test` a testovací faktura na 123 Kč. Nemusíš si hrát na reálné lidi. Potřebuješ reálné scénáře.
+
+Dobrá sada testovacích dat obsahuje:
+
+- Jeden účet bez dat pro čistý onboarding.
+- Jeden účet s běžným objemem dat.
+- Jeden účet na hraně limitů, třeba hodně položek v exportu.
+- Jeden účet s chybami: neplatné DIČ, chybějící adresa, expirovaný token.
+- Ukázkové webhook události pro úspěch, chybu, retry a zrušení.
+
+Codyho komentář: Testovací data mají být trochu nudná. Pokud jsou zajímavější než produkt, právě sis vytvořil interní reality show, ne bezpečný sandbox.
+
+### BY.3 Chování sandboxu musí být dokumentované
+
+Sandbox nikdy nebude stoprocentní produkce. Některé e-maily se neposílají, platby se jen simulují, čas se dá posunout, webhooky mají kratší frontu a externí služby mohou být nahrazené mockem. To je v pořádku, pokud to řekneš nahlas.
+
+V dokumentaci uveď:
+
+- Jak získat testovací API klíč.
+- Které endpointy se chovají stejně jako produkce.
+- Které endpointy jsou simulované.
+- Jak vyvolat konkrétní chybové stavy.
+- Jak otestovat webhook podpis, retry a idempotenci.
+- Jak dlouho se drží testovací data.
+- Jak sandbox vyčistit nebo resetovat.
+
+Pokud používáš OpenAPI popis, drž ho aktuální i pro sandbox. OpenAPI Initiative FAQ stále zmiňuje verzi 3.1.1 z 24. 10. 2024, ale stránka „latest“ specifikace už uvádí OpenAPI Specification 3.2.0 z 19. 9. 2025. Pro malý tým je důležitější konzistentní, validovaný popis než hon za verzí kvůli verzi. Zdroj: https://www.openapis.org/faq a https://spec.openapis.org/oas/latest.html
+
+### BY.4 Chyby a limity musí jít v sandboxu vyvolat záměrně
+
+Vývojář integrace nepotřebuje jen happy path. Potřebuje vědět, co se stane, když:
+
+- pošle duplicitní požadavek,
+- překročí rate limit,
+- použije neplatný scope,
+- webhook endpoint vrátí `500`,
+- export trvá déle než obvykle,
+- požadavek projde validací formátu, ale narazí na obchodní pravidlo.
+
+U API chyb se hodí držet stabilní formát. RFC 9457 definuje „Problem Details for HTTP APIs“, tedy standardizovaný způsob, jak v odpovědi nést strojově čitelné detaily problému. Zdroj: https://www.rfc-editor.org/rfc/rfc9457.html
+
+Prakticky můžeš přidat testovací hlavičku nebo speciální hodnoty, které vyvolají konkrétní stav:
+
+```http
+POST /sandbox/invoices
+X-Test-Scenario: rate_limit
+```
+
+Nebo bezpečnější variantu přes předpřipravené testovací objekty:
+
+```json
+{
+  "customer_id": "cus_test_vat_invalid",
+  "amount": 12300,
+  "currency": "CZK"
+}
+```
+
+Důležité je, aby to fungovalo jen v sandboxu. Produkční API nemá přijímat magické testovací zkratky, protože magické zkratky mají nepříjemnou schopnost najít si cestu do pátečního releasu.
+
+### BY.5 Webhooky testuj jako samostatný produkt
+
+Webhook není jen „pošleme POST a uvidíme“. Je to mini doručovací systém. Sandbox má umožnit vývojáři:
+
+- poslat testovací událost ručně,
+- zobrazit historii pokusů o doručení,
+- zopakovat konkrétní webhook,
+- ověřit podpis bez odhalení tajemství,
+- simulovat zpoždění, duplicitu a změnu pořadí událostí,
+- nastavit jiný endpoint pro sandbox a produkci.
+
+U každého pokusu ukaž čas, stav, HTTP kód, `request_id`, typ události a bezpečně zkrácený payload. Neukazuj celé citlivé objekty jako ve výloze. Pokud zákazník potřebuje ladit fakturační webhook, nepotřebuje vidět osobní poznámky z podpory ani interní metadata účtu.
+
+### BY.6 Přechod do produkce udělej jako bránu, ne jako tajný rituál
+
+Když zákazník integraci otestuje, potřebuje jasně vědět, co ještě zbývá před ostrým provozem. V administraci mu ukaž krátký checklist:
+
+- Produkční API klíč vytvořený konkrétní rolí.
+- Webhook endpoint ověřený přes podepsanou testovací událost.
+- Idempotence otestovaná duplicitním požadavkem.
+- Rate limit a retry pravidla přečtená a potvrzená.
+- Kontaktní e-mail pro incidenty nastavený.
+- Export nebo záloha dat ověřená před prvním produkčním importem.
+
+Tohle je produktová zkušenost, ne byrokracie. Pomáhá zákazníkovi nenasadit integraci stylem „nějak to klapne“. Nějak to klapne je strategie vhodná pro palačinky, ne pro B2B SaaS.
+
+### BY.7 Konkrétní příklad: sandbox pro fakturační integraci
+
+Představ si SaaS, který posílá faktury do účetního systému. Minimum dobrého sandboxu:
+
+1. Zákazník si v administraci vytvoří `sk_test_` klíč s oprávněním `invoices:read` a `invoices:export`.
+2. Dokumentace ukáže ukázkovou fakturu, dobropis, fakturu s neplatným DIČ a fakturu čekající na export.
+3. Endpoint `/sandbox/invoices/export` vrací skutečný tvar odpovědi, ale pracuje jen se syntetickými daty.
+4. Webhook `invoice.exported` lze poslat ručně z administrace.
+5. Historie doručení ukazuje status, pokusy a `request_id`, ale neobsahuje celé účetní payloady navždy.
+6. Před produkčním přepnutím systém vyžádá nový produkční klíč a samostatný webhook podpis.
+
+Výsledek: zákazník otestuje skutečnou integraci, ale žádné ostré faktury necestují do testovacího chaosu. Přesně takhle má vypadat nudná profesionalita. Nudná profesionalita je mimochodem kompliment.
+
+### BY.8 Checklist sandboxu a testovacích integrací
+
+- Má sandbox vlastní doménu nebo jasně oddělenou API základnu?
+- Jsou testovací a produkční klíče technicky nekompatibilní?
+- Používáš syntetická nebo anonymizovaná data místo kopie produkce?
+- Lze záměrně vyvolat běžné chyby, limity a webhook retry scénáře?
+- Je dokumentováno, co sandbox simuluje a co se chová stejně jako produkce?
+- Má zákazník historii webhook doručení bez zbytečného úniku payloadů?
+- Umí zákazník sandbox resetovat bez zásahu podpory?
+- Existuje jasná brána pro přechod do produkce?
+- Mají sandbox data vlastní retenci a pravidelné čištění?
+- Neobsahují testovací e-maily, logy a exporty osobní údaje reálných lidí?
+
+### BY.9 Mini úkol na 60 minut
+
+Vyber jednu integraci, kterou zákazníci často nastavují ručně, a navrhni k ní první verzi sandboxu:
+
+1. Sepiš tři happy path scénáře a pět chybových scénářů.
+2. Navrhni prefix testovacích klíčů a oddělenou API základnu.
+3. Vytvoř pět syntetických testovacích objektů.
+4. Přidej do dokumentace odstavec „Co sandbox simuluje“.
+5. Navrhni jeden bezpečný způsob, jak zákazník vyvolá testovací webhook.
+
+Nemusíš postavit kompletní platformu pro integrátory během odpoledne. Stačí první bezpečný sandbox, který zabrání produkčním karambolům a zároveň dá zákazníkovi pocit: „Jo, tomuhle rozumím.“ To je přesně ten moment, kdy se API přestává tvářit jako tajná chodba a začíná fungovat jako produkt.
+
+
 ## Pracovní log
 
+- 2026-09-11: Doplněn Dodatek BY o sandboxu, testovacích API klíčích, syntetických datech, webhook testování a bezpečném přechodu do produkce.
 - 2026-09-11: Doplněn Dodatek BX o API dokumentaci, rychlém startu, OpenAPI kontraktu, spustitelných příkladech, retry pravidlech a privacy-first API portálu.
 
 - 2026-09-11: Doplněn Dodatek BW o zákaznických rolích, oprávněních, backendové autorizaci, pozvánkách, externistech a privacy-first správě přístupů.
