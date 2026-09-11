@@ -274,6 +274,152 @@ Web nemusí být velký. Musí být ostrý. Když každá stránka pomáhá náv
 
 ---
 
+## 3. SaaS bez přepálené architektury
+
+SaaS produkt se dá zničit dvěma opačnými způsoby. První je slepit všechno narychlo tak, že se tým za tři měsíce bojí změnit tlačítko. Druhý je navrhnout distribuovanou kosmickou stanici pro produkt, který má zatím pět pilotních uživatelů a jednu fakturu. Obě cesty bolí. Jedna hned, druhá později — a obě často zbytečně.
+
+Dobrá SaaS architektura v začátku není ta největší. Je to taková, která umožní rychle ověřit hodnotu, bezpečně obsloužit první zákazníky a nezavřít si dveře pro další růst. Tedy žádné „všechno bude mikroservisa“, ale ani „hesla uložíme do tabulky `users_final_final2`“. Prosím, internet už trpěl dost.
+
+První verze SaaS má odpovědět hlavně na tyto otázky:
+
+1. **Umíme doručit slíbený výsledek opakovaně?**
+2. **Umíme bezpečně spravovat účty, data a přístupy?**
+3. **Umíme zjistit, kde uživatelé naráží?**
+4. **Umíme účtovat nebo alespoň řídit piloty bez ručního chaosu?**
+5. **Umíme produkt provozovat bez toho, aby každý incident byl detektivka?**
+
+### MVP není polotovar bez odpovědnosti
+
+MVP znamená minimum, které ověří hodnotu. Ne minimum, za které se pak musíš omlouvat. U SaaS produktu je rozdíl mezi funkcí, která ještě chybí, a základem, který nesmí selhat. Export do PDF může počkat. Přihlášení, práva, zálohy a srozumitelné chybové stavy obvykle ne.
+
+Rozumné MVP by mělo mít tři vrstvy:
+
+- **Jádro hodnoty:** hlavní workflow, kvůli kterému si produkt někdo pořídí.
+- **Provozní minimum:** účty, pozvánky, práva, základní administrace, logy, zálohy.
+- **Učící smyčka:** měření klíčových akcí, sběr feedbacku, jednoduchý způsob prioritizace.
+
+Příklad: pokud stavíš nástroj pro plánování práce techniků, MVP není „dashboard, chat, AI doporučení a mobilní aplikace“. MVP může být: import zakázek, kalendář techniků, přiřazení práce, notifikace změny a přehled splnění. K tomu administrace týmu, audit základních změn a možnost exportu dat. To už řeší reálný problém a zároveň se to dá provozovat bez kouzelné tabulky v zákulisí.
+
+### Monolit není sprosté slovo
+
+Pro malý tým je dobře navržený modulární monolit často nejlepší start. Jedna aplikace, jedna databáze, jasné doménové moduly a jednoduchý deployment. Méně pohyblivých částí znamená méně míst, kde se dá rozbít páteční odpoledne.
+
+Modulární monolit neznamená kouli bahna. Znamená, že v kódu držíš hranice:
+
+- **Accounts:** uživatelé, organizace, role, pozvánky.
+- **Billing:** plány, fakturační stav, limity, trialy.
+- **Product core:** hlavní doména produktu, například projekty, zakázky nebo dokumenty.
+- **Notifications:** e-maily, systémové zprávy, webhooky.
+- **Audit a compliance:** důležité události, exporty, mazání, retenční pravidla.
+- **Admin:** interní nástroje pro podporu a řešení problémů.
+
+Každý modul by měl mít jasnou odpovědnost. Nemusí běžet jako samostatná služba. Důležité je, aby změna v onboardingu nerozbila billing a aby produktová logika nebyla rozházená mezi třiceti controllery jako konfety po firemním večírku.
+
+> Codyho komentář: Mikroservisy jsou skvělé, když máš organizační problém ve velkém týmu. Když máš tři lidi a osm zákazníků, mikroservisy jsou často jen dražší způsob, jak si pořídit více logů k proklínání.
+
+### Multi-tenant data: jednoduše, ale vědomě
+
+SaaS typicky obsluhuje více zákazníků v jedné aplikaci. To znamená, že musíš vědět, jak odděluješ data jednotlivých organizací. Tady se nevyplácí improvizace.
+
+Nejběžnější start pro menší B2B SaaS je jedna databáze a u většiny tabulek sloupec typu `organization_id` nebo `tenant_id`. Je to jednoduché na provoz, zálohování i vývoj. Ale musí být důsledné:
+
+- každý dotaz na zákaznická data filtruje organizaci,
+- přístupová práva se kontrolují na serveru, ne jen v UI,
+- interní administrace má audit a omezený přístup,
+- testy ověřují, že uživatel nevidí cizí data,
+- export a mazání dat pracují po hranici organizace,
+- logy neukládají zbytečně citlivý obsah.
+
+Později může dávat smysl databáze na zákazníka nebo oddělené prostředí pro větší klienty. Do první verze to ale patří jen tehdy, když to vyžaduje obchodní realita, regulace nebo bezpečnostní požadavek konkrétního segmentu. Jinak je to často složitost zaplacená předem, bez jistoty návratnosti.
+
+### Onboarding rozhoduje o aktivaci
+
+U SaaS produktu nestačí, že se uživatel zaregistruje. Musí dojít k prvnímu momentu hodnoty. Aktivace není „vytvořil účet“. Aktivace je „udělal první užitečnou věc“.
+
+Před stavbou onboardingového průvodce si napiš jednu větu:
+
+> Uživatel je aktivovaný, když __________.
+
+Pro plánování zakázek to může být: „když importuje první zakázku a přiřadí ji konkrétnímu technikovi“. Pro analytický nástroj: „když připojí první zdroj dat a uvidí první report“. Pro CRM: „když přidá první obchodní příležitost a nastaví další krok“.
+
+Onboarding potom navrhuj kolem této akce:
+
+- neptej se na zbytečné údaje před první hodnotou,
+- ukaž příkladová data, pokud prázdná obrazovka nedává smysl,
+- vysvětli jeden další krok, ne celý vesmír,
+- nabídni import tam, kde ruční zadávání bolí,
+- pošli užitečný e-mail jen tehdy, když pomáhá pokračovat,
+- umožni návrat k průvodci bez podpory.
+
+Privacy-first onboarding sbírá minimum. Když nepotřebuješ telefon, velikost firmy nebo pozici uživatele pro první hodnotu, nech to na později. Lepší profil se dá doplnit postupně, až existuje důvěra a důvod.
+
+### Billing a limity bez zbytečného dramatu
+
+Billing je produktová funkce, ne účetní přílepek. Ovlivňuje trial, upgrade, podporu, limity, faktury i očekávání zákazníka. Proto je dobré ho navrhnout jednoduše a čitelně už v první obchodní verzi.
+
+Na začátku často stačí:
+
+- jeden nebo dva placené plány,
+- jasný trial nebo pilotní období,
+- ruční schválení enterprise výjimek,
+- interní přehled stavu zákazníka,
+- jednoduché limity podle hodnoty produktu,
+- upozornění před tvrdým zablokováním.
+
+Limity mají být pochopitelné. Když účtuješ podle počtu uživatelů, projektů nebo zpracovaných položek, zákazník musí vědět, proč je to spravedlivé. Špatný limit trestá úspěch špatným způsobem. Dobrý limit roste s hodnotou, kterou zákazník získává.
+
+Pokud billing v první fázi řešíš ručně, napiš si to jako vědomé rozhodnutí. Ruční fakturace pro pět pilotních zákazníků může být v pořádku. Ruční úpravy databáze při každém upgradu už v pořádku nejsou. Tam má vzniknout aspoň interní administrace.
+
+### Admin a podpora nejsou ostuda
+
+Zakladatelé někdy podceňují interní nástroje, protože „to přece zákazník nevidí“. Jenže zákazník velmi rychle uvidí, když podpora nic neví, neumí obnovit přístup a každý problém končí větou „pošleme to vývojářům“.
+
+První interní admin může být jednoduchý, ale měl by umět:
+
+- najít organizaci a uživatele,
+- zobrazit stav plánu, trialu a limitů,
+- zkontrolovat poslední důležité události,
+- znovu poslat pozvánku nebo ověřovací e-mail,
+- bezpečně vypnout problematickou integraci,
+- exportovat základní diagnostiku bez citlivého obsahu.
+
+Interní nástroje musí mít silnější bezpečnost než běžné UI. Omezený přístup, audit akcí a žádné zbytečné čtení zákaznického obsahu. Podpora má řešit problém, ne listovat cizím byznysem jako bulvárem.
+
+### Technický dluh si zapisuj jako obchodní riziko
+
+Technický dluh není morální selhání. Je to půjčka. Problém začíná, když nikdo neví, kolik se dluží a kdy se to začne splácet. U SaaS produktu je dobré rozlišovat tři typy dluhu:
+
+- **Vědomý dluh:** víme, proč jsme zvolili jednodušší řešení, a máme spouštěč pro návrat.
+- **Nevědomý dluh:** vznikl chaosem, nikdo ho nepřiznal a teď překvapuje při každé změně.
+- **Nebezpečný dluh:** ohrožuje data, bezpečnost, fakturaci nebo dostupnost.
+
+Vědomý dluh může být dobrý obchod. Například ruční import dat pro první piloty, dokud nevíš, jaké formáty zákazníci opravdu používají. Nebezpečný dluh nepatří do „někdy“. Pokud systém nemá zálohy, přístupová práva nebo způsob obnovy, není to rychlost. Je to hazard v mikině startupu.
+
+Praktická pomůcka: ke každému většímu kompromisu napiš do backlogu položku ve formátu:
+
+- **Co jsme zjednodušili:** například ruční schvalování trialů.
+- **Proč:** rychlejší validace pilotů.
+- **Riziko:** chyba při nastavení plánu, pomalá reakce podpory.
+- **Spouštěč řešení:** více než 10 aktivních pilotů nebo první placený self-service plán.
+- **Cílový stav:** admin akce s audit logem.
+
+### Checklist: SaaS první verze bez kosmické lodi
+
+- [ ] Hlavní workflow doručuje konkrétní hodnotu bez ruční magie za oponou.
+- [ ] Účty, organizace, role a pozvánky mají jasný model.
+- [ ] Každý přístup k zákaznickým datům respektuje hranici organizace.
+- [ ] Onboarding vede k jedné definované aktivační akci.
+- [ ] Trial, pilot nebo billing stav je vidět v interní administraci.
+- [ ] Limity jsou srozumitelné a navázané na hodnotu produktu.
+- [ ] Existuje základní audit důležitých akcí.
+- [ ] Zálohy, obnova a chybové logy nejsou „doděláme potom“.
+- [ ] Interní admin neukazuje víc zákaznických dat, než je nutné.
+- [ ] Technický dluh má popsané riziko a spouštěč návratu.
+
+SaaS nemusí začínat jako enterprise platforma. Má začínat jako spolehlivý stroj na doručení jedné hodnoty pro jeden segment. Když se první zákazníci vrací, platí a říkají, co jim chybí dál, teprve pak má smysl přidávat další patra. Nejdřív základová deska. Až potom bazén na střeše.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -286,3 +432,4 @@ Web nemusí být velký. Musí být ostrý. Když každá stránka pomáhá náv
 
 - **2026-09-11:** Založena struktura e-booku, osnova a dokončená kapitola 1 o validaci produktu před vývojem, včetně privacy-first doporučení a zdrojů ke GDPR/ePrivacy.
 - **2026-09-11:** Dopsána kapitola 2 o webu jako obchodním systému: struktura stránek, důvěra, konverze bez manipulace, privacy-first měření, obsah, rychlost a checklist.
+- **2026-09-11:** Dopsána kapitola 3 o SaaS bez přepálené architektury: MVP, modulární monolit, multi-tenant data, onboarding, billing, admin a technický dluh.
