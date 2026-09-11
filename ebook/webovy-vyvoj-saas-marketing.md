@@ -12647,7 +12647,149 @@ Vyber jeden nedávný nebo plánovaný release a napiš pro něj jednostránkov�
 
 Když plán potřebuje víc než stránku, pravděpodobně neplánuješ hypercare, ale opisuješ celou firmu do tabulky. Zkrať ho. Po spuštění potřebuješ jasnost, ne román s přílohami.
 
+## Dodatek CG: Post-release review bez rituálního obviňování
+
+Po releasu se často stane jedna ze dvou chyb. Buď tým hned skočí na další funkci a všechno, co se při spuštění naučil, nechá vyprchat. Nebo uspořádá velké review, které se změní v soudní proces s tabulkou, pasivní agresí a jedním statečným člověkem, který už nikdy nepoužije slovo „retrospektiva“ bez tikání oka.
+
+Post-release review má být praktické. Nehledá viníka, ale zlepšení systému. Cílem je zjistit, co release zrychlilo, co ho zpomalilo, kde vzniklo riziko pro zákazníky a co příště upravit v produktu, procesu, dokumentaci nebo monitoringu.
+
+> Codyho komentář: Pokud review skončí větou „musíme víc komunikovat“, nic jste nezjistili. To je firemní verze horoskopu. Dobré review končí konkrétní změnou s vlastníkem.
+
+### CG.1 Udělej review brzy, ale ne uprostřed požáru
+
+Review nedělej v první hodině po spuštění, kdy tým ještě sleduje chyby, support a metriky. Nedělej ho ale ani za měsíc, kdy si všichni pamatují hlavně to, že bylo moc kávy a málo spánku. Ideální je krátké okno po ukončení hypercare: signály jsou čerstvé, ale lidé už nejsou v krizovém režimu.
+
+Pro menší release stačí 45 až 60 minut. Pro větší migraci nebo změnu s dopadem na zákazníky rozděl review na dvě části: provozní fakta a rozhodnutí o zlepšeních. První část sbírá realitu, druhá vybírá opatření. Nemíchej je hned od začátku, jinak se tým začne hádat o řešení dřív, než se shodne na problému.
+
+Dobrá příprava review:
+
+- timeline releasu a hypercare,
+- seznam incidentů a blokujících bugů,
+- support dotazy a opakující se nejasnosti,
+- změny v metrikách po spuštění,
+- zpětná vazba od zákazníků,
+- seznam ručních zásahů,
+- rozdíly mezi plánem a realitou,
+- rozhodnutí, která bylo potřeba udělat během provozu.
+
+Privacy-first poznámka: do review nenos celé exporty tiketů, chatů nebo zákaznických dat. Stačí agregace, anonymizované příklady, čas, dopad, typ účtu a odkaz na interní záznam s řízeným přístupem. Review není datové smetiště s projektorem.
+
+### CG.2 Odděl fakta, interpretace a akce
+
+Největší chaos v review vzniká, když se fakta, dojmy a řešení píšou do jednoho seznamu. Vypadá to rychle, ale za týden nikdo neví, co se vlastně stalo a proč padlo rozhodnutí.
+
+Použij jednoduché tři sloupce:
+
+| Vrstva | Otázka | Příklad |
+| --- | --- | --- |
+| Fakt | Co se prokazatelně stalo? | 14 % importních jobů se první den opakovalo kvůli timeoutu. |
+| Interpretace | Proč si myslíme, že se to stalo? | Testovací data neměla stejný objem a síťovou latenci jako produkce. |
+| Akce | Co konkrétně změníme? | Přidat zátěžový test importu s produkčně podobným objemem před dalším releasem. |
+
+Tohle oddělení chrání tým před dvěma extrémy: před emocemi bez důkazů a před analýzou bez výsledku. Fakt bez akce je zajímavost. Akce bez faktu je loterie s Jira ticketem.
+
+### CG.3 Hledej slabé signály, nejen velké incidenty
+
+Velké incidenty si tým zapamatuje sám. Slabé signály se ztratí: tři zákazníci se ptali na stejnou věc, support musel ručně upravit onboarding, interní dokumentace neseděla s produkcí, jeden endpoint měl divné špičky, zákazníci nevěděli, jestli mají použít starý nebo nový export.
+
+Právě slabé signály často ukazují, kde produkt zbytečně drhne. Při review se ptej:
+
+- Který dotaz se opakoval častěji, než jsme čekali?
+- Kde zákazníci potřebovali podporu, i když funkce technicky fungovala?
+- Který ruční zásah by měl zmizet před dalším releasem?
+- Které metriky jsme neměli připravené a chyběly nám při rozhodování?
+- Která dokumentace byla zastaralá nebo nejasná?
+- Kde jsme sbírali víc dat, než bylo nutné pro diagnostiku?
+
+Slabý signál neznamená automaticky nový projekt. Znamená to, že máš kandidáta na malou úpravu: text v UI, nápovědu, alert, validaci, test, metodu exportu nebo pravidlo v runbooku.
+
+### CG.4 Přepiš ponaučení do systému, ne do paměti lidí
+
+Nejhorší závěr review je „příště si na to dáme pozor“. Nedáte. Lidé mají práci, dovolené, jiné projekty a mozky, které odmítají fungovat jako distribuovaný change management systém.
+
+Každé důležité ponaučení musí skončit v jednom z těchto míst:
+
+- checklist před releasem,
+- runbook nebo incident postup,
+- monitorovací alert,
+- testovací scénář,
+- šablona zákaznické komunikace,
+- dokumentace pro support,
+- onboarding checklist,
+- produktový backlog,
+- rozhodovací záznam.
+
+Příklad:
+
+| Ponaučení | Špatný závěr | Dobrý závěr |
+| --- | --- | --- |
+| Zákazníci nechápali nový export | „Musíme to líp vysvětlit.“ | Přidat ukázkový soubor, tooltip u exportu a článek do nápovědy. |
+| Import padal na velkých účtech | „Musíme lépe testovat.“ | Přidat testovací dataset se 100k záznamy a alert na opakované importy. |
+| Support posílal screenshoty s citlivými údaji | „Budeme opatrnější.“ | Upravit support šablonu: sbírat ID záznamu, čas chyby a roli, ne screenshot celé stránky. |
+
+Systémová změna je nudnější než heroické sliby. Proto funguje.
+
+### CG.5 Udělej z review obchodní nástroj
+
+Post-release review není jen interní hygiena. Pomáhá i obchodně. Když tým ví, co se při releasu zlepšilo, může to použít v komunikaci se zákazníky, v případové studii, v dokumentaci nebo v prodejních hovorech.
+
+Hledej odpovědi na otázky:
+
+- Co je po releasu pro zákazníka rychlejší, bezpečnější nebo jasnější?
+- Které riziko jsme odstranili?
+- Jak se zlepšila administrace, onboarding nebo reporting?
+- Co jsme změnili díky zpětné vazbě zákazníků?
+- Které privacy-first rozhodnutí stojí za veřejné vysvětlení?
+
+Nepřeháněj. Release komunikace nemá znít jako start rakety, když jste opravili export do CSV. Ale pokud jste zkrátili onboarding, zpřehlednili práva, zlepšili export dat nebo omezili zbytečné logování, řekni to. Zákazníci si nevšimnou každé interní úpravy, dokud jim nepomůžeš pochopit dopad.
+
+### CG.6 Konkrétní příklad: review po spuštění nového importu dat
+
+Malý B2B SaaS spustil nový import zákaznických záznamů. Hypercare ukázal tři věci: import technicky fungoval, ale u velkých účtů byl pomalý; zákazníci nevěděli, které sloupce jsou povinné; support dostával celé soubory e-mailem, i když k diagnostice stačil anonymizovaný vzorek a ID importu.
+
+Review tým rozdělil na fakta, interpretace a akce:
+
+1. Fakt: velké importy trvaly déle než očekávané interní měřítko.
+2. Interpretace: testovací soubory byly malé a neobsahovaly problematické kombinace sloupců.
+3. Akce: přidat produkčně podobný testovací dataset bez reálných osobních údajů.
+4. Fakt: nejčastější support dotaz byl „proč import přeskočil řádek“.
+5. Akce: přidat preview validace před spuštěním importu a stáhnutelný report chyb.
+6. Fakt: support žádal zákazníky o celé soubory.
+7. Akce: upravit šablonu podpory tak, aby požadovala ID importu, čas a tři anonymizované řádky, ne kompletní export.
+
+Výsledek review nebyl tlustý dokument. Byly to čtyři změny: testovací dataset, validační preview, chybový report a support šablona. Krása. Žádné divadlo, jen méně bolesti příště.
+
+### CG.7 Checklist post-release review
+
+- [ ] Review proběhne po ukončení hypercare, dokud jsou fakta čerstvá.
+- [ ] Tým má timeline releasu, incidenty, support signály a provozní metriky.
+- [ ] Fakta, interpretace a akce jsou oddělené.
+- [ ] Každá akce má vlastníka, termín a místo, kam se promítne.
+- [ ] Review řeší i slabé signály, ne jen velké incidenty.
+- [ ] Zákaznická data jsou v review agregovaná nebo anonymizovaná.
+- [ ] Ponaučení se promítne do checklistů, testů, runbooků nebo dokumentace.
+- [ ] Výstup obsahuje maximálně několik prioritních zlepšení, ne seznam přání od celé firmy.
+- [ ] Tým rozhodne, co se komunikuje zákazníkům, supportu a obchodu.
+- [ ] Po měsíci se zkontroluje, zda se akce opravdu staly.
+
+### CG.8 Mini úkol na 60 minut
+
+Vezmi poslední release a napiš jednostránkové review:
+
+1. tři fakta, která se stala po spuštění,
+2. dvě věci, které zákazníci nechápali,
+3. jeden provozní signál, který jste neměli připravený,
+4. jednu věc, která fungovala dobře a má se opakovat,
+5. tři konkrétní akce s vlastníkem,
+6. jednu úpravu support šablony,
+7. jednu úpravu release checklistu,
+8. jednu větu pro zákaznickou komunikaci,
+9. datum, kdy zkontrolujete splnění akcí.
+
+Když z review nevznikne žádná změna v systému, byl to jen firemní táborák s tabulkou. Hezké, možná terapeutické, ale příští release na to zapomene rychleji než marketing na starý UTM parametr.
+
 ## Pracovní log
+- 2026-09-11: Doplněn Dodatek CG o post-release review, oddělení faktů od interpretací, slabé signály, systémová ponaučení, obchodní využití výstupů a privacy-first práci s daty při retrospektivě.
 - 2026-09-11: Doplněn Dodatek CF o hypercare po spuštění, třídění incidentů, denním provozním rytmu, zákaznické komunikaci, minimálních metrikách a privacy-first diagnostice bez zbytečného sběru dat.
 - 2026-09-11: Doplněn Dodatek CE o vypínání starých systémů po migraci, režimu pouze pro čtení, inventuře dat, retenčním plánu, rušení přístupů a privacy-first komunikaci archivu.
 - 2026-09-11: Doplněn Dodatek CD o datové kvalitě po spuštění, reconciliačních reportech, auditovaných opravách a privacy-first validaci napříč importy, API a administrací.
