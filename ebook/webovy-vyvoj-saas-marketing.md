@@ -12943,7 +12943,133 @@ Vezmi poslední tři incidenty, support vlny nebo review výstupy a udělej z ni
 
 Kontinuální zlepšování není motivační plakát. Je to drobná provozní hygiena. Trochu nudná, trochu nevděčná, ale přesně ta věc, díky které se produkt za rok nerozpadne pod vlastní historií.
 
+## Dodatek CI: Produktové dluhy bez nekonečné omluvenky „později“
+
+Každý SaaS má dluh. Technický, produktový, obsahový, provozní, bezpečnostní i ten nenápadný: „všichni víme, že to tlačítko je divné, ale zatím to nikdo neopraví“. Dluh sám o sobě není ostuda. Ostuda je tvářit se, že neexistuje, zatímco zákazníci každý týden zakopávají o stejný práh.
+
+Produktový dluh vzniká, když tým udělá zkratku, aby rychle dodal hodnotu. To je v pořádku. Jen musí být jasné, co byla vědomá zkratka, jaké má riziko a kdy se k ní tým vrátí. Jinak se z rychlého MVP stane muzeum kompromisů, kde každý nový feature požadavek nejdřív absolvuje prohlídku starých rozhodnutí.
+
+> Codyho komentář: „Vyřešíme později“ není plán. Je to kouzelná formule, kterou týmy používají, aby se backlog tvářil menší. Backlog se ale nenechá obelhat. Backlog čeká. A roste mu knír.
+
+### CI.1 Rozliš dluh od normální nedokonalosti
+
+Ne každá nedokonalost je dluh. Malý tým nemá pilovat všechno do lesku jen proto, že to jde. Dluh je něco, co opakovaně brzdí dodávku, zhoršuje zákaznickou zkušenost, zvyšuje provozní riziko nebo komplikuje práci s daty.
+
+Praktické rozlišení:
+
+| Typ problému | Příklad | Co s tím |
+| --- | --- | --- |
+| Kosmetická nedokonalost | Ikona v nastavení není úplně elegantní. | Nechat být, pokud nebrání pochopení. |
+| Produktové tření | Zákazníci opakovaně nechápou rozdíl mezi dvěma stavy objednávky. | Opravit text, stavový model nebo nápovědu. |
+| Provozní dluh | Každý větší import vyžaduje ruční zásah vývojáře. | Přepsat do runbooku, validace a automatického reportu. |
+| Bezpečnostní dluh | Admin role má širší přístup, než opravdu potřebuje. | Rozdělit oprávnění a zapsat kontrolu do auditu. |
+| Datový dluh | Tabulka obsahuje historická pole bez jasného vlastníka. | Popsat, migrovat nebo odstranit podle retenční politiky. |
+
+Nejhorší je míchat všechno dohromady. Když vedle sebe stojí „lepší ikona“, „slabá tenant izolace“ a „přepsat homepage“, tým přestane vidět rozdíl mezi bolestí, rizikem a estetikou.
+
+### CI.2 Zapisuj dluh jako rozhodnutí, ne jako výčitku
+
+Dobrý záznam dluhu není moralizování. Nepíše se tam „tohle jsme odflákli“. Píše se tam, proč zkratka vznikla a jak se pozná, že začala škodit.
+
+Použij tuto šablonu:
+
+- **Kontext:** proč jsme zvolili zkratku.
+- **Dopad:** koho a co může brzdit.
+- **Riziko:** bezpečnost, data, výkon, support, onboarding nebo obchod.
+- **Spouštěč opravy:** kdy se k tomu vrátíme.
+- **Minimální oprava:** nejmenší změna, která sníží riziko.
+- **Vlastník:** kdo hlídá, že dluh nezmizí v mlze.
+
+Příklad:
+
+> Import CSV zatím nepodporuje detailní náhled chyb, protože první pilot potřeboval jen základní přenos dat. Dopad: support musí vysvětlovat odmítnuté řádky ručně. Riziko: zákazníci mohou posílat celé soubory e-mailem. Spouštěč opravy: více než 3 importní tickety za měsíc nebo první enterprise pilot. Minimální oprava: validační preview se souhrnem chyb bez ukládání původního souboru. Vlastník: produkt.
+
+Tohle je záznam, se kterým se dá pracovat. Ne trestní spis. Ne historická kronika bolesti. Prostě řízený kompromis.
+
+### CI.3 Dej dluhu vlastní rytmus
+
+Produktový dluh nesmí soupeřit jen podle toho, kdo zrovna nejvíc křičí. Dej mu pevný rytmus, aby se řešil dřív, než začne určovat architekturu i náladu týmu.
+
+Pro malý SaaS stačí:
+
+- **Každý týden:** vybrat jeden drobný dluh, který blokuje zákazníka nebo support.
+- **Každý měsíc:** projít 5 největších dluhů podle dopadu a rizika.
+- **Před větším releasem:** zkontrolovat, které dluhy mohou zkomplikovat spuštění.
+- **Po incidentu:** přepsat ponaučení do konkrétního artefaktu.
+- **Před novou integrací:** ověřit, jestli nepřidává nový datový nebo dodavatelský dluh.
+
+Dluh nemusíš mazat celý. Často stačí udělat bezpečnostní zábradlí: lepší log bez citlivých dat, jasnější runbook, validaci vstupu, omezení role, exportní kontrolu nebo drobnou úpravu UI. Malé opravy jsou nudné. Nudné opravy zachraňují pátky.
+
+### CI.4 Privacy-first pohled: dluh často žije v datech
+
+V evropském SaaS není dluh jen starý kód. Často je schovaný v tom, co ukládáš, komu dáváš přístup a jak snadno umíš data vysvětlit zákazníkovi.
+
+Ptej se:
+
+- Sbíráme pole, která už nepotřebujeme?
+- Máme logy, které obsahují citlivé údaje jen proto, že to kdysi pomohlo při debugování?
+- Mají interní role širší přístup, než odpovídá jejich práci?
+- Umíme zákazníkovi vysvětlit, kde jsou jeho data a jak je exportuje?
+- Máme staré integrace, které stále drží tokeny, i když je nikdo nepoužívá?
+- Umíme bezpečně smazat účet bez ručního lovu v databázi?
+
+Privacy-first provoz není jen o tom, že si vybereš evropský hosting. Je to schopnost říct: „Tahle data opravdu potřebujeme, tady jsou, takhle dlouho je držíme a takhle je smažeme.“ Pokud to neumíš, máš dluh. Možná neviditelný, ale o to zrádnější.
+
+### CI.5 Nenech refaktor pohltit celý plán
+
+Refaktor je lákavý. Voní po čistotě, novém začátku a představě, že tentokrát už to bude krásné navždy. Jenže produkt se mezitím hýbe, zákazníci mají práci a trh nečeká, až tým dokončí šestitýdenní přepis interní abstrakce.
+
+Bezpečnější přístup:
+
+1. Vyber konkrétní bolest, ne abstraktní „kód je špatný“.
+2. Najdi část systému, kde bolest vzniká nejčastěji.
+3. Udělej malou změnu s jasným měřitelným efektem.
+4. Přidej test, checklist nebo alert, aby se problém nevrátil.
+5. Teprve potom pokračuj další oblastí.
+
+Dobrý refaktor má zákaznický nebo provozní důvod: rychlejší onboarding, méně support práce, bezpečnější oprávnění, jednodušší export, spolehlivější import, nižší provozní riziko. Pokud důvod zní jen „bude to hezčí“, možná je to správně, ale dej tomu férovou prioritu. Krása kódu je výhoda. Doručená hodnota platí účty.
+
+### CI.6 Příklad: dluh kolem importu dat
+
+Malý B2B SaaS umožňuje import klientů z CSV. První verze vznikla rychle pro tři piloty. Funguje, ale support každý týden řeší stejné problémy: nejasné chyby, ruční opravy sloupců a zákazníci posílají soubory e-mailem.
+
+Špatná reakce:
+
+- přidat další logování celých řádků,
+- nechat support ručně čistit soubory,
+- slíbit „někdy nový importní modul“,
+- založit obří refaktor bez termínu.
+
+Lepší reakce:
+
+- přidat preview prvních chyb před potvrzením importu,
+- ukázat šablonu CSV ke stažení,
+- ukládat jen agregovaný výsledek importu a ID dávky,
+- dát supportu bezpečný diagnostický kód místo celého souboru,
+- přidat test pro časté chyby formátu,
+- doplnit nápovědu a checklist před importem.
+
+Výsledek není dokonalý importní engine. Výsledek je menší riziko, méně ruční práce a méně zákaznických dat posílaných mimo produkt. To je přesně ten typ nudného vítězství, které malé SaaS drží při životě.
+
+### CI.7 Checklist řízeného produktového dluhu
+
+- [ ] Každý významný dluh má kontext, dopad, riziko, spouštěč opravy a vlastníka.
+- [ ] Dluh je oddělený od kosmetických přání a běžného backlogu funkcí.
+- [ ] Tým každý měsíc reviduje největší dluhy podle dopadu a provozního rizika.
+- [ ] Bezpečnostní a datový dluh má vyšší prioritu než estetické úpravy.
+- [ ] Každá oprava dluhu mění i související artefakt: test, runbook, checklist, dokumentaci nebo alert.
+- [ ] Refaktor má konkrétní zákaznický, provozní nebo bezpečnostní důvod.
+- [ ] Dočasné diagnostické měření má jasný účel, krátkou retenci a plán vypnutí.
+- [ ] Staré integrace, tokeny a role se pravidelně kontrolují a odstraňují.
+
+### CI.8 Mini úkol na 30 minut
+
+Vyber jeden produktový dluh, o kterém tým mluví déle než měsíc. Nepřepisuj celý systém. Jen ho zapiš podle šablony: kontext, dopad, riziko, spouštěč, minimální oprava, vlastník. Potom urč jednu malou změnu, která sníží riziko už tento týden.
+
+Pokud žádný dluh nenajdeš, zeptej se supportu nebo člověka, který nejčastěji onboarduje zákazníky. Oni ho najdou. Pravděpodobně i se seznamem příkladů a lehce unaveným výrazem.
+
 ## Pracovní log
+- 2026-09-11: Doplněn Dodatek CI o řízeném produktovém dluhu, rozlišování zkratek od rizik, privacy-first pohledu na data a checklistu pro malé SaaS týmy.
 - 2026-09-11: Doplněn Dodatek CH o kontinuálním zlepšování, improvement backlogu, převodu ponaučení do checklistů, testů, dokumentace a privacy-first měření účinku bez plošného sledování.
 - 2026-09-11: Doplněn Dodatek CG o post-release review, oddělení faktů od interpretací, slabé signály, systémová ponaučení, obchodní využití výstupů a privacy-first práci s daty při retrospektivě.
 - 2026-09-11: Doplněn Dodatek CF o hypercare po spuštění, třídění incidentů, denním provozním rytmu, zákaznické komunikaci, minimálních metrikách a privacy-first diagnostice bez zbytečného sběru dat.
