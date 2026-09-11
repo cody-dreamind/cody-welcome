@@ -568,10 +568,124 @@ Marketing malého SaaS týmu nemá být hlučný stroj na leady za každou cenu.
 
 ---
 
+## 5. Privacy-first provoz v Evropě
+
+Privacy-first není právnická dekorace do patičky webu. Je to provozní disciplína: rozhodování o tom, jaká data opravdu potřebuješ, kde leží, kdo k nim má přístup, jak dlouho je držíš a jak rychle umíš reagovat, když se něco pokazí. U evropského SaaS je to zároveň obchodní výhoda. Zákazník nemusí luštit, jestli jeho data mizí v deseti reklamních sítích a třech „growth“ nástrojích, které nikdo neumí vysvětlit.
+
+Evropská komise shrnuje GDPR principy jako zákonnost, férovost a transparentnost, účelové omezení, minimalizaci dat, omezení uložení, přesnost, integritu a důvěrnost a odpovědnost správce. EDPB k tomu pro malé firmy prakticky zdůrazňuje ochranu údajů už při návrhu a ve výchozím nastavení. Přeloženo z úředštiny: nejdřív navrhni rozumný provoz, potom teprve přidávej nástroje. Ne opačně.
+
+> Codyho komentář: Když tým říká „tohle vyřešíme privacy policy“, většinou tím myslí „udělali jsme bordel a teď ho zabalíme do PDF“. Privacy-first začíná v architektuře, ne v dokumentu.
+
+### Datová mapa dřív než další integrace
+
+Každý SaaS by měl mít jednoduchou datovou mapu. Nemusí to být enterprise diagram přes tři zdi. Stačí tabulka, která u každého typu dat říká: proč je sbíráme, kde vzniká, kde se ukládá, kdo k němu má přístup, komu ho předáváme a kdy ho mažeme.
+
+Začni těmito kategoriemi:
+
+- **Účetní data:** e-mail, jméno, organizace, role, přihlášení, bezpečnostní logy.
+- **Produktová data:** obsah, který zákazník do aplikace vloží, soubory, komentáře, nastavení.
+- **Platební data:** tarif, fakturační údaje, stav předplatného, transakční identifikátory.
+- **Podpůrná data:** zprávy na support, diagnostika, chybové výpisy, metadata incidentů.
+- **Marketingová data:** newsletter, zdroj leadu, souhlas, preference komunikace.
+- **Analytická data:** agregované návštěvy, události v produktu, technický výkon.
+
+U každé položky se ptej: „Kdybychom tato data zítra neměli, jaké rozhodnutí nebo funkce se rozbije?“ Pokud odpověď zní „možná se to někdy bude hodit“, je to slabý důvod. Data nejsou suvenýry. Každý záznam zvyšuje odpovědnost, náklady a dopad případného incidentu.
+
+### Minimalizace není asketismus
+
+Minimalizace dat neznamená, že produkt nesmí nic vědět. Znamená, že sbírá jen to, co potřebuje pro jasný účel. U registračního formuláře často nepotřebuješ telefon, velikost firmy, adresu ani obor. U newsletteru nepotřebuješ datum narození. U supportu nepotřebuješ automaticky kopírovat celé zákaznické databáze do externího ticket systému.
+
+Praktické příklady:
+
+- **Registrace:** začni e-mailem a heslem nebo magic linkem; profil doplň až ve chvíli, kdy to pomůže onboardingu.
+- **Demo poptávka:** chtěj jméno, e-mail a stručný kontext; zbytek vyřeší člověk v odpovědi.
+- **Logování:** ukládej technické informace potřebné k řešení chyby, ne plné payloady s osobními údaji.
+- **Analytika:** měř události typu `trial_started` nebo `invoice_exported`, ne detailní obsah zákaznických záznamů.
+- **Newsletter:** odděl souhlas s obchodní komunikací od souhlasu s produktovými podmínkami.
+
+Minimalizace má i produktovou výhodu: jednodušší formuláře zvyšují šanci, že je lidé dokončí. A jednodušší datový model se lépe zabezpečuje. Není to morální sebetrýznění, je to dobrý design.
+
+### Evropský provoz jako výchozí volba
+
+Pokud stavíš pro evropské zákazníky, nastav evropský provoz jako default. Hosting, databáze, zálohy, e-mail, support, analytika a monitoring by měly mít jasně popsané místo zpracování a smluvní vztah. Ne každý americký nástroj je automaticky špatně, ale každý mimoevropský tok dat musí mít důvod, právní základ a provozní kontrolu. Když existuje kvalitní evropská alternativa, začni tam.
+
+Rozumná provozní pravidla:
+
+- Preferuj EU datová centra a dodavatele, kteří umí jasně popsat subprocesory.
+- U každého nástroje eviduj účel, kategorii dat, region, retenční dobu a vlastníka v týmu.
+- Nepřidávej marketingové pixely jen proto, že „to tak dělají všichni“.
+- Zvaž self-hosted nebo EU-hosted analytiku pro web i produktové události.
+- U externích integrací nastav nejnižší nutná oprávnění a pravidelně je reviduj.
+- Zálohy šifruj a testuj obnovu, ne jen existenci záložního souboru.
+
+Kritická je i přenositelnost. Pokud dodavatel zítra zdraží, změní podmínky nebo přestane sedět tvému privacy modelu, umíš odejít? Export dat, dokumentované API a jednoduché mazání účtu jsou součást provozní svobody. Vendor lock-in není jen finanční problém. Je to i datové riziko.
+
+### Cookies, souhlas a férové měření
+
+EDPB ve FAQ připomíná, že ukládání cookies nebo přístup k informacím v zařízení uživatele typicky vyžaduje informování a souhlas, pokud nejde o výjimku podle ePrivacy pravidel. Souhlas podle EDPB musí být skutečná volba, ne předem zaškrtnuté políčko nebo nátlakový banner. Pro malý SaaS z toho plyne jednoduché pravidlo: čím méně nepotřebných cookies a trackerů, tím méně právního i UX bahna.
+
+V praxi rozděl měření na tři vrstvy:
+
+- **Technicky nezbytné:** session, zabezpečení, košík, jazyk, základní nastavení aplikace.
+- **Produktově užitečné:** agregované události, výkon, chyby, dokončení onboardingu.
+- **Marketingově invazivní:** reklamní pixely, retargeting, cross-site identifikátory, profilování.
+
+První vrstva má být minimální a vysvětlená. Druhá vrstva má být navržená tak, aby pokud možno nepotřebovala identifikovat člověka napříč webem. Třetí vrstva má projít tvrdým testem: opravdu bez ní nejde dosáhnout obchodního cíle? A pokud ano, umíš ji vysvětlit lidsky a získat platný souhlas bez manipulace?
+
+Cookie lišta nemá být hra „najdi odmítnutí“. Dobré rozhraní nabízí stejně snadné odmítnutí jako přijetí, jasné účely a možnost volbu změnit. Je to méně agresivní. A ano, možná nasbíráš méně dat. Zato data, která máš, nejsou výsledkem digitálního vydírání.
+
+### Dokumentace, která pomáhá provozu
+
+Privacy dokumentace nemá žít jen jako odkaz v patičce. Má pomáhat týmu rozhodovat. U malého SaaS doporučuji držet čtyři praktické dokumenty:
+
+- **Záznam datových toků:** přehled kategorií dat, účelů, úložišť, dodavatelů a retenčních dob.
+- **Seznam subprocesorů:** kdo zpracovává data za tebe, pro jaký účel, v jakém regionu.
+- **Retenční pravidla:** kdy mažeš trial účty, logy, support zprávy, fakturační data a zálohy.
+- **Incident runbook:** kdo rozhoduje, kde jsou logy, jak se izoluje problém, kdy a koho informovat.
+
+Tyto dokumenty nemusí být krásné. Musí být aktuální. Ideální je mít je v repozitáři nebo interní znalostní bázi, kde změna nástroje znamená i změnu dokumentace. Když přidáš nový support chat, aktualizuj datovou mapu. Když změníš analytiku, aktualizuj privacy stránku. Když nastavíš novou retenční dobu logů, napiš to do runbooku.
+
+### Bezpečnost bez divadla
+
+Bezpečnost často sklouzne do nákupu loga „enterprise security“ místo nudné každodenní disciplíny. Malý tým ale získá nejvíc z jednoduchých základů:
+
+- vícefaktorové ověření pro administraci, hosting, Git a billing,
+- oddělené produkční, testovací a vývojové prostředí,
+- žádná reálná zákaznická data v lokálním vývoji, pokud to není nezbytné,
+- rotace klíčů a tajemství po odchodu člověka z týmu,
+- audit přístupů aspoň jednou za kvartál,
+- šifrované zálohy a pravidelný test obnovy,
+- jasný postup pro mazání účtu a export zákaznických dat.
+
+Zvláštní pozornost věnuj interním adminům. Jsou pohodlné, ale nebezpečné. Admin má ukazovat jen data potřebná pro podporu a provoz, ideálně s auditním záznamem. Pokud support člověk nepotřebuje vidět obsah zákaznického dokumentu, nemá ho vidět. Role „admin vidí všechno“ je rychlá cesta k malé katastrofě s velkým titulkem.
+
+### Checklist: privacy-first provoz v Evropě
+
+- [ ] Máme datovou mapu pro účetní, produktová, platební, podpůrná, marketingová a analytická data.
+- [ ] U každého typu dat známe účel, právní základ, úložiště, přístup a retenční dobu.
+- [ ] Formuláře sbírají jen údaje potřebné pro konkrétní další krok.
+- [ ] Hosting, databáze, zálohy, analytika a support mají popsaný region zpracování.
+- [ ] Každý externí nástroj má vlastníka, účel a záznam v seznamu subprocesorů.
+- [ ] Marketingové cookies a pixely nejsou zapnuté bez jasného důvodu a platného souhlasu.
+- [ ] Odmítnutí cookies je stejně snadné jako přijetí.
+- [ ] Logy neobsahují zbytečné osobní údaje nebo celé zákaznické payloady.
+- [ ] Existuje incident runbook a tým ví, kde ho najde.
+- [ ] Admin rozhraní používá role, minimální přístup a audit důležitých akcí.
+- [ ] Zálohy jsou šifrované a obnova je prakticky otestovaná.
+- [ ] Retence dat je napsaná, automatizovaná a pravidelně kontrolovaná.
+
+Privacy-first SaaS není produkt, který nikdy nic neměří a bojí se vlastního stínu. Je to produkt, který ví, proč data zpracovává, umí to vysvětlit, drží kontrolu v Evropě, minimalizuje zbytečné riziko a nechová se k uživateli jako ke zdroji suroviny. Důvěra se nevykliká v banneru. Důvěra se provozuje.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
 - Evropská komise: [Information for business and organisations](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations_en)
+- EDPB: [Data protection guide for small business](https://www.edpb.europa.eu/sme_en)
+- EDPB: [Be compliant](https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en)
+- EDPB: [Frequently Asked Questions](https://www.edpb.europa.eu/contact/frequently-asked-questions_en)
+- EDPB: [Consent under GDPR — summary](https://www.edpb.europa.eu/system/files/2026-04/edpb-summary-consent_en.pdf)
 - EDPB: [Feedback on the cookie pledge draft principles](https://www.edpb.europa.eu/system/files/2023-12/edpb_letter_out20230098_feedback_on_cookie_pledge_draft_principles_en.pdf)
 
 ---
@@ -582,3 +696,4 @@ Marketing malého SaaS týmu nemá být hlučný stroj na leady za každou cenu.
 - **2026-09-11:** Dopsána kapitola 2 o webu jako obchodním systému: struktura stránek, důvěra, konverze bez manipulace, privacy-first měření, obsah, rychlost a checklist.
 - **2026-09-11:** Dopsána kapitola 3 o SaaS bez přepálené architektury: MVP, modulární monolit, multi-tenant data, onboarding, billing, admin a technický dluh.
 - **2026-09-11:** Dopsána kapitola 4 o marketingu bez spamu: positioning, obsah, newsletter, distribuce, komunitní zapojení, privacy-first měření a checklist.
+- **2026-09-11:** Dopsána kapitola 5 o privacy-first provozu v Evropě: datová mapa, minimalizace, evropský hosting, cookies, dokumentace, bezpečnost a provozní checklist.
