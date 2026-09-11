@@ -12788,7 +12788,163 @@ Vezmi poslední release a napiš jednostránkové review:
 
 Když z review nevznikne žádná změna v systému, byl to jen firemní táborák s tabulkou. Hezké, možná terapeutické, ale příští release na to zapomene rychleji než marketing na starý UTM parametr.
 
+## Dodatek CH: Kontinuální zlepšování bez nekonečného backlogového hřbitova
+
+Post-release review je užitečné jen tehdy, když se jeho závěry promění v lepší systém. Ne v další stránku ve wiki, kterou za měsíc nikdo nenajde. Ne v dvacet ticketů s prioritou „někdy“. A už vůbec ne v morální apel typu „příště si dáme větší pozor“, což je produktový ekvivalent lepící pásky na prasklém potrubí.
+
+Kontinuální zlepšování v malém SaaS má být nudně praktické: vyber pár opakujících se tření, přepiš je do checklistů, testů, šablon, automatizací nebo produktových změn a zkontroluj, jestli opravdu zmizela. Privacy-first provoz tomu dává ještě jednu podmínku: neopravuj proces tím, že začneš sbírat víc dat o lidech. Oprav proces tak, že potřebuješ méně ručních zásahů, méně exportů a méně improvizace.
+
+### CH.1 Zlepšení musí mít domov
+
+Každé ponaučení potřebuje místo, kam patří. Pokud ho jen zapíšeš do review, umře tam. Krátce zapláče, dostane emoji v komentáři a pak ho sežere další sprint.
+
+Rozděl výstupy podle toho, co mají změnit:
+
+- **Checklist**: když někdo něco opomenul při releasu, migraci, onboardingu nebo supportu.
+- **Automatický test**: když chyba vznikla opakovatelným technickým stavem.
+- **Monitoring nebo alert**: když problém existoval, ale nikdo ho neviděl včas.
+- **Produktová úprava**: když zákazník musí dělat zbytečný krok nebo hádat další akci.
+- **Dokumentace**: když lidé nerozuměli pravidlu, limitu, procesu nebo odpovědnosti.
+- **Šablona komunikace**: když support, obchod nebo zákazník potřebovali lepší formulaci.
+
+Neptej se „kam to napíšeme“. Ptej se „kde se to projeví příště“. To je rozdíl mezi znalostní bází a firemním hřbitovem PDFek.
+
+### CH.2 Drž malý improvement backlog
+
+Backlog zlepšení se snadno nafoukne do seznamu výčitek. Tomu se vyhni. Udělej samostatný krátký seznam, který obsahuje jen práce z reálných provozních signálů: incidentů, supportu, post-release review, churn rozhovorů, bezpečnostních nálezů a opakovaných ručních zásahů.
+
+Každá položka má mít pět polí:
+
+1. **Signál**: co se stalo a kolikrát.
+2. **Dopad**: komu to vadilo a jak moc.
+3. **Systémová změna**: co upravíme, aby se to neopakovalo.
+4. **Vlastník**: kdo to dotáhne.
+5. **Kontrola účinku**: podle čeho poznáme, že to pomohlo.
+
+Příklad dobré položky:
+
+> Tři zákazníci po importu nevěděli, proč bylo přeskočeno 8–15 % řádků. Dopad: support ručně vysvětloval chyby a zákazníci posílali celé CSV. Změna: přidat validační preview a report chyb bez ukládání původního souboru. Vlastník: produkt + backend. Kontrola: méně support ticketů s tématem „import přeskočil řádek“ během dalšího měsíce.
+
+Příklad špatné položky:
+
+> Zlepšit import.
+
+To není položka. To je přání hozené do studny.
+
+### CH.3 Třiď podle opakování, ne podle hlasitosti
+
+Nejhlasitější problém nemusí být nejdůležitější. Jeden naštvaný e-mail umí zničit den, ale nemusí znamenat systémovou chybu. Naopak pět drobných support dotazů o stejné věci často ukazuje, že produkt mlčí tam, kde má mluvit.
+
+U každého zlepšení se ptej:
+
+- Stalo se to víckrát?
+- Zasáhlo to placené zákazníky, pilot, interní tým nebo všechny?
+- Vedlo to k ruční práci, ztrátě důvěry, bezpečnostnímu riziku nebo datovému nepořádku?
+- Umíme to příště detekovat dřív?
+- Umíme tomu předejít bez nového sledování uživatelů?
+
+Privacy-first komentář od Codyho: když je řešením „začneme nahrávat session všech uživatelů“, vrať se o krok zpět. Často stačí lepší chybová zpráva, agregovaná metrika, anonymizovaný validační report nebo auditní událost bez obsahu zákaznických dat.
+
+### CH.4 Každé zlepšení přepiš do provozního artefaktu
+
+Zlepšení není hotové ve chvíli, kdy je ticket zavřený. Hotové je tehdy, když změnilo artefakt, který tým používá.
+
+Typické artefakty:
+
+- release checklist,
+- onboarding checklist,
+- migrační runbook,
+- support šablona,
+- bezpečnostní dotazník,
+- OpenAPI dokumentace,
+- interní rozhodovací záznam,
+- alert pravidlo,
+- testovací dataset,
+- zákaznická nápověda.
+
+Když se po incidentu upraví kód, ale neupraví se runbook, tým příště zase improvizuje. Když se po support vlně opraví text v UI, ale neupraví se dokumentace, obchod bude dál slibovat staré chování. Když se po migraci opraví jeden skript, ale neupraví se kontrolní checklist, další migrace si odnese stejný batoh problémů.
+
+### CH.5 Měř účinek střídmě
+
+U každého zlepšení si vyber jednu jednoduchou kontrolu. Nemusíš stavět dashboard s ohňostrojem. Stačí zjistit, jestli problém opravdu ustoupil.
+
+Příklady kontrol:
+
+- počet support ticketů k danému tématu za 30 dní,
+- počet ručních zásahů administrátora za týden,
+- počet chyb validace po úpravě formuláře,
+- čas potřebný na onboarding nového zákazníka,
+- počet incidentů stejné kategorie,
+- počet exportů posílaných mimo produkt,
+- počet opakovaných dotazů po změně dokumentace.
+
+Používej agregace a krátkou retenci. Cílem není postavit muzeum zákaznického chování. Cílem je poznat, jestli jsi odstranil tření. Pokud potřebuješ detailní diagnostiku, sbírej ji dočasně, s jasným účelem a bez citlivého obsahu. Pak ji vypni. Ano, vypnout měření je taky produktová disciplína.
+
+### CH.6 Nech zlepšení soupeřit s novými funkcemi
+
+Největší chyba malého týmu je oddělit „nový vývoj“ a „zlepšování“ tak tvrdě, že zlepšování vždy prohraje. Pak vznikne produkt, který přidává funkce rychleji, než uklízí následky. To je SaaS verze garáže, kde už je všechno, jen auto ne.
+
+Praktické pravidlo:
+
+- Každý týden vyber jednu až tři improvement položky.
+- Aspoň jedna musí odstranit opakovanou ruční práci nebo support bolest.
+- Bezpečnostní a privacy rizika mají přednost před kosmetikou.
+- Položky bez vlastníka po dvou týdnech smaž nebo přepiš.
+- Jednou měsíčně zkontroluj, které zlepšení mělo skutečný dopad.
+
+Tohle není pomalost. To je údržba rychlosti. Tým, který pravidelně snižuje tření, může později dodávat rychleji, protože netlačí před sebou hromadu starých výmluv.
+
+### CH.7 Konkrétní příklad: zlepšování po spuštění zákaznického portálu
+
+Tým spustil zákaznický portál pro správu faktur, exportů a uživatelských rolí. Po prvním měsíci měl několik signálů:
+
+1. Support často vysvětloval rozdíl mezi rolí „správce účtu“ a „účetní“.
+2. Zákazníci posílali screenshoty chyb místo `request_id`.
+3. Někteří administrátoři nevěděli, kde stáhnout auditní log.
+4. Při exportu velkých dat vznikaly dotazy „zamrzlo to?“.
+5. Interní tým dvakrát ručně ověřoval, zda starý účet nemá aktivní API klíče.
+
+Místo obřího redesignu vznikl malý improvement plán:
+
+- upravit popisy rolí přímo v administraci,
+- přidat `request_id` do chybové obrazovky a support šablony,
+- doplnit odkaz na auditní log do bezpečnostní stránky účtu,
+- u dlouhých exportů ukázat stav fronty a poslat transakční e-mail po dokončení,
+- přidat kontrolu aktivních API klíčů do offboarding checklistu.
+
+Kontrola po měsíci: méně dotazů na role, support žádá ID chyby místo screenshotu, exporty už nevedou k panickému refreshování stránky a offboarding má jeden krok navíc, který šetří pozdější nervy. Žádná magie. Jen pět malých změn, které produkt přestaly dělat ručně.
+
+### CH.8 Checklist kontinuálního zlepšování
+
+- [ ] Každé post-release ponaučení má domov: checklist, test, runbook, dokumentaci, šablonu nebo produktovou úpravu.
+- [ ] Improvement backlog obsahuje signál, dopad, systémovou změnu, vlastníka a kontrolu účinku.
+- [ ] Tým třídí problémy podle opakování a dopadu, ne podle hlasitosti posledního e-mailu.
+- [ ] Privacy-first pravidlo brání tomu, aby se zlepšování řešilo plošným sledováním uživatelů.
+- [ ] Každý týden se vybere malý počet zlepšení, která se opravdu dokončí.
+- [ ] Bezpečnostní, datová a supportní rizika mají prioritu před kosmetickými úpravami.
+- [ ] Každé zlepšení má jednoduchou kontrolu účinku po 2–4 týdnech.
+- [ ] Dočasná diagnostika má účel, krátkou retenci a plán vypnutí.
+- [ ] Opakovaná ruční práce se převádí do produktu, automatizace nebo checklistu.
+- [ ] Položky bez vlastníka se mažou, přepisují nebo přesouvají do jasného rozhodnutí.
+
+### CH.9 Mini úkol na 60 minut
+
+Vezmi poslední tři incidenty, support vlny nebo review výstupy a udělej z nich malý improvement backlog:
+
+1. napiš ke každému jeden konkrétní signál,
+2. popiš dopad na zákazníka nebo tým,
+3. urč, jestli patří do checklistu, testu, dokumentace, produktu, monitoringu nebo šablony,
+4. vyber maximálně tři položky na další týden,
+5. ke každé napiš vlastníka,
+6. nastav jednu kontrolu účinku,
+7. ověř, že řešení nepotřebuje plošné sledování uživatelů,
+8. smaž nebo přepiš položky typu „zlepšit X“,
+9. za měsíc zkontroluj, co opravdu zmizelo.
+
+Kontinuální zlepšování není motivační plakát. Je to drobná provozní hygiena. Trochu nudná, trochu nevděčná, ale přesně ta věc, díky které se produkt za rok nerozpadne pod vlastní historií.
+
 ## Pracovní log
+- 2026-09-11: Doplněn Dodatek CH o kontinuálním zlepšování, improvement backlogu, převodu ponaučení do checklistů, testů, dokumentace a privacy-first měření účinku bez plošného sledování.
 - 2026-09-11: Doplněn Dodatek CG o post-release review, oddělení faktů od interpretací, slabé signály, systémová ponaučení, obchodní využití výstupů a privacy-first práci s daty při retrospektivě.
 - 2026-09-11: Doplněn Dodatek CF o hypercare po spuštění, třídění incidentů, denním provozním rytmu, zákaznické komunikaci, minimálních metrikách a privacy-first diagnostice bez zbytečného sběru dat.
 - 2026-09-11: Doplněn Dodatek CE o vypínání starých systémů po migraci, režimu pouze pro čtení, inventuře dat, retenčním plánu, rušení přístupů a privacy-first komunikaci archivu.
