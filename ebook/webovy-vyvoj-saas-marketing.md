@@ -11602,9 +11602,170 @@ Vyber jednu integraci, kterou zákazníci často nastavují ručně, a navrhni k
 
 Nemusíš postavit kompletní platformu pro integrátory během odpoledne. Stačí první bezpečný sandbox, který zabrání produkčním karambolům a zároveň dá zákazníkovi pocit: „Jo, tomuhle rozumím.“ To je přesně ten moment, kdy se API přestává tvářit jako tajná chodba a začíná fungovat jako produkt.
 
+## Dodatek BZ: Rate limiting a kvóty bez trestání dobrých zákazníků
+
+Rate limiting je jedna z těch funkcí, které nikdo nechválí, dokud nechybí. Když funguje dobře, chrání produkt, databázi, rozpočet i zákazníky před lavinou požadavků. Když funguje špatně, připomíná školníka s píšťalkou: zastaví i člověka, který jen normálně prochází dveřmi.
+
+V malém SaaS se limity často přidávají pozdě, až po prvním incidentu, drahém účtu nebo integrační smyčce zákazníka. Lepší je navrhnout je hned jako součást produktu. Ne proto, že chceš zákazníky omezovat, ale proto, že jim chceš dát předvídatelné prostředí.
+
+### BZ.1 Nejdřív rozliš ochranu systému a obchodní balíček
+
+Existují dva různé typy limitů:
+
+- **Ochranné limity** brání přetížení, útokům, chybám integrací a nečekaným špičkám.
+- **Produktové kvóty** definují, co je součástí tarifu: počet projektů, uživatelů, exportů, API volání nebo uložených dokumentů.
+
+Nemíchej je dohromady. Ochranný limit má být bezpečnostní zábradlí. Produktová kvóta má být obchodní dohoda. Pokud zákazník narazí na ochranný limit, potřebuje vědět, kdy a jak může pokračovat. Pokud narazí na kvótu tarifu, potřebuje vědět, co si má změnit: uklidit data, snížit frekvenci, nebo přejít na vyšší balíček.
+
+Špatná hláška:
+
+```json
+{
+  "error": "Limit exceeded"
+}
+```
+
+Lepší hláška:
+
+```json
+{
+  "type": "https://docs.example.com/errors/rate-limit",
+  "title": "Too many requests",
+  "status": 429,
+  "detail": "API key exceeded 120 requests per minute.",
+  "retry_after_seconds": 34,
+  "request_id": "req_7J2K..."
+}
+```
+
+Člověk ani integrace nemají luštit, jestli je problém v tarifu, bugu, útoku nebo dočasné špičce. Nejasný limit je support ticket v larválním stádiu.
+
+### BZ.2 Limity navrhuj podle dopadu, ne podle nálady
+
+Nezačínej otázkou „kolik požadavků dáme do tarifu“. Začni otázkou „co nás může poškodit a co zákazník legitimně potřebuje“.
+
+Typické dimenze limitů:
+
+- požadavky za sekundu nebo minutu na API klíč,
+- paralelní běžící exporty nebo importy,
+- počet webhook pokusů v krátkém okně,
+- velikost uploadu a počet souborů,
+- počet zápisů do citlivých tabulek,
+- počet nákladných reportů za hodinu,
+- počet pozvánek, e-mailů nebo notifikací za den.
+
+Každý limit si napiš do tabulky:
+
+| Limit | Koho chrání | Co zákazník potřebuje | Co ukážeme při dosažení |
+| --- | --- | --- | --- |
+| API volání za minutu | API a databázi | Stabilní integraci | `429`, reset času, dokumentace |
+| Paralelní exporty | Worker frontu | Velké dávkové exporty | Stav fronty, doporučené stránkování |
+| Upload velikost | Úložiště a antivirus | Poslat běžný dokument | Max velikost, podporované formáty |
+| Webhook retry | Zákazníkův endpoint i naši frontu | Doručit událost spolehlivě | Historii pokusů a další retry |
+
+Tohle není akademické cvičení. Je to způsob, jak zabránit tomu, aby někdo nastavil číslo „1000“, protože hezky vypadá v konfiguráku.
+
+### BZ.3 V odpovědi dej integraci plán
+
+Když API vrací `429 Too Many Requests`, nemá jen říct „ne“. Má říct „ne teď, zkus to takhle“. Přidej hlavičky nebo tělo odpovědi, které klientovi pomohou:
+
+```http
+HTTP/1.1 429 Too Many Requests
+Retry-After: 34
+X-RateLimit-Limit: 120
+X-RateLimit-Remaining: 0
+X-RateLimit-Reset: 1789123456
+X-Request-Id: req_7J2K...
+```
+
+Do dokumentace napiš doporučené chování klienta:
+
+- respektuj `Retry-After`,
+- používej exponenciální backoff s jitterem,
+- neposílej okamžité nekonečné retry,
+- batchuj malé požadavky, pokud API podporuje dávky,
+- u zápisů používej idempotency key,
+- u dlouhých exportů používej job endpoint místo držení spojení.
+
+Privacy-first poznámka: i rate limit logy jsou data. Nepotřebuješ ukládat celé payloady, e-mailové adresy a obsah požadavků. Většinou stačí čas, účet, API klíč nebo jeho bezpečný identifikátor, endpoint, stav, počet požadavků a `request_id`.
+
+### BZ.4 Ukaž stav limitů v administraci
+
+Vývojářský zážitek nekončí dokumentací. Pokud má zákazník API integraci, dej mu v administraci jednoduchý přehled:
+
+- aktuální tarifní kvóty,
+- využití za dnešek a aktuální fakturační období,
+- poslední rate limit události,
+- doporučení pro snížení počtu volání,
+- kontakt nebo postup pro navýšení limitu,
+- oddělený pohled pro sandbox a produkci.
+
+Neukazuj jen grafy. Přidej konkrétní věty: „Exporty spouštíte každých 5 minut, ale data se mění průměrně jednou za hodinu. Zvažte webhook nebo delší interval.“ To je užitečnější než barevná čára, která se tváří jako business intelligence, ale v zásadě říká: hodně.
+
+U B2B zákazníků se hodí poslat upozornění před dosažením kvóty. Ne každý limit musí skončit tvrdým odmítnutím. Někdy stačí včasné varování: „Jste na 80 % měsíční kvóty exportů.“ Férovost je i to, že zákazník není překvapený v pátek večer, kdy účetní integrace najednou dělá mrtvého brouka.
+
+### BZ.5 Nastav výjimky jako proces, ne jako ruční kouzlo
+
+Někteří zákazníci budou legitimně potřebovat vyšší limit. To je v pořádku. Problém začíná, když se výjimky nastavují ručně v databázi, bez důvodu, bez expirace a bez viditelnosti.
+
+Dobrá výjimka má:
+
+- jasného vlastníka,
+- důvod,
+- rozsah,
+- datum revize nebo expirace,
+- auditní záznam,
+- viditelnost pro podporu a obchod,
+- technické testy, že vyšší limit neunese jen obchodní prezentace.
+
+Pokud zákazník potřebuje dočasně importovat historická data, dej mu časově omezený importní režim. Pokud potřebuje trvale vysoký provoz, řeš architekturu a tarif. Nepředstírej, že checkbox „VIP = true“ je škálovací strategie.
+
+### BZ.6 Konkrétní příklad: účetní SaaS a dávkové exporty
+
+Představ si účetní SaaS, který umožňuje exportovat faktury přes API.
+
+Rozumný návrh může vypadat takhle:
+
+1. Běžné API má limit 120 požadavků za minutu na produkční API klíč.
+2. Endpoint pro export faktur nevrací tisíce položek najednou, ale stránkuje po 100 záznamech.
+3. Velký export se spouští jako job: `POST /exports/invoices`, potom `GET /exports/{id}`.
+4. Zápisy používají `Idempotency-Key`, aby retry nevytvořil duplicitní faktury.
+5. Při překročení limitu API vrací `429`, `Retry-After`, reset času a odkaz na dokumentaci.
+6. Administrace ukazuje, že integrace volá export příliš často, a navrhuje webhook `invoice.changed`.
+7. Dočasné navýšení pro migraci dat má expiraci po 7 dnech a auditní záznam.
+
+Výsledek: systém je chráněný, zákazník ví, co se děje, a podpora nehraje detektiva nad logy, které vypadají jako dešťová srážková mapa.
+
+### BZ.7 Checklist rate limitů a kvót
+
+- Máš oddělené ochranné limity a obchodní kvóty?
+- Vrací API při limitu jasný stav, `request_id` a doporučené čekání?
+- Dokumentace popisuje retry, backoff, dávkování a idempotenci?
+- Vidí zákazník využití limitů v administraci?
+- Posíláš upozornění před dosažením důležitých kvót?
+- Mají sandbox a produkce oddělené limity?
+- Neukládáš v rate limit logách zbytečné payloady ani osobní údaje?
+- Mají výjimky vlastníka, důvod, expiraci a auditní stopu?
+- Testuješ, co se stane při překročení limitu v API, webhooks i UI?
+- Umí podpora vysvětlit rozdíl mezi tarifní kvótou a dočasným ochranným limitem?
+
+### BZ.8 Mini úkol na 45 minut
+
+Vyber jeden nákladný endpoint a navrhni k němu limit:
+
+1. Sepiš, co endpoint zatěžuje: databázi, frontu, externí službu, úložiště nebo e-mail.
+2. Navrhni ochranný limit pro běžného zákazníka.
+3. Napiš přesnou `429` odpověď včetně `Retry-After` a `request_id`.
+4. Přidej do dokumentace tři doporučení pro klientskou integraci.
+5. Rozhodni, co se bude logovat a jak dlouho.
+6. Navrhni, kde zákazník uvidí aktuální využití.
+
+> Codyho komentář: Dobrý rate limit není „brzda“. Je to semafor. Když svítí červená, má být jasné proč, jak dlouho a kudy jet příště. Bez toho je to jen digitální závora s náladou.
+
 
 ## Pracovní log
 
+- 2026-09-11: Doplněn Dodatek BZ o rate limitingu, tarifních kvótách, srozumitelných chybách `429`, viditelnosti limitů v administraci a privacy-first logování bez payloadů.
 - 2026-09-11: Doplněn Dodatek BY o sandboxu, testovacích API klíčích, syntetických datech, webhook testování a bezpečném přechodu do produkce.
 - 2026-09-11: Doplněn Dodatek BX o API dokumentaci, rychlém startu, OpenAPI kontraktu, spustitelných příkladech, retry pravidlech a privacy-first API portálu.
 
