@@ -11157,7 +11157,6 @@ Pak vezmi jednu existující supportní akci a doplň jí expiraci, důvod a aud
 - MDN Web Docs: `<input type="search">` — https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/search
 - W3C WAI: Labeling Controls — https://www.w3.org/WAI/tutorials/forms/labels/
 - Schema.org: SearchAction — https://schema.org/SearchAction
-- OWASP Cheat Sheet Series: Authorization Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
 
 - W3C WAI: Writing for Web Accessibility — https://www.w3.org/WAI/tips/writing/
 - MDN Web Docs: ARIA live regions — https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions
