@@ -11913,7 +11913,151 @@ Vyber poslední větší API nebo integrační změnu a udělej z ní release ba
 > Codyho komentář: Release poznámky nejsou povinný domácí úkol pro produktového manažera. Jsou to provozní brzdy proti chaosu. A chaos je nejdražší framework, který si malý SaaS může omylem nainstalovat.
 
 
+## Dodatek CB: Produkční přechod bez pátečního adrenalinu
+
+Sandbox, dokumentace a release balíček jsou krásné věci. Ale produkční přechod je chvíle, kdy se ukáže, jestli máš proces, nebo jen hromadu dobrých úmyslů v pěti záložkách prohlížeče. U malého SaaS týmu není cílem velká korporátní ceremonie. Cílem je dostat zákazníka do produkce bezpečně, srozumitelně a tak, aby první problém nebyl překvapení pro všechny zúčastněné.
+
+> Codyho komentář: Nasazovat zákaznickou integraci v pátek v 16:40 je jako otevírat konzervu šroubovákem nad bílým kobercem. Možná to vyjde. Ale proč bys to dobrovolně dělal?
+
+### CB.1 Go-live není jedno tlačítko, ale krátký kontrolovaný proces
+
+Produkční přechod rozděl na tři části: připravenost, samotné zapnutí a dohled po zapnutí. Každá část má mít vlastní odpovědnou osobu a jasný výstup.
+
+| Fáze | Otázka | Výstup |
+| --- | --- | --- |
+| Připravenost | Je zákazník technicky i procesně připravený? | Odškrtnutý go-live checklist |
+| Zapnutí | Víme přesně, co se mění a kdy? | Časové okno, plán kroků, rollback |
+| Dohled | Poznáme rychle, že se něco rozbilo? | Metriky, logy, kontakty, první review |
+
+Neříkej „nasadíme to ráno“. Napiš: „Ve středu 9:00–10:00 zapneme produkční API klíč, přepneme webhook URL, odešleme testovací export a 60 minut sledujeme doručení.“ To je věta, se kterou se dá pracovat. „Ráno“ je časová jednotka pro kavárnu, ne pro produkci.
+
+### CB.2 Připravenost zákazníka ověř v checklistu, ne v naději
+
+Před go-live musí být jasné, že zákazník ví, co se stane. Nejen vývojář na jejich straně, ale i člověk, kterého zasáhne první reálný provoz: účetní, obchodník, administrátor, support nebo majitel.
+
+Minimální checklist připravenosti:
+
+- produkční účet je založený a má správného vlastníka,
+- role a oprávnění odpovídají skutečnému týmu,
+- API klíče nebo integrační účty mají jen potřebné scope,
+- webhooky míří na produkční URL a mají ověřené podpisy,
+- testovací data nejsou přenesená do produkce jako „dočasné řešení“,
+- fakturace, limity a tarif odpovídají domluvě,
+- zákazník ví, kde najde podporu, dokumentaci a stav služby,
+- existuje kontakt pro technický i obchodní problém.
+
+Privacy-first detail: nepřenášej do produkce historické testovací osobní údaje jen proto, že „už tam něco je“. Pokud potřebuješ zkušební scénáře, vytvoř je jako syntetická data nebo je po ověření smaž. Produkce není muzeum sandboxových pokusů.
+
+### CB.3 Produkční tajemství předávej jako operaci, ne přes chat
+
+API klíče, webhook signing secret, SFTP přístup nebo integrační tokeny nikdy neposílej volně do chatu, sdíleného dokumentu nebo screenshotu. Předání tajemství má mít vlastní bezpečný kanál a jasné pravidlo: ukázat jednou, uložit bezpečně, nepřepisovat do poznámek.
+
+Dobrá praxe:
+
+- produkční klíč vytvoř až těsně před go-live,
+- nastav minimální scope a tenant omezení,
+- ukaž hodnotu jen jednou,
+- ulož jen hash nebo bezpečný otisk,
+- připrav rotaci ještě před prvním incidentem,
+- zapiš do auditního logu, kdo klíč vytvořil a kdy,
+- zákazníkovi dej návod, jak klíč zneplatnit bez ticketu.
+
+Pokud zákazník požádá o poslání klíče e-mailem, nezesměšňuj ho. Vysvětli, že chráníš jeho data, a nabídni bezpečný postup. Bezpečnost, která lidi trestá za neznalost, vede k obcházení. Bezpečnost, která je vede za ruku, má šanci přežít kontakt s realitou.
+
+### CB.4 Rollback plán napiš dřív, než ho potřebuješ
+
+Rollback není projev pesimismu. Je to brzda v autě. Nikdo si nekupuje auto proto, aby brzdil, ale jen blázen by si koupil auto bez brzd.
+
+Rollback plán pro produkční přechod má odpovědět:
+
+1. Co přesně můžeme vrátit zpět?
+2. Kdo smí rozhodnout o návratu?
+3. Jak dlouho návrat trvá?
+4. Jak poznáme, že je rollback úspěšný?
+5. Co se stane s daty vytvořenými během neúspěšného pokusu?
+
+U integrací je poslední bod nejdůležitější. Pokud se během půl hodiny vytvořilo 200 faktur, nemůže rollback znamenat „prostě vypneme endpoint“. Potřebuješ plán pro duplicitní požadavky, částečně zpracované dávky, fronty, webhooky a ruční kontrolu. Idempotence není akademické slovo. Je to důvod, proč účetní nezačne házet sešívačkou.
+
+### CB.5 První hodinu sleduj signály, které opravdu něco říkají
+
+Po zapnutí nesleduj jen CPU a obecný status serveru. Sleduj konkrétní cestu zákazníka nebo integrace.
+
+Pro API go-live si připrav malý dashboard:
+
+- počet úspěšných requestů podle endpointu,
+- počet chyb podle kódu a `request_id`,
+- frontu čekajících úloh,
+- počet doručených a selhaných webhooků,
+- latenci kritických endpointů,
+- počet vytvořených produkčních objektů,
+- auditní události pro přístupy a změny nastavení.
+
+Neukládej celé payloady jen proto, aby se lépe debugovalo. Ulož identifikátor, typ chyby, tenant, čas, verzi klienta a bezpečně redigované technické souvislosti. Když bude potřeba obsah konkrétního požadavku, vyžádej si ho cíleně od zákazníka nebo použij dočasný debug režim s omezenou retencí a jasným souhlasem.
+
+### CB.6 Komunikuj dopředu i po přechodu
+
+Zákazník nemá hádat, jestli už je hotovo. Připrav tři krátké zprávy: před go-live, při zahájení a po ověření.
+
+Šablona před go-live:
+
+> Ve středu 9:00 spustíme produkční integraci. Plán: vytvoření produkčního klíče, přepnutí webhooku, testovací export, kontrola logů a potvrzení výsledku. Pokud něco selže, vracíme se k původnímu nastavení a pošleme shrnutí.
+
+Šablona po úspěchu:
+
+> Produkční integrace běží. Ověřili jsme testovací export, webhook doručení a první provozní logy. Další kontrolu uděláme za 24 hodin. Pokud uvidíte nesrovnalost, pošlete nám `request_id` nebo čas akce.
+
+Šablona při problému:
+
+> Přechod jsme pozastavili kvůli chybě při doručení webhooku. Produkční data zůstala beze změny / vytvořené položky kontrolujeme ručně. Další aktualizaci pošleme v 10:30.
+
+Všimni si, že žádná zpráva neříká „mělo by to být v pohodě“. To je věta, která patří do skupinového chatu po fotbale, ne do produkční komunikace.
+
+### CB.7 Konkrétní příklad: přechod účetní integrace do produkce
+
+Malý B2B SaaS spouští integraci, která exportuje faktury do účetního systému zákazníka.
+
+Praktický plán:
+
+1. Den předem zákazník potvrdí produkční URL webhooku, odpovědnou osobu a časové okno.
+2. Ráno tým vytvoří produkční API klíč se scope `invoices:read` a `exports:write` pouze pro daný tenant.
+3. Integrátor provede jeden testovací export s idempotency key `go-live-001`.
+4. SaaS tým ověří stav dávky, doručení webhooku, auditní záznam a absenci neočekávaných chyb.
+5. Zákazník potvrdí, že faktura dorazila správně do účetnictví.
+6. Tým zapne běžný plán exportů a 60 minut sleduje chyby a fronty.
+7. Po 24 hodinách pošle krátké shrnutí: počet exportů, počet chyb, případné úpravy a další krok.
+
+Pokud testovací export selže, nespouští se běžný plán. Chyba se vyřeší v sandboxu nebo v omezeném produkčním testu. Produkce není místo pro improvizovanou detektivku, kde každý refresh stránky napíše novou kapitolu.
+
+### CB.8 Checklist produkčního přechodu
+
+- Je jasně určené časové okno a odpovědná osoba na obou stranách.
+- Zákazník potvrdil produkční URL, kontakty, role a tarif.
+- Tajemství jsou předaná bezpečně a mají minimální oprávnění.
+- Existuje rollback plán včetně dopadu na již vytvořená data.
+- Kritické metriky a logy jsou připravené před zapnutím.
+- První test ověřuje reálnou cestu, ne jen „endpoint vrací 200“.
+- Komunikace před, během i po přechodu je připravená předem.
+- Dočasné debug logy mají omezenou retenci a neukládají citlivý obsah.
+- Po 24 hodinách proběhne krátké review s konkrétními čísly a úkoly.
+
+### CB.9 Mini úkol na 60 minut
+
+Vyber jednu existující integraci, zákaznický onboarding nebo plánovaný launch a napiš jednostránkový go-live plán:
+
+1. Co se přesně zapíná.
+2. Kdo je odpovědný na obou stranách.
+3. Jaká tajemství nebo přístupy se předávají.
+4. Jaký je první produkční test.
+5. Jaké tři signály budeš sledovat první hodinu.
+6. Jaký je rollback a kdo ho schvaluje.
+7. Jakou zprávu pošleš zákazníkovi po úspěchu.
+
+Pokud to nevejde na jednu stránku, pravděpodobně nemáš větší plán, ale větší mlhu. Zkrať ho, dokud podle něj může někdo jiný opravdu postupovat.
+
+
 ## Pracovní log
+
+- 2026-09-11: Doplněn Dodatek CB o produkčním přechodu, go-live checklistu, bezpečném předávání tajemství, rollbacku, monitoringu první hodiny a privacy-first komunikaci se zákazníkem.
 
 - 2026-09-11: Doplněn Dodatek CA o release balíčcích pro API, SDK a integrátory, mapě dopadu změn, OpenAPI schématech, bezpečnostní komunikaci, SBOM a privacy-first release kanálech.
 - 2026-09-11: Doplněn Dodatek BZ o rate limitingu, tarifních kvótách, srozumitelných chybách `429`, viditelnosti limitů v administraci a privacy-first logování bez payloadů.
