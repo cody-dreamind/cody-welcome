@@ -165,6 +165,8 @@ Místo „bezpečný provoz“ napiš:
 - jak zákazník zruší účet,
 - koho kontaktovat při incidentu.
 
+Přidej i krátkou větu o tom, kdy naposledy byl postup ověřený. Důvěra rychle slábne, když bezpečnostní stránka vypadá jako archeologický nález z minulého redesignu.
+
 Místo „skvělá podpora“ napiš:
 
 - kdy odpovídáš,
