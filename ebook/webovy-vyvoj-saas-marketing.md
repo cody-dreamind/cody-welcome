@@ -10772,6 +10772,150 @@ Vyber jedno API, webhook nebo importní rozhraní a napiš krátkou „kartu kon
 
 Pak najdi jednu existující změnu v backlogu a označ ji jako kompatibilní, deprekační nebo breaking. Pokud to nejde rozhodnout během pěti minut, problém není v tobě. Problém je v tom, že API kontrakt zatím žije v kolektivní intuici. A kolektivní intuice je fajn na výběr oběda, horší na provoz zákaznických integrací.
 
+
+## Dodatek BU: Auditní logy bez šmírovací kroniky
+
+Auditní log není skládka všeho, co se v systému šustne. Je to důkazní stopa pro důležité události: kdo změnil oprávnění, kdo spustil export, kdo upravil fakturační údaje, kdo vypnul integraci a kdo se pokusil o akci, na kterou neměl právo. Dobře navržený auditní log pomáhá bezpečnosti, podpoře i zákazníkovi. Špatně navržený auditní log je jen drahý deník plný citlivých dat, který jednou někomu bouchne do obličeje.
+
+OWASP Logging Cheat Sheet doporučuje logovat konzistentně, chránit logy proti zneužití a vyloučit citlivé údaje jako hesla, tokeny, session identifikátory, platební údaje nebo zbytečná osobní data. Zdroj: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+> Codyho komentář: Auditní log má odpovědět na „co se stalo a kdo za to odpovídá“, ne na „kolik detailů zvládneme narvat do jedné tabulky, než si právník začne hladit spánek“.
+
+### BU.1 Nejdřív vyber události, které opravdu mají auditní hodnotu
+
+Začni akcemi, které mění bezpečnost, peníze, data nebo provozní stav. Pokud budeš auditovat úplně všechno, nebudeš umět najít nic. Pokud nebudeš auditovat nic, budeš při incidentu hádat z kávové sedliny a access logu.
+
+Audituj minimálně:
+
+- přihlášení, neúspěšné pokusy a změny MFA,
+- vytvoření, změnu a odebrání uživatele,
+- změny rolí, oprávnění a pozvánek,
+- vytvoření, rotaci a zrušení API klíčů,
+- exporty, importy a hromadné mazání dat,
+- změny fakturačních údajů a tarifů,
+- zapnutí nebo vypnutí integrací a webhooků,
+- změny bezpečnostních a retenčních nastavení,
+- zásahy podpory do zákaznického účtu.
+
+Naopak neukládej každý hover, klik na záložku nebo interní UI krok jen proto, že to technicky jde. Pokud událost nepomáhá bezpečnosti, účtování, zákaznické podpoře ani provozní odpovědnosti, pravděpodobně patří do produktové analytiky, ne do auditního logu.
+
+### BU.2 Každý záznam musí mít stejný tvar
+
+Auditní log se čte ve stresu: při incidentu, sporu, podezření na chybu nebo během bezpečnostního auditu. Tvar záznamu proto musí být nudně konzistentní.
+
+Praktický záznam může obsahovat:
+
+```json
+{
+  "event_id": "evt_01J...",
+  "occurred_at": "2026-09-11T02:00:00Z",
+  "actor_type": "user",
+  "actor_id": "usr_123",
+  "tenant_id": "ten_456",
+  "action": "api_key.rotated",
+  "target_type": "api_key",
+  "target_id": "key_789",
+  "result": "success",
+  "request_id": "req_abc",
+  "ip_prefix": "203.0.113.0/24"
+}
+```
+
+Všimni si, co tam není: celý token, celý payload, heslo, kompletní obsah importu, tělo e-mailu ani osobní poznámka podpory. Záznam má dát kontext, ne kopírovat zákazníkova data do druhé databáze.
+
+Dobrá pomůcka: odděl „identifikátor pro dohledání“ od „obsahu pro čtení“. Auditní log má často uložit `target_id`, `request_id` a `result`. Detailní obsah zůstává v doménové tabulce s vlastními právy, retencí a exportním režimem.
+
+### BU.3 Auditní log musí být odolný proti úpravám
+
+Když administrátor smaže uživatele a může zároveň smazat stopu o smazání, nemáš auditní log. Máš zápisník důvěry. A důvěra je krásná věc, ale špatný bezpečnostní model.
+
+Pravidla pro malý SaaS:
+
+- běžní uživatelé auditní log jen čtou podle svých práv,
+- administrátor tenant účtu nevidí cizí tenanty,
+- podpora vidí jen zákazníky, které obsluhuje, a jen nutný detail,
+- mazání auditních záznamů není dostupné z běžného admin UI,
+- změna retenční politiky se sama zapíše jako auditní událost,
+- produkční přístup k auditním logům je omezený, dočasný a dohledatelný.
+
+Pro vyšší nároky přidej append-only úložiště, pravidelné exporty do odděleného log systému nebo kryptografické řetězení záznamů. Ne každý malý produkt to potřebuje hned první týden, ale každý produkt by měl vědět, co chrání a proti komu.
+
+### BU.4 Ukaž zákazníkovi užitečný pohled, ne interní skladiště
+
+Auditní log v produktu má být čitelný. Zákazník nepotřebuje stack trace, interní názvy jobů ani `diff` databázového řádku. Potřebuje odpověď: co se stalo, kdy, kdo to udělal a jestli má jednat.
+
+Příklad lidského záznamu:
+
+| Čas | Událost | Kdo | Výsledek |
+| --- | --- | --- | --- |
+| 11. 9. 2026 09:14 | Uživatelka Petra změnila roli Jana z „Čtenář“ na „Správce fakturace“ | petra@example.eu | Hotovo |
+| 11. 9. 2026 09:20 | API klíč „Účetní export“ byl rotován | ondrej@example.eu | Hotovo |
+| 11. 9. 2026 09:31 | Neúspěšný pokus o export faktur bez oprávnění | jan@example.eu | Zamítnuto |
+
+Přidej filtry podle typu události, uživatele a období. Export dovol jen lidem s jasným oprávněním. A pokud export obsahuje osobní údaje, označ to v UI normální větou, ne právnickým zaklínadlem.
+
+Privacy-first detail: IP adresu často nepotřebuješ ukazovat v plném tvaru. Pro zákaznický pohled může stačit prefix, země nebo informace „nové zařízení / známé zařízení“, pokud je to pro daný scénář dostačující. Interní bezpečnostní log může mít přísnější režim a kratší přístupovou cestu.
+
+### BU.5 Retence musí být plán, ne nekonečno
+
+Auditní logy jsou citlivé. Ukazují chování lidí, provozní rytmus firmy a někdy i bezpečnostní slabiny. Proto si napiš retenční pravidla dřív, než tabulka doroste do velikosti digitálního mamuta.
+
+Rozděl události podle dopadu:
+
+- **Bezpečnostní a přístupové události:** delší retence podle rizika a smluvních potřeb.
+- **Běžné produktové změny:** kratší retence, pokud nejsou nutné pro podporu nebo spor.
+- **Diagnostické detaily:** krátká retence, ideálně dny až týdny.
+- **Exporty auditního logu:** vlastní expirace, práva a záznam o stažení.
+
+Retence má být viditelná v interní dokumentaci a u vyšších tarifů i v bezpečnostní stránce produktu. Pokud zákazník prodává do regulovanějšího prostředí, bude se ptát. Je lepší mít stručnou odpověď než improvizovat stylem „někde to asi máme“.
+
+### BU.6 Konkrétní příklad: auditní log pro účetní SaaS
+
+Představ si SaaS, který pomáhá účetním kancelářím sbírat podklady od klientů. Auditní log nemusí ukládat obsah faktur, ale musí umět doložit práci s přístupy a daty.
+
+Události:
+
+- `user.invited` — kdo pozval nového uživatele a do jakého klienta,
+- `role.changed` — stará a nová role, bez zbytečných osobních detailů,
+- `document.uploaded` — ID dokumentu, typ a tenant, ne celý soubor,
+- `document.downloaded` — kdo stáhl podklad a kdy,
+- `export.created` — rozsah exportu a počet položek,
+- `api_key.created` a `api_key.revoked` — název klíče, scope a prostředí,
+- `retention_policy.updated` — kdo změnil dobu uchování,
+- `support_access.granted` — kdo povolil přístup podpoře a na jak dlouho.
+
+Zákazník v UI vidí přehled událostí a může stáhnout auditní report za měsíc. Podpora vidí jen metadata potřebná k řešení problému. Vývojář při incidentu hledá podle `request_id`, ne podle obsahu dokumentu. Výsledek: stopa existuje, je použitelná a nerozmnožuje citlivá data jako králíci v datacentru.
+
+### BU.7 Checklist auditních logů
+
+- [ ] Máš seznam událostí, které opravdu vyžadují auditní stopu.
+- [ ] Každý záznam obsahuje čas, aktéra, tenant, akci, cíl, výsledek a korelační ID.
+- [ ] Auditní log neukládá hesla, tokeny, session ID, celé payloady ani zbytečná osobní data.
+- [ ] Zákaznický pohled je čitelný a omezený podle rolí.
+- [ ] Interní přístup k auditním logům je omezený, dočasný a dohledatelný.
+- [ ] Změny rolí, API klíčů, exportů, retence a podpůrných přístupů se zapisují vždy.
+- [ ] Retenční pravidla jsou napsaná a pravidelně kontrolovaná.
+- [ ] Export auditního logu je sám auditovaná událost.
+- [ ] Logy jsou chráněné proti neoprávněné úpravě a smazání.
+- [ ] Testuješ, že citlivé hodnoty opravdu nekončí v auditním záznamu.
+
+### BU.8 Mini úkol na 60 minut
+
+Vezmi jednu citlivou část produktu: role, API klíče, exporty nebo fakturaci. Napiš deset událostí, které musí skončit v auditním logu. Ke každé doplň:
+
+1. Kdo je aktér.
+2. Co je cíl akce.
+3. Jaký výsledek může nastat.
+4. Jaké ID pomůže dohledat detail.
+5. Jaké údaje se nesmí uložit.
+6. Kdo smí záznam vidět.
+7. Jak dlouho se má držet.
+8. Jestli se událost ukáže zákazníkovi.
+9. Jestli spouští alert nebo jen záznam.
+10. Jak otestuješ, že se citlivá data nepropsala do logu.
+
+Pak vyber jednu existující akci v aplikaci a doplň auditní záznam do návrhu. Nezačínej refaktorem celého log systému. Začni jednou událostí s vysokou hodnotou. Auditní log se nejlépe staví stejně jako důvěra: konzistentně, po malých krocích a bez dramatického orchestru v pozadí.
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -10867,6 +11011,7 @@ Pak najdi jednu existující změnu v backlogu a označ ji jako kompatibilní, d
 
 ## Pracovní log
 
+- 2026-09-11: Doplněn Dodatek BU o auditních logách, bezpečných metadatech, odolnosti proti úpravám, retenčních pravidlech a privacy-first zákaznickém pohledu.
 - 2026-09-11: Doplněn Dodatek BT o verzování API, veřejném kontraktu, zpětné kompatibilitě, deprekacích, changelogu, kontraktových testech a privacy-first migraci integrací.
 - 2026-09-11: Doplněn Dodatek BS o chybových stavech API, jednotném formátu chyb, request ID, bezpečném logování a privacy-first diagnostice bez úniku dat.
 - 2026-09-10: Doplněn Dodatek BR o webhoocích, minimálních payloadech, podpisech, retry, idempotenci, verzování schématu a privacy-first doručování událostí.
