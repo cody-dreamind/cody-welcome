@@ -11068,6 +11068,135 @@ Vyber jeden reálný supportní scénář, který řešíš často: nefunkční 
 
 Pak vezmi jednu existující supportní akci a doplň jí expiraci, důvod a auditní záznam. Nemusíš za hodinu postavit dokonalý interní portál. Stačí odstranit jeden tajný průchod. Tajné průchody jsou skvělé v hradech, horší v SaaS, kde zákazník věří, že jeho účet není veřejná prohlídková trasa.
 
+## Dodatek BW: Zákaznické role a oprávnění bez chaosu v administraci
+
+Role v SaaS nejsou jen hezké štítky typu „admin“ a „uživatel“. Jsou to mantinely, které rozhodují, kdo může vidět obchodní data, měnit fakturaci, zvát další lidi, mazat obsah nebo připojovat integrace. Jakmile zákazník vyroste z jednoho člověka na tým, špatně navržená oprávnění začnou bolet rychleji než pondělní stand-up po neděli s deployem.
+
+OWASP Authorization Cheat Sheet doporučuje kontrolovat oprávnění na serveru, používat výchozí zamítnutí přístupu a navrhovat oprávnění podle principu nejmenších práv. Zdroj: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+
+> Codyho komentář: Role nejsou firemní hierarchie přeložená do dropdownu. Role jsou produktový bezpečnostní model. Když je navrhneš stylem „všichni můžou všechno, protože jsme přece malý tým“, právě jsi vynalezl interní ransomware na lidský pohon.
+
+### BW.1 Začni akcemi, ne názvy rolí
+
+Nejdřív si vypiš citlivé akce v produktu. Teprve potom z nich slož role. Pokud začneš názvy rolí, snadno skončíš u „Owner“, „Admin“, „Manager“, „User“ a nikdo přesně neví, co to znamená.
+
+Praktický seznam akcí:
+
+| Oblast | Akce | Citlivost | Poznámka |
+| --- | --- | --- | --- |
+| Lidé | Pozvat člena týmu | Střední | Může zvýšit počet osob s přístupem k datům |
+| Role | Změnit oprávnění uživatele | Vysoká | Může obejít celý bezpečnostní model |
+| Fakturace | Změnit tarif nebo platební údaje | Vysoká | Dopad na peníze i odpovědnost |
+| Data | Exportovat zákaznická data | Vysoká | Dopad na soukromí a odchod zákazníka |
+| Integrace | Vytvořit API klíč nebo webhook | Vysoká | Může otevřít přístup mimo aplikaci |
+| Obsah | Mazat nebo archivovat záznamy | Střední až vysoká | Záleží na obnovitelnosti |
+
+Jakmile máš akce, označ u každé: kdo ji opravdu potřebuje, jestli vyžaduje potvrzení, jestli patří do auditního logu a jestli se má dát omezit jen na konkrétní projekt, tým nebo prostředí.
+
+### BW.2 Rozliš vlastnictví účtu, správu týmu a běžnou práci
+
+Malý SaaS často udělá jednu roli „admin“ a hotovo. To funguje první měsíc. Pak zákazník přidá účetní, externí agenturu, obchodníka a brigádníka. Najednou buď všichni vidí všechno, nebo si lidé navzájem blokují práci.
+
+Užitečné minimum rolí:
+
+- **Owner:** spravuje účet, fakturaci, zrušení účtu, bezpečnostní nastavení a převod vlastnictví.
+- **Admin:** spravuje tým, konfiguraci produktu a integrace, ale nemusí měnit fakturaci ani rušit účet.
+- **Editor:** vytváří a upravuje pracovní obsah v přiděleném prostoru.
+- **Viewer:** čte vybraná data bez možnosti měnit konfiguraci nebo exportovat vše.
+- **Billing:** vidí faktury a platby, ale ne produktová data.
+- **Integration manager:** spravuje API klíče, webhooky a propojení, ale ne role lidí.
+
+Ne každá aplikace potřebuje všechny role hned. Důležité je, aby role odpovídaly reálným scénářům. Pokud zákazník často zve externího dodavatele jen na jeden projekt, potřebuje projektově omezený přístup víc než další cool název v tabulce.
+
+### BW.3 Oprávnění vynucuj na backendu, ne v menu
+
+Schovat tlačítko ve frontendu je použitelnostní pomůcka, ne bezpečnost. Skutečné rozhodnutí musí vždy proběhnout na serveru u konkrétní akce.
+
+Bezpečný vzorec:
+
+```text
+actor: user_123
+tenant: ten_456
+action: invoice.export
+resource: invoice_set_789
+context: production
+result: allow | deny
+reason: role billing_admin has permission invoice.export for tenant ten_456
+```
+
+Frontend může podle oprávnění skrýt navigaci, vysvětlit omezení a zlepšit UX. Backend ale musí znovu ověřit, jestli daný uživatel smí provést přesně tu akci nad přesně tím zdrojem. Jinak stačí otevřít DevTools, upravit request a tvůj bezpečnostní model odejde na krátkou dovolenou bez zpáteční jízdenky.
+
+### BW.4 Přidávání práv dělej úmyslně, ubírání bez dramatu
+
+Změna role je citlivá akce. Uživatel, který může povýšit ostatní na admina, může prakticky změnit budoucnost celého tenant účtu. Proto změny oprávnění potřebují jasný tok.
+
+Doporučený postup:
+
+1. Ukázat, co nová role dovolí.
+2. Vyžadovat potvrzení u vysokých oprávnění.
+3. Zapsat změnu do auditního logu.
+4. Poslat upozornění dotčenému uživateli nebo ownerovi.
+5. Při odebrání práv okamžitě zneplatnit relevantní session, tokeny nebo pozvánky.
+
+U privacy-first produktu nepřidávej do notifikace zbytečná data. Stačí: kdo změnu provedl, komu, kdy, v jakém účtu a jaká role se změnila. Neposílej v e-mailu seznam zákaznických dat, projektů nebo interních poznámek. E-mail je pošťák, ne trezor.
+
+### BW.5 Pozvánky a externisté potřebují expiraci
+
+Pozvánka do týmu není jen odkaz. Je to dočasný vstupní mechanismus do zákaznického prostoru. Měla by mít omezenou platnost, jasnou roli a auditní stopu.
+
+Praktická pravidla:
+
+- Pozvánka expiruje, například po 7 nebo 14 dnech.
+- Pozvánka je vázaná na konkrétní e-mail nebo doménové pravidlo, pokud to dává smysl.
+- Role se vybírá už při vytvoření pozvánky a po přijetí se znovu zobrazí.
+- Opakované odeslání nevytváří nekonečné aktivní odkazy.
+- Nepřijaté pozvánky se dají zrušit.
+- Externí členové jsou v UI viditelně označení.
+
+Externisté často potřebují přístup jen na dobu projektu. Přidej proto volitelnou expiraci členství: „přístup do 30. 9. 2026“. Po expiraci účet nezmizí beze stopy, ale ztratí přístup k tenantovi. V auditním logu zůstane, co dělal. To je férové k zákazníkovi i k dodavateli.
+
+### BW.6 Konkrétní příklad: role v B2B portálu
+
+Představ si B2B portál, kde zákazník spravuje objednávky, faktury, exporty a integrace.
+
+Rozumné rozdělení:
+
+| Role | Smí | Nesmí |
+| --- | --- | --- |
+| Owner | Správa účtu, role, fakturace, zrušení účtu, export všech dat | Skrýt vlastní kritické akce před auditem |
+| Admin | Nastavení portálu, členové týmu, integrace, pracovní exporty | Zrušit účet nebo převést vlastnictví |
+| Obchodník | Číst objednávky a zákaznické přehledy, přidávat poznámky | Měnit role, API klíče a fakturaci |
+| Účetní | Číst faktury, platby a účetní exporty | Číst obchodní poznámky mimo fakturační kontext |
+| Externí konzultant | Číst přidělený projekt a navrhovat změny | Exportovat všechna data nebo zvát další lidi |
+
+Důležité je, že role nejsou jen globální. U některých produktů potřebuješ kombinaci role a rozsahu: „editor projektu A“, „viewer projektu B“, „billing pro celý účet“. Pokud to neuděláš, budeš zákazníka nutit buď do příliš širokých práv, nebo do zakládání zbytečných účtů.
+
+### BW.7 Checklist rolí a oprávnění
+
+- Máš sepsané citlivé akce, které produkt umožňuje?
+- Umíš říct, která role smí každou akci provést?
+- Vynucuješ oprávnění na backendu u každého endpointu a background jobu?
+- Jsou změny rolí v auditním logu?
+- Dostane owner upozornění na povýšení uživatele nebo vytvoření citlivého přístupu?
+- Mají pozvánky expiraci a možnost zrušení?
+- Umíš omezit přístup externisty jen na konkrétní projekt, tým nebo čas?
+- Zneplatní se session a tokeny po odebrání práv?
+- Vidí zákazník srozumitelně, kdo má k čemu přístup?
+- Neobsahují notifikace o rolích zbytečná osobní nebo obchodní data?
+
+### BW.8 Mini úkol na 60 minut
+
+Vezmi jednu existující aplikaci nebo plánovaný SaaS a udělej rychlý autorizační audit:
+
+1. Vyber 10 nejcitlivějších akcí v produktu.
+2. Ke každé napiš, kdo ji smí provést a proč.
+3. Ověř, jestli se kontrola děje na backendu, nejen ve frontendu.
+4. Najdi jednu roli, která je příliš široká, a rozděl ji na menší oprávnění.
+5. Přidej jednu událost do auditního logu pro změnu rolí nebo pozvánek.
+
+Výstupem nemá být krásný diagram. Stačí tabulka, kterou pochopí vývojář, support i zákazník. Pokud ji musíš vysvětlovat deset minut, je moc chytrá. A moc chytré autorizační modely mají nepříjemný zvyk selhat přesně ve chvíli, kdy se někdo zeptá: „Proč to ten člověk vůbec viděl?“
+
+
 ## Zdroje
 
 - Evropská komise: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -11163,6 +11292,7 @@ Pak vezmi jednu existující supportní akci a doplň jí expiraci, důvod a aud
 
 ## Pracovní log
 
+- 2026-09-11: Doplněn Dodatek BW o zákaznických rolích, oprávněních, backendové autorizaci, pozvánkách, externistech a privacy-first správě přístupů.
 - 2026-09-11: Doplněn Dodatek BV o supportním přístupu, impersonaci, dočasných session, zákaznickém auditním pohledu, interních rolích a privacy-first řešení podpory bez tajných průchodů.
 - 2026-09-11: Doplněn Dodatek BU o auditních logách, bezpečných metadatech, odolnosti proti úpravám, retenčních pravidlech a privacy-first zákaznickém pohledu.
 - 2026-09-11: Doplněn Dodatek BT o verzování API, veřejném kontraktu, zpětné kompatibilitě, deprekacích, changelogu, kontraktových testech a privacy-first migraci integrací.
