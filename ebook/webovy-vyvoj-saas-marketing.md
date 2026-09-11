@@ -12217,7 +12217,138 @@ Vezmi jednu plánovanou nebo hypotetickou migraci a vytvoř jednostránkový mig
 Výstup nemusí být krásný. Musí být použitelný. Krásná migrace, která nejde ověřit, je jen tabulka s make-upem.
 
 
+## Dodatek CD: Datová kvalita po spuštění bez tichého rozpadu produktu
+
+Migrace skončila, produkce běží a nikdo nekřičí. Gratuluju. Teď přichází ta méně filmová část: ověřit, že data zůstávají kvalitní i po prvních dnech reálného používání. Nejhorší problémy po spuštění totiž často nevypadají jako výpadek. Vypadají jako drobný nesoulad v reportu, chybějící stav objednávky, špatně napojený vlastník účtu nebo faktura, která se tváří normálně, ale účetnímu z ní cuká oko.
+
+> Codyho komentář: Datová kvalita je jako úklid v kuchyni. Když ji řešíš průběžně, je to deset minut. Když ji ignoruješ měsíc, najednou držíš v ruce něco, co možná býval sýr.
+
+### CD.1 Definuj, co znamená „správná data“
+
+Než začneš kontrolovat kvalitu, napiš si pravidla. Bez nich bude každý problém debatní kroužek. Správná data nejsou jen „nějak vyplněná“. Musí být úplná, konzistentní, aktuální a použitelná pro rozhodnutí.
+
+Pro každou klíčovou entitu si urč:
+
+- povinná pole,
+- platné formáty,
+- povolené stavy,
+- vztahy na jiné entity,
+- pravidla pro duplicity,
+- vlastníka odpovědného za opravu,
+- dopad chyby na zákazníka nebo provoz.
+
+Příklad pro zákaznický účet:
+
+| Pravidlo | Proč existuje | Kdo řeší chybu |
+| --- | --- | --- |
+| Účet má právě jednoho vlastníka | někdo musí schvalovat fakturaci a exporty | support + administrátor účtu |
+| Fakturační e-mail má platný formát | jinak nedojde faktura ani upomínka | support |
+| Aktivní účet má aspoň jeden aktivní plán | bez plánu nejde správně účtovat limity | produktový tým |
+| Smazaný účet nejde znovu použít bez obnovy | chrání auditní stopu a retenci | vývoj + support |
+
+Tahle pravidla nemusí být hned dokonalá. Musí ale existovat na jednom místě a musí jim rozumět vývoj, support i člověk, který zákazníkovi slibuje termín.
+
+### CD.2 Kontroly rozděl na blokující, varovné a informační
+
+Ne každá chyba má zastavit systém. Některé chyby musí blokovat akci, jiné mají vyvolat upozornění a další stačí sledovat v reportu. Když všechno označíš jako kritické, tým začne alerty ignorovat. Když kritické chyby schováš do týdenního exportu, zákazník ti je najde rychleji než monitoring. A bude z toho krásná, lehce kyselá schůzka.
+
+Použij tři úrovně:
+
+1. Blokující kontrola: Bez opravy nesmí proběhnout akce. Například vystavení faktury bez fakturačního profilu.
+2. Varovná kontrola: Akce může pokračovat, ale někdo musí problém řešit. Například zákazník nemá doplněný obor podnikání pro segmentaci podpory.
+3. Informační kontrola: Sleduje trend nebo kvalitu, ale nevyžaduje okamžitý zásah. Například počet kontaktů bez telefonního čísla, pokud telefon není nutný.
+
+Privacy-first pravidlo: nevyžaduj data jen proto, že se hezky kontrolují. Povinné pole musí mít jasný účel. Jinak sis jen vyrobil validovanou zvědavost.
+
+### CD.3 Po spuštění sleduj reconciliační report
+
+Prvních pár dní po go-live potřebuješ report, který porovnává realitu napříč systémy. Nejde o hezký dashboard pro poradu. Jde o kontrolu, že obchod, produkt, fakturace a integrace vyprávějí stejný příběh.
+
+Denně sleduj například:
+
+- počet nových účtů v produktu vs. fakturační systém,
+- počet objednávek vs. počet vystavených dokladů,
+- počet dokončených importů vs. počet notifikací zákazníkům,
+- počet aktivních předplatných vs. počet zákazníků s přístupem,
+- počet exportů vs. počet doručených webhooků,
+- počet účtů ve stavu `pending` déle než rozumný limit.
+
+Důležité je sledovat rozdíly, ne jen absolutní čísla. Pokud produkt říká 128 aktivních účtů a fakturace 126, chceš vědět proč. Možná je to legitimní zpoždění. Možná dvě firmy používají produkt zdarma, protože někde zůstal ruční bypass z pilotu. To je obchodně zajímavé, technicky nepříjemné a účetně vyloženě aromatické.
+
+### CD.4 Opravy dat dělej přes auditovatelný proces
+
+Když najdeš špatná data, nelákej se rychlou opravou v databázi. Občas je to nutné, ale nemá to být normální provozní nástroj. Každá ruční oprava dat by měla mít důvod, autora, čas, rozsah a možnost zpětně pochopit, co se změnilo.
+
+Minimální proces:
+
+1. Popiš problém v ticketu nebo interním záznamu.
+2. Uveď dotčený účet, entitu nebo dávku.
+3. Zapiš očekávaný správný stav.
+4. Nech změnu zkontrolovat druhým člověkem u citlivých dat.
+5. Proveď opravu skriptem nebo admin akcí, ne náhodným klikáním v databázi.
+6. Ulož výstup: kolik záznamů se změnilo a podle jakého pravidla.
+7. Uzavři příčinu, aby se stejný problém nevracel.
+
+U osobních údajů mysli na minimalizaci i při opravách. Do ticketu nedávej celé exporty, payloady ani kopie dokladů, pokud stačí interní identifikátor a popis chyby. Supportní ticket není datový sklad s náladou.
+
+### CD.5 Validace patří i do importů, adminu a integrací
+
+Častá chyba: frontend formulář validuje krásně, ale import, admin rozhraní nebo API integrace pustí dovnitř cokoli. Pak máš v systému data, která by uživatelský formulář nikdy nepovolil. Výsledkem je produktová schizofrenie: aplikace se tváří přísně u zákazníka, ale benevolentně u vlastních nástrojů.
+
+Validuj na těchto místech:
+
+- veřejné formuláře,
+- API endpointy,
+- dávkové importy,
+- administraci podpory,
+- interní skripty,
+- webhook handlery,
+- migrační a opravné nástroje.
+
+Ideální je mít sdílené validační schéma nebo aspoň jednu dokumentovanou pravdu. Když se pravidlo změní, nesmí se aktualizovat jen na jednom místě a doufat, že zbytek systému dostane telepatickou notifikaci.
+
+### CD.6 Konkrétní příklad: účetní SaaS po migraci
+
+Představ si účetní SaaS, který převedl zákazníky ze starého systému. Po týdnu provozu tým zjistí, že část zákazníků má aktivní účet, ale chybí jim fakturační profil. Produkt funguje, faktury se nevystavují a obchodní dashboard vypadá lépe než realita. To je přesně ten druh chyby, který se usmívá, dokud z něj není problém.
+
+Rozumný postup:
+
+1. Vytvoř report aktivních účtů bez fakturačního profilu.
+2. Rozděl záznamy podle původu: migrace, ruční založení, API import.
+3. Ověř, zda jde o legitimní výjimky nebo chybu.
+4. Přidej blokující kontrolu při aktivaci placeného plánu.
+5. Připrav opravný skript pro existující účty.
+6. U zákazníků s dopadem pošli stručné vysvětlení bez technických výmluv.
+7. Přidej denní reconciliační kontrolu na další dva týdny.
+
+Dobrá oprava není jen doplnění chybějících řádků. Dobrá oprava zabrání tomu, aby se chyba zítra vrátila v jiném kabátě.
+
+### CD.7 Checklist datové kvality po spuštění
+
+- [ ] Máš definovaná pravidla správnosti pro klíčové entity.
+- [ ] Víš, které kontroly jsou blokující, varovné a informační.
+- [ ] První dny po go-live běží denní reconciliační report.
+- [ ] Rozdíly mezi produktem, fakturací a integracemi mají vlastníka.
+- [ ] Ruční opravy dat jsou auditované a kontrolované.
+- [ ] Validace platí pro API, importy, admin i interní skripty.
+- [ ] Tickety neobsahují zbytečné osobní údaje ani celé exporty.
+- [ ] Každá opakovaná chyba končí úpravou pravidla, ne jen dalším hasičským zásahem.
+- [ ] Zákazník dostane informaci, pokud chyba ovlivnila jeho práci nebo data.
+
+### CD.8 Mini úkol na 45 minut
+
+Vyber jednu důležitou entitu ve svém produktu: zákaznický účet, objednávku, fakturu, projekt nebo uživatele. Napiš pro ni pět pravidel správnosti a u každého urč:
+
+1. co se kontroluje,
+2. kde se kontrola spouští,
+3. jestli je blokující, varovná nebo informační,
+4. kdo řeší výjimku,
+5. jak poznáš, že se chyba neopakuje.
+
+Pokud po 45 minutách nemáš aspoň jednu konkrétní kontrolu, kterou lze zavést tento týden, pravidla jsou moc abstraktní. Přelož je z manažerštiny do provozu. Produkt ti poděkuje, i když trochu potichu.
+
 ## Pracovní log
+- 2026-09-11: Doplněn Dodatek CD o datové kvalitě po spuštění, reconciliačních reportech, auditovaných opravách a privacy-first validaci napříč importy, API a administrací.
 
 - 2026-09-11: Doplněn Dodatek CC o datových migracích, migrační mapě, suchých bězích, kontrolních součtech, souhlasech, cutover plánu, rollbacku a privacy-first úklidu exportů.
 - 2026-09-11: Doplněn Dodatek CB o produkčním přechodu, go-live checklistu, bezpečném předávání tajemství, rollbacku, monitoringu první hodiny a privacy-first komunikaci se zákazníkem.
