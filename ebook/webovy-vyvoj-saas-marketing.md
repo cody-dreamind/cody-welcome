@@ -27,7 +27,7 @@ Každou kapitolu ber jako pracovní checklist. Nečti ji jako román do šuplík
 8. Praktické šablony: brief, landing page, launch checklist a audit soukromí.
 9. AI automatizace v evropském SaaS: užitek, governance a bezpečné nasazení.
 10. Cenotvorba a balíčky: hodnota, jednoduchost, férovost a důvěra.
-11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy, postupné rollouty, e-mailová doručitelnost, cache, statická aktiva, API klíče, auditní logy, stránka bezpečnosti a soukromí, souborové přílohy, hlášení zranitelností, retence dat, checkout, waitlisty, produktová dema, trialy, piloty, produkční přechody, sandbox a testovací integrace.
+11. Dodatky: 30denní plán, výběr nástrojů, obsah, přístupnost, podpora, retence, souhlasy, technické SEO, bezpečnostní minimum, roadmapa, prodejní discovery, onboarding, jednoduché CRM, zpětná vazba, produktové e-maily, dashboardy, experimenty, provozní náklady, observabilita, dodavatelé, exporty, obnova dat, předstartovní QA, lokalizace, evropská expanze, prázdné stavy, role, nastavení, importy dat, API integrace, notifikace, platby, upomínky, ukončení účtu, mobilní UX, vyhledávání, nápověda, SLA a provozní sliby, tenant izolace, multi-tenant bezpečnost, feature flagy, postupné rollouty, e-mailová doručitelnost, cache, statická aktiva, API klíče, auditní logy, stránka bezpečnosti a soukromí, souborové přílohy, hlášení zranitelností, retence dat, checkout, waitlisty, produktová dema, trialy, piloty, produkční přechody, datové migrace, sandbox a testovací integrace.
 
 ---
 
@@ -12055,8 +12055,171 @@ Vyber jednu existující integraci, zákaznický onboarding nebo plánovaný lau
 Pokud to nevejde na jednu stránku, pravděpodobně nemáš větší plán, ale větší mlhu. Zkrať ho, dokud podle něj může někdo jiný opravdu postupovat.
 
 
+## Dodatek CC: Datové migrace bez ztrát, překvapení a nočního lovu v zálohách
+
+Datová migrace vypadá na papíře nevinně: vezmeme data ze starého systému, převedeme je do nového a jede se dál. Realita je méně poetická. V datech bývají historické výjimky, ruční opravy, duplicitní kontakty, staré souhlasy, chybějící vlastníci účtů a poznámky typu „neodesílat fakturu paní Novákové, volat synovi“. Pokud migraci podceníš, nový SaaS nezačne čistým startem. Začne importovaným chaosem v hezčím kabátě.
+
+> Codyho komentář: Migrace dat není kopírování složky na flashku. Je to operace s pamětí firmy. A paměť firmy občas obsahuje věci, které by si nejradši nepamatovala ani firma samotná.
+
+### CC.1 Nejdřív rozhodni, co se migrovat nemá
+
+První chyba migrací je představa, že „všechno“ je bezpečná volba. Není. Všechno znamená staré testovací účty, neplatné kontakty, historické poznámky, soubory bez vlastníka a osobní údaje, které už nemají jasný účel. Privacy-first migrace začíná škrtáním.
+
+Před importem si rozděl data do čtyř skupin:
+
+| Skupina | Co s ní udělat |
+| --- | --- |
+| Aktivní provozní data | Migrovat a ověřit proti zákaznickému scénáři |
+| Historie nutná ze zákona nebo smlouvy | Migrovat s retencí a omezeným přístupem |
+| Archiv pro zákazníka | Nabídnout export nebo read-only režim |
+| Nepotřebná a neobhajitelná data | Nemigrovat, bezpečně smazat nebo anonymizovat |
+
+Pokud neumíš u dat říct účel, vlastníka a dobu uchování, nemají v nové produkci automatické právo na nový život. Evropský privacy-first provoz není skládka s lepším UI.
+
+### CC.2 Migrační mapu piš pro lidi, ne jen pro skript
+
+Migrační skript potřebuje mapování sloupců. Tým potřebuje pochopit dopad. Proto si vytvoř jednoduchou migrační mapu, kterou přečte vývojář, zákaznická podpora i člověk od zákazníka.
+
+Minimální mapa:
+
+| Zdrojové pole | Cílové pole | Transformace | Riziko | Ověření |
+| --- | --- | --- | --- | --- |
+| `client_email` | `users.email` | trim, lowercase | duplicitní e-maily | unikátní index a report duplicit |
+| `company_note` | nemigruje se | export do archivu | může obsahovat osobní údaje | vzorek a schválení zákazníkem |
+| `invoice_status` | `invoices.state` | mapování hodnot | staré neznámé stavy | seznam výjimek před importem |
+| `consent_marketing` | `consents.marketing` | převod na datum a zdroj | nejasný původ souhlasu | nemigrovat bez důkazu |
+
+Mapu drž u migrace jako dokumentaci rozhodnutí. Až se za tři měsíce někdo zeptá, proč se nepřevedly interní poznámky, nechceš odpovídat „protože to tak řekl jeden skript v úterý“.
+
+### CC.3 Migruj ve vrstvách, ne jedním heroickým skokem
+
+Jednorázová migrace bez zkušebního běhu je adrenalinový sport. Lepší postup je vrstvený:
+
+1. Profiluj zdrojová data a najdi anomálie.
+2. Udělej suchý běh na kopii dat.
+3. Vygeneruj report chyb, duplicit a přeskočených položek.
+4. Oprav pravidla transformace.
+5. Proveď druhý suchý běh a porovnej výsledky.
+6. Nech zákazníka schválit vzorek.
+7. Teprve potom plánuj produkční cutover.
+
+Suchý běh není formalita. Je to levná verze budoucího incidentu. Když najdeš problém v testu, jsi pečlivý. Když ho najde zákazník po go-live, jsi „ten dodavatel, co nám rozbil data“. Marketingově slabší titul, upřímně.
+
+### CC.4 Každý import potřebuje kontrolní součty a výjimky
+
+Po migraci nestačí říct „skript doběhl“. Skript může doběhnout i do zdi. Potřebuješ kontrolní čísla a výjimkový report.
+
+Ověř minimálně:
+
+- počet záznamů před a po migraci,
+- počet přeskočených záznamů a důvod,
+- počet sloučených duplicit,
+- sumy u finančních dat,
+- počet záznamů podle stavu,
+- počet záznamů bez vlastníka,
+- počet souborů a jejich velikost,
+- náhodný vzorek kritických zákaznických scénářů.
+
+U peněz, souhlasů a oprávnění nestačí procentuální shoda. Tam chceš konkrétní kontrolu. Když se ztratí jedna faktura z milionu, je to pořád jedna faktura, kterou někdo bude řešit. A hádej kdo.
+
+### CC.5 Souhlasy a právní metadata nepřeváděj naslepo
+
+Souhlas není boolean. Souhlas má zdroj, čas, účel, text, kanál a možnost odvolání. Pokud starý systém drží jen `newsletter = true`, nemáš automaticky použitelný marketingový souhlas pro nový systém.
+
+U právních metadat si ověř:
+
+- odkud souhlas pochází,
+- k jakému účelu byl udělen,
+- jaké znění uživatel viděl,
+- kdy byl udělen nebo změněn,
+- jestli existuje důkaz,
+- jak se přenese odvolání,
+- jak dlouho se metadata drží.
+
+Pokud důkaz chybí, férovější je uživatele znovu požádat o souhlas nebo ho do marketingového seznamu nemigrovat. Krátkodobě přijdeš o část databáze. Dlouhodobě nezakládáš marketing na „možná to kdysi někdo odklikl“. To je méně sexy, ale mnohem lépe se s tím spí.
+
+### CC.6 Cutover plán napiš podle hodin, ne podle přání
+
+Produkční migrace potřebuje časové okno, odpovědnosti a rozhodovací body. Neplánuj ji jako „v pátek večer to přehodíme“. Napiš přesný postup.
+
+Příklad:
+
+| Čas | Krok | Vlastník | Rozhodnutí |
+| --- | --- | --- | --- |
+| 08:00 | Zamknout zápis ve starém systému | zákazník | potvrdit read-only režim |
+| 08:15 | Export zdrojových dat | dodavatel | ověřit hash a počet souborů |
+| 08:45 | Spustit import | vývoj | sledovat chyby a čas běhu |
+| 09:30 | Spustit kontrolní report | vývoj + support | porovnat součty |
+| 10:00 | Ověřit vzorek zákaznických scénářů | zákazník | go/no-go |
+| 10:30 | Zapnout nový systém | vlastník produktu | komunikace týmu |
+| 11:30 | První provozní review | všichni | seznam oprav |
+
+Když nemáš jasné `go/no-go` body, migrace se začne posouvat pocitově. A pocitové migrace obvykle končí větou „ještě to chvíli nechme běžet vedle sebe“, což znamená dvojí pravdu, dvojí práci a dvojí šanci udělat chybu.
+
+### CC.7 Rollback u migrace řeší i nově vzniklá data
+
+Rollback migrace není jen návrat databáze ze zálohy. Po zapnutí nového systému mohou vzniknout nová data: faktury, objednávky, komentáře, soubory, auditní záznamy, souhlasy nebo změny rolí. Plán musí říct, co se s nimi stane.
+
+Ptej se:
+
+1. Lze se vrátit do starého systému bez ztráty nových dat?
+2. Která nová data se exportují zpět?
+3. Která data se musí ručně odsouhlasit?
+4. Kdo rozhoduje o rollbacku?
+5. Jak dlouho je rollback realisticky možný?
+6. Jak zákazníkovi vysvětlíme dopad?
+
+U složitějších migrací zvaž dočasný read-only režim, krátké paralelní ověření nebo postupný přechod po skupinách zákazníků. Ne kvůli alibismu, ale kvůli tomu, že data nejsou vypínač.
+
+### CC.8 Po migraci ukliď přístupy, exporty a dočasné kopie
+
+Nejnebezpečnější část migrace často není samotný import, ale bordel po něm. Exporty na disku, dočasné dumpy databáze, sdílené archivy, přístupy pro externisty a debug logy s payloady. Privacy-first migrace končí až úklidem.
+
+Po migraci udělej:
+
+- smazání nebo bezpečnou archivaci dočasných exportů,
+- revizi přístupů použitých jen pro migraci,
+- vypnutí dočasných integračních klíčů,
+- kontrolu, že debug logy nemají dlouhou retenci,
+- záznam do auditního logu,
+- předání finálního reportu zákazníkovi,
+- potvrzení, kde leží archiv a kdo k němu smí.
+
+Když zákazníkovi předáš nový systém, ale necháš export osobních dat ve sdílené složce „migrace-final-final2“, migrace není hotová. Jen se tváří, že je.
+
+### CC.9 Checklist datové migrace
+
+Před produkční migrací si odškrtni:
+
+- Je jasné, která data se nemigrují a proč?
+- Existuje migrační mapa polí, transformací a rizik?
+- Proběhl suchý běh na kopii dat?
+- Máš report duplicit, výjimek a přeskočených záznamů?
+- Jsou finanční údaje ověřené součty, ne jen počtem řádků?
+- Jsou souhlasy migrované jen s účelem, časem a důkazem?
+- Je připravený cutover plán s vlastníky a `go/no-go` body?
+- Existuje rollback plán včetně nově vzniklých dat?
+- Jsou dočasné exporty a přístupy po migraci odstraněné?
+- Dostane zákazník srozumitelný migrační report?
+
+### CC.10 Mini úkol na 60 minut
+
+Vezmi jednu plánovanou nebo hypotetickou migraci a vytvoř jednostránkový migrační brief:
+
+1. Napiš zdrojový a cílový systém.
+2. Vyjmenuj pět datových oblastí, které se migrují.
+3. Vyjmenuj tři oblasti, které se migrovat nemají.
+4. U jedné tabulky napiš mapování polí a transformace.
+5. Navrhni tři kontrolní součty.
+6. Popiš jeden rollback scénář.
+7. Doplň privacy úklid po migraci.
+
+Výstup nemusí být krásný. Musí být použitelný. Krásná migrace, která nejde ověřit, je jen tabulka s make-upem.
+
+
 ## Pracovní log
 
+- 2026-09-11: Doplněn Dodatek CC o datových migracích, migrační mapě, suchých bězích, kontrolních součtech, souhlasech, cutover plánu, rollbacku a privacy-first úklidu exportů.
 - 2026-09-11: Doplněn Dodatek CB o produkčním přechodu, go-live checklistu, bezpečném předávání tajemství, rollbacku, monitoringu první hodiny a privacy-first komunikaci se zákazníkem.
 
 - 2026-09-11: Doplněn Dodatek CA o release balíčcích pro API, SDK a integrátory, mapě dopadu změn, OpenAPI schématech, bezpečnostní komunikaci, SBOM a privacy-first release kanálech.
