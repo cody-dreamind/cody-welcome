@@ -12347,7 +12347,154 @@ Vyber jednu důležitou entitu ve svém produktu: zákaznický účet, objednáv
 
 Pokud po 45 minutách nemáš aspoň jednu konkrétní kontrolu, kterou lze zavést tento týden, pravidla jsou moc abstraktní. Přelož je z manažerštiny do provozu. Produkt ti poděkuje, i když trochu potichu.
 
+
+## Dodatek CE: Vypínání starého systému bez datového smogu
+
+Migrace je hotová, nový systém běží a nikdo nekřičí. Jenže starý nástroj pořád někde bliká v rohu. Někdo ho chce nechat „pro jistotu“. Někdo se bojí, že v něm ještě něco je. Někdo do něj pořád jednou za týden sáhne, protože si nepamatuje, kde je nová obrazovka. Takhle vzniká digitální půda plná starých exportů, dočasných hesel, nejasných práv a dat, která už nikdo aktivně nespravuje.
+
+Vypnutí starého systému není úklid po projektu. Je to poslední fáze migrace. Dokud ji neuděláš, nemáš jeden provozní zdroj pravdy, ale dvě polopravdy, které se časem začnou rozcházet.
+
+> Codyho komentář: „Necháme to běžet ještě měsíc“ je v IT často kouzelná formule. Přeloženo do češtiny: za rok najdeme server, který nikdo nevlastní, ale všichni se ho bojí vypnout.
+
+### CE.1 Nejdřív pojmenuj důvod, proč starý systém ještě žije
+
+Starý systém po migraci smí zůstat dostupný jen z konkrétního důvodu. „Kdyby něco“ není důvod. Je to mlha s administrátorským účtem.
+
+Typické legitimní důvody jsou:
+
+- krátká ověřovací fáze po migraci,
+- zákonná archivace vybraných záznamů,
+- možnost zákaznického porovnání v omezeném období,
+- nedokončený export historických příloh,
+- čekající audit nebo účetní uzávěrka,
+- smluvní povinnost držet určité reporty dostupné.
+
+Ke každému důvodu napiš vlastníka a datum konce. Pokud datum konce neumíš určit, nastav kontrolní bod. Starý systém bez kontrolního bodu není záloha. Je to budoucí incident, který zatím nemá kalendářovou pozvánku.
+
+### CE.2 Přepni starý systém do režimu pouze pro čtení
+
+Po produkčním přechodu musí být jasné, kde vznikají nová data. Pokud lidé dál zapisují do starého systému, migrace se ti rozpadá pod rukama. Nejrychlejší prevence je režim pouze pro čtení.
+
+Prakticky:
+
+1. Zakaž běžným uživatelům vytváření a úpravy záznamů.
+2. Vypni automatické importy a integrace, které do starého systému zapisují.
+3. Nech dostupné jen čtení historických dat, pokud je ještě potřeba.
+4. Do rozhraní přidej jasnou hlášku: „Tento systém je archivní, nové změny patří do nového produktu.“
+5. Sleduj pokusy o zápis, protože ti ukážou zapomenuté procesy.
+
+Privacy-first detail: archivní režim neznamená, že data může vidět víc lidí než dřív. Naopak. Po migraci často stačí menší skupina s přístupem, protože běžná práce už probíhá jinde.
+
+### CE.3 Udělej inventuru dat, exportů a příloh
+
+Před vypnutím potřebuješ vědět, co ve starém systému zůstává. Ne kvůli nostalgii, ale kvůli odpovědnosti. Staré systémy často obsahují víc než hlavní databázi: přílohy, vygenerované PDF, logy, dočasné exporty, cache a integrační fronty.
+
+Inventura může vypadat takhle:
+
+| Oblast | Co ověřit | Rozhodnutí |
+| --- | --- | --- |
+| Zákaznické záznamy | byly migrovány nebo archivovány? | ponechat jen zákonný archiv |
+| Přílohy | existuje cílové úložiště a kontrola počtu? | migrovat nebo smazat podle účelu |
+| Exporty | nejsou v nich osobní údaje bez potřeby? | smazat dočasné soubory |
+| Logy | obsahují citlivé payloady? | zkrátit retenci nebo anonymizovat |
+| Integrace | neposílají stále webhooky nebo e-maily? | vypnout a zdokumentovat |
+| Uživatelé | kdo má ještě přístup? | odebrat vše mimo správce archivu |
+
+Největší riziko nebývá hlavní databáze. Ta má aspoň jméno. Riziko jsou složky typu `final_export_2`, zapomenuté sdílené odkazy a integrace, která jednou týdně posílá report někomu, kdo už ve firmě dávno není.
+
+### CE.4 Nastav retenční a mazací plán
+
+Vypnutí systému neznamená automaticky všechno smazat. Některá data musíš držet kvůli účetnictví, smlouvám nebo bezpečnostnímu auditu. Jiná data už nemají účel a mají zmizet. Rozdíl musí být napsaný dřív, než někdo klikne na `delete`.
+
+Rozděl data do čtyř košů:
+
+1. Migrováno do nového systému a ověřeno: ve starém systému smazat nebo znepřístupnit po schválené lhůtě.
+2. Archivováno kvůli zákonnému nebo smluvnímu důvodu: omezit přístup, nastavit retenci a zdokumentovat účel.
+3. Dočasné provozní kopie: smazat co nejdřív po ověření migrace.
+4. Neznámý původ nebo nejasný účel: eskalovat vlastníkovi, neponechávat navždy ze strachu.
+
+Privacy-first provoz nestojí na tom, že všechno smažeš hned. Stojí na tom, že pro každý ponechaný datový záznam umíš říct proč, kde je, kdo ho vidí a kdy skončí jeho život.
+
+### CE.5 Zavři přístupy, tajemství a automatizace
+
+Starý systém bývá napojený na víc věcí, než si tým pamatuje. API klíče, servisní účty, SMTP přístupy, webhooky, cron joby, zálohovací skripty, BI exporty a interní dashboardy. Když vypneš jen webovou aplikaci, může zbytek dál běžet jako malá robotická zombie.
+
+Před definitivním vypnutím projdi:
+
+- uživatelské účty a role,
+- servisní účty a API klíče,
+- tajemství v CI/CD a serverech,
+- plánované úlohy a cron joby,
+- odchozí e-maily a notifikace,
+- webhooky a integrační endpointy,
+- zálohovací plány,
+- monitoring a alerty,
+- DNS záznamy, subdomény a interní odkazy.
+
+Každý vypnutý přístup si zapiš. Ne proto, aby vznikl krásný byrokratický památník, ale aby bylo jasné, že vypnutí proběhlo kontrolovaně. „Asi jsme to smazali“ je věta, která nemá patřit do bezpečnostního postmortemu.
+
+### CE.6 Komunikuj změnu lidem, kteří starý systém používali
+
+Technické vypnutí bez komunikace vytvoří chaos. Lidé si začnou ukládat screenshoty, exportovat tabulky bokem nebo obcházet nový proces. To je přesně opačný výsledek, než chceš.
+
+Krátká zpráva stačí:
+
+- co se vypíná,
+- od kdy je systém jen pro čtení,
+- kdy přístup skončí úplně,
+- kde je nový zdroj pravdy,
+- co dělat při nálezu chybějících dat,
+- kdo schvaluje výjimky,
+- jak se nakládá s archivem.
+
+Zákazníkům piš bez interního žargonu. „Legacy CRM bude dekomisionováno“ zní jako pohřební služba pro software. Lepší je: „Od 1. října najdete všechny zákaznické záznamy v novém portálu. Starý portál zůstane do 31. října dostupný pouze pro čtení.“
+
+### CE.7 Konkrétní příklad: vypnutí starého klientského portálu
+
+Agentura migrovala klientský portál do nového SaaS. Starý portál obsahoval projekty, faktury, přílohy a komentáře. Tým ho nechtěl vypnout, protože „někteří klienti jsou zvyklí“.
+
+Rozumný plán:
+
+1. První týden po go-live: starý portál jen pro čtení, jasná hláška v horní liště.
+2. Druhý týden: reconciliační kontrola počtu projektů, faktur a příloh.
+3. Třetí týden: odebrání přístupu běžným uživatelům, ponechání interního archivu pro support.
+4. Po měsíci: smazání dočasných exportů a vypnutí integračních jobů.
+5. Po schválené retenční době: odstranění archivních dat, která už nemají účel.
+
+Support dostal jednoduchou odpověď pro klienty: „Historická data jsme převedli do nového portálu. Pokud vám něco chybí, pošlete nám ID projektu nebo faktury, ne screenshot celé stránky.“ Tím se snížilo riziko, že zákazníci začnou posílat osobní údaje v přílohách e-mailů.
+
+### CE.8 Checklist vypnutí starého systému
+
+- [ ] Je jasné, proč starý systém ještě existuje.
+- [ ] Každý důvod má vlastníka a datum konce.
+- [ ] Systém je po go-live v režimu pouze pro čtení.
+- [ ] Zápisové integrace, importy a automatizace jsou vypnuté.
+- [ ] Proběhla inventura databází, příloh, exportů, logů a reportů.
+- [ ] Existuje retenční plán pro data, která zůstávají v archivu.
+- [ ] Zbytečné uživatelské a servisní přístupy jsou odebrané.
+- [ ] API klíče a tajemství jsou zrušené nebo rotované.
+- [ ] Komunikace je připravená pro interní tým i zákazníky.
+- [ ] Existuje postup, jak nahlásit chybějící nebo špatně převedená data.
+- [ ] Po vypnutí vznikne stručný záznam o tom, co se stalo.
+
+### CE.9 Mini úkol na 60 minut
+
+Vyber jeden starý nástroj, tabulku, databázi nebo interní systém, který už nemá být aktivní, a napiš mu vypínací plán:
+
+1. proč ještě existuje,
+2. kdo je jeho vlastník,
+3. jaká data obsahuje,
+4. kdo má přístup,
+5. jaké integrace do něj nebo z něj stále běží,
+6. kdy přejde do režimu pouze pro čtení,
+7. co se archivuje, co se migruje a co se smaže,
+8. jak informuješ tým nebo zákazníky,
+9. jak poznáš, že je bezpečné ho vypnout.
+
+Když plán nevejde na jednu stránku, nevadí. Když nejde určit vlastník, vadí hodně. Starý systém bez vlastníka je firemní půda bez světla: možná je prázdná, možná tam bydlí netopýr s produkčním heslem.
+
 ## Pracovní log
+- 2026-09-11: Doplněn Dodatek CE o vypínání starých systémů po migraci, režimu pouze pro čtení, inventuře dat, retenčním plánu, rušení přístupů a privacy-first komunikaci archivu.
 - 2026-09-11: Doplněn Dodatek CD o datové kvalitě po spuštění, reconciliačních reportech, auditovaných opravách a privacy-first validaci napříč importy, API a administrací.
 
 - 2026-09-11: Doplněn Dodatek CC o datových migracích, migrační mapě, suchých bězích, kontrolních součtech, souhlasech, cutover plánu, rollbacku a privacy-first úklidu exportů.
