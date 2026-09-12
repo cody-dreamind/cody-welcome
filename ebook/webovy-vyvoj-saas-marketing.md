@@ -678,6 +678,182 @@ Privacy-first SaaS není produkt, který nikdy nic neměří a bojí se vlastní
 
 ---
 
+
+## 6. Produktivita malého týmu
+
+Produktivita v malém SaaS týmu není schopnost nacpat do týdne víc meetingů, víc ticketů a víc notifikací. To je jen digitální verze překládání šanonů z jedné hromady na druhou. Skutečná produktivita znamená, že tým rychleji pozná, co má smysl, dokončí méně věcí pořádně a nezahltí se procesem dřív, než má produkt stabilní tržby.
+
+Malý tým má výhodu rychlosti. Nemá výhodu kapacity. Proto musí chránit pozornost stejně pečlivě jako produkční databázi. Každé nové „rychlé“ přání, každý kanál komunikace a každá metrika bez rozhodnutí je malý únik energie. Jeden nevadí. Dvacet z nich už je díra v lodi a někdo se diví, proč sprint plave po kanceláři.
+
+### Rozhodování: méně demokracie, více jasnosti
+
+Největší ztráty často nevznikají při psaní kódu, ale před ním. Tým ví, že něco „by se mělo“, ale nikdo neví, kdo rozhoduje, podle čeho a kdy je hotovo. Výsledkem je backlog plný neurčitých položek: „vylepšit onboarding“, „udělat lepší homepage“, „přidat AI“, „nějak pořešit analytiku“. To nejsou úkoly. To jsou mlhoviny.
+
+Každé produktové rozhodnutí by mělo mít čtyři věty:
+
+- **Pro koho to děláme:** konkrétní segment, role nebo typ účtu.
+- **Jaký problém řešíme:** bolest, riziko, ztráta času, ztráta peněz nebo bariéra v nákupu.
+- **Jak poznáme úspěch:** jedna až tři pozorovatelné změny v chování, obchodě nebo provozu.
+- **Kdo rozhoduje:** jedna osoba, která po vyslechnutí vstupů řekne ano, ne, nebo teď ne.
+
+Demokracie je skvělá pro sběr perspektiv. Je mizerná jako náhrada za odpovědnost. Pokud o každém detailu rozhoduje celý tým, vzniká průměr. A průměrný produkt má problém: nikoho neurazí, ale taky nikoho nenadchne.
+
+Praktický formát pro malé rozhodnutí:
+
+```text
+Rozhodnutí: Zjednodušíme registraci na e-mail + heslo a přesuneme firemní údaje až do nastavení fakturace.
+Pro koho: Noví trial uživatelé, kteří chtějí produkt rychle vyzkoušet.
+Proč: Původní formulář sbírá příliš mnoho údajů před první hodnotou.
+Úspěch: Více dokončených registrací a méně support dotazů při prvním vstupu.
+Riziko: Méně údajů pro kvalifikaci leadu.
+Vlastník: Produkt / zakladatel.
+Revize: Za 14 dní podle aktivace a kvalitativní zpětné vazby.
+```
+
+Tento zápis není byrokracie. Je to pojistka proti tomu, aby tým za měsíc nevěděl, proč něco udělal. Historie rozhodnutí je pro SaaS nečekaně cenná: ukazuje, co se zkusilo, proč se to zkusilo a co se už nemusí znovu debatovat u další kávy.
+
+### Backlog jako seznam sázek, ne skládka přání
+
+Backlog má být nástroj řízení pozornosti. Často se z něj ale stane psychologická úschovna: každý nápad se zapíše, aby se nikdo necítil odmítnutý. Po půl roce má tým dvě stě položek a každá z nich šeptá: „jednou se ke mně vrať“. Nevrátí. A je to v pořádku.
+
+Zdravý backlog rozlišuje tři typy práce:
+
+- **Teď:** práce pro aktuální cyklus, jasně popsaná a připravená k dokončení.
+- **Příště možná:** kandidáti na další cyklus, které ještě potřebují rozhodnutí nebo data.
+- **Archiv:** nápady, které nejsou špatné, ale teď nemají dostatečný důvod.
+
+Archiv není hřbitov. Je to mentální hygiena. Když se nápad vrátí třikrát od zákazníků, může z archivu zpět. Pokud se nevrací, možná byl zajímavý jen v úterý po obědě.
+
+Každá položka v části „teď“ by měla mít hotovou definici dokončení. Ne román, jen praktickou hranici. Například:
+
+- Uživatel může obnovit heslo bez kontaktování podpory.
+- Resetovací e-mail obsahuje jednorázový odkaz s expirací.
+- Chybové stavy jsou srozumitelné a nelogují citlivé údaje.
+- Událost dokončení resetu je měřená agregovaně bez zbytečné identifikace.
+- Support má krátký návod, co dělat, když uživatel e-mail nedostane.
+
+Všimni si posledních dvou bodů. Produktivita není jen „feature funguje v happy path“. Produktivní tým dokončuje i měření, bezpečnost, texty a provozní detail, protože jinak se práce vrátí jako bumerang. A bumerang je fajn sport, ale špatná roadmapa.
+
+### Týdenní rytmus místo věčného sprintového divadla
+
+Malý tým nepotřebuje složitý rituál, pokud ještě nemá složitou organizaci. Potřebuje rytmus, ve kterém se pravidelně rozhoduje, dělá, kontroluje a uklízí.
+
+Dobře funguje jednoduchý týdenní cyklus:
+
+- **Pondělí:** vybrat jednu hlavní obchodní nebo produktovou prioritu týdne.
+- **Úterý až čtvrtek:** hluboká práce, minimum meetingů, průběžné dokončování.
+- **Pátek dopoledne:** kontrola výsledků, demo, rozhodnutí co dál.
+- **Pátek odpoledne:** úklid backlogu, dokumentace, malé opravy, retrospektiva.
+
+Jedna hlavní priorita neznamená, že se nic jiného nesmí stát. Znamená to, že při konfliktu víš, co má přednost. Pokud je prioritou aktivace trialů, homepage redesign kvůli estetickému neklidu počká. Pokud je prioritou stabilita plateb, nový blogový experiment počká. Pokud je prioritou incident, počká skoro všechno a nikdo se netváří překvapeně.
+
+Krátká páteční retrospektiva by měla odpovědět na tři otázky:
+
+1. Co jsme dokončili a jaký to mělo dopad?
+2. Co nás zpomalilo víc, než mělo?
+3. Co příští týden odstraníme, zjednodušíme nebo nebudeme dělat?
+
+Nejlepší retrospektiva není dlouhá. Nejlepší retrospektiva změní jednu věc. Pokud po ní vznikne pět nových procesů, gratuluji, právě jste založili malou interní vládu.
+
+### Automatizace, která šetří hlavu
+
+Automatizace není cíl. Je to způsob, jak z opakované práce udělat infrastrukturu. Malý tým by měl automatizovat hlavně věci, které jsou časté, nudné, rizikové nebo snadno zapomenutelné.
+
+Dobří kandidáti:
+
+- kontrola dostupnosti webu a základních API endpointů,
+- upozornění na selhané platby, chyby při registraci a nedoručené e-maily,
+- pravidelné zálohy a test obnovy,
+- publikace RSS feedu a sitemap po změně obsahu,
+- kontrola rozbitých odkazů na webu,
+- připomenutí revize přístupů a expirovaných tokenů,
+- generování jednoduchého týdenního reportu z privacy-first analytiky.
+
+Špatní kandidáti jsou procesy, kterým tým nerozumí. Pokud nevíš, jak by měla vypadat ruční verze, automatizace jen zrychlí chaos. Nejdřív napiš checklist, projdi ho dvakrát ručně a teprve potom automatizuj. Ano, je to méně sexy než „AI agent, který vyřeší provoz“. Zato to občas funguje.
+
+Privacy-first automatizace má ještě jednu disciplínu: neposílat data všude jen proto, že integrace existuje. Když monitoruješ chyby, nepotřebuješ do nástroje posílat celé požadavky s osobními údaji. Když měříš konverze, často stačí agregovaná událost. Když posíláš týdenní report, nepotřebuješ exportovat seznam všech uživatelů do další služby.
+
+### Komunikace: méně kanálů, lepší zápis
+
+Produktivita trpí, když důležitá rozhodnutí žijí v chatu jako archeologická vrstva. Chat je dobrý na rychlé domluvy, incidenty a krátké otázky. Není dobrý jako jediný zdroj pravdy.
+
+Malý tým si vystačí se třemi úrovněmi komunikace:
+
+- **Chat:** rychlé otázky, koordinace, upozornění, věci s krátkou životností.
+- **Ticket nebo issue:** práce, která má vlastníka, stav a definici dokončení.
+- **Dokumentace:** rozhodnutí, postupy, architektura, provozní pravidla, privacy informace.
+
+Pravidlo je jednoduché: pokud se k tomu bude někdo vracet za měsíc, nepatří to jen do chatu. Pokud podle toho někdo nasazuje, fakturuje, řeší incident nebo odpovídá zákazníkovi, patří to do dokumentace.
+
+Asynchronní komunikace není výmluva pro romány. Dobrý asynchronní update má pět řádků:
+
+```text
+Hotovo: co se dokončilo.
+Blokuje: co brání pokračování.
+Riziko: co může dopadnout špatně.
+Rozhodnutí: co potřebuji rozhodnout a do kdy.
+Další krok: co udělám jako první.
+```
+
+Takový zápis šetří meeting. A meeting, který nemusel vzniknout, je nejčistší forma produktivity. Skoro jako kompostování, jen méně voní po kancelářské politice.
+
+### Měření dopadu bez metrického lunaparku
+
+Produktivní tým neměří všechno. Produktivní tým měří to, podle čeho se rozhoduje. Rozdíl je zásadní. Dashboard s třiceti grafy může vypadat profesionálně, ale pokud po jeho otevření nikdo nezmění prioritu, je to jen drahý screensaver.
+
+Pro malý SaaS stačí na začátku pár praktických metrik:
+
+- **Akvizice:** odkud přichází relevantní návštěvnost a poptávky.
+- **Aktivace:** kolik nových uživatelů dokončí první hodnotnou akci.
+- **Retence:** zda se zákazníci vrací k jádrové funkci.
+- **Výnos:** kolik účtů přechází na placení a kde se ztrácí billing.
+- **Podpora:** jaké problémy se opakují a kolik stojí času.
+- **Provoz:** dostupnost, chyby, rychlost a stav záloh.
+
+Každá metrika by měla mít vlastníka a otázku. Ne „sledujeme aktivaci“, ale „pokud aktivace klesne, kdo to uvidí a co udělá jako první?“ Bez vlastníka je metrika dekorace.
+
+Privacy-first přístup tady není překážka. Naopak nutí tým pokládat lepší otázky. Neptej se: „Jak můžeme sledovat každého uživatele všude?“ Ptej se: „Jaké minimální signály potřebujeme, abychom zlepšili produkt?“ Často zjistíš, že nepotřebuješ sledovat člověka napříč webem. Potřebuješ vědět, zda registrační tok padá na konkrétním kroku, zda lidé našli cenu a zda onboarding vede k první hodnotě.
+
+### Osobní produktivita zakladatele
+
+Zakladatel malého SaaS často funguje jako produkt, obchod, support, finance, copywriter a občas také člověk. To je silná kombinace, pokud má systém. Bez systému je to pomalý požár s hezkým kalendářem.
+
+Doporučuji jednoduché rozdělení týdne podle typů energie:
+
+- **Tvorba:** psaní, návrh produktu, strategické rozhodování, kód, obsah.
+- **Komunikace:** zákazníci, prodej, partnerství, support, tým.
+- **Provoz:** finance, právní věci, dokumentace, bezpečnost, reporting.
+- **Učení:** zpětná vazba, analýza, rozhovory, review metrik.
+
+Nemíchej všechno do každého dne. Pokud dopoledne navrhuješ onboarding, mezi tím odpovídáš na fakturační dotaz, pak ladíš DNS a do toho čteš konkurenční landing page, mozek ti pošle výpověď. Má na to právo.
+
+Praktické pravidlo: každý den si před začátkem práce napiš jednu větu „dnes musí být hotovo“. Ne seznam dvaceti přání. Jednu větu. Například: „Dnes musí být venku upravený pricing text a měření kliknutí na trial.“ Pokud se den rozpadne, aspoň víš, co zachránit.
+
+### Codyho komentář
+
+Produktivita není estetika nástroje. Je úplně jedno, jestli backlog žije v GitHub Issues, Linearu, Trellu, Notionu nebo na zdi, pokud tým neumí říct ne. Nástroj může pomoct, ale neudělá za tebe nepopulární rozhodnutí. A právě „ne“ je často nejlevnější funkce, kterou můžeš tento týden dodat.
+
+Malé týmy by měly být hrdé na jednoduchost. Jednoduchý rytmus. Jednoduché metriky. Jednoduchá dokumentace. Jednoduchý provoz. Ne proto, že nemají ambice, ale protože ambice bez soustředění je jen hlučný kalendář.
+
+### Checklist: produktivita malého SaaS týmu
+
+- [ ] Každý týden má jednu hlavní prioritu, která řeší obchodní, produktový nebo provozní cíl.
+- [ ] Důležitá rozhodnutí mají zapsané proč, pro koho, úspěch, riziko a vlastníka.
+- [ ] Backlog je rozdělený na teď, příště možná a archiv.
+- [ ] Položky v aktuální práci mají jasnou definici dokončení.
+- [ ] Tým má vyhrazený čas na hlubokou práci bez zbytečných meetingů.
+- [ ] Páteční review kontroluje dokončené výsledky, překážky a jednu změnu procesu.
+- [ ] Automatizujeme opakované, nudné, rizikové nebo snadno zapomenutelné úkoly.
+- [ ] Žádná automatizace neposílá osobní údaje do další služby bez jasného důvodu.
+- [ ] Chat není jediný zdroj pravdy pro rozhodnutí, postupy a provozní pravidla.
+- [ ] Každá metrika má otázku, vlastníka a jasné další kroky.
+- [ ] Zakladatel si chrání čas pro tvorbu, komunikaci, provoz a učení.
+- [ ] Tým pravidelně maže nebo archivuje práci, která už nemá dostatečný důvod.
+
+Produktivní malý tým nepůsobí hekticky. Působí skoro nudně: ví, co je důležité, zapisuje rozhodnutí, dokončuje práci, měří dopad a nenechá se unést každou novou hračkou. Nuda je v provozu často kompliment. Znamená, že systém drží.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -697,3 +873,4 @@ Privacy-first SaaS není produkt, který nikdy nic neměří a bojí se vlastní
 - **2026-09-11:** Dopsána kapitola 3 o SaaS bez přepálené architektury: MVP, modulární monolit, multi-tenant data, onboarding, billing, admin a technický dluh.
 - **2026-09-11:** Dopsána kapitola 4 o marketingu bez spamu: positioning, obsah, newsletter, distribuce, komunitní zapojení, privacy-first měření a checklist.
 - **2026-09-11:** Dopsána kapitola 5 o privacy-first provozu v Evropě: datová mapa, minimalizace, evropský hosting, cookies, dokumentace, bezpečnost a provozní checklist.
+- **2026-09-12:** Dopsána kapitola 6 o produktivitě malého SaaS týmu: rozhodování, backlog, týdenní rytmus, automatizace, komunikace, metriky a checklist.
