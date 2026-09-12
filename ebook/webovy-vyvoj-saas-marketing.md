@@ -1210,6 +1210,145 @@ Když se po třiceti dnech rozhodneš nepokračovat, není to prohra. Je to levn
 
 ---
 
+## Příloha B: První placený pilot bez enterprise divadla
+
+Placený pilot je most mezi „zní to zajímavě“ a „má to pro nás hodnotu“. Není to demo zdarma, nekonečný proof of concept ani tajná zakázková implementace převlečená za SaaS. Je to omezená dohoda s jasným cílem, termínem, rozsahem, cenou a rozhodnutím, co se stane potom.
+
+Pro malý tým je placený pilot užitečný hlavně proto, že chrání pozornost. Když zákazník není ochotný zaplatit ani malou částku, často ještě nekupuje řešení — jen zkoumá, jestli by se někdo nestal jeho bezplatným konzultantem. Výjimky existují, ale neměly by řídit celý obchodní proces.
+
+> Codyho komentář: Pilot zdarma je někdy dobrý obchodní tah. Pilot zdarma bez hranic je už jen fitness program pro tvoji trpělivost.
+
+### Kdy pilot nabídnout
+
+Pilot dávej až ve chvíli, kdy existuje konkrétní problém a reálný vlastník na straně zákazníka. Nestačí, že se někomu líbí nápad. Potřebuješ člověka, který umí říct, proč je problém důležitý, kdo bude produkt používat, jak dnes práce probíhá a podle čeho se rozhodne, jestli pokračovat.
+
+Dobré signály pro pilot:
+
+- zákazník popsal aktuální proces bez toho, abys mu ho musel podsouvat,
+- problém má jasný dopad na čas, peníze, riziko nebo kvalitu služby,
+- existuje jeden člověk odpovědný za vyhodnocení pilotu,
+- zákazník umí dodat ukázková data nebo popsat první reálný scénář,
+- obě strany se shodnou na datu vyhodnocení.
+
+Špatné signály:
+
+- „pošlete nám přístup a my se na to někdy podíváme“,
+- nikdo nechce převzít odpovědnost za pilot,
+- zákazník chce nejdřív všechny budoucí enterprise funkce,
+- rozhodovací kritérium je jen obecný pocit,
+- první diskuse se točí hlavně kolem slevy.
+
+### Nabídka pilotu na jednu stránku
+
+Pilot nepotřebuje třicetistránkovou prezentaci. Potřebuje jednu stránku, která nastaví očekávání. Čím menší tým, tím důležitější je psát jednoduše: co uděláme, co neuděláme, kdo co dodá a jak poznáme výsledek.
+
+Struktura nabídky:
+
+- **Cíl pilotu:** jedna věta o výsledku, například „ověřit, zda tým dokáže plánovat servisní výjezdy bez ručního přepisování z Excelu“.
+- **Rozsah:** jeden až tři konkrétní scénáře, ne celý vysněný produkt.
+- **Čas:** typicky 2–6 týdnů podle složitosti provozu.
+- **Cena:** pevná částka nebo omezený měsíční poplatek, aby zákazník potvrdil vážnost zájmu.
+- **Zodpovědnosti:** kdo dodá data, kdo pozve uživatele, kdo sbírá zpětnou vazbu.
+- **Vyhodnocení:** jasná kritéria úspěchu a datum rozhodnutí.
+- **Další krok:** přechod na standardní plán, rozšířený pilot, nebo ukončení.
+
+Příklad formulace:
+
+> Během 30 dnů ověříme, zda váš tým zvládne zadat, naplánovat a uzavřít servisní zakázku v jednom workflow. Pilot zahrnuje nastavení účtu, import vzorku dat, jednu onboardingovou schůzku a podporu přes e-mail. Úspěch vyhodnotíme podle počtu dokončených zakázek, času potřebného na plánování a zpětné vazby tří klíčových uživatelů.
+
+### Privacy-first nastavení pilotu
+
+Pilot bývá rizikový, protože tým má chuť „rychle něco napojit“ a zákazník má chuť poslat „nějaký export“. Přesně tady vzniká datový chaos. Privacy-first pilot není pomalejší. Je jen méně líný v otázce, co se vlastně zpracovává.
+
+Před startem si napiš mini datovou mapu:
+
+- jaké typy dat zákazník dodá,
+- jestli jsou v datech osobní údaje,
+- zda jde použít anonymizovaný nebo zmenšený vzorek,
+- kde budou data uložena,
+- kdo k nim má přístup,
+- kdy se data smažou, pokud pilot nepokračuje.
+
+Praktické pravidlo: pro pilot nepřebírej kompletní historickou databázi, pokud stačí malý reprezentativní vzorek. Pokud zákazník potřebuje pracovat s reálnými osobními údaji, domluv zpracovatelský rámec před importem, ne až ve chvíli, kdy už data leží ve třech tabulkách a jednom sdíleném ZIPu.
+
+Privacy-first pilot by měl mít také výstupní cestu. Když nepokračuje, zákazník má dostat export toho, co vytvořil, a jasné potvrzení, co se smaže. Důvěra se buduje i tím, že odchod není past.
+
+### Jak pilot řídit týden po týdnu
+
+Pilot bez rytmu se rozteče. Nastav jednoduchý kalendář a drž ho, i kdyby se všichni tvářili, že „to nějak poběží“. Nebude. Software bez rytmu má přirozenou tendenci stát se archeologickou vrstvou dobrých úmyslů.
+
+**Týden 0: příprava**
+
+- potvrď cíl, rozsah a kritéria úspěchu,
+- domluv vlastníka pilotu na straně zákazníka,
+- připrav testovací účet a ukázkový scénář,
+- zkontroluj datovou mapu a přístupy,
+- pošli krátký plán pilotu všem zapojeným lidem.
+
+**Týden 1: první hodnota**
+
+- dostaň uživatele co nejrychleji k první dokončené akci,
+- sleduj, kde se ptají nebo zastaví,
+- neopravuj všechno najednou; zapisuj vzory,
+- pošli shrnutí: co se povedlo, co brání používání, co bude dál.
+
+**Týden 2–3: stabilizace**
+
+- oprav jen překážky, které brání ověření cíle,
+- odmítej funkce mimo rozsah slušně, ale pevně,
+- sbírej konkrétní citace a příklady z provozu,
+- kontroluj, jestli produkt používají skuteční uživatelé, ne jen sponsor pilotu.
+
+**Poslední týden: rozhodnutí**
+
+- porovnej výsledek s původními kritérii,
+- odděl produktovou hodnotu od implementačních přání,
+- navrhni další placený krok,
+- domluv smazání nebo další zpracování dat,
+- napiš krátké postmortem pro vlastní tým.
+
+### Co měřit v pilotu
+
+Měř jen věci, které pomáhají rozhodnout. U malého pilotu nepotřebuješ analytický chrám, stačí pár signálů z produktu, podpory a rozhovorů.
+
+Užitečné metriky:
+
+- **Aktivace:** kolik zapojených uživatelů dokončilo hlavní workflow.
+- **Opakované použití:** jestli se vrátili i bez připomínání.
+- **Čas k hodnotě:** jak dlouho trvalo dostat se k prvnímu užitečnému výsledku.
+- **Počet blokací:** kolikrát bylo nutné zasáhnout ručně.
+- **Kvalita feedbacku:** zda zákazník mluví o reálné práci, nebo jen o hezkých nápadech.
+- **Ochota pokračovat:** jestli po pilotu existuje konkrétní další placený krok.
+
+Privacy-first poznámka: většinu těchto signálů získáš bez invazivního sledování uživatelů. Stačí produktové události bez zbytečných osobních detailů, support log a krátké rozhovory. Cílem není vědět všechno o každém kliknutí. Cílem je vědět, jestli produkt doručuje hodnotu.
+
+### Jak pilot ukončit
+
+Ukončení pilotu má být stejně profesionální jako začátek. Pokud pilot vyšel, nabídni jasný přechod na placený plán: cenu, rozsah, termín, podporu a další milníky. Pokud nevyšel, pojmenuj proč. Dobře ukončený neúspěšný pilot může přinést doporučení, pozdější návrat nebo aspoň čisté poučení.
+
+Tři možné závěry:
+
+- **Pokračujeme:** problém je potvrzený, uživatelé vidí hodnotu, existuje rozpočet nebo jasný rozhodovací proces.
+- **Zuříme dál v menším rozsahu:** hodnota existuje, ale segment, workflow nebo nabídka potřebují zúžit.
+- **Zastavujeme:** problém není dost silný, zákazník není správný segment, nebo řešení nepřináší dostatečnou hodnotu.
+
+Nikdy nenech pilot umřít potichu. Tiché konce vytváří falešnou naději, špiní pipeline a nutí tým udržovat mentální záložku „možná se ozvou“. Neozvou. A pokud ano, ozvou se raději na jasný další krok než na neurčité „budeme v kontaktu“.
+
+### Checklist: první placený pilot
+
+- Máme jednoho vlastníka pilotu na straně zákazníka.
+- Pilot má jeden hlavní obchodní nebo provozní cíl.
+- Rozsah je omezený na několik konkrétních scénářů.
+- Cena nebo závazek potvrzuje vážnost zájmu.
+- Datová mapa je hotová před importem dat.
+- Používáme jen data nutná pro ověření hodnoty.
+- Víme, kdo má k datům přístup a kdy se smažou.
+- Každý týden posíláme krátké shrnutí stavu.
+- Funkce mimo rozsah zapisujeme, ale neslibujeme automaticky.
+- Na konci existuje jasné rozhodnutí: pokračovat, zúžit, nebo zastavit.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -1236,3 +1375,4 @@ Když se po třiceti dnech rozhodneš nepokračovat, není to prohra. Je to levn
 - **2026-09-12:** Dopsána kapitola 7 o provozu a růstu: monitoring, logy, support, incidenty, roadmapa, evropská expanze a provozní checklist.
 - **2026-09-12:** Dopsána kapitola 8 s praktickými checklisty a šablonami pro launch, audit webu, privacy-first integrace, obsahový plán a týdenní produktový rytmus.
 - **2026-09-12:** Doplněna příloha A s 30denním plánem pro první privacy-first SaaS MVP: validace, landing page, stavba bezpečné první verze a pilot.
+- **2026-09-12:** Doplněna příloha B o prvním placeném pilotu: nabídka, privacy-first nastavení, týdenní řízení, měření a ukončení pilotu.
