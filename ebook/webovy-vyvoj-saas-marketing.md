@@ -1986,6 +1986,144 @@ Cenotvorba není jednorázové rozhodnutí. Je to pravidelná produktová práce
 
 ---
 
+## Příloha H: Demo call, který prodává bez nátlaku
+
+Demo call není divadelní představení, kde zakladatel kliká co nejrychleji a zákazník předstírá, že chápe rozdíl mezi „workspace“, „tenantem“ a „smart flow orchestration modulem“. Dobré demo je řízený rozhovor o problému, rozhodnutí a dalším kroku. Produkt se ukazuje až ve chvíli, kdy víš, co má zákazník vyhodnotit.
+
+U malého SaaS má demo ještě jednu roli: chrání tým před špatnými zákazníky. Když během hovoru zjistíš, že zákazník chce úplně jiný produkt, extrémní customizaci nebo datové toky, které nechceš podporovat, je lepší říct „ne“ teď než za tři měsíce při support apokalypse.
+
+### Před hovorem: kvalifikuj, ale nevyslýchej
+
+Před demo callem nepotřebuješ desetistránkový formulář. Potřebuješ jen tolik kontextu, aby hovor nebyl ztráta času pro obě strany. Zeptej se na problém, velikost týmu, současné řešení, očekávaný termín a citlivost dat. Všechno ostatní se dá zjistit v rozhovoru.
+
+Krátký před-demo formulář může obsahovat:
+
+- **Co chcete zlepšit?** Jedna otevřená otázka, ne katalog funkcí.
+- **Jak to řešíte dnes?** Excel, e-mail, jiný nástroj, ruční práce, interní systém.
+- **Kdo bude produkt používat?** Role a počet lidí, ne nutně jména.
+- **Jaká data se budou zpracovávat?** Obchodní, zákaznická, osobní, citlivější provozní data.
+- **Kdy potřebujete rozhodnout?** Pilot za týden je jiný scénář než průzkum na příští rok.
+
+Privacy-first pravidlo: neptej se na osobní údaje, které pro demo nepotřebuješ. Pokud stačí firemní e-mail a krátký popis situace, nechtěj telefon, obrat firmy, seznam zaměstnanců ani export jejich CRM. Každé pole navíc je malé tření a malý závazek, že se o data musíš starat.
+
+### Struktura hovoru na 30 minut
+
+Demo bez struktury se změní v bludiště. Zakladatel ukáže oblíbené funkce, zákazník se zeptá na tři okrajové věci a na konci nikdo neví, co se rozhodlo. Drž jednoduchý rytmus.
+
+Praktická agenda:
+
+1. **Úvod a cíl hovoru — 3 minuty.** Potvrď, proč spolu mluvíte a co má být výstup.
+2. **Kontext zákazníka — 8 minut.** Nech zákazníka popsat současný proces, bolest a dopady.
+3. **Cílené demo — 12 minut.** Ukaž jen workflow, které odpovídá problému.
+4. **Rizika a otázky — 5 minut.** Prober integrace, data, role, migraci a limity.
+5. **Další krok — 2 minuty.** Domluv pilot, technický call, rozhodovací materiál nebo férové ukončení.
+
+Největší chyba je začít demem. Nejdřív si nech zákazníka říct, jak vypadá jeho realita. Jinak budeš ukazovat mapu města člověku, který se ve skutečnosti ptá, kde zaparkovat dodávku.
+
+### Otázky, které odhalí skutečnou hodnotu
+
+Dobré otázky nejsou manipulativní. Pomáhají oběma stranám pochopit, jestli produkt řeší dost důležitý problém. Ptej se na konkrétní situace, ne abstraktní preference.
+
+Užitečné otázky:
+
+- Kdy se problém naposledy stal a co to způsobilo?
+- Kdo dnes nese náklady, když proces selže?
+- Co se stane, když to nevyřešíte dalších šest měsíců?
+- Jak poznáte, že nové řešení funguje?
+- Kdo musí být u rozhodnutí a kdo bude produkt denně používat?
+- Jaká data nesmí opustit vaše prostředí nebo EU provoz?
+- Co by pro vás byl důvod pilot ukončit jako neúspěšný?
+
+Tyto otázky často prodají víc než nejlepší animace v produktu. Zákazník si sám pojmenuje hodnotu, riziko i rozhodovací kritéria. Ty pak můžeš ukázat jen ty části produktu, které s tím souvisí.
+
+### Demo ukazuj jako příběh, ne jako menu
+
+Produktové demo má mít scénu. „Tady je dashboard, tady nastavení, tady export“ je nudné a většinou neprodává. Lepší je vybrat jeden reálný scénář a projít ho od začátku do konce.
+
+Příklad pro nástroj na servisní zakázky:
+
+- přijde nová zakázka,
+- dispečer ji přiřadí technikovi,
+- technik dostane jen informace, které potřebuje,
+- zákazník vidí potvrzení termínu,
+- po dokončení vznikne záznam a podklad pro fakturaci,
+- manažer vidí, kde vzniklo zpoždění.
+
+Takové demo ukazuje výsledek. Funkce jsou jen zastávky po cestě. Když zákazník začne řešit detail, vrať ho k cíli: „Tohle umíme nastavit, ale důležitější je, jestli vám tento tok odstraní ruční předávání zakázek.“
+
+### Privacy-first část neodsouvej na právní přílohu
+
+U evropského SaaS má být datová část součástí obchodního hovoru, ne tajná místnost na konci smlouvy. Nemusíš z demo callu dělat právní seminář, ale měl bys umět stručně říct, kde produkt běží, jaká data zpracovává, kdo má přístup, jak funguje export a jak se řeší výmaz.
+
+Krátká privacy-first pasáž může znít takto:
+
+> Produkt navrhujeme pro evropský provoz. Sbíráme jen data potřebná pro službu, analytiku držíme bez reklamních trackerů, zákaznická data neprodáváme a export i ukončení účtu řešíme jako standardní proces, ne jako ruční výjimku.
+
+Pak se zeptej, jestli zákazník má vlastní požadavky: interní bezpečnostní dotazník, DPA, seznam subprocessoru, retenční pravidla nebo zákaz konkrétních zemí. Když to otevřeš sám, působíš důvěryhodněji než dodavatel, který začne o datech mluvit až po třetím připomenutí.
+
+### Co po hovoru poslat
+
+Follow-up má být krátký, konkrétní a užitečný. Ne posvátný e-mail „děkujeme za váš čas“ bez obsahu. Shrň problém, domluvený další krok, otevřené otázky a materiály, které zákazník potřebuje pro rozhodnutí.
+
+Šablona follow-up e-mailu:
+
+```text
+Předmět: Shrnutí dema: [produkt] pro [firma]
+
+Ahoj [jméno],
+
+díky za dnešní hovor. Chápu, že hlavní problém je [konkrétní problém] a úspěšný pilot by měl ukázat [měřitelný výsledek].
+
+Navržený další krok:
+- [co uděláme]
+- [kdo dodá jaký podklad]
+- [datum další kontroly]
+
+Otevřené otázky:
+- [otázka 1]
+- [otázka 2]
+
+K datům a provozu: [stručně kde běží služba, jak řešíte přístupy/export/trackery]. Plné podklady pošlu nebo doplním podle vašeho interního procesu.
+
+Cody
+```
+
+Pokud produkt není fit, napiš to slušně. „Podle dnešního hovoru to zatím nevypadá jako dobrý fit, protože potřebujete X a náš produkt je stavěný na Y.“ Takový e-mail bolí méně než půlroční zákazník, kterému jsi prodal naději místo řešení.
+
+### Pipeline bez CRM cirkusu
+
+Na začátku nepotřebuješ složitý CRM systém. Potřebuješ spolehlivě vědět, s kým mluvíš, v jaké fázi je rozhodnutí a jaký je další krok. Klidně to může být jednoduchá tabulka nebo malé CRM, pokud je udržované.
+
+Minimální pipeline:
+
+| Fáze | Význam | Další akce |
+| --- | --- | --- |
+| Nový zájem | člověk projevil zájem | ověřit problém a vhodnost |
+| Kvalifikováno | problém odpovídá produktu | domluvit demo nebo pilot |
+| Demo proběhlo | zákazník viděl relevantní workflow | poslat shrnutí a další krok |
+| Pilot navržen | existuje jasný rozsah pilotu | potvrdit cenu, termín a kritéria |
+| Vyhráno | zákazník platí nebo podepsal | spustit onboarding |
+| Prohráno | není fit nebo není priorita | zapsat důvod a nenahánět donekonečna |
+
+U každého leadu stačí držet: firma, kontakt, problém, fáze, další krok, termín další akce, rizika, zdroj kontaktu a poznámka k datovým požadavkům. Pokud nemáš další krok, nemáš obchodní příležitost. Máš jen přání v tabulce.
+
+### Checklist: demo a prodej bez nátlaku
+
+- [ ] Před-demo formulář sbírá jen data nutná pro přípravu hovoru.
+- [ ] Hovor má jasnou 30minutovou agendu a očekávaný výstup.
+- [ ] Demo začíná kontextem zákazníka, ne prohlídkou menu.
+- [ ] Ukazuje se jeden reálný scénář od problému k výsledku.
+- [ ] Zákazník pojmenoval kritéria úspěchu pilotu nebo nákupu.
+- [ ] Privacy-first provoz je vysvětlený stručně a srozumitelně.
+- [ ] Otevřené datové, bezpečnostní a integrační otázky jsou zapsané.
+- [ ] Follow-up obsahuje problém, další krok, termíny a odpovědnosti.
+- [ ] Pipeline má u každého leadu jasnou fázi a další akci.
+- [ ] Špatný fit se ukončuje férově místo slibování custom zázraků.
+
+Demo call není tlaková zkouška extroverze. Je to servisní rozhovor: pochopit problém, ukázat relevantní cestu, pojmenovat rizika a domluvit další krok. Když zákazník odchází s jasnějším rozhodnutím, demo splnilo účel — i když odpověď zní „zatím ne“.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -2020,3 +2158,4 @@ Cenotvorba není jednorázové rozhodnutí. Je to pravidelná produktová práce
 - **2026-09-12:** Doplněna příloha E o zákaznickém onboardingu po první platbě: aktivační moment, vrstvená komunikace, znalostní báze, měření a uvítací e-mail.
 - **2026-09-12:** Doplněna příloha F o offboardingu, exportu a mazání dat: scénáře odchodu, strojově čitelný export, retenční proces, žádosti subjektů údajů a checklist.
 - **2026-09-12:** Doplněna příloha G o cenotvorbě a balíčcích pro malý privacy-first SaaS: hodnota, cenová metrika, tři tarify, pricing stránka, slevy, zdražování a checklist.
+- **2026-09-12:** Doplněna příloha H o demo callu a prodeji bez nátlaku: kvalifikace, 30minutová agenda, otázky, follow-up, pipeline a privacy-first checklist.
