@@ -1084,6 +1084,8 @@ Dobrá páteční otázka zní: „Co jsme tento týden změnili, aby zákazník
 
 Checklisty stárnou. Produkt se mění, trh se mění, právní požadavky se mění, tým se mění a některé položky začnou být směšně samozřejmé. Proto je potřeba checklisty spravovat jako produktovou dokumentaci, ne jako vytesaný kámen.
 
+Užitečný checklist má krátký revizní rytmus: jednou za měsíc ho projdi s člověkem, který podle něj opravdu pracuje, a nech ho označit tři typy položek — co chybí, co mate a co už jen překáží. Tím se z dokumentu nestane archiv dobrých úmyslů, ale pracovní nástroj, který šetří pozornost přesně ve chvíli, kdy je jí nejméně.
+
 Pravidla údržby:
 
 - Po každém incidentu přidej nebo uprav jednu položku, která by problém zachytila dřív.
