@@ -1458,6 +1458,125 @@ Tohle není brzda růstu. Je to bezpečnostní pás. Bez něj každá nová zak�
 
 ---
 
+## Příloha D: 90denní obsahový systém bez honění algoritmů
+
+Marketing malého SaaS týmu často vypadá jako náhodné výkřiky do internetu: jeden týden článek, další týden LinkedIn post, pak měsíc ticho a nakonec panika, že „musíme dělat víc obsahu“. Obsah ale není ohňostroj. Je to systém, který má dlouhodobě vysvětlovat problém, budovat důvěru a přivádět správné lidi k dalšímu kroku.
+
+Privacy-first přístup je v obsahu překvapivě praktický. Když nestavíš růst na agresivním retargetingu a cizích pixelech, musíš mít silnější vlastní základ: užitečné stránky, přímé odkazy, RSS, dobrou archivaci, jasné CTA a pravidelný rytmus. Méně kouzel, více řemesla. Hrůza, skoro jako práce.
+
+### Začni tématy, ne formáty
+
+Nejdřív si neříkej „potřebujeme newsletter“ nebo „musíme dělat krátká videa“. To jsou formáty. Začni tématy, která zákazník opravdu řeší před nákupem, během zavádění a po prvních výsledcích.
+
+Dobrá tematická mapa má pět kategorií:
+
+- **Bolest:** co zákazníka stojí čas, peníze, nervy nebo reputaci.
+- **Rozhodování:** podle čeho vybírá řešení, dodavatele nebo interní variantu.
+- **Implementace:** čeho se bojí při zavádění a co potřebuje připravit.
+- **Důvěra:** jak funguje bezpečnost, data, provoz, podpora a odpovědnost.
+- **Růst:** jak produkt používat lépe, rozšířit na další tým nebo měřit dopad.
+
+Příklad pro SaaS na plánování servisních výjezdů:
+
+- „Proč servisní tým ztrácí zakázky mezi telefonem a Excelem“
+- „Checklist pro výběr nástroje na plánování techniků“
+- „Jak připravit import zakázek bez datového nepořádku“
+- „Kde běží data a kdo k nim má přístup“
+- „Jak poznat, že plánování opravdu šetří dispečerům čas“
+
+Takhle vzniká obsah, který navazuje na obchodní cestu. Ne jen hromada článků, které vypadají aktivně, ale nikdo neví, k čemu jsou.
+
+### Jedno hlavní aktivum za měsíc
+
+Malý tým nepotřebuje publikovat každý den. Potřebuje každý měsíc vytvořit jedno kvalitní aktivum, které jde rozřezat na menší části a opakovaně používat.
+
+Měsíční aktivum může být:
+
+- dlouhý praktický článek,
+- checklist ke stažení bez povinného formuláře,
+- případová studie,
+- technický rozbor architektury,
+- srovnání přístupů,
+- návod pro onboarding zákazníka,
+- odpovědi na časté obchodní námitky.
+
+Z jednoho aktiva pak uděláš několik menších výstupů: krátký post, e-mail existujícím kontaktům, položku do dokumentace, interní obchodní poznámku, odpověď do komunity nebo sekci na produktové stránce. To není recyklace z lenosti. To je respekt k tomu, že dobrý nápad si zaslouží víc než jedno odpoledne na timeline.
+
+> Codyho komentář: Pokud článek nejde použít v obchodním hovoru, onboardingu ani supportu, možná to není obsah. Možná je to jen firemní karaoke.
+
+### Publikační rytmus na 90 dní
+
+Devadesát dní je dost dlouhá doba na konzistenci a dost krátká na to, aby se tým neztratil ve strategii o třiceti slajdech.
+
+Jednoduchý rytmus:
+
+1. **Týden 1:** vyber téma, napiš osnovu, sesbírej příklady z praxe.
+2. **Týden 2:** napiš hlavní aktivum a doplň konkrétní CTA.
+3. **Týden 3:** publikuj, rozešli přímé odkazy, vytvoř menší výstupy.
+4. **Týden 4:** vyhodnoť dotazy, reakce, konverze a uprav další téma.
+
+Po třech měsících máš tři silná aktiva a zhruba dvanáct menších distribučních kusů. To už je základ, který může žít na webu, v obchodních e-mailech, v dokumentaci i v onboardingových materiálech.
+
+### Distribuce bez závislosti na platformách
+
+Sociální sítě mohou pomoct, ale nemají být jediným domovem obsahu. Platforma mění dosah, pravidla i náladu algoritmu. Vlastní web měníš ty. To je v podnikání docela příjemná funkce.
+
+Privacy-first distribuční mix:
+
+- **Vlastní web:** kanonické místo pro články, návody a případové studie.
+- **RSS:** jednoduchý odběr bez sledovacích newsletterových triků.
+- **Přímé odkazy:** sdílení v e-mailu, komunitách a obchodních konverzacích.
+- **Newsletter bez nátlaku:** jen pokud má jasný přínos a férové odhlášení.
+- **Komunity:** odpovídej užitečně tam, kde už lidé řeší problém.
+- **Produkt:** propojuj obsah s onboardingem, help centrem a prázdnými stavy v aplikaci.
+
+Důležité pravidlo: publikuj nejdřív u sebe a teprve potom distribuuj jinde. Když nejlepší myšlenky žijí jen v cizím feedu, buduješ cizí archiv, ne vlastní značku.
+
+### Měř obsah podle rozhodnutí
+
+Obsah se nedá hodnotit jen počtem zobrazení. Článek se stovkou správných čtenářů může být cennější než virální post, který přivede tisíc lidí mimo cílovku a tři roboty s podezřele nadšeným komentářem.
+
+Měř hlavně otázky:
+
+- Přivedl obsah relevantní návštěvníky na produktovou stránku?
+- Pomohl zákazníkovi pochopit problém nebo vybrat další krok?
+- Použil obchodní tým článek při odpovědi na námitku?
+- Vznikly po publikaci kvalitní dotazy nebo demo hovory?
+- Snížil obsah opakované support otázky?
+- Dá se text aktualizovat a držet dlouhodobě užitečný?
+
+Na webu k tomu často stačí jednoduchá privacy-first analytika: návštěvy stránky, zdroje v hrubé podobě, kliknutí na CTA a konverze bez individuálního profilování. Pokud potřebuješ ručně doplnit kvalitativní signály, přidej do týdenního rytmu krátkou poznámku: „Jaký obsah tento týden pomohl obchodně nebo produktově?“
+
+### Šablona obsahového briefu
+
+Před psaním vyplň krátký brief. Ušetří ti to texty, které mají hezký nadpis a nulovou obchodní funkci.
+
+- **Pracovní název:** konkrétní problém nebo otázka.
+- **Čtenář:** role, situace a úroveň znalostí.
+- **Moment:** před nákupem, při zavádění, po spuštění nebo při rozšiřování.
+- **Hlavní slib:** co bude čtenář po přečtení umět rozhodnout nebo udělat.
+- **Důkaz:** příklad, checklist, mini postup, screenshot, tabulka nebo zkušenost.
+- **CTA:** demo, konzultace, navazující článek, checklist, RSS nebo kontakt.
+- **Privacy detail:** jak text podporuje důvěru, datovou střídmost nebo evropský provoz.
+- **Opětovné použití:** kde se obsah uplatní mimo blog.
+
+### Checklist: obsahový systém na 90 dní
+
+- Máme pět tematických kategorií podle zákaznické cesty.
+- Každý měsíc vzniká jedno hlavní praktické aktivum.
+- Každé aktivum má jasný další krok a konkrétní příklad.
+- Obsah nejdřív publikujeme na vlastním webu.
+- RSS nebo přímý odběr funguje bez povinného sledování.
+- Distribuce nevisí jen na jedné sociální síti.
+- Měříme rozhodnutí a kvalitní signály, ne jen objem návštěv.
+- Obchod, onboarding a support vědí, jak obsah používat.
+- Starší články mají majitele a plán aktualizace.
+- U každého nástroje pro distribuci víme, kde končí data a kdo k nim má přístup.
+
+Obsahový systém nemusí být hlučný. Má být spolehlivý. Když každý měsíc přibude jeden dobrý kus, který pomáhá zákazníkům rozhodovat a týmu prodávat bez manipulace, marketing začne být méně loterie a více infrastruktura důvěry.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -1486,3 +1605,4 @@ Tohle není brzda růstu. Je to bezpečnostní pás. Bez něj každá nová zak�
 - **2026-09-12:** Doplněna příloha A s 30denním plánem pro první privacy-first SaaS MVP: validace, landing page, stavba bezpečné první verze a pilot.
 - **2026-09-12:** Doplněna příloha B o prvním placeném pilotu: nabídka, privacy-first nastavení, týdenní řízení, měření a ukončení pilotu.
 - **2026-09-12:** Doplněna příloha C o přechodu z pilotu na první placený provoz: nabídka, výjimky, onboarding, support, fakturace a checklist před druhým zákazníkem.
+- **2026-09-12:** Doplněna příloha D s 90denním obsahovým systémem bez honění algoritmů: tematická mapa, měsíční aktivum, privacy-first distribuce, měření a brief.
