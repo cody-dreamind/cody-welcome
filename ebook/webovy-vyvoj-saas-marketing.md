@@ -3077,6 +3077,195 @@ Vlastní publikum neroste přes noc. Roste tím, že opakovaně dodáváš užit
 
 ---
 
+
+## Příloha Q: Prodejní stránka, která vysvětlí hodnotu bez manipulace
+
+Dobrá prodejní stránka není digitální leták s efektním gradientem a třemi odstavci o „inovativním řešení“. Je to obchodní rozhovor převedený do webu. Člověk přijde s problémem, pochybností a omezeným časem. Stránka má rychle vysvětlit, jestli je produkt pro něj, jak mu pomůže, co se stane dál a proč může důvěřovat týmu za produktem.
+
+Privacy-first SaaS má v prodejní stránce ještě jednu výhodu: nemusí hrát hru na temné vzory. Nemusí návštěvníka honit po internetu retargetingem, strašit falešným odpočtem ani schovávat cenu za „kontaktujte obchod“. Když je nabídka jasná, férová a konkrétní, stránka může prodávat bez datového cirkusu.
+
+### Jedna stránka, jedna práce
+
+Než začneš psát text, pojmenuj jednu hlavní akci stránky. Ne tři. Ne sedm. Jednu.
+
+Příklady hlavní akce:
+
+- rezervovat demo,
+- založit trial,
+- stáhnout praktický checklist,
+- požádat o pilot,
+- porovnat tarify,
+- kontaktovat tým kvůli migraci.
+
+Když stránka míří na malé B2B týmy, často je nejlepší akce „domluvit demo“ nebo „začít pilot“. Když míří na samoobslužný SaaS, může být lepší trial. Rozhodnutí závisí na ceně, složitosti produktu a míře důvěry, kterou zákazník potřebuje před prvním krokem.
+
+Codyho pravidlo: pokud neumíš říct, co má návštěvník udělat po přečtení stránky, neumíš stránku napsat. Grafický design to nezachrání. Ani animovaná koule. Koule se snažila.
+
+### Hero sekce: slib, segment, další krok
+
+První obrazovka má odpovědět na tři otázky:
+
+1. **Co to dělá?**
+2. **Pro koho to je?**
+3. **Co mám udělat dál?**
+
+Slabý hero text:
+
+> Moderní platforma pro efektivní řízení procesů v digitální době.
+
+Lepší hero text:
+
+> Plánování servisních zakázek pro malé týmy, které už nechtějí řídit provoz v Excelu.
+
+Pod tím může být krátké doplnění:
+
+> Cody pomáhá servisním firmám plánovat práci, hlídat termíny a rychleji odpovídat zákazníkům — bez zbytečných trackerů a bez posílání provozních dat mimo evropský provoz.
+
+A jasná akce:
+
+- „Domluvit 30min demo“
+- „Podívat se na ukázkový workflow“
+- „Stáhnout checklist pro plánování zakázek“
+
+Hero sekce nemusí říct všechno. Má jen vytvořit správné očekávání a poslat člověka dál.
+
+### Struktura stránky podle rozhodování zákazníka
+
+Prodejní stránka má kopírovat myšlenkovou cestu zákazníka. Ne interní organizační strukturu firmy. Návštěvníka nezajímá, že produkt má moduly A, B a C, pokud ještě neví, proč by měl řešit problém.
+
+Praktická struktura:
+
+1. **Problém:** pojmenuj situaci, kterou zákazník zná.
+2. **Dopad:** ukaž, co ho problém stojí.
+3. **Řešení:** vysvětli princip produktu bez technického balastu.
+4. **Příklady použití:** ukaž konkrétní scénáře.
+5. **Důkaz:** reference, pilotní výsledek, ukázka workflow nebo veřejná dokumentace.
+6. **Privacy-first provoz:** stručně vysvětli data, hosting, analytiku a subprocesory.
+7. **Cena nebo další krok:** ukaž tarify, pilotní nabídku nebo způsob domluvy.
+8. **FAQ:** odpověz na námitky dřív, než je člověk musí psát e-mailem.
+
+Tahle struktura funguje i pro landing page nové funkce. Jen ji zkrať. Pro jednu funkci nepotřebuješ román. Potřebuješ odstranit nejistotu.
+
+### Piš konkrétně, ne ozdobně
+
+Marketingový text často trpí tím, že se bojí říct něco přesného. Vzniknou věty, které zní profesionálně a neříkají nic. „Zvýšíme efektivitu vašeho podnikání pomocí inovativních nástrojů“ je obsahový polystyren: zabírá místo, izoluje význam.
+
+Lepší je psát v pozorovatelných situacích:
+
+- „Dispečer vidí dnešní zakázky, přiřazené techniky a nevyřízené změny na jedné obrazovce.“
+- „Zákazník dostane potvrzení termínu bez toho, aby někdo ručně kopíroval text z tabulky.“
+- „Manažer každý pátek vidí zpožděné zakázky a důvod zpoždění.“
+- „Nový technik dostane jen přístup k zakázkám, které opravdu potřebuje.“
+
+Konkrétní text lépe prodává, protože si ho zákazník umí představit. A když si ho umí představit, umí posoudit hodnotu.
+
+### Důvěra bez logománie
+
+Reference jsou skvělé, ale ne každý začínající SaaS má řadu známých log. To nevadí. Důvěru jde stavět i jinak.
+
+Použij:
+
+- ukázkový účet nebo video průchod,
+- screenshoty reálných workflow bez citlivých dat,
+- veřejný changelog,
+- dokumentaci onboardingového procesu,
+- stránku se stavem služby,
+- stručné vysvětlení bezpečnosti a záloh,
+- seznam subprocesorů a kontakt pro privacy dotazy,
+- jméno člověka nebo týmu, který za produktem stojí.
+
+Důvěra není jen „kdo už nás používá“. Je to i „jak se chováme, když mám otázku, problém nebo obavu“.
+
+### Privacy-first blok dej na stránku viditelně
+
+Privacy-first není právní poznámka v patičce. U evropského SaaS je to součást hodnoty. Dej ji na stránku jako normální prodejní argument, ale bez přehnaných slibů.
+
+Krátký blok může vypadat takto:
+
+> **Navrženo pro evropský provoz.** Sbíráme jen data potřebná pro fungování služby, analytiku držíme agregovaně a bez reklamních identifikátorů. Přístupy evidujeme, subprocesory dokumentujeme a export dat řešíme jako součást produktu, ne jako ruční drama na pátek večer.
+
+Vedle toho přidej odkazy:
+
+- „Jak pracujeme s daty“
+- „Seznam subprocesorů“
+- „Bezpečnost a zálohy“
+- „Export a smazání dat“
+
+Nemusí to být dlouhé. Musí to být srozumitelné a pravdivé.
+
+### CTA bez nátlaku
+
+Výzva k akci má být jasná, ne hysterická. Falešné urgence typu „zbývají poslední 2 místa“ používá jen ten, kdo už prohrál v argumentech a zkouší divadlo.
+
+Dobré CTA říká, co se stane po kliknutí:
+
+- „Domluvit 30min demo“
+- „Získat návrh pilotu“
+- „Vyzkoušet ukázkový účet“
+- „Poslat dotaz k migraci“
+- „Stáhnout checklist v PDF“
+
+Pod tlačítko přidej uklidňující mikrotext:
+
+- „Bez obchodního nátlaku, odpovíme do jednoho pracovního dne.“
+- „Ukážeme reálný workflow, ne prezentaci s třiceti slidy.“
+- „E-mail použijeme jen pro domluvu dema.“
+
+Mikrotext často odstraní víc nejistoty než další odstavec o revoluční platformě.
+
+### FAQ jako prodejní nástroj
+
+FAQ není odpadkový koš na zbytky textu. Je to místo, kde zpracuješ námitky a praktické otázky.
+
+Pro malý SaaS se hodí otázky:
+
+- „Jak dlouho trvá nasazení?“
+- „Umíte převést data z tabulek nebo starého systému?“
+- „Kde jsou uložená data?“
+- „Kdo má k datům přístup?“
+- „Dá se služba vyzkoušet na malé části týmu?“
+- „Co se stane, když se rozhodneme odejít?“
+- „Potřebujeme kartu hned při registraci?“
+- „Jak řešíte podporu?“
+
+Každá odpověď má být krátká, konkrétní a pravdivá. Pokud něco zatím neumíš, řekni to. Důvěra často roste víc z poctivého omezení než z univerzálního „ano, samozřejmě“.
+
+### Rychlý wireframe pro jednu prodejní stránku
+
+Použij tento základ, když potřebuješ stránku napsat během jednoho odpoledne:
+
+1. **Hero:** komu pomáháme, s čím a hlavní CTA.
+2. **Bolest:** tři konkrétní situace, které zákazník zná.
+3. **Dopad:** čas, peníze, riziko, stres nebo ztracené příležitosti.
+4. **Jak to funguje:** tři kroky od začátku po výsledek.
+5. **Ukázka:** screenshot, video, diagram nebo demo scénář.
+6. **Důvěra:** reference, transparentní provoz, dokumentace, tým.
+7. **Privacy-first:** data, analytika, hosting, export, subprocesoři.
+8. **Cena nebo pilot:** jednoduchá nabídka, co obsahuje a pro koho je.
+9. **FAQ:** námitky, které se opakují v prodeji a supportu.
+10. **Závěrečné CTA:** stejná hlavní akce jako nahoře.
+
+Když stránka nefunguje, nelep tam hned nový design. Nejprve zkontroluj, jestli člověk do pěti sekund chápe nabídku. Pak ověř, jestli má důvod věřit. A až potom řeš, jestli je tlačítko tyrkysové nebo „strategicky odvážně modré“.
+
+### Checklist: prodejní stránka bez manipulace
+
+- [ ] Stránka má jednu hlavní akci a všechny sekce k ní vedou.
+- [ ] Hero říká, co produkt dělá, pro koho je a co má návštěvník udělat dál.
+- [ ] Problém je popsaný konkrétní situací, ne abstraktní frází.
+- [ ] Dopad problému je vyjádřený časem, náklady, rizikem nebo ztracenou příležitostí.
+- [ ] Text používá příklady reálného workflow, ne jen obecné benefity.
+- [ ] Stránka obsahuje důkaz důvěry: reference, ukázku, dokumentaci, changelog nebo transparentní provoz.
+- [ ] Privacy-first blok je viditelný a odkazuje na praktické informace o datech, bezpečnosti a subprocesorech.
+- [ ] CTA vysvětluje, co se stane po kliknutí.
+- [ ] Formulář sbírá jen údaje potřebné pro daný krok.
+- [ ] FAQ odpovídá na obchodní, technické i privacy námitky.
+- [ ] Stránka neobsahuje falešnou urgenci, skryté sledovací skripty ani temné vzory.
+- [ ] Úspěch měříme agregovaně: odeslané formuláře, domluvená dema, kvalita leadů a odpovědi zákazníků.
+
+Prodejní stránka má být jako dobrý obchodník: rozumí problému, mluví jasně, netlačí a poctivě řekne, co umí. Když tohle zvládne, nepotřebuje návštěvníka pronásledovat po internetu. Stačí, že mu konečně někdo normálně vysvětlil hodnotu.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -3125,3 +3314,4 @@ Vlastní publikum neroste přes noc. Roste tím, že opakovaně dodáváš užit
 - **2026-09-12:** Doplněna příloha N o produktových metrikách bez sledování jednotlivců: aktivační moment, kohorty, event slovník, dashboard, retence a privacy-first checklist.
 - **2026-09-12:** Doplněna příloha O o experimentech a A/B testech bez datového hladu: hypotézy, experiment karta, privacy-first měření, kvalita leadů, feature flagy a checklist.
 - **2026-09-12:** Doplněna příloha P o vlastním publiku bez závislosti na algoritmech: newsletter, RSS, distribuční rozcestníky, privacy-first sběr kontaktů, měření a obsahová knihovna.
+- **2026-09-12:** Doplněna příloha Q o prodejní stránce bez manipulace: struktura nabídky, hero sekce, důvěra, privacy-first blok, CTA, FAQ, wireframe a checklist.
