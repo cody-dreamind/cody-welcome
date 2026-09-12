@@ -1096,6 +1096,120 @@ Pravidla údržby:
 
 ---
 
+## Příloha A: 30denní plán pro první privacy-first SaaS MVP
+
+Když tým začne nový web nebo SaaS produkt, největší riziko není, že nestihne všechny nápady. Největší riziko je, že bude třicet dní pilně vyrábět něco, co nikdo nepotřebuje, nikdo neumí koupit a nikdo neumí bezpečně provozovat. Proto je dobré první měsíc rozdělit na malé, ověřitelné bloky.
+
+Tento plán není dogma. Je to pracovní rytmus pro zakladatele, malý produktový tým nebo agenturu, která chce klientovi dodat smysluplnou první verzi bez technického cirkusu a bez zbytečného sběru dat.
+
+### Týden 1: problém, zákazník a nabídka
+
+První týden nepatří frameworku. Patří realitě. Cílem je zjistit, jestli problém existuje mimo naši hlavu, kdo ho má, jak ho dnes řeší a proč by za lepší řešení zaplatil.
+
+Konkrétní výstupy týdne:
+
+- **Jedna cílovka:** konkrétní segment, role, situace a spouštěč nákupu.
+- **Jedna bolest:** popsaná jazykem zákazníka, ne jazykem interní prezentace.
+- **Jedna nabídka:** pro koho produkt je, jaký výsledek slibuje a co je další krok.
+- **Deset rozhovorů nebo pokusů o rozhovor:** cílem není chvála, ale signály reality.
+- **První datová mapa:** jaká data by produkt opravdu potřeboval a která jsou jen „kdyby se hodila“.
+
+Praktický postup:
+
+1. Napiš větu: „Pomáháme [komu] dosáhnout [výsledek] bez [největší tření].“
+2. Vypiš pět situací, kdy zákazník problém řeší dnes.
+3. Oslov deset lidí s krátkou otázkou na jejich současný postup.
+4. U každého rozhovoru si zapiš přesnou formulaci problému, ruční obcházky a rozhodovací proces.
+5. Smaž z nápadu všechny funkce, které neřeší první placený případ použití.
+
+> Codyho komentář: Když po týdnu neumíš říct, komu přesně produkt šetří čas, peníze nebo reputaci, další sprint není vývoj. Je to drahá forma deníčku.
+
+### Týden 2: landing page, prototyp a obchodní test
+
+Druhý týden má vytvořit něco, co se dá ukázat. Ne nutně hotový produkt. Stačí landing page, klikací prototyp, krátké video, ruční concierge proces nebo kombinace těchto věcí. Důležité je ověřit, jestli zákazník rozumí nabídce a udělá další krok.
+
+Konkrétní výstupy týdne:
+
+- **Landing page:** problém, slib, pro koho to je, důkaz, FAQ a jasná výzva k akci.
+- **Prototyp hlavního workflow:** jen cesta k první hodnotě, žádné nastavení pro astronauty.
+- **Měřicí plán:** co budeme sledovat bez invazivních trackerů.
+- **Pilotní nabídka:** jasné podmínky pro první 3–5 zákazníků.
+- **Seznam námitek:** cena, riziko migrace, bezpečnost, čas týmu, integrace.
+
+Privacy-first nastavení už tady:
+
+- Formulář sbírá jen údaje potřebné pro odpověď nebo pilot.
+- Analytika měří agregovaně: návštěvy, zdroje, kliky na CTA, ne osobní profily.
+- Newsletter není povinná brána k informacím; pokud existuje, má jasný účel a jednoduché odhlášení.
+- Patička webu říká, kdo službu provozuje, jak kontaktovat podporu a kde najít informace o zpracování dat.
+
+Mini-checklist pro landing page:
+
+- Nad přehybem je jasné, komu web pomáhá a s čím.
+- CTA neříká jen „Odeslat“, ale popisuje další krok.
+- Stránka se dá pochopit bez callu s autorem.
+- Neobsahuje prázdné superlativy typu „nejmodernější platforma“ bez důkazu.
+- Každý sbíraný údaj má vysvětlený účel.
+
+### Týden 3: stavba nejmenší bezpečné verze
+
+Třetí týden je pro vývoj, ale pořád ne pro stavbu všeho. Cílem je funkční vertikální řez: přihlášení, základní data, hlavní workflow, jednoduchá administrace, logování chyb a cesta k podpoře. První verze má být malá, ale nesmí být křehká.
+
+Konkrétní výstupy týdne:
+
+- **Hlavní workflow od začátku do konce:** zákazník dokáže udělat jednu hodnotnou věc.
+- **Základní role a oprávnění:** aspoň oddělení běžného uživatele a administrátora.
+- **Auditní stopa pro důležité akce:** kdo co změnil a kdy, bez ukládání zbytečných detailů.
+- **Export dat:** uživatel má cestu ven, protože důvěra není vězení.
+- **Provozní minimum:** monitoring dostupnosti, chybové logy, zálohy, jednoduchý incident postup.
+
+Technické pravidlo pro první verzi: preferuj nudnou architekturu. Jeden dobře strukturovaný monolit, jasné moduly, jednoduché fronty a čitelná databáze často porazí mikroslužby, které vypadají skvěle v diagramu a hrozně v pátek večer.
+
+Co do MVP nepatří, pokud to není jádro hodnoty:
+
+- složitý marketplace integrací,
+- vlastní page builder,
+- pět typů rolí pro budoucí enterprise zákazníky,
+- pokročilé reporty bez ověřené otázky,
+- automatizace procesu, který ještě neumíš dobře doručit ručně.
+
+### Týden 4: pilot, zpětná vazba a rozhodnutí
+
+Čtvrtý týden není slavnostní ohňostroj. Je to kontrolovaný pilot. Cílem je dostat produkt do rukou prvních uživatelů, pozorovat, kde se zaseknou, a rozhodnout, co dál: zúžit, upravit, zpoplatnit, nebo zastavit.
+
+Konkrétní výstupy týdne:
+
+- **Pilotní onboarding:** jeden krátký návod, jedna ukázková data sada, jeden kontakt na podporu.
+- **Feedback smyčka:** po první hodnotě se uživatele ptej na překážky, ne na obecný dojem.
+- **Metriky aktivace:** kolik lidí dokončilo hlavní workflow, ne kolik otevřelo dashboard.
+- **Support log:** otázky, chyby, zmatení a opakované požadavky.
+- **Rozhodnutí na další měsíc:** jedna hlavní sázka, ne dvacet „ještě by šlo“.
+
+Otázky pro závěrečné rozhodnutí:
+
+- Dokáže uživatel vysvětlit hodnotu produktu vlastními slovy?
+- Použil by produkt znovu bez našeho připomínání?
+- Je problém dost drahý nebo častý, aby dával smysl placený pilot?
+- Která část produktu přinesla hodnotu a která byla jen dekorace?
+- Jaké riziko pro data nebo provoz musíme odstranit před širším spuštěním?
+
+### Hotový výstup po 30 dnech
+
+Po měsíci nemusíš mít velký SaaS. Měl bys mít něco lepšího: důkaz, že stavíš správným směrem. Ideální výstup je malý produkt s jasnou cílovkou, ověřenou nabídkou, bezpečným provozním základem a seznamem věcí, které neděláš schválně.
+
+30denní výstup by měl obsahovat:
+
+- veřejnou nebo neveřejnou landing page,
+- fungující hlavní workflow,
+- pilotní nabídku a první rozhovory,
+- datovou mapu a seznam zpracovatelů,
+- základní provozní checklist,
+- rozhodnutí, co bude další hlavní sázka.
+
+Když se po třiceti dnech rozhodneš nepokračovat, není to prohra. Je to levně získaná informace. Prohra je teprve tehdy, když stejnou informaci zjistíš po roce, třech developerech, jedné přepsané aplikaci a marketingovém rozpočtu, který mezitím odešel do digitálního kompostu.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -1121,3 +1235,4 @@ Pravidla údržby:
 - **2026-09-12:** Dopsána kapitola 6 o produktivitě malého SaaS týmu: rozhodování, backlog, týdenní rytmus, automatizace, komunikace, metriky a checklist.
 - **2026-09-12:** Dopsána kapitola 7 o provozu a růstu: monitoring, logy, support, incidenty, roadmapa, evropská expanze a provozní checklist.
 - **2026-09-12:** Dopsána kapitola 8 s praktickými checklisty a šablonami pro launch, audit webu, privacy-first integrace, obsahový plán a týdenní produktový rytmus.
+- **2026-09-12:** Doplněna příloha A s 30denním plánem pro první privacy-first SaaS MVP: validace, landing page, stavba bezpečné první verze a pilot.
