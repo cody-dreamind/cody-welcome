@@ -1349,6 +1349,113 @@ Nikdy nenech pilot umřít potichu. Tiché konce vytváří falešnou naději, �
 - Funkce mimo rozsah zapisujeme, ale neslibujeme automaticky.
 - Na konci existuje jasné rozhodnutí: pokračovat, zúžit, nebo zastavit.
 
+## Příloha C: Přechod z pilotu na první placený provoz
+
+Pilot je důkaz, že problém existuje. Placený provoz je důkaz, že dokážeš dlouhodobě doručovat hodnotu bez toho, aby se z týmu stala nonstop hasičská jednotka. Přechod mezi těmito dvěma světy bývá zrádný: zákazník už produkt používá, ale procesy, podpora, billing, role a datová pravidla jsou pořád trochu slepené izolepou.
+
+Cílem není postavit enterprise aparát. Cílem je udělat z pilotu opakovatelnou službu, kterou můžeš nabídnout dalším zákazníkům bez každodenní improvizace.
+
+### První placený plán musí být jednoduchý
+
+Po pilotu má tým tendenci vymyslet tři tarify, sedm limitů a tabulku funkcí větší než jídelní lístek turistické restaurace. Nedělej to. První placený plán má hlavně odstranit nejistotu: co zákazník dostane, kolik to stojí, kdo se o něj stará a co je mimo rozsah.
+
+Dobrá první nabídka může mít tuto strukturu:
+
+- **Rozsah:** konkrétní workflow, počet týmů, počet uživatelů nebo objem dat.
+- **Výsledek:** co má být pro zákazníka každý měsíc lepší.
+- **Podpora:** kanál, reakční doba a počet pravidelných kontrol.
+- **Cena:** měsíční nebo kvartální částka bez složitého kalkulátoru.
+- **Limity:** co se účtuje navíc a co zatím vůbec nenabízíš.
+- **Ukončení:** jak zákazník získá export dat a kdy se data mažou.
+
+Příklad: „Provoz workflow pro plánování servisních výjezdů do 20 aktivních uživatelů, včetně měsíční kontroly nastavení, e-mailové podpory do dvou pracovních dnů a exportu dat při ukončení.“ Je to méně sexy než „AI-powered operating system“, ale zákazník ví, co kupuje. A účetní taky, což je podceňovaný stakeholder.
+
+### Přepiš pilotní výjimky na produktová pravidla
+
+Pilot často obsahuje výjimky: ruční import, speciální report, přístup pro někoho „jen na chvíli“, dočasné pole v databázi, rychlý skript na export. To je v pořádku, pokud po pilotu rozhodneš, co se s nimi stane. Výjimky nesmí potichu zůstat jako neviditelný produktový dluh.
+
+Rozděl je do čtyř kategorií:
+
+- **Standardizovat:** výjimka se opakuje a dává smysl pro více zákazníků.
+- **Zpoplatnit:** má hodnotu, ale je drahá na podporu nebo provoz.
+- **Ruční služba:** zatím ji nedává smysl automatizovat, ale může být součástí vyššího balíčku.
+- **Zrušit:** vznikla jen kvůli pilotu a nemá přežít přechod na provoz.
+
+Tento krok udělej před podpisem delší smlouvy. Když zákazník začne platit za provoz, každá zachovaná výjimka se rychle promění v očekávání. A očekávání bez ceny je jen elegantně zabalená budoucí hádka.
+
+### Onboarding do provozu není totéž co pilot
+
+Pilot můžeš řídit hodně osobně. Provoz už potřebuje opakovatelný onboarding: jasný start, kontrolu nastavení, předání odpovědností a místo, kam se zákazník vrací pro odpovědi.
+
+Minimální onboarding do placeného provozu:
+
+1. **Kickoff:** potvrzení cíle, rozsahu a lidí na obou stranách.
+2. **Přístupy:** role podle potřeby, žádné sdílené účty, žádné „admin pro všechny“.
+3. **Data:** co se importuje, co se neimportuje a kdo schvaluje kvalitu.
+4. **První workflow:** jedna hlavní akce, kterou má tým začít používat hned.
+5. **Podpora:** kam psát, co je incident a co je běžný dotaz.
+6. **Kontrola po 14 dnech:** co funguje, co blokuje adopci a co se nemá stavět.
+
+Privacy-first detail: onboarding je dobré místo pro vysvětlení datových pravidel lidskou řečí. Nečekej, že zákazník otevře dokumentaci jen proto, že má krásný název „Zásady zpracování osobních údajů“. Shrň prakticky, jaká data bereš, proč, kdo k nim má přístup a jak se exportují nebo mažou.
+
+### Support nastav jako systém, ne jako osobní hrdinství
+
+Zakladatel často první zákazníky podporuje přímo. To je dobré pro učení, špatné jako dlouhodobý model. Potřebuješ jednoduchý systém, který chrání zákazníka i tým.
+
+Základní pravidla podpory:
+
+- Jeden oficiální kanál pro požadavky, ne pět chatů a tři osobní e-maily.
+- Každý požadavek má stav: nové, řeší se, čeká na zákazníka, hotovo, odloženo.
+- Incidenty mají vlastní postup a prioritu, běžné nápady nejdou rovnou do vývoje.
+- Odpověď může být rychlá, ale slib musí být realistický.
+- Požadavky se jednou týdně třídí na bug, podporu, produktový insight nebo obchodní signál.
+
+> Codyho komentář: „Napiš mi kdykoliv na WhatsApp“ zní přátelsky, dokud se z toho nestane půlnoční technická podpora pro problém, který měl být formulář v helpdesku.
+
+### Fakturace a obnovování bez trapného ticha
+
+Placený provoz potřebuje rytmus peněz. Ne kvůli tabulkám, ale kvůli vztahu. Zákazník má vědět, kdy se platí, za co se platí a co se stane, když chce pokračovat, rozšířit nebo skončit.
+
+Praktický postup:
+
+- Po pilotu pošli shrnutí hodnoty a návrh placeného pokračování.
+- Nastav první fakturační období krátké, například měsíc nebo kvartál, pokud je riziko stále vyšší.
+- Uveď datum dalšího vyhodnocení, ne jen datum další faktury.
+- Před obnovou připomeň výsledky, otevřené věci a doporučený další krok.
+- Pokud zákazník končí, nabídni export a potvrď plán smazání nebo archivace dat.
+
+Obchodně je lepší říct „navrhujeme další kvartál s těmito třemi cíli“ než „tak co, prodloužíme?“. První varianta vede rozhodnutí. Druhá čeká, jestli zákazník náhodou udělá tvoji práci za tebe.
+
+### Co musí být hotové před druhým zákazníkem
+
+První platící zákazník může přežít trochu ruční práce. Druhý už začne odhalovat, co je systém a co je šťastná náhoda. Než přidáš dalšího zákazníka, zkontroluj minimální provozní standard.
+
+Musí existovat:
+
+- stručný onboardingový checklist,
+- šablona nabídky a rozsahu služby,
+- základní role a přístupová pravidla,
+- jasný postup pro export a mazání dat,
+- místo pro support požadavky,
+- jednoduchý provozní dashboard nebo týdenní kontrola,
+- seznam známých ručních kroků,
+- rozhodnutí, které výjimky už neděláš.
+
+Tohle není brzda růstu. Je to bezpečnostní pás. Bez něj každá nová zakázka zvětšuje chaos rychleji než příjem.
+
+### Checklist: z pilotu do placeného provozu
+
+- Máme jednu jasnou nabídku pro pokračování po pilotu.
+- Cena odpovídá hodnotě i ruční práci, kterou zatím neseme.
+- Pilotní výjimky jsou rozdělené na standardizovat, zpoplatnit, ruční službu nebo zrušit.
+- Zákazník ví, co je v ceně a co je mimo rozsah.
+- Onboarding má opakovatelný checklist.
+- Přístupy jsou založené na rolích a potřebě vědět.
+- Datová pravidla jsou vysvětlená prakticky, nejen právním dokumentem.
+- Support má jeden oficiální kanál a jasné stavy požadavků.
+- Před obnovou posíláme shrnutí hodnoty a návrh dalšího kroku.
+- Při ukončení umíme dodat export a potvrdit mazání nebo další zpracování dat.
+
 ---
 
 ## Zdroje
@@ -1378,3 +1485,4 @@ Nikdy nenech pilot umřít potichu. Tiché konce vytváří falešnou naději, �
 - **2026-09-12:** Dopsána kapitola 8 s praktickými checklisty a šablonami pro launch, audit webu, privacy-first integrace, obsahový plán a týdenní produktový rytmus.
 - **2026-09-12:** Doplněna příloha A s 30denním plánem pro první privacy-first SaaS MVP: validace, landing page, stavba bezpečné první verze a pilot.
 - **2026-09-12:** Doplněna příloha B o prvním placeném pilotu: nabídka, privacy-first nastavení, týdenní řízení, měření a ukončení pilotu.
+- **2026-09-12:** Doplněna příloha C o přechodu z pilotu na první placený provoz: nabídka, výjimky, onboarding, support, fakturace a checklist před druhým zákazníkem.
