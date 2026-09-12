@@ -3780,6 +3780,178 @@ Po importu pošli report v lidské řeči: „Importovali jsme 1 240 zákazník�
 
 ---
 
+## Příloha U: Přístupnost webu a SaaS bez alibi
+
+Přístupnost není dekorace pro tendr ani jednorázový audit před launchem. Je to způsob, jak stavět produkt tak, aby ho mohli používat lidé s různými schopnostmi, zařízeními, situacemi a omezeními. Někdo používá čtečku obrazovky. Někdo má rozbitou myš. Někdo sedí ve vlaku na slunci a sotva vidí displej. Někdo má po operaci jednu ruku mimo provoz. A někdo je prostě unavený po dni plném tabulek, což je taky forma utrpení, jen hůř fakturovatelná.
+
+Pro evropský SaaS je přístupnost navíc čím dál víc obchodní a právní téma. Evropská komise uvádí, že požadavky European Accessibility Act se začaly uplatňovat od 28. června 2025 pro vybrané produkty a služby. Ne každý malý B2B produkt spadne do stejného režimu, ale ignorovat přístupnost je špatná strategie: zákazníci, veřejné instituce i větší firmy budou dostupnost a inkluzi čím dál častěji vyžadovat v procurementu.
+
+Codyho komentář: přístupnost je jeden z mála produktových dluhů, který se s věkem nechová jako víno. Spíš jako zapomenutý jogurt v kancelářské lednici.
+
+### Začni čtyřmi základními otázkami
+
+Nejdřív nepotřebuješ tlustý audit. Potřebuješ zjistit, jestli produkt vůbec drží pohromadě pro běžné asistivní scénáře.
+
+Polož si čtyři otázky:
+
+- **Jde produkt ovládat klávesnicí?** Uživatel se dostane na všechny důležité akce, vidí fokus a nezasekne se v modalu.
+- **Dává stránka smysl bez vizuálního layoutu?** Nadpisy, popisky polí, chybové hlášky a pořadí obsahu mají logiku.
+- **Je obsah čitelný v reálných podmínkách?** Kontrast, velikost písma, délka řádků a stavové barvy nejsou jen designérská poezie.
+- **Umí produkt odpustit chybu?** Formuláře jasně říkají, co se stalo, jak to opravit a co se uloží.
+
+Pokud na některou odpověď zní „nevím“, máš první backlog. Ne paniku, backlog. Panika je jen backlog bez názvů ticketů.
+
+### WCAG ber jako praktický rámec, ne jako magickou zaklínací knihu
+
+WCAG 2.2 je doporučení W3C z října 2023 a stojí na čtyřech principech: obsah má být vnímatelný, ovladatelný, srozumitelný a robustní. Pro malý tým je užitečné převést si to do produktové řeči.
+
+Praktický překlad:
+
+- **Vnímatelné:** informace nejsou předané jen barvou, obrázkem nebo animací.
+- **Ovladatelné:** všechny akce fungují bez myši, bez časového stresu a bez pasti fokusu.
+- **Srozumitelné:** texty, formuláře a chybové stavy říkají jasně, co se děje.
+- **Robustní:** HTML je dostatečně správné, aby ho zvládly prohlížeče, čtečky a automatizační nástroje.
+
+Pro první produktový standard doporučuji cílit na WCAG 2.2 AA u veřejných stránek, onboardingových toků, administrace účtu, plateb, podpory a kritických pracovních workflow. Není to záruka dokonalosti, ale je to dobrý měřitelný základ.
+
+### Přístupnost patří do design systému
+
+Nejlevnější přístupnost vzniká v komponentách. Ne v každé obrazovce zvlášť. Pokud máš dobrý `Button`, `Input`, `Modal`, `Toast`, `Table` a `Navigation`, velká část produktu dědí dobré chování automaticky.
+
+U každé základní komponenty si hlídej:
+
+- viditelný a dostatečně kontrastní stav fokusu,
+- správné nativní HTML prvky před vlastními div-kouzly,
+- popisky formulářových polí napojené na inputy,
+- chybové stavy dostupné i mimo barvu,
+- stav `disabled`, `loading`, `selected` a `expanded` popsaný srozumitelně,
+- rozumnou velikost klikací plochy,
+- ovládání klávesnicí podle očekávání.
+
+Příklad: dropdown není jen hezká krabička. Potřebuje otevření klávesou, šipky, zavření přes Escape, návrat fokusu, oznámení vybrané položky a chování na mobilu. Pokud tohle nechceš řešit ručně, použij prověřenou knihovnu nebo nativní prvek. Ego si nech na naming proměnných, tam škody přežijeme snáz.
+
+### Formuláře rozhodují o důvěře
+
+Formuláře jsou místo, kde přístupnost nejčastěji selže a zároveň nejvíc bolí byznys. Registrace, objednávka, nastavení fakturace, pozvánka uživatele, export dat, žádost o smazání účtu — to jsou momenty, kde nesmíš uživatele nechat hádat.
+
+Dobré pravidlo: každé pole má mít jasný účel, viditelný label, očekávaný formát a konkrétní chybu.
+
+Místo:
+
+```text
+Chyba: neplatná hodnota.
+```
+
+Piš:
+
+```text
+IČO musí mít 8 číslic. Zkontrolujte prosím, že neobsahuje mezery ani pomlčky.
+```
+
+U delších formulářů používej průběžné ukládání, shrnutí chyb nahoře a odkaz z chyby přímo na pole. Pokud chyba vznikne až po odeslání, fokus přesuň na souhrn chyb nebo první problematické pole. Uživatel nemá luštit, jestli se něco stalo. Od toho máme detektivky, ne fakturační formuláře.
+
+### Přístupnost a privacy-first se podporují
+
+Přístupnost se dá dělat bez sledovacího cirkusu. Nepotřebuješ nahrávat obrazovky každého uživatele, posílat heatmapy třetím stranám ani sbírat citlivé signály o tom, kdo používá asistivní technologii.
+
+Privacy-first přístup:
+
+- testuj klíčové scénáře ručně a s dobrovolníky, ne plošným šmírováním,
+- sbírej agregované chyby formulářů bez ukládání obsahu polí,
+- loguj technické chyby bez osobních dat a bez textů, které uživatel zadal,
+- nepoužívej detekci zdravotního stavu nebo asistivních technologií jako segmentaci,
+- pro výzkum používej informovaný souhlas a jasnou retenci poznámek,
+- záznamy z testování anonymizuj nebo maž podle předem daného pravidla.
+
+Dobrý accessibility research může být velmi jednoduchý: pět lidí, pět úkolů, poznámky k místům, kde se zasekli, a opravy v backlogu. Žádná datová elektrárna. Jen pozornost.
+
+### Minimální audit před launchem
+
+Před spuštěním veřejné stránky nebo větší produktové změny si dej krátký audit. Ideálně ho dělá někdo, kdo funkci nestavěl. Autor obrazovky totiž vidí i věci, které tam nejsou. Mozek je v tomhle kreativní lhář.
+
+Rychlý postup:
+
+1. Projdi hlavní tok jen klávesnicí.
+2. Zkontroluj pořadí nadpisů a logiku obsahu.
+3. Ověř kontrast textů, odkazů, chyb a stavů.
+4. Zvětši stránku na 200 % a zkontroluj, že se obsah nerozbije.
+5. Pusť čtečku obrazovky aspoň pro jeden kritický tok.
+6. Ověř formulářové chyby a návrat fokusu po modalu.
+7. Vypni animace nebo respektuj systémovou preferenci omezeného pohybu.
+8. Zkontroluj, že video, audio nebo obrázky mají alternativní cestu k informaci.
+
+Automatické nástroje pomůžou, ale nechytí všechno. Umí najít chybějící label nebo nízký kontrast. Neřeknou ti spolehlivě, jestli text dává smysl, jestli je workflow pochopitelné nebo jestli modal působí jako past v únikovce.
+
+### Přístupnost napiš do definice hotovo
+
+Pokud přístupnost není v Definition of Done, bude se řešit „až potom“. A „až potom“ je obvykle sprint někdy mezi nikdy a až shoří produkce.
+
+Přidej do každého ticketu s UI změnou krátká kritéria:
+
+- funguje ovládání klávesnicí,
+- fokus je viditelný a logický,
+- texty chyb jsou konkrétní,
+- stav není sdělen jen barvou,
+- komponenta používá existující accessible pattern,
+- změna prošla aspoň základním ručním testem,
+- pokud vzniká nové chování, je doplněno do design systému nebo dokumentace.
+
+U větších funkcí přidej accessibility poznámku do produktového briefu: které scénáře jsou kritické, jak se testují, jaká rizika zůstávají a kdy se vrátíš k opravám.
+
+### Checklist: přístupný privacy-first SaaS
+
+- [ ] Kritické stránky a workflow mají cíl WCAG 2.2 AA.
+- [ ] Produkt lze v hlavních scénářích ovládat klávesnicí.
+- [ ] Fokus je vždy viditelný a po modalu nebo akci se vrací na logické místo.
+- [ ] Formuláře mají labely, nápovědu, konkrétní chyby a souhrn problémů.
+- [ ] Informace nejsou sdělené pouze barvou, ikonou nebo animací.
+- [ ] Design systém obsahuje přístupné varianty základních komponent.
+- [ ] Kontrast textů a stavů je ověřený, ne odhadnutý okem po třetí kávě.
+- [ ] Produkt respektuje omezení pohybu a nerozbíjí se při zvětšení.
+- [ ] Výzkum přístupnosti nesbírá zbytečná osobní data.
+- [ ] Accessibility kontrola je součást Definition of Done.
+
+### Šablona accessibility karty
+
+```markdown
+## Accessibility karta: [funkce / obrazovka]
+
+### Kritický scénář
+- Co musí uživatel zvládnout?
+- Co se stane, když scénář selže?
+
+### Ovládání
+- Klávesnice:
+- Fokus:
+- Mobil / dotyk:
+- Čtečka obrazovky:
+
+### Obsah
+- Nadpisy:
+- Labely:
+- Chybové hlášky:
+- Alternativní texty:
+
+### Vizuální přístupnost
+- Kontrast:
+- Zvětšení na 200 %:
+- Stavové barvy:
+- Animace a pohyb:
+
+### Privacy-first testování
+- Jak testujeme bez zbytečných osobních dat:
+- Jaké poznámky ukládáme:
+- Kdy poznámky mažeme:
+
+### Výsledek
+- Blokující problémy:
+- Neblokující zlepšení:
+- Vlastník oprav:
+- Datum další kontroly:
+```
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -3799,11 +3971,14 @@ Po importu pošli report v lidské řeči: „Importovali jsme 1 240 zákazník�
 - OWASP: [Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
 - ENISA: [Incident Response Plan](https://tools.enisa.europa.eu/topics/risk-management/current-risk/bcm-resilience/bc-plan/incident-response-plan)
 - Atlassian: [Postmortems: Enhance Incident Management Processes](https://www.atlassian.com/incident-management/handbook/postmortems)
+- Evropská komise: [European Accessibility Act](https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/union-equality-strategy-rights-persons-disabilities-2021-2030/european-accessibility-act_en)
+- W3C: [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)
 
 ---
 
 ## Pracovní log
 
+- **2026-09-12:** Doplněna příloha U o přístupnosti webu a SaaS: WCAG 2.2, European Accessibility Act, design systém, formuláře, privacy-first testování a checklist.
 - **2026-09-12:** Doplněna příloha T o bezpečných importech dat: rozsah migrace, importní mapa, validace, duplicity, rollback, retence a šablona importní karty.
 - **2026-09-12:** Doplněna příloha S o integracích a API partnerstvích: scénáře, datové smlouvy, webhooky, partnerská pravidla, dokumentace a privacy-first checklist.
 - **2026-09-12:** Doplněna příloha R o roadmapě a changelogu: práce se směrem produktu, zákaznickým changelogem, privacy-first filtrem, sběrem požadavků a šablonami.
