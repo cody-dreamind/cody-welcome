@@ -1818,6 +1818,174 @@ Offboarding není přiznání porážky. Je to poslední část zákaznické zku
 
 ---
 
+## Příloha G: Cenotvorba a balíčky pro malý privacy-first SaaS
+
+Cenotvorba není jen číslo na stránce. Je to způsob, jak zákazník pochopí hodnotu produktu, jak tým řídí support, jak rychle roste příjem a kolik provozní složitosti si přidá na záda. U malého SaaS je nejhorší kombinace nízká cena, mnoho výjimek a ručně slíbené funkce pro každého druhého zákazníka. To není podnikání, to je permanentní improvizační divadlo s fakturami.
+
+Dobrý pricing má splnit čtyři věci:
+
+1. zákazník rychle pozná, který balíček je pro něj,
+2. cena odpovídá výsledku, ne počtu tlačítek,
+3. tým umí balíčky doručit bez chaosu,
+4. soukromí a kontrola nad daty nejsou placený luxus, ale základ.
+
+### Začni hodnotou, ne tabulkou funkcí
+
+První otázka nezní „kolik stojí hosting a kolik chceme marži“. To je důležité, ale až později. První otázka zní: jaký výsledek zákazník kupuje?
+
+Příklad u nástroje pro plánování zakázek:
+
+- slabá formulace hodnoty: „Máme kalendář, role, exporty a notifikace.“
+- silnější formulace hodnoty: „Servisní tým každý den ví, kam jede, co má udělat a co se změnilo.“
+
+Z druhé věty se dá odvodit cena mnohem lépe. Pokud produkt šetří dispečerovi pět hodin týdně, snižuje počet zmeškaných termínů a zlepšuje komunikaci se zákazníkem, není to doplněk k Excelu za cenu kávy. Je to provozní systém, který má dopad na kapacitu firmy.
+
+Praktický postup:
+
+- napiš hlavní výsledek produktu jednou větou,
+- odhadni, jak často zákazník výsledek potřebuje,
+- pojmenuj, co dnes stojí současné řešení,
+- zjisti, kdo za problém platí časem, penězi nebo reputací,
+- ověř v rozhovorech, jestli zákazník používá podobná slova.
+
+Codyho komentář: Pokud zákazník nerozumí hodnotě bez ukázky administračního panelu, pravděpodobně neprodáváš výsledek, ale katalog obrazovek. A katalog obrazovek má konverzi zhruba jako leták v dešti.
+
+### Vyber jednu hlavní cenovou metriku
+
+Cenová metrika je jednotka, podle které zákazník platí: uživatel, tým, lokalita, počet objednávek, objem dat, aktivní projekt, firma, modul nebo kombinace. Špatná metrika trestá zákazníka za úspěch nebo ho nutí obcházet pravidla. Dobrá metrika roste spolu s hodnotou.
+
+Časté možnosti:
+
+- **Za uživatele:** snadno pochopitelné, ale může brzdit adopci, protože zákazník šetří na účtech.
+- **Za tým nebo firmu:** jednoduché pro malé zákazníky, ale vyžaduje jasné limity férového používání.
+- **Za objem práce:** například počet zakázek, faktur, projektů nebo aktivních klientů; často lépe kopíruje hodnotu.
+- **Za moduly:** vhodné u širších produktů, ale rychle komplikuje prodej i support.
+- **Hybrid:** základní platforma plus limity podle růstu; silné, ale musí být srozumitelné.
+
+Pro první verzi doporučuji vybrat jednu hlavní metriku a maximálně jeden pomocný limit. Například: „balíček podle počtu aktivních zakázek měsíčně, všichni členové týmu v ceně“. Tím produkt podporuje spolupráci a netrestá firmu za to, že do systému pustí lidi, kteří ho opravdu potřebují.
+
+Privacy-first pohled: neúčtuj za základní bezpečnostní a datová práva. Export dat, rozumná správa přístupů, smazání účtu, transparentní logika retence a základní auditní stopa nemají být „Enterprise only“. Enterprise balíček může mít pokročilé řízení rolí, vlastní smluvní proces, SSO nebo dedikované prostředí, ale ne právo nebýt sledován jako laboratorní křeček.
+
+### Tři balíčky stačí
+
+Začínající SaaS často vytvoří pět balíčků, sedm doplňků, roční slevu, agenturní verzi a tajný „startup plan“. Výsledek? Nikdo neví, co koupit, a tým neví, co má vlastně podporovat.
+
+Jednodušší struktura:
+
+| Balíček | Pro koho | Typická role |
+| --- | --- | --- |
+| Start | první tým, pilot, menší provoz | snížit vstupní bariéru |
+| Growth | hlavní cílový zákazník | vydělávat a doručovat plnou hodnotu |
+| Scale | větší nebo regulovanější zákazník | řešit bezpečnost, proces a smlouvy |
+
+Balíček Start nemá být dumping. Má být omezená, ale hodnotná verze. Pokud je příliš levný a obsahuje skoro vše, zákazník nemá důvod přejít výš. Pokud je příliš osekaný, nepředvede hodnotu. Dobré omezení je takové, které odpovídá přirozenému růstu: počet aktivních projektů, lokalit, zakázek nebo klientů.
+
+Balíček Growth je hlavní produkt. Sem dej nejlepší poměr hodnoty, podpory a jednoduchosti. Na pricing stránce by měl být jasně označený jako doporučená volba, pokud to odpovídá realitě. Ne proto, že marketingový učebnicový démon žádá zvýrazněné tlačítko, ale proto, že zákazník potřebuje rozhodovací zkratku.
+
+Balíček Scale není skladiště všeho, co se nevešlo jinam. Patří sem věci, které opravdu vyžadují větší provozní náklady nebo vyšší riziko: individuální smluvní podmínky, pokročilé role, bezpečnostní dotazníky, vyšší limity, auditní exporty, SLA, dedikovaný onboarding nebo zvláštní retenční režimy.
+
+### Co dát na pricing stránku
+
+Pricing stránka nemá být účetní závěrka. Má pomoci zákazníkovi rozhodnout se a snížit nejistotu.
+
+Minimum pro dobrou stránku:
+
+- jedna věta, pro koho je produkt,
+- tři srozumitelné balíčky,
+- jasná cenová metrika,
+- hlavní limity bez schovaných háčků,
+- často kladené otázky,
+- informace o datech, hostingu a soukromí,
+- kontakt pro zákazníky, kteří potřebují smlouvu nebo bezpečnostní dotazník.
+
+Privacy-first produkty by měly mít na pricing stránce krátkou sekci „Data a soukromí“. Ne jako právní román, ale jako signál důvěry:
+
+- kde služba běží,
+- jaké typy dat produkt zpracovává,
+- zda používá marketingové trackery,
+- jak funguje export a smazání dat,
+- kde je dokumentace k subprocessingu nebo bezpečnosti.
+
+Tahle sekce nepatří jen do patičky a obchodních podmínek. Patří do rozhodovacího procesu. U evropských B2B zákazníků může být kontrola nad daty stejně důležitá jako cena.
+
+### Příklad jednoduchého pricingu
+
+Představme si SaaS pro plánování práce servisního týmu.
+
+**Start — pro první tým**
+
+- do 50 aktivních zakázek měsíčně,
+- neomezený počet interních uživatelů,
+- základní plánování, notifikace a export,
+- e-mailová podpora,
+- měsíční nebo roční platba.
+
+**Growth — pro pravidelný provoz**
+
+- do 300 aktivních zakázek měsíčně,
+- pokročilé role,
+- šablony zakázek,
+- reporty pro vedení,
+- prioritní podpora,
+- onboardingový hovor.
+
+**Scale — pro více týmů nebo vyšší nároky**
+
+- vyšší nebo individuální limity,
+- více poboček,
+- auditní exporty,
+- pokročilé bezpečnostní nastavení,
+- smluvní a bezpečnostní dokumentace,
+- individuální onboarding.
+
+Všimni si dvou věcí. Za prvé: všichni uživatelé mohou být v ceně, protože hodnota je v řízení zakázek, ne v trestání spolupráce. Za druhé: export dat je už v základu. To je součást důvěry, ne páka na upsell.
+
+### Slevy, výjimky a ruční dohody
+
+Sleva není zlo. Nekontrolovaná sleva je zlo se slevovým kódem. Malý tým potřebuje jednoduchá pravidla, jinak se z cenotvorby stane ruční CRM peklo.
+
+Rozumná pravidla:
+
+- jedna standardní roční sleva,
+- jasná pilotní cena a datum konce pilotu,
+- žádné doživotní slevy bez opravdu dobrého důvodu,
+- výjimky schvaluje jedna odpovědná osoba,
+- každá výjimka má datum revize,
+- individuální cena musí mít poznámku, proč vznikla.
+
+U pilotů pomáhá formulace: „Pilot stojí X na 30 dní. Pokud spolupráce pokračuje, přechází na balíček Growth za Y měsíčně, pokud se nedomluvíme jinak do data Z.“ Zákazník ví, co se stane, a tým nemusí po měsíci vymýšlet cenu z kávové sedliny.
+
+### Kdy zdražit
+
+Zdražení je citlivé, ale někdy nutné. Signály, že cena může být nízká:
+
+- zákazníci se rozhodují rychle a skoro nikdy neřeší cenu,
+- support a onboarding stojí víc, než balíček unese,
+- produkt řeší kritický proces, ale cena odpovídá doplňku,
+- nové funkce zvyšují hodnotu, ale pricing zůstal v době prvního prototypu,
+- největší zákazníci platí stejně jako malí, přestože mají výrazně vyšší nároky.
+
+Zdražování dělej s respektem. Stávajícím zákazníkům dej čas, vysvětli důvod, nabídni přechodné období a nezabaluj to do marketingové mlhy typu „aktualizujeme hodnotovou architekturu“. Napiš lidsky: produkt je spolehlivější, přibyly funkce, rostou náklady na podporu, chceme službu dlouhodobě udržet.
+
+Privacy-first detail: pokud zdražení souvisí s lepším evropským provozem, bezpečností nebo podporou datových práv, řekni to napřímo. Někteří zákazníci ocení, že nešetříš na infrastruktuře a právním pořádku jen proto, aby cena vypadala hezky v tabulce.
+
+### Checklist: pricing před zveřejněním
+
+- [ ] Hlavní hodnota produktu je popsaná jednou větou.
+- [ ] Cenová metrika roste spolu s hodnotou pro zákazníka.
+- [ ] Balíčky jsou maximálně tři a každý má jasnou cílovku.
+- [ ] Doporučený balíček odpovídá hlavnímu zákazníkovi, ne jen nejvyšší marži.
+- [ ] Základní privacy a datová práva nejsou zamčená v nejdražším plánu.
+- [ ] Limity jsou viditelné a vysvětlené bez drobného písma.
+- [ ] Pricing stránka obsahuje stručnou sekci o datech, hostingu a trackerech.
+- [ ] Pilotní cena má datum konce a jasný přechod na běžný tarif.
+- [ ] Slevy a výjimky mají pravidla, vlastníka a datum revize.
+- [ ] Tým ví, co přesně který balíček obsahuje a co už je placený doplněk.
+
+Cenotvorba není jednorázové rozhodnutí. Je to pravidelná produktová práce. Jakmile se mění cílovka, hodnota, náklady nebo support, má se měnit i pricing. Nejlepší cena není ta, která vypadá nejlevněji. Nejlepší cena je ta, která zákazníkovi dává smysl, týmu umožní doručovat kvalitu a produktu dovolí přežít bez reklamního cirkusu a datových kompromisů.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -1851,3 +2019,4 @@ Offboarding není přiznání porážky. Je to poslední část zákaznické zku
 - **2026-09-12:** Doplněna příloha D s 90denním obsahovým systémem bez honění algoritmů: tematická mapa, měsíční aktivum, privacy-first distribuce, měření a brief.
 - **2026-09-12:** Doplněna příloha E o zákaznickém onboardingu po první platbě: aktivační moment, vrstvená komunikace, znalostní báze, měření a uvítací e-mail.
 - **2026-09-12:** Doplněna příloha F o offboardingu, exportu a mazání dat: scénáře odchodu, strojově čitelný export, retenční proces, žádosti subjektů údajů a checklist.
+- **2026-09-12:** Doplněna příloha G o cenotvorbě a balíčcích pro malý privacy-first SaaS: hodnota, cenová metrika, tři tarify, pricing stránka, slevy, zdražování a checklist.
