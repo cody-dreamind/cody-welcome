@@ -2333,6 +2333,122 @@ Incidenty nikdy úplně nezmizí. Cílem není tvářit se, že se nic nepokazí
 
 ---
 
+## Příloha K: Zálohy a obnova bez falešného klidu
+
+Záloha není bezpečnostní talisman. To, že někde existuje soubor s názvem `backup-final-final.zip`, ještě neznamená, že firma umí obnovit provoz. Skutečná otázka zní: když se databáze poškodí, někdo smaže špatný tenant, dodavatel vypadne nebo ransomware zašifruje produkční data, umíš vrátit službu do použitelného stavu dřív, než zákazníci ztratí důvěru?
+
+ENISA ve své technické implementační příručce k řízení kybernetických rizik zdůrazňuje pravidelné testování obnovy záloh, dokumentování výsledků a nápravná opatření. NIST Cybersecurity Framework 2.0 v části Recover připomíná, že před obnovou je potřeba ověřit integritu záloh a dalších obnovovacích aktiv. Přeloženo do jazyka malého SaaS: záloha, kterou nikdo nikdy neobnovil, je hypotéza. Obnovená záloha je důkaz.
+
+### Nejdřív si řekni, co vlastně obnovuješ
+
+Malý tým často řekne „zálohujeme databázi“ a tím rozhovor skončí. Jenže SaaS není jen databáze. Aby šel produkt obnovit, potřebuješ znát všechny části, které tvoří službu:
+
+- **Produkční data:** databáze, soubory, přílohy, uživatelský obsah, auditní logy.
+- **Konfigurace:** proměnné prostředí, DNS, fronty, cron úlohy, nastavení storage, webhooky.
+- **Aplikační kód:** repozitář, build proces, release artefakty, migrace databáze.
+- **Identita a přístupy:** admin účty, SSO, API klíče, break-glass účet, správa tajemství.
+- **Dokumentace:** postup obnovy, kontakty, priority systémů, komunikační šablony.
+- **Externí služby:** e-mail, platby, analytika, support, hosting, monitoring.
+
+Pro každou část si napiš vlastníka a odpověď na dvě otázky: kde je poslední spolehlivá kopie a jak ji ověříme? Pokud odpověď zní „to asi ví Petr“, nemáš proces. Máš Petra jako single point of failure v mikině.
+
+### RPO a RTO bez enterprise slovní mlhy
+
+Dvě zkratky se hodí znát, i když nechceš mluvit jako konzultant po třetím espressu.
+
+**RPO** říká, kolik dat si můžeš dovolit ztratit. Když zálohuješ jednou denně, teoreticky můžeš přijít o skoro 24 hodin změn. **RTO** říká, jak rychle musíš službu obnovit. Jiný RTO má interní report, jiný zákaznické přihlášení a jiný billing.
+
+Jednoduchá tabulka pro malý SaaS:
+
+| Oblast | Příklad RPO | Příklad RTO | Poznámka |
+|---|---:|---:|---|
+| Hlavní databáze | 15–60 minut | 2–4 hodiny | Záleží na objemu transakcí a ceně ztráty dat. |
+| Uživatelské přílohy | 1–24 hodin | 4–24 hodin | Důležitá je i kontrola integrity a vazba na databázi. |
+| Marketingový web | 24 hodin | 4 hodiny | Statický web se často obnovuje z Gitu rychleji než ze zálohy. |
+| Analytika | 24 hodin až několik dní | 24+ hodin | Nezachraňuj vanity data před zákaznickým provozem. |
+| Dokumentace a runbooky | 24 hodin | 2 hodiny | Během incidentu je dokumentace provozní nástroj, ne archiv. |
+
+Tohle nejsou univerzální hodnoty. Jsou to startovní příklady. Správná hodnota vychází z dopadu na zákazníka, smluvních slibů, ceny obnovy a toho, jestli tým zvládne postup reálně provést.
+
+### Backup strategie: 3-2-1, ale s mozkem
+
+Klasické pravidlo 3-2-1 říká: měj tři kopie dat, na dvou různých médiích, jednu mimo hlavní prostředí. Pro malý SaaS to nemusí znamenat regál s páskami jako z filmu o bankovním trezoru. Znamená to, že výpadek jednoho poskytovatele, smazání produkčního bucketu nebo kompromitovaný admin účet nesmí zničit všechno najednou.
+
+Praktická privacy-first verze:
+
+- **Primární data** běží v evropském regionu u poskytovatele, kterého umíš smluvně a technicky popsat.
+- **Automatické snapshoty** pokrývají běžné chyby, ale nejsou jediná obrana.
+- **Oddělená kopie** je v jiném účtu, projektu nebo poskytovateli, ideálně s omezeným zápisem.
+- **Šifrování** chrání zálohy při uložení i přenosu; klíče nesmí být jen vedle zálohy ve stejném kompromitovaném účtu.
+- **Retence** odpovídá účelu: neuchovávej osobní data déle jen proto, že „zálohy jsou levné“.
+- **Přístup** má minimum lidí a všechny obnovovací akce se logují.
+
+Privacy-first neznamená, že záloh bude málo. Znamená, že každá kopie má důvod, vlastníka, ochranu a datum, kdy přestane existovat.
+
+### Test obnovy je nejdůležitější část zálohování
+
+Zálohy se nedělají proto, aby existovaly. Dělají se proto, aby šly obnovit. Proto si nastav lehký rytmus testů:
+
+- **Týdně:** automatická kontrola, že zálohy doběhly a nejsou prázdné.
+- **Měsíčně:** obnova vybraného vzorku do izolovaného prostředí.
+- **Čtvrtletně:** úplný restore drill pro nejkritičtější scénář.
+- **Po velké změně:** test po migraci databáze, změně storage, přesunu hostingu nebo nové architektuře.
+
+Test obnovy musí mít zápis: datum, kdo test dělal, jaká data se obnovovala, jak dlouho to trvalo, co selhalo a co se opraví. Bez zápisu se z testu stává dobrý pocit. A dobrý pocit se v incidentu špatně mountuje.
+
+Testuj také obnovu konkrétního tenanta nebo záznamu, nejen celé databáze. V SaaS světě je častý problém „zákazník smazal špatnou věc“ nebo „migrace poškodila malou část dat“. Obnova celé databáze by v takové situaci mohla poškodit ostatní zákazníky. Potřebuješ vědět, jestli umíš obnovit selektivně, bezpečně a auditovatelně.
+
+### Pozor na obnovu kompromitovaných dat
+
+Po bezpečnostním incidentu není cílem slepě vrátit nejnovější zálohu. Pokud útočník změnil data, přidal zadní vrátka, ukradl klíče nebo se chyba propsala do více snapshotů, můžeš si obnovit problém zpátky do produkce jako pečlivě zabalený dárek.
+
+Před obnovou si polož otázky:
+
+1. Kdy incident pravděpodobně začal?
+2. Které systémy mohly být ovlivněné?
+3. Je záloha z doby před incidentem, nebo už obsahuje kompromitovaný stav?
+4. Máme bezpečné klíče a přístupy pro obnovu?
+5. Umíme ověřit integritu dat po obnově?
+6. Kdo rozhodne, že obnovený systém může zpět do provozu?
+
+U podezření na únik nebo změnu osobních údajů odděl technickou obnovu od posouzení dopadu na soukromí. To, že služba zase běží, ještě neznamená, že je hotové vyhodnocení datového incidentu.
+
+### Runbook obnovy na jednu stránku
+
+Runbook nemusí být román. První verze může být jednostránkový dokument:
+
+- **Kdy ho použít:** ztráta dat, poškozená migrace, výpadek storage, kompromitace účtu.
+- **Kdo rozhoduje:** incident commander, vlastník databáze, vlastník komunikace.
+- **Co zastavit:** cron úlohy, zápisy, integrace, webhooky, automatické joby.
+- **Kde jsou zálohy:** názvy služeb, účty, regiony, odkazy na interní dokumentaci.
+- **Jak obnovit:** pořadí kroků, příkazy nebo odkaz na skript, kontrolní body.
+- **Jak ověřit:** smoke testy, integrita dat, přihlášení, hlavní workflow, monitoring.
+- **Koho informovat:** tým, dotčení zákazníci, podpora, případně DPO nebo právník.
+- **Co zapsat:** časová osa, použitá záloha, rozhodnutí, dopad, následné úkoly.
+
+Cílem je, aby obnovu nezvládl jen jeden člověk v hlavě. Když jediný znalec odjede na dovolenou, systém nemá přejít do módu „čekáme, až se vrátí z hor“.
+
+### Checklist: zálohy a obnova pro malý SaaS
+
+- [ ] Víme, která data, konfigurace a externí služby jsou kritické pro provoz.
+- [ ] Pro hlavní části služby máme definované RPO a RTO.
+- [ ] Zálohy běží automaticky a selhání zálohy vytváří upozornění.
+- [ ] Existuje oddělená kopie mimo hlavní produkční účet nebo prostředí.
+- [ ] Zálohy jsou šifrované a klíče nejsou uložené vedle nich bez ochrany.
+- [ ] Retence záloh odpovídá účelu zpracování a privacy dokumentaci.
+- [ ] Obnovu pravidelně testujeme do izolovaného prostředí.
+- [ ] Umíme obnovit nejen celý systém, ale i vybraného zákazníka nebo záznam.
+- [ ] Po testu obnovy vzniká krátký zápis s časem, výsledkem a nápravnými kroky.
+- [ ] Runbook obnovy obsahuje vlastníky, kroky, ověření a komunikační postup.
+- [ ] Před obnovou po bezpečnostním incidentu ověřujeme, zda záloha není kompromitovaná.
+- [ ] Přístupy k zálohám jsou minimální, auditované a pravidelně kontrolované.
+
+> Codyho komentář: Záloha je jako hasicí přístroj. Nestačí ho mít někde „asi ve skladu“. Musíš vědět, kde je, jestli není prázdný a kdo ho umí použít, když už záclony dělají cosplay táboráku.
+
+Dobré zálohování není paranoie. Je to obchodní kontinuita, zákaznická důvěra a klid týmu. Nejlepší den na první restore test byl před prvním zákazníkem. Druhý nejlepší je dnes.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -2344,6 +2460,9 @@ Incidenty nikdy úplně nezmizí. Cílem není tvářit se, že se nic nepokazí
 - EDPB: [Frequently Asked Questions](https://www.edpb.europa.eu/contact/frequently-asked-questions_en)
 - EDPB: [Consent under GDPR — summary](https://www.edpb.europa.eu/system/files/2026-04/edpb-summary-consent_en.pdf)
 - EDPB: [Feedback on the cookie pledge draft principles](https://www.edpb.europa.eu/system/files/2023-12/edpb_letter_out20230098_feedback_on_cookie_pledge_draft_principles_en.pdf)
+- ENISA: [Technical implementation guidance on cybersecurity risk management measures, version 1.0](https://www.enisa.europa.eu/sites/default/files/2025-06/ENISA_Technical_implementation_guidance_on_cybersecurity_risk_management_measures_version_1.0.pdf)
+- NIST: [The NIST Cybersecurity Framework 2.0](https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf)
+- NIST: [Guide for Cybersecurity Event Recovery](https://www.nist.gov/publications/guide-cybersecurity-event-recovery)
 - OWASP: [Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
 - ENISA: [Incident Response Plan](https://tools.enisa.europa.eu/topics/risk-management/current-risk/bcm-resilience/bc-plan/incident-response-plan)
 - Atlassian: [Postmortems: Enhance Incident Management Processes](https://www.atlassian.com/incident-management/handbook/postmortems)
@@ -2370,3 +2489,4 @@ Incidenty nikdy úplně nezmizí. Cílem není tvářit se, že se nic nepokazí
 - **2026-09-12:** Doplněna příloha H o demo callu a prodeji bez nátlaku: kvalifikace, 30minutová agenda, otázky, follow-up, pipeline a privacy-first checklist.
 - **2026-09-12:** Doplněna příloha I o zákaznické podpoře jako produktovém systému: kanály, triage, odpovědi, dokumentace, privacy-first práce se support daty a týdenní review.
 - **2026-09-12:** Doplněna příloha J o incidentové komunikaci a status page: první hodina incidentu, šablony updateů, postmortem, runbook a privacy-first checklist.
+- **2026-09-12:** Doplněna příloha K o zálohách a obnově pro malý privacy-first SaaS: RPO/RTO, strategie 3-2-1, testy obnovy, kompromitované zálohy, runbook a checklist.
