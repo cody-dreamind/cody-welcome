@@ -854,6 +854,131 @@ Produktivní malý tým nepůsobí hekticky. Působí skoro nudně: ví, co je d
 
 ---
 
+## 7. Provoz a růst
+
+Růst není jen víc návštěvnosti, víc registrací a větší faktury. Růst je také víc okrajových případů, víc dotazů na podporu, víc integrací, víc právních detailů a víc situací, kdy se malá chyba tváří jako hlavní program dne. Pokud produkt začne fungovat, provoz se z administrativní nudy stane konkurenční výhodou.
+
+Dobře provozovaný SaaS nemusí mít armádu SRE inženýrů, šest dashboardů a incident commandera s vysílačkou. Potřebuje hlavně jasné odpovědi na praktické otázky:
+
+- Co poznáme jako první, když se něco rozbije?
+- Kdo má právo rozhodnout o rychlé opravě?
+- Jak zákazníkům vysvětlíme problém bez mlžení?
+- Jak obnovíme data, službu nebo důvěru?
+- Jak zajistíme, že se stejná chyba nebude vracet jako špatný sitcom?
+
+### Monitoring: měř to, co bolí zákazníka
+
+Monitoring začíná u zákaznického zážitku, ne u toho, co se dobře kreslí do grafu. CPU vytížené na 90 % může být problém, ale zákazníka obvykle zajímá jednodušší realita: jde se přihlásit, načte se aplikace, odejde e-mail, proběhne platba, uloží se práce.
+
+Pro malý SaaS doporučuji tři vrstvy monitoringu:
+
+- **Dostupnost:** hlavní web, přihlášení, API health endpoint, kritické veřejné stránky.
+- **Produktové toky:** registrace, reset hesla, pozvánka do týmu, vytvoření objednávky, vystavení faktury.
+- **Provozní zdraví:** chybovost, fronty úloh, odesílání e-mailů, naplnění disku, stav záloh, expirované certifikáty.
+
+Není nutné měřit všechno od prvního dne. Je nutné měřit věci, kvůli kterým zákazník napíše „nefunguje mi to“. Každý signál by měl mít jasnou reakci. Alert bez reakčního plánu je jen digitální hysterka.
+
+Privacy-first poznámka: monitoring nesmí být skrytá analytika v montérkách. Do logů neposílej celé formuláře, hesla, tokeny, platební údaje ani zbytečné osobní informace. U chybových reportů často stačí technický kontext, anonymní identifikátor účtu, typ události a korelační ID. Když už potřebuješ konkrétní osobní údaj pro podporu, musíš vědět proč, kde leží a kdy zmizí.
+
+### Logy a auditní stopa bez datového bahna
+
+Logy jsou skvělé, dokud se z nich nestane druhá databáze zákaznických dat. Častá chyba je logovat „pro jistotu“ celé objekty. Vypadá to pohodlně při debugování, ale za pár měsíců máš v logovacím nástroji e-maily, adresy, poznámky zákazníků a možná i údaje, které tam nikdy neměly být.
+
+Rozumný provozní log odpovídá na otázky:
+
+- Kdy se událost stala?
+- V jaké službě, verzi a prostředí?
+- Jaký účet nebo tenant byl dotčen, ideálně přes interní ID?
+- Jaký typ akce proběhl?
+- Jaký byl výsledek a chybový kód?
+- Který požadavek nebo job lze dohledat přes korelační ID?
+
+Auditní stopa je něco jiného než debug log. Auditní stopa má pomoct vysvětlit důležité změny: kdo změnil billing, kdo pozval uživatele, kdo smazal projekt, kdo změnil role, kdo exportoval data. Tady se vyplatí být přesný, ale stále minimalistický. Nechceš zaznamenávat obsah práce zákazníka, pokud k tomu nemáš velmi dobrý důvod.
+
+Praktické pravidlo: každý logovací řádek by měl projít testem „chtěl bych to ukázat zákazníkovi nebo auditorovi?“ Pokud odpověď zní „radši ne“, možná loguješ moc. A pokud odpověď zní „nevím, co to znamená“, loguješ špatně.
+
+### Podpora jako produktový senzor
+
+Support není odpadní kanál produktu. Je to radar. Ukazuje, kde je onboarding nejasný, kde pricing mate, kde UI slibuje něco jiného než backend, a kde dokumentace dělá mrtvého brouka.
+
+Malý tým by měl mít jednoduchou kategorizaci dotazů:
+
+- **Bug:** něco objektivně nefunguje.
+- **Nejasnost:** uživatel neví, co má udělat.
+- **Chybějící funkce:** zákazník chce nový výsledek.
+- **Billing nebo smlouva:** peníze, faktury, limity, nákupní proces.
+- **Privacy a bezpečnost:** data, přístupy, exporty, mazání, smluvní dokumenty.
+- **Integrace:** napojení na další systémy a jejich hraniční případy.
+
+Každá opakovaná otázka je kandidát na změnu produktu, textu nebo dokumentace. Pokud třikrát za měsíc vysvětluješ stejný billing limit, není problém v uživatelích. Problém je v tom, že tvůj produkt mluví potichu a support to musí tlumočit.
+
+Privacy-first support má jasnou disciplínu: nepřeposílat zákaznická data do náhodných nástrojů jen proto, že se tam lépe píše odpověď. Pokud používáš externí helpdesk, zkontroluj, jaká data do něj tečou, kde se zpracovávají, kdo k nim má přístup a jak dlouho se drží. U menšího SaaS často stačí jednoduchý systém s omezenými poli, dobrými šablonami a ruční eskalací pro citlivé případy.
+
+### Incidenty: klidný postup místo paniky v chatu
+
+Incident je událost, která znatelně dopadne na dostupnost, bezpečnost, data, platby nebo důvěru zákazníků. Nemusí to být drama s titulky. Může to být neodesílaný e-mail pro reset hesla, špatně spočítaná faktura, rozbitá integrace nebo pomalý admin, kvůli kterému support nestíhá.
+
+Incident proces pro malý tým může být velmi jednoduchý:
+
+1. **Pojmenuj dopad:** co nefunguje, komu a od kdy.
+2. **Urči vlastníka:** jedna osoba koordinuje opravu a komunikaci.
+3. **Zastav krvácení:** rollback, vypnutí funkce, ruční workaround, omezení škody.
+4. **Komunikuj:** interně stručně, externě pravdivě a bez technického kouře.
+5. **Obnov službu:** ověř kritické toky, ne jen „deploy prošel“.
+6. **Zapiš postmortem:** časová osa, příčina, dopad, co fungovalo, co změnit.
+
+Postmortem nemá hledat viníka. Má hledat systémovou změnu. Jestli někdo smazal produkční data jedním příkazem, otázka není jen „kdo to udělal“, ale „proč to vůbec šlo tak snadno“. Dobré postmortem končí konkrétními úkoly: test obnovy, lepší práva, validace migrace, upozornění, dokumentace, ochranná brzda.
+
+Codyho komentář: „Lidská chyba“ je často jen elegantní nálepka pro systém, který člověku dovolil udělat katastrofu rychleji než kávovar espresso.
+
+### Roadmapa růstu bez rozbití jádra
+
+Růst produktu svádí k tomu přidávat funkce, trhy a kanály rychleji, než tým zvládá udržet kvalitu. Jenže každá nová funkce je budoucí provozní závazek. Někdo ji bude testovat, vysvětlovat, monitorovat, migrovat, lokalizovat, účtovat a jednou možná mazat.
+
+Před větší funkcí si polož pět otázek:
+
+- Pomůže to existujícím zákazníkům častěji dosáhnout hodnoty?
+- Přinese to nový typ zákazníka, kterého opravdu chceme obsluhovat?
+- Umíme to provozovat bez ručního hrdinství?
+- Jaká data kvůli tomu budeme nově sbírat nebo zpracovávat?
+- Co vypneme, zjednodušíme nebo odložíme, aby se produkt nerozpadl vlastní vahou?
+
+Růst není jen přidávání. Růst je i schopnost říct: tuto integraci zatím ne, tento segment není náš, tento report raději nahradíme exportem, tuto funkci sloučíme s jinou. Produkt, který nikdy nemaže, postupně ztrácí tvar.
+
+### Expanze do Evropy: nejdřív provozní realita
+
+Evropa není jeden trh s jinými vlaječkami. Jazyk, fakturace, zvyklosti, podpora, právní texty, lokální důvěra a očekávání kolem dat se liší. Pro privacy-first SaaS je to ale výhoda: pokud máš od začátku čistou datovou mapu, evropský provoz, rozumné smlouvy a minimum trackerů, nelepíš důvěru až na konci jako nálepku „bio“ na sušenku.
+
+Před expanzí zkontroluj:
+
+- zda web a onboarding vysvětlují hodnotu bez lokálních inside jokeů,
+- zda faktury, DPH a měny odpovídají cílovým zákazníkům,
+- zda smluvní dokumenty a privacy informace dávají smysl pro daný segment,
+- zda support zvládne jazyk a časová očekávání,
+- zda infrastruktura a subprocesory odpovídají slibům o datech,
+- zda marketingové kanály nejsou závislé na šmírovací reklamě.
+
+Nejlepší první expanze je často nenápadná: přeložená landing page pro jeden segment, pár cílených rozhovorů, lokální reference, jednoduchý obsah a přímý kontakt. Ne hned pět jazyků, affiliate armáda a CRM s tolika poli, že by z toho omdlel i celník.
+
+### Checklist: provoz a růst bez chaosu
+
+- [ ] Sledujeme dostupnost hlavního webu, přihlášení a kritických produktových toků.
+- [ ] Každý alert má jasného vlastníka nebo postup, co se má stát jako první.
+- [ ] Logy neobsahují hesla, tokeny, platební údaje ani zbytečné osobní informace.
+- [ ] Auditní stopa pokrývá důležité změny rolí, billing nastavení, mazání a exporty.
+- [ ] Support dotazy třídíme podle typu a opakované problémy vracíme do produktu nebo dokumentace.
+- [ ] Citlivé support případy mají omezený přístup a jasný postup eskalace.
+- [ ] Máme jednoduchý incident proces: dopad, vlastník, mitigace, komunikace, obnova, postmortem.
+- [ ] Po incidentu vzniká konkrétní úkol, který snižuje šanci na opakování.
+- [ ] Před větší funkcí hodnotíme provozní náklady, nová data a dopad na podporu.
+- [ ] Roadmapa obsahuje i mazání, slučování nebo zjednodušování funkcí.
+- [ ] Před expanzí kontrolujeme jazyk, fakturaci, support, dokumenty a subprocesory.
+- [ ] Růst neměříme jen registracemi, ale i kvalitou provozu, retencí a důvěrou.
+
+Provoz je místo, kde se ukáže, jestli byl produkt navržený pro realitu. Marketing přivede lidi ke dveřím. Produkt je pustí dovnitř. Provoz rozhodne, jestli se budou chtít vrátit i po prvním problému.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -863,6 +988,9 @@ Produktivní malý tým nepůsobí hekticky. Působí skoro nudně: ví, co je d
 - EDPB: [Frequently Asked Questions](https://www.edpb.europa.eu/contact/frequently-asked-questions_en)
 - EDPB: [Consent under GDPR — summary](https://www.edpb.europa.eu/system/files/2026-04/edpb-summary-consent_en.pdf)
 - EDPB: [Feedback on the cookie pledge draft principles](https://www.edpb.europa.eu/system/files/2023-12/edpb_letter_out20230098_feedback_on_cookie_pledge_draft_principles_en.pdf)
+- OWASP: [Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+- ENISA: [Incident Response Plan](https://tools.enisa.europa.eu/topics/risk-management/current-risk/bcm-resilience/bc-plan/incident-response-plan)
+- Atlassian: [Postmortems: Enhance Incident Management Processes](https://www.atlassian.com/incident-management/handbook/postmortems)
 
 ---
 
@@ -874,3 +1002,4 @@ Produktivní malý tým nepůsobí hekticky. Působí skoro nudně: ví, co je d
 - **2026-09-11:** Dopsána kapitola 4 o marketingu bez spamu: positioning, obsah, newsletter, distribuce, komunitní zapojení, privacy-first měření a checklist.
 - **2026-09-11:** Dopsána kapitola 5 o privacy-first provozu v Evropě: datová mapa, minimalizace, evropský hosting, cookies, dokumentace, bezpečnost a provozní checklist.
 - **2026-09-12:** Dopsána kapitola 6 o produktivitě malého SaaS týmu: rozhodování, backlog, týdenní rytmus, automatizace, komunikace, metriky a checklist.
+- **2026-09-12:** Dopsána kapitola 7 o provozu a růstu: monitoring, logy, support, incidenty, roadmapa, evropská expanze a provozní checklist.
