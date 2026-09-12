@@ -2124,6 +2124,109 @@ Demo call není tlaková zkouška extroverze. Je to servisní rozhovor: pochopit
 
 ---
 
+## Příloha I: Zákaznická podpora jako produktový systém
+
+Podpora u malého SaaS často začne nevinně: zakladatel odpovídá na e-maily, řeší dotazy v chatu, opravuje drobnosti a u toho si říká, že „to zatím není potřeba systematizovat“. Jenže právě podpora je místo, kde se nejrychleji ukáže, jestli produkt lidé opravdu chápou, kde jim vzniká stres a co tým slibuje rychleji, než stíhá doručit.
+
+Dobrá podpora není jen milé odpovídání. Je to produktový radar, reputační pojistka a provozní disciplína. Když ji nastavíš brzy, ušetříš si chaos, přeposílání screenshotů po třech kanálech a zoufalé hledání toho, kdo vlastně slíbil opravu „do zítřka“.
+
+### Definuj kanály dřív, než si je zákazníci vymyslí sami
+
+Malý tým nepotřebuje pět support kanálů. Potřebuje jasně říct, kudy se řeší co. Pokud zákazník může psát na osobní WhatsApp zakladatele, LinkedIn, kontaktní formulář, fakturační e-mail a ještě komentovat dokumentaci, podpora se rozpadne dřív, než dorazí první větší incident.
+
+Praktické minimum:
+
+- **Jeden hlavní support e-mail** pro běžné dotazy a chyby.
+- **Samostatný fakturační kontakt** pro platby, smlouvy a účetnictví.
+- **Status stránka nebo jednoduchý provozní záznam** pro výpadky a incidenty.
+- **Znalostní báze** pro opakované návody, limity a řešení známých problémů.
+- **Interní poznámka v CRM nebo tabulce** pro kontext zákazníka, který nemá být schovaný v hlavě jednoho člověka.
+
+U privacy-first provozu je důležité i to, aby zákazník věděl, kam neposílat citlivá data. Do veřejného chatu, komunitního fóra nebo běžného e-mailu nepatří exporty databází, hesla, tokeny ani seznamy osobních údajů. Dej lidem bezpečnou alternativu a napiš ji srozumitelně.
+
+### Triage: ne každý ticket hoří stejně
+
+Bez triage se tým učí reagovat na nejhlasitějšího zákazníka, ne na největší dopad. Každý požadavek potřebuje rychlé zařazení: chyba, dotaz, požadavek na funkci, fakturace, bezpečnost, incident nebo onboarding.
+
+Jednoduchá priorita může vypadat takto:
+
+| Priorita | Typ situace | Reakce týmu |
+| --- | --- | --- |
+| P0 | výpadek služby, ztráta dostupnosti, bezpečnostní incident | okamžitě potvrdit, otevřít incident, průběžně komunikovat |
+| P1 | kritická funkce nefunguje více zákazníkům | potvrdit dopad, najít workaround, naplánovat opravu |
+| P2 | chyba omezuje jednoho zákazníka, existuje náhradní cesta | zařadit do opravy, dát realistický termín |
+| P3 | dotaz, drobná chyba, kosmetika, přání | odpovědět, odkázat na dokumentaci nebo backlog |
+
+Triage nemusí být korporátní rituál. Stačí, když má každý ticket vlastníka, prioritu, další krok a stav. Nejhorší stav podpory není „máme hodně ticketů“. Nejhorší stav je „nevíme, co se s nimi děje“.
+
+### Odpověď má uklidnit i posunout věc dál
+
+Dobrá support odpověď není román. Má potvrdit, že tým problém pochopil, říct co se stane dál a snížit nejistotu zákazníka. U incidentů je často lepší stručná pravdivá zpráva než dlouhé ticho zakončené perfektním vysvětlením.
+
+Základní šablona odpovědi:
+
+> Dobrý den, díky za zprávu. Vidíme problém s [konkrétní část]. Dopad je zatím [koho se týká / čeho se týká]. Teď děláme [další krok]. Další update pošleme nejpozději [čas]. Pokud potřebujete pokračovat hned, použijte prosím [workaround].
+
+U běžných dotazů funguje podobná logika: odpověz přímo, přidej odkaz na návod a napiš, co má zákazník udělat, pokud to nepomůže. Nezakončuj odpověď neurčitým „snad to pomůže“. Lepší je: „Kdyby se import znovu zastavil, pošlete nám ID importu a čas spuštění; podíváme se do logu.“
+
+### Dokumentace vzniká ze supportu, ne z fantazie
+
+Nejlepší témata do dokumentace najdeš ve skutečných dotazech. Pokud se stejná otázka objeví potřetí, napiš návod. Pokud zákazník špatně chápe stejný krok onboardingu, uprav produkt nebo microcopy. Pokud support musí vysvětlovat obchodní pravidlo, které nikde není napsané, chybí část dokumentace.
+
+U každého opakovaného dotazu si polož tři otázky:
+
+- Dá se odpověď převést na krátký návod?
+- Dá se problém odstranit přímo v produktu?
+- Dá se zákazníkovi ukázat správný další krok dřív, než napíše na podporu?
+
+Znalostní báze nemusí být obří portál. Pro první fázi stačí několik dobře udržovaných stránek: první nastavení, správa uživatelů, fakturace, export dat, mazání účtu, import, běžné chyby a kontakt na podporu. Důležité je, aby návody měly datum aktualizace a vlastníka. Zastaralý návod je horší než žádný, protože vytváří falešnou jistotu.
+
+### Support data sbírej střídmě
+
+Podpora často svádí ke sběru všeho: screenshoty, exporty, logy, session replay, kopie databází, osobní údaje „pro jistotu“. Privacy-first přístup je přísnější a praktičtější: sbírej jen to, co potřebuješ k vyřešení problému, a jakmile to nepotřebuješ, nemačkej to navždy do šuplíku.
+
+Pravidla pro support data:
+
+- Neptej se na hesla, tokeny ani celé databázové exporty.
+- Screenshoty s osobními údaji ber jako citlivý materiál, ne jako dekoraci v ticketu.
+- Logy rediguj nebo filtruj, pokud obsahují osobní data.
+- U příloh nastav retenční dobu a odpovědnost za mazání.
+- Přístupy do zákaznického účtu používej jen se souhlasem a zapisuj proč.
+- Bezpečnostní hlášení odděl od běžných dotazů a neřeš je ve veřejném vlákně.
+
+> Codyho komentář: „Pošlete nám heslo, my se na to podíváme“ je support verze kouření u benzínky. Možná to jednou projde. Ale nechceš z toho dělat proces.
+
+### Z podpory dělej produktové rozhodnutí
+
+Jednou týdně projdi support a vytáhni signály pro produkt. Ne každý ticket znamená novou funkci, ale opakované bolesti ukazují, kde produkt není dost jasný, robustní nebo hodnotný.
+
+Týdenní support review může mít pět bodů:
+
+1. Kolik ticketů přišlo a jaké byly hlavní kategorie?
+2. Které tři problémy zákazníkům nejvíc bránily v práci?
+3. Co se opakovalo a má se změnit v dokumentaci nebo produktu?
+4. Který ticket ukázal riziko v datech, přístupech nebo provozu?
+5. Co uděláme tento týden, aby se stejný problém neopakoval?
+
+Výstupem nemá být prezentace. Stačí krátký zápis: rozhodnutí, vlastník, termín. Pokud support review končí jen povzdechem „lidi to neumí používat“, tým si nevzal lekci. Lidé používají produkt tak, jak jim to produkt dovolí.
+
+### Checklist: support systém pro malý SaaS
+
+- [ ] Zákazníci znají jeden hlavní support kanál a očekávanou dobu reakce.
+- [ ] Fakturace, bezpečnostní hlášení a incidenty mají oddělený postup.
+- [ ] Každý ticket má kategorii, prioritu, vlastníka a další krok.
+- [ ] Existuje jednoduchá šablona pro incidentovou a běžnou odpověď.
+- [ ] Opakované dotazy se mění na dokumentaci nebo produktové úpravy.
+- [ ] Support tým nesbírá hesla, tokeny ani zbytečné osobní údaje.
+- [ ] Přílohy a logy mají jasnou retenční dobu a pravidla mazání.
+- [ ] Přístup do zákaznického účtu se zapisuje a používá jen s důvodem.
+- [ ] Jednou týdně probíhá krátké support review s konkrétními rozhodnutími.
+- [ ] Produktový backlog rozlišuje chybu, zlepšení, přání a obchodní výjimku.
+
+Podpora není brzda růstu. Je to místo, kde zákazníci zadarmo popisují, proč produkt nefunguje tak hladce, jak sis myslel. Když z podpory uděláš systém, neztratíš lidskost — naopak. Zákazník dostane jasnější odpověď, tým méně chaosu a produkt lepší signály než z libovolného vanity dashboardu.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -2159,3 +2262,4 @@ Demo call není tlaková zkouška extroverze. Je to servisní rozhovor: pochopit
 - **2026-09-12:** Doplněna příloha F o offboardingu, exportu a mazání dat: scénáře odchodu, strojově čitelný export, retenční proces, žádosti subjektů údajů a checklist.
 - **2026-09-12:** Doplněna příloha G o cenotvorbě a balíčcích pro malý privacy-first SaaS: hodnota, cenová metrika, tři tarify, pricing stránka, slevy, zdražování a checklist.
 - **2026-09-12:** Doplněna příloha H o demo callu a prodeji bez nátlaku: kvalifikace, 30minutová agenda, otázky, follow-up, pipeline a privacy-first checklist.
+- **2026-09-12:** Doplněna příloha I o zákaznické podpoře jako produktovém systému: kanály, triage, odpovědi, dokumentace, privacy-first práce se support daty a týdenní review.
