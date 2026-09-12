@@ -1575,6 +1575,120 @@ Před psaním vyplň krátký brief. Ušetří ti to texty, které mají hezký 
 
 Obsahový systém nemusí být hlučný. Má být spolehlivý. Když každý měsíc přibude jeden dobrý kus, který pomáhá zákazníkům rozhodovat a týmu prodávat bez manipulace, marketing začne být méně loterie a více infrastruktura důvěry.
 
+
+## Příloha E: Onboarding, který nezabije důvěru po první platbě
+
+Prodej nekončí podpisem objednávky. U SaaS produktů často právě tam začíná nejcitlivější část vztahu: zákazník už věří dost na to, aby zaplatil, ale ještě neviděl každodenní hodnotu. Pokud onboarding působí chaoticky, produkt může být technicky dobrý a stejně ztratí momentum.
+
+Onboarding není série uvítacích e-mailů s veselým emoji. Je to řízený přechod od slibu k návyku. Člověk nebo tým musí pochopit, co udělat jako první, jak pozná úspěch a kam se obrátit, když narazí. Privacy-first onboarding k tomu přidává ještě jednu věc: zákazník má od začátku vědět, co se děje s jeho daty.
+
+### První den rozhoduje o tempu
+
+První kontakt po platbě nebo aktivaci má být krátký, konkrétní a uklidňující. Zákazník nepotřebuje encyklopedii funkcí. Potřebuje vědět, že udělal správný krok a co má udělat během nejbližších 15 minut.
+
+Dobrá první zpráva obsahuje:
+
+- **Potvrzení cíle:** proč produkt používá a jaký výsledek se řeší.
+- **Jeden první krok:** například nahrát CSV, vytvořit první projekt, pozvat jednoho kolegu nebo rezervovat kickoff.
+- **Očekávání:** kolik času krok zabere a co se stane potom.
+- **Kontakt:** kam napsat, když něco nejde.
+- **Datový detail:** stručně, jaká data se při prvním kroku zpracují.
+
+Příklad: „Začněte importem jedné testovací tabulky. Import trvá zhruba 10 minut, data zůstanou v evropském provozu a před finálním uložením uvidíte náhled. Pokud narazíte, odpovězte přímo na tento e-mail.“ To je lepší než „Vítejte v budoucnosti produktivity“, protože budoucnost produktivity si zákazník nekoupil. Koupil si méně chaosu.
+
+### Aktivace je konkrétní akce, ne pocit
+
+Každý produkt by měl mít jasně pojmenovaný aktivační moment. To není „uživatel se přihlásil“. Přihlášení je jen otevření dveří. Aktivace nastane, když zákazník poprvé zažije hodnotu.
+
+Příklady aktivačních momentů:
+
+- plánovací SaaS: první tým má rozdělené úkoly na příští týden,
+- fakturační nástroj: první faktura je odeslaná a zaplacená,
+- analytický nástroj: zákazník vidí první srozumitelný report bez ruční práce,
+- helpdesk: první požadavek je vyřešený přes nový proces,
+- obsahový nástroj: první článek je publikovaný a má měřitelný další krok.
+
+Aktivační moment napiš do interní dokumentace i do onboardingu. Vše před ním má pomáhat zákazníkovi dojít k hodnotě rychleji. Vše po něm může rozvíjet návyk, pokročilé funkce a rozšíření účtu.
+
+> Codyho komentář: Pokud tým neumí jednou větou říct, kdy zákazník poprvé vyhrál, bude onboarding pravděpodobně jen prohlídka tlačítek. A prohlídky tlačítek patří do muzea softwaru, ne do růstového produktu.
+
+### Neposílej víc informací, než člověk unese
+
+Onboarding často selže ne proto, že informací je málo, ale protože přijdou ve špatný čas. Nový zákazník nechce první den číst o API, fakturačních limitech, exportech, ročním plánu a partnerském programu. Chce udělat první věc bez pocitu, že vstoupil do kokpitu letadla.
+
+Rozděl komunikaci do vrstev:
+
+- **Start:** první krok, kontakt, základní bezpečnost a datová pravidla.
+- **Aktivace:** konkrétní workflow, které doručí první hodnotu.
+- **Návyk:** opakované použití, pozvání týmu, pravidelná kontrola.
+- **Rozšíření:** integrace, pokročilé funkce, automatizace, vyšší tarif.
+- **Správa:** exporty, role, auditní stopa, fakturace, ukončení.
+
+Každá vrstva může mít vlastní krátký e-mail, nápovědu v aplikaci nebo článek ve znalostní bázi. Důležité je, aby zákazník vždy viděl jen další smysluplný krok, ne celý vesmír možností.
+
+### Znalostní báze má šetřit podporu i zákazníka
+
+Dobrá nápověda není skladiště screenshotů. Je to samoobslužný support pro opakované situace. Začni nejčastějšími otázkami, ne tím, co se nejlépe dokumentuje.
+
+První znalostní báze může mít jen pár článků:
+
+- Jak začít během prvního dne.
+- Jak pozvat kolegy a nastavit role.
+- Jak importovat nebo exportovat data.
+- Jak řešit nejčastější chyby.
+- Jak funguje fakturace a ukončení služby.
+- Jaká data zpracováváme a proč.
+
+Privacy-first detail: článek o datech by neměl být schovaný za právnickým PDF. Napiš lidské shrnutí: jaké kategorie dat produkt používá, k čemu slouží, kdo k nim má přístup, kde běží infrastruktura a jak lze data exportovat nebo smazat. Plné dokumenty mohou být odkazované, ale provozní realita musí být pochopitelná.
+
+### Onboarding měř podle rizik, ne podle vanity grafů
+
+Měření onboardingu má odpovědět na otázku: kde zákazník ztrácí důvěru nebo momentum? Nepotřebuješ sledovat každý pohyb myši. Potřebuješ pár signálů, které vedou k rozhodnutí.
+
+Sleduj hlavně:
+
+- kolik zákazníků dokončí první klíčový krok,
+- jak dlouho trvá cesta k aktivačnímu momentu,
+- kde se lidé ptají podpory na stejnou věc,
+- které kroky vyžadují ruční zásah týmu,
+- kolik zákazníků se vrátí k produktu během prvního týdne,
+- jaké námitky nebo obavy se objevují při nastavování dat.
+
+Když se opakuje stejný problém, nepiš jen další vysvětlující e-mail. Zvaž, jestli není rozbité rozhraní, copywriting, výchozí nastavení nebo obchodní slib. Support ticket je někdy bug. Jindy je to špatně pojmenovaný produkt.
+
+### Šablona uvítacího e-mailu
+
+Krátká šablona pro B2B SaaS po aktivaci účtu:
+
+> Dobrý den,
+>
+> vítejte v [produkt]. Cílem prvního týdne je [konkrétní výsledek].
+>
+> Začněte tímto krokem: [jedna akce]. Zabere přibližně [čas] a po dokončení uvidíte [výsledek].
+>
+> Data zpracováváme za účelem [účel] a běží v [stručný provozní popis]. Praktické informace najdete zde: [odkaz na data/privacy článek].
+>
+> Pokud se zaseknete, odpovězte na tento e-mail nebo napište na [support kontakt]. Ozveme se do [reakční doba].
+>
+> Codyho poznámka: první týden nemá být maraton funkcí. Stačí doručit první měřitelnou hodnotu.
+
+Šablonu nepřebírej slepě. Uprav ji podle segmentu, tónu značky a typu zákazníka. Enterprise kupující ocení jiný detail než zakladatel malé firmy, který chce hlavně rychle odstranit bolest.
+
+### Checklist: onboarding bez ztráty důvěry
+
+- Máme jasně definovaný aktivační moment.
+- První e-mail vede k jedné konkrétní akci.
+- Zákazník ví, kam se obrátit při problému.
+- Datová pravidla jsou vysvětlena lidsky a dohledatelně.
+- Onboarding je rozdělený podle fáze, ne podle seznamu funkcí.
+- Znalostní báze řeší nejčastější otázky z podpory.
+- Měříme dokončení klíčového kroku a čas k první hodnotě.
+- Opakované dotazy převádíme na lepší produkt, text nebo nápovědu.
+- Role a přístupy jsou nastavené podle potřeby, ne stylem „admin všem“.
+- Ukončení služby má jasný postup pro export a smazání dat.
+
+Onboarding je první provozní důkaz, že produkt myslí na zákazníka i po prodeji. Když je klidný, konkrétní a datově střídmý, podporuje přesně tu důvěru, kterou privacy-first SaaS potřebuje: zákazník ví, co má dělat, proč to dělá a co se děje s jeho daty.
+
 ---
 
 ## Zdroje
@@ -1606,3 +1720,4 @@ Obsahový systém nemusí být hlučný. Má být spolehlivý. Když každý mě
 - **2026-09-12:** Doplněna příloha B o prvním placeném pilotu: nabídka, privacy-first nastavení, týdenní řízení, měření a ukončení pilotu.
 - **2026-09-12:** Doplněna příloha C o přechodu z pilotu na první placený provoz: nabídka, výjimky, onboarding, support, fakturace a checklist před druhým zákazníkem.
 - **2026-09-12:** Doplněna příloha D s 90denním obsahovým systémem bez honění algoritmů: tematická mapa, měsíční aktivum, privacy-first distribuce, měření a brief.
+- **2026-09-12:** Doplněna příloha E o zákaznickém onboardingu po první platbě: aktivační moment, vrstvená komunikace, znalostní báze, měření a uvítací e-mail.
