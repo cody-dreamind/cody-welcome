@@ -2562,6 +2562,118 @@ Výsledek úklidu nemusí být dlouhý report. Stačí tři sloupce: ponechat, o
 
 Dodavatelský stack je součást produktu. Když je čistý, zdokumentovaný a přiměřeně evropský, zvyšuje důvěru. Když je chaotický, dřív nebo později začne produkt řídit on. A to nechceš — SaaS má sloužit zákazníkům, ne sbírce zapomenutých trial účtů.
 
+
+## Příloha M: Interní dokumentace, která přežije dovolenou i incident
+
+Malý SaaS tým často funguje dlouho na ústní dohodě. Jeden člověk ví, kde se obnovuje databáze, druhý ví, proč se nepoužívá určitá knihovna, třetí si pamatuje, co slíbil prvnímu zákazníkovi při pilotu. Dokud jsou všichni online, vypadá to efektivně. Pak přijde dovolená, nemoc, incident nebo rychlý onboarding nového člověka — a z „všichni to víme“ je archeologická expedice v chatu.
+
+Interní dokumentace není korporátní sport v psaní stránek pro radost. Je to způsob, jak snížit závislost na jednotlivcích, zrychlit rozhodování a chránit zákaznická data. Privacy-first provoz navíc potřebuje dohledatelné odpovědi: proč sbíráme tato data, kdo má přístup, kde běží služba, jak řešíme žádost o výmaz, co uděláme při incidentu.
+
+> Codyho komentář: Dokumentace nemusí být krásná jako landing page. Stačí, když ji člověk ve stresu najde, pochopí a nepokazí podle ní produkci. To je překvapivě vysoká laťka.
+
+### Dokumentuj rozhodnutí, ne jen návody
+
+Návod říká, jak něco udělat. Rozhodnutí říká, proč to děláme právě takhle. V provozu SaaS potřebuješ obojí. Když máš jen návody, nový člověk spustí správný příkaz, ale nepozná, kdy ho spustit nemá. Když máš jen strategické poznámky, tým chápe filozofii, ale při incidentu hledá konkrétní krok.
+
+U každého většího rozhodnutí stačí krátký záznam:
+
+- **Kontext:** jaký problém jsme řešili.
+- **Rozhodnutí:** co jsme vybrali.
+- **Alternativy:** co jsme odmítli a proč.
+- **Dopad:** čeho se rozhodnutí týká — produkt, bezpečnost, cena, data, zákazník.
+- **Datum a vlastník:** kdy vzniklo a kdo ho umí vysvětlit.
+- **Revize:** kdy se k němu vrátíme.
+
+Příklad: „Pro transakční e-maily používáme evropského poskytovatele s DPA, protože reset hesla a fakturační komunikace nesmí záviset na osobním Gmailu. Newsletter neposíláme přes stejný nástroj, dokud nemáme jasný souhlas a preference odběru.“ Takový záznam je krátký, ale chrání tým před tím, aby za půl roku někdo přidal marketingový import kontaktů do systému určeného jen pro servisní e-maily.
+
+### Minimum provozní wiki pro první rok
+
+První dokumentace nemusí mít padesát sekcí. Začni místy, která mají největší dopad na provoz, zákazníky a data. Praktické minimum:
+
+- **Mapa systému:** hlavní komponenty, domény, databáze, fronty, úložiště, externí služby.
+- **Datová mapa:** jaké osobní a zákaznické údaje sbíráme, proč, kde jsou a jak dlouho je držíme.
+- **Přístupy:** role, kdo schvaluje přístup, jak se odebírá, kde se používá 2FA/SSO.
+- **Runbooky:** deploy, rollback, obnova záloh, incident, výpadek e-mailů, výpadek plateb.
+- **Zákaznické procesy:** onboarding, offboarding, export, výmaz, změna vlastníka účtu.
+- **Support playbook:** typické otázky, priorita tiketů, eskalace, co nikdy neposílat do chatu.
+- **Dodavatelé:** vendor karty, subprocesoři, odkazy na DPA a bezpečnostní dokumenty.
+- **Produktová pravidla:** co patří do MVP, co je enterprise výjimka, co zatím vědomě neděláme.
+
+Dobré pravidlo: pokud by absence informace zastavila tým na více než třicet minut, patří do wiki. Pokud by chyba v informaci mohla poškodit data zákazníka, patří do wiki s vlastníkem a pravidelnou revizí.
+
+### Jak psát runbook, který někdo opravdu použije
+
+Runbook piš pro člověka, který je unavený, má otevřený incident a nechce luštit interní folklór. Každý runbook by měl mít stejnou strukturu:
+
+1. **Kdy použít:** jasný spouštěč, například „API vrací 5xx déle než 5 minut“.
+2. **Kdo rozhoduje:** role, ne jen jméno člověka.
+3. **Rizika:** co se může pokazit, jaká data jsou dotčená.
+4. **Kroky:** krátké očíslované body, ideálně s příkazy nebo odkazy.
+5. **Ověření:** jak poznáme, že je problém vyřešený.
+6. **Komunikace:** komu dát vědět a jakou šablonu použít.
+7. **Zápis:** kam uložit časovou osu a následné úkoly.
+
+Nejhorší runbook je ten, který začíná „prostě restartuj službu“. Restart může být správný krok. Ale bez kontextu nevíš, jestli tím nepřerušíš migraci, neztratíš joby ve frontě nebo nepřepíšeš diagnostické logy. U kritických kroků přidej krátké varování: „Před tímto krokem zastav cron úlohy“ nebo „Neprováděj během probíhající migrace databáze“.
+
+### Privacy-first dokumentace přístupů
+
+Přístupy jsou místo, kde se v malých týmech často hromadí technický dluh. Někdo dostal admina kvůli jedné urgentní věci a zůstal mu navždy. Agentura měla přístup při launchi a nikdo ho neodebral. Testovací integrace má token s produkčními právy. Tohle není dramatická scéna z bezpečnostního filmu. Tohle je úterý.
+
+Základní evidence přístupů:
+
+- kdo má přístup do produkce,
+- jakou má roli a proč,
+- kdo přístup schválil,
+- kdy byl naposledy použit nebo revidován,
+- jak se přístup odebere,
+- zda je zapnuté 2FA/SSO,
+- které servisní účty a API tokeny existují.
+
+Privacy-first princip je jednoduchý: lidé a služby mají mít jen takový přístup, který potřebují pro konkrétní práci. Ne proto, že jim ho kdysi někdo dal a „zatím se nic nestalo“. Přístupy kontroluj minimálně měsíčně u kritických systémů a po každé změně spolupracovníka, dodavatele nebo role.
+
+### Dokumentace pro zákaznickou důvěru
+
+Ne všechno interní patří ven. Ale část dokumentace může být veřejným signálem důvěry: status page, seznam subprocesorů, privacy policy, stručný bezpečnostní přehled, changelog, stránka s dostupností podpory a postup pro nahlášení bezpečnostního problému.
+
+Veřejná dokumentace má být srozumitelná, ne právní mlha. Napiš například:
+
+- kde služba běží,
+- jaké typy dat typicky zpracovává,
+- jak zákazník získá export,
+- jak požádá o výmaz,
+- jak hlásit bezpečnostní problém,
+- jak se dozví o incidentech nebo plánované údržbě,
+- jaké hlavní subprocesory používáš.
+
+Tím neprozrazuješ citlivé interní detaily. Jen zákazníkovi ukazuješ, že provoz není improvizace s produkční databází v jedné ruce a kávou v druhé.
+
+### Týdenní údržba místo velkého úklidu
+
+Dokumentace stárne. Nejlepší obrana není každoroční „wiki wellness víkend“, ale malý rytmus. Přidej do týdenního review tři otázky:
+
+1. Změnilo se něco v produktu, provozu nebo datech, co musí být zapsané?
+2. Narazili jsme tento týden na otázku, kterou jsme museli lovit v chatu?
+3. Existuje runbook nebo stránka, které už nevěříme?
+
+Když odpověď zní ano, oprav jednu věc hned. Dokumentační dluh se splácí nejlépe po drobných. Pokud čekáš na den, kdy tým „bude mít čas všechno sjednotit“, gratuluji, právě jsi vytvořil nový fantasy žánr.
+
+### Checklist: interní dokumentace pro malý SaaS
+
+- [ ] Máme mapu systému s hlavními komponentami, doménami, databázemi a externími službami.
+- [ ] Máme datovou mapu osobních a zákaznických údajů včetně účelu a retence.
+- [ ] U významných technických a privacy rozhodnutí zapisujeme kontext, alternativy a vlastníka.
+- [ ] Existují runbooky pro deploy, rollback, incident, obnovu záloh a odchod zákazníka.
+- [ ] Runbooky obsahují spouštěč, rozhodovací roli, kroky, ověření a komunikaci.
+- [ ] Evidence přístupů ukazuje, kdo má produkční a administrátorská práva a proč.
+- [ ] API tokeny a servisní účty mají vlastníka, účel a plán rotace.
+- [ ] Support playbook říká, co se smí a nesmí posílat do externích nástrojů.
+- [ ] Veřejná dokumentace vysvětluje privacy, subprocesory, export, výmaz a hlášení problémů.
+- [ ] Každý týden opravíme aspoň jednu zastaralou nebo chybějící informaci.
+
+Dobrá dokumentace nedělá z týmu byrokraty. Dělá z něj tým, který si pamatuje i ve chvíli, kdy jednotlivci zrovna nemůžou. A to je v malém SaaS stejně důležité jako čistý kód.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -2606,3 +2718,4 @@ Dodavatelský stack je součást produktu. Když je čistý, zdokumentovaný a p
 - **2026-09-12:** Doplněna příloha J o incidentové komunikaci a status page: první hodina incidentu, šablony updateů, postmortem, runbook a privacy-first checklist.
 - **2026-09-12:** Doplněna příloha K o zálohách a obnově pro malý privacy-first SaaS: RPO/RTO, strategie 3-2-1, testy obnovy, kompromitované zálohy, runbook a checklist.
 - **2026-09-12:** Doplněna příloha L o výběru dodavatelů a subprocesorů: vendor karta, privacy-first filtr, schvalování nástrojů, čtvrtletní úklid a checklist.
+- **2026-09-12:** Doplněna příloha M o interní dokumentaci pro malý SaaS: rozhodnutí, provozní wiki, runbooky, evidence přístupů, veřejná důvěra a checklist.
