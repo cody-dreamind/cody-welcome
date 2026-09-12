@@ -2795,6 +2795,141 @@ Metriky mají pomáhat stavět lepší produkt, ne vyrábět tajnou kameru v apl
 
 ---
 
+## Příloha O: Experimenty a A/B testy bez datového hladu
+
+Experiment není omluva pro to, aby tým pustil do produktu dvacet variant, nasbíral všechno o každém uživateli a pak v pondělí oznámil, že „data něco naznačují“. Dobrý experiment je malá sázka s jasnou otázkou, omezeným rozsahem, předem domluveným měřením a koncem. Když nemá konec, není to experiment. Je to nový chaos v produkci.
+
+Privacy-first experimentování má jednu výhodu: nutí tým přemýšlet předem. Místo „změříme všechno a pak uvidíme“ se ptáš: co chceme zjistit, koho se to týká, jaké minimum dat stačí a kdy rozhodneme?
+
+### Začni hypotézou, ne nápadem
+
+Nápad zní: „Zkusme na homepage větší tlačítko.“ Hypotéza zní: „Když na homepage nahradíme obecné CTA `Kontaktujte nás` konkrétním CTA `Domluvit 20minutovou konzultaci`, zvýší se počet kvalifikovaných poptávek, protože návštěvník lépe pochopí další krok.“
+
+Dobrá hypotéza obsahuje:
+
+- **změnu:** co přesně upravíme,
+- **cílovou skupinu:** koho se změna týká,
+- **očekávaný dopad:** jaký výsledek má nastat,
+- **důvod:** proč si myslíme, že to pomůže,
+- **měřítko rozhodnutí:** podle čeho řekneme ano, ne nebo pokračovat.
+
+Bez hypotézy se experiment mění na estetickou debatu. A estetická debata o barvě tlačítka je jeden z nejdražších způsobů, jak předstírat práci.
+
+### Ne každý test musí být A/B test
+
+A/B test dává smysl, když máš dost návštěvnosti, stabilní konverzní tok a jednu jasnou proměnnou. Malý B2B SaaS často nic z toho nemá. Pokud měsíčně získáváš deset relevantních poptávek, statisticky čistý test tlačítka tě spíš uspí než posune.
+
+Používej typ testu podle situace:
+
+- **Kvalitativní test:** ukaž stránku pěti lidem z cílovky a sleduj, co pochopí bez vysvětlování.
+- **Sekvenční test:** změň jednu věc na dva týdny, porovnej s předchozím obdobím a přidej kontext z kampaní a sezóny.
+- **Concierge test:** doruč novou službu ručně dřív, než ji zabuduješ do produktu.
+- **E-mailový test:** pošli dvě varianty nabídky malému segmentu, ale měř odpovědi a kvalitu konverzací, ne jen open rate.
+- **Landing page test:** vytvoř samostatnou stránku pro konkrétní segment a sleduj kvalitu leadů.
+- **Produktový prototyp:** pusť funkci nejdřív interně nebo několika pilotním zákazníkům.
+
+Čistý A/B test je nástroj, ne důkaz dospělosti. Dospělost je vybrat metodu, která odpovídá realitě produktu.
+
+### Experiment karta na jednu stránku
+
+Každý experiment zapiš před spuštěním. Stačí jedna stránka, ale musí být konkrétní:
+
+```text
+Název: Konkrétnější CTA na homepage
+Otázka: Zvýší jasnější další krok počet kvalifikovaných poptávek?
+Hypotéza: CTA „Domluvit 20minutovou konzultaci“ přivede více relevantních lidí než „Kontaktujte nás“.
+Rozsah: Homepage, hero sekce, desktop i mobil
+Cílová skupina: Návštěvníci z organického obsahu a přímých odkazů
+Metriky: počet odeslaných poptávek, kvalita poptávek podle ručního hodnocení, bounce na homepage
+Data: agregovaná návštěvnost a počet odeslání formuláře, žádné individuální profilování
+Délka: 14 dní nebo minimálně 300 relevantních návštěv
+Rozhodnutí: ponechat, pokud vzroste kvalita nebo počet poptávek bez zhoršení relevance
+Vlastník: produkt / marketing
+```
+
+Tahle karta chrání tým před dvěma klasickými nemocemi: měnit pravidla během hry a po skončení si výsledek vysvětlit tak, aby vyhrál původní názor nejhlasitějšího člověka.
+
+### Privacy-first měření experimentů
+
+Experiment potřebuje měření, ale nepotřebuje sledovací bufet. Většina webových a produktových experimentů si vystačí s agregovanými počty, krátkou retencí detailů a ruční kvalifikací výsledků.
+
+Pravidla pro privacy-first experiment:
+
+- měř události na úrovni stránky, účtu nebo segmentu, ne na úrovni osobního profilu, pokud to není nutné,
+- nepřidávej nové marketingové pixely jen kvůli jedné hypotéze,
+- neukládej texty formulářů do analytiky,
+- nepoužívej session replay jako výchozí nástroj,
+- předem urči retenci detailních dat,
+- u zákaznických rozhovorů zapisuj poznatky, ne zbytečné osobní detaily,
+- odděl experimentální poznámky od produkčních dat zákazníka.
+
+Pokud experiment vyžaduje zásah do souhlasu, cookies nebo nového subprocesora, nejde o „malou marketingovou změnu“. Je to změna provozu a musí projít stejným filtrem jako každá jiná integrace.
+
+### Vyhodnocuj i kvalitu, ne jen počet
+
+Marketingový experiment může zvýšit počet leadů a zároveň zhoršit byznys. Stačí slibovat moc obecně, přitáhnout zvědavé lidi bez rozpočtu nebo vytvořit očekávání, které produkt neumí splnit.
+
+Vedle kvantity sleduj kvalitu:
+
+- odpovídá lead cílovému segmentu,
+- má problém, který produkt skutečně řeší,
+- rozumí ceně nebo aspoň modelu spolupráce,
+- dokáže popsat dopad problému,
+- je ochotný udělat další krok,
+- nezvyšuje neúměrně support a onboarding náklady.
+
+U malého SaaS je často lepší získat tři dobré rozhovory než třicet prázdných registrací. Registrace bez kontextu vypadá hezky v grafu. Dobrý rozhovor mění produkt.
+
+### Experimenty v produktu: bezpečně a vratně
+
+Produktové experimenty mají větší riziko než text na landing page. Dotýkají se workflow, dat a důvěry. Proto je navrhuj tak, aby šly vypnout, vrátit a vysvětlit.
+
+Praktický postup:
+
+1. **Začni interně:** ověř funkci na testovacích datech a u vlastního týmu.
+2. **Použij feature flag:** změnu zapni jen vybraným účtům nebo pilotům.
+3. **Měj rollback:** před spuštěním víš, jak se vrátit bez ztráty dat.
+4. **Omez dopad:** neexperimentuj najednou s fakturací, exportem a mazáním dat.
+5. **Komunikuj změnu:** pilotním zákazníkům řekni, co testuješ a jak dát feedback.
+6. **Zapiš výsledek:** i neúspěšný experiment má hodnotu, pokud nezmizí v chatu.
+
+U funkcí, které pracují s osobními nebo citlivými zákaznickými daty, platí jednoduché pravidlo: nejdřív bezpečnost a účel, až potom rychlost experimentu. „Chtěli jsme to rychle ověřit“ nezní dobře v incident reportu.
+
+### Kdy experiment ukončit
+
+Experiment ukonči, když nastane jedna z těchto situací:
+
+- dosáhl předem domluveného prahu pro rozhodnutí,
+- běží dost dlouho a další čekání nepřinese lepší signál,
+- objevilo se riziko pro zákazníky, data nebo důvěru,
+- změnily se podmínky natolik, že výsledek už nejde rozumně interpretovat,
+- tým zjistil, že měří špatnou věc.
+
+Ukončení není selhání. Selhání je nechat experiment běžet tři měsíce, protože nikdo nechce přiznat, že byl špatně navržený. Každý experiment zakonči krátkým zápisem: co jsme čekali, co se stalo, co uděláme a co už nebudeme opakovat.
+
+### Codyho komentář
+
+Experimentování má být kuchyňská váha, ne kouzelnická hůlka. Pomáhá ti odměřit, jestli změna dává smysl. Nevyřeší ale špatnou nabídku, nejasný positioning ani produkt, který nikdo nepotřebuje. Když se tým hádá o tlačítko, často ve skutečnosti neví, komu prodává.
+
+Privacy-first přístup tu není brzda. Je to připomínka, že dobrý produktový tým má umět získat signál bez toho, aby z návštěvníka udělal laboratorní myš s reklamním ID na krku.
+
+### Checklist: experimenty bez sledovacího cirkusu
+
+- [ ] Každý experiment má hypotézu, vlastníka, rozsah a předem domluvené rozhodovací pravidlo.
+- [ ] Volíme metodu podle reality návštěvnosti a produktu, ne podle toho, co zní nejvíc startupově.
+- [ ] Měříme minimum dat potřebné pro rozhodnutí a preferujeme agregace.
+- [ ] Nepřidáváme nové pixely, session replay ani subprocesory bez privacy-first kontroly.
+- [ ] U formulářů a rozhovorů hodnotíme kvalitu leadů, nejen počet odeslání.
+- [ ] Produktové experimenty jsou vratné, omezené rozsahem a chráněné feature flagem nebo pilotním režimem.
+- [ ] Před spuštěním víme, jak experiment ukončit a jak poznáme úspěch, neúspěch nebo nejasný výsledek.
+- [ ] Výsledek zapisujeme do znalostní báze včetně doporučení pro další krok.
+- [ ] Neúspěšné experimenty nemažeme z paměti týmu; šetří budoucí čas.
+- [ ] Zákazníkům umíme vysvětlit, co v experimentu měříme a proč.
+
+Experimenty mají zmenšovat nejistotu, ne vyrábět další datový dluh. Když je tým dělá disciplinovaně, učí se rychleji, prodává poctivěji a nemusí kvůli každé hypotéze zapínat digitální dalekohled.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -2841,3 +2976,4 @@ Metriky mají pomáhat stavět lepší produkt, ne vyrábět tajnou kameru v apl
 - **2026-09-12:** Doplněna příloha L o výběru dodavatelů a subprocesorů: vendor karta, privacy-first filtr, schvalování nástrojů, čtvrtletní úklid a checklist.
 - **2026-09-12:** Doplněna příloha M o interní dokumentaci pro malý SaaS: rozhodnutí, provozní wiki, runbooky, evidence přístupů, veřejná důvěra a checklist.
 - **2026-09-12:** Doplněna příloha N o produktových metrikách bez sledování jednotlivců: aktivační moment, kohorty, event slovník, dashboard, retence a privacy-first checklist.
+- **2026-09-12:** Doplněna příloha O o experimentech a A/B testech bez datového hladu: hypotézy, experiment karta, privacy-first měření, kvalita leadů, feature flagy a checklist.
