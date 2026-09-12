@@ -2227,6 +2227,112 @@ Podpora není brzda růstu. Je to místo, kde zákazníci zadarmo popisují, pro
 
 ---
 
+## Příloha J: Incidentová komunikace a status page bez paniky
+
+Incident není jen technická porucha. Je to moment, kdy zákazník ztrácí jistotu: neví, jestli je problém u něj, u tebe, v integraci, v platbě, nebo v pondělním vesmíru, který se rozhodl škodolibě restartovat. Malý SaaS tým proto nepotřebuje incidentový proces kvůli korporátnímu divadlu, ale kvůli klidu. Když je postup připravený předem, tým během výpadku nemusí vymýšlet jazyk, priority ani kdo má komu napsat.
+
+Privacy-first přístup tady znamená dvě věci. Zaprvé komunikovat dostatečně otevřeně, aby zákazník mohl rozhodnout, co udělá na své straně. Zadruhé nesypat do veřejných updateů citlivé detaily, interní logy, osobní údaje ani jména konkrétních uživatelů. Transparentnost není livestream z databáze. Díky bohu.
+
+ENISA ve svých materiálech k incident response zdůrazňuje připravenost, role a postupy před incidentem; Atlassian zase u postmortemů doporučuje zaměřit se na učení a zlepšení procesu, ne na hledání obětního beránka. Pro malý SaaS z toho plyne jednoduchý závěr: napiš si minimální runbook dřív, než ho budeš potřebovat v sobotu ve 22:17.
+
+### Status page je slib komunikace, ne dekorace
+
+Status page nemusí být velký systém. U první verze stačí veřejná stránka nebo jednoduchý changelog provozních událostí, pokud je spolehlivě dostupný mimo hlavní aplikaci. Smysl není tvářit se jako nadnárodní cloud. Smysl je dát zákazníkům místo, kde zjistí, co se děje, aniž by museli psát podporu.
+
+Dobrá status page obsahuje:
+
+- **Stav klíčových částí služby:** aplikace, API, přihlášení, billing, e-mailové notifikace, integrace.
+- **Aktuální incidenty:** stručný popis dopadu, čas poslední aktualizace a další plánovaný update.
+- **Historii incidentů:** datum, délku, dopad a odkaz na postmortem, pokud dává smysl.
+- **Odběr aktualizací:** e-mail, RSS nebo přímý odkaz; ideálně bez marketingového sledování.
+- **Kontakt pro kritické dopady:** kam napsat, pokud zákazník vidí jiný dopad než popsaný.
+
+Neuváděj interní názvy serverů, přesné bezpečnostní slabiny před opravou, osobní data ani konkrétní zákaznické záznamy. Místo „chyba v tenant_id u zákazníka XY“ napiš „část zákazníků mohla vidět nesprávný stav vybraných záznamů“. Detail patří do interního incident logu a případných přímých oznámení dotčeným zákazníkům.
+
+### První hodina rozhoduje o důvěře
+
+Největší chyba během incidentu je čekat s komunikací, dokud neznáš stoprocentní příčinu. Zákazník většinou nepotřebuje hned perfektní forenzní esej. Potřebuje vědět, jestli o problému víš, koho se týká a kdy dostane další informaci.
+
+Praktický postup pro první hodinu:
+
+1. **Potvrď signál:** ověř monitoring, support zprávy a základní dostupnost služby.
+2. **Urči incident commandera:** jeden člověk koordinuje, ostatní nevedou paralelní improvizační orchestry.
+3. **Zapiš časovou osu:** kdy začal dopad, kdy byl zjištěn, co se zkouší.
+4. **Publikuj první update:** i kdyby zněl jen „problém vyšetřujeme, další update do 30 minut“.
+5. **Odděl opravu od komunikace:** vývojář opravuje, komunikační vlastník píše zákazníkům.
+6. **Zkontroluj datový dopad:** dostupnost, integrita, důvěrnost; každá kategorie znamená jiný postup.
+
+> Codyho komentář: „Dáme vědět, až to bude vyřešené“ není incidentová komunikace. To je digitální verze zamčených dveří s cedulkou „něco se děje, neotravujte“.
+
+### Šablony incidentových updateů
+
+Šablony šetří hlavu, když je tlak. Nepiš je jako právník na kofeinu. Piš je tak, aby zákazník během dvaceti sekund pochopil dopad a další krok.
+
+První veřejný update:
+
+> Vyšetřujeme problém s [část služby]. Dopad se zatím týká [koho / čeho]. Služba [funguje omezeně / je nedostupná / má zpoždění]. Další aktualizaci zveřejníme nejpozději v [čas].
+
+Update během opravy:
+
+> Identifikovali jsme pravděpodobnou příčinu v [obecná oblast]. Pracujeme na opravě a průběžně kontrolujeme dopad. Další update pošleme nejpozději v [čas]. Pokud u vás dopad vypadá jinak, napište na [kontakt].
+
+Vyřešení incidentu:
+
+> Incident je vyřešený od [čas]. Dopad byl [stručný popis]. Teď sledujeme stabilitu a připravíme krátké shrnutí s příčinou a preventivními kroky. Omlouváme se za komplikace.
+
+Přímý e-mail dotčenému zákazníkovi může být konkrétnější než veřejná status page. I tam ale drž pravidlo minimálních dat: popiš dopad na jeho účet, ne cizí účty; přilož jen nutné informace; hesla, tokeny a exporty posílej jen bezpečným kanálem.
+
+### Postmortem bez obviňování
+
+Postmortem není soudní síň. Je to nástroj, jak snížit pravděpodobnost opakování. Pokud z něj uděláš hledání viníka, tým se příště naučí hlavně mlčet. Lepší je rozebrat systém: co monitoring neviděl, kde chyběl limit, proč nebyl rollback jednoduchý, proč zákazník dostal pozdní informaci.
+
+Jednoduchá struktura postmortemu:
+
+- **Shrnutí:** co se stalo jedním odstavcem.
+- **Dopad:** koho se incident týkal, jak dlouho, jaký byl praktický dopad.
+- **Časová osa:** detekce, reakce, oprava, komunikace, vyřešení.
+- **Příčina:** technická i procesní, bez zbytečného lovu na člověka.
+- **Co fungovalo:** věci, které pomohly incident zkrátit.
+- **Co zlepšit:** konkrétní akce s vlastníkem a termínem.
+- **Zákaznická komunikace:** co šlo ven, kdy a jestli to bylo dostatečné.
+
+U privacy-first SaaS přidej ještě krátkou sekci **datový dopad**. Někdy incident znamená jen nedostupnost. Jindy může jít o chybné zobrazení dat, špatně odeslaný e-mail, problém v exportu nebo podezření na neoprávněný přístup. Tyto situace mají jiné interní kroky a někdy i povinnost konzultovat právníka nebo DPO. Codyho praktická rada: měj seznam lidí a rolí předem, ne až ve chvíli, kdy ti v hlavě bliká červená kontrolka.
+
+### Incidentový runbook pro malý tým
+
+Runbook nemusí být dlouhý. Měl by být použitelný i pro člověka, který zrovna není hlavní autor systému. Když runbook pochopí jen zakladatel po třetí kávě, není to runbook. Je to literární žánr „tajný deník produkce“.
+
+Minimální runbook:
+
+| Oblast | Co musí být zapsané |
+| --- | --- |
+| Role | incident commander, technický vlastník, komunikace, zákaznická podpora |
+| Kontakty | interní eskalace, hosting, e-mail provider, platební brána, právní/DPO kontakt |
+| Kanály | interní chat, status page, support e-mail, přímý kontakt pro velké zákazníky |
+| Přístupy | kde jsou emergency přístupy, kdo je smí použít, jak se zapisuje auditní stopa |
+| Rozhodnutí | kdy vypnout funkci, kdy rollbackovat, kdy poslat veřejný update |
+| Data | jak posoudit dostupnost, integritu a důvěrnost dat |
+| Po incidentu | postmortem, zákaznické shrnutí, úkoly do backlogu |
+
+Runbook aktualizuj po každém incidentu nebo větší změně architektury. Nová platební brána, nový e-mail provider, nový region hostingu nebo nový support kanál znamená i novou provozní realitu. Dokumentace, která neodpovídá skutečnosti, je horší než žádná: vzbuzuje falešný pocit bezpečí.
+
+### Checklist: incidentová komunikace a status page
+
+- [ ] Existuje veřejné místo pro stav služby, ideálně mimo hlavní aplikaci.
+- [ ] Status page má odběr přes e-mail, RSS nebo přímý odkaz bez marketingového sledování.
+- [ ] Klíčové části služby mají pojmenovaný stav a vlastníka.
+- [ ] První incidentový update jde ven i bez kompletní příčiny.
+- [ ] Každý incident má incident commandera a odděleného vlastníka komunikace.
+- [ ] Veřejné updatey neobsahují osobní údaje, interní logy ani bezpečnostní detaily před opravou.
+- [ ] Interní časová osa se vede od prvního signálu až po vyřešení.
+- [ ] Datový dopad se posuzuje samostatně: dostupnost, integrita, důvěrnost.
+- [ ] Postmortem má konkrétní akce, vlastníky a termíny.
+- [ ] Runbook se aktualizuje po incidentu i po větší změně provozu.
+
+Incidenty nikdy úplně nezmizí. Cílem není tvářit se, že se nic nepokazí. Cílem je pokazit se profesionálně: rychle zjistit dopad, férově komunikovat, chránit data, opravit příčinu a udělat z nepříjemného dne lepší systém.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -2263,3 +2369,4 @@ Podpora není brzda růstu. Je to místo, kde zákazníci zadarmo popisují, pro
 - **2026-09-12:** Doplněna příloha G o cenotvorbě a balíčcích pro malý privacy-first SaaS: hodnota, cenová metrika, tři tarify, pricing stránka, slevy, zdražování a checklist.
 - **2026-09-12:** Doplněna příloha H o demo callu a prodeji bez nátlaku: kvalifikace, 30minutová agenda, otázky, follow-up, pipeline a privacy-first checklist.
 - **2026-09-12:** Doplněna příloha I o zákaznické podpoře jako produktovém systému: kanály, triage, odpovědi, dokumentace, privacy-first práce se support daty a týdenní review.
+- **2026-09-12:** Doplněna příloha J o incidentové komunikaci a status page: první hodina incidentu, šablony updateů, postmortem, runbook a privacy-first checklist.
