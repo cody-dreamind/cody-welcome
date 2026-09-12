@@ -979,6 +979,123 @@ Provoz je místo, kde se ukáže, jestli byl produkt navržený pro realitu. Mar
 
 ---
 
+## 8. Checklisty a šablony
+
+Dobrá šablona není byrokracie. Je to paměť týmu v čitelné podobě. Malý tým nepotřebuje procesní chrám se třemi schvalovacími radami a fontem „korporátní šedá“. Potřebuje pár opakovatelných kontrol, které zabrání stejným chybám: nejasná nabídka, rozbitý formulář, zbytečný tracker, chybějící právní text, špatný onboarding nebo launch bez plánu.
+
+Checklist má fungovat jako brzda před zbytečným průšvihem, ne jako klec. Když položka nepomáhá kvalitě, důvěře, rychlosti nebo prodeji, smaž ji. Když se chyba opakuje, přidej ji. A když checklist nikdo nepoužívá, není problém v lidech — checklist je pravděpodobně moc dlouhý, moc obecný nebo schovaný v nástroji, kam se chodí jen za trest.
+
+### Launch checklist pro web nebo SaaS MVP
+
+Launch není jeden velký ohňostroj. Je to kontrolovaný přechod z „stavíme“ do „lidé to můžou použít“. Cílem není perfektní produkt, ale produkt, který splní slib, jde kontaktovat, jde měřit bez šmírování a nerozsype se při prvních reálných návštěvnících.
+
+Praktická šablona:
+
+- [ ] **Nabídka:** hero sekce říká, pro koho produkt je, jaký problém řeší a co má návštěvník udělat dál.
+- [ ] **Důkaz:** stránka obsahuje ukázku, screenshot, demo, referenci, případovou mini-studii nebo konkrétní příklad použití.
+- [ ] **Primární akce:** hlavní CTA je viditelné bez hledání a vede na funkční formulář, kalendář, trial nebo kontakt.
+- [ ] **Mobil:** klíčové stránky, menu, formuláře a checkout fungují na běžném telefonu, ne jen na monitoru vývojáře s božským rozlišením.
+- [ ] **Rychlost:** obrázky jsou komprimované, fonty rozumné, skripty omezené a stránka nepůsobí jako kamion plný JavaScriptu.
+- [ ] **SEO základ:** každá důležitá stránka má unikátní title, meta description, kanonickou URL a čitelný slug.
+- [ ] **Sdílení:** Open Graph náhled má správný titulek, popis a obrázek.
+- [ ] **Přístupnost:** text má dostatečný kontrast, formuláře mají popisky a web se dá ovládat klávesnicí v hlavních tocích.
+- [ ] **Privacy:** analytika neukládá zbytečné osobní údaje, cookie lišta se nezobrazuje jen proto, že „to tak mají všichni“.
+- [ ] **Právní minimum:** privacy informace, obchodní podmínky a kontakt odpovídají tomu, co služba skutečně dělá.
+- [ ] **E-maily:** potvrzovací a transakční e-maily mají jasný předmět, odesílatele, text a fungující odhlášení tam, kde je potřeba.
+- [ ] **Monitoring:** tým ví, jak pozná výpadek webu, chybu formuláře, problém s platbou nebo selhání registrace.
+- [ ] **Rollback:** existuje jednoduchý způsob, jak vrátit poslední nasazení nebo vypnout problematickou funkci.
+
+Codyho komentář: Nejlepší launch checklist je ten, který otevřeš před deployem, ne po incidentu. Po incidentu už to není checklist, ale archeologie.
+
+### Audit webu za 60 minut
+
+Audit nemusí být třídenní workshop. Jednou za měsíc si můžeš sednout k webu jako cizí návštěvník a projít ho podle scénáře. Důležité je nehodnotit „líbí/nelíbí“, ale ptát se, jestli stránka pomáhá člověku udělat další krok.
+
+Použij tento postup:
+
+1. **První minuta:** otevři homepage a bez scrollování napiš jednou větou, co firma nabízí. Pokud to nejde, hero sekce není dost jasná.
+2. **Cílovka:** najdi, pro koho produkt je. Pokud text mluví ke všem, často nepřesvědčí nikoho.
+3. **Důvěra:** spočítej konkrétní důkazy: reference, loga, ukázky, čísla, případové studie, veřejné kontakty, lidé za produktem.
+4. **Cesta:** klikni na hlavní CTA a projdi cestu až do cíle. Každý nejasný krok zapiš.
+5. **Obsah:** otevři tři články nebo podpůrné stránky a ověř, jestli odpovídají na reálné otázky zákazníků, ne jen plní blog kvůli SEO.
+6. **Technika:** zkontroluj základní rychlost, rozbitá místa, responzivitu a chybové stavy formulářů.
+7. **Soukromí:** zapiš všechny externí skripty, formuláře, vložená média a analytické nástroje. U každého se zeptej: potřebujeme ho opravdu?
+8. **Další krok:** vyber maximálně tři opravy s největším dopadem a dej jim vlastníka.
+
+Výstup auditu může být takhle jednoduchý:
+
+- **Největší problém:** návštěvník nerozumí rozdílu proti běžné agentuře.
+- **Dopad:** méně relevantních poptávek a horší kvalita leadů.
+- **Oprava tento týden:** přepsat hero sekci, přidat dvě ukázky výsledků a zjednodušit CTA.
+- **Měření:** sledovat kliknutí na kontakt, odeslané formuláře a kvalitu odpovědí v CRM.
+
+### Privacy-first checklist před novou integrací
+
+Každá integrace je nová důvěra. Nástroj může být levný, populární a krásně se tvářit v prezentaci, ale pořád platí: data někam tečou, někdo je provozuje a někdo má podmínky, které si tým musí přečíst dřív než po problému.
+
+Před přidáním nové služby projdi minimálně toto:
+
+- [ ] Jaká data do nástroje posíláme?
+- [ ] Jsou mezi nimi osobní údaje, obchodní tajemství, interní poznámky nebo citlivé přílohy?
+- [ ] Kde se data ukládají a zpracovávají?
+- [ ] Existuje evropský region nebo evropská alternativa?
+- [ ] Má dodavatel jasné informace o subprocesorech a změnách subprocesorů?
+- [ ] Umíme nastavit retenci, export a mazání dat?
+- [ ] Lze integraci používat bez invazivních cookies nebo fingerprintingu?
+- [ ] Potřebujeme souhlas, smluvní základ, oprávněný zájem nebo jiný právní základ?
+- [ ] Je integrace zdokumentovaná v datové mapě a interním seznamu nástrojů?
+- [ ] Ví support a obchod, co do nástroje nesmí kopírovat?
+
+Rozhodovací pravidlo pro malé týmy: pokud nástroj zrychlí práci o pět minut týdně, ale přidá nejasný tok osobních dat mimo Evropu, není to automatizace. Je to malý právní batoh s kolečky.
+
+### Šablona obsahového plánu bez spamového pocitu
+
+Marketingový plán nemusí začínat větou „musíme být všude“. Nemusíme. Internet už je dost hlučný i bez toho, abychom do něj sypali pět recyklovaných postů denně. Lepší je mít pravidelný obsah, který odpovídá na otázky zákazníků, podporuje prodej a dá se šířit přímými odkazy, RSS nebo rozumným newsletterem.
+
+Jednoduchý měsíční plán:
+
+- **1 hlubší článek:** vysvětlení problému, návod, srovnání přístupů nebo případová studie.
+- **2 praktické materiály:** checklist, šablona, mini-kalkulačka, ukázkový postup nebo rozhodovací strom.
+- **4 krátké aktualizace:** poznámka k produktu, tip z praxe, odpověď na častou otázku, komentář k oborové změně.
+- **1 distribuční blok:** poslat článek existujícím kontaktům, přidat do dokumentace, sdílet v relevantní komunitě, doplnit interní obchodní materiály.
+- **1 revizní blok:** aktualizovat starší obsah, opravit odkazy, doplnit zdroje a odstranit neaktuální tvrzení.
+
+Pro každý obsah si vyplň čtyři řádky:
+
+- **Komu pomáhá:** konkrétní role nebo segment.
+- **Jakou otázku řeší:** problém formulovaný jazykem zákazníka.
+- **Co má čtenář udělat dál:** stáhnout checklist, napsat, vyzkoušet demo, upravit proces.
+- **Jak poznáme dopad:** kvalitní odpovědi, registrace, schůzky, sdílení přímým odkazem, organická návštěvnost.
+
+Obsah je silný, když ho obchodník může poslat zákazníkovi místo dlouhého vysvětlování. Ještě silnější je, když zákazník odpoví: „Tohle přesně řešíme.“
+
+### Šablona týdenního produktového rytmu
+
+Malý SaaS tým nepotřebuje deset meetingů. Potřebuje rytmus, ve kterém se neztratí zákaznické signály, technický dluh ani obchodní realita. Týdenní šablona může vypadat takto:
+
+- **Pondělí:** vybrat jeden hlavní výsledek týdne a maximálně tři podpůrné úkoly.
+- **Úterý až čtvrtek:** soustředěná práce, krátká asynchronní kontrola blokérů, žádné schůzky „jen abychom byli v obraze“.
+- **Pátek:** demo hotových změn, kontrola metrik, support témat a rozhodnutí, co se zlepší příští týden.
+- **Průběžně:** chyby z produkce mají přednost před kosmetikou, ale ne před vším navždy.
+
+Dobrá páteční otázka zní: „Co jsme tento týden změnili, aby zákazník rychleji pochopil hodnotu, bezpečněji používal produkt nebo měl méně důvodů psát na podporu?“ Pokud odpověď není žádná, tým možná pracoval hodně, ale ne nutně správným směrem.
+
+### Jak checklisty udržet živé
+
+Checklisty stárnou. Produkt se mění, trh se mění, právní požadavky se mění, tým se mění a některé položky začnou být směšně samozřejmé. Proto je potřeba checklisty spravovat jako produktovou dokumentaci, ne jako vytesaný kámen.
+
+Pravidla údržby:
+
+- Po každém incidentu přidej nebo uprav jednu položku, která by problém zachytila dřív.
+- Po každém launchi smaž položky, které nikdo nepoužil a nepřinesly hodnotu.
+- Každý checklist musí mít vlastníka a místo, kde ho tým opravdu najde.
+- Položky formuluj jako ověřitelné akce, ne jako přání typu „myslet na bezpečnost“.
+- Pokud má checklist víc než třicet položek, rozděl ho podle fáze: před vývojem, před deployem, po launchi.
+
+Šablony nejsou náhrada za úsudek. Jsou nástroj, který dobrý úsudek drží pohromadě ve chvíli, kdy tým spěchá, zákazník čeká a produkce si zrovna řekla, že pátek odpoledne je krásný čas na drama.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -1003,3 +1120,4 @@ Provoz je místo, kde se ukáže, jestli byl produkt navržený pro realitu. Mar
 - **2026-09-11:** Dopsána kapitola 5 o privacy-first provozu v Evropě: datová mapa, minimalizace, evropský hosting, cookies, dokumentace, bezpečnost a provozní checklist.
 - **2026-09-12:** Dopsána kapitola 6 o produktivitě malého SaaS týmu: rozhodování, backlog, týdenní rytmus, automatizace, komunikace, metriky a checklist.
 - **2026-09-12:** Dopsána kapitola 7 o provozu a růstu: monitoring, logy, support, incidenty, roadmapa, evropská expanze a provozní checklist.
+- **2026-09-12:** Dopsána kapitola 8 s praktickými checklisty a šablonami pro launch, audit webu, privacy-first integrace, obsahový plán a týdenní produktový rytmus.
