@@ -2674,6 +2674,127 @@ Dobrá dokumentace nedělá z týmu byrokraty. Dělá z něj tým, který si pam
 
 ---
 
+## Příloha N: Produktové metriky bez sledování jednotlivců
+
+Malý SaaS tým nepotřebuje vědět, že uživatel s interním ID `84217` v úterý v 9:43 zaváhal nad tlačítkem. Potřebuje vědět, jestli produkt skutečně doručuje hodnotu, kde zákazníci uvíznou a co zlepšit příště. Rozdíl mezi těmito dvěma větami je rozdíl mezi produktovým řízením a datovým slíděním.
+
+Privacy-first metriky nejsou metriky naslepo. Jsou to metriky s disciplínou: sbírej jen to, pro co máš jasný účel, používej agregace, drž krátkou retenci detailů a nedělej z analytiky druhou skrytou databázi zákazníků. Evropská komise mezi principy GDPR uvádí mimo jiné účelové omezení, minimalizaci dat a omezení uložení; pro produktový tým je to dobrý designový mantinel, ne jen právní poznámka pod čarou.
+
+### Začni otázkami, ne eventy
+
+Nejhorší analytický plán začíná větou: „Pošleme event na každý klik, ono se to někdy hodí.“ Ne, nehodí. Jen si vytvoříš hromadu dat, která nikdo nečte, ale všichni za ni nesou odpovědnost.
+
+Začni pěti rozhodovacími otázkami:
+
+1. **Aktivace:** Kolik nových zákazníků dojde k prvnímu skutečnému výsledku?
+2. **Adopce:** Které klíčové části produktu se používají opakovaně?
+3. **Retence:** Vrací se zákazníci kvůli hodnotě, nebo jen kvůli faktuře a setrvačnosti?
+4. **Riziko:** Kde se hromadí chyby, nedokončené kroky nebo support dotazy?
+5. **Obchod:** Které změny v produktu pomáhají konverzi, expanzi nebo snížení churnu?
+
+Teprve potom navrhni události. Každá metrika musí mít vlastníka a rozhodnutí, které podle ní uděláš. Pokud žádné rozhodnutí neexistuje, metrika je dekorace. A dekorace v databázi je dražší než kaktus na stole.
+
+### Definuj aktivační moment
+
+Aktivace není registrace. Registrace je administrativní událost. Aktivace je okamžik, kdy zákazník poprvé pochopí hodnotu produktu.
+
+Příklady aktivačních momentů:
+
+- projektový nástroj: vytvořený projekt, pozvaný kolega a první dokončený úkol,
+- fakturační SaaS: vystavená a odeslaná první faktura,
+- rezervační systém: publikovaný kalendář a první potvrzená rezervace,
+- analytický nástroj: připojený web a první přehled, podle kterého zákazník něco upraví,
+- interní AI asistent: první úspěšně dokončený úkol, který by jinak dělal člověk ručně.
+
+Aktivační metrika má být jednoduchá věta: „Zákazník je aktivovaný, když do 7 dnů od založení účtu udělá X.“ Časové okno si zvol podle produktu. U jednoduchého B2B nástroje to může být první den, u složitějšího provozního systému první měsíc.
+
+### Používej agregace a kohorty
+
+Agregace odpovídá na otázku, jak se daří skupině. Kohorta odpovídá na otázku, jak se chová skupina, která začala ve stejném období nebo prošla stejnou změnou. Pro řízení produktu většinou nepotřebuješ sledovat jednotlivce; potřebuješ sledovat vzory.
+
+Praktický základ:
+
+- **Aktivační kohorta:** účty založené v konkrétním týdnu a procento těch, které splnily aktivační moment.
+- **Retenční kohorta:** zákazníci, kteří produkt použili v týdnu 1, 2, 4 a 8 po aktivaci.
+- **Feature adopce:** podíl aktivních účtů, které použily klíčovou funkci aspoň jednou za období.
+- **Support signál:** počet ticketů podle tématu, ne podle konkrétního člověka.
+- **Kvalita provozu:** chybovost a pomalé odpovědi podle části systému, ne podle obsahu zákaznických dat.
+
+Když potřebuješ detail pro support nebo debugging, odděl ho od produktové analytiky. Provozní logy mají vlastní účel, retenci a přístupová pravidla. Produktový dashboard nemá být boční dveře k citlivým datům.
+
+### Navrhni event slovník
+
+Event slovník je malá dohoda mezi produktem, vývojem a marketingem. Říká, jaké události měříš, co znamenají a jaké vlastnosti u nich smíš ukládat. Bez slovníku se z analytiky stane lidová tvořivost: `button_clicked`, `clicked_button`, `ctaClick`, `final_final_signup_v2` a tichý pláč v dashboardu.
+
+Minimální šablona eventu:
+
+```text
+Název eventu: project_created
+Účel: měřit dokončení prvního hodnotového kroku
+Spouštěč: uživatel uloží první projekt
+Úroveň: účet / workspace, ne individuální profil
+Vlastnosti: plan_type, onboarding_source, project_template
+Zakázané vlastnosti: jméno projektu, e-mail, text poznámek, IP adresa
+Retence detailu: 30 dní, poté jen agregace
+Vlastník: produkt
+Rozhodnutí: upravit onboarding, pokud aktivační poměr klesne pod interní práh
+```
+
+U každého eventu si polož otázku: „Kdyby si zákazník vyžádal vysvětlení, proč to sbíráme, umíme odpovědět bez koktání?“ Pokud ne, event ven.
+
+### Dashboard má vést k akci
+
+Dashboard, který má dvacet grafů a žádné rozhodnutí, je firemní akvárium. Hezky bliká, nikdo podle něj neřídí loď.
+
+Pro malý SaaS stačí jeden týdenní produktový dashboard:
+
+- nové kvalifikované leady,
+- nové trialy nebo piloty,
+- aktivační poměr,
+- počet aktivních účtů,
+- použití 2–3 klíčových funkcí,
+- support témata podle počtu a závažnosti,
+- churn rizika nebo rušení,
+- provozní zdraví: dostupnost, chybovost, pomalé odpovědi.
+
+Ke každé metrice přidej interpretaci: **zelená / žlutá / červená** a jednu větu „co uděláme“. Bez toho tým jen pozoruje počasí. Produktový tým má podle dat měnit chování, ne sbírat grafy jako kartičky hokejistů.
+
+### Privacy-first pravidla pro produktovou analytiku
+
+Praktická pravidla, která bych nastavil jako výchozí:
+
+- Neposílej do analytiky e-maily, jména, názvy projektů, texty zpráv ani zákaznický obsah.
+- Měř primárně na úrovni účtu, workspace nebo anonymizované kohorty.
+- Detailní eventy drž krátce a dlouhodobě ponech agregace.
+- Odděl produktovou analytiku od supportu, logů a fakturace.
+- Přístupy k dashboardům dávej podle role, ne podle zvědavosti.
+- U každé nové události zapiš účel, vlastnosti, retenci a vlastníka.
+- Pokud používáš externí nástroj, zkontroluj region zpracování, subprocesory a export dat.
+- U veřejného webu preferuj agregovanou analytiku bez reklamních identifikátorů a cross-site profilování.
+
+### Codyho komentář
+
+Data nejsou automaticky moudrost. Často jsou to jen drahé drobky po uživatelích, které si tým vysype na stůl a tváří se, že právě objevil strategii. Dobrá metrika má být jako dobrý kolega: řekne ti něco nepříjemného, ale užitečného. Špatná metrika je jako nekonečný meeting s grafem.
+
+Privacy-first přístup má jednu příjemnou vedlejší výhodu: nutí tě přemýšlet. Když nemůžeš sbírat všechno „pro jistotu“, musíš si vybrat, co je opravdu důležité. A to je produktová disciplína, ne omezení.
+
+### Checklist: produktové metriky bez sledování lidí
+
+- [ ] Máme sepsaných 3–5 rozhodovacích otázek, které mají metriky zodpovědět.
+- [ ] Aktivační moment je popsán konkrétní akcí a časovým oknem.
+- [ ] Eventy mají slovník: název, účel, spouštěč, povolené vlastnosti, zakázané vlastnosti, retenci a vlastníka.
+- [ ] Do analytiky neposíláme osobní údaje ani zákaznický obsah, pokud k tomu není jasný a zdokumentovaný důvod.
+- [ ] Produktový dashboard pracuje hlavně s agregacemi, kohortami a účty/workspaces.
+- [ ] Detailní produktové eventy mají krátkou retenci a dlouhodobě zůstávají agregace.
+- [ ] Support, provozní logy, fakturace a produktová analytika mají oddělené účely a přístupy.
+- [ ] Každý týden nad dashboardem vznikne konkrétní rozhodnutí nebo experiment.
+- [ ] Nové měření prochází privacy-first kontrolou stejně jako nová integrace.
+- [ ] Zákazníkům umíme srozumitelně vysvětlit, co měříme a proč.
+
+Metriky mají pomáhat stavět lepší produkt, ne vyrábět tajnou kameru v aplikaci. Když se tým naučí měřit hodnotu bez zbytečného sledování lidí, získá lepší rozhodování i důvěryhodnější značku. To je kombinace, která se v Evropě prodává mnohem lépe než další pixel v patičce.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -2719,3 +2840,4 @@ Dobrá dokumentace nedělá z týmu byrokraty. Dělá z něj tým, který si pam
 - **2026-09-12:** Doplněna příloha K o zálohách a obnově pro malý privacy-first SaaS: RPO/RTO, strategie 3-2-1, testy obnovy, kompromitované zálohy, runbook a checklist.
 - **2026-09-12:** Doplněna příloha L o výběru dodavatelů a subprocesorů: vendor karta, privacy-first filtr, schvalování nástrojů, čtvrtletní úklid a checklist.
 - **2026-09-12:** Doplněna příloha M o interní dokumentaci pro malý SaaS: rozhodnutí, provozní wiki, runbooky, evidence přístupů, veřejná důvěra a checklist.
+- **2026-09-12:** Doplněna příloha N o produktových metrikách bez sledování jednotlivců: aktivační moment, kohorty, event slovník, dashboard, retence a privacy-first checklist.
