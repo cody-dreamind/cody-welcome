@@ -3431,6 +3431,175 @@ Roadmapa je produktová hygiena. Není to věštírna, tisková zpráva ani nás
 - Umí support, obchod i zákazník najít poslední důležité změny bez archeologické výpravy?
 
 
+
+## Příloha S: Integrace a API partnerství bez datového chaosu
+
+Jakmile SaaS začne růst, zákazníci se začnou ptát na integrace. „Umíte to propojit s účetnictvím?“ „Pošlete data do CRM?“ „Máte API?“ To je dobré znamení. Produkt se dostává do reálného provozu. Zároveň je to okamžik, kdy si malý tým může do systému pustit technický dluh, bezpečnostní rizika a datový cirkus v jednom krásně zabaleném webhooku.
+
+Integrace nejsou jen technická funkce. Jsou to hranice důvěry. Říkají, komu dovolíš sahat na zákaznická data, za jakých pravidel, jak rychle umíš odpojit problémového partnera a jestli zákazník chápe, co se s jeho daty děje.
+
+> Codyho komentář: API je jako boční dveře do produktu. Je fajn je mít. Je méně fajn nechat u nich rohožku s nápisem „token najdeš pod květináčem“.
+
+### Nezačínej integrací, začni scénářem
+
+Špatná otázka zní: „S čím vším se máme propojit?“ Správná otázka zní: „Jaký konkrétní pracovní tok má zákazník po propojení hotový rychleji, bezpečněji nebo s menším počtem chyb?“
+
+Každou integraci popiš jako scénář:
+
+- **Kdo ji používá:** role, tým nebo typ zákazníka.
+- **Kdy se spouští:** ručně, plánovaně, při události v produktu nebo při změně dat.
+- **Jaká data tečou ven:** konkrétní objekty, pole a citlivost.
+- **Jaká data přichází dovnitř:** zdroj, validace, konflikt s existujícími záznamy.
+- **Co se stane při chybě:** retry, upozornění, ruční oprava, fallback.
+- **Jak zákazník propojení vypne:** okamžitě, bez ticketu na podporu.
+
+Příklad slabého zadání: „Integrace s CRM.“
+
+Lepší zadání: „Když obchodník v našem SaaS označí firmu jako kvalifikovaný lead, pošleme do CRM název firmy, kontaktní e-mail, zdroj leadu a odkaz na detail. Neposíláme interní poznámky, aktivitu jednotlivých uživatelů ani citlivé přílohy. Pokud CRM vrátí chybu, ukážeme ji v administraci a zkusíme synchronizaci ještě třikrát.“
+
+Takové zadání už jde navrhnout, nacenit, otestovat i právně zkontrolovat.
+
+### Privacy-first datová smlouva pro každé propojení
+
+U každé integrace si napiš malou datovou smlouvu. Nemusí to být právní román. Stačí provozní dokument, který pochopí vývojář, support i zákazník.
+
+Datová smlouva obsahuje:
+
+- **Účel:** proč propojení existuje a jakou hodnotu přináší.
+- **Rozsah dat:** přesný seznam polí, která opouští systém.
+- **Směr toku:** jednosměrný export, import, obousměrná synchronizace nebo webhook.
+- **Právní role:** kdo je správce, zpracovatel nebo samostatný správce podle kontextu.
+- **Retence:** jak dlouho jsou integrační logy a payloady uložené.
+- **Subprocesor:** jestli přibývá nový dodavatel, kterého musí zákazník znát.
+- **Vypnutí:** co se smaže, co zůstane v auditu a co musí zákazník udělat u partnera.
+
+Tahle smlouva chrání tým před větou „to přece posíláme jen technicky“. Technicky se dá poslat všechno. Produktově se má poslat jen to, co zákazník opravdu potřebuje.
+
+### API navrhuj jako produkt, ne jako únik z databáze
+
+Dobré API není veřejná kopie interních tabulek. Interní model se mění podle potřeb týmu. Veřejné API je závazek vůči zákazníkům a partnerům.
+
+Praktická pravidla:
+
+- **Používej stabilní objekty:** `customer`, `project`, `invoice`, `event`, ne interní názvy tabulek.
+- **Odděl interní ID od veřejných ID:** veřejné identifikátory nemají prozrazovat počet záznamů ani strukturu databáze.
+- **Verzuj rozhraní:** změny, které rozbíjí kompatibilitu, patří do nové verze.
+- **Vracej srozumitelné chyby:** partner potřebuje vědět, co opravit, ne luštit stack trace.
+- **Omez rozsah tokenů:** token pro čtení faktur nemá umět mazat uživatele. Překvapivé, já vím.
+- **Loguj bezpečně:** ukládej metadata, stav a identifikátor požadavku; celé payloady jen výjimečně a krátce.
+
+MVP API může být malé. Třeba jen export několika objektů a jeden webhook. Důležité je, aby bylo konzistentní. Špatně navržené API se opravuje hůř než špatně pojmenované tlačítko, protože na něm mezitím stojí cizí automatizace.
+
+### Webhooky potřebují disciplínu
+
+Webhook je jednoduchý koncept: něco se stane a tvůj systém pošle zprávu jinam. V praxi je to malý distribuovaný systém, který selhává přesně ve chvíli, kdy má zákazník uzávěrku.
+
+U webhooků definuj:
+
+- **Události:** jasné názvy, například `invoice.created`, `project.completed`, `user.invited`.
+- **Payload:** jen data nutná pro reakci, zbytek ať si partner dotáhne přes API.
+- **Podpis:** každý webhook podepisuj, aby příjemce ověřil původ.
+- **Retry:** opakuj doručení s rozumným odstupem a konečným limitem.
+- **Idempotenci:** stejná událost může přijít víckrát; příjemce ji nesmí zpracovat duplicitně.
+- **Historii doručení:** zákazník má vidět poslední pokusy, odpovědi a možnost ručního opakování.
+
+Privacy-first varianta: webhook neposílá celé zákaznické záznamy, pokud stačí ID události a typ změny. Čím méně dat posíláš přes hranice systému, tím menší škoda při chybné konfiguraci endpointu.
+
+### Marketplace až po třetím opakování
+
+Integrační marketplace zní jako známka dospělého produktu. Pro malý SaaS je to ale často drahá vitrína. Nejdřív potřebuješ vědět, které integrace se opravdu opakují a kdo je používá.
+
+Rozumná postupka:
+
+1. **Ruční export/import:** CSV, JSON nebo jednoduchý report pro ověření potřeby.
+2. **Jednorázový skript:** řízená automatizace pro pilotního zákazníka.
+3. **Interní konektor:** opakovatelná integrace pro několik podobných zákazníků.
+4. **Veřejné API/webhook:** stabilní rozhraní pro technické týmy a partnery.
+5. **Marketplace:** dokumentace, onboarding partnerů, schvalování a provozní odpovědnost.
+
+Marketplace dává smysl, když umíš partnerům nabídnout jasná pravidla, testovací prostředí, bezpečnostní požadavky a podporu. Bez toho je to jen stránka s logy a budoucími omluvami.
+
+### Partnerství musí mít provozní pravidla
+
+Každý integrační partner by měl projít lehkým schvalováním. Ne proto, že chceš brzdit obchod, ale protože zákazník obvykle nerozlišuje mezi „naším produktem“ a „partnerem, kterého jsme doporučili“. Když partner zachází špatně s daty, reputačně to spadne i na tebe.
+
+Minimum pro partnera:
+
+- veřejný popis služby a kontakt na odpovědnou osobu,
+- bezpečnostní a privacy dokumentace,
+- jasné země zpracování a seznam dalších dodavatelů,
+- postup pro incidenty a zranitelnosti,
+- možnost zákazníka integraci odpojit,
+- pravidla pro používání značky a marketingových tvrzení.
+
+U evropského privacy-first SaaS je fér preferovat partnery, kteří umí evropský provoz, datovou minimalizaci a rozumnou dokumentaci. Pokud partner stojí jen na agresivním trackingu, zvaž, jestli krátkodobá integrace stojí za dlouhodobé vysvětlování.
+
+### Dokumentace je součást integrace
+
+Integrace bez dokumentace je support ticket převlečený za feature. Dokumentace nemusí být obří portál, ale musí odpovědět na otázky, které partner nebo zákazník řeší při prvním nastavení.
+
+Dobrá integrační dokumentace obsahuje:
+
+- k čemu integrace slouží a pro koho je,
+- krok za krokem nastavení,
+- seznam posílaných dat,
+- ukázkový payload nebo export,
+- limity, rate limiting a očekávané zpoždění,
+- chybové stavy a postup opravy,
+- bezpečnostní doporučení pro tokeny,
+- návod na vypnutí a odstranění propojení.
+
+Přidej i krátkou sekci „Co neposíláme“. Je to překvapivě silný důvěryhodnostní signál. Zákazník vidí, že ses nad rozsahem dat zamyslel, ne že jsi jen otevřel kohoutek.
+
+### Checklist: první bezpečná integrace
+
+Před spuštěním první produkční integrace si projdi:
+
+- [ ] Máme popsaný konkrétní zákaznický scénář a očekávaný výsledek.
+- [ ] Víme, která data tečou ven, dovnitř a proč.
+- [ ] Posíláme minimum polí nutných pro daný účel.
+- [ ] Tokeny mají omezený rozsah práv a dají se samostatně zrušit.
+- [ ] Webhooky jsou podepsané, opakovatelné a idempotentní.
+- [ ] Integrační logy neukládají zbytečně celé payloady ani citlivá data.
+- [ ] Zákazník vidí stav propojení, poslední chyby a možnost vypnutí.
+- [ ] Dokumentace vysvětluje nastavení, chyby, limity i datový rozsah.
+- [ ] Víme, jestli přibývá subprocesor nebo změna privacy dokumentace.
+- [ ] Máme interního vlastníka integrace a plán, co se stane při incidentu.
+
+### Šablona integrační karty
+
+Použij ji pro každou novou integraci:
+
+```markdown
+## Integrace: [název]
+
+**Zákaznický scénář:**
+Kdo ji používá, kdy a jaký výsledek očekává.
+
+**Datový rozsah:**
+Pole odcházející ze systému, pole přicházející do systému, citlivost dat.
+
+**Technický způsob:**
+API, webhook, CSV export, plánovaná synchronizace nebo ruční import.
+
+**Bezpečnost:**
+Autentizace, rozsah práv, podpisy, rotace tokenů, rate limiting.
+
+**Privacy dopad:**
+Účel, minimalizace, retence logů, země zpracování, subprocesoři.
+
+**Chybové stavy:**
+Retry pravidla, upozornění zákazníkovi, ruční oprava, support runbook.
+
+**Vypnutí:**
+Jak zákazník integraci odpojí a co se stane s daty a logy.
+
+**Vlastník:**
+Člověk odpovědný za provoz, dokumentaci a review integrace.
+```
+
+Integrace mají zákazníkovi ubírat práci, ne přidávat riziko. Když začínáš malým scénářem, přesnou datovou smlouvou a dobrou dokumentací, může i jednoduché API působit dospěle. A hlavně: nebudeš za půl roku zjišťovat, proč se osobní údaje zákazníků posílají do tří nástrojů, které už nikdo nepoužívá.
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -3455,6 +3624,7 @@ Roadmapa je produktová hygiena. Není to věštírna, tisková zpráva ani nás
 
 ## Pracovní log
 
+- **2026-09-12:** Doplněna příloha S o integracích a API partnerstvích: scénáře, datové smlouvy, webhooky, partnerská pravidla, dokumentace a privacy-first checklist.
 - **2026-09-12:** Doplněna příloha R o roadmapě a changelogu: práce se směrem produktu, zákaznickým changelogem, privacy-first filtrem, sběrem požadavků a šablonami.
 - **2026-09-11:** Založena struktura e-booku, osnova a dokončená kapitola 1 o validaci produktu před vývojem, včetně privacy-first doporučení a zdrojů ke GDPR/ePrivacy.
 - **2026-09-11:** Dopsána kapitola 2 o webu jako obchodním systému: struktura stránek, důvěra, konverze bez manipulace, privacy-first měření, obsah, rychlost a checklist.
