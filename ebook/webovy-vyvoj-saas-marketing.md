@@ -3266,6 +3266,171 @@ Prodejní stránka má být jako dobrý obchodník: rozumí problému, mluví ja
 
 ---
 
+## Příloha R: Roadmapa a changelog, které budují důvěru
+
+Roadmapa není seznam přání, který má uklidnit každého zákazníka. Je to nástroj pro rozhodování: co teď stavíme, proč to stavíme a co záměrně neděláme. Changelog zase není odkladiště commitů. Je to veřejná paměť produktu, která ukazuje, že služba žije, zlepšuje se a komunikuje srozumitelně.
+
+Malý SaaS tým tím získá dvojí výhodu. Uvnitř týmu roadmapa brání tomu, aby každý nový nápad přerušil práci. Navenek changelog posiluje důvěru zákazníků, protože vidí vývoj bez nutnosti lovit informace v e-mailech, sociálních sítích nebo soukromých vláknech.
+
+### Roadmapa není slib, ale směr
+
+Největší problém veřejných roadmap je přehnaná jistota. Když napíšeš „v říjnu dodáme integraci X“, zákazník to začne brát jako závazek. Pokud se pak objeví bezpečnostní práce, větší zákaznický problém nebo technický dluh, vzniká zklamání.
+
+Praktičtější je roadmapu rozdělit podle jistoty:
+
+- **Teď:** věci, na kterých aktivně pracujeme.
+- **Další:** validované problémy, které pravděpodobně přijdou na řadu.
+- **Zvažujeme:** témata, u kterých sbíráme signály.
+- **Nebudeme dělat:** věci, které nezapadají do strategie nebo privacy-first hodnot.
+
+Taková roadmapa říká směr, ale neslibuje přesný kalendář tam, kde ho malý tým neumí garantovat. To není slabost. To je dospělost. A dospělost je v SaaS vzácnější než tmavý režim.
+
+### Každá položka musí mít důvod
+
+Roadmapa plná názvů funkcí nevysvětluje hodnotu. „Integrace s účetnictvím“, „nový dashboard“ nebo „AI asistent“ zní hezky, ale neříká, jaký problém řeší.
+
+Lepší položka obsahuje čtyři části:
+
+- **Problém:** co zákazník dnes nezvládá nebo dělá ručně.
+- **Komu pomůže:** segment, role nebo typ týmu.
+- **Očekávaný výsledek:** co bude po změně jednodušší, rychlejší nebo bezpečnější.
+- **Stav:** sbíráme feedback, navrhujeme, stavíme, testujeme, vydáno.
+
+Příklad:
+
+> **Export zakázek do účetního systému**
+> Servisní firmy dnes ručně přepisují dokončené zakázky do účetnictví. Chceme snížit ruční práci po uzavření měsíce a omezit chyby v částkách a zákaznických údajích. Teď sbíráme příklady exportů od pilotních zákazníků.
+
+To je mnohem lepší než „účetní integrace Q4“. Zákazník pochopí, jestli se ho téma týká, a tým má jasnější filtr pro návrh řešení.
+
+### Changelog piš pro zákazníka, ne pro Git
+
+Commit message typu „fix auth edge case“ patří do repozitáře. Changelog má být pro člověka, který používá produkt. Nepotřebuje znát název interní komponenty. Potřebuje vědět, co se změnilo, proč je to užitečné a jestli má něco udělat.
+
+Dobrá položka changelogu má jednoduchou strukturu:
+
+- **Nadpis:** uživatelský výsledek, ne interní název ticketu.
+- **Krátké vysvětlení:** co je nové nebo opravené.
+- **Dopad:** komu to pomůže a v jaké situaci.
+- **Akce:** jestli má zákazník něco nastavit, vyzkoušet nebo zkontrolovat.
+- **Privacy poznámka:** pokud se mění práce s daty, jasně to řekni.
+
+Příklad:
+
+> **Rychlejší přehled zpožděných zakázek**
+> Přidali jsme filtr, který ukáže zakázky po termínu podle odpovědného technika. Pomůže týmům, které ráno řeší priority dispečinku. Není potřeba nic nastavovat. Změna nepřidává žádné nové sledování uživatelů ani externí skripty.
+
+Tohle je malá věc, ale zákazník z ní cítí provozní zralost.
+
+### Veřejný changelog šetří support
+
+Když zákazník neví, co se změnilo, ptá se podpory. Když podpora neví, co se změnilo, ptá se vývoje. Když vývoj neví, proč se to změnilo, všichni se dívají do ticketů a předstírají archeologii.
+
+Veřejný nebo poloveřejný changelog pomáhá:
+
+- snížit opakované dotazy typu „je to už hotové?“,
+- připomenout hodnotu produktu před obnovou předplatného,
+- ukázat tempo vývoje bez marketingového křiku,
+- dát obchodníkovi konkrétní důkazy do follow-upu,
+- vracet zákazníky k novým možnostem produktu,
+- dokumentovat opravy, které měly dopad na důvěru.
+
+Nemusí být veřejný úplně pro celý internet. U B2B produktu může být dostupný v aplikaci, v dokumentaci nebo jako RSS kanál pro zákazníky. Důležité je, aby nebyl zamčený v interním Slacku, kde ho najde jen člověk s detektivní licencí.
+
+### Privacy-first roadmapa má vlastní filtr
+
+Každý roadmap nápad by měl projít datovým filtrem ještě před tím, než se dostane do návrhu. Ušetříš si situaci, kdy se skvělá funkce na poslední chvíli ukáže jako sběr dat, který neumíš obhájit.
+
+Ptej se:
+
+- Jaká nová data funkce potřebuje?
+- Jde stejný výsledek udělat s menším množstvím dat?
+- Budou data opouštět evropské prostředí?
+- Přibývá nový subprocesor nebo integrace?
+- Potřebujeme změnit dokumentaci, DPA, privacy policy nebo nastavení souhlasů?
+- Dá se funkce vypnout nebo omezit pro citlivější zákazníky?
+- Jak zákazník exportuje nebo smaže data vytvořená touto funkcí?
+
+Tento filtr nebrzdí produkt. Brzdí chaos. A chaos je dražší než pár otázek na začátku.
+
+### Jak sbírat nápady bez hlasovací pasti
+
+Veřejné hlasování o funkcích vypadá demokraticky, ale často zvýhodní nejhlasitější zákazníky. Ti nemusí reprezentovat největší hodnotu ani nejlepší směr produktu. Roadmapa není reality show.
+
+Lepší systém:
+
+- sbírej požadavky do jednoho místa,
+- u každého požadavku zapisuj kontext zákazníka,
+- znač dopad na segment, tržby, retenci a provozní riziko,
+- rozlišuj „chci funkci“ od „mám problém“,
+- jednou týdně sluč duplicity,
+- jednou měsíčně vyber témata k validaci.
+
+Když zákazník navrhne konkrétní řešení, vrať se k problému: „Co by vám to umožnilo dělat?“ Tím často zjistíš, že existuje jednodušší cesta než funkce, kterou popsal.
+
+### Šablona roadmap položky
+
+Použij jednu kartu pro každé větší téma:
+
+```markdown
+## Název tématu
+
+**Stav:** Zvažujeme / Další / Teď / Vydáno
+**Segment:** Pro koho je to primárně
+**Problém:** Jaká situace dnes bolí
+**Dopad:** Čas, peníze, riziko, důvěra nebo retence
+**Signály:** Rozhovory, support tickety, pilotní feedback, data z používání
+**Privacy dopad:** Nová data, subprocesoři, export, mazání, dokumentace
+**Neuděláme:** Co záměrně není součástí první verze
+**Další krok:** Rozhovor, prototyp, technický návrh, pilot, vydání
+```
+
+Tahle šablona je nudná tím správným způsobem. Nutí tým přemýšlet dřív, než otevře editor.
+
+### Šablona changelog položky
+
+```markdown
+## Krátký nadpis změny
+
+**Co je nové:** Jedna až tři věty lidským jazykem.
+**Komu to pomůže:** Segment, role nebo konkrétní situace.
+**Co udělat teď:** Nic / zapnout v nastavení / zkontrolovat export / kontaktovat podporu.
+**Privacy poznámka:** Beze změny ve zpracování dat / aktualizovaná dokumentace / nový subprocesor.
+**Odkazy:** Nápověda, screenshot, dokumentace, kontaktní e-mail.
+```
+
+Pokud změna opravuje incident nebo bezpečnostní problém, buď konkrétní, ale neprozrazuj detaily, které by pomohly útočníkům. Řekni dopad, rozsah, co bylo opraveno a jestli zákazník musí něco udělat.
+
+### Minimální rytmus pro malý tým
+
+Nemusíš mít produktového manažera na plný úvazek. Stačí rytmus:
+
+- **Každý týden:** projdi nové požadavky, support témata a chyby.
+- **Každé dva týdny:** aktualizuj interní stav roadmapy.
+- **Každý měsíc:** publikuj souhrn vydaných změn.
+- **Každé čtvrtletí:** zreviduj veřejnou roadmapu a smaž věci, které už nedávají smysl.
+- **Po každé významné změně:** doplň changelog a případně dokumentaci.
+
+Nejhorší roadmapa je ta, která zestárne a nikdo se k ní nehlásí. Pokud něco nemáš kapacitu udržovat, zveřejni méně. Raději stručný živý changelog než velká mapa budoucnosti, která připomíná zapomenutý billboard u dálnice.
+
+### Codyho komentář
+
+Roadmapa je produktová hygiena. Není to věštírna, tisková zpráva ani nástroj na uklidnění každého člověka, který napíše „chybí mi integrace s mým oblíbeným nástrojem z roku 2009“. Dobrá roadmapa chrání pozornost týmu. Dobrý changelog chrání důvěru zákazníků. Obojí dohromady říká: víme, kam jdeme, a umíme o tom mluvit bez kouře a laserů.
+
+### Checklist: roadmapa a changelog bez kouřové clony
+
+- Má roadmapa rozdělení podle jistoty místo falešných termínů?
+- Má každá větší položka popsaný problém, segment a očekávaný výsledek?
+- Prochází nové nápady privacy-first filtrem před návrhem řešení?
+- Sbírá tým požadavky i s kontextem, ne jen jako seznam funkcí?
+- Existuje changelog psaný jazykem zákazníka?
+- Říká changelog, jestli má zákazník něco udělat?
+- Uvádíš u změn dopad na data, subprocesory nebo dokumentaci, když existuje?
+- Má tým týdenní nebo dvoutýdenní rytmus pro údržbu roadmapy?
+- Je jasné, které věci záměrně neděláte?
+- Umí support, obchod i zákazník najít poslední důležité změny bez archeologické výpravy?
+
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -3290,6 +3455,7 @@ Prodejní stránka má být jako dobrý obchodník: rozumí problému, mluví ja
 
 ## Pracovní log
 
+- **2026-09-12:** Doplněna příloha R o roadmapě a changelogu: práce se směrem produktu, zákaznickým changelogem, privacy-first filtrem, sběrem požadavků a šablonami.
 - **2026-09-11:** Založena struktura e-booku, osnova a dokončená kapitola 1 o validaci produktu před vývojem, včetně privacy-first doporučení a zdrojů ke GDPR/ePrivacy.
 - **2026-09-11:** Dopsána kapitola 2 o webu jako obchodním systému: struktura stránek, důvěra, konverze bez manipulace, privacy-first měření, obsah, rychlost a checklist.
 - **2026-09-11:** Dopsána kapitola 3 o SaaS bez přepálené architektury: MVP, modulární monolit, multi-tenant data, onboarding, billing, admin a technický dluh.
