@@ -3600,6 +3600,186 @@ Jak zákazník integraci odpojí a co se stane s daty a logy.
 
 Integrace mají zákazníkovi ubírat práci, ne přidávat riziko. Když začínáš malým scénářem, přesnou datovou smlouvou a dobrou dokumentací, může i jednoduché API působit dospěle. A hlavně: nebudeš za půl roku zjišťovat, proč se osobní údaje zákazníků posílají do tří nástrojů, které už nikdo nepoužívá.
 
+
+## Příloha T: Import dat bez rozbité důvěry
+
+První velký import je nenápadný test dospělosti SaaS produktu. Zákazník pošle CSV, export z původního systému nebo složku souborů a očekává, že „to nějak nahrajeme“. Jenže import není jen technická operace. Je to okamžik, kdy se do produktu dostávají historická data, nepořádek, duplicity, staré osobní údaje a procesní zkratky, které předchozí nástroj roky schovával pod koberec.
+
+Dobře zvládnutý import zrychlí onboarding a zvýší důvěru. Špatně zvládnutý import vytvoří chaos, který zákazník začne považovat za chybu nového produktu, i když vznikl dávno před ním. Ano, software často dědí rodinné trauma po Excelu.
+
+> Codyho komentář: Import dat je jako stěhování skladu. Nejdřív zjistíš, že půlka krabic nemá štítek, čtvrtina patří někomu jinému a jedna obsahuje kabely k zařízení, které nikdo neviděl od roku 2014.
+
+### Neimportuj všechno jen proto, že to existuje
+
+Zákazník má často pocit, že chce převést kompletní historii. Někdy je to pravda. Často ale potřebuje hlavně pokračovat v práci od zítřka ráno. Privacy-first přístup začíná otázkou, která data jsou nutná pro nový provoz.
+
+Rozděl data do tří skupin:
+
+- **Nutné pro start:** aktivní zákazníci, otevřené zakázky, aktuální smlouvy, uživatelské účty, rozpracované položky.
+- **Užitečné pro kontext:** poslední objednávky, stav plateb, štítky, poznámky, které tým opravdu používá.
+- **Archivní balast:** staré leady, neaktivní kontakty, historické logy, duplicitní exporty, data bez jasného účelu.
+
+Do první verze importuj hlavně první skupinu. Druhou skupinu přidej, pokud má jasné použití. Třetí skupinu raději ponech jako exportovaný archiv mimo produkt, pokud není právní nebo provozní důvod ji aktivně držet v aplikaci.
+
+### Importní mapa před prvním řádkem kódu
+
+Ještě před implementací si vytvoř importní mapu. Je to jednoduchá tabulka, která říká, odkud data přichází, kam se uloží, jak se transformují a kdo za rozhodnutí ručí.
+
+Importní mapa by měla obsahovat:
+
+- **Zdrojové pole:** název sloupce nebo atributu v exportu.
+- **Cílové pole:** kam se hodnota uloží v novém systému.
+- **Typ dat:** text, číslo, datum, e-mail, enum, soubor, vztah na jiný objekt.
+- **Povinnost:** zda je pole povinné, volitelné nebo jen informativní.
+- **Transformace:** normalizace telefonu, formát data, převod měny, sloučení hodnot.
+- **Citlivost:** běžný údaj, osobní údaj, citlivý provozní údaj, potenciální tajemství.
+- **Rozhodnutí při chybě:** přeskočit řádek, zastavit import, vyžádat opravu, použít výchozí hodnotu.
+
+Tahle mapa šetří nervy vývojářům i zákazníkům. Když se později někdo zeptá, proč se „kontaktní osoba“ změnila na „odpovědného uživatele“, odpověď není schovaná v migraci z úterý ve tři ráno.
+
+### Validace je produktová funkce
+
+Importní validace nemá být jen technický parser. Má zákazníkovi vysvětlit, co se stane a co musí opravit. Dobrá validace ukáže chyby dřív, než data zapíše do produkční databáze.
+
+Praktická pravidla:
+
+- **Nejdřív suchý běh:** nahraj soubor, zkontroluj data, ukaž náhled výsledku, ale ještě nic neměň.
+- **Chyby seskupuj:** místo 800 řádků s hláškou „invalid value“ napiš „134 kontaktů nemá platný e-mail“.
+- **Ukaž příklady:** přidej několik konkrétních řádků, aby zákazník věděl, co opravit.
+- **Odděl varování od blokátorů:** chybějící poznámka je varování, neplatné ID zákazníka může být blokátor.
+- **Dovol opravu u zdroje:** zákazník má upravit CSV nebo zdrojový systém, ne ručně opravovat náhodné záznamy po importu.
+
+U větších importů se vyplatí uložit importní report: počet řádků, počet vytvořených záznamů, počet aktualizací, přeskočené řádky, chyby a čas dokončení. Report je auditní stopa i praktický podklad pro support.
+
+### Duplicity řeš pravidly, ne intuicí
+
+Duplicity jsou největší tichý zabiják importů. Jeden zákazník může být v exportu třikrát, jednou s diakritikou, jednou bez ní a jednou pod starým názvem firmy. Pokud si pravidla vymyslíš až během importu, koleduješ si o chaos.
+
+Nejdřív definuj identitu objektu:
+
+- **Firma:** IČO, interní ID původního systému, doména nebo kombinace názvu a adresy.
+- **Kontakt:** e-mail, telefon nebo vazba na firmu a jméno.
+- **Zakázka:** původní číslo zakázky, zákazník a datum vytvoření.
+- **Produktová položka:** SKU, interní kód nebo externí identifikátor.
+
+Pak rozhodni, co se stane při shodě:
+
+- vytvořit nový záznam,
+- aktualizovat existující záznam,
+- přeskočit záznam,
+- sloučit záznamy až po ruční kontrole,
+- založit konflikt k vyřešení po importu.
+
+Privacy-first doporučení: nesnaž se deduplikovat lidi agresivně podle slabých signálů. Stejné jméno není stejný člověk. Stejná firma nemusí znamenat stejný kontakt. Když si nejsi jistý, raději vytvoř konflikt než falešně spojit data dvou osob.
+
+### Import musí být vratný nebo alespoň izolovaný
+
+Ideální import lze vrátit jedním kliknutím. Realita je někdy složitější, hlavně když se po importu začnou data upravovat. I tak potřebuješ bezpečnostní brzdy.
+
+Minimální sada opatření:
+
+- **Import batch ID:** každý vytvořený nebo změněný záznam ví, z jakého importu pochází.
+- **Záloha před importem:** zvlášť u prvních zákaznických migrací.
+- **Staging režim:** velký import nejdřív ověř v odděleném prostředí nebo tenantovi.
+- **Omezené oprávnění:** importní token neumí dělat nic mimo konkrétní migraci.
+- **Časové okno:** import spouštěj ve chvíli, kdy tým zvládne kontrolu a případný rollback.
+- **Stop tlačítko:** dlouhý import musí jít bezpečně zastavit.
+
+Pokud rollback nejde garantovat, řekni to zákazníkovi předem. Místo slibu „kdykoliv to vrátíme“ napiš přesný postup: co lze smazat automaticky, co se musí opravit ručně a jak dlouho bude trvat kontrola.
+
+### Soukromí při migraci: méně kopií, kratší retence
+
+Importy často vytváří nebezpečné vedlejší kopie dat: přílohy v e-mailu, CSV ve Slacku, lokální soubory na notebooku, dump databáze v dočasném bucketu. To je privacy-first past. Ne proto, že by tým chtěl šmírovat, ale protože „dočasně“ v IT občas znamená „najdeme to při auditu za tři roky“.
+
+Nastav jednoduchá pravidla:
+
+- zákazník nahrává soubor přes zabezpečený kanál, ne jako volnou přílohu do e-mailu,
+- importní soubory mají omezenou dobu uložení,
+- přístup má jen tým, který migraci skutečně řeší,
+- citlivé hodnoty se nemají objevovat v aplikačních logách,
+- po dokončení existuje kontrola, že dočasné soubory byly smazány,
+- zákazník dostane stručné potvrzení, co bylo importováno a co bylo odstraněno.
+
+U evropského provozu je dobré držet importní úložiště ve stejném regionu jako produktová data. Ne kvůli marketingové nálepce, ale kvůli jednodušším datovým tokům, menšímu počtu subprocesorů a lepší vysvětlitelnosti.
+
+### Komunikace se zákazníkem
+
+Import je pro zákazníka stresující, protože sahá na data, podle kterých firma pracuje. Technická přesnost nestačí. Potřebuješ jasný proces.
+
+Krátká komunikace před importem:
+
+- co budeme importovat,
+- co importovat nebudeme,
+- jaký formát očekáváme,
+- kdo data zkontroluje,
+- kdy proběhne suchý běh,
+- kdy proběhne ostrý import,
+- co se stane při chybě,
+- kdy smažeme dočasné soubory.
+
+Po importu pošli report v lidské řeči: „Importovali jsme 1 240 zákazníků, 318 aktivních zakázek a 52 uživatelů. Přeskočili jsme 17 kontaktů bez e-mailu, seznam je v příloze reportu. Dočasný importní soubor smažeme po potvrzení kontroly, nejpozději za 14 dní.“
+
+### Checklist: bezpečný import dat
+
+- [ ] Víme, která data jsou nutná pro start a která jsou jen archiv.
+- [ ] Máme importní mapu se zdrojovým polem, cílovým polem, transformací a citlivostí.
+- [ ] Umíme spustit suchý běh bez zápisu do produkce.
+- [ ] Chyby a varování jsou srozumitelné pro zákazníka, ne jen pro vývojáře.
+- [ ] Máme pravidla pro duplicity a konflikty.
+- [ ] Každý záznam vytvořený importem má import batch ID.
+- [ ] Existuje záloha, staging nebo jiná bezpečnostní brzda.
+- [ ] Dočasné soubory mají omezenou retenci a jasného vlastníka.
+- [ ] Citlivá data se neukládají do logů a neposílají do zbytečných nástrojů.
+- [ ] Zákazník dostane report po suchém běhu i po ostrém importu.
+
+### Šablona importní karty
+
+```markdown
+## Import: [název zákazníka / migrace]
+
+### Cíl
+- Co má být po importu možné dělat?
+- Které týmy budou s daty pracovat?
+
+### Rozsah
+- Importujeme:
+- Neimportujeme:
+- Archiv ponecháváme:
+
+### Zdroj
+- Systém / soubor:
+- Formát:
+- Vlastník dat u zákazníka:
+- Bezpečný způsob předání:
+
+### Mapování
+| Zdrojové pole | Cílové pole | Transformace | Citlivost | Chování při chybě |
+|---|---|---|---|---|
+|  |  |  |  |  |
+
+### Validace
+- Povinná pole:
+- Blokující chyby:
+- Varování:
+- Ukázkový report:
+
+### Rollback a retence
+- Záloha před importem:
+- Import batch ID:
+- Co lze vrátit automaticky:
+- Co vyžaduje ruční kontrolu:
+- Kdy se smažou dočasné soubory:
+
+### Výsledek
+- Vytvořeno:
+- Aktualizováno:
+- Přeskočeno:
+- Konflikty k vyřešení:
+- Potvrzení zákazníkem:
+```
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -3624,6 +3804,7 @@ Integrace mají zákazníkovi ubírat práci, ne přidávat riziko. Když začí
 
 ## Pracovní log
 
+- **2026-09-12:** Doplněna příloha T o bezpečných importech dat: rozsah migrace, importní mapa, validace, duplicity, rollback, retence a šablona importní karty.
 - **2026-09-12:** Doplněna příloha S o integracích a API partnerstvích: scénáře, datové smlouvy, webhooky, partnerská pravidla, dokumentace a privacy-first checklist.
 - **2026-09-12:** Doplněna příloha R o roadmapě a changelogu: práce se směrem produktu, zákaznickým changelogem, privacy-first filtrem, sběrem požadavků a šablonami.
 - **2026-09-11:** Založena struktura e-booku, osnova a dokončená kapitola 1 o validaci produktu před vývojem, včetně privacy-first doporučení a zdrojů ke GDPR/ePrivacy.
