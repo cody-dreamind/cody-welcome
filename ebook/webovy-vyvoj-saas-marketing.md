@@ -1691,12 +1691,141 @@ Onboarding je první provozní důkaz, že produkt myslí na zákazníka i po pr
 
 ---
 
+## Příloha F: Offboarding, export a mazání dat bez paniky
+
+Dobře navržený SaaS se pozná nejen podle toho, jak vítá nové zákazníky, ale i podle toho, jak se chová, když zákazník odchází. Offboarding je nepříjemné téma jen pro produkt, který stojí na zámcích, ne na hodnotě. Pokud zákazník nemůže rozumně odejít, exportovat data nebo pochopit, co se po ukončení stane, není to růstová strategie. Je to digitální past s lepším fontem.
+
+Privacy-first produkt má mít odchod stejně promyšlený jako onboarding. Ne proto, že chce zákazníky ztrácet, ale protože důvěra vzniká i z možnosti férově odejít. Evropský kontext k tomu přidává praktický rámec: EDPB ve svém průvodci pro malé firmy připomíná práva subjektů údajů včetně přístupu, výmazu, omezení zpracování a přenositelnosti dat. Evropská komise zároveň uvádí, že na žádosti lidí o uplatnění práv má organizace odpovědět bez zbytečného odkladu a v zásadě do jednoho měsíce.
+
+> Codyho komentář: Produkt, který dělá export těžší než registraci, tím říká hodně. A většinou ne to, co by chtěl mít v brand manuálu.
+
+### Začni scénáři odchodu
+
+Ne každý odchod znamená nespokojenost. Někdo ruší trial, někdo přechází na vyšší interní systém, někdo končí projekt, někdo mění dodavatele kvůli nákupu ve velké firmě. Když všechny scénáře narveš do jednoho tlačítka „smazat účet“, buď přijdeš o užitečnou zpětnou vazbu, nebo vytvoříš právní a provozní chaos.
+
+Prakticky rozděl offboarding aspoň na čtyři situace:
+
+- **Konec trialu:** uživatel produkt neaktivoval nebo nezískal hodnotu.
+- **Zrušení předplatného:** zákazník nechce dál platit, ale může chtít data zachovat do konce období.
+- **Export a migrace:** zákazník odchází, ale potřebuje předat data jinému systému.
+- **Žádost o výmaz:** zákazník nebo uživatel chce odstranit osobní údaje tam, kde to lze.
+
+Každý scénář má mít vlastní text, proces a odpovědnost. Trial může skončit automaticky po jasné retenční době. Placený zákazník potřebuje informaci o fakturaci, datu ukončení služby a exportu. Žádost o výmaz musí projít kontrolou, jestli některá data nejde smazat hned kvůli právní povinnosti, účetnictví nebo obraně právních nároků.
+
+### Export není poslední vývojový úkol
+
+Export dat se špatně dodělává až ve chvíli, kdy první zákazník odchází a support píše do vývoje „šlo by rychle vytáhnout všechno z databáze?“. Šlo. Ale rychle a bezpečně jsou dvě různé věci. Export má být součástí návrhu datového modelu, ne noční archeologie v produkci.
+
+U malého B2B SaaS obvykle stačí:
+
+- **CSV nebo JSON** pro hlavní zákaznická data,
+- **ZIP archiv** pro soubory a přílohy,
+- **README** s popisem polí, časových zón a vztahů mezi soubory,
+- **auditní potvrzení** kdy byl export vytvořen a kdo ho stáhl,
+- **časově omezený odkaz** místo trvalého veřejného URL.
+
+EDPB u přenositelnosti dat zmiňuje strukturovaný, běžně používaný a strojově čitelný formát; jako praktické příklady uvádí XML, JSON a CSV. PDF výpis může být hezký pro člověka, ale pro přenos dat do jiného systému často nestačí. Pokud export poskytuje jen screenshot v PDF, je to spíš suvenýr než přenositelnost.
+
+Export by měl respektovat role. Běžný člen týmu nemá stáhnout všechno jen proto, že našel tlačítko. U firemního účtu patří export vlastníkovi organizace nebo roli s výslovným oprávněním. Když jde o citlivější data, přidej potvrzení e-mailem, krátkou platnost odkazu a záznam do audit logu.
+
+### Mazání dat je proces, ne tlačítko s dramatickou ikonou
+
+Mazání účtu zní jednoduše, dokud produkt nemá faktury, auditní logy, sdílené projekty, komentáře, zálohy a napojení na support. Proto je potřeba rozlišit několik vrstev:
+
+- **Deaktivace přístupu:** uživatel se už nepřihlásí, ale data mohou existovat kvůli službě nebo zákonné povinnosti.
+- **Smazání pracovních dat:** projekty, soubory, úkoly, importy, poznámky a jiné zákaznické obsahy.
+- **Anonymizace stop:** komentáře, logy nebo statistiky se oddělí od konkrétní identity, pokud je to vhodné.
+- **Retence povinných záznamů:** faktury, účetní doklady nebo bezpečnostní logy mohou mít odlišnou retenční dobu.
+- **Zálohy:** data mohou dočasně existovat v zálohách, ale nesmí se běžně obnovovat do aktivního provozu mimo definovaný proces.
+
+Dobrá praxe je mít jednoduchou retenční tabulku. Například: trial data mažeme po 30 dnech od expirace, neaktivní importy po 90 dnech, technické logy po 14 až 30 dnech podle účelu, fakturační doklady podle účetních povinností. Konkrétní lhůty si nastav podle právního a provozního kontextu, ale hlavně je napiš a automatizuj. Retence, která žije jen v hlavě zakladatele, není retence. Je to folklór.
+
+### Žádosti uživatelů musí mít vlastní frontu
+
+Žádost o přístup, opravu, výmaz nebo přenositelnost nesmí zapadnout mezi běžné support tickety typu „nejde mi nahrát logo“. V malém týmu nemusíš mít drahý compliance systém, ale potřebuješ spolehlivý postup.
+
+Minimální workflow:
+
+1. **Přijmout žádost** přes e-mail, formulář nebo support.
+2. **Ověřit identitu** přiměřeně riziku a typu dat.
+3. **Zařadit typ žádosti**: přístup, oprava, výmaz, omezení, námitka, přenositelnost.
+4. **Zkontrolovat výjimky**: právní povinnosti, práva dalších osob, bezpečnostní záznamy, účetnictví.
+5. **Provést akci** v produktu, databázi, subprocesorech a dokumentaci.
+6. **Odpovědět srozumitelně** a uložit důkaz, že tým žádost vyřídil.
+
+Evropská komise u žádostí jednotlivců uvádí možnost požádat o další informace k potvrzení identity a povinnost sdělit důvod, pokud organizace žádost odmítne. To je důležité hlavně u B2B SaaS, kde se mohou míchat role: zaměstnanec zákazníka, administrátor účtu, fakturační kontakt a koncový uživatel nejsou vždy stejná osoba.
+
+### Subprocesoři nesmí zůstat bokem
+
+Když smažeš data jen ve vlastní databázi, ale necháš je v support nástroji, analytice, e-mailingu a exportním úložišti, máš jen hezký pocit. Offboarding musí zahrnovat všechny systémy, kam data tečou.
+
+U každého subprocesora si napiš:
+
+- jaká data tam posíláš,
+- kdo má k účtu přístup,
+- jak se exportují nebo mažou záznamy,
+- jak dlouho je drží dodavatel,
+- kde najdeš smlouvu, DPA a bezpečnostní informace,
+- kdo v týmu je vlastník integrace.
+
+Privacy-first SaaS v Evropě má výhodu, když tyto informace umí ukázat bez lovu v deseti admin panelech. Neznamená to, že nesmíš používat žádné externí služby. Znamená to, že víš, co dělají, proč je používáš a jak se chovají při ukončení spolupráce.
+
+### Zachraňuj vztah, ne blokuj dveře
+
+Offboarding je také obchodní moment. Zákazník, který dnes odchází, se může za půl roku vrátit nebo doporučit produkt někomu jinému. Ale jen pokud ho při odchodu nenaštveš.
+
+Férový retenční dialog vypadá takto:
+
+- nabídni pomoc s problémem, pokud je důvod technický,
+- ukaž možnost nižšího tarifu nebo pauzy, pokud dává smysl,
+- zeptej se na důvod odchodu jednou, ne výslechem,
+- neblokuj zrušení povinným hovorem,
+- pošli potvrzení ukončení a další kroky,
+- připomeň export a termín mazání dat.
+
+Manipulativní retenční taktiky možná krátkodobě zlepší metriku churnu v dashboardu. Dlouhodobě zhorší značku. Pokud člověk musí hledat zrušení přes pět obrazovek a jednoho chatbota, nebude si pamatovat hodnotu produktu. Bude si pamatovat digitální únikový pokoj.
+
+### Šablona e-mailu po zrušení předplatného
+
+> Dobrý den,
+>
+> potvrzujeme zrušení předplatného [produkt]. Přístup zůstane aktivní do [datum], pokud není domluveno jinak.
+>
+> Export dat najdete zde: [odkaz nebo instrukce]. Odkaz je dostupný do [datum] a může ho stáhnout pouze oprávněná role účtu.
+>
+> Po ukončení služby budeme s daty nakládat podle našich retenčních pravidel: [stručný popis nebo odkaz]. Pokud chcete požádat o výmaz osobních údajů nebo máte dotaz k datům, napište na [kontakt].
+>
+> Budeme rádi za jednu větu zpětné vazby: co byl hlavní důvod ukončení?
+>
+> Díky za důvěru a ať se daří.
+
+Tahle zpráva není román. Je to mapa. Zákazník ví, kdy končí přístup, kde získá data, co se bude dít dál a kudy řešit práva nebo dotazy.
+
+### Checklist: offboarding a data exit
+
+- [ ] Máme popsané scénáře pro konec trialu, zrušení předplatného, export a výmaz.
+- [ ] Export hlavních dat existuje ve strojově čitelném formátu.
+- [ ] Export může spustit jen oprávněná role a akce se zapisuje do audit logu.
+- [ ] Retenční tabulka říká, co mažeme, kdy a proč.
+- [ ] Žádosti subjektů údajů mají vlastní workflow a odpovědnou osobu.
+- [ ] Umíme rozlišit smazání pracovních dat, anonymizaci a povinnou retenci.
+- [ ] Subprocesoři jsou zahrnutí v exportu, výmazu nebo retenčním procesu.
+- [ ] Zálohy mají jasný režim obnovy a expirace.
+- [ ] Zrušení předplatného nevyžaduje povinný hovor ani lov v rozhraní.
+- [ ] E-mail po ukončení obsahuje datum konce, export, retenční pravidla a kontakt.
+
+Offboarding není přiznání porážky. Je to poslední část zákaznické zkušenosti, která ukazuje, jestli produkt opravdu respektuje kontrolu nad daty. Když zákazník může odejít klidně, exportovat rozumně a chápat, co se bude dít dál, paradoxně tím posiluješ důvěru i u těch, kteří zůstávají.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
 - Evropská komise: [Information for business and organisations](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations_en)
+- Evropská komise: [Dealing with requests from individuals](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en)
 - EDPB: [Data protection guide for small business](https://www.edpb.europa.eu/sme_en)
 - EDPB: [Be compliant](https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en)
+- EDPB: [Respect individuals’ rights](https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_en)
 - EDPB: [Frequently Asked Questions](https://www.edpb.europa.eu/contact/frequently-asked-questions_en)
 - EDPB: [Consent under GDPR — summary](https://www.edpb.europa.eu/system/files/2026-04/edpb-summary-consent_en.pdf)
 - EDPB: [Feedback on the cookie pledge draft principles](https://www.edpb.europa.eu/system/files/2023-12/edpb_letter_out20230098_feedback_on_cookie_pledge_draft_principles_en.pdf)
@@ -1721,3 +1850,4 @@ Onboarding je první provozní důkaz, že produkt myslí na zákazníka i po pr
 - **2026-09-12:** Doplněna příloha C o přechodu z pilotu na první placený provoz: nabídka, výjimky, onboarding, support, fakturace a checklist před druhým zákazníkem.
 - **2026-09-12:** Doplněna příloha D s 90denním obsahovým systémem bez honění algoritmů: tematická mapa, měsíční aktivum, privacy-first distribuce, měření a brief.
 - **2026-09-12:** Doplněna příloha E o zákaznickém onboardingu po první platbě: aktivační moment, vrstvená komunikace, znalostní báze, měření a uvítací e-mail.
+- **2026-09-12:** Doplněna příloha F o offboardingu, exportu a mazání dat: scénáře odchodu, strojově čitelný export, retenční proces, žádosti subjektů údajů a checklist.
