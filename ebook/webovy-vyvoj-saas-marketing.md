@@ -6535,6 +6535,176 @@ Design systém pro malý SaaS nemá udělat z týmu design korporaci. Má z tým
 
 ---
 
+## Příloha AL: Výkon webu bez honění zeleného kolečka
+
+Rychlost webu není sportovní disciplína pro Lighthouse maniaky. Je to obchodní vlastnost. Pomalý web zvyšuje tření, snižuje důvěru a dělá z každého kliknutí malou zkoušku trpělivosti. Zvlášť u SaaS a B2B webů platí: když návštěvník čeká na ceník, demo formulář nebo dokumentaci, produkt ještě nezačal a už trochu prohrává.
+
+Výkon ale nejde řídit jen tím, že jednou měsíčně otevřeš PageSpeed Insights a nervózně čekáš, jestli kolečko zezelená. Podle dokumentace PageSpeed Insights je dobré rozlišovat laboratorní data z řízeného testu a field data z reálného používání přes Chrome UX Report. Core Web Vitals pak sledují hlavně LCP, INP a CLS: načtení hlavního obsahu, odezvu na interakci a vizuální stabilitu stránky.
+
+*Codyho komentář:* Zelené skóre je fajn. Ale zákazník neříká: „Ten produkt miluju, měl 97 bodů.“ Říká: „Našel jsem, co jsem potřeboval, nic neposkakovalo a formulář mě nenaštval.“ Takže ano, měř. Ale nemodli se k semaforu.
+
+### Začni kritickými cestami, ne domovskou stránkou
+
+Domovská stránka je důležitá, ale často není jediný výkonový problém. U SaaS produktu mě zajímá hlavně to, kde výkon ovlivňuje obchod nebo důvěru:
+
+- landing page pro placenou kampaň,
+- stránka s ceníkem,
+- registrace a první přihlášení,
+- onboardingový krok s importem dat,
+- dashboard po přihlášení,
+- vyhledávání, tabulky a detail záznamu,
+- dokumentace nebo nápověda během rozhodování.
+
+Pro každou kritickou cestu si napiš jednoduchou otázku: „Co tady uživatel potřebuje udělat bez zdržení?“ U landing page je to pochopit nabídku a kliknout. U dashboardu vidět stav a pokračovat v práci. U formuláře bezpečně odeslat data. Výkon měř podle těchto úkolů, ne podle abstraktní touhy mít všude perfektní skóre.
+
+### Rozlišuj laboratorní a reálná data
+
+Laboratorní test je jako zkušební kuchyně. Má kontrolované podmínky, stejné zařízení, stejnou síť a dobře se v něm ladí technické chyby. Reálná data jsou jako restaurace v pátek večer. Lidé mají různá zařízení, sítě, rozšíření v prohlížeči, staré telefony a netrpělivost velikosti menšího kamionu.
+
+Používej oboje:
+
+- **Lab data:** najdou konkrétní příčiny, třeba velký JavaScript bundle, render-blocking CSS, neoptimalizované obrázky nebo drahý hydration krok.
+- **Field data:** ukážou, jak stránku skutečně zažívají lidé v provozu.
+- **Lokální měření:** pomůže při vývoji, ale nesmí být jediným důkazem.
+- **Monitoring po releasu:** hlídá, jestli se výkon nezhoršil po nové funkci, skriptu nebo změně CMS.
+
+Praktické pravidlo: když lab test hlásí problém, ber ho jako stopu. Když field data dlouhodobě ukazují špatnou zkušenost na důležité šabloně, ber to jako produktový dluh.
+
+### Nejrychlejší optimalizace bývá odebrání věcí
+
+Privacy-first provoz má krásný vedlejší efekt: méně externích skriptů často znamená rychlejší web. Trackery, chat widgety, heatmapy, reklamní pixely, social embed skripty a A/B testovací knihovny se tváří jako drobnosti. Jenže každá drobnost může přidat síťový požadavek, JavaScript, blokování hlavního vlákna nebo vizuální posun.
+
+Než začneš hero sekci přepisovat do exotického frameworku, udělej úklid:
+
+- smaž nepoužívané marketingové skripty,
+- nahraď social embed obyčejným odkazem,
+- načítej chat widget až po jasné akci uživatele,
+- nedávej video na autoplay do první obrazovky,
+- omez fonty na minimum řezů,
+- vyměň obří PNG za optimalizované obrázky ve vhodném formátu,
+- nepoužívej knihovnu kvůli efektu, který zvládne CSS.
+
+Tohle není asketismus. To je respekt k uživateli. Když stránka funguje rychleji, sbírá méně dat a má méně externích závislostí, vyhrávají všichni kromě dodavatelů sledovacích cetek. Ti to přežijí.
+
+### Výkon dashboardu řeš jinak než výkon landing page
+
+Marketingový web má být rychlý hlavně v první obrazovce, čitelnosti a jasné navigaci. SaaS aplikace má navíc zvládnout dlouhodobou práci: tabulky, filtry, ukládání, modaly, nahrávání souborů a přepínání mezi stavy.
+
+Pro landing page typicky řeš:
+
+- server-side render nebo statické HTML tam, kde dává smysl,
+- prioritu hlavního obsahu a hero obrázku,
+- malé množství JavaScriptu,
+- stabilní layout bez poskakování,
+- rychlé načtení fontů a fallback,
+- formulář bez těžkých závislostí.
+
+Pro SaaS aplikaci typicky řeš:
+
+- stránkování nebo virtualizaci dlouhých tabulek,
+- rychlou odezvu na kliknutí,
+- skeletony jen tam, kde opravdu pomáhají,
+- optimistic UI u bezpečných akcí,
+- cachování častých dotazů,
+- oddělení drahých reportů od běžného dashboardu,
+- backendové limity, aby jeden export nepoložil pracovní den všem ostatním.
+
+Nejhorší varianta je tvářit se, že dashboard se stovkami záznamů je stejný problém jako statická homepage. Není. Jeden prodává důvěru před registrací, druhý drží důvěru po zaplacení.
+
+### Nastav výkonový rozpočet
+
+Výkonový rozpočet je dohoda, kolik si web smí dovolit. Bez rozpočtu se každý nový skript tváří jako „jen malý doplněk“. Po půl roce má stránka digitální batoh plný cihel.
+
+Příklad jednoduchého rozpočtu pro marketingovou stránku:
+
+- žádný externí marketingový skript bez schválení,
+- maximálně jedna analytická knihovna,
+- žádný social embed v první obrazovce,
+- obrázky v hero sekci musí mít jasně nastavené rozměry,
+- každá nová knihovna musí mít důvod a vlastníka,
+- při zhoršení Core Web Vitals se release řeší jako regresní chyba.
+
+Příklad rozpočtu pro aplikaci:
+
+- základní dashboard nesmí čekat na všechny reporty,
+- tabulka nesmí načítat neomezený počet řádků,
+- každá integrace má timeout a chybový stav,
+- import a export běží asynchronně,
+- drahé dotazy mají limit, cache nebo frontu,
+- produktový tým vidí výkonové regresní chyby v backlogu.
+
+Rozpočet nemusí být dokonalý. Musí být viditelný a používaný.
+
+### Měř minimum, které vede k rozhodnutí
+
+Privacy-first měření výkonu nemusí znát identitu konkrétního člověka. V mnoha případech stačí agregovaný pohled podle typu stránky, zařízení, země nebo verze aplikace. Cílem není sledovat Frantu z účtárny, ale vědět, že stránka ceníku je pomalá na mobilech nebo že nový dashboard zhoršil interaktivitu.
+
+Dobrá výkonová událost může obsahovat:
+
+- typ stránky nebo šablony,
+- anonymizovanou verzi aplikace,
+- základní kategorii zařízení,
+- hodnotu metriky v bucketu,
+- čas měření zaokrouhlený na rozumnou granularitu,
+- informaci, jestli šlo o první návštěvu v relaci.
+
+Špatná výkonová událost obsahuje e-mail, celé URL s tokeny, obsah formuláře, ID zákazníka bez důvodu nebo přesný otisk zařízení. Výkon nepotřebuje šmírovací cosplay.
+
+### Checklist: výkon webu privacy-first
+
+- Máme vybrané kritické cesty, ne jen domovskou stránku.
+- Rozlišujeme lab data, field data a lokální měření.
+- Umíme říct, které metriky ovlivňují obchodní výsledek.
+- Každý externí skript má vlastníka, účel a datum revize.
+- Nepoužíváme tracking jen proto, že je součástí marketingového nástroje.
+- Obrázky, fonty a videa mají pravidla pro velikost a načítání.
+- Dashboardy neblokují základní práci kvůli drahým reportům.
+- Importy, exporty a integrace mají timeouty, fronty nebo asynchronní zpracování.
+- Výkonové regresní chyby se dostávají do backlogu stejně jako produktové bugy.
+- Měření výkonu neukládá osobní údaje, pokud k tomu není jasný důvod.
+
+### Šablona výkonové karty
+
+```markdown
+## Výkonová karta: [stránka / tok / šablona]
+
+### Kontext
+- Účel stránky:
+- Kritická akce uživatele:
+- Segment uživatelů:
+- Zařízení / prostředí:
+
+### Metriky
+- Primární metrika:
+- Sekundární metriky:
+- Lab nástroj:
+- Field zdroj:
+- Frekvence kontroly:
+
+### Rozpočet
+- Externí skripty:
+- Obrázky a média:
+- JavaScript:
+- Datové dotazy:
+- Integrace:
+
+### Privacy-first kontrola
+- Jaká výkonová data sbíráme:
+- Co záměrně nesbíráme:
+- Retence měření:
+- Kdo má přístup:
+
+### Regrese
+- Co znamená problém:
+- Kdo je vlastník opravy:
+- Jaký je rollback plán:
+- Kdy se karta reviduje:
+```
+
+Výkon není jednorázová optimalizace před launchí. Je to provozní hygiena. Malý tým nemusí mít vlastní performance oddělení, ale měl by mít zdravý reflex: když něco přidáváme, ptáme se, co to stojí uživatele, prohlížeč, data a důvěru.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -6563,11 +6733,16 @@ Design systém pro malý SaaS nemá udělat z týmu design korporaci. Má z tým
 - EDPB: [Guidelines on the right to data portability under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en)
 - Evropská komise: [Obligations for businesses and organisations under GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en)
 - Evropská komise: [Standard Contractual Clauses](https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en)
+- web.dev: [Web Vitals](https://web.dev/articles/vitals)
+- web.dev: [How the Core Web Vitals metrics thresholds were defined](https://web.dev/articles/defining-core-web-vitals-thresholds)
+- Google for Developers: [About PageSpeed Insights](https://developers.google.com/speed/docs/insights/v5/about)
+- Google Search Central: [Understanding Core Web Vitals and Google search results](https://developers.google.com/search/docs/appearance/core-web-vitals)
 
 ---
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha AL o výkonu webu bez honění zeleného kolečka: kritické cesty, lab vs. field data, úklid externích skriptů, výkon landing page a dashboardu, výkonový rozpočet, privacy-first měření, checklist a výkonová karta.
 - **2026-09-13:** Doplněna příloha AK o design systému pro malý SaaS: produktová pravidla, tokeny, komponenty podle toků, microcopy, formuláře a tabulky, privacy-first UI vzory, údržba systému, checklist a komponentová karta.
 - **2026-09-13:** Doplněna příloha AJ o interním vyhledávání znalostí bez datového kombajnu: typy dotazů, vrstvy zdrojů, přístupová práva, AI odpovědi se zdroji, vlastnictví dokumentů, privacy-first měření a šablona znalostní karty.
 - **2026-09-13:** Doplněna příloha AI o zpracovatelských smlouvách pro malý privacy-first SaaS: role správce a zpracovatele, realistická DPA, subprocesoři, mezinárodní předávání, napojení na produktové procesy, checklist a DPA karta.
