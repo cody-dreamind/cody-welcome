@@ -7027,6 +7027,165 @@ Přístupy jsou nudné jen do chvíle, než nejsou. Dobře nastavený systém ú
 
 ---
 
+## Příloha AO: SEO bez sledovacího cirkusu
+
+SEO má zvláštní schopnost svádět týmy k divným rituálům: instalovat pět analytických skriptů, psát texty pro roboty, generovat stovky podobných stránek a čekat, že se z toho narodí růst. V privacy-first SaaS je lepší začít jednodušeji: pomoz vyhledávači pochopit, co je stránka zač, pomoz člověku najít odpověď a měř jen tolik, kolik potřebuješ k rozhodnutí.
+
+Technické SEO není kouzlo. Je to hygiena: URL, titulky, popisy, interní odkazy, sitemap, robots.txt, rychlost, dostupnost, strukturovaná data a obsah, který odpovídá na skutečné otázky. Když máš dobrý produkt, ale web nejde rozumně procházet, je to jako otevřít obchod a sundat ceduli ze dveří.
+
+Codyho komentář: Pokud SEO audit začíná slovy „nainstalujeme další tracking“, zpozorni. Často to znamená, že někdo neumí položit lepší otázku než „kolik lidí kliklo?“
+
+### Začni mapou záměrů, ne klíčových slov
+
+Klíčová slova jsou užitečná, ale sama o sobě neříkají, co má člověk za problém. Lepší je sepsat záměry:
+
+- **Informační záměr:** člověk se učí téma a hledá vysvětlení.
+- **Srovnávací záměr:** porovnává přístupy, nástroje nebo dodavatele.
+- **Nákupní záměr:** chce vědět cenu, rizika, integrace, limity a další krok.
+- **Podpůrný záměr:** už produkt používá a řeší konkrétní problém.
+
+Pro malý SaaS to může vypadat takhle:
+
+| Záměr | Příklad dotazu | Vhodná stránka |
+| --- | --- | --- |
+| Informační | „jak řídit servisní zakázky bez excelu“ | praktický článek s procesem |
+| Srovnávací | „CRM vs zakázkový systém pro servis“ | porovnávací landing page |
+| Nákupní | „software pro plánování techniků cena“ | pricing + demo |
+| Podpůrný | „jak importovat zakázky z CSV“ | nápověda |
+
+Tahle mapa pomáhá psát méně obsahu, ale lepšího. Nehoníš stovky frází. Stavíš knihovnu odpovědí, která podporuje prodej, onboarding i zákaznickou podporu.
+
+### Každá důležitá stránka má mít jednu práci
+
+Stránka bez jasné práce končí jako sklad kompromisů. Nejdřív si napiš větu: „Tato stránka má pomoci [komu] udělat [jaké rozhodnutí].“
+
+Příklad:
+
+- Domovská stránka: vysvětlit, pro koho produkt je a proč stojí za další klik.
+- Pricing: ukázat balíčky, limity, férové podmínky a další krok.
+- Integrace: odpovědět, jaká data tečou mezi systémy a kdo za ně odpovídá.
+- Blogový článek: vyřešit jeden konkrétní problém a nabídnout související další krok.
+- Nápověda: zkrátit cestu k dokončení úkolu bez kontaktu na support.
+
+Praktická struktura pro důležitou stránku:
+
+1. **Title:** čitelný název s hlavním tématem, ne spam klíčových slov.
+2. **Meta description:** stručný slib a kontext, proč kliknout.
+3. **H1:** lidsky pojmenovaný problém nebo výsledek.
+4. **První odstavec:** komu stránka pomáhá a co si odnese.
+5. **Vnitřní odkazy:** další krok v cestě, ne náhodné „mohlo by vás zajímat“.
+6. **CTA:** jedna hlavní akce, která odpovídá záměru stránky.
+
+### Sitemap a robots.txt ber jako provozní dokumentaci
+
+Google i Bing ve svých dokumentacích popisují sitemap jako způsob, jak vyhledávačům pomoci najít důležité URL. Robots.txt naopak řídí crawling, ale nemá být hlavní mechanismus pro utajení soukromého obsahu. Soukromé nebo zákaznické stránky patří za přihlášení a citlivé stránky mají mít jasné `noindex`, pokud nemají být v indexu.
+
+Pro malý web stačí jednoduchý rytmus:
+
+- při každém deployi vygeneruj aktuální `sitemap.xml`,
+- v `robots.txt` odkaž na sitemap,
+- blokuj technické duplicity a zbytečné crawl cesty,
+- nikdy neschovávej neveřejná data jen přes `robots.txt`,
+- po větších změnách zkontroluj indexaci v Search Console a Bing Webmaster Tools.
+
+Privacy-first pohled: `sitemap.xml` je veřejný seznam URL. Nedávej do něj staging, interní preview, zákaznické portály, dočasné exporty ani nic, co by nemělo být veřejně objevitelné. Zní to banálně. Přesně proto se to vyplatí kontrolovat automaticky.
+
+### Měř objevitelnost, ne každé nadechnutí návštěvníka
+
+SEO nepotřebuje sledovat konkrétní lidi přes půl internetu. Pro rozhodování většinou stačí agregovaná data:
+
+- počet impresí a kliků ze Search Console nebo Bing Webmaster Tools,
+- dotazy a stránky, které získávají viditelnost,
+- technické chyby indexace,
+- základní návštěvnost přes privacy-first analytiku,
+- konverze na úrovni formuláře, demo poptávky nebo registrace,
+- kvalita leadů podle interního CRM nebo jednoduché pipeline karty.
+
+Nesnaž se za každou cenu spojit vyhledávací dotaz s konkrétním člověkem. U B2B SaaS je často hodnotnější vědět, že stránka o importu CSV přivádí dobré demo cally, než mít detailní behaviorální profil návštěvníka, který stejně ještě není zákazník.
+
+### Obsah propojuj jako produktovou dokumentaci
+
+Dobré SEO není jen akvizice. Je to navigace znalostí. Když článek vysvětluje problém, měl by odkazovat na relevantní use-case. Když use-case slibuje řešení, měl by ukázat integrace, pricing a demo. Když nápověda řeší detail, měla by se vracet k širšímu konceptu.
+
+Použij jednoduchý model:
+
+- **Pilířová stránka:** hlavní téma, například „řízení servisních zakázek“.
+- **Podpůrné články:** konkrétní otázky, chyby, checklisty a rozhodování.
+- **Produktové stránky:** funkce, integrace, pricing, bezpečnost, privacy.
+- **Nápověda:** návody pro uživatele a opakovatelné postupy.
+- **Changelog:** důkaz, že produkt žije a zlepšuje se.
+
+Interní odkazy mají být užitečné, ne dekorativní. Pokud odkaz nepomáhá čtenáři udělat další krok, pryč s ním. Web není vánoční stromeček.
+
+### Technické SEO kontroluj při releasu
+
+SEO chyby často vzniknou bokem: redesign smaže meta popisy, router začne generovat duplicitní URL, staging se dostane do indexu, obrázky nemají rozměry, dokumentace vrací špatné status kódy. Proto patří základní SEO kontrola do release checklistu.
+
+Minimální kontrola:
+
+- domovská stránka a hlavní landing pages vrací `200`,
+- staré URL mají smysluplné `301` přesměrování,
+- neexistující stránky vrací `404`, ne falešnou stránku s `200`,
+- titulky a H1 nejsou prázdné ani duplicitní u klíčových stránek,
+- canonical URL odpovídá veřejné verzi stránky,
+- sitemap neobsahuje neveřejné ani chybové URL,
+- robots.txt neblokuje důležité CSS, JS nebo landing pages,
+- formuláře fungují bez externích social loginů jako jediné možnosti,
+- stránka je použitelná bez marketingových skriptů.
+
+### Checklist: SEO bez sledovacího cirkusu
+
+- Máme mapu záměrů pro akvizici, porovnání, nákup i podporu.
+- Každá důležitá stránka má jednu práci, jasný title, H1, description a CTA.
+- `sitemap.xml` se generuje z veřejných kanonických URL.
+- `robots.txt` řídí crawling, ale neslouží jako ochrana neveřejných dat.
+- Soukromé části produktu jsou za přihlášením a nejsou v sitemap.
+- Měříme agregovaně: imprese, kliky, stránky, chyby indexace a obchodní dopad.
+- Nepřidáváme trackery jen proto, že je má konkurence.
+- Interní odkazy vedou čtenáře k dalšímu užitečnému kroku.
+- Release checklist obsahuje status kódy, canonical, sitemap, robots a metadata.
+- Každý kvartál mažeme nebo slučujeme obsah, který je duplicitní, zastaralý nebo bez účelu.
+
+### Šablona SEO karty
+
+```md
+## SEO karta: [stránka / téma]
+
+### Účel
+- Komu stránka pomáhá:
+- Jaké rozhodnutí má podpořit:
+- Primární záměr:
+
+### Obsah
+- Hlavní otázka:
+- Důkaz / příklad:
+- Další krok pro čtenáře:
+- Interní odkazy:
+
+### Technika
+- Kanonická URL:
+- Title:
+- Meta description:
+- H1:
+- Strukturovaná data:
+- Stav v sitemap:
+
+### Privacy-first měření
+- Agregovaná metrika:
+- Konverzní signál:
+- Data, která nesbíráme:
+- Retence dat:
+
+### Review
+- Poslední kontrola:
+- Co zlepšit:
+- Vlastník:
+```
+
+SEO je nejsilnější, když není oddělený trik, ale součást produktu. Dobrý obsah s jasnou strukturou pomáhá lidem, vyhledávačům, supportu i obchodu. A když to zvládneš bez datového cirkusu, získáš něco lepšího než pár grafů navíc: důvěru.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -7059,11 +7218,18 @@ Přístupy jsou nudné jen do chvíle, než nejsou. Dobře nastavený systém ú
 - web.dev: [How the Core Web Vitals metrics thresholds were defined](https://web.dev/articles/defining-core-web-vitals-thresholds)
 - Google for Developers: [About PageSpeed Insights](https://developers.google.com/speed/docs/insights/v5/about)
 - Google Search Central: [Understanding Core Web Vitals and Google search results](https://developers.google.com/search/docs/appearance/core-web-vitals)
+- Google Search Central: [SEO Guide for Web Developers](https://developers.google.com/search/docs/fundamentals/get-started-developers)
+- Google Search Central: [What is a sitemap?](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview)
+- Google Search Central: [Robots.txt Introduction and Guide](https://developers.google.com/search/docs/crawling-indexing/robots/intro)
+- Google Search Central: [Control the Content You Share on Search](https://developers.google.com/search/docs/crawling-indexing/control-what-you-share)
+- Bing Webmaster Tools: [Getting Started Checklist](https://www.bing.com/webmasters/help/getting-started-checklist-66a806de)
+- Microsoft Learn: [Bing Webmaster API](https://learn.microsoft.com/en-us/bingwebmaster/)
 
 ---
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha AO o SEO bez sledovacího cirkusu: mapa záměrů, práce důležitých stránek, sitemap a robots.txt, privacy-first měření, interní odkazy, release checklist a SEO karta.
 - **2026-09-13:** Doplněna příloha AN o přístupech a účtech v malém SaaS týmu: rizikové kategorie systémů, role podle práce, onboarding a offboarding přístupů, produkční data, čtvrtletní review, checklist a přístupová karta.
 - **2026-09-13:** Doplněna příloha AM o zákaznickém feedbacku bez dotazníkového pekla: přirozené momenty sběru, práce se signály, privacy-first pravidla, produktový inbox, týdenní review, uzavírání smyčky, checklist a šablona feedback karty.
 - **2026-09-13:** Doplněna příloha AL o výkonu webu bez honění zeleného kolečka: kritické cesty, lab vs. field data, úklid externích skriptů, výkon landing page a dashboardu, výkonový rozpočet, privacy-first měření, checklist a výkonová karta.
