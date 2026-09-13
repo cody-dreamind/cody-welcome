@@ -5838,6 +5838,192 @@ Privacy-first bonus: při review se neptej jen „kdo má přístup“, ale i �
 
 ---
 
+
+## Příloha AH: Datová mapa bez právnického mlžení
+
+Datová mapa je jednoduchý přehled toho, jaká data produkt sbírá, proč je potřebuje, kde žijí, kdo k nim má přístup a kdy zmizí. Není to dokument pro šuplík. Je to provozní nástroj, který chrání zákazníky, tým i obchod.
+
+Malý SaaS často začne nevinně: pár polí v registraci, analytika, support formulář, fakturační systém, logy, newsletter, exporty. Za půl roku už nikdo přesně neví, kde všude leží e-mail zákazníka, jak dlouho se drží logy a který dodavatel vidí jaká data. Datová mapa tomu dává brzdy dřív, než z toho vznikne compliance escape room.
+
+### Začni událostmi, ne databázovými tabulkami
+
+Když začneš tabulkami, skončíš technickým inventářem. Ten je užitečný pro vývojáře, ale špatně se podle něj rozhoduje. Lepší je popsat cesty dat podle životních situací zákazníka:
+
+- návštěvník otevře web,
+- člověk vyplní kontaktní formulář,
+- uživatel založí účet,
+- zákazník přidá týmového člena,
+- produkt odešle notifikaci,
+- support řeší problém,
+- účet se smaže nebo exportuje.
+
+U každé situace si napiš: jaká data vznikají, proč, kde se ukládají, komu se posílají a jak dlouho je potřebuješ. Až potom to propoj s konkrétními tabulkami, frontami, logy a dodavateli.
+
+Praktický příklad pro kontaktní formulář:
+
+- **Data:** jméno, e-mail, firma, zpráva, čas odeslání, základní technické logy.
+- **Účel:** odpověď na poptávku a evidence obchodní komunikace.
+- **Systémy:** web, e-mailová schránka, lehká pipeline, záloha serveru.
+- **Přístup:** obchod, zakladatel, technický admin jen při incidentu.
+- **Retence:** aktivní obchodní případ, potom archiv podle interní retenční matice.
+- **Riziko:** zpráva může obsahovat citlivé údaje, i když je nechceš.
+
+### Každému poli dej důvod k existenci
+
+Privacy-first produkt neznamená „nesbíráme nic“. Znamená „sbíráme jen to, co umíme obhájit“. Evropská komise mezi principy GDPR uvádí minimalizaci dat: zpracovávat jen osobní údaje potřebné pro daný účel. EDPB ve svém průvodci pro malé firmy zároveň zdůrazňuje data protection by design and by default, tedy řešení soukromí už při návrhu služby.
+
+U každého pole si polož pět otázek:
+
+1. Pomáhá toto pole přímo doručit službu?
+2. Je nutné pro bezpečnost, fakturaci, podporu nebo zákonnou povinnost?
+3. Umíme stejný výsledek doručit bez něj?
+4. Má zákazník rozumně pochopitelný důvod, proč ho chceme?
+5. Víme, kdy a jak ho smažeme?
+
+Když odpověď zní „možná se to někdy bude hodit“, pole nepatří do první verze. Možná nepatří nikam.
+
+### Rozlišuj produkční data, provozní data a marketingová data
+
+Ne všechna data mají stejnou citlivost ani stejný životní cyklus. Smíchat je do jedné hromady je rychlá cesta k chaosu.
+
+- **Produkční data:** obsah účtů, projekty, dokumenty, zákaznické záznamy, nastavení služby.
+- **Provozní data:** logy, chyby, auditní stopy, metriky výkonu, e-mailové doručenky.
+- **Obchodní data:** pipeline, smlouvy, fakturace, historie komunikace.
+- **Marketingová data:** newsletter, zdroje leadů, UTM parametry, preference odběru.
+- **Support data:** tikety, screenshoty, přílohy, diagnostické informace.
+
+Každá skupina potřebuje vlastní pravidla přístupů, retence a exportu. Produkční data zákazníka nepoužívej jako marketingový trenažér. Support screenshot s osobními údaji nepatří do veřejného issue trackeru. Log s e-mailem není „jen technický detail“, ale data, se kterými musíš zacházet stejně disciplinovaně jako s aplikací.
+
+### Udělej mapu systémů a předávání
+
+Datová mapa má ukázat i to, kudy data tečou ven. Pro malý tým stačí tabulka se sloupci:
+
+- systém nebo dodavatel,
+- typ dat,
+- účel,
+- region provozu,
+- role dodavatele,
+- přístup členů týmu,
+- retenční pravidlo,
+- způsob exportu nebo smazání,
+- vlastník v týmu.
+
+Privacy-first filtr je jednoduchý: pokud nástroj neumí vysvětlit, kde data zpracovává a jak je smažeš, není to nástroj pro kritický zákaznický proces. U evropského SaaS preferuj EU region, jasnou zpracovatelskou smlouvu, export dat a možnost vypnout zbytečné telemetrie.
+
+Příklad rozhodnutí:
+
+- **Nevhodné:** posílat celý support ticket včetně příloh do náhodného AI nástroje kvůli shrnutí.
+- **Lepší:** nejdřív odstranit identifikátory, shrnovat jen nezbytný kontext a ukládat výsledek zpět do support systému.
+- **Nejlepší pro citlivé provozy:** použít interní nebo smluvně ošetřený evropský nástroj s jasnými retenčními pravidly.
+
+### Udržuj datovou mapu jako součást změnového procesu
+
+Datová mapa zastará přesně ve chvíli, kdy se produkt začne vyvíjet. Proto ji neber jako jednorázový compliance dokument. Přidej jednu jednoduchou otázku do Definition of Done:
+
+> Mění tato úprava sběr, ukládání, předávání, přístup nebo retenci dat?
+
+Pokud ano, aktualizuj datovou mapu před releasem. Ne za měsíc. Ne „až bude klid“. Klid v SaaS je mýtus, něco jako jednorožec, jen s horším backlogem.
+
+Typické změny, které mají spustit aktualizaci:
+
+- nové pole v registraci nebo profilu,
+- nový analytický event,
+- nová integrace nebo webhook,
+- změna support nástroje,
+- nový typ exportu,
+- rozšíření logování,
+- změna retenční doby,
+- nový interní přístup k produkci.
+
+### Zapoj datovou mapu do obchodní důvěry
+
+B2B zákazník se dřív nebo později zeptá, kde máte data, kdo k nim má přístup a jak probíhá mazání. Když máš datovou mapu, odpověď netaháš z klobouku. Uděláš z ní zkrácený bezpečnostní a privacy profil, který pomáhá prodeji.
+
+Veřejně můžeš ukázat například:
+
+- kde je služba provozovaná,
+- jaké kategorie subprocesorů používáš,
+- jaký má zákazník export,
+- jak řešíš mazání účtu,
+- jak se přistupuje k produkčním datům,
+- jaké typy analytiky nepoužíváš.
+
+Nemusíš zveřejňovat interní architekturu do posledního šroubku. Ale jasné odpovědi budují víc důvěry než obecná věta „bereme bezpečnost vážně“. Tu říká každý. I formulář, který posílá heslo e-mailem. Fuj.
+
+### Minimální datová mapa pro první verzi
+
+Pro první verzi produktu stačí jedna Markdown tabulka nebo spreadsheet. Důležité je, aby ji tým opravdu používal.
+
+Začni těmito položkami:
+
+| Oblast | Otázka |
+| --- | --- |
+| Účel | Proč data potřebujeme? |
+| Kategorie dat | Jaké typy údajů zpracováváme? |
+| Zdroj | Odkud data přichází? |
+| Systém | Kde jsou uložena nebo zpracována? |
+| Přístup | Kdo je vidí a za jakých podmínek? |
+| Předávání | Jdou k dodavateli nebo integraci? |
+| Region | Kde probíhá hosting nebo zpracování? |
+| Retence | Kdy data mažeme nebo anonymizujeme? |
+| Export | Jak je zákazník získá zpět? |
+| Vlastník | Kdo v týmu hlídá správnost záznamu? |
+
+### Checklist: datová mapa bez chaosu
+
+- [ ] Máme vypsané hlavní situace, ve kterých vznikají data.
+- [ ] Každé nové pole má jasný účel a vlastníka.
+- [ ] Víme, které systémy ukládají osobní údaje.
+- [ ] U každého dodavatele známe typ dat, region a důvod použití.
+- [ ] Produkční, provozní, obchodní, marketingová a support data mají oddělená pravidla.
+- [ ] Datová mapa se aktualizuje při změně sběru, předávání nebo retence dat.
+- [ ] Support a obchod umí z mapy vytvořit srozumitelnou odpověď pro zákazníka.
+- [ ] Jednou za čtvrtletí odstraníme systémy, pole a eventy, které už nemají jasný účel.
+
+### Šablona datové karty
+
+```markdown
+## Datová karta: [proces / funkce / integrace]
+
+### Kontext
+- Proč tento proces existuje:
+- Dotčený zákazník nebo role:
+- Vlastník v týmu:
+
+### Data
+- Kategorie dat:
+- Konkrétní pole:
+- Zdroj dat:
+- Povinné / volitelné:
+
+### Zpracování
+- Účel:
+- Systémy:
+- Dodavatelé:
+- Region zpracování:
+- Přístupy:
+
+### Životní cyklus
+- Retence:
+- Export:
+- Mazání / anonymizace:
+- Logy a zálohy:
+
+### Rizika
+- Co by zákazníka poškodilo:
+- Jak riziko snižujeme:
+- Co nesmíme dělat:
+
+### Revize
+- Poslední kontrola:
+- Co se změnilo:
+- Další kontrola:
+```
+
+> Codyho komentář: Datová mapa je nudná jen do prvního bezpečnostního dotazníku, incidentu nebo enterprise dealu. Pak se z ní najednou stane nejlevnější dokument ve firmě.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -5864,11 +6050,13 @@ Privacy-first bonus: při review se neptej jen „kdo má přístup“, ale i �
 - Evropská komise: [AI Literacy — Questions & Answers](https://digital-strategy.ec.europa.eu/en/faqs/ai-literacy-questions-answers)
 - Evropská komise: [Guidelines on transparency obligations for providers and deployers of AI systems](https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems)
 - EDPB: [Guidelines on the right to data portability under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en)
+- Evropská komise: [Obligations for businesses and organisations under GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en)
 
 ---
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha AH o datové mapě pro malý privacy-first SaaS: procesní pohled na data, minimalizace polí, rozdělení datových kategorií, mapování systémů a dodavatelů, změnový proces, obchodní důvěra, checklist a šablona datové karty.
 - **2026-09-13:** Doplněna příloha AG o přístupových právech v malém privacy-first SaaS: role, produkční přístup, offboarding, sdílené účty, pravidelné review, checklist a šablona přístupové karty.
 - **2026-09-13:** Doplněna příloha AF o zákaznickém vzdělávání bez akademie na steroidech: mapa zákaznických situací, struktura článků nápovědy, propojení s produktem, privacy-first měření, převod support dotazů na obsah a šablona vzdělávací karty.
 - **2026-09-13:** Doplněna příloha AE o lehké obchodní pipeline bez CRM monstróznosti: kvalifikace leadů, jednoduché fáze, další kroky, minimalizace obchodních dat, důvody proher, hodnotný follow-up, týdenní review a šablona pipeline karty.
