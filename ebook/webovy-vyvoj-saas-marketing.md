@@ -204,6 +204,7 @@ Praktická pravidla:
 - **Jedno hlavní CTA na stránku.** Sekundární akce může existovat, ale nesmí soupeřit s hlavním rozhodnutím.
 - **Formuláře zkracuj na minimum.** U prvního kontaktu často stačí jméno, e-mail a krátká zpráva.
 - **Mikrocopy vysvětluje obavy.** „Ozveme se do jednoho pracovního dne“ je lepší než anonymní „Odeslat“.
+- **Děkovací stav má navazovat.** Po odeslání řekni, co se stane dál, kdy přijde odpověď a kam se člověk může vrátit mezitím.
 - **Cenu neskrývej zbytečně.** Pokud nejde dát přesný ceník, popiš aspoň rozpětí, model nebo podmínky pilotu.
 - **Nenuť účet před hodnotou.** Ukaž příklad, demo nebo checklist dřív, než žádáš registraci.
 
