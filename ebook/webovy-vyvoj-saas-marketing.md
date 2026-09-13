@@ -5019,6 +5019,171 @@ Pak rozhodni, co patří do bezpečnostního backlogu, co do produktové roadmap
 
 ---
 
+## Příloha AC: Zakázková implementace bez scope creep pekla
+
+Malý SaaS často nezačne jako čistý samoobslužný produkt. První větší zákazníci chtějí onboarding, migraci dat, propojení s interním systémem, report navíc, export jinak a „ještě drobnost“. Ta drobnost má občas velikost menšího bagru. Zakázková implementace není problém sama o sobě. Problém je, když se tváří jako součást běžného tarifu a potichu sežere roadmapu.
+
+Správně vedená implementace může být výborný zdroj peněz, důvěry i produktového učení. Špatně vedená implementace vytvoří Frankensteina: jeden zákazník má speciální workflow, druhý vlastní export, třetí ručně spravované role a tým se bojí deploynout změnu, protože někde v temném koutě běží „ta výjimka z března“.
+
+### Odděl produkt, službu a experiment
+
+Nejdřív pojmenuj, co zákazník skutečně kupuje. U každého požadavku rozliš tři typy práce:
+
+- **Produktová funkce:** bude užitečná pro více zákazníků, patří do roadmapy a má dlouhodobého vlastníka.
+- **Implementační služba:** zákazník potřebuje pomoc s nastavením, migrací, školením nebo procesem; nevzniká tím nová vlastnost produktu.
+- **Experiment nebo výjimka:** tým zatím neví, jestli to má opakovat; musí mít časové omezení, jasné riziko a plán vyhodnocení.
+
+Tohle rozlišení napiš přímo do nabídky. Když zákazník platí implementaci, nemá automaticky získat nekonečný vývoj na míru. A když tým slíbí produktovou funkci, nemá se schovat za větu „to byl onboarding“.
+
+Praktická formulace do nabídky:
+
+> Implementační balíček zahrnuje nastavení účtu, import počátečních dat, úvodní školení a jedno kolo úprav konfigurace. Vývoj nových produktových funkcí, integrací nebo změn datového modelu řešíme samostatnou změnovou žádostí.
+
+Není to studené. Je to fér. Fér dohoda je lepší než teplý chaos.
+
+### Vytvoř implementační mapu
+
+Před začátkem sepiš jednoduchou mapu implementace. Nemusí to být projektový román, ale musí z ní být jasné, co se stane, kdo dodá vstupy a kdy je hotovo.
+
+Implementační mapa má obsahovat:
+
+- **Cíl:** jaký provozní výsledek má zákazník po implementaci mít.
+- **Rozsah:** co je součástí a co už není.
+- **Vstupy od zákazníka:** data, kontakty, přístupy, rozhodnutí, termíny.
+- **Milníky:** kickoff, import, konfigurace, test, školení, předání.
+- **Akceptace:** podle čeho obě strany poznají, že je implementace dokončená.
+- **Rizika:** závislosti na třetích systémech, kvalitě dat, interním schvalování nebo dostupnosti lidí.
+
+Bez akceptace se implementace rozteče. Jeden tým si myslí, že hotovo znamená „zákazník se přihlásil“. Druhý si myslí, že hotovo znamená „všichni zaměstnanci používají produkt každý den a nikdo už nikdy nepošle dotaz“. To jsou dvě různé planety, byť obě mají kyslík a tabulky.
+
+### Hlídání rozsahu bez pasivní agrese
+
+Scope creep nevzniká jen proto, že zákazník zlobí. Často vzniká proto, že dodavatel chce být hodný, nechce říct ne a doufá, že se práce nějak vejde. Nevejde. Práce je plyn: vyplní celý dostupný prostor a pak se ještě tváří překvapeně.
+
+Používej jednoduchý změnový proces:
+
+1. **Zachyť požadavek.** Nenechávej ho ztratit v hovoru nebo chatu.
+2. **Urči typ.** Produktová funkce, implementační služba, bug, výjimka nebo nápad.
+3. **Odhadni dopad.** Čas, cena, termín, riziko, privacy dopad.
+4. **Rozhodni.** Součást původního rozsahu, placená změna, backlog, odmítnutí.
+5. **Potvrď písemně.** Krátce, lidsky a bez právnického kouře.
+
+Věta, která zachrání spoustu bolesti:
+
+> Tohle dává smysl, ale není to součást aktuální implementace. Můžeme to buď přidat jako placenou změnu s dopadem na termín, nebo zapsat do produktového backlogu pro pozdější vyhodnocení.
+
+To není odmítnutí. To je dospělé řízení práce. Ano, zní to méně romanticky než „jasně, nějak to uděláme“, ale romantika v implementaci končí fakturou za přesčasy.
+
+### Privacy-first pravidla pro implementace
+
+Implementace je místo, kde se privacy-first sliby lámou nejčastěji. Zákazník pošle export celé databáze, někdo ho hodí do sdíleného disku, vývojář si vezme kopii „jen na chvilku“ a najednou má malý SaaS víc osobních dat než potřebuje. Ne proto, že je zlý. Protože neměl proces.
+
+Nastav minimální pravidla:
+
+- **Data si vyžádej jen v potřebném rozsahu.** Pro test importu často stačí vzorek nebo anonymizovaná sada.
+- **Používej bezpečný přenos.** Žádné osobní údaje v příloze běžného e-mailu, pokud existuje lepší cesta.
+- **Odděl testovací a produkční data.** Neplň staging plnou kopií zákaznické reality, pokud to není nezbytné.
+- **Nastav retenci implementačních souborů.** Importní CSV, mapovací tabulky a screenshoty nesmí žít navždy.
+- **Omez přístupy.** K implementačním datům má mít přístup jen ten, kdo je opravdu potřebuje.
+- **Zapiš subprocesory.** Pokud do implementace vstupuje externí nástroj nebo konzultant, zákazník to má vědět.
+
+Privacy-first implementace nemusí být pomalá. Jen má mít brzdový pedál. Bez něj je rychlost jen elegantní cesta do příkopu.
+
+### Kdy říct ne zakázkové úpravě
+
+Ne každá placená úprava je dobrý obchod. Některé peníze jsou drahé. Pokud změna komplikuje produkt pro všechny, vytváří technický dluh, přidává citlivá data nebo posouvá produkt mimo strategii, máš právo říct ne.
+
+Varovné signály:
+
+- požadavek používá jen jeden zákazník a nejde ho zobecnit,
+- úprava obchází bezpečnostní nebo privacy pravidla,
+- zákazník chce přímý přístup do databáze místo API nebo exportu,
+- změna vyžaduje ruční provoz bez jasné ceny,
+- výjimka by zablokovala budoucí vývoj,
+- požadavek řeší interní chaos zákazníka, ne hodnotu produktu.
+
+Dobré „ne“ nabídne alternativu. Například: „Přímý databázový přístup neposkytujeme. Umíme ale připravit pravidelný export přes API nebo zabezpečený soubor s omezeným rozsahem dat.“ Tím chráníš produkt i zákazníka. Občas před ním chráníš i jeho vlastní nápady, což je nevděčná, ale užitečná disciplína.
+
+### Přetav implementace do produktu
+
+Každá implementace by měla skončit krátkým interním review. Ne proto, aby se napsal román do wiki, ale aby tým nezapomněl, co se naučil.
+
+Ptej se:
+
+- Co jsme dělali ručně a opakovalo se to už podruhé?
+- Který krok zákazník nechápal bez vysvětlení?
+- Jaké datové pole, export nebo integrace se opakovaly?
+- Kde vzniklo privacy nebo bezpečnostní riziko?
+- Co by šlo převést do self-service nastavení?
+- Která část implementace má být příště placený balíček?
+
+Z implementací často vyrostou nejlepší produktové funkce: importní wizard, validační report, role a oprávnění, audit log, onboarding checklist, exportní šablony nebo integrační dokumentace. Rozdíl mezi chaosem a produktem je v tom, jestli opakovanou ruční práci někdo pojmenuje a rozhodne o ní.
+
+### Checklist: implementace bez scope creep pekla
+
+- Máme jasně oddělený produkt, implementační službu a experiment.
+- Nabídka říká, co je součástí implementace a co je změnová žádost.
+- Máme implementační mapu s cílem, milníky, vstupy a akceptací.
+- Požadavky ze schůzek zapisujeme a třídíme podle typu.
+- Změny rozsahu potvrzujeme písemně včetně dopadu na termín nebo cenu.
+- Implementační data sbíráme v minimálním rozsahu a s retencí.
+- Testovací prostředí neplníme zbytečně kompletními osobními daty.
+- Umíme říct ne úpravám, které rozbíjí produkt, bezpečnost nebo privacy pravidla.
+- Po implementaci děláme krátké review a převádíme opakovanou práci do backlogu.
+
+### Šablona implementační karty
+
+```markdown
+## Implementační karta: [zákazník / projekt]
+
+### Cíl
+- Hlavní výsledek:
+- Kdo bude produkt používat:
+- Aktivační moment:
+
+### Rozsah
+- Součástí implementace:
+- Mimo rozsah:
+- Možné změnové žádosti:
+
+### Vstupy od zákazníka
+- Data:
+- Kontaktní osoby:
+- Přístupy / integrace:
+- Termíny a závislosti:
+
+### Milníky
+- Kickoff:
+- Import / konfigurace:
+- Test zákazníkem:
+- Školení:
+- Předání:
+
+### Privacy-first kontrola
+- Jaká data potřebujeme:
+- Kde budou uložena:
+- Kdo k nim má přístup:
+- Kdy je smažeme:
+- Subprocesory:
+
+### Změny rozsahu
+- Požadavek:
+- Typ:
+- Dopad:
+- Rozhodnutí:
+- Potvrzeno kdy a kým:
+
+### Review po implementaci
+- Co automatizovat:
+- Co dát do produktu:
+- Co příště nacenit zvlášť:
+- Rizika pro další implementace:
+```
+
+> Codyho komentář: Zakázková práce není zlo. Zlo je zakázková práce převlečená za „malou úpravu“, která potom bydlí v produkci déle než původní byznys plán.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -5050,6 +5215,7 @@ Pak rozhodni, co patří do bezpečnostního backlogu, co do produktové roadmap
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha AC o zakázkové implementaci bez scope creepu: oddělení produktu a služby, implementační mapa, změnové řízení, privacy-first práce s daty, odmítání rizikových úprav a šablona implementační karty.
 - **2026-09-13:** Doplněna příloha AB o bezpečnostních dotaznících v B2B prodeji: bezpečnostní profil, odpovědi podle důkazů, oblasti dotazníku, certifikace bez mlžení, bezpečné sdílení, backlog a šablona bezpečnostní karty.
 - **2026-09-13:** Doplněna příloha AA o release procesu pro malý privacy-first SaaS: rozdíl mezi deployem a releasem, malé vratné změny, Definition of Done, privacy kontrola, release okna, rollback, changelog, checklist a release karta.
 - **2026-09-13:** Doplněna příloha Z o exit plánu a přenositelnosti dat: užitečný export, scénáře odchodu, vendor lock-in rizika, technický vzor exportu, checklist a šablona exit karty.
