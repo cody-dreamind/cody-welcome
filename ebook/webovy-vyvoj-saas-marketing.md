@@ -3952,6 +3952,163 @@ U větších funkcí přidej accessibility poznámku do produktového briefu: kt
 
 ---
 
+## Příloha V: QA a regresní testování bez korporátního divadla
+
+Kvalita produktu není oddělení. Je to zvyk týmu. Malý SaaS si často nemůže dovolit velký QA tým, ale může si dovolit jasné scénáře, rozumnou automatizaci a disciplínu před releasem. Cíl není testovat všechno. Cíl je nenechat opakovaně padat věci, které drží důvěru zákazníka.
+
+Nejhorší QA strategie je „klikneme to před deployem“. To zní akčně, dokud někdo v pátek večer nerozbije fakturaci, export dat nebo přihlášení. Pak se z klikání stane archeologie.
+
+### Začni mapou kritických cest
+
+Nejdřív si napiš, co v produktu nesmí selhat. Ne podle architektury, ale podle zákazníka. Kritická cesta je workflow, které přímo souvisí s hodnotou, penězi, daty nebo důvěrou.
+
+Pro typický B2B SaaS to může být:
+
+- registrace a přihlášení,
+- pozvánka dalšího uživatele,
+- vytvoření hlavního pracovního objektu,
+- uložení a zobrazení změny,
+- export dat,
+- fakturace nebo změna tarifu,
+- žádost o smazání účtu,
+- administrátorská změna oprávnění,
+- kontaktování podpory.
+
+Každou kritickou cestu popiš jednou větou: „Uživatel s rolí správce pozve kolegu, ten přijme pozvánku a dostane správná oprávnění.“ Taková věta je lepší než abstraktní ticket „otestovat users modul“. Modul nikoho nezajímá. Scénář ano.
+
+### Testovací pyramidu ber prakticky
+
+Testovací pyramida není náboženství. Je to připomínka, že levné rychlé testy mají chytat většinu chyb a pomalejší end-to-end testy mají hlídat jen zásadní průchody.
+
+Rozumné minimum:
+
+- **Unit testy:** čistá pravidla, validace, výpočty, oprávnění, transformace dat.
+- **Integrační testy:** API endpointy, databázové operace, práce s frontou, napojení vlastních modulů.
+- **End-to-end testy:** několik nejdůležitějších zákaznických cest přes reálné UI.
+- **Ruční testy:** nové UX, texty, edge cases a věci, kde automat zatím nemá dobrý úsudek.
+
+Pro malý tým doporučuji začít tak, že každá chyba v kritické cestě dostane regresní test. Ne proto, že test coverage musí mít krásné číslo, ale proto, že stejná chyba dvakrát je už dobrovolný koníček.
+
+### Definition of Done musí obsahovat kvalitu
+
+Když v ticketu není napsané, jak se pozná hotovo, každý si to vyloží po svém. Vývojář podle commitu, produkt podle screenshotu, obchod podle slibu zákazníkovi a zákazník podle toho, jestli mu to v pondělí funguje.
+
+Praktická Definition of Done pro SaaS změnu:
+
+- změna řeší popsaný scénář,
+- jsou ošetřené prázdné stavy, chyby a loading,
+- oprávnění jsou ověřená pro správné role,
+- data se neukládají navíc jen „pro jistotu“,
+- hlavní cesta má automatický nebo ruční test,
+- změna neporušuje export, mazání ani retenci dat,
+- dokumentace nebo nápověda je upravená, pokud se mění chování,
+- release poznámka je připravená, pokud změnu uvidí zákazník.
+
+Tahle pravidla nemají brzdit práci. Mají zabránit tomu, aby se kvalita řešila až ve chvíli, kdy zákazník píše „ono to nějak divně zmizelo“.
+
+### Testovací data nesmí být skládka osobních údajů
+
+QA prostředí bývá tichá díra v privacy-first provozu. Produkční export „jen na chvíli“ se zkopíruje do stagingu, někdo ho zapomene smazat a najednou má testovací databáze víc citlivých dat než produkce. Gratuluji, právě vznikl datový horor s horším osvětlením.
+
+Privacy-first pravidla pro testovací data:
+
+- nepoužívej produkční osobní data, pokud k tomu nemáš opravdu silný důvod,
+- preferuj syntetická data s realistickou strukturou,
+- pokud musíš použít produkční vzorek, anonymizuj ho a stanov krátkou retenci,
+- staging chraň stejně vážně jako produkci, pokud obsahuje reálná data,
+- testovací účty jasně označ a pravidelně maž,
+- do screenshotů a bug reportů nedávej osobní údaje zákazníků,
+- logy z testů neukládej déle, než potřebuješ.
+
+Dobrá syntetická data nejsou `test@test.cz` ve všech polích. Použij různé role, délky názvů, diakritiku, neúplné údaje, staré záznamy, neaktivní uživatele a konfliktní stavy. Realita je kreativní. Testovací data by měla být aspoň trochu taky.
+
+### Release checklist místo hrdinství
+
+Před releasem nechceš spoléhat na paměť. Paměť je skvělá na citace filmů, horší na migrace databáze. Checklist je levný způsob, jak snížit nervozitu i počet trapných rollbacků.
+
+Krátký release checklist:
+
+1. Co se mění pro zákazníka?
+2. Které kritické cesty to může rozbít?
+3. Proběhly migrace lokálně nebo na testovacím prostředí?
+4. Existuje návratová cesta nebo bezpečný rollback?
+5. Jsou feature flagy nastavené rozumně?
+6. Má support informaci, co se mění?
+7. Je připravený changelog nebo poznámka do účtu?
+8. Sledujeme po deployi správné metriky a chyby?
+
+U malého SaaS nemusí každý release znamenat ceremonii. Ale každá změna v kritické cestě by měla mít aspoň krátkou kontrolu před a po nasazení.
+
+### Bug report má být reprodukovatelný
+
+Špatný bug report zní: „Nefunguje mi to.“ Dobrý bug report zní: „Uživatel s rolí editor otevře projekt, klikne na Export CSV, dostane chybu 403, i když má v nastavení povolený export.“
+
+Šablona dobrého reportu:
+
+- **Scénář:** co chtěl uživatel udělat.
+- **Kroky:** jak chybu zopakovat.
+- **Očekávání:** co se mělo stát.
+- **Skutečnost:** co se stalo.
+- **Dopad:** koho to blokuje a jak vážně.
+- **Data:** ID záznamu, role, čas, prostředí; bez citlivého obsahu, pokud není nutný.
+- **Důkaz:** screenshot, log nebo odkaz na interní záznam.
+
+Bug bez dopadu je hádanka. Bug s dopadem je priorita. Rozlišuj kosmetiku, nepohodlí, blokaci práce, ztrátu dat a bezpečnostní problém. Všechny chyby nejsou stejné a předstírat opak je rychlá cesta k vyhoření.
+
+### Codyho komentář
+
+Kvalita není o tom, že nikdy nic nerozbiješ. To by bylo hezké, ale taky bych rád uměl teleportaci a kávovar, který pozná pondělí. Kvalita je schopnost rozbíjet méně důležité věci méně často, rychle poznat průšvih a neopakovat stejnou chybu donekonečna.
+
+### Checklist: QA pro malý privacy-first SaaS
+
+- [ ] Máme sepsané kritické zákaznické cesty.
+- [ ] Každá kritická cesta má jasný testovací scénář.
+- [ ] Nové chyby v kritických cestách dostávají regresní test.
+- [ ] Definition of Done obsahuje chybové stavy, role, data a dokumentaci.
+- [ ] Testovací data jsou syntetická nebo anonymizovaná.
+- [ ] Staging neobsahuje produkční osobní data bez důvodu a retence.
+- [ ] Release checklist existuje a používá se u rizikových změn.
+- [ ] Support ví o změnách, které zákazník uvidí.
+- [ ] Bug reporty popisují scénář, kroky, očekávání, skutečnost a dopad.
+- [ ] Po deployi kontrolujeme chyby, logy a kritické metriky.
+
+### Šablona testovací karty
+
+```markdown
+## Testovací karta: [funkce / scénář]
+
+### Cíl
+- Jakou hodnotu scénář ověřuje?
+- Co se nesmí rozbít?
+
+### Role a oprávnění
+- Role uživatele:
+- Povolené akce:
+- Zakázané akce:
+
+### Testovací data
+- Typ dat:
+- Jsou syntetická / anonymizovaná?
+- Kdy se mažou?
+
+### Kroky
+1.
+2.
+3.
+
+### Očekávaný výsledek
+- UI:
+- Data:
+- Notifikace / e-mail:
+- Logy:
+
+### Regrese
+- Jaký automatický test existuje nebo vznikne?
+- Který release tuto kartu naposledy ověřil?
+```
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -3978,6 +4135,7 @@ U větších funkcí přidej accessibility poznámku do produktového briefu: kt
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha V o QA a regresním testování pro malý privacy-first SaaS: kritické cesty, Definition of Done, testovací data, release checklist, bug reporty a šablona testovací karty.
 - **2026-09-12:** Doplněna příloha U o přístupnosti webu a SaaS: WCAG 2.2, European Accessibility Act, design systém, formuláře, privacy-first testování a checklist.
 - **2026-09-12:** Doplněna příloha T o bezpečných importech dat: rozsah migrace, importní mapa, validace, duplicity, rollback, retence a šablona importní karty.
 - **2026-09-12:** Doplněna příloha S o integracích a API partnerstvích: scénáře, datové smlouvy, webhooky, partnerská pravidla, dokumentace a privacy-first checklist.
