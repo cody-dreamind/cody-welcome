@@ -7186,6 +7186,190 @@ SEO je nejsilnější, když není oddělený trik, ale součást produktu. Dobr
 
 ---
 
+## Příloha AP: Produktové e-maily bez otravného orchestrionu
+
+E-mail v SaaS produktu není jen marketingový kanál. Je to provozní rozhraní mezi produktem a člověkem. Potvrzuje důležité akce, zachraňuje ztracený kontext, pomáhá dokončit onboarding a někdy je to jediná věc, kterou si zákazník všimne ve správný okamžik. Když ho ale tým začne používat jako levnou náhražku produktu, rychle vznikne šum: notifikace o ničem, newslettery bez důvodu a automatizace, která působí jako robot s megafonem.
+
+Privacy-first přístup k e-mailu začíná jednoduchou větou: posílej jen zprávy, které mají pro příjemce jasnou hodnotu a které umíš obhájit bez marketingové gymnastiky. Ano, méně e-mailů znamená méně grafů v nástroji pro kampaně. Taky to znamená méně otrávených zákazníků. Divné, jak často se to potká.
+
+### Rozlišuj produktové, obchodní a obsahové e-maily
+
+Největší chaos vzniká, když se všechny e-maily hází do jednoho pytle. Reset hesla, faktura, pozvánka do workspace, tip na novou funkci a newsletter nejsou totéž. Mají jiný účel, jinou urgenci, jiné očekávání příjemce a jiná pravidla pro odhlášení nebo nastavení preference.
+
+Praktické rozdělení:
+
+- **Transakční e-maily:** reset hesla, ověření účtu, faktury, bezpečnostní upozornění, pozvánky, export dat.
+- **Produktové lifecycle e-maily:** onboardingové tipy, nedokončené nastavení, upozornění na dosažený limit, shrnutí aktivity týmu.
+- **Obchodní e-maily:** domluva dema, follow-up po pilotu, nabídka rozšíření tarifu, informace k obnově smlouvy.
+- **Obsahové e-maily:** novinky, edukace, blogové shrnutí, komunitní pozvánky, produktové update digesty.
+- **Interní provozní e-maily:** alerty pro tým, support notifikace, billing výjimky, incidentové zprávy.
+
+Každá kategorie má mít vlastní pravidla. Transakční e-mail musí být doručen spolehlivě a rychle. Newsletter může počkat. Bezpečnostní upozornění má být jasné a neprodejní. Onboardingový tip má pomoci dokončit krok, ne cpát do člověka seznam všech funkcí, protože tým měl v pondělí moc kávy.
+
+### Každý e-mail musí mít jeden úkol
+
+Produktový e-mail není leták s dvaceti odkazy. Když příjemce nepozná do pěti sekund, proč zpráva přišla a co má udělat, e-mail selhal. Před napsáním si polož tři otázky:
+
+1. **Jaký moment v produktu zprávu spouští?**
+2. **Co má člověk pochopit nebo udělat?**
+3. **Co se stane, když e-mail vůbec nepošleme?**
+
+Pokud odpověď na třetí otázku zní „nic zásadního“, zpráva možná nepatří do automatizace. Může být lepší jako článek nápovědy, tooltip, checklist v aplikaci nebo kvartální produktový digest.
+
+Příklad slabé zprávy:
+
+> Máme spoustu funkcí, podívejte se na všechny novinky v účtu.
+
+Lepší zpráva:
+
+> Import kontaktů je připravený ke kontrole. Zkontrolujte 12 duplicit a potvrďte spuštění kampaně.
+
+Druhá zpráva má kontext, stav, konkrétní číslo a další krok. Nemusí křičet. Ví, proč existuje.
+
+### Preference jsou produktová funkce
+
+Odhlášení není selhání marketingu. Je to uživatelské nastavení. U SaaS produktů se vyplatí vytvořit jednoduché centrum preferencí, kde zákazník rozliší, co chce dostávat.
+
+Minimální preference:
+
+- bezpečnostní a účetní zprávy,
+- faktury a billing upozornění,
+- pozvánky a týmové notifikace,
+- týdenní nebo měsíční produktové shrnutí,
+- edukace a novinky,
+- obchodní komunikace k pilotu nebo obnově.
+
+Ne všechno musí být vypínatelné stejným způsobem. Bezpečnostní upozornění nebo faktura jsou jiné než blogové novinky. Důležité je nepředstírat, že jeden checkbox „souhlasím s komunikací“ vyřeší všechno. Člověk má rozumět, co dostává a proč.
+
+Privacy-first bonus: preference drž jako jednoduchá produktová data. Nepotřebuješ kvůli nim vytvářet behaviorální profil příjemce, skóre zájmu, predikci nákupu a další věšteckou tabuli. Stačí stav, kategorie zpráv, jazyk, časové pásmo a audit důležitých změn.
+
+### Onboarding posílej podle pokroku, ne podle kalendáře
+
+Klasická chyba: uživatel se zaregistruje a systém mu sedm dní posílá předpřipravenou sérii bez ohledu na to, co udělal. Výsledek? Člověk dokončí nastavení první den a pořád dostává „začněte prvním krokem“. Nebo se zasekne u importu a místo pomoci mu přijde nadšený e-mail o pokročilých integracích. Automatizace gratuluje sama sobě, produkt mlčí.
+
+Lepší model je stavový:
+
+- účet vytvořen, ale e-mail není ověřený,
+- workspace existuje, ale chybí první projekt,
+- projekt existuje, ale chybí první data,
+- data existují, ale tým nepozval kolegy,
+- první hodnota byla dosažena,
+- aktivita klesla a uživatel pravděpodobně neví, co dál.
+
+Každý stav má jednu pomocnou zprávu, jeden odkaz a jasný důvod. Pokud jde pomoc nabídnout přímo v produktu, často je to lepší než e-mail. E-mail použij ve chvíli, kdy člověk odešel, čeká na výsledek, potřebuje potvrzení nebo má důležitý blokátor.
+
+### Doručitelnost začíná hygienou, ne triky
+
+Technické nastavení domény, oddělení transakční a marketingové pošty, konzistentní odesílatel a čisté seznamy jsou základ. Ale doručitelnost není jen DNS magie. Je to i kvalita toho, co posíláš. Když lidé zprávy ignorují, mažou nebo označují jako spam, žádná šablona předmětu tě dlouhodobě nezachrání.
+
+Praktická pravidla:
+
+- používej samostatné domény nebo subdomény pro transakční a marketingovou poštu podle rizika,
+- drž konzistentní jména odesílatelů,
+- neposílej z noreply adresy, pokud očekáváš reakci,
+- testuj text i HTML verzi zprávy,
+- sleduj odražené zprávy a neaktivní adresy uklízej,
+- neimportuj staré kontakty bez jasného původu,
+- nepřikupuj databáze kontaktů, protože „to dělají všichni“.
+
+> Codyho komentář: Koupený mailing list je jako pozvat cizí lidi do obýváku a začít jim prodávat židle. Možná někdo sedne. Většina zavolá policii, metaforicky nebo doslova přes tlačítko spam.
+
+### E-mailové šablony piš jako support
+
+Dobrá produktová zpráva je krátká, konkrétní a lidská. Nemusí mít hero obrázek, tři gradienty a motivační citát. Většinou stačí:
+
+- proč píšeme,
+- co se stalo,
+- co má příjemce udělat,
+- do kdy je to důležité,
+- kde najde pomoc,
+- jak odpovědět člověku.
+
+Příklad struktury:
+
+```md
+Předmět: Import kontaktů čeká na kontrolu
+
+Dobrý den,
+
+import kontaktů pro workspace [název] je připravený. Našli jsme 12 možných duplicit, které je dobré zkontrolovat před potvrzením.
+
+Další krok: otevřete kontrolu importu a vyberte, které záznamy sloučit.
+
+[Zkontrolovat import]
+
+Pokud import nepoznáváte, odpovězte na tento e-mail a prověříme to.
+```
+
+Všimni si, co tam není: žádné „nejnovější inovativní řešení“, žádné social ikony, žádné sledovací pixelové divadlo. Jen užitečná zpráva.
+
+### Měř dopad bez čtení přes rameno
+
+U e-mailů se snadno sklouzne k posedlosti open rate. Jenže otevření je technicky i interpretačně nejistý signál a často neříká, jestli e-mail pomohl. Lepší je měřit návazné chování na úrovni produktu nebo obchodního procesu.
+
+Užitečné metriky:
+
+- dokončení akce po kliknutí,
+- snížení počtu support dotazů k danému kroku,
+- rychlejší aktivace účtu,
+- méně chyb v importu nebo onboardingu,
+- odpovědi na obchodní follow-up,
+- počet odhlášení z konkrétní kategorie,
+- stížnosti a odpovědi typu „tohle mi nepomohlo“.
+
+Privacy-first zásada: nesbírej víc detailů, než potřebuješ pro rozhodnutí. U většiny produktových e-mailů stačí agregovaně vědět, že zpráva A pomohla dokončit krok lépe než zpráva B. Nepotřebuješ sledovat každý pohyb kurzoru v e-mailu ani spojovat newsletter s kompletní historií chování napříč webem.
+
+### Checklist: produktové e-maily bez šumu
+
+- Každá e-mailová kategorie má jasný účel a vlastní pravidla.
+- Transakční pošta je oddělená od marketingové podle rizika a priority.
+- Každý e-mail má jeden hlavní úkol a jedno hlavní CTA.
+- Onboardingové zprávy se spouští podle stavu produktu, ne slepě podle kalendáře.
+- Preference jsou srozumitelné a zákazník ví, co může vypnout.
+- Noreply adresy nepoužíváme tam, kde má dávat smysl odpověď.
+- Neimportujeme kontakty bez jasného původu a účelu.
+- Šablony mají textovou verzi, lidský jazyk a jasný další krok.
+- Měříme dopad na dokončení úkolu, ne jen otevření zprávy.
+- Každý kvartál mažeme nebo slučujeme automatizace, které už nemají jasnou hodnotu.
+
+### Šablona e-mailové karty
+
+```md
+## E-mailová karta: [název zprávy]
+
+### Účel
+- Kategorie:
+- Spouštěcí moment:
+- Pro koho je zpráva:
+- Co se stane, když ji nepošleme:
+
+### Obsah
+- Hlavní sdělení:
+- Primární CTA:
+- Alternativní cesta:
+- Kontakt na podporu:
+
+### Data a privacy
+- Data použitá pro odeslání:
+- Data použitá pro personalizaci:
+- Tracking, který nepoužíváme:
+- Retence logů:
+
+### Preference
+- Lze vypnout:
+- Kategorie v centru preferencí:
+- Výjimky:
+
+### Měření
+- Hlavní metrika úspěchu:
+- Signál problému:
+- Datum posledního review:
+```
+
+Produktové e-maily mají být tichý, spolehlivý pomocník. Když zákazníkovi šetří čas, potvrzují důležité akce a respektují jeho pozornost, zvyšují důvěru. Když jen honí engagement, stávají se šumem. A šum je produktový dluh, jen chodí v HTML kabátku.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -7229,6 +7413,7 @@ SEO je nejsilnější, když není oddělený trik, ale součást produktu. Dobr
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha AP o produktových e-mailech bez otravného orchestrionu: rozdělení kategorií, účel zpráv, preference, onboarding podle pokroku, doručitelnost, šablony, privacy-first měření a e-mailová karta.
 - **2026-09-13:** Doplněna příloha AO o SEO bez sledovacího cirkusu: mapa záměrů, práce důležitých stránek, sitemap a robots.txt, privacy-first měření, interní odkazy, release checklist a SEO karta.
 - **2026-09-13:** Doplněna příloha AN o přístupech a účtech v malém SaaS týmu: rizikové kategorie systémů, role podle práce, onboarding a offboarding přístupů, produkční data, čtvrtletní review, checklist a přístupová karta.
 - **2026-09-13:** Doplněna příloha AM o zákaznickém feedbacku bez dotazníkového pekla: přirozené momenty sběru, práce se signály, privacy-first pravidla, produktový inbox, týdenní review, uzavírání smyčky, checklist a šablona feedback karty.
