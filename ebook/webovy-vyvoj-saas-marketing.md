@@ -6705,6 +6705,163 @@ Výkon není jednorázová optimalizace před launchí. Je to provozní hygiena.
 
 ---
 
+## Příloha AM: Zákaznický feedback bez dotazníkového pekla
+
+Feedback není rituál, při kterém jednou za kvartál rozešleš dlouhý formulář a doufáš, že z něj vypadne produktová strategie. Dobrý feedback systém je kratší, pravidelnější a blíž skutečné práci zákazníka. Neptá se jen „jak jste spokojeni“, ale hledá momenty, kde produkt pomohl, zdržel, zmátl nebo tiše selhal.
+
+U malého SaaS týmu je největší riziko dvojí. Buď se feedback ignoruje, protože „máme roadmapu“. Nebo se naopak každé přání zákazníka promění v úkol a produkt začne připomínat švýcarský nůž přilepený k vysavači. Cílem není poslechnout všechny. Cílem je rozpoznat vzory, které ukazují na hodnotu, riziko nebo opakované tření.
+
+### Feedback sbírej v přirozených momentech
+
+Nejlepší otázka je často položená ve správný čas. Když se zákazníka zeptáš měsíc po problému, dostaneš shrnutí. Když se zeptáš hned po dokončení důležité akce, dostaneš realitu.
+
+Praktické momenty pro sběr feedbacku:
+
+- po dokončení onboardingu,
+- po prvním úspěšném použití klíčové funkce,
+- po chybě nebo neúspěšném pokusu,
+- po support konverzaci,
+- před obnovou předplatného,
+- po exportu dat nebo ukončení účtu,
+- při pilotním review se zákazníkem.
+
+Otázky drž krátké. Jedna dobrá otázka porazí formulář s dvaceti poli. Například:
+
+- „Co vás dnes nejvíc zdrželo?“
+- „Který krok nebyl jasný?“
+- „Co by muselo fungovat lépe, abyste produkt doporučili kolegovi?“
+- „Jak jste tento problém řešili před námi?“
+- „Kdybyste zítra produkt neměli, co by vám chybělo?“
+
+> Codyho komentář: Když dotazník vypadá jako daňové přiznání s pastelovým logem, není to výzkum. Je to test trpělivosti.
+
+### Rozlišuj signál, názor a objednávku funkce
+
+Zákazník může říct: „Chceme export do Excelu.“ To je požadavek. Signál může být: „Potřebujeme data předat účetní jednou měsíčně.“ Řešení může být Excel, účetní integrace, PDF report, automatický e-mail nebo lepší role pro externí účetní. Když skočíš rovnou na funkci, můžeš postavit přesně to, co zákazník vyslovil, ale ne to, co potřeboval.
+
+U každého feedbacku si proto zapiš tři vrstvy:
+
+- **Doslovné přání:** co člověk řekl.
+- **Situace:** kdy a proč to řešil.
+- **Skutečný problém:** co se snažil dokončit, snížit nebo předat.
+
+Příklad:
+
+```md
+Feedback: „Chceme hromadné štítky u zakázek.“
+Situace: dispečer každý pátek připravuje seznam zakázek pro fakturaci.
+Problém: potřebuje rychle odlišit hotové, čekající a sporné položky.
+Možné řešení: stavový filtr + uložený pohled pro fakturaci, ne nutně volné štítky.
+```
+
+Tento zápis brání tomu, aby se backlog změnil na sbírku hlasitých přání. Zákazníka bere vážně, ale nenechává ho navrhovat architekturu produktu místo týmu.
+
+### Nedělej z feedbacku sledování lidí
+
+Privacy-first feedback znamená sbírat méně osobních dat a více kontextu k rozhodnutí. Nepotřebuješ vědět, že Jana klikla přesně v 10:43 na každý pixel. Často stačí vědět, že tři zákaznické týmy během týdne narazily na stejný krok v onboardingu.
+
+Dobrá pravidla:
+
+- u interních poznámek používej název zákazníka jen tam, kde je to nutné,
+- citlivé ukázky obrazovek anonymizuj před sdílením v týmu,
+- odděl produktové poznatky od osobních údajů v support nástroji,
+- nastav retenci starých výzkumných záznamů,
+- nikdy nekopíruj produkční data do poznámek jen proto, že je to pohodlné,
+- u nahrávek hovorů měj jasný souhlas, účel a dobu uchování.
+
+Pokud chceš poznatek použít veřejně jako referenci, případovou studii nebo citaci, získej výslovné schválení. Interní insight není automaticky marketingový materiál. Ano, i když je ta věta krásná. Právě proto.
+
+### Měj jeden inbox pro produktové poznatky
+
+Feedback se obvykle válí všude: v e-mailu, supportu, CRM, Slacku, poznámkách z callů, komentářích u faktur a v hlavě člověka, který byl „u toho“. To je recept na rozhodování podle posledního dojmu.
+
+Zaveď jednoduchý produktový inbox. Nemusí to být nový nástroj. Může to být tabulka, databáze v interní wiki nebo issue label. Důležité je, aby každý záznam měl stejnou minimální strukturu:
+
+- kdo nebo jaký segment signál poslal,
+- jaká byla situace,
+- jaký problém se objevil,
+- jaký dopad měl problém,
+- jak často se podobný signál opakuje,
+- jaký je navržený další krok,
+- kdo je vlastník vyhodnocení.
+
+Ne každý feedback se má stát úkolem. Některý patří do dokumentace, některý do onboardingového e-mailu, některý do cenové komunikace a některý jen do složky „zajímavé, ale ne teď“. Backlog je drahý prostor. Chovej se k němu jako ke skladu, ne jako k půdě po babičce.
+
+### Týdenní review stačí, když je poctivé
+
+Malý tým nepotřebuje velkou výzkumnou ceremonii. Stačí krátký týdenní rytmus:
+
+1. Projít nové signály z supportu, obchodu, analytiky a rozhovorů.
+2. Sloučit duplicity a popsat skutečný problém.
+3. Označit dopad: blokuje nákup, blokuje aktivaci, zvyšuje churn, vytváří support náklady, nebo je jen pohodlný nice-to-have.
+4. Rozhodnout, co se řeší teď, co se sleduje a co se vědomě odmítá.
+5. Vrátit informaci zákazníkům tam, kde to dává smysl.
+
+Právě poslední krok se často vynechává. Přitom odpověď typu „Díky, vidíme stejný problém u více týmů, tento měsíc řešíme jednodušší export“ buduje důvěru. I když funkci neslíbíš. Možná hlavně tehdy.
+
+### Uzavírej smyčku, ne jen sbírej přání
+
+Feedback bez reakce je černá díra s formulářem. Zákazník něco pošle, tým poděkuje a pak ticho. Po třetím tichu už zákazník nemá pocit, že pomáhá zlepšovat produkt. Má pocit, že krmí CRM.
+
+Uzavření smyčky může mít několik podob:
+
+- odpověď, proč se požadavek teď nebude řešit,
+- pozvánka do krátkého rozhovoru,
+- odkaz na nový článek v dokumentaci,
+- oznámení vydané úpravy,
+- nabídka workaroundu,
+- žádost o ověření prototypu.
+
+Nemusíš slibovat termíny, které neznáš. Stačí být konkrétní a férový. „Zatím to neplánujeme, protože řešíme stabilitu importů“ je lepší než „předáme produktovému týmu“, což v překladu často znamená „hodíme to do jámy neurčité budoucnosti“.
+
+### Checklist: feedback systém bez pekla
+
+- [ ] Máme jasné momenty, kdy se ptáme na feedback.
+- [ ] Každá otázka má účel a vede k rozhodnutí.
+- [ ] Rozlišujeme doslovný požadavek, situaci a skutečný problém.
+- [ ] Produktové poznatky ukládáme do jednoho inboxu.
+- [ ] Support, obchod a produkt používají stejnou strukturu záznamu.
+- [ ] Citlivá data a nahrávky mají jasný souhlas, přístup a retenci.
+- [ ] Týdně třídíme signály podle dopadu, ne podle hlasitosti.
+- [ ] Zákazníkům vracíme odpověď, když jejich feedback ovlivní rozhodnutí.
+- [ ] Backlog obsahuje jen rozhodnuté věci, ne syrovou skládku přání.
+- [ ] Jednou měsíčně kontrolujeme, které poznatky změnily produkt, dokumentaci nebo prodej.
+
+### Šablona feedback karty
+
+```md
+## Feedback karta: [téma / zákazník / segment]
+
+### Kontext
+- Zdroj feedbacku:
+- Segment:
+- Fáze zákazníka:
+- Datum:
+
+### Signál
+- Co zákazník řekl:
+- V jaké situaci:
+- Jaký problém se tím ukazuje:
+- Dopad na zákazníka:
+
+### Privacy-first kontrola
+- Obsahuje osobní nebo citlivá data:
+- Kde je záznam uložen:
+- Kdo má přístup:
+- Kdy se smaže nebo anonymizuje:
+
+### Rozhodnutí
+- Kategorie: bug / dokumentace / onboarding / funkce / pricing / neřešit teď
+- Priorita:
+- Další krok:
+- Vlastník:
+- Jak zákazníkovi uzavřeme smyčku:
+```
+
+Feedback není hlasování o roadmapě. Je to navigace v mlze. Když ho sbíráš včas, strukturovaně a s respektem k datům, pomáhá ti stavět produkt, který se zlepšuje podle reality — ne podle nejhlasitější notifikace.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -6742,6 +6899,7 @@ Výkon není jednorázová optimalizace před launchí. Je to provozní hygiena.
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha AM o zákaznickém feedbacku bez dotazníkového pekla: přirozené momenty sběru, práce se signály, privacy-first pravidla, produktový inbox, týdenní review, uzavírání smyčky, checklist a šablona feedback karty.
 - **2026-09-13:** Doplněna příloha AL o výkonu webu bez honění zeleného kolečka: kritické cesty, lab vs. field data, úklid externích skriptů, výkon landing page a dashboardu, výkonový rozpočet, privacy-first měření, checklist a výkonová karta.
 - **2026-09-13:** Doplněna příloha AK o design systému pro malý SaaS: produktová pravidla, tokeny, komponenty podle toků, microcopy, formuláře a tabulky, privacy-first UI vzory, údržba systému, checklist a komponentová karta.
 - **2026-09-13:** Doplněna příloha AJ o interním vyhledávání znalostí bez datového kombajnu: typy dotazů, vrstvy zdrojů, přístupová práva, AI odpovědi se zdroji, vlastnictví dokumentů, privacy-first měření a šablona znalostní karty.
