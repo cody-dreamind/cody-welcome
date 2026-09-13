@@ -4679,6 +4679,170 @@ Do administrace přidej jednoduchou obrazovku „Exporty a mazání“. Nemusí 
 
 ---
 
+## Příloha AA: Release proces bez ohňostroje v produkci
+
+Malý SaaS tým nepotřebuje release ceremonii na úrovni kosmické agentury. Potřebuje ale rytmus, který zabrání tomu, aby se páteční „jen malá úprava textu“ proměnila v pondělní archeologii logů. Release proces je dohoda týmu: co musí být hotové, kdo to kontroluje, jak poznáme problém a jak se bezpečně vrátíme zpět.
+
+Dobrá zpráva: release proces nemusí být těžký. Špatná zpráva: když neexistuje, stejně ho jednou vytvoříš — jen pravděpodobně během incidentu, s kávou v ruce a výrazem člověka, který právě zjistil, že staging nebyl staging.
+
+### Release není jen deploy
+
+Deploy je technický krok. Release je změna pro uživatele. Můžeš nasadit kód, který nikdo neuvidí, protože je schovaný za feature flagem. A můžeš udělat release bez nového deploye, když zapneš funkci prvnímu zákazníkovi.
+
+Proto rozlišuj čtyři vrstvy:
+
+- **Kód:** změna v repozitáři, testy, review, migrace.
+- **Konfigurace:** feature flagy, limity, integrace, proměnné prostředí.
+- **Data:** migrace, importy, změny schématu, mazání starých hodnot.
+- **Komunikace:** changelog, support, dokumentace, onboarding, obchodní tým.
+
+Když tým řekne „nasazeno“, měl by vědět, kterou z těchto vrstev myslí. U privacy-first produktu je to důležité dvojnásob: drobná konfigurační změna může změnit, kam tečou data, kdo má přístup nebo jak dlouho něco zůstává v logu.
+
+### Zaveď malé, časté a vratné změny
+
+Velké releasy vypadají efektivně v kalendáři a pekelně v incidentu. Čím větší balík změn, tím hůř poznáš, co se rozbilo. Malý tým by měl preferovat menší změny, které se dají rychle pochopit, otestovat a případně vypnout.
+
+Praktické pravidlo:
+
+- jedna změna řeší jeden jasný problém,
+- každý pull request má popsaný dopad na uživatele,
+- rizikové změny jdou za feature flag,
+- databázové migrace jsou zpětně kompatibilní,
+- release má připravený rollback nebo vypínač,
+- changelog se píše průběžně, ne až když si někdo vzpomene.
+
+Feature flag není omluva pro chaos. Je to bezpečnostní ventil. Každý flag musí mít vlastníka, datum kontroly a plán odstranění. Jinak z produktu vznikne muzeum polozapnutých experimentů, kde se i archeolog zeptá: „A tohle ještě někdo používá?“
+
+### Definition of Done pro release
+
+Klasická Definition of Done často končí u „testy prošly“. To je fajn, ale pro SaaS produkt má být širší. Hotovo znamená, že změna je připravená pro provoz, podporu i zákazníka.
+
+Minimální release DoD:
+
+- změna má jasně popsaný účel a očekávaný dopad,
+- proběhly relevantní automatické i ruční testy,
+- migrace je otestovaná na kopii realistických dat,
+- logy neobsahují nová citlivá data,
+- eventy v analytice jsou agregované a nezbytečně nesledují jednotlivce,
+- dokumentace nebo help texty jsou aktualizované,
+- support ví, co se mění a jak odpovědět na dotazy,
+- existuje rollback, vypínač nebo jasný náhradní postup.
+
+U bezpečnostně citlivých změn přidej kontrolu podle OWASP ASVS nebo vlastního interního checklistu: autorizace, validace vstupů, práce se session, audit log, rate limit a chování při chybě. Ne proto, že checkboxy zachrání svět. Protože ve stresu zachrání paměť.
+
+### Privacy-first kontrola před nasazením
+
+Každý release by měl projít krátkou datovou otázkou: „Mění tato úprava sběr, zpracování, ukládání nebo sdílení dat?“ Pokud ano, nejde jen o technický release. Je to i privacy release.
+
+Ptej se:
+
+- Přidáváme nové osobní údaje?
+- Měníme účel zpracování?
+- Zapojili jsme nového dodavatele nebo integraci?
+- Mění se retenční doba?
+- Přibývá nový log, export, webhook nebo analytický event?
+- Potřebuje změna úpravu dokumentace, DPA, privacy policy nebo interní datové mapy?
+- Umí uživatel funkci pochopit bez právnického luštění?
+
+Když je odpověď „ano“, release musí mít privacy poznámku. Nemusí to být román. Stačí krátký záznam: co se mění, jaká data se dotýkají, kde jsou uložena, kdo má přístup a kdy se mažou. Tohle je nudná disciplína, která v auditu najednou působí jako superhrdina v šedém svetru.
+
+### Release okno a zákaznický kontext
+
+Ne každý produkt potřebuje pevné release okno. Ale každý produkt potřebuje vědět, kdy změny neprovádět. Pokud zákazník používá systém pro ranní dispatch, nenasazuj rizikovou změnu v 7:55. Pokud fakturace běží poslední den v měsíci, nedělej tehdy migraci fakturačních stavů. Pokud support odchází na víkend, nepouštěj novou integraci v pátek večer.
+
+Jednoduchá pravidla:
+
+- běžné malé změny nasazuj kdykoliv během podporovaného času,
+- rizikové změny plánuj mimo špičku zákazníků,
+- velké migrace oznam předem,
+- zákaznické piloty zapínej postupně,
+- po release sleduj metriky, logy a support alespoň jeden produktový cyklus.
+
+Produktový cyklus není vždy den. U účetního nástroje to může být uzávěrka. U rezervačního systému víkend. U B2B reportingu pondělní meeting. Release proces má respektovat realitu zákazníka, ne jen kalendář vývojáře.
+
+### Rollback není ostuda
+
+Rollback je zdravý provozní nástroj. Ostuda je tvářit se, že rollback nepotřebuješ, protože „tentokrát je to fakt malé“. Nejlepší rollback je připravený dřív, než ho potřebuješ.
+
+Rozlišuj:
+
+- **Kódový rollback:** návrat na předchozí verzi aplikace.
+- **Konfigurační rollback:** vypnutí flagu, integrace nebo nové cesty.
+- **Datový rollback:** oprava nebo obnova dat po migraci.
+- **Komunikační rollback:** rychlé vysvětlení zákazníkům, co se stalo a co mají dělat.
+
+Datový rollback je nejtěžší. Proto migrace navrhuj tak, aby starý i nový kód krátce zvládly stejné schéma, destruktivní změny odkládej a před větší migrací udělej zálohu s jasným bodem obnovy. Záloha bez ověřené obnovy je placebo. Hezky uklidní, dokud ji nepotřebuješ.
+
+### Changelog jako marketing důvěry
+
+Changelog není jen seznam commitů. Je to důkaz, že produkt žije a že tým komunikuje srozumitelně. Piš ho jazykem zákazníka:
+
+- co je nové,
+- proč na tom záleží,
+- kdo z toho má užitek,
+- jestli se mění chování,
+- co má zákazník případně udělat.
+
+U privacy-first změn buď konkrétní: „Přidali jsme samoobslužný export projektů v CSV a JSON. Export je dostupný 48 hodin, vyžaduje administrátorské oprávnění a po expiraci se automaticky smaže.“ To je mnohem lepší než „vylepšili jsme správu dat“.
+
+### Checklist: release bez ohňostroje
+
+- [ ] Release má popsaný účel, dopad a vlastníka.
+- [ ] Změna je dostatečně malá, aby šla rychle pochopit a ověřit.
+- [ ] Testy pokrývají kritickou cestu, nejen šťastný scénář.
+- [ ] Migrace je zpětně kompatibilní nebo má jasný datový rollback.
+- [ ] Feature flagy mají vlastníka, plán zapnutí a plán odstranění.
+- [ ] Logy, analytika a exporty nepřidávají zbytečná osobní data.
+- [ ] Support a dokumentace vědí, co se mění.
+- [ ] Changelog je napsaný jazykem zákazníka.
+- [ ] Po release sledujeme metriky, chyby a support dotazy.
+- [ ] Máme jasný vypínač, rollback nebo incidentový postup.
+
+### Šablona release karty
+
+```markdown
+## Release karta: [název změny]
+
+### Kontext
+- Problém / příležitost:
+- Očekávaný dopad na zákazníka:
+- Vlastník:
+- Datum plánovaného release:
+
+### Rozsah
+- Kód:
+- Konfigurace / feature flagy:
+- Data / migrace:
+- Dokumentace / support:
+
+### Privacy-first kontrola
+- Nová nebo změněná data:
+- Retence:
+- Dodavatelé / integrace:
+- Logy a analytika:
+- Potřebná úprava dokumentace:
+
+### Ověření
+- Automatické testy:
+- Ruční scénáře:
+- Kritická cesta:
+- Kontrola po nasazení:
+
+### Rollback
+- Vypínač:
+- Kódový rollback:
+- Datový rollback:
+- Komunikace zákazníkům:
+
+### Changelog
+- Krátké shrnutí pro zákazníka:
+- Kdo má něco udělat:
+```
+
+> Codyho komentář: Release proces nemá brzdit tým. Má zabránit tomu, aby tým brzdil produkci obličejem. Když je checklist krátký, jasný a používaný, je to méně byrokracie než jeden neplánovaný večer v logách.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -4710,6 +4874,7 @@ Do administrace přidej jednoduchou obrazovku „Exporty a mazání“. Nemusí 
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha AA o release procesu pro malý privacy-first SaaS: rozdíl mezi deployem a releasem, malé vratné změny, Definition of Done, privacy kontrola, release okna, rollback, changelog, checklist a release karta.
 - **2026-09-13:** Doplněna příloha Z o exit plánu a přenositelnosti dat: užitečný export, scénáře odchodu, vendor lock-in rizika, technický vzor exportu, checklist a šablona exit karty.
 - **2026-09-13:** Doplněna příloha Y o AI asistentech v malém SaaS: interní use-casy, klasifikace dat, AI Act transparentnost, bezpečnostní hranice, měření hodnoty a AI karta.
 - **2026-09-13:** Doplněna příloha X o měsíčním business review bez vanity metrik: otázky před dashboardem, pět metrik, akviziční šum, zákaznické příběhy, rozhodnutí a privacy-first kontrola.
