@@ -5365,6 +5365,188 @@ Jednou měsíčně si projdi tři nejlepší a tři nejhorší referral leady. H
 
 ---
 
+## Příloha AE: Lehká obchodní pipeline bez CRM monstróznosti
+
+Malý SaaS nepotřebuje hned CRM, které umí předpovídat náladu zákazníka podle fáze měsíce a barvy tlačítka v e-mailu. Potřebuje přehled, kdo má jaký problém, kde je další krok, kdo ho vlastní a jaká data k tomu opravdu potřebujeme.
+
+Obchodní pipeline je provozní nástroj. Když je příliš jednoduchá, tým zapomíná follow-upy a ztrácí dobré příležitosti. Když je příliš složitá, lidé ji nevyplňují a stane se z ní drahý hřbitov políček. Cíl je mezi tím: minimum dat, jasné fáze, pravidelný rytmus a žádné sledovací divadlo.
+
+### Pipeline začíná kvalifikací, ne tabulkou
+
+Nejdřív si napiš, co znamená dobrý lead. Bez toho bude pipeline jen seznam lidí, kteří někdy klikli, napsali nebo se mihli kolem produktu jako zvědavý holub u kavárny.
+
+Pro malý B2B SaaS může kvalifikační filtr vypadat takto:
+
+- **Segment:** odpovídá cílové skupině, pro kterou produkt opravdu stavíme.
+- **Problém:** má konkrétní bolest, ne jen obecný zájem o „digitalizaci“.
+- **Dopad:** problém stojí čas, peníze, reputaci nebo kapacitu týmu.
+- **Timing:** existuje důvod řešit věc v nejbližších týdnech nebo měsících.
+- **Rozhodování:** víme, kdo bude používat, kdo schvaluje a kdo platí.
+- **Fit:** produkt umí pomoct bez zakázkové gymnastiky přes půl roadmapy.
+
+Když lead neprojde filtrem, není to prohra. Je to ochrana týmu. Špatný zákazník v rané fázi stojí víc než žádný zákazník, protože vytváří falešné signály, support dluh a tlak na funkce, které nepatří do strategie.
+
+### Stačí pět praktických fází
+
+Pipeline nemusí mít patnáct stavů s názvy jako „Solution Validation Pending Commercial Alignment“. Česky: nikdo tomu nevěří a nikdo to nechce vyplňovat.
+
+Začni pěti fázemi:
+
+1. **Nový signál:** někdo se ozval, přišel referral, odpověď na obsah nebo přímý dotaz.
+2. **Kvalifikace:** ověřuješ problém, segment, dopad a rozhodovací proces.
+3. **Nabídka dalšího kroku:** demo, pilot, workshop, audit nebo konkrétní návrh spolupráce.
+4. **Rozhodování:** zákazník interně řeší cenu, prioritu, rizika a schválení.
+5. **Vyhráno / prohráno / odloženo:** jasný výsledek a stručný důvod.
+
+Každá fáze musí mít definované, co znamená vstup a co znamená výstup. Jinak se příležitosti zaseknou v mlze. Například „Kvalifikace“ není hotová tím, že proběhl call. Je hotová až ve chvíli, kdy víš, jaký problém řeší, kdo rozhoduje a jaký je realistický další krok.
+
+### Každá příležitost potřebuje další krok
+
+Největší obchodní chaos nevzniká z nedostatku nástrojů, ale z věty „nějak se jim ozveme“. To není plán. To je kalendářní hazard.
+
+U každé aktivní příležitosti eviduj:
+
+- kdo je vlastník za tvůj tým,
+- kdo je hlavní kontakt u zákazníka,
+- v jaké fázi se příležitost nachází,
+- jaký je další konkrétní krok,
+- do kdy se má stát,
+- co musí zákazník dodat nebo rozhodnout,
+- proč může obchod selhat.
+
+Další krok musí být akce, ne nálada. „Zákazník přemýšlí“ není další krok. „V úterý poslat shrnutí pilotu a návrh první fáze“ je další krok. Pokud další krok nemá datum a vlastníka, pipeline lže.
+
+### Sbírej méně dat, ale lepších
+
+CRM systémy svádí k tomu, že si vytvoříš pole na všechno. Velikost firmy, obrat, LinkedIn profil, oblíbený zdroj leadu, interní skóre, poznámky z každého povzdechu. Jenže čím víc polí, tím víc neaktuálních dat, tím větší nepořádek a tím horší privacy profil.
+
+Privacy-first minimum pro obchodní pipeline:
+
+- jméno a pracovní kontakt hlavní osoby,
+- firma a veřejný web,
+- problém nebo poptávka vlastními slovy,
+- fáze pipeline,
+- další krok a termín,
+- odhad velikosti příležitosti, pokud je užitečný,
+- zdroj leadu v hrubé podobě,
+- právní nebo bezpečnostní požadavky, pokud padly v rozhovoru.
+
+Co často nepotřebuješ: osobní sociální profily, soukromá telefonní čísla, kompletní historii chování na webu, nahrávky callů bez jasného účelu, interní poznámky o osobnosti kontaktu nebo automatické obohacování dat z externích databází. Pokud neumíš vysvětlit, proč údaj potřebuješ pro obchodní rozhodnutí nebo zákaznickou péči, nepatří do pipeline.
+
+### Důvod prohry je zlato, když ho nepřikrášlíš
+
+Prohrané obchody jsou produktový výzkum, ne odpad. Ale jen pokud si napíšeš skutečný důvod. „Cena“ často znamená něco přesnějšího: zákazník neviděl hodnotu, neměl rozpočet, neměl urgentní problém, potřeboval integraci, bál se migrace nebo rozhodnutí prohrálo proti interním prioritám.
+
+Používej jednoduché kategorie:
+
+- **Nejasná bolest:** problém nebyl dost silný.
+- **Špatný segment:** zákazník potřebuje jiný typ produktu.
+- **Chybějící funkce:** něco zásadního brání použití.
+- **Cena / rozpočet:** hodnota neobhájila investici nebo rozpočet neexistuje.
+- **Timing:** řešení dává smysl, ale ne teď.
+- **Důvěra / riziko:** bezpečnost, reference, provoz nebo data nejsou dostatečně jasné.
+- **Konkurence / interní řešení:** zákazník zvolil jinou cestu.
+
+Jednou měsíčně si projdi prohrané příležitosti. Pokud se opakuje „chybějící funkce“, neznamená to automaticky „postav funkci“. Nejdřív zjisti, zda jde o cílový segment a strategický problém. Jinak jen trénuješ produkt, aby poslouchal každého kolemjdoucího.
+
+### Follow-up bez otravování
+
+Follow-up je užitečný, když přináší kontext. Je otravný, když jen připomíná, že obchodník existuje. Rozdíl je v hodnotě.
+
+Slabý follow-up:
+
+```text
+Dobrý den, jen se připomínám, jestli máte novinky.
+```
+
+Lepší follow-up:
+
+```text
+Dobrý den,
+
+navazuji na náš hovor o plánování zakázek v tabulkách. Slíbil jsem poslat návrh první pilotní fáze bez migrace historických dat.
+
+Shrnutí:
+- cíl pilotu: ověřit plánování pro 8 techniků,
+- délka: 3 týdny,
+- vstup: aktuální CSV export zakázek,
+- úspěch: každý technik vidí práci na další den bez ručního přepisování.
+
+Pokud to sedí, pošlu konkrétní harmonogram a rozsah dat, která budeme potřebovat.
+```
+
+Druhý e-mail pomáhá rozhodnutí. Připomíná kontext, snižuje nejistotu a nevyžaduje, aby zákazník lovil v paměti, kdo jsi a proč mu píšeš.
+
+### Týdenní pipeline review na 25 minut
+
+Jednou týdně udělej krátké obchodní review. Ne proto, aby se tým cítil korporátně, ale aby se příležitosti nehromadily bez akce.
+
+Agenda:
+
+1. **Nové signály:** které stojí za kvalifikaci a které ne.
+2. **Zaseknuté příležitosti:** vše bez dalšího kroku nebo po termínu.
+3. **Nejbližší rozhodnutí:** co může tento týden přejít do pilotu, platby nebo uzavření.
+4. **Rizika:** kde chybí rozhodovatel, důvěra, bezpečnostní odpovědi nebo jasná hodnota.
+5. **Poučení:** co jsme se dozvěděli o segmentu, ceně, námitkách nebo produktu.
+
+Review nemá být čtení celé tabulky nahlas. To je trest, ne meeting. Zaměř se na změny, blokery a rozhodnutí. Pokud příležitost nemá pohyb několik týdnů, buď ji oživ konkrétním krokem, nebo ji odlož. Pipeline má být živý systém, ne muzeum optimismu.
+
+### Checklist: obchodní pipeline privacy-first
+
+- Máme jasně definované, co je kvalifikovaný lead.
+- Pipeline má jednoduché fáze s popsaným vstupem a výstupem.
+- Každá aktivní příležitost má vlastníka, další krok a termín.
+- Sbíráme jen data potřebná pro obchodní rozhodnutí a zákaznický kontext.
+- Nepoužíváme automatické obohacování kontaktů bez jasného důvodu a kontroly.
+- Důvody prohry zapisujeme konkrétně, ne kosmeticky.
+- Follow-up přináší hodnotu, shrnutí nebo rozhodovací podklad.
+- Jednou týdně čistíme zaseknuté příležitosti.
+- Jednou měsíčně hledáme vzory v prohraných a vyhraných obchodech.
+- Přístupy do pipeline mají jen lidé, kteří je opravdu potřebují.
+
+### Šablona pipeline karty
+
+```markdown
+## Pipeline karta: [firma / příležitost]
+
+### Kontext
+- Firma:
+- Hlavní kontakt:
+- Segment:
+- Zdroj leadu:
+- Vlastník za náš tým:
+
+### Problém
+- Co zákazník řeší:
+- Dopad problému:
+- Co používá dnes:
+- Proč to řeší teď:
+
+### Kvalifikace
+- Fit se segmentem:
+- Rozhodovatel:
+- Uživatelé:
+- Rozpočet / model nákupu:
+- Rizika:
+
+### Další krok
+- Aktuální fáze:
+- Další akce:
+- Vlastník:
+- Termín:
+- Co potřebujeme od zákazníka:
+
+### Výsledek
+- Stav: vyhráno / prohráno / odloženo
+- Důvod:
+- Poučení pro produkt nebo marketing:
+- Datum uzavření:
+```
+
+> Codyho komentář: Dobrá pipeline není obchodní věštírna. Je to jednoduchý systém, který drží sliby, další kroky a poučení na jednom místě — bez toho, aby z každého kontaktu dělal datovou archeologii.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -5396,6 +5578,7 @@ Jednou měsíčně si projdi tři nejlepší a tři nejhorší referral leady. H
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha AE o lehké obchodní pipeline bez CRM monstróznosti: kvalifikace leadů, jednoduché fáze, další kroky, minimalizace obchodních dat, důvody proher, hodnotný follow-up, týdenní review a šablona pipeline karty.
 - **2026-09-13:** Doplněna příloha AD o partnerském a referral růstu bez sledovacího cirkusu: správný moment pro doporučení, férová odměna, minimální evidence dat, šablony zpráv, partnerská pravidla, měření kvality a referral karta.
 - **2026-09-13:** Doplněna příloha AC o zakázkové implementaci bez scope creepu: oddělení produktu a služby, implementační mapa, změnové řízení, privacy-first práce s daty, odmítání rizikových úprav a šablona implementační karty.
 - **2026-09-13:** Doplněna příloha AB o bezpečnostních dotaznících v B2B prodeji: bezpečnostní profil, odpovědi podle důkazů, oblasti dotazníku, certifikace bez mlžení, bezpečné sdílení, backlog a šablona bezpečnostní karty.
