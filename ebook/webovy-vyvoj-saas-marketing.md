@@ -4109,6 +4109,155 @@ Kvalita není o tom, že nikdy nic nerozbiješ. To by bylo hezké, ale taky bych
 
 ---
 
+
+## Příloha W: Retence a mazání dat bez šuplíku „navždy“
+
+Data, která držíš bez důvodu, nejsou aktivum. Jsou budoucí práce, riziko a vysvětlování. Privacy-first SaaS proto nepotřebuje jen hezkou větu „data mažeme na žádost“. Potřebuje provozní systém, který říká, co držíme, proč, jak dlouho, kdo o tom rozhoduje a jak poznáme, že mazání opravdu proběhlo.
+
+GDPR principy minimalizace a omezení uložení nejsou jen právní pojmy do dokumentace. Jsou praktický návrhový filtr. Evropská komise i EDPB opakovaně zdůrazňují, že osobní údaje mají odpovídat jasnému účelu, být přiměřené a nemají se držet déle, než je nutné. Přeloženo do řeči malého SaaS: každá tabulka, log a export má mít důvod i datum úklidu.
+
+> Codyho komentář: „Smažeme to někdy později“ je datová verze „dočasně to položím na stůl“. Za tři měsíce je z toho archeologická vrstva a nikdo nechce být ten, kdo ji pojmenuje.
+
+### Retenční matice místo dojmů
+
+Retenční politika nemusí být román. Pro začátek stačí matice, kterou tým skutečně používá. U každé kategorie dat napiš účel, právní nebo smluvní důvod, doporučenou dobu uložení, událost, která spouští mazání, a vlastníka.
+
+Praktické kategorie pro SaaS:
+
+- **Účty a přístupy:** uživatelé, role, pozvánky, bezpečnostní logy.
+- **Zákaznický obsah:** projekty, dokumenty, zakázky, komentáře, nahrané soubory.
+- **Billing a účetnictví:** fakturační údaje, platby, daňové doklady, tarifní historie.
+- **Support:** e-maily, tikety, screenshoty, diagnostická metadata.
+- **Produktová analytika:** agregované události, aktivace, retence, technické chyby.
+- **Marketing:** newsletter, preference komunikace, zdroj leadu, odhlášení.
+- **Zálohy:** databázové snapshoty, objektové úložiště, disaster recovery kopie.
+
+U každé kategorie si polož jednoduchou otázku: „Co nejhoršího se stane, když to smažeme po třiceti, devadesáti nebo třista šedesáti pěti dnech?“ Odpověď často odhalí, že některá data držíš jen ze zvyku.
+
+### Mazání musí být součást produktu
+
+Mazání dat není jednorázový SQL skript, který někdo spustí s oroseným čelem. Má být běžná produktová schopnost. Když zákazník zruší účet, skončí pilot nebo požádá o výmaz, systém by měl mít předvídatelný postup.
+
+Minimální proces:
+
+1. **Identifikuj rozsah:** účet, organizace, konkrétní projekt, support ticket nebo marketingový kontakt.
+2. **Ověř oprávnění:** žádost podává správná osoba nebo interní role.
+3. **Rozliš data:** co se maže hned, co se anonymizuje a co se musí držet kvůli účetnictví nebo bezpečnosti.
+4. **Proveď akci:** aplikace spustí mazání nebo označení pro dávkový job.
+5. **Zapiš audit:** ne citlivý obsah, ale kdo, kdy, jaký typ akce a výsledek.
+6. **Informuj člověka:** stručně potvrď, co bylo provedeno a co případně zůstává z oprávněného důvodu.
+
+Důležité je oddělit **smazání zákaznického obsahu** od **uchování nezbytných provozních záznamů**. Například faktura může zůstat kvůli účetním povinnostem, ale pracovní dokumenty zákazníka a nepotřebné diagnostické přílohy by neměly strašit v systému donekonečna.
+
+### Anonymizace není přejmenování na „Uživatel 123“
+
+Někdy nepotřebuješ data smazat úplně, protože chceš zachovat agregovanou statistiku nebo historický počet událostí. Pak dává smysl anonymizace. Ale anonymizace znamená, že člověka už rozumně nejde znovu identifikovat. Pouhé odstranění jména obvykle nestačí, pokud zůstane e-mail, unikátní ID, IP adresa nebo kombinace detailů, která osobu prozradí.
+
+Rozumné varianty:
+
+- **Smazání:** data už nejsou potřeba pro produkt ani provoz.
+- **Pseudonymizace:** identifikátor se oddělí, ale stále existuje cesta zpět; chovej se k tomu jako k osobním údajům.
+- **Anonymizace:** zachová se jen agregace nebo statistika bez reálné možnosti návratu k osobě.
+- **Agregace:** místo událostí jednotlivce držíš souhrny za den, týden, organizaci nebo tarif.
+
+Pro produktové metriky často stačí agregace. Nemusíš vědět, že konkrétní uživatel klikl v úterý ve 14:03 na export. Stačí vědět, kolik organizací export použilo, jak často a jestli po něm lépe aktivují produkt.
+
+### Zálohy mají vlastní pravidla
+
+Mazání v produkční databázi nestačí, pokud stejné údaje žijí v zálohách ještě tři roky. Zálohy jsou zvláštní případ: jejich účelem je obnova po incidentu, ne běžné hledání historických dat. Proto mají mít jasnou retenční dobu, šifrování, omezený přístup a test obnovy.
+
+Dobrá pravidla pro zálohy:
+
+- nastav pevnou retenční dobu podle RPO/RTO a rizika,
+- šifruj zálohy a odděl přístup od běžné produkční administrace,
+- dokumentuj, že výmaz v aktivním systému se do záloh propíše přirozeným vypršením retenční doby,
+- nepoužívej zálohy jako archiv pro support nebo reporting,
+- při obnově zkontroluj, zda se nevrací data, která už měla být smazaná,
+- testuj obnovu pravidelně, ne až při požáru.
+
+Pokud zákazník požádá o výmaz, je fér vysvětlit, jak se chovají zálohy: aktivní data se odstraní podle procesu, zálohy se nepoužívají pro běžný provoz a záznamy z nich zmizí podle retenčního cyklu. Hlavně to musí odpovídat realitě. Dokumentace není kouzelný plášť neviditelnosti.
+
+### Support a logy jsou častý únikový kanál
+
+Nejvíc nepořádku bývá mimo hlavní databázi: v e-mailech, tiketech, Slacku, screenshot nástrojích, crash reportech a ručně exportovaných CSV. Retenční systém proto nesmí končit u aplikace.
+
+Praktická opatření:
+
+- support formulář upozorňuje, ať lidé neposílají zbytečně citlivé údaje,
+- interní tým maskuje osobní údaje ve screenshotech,
+- logy neobsahují plné payloady, hesla, tokeny ani obsah zákaznických dokumentů,
+- přílohy v tiketech mají kratší retenci než samotný text požadavku,
+- ruční exporty mají vlastní složku, vlastníka a datum smazání,
+- do komunikačních nástrojů neposílej zákaznická data, pokud stačí interní ID.
+
+Privacy-first provoz často vyhraje tím, že citlivá data vůbec neopustí hlavní systém. Když podpora potřebuje kontext, dej jí bezpečný interní pohled s oprávněním a auditem místo kopírování dat do pěti nástrojů.
+
+### Retenční review jednou za čtvrtletí
+
+Retence není dokument, který napíšeš a pak ho necháš stárnout jako zapomenutý sýr v lednici. Produkt se mění, přibývají integrace, mění se reporting a někdo občas přidá nový log „jen dočasně“. Proto si dej pravidelný review rytmus.
+
+Čtvrtletní otázky:
+
+- Přibyla nová kategorie dat nebo nový subprocesor?
+- Držíme někde data déle, než říká matice?
+- Existují ruční exporty bez vlastníka?
+- Funguje mazání účtu end-to-end včetně souborů a analytiky?
+- Umíme odpovědět na žádost o přístup nebo výmaz bez paniky?
+- Sedí privacy dokumentace s reálným provozem?
+- Má support jasný postup pro citlivé přílohy?
+
+Výstup review má být krátký: co je v pořádku, co se smaže, co se opraví a kdo to vlastní. Bez vlastníka je retenční politika jen hezký plakát.
+
+### Checklist: retence a mazání dat
+
+- [ ] Máme retenční matici pro účty, obsah, billing, support, analytiku, marketing a zálohy.
+- [ ] Každá kategorie dat má účel, vlastníka, retenční dobu a spouštěč mazání.
+- [ ] Mazání účtu nebo organizace je popsaný produktový proces, ne ruční improvizace.
+- [ ] Víme, která data mažeme, anonymizujeme, agregujeme nebo držíme z oprávněného důvodu.
+- [ ] Zálohy mají šifrování, omezený přístup, retenční cyklus a test obnovy.
+- [ ] Logy a support nástroje neobsahují zbytečný citlivý obsah.
+- [ ] Ruční exporty mají vlastníka a datum smazání.
+- [ ] Žádosti o přístup, export a výmaz mají šablonu odpovědi i interní postup.
+- [ ] Čtvrtletně kontrolujeme, zda dokumentace odpovídá reálnému provozu.
+- [ ] Umíme zákazníkovi lidsky vysvětlit, co s jeho daty děláme po ukončení služby.
+
+### Šablona retenční karty
+
+```markdown
+## Retenční karta: [kategorie dat]
+
+### Účel
+- Proč data potřebujeme:
+- Co by se rozbilo bez nich:
+
+### Rozsah
+- Typy údajů:
+- Kde vznikají:
+- Kde se ukládají:
+- Kdo má přístup:
+
+### Retence
+- Doba uložení:
+- Spouštěč mazání:
+- Výjimky:
+- Vlastník:
+
+### Mazání / anonymizace
+- Technický postup:
+- Auditní záznam:
+- Dopad na zálohy:
+- Jak ověříme dokončení:
+
+### Komunikace
+- Co říkáme zákazníkovi:
+- Odkaz na dokumentaci:
+- Datum poslední kontroly:
+```
+
+Retence je jedna z těch nudných věcí, které se stanou extrémně zajímavé až ve chvíli, kdy ji nemáš. Dobrý privacy-first SaaS ji řeší dřív: méně dat, jasnější pravidla, klidnější support a menší bolest při každé žádosti zákazníka.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -4117,6 +4266,7 @@ Kvalita není o tom, že nikdy nic nerozbiješ. To by bylo hezké, ale taky bych
 - EDPB: [Data protection guide for small business](https://www.edpb.europa.eu/sme_en)
 - EDPB: [Be compliant](https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en)
 - EDPB: [Respect individuals’ rights](https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_en)
+- Evropská komise: [How long can data be kept and is it necessary to update it?](https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr/how-long-can-data-be-kept-and-it-necessary-update-it_en)
 - EDPB: [Frequently Asked Questions](https://www.edpb.europa.eu/contact/frequently-asked-questions_en)
 - Evropská komise: [What is a data controller or a data processor?](https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/obligations/controller-processor/what-data-controller-or-data-processor_en)
 - EDPB: [Guidelines 07/2020 on the concepts of controller and processor in the GDPR](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en)
@@ -4135,6 +4285,7 @@ Kvalita není o tom, že nikdy nic nerozbiješ. To by bylo hezké, ale taky bych
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha W o retenci a mazání dat: retenční matice, mazání účtů, anonymizace, zálohy, support data, čtvrtletní review a šablona retenční karty.
 - **2026-09-13:** Doplněna příloha V o QA a regresním testování pro malý privacy-first SaaS: kritické cesty, Definition of Done, testovací data, release checklist, bug reporty a šablona testovací karty.
 - **2026-09-12:** Doplněna příloha U o přístupnosti webu a SaaS: WCAG 2.2, European Accessibility Act, design systém, formuláře, privacy-first testování a checklist.
 - **2026-09-12:** Doplněna příloha T o bezpečných importech dat: rozsah migrace, importní mapa, validace, duplicity, rollback, retence a šablona importní karty.
