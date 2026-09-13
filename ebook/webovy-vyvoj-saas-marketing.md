@@ -6862,6 +6862,171 @@ Feedback není hlasování o roadmapě. Je to navigace v mlze. Když ho sbírá�
 
 ---
 
+## Příloha AN: Přístupy a účty bez chaosu v malém SaaS týmu
+
+Přístupy nejsou jen IT detail. Jsou to dveře k zákaznickým datům, fakturaci, produkční databázi, e-mailům, repozitářům, analytice a někdy i k reputaci celé firmy. Malý tým má jednu výhodu: nemusí čekat na korporátní IAM projekt za cenu menší jachty. Může si nastavit jednoduchá pravidla hned.
+
+Cíl není vytvořit byrokratickou pevnost, kde nový člověk čeká tři týdny na účet. Cíl je, aby každý věděl, kdo má k čemu přístup, proč ho má, jak dlouho ho potřebuje a co se stane při odchodu. Když tohle nevíš, nemáš přístupy. Máš digitální adventní kalendář plný překvapení.
+
+### Nejprve rozděl účty podle rizika
+
+Ne každý účet má stejnou váhu. Přístup do nástroje na plánování obsahu není totéž jako přístup do produkční databáze nebo platební brány. Praktický první krok je rozdělit systémy do tří kategorií:
+
+- **Kritické systémy:** produkce, databáze, hosting, DNS, repozitáře, CI/CD, platební brána, e-mailová infrastruktura, zálohy.
+- **Důležité systémy:** CRM, support, analytika, projektové řízení, dokumentace, interní komunikace.
+- **Pomocné systémy:** grafika, plánování obsahu, jednorázové exporty, nástroje pro kampaně bez zákaznických dat.
+
+Kritické systémy mají mít nejpřísnější režim: vícefaktorové ověření, individuální účty, žádné sdílené heslo v chatu, jasného vlastníka a pravidelnou kontrolu. U pomocných systémů stačí lehčí režim, ale pořád musí být jasné, kdo je vlastní.
+
+> Codyho komentář: Sdílený účet „admin@firma.cz“ je jako klíč pod rohožkou. Všichni vědí, že je to špatně, ale dokud nepřijde incident, tváří se to jako tradice.
+
+### Role pojmenuj podle práce, ne podle ega
+
+Role „admin“, „superadmin“ a „ultra boss“ nevysvětlují nic. Lepší je pojmenovat role podle práce, kterou člověk potřebuje udělat:
+
+- **Support:** vidí zákaznický účet, historii komunikace a stav objednávky, ale nepotřebuje měnit billing pravidla.
+- **Finance:** vidí faktury, platby a smluvní údaje, ale nepotřebuje číst technické logy.
+- **Developer:** vidí repozitář, staging a logy, ale produkční data používá jen přes bezpečné postupy.
+- **Ops:** spravuje hosting, monitoring, incidenty a zálohy.
+- **Marketing:** vidí agregovanou analytiku a obsahové nástroje, ale nepotřebuje detailní profily uživatelů.
+
+Dobré pravidlo: když neumíš jednou větou vysvětlit, proč role potřebuje konkrétní oprávnění, pravděpodobně ho nemá mít. Ne proto, že lidem nevěříš. Protože dobrý systém nevynucuje hrdinství.
+
+### Onboarding přístupů musí být checklist, ne improvizace
+
+Nový člověk často dostává účty podle toho, kdo je zrovna online. To vede k opomenutím, sdíleným heslům a přístupům, které nikdo neodebere. Udělej jednoduchý onboardingový checklist podle role.
+
+Checklist by měl obsahovat:
+
+- jakou roli člověk nastupuje,
+- které systémy potřebuje od prvního dne,
+- kdo schvaluje kritické přístupy,
+- zda je zapnuté MFA,
+- kde je uložený recovery postup,
+- kdo ověří, že přístup funguje,
+- kdy proběhne první review oprávnění.
+
+U externistů buď ještě přísnější. Externista často potřebuje kratší, užší a časově omezený přístup. Pokud někdo spravuje jednu kampaň, nepotřebuje navždy přístup do celé analytiky a už vůbec ne do seznamu zákazníků.
+
+### Offboarding je bezpečnostní funkce
+
+Odchod člověka není jen HR moment. Je to bezpečnostní událost. Nemusí být dramatická; většina lidí odchází normálně a férově. Ale systém má fungovat i ve chvíli, kdy je pátek večer, všichni jsou unavení a někdo zapomene, že externista měl přístup do DNS.
+
+Minimální offboardingový postup:
+
+1. Urči datum a čas ukončení přístupů.
+2. Odeber nebo deaktivuj účty v kritických systémech jako první.
+3. Změň sdílená tajemství, pokud se jim nedalo vyhnout.
+4. Předej vlastnictví dokumentů, repozitářů, kalendářů a automatizací.
+5. Zkontroluj API klíče, osobní tokeny a webhooky.
+6. Archivuj potřebnou komunikaci podle retenčních pravidel.
+7. Zapiš dokončení do přístupového logu.
+
+Největší past jsou osobní tokeny. Člověk odejde, účet se vypne, ale token dál drží integraci pohromadě jako izolepa na produkčním potrubí. Proto je důležité evidovat nejen účty, ale i klíče a automatizace navázané na konkrétního člověka.
+
+### Produkční data nejsou tréninkové hřiště
+
+U malého SaaS týmu je lákavé dát vývojářům přímý přístup do produkční databáze, protože „je to rychlejší“. Někdy je produkční zásah opravdu potřeba. Ale výchozí režim má být jiný:
+
+- používej anonymizovaná nebo syntetická data pro vývoj,
+- debuguj přes bezpečné logy a auditované nástroje,
+- pro produkční zásahy používej časově omezený přístup,
+- každý ruční zásah zapisuj s důvodem a výsledkem,
+- nikdy neposílej exporty osobních dat přes chat,
+- citlivá data nekopíruj do issue trackeru.
+
+Když potřebuješ analyzovat konkrétní zákaznický problém, popiš minimum nezbytných dat. Například: „potřebujeme ID objednávky a timestamp chyby“, ne „pošli mi celý export zákazníka“. Privacy-first provoz není o tom, že nikdy neřešíš produkční realitu. Je o tom, že ji řešíš s menším datovým otiskem.
+
+### Audit přístupů dělej rytmicky a krátce
+
+Jednou za čtvrtletí udělej přístupové review. Ne velký audit, který všichni odkládají. Krátkou kontrolu kritických a důležitých systémů:
+
+- kdo má admin práva,
+- kdo má přístup k zákaznickým datům,
+- které účty patří bývalým lidem nebo externistům,
+- které API klíče jsou staré nebo bez vlastníka,
+- které integrace nikdo nepoužívá,
+- kde chybí MFA,
+- kde existuje sdílený účet a proč.
+
+Výstupem review nemá být pocit viny. Výstupem má být seznam konkrétních úprav: odebrat tři účty, rotovat dva klíče, převést vlastnictví automatizace, doplnit recovery kontakt. Malé pravidelné úklidy jsou levnější než jeden velký incidentový úklid s potem na zádech.
+
+### Přístupy dokumentuj lidsky
+
+Evidence přístupů nemusí být složitá. Stačí tabulka nebo interní karta systému. Důležité je, aby byla živá a někdo ji vlastnil.
+
+Pro každý důležitý systém si zapiš:
+
+- název systému a účel,
+- vlastníka ve firmě,
+- typ dat, která systém zpracovává,
+- role a oprávnění,
+- kdo má admin přístup,
+- zda je zapnuté MFA,
+- kde jsou API klíče nebo integrace,
+- jak se dělá onboarding a offboarding,
+- kdy proběhlo poslední review.
+
+Když se bojíš, že dokumentace rychle zastará, nastav kratší formát. Jedna přesná stránka je lepší než deset stránek bezpečnostního románu, který nikdo neotevřel od doby, kdy byl Internet Explorer ještě společenská hrozba.
+
+### Checklist: přístupy bez chaosu
+
+- Má každý důležitý systém jasného vlastníka?
+- Jsou kritické účty individuální, ne sdílené?
+- Je u kritických systémů zapnuté MFA?
+- Existuje onboardingový checklist podle role?
+- Existuje offboardingový checklist včetně API klíčů a tokenů?
+- Jsou produkční data chráněná před zbytečným kopírováním?
+- Má tým evidenci admin účtů a integrací?
+- Probíhá aspoň čtvrtletní review přístupů?
+- Jsou externí přístupy časově omezené?
+- Umí tým rychle zjistit, kdo má přístup k zákaznickým datům?
+
+### Šablona přístupové karty
+
+```markdown
+## Přístupová karta: [systém / oblast]
+
+### Účel
+- K čemu systém slouží:
+- Vlastník systému:
+- Kritičnost: kritický / důležitý / pomocný
+
+### Data
+- Jaká data systém obsahuje:
+- Obsahuje osobní data: ano / ne
+- Obsahuje citlivá nebo provozně kritická data:
+- Retence nebo pravidla mazání:
+
+### Role a oprávnění
+- Role:
+- Kdo má admin přístup:
+- Kdo schvaluje nový přístup:
+- Je vyžadované MFA: ano / ne
+
+### Integrace
+- API klíče nebo tokeny:
+- Webhooky:
+- Napojené automatizace:
+- Vlastník integrací:
+
+### Onboarding a offboarding
+- Jak se přístup přidává:
+- Jak se přístup odebírá:
+- Co se rotuje při odchodu člověka:
+- Kde je recovery postup:
+
+### Review
+- Poslední kontrola:
+- Zjištěné problémy:
+- Další krok:
+- Vlastník dalšího kroku:
+```
+
+Přístupy jsou nudné jen do chvíle, než nejsou. Dobře nastavený systém účtů chrání zákazníky, tým i produktovou rychlost. Když lidé vědí, kam mohou a proč, méně improvizují — a bezpečnost přestane být oddělená brzda někde v rohu.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -6899,6 +7064,7 @@ Feedback není hlasování o roadmapě. Je to navigace v mlze. Když ho sbírá�
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha AN o přístupech a účtech v malém SaaS týmu: rizikové kategorie systémů, role podle práce, onboarding a offboarding přístupů, produkční data, čtvrtletní review, checklist a přístupová karta.
 - **2026-09-13:** Doplněna příloha AM o zákaznickém feedbacku bez dotazníkového pekla: přirozené momenty sběru, práce se signály, privacy-first pravidla, produktový inbox, týdenní review, uzavírání smyčky, checklist a šablona feedback karty.
 - **2026-09-13:** Doplněna příloha AL o výkonu webu bez honění zeleného kolečka: kritické cesty, lab vs. field data, úklid externích skriptů, výkon landing page a dashboardu, výkonový rozpočet, privacy-first měření, checklist a výkonová karta.
 - **2026-09-13:** Doplněna příloha AK o design systému pro malý SaaS: produktová pravidla, tokeny, komponenty podle toků, microcopy, formuláře a tabulky, privacy-first UI vzory, údržba systému, checklist a komponentová karta.
