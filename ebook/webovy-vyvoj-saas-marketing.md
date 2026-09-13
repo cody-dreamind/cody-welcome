@@ -5701,6 +5701,143 @@ Tohle není právnický ornament. Je to důvěra v praxi. Když uživatel rozum�
 
 ---
 
+## Příloha AG: Přístupová práva bez interního chaosu
+
+Malý SaaS tým často řeší přístupy až ve chvíli, kdy někdo odejde, zákazník se zeptá na audit nebo se v supportu objeví screenshot s daty, která tam vůbec neměla být. Přístupová práva přitom nejsou jen bezpečnostní detail. Jsou to brzdy, mantinely a důkaz, že firma bere data zákazníků vážně.
+
+Dobře nastavené role mají tři cíle: lidé se dostanou k tomu, co potřebují pro práci, citlivá data nejsou všude a změna týmu nezpůsobí detektivku s názvem „kdo má ještě účet v produkci“. Pro privacy-first SaaS je to základní provozní hygiena.
+
+### Začni inventurou lidí, ne nástrojů
+
+Nejdřív si napiš, kdo reálně potřebuje přístup k čemu. Ne podle organizačního diagramu, ale podle práce:
+
+- **Vývoj:** potřebuje debugovat chyby, ale většinou nepotřebuje číst celé zákaznické záznamy.
+- **Support:** potřebuje řešit konkrétní účty a konkrétní požadavky, ne volně procházet všechna data.
+- **Obchod:** potřebuje stav leadu, firmu, kontakt a poznámky k jednání, ne technické logy.
+- **Finance:** potřebují fakturační údaje, platby a stav smluv, ne produktovou aktivitu uživatelů.
+- **Externisté:** potřebují úzce vymezený přístup na konkrétní dobu.
+
+Výsledek inventury nemá být román. Stačí tabulka: role, účel, systémy, typ dat, důvod, vlastník a datum poslední kontroly. Když u přístupu neumíš napsat účel, pravděpodobně ho nemáš dávat.
+
+### Role navrhuj podle nejmenších práv
+
+Princip „least privilege“ zní jako bezpečnostní plakát v korporátní chodbě, ale v praxi je prostý: člověk má mít jen ta práva, která potřebuje pro aktuální práci. Ne „radši admina, ať se neptá“. To je pohodlí převlečené za riziko.
+
+Praktické role pro malý SaaS:
+
+- **Owner:** správa billingů, práv, bezpečnostních nastavení a klíčových integrací.
+- **Admin:** provozní správa zákazníků, nastavení produktu a běžné interní úkony.
+- **Support:** omezený přístup k zákaznickému účtu jen při řešení ticketu.
+- **Developer:** technický přístup k prostředí, logům a anonymizovaným nebo testovacím datům.
+- **Finance:** faktury, platby, smlouvy a exporty pro účetnictví.
+- **Read-only:** kontrola, audit, reporting nebo předání bez možnosti měnit data.
+
+U každé role si napiš i to, co nesmí. Právě negativní vymezení často odhalí problém: „support nesmí exportovat všechna data“, „externista nesmí vidět produkční zákazníky“, „obchod nesmí upravovat fakturační historii“.
+
+### Přístup do produkce není běžný pracovní nástroj
+
+Produkce má být nudná a chráněná. Pokud každý vývojář každý den leze do produkční databáze, nemáš agilitu. Máš budoucí incident, který si zatím jen obléká mikinu.
+
+Lepší provozní vzor:
+
+1. Běžné ladění řeš přes logy, metriky, testovací prostředí a reprodukovatelné scénáře.
+2. Produkční data zpřístupni jen pro konkrétní incident nebo schválený support případ.
+3. Přístup časově omez a zaznamenej důvod.
+4. Citlivá pole maskuj tam, kde nejsou nezbytná.
+5. Po vyřešení ověř, že dočasný přístup opravdu zmizel.
+
+Tohle není nedůvěra k týmu. Je to ochrana týmu. Když se něco pokazí, auditní stopa ušetří spoustu dohadů a prstíčkování.
+
+### Offboarding musí být checklist, ne vzpomínka
+
+Odchod člověka z týmu je přesně ta situace, kde se ukáže, jestli firma pracuje systémově. „Myslím, že jsme mu všechno vzali“ není proces. To je hororový žánr.
+
+Minimální offboarding checklist:
+
+- zrušit nebo převést firemní e-mail,
+- odebrat přístupy do repozitářů, hostingu, analytiky, supportu, CRM a fakturace,
+- rotovat sdílená hesla a API klíče, pokud k nim měl člověk přístup,
+- převést vlastnictví dokumentů, účtů, integrací a automatizací,
+- odebrat zařízení z MDM nebo interní evidence,
+- zkontrolovat přístup přes osobní OAuth autorizace,
+- zapsat datum, vlastníka a potvrzení dokončení.
+
+Největší riziko nejsou jen hlavní účty. Často jsou to vedlejší integrace: starý Zapier scénář, export do tabulky, přístup k DNS, osobní token v GitHubu, sdílený účet u transakčního e-mailu nebo soubor s „dočasným“ heslem z minulého léta.
+
+### Sdílené účty jsou technický dluh s knírem
+
+Sdílený účet vypadá jednoduše, dokud nepotřebuješ zjistit, kdo co změnil. Pak se z „admin@firma.cz“ stane kolektivní alibi. Kde to jde, používej osobní účty, role a auditní logy.
+
+Když sdílený účet dočasně nejde obejít:
+
+- ulož přístup ve správci hesel,
+- nastav dvoufaktorové ověření,
+- napiš vlastníka účtu,
+- omez počet lidí,
+- eviduj důvod sdílení,
+- dej si datum, kdy sdílení znovu zhodnotíš.
+
+Dočasnost bez data konce není dočasnost. Je to trvalý nepořádek s lepším PR.
+
+### Přístupová práva patří do pravidelného review
+
+Jednou měsíčně nebo čtvrtletně projdi přístupy do hlavních systémů. Ne proto, že miluješ tabulky. Protože role se mění rychleji než dokumentace a externisté mají zvláštní schopnost zůstávat v nástrojích dlouho poté, co projekt skončil.
+
+Review může být jednoduché:
+
+- exportuj seznam uživatelů z hlavních systémů,
+- označ vlastníka každého přístupu,
+- u rizikových rolí ověř aktuální důvod,
+- odeber nepoužívané nebo příliš široké přístupy,
+- zkontroluj administrátory a billing vlastníky,
+- zapiš změny do krátkého logu.
+
+Privacy-first bonus: při review se neptej jen „kdo má přístup“, ale i „jaká data tím vidí“. Přístup do nástroje je jen zkratka. Skutečná otázka je, ke kterým osobním, obchodním nebo technickým datům člověk dosáhne.
+
+### Checklist: přístupová práva bez chaosu
+
+- Máme seznam hlavních systémů, rolí a vlastníků.
+- Každý přístup má účel, rozsah a odpovědnou osobu.
+- Admin práva jsou výjimka, ne výchozí nastavení.
+- Produkční data jsou dostupná jen při konkrétním důvodu a ideálně časově omezeně.
+- Support přístup je navázaný na konkrétní zákaznický požadavek.
+- Sdílené účty jsou omezené, evidované a pravidelně revidované.
+- Offboarding obsahuje repozitáře, hosting, DNS, analytiku, CRM, support, finance i automatizace.
+- Přístupy kontrolujeme pravidelně a změny zapisujeme do logu.
+
+### Šablona přístupové karty
+
+```markdown
+## Přístupová karta: [systém / role]
+
+### Účel
+- Proč přístup existuje:
+- Kdo ho používá:
+- Vlastník přístupu:
+
+### Rozsah
+- Systém / prostředí:
+- Typ dat:
+- Povolené akce:
+- Zakázané akce:
+
+### Bezpečnost
+- MFA zapnuto:
+- Sdílený účet ano/ne:
+- Auditní log dostupný:
+- Časové omezení:
+
+### Revize
+- Datum poslední kontroly:
+- Co se změnilo:
+- Přístup odebrat / ponechat / zúžit:
+- Další kontrola:
+```
+
+> Codyho komentář: Přístupová práva jsou jako klíče od kanceláře. Když je rozdáš všem „pro jistotu“, jednoho dne zjistíš, že má klíč i člověk, který u vás před rokem opravoval tiskárnu. A tiskárna stejně nefunguje.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -5732,6 +5869,7 @@ Tohle není právnický ornament. Je to důvěra v praxi. Když uživatel rozum�
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha AG o přístupových právech v malém privacy-first SaaS: role, produkční přístup, offboarding, sdílené účty, pravidelné review, checklist a šablona přístupové karty.
 - **2026-09-13:** Doplněna příloha AF o zákaznickém vzdělávání bez akademie na steroidech: mapa zákaznických situací, struktura článků nápovědy, propojení s produktem, privacy-first měření, převod support dotazů na obsah a šablona vzdělávací karty.
 - **2026-09-13:** Doplněna příloha AE o lehké obchodní pipeline bez CRM monstróznosti: kvalifikace leadů, jednoduché fáze, další kroky, minimalizace obchodních dat, důvody proher, hodnotný follow-up, týdenní review a šablona pipeline karty.
 - **2026-09-13:** Doplněna příloha AD o partnerském a referral růstu bez sledovacího cirkusu: správný moment pro doporučení, férová odměna, minimální evidence dat, šablony zpráv, partnerská pravidla, měření kvality a referral karta.
