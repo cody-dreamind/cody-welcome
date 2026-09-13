@@ -7544,6 +7544,156 @@ Staging má chránit tým před drahými chybami, ne vytvářet nové tiché riz
 
 ---
 
+## Příloha AR: Auditní logy bez šmírovacího panoptika
+
+Auditní logy jsou pojistka pro chvíle, kdy se někdo zeptá: „Kdo to změnil, kdy a proč?“ Bez nich tým hádá z paměti, hledá ve Slacku, čte kávovou sedlinu a doufá, že viník nebyl zrovna účet `admin@example.com`. Jenže logování se dá pokazit dvěma směry. Buď neloguješ skoro nic a při incidentu jsi slepý. Nebo loguješ všechno a vytvoříš si interní sledovací systém, který sbírá víc osobních údajů než samotný produkt.
+
+Privacy-first auditní log není deník každého kliknutí. Je to cílený záznam bezpečnostně, právně a provozně důležitých událostí. Má chránit zákazníka, tým i produkt. Ne sloužit k mikromanagementu uživatelů nebo k tomu, aby někdo zpětně analyzoval, kdo se v aplikaci pětkrát rozmyslel před uložením formuláře.
+
+### Loguj rozhodnutí a rizika, ne nervózní pohyby myší
+
+První otázka nezní „co všechno můžeme logovat“, ale „které události budeme potřebovat vysvětlit“. Malý SaaS obvykle nepotřebuje kompletní behaviorální stopu uživatele. Potřebuje spolehlivě zachytit akce, které mění data, přístupy, peníze, bezpečnost nebo nastavení účtu.
+
+Rozumné auditní události:
+
+- **Přihlášení a bezpečnost:** úspěšné přihlášení, neúspěšné pokusy ve zvýšeném objemu, změna hesla, zapnutí nebo vypnutí vícefaktorového ověření.
+- **Přístupy:** pozvání uživatele, změna role, odebrání přístupu, vytvoření API klíče, rotace tokenu.
+- **Data:** vytvoření, změna, export nebo smazání důležitých záznamů, zejména u citlivějších entit.
+- **Billing:** změna tarifu, přidání platební metody, ruční úprava fakturačních údajů, storno nebo refundace.
+- **Integrace:** připojení dodavatele, změna webhooku, vypnutí synchronizace, chyba opakovaného doručení.
+- **Administrace:** zásah supportu do zákaznického účtu, impersonace, změna globální konfigurace.
+
+Naopak opatrně s logováním každého zobrazení stránky, pohybu kurzoru, čtení položky nebo detailní práce v editoru. Někdy to může být užitečné pro produktovou analytiku, ale to není totéž co auditní log. Míchat audit, analytiku a debug logy dohromady je jako nalít účetnictví, CRM a poznámky z retrospektivy do jednoho kýble. Technicky to jde. Mentálně to bolí.
+
+### Každý záznam musí být čitelný člověkem
+
+Auditní log není jen databázová tabulka. Je to budoucí odpověď supportu, bezpečnostní analýza a někdy i podklad pro zákaznické vysvětlení. Pokud záznam vypadá jako `event_type=usr_perm_upd obj=42 actor=7`, bude ho umět číst jen člověk, který zrovna není na dovolené. Což je samozřejmě přesně ten člověk, který na dovolené bude.
+
+Dobrá auditní událost má minimálně:
+
+- **kdo:** uživatel, systémový proces nebo externí integrace,
+- **co:** jasný typ akce,
+- **kdy:** čas v jednotném formátu,
+- **kde:** tenant, účet, organizace nebo projekt,
+- **čeho se to týká:** typ objektu a jeho interní ID,
+- **výsledek:** úspěch, chyba, odmítnutí, rollback,
+- **kontext:** IP nebo zařízení jen tam, kde to má bezpečnostní důvod,
+- **důvod:** volitelná poznámka u ručních administrátorských zásahů.
+
+Příklad čitelného záznamu: „Jana Nováková změnila roli uživatele Petr Svoboda z `Editor` na `Admin` v organizaci Alfa, 2026-09-13 21:14 UTC.“ Technicky můžeš držet ID a strukturovaný JSON, ale uživatelské rozhraní musí ukázat větu, kterou pochopí i člověk mimo vývojový tým.
+
+### Odděl auditní log od debug logů
+
+Debug logy pomáhají vývojářům zjistit, proč něco spadlo. Auditní logy pomáhají vysvětlit, co se stalo z pohledu produktu a bezpečnosti. Mají jinou životnost, jiné publikum a jiná rizika. Když je spojíš, buď budeš audit uchovávat příliš krátce, nebo debug logy příliš dlouho.
+
+Praktické rozdělení:
+
+- **Auditní log:** produktové a bezpečnostní události, stabilní schéma, delší retence, omezený přístup.
+- **Aplikační log:** chyby, varování, výkonové informace, kratší retence, technické publikum.
+- **Analytické události:** agregované chování produktu, minimální identifikace, samostatná pravidla souhlasu a retence.
+- **Support poznámky:** lidský kontext k ticketům, jasné vlastnictví a mazání podle support procesu.
+
+Toto rozdělení pomůže i v UI. Zákazník může vidět vlastní auditní historii účtu, ale nemá vidět stack trace. Vývojář může číst chyby aplikace, ale nepotřebuje automaticky přístup k citlivým zákaznickým změnám. A produktový tým může sledovat agregované používání funkcí bez toho, aby měl detailní timeline konkrétního člověka.
+
+### Citlivá data do logů nepatří
+
+Nejhorší auditní log je ten, který chrání bezpečnost tím, že potichu kopíruje tajemství. Do logů nepatří hesla, celé tokeny, platební údaje, obsah soukromých zpráv, přílohy, celé exporty ani citlivé hodnoty polí. Pokud potřebuješ zaznamenat změnu, často stačí uložit typ změny, název pole a informaci, že hodnota byla upravena — ne celou původní a novou hodnotu.
+
+Bezpečnější vzory:
+
+- místo celého API klíče ulož jen poslední čtyři znaky nebo fingerprint,
+- místo hodnoty citlivého pole ulož `changed: true`,
+- místo celého dokumentu ulož ID dokumentu a typ akce,
+- místo přesné IP u běžné produktové akce zvaž zkrácení nebo uchování jen u bezpečnostních událostí,
+- místo osobního e-mailu v interním exportu použij interní ID a dohledání povol jen vybraným rolím.
+
+Codyho komentář: Log, ve kterém najdeš heslo, není log. Je to bezpečnostní incident, který si zatím nevšiml, že je incident.
+
+### Dej zákazníkovi užitečný pohled
+
+U B2B SaaS je auditní historie součást důvěry. Správce zákaznického účtu chce vědět, kdo pozval nového uživatele, kdo změnil oprávnění, kdo exportoval data nebo kdo upravil fakturační nastavení. Neměl by kvůli tomu psát na support, pokud nejde o citlivý detail.
+
+Zákaznické UI auditního logu drž jednoduché:
+
+- filtr podle typu události,
+- filtr podle uživatele nebo role,
+- časové období,
+- export pro interní kontrolu,
+- jasné vysvětlení systémových událostí,
+- možnost zobrazit detail jen podle oprávnění.
+
+Neukazuj zákazníkovi interní technické chyby, stack trace ani poznámky supportu. Auditní log pro zákazníka má odpovědět na otázku „co se v našem účtu stalo“. Interní logy mají odpovědět na otázku „proč systém udělal přesně toto“. To jsou příbuzné, ne dvojčata.
+
+### Retence a neměnnost musí být záměrné
+
+Auditní logy mají smysl jen tehdy, když jim tým věří. Pokud je může každý admin upravit nebo smazat bez stopy, jsou to spíš dekorace. Neměnnost ale neznamená, že data musí žít navždy. Privacy-first přístup hledá rovnováhu: auditní stopa má být chráněná před manipulací, ale má mít jasnou retenci a proces mazání.
+
+Nastav si pravidla:
+
+- kdo může auditní log číst,
+- kdo může číst citlivější bezpečnostní detaily,
+- jak dlouho se drží běžné události,
+- jak dlouho se drží bezpečnostní incidenty,
+- jak se řeší odchod zákazníka,
+- jak se loguje přístup supportu k auditním záznamům,
+- jak poznáš, že logování přestalo fungovat.
+
+U kritických událostí zvaž append-only úložiště nebo alespoň ochranu proti tiché úpravě. Pro malý SaaS často stačí jednoduchý model: aplikace zapisuje, běžní admini jen čtou, mazání běží retenční úlohou a změny pravidel schvaluje někdo mimo člověka, který je právě potřebuje obejít. Není to kosmická věda. Je to jen disciplína, což je občas horší než kosmická věda.
+
+### Checklist: auditní logy bez panoptika
+
+- Máme jasně rozdělené auditní, aplikační, analytické a support logy.
+- Auditní log zachycuje změny dat, přístupů, billing, integrace a administrátorské zásahy.
+- Nelogujeme hesla, celé tokeny, platební údaje, soukromý obsah ani zbytečné osobní údaje.
+- Každá událost má čitelné „kdo, co, kdy, kde, výsledek“.
+- Ruční support zásahy vyžadují důvod nebo odkaz na ticket.
+- Zákazník má přístup k užitečné historii svého účtu bez interních technických detailů.
+- Přístupy k auditním logům jsou omezené a pravidelně revidované.
+- Retence je zdokumentovaná a mazání je automatizované nebo pravidelně kontrolované.
+- Kritické události nejdou potichu upravit bez další stopy.
+- Máme alert, pokud zápis auditních logů přestane fungovat.
+
+### Šablona auditní karty
+
+```markdown
+## Auditní karta: [oblast / produkt / tenant]
+
+### Účel
+- Jaké otázky má auditní log zodpovědět:
+- Kdo je hlavní čtenář: zákazník / support / bezpečnost / provoz:
+
+### Události
+- Přístupy:
+- Data:
+- Billing:
+- Integrace:
+- Administrace:
+
+### Data a citlivost
+- Zakázané hodnoty v logu:
+- Maskování nebo fingerprinty:
+- Volný text povolen: ano/ne + proč:
+
+### Přístupy
+- Kdo může číst zákaznický pohled:
+- Kdo může číst interní detail:
+- Jak se loguje support přístup:
+
+### Retence
+- Běžné události:
+- Bezpečnostní události:
+- Po ukončení zákazníka:
+
+### Kontrola
+- Jak ověřujeme, že logování funguje:
+- Kdy probíhá review schématu:
+- Kdo vlastní tuto kartu:
+```
+
+Auditní logy jsou dobrý sluha a protivný pán. Když je navrhneš podle rizik, pomohou při incidentu, supportu i zákaznické důvěře. Když je navrhneš podle chuti sbírat všechno, vyrobíš další datový sklad, který bude jednou někdo složitě uklízet. A ten někdo bude pravděpodobně budoucí ty. Buď na něj hodný.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -7587,6 +7737,7 @@ Staging má chránit tým před drahými chybami, ne vytvářet nové tiché riz
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha AR o auditních logách bez šmírovacího panoptika: výběr auditních událostí, čitelné záznamy, oddělení od debug logů, minimalizace citlivých dat, zákaznický pohled, retence, checklist a auditní karta.
 - **2026-09-13:** Doplněna příloha AQ o stagingu a testovacích prostředích bez úniku dat: rozdělení prostředí, syntetická data, anonymizace, bezpečné integrace, přístupy, seed scénáře, automatický úklid, checklist a staging karta.
 - **2026-09-13:** Doplněna příloha AP o produktových e-mailech bez otravného orchestrionu: rozdělení kategorií, účel zpráv, preference, onboarding podle pokroku, doručitelnost, šablony, privacy-first měření a e-mailová karta.
 - **2026-09-13:** Doplněna příloha AO o SEO bez sledovacího cirkusu: mapa záměrů, práce důležitých stránek, sitemap a robots.txt, privacy-first měření, interní odkazy, release checklist a SEO karta.
