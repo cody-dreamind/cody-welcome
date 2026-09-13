@@ -5184,6 +5184,187 @@ Z implementací často vyrostou nejlepší produktové funkce: importní wizard,
 
 ---
 
+## Příloha AD: Partnerský a referral růst bez sledovacího cirkusu
+
+Doporučení od spokojeného zákazníka bývá pro malý SaaS silnější než deset reklamních kampaní. Jenže referral program se dá snadno pokazit: složitými provizemi, agresivním sledováním, affiliate odkazy přes tři reklamní sítě a motivací, která přitáhne lidi hledající slevu místo zákazníků hledajících hodnotu.
+
+Privacy-first referral není trik na obcházení marketingových pravidel. Je to systém, který pomáhá dobrým zákazníkům přivést podobně dobré zákazníky — s jasnou motivací, jednoduchým vyhodnocením a minimem dat.
+
+### Začni otázkou, kdo má doporučovat
+
+Ne každý zákazník je dobrý zdroj doporučení. Pokud požádáš o referral člověka, který produkt sotva aktivoval, dostaneš buď ticho, nebo vlažné „zkuste to“. Nejlepší doporučení přichází od zákazníků, kteří už zažili konkrétní výsledek.
+
+Praktický filtr:
+
+- zákazník používá produkt aspoň několik týdnů,
+- dokončil hlavní aktivační scénář,
+- tým interně chápe, jakou hodnotu produkt přinesl,
+- support u něj neřeší otevřený zásadní problém,
+- existuje jasný segment, komu by mohl produkt doporučit.
+
+Referral request tedy nepatří do prvního onboardingového e-mailu. Patří za moment, kdy zákazník řekne nebo ukáže: „Tohle nám fakt pomohlo.“ U B2B SaaS to může být po prvním úspěšném měsíčním review, po dokončení implementace nebo po prvním měřitelném výsledku.
+
+### Referral nabídka musí být srozumitelná
+
+Dobrá referral nabídka má tři části: komu produkt doporučit, co má doporučující udělat a co se stane potom. Pokud zákazník musí přemýšlet, jak program funguje, pravděpodobně ho nepoužije.
+
+Slabá formulace:
+
+> „Zapojte se do našeho partnerského programu a získejte atraktivní benefity.“
+
+Silnější formulace:
+
+> „Znáte servisní firmu, která pořád plánuje zakázky v tabulkách? Pošlete nám kontakt nebo předejte tento odkaz. Pokud z toho vznikne placený pilot, připíšeme vám měsíc provozu zdarma nebo kredit na konzultaci.“
+
+Druhá varianta říká segment, akci, podmínku i odměnu. Žádné konfety, ale funguje.
+
+### Odměna nemá kazit motivaci
+
+U referral programu si dej pozor, aby odměna nepřepsala důvěru. Když je motivace příliš agresivní, doporučení začne vypadat jako obchodní útok. Zákazník má doporučovat proto, že produkt pomohl, ne proto, že honí provizi jako digitální lovec lebek.
+
+Pro malý B2B SaaS často fungují odměny, které zůstávají blízko hodnotě produktu:
+
+- kredit na další měsíc provozu,
+- konzultační hodina navíc,
+- prioritní workshop,
+- rozšířený onboarding pro doporučeného zákazníka,
+- společná případová studie,
+- drobná finanční odměna tam, kde je to transparentní a účetně čisté.
+
+Codyho pravidlo: čím dražší a komplexnější produkt, tím opatrněji s automatickou provizí. U enterprise B2B je lepší mluvit o partnerské spolupráci, společné hodnotě a jasných obchodních pravidlech než o kuponu s ohňostrojem.
+
+### Sleduj minimum dat
+
+Referral program nepotřebuje reklamní pixel, fingerprinting ani sledování uživatele přes půl internetu. Většinou stačí jednoduchá evidence:
+
+- kdo doporučil,
+- koho doporučil nebo jaký referral kód použil,
+- kdy doporučení přišlo,
+- v jakém stavu je lead,
+- kdy vznikl placený pilot nebo zákazník,
+- jaká odměna byla přiznána.
+
+Tohle jde řešit interní tabulkou, CRM záznamem nebo jednoduchým formulářem. Pokud používáš referral odkazy, nastav je tak, aby byly krátké, čitelné a neobsahovaly osobní údaje. Například `?ref=servis-partner-01` je lepší než odkaz plný e-mailu, jména a kampaní poskládaných jako špagety po pádu z balkonu.
+
+U citlivějších doporučení je bezpečnější cesta bez veřejného odkazu: zákazník předá kontakt až po souhlasu doporučené firmy, nebo jí pošle přímý odkaz na produkt a krátkou šablonu zprávy.
+
+### Dej lidem hotový text, ne práci navíc
+
+Zákazník, který tě chce doporučit, často nemá čas vymýšlet perfektní formulaci. Pomoz mu. Připrav krátké texty, které si může upravit.
+
+Příklad e-mailu od zákazníka známému:
+
+```text
+Ahoj [jméno],
+
+posílám tip na [produkt], protože řeší podobnou věc, jakou jsme řešili my: [konkrétní problém].
+
+Nám pomohlo hlavně [konkrétní výsledek]. Není to masový nástroj na všechno, spíš praktické řešení pro [segment / situace].
+
+Když budeš chtít, tady je přímý odkaz: [URL]
+
+Měj se,
+[jméno]
+```
+
+Příklad krátké zprávy na LinkedIn bez spamového aroma:
+
+```text
+Viděl jsem, že řešíte [problém]. My jsme na to začali používat [produkt] a pomohlo nám [výsledek]. Pokud chceš, pošlu kontakt nebo krátké intro.
+```
+
+Neposílej zákazníkům hotový spam. Dej jim lidský text, který respektuje vztah s doporučeným člověkem.
+
+### Partnerství není jen provize
+
+Referral je jednorázové doporučení. Partnerství je opakovatelný vztah. Pro malý SaaS může být partnerem konzultant, implementační firma, účetní kancelář, oborová komunita, integrační dodavatel nebo agentura, která řeší stejný segment z jiné strany.
+
+Dobré partnerství má jasnou mapu:
+
+- jaký zákaznický segment partner zná,
+- jaký problém umí otevřít,
+- kde končí jeho práce a začíná produkt,
+- kdo komunikuje se zákazníkem,
+- jak se řeší data a přístupy,
+- jak se měří úspěch,
+- jak se partnerství ukončí bez rukojmí.
+
+Privacy-first část je zásadní. Partner nemá dostat přístup k zákaznickému účtu jen proto, že přivedl lead. Každý přístup musí mít účel, roli, souhlas nebo smluvní základ a možnost odebrání. „On je náš partner“ není bezpečnostní model, to je věta před průšvihem.
+
+### Měř kvalitu, ne objem doporučení
+
+Referral program se dá velmi rychle nafouknout vanity metrikami. Počet referral odkazů, kliknutí nebo přihlášek vypadá hezky, ale může znamenat jen to, že lidé klikají na slevu. Důležitější je kvalita.
+
+Sleduj hlavně:
+
+- kolik doporučení odpovídá cílovému segmentu,
+- kolik jich projde kvalifikací,
+- kolik se změní v pilot,
+- kolik zůstane po prvním měsíci nebo kvartálu,
+- jaká je podpora a náročnost doporučených zákazníků,
+- zda doporučení přivádí podobné dobré zákazníky, nebo úplně jiný trh.
+
+Jednou měsíčně si projdi tři nejlepší a tři nejhorší referral leady. Hledej vzory. Možná zjistíš, že nejlepší doporučení přichází od jednoho konkrétního typu zákazníka, zatímco veřejná sleva tahá špatný segment. To je signál upravit nabídku, ne přidat další pixel.
+
+### Checklist: referral a partnerství privacy-first
+
+- Máme definované, koho chceme přes referral získat.
+- Žádáme o doporučení až po skutečném zákaznickém výsledku.
+- Referral nabídka jasně říká akci, podmínku a odměnu.
+- Odměna podporuje důvěru, ne agresivní prodej.
+- Nesbíráme osobní údaje bez jasného účelu.
+- Referral odkazy neobsahují e-mail ani osobní identifikátory.
+- U partnerů máme jasné role, odpovědnosti a přístupy.
+- Partner nedostává zákaznická data automaticky.
+- Měříme kvalitu leadů, ne jen kliknutí.
+- Jednou měsíčně program revidujeme podle retence a support náročnosti.
+
+### Šablona referral karty
+
+```markdown
+## Referral karta: [program / segment]
+
+### Cíl
+- Koho chceme získat:
+- Jaký problém má řešit:
+- Proč je referral vhodný kanál:
+
+### Doporučující
+- Kdo může doporučovat:
+- Kdy o doporučení žádáme:
+- Jak poznáme, že zákazník už má hodnotu:
+
+### Nabídka
+- Text žádosti o doporučení:
+- Odměna:
+- Podmínka pro přiznání odměny:
+- Kdy odměnu komunikujeme:
+
+### Data a soukromí
+- Jaká data evidujeme:
+- Kde jsou uložená:
+- Kdo má přístup:
+- Jak dlouho je držíme:
+- Jak řešíme smazání nebo opravu:
+
+### Partnerství
+- Zapojení partnera:
+- Role a hranice odpovědnosti:
+- Přístupy k systému:
+- Ukončení spolupráce:
+
+### Měření
+- Počet kvalifikovaných doporučení:
+- Konverze na pilot:
+- Konverze na platícího zákazníka:
+- Retence doporučených zákazníků:
+- Support náročnost:
+```
+
+> Codyho komentář: Referral program má být digitální verze věty „tohle nám pomohlo, mohlo by i vám“. Jakmile začne připomínat kasíno s kupony a sledovacími odkazy, důvěra odchází zadním východem a bere si kabát.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -5215,6 +5396,7 @@ Z implementací často vyrostou nejlepší produktové funkce: importní wizard,
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha AD o partnerském a referral růstu bez sledovacího cirkusu: správný moment pro doporučení, férová odměna, minimální evidence dat, šablony zpráv, partnerská pravidla, měření kvality a referral karta.
 - **2026-09-13:** Doplněna příloha AC o zakázkové implementaci bez scope creepu: oddělení produktu a služby, implementační mapa, změnové řízení, privacy-first práce s daty, odmítání rizikových úprav a šablona implementační karty.
 - **2026-09-13:** Doplněna příloha AB o bezpečnostních dotaznících v B2B prodeji: bezpečnostní profil, odpovědi podle důkazů, oblasti dotazníku, certifikace bez mlžení, bezpečné sdílení, backlog a šablona bezpečnostní karty.
 - **2026-09-13:** Doplněna příloha AA o release procesu pro malý privacy-first SaaS: rozdíl mezi deployem a releasem, malé vratné změny, Definition of Done, privacy kontrola, release okna, rollback, changelog, checklist a release karta.
