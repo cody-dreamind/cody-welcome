@@ -6159,6 +6159,152 @@ DPA karta není náhrada právní revize. Je to provozní most mezi smlouvou, pr
 
 ---
 
+## Příloha AJ: Interní vyhledávání znalostí bez datového kombajnu
+
+Malý SaaS tým začne znalosti ztrácet dřív, než si to přizná. Ne proto, že by lidé byli líní psát dokumentaci. Spíš proto, že odpovědi leží všude: v pull requestech, support tiketech, chatu, fakturačním nástroji, projektové wiki, starém e-mailu a v hlavě člověka, který zrovna odjel na prodloužený víkend. Interní vyhledávání má tenhle chaos zmenšit. Nemá z firmy udělat vysavač osobních údajů s pěkným AI tlačítkem.
+
+Privacy-first přístup říká jednoduchou věc: znalostní systém má pomáhat týmu najít odpověď, ale nemá automaticky kopírovat všechno do jednoho obřího indexu. Každý zdroj, každé pole a každá synchronizace potřebuje důvod.
+
+### Začni otázkami, ne technologií
+
+Nejdřív si napiš, jaké odpovědi tým opravdu hledá. „Chceme enterprise search“ je neurčitý požadavek. „Support potřebuje do 30 sekund najít aktuální postup pro obnovu exportu“ už je zadání.
+
+Praktické typy dotazů:
+
+- **Support:** jak vyřešit konkrétní zákaznický problém bez otevírání produkčních dat.
+- **Obchod:** jaký je aktuální postup pro bezpečnostní dotazník, DPA nebo pilot.
+- **Produkt:** proč jsme udělali určité rozhodnutí a jaké alternativy jsme odmítli.
+- **Vývoj:** kde je runbook, jak otestovat release a jak vrátit migraci.
+- **Provoz:** kdo je vlastník systému, jaká je retence a kde jsou incidentové kontakty.
+
+Každý typ dotazu spoj s jasným zdrojem. Support postupy patří do znalostní báze, ne do náhodných chat vláken. Architektonická rozhodnutí patří do ADR nebo technických poznámek. Smluvní a privacy odpovědi patří do schváleného profilu, ne do paměti obchodníka.
+
+### Neindexuj všechno jen proto, že můžeš
+
+Největší chyba interního vyhledávání je přístup „připojíme všechny nástroje a ono se to nějak samo zlepší“. Nezlepší. Jen vznikne rychlejší cesta k zastaralým odpovědím, citlivým údajům a dokumentům, které nikdo neměl vidět.
+
+Rozděl zdroje do tří vrstev:
+
+| Vrstva | Příklady | Režim |
+| --- | --- | --- |
+| Veřejně sdílitelná interní znalost | návody, runbooky, produktové principy, changelog | indexovat standardně |
+| Omezená týmová znalost | obchodní playbook, bezpečnostní odpovědi, roadmapa | indexovat s rolemi a vlastníkem |
+| Citlivá operativa | zákaznické payloady, osobní údaje, incidentní detaily, fakturace | neindexovat, nebo jen metadata a odkazy |
+
+Cílem není mít jednu magickou krabičku. Cílem je, aby člověk rychle našel správný dokument a věděl, jestli mu může věřit. Někdy je nejlepší výsledek vyhledávání odkaz na zdroj, ne vygenerovaná odpověď.
+
+Codyho komentář: pokud interní search odpoví sebevědomě na otázku, na kterou nemá schválený zdroj, není to produktivita. Je to halucinace v obleku.
+
+### Přístupová práva dědi ze zdroje
+
+Interní vyhledávání nesmí rozbít pravidla přístupů. Když člověk nemá právo číst dokument ve zdrojovém systému, nemá ho získat přes index. To zní samozřejmě, ale právě tady se rodí nejvíc průšvihů.
+
+Minimální pravidla:
+
+- index respektuje role ze zdrojového systému,
+- výsledky ukazují jen dokumenty, které uživatel smí vidět,
+- administrátor vyhledávání nemá automaticky právo číst veškerý obsah,
+- změna role se propíše do indexu bez ruční magie,
+- smazaný dokument zmizí z indexu i cache,
+- logy dotazů neukládají citlivé texty déle, než je nutné.
+
+Pokud to neumíš garantovat, začni jednodušeji: kurátorovanou znalostní bází, ručními kolekcemi a odkazy na zdroje. Horší než pomalejší vyhledávání je rychlé vyhledávání přes cizí data.
+
+### Kvalita odpovědi je produktová vlastnost
+
+Interní search není hotový ve chvíli, kdy vrací výsledky. Je hotový teprve tehdy, když tým ví, co s nimi. Každý výsledek by měl ukazovat kontext: název, vlastníka, datum poslední revize, typ dokumentu a zdrojový odkaz.
+
+U AI shrnutí přidej ještě přísnější pravidla:
+
+- odpověď musí citovat konkrétní interní zdroje,
+- nesmí si domýšlet postupy mimo nalezené dokumenty,
+- u citlivých témat má raději říct „nenašel jsem schválený postup“,
+- právní, bezpečnostní a incidentové odpovědi mají jasné varování, kdo je musí potvrdit,
+- staré dokumenty se označí jako rizikové, ne jako stejně platné.
+
+Dobrá odpověď pomáhá člověku jednat. Špatná odpověď mu dává falešný klid. A falešný klid je v provozu SaaS drahý sport.
+
+### Znalosti potřebují vlastníka a expiraci
+
+Každý důležitý dokument má mít vlastníka. Ne „tým“. Konkrétní osobu nebo roli. Jinak se z dokumentace stane muzeum bývalých pravd.
+
+Přidej ke znalostem jednoduchá metadata:
+
+- vlastník,
+- oblast produktu nebo procesu,
+- citlivost,
+- datum poslední revize,
+- datum další kontroly,
+- zdroj pravdy,
+- kontakt pro opravu.
+
+U provozních runbooků a privacy dokumentů nastav pravidelné review. U běžných návodů může stačit kontrola při změně produktu. U bezpečnostních postupů a incidentové komunikace buď přísnější — když je potřebuješ, nechceš zjišťovat, že odkaz vede na nástroj, který už rok nepoužíváš.
+
+### Měř užitečnost bez šmírování lidí
+
+Interní vyhledávání můžeš měřit privacy-first způsobem. Nepotřebuješ profilovat zaměstnance ani ukládat kompletní dotazy navždy.
+
+Užitečné metriky:
+
+- procento dotazů bez výsledku,
+- nejčastější témata bez schváleného dokumentu,
+- dokumenty s vysokým použitím a starou revizí,
+- počet nahlášených špatných výsledků,
+- průměrný čas od nahlášení chyby po opravu,
+- počet zdrojů bez vlastníka.
+
+Dotazy agreguj, citlivé části rediguj a nastav krátkou retenci. Pokud lidé hledají „jak smazat zákazníka“, je to signál, že potřebuješ lepší runbook. Není to důvod stavět detektivku nad konkrétním zaměstnancem.
+
+### Checklist: interní vyhledávání bez datového kombajnu
+
+- [ ] Víme, jaké typy otázek má vyhledávání řešit.
+- [ ] Každý indexovaný zdroj má účel, vlastníka a citlivost.
+- [ ] Citlivá zákaznická data se neindexují plošně.
+- [ ] Přístupová práva ve výsledcích dědí pravidla ze zdroje.
+- [ ] AI odpovědi citují zdroje a umí říct „nevím“.
+- [ ] Dokumenty mají vlastníka, datum revize a kontakt pro opravu.
+- [ ] Logy dotazů mají krátkou retenci a neukládají zbytečné osobní údaje.
+- [ ] Jednou měsíčně kontrolujeme nejčastější mezery ve znalostech.
+
+### Šablona znalostní karty
+
+```markdown
+## Znalostní karta: [kolekce / zdroj / proces]
+
+### Účel
+- Jaké otázky má řešit:
+- Kdo ji používá:
+- Kdy je odpověď kritická:
+
+### Zdroje
+- Primární zdroj pravdy:
+- Indexované systémy:
+- Neindexované systémy:
+- Vlastník zdroje:
+
+### Data a přístupy
+- Citlivost:
+- Osobní údaje:
+- Přístupové role:
+- Retence indexu:
+- Retence logů dotazů:
+
+### Kvalita
+- Požadované citace:
+- Datum poslední revize:
+- Datum další kontroly:
+- Jak nahlásit chybu:
+
+### Rizika
+- Co nesmí být ve výsledcích:
+- Kdy musí odpověď potvrdit člověk:
+- Nouzový postup při špatné odpovědi:
+```
+
+Interní vyhledávání je skvělý sluha, když má hranice. Pomáhá týmu být rychlejší, méně závislý na paměti jednotlivců a konzistentnější vůči zákazníkům. Bez hranic je to jen další způsob, jak roznést data po firmě rychleji než páteční mem v chatu.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -6192,6 +6338,7 @@ DPA karta není náhrada právní revize. Je to provozní most mezi smlouvou, pr
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha AJ o interním vyhledávání znalostí bez datového kombajnu: typy dotazů, vrstvy zdrojů, přístupová práva, AI odpovědi se zdroji, vlastnictví dokumentů, privacy-first měření a šablona znalostní karty.
 - **2026-09-13:** Doplněna příloha AI o zpracovatelských smlouvách pro malý privacy-first SaaS: role správce a zpracovatele, realistická DPA, subprocesoři, mezinárodní předávání, napojení na produktové procesy, checklist a DPA karta.
 - **2026-09-13:** Doplněna příloha AH o datové mapě pro malý privacy-first SaaS: procesní pohled na data, minimalizace polí, rozdělení datových kategorií, mapování systémů a dodavatelů, změnový proces, obchodní důvěra, checklist a šablona datové karty.
 - **2026-09-13:** Doplněna příloha AG o přístupových právech v malém privacy-first SaaS: role, produkční přístup, offboarding, sdílené účty, pravidelné review, checklist a šablona přístupové karty.
