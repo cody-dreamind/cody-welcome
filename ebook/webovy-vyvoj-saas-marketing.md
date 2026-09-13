@@ -4843,6 +4843,182 @@ U privacy-first změn buď konkrétní: „Přidali jsme samoobslužný export p
 
 ---
 
+## Příloha AB: Bezpečnostní dotazník bez paniky a obchodního divadla
+
+Jakmile malý SaaS začne prodávat větším firmám, objeví se bezpečnostní dotazník. Někdy má dvacet otázek, někdy dvě stě. V horší verzi přijde jako Excel s buňkami, které pamatují fax. V lepší verzi je to rozumná kontrola, jestli zákazník nesvěřuje data někomu, kdo má produkční heslo v poznámkách na ploše.
+
+Bezpečnostní dotazník není nepřítel prodeje. Je to zkouška dospělosti produktu. Pokud máš připravené odpovědi, zkrátíš obchodní cyklus, snížíš stres týmu a zároveň objevíš slabá místa dřív, než se z nich stane incident. Pro privacy-first firmu je to navíc příležitost ukázat, že kontrola nad daty není marketingová samolepka, ale provozní návyk.
+
+### Vytvoř si bezpečnostní profil dřív, než přijde dotazník
+
+Nečekej na první enterprise lead. Připrav jednostránkový bezpečnostní profil, který shrne nejdůležitější odpovědi lidským jazykem. Nemusí z tebe dělat banku ani kosmickou agenturu. Má jen ukázat, že víš, co provozuješ.
+
+Minimum bezpečnostního profilu:
+
+- **Co služba dělá:** krátký popis produktu a typické kategorie dat.
+- **Kde běží:** země nebo region hostingu, hlavní infrastruktura, oddělení prostředí.
+- **Kdo má přístup:** role v týmu, schvalování přístupů, revize oprávnění.
+- **Jak chráníš účty:** hesla, MFA pro interní nástroje, správa administrátorů.
+- **Jak řešíš zálohy:** frekvence, test obnovy, omezení přístupů k zálohám.
+- **Jak řešíš incidenty:** kontakt, eskalace, komunikace se zákazníkem.
+- **Jak řešíš subprocesory:** seznam dodavatelů, účel, region zpracování.
+
+U každého bodu napiš realitu, ne ideál. „Revize přístupů probíhá čtvrtletně“ je lepší než „přístupy řídíme dle best practices“, protože první věta jde ověřit. Obecné fráze vypadají jako kouřostroj. A kouřostroj je hezký jen do chvíle, než zjistíš, že ho někdo odpálil v serverovně.
+
+### Odpovídej podle důkazů, ne podle přání
+
+Bezpečnostní dotazník často láká k optimistickému vyplňování. Otázka zní: „Máte formalizovaný incident response plan?“ Tým si řekne: „Kdyby něco, napsali bychom si.“ To není plán. Plán je dokument nebo runbook, který někdo umí najít, přečíst a použít.
+
+U každé odpovědi si polož tři otázky:
+
+1. **Máme pro to důkaz?** Dokument, nastavení, log, ticket, checklist, záznam testu.
+2. **Kdo je vlastník?** Jedna konkrétní role nebo člověk, ne „tým“.
+3. **Kdy jsme to naposledy ověřili?** Bez data je odpověď často jen přání v kravatě.
+
+Když odpověď zní „ne“, napiš „ne“ a přidej kompenzační opatření nebo plán. Například: „Formální penetrační test zatím nemáme; před releasem používáme interní kontrolu podle OWASP ASVS, kritické opravy jdou mimo běžný release cyklus a externí test plánujeme před rozšířením do regulovanějších segmentů.“ To je férovější než zakliknout „ano“ a doufat, že se nikdo nezeptá.
+
+### Rozděl otázky podle oblastí
+
+Dotazníky bývají chaotické, ale odpovědi nemusí. Vytvoř si interní knowledge base s oblastmi, které se opakují. Každou odpověď aktualizuj jen na jednom místě a do zákaznických dotazníků ji přenášej konzistentně.
+
+Praktické oblasti:
+
+- **Organizace bezpečnosti:** vlastník bezpečnosti, onboarding a offboarding lidí, školení.
+- **Aplikační bezpečnost:** kontrola kódu, závislosti, zranitelnosti, oddělení prostředí.
+- **Infrastruktura:** hosting, sítě, logování, monitoring, zálohy, obnova.
+- **Přístupy:** role, administrace, MFA, správa tajemství, pravidelné revize.
+- **Data protection:** kategorie dat, minimalizace, retence, export a mazání.
+- **Subprocesoři:** dodavatelé, účel, region, smluvní dokumentace.
+- **Incidenty:** detekce, eskalace, komunikace, postmortem, prevence opakování.
+
+Tahle struktura navazuje na praktická doporučení ENISA, NIST a OWASP uvedená ve zdrojích. Nepotřebuješ kopírovat celý framework. Potřebuješ z něj vybrat rozumné kontroly pro velikost produktu, rizikovost dat a typ zákazníků.
+
+### Připrav si odpovědi, které pomáhají prodeji
+
+Bezpečnostní odpověď má být přesná, ale nemusí být suchá jako starý toast. Dobrá odpověď zákazníkovi pomůže pochopit riziko a rozhodnout se.
+
+Slabá odpověď:
+
+> Ano, máme zálohy.
+
+Lepší odpověď:
+
+> Produkční databáze zálohujeme automaticky. Přístup k zálohám je omezený na administrátorské role. Obnovu testujeme podle interního runbooku a výsledek testu zapisujeme do provozní dokumentace.
+
+Slabá odpověď:
+
+> Používáme bezpečný hosting.
+
+Lepší odpověď:
+
+> Produkční prostředí provozujeme v evropském regionu. Subprocesory evidujeme v samostatném seznamu včetně účelu zpracování a regionu. Nový dodavatel musí projít privacy-first kontrolou před nasazením.
+
+Slabá odpověď:
+
+> Data mažeme na požádání.
+
+Lepší odpověď:
+
+> Žádosti o export a mazání řešíme přes support proces. Před mazáním ověřujeme oprávněnost žadatele, oddělujeme aktivní produkční data od záloh a u každé kategorie dat držíme retenční pravidlo.
+
+### Neprodávej certifikát, který nemáš
+
+Malý tým může narazit na otázky typu ISO 27001, SOC 2 nebo formální penetrační test. Pokud certifikaci nemáš, nepředstírej ji. Místo toho ukaž, jaké konkrétní kontroly už děláš a kde je hranice aktuální maturity.
+
+Vhodná formulace:
+
+- „Certifikaci ISO 27001 zatím nemáme; interní procesy ale vedeme tak, aby byly auditovatelné: evidence aktiv, revize přístupů, incident runbook, seznam subprocesorů a pravidelné bezpečnostní review.“
+- „Externí penetrační test zatím neproběhl; před významným enterprise rolloutem ho plánujeme. Do té doby kombinujeme dependency scanning, code review a manuální kontrolu kritických toků.“
+- „Formální SOC 2 report neposkytujeme; pro due diligence umíme dodat bezpečnostní profil, subprocesory, popis záloh, přístupového modelu a incidentového procesu.“
+
+Tím neříkáš „jsme malí, omluvte chaos“. Říkáš „známe svůj stav a máme plán“. To je ve skutečném B2B prodeji často důvěryhodnější než sebevědomé mlžení.
+
+### Bezpečnostní dotazník nesmí vytvořit nové riziko
+
+Paradox: zákazník chce ověřit bezpečnost, a tak ti pošle Excel, kam máš vypsat detaily infrastruktury, seznam nástrojů, interní procesy a někdy skoro návod pro útočníka. Sdílej jen to, co je přiměřené účelu.
+
+Pravidla pro sdílení odpovědí:
+
+- neposílej tajemství, interní URL, přesné názvy účtů ani konfigurace,
+- citlivější dokumenty sdílej jen po NDA nebo přes řízený přístup,
+- veřejný bezpečnostní profil drž obecnější než interní runbook,
+- každý odeslaný dotazník ulož do CRM nebo složky zákazníka,
+- u odpovědí s datem nastav revizi, aby za rok necestovala ven stará realita.
+
+Privacy-first přístup platí i tady: méně sdílených detailů, více jasných principů a ověřitelných procesů. Transparentnost neznamená vyvěsit mapu sklepa na plot.
+
+### Udělej z dotazníku produktový backlog
+
+Každý bezpečnostní dotazník je zdroj signálů. Když se tři zákazníci ptají na SSO, audit log nebo datovou lokalitu, není to jen compliance otázka. Je to produktová informace o trhu, do kterého míříš.
+
+Po každém větším dotazníku si zapiš:
+
+- otázky, které se opakovaly,
+- odpovědi, u kterých ses necítil jistě,
+- požadavky, které blokovaly deal,
+- kontroly, které už děláš, ale nemáš zdokumentované,
+- funkce, které by zvýšily důvěru i hodnotu produktu.
+
+Pak rozhodni, co patří do bezpečnostního backlogu, co do produktové roadmapy a co je mimo současný segment. Ne každý enterprise požadavek je rozumný pro malý SaaS. Ale každý opakovaný požadavek si zaslouží vědomé rozhodnutí.
+
+### Checklist: bezpečnostní dotazník bez paniky
+
+- Máme jednostránkový bezpečnostní profil pro zákazníky.
+- Máme interní databázi opakovaných bezpečnostních odpovědí.
+- U každé silné odpovědi máme důkaz nebo odkaz na proces.
+- Umíme jasně říct, které certifikace a testy zatím nemáme.
+- Sdílíme jen přiměřené informace a chráníme citlivé detaily.
+- Evidujeme subprocesory, regiony a účely zpracování.
+- Máme popsané zálohy, obnovu, incidenty, přístupy a retenci.
+- Po dotazníku vytváříme backlog položky pro slabá místa.
+- Odpovědi revidujeme alespoň čtvrtletně nebo po větší změně infrastruktury.
+
+### Šablona bezpečnostní karty
+
+```markdown
+## Bezpečnostní karta: [produkt / zákazník / dotazník]
+
+### Kontext
+- Zákazník:
+- Segment:
+- Typ dat:
+- Rizikovost:
+
+### Sdílené dokumenty
+- Bezpečnostní profil:
+- Seznam subprocesorů:
+- DPA / smluvní dokumentace:
+- Další přílohy:
+
+### Klíčové odpovědi
+- Hosting a region:
+- Přístupy a MFA:
+- Zálohy a obnova:
+- Incident proces:
+- Retence a mazání:
+- Aplikační bezpečnost:
+
+### Nejasnosti a výjimky
+- Co neumíme potvrdit:
+- Kompenzační opatření:
+- Plán zlepšení:
+
+### Backlog po dotazníku
+- Dokumentace:
+- Produkt:
+- Provoz:
+- Obchodní dopad:
+
+### Revize
+- Vlastník:
+- Poslední aktualizace:
+- Další kontrola:
+```
+
+> Codyho komentář: Bezpečnostní dotazník je jako návštěva tchyně u racku. Trochu nepříjemné, ale když máš uklizeno, možná dokonce odejde s lepším dojmem, než s jakým přišla.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -4874,6 +5050,7 @@ U privacy-first změn buď konkrétní: „Přidali jsme samoobslužný export p
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha AB o bezpečnostních dotaznících v B2B prodeji: bezpečnostní profil, odpovědi podle důkazů, oblasti dotazníku, certifikace bez mlžení, bezpečné sdílení, backlog a šablona bezpečnostní karty.
 - **2026-09-13:** Doplněna příloha AA o release procesu pro malý privacy-first SaaS: rozdíl mezi deployem a releasem, malé vratné změny, Definition of Done, privacy kontrola, release okna, rollback, changelog, checklist a release karta.
 - **2026-09-13:** Doplněna příloha Z o exit plánu a přenositelnosti dat: užitečný export, scénáře odchodu, vendor lock-in rizika, technický vzor exportu, checklist a šablona exit karty.
 - **2026-09-13:** Doplněna příloha Y o AI asistentech v malém SaaS: interní use-casy, klasifikace dat, AI Act transparentnost, bezpečnostní hranice, měření hodnoty a AI karta.
