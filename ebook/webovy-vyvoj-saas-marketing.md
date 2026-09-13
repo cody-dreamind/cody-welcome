@@ -4258,6 +4258,156 @@ Retence je jedna z těch nudných věcí, které se stanou extrémně zajímavé
 
 ---
 
+
+## Příloha X: Měsíční business review bez vanity metrik
+
+Malý SaaS tým nepotřebuje každý měsíc padesátislajdovou prezentaci, která vypadá jako letištní řídicí věž. Potřebuje pravidelný rytmus, ve kterém se podívá na realitu: co přivádí správné zákazníky, co je aktivuje, co je drží, co stojí příliš energie a co už jen hezky vypadá v grafu.
+
+Měsíční business review je provozní zastávka. Ne soudní proces. Cílem není někoho nachytat, že graf neroste dost zeleně. Cílem je rozhodnout, čemu se bude tým příští měsíc věnovat a co naopak přestane dělat.
+
+> Codyho komentář: Vanity metrika je číslo, které se dobře vyjímá ve statusu, ale špatně se podle něj rozhoduje. Typicky „měli jsme hodně návštěv“. Gratuluju, možná přišli roboti, studenti, konkurence a teta z Moravy. A teď co s tím?
+
+### Review musí začít otázkou, ne dashboardem
+
+Dashboard je užitečný, ale nesmí řídit schůzku. Když začneš tím, že otevřeš dvacet grafů, tým se utopí v komentování šumu. Začni raději třemi otázkami:
+
+- **Co jsme se tento měsíc naučili o zákazníkovi?** Ne co jsme dodali, ale co víme lépe.
+- **Kde produkt vytvořil měřitelnou hodnotu?** Aktivace, dokončené workflow, úspora práce, méně supportu.
+- **Co nám brání v dalším růstu?** Chybějící důvěra, slabý onboarding, pomalý prodej, technický dluh, nejasná nabídka.
+
+Teprve potom otevři čísla. Metriky mají být důkazní materiál k otázkám, ne ohňostroj pro uklidnění ega.
+
+Praktický příklad: místo „návštěvnost blogu rostla o 18 %“ se ptej „přivedl obsah více lidí, kteří odpovídají našemu ideálnímu zákazníkovi a udělali další krok?“ Pokud nevíš, číslo je hezké, ale zatím nepomáhá.
+
+### Vyber pět metrik, které mají vlastníka
+
+Měsíční review by mělo mít malou sadu metrik. U každé musí být jasné, proč existuje, kdo ji sleduje a jaké rozhodnutí může změnit. Pokud metrika nemá vlastníka ani možnou akci, je to dekorace.
+
+Dobrá základní sada pro malý B2B SaaS:
+
+- **Kvalifikovaný zájem:** počet relevantních poptávek, demo callů nebo pilotních žádostí.
+- **Aktivace:** podíl nových zákazníků nebo uživatelů, kteří dokončili klíčový první scénář.
+- **Retence / opakované použití:** kolik účtů se vrací k hodnotové akci v rozumném intervalu.
+- **Support zátěž:** počet a typ dotazů, které ukazují nejasný produkt, dokumentaci nebo onboarding.
+- **Provozní spolehlivost:** incidenty, pomalé části produktu, chybové stavy a ruční zásahy.
+
+Finanční metriky samozřejmě patří do review také: MRR, nová tržba, churn, expanze, cash runway. Jen pozor na to, aby se z nich nestal jediný kompas. U raného SaaS často finanční čísla ukazují důsledek starších rozhodnutí. Produktové a prodejní signály ukazují, co můžeš změnit teď.
+
+Privacy-first pravidlo: měř chování na úrovni produktu a účtů tam, kde to má jasný účel. Nepotřebuješ tajně sledovat každý pohyb jednotlivce přes web, e-mail, reklamy a podporu. Pro rozhodování často stačí agregované události, cohorty, kvalifikované poznámky ze supportu a pár dobře vedených zákaznických rozhovorů.
+
+### Odděl akviziční šum od obchodní reality
+
+Marketingové metriky svádí k radosti z růstu. Návštěvnost, imprese, otevření e-mailu nebo lajky jsou signály, ne výsledek. Review je musí propojit s obchodní realitou.
+
+U každého akvizičního kanálu se ptej:
+
+- Přivádí lidi, kterým opravdu umíme pomoct?
+- Rozumí návštěvníci nabídce bez dalšího vysvětlování?
+- Dělají další krok: čtou související obsah, stahují checklist, píšou e-mail, žádají demo?
+- Jaká je kvalita konverzací, které z kanálu vznikly?
+- Kolik práce stojí kanál udržovat a co by se stalo, kdybychom ho na měsíc zastavili?
+
+Kanál, který přivádí méně lidí, ale lepší zákazníky, může být cennější než kanál s krásným grafem. U privacy-first značky navíc počítej i reputační náklady: agresivní remarketing, vyskakovací okna a datově hladové reklamní skripty možná krátkodobě zvednou konverzi, ale dlouhodobě kazí důvěru.
+
+### Spoj čísla s konkrétními příběhy
+
+Čísla ukazují, kde se něco děje. Příběhy pomáhají pochopit proč. Do měsíčního review proto patří krátká kvalitativní část:
+
+- tři nejčastější otázky ze supportu,
+- dva citáty ze zákaznických hovorů,
+- jeden případ úspěšného použití produktu,
+- jeden případ, kde zákazník narazil nebo odešel,
+- jedna interní třecí plocha, která zpomaluje tým.
+
+Tohle není anekdotická náhrada dat. Je to kontext. Pokud aktivace klesá a zároveň support řeší „nevím, co mám udělat po registraci“, máš pravděpodobně problém v onboardingu. Pokud návštěvnost roste, ale demo cally jsou mimo cílovku, máš problém v positioningu nebo distribučním kanálu.
+
+Praktický formát: každý příběh napiš na tři řádky: situace, dopad, možné rozhodnutí. Žádné romány. Review má rozhodovat, ne archivovat firemní folklór.
+
+### Udělej z review rozhodovací stroj
+
+Největší chyba měsíčních review je, že skončí větou „bylo to zajímavé“. To je firemní ekvivalent prázdné kalorické bomby. Každé review musí skončit rozhodnutími.
+
+Použij jednoduchou strukturu:
+
+- **Pokračujeme:** co funguje a zaslouží si další měsíc pozornosti.
+- **Zastavujeme:** co bere čas a nemá dostatečný signál.
+- **Měníme:** kde upravíme nabídku, onboarding, obsah, cenu, proces nebo technickou prioritu.
+- **Ověříme:** jedna až tři hypotézy pro další měsíc.
+- **Dokumentujeme:** co se naučilo a kam se to zapíše.
+
+Každé rozhodnutí potřebuje vlastníka a datum kontroly. Bez toho se z něj stane dobrý úmysl. A dobré úmysly jsou v backlogu jako ponožky v pračce: víš, že tam někde jsou, ale už je nikdy neuvidíš ve dvojici.
+
+### Privacy-first review má i etickou kontrolu
+
+Měsíční review není jen o růstu. Je to dobré místo pro krátkou kontrolu, jestli tým nezačal kvůli tlaku na výsledky dělat věci, které odporují hodnotám produktu.
+
+Zařaď pětiminutový privacy-first blok:
+
+- Přidali jsme nový nástroj, skript nebo integraci? Víme, kam data tečou?
+- Sbíráme novou událost nebo atribut? Má jasný účel a retenci?
+- Má zákazník pořád srozumitelnou možnost exportu, mazání nebo úpravy dat?
+- Nepoužíváme marketingový kanál, který podrývá důvěru víc, než pomáhá růstu?
+- Neřešíme produktový problém tím, že budeme sledovat uživatele detailněji místo toho, abychom zjednodušili design?
+
+Tento blok je malý, ale důležitý. Hodnoty se neztrácí jedním velkým zlým rozhodnutím. Ztrácí se deseti malými kompromisy, které „teď nebudeme řešit“.
+
+### Checklist: měsíční business review
+
+- [ ] Máme připravené otázky, na které review odpovídá.
+- [ ] Sledujeme omezenou sadu metrik s jasným vlastníkem.
+- [ ] Oddělujeme akviziční šum od kvalifikovaného zájmu.
+- [ ] Každou důležitou metriku doplňuje konkrétní zákaznický příběh.
+- [ ] Review končí rozhodnutími: pokračujeme, zastavujeme, měníme, ověříme.
+- [ ] Každé rozhodnutí má vlastníka a datum kontroly.
+- [ ] Součástí review je privacy-first kontrola nástrojů, dat a marketingu.
+- [ ] Výstup je uložený na jednom dohledatelném místě, ne v chatu, který za týden pohřbí další memy.
+
+### Šablona měsíčního review
+
+```markdown
+## Business review: [měsíc]
+
+### Tři hlavní otázky
+- Co jsme se naučili o zákazníkovi?
+- Kde produkt vytvořil hodnotu?
+- Co nejvíc brzdí další růst?
+
+### Metriky
+| Oblast | Metrika | Hodnota | Trend | Vlastník | Co z toho plyne |
+|---|---:|---:|---:|---|---|
+| Akvizice | Kvalifikované poptávky |  |  |  |  |
+| Aktivace | Dokončený klíčový scénář |  |  |  |  |
+| Retence | Opakované použití |  |  |  |  |
+| Support | Nejčastější typ dotazu |  |  |  |  |
+| Provoz | Incidenty / ruční zásahy |  |  |  |  |
+
+### Zákaznické signály
+- Úspěšný příběh:
+- Tření nebo odchod:
+- Citace / poznámka ze supportu:
+
+### Privacy-first kontrola
+- Nové nástroje / integrace:
+- Nová data nebo eventy:
+- Retence a mazání:
+- Marketingové kompromisy:
+
+### Rozhodnutí
+- Pokračujeme:
+- Zastavujeme:
+- Měníme:
+- Ověříme příští měsíc:
+
+### Vlastníci a termíny
+- Rozhodnutí:
+- Vlastník:
+- Kontrola:
+```
+
+Měsíční review má být krátké, pravdivé a použitelné. Když po něm tým ví, co dělat příští týden jinak, funguje. Když po něm vznikne jen hezčí dashboard, máš drahou tapetu.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -4285,6 +4435,7 @@ Retence je jedna z těch nudných věcí, které se stanou extrémně zajímavé
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha X o měsíčním business review bez vanity metrik: otázky před dashboardem, pět metrik, akviziční šum, zákaznické příběhy, rozhodnutí a privacy-first kontrola.
 - **2026-09-13:** Doplněna příloha W o retenci a mazání dat: retenční matice, mazání účtů, anonymizace, zálohy, support data, čtvrtletní review a šablona retenční karty.
 - **2026-09-13:** Doplněna příloha V o QA a regresním testování pro malý privacy-first SaaS: kritické cesty, Definition of Done, testovací data, release checklist, bug reporty a šablona testovací karty.
 - **2026-09-12:** Doplněna příloha U o přístupnosti webu a SaaS: WCAG 2.2, European Accessibility Act, design systém, formuláře, privacy-first testování a checklist.
