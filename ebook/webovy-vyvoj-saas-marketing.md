@@ -6024,6 +6024,141 @@ Začni těmito položkami:
 
 ---
 
+
+## Příloha AI: Zpracovatelská smlouva bez papírového kouře
+
+Zpracovatelská smlouva neboli DPA není talisman, který magicky ochrání špatně navržený produkt. Je to praktická dohoda o tom, kdo s osobními údaji co dělá, proč, jak dlouho, s jakými bezpečnostními opatřeními a komu za to odpovídá. GDPR v článku 28 říká, že pokud zpracovatel zpracovává osobní údaje pro správce, musí se vztah opřít o smlouvu nebo jiný právní akt s konkrétními náležitostmi. Přeloženo z právničtiny: nestačí „věříme si, máme hezké logo a v patičce slovo security“.
+
+Pro malý SaaS je DPA hlavně nástroj důvěry. Pomáhá zákazníkovi pochopit, co se stane s jeho daty, a pomáhá týmu neztratit se v tom, co slíbil. Dobrá DPA není dlouhá proto, že chce vypadat dospěle. Je jasná proto, že někdo jednou bude řešit incident, audit, export, mazání nebo změnu dodavatele.
+
+### Nejdřív si ujasni role
+
+Než začneš kopírovat šablonu z internetu, napiš si jednu větu: v jakém vztahu k datům stojíš? Typicky u B2B SaaS platí, že zákazník je správce a tvůj SaaS je zpracovatel pro data, která zákazník do služby vloží. Ty zároveň můžeš být samostatný správce pro vlastní obchodní komunikaci, fakturaci nebo bezpečnostní evidenci.
+
+Praktický příklad:
+
+- **Data v zákaznickém účtu:** zákazník určuje účel, SaaS zpracovává podle jeho instrukcí.
+- **Fakturační údaje zákazníka:** provozovatel SaaS je často samostatný správce kvůli účetním povinnostem.
+- **Bezpečnostní logy:** mohou sloužit k ochraně služby, ale pořád potřebují jasný účel, retenci a přístupová pravidla.
+- **Marketingový newsletter:** není automaticky součást zpracování pro zákazníka; má vlastní pravidla a odhlášení.
+
+Codyho komentář: nejhorší odpověď na otázku „jste správce, nebo zpracovatel?“ je „ano“. To není strategie, to je compliance mlha s powerpointovým přechodem.
+
+### DPA musí odpovídat realitě produktu
+
+DPA nesmí slibovat něco, co neumíš technicky nebo procesně dodat. Pokud píšeš, že data smažeš do 30 dnů, musí existovat postup pro produkční databázi, přílohy, logy i zálohy. Pokud píšeš, že zákazník dostane export, musí export existovat dřív než v panice při odchodu prvního většího klienta.
+
+Minimální obsah DPA pro malý SaaS:
+
+- předmět a délka zpracování,
+- povaha a účel zpracování,
+- typy osobních údajů,
+- kategorie subjektů údajů,
+- povinnosti a práva zákazníka jako správce,
+- bezpečnostní opatření,
+- pravidla pro subprocesory,
+- pomoc při právech subjektů údajů,
+- postup při bezpečnostním incidentu,
+- mazání nebo vrácení dat po ukončení služby,
+- auditní a informační povinnosti v rozumném rozsahu.
+
+Tenhle seznam není kreativní literatura. Vychází z logiky článku 28 GDPR a z evropských doporučení k rolím správce a zpracovatele. Kreativní buď v produktu, ne ve smluvních náležitostech.
+
+### Subprocesory nejsou poznámka pod čarou
+
+Každý externí nástroj, který vidí zákaznická osobní data, může být subprocesor: hosting, databáze, e-mailové doručování, helpdesk, monitoring, zálohy, OCR, AI shrnutí, platební nástroj. Privacy-first SaaS má u subprocesorů jednoduché pravidlo: zákazník má vědět, kdo data zpracovává, proč a kde.
+
+Praktický režim:
+
+- veď veřejný nebo zákazníkům dostupný seznam subprocesorů,
+- u každého uveď účel, kategorii dat a region zpracování,
+- preferuj evropský provoz nebo aspoň jasně smluvně ošetřený EU region,
+- oznamuj významné změny dopředu,
+- měj interní proces, kdo smí nový nástroj schválit.
+
+Pokud nástroj nemá srozumitelnou dokumentaci zpracování, exportu a mazání, nepouštěj do něj produkční zákaznická data. Pohodlí týmu není právní základ. Škoda, já vím, taky bych chtěl, aby se některé věci vyřešily tlačítkem „udělej bezpečně“.
+
+### Mezinárodní předávání řeš předem
+
+Evropský provoz neznamená jen „server fyzicky v EU“. Zajímej se i o to, kdo má k datům přístup, odkud běží support, kam padají logy a jaké další společnosti v řetězci data zpracovávají. Pokud data tečou mimo EHP, potřebuješ právní mechanismus a reálné posouzení rizik. Evropská komise publikuje standardní smluvní doložky, které se používají pro vybrané scénáře předávání osobních údajů mimo EU/EHP, ale nejsou omluvenkou pro slepé posílání všeho všude.
+
+U malého SaaS je nejlepší strategie nudná a účinná:
+
+- drž primární hosting, databázi a zálohy v EU,
+- vypni zbytečnou telemetrii dodavatelů,
+- neukládej celé zákaznické payloady do externí observability,
+- pro AI a support používej anonymizovaný nebo minimalizovaný kontext,
+- dokumentuj výjimky a jednou za kvartál je znovu projdi.
+
+### DPA napoj na produktové procesy
+
+Smlouva samotná nic neudělá. Musí se propsat do backlogu, release procesu a podpory. Když přidáš novou integraci, datová mapa i seznam subprocesorů se mají aktualizovat před releasem. Když zavedeš nové logování, retenční karta se má změnit. Když zákazník požádá o smazání, support nemá improvizovat v chatu.
+
+Doporučený pracovní postup:
+
+1. **Před prodejem:** měj krátký privacy profil, vzor DPA a seznam subprocesorů.
+2. **Při onboardingu:** zákazníkovi ukaž, kde najde export, mazání, role a kontaktní místo.
+3. **Při změně produktu:** každá nová datová cesta aktualizuje datovou mapu a DPA přílohy.
+4. **Při incidentu:** postupuj podle incidentového runbooku a ověř, co slibuje DPA.
+5. **Při odchodu:** vrať nebo smaž data podle předem popsaného procesu.
+
+### Checklist: DPA bez kouře
+
+- [ ] Víme, kdy jsme správce a kdy zpracovatel.
+- [ ] DPA odpovídá skutečným systémům, ne přáním obchodního týmu.
+- [ ] Máme seznam subprocesorů s účelem, daty a regionem.
+- [ ] U nového dodavatele kontrolujeme DPA, region, export, mazání a přístupy.
+- [ ] Máme postup pro export a smazání dat po ukončení služby.
+- [ ] Incidentový runbook odpovídá smluvním lhůtám a kontaktním bodům.
+- [ ] Změny zpracování aktualizují datovou mapu před releasem.
+- [ ] Neposíláme produkční data do nástrojů bez jasného právního a bezpečnostního režimu.
+
+### Šablona DPA karty
+
+```markdown
+## DPA karta: [zákazník / produkt / dodavatel]
+
+### Role
+- Správce:
+- Zpracovatel:
+- Samostatný správce pro vybrané účely:
+
+### Rozsah zpracování
+- Účel:
+- Typy osobních údajů:
+- Kategorie subjektů údajů:
+- Doba zpracování:
+
+### Subprocesory
+- Název:
+- Účel:
+- Region:
+- DPA / smluvní podklad:
+- Kontakt pro změny:
+
+### Bezpečnost a provoz
+- Přístupová pravidla:
+- Logování:
+- Retence:
+- Zálohy:
+- Incidentový postup:
+
+### Ukončení
+- Export:
+- Mazání:
+- Zálohy po ukončení:
+- Potvrzení zákazníkovi:
+
+### Review
+- Vlastník:
+- Poslední kontrola:
+- Další kontrola:
+```
+
+DPA karta není náhrada právní revize. Je to provozní most mezi smlouvou, produktem a realitou. A realita má tu nepříjemnou vlastnost, že na ni zákazník jednou klikne.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -6051,11 +6186,13 @@ Začni těmito položkami:
 - Evropská komise: [Guidelines on transparency obligations for providers and deployers of AI systems](https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems)
 - EDPB: [Guidelines on the right to data portability under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en)
 - Evropská komise: [Obligations for businesses and organisations under GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en)
+- Evropská komise: [Standard Contractual Clauses](https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en)
 
 ---
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha AI o zpracovatelských smlouvách pro malý privacy-first SaaS: role správce a zpracovatele, realistická DPA, subprocesoři, mezinárodní předávání, napojení na produktové procesy, checklist a DPA karta.
 - **2026-09-13:** Doplněna příloha AH o datové mapě pro malý privacy-first SaaS: procesní pohled na data, minimalizace polí, rozdělení datových kategorií, mapování systémů a dodavatelů, změnový proces, obchodní důvěra, checklist a šablona datové karty.
 - **2026-09-13:** Doplněna příloha AG o přístupových právech v malém privacy-first SaaS: role, produkční přístup, offboarding, sdílené účty, pravidelné review, checklist a šablona přístupové karty.
 - **2026-09-13:** Doplněna příloha AF o zákaznickém vzdělávání bez akademie na steroidech: mapa zákaznických situací, struktura článků nápovědy, propojení s produktem, privacy-first měření, převod support dotazů na obsah a šablona vzdělávací karty.
