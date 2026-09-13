@@ -4557,6 +4557,127 @@ Privacy-first analytika tu pořád platí. Nepotřebuješ ukládat každý promp
 
 ---
 
+## Příloha Z: Exit plán bez rukojmí a vendor lock-inu
+
+Privacy-first produkt se pozná i podle toho, jak férově se s ním dá odejít. Zní to divně: proč bys měl zákazníkovi usnadňovat odchod, když chceš růst? Protože důvěra nevzniká tím, že zamkneš data do trezoru bez kliky. Důvěra vzniká tím, že zákazník ví, že má kontrolu. A paradoxně právě proto zůstává déle.
+
+Exit plán není jen právní pojistka. Je to produktová funkce, provozní disciplína a obchodní argument. Když umíš zákazníkovi říct „data si kdykoliv bezpečně vyexportujete“, prodáváš klid. A klid se v B2B prodává velmi dobře.
+
+### Odchod navrhni už při onboardingu
+
+Nečekej na první naštvaný e-mail s předmětem „urgentně smažte všechno“. Už při návrhu datového modelu si polož otázky:
+
+- Která data zákazník do systému vložil?
+- Která data systém dopočítal nebo odvodil?
+- Která data patří uživateli, týmu, zákaznickému účtu nebo provozovateli?
+- Co musí jít exportovat samoobslužně?
+- Co se maže hned a co se drží kvůli účetnictví, bezpečnosti nebo právním nárokům?
+- Jak poznáme, že export je úplný a čitelný?
+
+Evropská komise k právům podle GDPR uvádí, že lidé mohou žádat mimo jiné o přístup, výmaz a přenositelnost údajů; u přenositelnosti jde o osobní údaje poskytnuté subjektům údajů ve strukturovaném, strojově čitelném formátu, pokud jsou splněné podmínky zpracování: [Dealing with requests from individuals](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en). U SaaS produktu to neznamená, že každá interní metrika je automaticky „přenositelné osobní datum“. Znamená to ale, že máš mít jasno, co umíš vydat a proč.
+
+### Export musí být užitečný, ne jen formálně správný
+
+Špatný export je ZIP plný nepojmenovaných CSV souborů, ve kterých chybí vazby a význam sloupců. Formálně něco odešlo, prakticky zákazník drží digitální konfety.
+
+Dobrý export má čtyři vrstvy:
+
+- **Data:** CSV nebo JSON podle typu obsahu, ideálně bez proprietárních zkratek.
+- **Schéma:** popis tabulek, sloupců, datových typů a vztahů.
+- **Kontext:** vysvětlení stavů, enum hodnot, časových pásem a jednotek.
+- **Manifest:** seznam souborů, datum exportu, rozsah, verze schématu a kontrolní součet.
+
+Příklad: pokud exportuješ projekty, nestačí `projects.csv`. Přidej `tasks.csv`, `users.csv`, vazební identifikátory, popis stavů úkolů a informaci, zda jsou časy v UTC. Bez toho se migrace mění v archeologii. A archeologie je super u pyramid, ne u produkčního CRM.
+
+### Rozliš tři druhy odchodu
+
+Ne každý exit je stejný. Produkt by měl umět alespoň tři scénáře:
+
+1. **Export bez ukončení:** zákazník chce zálohu, audit nebo vlastní reporting.
+2. **Ukončení účtu:** zákazník odchází, potřebuje export a jasný termín smazání.
+3. **Nouzový exit:** zákazník řeší incident, ztrátu důvěry nebo interní audit a potřebuje rychlý řízený postup.
+
+Pro každý scénář napiš, kdo žádost schvaluje, jak ověřuješ oprávnění, jak dlouho export zůstává dostupný a kdy se smaže. U B2B účtů pozor na situaci, kdy export žádá jeden uživatel, ale data patří celé organizaci. Samoobsluha je fajn, ale oprávnění rozhodují.
+
+### Vendor lock-in začíná nenápadně
+
+Lock-in není jen „nejde stáhnout data“. Často vzniká drobně:
+
+- používáš interní ID bez mapování na zákaznické identifikátory,
+- export neumí přílohy nebo historii změn,
+- API má přísné limity, ale žádný bulk export,
+- integrace funguje jen jedním směrem,
+- dokumentace exportu neexistuje,
+- smazání účtu musí ručně řešit support,
+- zákazník neví, jaké subprocesory se při exportu zapojí.
+
+Privacy-first přístup říká: zákazník není rukojmí. Můžeš mít lepší produkt, lepší podporu a lepší onboarding. To jsou férové důvody, proč zůstat. Datová past férový důvod není.
+
+### Exit plán je i tvoje pojistka
+
+Dobře připravený odchod chrání i tým. Když přijde větší zákazník s bezpečnostním dotazníkem, máš odpovědi. Když někdo požádá o výmaz, víš, kde začít. Když dodavatel zdraží nebo změní podmínky, víš, jak dostat vlastní data pryč.
+
+EDPB ve svých materiálech pro malé firmy připomíná, že organizace mají respektovat práva jednotlivců včetně přístupů, výmazu a přenositelnosti: [Respect individuals’ rights](https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_en). Pro zakladatele malého SaaS je praktický závěr jednoduchý: neřeš práva subjektů údajů až v okamžiku, kdy někdo klikne na „žádám o výmaz“. Udělej z nich běžnou provozní schopnost.
+
+### Minimální technický vzor exportu
+
+Pro malý SaaS stačí jednoduchý, ale předvídatelný vzor:
+
+- export běží asynchronně jako job,
+- uživatel dostane notifikaci po dokončení,
+- soubor je dostupný jen omezenou dobu,
+- odkaz vyžaduje přihlášení a správné oprávnění,
+- export se zapisuje do audit logu,
+- citlivé hodnoty, které nemají být součástí exportu, se redigují,
+- velké exporty mají stránkování nebo více souborů,
+- staré exportní balíčky se automaticky mažou.
+
+Do administrace přidej jednoduchou obrazovku „Exporty a mazání“. Nemusí být krásná jako landing page. Musí být jasná, bezpečná a použitelná ve stresu. Stres je mimochodem nejlepší UX tester, jen má mizerný smysl pro humor.
+
+### Checklist: exit plán bez rukojmí
+
+- Máme popsané, která data patří zákazníkovi a která jsou interní provozní metadata.
+- Export obsahuje data, schéma, kontext a manifest.
+- Export je strojově čitelný a dokumentovaný.
+- Umíme rozlišit zálohu, ukončení účtu a nouzový exit.
+- Každý export kontroluje oprávnění uživatele.
+- Exportní soubory mají omezenou životnost a audit log.
+- Mazání účtu má jasný proces včetně záloh a retenčních výjimek.
+- Support má šablonu odpovědi pro žádost o export nebo výmaz.
+- Vendor lock-in rizika kontrolujeme u vlastního produktu i u dodavatelů.
+
+### Šablona exit karty
+
+```md
+## Exit karta: [produkt / zákaznický účet]
+
+### Rozsah dat
+- Data vložená zákazníkem:
+- Data vytvořená systémem:
+- Data, která neexportujeme a proč:
+
+### Export
+- Formáty:
+- Schéma / dokumentace:
+- Doba dostupnosti exportu:
+- Oprávnění potřebné ke stažení:
+
+### Mazání
+- Co mažeme hned:
+- Co anonymizujeme:
+- Co držíme kvůli zákonné nebo smluvní retenci:
+- Kdy probíhá kontrola dokončení:
+
+### Komunikace
+- Text pro zákazníka:
+- Kontakt pro dotazy:
+- Interní vlastník procesu:
+```
+
+> Codyho komentář: Produkt, ze kterého se dá férově odejít, působí sebevědomě. Produkt, který schovává export za support tiket a tři interní výmluvy, působí jako hotel, kde recepce při checkoutu ztratila dveře.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -4582,11 +4703,13 @@ Privacy-first analytika tu pořád platí. Nepotřebuješ ukládat každý promp
 - Evropská komise: [AI Act — Shaping Europe’s digital future](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
 - Evropská komise: [AI Literacy — Questions & Answers](https://digital-strategy.ec.europa.eu/en/faqs/ai-literacy-questions-answers)
 - Evropská komise: [Guidelines on transparency obligations for providers and deployers of AI systems](https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems)
+- EDPB: [Guidelines on the right to data portability under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en)
 
 ---
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha Z o exit plánu a přenositelnosti dat: užitečný export, scénáře odchodu, vendor lock-in rizika, technický vzor exportu, checklist a šablona exit karty.
 - **2026-09-13:** Doplněna příloha Y o AI asistentech v malém SaaS: interní use-casy, klasifikace dat, AI Act transparentnost, bezpečnostní hranice, měření hodnoty a AI karta.
 - **2026-09-13:** Doplněna příloha X o měsíčním business review bez vanity metrik: otázky před dashboardem, pět metrik, akviziční šum, zákaznické příběhy, rozhodnutí a privacy-first kontrola.
 - **2026-09-13:** Doplněna příloha W o retenci a mazání dat: retenční matice, mazání účtů, anonymizace, zálohy, support data, čtvrtletní review a šablona retenční karty.
