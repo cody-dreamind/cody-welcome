@@ -6305,6 +6305,236 @@ Interní vyhledávání je skvělý sluha, když má hranice. Pomáhá týmu bý
 
 ---
 
+## Příloha AK: Design systém pro malý SaaS bez korporátního divadla
+
+Design systém není galerie krásných tlačítek. Je to dohoda, jak produkt mluví, vypadá a chová se. U malého SaaS týmu má šetřit čas, snižovat počet rozhodnutí a držet kvalitu i ve chvíli, kdy se do produktu rychle přidávají nové obrazovky.
+
+Špatný design systém začíná obřím Figma souborem a končí tím, že ho nikdo nepoužívá. Dobrý začíná otázkou: „Co se nám v produktu opakuje tak často, že to nechceme vymýšlet znovu?“
+
+*Codyho komentář:* Design systém pro malý tým má být jako dobrý batoh. Vejde se do něj všechno důležité, ale nenutí tě tahat stan, když jdeš pro rohlíky.
+
+### Nezačínej komponentami, začni pravidly
+
+Než nakreslíš první `Button`, napiš si jednoduchá pravidla produktu. Ne estetický manifest na tři stránky. Stačí pár vět, které tým použije při každém rozhodnutí.
+
+Příklad pravidel:
+
+- Rozhraní má být klidné, čitelné a pracovní, ne herní automat.
+- Primární akce je na obrazovce jen jedna, sekundární akce jsou vizuálně tišší.
+- Chyby vysvětlujeme lidsky a říkáme, jak pokračovat.
+- Osobní údaje zobrazujeme jen tam, kde pomáhají dokončit úkol.
+- Prázdné stavy nejsou dekorace, ale navigace k dalšímu kroku.
+- Marketingové obrazovky nesmí slibovat víc, než produkt umí dodat.
+
+Tahle pravidla zní obyčejně. To je dobře. Pravidlo, které nejde použít při návrhu formuláře, není pravidlo, ale tapeta do prezentace.
+
+### Tokeny jsou slovník, ne sbírka náhodných barev
+
+Malý SaaS nepotřebuje 80 odstínů šedé. Potřebuje pojmenované hodnoty, které dávají smysl v produktu i v kódu. Tokeny nejsou jen barvy. Jsou to rozhodnutí: jaký prostor používáme, jak vypadá nebezpečná akce, jak poznám chybu, co je tiché pozadí a co je důležitý signál.
+
+Začni malou sadou:
+
+- `color.background.page` — hlavní pozadí stránky,
+- `color.background.surface` — karty, panely a modaly,
+- `color.text.primary` — hlavní text,
+- `color.text.muted` — pomocný text,
+- `color.action.primary` — hlavní akce,
+- `color.action.danger` — destruktivní akce,
+- `space.1` až `space.8` — škála mezer,
+- `radius.sm`, `radius.md`, `radius.lg` — zaoblení,
+- `shadow.card` — pokud stíny opravdu potřebuješ,
+- `font.size.body`, `font.size.heading`, `font.size.caption`.
+
+Důležité je nepoužívat tokeny jako kosmetiku. Když má každý nový panel vlastní odstín pozadí, tokeny jen legalizují chaos. Každá nová hodnota musí mít důvod: nový stav, nový význam, nebo reálnou opakovanou potřebu.
+
+### Komponenty stavěj podle toků, ne podle katalogu
+
+Katalog komponent svádí k tomu, že vyrobíš `Badge`, `Card`, `Tooltip`, `Accordion`, `Tabs`, `Toast`, `AvatarGroup` a pak zjistíš, že největší bolest produktu je obyčejný formulář pro nastavení fakturačních údajů.
+
+Lepší postup:
+
+1. Vezmi tři nejdůležitější zákaznické toky.
+2. Označ prvky, které se opakují.
+3. Z nich udělej první komponenty.
+4. Doplň jen varianty, které už existují v reálném použití.
+5. Každé nové komponentě napiš, kdy ji použít a kdy ne.
+
+Pro B2B SaaS bývá první sada překvapivě nudná:
+
+- tlačítka,
+- textová pole,
+- select,
+- checkbox,
+- alert,
+- prázdný stav,
+- tabulka,
+- karta nastavení,
+- potvrzovací dialog,
+- navigace,
+- status štítek.
+
+To není málo. To je produktový podvozek. Když je pevný, můžeš nad ním stavět rychleji.
+
+### Každá komponenta má mít rozhodovací poznámku
+
+Komponenta bez pravidel použití je hezký LEGO dílek hozený do tmavé krabice. Vypadá profesionálně, ale tým se pořád ptá, co z toho má vzít.
+
+Ke každé důležité komponentě přidej krátkou poznámku:
+
+- kdy ji použít,
+- kdy ji nepoužít,
+- jaké má stavy,
+- jak má znít text,
+- co nesmí obsahovat z pohledu privacy,
+- jak se testuje.
+
+Příklad pro potvrzovací dialog:
+
+```markdown
+## ConfirmDialog
+
+Použij pro nevratné nebo těžko vratné akce: smazání účtu, odebrání přístupu, zrušení integrace, reset dat.
+
+Nepoužívej pro běžné uložení změn nebo navigaci mezi stránkami.
+
+Stavy:
+- default
+- destructive
+- loading
+- blocked kvůli chybě oprávnění
+
+Text:
+- titulek říká konkrétní akci
+- popis vysvětluje dopad
+- hlavní tlačítko používá sloveso, ne „OK“
+
+Privacy:
+- nezobrazuj víc osobních údajů, než je nutné pro ověření akce
+- u mazání dat ukaž, co se smaže, co zůstane v zálohách a jak dlouho
+```
+
+Tohle je drobnost, která šetří desítky debat. A ano, debat o tlačítku „OK“ bývá v historii lidstva až znepokojivě moc.
+
+### Texty jsou součást systému
+
+Design systém bez microcopy je poloviční systém. SaaS produkt komunikuje v tlačítkách, prázdných stavech, chybách, notifikacích a nastavení. Pokud tyto texty píše každý jinak, produkt působí roztříštěně i při perfektních barvách.
+
+Nastav jednoduchý tón:
+
+- buď konkrétní,
+- nevysvětluj interní technické chyby,
+- nepoužívej falešně veselé hlášky u problémů,
+- říkej další krok,
+- vyhýbej se manipulaci a nátlaku,
+- u práce s daty buď přesný.
+
+Místo „Něco se pokazilo“ napiš: „Nepodařilo se uložit fakturační údaje. Zkontroluj povinná pole a zkus to znovu.“
+
+Místo „Zůstaň s námi, budeš nám chybět 😢“ napiš: „Účet můžeš zrušit. Před zrušením si stáhni export dat a zkontroluj, co bude smazáno.“
+
+Privacy-first produkt nepotřebuje emoční vydírání. Potřebuje jasnost.
+
+### Tabulky a formuláře rozhodují o důvěře
+
+Mnoho SaaS produktů nevypadá špatně v marketingové hero sekci. Rozpadnou se až v detailu: dlouhé tabulky, filtry, formuláře, chyby, prázdné stavy, hromadné akce.
+
+Proto si udělej pravidla pro nudné části:
+
+- Tabulka má jasně říct, co je řádek, co je stav a co je hlavní akce.
+- Filtry mají být viditelné, resetovatelné a pochopitelné.
+- Formulář má mít popisky, nápovědu a validaci u konkrétního pole.
+- Chyba má vysvětlit problém i opravu.
+- Hromadné akce mají ukázat dopad před potvrzením.
+- Exporty mají jasně říct formát, rozsah a citlivost dat.
+
+Právě tady vzniká důvěra. Ne v gradientu, ale v tom, že uživatel bezpečně pozná, co se stane po kliknutí.
+
+### Privacy-first design není jen právní text
+
+Soukromí se nedělá až v patičce přes odkaz na zásady zpracování. Dělá se v rozhraní.
+
+Příklady privacy-first rozhodnutí v UI:
+
+- U integrace ukážeš, jaká data bude číst a proč.
+- U pozvánky člena týmu zobrazíš roli a rozsah oprávnění před odesláním.
+- U exportu dat vysvětlíš, co soubor obsahuje.
+- U smazání účtu ukážeš rozdíl mezi deaktivací, anonymizací a smazáním.
+- U analytiky nabídneš agregované metriky místo sledování jednotlivců.
+- U audit logu nezobrazuješ zbytečné osobní detaily, pokud stačí role a akce.
+
+Design systém by měl mít i privacy varianty komponent. Například `DataAccessNotice`, `RetentionHint`, `ExportSummary`, `PermissionScope`, `DangerZone`. Ne proto, že zní cool, ale protože tyto momenty se budou vracet.
+
+### Udržuj systém malý a živý
+
+Největší riziko design systému není, že bude neúplný. Největší riziko je, že bude slavnostně hotový a prakticky mrtvý.
+
+Nastav jednoduchý provozní rytmus:
+
+- Nová komponenta vzniká až po druhém nebo třetím reálném použití.
+- Každý měsíc zkontroluj duplicitní styly a jednorázové výjimky.
+- Každý release s větší UI změnou aktualizuje příslušnou komponentu nebo poznámku.
+- Nepoužívané varianty maž nebo označ jako deprecated.
+- Rozhodnutí zapisuj krátce, aby další člověk věděl proč.
+
+Když tým poruší systém, neber to automaticky jako selhání. Možná systém neřeší reálný případ. Ale každá výjimka musí být vidět. Skryté výjimky jsou kompost, ze kterého vyroste UI džungle.
+
+### Checklist: design systém pro malý SaaS
+
+- [ ] Máme krátká produktová pravidla pro vzhled, tón a chování.
+- [ ] Tokeny jsou pojmenované podle významu, ne podle vzhledu.
+- [ ] První komponenty vycházejí z reálných zákaznických toků.
+- [ ] Každá důležitá komponenta má poznámku kdy použít a kdy ne.
+- [ ] Formuláře, tabulky, chyby a prázdné stavy mají jasná pravidla.
+- [ ] Microcopy říká konkrétní další krok a nemanipuluje uživatelem.
+- [ ] Privacy-first momenty jsou navržené přímo v UI, ne schované v patičce.
+- [ ] Nepoužívané varianty pravidelně mažeme nebo označujeme jako zastaralé.
+- [ ] Design systém má vlastníka a pravidelný review rytmus.
+
+### Šablona komponentové karty
+
+```markdown
+## Komponentová karta: [název komponenty]
+
+### Účel
+- Jaký problém řeší:
+- Kde se používá:
+- Kdy ji nepoužít:
+
+### Varianty
+- Základní stav:
+- Chybový stav:
+- Načítání:
+- Prázdný stav:
+- Zakázaný stav:
+
+### Texty
+- Doporučený tón:
+- Primární akce:
+- Pomocný text:
+- Chybová hláška:
+
+### Data a soukromí
+- Jaká data zobrazuje:
+- Jaká data nesmí zobrazit:
+- Potřebné oprávnění:
+- Retenční nebo exportní poznámka:
+
+### Implementace
+- Tokeny:
+- Responsivní chování:
+- Přístupnost:
+- Testovací scénáře:
+
+### Provoz
+- Vlastník:
+- Datum poslední revize:
+- Známé výjimky:
+```
+
+Design systém pro malý SaaS nemá udělat z týmu design korporaci. Má z týmu sundat opakovaná rozhodnutí, aby měl víc energie na produkt, zákazníky a důvěru. Když systém zrychluje práci a zároveň chrání uživatele před chaosem, splnil úkol.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -6338,6 +6568,7 @@ Interní vyhledávání je skvělý sluha, když má hranice. Pomáhá týmu bý
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha AK o design systému pro malý SaaS: produktová pravidla, tokeny, komponenty podle toků, microcopy, formuláře a tabulky, privacy-first UI vzory, údržba systému, checklist a komponentová karta.
 - **2026-09-13:** Doplněna příloha AJ o interním vyhledávání znalostí bez datového kombajnu: typy dotazů, vrstvy zdrojů, přístupová práva, AI odpovědi se zdroji, vlastnictví dokumentů, privacy-first měření a šablona znalostní karty.
 - **2026-09-13:** Doplněna příloha AI o zpracovatelských smlouvách pro malý privacy-first SaaS: role správce a zpracovatele, realistická DPA, subprocesoři, mezinárodní předávání, napojení na produktové procesy, checklist a DPA karta.
 - **2026-09-13:** Doplněna příloha AH o datové mapě pro malý privacy-first SaaS: procesní pohled na data, minimalizace polí, rozdělení datových kategorií, mapování systémů a dodavatelů, změnový proces, obchodní důvěra, checklist a šablona datové karty.
