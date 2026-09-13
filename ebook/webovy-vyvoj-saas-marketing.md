@@ -7694,6 +7694,174 @@ Auditní logy jsou dobrý sluha a protivný pán. Když je navrhneš podle rizik
 
 ---
 
+
+## Příloha AS: Ochrana proti zneužití bez trestání dobrých uživatelů
+
+Každý SaaS má dřív nebo později potkat lidi, boty nebo integrace, které se nechovají hezky. Někdo zkouší hesla. Někdo posílá formulář stokrát za minutu. Někdo omylem napíše skript, který z API udělá buben pračky. A někdo jen klikne pětkrát na „odeslat“, protože internet občas vypadá jako želva na dovolené.
+
+Abuse protection není jen bezpečnostní doplněk. Je to součást zákaznické zkušenosti. Špatně nastavené limity potrestají platícího uživatele za legitimní práci. Chybějící limity zase dovolí jednomu rozbitému klientovi zpomalit službu všem ostatním. Cílem není být tvrdý. Cílem je být předvídatelný, spravedlivý a úsporný s daty.
+
+Privacy-first přístup znamená, že chráníš službu bez toho, abys z každého návštěvníka dělal podezřelého. Sbíráš jen signály, které potřebuješ k obraně, držíš je krátce, vysvětluješ chování systému a dáváš lidem cestu ven z falešného zablokování.
+
+### Nejprve pojmenuj, co vlastně chráníš
+
+Než začneš přidávat CAPTCHA, globální bloklisty a magické skóre rizika, napiš si mapu zneužití. Pro malý SaaS obvykle stačí rozdělit rizika podle toho, co může útočník poškodit.
+
+Typické kategorie:
+
+- **Přihlášení:** hádání hesel, credential stuffing, zahlcení resetu hesla, útoky na MFA.
+- **Formuláře:** spam v kontaktním formuláři, falešné registrace, hromadné objednávky zdarma.
+- **API:** příliš časté volání endpointů, drahé exporty, nekonečné stránkování, rozbité integrační smyčky.
+- **E-mail:** zneužití pozvánek, notifikací, magic linků nebo reportů k odesílání spamu.
+- **Billing:** testování ukradených karet, opakované pokusy o trial, obcházení limitů tarifu.
+- **Obsah:** nahrávání škodlivých souborů, toxický obsah, generování veřejného spamu přes tvůj produkt.
+
+U každé kategorie si napiš dvě věci: jak vypadá legitimní špička a jak vypadá útok. Pokud to neuděláš, nastavíš limity od oka. A limity od oka mají zvláštní talent blokovat přesně toho zákazníka, který zrovna potřebuje dokončit důležitou práci v pátek v 16:58. Klasika, protože software má smysl pro drama.
+
+### Limity nastavuj podle kontextu, ne jen podle IP adresy
+
+IP adresa je užitečný signál, ale špatný jediný soudce. Za jednou adresou může být celá firma, coworking, mobilní operátor nebo hotelová Wi-Fi. Když blokuješ jen podle IP, můžeš omylem potrestat skupinu lidí za chování jednoho zařízení.
+
+Praktičtější je kombinovat vrstvy:
+
+- **IP + časové okno:** základní ochrana pro veřejné formuláře a anonymní endpointy.
+- **Uživatel:** limity pro přihlášené akce, exporty, generování reportů a změny nastavení.
+- **Tenant / organizace:** ochrana před tím, aby jeden zákazník spotřeboval kapacitu celé služby.
+- **API klíč:** limity pro integrace, které lze komunikovat ve veřejné dokumentaci.
+- **Akce:** odlišné limity pro levné čtení, drahé výpočty, posílání e-mailů a bezpečnostní operace.
+
+Příklad: veřejný kontaktní formulář může mít limit na IP a doménu e-mailu. Export dat by měl mít limit na uživatele i tenant. API endpoint pro vyhledávání může mít měkčí limit než endpoint, který generuje PDF nebo spouští synchronizaci s externím systémem.
+
+Dobré pravidlo: čím dražší nebo rizikovější akce, tím přesnější identita limitu. Anonymní návštěvník může mít hrubý limit. Přihlášený platící zákazník má mít limit, který respektuje jeho tarif, roli a běžný způsob práce.
+
+### Používej měkké brzdy dřív než tvrdé zdi
+
+Ne každé podezřelé chování má skončit okamžitým zákazem. Tvrdý blok je poslední možnost. Často stačí zpomalit, zmenšit dávku, vyžádat potvrzení nebo přesunout práci do fronty.
+
+Stupně reakce:
+
+1. **Tiché zpomalení:** krátký delay u podezřele rychlých anonymních pokusů.
+2. **Jasná odpověď:** HTTP `429 Too Many Requests` s informací, kdy to zkusit znovu.
+3. **Fronta:** drahé operace běží asynchronně a uživatel vidí stav zpracování.
+4. **Dočasné omezení:** účet, API klíč nebo tenant má na pár minut nižší propustnost.
+5. **Výzva k ověření:** potvrzení e-mailu, MFA krok, administrátorská kontrola.
+6. **Blokace:** pouze u zjevného zneužití nebo po opakovaném porušení pravidel.
+
+Pro API je férové vracet hlavičky typu `Retry-After` a v dokumentaci vysvětlit, jak limity fungují. Pro uživatelské rozhraní napiš lidskou hlášku: „Akci jsme na chvíli pozastavili, protože se opakuje příliš rychle. Zkuste to prosím za 2 minuty.“ To je lepší než mysteriózní „Error 1029“, které říká jen: „někde v serverovně pláče démon“.
+
+### CAPTCHA není první pomoc na všechno
+
+CAPTCHA může pomoct u veřejných formulářů, ale není to univerzální lék. Zhoršuje přístupnost, přidává třetí stranu do toku a často posílá data mimo tvůj přímý provozní model. Privacy-first SaaS by ji měl používat střídmě a až po jednodušších opatřeních.
+
+Nejdřív zkus:
+
+- honeypot pole, které běžný člověk nevyplní,
+- časový práh mezi načtením formuláře a odesláním,
+- serverovou validaci a normalizaci vstupů,
+- limit na opakované odeslání z jedné identity,
+- potvrzení e-mailu před citlivější akcí,
+- ruční schvalování u velmi rizikových veřejných formulářů.
+
+Když CAPTCHA opravdu dává smysl, napiš si proč, kde běží, jaká data posílá dodavateli a jakou má alternativu pro uživatele, kterému nefunguje. Pokud je jediná odpověď „protože to tak dělají všichni“, je to slabší argument než studená káva z automatu.
+
+### Chraň e-mailové a notifikační funkce
+
+Každá funkce, která umí poslat e-mail, webhook nebo zprávu ven, je potenciální megafon pro útočníka. Pozvánky do týmu, magic linky, reset hesla, reporty, sdílení dokumentů a notifikace musí mít vlastní limity.
+
+Praktické brzdy:
+
+- omez počet pozvánek na uživatele a tenant za den,
+- nedovol opakovaně posílat stejný reset hesla každých pár sekund,
+- u magic linků drž krátkou platnost a jednorázové použití,
+- u webhooků nastav opakování s backoffem a maximální počet pokusů,
+- u reportů do e-mailu použij frontu a limit velikosti příloh,
+- u veřejného sdílení používej expiraci odkazu a možnost odvolání.
+
+Z pohledu privacy-first provozu je důležité neukládat víc detailů, než potřebuješ. U e-mailových pokusů často stačí hash nebo normalizovaný identifikátor příjemce, typ zprávy, počet pokusů, čas posledního pokusu a výsledek doručení. Obsah e-mailu do abuse tabulky nepatří.
+
+### Udělej výjimky kontrolovaně, ne po známosti
+
+Každý limit bude mít výjimky. Důležitý zákazník dělá migraci. Partner spouští integraci. Interní tým importuje historická data. Výjimka je v pořádku, pokud je viditelná, časově omezená a schválená.
+
+Výjimka by měla mít:
+
+- koho se týká,
+- kterého limitu se týká,
+- proč existuje,
+- kdo ji schválil,
+- kdy automaticky skončí,
+- jak poznáš, že se nezneužívá.
+
+Nikdy nedělej permanentní výjimku typu `vip_customer_unlimited=true`, pokud nemáš velmi dobrý důvod a monitoring dopadu. Neomezené účty mají talent stát se přesně tím účtem, přes který jednou proteče incident. Murphyho zákon má v SaaS admin panelu evidentně vlastní přístup.
+
+### Monitoruj agregovaně a vysvětluj incidenty konkrétně
+
+Abuse monitoring nemusí být behaviorální šmírování. Sleduj agregované signály, které ti řeknou, že služba je pod tlakem nebo že konkrétní ochrana pálí příliš často.
+
+Užitečné metriky:
+
+- počet `429` odpovědí podle endpointu,
+- počet blokovaných pokusů o přihlášení,
+- počet resetů hesla na účet a časové okno,
+- počet zadržených webhooků,
+- počet ručních odblokování supportem,
+- top endpointy podle nákladné práce,
+- poměr falešných blokací vůči skutečným útokům.
+
+Pro support potřebuješ konkrétní auditní stopu: který limit se spustil, na jakou identitu, v jakém čase a co má uživatel udělat. Pro produktové rozhodování ale stačí agregace. Pokud každý týden ručně odblokováváš legitimní zákazníky, limit není „bezpečný“. Je rozbitý, jen se tváří přísně.
+
+### Checklist: abuse protection bez trestání zákazníků
+
+- Máš mapu zneužití pro login, formuláře, API, e-mail, billing a obsah.
+- Každý limit má vlastníka, důvod, časové okno a očekávané legitimní špičky.
+- Limity nejsou postavené pouze na IP adrese, pokud existuje přesnější identita.
+- API vrací srozumitelnou odpověď a informaci, kdy lze akci zopakovat.
+- UI vysvětluje omezení lidsky a nabízí další krok.
+- CAPTCHA je až druhá nebo třetí vrstva, ne výchozí náplast.
+- E-mailové a notifikační funkce mají samostatné limity.
+- Výjimky jsou časově omezené, schválené a auditované.
+- Abuse data mají krátkou retenci a neobsahují tajemství ani obsah zpráv.
+- Support má postup pro falešné blokace a eskalaci incidentů.
+
+### Šablona abuse karty
+
+```md
+## Abuse karta: [oblast / endpoint / funkce]
+
+### Účel ochrany
+- Co chráníme:
+- Jaké škody hrozí:
+- Kdo je vlastník pravidla:
+
+### Legitimní chování
+- Běžný objem:
+- Špičkový objem:
+- Známé výjimky:
+
+### Limity
+- Identita limitu: [IP / uživatel / tenant / API klíč / kombinace]
+- Časové okno:
+- Tvrdý limit:
+- Měkká brzda:
+- Odpověď pro uživatele nebo API klienta:
+
+### Privacy-first kontrola
+- Jaká data ukládáme:
+- Jak dlouho je držíme:
+- Co výslovně neukládáme:
+- Kdo má přístup:
+
+### Provoz
+- Dashboard nebo alert:
+- Postup při falešné blokaci:
+- Postup při útoku:
+- Datum příštího review:
+```
+
+Codyho komentář: Dobrá ochrana proti zneužití není ostnatý drát kolem produktu. Je to chytrý vrátný, který pozná rozdíl mezi zákazníkem s kufrem a někým, kdo se snaží propašovat slona výtahem. Čím přesnější a vysvětlitelnější pravidla máš, tím méně potřebuješ plošné sledování.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -7737,6 +7905,7 @@ Auditní logy jsou dobrý sluha a protivný pán. Když je navrhneš podle rizik
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha AS o ochraně proti zneužití bez trestání dobrých uživatelů: mapování abuse scénářů, kontextové rate limity, měkké brzdy, CAPTCHA jako poslední vrstva, ochrana e-mailů, kontrolované výjimky, metriky a šablona abuse karty.
 - **2026-09-13:** Doplněna příloha AR o auditních logách bez šmírovacího panoptika: výběr auditních událostí, čitelné záznamy, oddělení od debug logů, minimalizace citlivých dat, zákaznický pohled, retence, checklist a auditní karta.
 - **2026-09-13:** Doplněna příloha AQ o stagingu a testovacích prostředích bez úniku dat: rozdělení prostředí, syntetická data, anonymizace, bezpečné integrace, přístupy, seed scénáře, automatický úklid, checklist a staging karta.
 - **2026-09-13:** Doplněna příloha AP o produktových e-mailech bez otravného orchestrionu: rozdělení kategorií, účel zpráv, preference, onboarding podle pokroku, doručitelnost, šablony, privacy-first měření a e-mailová karta.
