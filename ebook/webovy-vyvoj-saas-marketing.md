@@ -4408,6 +4408,155 @@ Měsíční review má být krátké, pravdivé a použitelné. Když po něm t�
 
 ---
 
+
+## Příloha Y: AI asistenti v malém SaaS bez datového chaosu
+
+AI asistent v malém SaaS může být skvělý parťák: shrne support tiket, navrhne odpověď, pomůže uživateli projít složitý formulář, najde informaci v dokumentaci nebo zrychlí interní provoz. Stejně snadno se z něj ale může stát elegantní vysavač dat, který posílá citlivé informace tam, kam by nikdy neměly odtéct.
+
+První pravidlo: AI není funkce sama o sobě. Je to způsob, jak zkrátit cestu k výsledku. Pokud nevíš, jaký konkrétní problém řešíš, nepřidáváš asistenta. Přidáváš drahou mlhu s ikonou jiskřiček.
+
+### Začni interním použitím
+
+Nejbezpečnější první krok je interní asistent pro tým. Má menší reputační riziko, dá se rychleji omezit a lépe ukáže, kde AI opravdu pomáhá. Typické dobré scénáře:
+
+- shrnutí dlouhého support vlákna před odpovědí,
+- návrh prvního draftu odpovědi zákazníkovi,
+- vyhledávání v interní dokumentaci a runboocích,
+- příprava release notes z changelogu,
+- kontrola textu landing page proti positioningu,
+- návrh testovacích scénářů pro novou funkci.
+
+U každého scénáře napiš, kdo je uživatel asistenta, jaký vstup smí použít, jaký výstup vzniká a kdo ho musí schválit. Interní AI, která rovnou posílá e-maily zákazníkům bez člověka, není „automatizace“. Je to malý produkční goblin s přístupem k reputaci firmy.
+
+### Rozděl data podle citlivosti
+
+Než připojíš model k produktu, udělej jednoduchou klasifikaci dat. Stačí čtyři úrovně:
+
+- **Veřejné:** dokumentace, marketingový web, veřejný changelog, ceník.
+- **Interní:** roadmapa, interní poznámky, runbooky, neveřejné procesy.
+- **Zákaznické:** obsah účtu, support konverzace, nastavení, obchodní informace.
+- **Citlivé:** osobní údaje, přístupové tokeny, fakturační údaje, zdravotní či jiné zvláštní kategorie dat, bezpečnostní incidenty.
+
+Každá AI funkce musí mít povolenou maximální úroveň dat. Například „navrhni odpověď ze support ticketu“ pracuje se zákaznickými daty a musí mít přísnější pravidla než „přepiš veřejný článek do kratší verze“. Pokud tohle nerozlišíš, skončíš s jedním univerzálním promptem, který se tváří jako švýcarský nůž, ale chová se jako díra v plotě.
+
+Privacy-first minimum:
+
+- neposílej do modelu tajné klíče, hesla, session tokeny ani celé databázové exporty,
+- předávej jen relevantní výřez dat, ne celý účet zákazníka,
+- loguj účel použití a typ dat, ne celý prompt s citlivým obsahem,
+- nastav retenci promptů a odpovědí,
+- dokumentuj, zda data opouští EU nebo tvůj kontrolovaný provoz,
+- měj vypínač funkce pro konkrétního zákazníka.
+
+### AI Act neřeš až po incidentu
+
+V Evropě už nestačí říct „je to jen chatbot“. Evropská komise uvádí, že AI Act vstoupil v platnost 1. srpna 2024 a většina pravidel se začala používat od 2. srpna 2026; některé povinnosti, například zakázané praktiky a AI literacy, platí už od 2. února 2025: [AI Act — Shaping Europe’s digital future](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai).
+
+Pro malý SaaS z toho neplyne, že musíš okamžitě najmout právní armádu v oblecích. Plyne z toho, že máš u každé AI funkce vědět:
+
+- jestli jsi poskytovatel systému, nasazovatel systému, nebo jen používáš nástroj třetí strany,
+- jestli asistent pouze pomáhá s textem, nebo ovlivňuje rozhodnutí o lidech,
+- jestli uživatel musí jasně vědět, že mluví s AI,
+- jaké lidské schválení je potřeba,
+- jak funkci vypnout, auditovat a vysvětlit.
+
+Transparentní označení je zvlášť důležité u chatbotů a generovaného obsahu. Komise k pravidlům transparentnosti podle článku 50 AI Actu vydala pokyny a uvádí, že tyto povinnosti se používají od 2. srpna 2026: [Guidelines on transparency obligations for providers and deployers of AI systems](https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems).
+
+### Uživatel má vidět hranice asistenta
+
+Dobrý AI asistent nesmí předstírat vševědoucnost. V UI jasně ukaž:
+
+- co asistent umí,
+- z jakých zdrojů odpovídá,
+- kdy může být odpověď nepřesná,
+- co se s dotazem děje,
+- zda odpověď ukládáš,
+- jak uživatel pošle zpětnou vazbu nebo nahlásí chybu.
+
+Příklad dobrého mikrotextu:
+
+> „Cody navrhuje odpověď podle dokumentace a tohoto ticketu. Před odesláním ji zkontroluj. Do návrhu neposílej hesla, tokeny ani údaje, které zákazník nepotřebuje sdílet.“
+
+Příklad špatného mikrotextu:
+
+> „AI vyřeší vše za vás.“
+
+To druhé je marketingová past. Lidé pak čekají kouzla, tým řeší eskalace a produkt vypadá méně spolehlivě, než ve skutečnosti je.
+
+### Prompt není bezpečnostní hranice
+
+Do promptu můžeš napsat „nikdy neprozrazuj tajemství“, ale bezpečnost tím nekončí. Prompt je instrukce, ne zámek. Bezpečnostní hranice musí být v aplikaci:
+
+- backend rozhoduje, k jakým datům má asistent přístup,
+- oprávnění uživatele se kontrolují před načtením kontextu,
+- citlivé hodnoty se redigují před odesláním do modelu,
+- výstup prochází validací tam, kde může spustit akci,
+- akce jako smazání, odeslání e-mailu nebo změna fakturace vyžadují explicitní potvrzení.
+
+Praktický vzor: asistent může navrhnout SQL dotaz, ale nesmí ho sám spustit nad produkcí. Může připravit odpověď zákazníkovi, ale člověk ji musí odeslat. Může doporučit změnu nastavení, ale aplikace ji musí ukázat jako diff a nechat potvrdit.
+
+### Měř hodnotu, ne jen počet tokenů
+
+AI funkce často vypadají užitečně, protože jsou efektní. Měř proto skutečný dopad:
+
+- kolik času ušetřila konkrétnímu týmu,
+- kolik návrhů člověk použil bez zásadní úpravy,
+- kolik chyb nebo eskalací vzniklo kvůli špatné odpovědi,
+- zda zákazníci dokončí scénář rychleji,
+- zda se nesnížila důvěra kvůli nepřesným nebo přehnaně sebevědomým výstupům.
+
+Privacy-first analytika tu pořád platí. Nepotřebuješ ukládat každý prompt navždy. Často stačí agregace: typ scénáře, výsledek, ruční korekce, zpětná vazba a incidenty. Když potřebuješ ukázkové prompty pro zlepšování, pracuj se souhlasem, anonymizací a krátkou retencí.
+
+### Checklist: AI asistent bez datového chaosu
+
+- [ ] Každá AI funkce má popsaný konkrétní uživatelský scénář a očekávaný výsledek.
+- [ ] Víme, zda jde o interní, zákaznickou nebo veřejnou funkci.
+- [ ] Máme klasifikaci dat a maximální povolenou úroveň vstupu.
+- [ ] Uživatel ví, kdy komunikuje s AI nebo čte AI výstup.
+- [ ] Prompt ani odpověď neobsahují tokeny, hesla a zbytečné osobní údaje.
+- [ ] Přístup k datům kontroluje aplikace, ne pouze instrukce v promptu.
+- [ ] Rizikové akce vyžadují lidské potvrzení.
+- [ ] Máme nastavenou retenci promptů, odpovědí a feedbacku.
+- [ ] Umíme funkci vypnout pro zákazníka nebo celý produkt.
+- [ ] Tým má základní AI literacy: ví, kde AI pomáhá, kde halucinuje a kdy ji nepoužít.
+
+### Šablona AI karty
+
+```markdown
+## AI karta: [název funkce]
+
+### Scénář
+- Komu pomáhá:
+- Jaký problém řeší:
+- Co je úspěšný výstup:
+
+### Data
+- Povolené vstupy:
+- Zakázané vstupy:
+- Kde data zpracováváme:
+- Retence promptů a odpovědí:
+
+### Rizika
+- Možná chyba modelu:
+- Dopad na zákazníka:
+- Lidské schválení:
+- Vypínač / rollback:
+
+### Transparentnost
+- Text v UI:
+- Zdroj odpovědi:
+- Feedback / nahlášení chyby:
+
+### Měření
+- Metrika hodnoty:
+- Metrika kvality:
+- Privacy-first omezení měření:
+```
+
+> Codyho komentář: Nejlepší AI funkce není ta, která nejvíc připomíná sci-fi. Je to ta, po které člověk řekne: „Jo, přesně tuhle otravnou část už nechci dělat ručně.“ A bezpečnosták neupadne ze židle. Ideálně obojí.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -4430,11 +4579,15 @@ Měsíční review má být krátké, pravdivé a použitelné. Když po něm t�
 - Atlassian: [Postmortems: Enhance Incident Management Processes](https://www.atlassian.com/incident-management/handbook/postmortems)
 - Evropská komise: [European Accessibility Act](https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/union-equality-strategy-rights-persons-disabilities-2021-2030/european-accessibility-act_en)
 - W3C: [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)
+- Evropská komise: [AI Act — Shaping Europe’s digital future](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
+- Evropská komise: [AI Literacy — Questions & Answers](https://digital-strategy.ec.europa.eu/en/faqs/ai-literacy-questions-answers)
+- Evropská komise: [Guidelines on transparency obligations for providers and deployers of AI systems](https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems)
 
 ---
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha Y o AI asistentech v malém SaaS: interní use-casy, klasifikace dat, AI Act transparentnost, bezpečnostní hranice, měření hodnoty a AI karta.
 - **2026-09-13:** Doplněna příloha X o měsíčním business review bez vanity metrik: otázky před dashboardem, pět metrik, akviziční šum, zákaznické příběhy, rozhodnutí a privacy-first kontrola.
 - **2026-09-13:** Doplněna příloha W o retenci a mazání dat: retenční matice, mazání účtů, anonymizace, zálohy, support data, čtvrtletní review a šablona retenční karty.
 - **2026-09-13:** Doplněna příloha V o QA a regresním testování pro malý privacy-first SaaS: kritické cesty, Definition of Done, testovací data, release checklist, bug reporty a šablona testovací karty.
