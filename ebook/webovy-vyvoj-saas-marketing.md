@@ -5547,6 +5547,160 @@ Review nemá být čtení celé tabulky nahlas. To je trest, ne meeting. Zaměř
 
 ---
 
+## Příloha AF: Zákaznické vzdělávání bez akademie na steroidech
+
+Malý SaaS často nepotřebuje obří „academy portal“, certifikace, bodíky a sledování každého kliknutí. Potřebuje, aby se zákazník rychle zorientoval, pochopil hodnotu produktu a dokázal vyřešit běžné situace bez čekání na support. Zákaznické vzdělávání není vedlejší marketingová dekorace. Je to produktová infrastruktura.
+
+Když vzdělávání chybí, tým platí třikrát: support opakuje stejné odpovědi, obchod musí vysvětlovat základy pořád dokola a produkt vypadá složitější, než ve skutečnosti je. Když je vzdělávání dobře navržené, zákazník má jasnou cestu od prvního úspěchu k pokročilému používání — a firma nepotřebuje sbírat tunu behaviorálních dat, aby poznala, kde lidé tápou.
+
+### Začni mapou situací, ne knihovnou článků
+
+Nejhorší knowledge base je skladiště náhodných textů podle interní struktury firmy. Zákazník nehledá „modul integrací“. Hledá odpověď na otázku: „Jak dostanu data z Excelu do aplikace, aniž bych něco rozbil?“
+
+První mapa vzdělávání má vycházet ze situací:
+
+- **Začínám:** potřebuji první nastavení, pozvánku týmu, import dat a bezpečný test.
+- **Dělám rutinní práci:** potřebuji opakovat nejčastější workflow bez chyb.
+- **Něco se pokazilo:** potřebuji pochopit hlášku, vrátit změnu nebo kontaktovat podporu.
+- **Rostu:** potřebuji role, procesy, integrace, reporting a kontrolu přístupů.
+- **Odcházím nebo měním proces:** potřebuji export, archivaci, mazání a vysvětlení dopadů.
+
+Z této mapy potom vzniknou články, krátká videa, checklisty nebo šablony. Ne naopak. Když nejdřív píšeš články, snadno vytvoříš dokumentaci, která odráží databázové tabulky místo zákaznického myšlení.
+
+### Každá stránka má odpovědět na jeden úkol
+
+Dobrá nápověda není román. Jedna stránka má mít jeden jasný úkol: „pozvat uživatele“, „nastavit fakturační údaje“, „obnovit smazaný záznam“, „připravit export pro audit“. Pokud je úkol složitější, rozděl ho na více stránek a propojuj je přes „další krok“.
+
+Praktická struktura článku:
+
+1. **Kdy to použít:** jedna věta s kontextem.
+2. **Co budeš potřebovat:** role, data, oprávnění, čas.
+3. **Postup:** krátké kroky v pořadí, ve kterém je uživatel opravdu udělá.
+4. **Kontrola výsledku:** jak pozná, že je hotovo.
+5. **Časté chyby:** dvě až čtyři situace, které se opakují.
+6. **Privacy poznámka:** jaká data se zpracují, kdo je uvidí a jak je případně smazat.
+
+Příklad: článek „Import zákazníků z CSV“ nemá začínat historií formátu CSV. Má začít větou: „Použijte tento postup, když chcete převést existující seznam zákazníků do aplikace bez ručního přepisování.“ Pak vysvětlí povinné sloupce, ukáže vzorový soubor, popíše validaci, upozorní na duplicity a skončí tím, jak import vrátit zpět nebo smazat testovací data.
+
+### Vzdělávání má být propojené s produktem
+
+Knowledge base mimo produkt je užitečná, ale nejlepší vzdělávání se objeví přesně ve chvíli, kdy ho člověk potřebuje. Neznamená to vyskakovací cirkus. Znamená to jemné vodicí prvky:
+
+- krátký odkaz „Jak připravit CSV“ přímo u importu,
+- ukázkový prázdný stav s doporučeným prvním krokem,
+- bezpečné demo data místo prázdné obrazovky,
+- tooltip u rizikové volby, ne u každého tlačítka,
+- checklist prvního nastavení, který se dá skrýt,
+- odkaz na export a mazání dat v nastavení účtu, ne v patičce za sedmi kliky.
+
+Dobré pravidlo: pokud support posílá stejný odkaz třikrát týdně, ten odkaz pravděpodobně patří přímo do produktu.
+
+> Codyho komentář: Tooltip na každém druhém slově není edukace. To je produktová verze člověka, který ti při vaření stojí za zády a říká „pozor, nůž je ostrý“. Díky, Sherlocku.
+
+### Měř kvalitu vzdělávání bez šmírování
+
+U nápovědy není potřeba sledovat jednotlivce napříč produktem. Většinu užitečných signálů získáš agregovaně nebo přímo z podpory:
+
+- počet opakovaných dotazů na stejné téma,
+- počet support ticketů po publikaci nového článku,
+- nejnavštěvovanější stránky nápovědy v agregované analytice,
+- dotazy bez výsledku ve vyhledávání knowledge base,
+- kliknutí na „kontaktovat podporu“ po přečtení článku,
+- kvalitativní poznámky z onboarding callů.
+
+Privacy-first přístup: měř stránku, téma a výsledek, ne kompletní cestu konkrétního člověka. Pokud opravdu potřebuješ propojit chování s účtem, udělej to jen pro jasný účel, s minimem dat, krátkou retencí a interní dokumentací. Většina malých SaaS týmů zjistí, že jim stačí mnohem méně dat, než se tváří různé „customer education“ platformy.
+
+### Vytvoř minimální vzdělávací systém
+
+První verze nemusí být hezký portál. Stačí jednoduchý systém, který tým udrží v pohybu:
+
+- **10 základních článků:** první nastavení, import, role, hlavní workflow, export, fakturace, bezpečnost, řešení chyb, offboarding, kontakt na podporu.
+- **3 šablony:** onboarding checklist, checklist před importem, checklist před spuštěním týmu.
+- **1 veřejná stránka důvěry:** jak pracujete s daty, kde běží služba, jak řešíte přístupy, export a mazání.
+- **1 interní backlog vzdělávání:** témata ze supportu, obchodu a produktu.
+- **1 měsíční review:** co lidé nechápou, co se zlepšilo a co má největší dopad.
+
+U každého článku eviduj vlastníka, datum poslední revize a vazbu na produktovou oblast. Dokumentace stárne stejně jako kód. Rozdíl je v tom, že zastaralý článek umí naštvat zákazníka rychleji než ošklivá funkce v adminu.
+
+### Přepiš podporu na obsah, ne obsah na podporu
+
+Support je zlatý důl pro vzdělávání. Každý opakovaný dotaz by měl skončit jedním ze tří výsledků:
+
+- upravit produkt, aby otázka vůbec nevznikala,
+- doplnit kontext přímo do rozhraní,
+- vytvořit nebo opravit článek v nápovědě.
+
+Praktický rytmus pro malý tým:
+
+1. Každý pátek vyber tři nejčastější support otázky.
+2. U každé rozhodni, jestli jde o problém produktu, nápovědy nebo očekávání z marketingu.
+3. Jednu otázku převeď na konkrétní zlepšení ještě tentýž týden.
+4. Nový článek přidej do follow-up šablon pro obchod a support.
+5. Za měsíc zkontroluj, jestli dotaz ubyl.
+
+Tím se z nápovědy stává živý produktový systém, ne archiv odpovědí z dávných časů.
+
+### Privacy-first vzdělávání má učit i hranice
+
+Zákazník potřebuje vědět nejen „jak funkci zapnout“, ale i „co se stane s daty“. U citlivějších oblastí přidej jasné poznámky:
+
+- jaká data uživatel nahrává,
+- kdo v účtu je uvidí,
+- jestli se data posílají subprocesorovi,
+- jak dlouho se uchovávají dočasné soubory,
+- jak provést export nebo smazání,
+- co dělat při chybně nahraných datech.
+
+Tohle není právnický ornament. Je to důvěra v praxi. Když uživatel rozumí dopadu akce, méně chybí, méně se bojí a častěji produkt používá správně.
+
+### Checklist: zákaznické vzdělávání bez datového hladu
+
+- Máme mapu hlavních zákaznických situací, ne jen seznam interních funkcí.
+- Každý článek řeší jeden úkol a má jasný další krok.
+- U rizikových akcí vysvětlujeme dopad na data, role a možnost návratu.
+- Nejčastější support odkazy jsou dostupné přímo v produktu.
+- Měříme agregované signály kvality, ne detailní sledování jednotlivců.
+- Každý článek má vlastníka a datum poslední revize.
+- Support otázky pravidelně převádíme na produktová nebo obsahová zlepšení.
+- Veřejně vysvětlujeme export, mazání, hosting a přístupy k datům.
+
+### Šablona vzdělávací karty
+
+```markdown
+## Vzdělávací karta: [téma / workflow]
+
+### Situace zákazníka
+- Kdo to řeší:
+- Kdy problém vzniká:
+- Jak dnes poznáme, že tápe:
+
+### Cíl obsahu
+- Co má uživatel zvládnout:
+- Jak pozná, že je hotovo:
+- Jaký další krok nabídneme:
+
+### Formát
+- Článek / checklist / video / šablona / prázdný stav:
+- Umístění v produktu:
+- Veřejné nebo interní:
+
+### Privacy-first poznámka
+- Jaká data se používají:
+- Kdo je uvidí:
+- Retence / mazání:
+- Riziko chybného použití:
+
+### Měření
+- Agregovaný signál úspěchu:
+- Support dotazy, které mají ubýt:
+- Datum revize:
+- Vlastník:
+```
+
+> Codyho komentář: Nejlepší zákaznická akademie je ta, kterou zákazník skoro nevnímá — protože ho produkt vede, nápověda odpovídá a support nemusí hrát lidský vyhledávač.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -5578,6 +5732,7 @@ Review nemá být čtení celé tabulky nahlas. To je trest, ne meeting. Zaměř
 
 ## Pracovní log
 
+- **2026-09-13:** Doplněna příloha AF o zákaznickém vzdělávání bez akademie na steroidech: mapa zákaznických situací, struktura článků nápovědy, propojení s produktem, privacy-first měření, převod support dotazů na obsah a šablona vzdělávací karty.
 - **2026-09-13:** Doplněna příloha AE o lehké obchodní pipeline bez CRM monstróznosti: kvalifikace leadů, jednoduché fáze, další kroky, minimalizace obchodních dat, důvody proher, hodnotný follow-up, týdenní review a šablona pipeline karty.
 - **2026-09-13:** Doplněna příloha AD o partnerském a referral růstu bez sledovacího cirkusu: správný moment pro doporučení, férová odměna, minimální evidence dat, šablony zpráv, partnerská pravidla, měření kvality a referral karta.
 - **2026-09-13:** Doplněna příloha AC o zakázkové implementaci bez scope creepu: oddělení produktu a služby, implementační mapa, změnové řízení, privacy-first práce s daty, odmítání rizikových úprav a šablona implementační karty.
