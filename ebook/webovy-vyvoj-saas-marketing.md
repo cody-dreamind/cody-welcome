@@ -8396,6 +8396,180 @@ Codyho komentář: Lokalizace není romantická práce s vlaječkami v patičce 
 
 ---
 
+## Příloha AW: Interní automatizace bez černých skříněk
+
+Malý SaaS tým má automatizace milovat, ale nemá jim slepě věřit. Dobrý skript ušetří hodinu týdně, špatný skript potichu pošle zákaznický export na špatné místo, přepíše ceník nebo začne spamovat leady jako robot s kofeinem. Automatizace není kouzelná hůlka. Je to další člen týmu, který neumí improvizovat a potřebuje jasné mantinely.
+
+Privacy-first automatizace má jednoduchý cíl: odstranit opakovanou ruční práci, ale nezvětšit datový hlad firmy. Každý workflow by měl mít vlastníka, jasný účel, omezený přístup k datům, log rozhodnutí a bezpečný způsob vypnutí.
+
+Neautomatizuj proto všechno, co se hýbe. Automatizuj to, co je opakovatelné, pravidlové, kontrolovatelné a má měřitelnou hodnotu.
+
+### Začni nudnými procesy, ne efektními demy
+
+Nejlepší první automatizace obvykle nevypadá sexy. Je to připomenutí nezodpovězených leadů, kontrola nevyplněných fakturačních údajů, generování týdenního reportu, záloha obsahu nebo vytvoření checklistu po novém deployi. Přesně tyhle věci se lidem opakují, lezou na nervy a při ručním provedení často končí slovy „jo, to jsem chtěl udělat včera“.
+
+Vyber kandidáty podle čtyř otázek:
+
+- **Opakování:** děje se úkol aspoň jednou týdně?
+- **Pravidla:** dá se popsat jasně, kdy má workflow běžet a co má udělat?
+- **Riziko:** co nejhoršího se stane, když automatizace selže?
+- **Hodnota:** ušetří čas, sníží chyby, zrychlí zákazníka nebo zlepší provozní jistotu?
+
+Praktický příklad: místo „automatizujeme celý sales“ začni workflowem „každý pracovní den v 9:00 najdi leady bez dalšího kroku starší než 3 dny a pošli obchodníkovi interní souhrn“. To je konkrétní, vratné a bezpečnější než robot, který rovnou posílá deset personalizovaných e-mailů bez kontroly.
+
+### Každá automatizace musí mít vlastníka
+
+Automatizace bez vlastníka je budoucí incident se zpožděným zapalováním. Někdo musí vědět, proč existuje, kde běží, jak se vypíná a co dělat, když začne dělat nesmysly. Nestačí „to kdysi nastavil Karel“. Karel je možná na dovolené, možná změnil práci a možná si taky nepamatuje, proč workflow posílá CSV do složky `final_final_2`.
+
+U každé automatizace eviduj:
+
+- **vlastníka procesu:** člověk odpovědný za business výsledek,
+- **technického správce:** člověk schopný workflow upravit nebo vypnout,
+- **účel:** jedna věta, proč automatizace existuje,
+- **spouštěč:** čas, událost, webhook, ruční tlačítko nebo změna dat,
+- **systémy:** odkud bere data a kam zapisuje,
+- **úroveň rizika:** nízká, střední, vysoká,
+- **poslední review:** datum, kdy tým ověřil, že pořád dává smysl.
+
+Nízkoriziková automatizace může jen poslat interní připomínku. Střední riziko už mění stav záznamu, třeba označí fakturu jako připravenou ke kontrole. Vysoké riziko posílá externí komunikaci, mění ceny, upravuje přístupy nebo pracuje s osobními a obchodně citlivými daty. Tam patří schválení člověkem, ne hrdinská víra v cron.
+
+### Data minimalizuj i uvnitř firmy
+
+Častá past: tým je přísný na externí trackery, ale interní automatizaci dá přístup ke všemu, protože „je to přece naše“. Privacy-first kultura začíná právě uvnitř. Interní nástroj nemá automaticky nárok na kompletní databázi zákazníků, historii plateb a všechny support zprávy jen proto, že běží pod firemním účtem.
+
+Před napojením dat si napiš minimální vstup:
+
+- Jaká pole workflow opravdu potřebuje?
+- Stačí ID záznamu místo celého profilu?
+- Stačí agregace místo jednotlivých osob?
+- Stačí pseudonymizovaná data pro test?
+- Může workflow číst bez zápisu?
+- Je potřeba uchovávat výstup, nebo ho jen krátce zobrazit?
+
+Příklad: týdenní produktový report nepotřebuje seznam všech uživatelů se jménem a e-mailem. Často stačí počet aktivovaných účtů, počet dokončených klíčových akcí, počet nových support témat a odkazy na interní detail pro člověka s oprávněním. Report má pomáhat rozhodovat, ne vytvářet další kopii zákaznických dat.
+
+### Lidské schválení dej na správné místo
+
+„Human in the loop“ není magické zaklínadlo. Když člověk jen mechanicky kliká na schválit u stovky položek, automatizace se tváří bezpečně, ale ve skutečnosti jen přesunula únavu do jiného okna. Lidská kontrola má být tam, kde je potřeba úsudek, kontext nebo odpovědnost.
+
+Schválení člověkem dej hlavně před:
+
+- první externí zprávu novému kontaktu,
+- změnu tarifu, slevy nebo fakturačního nastavení,
+- smazání nebo hromadný export dat,
+- změnu přístupových práv,
+- odpověď na právní, bezpečnostní nebo incidentový dotaz,
+- automatizované rozhodnutí, které může zákazníka omezit.
+
+Naopak nemusíš schvalovat každý interní souhrn, kontrolu chybějících polí nebo vytvoření návrhu odpovědi. Tam stačí dobrý log, možnost upravit výsledek a jasné označení, že jde o návrh.
+
+Codyho komentář: Automatizace má dělat nudnou práci. Jakmile začne dělat politiku, obchodní sliby nebo právní výklady bez člověka, dej jí čaj, vypni ji a zavolej dospělého.
+
+### Loguj rozhodnutí, ne každé nadechnutí
+
+Provozní log automatizace má pomoct odpovědět na otázky: co se stalo, proč se to stalo, s jakými daty workflow pracoval a kdo může výsledek zkontrolovat. Nemá být tajný deník všeho, co se kdy mihlo v systému.
+
+Dobrý záznam obsahuje:
+
+- název automatizace,
+- čas běhu,
+- spouštěč,
+- počet zpracovaných položek,
+- výsledek,
+- případnou chybu,
+- odkaz na bezpečný interní detail,
+- verzi pravidel nebo konfigurace.
+
+Špatný záznam obsahuje celé e-maily, kompletní zákaznické profily, tokeny, soukromé poznámky nebo exporty vložené přímo do logu. Log má být stopa, ne skládka. Pokud potřebuješ dohledat detail, odkazuj na původní systém s přístupovými právy, neukládej citlivá data podruhé.
+
+### Automatizace musí umět selhat bezpečně
+
+Každý workflow jednou selže. API vrátí jiný formát, dodavatel změní limit, databáze je chvíli pomalá, člověk přejmenuje sloupec, webhook přijde dvakrát. Otázka není, jestli se to stane. Otázka je, jestli selhání vytvoří chaos, nebo jen úkol pro člověka.
+
+Bezpečné selhání znamená:
+
+- žádné nekonečné opakování bez limitu,
+- žádné mazání dat při nejasném stavu,
+- žádné tiché přeskočení kritické chyby,
+- žádné odesílání externích zpráv po částečně neúspěšném běhu,
+- jasné upozornění vlastníkovi,
+- možnost ručního opakování po opravě.
+
+U důležitých automatizací nastav režim „dry run“. Nejdřív nech workflow vypsat, co by udělal, a teprve po kontrole povol zápis. Stejně tak používej malé dávky. Když se něco pokazí u pěti položek, bolí to méně než u pěti tisíc.
+
+### Každý měsíc udělej úklid robotů
+
+Automatizace stárnou. Co dávalo smysl při deseti zákaznících, může být nebezpečné při stovce. Co pomáhalo v pilotu, může překážet v placeném provozu. A co bylo dočasné, má zvláštní talent stát se trvalým, pokud to nikdo nehlídá.
+
+Měsíční review nemusí být dlouhé. Projdi seznam automatizací a u každé se zeptej:
+
+- Běžela v posledním měsíci?
+- Ušetřila čas nebo snížila chyby?
+- Pracuje pořád jen s nezbytnými daty?
+- Má aktuálního vlastníka?
+- Selhala někdy bez upozornění?
+- Existuje jednodušší způsob?
+- Má se ponechat, upravit, nebo vypnout?
+
+Vypnutí staré automatizace je produktivní práce. Není to prohra. Je to úklid dílny, aby si tým jednou neusekl prst o zapomenutý skript.
+
+### Checklist: interní automatizace privacy-first
+
+- Má automatizace jasný účel v jedné větě.
+- Má business vlastníka a technického správce.
+- Pracuje jen s minimem potřebných dat.
+- Má oddělené testovací a produkční prostředí.
+- Umí běžet v režimu dry run před prvním zápisem.
+- Má limity opakování a bezpečné chování při chybě.
+- Externí komunikace, mazání dat a změny přístupů vyžadují kontrolu člověka.
+- Log neobsahuje citlivé hodnoty, tokeny ani celé zákaznické exporty.
+- Existuje jednoduchý vypínač nebo rollback postup.
+- Automatizace prochází pravidelným review.
+
+### Šablona automatizační karty
+
+```md
+## Automatizační karta: [název workflow]
+
+### Účel
+- Proč workflow existuje:
+- Jaký problém řeší:
+- Jak poznáme, že má hodnotu:
+
+### Vlastnictví
+- Business vlastník:
+- Technický správce:
+- Náhradník:
+- Poslední review:
+
+### Spouštění
+- Spouštěč:
+- Frekvence:
+- Režim dry run:
+- Ruční spuštění:
+
+### Data
+- Vstupní systémy:
+- Výstupní systémy:
+- Používaná pole:
+- Citlivá data:
+- Retence výstupů:
+
+### Rizika
+- Co se stane při chybě:
+- Kdy je potřeba člověk:
+- Jak workflow vypnout:
+- Jak zopakovat běh po opravě:
+
+### Logování
+- Co logujeme:
+- Co nikdy nelogujeme:
+- Kde je interní detail:
+- Koho upozornit při selhání:
+```
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -8439,6 +8613,7 @@ Codyho komentář: Lokalizace není romantická práce s vlaječkami v patičce 
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha AW o interních automatizacích bez černých skříněk: výběr vhodných procesů, vlastnictví, minimalizace dat, lidské schvalování, bezpečné logování, selhání, pravidelné review, checklist a automatizační karta.
 - **2026-09-14:** Doplněna příloha AV o lokalizaci SaaS bez překládacího chaosu: výběr trhu, lokalizace zákaznické cesty, terminologie, pricing, support, technická pravidla, privacy-first kontrola, checklist a lokalizační karta.
 - **2026-09-14:** Doplněna příloha AU o customer success signálech bez šmírování: definice úspěchu, health score, segmentace podle kontextu, pomocná komunikace, ruční poznámky, playbooky, minimalizace dat, checklist a customer success karta.
 - **2026-09-14:** Doplněna příloha AT o B2B datové místnosti pro privacy-first SaaS: vrstvy sdílení, bezpečnostní profil, subprocesory, certifikace bez mlžení, řízení přístupů, napojení na obchodní proces, checklist a šablona datové místnosti.
