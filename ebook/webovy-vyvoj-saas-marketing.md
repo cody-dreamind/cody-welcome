@@ -9639,6 +9639,170 @@ Výstupem nemá být filozofická debata o „data governance“. Výstupem má 
 
 ---
 
+## Příloha BE: Forecast a kapacita bez věštění z křišťálové analytiky
+
+Malý SaaS tým nepotřebuje korporátní plánovací rituál, kde se tři týdny vyrábí tabulka, které nikdo nevěří už v pondělí ráno. Potřebuje jednoduchý forecast: co pravděpodobně přijde, kolik práce to sežere, kde se může něco rozbít a kdy musíme říct „ne“ dřív, než tým začne mluvit s monitorem.
+
+Forecast není slib budoucnosti. Je to pracovní mapa nejistoty. Pomáhá rozhodnout, jestli nabrat zákazníka, otevřít nový segment, spustit marketingovou kampaň, slíbit termín enterprise zákazníkovi nebo raději nejdřív uklidit onboarding. Privacy-first přístup k forecastu navíc drží plánování u agregovaných signálů a reálné kapacity, ne u detailního sledování každého kliknutí.
+
+### Začni třemi frontami kapacity
+
+V malém SaaS se kapacita neztrácí jen ve vývoji. Mizí v supportu, prodeji, onboardingu, provozu, administrativě, opravách a kontextových přepínačích. Když plán počítá jen s vývojovými story pointy, ignoruje polovinu reality.
+
+Rozděl kapacitu na tři fronty:
+
+- **Produktová kapacita:** nové funkce, zlepšení UX, technický dluh, integrace, dokumentace.
+- **Zákaznická kapacita:** onboarding, support, demo cally, implementace, školení, migrace dat.
+- **Provozní kapacita:** incidenty, bezpečnost, aktualizace, fakturace, reporting, vendor review, interní automatizace.
+
+Každý týden si zapiš, kolik času přibližně sežrala každá fronta. Nemusí to být přesné na minuty. Cíl není sledovat lidi jako výrobní linku. Cíl je poznat, že „máme ještě dost kapacity“ je často jen poetická verze „ještě jsme neotevřeli support inbox“.
+
+### Forecast stavěj ze scénářů, ne z jednoho čísla
+
+Jedno číslo působí sebevědomě, ale často lže. „Příští měsíc získáme 12 zákazníků“ je méně užitečné než tři scénáře: opatrný, realistický a napnutý. Scénáře ukážou, co se stane s kapacitou, pokud se daří dobře, průměrně nebo divně.
+
+Pro každý měsíc si napiš:
+
+- **Očekávaný příliv:** leady, demo cally, piloty, noví platící zákazníci, rozšíření účtů.
+- **Očekávaný odliv:** churn, ukončené piloty, pozastavené projekty, zákazníci čekající na vlastní rozhodnutí.
+- **Kapacitní dopad:** onboarding hodiny, support zátěž, technické požadavky, fakturační práce.
+- **Rizika:** závislost na jednom velkém zákazníkovi, nestabilní integrace, ruční proces, úzké místo v týmu.
+- **Rozhodnutí:** co uděláme, pokud se naplní nízký, střední nebo vysoký scénář.
+
+Příklad: pokud se podaří kampaň a přijde deset pilotů najednou, není to jen radost. Je to otázka: kdo je onboarduje, kdo odpoví na dotazy, kdo pohlídá migrace a co se mezitím zastaví ve vývoji? Růst, který neumíš obsloužit, je incident v hezkém kabátě.
+
+### Pipeline převeď na práci, ne jen na tržby
+
+Obchodní pipeline často ukazuje hodnotu dealů. To je fajn pro cash flow, ale slabé pro plánování práce. Dva zákazníci se stejnou měsíční platbou mohou mít úplně jiný dopad na tým. Jeden se onboarduje sám za hodinu. Druhý chce import, SSO, právní revizi, školení a tři „rychlé“ úpravy, které rychlé nejsou.
+
+Ke každé větší příležitosti přidej odhad práce:
+
+- kolik hodin zabere předprodejní komunikace,
+- kdo musí být na demo callu,
+- jestli bude potřeba migrace nebo integrace,
+- jaké bezpečnostní nebo právní otázky přijdou,
+- kdo zákazníka převezme po podpisu,
+- co se odloží, pokud deal vyjde.
+
+Tím se z pipeline stane plánovací nástroj. Ne jen vitrína očekávaných peněz. A tým přestane být překvapený, že velký deal nepřinesl jen revenue, ale i tři týdny práce, pět nových edge casů a jednu šedivou vlasovou zónu.
+
+### Drž rezervu jako produktovou funkci
+
+Rezerva není lenost. Rezerva je vlastnost systému. Bez ní každý drobný incident rozbije roadmapu, každý enterprise dotaz zastaví vývoj a každý nemocný člen týmu způsobí domino efekt.
+
+Praktické pravidlo pro malý SaaS:
+
+- neplánuj 100 % kapacity,
+- nech prostor na support a incidenty,
+- u kritických lidí nepočítej s tím, že budou pořád dostupní,
+- rozlišuj závazky zákazníkům a interní přání,
+- termíny dávej s rezervou podle rizika, ne podle optimismu,
+- velké změny řež na menší vratné kroky.
+
+Když tým dlouhodobě jede bez rezervy, nezačne být rychlejší. Začne dělat horší rozhodnutí. A horší rozhodnutí pak vytvoří ještě víc práce. To je produktivitní perpetuum mobile, jen místo energie vyrábí chaos.
+
+### Měř zatížení bez osobního dohledu
+
+Kapacitní plánování nepotřebuje sledovat, kdo byl kolik minut v jaké aplikaci. To je manažerská verze koukání přes rameno a málokdy vede k lepšímu produktu. Užitečnější je měřit tok práce a místa, kde se práce zasekává.
+
+Privacy-first signály zatížení:
+
+- počet otevřených support dotazů podle typu,
+- stáří nevyřešených požadavků,
+- počet zákazníků v onboarding fázi,
+- počet rozpracovaných úkolů na tým,
+- čekání na review, zákazníka nebo dodavatele,
+- počet incidentů a opakovaných problémů,
+- počet ručních kroků v procesu, který měl být hotový automaticky.
+
+Tyto signály sleduj agregovaně. Pokud se backlog supportu zvedá, problém není „Karel je pomalý“. Problém může být nejasný onboarding, chybějící dokumentace, špatný import nebo funkce, která mate zákazníky. Diagnostikuj systém, ne člověka.
+
+### Rozhoduj před přetížením
+
+Nejhorší kapacitní rozhodnutí se dělají pozdě. Když už tým hoří, každá volba vypadá špatně. Proto si nastav předem signály, které spouští změnu plánu.
+
+Příklady rozhodovacích hranic:
+
+- pokud onboarding fronta překročí pět aktivních zákazníků, zastavíme nové piloty na týden,
+- pokud support odpovědi přesáhnou domluvené SLA, odložíme jednu produktovou iniciativu,
+- pokud dvě po sobě jdoucí release okna skončí hotfixem, dáme týden na stabilizaci,
+- pokud obchod slíbí integraci mimo roadmapu, musí vzniknout kapacitní karta,
+- pokud ruční proces běží třikrát týdně, dostane automatizační nebo dokumentační úkol.
+
+Hranice nejsou trest. Jsou bezpečnostní zábradlí. Pomáhají týmu říct „teď ne“ dřív, než se „ano“ promění v zákaznické zklamání.
+
+### Forecast musí mít vlastníka a rytmus
+
+Forecast bez vlastníka skončí jako tabulka v oblaku, kterou všichni respektují asi jako ceduli „netiskněte zbytečně“ u kancelářské tiskárny. Urči člověka, který forecast udržuje, sbírá vstupy a na review klade nepříjemné, ale užitečné otázky.
+
+Týdenní rytmus může být jednoduchý:
+
+- co se změnilo v pipeline,
+- co se změnilo v zákaznické zátěži,
+- co se změnilo v provozních rizicích,
+- který závazek je ohrožený,
+- co musíme zastavit, zmenšit nebo přesunout,
+- jaké rozhodnutí má tým udělat dnes.
+
+Měsíčně pak zkontroluj, kde se forecast mýlil. Ne kvůli viníkům, ale kvůli lepšímu odhadu. Možná podceňuješ onboarding. Možná obchodní cyklus trvá déle. Možná každý „malý import“ znamená dvě hodiny podpory. To nejsou selhání. To jsou data pro příští plán.
+
+### Checklist: forecast a kapacita privacy-first
+
+- Rozlišuje plán produktovou, zákaznickou a provozní kapacitu?
+- Převádí obchodní pipeline na dopad v hodinách, rolích a rizicích?
+- Existují minimálně tři scénáře místo jednoho optimistického čísla?
+- Má tým jasnou rezervu na support, incidenty a nečekané zákaznické práce?
+- Sleduje zatížení agregovaně bez osobního dohledu nad jednotlivci?
+- Jsou předem nastavené hranice, kdy se stopnou piloty, scope nebo roadmapa?
+- Má každá větší příležitost kapacitní kartu před podpisem závazku?
+- Vede forecast ke konkrétním rozhodnutím, ne jen k barevnému grafu?
+- Probíhá pravidelné review odchylek bez hledání viníků?
+- Chrání plán zákaznickou důvěru stejně jako rychlost růstu?
+
+### Šablona kapacitní karty
+
+## Kapacitní karta: [měsíc / segment / velká příležitost]
+
+### Kontext
+
+- Proč forecast vzniká:
+- Jaké rozhodnutí má podpořit:
+- Vlastník forecastu:
+
+### Scénáře
+
+- Opatrný scénář:
+- Realistický scénář:
+- Napnutý scénář:
+
+### Dopad na práci
+
+- Produktová kapacita:
+- Zákaznická kapacita:
+- Provozní kapacita:
+
+### Rizika a hranice
+
+- Hlavní úzké místo:
+- Signál přetížení:
+- Co zastavíme jako první:
+
+### Privacy-first kontrola
+
+- Jaká data používáme:
+- Co nesledujeme:
+- Kdo má přístup k forecastu:
+
+### Rozhodnutí
+
+- Co děláme teď:
+- Co kontrolujeme příští týden:
+- Kdy forecast aktualizujeme:
+
+Codyho komentář: Forecast není kouzelná koule. Je to způsob, jak se nenechat překvapit vlastními sliby. A to je v SaaS někdy větší výhoda než další graf s gradientem.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -9687,6 +9851,7 @@ Výstupem nemá být filozofická debata o „data governance“. Výstupem má 
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha BE o forecastu a kapacitě bez věštění: tři fronty kapacity, scénáře, převod pipeline na práci, rezerva, agregované signály zatížení, rozhodovací hranice, rytmus review, checklist a kapacitní karta.
 - **2026-09-14:** Doplněna příloha BD o kvalitě dat bez datového jezera na steroidech: rozhodovací scénáře, zdroj pravdy, účel polí, validace u vzniku dat, agregované měření, audit oprav, týmové review, checklist a karta kvality dat.
 - **2026-09-14:** Doplněna příloha BC o nákladech SaaS bez slepého škrtání: vlastnictví výdajů, typy nákladů, jednotková ekonomika, limity jako produktová zkušenost, úklid odpadu, vendor lock-in, měsíční review, checklist a nákladová karta.
 - **2026-09-14:** Doplněna příloha BB o interním reportingu bez dashboardového divadla: adresát reportu, provozní/produktový/obchodní pohled, privacy-first měření, kvalitativní signály, vrstvy přístupů, automatizace, checklist a reportingová karta.
