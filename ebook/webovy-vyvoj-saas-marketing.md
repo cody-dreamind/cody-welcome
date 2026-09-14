@@ -11567,7 +11567,155 @@ U každého scénáře sleduj, kolik kroků zabere, kde se člověk může splé
 - Varování u rizikové akce:
 - Odkaz na nápovědu:
 ```
+
+## Příloha BQ: Trial a první aktivace bez pasti na platební kartu
+
+Trial je slib: „Vyzkoušej si hodnotu produktu dřív, než po tobě budeme chtít větší závazek.“ Jenže spousta SaaS produktů z něj udělá malou únikovou místnost. Nejprve registrace přes sociální účet, potom firma, telefon, velikost týmu, kreditka, povinný onboarding call a tři automatické e-maily denně. Výsledek? Člověk ještě neviděl hodnotu, ale už má pocit, že podepsal hypotéku na dashboard.
+
+Dobře navržený trial není trik na získání kontaktu. Je to krátká cesta k prvnímu skutečnému výsledku. Privacy-first přístup tady není brzda růstu. Naopak: čím méně tření, čím jasnější datové toky a čím férovější očekávání, tím snazší je získat důvěru správných zákazníků.
+
+> Codyho komentář: Pokud uživatel potřebuje právníka, aby pochopil trial, není to trial. Je to escape room s fakturačním oddělením na konci.
+
+### Trial začíná aktivací, ne registrací
+
+Registrace není úspěch. Úspěch je moment, kdy zákazník poprvé zažije hodnotu produktu. U plánování zakázek to může být první vytvořený plán směny. U analytiky první srozumitelný report. U nástroje pro podporu první vyřešený ticket. U marketingového SaaS první publikovaný obsahový plán.
+
+Než navrhneš trial, napiš si jednu větu:
+
+> „Uživatel pochopí hodnotu produktu, když během prvních X minut udělá Y a uvidí Z.“
+
+Příklady:
+
+- „Během 15 minut nahraje tři zakázky a uvidí přehled kapacity týmu.“
+- „Během prvního sezení propojí jeden web a uvidí základní privacy-first statistiky.“
+- „Během dne založí tým, pozve kolegu a společně dokončí první workflow.“
+
+Tahle věta určuje onboarding, demo data, prázdné stavy, e-maily i podporu. Pokud ji neumíš napsat, trial bude jen přístup do produktu bez jasného směru. A to je jako dát člověku klíče od skladu a říct: „Někde tady je hodnota, hodně štěstí.“
+
+### Kreditka až ve chvíli, kdy dává smysl
+
+Vyžadovat platební kartu před trialem může být legitimní u produktů, kde každý účet generuje okamžité náklady nebo riziko zneužití. Ale u většiny B2B SaaS tím odfiltruješ i lidi, kteří by produkt rádi vyzkoušeli, jen nechtějí začínat finančním závazkem.
+
+Rozhoduj podle rizika a typu produktu:
+
+- **Bez kreditky:** vhodné pro samoobslužný B2B trial, obsahové nástroje, dashboardy, interní workflow a produkty s nízkými náklady na účet.
+- **Kreditka před placením:** vhodné, když chceš nejdřív ukázat hodnotu a teprve potom převést účet na tarif.
+- **Kreditka před trialem:** dává smysl u drahých API, generativních funkcí, vysoké infrastruktury nebo tam, kde hrozí spam a abuse.
+- **Pilot místo trialu:** vhodné pro komplexní B2B produkt, kde aktivace vyžaduje data, integrace nebo změnu procesu.
+
+Privacy-first varianta je jednoduchá: vysvětli proč kartu chceš, kdy se začne účtovat, jak přijde upozornění před koncem trialu a jak lze účet zrušit. Žádné „zapomněli jste kliknout, tak máme radost“. To není růst, to je účetní jumpscare.
+
+### Ptej se jen na data potřebná pro první hodnotu
+
+Trialový formulář není místo pro sběr marketingového pokladu. Každé pole zvyšuje tření a každé zbytečné osobní či firemní datum zvyšuje odpovědnost. U první registrace typicky stačí e-mail, heslo nebo magic link a případně název organizace. Všechno ostatní sbírej až ve chvíli, kdy je to potřeba pro konkrétní krok.
+
+Praktické pravidlo:
+
+- pokud údaj pomáhá doručit první hodnotu, může být v onboardingu,
+- pokud pomáhá obchodnímu týmu segmentovat lead, zvaž ho později,
+- pokud ho chceš „pro jistotu“, pryč s ním,
+- pokud jde o citlivější údaj, vysvětli účel přímo u pole,
+- pokud jde údaj odvodit z používání produktu v agregované podobě, neptej se na něj ručně.
+
+Příklad: místo povinného pole „počet zaměstnanců“ může onboarding nabídnout volbu scénáře: „Plánuji práci pro sebe“, „Plánuji menší tým“, „Řídím více poboček“. Tím pomůžeš produktu nastavit správný výchozí stav, aniž bys sbíral přesnější firemní profil, než potřebuješ.
+
+### Demo data musí být užitečná a bezpečná
+
+Prázdný trial často selže, protože uživatel nemá čas vymýšlet testovací data. Import reálných dat zase může být moc velký závazek na první sezení. Proto je dobré nabídnout bezpečnou mezivrstvu: demo data, šablonu nebo ukázkový projekt.
+
+Dobrá demo data:
+
+- ukazují nejčastější zákaznický scénář,
+- neobsahují reálné osobní údaje,
+- jsou jasně označená jako ukázková,
+- dají se jedním kliknutím smazat,
+- nejdou omylem poslat zákazníkům nebo externím systémům,
+- nepřekážejí přechodu na vlastní data.
+
+U B2B produktu se hodí tlačítko „Vyzkoušet na ukázkových datech“ vedle tlačítka „Začít s vlastními daty“. První cesta ukazuje hodnotu rychle. Druhá cesta vede k reálnému nasazení. Obě mají mít jasnou informační ceduli: co se ukládá, jak dlouho a jak to uživatel smaže.
+
+### Aktivaci řiď podle chování, ne podle e-mailového bubnování
+
+Trialové e-maily mají pomáhat, ne vytvářet pocit, že produkt stojí za dveřmi s megafonem. Neposílej všem stejnou sekvenci bez ohledu na to, co udělali. Lepší je navázat na několik bezpečných signálů: účet vytvořen, projekt založen, demo data použita, kolega pozván, klíčová akce nedokončena.
+
+Užitečná trialová komunikace:
+
+- **Uvítání:** stručně připomene hodnotu a první krok.
+- **Nedokončená aktivace:** pomůže odstranit konkrétní blokaci.
+- **Dosažený první výsledek:** nabídne další smysluplný krok.
+- **Konec trialu:** férově upozorní předem, bez překvapení.
+- **Po skončení:** nabídne export, smazání nebo domluvu pilotu.
+
+Měřit můžeš agregovaně: kolik účtů dokončilo aktivační krok, kolik pozvalo kolegu, kolik přešlo na placený tarif. Nemusíš sledovat každé kliknutí jednotlivce jako detektiv v béčkovém seriálu.
+
+### Jasně ukaž, co se stane po konci trialu
+
+Konec trialu je test důvěry. Zákazník má vědět, zda účet zůstane dostupný, zamkne se, smaže se, přejde do free režimu nebo začne placení. Pokud pracuje s vlastními daty, musí vědět, jak je exportovat a kdy budou smazána podle retenčních pravidel.
+
+Dobrá stránka „Trial končí“ obsahuje:
+
+- datum a čas konce trialu,
+- aktuální stav účtu,
+- dostupné tarify nebo možnost pilotu,
+- odkaz na export dat,
+- možnost smazat účet,
+- kontakt na podporu,
+- stručné vysvětlení retence po neaktivním trialu.
+
+Tím chráníš zákazníka i vlastní tým. Support nemusí vysvětlovat překvapení, obchod nemusí žehlit špatný pocit a produkt nepůsobí jako past s hezkým UI.
+
+### Checklist trialu a aktivace
+
+- [ ] Máme jasně pojmenovaný aktivační moment.
+- [ ] Trial vede k první hodnotě v konkrétním čase, ne jen do prázdné aplikace.
+- [ ] Platební kartu vyžadujeme jen tam, kde pro to existuje dobrý důvod.
+- [ ] Registrační formulář sbírá minimum údajů.
+- [ ] Demo data jsou syntetická, smazatelná a jasně označená.
+- [ ] Trialové e-maily reagují na klíčové situace, ne na touhu spamovat.
+- [ ] Před koncem trialu posíláme férové upozornění.
+- [ ] Uživatel má jasný export a možnost smazání dat.
+- [ ] Měříme aktivaci agregovaně a bez zbytečného profilování.
+- [ ] Support ví, jak řešit prodloužení trialu, pilot i odchod.
+
+## Trial karta: [produkt / segment]
+
+```markdown
+# Trial karta: [produkt / segment]
+
+## Aktivační moment
+- Uživatel pochopí hodnotu, když:
+- Cílový čas do první hodnoty:
+- Nejmenší smysluplný krok:
+
+## Vstup do trialu
+- Vyžadujeme kartu: ano/ne
+- Důvod, pokud ano:
+- Povinná pole registrace:
+- Volitelná pole později:
+
+## Demo a data
+- Demo scénář:
+- Typ demo dat:
+- Mazání demo dat:
+- Přechod na vlastní data:
+
+## Komunikace
+- Uvítací zpráva:
+- Zpráva při nedokončené aktivaci:
+- Upozornění před koncem trialu:
+- Zpráva po skončení:
+
+## Privacy-first kontrola
+- Minimum údajů:
+- Export:
+- Mazání:
+- Retence neaktivních trialů:
+- Agregované metriky:
+```
+
 ## Pracovní log
+
+- **2026-09-14:** Doplněna příloha BQ o trialu a první aktivaci bez pasti na platební kartu: aktivační moment, kreditka, minimalizace registračních dat, demo data, e-mailová komunikace, konec trialu, checklist a trial karta.
 
 - **2026-09-14:** Doplněna příloha BP o auditu produktových nastavení: informační architektura podle rozhodnutí, rizikové akce, privacy-first defaulty, prázdné stavy, release disciplína, scénářový audit, checklist a karta nastavení.
 
