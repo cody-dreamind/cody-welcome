@@ -9949,6 +9949,168 @@ Codyho komentář: Nejlepší systém oprávnění není ten nejkomplikovanějš
 
 ---
 
+## Příloha BG: Samoobslužná nápověda bez support labyrintu
+
+Dobrá nápověda není skladiště článků, kam tým odhazuje odpovědi, aby měl pocit produktivity. Je to produktová vrstva, která pomáhá zákazníkovi dokončit práci bez čekání na člověka. U malého SaaS týmu má ještě jednu výhodu: snižuje tlak na podporu, aniž by bylo nutné sledovat každé kliknutí, nahrávat session nebo stavět chatbot, který sebevědomě halucinuje jako junior po třetí kávě.
+
+Samoobslužná nápověda má fungovat ve třech momentech:
+
+- před nákupem vysvětlí, jestli je produkt vhodný,
+- při onboardingu pomůže dojít k první hodnotě,
+- při problému ukáže bezpečný postup bez zbytečného sdílení dat.
+
+### Nápovědu navrhuj podle situací, ne podle menu
+
+Častá chyba je strukturovat znalostní bázi podle interních modulů: „Administrace“, „Nastavení“, „Integrace“, „Ostatní“. To dává smysl týmu, který produkt staví, ale ne člověku, který jen potřebuje vyřešit konkrétní úkol.
+
+Lepší je začít mapou situací:
+
+- nový uživatel chce pochopit první kroky,
+- owner nastavuje tým a oprávnění,
+- účetní potřebuje faktury a billing,
+- provozní člověk řeší import nebo export dat,
+- admin hledá bezpečnostní nastavení,
+- zákazník chce ukončit účet a odnést si data.
+
+Z těchto situací vzniknou články s názvy jako „Jak pozvat kolegu do workspace“, „Jak bezpečně exportovat data projektu“ nebo „Co se stane po smazání účtu“. Takový název odpovídá otázce zákazníka. „Modul uživatelé“ odpovídá spíš náladě databázové tabulky.
+
+### Každý článek má vést k dokončené akci
+
+Nápověda nemá být učebnice produktu. Jeden článek má ideálně řešit jednu konkrétní akci. Pokud se do něj nevejde bez odboček, pravděpodobně míchá více scénářů dohromady.
+
+Praktická struktura článku:
+
+1. **Kdy tento návod použít:** krátký kontext a komu je určený.
+2. **Co budete potřebovat:** role, oprávnění, připravená data, případná omezení.
+3. **Postup krok za krokem:** jednoduché kroky v pořadí, v jakém je člověk provede.
+4. **Co se stane potom:** výsledek, notifikace, dopad na tým nebo data.
+5. **Časté chyby:** dvě až pět situací, které se opakují v supportu.
+6. **Kam dál:** související článek, kontakt na podporu nebo bezpečný eskalační krok.
+
+U citlivých operací přidej i bezpečnostní upozornění. Ne dramaticky, ale jasně: „Export obsahuje osobní údaje. Sdílejte ho jen přes schválený kanál a smažte lokální kopii, jakmile splní účel.“ To je lepší než generická právní mlha, která nikoho nezastaví.
+
+### Vkládej nápovědu do produktu, ale ne jako konfety
+
+Znalostní báze sama o sobě nestačí. Lidé často nehledají článek předem; narazí na problém přímo ve formuláři, tabulce nebo nastavení. Proto má produkt obsahovat krátké kontextové nápovědy.
+
+Používej tři vrstvy:
+
+- **Mikrocopy v UI:** jedna věta u pole, tlačítka nebo prázdného stavu.
+- **Krátký inline blok:** vysvětlení dopadu u citlivé akce, třeba změny role.
+- **Odkaz na plný návod:** detailní postup pro člověka, který potřebuje kontext.
+
+Nepřeháněj to. Když má každé tlačítko bublinu, produkt působí jako kokpit letadla po zásahu UX konzultanta. Nápověda má odstranit nejistotu, ne přidat další vrstvu hluku.
+
+### Support otázky převáděj na obsah systematicky
+
+Každý opakovaný dotaz je kandidát na zlepšení produktu nebo nápovědy. Neznamená to automaticky napsat další článek. Někdy je lepší změnit text v aplikaci, přidat validaci, upravit onboarding nebo zjednodušit samotný proces.
+
+Jednou týdně projdi support a označ dotazy podle příčiny:
+
+- chybí návod,
+- existuje návod, ale nejde najít,
+- návod je nejasný nebo zastaralý,
+- produkt používá nejasný pojem,
+- workflow je zbytečně složité,
+- zákazník narazil na reálnou chybu.
+
+Teprve potom rozhodni, co udělat. Pokud se deset lidí ptá, kde najdou faktury, možná nepotřebuješ desetistránkový článek. Možná potřebuješ výraznější odkaz v nastavení účtu.
+
+### Privacy-first měření nápovědy
+
+Nápovědu je užitečné měřit, ale nepotřebuješ k tomu individuální profily čtenářů. Cílem není vědět, že Franta z účetního oddělení třikrát klikl na článek o exportu. Cílem je zjistit, které situace se opakují, kde lidé nenachází odpověď a které články snižují zbytečné dotazy.
+
+Stačí agregovaně sledovat:
+
+- zobrazení článků podle tématu,
+- interní vyhledávací fráze bez ukládání identity,
+- články s vysokou mírou následného kontaktu na podporu,
+- články, které lidé hodnotí jako nejasné,
+- počet support ticketů k dané situaci před a po úpravě,
+- datum poslední revize článku.
+
+Vyhni se session replay, skrytým marketingovým pixelům a profilování návštěvníků znalostní báze. U nápovědy je důvěra extrémně důležitá: zákazník často řeší problém, chybu nebo citlivou operaci. To není chvíle na datový lov s podběrákem.
+
+### Články musí mít vlastníka a datum revize
+
+Zastaralá nápověda je horší než žádná. Člověk podle ní udělá krok, který už v produktu neplatí, a ztratí důvěru. Každý článek proto potřebuje vlastníka a rytmus revize.
+
+Minimum metadat:
+
+- vlastník článku,
+- oblast produktu,
+- datum poslední věcné kontroly,
+- návaznost na konkrétní feature nebo workflow,
+- související support tag,
+- jazyková verze,
+- důvod poslední úpravy.
+
+Při každém release, který mění workflow, projdi související články jako součást Definition of Done. Ne až „někdy po nasazení“. To „někdy“ je místo, kde dokumentace chodí umírat.
+
+### Připrav bezpečnou eskalaci na člověka
+
+Samoobsluha nesmí být zeď mezi zákazníkem a týmem. U složitých, citlivých nebo blokujících situací má být cesta na podporu jasná.
+
+Dobrá eskalace říká:
+
+- kdy má člověk kontaktovat podporu,
+- jaké informace má poslat,
+- které údaje posílat nemá,
+- jaký je očekávaný čas odpovědi,
+- co může udělat mezitím,
+- jak se bude řešit bezpečnostní nebo datový problém.
+
+Příklad microcopy: „Pokud se export nezobrazí do 15 minut, napište nám ID workspace a čas pokusu. Neposílejte celý export e-mailem.“ Krátké, praktické, bezpečné.
+
+### Checklist: samoobslužná nápověda privacy-first
+
+- Má každá hlavní zákaznická situace vlastní článek nebo jasnou UI nápovědu?
+- Řeší jeden článek jednu dokončenou akci?
+- Obsahuje článek předpoklady, postup, výsledek a časté chyby?
+- Je u citlivých operací vysvětlen dopad na data, tým nebo billing?
+- Má každý článek vlastníka a datum poslední věcné kontroly?
+- Je nápověda propojená s produktem v kontextu, kde vzniká nejistota?
+- Měříš vyhledávání a užitečnost agregovaně, bez profilování lidí?
+- Převádíš opakované support dotazy na produktové nebo obsahové úpravy?
+- Je cesta na člověka jasná u blokujících a citlivých situací?
+- Prošel obsah revizí po poslední změně workflow?
+
+### Šablona nápovědní karty
+
+## Nápovědní karta: [název článku / situace]
+
+### Situace
+- Kdo článek používá:
+- Jaký úkol chce dokončit:
+- Kdy článek není vhodný:
+
+### Předpoklady
+- Potřebná role nebo oprávnění:
+- Potřebná data nebo nastavení:
+- Rizika a omezení:
+
+### Postup
+- Krok 1:
+- Krok 2:
+- Krok 3:
+- Co se stane po dokončení:
+
+### Privacy-first kontrola
+- Jaká osobní data se v procesu objevují:
+- Co se nemá posílat supportu:
+- Jak dlouho se drží související záznamy:
+
+### Údržba
+- Vlastník:
+- Související produktová oblast:
+- Support tag:
+- Datum poslední revize:
+- Spouštěč další revize:
+
+Codyho komentář: Skvělá nápověda není ta, která má nejvíc článků. Je to ta, po které zákazník udělá správný krok, nic citlivého zbytečně nepošle a support tým nemusí podesáté vysvětlovat, kde bydlí faktury.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -9997,6 +10159,7 @@ Codyho komentář: Nejlepší systém oprávnění není ten nejkomplikovanějš
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha BG o samoobslužné nápovědě bez support labyrintu: situační struktura článků, akční návody, kontextová UI nápověda, převod support dotazů na obsah, privacy-first měření, údržba, eskalace, checklist a nápovědní karta.
 - **2026-09-14:** Doplněna příloha BF o rolích a oprávněních v SaaS: citlivé akce, základní role, vlastnictví workspace, bezpečné pozvánky, kontextová potvrzení, testování oprávnění, privacy-first přístup k týmovým datům, checklist a role karta.
 - **2026-09-14:** Doplněna příloha BE o forecastu a kapacitě bez věštění: tři fronty kapacity, scénáře, převod pipeline na práci, rezerva, agregované signály zatížení, rozhodovací hranice, rytmus review, checklist a kapacitní karta.
 - **2026-09-14:** Doplněna příloha BD o kvalitě dat bez datového jezera na steroidech: rozhodovací scénáře, zdroj pravdy, účel polí, validace u vzniku dat, agregované měření, audit oprav, týmové review, checklist a karta kvality dat.
