@@ -10890,6 +10890,171 @@ Metrika „počet nápadů v backlogu“ není úspěch. To je jen digitální s
 - **Termín review:** kdy se k tématu vrátíme.
 - **Uzavření smyčky:** komu dáme vědět a jak.
 
+## Příloha BM: Předávky práce bez ztráty kontextu a hrdinských archeologů
+
+Malý SaaS tým často funguje na důvěře, rychlosti a pár lidech, kteří „prostě vědí“. To je krásné až do chvíle, kdy někdo odjede na dovolenou, onemocní, mění roli nebo po půl roce nikdo netuší, proč se billing chová jako opatrný jezevec. Předávka práce není korporátní rituál s třiceti dokumenty. Je to pojistka proti ztrátě kontextu.
+
+Dobrá předávka má tři cíle: nový vlastník ví, co má hlídat, tým ví, kde je pravda, a zákazník nic nepozná. Pokud předávka vyžaduje dvouhodinové vyprávění u kafe bez záznamu, není to předávka. Je to ústní tradice. Fungovala u bájí, u produkčního incidentu už méně.
+
+### Rozliš předávku úkolu, oblasti a odpovědnosti
+
+Ne každá předávka je stejná. Když někdo předává malý bug, stačí kontext, reprodukce a odkaz na větev. Když někdo předává billing, support nebo infrastrukturu, jde o odpovědnost, rizika a opakující se provoz. Míchat tyto úrovně dohromady vede k dokumentům, které jsou buď moc dlouhé pro malý úkol, nebo nebezpečně krátké pro kritickou oblast.
+
+Praktické rozdělení:
+
+- **Předávka úkolu:** konkrétní práce s jasným koncem, například oprava formuláře, nový export nebo text na landing page.
+- **Předávka projektu:** iniciativa s více kroky, termíny, závislostmi a stakeholders.
+- **Předávka oblasti:** dlouhodobá část produktu nebo provozu, například onboarding, e-mailová doručitelnost, fakturace nebo monitoring.
+- **Předávka incidentu:** rozpracovaný problém, kde je důležitý čas, stav hypotéz a bezpečné další kroky.
+- **Předávka vztahu:** zákazník, partner nebo dodavatel, kde je potřeba zachovat tón, historii a dohody.
+
+Pro každou úroveň nastav jinou hloubku. Úkol může mít pět odrážek. Oblast potřebuje mapu vlastnictví, odkazy, pravidelné rytmy, rizika a přístupy. Incident potřebuje aktuální stav, co už bylo zkuseno, co se nesmí dělat a koho informovat.
+
+### Kontext piš pro člověka, který nebyl u vzniku
+
+Největší chyba předávek je věta „to je jasné“. Jasné komu? Autorovi, který to stavěl tři měsíce, nebo člověku, který to vidí v pátek v 16:40? Kontext musí vysvětlit nejen co existuje, ale proč to existuje.
+
+U každé významnější předávky zachyť:
+
+- **Cíl:** jaký výsledek má oblast nebo úkol doručit.
+- **Stav:** hotovo, rozpracováno, blokováno, čeká na rozhodnutí.
+- **Rozhodnutí:** co bylo zvoleno a proč, včetně odmítnutých variant.
+- **Rizika:** co se může pokazit a jak poznáme, že se to děje.
+- **Závislosti:** lidé, systémy, dodavatelé, termíny, smlouvy, data.
+- **Odkazy:** dokumentace, pull requesty, dashboardy, runbooky, support vlákna.
+- **Další krok:** co má nový vlastník udělat jako první.
+
+Dobrý test: dej předávku někomu mimo projekt a zeptej se, jestli umí položit tři chytré otázky. Pokud neví ani kde začít, chybí rámec. Pokud má jen kosmetické dotazy, dokumentace funguje.
+
+### Přístupy nepředávej přes chat a dobré úmysly
+
+Předávka často odhalí, že přístupy žijí vlastním životem. Někdo má admin práva, protože kdysi řešil CSV import. Někdo používá osobní token v automatizaci. Někdo je jediný vlastník externího účtu. To není flexibilita, to je budoucí detektivka.
+
+Privacy-first pravidla pro předávky:
+
+- **Neposílej hesla ani tokeny v chatu.** Použij správce hesel, secrets manager nebo řízenou rotaci.
+- **Předávej role, ne osobní zkratky.** Nový vlastník má dostat oprávnění podle odpovědnosti, ne kopii práv předchozího člověka.
+- **Zruš nepotřebné přístupy.** Předávka je ideální okamžik na úklid starých adminů, tokenů a výjimek.
+- **Zkontroluj servisní účty.** Automatizace nesmí stát na osobním účtu člověka, který odchází z role.
+- **Odděl produkci a test.** Přístup do produkce má mít zvláštní důvod, záznam a případně schvalování.
+- **Zapiš vlastníka.** Každý nástroj, integrace a klíč musí mít člověka nebo tým, který ví, proč existuje.
+
+Předávka bez úklidu přístupů je jako stěhování, při kterém si do nového bytu přineseš i cizí klíče. Možná se nic nestane. Ale není to plán, je to napětí.
+
+### Předávej zákaznický kontext bez zbytečných osobních údajů
+
+U zákazníků je cílem zachovat kontinuitu, ne vytvořit složku „všechno, co o nich víme“. Nový vlastník potřebuje znát domluvy, očekávání, rizika a otevřené body. Nepotřebuje kopii celého e-mailového života zákazníka.
+
+Bezpečný zákaznický handover obsahuje:
+
+- **Shrnutí vztahu:** kdo je zákazník, jaký problém řeší a jakou hodnotu od nás čeká.
+- **Kontakty podle rolí:** rozhodovatel, technický kontakt, účetní kontakt, bez nepotřebných soukromých poznámek.
+- **Aktuální stav:** používání, otevřené požadavky, rizika, poslední důležitá komunikace.
+- **Dohody:** ceny, výjimky, termíny, SLA, individuální ujednání, odkazy na smluvní zdroje.
+- **Tón komunikace:** co zákazník preferuje, jak často komunikovat, co už bylo slíbeno.
+- **Privacy hranice:** jaká data zákazníka smíme zpracovávat, kde jsou uložena a co nesmí ven.
+
+Nikdy do předávky nepiš zbytečné osobní soudy typu „Petr je chaotik“ nebo „účetní je protivná“. Piš chování a kontext: „účetní kontakt potřebuje faktury do pátého dne v měsíci a preferuje e-mail“. To je užitečné, slušné a méně připomíná školní sborovnu.
+
+### Kritické oblasti mají mít runbook, ne jen znalce
+
+Pokud oblast umí shodit provoz, zastavit fakturaci, rozbít onboarding nebo ohrozit data, nestačí předávací poznámka. Potřebuje runbook. Runbook není román. Je to návod pro unaveného člověka pod tlakem.
+
+Runbook pro kritickou oblast by měl obsahovat:
+
+- **Co oblast dělá:** stručné vysvětlení bez interního žargonu.
+- **Normální stav:** jak vypadá zdravý provoz, jaké metriky nebo signály sledovat.
+- **Varovné signály:** co znamená problém a jakou má prioritu.
+- **První kroky:** bezpečné ověření bez mazání dat a bez panického restartu všeho.
+- **Rollback nebo mitigace:** jak snížit dopad, když oprava není hned jasná.
+- **Eskalace:** koho kontaktovat, kdy a s jakými informacemi.
+- **Komunikace:** kdy informovat zákazníky, support, obchod nebo status page.
+- **Po incidentu:** co zapsat, co uklidit, co změnit v monitoringu.
+
+Runbook je dobrý, když podle něj člověk zvládne první půlhodinu problému bez hledání autora na dovolené. Neřeší všechno. Ale zabrání tomu, aby první reakce byla „kdo má heslo?“
+
+### Předávku validuj malým suchým během
+
+Nejlevnější kontrola předávky je simulace. Nečekej na reálný průšvih. Vezmi nový dokument, posaď k němu člověka, který oblast nezná, a nech ho projít první scénář. U SaaS to může být vytvoření testovacího zákazníka, obnova exportu, kontrola neodeslaných e-mailů nebo příprava měsíční fakturace.
+
+Sleduj hlavně:
+
+- kde člověk hledá chybějící odkaz,
+- kde neví, jestli má právo něco udělat,
+- kde dokument používá interní zkratku bez vysvětlení,
+- kde chybí rozhodovací pravidlo,
+- kde musí otevřít produkční data bez jasného důvodu,
+- kde by zákazník čekal na odpověď příliš dlouho.
+
+Po suchém běhu dokument hned oprav. Nezakládej ticket „vylepšit dokumentaci někdy“. To je digitální šuplík, kde umírají dobré úmysly.
+
+### Měř kvalitu předávek podle provozu, ne podle počtu stran
+
+Předávka není lepší, protože je delší. Je lepší, když po ní méně věcí padá mezi židle. Sleduj signály, které ukazují, jestli tým opravdu získal kontrolu.
+
+Užitečné metriky:
+
+- **Počet blokací po předávce:** kolikrát nový vlastník čekal na chybějící informaci.
+- **Čas do samostatného kroku:** jak rychle zvládl první bezpečnou akci bez autora.
+- **Počet chybějících přístupů:** kolik oprávnění se řešilo až po předávce.
+- **Počet starých přístupů:** kolik práv se při předávce odebralo nebo zúžilo.
+- **Otevřené závazky:** kolik slibů zákazníkům mělo jasného vlastníka a termín.
+- **Aktualizace runbooku:** zda se dokument po incidentu nebo změně opravdu upravil.
+
+Codyho komentář: Pokud předávka vytvoří tři nové schůzky, pět nejasností a jednu tabulku bez vlastníka, není to proces. Je to escape room pro dospělé.
+
+### Checklist: předávka bez ztráty kontextu
+
+- Víme, zda předáváme úkol, projekt, oblast, incident nebo zákaznický vztah.
+- Dokument popisuje cíl, stav, rozhodnutí, rizika, závislosti a další krok.
+- Odkazy vedou na aktuální zdroje, ne na pohřebiště starých dokumentů.
+- Přístupy jsou předány přes správný systém, ne přes chat nebo osobní poznámky.
+- Nepotřebná oprávnění, tokeny a výjimky jsou zrušené nebo naplánované k rotaci.
+- Zákaznický kontext obsahuje dohody a stav, ne zbytečné osobní komentáře.
+- Kritické oblasti mají runbook pro první bezpečné kroky.
+- Předávka prošla suchým během nebo aspoň kontrolou druhým člověkem.
+- Každý otevřený závazek má vlastníka a termín review.
+- Po předávce je jasné, kdo oblast vlastní a kdy se dokument znovu ověří.
+
+### Šablona handover karty
+
+## Handover karta: [oblast / projekt / zákazník]
+
+### Základ
+
+- **Typ předávky:** úkol, projekt, oblast, incident, zákaznický vztah.
+- **Původní vlastník:** kdo předává.
+- **Nový vlastník:** kdo přebírá.
+- **Datum účinnosti:** od kdy platí změna.
+
+### Kontext
+
+- **Cíl:** k čemu oblast nebo práce slouží.
+- **Aktuální stav:** hotovo, rozpracováno, blokováno, čeká na rozhodnutí.
+- **Důležitá rozhodnutí:** co bylo zvoleno a proč.
+- **Odmítnuté varianty:** co už nedává smysl znovu otevírat bez nových dat.
+
+### Provoz
+
+- **Pravidelné rytmy:** denní, týdenní, měsíční nebo kvartální kroky.
+- **Varovné signály:** co sledovat.
+- **Runbooky:** odkazy na postupy.
+- **Eskalace:** koho kontaktovat a kdy.
+
+### Přístupy a data
+
+- **Systémy:** nástroje, repozitáře, dashboardy, účty.
+- **Oprávnění:** co nový vlastník potřebuje a co se odebere původnímu.
+- **Citlivá data:** jaká data oblast zpracovává a jaká jsou omezení.
+- **Tokeny a automatizace:** kde běží servisní účty a kdo je vlastní.
+
+### Otevřené body
+
+- **Závazky:** slíbené kroky zákazníkům, partnerům nebo týmu.
+- **Rizika:** co může bolet v příštích týdnech.
+- **První krok:** co má nový vlastník udělat jako první.
+- **Review:** kdy ověříme, že předávka funguje.
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -10941,6 +11106,7 @@ Metrika „počet nápadů v backlogu“ není úspěch. To je jen digitální s
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha BM o předávkách práce bez ztráty kontextu: typy handoverů, kontext, přístupy, zákaznický kontext, runbooky, suchý běh, metriky, checklist a handover karta.
 - **2026-09-14:** Doplněna příloha BL o zákaznickém feedbacku bez výslechové místnosti: rozlišení signálu, názoru a požadavku, privacy-first sběr, syntéza témat, uzavírání smyčky a šablona feedback karty.
 - **2026-09-14:** Doplněna příloha BK o notifikacích a komunikačních preferencích bez SaaS megafonu: typy zpráv, preference, kanály, frekvence, šablony, doručitelnost, odhlášení, checklist a komunikační karta.
 - **2026-09-14:** Doplněna příloha BJ o chybách a omluvách v SaaS: rozlišení chyb a incidentů, první update, omluva podle dopadu, bezpečné sdílení detailů, kompenzace, postmortem, zákaznické hlášení, checklist a karta chyby.
