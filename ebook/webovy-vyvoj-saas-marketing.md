@@ -11055,6 +11055,172 @@ Codyho komentář: Pokud předávka vytvoří tři nové schůzky, pět nejasnos
 - **První krok:** co má nový vlastník udělat jako první.
 - **Review:** kdy ověříme, že předávka funguje.
 
+## Příloha BN: Staging a testovací prostředí bez produkčního nepořádku
+
+Staging má být bezpečné místo, kde tým ověří změnu dřív, než ji pustí k zákazníkům. V praxi se z něj ale často stane poloviční produkce: stará data, zapomenuté účty, slabší hesla, divné integrace a nikdo přesně neví, co tam běží. To je nebezpečná kombinace. Testovací prostředí nemá být skládka. Má být kontrolovaný simulátor reality.
+
+Dobré staging prostředí odpovídá na tři otázky: co se tu dá ověřit, jaká data se tu smí objevit a kdo za prostředí odpovídá. Bez těchto hranic se staging rychle změní v kouzelný les, kde každý deploy potká jiného skřítka.
+
+### Rozliš typy prostředí podle účelu
+
+Jedno univerzální „test“ prostředí většinou nestačí. Ne proto, že malý SaaS potřebuje armádu serverů, ale proto, že různé typy ověření mají jiné riziko. Lokální vývoj potřebuje rychlost. Preview prostředí potřebuje izolaci pro konkrétní změnu. Staging potřebuje věrnost produkčnímu chování. Demo prostředí potřebuje stabilní příběh pro zákazníka.
+
+Praktické členění:
+
+- **Lokální prostředí:** vývojář ověřuje konkrétní změnu, ideálně bez připojení na produkční služby.
+- **Preview prostředí:** dočasná instance pro pull request, interní review nebo zákaznickou ukázku rozpracované funkce.
+- **Staging:** stabilnější kopie produkční konfigurace pro integrační testy, migrace, release kandidáty a regresi.
+- **Demo sandbox:** řízené prostředí se syntetickými daty pro obchod, onboarding nebo dokumentaci.
+- **Recovery prostředí:** izolované místo pro test obnovy záloh, incidentový nácvik nebo ověření opravy dat.
+
+Každé prostředí má mít vlastní pravidla. Pokud preview umí posílat skutečné e-maily zákazníkům, není to preview, ale malý produkční minomet. Pokud staging používá starou kopii produkční databáze bez maskování, není to efektivita, ale čekající průšvih.
+
+### Produkční data do testu nepatří jako výchozí režim
+
+Nejrychlejší cesta ke „skoro realistickému“ testu je zkopírovat produkční databázi. Nejrychlejší cesta k bezpečnostnímu a právnímu bolení hlavy je udělat z toho rutinu. Privacy-first přístup začíná tím, že produkční osobní údaje nejsou běžný testovací materiál.
+
+Bezpečnější varianty:
+
+- **Syntetická data:** ručně nebo generátorem vytvořené firmy, uživatelé, faktury, objednávky a scénáře.
+- **Seed data:** malá sada opakovatelných datasetů pro vývoj a automatizované testy.
+- **Anonymizovaná data:** jen pokud opravdu potřebuješ tvar reálných dat a anonymizace je ověřená, ne jen přejmenování lidí na „Jan Novák“.
+- **Maskovaná kopie:** krajní varianta pro specifický problém, s časovým limitem, schválením a následným smazáním.
+- **Ruční reprodukce:** pro mnoho bugů stačí opsat strukturu problému, ne převážet celou zákaznickou realitu.
+
+Testovací data mají být nudná, ale užitečná. Potřebuješ zákazníka s nezaplacenou fakturou, uživatele bez oprávnění, účet po zkušební době, tým se třemi rolemi, ne reálnou historii komunikace konkrétní firmy.
+
+> Codyho komentář: „Jen na chvíli si zkopírujeme produkci“ je technologická verze „to podržím rukou, vypínač nepotřebujeme“. Občas to vyjde. Metodika to není.
+
+### Konfigurace musí být podobná produkci, data ne
+
+Staging má být věrný tam, kde testuješ chování systému: verze aplikace, migrace, fronty, background joby, permission model, e-mailové šablony, platební flow, storage, cache, limity a observabilita. Nemá být věrný v tom, že obsahuje zákaznická data.
+
+Dobrá staging konfigurace:
+
+- používá stejný build proces jako produkce,
+- běží na podobné infrastruktuře nebo aspoň na stejném runtime,
+- má oddělené databáze, storage buckety, fronty a API klíče,
+- posílá e-maily jen do bezpečného sinku nebo na allowlist,
+- platební brána je v test režimu a jasně označená,
+- integrace mají sandbox nebo mock, ne produkční webhooky,
+- logy a metriky jsou oddělené od produkce,
+- prostředí má vlastní doménu a výrazné vizuální označení.
+
+Vizuální označení nepodceňuj. Barevný pruh „STAGING“, jiná favicon a varování v administraci zabrání drahým omylům. Člověk, který po třech hodinách debugování kouká na dvě podobná okna, není robot. A i roboti mají občas špatný den, jen ho říkají „edge case“.
+
+### Přístupy nastav přísněji, ne volněji
+
+Testovací prostředí bývá paradoxně méně chráněné než produkce, protože „tam přece nic není“. Jenže často tam jsou preview funkce, testovací účty, API klíče, interní poznámky, konfigurace integrací a někdy i data, která tam být neměla. Proto staging potřebuje jasná pravidla přístupu.
+
+Minimum pro malý tým:
+
+- **SSO nebo centrální identita:** žádné sdílené účty typu `test@test.cz` pro interní administraci.
+- **Role podle potřeby:** obchod nemusí mít přístup k debug logům, vývoj nemusí vidět obchodní poznámky.
+- **Dočasné přístupy:** externí dodavatel dostane časově omezený vstup a po práci se odstraní.
+- **Oddělené secrets:** staging klíče nesmí odemykat produkční data.
+- **Audit citlivých akcí:** migrace, importy, exporty a změny oprávnění se zapisují i mimo produkci.
+- **Pravidelný úklid účtů:** jednou měsíčně projdi, kdo má přístup a proč.
+
+Pokud staging používáš pro zákaznické preview, nastav ještě tvrdší hranice. Zákazník má vidět jen svůj dočasný scénář, ne interní backlog, debug chyby nebo cizí testovací data.
+
+### Preview prostředí má zemřít včas
+
+Preview prostředí je skvělé, dokud existuje krátce. Když žije měsíce, nikdo neví, jakou verzi obsahuje, kdo do něj má přístup a jestli pořád něco nevolá. Každé dočasné prostředí proto potřebuje automatický konec.
+
+Pravidla pro preview:
+
+- vytvořit prostředí automaticky z větve nebo pull requestu,
+- naplnit ho pouze seed daty pro daný scénář,
+- vypnout produkční e-mail, platby a externí webhooky,
+- označit ho názvem změny, vlastníkem a datem expirace,
+- po sloučení nebo zavření práce prostředí automaticky smazat,
+- odstranit dočasné tokeny, storage a logy podle retenčního pravidla.
+
+Preview je jednorázový testovací stůl, ne další server do rodiny. Pokud na něm závisí obchodní demo, dokumentace nebo onboarding, má se proměnit v řízený demo sandbox se svým vlastníkem.
+
+### Migrace testuj jako samostatný produktový moment
+
+Databázová migrace není jen technický detail. Umí rozbít onboarding, billing, exporty, reporting i zákaznické workflow. Proto staging musí umět ověřit migrace na datech, která pokrývají reálné tvary, ale neprozrazují reálné lidi.
+
+Před produkční migrací zkontroluj:
+
+- **Kompatibilitu:** stará i nová verze aplikace ví, co se s daty děje během rollout okna.
+- **Objem:** seed data obsahují malé, střední i hraniční případy.
+- **Chyby:** migrace má bezpečné selhání, log a jasnou zprávu pro tým.
+- **Rollback:** víš, co jde vrátit automaticky a co vyžaduje ruční opravu.
+- **Exporty:** změna nepoškodí CSV, API, webhooky ani zákaznické reporty.
+- **Retenci:** dočasné migrační tabulky a logy se smažou podle plánu.
+
+U citlivých změn si napiš mini runbook: kdy migrace běží, kdo sleduje výsledek, jaký signál znamená stop, komu se píše a kde je návratová cesta. Runbook na půl stránky je levnější než improvizace v produkci.
+
+### Testovací e-maily a notifikace drž v kleci
+
+Notifikace jsou častý zdroj trapných úniků. Stačí, aby staging poslal „vaše faktura je po splatnosti“ na reálný kontakt z kopie databáze, a tým má o zábavu postaráno. Proto musí mít všechny neprodukční notifikace bezpečný režim.
+
+Dobrá pravidla:
+
+- všechny e-maily jdou do mail sinku nebo na interní allowlist,
+- SMS a push notifikace jsou vypnuté, pokud se výslovně netestují,
+- odchozí webhooky míří do mock endpointu,
+- předmět e-mailu obsahuje označení prostředí,
+- šablony používají syntetické kontakty,
+- testovací domény mají vlastní DNS a oddělenou reputaci,
+- nikdo neručí za doručení staging e-mailů jako za produkční kanál.
+
+Stejné pravidlo platí pro automatizace. Cron, který v produkci posílá upomínky, může ve stagingu generovat tiché testovací události. Nemá bez kontroly komunikovat s lidmi mimo tým.
+
+### Checklist: staging a testovací prostředí privacy-first
+
+- Každé prostředí má účel, vlastníka a pravidlo expirace.
+- Produkční osobní údaje nejsou výchozí testovací dataset.
+- Seed data pokrývají hlavní scénáře, role, limity a chybové stavy.
+- E-maily, platby, SMS, push a webhooky jsou v neprodukci bezpečně oddělené.
+- Secrets, databáze, storage a fronty jsou oddělené od produkce.
+- Staging má jasné vizuální označení a oddělené logy.
+- Přístupy se kontrolují pravidelně a dočasné účty expirují.
+- Preview prostředí se mažou po uzavření práce.
+- Migrace mají testovací dataset, runbook a rollback plán.
+- Dočasná data, logy a exporty mají retenční pravidlo.
+
+### Šablona karty prostředí
+
+## Karta prostředí: [název / účel]
+
+### Účel
+
+- **Typ prostředí:** lokální, preview, staging, demo, recovery.
+- **Hlavní scénáře:** co se tu ověřuje.
+- **Vlastník:** kdo odpovídá za provoz a úklid.
+- **Expirace:** kdy se prostředí smaže nebo reviduje.
+
+### Data
+
+- **Dataset:** syntetická data, seed, anonymizovaná sada, ruční reprodukce.
+- **Zakázaná data:** co se sem nesmí dostat.
+- **Retence:** kdy se mažou databáze, exporty, soubory a logy.
+- **Obnova:** jak prostředí resetovat do čistého stavu.
+
+### Integrace
+
+- **E-mail:** sink, allowlist nebo vypnuto.
+- **Platby:** test režim nebo mock.
+- **Webhooky:** sandbox endpointy.
+- **Externí API:** oddělené klíče a limity.
+
+### Přístupy
+
+- **Role:** kdo smí prostředí používat.
+- **Citlivé akce:** migrace, exporty, změny oprávnění.
+- **Dočasní uživatelé:** datum odstranění.
+- **Audit:** kde je záznam akcí.
+
+### Release kontrola
+
+- **Poslední reset:** datum a výsledek.
+- **Migrace:** ověřené scénáře a rollback.
+- **Známé rozdíly proti produkci:** co může zkreslit test.
+- **Go/no-go:** kdo rozhoduje o posunu dál.
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -11106,6 +11272,7 @@ Codyho komentář: Pokud předávka vytvoří tři nové schůzky, pět nejasnos
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha BN o stagingu a testovacích prostředích bez produkčního nepořádku: typy prostředí, bezpečná testovací data, konfigurace, přístupy, preview expirace, migrace, notifikace, checklist a karta prostředí.
 - **2026-09-14:** Doplněna příloha BM o předávkách práce bez ztráty kontextu: typy handoverů, kontext, přístupy, zákaznický kontext, runbooky, suchý běh, metriky, checklist a handover karta.
 - **2026-09-14:** Doplněna příloha BL o zákaznickém feedbacku bez výslechové místnosti: rozlišení signálu, názoru a požadavku, privacy-first sběr, syntéza témat, uzavírání smyčky a šablona feedback karty.
 - **2026-09-14:** Doplněna příloha BK o notifikacích a komunikačních preferencích bez SaaS megafonu: typy zpráv, preference, kanály, frekvence, šablony, doručitelnost, odhlášení, checklist a komunikační karta.
