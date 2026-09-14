@@ -8570,6 +8570,159 @@ Vypnutí staré automatizace je produktivní práce. Není to prohra. Je to úkl
 
 ---
 
+## Příloha AX: Servisní účty, tokeny a tajemství bez chaosu v šuplíku
+
+Malý SaaS často nezačne bezpečnostním incidentem. Začne nevinně: jeden API klíč v `.env`, druhý v CI, třetí v poznámce, čtvrtý v integraci, kterou kdysi někdo testoval, a pátý v účtu člověka, který už ve firmě nepracuje. Všechno funguje, dokud se něco nerozbije nebo neuteče. Pak tým zjistí, že neví, který klíč co umí, kde je použitý a jestli ho může bez bolesti vypnout.
+
+Privacy-first provoz není jen o cookies a analytice. Je i o tom, že interní stroje, skripty, integrace a automatizace mají stejně jasná pravidla jako lidé. Servisní účet není bezejmenný duch v systému. Je to technická identita s účelem, oprávněním, vlastníkem a datovou stopou.
+
+### Rozlišuj lidi, služby a nouzový přístup
+
+Nejdřív si udělej pořádek v typech identit. Lidský účet patří konkrétnímu člověku. Servisní účet patří konkrétnímu systému nebo workflow. Nouzový účet existuje pro výjimečnou situaci, ne pro pohodlné obcházení pravidel.
+
+Praktické rozdělení:
+
+- **Lidský účet:** používá ho jeden člověk, má osobní přihlášení, MFA a roli podle práce.
+- **Servisní účet:** používá ho aplikace, skript, CI/CD pipeline nebo integrace.
+- **API token:** konkrétní přístupový klíč s omezeným rozsahem a expirací, pokud to nástroj dovoluje.
+- **Nouzový účet:** silně chráněný přístup pro incident, uložený mimo běžný denní provoz.
+- **Sdílený účet:** dočasná výjimka, kterou máš aktivně odstranit, ne provozní standard.
+
+Sdílené účty jsou lákavé, protože šetří nastavování. Jenže zároveň mažou odpovědnost. Když se něco stane, nevíš, kdo provedl změnu, proč ji provedl a jestli šlo o člověka, skript nebo kompromitovaný klíč. Pokud nástroj neumí rozumně oddělit uživatele, zapiš to jako vendor risk, ne jako „to je v pohodě“.
+
+### Každý token musí mít pas
+
+API token bez evidence je jako klíč od kanceláře položený pod rohožkou. Možná tam leží roky a nikomu nevadí. To není bezpečnost, to je optimismus v kostýmu procesu.
+
+U každého tokenu eviduj:
+
+- název a systém,
+- vlastníka,
+- účel,
+- rozsah oprávnění,
+- prostředí, kde se používá,
+- datum vytvoření,
+- plán rotace nebo expirace,
+- postup vypnutí,
+- dopad při zneužití,
+- odkaz na místo, kde je bezpečně uložený.
+
+Nepotřebuješ k tomu hned velký enterprise nástroj. Pro začátek stačí jednoduchá tabulka nebo stránka ve wiki, pokud v ní nejsou samotné hodnoty tajemství. Evidence říká, že token existuje a k čemu je. Tajemství samotné patří do bezpečného úložiště, ne do Markdownu, chatu nebo screenshotu.
+
+### Oprávnění nastav podle scénáře, ne podle pohodlí
+
+Nejčastější chyba u servisních účtů je role „admin, protože to pak funguje“. Funguje to podobně jako otevřené okno v zimě: technicky ano, ale účet za topení a bezpečnostní následky přijdou později.
+
+Před vydáním přístupu si polož tři otázky:
+
+- Co přesně má workflow číst?
+- Co přesně má zapisovat?
+- Co se nesmí stát ani při chybě nebo kompromitaci?
+
+Pokud automatizace jen čte stav objednávek pro interní report, nepotřebuje mazat zákazníky. Pokud CI nasazuje aplikaci, nemusí mít přístup k produkční databázi. Pokud e-mailová integrace posílá transakční zprávy, nepotřebuje číst celý support inbox.
+
+Kde to jde, používej oddělené tokeny pro různé účely. Jeden token pro build, druhý pro deploy, třetí pro monitoring. Když pak řešíš incident nebo rotaci, nemusíš vypnout polovinu firmy jen proto, že jeden univerzální klíč měl všechna práva jako král v pohádce.
+
+### Tajemství nikdy nepatří do kódu
+
+Tajemství v repozitáři je problém i tehdy, když je repozitář soukromý. Soukromý repozitář není trezor. Má historii, forky, lokální kopie, CI logy, zálohy a lidi s různými přístupy. Jakmile se tajemství jednou dostane do Gitu, neřešíš jen smazání řádku. Řešíš rotaci a dohledání všech míst, kam se mohlo propsat.
+
+Praktická pravidla:
+
+- `.env` soubory drž mimo Git a verzuj jen bezpečný `.env.example`,
+- v CI používej secrets mechanismus dané platformy,
+- nikdy nevypisuj tokeny do logů,
+- při chybě neukazuj celé konfigurační objekty,
+- v testech používej falešné hodnoty,
+- pravidelně kontroluj repozitář nástrojem na hledání secrets,
+- při úniku token okamžitě rotuj, ne jen „odstraň z commitu“.
+
+U privacy-first SaaS má únik tajemství dvojí dopad: technické riziko a ztrátu důvěry. Zákazník nemusí řešit, jestli token unikl přes špatný commit, CI log nebo externí integraci. Vidí jen to, že provozní disciplína selhala.
+
+### Rotace má být nudná rutina
+
+Rotace klíčů je nepříjemná hlavně tehdy, když ji děláš poprvé uprostřed incidentu. Cílem není dramatický bezpečnostní rituál jednou za rok. Cílem je nudný postup, který umí tým provést bez paniky.
+
+U důležitých tajemství si napiš rotační scénář:
+
+- kde se vytvoří nový token,
+- kam se bezpečně uloží,
+- které služby ho používají,
+- jak se nasadí bez výpadku,
+- jak ověříš funkčnost,
+- kdy vypneš starý token,
+- kdo změnu schvaluje,
+- kde se zapíše výsledek.
+
+Ne každý token musí mít stejný interval. Kritický produkční přístup potřebuje přísnější režim než lokální testovací integrace bez citlivých dat. Důležitější než magické číslo je schopnost token rychle najít, vyměnit a vypnout.
+
+### Přístupy do produkce odděl od každodenní práce
+
+Produkční přístup má být výjimka řízená procesem, ne běžný pracovní nástroj. Vývojář nepotřebuje trvalý přístup ke všem produkčním datům jen proto, že občas ladí bug. Support nepotřebuje administrátorský účet jen proto, že zákazník někdy udělá chybu v nastavení.
+
+Lepší vzor:
+
+- běžná práce probíhá přes omezené role,
+- citlivé akce mají dočasné zvýšení oprávnění,
+- produkční zásahy se logují,
+- přístup k osobním datům je účelový,
+- exporty mají schválení a expiraci,
+- nouzové přístupy se po použití revidují.
+
+Tohle není nedůvěra k týmu. Je to ochrana týmu. Když jsou oprávnění omezená, jedna chyba nebo kompromitovaný notebook nezpůsobí katastrofu velikosti „všichni si sedněte, máme postmortem“.
+
+### Checklist: servisní účty a secrets privacy-first
+
+- Má každý servisní účet jasného vlastníka a účel?
+- Je u každého tokenu evidovaný rozsah, prostředí a postup vypnutí?
+- Mají tokeny nejmenší praktické oprávnění?
+- Jsou tajemství mimo Git, chaty, dokumenty a screenshoty?
+- Existuje bezpečné úložiště pro produkční secrets?
+- Umí tým najít a rotovat kritické tokeny do jedné hodiny?
+- Jsou CI/CD secrets oddělené podle prostředí?
+- Nevypisují se tajemství do logů, chybových hlášek nebo build výstupů?
+- Existuje postup pro únik tokenu?
+- Probíhá pravidelné review starých servisních účtů a nepoužívaných klíčů?
+
+### Šablona token karty
+
+```markdown
+## Token karta: [systém / účel]
+
+### Vlastnictví
+- Business vlastník:
+- Technický správce:
+- Datum vytvoření:
+- Datum poslední revize:
+
+### Účel
+- K čemu token slouží:
+- Který proces nebo služba ho používá:
+- Prostředí: [dev / staging / production]
+
+### Oprávnění
+- Co smí číst:
+- Co smí zapisovat:
+- Co výslovně nesmí:
+- Proč nestačí nižší oprávnění:
+
+### Uložení a nasazení
+- Kde je bezpečně uložený:
+- Kde se používá:
+- Jak se nasazuje změna:
+- Jak se ověřuje funkčnost:
+
+### Rotace a incident
+- Plán rotace:
+- Postup vypnutí:
+- Dopad při zneužití:
+- Koho informovat při úniku:
+```
+
+Codyho komentář: Secrets management je přesně ten typ práce, která není vidět, když je udělaná dobře. Což je nespravedlivé, ale pořád lepší než být vidět na incident callu v pátek večer.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -8588,6 +8741,9 @@ Vypnutí staré automatizace je produktivní práce. Není to prohra. Je to úkl
 - NIST: [The NIST Cybersecurity Framework 2.0](https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf)
 - NIST: [Guide for Cybersecurity Event Recovery](https://www.nist.gov/publications/guide-cybersecurity-event-recovery)
 - OWASP: [Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+- OWASP: [Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
+- OWASP: [Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
+- NIST: [Special Publication 800-63 Digital Identity Guidelines](https://www.nist.gov/identity-access-management/projects/nist-special-publication-800-63-digital-identity-guidelines)
 - ENISA: [Incident Response Plan](https://tools.enisa.europa.eu/topics/risk-management/current-risk/bcm-resilience/bc-plan/incident-response-plan)
 - Atlassian: [Postmortems: Enhance Incident Management Processes](https://www.atlassian.com/incident-management/handbook/postmortems)
 - Evropská komise: [European Accessibility Act](https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/union-equality-strategy-rights-persons-disabilities-2021-2030/european-accessibility-act_en)
@@ -8613,6 +8769,7 @@ Vypnutí staré automatizace je produktivní práce. Není to prohra. Je to úkl
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha AX o servisních účtech, tokenech a secrets: rozlišení identit, evidence tokenů, nejmenší oprávnění, ukládání mimo kód, rotace, produkční přístupy, checklist a token karta.
 - **2026-09-14:** Doplněna příloha AW o interních automatizacích bez černých skříněk: výběr vhodných procesů, vlastnictví, minimalizace dat, lidské schvalování, bezpečné logování, selhání, pravidelné review, checklist a automatizační karta.
 - **2026-09-14:** Doplněna příloha AV o lokalizaci SaaS bez překládacího chaosu: výběr trhu, lokalizace zákaznické cesty, terminologie, pricing, support, technická pravidla, privacy-first kontrola, checklist a lokalizační karta.
 - **2026-09-14:** Doplněna příloha AU o customer success signálech bez šmírování: definice úspěchu, health score, segmentace podle kontextu, pomocná komunikace, ruční poznámky, playbooky, minimalizace dat, checklist a customer success karta.
