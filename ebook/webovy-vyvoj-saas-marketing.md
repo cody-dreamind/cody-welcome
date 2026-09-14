@@ -7862,6 +7862,177 @@ Codyho komentář: Dobrá ochrana proti zneužití není ostnatý drát kolem pr
 
 ---
 
+## Příloha AT: B2B datová místnost bez zbytečného svlékání firmy do naha
+
+Když prodáváš SaaS firmám, dřív nebo později přijde fáze „pošlete nám bezpečnostní dokumentaci“. U menších zákazníků to může být jeden e-mail s pár otázkami. U větších organizací to bývá bezpečnostní dotazník, DPA, seznam subprocesorů, popis incidentů, architektura, pojištění, uptime, retenční politika, export dat a někdy i dotaz, jestli váš server náhodou neběží pod stolem vedle kávovaru.
+
+Datová místnost není jen pro investory. Pro B2B SaaS je to prodejní zkratka: připravené místo, kde zákazník nebo jeho security tým najde důkazy, které potřebuje k rozhodnutí. Privacy-first verze ale neznamená „nahrajeme všechno, co máme“. Znamená: sdílíme dost informací pro důvěru, ale ne víc, než je nutné.
+
+### Datová místnost má zrychlit důvěru, ne nahrazovat důvěru
+
+Dobrá datová místnost odpovídá na opakující se otázky dřív, než zablokují obchod. Typicky obsahuje:
+
+- bezpečnostní a privacy profil produktu,
+- aktuální seznam subprocesorů,
+- stručný popis architektury a hostingu,
+- DPA nebo vzor zpracovatelské smlouvy,
+- přehled retenčních pravidel,
+- export a offboarding postup,
+- incident response proces,
+- dostupnost, zálohování a obnovu,
+- kontakty pro bezpečnostní a právní dotazy.
+
+Nejde o to zahlcovat zákazníka třiceti PDF. Cílem je dát mu jistotu, že firma ví, co dělá. Pokud dokumentace působí jako archeologický nález z roku, kdy se ještě všichni zdravili na Clubhousu, důvěru nezvedne.
+
+Praktické pravidlo: co se ptali tři různí zákazníci, patří do datové místnosti. Co se ptal jeden člověk v panice těsně před dovolenou, může zatím zůstat jako interní poznámka.
+
+### Rozděl informace podle citlivosti
+
+Ne každá informace má být veřejná. Privacy-first provoz chrání i vlastní bezpečnostní detaily. Datovou místnost rozděl do vrstev:
+
+- **Veřejná vrstva:** základní privacy stránka, subprocesoři, obecný popis hostingu, kontakty, status page, principy zpracování dat.
+- **Sdílená po domluvě:** DPA, detailnější bezpečnostní profil, odpovědi na standardní dotazník, popis záloh a obnovy.
+- **Pouze pod NDA nebo ve vyšší fázi obchodu:** detailnější architektura, penetrační testy, interní politiky, incidentové retrospektivy, auditní zprávy.
+- **Nikdy nesdílet bez zvláštního důvodu:** tajné klíče, konkrétní interní IP adresy, plné logy, osobní data zaměstnanců, bezpečnostní postupy umožňující útok.
+
+Tohle rozdělení ušetří tým od dvou extrémů: buď neposlat nic a působit netransparentně, nebo poslat všechno a dobrovolně rozdávat mapu k trezoru. Transparentnost není exhibicionismus. Je to řízené sdílení důkazů.
+
+### Dokumenty piš pro člověka, ne pro šanon
+
+Security tým zákazníka potřebuje přesnost. Obchodní rozhodovatel potřebuje pochopit riziko. Právník potřebuje oporu ve smlouvě. Jeden dokument nemusí uspokojit všechny, ale měl by být čitelný.
+
+Dobrá struktura bezpečnostního profilu:
+
+1. **Co produkt dělá a jaká data typicky zpracovává.**
+2. **Kde data běží a kdo jsou klíčoví subprocesoři.**
+3. **Jak fungují přístupy, role a interní kontrola.**
+4. **Jak chráníš data technicky: šifrování, zálohy, monitoring, incidenty.**
+5. **Jak zákazník získá export, smaže data nebo ukončí službu.**
+6. **Kde jsou limity: co produkt nedělá, jaká odpovědnost zůstává zákazníkovi.**
+
+Nepoužívej fráze typu „využíváme nejmodernější bezpečnostní standardy“, pokud za nimi není konkrétní důkaz. Lepší je napsat: „Produkční přístupy mají samostatné účty, MFA a čtvrtletní review; sdílené účty nejsou povolené.“ To je méně marketingové, ale mnohem důvěryhodnější.
+
+Codyho komentář: Bezpečnostní dokumentace má znít jako dospělý člověk, který ví, kde má hasicí přístroj. Ne jako billboard na kybernetickou posilovnu.
+
+### Subprocesory udržuj jako živý seznam
+
+Seznam subprocesorů je častý zdroj trapných momentů. Firma používá pět nástrojů, v dokumentaci má dva a jeden z nich už rok neexistuje. U privacy-first SaaS je seznam subprocesorů provozní artefakt, ne příloha schovaná v patičce.
+
+U každého subprocesora eviduj:
+
+- název služby,
+- účel zpracování,
+- typ dat,
+- region nebo země zpracování,
+- právní základ vztahu a odkaz na DPA,
+- vlastník interně,
+- datum posledního review,
+- dopad při výpadku nebo ukončení.
+
+Zákazník nemusí znát každou technickou drobnost. Potřebuje ale vědět, jestli jeho data putují přes další služby a proč. Pokud neumíš účel vysvětlit jednou větou, integrace možná nemá v produktu co dělat.
+
+### Neslibuj certifikace, které nemáš
+
+V B2B prodeji je lákavé odpovídat „ano“ na všechno. ISO? „Pracujeme na tom.“ SOC 2? „V plánu.“ Penetrační test? „Interně průběžně.“ Tohle krátkodobě uklidní tabulku, ale dlouhodobě podkope důvěru.
+
+Lepší odpověď je přesná:
+
+- „Formální certifikaci zatím nemáme; nahrazujeme ji těmito konkrétními kontrolami.“
+- „Externí penetrační test plánujeme až po stabilizaci modulů X a Y; zatím provádíme code review, dependency monitoring a interní bezpečnostní checklist.“
+- „Tento typ dat nezpracováváme, proto daná kontrola není relevantní.“
+- „Na požadavek se můžeme podívat v rámci enterprise spolupráce, ale není součástí standardního tarifu.“
+
+Upřímnost nezabije obchod tak často jako mlžení. Většina rozumných zákazníků snese, že malý SaaS není banka. Hůř snese, když z dokumentace cítí, že někdo vyplnil dotazník metodou „Ctrl+C, Ctrl+v, modlitba“.
+
+### Přístup do datové místnosti musí být řízený
+
+Pokud datová místnost obsahuje citlivější dokumenty, dej jí základní pravidla:
+
+- kdo schvaluje přístup,
+- pro jakou firmu a obchodní příležitost se přístup uděluje,
+- jak dlouho platí,
+- co se smí stáhnout a co jen zobrazit,
+- kdo dostane upozornění při sdílení dál,
+- jak se přístup ukončuje po prohře nebo konci jednání.
+
+Nemusíš kvůli tomu pořizovat těžký enterprise nástroj. Pro malý tým může stačit privátní složka, expirační odkazy, ruční evidence v CRM a jasný checklist. Důležité je, aby dokumenty neplavaly po e-mailech bez kontroly a bez kontextu.
+
+Privacy-first detail: do datové místnosti nedávej zákaznické osobní údaje jako důkaz „reálného provozu“. Pokud potřebuješ ukázky, použij anonymizované nebo syntetické příklady.
+
+### Propoj datovou místnost s obchodním procesem
+
+Datová místnost má fungovat v rytmu prodeje. Ne až ve chvíli, kdy zákazník po třech týdnech nadšení řekne: „Ještě nám to musí schválit IT.“
+
+Praktický postup:
+
+1. **Po kvalifikaci leadu** pošli veřejný security a privacy přehled.
+2. **Před pilotem** připrav DPA, seznam subprocesorů a popis dat v pilotu.
+3. **Před nákupem** zpřístupni detailnější dokumenty pro security review.
+4. **Po podpisu** předej onboarding balíček: kontakty, incident kanál, export, support, změnové notifikace.
+5. **Při změně subprocesora nebo zásadní architektury** informuj zákazníky předem podle smlouvy a dopadu.
+
+Tím se z bezpečnostní dokumentace stane součást zákaznické zkušenosti, ne brzdný kámen na konci pipeline.
+
+### Checklist: B2B datová místnost privacy-first
+
+- Máš jeden aktuální bezpečnostní a privacy profil produktu.
+- Seznam subprocesorů obsahuje účel, typ dat, region, DPA a datum review.
+- Dokumenty jsou rozdělené na veřejné, sdílené po domluvě, NDA a interní.
+- Citlivé dokumenty mají vlastníka, expiraci přístupu a evidenci sdílení.
+- DPA, retence, export a offboarding jsou snadno dohledatelné.
+- Odpovědi na security dotazníky vycházejí z důkazů, ne z přání obchodníka.
+- Dokumentace uvádí i limity produktu a odpovědnosti zákazníka.
+- Ukázky neobsahují osobní data reálných zákazníků.
+- Datová místnost je napojená na obchodní fáze a pilotní proces.
+- Jednou za kvartál proběhne review dokumentů a odkazů.
+
+### Šablona datové místnosti
+
+```md
+## Datová místnost: [produkt / segment]
+
+### Vlastnictví
+- Interní vlastník:
+- Obchodní vlastník:
+- Datum posledního review:
+- Datum dalšího review:
+
+### Veřejné odkazy
+- Privacy stránka:
+- Subprocesoři:
+- Status page:
+- Kontakt pro security:
+
+### Sdílené dokumenty
+- Bezpečnostní profil:
+- DPA:
+- Retenční politika:
+- Export a offboarding:
+- Incident response přehled:
+
+### Citlivější dokumenty
+- Dokument:
+- Podmínka sdílení: [NDA / enterprise fáze / ruční schválení]
+- Kdo schvaluje:
+- Expirace přístupu:
+
+### Privacy-first kontrola
+- Obsahují dokumenty osobní data? [ano/ne]
+- Jsou ukázky anonymizované nebo syntetické?
+- Jsou odkazy aktuální?
+- Víme, kdo měl přístup?
+
+### Obchodní použití
+- Kdy posíláme veřejný přehled:
+- Kdy otevíráme detailní dokumenty:
+- Jaký je follow-up po security review:
+- Co se aktualizuje po změně subprocesora:
+```
+
+Codyho komentář: Datová místnost je jako dobře připravená technická prohlídka auta. Nemusíš zákazníkovi ukazovat každý šroubek, ale když se zeptá na brzdy, nemáš vytahovat ubrousek s nápisem „věř nám, kámo“.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -7905,6 +8076,7 @@ Codyho komentář: Dobrá ochrana proti zneužití není ostnatý drát kolem pr
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha AT o B2B datové místnosti pro privacy-first SaaS: vrstvy sdílení, bezpečnostní profil, subprocesory, certifikace bez mlžení, řízení přístupů, napojení na obchodní proces, checklist a šablona datové místnosti.
 - **2026-09-13:** Doplněna příloha AS o ochraně proti zneužití bez trestání dobrých uživatelů: mapování abuse scénářů, kontextové rate limity, měkké brzdy, CAPTCHA jako poslední vrstva, ochrana e-mailů, kontrolované výjimky, metriky a šablona abuse karty.
 - **2026-09-13:** Doplněna příloha AR o auditních logách bez šmírovacího panoptika: výběr auditních událostí, čitelné záznamy, oddělení od debug logů, minimalizace citlivých dat, zákaznický pohled, retence, checklist a auditní karta.
 - **2026-09-13:** Doplněna příloha AQ o stagingu a testovacích prostředích bez úniku dat: rozdělení prostředí, syntetická data, anonymizace, bezpečné integrace, přístupy, seed scénáře, automatický úklid, checklist a staging karta.
