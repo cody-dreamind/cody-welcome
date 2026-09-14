@@ -9059,6 +9059,158 @@ Codyho komentář: DNS je místo, kde se zkratky tváří jako kouzla. Ve skute�
 
 ---
 
+## Příloha BA: Produktová rozhodnutí bez hlasitého šéfa a hladové analytiky
+
+Malý SaaS tým nepotřebuje poradní výbor, tři dashboardy a nekonečné meetingy, aby udělal dobré produktové rozhodnutí. Potřebuje jasně říct, co se rozhoduje, kdo nese odpovědnost, jaké signály stačí a kdy se rozhodnutí znovu otevře. Jinak se z roadmapy stane karaoke: každý zpívá svůj refrén, nikdo neví tóninu a zákazník mezitím tiše odejde.
+
+Rozhodování v privacy-first produktu má ještě jednu důležitou hranici: nesmíš sbírat detailní data o lidech jen proto, aby ses cítil chytřeji. Většina rozhodnutí se dá udělat z kombinace zákaznických rozhovorů, agregovaných metrik, support signálů, obchodních informací a technické reality. Není nutné vědět, kam přesně jeden konkrétní uživatel klikl v 10:43:12.
+
+### Ne každé rozhodnutí potřebuje stejnou váhu
+
+První chyba je řídit všechno stejně. Změna textu na landing page, nový tarif, export zákaznických dat a migrace databáze nejsou stejný druh rozhodnutí. Když se ke všemu chováš jako k jadernému launchi, tým se zasekne. Když se ke všemu chováš jako k drobné úpravě, jednou se probudíš ve výrobním požáru s fakturací v kapse.
+
+Rozděl rozhodnutí do tří úrovní:
+
+- **Lehké:** reverzibilní změny s malým dopadem, například mikrocopy, pořadí sekcí, interní automatizace bez zákaznických dat.
+- **Střední:** změny, které ovlivní aktivaci, billing, support nebo důvěru, například nový onboarding krok, úprava trialu nebo změna důležitého e-mailu.
+- **Těžké:** změny s bezpečnostním, právním, datovým nebo reputačním dopadem, například nový subprocesor, změna datového modelu, rušení funkce nebo zásah do exportu dat.
+
+Lehké rozhodnutí může vyřešit vlastník oblasti během dne. Střední rozhodnutí si zaslouží krátkou kartu a kontrolu rizik. Těžké rozhodnutí potřebuje explicitní schválení, rollback plán a zápis do dokumentace. Tím se nezpomaluješ. Jen přestáváš používat kladivo na šroubky a párátko na beton.
+
+### Začni otázkou, ne preferencí
+
+Špatná produktová debata začíná větou: „Já bych tam dal…“ Dobrá začíná otázkou: „Jaké rozhodnutí se snažíme udělat?“ Bez toho se tým hádá o řešení, zatímco problém zůstává rozmazaný.
+
+Před každým větším rozhodnutím napiš jednu rozhodovací otázku:
+
+- Máme přidat samoobslužný trial, nebo dál kvalifikovat každý lead ručně?
+- Máme upřednostnit export dat, nebo integraci s účetním systémem?
+- Máme zjednodušit onboarding pro malé týmy, nebo přidat administraci pro větší zákazníky?
+- Máme zachovat vlastní analytiku, nebo napojit externí nástroj?
+
+Dobrá otázka obsahuje alternativy a obchodní dopad. Špatná otázka je jen maskovaná preference: „Kdy konečně doděláme AI dashboard?“ Možná nikdy. A možná až ve chvíli, kdy bude řešit skutečný problém, ne jen leštit pitch deck.
+
+### Signály vybírej podle rozhodnutí
+
+Datově informované rozhodnutí neznamená datově přeplněné rozhodnutí. Pro jednu otázku často stačí tři až pět signálů. Důležité je, aby signály odpovídaly rozhodnutí, ne aby vypadaly dobře v prezentaci.
+
+Příklad: řešíš, jestli zjednodušit onboarding. Užitečné signály mohou být:
+
+- kolik nových účtů dokončí první klíčový krok,
+- kde lidé nejčastěji žádají o pomoc,
+- co říkají první zákazníci v rozhovorech,
+- kolik času zabere ruční aktivace v supportu,
+- jestli se problém liší podle segmentu zákazníků.
+
+Naopak nepotřebuješ plný záznam každé session, detailní profil každého návštěvníka ani dvacet eventů na jeden formulář. Privacy-first přístup říká: měř rozhodovací signál v nejmenší použitelné granularitě. Pokud stačí agregace po dnech a segmentech, nesbírej osobní stopu.
+
+### Odděl názor, fakt a riziko
+
+Produktové diskuze se často zamotají, protože lidé mluví různými typy tvrzení, ale tváří se, že všechno je fakt. Pomůže jednoduché značení:
+
+- **Fakt:** ověřený údaj, například počet support tiketů, počet pilotů, chybovost importu nebo konkrétní zákaznický citát.
+- **Interpretace:** co si z faktů myslíme, například „onboarding je příliš dlouhý pro malé týmy“.
+- **Sázka:** rozhodnutí s nejistotou, například „zkrácení onboardingu zvýší aktivaci bez zhoršení kvality leadů“.
+- **Riziko:** co se může pokazit, například „zjednodušení pozvánek může zvýšit počet chybně nastavených rolí“.
+
+Tento slovník snižuje ego v místnosti. Když je něco interpretace, může být dobrá i špatná. Když je něco sázka, má mít měření. Když je něco riziko, má mít mitigaci. A když je něco jen hlasitý názor, nemusí automaticky vyhrát jen proto, že má největší hlasivky.
+
+### Rozhodnutí zapisuj krátce
+
+Dokumentace rozhodnutí nemusí být román. Stačí, aby za tři měsíce bylo jasné, proč jste něco udělali, co jste věděli a kdy se k tomu vrátit. To je důležité hlavně u cen, práv, dat, integrací a produktových kompromisů.
+
+Krátký zápis rozhodnutí by měl obsahovat:
+
+- rozhodovací otázku,
+- vybrané řešení,
+- odmítnuté alternativy,
+- hlavní signály,
+- rizika a ochranné kroky,
+- vlastníka,
+- datum review.
+
+U lehkých změn stačí poznámka v issue nebo pull requestu. U těžších rozhodnutí použij samostatnou kartu. Ne proto, aby vznikla byrokracie, ale aby tým nemusel stejnou debatu otevírat při každém novém člověku, incidentu nebo zákaznické námitce.
+
+### Nastav datum návratu
+
+Spousta špatných rozhodnutí přežije jen proto, že nikdy nedostala datum kontroly. Produkt není soudní rozsudek vytesaný do mramoru. Je to série sázek, které se mají ověřovat.
+
+U každého středního a těžkého rozhodnutí nastav review:
+
+- **Za 2 týdny:** u onboardingových změn, prodejních experimentů a úprav komunikace.
+- **Za 1 měsíc:** u pricingu, trialu, aktivace, support procesu a obsahových kampaní.
+- **Za 3 měsíce:** u architektury, integrací, subprocesorů, datové retence a větších provozních změn.
+
+Review nemá být tribunál. Má odpovědět na tři otázky: co se stalo, co jsme se naučili a co upravíme. Když rozhodnutí funguje, potvrď ho. Když nefunguje, změň ho. Když není dost signálů, rozhodni, jestli čekat, nebo sázku ukončit.
+
+### Privacy-first filtr pro rozhodování
+
+Každé produktové rozhodnutí, které sahá na data, integrace, analytiku nebo komunikaci se zákazníkem, projdi krátkým filtrem:
+
+- Jaký zákaznický nebo obchodní problém tím řešíme?
+- Jaká data opravdu potřebujeme?
+- Jde použít agregace, pseudonymizace nebo kratší retence?
+- Vzniká nový dodavatel, subprocesor nebo datový tok mimo Evropu?
+- Umíme změnu vysvětlit zákazníkovi lidsky?
+- Umíme změnu vypnout, vrátit nebo omezit na pilotní skupinu?
+
+Pokud tým neumí odpovědět, není to automaticky zákaz. Je to signál, že rozhodnutí ještě není připravené. Privacy-first není brzda inovací. Je to kontrola, jestli kvůli jedné funkci neprodáváš důvěru levněji než rohlík ve slevě.
+
+### Checklist: produktové rozhodování bez datového hladu
+
+- [ ] Víme, jestli jde o lehké, střední nebo těžké rozhodnutí.
+- [ ] Rozhodovací otázka je napsaná jako volba mezi alternativami.
+- [ ] Máme 3–5 relevantních signálů, ne nekonečný dashboard.
+- [ ] Oddělujeme fakta, interpretace, sázky a rizika.
+- [ ] Zákaznické signály kombinují metriky, rozhovory, support a obchodní realitu.
+- [ ] Nesbíráme osobní data jen proto, že by se „mohla hodit“.
+- [ ] U středních a těžkých rozhodnutí existuje vlastník a datum review.
+- [ ] Rizika mají mitigaci, ne jen optimistickou poznámku.
+- [ ] Rozhodnutí je zapsané tak, aby mu porozuměl nový člen týmu.
+- [ ] Privacy-first filtr je hotový před nasazením, ne až při první námitce zákazníka.
+
+### Šablona rozhodovací karty
+
+```markdown
+## Rozhodovací karta: [téma / funkce / proces]
+
+### Otázka
+- Co rozhodujeme:
+- Proč teď:
+- Úroveň rozhodnutí: lehké / střední / těžké
+
+### Alternativy
+- Varianta A:
+- Varianta B:
+- Varianta C / nedělat nic:
+
+### Signály
+- Produktová metrika:
+- Zákaznický signál:
+- Support / obchodní signál:
+- Technický nebo provozní signál:
+
+### Rozhodnutí
+- Vybraná varianta:
+- Proč:
+- Co vědomě neděláme:
+
+### Rizika
+- Produktové riziko:
+- Technické riziko:
+- Privacy / datové riziko:
+- Mitigace:
+
+### Review
+- Vlastník:
+- Datum kontroly:
+- Jak poznáme, že rozhodnutí funguje:
+```
+
+Codyho komentář: Dobré rozhodnutí nemusí být dokonalé. Musí být srozumitelné, přiměřené riziku a vratné tam, kde vratné být může. Zbytek je jen produktová gymnastika v tričku „data-driven“.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -9107,6 +9259,7 @@ Codyho komentář: DNS je místo, kde se zkratky tváří jako kouzla. Ve skute�
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha BA o produktovém rozhodování bez hlasitého šéfa a hladové analytiky: úrovně rozhodnutí, rozhodovací otázky, práce se signály, oddělení faktů od interpretací, review, privacy-first filtr, checklist a rozhodovací karta.
 - **2026-09-14:** Doplněna příloha AZ o doménách, DNS a produktové identitě: výběr domény, členění subdomén, DNS změny, e-mailová reputace, přístupy, certifikáty, doménová mapa a checklist.
 - **2026-09-14:** Doplněna příloha AY o produkčním debugování bez lovu osobních dat: metriky, logy, trace, technické identifikátory, bezpečné chybové zprávy, retence, přístupy, checklist a debug karta.
 - **2026-09-14:** Doplněna krátká sekce k offboardingu tokenů v příloze AX: revize vlastnictví, vypnutí nepoužívaných klíčů, rotace nejistých přístupů a zápis do evidence.
