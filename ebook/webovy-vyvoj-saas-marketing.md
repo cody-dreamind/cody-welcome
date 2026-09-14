@@ -10433,6 +10433,161 @@ Tahle práce není sexy. Ale právě ona rozhoduje, jestli produkt po roce půso
 - **Dokumentace:** nápověda, changelog, interní wiki, support makra.
 - **Datum review:** kdy kartu zavřeme nebo aktualizujeme.
 
+
+## Příloha BJ: Chyby a omluvy v SaaS bez korporátní mlhy
+
+Každý SaaS produkt občas něco pokazí. Import se zasekne, notifikace odejde dvakrát, faktura má špatný text, integrace vrátí jiný formát, než slíbila. Rozdíl mezi důvěryhodným produktem a cirkusem není v tom, že první nikdy nechybuje. Rozdíl je v tom, jak rychle chybu pozná, jak jasně ji vysvětlí a jak po sobě uklidí.
+
+Malý tým má v tomhle překvapivou výhodu. Nemusí psát tiskové prohlášení v sedmi kolech schvalování. Může říct pravdu, konkrétně a lidsky. Jen je potřeba mít připravený systém, aby omluva nebyla improvizovaný požár pokaždé, když něco bouchne.
+
+### Rozliš chybu, incident a produktový dluh
+
+Ne každá chyba je incident. A ne každý incident je katastrofa. Když tým všechno označí jako urgentní, brzy nepozná, co je skutečně důležité. Zaveď jednoduché rozlišení:
+
+- **Drobná chyba:** nepříjemnost bez dopadu na data, peníze nebo klíčové workflow.
+- **Produktová chyba:** rozbíjí konkrétní scénář, ale má omezený dopad a jasnou náhradu.
+- **Incident:** ovlivňuje dostupnost, bezpečnost, data, fakturaci nebo větší část zákazníků.
+- **Produktový dluh:** známé slabé místo, které zatím nehoří, ale opakovaně vytváří riziko.
+
+Tahle klasifikace pomáhá rozhodnout, kdo má jednat, koho informovat a jak moc detailní má být komunikace. Drobná chyba může skončit v changelogu. Incident potřebuje vlastníka, časovou osu, dopad, další update a následné poučení.
+
+### První zpráva nemá být dokonalá, má být užitečná
+
+U problému, který už zákazník cítí, je ticho horší než nedokonalá první zpráva. První update nemusí obsahovat kompletní příčinu. Má říct, že o problému víš, koho se pravděpodobně týká, co tým právě dělá a kdy přijde další informace.
+
+Dobrá první zpráva obsahuje:
+
+- **Co se děje:** stručný popis bez technického kouře.
+- **Dopad:** koho a jak to může ovlivnit.
+- **Stav:** vyšetřujeme, mitigujeme, nasazujeme opravu, ověřujeme stabilitu.
+- **Náhradní postup:** pokud existuje.
+- **Další update:** konkrétní čas nebo pravidlo.
+
+Špatná první zpráva říká „někteří uživatelé mohou zaznamenat degradovaný zážitek“. To je věta, která by se měla dát do muzea korporátní mlhy. Lepší je: „Část zákazníků nemůže dokončit export faktur. Data nejsou ztracená. Exporty znovu spustíme po opravě a další update dáme do 30 minut.“
+
+### Omluva patří k dopadu, ne k egu
+
+Omluva nemá být divadelní. Nemá vysvětlovat, jak těžký týden měl tým. Zákazník platí za výsledek, ne za zákulisní drama. Dobrá omluva uzná dopad a nabídne konkrétní nápravu.
+
+Struktura omluvy:
+
+1. **Uznání:** co se stalo a koho se to dotklo.
+2. **Dopad:** co zákazník nemohl udělat nebo jaké riziko vzniklo.
+3. **Náprava:** co už je opravené a co ještě běží.
+4. **Prevence:** jedna až tři konkrétní změny, ne román.
+5. **Kontakt:** kam napsat, pokud zákazník vidí jiný dopad.
+
+> Codyho komentář: „Omlouváme se za případné nepříjemnosti“ je fráze, která skoro nikdy nepomáhá. Když víš, že jsi někomu rozbil pracovní den, řekni to normálně. Internet to unese.
+
+### Nepiš víc detailů, než dokážeš bezpečně sdílet
+
+Transparentnost není povinnost vysypat do e-mailu interní logy, IP adresy, jména zaměstnanců nebo technické detaily, které by někomu pomohly chybu zneužít. Privacy-first komunikace říká dost na to, aby zákazník rozuměl dopadu, ale neprozrazuje zbytečné citlivosti.
+
+Bezpečný detail:
+
+- „Chyba v nové validační vrstvě zastavila část importů CSV.“
+- „Dopad byl omezený na účty, které spustily import mezi 9:10 a 10:05.“
+- „Importovaná data zůstala v původním souboru, v aplikaci se neuložila neúplně.“
+
+Rizikový detail:
+
+- kompletní stack trace,
+- interní názvy serverů a tokenů,
+- osobní údaje konkrétních zákazníků,
+- přesný popis bezpečnostní mezery před opravou,
+- screenshoty produkčních dat.
+
+Pokud potřebuješ sdílet technické poučení veřejně, udělej z něj anonymizovaný postmortem: scénář, dopad, kořenová příčina, změny v procesu. Ne výpis interního provozu.
+
+### Náhrada a kompenzace mají mít pravidla
+
+Když chyba poškodí práci zákazníka, nestačí říct „už by to mělo fungovat“. Někdy je potřeba pomoct s obnovou, ručně doručit výstup, prodloužit trial, odpustit část měsíce nebo nabídnout konzultaci. Důležité je mít hranice předem, aby každá situace nebyla vyjednávání podle nálady.
+
+Praktická pravidla:
+
+- u krátkého výpadku stačí vysvětlení a potvrzení opravy,
+- u ztraceného času nabídni pomoc s dokončením konkrétní práce,
+- u fakturační chyby oprav doklad a napiš jasně, co se stane s platbou,
+- u pilotních zákazníků zvaž prodloužení pilotu o dobu narušení,
+- u opakovaných problémů nabídni osobní hovor a plán nápravy.
+
+Kompenzace nemá nahrazovat opravu produktu. Sleva je fajn, ale pokud stejná chyba přijde znovu za týden, zákazník si nekupuje důvěru. Jen dostává levnější frustraci.
+
+### Interní postmortem drž krátké a akční
+
+Postmortem není soud. Je to nástroj, jak příště nebýt ve stejné situaci se stejným výrazem „to je divné“. Malý tým nepotřebuje dvacetistránkový dokument. Potřebuje jasnou časovou osu, příčinu, rozhodnutí a pár konkrétních úkolů.
+
+Dobrý postmortem odpoví:
+
+- kdy jsme problém poprvé mohli poznat,
+- kdy jsme ho skutečně poznali,
+- co zhoršilo dopad,
+- co zkrátilo obnovu,
+- jaké detekce, testy nebo pravidla přidáme,
+- kdo vlastní jednotlivé úkoly a kdy se zkontrolují.
+
+Akční úkoly piš tak, aby se daly splnit. „Zlepšit monitoring“ je přání. „Přidat alert na chybovost exportu nad běžnou úroveň a otestovat ho při dalším release“ je práce.
+
+### Uč zákazníky, že chyba má cestu ven
+
+Důvěra vzniká i tím, že zákazník ví, co má dělat, když něco nefunguje. Pokud každá chyba končí hledáním kontaktu, screenshotováním obrazovky a vysvětlováním od nuly, zvyšuješ stres i náklady podpory.
+
+Pomáhá mít:
+
+- viditelný kontakt na podporu v aplikaci,
+- krátký návod „co poslat při hlášení chyby“,
+- bezpečné ID požadavku, objednávky nebo importu místo osobních dat,
+- status stránku nebo jednoduché místo pro provozní zprávy,
+- pravidlo, kdy support eskaluje problém produktu.
+
+Privacy-first detail: uživatele nenaváděj, aby posílal exporty plné osobních údajů, pokud to není nutné. Raději si vyžádej technický identifikátor, čas, krok, očekávaný výsledek a chybovou hlášku. Když potřebuješ soubor, řekni proč, kdo ho uvidí a kdy ho smažeš.
+
+### Checklist: chyby a omluvy privacy-first
+
+- Máme jednoduché rozlišení drobná chyba, produktová chyba, incident a produktový dluh?
+- Ví tým, kdo píše první zákaznický update?
+- Umíme popsat dopad bez korporátní mlhy a bez citlivých interních detailů?
+- Máme bezpečný způsob, jak od zákazníka získat diagnostiku?
+- Víme, kdy nabídnout náhradní postup, ruční pomoc nebo kompenzaci?
+- Má každý větší incident krátké postmortem s vlastníky úkolů?
+- Mažeme diagnostická data, soubory a screenshoty po vyřešení?
+- Převádíme opakované chyby do produktového dluhu nebo roadmapy?
+- Má zákazník jasné místo, kde zjistí stav a další krok?
+
+### Šablona karty chyby
+
+## Karta chyby: [název / datum / dopad]
+
+### Kontext
+
+- **Typ:** drobná chyba, produktová chyba, incident, produktový dluh.
+- **Zasažený scénář:** co zákazník nemohl dokončit.
+- **Vlastník:** kdo řídí opravu a komunikaci.
+
+### Dopad
+
+- **Kdo:** segment, účty nebo workflow bez zbytečných osobních detailů.
+- **Co:** nedostupnost, špatný výstup, zpoždění, fakturace, data.
+- **Od kdy do kdy:** časové okno podle dostupných signálů.
+
+### Komunikace
+
+- **První zpráva:** co víme, co děláme, kdy dáme update.
+- **Náhradní postup:** co může zákazník dělat mezitím.
+- **Omluva a náprava:** co opravíme, jak pomůžeme a kdo odpovídá.
+
+### Privacy-first kontrola
+
+- **Diagnostická data:** co sbíráme, proč a jak dlouho.
+- **Citlivé informace:** co nesdílíme veřejně ani v běžném e-mailu.
+- **Úklid:** kdy mažeme soubory, screenshoty a dočasné exporty.
+
+### Poučení
+
+- **Kořenová příčina:** stručně, bez hledání viníka.
+- **Preventivní změny:** test, alert, proces, dokumentace, produktová úprava.
+- **Review:** datum kontroly, že úkoly opravdu proběhly.
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -10481,6 +10636,7 @@ Tahle práce není sexy. Ale právě ona rozhoduje, jestli produkt po roce půso
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha BJ o chybách a omluvách v SaaS: rozlišení chyb a incidentů, první update, omluva podle dopadu, bezpečné sdílení detailů, kompenzace, postmortem, zákaznické hlášení, checklist a karta chyby.
 - **2026-09-14:** Doplněna příloha BI o postupném nasazování změn: typy releasů, feature flagy, rollout, agregované měření, rollback, komunikace, úklid a šablona release karty.
 - **2026-09-14:** Doplněna příloha BH o demo prostředích a sandboxech bez úniku zákaznických dat: syntetické datasety, scénáře, demo role, reset prostředí, bezpečné falešné integrace, kontrola screenshotů, checklist a demo karta.
 - **2026-09-14:** Doplněna příloha BG o samoobslužné nápovědě bez support labyrintu: situační struktura článků, akční návody, kontextová UI nápověda, převod support dotazů na obsah, privacy-first měření, údržba, eskalace, checklist a nápovědní karta.
