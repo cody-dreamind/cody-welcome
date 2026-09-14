@@ -10747,6 +10747,149 @@ Praktická pravidla:
 - **Měření:** doručení, bounce, kliknutí, navazující akce nebo nic.
 - **Retence:** jak dlouho držíme log o odeslání a proč.
 
+## Příloha BL: Zákaznický feedback bez výslechové místnosti
+
+Feedback je palivo produktu, ale jen pokud ho nespálíš v motoru zbytečných formulářů, dotazníků a nahrávek, které nikdo nikdy neposlechne. Malý SaaS nepotřebuje sledovat každý pohyb kurzoru a ptát se zákazníka po každém kliknutí, jestli je „pravděpodobné, že nás doporučí“. Potřebuje jednoduchý systém, který zachytí skutečné signály, ochrání soukromí lidí a převádí poznatky do rozhodnutí.
+
+Privacy-first feedback stojí na jedné zásadě: ptej se méně, ale lépe. Když už zákazníka vyrušíš, musí být jasné, proč se ptáš, co s odpovědí uděláš a jak dlouho ji budeš držet. Jinak nevytváříš výzkum, ale administrativní kompost. Ten sice časem taky něco vyprodukuje, ale většinou zápach.
+
+### Rozliš signál, názor a požadavek
+
+Ne každý feedback má stejnou váhu. „Přidejte tmavý režim“ může být legitimní potřeba, estetická preference nebo zástupný problém pro únavu očí při dlouhé práci večer. Když tým rovnou překládá věty zákazníků na položky v backlogu, rychle vznikne produkt řízený posledním hlasitým e-mailem.
+
+Praktické rozdělení:
+
+- **Signál:** konkrétní pozorování chování nebo dopadu, například „uživatelé často nedokončí import, protože nevidí chybu ve třetím řádku CSV“.
+- **Názor:** interpretace nebo preference, například „import je matoucí“.
+- **Požadavek:** navržené řešení, například „přidejte průvodce importem“.
+- **Kontext:** role, situace, četnost a dopad, bez kterých je feedback jen plovoucí poznámka.
+- **Rozhodnutí:** co s tím tým udělá teď, později nebo vůbec.
+
+Cílem není zákazníka opravovat. Cílem je pochopit, co se opravdu děje. Když tři lidé žádají tři různé funkce, často popisují jeden společný problém. A když jeden člověk žádá dvacet funkcí, často popisuje pondělí.
+
+### Feedback sbírej v přirozených místech
+
+Nejlepší feedback často přijde ve chvíli, kdy zákazník narazí na překážku, dokončí důležitou akci nebo řeší reálný problém se supportem. Nemusíš hned nasazovat velký výzkumný nástroj. Stačí promyšlená místa, kde může člověk bezpečně říct, co potřebuje.
+
+Dobrá sběrná místa:
+
+- **Support konverzace:** po vyřešení dotazu označ hlavní téma, dopad a případnou produktovou příčinu.
+- **Onboarding:** zeptej se po aktivačním momentu, co bylo nejméně jasné.
+- **Zrušení účtu:** nabídni krátké dobrovolné důvody, volné pole a jasný export/mazání dat.
+- **Beta funkce:** sbírej feedback jen od lidí, kteří funkci opravdu používají.
+- **Produktový changelog:** umožni odpověď na změnu bez veřejného divadla.
+- **Pravidelné rozhovory:** u klíčových B2B zákazníků naplánuj krátký kvartální check-in.
+
+Vyhýbej se plošnému bombardování. Dotazník po každém přihlášení je digitální verze člověka, který se v obchodě ptá: „A teď? A teď? A teď?“ Ano, získáš data. Ne, nezískáš sympatie.
+
+### Minimalizuj osobní údaje ve výzkumu
+
+Feedback často obsahuje citlivější informace, než tým čeká: jména zákazníků, interní procesy, screenshoty s osobními údaji, obchodní čísla, technické konfigurace nebo zdravotní poznámky u specifických oborů. Proto k výzkumu přistupuj jako k provozním datům, ne jako k volnému poznámkovému bloku.
+
+Privacy-first pravidla:
+
+- **Ptej se na situaci, ne na identitu:** role a typ firmy obvykle stačí lépe než plné jméno každého účastníka.
+- **Maskuj ukázky:** screenshoty před uložením očisti od osobních údajů, tokenů, e-mailů a zákaznických dat.
+- **Odděl kontakt od poznatku:** kdo řekl co je užitečné pro follow-up, ale produktová insight databáze může pracovat s anonymizovaným nebo pseudonymizovaným zápisem.
+- **Nahrávky používej výjimečně:** pokud je nahrávka potřeba, řekni proč, získej souhlas, nastav retenci a udělej textový souhrn.
+- **Retenci nastav předem:** surové poznámky drž krátce, syntetizované poznatky déle, pokud už neobsahují osobní údaje.
+- **Přístup omez:** výzkumné poznámky nejsou firemní reality show pro celý tým.
+
+> Codyho komentář: Nejlepší výzkumná databáze není ta, kde najdeš všechno. Je to ta, kde najdeš důležité věci bez pocitu, že právě listuješ cizím deníkem.
+
+### Převáděj odpovědi na témata, ne na tiketovou lavinu
+
+Jednotlivý feedback je vstup. Produktové rozhodnutí vzniká až po syntéze. Pokud každou odpověď pošleš rovnou do backlogu, backlog se promění v hřbitov přání. Místo toho vytvářej témata, která spojují více signálů.
+
+Jednoduchý proces:
+
+1. **Zapiš surový signál:** co člověk řekl nebo udělal, v jaké situaci.
+2. **Přidej dopad:** čas, peníze, riziko, frustrace, ztracená příležitost.
+3. **Označ oblast:** onboarding, billing, import, reporting, role, integrace, support.
+4. **Spoj podobné signály:** hledej vzor napříč zákazníky, ne jen opakování stejné věty.
+5. **Navrhni hypotézu:** co by mohlo problém zmenšit.
+6. **Rozhodni další krok:** oprava textu, změna UI, rozhovor, experiment, odložení.
+
+Příklad: pět zákazníků píše, že „export je moc složitý“. Řešením nemusí být nový exportní modul. Možná chybí popis formátů, předvyplněný doporučený export, lepší chyba při velkém souboru nebo jasné vysvětlení, co se stane s daty po stažení.
+
+### Uzavírej smyčku se zákazníkem
+
+Feedback bez odpovědi působí jako schránka na náměty v instituci, kde klíč ztratil někdo v roce 2009. Zákazník nemusí dostat slíbenou funkci, ale měl by vidět, že jeho vstup nezmizel v mlze.
+
+Praktické způsoby uzavření smyčky:
+
+- **Krátké poděkování:** potvrď, co jsi pochopil, a neslibuj víc, než víš.
+- **Follow-up po změně:** napiš lidem, kterých se úprava týká, že problém řeší nová verze.
+- **Changelog:** propojuj změny s reálnými situacemi, ne jen s interními názvy tiketů.
+- **Veřejná roadmapa opatrně:** ukazuj směry a řešené problémy, ne pevné sliby bez jistoty.
+- **Support makra:** když se opakuje stejný problém, připrav odpověď s aktuálním stavem.
+
+Uzavřená smyčka buduje důvěru i tehdy, když odpověď zní „teď to neuděláme“. Upřímné ne je pro zákazníka užitečnější než nekonečné „dáme vědět“, které ve skutečnosti znamená „zapadlo to za radiátor“.
+
+### Měř kvalitu feedbacku, ne počet odpovědí
+
+Velký počet odpovědí může být dobrý signál, ale taky známka toho, že ses zeptal příliš obecně. U malého SaaS je často cennější deset kvalitních poznatků než tisíc anonymních kliknutí na smajlíka.
+
+Užitečné metriky:
+
+- **Počet signálů podle produktové oblasti:** kde vzniká nejvíc tření.
+- **Podíl feedbacku s dopadem:** kolik vstupů má popsaný konkrétní následek.
+- **Čas do první reakce:** jak rychle tým potvrdí důležité vstupy.
+- **Počet uzavřených smyček:** kolik zákazníků dostalo informaci o výsledku.
+- **Opakovanost tématu:** zda problém roste, mizí nebo se vrací v nové podobě.
+- **Datová čistota:** kolik záznamů obsahuje zbytečné osobní údaje a musí se čistit.
+
+Metrika „počet nápadů v backlogu“ není úspěch. To je jen digitální skladiště. Úspěch je menší počet lepších rozhodnutí.
+
+### Checklist: feedback privacy-first
+
+- Máme jasně určené, proč feedback sbíráme a kdo ho používá.
+- Každý vstup rozlišuje signál, názor, požadavek a kontext.
+- Surové poznámky a nahrávky mají nastavenou retenci.
+- Screenshoty a ukázky dat čistíme před uložením nebo sdílením.
+- Insight databáze neobsahuje zbytečné osobní údaje.
+- Feedback převádíme na témata, ne automaticky na funkce.
+- U důležitých vstupů uzavíráme smyčku se zákazníkem.
+- Produktové rozhodnutí vždy obsahuje dopad, riziko a další krok.
+- Marketingové využití citací řešíme odděleně a jen se souhlasem.
+- Jednou měsíčně mažeme staré surové podklady, které už nepotřebujeme.
+
+### Šablona feedback karty
+
+## Feedback karta: [téma / oblast]
+
+### Kontext
+
+- **Zdroj:** support, rozhovor, onboarding, churn, beta, changelog.
+- **Segment:** typ zákazníka nebo role, bez zbytečné identifikace.
+- **Situace:** kdy problém vzniká.
+
+### Signály
+
+- **Pozorování:** co zákazník řekl nebo udělal.
+- **Četnost:** jednorázové, opakované, rostoucí.
+- **Dopad:** čas, peníze, riziko, frustrace, ztracená příležitost.
+
+### Interpretace
+
+- **Pravděpodobná příčina:** pracovní hypotéza.
+- **Alternativní vysvětlení:** co může být jinak.
+- **Neověřené předpoklady:** co ještě nevíme.
+
+### Privacy-first kontrola
+
+- **Osobní údaje:** co karta obsahuje a proč.
+- **Maskování:** co bylo odstraněno ze screenshotů nebo poznámek.
+- **Retence:** kdy smažeme surové podklady.
+- **Přístup:** kdo kartu potřebuje vidět.
+
+### Další krok
+
+- **Rozhodnutí:** opravit, prozkoumat, odložit, odmítnout.
+- **Vlastník:** kdo krok řeší.
+- **Termín review:** kdy se k tématu vrátíme.
+- **Uzavření smyčky:** komu dáme vědět a jak.
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -10798,6 +10941,7 @@ Praktická pravidla:
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha BL o zákaznickém feedbacku bez výslechové místnosti: rozlišení signálu, názoru a požadavku, privacy-first sběr, syntéza témat, uzavírání smyčky a šablona feedback karty.
 - **2026-09-14:** Doplněna příloha BK o notifikacích a komunikačních preferencích bez SaaS megafonu: typy zpráv, preference, kanály, frekvence, šablony, doručitelnost, odhlášení, checklist a komunikační karta.
 - **2026-09-14:** Doplněna příloha BJ o chybách a omluvách v SaaS: rozlišení chyb a incidentů, první update, omluva podle dopadu, bezpečné sdílení detailů, kompenzace, postmortem, zákaznické hlášení, checklist a karta chyby.
 - **2026-09-14:** Doplněna příloha BI o postupném nasazování změn: typy releasů, feature flagy, rollout, agregované měření, rollback, komunikace, úklid a šablona release karty.
