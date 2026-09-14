@@ -9211,6 +9211,121 @@ Codyho komentář: Dobré rozhodnutí nemusí být dokonalé. Musí být srozumi
 
 ---
 
+## Příloha BB: Interní reporting bez dashboardového divadla
+
+Reporting v malém SaaS týmu nemá být muzeum grafů. Má pomáhat lidem rozhodnout, co udělat příští týden. Jakmile report obsahuje dvacet metrik, pět barevných trendů a žádné rozhodnutí, není to řízení firmy. Je to akvárium pro čísla.
+
+Privacy-first reporting má ještě jednu výhodu: nutí tým přemýšlet, které signály opravdu potřebuje. Když se rozhoduješ podle agregovaných trendů, zákaznických rozhovorů, support témat a finančních dopadů, většinou nepotřebuješ osobní profily návštěvníků ani nekonečný proud behaviorálních stop.
+
+### Report začíná adresátem
+
+Nejdřív si řekni, komu report slouží. Zakladatel, vývojář, obchodník, zákaznická podpora a investor nepotřebují stejný pohled. Jeden chce vědět, jestli firma přežije. Druhý, kde se láme onboarding. Třetí, proč leady nepostupují do pilotu. Čtvrtý, které dotazy pálí zákazníky.
+
+Pro každý pravidelný report napiš jednu větu:
+
+- **Adresát:** kdo report čte a co má po přečtení udělat.
+- **Rytmus:** denně, týdně, měsíčně nebo jen při incidentu.
+- **Rozhodnutí:** jaký typ rozhodnutí má report podpořit.
+- **Zdroj pravdy:** odkud data pochází a kdo je vlastní.
+- **Hranice:** která data se nesmí sbírat nebo zobrazovat.
+
+Příklad: „Týdenní produktový report pro zakladatele a product ownera ukazuje, jestli noví zákazníci dosáhli aktivačního momentu, kde vznikly support blokery a co se příští týden mění v onboardingu.“ To je použitelné. „Dashboard růstu“ je mlha s loginem.
+
+### Odděl provozní, obchodní a produktový pohled
+
+Jeden univerzální report bývá past. Vypadá efektivně, ale postupně se do něj nacpe všechno a nikdo ho nepoužívá. Lepší je mít tři lehké pohledy, každý s jasným účelem.
+
+Pro malý SaaS typicky stačí:
+
+- **Provozní report:** dostupnost, incidenty, chybovost, výkon klíčových cest, zálohy, otevřené technické dluhy s rizikem.
+- **Produktový report:** aktivace, retence v agregaci, dokončení klíčových toků, support témata, zákaznické citace a dokončené změny.
+- **Obchodní report:** nové leady, kvalifikované příležitosti, piloty, konverze do platby, důvody proher, plánovaný follow-up.
+
+Každý pohled by měl mít maximálně pět hlavních ukazatelů a jednu sekci „co s tím uděláme“. Pokud report nemění chování týmu, je to dekorace. A dekorace jsou fajn na poličce, ne v pondělním řízení firmy.
+
+### Měř rozhodnutí, ne zvědavost
+
+Špatný reporting odpovídá na otázku: „Co všechno můžeme sledovat?“ Dobrý reporting odpovídá: „Co potřebujeme vědět, abychom se rozhodli?“ To je zásadní rozdíl.
+
+Před přidáním metriky polož čtyři otázky:
+
+- Jaké rozhodnutí se podle ní bude dělat?
+- Jak často se podle ní opravdu někdo zachová jinak?
+- Dá se měřit agregovaně nebo anonymně?
+- Kdy ji z reportu vyhodíme, pokud nepomáhá?
+
+Příklad: místo sledování kompletní cesty konkrétního uživatele můžeš měřit, kolik účtů v daném týdnu dokončilo první import, pozvalo kolegu a vytvořilo první výstup. To stačí k rozhodnutí, jestli onboarding potřebuje zjednodušit. Nepotřebuješ vědět, že Franta třikrát najel myší na tlačítko. Franta má právo na trochu digitální důstojnosti.
+
+### Přidej kvalitativní signály
+
+Čísla bez kontextu svádějí k rychlým, ale hloupým závěrům. Když klesne aktivace, nemusí to znamenat špatný produkt. Možná přišel jiný typ leadů. Možná se rozbila jedna integrace. Možná nový zákazník čeká na interní schválení. Proto má dobrý report kombinovat kvantitativní a kvalitativní signály.
+
+Do týdenního reportu přidej:
+
+- tři nejčastější support témata,
+- jednu konkrétní zákaznickou větu,
+- největší blokaci v onboarding toku,
+- jednu věc, která zákazníkům tento týden pomohla,
+- jednu otázku, kterou má tým ověřit rozhovorem.
+
+Kvalitativní část drž krátkou a bezpečnou. Nepiš do reportu citlivé osobní údaje, interní tajemství zákazníka ani celé e-mailové vlákno. Stačí anonymizovaná formulace typu: „Menší servisní firma nerozuměla rozdílu mezi rolí Správce a Technik při pozvánce kolegy.“ To je signál pro UX i dokumentaci.
+
+### Používej vrstvený přístup
+
+Ne každý musí vidět všechno. Reporting by měl mít vrstvy podle rizika a potřeby. Vedení nepotřebuje raw logy. Vývojář nepotřebuje obchodní poznámky z citlivého jednání. Support nepotřebuje finanční predikce, pokud podle nich nic nedělá.
+
+Praktické vrstvy:
+
+- **Veřejné nebo zákaznické:** status page, changelog, přehled dostupnosti, incidentová komunikace.
+- **Týmové:** agregované produktové metriky, support témata, plán změn, stav priorit.
+- **Omezené:** finanční report, bezpečnostní rizika, přístupy, větší incidenty, smluvní závazky.
+- **Technické detailní:** logy, trace, debug data a diagnostické výstupy s krátkou retencí.
+
+Každá vrstva má mít vlastní pravidla přístupu a retence. Pokud někdo potřebuje detailní data jednou za půl roku, nedávej mu trvalý přístup „pro jistotu“. To je bezpečnostní ekvivalent klíče pod rohožkou s cedulkou „prosím nezneužít“.
+
+### Automatizuj sběr, ne úsudek
+
+Automatický report je skvělý sluha a mizerný šéf. Nech stroj posbírat čísla, zkontrolovat limity, vytáhnout změny a připomenout review. Nenech ho bez dozoru rozhodovat, že zákazník je „nezdravý“, obchodník „selhal“ nebo funkce „nemá hodnotu“, pokud za tím není lidský kontext.
+
+Dobrá automatizace reportingu:
+
+- sbírá data z jasně pojmenovaných zdrojů,
+- ukazuje metodiku výpočtu,
+- odděluje fakt od interpretace,
+- zvýrazní změny proti minulému období,
+- vyžaduje lidský komentář u důležitých odchylek,
+- má vlastníka, který report jednou za měsíc uklidí.
+
+Codyho komentář: Automatický dashboard, který nikdo nevlastní, je jako robotický vysavač bez nádoby. Chvíli to vypadá futuristicky, pak zjistíš, že bordel jen elegantně přesouvá po místnosti.
+
+### Reportingový checklist
+
+- Má každý report jasného adresáta a rozhodnutí, které podporuje?
+- Obsahuje maximálně pět hlavních ukazatelů?
+- Je u každé metriky jasný zdroj, vlastník a metodika?
+- Používá agregaci nebo anonymizaci všude, kde detail není nutný?
+- Obsahuje krátký kvalitativní kontext, ne jen grafy?
+- Má sekci „rozhodnutí / další kroky“?
+- Má nastavenou retenci pro exporty, snapshoty a detailní technická data?
+- Je jasné, kdo může report číst a kdo ho smí sdílet dál?
+- Probíhá měsíční úklid metrik, které už nepomáhají?
+- Umí tým vysvětlit zákazníkovi, proč daná data pro provoz potřebuje?
+
+## Reportingová karta: [název reportu]
+
+- **Adresát:** kdo report čte.
+- **Rytmus:** kdy vzniká a kdy se reviduje.
+- **Rozhodnutí:** co má report pomoct rozhodnout.
+- **Hlavní metriky:** maximálně pět ukazatelů.
+- **Kvalitativní signály:** support témata, citace, obchodní poznámky v bezpečné podobě.
+- **Zdroje dat:** systémy, exporty, ruční vstupy.
+- **Privacy hranice:** co se nesbírá, neukazuje nebo rychle maže.
+- **Přístupy:** kdo může číst, upravovat a sdílet.
+- **Retence:** jak dlouho se reporty a exporty drží.
+- **Další krok:** jedno až tři rozhodnutí nebo úkoly pro další období.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -9259,6 +9374,7 @@ Codyho komentář: Dobré rozhodnutí nemusí být dokonalé. Musí být srozumi
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha BB o interním reportingu bez dashboardového divadla: adresát reportu, provozní/produktový/obchodní pohled, privacy-first měření, kvalitativní signály, vrstvy přístupů, automatizace, checklist a reportingová karta.
 - **2026-09-14:** Doplněna příloha BA o produktovém rozhodování bez hlasitého šéfa a hladové analytiky: úrovně rozhodnutí, rozhodovací otázky, práce se signály, oddělení faktů od interpretací, review, privacy-first filtr, checklist a rozhodovací karta.
 - **2026-09-14:** Doplněna příloha AZ o doménách, DNS a produktové identitě: výběr domény, členění subdomén, DNS změny, e-mailová reputace, přístupy, certifikáty, doménová mapa a checklist.
 - **2026-09-14:** Doplněna příloha AY o produkčním debugování bez lovu osobních dat: metriky, logy, trace, technické identifikátory, bezpečné chybové zprávy, retence, přístupy, checklist a debug karta.
