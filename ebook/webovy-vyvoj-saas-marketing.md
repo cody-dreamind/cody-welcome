@@ -9471,6 +9471,174 @@ Důležité je, aby review nekončilo větou „musíme šetřit“. To je mlha.
 
 ---
 
+## Příloha BD: Kvalita dat bez datového jezera na steroidech
+
+SaaS může mít krásné dashboardy, šikovné exporty a tabulky s grafy, které vypadají jako kokpit menší kosmické lodi. Ale když vstupní data neodpovídají realitě, produkt jen rychleji vyrábí sebevědomé nesmysly. Kvalita dat není luxus pro enterprise. Je to základní provozní hygiena.
+
+Malý tým nepotřebuje hned datové jezero, tři BI vrstvy a poradce, který kreslí obdélníky do prezentace. Potřebuje vědět, která data jsou důležitá, odkud pochází, kdo za ně odpovídá, jak se opravují a kdy se mažou. To zní méně sexy než „moderní data stack“, ale obvykle to vydělá víc peněz a spálí méně nervů.
+
+### Začni rozhodnutími, která data podporují
+
+Kvalita dat se nedá řídit obecnou větou „chceme čistá data“. To je jako říct „chceme hezký software“ a doufat, že se tím opraví backlog. Nejdřív napiš, která rozhodnutí na datech stojí.
+
+Typické rozhodovací scénáře:
+
+- obchod chce vědět, které leady mají prioritu,
+- support potřebuje poznat zákazníka v riziku,
+- produkt řeší, jestli funkce vede k aktivaci,
+- finance kontrolují tarif, fakturaci a limity,
+- zákazník chce exportovat svoje údaje,
+- tým potřebuje dohledat stav importu nebo migrace.
+
+Pro každý scénář stačí jednoduchá otázka: **co se pokazí, když jsou tato data špatně?** Pokud se nic zásadního nestane, možná nepotřebuješ nový proces. Pokud vznikne špatná faktura, ztracený zákazník nebo support požár, data si zaslouží vlastníka.
+
+### Urči zdroj pravdy
+
+Největší chaos vzniká, když má jeden údaj pět verzí. Jméno firmy je v CRM, fakturačním systému, produktové databázi, tabulce obchodníka a poznámce v e-mailu. Všude trochu jinak. Pak tým netuší, čemu věřit, a zákazník dostane zprávu, kde je osloven jako „ACME test old final 2“. Elegantní, pokud prodáváš chaos jako službu.
+
+U důležitých údajů napiš zdroj pravdy:
+
+- **Účet zákazníka:** produktová databáze.
+- **Fakturační údaje:** billing systém.
+- **Obchodní fáze:** CRM nebo jednoduchá pipeline tabulka.
+- **Marketingový souhlas:** nástroj, kde souhlas vznikl a kde jde odvolat.
+- **Produktové eventy:** event slovník napojený na konkrétní akce v aplikaci.
+- **Support kontext:** helpdesk nebo zákaznická karta, ne soukromé poznámky po chatech.
+
+Zdroj pravdy neznamená, že údaj nesmí být nikde jinde. Znamená, že kopie má jasný původ, účel a pravidlo aktualizace. Když se zákazník přejmenuje, tým ví, kde změna začíná a kam se propíše.
+
+### Datové pole musí mít účel
+
+Každé nové pole v databázi, formuláři nebo CRM je malý závazek. Někdo ho musí vysvětlit, validovat, chránit, migrovat, exportovat a někdy smazat. Privacy-first produkt proto nezačíná otázkou „co všechno by se mohlo hodit“. Začíná otázkou „k čemu to opravdu použijeme“.
+
+Praktický filtr pro nové pole:
+
+- Jaké rozhodnutí nebo funkci podporuje?
+- Je povinné, nebo stačí volitelné?
+- Musí být uloženo, nebo stačí použít jednorázově?
+- Je osobní, citlivé, obchodně důvěrné nebo technické?
+- Kdo k němu potřebuje přístup?
+- Jak dlouho ho držíme?
+- Bude součástí exportu nebo mazání účtu?
+
+Když na tyto otázky nikdo neumí odpovědět, pole pravděpodobně nepatří do první verze. „Možná se bude hodit“ je datový ekvivalent šuplíku s kabely. Jednou za rok ho otevřeš a stejně nevíš, co k čemu je.
+
+### Validace patří k produktu, ne až k reportu
+
+Špinavá data často nevznikají v analytice. Vznikají ve formuláři, importu, integraci nebo ručním admin zásahu. Když kvalitu řešíš až v reportu, jen lepíš náplast na potrubí, které dál teče.
+
+Dobrá validace je blízko vzniku dat:
+
+- formulář má jasné formáty a nápovědu,
+- import ukáže chyby před uložením,
+- integrace odmítne neúplný payload s čitelnou chybou,
+- admin rozhraní upozorní na neobvyklou změnu,
+- systém rozlišuje „neznámé“, „není relevantní“ a prázdnou hodnotu,
+- duplicitní záznamy se slučují podle pravidel, ne podle nálady.
+
+Zákaznická zkušenost je tady klíčová. Pokud uživatel vyplní formulář špatně, nepiš „invalid input“. Řekni mu, co přesně opravit a proč. Pokud import selže, dej mu soubor chyb s řádky a doporučenou opravou. Kvalita dat nemá být trest, ale navigace.
+
+### Sleduj kvalitu agregovaně
+
+Privacy-first přístup neznamená, že kvalitu dat neměříš. Znamená, že ji měříš přiměřeně. Většinou nepotřebuješ sledovat každého jednotlivce. Stačí agregované signály, které ukážou, kde vzniká problém.
+
+Užitečné metriky kvality:
+
+- podíl nevyplněných klíčových polí,
+- počet odmítnutých importních řádků,
+- počet duplicitních záznamů za týden,
+- počet ručních oprav v administraci,
+- počet chyb integrací podle typu,
+- stáří neověřených nebo nedokončených záznamů,
+- rozdíl mezi zdrojem pravdy a kopií v jiné službě.
+
+Tyto metriky mají vést k úpravě procesu. Pokud se pořád opakuje stejná chyba importu, nepřidávej další report. Oprav šablonu, validaci nebo instrukce. Data kvalita není sport v počítání červených buněk.
+
+### Opravy dat musí mít stopu
+
+Ruční opravy jsou normální. Problém je, když probíhají jako kouzelnický trik. Někdo něco přepíše, report se změní, zákazník se diví a tým nemá tušení, co se stalo.
+
+U důležitých dat nastav jednoduché pravidlo:
+
+- kdo změnu udělal,
+- kdy ji udělal,
+- jaké pole změnil,
+- proč byla změna potřeba,
+- jestli se má propsat do dalších systémů,
+- jestli má zákazník dostat informaci.
+
+Nemusíš logovat každé nadechnutí aplikace. Ale u fakturačních údajů, tarifů, přístupů, exportů, importů a zákaznických stavů se auditní stopa vyplatí. Pomáhá supportu, bezpečnosti i důvěře.
+
+### Datová kvalita je týmový proces
+
+Když je za data odpovědný „někdo z analytiky“, malý SaaS už prohrává. Produkt navrhuje pole. Vývoj hlídá validaci. Support vidí nejasnosti zákazníků. Obchod zná realitu pipeline. Finance řeší fakturační dopad. Každý má kus odpovědnosti.
+
+Jednou měsíčně udělej krátké datové review:
+
+- které údaje nejčastěji chybí nebo jsou špatně,
+- který formulář, import nebo integrace chyby vyrábí,
+- které ruční opravy se opakují,
+- které pole už nikdo nepoužívá,
+- kde kopie nesedí se zdrojem pravdy,
+- co smažeme, zjednodušíme nebo zvalidujeme příště.
+
+Výstupem nemá být filozofická debata o „data governance“. Výstupem má být třeba: „Sjednotíme názvy tarifů, přidáme validaci DIČ do billing formuláře, zrušíme nepoužívané pole `company_size_old` a upravíme importní šablonu.“ Malé konkrétní změny, žádné datové divadlo.
+
+### Checklist: kvalita dat privacy-first
+
+- Má každý důležitý údaj jasný účel a vlastníka?
+- Je u klíčových dat určený zdroj pravdy?
+- Ví tým, které kopie dat existují a jak se aktualizují?
+- Validují se data co nejblíže místu vzniku?
+- Umí importy a formuláře ukázat konkrétní opravy místo obecných chyb?
+- Měří se kvalita agregovaně, bez zbytečného profilování jednotlivců?
+- Mají ruční opravy důležitých dat auditní stopu?
+- Existuje proces pro duplicity, neúplné záznamy a zastaralé údaje?
+- Jsou nepotřebná pole pravidelně mazána nebo archivována podle účelu?
+- Končí datové review konkrétní změnou v produktu, procesu nebo dokumentaci?
+
+### Šablona datové kvality
+
+## Karta kvality dat: [oblast / údaj / proces]
+
+### Účel
+
+- Jaké rozhodnutí, funkci nebo zákaznický proces data podporují?
+- Co se pokazí, když jsou data neúplná nebo chybná?
+
+### Zdroj pravdy
+
+- Primární systém:
+- Kopie a integrace:
+- Pravidlo aktualizace:
+
+### Vlastnictví
+
+- Produktový vlastník:
+- Technický vlastník:
+- Tým, který chyby nejčastěji vidí:
+
+### Validace
+
+- Kde data vznikají:
+- Jaká pravidla se kontrolují:
+- Jak se uživateli vysvětluje chyba:
+
+### Privacy-first kontrola
+
+- Kategorie dat:
+- Přístupy:
+- Retence:
+- Export / mazání:
+
+### Review
+
+- Nejčastější chyby:
+- Poslední oprava procesu:
+- Další krok:
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -9519,6 +9687,7 @@ Důležité je, aby review nekončilo větou „musíme šetřit“. To je mlha.
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha BD o kvalitě dat bez datového jezera na steroidech: rozhodovací scénáře, zdroj pravdy, účel polí, validace u vzniku dat, agregované měření, audit oprav, týmové review, checklist a karta kvality dat.
 - **2026-09-14:** Doplněna příloha BC o nákladech SaaS bez slepého škrtání: vlastnictví výdajů, typy nákladů, jednotková ekonomika, limity jako produktová zkušenost, úklid odpadu, vendor lock-in, měsíční review, checklist a nákladová karta.
 - **2026-09-14:** Doplněna příloha BB o interním reportingu bez dashboardového divadla: adresát reportu, provozní/produktový/obchodní pohled, privacy-first měření, kvalitativní signály, vrstvy přístupů, automatizace, checklist a reportingová karta.
 - **2026-09-14:** Doplněna příloha BA o produktovém rozhodování bez hlasitého šéfa a hladové analytiky: úrovně rozhodnutí, rozhodovací otázky, práce se signály, oddělení faktů od interpretací, review, privacy-first filtr, checklist a rozhodovací karta.
