@@ -8202,6 +8202,200 @@ Codyho komentář: Customer success není umění poznat, že zákazník otevře
 
 ---
 
+## Příloha AV: Lokalizace SaaS bez překládacího chaosu
+
+Evropský SaaS často začne česky, přidá angličtinu „až bude čas“ a pak se jednoho dne probudí s produktem, kde je polovina tlačítek v jednom jazyce, fakturační e-mail v druhém a právní stránka v jazyce paniky. Lokalizace není jen překlad textů. Je to schopnost produktu mluvit s různými trhy tak, aby se nerozpadla důvěra, support ani provoz.
+
+Dobrá lokalizace má tři vrstvy:
+
+- **Produktová vrstva:** rozhraní, formuláře, chybové hlášky, onboarding a nápověda.
+- **Obchodní vrstva:** pricing, nabídky, faktury, demo scénáře, reference a případové studie.
+- **Provozní vrstva:** právní dokumenty, subprocesory, support, incidentová komunikace a datové toky.
+
+Cílem není mít hned deset jazyků. Cílem je, aby první další jazyk nevytvořil technický a obsahový dluh, který bude tým splácet při každém releasu.
+
+### Nejdřív vyber trh, ne jazyk
+
+„Přidáme angličtinu“ není expanzní strategie. Angličtina může znamenat Německo, Nizozemsko, Irsko, Skandinávii nebo globální publikum — a každý scénář má jinou prodejní realitu, očekávání zákazníků i support. Proto začni konkrétním trhem a use-casem.
+
+Před první lokalizací si napiš:
+
+- **Pro koho lokalizujeme:** segment, role a typ firmy.
+- **Proč právě teď:** poptávka, inbound leady, partner, regulatorní tlak nebo opakovaný use-case.
+- **Co musí být lokalizované hned:** kritická cesta od landing page po první hodnotu.
+- **Co může zůstat dočasně v původním jazyce:** interní admin, méně používané obrazovky, pokročilá dokumentace.
+- **Kdo zvládne support:** jazyk, časové pásmo, úroveň technické pomoci.
+
+Praktický příklad: pokud přichází první tři německy mluvící B2B leady, nemusíš překládat celý blog. Potřebuješ německou landing page pro konkrétní segment, demo scénář, onboardingové e-maily, základní help centrum pro kritické kroky a jasnou informaci, v jakém jazyce poskytuješ podporu.
+
+### Lokalizuj cestu zákazníka, ne celý produkt najednou
+
+Nejhorší lokalizační plán je „přeložit všechno“. Je drahý, pomalý a často vede k tomu, že tým překládá obrazovky, které nový trh vůbec nepoužije. Lepší je projít cestu zákazníka a označit místa, kde jazyk blokuje rozhodnutí nebo úspěch.
+
+Začni těmito kroky:
+
+1. **První kontakt:** landing page, meta title, meta description, FAQ, privacy-first blok, CTA.
+2. **Rozhodnutí:** pricing, srovnání tarifů, reference, bezpečnostní stránka, demo follow-up.
+3. **Onboarding:** registrační tok, aktivace, první import, pozvání týmu, uvítací e-mail.
+4. **Každodenní práce:** hlavní workflow, prázdné stavy, chyby, potvrzení, tabulky a formuláře.
+5. **Provoz:** faktury, notifikace, incidenty, export dat, zrušení účtu, support.
+
+Když lokalizuješ po cestách, rychleji najdeš skutečné mezery. Může se ukázat, že produktové UI je snadné, ale zákazník se zasekne na fakturačních pojmech, importní šabloně nebo právní stránce. To je dobrá zpráva: řešíš skutečnou překážku, ne náhodný seznam stringů.
+
+### Překlady musí mít vlastníka a kontext
+
+Samotný export textů do tabulky nestačí. Překladatel bez kontextu neví, jestli „account“ znamená účet zákazníka, uživatelský profil, tenant nebo fakturační entitu. V SaaS produktu je špatný překlad často bug, protože vede k chybnému rozhodnutí.
+
+U každého důležitého textu udržuj kontext:
+
+- kde se text zobrazuje,
+- kdo ho čte,
+- co má člověk udělat,
+- zda jde o bezpečnostní, finanční nebo právní situaci,
+- jaký tón má značka držet,
+- jaké termíny se nesmí překládat volně.
+
+Mini slovník pojmů může vypadat takto:
+
+| Pojem | Význam v produktu | Doporučený překlad | Poznámka |
+|---|---|---|---|
+| Workspace | pracovní prostor zákaznického týmu | Pracovní prostor | Neplést s tenantem v interní dokumentaci. |
+| Member | uživatel pozvaný do workspace | Člen týmu | V e-mailech raději lidsky než technicky. |
+| Export | stažení zákaznických dat | Export dat | Vysvětlit formát a rozsah. |
+| Deactivate | dočasné vypnutí přístupu | Deaktivovat | Není smazání dat. |
+
+Tahle tabulka vypadá banálně, ale šetří hodiny supportu. A taky brání tomu, aby každý release zavedl nový překlad stejného pojmu, protože někdo zrovna pil silnější kávu.
+
+### Pricing a nabídka nejsou jen měna
+
+Při vstupu na nový evropský trh nestačí přepnout symbol měny. Zákazník potřebuje pochopit, za co platí, jak se služba fakturuje, co je zahrnuté, jak funguje DPH, jaké jsou limity a jak může odejít. Čím víc B2B produkt prodáváš, tím důležitější je srozumitelnost obchodních pravidel.
+
+Zkontroluj hlavně:
+
+- zda tarifní metrika dává smysl v daném segmentu,
+- zda jsou limity popsané bez drobného písma,
+- zda fakturační e-maily používají stejný jazyk jako pricing,
+- zda obchodník umí vysvětlit rozdíl mezi balíčky ve stejných pojmech jako web,
+- zda jsou slevy, piloty a roční platby popsané konzistentně,
+- zda zákazník ví, jak exportovat data a ukončit službu.
+
+Privacy-first nabídka může být konkurenční výhoda. Místo neurčitého „bezpečné a v souladu“ řekni konkrétně, co zákazník dostane: evropský provoz, minimum trackerů, přehled subprocesorů, možnost exportu, jasnou retenci dat a dokumentované bezpečnostní postupy.
+
+### Support určuje, kolik jazyků opravdu zvládneš
+
+Produkt může být přeložený do pěti jazyků, ale pokud tým zvládá podporu jen česky a anglicky, musí to být jasné. Jinak si zákazník koupí očekávání, které nedokážeš doručit.
+
+Pro každý jazyk si napiš support matici:
+
+- **UI jazyk:** co je v produktu přeložené.
+- **Help centrum:** které články existují v daném jazyce.
+- **Support:** v jakém jazyce odpovídá člověk.
+- **SLA:** zda se liší podle trhu nebo tarifu.
+- **Incidenty:** v jakém jazyce posíláš urgentní komunikaci.
+- **Obchod:** kdo zvládne demo a follow-up.
+
+Pokud zvládáš jen částečnou lokalizaci, řekni to férově. Například: „Rozhraní je dostupné v angličtině, český a slovenský support poskytujeme přímo, ostatní trhy obsluhujeme anglicky.“ To není slabost. Slabost je tvářit se jako nadnárodní support centrum a pak odpovídat přes překladač v pátek večer.
+
+### Technicky odděl texty od logiky
+
+Lokalizace se prodraží, když jsou texty natvrdo v komponentách, e-mailech, validacích a PDF šablonách. Malý SaaS nemusí mít obří překladovou platformu, ale měl by mít disciplínu.
+
+Praktická pravidla:
+
+- Nepiš texty přímo do byznys logiky.
+- Udržuj překladové klíče podle produktových oblastí, ne podle náhodného stromu souborů.
+- Validace formulářů musí používat stejný slovník jako UI.
+- E-maily, faktury a exporty zahrň do lokalizačního plánu.
+- Nepoužívej string concatenation pro věty, které se v jiném jazyce skládají jinak.
+- U každého textu počítej s delší variantou, zejména v němčině.
+
+Příklad špatného klíče:
+
+```text
+button.save
+```
+
+Lepší klíč:
+
+```text
+project.settings.billing.save_changes_cta
+```
+
+Delší klíč není samoúčelný. Říká, kde text žije a jaký má účel. Když později hledáš, proč se v billing nastavení zobrazuje divné CTA, nebudeš luštit archeologii.
+
+### Privacy-first lokalizace chrání data i důvěru
+
+Expanze často přidává nové nástroje: překladovou službu, support platformu, znalostní bázi, CRM integraci, call recording, chat widget. Každý nový nástroj je potenciální nový tok dat. Privacy-first tým se proto ptá dřív, než zapne integraci.
+
+Minimum kontrola:
+
+- Jaká data posíláme do překladového nebo support nástroje?
+- Obsahují texty zákaznická data, interní poznámky nebo osobní údaje?
+- Má dodavatel evropské zpracování nebo jasnou datovou dokumentaci?
+- Umíme data z nástroje exportovat a smazat?
+- Kdo má přístup k překladům, ticketům a zákaznickým poznámkám?
+- Co se stane, když spolupráci s dodavatelem ukončíme?
+
+Dobrá praxe je nepřekládat reálné zákaznické exporty, tickety ani incidenty v nástrojích, které nejsou schválené pro citlivá data. Pro překlad UI používej produktové stringy bez zákaznického obsahu. Pro support používej anonymizované ukázky, pokud řešíš jazykové šablony.
+
+### Checklist: lokalizace bez chaosu
+
+- Máme vybraný konkrétní trh a segment, ne jen jazyk.
+- Víme, která zákaznická cesta musí být lokalizovaná jako první.
+- Máme slovník klíčových produktových pojmů.
+- Překlady mají kontext, vlastníka a review proces.
+- Pricing, fakturace, onboarding a support používají stejnou terminologii.
+- Máme support matici pro každý jazyk.
+- E-maily, notifikace, exporty a PDF šablony jsou v lokalizačním plánu.
+- Technické řešení nelepí věty z náhodných kusů stringů.
+- Nové lokalizační a support nástroje prošly privacy-first kontrolou.
+- Víme, jak stáhnout nebo ukončit data u dodavatelů zapojených do lokalizace.
+
+### Šablona lokalizační karty
+
+```markdown
+## Lokalizační karta: [trh / jazyk / segment]
+
+### Cíl
+- Pro koho lokalizujeme:
+- Proč právě teď:
+- Jaký obchodní výsledek čekáme:
+
+### Rozsah první verze
+- Landing page:
+- Produktové obrazovky:
+- E-maily a notifikace:
+- Help centrum:
+- Pricing a fakturace:
+
+### Terminologie
+- Klíčové pojmy:
+- Zakázané nebo rizikové překlady:
+- Tón komunikace:
+
+### Support
+- Podporované jazyky:
+- SLA / očekávání:
+- Incidentová komunikace:
+- Vlastník supportu:
+
+### Privacy-first kontrola
+- Nové nástroje nebo dodavatelé:
+- Jaká data se do nich posílají:
+- Retence a export:
+- Přístupová práva:
+
+### Release
+- Kdo schvaluje překlady:
+- Jak se testuje kritická cesta:
+- Jak sbíráme feedback:
+- Datum další revize:
+```
+
+Codyho komentář: Lokalizace není romantická práce s vlaječkami v patičce webu. Je to provozní disciplína. Když ji uděláš dobře, zákazník má pocit, že produkt vznikl i pro něj. Když špatně, i nejlepší SaaS najednou působí jako automaticky přeložený návod k mikrovlnce z roku 2004.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -8245,6 +8439,7 @@ Codyho komentář: Customer success není umění poznat, že zákazník otevře
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha AV o lokalizaci SaaS bez překládacího chaosu: výběr trhu, lokalizace zákaznické cesty, terminologie, pricing, support, technická pravidla, privacy-first kontrola, checklist a lokalizační karta.
 - **2026-09-14:** Doplněna příloha AU o customer success signálech bez šmírování: definice úspěchu, health score, segmentace podle kontextu, pomocná komunikace, ruční poznámky, playbooky, minimalizace dat, checklist a customer success karta.
 - **2026-09-14:** Doplněna příloha AT o B2B datové místnosti pro privacy-first SaaS: vrstvy sdílení, bezpečnostní profil, subprocesory, certifikace bez mlžení, řízení přístupů, napojení na obchodní proces, checklist a šablona datové místnosti.
 - **2026-09-13:** Doplněna příloha AS o ochraně proti zneužití bez trestání dobrých uživatelů: mapování abuse scénářů, kontextové rate limity, měkké brzdy, CAPTCHA jako poslední vrstva, ochrana e-mailů, kontrolované výjimky, metriky a šablona abuse karty.
