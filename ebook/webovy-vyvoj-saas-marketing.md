@@ -8893,6 +8893,172 @@ Codyho komentář: Dobrá observability je jako dobrý mechanik. Nepotřebuje ti
 
 ---
 
+
+## Příloha AZ: Domény, DNS a produktová identita bez nočního požáru
+
+Doména vypadá jako drobnost, dokud nepřestane fungovat. Pak se z ní během pěti minut stane nejdražší řádek v projektu: web nejde otevřít, e-maily padají do prázdna, zákazníci nevědí, jestli služba žije, a tým v panice hledá, kdo vlastně má přístup k registrátorovi. Privacy-first SaaS nepotřebuje heroický DNS zásah ve dvě ráno. Potřebuje nudnou, dohledatelnou správu identity.
+
+Doména není jen adresa. Je to veřejný důkaz, že produkt existuje, komunikuje a dá se mu věřit. Proto ji spravuj stejně pečlivě jako produkční databázi, jen s menším množstvím dramatických logů.
+
+### Doménu vybírej jako dlouhodobé aktivum
+
+Název produktu může být hravý. Doména musí být použitelná. Při výběru si ověř:
+
+- dá se doména nadiktovat po telefonu bez tří vysvětlivek,
+- nevypadá jako překlep zavedené značky,
+- funguje pro české i zahraniční zákazníky,
+- má rozumnou variantu pro e-mailovou komunikaci,
+- nebude tě nutit k trapným kompromisům v názvech subdomén,
+- nepůsobí podezřele v obchodních dokumentech.
+
+U evropského B2B SaaS je často lepší jednoduchá doména s jasnou značkou než exotická koncovka, která sice vypadá startupově, ale zákazník ji pokaždé píše špatně. Pokud máš český trh, `.cz` je pořád silný důvěryhodnostní signál. Pokud míříš evropsky, zvaž hlavní produktovou doménu a lokální přesměrování, ne deset oddělených webů bez údržby.
+
+Codyho komentář: Doména není tetování na čelo, ale rebrand ve chvíli, kdy už posíláš faktury, onboarding e-maily a odkazy v dokumentaci, bolí dost podobně.
+
+### Odděl veřejný web, aplikaci a infrastrukturu
+
+Jedna doména nemusí znamenat jeden velký chumel. Naopak: dobré členění subdomén dává týmu pořádek a zákazníkům čitelnou cestu.
+
+Praktický vzor:
+
+- `example.cz` — marketingový web a hlavní nabídka,
+- `app.example.cz` — přihlášení do aplikace,
+- `docs.example.cz` — dokumentace nebo znalostní báze,
+- `status.example.cz` — stav služeb a incidenty,
+- `api.example.cz` — veřejné API, pokud ho opravdu máš,
+- `help.example.cz` — podpora, pokud je oddělená od dokumentace.
+
+Nevytvářej subdomény jen proto, že to vypadá důležitě. Každá subdoména je další místo, které má mít TLS, monitoring, vlastníka, DNS záznamy, redirect pravidla a plán při změně dodavatele. Když stránka slouží jen jako jedna sekce webu, často stačí `/docs`, `/status` nebo `/help`.
+
+### DNS změny plánuj jako release
+
+DNS se často mění lehkovážně: někdo přepíše záznam, počká tři minuty, nic se nerozbije, a jde se dál. To funguje přesně do chvíle, kdy změna ovlivní e-mail, ověření domény, certifikát nebo produkční traffic.
+
+Před změnou si napiš mini plán:
+
+- co se mění a proč,
+- kdo změnu schvaluje,
+- jaký je původní stav,
+- jaký je očekávaný nový stav,
+- kdy se změna dělá,
+- jak ověříš výsledek,
+- jak provedeš rollback.
+
+U citlivějších změn sniž TTL dopředu, ne až ve chvíli požáru. A hlavně: DNS záznamy dokumentuj mimo administraci registrátora. Když ztratíš přístup nebo někdo omylem smaže zónu, screenshot v chatu není obnova.
+
+### E-mailová identita patří do stejné mapy
+
+Produkt může mít krásný web, ale pokud e-maily končí ve spamu, působí nedůvěryhodně. E-mailová identita má být navržená, ne poslepovaná podle toho, co zrovna vyžaduje nástroj na newsletter.
+
+Rozděl e-mailové proudy:
+
+- **osobní komunikace:** lidé v týmu, obchod, podpora,
+- **transakční e-maily:** registrace, reset hesla, faktury, systémové zprávy,
+- **marketingové e-maily:** newsletter, produktové novinky, pozvánky,
+- **technické notifikace:** alerty, logy, interní zprávy.
+
+Každý proud má jiný účel, jinou retenci a jiná rizika. Transakční e-mail nesmí spadnout jen proto, že marketingový nástroj poslal špatně připravenou kampaň. Pro menší SaaS často dává smysl oddělit domény nebo subdomény pro transakční a marketingovou komunikaci, aby reputace jedné části neshodila druhou.
+
+Privacy-first pravidlo: neposílej zákaznická data e-mailem jen proto, že je to jednoduché. Reset hesla, potvrzení platby nebo upozornění na změnu stavu mají obsahovat minimum údajů a vést do zabezpečeného prostředí, kde uživatel uvidí detail.
+
+### Přístupy k doménám drž mimo běžný chaos
+
+Domény a DNS nesmí viset na jednom osobním účtu člověka, který zrovna odjel na dovolenou nebo odešel z firmy. Nastav správu tak, aby byla bezpečná a obnovitelná:
+
+- vlastnictví domény patří firmě, ne freelancerovi,
+- registrátor má zapnuté vícefaktorové ověření,
+- nouzový přístup je uložený mimo běžný password manager jednotlivce,
+- změny DNS dělají jen určení lidé,
+- účty dodavatelů mají omezený rozsah,
+- offboarding kontroluje i domény, DNS a e-mailové nástroje.
+
+Pokud agentura spravuje web, nemusí automaticky vlastnit doménu. Může mít delegovaný přístup, konkrétní DNS záznam nebo technickou roli. Vlastnictví identity produktu má zůstat u firmy.
+
+### Certifikáty a přesměrování mají být součástí kontroly
+
+TLS certifikát je základní hygiena. Stejně důležitá jsou ale i přesměrování a kanonické URL. Uživatel by se měl dostat na správnou verzi webu bez ohledu na to, jestli zadá `http`, `https`, `www` nebo starý odkaz z dokumentace.
+
+Zkontroluj:
+
+- všechny veřejné domény používají HTTPS,
+- staré URL mají smysluplné přesměrování,
+- marketingový web nemá duplicitní varianty stejné stránky,
+- aplikace nepřesměrovává přihlášeného uživatele přes marketingové trackery,
+- status page a dokumentace fungují i při incidentu hlavní aplikace,
+- expirovaný certifikát spustí alert dřív než zákazník naštvaný e-mail.
+
+Neřeš jen hlavní stránku. Ověř i přihlašovací obrazovku, reset hesla, fakturační portál, webhook callbacky a veřejné assety. Nejhorší výpadky často nejsou na homepage, ale na zapomenuté subdoméně, která je kritická pro jeden důležitý workflow.
+
+### Doménová mapa šetří čas při incidentech
+
+Doménová mapa je jednoduchý dokument, který říká, co kam vede a kdo za to odpovídá. Není to umělecké dílo. Je to hasicí přístroj s popiskem.
+
+Měla by obsahovat:
+
+- doménu a její účel,
+- registrátora a vlastníka,
+- DNS poskytovatele,
+- klíčové záznamy,
+- používané subdomény,
+- navázané služby,
+- odpovědnou osobu,
+- datum poslední kontroly,
+- postup při incidentu.
+
+Kontroluj ji aspoň kvartálně a vždy po větší změně infrastruktury, e-mailového nástroje nebo hostingu. Když zrušíš dodavatele, odstraň i jeho DNS záznamy. Opuštěný záznam je jako zapomenutý klíč pod rohožkou — většinu času nudný, jednou extrémně drahý.
+
+### Checklist: domény a DNS privacy-first
+
+- Je vlastnictví domény vedené na firmu, ne na jednotlivce nebo agenturu?
+- Má registrátor i DNS účet vícefaktorové ověření?
+- Existuje aktuální doménová mapa mimo administraci DNS?
+- Jsou web, aplikace, dokumentace a status stránka oddělené smysluplně?
+- Má každá subdoména vlastníka a účel?
+- Jsou transakční a marketingové e-maily oddělené podle rizika?
+- Posílají e-maily jen minimum zákaznických údajů?
+- Má tým postup pro DNS změny včetně rollbacku?
+- Sleduje monitoring certifikáty, hlavní domény i kritické subdomény?
+- Probíhá pravidelný úklid starých záznamů po dodavatelích?
+
+### Šablona doménové karty
+
+```markdown
+## Doménová karta: [doména / subdoména]
+
+### Účel
+- K čemu slouží:
+- Pro koho je veřejná:
+- Kritičnost:
+
+### Vlastnictví
+- Právní vlastník:
+- Registrátor:
+- DNS poskytovatel:
+- Odpovědná osoba:
+
+### Záznamy
+- Hlavní záznamy:
+- E-mailové záznamy:
+- Ověřovací záznamy dodavatelů:
+- Záznamy k odstranění / kontrole:
+
+### Provoz
+- Monitoring:
+- TLS / certifikát:
+- Přesměrování:
+- Rollback postup:
+
+### Privacy-first kontrola
+- Jaká data přes tuto doménu tečou:
+- Kteří dodavatelé jsou napojení:
+- Jak se minimalizují údaje v e-mailech:
+- Datum poslední revize:
+```
+
+Codyho komentář: DNS je místo, kde se zkratky tváří jako kouzla. Ve skutečnosti je to jen veřejná tabulka důvěry. Chovej se k ní podle toho.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -8941,6 +9107,7 @@ Codyho komentář: Dobrá observability je jako dobrý mechanik. Nepotřebuje ti
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha AZ o doménách, DNS a produktové identitě: výběr domény, členění subdomén, DNS změny, e-mailová reputace, přístupy, certifikáty, doménová mapa a checklist.
 - **2026-09-14:** Doplněna příloha AY o produkčním debugování bez lovu osobních dat: metriky, logy, trace, technické identifikátory, bezpečné chybové zprávy, retence, přístupy, checklist a debug karta.
 - **2026-09-14:** Doplněna krátká sekce k offboardingu tokenů v příloze AX: revize vlastnictví, vypnutí nepoužívaných klíčů, rotace nejistých přístupů a zápis do evidence.
 - **2026-09-14:** Doplněna příloha AX o servisních účtech, tokenech a secrets: rozlišení identit, evidence tokenů, nejmenší oprávnění, ukládání mimo kód, rotace, produkční přístupy, checklist a token karta.
