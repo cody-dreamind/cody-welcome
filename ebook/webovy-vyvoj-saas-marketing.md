@@ -11416,7 +11416,160 @@ Pokud měříš konverzi, stačí server-side událost „formulář odeslán“
 - Mazání:
 ```
 
+## Příloha BP: Audit produktových nastavení bez temného sklepa
+
+Produktová nastavení jsou místo, kde se často ukáže skutečná kvalita SaaS. Landing page může být naleštěná, onboarding přátelský a demo krásné, ale když zákazník po přihlášení najde změť přepínačů, nejasných voleb a nastavení schovaných v pěti menu, důvěra rychle mizí. Nastavení nejsou skladiště okrajových funkcí. Jsou ovládací panel vztahu mezi produktem, týmem a daty.
+
+Privacy-first SaaS potřebuje nastavení, která jsou čitelná, vratná a vysvětlená. Ne proto, že uživatel miluje formuláře v administraci. Protože rozhoduje o datech, přístupech, účtování, notifikacích a integracích — tedy přesně o věcech, které umí pokazit den, když jsou navržené jako úniková místnost pro účetní.
+
+> Codyho komentář: Nastavení je jako sklep. Když ho rok ignoruješ, jednou tam vlezeš pro žárovku a najdeš tři rozbité židle, starý router, neoznačené kabely a pocit, že produkt mezitím založil vlastní podzemní kult.
+
+### Rozděl nastavení podle rozhodnutí, ne podle databázových tabulek
+
+Nejčastější chyba je kopírovat do UI technickou strukturu produktu. `Account`, `User`, `Workspace`, `Billing`, `Notifications`, `Integrations`, `Security` — to může být interně správně, ale uživatel nepřemýšlí v entitách. Přemýšlí v otázkách: kdo má přístup, co se komu posílá, kde jsou data, kolik platíme, jak vypnout integraci a co se stane při odchodu.
+
+Dobrá informační architektura nastavení proto vychází z rozhodnutí:
+
+- **Tým a přístupy:** kdo může produkt používat a s jakými právy.
+- **Organizace:** fakturační údaje, název, výchozí jazyk, časové pásmo a kontakty.
+- **Data a soukromí:** export, mazání, retence, auditní log, zpracovatelské informace.
+- **Notifikace:** typy zpráv, kanály, frekvence a odhlášení.
+- **Integrace:** napojené systémy, rozsah dat, stav synchronizace a vypnutí.
+- **Bezpečnost:** přihlášení, MFA, aktivní relace, API klíče a přístupové tokeny.
+
+Technický model může zůstat v backendu. V UI má vyhrát mentální model zákazníka. Pokud musí uživatel vědět, jestli se něco nastavuje na úrovni organizace, workspace, projektu nebo uživatele, vysvětli to přímo v rozhraní. Nečekej, že si to domyslí z drobečkové navigace.
+
+### Každé rizikové nastavení potřebuje důsledek
+
+Přepínač bez vysvětlení je malý hazard. Zvlášť u nastavení, která mění data, přístupy, fakturaci nebo veřejnou viditelnost. Nestačí napsat „Zapnout synchronizaci“. Uživatel má vědět, co se začne dít, jak často, s jakými daty a jak změnu vrátit.
+
+U rizikových akcí vždy ukaž:
+
+- co přesně se změní,
+- koho se změna dotkne,
+- jestli je změna vratná,
+- kdy se projeví,
+- jaké datové toky vzniknou nebo skončí,
+- kdo má právo změnu udělat,
+- kde bude vidět auditní stopa.
+
+Příklad špatného textu: „Smazat integraci“. Lepší text: „Odpojit integraci s účetním systémem. Nové faktury se přestanou synchronizovat ihned, historické záznamy v Cody SaaS zůstanou uložené podle retenčních pravidel. Změnu uvidí administrátoři v auditním logu.“
+
+Tohle není ukecanost. To je prevence support ticketů, právních překvapení a pátečního deploye, který z nějakého důvodu zase končí v neděli ráno.
+
+### Výchozí hodnoty jsou produktové rozhodnutí
+
+Defaulty nejsou neutrální. Většina zákazníků je nechá tak, jak jsou. Proto musí být výchozí nastavení bezpečná, střídmá a pochopitelná. Pokud produkt ve výchozím stavu zapne všechny notifikace, všechny integrace, dlouhou retenci a nejširší sdílení, není to růst. Je to dluh s hezkou ikonou ozubeného kolečka.
+
+Privacy-first defaulty vypadají nudně, ale fungují:
+
+- minimum notifikací, které jsou nutné pro službu,
+- žádné marketingové zprávy bez samostatné volby,
+- nejkratší praktická retence pro pomocná data,
+- přístup jen pro pozvané lidi,
+- integrace vypnuté, dokud je někdo vědomě nenakonfiguruje,
+- export a smazání dostupné bez kontaktování podpory,
+- citlivé akce chráněné dodatečným potvrzením.
+
+Když potřebuješ agresivnější výchozí režim kvůli hodnotě produktu, napiš proč. Například „Týdenní souhrn je zapnutý, protože pomáhá administrátorům zachytit nevyřízené úkoly. Lze ho vypnout v notifikacích.“ Transparentnost obvykle bolí méně než skrytý opt-out.
+
+### Prázdné stavy musí učit bez manipulace
+
+Nastavení často obsahují stránky, kde ještě nic není: žádné integrace, žádné API klíče, žádní členové týmu, žádné webhooks, žádné fakturační údaje. Prázdný stav nemá být jen text „Nic zde není“. Má vysvětlit, k čemu sekce slouží, kdy ji použít a jak začít bezpečně.
+
+Dobrá šablona prázdného stavu:
+
+- **Co to je:** jedna věta bez interního žargonu.
+- **Kdy to použít:** konkrétní scénář.
+- **Co se stane s daty:** stručný privacy-first popis.
+- **První bezpečný krok:** nejmenší akce bez velkého závazku.
+- **Alternativa:** odkaz na dokumentaci nebo ruční postup.
+
+Příklad: „API klíče umožní propojit Cody SaaS s vaším interním systémem. Klíč vytvořte jen pro konkrétní účel a nastavte mu nejnižší potřebná práva. Hodnotu klíče ukážeme jen jednou; později ji lze pouze zneplatnit a vytvořit nový klíč.“
+
+To je lepší než hero box s tlačítkem „Unlock integrations 🚀“. Raketa je fajn, ale u API klíčů chci spíš hasicí přístroj.
+
+### Nastavení má mít vlastní release disciplínu
+
+Změny v nastavení jsou nenápadné, a tím nebezpečné. Přidáš nový přepínač, přejmenuješ volbu, přesuneš integraci, změníš default — a najednou zákazník neví, proč se něco chová jinak. Nastavení proto patří do release procesu stejně jako hlavní funkce.
+
+Před úpravou nastavení si odpověz:
+
+- mění se výchozí chování pro nové nebo existující účty,
+- vzniká nový typ osobních údajů,
+- mění se souhlas, notifikace nebo export,
+- je potřeba migrace starých hodnot,
+- musí zákazník dostat zprávu předem,
+- je změna vidět v dokumentaci a nápovědě,
+- umí support vysvětlit starý i nový stav.
+
+U větších změn přidej krátký changelog přímo do administrace. Ne každý zákazník čte blog, release notes nebo e-mail. Když se něco mění v nastavení, nejlepší místo pro vysvětlení je často právě tam.
+
+### Audituj nastavení jako zákaznickou cestu
+
+Jednou za čas projdi nastavení od začátku do konce jako nový administrátor. Ne jako vývojář, který ví, kde co je. Jako člověk, který má dvacet minut před poradou a potřebuje přidat kolegu, vypnout notifikaci a ověřit fakturační kontakt.
+
+Audit proveď scénářově:
+
+1. nový zákazník nastavuje organizaci,
+2. administrátor zve členy týmu,
+3. účetní hledá fakturaci,
+4. bezpečnostní člověk kontroluje přístupy,
+5. zákazník chce export dat,
+6. zákazník chce odejít,
+7. support řeší špatně nastavenou integraci.
+
+U každého scénáře sleduj, kolik kroků zabere, kde se člověk může splést a jestli UI jasně říká důsledky. Pokud nastavení působí jako archeologická expedice, nevysvětluj uživateli, že „to tam přece je“. Přesuň to, přejmenuj to nebo napiš lepší text.
+
+### Checklist: audit produktových nastavení privacy-first
+
+- [ ] Každá sekce nastavení odpovídá zákaznickému rozhodnutí, ne jen interní tabulce.
+- [ ] Rizikové akce vysvětlují dopad, vratnost, datové toky a auditní stopu.
+- [ ] Výchozí hodnoty jsou bezpečné, střídmé a obhajitelné.
+- [ ] Notifikace, marketing a produktové zprávy mají oddělené preference.
+- [ ] Integrace ukazují rozsah dat, stav synchronizace a jasné odpojení.
+- [ ] Export, mazání a retence jsou dohledatelné bez kontaktování podpory.
+- [ ] API klíče a tokeny mají názvy, účel, práva, expiraci a možnost zneplatnění.
+- [ ] Prázdné stavy vysvětlují první bezpečný krok.
+- [ ] Změny nastavení procházejí release kontrolou a dokumentací.
+- [ ] Support umí vysvětlit aktuální i historické chování důležitých voleb.
+
+### Šablona karty nastavení
+
+```markdown
+## Karta nastavení: [název sekce / volby]
+
+### Účel
+- Jaké zákaznické rozhodnutí tato volba řeší:
+- Kdo ji typicky nastavuje:
+- Kdy ji zákazník hledá:
+
+### Dopad
+- Co se změní po zapnutí / vypnutí:
+- Koho se změna dotkne:
+- Kdy se projeví:
+- Je změna vratná:
+
+### Data a soukromí
+- Jaké údaje se sbírají nebo přenášejí:
+- Jak dlouho se drží:
+- Kdo k nim má přístup:
+- Kde je export nebo mazání:
+
+### Bezpečnost
+- Potřebná role:
+- Potvrzení citlivé akce:
+- Auditní log:
+- Rollback nebo náhradní postup:
+
+### Text v produktu
+- Krátký popis pro UI:
+- Varování u rizikové akce:
+- Odkaz na nápovědu:
+```
 ## Pracovní log
+
+- **2026-09-14:** Doplněna příloha BP o auditu produktových nastavení: informační architektura podle rozhodnutí, rizikové akce, privacy-first defaulty, prázdné stavy, release disciplína, scénářový audit, checklist a karta nastavení.
 
 - **2026-09-14:** Doplněna příloha BO o formulářích a sběru leadů bez datového vysavače: účel formulářů, minimalizace polí, souhlasy, antispam, lead routing, děkovací stránka, checklist a formulářová karta.
 - **2026-09-14:** Doplněna příloha BN o stagingu a testovacích prostředích bez produkčního nepořádku: typy prostředí, bezpečná testovací data, konfigurace, přístupy, preview expirace, migrace, notifikace, checklist a karta prostředí.
