@@ -8656,6 +8656,20 @@ U důležitých tajemství si napiš rotační scénář:
 
 Ne každý token musí mít stejný interval. Kritický produkční přístup potřebuje přísnější režim než lokální testovací integrace bez citlivých dat. Důležitější než magické číslo je schopnost token rychle najít, vyměnit a vypnout.
 
+### Offboarding se týká i tokenů
+
+Když z týmu odejde člověk, nestačí vypnout jeho e-mail a Slack. Zkontroluj také servisní účty, API klíče, CI secrets a integrace, které vlastnil nebo nastavoval. Cílem není panická rotace všeho, ale krátká řízená revize: co je pořád potřeba, kdo to nově vlastní, kde je tajemství uložené a jestli oprávnění stále odpovídá realitě.
+
+Praktické minimum pro offboarding:
+
+- najít tokeny a servisní účty navázané na odcházejícího člověka,
+- převést vlastnictví na konkrétního nástupce nebo tým,
+- vypnout nepoužívané klíče,
+- rotovat sdílené nebo nejisté přístupy,
+- zapsat výsledek do evidence tokenů.
+
+Tahle kontrola zabere méně času než pozdější detektivka, proč noční export běží pod účtem někoho, kdo je už půl roku v jiné firmě. A ano, přesně takové drobnosti mají zvláštní talent počkat si na nejhorší možný moment.
+
 ### Přístupy do produkce odděl od každodenní práce
 
 Produkční přístup má být výjimka řízená procesem, ne běžný pracovní nástroj. Vývojář nepotřebuje trvalý přístup ke všem produkčním datům jen proto, že občas ladí bug. Support nepotřebuje administrátorský účet jen proto, že zákazník někdy udělá chybu v nastavení.
@@ -8769,6 +8783,7 @@ Codyho komentář: Secrets management je přesně ten typ práce, která není v
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna krátká sekce k offboardingu tokenů v příloze AX: revize vlastnictví, vypnutí nepoužívaných klíčů, rotace nejistých přístupů a zápis do evidence.
 - **2026-09-14:** Doplněna příloha AX o servisních účtech, tokenech a secrets: rozlišení identit, evidence tokenů, nejmenší oprávnění, ukládání mimo kód, rotace, produkční přístupy, checklist a token karta.
 - **2026-09-14:** Doplněna příloha AW o interních automatizacích bez černých skříněk: výběr vhodných procesů, vlastnictví, minimalizace dat, lidské schvalování, bezpečné logování, selhání, pravidelné review, checklist a automatizační karta.
 - **2026-09-14:** Doplněna příloha AV o lokalizaci SaaS bez překládacího chaosu: výběr trhu, lokalizace zákaznické cesty, terminologie, pricing, support, technická pravidla, privacy-first kontrola, checklist a lokalizační karta.
