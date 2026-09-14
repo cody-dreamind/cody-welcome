@@ -10270,6 +10270,169 @@ Ideální je mít pro screenshoty samostatný „media dataset“: krásně ukli
 
 ---
 
+## Příloha BI: Postupné nasazování změn bez release rulety
+
+Malý SaaS tým často žije v rytmu „rychle opravit, rychle nasadit, rychle doufat“. To funguje přesně do chvíle, než jedna drobná úprava rozbije onboarding, fakturaci nebo export dat pro zákazníka, který zrovna posílá podklady účetní. Postupné nasazování není korporátní ceremoniál. Je to způsob, jak doručovat změny rychleji, ale s menší šancí, že celý produkt spadne na obličej jako prezentace bez nabíječky.
+
+Dobré nasazování má tři cíle:
+
+- zákazník dostane hodnotu bez zbytečného čekání,
+- tým umí chybu rychle zastavit nebo vrátit,
+- produkt nesbírá víc dat jen proto, aby se někdo cítil analyticky důležitě.
+
+Privacy-first přístup tady neznamená „nic neměř“. Znamená „měř přesně to, co potřebuješ k bezpečnému rozhodnutí, a zbytek nech být“.
+
+### Každá změna potřebuje typ, ne drama
+
+Ne všechny změny mají stejnou váhu. Oprava překlepu v nápovědě nepotřebuje stejné řízení jako nová logika oprávnění. Pokud tým hází všechno do jednoho pytle, buď zbytečně brzdí malé úpravy, nebo podceňuje rizikové releasy.
+
+Praktické rozdělení:
+
+- **Kosmetická změna:** texty, drobné UI, nápověda, prázdné stavy.
+- **Produktová změna:** nový krok v onboardingu, úprava formuláře, nová akce v aplikaci.
+- **Datová změna:** migrace, import, export, změna validace nebo výpočtu.
+- **Bezpečnostní změna:** role, oprávnění, tokeny, přihlášení, auditní stopa.
+- **Obchodní změna:** pricing, trial, billing, limity, zákaznické e-maily.
+
+Každý typ má jiný kontrolní seznam. Kosmetiku můžeš poslat hned po rychlé kontrole. Datová a bezpečnostní změna potřebuje plán návratu, test na reálném scénáři a jasného vlastníka.
+
+### Feature flag není omluva pro chaos
+
+Feature flag je vypínač. Není to magická skříň, do které schováš nedodělaný produkt. Pokud tým používá flagy bez pravidel, po pár měsících má aplikaci plnou větví, kterým nikdo nerozumí. To je technický dluh s knoflíkem.
+
+Každý flag by měl mít kartu:
+
+- co zapíná,
+- pro koho je dostupný,
+- kdo ho vlastní,
+- kdy se má odstranit,
+- jak poznáš, že ho máš vypnout,
+- jestli ovlivňuje osobní nebo zákaznická data.
+
+Příklad dobrého flagu: „Nový import CSV pro tři pilotní účty ve službách, vypnout při chybovosti importu nad dohodnutou hranici nebo při prvním potvrzeném poškození dat.“
+
+Příklad špatného flagu: „new-import-v2-final-real.“ Codyho komentář: pokud název obsahuje „final“ a „real“, není to release management. Je to volání o pomoc.
+
+### Rollout začínej nejmenším smysluplným publikem
+
+Postupné nasazení neznamená, že změnu ukážeš náhodným pěti procentům uživatelů. U B2B SaaS často dává větší smysl vybrat konkrétní segment nebo několik účtů, kde rozumíš kontextu.
+
+Bezpečný rollout může mít tyto kroky:
+
+1. **Interní test:** tým projde hlavní scénář na syntetických datech.
+2. **Demo nebo sandbox:** změna se ověří mimo produkční data.
+3. **Pilotní účty:** zapneš funkci zákazníkům, kteří znají kontext a souhlasili s pilotem.
+4. **Segment:** rozšíříš na podobné zákazníky s podobným použitím.
+5. **Výchozí zapnutí:** funkce je standard pro nové nebo všechny účty.
+6. **Úklid:** odstraníš starou cestu, flagy a dočasnou dokumentaci.
+
+Největší chyba je přeskočit poslední krok. Staré cesty v produktu jsou jako krabice kabelů v kanceláři: nikdo neví, k čemu patří, ale všichni se bojí je vyhodit.
+
+### Měř zdraví změny, ne život zákazníka
+
+U releasu nepotřebuješ vědět, na co každý uživatel klikl po večeři. Potřebuješ vědět, jestli změna funguje bezpečně a přináší očekávaný výsledek.
+
+Pro většinu změn stačí několik agregovaných signálů:
+
+- počet úspěšně dokončených akcí,
+- počet chyb podle typu,
+- počet ručních zásahů podpory,
+- počet návratů na starou cestu,
+- počet zákazníků, kteří dokončili cílový scénář,
+- kvalitativní poznámky ze supportu nebo pilotního hovoru.
+
+Vyhýbej se sběru kompletních session replayů, zbytečně detailních payloadů nebo dlouhodobému ukládání osobních údajů jen kvůli jedné produktové otázce. Pokud potřebuješ diagnostiku, nastav krátkou retenci, omezený přístup a jasný účel.
+
+### Rollback musí být nudný, ne hrdinský
+
+Rollback není selhání. Selhání je nevědět, jak změnu bezpečně zastavit. Každá rizikovější úprava by měla mít předem napsanou odpověď na otázku: „Co uděláme, když se to pokazí?“
+
+Rollback plán nemusí být složitý:
+
+- vypnout feature flag,
+- vrátit předchozí verzi aplikace,
+- zastavit importní frontu,
+- skrýt nový krok z navigace,
+- obnovit starý text nebo e-mail,
+- kontaktovat pilotní zákazníky s krátkým vysvětlením.
+
+U datových změn je důležité vědět, jestli rollback vrací jen kód, nebo i data. Někdy je bezpečnější změnu zastavit, opravit data cíleným skriptem a pokračovat až po kontrole. Automatické „vrátíme všechno“ může napáchat víc škody než původní bug.
+
+### Komunikuj podle dopadu, ne podle ega týmu
+
+Ne každá změna potřebuje fanfáry v changelogu. Zákazníka nezajímá, že tým refaktoroval komponentu. Zajímá ho, jestli má něco dělat jinak, jestli se mění výsledek práce nebo jestli má nové riziko.
+
+Komunikační pravidlo:
+
+- **Bez dopadu na workflow:** interní poznámka, žádné rušení zákazníka.
+- **Malé zlepšení:** stručný changelog nebo poznámka v aplikaci.
+- **Změna chování:** e-mail, nápověda a jasné datum účinnosti.
+- **Změna dat, oprávnění nebo cen:** přímá komunikace, dokumentace a možnost dotazů.
+- **Incident nebo chyba:** status update, dopad, další krok a následné poučení.
+
+Privacy-first komunikace je konkrétní. Neříká „vylepšili jsme zážitek“. Říká „export teď obsahuje nový sloupec Stav zakázky; pokud používáte vlastní import do účetnictví, zkontrolujte mapování“.
+
+### Po releasu uklízej hned, dokud si pamatuješ proč
+
+Release nekončí nasazením. Končí až ve chvíli, kdy je změna stabilní, staré cesty jsou odstraněné a dokumentace odpovídá realitě.
+
+Po každém větším releasu zkontroluj:
+
+- jsou dočasné flagy odstraněné nebo mají nové datum review,
+- nápověda odpovídá aktuálním obrazovkám,
+- support ví, jak odpovídat na dotazy,
+- metriky neměří dočasné experimenty donekonečna,
+- staré exporty nebo API chování mají jasný konec,
+- zákaznická komunikace je uložená u release karty.
+
+Tahle práce není sexy. Ale právě ona rozhoduje, jestli produkt po roce působí jako promyšlený systém, nebo jako archeologické naleziště sprintů.
+
+### Checklist: postupné nasazování privacy-first
+
+- Má změna jasný typ a vlastníka?
+- Víme, jaký zákaznický scénář má fungovat po nasazení?
+- Existuje nejmenší smysluplné publikum pro první rollout?
+- Má feature flag datum odstranění a vypínací kritéria?
+- Měříme jen agregované signály potřebné pro rozhodnutí?
+- Je připraven rollback nebo stop plán?
+- Ví support, co se mění a jak reagovat?
+- Je zákaznická komunikace přiměřená dopadu změny?
+- Počítá plán s úklidem staré cesty, dokumentace a metrik?
+
+### Šablona release karty
+
+## Release karta: [název změny]
+
+### Kontext
+
+- **Problém nebo příležitost:** proč změnu děláme.
+- **Typ změny:** kosmetická, produktová, datová, bezpečnostní, obchodní.
+- **Vlastník:** člověk odpovědný za rozhodnutí a komunikaci.
+
+### Rollout
+
+- **První publikum:** interní tým, sandbox, pilotní účty, segment.
+- **Feature flag:** název, vlastník, datum review, datum odstranění.
+- **Kritéria rozšíření:** co musí být pravda, než změnu zapneme dalším.
+
+### Signály
+
+- **Úspěch:** dokončené akce, méně dotazů, rychlejší aktivace, kvalitativní feedback.
+- **Riziko:** chyby, ruční zásahy, zmatení zákazníků, dopad na data.
+- **Retence diagnostiky:** co sbíráme, proč, kdo má přístup a kdy data mažeme.
+
+### Rollback
+
+- **Stop podmínky:** kdy změnu zastavíme.
+- **Technický krok:** vypnutí flagu, revert, skript, ruční oprava.
+- **Zákaznická zpráva:** kdo informuje dotčené zákazníky a jak stručně.
+
+### Úklid
+
+- **Staré cesty:** co odstraníme po stabilizaci.
+- **Dokumentace:** nápověda, changelog, interní wiki, support makra.
+- **Datum review:** kdy kartu zavřeme nebo aktualizujeme.
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -10318,6 +10481,7 @@ Ideální je mít pro screenshoty samostatný „media dataset“: krásně ukli
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha BI o postupném nasazování změn: typy releasů, feature flagy, rollout, agregované měření, rollback, komunikace, úklid a šablona release karty.
 - **2026-09-14:** Doplněna příloha BH o demo prostředích a sandboxech bez úniku zákaznických dat: syntetické datasety, scénáře, demo role, reset prostředí, bezpečné falešné integrace, kontrola screenshotů, checklist a demo karta.
 - **2026-09-14:** Doplněna příloha BG o samoobslužné nápovědě bez support labyrintu: situační struktura článků, akční návody, kontextová UI nápověda, převod support dotazů na obsah, privacy-first měření, údržba, eskalace, checklist a nápovědní karta.
 - **2026-09-14:** Doplněna příloha BF o rolích a oprávněních v SaaS: citlivé akce, základní role, vlastnictví workspace, bezpečné pozvánky, kontextová potvrzení, testování oprávnění, privacy-first přístup k týmovým datům, checklist a role karta.
