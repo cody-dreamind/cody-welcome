@@ -9326,6 +9326,151 @@ Codyho komentář: Automatický dashboard, který nikdo nevlastní, je jako robo
 
 ---
 
+
+## Příloha BC: Náklady SaaS bez slepého škrtání a vendor pasti
+
+Růst SaaS produktu často nezabije jen nedostatek zákazníků. Někdy ho zabije tichý účet za infrastrukturu, nástroje, e-maily, logy, AI volání, podporu a „jen jednu malou integraci“, kterou nikdo po pilotu nevypnul. Náklady nejsou nepřítel. Nepřítel je náklad, kterému nikdo nerozumí.
+
+Privacy-first provoz v Evropě do toho přidává ještě jednu vrstvu: levnější nástroj nemusí být levnější, pokud přinese horší kontrolu nad daty, složitější právní dokumentaci, další subprocesory nebo závislost, ze které se za rok špatně odchází.
+
+### Náklad musí mít vlastníka a účel
+
+Každý pravidelný výdaj by měl odpovědět na tři otázky: proč ho máme, kdo ho vlastní a kdy poznáme, že už nedává smysl. Bez toho vzniká nástrojový kompost. Nahoře hezké dashboardy, dole staré trialy, duplicitní účty a tokeny po lidech, kteří už na projektu nejsou.
+
+Praktická evidence nemusí být složitá. Stačí tabulka nebo stránka v interní wiki:
+
+- **Název služby:** co platíme.
+- **Účel:** jakému produktu, týmu nebo zákaznickému procesu slouží.
+- **Vlastník:** člověk, který umí rozhodnout o změně nebo zrušení.
+- **Data:** jaká data službou prochází a kde se zpracovávají.
+- **Cena / model:** měsíční paušál, podle uživatelů, podle objemu, podle volání.
+- **Riziko:** vendor lock-in, compliance dopad, kritičnost pro provoz.
+- **Review:** datum příští kontroly.
+
+Codyho komentář: „Tohle někdo kdysi nastavil“ není vlastník. To je zaklínadlo, kterým se v SaaS vyvolává účetní démon.
+
+### Rozděl náklady podle chování
+
+Ne všechny náklady se řídí stejně. Paušální nástroj pro tým řešíš jinak než infrastrukturu, která roste s každým zákazníkem. Pokud je hodíš do jedné hromady, začneš škrtat naslepo.
+
+Užitečné rozdělení:
+
+- **Fixní provoz:** hosting, domény, základní monitoring, účetnictví, právní dokumentace.
+- **Proměnné produktové náklady:** úložiště, databáze, e-maily, AI volání, exporty, přenos dat.
+- **Týmové nástroje:** projektové řízení, komunikace, vývojářské služby, design, knowledge base.
+- **Marketing a obchod:** obsah, PPC, eventy, CRM, automatizace, materiály pro prodej.
+- **Compliance a bezpečnost:** audit, penetrační test, právní revize, zálohy, přístupové nástroje.
+- **Experimenty:** dočasné nástroje a piloty s jasným koncem.
+
+U každé kategorie si nastav jinou otázku. U fixního provozu se ptej, jestli je stále potřebný a bezpečně nastavený. U proměnných nákladů sleduj jednotkovou ekonomiku. U experimentů hlídej datum ukončení. U compliance výdajů nehledej nejlevnější zkratku, protože špatná zkratka bývá dražší než poctivá práce.
+
+### Počítej jednotkovou ekonomiku v technickém jazyce
+
+Zakladatel často vidí cenu za zákazníka. Vývojář vidí databázi, frontu, storage a API limity. Dobrá nákladová disciplína propojí obě řeči.
+
+Pro klíčové scénáře si napiš jednoduchý model:
+
+- Kolik stojí nový účet bez aktivity?
+- Kolik stojí aktivní zákazník za měsíc?
+- Která akce je nejdražší: import, export, generování reportu, AI shrnutí, nahrání souboru?
+- Které náklady rostou lineárně a které skokově?
+- Kdy se zákazník dostane do ztrátového profilu?
+- Jaký tarif nebo limit tomu odpovídá?
+
+Příklad: pokud zákazník v levném tarifu může neomezeně spouštět drahé exporty, problém není jen technický. Je to pricing problém. Možná potřebuješ férový limit, frontu, balíček kreditů nebo vyšší tarif. Ne proto, že chceš zákazníka trestat, ale protože produkt má přežít i po nadšení z prvních faktur.
+
+### Limity piš jako produktovou zkušenost
+
+Limity nejsou sprosté slovo. Sprosté je, když se objeví až ve chvíli, kdy zákazník narazí do zdi. Dobře navržený limit je součást služby: chrání výkon, náklady, dostupnost a férovost mezi zákazníky.
+
+Dobré limity mají:
+
+- jasný důvod v produktu,
+- čitelné zobrazení v administraci,
+- upozornění před dosažením hranice,
+- možnost exportu nebo úklidu dat,
+- lidský proces pro výjimky,
+- vazbu na tarif nebo domluvený pilot.
+
+Privacy-first úhel je důležitý: limit raději navrhuj podle agregovaných objemů a technických metrik než podle šmírování jednotlivých uživatelů. Nepotřebuješ vědět, kdo přesně klikl na každý detail, když rozhoduješ, že tým překročil domluvený objem exportů.
+
+### Optimalizuj nejdřív odpad, potom architekturu
+
+Když rostou účty, láká to k velké technické přestavbě. Někdy je potřeba. Často ale první úspory leží v obyčejném úklidu.
+
+Začni tady:
+
+- vypni nepoužívané prostředí, demo instance a staré preview deploye,
+- nastav retenci logů podle účelu, ne podle „radši navždy“,
+- zmenši a komprimuj ukládané soubory,
+- smaž duplicitní exporty a dočasné importní soubory,
+- sjednoť nástroje, které dělají totéž,
+- zkontroluj, jestli drahé funkce neběží zbytečně často,
+- nastav rozpočtová upozornění dřív, než přijde faktura s jumpscare efektem.
+
+Teprve potom řeš větší změny: caching, dávkové zpracování, jinou databázovou strategii, levnější storage třídu, fronty, oddělení analytických dotazů nebo změnu poskytovatele. Architektura bez úklidu jen elegantně přesune bordel do dražší krabice.
+
+### Vendor lock-in měř před migrací, ne po ní
+
+Každý nástroj vytváří nějakou závislost. To neznamená, že se máš všemu vyhýbat a provozovat SaaS na ručně krmeném serveru pod stolem. Znamená to, že máš vědět, jak moc jsi zamčený a co by stál odchod.
+
+Před nasazením důležité služby si napiš exit scénář:
+
+- Jak získáme data ven ve strojově čitelné podobě?
+- Jak dlouho by trvala migrace?
+- Které části produktu by přestaly fungovat?
+- Máme alternativu v Evropě nebo self-hosted variantu?
+- Jsou data oddělená podle zákazníků?
+- Jsou smlouvy, DPA a seznam subprocesorů srozumitelné?
+- Umíme službu nahradit postupně, nebo jen velkým třeskem?
+
+Vendor lock-in není vždy špatně. Špatně je lock-in, o kterém se dozvíš až ve chvíli, kdy zdraží, změní podmínky nebo přestane sedět privacy-first strategii.
+
+### Náklady komunikuj s týmem bez účetního divadla
+
+Malý tým nepotřebuje každý týden finanční román. Potřebuje rozumět tomu, které technické volby mají obchodní dopad. Když vývojář ví, že jedna funkce generuje drahé opakované úlohy, může navrhnout frontu, limit nebo lepší cache. Když obchod ví, že určitý zákaznický scénář je nákladově těžký, může ho dát do vhodného tarifu místo toho, aby ho slíbil všem.
+
+Jednou měsíčně stačí krátký nákladový review:
+
+- co zdražilo a proč,
+- co je nový pravidelný výdaj,
+- co se vypnulo nebo zlevnilo,
+- které funkce mají největší proměnné náklady,
+- kde je riziko vendor lock-inu,
+- jaké rozhodnutí uděláme tento měsíc.
+
+Důležité je, aby review nekončilo větou „musíme šetřit“. To je mlha. Lepší je: „Zkrátíme retenci debug logů na 14 dní, exporty přesuneme do fronty, vypneme staré preview instance a u AI shrnutí přidáme limit podle tarifu.“ To je plán.
+
+### Checklist: náklady SaaS privacy-first
+
+- Má každý pravidelný výdaj vlastníka, účel a datum review?
+- Jsou náklady rozdělené na fixní, proměnné, týmové, marketingové, compliance a experimentální?
+- Zná tým nejdražší produktové akce a jejich dopad na tarif?
+- Jsou limity vysvětlené zákazníkům předem a bez manipulace?
+- Probíhá pravidelný úklid starých prostředí, exportů, logů a nástrojů?
+- Má každá kritická služba popsaný exit scénář?
+- Preferuje výběr nástroje evropský provoz, kontrolu nad daty a jasné subprocesory?
+- Jsou rozpočtová upozornění nastavená dřív, než problém dorazí na faktuře?
+- Umí obchod vysvětlit, proč některé nákladné scénáře patří do vyššího tarifu?
+- Končí měsíční review konkrétními rozhodnutími, ne pocitem viny?
+
+### Šablona nákladové karty
+
+## Nákladová karta: [služba / funkce / kategorie]
+
+- **Účel:** proč náklad existuje a jakému výsledku pomáhá.
+- **Vlastník:** kdo rozhoduje o změně, omezení nebo zrušení.
+- **Typ nákladu:** fixní, proměnný, týmový, marketingový, compliance, experiment.
+- **Cena / model:** jak se účtuje a co ji zvyšuje.
+- **Data:** jaká data službou prochází, kde se zpracovávají a kdo k nim má přístup.
+- **Privacy-first kontrola:** evropský provoz, subprocesory, DPA, minimalizace, retence.
+- **Jednotková ekonomika:** dopad na zákazníka, tarif nebo klíčovou produktovou akci.
+- **Limity:** technické nebo obchodní hranice a zákaznická komunikace.
+- **Exit scénář:** jak data dostaneme ven a čím službu nahradíme.
+- **Review:** datum příští kontroly a rozhodnutí z posledního review.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -9374,6 +9519,7 @@ Codyho komentář: Automatický dashboard, který nikdo nevlastní, je jako robo
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha BC o nákladech SaaS bez slepého škrtání: vlastnictví výdajů, typy nákladů, jednotková ekonomika, limity jako produktová zkušenost, úklid odpadu, vendor lock-in, měsíční review, checklist a nákladová karta.
 - **2026-09-14:** Doplněna příloha BB o interním reportingu bez dashboardového divadla: adresát reportu, provozní/produktový/obchodní pohled, privacy-first měření, kvalitativní signály, vrstvy přístupů, automatizace, checklist a reportingová karta.
 - **2026-09-14:** Doplněna příloha BA o produktovém rozhodování bez hlasitého šéfa a hladové analytiky: úrovně rozhodnutí, rozhodovací otázky, práce se signály, oddělení faktů od interpretací, review, privacy-first filtr, checklist a rozhodovací karta.
 - **2026-09-14:** Doplněna příloha AZ o doménách, DNS a produktové identitě: výběr domény, členění subdomén, DNS změny, e-mailová reputace, přístupy, certifikáty, doménová mapa a checklist.
