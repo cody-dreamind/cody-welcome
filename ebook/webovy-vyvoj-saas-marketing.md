@@ -8033,6 +8033,175 @@ Codyho komentář: Datová místnost je jako dobře připravená technická proh
 
 ---
 
+## Příloha AU: Customer success signály bez šmírování zákazníka
+
+Customer success v malém SaaS týmu nemá být tajná policie, která sleduje každý pohyb uživatele. Má to být systém, který včas pozná, že zákazník nedostává slíbenou hodnotu, a nabídne pomoc dřív, než přijde výpověď. Rozdíl je v úmyslu i v datech: nepotřebuješ kompletní kamerový záznam používání produktu, potřebuješ několik férových signálů, které souvisí s výsledkem zákazníka.
+
+Privacy-first customer success stojí na třech pravidlech:
+
+- **Měř výsledek, ne zvědavost.** Sleduj, zda zákazník dokončil klíčový proces, ne jestli třikrát přejel myší přes menu.
+- **Používej agregované nebo týmové signály.** U B2B SaaS často stačí stav účtu, ne detailní profil každého člověka.
+- **Vysvětli, proč data používáš.** Když zákazník ví, že signály slouží k lepší podpoře, ne k manipulačnímu prodeji, důvěra neklesá.
+
+### Health score začíná definicí úspěchu
+
+Health score není magické číslo z tabulky. Je to zjednodušený odhad, jestli zákazník směřuje k výsledku, kvůli kterému si produkt koupil. Pokud nevíš, jak vypadá úspěch, budeš měřit náhodné aktivity a říkat jim „engagement“.
+
+Nejprve si pro každý segment napiš jednu větu:
+
+- „Úspěšný zákazník do 14 dnů založí první projekt, pozve tým a dokončí první předání zakázky.“
+- „Úspěšný zákazník má každý týden aktuální pipeline a obchodní tým používá důvody proher.“
+- „Úspěšný zákazník každý měsíc vyexportuje report bez ručního skládání dat z pěti zdrojů.“
+
+Teprve potom vybírej signály. Aktivita sama o sobě nestačí. Někdo může klikat každý den a přitom nikam nedojít. Jiný se přihlásí jednou týdně, udělá klíčový úkon a produkt mu šetří hodiny. Customer success má poznat rozdíl mezi ruchem a hodnotou.
+
+### Vyber pět signálů, ne padesát
+
+Malý tým nepotřebuje datový sklad na olympijské úrovni. Potřebuje pár signálů, které spustí konkrétní akci. Dobrý výchozí mix:
+
+- **Aktivace:** zákazník dokončil první hodnotový moment.
+- **Rytmus používání:** účet se vrací k práci v očekávaném intervalu.
+- **Hloubka adopce:** používá se funkce, kvůli které zákazník platí.
+- **Týmové zapojení:** do procesu je zapojený správný počet rolí.
+- **Podpůrné signály:** opakované dotazy, nevyřešené tickety, blížící se renewal, neúspěšné importy nebo integrace.
+
+Každý signál musí mít vlastníka a reakci. Pokud nízké skóre jen svítí červeně v dashboardu a nikdo neví, co dělat, je to dekorace. A dekorace churn nesnižuje, maximálně hezky smutní.
+
+Příklad praktického pravidla:
+
+- Pokud zákazník do 7 dnů od platby nezaložil první projekt, pošli krátký osobní e-mail s nabídkou patnáctiminutového nastavení.
+- Pokud účet 30 dnů nepoužil hlavní workflow, zkontroluj poslední komunikaci, otevřené tickety a domluv review.
+- Pokud zákazník používá produkt pravidelně, ale jen v jedné osobě, nabídni šablonu pro pozvání týmu a vysvětli přínos širší adopce.
+
+### Segmentuj podle kontextu, ne podle dojmu
+
+Stejné chování může znamenat různé věci. U sezónního zákazníka je měsíční pauza normální. U týmu, který má každý den plánovat práci, je to varování. Proto health score nesmí být jedno univerzální pravítko pro všechny.
+
+Rozděl zákazníky alespoň podle:
+
+- typu zákazníka: malý tým, agentura, enterprise pilot, interní nástroj,
+- hlavního use-casu: plánování, reporting, compliance, komunikace, automatizace,
+- fáze vztahu: onboarding, pilot, běžný provoz, renewal, rizikový účet,
+- očekávaného rytmu: denní, týdenní, měsíční nebo nárazové použití.
+
+Pak pro každý segment nastav jiné prahy. Produkt pro měsíční reporting nemá panikařit po pěti dnech ticha. Produkt pro dispečink ano. Kontext šetří falešné poplachy i trapné e-maily typu „chybíte nám“, když zákazník produkt zrovna použil přesně tak, jak měl.
+
+### Customer success komunikace má pomáhat, ne nahánět
+
+Když signál spustí kontakt, zpráva musí být užitečná. Ne „všimli jsme si, že jste nebyli aktivní“, což zní jako soused s dalekohledem. Lepší je navázat na výsledek a nabídnout konkrétní pomoc.
+
+Špatně:
+
+> Vidíme, že jste se tento týden nepřihlásili. Chcete se vrátit?
+
+Lépe:
+
+> Minule jsme řešili první import zakázek. Pokud se zasekl na mapování sloupců, můžu vám poslat krátký postup nebo to projít na 15 minutách společně.
+
+Ještě lépe:
+
+> Připravil jsem stručný checklist pro první import zakázek. Když mi pošlete, ve kterém kroku jste skončili, odpovím konkrétním doporučením.
+
+Privacy-first tón je důležitý. Nechceš zákazníkovi připomínat, že ho produkt sleduje. Chceš mu ukázat, že rozumíš jeho cíli a umíš odstranit překážku.
+
+### Ruční poznámky jsou často cennější než eventy
+
+Automatická data řeknou, co se stalo. Často ale neřeknou proč. Proto má customer success karta obsahovat i stručné ruční poznámky ze schůzek, podpory a e-mailů. Ne román. Jen rozhodnutí, rizika a slíbené další kroky.
+
+Dobrá poznámka:
+
+- „Zákazník chce do konce měsíce zkrátit ruční reporting. Blokuje ho export z účetního systému. Další krok: poslat příklad CSV mapování do pátku.“
+
+Špatná poznámka:
+
+- „Petr byl trochu nervózní a asi mu to nejde.“
+
+Poznámky piš tak, jako by je jednou četl zákazník nebo nový kolega. Žádné osobní soudy, drby, zbytečné detaily ani citlivé informace mimo účel. Customer success není CRM deníček pro vylévání duše.
+
+### Health score musí vést k rozhodnutí
+
+Každá barva v health score má mít jasný playbook:
+
+- **Zelená:** zákazník získává hodnotu; sbírej příběh, nabídni rozšíření jen pokud dává smysl.
+- **Žlutá:** chybí jeden důležitý signál; nabídni pomoc nebo edukaci.
+- **Červená:** hodnota se nedoručuje; domluv review, pojmenuj překážku a rozhodni, zda má vztah šanci.
+- **Šedá:** nemáš dost dat; zeptej se, nehádej.
+
+Nejhorší je červený zákazník, kterého tým ignoruje, protože „dashboard to přece ukazoval“. Metrika není alibi. Je to zvonek. Když zvoní, někdo musí otevřít.
+
+### Minimalizuj data i přístupy
+
+Customer success často kombinuje produktová data, obchodní historii a podporu. To z něj dělá citlivé místo. Nastav proto jednoduchá pravidla:
+
+- support vidí jen data potřebná pro řešení požadavku,
+- obchod nevidí detailní produktové chování jednotlivců, pokud k tomu není jasný důvod,
+- interní poznámky mají retenční dobu,
+- export zákaznické karty je možný pro enterprise a offboarding scénáře,
+- citlivé informace ze schůzek patří do omezeného prostoru, ne do volného textu všude možně,
+- automatické scoringové pravidlo má popis, vlastníka a datum poslední revize.
+
+Pokud používáš externí customer success nástroj, zapiš ho do seznamu subprocesorů, ověř datové regiony, DPA, export a mazání. Když ti nástroj neumí říct, kde data leží a jak je smažeš, není to „growth stack“. Je to budoucí sobotní problém.
+
+### Checklist: customer success bez šmírování
+
+- Máme pro každý klíčový segment definici zákaznického úspěchu.
+- Health score používá jen signály, které souvisí s doručenou hodnotou.
+- Každý signál má vlastníka, reakci a frekvenci revize.
+- Nepoužíváme detailní sledování jednotlivců tam, kde stačí týmový nebo agregovaný pohled.
+- Komunikace zákazníkovi vysvětluje hodnotu, ne naše interní sledování.
+- Ruční poznámky jsou věcné, minimální a bez osobních soudů.
+- Přístupy k customer success datům jsou omezené podle role.
+- Externí nástroje jsou zapsané v seznamu subprocesorů a mají ověřený export i mazání.
+- Renewal, riziko churnu a expanze mají playbook, ne improvizovaný heroismus.
+- Health score revidujeme aspoň jednou za čtvrtletí podle reality zákazníků.
+
+### Šablona customer success karty
+
+```markdown
+## Customer success karta: [zákazník / segment]
+
+### Kontext
+- Segment:
+- Hlavní use-case:
+- Fáze vztahu: [onboarding / pilot / provoz / renewal / riziko]
+- Očekávaný rytmus používání:
+
+### Definice úspěchu
+- První hodnotový moment:
+- Dlouhodobý výsledek:
+- Jak to zákazník pozná:
+
+### Signály
+- Aktivační signál:
+- Rytmus používání:
+- Hloubka adopce:
+- Týmové zapojení:
+- Support / rizikový signál:
+
+### Playbook
+- Zelený stav:
+- Žlutý stav:
+- Červený stav:
+- Kdy kontaktujeme člověka:
+- Kdy eskalujeme interně:
+
+### Privacy-first kontrola
+- Sledujeme jednotlivce, nebo účet/tým?
+- Jaký je účel každého signálu?
+- Kdo má k datům přístup?
+- Jak dlouho držíme poznámky?
+- Jak zákazník získá export nebo vysvětlení?
+
+### Review
+- Vlastník:
+- Datum poslední kontroly:
+- Co upravit před dalším renewal:
+```
+
+Codyho komentář: Customer success není umění poznat, že zákazník otevřel produkt v úterý v 9:17. Je to umění poznat, že mu produkt pořád nevydělal slíbenou hodinu týdně — a udělat s tím něco užitečného.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -8076,6 +8245,7 @@ Codyho komentář: Datová místnost je jako dobře připravená technická proh
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha AU o customer success signálech bez šmírování: definice úspěchu, health score, segmentace podle kontextu, pomocná komunikace, ruční poznámky, playbooky, minimalizace dat, checklist a customer success karta.
 - **2026-09-14:** Doplněna příloha AT o B2B datové místnosti pro privacy-first SaaS: vrstvy sdílení, bezpečnostní profil, subprocesory, certifikace bez mlžení, řízení přístupů, napojení na obchodní proces, checklist a šablona datové místnosti.
 - **2026-09-13:** Doplněna příloha AS o ochraně proti zneužití bez trestání dobrých uživatelů: mapování abuse scénářů, kontextové rate limity, měkké brzdy, CAPTCHA jako poslední vrstva, ochrana e-mailů, kontrolované výjimky, metriky a šablona abuse karty.
 - **2026-09-13:** Doplněna příloha AR o auditních logách bez šmírovacího panoptika: výběr auditních událostí, čitelné záznamy, oddělení od debug logů, minimalizace citlivých dat, zákaznický pohled, retence, checklist a auditní karta.
