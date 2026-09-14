@@ -10111,6 +10111,165 @@ Codyho komentář: Skvělá nápověda není ta, která má nejvíc článků. J
 
 ---
 
+## Příloha BH: Demo a sandboxy bez úniku zákaznických dat
+
+Demo prostředí je zvláštní tvor. Obchod ho chce hezké, produkt ho chce realistické, vývoj ho chce rychle naklikat a bezpečnost chce hlavně to, aby v něm neskončila kopie produkční databáze s poznámkou „jen na chvíli“. Hádej, která varianta se v praxi stává častěji, než by měla. Ano, ta nejhorší. Internet je někdy jako kuchyňka v kanceláři: všichni říkají, že po sobě uklízí.
+
+Privacy-first SaaS má k demům jednoduchý postoj: zákazníkovi ukaž reálnou hodnotu, ne reálná cizí data. Demo a sandbox mají prodávat důvěru. Pokud během prezentace omylem problikne jméno jiného klienta, interní poznámka, e-mail nebo číslo smlouvy, právě jsi neukázal funkci. Ukázal jsi riziko.
+
+### Demo není odpadní kopie produkce
+
+Nejhorší zkratka zní: „Vezmeme produkční data, anonymizujeme je později a zatím to dáme za heslo.“ Heslo není strategie. A „později“ je v provozu často synonymum pro „nikdy, dokud to nevybuchne“.
+
+Demo prostředí má mít vlastní životní cyklus:
+
+- **vlastní dataset,** který nikomu nepatří,
+- **vlastní účty,** které nejdou zaměnit se skutečnými zákazníky,
+- **vlastní scénáře,** které pokrývají typické use-casy,
+- **vlastní reset,** aby po každém obchodníkovi nezůstala digitální archeologie,
+- **vlastní oprávnění,** protože demo účet není interní admin.
+
+Když potřebuješ realistická data, vytvoř syntetická. Ne „anonymizovaná tak nějak“, ale vymyšlená od začátku: fiktivní firmy, fiktivní lidé, fiktivní faktury, fiktivní události. Realističnost nevzniká tím, že použiješ data zákazníků. Vzniká tím, že dataset odpovídá procesu, který chceš ukázat.
+
+### Začni scénáři, ne tabulkami
+
+Dobré demo není databázový dump. Je to příběh. Zákazník se v něm má poznat: „Aha, přesně takhle dnes řešíme objednávky / směny / nabídky / support.“
+
+Pro každý hlavní segment si napiš 3–5 scénářů:
+
+- **Nový lead:** návštěvník odešle poptávku, obchodník ji kvalifikuje a založí další krok.
+- **Provozní den:** tým řeší úkoly, změny termínů, notifikace a přehled priorit.
+- **Manažerský pohled:** majitel vidí stav bez nutnosti číst každou interní konverzaci.
+- **Chyba a oprava:** uživatel zadá špatný údaj a produkt mu pomůže bezpečně opravit stav.
+- **Export nebo odchod:** zákazník si stáhne vlastní data a chápe, že není rukojmí.
+
+Každý scénář má mít začátek, akci a výsledek. Pokud demo jen kliká mezi obrazovkami, zákazník si pamatuje UI. Pokud ukážeš cestu od problému k výsledku, pamatuje si hodnotu.
+
+### Syntetická data musí být záměrně obyčejná
+
+Syntetická data nejsou místo pro interní vtípky, jména známých lidí, reálné adresy zákazníků nebo „vtipné“ faktury na nesmyslné částky. Demo dataset se často dostane do screenshotů, videí, obchodních callů, školení a dokumentace. Chovej se k němu jako k veřejnému materiálu.
+
+Praktická pravidla:
+
+- používej jasně fiktivní názvy, například „Severní servis s.r.o.“ nebo „Dílna Modrý klíč“,
+- e-maily směruj na neexistující nebo interně kontrolované domény typu `example.test`,
+- telefonní čísla a adresy označ jako ukázkové,
+- poznámky piš profesionálně, protože screenshoty mají talent přežít všechno,
+- číselné hodnoty drž realistické, aby demo nepůsobilo jako hračka.
+
+Codyho komentář: Fiktivní data mají být nudná. Nudná data nevyhrají stand-up comedy večer, ale taky tě neprobudí ve dvě ráno kvůli screenshotu s cizím zákazníkem. To je férový obchod.
+
+### Demo účet není administrátor
+
+Obchodní demo často potřebuje ukázat hodně funkcí. To ale neznamená, že demo uživatel má mít božský režim. Naopak: demo je skvělá příležitost ukázat role a oprávnění v praxi.
+
+Vytvoř několik demo rolí:
+
+- **Běžný uživatel:** řeší každodenní úkoly a vidí jen svůj kontext.
+- **Manažer týmu:** vidí agregovaný přehled, schvaluje změny a spravuje práci týmu.
+- **Správce účtu:** nastavuje organizaci, uživatele, billing nebo integrace.
+- **Read-only auditor:** může číst vybrané záznamy, ale nemění stav.
+
+Tím si ověříš dvě věci najednou: produkt je srozumitelný pro různé role a oprávnění nejsou jen checkbox v backlogu. Pokud musíš při demu pořád říkat „tady by normálně viděl jen svoje věci“, produkt to pravděpodobně neumí dost jasně.
+
+### Reset je součást produktu
+
+Demo prostředí bez resetu se rychle změní v digitální půdu. Jeden obchodník založí pět testovacích firem, druhý přepíše nastavení, třetí zapne integraci a čtvrtý se diví, proč se na callu ukazuje chaos z minulého týdne.
+
+Nastav reset jako běžnou operaci:
+
+- automatický noční návrat do výchozího stavu,
+- ruční tlačítko „obnovit demo“ pro oprávněné lidi,
+- oddělené demo prostory pro obchod, školení a veřejný sandbox,
+- zákaz napojení na produkční e-mailové nebo platební akce,
+- krátká kontrola po resetu, že klíčové scénáře pořád fungují.
+
+Veřejný sandbox by měl mít ještě tvrdší pravidla: rate limit, ochranu proti spamu, omezené exporty, žádné odesílání reálných zpráv na třetí osoby a jasné upozornění, že data se pravidelně mažou. Lidé do sandboxu napíšou cokoliv. Ne proto, že jsou zlí. Protože lidé.
+
+### Demo integrace musí být bezpečně falešné
+
+Integrace vypadají v demu skvěle: CRM, účetnictví, kalendář, e-mail, platby, webhooks. Jenže každá integrace je datová hranice. Pokud demo používá reálné API klíče nebo reálný účet třetí strany, hraješ si s ohněm a ještě u toho držíš marketingovou prezentaci.
+
+Bezpečnější vzor:
+
+- pro platby používej testovací režim a jasně oddělené testovací klíče,
+- pro e-mail používej lokální zachytávač nebo interní testovací mailbox,
+- pro webhooks vytvoř demo endpoint, který nevolá produkční systémy,
+- pro účetní a CRM integrace používej stub nebo testovací tenant,
+- všechny demo klíče drž v odděleném secret store a pravidelně je rotuj.
+
+Demo má dokazovat, že integrace dává smysl. Nemusí při každém callu skutečně posílat fakturu do účetnictví. Pokud zákazník potřebuje technické ověření, udělej řízený pilot, ne divokou show v obchodním sandboxu.
+
+### Screenshoty a videa jsou také data
+
+Často se řeší databáze a logy, ale zapomíná se na screenshoty. Přitom screenshot z dema může skončit v prezentaci, dokumentaci, reklamě, help centru nebo na sociální síti. Video z produktové ukázky může žít roky.
+
+Před každým veřejným materiálem zkontroluj:
+
+- názvy firem a lidí,
+- e-maily, telefony, adresy a identifikátory,
+- interní poznámky a komentáře,
+- URL adresy s tokeny nebo parametry,
+- časové údaje, které mohou odhalit zákaznický provoz,
+- notifikace z prohlížeče nebo operačního systému.
+
+Ideální je mít pro screenshoty samostatný „media dataset“: krásně uklizený, stabilní a připravený na veřejné použití. Když marketing potřebuje obrázek, nevznikne panika ani improvizované přihlašování do produkce.
+
+### Checklist: demo a sandbox privacy-first
+
+- Má demo prostředí vlastní syntetický dataset bez zákaznických dat?
+- Jsou demo účty oddělené od produkčních účtů?
+- Existuje automatický nebo jednoduchý ruční reset?
+- Neodesílá demo e-maily, SMS, webhooky nebo platby do reálného světa?
+- Jsou integrační klíče testovací, oddělené a rotovatelné?
+- Má veřejný sandbox limity, mazání a jasné upozornění pro uživatele?
+- Jsou screenshoty a videa kontrolované jako publikovatelný materiál?
+- Ví obchodní tým, co v demu nesmí ukazovat ani zadávat?
+- Je jasně popsáno, kdo demo vlastní a kdy se reviduje?
+
+### Šablona demo karty
+
+## Demo karta: [segment / scénář / prostředí]
+
+### Účel
+
+- Komu demo slouží:
+- Jaké rozhodnutí má podpořit:
+- Jaký scénář ukazuje:
+
+### Dataset
+
+- Typ dat: syntetická / ručně připravená / generovaná
+- Zakázaná data:
+- Datum poslední kontroly:
+
+### Účty a role
+
+- Demo role:
+- Přístup má:
+- Přístup nesmí mít:
+
+### Integrace
+
+- Testovací služby:
+- Zakázané produkční akce:
+- Kde jsou uložené demo secrety:
+
+### Reset a retence
+
+- Resetovací rytmus:
+- Kdo může reset spustit:
+- Co se maže:
+
+### Privacy-first kontrola
+
+- Obsahuje zákaznická data: ano/ne
+- Obsahuje osobní údaje: ano/ne
+- Veřejně použitelné pro screenshoty: ano/ne
+- Další revize:
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -10159,6 +10318,7 @@ Codyho komentář: Skvělá nápověda není ta, která má nejvíc článků. J
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha BH o demo prostředích a sandboxech bez úniku zákaznických dat: syntetické datasety, scénáře, demo role, reset prostředí, bezpečné falešné integrace, kontrola screenshotů, checklist a demo karta.
 - **2026-09-14:** Doplněna příloha BG o samoobslužné nápovědě bez support labyrintu: situační struktura článků, akční návody, kontextová UI nápověda, převod support dotazů na obsah, privacy-first měření, údržba, eskalace, checklist a nápovědní karta.
 - **2026-09-14:** Doplněna příloha BF o rolích a oprávněních v SaaS: citlivé akce, základní role, vlastnictví workspace, bezpečné pozvánky, kontextová potvrzení, testování oprávnění, privacy-first přístup k týmovým datům, checklist a role karta.
 - **2026-09-14:** Doplněna příloha BE o forecastu a kapacitě bez věštění: tři fronty kapacity, scénáře, převod pipeline na práci, rezerva, agregované signály zatížení, rozhodovací hranice, rytmus review, checklist a kapacitní karta.
