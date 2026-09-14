@@ -8737,6 +8737,162 @@ Codyho komentář: Secrets management je přesně ten typ práce, která není v
 
 ---
 
+## Příloha AY: Debugování produkce bez lovu osobních dat
+
+Když se v produkci něco rozbije, tým má přirozenou chuť zapnout víc logů, uložit víc payloadů a „na chvíli“ si nechat kompletní historii všeho. To je pochopitelné, ale nebezpečné. Produkční debugování má pomoct najít příčinu problému, ne vytvořit druhou databázi zákaznických dat v logovacím nástroji.
+
+Privacy-first observability stojí na jednoduché zásadě: **měř systémové chování, ne soukromý život uživatele**. Potřebuješ vědět, že checkout padá na validaci DIČ, že import běží dvacet minut nebo že API partner vrací chybu 429. Obvykle nepotřebuješ ukládat celý formulář, osobní poznámky zákazníka ani obsah dokumentu, který někdo nahrál.
+
+### Debugování začíná otázkou, ne log řádkem
+
+Než přidáš nový log, polož si otázku: „Jaké rozhodnutí díky tomuto záznamu uděláme?“ Pokud odpověď není jasná, log pravděpodobně skončí jako šum. A šum v produkci není zadarmo: stojí peníze, zpomaluje vyšetřování incidentů a zvyšuje riziko úniku dat.
+
+Dobré debugovací otázky:
+
+- Který krok procesu selhal?
+- Je chyba izolovaná na tenant, region, integraci nebo verzi aplikace?
+- Opakuje se chyba u stejného typu vstupu?
+- Kdy problém začal a jaká změna tomu předcházela?
+- Umíme chybu reprodukovat bez použití reálných zákaznických dat?
+- Kdo je zodpovědný za další krok?
+
+Špatná otázka je „uložme všechno a pak se uvidí“. To je datový ekvivalent naházení celé dílny do kufru auta, protože možná bude potřeba šroubovák.
+
+### Pracuj se třemi signály
+
+Pro malý SaaS tým většinou stačí rozlišit tři vrstvy: metriky, logy a trace. Každá má jiný účel a nemá suplovat ostatní.
+
+- **Metriky** říkají, že se něco změnilo: počet chyb, latence, fronta úloh, úspěšnost importů, počet timeoutů.
+- **Logy** vysvětlují, co se stalo v konkrétním kroku: validace selhala, externí API neodpovědělo, e-mail nebyl odeslán.
+- **Trace** ukazuje cestu požadavku přes služby: frontend, backend, databáze, worker, integrace.
+
+OpenTelemetry popisuje observability jako práci se signály typu traces, metrics a logs, které pomáhají porozumět chování systému. Prakticky to znamená: nedělej z logů univerzální skládku. Metrika má spustit otázku, trace má zúžit místo problému a log má dodat čitelný kontext.
+
+### Identifikátory místo osobních údajů
+
+Když potřebuješ spojit události, nepoužívej e-mail, jméno firmy nebo celé URL s citlivými parametry. Používej technické identifikátory s omezeným významem:
+
+- `request_id` pro jeden požadavek,
+- `trace_id` pro cestu napříč službami,
+- interní `tenant_id` bez veřejného názvu zákazníka,
+- `job_id` pro dávkovou úlohu,
+- `integration_id` pro konkrétní napojení,
+- verzi aplikace nebo commit SHA,
+- typ chyby a stabilní kód události.
+
+Když support potřebuje propojit problém s konkrétním zákazníkem, ať to udělá přes oprávněný interní nástroj, ne přes veřejný logovací panel. Logovací systém nemá být CRM, helpdesk ani archiv osobních dat. Jeho úkol je provozní diagnostika.
+
+### Payloady loguj jen jako výjimku
+
+Celé requesty, odpovědi API a formulářová data jsou lákavé, protože „tam bude odpověď“. Jenže tam často bude i e-mail, telefon, fakturační údaj, poznámka zákazníka, API klíč nebo obsah, který se nikdy neměl dostat mimo primární systém.
+
+Bezpečnější vzor:
+
+- ulož schéma chyby, ne celý payload,
+- ulož počet položek, ne jejich obsah,
+- ulož délku textu, ne text samotný,
+- ulož typ souboru a velikost, ne soubor,
+- ulož kód externí chyby, ne kompletní odpověď,
+- citlivé hodnoty maskuj před zápisem, ne až při zobrazení.
+
+Pokud opravdu potřebuješ dočasně zachytit část vstupu kvůli incidentu, udělej z toho řízený režim: konkrétní scope, časové omezení, schválení, zabezpečené úložiště, jasná retence a zápis do incidentového záznamu. „Zapnuto do odvolání“ není režim, to je budoucí průšvih v klobouku.
+
+### Chybové zprávy piš pro dvě publika
+
+Každá produkční chyba má dvě publika: uživatele a tým. Uživatel potřebuje vědět, co se stalo a co má udělat dál. Tým potřebuje stopu pro diagnostiku. Tyto dvě věci nepatří do stejného textu.
+
+Uživatel vidí například:
+
+> Import se nepodařilo dokončit. Zkontrolujte formát souboru a zkuste to znovu. Pokud problém trvá, napište podpoře a přiložte kód chyby `IMP-042`.
+
+Tým v interním systému vidí:
+
+- `error_code`: `IMP-042`,
+- `job_id`, `tenant_id`, `request_id`,
+- fázi importu,
+- počet řádků,
+- typ validace,
+- verzi aplikace,
+- čas a prostředí.
+
+Uživatel nemá dostat stack trace, interní cestu k souboru ani odpověď databáze. Tým nemá lovit chybu podle screenshotu z chatu. Kód chyby je jednoduchý most mezi oběma světy.
+
+### Retence logů má odpovídat účelu
+
+Ne každý log potřebuje stejnou dobu života. Debug logy mohou mít krátkou retenci v řádu dnů. Bezpečnostní a auditní záznamy mohou mít delší pravidla, ale musí být oddělené, přístupově omezené a dobře popsané. Produktové metriky mohou být agregované a dlouhodobější, pokud neumožňují sledovat jednotlivce.
+
+Praktická matice:
+
+- **Debug logy:** krátká retence, omezený přístup, žádné payloady.
+- **Aplikační chyby:** střední retence, technické identifikátory, vazba na release.
+- **Auditní záznamy:** delší retence podle rizika a smluv, vyšší integrita, přístup jen pro určené role.
+- **Metriky:** agregace, delší trend, minimum identifikátorů.
+- **Incidentní exporty:** samostatná evidence, konkrétní důvod, rychlý úklid po uzavření.
+
+OWASP Logging Cheat Sheet doporučuje při návrhu logování přemýšlet nad účelem, bezpečností, ochranou dat a tím, co do logů nepatří. Pro privacy-first SaaS je to dobrý základní filtr: log má pomoct provozu, ne nenápadně obejít datovou minimalizaci.
+
+### Přístup k logům je produkční oprávnění
+
+Logy často obsahují víc citlivého kontextu než samotná aplikace. Proto přístup k nim nemá být automatický bonus pro každého vývojáře, freelancera nebo agenturu. Nastav role podle práce:
+
+- vývojář vidí technické chyby ve svých službách,
+- support vidí kód chyby a stav procesu, ne surové logy,
+- security role vidí bezpečnostní události,
+- administrátor spravuje retenci a integrace,
+- externista dostane dočasný, omezený přístup jen při konkrétním problému.
+
+Každý přístup k produkčním logům by měl být dohledatelný. Ne proto, že tým je banda podezřelých ve svetru, ale protože dobrý systém chrání i slušné lidi před špatně nastavenými nástroji.
+
+### Checklist: produkční debugování privacy-first
+
+- Má každý typ logu jasný účel a vlastníka?
+- Ví tým, které údaje se do logů nikdy nesmí zapsat?
+- Maskují se citlivé hodnoty před zápisem, ne až v UI?
+- Používají se technické identifikátory místo e-mailů a jmen?
+- Existuje `request_id` nebo `trace_id` pro spojení událostí?
+- Mají chybové zprávy stabilní kódy pro support?
+- Je retence logů rozdělena podle účelu?
+- Má support jen takový pohled, jaký opravdu potřebuje?
+- Umí tým dočasné debugování zapnout i vypnout kontrolovaně?
+- Kontroluje někdo pravidelně, jestli v logách nejsou citlivá data?
+
+### Šablona debug karty
+
+```markdown
+## Debug karta: [oblast / služba / proces]
+
+### Účel
+- Jaký problém pomáhá diagnostikovat:
+- Kdo je vlastník:
+- Kdy se používá:
+
+### Signály
+- Metriky:
+- Logy:
+- Trace / korelační ID:
+- Chybové kódy pro uživatele:
+
+### Data
+- Jaké identifikátory se ukládají:
+- Jaké údaje jsou zakázané:
+- Jak probíhá maskování:
+- Jak se kontroluje únik citlivých dat:
+
+### Přístupy
+- Kdo vidí debug logy:
+- Kdo vidí bezpečnostní logy:
+- Jak se schvaluje dočasný přístup:
+
+### Retence
+- Běžná retence:
+- Výjimky při incidentu:
+- Postup mazání incidentních exportů:
+```
+
+Codyho komentář: Dobrá observability je jako dobrý mechanik. Nepotřebuje ti prohledat peněženku, aby poznala, proč motor kašle.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -8757,6 +8913,8 @@ Codyho komentář: Secrets management je přesně ten typ práce, která není v
 - OWASP: [Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
 - OWASP: [Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
 - OWASP: [Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
+- OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- OpenTelemetry: [Signals](https://opentelemetry.io/docs/concepts/signals/)
 - NIST: [Special Publication 800-63 Digital Identity Guidelines](https://www.nist.gov/identity-access-management/projects/nist-special-publication-800-63-digital-identity-guidelines)
 - ENISA: [Incident Response Plan](https://tools.enisa.europa.eu/topics/risk-management/current-risk/bcm-resilience/bc-plan/incident-response-plan)
 - Atlassian: [Postmortems: Enhance Incident Management Processes](https://www.atlassian.com/incident-management/handbook/postmortems)
@@ -8783,6 +8941,7 @@ Codyho komentář: Secrets management je přesně ten typ práce, která není v
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha AY o produkčním debugování bez lovu osobních dat: metriky, logy, trace, technické identifikátory, bezpečné chybové zprávy, retence, přístupy, checklist a debug karta.
 - **2026-09-14:** Doplněna krátká sekce k offboardingu tokenů v příloze AX: revize vlastnictví, vypnutí nepoužívaných klíčů, rotace nejistých přístupů a zápis do evidence.
 - **2026-09-14:** Doplněna příloha AX o servisních účtech, tokenech a secrets: rozlišení identit, evidence tokenů, nejmenší oprávnění, ukládání mimo kód, rotace, produkční přístupy, checklist a token karta.
 - **2026-09-14:** Doplněna příloha AW o interních automatizacích bez černých skříněk: výběr vhodných procesů, vlastnictví, minimalizace dat, lidské schvalování, bezpečné logování, selhání, pravidelné review, checklist a automatizační karta.
