@@ -10588,6 +10588,165 @@ Privacy-first detail: uživatele nenaváděj, aby posílal exporty plné osobní
 - **Preventivní změny:** test, alert, proces, dokumentace, produktová úprava.
 - **Review:** datum kontroly, že úkoly opravdu proběhly.
 
+## Příloha BK: Notifikace a komunikační preference bez SaaS megafonu
+
+Notifikace jsou zvláštní disciplína. Když fungují, zákazník je skoro nevnímá, protože mu ve správný čas pomohly udělat správnou věc. Když nefungují, produkt začne znít jako hyperaktivní budík v plechovém hrnci. Malý SaaS nepotřebuje více e-mailů, bannerů a push zpráv. Potřebuje jasnou komunikační mapu: co musí zákazník vědět, co si může vybrat a co raději nemá odcházet vůbec.
+
+Privacy-first přístup tady není jen právní obrana. Je to produktová kvalita. Člověk, který chápe, proč mu píšeš, jak často mu píšeš a kde to může změnit, má větší důvěru než člověk, kterého produkt honí přes pět kanálů jen proto, že někdo objevil automatizaci.
+
+### Začni typem zprávy, ne nástrojem
+
+Nejdřív si rozděl komunikaci podle účelu. E-mailový nástroj, push systém nebo in-app banner je až druhý krok. První krok je rozhodnout, jakou práci má zpráva vykonat.
+
+Praktické kategorie:
+
+- **Transakční zprávy:** potvrzení registrace, reset hesla, faktura, bezpečnostní upozornění, dokončený export.
+- **Provozní zprávy:** plánovaná údržba, incident, změna dostupnosti služby, důležitá změna v nastavení účtu.
+- **Produktové zprávy:** nová funkce, změna workflow, ukončení staré verze, onboardingový tip.
+- **Vzdělávací zprávy:** návod, checklist, doporučený postup, pozvánka na webinář nebo článek.
+- **Marketingové zprávy:** nabídka, kampaň, novinky pro lidi, kteří si je opravdu vyžádali.
+
+Každá kategorie má jinou legitimitu, frekvenci a možnost odhlášení. Reset hesla nemá čekat na marketingový souhlas. Newsletter zase nemá být schovaný pod „systémovým oznámením“, protože to je rychlá cesta do složky nedůvěra.
+
+### Preference mají být čitelné pro člověka
+
+Nastavení komunikace často končí jako seznam dvaceti checkboxů s názvy interních kampaní. To je UX verze šuplíku s kabely: něco tam je, ale nikdo nechce zjišťovat co.
+
+Dobrá preference stránka odpovídá jednoduše:
+
+- **O čem mi budete psát?** Kategorie zpráv lidským jazykem.
+- **Jak často?** Ihned, denní souhrn, týdenní souhrn, jen důležité změny.
+- **Kam?** E-mail, in-app, RSS/changelog, případně týmový kanál, pokud je opravdu potřeba.
+- **Kdo to nastavuje?** Jednotlivec, vlastník účtu, administrátor organizace.
+- **Co nejde vypnout?** Bezpečnostní a zákonné zprávy s jasným vysvětlením.
+
+U B2B SaaS je důležité oddělit osobní preference od týmových. Uživatel si může vypnout produktové tipy, ale účetní kontakt musí dostat faktury. Administrátor může chtít incidentové zprávy pro celý účet, ale nemá automaticky rozhodovat, že každý člen týmu dostane marketingový newsletter. Ano, i firemní e-mail má člověka na druhém konci. Překvapivé zjištění, já vím.
+
+### Méně kanálů znamená méně chaosu
+
+Malý tým často nepotřebuje push notifikace, SMS, WhatsApp, Slack integraci, e-mail, modální okna a červený puntík u zvonečku. Potřebuje spolehlivý primární kanál a jasné pravidlo eskalace.
+
+Jednoduchý model:
+
+- **E-mail:** důležité transakční a provozní zprávy, fakturace, bezpečnost, exporty.
+- **In-app:** kontextové tipy, stav akce, upozornění při práci v produktu.
+- **Changelog/RSS:** produktové novinky pro lidi, kteří chtějí sledovat vývoj bez algoritmů.
+- **Status page:** incidenty a údržba, aby zákazník nemusel hádat, jestli je problém u něj.
+- **Přímý kontakt:** obchodní a support komunikace, kde je potřeba lidský kontext.
+
+Každý nový kanál zvyšuje provozní náklady: šablony, doručitelnost, odhlášení, audit, oprávnění, incidenty a support. Pokud tým neumí vysvětlit, jaký zákaznický problém kanál řeší, kanál zatím nepřidávej.
+
+### Frekvenci nastav podle dopadu
+
+Notifikace má být hlasitá jen tehdy, když je dopad opravdu vysoký nebo časově citlivý. Všechno ostatní může počkat do souhrnu, changelogu nebo klidného onboardingového kroku.
+
+Příklad frekvenční logiky:
+
+- **Ihned:** bezpečnostní změna, reset hesla, podezřelý přístup, výpadek kritické funkce, dokončení exportu.
+- **Do několika hodin:** důležité selhání integrace, problém s platbou, blížící se konec trialu.
+- **Denní souhrn:** nové komentáře, méně kritické úkoly, importní varování, opakované produktové signály.
+- **Týdenní souhrn:** přehled používání, doporučené kroky, obsahové novinky, změny v dokumentaci.
+- **Jen na vyžádání:** marketingové kampaně, produktové tipy, vzdělávací série.
+
+Tahle logika chrání zákazníka před únavou. Když píšeš kvůli všemu, zákazník tě přestane vnímat i tehdy, když konečně píšeš kvůli něčemu důležitému.
+
+### Šablony piš jako servisní informaci
+
+Dobrá zpráva je krátká, konkrétní a říká, co se stane dál. Nepotřebuje falešné nadšení, tři vykřičníky ani „Ahoj superstar“. U SaaS komunikace většinou vyhrává klidná přesnost.
+
+Struktura užitečné zprávy:
+
+- **Důvod:** proč zpráva přišla právě teď.
+- **Dopad:** co to znamená pro uživatele nebo účet.
+- **Akce:** co má člověk udělat, pokud něco.
+- **Čas:** do kdy je potřeba reagovat nebo kdy přijde další update.
+- **Kontakt:** kam napsat, když něco nesedí.
+- **Preference:** odkaz na nastavení, pokud jde o volitelný typ komunikace.
+
+Příklad provozní zprávy:
+
+> Dnes mezi 22:00 a 22:30 plánujeme údržbu importů. Aplikace zůstane dostupná, ale nové importy se mohou zpozdit. Pokud plánujete větší migraci dat, doporučujeme ji spustit po 22:30. Stav budeme aktualizovat na status stránce.
+
+Příklad marketingové zprávy by měl být stejně jasný: co nabízíš, pro koho to je, proč to posíláš a jak se odhlásit. Manipulativní předměty typu „Máme problém…“ patří do muzea růstových hacků, hned vedle pop-upů přes celý displej.
+
+### Doručitelnost je produktová odpovědnost
+
+E-mail není jen text. Je to infrastruktura. Když transakční zprávy padají do spamu, zákazník vnímá produkt jako rozbitý, ne jako „technicky doručený s drobnou reputační odchylkou“.
+
+Minimum pro malý SaaS:
+
+- odděl transakční a marketingové odesílání,
+- používej vlastní doménu nebo subdoménu pro produktové zprávy,
+- nastav SPF, DKIM a DMARC,
+- sleduj bounces a stížnosti na spam,
+- neposílej hromadné kampaně ze stejné identity jako reset hesla,
+- udržuj šablony jednoduché a čitelné i bez obrázků,
+- testuj klíčové zprávy při každé větší změně autentizace, fakturace nebo onboardingu.
+
+Privacy-first poznámka: doručitelnost nemá být výmluva pro přidání skrytých sledovacích pixelů do každé zprávy. Pokud měříš otevření nebo kliknutí, vysvětli proč, minimalizuj rozsah a u kritických transakčních zpráv zvaž, jestli takové měření vůbec potřebuješ. Často stačí doručení, bounce a dokončená navazující akce v produktu.
+
+### Odhlášení nesmí být trestná výprava
+
+Odhlášení z volitelné komunikace má být jednoduché. Ne proto, že to hezky vypadá v patičce, ale protože respekt k preferencím je součást důvěry. Když člověk musí projít loginem, potvrzením, captcha výslechem a ještě dostane otázku „opravdu nás opouštíte?“, produkt říká: tvoje volba mě nezajímá.
+
+Praktická pravidla:
+
+- odkaz na odhlášení dej přímo do volitelné komunikace,
+- umožni vypnout kategorii místo všeho, pokud to dává smysl,
+- změnu proveď okamžitě nebo jasně řekni, kdy se projeví,
+- nevyžaduj heslo pro odhlášení z newsletteru,
+- neposílej potvrzovací e-mail jen proto, abys měl poslední slovo,
+- ulož důvod odhlášení jen dobrovolně a agregovaně.
+
+### Checklist: notifikace privacy-first
+
+- Má každá zpráva jasný účel a kategorii?
+- Oddělujeme transakční, provozní, produktovou a marketingovou komunikaci?
+- Ví uživatel, které zprávy může vypnout a které jsou nutné?
+- Máme preference napsané lidským jazykem, ne názvy interních kampaní?
+- Neposíláme stejný signál přes zbytečně mnoho kanálů?
+- Umíme posílat souhrny místo okamžitých mikro-notifikací?
+- Jsou šablony krátké, konkrétní a bez manipulativních předmětů?
+- Máme nastavené SPF, DKIM a DMARC pro odesílací domény?
+- Sledujeme doručitelnost bez plošného šmírování příjemců?
+- Funguje odhlášení z volitelné komunikace rychle a bez nátlaku?
+- Mažeme nebo agregujeme historická komunikační data podle retenčních pravidel?
+- Testujeme klíčové zprávy po změně fakturace, autentizace a onboardingu?
+
+### Šablona komunikační karty
+
+## Komunikační karta: [název zprávy / série]
+
+### Účel
+
+- **Kategorie:** transakční, provozní, produktová, vzdělávací, marketingová.
+- **Spouštěč:** událost, čas, ruční odeslání nebo zákaznická akce.
+- **Adresát:** role, tým, vlastník účtu, účetní kontakt, všichni uživatelé.
+
+### Obsah
+
+- **Hlavní sdělení:** jedna věta, kterou si má člověk odnést.
+- **Akce:** co má příjemce udělat, pokud něco.
+- **Další krok:** kdy přijde další zpráva nebo kde sledovat stav.
+
+### Kanál a frekvence
+
+- **Kanál:** e-mail, in-app, RSS/changelog, status page, přímý kontakt.
+- **Frekvence:** ihned, souhrn, jednorázově, jen na vyžádání.
+- **Eskalace:** kdy přejít na silnější kanál.
+
+### Preference
+
+- **Lze vypnout:** ano/ne a proč.
+- **Kde upravit:** odkaz nebo cesta v nastavení.
+- **Vlastník nastavení:** uživatel, administrátor, účetní kontakt.
+
+### Privacy-first kontrola
+
+- **Data:** jaké údaje zpráva používá.
+- **Měření:** doručení, bounce, kliknutí, navazující akce nebo nic.
+- **Retence:** jak dlouho držíme log o odeslání a proč.
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -10613,6 +10772,9 @@ Privacy-first detail: uživatele nenaváděj, aby posílal exporty plné osobní
 - NIST: [Special Publication 800-63 Digital Identity Guidelines](https://www.nist.gov/identity-access-management/projects/nist-special-publication-800-63-digital-identity-guidelines)
 - ENISA: [Incident Response Plan](https://tools.enisa.europa.eu/topics/risk-management/current-risk/bcm-resilience/bc-plan/incident-response-plan)
 - Atlassian: [Postmortems: Enhance Incident Management Processes](https://www.atlassian.com/incident-management/handbook/postmortems)
+- IETF RFC 7208: [Sender Policy Framework (SPF) for Authorizing Use of Domains in Email](https://www.rfc-editor.org/rfc/rfc7208)
+- IETF RFC 6376: [DomainKeys Identified Mail (DKIM) Signatures](https://www.rfc-editor.org/rfc/rfc6376)
+- IETF RFC 9989: [Domain-based Message Authentication, Reporting, and Conformance (DMARC)](https://www.rfc-editor.org/rfc/rfc9989)
 - Evropská komise: [European Accessibility Act](https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/union-equality-strategy-rights-persons-disabilities-2021-2030/european-accessibility-act_en)
 - W3C: [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)
 - Evropská komise: [AI Act — Shaping Europe’s digital future](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
@@ -10636,6 +10798,7 @@ Privacy-first detail: uživatele nenaváděj, aby posílal exporty plné osobní
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha BK o notifikacích a komunikačních preferencích bez SaaS megafonu: typy zpráv, preference, kanály, frekvence, šablony, doručitelnost, odhlášení, checklist a komunikační karta.
 - **2026-09-14:** Doplněna příloha BJ o chybách a omluvách v SaaS: rozlišení chyb a incidentů, první update, omluva podle dopadu, bezpečné sdílení detailů, kompenzace, postmortem, zákaznické hlášení, checklist a karta chyby.
 - **2026-09-14:** Doplněna příloha BI o postupném nasazování změn: typy releasů, feature flagy, rollout, agregované měření, rollback, komunikace, úklid a šablona release karty.
 - **2026-09-14:** Doplněna příloha BH o demo prostředích a sandboxech bez úniku zákaznických dat: syntetické datasety, scénáře, demo role, reset prostředí, bezpečné falešné integrace, kontrola screenshotů, checklist a demo karta.
