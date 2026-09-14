@@ -11270,8 +11270,155 @@ Stejné pravidlo platí pro automatizace. Cron, který v produkci posílá upom�
 
 ---
 
+## Příloha BO: Formuláře a sběr leadů bez datového vysavače
+
+Formulář je malé rozhraní s velkým dopadem. Umí přinést obchod, zpřesnit onboarding, otevřít support ticket nebo zachránit zákazníka před odchodem. Umí ale také potichu vytvořit datový nepořádek: deset povinných polí, zbytečný telefon, skrytý tracking, export do pěti nástrojů a souhlas, kterému nerozumí ani autor textu.
+
+Privacy-first formulář nezačíná otázkou „co všechno můžeme zjistit?“. Začíná otázkou „co opravdu potřebujeme k dalšímu kroku?“. To je méně sexy než růstový hack, ale výrazně levnější než CRM plné polopravd, neaktuálních kontaktů a právních dluhů.
+
+> Codyho komentář: Formulář není policejní výslech. Když po člověku chceš rodné číslo kvůli stažení checklistu, problém není v konverzním poměru. Problém je, že formulář utekl z vodítka.
+
+### Každý formulář musí mít jasný obchodní účel
+
+Než přidáš pole, pojmenuj výsledek. Má formulář získat poptávku, přihlášku do pilotu, žádost o demo, odběr novinek, support ticket, zpětnou vazbu nebo registraci do aplikace? Každý účel potřebuje jiná data, jinou odpověď a jinou retenci.
+
+Příklad rozdílu:
+
+- **Žádost o demo:** jméno, pracovní e-mail, firma, role, krátký popis problému, preferovaný termín nebo odkaz na kalendář.
+- **Stažení praktické šablony:** e-mail může stačit, ale RSS nebo přímý odkaz je často čistší varianta.
+- **Support ticket:** e-mail, identifikátor účtu, popis problému, dopad, příloha; nepotřebuje marketingový souhlas.
+- **Feedback po používání funkce:** hodnocení, komentář, kontext obrazovky; nepotřebuje telefon ani velikost firmy.
+- **Partnerství:** kontakt, typ partnerství, web firmy, konkrétní návrh spolupráce.
+
+Pokud se účely míchají, formulář se nafoukne. „Poptávka + newsletter + segmentace + research + obchodní scoring“ v jednom kroku obvykle znamená, že nikdo nechce rozhodnout, co je důležité. Výsledek: méně odeslání, horší data a víc výmluv.
+
+### Minimalizace polí není designový detail
+
+Každé pole má cenu. Uživatel platí pozorností, tým platí údržbou, firma platí odpovědností za data. Proto u každého pole napiš důvod: k čemu slouží, kdo ho používá, jak dlouho ho držíš a co se stane, když ho člověk nevyplní.
+
+Praktické pravidlo:
+
+- pole bez jasné akce smaž,
+- pole pro „možná se bude hodit“ odlož do pozdější komunikace,
+- citlivé údaje sbírej jen tam, kde jsou nutné,
+- nepovinná pole skutečně ponech nepovinná,
+- výběry drž krátké a s možností „nevím / jiné“,
+- u dlouhých odpovědí vysvětli, co je dobrá odpověď.
+
+Dobrá otázka není „Jak velká je vaše společnost?“. Lepší je „Kolik lidí bude nástroj používat v první fázi?“. První otázka krmí segmentaci. Druhá pomáhá navrhnout onboarding, cenu a podporu.
+
+### Souhlas nesmí být univerzální koberec
+
+Formulář často obsahuje checkbox, který má magicky vyřešit všechno. Jenže jeden obecný souhlas pro kontaktování, newsletter, obchodní sdělení, produktový research a předání partnerovi je špatný produktový vzor. Lidé mají vědět, k čemu říkají ano.
+
+Rozděl komunikaci podle účelu:
+
+- **Odpověď na poptávku:** navazuje na požadavek člověka, není to automatická vstupenka do marketingu.
+- **Produktové novinky:** samostatná volba s jasnou frekvencí a možností odhlášení.
+- **Obchodní sdělení:** vlastní opt-in, pokud ho potřebuješ.
+- **Research rozhovor:** samostatná nabídka, ne skrytá klauzule.
+- **Předání třetí straně:** výslovně a konkrétně, ne „našim partnerům“ v mlze.
+
+Text u checkboxu piš lidsky. Ne „souhlasím se zpracováním osobních údajů v rozsahu nezbytném pro marketingové účely“. Raději: „Chci občas dostat praktické tipy a novinky e-mailem. Odhlášení je v každém e-mailu.“ Právní dokument může být přesný, ale rozhraní má být pochopitelné.
+
+### Antispam řeš bez šmírování návštěvníků
+
+Formulář bez ochrany se rychle promění ve spamovou fontánu. To ale neznamená, že musíš nasadit invazivní skripty, které sledují chování napříč webem. Privacy-first ochrana kombinuje několik menších bariér.
+
+Použitelné vrstvy:
+
+- honeypot pole, které běžný člověk nevidí,
+- časový limit pro příliš rychlé odeslání,
+- server-side rate limiting podle rozumně krátkého okna,
+- kontrola duplicitních zpráv,
+- validace domény e-mailu bez agresivního obohacování profilu,
+- ruční moderace u drahých akcí,
+- jednoduchá otázka specifická pro kontext, pokud spam přeroste únosnou mez.
+
+Není nutné sbírat otisky zařízení, historii pohybu myší ani třetí strany jen proto, aby se zastavil bot, který neumí nevyplnit skryté pole. Začni lokálně a přidávej jen to, co problém opravdu řeší.
+
+### Lead routing má být čitelný
+
+Po odeslání formuláře musí být jasné, kam data jdou. Malý SaaS často začne jedním e-mailem a skončí tím, že každý formulář teče jinam: CRM, tabulka, helpdesk, Slack, automatizace, newsletter, osobní inbox zakladatele. Za tři měsíce nikdo neví, kde je zdroj pravdy.
+
+Navrhni jednoduchou mapu:
+
+- **Zdroj pravdy:** kam se uloží původní odeslání.
+- **Notifikace:** kdo dostane upozornění a proč.
+- **Navazující akce:** vytvoření ticketu, leadu, úkolu nebo e-mailové odpovědi.
+- **Retence:** kdy se smažou nerelevantní nebo nevyřízené záznamy.
+- **Export:** jak člověku ukážeš nebo vydáš jeho údaje, pokud o to požádá.
+- **Audit:** kdo měnil stav leadu nebo přístup k datům.
+
+Když existuje více formulářů, dej jim jednotné názvy událostí a polí. `demo_request.company_size` je lepší než pět variant `firma_velikost`, `size`, `employees`, `pocet_lidi` a `segment`. Konzistence šetří víc času než nejchytřejší automatizace.
+
+### Děkovací stránka má pokračovat, ne jen mávat
+
+Po odeslání formuláře nepouštěj člověka do prázdna. Děkovací stránka má potvrdit, co se stalo, kdy přijde odpověď a co může člověk udělat mezitím. Zároveň je to dobré místo pro přímé odkazy bez sledovacích triků.
+
+Dobrá děkovací stránka obsahuje:
+
+- potvrzení typu požadavku,
+- realistický čas reakce,
+- kontakt pro urgentní situace,
+- odkaz na relevantní článek, dokumentaci nebo checklist,
+- možnost upravit nebo doplnit žádost,
+- informaci o dalším zpracování dat,
+- žádné automatické přihlášení do cizích publik.
+
+Pokud měříš konverzi, stačí server-side událost „formulář odeslán“ s typem formuláře. Nepotřebuješ sledovat každý pohyb po stránce ani posílat data reklamním systémům. Kvalita leadu se stejně pozná až v navazující práci.
+
+### Checklist: formulář privacy-first
+
+- Formulář má jeden jasný účel a vlastníka.
+- Každé pole má popsaný důvod a navazující akci.
+- Povinná jsou jen data nutná pro další krok.
+- Marketingový souhlas není spojený s odpovědí na poptávku.
+- Antispam běží primárně server-side a bez zbytečných třetích stran.
+- Odeslání se ukládá do jednoho zdroje pravdy.
+- Notifikace obsahují jen data nutná pro vyřízení.
+- Děkovací stránka říká, co se bude dít dál.
+- Retence rozlišuje poptávky, support, feedback a newsletter.
+- Export a smazání kontaktu jsou proveditelné bez archeologie.
+
+### Šablona formulářové karty
+
+```markdown
+## Formulář: [název]
+
+### Účel
+- Primární akce:
+- Kdo formulář vlastní:
+- Kdo odpovídá člověku:
+
+### Pole
+| Pole | Povinné? | Proč ho sbíráme | Kdo ho používá | Retence |
+|---|---:|---|---|---|
+| E-mail | ano | odpověď na požadavek | obchod/support | podle typu požadavku |
+
+### Souhlasy a komunikace
+- Odpověď na požadavek:
+- Newsletter / novinky:
+- Research:
+- Předání třetí straně:
+
+### Routing
+- Zdroj pravdy:
+- Notifikace:
+- Automatizace:
+- Ruční kontrola:
+
+### Privacy-first kontrola
+- Třetí strany:
+- Antispam:
+- Logy:
+- Export:
+- Mazání:
+```
+
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha BO o formulářích a sběru leadů bez datového vysavače: účel formulářů, minimalizace polí, souhlasy, antispam, lead routing, děkovací stránka, checklist a formulářová karta.
 - **2026-09-14:** Doplněna příloha BN o stagingu a testovacích prostředích bez produkčního nepořádku: typy prostředí, bezpečná testovací data, konfigurace, přístupy, preview expirace, migrace, notifikace, checklist a karta prostředí.
 - **2026-09-14:** Doplněna příloha BM o předávkách práce bez ztráty kontextu: typy handoverů, kontext, přístupy, zákaznický kontext, runbooky, suchý běh, metriky, checklist a handover karta.
 - **2026-09-14:** Doplněna příloha BL o zákaznickém feedbacku bez výslechové místnosti: rozlišení signálu, názoru a požadavku, privacy-first sběr, syntéza témat, uzavírání smyčky a šablona feedback karty.
