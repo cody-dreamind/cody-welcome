@@ -9803,6 +9803,152 @@ Codyho komentář: Forecast není kouzelná koule. Je to způsob, jak se nenecha
 
 ---
 
+## Příloha BF: Role a oprávnění v SaaS bez admin chaosu
+
+Oprávnění v SaaS často začínají nevinně: první uživatel je admin, druhý je taky admin, třetí „zatím taky, ať ho to neblokuje“. O půl roku později má půlka firmy přístup k fakturaci, exportům a nastavení integrací, protože nikdo nechce být ten člověk, který rozbije onboarding kvůli bezpečnosti. Jenže dobrý systém rolí nemá lidi brzdit. Má jim dát přesně tolik pravomocí, kolik potřebují k práci, a zbytek nechat za bezpečným plotem.
+
+Privacy-first SaaS se pozná i podle toho, že práva nejsou kouzelná mlha. Zákazník rozumí, kdo vidí jaká data, kdo může pozvat další lidi, kdo smí exportovat obsah a kdo může měnit nastavení, které ovlivňuje celé konto.
+
+### Začni akcemi, ne názvy rolí
+
+Nejdřív nesepisuj role jako „Admin“, „Manager“, „User“. To jsou jen štítky. Začni seznamem citlivých akcí:
+
+- pozvat nebo odebrat člena týmu,
+- změnit billing a fakturační údaje,
+- exportovat zákaznická nebo provozní data,
+- nastavovat integrace a webhooky,
+- měnit bezpečnostní nastavení,
+- mazat projekty, účty nebo větší objemy dat,
+- číst auditní logy a incidentové informace,
+- spravovat šablony, které vidí celý tým.
+
+Teprve potom z akcí slož role. Když začneš názvy, skončíš debatou, jestli „Editor Plus“ zní lépe než „Power User“. Když začneš akcemi, řešíš skutečné riziko.
+
+### První sada rolí má být nudná
+
+Pro první verzi SaaS obvykle stačí čtyři role:
+
+- **Owner:** vlastník účtu, billing, nejvyšší bezpečnostní změny, zrušení účtu.
+- **Admin:** správa členů, nastavení pracovního prostoru, integrace, běžné provozní změny.
+- **Editor:** práce s obsahem, projekty, záznamy nebo workflow podle účelu produktu.
+- **Viewer:** čtení vybraných dat bez možnosti měnit nastavení nebo exportovat vše.
+
+Pokud má produkt citlivější data, přidej samostatné oprávnění pro exporty, auditní logy a integrace. Nedávej je automaticky každému adminovi. Export je v praxi často největší úniková díra, protože z aplikace najednou vznikne soubor v cizím úložišti, e-mailu nebo notebooku.
+
+Codyho komentář: Role mají být jako dobré dveře v kanceláři. Většinu času si jich nevšimneš, ale když někdo zkusí vejít do serverovny s kávou a optimismem, mají říct ne.
+
+### Vlastnictví účtu řeš od prvního zákazníka
+
+Každý pracovní prostor musí mít jasného vlastníka. Ne „nějaký admin“, ale konkrétní účet nebo organizaci. Vlastník řeší:
+
+- kdo platí,
+- kdo může uzavřít smluvní vztah,
+- kdo schvaluje zpracování dat,
+- kdo může požádat o export nebo smazání celého workspace,
+- kdo přebírá účet při odchodu původního zakladatele nebo manažera.
+
+U B2B SaaS je dobré mít proces převodu vlastnictví. Například: současný owner potvrdí změnu, nový owner potvrdí převzetí, systém zapíše událost do auditního logu a pošle potvrzení oběma stranám. Když současný owner odešel z firmy, podporu čeká ověření přes firemní doménu, fakturační historii nebo smluvní kontakt. Žádné „napište nám z libovolného Gmailu a my vám dáme firmu“.
+
+### Pozvánky jsou bezpečnostní workflow
+
+Pozvánka do týmu není jen e-mail s hezkým tlačítkem. Je to změna přístupu k datům. Proto nastav pár pravidel:
+
+- pozvánka má expirovat,
+- pozvánka patří konkrétnímu e-mailu,
+- role je viditelná už při přijetí,
+- opakované pozvánky se dají zrušit,
+- doménové automatické připojení je vypnuté, dokud ho zákazník výslovně nechce,
+- přijetí pozvánky se zapisuje do auditního logu.
+
+Pokud podporuješ SSO, pořád drž lokální mapu rolí. Identita říká, kdo člověk je. Role říká, co smí dělat v produktu. Míchání těchto dvou věcí je rychlá cesta k překvapení, které se obvykle objeví v pátek večer.
+
+### Citlivé akce potvrzuj kontextově
+
+Ne každá akce potřebuje další potvrzení. Když uživatel přejmenuje projekt, nenuť ho opisovat název workspace. Ale u nevratných nebo datově citlivých kroků dej rozumnou brzdu:
+
+- export všech dat,
+- mazání workspace,
+- rotace API klíčů,
+- vypnutí dvoufázového ověření,
+- změna billing kontaktu,
+- přidání nové integrace s přístupem k většímu objemu dat.
+
+Dobré potvrzení říká, co se stane, koho se to dotkne a jestli je akce vratná. Špatné potvrzení je jen modální okno „Jste si jistí?“. Jistý si je každý, dokud nezjistí, že tlačítko znamenalo smazat produkční projekt.
+
+### Oprávnění testuj jako produktovou funkci
+
+Role nejsou tabulka v databázi, kterou jednou vyplníš a zapomeneš. Jsou součást produktu. Testuj je stejně jako checkout nebo onboarding:
+
+- viewer nesmí měnit obsah přes UI ani API,
+- editor nesmí získat export přes starý endpoint,
+- admin bez billing práv nesmí měnit platební údaje,
+- odebraný uživatel ztrácí aktivní session,
+- změna role se projeví bez odhlášení nebo má jasné pravidlo,
+- API token dědí jen povolený rozsah, ne magické superpravomoci.
+
+Technicky pomáhá mít oprávnění na serveru jako jediný zdroj pravdy. UI může schovat tlačítko, ale nesmí být jedinou ochranou. API musí kontrolovat každou citlivou akci samo.
+
+### Privacy-first přístup k týmovým datům
+
+Týmové účty svádí k internímu šmírování. „Ukážeme adminovi všechno, ať má přehled.“ Jenže admin zákazníka nemusí potřebovat vidět každý osobní detail. Místo toho rozlišuj:
+
+- provozní přehledy bez osobních údajů,
+- obsah, který role opravdu potřebuje,
+- bezpečnostní události s technickými identifikátory,
+- exporty omezené podle účelu,
+- auditní logy bez citlivých payloadů.
+
+To odpovídá principu minimalizace a řízení přístupů: člověk má dostat data pro svůj úkol, ne kompletní panoramatický výhled na život všech uživatelů.
+
+### Checklist: role a oprávnění privacy-first
+
+- Má každý workspace jasného ownera?
+- Jsou citlivé akce popsané dřív než názvy rolí?
+- Existuje samostatné pravidlo pro exporty, billing, integrace a mazání?
+- Expirují pozvánky a jde je zrušit?
+- Kontroluje oprávnění server, nejen UI?
+- Zapisují se změny rolí a členství do auditního logu?
+- Má support bezpečný proces pro převod vlastnictví?
+- Odebraný uživatel ztrácí session a přístupové tokeny?
+- Rozumí zákazník tomu, kdo v jeho týmu vidí jaká data?
+
+### Šablona role karty
+
+## Role karta: [název role]
+
+### Účel
+- Pro koho role je:
+- Jakou práci umožňuje:
+- Jakou práci záměrně neumožňuje:
+
+### Povolené akce
+- Čtení:
+- Úpravy:
+- Správa týmu:
+- Exporty:
+- Integrace:
+- Billing:
+
+### Zakázané nebo omezené akce
+- Akce vyžadující vyšší roli:
+- Akce vyžadující dodatečné potvrzení:
+- Akce dostupné pouze ownerovi:
+
+### Bezpečnostní chování
+- Jak se logují změny:
+- Kdy role vyžaduje nové přihlášení:
+- Jak se řeší aktivní session po změně role:
+
+### Privacy-first kontrola
+- Jaká osobní data role opravdu potřebuje:
+- Co role vidí jen agregovaně:
+- Jak dlouho se drží auditní stopa:
+- Kdo roli pravidelně kontroluje:
+
+Codyho komentář: Nejlepší systém oprávnění není ten nejkomplikovanější. Je to ten, který zákazník pochopí, vývojář správně použije a útočník přes něj neprojde jako turista přes otevřenou branku.
+
+---
+
 ## Zdroje
 
 - Evropská komise: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -9851,6 +9997,7 @@ Codyho komentář: Forecast není kouzelná koule. Je to způsob, jak se nenecha
 
 ## Pracovní log
 
+- **2026-09-14:** Doplněna příloha BF o rolích a oprávněních v SaaS: citlivé akce, základní role, vlastnictví workspace, bezpečné pozvánky, kontextová potvrzení, testování oprávnění, privacy-first přístup k týmovým datům, checklist a role karta.
 - **2026-09-14:** Doplněna příloha BE o forecastu a kapacitě bez věštění: tři fronty kapacity, scénáře, převod pipeline na práci, rezerva, agregované signály zatížení, rozhodovací hranice, rytmus review, checklist a kapacitní karta.
 - **2026-09-14:** Doplněna příloha BD o kvalitě dat bez datového jezera na steroidech: rozhodovací scénáře, zdroj pravdy, účel polí, validace u vzniku dat, agregované měření, audit oprav, týmové review, checklist a karta kvality dat.
 - **2026-09-14:** Doplněna příloha BC o nákladech SaaS bez slepého škrtání: vlastnictví výdajů, typy nákladů, jednotková ekonomika, limity jako produktová zkušenost, úklid odpadu, vendor lock-in, měsíční review, checklist a nákladová karta.
