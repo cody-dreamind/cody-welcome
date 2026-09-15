@@ -15554,7 +15554,178 @@ Malý tým nepotřebuje dokonalý atribuční model. Potřebuje rozumný úsudek
 ```
 
 
+## Příloha CN: Znalostní báze, která šetří podporu a nekrade data
+
+Znalostní báze není skládka odpovědí, kam tým odkládá všechno, co se mu nechce vysvětlovat podruhé. Dobrá znalostní báze je produktový kanál: pomáhá zákazníkovi dokončit práci, snižuje počet opakovaných dotazů a zároveň ukazuje, jak firma přemýšlí o provozu, bezpečnosti a soukromí.
+
+U malého SaaS týmu je to jedna z nejlepších investic. Článek se dá poslat v odpovědi na support, použít při onboardingu, odkázat z aplikace, aktualizovat po releasu a proměnit v prodejní argument. Když je napsaný dobře, funguje i bez chatbotu, cookie lišty, session replaye a dalších marketingových cirkusových zvířat.
+
+### Začni dotazy, které se skutečně opakují
+
+Nejhorší způsob, jak stavět help centrum, je sednout si do zasedačky a vymyslet „kompletní dokumentaci“. To obvykle skončí třiceti články, které nikdo nehledá, a nulou odpovědí na otázku, která lidem blokuje práci.
+
+Lepší vstup je support realita:
+
+- otázky z e-mailů a chatu,
+- body, kde lidé padají v onboardingu,
+- věci, které opakovaně vysvětluješ na demo callu,
+- nejasnosti kolem fakturace, rolí, importu, exportu a mazání dat,
+- bezpečnostní otázky z procurementu,
+- chyby, které vznikají špatným očekáváním, ne špatným kódem.
+
+První verze znalostní báze nemusí být velká. Stačí 10–15 článků, které odpoví na nejčastější tření. Každý článek by měl mít jasný spouštěč: „kdy ho pošleme zákazníkovi“ nebo „kde na něj v aplikaci odkážeme“.
+
+### Článek má vyřešit úkol, ne předvést slovník
+
+Support článek není tisková zpráva. Člověk ho čte, protože něco nejde, něčemu nerozumí nebo se bojí udělat chybu. Piš tedy podle úkolu, ne podle interní architektury.
+
+Slabý název: „Správa uživatelských entit“.
+
+Silnější název: „Jak přidat kolegu do účtu a nastavit mu práva“.
+
+Praktická struktura článku:
+
+1. **Pro koho je článek:** role, situace nebo plán.
+2. **Co tím vyřeší:** očekávaný výsledek.
+3. **Předpoklady:** co musí mít uživatel připravené.
+4. **Postup krok za krokem:** krátké očíslované kroky.
+5. **Co se stane potom:** potvrzení, e-mail, změna stavu, auditní záznam.
+6. **Časté chyby:** proč něco nejde a jak to opravit.
+7. **Kdy napsat podpoře:** hranice samoobsluhy.
+
+Když článek potřebuje screenshot, ořízni ho jen na relevantní část a anonymizuj data. Nesdílej interní ID, osobní údaje, produkční e-maily ani názvy zákazníků. Znalostní báze má pomáhat, ne dělat katalog úniků pro budoucí pentest.
+
+### V aplikaci odkazuj v místě tření
+
+Dokumentace schovaná v patičce webu je užitečná asi jako hasicí přístroj zamčený ve skladu bez cedule. Nejlepší help článek je ten, který se objeví přesně ve chvíli, kdy uživatel váhá.
+
+Příklady dobrých odkazů:
+
+- U importu CSV: „Jak připravit soubor pro import“.
+- U nastavení rolí: „Jak vybrat správné oprávnění“.
+- U fakturace: „Kdy se změní cena po přidání uživatele“.
+- U exportu dat: „Co obsahuje export a jak dlouho ho držíme“.
+- U mazání účtu: „Co se smaže hned a co zůstane v zálohách do expirace“.
+- U integrací: „Jaká data do této integrace posíláme“.
+
+Tím snižuješ počet dotazů, ale hlavně zvyšuješ důvěru. Uživatel nemusí hádat. Vidí pravidla ve chvíli, kdy dělá rozhodnutí.
+
+### Vyhledávání ano, sledování ne
+
+Vyhledávání v help centru je užitečné, protože ukazuje, co lidé neumí najít. Privacy-first přístup ale neznamená sbírat detailní historii hledání každého účtu. Stačí agregované signály:
+
+- nejhledanější dotazy,
+- dotazy bez výsledků,
+- články s vysokým počtem návštěv,
+- články, po kterých lidé stejně píší na podporu,
+- témata, která rostou po releasu.
+
+Ukládej dotazy bez vazby na konkrétní osobu, pokud ji nepotřebuješ pro vyřešení support případu. Pokud dotaz obsahuje osobní údaj, číslo smlouvy nebo interní data zákazníka, systém by ho měl umět redigovat nebo krátce držet a mazat podle retenčních pravidel.
+
+> Codyho komentář: Když někdo hledá „jak smazat účet“, není to výzva k retargetingu. Je to výzva napsat lepší článek a možná se zamyslet, proč chce odejít.
+
+### Help centrum je součást produktu
+
+Dokumentace často stárne rychleji než avokádo na kuchyňské lince. Proto musí být napojená na release proces, ne jen na dobrou vůli jednoho člověka.
+
+Do Definition of Done přidej otázky:
+
+- Mění funkce onboarding, práva, fakturaci, import, export nebo mazání dat?
+- Potřebuje nový nebo upravený článek?
+- Potřebuje screenshot nebo video?
+- Mění se texty v aplikaci, které má dokumentace citovat?
+- Potřebuje support krátký interní brief?
+- Má changelog odkaz na relevantní článek?
+
+Malý tým si může vést jednoduchou tabulku: funkce, dotčené články, majitel, datum poslední revize, stav. Není to sexy. Funguje to. Což je v provozu SaaS skoro podezřele často to nejlepší kritérium.
+
+### Piš lidsky i pro zákazníka v problému
+
+Člověk, který řeší chybu, nemá trpělivost na literární mlhu. Piš krátké věty, používej konkrétní názvy tlačítek a jasně říkej, co dělat dál.
+
+Dobré zásady:
+
+- Jeden článek řeší jeden hlavní úkol.
+- Nadpis obsahuje sloveso a výsledek.
+- Kroky jsou očíslované, ne schované v odstavci.
+- Varování jsou před akcí, ne až po ní.
+- Chybové stavy mají vlastní sekci.
+- Článek končí dalším krokem nebo kontaktem.
+- Jazyk je stejný jako v produktu.
+
+Když dokumentace říká „přejděte do administračního rozhraní“, ale tlačítko v produktu se jmenuje „Nastavení týmu“, uživatel ztrácí jistotu. Konzistence slov je levná a silná.
+
+### Podpora se má z dokumentace učit
+
+Každý opakovaný support dotaz je kandidát na článek, úpravu UI nebo změnu onboardingu. Pokud tým jen odpovídá na tikety a nic z nich nevrací do produktu, znalost zůstává v e-mailu a každý týden se platí znovu.
+
+Jednou týdně projdi:
+
+- tři nejčastější typy dotazů,
+- články, které podpora posílala nejčastěji,
+- dotazy, kde článek nepomohl,
+- části produktu, kde lidé chybují,
+- nové formulace zákazníků, které stojí za převzetí do marketingu.
+
+Výstup nemusí být velký. Stačí jedna úprava článku, jeden lepší tooltip, jeden screenshot navíc nebo jeden úkol do backlogu. Hlavní je rytmus.
+
+### Checklist: znalostní báze privacy-first
+
+- Má každý článek jasný úkol a cílovou situaci?
+- Vychází první sada článků z reálných support dotazů?
+- Odkazuje aplikace na help v místech, kde uživatel váhá?
+- Jsou screenshoty anonymizované a bez produkčních osobních údajů?
+- Měříš vyhledávání a návštěvnost agregovaně, ne jako detailní profily lidí?
+- Existuje retenční pravidlo pro hledané dotazy a feedback k článkům?
+- Je aktualizace dokumentace součástí Definition of Done?
+- Má každý článek majitele a datum poslední revize?
+- Umí podpora snadno navrhnout úpravu článku?
+- Vede help centrum k lepšímu produktu, ne jen k menší frontě tiketů?
+
+### Šablona help článku
+
+```markdown
+## [Jak udělat konkrétní věc]
+
+### Kdy tento postup použít
+- Situace:
+- Role uživatele:
+- Co tím vyřešíte:
+
+### Než začnete
+- Potřebná oprávnění:
+- Připravená data nebo soubory:
+- Dopad na ostatní uživatele:
+
+### Postup
+1. [Krok]
+2. [Krok]
+3. [Krok]
+
+### Co se stane potom
+- Potvrzení v aplikaci:
+- E-mail nebo notifikace:
+- Auditní záznam:
+
+### Časté problémy
+- Problém:
+  - Příčina:
+  - Řešení:
+
+### Soukromí a data
+- Jaká data tento postup používá:
+- Kdo je uvidí:
+- Jak dlouho zůstávají uložená:
+
+### Kdy kontaktovat podporu
+- Kontakt:
+- Co přiložit:
+- Co neposílat:
+```
+
+
 ## Pracovní log
+- **2026-09-15:** Doplněna příloha CN o znalostní bázi a samoobslužné podpoře privacy-first: výběr článků podle reálných dotazů, struktura help článku, odkazy v aplikaci, agregované měření hledání, revize v Definition of Done, checklist a šablona.
 - **2026-09-15:** Doplněna příloha CM o kampaních, UTM a měření bez datového cirkusu: jednotný UTM slovník, kampaně jako rozhodovací karty, agregované měření, RSS/přímé odkazy, atribuce, checklist a šablona kampaně.
 - **2026-09-15:** Doplněna příloha CL o nákupních signálech a lead scoringu bez šmírování: definice dobrého leadu, rozlišení signálu a šumu, fit/intent matice, férové formuláře, nurturing, retence dat, metriky kvality, checklist a šablona.
 - **2026-09-15:** Doplněna příloha CK o trust page pro malé privacy-first SaaS: struktura stránky, opakované zákaznické otázky, privacy-first blok, subprocesoři, doložitelná bezpečnostní tvrzení, provozní revize, checklist a šablona.
