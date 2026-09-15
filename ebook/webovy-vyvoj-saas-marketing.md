@@ -13988,7 +13988,233 @@ Někdy nejlepší další krok není další setkání, ale tři individuální 
 ```
 
 
+## Příloha CE: Partnerské integrace bez datového pašování a roadmapy na cizí povel
+
+Integrace umí malému SaaS otevřít dveře k větším zákazníkům, rychlejšímu onboardingu a lepšímu workflow. Umí ale také vytvořit technický dluh, support peklo a tichý kanál, kterým data tečou někam, kde je už nikdo nechce dohledávat. Partnerství není jen „pojďme napojit API“. Je to produktové rozhodnutí se strategickým, právním, bezpečnostním a obchodním dopadem.
+
+Nejhorší integrace vznikají ze strachu: zákazník se zeptá na nástroj, obchod slíbí termín, vývoj napojí první endpoint, nikdo nenapíše vlastnictví a za tři měsíce se tým diví, proč drží křehký můstek mezi dvěma systémy, které se ani nemají rády. Krása moderního SaaS, fakt.
+
+Dobrá integrace začíná otázkou: **jaký zákaznický proces zlepšíme a jak má vypadat bezpečný konec vztahu?** Pokud neumíš popsat obojí, zatím nestavíš integraci. Stavíš budoucí incident s hezčím názvem.
+
+### Rozlišuj typy partnerství
+
+Ne každé partnerství potřebuje stejnou hloubku. Před vývojem si pojmenuj, o jaký typ vztahu jde:
+
+- **Technická integrace:** dva systémy si vyměňují data kvůli konkrétnímu workflow.
+- **Distribuční partnerství:** partner doporučuje produkt svým zákazníkům nebo ho přidává do nabídky.
+- **Implementační partner:** externí tým pomáhá zákazníkům s nastavením, migrací nebo školením.
+- **Marketplace listing:** produkt je dohledatelný v katalogu jiného ekosystému.
+- **Datový partner:** partner poskytuje nebo přijímá data jako součást hodnoty produktu.
+- **Strategická aliance:** obě firmy společně plánují nabídku, obsah, eventy nebo obchodní balíček.
+
+Každý typ má jiné riziko. Implementační partner může potřebovat dočasný přístup do účtu. Marketplace listing může vypadat nevinně, ale přinese tlak na marketingové parametry, tracking a certifikace. Datový partner je nejcitlivější: tam musí být jasné účely, role, retence, bezpečnost a auditní stopa.
+
+> Codyho komentář: Slovo „partner“ je nádherná mlha. Může znamenat strategickou spolupráci, affiliate link nebo člověka, který ti jednou poslal logo v PNG. Produktový tým potřebuje přesnější jazyk, jinak se v té mlze dřív nebo později někdo praští o API.
+
+### Integrace musí mít vlastní business case
+
+Integrace není automaticky dobrá jen proto, že ji chce jeden hlasitý zákazník. Před závazkem si napiš krátký business case:
+
+- kolik zákazníků integraci opravdu potřebuje,
+- jak často daný proces probíhá,
+- kolik času, chyb nebo ruční práce odstraní,
+- zda pomůže akvizici, aktivaci, retenci nebo expanzi,
+- kdo bude integraci podporovat,
+- jaké jsou náklady na údržbu,
+- co se stane, když partner změní API, cenu nebo obchodní pravidla.
+
+U malého týmu je férové říct: „Integraci zatím nestavíme jako plně podporovanou funkci, ale ověříme ruční export/import nebo jednoduchý webhook.“ Často tím zjistíš, jestli problém stojí za produktizaci, aniž bys hned podepisoval věčný závazek.
+
+Praktický filtr: pokud integrace nepomáhá aspoň jednomu z těchto cílů, dej ji do parkoviště:
+
+- rychlejší první hodnota pro nového zákazníka,
+- menší ruční práce v opakovaném workflow,
+- vyšší důvěra u konkrétního segmentu,
+- lepší retence díky zapojení do denní práce,
+- bezpečnější a kontrolovanější datový tok než současná alternativa,
+- jasně měřitelný dopad na prodej nebo podporu.
+
+### Začni nejmenším bezpečným rozhraním
+
+Nejmenší integrace není vždy nejmenší kód. Je to nejmenší bezpečný způsob, jak doručit hodnotu. Někdy je to CSV export, někdy jednosměrný webhook, někdy ruční import přes admina a někdy jen dokumentovaný postup.
+
+Stupně zralosti mohou vypadat takto:
+
+1. **Dokumentovaný manuální postup:** zákazník ví, jak data přenést ručně a bezpečně.
+2. **Export/import:** data se přesouvají dávkově, viditelně a s potvrzením.
+3. **Jednosměrná synchronizace:** produkt posílá nebo přijímá jen nezbytné údaje.
+4. **Obousměrná synchronizace:** řeší konflikty, audit, oprávnění a rollback.
+5. **Partner API:** integrace je stabilní produktová schopnost s verzováním a podporou.
+
+Přeskakovat rovnou na obousměrnou synchronizaci je lákavé, protože vypadá „enterprise“. Jenže synchronizace není funkce, ale závazek: konflikty, duplicity, retry logika, stavové obrazovky, zákaznické otázky a noční ladění, proč účetní systém odmítl položku s českou diakritikou. Ano, i takhle vznikají character-building zážitky.
+
+### Datová mapa před prvním endpointem
+
+Každá integrace potřebuje jednoduchou datovou mapu. Ne právní román, ale provozní přehled, kterému rozumí produkt, vývoj, support i obchod:
+
+- jaká data odchází z našeho produktu,
+- jaká data přichází od partnera,
+- jaký je účel výměny,
+- kdo integraci aktivuje,
+- jaký souhlas nebo oprávnění je potřeba,
+- kde se ukládají tokeny,
+- kdo má k logům přístup,
+- jak dlouho držíme synchronizační záznamy,
+- jak zákazník integraci vypne,
+- jak se data mažou po odpojení.
+
+Privacy-first přístup neznamená „žádné integrace“. Znamená kontrolované integrace, které zákazník chápe a může řídit. V ideálním případě má administrátor v produktu obrazovku „Napojené služby“, kde vidí stav, rozsah dat, poslední synchronizaci, chyby, odpovědnou osobu a tlačítko pro odpojení.
+
+### Oprávnění navrhuj úžeji, než je pohodlné
+
+Partner API často nabízí široká oprávnění, protože je to pohodlné pro vývojáře. Produkt ale nemá žádat plný přístup jen proto, že dokumentace začíná ukázkovým tokenem „admin-all“. Pro každou integraci zvol princip nejmenších oprávnění:
+
+- čti jen entity, které opravdu potřebuješ,
+- zapisuj jen tam, kde je zákazníkovi jasný důsledek,
+- odděl testovací a produkční přístup,
+- používej expirovatelné tokeny nebo OAuth, pokud to ekosystém podporuje,
+- ukládej tajemství mimo kód a mimo běžné logy,
+- zobraz zákazníkovi, jaká oprávnění integrace používá,
+- pravidelně reviduj nepoužívané tokeny a staré napojení.
+
+U implementačních partnerů je dobré nepoužívat sdílené účty. Lepší je dočasná role s jasným rozsahem, auditní stopou a datem expirace. Když partner pomáhá s nastavením, nemusí automaticky vidět fakturaci, osobní poznámky, exporty nebo všechny workspace zákazníka.
+
+### Smluvní a provozní hranice napiš lidsky
+
+Partnerství potřebuje obchodní nadšení, ale také hranice. Napiš si krátký partnerský rámec:
+
+- co přesně partner smí slibovat,
+- jaký support poskytuje partner a jaký poskytujete vy,
+- kdo komunikuje incidenty zákazníkům,
+- jak se řeší změny API, výpadky a ukončení služby,
+- jaké marketingové materiály jsou schválené,
+- kdy lze používat logo nebo případovou studii,
+- jak se řeší provize, doporučení nebo obchodní leady,
+- jak vypadá offboarding partnera.
+
+Tohle není byrokracie pro radost. Je to prevence situace, kdy partner prodá zákazníkovi něco, co produkt neumí, support to zjistí v pátek večer a vývoj dostane zprávu „jde jen o malou úpravu“. Malá úprava je v SaaS často jednotka měření bolesti.
+
+### Marketplace listing není strategie
+
+Katalogy, partnerské stránky a marketplaces mohou přinést důvěru i leady. Samotné zalistování ale málokdy vyřeší distribuci. Připrav listing jako landing page uvnitř cizího prostoru:
+
+- jasný segment,
+- konkrétní use-case,
+- screenshot workflow,
+- minimální požadavky na nastavení,
+- privacy-first popis datového toku,
+- odkaz na dokumentaci,
+- kontakt pro pilot,
+- datum poslední aktualizace.
+
+Neplň listing frázemi typu „seamless, powerful, next-generation“. Napiš, co přesně se stane: „Po dokončení zakázky odešleme fakturační položku do účetního systému a uložíme identifikátor synchronizace pro audit.“ Méně ohňostroje, více použitelnosti.
+
+### Měř dopad, ne jen počet napojení
+
+Po spuštění integrace se nenech opít metrikou „počet aktivních propojení“. Aktivní propojení může být živé workflow, nebo zapomenutý token, který jednou poslal chybu a od té doby mlčí.
+
+Lepší signály:
+
+- kolik zákazníků dokončilo první úspěšnou synchronizaci,
+- kolik ruční práce integrace odstranila,
+- kolik chyb nebo support ticketů integrace vytváří,
+- jak často zákazníci integraci vypínají,
+- zda integrace zkracuje onboarding,
+- zda zákazníci s integrací déle zůstávají,
+- kolik incidentů souvisí s partnerem,
+- kolik času stojí údržba a změny API.
+
+Privacy-first měření drž agregované. Není potřeba vytvářet profil každého uživatele jen proto, aby tým věděl, že synchronizace selhává v kroku validace adresy. Stačí technický stav, chybový kód, tenant/workspace identifikátor dostupný oprávněným lidem a retenční pravidlo pro logy.
+
+### Ukončení integrace navrhni hned na začátku
+
+Každá integrace jednou skončí. Partner změní podmínky, zákazník přejde jinam, API zastará, obchodní hodnota zmizí nebo bezpečnostní riziko převáží přínos. Když odpojení neřešíš předem, skončíš s ručními zásahy a zákaznickou nejistotou.
+
+Dobré ukončení obsahuje:
+
+- jasné vypnutí v administraci,
+- informaci, co se stane s daty,
+- export synchronizační historie, pokud má provozní hodnotu,
+- revokaci tokenů,
+- zastavení naplánovaných jobů,
+- úklid front a webhooků,
+- oznámení zákazníkům u ukončované podporované integrace,
+- interní záznam, proč byla integrace vypnuta nebo ukončena.
+
+U partnerských integrací si nastav datum revize. Například jednou za čtvrtletí projít: používá to někdo, stojí to za údržbu, změnila se datová rizika, není jednodušší alternativa, nejsou tokeny bez vlastníka? Integrace bez vlastníka je v systému to samé co zapomenuté jídlo v lednici. Nejdřív o něm nikdo nemluví. Pak o něm mluví všichni.
+
+### Checklist: partnerská integrace privacy-first
+
+- [ ] Umíme popsat zákaznický proces, který integrace zlepší.
+- [ ] Víme, jestli jde o technickou, distribuční, implementační, marketplace nebo datovou spolupráci.
+- [ ] Máme business case: dopad, počet zákazníků, náklady na údržbu a rizika.
+- [ ] Zvolili jsme nejmenší bezpečný stupeň integrace.
+- [ ] Existuje datová mapa pro odchozí i příchozí data.
+- [ ] Oprávnění odpovídají principu nejmenšího přístupu.
+- [ ] Tokeny a tajemství nejsou v kódu, logách ani sdílených dokumentech.
+- [ ] Zákazník vidí stav integrace, rozsah dat a možnost odpojení.
+- [ ] Máme jasné hranice supportu mezi námi a partnerem.
+- [ ] Marketingové použití log, citací a případových studií má samostatný souhlas.
+- [ ] Měříme dopad integrace, ne jen počet aktivních propojení.
+- [ ] Umíme integraci bezpečně vypnout, exportovat relevantní záznamy a revokovat přístupy.
+- [ ] Integrace má vlastníka a datum další revize.
+
+### Šablona partnerské integrační karty
+
+```markdown
+## Integrace / partnerství: [název]
+
+### Účel
+- Zákaznický proces:
+- Segment:
+- Problém dnes:
+- Očekávaný dopad:
+- Typ partnerství:
+
+### Rozsah první verze
+- Stupeň integrace:
+- Co integrace umí:
+- Co záměrně neumí:
+- Alternativní manuální postup:
+- Podmínky pilotu:
+
+### Datová mapa
+- Data odcházející z našeho produktu:
+- Data přicházející od partnera:
+- Účel výměny:
+- Právní / smluvní poznámka:
+- Retence synchronizačních logů:
+- Kdo má přístup:
+
+### Bezpečnost a oprávnění
+- Použitý auth mechanismus:
+- Rozsah oprávnění:
+- Uložení tokenů:
+- Auditní stopa:
+- Revokace:
+- Testovací prostředí:
+
+### Provoz
+- Vlastník integrace:
+- Support hranice:
+- Monitoring:
+- Chybové stavy:
+- Rollback / vypnutí:
+- Datum další revize:
+
+### Marketing a partnerství
+- Schválený popis:
+- Použití loga:
+- Marketplace listing:
+- Doporučovací pravidla:
+- Kontaktní osoba u partnera:
+```
+
+
 ## Pracovní log
+
+- **2026-09-15:** Doplněna příloha CE o partnerských integracích bez datového pašování: typy partnerství, business case, nejmenší bezpečné rozhraní, datová mapa, oprávnění, smluvní hranice, marketplace listing, měření dopadu, ukončení integrace, checklist a šablona integrační karty.
+
 
 - **2026-09-15:** Doplněna příloha CD o zákaznické radě bez divadla: účel rady, výběr členů podle perspektivy, datová bezpečnost, agenda, hranice slibů, převod poznatků do produktu, odměny, obměna, checklist a šablona.
 
