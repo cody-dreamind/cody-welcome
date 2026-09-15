@@ -13172,8 +13172,177 @@ Jednou měsíčně si udělej „flag review“. Projdi aktivní flagy a zařaď
 - Jak ověříme návrat do bezpečného stavu:
 
 
+## Příloha BZ: Release notes a changelog bez marketingového kouře
+
+Release notes nejsou jen seznam změněných souborů v lidštějším kabátě. Jsou to produktová komunikace: zákazníkovi říkají, co se změnilo, proč ho to má zajímat, co má udělat dál a jestli se ho změna vůbec týká.
+
+Malý SaaS tým často dělá dvě opačné chyby. Buď mlčí, takže zákazníci objeví novinku náhodou a support vysvětluje totéž pětkrát. Nebo z každého drobného tlačítka udělá ohňostroj, takže lidé přestanou číst. Dobré release notes jsou klidné, konkrétní a respektují pozornost.
+
+> Codyho komentář: Changelog nemá znít jako fanfára na každou změnu paddingu. Když zákazník neví, co se pro něj zlepšilo, tak to není release note, ale interní potlesk vývojářů.
+
+### Rozliš interní changelog a zákaznické release notes
+
+Interní changelog může být technický. Patří do něj migrace, refaktoring, opravy hraničních případů, bezpečnostní zpevnění, změny konfigurace a odkazy na issue. Zákaznické release notes mají jiný úkol: přeložit změnu do dopadu na práci zákazníka.
+
+Praktické rozdělení:
+
+- **Interní changelog:** co se změnilo v systému a proč to tým potřebuje vědět.
+- **Zákaznické release notes:** co se změnilo pro uživatele, správce nebo kupujícího.
+- **Admin oznámení:** změny s dopadem na nastavení, oprávnění, billing, exporty nebo integrace.
+- **Incident follow-up:** opravy po výpadku nebo chybě, které mají vlastní tón a kontext.
+
+Tím zabráníš tomu, aby veřejný changelog vypadal jako výpis z gitu, ale zároveň neztratíš provozní stopu. Obě vrstvy jsou užitečné, jen každá pro jiné rozhodnutí.
+
+### Každý záznam začni dopadem
+
+U každé změny se ptej: „Co teď zákazník zvládne rychleji, bezpečněji, levněji nebo s menším stresem?“ Pokud odpověď neexistuje, změna možná nepatří do veřejného oznámení.
+
+Slabý záznam:
+
+- Přidali jsme nový endpoint pro export faktur.
+
+Lepší záznam:
+
+- Správci si teď mohou stáhnout faktury za vybrané období najednou, takže měsíční předání účetnímu nezávisí na ručním klikání po jednotlivých dokladech.
+
+Ještě lepší záznam přidá další krok:
+
+- Najdete ho v **Nastavení → Fakturace → Exporty**. Export obsahuje CSV a PDF soubory v jednom ZIP balíčku.
+
+Release note má být malý most mezi změnou a použitím. Nečekej, že zákazník bude luštit produktovou archeologii.
+
+### Nepřeháněj tón podle velikosti změny
+
+Ne každá oprava je „game changer“. Když jazyk nafoukneš, lidé se naučí filtrovat. V changelogu pomáhá jednoduchá hierarchie:
+
+- **Nové:** nová schopnost, která umožní jiný pracovní postup.
+- **Zlepšeno:** existující věc je rychlejší, jasnější, bezpečnější nebo pohodlnější.
+- **Opraveno:** chyba, nekonzistence nebo nepříjemnost uživatele.
+- **Změněno:** úprava chování, která může vyžadovat pozornost.
+- **Končí:** deprekace, odstranění nebo migrace.
+
+Tahle slova drží očekávání při zemi. Zákazník rychle pozná, jestli má číst detail, něco nastavit, nebo se jen usmát a pokračovat v práci.
+
+### Privacy-first release notes neprozrazují cizí data
+
+Změny často vznikají z konkrétní zákaznické situace. To neznamená, že ji máš popsat veřejně. Release notes nikdy nesmí vyzradit jméno zákazníka, interní proces, objem dat, bezpečnostní slabinu ani detail, který by pomohl zneužití.
+
+Bezpečnější formulace:
+
+- „Opravili jsme chybu, která v některých workspaces způsobila duplicitní zobrazení dokončených úkolů.“
+- „Zpřesnili jsme validaci importu, aby systém dřív upozornil na chybějící povinný sloupec.“
+- „Správci teď vidí jasnější upozornění před změnou oprávnění celé role.“
+
+Rizikové formulace:
+
+- „Opravili jsme chybu nahlášenou zákazníkem X, kterému se importovalo 18 432 záznamů dvakrát.“
+- „Zavřeli jsme bezpečnostní díru v endpointu `/admin/export`, kterou šlo obejít kontrolu role.“
+- „Kvůli problému v databázi zákazníka Y jsme změnili migraci.“
+
+U bezpečnostních oprav piš tolik, kolik pomůže zákazníkům jednat, ale ne tolik, aby text sloužil jako návod k útoku. Pokud je potřeba detailní bezpečnostní oznámení, udělej ho cíleně pro dotčené správce.
+
+### Kanál zvol podle naléhavosti
+
+Ne všechno patří do e-mailu. E-mail je drahý kanál na pozornost a snadno sklouzne ke spamu. Changelog může žít na více místech:
+
+- **Veřejná stránka changelogu:** pro transparentnost, SEO a zákazníky, kteří chtějí sledovat vývoj.
+- **RSS feed:** pro lidi, kteří chtějí změny odebírat bez algoritmů a cizích platforem.
+- **In-app oznámení:** pro změny, které se týkají konkrétní obrazovky nebo role.
+- **E-mail správcům:** pro změny s dopadem na billing, bezpečnost, integrace, exporty nebo smluvní provoz.
+- **Support makra:** pro tým, který bude vysvětlovat změnu v odpovědích.
+
+Privacy-first výchozí režim: veřejný changelog a RSS pro běžné novinky, cílený e-mail jen pro změny, kde příjemce opravdu potřebuje jednat. Žádné sledovací pixely, žádné sdílecí skripty, žádné „otevřel/neotevřel, pošleme mu to znovu ještě třikrát“.
+
+### Piš release notes průběžně, ne v pátek večer
+
+Nejhorší changelog vzniká tak, že někdo po release hledá v issue trackeru, co se vlastně stalo. Výsledek bývá nepřesný, technický a bez kontextu.
+
+Lepší proces:
+
+1. U větší změny přidej návrh release note už do pull requestu nebo issue.
+2. Product owner nebo support doplní jazyk zákazníka a dopad.
+3. Před releasem někdo zkontroluje bezpečnost, privacy a přesnost.
+4. Po releasu se text publikuje na správných kanálech.
+5. Po týdnu se zkontroluje, jestli support nedostává opakované dotazy.
+
+Tím se release notes stanou součástí Definition of Done. Ne jako byrokracie, ale jako poslední metr doručení hodnoty.
+
+### Zákazník potřebuje cestu k akci
+
+Každý důležitý záznam by měl odpovědět na tři otázky:
+
+- Koho se změna týká?
+- Co má člověk udělat, pokud chce změnu použít?
+- Kde najde detail, nastavení nebo pomoc?
+
+Příklad:
+
+> **Zlepšeno: Export aktivit pro správce**  
+> Správci workspace teď mohou stáhnout přehled aktivit za vlastní období. Hodí se pro měsíční kontrolu interních procesů a předání podkladů zákaznickému týmu. Export najdete v **Nastavení → Audit → Export aktivit**. Data se generují jen na vyžádání a odkaz expiruje po 24 hodinách.
+
+Tenhle záznam říká roli, přínos, umístění i privacy detail. Není dlouhý, ale šetří support.
+
+### Měř kvalitu changelogu bez sledovacího apetitu
+
+Nemusíš vědět, který konkrétní člověk otevřel každý záznam. Stačí sledovat praktické signály:
+
+- klesl počet opakovaných dotazů na danou změnu,
+- zákazníci používají novou funkci bez dodatečného vysvětlování,
+- správci provedli potřebnou konfiguraci včas,
+- sales a support používají stejné vysvětlení,
+- release notes se dají zpětně najít a odkázat.
+
+Když chceš měřit návštěvnost changelogu, drž se agregovaných dat. Stačí počet návštěv stránky, kliknutí na dokumentaci nebo dotazy na support. Identifikace jednotlivců je většinou zbytečný luxus s nepříjemnou cenou.
+
+### Checklist: release notes privacy-first
+
+- Má každý záznam jasný dopad na zákazníka nebo správce?
+- Je tón přiměřený velikosti změny?
+- Neobsahuje text zákaznická data, interní incidentové detaily nebo zneužitelné technické informace?
+- Je uvedeno, koho se změna týká a kde ji najde?
+- Existuje RSS nebo přímý odkaz na veřejný changelog?
+- Posíláme e-mail jen tehdy, když příjemce potřebuje jednat?
+- Zkontroloval text někdo ze supportu nebo productu?
+- Má změna interní stopu v issue, pull requestu nebo release kartě?
+
+### Šablona release note karty
+
+```markdown
+## Release note: [název změny]
+
+### Kategorie
+- Nové / Zlepšeno / Opraveno / Změněno / Končí:
+- Datum releasu:
+- Vlastník textu:
+
+### Dopad
+- Koho se změna týká:
+- Co je nově možné nebo jednodušší:
+- Co musí zákazník udělat:
+
+### Text pro zákazníky
+- Krátký nadpis:
+- Popis ve 2–4 větách:
+- Odkaz na nastavení nebo dokumentaci:
+
+### Kanály
+- Veřejný changelog:
+- RSS:
+- In-app oznámení:
+- E-mail správcům:
+- Support makro:
+
+### Privacy-first kontrola
+- Neobsahuje zákaznická data:
+- Neprozrazuje zneužitelné technické detaily:
+- Nepoužívá sledovací pixely:
+- Měření je agregované:
+```
+
+
 ## Pracovní log
 
+- **2026-09-15:** Doplněna příloha BZ o release notes a changelogu: rozdíl mezi interní a zákaznickou komunikací, dopad změn, privacy-first hranice, kanály, proces a šablona release note karty.
 - **2026-09-15:** Doplněna příloha BY o feature flazích a postupném rolloutu: typy flagů, vlastnictví, privacy-first segmentace, měření, komunikace, rollback, úklid a šablona rollout karty.
 
 - **2026-09-15:** Doplněna příloha BX o produktových notifikacích: typy zpráv, kanály, preference, bezpečný obsah, digesty, měření bez tracking pixelů a šablona notifikační karty.
