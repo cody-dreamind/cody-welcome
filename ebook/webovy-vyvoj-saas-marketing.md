@@ -12790,7 +12790,187 @@ Když deprekace vyvolá chaos, není to důkaz, že zákazníci „neradi změny
 - Kdy proběhne závěrečný úklid:
 
 
+## Příloha BX: Produktové notifikace bez poplašného orchestru
+
+Notifikace jsou zvláštní produktová disciplína. Když je uděláš dobře, zákazník má pocit, že mu produkt kryje záda. Když je uděláš špatně, vznikne další zdroj hluku, který lidé vypnou rychleji než otravnou melodii budíku v pondělí ráno.
+
+Cílem notifikace není „zvýšit engagement“. Cílem je doručit správnou informaci správnému člověku ve chvíli, kdy podle ní může jednat. V privacy-first SaaS navíc platí: neposílej víc dat, než příjemce potřebuje, a nedělej z každé události behaviorální profil.
+
+### Začni rozhodnutím, které má příjemce udělat
+
+Každá notifikace má mít jasnou odpověď na otázku: co má člověk po přečtení udělat?
+
+Použitelné důvody:
+
+- **Akce čeká na uživatele:** schválení, doplnění údajů, kontrola chyby, platba, odpověď zákazníkovi.
+- **Riziko roste:** blíží se limit, integrace selhává, import má chyby, certifikát nebo metoda platby expiruje.
+- **Stav se změnil:** export je připravený, faktura zaplacená, úkol dokončený, incident vyřešený.
+- **Hodnota je dostupná:** nový report je připravený, ale jen pokud ho zákazník opravdu očekává.
+
+Slabé důvody:
+
+- „Uživatel se dlouho nepřihlásil.“
+- „Marketing chce připomenout funkci.“
+- „Máme nový release a všichni to musí vědět.“
+- „Konkurence posílá pushky, tak my taky.“
+
+Codyho komentář: Pokud neumíš říct, jaké rozhodnutí má notifikace zlepšit, pravděpodobně neposíláš notifikaci. Posíláš produktový konfety kanón.
+
+### Rozliš transakční, provozní a marketingové zprávy
+
+Míchat všechno do jednoho kanálu je cesta do pekla s pěkným HTML šablonovačem. Uživatel potřebuje vědět, co je nutné, co je užitečné a co je volitelné.
+
+Základní typy:
+
+- **Transakční:** potvrzení platby, reset hesla, export dat, bezpečnostní upozornění, změna e-mailu.
+- **Provozní:** výpadek integrace, dokončený import, blížící se limit, selhané webhooky, změna stavu projektu.
+- **Produktové:** změna workflow, důležitý release pro konkrétní roli, ukončení funkce, nová možnost v používaném modulu.
+- **Vzdělávací:** tip k lepšímu nastavení, návod po aktivaci, checklist před spuštěním.
+- **Marketingové:** newsletter, pozvánka na webinář, obchodní nabídka, případová studie.
+
+Privacy-first pravidlo: transakční a bezpečnostní zprávy neposílej přes marketingový nástroj jen proto, že se v něm hezky skládají šablony. Zbytečně tím rozšiřuješ okruh systémů, které vidí citlivé provozní události.
+
+### Kanál vol podle naléhavosti, ne podle módnosti
+
+Ne každá informace patří do e-mailu. Ne každá patří do aplikace. A push notifikace nejsou magické kladivo na produktovou retenci.
+
+Praktické pravidlo:
+
+- **In-app banner:** když je uživatel právě v kontextu a může jednat hned.
+- **E-mail:** když jde o důležitou informaci mimo aplikaci nebo o záznam, ke kterému se příjemce vrátí.
+- **Digest:** když se události opakují a nejsou jednotlivě kritické.
+- **Webhook / API:** když má jednat jiný systém, ne člověk.
+- **Status page / RSS:** když jde o širší provozní informaci, kterou nemáš cpát každému zvlášť.
+- **SMS / telefon:** jen pro kritické bezpečnostní nebo provozní situace, kde zpoždění bolí.
+
+Příklad: „Import 18 řádků je hotový“ nepotřebuje samostatný e-mail. „Import 18 000 řádků selhal a 312 záznamů se nepřevedlo“ už si e-mail zaslouží. „Veřejná API integrace volá starý endpoint, který za 14 dní končí“ patří i vlastníkovi účtu, nejen vývojáři, který endpoint kdysi nastavil a od té doby třikrát změnil práci.
+
+### Nastavení preferencí není dekorace
+
+Notifikační preference jsou součást důvěry. Pokud uživatel nemůže řídit, co dostává, udělá jediné nastavení, které mu zbyde: odhlásí všechno, filtruje doménu nebo přestane produkt číst.
+
+Dobrá nastavení obsahují:
+
+- **Kategorie zpráv:** bezpečnost, provoz, projekty, komentáře, billing, produktové novinky, vzdělávání.
+- **Kanály:** e-mail, in-app, digest, webhook, případně mobilní push.
+- **Frekvenci:** okamžitě, denně, týdně, jen kritické.
+- **Role:** vlastník účtu, admin, technický správce, účetní, běžný uživatel.
+- **Výjimky:** bezpečnostní a právně/provozně nutné zprávy, které nejde vypnout úplně.
+
+Text u výjimek piš lidsky. Ne „Tuto kategorii nelze deaktivovat z důvodu legitimního zájmu“. Lepší: „Bezpečnostní zprávy posíláme vždy, protože chrání účet — například změnu hesla nebo nové přihlášení správce.“
+
+### Obsah notifikace má být malý, konkrétní a bezpečný
+
+Notifikace často unikají mimo kontrolované prostředí: do přeposlaných e-mailů, náhledů na zamčené obrazovce, sdílených inboxů nebo ticketovacích systémů. Proto do nich nepatří citlivé detaily, pokud nejsou nutné.
+
+Bezpečnější vzor:
+
+- **Co se stalo:** „Import kontaktů se dokončil s chybami.“
+- **Dopad:** „12 řádků nebylo importováno kvůli chybějícímu e-mailu.“
+- **Další krok:** „Otevřít report importu.“
+- **Kontext:** název workspace, projektu nebo importu jen v míře, která pomůže orientaci.
+- **Odkaz:** vede na přihlášenou stránku s detailním logem, ne na veřejně dostupný soubor.
+
+Vyhýbej se:
+
+- osobním údajům v předmětu e-mailu,
+- celým exportům v příloze,
+- interním ID bez významu pro zákazníka,
+- dlouhým stack trace chybám,
+- tlačítkům typu „Klikněte okamžitě, jinak o vše přijdete“.
+
+Když potřebuješ poslat detail, dej ho za autentizovaný odkaz s omezenou životností nebo do aplikace. E-mail má být ukazatel, ne skladiště dat.
+
+### Digest je často lepší než dávka drobných štípanců
+
+Jedna notifikace může být užitečná. Dvacet podobných notifikací za den je už komáří útok na soustředění. U opakovaných událostí raději používej souhrny.
+
+Digest se hodí pro:
+
+- nové komentáře u projektu,
+- dokončené úkoly,
+- týdenní stav zákaznických požadavků,
+- měsíční billing přehled,
+- přehled nových leadů,
+- změny v dokumentaci nebo roadmapě.
+
+Dobrý digest má horní shrnutí, tři až pět nejdůležitějších položek a odkaz na detail. Špatný digest je smetiště všeho, co systém vyplivl od včerejška.
+
+Praktický filtr: pokud příjemce po přečtení digestu neumí udělat rozhodnutí do dvou minut, souhrn je moc široký nebo špatně strukturovaný.
+
+### Měř kvalitu notifikací bez šmírování
+
+Nemusíš sledovat každý pohyb myši, abys poznal, jestli notifikace fungují. Stačí měřit agregované signály a zákaznické reakce.
+
+Sleduj:
+
+- počet odeslaných zpráv podle kategorie a kanálu,
+- míru odhlášení podle kategorie,
+- počet support dotazů po konkrétní notifikaci,
+- doručitelnost e-mailů na úrovni domény,
+- počet akcí dokončených po kritické provozní zprávě,
+- počet opakovaných upozornění ke stejnému problému.
+
+Nesleduj zbytečně:
+
+- individuální otevření každého e-mailu přes tracking pixel,
+- detailní heatmapy kliků v e-mailu,
+- osobní skóre „poslušnosti“ uživatele,
+- chování mimo vlastní produktový kontext.
+
+Codyho komentář: Metrika „open rate“ zní krásně, dokud nezjistíš, že optimalizuješ předměty e-mailů jako bulvární titulek a zákazník mezitím tiše trpí.
+
+### Checklist: produktové notifikace privacy-first
+
+- Každá notifikace má jasné rozhodnutí nebo akci pro příjemce.
+- Kategorie zpráv jsou oddělené: transakční, provozní, produktové, vzdělávací, marketingové.
+- Kritické provozní zprávy nejdou přes zbytečné marketingové nástroje.
+- Kanál odpovídá naléhavosti a kontextu.
+- Uživatel má srozumitelné preference podle kategorií, kanálů a frekvence.
+- Bezpečnostní výjimky jsou vysvětlené lidsky.
+- E-mail neobsahuje zbytečné osobní údaje, přílohy ani citlivé logy.
+- Detailní informace jsou za přihlášeným odkazem v aplikaci.
+- Opakované události se slučují do digestu.
+- Měření používá agregované signály a minimalizuje tracking.
+- Notifikace mají vlastníka, revizi a možnost vypnutí nebo úpravy.
+
+### Šablona notifikační karty
+
+## Notifikace: [název]
+
+### Účel
+
+- Jaké rozhodnutí má příjemce udělat:
+- Co se stane, když zpráva nepřijde:
+- Kategorie: transakční / provozní / produktová / vzdělávací / marketingová
+
+### Příjemci a kanál
+
+- Role příjemce:
+- Kanál:
+- Frekvence:
+- Lze vypnout: ano / ne / částečně
+- Důvod výjimky, pokud nejde vypnout:
+
+### Obsah
+
+- Předmět / nadpis:
+- Krátké shrnutí:
+- Další krok:
+- Odkaz na detail:
+- Co do zprávy nesmí přijít:
+
+### Privacy-first kontrola
+
+- Jaká data zpráva obsahuje:
+- Které systémy zprávu zpracují:
+- Retence logů o odeslání:
+- Agregované metriky kvality:
+- Datum další revize:
+
 ## Pracovní log
+
+- **2026-09-15:** Doplněna příloha BX o produktových notifikacích: typy zpráv, kanály, preference, bezpečný obsah, digesty, měření bez tracking pixelů a šablona notifikační karty.
 - **2026-09-15:** Doplněna příloha BW o ukončování funkcí bez produktového hřbitova: rozlišení mrtvých a kritických funkcí, deprekační mapa, komunikace, migrace dat, technické vypínání, metriky klidu, checklist a deprekační karta.
 - **2026-09-15:** Doplněn krátký detail k renewal meetingu: otázka „co se stane, když neuděláme nic“ pro rozlišení skutečného rizika od obchodního tlaku.
 - **2026-09-15:** Doplněna příloha BV o obnovách a expanzi zákazníků bez nátlaku: průběžná hodnota, renewal rytmus, expanzní signály, férové nabídky, rizika, privacy-first evidence, měření, checklist a renewal karta.
