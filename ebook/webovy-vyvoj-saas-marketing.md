@@ -13340,7 +13340,155 @@ Když chceš měřit návštěvnost changelogu, drž se agregovaných dat. Stač
 ```
 
 
+## Příloha CA: Zákaznická nápověda bez bludiště a support ping-pongu
+
+Dobrá nápověda není skládka starých odpovědí ze supportu. Je to produktová vrstva, která pomáhá zákazníkovi dokončit práci bez čekání, snižuje opakované dotazy a zároveň chrání data. Malý SaaS často začne tím, že má tři články, pár odpovědí v e-mailu a jeden „dočasný“ dokument, který přežil čtyři redesigny. Gratuluju, právě vznikl informační kompost.
+
+Nápověda má fungovat jako mapa. Ne jako román, ne jako interní wiki, ne jako místo, kam schováš složitost produktu a doufáš, že ji uživatelé najdou sami.
+
+### Začni úkoly, ne strukturou firmy
+
+Zákazník nehledá „modul fakturace / nastavení / integrace / import / export“ podle toho, jak sis pojmenoval komponenty v kódu. Hledá výsledek:
+
+- jak pozvat kolegu,
+- jak importovat první data,
+- jak nastavit oprávnění,
+- jak stáhnout export,
+- jak zrušit účet,
+- jak opravit chybu v platbě,
+- jak zjistit, kdo má přístup k datům.
+
+Proto piš nápovědu podle zákaznických úkolů. Kategorie můžeš mít interně, ale hlavní navigace má odpovídat tomu, co člověk právě potřebuje udělat. Pokud musí zákazník znát tvoji produktovou architekturu, aby našel odpověď, není zmatený zákazník. Je to zmatený produkt.
+
+### Každý článek musí mít jednu práci
+
+Jeden článek, jeden konkrétní výsledek. „Nastavení workspace“ je moc široké. „Jak změnit fakturační e-mail workspace“ je použitelné. Článek má mít jasnou kostru:
+
+1. kdy se hodí,
+2. kdo ho může provést,
+3. co se před změnou stane,
+4. postup krok za krokem,
+5. dopady na data, oprávnění nebo billing,
+6. co dělat, když něco selže.
+
+Krátký článek není líný článek. Krátký článek, který vyřeší jednu věc, je často nejlepší support agent v týmu. Nech si dlouhé vysvětlování pro průvodce, onboarding nebo architektonické rozhodnutí.
+
+### Nápověda má říkat i důsledky
+
+Nejhorší dokumentace je taková, která jen popisuje tlačítka. „Klikněte na Smazat.“ Paráda. A co přesně se smaže? Jde to vrátit? Dotkne se to členů týmu? Zůstane něco v zálohách? Přijde někomu e-mail? Vznikne fakturační dopad?
+
+U každé citlivější akce napiš dopad lidsky:
+
+> Když odeberete uživatele z workspace, ztratí přístup k projektům a notifikacím. Jeho historické akce v audit logu zůstanou zachované, aby tým mohl zpětně dohledat změny. Osobní údaje mimo auditní stopu se řídí retenční politikou workspace.
+
+Tohle je mnohem užitečnější než screenshot s červeným tlačítkem. Screenshot pomůže, ale důsledek chrání zákazníka před špatným rozhodnutím.
+
+### Privacy-first nápověda nesbírá zbytečné stopy
+
+Knowledge base se snadno promění ve sledovací vánoční stromeček: heatmapa, session replay, chat widget, remarketing pixel, externí fonty, tři analytiky a „personalizace obsahu“. Výsledek? Člověk přijde zjistit, jak exportovat data, a mezitím odevzdá půlku prohlížeče reklamnímu průmyslu. Velmi moderní, velmi hloupé.
+
+Privacy-first nápověda stojí na jednodušších pravidlech:
+
+- veřejné články bez přihlašování tam, kde neobsahují zákaznická data,
+- agregovaná analytika místo sledování konkrétních čtenářů,
+- žádné session replaye pro stránky s citlivými dotazy,
+- přímé odkazy místo skriptů sociálních sítí,
+- RSS nebo changelog pro nové články,
+- jasně oddělená veřejná nápověda od interních support poznámek.
+
+Pokud potřebuješ měřit kvalitu článků, sleduj signály jako počet opakovaných dotazů, úspěšnost dokončení úkolu, interní hodnocení supportem a feedback tlačítko „pomohlo / nepomohlo“ bez identifikace člověka. Nemusíš vědět, že zrovna Jana z účetního oddělení přečetla odstavec tři a čtyřikrát pohnula myší. Fakt nemusíš.
+
+### Support dotazy jsou vstup do produktového backlogu
+
+Každý opakovaný dotaz patří do jedné ze tří krabic:
+
+- **Chybí článek:** zákazník hledá legitimní informaci, kterou nikde nemáš.
+- **Článek existuje, ale nejde najít:** problém je navigace, názvosloví nebo interní žargon.
+- **Článek existuje, ale produkt je matoucí:** dokumentace jen lepí problém, který má řešit UX nebo samotná funkce.
+
+Třetí krabice je nejdůležitější. Když deset lidí čte článek „Jak najít API klíč“ a pořád píše na support, možná nepotřebuješ delší článek. Možná potřebuješ lepší obrazovku, lepší prázdný stav nebo méně schovaný API klíč. Dokumentace není výmluva pro špatný produkt. Je to radar.
+
+### Udržuj články jako produkt, ne jako archiv
+
+Každý článek by měl mít vlastníka a datum revize. Stačí jednoduchá metadata:
+
+- vlastník článku,
+- produktová oblast,
+- poslední kontrola,
+- další plánovaná revize,
+- související funkce nebo nastavení,
+- interní poznámka pro support.
+
+Revize nedělej náhodně. Spouštěče jsou jasné: změna UI, nový release, incident, častý support dotaz, změna cen, změna oprávnění, nová integrace, úprava retenční politiky nebo odchod funkce. Když změníš produkt a zapomeneš na nápovědu, zákazník dostane mapu k městu, které už neexistuje.
+
+### Kombinuj tři typy obsahu
+
+Dobrá knowledge base není jen sbírka návodů. Potřebuje tři vrstvy:
+
+- **Rychlá odpověď:** krátký článek na jeden úkol.
+- **Průvodce:** delší postup pro proces, třeba onboarding týmu nebo migraci dat.
+- **Referenční stránka:** přesný popis polí, rolí, limitů, API nebo exportního formátu.
+
+Nemíchej je do sebe. Když někdo řeší urgentní problém, nechce číst filozofii produktu. Když někdo plánuje migraci, potřebuje kontext, rizika a kontrolní seznam. A když integruje API, potřebuje přesnost, ne motivační odstavec o budoucnosti automatizace.
+
+### Codyho komentář
+
+Můj pohled: nejlepší nápověda je ta, kterou zákazník skoro nepotřebuje, protože produkt je jasný. Druhá nejlepší je ta, která mu do třiceti sekund řekne pravdu. Ne marketingovou pěnu, ne „kontaktujte náš tým pro více informací“, ale konkrétní odpověď. Pokud člověk hledá, jak exportovat nebo smazat data, zaslouží si přímou cestu, ne obchodní trychtýř v převleku za podporu.
+
+### Checklist: knowledge base privacy-first
+
+- Má každý článek jeden jasný zákaznický úkol?
+- Je v článku uvedeno, kdo může akci provést a jaký má dopad?
+- Neobsahuje veřejná nápověda zákaznická data, interní incidentové detaily ani bezpečnostně citlivé postupy?
+- Jsou články napojené na support dotazy a produktový backlog?
+- Má každý důležitý článek vlastníka a datum revize?
+- Měříme kvalitu agregovaně, bez profilování konkrétních čtenářů?
+- Existuje přímý odkaz na článek, který support může poslat bez přihlašování, pokud to data dovolují?
+- Jsou interní poznámky oddělené od veřejného textu?
+
+### Šablona článku nápovědy
+
+```markdown
+# [Jeden konkrétní úkol]
+
+## Kdy se to hodí
+- Situace:
+- Typický zákazník / role:
+
+## Kdo to může udělat
+- Potřebná role:
+- Potřebná oprávnění:
+
+## Než začneš
+- Co se změní:
+- Co se nedá vrátit:
+- Dopad na data / billing / přístupy:
+
+## Postup
+1. ...
+2. ...
+3. ...
+
+## Když se něco pokazí
+- Častá chyba:
+- Jak ji ověřit:
+- Kdy kontaktovat support:
+
+## Privacy-first poznámka
+- Jaká data se používají:
+- Jak dlouho zůstávají:
+- Kde najít export nebo smazání:
+
+## Revize
+- Vlastník článku:
+- Produktová oblast:
+- Poslední kontrola:
+- Další kontrola:
+```
+
 ## Pracovní log
+
+- **2026-09-15:** Doplněna příloha CA o zákaznické nápovědě a knowledge base: struktura podle úkolů, důsledky akcí, privacy-first měření, propojení se supportem, revize článků, checklist a šablona článku.
 
 - **2026-09-15:** Doplněna příloha BZ o release notes a changelogu: rozdíl mezi interní a zákaznickou komunikací, dopad změn, privacy-first hranice, kanály, proces a šablona release note karty.
 - **2026-09-15:** Doplněna příloha BY o feature flazích a postupném rolloutu: typy flagů, vlastnictví, privacy-first segmentace, měření, komunikace, rollback, úklid a šablona rollout karty.
