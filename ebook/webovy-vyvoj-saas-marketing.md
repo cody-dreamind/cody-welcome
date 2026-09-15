@@ -12557,6 +12557,8 @@ Agenda na 45 minut:
 
 Po schůzce pošli krátké shrnutí. Ne román, ne transcript, ne generickou obchodní poezii. Stačí: co zaznělo, co bylo dohodnuto, kdo co udělá a do kdy.
 
+Užitečný detail: přidej jednu větu „co se stane, když neuděláme nic“. Tohle rychle oddělí skutečné riziko od obchodnické nervozity. Pokud odpověď zní „nic zásadního“, není potřeba tlačit na expanzi ani eskalaci. Pokud odpověď zní „zákazník nedosáhne slíbeného výsledku“, má tým jasný důvod jednat.
+
 ### Měření obnov a expanze bez vanity metrik
 
 U renewal procesu se snadno sklouzne k metrikám, které vypadají hezky, ale nepomáhají rozhodovat. „Počet renewal aktivit“ je fajn pro pocit pohybu, ale neříká, jestli zákazník vidí hodnotu.
@@ -12630,7 +12632,167 @@ Finanční metriky jsou důležité, ale bez kontextu svádí k nesmyslným záv
 - Kdy kartu revidujeme:
 
 
+## Příloha BW: Ukončování funkcí bez produktového hřbitova a zákaznické zrady
+
+Každý SaaS časem nasbírá funkce, které kdysi dávaly smysl, ale dnes už jen zabírají místo v navigaci, komplikují podporu a drží tým v minulosti. Některé používali tři pilotní zákazníci. Některé vznikly kvůli jednomu velkému obchodu. Některé byly „dočasné řešení“, takže samozřejmě přežily dvě redesignové vlny a jednoho produktového manažera.
+
+Ukončit funkci není selhání. Selhání je nechat ji hnít v produktu tak dlouho, až tým neví, jestli ji může změnit, zákazníci neví, jestli se na ni mohou spolehnout, a support tráví čas vysvětlováním historických kompromisů. Dobré ukončování funkcí je normální součást produktové hygieny.
+
+> Codyho komentář: Produkt bez úklidu je jako kancelářský šuplík. Nejdřív v něm máš tužku. Pak účtenku z roku 2019. Pak kabel, který „se může hodit“. A najednou tam bydlí malý legacy démon.
+
+### Nejdřív zjisti, jestli je funkce opravdu mrtvá
+
+Než něco označíš za kandidáta na vypnutí, odděl tři různé situace:
+
+- **Funkce je nepoužívaná:** téměř nikdo ji neotevírá, nevznikají kolem ní support dotazy a není součástí hodnotového příběhu.
+- **Funkce je používaná špatně:** zákazníci ji obcházejí, používají jako náhradu za něco jiného nebo kvůli ní vyrábí ruční práci.
+- **Funkce je používaná málo, ale kriticky:** malý počet účtů na ní závisí v důležitém procesu.
+
+Třetí varianta je zrádná. Pokud se díváš jen na objem používání, můžeš omylem vypnout věc, která drží fakturaci, export pro audit nebo měsíční report pro vedení. Privacy-first přístup neznamená sledovat každý pohyb uživatele. Znamená mít dost kontextu k bezpečnému rozhodnutí: agregovaná metrika, seznam dotčených workspace, support historie a rozhovor s vlastníkem účtu.
+
+Praktická otázka před rozhodnutím:
+
+> „Kdyby tato funkce zítra zmizela, kdo by si toho všiml, co by nemohl udělat a jakou náhradní cestu bychom mu nabídli?“
+
+Pokud na to neumíš odpovědět, ještě nejsi připravený vypínat. Jsi připravený zkoumat.
+
+### Vytvoř deprekační mapu, ne náhodný seznam přání
+
+Deprekace má mít vlastní kartu stejně jako nová funkce. Jinak se z ní stane nenápadná položka v backlogu, která se pořád odkládá, protože „teď hoří něco důležitějšího“. Jenže právě staré funkce často zvyšují cenu každé nové změny.
+
+Deprekační mapa by měla obsahovat:
+
+- **Název funkce:** jak ji vidí zákazník, ne jen interní název modulu.
+- **Důvod ukončení:** nízká hodnota, technické riziko, duplicita, bezpečnost, změna strategie.
+- **Dotčené scénáře:** co přesně zákazník dnes dělá.
+- **Dotčené účty:** počet, segment a kritičnost bez zbytečných osobních detailů.
+- **Náhradní cesta:** nová funkce, export, migrace, ruční proces nebo jasné vysvětlení, proč náhrada nebude.
+- **Časová osa:** oznámení, read-only fáze, vypnutí tvorby nových dat, finální odstranění.
+- **Vlastník:** kdo hlídá komunikaci, migraci, support a technické dokončení.
+
+Dobrá deprekační mapa není román. Je to pracovní dokument, který zabrání tomu, aby produktový úklid vypadal jako překvapivý požár.
+
+### Komunikuj dřív, než zákazník narazí do zdi
+
+Nejhorší deprekační komunikace je banner den před vypnutím. Druhá nejhorší je changelog schovaný někde mezi „opravili jsme zarovnání tlačítka“ a „vylepšili jsme výkon“. Pokud zákazník musí kvůli změně upravit proces, potřebuje čas, kontext a konkrétní kroky.
+
+Komunikační vrstvy:
+
+- **Veřejný changelog:** stručné oznámení pro všechny, kterých se změna může týkat.
+- **In-app upozornění:** jen tam, kde uživatel funkci skutečně používá nebo spravuje.
+- **Přímý e-mail vlastníkům účtů:** pro kritické funkce, exporty, integrace a billing dopady.
+- **Support makro:** jednotná odpověď s důvodem, termíny a náhradní cestou.
+- **Dokumentace:** migrační návod, FAQ a screenshoty nového postupu.
+
+Příklad špatné zprávy:
+
+> „Staré reporty budou odstraněny. Použijte nové reporty.“
+
+Příklad použitelné zprávy:
+
+> „Staré projektové reporty ukončíme 30. listopadu, protože neobsahují nové role a neumí audit změn. Od dneška už v nich nepůjde vytvářet nové šablony. Existující reporty můžete exportovat do CSV a převést do nové sekce Reporty 2.0 podle návodu. Pokud report používáte pro měsíční reporting vedení, napište nám — pomůžeme ověřit náhradní workflow.“
+
+Rozdíl není v délce. Rozdíl je v respektu k realitě zákazníka.
+
+### Migruj data jen tehdy, když víš proč
+
+Automatická migrace působí pohodlně, ale může přenést i starý nepořádek. Ruční migrace zase může zákazníka zbytečně zatížit. Rozhodnutí má vycházet z hodnoty a rizika.
+
+Použij tři možnosti:
+
+- **Automatická migrace:** když je mapování jasné, ztráta významu nízká a zákazník by ruční prací jen trpěl.
+- **Asistovaná migrace:** když existují varianty, výjimky nebo dopady na proces.
+- **Export a archiv:** když funkce končí bez nástupce, ale zákazník potřebuje historii.
+
+Privacy-first pravidlo: nemigruj data jen proto, že „by se mohla hodit“. Pokud stará funkce obsahuje pole, která už nemají účel, nepřenášej je automaticky do nové struktury. Dej zákazníkovi možnost exportu, jasně vysvětli retenci a smaž pracovní migrační kopie po dokončení.
+
+### Technické vypnutí rozděl na bezpečné kroky
+
+Jednorázové smazání je lákavé, ale riskantní. Lepší je vypínat po vrstvách:
+
+1. **Zastav nový vstup:** nejdřív zakaž vytváření nových objektů ve staré funkci.
+2. **Zobraz náhradní cestu:** přidej odkazy na novou sekci, export nebo návod.
+3. **Přepni do read-only:** stará data lze číst a exportovat, ale ne dál rozšiřovat.
+4. **Odpoj integrace:** upozorni na API endpointy, webhooky a automatizace.
+5. **Odstraň UI:** schovej starou cestu z navigace, ale nech řízený přístup pro podporu po omezenou dobu.
+6. **Smaž nebo archivuj podle retenčního pravidla:** ne podle nálady vývojáře v pátek odpoledne.
+
+U API a integrací přidej verzi, jasnou chybovou odpověď a datum ukončení. Tiché rozbití integrace je spolehlivý způsob, jak z malého technického dluhu vyrobit velký zákaznický telefonát.
+
+### Měř úspěch deprekace podle klidu, ne podle počtu smazaných řádků
+
+Ukončení funkce má vlastní metriky. Ne proto, abys sledoval jednotlivce, ale abys věděl, jestli změna proběhla bezpečně.
+
+Sleduj agregovaně:
+
+- kolik účtů přešlo na náhradní cestu,
+- kolik support dotazů vzniklo před a po vypnutí,
+- kolik exportů bylo staženo,
+- kolik integrací stále volá starý endpoint,
+- kolik účtů je blokovaných a proč,
+- jestli se snížila složitost podpory, testování nebo vývoje.
+
+Když deprekace vyvolá chaos, není to důkaz, že zákazníci „neradi změny“. Možná jsi špatně vysvětlil hodnotu, podcenil kritický scénář nebo vypnul funkci dřív, než existovala použitelná alternativa.
+
+### Checklist deprekace
+
+- Máme jasný důvod ukončení, který lze vysvětlit zákazníkovi.
+- Víme, které účty a scénáře jsou dotčené.
+- Rozlišili jsme nízké používání od kritického používání.
+- Existuje náhradní cesta, export nebo férové vysvětlení bez náhrady.
+- Komunikace má datum, dopad, kroky a kontakt na podporu.
+- Dokumentace a support makra jsou připravené před oznámením.
+- Technické vypnutí je rozdělené na fáze.
+- Pracovní migrační data mají vlastní retenci a vlastníka.
+- API, webhooky a automatizace mají zvláštní migrační plán.
+- Po vypnutí proběhne review dopadu a úklid kódu, testů i dokumentace.
+
+## Deprekační karta: [funkce / modul / integrace]
+
+### Shrnutí
+
+- Co ukončujeme:
+- Proč:
+- Kdo je vlastník:
+- Navržené datum oznámení:
+- Navržené datum vypnutí:
+
+### Dopad
+
+- Dotčené scénáře:
+- Dotčené segmenty:
+- Kritické účty:
+- Dopad na API / integrace:
+- Dopad na billing / smlouvy / support:
+
+### Náhradní cesta
+
+- Nový postup:
+- Export / archiv:
+- Migrační kroky:
+- Kdy zákazník potřebuje asistenci:
+- Co se nestěhuje a proč:
+
+### Komunikace
+
+- Changelog:
+- In-app text:
+- E-mail vlastníkům účtů:
+- Support makro:
+- Dokumentace:
+
+### Privacy-first kontrola
+
+- Jaká data se migrují:
+- Jaká data se nemažou hned a proč:
+- Retence pracovních kopií:
+- Kdo má přístup během migrace:
+- Kdy proběhne závěrečný úklid:
+
+
 ## Pracovní log
+- **2026-09-15:** Doplněna příloha BW o ukončování funkcí bez produktového hřbitova: rozlišení mrtvých a kritických funkcí, deprekační mapa, komunikace, migrace dat, technické vypínání, metriky klidu, checklist a deprekační karta.
+- **2026-09-15:** Doplněn krátký detail k renewal meetingu: otázka „co se stane, když neuděláme nic“ pro rozlišení skutečného rizika od obchodního tlaku.
 - **2026-09-15:** Doplněna příloha BV o obnovách a expanzi zákazníků bez nátlaku: průběžná hodnota, renewal rytmus, expanzní signály, férové nabídky, rizika, privacy-first evidence, měření, checklist a renewal karta.
 - **2026-09-15:** Doplněna příloha BU o customer health score bez sledovací magie: účel skóre, hodnotové signály, vysvětlitelné kategorie, privacy-first hranice, zásahy, měření kvality, checklist a health score karta.
 - **2026-09-15:** Doplněna příloha BT o churn rozhovorech bez výčitek: typy odchodu, offboarding, otázky při rušení účtu, osobní rozhovory, privacy-first evidence, měsíční review, win-back pravidla, checklist a churn karta.
