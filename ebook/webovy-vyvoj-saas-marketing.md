@@ -14373,7 +14373,166 @@ Případová studie je nejdůstojnější forma marketingu, když je poctivá. U
 ```
 
 
+
+## Příloha CG: Bezpečnostní dotazníky a procurement bez nekonečného ping-pongu
+
+Jakmile SaaS začne prodávat firmám, přijde první bezpečnostní dotazník. Někdy má deset otázek, někdy sto padesát, někdy se tváří jako nevinný Excel a ve skutečnosti je to archeologická expedice do všech koutů produktu, infrastruktury a právních dokumentů. Malý tým se na tom umí zaseknout na týdny.
+
+Cílem není tvářit se jako enterprise korporace s oddělením na každé razítko. Cílem je mít připravené odpovědi, důkazy a hranice tak, aby zákazník získal důvěru a tým nezastavil vývoj pokaždé, když někdo pošle tabulku s názvem „Vendor Security Assessment Final v7 REALLY FINAL.xlsx“.
+
+### Připrav si jednu bezpečnostní složku
+
+Bezpečnostní dotazník se nevyplňuje od nuly. Vyplňuje se z připravené interní složky, která obsahuje aktuální pravdu o produktu. Nemusí to být drahý compliance portál. Pro začátek stačí dobře strukturovaný interní dokument, který má vlastníka a datum poslední revize.
+
+Minimální obsah bezpečnostní složky:
+
+- **Popis služby:** co produkt dělá, pro koho je určený a jaký typ dat typicky zpracovává.
+- **Architektura:** jednoduchý diagram hlavních částí, hosting, databáze, fronty, úložiště a integrační body.
+- **Data:** kategorie osobních údajů, zákaznická data, systémová metadata, logy a zálohy.
+- **Přístupy:** kdo má administrátorský přístup, jak se schvaluje, jak se odebírá a jak se loguje.
+- **Subprocesoři:** služby, které se podílí na provozu, včetně účelu a země nebo regionu zpracování.
+- **Bezpečnostní opatření:** šifrování, zálohy, monitoring, incidenty, aktualizace a správa tajemství.
+- **Dokumenty pro zákazníka:** DPA, podmínky, privacy policy, seznam subprocesorů, kontaktní e-mail pro bezpečnost.
+
+Důležité je, aby složka popisovala skutečný stav. Ne ideální stav, který by bylo hezké mít po dvou kvartálech a třech hirech. Pokud něco zatím nemáš, napiš plán a realistický termín. Přikrášlená bezpečnostní odpověď je technický dluh v obleku.
+
+### Odpovídej konzistentně, ne kreativně pokaždé jinak
+
+Bezpečnostní otázky se opakují. „Máte šifrování v klidu a při přenosu?“ „Kde jsou data?“ „Jak řešíte incidenty?“ „Kdo má přístup do produkce?“ „Jak často testujete obnovu ze záloh?“ Pokud na každou podobnou otázku vznikne nová formulace, dřív nebo později si začneš odporovat.
+
+Vytvoř si knihovnu standardních odpovědí. U každé odpovědi drž:
+
+- krátkou verzi pro tabulky,
+- delší verzi pro bezpečnostní tým zákazníka,
+- odkaz na interní důkaz nebo veřejný dokument,
+- vlastníka odpovědi,
+- datum poslední kontroly.
+
+Příklad krátké odpovědi:
+
+> Produkční přístupy jsou omezené na nezbytné členy týmu, chráněné vícefaktorovým ověřením, schvalované vlastníkem systému a pravidelně revidované. Přístupy po odchodu člena týmu rušíme jako součást offboarding checklistu.
+
+Příklad lepší dlouhé odpovědi:
+
+> Produkční přístupy používáme jen pro provozní a podpůrné účely. Přístup se uděluje podle role, vyžaduje MFA a eviduje se v interním seznamu přístupů. Každý přístup má vlastníka, účel a datum poslední revize. Při změně role nebo ukončení spolupráce probíhá odebrání podle offboarding checklistu. Přístup k zákaznickým datům používáme jen tam, kde je to nutné pro podporu, incident nebo smluvně dohodnutou správu.
+
+Rozdíl není v tom, že druhá verze zní „víc compliance“. Rozdíl je v tom, že říká proces, hranice a účel.
+
+### Procurement není jen právní brzda
+
+Zakladatelé procurement často nesnáší, protože přichází mezi „zákazník chce koupit“ a „peníze jsou na účtu“. Jenže u B2B zákazníka je procurement součást nákupního produktu. Když ho ignoruješ, neprodáváš rychleji. Jen posouváš tření na konec obchodu.
+
+Praktický postup:
+
+1. Už na demo callu se zeptej, kdo bude řešit bezpečnost, právní dokumenty a nákupní schválení.
+2. Pošli zákazníkovi předem balíček dokumentů, ne až po třetí urgenci.
+3. V CRM si zapisuj, které otázky procurement blokují nejčastěji.
+4. Standardizuj odpovědi do FAQ pro obchod a support.
+5. Odděl požadavky, které jsou nutné pro deal, od požadavků „bylo by hezké“.
+6. U velkých výjimek si hlídej, aby se nestaly neviditelným závazkem pro celý produkt.
+
+> Codyho komentář: Procurement není boss fight. Je to spíš kontrolní seznam u letištní brány. Když máš pas, boarding pass a žádné tekuté překvapení v batohu, projdeš rychleji.
+
+### Neříkej ano na každou bezpečnostní výjimku
+
+Některé zákaznické požadavky dávají smysl. Jiné jsou kopie interní politiky napsané pro úplně jiný typ dodavatele. Malý SaaS by měl umět říct: „Tomu rozumíme, ale pro náš typ služby to řešíme takto.“
+
+Typické požadavky, které je potřeba posoudit opatrně:
+
+- **Dedikovaná infrastruktura pro jednoho zákazníka:** může dramaticky zvýšit provozní náklady a složitost.
+- **Speciální retenční pravidla:** mohou rozbít jednoduchý model mazání a záloh.
+- **Přímý přístup do auditních logů:** může odhalit metadata jiných zákazníků, pokud nejsou logy navržené správně.
+- **Zakázané subprocesory:** mohou znemožnit provoz nebo podporu, pokud nejsou předem vyřešené alternativy.
+- **Vlastní bezpečnostní dodatky mimo standardní DPA:** mohou vytvořit povinnosti, které tým neumí dlouhodobě plnit.
+
+Na každý nestandardní požadavek použij jednoduchý filtr:
+
+- Pomáhá to jednomu zákazníkovi, nebo zlepšuje produkt pro více zákazníků?
+- Zvyšuje to bezpečnost, nebo jen přesouvá odpovědnost do dokumentu?
+- Umíme to provozovat i při deseti dalších zákaznících?
+- Dá se to nacenit jako enterprise varianta?
+- Kdo bude vlastníkem výjimky po podpisu smlouvy?
+
+Pokud odpovědi nejsou jasné, výjimka nepatří do tichého „jasně, nějak to uděláme“. Patří do rozhodnutí se jménem vlastníka, cenou a termínem revize.
+
+### Privacy-first odpovědi musí být konkrétní
+
+Privacy-first značka nesmí v dotazníku znít jako marketingová mlha. Nestačí napsat „bereme soukromí vážně“. Ukaž konkrétní rozhodnutí:
+
+- sbíráme jen údaje nutné pro službu,
+- nepoužíváme reklamní pixely v produktu,
+- preferujeme evropský hosting a evropské zpracování,
+- oddělujeme produktovou analytiku od individuálního sledování lidí,
+- logy držíme jen po nezbytnou dobu,
+- subprocesory vybíráme podle datových toků, ne podle toho, kdo má hezčí homepage,
+- zákazník má jasnou cestu k exportu a ukončení služby.
+
+Dobrá odpověď na otázku „Kde zpracováváte data?“ může znít takto:
+
+> Primární provoz služby je navržený pro evropské zákazníky a preferuje evropské umístění dat a subprocesorů. U každého subprocesora evidujeme účel zpracování, typ dat a region. Pokud některý dodavatel znamená přenos mimo EU/EHP, posuzujeme ho samostatně a uvádíme ho v seznamu subprocesorů a smluvní dokumentaci.
+
+Tahle formulace je lepší než absolutní slib, který nemusí být pravda. Privacy-first není pohádka o dokonalosti. Je to disciplína transparentních rozhodnutí.
+
+### Bezpečnostní stránka zrychlí obchod
+
+Jakmile se otázky opakují, vytvoř veřejnou nebo poloveřejnou bezpečnostní stránku. Nemusí obsahovat citlivé detaily. Má dát zákazníkovi jistotu, že produkt má provozní řád.
+
+Struktura bezpečnostní stránky:
+
+- **Shrnutí:** krátce, jak přistupujete k bezpečnosti a soukromí.
+- **Data a hosting:** kde služba běží a jaké typy dat zpracovává.
+- **Přístupy:** role, MFA, omezení produkčních přístupů.
+- **Šifrování:** přenos, úložiště, zálohy, správa tajemství.
+- **Zálohy a obnova:** základní RPO/RTO nebo alespoň princip testování obnovy.
+- **Incidenty:** kontaktní adresa, postup oznámení, interní triage.
+- **Subprocesoři:** odkaz na aktuální seznam.
+- **Dokumenty:** DPA, privacy policy, podmínky, případně status page.
+
+U malého týmu je lepší kratší pravdivá stránka než dlouhý bezpečnostní román, který nikdo neudržuje. Každá věta na stránce je závazek. Nepiš tam věci, které neumíš doložit.
+
+### Šablona odpovědi na bezpečnostní dotazník
+
+Použij jednoduchou odpověď, která nastaví tempo a ukáže připravenost:
+
+```markdown
+Dobrý den,
+
+děkujeme za bezpečnostní dotazník. Vyplníme ho podle aktuálního stavu služby a případné nejasnosti označíme komentářem, aby nevznikaly nepřesné odpovědi.
+
+Pro urychlení posíláme také základní dokumenty:
+- popis služby a datových toků,
+- DPA / smlouvu o zpracování osobních údajů,
+- seznam subprocesorů,
+- bezpečnostní a provozní shrnutí,
+- kontakt pro doplňující otázky.
+
+Pokud máte interní kritické požadavky, které mohou blokovat nákup, pošlete nám je prosím přednostně. Pomůže nám to oddělit zásadní body od formálních doplnění.
+
+Cody
+```
+
+Tahle zpráva dělá dvě věci: ukazuje ochotu spolupracovat a zároveň brání tomu, aby tým tři dny vyplňoval méně důležité kolonky, zatímco skutečný blocker sedí někde v právním oddělení jako líný drak.
+
+### Checklist: bezpečnostní dotazník bez chaosu
+
+Před prvním větším B2B obchodem si projdi:
+
+- Máme aktuální popis služby, architektury a datových toků?
+- Víme, jaké kategorie dat zpracováváme a kde?
+- Existuje seznam subprocesorů s účelem a regionem?
+- Máme standardní odpovědi na nejčastější bezpečnostní otázky?
+- Má každá odpověď vlastníka a datum poslední kontroly?
+- Umíme popsat produkční přístupy, MFA a offboarding?
+- Máme jasný postup pro incidenty a kontaktní e-mail?
+- Ví obchod, kdy zapojit technika, právníka nebo zakladatele?
+- Evidujeme zákaznické bezpečnostní výjimky jako závazky?
+- Umíme říct ne požadavku, který by rozbil produkt nebo privacy-first hodnotu?
+
+Bezpečnostní dotazník není jen administrativní otrava. Je to zrcadlo provozní dospělosti. Když odpovědi bolí, není problém v dotazníku. Problém je v tom, že produkt ještě nemá některé důležité části pojmenované.
+
 ## Pracovní log
+
+- **2026-09-15:** Doplněna příloha CG o bezpečnostních dotaznících a procurementu: bezpečnostní složka, standardní odpovědi, práce s výjimkami, privacy-first argumentace, bezpečnostní stránka, šablona odpovědi a checklist.
 
 - **2026-09-15:** Doplněna příloha CF o případových studiích bez nafouknutých grafů: výběr příběhu, důkazy, privacy-first souhlas, struktura studie, bezpečné screenshoty, citace, distribuce bez lead gate, checklist a šablona.
 
