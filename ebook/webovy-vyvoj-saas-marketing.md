@@ -15025,7 +15025,177 @@ Produktová telemetrie nemá být reality show. Má být palubní deska. Řidič
 - Kdy se event zreviduje nebo odstraní:
 
 
+## Příloha CK: Trust page bez bezpečnostního divadla a PDF labyrintu
+
+Trust page je veřejná stránka, která zákazníkovi vysvětlí, jak produkt zachází s bezpečností, soukromím a provozem. Není to marketingová nástěnka s ikonou zámku a větou „bereme bezpečnost vážně“. To bere vážně každý, kdo nechce skončit jako varovný screenshot na LinkedInu. Dobrá trust page zrychluje prodej, support i procurement, protože odpovídá na opakující se otázky dřív, než přistanou v inboxu.
+
+U malého evropského SaaS nemusí mít trust page podobu drahého portálu se stovkou certifikátů. Stačí přehledná stránka, která říká:
+
+- jaká data produkt zpracovává,
+- kde data běží a kdo k nim má přístup,
+- jak řešíš zálohy, incidenty, přístupy a subprocesory,
+- kde zákazník najde právní a provozní dokumenty,
+- jak se může zeptat na bezpečnostní nebo privacy otázku.
+
+### Začni otázkami, které se pořád vrací
+
+Trust page má být odpověď na reálné tření, ne galerie firemní sebechvály. Projdi posledních deset obchodních callů, support ticketů, bezpečnostních dotazníků a procurement e-mailů. Vypiš otázky, které se opakují.
+
+Typické otázky:
+
+- Kde jsou data hostovaná?
+- Používáte subprocesory a jaké?
+- Máte zálohy a jak často testujete obnovu?
+- Kdo z vašeho týmu má přístup k produkčním datům?
+- Jak hlásíte incidenty?
+- Umí zákazník exportovat a smazat data?
+- Jak dlouho držíte logy, support konverzace a analytiku?
+- Používáte trackery nebo reklamní pixely?
+
+Když neumíš na otázku odpovědět stručně a konkrétně, trust page ti právě ukázala díru v provozu. To je dobře. Lepší je najít ji při psaní stránky než ve chvíli, kdy enterprise zákazník pošle dotazník se sedmdesáti řádky a deadlinem „včera“.
+
+### Stránka má být čitelná pro člověka i právní tým
+
+Trust page není náhrada smluv, DPA ani privacy policy. Je to rozcestník a lidské vysvětlení. Piš ji tak, aby ji pochopil zakladatel zákaznické firmy, provozní manažer i bezpečnostní člověk, který hledá konkrétní odpověď.
+
+Dobrá struktura:
+
+- **Přehled:** krátký odstavec, co produkt dělá a jaký je privacy-first postoj.
+- **Data:** typy dat, účely zpracování, minimalizace a export.
+- **Hosting a infrastruktura:** region, provozní principy, oddělení prostředí.
+- **Přístupy:** role týmu, produkční přístup, MFA, offboarding.
+- **Subprocesoři:** název, účel, lokalita nebo region provozu, odkaz na vlastní dokumentaci.
+- **Zálohy a obnova:** frekvence, test obnovy, základní RPO/RTO jazykem zákazníka.
+- **Incidenty:** jak se hlásí, kdo komunikuje, kde bude stav.
+- **Dokumenty:** privacy policy, podmínky, DPA, seznam subprocesorů, bezpečnostní kontakt.
+- **Kontakt:** e-mail pro privacy/security dotazy.
+
+Nepřidávej sekci jen proto, že ji má velký americký konkurent. Pokud nemáš certifikaci, nevyrob z ní prázdnou kolonku „již brzy“. Napiš raději, jaké praktické kontroly už běží a co je plánované.
+
+### Privacy-first blok jako obchodní výhoda
+
+Privacy-first hodnota se nemá schovávat do patičky. Dej jí vlastní blok. Zákazník má rychle vidět, že minimum dat není nouzové řešení, ale záměr.
+
+Příklad formulace:
+
+> Produkt navrhujeme tak, aby sbíral jen data potřebná pro provoz služby, podporu zákazníka a zlepšování produktu. Nepoužíváme reklamní pixely, neprodáváme data třetím stranám a analytiku držíme v agregované podobě. Preferujeme evropský provoz a přímé vztahy se zákazníky před závislostí na sledovacích platformách.
+
+Konkrétnost je silnější než slogan. Místo „chráníme vaše soukromí“ napiš, že nepoužíváš session replay, neukládáš obsah formulářů do marketingových nástrojů, neprofiluješ jednotlivé návštěvníky a u produktové telemetrie odděluješ uživatele od měřených událostí.
+
+### Subprocesoři bez mlžení
+
+Seznam subprocesorů je citlivé místo, protože odhaluje, kde produkt reálně stojí. Právě proto je důležitý. Pokud zákazník musí tři dny čekat, než mu někdo pošle ručně poskládaný seznam služeb, nevypadá to jako bezpečnost. Vypadá to jako šuplík plný účtů, které nikdo neuklidil.
+
+U každého subprocesora uveď:
+
+- **Název služby** a odkaz.
+- **Účel:** hosting, e-mail, monitoring, support, billing, analytika.
+- **Typ dat:** účetní údaje, technické logy, zákaznický obsah, e-mailové adresy.
+- **Region nebo provozní poznámku:** pokud je relevantní pro evropský provoz.
+- **Důvod výběru:** proč nástroj potřebuješ a proč nejde o zbytečný datový výlet.
+- **Stav revize:** kdy byl dodavatel naposledy zkontrolovaný.
+
+Nepiš víc, než víš. Pokud nemáš ověřený detail, označ ho jako interně ověřitelný bod a doplň ho před publikací. Trust page nemá být kreativní psaní. Má být pravdivá mapa.
+
+### Bezpečnostní tvrzení musí mít důkaz
+
+Věty typu „používáme moderní šifrování“ jsou slabé, pokud neříkají kde a jak. Zákazníka obvykle nezajímá kryptografická poezie. Zajímá ho, jestli přenos běží přes TLS, jestli jsou zálohy chráněné, jestli přístupy vyžadují MFA a jestli někdo testuje obnovu.
+
+Praktické formulace:
+
+- „Administrátorské účty chráníme MFA a přístupy revidujeme měsíčně.“
+- „Produkční přístupy používáme jen pro provozní zásahy a evidujeme je v auditním logu.“
+- „Zálohy obnovujeme testovacím postupem minimálně podle interního plánu obnovy.“
+- „Incidenty třídíme podle dopadu a zákazníka informujeme přes určený kontaktní kanál.“
+
+Pokud něco ještě nemáš, netvař se, že to existuje. Lepší je menší sada pravdivých kontrol než velká sada mlhavých slibů. Trust se buduje přesně tím, že nepřeháníš.
+
+### Trust page jako provozní checklist
+
+Stránka nesmí zestárnout jako firemní blog z roku 2018. Při každé změně dodavatele, hostingu, retenční doby, analytiky nebo incidentového procesu zkontroluj, jestli se má změnit i trust page.
+
+Zařaď ji do provozních rutin:
+
+- při přidání nového subprocesora,
+- při změně hostingu nebo regionu,
+- při nové kategorii zpracovávaných dat,
+- po větším bezpečnostním nebo privacy incidentu,
+- před odpovědí na velký bezpečnostní dotazník,
+- jednou kvartálně jako revizi veřejných provozních tvrzení.
+
+Trust page je malý veřejný kontrakt. Když říká něco jiného než realita, škodí víc, než kdyby neexistovala.
+
+### Codyho komentář
+
+Trust page není o tom vypadat jako banka s rozpočtem na tři compliance týmy. Je o tom ukázat, že víš, kde máš data, kdo na ně sahá a co uděláš, když se něco pokazí. To je překvapivě vzácné. A ano, pořád je to lepší než posílat zákazníkovi zip s pěti PDF a názvem `final_final_security_docs_v7.zip`.
+
+### Checklist: trust page pro malé SaaS
+
+- Má stránka jasně říct, jaký produkt provozuješ a jaký typ dat zpracovává?
+- Je vidět privacy-first postoj bez reklamních trackerů a zbytečného profilování?
+- Jsou vypsaní subprocesoři s účelem a typem dat?
+- Popisuje stránka hosting, přístupy, zálohy, incidenty a export dat?
+- Odkazuje na aktuální dokumenty: privacy policy, podmínky, DPA nebo seznam subprocesorů?
+- Obsahuje bezpečnostní kontakt nebo postup pro dotazy?
+- Má každé silné bezpečnostní tvrzení reálný interní důkaz?
+- Je stránka napojená na proces změn dodavatelů a provozu?
+- Probíhá aspoň kvartální revize?
+- Neobsahuje marketingové fráze, které neumíš doložit?
+
+### Šablona trust page
+
+```markdown
+## Trust, bezpečnost a soukromí
+
+### Náš přístup
+- Co produkt dělá:
+- Pro koho je:
+- Privacy-first princip:
+- Co záměrně nesbíráme:
+
+### Data
+- Kategorie dat:
+- Účely zpracování:
+- Export dat:
+- Mazání a retence:
+
+### Hosting a provoz
+- Kde služba běží:
+- Oddělení prostředí:
+- Monitoring a logy:
+- Zálohy a obnova:
+
+### Přístupy
+- Kdo má administrátorský přístup:
+- Jak chráníme účty:
+- Jak probíhá offboarding:
+- Jak evidujeme zásahy:
+
+### Subprocesoři
+| Služba | Účel | Typ dat | Region / poznámka | Poslední revize |
+|---|---|---|---|---|
+|  |  |  |  |  |
+
+### Incidenty
+- Jak incident třídíme:
+- Jak zákazníka informujeme:
+- Kde najde stav služby:
+- Kdo je kontaktní osoba:
+
+### Dokumenty
+- Privacy policy:
+- Podmínky služby:
+- DPA:
+- Seznam subprocesorů:
+- Bezpečnostní kontakt:
+
+### Poslední aktualizace
+- Datum:
+- Co se změnilo:
+```
+
 ## Pracovní log
+- **2026-09-15:** Doplněna příloha CK o trust page pro malé privacy-first SaaS: struktura stránky, opakované zákaznické otázky, privacy-first blok, subprocesoři, doložitelná bezpečnostní tvrzení, provozní revize, checklist a šablona.
 - **2026-09-15:** Doplněna příloha CJ o produktové telemetrii bez sledovacího cirkusu: rozhodnutí před eventy, event slovník, pseudonymizace, bezpečná metadata, aktivační moment, Definition of Done, dashboardy, privacy-first technický vzor, checklist a šablona telemetrické karty.
 
 - **2026-09-15:** Doplněna příloha CI o auditních logách v malém privacy-first SaaS: oddělení technických a auditních logů, bezpečná metadata, retence, zákaznický audit log, implementační vzor, checklist a šablona auditní události.
