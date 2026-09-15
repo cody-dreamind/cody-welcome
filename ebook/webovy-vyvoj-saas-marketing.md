@@ -12968,7 +12968,213 @@ Codyho komentář: Metrika „open rate“ zní krásně, dokud nezjistíš, že
 - Agregované metriky kvality:
 - Datum další revize:
 
+## Příloha BY: Feature flagy a rollout bez ruské rulety v produkci
+
+Feature flag není kouzelný přepínač, který promění chaos v profesionální release management. Je to dohoda mezi produktem, vývojem, supportem a obchodem: nová věc může být v kódu, ale nemusí být hned dostupná všem. Díky tomu může malý SaaS tým vydávat menší změny, testovat opatrně a rychle vypnout problém bez nočního hasičského orchestru.
+
+Špatně používané flagy jsou ale jen jiný druh technického dluhu. Když se neuklízí, nikdo neví, co je zapnuté, pro koho, proč a kdo nese odpovědnost. Po pár měsících vznikne produktová archeologie: „Tento flag asi patří k migraci z roku, kdy jsme ještě věřili, že backlog se jednou vyprázdní.“ Spoiler: nevyprázdní.
+
+Privacy-first pohled je jednoduchý: rollout má chránit zákazníka i data. Flag nesmí znamenat tajné profilování uživatelů, zbytečné kopírování dat do experimentálních služeb ani tiché zapínání funkcí, které mění právní nebo bezpečnostní dopad produktu.
+
+### Rozliš flagy podle účelu
+
+Ne každý flag slouží ke stejnému rozhodnutí. Když je všechny pojmenuješ jen `new_feature_enabled`, brzo se z toho stane šuplík s kabely, ve kterém nejde najít nabíječka ani zdravý rozum.
+
+Používej aspoň tyto typy:
+
+- **Release flag:** nová funkce je nasazená, ale zatím skrytá před většinou zákazníků.
+- **Permission flag:** funkce je dostupná jen pro tarif, roli, zákaznickou skupinu nebo smluvní režim.
+- **Operational flag:** rychlé vypnutí náročné části systému při incidentu nebo degradaci služby.
+- **Migration flag:** postupný přesun na nové chování, datový model nebo integraci.
+- **Experiment flag:** řízené ověření hypotézy na omezeném segmentu.
+- **Kill switch:** nouzové vypnutí rizikové funkce bez čekání na nový deploy.
+
+Každý typ má jinou životnost. Release flag má zmizet krátce po rollout dokončení. Operational flag může zůstat déle, ale musí být dokumentovaný a testovaný. Experiment flag má mít datum vyhodnocení. Migration flag má mít plán návratu i plán úklidu.
+
+### Každý flag potřebuje vlastníka a konec života
+
+Flag bez vlastníka je jako otevřený sklep v hororu: všichni tuší, že tam něco je, ale nikdo nechce jít první. Proto u každého flagu eviduj:
+
+- název a účel,
+- typ flagu,
+- vlastníka rozhodnutí,
+- technického vlastníka,
+- výchozí stav,
+- cílové publikum,
+- datum revize,
+- plán odstranění,
+- bezpečný rollback.
+
+Praktické pravidlo: když flag nemá datum revize, neměl by projít review. Datum revize není byrokracie. Je to pojistka, že se z dočasného rozhodnutí nestane věčný kus podmínkového pekla.
+
+Příklad dobrého názvu: `billing_invoice_export_v2_release`. Příklad špatného názvu: `new_export`. První říká oblast, schopnost, verzi a účel. Druhý říká jen to, že budoucí vývojář bude nadávat.
+
+### Rollout piš jako scénář, ne jako procento
+
+„Zapneme to na 10 % uživatelů“ zní vědecky, ale často je to jen numerologie v mikině. Pro malý B2B SaaS bývá lepší rollout podle zákaznického kontextu než náhodné procento.
+
+Bezpečnější pořadí:
+
+1. **Interní účet:** tým ověří základní scénáře bez zákaznického dopadu.
+2. **Demo workspace:** obchod a support si funkci osahají na bezpečných datech.
+3. **Jeden pilotní zákazník:** ideálně zákazník, který problém opravdu má a chápe pilotní režim.
+4. **Malý segment:** podobné účty, podobné workflow, jasná komunikační linka.
+5. **Noví zákazníci:** tam, kde nové chování nezpůsobí migraci starých návyků.
+6. **Stávající zákazníci:** až když máš support materiály, rollback a metriky.
+
+U každého kroku napiš: co musí být pravda, aby se šlo dál; co znamená stop; kdo rozhoduje; jak se zákazník dozví o změně. Rollout bez stop podmínek je jen pomalý incident.
+
+### Privacy-first segmentace rolloutu
+
+Segment pro rollout má být vysvětlitelný. „Zapnuto pro zákazníky, kteří používají modul Fakturace a mají méně než 5 000 dokladů“ je pochopitelné. „Zapnuto pro uživatele s vysokým engagement scorem, nízkým rizikem churnu a podobností k našemu ideálnímu profilu“ už zavání datovou mlhou.
+
+Dobré rollout segmenty:
+
+- tarif nebo smluvní režim,
+- konkrétní modul, který zákazník používá,
+- velikost datasetu v technicky nutných kategoriích,
+- země provozu nebo datové rezidence, pokud má dopad na službu,
+- dobrovolný beta program,
+- ručně schválený pilot.
+
+Slabé rollout segmenty:
+
+- individuální chování bez jasného účelu,
+- skryté skóre „kvality zákazníka“,
+- data z marketingových nástrojů,
+- sledování napříč webem a produktem,
+- segmenty, které neumíš zákazníkovi férově vysvětlit.
+
+Codyho komentář: Když by ses styděl segmentaci popsat zákazníkovi do e-mailu, možná ji nemáš používat. Produktové kouzlo je fajn. Produktová černá magie už míň.
+
+### Měř dopad bez sledovacího přejídání
+
+Rollout potřebuje signály, ale ne všechno musí být event. U malé funkce často stačí kombinace provozních metrik, support signálů a několika agregovaných produktových událostí.
+
+Před zapnutím si napiš:
+
+- **Technický signál:** chybovost, latence, využití front, velikost jobů, počet rollbacků.
+- **Produktový signál:** dokončené akce, opuštěné kroky, použití nové volby, počet ručních zásahů.
+- **Support signál:** nové dotazy, nejasnosti, opakované chyby, čas do vyřešení.
+- **Business signál:** aktivace, expanze, snížení ruční práce, kvalita pilotu.
+- **Privacy signál:** nové datové toky, přístupy, exporty, retence a logování.
+
+Metriky drž agregované, pokud nepotřebuješ řešit konkrétní problém konkrétního zákazníka. Když už musíš jít na úroveň účtu, měj důvod, oprávnění a retenční pravidlo. Logy z rolloutů nejsou suvenýr. Jsou provozní materiál s datem spotřeby.
+
+### Komunikace je součást rolloutu
+
+Nová funkce není hotová ve chvíli, kdy je flag zapnutý. Je hotová, když správní lidé vědí, co se změnilo, proč je to pro ně užitečné a co mají dělat, pokud něco nesedí.
+
+Připrav tři vrstvy komunikace:
+
+- **Interní poznámka:** co se mění, koho se to týká, jak poznáme problém a jak vypnout flag.
+- **Support makro:** stručná odpověď pro zákazníky, včetně odkazu do dokumentace.
+- **Zákaznický update:** jen pro relevantní zákazníky, s jasným dopadem a bez citlivých detailů.
+
+Když změna mění workflow, nestačí changelog. Přidej in-app vysvětlení v místě akce. Když změna mění data, export, práva nebo integrace, přidej důvod, dopad a kontakt. A když změna může překvapit administrátora účtu, nečekej, až mu to vysvětlí běžný uživatel přes rozbitý screenshot.
+
+### Rollback testuj před tím, než ho potřebuješ
+
+Rollback není věta „kdyžtak to vypneme“. Rollback je ověřený postup. U flagu si odpověz:
+
+- Co se stane s daty vytvořenými během zapnuté funkce?
+- Uvidí je zákazník po vypnutí?
+- Zůstane systém konzistentní?
+- Musíme zákazníkovi něco oznámit?
+- Kdo může flag vypnout?
+- Jak rychle se změna projeví?
+- Je vypnutí auditované?
+
+Pozor hlavně na migrace a nové datové struktury. Vypnout tlačítko je snadné. Vrátit význam dat, která už zákazník změnil, je občas jako narvat zubní pastu zpátky do tuby. Teoreticky fascinující, prakticky lepší tomu předejít.
+
+### Uklízej flagy jako součást Definition of Done
+
+Feature flag má vlastní konec. Jakmile je funkce stabilní a rozhodnutí hotové, odstraň starou větev. Jinak se každá další změna testuje ve více kombinacích a produkt se začne chovat jako adventní kalendář plný podmínek.
+
+Do Definition of Done přidej:
+
+- flag má kartu a vlastníka,
+- rollout scénář je schválený,
+- rollback je popsaný a otestovaný,
+- support ví, co se mění,
+- metriky mají limit a retenční pravidlo,
+- po dokončení existuje úkol na odstranění flagu,
+- staré chování má jasné datum vypnutí.
+
+Jednou měsíčně si udělej „flag review“. Projdi aktivní flagy a zařaď je do tří kategorií: ponechat, rozhodnout, odstranit. Pokud flag nikdo neumí vysvětlit, je to buď dokumentační problém, nebo archeologický nález. V obou případech se tím zabývej dřív, než začne blokovat release.
+
+### Checklist: feature flagy a rollout privacy-first
+
+- [ ] Každý flag má typ, účel, vlastníka a datum revize.
+- [ ] Název flagu říká oblast, schopnost a účel.
+- [ ] Výchozí stav je bezpečný pro nové i stávající zákazníky.
+- [ ] Rollout má kroky, stop podmínky a rozhodovatele.
+- [ ] Segmentace rolloutu je vysvětlitelná zákazníkovi.
+- [ ] Pilotní zákazníci vědí, že jde o postupné zapnutí nebo beta režim.
+- [ ] Měření je agregované, pokud není nutný konkrétní zákaznický zásah.
+- [ ] Nové datové toky, logy a retence jsou zkontrolované před zapnutím.
+- [ ] Support má makro, dokumentaci a postup eskalace.
+- [ ] Rollback je otestovaný před rozšířením na větší segment.
+- [ ] Po stabilizaci existuje úkol na odstranění flagu a starého chování.
+- [ ] Měsíční review aktivních flagů odstraňuje produktovou archeologii.
+
+### Šablona rollout karty
+
+## Rollout karta: [název funkce / změny]
+
+### Základ
+
+- Název flagu:
+- Typ flagu:
+- Produktový vlastník:
+- Technický vlastník:
+- Datum revize:
+- Plánované datum odstranění:
+
+### Účel
+
+- Jaký problém změna řeší:
+- Pro koho je určená:
+- Jak poznáme úspěch:
+- Co není cílem této změny:
+
+### Rollout plán
+
+- Krok 1: interní účet / demo workspace
+- Krok 2: pilotní zákazník
+- Krok 3: malý segment
+- Krok 4: širší zapnutí
+- Stop podmínky:
+- Kdo rozhoduje o dalším kroku:
+
+### Měření
+
+- Technické signály:
+- Produktové signály:
+- Support signály:
+- Business signály:
+- Jak dlouho držíme detailní logy:
+
+### Privacy-first kontrola
+
+- Jaká data změna zpracovává nově:
+- Kdo k nim má přístup:
+- Jestli se mění export, mazání nebo retence:
+- Jestli se zapojuje nový dodavatel:
+- Jak segmentaci vysvětlíme zákazníkovi:
+
+### Rollback
+
+- Jak flag vypnout:
+- Kdo ho může vypnout:
+- Co se stane s daty vytvořenými během rolloutu:
+- Jak informujeme zákazníky:
+- Jak ověříme návrat do bezpečného stavu:
+
+
 ## Pracovní log
+
+- **2026-09-15:** Doplněna příloha BY o feature flazích a postupném rolloutu: typy flagů, vlastnictví, privacy-first segmentace, měření, komunikace, rollback, úklid a šablona rollout karty.
 
 - **2026-09-15:** Doplněna příloha BX o produktových notifikacích: typy zpráv, kanály, preference, bezpečný obsah, digesty, měření bez tracking pixelů a šablona notifikační karty.
 - **2026-09-15:** Doplněna příloha BW o ukončování funkcí bez produktového hřbitova: rozlišení mrtvých a kritických funkcí, deprekační mapa, komunikace, migrace dat, technické vypínání, metriky klidu, checklist a deprekační karta.
