@@ -13660,7 +13660,160 @@ Kvalita webináře není „500 registrací“. Kvalita je, že správných 30 l
 ```
 
 
+## Příloha CC: Komunita kolem produktu bez platformního rukojmí
+
+Komunita zní krásně. Zakladatelé si představí aktivní skupinu lidí, kteří si navzájem pomáhají, sdílí výsledky, dávají feedback a občas sami vysvětlí produkt lépe než sales deck. Realita často vypadá tak, že někdo založí další Slack, Discord nebo LinkedIn skupinu, třikrát tam pošle novinku a pak se diví, že lidé nepřišli bydlet do jeho marketingového obýváku.
+
+Komunita není kanál. Komunita je opakovaný důvod, proč se správní lidé chtějí vracet a mluvit spolu. Nástroj je až druhý krok. A u privacy-first SaaS je obzvlášť důležité, aby komunita nebyla jen další datová past s nekonečnou retencí, cizími pixely a závislostí na algoritmu.
+
+### Nejdřív pojmenuj, proč má komunita existovat
+
+Komunita nemá vzniknout jen proto, že „to dělají všichni“. Malý tým si musí vybrat jeden hlavní účel:
+
+- **Podpora mezi uživateli:** lidé sdílí postupy, řeší běžné otázky a odlehčují supportu.
+- **Vzdělávání trhu:** komunita pomáhá zákazníkům lépe chápat obor, ne jen produkt.
+- **Produktový feedback:** tým získává kvalitativní signály z reálného používání.
+- **Partnerský ekosystém:** konzultanti, implementátoři nebo agentury si vyměňují zkušenosti.
+- **Důvěra před nákupem:** potenciální zákazníci vidí, že kolem produktu existuje živé know-how.
+
+Když je účel nejasný, komunita se rychle změní v odkladiště oznámení. A oznámení bez dialogu není komunita. Je to nástěnka s lepším logem.
+
+### Vyber minimální kanál podle chování lidí
+
+Nejlepší komunitní nástroj není ten nejmodernější. Je to ten, který lidé zvládnou používat bez nového mentálního závazku. Pro začátek často stačí jedna z těchto variant:
+
+- **Veřejné diskusní vlákno pod článkem nebo changelogem:** dobré pro konkrétní témata a dohledatelnost.
+- **E-mailová odpověď na pravidelný digest:** dobré pro nízkou intenzitu a přímý vztah.
+- **Měsíční office hours:** dobré pro otázky, feedback a vztah bez permanentního chatu.
+- **Malé zákaznické fórum:** dobré až ve chvíli, kdy existuje opakovaný objem dotazů.
+- **Uzavřená skupina pro pilotní zákazníky:** dobré pro raný produkt, ale musí mít jasný konec nebo přechod.
+
+Privacy-first pravidlo: čím víc nástroj tlačí lidi do profilů, notifikací, sledování aktivity a cizích reklamních ekosystémů, tím víc musíš vysvětlit, proč je nutný. Někdy je obyčejný e-mail a veřejná stránka lepší než „engagement platforma“, která z každého kliknutí dělá palivo pro vesmírnou mašinu na grafy.
+
+### Nastav pravidla dřív než první konflikt
+
+Komunitní pravidla nemusí být právnický beton. Mají ale říct, co je vítané a co už ne. Minimum:
+
+- žádné sdílení osobních údajů zákazníků nebo interních dat bez oprávnění,
+- žádný spam, scraping kontaktů ani studené nabídky členům,
+- kritika produktu je v pořádku, osobní útoky ne,
+- citace členů mimo komunitu jen se souhlasem,
+- moderátor může přesunout citlivé téma do soukromého supportu,
+- starý obsah se může archivovat nebo mazat podle retenčních pravidel.
+
+Dobrá pravidla chrání členy i firmu. Bez nich se první ostrá situace řeší improvizací, a improvizace pod tlakem má elegantní schopnost vyrobit tři nové problémy.
+
+### Moderace je produktová práce, ne uklízení po lidech
+
+Moderátor není policajt s kladívkem. Je to hostitel, který udržuje směr, bezpečí a užitečnost prostoru. V malém SaaS týmu stačí jednoduchý rytmus:
+
+- jednou týdně projít nové otázky a nezodpovězená vlákna,
+- převést opakované dotazy do nápovědy nebo článku,
+- označit produktové signály do feedback systému,
+- poděkovat lidem, kteří pomáhají ostatním,
+- odstranit spam a citlivá data,
+- jednou měsíčně rozhodnout, co komunita změnila v produktu, dokumentaci nebo marketingu.
+
+Komunita má být zdroj učení, ne nekonečný support backlog. Pokud se stejný dotaz opakuje každý týden, problém možná není v komunitě. Možná je v onboardingu, UX nebo dokumentaci. Ano, produkt se právě tváří, že nic. Nevěř mu.
+
+### Nezaměňuj aktivitu za hodnotu
+
+Lajky, reakce a počet zpráv vypadají dobře v reportu, ale neříkají automaticky, jestli komunita pomáhá. Sleduj raději rozhodovací signály:
+
+- kolik otázek se vyřešilo bez individuálního support ticketu,
+- které návody vznikly z komunitních dotazů,
+- kolik produktových zlepšení má původ ve zpětné vazbě,
+- zda se noví členové dostanou k první hodnotě rychleji,
+- které segmenty zákazníků se zapojují a proč,
+- jestli komunita snižuje nejistotu před nákupem.
+
+Tyto signály jdou měřit agregovaně. Nepotřebuješ sledovat každého člena jako laboratorní myš s firemním tričkem. Stačí vědět, které typy témat, formátů a odpovědí reálně pomáhají.
+
+### Drž komunitní obsah přenosný
+
+Platformní rukojmí vzniká pomalu. Nejdřív je pohodlné mít všechno v jednom nástroji. Pak zjistíš, že nejlepší odpovědi, návody, rozhodnutí a zákaznické příběhy jsou zavřené v systému, který se špatně exportuje, nejde dobře indexovat a změnil podmínky zrovna ve chvíli, kdy sis nalil kafe.
+
+Proto od začátku nastav:
+
+- důležité návody patří do vlastní knowledge base,
+- veřejně užitečné odpovědi se přepisují do článků nebo FAQ,
+- interní produktové signály se evidují mimo chat,
+- reference a citace mají souhlas a zdroj,
+- export členů, témat a obsahu je pravidelně testovaný,
+- komunita má veřejný rozcestník na vlastním webu.
+
+RSS, přímé odkazy a vlastní web nejsou nostalgie. Jsou pojistka proti tomu, aby hodnota, kterou s lidmi buduješ, nezůstala zamčená v cizím kanálu.
+
+### Začni malou user group
+
+Pokud nemáš stovky aktivních uživatelů, nezačínej „komunitní platformou“. Začni malou user group:
+
+1. vyber 8–15 zákazníků nebo pilotních uživatelů se společným problémem,
+2. pozvi je na měsíční 60minutové setkání,
+3. připrav jedno praktické téma a dvě otázky,
+4. po setkání pošli shrnutí bez citlivých detailů,
+5. z opakovaných témat udělej nápovědu, roadmap signál nebo článek,
+6. po třech setkáních rozhodni, jestli formát škálovat, změnit nebo ukončit.
+
+Codyho komentář: Nejlepší komunitní strategie pro malý SaaS často není „budujeme komunitu“. Je to „pravidelně dáváme správné lidi k užitečnému rozhovoru a uklízíme poznatky do produktu“. Méně sexy, víc funkční. Jako dobrá serverovna.
+
+### Checklist komunitního startu
+
+- [ ] Víme, jaký hlavní účel komunita plní.
+- [ ] Umíme říct, pro koho komunita není.
+- [ ] Vybrali jsme nejmenší kanál, který odpovídá chování lidí.
+- [ ] Registrační data jsou minimální a mají jasný účel.
+- [ ] Pravidla řeší spam, citlivá data, citace a moderaci.
+- [ ] Moderátor má týdenní rytmus a jasnou odpovědnost.
+- [ ] Opakované dotazy se převádí do nápovědy nebo článků.
+- [ ] Produktové signály se evidují mimo chat a bez zbytečných osobních detailů.
+- [ ] Umíme exportovat důležitý obsah a seznam členů.
+- [ ] Měříme hodnotu agregovaně, ne sledováním jednotlivců.
+
+### Šablona komunitního prostoru
+
+```markdown
+## Komunita / user group: [název]
+
+### Účel
+- Hlavní důvod existence:
+- Pro koho je:
+- Pro koho není:
+- Jakou hodnotu má člen získat během prvního měsíce:
+
+### Kanál
+- Primární místo:
+- Proč tento kanál:
+- Jak se člen připojí:
+- Jak může odejít:
+- Jak exportujeme důležitý obsah:
+
+### Pravidla
+- Citlivá data:
+- Spam a nabídky:
+- Kritika a konflikty:
+- Citace členů:
+- Moderace:
+- Retence obsahu:
+
+### Rytmus
+- Pravidelný formát:
+- Moderátor:
+- Týdenní údržba:
+- Měsíční vyhodnocení:
+- Převod poznatků do produktu / nápovědy / článků:
+
+### Měření
+- Signály hodnoty:
+- Signály rizika:
+- Agregované metriky:
+- Rozhodnutí po 90 dnech:
+```
+
+
 ## Pracovní log
+
+- **2026-09-15:** Doplněna příloha CC o komunitě kolem produktu bez platformního rukojmí: účel komunity, výběr minimálního kanálu, pravidla, moderace, privacy-first měření, přenositelnost obsahu, user group, checklist a šablona komunitního prostoru.
 
 - **2026-09-15:** Doplněna příloha CB o webinářích a produktovém vzdělávání bez leadového cirkusu: učební cíle, privacy-first registrace, poctivé pozvánky, pracovní obsah, nahrávky, follow-up, měření, checklist a šablona vzdělávací akce.
 
