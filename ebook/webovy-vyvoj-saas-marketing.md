@@ -11713,7 +11713,175 @@ Tím chráníš zákazníka i vlastní tým. Support nemusí vysvětlovat překv
 - Agregované metriky:
 ```
 
+## Příloha BR: Segmentace zákazníků bez sledovacích profilů
+
+Segmentace má pomáhat produktu, marketingu a podpoře mluvit s lidmi přesněji. Nemá z firmy udělat malou datovou rozvědku, která si o každém návštěvníkovi skládá album podezřelých detailů. Privacy-first segmentace začíná otázkou: „Jaké rozhodnutí díky tomuto rozdělení opravdu uděláme?“ Pokud odpověď neexistuje, segment je jen dekorace v CRM.
+
+Dobrá segmentace není co nejjemnější. Je užitečná, vysvětlitelná a bezpečná. Malý SaaS nepotřebuje stovky mikrosegmentů podle každého kliknutí. Potřebuje pár pracovních skupin, které pomáhají lépe navrhnout onboarding, pricing, obsah, podporu a roadmapu.
+
+Codyho komentář: Když máš segment „návštěvník, který v úterý v 14:03 najel myší na ceník“, nemáš marketingovou strategii. Máš digitální nervozitu v tabulce.
+
+### Segment začíná rozhodnutím
+
+Nejdřív si napiš, jaké rozhodnutí má segmentace zlepšit. Teprve potom vybírej data. Typická rozhodnutí v malém SaaS jsou:
+
+- komu ukázat kratší onboarding,
+- komu nabídnout demo místo samoobslužného trialu,
+- pro koho napsat další článek nebo checklist,
+- komu poslat produktový update,
+- jaké tarify zjednodušit,
+- které požadavky v roadmapě brát jako opakující se vzor.
+
+Špatná formulace: „Chceme segmentovat zákazníky podle chování.“
+
+Lepší formulace: „Chceme poznat, jestli nový účet potřebuje samoobslužný onboarding, nebo lidskou pomoc, protože druhá varianta často vyžaduje import dat a nastavení rolí.“
+
+Druhá věta už napovídá, co měřit a co neměřit. Nepotřebuješ znát osobní historii návštěvníka napříč internetem. Stačí několik signálů uvnitř produktu: zvolený scénář, počet členů týmu, dokončený import, pozvaný kolega a aktivační krok.
+
+### Používej segmenty, které zákazník chápe
+
+Privacy-first segment má být vysvětlitelný i zákazníkovi. Kdyby se zeptal „proč mi posíláte tuto zprávu?“, odpověď by měla znít normálně, ne jako výpis z reklamního systému.
+
+Dobré segmenty:
+
+- „jste ve zkušební verzi a ještě jste nedokončili import“,
+- „používáte týmový tarif a máte zapnuté schvalování“,
+- „spravujete více poboček“,
+- „odebíráte produktové novinky e-mailem“,
+- „požádali jste o export dat“.
+
+Slabé nebo rizikové segmenty:
+
+- „pravděpodobně vysoká ochota platit podle chování na webu“,
+- „návštěvník podobný našim nejdražším zákazníkům“,
+- „uživatel s nízkou disciplínou podle času přihlášení“,
+- „lead obohacený o osobní profil z více zdrojů“.
+
+První skupina vychází z kontextu služby. Druhá skupina často zavání profilováním, nepřesností a špatnou důvěrou. U B2B SaaS je navíc spousta „chytrých“ signálů falešná: někdo otevřel ceník třikrát ne proto, že je horký lead, ale protože mu spadl prohlížeč nebo hledal fakturační adresu. Ano, i takhle vznikají slavné datové závěry.
+
+### Začni ruční segmentací, než postavíš automat
+
+Než vytvoříš automatická pravidla v CRM, udělej segmentaci ručně na malém vzorku zákazníků. Vyber třeba 20 účtů a u každého doplň:
+
+- typ zákazníka,
+- hlavní use case,
+- aktivační moment,
+- současný blokátor,
+- další nejlepší krok,
+- riziko pro soukromí nebo podporu.
+
+Po hodině ruční práce často zjistíš, že nepotřebuješ složitý model. Potřebuješ lepší otázku v onboardingu, jasnější tarif, článek do nápovědy nebo obchodní poznámku u účtu. Automatizuj až vzory, které se opakují a mají jasnou akci.
+
+Příklad: Pokud osm z dvaceti zákazníků uvízne na importu, segment „potřebuje pomoc s importem“ je užitečnější než obecné skóre angažovanosti. Produkt může nabídnout šablonu CSV, support může poslat krátký návod a marketing může napsat článek „Jak připravit data na první import“.
+
+### Pracuj s minimem dat a jasnou retencí
+
+Segmentační data mají mít stejnou disciplínu jako produktová data: účel, vlastník, retence a možnost opravy. Nestačí říct „je to jen marketing“. Marketingová data pořád mohou být osobní nebo obchodně citlivá.
+
+Praktické minimum:
+
+- **Scénář použití:** zákazník ho vybere sám v onboardingu.
+- **Stav aktivace:** agregovaný nebo účtový stav, ne detailní klikací deník.
+- **Tarif a role:** nutné pro produktovou komunikaci.
+- **Komunikační preference:** kanál, typ zpráv a frekvence.
+- **Support témata:** tagy problémů bez zbytečných citací osobních detailů.
+- **Souhlas nebo právní základ:** podle typu komunikace a vztahu.
+
+Ke každému poli si napiš retenční pravidlo. Například: trialový blokátor držet po dobu trialu a krátké vyhodnocovací období, potom převést na agregovaný poznatek. Komunikační preference držet po dobu odběru. Staré lead scoring poznámky mazat nebo anonymizovat, jakmile přestanou sloužit konkrétnímu rozhodnutí.
+
+### Obsah segmentuj podle problému, ne podle osoby
+
+U privacy-first marketingu je lepší segmentovat obsah podle situace než lidi podle domnělých vlastností. Místo „ambiciózní founder s vysokou hodnotou“ piš pro situace:
+
+- „spouštím první B2B SaaS trial“,
+- „mám první tři zákazníky a chaos v onboardingu“,
+- „řeším evropský hosting a subprocesory“,
+- „chci měřit produkt bez reklamních trackerů“,
+- „potřebuji zrychlit support bez ztráty lidskosti“.
+
+Takové segmenty se dají použít na webu, v newsletteru i v obchodním rozhovoru bez creepy dojmu. Návštěvník si může sám vybrat téma, RSS kanál, štítek nebo rozcestník. Ty získáš signál zájmu, ale nehraješ si na věštce z cookies.
+
+### Segmentace má pomáhat i zákazníkovi
+
+Nejlepší segmentace je oboustranně užitečná. Pokud zákazníka zařadíš do skupiny, měl by z toho něco mít: kratší cestu k výsledku, relevantnější nápovědu, méně hluku, správný tarif nebo férovější podporu.
+
+Příklady užitečného použití:
+
+- účet se zvoleným scénářem „menší tým“ dostane onboarding s pozváním kolegy a jednoduchými rolemi,
+- účet s nedokončeným importem vidí přímo v produktu odkaz na šablonu dat,
+- zákazník s vypnutými marketingovými e-maily pořád dostane bezpečnostní a fakturační zprávy,
+- zákazník s vyšším provozním rizikem má jasnější doporučení k zálohám a přístupům,
+- uživatel, který čte obsah přes RSS, není nucen do newsletteru jen kvůli měření.
+
+Když segmentace pomáhá jen firmě tlačit víc zpráv, časem se obrátí proti ní. Lidé poznají rozdíl mezi relevancí a dotěrným honem na konverzi.
+
+### Dejte segmentům vlastníka a datum revize
+
+Segmenty stárnou. Produkt se mění, zákazníci dospívají, tarify se upravují a původní hypotézy přestávají platit. Každý segment by měl mít vlastníka a datum další revize.
+
+U každého segmentu sleduj:
+
+- proč vznikl,
+- jaká data používá,
+- jaká akce se podle něj spouští,
+- kdo je za něj odpovědný,
+- kdy byl naposledy ověřen,
+- jak poznáš, že už nemá smysl.
+
+Jednou za čtvrtletí projdi segmenty a smaž ty, které nikdo nepoužívá. Neaktivní segment není neškodný. Je to další kus datové mlhy, další riziko pro chybnou komunikaci a další položka, kterou jednou bude někdo vysvětlovat. Nejlepší CRM úklid je ten, po kterém zůstane méně polí a víc jasných rozhodnutí.
+
+### Checklist: segmentace privacy-first
+
+- Má každý segment jasné rozhodnutí nebo akci?
+- Umíš zákazníkovi lidsky vysvětlit, proč je v segmentu?
+- Sbíráš jen data potřebná pro tento účel?
+- Má každé segmentační pole vlastníka a retenční pravidlo?
+- Jde segment změnit, opravit nebo opustit?
+- Nepoužíváš citlivé nebo externě obohacené údaje bez silného důvodu?
+- Nezaměňuješ kliky za obchodní pravdu?
+- Měříš úspěch segmentu podle lepší hodnoty pro zákazníka, ne podle objemu odeslaných zpráv?
+- Mažeš staré segmenty a nepoužívané automatizace?
+- Je komunikační preference nadřazená marketingové chuti poslat „ještě jeden e-mail“?
+
+### Šablona segmentační karty
+
+## Segment: [název segmentu]
+
+### Účel
+
+- Jaké rozhodnutí tento segment zlepšuje:
+- Jakou hodnotu z toho má zákazník:
+- Jakou hodnotu z toho má tým:
+
+### Vstupní signály
+
+- Data používaná pro zařazení:
+- Data, která výslovně nepoužíváme:
+- Místo sběru dat:
+- Právní nebo komunikační poznámka:
+
+### Akce
+
+- Co se stane po zařazení do segmentu:
+- Jak často se akce spouští:
+- Kdo má výjimku nebo ruční kontrolu:
+- Jak zákazník upraví preference:
+
+### Retence a úklid
+
+- Jak dlouho segmentační údaj držíme:
+- Kdy se převádí na agregovaný poznatek:
+- Kdo segment reviduje:
+- Kdy segment smažeme:
+
+### Kontrola kvality
+
+- Jak poznáme, že segment pomáhá:
+- Jak poznáme, že škodí nebo mate:
+- Jaký je nejjednodušší test před automatizací:
+
 ## Pracovní log
+- **2026-09-15:** Doplněna příloha BR o segmentaci zákazníků bez sledovacích profilů: rozhodovací účel, vysvětlitelné segmenty, ruční ověření, datová minimalizace, retence, revize a šablona segmentační karty.
 
 - **2026-09-14:** Doplněna příloha BQ o trialu a první aktivaci bez pasti na platební kartu: aktivační moment, kreditka, minimalizace registračních dat, demo data, e-mailová komunikace, konec trialu, checklist a trial karta.
 
