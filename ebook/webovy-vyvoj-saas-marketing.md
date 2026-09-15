@@ -12417,7 +12417,221 @@ Nejlepší metrika health score není přesnost na papíře. Je to počet lepš�
 - Kdy pravidla přehodnotíme:
 
 
+## Příloha BV: Obnovy a expanze zákazníků bez nátlakového divadla
+
+Obnova předplatného není administrativní formalita. Je to okamžik, kdy zákazník znovu rozhoduje, jestli produkt pořád stojí za peníze, pozornost a důvěru. Pokud tým řeší renewal až v týdnu před expirací smlouvy, většinou už jen hasí požár, který doutnal měsíce.
+
+Expanze je podobná disciplína. Nemá začínat otázkou „jak z nich dostaneme víc peněz“, ale „kde už prokazatelně vzniká větší hodnota, kterou umíme férově obsloužit“. Rozdíl je zásadní. První přístup vyrábí tlak. Druhý buduje dlouhodobý vztah.
+
+> Codyho komentář: Upsell, který zákazníkovi nepomáhá, není růst. Je to jen dražší omluva za chybějící produktovou strategii.
+
+### Renewal začíná po podpisu, ne před deadlinem
+
+Dobrá obnova je výsledkem průběžné práce. Zákazník by při renewal hovoru neměl poprvé slyšet, co všechno pro něj produkt údajně udělal. Hodnota musí být viditelná už během používání.
+
+Praktický rytmus pro B2B SaaS:
+
+- **Po aktivaci:** ověř, že zákazník dosáhl prvního hodnotového momentu.
+- **Po prvním měsíci:** zeptej se, co funguje, co brzdí tým a co by zlepšilo adopci.
+- **V polovině období:** shrň dosažené výsledky, otevřené blokery a plán do dalšího období.
+- **90–60 dní před obnovou:** potvrď rozhodovací proces, rozpočet, vlastníka a rizika.
+- **30 dní před obnovou:** pošli jasnou nabídku, shrnutí hodnoty a další kroky.
+
+U měsíčních produktů je rytmus kratší, ale princip zůstává. Obnova není událost v kalendáři. Je to důsledek toho, jestli zákazník průběžně cítí hodnotu.
+
+### Hodnotu shrnuj lidsky, ne jako telemetrickou tapetu
+
+Renewal deck nemusí mít dvacet grafů. Stačí jasně ukázat, co se změnilo v zákazníkově realitě. Nejlepší shrnutí hodnoty kombinuje čísla, příběh a další doporučení.
+
+Použitelná struktura:
+
+- **Výchozí stav:** s čím zákazník přišel a co chtěl změnit.
+- **Dosažený výsledek:** konkrétní změna v práci, čase, kvalitě nebo riziku.
+- **Adopce:** které týmy, procesy nebo scénáře produkt skutečně používají.
+- **Otevřené překážky:** co stále brzdí větší hodnotu.
+- **Doporučený další krok:** pokračování, úprava balíčku, školení, integrace nebo rozšíření.
+
+Slabé shrnutí:
+
+> „Váš účet měl 14 832 eventů a 372 aktivních akcí.“
+
+Silnější shrnutí:
+
+> „Tým podpory přesunul 62 % opakovaných dotazů do samoobslužné nápovědy, takže seniorní lidé řeší méně rutiny. Největší brzda je teď onboarding nových kolegů, proto navrhujeme krátký enablement sprint.“
+
+Čísla jsou užitečná, když podporují rozhodnutí. Sama o sobě jsou často jen hlučný koberec.
+
+### Expanze musí vycházet ze signálu hodnoty
+
+Ne každý spokojený zákazník je připravený na expanzi. A ne každý velký účet potřebuje větší tarif. Signál pro expanzi by měl být napojený na reálné použití, ne na ambici obchodníka dohnat kvartální plán.
+
+Dobré expanzní signály:
+
+- zákazník opakovaně naráží na limit, který souvisí s hodnotou,
+- produkt používá více týmů, než bylo v původním rozsahu,
+- roste počet procesů, které na službě závisí,
+- zákazník žádá integraci, automatizaci nebo vyšší SLA,
+- interní šampion potřebuje pomoci obhájit širší nasazení,
+- support dotazy ukazují, že problém už není „jak začít“, ale „jak škálovat“.
+
+Špatné expanzní signály:
+
+- „dlouho jsme jim nic neprodali“,
+- „mají velké logo“,
+- „v CRM svítí vysoký potenciál“,
+- „potřebujeme dorovnat plán“,
+- „klikli na stránku s pricingem, tak je budeme honit“.
+
+Privacy-first tým nepoužívá expanzi jako záminku k nenápadnému sledování lidí v účtu. Stačí agregované signály na úrovni firmy, rozhovory s vlastníkem a transparentní evidence potřeb.
+
+### Nabídka expanze není trest za úspěch
+
+Uživatelé nesmí mít pocit, že čím lépe produkt používají, tím rychleji je systém potrestá paywallem. Limity a balíčky mají být čitelné předem. Když zákazník roste, nabídka má znít jako přirozené pokračování, ne jako náhlé clo na vlastní adopci.
+
+Dobrá expanzní nabídka obsahuje:
+
+- **důvod:** proč změna dává smysl právě teď,
+- **hodnotu:** co zákazník získá navíc,
+- **rozsah:** které týmy, funkce nebo procesy se mění,
+- **cenu:** jasný model bez překvapivých příplatků,
+- **rizika:** co se stane, když zákazník zůstane na současném plánu,
+- **pilotní cestu:** možnost ověřit širší nasazení bez dlouhého závazku.
+
+Příklad férového formulování:
+
+> „Dnes používáte produkt ve třech týmech, ale tarif počítal s jedním provozním scénářem. Navrhujeme přejít na týmový plán, který přidá oddělená oprávnění, audit změn a prioritní podporu. Pokud si nejste jistí, můžeme nejdřív udělat 30denní rozšířený pilot pro druhý tým.“
+
+Tohle je jiné než: „Dosáhli jste limitu, zaplaťte nebo smůla.“ Jemný rozdíl. Asi jako mezi poradcem a parkovacím automatem.
+
+### Renewal rizika řeš bez strašení
+
+Některé účty budou rizikové. Někdo mění rozpočet, někdo má slabou adopci, někde odešel šampion, někde produkt prostě nedodal slíbenou hodnotu. Úkolem týmu není zákazníka zastrašit ztrátou dat nebo komplikovaným odchodem. Úkolem je zjistit pravdu včas.
+
+Typická rizika a reakce:
+
+- **Slabá adopce:** nabídni konkrétní aktivaci, školení nebo zjednodušení workflow.
+- **Změna rozhodovatele:** připrav stručný business summary pro nového vlastníka.
+- **Rozpočtový tlak:** rozliš, jestli jde o cenu, nejasnou hodnotu nebo interní prioritu.
+- **Technický blocker:** dej jasný termín, vlastníka a náhradní postup.
+- **Ztráta šampiona:** najdi nový kontakt přes hodnotový příběh, ne přes paniku.
+- **Nespokojenost:** přiznej realitu, navrhni nápravu a neslibuj nemožné.
+
+Pokud zákazník odchází oprávněně, férový offboarding může být nejlepší marketing, který si neobjednáš. Lidé si pamatují, kdo jim při odchodu nepodrazil nohy.
+
+### Privacy-first evidence renewal procesu
+
+Obchodní a customer success týmy potřebují kontext, ale ne nekonečnou kroniku všeho, co kdo kdy udělal. Evidence má podporovat rozhodnutí a péči, ne vytvářet soukromý román o zákazníkovi.
+
+Ukládej zejména:
+
+- vlastník účtu a hlavní kontakty,
+- termín obnovy a rozhodovací proces,
+- domluvené cíle a očekávané výsledky,
+- agregované signály adopce,
+- otevřené blokery a závazky týmu,
+- poslední hodnotové shrnutí,
+- stav nabídky a další krok.
+
+Vyhýbej se:
+
+- osobním poznámkám bez pracovního účelu,
+- kopírování interních e-mailů zákazníka bez důvodu,
+- detailnímu sledování jednotlivých uživatelů mimo bezpečnostní a provozní potřebu,
+- ukládání citlivých informací do volných poznámek,
+- trvalému držení historických signálů, které už nemají rozhodovací hodnotu.
+
+Jednoduché pravidlo: kdyby zákazník požádal o vysvětlení, proč danou informaci eviduješ, měl bys umět odpovědět jednou normální větou.
+
+### Renewal meeting jako rozhodovací schůzka
+
+Obnovovací schůzka nemá být prezentace ve stylu „podívejte, jak jsme skvělí“. Má vést k rozhodnutí: pokračujeme, měníme rozsah, řešíme blocker, nebo plánujeme odchod.
+
+Agenda na 45 minut:
+
+1. **5 minut — kontext:** co byl původní cíl spolupráce.
+2. **10 minut — výsledky:** co se povedlo a kde je důkaz hodnoty.
+3. **10 minut — překážky:** co nefunguje, kde je tření, co se změnilo.
+4. **10 minut — doporučení:** pokračování, expanze, úprava nebo náprava.
+5. **5 minut — rozhodovací proces:** kdo schvaluje, do kdy a podle čeho.
+6. **5 minut — další krok:** konkrétní vlastník, termín a follow-up.
+
+Po schůzce pošli krátké shrnutí. Ne román, ne transcript, ne generickou obchodní poezii. Stačí: co zaznělo, co bylo dohodnuto, kdo co udělá a do kdy.
+
+### Měření obnov a expanze bez vanity metrik
+
+U renewal procesu se snadno sklouzne k metrikám, které vypadají hezky, ale nepomáhají rozhodovat. „Počet renewal aktivit“ je fajn pro pocit pohybu, ale neříká, jestli zákazník vidí hodnotu.
+
+Lepší metriky:
+
+- **renewal forecast podle rizik:** zelené, žluté a červené účty s důvodem,
+- **čas do první hodnoty:** jak rychle nový zákazník dosáhne aktivačního momentu,
+- **blokery podle typu:** produkt, data, integrace, lidé, rozpočet, proces,
+- **důvody neobnovení:** kategorizované z rozhovorů, ne domněnky z CRM,
+- **kvalita expanze:** kolik rozšíření vedlo k reálné adopci po 60–90 dnech,
+- **závazky týmu:** kolik slíbených náprav bylo splněno včas.
+
+Finanční metriky jsou důležité, ale bez kontextu svádí k nesmyslným závěrům. Když roste expanze, ale zároveň klesá důvěra, vyrábíš budoucí churn s mašlí.
+
+### Checklist obnov a expanze
+
+- Má každý zákazník jasný renewal datum, vlastníka a rozhodovací proces?
+- Shrnuje tým hodnotu průběžně, ne až těsně před obnovou?
+- Umíme popsat původní cíl zákazníka a aktuální stav?
+- Máme u rizikových účtů konkrétní důvod rizika, ne jen pocit?
+- Vychází expanzní nabídky z hodnotových signálů?
+- Jsou limity tarifů vysvětlené dopředu a bez překvapení?
+- Používáme agregované adopční signály místo zbytečného sledování jednotlivců?
+- Evidujeme jen data potřebná pro péči, obchod a provoz?
+- Má zákazník férovou možnost zůstat na současném plánu, pokud mu stačí?
+- Umíme po 60–90 dnech ověřit, že expanze skutečně pomohla?
+
+### Šablona renewal karty
+
+## Renewal karta: [zákazník / workspace]
+
+### Kontext
+
+- Termín obnovy:
+- Vlastník účtu:
+- Hlavní kontakt:
+- Rozhodovatelé:
+- Původní cíl spolupráce:
+
+### Hodnota
+
+- První aktivační moment:
+- Dosažené výsledky:
+- Agregované signály adopce:
+- Citace nebo kvalitativní signál:
+- Otevřené překážky:
+
+### Riziko
+
+- Aktuální stav: zelená / žlutá / červená
+- Důvod rizika:
+- Doporučená akce:
+- Vlastník dalšího kroku:
+- Termín kontroly:
+
+### Expanze
+
+- Existuje expanzní signál:
+- Navržený rozsah:
+- Hodnota pro zákazníka:
+- Riziko přepálení:
+- Pilot nebo bezpečná cesta:
+
+### Privacy-first kontrola
+
+- Jaké kontaktní údaje držíme:
+- Jaké signály agregujeme:
+- Co smažeme po ukončení vztahu:
+- Kdo má přístup k renewal poznámkám:
+- Kdy kartu revidujeme:
+
+
 ## Pracovní log
+- **2026-09-15:** Doplněna příloha BV o obnovách a expanzi zákazníků bez nátlaku: průběžná hodnota, renewal rytmus, expanzní signály, férové nabídky, rizika, privacy-first evidence, měření, checklist a renewal karta.
 - **2026-09-15:** Doplněna příloha BU o customer health score bez sledovací magie: účel skóre, hodnotové signály, vysvětlitelné kategorie, privacy-first hranice, zásahy, měření kvality, checklist a health score karta.
 - **2026-09-15:** Doplněna příloha BT o churn rozhovorech bez výčitek: typy odchodu, offboarding, otázky při rušení účtu, osobní rozhovory, privacy-first evidence, měsíční review, win-back pravidla, checklist a churn karta.
 - **2026-09-15:** Doplněna příloha BS o referral a partnerských doporučeních bez provizní džungle: typy doporučení, pravidla provizí, privacy-first tracking, kvalifikace leadů, onboarding partnerů, měření kvality, checklist a referral karta.
