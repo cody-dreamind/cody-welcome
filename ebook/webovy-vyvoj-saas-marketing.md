@@ -11880,7 +11880,200 @@ Jednou za čtvrtletí projdi segmenty a smaž ty, které nikdo nepoužívá. Nea
 - Jak poznáme, že škodí nebo mate:
 - Jaký je nejjednodušší test před automatizací:
 
+
+## Příloha BS: Referral a partnerská doporučení bez provizní džungle
+
+Referral program v malém SaaS není automat na virální růst. Je to domluvený způsob, jak spokojeným zákazníkům, konzultantům a partnerům usnadnit doporučení správným lidem. Když se udělá dobře, přinese kvalitnější leady než studená reklama. Když se udělá špatně, vznikne provizní zoologická zahrada, kde každý slibuje všechno a nikdo nechce vlastnit výsledek.
+
+Cíl referral systému je jednoduchý: získat důvěryhodné doporučení bez toho, aby produkt začal působit jako MLM v saku. Doporučení má být přirozené, transparentní a užitečné pro všechny tři strany: doporučujícího, nového zákazníka i tým, který produkt provozuje.
+
+> Codyho komentář: Nejlepší referral program není ten, kde partner dostane největší provizi. Je to ten, kde se zákazník nestydí říct: „Tohle jim fakt pomohlo.“ Peníze jsou fajn. Důvěra je lepší měna, jen ji bohužel nejde exportovat do CSV bez kontextu.
+
+### Nejdřív ověř, jestli máš co doporučovat
+
+Referral program nespustí růst produktu, který ještě nedoručuje hodnotu. Jen rychleji ukáže, že lidé nemají důvod ho doporučovat. Před spuštěním si proto polož tvrdé otázky:
+
+- Kolik zákazníků by nás dnes doporučilo bez pobídky?
+- U kterých segmentů už máme opakovatelný výsledek?
+- Ví zákazník jednou větou říct, komu jsme vhodní?
+- Máme onboarding, který zvládne přivést doporučeného člověka k hodnotě?
+- Umíme rozlišit kvalitní lead od „někdo mi poslal kontakt, hodně štěstí“?
+
+Pokud odpovědi nejsou jasné, začni ručním doporučovacím procesem. Zavolej pěti spokojeným zákazníkům a zeptej se: „Znáte někoho v podobné situaci, komu by dávalo smysl si o tom promluvit?“ Než tvoříš landing page pro partnery, ověř, jestli doporučení vůbec přichází přirozeně.
+
+### Tři typy doporučení
+
+Ne každé doporučení má být placené. Malý SaaS může pracovat se třemi režimy:
+
+1. **Zákaznické doporučení:** stávající zákazník pošle kontakt, protože produkt řeší podobný problém. Odměnou může být kredit, sleva, rozšířená podpora nebo prosté poděkování.
+2. **Partnerské doporučení:** konzultant, agentura nebo integrátor doporučuje produkt klientům. Tady dává smysl jasná provize nebo partnerský balíček.
+3. **Ekosystémové doporučení:** komunita, newsletter, odborný článek, podcast nebo integrace přivede zájemce bez individuální provize. Hodnota je reputační a distribuční.
+
+Každý režim potřebuje jiná pravidla. Nejhorší je mít jeden „affiliate“ program pro všechny a pak se divit, že zákazník nechce působit jako obchodník, partner nechápe provizi a komunita má pocit, že z ní někdo dělá billboard.
+
+### Nabídka pro doporučujícího
+
+Doporučující člověk potřebuje méně materiálů, než si myslíš, ale musí být dobré. Dej mu jednoduchý balíček:
+
+- krátký popis produktu v jedné větě,
+- pro koho je produkt vhodný a pro koho ne,
+- tři typické problémy, které řeší,
+- odkaz na konkrétní stránku nebo demo,
+- bezpečný úvodní text, který může přeposlat,
+- pravidla odměny, pokud existuje.
+
+Příklad přeposílatelného textu:
+
+> Ahoj, napadlo mě, že by vám mohl dávat smysl [produkt]. Řeší [konkrétní problém] pro [typ týmu]. Mně pomohl hlavně s [výsledek]. Pokud chceš, můžu vás propojit, nebo mrkni na [odkaz].
+
+Tohle je lepší než poslat partnerovi PDF o šestnácti stranách, které začíná vizí firmy a končí logem ve špatném poměru stran. Doporučení musí být lehké. Když vyžaduje školení, není referral, ale franšíza.
+
+### Pravidla provize bez šedé zóny
+
+Pokud platíš provizi, napiš pravidla tak, aby jim rozuměl i člověk mimo tvůj tým. Minimálně:
+
+- **Kdy vzniká nárok:** po podpisu smlouvy, po první platbě, po uplynutí zkušební doby nebo po určitém obratu.
+- **Jak se počítá odměna:** jednorázově, procentem z první faktury, procentem po omezenou dobu nebo fixní částkou.
+- **Co se stane při refundu nebo neplacení:** provize se nevyplatí, krátí se nebo se započte proti dalšímu období.
+- **Jak dlouho platí atribuční okno:** například doporučení je aktivní 90 dní od prvního kontaktu.
+- **Kdo vlastní obchodní proces:** partner doporučuje, tvůj tým kvalifikuje a uzavírá, nebo partner aktivně prodává.
+- **Jak se řeší konflikt doporučení:** když stejného zákazníka přivede více kanálů, platí první doložené doporučení, ruční rozhodnutí nebo předem daná priorita.
+
+Provize má motivovat správné chování. Když odměňuješ jen počet leadů, dostaneš hodně šumu. Když odměňuješ první platbu bez ohledu na fit, dostaneš špatné zákazníky. Lepší je odměnit kvalifikované doporučení, které projde jasným obchodním krokem a nezvyšuje support peklo.
+
+### Privacy-first referral tracking
+
+Referral tracking se dá udělat i bez armády třetích stran a sledovacích pixelů. U malého B2B SaaS často stačí kombinace:
+
+- unikátní referral odkaz s jednoduchým parametrem,
+- formulářové pole „kdo vás doporučil“,
+- ruční evidence v CRM nebo tabulce,
+- interní poznámka u obchodní příležitosti,
+- pravidelné měsíční vyhodnocení.
+
+Nesbírej víc, než potřebuješ. Pro doporučení obvykle nepotřebuješ sledovat návštěvníka napříč webem, ukládat detailní historii prohlížení ani posílat data do reklamních sítí. Potřebuješ vědět: kdo doporučil, koho doporučil, kdy vznikl kontakt, jaký je stav a zda vznikl nárok na odměnu.
+
+Dobrá privacy-first praxe:
+
+- Vysvětli na partnerské stránce, jak referral evidence funguje.
+- Nepředávej partnerovi osobní údaje leadu bez jasného důvodu a očekávání.
+- Pokud partner pomáhá s obchodem, popiš role v komunikaci se zákazníkem.
+- Uchovávej neúspěšné referral záznamy jen po omezenou dobu.
+- Pro reporty používej agregace: počet doporučení, konverze, typ segmentu, kvalita leadu.
+
+Doporučující partner nepotřebuje dashboard se všemi pohyby leadu jako sportovní komentátor. Potřebuje vědět, jestli doporučení dorazilo, jestli dává smysl a zda vznikla odměna.
+
+### Kvalifikace doporučeného leadu
+
+Referral lead není automaticky dobrý lead. Jen přichází s důvěrou navíc. Kvalifikuj ho stejně jako ostatní:
+
+- Má problém, který produkt skutečně řeší?
+- Patří do segmentu, kde umíte doručit výsledek?
+- Má rozpočet nebo cestu k rozhodnutí?
+- Je načasování reálné?
+- Nečeká funkce, které jste partnerovi nikdy neslíbili?
+
+U partnerů pomáhá jednoduchá kvalifikační věta:
+
+> Ideální doporučení je firma, která dnes řeší [problém], má [velikost/situaci] a chce během [čas] udělat [konkrétní změnu].
+
+Čím konkrétnější popis, tím méně obchodních hovorů typu „oni by možná jednou něco s AI chtěli“. To je hezká věta na konferenci, ale mizerný lead.
+
+### Onboarding partnerů
+
+Partner nemusí znát celý produkt. Musí znát hranice. Připrav mu stručný onboarding:
+
+- **Produktový fit:** kdy produkt doporučit a kdy ne.
+- **Zakázané sliby:** co partner nesmí garantovat za tým.
+- **Proces doporučení:** kam poslat lead, co napsat, co se stane dál.
+- **Odměna:** kdy vzniká nárok a kdy ne.
+- **Privacy pravidla:** jak pracovat s kontakty, souhlasy a zákaznickými informacemi.
+- **Kontaktní bod:** kdo řeší otázky, spory a výjimky.
+
+Stačí jedna stránka a 30minutový call. Pokud partner potřebuje dvoutýdenní certifikaci, možná nestavíš referral program, ale distribuční kanál. To je jiná disciplína a chce jiný management.
+
+### Měření bez vanity metrik
+
+Referral systém měř podle kvality, ne podle počtu odkazů v oběhu. Sleduj měsíčně:
+
+- počet nových doporučení,
+- podíl doporučení, která prošla kvalifikací,
+- konverzi na demo, pilot nebo platbu,
+- průměrný čas od doporučení k rozhodnutí,
+- retenci doporučených zákazníků,
+- support náročnost oproti ostatním kanálům,
+- počet konfliktů nebo nejasností v odměnách.
+
+Jeden dobrý partner, který přivede tři správné zákazníky ročně, může být cennější než sto affiliate odkazů v článcích bez kontextu. Kvalita distribuce se nepozná podle grafu návštěvnosti, ale podle toho, jestli zákazníci dorazí s realistickým očekáváním.
+
+### Checklist pro referral program
+
+- [ ] Víme, které segmenty už máme ověřené a doporučitelné.
+- [ ] Máme jasný rozdíl mezi zákaznickým doporučením, partnerem a obsahovým kanálem.
+- [ ] Doporučující člověk dostane krátký text, odkaz a pravidla.
+- [ ] Provize má jasný vznik nároku, výši, atribuční okno a výjimky.
+- [ ] Doporučené leady kvalifikujeme podle problému, segmentu, rozpočtu a načasování.
+- [ ] Referral tracking funguje bez zbytečných trackerů třetích stran.
+- [ ] Partnerům nepředáváme osobní údaje leadů bez jasného účelu.
+- [ ] Neúspěšná doporučení mají retenční pravidlo a pravidelný úklid.
+- [ ] Každý měsíc hodnotíme kvalitu, ne jen počet doporučení.
+- [ ] Máme postup pro spory, duplicity a špatně nastavená očekávání.
+
+### Mini šablona referral stránky
+
+1. **Pro koho je produkt:** jasný segment a situace.
+2. **Kdy má smysl doporučit:** konkrétní problémy a spouštěče.
+3. **Kdy doporučení neposílat:** špatný fit, chybějící rozpočet, nereálné požadavky.
+4. **Jak doporučení poslat:** formulář, e-mail, přímé propojení nebo referral odkaz.
+5. **Co se stane dál:** kvalifikace, kontaktování leadu, informování doporučujícího.
+6. **Odměna:** jednoduchá pravidla a příklady.
+7. **Privacy poznámka:** jaká data zpracováváte, kdo je vidí a jak dlouho je držíte.
+8. **Kontakt:** člověk, který řeší partnerské otázky.
+
+## Referral karta: [partner / zákazník / kanál]
+
+### Účel
+
+- Proč tento referral vztah existuje:
+- Jaký segment má přivádět:
+- Jakou hodnotu má pro doporučujícího:
+- Jakou hodnotu má pro nového zákazníka:
+
+### Pravidla
+
+- Typ doporučení: zákaznické / partnerské / obsahové
+- Kdy vzniká nárok na odměnu:
+- Výše nebo forma odměny:
+- Atribuční okno:
+- Výjimky a konflikty:
+
+### Proces
+
+- Jak partner předává doporučení:
+- Kdo lead kvalifikuje:
+- Jak rychle reagujeme:
+- Jaký update dostane doporučující:
+- Kdo řeší spory:
+
+### Privacy-first nastavení
+
+- Jaká data evidujeme:
+- Kdo k nim má přístup:
+- Co partnerovi nesdílíme:
+- Retence neúspěšných doporučení:
+- Kdy data mažeme nebo agregujeme:
+
+### Kontrola kvality
+
+- Kolik doporučení bylo kvalifikovaných:
+- Kolik přešlo do pilotu nebo platby:
+- Jaká byla očekávání zákazníků:
+- Jaká byla support náročnost:
+- Co upravíme v partnerských materiálech:
+
+
 ## Pracovní log
+- **2026-09-15:** Doplněna příloha BS o referral a partnerských doporučeních bez provizní džungle: typy doporučení, pravidla provizí, privacy-first tracking, kvalifikace leadů, onboarding partnerů, měření kvality, checklist a referral karta.
 - **2026-09-15:** Doplněna příloha BR o segmentaci zákazníků bez sledovacích profilů: rozhodovací účel, vysvětlitelné segmenty, ruční ověření, datová minimalizace, retence, revize a šablona segmentační karty.
 
 - **2026-09-14:** Doplněna příloha BQ o trialu a první aktivaci bez pasti na platební kartu: aktivační moment, kreditka, minimalizace registračních dat, demo data, e-mailová komunikace, konec trialu, checklist a trial karta.
