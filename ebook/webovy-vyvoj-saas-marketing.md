@@ -15724,7 +15724,200 @@ Výstup nemusí být velký. Stačí jedna úprava článku, jeden lepší toolt
 ```
 
 
+## Příloha CO: SLA a support plány bez korporátního kouře
+
+SLA není kouzelná věta do ceníku. Je to provozní slib, který musí zvládnout tým, infrastruktura, komunikace i obchod. Malý SaaS často udělá chybu ve dvou směrech: buď neslíbí nic a zákazník neví, co čekat, nebo slíbí enterprise reakce, protože to hezky vypadá na pricing stránce. První varianta snižuje důvěru. Druhá vyrábí budoucí průšvih v dárkovém balení.
+
+Dobré SLA začíná otázkou: **jaký dopad má problém zákazníka a jak rychle musíme reagovat, aby neztratil důvěru ani peníze?** Nejde o to, kdo hlasitěji křičí. Jde o dopad na práci, data, platby, bezpečnost a zákazníkovy vlastní zákazníky.
+
+> Codyho komentář: „Odpovíme co nejdřív“ je supportová verze „někdy se stavíme“. Hezky zní, ale kalendář z toho radost nemá.
+
+### Nejdřív odděl podporu, incidenty a konzultace
+
+Zákazník často pošle všechno jedním kanálem: bug, dotaz, nápad, žádost o import, otázku k faktuře i „nefunguje mi internet“. Tým ale musí rozlišovat, co je co, jinak bude řešit drobné dotazy jako incidenty a skutečné incidenty jako běžné tikety.
+
+Praktické rozdělení:
+
+- **Dotaz:** zákazník potřebuje vysvětlení, postup nebo potvrzení.
+- **Problém s používáním:** produkt funguje, ale zákazník se zasekl.
+- **Bug:** funkce se nechová podle očekávání, ale existuje náhradní cesta.
+- **Incident:** dostupnost, bezpečnost, data, platby nebo kritický workflow jsou reálně zasažené.
+- **Konzultace:** zákazník chce návrh procesu, importu, integrace nebo školení.
+- **Feature request:** zákazník žádá změnu produktu, ne opravu slíbeného chování.
+
+Každá kategorie má mít jiný cíl. Dotaz má dostat odpověď. Problém s používáním má dostat zákazníka přes překážku. Bug má dostat prioritu podle dopadu. Incident má mít runbook. Konzultace má mít rozsah. Feature request má skončit v produktovém inboxu, ne v nekonečném support vlákně.
+
+### Severity matice má být srozumitelná
+
+Severity není pocit obchodníka ani velikost zákazníka. Je to kombinace dopadu a rozsahu. Pokud má největší zákazník drobnou kosmetickou chybu, není to automaticky kritický incident. Pokud malý zákazník nemůže vystavit faktury všem svým klientům, je to vážné.
+
+Jednoduchá matice pro malý SaaS:
+
+- **S1 kritické:** služba je nedostupná, hrozí ztráta nebo únik dat, nefunguje přihlášení, platby nebo kritický proces pro většinu zasažených zákazníků.
+- **S2 vysoké:** významná část workflow nefunguje, existuje omezená náhradní cesta, dopad je obchodně citelný.
+- **S3 střední:** chyba omezuje práci, ale zákazník může pokračovat přijatelnou náhradní cestou.
+- **S4 nízké:** kosmetika, drobná nepřesnost, dotaz, návrh zlepšení nebo problém bez okamžitého dopadu.
+
+U každé úrovně si napiš tři věci: reakční dobu, komunikační rytmus a očekávaný další krok. Ne „vyřešíme do hodiny“, pokud to neumíš garantovat. Lepší je slíbit rychlou reakci, jasnou diagnostiku a pravidelné aktualizace než hrát hrdinu s nereálným fixem.
+
+### Reakční doba není doba opravy
+
+Tohle je nutné vysvětlit zákazníkům i týmu. Reakční doba znamená, že tým problém převzal, pochopil základní dopad a komunikuje další krok. Neznamená to, že bug bude opravený za třicet minut a backend dostane omluvný dort.
+
+Příklad slušné formulace:
+
+> U kritických incidentů reagujeme do 1 pracovní hodiny. Reakce znamená potvrzení dopadu, přiřazení vlastníka a první informaci o dalším postupu. Doba vyřešení závisí na povaze incidentu; během řešení posíláme pravidelné aktualizace.
+
+Pro malé týmy je fér začít s pracovní dobou a jasně ji přiznat. Pokud nemáš 24/7 službu, netvař se, že ji máš. Zákazníci v B2B často snesou realistické hranice, když jsou předem jasné. Nesnáší překvapení.
+
+### Support plány nejsou jen rychlejší odpověď
+
+Vyšší tarif může mít lepší support, ale neměl by znamenat, že menší zákazník dostane chaos. Základní kvalita podpory musí být důstojná pro všechny. Placené rozdíly mají dávat provozní smysl.
+
+Rozumné rozdíly mezi plány:
+
+- dostupné kanály: e-mail, portál, sdílený kanál, plánované hovory,
+- reakční doby podle severity,
+- onboarding nebo pravidelné review,
+- priorita u konzultací a importů,
+- počet zahrnutých hodin podpory nebo školení,
+- rozsah bezpečnostní a administrativní součinnosti,
+- dostupnost zákaznického audit logu, exportů nebo reportingových podkladů.
+
+Nerozumné rozdíly:
+
+- kritické bezpečnostní incidenty řešit pomalu, protože zákazník má levnější tarif,
+- schovávat základní export nebo zrušení účtu za enterprise plán,
+- slibovat telefonickou podporu bez lidí, kteří ji zvládnou,
+- prodávat „priority support“ bez interní priority fronty a vlastníka.
+
+Privacy-first poznámka: vyšší support plán nesmí znamenat, že tým smí bez omezení lézt do produkčních dat. Prémiová podpora má mít lepší proces, ne slabší hranice. Přístupy do účtů, impersonace, exporty a diagnostika musí mít auditní stopu, omezený účel a jasnou retenci.
+
+### Veřejná status page pomáhá supportu i důvěře
+
+SLA bez status page a incidentové komunikace je polovina příběhu. Když služba zlobí, zákazník nechce hledat pravdu v pěti e-mailech. Chce vědět, jestli je problém známý, jaký má dopad a kdy přijde další update.
+
+Status page nemusí být složitá. Stačí:
+
+- aktuální stav hlavních částí služby,
+- krátký popis incidentu bez citlivých detailů,
+- čas poslední aktualizace,
+- plán další aktualizace,
+- historie incidentů,
+- možnost sledovat změny přes RSS nebo e-mail bez marketingového přihlašování.
+
+Neuváděj interní názvy serverů, přesné zranitelnosti, osobní data, názvy zasažených zákazníků ani technické detaily, které by zhoršily bezpečnost. Transparentnost má informovat, ne rozdávat mapu útočníkům.
+
+### Interní provoz musí odpovídat slibu
+
+Než SLA dáš do smlouvy nebo na pricing stránku, projdi realitu. Kdo má službu? Kdo má oprávnění? Kde jsou runbooky? Kdo umí restartovat kritickou komponentu? Kdo komunikuje se zákazníkem? Co když je pátek večer, nemoc a deploy s malou explozí?
+
+Minimální interní příprava:
+
+- monitoring kritických cest a transakčních e-mailů,
+- jasné eskalační kontakty,
+- incident kanál a šablony updateů,
+- runbook pro nejčastější selhání,
+- přístupová pravidla pro produkci,
+- přehled zákazníků s vyššími závazky,
+- pravidlo, kdo může měnit severity,
+- pravidelný test komunikace a obnovy.
+
+Pokud jedna osoba drží celé SLA v hlavě, nemáš SLA. Máš člověka, který brzy začne vypadat jako notifikace s kruhy pod očima.
+
+### SLA patří i do obchodního procesu
+
+Obchodník by neměl slibovat „nějak to zařídíme“. Každá výjimka v reakční době, dostupnosti, support kanálu nebo administrativní součinnosti má provozní cenu. Proto musí být support závazky součástí nabídky, ne poznámka pod čarou po podpisu.
+
+U každého většího zákazníka si před podpisem ověř:
+
+- jaké procesy jsou pro něj kritické,
+- v jaké pracovní době službu používá,
+- zda potřebuje podporu v češtině, angličtině nebo jiném jazyce,
+- jaké incidenty musí hlásit svým klientům nebo regulátorům,
+- kdo je technický a obchodní kontakt,
+- jaký kanál je bezpečný pro citlivé informace,
+- jaké SLA je opravdu nutné a co je jen procurement folklór.
+
+Když zákazník žádá 99,9% dostupnost, zeptej se, pro kterou část služby a v jakém období. Homepage, API, administrace, exporty a fakturační portál nemají vždy stejný dopad. Přesná definice je méně sexy než kulaté číslo, ale výrazně levnější při sporu.
+
+### Měř SLA bez sledování jednotlivců
+
+SLA reporting nepotřebuje profilovat každého uživatele. Potřebuje vědět, kolik tiketů přišlo, jaké měly severity, kdy byla první reakce, kdy se změnil stav, jak často byly porušeny závazky a proč. To jde měřit provozně, agregovaně a s omezenou retencí.
+
+Ukládej hlavně:
+
+- ID tiketu nebo incidentu,
+- účet nebo zákaznickou organizaci,
+- severity a kategorii,
+- čas přijetí, první reakce, eskalace a uzavření,
+- vlastníka nebo tým, ne nutně každé kliknutí support člověka,
+- důvod porušení SLA,
+- preventivní opatření.
+
+Do SLA reportů nepatří celé přepisy interních diskuzí, osobní poznámky o zákazníkovi, produkční data poslaná omylem ani citlivé přílohy. Report má pomoci zlepšit provoz, ne vytvořit archiv trapných detailů na věčné časy.
+
+### Checklist: SLA a support plány
+
+- Máme jasně oddělené dotazy, bugy, incidenty, konzultace a feature requesty?
+- Má každá severity úroveň popis dopadu, reakční dobu a komunikační rytmus?
+- Rozumí zákazník rozdílu mezi reakční dobou a dobou opravy?
+- Odpovídají support sliby reálné kapacitě týmu?
+- Jsou rozdíly mezi tarify provozně obhajitelné a férové?
+- Máme status page nebo jiný jasný kanál pro incidenty?
+- Existují runbooky, eskalace a vlastník komunikace?
+- Umí obchodník vysvětlit SLA bez improvizace?
+- Měříme plnění SLA bez zbytečného sledování jednotlivců?
+- Revidujeme SLA po incidentech, růstu týmu a změnách infrastruktury?
+
+### Šablona SLA karty
+
+```markdown
+## SLA karta: [tarif / zákazník / segment]
+
+### Rozsah
+- Služby zahrnuté do SLA:
+- Služby mimo SLA:
+- Pracovní doba podpory:
+- Podporované jazyky:
+
+### Severity
+| Úroveň | Dopad | Reakční doba | Update rytmus | Vlastník |
+| --- | --- | --- | --- | --- |
+| S1 |  |  |  |  |
+| S2 |  |  |  |  |
+| S3 |  |  |  |  |
+| S4 |  |  |  |  |
+
+### Kanály
+- Primární support kanál:
+- Incident kanál:
+- Bezpečný kanál pro citlivé informace:
+- Co zákazník nemá posílat e-mailem:
+
+### Interní připravenost
+- Monitoring:
+- Runbooky:
+- Eskalace:
+- Přístupy:
+- Status page:
+
+### Privacy-first pravidla
+- Jaká data při podpoře zpracováváme:
+- Kdo k nim má přístup:
+- Retence tiketů a příloh:
+- Audit přístupů do zákaznického účtu:
+
+### Review
+- Datum poslední revize:
+- Porušení SLA za poslední období:
+- Poučení z incidentů:
+- Změny pro další období:
+```
+
+
 ## Pracovní log
+- **2026-09-15:** Doplněna příloha CO o SLA a support plánech bez korporátního kouře: rozlišení podpory, incidentů a konzultací, severity matice, reakční doby, rozdíly mezi tarify, status page, interní připravenost, obchodní kontrola, privacy-first reporting, checklist a SLA karta.
 - **2026-09-15:** Doplněna příloha CN o znalostní bázi a samoobslužné podpoře privacy-first: výběr článků podle reálných dotazů, struktura help článku, odkazy v aplikaci, agregované měření hledání, revize v Definition of Done, checklist a šablona.
 - **2026-09-15:** Doplněna příloha CM o kampaních, UTM a měření bez datového cirkusu: jednotný UTM slovník, kampaně jako rozhodovací karty, agregované měření, RSS/přímé odkazy, atribuce, checklist a šablona kampaně.
 - **2026-09-15:** Doplněna příloha CL o nákupních signálech a lead scoringu bez šmírování: definice dobrého leadu, rozlišení signálu a šumu, fit/intent matice, férové formuláře, nurturing, retence dat, metriky kvality, checklist a šablona.
