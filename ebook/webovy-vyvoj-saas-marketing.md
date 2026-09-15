@@ -15194,7 +15194,191 @@ Trust page není o tom vypadat jako banka s rozpočtem na tři compliance týmy.
 - Co se změnilo:
 ```
 
+
+## Příloha CL: Nákupní signály bez šmírovacího lead scoringu
+
+Lead scoring často začne nevinně: obchod chce vědět, komu zavolat dřív. Jenže za dva týdny z toho bývá bodovací automat, který sleduje každé kliknutí, otevírání e-mailů, návštěvy stránky, pracovní titul, velikost firmy a možná i fázi měsíce. Výsledek? Tým má barevný dashboard, ale pořád neví, kdo má skutečný problém a kdo jen omylem klikl na článek v tramvaji.
+
+Privacy-first přístup je jednodušší: nesnaž se uhodnout myšlenky člověka podle stínů v analytice. Sbírej jen signály, které souvisí s nákupním záměrem, ideálně dobrovolně a transparentně. Cílem není sledovat návštěvníka. Cílem je poznat, kdy má smysl nabídnout pomoc.
+
+### Začni definicí dobrého leadu
+
+Než přidáš první bodovací pravidlo, napiš si, co znamená dobrý lead. Ne podle toho, kdo vypadá zajímavě v CRM, ale podle toho, komu produkt reálně pomůže a kdo může udělat další krok.
+
+Praktická definice může mít čtyři vrstvy:
+
+- **Segment:** typ firmy, velikost týmu, země, jazyk, regulace nebo provozní realita.
+- **Bolest:** konkrétní problém, který produkt řeší a který má měřitelný dopad.
+- **Urgence:** proč to řeší teď, ne někdy v kvartálu „až bude prostor“.
+- **Schopnost koupit:** rozpočet, rozhodovací role, technická připravenost a právní průchodnost.
+
+Příklad: „Dobrý lead je česká nebo slovenská B2B firma s 10–80 lidmi, která řeší ruční předávání zákaznických dat mezi obchodem a provozem, má vlastníka problému a chce pilot do 30 dnů.“ To je obchodní signál. „Návštěvník byl třikrát na pricingu“ je jen stopa, která bez kontextu může znamenat cokoliv včetně toho, že hledal kontakt na podporu.
+
+### Rozliš signál, šum a zvědavost
+
+Ne každý kontakt je lead. Ne každý lead je příležitost. A ne každá návštěva webu je drama o nákupním záměru. Malý tým si ušetří spoustu energie, když rozdělí vstupy do tří kategorií.
+
+- **Silný signál:** člověk požádá o demo, odpoví na kvalifikační otázku, pošle konkrétní use-case, požádá o DPA, ptá se na migraci nebo zapojí rozhodovatele.
+- **Střední signál:** stáhne checklist, přihlásí se na webinář, sleduje opakovaně produktové materiály nebo odpoví na newsletter.
+- **Šum:** anonymní návštěva stránky, otevření e-mailu, obecný like, náhodné kliknutí, návštěva z agregátoru.
+
+Silné signály patří obchodníkovi nebo zakladateli. Střední signály patří do vzdělávacího follow-upu. Šum patří maximálně do agregovaného reportu, ne do osobního profilu návštěvníka.
+
+### Skóruj podle fitu a intentu, ne podle slídění
+
+Pokud scoring opravdu potřebuješ, drž ho malý a vysvětlitelný. Ideální je kombinovat dvě osy: **fit** a **intent**.
+
+**Fit** říká, jestli firma odpovídá produktu:
+
+- obor a typ provozu,
+- velikost týmu,
+- země nebo jazyk,
+- typ problému,
+- kompatibilita s privacy-first provozem a smluvním modelem.
+
+**Intent** říká, jestli teď existuje nákupní pohyb:
+
+- žádost o demo,
+- odpověď na konkrétní otázku,
+- poptávka migrace,
+- dotaz na cenu nebo pilot,
+- zapojení více lidí z firmy,
+- žádost o bezpečnostní nebo právní podklady.
+
+Jednoduchá matice:
+
+| Fit | Intent | Doporučená akce |
+|---|---|---|
+| Vysoký | Vysoký | Osobní reakce do jednoho pracovního dne |
+| Vysoký | Nízký | Vzdělávací obsah, případová studie, pozvánka k otázce |
+| Nízký | Vysoký | Krátká kvalifikace, případně férové odmítnutí nebo doporučení jiné cesty |
+| Nízký | Nízký | Žádný tlak, jen obecný obsah nebo nic |
+
+Tohle je obyčejná tabulka. A právě proto funguje. Malý tým nepotřebuje tajemný algoritmus, který nikdo neumí vysvětlit. Potřebuje jasné pravidlo, komu se věnovat teď.
+
+### Ptej se přímo a slušně
+
+Nejlepší intent data často nevzniknou sledováním, ale otázkou. Formulář nemusí mít dvacet polí. Stačí dvě až čtyři otázky, které pomohou lépe odpovědět.
+
+Dobré otázky:
+
+- „Co chcete zlepšit jako první?“
+- „Jak to řešíte dnes?“
+- „Kolik lidí se toho týká?“
+- „Kdy chcete mít první funkční řešení?“
+- „Je pro vás důležité, aby data zůstala v Evropě?“
+
+Špatné otázky:
+
+- „Jaký je váš roční obrat?“ když to nepotřebuješ pro první odpověď.
+- „Kolik máte zaměstnanců?“ když produkt cílí podle procesu, ne podle velikosti.
+- „Telefon povinně“ u obsahu, který člověk chtěl jen přečíst.
+- „Souhlasíte s marketingovou komunikací?“ schovaný tak, že připomíná právní pastičku.
+
+Privacy-first formulář je fér obchodní dohoda: řekni, proč se ptáš, co s odpovědí uděláš a jak rychle se ozveš.
+
+### Nurturing bez pronásledování
+
+Když lead ještě není připravený, nepotřebuje sedmidílnou e-mailovou honičku. Potřebuje užitečný další krok.
+
+Místo automatické sekvence „den 1 problém, den 3 sociální důkaz, den 5 poslední šance“ použij jednoduchý rytmus:
+
+- pošli slíbený materiál bez zdržování,
+- přidej jednu otázku, která pomůže pochopit kontext,
+- nabídni přímou odpověď člověku, ne jen tlačítko do kalendáře,
+- po týdnu pošli navazující praktický zdroj,
+- pak kontakt nech na dobrovolném odběru, RSS nebo jasné možnosti ozvat se.
+
+Nurturing nemá být skrytý tlak. Má budovat důvěru. Pokud někdo nereaguje, neznamená to, že potřebuje další čtyři připomínky s předmětem „jen se vracím“. Možná má práci. Šokující koncept, já vím.
+
+### Ukládej minimum a maž staré stopy
+
+Lead databáze rychle stárne. Člověk změní roli, firma vyřeší problém, projekt se zruší nebo kontakt nikdy nebyl relevantní. Pokud CRM drží všechno navždy, není to paměť firmy. Je to půda plná krabic bez štítků.
+
+Doporučená pravidla:
+
+- U anonymní webové analytiky používej agregované metriky bez osobních profilů.
+- U formulářů ukládej jen údaje potřebné pro odpověď a kvalifikaci.
+- U neaktivních leadů nastav retenční lhůtu a pravidelný úklid.
+- U newsletteru drž jasný původ souhlasu, odhlášení a účel komunikace.
+- U obchodních poznámek neukládej citlivé osobní detaily, které nesouvisí s nákupem.
+- U exportu nebo smazání měj postup, který zvládne i člověk mimo vývojový tým.
+
+Privacy-first lead management není o tom, že obchod nepracuje s daty. Je o tom, že pracuje s daty, která mají důvod existovat.
+
+### Měř kvalitu leadů podle výsledku
+
+Lead scoring se často pokazí tím, že optimalizuje aktivitu místo obchodní reality. Vysoké skóre v CRM je hezké, ale fakturu nezaplatí. Sleduj proto metriky, které propojují marketing, prodej a produkt.
+
+Užitečné metriky:
+
+- podíl leadů, které odpovídají definici ideálního zákazníka,
+- doba od silného signálu k první lidské reakci,
+- poměr demo callů, které skončí konkrétním dalším krokem,
+- důvody ztracených příležitostí,
+- kvalita pilotů po 30 dnech,
+- počet obchodních výjimek, které produkt nechce dlouhodobě podporovat.
+
+Codyho komentář: Pokud scoring vyhrávají lidé, kteří nejvíc klikají, postavil jsi věrnostní program pro zvědavce. Obchod má hledat problémy, rozpočet a timing. Ne digitální otisky prstů v písku.
+
+### Checklist: lead scoring privacy-first
+
+- Máš jasnou definici dobrého leadu podle segmentu, bolesti, urgence a schopnosti koupit?
+- Rozlišuješ silné signály, střední signály a šum?
+- Umíš vysvětlit každé bodovací pravidlo bez tajemného algoritmu?
+- Používáš fit a intent odděleně?
+- Ptáš se ve formuláři jen na údaje, které pomohou odpovědět nebo kvalifikovat lead?
+- Má každý formulář jasný účel, očekávání a informaci o dalším kroku?
+- Neprofiluješ anonymní návštěvníky na úroveň jednotlivců?
+- Máš retenční pravidla pro staré leady a obchodní poznámky?
+- Umíš doložit původ kontaktu a účel komunikace?
+- Měříš kvalitu leadů podle výsledku, ne podle počtu kliknutí?
+
+### Šablona lead scoring karty
+
+```markdown
+## Lead scoring karta: [segment / produkt]
+
+### Definice dobrého leadu
+- Segment:
+- Typický problém:
+- Urgence:
+- Rozhodovací role:
+- Minimální technický nebo právní fit:
+
+### Silné signály
+- Signál 1:
+- Signál 2:
+- Signál 3:
+- Kdo reaguje:
+- Maximální doba reakce:
+
+### Střední signály
+- Signál 1:
+- Signál 2:
+- Doporučený follow-up:
+- Kdy přestat kontaktovat:
+
+### Co neskórujeme
+- Anonymní chování:
+- Citlivé nebo zbytečné údaje:
+- Signály, které jsou moc šumové:
+
+### Data a retence
+- Jaké údaje ukládáme:
+- Proč je ukládáme:
+- Kdo k nim má přístup:
+- Kdy je mažeme nebo anonymizujeme:
+
+### Kontrola kvality
+- Jak poznáme dobrý lead:
+- Jak poznáme špatné pravidlo:
+- Kdy scoring revidujeme:
+```
+
+
 ## Pracovní log
+- **2026-09-15:** Doplněna příloha CL o nákupních signálech a lead scoringu bez šmírování: definice dobrého leadu, rozlišení signálu a šumu, fit/intent matice, férové formuláře, nurturing, retence dat, metriky kvality, checklist a šablona.
 - **2026-09-15:** Doplněna příloha CK o trust page pro malé privacy-first SaaS: struktura stránky, opakované zákaznické otázky, privacy-first blok, subprocesoři, doložitelná bezpečnostní tvrzení, provozní revize, checklist a šablona.
 - **2026-09-15:** Doplněna příloha CJ o produktové telemetrii bez sledovacího cirkusu: rozhodnutí před eventy, event slovník, pseudonymizace, bezpečná metadata, aktivační moment, Definition of Done, dashboardy, privacy-first technický vzor, checklist a šablona telemetrické karty.
 
