@@ -14530,7 +14530,186 @@ Před prvním větším B2B obchodem si projdi:
 
 Bezpečnostní dotazník není jen administrativní otrava. Je to zrcadlo provozní dospělosti. Když odpovědi bolí, není problém v dotazníku. Problém je v tom, že produkt ještě nemá některé důležité části pojmenované.
 
+## Příloha CH: Role, přístupy a oprávnění bez firemního trezoru na heslo `admin123`
+
+Přístupová práva jsou jedna z těch nudných věcí, které nikoho nezajímají — dokud bývalý dodavatel pořád vidí zákaznická data, obchodník má omylem produkční exporty a junior může smazat fakturační nastavení. V malém SaaS týmu se práva často rozdávají podle věty „dej mu radši všechno, ať to neblokuje“. To je rychlé. A taky je to pozvánka na incident s mašličkou.
+
+Privacy-first provoz nezačíná až u cookie lišty. Začíná tím, kdo ve firmě smí vidět jaká data, proč, na jak dlouho a kdo to kontroluje. GDPR mezi základními principy zpracování uvádí minimalizaci dat, omezení účelu a omezení uložení; prakticky to znamená, že i interní přístupy mají být omezené na to, co je pro danou práci opravdu potřeba. Oficiální text na EUR-Lexu je dobrý právní základ pro tuto disciplínu: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng. EDPB k tomu v pokynech k data protection by design and by default připomíná, že ochrana dat se má řešit už při návrhu prostředků zpracování, ne až po incidentu: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en.
+
+### Proč práva řešit dřív než bolí
+
+U malého produktu se často zdá, že formální správa rolí je zbytečná. Vždyť tým sedí v jednom chatu, všichni se znají a zákazníků je zatím málo. Jenže právě v této fázi vznikají návyky, které se později špatně vytrhávají i s kořeny.
+
+Typické varovné signály:
+
+- každý administrátor má stejná práva bez ohledu na roli,
+- produkční databáze je dostupná „dočasně“ přes sdílený účet,
+- zákaznická podpora vidí více osobních údajů, než potřebuje k řešení ticketu,
+- dodavatel má přístup i po skončení práce,
+- exporty zůstávají v lokálních složkách bez expirace,
+- neexistuje seznam lidí a služeb s produkčním přístupem,
+- offboarding je ruční vzpomínková hra.
+
+Správa přístupů není byrokracie. Je to pojištění, že když se něco pokazí, škoda bude omezená. A také signál pro zákazníky: firma ví, kde jsou data a kdo na ně sahá.
+
+### Začni maticí rolí, ne technickým peklem
+
+Nepotřebuješ hned enterprise IAM vesmír se sedmi konzultanty a grafem, který vypadá jako městská doprava v Tokiu. Potřebuješ jednoduchou matici rolí. Ta popisuje, co kdo potřebuje pro práci.
+
+První verze může mít pět rolí:
+
+- **Owner:** správa účtu, fakturace, bezpečnostní nastavení, přístup k auditnímu logu.
+- **Admin:** nastavení produktu a uživatelů, ale ne nutně billing nebo mazání workspace.
+- **Member:** běžná práce v aplikaci bez správy kritických nastavení.
+- **Support:** omezený pohled na zákaznické účty pro řešení požadavků, ideálně s důvodem a časovým omezením.
+- **Read-only auditor:** čtení konfigurace, logů nebo reportů bez možnosti měnit data.
+
+U každé role si napiš tři věty: k čemu slouží, co výslovně nesmí a jak se schvaluje. Pokud to neumíš vysvětlit v běžné češtině, role je moc široká nebo moc složitá.
+
+Příklad:
+
+- **Role:** Support.
+- **Smí:** zobrazit stav účtu, poslední systémové události, konfiguraci relevantní k ticketu.
+- **Nesmí:** exportovat všechna data, měnit billing, číst citlivý obsah bez schváleného důvodu.
+- **Kontrola:** přístup se loguje a měsíčně kontroluje vedoucí podpory nebo zakladatel.
+
+### Nejmenší nutné oprávnění v praxi
+
+Princip nejmenších oprávnění zní jednoduše: dej člověku jen to, co potřebuje. V praxi je těžký proto, že pohodlí pořád našeptává „dej mu admina, vyřešíme později“. Později je ovšem bájná země, kde žije i dokonalá dokumentace a nulový technický dluh.
+
+Praktický postup:
+
+1. **Popiš úkol.** Například „vyřešit fakturační dotaz zákazníka“.
+2. **Vyjmenuj potřebná data.** Fakturační stav, tarif, kontaktní e-mail, historie platebních událostí.
+3. **Vyškrtni zbytek.** Obsah zákaznických projektů, interní poznámky, export všech uživatelů.
+4. **Navrhni obrazovku nebo API scope.** Support nepotřebuje plný administrátorský dashboard.
+5. **Přidej audit.** Kdo se díval, kdy, z jakého ticketu a s jakým výsledkem.
+6. **Nastav expiraci.** Dočasný přístup nemá přežít důvod, kvůli kterému vznikl.
+
+Výborný detail je tlačítko „požádat o dočasný přístup“ místo trvalého rozšíření role. Člověk uvede důvod, systém nastaví časové okno a událost skončí v logu. Není to nedůvěra k týmu. Je to ochrana týmu před zbytečným rizikem.
+
+### Produkční přístupy odděl od běžné práce
+
+Největší rozdíl mezi hobby projektem a dospělým SaaS není počet microservices. Je to schopnost říct: produkce není hřiště. Produkční přístupy musí být oddělené, pojmenované a kontrolované.
+
+Doporučený základ:
+
+- osobní účty místo sdílených loginů,
+- vícefaktorové ověření pro administraci, repozitáře, hosting, databáze a platební systémy,
+- oddělení produkce, stagingu a lokálního vývoje,
+- zákaz přímých ručních zásahů do produkční databáze bez záznamu,
+- read-only přístupy jako výchozí volba pro diagnostiku,
+- časově omezené emergency přístupy,
+- jednoduchý runbook pro situace, kdy je potřeba práva rychle navýšit.
+
+Pokud musí někdo sáhnout do produkce ručně, nemá to být tajná operace v terminálu. Stačí jednoduchý záznam: kdo, kdy, proč, jaký ticket nebo incident, co se změnilo, jak se ověřil výsledek a zda je potřeba follow-up.
+
+### Přístupy služeb a integrací
+
+Lidé nejsou jediní uživatelé. Přístupy mají i integrace, API tokeny, cron úlohy, webhooky, analytika, monitoring a interní skripty. Ty bývají nebezpečnější právě proto, že se na ně zapomíná.
+
+Pro každý technický přístup eviduj:
+
+- název služby nebo integrace,
+- vlastníka v týmu,
+- účel,
+- rozsah oprávnění,
+- datum vytvoření,
+- datum poslední kontroly,
+- způsob rotace nebo zneplatnění,
+- prostředí, kde se používá,
+- kam tečou data.
+
+Privacy-first pravidlo: token nesmí být silnější než scénář, který obsluhuje. Pokud integrace jen zapisuje event „formulář odeslán“, nepotřebuje číst databázi zákazníků. Pokud webhook posílá notifikaci o faktuře, neposílej do něj celý zákaznický profil jen proto, že objekt už existuje v paměti.
+
+### Offboarding jako checklist, ne jako vzpomínání u kávy
+
+Odchody lidí, dodavatelů a partnerů jsou normální. Riziko vzniká, když offboarding závisí na tom, kdo si na co vzpomene. Jeden zapomenutý účet v hostingu, helpdesku nebo repozitáři může být dražší než celé odpoledne dokumentace.
+
+Offboarding checklist:
+
+- vypnout přístup do e-mailu, chatu a interní dokumentace,
+- odebrat přístup do repozitářů, CI/CD a hostingů,
+- zkontrolovat databázové a produkční účty,
+- zrušit nebo převzít API tokeny vytvořené danou osobou,
+- převést vlastnictví dokumentů, projektů a automatizací,
+- zkontrolovat zařízení a lokální kopie dat,
+- zneplatnit sdílené tajné hodnoty, pokud k nim osoba měla přístup,
+- zaznamenat datum dokončení a odpovědnou osobu.
+
+U dodavatelů přidej ještě datum konce spolupráce už při vytváření přístupu. Systém nebo kalendář má připomenout revizi. Dočasný člověk nemá mít trvalá práva jen proto, že faktura byla zaplacená včas.
+
+### Auditní log, který pomáhá, ne špehuje
+
+Auditní log má chránit zákazníka, tým i produkt. Nemá být interní reality show. Loguj hlavně akce s dopadem: přihlášení do administrace, změny rolí, exporty, mazání, změny billing údajů, přístup supportu k zákaznickému účtu, změny integrací a bezpečnostní nastavení.
+
+Dobrý auditní záznam obsahuje:
+
+- kdo akci provedl,
+- kdy se stala,
+- v jakém účtu nebo workspace,
+- jaký typ akce proběhl,
+- jaký byl důvod nebo navázaný ticket u citlivých akcí,
+- technický identifikátor požadavku pro dohledání v logách.
+
+Naopak opatrně s ukládáním příliš detailního obsahu. Auditní log nemá být druhá databáze osobních údajů bez retenčních pravidel. I logy potřebují vlastní účel, omezený přístup a dobu uchování.
+
+### Měsíční revize přístupů
+
+Revize přístupů je nudná, takže musí být krátká. Dlouhá revize se odloží, krátká se udělá. Pro malý tým stačí jednou měsíčně třicetiminutová kontrola.
+
+Agenda:
+
+- kdo má produkční přístup a proč,
+- kdo má administrátorskou roli v aplikaci,
+- které dočasné přístupy měly expirovat,
+- jaké nové integrace vznikly,
+- které tokeny nebo účty nemají jasného vlastníka,
+- zda odešel člověk nebo dodavatel,
+- zda některá role opakovaně naráží na chybějící oprávnění.
+
+Poslední bod je důležitý. Když lidé pořád žádají výjimky, nemusí být problém v lidech. Možná role neodpovídají realitě produktu. Revize není jen mazání přístupů; je to zpětná vazba pro design administrace.
+
+### Šablona přístupové karty
+
+```markdown
+## Přístupová karta
+
+- Oblast: [produkce / administrace / databáze / hosting / analytika / support / billing]
+- Vlastník: [jméno nebo role]
+- Účel přístupu: [konkrétní pracovní scénář]
+- Typ přístupu: [read-only / write / admin / emergency]
+- Prostředí: [produkce / staging / lokální / externí služba]
+- Data, která jsou viditelná: [stručný výčet]
+- Zakázané použití: [co role nesmí dělat]
+- Schvalování: [kdo a kdy schvaluje]
+- Expirace nebo revize: [datum / měsíčně / po skončení projektu]
+- Audit: [kde se loguje]
+- Offboarding krok: [jak se přístup ruší]
+```
+
+Tuto kartu vyplň pro každou citlivou oblast. Nemusí být dokonalá. Musí být dostatečně jasná, aby nový člověk pochopil, proč přístup existuje a kdy má zmizet.
+
+### Checklist: Přístupy pod kontrolou
+
+- Má každý člen týmu osobní účet místo sdíleného loginu?
+- Používáme MFA u administrace, repozitářů, hostingu, databází a plateb?
+- Existuje matice rolí pro aplikaci i interní nástroje?
+- Má support omezený a auditovaný přístup k zákaznickým datům?
+- Umíme dočasně navýšit práva bez trvalé výjimky?
+- Evidujeme API tokeny, webhooky a servisní účty?
+- Má každý technický přístup vlastníka a účel?
+- Probíhá měsíční revize produkčních a admin práv?
+- Má offboarding checklist jasného vlastníka?
+- Mají auditní logy vlastní retenci a omezený přístup?
+- Dokážeme zákazníkovi lidsky vysvětlit, kdo ve firmě může vidět jeho data?
+
+> Codyho komentář: Přístupová práva jsou jako klíče od kanceláře. Když má každý generální klíč a nikdo neví, kdo ho okopíroval, není to startupová rychlost. Je to escape room pro budoucí incident.
+
 ## Pracovní log
+
+- **2026-09-15:** Doplněna příloha CH o rolích, přístupech a oprávněních: matice rolí, nejmenší nutná oprávnění, produkční přístupy, servisní účty, offboarding, auditní logy, měsíční revize, checklist a šablona přístupové karty.
+
 
 - **2026-09-15:** Doplněna příloha CG o bezpečnostních dotaznících a procurementu: bezpečnostní složka, standardní odpovědi, práce s výjimkami, privacy-first argumentace, bezpečnostní stránka, šablona odpovědi a checklist.
 
