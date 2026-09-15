@@ -14211,7 +14211,171 @@ U partnerských integrací si nastav datum revize. Například jednou za čtvrtl
 ```
 
 
+## Příloha CF: Případové studie bez nafouknutých grafů a zákaznického stripteasu
+
+Případová studie má být důkaz, ne ohňostroj. U malého SaaS nebo webového studia často nepotřebuješ dvacetistránkový PDF artefakt s fotkou usměvavého týmu u tabule. Potřebuješ srozumitelný příběh: kdo měl jaký problém, co se změnilo, co zůstalo těžké a proč tomu může podobný zákazník věřit.
+
+Dobrá case study prodává klidněji než reklama, protože neříká „jsme skvělí“. Ukazuje rozhodnutí, postup a dopad. Špatná case study je naopak katalog superlativů, který zákazník pozná na tři kilometry. A pak už jen hledá tlačítko zpět. Internet je v tomhle nemilosrdný, skoro jako účetní před DPH termínem.
+
+### Začni výběrem správného příběhu
+
+Ne každý spokojený zákazník je dobrá případová studie. Hledej kombinaci tří věcí: čitelný problém, konkrétní změna a podobnost s budoucími zákazníky. Pokud příběh nejde vysvětlit bez interní hantýrky, bude těžké ho použít jako důkaz.
+
+Silný kandidát má obvykle tyto znaky:
+
+- zákazník před spoluprací řešil bolest, kterou dobře zná i tvůj trh,
+- existuje jasný stav „před“ a „po“,
+- výsledek nejde připsat jen sezóně, náhodě nebo jedné kampani,
+- zákazník je ochotný schválit konkrétní formulace,
+- příběh ukazuje typ práce, kterou chceš dělat znovu.
+
+Příklad: „Pomohli jsme firmě zlepšit web“ je slabé. „Servisní firma měla poptávky rozptýlené mezi telefonem, e-mailem a formulářem; po redesignu a CRM napojení má každý lead vlastní stav, odpovědného člověka a jasnou další akci“ už je obchodně použitelný příběh.
+
+### Odděl důkaz od dekorace
+
+Logo zákazníka není důkaz. Je to orientační značka. Důkaz je popsaný mechanismus změny: co nefungovalo, co jste udělali, proč právě to, jak se změnila práce zákazníka a co byste dnes udělali jinak.
+
+U každé studie si napiš minimálně tři vrstvy důkazu:
+
+- **Procesní důkaz:** „Zkrátili jsme počet kroků v poptávce ze šesti na tři.“
+- **Kvalitativní důkaz:** „Obchodník už nemusí dohledávat kontext v e-mailu.“
+- **Kvantitativní důkaz:** „Tým zvládne vyřídit víc poptávek bez další administrativy.“
+
+Když nemáš tvrdá čísla, nepředstírej je. Raději použij přesný popis změny pracovního postupu. Čestná věta „zákazník nesdílí interní čísla, proto ukazujeme změnu procesu“ působí důvěryhodněji než graf bez metodiky.
+
+### Privacy-first souhlas není formalita
+
+Případová studie často obsahuje jména lidí, název firmy, citace, screenshoty, pracovní postupy, metriky a někdy i nepříjemné přiznání typu „předtím jsme měli chaos“. To jsou citlivé obchodní informace, i když nejde o zvláštní kategorii osobních údajů.
+
+Proto nestačí věta „můžeme vás zmínit na webu?“ Potřebuješ konkrétní schválení:
+
+- kde bude studie publikovaná,
+- jestli lze použít logo,
+- kdo bude citovaný jménem,
+- zda se smí ukázat screenshoty,
+- která čísla jsou veřejná a která jen interní,
+- jak dlouho může být studie online,
+- koho kontaktovat při budoucí aktualizaci nebo stažení.
+
+Privacy-first přístup nebrzdí marketing. Jen zabraňuje tomu, aby se z důvěry stal exportní soubor pro landing page.
+
+### Struktura, která neuspí čtenáře
+
+Dobrá případová studie má rytmus. Čtenář má rychle pochopit, jestli je to relevantní pro něj. Nepiš chronologii celého projektu od první schůzky po poslední faviconu. Piš rozhodovací příběh.
+
+Použitelná struktura:
+
+1. **Kontext:** kdo je zákazník a v jaké situaci byl.
+2. **Problém:** co konkrétně brzdilo obchod, provoz nebo tým.
+3. **Rozhodnutí:** proč se zvolil daný přístup, ne všechny možné přístupy.
+4. **Řešení:** co se reálně postavilo, zjednodušilo nebo změnilo.
+5. **Dopad:** jak se změnila práce, náklady, rychlost, kvalita nebo důvěra.
+6. **Poučení:** co by si z toho měl odnést podobný zákazník.
+7. **Další krok:** nenápadná výzva k akci podle tématu studie.
+
+Každá část má být konkrétní. „Implementovali jsme moderní řešení“ je mlha. „Nahradili jsme tři formuláře jedním kvalifikačním tokem a lead rovnou zapisujeme do obchodního pipeline“ je informace.
+
+### Screenshoty ukazuj jako pracovní důkaz
+
+Screenshot není výplň mezi odstavci. Má dokazovat konkrétní změnu. U SaaS produktu může ukázat jednodušší onboarding, prázdný stav, export, nastavení oprávnění nebo dashboard. U webu může ukázat novou navigaci, srozumitelnější pricing, lepší formulář nebo obsahový rozcestník.
+
+Před publikací screenshoty vyčisti:
+
+- nahraď osobní údaje realistickými, ale fiktivními daty,
+- skryj interní názvy projektů, částky, tokeny a e-maily,
+- neukazuj zákaznické seznamy ani support tickety,
+- ověř, že URL, query parametry a metadata neprozrazují víc než samotný obrázek,
+- používej vlastní hostované obrázky, ne externí trackovací embed.
+
+Pokud screenshot nejde bezpečně anonymizovat, vytvoř rekonstrukci. Přiznej, že jde o ilustrační verzi podle reálného workflow. To je lepší než pixelově rozmazaný obrázek, který stejně prozradí půlku firmy.
+
+### Citace má být krátká a ověřitelná
+
+Citace zákazníka nemá nahradit argument. Má ho podpořit. Nejlepší citace říká konkrétní změnu lidským jazykem: „Dřív jsme leady dohledávali ručně, teď vidíme další krok hned po odeslání formuláře.“
+
+Vyhni se citacím typu „spolupráce byla skvělá“. To je hezké, ale obchodně měkké jako rohlík třetí den. Lepší je citace, která ukáže dopad na práci, rozhodování nebo zákaznickou zkušenost.
+
+Před publikací pošli zákazníkovi přesné znění citace, kontext kolem ní a náhled celé studie. Neschvaluj jen větu vytrženou z dokumentu. Člověk má právo vidět, v jakém příběhu jeho slova žijí.
+
+### Distribuce bez leadového vězení
+
+Případová studie nemusí být zavřená za formulářem. U privacy-first značky je často silnější dát ji veřejně na web, přidat kanonickou URL, RSS položku a poslat přímý odkaz lidem, pro které je relevantní.
+
+Jednu studii můžeš rozdělit do více formátů:
+
+- krátká veřejná webová verze,
+- interní obchodní one-pager,
+- technický rozbor rozhodnutí,
+- newsletter / RSS shrnutí,
+- slide pro demo call,
+- anonymizovaný checklist z projektu.
+
+Nepotřebuješ sledovat každé otevření a pohyb kurzoru. Stačí měřit, jestli studie pomáhá v obchodním procesu: přináší kvalifikované dotazy, zkracuje vysvětlování, podporuje důvěru ve správném segmentu a vrací se k ní obchod i support.
+
+### Codyho komentář
+
+Případová studie je nejdůstojnější forma marketingu, když je poctivá. Ukazuje práci, ne pózu. Pokud se bojíš napsat, co bylo na projektu těžké, píšeš reklamu. Pokud umíš přiznat limity a ukázat rozhodnutí, píšeš důkaz. A důkaz je v B2B dražší než pět sloganů s gradientem.
+
+### Checklist: případová studie privacy-first
+
+- [ ] Vybraný příběh odpovídá typu zákazníka, kterého chceme získávat.
+- [ ] Umíme popsat stav před změnou bez interní mlhy.
+- [ ] Máme jasně pojmenovaný mechanismus řešení, ne jen seznam funkcí.
+- [ ] Dopad je doložen číslem, procesní změnou nebo konkrétním kvalitativním důkazem.
+- [ ] Zákazník schválil použití názvu, loga, citací, screenshotů a metrik.
+- [ ] Screenshoty neobsahují osobní údaje, interní názvy, tokeny, e-maily ani citlivá obchodní data.
+- [ ] Studie neprozrazuje bezpečnostní detaily, které by mohly zákazníka poškodit.
+- [ ] Existuje veřejná URL bez povinného formuláře, pokud tomu nebrání smluvní důvody.
+- [ ] Studie obsahuje konkrétní další krok pro podobného zákazníka.
+- [ ] Máme nastavené datum revize nebo stažení.
+
+### Šablona případové studie
+
+```markdown
+## Případová studie: [zákazník / anonymizovaný segment]
+
+### Kontext
+- Segment zákazníka:
+- Velikost týmu:
+- Situace před projektem:
+- Proč se problém řešil právě teď:
+
+### Problém
+- Hlavní bolest:
+- Dopad na obchod / provoz / zákazníky:
+- Co nefungovalo v původním řešení:
+- Rizika neřešení:
+
+### Řešení
+- Zvolený přístup:
+- Co jsme udělali v první fázi:
+- Co jsme záměrně neřešili:
+- Klíčová rozhodnutí:
+
+### Dopad
+- Procesní změna:
+- Kvalitativní důkaz:
+- Kvantitativní údaj, pokud je veřejný:
+- Citace zákazníka:
+
+### Privacy-first kontrola
+- Schválené použití loga:
+- Schválené citace:
+- Povolené screenshoty:
+- Anonymizovaná data:
+- Datum revize:
+
+### Poučení
+- Co si má odnést podobný zákazník:
+- Kdy tento přístup dává smysl:
+- Kdy by byl zbytečně složitý:
+- Doporučený další krok:
+```
+
+
 ## Pracovní log
+
+- **2026-09-15:** Doplněna příloha CF o případových studiích bez nafouknutých grafů: výběr příběhu, důkazy, privacy-first souhlas, struktura studie, bezpečné screenshoty, citace, distribuce bez lead gate, checklist a šablona.
 
 - **2026-09-15:** Doplněna příloha CE o partnerských integracích bez datového pašování: typy partnerství, business case, nejmenší bezpečné rozhraní, datová mapa, oprávnění, smluvní hranice, marketplace listing, měření dopadu, ukončení integrace, checklist a šablona integrační karty.
 
