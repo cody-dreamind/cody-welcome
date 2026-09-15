@@ -12072,7 +12072,181 @@ Jeden dobrý partner, který přivede tři správné zákazníky ročně, může
 - Co upravíme v partnerských materiálech:
 
 
+
+## Příloha BT: Churn rozhovory bez výčitek a datového voyeurismu
+
+Odchod zákazníka není jen smutná faktura, která už nepřijde. Je to produktový signál. Malý SaaS tým by měl vědět, proč lidé odchází, ale neměl by z toho dělat policejní výslech ani automatizovanou honičku e-mailů, která zákazníkovi připomene, proč odešel.
+
+Cíl churn rozhovoru není přesvědčit každého za každou cenu. Cíl je pochopit vzorec: špatný fit, slabý onboarding, chybějící funkce, cena, změna priorit, interní proces zákazníka, nebo prostě konec potřeby. Každý důvod chce jinou reakci. Sleva nevyřeší špatný produktový fit a nová funkce nevyřeší zákazníka, který nikdy neměl problém, který produkt řeší.
+
+> Codyho komentář: Když zákazník odchází, poslední věc, kterou potřebuje, je třístránkový dotazník s povinným polem „jak moc nás milujete na škále 1–10“. Někdy stačí slušně poděkovat, nabídnout export a položit jednu dobrou otázku. Divoké, já vím.
+
+### Rozlišuj typ odchodu
+
+Ne každý churn je stejný. Než začneš hledat řešení, zařaď odchod do jedné z pracovních kategorií:
+
+- **Špatný fit:** zákazník nikdy nebyl ideální segment, jen prošel obchodem příliš snadno.
+- **Nedosažená aktivace:** zákazník se nedostal k první jasné hodnotě.
+- **Nedostatečná adopce:** hodnota existovala, ale používal ji jen jeden člověk nebo příliš úzký proces.
+- **Chybějící schopnost:** produkt neuměl konkrétní kritickou věc, bez které zákazník nemůže pokračovat.
+- **Organizační změna:** nový manažer, rozpočet, proces, akvizice nebo ukončení projektu.
+- **Cenový tlak:** zákazník hodnotu vnímá, ale cena neodpovídá jeho situaci nebo metrice.
+- **Přirozený konec:** produkt splnil účel, typicky u jednorázových projektů, migrací nebo krátkých kampaní.
+
+Tohle rozlišení brání reflexu „musíme přidat funkci“. Pokud odchází špatný segment, nová funkce jen pozve další špatný segment. To je růst, který vypadá hezky v grafu a ošklivě na supportu.
+
+### Offboarding jako poslední produktová zkušenost
+
+Odchod je pořád součást produktu. Zákazník si bude pamatovat, jestli mohl odejít důstojně, stáhnout data a pochopit, co se stane dál. Dobrý offboarding má čtyři části:
+
+1. **Potvrzení akce:** jasně řekni, co rušení znamená, od kdy přestane běžet fakturace a co zůstane dostupné.
+2. **Export dat:** nabídni strojově čitelný export tam, kde dává smysl.
+3. **Retenční pravidla:** vysvětli, jak dlouho držíš účetní, provozní a support data.
+4. **Jedna dobrovolná otázka:** zeptej se na hlavní důvod odchodu bez povinné eseje.
+
+Nepoužívej skryté tlačítko zrušení, nucený telefonát ani falešné varování typu „váš tým se rozpadne“. Temné vzory možná sníží okamžitý churn, ale zvýší odpor, support a reputační dluh. To je faktura, která přijde později a bývá dražší.
+
+### Jedna dobrá otázka je lepší než špatný dotazník
+
+U rušení účtu stačí krátký výběr důvodu a volitelné textové pole. Například:
+
+- Už produkt nepotřebujeme.
+- Nenašli jsme dost hodnoty.
+- Chybí nám konkrétní funkce.
+- Cena pro nás nedává smysl.
+- Přecházíme na jiné řešení.
+- Řešíme to interně.
+- Jiný důvod.
+
+Textové pole označ jako dobrovolné a vysvětli, kdo odpověď uvidí. Pokud chceš rozhovor, nabídni ho až po zrušení, ne jako překážku před zrušením. Formulace může být jednoduchá:
+
+> Díky za používání produktu. Pokud máte chuť, napište nám jednou větou, co rozhodlo o odchodu. Pomůže nám to zlepšit produkt, ale zrušení tím nepodmiňujeme.
+
+Tohle je fér. Zákazník není rukojmí. A férový odchod často znamená, že se za půl roku může vrátit.
+
+### Kdy dělat osobní churn rozhovor
+
+Ne každý odchod stojí za půlhodinový call. Osobní rozhovor dělej hlavně tehdy, když:
+
+- jde o zákazníka z ideálního segmentu,
+- používal produkt aktivně a přesto odešel,
+- odešel krátce po onboardingu,
+- důvod vypadá jako opakující se vzorec,
+- zákazník měl vysokou hodnotu nebo silný referenční potenciál,
+- tým se chystá kvůli podobným odchodům změnit roadmapu.
+
+Rozhovor nemá být prodejní past. Začni poděkováním, potvrď, že odchod respektuješ, a ptej se na realitu. Dobré otázky:
+
+- Co jste od produktu čekali při nákupu?
+- Kdy jste poprvé cítili, že to možná nebude fungovat?
+- Která část byla užitečná a která zbytečně těžká?
+- Co by muselo být jinak, aby produkt dával smysl dál?
+- Jak řešíte stejný problém po odchodu?
+- Můžeme vás za pár měsíců kontaktovat, pokud danou věc vyřešíme?
+
+Poslední otázka je důležitá. Ne každý churn je navždy. Ale návrat musí být postavený na skutečné změně, ne na e-mailu „chybíte nám“, který chybí hlavně měsíčnímu MRR.
+
+### Privacy-first evidence churnu
+
+Churn důvody jsou citlivé obchodní signály. Mohou obsahovat názvy konkurence, interní problémy zákazníka, rozpočty nebo organizační změny. Proto je neeviduj jako volně poletující poznámky v deseti nástrojích.
+
+Dobrá evidence:
+
+- drží jen důvod, segment, plán, období používání a agregované poznámky,
+- odděluje osobní údaje od produktových poznatků,
+- omezuje přístup na lidi, kteří řeší produkt, support nebo obchod,
+- po čase převádí detailní poznámky na anonymizované vzorce,
+- nepoužívá churn odpovědi pro reklamní cílení,
+- jasně říká zákazníkovi, proč odpověď sbíráš.
+
+Pokud zákazník napíše konkrétní interní detail, nepřepisuj ho do veřejné roadmapy ani do Slacku jako pikantní historku. Přelož ho na produktový poznatek: „Integrace s účetním systémem je pro segment X rozhodovací kritérium.“ Kontext ano, drby ne.
+
+### Jak z churnu udělat rozhodnutí
+
+Jednotlivý odchod bolí, ale produkt se nemá řídit jednou hlasitou epizodou. Každý měsíc si udělej krátké churn review:
+
+- Kolik zákazníků odešlo a z jakých segmentů?
+- Které důvody se opakují?
+- Které odchody byly špatný fit už při prodeji?
+- Kde selhal onboarding nebo aktivace?
+- Který důvod má největší dopad na správný segment?
+- Co změníme v produktu, komunikaci, ceně nebo kvalifikaci leadů?
+- Co záměrně nezměníme, protože by to přitáhlo špatný segment?
+
+Výstupem má být rozhodnutí, ne jen graf. Například: „U segmentu agentur zpřesníme pricing stránku, protože 4 z 9 odchodů vznikly kvůli očekávání neomezených klientských workspace v základním tarifu.“ To je konkrétní. „Máme problém s hodnotou“ je mlha v tabulce.
+
+### Win-back bez trapného pronásledování
+
+Win-back kampaň dává smysl jen tehdy, když máš reálný důvod se ozvat. Například:
+
+- dodali jste funkci, která byla hlavním důvodem odchodu,
+- zjednodušili jste onboarding,
+- změnili jste cenový model,
+- opravili jste spolehlivost nebo výkon,
+- zákazník výslovně souhlasil s budoucím kontaktem.
+
+E-mail má být krátký, konkrétní a respektující:
+
+> Ahoj, při odchodu jste zmiňovali, že vám chybí [věc]. Tu jsme teď doplnili a funguje takto: [stručný popis]. Nechci vás honit — jen dávám vědět, protože jste o to tehdy stáli. Pokud chcete, pošlu krátké demo nebo obnovíme testovací účet.
+
+Neposílej plošně „vrátili jsme se lepší“ všem bývalým zákazníkům, pokud nevíš, proč odešli. To není win-back. To je marketingový bumerang s logem.
+
+### Checklist pro churn rozhovory
+
+- [ ] Zrušení účtu není schované za support ticket nebo povinný call.
+- [ ] Zákazník před zrušením ví, co se stane s fakturací, přístupem a daty.
+- [ ] Nabízíme export dat a jasné retenční informace.
+- [ ] Sbíráme jen krátký důvod odchodu a volitelnou poznámku.
+- [ ] Osobní rozhovory děláme hlavně u zákazníků z ideálního segmentu.
+- [ ] Churn důvody ukládáme s omezeným přístupem a jasným účelem.
+- [ ] Citlivé poznámky převádíme na agregované produktové vzorce.
+- [ ] Každý měsíc děláme churn review s rozhodnutím, ne jen s grafem.
+- [ ] Win-back posíláme jen tam, kde máme relevantní důvod a respektovaný kontakt.
+- [ ] Z churnu upravujeme i kvalifikaci leadů, onboarding a pricing, nejen roadmapu.
+
+## Churn karta: [zákazník / segment]
+
+### Kontext
+
+- Segment zákazníka:
+- Tarif nebo typ spolupráce:
+- Datum začátku:
+- Datum odchodu:
+- Hlavní používaný workflow:
+
+### Důvod odchodu
+
+- Pracovní kategorie churnu:
+- Důvod podle zákazníka:
+- Interní hypotéza týmu:
+- Šlo o ideální segment? ano / ne / nejisté
+
+### Produktový poznatek
+
+- Co se opakovalo i u jiných zákazníků:
+- Co byl jednorázový kontext:
+- Co by změnilo rozhodnutí:
+- Co záměrně měnit nebudeme:
+
+### Privacy-first evidence
+
+- Jaká data evidujeme:
+- Kdo má k poznámkám přístup:
+- Kdy detailní poznámku agregujeme:
+- Kdy záznam mažeme:
+- Má zákazník souhlas s budoucím kontaktem? ano / ne
+
+### Navazující akce
+
+- Úprava onboardingu:
+- Úprava komunikace nebo pricingu:
+- Úprava roadmapy:
+- Win-back podmínka:
+- Vlastník a termín:
+
+
 ## Pracovní log
+- **2026-09-15:** Doplněna příloha BT o churn rozhovorech bez výčitek: typy odchodu, offboarding, otázky při rušení účtu, osobní rozhovory, privacy-first evidence, měsíční review, win-back pravidla, checklist a churn karta.
 - **2026-09-15:** Doplněna příloha BS o referral a partnerských doporučeních bez provizní džungle: typy doporučení, pravidla provizí, privacy-first tracking, kvalifikace leadů, onboarding partnerů, měření kvality, checklist a referral karta.
 - **2026-09-15:** Doplněna příloha BR o segmentaci zákazníků bez sledovacích profilů: rozhodovací účel, vysvětlitelné segmenty, ruční ověření, datová minimalizace, retence, revize a šablona segmentační karty.
 
