@@ -13486,7 +13486,183 @@ Můj pohled: nejlepší nápověda je ta, kterou zákazník skoro nepotřebuje, 
 - Další kontrola:
 ```
 
+## Příloha CB: Webináře a produktové vzdělávání bez leadového cirkusu
+
+Webinář může být dobrý obchodní nástroj. Nebo také hodinová past, kde firma nejdřív sebere telefonní číslo, velikost týmu, obrat, oblíbenou barvu psa a pak dvacet minut čte slidy o sobě. Pokud chceš vzdělávat trh, budovat důvěru a zároveň držet privacy-first hodnotu, webinář nesmí být jen přestrojený formulář na lov kontaktů.
+
+Produktové vzdělávání má pomáhat lidem udělat lepší rozhodnutí. Někdy z nich budou zákazníci, někdy ne. To je v pořádku. Důvěra se často staví právě tím, že člověku dáš užitečnou odpověď i bez toho, aby okamžitě vytáhl kartu.
+
+### Začni učebním cílem, ne registračním formulářem
+
+První otázka není „kolik leadů získáme?“. První otázka je: co bude účastník po webináři umět, rozhodnout nebo zkontrolovat?
+
+Dobré cíle jsou konkrétní:
+
+- účastník si zkontroluje svůj launch checklist,
+- zakladatel si spočítá první SaaS pricing metriku,
+- marketingový tým pozná tři chyby v landing page,
+- provozní člověk si připraví datovou mapu pro nový nástroj,
+- produktový tým rozhodne, jestli má smysl build, buy nebo ruční proces.
+
+Slabý cíl je „představíme naši platformu“. To může být část programu, ale není to vzdělávání. Je to demo v kabátu, který si půjčil brýle.
+
+### Vyber formát podle důvěry, ne podle módnosti
+
+Ne každý obsah musí být živý webinář. Malý tým má omezenou kapacitu, takže formát vybírej podle práce, kterou má obsah udělat:
+
+- **Krátká živá dílna:** nejlepší pro společné vyplnění checklistu nebo ukázku workflow.
+- **Nahraný průvodce:** vhodný pro opakované téma, které nechceš vysvětlovat desetkrát týdně.
+- **Otevřená office hours:** dobré pro otázky, validaci problémů a komunitní důvěru.
+- **E-mailový kurz:** funguje pro postupné vzdělávání bez nutnosti sledovat člověka napříč webem.
+- **Veřejný článek s videem:** nejlepší dlouhodobý asset pro SEO, support a sales enablement.
+
+Codyho komentář: Pokud webinář existuje jen proto, aby vznikla nahrávka, možná rovnou natoč nahrávku a ušetři všem kalendářový ping-pong. Lidé ti budou vděční, i když to nikdy nepřiznají nahlas.
+
+### Registrace má sbírat jen to, co opravdu použiješ
+
+Privacy-first registrace je krátká a poctivá. Pro většinu veřejných vzdělávacích akcí stačí e-mail a případně jméno. Pokud potřebuješ segment, zeptej se volitelně a lidsky:
+
+- „Co řešíte nejvíc?“
+- „Jste spíš zakladatel, marketér, vývojář nebo provoz?“
+- „Chcete dostat po akci checklist?“
+
+Nevyžaduj telefon, velikost firmy, obrat ani název firmy jen proto, že to umí CRM. Každé povinné pole musí projít otázkou: pomůže to účastníkovi získat lepší vzdělávací zkušenost, nebo jen krmí naši zvědavost?
+
+Praktické pravidlo: pokud na základě pole neděláš konkrétní užitečnou akci do sedmi dnů, pole do registrace nepatří.
+
+### Pozvánka nesmí slibovat produktovou pohádku
+
+Dobrá pozvánka řekne:
+
+- pro koho akce je,
+- co si člověk odnese,
+- jak dlouho to potrvá,
+- zda bude nahrávka,
+- kdo dostane kontakt po registraci,
+- jak se dá odhlásit z navazující komunikace.
+
+Špatná pozvánka slibuje „revoluci“, „tajné frameworky“ a „jedinečnou příležitost“, která se další týden opakuje úplně stejně. Tlak sice může zvednout registrace, ale často sníží kvalitu publika. A hlavně: špatná očekávání vytváří špatné obchodní rozhovory.
+
+Ukázka poctivé pozvánky:
+
+> Za 45 minut projdeme praktický checklist pro první privacy-first SaaS launch v Evropě. Ukážu, jak zkontrolovat landing page, registraci, analytiku, export dat a základní support proces. Po registraci pošlu odkaz na akci a následně checklist. Žádné předávání kontaktu třetím stranám, žádný remarketingový ohňostroj.
+
+### Obsah stav jako pracovní sešit
+
+Nejlepší vzdělávací akce není přednáška. Je to řízená práce. Struktura může být jednoduchá:
+
+1. **Kontext:** proč téma bolí a komu se vyplatí ho řešit.
+2. **Rámec:** jednoduchý model nebo rozhodovací strom.
+3. **Ukázka:** konkrétní příklad z praxe, ne abstraktní slajd.
+4. **Práce účastníka:** krátký úkol, checklist nebo rozhodnutí.
+5. **Otázky:** prostor pro realitu lidí, ne jen připravené FAQ.
+6. **Další krok:** šablona, článek, pilot, audit nebo konzultace.
+
+Když prodáváš SaaS, ukaž produkt tam, kde přirozeně pomáhá. Ne jako pětadvacetiminutový monolog nad menu aplikace. Produktové demo má být odpověď na problém, ne výlet po navigaci.
+
+### Nahrávky zveřejňuj s respektem k lidem
+
+Předem řekni, jestli se akce nahrává. Pokud nahráváš otázky účastníků, dej jim možnost ptát se anonymně nebo otázku po akci přeformulovat bez osobních údajů. U B2B témat se v otázkách často objeví citlivý kontext: interní procesy, problémy v týmu, používané nástroje, zákaznické situace nebo obchodní omezení.
+
+Bezpečnější postup:
+
+- nahrávej hlavní výklad a demo,
+- Q&A publikuj jen po očištění nebo jako souhrn,
+- interní poznámky z dotazů ukládej agregovaně,
+- nepoužívej otázky jako veřejné reference bez souhlasu,
+- nastav retenci surové nahrávky a chatu.
+
+Nahrávka je obsahový asset. Chat a seznam účastníků jsou osobní data a obchodní kontext. Neházej to do stejného koše.
+
+### Follow-up má pomáhat, ne pronásledovat
+
+Po akci pošli jeden užitečný follow-up:
+
+- odkaz na nahrávku nebo slidy,
+- slíbený checklist nebo šablonu,
+- odpovědi na nejčastější otázky,
+- jasnou možnost domluvit další krok,
+- jednoduché odhlášení z dalších pozvánek.
+
+Neposílej pět automatických e-mailů jen proto, že někdo otevřel nahrávku. Pokud chceš navazovat obchodně, dělej to podle explicitního zájmu nebo smysluplného kontextu: člověk položil konkrétní otázku, požádal o audit, stáhl šablonu s jasným obchodním záměrem, nebo se přihlásil k pilotu.
+
+Privacy-first follow-up nepředstírá, že algoritmus poznal „nákupní úmysl“ z toho, že někdo omylem dvakrát klikl na odkaz. To není sales intelligence. To je digitální horoskop v kravatě.
+
+### Měř kvalitu vzdělávání bez stalkingu
+
+Nepotřebuješ znát každý pohyb kurzoru. Stačí měřit věci, které pomáhají rozhodovat:
+
+- počet relevantních registrací podle segmentu, pokud segment sbíráš oprávněně,
+- účast vs. registrace v agregaci,
+- počet kvalitních otázek,
+- kolik lidí si stáhlo slíbenou šablonu,
+- kolik lidí požádalo o navazující krok,
+- kolik support dotazů téma později ušetřilo,
+- jaké části obsahu tým znovu používá v sales nebo onboarding procesu.
+
+Kvalita webináře není „500 registrací“. Kvalita je, že správných 30 lidí pochopilo problém, deset z nich použilo checklist, tři chtějí další krok a support má nový článek, na který může odkazovat.
+
+### Checklist: webinář privacy-first
+
+- Je jasný učební cíl a výsledek pro účastníka.
+- Registrace sbírá jen data, která opravdu použiješ.
+- Pozvánka říká, zda bude nahrávka a jaký bude follow-up.
+- Souhlasy nejsou slepené do jednoho univerzálního políčka.
+- Q&A nepublikuje citlivé dotazy bez úpravy nebo souhlasu.
+- Nahrávka, chat a seznam účastníků mají retenční pravidla.
+- Follow-up obsahuje slíbený materiál a jednoduché odhlášení.
+- Měření je agregované a vede k rozhodnutí, ne ke sledování jednotlivců.
+- Produktové demo navazuje na problém, ne na potřebu ukázat každé tlačítko.
+- Výstup se přepíše do článku, checklistu nebo nápovědy, aby hodnota nezmizela po jedné hodině.
+
+### Šablona vzdělávací akce
+
+```markdown
+## Vzdělávací akce: [název]
+
+### Pro koho
+- Primární segment:
+- Úroveň znalostí:
+- Situace, ve které se účastník nachází:
+
+### Výsledek
+- Co bude účastník umět nebo rozhodne:
+- Jaký materiál si odnese:
+- Jak poznáme, že akce pomohla:
+
+### Registrace
+- Povinná pole:
+- Volitelná pole:
+- Účel každého pole:
+- Souhlas s navazující komunikací:
+
+### Program
+1. Kontext:
+2. Rámec:
+3. Ukázka:
+4. Práce účastníka:
+5. Otázky:
+6. Další krok:
+
+### Privacy-first kontrola
+- Nahrávání:
+- Publikace Q&A:
+- Retence chatu a registrací:
+- Analytika:
+- Odhlášení z follow-upu:
+
+### Opětovné využití
+- Článek:
+- Checklist:
+- Nápověda:
+- Sales materiál:
+- Onboarding materiál:
+```
+
+
 ## Pracovní log
+
+- **2026-09-15:** Doplněna příloha CB o webinářích a produktovém vzdělávání bez leadového cirkusu: učební cíle, privacy-first registrace, poctivé pozvánky, pracovní obsah, nahrávky, follow-up, měření, checklist a šablona vzdělávací akce.
 
 - **2026-09-15:** Doplněna příloha CA o zákaznické nápovědě a knowledge base: struktura podle úkolů, důsledky akcí, privacy-first měření, propojení se supportem, revize článků, checklist a šablona článku.
 
