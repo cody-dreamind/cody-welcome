@@ -15377,7 +15377,185 @@ Codyho komentář: Pokud scoring vyhrávají lidé, kteří nejvíc klikají, po
 ```
 
 
+
+## Příloha CM: Kampaně, UTM a měření bez marketingového konfety kanónu
+
+Marketingová kampaň má pomoct rozhodnout, co funguje. Nemá vytvořit tabulku se čtyřiceti sloupci, ve které se po měsíci bojí hrabat i člověk, který ji založil. U malého SaaS je největší riziko dvojí: buď neměříš nic a jedeš podle pocitu, nebo měříš všechno a tváříš se, že chaos je analytika.
+
+Privacy-first přístup je střední cesta: měř kampaně tak, aby tým viděl obchodní dopad, ale nevyráběl z návštěvníků digitální sledovací špiony. Cílem není vědět, co dělal konkrétní člověk ve středu ve 22:13. Cílem je poznat, které kanály přivádějí správné lidi, které sliby rezonují a kde se vyplatí přidat energii.
+
+### Začni otázkou, ne parametrem
+
+Než přidáš do odkazu `utm_source`, zeptej se, jaké rozhodnutí chceš po kampani udělat. Parametry bez rozhodnutí jsou jen barevné štítky na krabicích, které nikdy nikdo neotevře.
+
+Dobré otázky:
+
+- Přivádí newsletter kvalitnější leady než sociální sítě?
+- Funguje lépe praktický checklist, případová studie nebo pozvánka na demo?
+- Má smysl opakovat webinář pro stejný segment?
+- Který partnerský odkaz přináší lidi s reálným problémem, ne jen zvědavé kliky?
+- Kolik obchodních příležitostí vzniklo z kampaně po 30 dnech?
+
+Špatné otázky:
+
+- Kolik různých UTM kombinací dokážeme vyrobit?
+- Umíme připsat každé kliknutí přesně jednomu člověku?
+- Jak přidat další tracker, protože dashboard vypadá prázdně?
+
+Codyho komentář: Pokud kampaň neumíš vyhodnotit jednou větou, pravděpodobně neměříš kampaň. Měříš vlastní nervozitu.
+
+### UTM slovník musí být nudný
+
+UTM parametry mají být konzistentní, ne kreativní. Kreativita patří do nabídky, textu a produktu. V měření chceš nudu, protože nuda se dá porovnat.
+
+Doporučený základ:
+
+- `utm_source` = odkud člověk přišel: `newsletter`, `linkedin`, `partner-nazev`, `rss`, `direct-mail`.
+- `utm_medium` = typ kanálu: `email`, `social`, `referral`, `community`, `paid`.
+- `utm_campaign` = konkrétní kampaň: `2026-q1-onboarding-checklist`, `webinar-pricing-b2b`.
+- `utm_content` = varianta odkazu, pokud ji opravdu potřebuješ: `hero-cta`, `footer-link`, `text-link`.
+- `utm_term` = nech prázdné, pokud neděláš placené vyhledávání s jasným důvodem.
+
+Pravidla:
+
+- používej malá písmena,
+- odděluj slova pomlčkou,
+- nepoužívej diakritiku,
+- nemíchej češtinu a angličtinu podle nálady,
+- neukládej do UTM osobní údaje, e-maily ani názvy konkrétních lidí,
+- nerozlišuj detaily, které nikdy nevyhodnotíš.
+
+Praktický příklad odkazu:
+
+```text
+https://example.cz/pruvodce-onboardingem?utm_source=newsletter&utm_medium=email&utm_campaign=2026-q1-onboarding-checklist&utm_content=main-cta
+```
+
+Tohle stačí. Není potřeba přidávat tři další parametry jen proto, že analytický nástroj má volné políčko. Volné políčko není výzva. Je to past s klávesnicí.
+
+### Jedna kampaň, jedna karta
+
+Každá větší kampaň by měla mít krátkou kartu. Ne kvůli byrokracii, ale proto, aby se po měsíci dalo zjistit, co se vlastně slíbilo, komu a proč.
+
+Karta kampaně obsahuje:
+
+- cílový segment,
+- problém nebo příležitost,
+- hlavní nabídku,
+- kanály,
+- odkaz na landing page nebo obsah,
+- UTM pravidla,
+- očekávaný obchodní signál,
+- datum vyhodnocení,
+- rozhodnutí po kampani.
+
+Bez karty se často stane, že marketing slaví návštěvnost, obchod si stěžuje na nekvalitní leady a produkt netuší, proč se lidé ptají na funkci, která není priorita. Karta není všelék, ale zarazí minimálně polovinu chaosu.
+
+### Měř agregovaně a propojuj s realitou
+
+Privacy-first kampaň nepotřebuje detailní profil každého návštěvníka. Potřebuje agregovaný pohled a ruční propojení s obchodní realitou.
+
+Užitečný postup:
+
+1. Na landing page měř návštěvy, zdroje a konverzní událost agregovaně.
+2. U formuláře ulož jen zdroj kampaně a kontext, který potřebuješ pro odpověď.
+3. V CRM nebo tabulce sleduj, zda lead odpovídal ideálnímu zákazníkovi.
+4. Po 30 dnech vyhodnoť nejen počet leadů, ale kvalitu rozhovorů, pilotů a zákaznických otázek.
+5. Zapiš rozhodnutí: opakovat, upravit, ukončit, nebo použít obsah jinak.
+
+Důležité je oddělit signál od šumu. Kliknutí z komunity může být malé číslo, ale vysoká kvalita. Placená kampaň může přinést hodně návštěv, ale samé lidi mimo segment. Newsletter může mít méně nových návštěv, ale lepší konverzace, protože publikum už značce věří.
+
+### RSS a přímé odkazy nejsou druhořadé kanály
+
+Když někdo přijde přes RSS, uložený odkaz, komunitní doporučení nebo přímý e-mail bez sledovacího pixelu, analytika často pokrčí rameny. To neznamená, že kanál nemá hodnotu. Znamená to, že respektuje uživatele víc než reklamní ekosystém.
+
+U privacy-first marketingu počítej s tím, že část dobrých signálů bude méně přesně atribuovaná. To je v pořádku. Lepší je mít trochu méně přesný, ale férový obraz než dokonale vypadající dashboard postavený na invazivním sledování.
+
+Jak pracovat s méně přesnými kanály:
+
+- U formuláře se zeptej volitelně: „Kde jste na nás narazili?“
+- U sales callu se ptej: „Co vás přimělo ozvat se právě teď?“
+- U newsletteru sleduj odpovědi a kvalitu konverzací, nejen prokliky.
+- U RSS a blogu sleduj dlouhodobé dotazy, citace a přímé odkazy.
+- U komunit měř spíš opakující se témata než jednotlivé uživatele.
+
+### Nepřepisuj realitu atribucí
+
+Atribuce je model, ne pravda vytesaná do serverového racku. Zákazník často viděl článek, dostal doporučení, přečetl newsletter, koukl na trust page a až potom klikl na konkrétní odkaz. Pokud všechno připíšeš poslednímu kliku, odměníš poslední dveře v budově a zapomeneš na zbytek domu.
+
+Praktičtější otázky:
+
+- Jaké dotazy se opakovaly před nákupem?
+- Který obsah pomohl snížit nejistotu?
+- Který kanál přivedl první důvěru?
+- Který kanál vytvořil konkrétní obchodní akci?
+- Co by se stalo, kdybychom tento kanál na měsíc vypnuli?
+
+Malý tým nepotřebuje dokonalý atribuční model. Potřebuje rozumný úsudek a pravidelné vyhodnocení.
+
+### Checklist: kampaň bez datového cirkusu
+
+- Má kampaň jasné rozhodnutí, které po ní chceš udělat?
+- Existuje jednotný UTM slovník a používá ho celý tým?
+- Neobsahují odkazy osobní údaje ani interní citlivé informace?
+- Má každá větší kampaň vlastní kartu s cílem, segmentem a vyhodnocením?
+- Měříš agregované výsledky místo profilování jednotlivců?
+- Umíš propojit leady s kvalitou rozhovorů, ne jen s počtem kliknutí?
+- Počítáš s hodnotou RSS, komunit a přímých odkazů i bez perfektní atribuce?
+- Máš datum, kdy kampaň vyhodnotíš a rozhodneš, co dál?
+- Mažeš nebo anonymizuješ staré kampaně a nepotřebné lead údaje podle interních pravidel?
+- Umíš vysvětlit zákazníkovi, co měříš a proč?
+
+### Šablona kampaně
+
+```markdown
+## Kampaň: [název]
+
+### Cíl
+- Jaké rozhodnutí chceme po kampani udělat:
+- Cílový segment:
+- Problém nebo motivace:
+- Hlavní nabídka:
+
+### Kanály
+- Newsletter:
+- Blog / RSS:
+- Komunita:
+- Partner:
+- Sociální síť:
+- Přímé oslovení:
+
+### UTM pravidla
+- utm_source:
+- utm_medium:
+- utm_campaign:
+- utm_content:
+- Co do UTM nikdy nedáváme:
+
+### Měření
+- Agregované metriky:
+- Konverzní událost:
+- Obchodní signál:
+- Kvalitativní otázka ve formuláři nebo callu:
+- Datum vyhodnocení:
+
+### Privacy-first kontrola
+- Jaké údaje ukládáme:
+- Proč je ukládáme:
+- Kdo k nim má přístup:
+- Kdy je mažeme nebo anonymizujeme:
+
+### Výsledek
+- Co fungovalo:
+- Co byl šum:
+- Co opakujeme:
+- Co měníme:
+- Co rušíme:
+```
+
+
 ## Pracovní log
+- **2026-09-15:** Doplněna příloha CM o kampaních, UTM a měření bez datového cirkusu: jednotný UTM slovník, kampaně jako rozhodovací karty, agregované měření, RSS/přímé odkazy, atribuce, checklist a šablona kampaně.
 - **2026-09-15:** Doplněna příloha CL o nákupních signálech a lead scoringu bez šmírování: definice dobrého leadu, rozlišení signálu a šumu, fit/intent matice, férové formuláře, nurturing, retence dat, metriky kvality, checklist a šablona.
 - **2026-09-15:** Doplněna příloha CK o trust page pro malé privacy-first SaaS: struktura stránky, opakované zákaznické otázky, privacy-first blok, subprocesoři, doložitelná bezpečnostní tvrzení, provozní revize, checklist a šablona.
 - **2026-09-15:** Doplněna příloha CJ o produktové telemetrii bez sledovacího cirkusu: rozhodnutí před eventy, event slovník, pseudonymizace, bezpečná metadata, aktivační moment, Definition of Done, dashboardy, privacy-first technický vzor, checklist a šablona telemetrické karty.
