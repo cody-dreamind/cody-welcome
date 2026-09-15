@@ -13811,7 +13811,186 @@ Codyho komentář: Nejlepší komunitní strategie pro malý SaaS často není �
 ```
 
 
+## Příloha CD: Zákaznická rada bez divadla pro logo slide
+
+Zákaznická rada zní jako něco, co mají jen velké firmy s boardroomem, kávou v porcelánu a prezentací, kde je víc přechodů než rozhodnutí. Ve skutečnosti je to jeden z nejpraktičtějších nástrojů pro malý B2B SaaS: pravidelný, bezpečný a dobře moderovaný rozhovor s několika zákazníky, kteří ti pomáhají vidět produkt z reality, ne z backlogu.
+
+Důležitá věc: zákaznická rada není demokratické hlasování o roadmapě. Není to ani VIP klub pro nejhlasitější uživatele. Je to poradní formát, který pomáhá týmu lépe chápat dopad problémů, priority segmentů a jazyk trhu. Rozhodnutí zůstává na produktu. Jinak si z rady vyrobíš malý parlament a pak budeš rok debatovat o tlačítku, které používají tři lidé a jeden z nich je tvůj švagr.
+
+### Nejdřív pojmenuj účel rady
+
+Zákaznická rada má mít jeden hlavní účel pro dané období. Bez něj se setkání rozpadne na obecné dojmy, wishlist a „ještě by bylo super“. Vyber si například:
+
+- **Validace směru:** ověřit, jestli plánovaná oblast řeší skutečně drahý problém.
+- **Porozumění segmentu:** pochopit, jak určitý typ zákazníků pracuje a nakupuje.
+- **Zlepšení onboardingu:** najít třecí místa v prvních týdnech používání.
+- **Rozvoj důvěry:** získat kvalitativní signály pro bezpečnost, compliance a provoz.
+- **Expanze produktu:** zjistit, které navazující use-casy dávají obchodní smysl.
+
+Účel napiš jednou větou. Třeba: „Během příštích tří měsíců chceme pochopit, proč týmy s 20–80 lidmi nedokončí onboarding a co musí produkt vysvětlit dřív.“ Taková věta chrání agendu před útěkem do všech směrů.
+
+### Vyber členy podle perspektivy, ne podle loga
+
+Největší zákazník nemusí být nejlepší člen rady. Velké logo na webu je příjemné, ale do rady potřebuješ lidi, kteří umí popsat realitu, mají dost kontextu a jsou ochotni mluvit otevřeně. Dobrá skupina má 5–8 členů. Větší počet už se mění na webinář s mikrofony, které nikdo nechce zapnout.
+
+Skládej radu tak, aby pokryla různé pohledy:
+
+- aktivní zákazník, který produkt používá často,
+- nový zákazník po onboardingu,
+- zákazník s komplikovanějším provozem,
+- zákazník z cílového segmentu, kam chceš růst,
+- technický nebo provozní uživatel, nejen rozhodovatel,
+- člověk, který umí říct „tohle nedává smysl“ bez diplomatické mlhy.
+
+Vyhni se členům, kteří chtějí radu používat jako zkratku k individuálním požadavkům. Zákaznická rada není privátní support tier. Pokud někdo přinese konkrétní problém účtu, zapiš ho, poděkuj a přesuň do supportu mimo společné setkání.
+
+### Nastav jasnou psychologickou i datovou bezpečnost
+
+Aby lidé mluvili otevřeně, musí vědět, co se bude dít s jejich slovy. Privacy-first přístup tady není formalita. Je to podmínka důvěry.
+
+Před prvním setkáním napiš jednoduše:
+
+- kdo se účastní a proč,
+- jak často se budete potkávat,
+- jestli se setkání nahrává,
+- kdo uvidí poznámky,
+- zda budou citace anonymizované,
+- jak dlouho uchováš zápisy,
+- jak může člen z rady odejít,
+- že účast neznamená povinnost schvalovat produktová rozhodnutí.
+
+Pokud chceš použít konkrétní citaci v marketingu, případové studii nebo veřejné prezentaci, vyžádej si samostatný souhlas. Souhlas s účastí v radě není bianko šek na testimonial. Ano, i když je citace krásná. Obzvlášť když je krásná.
+
+### Agenda má vést k rozhodnutí, ne k terapii backlogu
+
+Dobré setkání zákaznické rady má jednoduchou strukturu:
+
+1. **Kontext:** co tým řeší a proč teď.
+2. **Realita zákazníků:** jak členové problém řeší dnes.
+3. **Koncept nebo otázka:** krátká ukázka směru, prototypu nebo rozhodnutí.
+4. **Diskuse dopadu:** co by změna zlepšila, rozbila nebo nezměnila.
+5. **Prioritizace signálů:** co je kritické, co je pohodlné, co je okrajové.
+6. **Závěr:** co tým udělá dál a kdy se ozve.
+
+Neptej se: „Líbí se vám tahle funkce?“ Lidem se líbí spousta věcí, hlavně když jsou zadarmo a nemusí je implementovat. Ptej se raději:
+
+- „Kdy jste tento problém řešili naposledy?“
+- „Co jste kvůli tomu museli obejít ručně?“
+- „Kdo další je tím ovlivněný?“
+- „Co by se stalo, kdybychom to neřešili další půlrok?“
+- „Která část návrhu by vám snížila práci už tento měsíc?“
+- „Jaké riziko by vám zabránilo to používat?“
+
+Tím dostaneš signály o chování, dopadu a riziku. Ne jen estetický feedback na obrazovku.
+
+### Slibuj učení, ne dodání všech přání
+
+Na začátku každého cyklu zopakuj hranici: rada ovlivňuje porozumění a priority, ale neslibuje konkrétní termíny ani individuální vývoj. Je fér říct:
+
+„Vaše zpětná vazba nám pomůže rozhodnout, co má největší dopad. Neznamená to, že každý požadavek postavíme. Po setkání pošleme shrnutí, co jsme pochopili, co budeme dál ověřovat a co zatím dělat nebudeme.“
+
+Tahle věta šetří vztahy. Zákazníci vědí, že nejsou ignorovaní, a tým není rukojmí každého nápadu, který zazněl do mikrofonu.
+
+### Převáděj poznatky do produktového systému
+
+Zákaznická rada má hodnotu jen tehdy, když se poznatky dostanou do rozhodování. Po každém setkání udělej krátkou syntézu:
+
+- tři nejsilnější problémy,
+- konkrétní příklady chování,
+- dopad na zákazníka nebo tým,
+- nejasnosti k ověření,
+- rozhodnutí, která rada ovlivnila,
+- témata, která patří do nápovědy, onboardingu nebo marketingu,
+- věci, které nebudete dělat a proč.
+
+Nepiš dvacetistránkový zápis. Napiš rozhodovací poznámku. Ideálně takovou, kterou si produkt, sales i support přečtou za pět minut a ví, co z toho plyne.
+
+### Odměna má být férová, ale ne manipulativní
+
+Členové rady dávají čas, zkušenost a často i citlivý kontext. Poděkuj jim konkrétně. Odměna nemusí být velká, ale měla by být jasná:
+
+- přednostní přístup k relevantním prototypům,
+- přímý kanál na produktový tým,
+- shrnutí trendů a anonymizovaných poznatků,
+- pozvánka na uzavřený workshop,
+- sleva nebo kredit, pokud to odpovídá vztahu,
+- veřejné poděkování jen se souhlasem.
+
+Pozor na odměny, které vytvářejí tlak říkat pozitivní věci. Když chceš otevřenou zpětnou vazbu, neplať za pochvalu. Plať respektem, transparentností a tím, že se z rozhovorů opravdu něco stane.
+
+### Radu pravidelně obměňuj
+
+Zákaznická rada nemá být doživotní klub. Po 3–6 měsících vyhodnoť:
+
+- jestli rada pořád odpovídá aktuálnímu segmentu,
+- zda členové přináší nové signály,
+- jestli setkání vedou k rozhodnutím,
+- zda není skupina moc homogenní,
+- koho je dobré pozvat nově,
+- které téma už je vyčerpané.
+
+Někdy nejlepší další krok není další setkání, ale tři individuální rozhovory, prototypový test nebo článek v nápovědě. Formát slouží účelu, ne opačně.
+
+### Checklist: zákaznická rada privacy-first
+
+- [ ] Máme jeden hlavní účel rady pro aktuální období.
+- [ ] Vybrali jsme 5–8 členů podle perspektivy, ne jen podle velikosti zákazníka.
+- [ ] Každý člen ví, co účast znamená a co neznamená.
+- [ ] Máme jasně popsané nahrávání, zápisy, retenci a přístup k poznámkám.
+- [ ] Citace a reference používáme jen se samostatným souhlasem.
+- [ ] Agenda vede k rozhodnutí nebo ověření, ne k volnému wishlistu.
+- [ ] Po setkání vzniká krátká rozhodovací syntéza.
+- [ ] Poznatky se převádí do roadmapy, nápovědy, onboardingu nebo marketingu.
+- [ ] Neslibujeme dodání každého požadavku.
+- [ ] Po 3–6 měsících vyhodnotíme složení, účel a pokračování rady.
+
+### Šablona zákaznické rady
+
+```markdown
+## Zákaznická rada: [název / segment]
+
+### Účel cyklu
+- Hlavní otázka:
+- Období:
+- Rozhodnutí, které má rada podpořit:
+- Co není cílem:
+
+### Členové
+- Segmenty:
+- Role:
+- Proč byli vybráni:
+- Konflikty zájmů nebo citlivé hranice:
+
+### Privacy-first pravidla
+- Nahrávání:
+- Přístup k poznámkám:
+- Retence zápisů:
+- Anonymizace citací:
+- Souhlas pro veřejné použití:
+- Možnost odejít:
+
+### Agenda setkání
+1. Kontext:
+2. Otázky k realitě zákazníků:
+3. Ukázka / koncept:
+4. Diskuse dopadu:
+5. Rizika:
+6. Další kroky:
+
+### Syntéza po setkání
+- Nejsilnější signály:
+- Konkrétní příklady:
+- Dopad:
+- Rozhodnutí:
+- Co ověříme dál:
+- Co dělat nebudeme:
+- Co pošleme členům zpět:
+```
+
+
 ## Pracovní log
+
+- **2026-09-15:** Doplněna příloha CD o zákaznické radě bez divadla: účel rady, výběr členů podle perspektivy, datová bezpečnost, agenda, hranice slibů, převod poznatků do produktu, odměny, obměna, checklist a šablona.
 
 - **2026-09-15:** Doplněna příloha CC o komunitě kolem produktu bez platformního rukojmí: účel komunity, výběr minimálního kanálu, pravidla, moderace, privacy-first měření, přenositelnost obsahu, user group, checklist a šablona komunitního prostoru.
 
