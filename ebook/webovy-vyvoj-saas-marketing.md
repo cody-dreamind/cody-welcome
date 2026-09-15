@@ -14851,7 +14851,183 @@ Důležité akce emituj z aplikační vrstvy po úspěšném dokončení transak
 - Jak ověříme, že neobsahuje citlivý payload:
 
 
+## Příloha CJ: Produktová telemetrie bez sledování lidí jako zásilek v depu
+
+Produktová telemetrie má odpovědět na jednoduchou otázku: pomáhá produkt lidem dělat práci lépe? Nemá odpovědět na otázku, kolikrát se konkrétní člověk v úterý v 16:07 zamyslel nad tlačítkem a jestli mu pak máme tři týdny ukazovat reklamu na jiném webu. To první je řízení produktu. To druhé je datový cirkus s popcornem z consent bannerů.
+
+Dobrá telemetrie pro malý SaaS je úzká, účelová a spojená s rozhodováním. Sleduje aktivační moment, dokončení klíčových workflow, kvalitu onboardingových kroků, výskyt chyb a signály retence. Nepotřebuje znát každý pohyb myši, celý obsah formulářů ani identitu člověka tam, kde stačí agregace. GDPR principy minimalizace dat a omezení uložení jsou tady praktický produktový filtr, ne jen právnická dekorace ([European Commission: GDPR principles](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)). OWASP zároveň připomíná, že logování a monitoring mají být navržené podle účelu, chráněné a testované — protože i provozní data mohou nést citlivý kontext ([OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)).
+
+### Začni rozhodnutími, ne eventy
+
+Nejhorší telemetrický brief zní: „Pošleme všechno do analytiky a pak se uvidí.“ Neuvidí. Tým dostane tabulku se stovkami eventů, nikdo jim nebude věřit a každý roadmapový spor skončí větou „tohle si musíme ještě změřit“. Produktová data mají sloužit konkrétním rozhodnutím.
+
+Nejdřív si napiš pět rozhodnutí, která chceš zlepšit:
+
+- kde uživatelé poprvé pochopí hodnotu produktu,
+- který krok onboardingu nejčastěji brzdí aktivaci,
+- které funkce opravdu používají platící zákazníci,
+- zda nový release snížil počet ručních support zásahů,
+- které workflow je tak pomalé nebo chybové, že ohrožuje obnovu předplatného.
+
+Teprve potom navrhni eventy. Pokud event nepomáhá žádnému rozhodnutí, nepatří do první verze. „Možná se to bude hodit“ je věta, která v datech stárne stejně dobře jako jogurt na topení.
+
+### Event slovník udržuj malý a stabilní
+
+Telemetrie se rozpadá, když každý vývojář pojmenuje stejnou věc jinak. Jeden event říká `project_created`, druhý `newProject`, třetí `workspace.init.done` a dashboard pak vypadá jako archeologický výzkum. Malý event slovník je nudný dokument, který šetří měsíce chaosu.
+
+Praktická struktura eventu:
+
+- **název:** stabilní, čitelný a popisný, například `workspace.created`,
+- **účel:** rozhodnutí, které event podporuje,
+- **spouštěč:** přesný okamžik v produktu,
+- **scope:** tenant, plán, role nebo typ účtu v bezpečné podobě,
+- **metadata:** jen minimální doplňující údaje,
+- **retence:** jak dlouho event držíme,
+- **vlastník:** člověk, který odpovídá za význam eventu.
+
+Názvy drž v minulém čase nebo jako dokončenou akci: `report.exported`, `invite.accepted`, `integration.connected`. Nezapisuj eventy typu `button_clicked` bez kontextu. Kliknutí samo o sobě většinou není hodnota. Dokončený export, první vytvořený projekt nebo odeslaná faktura už hodnota být může.
+
+### Pseudonymizace není kouzelné zmizíkování
+
+Pseudonymizované ID je lepší než e-mail v každém eventu, ale pořád může být osobní údaj, pokud ho umíš spojit zpět s člověkem. Proto k němu přistupuj opatrně. V produktové telemetrii často stačí úroveň workspace, plánu nebo kohorty. Pokud nepotřebuješ sledovat jednotlivce napříč týdny, nedělej to.
+
+Rozumné vrstvy identity:
+
+- **agregovaná metrika:** počet aktivovaných workspace za týden,
+- **tenant-level metrika:** kolik workspace dokončilo onboarding,
+- **pseudonymní uživatel:** stabilní interní ID bez e-mailu a jména,
+- **identifikovaný uživatel:** jen tam, kde to má jasný supportní nebo bezpečnostní účel.
+
+Pro marketingové a produktové dashboardy preferuj agregace. Detail jednotlivce nech do supportu, auditu a bezpečnosti, kde má přístup omezený okruh lidí a existuje jasný důvod.
+
+### Metadata mají být odpovědi, ne deník uživatele
+
+Metadata jsou nejčastější místo, kde se dobrý záměr změní v průšvih. Event `form_submitted` s celým obsahem formuláře je rychlá cesta k tomu, že v analytice skončí telefon, e-mail, poznámka zákazníka a možná i něco, co fakt nechceš číst u ranní kávy.
+
+Bezpečnější metadata:
+
+- typ formuláře místo jeho obsahu,
+- počet položek místo seznamu položek,
+- kategorie chyby místo celé chybové zprávy s payloadem,
+- velikost importu v rozsahu místo nahraného souboru,
+- typ integrace místo tokenu nebo URL s tajným parametrem,
+- plán produktu místo konkrétní fakturační informace.
+
+Před přidáním každého metadata se zeptej: „Kdyby se to objevilo ve sdíleném dashboardu, bylo by to v pohodě?“ Pokud odpověď zní „ehm“, metadata patří pryč nebo do bezpečnější vrstvy.
+
+### Onboarding měř přes aktivační moment
+
+Aktivace není registrace. Registrace říká, že člověk otevřel dveře. Aktivace říká, že uvnitř našel důvod zůstat. Pro každý SaaS si napiš jeden aktivační moment, který nejlépe předpovídá hodnotu.
+
+Příklady:
+
+- projektový nástroj: první pozvaný člen týmu a vytvořený úkol,
+- fakturační SaaS: první vystavená faktura,
+- knowledge base: první publikovaný článek a první interní vyhledání,
+- monitoring: první přidaná služba a první úspěšný alert test,
+- rezervační systém: první dostupný termín a první potvrzená rezervace.
+
+Pak měř cestu k tomuto momentu: registrace, vytvoření workspace, nastavení základních údajů, první akce, pozvání kolegy, dokončení hodnotného workflow. Nepotřebuješ dvacet eventů na každou obrazovku. Potřebuješ vidět, kde mizí energie.
+
+### Telemetrie patří do Definition of Done
+
+Když telemetrii dopisuješ až po releasu, často vznikne jako rychlá záplata: event bez vlastníka, metadata bez kontroly a dashboard, který nikdo neotevře. U důležitých funkcí patří měření do Definition of Done stejně jako testy, copy a support poznámka.
+
+U každé větší změny si odpověz:
+
+- jak poznáme, že funkce pomohla,
+- jaký event nebo metrika to ukáže,
+- zda stačí agregace,
+- jaká metadata jsou opravdu nutná,
+- kde bude metrika vidět,
+- kdo ji zkontroluje po releasu,
+- kdy event smažeme, pokud už nebude potřeba.
+
+Tohle není byrokracie. Je to ochrana před roadmapou řízenou dojmy, nejhlasitějším zákazníkem nebo posledním dramatickým Slack vláknem.
+
+### Dashboard má vést k akci
+
+Dashboard, který má třicet grafů a žádné rozhodnutí, je tapeta pro kancelář. U malého SaaS stačí několik pohledů, které tým opravdu používá.
+
+První produktový dashboard může obsahovat:
+
+- nové workspace podle týdne,
+- aktivační poměr podle zdroje nebo segmentu,
+- dokončení hlavního workflow,
+- počet aktivních týmů podle plánu,
+- churn signály v agregaci,
+- chybovost klíčových akcí,
+- dopad posledního releasu na jednu cílovou metriku.
+
+Ke každému grafu napiš „co uděláme, když číslo spadne“ a „co uděláme, když vyroste“. Pokud odpověď neexistuje, graf je možná zajímavý, ale ne operativní.
+
+### Privacy-first technický vzor
+
+První implementace může být velmi jednoduchá:
+
+- eventy se posílají z backendu po dokončení důležité akce,
+- frontend posílá jen nezbytné interakce, které backend nevidí,
+- event validátor povoluje jen známé názvy a schválená metadata,
+- citlivá pole se zahazují před uložením,
+- dashboard pracuje primárně s agregacemi,
+- raw eventy mají krátkou retenci,
+- exporty pro tým neobsahují identifikátory bez důvodu.
+
+Výhodou backendových eventů je, že lépe odpovídají skutečně dokončené práci. Frontend kliknutí může říkat „uživatel zkusil“, backend event říká „akce proběhla“. Obojí má místo, ale hodnotu produktu měř hlavně podle dokončených výsledků.
+
+### Codyho komentář
+
+Produktová telemetrie nemá být reality show. Má být palubní deska. Řidič nepotřebuje vědět, kolikrát si spolujezdec upravil sedačku. Potřebuje vědět rychlost, palivo, varování motoru a jestli jede správným směrem. A když palubní deska zároveň tajně prodává data o trase reklamní síti, tak už to není auto. To je marketingový vysavač na kolech.
+
+### Checklist: produktová telemetrie privacy-first
+
+- Máme sepsaná rozhodnutí, která má telemetrie zlepšit.
+- Každý event má vlastníka, účel a jasný spouštěč.
+- Event slovník je malý, verzovaný a srozumitelný.
+- Metadata neobsahují obsah formulářů, tokeny, dokumenty ani volné texty zákazníků.
+- Pseudonymní identifikátory používáme jen tam, kde nestačí agregace.
+- Raw eventy mají retenci a omezený přístup.
+- Dashboardy obsahují metriky, ke kterým existuje konkrétní akce.
+- Měření klíčových funkcí je součást Definition of Done.
+- Supportní, bezpečnostní, auditní a produktová data jsou oddělená.
+- Zákazníkům umíme lidsky vysvětlit, co měříme a proč.
+
+### Šablona telemetrické karty
+
+## Produktový event: [název]
+
+### Rozhodnutí
+
+- Jaké produktové nebo obchodní rozhodnutí event podporuje:
+
+### Spouštěč
+
+- Kdy přesně event vzniká:
+- Backend / frontend / systémová automatizace:
+
+### Metadata
+
+- Povolená metadata:
+- Zakázaná metadata:
+- Je nutný uživatelský identifikátor: ano / ne / pseudonymně
+
+### Retence a přístup
+
+- Raw event retence:
+- Agregovaná metrika retence:
+- Kdo smí vidět detail:
+- Kde se zobrazuje agregace:
+
+### Kontrola kvality
+
+- Jak se testuje vznik eventu:
+- Jak se testuje, že neobsahuje citlivý obsah:
+- Kdy se event zreviduje nebo odstraní:
+
+
 ## Pracovní log
+- **2026-09-15:** Doplněna příloha CJ o produktové telemetrii bez sledovacího cirkusu: rozhodnutí před eventy, event slovník, pseudonymizace, bezpečná metadata, aktivační moment, Definition of Done, dashboardy, privacy-first technický vzor, checklist a šablona telemetrické karty.
+
 - **2026-09-15:** Doplněna příloha CI o auditních logách v malém privacy-first SaaS: oddělení technických a auditních logů, bezpečná metadata, retence, zákaznický audit log, implementační vzor, checklist a šablona auditní události.
 
 - **2026-09-15:** Doplněna příloha CH o rolích, přístupech a oprávněních: matice rolí, nejmenší nutná oprávnění, produkční přístupy, servisní účty, offboarding, auditní logy, měsíční revize, checklist a šablona přístupové karty.
