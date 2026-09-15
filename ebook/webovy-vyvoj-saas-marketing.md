@@ -12245,7 +12245,180 @@ Neposílej plošně „vrátili jsme se lepší“ všem bývalým zákazníkům
 - Vlastník a termín:
 
 
+## Příloha BU: Customer health score bez věštecké koule a sledovací magie
+
+Customer health score je pokus poznat, jestli zákazník z produktu opravdu získává hodnotu, nebo jen potichu čeká na další fakturu a potom zmizí. V malém SaaS týmu může být velmi užitečný, ale jen pokud není převlečený za datovou věšteckou kouli. Skóre nemá být tajný rozsudek nad zákazníkem. Má být pracovní pomůcka pro lepší onboarding, podporu, produkt a férovou komunikaci.
+
+Špatně postavený health score sbírá všechno, co se hýbe: každé kliknutí, čas na stránce, počet otevřených e-mailů, polohu myši a náladu kávovaru. Výsledek vypadá přesně, ale tým stejně neví, co udělat. Dobře postavený health score začíná opačně: jaké rozhodnutí chceme zlepšit a jaký signál k tomu opravdu potřebujeme?
+
+> Codyho komentář: Pokud zákaznické zdraví počítáš ze čtyřiceti tajných proměnných, které neumí vysvětlit ani člověk, který je nastavil, nemáš health score. Máš horoskop s dashboardem.
+
+### Začni rozhodnutím, ne metrikou
+
+Než začneš počítat skóre, napiš si, k čemu bude sloužit. Typické účely:
+
+- **Onboarding:** poznat, kdo se nedostal k první hodnotě.
+- **Adopce:** zjistit, jestli produkt používá správná role nebo celý tým.
+- **Support:** najít zákazníky, kteří se trápí, ale ještě nenapsali.
+- **Retence:** zachytit pokles hodnoty dřív než rušení účtu.
+- **Expansion:** poznat zákazníky, kterým dává smysl nabídnout vyšší plán nebo další modul.
+
+Každý účel potřebuje jiné signály. Pokud chceš zlepšit onboarding, nepotřebuješ komplexní skóre loajality. Stačí vědět, jestli zákazník dokončil klíčové kroky, použil hlavní funkci a rozumí dalšímu kroku. Pokud řešíš retenci, zajímá tě spíš pravidelnost hodnotného použití, kvalita výsledků a opakované blokery.
+
+První verze health score by měla odpovědět na jednu provozní otázku: **koho má tým tento týden kontaktovat a proč?** Pokud na ni skóre neodpovídá, je to jen dekorace v reportu.
+
+### Používej signály, které souvisí s hodnotou
+
+Dobré signály jsou blízko výsledku, který zákazník koupil. U nástroje pro plánování zakázek může hodnotu naznačit počet naplánovaných zakázek, aktivní členové týmu a dokončené pracovní postupy. U fakturačního SaaS to může být počet vystavených dokladů, úspěšné párování plateb a méně ručních oprav. U marketingového nástroje to může být publikovaný obsah, doručené kampaně a navazující obchodní akce.
+
+Slabé signály vypadají lákavě, ale snadno matou:
+
+- počet přihlášení bez znalosti, co člověk dělal,
+- otevření e-mailu jako důkaz zájmu,
+- dlouhý čas v aplikaci jako údajná spokojenost,
+- množství kliknutí jako známka hodnoty,
+- návštěva ceníku jako automatický expansion signál.
+
+Dlouhý čas v aplikaci může znamenat nadšení, ale také zmatek. Hodně kliknutí může znamenat aktivitu, ale také špatné UX. Health score proto nesmí stát jen na aktivitě. Musí rozlišovat **používání produktu** a **dosahování výsledku**.
+
+### Udělej skóre vysvětlitelné
+
+Malý tým nepotřebuje tajný model. Potřebuje jednoduchou kartu, kde každý vidí, proč je zákazník zelený, žlutý nebo červený. Například:
+
+- **Aktivace:** zákazník dokončil první klíčový scénář.
+- **Pravidelnost:** produkt se používá v rytmu odpovídajícím danému use-casu.
+- **Týmová adopce:** používá ho více než jeden kritický uživatel, pokud je týmové používání důležité.
+- **Support signály:** neblokují ho opakované chyby nebo nevyřešené dotazy.
+- **Obchodní kontext:** plán, segment a očekávaný způsob využití odpovídají realitě.
+
+Každý signál popiš lidsky. Ne „engagement_score > 0.73“, ale „tým za poslední dva týdny naplánoval aspoň jednu reálnou zakázku a pozval dispečera“. To je vysvětlitelné pro produkt, support i obchod.
+
+Skóre také odděl od nálepky zákazníka. Neříkej „špatný zákazník“. Říkej „nízká aktivace“, „blokovaný onboarding“ nebo „slábnoucí adopce“. Jazyk rozhoduje, jestli tým pomáhá, nebo soudí.
+
+### Privacy-first hranice health score
+
+Health score nemusí být šmírovací stroj. V privacy-first provozu platí několik pravidel:
+
+- **Minimalizace:** sbírej jen signály, které vedou ke konkrétní akci.
+- **Agregace:** preferuj pracovní úroveň účtu nebo workspace před sledováním jednotlivce, pokud individuální pohled není nutný.
+- **Vysvětlitelnost:** interně popiš, z čeho se skóre skládá a kdo ho používá.
+- **Přístupová práva:** ne každý v týmu potřebuje vidět všechny zákaznické poznámky.
+- **Retence:** staré signály pravidelně maž nebo agreguj.
+- **Žádné překvapení:** pokud produkt používá behaviorální signály pro podporu nebo zlepšování služby, má to být popsatelné v dokumentaci a zákaznické komunikaci.
+
+Zvlášť opatrný buď u poznámek ze supportu a obchodních hovorů. Tam se snadno objeví informace o interních problémech zákazníka, rozpočtu, zaměstnancích nebo konkurenci. Do health score většinou patří agregovaný poznatek, ne kompletní přepis rozhovoru.
+
+### Tři barvy stačí
+
+První verze může být brutálně jednoduchá:
+
+- **Zelená:** zákazník dosahuje očekávané hodnoty a nejsou známé blokery.
+- **Žlutá:** existuje riziko, které má jasného vlastníka a další krok.
+- **Červená:** zákazník je blokovaný, neaktivní po klíčové fázi, nebo se blíží rozhodnutí o odchodu.
+
+Důležité je, aby každá barva měla akci. Žlutá bez akce je jen nervozita v tabulce. Červená bez vlastníka je siréna v prázdné kanceláři.
+
+Příklad pravidel:
+
+- Zákazník je **žlutý**, pokud do sedmi dnů od startu nedokončil aktivační scénář.
+- Zákazník je **žlutý**, pokud klíčový uživatel odešel a není známý nástupce.
+- Zákazník je **červený**, pokud aktivně používá produkt méně než dřív a zároveň má otevřený kritický support problém.
+- Zákazník je **zelený**, pokud pravidelně dokončuje hlavní workflow a poslední kontakt nepotvrdil zásadní blocker.
+
+Čísla uprav podle produktu. Pointa není univerzální metrika, ale srozumitelný mechanismus.
+
+### Kombinuj produktová data s lidským kontextem
+
+Health score selže, když ignoruje realitu mimo aplikaci. Zákazník může mít nízké používání, protože čeká na interní schválení. Nebo může být aktivní, ale nespokojený, protože produkt drží pohromadě ručními obchvaty. Proto je dobré kombinovat tři vrstvy:
+
+1. **Produktové signály:** aktivace, používání hlavních funkcí, chybovost, dokončené workflow.
+2. **Support a success signály:** otevřené blokery, opakované dotazy, kvalita onboardingu.
+3. **Obchodní kontext:** plán, segment, datum obnovy, očekávání při nákupu, interní změny u zákazníka.
+
+Každý týden projdi jen výjimky: nové červené účty, dlouho žluté účty, zákazníky po onboardingu a zákazníky před obnovou. Nesnaž se ručně meditovat nad celou databází. Produktivita není soutěž v počtu barevných buněk.
+
+### Zásah má být užitečný, ne paranoidní
+
+Když skóre ukáže riziko, reakce má zákazníkovi pomoci. Ne ho vystrašit. Špatná zpráva zní:
+
+> Vidíme, že jste se poslední dobou méně přihlašovali. Chcete si promluvit?
+
+Lepší zpráva:
+
+> Všimli jsme si, že se vám zatím nepodařilo dokončit první plánovací workflow. Posílám krátký návod a můžu vám pomoct nastavit první scénář, pokud se hodí.
+
+Rozdíl je v tónu i hodnotě. První věta říká „sledujeme vás“. Druhá říká „vidíme blocker a nabízíme pomoc“. Privacy-first komunikace nemusí předstírat, že produkt nic neví. Má být konkrétní, přiměřená a užitečná.
+
+### Měř kvalitu zásahů
+
+Health score není hotové tím, že existuje. Každý měsíc se zeptej:
+
+- Které žluté účty se zlepšily po zásahu?
+- Které červené účty odešly navzdory zásahu?
+- Které zelené účty překvapivě churnovaly?
+- Který signál byl falešný poplach?
+- Který důležitý signál chyběl?
+- Kolik zásahů bylo pro zákazníka skutečně užitečných?
+
+Nejlepší metrika health score není přesnost na papíře. Je to počet lepších rozhodnutí: rychlejší onboarding, méně zbytečných callů, jasnější roadmapa, lepší support a méně překvapivých odchodů.
+
+### Checklist: customer health score privacy-first
+
+- Má skóre jeden jasný účel pro aktuální fázi produktu?
+- Ví tým, jakou akci má udělat u zelené, žluté a červené kategorie?
+- Jsou signály navázané na hodnotu, ne jen na aktivitu?
+- Umí člověk vysvětlit skóre bez tajného modelu a datového kouře?
+- Sbíráme jen data potřebná pro rozhodnutí nebo pomoc zákazníkovi?
+- Preferujeme agregovaný pohled na účet před zbytečným sledováním jednotlivců?
+- Máme nastavená přístupová práva k poznámkám a citlivému kontextu?
+- Mažeme nebo agregujeme staré signály, které už nepomáhají rozhodování?
+- Testujeme, jestli zásahy podle skóre zákazníkům opravdu pomáhají?
+- Umíme poznat falešné poplachy a upravit pravidla?
+
+### Šablona health score karty
+
+## Health score karta: [segment / plán / use-case]
+
+### Účel
+
+- Jaké rozhodnutí skóre podporuje:
+- Kdo skóre používá:
+- Jak často se reviduje:
+- Co skóre neznamená:
+
+### Signály hodnoty
+
+- Aktivační signál:
+- Pravidelné hodnotné použití:
+- Týmová adopce:
+- Support nebo blocker signály:
+- Obchodní kontext:
+
+### Kategorie
+
+- Zelená znamená:
+- Žlutá znamená:
+- Červená znamená:
+- Kdy se stav ručně upravuje:
+
+### Akce
+
+- Akce při žlutém stavu:
+- Akce při červeném stavu:
+- Kdo je vlastník dalšího kroku:
+- Jak zákazníkovi vysvětlíme pomoc:
+
+### Privacy-first kontrola
+
+- Jaká data ukládáme:
+- Co agregujeme:
+- Kdo má přístup:
+- Retence signálů:
+- Kdy pravidla přehodnotíme:
+
+
 ## Pracovní log
+- **2026-09-15:** Doplněna příloha BU o customer health score bez sledovací magie: účel skóre, hodnotové signály, vysvětlitelné kategorie, privacy-first hranice, zásahy, měření kvality, checklist a health score karta.
 - **2026-09-15:** Doplněna příloha BT o churn rozhovorech bez výčitek: typy odchodu, offboarding, otázky při rušení účtu, osobní rozhovory, privacy-first evidence, měsíční review, win-back pravidla, checklist a churn karta.
 - **2026-09-15:** Doplněna příloha BS o referral a partnerských doporučeních bez provizní džungle: typy doporučení, pravidla provizí, privacy-first tracking, kvalifikace leadů, onboarding partnerů, měření kvality, checklist a referral karta.
 - **2026-09-15:** Doplněna příloha BR o segmentaci zákazníků bez sledovacích profilů: rozhodovací účel, vysvětlitelné segmenty, ruční ověření, datová minimalizace, retence, revize a šablona segmentační karty.
