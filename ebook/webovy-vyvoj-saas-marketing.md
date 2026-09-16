@@ -16893,7 +16893,213 @@ Pokud funkce vyžaduje sběr nových osobních údajů, nové integrace nebo del
 
 
 
+## Příloha CU: Rozhodovací memo pro malé SaaS týmy bez poradového divadla
+
+Malý SaaS tým nepotřebuje deset schvalovacích komisí, tři barevné roadmapy a meeting, který mohl být věta v dokumentu. Potřebuje rychle dělat dobrá rozhodnutí, ke kterým se dá za měsíc vrátit bez archeologického výzkumu ve Slacku. Rozhodovací memo je jednoduchý nástroj: krátký zápis problému, variant, rizik, datových dopadů a dalšího kroku.
+
+Nejde o byrokracii. Jde o paměť týmu. Když se po čtvrt roce zeptáš „proč jsme neintegrovali ten velký reklamní nástroj?“, odpověď nemá být „myslím, že to tehdy někomu vadilo“. Má být dohledatelná: protože přidával třetí stranu do marketingového webu, vyžadoval nový souhlasový režim, nepřinášel jasné rozhodnutí a šel nahradit agregovanou kampaní s přímými odkazy.
+
+### Kdy memo psát
+
+Memo nepiš na každé tlačítko. To by byl produktový cosplay ministerstva. Piš ho tam, kde rozhodnutí mění směr, náklady, data, riziko nebo očekávání zákazníků.
+
+Typické situace:
+
+- výběr nové integrace, subprocesora nebo hostingové služby,
+- změna cenového modelu nebo balíčků,
+- přidání funkce, která sbírá nová data,
+- větší refaktor nebo změna architektury,
+- rozhodnutí nevěnovat se žádané funkci,
+- změna onboardingu, trialu nebo prodejního procesu,
+- kompromis mezi rychlostí dodání a provozní spolehlivostí,
+- prioritizace dvou podobně důležitých roadmapových směrů.
+
+Dobré pravidlo: pokud se rozhodnutí bude vysvětlovat zákazníkovi, investorovi, právníkovi, supportu nebo budoucímu vývojáři, zaslouží si memo.
+
+### Začni otázkou, ne preferovaným řešením
+
+Špatné memo začíná větou: „Chceme nasadit nástroj X.“ Tím už je rozhodnutí skoro upečené a zbytek dokumentu jen hledá omáčku. Dobré memo začíná otázkou:
+
+> „Jak zjistíme, které kampaně přivádí kvalitní leady, aniž bychom přidali invazivní tracking na web?“
+
+Nebo:
+
+> „Jak umožníme zákazníkům hromadně importovat data, aniž bychom zvýšili riziko úniku nebo chaosu v podpoře?“
+
+Otázka drží tým u problému. Teprve potom porovnáš varianty. Často se ukáže, že nejjednodušší řešení není nový nástroj, ale lepší proces, menší funkce, jasnější dokumentace nebo ruční pilot.
+
+### Varianty musí být férové
+
+Memo má obsahovat aspoň tři možnosti:
+
+- **Nedělat nic teď:** co se stane, když rozhodnutí odložíme.
+- **Malá varianta:** nejmenší změna, která dá signál nebo sníží bolest.
+- **Větší varianta:** robustnější řešení, které může být správně později.
+
+Příklad pro import dat:
+
+- **Nedělat nic:** support bude dál ručně pomáhat prvním zákazníkům; riziko pomalého onboardingu.
+- **Malá varianta:** CSV import pro jeden typ dat, validační report a ruční rollback přes support.
+- **Větší varianta:** univerzální importér, mapování sloupců, historie importů, zákaznický rollback a API endpoint.
+
+Takhle se tým nebaví o tom, kdo má hlasitější názor, ale o ceně, riziku a učení. V začátku často vyhraje malá varianta, protože dá reálný signál bez přestavby půlky produktu.
+
+### Privacy-first sekce není příloha pro právníky
+
+Každé rozhodnutí, které se dotýká dat, musí mít krátkou privacy-first kontrolu. Ne až „potom“, až už je nástroj koupený, skript nasazený a v patičce webu se krčí třicet cookie řádků. Předem.
+
+Zeptej se:
+
+- Jaká data rozhodnutí nově sbírá, ukládá nebo sdílí?
+- Je možné dosáhnout cíle s menším rozsahem dat?
+- Přibývá nový subprocesor nebo datový tok mimo Evropu?
+- Jak dlouho data potřebujeme držet?
+- Kdo k nim bude mít přístup?
+- Jak to vysvětlíme zákazníkovi lidskou řečí?
+- Co se stane při odchodu zákazníka nebo zrušení nástroje?
+
+Tato sekce nemusí být dlouhá. Ale musí být konkrétní. „GDPR ok“ není analýza, to je samolepka na prázdné krabici.
+
+> Codyho komentář: Když tým neumí jednou větou říct, proč nová data potřebuje, velmi často je nepotřebuje. Jen se mu líbí pocit, že „budeme mít víc insightů“. To je datová obdoba nakupování kabelů do šuplíku.
+
+### Rozhodnutí zapisuj jako závazek i hypotézu
+
+Dobré rozhodnutí má dvě části. První je závazek: co uděláme teď. Druhá je hypotéza: podle čeho poznáme, že to bylo správně.
+
+Místo:
+
+> „Vybereme nástroj na newsletter.“
+
+Lépe:
+
+> „Na příští tři měsíce použijeme jednoduchý newsletter s double opt-inem, minimem polí a měřením agregovaných odkazů. Správnost ověříme podle počtu kvalifikovaných odpovědí, ne podle toho, kolik pixelů umíme vložit do e-mailu.“
+
+Rozhodnutí pak není jen „hotovo“. Má kontrolní bod. Po třech měsících se můžeš podívat, jestli přineslo lepší obchodní signál, nebo jen další nástroj v měsíční fakturaci.
+
+### Kdo rozhoduje a kdo je slyšen
+
+Malý tým často trpí falešným konsensem. Všichni se k něčemu vyjádří, nikdo nechce být brzda a nakonec se udělá rozmazaná verze všeho. Memo má jasně říct:
+
+- kdo je **vlastník rozhodnutí**,
+- kdo musí dodat vstup,
+- kdo má právo veta kvůli bezpečnosti, právu nebo provozu,
+- koho je potřeba jen informovat,
+- kdy se rozhodnutí znovu otevře.
+
+To chrání rychlost i důvěru. Vývojář nemusí nést právní riziko. Právník nemusí navrhovat UI. Obchod může popsat zákaznický tlak, ale nemusí tím automaticky řídit roadmapu.
+
+### Rozhodnutí musí mít datum expirace
+
+Ne každé rozhodnutí je navždy. U raného SaaS je zdravé říct: „Toto rozhodnutí platí do určitého milníku.“
+
+Příklady:
+
+- „Ruční onboarding držíme do prvních 10 platících zákazníků.“
+- „CSV import stačí do chvíle, kdy import řeší více než 30 % nových účtů.“
+- „Ceník revidujeme po 20 uzavřených dealových rozhovorech.“
+- „Tento subprocesor se přehodnotí při vstupu do enterprise segmentu.“
+- „Měření kampaní zůstává agregované, dokud nemáme jasný důvod pro podrobnější atribuci.“
+
+Expirace snižuje hádky. Lidé snáz přijmou menší řešení, když vědí, kdy a podle čeho se znovu otevře.
+
+### Rozhodovací archiv je produktová paměť
+
+Memo má být dohledatelné. Stačí jednoduchá složka v repozitáři, wiki nebo interní dokumentaci. Důležité je jednotné pojmenování a stav.
+
+Praktická struktura:
+
+- `2026-09-16-import-zakaznickych-dat.md`
+- `2026-09-16-newsletter-nastroj.md`
+- `2026-09-16-auditni-logy-vs-reporty.md`
+
+Stavy:
+
+- **Návrh:** sbírá se kontext a varianty.
+- **Rozhodnuto:** tým ví, co se děje.
+- **Ověřuje se:** běží pilot, experiment nebo první implementace.
+- **Uzavřeno:** výsledek byl vyhodnocen.
+- **Nahrazeno:** existuje novější rozhodnutí.
+
+Ke starému memu se nevracíš proto, abys někoho nachytal. Vracíš se proto, abys nemusel dvakrát šlápnout na stejný hrábě. Hrábě jsou mimochodem velmi škálovatelná technologie.
+
+### Checklist: rozhodovací memo
+
+- [ ] Memo začíná otázkou nebo problémem, ne oblíbeným řešením.
+- [ ] Jsou popsané aspoň tři varianty: nedělat nic, malá varianta, větší varianta.
+- [ ] Každá varianta má dopad na zákazníka, tým, náklady a riziko.
+- [ ] Privacy-first sekce popisuje nová data, přístupy, retenci a subprocesory.
+- [ ] Je jasné, kdo rozhoduje a kdo dodává vstup.
+- [ ] Rozhodnutí obsahuje hypotézu úspěchu a kontrolní datum.
+- [ ] Memo uvádí, co vědomě neděláme.
+- [ ] Výsledek je dohledatelný v interní dokumentaci.
+- [ ] Po ověření se doplní, co se tým naučil.
+- [ ] Pokud rozhodnutí ovlivní zákazníky, existuje plán komunikace.
+
+### Šablona rozhodovacího mema
+
+```markdown
+## Rozhodovací memo: [název]
+
+### Kontext
+- Datum:
+- Vlastník rozhodnutí:
+- Stav: návrh / rozhodnuto / ověřuje se / uzavřeno / nahrazeno
+- Týká se: produkt / marketing / provoz / bezpečnost / privacy / obchod
+
+### Otázka
+- Jaký problém nebo rozhodnutí řešíme:
+- Proč teď:
+- Koho se to týká:
+
+### Varianty
+#### Varianta 1: nedělat nic teď
+- Přínos:
+- Cena:
+- Riziko:
+- Co se naučíme:
+
+#### Varianta 2: malá varianta
+- Přínos:
+- Cena:
+- Riziko:
+- Co se naučíme:
+
+#### Varianta 3: větší varianta
+- Přínos:
+- Cena:
+- Riziko:
+- Co se naučíme:
+
+### Privacy-first kontrola
+- Nově sbíraná nebo sdílená data:
+- Subprocesor / integrace:
+- Retence:
+- Přístupy:
+- Vysvětlení zákazníkovi:
+- Exit nebo rollback:
+
+### Rozhodnutí
+- Vybraná varianta:
+- Proč:
+- Co vědomě neděláme:
+- Hypotéza úspěchu:
+- Kontrolní datum nebo milník:
+
+### Komunikace
+- Koho informovat interně:
+- Co říct zákazníkům:
+- Kde aktualizovat dokumentaci:
+
+### Vyhodnocení
+- Co se stalo:
+- Co jsme se naučili:
+- Co měníme příště:
+```
+
+
+
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha CU o rozhodovacím memu pro malé SaaS týmy: kdy ho psát, jak formulovat otázku, porovnat varianty, udělat privacy-first kontrolu, určit vlastníka, nastavit expiraci rozhodnutí, archivovat výsledek, checklist a šablona mema.
 - **2026-09-16:** Doplněna příloha CT o zákaznické radě a feedback systému: výběr účastníků, agenda podle rozhodnutí, zápis problémů místo funkcí, triage, komunikace zpět, roadmapové filtry, checklist a šablona feedback karty.
 - **2026-09-16:** Doplněna příloha CS o renewalech a expanzi bez nátlaku: definice úspěchu, privacy-first health score, průběžné shrnutí hodnoty, expanzní signály, churn, renewal kalendář, checklist a šablona renewal karty.
 - **2026-09-16:** Doplněna příloha CR o business case pro nákup SaaS: popis současného procesu, tvrdé/měkké/rizikové přínosy, celkové náklady změny, jednoduchý ROI model, privacy-first měření bez sledování jednotlivců, podpora interního šampiona, checklist, šablona karty a zdroje k minimalizaci údajů a privacy by design.
