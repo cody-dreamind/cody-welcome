@@ -17678,7 +17678,207 @@ U anonymních návštěvníků webu nedělej hned účet za každou cenu. Pokud 
 
 
 
+## Příloha CY: Datová mapa pro SaaS, která není jen tabulka pro audit
+
+Datová mapa je jeden z nejpodceňovanějších dokumentů v malém SaaS. Vypadá nudně, takže ji tým odkládá. Pak přijde první větší zákazník, bezpečnostní dotazník, žádost o výmaz, změna dodavatele nebo incident — a najednou všichni loví odpovědi v kódu, fakturách, Slacku, hlavách lidí a historických rozhodnutích. Krása. Archeologie, jen bez klobouku.
+
+Dobrá datová mapa není právnická dekorace. Je to provozní nástroj, který říká:
+
+- jaká data produkt opravdu sbírá,
+- proč je potřebuje,
+- kde fyzicky a smluvně končí,
+- kdo k nim má přístup,
+- jak dlouho zůstávají,
+- co se stane při exportu, výmazu, incidentu nebo změně dodavatele.
+
+Evropský privacy-first SaaS tím získá dvě výhody najednou: rychlejší rozhodování a vyšší důvěru. Když se zákazník zeptá, kde jsou jeho data a kdo je zpracovává, nechce poetický manifest. Chce přesnou odpověď bez půldenního interního dramatu.
+
+### Začni produktovým tokem, ne právní kategorií
+
+Nejhorší způsob, jak dělat datovou mapu, je otevřít prázdnou tabulku a začít sloupcem „právní základ“. Tým se zasekne dřív, než napíše první řádek. Lepší je začít produktovým tokem: co se stane od prvního kliknutí na webu po ukončení účtu.
+
+Pro malý SaaS si nakresli tyto cesty:
+
+- **Návštěva webu:** logy, analytika, formuláře, stažení šablon, newsletter nebo RSS.
+- **Registrace:** účet, ověření e-mailu, pozvánky do týmu, role a oprávnění.
+- **Používání produktu:** projekty, soubory, komentáře, události, notifikace, integrace.
+- **Fakturace:** objednávka, údaje firmy, platby, daňové doklady, upomínky.
+- **Podpora:** e-maily, chat, screenshoty, přílohy, interní poznámky, eskalace.
+- **Provoz:** aplikační logy, monitoring, zálohy, auditní záznamy, bezpečnostní události.
+- **Odchod:** export, deaktivace, výmaz, retence účetních a bezpečnostních záznamů.
+
+U každé cesty se ptej: „Který člověk nebo firma tady předává informaci? Co s ní děláme? Kam teče dál?“ Teprve potom přidej GDPR štítky. Takhle mapa zůstane srozumitelná i pro produkt, vývoj, podporu a obchod.
+
+### Rozliš data zákazníka, uživatele a provozu
+
+V SaaS se často míchají tři vrstvy dat. Pokud je v mapě nerozdělíš, později vznikají špatná rozhodnutí o exportu, retenci i přístupech.
+
+**Zákaznická data** jsou obsah, který zákazník do produktu vkládá kvůli vlastní práci: záznamy zakázek, dokumenty, poznámky, kontakty, importované tabulky, interní data jeho firmy. Tady bývá SaaS často zpracovatel a zákazník správce.
+
+**Uživatelská data** popisují lidi, kteří produkt používají: jméno, e-mail, role, přihlášení, preference, jazyk, historie souhlasů, auditní stopa akcí. Část můžeš zpracovávat jako správce, část podle instrukcí zákazníka. Bez jasného rozlišení se špatně píší podmínky i odpovědi na dotazníky.
+
+**Provozní data** pomáhají službu doručit bezpečně: serverové logy, technické metriky, chybové hlášky, rate limiting, záznamy o doručení e-mailu, zálohy. Nejsou automaticky „méně citlivá“. IP adresa, identifikátor účtu nebo obsah chyby může pořád být osobní údaj nebo obchodně citlivý signál.
+
+Praktický trik: do datové mapy přidej sloupec **vrstva dat** s hodnotami `zákaznická`, `uživatelská`, `provozní`, `fakturační`, `marketingová`. Při každé nové funkci pak rychleji poznáš, jestli patří do exportu pro zákazníka, do preference centra, do účetní retence nebo do bezpečnostního logu.
+
+### Každé pole musí mít účel
+
+Datová mapa má být nepříjemně konkrétní. Nestačí napsat „profilová data“. Napiš, která data to jsou a proč existují. Pokud nevíš proč, je to kandidát na smazání nebo aspoň na revizi.
+
+Příklad slabého řádku:
+
+| Oblast | Data | Účel |
+| --- | --- | --- |
+| Účet | Profil | Správa účtu |
+
+Příklad použitelnějšího řádku:
+
+| Oblast | Data | Účel |
+| --- | --- | --- |
+| Přihlášení | E-mail, hash hesla, datum posledního přihlášení, MFA stav | Ověření identity, bezpečnost účtu, detekce neaktivních účtů |
+
+Druhá varianta rovnou pomáhá rozhodnout:
+
+- e-mail patří do exportu účtu,
+- hash hesla se nikdy neposílá do běžného exportu,
+- datum posledního přihlášení může řídit deaktivaci neaktivních účtů,
+- MFA stav je bezpečnostní údaj, který má vidět jen omezený okruh lidí.
+
+Codyho komentář: Když pole neumíš vysvětlit jednou větou bez slov „optimalizace“ a „personalizace“, pravděpodobně ho sbíráš z nervozity, ne z potřeby.
+
+### Dodej mapě provozní otázky
+
+Aby mapa nebyla mrtvý dokument, musí odpovídat na otázky, které tým řeší v reálném provozu.
+
+U každé datové položky nebo skupiny přidej:
+
+- **Systém:** kde je primárně uložena.
+- **Dodavatel:** kdo ji zpracovává mimo vlastní infrastrukturu.
+- **Region:** EU, EHP, mimo EU, nebo nutno ověřit.
+- **Role:** jsme správce, zpracovatel, společný správce, nebo příjemce.
+- **Právní základ / instrukce:** smlouva, oprávněný zájem, souhlas, právní povinnost, zákaznická instrukce.
+- **Retence:** jak dlouho ji držíme a co ji maže.
+- **Export:** zda patří do zákaznického exportu a v jakém formátu.
+- **Výmaz:** zda se maže hned, po lhůtě, anonymizuje, nebo zůstává kvůli právní povinnosti.
+- **Přístup:** které role ji vidí v administraci, supportu a databázi.
+- **Riziko:** nízké, střední, vysoké; hlavně podle dopadu na člověka nebo zákazníka.
+
+Neřeš dokonalost. První verze může mít u některých polí stav `ověřit`. Důležité je, aby `ověřit` nebyla konečná destinace, ale úkol s vlastníkem a datem.
+
+### Datová mapa pomáhá i vývoji
+
+Vývojáři datovou mapu často vnímají jako papír bokem. Přitom dobrá mapa šetří technickou práci. Ukáže, kde potřebuješ automatické mazání, kde chybí auditní log, kde export nebude kompletní a kde se citlivý údaj zbytečně kopíruje do tří systémů.
+
+Používej ji při návrhu nové funkce:
+
+1. **Nové pole v databázi:** má účel, vlastníka, retenci a exportní pravidlo?
+2. **Nová integrace:** jaká data odchází, kam, pod jakou smlouvou a s jakým fallbackem?
+3. **Nový e-mail:** je provozní, marketingový, nebo transakční? Dá se vypnout?
+4. **Nový log:** neobsahuje tokeny, hesla, celé dokumenty nebo zbytečné osobní údaje?
+5. **Nový report:** opravdu potřebuje individuální úroveň, nebo stačí agregace?
+
+Při code review stačí jednoduchá otázka: „Mění tahle změna datovou mapu?“ Pokud ano, aktualizace mapy je součást Definition of Done. Bez toho vzniká dokumentační dluh, který se tváří jako compliance, ale bolí jako bug.
+
+### Minimalistická tabulka pro začátek
+
+Nemusíš hned zavádět GRC platformu. Pro malý tým stačí Markdown, spreadsheet nebo YAML v repozitáři. Důležité je, aby mapa měla vlastníka, historii změn a byla blízko produktu.
+
+Startovací struktura:
+
+```markdown
+## Datová mapa: [produkt]
+
+| Tok | Data | Účel | Systém | Dodavatel | Region | Role | Právní základ / instrukce | Retence | Export | Výmaz | Přístup | Riziko | Vlastník |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Registrace | E-mail, jméno, hash hesla | Založení a zabezpečení účtu | Primární DB | vlastní provoz | EU | správce / ověřit | smlouva | po dobu účtu + 30 dní | ano, bez hashe | smazat/anonymizovat | uživatel, support L2, admin | střední | product |
+```
+
+Pro větší přehlednost rozděl mapu na listy nebo sekce podle toku: web, účet, produktová data, billing, support, provoz, marketing. Hlavně ji nedělej podle organizační struktury. Data netečou podle toho, jak se jmenují oddělení.
+
+### Review dělej po událostech, ne jen podle kalendáře
+
+Čtvrtletní kontrola je fajn, ale nestačí. Datová mapa se má aktualizovat při konkrétních změnách:
+
+- spouštíš novou funkci se sběrem dat,
+- přidáváš nebo měníš dodavatele,
+- zapínáš novou analytiku nebo marketingový kanál,
+- měníš retenční lhůty,
+- přidáváš AI asistenta nebo automatizované rozhodování,
+- otevíráš API nebo webhooks,
+- řešíš incident, žádost o výmaz nebo export,
+- vstupuješ na nový trh v EU.
+
+Po každé takové změně doplň řádek, datum a vlastníka. Pokud mapa žije jen jednou ročně před auditem, není to mapa. Je to kostým.
+
+### Checklist: datová mapa privacy-first
+
+- Má každý datový tok popsaný účel, systém, dodavatele a region?
+- Rozlišuje mapa zákaznická, uživatelská, provozní, fakturační a marketingová data?
+- Víš u každé skupiny dat, jestli vystupuješ jako správce, zpracovatel nebo obojí?
+- Je jasné, která data patří do exportu a která ne?
+- Má každá položka retenční pravidlo a spouštěč výmazu?
+- Neunikají osobní nebo citlivá data do logů, analytiky, AI nástrojů nebo support příloh?
+- Je u každého dodavatele uveden region, smluvní stav a odpovědný vlastník?
+- Aktualizuje se mapa při nové funkci, integraci, změně dodavatele nebo incidentu?
+- Umí podpora podle mapy odpovědět zákazníkovi bez dotazu na vývojáře?
+- Je mapa verzovaná, dohledatelná a součástí Definition of Done?
+
+### Šablona datové karty
+
+```markdown
+## Datová karta: [tok / funkce]
+
+### Kontext
+- Produktová oblast:
+- Vlastník:
+- Datum poslední revize:
+- Stav: návrh / aktivní / k revizi / ukončeno
+
+### Data
+- Kategorie dat:
+- Konkrétní pole:
+- Vrstva: zákaznická / uživatelská / provozní / fakturační / marketingová
+- Citlivost:
+
+### Účel a role
+- Účel zpracování:
+- Naše role: správce / zpracovatel / společný správce / ověřit
+- Právní základ nebo zákaznická instrukce:
+- Informace pro uživatele nebo zákazníka:
+
+### Systémy a dodavatelé
+- Primární systém:
+- Další systémy:
+- Dodavatelé:
+- Region zpracování:
+- Předání mimo EU/EHP:
+
+### Provoz
+- Kdo má přístup:
+- Retence:
+- Export:
+- Výmaz nebo anonymizace:
+- Zálohy:
+- Logování:
+
+### Rizika a opatření
+- Hlavní rizika:
+- Technická opatření:
+- Organizační opatření:
+- Otevřené otázky:
+```
+
+### Zdroje k datovým mapám a záznamům zpracování
+
+- [European Commission: Application of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/application-gdpr_en) — praktický přehled, kdy GDPR dopadá na firmy, jak se řeší malé organizace, záznamy činností a role správce/zpracovatele.
+- [European Commission: What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en) — shrnutí principů jako účelové omezení, minimalizace, přesnost, omezení uložení a zabezpečení.
+- [EDPB: Data controller or data processor — Data protection guide for small business](https://www.edpb.europa.eu/sme/learn-the-basics/data-controller-or-data-processor_en) — vysvětlení rolí správce a zpracovatele pro malé firmy.
+- [EDPB: Guidelines 07/2020 on the concepts of controller and processor in the GDPR](https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en) — podrobnější vodítka k rolím, smluvním vztahům a odpovědnostem.
+- [EDPB: Do I need a record of processing?](https://www.edpb.europa.eu/node/5350_sk) — stručné vysvětlení záznamů o činnostech zpracování a jejich praktického smyslu.
+
+
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha CY o datové mapě pro SaaS: produktové datové toky, rozlišení zákaznických/uživatelských/provozních dat, účely polí, provozní otázky, napojení na vývoj, minimalistická tabulka, review události, checklist, šablona datové karty a ověřené zdroje Evropské komise a EDPB.
 - **2026-09-16:** Doplněna příloha CX o preference centru bez cookie divadla: rozlišení účelů a právních základů, výchozí privacy-first stav, správa preferencí v účtu, evidence verzí souhlasů, oddělení marketingové a provozní komunikace, minimalistický technický model, checklist, šablona preference karty a ověřené zdroje EDPB, Evropské komise a ÚOOÚ.
 - **2026-09-16:** Doplněna příloha CW o týdenním provozním review SaaS: rozhodovací otázka, agregované signály, oddělení provozu/produktu/obchodu, support jako radar, incidenty bez hledání viníka, vlastníci rozhodnutí, třicetiminutový rytmus, checklist a šablona review.
 - **2026-09-16:** Doplněna příloha CV o exit plánu dodavatele: výběr nástrojů s ohledem na odchod, kritičnost vendorů, datový inventář, test exportů, migrační fáze, vypnutí účtů a integrací, zákaznická komunikace, checklist a šablona vendor exit karty.
