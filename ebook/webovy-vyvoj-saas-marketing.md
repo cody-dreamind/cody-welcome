@@ -19021,7 +19021,209 @@ První placený kvartál je most mezi „produkt se líbí“ a „produkt je so
 
 ---
 
+## Příloha DF: Referenční příběh po prvním kvartálu bez vytěžování zákazníka
+
+Po prvním placeném kvartálu má tým často chuť udělat case study. To je správný instinkt, ale špatně provedená případovka umí zákazníka otrávit rychleji než formulář s povinným polem „jak jste se o nás dozvěděli“. Referenční příběh není trofej pro marketing. Je to společně odsouhlasený záznam hodnoty, který pomáhá podobným zákazníkům pochopit, jestli je produkt pro ně.
+
+Dobrá případová studie po prvním kvartálu má tři cíle:
+
+1. **Zákazník se v ní pozná a nestydí se ji ukázat interně.**
+2. **Nový zájemce rychle pochopí situaci, problém a výsledek.**
+3. **Tým nezveřejní víc dat, než je nutné pro důvěryhodný příběh.**
+
+Nejde o literární Nobelovku. Jde o konkrétní obchodní důkaz bez datového stripteasu.
+
+### Reference začíná už během kvartálu
+
+Nejhorší moment na žádost o případovou studii je náhodný e-mail tři měsíce po onboardingu: „Ahoj, nemáte čas na testimonial?“ Zákazník v tu chvíli loví v paměti, co se vlastně stalo, a ty lovíš citaci jako člověk, který nechal síť doma.
+
+Lepší je sbírat podklady průběžně, ale minimalisticky:
+
+- na začátku si poznamenej původní situaci a očekávaný výsledek,
+- v prvním měsíci zachyť odstraněné tření,
+- ve druhém měsíci sleduj vznikající rutinu,
+- ve třetím měsíci shrň dopad a další krok,
+- průběžně si označ výroky zákazníka, které smíš později ověřit jako citaci,
+- nikdy neukládej citlivé interní informace jen proto, že „by se mohly hodit“.
+
+Privacy-first přístup tady není brzda. Naopak pomáhá psát lepší příběhy. Když nemůžeš bezmyšlenkovitě zveřejnit všechno, musíš najít podstatu: problém, změnu chování a výsledek.
+
+### Nejdřív interní důkaz, až potom veřejná případovka
+
+Ne každý úspěšný kvartál musí skončit veřejnou case study. Někdy stačí interní referenční karta pro obchod, support a produkt. Ta může být anonymizovaná a pořád užitečná.
+
+Rozlišuj tři úrovně:
+
+- **Interní příběh:** používá se uvnitř týmu pro učení, onboarding obchodníků a produktová rozhodnutí.
+- **Anonymizovaný příběh:** popisuje segment, situaci a výsledek bez názvu zákazníka.
+- **Veřejná case study:** obsahuje jméno zákazníka, schválené citace a konkrétní veřejné detaily.
+
+Tahle stupnice snižuje tlak. Když zákazník nechce veřejný příběh, pořád může vzniknout anonymizovaná verze. Když nechce ani tu, tým si může ponechat interní poznatky bez marketingového využití.
+
+> Codyho komentář: Reference není únos zákazníkovy reputace pro naše landing page dobrodružství. Je to dohoda. Ano, marketing právě teatrálně odložil megafon.
+
+### Ptej se na změnu práce, ne na obecnou spokojenost
+
+Otázka „jste spokojení?“ vede k odpovědi „ano, díky“. To je zdvořilé, ale nepoužitelné. Referenční příběh potřebuje zachytit změnu práce.
+
+Lepší otázky:
+
+- Co jste před produktem řešili ručně nebo opakovaně?
+- Který moment vám ukázal, že produkt dává smysl?
+- Co se změnilo v běžném týdnu týmu?
+- Kde produkt odstranil zbytečnou komunikaci nebo čekání?
+- Co byste doporučili podobné firmě, která stejný problém teprve řeší?
+- Co zatím není ideální a co je další krok?
+
+Poslední otázka je důležitá. Příběh bez limitů působí podezřele. Když přiznáš, že další kvartál bude řešit třeba lepší napojení dat nebo širší adopci v týmu, celý text je důvěryhodnější. Produkt nemusí být dokonalý. Musí být užitečný a poctivě popsaný.
+
+### Struktura referenčního příběhu
+
+Pro malý B2B SaaS funguje jednoduchá struktura:
+
+1. **Kontext:** kdo je zákazník a v jaké situaci byl.
+2. **Problém:** co brzdilo práci, rozhodování nebo zákaznickou zkušenost.
+3. **Volba řešení:** proč dávalo smysl začít právě tímto produktem nebo pilotem.
+4. **Nasazení:** jak vypadal první kvartál, kdo byl zapojený a co se nastavilo.
+5. **Výsledek:** jaká rutina, úspora, přehled nebo snížení rizika vzniklo.
+6. **Co dál:** další krok bez agresivního upsellu.
+7. **Privacy poznámka:** jak se pracovalo s daty a co se nesbíralo.
+
+Privacy poznámka nemusí být dlouhá. Stačí například: „Projekt běžel na odděleném workspace, pro reporting se používaly agregované signály a veřejná studie neobsahuje osobní údaje koncových uživatelů.“ Taková věta je malá, ale pro správný typ zákazníka velmi hlasitá.
+
+### Čísla používej přesně, nebo raději opatrně
+
+Čísla zvyšují důvěryhodnost, ale jen když jsou opravdu obhajitelná. Pokud nemáš tvrdé měření, nepiš „ušetřili jsme 37 % času“, protože to zní přesně a může to být přesně blbě. Raději použij měkčí, ale poctivý popis.
+
+Příklady formulací:
+
+- „Tým nahradil páteční ruční slučování reportu jedním sdíleným workflow.“
+- „Dispečink už nepředává denní plán přes kombinaci telefonu a tabulky.“
+- „Management má jednou týdně stejné provozní shrnutí pro všechny pobočky.“
+- „Zákazník v dalším kvartálu rozšiřuje používání na druhý tým.“
+
+Když čísla máš, uveď jejich kontext:
+
+- období měření,
+- co přesně se počítalo,
+- jestli jde o odhad, agregovaný signál nebo účetní údaj,
+- co se do čísla nezahrnuje.
+
+Tohle je méně efektní než velký marketingový výkřik, ale mnohem odolnější při nákupním procesu. A taky méně trapné, když se někdo zeptá „jak jste to spočítali?“
+
+### Schvalování bez chaosu
+
+Veřejná case study musí mít jasný schvalovací proces. Ne proto, že milujeme procesy. Protože nechceme, aby marketing poslal ven text, který zákazník vidí poprvé až na LinkedInu. To je sociální sebevražda v hezkém grafickém kabátku.
+
+Doporučený postup:
+
+1. **Domluv rozsah:** anonymní, veřejný název, logo, citace, čísla, screenshoty.
+2. **Pošli osnovu:** zákazník odsouhlasí příběh dřív, než vznikne celý text.
+3. **Sepiš první verzi:** bez přikrášlování a bez citlivých detailů.
+4. **Označ části ke schválení:** citace, čísla, screenshoty, názvy týmů, interní procesy.
+5. **Dej rozumnou lhůtu:** ideálně s jedním jasným kontaktem na obou stranách.
+6. **Archivuj souhlas:** ulož verzi, datum a kdo schválil zveřejnění.
+7. **Domluv aktualizaci:** příběh po půl roce zkontroluj nebo stáhni, pokud přestal odpovídat realitě.
+
+Archivace souhlasu je nudná. Nudné věci často zachraňují zadek. To je jejich tajná superschopnost.
+
+### Screenshoty a data: raději synteticky
+
+Screenshoty jsou skvělé, protože ukazují realitu produktu. Zároveň jsou rizikové, protože v nich často zůstanou jména, e-maily, interní poznámky, názvy klientů nebo finanční údaje.
+
+Praktická pravidla:
+
+- pro veřejné příběhy používej syntetická nebo upravená data,
+- před exportem screenshotu vypni nepotřebné panely a osobní detaily,
+- nikdy nemaž citlivé údaje jen rozmazáním, pokud originál dál koluje v týmu,
+- vytvoř samostatné demo zobrazení, které ukazuje workflow bez živých dat,
+- u grafů používej agregované hodnoty a popiš, co znamenají,
+- pokud zákazník poskytne vlastní materiály, nech si potvrdit, že je smíš použít.
+
+U privacy-first značky je lepší méně efektní, ale bezpečný screenshot než krásný obrázek, který omylem ukáže kus zákazníkova provozu. Důvěra se nezískává pixelovým adrenalinem.
+
+### Distribuce bez pronásledování
+
+Hotová případovka nemusí znamenat reklamní pixelovou mašinu. Distribuce může být jednoduchá a přímá:
+
+- samostatná stránka s čitelnou URL,
+- odkaz v relevantní produktové sekci,
+- krátké shrnutí v newsletteru,
+- RSS položka pro lidi, kteří chtějí sledovat obsah bez algoritmů,
+- PDF verze pro obchodní proces, pokud ji zákazníci potřebují,
+- interní karta pro obchod s hlavními otázkami a odpověďmi,
+- přímý odkaz ve follow-up e-mailech po demu.
+
+Měř základní signály: návštěvy stránky, kliknutí na CTA, odpovědi na follow-up, použití v obchodním procesu. Nepotřebuješ vědět, že konkrétní člověk četl odstavec číslo čtyři třikrát v úterý večer. To není insight. To je divné.
+
+### Checklist: referenční příběh po prvním kvartálu
+
+- [ ] Máme jasně popsaný původní problém zákazníka.
+- [ ] Víme, která rutina nebo výsledek vznikly během kvartálu.
+- [ ] Rozlišili jsme interní, anonymizovanou a veřejnou verzi příběhu.
+- [ ] Zákazník předem ví, jaký rozsah zveřejnění navrhujeme.
+- [ ] Citace, čísla, logo a screenshoty mají samostatné schválení.
+- [ ] Veřejný text neobsahuje zbytečné osobní nebo interní údaje.
+- [ ] Screenshoty používají syntetická, anonymizovaná nebo schválená data.
+- [ ] Čísla mají kontext a nejsou nafouknutá marketingovou pumpičkou.
+- [ ] Příběh obsahuje i limit nebo další krok, ne jen chválu.
+- [ ] Distribuce stojí na přímých odkazech, RSS a užitečném follow-upu.
+- [ ] Uložený souhlas obsahuje datum, verzi a schvalující osobu.
+- [ ] Máme naplánované review příběhu po několika měsících.
+
+### Šablona: referenční karta po kvartálu
+
+```markdown
+# Referenční karta: [zákazník / segment]
+
+## Úroveň použití
+- Interní / anonymizovaná / veřejná:
+- Povolené použití názvu zákazníka:
+- Povolené použití loga:
+- Povolené citace:
+- Povolené screenshoty:
+
+## Kontext
+- Segment zákazníka:
+- Role zapojených lidí:
+- Původní situace:
+- Hlavní problém:
+- Dopad problému:
+
+## První kvartál
+- Co se nastavilo:
+- Jaká rutina vznikla:
+- Kde bylo tření:
+- Jak se tření odstranilo:
+- Co zatím není hotové:
+
+## Výsledek
+- Konkrétní změna práce:
+- Agregovaný nebo ověřitelný signál:
+- Citace ke schválení:
+- Další krok zákazníka:
+
+## Privacy-first kontrola
+- Data, která nesmí ven:
+- Screenshoty k úpravě nebo nahrazení:
+- Agregované údaje k použití:
+- Verze textu ke schválení:
+- Schválil / datum:
+
+## Distribuce
+- URL případovky:
+- Produktová stránka, kde bude odkaz:
+- Newsletter / RSS poznámka:
+- Obchodní follow-up:
+- Datum review příběhu:
+```
+
+Referenční příběh po prvním kvartálu je nejlepší, když působí jako užitečný rozhovor, ne jako reklamní konfety. Ukaž problém, změnu práce, ověřený výsledek a férové limity. Když se u toho zákazník cítí bezpečně, buduješ víc než marketingový materiál. Buduješ důvěru, že s daty i reputací zacházíš jako dospělý. Což by na internetu pořád mělo být méně výjimečné, než bohužel je.
+
+---
+
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha DF o referenčním příběhu po prvním placeném kvartálu: průběžný sběr podkladů, úrovně interní/anonymizované/veřejné případovky, otázky na změnu práce, struktura case study, opatrná práce s čísly, schvalování, bezpečné screenshoty, privacy-first distribuce, checklist a šablona referenční karty.
 - **2026-09-16:** Doplněna příloha DE o prvním placeném kvartálu zákazníka: stabilizace, tvorba návyku, důkaz hodnoty, včasné varovné signály, privacy-first health score bez sledování jednotlivců, kvartální shrnutí, opatrná expanze, checklist a šablona kvartální karty.
 - **2026-09-16:** Doplněna příloha DD o přechodu z trialu do placeného provozu: potvrzení hodnoty, čištění testovacích dat, jasná fakturace, první měsíc onboardingu, předávka mezi obchodem a supportem, měření návyku, uzavření neúspěšných trialů, checklist a šablona převodní karty.
 - **2026-09-16:** Doplněna příloha DC o trialu, který prodává hodnotu místo sběru dat: jeden aktivační scénář, úměrná registrace, onboarding podle práce zákazníka, agregované měření, užitečná komunikace, jasný konec trialu, checklist a šablona trial karty.
