@@ -18851,7 +18851,178 @@ Převod z trialu není administrativní formalita. Je to chvíle, kdy se z nadě
 
 ---
 
+## Příloha DE: První placený kvartál zákazníka bez tichého churnu
+
+První platba je příjemná. První kvartál rozhoduje, jestli zákazník zůstane. Spousta SaaS týmů slaví podpis smlouvy nebo aktivaci karty a pak se na tři měsíce odmlčí, protože „zákazník už je onboardovaný“. Jenže zákazník mezitím řeší běžnou práci, interní odpor, staré návyky, data v původních systémech a kolegy, kteří se ptají, proč mají zase používat další nástroj.
+
+První placený kvartál má jednoduchý cíl: převést hodnotu z prodejního slibu do opakovatelné rutiny. Nejde o to zákazníka honit. Jde o to včas poznat, jestli produkt zapadl do reálného provozu, nebo jen leží vedle něj jako hezká, ale ignorovaná aplikace.
+
+Dobrý kvartální plán odpovídá na čtyři otázky:
+
+1. **Jaká rutina má po třech měsících existovat?**
+2. **Kdo ji vlastní na straně zákazníka?**
+3. **Jak poznáme, že produkt opravdu pomáhá?**
+4. **Jaké varovné signály zachytíme dřív než výpověď?**
+
+### Nepočítej jen používání, sleduj změnu práce
+
+Aktivní uživatel není automaticky spokojený zákazník. Člověk může klikat často, protože produkt pomáhá, nebo protože je workflow zmatené a hledá, kam sakra zmizelo tlačítko. Samotné číslo přihlášení proto nestačí.
+
+V prvním kvartálu sleduj hlavně změnu práce:
+
+- používá zákazník produkt pro reálné úkoly, ne jen testovací příklady,
+- přesunula se část procesu ze starého nástroje do nového,
+- vznikla opakovaná rutina, třeba týdenní plánování nebo měsíční report,
+- zapojili se lidé, kteří mají práci opravdu dělat,
+- zákazník se ptá na zlepšení workflow, ne jen na základní ovládání,
+- interní vlastník dokáže vysvětlit hodnotu produktu bez tebe.
+
+Tohle můžeš měřit velmi jednoduše. U plánovacího SaaS třeba nepočítej každý pohyb myši. Počítej, kolik nových zakázek vzniklo v systému, kolik jich prošlo celým stavem od zadání po dokončení a jestli tým přestal posílat kritické informace bokem v e-mailu.
+
+> Codyho komentář: Pokud zákazník po dvou měsících pořád používá produkt jen v pondělí pět minut a zbytek týdne jede ve starém Excelu, nemáš „nízký engagement“. Máš tichý churn s kalendářovým zpožděním.
+
+### Nastav kvartál jako tři malé etapy
+
+První kvartál není jedna neurčitá fáze „po onboardingu“. Rozděl ho na tři menší etapy, protože každá má jiný typ rizika.
+
+**První měsíc: stabilizace.** Zákazník převádí nastavení, lidi a první provozní data. Riziko je zmatek: špatné role, nejasné workflow, chybějící import, nedokončené rozhodnutí. Tady pomáhá krátký check-in, kontrola nastavení a jasný seznam „hotovo / není hotovo“.
+
+**Druhý měsíc: návyk.** Produkt by měl být součástí běžné práce. Riziko je návrat ke starému procesu. Tady sleduj opakované použití, ne jednorázové nadšení. Ptej se: „Který krok už dnes děláte v produktu automaticky?“
+
+**Třetí měsíc: důkaz hodnoty.** Zákazník potřebuje vidět, proč má pokračovat. Riziko je neviditelná hodnota: produkt pomáhá, ale nikdo to neumí pojmenovat. Tady připrav krátké shrnutí výsledků, překážek a dalšího kroku.
+
+Praktický rytmus může vypadat takto:
+
+- **Den 7:** technická a provozní kontrola nastavení.
+- **Den 30:** review prvního měsíce a odstranění tření.
+- **Den 60:** kontrola návyku a zapojení týmu.
+- **Den 90:** business review s rozhodnutím, co dál.
+
+U malých zákazníků nemusí být každý bod schůzka. Někdy stačí dobře napsaný e-mail, checklist v aplikaci nebo krátký formulář zpětné vazby. Důležité je, aby rytmus existoval a někdo ho vlastnil.
+
+### Varovné signály zachytíš dřív než support ticket
+
+Zákazník často neřekne „odcházíme“ hned. Nejdřív se začne vytrácet. Přestane zvát další lidi, odkládá rozhodnutí, nereaguje na otázky, používá jen jednu okrajovou funkci nebo žádá exporty bez jasného důvodu.
+
+Varovné signály v prvním kvartálu:
+
+- hlavní vlastník se po zaplacení odmlčel,
+- do produktu se nepřenesla reálná data,
+- nový tým se nepřihlásil ani po pozvánce,
+- zákazník používá jen demo scénář z trialu,
+- support opakuje stejné základní vysvětlení,
+- zákazník řeší interní odpor, ale nikdo ho nepojmenoval,
+- žádný člověk na straně zákazníka neumí říct, co je úspěch.
+
+U každého signálu měj jednoduchou reakci. Když se nepřenesla reálná data, nabídni importní mini-workshop nebo čistý start. Když se nezapojil tým, pošli vlastníkovi krátký interní komunikační text. Když se opakují dotazy, uprav onboarding nebo dokumentaci. Nečekej na „větší vzorek“. První kvartál je přesně období, kdy malá úprava zachrání velký vztah.
+
+### Privacy-first health score bez sledování jednotlivců
+
+Health score nemusí být šmírovací tabule, kde se řeší, že Jana v úterý klikla sedmnáctkrát na filtr. Privacy-first přístup pracuje s agregovanými a účelovými signály.
+
+Rozumné signály pro první kvartál:
+
+- počet dokončených klíčových workflow za workspace,
+- počet aktivních týmových rolí, ne detailní profil každého člověka,
+- dokončené onboardingové kroky,
+- počet otevřených blokérů a jejich stáří,
+- počet support dotazů podle tématu,
+- potvrzení vlastníka, že produkt je součástí procesu,
+- výsledek kvartálního review.
+
+Naopak si dej pozor na metriky, které sbírají hodně osobního chování a málo pomáhají rozhodnutí: heatmapy bez jasného účelu, nahrávání relací, detailní sledování každého kliknutí nebo profilování jednotlivých zaměstnanců zákazníka. Pokud metrika nevede ke konkrétnímu rozhodnutí, pravděpodobně ji nepotřebuješ.
+
+### Připrav shrnutí hodnoty dřív, než se zákazník zeptá
+
+Na konci prvního kvartálu by zákazník neměl lovit v paměti, proč vlastně platí. Pomoz mu krátkým shrnutím. Ideálně takovým, které může přeposlat šéfovi, účetnímu nebo internímu týmu.
+
+Shrnutí hodnoty může mít jednu stránku:
+
+- co byl původní problém,
+- co se během kvartálu nastavilo,
+- jaké rutiny vznikly,
+- jaké překážky se odstranily,
+- jaké výsledky jsou vidět,
+- co se nepovedlo a jaký je další krok,
+- co doporučujeme pro další kvartál.
+
+Piš konkrétně. „Zlepšili jsme efektivitu“ je mlha. „Dispečink zadává nové servisní zakázky v jednom workflow, technici dostávají denní plán bez ručního přeposílání tabulek a tým už nepotřebuje páteční slučování reportu ze tří souborů“ je důkaz.
+
+### První kvartál není prostor pro agresivní upsell
+
+Ano, v prvním kvartálu se mohou objevit expanzní příležitosti. Ale pokud zákazník ještě nemá stabilní základní rutinu, agresivní upsell působí jako špatný vtip. Nejdřív potvrď hodnotu, pak rozšiřuj.
+
+Dobré expanzní otázky:
+
+- Který další tým má stejný problém?
+- Které ruční kroky pořád zůstaly mimo produkt?
+- Co by zrychlilo adopci bez většího sběru dat?
+- Která integrace by odstranila duplicitní práci?
+- Jaký výsledek by měl dávat smysl pro další kvartál?
+
+Špatné expanzní otázky:
+
+- Kolik dalších licencí vám můžeme prodat hned teď?
+- Nechcete vyšší tarif, protože má víc funkcí?
+- Můžeme vám zapnout všechno a pak se uvidí?
+
+Rozšíření má navazovat na práci zákazníka, ne na hlad prodejního forecastu. Forecast je důležitý. Ale zákazník není svačina pro tabulku.
+
+### Checklist: první placený kvartál
+
+- [ ] Víme, jaká rutina má po třech měsících existovat.
+- [ ] Máme vlastníka na straně zákazníka i u nás.
+- [ ] První měsíc má kontrolu nastavení a odstranění tření.
+- [ ] Druhý měsíc sleduje návyk, ne jen přihlášení.
+- [ ] Třetí měsíc obsahuje shrnutí hodnoty a další krok.
+- [ ] Health score používá agregované a účelové signály.
+- [ ] Varovné signály mají předem domluvenou reakci.
+- [ ] Interní poznámky nesbírají zbytečné osobní detaily.
+- [ ] Expanzní návrhy vycházejí z reálné práce zákazníka.
+- [ ] Zákazník dostane srozumitelné kvartální shrnutí.
+
+### Šablona: kvartální karta zákazníka
+
+```markdown
+# První placený kvartál: [zákazník / workspace]
+
+## Cíl kvartálu
+- Hlavní rutina, která má vzniknout:
+- Vlastník u zákazníka:
+- Vlastník u nás:
+- Měřítko úspěchu:
+
+## Měsíc 1: stabilizace
+- Co je nastavené:
+- Co blokuje provoz:
+- Kdo potřebuje pomoc:
+- Další krok:
+
+## Měsíc 2: návyk
+- Opakované workflow:
+- Zapojené role / týmy:
+- Návrat ke starému procesu:
+- Úpravy onboardingu:
+
+## Měsíc 3: hodnota
+- Viditelné výsledky:
+- Nevyřešené překážky:
+- Doporučení na další kvartál:
+- Riziko churnu:
+
+## Privacy-first kontrola
+- Jaké agregované signály sledujeme:
+- Jaké osobní údaje nepotřebujeme:
+- Retence poznámek a review:
+- Citlivé informace k omezení přístupu:
+```
+
+První placený kvartál je most mezi „produkt se líbí“ a „produkt je součást práce“. Když ho necháš bez vlastníka, vztah se může tvářit zdravě až do chvíle, kdy přijde výpověď. Když ho povedeš vědomě, zákazník dostane rytmus, tým dostane signály a produkt dostane šanci stát se návykem místo další zapomenuté ikony v liště.
+
+---
+
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha DE o prvním placeném kvartálu zákazníka: stabilizace, tvorba návyku, důkaz hodnoty, včasné varovné signály, privacy-first health score bez sledování jednotlivců, kvartální shrnutí, opatrná expanze, checklist a šablona kvartální karty.
 - **2026-09-16:** Doplněna příloha DD o přechodu z trialu do placeného provozu: potvrzení hodnoty, čištění testovacích dat, jasná fakturace, první měsíc onboardingu, předávka mezi obchodem a supportem, měření návyku, uzavření neúspěšných trialů, checklist a šablona převodní karty.
 - **2026-09-16:** Doplněna příloha DC o trialu, který prodává hodnotu místo sběru dat: jeden aktivační scénář, úměrná registrace, onboarding podle práce zákazníka, agregované měření, užitečná komunikace, jasný konec trialu, checklist a šablona trial karty.
 - **2026-09-16:** Doplněna příloha DB o demo prostředí bez živých dat: jasný obchodní účel, syntetická data, oddělení od produkce, scénáře podle práce zákazníka, minimalistický demo formulář, expirace přístupů, agregované měření, privacy-first důkazy, checklist a šablona demo karty.
