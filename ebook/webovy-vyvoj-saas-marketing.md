@@ -18293,7 +18293,228 @@ Rozděl si hodinu takto:
 ```
 
 
+## Příloha DB: Demo prostředí bez živých dat a obchodního divadla
+
+Demo je zvláštní zvíře. Má ukázat hodnotu produktu co nejrychleji, ale nesmí být jen naleštěná výloha, která se rozpadne při první otázce zákazníka. U privacy-first SaaS má navíc ještě jednu roli: ukazuje, jak vážně bereš data, bezpečnost a provozní disciplínu.
+
+Dobré demo prostředí není kopie produkce s přelepenými jmény. Je to samostatný, kontrolovaný prostor s promyšlenými scénáři, bezpečnými daty a jasným cílem. Má obchodníkovi pomoct vysvětlit produkt, zákazníkovi ověřit vlastní use-case a týmu zabránit v nechtěném úniku citlivostí. Ano, demo může být sexy i bez toho, aby v něm omylem svítily faktury skutečných zákazníků. Odvážná myšlenka, já vím.
+
+> Codyho komentář: Když někdo ukazuje demo nad produkční databází, není to „rychlá improvizace“. Je to losování tomboly, kde hlavní cenou je incident.
+
+### Demo má mít jeden obchodní účel
+
+Nejdřív si napiš, jaké rozhodnutí má demo podpořit. Jinak do něj nacpeš všechny funkce a zákazník odejde s dojmem, že viděl hodně obrazovek a málo odpovědí.
+
+Typické účely dema:
+
+- **Discovery demo:** ověřit, jestli problém a proces zákazníka odpovídá produktu.
+- **Hodnotové demo:** ukázat konkrétní výsledek, který zákazník chce koupit.
+- **Technické demo:** prokázat integrace, oprávnění, auditní stopu nebo bezpečnost.
+- **Pilotní demo:** připravit zákazníka na první reálný workflow.
+- **Interní champion demo:** dát šampionovi materiál, který může ukázat kolegům.
+
+Každý účel potřebuje jiný scénář. Obchodník nepotřebuje v discovery ukazovat admin nastavení SSO, pokud zákazník ještě ani neví, jestli chce měnit současný proces. A technický buyer nepotřebuje slyšet marketingovou ódu na „intuitivní prostředí“, když se ptá, jak funguje export a role.
+
+### Používej syntetická data, ne produkční zbytky
+
+Demo data mají působit realisticky, ale nesmí pocházet ze skutečných zákaznických dat, pokud k tomu nemáš velmi dobrý právní, smluvní a bezpečnostní důvod. V malém SaaS téměř nikdy nemáš.
+
+Syntetická data nejsou náhodné nesmysly. Mají simulovat reálný proces:
+
+- firmy, osoby a zakázky mají uvěřitelné názvy,
+- časové osy dávají smysl,
+- stavy workflow ukazují běžné i problémové situace,
+- čísla jsou realistická, ale neodkazují na konkrétního zákazníka,
+- texty neobsahují e-maily, telefony ani osobní poznámky skutečných lidí.
+
+Špatně:
+
+> „Firma ABC, Jan Novák, faktura 2024-001, urgentní reklamace od reálného klienta.“
+
+Lépe:
+
+> „Servisní tým Morava, technik Petr, zakázka výměny čerpadla, zpoždění kvůli chybějícímu dílu.“
+
+Syntetická data piš jako příběh. Demo pak není proklikávání tabulek, ale ukázka změny práce: problém vznikne, produkt ho zachytí, tým rozhodne, zákazník dostane výsledek.
+
+### Odděl demo od produkce technicky i mentálně
+
+Demo prostředí by mělo být samostatné. Minimální rozumný standard:
+
+- vlastní databáze nebo tenant,
+- oddělené přístupové údaje,
+- jasné označení prostředí v UI,
+- vypnuté produkční webhooks a e-mailové odesílání,
+- omezené integrace jen na sandbox účty,
+- možnost rychlého resetu do známého stavu,
+- samostatné logy a monitorování.
+
+Pokud používáš multi-tenant architekturu, demo tenant nestačí jen založit. Označ ho interně jako demo, nastav mu limity a zabraň tomu, aby se omylem dostal do produkčních reportů, fakturace nebo zákaznické komunikace.
+
+Důležitá drobnost: demo účty nesmí mít vyšší oprávnění jen proto, že „je to přece demo“. Právě demo často sdílíš s lidmi mimo tým. Role, expirace přístupů a auditní logy mají platit i tady.
+
+### Scénář ukaž jako práci, ne jako seznam funkcí
+
+Dobré demo má dramatickou linku. Malou, pracovní, bez filmového orchestru:
+
+1. zákazník má konkrétní problém,
+2. v systému vznikne situace,
+3. produkt pomůže udělat správné rozhodnutí,
+4. tým ušetří čas nebo sníží riziko,
+5. zákazník vidí, jak by to vypadalo u něj.
+
+Příklad pro SaaS na plánování servisních zakázek:
+
+- dispečer ráno vidí přetížený den,
+- technik hlásí zpoždění,
+- systém ukáže zakázky s dopadem na SLA,
+- dispečer přesune méně urgentní práci,
+- zákazník dostane automatickou, ale nevtíravou aktualizaci,
+- manažer vidí agregovaný přehled bez sledování každého kroku technika jako v detektivce.
+
+Všimni si, že funkce se ukazují až skrz situaci. To je rozdíl mezi „máme filtr podle priority“ a „takhle najdete zakázky, které dnes opravdu hoří“.
+
+### Demo formulář sbírá jen to, co potřebuješ
+
+Pokud dáváš lidem přístup do demo prostředí, nesbírej registrační román. Pro první demo obvykle stačí:
+
+- jméno,
+- pracovní e-mail,
+- firma,
+- role nebo základní segment,
+- volitelně jedna otázka k use-casu.
+
+Telefon, velikost rozpočtu, počet zaměstnanců, marketingový souhlas a „jak jste se o nás dozvěděli“ nepatří do každého formuláře automaticky. Pokud údaj nepoužiješ k doručení dema, kvalifikaci nebo bezpečnosti přístupu, pravděpodobně tam nemá co dělat.
+
+Privacy-first přístup znamená i jasně říct, co se stane po odeslání:
+
+- kdo dostane požadavek,
+- jak rychle se ozvete,
+- jestli pošlete přístup nebo domluvíte call,
+- jak dlouho demo přístup platí,
+- jestli budete posílat další obchodní komunikaci.
+
+Tohle není jen právní hygiena. Je to konverzní hygiena. Lidé raději kliknou, když vědí, co bude dál.
+
+### Demo přístupy musí expirovat
+
+Demo účet bez expirace je budoucí bordel. Nastav jednoduchá pravidla:
+
+- přístup pro externího zájemce platí třeba 7 nebo 14 dní,
+- po expiraci se účet zamkne nebo smaže,
+- obchodník může prodloužit přístup s důvodem,
+- sdílené demo účty se nepoužívají pro zákazníky,
+- interní demo účty se pravidelně rotují,
+- po větší změně produktu se demo resetuje a znovu projde.
+
+U B2B dema je lepší osobní přístup s omezením než jeden věčný login `demo@example.com`. Sdílený login je pohodlný, ale nevíš, kdo ho používá, co udělal a komu unikl. Pohodlí je fajn. Auditní stopa je fajn víc.
+
+### Měř demo bez šmírování
+
+U demo prostředí chceš vědět, jestli pomáhá prodeji a onboardingové práci. Nepotřebuješ sledovat každý pohyb myši.
+
+Stačí agregované signály:
+
+- kolik lidí požádalo o demo,
+- kolik dostalo přístup,
+- kolik se přihlásilo,
+- které scénáře prošli,
+- kde nejčastěji skončili,
+- kolik demo přístupů vedlo k pilotu nebo callu,
+- jaké otázky se opakují po demu.
+
+Eventy pojmenuj podle produktového významu, ne podle šmírovací fantazie. `demo_scenario_completed` je užitečnější než padesát click eventů. A pokud nepotřebuješ ukládat identitu uživatele pro obchodní follow-up, agreguj data podle účtu nebo scénáře.
+
+### Demo jako důkaz privacy-first provozu
+
+Privacy-first SaaS může v demu ukázat věci, které konkurence schovává:
+
+- datovou mapu přímo u relevantní funkce,
+- role a oprávnění v praxi,
+- export účtu nebo projektu,
+- auditní log důležitých změn,
+- nastavení retence,
+- preference komunikace,
+- jasnou stránku s provozem a subprocesory.
+
+Nedělej z toho compliance přednášku. Ukaž to ve chvíli, kdy to zákazník řeší. Například při ukázce importu řekni: „Tady vidíte, která pole jsou povinná, která volitelná a co se smaže po dokončení migrace.“ To je mnohem silnější než poslední slide s nápisem „GDPR compliant“.
+
+### Demo review po každých pěti ukázkách
+
+Demo prostředí stárne rychle. Produkt se mění, zákaznické otázky se opakují a některé části přestanou dávat smysl. Po každých pěti až deseti demech udělej krátké review:
+
+- Kde lidé nejčastěji ztrácí kontext?
+- Která část dema vyvolává nejvíc otázek?
+- Který důkaz chybí k rozhodnutí?
+- Jaké funkce ukazujeme zbytečně?
+- Jaké citlivé nebo matoucí údaje se v demu objevily?
+- Co by měl zvládnout zákazník sám bez callu?
+
+Výstupem nemá být nový dvouhodinový demo scénář. Stačí tři úpravy: lepší data, jasnější průchod, odstranění jedné rušivé části.
+
+### Checklist bezpečného demo prostředí
+
+- [ ] Demo má jasný obchodní účel a cílový segment.
+- [ ] Demo data jsou syntetická a neobsahují reálné osobní nebo zákaznické údaje.
+- [ ] Demo je technicky oddělené od produkce nebo alespoň bezpečně izolované jako tenant.
+- [ ] UI jasně označuje, že jde o demo prostředí.
+- [ ] Produkční e-maily, webhooks a integrace jsou vypnuté nebo napojené na sandbox.
+- [ ] Demo lze resetovat do známého výchozího stavu.
+- [ ] Externí přístupy expirují a mají vlastní auditní stopu.
+- [ ] Formulář pro demo sbírá jen údaje nutné pro další krok.
+- [ ] Demo scénář ukazuje práci a výsledek, ne jen seznam funkcí.
+- [ ] Měření dema používá agregované produktové signály.
+- [ ] Privacy-first prvky jsou součástí ukázky, ne až právní dodatek.
+- [ ] Demo se pravidelně reviduje podle otázek zákazníků.
+
+### Šablona demo karty
+
+```markdown
+## Demo prostředí: [produkt / segment]
+
+### Účel dema
+- Typ dema:
+- Pro koho je:
+- Jaké rozhodnutí má podpořit:
+- Primární další krok po demu:
+
+### Scénář
+1. Výchozí problém:
+2. Situace v systému:
+3. Klíčová akce uživatele:
+4. Výsledek pro tým:
+5. Důkaz hodnoty:
+
+### Demo data
+- Použité entity:
+- Riziková pole, která nesmí být reálná:
+- Jak se data generují:
+- Jak se demo resetuje:
+
+### Přístupy
+- Kdo může přístup vytvořit:
+- Jak dlouho platí:
+- Jak se ruší:
+- Jak se eviduje aktivita:
+
+### Privacy-first kontrola
+- Oddělení od produkce:
+- Vypnuté produkční integrace:
+- Formulář a sbírané údaje:
+- Agregované měření:
+- Export / role / auditní log ukázané v demu:
+
+### Revize po demech
+- Opakované otázky:
+- Matoucí části:
+- Chybějící důkazy:
+- Úpravy pro další verzi:
+```
+
+
+
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha DB o demo prostředí bez živých dat: jasný obchodní účel, syntetická data, oddělení od produkce, scénáře podle práce zákazníka, minimalistický demo formulář, expirace přístupů, agregované měření, privacy-first důkazy, checklist a šablona demo karty.
 - **2026-09-16:** Doplněna příloha DA o hodinovém auditu homepage pro malý SaaS: první dojem, jasná nabídka, důkazy, struktura sekcí, text bez mlhy, privacy-first kontrola, hodinový postup, checklist a šablona auditní karty.
 - **2026-09-16:** Doplněna příloha CZ o nákladové mapě SaaS: rozlišení fixních/proměnných/skrytých nákladů, mapování podle rozhodnutí, privacy-first měření bez sledování lidí, volba mezi pricingem a produktovou úpravou, měsíční cost review, checklist a šablona nákladové karty.
 - **2026-09-16:** Doplněna příloha CY o datové mapě pro SaaS: produktové datové toky, rozlišení zákaznických/uživatelských/provozních dat, účely polí, provozní otázky, napojení na vývoj, minimalistická tabulka, review události, checklist, šablona datové karty a ověřené zdroje Evropské komise a EDPB.
