@@ -19400,7 +19400,197 @@ Výstup nemá být román. Stačí jedna stránka: tři témata, tři rozhodnut�
 - Odkaz na změnu / dokumentaci / ticket:
 ```
 
+
+## Příloha DH: Produktové rozhodnutí z feedbacku bez scope creepu
+
+Feedback je surovina. Rozhodnutí je produktová práce. Mezi těmito dvěma věcmi je místo, kde malý SaaS tým často ztratí klid: jeden zákazník něco chce, obchodník to slíbí, vývojář to přilepí na existující obrazovku, support k tomu napíše omluvný odstavec a za tři měsíce nikdo neví, proč v produktu existuje čtvrté nastavení exportu „jen pro účetní s páteční uzávěrkou“.
+
+Tahle příloha navazuje na feedback loop. Neřeší, jak signál sbírat, ale jak z něj udělat rozhodnutí: postavit, odmítnout, odložit, zjednodušit, vysvětlit dokumentací, nebo nabídnout ruční workaround. Cílem není být pomalý. Cílem je být přesný. Rychlé ano na špatnou věc je dražší než pomalé ne s dobrým vysvětlením.
+
+### Každý feedback musí projít přes problém
+
+Požadavek zákazníka obvykle přichází jako řešení: „Přidejte export do Excelu“, „Potřebujeme další roli“, „Chceme vlastní dashboard“, „Ať jde vypnout tahle kontrola“. Tým nesmí začít otázkou „Kolik to zabere?“, ale „Jaký problém tím zákazník řeší?“.
+
+Praktický překlad vypadá takto:
+
+- „Export do Excelu“ může znamenat, že zákazník potřebuje měsíční report pro účetní.
+- „Další role“ může znamenat, že externí dodavatel má vidět jen část zakázky.
+- „Vlastní dashboard“ může znamenat, že manažer nevidí rizikové projekty včas.
+- „Vypnout kontrolu“ může znamenat, že pravidlo je správné, ale onboarding ho špatně vysvětluje.
+
+Dokud neznáš skutečný problém, neznáš rozsah. A dokud neznáš rozsah, každé odhadování je věštění z deploy logů.
+
+### Ne každé ano musí být funkce
+
+Dobré produktové rozhodnutí má víc možností než „postavit / nepostavit“. U malého SaaS týmu je často nejlepší řešení menší než požadavek:
+
+- **Dokumentace:** zákazník už funkci má, jen ji nenašel nebo nepochopil.
+- **Onboarding:** problém vzniká v prvních dnech, ne v samotné funkci.
+- **Ruční služba:** u drahého B2B zákazníka může být dočasný concierge postup levnější než vývoj.
+- **Konfigurace pro administrátora:** řešení patří do nastavení, ne na hlavní obrazovku pro všechny.
+- **Agregovaný report:** zákazník nepotřebuje každou událost, potřebuje rozhodovací souhrn.
+- **Produktová změna:** pokud se stejný problém opakuje napříč segmentem, teprve potom má smysl stavět.
+
+Codyho komentář: Nejzrádnější věta v SaaS je „tohle je jen malé tlačítko“. Malé tlačítko má backend, práva, testy, překlady, dokumentaci, support odpovědi, stav prázdných dat a za rok někoho, kdo se bojí ho smazat. To je hodně svalů na jedno tlačítko.
+
+### Rozhodnutí má mít typ, ne jen prioritu
+
+Priorita bez typu rozhodnutí vede k nekonečnému backlogu. Proto je lepší každý signál zařadit do jedné z pěti kategorií:
+
+1. **Opravit:** je to bug, rozbitý slib nebo bezpečnostní problém.
+2. **Zjednodušit:** existující workflow je moc složité nebo matoucí.
+3. **Vysvětlit:** produkt dává smysl, ale komunikace selhala.
+4. **Prozkoumat:** signál je zajímavý, ale zatím nemá dost kontextu.
+5. **Odmítnout:** požadavek je mimo strategii, mimo segment nebo zvyšuje riziko.
+
+Tohle rozlišení chrání tým před falešným pocitem, že všechno v backlogu je jen otázka pořadí. Není. Některé věci do produktu vůbec nepatří. Některé patří do textu. Některé patří do obchodního procesu. A některé patří do složky „hezké, ale ne teď“, kde budou důstojně spát.
+
+### Scope creep poznáš podle kompromisů bez vlastníka
+
+Scope creep nezačíná velkým rozhodnutím. Začíná malými ústupky, které nikdo nepovažuje za rozhodnutí:
+
+- „Přidáme ještě jednu volbu, ať je zákazník spokojený.“
+- „Uděláme to jen pro jednoho klienta, později to zobecníme.“
+- „Není čas řešit UX, hlavně ať to funguje.“
+- „Dokumentaci dopíšeme potom.“
+- „Retenci dat vyřešíme, až to někdo začne používat.“
+
+Každý takový kompromis musí mít vlastníka, datum review a podmínku odstranění. Jinak se z dočasného řešení stane archeologická vrstva produktu.
+
+Jednoduché pravidlo: když přidáváš výjimku, napiš hned i pravidlo, kdy ji smažeš. Pokud ho napsat neumíš, pravděpodobně nestavíš výjimku, ale nový produktový směr — a ten si zaslouží normální rozhodnutí.
+
+### Privacy-first filtr před stavbou
+
+Feedback často láká tým k většímu sběru dat: „Kdybychom věděli, kam přesně každý uživatel kliká, rozhodli bychom líp.“ Možná. Nebo byste jen měli víc grafů, víc právních otázek a pořád stejný produktový zmatek.
+
+Před každým rozhodnutím si polož privacy-first otázky:
+
+- Potřebujeme osobní data, nebo stačí agregovaný signál?
+- Potřebujeme ukládat obsah zákaznických dat, nebo jen metadata o problému?
+- Dá se problém ověřit rozhovorem, anonymizovaným screenshotem nebo syntetickým příkladem?
+- Kdo uvidí detail a kdo jen shrnutí?
+- Jak dlouho budeme držet raw poznámky, nahrávky a citace?
+- Přidává funkce nové role, oprávnění, exporty nebo integrace?
+- Zvyšuje funkce riziko vendor lock-inu pro zákazníka?
+
+Privacy-first není brzda. Je to designový filtr. Často donutí tým najít jednodušší řešení: méně polí, méně stavů, méně exportů, jasnější copy, lepší výchozí nastavení.
+
+### Rozhodovací mini-memo šetří budoucí nervy
+
+U větších požadavků napiš krátké memo. Ne román pro grantovou komisi. Stačí jedna stránka:
+
+- jaký problém řešíme,
+- pro jaký segment,
+- jak často se objevil,
+- jaký je dopad,
+- jaké jsou varianty,
+- co stavíme teď,
+- co vědomě nestavíme,
+- jak poznáme, že rozhodnutí bylo správné,
+- kdy se k němu vrátíme.
+
+Mini-memo má tři výhody. Obchod ví, co může slíbit. Vývoj ví, co nemá stavět. Support ví, jak vysvětlit rozhodnutí zákazníkovi. A budoucí tým ví, proč produkt nevypadá jako náhodný sklad přání.
+
+### Odmítnutí je produktová funkce
+
+Malý SaaS tým musí umět říkat ne. Ne arogantně, ne stroze, ale jasně. Dobré odmítnutí má strukturu:
+
+1. uznání problému,
+2. vysvětlení rozhodnutí,
+3. případný alternativní postup,
+4. slib, co se bude sledovat dál,
+5. poděkování za kontext.
+
+Příklad:
+
+> Díky za detailní popis. Rozumíme, že potřebujete sdílet report s externím partnerem. V tuto chvíli nebudeme přidávat veřejné odkazy na reporty, protože by to zvýšilo riziko nechtěného sdílení zákaznických dat. Jako bezpečnější cestu teď podporujeme export agregovaného PDF pro oprávněné administrátory. Pokud se stejný scénář objeví častěji, vrátíme se k němu s návrhem sdílení přes expirační přístupy.
+
+Tohle není „nechceme“. To je produktová disciplína. Zákazník nemusí vždy souhlasit, ale chápe logiku. A pochopená logika je lepší než tiché mizení požadavku v backlogu.
+
+### Kdy feedback opravdu poslat do vývoje
+
+Do vývoje patří požadavek, který splňuje většinu těchto podmínek:
+
+- problém se opakuje u správného segmentu,
+- dopad je jasný a měřitelný,
+- řešení podporuje positioning produktu,
+- existuje menší první verze,
+- privacy-first dopad je pochopený,
+- tým ví, co nebude součástí verze,
+- je jasné, jak změnu vysvětlit zákazníkům,
+- existuje kritérium úspěchu a datum review.
+
+Pokud některý bod chybí, neznamená to automaticky stop. Znamená to „doplň kontext“. Nejhorší je začít stavět jen proto, že požadavek přišel hlasitě, od velkého zákazníka nebo v pátek odpoledne. Pátek odpoledne je mimochodem špatný produktový manažer.
+
+### Checklist: rozhodnutí z feedbacku
+
+- [ ] Požadavek jsme přepsali na skutečný problém zákazníka.
+- [ ] Víme, pro jaký segment a roli je problém důležitý.
+- [ ] Máme konkrétní dopad: čas, peníze, riziko, churn nebo aktivace.
+- [ ] Rozlišili jsme typ rozhodnutí: opravit, zjednodušit, vysvětlit, prozkoumat, odmítnout.
+- [ ] Zvažovali jsme menší řešení než novou funkci.
+- [ ] Popsali jsme, co vědomě nebude součástí první verze.
+- [ ] Udělali jsme privacy-first kontrolu dat, práv, exportů a retence.
+- [ ] Výjimky mají vlastníka, datum review a podmínku odstranění.
+- [ ] Obchod, support a vývoj sdílí stejné vysvětlení rozhodnutí.
+- [ ] Zákazník dostane odpověď, i když požadavek odmítneme.
+- [ ] Máme kritérium úspěchu a termín vyhodnocení.
+- [ ] Po vyhodnocení rozhodnutí upravíme backlog, dokumentaci nebo komunikaci.
+
+### Šablona: karta produktového rozhodnutí z feedbacku
+
+```markdown
+## Produktové rozhodnutí z feedbacku: [téma]
+
+### Zdroj signálu
+- Datum:
+- Zdroj: support / obchod / onboarding / rozhovor / analytika / jiné
+- Segment:
+- Role zákazníka:
+- Odkaz na feedback kartu:
+
+### Problém
+- Co se zákazník snaží udělat:
+- Co mu v tom brání:
+- Dopad na práci / čas / riziko:
+- Jak to řeší dnes:
+
+### Rozhodnutí
+- Typ: opravit / zjednodušit / vysvětlit / prozkoumat / odmítnout
+- Co uděláme teď:
+- Co vědomě neuděláme:
+- Proč:
+- Vlastník:
+- Termín:
+
+### Varianty
+- Varianta A:
+- Varianta B:
+- Nejmenší užitečná verze:
+- Ruční nebo dokumentační alternativa:
+
+### Privacy-first kontrola
+- Jaká data změna používá:
+- Nová oprávnění / exporty / integrace:
+- Co lze agregovat nebo anonymizovat:
+- Retence raw podkladů:
+- Rizika pro zákazníka:
+
+### Komunikace
+- Co řekne obchod:
+- Co řekne support:
+- Co dáme do changelogu / dokumentace:
+- Komu odpovíme zpět:
+
+### Vyhodnocení
+- Kritérium úspěchu:
+- Datum review:
+- Výsledek po review:
+- Další rozhodnutí:
+```
+
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha DH o převodu feedbacku na produktové rozhodnutí bez scope creepu: práce s problémem místo požadavku, varianty menší než nová funkce, typy rozhodnutí, privacy-first filtr, mini-memo, odmítání požadavků, checklist a šablona rozhodovací karty.
 - **2026-09-16:** Doplněna příloha DG o zákaznickém feedback loopu bez nekonečných dotazníků: zdroje signálů, triage, privacy-first práce s poznámkami, prioritizace, uzavírání smyčky a šablona feedback karty.
 - **2026-09-16:** Doplněna příloha DF o referenčním příběhu po prvním placeném kvartálu: průběžný sběr podkladů, úrovně interní/anonymizované/veřejné případovky, otázky na změnu práce, struktura case study, opatrná práce s čísly, schvalování, bezpečné screenshoty, privacy-first distribuce, checklist a šablona referenční karty.
 - **2026-09-16:** Doplněna příloha DE o prvním placeném kvartálu zákazníka: stabilizace, tvorba návyku, důkaz hodnoty, včasné varovné signály, privacy-first health score bez sledování jednotlivců, kvartální shrnutí, opatrná expanze, checklist a šablona kvartální karty.
