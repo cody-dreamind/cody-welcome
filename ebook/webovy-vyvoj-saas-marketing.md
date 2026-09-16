@@ -17486,8 +17486,200 @@ Podklady připrav asynchronně předem. Každý přidá maximálně tři body do
 ```
 
 
+## Příloha CX: Preference centrum bez cookie divadla a právního kouře
+
+Preference centrum je místo, kde uživatel spravuje, co od tebe chce dostávat a jaké volitelné zpracování dat ti dovoluje. Není to jen cookie lišta. Je to praktická dohoda mezi produktem a člověkem: tady jsou účely, tady jsou volby, tady je jednoduchá cesta zpět.
+
+Malý SaaS často řeší souhlasy až ve chvíli, kdy právník pošle dlouhý dokument nebo marketing chce přidat nový pixel. To je pozdě. Preference centrum má vzniknout dřív než třetí nástroj v marketingovém stacku. Jinak skončíš s pěti checkboxy, třemi tabulkami a pocitem, že compliance je mokrý koberec v kanceláři.
+
+> Codyho komentář: Dobré preference centrum není UX trest za to, že člověk klikl na web. Je to dálkové ovládání k důvěře. A dálkové ovládání nemá mít padesát tlačítek, z nichž třicet dělá totéž.
+
+### Než požádáš o souhlas, zeptej se, jestli ho vůbec potřebuješ
+
+Souhlas je jen jeden z právních základů. Není univerzální kouzelné zaklínadlo na všechno, co voní po datech. Když zpracování potřebuješ pro plnění smlouvy, zákonnou povinnost nebo oprávněný zájem, nedělej z toho falešný souhlas. Uživatel by pak mohl souhlas odvolat, ale ty bys stejně některá data musel držet dál — třeba kvůli účetnictví nebo bezpečnosti. To je matoucí a zbytečně to ničí důvěru.
+
+Praktické rozdělení:
+
+- **Nutné zpracování pro službu:** účet, přihlášení, fakturace, bezpečnostní logy, základní provoz aplikace.
+- **Volitelné produktové preference:** upozornění, digesty, jazyk, oblíbené pohledy, nastavení týmových notifikací.
+- **Marketingové preference:** newsletter, produktové novinky, pozvánky na webináře, případové studie.
+- **Volitelné měření:** analytika nad rámec technicky nutného provozu, pokud používá cookies nebo jiné uložení v zařízení.
+- **Profilování a personalizace:** doporučení obsahu, scoring, segmentace, dynamické kampaně.
+
+První dvě kategorie často nejsou o souhlasu, ale o nastavení služby. Poslední tři už vyžadují mnohem opatrnější návrh. Český ÚOOÚ u cookies připomíná, že technické cookies nepotřebují cookie lištu, ale pořád musíš splnit informační povinnost. Netechnické cookies a ukládání nebo čtení informací v zařízení naopak typicky vyžadují souhlas předem.
+
+### Jedna preference musí odpovídat jednomu účelu
+
+Nejhorší checkbox je: „Souhlasím se zpracováním osobních údajů pro zlepšování služeb, marketing a personalizované nabídky.“ To je právní smoothie. Člověk neví, co přesně povoluje, a ty nevíš, co přesně smíš dělat.
+
+Lepší je oddělit účely podle skutečného rozhodnutí uživatele:
+
+- **Produktové e-maily:** změny funkcí, plánované odstávky, důležité informace k účtu.
+- **Vzdělávací obsah:** návody, checklisty, e-booky, webináře.
+- **Obchodní novinky:** nabídky, slevy, nové balíčky, rozšíření služby.
+- **Analytické cookies:** agregované měření návštěvnosti a výkonu webu.
+- **Personalizace:** přizpůsobení obsahu podle chování nebo profilu.
+
+Každý účel popiš lidsky. Nepiš „optimalizace uživatelské zkušenosti“. Napiš: „Pomůže nám zjistit, které části aplikace lidé používají nejčastěji, abychom je zjednodušili.“ A pokud data posíláš dodavateli, řekni komu a proč.
+
+### Výchozí stav má být klidný, ne vychytralý
+
+Privacy-first produkt nezačíná tím, že všechno předem zaškrtne a čeká, jestli si toho někdo všimne. Výchozí stav má být konzervativní:
+
+- nutné věci běží, protože bez nich služba nefunguje,
+- volitelné věci jsou vypnuté, dokud je člověk nepovolí,
+- odmítnutí je stejně snadné jako přijetí,
+- odvolání souhlasu je dostupné i později v nastavení,
+- změna dodavatele nebo účelu spustí nové posouzení, jestli je potřeba znovu požádat.
+
+To platí hlavně pro web. Cookie lišta, která má obří zelené „Přijmout vše“ a šedý mikroskopický odkaz „nastavení“, není důkaz zralého marketingu. Je to designový loket do žeber. ÚOOÚ u cookies výslovně zdůrazňuje jasné informace, možnost odmítnout a přiměřené nastavení podle účelu a očekávání uživatele.
+
+### Preference centrum patří do účtu, ne jen do patičky webu
+
+Cookie banner řeší první návštěvu. Preference centrum řeší vztah. Uživatel by měl najít svoje volby v aplikaci i později, ideálně v části „Nastavení účtu“, „Soukromí“ nebo „Komunikace“.
+
+Dobré preference centrum obsahuje:
+
+- **Přehled účelů:** co je nutné, co volitelné a proč.
+- **Stav každé volby:** zapnuto, vypnuto, datum poslední změny.
+- **Jednoduchou změnu:** přepínač nebo tlačítko bez nutnosti psát na podporu.
+- **Historii pro interní audit:** kdo, kdy, odkud a jakou verzi textu odsouhlasil.
+- **Odkazy na dokumenty:** zásady zpracování, subprocesory, kontakt pro privacy dotazy.
+- **Export / žádost:** jasná cesta k exportu dat, opravě, výmazu nebo omezení zpracování.
+
+U B2B SaaS přidej ještě týmový rozměr. Některé preference spravuje jednotlivec, jiné administrátor účtu. Například osobní newsletter si řeší každý sám, ale bezpečnostní notifikace pro workspace má nastavovat admin. Nepřehazuj odpovědnost na náhodného uživatele, který se jen chtěl podívat na dashboard.
+
+### Verze textu ukládej stejně pečlivě jako samotný souhlas
+
+Nestačí uložit `newsletter=true`. Potřebuješ vědět, s čím člověk souhlasil. Texty se mění, dodavatelé se mění, účely se rozšiřují. Když za rok řešíš dotaz nebo audit, „asi to byla stará lišta“ není strategie. To je archeologie s baterkou z večerky.
+
+Ukládej minimálně:
+
+- identifikátor uživatele nebo anonymní návštěvy,
+- účel souhlasu nebo preference,
+- hodnotu volby,
+- čas změny,
+- zdroj změny: web, aplikace, import, podpora,
+- verzi textu nebo dokumentu,
+- jazyk textu,
+- informaci o použitém rozhraní, například `cookie_banner_v3`.
+
+Nepřeháněj to s technickými otisky. Prokazatelnost neznamená sbírat všechno o zařízení. Ve většině malých SaaS stačí auditní záznam změny preference, verze textu a kontext účelu. IP adresa může být citlivá a retenci nastav opatrně.
+
+### Marketingové preference drž odděleně od produktového provozu
+
+Když se člověk odhlásí z newsletteru, neznamená to, že nechce dostat bezpečnostní upozornění nebo fakturu. Když vypne analytiku, neznamená to, že mu přestane fungovat účet. To musí být jasné v návrhu i v kódu.
+
+Doporučený model:
+
+- **Transakční komunikace:** bez odhlášení, pokud je nezbytná pro službu nebo smlouvu.
+- **Bezpečnostní komunikace:** samostatná kategorie, typicky povinná pro správce účtu.
+- **Produktové novinky:** volitelné, ale často užitečné pro aktivní zákazníky.
+- **Marketingový newsletter:** samostatný opt-in nebo zákonný režim podle konkrétní situace.
+- **Partnerská sdělení:** nikdy nepřimíchat potají k vlastnímu newsletteru.
+
+V databázi se vyplatí mít explicitní účely, ne jeden sloupec `marketingConsent`. Jakmile přibude webinář, case study nebo produktový digest, jeden sloupec se promění v špagetový salát.
+
+### Minimalistický technický návrh
+
+Pro malý SaaS není potřeba kupovat monstrózní consent management platformu hned první den. Často stačí jednoduchý interní model, pokud umí oddělit účely a bezpečně evidovat změny.
+
+Příklad tabulek:
+
+```text
+preference_purposes
+- id
+- key                  # analytics_cookies, newsletter, product_updates
+- title
+- description
+- required            # true / false
+- legal_basis
+- document_version
+- active
+
+user_preferences
+- id
+- user_id
+- purpose_key
+- value                # granted / denied / withdrawn
+- changed_at
+- changed_by           # user / admin / support / system
+- source               # app_settings / cookie_banner / import
+- document_version
+
+preference_events
+- id
+- subject_id
+- purpose_key
+- old_value
+- new_value
+- occurred_at
+- source
+- metadata             # střídmě, bez zbytečných osobních údajů
+```
+
+U anonymních návštěvníků webu nedělej hned účet za každou cenu. Pokud používáš jen technické cookies, cookie lišta není potřeba. Pokud máš volitelnou analytiku, ulož stav souhlasu lokálně a do serveru posílej jen to, co opravdu potřebuješ pro evidenci a respektování volby.
+
+### Checklist: preference centrum privacy-first
+
+- Má každý účel jasný popis v lidské řeči?
+- Je souhlas oddělený od smluvních, zákonných a bezpečnostních zpracování?
+- Je odmítnutí stejně jednoduché jako přijetí?
+- Je možné souhlas později odvolat v účtu nebo přes jasný odkaz?
+- Ukládáš verzi textu, se kterou člověk souhlasil?
+- Má marketing oddělené preference pro newsletter, produktové novinky a partnerská sdělení?
+- Nejsou volitelné cookies nebo trackery spuštěné před souhlasem?
+- Ví podpora, kde preference najde a co smí měnit za zákazníka?
+- Máš nastavenou retenci pro preference a související auditní záznamy?
+- Spouští změna účelu, dodavatele nebo předávání dat nové posouzení?
+
+### Šablona preference karty
+
+```markdown
+## Preference karta: [účel]
+
+### Účel
+- Název:
+- Lidský popis:
+- Proč to uživateli pomáhá:
+
+### Právní a provozní zařazení
+- Kategorie: nutné / volitelné / marketing / analytika / personalizace
+- Právní základ:
+- Vyžaduje souhlas: ano / ne / ověřit
+- Dokument nebo text souhlasu:
+- Verze textu:
+
+### Data
+- Jaká data používáme:
+- Kde jsou uložená:
+- Kdo je zpracovává:
+- Předání mimo EU: ne / ano, popsat
+
+### Uživatelská kontrola
+- Kde lze zapnout:
+- Kde lze vypnout:
+- Co se stane po vypnutí:
+- Jak rychle se změna projeví:
+
+### Evidence
+- Co ukládáme jako důkaz:
+- Retence záznamu:
+- Vlastník kontroly:
+- Datum poslední revize:
+```
+
+### Zdroje k souhlasům, cookies a preferencím
+
+- [EDPB: Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en) — podmínky platného souhlasu, oddělení účelů, svobodnost a odvolání.
+- [European Commission: Information for individuals](https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en) — srozumitelný přehled práv subjektů údajů a pravidel pro souhlas.
+- [ÚOOÚ: Cookies](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies) — české odpovědi k technickým a netechnickým cookies, informační povinnosti a odvolání souhlasu.
+- [ÚOOÚ: K vyžadování souhlasu](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/k-vyzadovani-souhlasu) — upozornění, že souhlas se nemá vyžadovat tam, kde pro zpracování existuje jiný právní důvod.
+
+
 
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha CX o preference centru bez cookie divadla: rozlišení účelů a právních základů, výchozí privacy-first stav, správa preferencí v účtu, evidence verzí souhlasů, oddělení marketingové a provozní komunikace, minimalistický technický model, checklist, šablona preference karty a ověřené zdroje EDPB, Evropské komise a ÚOOÚ.
 - **2026-09-16:** Doplněna příloha CW o týdenním provozním review SaaS: rozhodovací otázka, agregované signály, oddělení provozu/produktu/obchodu, support jako radar, incidenty bez hledání viníka, vlastníci rozhodnutí, třicetiminutový rytmus, checklist a šablona review.
 - **2026-09-16:** Doplněna příloha CV o exit plánu dodavatele: výběr nástrojů s ohledem na odchod, kritičnost vendorů, datový inventář, test exportů, migrační fáze, vypnutí účtů a integrací, zákaznická komunikace, checklist a šablona vendor exit karty.
 - **2026-09-16:** Doplněna příloha CU o rozhodovacím memu pro malé SaaS týmy: kdy ho psát, jak formulovat otázku, porovnat varianty, udělat privacy-first kontrolu, určit vlastníka, nastavit expiraci rozhodnutí, archivovat výsledek, checklist a šablona mema.
