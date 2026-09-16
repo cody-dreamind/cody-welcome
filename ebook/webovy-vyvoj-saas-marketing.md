@@ -18065,8 +18065,236 @@ Do review pozvi produkt, vývoj, support a někoho, kdo rozumí obchodní realit
 - Jak poznáme, že zásah pomohl:
 ```
 
+## Příloha DA: Hodinový audit homepage bez marketingového kouře
+
+Homepage malého SaaS webu není výstavní vitrína pro interní ambice. Je to rozhodovací obrazovka. Návštěvník na ní během pár desítek sekund zjišťuje, jestli je na správném místě, jestli rozumíš jeho problému a jestli další krok stojí za čas.
+
+Hodinový audit homepage je praktický rituál pro týmy, které nechtějí čekat na velký redesign. Vezmeš existující stránku, projdeš ji jako zákazník a skončíš s konkrétním seznamem úprav. Žádné „brand refresh workshop synergy“. Jen práce.
+
+> Codyho komentář: Homepage často netrpí tím, že je málo kreativní. Trpí tím, že se snaží potěšit zakladatele, investora, obchod, produkt, HR a babičku zároveň. Zákazník mezitím hledá větu, která mu řekne, proč má zůstat.
+
+### Začni jednou otázkou
+
+Než otevřeš editor, napiš si auditní otázku:
+
+**Dokáže správný návštěvník do jedné minuty pochopit, pro koho produkt je, jaký výsledek slibuje a co má udělat dál?**
+
+Když odpověď není jasné „ano“, homepage potřebuje práci. Ne nutně novou grafiku. Často stačí lepší hierarchie, ostřejší text, méně rušivých prvků a srozumitelnější CTA.
+
+Audit nedělej z pohledu týmu. Tým už ví všechno. Dělej ho z pohledu člověka, který přišel z vyhledávání, odkazu v článku, doporučení od známého nebo obchodního e-mailu. Nezná interní zkratky, neví, co znamená tvoje kategorie, a nemá povinnost luštit poetický slogan.
+
+### Prvních pět sekund: jasnost před krásou
+
+První obrazovka má odpovědět na tři věci:
+
+- **Kdo jste:** ne právní název firmy, ale kategorie produktu.
+- **Komu pomáháte:** konkrétní segment, role nebo situace.
+- **Jaký výsledek slibujete:** změna, kterou zákazník chce.
+
+Slabý hero text:
+
+> „Nová generace chytrého workflow pro moderní týmy.“
+
+Silnější hero text:
+
+> „Plánování servisních zakázek pro malé týmy, které už nechtějí řídit techniky přes telefon a Excel.“
+
+Druhý text není tak elegantní. Zato má adresáta, situaci i bolest. To je pro prodej užitečnější než věta, kterou by šlo nalepit na libovolný SaaS od fakturace po krmení akvarijních rybiček.
+
+Při auditu si polož:
+
+- Je v nadpisu jasná kategorie produktu?
+- Pozná cílový zákazník, že mluvíme o něm?
+- Popisujeme výsledek, ne jen technologii?
+- Je hlavní CTA viditelné bez scrollování?
+- Nekonkuruje hlavnímu CTA pět dalších tlačítek?
+
+### Důkaz hned po slibu
+
+Homepage nemá jen slibovat. Musí ukázat, proč se slibu dá věřit. Důkaz nemusí být obří logo wall od světových značek. U malého SaaS často funguje lépe menší, konkrétní důkaz:
+
+- krátká zákaznická citace s rolí a kontextem,
+- screenshot skutečného workflow,
+- ukázka před a po,
+- číslo z pilotu, pokud je férově popsané,
+- stručný popis provozu a podpory,
+- veřejný changelog nebo status page,
+- jasná informace, kde a jak zpracováváte data.
+
+Pozor na falešnou autoritu. „Důvěřují nám inovativní týmy“ bez jmen, detailu a kontextu je dekorace. „Servisní tým se 14 techniky zkrátil ranní plánování z 45 minut na 12 minut během pilotu“ je důkaz, se kterým se dá pracovat.
+
+Privacy-first produkty mají výhodu: důvěru můžou stavět i provozní transparentností. Napiš lidsky, že nepoužíváš reklamní pixely, měříš agregovaně, data provozuješ v Evropě a zákazník má jasný export. Není to nudná právní patička. Je to prodejní argument pro firmy, které už se spálily u nástrojů s datovým apetitem hladového vysavače.
+
+### Jedna cesta, ne turistická mapa
+
+Homepage se často rozbije tím, že každá sekce chce jiné rozhodnutí. „Vyzkoušet zdarma“, „Objednat demo“, „Stáhnout e-book“, „Přečíst blog“, „Kontaktovat obchod“, „Přihlásit se k newsletteru“ a „Sledovat nás na sítích“ vedle sebe vytváří digitální kruhový objezd.
+
+Vyber jednu primární akci podle fáze produktu:
+
+- **Před produktem:** přihlásit se do pilotu nebo domluvit rozhovor.
+- **Během pilotu:** rezervovat demo nebo požádat o přístup.
+- **Po spuštění:** začít trial, domluvit demo nebo vytvořit účet.
+- **Enterprise/B2B:** naplánovat konzultaci s jasnou agendou.
+
+Sekundární akce může existovat, ale musí být opravdu sekundární. Například „Zobrazit ukázku“ nebo „Přečíst případovou studii“. Nepřidávej akce jen proto, že existují. Každé tlačítko je rozhodnutí navíc.
+
+### Sekce, které homepage obvykle potřebuje
+
+Pro malý B2B SaaS často stačí tato kostra:
+
+1. **Hero:** pro koho, jaký problém, jaký výsledek, hlavní CTA.
+2. **Problém:** konkrétní situace, kterou zákazník pozná.
+3. **Řešení:** jak produkt mění práci krok za krokem.
+4. **Ukázka:** screenshot, krátké video nebo diagram workflow.
+5. **Důkaz:** citace, pilot, případová studie, číslo nebo provozní transparentnost.
+6. **Privacy-first blok:** data, hosting, analytika, export, minimální tracking.
+7. **Pro koho / pro koho ne:** segmenty, vhodné a nevhodné scénáře.
+8. **Další krok:** CTA s vysvětlením, co se stane po kliknutí.
+
+Nemusíš mít všechno. Ale pokud chybí problém, řešení, důkaz a další krok, stránka pravděpodobně spíš prezentuje firmu než pomáhá zákazníkovi rozhodnout.
+
+### Textový audit: vyhoď mlhu
+
+Projdi homepage a označ věty, které by mohly být na webu skoro libovolného SaaS. Typicky:
+
+- „šetříme čas a peníze“,
+- „moderní platforma pro růst“,
+- „intuitivní řešení pro každý tým“,
+- „digitalizace procesů nové generace“,
+- „vše na jednom místě“.
+
+Tyhle fráze nejsou zakázané, jen většinou nic nevysvětlují. Nahraď je konkrétností:
+
+- Co přesně se zkrátí?
+- Který proces se zjednoduší?
+- Kdo s tím pracuje?
+- Jak vypadá stav před produktem?
+- Jak vypadá stav po produktu?
+- Co už zákazník nebude muset dělat ručně?
+
+Dobré pravidlo: po každé důležité větě se zeptej „například jak?“. Pokud odpověď neumíš napsat do další věty, původní tvrzení je moc obecné.
+
+### Privacy-first kontrola homepage
+
+Homepage je často nejvíc zatížená marketingovými skripty, protože „tam přece chodí všichni“. Právě proto si zaslouží samostatnou kontrolu.
+
+Zkontroluj:
+
+- kolik externích skriptů se načítá,
+- jestli nějaký skript není jen historický pozůstatek,
+- zda formuláře sbírají pouze data potřebná pro další krok,
+- jestli cookie/preference blok nekřičí víc než hlavní nabídka,
+- jestli analytika odpovídá rozhodnutím, která opravdu děláš,
+- zda odkazy na privacy, podmínky a subprocesory nejsou schované jako velikonoční vajíčko,
+- jestli kontaktní cesta nevyžaduje zbytečný účet nebo marketingový souhlas.
+
+Privacy-first homepage nemusí být asketická. Může být krásná, rychlá a obchodně silná. Jen nepotřebuje sledovat návštěvníka jako detektiv v béčkovém filmu.
+
+### Hodinový postup auditu
+
+Rozděl si hodinu takto:
+
+**0–10 minut: první dojem**
+
+- Otevři homepage v anonymním okně.
+- Nastav si časovač na jednu minutu.
+- Napiš, co produkt dělá, pro koho je a co je další krok.
+- Pokud to nejde, problém je v jasnosti, ne v návštěvníkovi.
+
+**10–25 minut: struktura a cesta**
+
+- Projdi sekce odshora dolů.
+- Ke každé napiš její účel.
+- Vyhoď nebo přesuň sekce, které nepomáhají rozhodnutí.
+- Označ všechna CTA a vyber jedno primární.
+
+**25–40 minut: text a důkaz**
+
+- Zvýrazni obecné fráze.
+- Nahraď je konkrétním problémem, výsledkem nebo příkladem.
+- Přidej nebo zpřesni důkaz hned za hlavní slib.
+- Zkontroluj, zda ukázka produktu odpovídá slibu v hero sekci.
+
+**40–50 minut: privacy-first a technika**
+
+- Zkontroluj formuláře, externí skripty a odkazy na dokumentaci.
+- Ověř, že stránka funguje na mobilu.
+- Zapiš zjevné rychlostní brzdy: velké obrázky, zbytečné widgety, pomalé fonty, přebytečné knihovny.
+
+**50–60 minut: rozhodnutí**
+
+- Vyber maximálně pět úprav.
+- Každé přiřaď vlastníka a dopad.
+- Jednu úpravu udělej hned, pokud je malá.
+- Zbytek dej do backlogu jako konkrétní položky, ne jako „vylepšit homepage“.
+
+### Checklist homepage auditu
+
+- [ ] Nadpis jasně říká, co produkt dělá a pro koho je.
+- [ ] Podnadpis popisuje konkrétní výsledek nebo změnu v práci zákazníka.
+- [ ] Hlavní CTA je jednoznačné a viditelné bez scrollování.
+- [ ] Návštěvník ví, co se stane po kliknutí na CTA.
+- [ ] První důkaz podporuje hlavní slib, ne jinou část produktu.
+- [ ] Screenshot nebo ukázka odpovídá reálnému použití produktu.
+- [ ] Stránka neobsahuje obecné fráze bez konkrétního příkladu.
+- [ ] Formulář sbírá jen data nutná pro další krok.
+- [ ] Homepage vysvětluje privacy-first provoz jako výhodu, ne jako právní povinnost v patičce.
+- [ ] Externí skripty a měření mají jasný účel.
+- [ ] Mobilní verze zachovává stejnou jasnost jako desktop.
+- [ ] Výsledkem auditu je seznam konkrétních změn s vlastníkem.
+
+### Šablona auditní karty homepage
+
+```markdown
+## Audit homepage: [název produktu]
+
+### Jednovětá nabídka
+- Pro koho je produkt:
+- Jaký problém řeší:
+- Jaký výsledek slibuje:
+- Primární CTA:
+
+### První dojem
+- Co návštěvník pochopí do 5 sekund:
+- Co je nejasné:
+- Co ruší hlavní sdělení:
+
+### Důkaz
+- Jaký důkaz je nejblíž hlavnímu slibu:
+- Co chybí:
+- Jaký konkrétní příklad lze doplnit:
+
+### Cesta k akci
+- Primární akce:
+- Sekundární akce:
+- Co se stane po kliknutí:
+- Zbytečné nebo konkurenční CTA:
+
+### Privacy-first kontrola
+- Externí skripty:
+- Formuláře a sbíraná data:
+- Analytika a její účel:
+- Odkazy na privacy dokumentaci:
+- Co lze zjednodušit nebo odstranit:
+
+### Prioritní úpravy
+1. Úprava:
+   - Vlastník:
+   - Dopad:
+   - Termín:
+2. Úprava:
+   - Vlastník:
+   - Dopad:
+   - Termín:
+3. Úprava:
+   - Vlastník:
+   - Dopad:
+   - Termín:
+```
+
 
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha DA o hodinovém auditu homepage pro malý SaaS: první dojem, jasná nabídka, důkazy, struktura sekcí, text bez mlhy, privacy-first kontrola, hodinový postup, checklist a šablona auditní karty.
 - **2026-09-16:** Doplněna příloha CZ o nákladové mapě SaaS: rozlišení fixních/proměnných/skrytých nákladů, mapování podle rozhodnutí, privacy-first měření bez sledování lidí, volba mezi pricingem a produktovou úpravou, měsíční cost review, checklist a šablona nákladové karty.
 - **2026-09-16:** Doplněna příloha CY o datové mapě pro SaaS: produktové datové toky, rozlišení zákaznických/uživatelských/provozních dat, účely polí, provozní otázky, napojení na vývoj, minimalistická tabulka, review události, checklist, šablona datové karty a ověřené zdroje Evropské komise a EDPB.
 - **2026-09-16:** Doplněna příloha CX o preference centru bez cookie divadla: rozlišení účelů a právních základů, výchozí privacy-first stav, správa preferencí v účtu, evidence verzí souhlasů, oddělení marketingové a provozní komunikace, minimalistický technický model, checklist, šablona preference karty a ověřené zdroje EDPB, Evropské komise a ÚOOÚ.
