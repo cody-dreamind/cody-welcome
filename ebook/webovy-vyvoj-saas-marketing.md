@@ -18664,7 +18664,195 @@ U B2B produktů může být lepší kratší trial s asistovaným setupem než d
 ```
 
 
+
+## Příloha DD: Přechod z trialu do placeného provozu bez ztráty kontextu
+
+Trial ukáže zájem. Placený provoz ukáže závazek. Mezi těmito dvěma stavy je nebezpečné údolí: zákazník už něco vyzkoušel, možná vidí hodnotu, ale tým ještě nemá jasně předané očekávání, data, zodpovědnosti ani další kroky. Když se převod z trialu udělá stylem „tak tady máte fakturu a hodně štěstí“, vznikne chaos dřív, než produkt stihne vydělat první pořádné peníze.
+
+Dobrý přechod z trialu do placeného provozu má tři cíle:
+
+1. **Potvrdit hodnotu, kvůli které zákazník platí.**
+2. **Předat provozní kontext bez zbytečného sběru dat.**
+3. **Nastavit první měsíc tak, aby zákazník nezůstal viset ve vzduchu.**
+
+Není to jen obchodní moment. Je to produktový a provozní moment. Právě tady se pozná, jestli trial opravdu připravil cestu k používání, nebo jen vyrobil hezký graf registrací.
+
+### Nejdřív potvrď, co se v trialu povedlo
+
+Před převodem na placený účet si napiš krátké shrnutí trialu. Ne kvůli internímu divadlu, ale proto, aby zákazník i tým věděli, co vlastně kupuje.
+
+Shrnutí může obsahovat:
+
+- hlavní use-case zákazníka,
+- dokončený aktivační scénář,
+- konkrétní výsledek nebo úsporu,
+- otevřené překážky,
+- domluvený rozsah placeného provozu,
+- osoby, které budou produkt reálně používat,
+- data, která už jsou v účtu, a co se s nimi stane dál.
+
+Příklad slabého převodu:
+
+> „Trial skončil, chcete přejít na tarif Pro?“
+
+Příklad lepšího převodu:
+
+> „V trialu jste nastavili plánování prvních 12 zakázek, pozvali dva koordinátory a ověřili, že technici dostanou denní plán bez ručního přeposílání tabulek. Navrhujeme převést účet na placený provoz pro dispečink a servisní tým, s cílem během prvního měsíce převést všechny nové zakázky do jednoho workflow.“
+
+Druhá varianta neprodává tarif. Prodává pokračování hodnoty. To je rozdíl mezi objednávkou a vztahem.
+
+### Převod účtu nesmí být mini migrace peklem
+
+Když zákazník přechází z trialu do placeného provozu, nechce znovu vyplňovat všechno, co už jednou zadal. Zároveň ale nechce, aby se do produkce přenesl testovací nepořádek. Převod musí rozlišit, co zachovat, co vyčistit a co potvrdit.
+
+Praktický postup:
+
+- **Zachovej užitečné nastavení:** tým, role, workflow, šablony, integrace, které zákazník opravdu použil.
+- **Označ testovací obsah:** ukázkové projekty, fiktivní zakázky a demo uživatele nesmí splynout s produkcí.
+- **Potvrď fakturační údaje odděleně:** účetní data nesbírej dřív, než jsou potřeba pro platbu nebo smlouvu.
+- **Zkontroluj oprávnění:** lidé z trialu nemusí být lidé v placeném provozu.
+- **Nabídni čistý start:** u některých B2B produktů je lepší převést konfiguraci, ale smazat testovací záznamy.
+
+> Codyho komentář: Trial účet plný položek „test test“, „asdf“ a „Pepa z Marsu“ není dobrý základ pro produkci. Je to archeologické naleziště a někdo ho pak bude muset vysvětlovat na board meetingu.
+
+### První faktura nemá být překvapení
+
+Cena a podmínky musí být jasné dřív, než zákazník klikne na přechod. Překvapivá faktura je rychlá cesta k churnu, support ticketu a morálnímu mikroinfarktu.
+
+Před placeným provozem jasně napiš:
+
+- jaký tarif nebo rozsah zákazník bere,
+- co je zahrnuté a co už je placený doplněk,
+- od kdy běží účtování,
+- jestli se účtuje podle uživatelů, objemu, workspace nebo fixní ceny,
+- jak funguje změna tarifu,
+- co se stane při nezaplacení,
+- jak lze službu ukončit.
+
+U B2B SaaS je často užitečné poslat krátké potvrzení e-mailem: „Toto je rozsah, toto je cena, toto je datum startu, toto je kontaktní osoba.“ Není to právní epos. Je to prevence budoucího ping-pongu.
+
+### První měsíc je onboarding, ne pasivní čekání
+
+Převodem na placený účet práce nekončí. Naopak začíná nejdůležitější fáze: zákazník musí převést produkt z „vyzkoušeli jsme“ do „takhle teď pracujeme“.
+
+První měsíc by měl mít jednoduchý plán:
+
+- **Týden 1:** potvrdit nastavení, role, produkční data a první rutinu.
+- **Týden 2:** zapojit další uživatele a odstranit první tření.
+- **Týden 3:** zkontrolovat, jestli se produkt používá v reálném procesu.
+- **Týden 4:** shrnout hodnotu, otevřené překážky a další rozumný krok.
+
+U menších zákazníků může stačit automatizovaný checklist a jeden krátký check-in. U větších zákazníků dává smysl plán nasazení s vlastníkem na obou stranách. Důležité je, aby zákazník věděl, co má udělat teď, ne „někdy až bude čas“. Čas je největší konkurence SaaS. Hned po Excelu, samozřejmě.
+
+### Předání z obchodu do podpory musí mít stopu
+
+Pokud obchodník ví spoustu detailů z trialu a support je nevidí, zákazník bude všechno opakovat. To je špatný začátek vztahu. Přitom stačí krátká interní karta.
+
+Předávka by měla obsahovat:
+
+- kdo je hlavní kontakt,
+- jaký problém zákazník řeší,
+- jaký aktivační scénář dokončil,
+- co bylo slíbeno,
+- co nebylo slíbeno,
+- jaká data nebo integrace jsou citlivé,
+- kdy má proběhnout první kontrola.
+
+Pozor na privacy-first hranici: interní poznámky nemají být skladiště osobních detailů. Nepiš tam dojmy typu „pan Novák je chaotik“. Napiš „zákazník potřebuje jednoduchý týdenní přehled pro tři koordinátory“. Jedno je drb. Druhé je provozní informace.
+
+### Měř úspěch prvního měsíce, ne jen platbu
+
+Platba je důležitý signál, ale není konec příběhu. Pokud zákazník zaplatil a nepoužívá produkt, máš jen odložený churn. První měsíc měř podle toho, jestli vzniká návyk.
+
+Užitečné agregované signály:
+
+- zákazník dokončil produkční nastavení,
+- do účtu vstoupili správní lidé,
+- proběhla první reálná práce,
+- opakuje se hlavní workflow,
+- support dotazy ubývají nebo se zpřesňují,
+- zákazník umí vysvětlit hodnotu vlastními slovy,
+- existuje plán pro další měsíc.
+
+Nepotřebuješ sledovat každý pohyb uživatele. Potřebuješ vědět, jestli se produkt stal součástí práce. To je jiná otázka a často stačí méně dat, lepší eventy a jeden dobře vedený check-in.
+
+### Když zákazník nepřejde, pořád se uč
+
+Ne každý trial se převede. To je normální. Důležité je nezacházet s neúspěšným trialem jako s černou dírou. Krátké uzavření pomůže produktu, marketingu i obchodu.
+
+Ptej se jednoduše:
+
+- Chyběla jasná hodnota?
+- Byl problém v ceně, načasování nebo interním rozhodnutí?
+- Narazil zákazník na chybějící funkci?
+- Bylo nastavení moc složité?
+- Potřeboval více pomoci?
+- Byl to vůbec správný segment?
+
+Nedělej z toho výslech. Jedna férová otázka často stačí: „Co byl hlavní důvod, proč teď nepokračujete?“ Pokud odpoví, poděkuj. Pokud ne, nepošli sedm připomínek. Lidé mají právo nechtít být výzkumný panel v botách.
+
+### Checklist: převod trialu do placeného provozu
+
+- [ ] Víme, jakou hodnotu zákazník v trialu reálně zažil.
+- [ ] Je jasný placený rozsah, tarif, datum startu a fakturační model.
+- [ ] Testovací data jsou označená, smazaná nebo oddělená od produkce.
+- [ ] Oprávnění a role odpovídají placenému provozu.
+- [ ] Zákazník ví, co má udělat během prvního týdne.
+- [ ] Obchod, support a produkt sdílí stejný kontext.
+- [ ] Interní poznámky neobsahují zbytečné osobní údaje.
+- [ ] První měsíc má jednoduchý onboardingový plán.
+- [ ] Měříme návyk a reálné použití, ne jen fakt, že přišla platba.
+- [ ] Neúspěšné trialy mají krátké uzavření a poučení.
+
+### Šablona: karta převodu z trialu
+
+```markdown
+# Převod z trialu: [zákazník / workspace]
+
+## Kontext
+- Segment:
+- Hlavní kontakt:
+- Problém, který řeší:
+- Aktivační scénář z trialu:
+
+## Co se v trialu povedlo
+- Dokončené kroky:
+- Viditelná hodnota:
+- Otevřené překážky:
+
+## Placený provoz
+- Tarif / rozsah:
+- Datum startu:
+- Fakturační model:
+- Vlastník na straně zákazníka:
+- Vlastník u nás:
+
+## Data a nastavení
+- Co převádíme:
+- Co mažeme nebo archivujeme:
+- Citlivé integrace / data:
+- Role a oprávnění ke kontrole:
+
+## První měsíc
+- Týden 1:
+- Týden 2:
+- Týden 3:
+- Týden 4:
+- Měřítko úspěchu:
+
+## Předávka
+- Slíbeno zákazníkovi:
+- Neslíbeno / mimo rozsah:
+- Rizika:
+- Datum prvního review:
+```
+
+Převod z trialu není administrativní formalita. Je to chvíle, kdy se z nadějného zájmu stává provozní realita. Když ji uděláš čistě, zákazník se necítí jako lead v CRM, ale jako partner, který ví, proč platí a co bude dál.
+
+---
+
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha DD o přechodu z trialu do placeného provozu: potvrzení hodnoty, čištění testovacích dat, jasná fakturace, první měsíc onboardingu, předávka mezi obchodem a supportem, měření návyku, uzavření neúspěšných trialů, checklist a šablona převodní karty.
 - **2026-09-16:** Doplněna příloha DC o trialu, který prodává hodnotu místo sběru dat: jeden aktivační scénář, úměrná registrace, onboarding podle práce zákazníka, agregované měření, užitečná komunikace, jasný konec trialu, checklist a šablona trial karty.
 - **2026-09-16:** Doplněna příloha DB o demo prostředí bez živých dat: jasný obchodní účel, syntetická data, oddělení od produkce, scénáře podle práce zákazníka, minimalistický demo formulář, expirace přístupů, agregované měření, privacy-first důkazy, checklist a šablona demo karty.
 - **2026-09-16:** Doplněna příloha DA o hodinovém auditu homepage pro malý SaaS: první dojem, jasná nabídka, důkazy, struktura sekcí, text bez mlhy, privacy-first kontrola, hodinový postup, checklist a šablona auditní karty.
