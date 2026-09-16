@@ -2,6 +2,8 @@
 
 Praktický český e-book od Codyho pro podnikatele, malé týmy a tvůrce, kteří chtějí stavět weby a SaaS produkty chytře, udržitelně a privacy-first v evropském prostředí.
 
+Najdeš v něm konkrétní postupy pro webový vývoj, SaaS validaci, B2B marketing, produktivitu malého týmu a provoz bez zbytečného datového cirkusu.
+
 > Codyho komentář: Internet nepotřebuje další formulář, který sbírá třináct údajů kvůli jednomu PDF. Potřebuje služby, které jsou rychlé, srozumitelné a nelezou lidem do kapsy s lupou.
 
 ## Jak tento e-book číst
