@@ -16264,8 +16264,217 @@ Dobrá metrika není počet dokumentů v data roomu. Dobrá metrika je počet n�
 - EUR-Lex — GDPR, článek 28 o zpracovateli a požadavcích na smluvní rámec zpracování: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
 - EDPB — pokyny ke konceptům správce a zpracovatele podle GDPR, včetně praktického výkladu vztahů mezi rolemi: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en
 
+## Příloha CR: Business case pro nákup SaaS bez excelového kouřostroje
+
+Skvělý produkt se často zasekne na zdánlivě nudné otázce: „Jak si obhájíme nákup?“ Zakladatel ukáže demo, obchodník nadšeně kývá, budoucí uživatelé vidí úlevu, ale nákupní tým nebo finanční ředitel potřebuje jednoduchý business case. Ne román o digitální transformaci. Stačí jasně popsat, co se dnes děje, kolik to stojí, co se změní, jaké jsou náklady, jaká rizika mizí a jak poznáme, že se nákup vyplatil.
+
+Malý SaaS tým by neměl čekat, až si zákazník business case nějak složí sám. Pokud mu dáš praktickou šablonu, zkrátíš rozhodování, snížíš počet interních e-mailů a hlavně posuneš debatu od „kolik stojí licence“ k „jakou hodnotu odemyká změna“. To je obchodně zdravější a privacy-first přístup tomu pomáhá: místo sledování každého kliknutí uživatele pracuješ s dopadem na proces, čas, riziko a výsledek.
+
+> Codyho komentář: Business case není kouzelná tabulka, která z průměrného produktu udělá nutnost. Je to baterka. Posvítí na to, jestli problém opravdu bolí, nebo jen hezky vypadal v prezentaci.
+
+### Začni současným stavem, ne cenou tarifu
+
+Cena SaaS je jen jedna řádka. Současný stav má obvykle mnohem víc skrytých nákladů: ruční přepisování, čekání, chyby, schvalovací kolečka, ztracené leady, opakované dotazy na podporu, pomalé předávky, špatná data pro rozhodování nebo riziko, že kritická agenda stojí na jednom člověku a jeho tabulce s názvem `final_final_2.xlsx`.
+
+Při přípravě business case pomoz zákazníkovi popsat:
+
+- **Proces:** co se dnes děje krok za krokem.
+- **Objem:** kolikrát týdně nebo měsíčně se situace opakuje.
+- **Čas:** kolik lidí a hodin proces spolkne.
+- **Chyby:** kde vznikají reklamace, opravy nebo zdržení.
+- **Dopad:** co se stane, když problém zůstane další kvartál.
+- **Riziko:** kde jsou osobní údaje, přístupy, ruční exporty nebo nejasná odpovědnost.
+
+Nechtěj po zákazníkovi přesnost na dvě desetinná místa. V rané fázi stačí kvalifikovaný odhad a rozsah. Rozhodování často nepotřebuje dokonalou matematiku, ale jasné pořadí problémů.
+
+### Odděl tvrdé, měkké a rizikové přínosy
+
+Když do jedné kolonky nasypeš všechno od „ušetříme čas“ po „budeme modernější“, business case ztratí důvěryhodnost. Lepší je rozdělit přínosy podle toho, jak se dají obhájit.
+
+Tvrdé přínosy:
+
+- méně hodin ruční práce,
+- rychlejší zpracování požadavků,
+- nižší počet chyb nebo reklamací,
+- kratší čas do odpovědi zákazníkovi,
+- méně nástrojů nebo duplicitních licencí.
+
+Měkké přínosy:
+
+- lepší přehled pro tým,
+- menší stres při předávkách,
+- rychlejší onboarding nových lidí,
+- snazší spolupráce mezi odděleními,
+- lepší zákaznická zkušenost.
+
+Rizikové přínosy:
+
+- méně ručních exportů osobních údajů,
+- jasnější přístupová práva,
+- lepší auditní stopa,
+- kratší retence zbytečných dat,
+- menší závislost na jednom člověku nebo jednom souboru.
+
+Tvrdé přínosy pomáhají financím. Měkké přínosy pomáhají týmu. Rizikové přínosy pomáhají právu, bezpečnosti a managementu. V dobrém business case mají místo všechny tři, ale nemají se tvářit stejně.
+
+### Počítej s celkovou změnou, ne jen s licencí
+
+SaaS nákup není jen měsíční poplatek. Do rozhodnutí patří i implementace, migrace, školení, interní komunikace, úprava procesu, integrace a čas lidí, kteří budou změnu zavádět. Když tyto položky schováš, zákazník je stejně objeví později. A pozdě objevené náklady chutnají jako studená káva ze včerejší porady.
+
+Praktická struktura nákladů:
+
+- **Licence:** tarif, počet uživatelů, limity, doplňky.
+- **Implementace:** nastavení, migrace, konfigurace, custom práce.
+- **Interní čas:** vlastník projektu, testování, školení, komunikace.
+- **Integrace:** napojení na účetnictví, CRM, identity provider, e-mail nebo datové zdroje.
+- **Provoz:** support, administrace, revize přístupů, aktualizace dokumentace.
+- **Odchod:** export dat, ukončení, archivace a smazání, pokud se produkt neosvědčí.
+
+Privacy-first detail: už při business case popiš, která data se budou migrovat a která ne. Ne každá historická tabulka musí do nového systému. Někdy je nejlepší migrace jen aktivní agenda, referenční číselníky a archiv mimo produkt s jasnou retencí.
+
+### Jednoduchý ROI model stačí
+
+Malý B2B SaaS nepotřebuje finanční model s makry, která přežijí jen na počítači jednoho konzultanta. Stačí jednoduchý výpočet, který si zákazník umí upravit.
+
+Základní model:
+
+1. Kolik hodin měsíčně dnes proces stojí?
+2. Jaká je realistická úspora po zavedení?
+3. Kolik stojí hodina lidí, kterých se to týká?
+4. Jaké další náklady zmizí nebo se sníží?
+5. Jaké jsou měsíční a jednorázové náklady na nový stav?
+6. Za kolik měsíců se změna vrátí?
+
+Příklad bez falešné přesnosti:
+
+- tým dnes tráví ručním reportem 24 hodin měsíčně,
+- produkt realisticky odstraní polovinu práce,
+- interní náklad hodiny je 800 Kč,
+- měsíční úspora času je zhruba 9 600 Kč,
+- licence a provoz stojí 6 000 Kč měsíčně,
+- čistý měsíční přínos je přibližně 3 600 Kč plus méně chyb a rychlejší rozhodování.
+
+Tohle není investiční prospekt. Je to začátek debaty. Pokud výsledek vychází špatně, není to tragédie. Možná řešíš malý problém, špatný segment, moc drahou implementaci nebo přínos, který nejde měřit časem.
+
+### Privacy-first business case nemá sledovat jednotlivce
+
+Pokušení je jasné: „Změříme každého uživatele a dokážeme, kdo ušetřil kolik minut.“ Nedělej z business case interní sledovací systém. Pro rozhodnutí většinou stačí agregované procesní metriky.
+
+Lepší metriky:
+
+- počet zpracovaných požadavků za týden,
+- průměrná doba od přijetí po dokončení,
+- počet ručních zásahů,
+- počet oprav po chybě,
+- počet otevřených položek po termínu,
+- spokojenost zákazníka nebo interního týmu v jednoduchém anonymizovaném pulse checku.
+
+Horší metriky:
+
+- detailní produktivita jednotlivých zaměstnanců,
+- nahrávání obrazovky bez silného důvodu,
+- sledování každého kliknutí mimo jasný účel,
+- exporty aktivit lidí do manažerských žebříčků,
+- neomezená retence behaviorálních dat.
+
+GDPR pracuje mimo jiné s principem minimalizace údajů: osobní údaje mají být přiměřené, relevantní a omezené na nezbytný rozsah vzhledem k účelu. Evropská komise tento princip shrnuje v přehledu zásad GDPR: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
+EDPB zároveň k ochraně údajů již od návrhu a ve výchozím nastavení vysvětluje, že privacy nemá být dodatečná nálepka, ale součást návrhu služby a jejích defaultů: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+
+### Pomoz internímu šampionovi prodat změnu slušně
+
+V B2B nákupu často existuje člověk, který produkt chce, ale nemá finální podpis. Tenhle interní šampion nepotřebuje další slogan. Potřebuje munici pro poradu: stručné shrnutí, odpovědi na námitky, rizika, plán zavedení a jasný další krok.
+
+Připrav mu balíček:
+
+- jednostránkový business case,
+- porovnání současného a cílového procesu,
+- stručný ROI model,
+- bezpečnostní a privacy shrnutí,
+- plán pilotu na 30 dní,
+- kritéria úspěchu,
+- scénář ukončení pilotu včetně exportu a mazání dat.
+
+Zní to jako práce navíc, ale opakuje se. Jakmile šablonu vytvoříš jednou, obchodník ji může používat znovu a znovu. Jen nesmí sklouznout k tomu, že každému zákazníkovi slíbí jiný produkt převlečený za stejnou tabulku.
+
+### Checklist: business case pro SaaS nákup
+
+- [ ] Umíme popsat současný proces jednou stránkou.
+- [ ] Máme odhad objemu, času, chyb a dopadu problému.
+- [ ] Přínosy jsou rozdělené na tvrdé, měkké a rizikové.
+- [ ] Náklady zahrnují licenci, implementaci, interní čas, integrace, provoz i ukončení.
+- [ ] ROI model je jednoduchý a zákazník ho umí upravit.
+- [ ] Metriky úspěchu jsou agregované a nesledují jednotlivce bez jasného důvodu.
+- [ ] Data pro pilot mají minimální rozsah a jasnou retenci.
+- [ ] Interní šampion má shrnutí pro finance, právní tým, bezpečnost i budoucí uživatele.
+- [ ] Pilot má předem daná kritéria úspěchu a scénář ukončení.
+- [ ] Po nákupu se business case vrací do review, ne do šuplíku.
+
+### Šablona business case karty
+
+```markdown
+## Business case: [produkt / tým / proces]
+
+### Současný stav
+- Proces:
+- Objem za měsíc:
+- Zapojené role:
+- Ruční práce:
+- Nejčastější chyby:
+- Dopad, pokud se nic nezmění:
+
+### Navržená změna
+- Co se změní:
+- Co zůstává mimo rozsah:
+- Jaká data se migrují:
+- Jaká data se nemigrují:
+- Kdo je vlastník změny:
+
+### Přínosy
+- Tvrdé přínosy:
+- Měkké přínosy:
+- Snížená rizika:
+- Jak přínosy ověříme:
+
+### Náklady
+- Licence:
+- Implementace:
+- Interní čas:
+- Integrace:
+- Provoz:
+- Ukončení / export / smazání:
+
+### ROI model
+- Odhad úspory času:
+- Odhad finančního dopadu:
+- Jednorázové náklady:
+- Měsíční náklady:
+- Návratnost:
+- Nejistoty:
+
+### Privacy-first kontrola
+- Účel zpracování:
+- Minimální nutná data:
+- Retence:
+- Přístupy:
+- Agregované metriky úspěchu:
+- Co nesledujeme:
+
+### Rozhodnutí
+- Doporučení:
+- Podmínky pilotu:
+- Kritéria úspěchu:
+- Datum review:
+```
+
+### Zdroje k privacy-first business case
+
+- Evropská komise — principy GDPR včetně minimalizace údajů podle článku 5(1)(c): https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- EDPB — Guidelines 4/2019 k ochraně údajů již od návrhu a ve výchozím nastavení podle článku 25 GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+
 
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha CR o business case pro nákup SaaS: popis současného procesu, tvrdé/měkké/rizikové přínosy, celkové náklady změny, jednoduchý ROI model, privacy-first měření bez sledování jednotlivců, podpora interního šampiona, checklist, šablona karty a zdroje k minimalizaci údajů a privacy by design.
 - **2026-09-16:** Doplněna příloha CQ o B2B data roomu pro privacy-first SaaS: opakované nákupní otázky, vrstvy sdílení, DPA balíček, security overview, ochrana citlivých dokumentů, údržba, checklist, šablona indexu a zdroje ke GDPR článku 28.
 - **2026-09-16:** Doplněna příloha CP o privacy-first discovery rozhovorech: rozhodnutí před otázkami, situační otázky, souhlas a hranice, minimalizace poznámek, syntéza, oddělení prodeje, retence, checklist, discovery karta a zdroje k principům GDPR.
 - **2026-09-15:** Doplněna příloha CO o SLA a support plánech bez korporátního kouře: rozlišení podpory, incidentů a konzultací, severity matice, reakční doby, rozdíly mezi tarify, status page, interní připravenost, obchodní kontrola, privacy-first reporting, checklist a SLA karta.
