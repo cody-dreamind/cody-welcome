@@ -16100,7 +16100,173 @@ Pokud výzkum souvisí se zpracováním osobních údajů, drž se zásad GDPR j
 - EDPB — pokyny k souhlasu podle GDPR, užitečné pro přemýšlení o dobrovolnosti a jasném účelu souhlasu: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
 
 
+## Příloha CQ: B2B data room, který zrychlí nákup a neotevře trezor navíc
+
+U B2B SaaS přijde chvíle, kdy zákazník nechce jen hezké demo. Chce vědět, kdo jste, kde běží data, jak řešíte bezpečnost, jaké máte subprocesory, co se stane při incidentu a jestli se z produktu dá odejít bez digitálního výkupného. To není otrava. To je nákupní realita.
+
+Malý tým na to často reaguje chaosem: jednou pošle staré PDF, podruhé screenshot z adminu, potřetí tabulku subprocesorů v e-mailu a počtvrté „nějak to právníkovi dodáme“. Výsledek? Delší prodej, víc ruční práce a větší riziko, že ven pošlete něco, co ven poslat nemělo.
+
+Data room není jen pro investory. Pro privacy-first SaaS je to řízené místo, kde má zákazník odpovědi na opakované bezpečnostní, právní a provozní otázky. Ne skladiště všeho. Spíš dobře označená polička s tím, co rozhodování opravdu potřebuje.
+
+> Codyho komentář: Data room má být jako dobrá technická dokumentace: dost konkrétní, aby pomohla, a dost disciplinovaná, aby z něj nebyl požární sklad s cedulí „někde tady bude hasicí přístroj“.
+
+### Začni otázkami, které zákazníci stejně položí
+
+Nejlepší data room nevznikne tím, že stáhneš šablonu o šedesáti složkách. Vznikne z obchodní reality. Projdi posledních deset B2B příležitostí a vypiš otázky, které se opakovaly.
+
+Typické otázky:
+
+- Kde jsou hostovaná data a kdo k nim má přístup?
+- Jaké osobní údaje produkt zpracovává?
+- Kdo jsou subprocesoři a k čemu se používají?
+- Máte zpracovatelskou smlouvu nebo její vzor?
+- Jak řešíte zálohy, obnovu a incidenty?
+- Jak se data mažou nebo exportují po ukončení služby?
+- Jak probíhá správa přístupů ve vašem týmu?
+- Co produkt loguje a jak dlouho logy držíte?
+- Jak rychle reagujete na bezpečnostní nebo provozní problém?
+
+Z těchto otázek udělej strukturu. Neobráceně. Když data room odpovídá na reálné námitky, zkracuje obchodní cyklus. Když odpovídá na fantazii interního týmu, jen přidává údržbu.
+
+### Rozděl veřejné, sdílené a citlivé informace
+
+Privacy-first neznamená všechno schovat. Naopak: část důvěry má být veřejná. Zákazník by bez NDA měl najít základní informace o provozu, soukromí, subprocesorech a kontaktu pro bezpečnostní nebo privacy dotazy.
+
+Praktické vrstvy:
+
+- **Veřejné:** trust page, privacy policy, seznam hlavních subprocesorů, status page, kontakt, stručný popis hostingu a regionů.
+- **Sdílené po obchodním kontextu:** vzor DPA, bezpečnostní přehled, odpovědi na běžný security dotazník, popis záloh, exportu a incidentové komunikace.
+- **Citlivé:** detailní architektura, interní runbooky, penetrační testy, přístupové matice, auditní výstupy, konkrétní zranitelnosti a interní procesní detaily.
+
+Každý dokument musí mít vlastníka, datum poslední aktualizace a úroveň sdílení. Bez toho se z data roomu rychle stane historický román. A historické romány jsou fajn, jen ne jako bezpečnostní evidence.
+
+### Zpracovatelská smlouva není marketingový leták
+
+Pokud pro zákazníka zpracováváte osobní údaje jako zpracovatel, smluvní rámec musí být přesný. GDPR v článku 28 říká, že zpracování zpracovatelem má být upravené smlouvou nebo jiným právním aktem a má pokrývat mimo jiné předmět a dobu zpracování, povahu a účel, typ osobních údajů, kategorie subjektů údajů a povinnosti a práva správce. Oficiální znění je v EUR-Lex: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+
+Pro malý SaaS to prakticky znamená: neměj jen generickou stránku „bereme privacy vážně“. Připrav dokument, který zákazník může dát právníkovi nebo DPO a který odpovídá na konkrétní otázky.
+
+Vzor DPA balíčku může obsahovat:
+
+- strany a role: kdo je správce, kdo zpracovatel,
+- účel a rozsah zpracování,
+- typy údajů a kategorie subjektů údajů,
+- dobu zpracování a pravidla po ukončení služby,
+- bezpečnostní opatření popsaná lidsky i technicky,
+- pravidla pro subprocesory a změny jejich seznamu,
+- podporu při žádostech subjektů údajů,
+- pravidla pro incidenty a součinnost,
+- mazání nebo vrácení dat po skončení služby,
+- auditní a informační mechanismus přiměřený velikosti dodavatele.
+
+Neber to jako právní radu od robota v mikině. Ber to jako produktový požadavek: pokud prodáváš do B2B, nákupní proces potřebuje dokumenty, které se dají posoudit bez pěti kol e-mailového ping-pongu.
+
+### Security overview má být čitelný i pro netechnického kupujícího
+
+Bezpečnostní přehled není místo, kde se předvádí slovník. Je to mapa důvěry. Má ukázat, že víte, co chráníte, jaké máte vrstvy obrany a kde jsou limity.
+
+Dobrý security overview má jednu až dvě stránky a odpovídá třeba takto:
+
+- **Architektura ve zkratce:** hlavní komponenty, hosting, databáze, storage, e-mail, monitoring.
+- **Přístupy:** kdo má produkční přístup, jak se schvaluje, jak se ruší.
+- **Autentizace:** MFA pro interní účty, role, princip nejmenších oprávnění.
+- **Šifrování:** přenos, úložiště, zálohy, tajemství a klíče.
+- **Zálohy a obnova:** frekvence, retenční pravidla, test obnovy.
+- **Logy:** co se loguje, co se neloguje, jak dlouho logy držíte.
+- **Incidenty:** detekce, eskalace, komunikace, postmortem.
+- **Dodavatelé:** hlavní subprocesoři a účel použití.
+
+Když něco ještě nemáte, napište to férově. „Penetrační test plánujeme před enterprise prodejem“ je lepší než mlhavé „bezpečnost pravidelně ověřujeme“. Zákazník se nerozhoduje jen podle dokonalosti, ale podle důvěryhodnosti.
+
+### Nedávej do data roomu víc dat, než zákazník potřebuje
+
+Data room má snižovat riziko, ne ho vyrábět. Typická chyba je poslat celý balík všem stejně: startupu s pěti lidmi, korporátu, partnerovi i potenciálnímu investorovi. Tím rozdáváš interní informace lidem, kteří je nepotřebují.
+
+Praktické pravidlo:
+
+- nejdřív pošli veřejný odkaz na trust page,
+- pak sdílej konkrétní dokument podle otázky,
+- citlivé dokumenty sdílej jen po jasném obchodním důvodu,
+- nastav expiraci odkazu nebo přístup přes konkrétní e-mail,
+- eviduj, kdo co dostal a kdy,
+- u citlivých souborů neposílej editovatelné interní originály.
+
+Privacy-first se týká i vašich interních dat. Když někomu ukážeš detailní infrastrukturu, interní proces nebo auditní zjištění, je to informace, která sama potřebuje ochranu.
+
+### Udržuj data room jako produkt
+
+Data room není jednorázová složka před velkým prodejem. Je to podpůrný produkt pro obchod, support, právní tým a provoz. Proto musí mít rytmus údržby.
+
+Minimální provozní pravidla:
+
+- jednou měsíčně zkontroluj subprocesory a veřejné odkazy,
+- po každé větší změně infrastruktury aktualizuj security overview,
+- po incidentu zkontroluj incidentovou sekci a komunikační šablony,
+- po změně retenčních pravidel uprav privacy dokumenty i DPA přílohy,
+- jednou za kvartál odstraň staré verze dokumentů z aktivního sdílení,
+- do obchodního CRM ukládej jen informaci, že byl dokument sdílen, ne citlivý obsah dokumentu.
+
+Dobrá metrika není počet dokumentů v data roomu. Dobrá metrika je počet nákupních otázek, které umíte zodpovědět bez improvizace.
+
+### Checklist: B2B data room privacy-first
+
+- [ ] Máme seznam opakovaných bezpečnostních, právních a provozních otázek zákazníků.
+- [ ] Data room je rozdělený na veřejnou, sdílenou a citlivou vrstvu.
+- [ ] Každý dokument má vlastníka, datum aktualizace a úroveň sdílení.
+- [ ] Trust page veřejně vysvětluje hosting, subprocesory, kontakt a základní privacy přístup.
+- [ ] Máme připravený DPA balíček nebo jasný proces jeho doplnění.
+- [ ] Security overview je srozumitelný obchodníkovi, právníkovi i technickému reviewerovi.
+- [ ] Citlivé dokumenty sdílíme jen s důvodem, expirací a evidencí.
+- [ ] Neposíláme zákazníkům surové interní runbooky, pokud stačí shrnutí.
+- [ ] Po změně infrastruktury, subprocesorů nebo retenčních pravidel aktualizujeme dokumenty.
+- [ ] Jednou kvartálně archivujeme staré verze a kontrolujeme přístupy.
+
+### Šablona data room indexu
+
+```markdown
+## B2B data room: [produkt / segment]
+
+### Veřejné odkazy
+- Trust page:
+- Privacy policy:
+- Subprocesoři:
+- Status page:
+- Security kontakt:
+
+### Sdílené dokumenty
+- DPA vzor:
+- Security overview:
+- Zálohy a obnova:
+- Incidentová komunikace:
+- Export a mazání dat:
+
+### Citlivé dokumenty
+- Název dokumentu:
+- Kdo smí sdílet:
+- Kdy je potřeba NDA nebo jiný důvod:
+- Expirace odkazu:
+- Evidence sdílení:
+
+### Údržba
+- Vlastník data roomu:
+- Poslední měsíční kontrola:
+- Poslední kvartální archivace:
+- Dokumenty k aktualizaci:
+
+### Nejčastější otázky
+- Otázka:
+- Odpověď / dokument:
+- Kdo odpovídá při eskalaci:
+```
+
+### Zdroje k B2B data roomu a zpracovatelským smlouvám
+
+- EUR-Lex — GDPR, článek 28 o zpracovateli a požadavcích na smluvní rámec zpracování: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+- EDPB — pokyny ke konceptům správce a zpracovatele podle GDPR, včetně praktického výkladu vztahů mezi rolemi: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en
+
+
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha CQ o B2B data roomu pro privacy-first SaaS: opakované nákupní otázky, vrstvy sdílení, DPA balíček, security overview, ochrana citlivých dokumentů, údržba, checklist, šablona indexu a zdroje ke GDPR článku 28.
 - **2026-09-16:** Doplněna příloha CP o privacy-first discovery rozhovorech: rozhodnutí před otázkami, situační otázky, souhlas a hranice, minimalizace poznámek, syntéza, oddělení prodeje, retence, checklist, discovery karta a zdroje k principům GDPR.
 - **2026-09-15:** Doplněna příloha CO o SLA a support plánech bez korporátního kouře: rozlišení podpory, incidentů a konzultací, severity matice, reakční doby, rozdíly mezi tarify, status page, interní připravenost, obchodní kontrola, privacy-first reporting, checklist a SLA karta.
 - **2026-09-15:** Doplněna příloha CN o znalostní bázi a samoobslužné podpoře privacy-first: výběr článků podle reálných dotazů, struktura help článku, odkazy v aplikaci, agregované měření hledání, revize v Definition of Done, checklist a šablona.
