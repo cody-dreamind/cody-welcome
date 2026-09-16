@@ -19222,7 +19222,186 @@ Referenční příběh po prvním kvartálu je nejlepší, když působí jako u
 
 ---
 
+
+## Příloha DG: Zákaznický feedback loop bez nekonečných dotazníků
+
+Po prvním kvartálu, referenčním příběhu a prvních stabilních zákaznících přichází nenápadná, ale zásadní disciplína: jak pravidelně sbírat zpětnou vazbu, aniž by se z produktu stal vysavač dat a z týmu call centrum pro každé přání. Malý SaaS nepotřebuje padesát slidů „voice of customer“. Potřebuje jednoduchý rytmus, který z rozhovorů, supportu, obchodních námitek a používání produktu dělá lepší rozhodnutí.
+
+Feedback loop není anketa na konci e-mailu. Je to provozní systém:
+
+1. zachytit signál,
+2. pochopit kontext,
+3. rozhodnout, co s tím,
+4. doručit změnu,
+5. vrátit zákazníkovi zprávu, co se stalo.
+
+Když chybí pátý krok, zákazník má pocit, že mluvil do šuplíku. Když chybí třetí krok, tým jen přepisuje názory do backlogu a říká tomu produktová strategie. A když chybí privacy-first filtr, začne se sbírat všechno „pro jistotu“. To je cesta do datového sklepa, kde se po čase bojíš rozsvítit.
+
+### Začni malým počtem zdrojů
+
+Na začátku stačí čtyři zdroje zpětné vazby:
+
+- **Support:** dotazy, chyby, opakované zmatení a ruční workaroundy.
+- **Obchod:** námitky, důvody ztracených dealů, otázky před nákupem.
+- **Onboarding:** místa, kde zákazník potřebuje pomoc, aby došel k první hodnotě.
+- **Pravidelné rozhovory:** krátké hovory s vybranými zákazníky jednou za měsíc nebo kvartál.
+
+Nepřidávej hned session replay, heatmapy a deset behaviorálních knihoven. U malého SaaS je často větší hodnota v pěti dobře vedených rozhovorech než ve stovce anonymních grafů bez kontextu. Graf řekne, že lidé odcházejí ze stránky. Rozhovor řekne, že nerozumí slovu „workspace“, protože v jejich firmě všichni říkají „zakázka“.
+
+Praktický začátek: založ jednu tabulku nebo jednoduchou databázi se signály. Každý záznam má mít datum, zdroj, zákaznický segment, popis situace, dopad a navrženou kategorii. Ne osobní detektivku.
+
+### Rozlišuj signál, přání a diagnózu
+
+Zákazník často popíše řešení, ne problém. „Potřebujeme export do Excelu“ může znamenat:
+
+- management chce týdenní report,
+- účetní potřebuje podklady pro fakturaci,
+- tým nedůvěřuje datům v aplikaci,
+- někdo má starý proces, který zatím nechce měnit,
+- chybí jednoduché sdílení s lidmi bez účtu.
+
+Kdyby tým slepě postavil export, možná vyřeší symptom. Možná taky jen přidá další místo, kde data žijí mimo kontrolu. Proto u každého požadavku polož tři otázky:
+
+1. **Co se má stát po použití této funkce?**
+2. **Jak to řešíte dnes a co na tom bolí?**
+3. **Kdo výsledek používá a jak často?**
+
+Do backlogu nepiš jen „export do Excelu“. Lepší zápis je: „Provozní manažer potřebuje každý pátek poslat vedení přehled dokončených zakázek, dnes ho skládá ručně 90 minut z aplikace a tabulky.“ Teprve z toho může vzniknout export, sdílený report, e-mailový digest nebo úplně jiná funkce.
+
+### Vytvoř týdenní triage, ne permanentní paniku
+
+Feedback má tendenci přeskakovat priority. Jeden hlasitý zákazník napíše dlouhý e-mail a najednou celý tým přepisuje roadmapu. To je pochopitelné, ale nebezpečné. Potřebuješ pravidelnou triage.
+
+Jednou týdně projdi nové signály a rozděl je:
+
+- **Bug:** něco je rozbité proti slíbenému chování.
+- **Friction:** produkt funguje, ale cesta je zbytečně těžká.
+- **Feature request:** zákazník chce novou schopnost.
+- **Pricing / packaging:** problém je v tarifu, limitu nebo nabídce.
+- **Education:** produkt umí správnou věc, ale zákazník o ní neví nebo jí nerozumí.
+- **Strategic:** signál ukazuje na možný směr produktu.
+
+Každá kategorie má jiný další krok. Bug nečeká na velkou roadmapu. Friction může jít do malého UX vylepšení. Feature request potřebuje víc kontextu. Education často vyřeší dokumentace, onboarding nebo lepší text v rozhraní. Strategic signál patří do produktového review, ne do pátečního hotfixe.
+
+Codyho komentář: Nejlevnější produktová funkce je někdy jedna věta v UI. Není tak sexy jako nová integrační platforma, ale zato ji nemusíš tři roky udržovat. Kruté, já vím.
+
+### Chraň zákazníka před vlastním sběrem dat
+
+Privacy-first feedback loop stojí na minimalizaci. Neukládej celé přepisy hovorů, pokud nepotřebuješ citovat přesné znění. Nelep do interní wiki celé e-mailové vlákno se jmény lidí, interními čísly zakázek a screenshoty. Neházej nahrávky schůzek do nástroje, u kterého nevíš, kde leží data a kdo je zpracovává.
+
+Bezpečnější postup:
+
+- z hovoru udělej krátké shrnutí,
+- osobní údaje nahraď rolí nebo segmentem,
+- citace používej jen se souhlasem a jasným účelem,
+- screenshoty anonymizuj nebo nahraď syntetickou ukázkou,
+- přístup k raw feedbacku nech jen lidem, kteří ho opravdu potřebují,
+- nastav retenci: staré detailní podklady maž, agregované poznatky nech.
+
+Feedback je citlivější, než vypadá. Lidé v něm často popisují interní procesy, slabá místa firmy, obchodní metriky nebo frustraci z konkrétních kolegů. Zacházej s tím jako s důvěrou, ne jako s materiálem pro nekonečný brainstorming.
+
+### Prioritizuj podle dopadu, ne podle hlasitosti
+
+Jednoduchý scoring stačí. U každého tématu ohodnoť čtyři otázky na škále 1–3:
+
+- **Dopad na zákazníka:** jak moc problém bolí?
+- **Četnost:** kolik podobných zákazníků to řeší?
+- **Strategická relevance:** sedí to do směru produktu?
+- **Náročnost:** jak těžké je to dodat a udržet?
+
+Nepotřebuješ složitý model. Cílem není vyrobit matematickou iluzi objektivity. Cílem je zpomalit impulz „nejhlasitější vyhrává“. Když má požadavek vysoký dopad, častý výskyt a sedí do strategie, patří do dalšího plánování. Když je to okrajová potřeba jednoho zákazníka a rozbíjí jednoduchost produktu, možná stačí workaround, integrace nebo férové „ne“.
+
+Dobrá věta pro odmítnutí: „Rozumíme problému, ale nechceme teď přidat funkci, která by zkomplikovala produkt většině zákazníků. Pomůžeme vám zatím tímto postupem a budeme téma sledovat, pokud se objeví u dalších týmů.“
+
+### Zavři smyčku zpět k zákazníkovi
+
+Nejvíc důvěry často nevzniká tím, že splníš každé přání. Vzniká tím, že zákazník ví, že byl slyšen a co se s jeho signálem stalo.
+
+Po triage můžeš posílat krátké odpovědi:
+
+- „Díky, potvrdili jsme to jako bug a opravíme ho v příštím patchi.“
+- „Je to dobrý signál, zatím sbíráme další kontext od podobných týmů.“
+- „Tuhle funkci teď neplánujeme, protože by zvýšila složitost pro většinu zákazníků.“
+- „Vyřešili jsme to jednodušším nastavením v onboardingu, tady je odkaz.“
+- „Přidali jsme variantu exportu s anonymizovanými daty, aby šla použít bezpečněji.“
+
+Tahle disciplína má marketingovou hodnotu bez marketingového cirkusu. Zákazník vidí, že produkt není černá krabice. A tým se učí formulovat rozhodnutí lidsky, ne jen interními ticket IDs.
+
+### Feedback loop jako měsíční produktový rituál
+
+Jednou měsíčně udělej krátké review:
+
+1. Jaké tři problémy se opakovaly nejčastěji?
+2. Který signál ukazuje na největší obchodní příležitost?
+3. Který signál ukazuje na riziko churnu?
+4. Co šlo vyřešit textem, dokumentací nebo onboardingem?
+5. Které požadavky jsme odmítli a proč?
+6. Co jsme zákazníkům vrátili zpět jako odpověď?
+7. Jaká data můžeme smazat, anonymizovat nebo agregovat?
+
+Výstup nemá být román. Stačí jedna stránka: tři témata, tři rozhodnutí, tři další kroky. Pokud z review nevznikne žádné rozhodnutí, byl to jen obřad. A obřady bez kávy jsou podezřelé.
+
+### Checklist: zákaznický feedback loop
+
+- [ ] Máme jasně určené zdroje feedbacku: support, obchod, onboarding, rozhovory.
+- [ ] Každý signál zapisujeme s kontextem, ne jen jako náhodné přání.
+- [ ] Rozlišujeme bug, friction, feature request, pricing, education a strategický signál.
+- [ ] Jednou týdně děláme triage nových signálů.
+- [ ] U požadavků hledáme skutečný problém a očekávaný výsledek.
+- [ ] Neuchováváme zbytečné osobní údaje, celé přepisy ani citlivé screenshoty.
+- [ ] Máme retenci pro raw poznámky, nahrávky a citace.
+- [ ] Prioritizujeme podle dopadu, četnosti, strategie a náročnosti.
+- [ ] Umíme zákazníkovi férově říct ano, později i ne.
+- [ ] Uzavíráme smyčku: zákazník se dozví, co se s jeho podnětem stalo.
+- [ ] Jednou měsíčně shrnujeme hlavní témata a rozhodnutí.
+- [ ] Agregované poznatky používáme v roadmapě, onboardingu, dokumentaci i marketingu.
+
+### Šablona: feedback karta
+
+```markdown
+## Feedback karta: [téma]
+
+### Základ
+- Datum:
+- Zdroj: support / obchod / onboarding / rozhovor / jiné
+- Segment zákazníka:
+- Role mluvčího:
+- Citlivost dat: nízká / střední / vysoká
+
+### Kontext
+- Co se zákazník snažil udělat:
+- Co se stalo místo toho:
+- Jak to řeší dnes:
+- Dopad na práci / čas / riziko:
+
+### Interpretace
+- Typ signálu: bug / friction / feature / pricing / education / strategic
+- Skutečný problém:
+- Navržené možnosti řešení:
+- Co by bylo nejmenší užitečné zlepšení:
+
+### Priorita
+- Dopad na zákazníka (1–3):
+- Četnost (1–3):
+- Strategická relevance (1–3):
+- Náročnost (1–3):
+- Rozhodnutí: teď / později / sledovat / odmítnout
+
+### Privacy-first kontrola
+- Obsahuje karta osobní údaje nebo interní data zákazníka?
+- Co lze anonymizovat nebo agregovat?
+- Kdo potřebuje přístup k detailu?
+- Kdy raw podklady smažeme?
+
+### Uzavření smyčky
+- Co zákazníkovi odpovíme:
+- Kdo odpovídá:
+- Termín odpovědi:
+- Odkaz na změnu / dokumentaci / ticket:
+```
+
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha DG o zákaznickém feedback loopu bez nekonečných dotazníků: zdroje signálů, triage, privacy-first práce s poznámkami, prioritizace, uzavírání smyčky a šablona feedback karty.
 - **2026-09-16:** Doplněna příloha DF o referenčním příběhu po prvním placeném kvartálu: průběžný sběr podkladů, úrovně interní/anonymizované/veřejné případovky, otázky na změnu práce, struktura case study, opatrná práce s čísly, schvalování, bezpečné screenshoty, privacy-first distribuce, checklist a šablona referenční karty.
 - **2026-09-16:** Doplněna příloha DE o prvním placeném kvartálu zákazníka: stabilizace, tvorba návyku, důkaz hodnoty, včasné varovné signály, privacy-first health score bez sledování jednotlivců, kvartální shrnutí, opatrná expanze, checklist a šablona kvartální karty.
 - **2026-09-16:** Doplněna příloha DD o přechodu z trialu do placeného provozu: potvrzení hodnoty, čištění testovacích dat, jasná fakturace, první měsíc onboardingu, předávka mezi obchodem a supportem, měření návyku, uzavření neúspěšných trialů, checklist a šablona převodní karty.
