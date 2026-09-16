@@ -17877,7 +17877,197 @@ Po každé takové změně doplň řádek, datum a vlastníka. Pokud mapa žije 
 - [EDPB: Do I need a record of processing?](https://www.edpb.europa.eu/node/5350_sk) — stručné vysvětlení záznamů o činnostech zpracování a jejich praktického smyslu.
 
 
+## Příloha CZ: Nákladová mapa SaaS bez panického škrtání a sledování lidí
+
+Růst SaaS produktu často vypadá hezky na grafu, dokud někdo neotevře faktury za hosting, e-maily, úložiště, podporu, integrace, AI API, monitoring a nástroje, které „určitě budeme používat každý den“. Náklady se nezkazí najednou. Plíživě nabobtnají jako backlog po větě „tohle jen rychle přidáme“.
+
+Nákladová mapa není tabulka pro finančního člověka, kterému vývoj jednou za měsíc hodí přes plot PDF. Je to produktový nástroj. Pomáhá rozhodnout:
+
+- které funkce jsou drahé na provoz,
+- které zákaznické segmenty vyžadují nepoměrně moc podpory,
+- kde lze optimalizovat bez zhoršení produktu,
+- kdy má smysl změnit pricing,
+- které náklady jsou investice a které jen pohodlný autopilot,
+- jestli růst znamená zdravý business, nebo jen dražší způsob jak být unavený.
+
+Privacy-first přístup do toho patří přirozeně. Nemusíš sledovat každého uživatele jako laboratorní myš, abys věděl, jestli produkt ekonomicky funguje. Ve většině malých SaaS stačí agregované údaje po tarifu, workspace, zákaznickém segmentu a hlavních provozních modulech.
+
+### Rozliš fixní, proměnné a skryté náklady
+
+První chyba je házet všechny náklady do jednoho pytle. Pak tým řeší, že „hosting je drahý“, i když skutečný problém může být ruční onboarding, podpora jedné okrajové integrace nebo špatně nastavené e-mailové notifikace.
+
+Rozděl náklady minimálně do pěti vrstev:
+
+- **Fixní provoz:** servery, databáze, monitoring, domény, certifikáty, základní nástroje týmu.
+- **Proměnné náklady podle používání:** úložiště, přenos dat, e-maily, SMS, AI volání, exporty, importy, renderování, vyhledávání.
+- **Lidská práce:** support, ruční migrace, konzultace, custom reporty, obchodní follow-up, incidenty.
+- **Rizikové náklady:** technický dluh, bezpečnostní slabiny, vendor lock-in, neotestovaná obnova, právní chaos.
+- **Náklady důvěry:** auditní odpovědi, bezpečnostní dokumentace, DPA, status page, vysvětlování subprocesorů, onboarding enterprise zákazníků.
+
+Skryté náklady bývají nejnebezpečnější, protože nejsou na faktuře. Pokud jeden zákazník každý měsíc spotřebuje šest hodin seniorního supportu, není „jen náročnější“. Je to signál pro pricing, onboarding, dokumentaci nebo produktové omezení.
+
+Codyho komentář: Nejlevnější SaaS není ten, který má nejnižší účet za server. Je to ten, který nemusí lidskou pozorností zalepovat každou díru v produktu. Mozek seniorního vývojáře je dražší cache než Redis. A hůř se škáluje.
+
+### Mapuj náklady podle rozhodnutí, ne podle účetních kategorií
+
+Účetnictví ti řekne, kolik co stálo. Produktová nákladová mapa má říct, co s tím uděláš. Proto se neptej jen „kolik platíme za službu X“, ale hlavně „které rozhodnutí tato informace podporuje“.
+
+Praktické otázky:
+
+- **Pricing:** stojí nejlevnější tarif víc podpory, než unese jeho marže?
+- **Produkt:** která funkce generuje hodně provozních nákladů a málo hodnoty?
+- **Onboarding:** dá se ruční práce nahradit lepším průvodcem, importem nebo šablonou?
+- **Architektura:** kde máme drahou technickou volbu jen proto, že byla pohodlná při MVP?
+- **Podpora:** které dotazy se opakují tak často, že patří do produktu nebo znalostní báze?
+- **Prodej:** slibujeme v obchodních hovorech věci, které později prodraží doručení?
+
+Příklad: „AI sumarizace stojí 3 000 Kč měsíčně“ je zajímavost. „AI sumarizace používá 12 % zákazníků, nejvíc v tarifu Pro, zkracuje support handover a nemá významný dopad na churn“ už je rozhodovací informace. Možná ji ponecháš v tarifu Pro. Možná ji dáš za limit. Možná zjistíš, že ji nikdo nepotřebuje a jen vypadala sexy v release note.
+
+### Nepřepínej hned do režimu škrtání
+
+Když náklady vyrostou, první instinkt je škrtat. To je pochopitelné, ale často nebezpečné. Některé náklady chrání důvěru, bezpečnost nebo rychlost týmu. Vypnout monitoring, zálohy, status page nebo kvalitní podporu jen kvůli krátkodobé úspoře je jako sundat brzdy z kola, protože byly těžké.
+
+Lepší pořadí je:
+
+1. **Zviditelnit:** sepiš náklady podle vrstev a vlastníků.
+2. **Přiřadit k hodnotě:** označ, k jakému produktu, segmentu nebo procesu patří.
+3. **Najít extrémy:** hledej náklady, které rostou rychleji než výnos nebo používání.
+4. **Rozlišit investici od odpadu:** drahé může být správně, pokud to snižuje riziko nebo zvyšuje retenci.
+5. **Navrhnout zásah:** limit, tarif, optimalizace, automatizace, ukončení funkce nebo změna procesu.
+6. **Změřit dopad:** porovnej náklady i zákaznickou zkušenost po změně.
+
+Tím zabráníš dvěma extrémům: nekontrolovanému rozhazování i tupému škrtání. Cílem není mít nejlevnější provoz. Cílem je mít provoz, který odpovídá hodnotě produktu a nezadlužuje budoucnost.
+
+### Privacy-first měření nákladů
+
+Nákladová mapa nepotřebuje invazivní tracking. Nepotřebuje session replay, detailní profil každého uživatele ani spojování produktových akcí s marketingovým šmírováním. Většinou stačí agregace.
+
+Bezpečné jednotky měření:
+
+- tarif nebo plán,
+- workspace nebo účet zákazníka,
+- anonymizovaný segment,
+- modul produktu,
+- typ operace,
+- časové období,
+- interní vlastník procesu.
+
+Příklady privacy-first metrik:
+
+- průměrný počet support tiketů na účet a měsíc podle tarifu,
+- objem uložených dat podle workspace bez čtení obsahu,
+- počet importů a exportů podle typu souboru,
+- počet odeslaných provozních e-mailů podle kategorie,
+- náklady na AI volání podle funkce a tarifu,
+- počet ručních zásahů supportu podle onboarding fáze,
+- počet incidentů nebo rollbacků podle modulu.
+
+Co raději nedělat:
+
+- neukládat plný obsah zákaznických dat jen kvůli analýze nákladů,
+- nespojovat marketingovou identitu s produktovým používáním bez jasného důvodu,
+- nedělat žebříčky „nejdražších uživatelů“ pro interní pobavení,
+- neposílat provozní data do nástroje, který nepotřebuješ a neumíš vysvětlit zákazníkovi,
+- neřešit pricing pomocí skrytých limitů, které zákazník zjistí až ve chvíli bolesti.
+
+### Kdy změnit pricing a kdy produkt
+
+Nákladová mapa často ukáže nepříjemnou pravdu: problém není faktura za infrastrukturu, ale špatně navržená nabídka. Některé tarify slibují moc za málo. Některé funkce by měly mít limity. Některé zákaznické segmenty potřebují služby, které nejsou SaaS, ale konzultace maskovaná jako produkt.
+
+Změň pricing, když:
+
+- náklady přirozeně rostou s hodnotou pro zákazníka,
+- drahé použití využívá jen část zákazníků,
+- vyšší tarif může férově pokrýt vyšší limity nebo podporu,
+- zákazník chápe, proč je daná jednotka zpoplatněná,
+- současná cena trestá zdravé zákazníky za extrémní používání menšiny.
+
+Změň produkt, když:
+
+- drahá funkce má nízkou adopci i nízký dopad,
+- ruční práce vzniká kvůli matoucímu UI,
+- zákazníci opakovaně chybují v nastavení,
+- technická architektura generuje zbytečné operace,
+- support řeší stále stejný problém místo produktu.
+
+Změň proces, když:
+
+- obchod slibuje nestandardní výjimky bez dopadu do ceny,
+- onboarding sbírá příliš mnoho dat ručně,
+- zákazník nemá jasný self-service export nebo import,
+- tým nemá vlastnictví nákladů a každý předpokládá, že to řeší někdo jiný.
+
+### Udělej měsíční cost review bez finančního divadla
+
+Cost review nemusí být dvouhodinová porada s grafy, ze kterých by usnul i projektor. Stačí 45 minut měsíčně a několik pevných otázek.
+
+Agenda:
+
+1. **Co vyrostlo:** které náklady se zvýšily výrazněji než zákazníci, revenue nebo používání?
+2. **Proč to vyrostlo:** nový zákazník, nová funkce, incident, změna dodavatele, chyba, sezónnost?
+3. **Kde je hodnota:** přinesl růst nákladu lepší retenci, aktivaci, rychlost týmu nebo důvěru?
+4. **Kde je odpad:** co běží ze zvyku, duplicitně nebo bez vlastníka?
+5. **Jaký je zásah:** optimalizace, limit, tarif, dokumentace, produktová úprava, vypnutí, renegociace?
+6. **Kdo to dokončí:** jeden vlastník, jeden termín, jedna kontrola dopadu.
+
+Do review pozvi produkt, vývoj, support a někoho, kdo rozumí obchodní realitě. Pokud tam sedí jen finance, vznikne tabulka. Pokud jen vývoj, vznikne refaktor. Pokud jen obchod, vznikne výjimka. Potřebuješ rozhodnutí.
+
+### Checklist nákladové mapy
+
+- [ ] Máme seznam hlavních nákladů podle vrstev: fixní, proměnné, lidské, rizikové a důvěryhodnostní.
+- [ ] Každý významný náklad má vlastníka, který mu rozumí a umí navrhnout zásah.
+- [ ] Proměnné náklady jsou přiřazené k produktu, tarifu, workspace nebo modulu bez zbytečného sledování jednotlivců.
+- [ ] Víme, které funkce jsou drahé na provoz a jakou hodnotu přinášejí zákazníkům.
+- [ ] Umíme oddělit jednorázovou investici od opakovaného provozního odpadu.
+- [ ] Support a onboarding mají odhad lidských nákladů, ne jen pocit „nějak to zvládáme“.
+- [ ] Pricing reflektuje extrémně drahé použití férově a srozumitelně.
+- [ ] Každé škrtání má kontrolu dopadu na zákaznickou zkušenost, bezpečnost a důvěru.
+- [ ] Nepoužíváme invazivní tracking jen proto, abychom pochopili provozní ekonomiku.
+- [ ] Cost review probíhá pravidelně a končí konkrétními rozhodnutími.
+
+### Šablona nákladové karty
+
+```markdown
+## Nákladová karta: [oblast / funkce / dodavatel]
+
+### Kontext
+- Proč tento náklad existuje:
+- Který produktový nebo provozní proces podporuje:
+- Vlastník:
+
+### Typ nákladu
+- Kategorie: fixní / proměnný / lidská práce / riziko / důvěra
+- Frekvence: měsíční / roční / podle použití / jednorázová
+- Ovlivňuje ho: počet zákazníků / objem dat / počet akcí / podpora / integrace
+
+### Hodnota
+- Jakou hodnotu přináší zákazníkovi:
+- Jakou hodnotu přináší týmu:
+- Co by se stalo po vypnutí nebo omezení:
+
+### Privacy-first kontrola
+- Jaká data se kvůli měření používají:
+- Je měření agregované:
+- Jsou v metrice osobní nebo zákaznická data:
+- Kde se data zpracovávají:
+- Jak dlouho se drží:
+
+### Rozhodnutí
+- Zachovat beze změny:
+- Optimalizovat:
+- Přesunout do vyššího tarifu nebo limitu:
+- Automatizovat:
+- Ukončit:
+
+### Další krok
+- Vlastník:
+- Termín:
+- Jak poznáme, že zásah pomohl:
+```
+
+
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha CZ o nákladové mapě SaaS: rozlišení fixních/proměnných/skrytých nákladů, mapování podle rozhodnutí, privacy-first měření bez sledování lidí, volba mezi pricingem a produktovou úpravou, měsíční cost review, checklist a šablona nákladové karty.
 - **2026-09-16:** Doplněna příloha CY o datové mapě pro SaaS: produktové datové toky, rozlišení zákaznických/uživatelských/provozních dat, účely polí, provozní otázky, napojení na vývoj, minimalistická tabulka, review události, checklist, šablona datové karty a ověřené zdroje Evropské komise a EDPB.
 - **2026-09-16:** Doplněna příloha CX o preference centru bez cookie divadla: rozlišení účelů a právních základů, výchozí privacy-first stav, správa preferencí v účtu, evidence verzí souhlasů, oddělení marketingové a provozní komunikace, minimalistický technický model, checklist, šablona preference karty a ověřené zdroje EDPB, Evropské komise a ÚOOÚ.
 - **2026-09-16:** Doplněna příloha CW o týdenním provozním review SaaS: rozhodovací otázka, agregované signály, oddělení provozu/produktu/obchodu, support jako radar, incidenty bez hledání viníka, vlastníci rozhodnutí, třicetiminutový rytmus, checklist a šablona review.
