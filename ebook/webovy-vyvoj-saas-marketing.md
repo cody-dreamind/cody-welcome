@@ -17299,9 +17299,196 @@ Příklad:
 - GDPR článek 28 — zpracovatel a smluvní nastavení zpracování: https://eur-lex.europa.eu/eli/reg/2016/679/oj
 - GDPR článek 32 — zabezpečení zpracování a vhodná technická a organizační opatření: https://eur-lex.europa.eu/eli/reg/2016/679/oj
 
+## Příloha CW: Týdenní provozní review SaaS bez mikromanagementu
+
+Malý SaaS tým nepotřebuje každý týden tříhodinový status meeting, kde se všichni tváří zaměstnaně a backlog mezitím tiše bobtná jako kvásek na steroidu. Potřebuje krátký rytmus, který odhalí rizika, pomůže rozhodnout další kroky a nenechá zákaznické problémy zapadnout mezi Slack reakce a dobré úmysly.
+
+Týdenní provozní review je jednoduchý rituál: jednou týdně se podíváš na produkt, zákazníky, obchod, podporu, technický provoz a privacy. Cílem není kontrolovat lidi. Cílem je kontrolovat systém.
+
+> Codyho komentář: Pokud se tým bojí review, děláte audit osoby. Pokud se na review těší, děláte údržbu produktu. Malý rozdíl v atmosféře, obří rozdíl ve výsledku.
+
+### Review má mít rozhodovací otázku
+
+Špatné review začíná větou: „Tak kdo co dělal?“ To je pozvánka na divadlo výkonnosti. Lidé začnou vyjmenovávat činnosti, ne dopady. Lepší je začít otázkou: „Co se tento týden změnilo v riziku, hodnotě nebo prioritě?“
+
+Provozní review by mělo odpovědět na pět otázek:
+
+- **Kde zákazník narazil?** Support, onboarding, formuláře, platby, import dat, nejasné texty.
+- **Kde produkt doručil hodnotu?** Aktivace, dokončené workflow, úspora času, úspěšný pilot, opakované použití.
+- **Kde roste riziko?** Chyby, pomalost, bezpečnostní dluh, vendor lock-in, právní nejistota, špatná data.
+- **Co musíme rozhodnout teď?** Priorita sprintu, incidentní prevence, zákaznická komunikace, odložení nápadu.
+- **Co můžeme s klidem ignorovat?** Každý týden se objeví pokušení řešit hluk. Review má umět říct „ne“.
+
+Když review nemá rozhodnutí, je to jen drahý podcast pro interní publikum.
+
+### Pracuj s agregovanými signály
+
+Privacy-first provoz neznamená zavřít oči před realitou. Znamená nesbírat víc, než potřebuješ pro dobré rozhodnutí. V týdenním review proto preferuj agregované signály před sledováním jednotlivců.
+
+Dobré signály:
+
+- počet nových účtů nebo pilotů,
+- počet aktivovaných týmů podle definovaného aktivačního momentu,
+- dokončené klíčové workflow,
+- support témata seskupená podle problému,
+- technické chyby podle typu a dopadu,
+- rychlost odpovědí podpory,
+- počet otevřených bezpečnostních nebo provozních rizik,
+- změny v churn riziku na úrovni účtu, ne chování jednotlivých zaměstnanců.
+
+Rizikové signály:
+
+- individuální sledování každého kliknutí bez jasného účelu,
+- session replay jako výchozí nástroj pro běžné rozhodování,
+- skryté tracking pixely v e-mailech,
+- exporty osobních dat do tabulek bez vlastníka a retence,
+- metriky, které tým neumí převést na konkrétní akci.
+
+Praktické pravidlo: pokud metrika neumí změnit rozhodnutí v příštích dvou týdnech, nepatří do týdenního review. Může být v měsíčním strategickém přehledu, archivu nebo vůbec nikde. Ne každé číslo si zaslouží židli u stolu.
+
+### Odděl provoz, produkt a obchod
+
+V malém týmu se všechno slévá dohromady. To je normální. Ale review musí témata oddělit, jinak nejhlasitější problém sežere celý prostor. Jeden rozbitý import nesmí automaticky přebít důležitý insight z prodeje. A jeden pěkný lead nesmí zamaskovat technický dluh, který za měsíc shodí onboarding.
+
+Použij jednoduché sekce:
+
+1. **Zákazníci a podpora:** opakované dotazy, blokery, stížnosti, pochvaly, ruční workaroundy.
+2. **Produkt a aktivace:** co lidé dokončili, kde se zasekli, co je třeba zjednodušit.
+3. **Obchod a marketing:** nové příležitosti, zdroj poptávek, kvalita leadů, otázky z nákupu.
+4. **Technický provoz:** incidenty, chyby, výkon, monitoring, zálohy, dostupnost.
+5. **Privacy a bezpečnost:** nové datové toky, přístupy, exporty, subprocesory, retence.
+6. **Rozhodnutí a vlastníci:** kdo co udělá, do kdy a jak poznáme hotovo.
+
+Každá sekce má mít maximálně tři body. Když jich má deset, neděláš review, ale skládku. Přebytek dej do podkladů a na meeting vytáhni jen to, co vyžaduje pozornost.
+
+### Support je radar, ne popelnice
+
+Podpora není jen místo, kam padají problémy. Je to nejlepší radar na nesoulad mezi slibem produktu a realitou zákazníka. Pokud se stejný dotaz objeví třikrát za týden, není to „uživatelé neumí číst“. Je to signál, že text, onboarding, UI nebo očekávání nefungují.
+
+V review si u supportu ptej:
+
+- Který dotaz se opakoval?
+- Který problém stál nejvíc času?
+- Který problém blokoval hodnotu pro zákazníka?
+- Který workaround děláme ručně a měli bychom ho zjednodušit?
+- Který článek v nápovědě chybí nebo je zastaralý?
+
+Výstupem nemusí být hned nová funkce. Často stačí změnit mikrocopy, doplnit screenshot, přidat kontrolu při importu nebo poslat zákazníkovi lepší šablonu. Nejlevnější produktové zlepšení je často věta na správném místě.
+
+### Incidenty zapisuj bez hledání viníka
+
+Když něco spadne, zpomalí se nebo zákazník narazí na chybu, review má zachytit poučení. Ne vyrobit soudní síň. Malý tým si nemůže dovolit kulturu, kde lidé tají problémy, protože se bojí rituálního grilování.
+
+Pro každý významnější incident stačí krátký záznam:
+
+- co se stalo,
+- koho se to dotklo,
+- jak dlouho problém trval,
+- jak jsme ho zjistili,
+- co zafungovalo,
+- co příště zlepšíme,
+- kdo vlastní preventivní krok.
+
+Privacy-first detail: do incidentního záznamu nepatří zbytečná osobní data zákazníků. Pokud potřebuješ příklad, použij interní ID účtu, typ problému a dopad. Jména lidí a citlivý obsah komunikace zapisuj jen tehdy, když je to nutné pro řešení a má to jasnou retenci.
+
+### Rozhodnutí musí mít vlastníka a důkaz hotova
+
+Největší past review je věta „měli bychom“. Měli bychom zlepšit onboarding. Měli bychom se podívat na pricing. Měli bychom uklidit eventy. Měli bychom — a pak nic. Tým získá pocit, že něco řešil, ale produkt se nepohne.
+
+Každé rozhodnutí přepiš do formátu:
+
+- **Akce:** co přesně uděláme.
+- **Vlastník:** jeden člověk, ne „produkt“ nebo „tým“.
+- **Termín:** kdy se k tomu vrátíme.
+- **Důkaz hotova:** co uvidíme, až je to dokončené.
+- **Metrika nebo signál:** jak poznáme, že to pomohlo.
+
+Příklad slabého výstupu:
+
+> „Zlepšíme onboarding.“
+
+Příklad použitelného výstupu:
+
+> „Do pátku přidáme do importu kontaktů ukázkový CSV soubor a chybovou hlášku pro špatné názvy sloupců. Vlastník: Petra. Hotovo poznáme podle deploye a aktualizovaného help článku. Příští týden zkontrolujeme, jestli ubyly support dotazy k importu.“
+
+Tohle není byrokracie. To je rozdíl mezi přáním a změnou.
+
+### Třicet minut stačí
+
+Pro malý tým navrhni review na 30 minut. Když se nevejde, problém obvykle není délka meetingu, ale slabá příprava.
+
+Rytmus může vypadat takto:
+
+- **5 minut:** největší změna týdne a případné incidenty.
+- **7 minut:** zákazníci, support a onboarding.
+- **7 minut:** produktové a obchodní signály.
+- **5 minut:** technický provoz, bezpečnost a privacy.
+- **6 minut:** rozhodnutí, vlastníci, termíny.
+
+Podklady připrav asynchronně předem. Každý přidá maximálně tři body do sdílené karty. Na meetingu se nečte nahlas to, co už je napsané. Řeší se nejasnosti, priority a rozhodnutí.
+
+### Checklist: týdenní provozní review
+
+- Má review jasnou rozhodovací otázku pro tento týden?
+- Jsou podklady připravené předem a omezené na nejdůležitější signály?
+- Pracujeme s agregovanými metrikami místo sledování jednotlivců?
+- Má každá sekce maximálně tři body?
+- Zapsali jsme zákaznické problémy jako problém, ne rovnou jako funkci?
+- Mají incidenty popis dopadu, příčiny a preventivního kroku?
+- Má každé rozhodnutí vlastníka, termín a důkaz hotova?
+- Vyhodnotili jsme aspoň jeden minulý závazek?
+- Nevznikl nový datový tok, export nebo přístup bez vlastníka?
+- Ví tým, co se tento týden nedělá?
+
+### Šablona provozního review
+
+```markdown
+## Týdenní provozní review: [týden / datum]
+
+### Hlavní otázka týdne
+- Co potřebujeme rozhodnout:
+
+### Zákazníci a podpora
+- Opakované dotazy:
+- Největší blocker:
+- Doporučená akce:
+
+### Produkt a aktivace
+- Co fungovalo:
+- Kde se lidé zasekli:
+- Experiment nebo změna:
+
+### Obchod a marketing
+- Nové příležitosti:
+- Otázky z prodeje:
+- Obsah nebo stránka k doplnění:
+
+### Technický provoz
+- Incidenty nebo chyby:
+- Výkon / dostupnost:
+- Preventivní krok:
+
+### Privacy a bezpečnost
+- Nové datové toky:
+- Přístupy nebo exporty k revizi:
+- Retence / dokumentace:
+
+### Rozhodnutí
+- Akce:
+- Vlastník:
+- Termín:
+- Důkaz hotova:
+- Signál úspěchu:
+
+### Co vědomě neděláme
+- Odložené téma:
+- Důvod:
+```
+
 
 
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha CW o týdenním provozním review SaaS: rozhodovací otázka, agregované signály, oddělení provozu/produktu/obchodu, support jako radar, incidenty bez hledání viníka, vlastníci rozhodnutí, třicetiminutový rytmus, checklist a šablona review.
 - **2026-09-16:** Doplněna příloha CV o exit plánu dodavatele: výběr nástrojů s ohledem na odchod, kritičnost vendorů, datový inventář, test exportů, migrační fáze, vypnutí účtů a integrací, zákaznická komunikace, checklist a šablona vendor exit karty.
 - **2026-09-16:** Doplněna příloha CU o rozhodovacím memu pro malé SaaS týmy: kdy ho psát, jak formulovat otázku, porovnat varianty, udělat privacy-first kontrolu, určit vlastníka, nastavit expiraci rozhodnutí, archivovat výsledek, checklist a šablona mema.
 - **2026-09-16:** Doplněna příloha CT o zákaznické radě a feedback systému: výběr účastníků, agenda podle rozhodnutí, zápis problémů místo funkcí, triage, komunikace zpět, roadmapové filtry, checklist a šablona feedback karty.
