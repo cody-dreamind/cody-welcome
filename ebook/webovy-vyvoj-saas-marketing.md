@@ -18513,7 +18513,159 @@ Výstupem nemá být nový dvouhodinový demo scénář. Stačí tři úpravy: l
 
 
 
+## Příloha DC: Trial, který prodává hodnotu místo sběru dat
+
+Trial je slib: „zkus si, jestli ti produkt reálně pomůže“. Není to past na e-mail, povinné číslo karty a sedm automatických follow-upů, které předstírají osobní zájem. U malého SaaS má trial fungovat jako krátká pracovní cesta k první hodnotě. Čím jasnější je tato cesta, tím méně musíš tlačit na prodejní triky.
+
+Dobrý trial odpovídá na tři otázky:
+
+1. **Jaký výsledek má zákazník zažít během prvních hodin nebo dnů?**
+2. **Jak poznáme, že se k výsledku přiblížil?**
+3. **Co mu máme vysvětlit, ne vyžebrat z formuláře?**
+
+### Trial není zmenšený produkt
+
+Největší chyba je pustit člověka do celé aplikace a doufat, že si najde hodnotu sám. Nenajde. Bude klikat jako návštěvník v cizím supermarketu, kde někdo schoval pokladny do oddělení zahradních hadic.
+
+Trial má mít jeden hlavní scénář. Například:
+
+- importovat první seznam klientů,
+- vytvořit jednu ukázkovou zakázku,
+- propojit jeden schvalovací proces,
+- pozvat jednoho kolegu,
+- vygenerovat první report,
+- poslat první bezpečný export.
+
+Pokud neumíš vybrat jeden scénář, nemáš problém s trialem. Máš problém s positioningem. Trial jen vytáhl kostlivce ze skříně a dal mu jmenovku.
+
+### Registrace má být úměrná hodnotě
+
+Čím dřív žádáš údaje, tím jasněji musíš vysvětlit proč. U prvního vstupu často stačí e-mail, pracovní role a případně firma, pokud je to nutné pro B2B kontext. Telefon, počet zaměstnanců, rozpočet a „jak jste se o nás dozvěděli“ patří až tam, kde opravdu pomáhají dalšímu kroku.
+
+Privacy-first trial používá princip: **nejdřív hodnota, potom detail**. Prakticky to znamená:
+
+- nevyžaduj kartu, pokud trial není spojený s okamžitými náklady,
+- nechtěj osobní údaje, které v trialu nepoužiješ,
+- jasně řekni, co se stane po konci trialu,
+- umožni smazání nebo export dat bez lovení podpory,
+- nepřidávej marketingové souhlasy jako schované výchozí volby.
+
+> Codyho komentář: Povinná platební karta u nástroje, který ještě neukázal hodnotu, není „kvalifikace leadu“. Je to malý test důvěry, který spousta lidí právem odmítne.
+
+### Onboarding veď podle práce zákazníka
+
+Trial onboarding nemá být tour po menu. Menu nikoho nezajímá. Zákazníka zajímá, jestli zvládne vlastní práci rychleji, bezpečněji nebo s menším chaosem.
+
+Místo „Tady je modul Projekty“ napiš: „Vytvoř první projekt, abys viděl, kdo má co udělat tento týden.“ Místo „Nastavte integrace“ napiš: „Připoj zdroj dat, ze kterého dnes ručně opisuješ report.“
+
+Dobrá trial cesta má vrstvy:
+
+- **Uvítání:** jednou větou zopakuje očekávaný výsledek.
+- **První úkol:** jedna akce, která vede k viditelné hodnotě.
+- **Ukázková data:** bezpečná syntetická data pro lidi, kteří nechtějí hned nahrávat vlastní.
+- **Nápověda v kontextu:** krátké vysvětlení u místa, kde vzniká nejistota.
+- **Lidský kontakt:** možnost zeptat se bez toho, aby se z trialu stal nátlakový sales call.
+
+### Měř aktivaci, ne každý pohyb myši
+
+Trial musíš měřit, jinak nevíš, kde se lidé zaseknou. To ale neznamená sledovat každé kliknutí jednotlivce a skládat behaviorální portrét. Pro první verzi stačí agregované signály podle aktivační cesty.
+
+Sleduj například:
+
+- kolik lidí dokončilo registraci,
+- kolik lidí spustilo první klíčový úkol,
+- kolik lidí úkol dokončilo,
+- kde lidé opakovaně končí,
+- které nápovědy otevírají,
+- kolik trialů vede k hovoru, pilotu nebo platbě.
+
+Nesbírej data „pro jistotu“. Každý event musí odpovědět na konkrétní rozhodnutí: zjednodušit krok, přepsat text, přidat ukázková data, změnit délku trialu nebo nabídnout asistovaný onboarding.
+
+### Komunikace během trialu má pomáhat
+
+E-mailová sekvence v trialu má být jako dobrý průvodce, ne jako automatický datel do lebky. Posílej méně zpráv, ale užitečnějších.
+
+Praktický rytmus:
+
+- **Den 0:** co je cílem trialu a jak udělat první krok.
+- **Den 1–2:** jeden konkrétní tip podle hlavního scénáře.
+- **Polovina trialu:** shrnutí, co uživatel stihl, a jedna doporučená další akce.
+- **Konec trialu:** jasně vysvětli, co se stane s účtem a daty.
+- **Po trialu:** jedna férová otázka na feedback, ne nekonečné nahánění.
+
+Pokud zpráva nevysvětluje další užitečný krok, neposílej ji. Ticho je někdy nejlepší marketingový nástroj, protože nepůsobí zoufale. Ano, revoluční koncept.
+
+### Trial musí mít konec
+
+Trial bez konce vytváří provozní bahno. Data se hromadí, účty zůstávají napůl aktivní, obchod neví, co řešit, a produktový tým nepozná skutečný zájem.
+
+Nastav jasná pravidla:
+
+- délka trialu a podmínky prodloužení,
+- co se stane s daty po skončení,
+- kdy se účet archivuje nebo smaže,
+- kdo může trial převést na placený účet,
+- jak se předá kontext obchodníkovi nebo supportu,
+- jak zákazník dostane export, pokud ho potřebuje.
+
+U B2B produktů může být lepší kratší trial s asistovaným setupem než dlouhá samoobsluha. Pokud je hodnota závislá na správném nastavení, nenechávej zákazníka samotného v prázdné aplikaci. To není self-service, to je digitální úniková hra.
+
+### Checklist: privacy-first trial
+
+- Je jasný jeden hlavní aktivační scénář.
+- Registrace sbírá jen údaje potřebné pro trial.
+- Platební karta není povinná bez silného důvodu.
+- Uživatel ví, co se stane po konci trialu.
+- Ukázková data nejsou produkční ani osobní.
+- Trial eventy odpovídají konkrétním rozhodnutím.
+- E-mailová komunikace pomáhá, ne tlačí.
+- Export a smazání dat jsou popsané srozumitelně.
+- Sales předávka obsahuje kontext, ne šmírovací deník.
+- Po každých několika trialech proběhne krátké review zaseknutých míst.
+
+### Šablona trial karty
+
+```markdown
+## Trial karta: [produkt / segment]
+
+### Cíl trialu
+- Jaký výsledek má zákazník zažít:
+- Jak rychle má vzniknout první hodnota:
+- Co znamená aktivace:
+
+### Vstup do trialu
+- Povinná pole registrace:
+- Proč je každé pole potřeba:
+- Je potřeba platební karta? Proč:
+- Jak je vysvětlen konec trialu:
+
+### Aktivační scénář
+- První úkol:
+- Ukázková data:
+- Nejčastější riziko zaseknutí:
+- Nápověda nebo lidská asistence:
+
+### Měření
+- Agregované eventy:
+- Rozhodnutí, která z nich děláme:
+- Co záměrně nesledujeme:
+
+### Komunikace
+- Den 0:
+- Polovina trialu:
+- Konec trialu:
+- Feedback po trialu:
+
+### Ukončení
+- Export dat:
+- Mazání nebo archivace:
+- Předání na placený účet:
+- Review zjištění:
+```
+
+
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha DC o trialu, který prodává hodnotu místo sběru dat: jeden aktivační scénář, úměrná registrace, onboarding podle práce zákazníka, agregované měření, užitečná komunikace, jasný konec trialu, checklist a šablona trial karty.
 - **2026-09-16:** Doplněna příloha DB o demo prostředí bez živých dat: jasný obchodní účel, syntetická data, oddělení od produkce, scénáře podle práce zákazníka, minimalistický demo formulář, expirace přístupů, agregované měření, privacy-first důkazy, checklist a šablona demo karty.
 - **2026-09-16:** Doplněna příloha DA o hodinovém auditu homepage pro malý SaaS: první dojem, jasná nabídka, důkazy, struktura sekcí, text bez mlhy, privacy-first kontrola, hodinový postup, checklist a šablona auditní karty.
 - **2026-09-16:** Doplněna příloha CZ o nákladové mapě SaaS: rozlišení fixních/proměnných/skrytých nákladů, mapování podle rozhodnutí, privacy-first měření bez sledování lidí, volba mezi pricingem a produktovou úpravou, měsíční cost review, checklist a šablona nákladové karty.
