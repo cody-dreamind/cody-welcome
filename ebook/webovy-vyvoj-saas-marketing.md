@@ -15915,8 +15915,193 @@ Do SLA reportů nepatří celé přepisy interních diskuzí, osobní poznámky 
 - Změny pro další období:
 ```
 
+## Příloha CP: Discovery rozhovory bez tahání citlivostí z lidí
+
+Produktové discovery rozhovory mají pomoct pochopit realitu zákazníka. Nemají být terapeutické sezení, skrytý prodejní call ani datová sklizeň převlečená za „výzkum“. Malý SaaS tým potřebuje slyšet konkrétní situace, rozhodovací proces, překážky a slovník zákazníka. Nepotřebuje znát všechno o člověku, jeho firmě a interních vztazích, pokud to přímo nesouvisí s rozhodnutím, které produkt řeší.
+
+Dobrý rozhovor stojí na jednoduchém principu: **ptej se na minulost, práci a důsledky; ne na hypotetické sliby a soukromé detaily.** Když člověk řekne „to bych určitě používal“, je to signál z cukrové vaty. Když popíše, jak minulý týden tři hodiny skládal report pro vedení a pak stejně ručně ověřoval čísla, máš materiál pro produkt, copywriting i pricing.
+
+> Codyho komentář: Nejhorší discovery otázka je „Líbí se vám náš nápad?“ Lidé chtějí být milí. Trh chce být placený. Hádej, koho musíš poslouchat víc.
+
+### Než se zeptáš, napiš rozhodnutí
+
+Rozhovor bez rozhodnutí je společenská aktivita. Fajn na kafe, slabé na produkt. Před každým blokem rozhovorů si napiš, jaké rozhodnutí chceš udělat.
+
+Příklady dobrých rozhodnutí:
+
+- Zúžit segment z „malé B2B firmy“ na jeden konkrétní provozní tým.
+- Ověřit, jestli je bolest dost častá pro placený pilot.
+- Zjistit, jak zákazník dnes řeší onboarding nových lidí.
+- Pochopit, kdo drží rozpočet a kdo nese provozní bolest.
+- Rozhodnout, jestli první verze potřebuje integraci, nebo stačí import/export.
+- Najít slova, kterými zákazník problém skutečně popisuje.
+
+Špatné cíle zní takto: „Chceme získat feedback“, „chceme zjistit zájem“, „chceme validovat produkt“. To je moc široké. Po deseti takových rozhovorech skončíš s hromadou poznámek, třemi novými nápady a nulovým rozhodnutím. Krásná mlha, ale pořád mlha.
+
+### Ptej se na situace, ne na názory
+
+Názor je levný. Chování je dražší a užitečnější. Proto se ptej na konkrétní poslední případ.
+
+Místo:
+
+- „Používali byste automatizované reporty?“
+- „Je pro vás důležitá analytika?“
+- „Kolik byste za to zaplatili?“
+
+Zkus:
+
+- „Kdy jste naposledy skládali report ručně? Co přesně se dělo?“
+- „Kdo ten report četl a jaké rozhodnutí podle něj padlo?“
+- „Co se stalo, když čísla nebyla připravená včas?“
+- „Jak to řešíte dnes a co vás na tom stojí nejvíc času?“
+- „Kdo by musel schválit nástroj, který tenhle proces změní?“
+
+Užitečný rozhovor často odhalí, že zákazník nechce funkci, kterou sis vysnil. Chce menší tření, méně ruční kontroly, jasnější odpovědnost nebo menší riziko chyby. To jsou lepší vstupy než seznam tlačítek.
+
+### Souhlas a hranice řekni normálně
+
+Privacy-first výzkum nezačíná právnickým rituálem na tři stránky. Začíná lidským vysvětlením: proč spolu mluvíte, co si zapisuješ, kdo poznámky uvidí a kdy je smažeš. Pokud hovor nahráváš, zeptej se výslovně a nabídni variantu bez nahrávání. Když člověk nechce nahrávku, rozhovor není ztracený. Jen budeš psát rychleji. Gratuluju, poznal jsi klávesnici.
+
+Krátké úvodní znění:
+
+> Díky za čas. Cílem je pochopit, jak dnes řešíte [téma], ne prodávat hotové řešení. Budu si psát poznámky pro produktový tým. Nepotřebujeme citlivé údaje, jména klientů ani interní čísla, pokud je nechcete sdílet. Nahrávání je dobrovolné; když řeknete ne, pojedeme jen přes poznámky. Poznámky po vyhodnocení zkrátíme na anonymizované závěry.
+
+Tím nastavíš bezpečí i kvalitu odpovědí. Lidé mluví konkrétněji, když vědí, že z nich netaháš interní šuplíky.
+
+### Minimalizuj poznámky už při zápisu
+
+Nečekej s úklidem dat na „až bude čas“. U discovery poznámek platí stejné pravidlo jako u šuplíku s kabely: když tam hodíš všechno, za měsíc vytáhneš jen frustraci.
+
+Piš hlavně:
+
+- situaci a kontext práce,
+- kroky současného procesu,
+- nástroje a náhradní řešení,
+- dopad problému,
+- rozhodovací role,
+- přesné formulace zákazníka,
+- otázky, které se opakovaly,
+- nejistoty, které je potřeba ověřit dalším rozhovorem.
+
+Nepíš zbytečně:
+
+- osobní detaily mimo téma,
+- jména koncových klientů,
+- citlivá interní čísla bez důvodu,
+- zdravotní, rodinné nebo jiné zvláštní okolnosti,
+- přístupové údaje, screenshoty s osobními daty nebo celé exporty,
+- drby o lidech ve firmě.
+
+Pokud člověk omylem řekne něco citlivého, neznamená to, že to musíš uložit. Poznámku můžeš převést do bezpečné formy: místo „klient Novák s dluhem 480 000 Kč“ napiš „velký klient po splatnosti blokuje rozhodnutí“. Produktový signál zůstal. Datový průšvih odešel domů.
+
+### Syntéza není skládka citací
+
+Po rozhovorech nesepisuj jen přepis všeho, co kdo řekl. Udělej syntézu, která vede k rozhodnutí. Ideální výstup má pět částí:
+
+1. **Opakované situace:** kde se problém objevuje a jak často.
+2. **Dopad:** čas, peníze, reputace, riziko nebo frustrace.
+3. **Současná náhradní řešení:** tabulky, e-maily, ruční kontroly, starý software, člověk v procesu.
+4. **Nákupní realita:** kdo trpí, kdo rozhoduje, kdo platí, kdo může blokovat změnu.
+5. **Produktové rozhodnutí:** co stavíme, co nestavíme, co ověříme dál.
+
+Dobrá syntéza není demokratické hlasování. Když tři lidé chtějí export do Excelu, nemusí to znamenat „postav export“. Může to znamenat „lidé potřebují důvěru, že data nejsou uvězněná“. Funkce je jedna odpověď. Důvod je důležitější.
+
+### Discovery a prodej nemíchej potají
+
+Je v pořádku, když z dobrého rozhovoru vznikne pilot. Není v pořádku tvářit se, že děláš výzkum, a pak dvacet minut tlačit demo. Člověk musí vědět, v jakém režimu jste.
+
+Praktické oddělení:
+
+- První část hovoru je discovery: otázky na realitu, bez prezentace produktu.
+- Druhá část může být volitelná: „Chcete vidět, jak o tom přemýšlíme?“
+- Po ukázce se ptej na nesoulad s realitou, ne na potlesk.
+- Pokud vznikne obchodní zájem, domluv samostatný další krok.
+- Do CRM ukládej jen obchodně potřebné minimum, ne celý psychologický portrét.
+
+Tahle poctivost zvyšuje důvěru. A ano, občas tím přijdeš o možnost někoho „ukecat“. Výborně. Ukecaný zákazník bývá dražší než žádný zákazník.
+
+### Retence poznámek musí mít konec
+
+Discovery poznámky nejsou muzeum. Po vyhodnocení je zkrať, anonymizuj a staré surové zápisy smaž podle předem daného pravidla. Surové poznámky mají hodnotu krátce po rozhovoru. Po třech měsících často slouží hlavně jako rizikový archiv vět, které nikdo znovu nepřečte.
+
+Jednoduché pravidlo:
+
+- Surové poznámky drž maximálně po dobu výzkumného cyklu.
+- Syntézu drž déle, protože obsahuje anonymizované závěry.
+- Nahrávky maž co nejdřív po přepisu nebo vyhodnocení.
+- Přístup k poznámkám dej jen lidem, kteří je opravdu potřebují.
+- Při sdílení mimo tým používej shrnutí, ne surové citace s identitou.
+
+Pokud výzkum souvisí se zpracováním osobních údajů, drž se zásad GDPR jako minimalizace, účelové omezení a omezení uložení. Oficiální přehled principů má Evropská komise: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
+### Checklist: discovery rozhovor privacy-first
+
+- [ ] Víme, jaké rozhodnutí má rozhovor podpořit.
+- [ ] Máme scénář otázek na konkrétní minulé situace.
+- [ ] Úvod vysvětluje účel, poznámky, nahrávání a hranice citlivých dat.
+- [ ] Nahrávání je dobrovolné a umíme vést rozhovor i bez něj.
+- [ ] Nepotřebujeme jména klientů, osobní detaily ani celé exporty.
+- [ ] Poznámky oddělují pozorování, citace, interpretace a rozhodnutí.
+- [ ] Po rozhovoru vznikne syntéza, ne jen skládka zápisů.
+- [ ] Surové poznámky a nahrávky mají retenční lhůtu.
+- [ ] Obchodní follow-up je oddělený od výzkumného režimu.
+- [ ] Výstup vede ke konkrétnímu produktovému rozhodnutí.
+
+### Šablona discovery karty
+
+```markdown
+## Discovery karta: [téma / segment]
+
+### Rozhodnutí
+- Co chceme rozhodnout:
+- Co už víme:
+- Co je největší nejistota:
+
+### Respondent
+- Segment:
+- Role:
+- Kontext práce:
+- Co neukládáme:
+
+### Souhlas a hranice
+- Účel vysvětlen:
+- Nahrávání: ano / ne
+- Kdo uvidí poznámky:
+- Retence surových poznámek:
+
+### Situace
+- Poslední konkrétní případ:
+- Současný postup:
+- Použité nástroje:
+- Dopad problému:
+
+### Nákupní realita
+- Kdo problém cítí:
+- Kdo rozhoduje:
+- Kdo platí:
+- Co může změnu zablokovat:
+
+### Signály
+- Silné citace bez citlivých údajů:
+- Opakující se vzory:
+- Překvapení:
+- Co je jen názor, ne důkaz:
+
+### Rozhodnutí po syntéze
+- Co postavíme nebo upravíme:
+- Co zatím nestavíme:
+- Co ověříme dalším rozhovorem:
+- Další krok:
+```
+
+### Zdroje k privacy-first výzkumu
+
+- Evropská komise — principy GDPR, včetně minimalizace, účelového omezení a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- EDPB — pokyny k souhlasu podle GDPR, užitečné pro přemýšlení o dobrovolnosti a jasném účelu souhlasu: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
+
 
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha CP o privacy-first discovery rozhovorech: rozhodnutí před otázkami, situační otázky, souhlas a hranice, minimalizace poznámek, syntéza, oddělení prodeje, retence, checklist, discovery karta a zdroje k principům GDPR.
 - **2026-09-15:** Doplněna příloha CO o SLA a support plánech bez korporátního kouře: rozlišení podpory, incidentů a konzultací, severity matice, reakční doby, rozdíly mezi tarify, status page, interní připravenost, obchodní kontrola, privacy-first reporting, checklist a SLA karta.
 - **2026-09-15:** Doplněna příloha CN o znalostní bázi a samoobslužné podpoře privacy-first: výběr článků podle reálných dotazů, struktura help článku, odkazy v aplikaci, agregované měření hledání, revize v Definition of Done, checklist a šablona.
 - **2026-09-15:** Doplněna příloha CM o kampaních, UTM a měření bez datového cirkusu: jednotný UTM slovník, kampaně jako rozhodovací karty, agregované měření, RSS/přímé odkazy, atribuce, checklist a šablona kampaně.
