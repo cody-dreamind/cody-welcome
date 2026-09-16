@@ -20113,7 +20113,202 @@ Výstup review má být rozhodnutí, ne jen další dashboard. Například: upra
 - Rozhodnutí: ponechat / upravit / více vysvětlit / stáhnout
 ```
 
+
+## Příloha DL: Úklid starého workflow po adopci nové funkce bez rozbití důvěry
+
+Nová funkce často nevydělá peníze tím, že existuje. Vydělá je až ve chvíli, kdy nahradí horší způsob práce. Jenže právě tady malé SaaS týmy často couvnou: nechají staré obrazovky, staré exporty, staré procesy a staré výjimky běžet vedle nového řešení, protože „někdo to možná ještě používá“. Výsledek je produktový sklep, ve kterém se už bojíš rozsvítit.
+
+Úklid starého workflow není kosmetika. Je to součást adopce. Pokud zákazníkům necháš tři způsoby, jak udělat stejnou práci, musíš podporovat tři mentální modely, tři sady chyb a tři vrstvy dokumentace. To je drahé pro tým a matoucí pro zákazníka.
+
+Cílem není mazat bez varování. Cílem je řízeně převést zákazníky na lepší cestu, zachovat jejich data, dát jim férový čas a odstranit z produktu věci, které už jen spotřebovávají pozornost.
+
+### Nejdřív pojmenuj, co staré workflow vlastně drží při životě
+
+Starý postup málokdy přežívá proto, že je skvělý. Častěji přežívá proto, že v něm zákazník řeší okrajovou situaci, kterou nová funkce ještě nepokrývá. Když starou cestu vypneš bez pochopení těchto výjimek, nevypadáš jako tým, který čistí produkt. Vypadáš jako tým, který zákazníkům sebral nářadí uprostřed práce.
+
+Před rozhodnutím si napiš:
+
+- které účty staré workflow používají,
+- jak často a v jakém pracovním scénáři,
+- jaký výsledek tím dokončují,
+- co z toho nová funkce už umí,
+- co nová funkce neumí a jestli to opravdu patří do produktu,
+- jaká data, exporty, automaty nebo integrace jsou na starý postup napojené,
+- kdo u zákazníka bude změnu cítit nejvíc.
+
+Pozor na falešnou metriku „někdo to otevřel“. Otevření staré stránky ještě neznamená hodnotu. Může to být zvyk, omyl, interní kontrola nebo zákazník hledající, kam se nová funkce schovala.
+
+### Rozliš tři typy úklidu
+
+Ne všechno se má rovnou mazat. Prakticky rozlišuj tři režimy:
+
+1. **Ztišení:** starý prvek zůstane funkční, ale přestane být primární cestou. Schováš ho z hlavní navigace, přidáš odkaz na novou cestu a přestaneš ho propagovat v dokumentaci.
+2. **Zmrazení:** starý prvek dál čte existující data, ale nepřijímá nové konfigurace, nové účty nebo nové integrace. Hodí se pro citlivé workflow, kde zákazník potřebuje přechodové období.
+3. **Ukončení:** starý prvek má oznámené datum vypnutí, migrační postup, export a support plán. Po termínu se odstraní z produktu i z interní dokumentace.
+
+Tahle typologie zabrání binárnímu chaosu „buď to necháme navždy, nebo to zítra smažeme“. Produktový úklid potřebuje přepínače, ne kladivo.
+
+### Migrační cesta musí být konkrétnější než oznámení
+
+„Přecházíme na nové rozhraní“ není migrační plán. Zákazník potřebuje vědět, co přesně má udělat, kdo to má udělat a co se stane, když to nestihne.
+
+Dobrá migrační cesta obsahuje:
+
+- **cílový stav:** jak bude práce vypadat po přechodu,
+- **mapování:** která stará akce odpovídá které nové akci,
+- **kontrolní krok:** jak zákazník pozná, že je převedeno správně,
+- **data:** co zůstane, co se přepočítá, co se archivuje,
+- **role:** kdo musí změnu potvrdit,
+- **čas:** realistické datum ztišení, zmrazení a ukončení,
+- **support:** kam se obrátit a jaký detail neposílat zbytečně e-mailem.
+
+U větších zákazníků přidej krátkou migrační kartu pro jejich administrátora. Ne marketingový e-mail. Normální pracovní návod, který se dá přeposlat kolegům.
+
+### Komunikuj podle dopadu, ne podle toho, jak moc tě release baví
+
+Změna starého workflow může být pro tým interně nudná a pro zákazníka zásadní. Nebo naopak. Kanál a tón komunikace vybírej podle dopadu na práci zákazníka.
+
+Jednoduché pravidlo:
+
+- **Malý dopad:** changelog, help článek, in-app poznámka v místě změny.
+- **Střední dopad:** e-mail administrátorovi, upozornění v produktu, jasný termín a odkaz na návod.
+- **Vysoký dopad:** přímý kontakt s klíčovými účty, migrační call, interní checklist pro support a potvrzení připravenosti.
+
+Nepoužívej temné vzory typu „kliknutím sem souhlasíte s novým workflow“. Zákazník nepotřebuje být nachytán. Potřebuje bezpečně dokončit práci.
+
+Codyho komentář: Když musíš změnu schovat do lišty, kterou nikdo nečte, možná to není komunikace. Možná je to produktová verze šepotu do vysavače.
+
+### Privacy-first úklid znamená také úklid dat
+
+Vypnutí starého workflow není jen UI změna. Často za ním zůstávají tabulky, logy, exporty, background joby, webhooks, oprávnění a interní pohledy. Pokud je necháš žít dál, produkt je sice na povrchu čistší, ale datově pořád tahá starý batoh.
+
+Privacy-first úklid si pohlídá:
+
+- odstranění nepotřebných polí z aktivního používání,
+- ukončení starých eventů v analytice,
+- vypnutí zbytečných webhooků a cronů,
+- aktualizaci datové mapy a retenčních pravidel,
+- kontrolu oprávnění k historickým datům,
+- jasné označení archivovaných záznamů,
+- smazání testovacích a migračních pomocných dat po dokončení přechodu.
+
+Historická data nemaž naslepo. Některá mohou být potřebná kvůli účetnictví, smlouvám, auditu nebo zákaznické historii. Ale musí mít účel, vlastníka a retenční pravidlo. „Pro jistotu“ není právní základ ani produktová strategie.
+
+### Staré workflow nejdřív změř kvalitativně
+
+Detailní sledování každého kliknutí staré obrazovky je lákavé, ale často zbytečné. U malého B2B SaaS bývá lepší kombinace agregovaného signálu a krátkého rozhovoru.
+
+Stačí ti:
+
+- seznam účtů, které staré workflow použily za posledních 30–90 dní,
+- agregovaný počet dokončených starých scénářů,
+- typy scénářů bez ukládání osobních detailů,
+- support tickety k danému workflow,
+- poznámky z rozhovorů s několika aktivními zákazníky,
+- interní odhad rizika podle segmentu a tarifu.
+
+Nepotřebuješ vědět, který konkrétní zaměstnanec klikl na jakou drobnost v 10:42. Potřebuješ vědět, jestli zákazník dokončuje důležitou práci a co mu brání přejít.
+
+### Vypnutí musí mít rollback myšlenku, i když ho nechceš použít
+
+Když odstraňuješ starou cestu, připrav si plán pro případ, že se ukáže skrytá závislost. Nemusí to znamenat plný návrat staré funkce. Může to být dočasný export, ruční pomoc supportu, prodloužené čtení historických dat nebo krátkodobé znovuzapnutí pro konkrétní účet.
+
+Před vypnutím si napiš:
+
+- kdo může rozhodnout o dočasném návratu,
+- jak dlouho může výjimka trvat,
+- jak se výjimka zaznamená,
+- jak se zákazníkovi vysvětlí,
+- kdy se definitivně uzavře.
+
+Výjimky bez data konce jsou produktový dluh s hezkým kabátem.
+
+### Po vypnutí uklízej i dokumentaci a support
+
+Nejhorší stav je funkce, která už neexistuje, ale pořád žije v nápovědě, interní wiki a obchodních prezentacích. Zákazník pak nevěří produktu a support tráví čas vysvětlováním duchů.
+
+Po ukončení starého workflow projdi:
+
+- veřejnou dokumentaci,
+- onboardingové e-maily,
+- šablony odpovědí podpory,
+- demo scénáře,
+- prodejní materiály,
+- screenshoty v článcích,
+- interní runbooky,
+- automatizované testy,
+- datovou mapu a seznam eventů.
+
+Tohle je nudné. Přesně proto to funguje. Důvěra často nevzniká z velkých launchů, ale z toho, že produkt nemá zatuchlé rohy.
+
+### Checklist: úklid starého workflow
+
+- Víme, jaký pracovní výsledek staré workflow zákazníkům pořád doručuje?
+- Rozlišili jsme režim ztišení, zmrazení nebo ukončení?
+- Máme migrační mapu mezi starou a novou cestou?
+- Ví zákazník, kdo má změnu provést a do kdy?
+- Jsou zachovaná nebo exportovatelná potřebná data?
+- Ukončili jsme nepotřebné eventy, webhooky, oprávnění a pomocná data?
+- Měříme přechod agregovaně a bez produktového stalkingu?
+- Má support připravené odpovědi a eskalační cestu?
+- Existuje plán pro dočasnou výjimku s datem konce?
+- Je aktualizovaná dokumentace, demo a obchodní materiály?
+
+### Šablona: karta úklidu workflow
+
+```markdown
+## Karta úklidu workflow: [název staré cesty]
+
+### Kontext
+- Staré workflow:
+- Nové workflow:
+- Proč uklízíme:
+- Cílové účty / segmenty:
+
+### Použití a rizika
+- Aktivní účty za posledních 30–90 dní:
+- Dokončované scénáře:
+- Závislé exporty / integrace / automaty:
+- Rizikové zákaznické role:
+
+### Režim úklidu
+- Ztišení / zmrazení / ukončení:
+- Datum ztišení:
+- Datum zmrazení:
+- Datum ukončení:
+- Vlastník:
+
+### Migrační plán
+- Mapování stará akce → nová akce:
+- Kontrolní krok pro zákazníka:
+- Data, která zůstávají:
+- Data, která se archivují nebo mažou:
+- Support postup:
+
+### Privacy-first kontrola
+- Eventy k vypnutí:
+- Webhooky / cron úlohy:
+- Oprávnění:
+- Retence historických dat:
+- Pomocná migrační data ke smazání:
+
+### Komunikace
+- Changelog:
+- In-app sdělení:
+- E-mail administrátorům:
+- Přímý kontakt s klíčovými účty:
+- Datum poslední připomínky:
+
+### Uzavření
+- Dokumentace aktualizovaná:
+- Support šablony aktualizované:
+- Demo scénáře aktualizované:
+- Výjimky a datum konce:
+- Finální review:
+```
+
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha DL o úklidu starého workflow po adopci nové funkce: rozlišení ztišení/zmrazení/ukončení, migrační mapa, komunikace podle dopadu, privacy-first úklid dat, kvalitativní měření, rollback myšlenka, aktualizace dokumentace, checklist a karta úklidu workflow.
 - **2026-09-16:** Doplněna příloha DK o adopci nové funkce bez produktového stalkingu: definice adopce jako pracovního výsledku, mapa adopční cesty, agregované měření po účtech a scénářích, kontextová pomoc, zapojení správných rolí, práce s neadopcí, dvoutýdenní review, checklist a adopční karta.
 - **2026-09-16:** Doplněna příloha DJ o release komunikaci bez ohňostroje: plán komunikace už při návrhu změny, volba kanálů podle dopadu, psaní z pohledu práce zákazníka, privacy-first segmentace bez sledování jednotlivců, přechod u změn návyků, changelog jako trust asset, checklist, mini šablona oznámení a release karta.
 - **2026-09-16:** Doplněna příloha DI o převodu produktového rozhodnutí do roadmapového slotu: vrstvy roadmapy, formulace slotu podle zákaznického výsledku, kapacita, vstupní/výstupní/stop kritéria, opatrná komunikace závazků, privacy-first review před vývojem, postup releasu, komunikace zpět, checklist a šablona roadmapového slotu.
