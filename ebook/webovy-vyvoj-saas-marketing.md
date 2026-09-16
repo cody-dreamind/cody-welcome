@@ -16473,7 +16473,231 @@ Zní to jako práce navíc, ale opakuje se. Jakmile šablonu vytvoříš jednou,
 - EDPB — Guidelines 4/2019 k ochraně údajů již od návrhu a ve výchozím nastavení podle článku 25 GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
 
 
+
+## Příloha CS: Renewaly a expanze bez nátlaku a datového slídění
+
+Renewal není administrativní formalita dva týdny před koncem smlouvy. Je to průběžný důkaz, že produkt zákazníkovi pořád pomáhá. Pokud se zákazník dozví o hodnotě služby až v e-mailu „prodlužte si nás, prosím pěkně“, je pozdě. To už neprodáváš hodnotu. To škemráš v saku.
+
+Dobře vedený renewal začíná první týden po nákupu:
+
+- zákazník ví, co má být úspěch,
+- tým sleduje přijetí produktu bez šmírování jednotlivců,
+- support sbírá opakované třecí plochy,
+- obchodník nebo customer success má plán kontaktů,
+- před koncem období existuje shrnutí hodnoty,
+- expanze vychází z reálného použití a potřeb, ne z kvóty v CRM.
+
+Codyho komentář: nejlepší renewal je ten, který nepůsobí jako renewal. Zákazník si jen řekne: „Jasně, pokračujeme, vždyť bez toho už nechceme fungovat.“ Magie? Ne. Nudná konzistence. Bohužel se na ni nedá udělat motivační plakát s horou.
+
+### Renewal začíná u definice úspěchu
+
+Před podpisem nebo hned po něm si se zákazníkem domluv, podle čeho poznáte, že služba funguje. Ne obecně „lepší přehled“. Konkrétně:
+
+- zkrátíme ruční report z 6 hodin na 2 hodiny týdně,
+- zrychlíme reakci na lead do jednoho pracovního dne,
+- snížíme počet ručních oprav objednávek,
+- převedeme tři týmy z e-mailových vláken do jednotného workflow,
+- připravíme pravidelný export pro finance bez ručního kopírování.
+
+Úspěch nemusí být dokonalý. Musí být společný. Když si dodavatel myslí, že úspěch je „aktivních 80 % uživatelů“ a zákazník řeší „méně chaosu v předávkách“, renewal meeting bude připomínat dvě rádia naladěná na různé stanice.
+
+Praktická věta do onboardingového plánu:
+
+```text
+Za úspěšný první kvartál považujeme stav, kdy tým používá produkt pro všechny nové požadavky v procesu X, správce zvládne měsíční export bez ruční pomoci dodavatele a počet dotazů na stav požadavku klesne alespoň subjektivně podle vedoucího týmu.
+```
+
+Všimni si poslední části: ne všechno musí být tvrdá metrika. U malých týmů často stačí kombinace procesních dat a kvalifikovaného rozhovoru.
+
+### Health score nesmí být špionážní skóre
+
+Zákaznické zdraví je užitečné, pokud pomáhá včas nabídnout podporu. Je nebezpečné, pokud se z něj stane sledování lidí a interní žebříček „kdo kliká dostatečně“.
+
+Lepší signály zdraví:
+
+- používá se kritická funkce, kvůli které zákazník koupil,
+- správce dokončil základní nastavení,
+- tým zvládl první reálný proces,
+- počet support dotazů klesá nebo se přesouvá k pokročilejším otázkám,
+- zákazník se vrací k roadmapovým tématům,
+- fakturační a kontaktní údaje jsou aktuální,
+- existuje interní vlastník nástroje.
+
+Horší signály:
+
+- detailní aktivita jednotlivých zaměstnanců bez jasného účelu,
+- sledování každého kliknutí jako důkaz hodnoty,
+- porovnávání lidí mezi sebou,
+- ukládání dlouhé historie chování bez retence,
+- vyvozování obchodních závěrů z citlivých nebo náhodných dat.
+
+Privacy-first health score může být jednoduchý semafor na úrovni účtu:
+
+| Stav | Signál | Akce |
+| --- | --- | --- |
+| Zelený | kritická funkce běží, správce reaguje, nejsou blokery | poslat kvartální shrnutí hodnoty |
+| Žlutý | nastavení nedokončeno, aktivace se zasekla, opakují se stejné dotazy | nabídnout pracovní session nebo konkrétní návod |
+| Červený | produkt se nepoužívá pro domluvený proces, chybí vlastník, blíží se konec období | domluvit rozhodovací rozhovor a férově zjistit, zda má služba smysl |
+
+Důležité je, aby skóre vedlo k pomoci, ne k automatickému otravování.
+
+### Hodnotu shrnuj průběžně, ne až při faktuře
+
+Renewal deck sestavený narychlo týden před expirací často vypadá jako archeologie: hledáš staré tickety, pár metrik, screenshot z dashboardu a doufáš, že zákazník zapomněl na tři měsíce ticha.
+
+Místo toho si veď jednoduchou hodnotovou kartu:
+
+- původní cíl,
+- dokončené milníky,
+- vyřešené problémy,
+- důležité support lekce,
+- změny v procesu zákazníka,
+- otevřené blokery,
+- doporučený další krok.
+
+Každý měsíc nebo kvartál doplň pár vět. Renewal pak není prodejní drama, ale shrnutí společné práce. U větších zákazníků může jít o krátký QBR. U menších stačí e-mail s třemi body: co se povedlo, co zůstává otevřené, co doporučuješ dál.
+
+Příklad krátkého shrnutí:
+
+```text
+Za poslední kvartál jste převedli všechny nové požadavky týmu podpory do jednoho workflow, nastavili dvě automatická upozornění a odstranili ruční páteční report. Největší otevřená třecí plocha je stále import historických dat; doporučujeme ho buď uzavřít do konce měsíce, nebo vědomě vynechat a držet systém jen pro nové případy.
+```
+
+Žádný ohňostroj. Jen užitečný kontext.
+
+### Expanze má vycházet z potřeby, ne z loveckého instinktu
+
+Upsell není špatné slovo. Špatné je nabídnout vyšší tarif jen proto, že se blíží konec kvartálu. Expanze má přijít ve chvíli, kdy zákazník naráží na hranici aktuálního nastavení.
+
+Dobré expanzní signály:
+
+- další tým chce používat stejný proces,
+- zákazník opakovaně ručně obchází limit,
+- integrace by odstranila pravidelnou ruční práci,
+- audit nebo reporting potřebuje vyšší úroveň oprávnění,
+- zákazník žádá lepší podporu kvůli provozní kritičnosti,
+- produkt už řeší původní problém a objevuje se navazující use-case.
+
+Špatné expanzní signály:
+
+- „mají hodně uživatelů, tak to zkusíme zdražit“,
+- „klikli na pricing stránku, pošleme sekvenci pěti e-mailů“,
+- „v ticketu zmínili konkurenci, spustíme paniku“,
+- „neodpověděli, pošleme jim kalendář znovu a znovu, protože CRM má hlad“.
+
+Expanzní nabídka má být konkrétní:
+
+```text
+Vidíme, že tým podpory už proces používá stabilně. Pokud chcete zapojit i obchod, nedoporučujeme jen přidat licence. Nejdřív bychom udělali 45minutový mapovací call, protože obchod má jiný typ požadavků a pravděpodobně bude potřebovat vlastní šablony, oprávnění a report.
+```
+
+Tohle prodává víc než sleva. Ukazuješ, že chráníš zákazníka před chaosem.
+
+### Churn ber jako signál, ne osobní zradu
+
+Někteří zákazníci odejdou. Produkt už nepotřebují, změnil se tým, rozpočet, priorita nebo se ukázalo, že problém nebyl dost silný. Cílem není držet je za každou cenu. Cílem je odejít profesionálně, s daty pod kontrolou a s poučením.
+
+Když zákazník nechce pokračovat, zjisti:
+
+- zda produkt neřešil dost důležitý problém,
+- zda selhal onboarding,
+- zda byla hodnota špatně komunikovaná,
+- zda chyběla funkce, integrace nebo důvěra,
+- zda jde o dočasný rozpočtový problém,
+- zda by dávalo smysl nižší nastavení místo úplného odchodu.
+
+Ale nepřeměň exit rozhovor v výslech. Jedna krátká schůzka nebo formulář stačí. A hlavně: připomeň export, retenci a mazání dat. Privacy-first offboarding je součást značky. I zákazník, který odchází, může později doporučit, že jste se nechovali jako zamčený sklep s fakturací.
+
+### Renewal kalendář pro roční B2B smlouvu
+
+Jednoduchý rytmus:
+
+- **Týden 1:** potvrdit cíle, vlastníka, kritickou cestu a data, která se opravdu budou používat.
+- **Den 30:** ověřit aktivaci, odstranit první blokery, uzavřít nebo přepsat nereálné cíle.
+- **Den 90:** poslat první hodnotové shrnutí, rozhodnout o dalším procesu nebo týmu.
+- **Měsíc 6:** zkontrolovat adopci, support témata, integrace a potenciál expanze.
+- **Měsíc 9:** otevřít renewal rizika, rozpočet, změny týmu a spokojenost vlastníka.
+- **Měsíc 10–11:** připravit renewal návrh, případnou expanzi a aktualizované podmínky.
+- **Měsíc 12:** uzavřít pokračování, změnu rozsahu nebo férový offboarding.
+
+U měsíčních tarifů zkrať rytmus, ale zachovej logiku: aktivace, hodnota, riziko, rozhodnutí.
+
+### Checklist: renewal bez nátlaku
+
+- [ ] Máme definovaný úspěch zákazníka hned po nákupu.
+- [ ] Health score je na úrovni účtu a nepoužívá zbytečné osobní sledování.
+- [ ] Každý rizikový zákazník dostane pomoc, ne automatickou spamovou sekvenci.
+- [ ] Hodnotová karta se doplňuje průběžně, ne týden před expirací.
+- [ ] Renewal shrnutí obsahuje cíle, milníky, blokery a doporučený další krok.
+- [ ] Expanze vychází z reálné potřeby a vysvětluje dopad i provozní nároky.
+- [ ] Slevy nejsou hlavní nástroj záchrany hodnoty.
+- [ ] Exit proces obsahuje export, retenci, mazání dat a vypnutí přístupů.
+- [ ] Důvody churnu se zapisují strukturovaně, ale bez citlivých detailů navíc.
+- [ ] Zákazník má jasného vlastníka komunikace po celou dobu smlouvy.
+
+### Šablona renewal karty
+
+```markdown
+## Renewal karta: [zákazník / účet]
+
+### Kontext
+- Segment:
+- Tarif:
+- Začátek období:
+- Konec období:
+- Vlastník na straně zákazníka:
+- Vlastník u nás:
+
+### Dohodnutý úspěch
+- Původní cíl:
+- Kritická cesta:
+- Metriky / kvalitativní signály:
+- Co není cílem:
+
+### Stav adopce
+- Dokončené milníky:
+- Používané funkce:
+- Blokery:
+- Support témata:
+- Health stav účtu:
+
+### Hodnota
+- Tvrdé přínosy:
+- Měkké přínosy:
+- Snížená rizika:
+- Důkaz / příklad:
+
+### Rizika renewalu
+- Rozpočet:
+- Změna týmu:
+- Chybějící funkce:
+- Konkurenční tlak:
+- Nízká adopce:
+
+### Doporučení
+- Pokračovat beze změny:
+- Upravit rozsah:
+- Nabídnout expanzi:
+- Snížit rozsah:
+- Ukončit a offboardovat:
+
+### Privacy-first kontrola
+- Jaká data používáme pro health score:
+- Co nesledujeme:
+- Retence poznámek:
+- Export při ukončení:
+- Mazání / anonymizace:
+
+### Další krok
+- Akce:
+- Vlastník:
+- Termín:
+```
+
+
+
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha CS o renewalech a expanzi bez nátlaku: definice úspěchu, privacy-first health score, průběžné shrnutí hodnoty, expanzní signály, churn, renewal kalendář, checklist a šablona renewal karty.
 - **2026-09-16:** Doplněna příloha CR o business case pro nákup SaaS: popis současného procesu, tvrdé/měkké/rizikové přínosy, celkové náklady změny, jednoduchý ROI model, privacy-first měření bez sledování jednotlivců, podpora interního šampiona, checklist, šablona karty a zdroje k minimalizaci údajů a privacy by design.
 - **2026-09-16:** Doplněna příloha CQ o B2B data roomu pro privacy-first SaaS: opakované nákupní otázky, vrstvy sdílení, DPA balíček, security overview, ochrana citlivých dokumentů, údržba, checklist, šablona indexu a zdroje ke GDPR článku 28.
 - **2026-09-16:** Doplněna příloha CP o privacy-first discovery rozhovorech: rozhodnutí před otázkami, situační otázky, souhlas a hranice, minimalizace poznámek, syntéza, oddělení prodeje, retence, checklist, discovery karta a zdroje k principům GDPR.
