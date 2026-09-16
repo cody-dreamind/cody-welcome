@@ -17098,7 +17098,211 @@ Ke starému memu se nevracíš proto, abys někoho nachytal. Vracíš se proto, 
 
 
 
+## Příloha CV: Exit plán dodavatele bez paniky, výčitek a datových rukojmí
+
+Vendor lock-in není vždy zlo. Někdy je úplně rozumné zvolit hotovou službu, protože ti ušetří měsíce práce a dovolí týmu soustředit se na produkt. Problém začíná ve chvíli, kdy neumíš odejít. Pak už nekupuješ nástroj. Kupuješ si budoucí vyjednávací slabost s měsíční fakturou.
+
+Exit plán dodavatele je krátký dokument, který říká: co v nástroji máme, jak data dostaneme ven, kdo rozhodne o odchodu, jak dlouho migrace potrvá a co se musí stát s účty, integracemi, zálohami a zákaznickou komunikací. Nepíše se až ve chvíli, kdy dodavatel zdraží o 80 %, změní podmínky, přestane podporovat EU region nebo začne tlačit funkce, které odporují tvojí privacy-first hodnotě. To už je pozdě a káva chutná po incidentu.
+
+> Codyho komentář: Nejlepší čas na exit plán je před podpisem smlouvy. Druhý nejlepší čas je dnes. Nejhorší čas je pátek večer, kdy export končí chybou `unknown error` a obchodník slibuje, že „enterprise migrace je v roadmapě“.
+
+### Exit plán začíná už při výběru nástroje
+
+Když vybíráš CRM, helpdesk, billing, analytiku, e-mailing nebo projektový nástroj, neptej se jen „umí to naši funkci?“. Ptej se taky: „Jak odejdeme, když to přestane dávat smysl?“
+
+Před nákupem si ověř:
+
+- zda existuje export dat v běžném formátu jako CSV, JSON nebo SQL dump,
+- jestli export obsahuje i metadata, historii změn, přílohy a vazby mezi objekty,
+- jestli lze export spustit samoobslužně, nebo jen přes support,
+- jak dlouho trvá získat kompletní data,
+- zda jsou součástí exportu i data potřebná pro audit nebo fakturaci,
+- jak se po ukončení smlouvy mažou data a zálohy,
+- kdo jsou subprocesoři a v jakých regionech se data zpracovávají,
+- jestli máš smluvně ošetřenou pomoc při ukončení služby.
+
+U privacy-first provozu v Evropě je důležité i to, zda dodavatel umí doložit zpracovatelskou smlouvu, subprocesory a technická a organizační opatření. GDPR v článku 28 říká, že zpracování osobních údajů zpracovatelem má být upravené smlouvou nebo jiným právním aktem a má popisovat mimo jiné předmět, dobu, povahu, účel, typ údajů a povinnosti stran. V praxi: nestačí „máme GDPR na webu“. Potřebuješ konkrétní podmínky pro svůj vztah.
+
+### Rozděl dodavatele podle kritičnosti
+
+Ne každý nástroj potřebuje stejný exit plán. Když odejde nástroj na interní ikonky, tým si zanadává a jede dál. Když odejde billing, autentizace, databáze nebo helpdesk, zákazníci to poznají rychle.
+
+Jednoduché rozdělení:
+
+- **Kritický dodavatel:** bez něj produkt nebo platby nefungují; výpadek ovlivní zákazníky.
+- **Důležitý dodavatel:** výpadek bolí tým, ale zákazník má základní službu dál.
+- **Podpůrný dodavatel:** ztráta zpomalí interní práci, ale neohrozí provoz.
+
+Pro kritické dodavatele musíš znát náhradu předem. Nemusíš mít vše hotové a zaplacené dvakrát, ale musíš vědět, co bys udělal v prvních 24 hodinách, prvním týdnu a prvním měsíci.
+
+Příklad:
+
+- **Billing:** známe export zákazníků, faktur, předplatných a platebních stavů; máme plán ručního fallbacku pro nové faktury.
+- **Helpdesk:** máme export tiketů a zákaznických kontaktů; kritické open tikety umíme převést do e-mailu nebo alternativního systému.
+- **Analytika:** máme agregované reporty a event slovník; ztráta historie neblokuje provoz ani podporu.
+- **Newsletter:** máme double opt-in záznamy, segmenty a odhlášení; bez nich neposíláme „rychlou náhradní rozesílku“, protože spam není recovery plán.
+
+### Datový inventář je mapa ven
+
+Exit nejde udělat, pokud nevíš, co je uvnitř. U každého důležitého nástroje si veď jednoduchou vendor kartu. Nemá to být právní román. Má to být provozní mapa.
+
+Zapiš:
+
+- jaké kategorie dat nástroj drží,
+- kdo je vlastníkem datového toku,
+- jaká data jsou osobní, obchodní, provozní nebo bezpečnostní,
+- odkud data přichází a kam odchází,
+- jaké integrace jsou napojené,
+- kde je nastavená retence,
+- jak se data exportují,
+- jak se ověří úplnost exportu,
+- kdo má v nástroji administrátorský přístup.
+
+Tahle karta je nudná jen do chvíle, než ji potřebuješ. Pak je to rozdíl mezi řízenou migrací a skupinovým archeologickým workshopem „kdo ví, co všechno jsme tam vlastně posílali“.
+
+### Export testuj dřív než při odchodu
+
+„Export máme v menu“ není plán. Export je potřeba aspoň jednou vyzkoušet. U kritických nástrojů klidně kvartálně nebo při každé větší změně integrace.
+
+Test exportu má odpovědět:
+
+- jde export spustit bez kontaktu se supportem?
+- obsahuje očekávaný počet záznamů?
+- jsou zachované vazby mezi objekty?
+- jsou data strojově čitelná a dokumentovaná?
+- jsou časová pásma, měny a ID konzistentní?
+- obsahuje export i smazané, archivované nebo historické položky, které potřebujeme pro audit?
+- neobsahuje export naopak data, která nepotřebujeme dál držet?
+
+U osobních údajů mysli i na přenositelnost. GDPR článek 20 upravuje právo subjektu údajů získat osobní údaje ve strukturovaném, běžně používaném a strojově čitelném formátu v situacích, kdy jsou splněné podmínky článku. Pro produktový tým z toho plyne praktická disciplína: data zákazníka nemají být uvězněná v proprietárním bahně, pokud je zákazník legitimně potřebuje dostat ven.
+
+### Migrace není jen technický přesun
+
+Při odchodu od dodavatele se často řeší jen „kam importujeme data“. To je polovina práce. Druhá polovina je proces, komunikace a bezpečnost.
+
+Migrační plán má mít fáze:
+
+1. **Rozhodnutí:** proč odcházíme, kdo schvaluje, jaký je deadline.
+2. **Inventář:** jaká data, integrace, účty a dokumentace jsou dotčené.
+3. **Export:** kdo exportuje, kam se export uloží, jak se chrání.
+4. **Transformace:** co se mapuje, čistí, slučuje nebo zahazuje.
+5. **Import:** jak proběhne testovací a ostrý import.
+6. **Paralelní provoz:** co běží dočasně dvakrát a jak se zabrání dvojím změnám.
+7. **Komunikace:** co říct týmu, zákazníkům a případně subprocesorům.
+8. **Ukončení:** vypnutí integrací, zrušení účtů, smazání dat, archiv důkazů.
+9. **Review:** co se povedlo, co bolelo, co změnit ve vendor procesu.
+
+Kritická věc: migrační export nepatří na osobní notebook, do náhodného cloudového disku ani do přílohy e-mailu. Ukládej ho do řízeného prostoru, omez přístupy, nastav expiraci a po migraci smaž pracovní kopie. GDPR článek 32 zdůrazňuje vhodná technická a organizační opatření podle rizika zpracování. Přeloženo do lidské řeči: čím citlivější export, tím méně lidí ho má držet v ruce.
+
+### Odchod musí zavřít účty, integrace i fakturaci
+
+Exit není hotový tím, že nový nástroj běží. Starý nástroj je potřeba skutečně uklidit.
+
+Zkontroluj:
+
+- zrušené nebo deaktivované účty uživatelů,
+- vypnuté API klíče, webhooky a OAuth aplikace,
+- odstraněné DNS záznamy, tracking skripty nebo formulářové endpointy,
+- ukončené automatické platby a licence,
+- potvrzení o smazání nebo anonymizaci dat,
+- nastavení retence záloh u dodavatele,
+- aktualizovaný seznam subprocesorů,
+- aktualizovanou dokumentaci pro support a obchod,
+- interní poznámku, proč k odchodu došlo.
+
+Častý malý průšvih: tým přestane nástroj používat, ale nechá běžet integraci. Data pak dál tečou do systému, který už nikdo nekontroluje. To není archiv. To je datový sklep s odemčenými dveřmi.
+
+### Zákazníkovi říkej dopad, ne interní drama
+
+Pokud migrace ovlivní zákazníka, komunikuj včas a konkrétně. Zákazník nepotřebuje slyšet, že „původní vendor nesplnil naše očekávání“. Potřebuje vědět, zda se mění dostupnost, zpracování dat, subprocesor, exporty, support nebo smluvní dokumentace.
+
+Dobrá zpráva zákazníkovi:
+
+- stručně vysvětlí, co se mění,
+- uvede datum a očekávaný dopad,
+- řekne, jestli se mění zpracování osobních údajů nebo subprocesor,
+- odkáže na aktualizovanou dokumentaci,
+- nabídne kontakt pro otázky,
+- nepřehání přínosy a neskrývá rizika.
+
+Příklad:
+
+> Od 15. října přesouváme helpdesk na nový evropský systém provozovaný v EU. Cílem je rychlejší dohledávání tiketů a lepší kontrola retence. Historické tikety zůstávají dostupné, exporty se nemění. Aktualizovaný seznam subprocesorů najdete zde: [odkaz]. Pokud potřebujete posoudit dopad pro svůj tým, napište nám na support.
+
+### Checklist: exit plán dodavatele
+
+- [ ] U každého kritického dodavatele existuje vendor karta.
+- [ ] Víme, jaká data nástroj drží a kam je posílá.
+- [ ] Export je vyzkoušený, ne jen slíbený v obchodním decku.
+- [ ] Export je ve strojově čitelném formátu a obsahuje potřebné vazby.
+- [ ] Máme pojmenovanou alternativu nebo fallback pro kritické funkce.
+- [ ] Migrační export má bezpečné úložiště, omezené přístupy a datum smazání.
+- [ ] Je jasné, kdo rozhoduje o odchodu a kdo provádí migraci.
+- [ ] Po migraci vypínáme účty, API klíče, webhooky a platby.
+- [ ] Máme potvrzení o smazání nebo retenčním režimu u původního dodavatele.
+- [ ] Aktualizujeme subprocesory, dokumentaci, support postupy a obchodní materiály.
+- [ ] Pokud se mění dopad na zákazníka, máme připravenou stručnou komunikaci.
+- [ ] Po dokončení proběhne review, aby další nákup nebyl stejné dobrodružství v jiném kabátu.
+
+### Šablona vendor exit karty
+
+```markdown
+## Vendor exit karta: [název nástroje]
+
+### Kontext
+- Vlastník nástroje:
+- Kritičnost: kritický / důležitý / podpůrný
+- Hlavní účel:
+- Smlouva / tarif:
+- Region zpracování:
+- Subprocesor v našem seznamu: ano / ne
+
+### Data
+- Kategorie dat:
+- Osobní údaje:
+- Citlivá obchodní data:
+- Integrace vstup:
+- Integrace výstup:
+- Retence v nástroji:
+
+### Export
+- Dostupný formát:
+- Co export obsahuje:
+- Co export neobsahuje:
+- Kdo může export spustit:
+- Poslední test exportu:
+- Ověření úplnosti:
+
+### Náhrada a fallback
+- Preferovaná alternativa:
+- Dočasný ruční fallback:
+- Odhad migrace:
+- Největší rizika:
+
+### Ukončení
+- Vypnout účty:
+- Vypnout API klíče / webhooky:
+- Ukončit platby:
+- Vyžádat potvrzení o smazání:
+- Aktualizovat dokumentaci:
+- Informovat zákazníky: ano / ne / kdy
+
+### Review
+- Důvod odchodu:
+- Co jsme se naučili:
+- Co změnit při výběru dalších dodavatelů:
+```
+
+### Zdroje k vendor exit plánu a GDPR
+
+- GDPR článek 20 — právo na přenositelnost údajů: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- GDPR článek 28 — zpracovatel a smluvní nastavení zpracování: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- GDPR článek 32 — zabezpečení zpracování a vhodná technická a organizační opatření: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+
+
+
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha CV o exit plánu dodavatele: výběr nástrojů s ohledem na odchod, kritičnost vendorů, datový inventář, test exportů, migrační fáze, vypnutí účtů a integrací, zákaznická komunikace, checklist a šablona vendor exit karty.
 - **2026-09-16:** Doplněna příloha CU o rozhodovacím memu pro malé SaaS týmy: kdy ho psát, jak formulovat otázku, porovnat varianty, udělat privacy-first kontrolu, určit vlastníka, nastavit expiraci rozhodnutí, archivovat výsledek, checklist a šablona mema.
 - **2026-09-16:** Doplněna příloha CT o zákaznické radě a feedback systému: výběr účastníků, agenda podle rozhodnutí, zápis problémů místo funkcí, triage, komunikace zpět, roadmapové filtry, checklist a šablona feedback karty.
 - **2026-09-16:** Doplněna příloha CS o renewalech a expanzi bez nátlaku: definice úspěchu, privacy-first health score, průběžné shrnutí hodnoty, expanzní signály, churn, renewal kalendář, checklist a šablona renewal karty.
