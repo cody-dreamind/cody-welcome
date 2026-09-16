@@ -16696,7 +16696,203 @@ U měsíčních tarifů zkrať rytmus, ale zachovej logiku: aktivace, hodnota, r
 
 
 
+## Příloha CT: Zákaznická rada a feedback bez hlasitého chaosu
+
+Jakmile SaaS získá první desítky zákazníků, feedback začne téct ze všech stran. Někdo píše do supportu, někdo něco zmíní na demo callu, někdo pošle screenshot s větou „tohle je rozbité“ a někdo chce funkci, která by z produktu udělala malý ERP převlečený za jednoduchou aplikaci. Pokud tým nemá systém, začne vyhrávat nejhlasitější zákazník, největší účet nebo poslední zpráva v inboxu. To není produktové řízení. To je meteorologie s backlogem.
+
+Zákaznická rada a dobře vedený feedback systém pomáhají oddělit skutečný opakovaný problém od jednorázového přání. Privacy-first verze navíc nesbírá všechno „pro jistotu“, ale pracuje s minimem údajů, jasným souhlasem a agregovanými vzory.
+
+### Nezakládej radu, dokud nevíš, proč existuje
+
+Zákaznická rada není klub VIP lidí, kterým slíbíš všechno dřív než ostatním. Má pomáhat lepším rozhodnutím. Než pozveš první účastníky, napiš si, jaké otázky má rada zodpovídat.
+
+Dobré důvody:
+
+- ověřit prioritní problém v konkrétním segmentu,
+- pochopit nákupní a provozní realitu zákazníků,
+- testovat směr roadmapy před velkou investicí,
+- získat kvalitní zpětnou vazbu k onboardingovým a support procesům,
+- ověřit, jestli nová funkce řeší problém, nebo jen zní hezky v prezentaci.
+
+Slabé důvody:
+
+- „potřebujeme víc feature requestů“,
+- „konkurence má customer advisory board“,
+- „chceme zákazníkům ukázat, že posloucháme“, ale bez ochoty něco změnit,
+- „největší zákazník chce pravidelný přímý vliv na roadmapu“.
+
+Rada má být poradní, ne řídicí. Produktový tým musí poslouchat, ale nesmí předat volant každému, kdo přijde s hlasitým požadavkem a větším logem na webu.
+
+### Vyber různorodé zákazníky, ne jen nejhlasitější
+
+Složení rady rozhoduje o kvalitě signálu. Když pozveš jen největší zákazníky, dostaneš enterprise seznam přání. Když pozveš jen fanoušky, uslyšíš chválu a málo tření. Když pozveš jen nespokojené, vznikne veřejná terapie s tabulkou úkolů.
+
+Praktický mix:
+
+- **Noví zákazníci:** čerstvě si pamatují onboarding, první hodnotu a nejasnosti.
+- **Aktivní zákazníci:** vědí, kde produkt reálně šetří práci.
+- **Rizikoví zákazníci:** ukážou tření, které se v interním týmu snadno přehlíží.
+- **Ztracené příležitosti:** někdy odhalí lepší positioning než stávající zákazníci.
+- **Menší i větší účty:** aby roadmapa nebyla rukojmí jednoho typu firmy.
+
+U každého účastníka si eviduj jen to, co potřebuješ pro práci s feedbackem: segment, roli, typ použití, fázi vztahu a souhlas s účastí. Nepiš do poznámek osobní detaily, zákulisní informace o firmě nebo citlivosti, které nepotřebuješ.
+
+> Codyho komentář: Jestli se feedback dokument začne podobat detektivní složce na zákazníka, někde se produktový výzkum převlékl za šmírování. Sundat kabát, prosím.
+
+### Každé setkání potřebuje rozhodnutí, ne jen agendu
+
+Špatná agenda zní: „Pobavíme se o roadmapě.“ Dobrá agenda říká: „Potřebujeme rozhodnout, jestli v příštím kvartálu řešit hromadný import kontaktů, nebo auditní logy.“
+
+Před setkáním připrav:
+
+- rozhodnutí, které chceš po setkání lépe udělat,
+- 3–5 konkrétních otázek,
+- krátký kontext bez prodejní omáčky,
+- hranice: co je otevřené, co už je dané a co dnes nerozhodujete,
+- pravidla důvěrnosti a práce s poznámkami.
+
+Příklad dobré otázky:
+
+> „Kdy naposledy vám chyběl auditní záznam a co se stalo potom?“
+
+Příklad slabé otázky:
+
+> „Chtěli byste auditní logy?“
+
+Lidé často řeknou ano, protože funkce zní užitečně. Ale příběh o poslední reálné situaci ukáže, jestli jde o kritický problém, občasnou nepříjemnost nebo jen pocitovou pojistku.
+
+### Feedback zapisuj jako problém, ne jako hotové řešení
+
+Zákazník často popíše řešení, protože nezná vnitřní možnosti produktu. Úkolem týmu je přeložit požadavek na problém.
+
+Místo zápisu:
+
+> „Přidat export do XLSX s vlastními sloupci.“
+
+Zapiš:
+
+> „Účetní tým potřebuje jednou měsíčně předat přehled faktur do systému, který neumí naše API. Dnes ručně kopíruje data a vznikají chyby.“
+
+Teprve potom zvaž řešení. Možná je správně XLSX. Možná CSV. Možná účetní integrace. Možná lepší dokumentace API. Možná vůbec nic, protože jde o okrajový případ mimo strategii.
+
+U každého feedbacku eviduj:
+
+- segment a roli,
+- situaci, ve které problém vznikl,
+- dopad problému,
+- frekvenci,
+- současnou obcházku,
+- navržené řešení zákazníkem,
+- vlastní produktovou interpretaci,
+- vazbu na cíle produktu.
+
+Tohle stačí. Nepotřebuješ nahrávky všech schůzek, kompletní transkripty a osobní profily všech účastníků, pokud s nimi neumíš bezpečně a smysluplně pracovat.
+
+### Vytvoř feedback triage, jinak backlog zplesniví
+
+Feedback bez triage je jen dražší inbox. Jednou týdně nebo jednou za dva týdny projdi nové vstupy a rozděl je do několika kategorií.
+
+Jednoduché štítky:
+
+- **Bug:** něco nefunguje podle slibu.
+- **Tření:** zákazník dosáhne cíle, ale zbytečně složitě.
+- **Chybějící schopnost:** produkt neumí scénář, který může patřit do strategie.
+- **Nesoulad očekávání:** marketing nebo prodej slibuje něco jiného než produkt.
+- **Dokumentační mezera:** stačí lepší návod, onboarding nebo help článek.
+- **Mimo směr:** užitečné pro někoho, ale ne pro tento produkt.
+
+U každého vstupu rozhodni další stav:
+
+- **řešit hned,** protože blokuje kritickou cestu,
+- **sloučit se vzorem,** protože podobný problém zmiňuje více zákazníků,
+- **ověřit,** protože signál je zajímavý, ale slabý,
+- **vysvětlit nebo zdokumentovat,** protože produkt už řešení má,
+- **odmítnout,** protože by rozbil fokus.
+
+Odmítnutí je legitimní produktová práce. Jen musí být slušné, vysvětlené a zaznamenané. „Ne“ bez kontextu pálí důvěru. „Ne, protože náš produkt zůstává jednoduchý pro malé týmy; tady je obcházka“ je fér.
+
+### Zákazník má dostat zpětnou vazbu
+
+Nejhorší zkušenost je poslat dobrý feedback a slyšet ticho. Není nutné slibovat termíny. Je nutné potvrdit, že vstup dorazil, jak s ním pracujete a co se stane dál.
+
+Krátká odpověď může znít:
+
+> Díky, tohle zapisujeme jako problém s měsíčním předáním dat do účetnictví. Nebereme to zatím jako závazek na konkrétní export, ale sloučíme to s podobnými vstupy a ověříme, jestli jde o opakovaný scénář. Dáme vědět, pokud budeme řešit návrh nebo testovat variantu.
+
+Když funkci opravdu postavíš, vrať se k lidem, kteří pomohli problém pojmenovat. Ne jako hromadný marketingový blast, ale jako konkrétní follow-up. Zákazník vidí, že jeho čas měl smysl.
+
+### Rada nesmí obejít roadmapu
+
+Zákaznická rada má dávat signály do roadmapy, ne ji diktovat. Každý výstup proto projdi přes stejné filtry jako ostatní práci:
+
+- odpovídá cílovému segmentu,
+- posouvá aktivaci, retenci, výnos nebo důvěru,
+- snižuje provozní riziko,
+- zapadá do architektury,
+- nezvyšuje zbytečně datový hlad,
+- dá se dodat a udržovat malým týmem.
+
+Pokud funkce vyžaduje sběr nových osobních údajů, nové integrace nebo delší retenci dat, musí projít privacy-first kontrolou. Ne proto, že „compliance kazí zábavu“, ale protože drahý datový batoh se špatně nese, když produkt roste.
+
+### Checklist: zákaznická rada a feedback
+
+- [ ] Víme, jaké rozhodnutí má zákaznická rada zlepšit.
+- [ ] Účastníci reprezentují různé segmenty, fáze a úrovně spokojenosti.
+- [ ] Máme jasný souhlas s účastí a pravidla práce s poznámkami.
+- [ ] Každé setkání má 3–5 konkrétních otázek a jasné hranice.
+- [ ] Feedback zapisujeme jako problém, ne rovnou jako funkci.
+- [ ] Evidujeme jen segment, situaci, dopad, frekvenci a produktovou interpretaci.
+- [ ] Nové vstupy prochází pravidelnou triage.
+- [ ] Umíme férově říct „ne“ bez ztráty důvěry.
+- [ ] Zákazník dostává krátkou zpětnou vazbu, co se s jeho vstupem stalo.
+- [ ] Roadmapa se rozhoduje podle strategie, ne podle nejhlasitějšího požadavku.
+- [ ] Nové datové potřeby prochází privacy-first kontrolou.
+
+### Šablona feedback karty
+
+```markdown
+## Feedback karta: [téma / problém]
+
+### Kontext
+- Datum:
+- Zdroj: support / rada / demo / churn / interní pozorování
+- Segment:
+- Role:
+- Fáze vztahu: nový / aktivní / rizikový / bývalý / ztracená příležitost
+
+### Situace
+- Co se zákazník snažil udělat:
+- Kde vzniklo tření:
+- Současná obcházka:
+- Dopad:
+- Frekvence:
+
+### Požadavek zákazníka
+- Navržené řešení:
+- Přesná citace nebo shrnutí:
+
+### Produktová interpretace
+- Skutečný problém:
+- Vazba na cílový segment:
+- Vazba na metriky / důvěru / provoz:
+- Riziko pro privacy nebo bezpečnost:
+
+### Triage
+- Kategorie: bug / tření / chybějící schopnost / očekávání / dokumentace / mimo směr
+- Stav: řešit / sloučit / ověřit / zdokumentovat / odmítnout
+- Vlastník:
+- Další krok:
+
+### Komunikace zpět
+- Potvrzení odesláno:
+- Co jsme slíbili:
+- Kdy se vrátíme:
+```
+
+
+
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha CT o zákaznické radě a feedback systému: výběr účastníků, agenda podle rozhodnutí, zápis problémů místo funkcí, triage, komunikace zpět, roadmapové filtry, checklist a šablona feedback karty.
 - **2026-09-16:** Doplněna příloha CS o renewalech a expanzi bez nátlaku: definice úspěchu, privacy-first health score, průběžné shrnutí hodnoty, expanzní signály, churn, renewal kalendář, checklist a šablona renewal karty.
 - **2026-09-16:** Doplněna příloha CR o business case pro nákup SaaS: popis současného procesu, tvrdé/měkké/rizikové přínosy, celkové náklady změny, jednoduchý ROI model, privacy-first měření bez sledování jednotlivců, podpora interního šampiona, checklist, šablona karty a zdroje k minimalizaci údajů a privacy by design.
 - **2026-09-16:** Doplněna příloha CQ o B2B data roomu pro privacy-first SaaS: opakované nákupní otázky, vrstvy sdílení, DPA balíček, security overview, ochrana citlivých dokumentů, údržba, checklist, šablona indexu a zdroje ke GDPR článku 28.
