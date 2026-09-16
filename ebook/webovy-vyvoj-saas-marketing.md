@@ -20307,7 +20307,168 @@ Tohle je nudné. Přesně proto to funguje. Důvěra často nevzniká z velkých
 - Finální review:
 ```
 
+
+## Příloha DM: Post-release review bez vanity metrik a honu na viníka
+
+Release nekončí tím, že se zeleně rozsvítí deploy. To je jen technická část příběhu. Skutečný konec změny přichází ve chvíli, kdy tým ví, jestli změna pomohla zákazníkům dělat práci lépe, jestli nezvýšila podporu, jestli nerozbila důvěru a co z ní plyne pro další rozhodnutí.
+
+Post-release review není soudní proces. Není to ani oslava screenshotů v interním chatu. Je to krátké, pravidelné zastavení, které promění release z jednorázové události na učení. Malý SaaS tým si tím šetří překvapení, technický dluh i trapné situace typu „funkce je venku tři týdny a nikdo neví, jestli ji někdo používá“.
+
+> Codyho komentář: Pokud release nemá review, není to produktový cyklus. Je to hod kostkou s lepším CI.
+
+### Review plánuj dřív než release
+
+Nejhorší čas na vymýšlení vyhodnocení je po releasu. V tu chvíli už často chybí baseline, neví se, jaký signál hledat, a tým sklouzne k tomu, co je zrovna po ruce: počet kliknutí, pageviews, počet eventů nebo hlasitost jednoho zákazníka.
+
+U každé větší změny si předem napiš:
+
+- jaký zákaznický výsledek má změna zlepšit,
+- jak poznáme první zdravou adopci,
+- jaký negativní signál budeme hlídat,
+- kdy se k dopadu vrátíme,
+- kdo připraví podklady,
+- jaké rozhodnutí po review může následovat.
+
+Příklad: Pokud release upravuje onboarding, cílem není „více zobrazení onboardingové stránky“. Cílem může být, že nový účet do sedmi dní dokončí první reálný pracovní scénář bez zásahu podpory. To už je signál, se kterým jde pracovat.
+
+### Měř výsledek, tření a důvěru
+
+Post-release review má stát na třech typech signálů.
+
+**Výsledek** říká, jestli změna pomohla zákazníkovi. Například dokončený import, odeslaná nabídka, vyřešený ticket, vytvořený projekt nebo aktivovaný tým. Výsledek by měl být co nejblíže skutečné práci zákazníka.
+
+**Tření** říká, kde se lidé zasekávají. Patří sem opakované dotazy podpory, chybové stavy, nedokončené kroky, ruční zásahy týmu nebo návraty ke starému workflow. Tření je často cennější než průměrná metrika, protože ukazuje, kde produkt bere zákazníkovi energii.
+
+**Důvěra** říká, jestli změna nezhoršila pocit kontroly. U privacy-first produktu sleduj hlavně otázky typu: rozumí zákazník, jaká data změna používá? Neobjevila se nová nejistota kolem oprávnění, exportu, retence nebo sdílení dat? Nepůsobí komunikace jako trik?
+
+### Privacy-first review nepotřebuje osobní šmírování
+
+Vyhodnocení změny nevyžaduje sledovat každého uživatele jako laboratorní myš s firemním e-mailem. Ve většině případů stačí agregace po účtech, segmentech, scénářích nebo časových oknech.
+
+Praktické minimum:
+
+- počet účtů, které dokončily cílový scénář,
+- počet účtů, které začaly, ale nedokončily,
+- nejčastější chybové stavy,
+- počet support dotazů k releasu,
+- kvalitativní poznámky ze sales/support hovorů,
+- anonymizované ukázky nejasností v textu nebo workflow.
+
+Nepotřebuješ vědět, že Jana z účtárny klikla v úterý 14:03 na třetí tlačítko. Potřebuješ vědět, že účet typu „servisní firma 10–30 lidí“ opakovaně nedokončí import, protože nerozumí mapování sloupců. To je produktový signál. První varianta je datový cirkus s občerstvením.
+
+### Vytvoř krátký review rytmus
+
+U běžné změny stačí dvě kontrolní okna:
+
+- **24–48 hodin po releasu:** technické chyby, support dotazy, první zmatek, komunikace.
+- **7–14 dní po releasu:** adopce, dokončené scénáře, zákaznický dopad, rozhodnutí o dalším kroku.
+
+U větších změn, které mění návyk zákazníka, přidej ještě review po 30 dnech. Tam už se ukáže, jestli změna opravdu přežila první nadšení a jestli se stala součástí práce.
+
+Review drž krátké. Pokud z něj vznikne dvouhodinová porada s patnácti grafy, tým ho přestane dělat. Lepší je 30 minut, jedna karta, tři rozhodnutí a jasný vlastník navazující práce.
+
+### Rozhodnutí po review musí být explicitní
+
+Review bez rozhodnutí je jen drahý zápisník. Po vyhodnocení zvol jednu z pěti možností:
+
+1. **Ponechat a sledovat:** změna funguje, není potřeba zásah.
+2. **Doladit:** menší úprava textu, UI, dokumentace nebo komunikace.
+3. **Posílit adopci:** doplnit onboarding, šablonu, importní pomůcku nebo přímý kontakt.
+4. **Omezit rozsah:** stáhnout část změny, vypnout segmentu, schovat pokročilou volbu.
+5. **Vrátit nebo nahradit:** pokud dopad škodí a oprava by byla dražší než ústup.
+
+Každé rozhodnutí by mělo mít vlastníka a datum kontroly. Jinak se z „doladíme později“ stane produktový kompost.
+
+### Support je nejlepší senzor po releasu
+
+Support není jen hasicí přístroj. Je to radar. Po releasu sleduj opakované formulace zákazníků: čemu nerozumí, jakými slovy popisují problém, kde čekali jiný výsledek a co je překvapilo.
+
+Dobrá praxe je udělat po větším releasu krátký support digest:
+
+- tři nejčastější dotazy,
+- nejhorší zmatek v UI nebo textu,
+- jedna pozitivní reakce,
+- jedna věc, kterou šlo vysvětlit dokumentací,
+- jedna věc, kterou dokumentace nespraví a musí do produktu.
+
+Tím se z podpory nestává skládka frustrace, ale vstup do produktového rozhodování.
+
+### Dokumentuj i malé učení
+
+Ne každé review přinese velký objev. To nevadí. Hodnota je v kumulaci. Po deseti releasích uvidíš vzory: kde tým pravidelně podceňuje komunikaci, které segmenty potřebují více podpory, jaké změny zvyšují důvěru a které typy funkcí vypadají dobře v roadmapě, ale zákazníkům nepomáhají.
+
+Do interní dokumentace ukládej krátké závěry:
+
+- co jsme čekali,
+- co se stalo,
+- co nás překvapilo,
+- co příště uděláme jinak,
+- jaký dopad to má na roadmapu.
+
+U veřejných změn můžeš část učení převést i do changelogu nebo článku. Ne jako omluvu za chaos, ale jako signál transparentnosti: produkt se vyvíjí, tým se učí a zákazník není pokusný králík v mlze.
+
+### Checklist: post-release review
+
+- [ ] Má release předem definovaný zákaznický výsledek?
+- [ ] Existuje baseline nebo aspoň srovnatelný předchozí stav?
+- [ ] Víme, kdy proběhne 24–48h a 7–14denní review?
+- [ ] Měříme agregovaně po účtech, scénářích nebo segmentech?
+- [ ] Sledujeme výsledek, tření i důvěru?
+- [ ] Má support připravený způsob sběru opakovaných dotazů?
+- [ ] Rozlišujeme technickou chybu, problém komunikace a problém produktu?
+- [ ] Po review vznikne explicitní rozhodnutí, ne jen zápis?
+- [ ] Má navazující práce vlastníka a termín kontroly?
+- [ ] Ukládáme poučení tak, aby pomohlo příštím releasům?
+
+### Šablona: post-release review karta
+
+```markdown
+## Post-release review: [název změny]
+
+### Kontext
+- Datum releasu:
+- Vlastník změny:
+- Cílový segment / účty:
+- Zákaznický výsledek:
+- Původní očekávání:
+
+### Review okna
+- 24–48h review datum:
+- 7–14denní review datum:
+- 30denní review datum, pokud dává smysl:
+
+### Signály výsledku
+- Dokončený cílový scénář:
+- Účty / segmenty se zdravou adopcí:
+- Kvalitativní důkaz hodnoty:
+
+### Signály tření
+- Nejčastější support dotazy:
+- Chybové stavy:
+- Nedokončené kroky:
+- Návraty ke starému workflow:
+
+### Signály důvěry
+- Dotazy na data / oprávnění / export:
+- Nejasná komunikace:
+- Privacy-first rizika:
+- Potřebné úpravy dokumentace:
+
+### Rozhodnutí
+- Ponechat / doladit / posílit adopci / omezit / vrátit:
+- Proč:
+- Vlastník:
+- Termín kontroly:
+
+### Poučení pro příště
+- Co fungovalo:
+- Co překvapilo:
+- Co změnit v release procesu:
+- Dopad na roadmapu:
+```
+
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha DM o post-release review bez vanity metrik: plánování vyhodnocení před releasem, měření výsledku/tření/důvěry, privacy-first agregace, review rytmus, explicitní rozhodnutí, support digest, dokumentace učení, checklist a review karta.
 - **2026-09-16:** Doplněna příloha DL o úklidu starého workflow po adopci nové funkce: rozlišení ztišení/zmrazení/ukončení, migrační mapa, komunikace podle dopadu, privacy-first úklid dat, kvalitativní měření, rollback myšlenka, aktualizace dokumentace, checklist a karta úklidu workflow.
 - **2026-09-16:** Doplněna příloha DK o adopci nové funkce bez produktového stalkingu: definice adopce jako pracovního výsledku, mapa adopční cesty, agregované měření po účtech a scénářích, kontextová pomoc, zapojení správných rolí, práce s neadopcí, dvoutýdenní review, checklist a adopční karta.
 - **2026-09-16:** Doplněna příloha DJ o release komunikaci bez ohňostroje: plán komunikace už při návrhu změny, volba kanálů podle dopadu, psaní z pohledu práce zákazníka, privacy-first segmentace bez sledování jednotlivců, přechod u změn návyků, changelog jako trust asset, checklist, mini šablona oznámení a release karta.
