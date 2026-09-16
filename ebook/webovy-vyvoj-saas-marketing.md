@@ -19943,7 +19943,178 @@ Před oznámením změny projdi tento krátký checklist:
 - Rozhodnutí po review: ponechat / upravit / více vysvětlit / stáhnout
 ```
 
+
+## Příloha DK: Adopce nové funkce bez produktového stalkingu
+
+Release je jen začátek. To, že je funkce v produkci, neznamená, že ji zákazník pochopil, použil a získal z ní hodnotu. Malý SaaS tým se po releasu často uklidní: tiket je zavřený, changelog napsaný, deploy prošel. Jenže zákazník nežije v backlogu. Má svoji práci, staré návyky, interní pravidla a občas i kolegu, který se nového tlačítka bojí jako tiskárny v pondělí ráno.
+
+Adopce nové funkce znamená převést změnu do běžné práce zákazníka. Nejde o to vytlačit metriky nahoru za každou cenu. Jde o to zjistit, jestli funkce skutečně řeší původní problém a co zákazník potřebuje, aby ji bezpečně začal používat. Privacy-first přístup k adopci říká: měř dopad agregovaně, pomáhej kontextově a nesbírej detailní chování lidí jen proto, že graf vypadá chytřeji.
+
+### Adopce není kliknutí
+
+Největší past adopčních metrik je zaměnit první kliknutí za hodnotu. Uživatel mohl funkci otevřít omylem, ze zvědavosti nebo proto, že ho zmatl banner. Skutečná adopce se pozná podle dokončené práce.
+
+Před měřením si napiš větu:
+
+> Zákazník funkci adoptoval, když [role] dokáže [výsledek] bez [původní překážka].
+
+Příklady:
+
+- Administrátor adoptoval nové role, když dokáže pozvat kolegu s omezeným přístupem bez zásahu podpory.
+- Obchodní tým adoptoval export, když ho použije pro týdenní report bez ručního čištění tabulky.
+- Provozní manažer adoptoval upozornění, když díky němu zachytí rizikovou zakázku dřív, než vznikne eskalace.
+
+Kliknutí může být signál cesty. Výsledek je důkaz hodnoty. Když měříš jen otevření obrazovky, optimalizuješ zvědavost. Když měříš dokončený pracovní scénář, optimalizuješ produkt.
+
+### Začni mapou adopční cesty
+
+Každá větší funkce má cestu od oznámení po návyk. Bez mapy tým často řeší špatné místo: přidává další e-mail, když problém je v oprávněních; upravuje UI, když zákazník neví, proč má workflow změnit.
+
+Jednoduchá adopční cesta:
+
+1. **Povědomí:** správný člověk ví, že změna existuje.
+2. **Porozumění:** chápe, jaký problém změna řeší.
+3. **První bezpečný pokus:** může si funkci vyzkoušet bez strachu, že rozbije produkční proces.
+4. **První dokončená práce:** funkce doručí konkrétní výsledek.
+5. **Předání týmu:** další role ví, co se změnilo a jak s tím pracovat.
+6. **Návyk:** funkce se stane běžnou součástí procesu.
+7. **Review hodnoty:** tým i zákazník ví, jestli změna stojí za další investici.
+
+U každého kroku si napiš, jaký je nejpravděpodobnější blokátor. Může to být nejasný text, chybějící oprávnění, strach ze změny dat, nepřipravený help článek, interní schvalování u zákazníka nebo prostě fakt, že funkce řeší problém, který zákazník nemá dost často.
+
+### Měř po účtech a scénářích, ne po lidech
+
+Privacy-first adopce nepotřebuje vědět, že Jana z účetního oddělení klikla v 9:43 na třetí tooltip. Většinou stačí vědět, kolik zákaznických účtů dokončilo pracovní scénář a kde se cesta láme.
+
+Užitečné agregované signály:
+
+- počet účtů, které funkci zapnuly,
+- počet účtů, které dokončily první klíčovou akci,
+- počet dokončených workflow za týden,
+- počet support dotazů k nové funkci,
+- poměr účtů, které se k funkci vrátily po prvním použití,
+- kvalita výstupu: méně ručních oprav, méně chyb, rychlejší předání práce,
+- ruční feedback od zákazníků po prvním použití.
+
+Když potřebuješ detailnější diagnostiku, začni kvalitativně: krátký rozhovor, anonymizovaná poznámka ze supportu, testovací sezení se souhlasem. Detailní produktová telemetrie má být poslední možnost, ne výchozí nastavení.
+
+Codyho komentář: Pokud k pochopení funkce potřebuješ sledovat každé zachvění kurzoru, možná nemáš analytický problém. Možná máš produkt, který zákazníkům šeptá v klingonštině.
+
+### Pomoc má být kontextová, ne hlučná
+
+Adopční komunikace nemá zákazníka bombardovat. Má se objevit ve chvíli, kdy pomůže s dalším krokem. Rozdíl mezi pomocí a otravným marketingem často dělá kontext.
+
+Praktické vrstvy podpory:
+
+- **Krátká in-app nápověda:** jedna věta u nového prvku, co dělá a kdy ho použít.
+- **Průvodce prvním krokem:** jen pro složitější scénář, ideálně s možností přeskočit.
+- **Help článek:** postup, oprávnění, limity, časté otázky a bezpečný rollback.
+- **Šablona interního oznámení:** text, který administrátor pošle svému týmu.
+- **Krátké demo video:** když funkce mění workflow více lidí.
+- **Podpora pro první použití:** nabídka patnáctiminutové pomoci u zákazníků s vyšším dopadem.
+
+Nepřidávej nápovědu jen proto, že je funkce nová. Přidej ji tam, kde snižuje riziko chyby nebo zrychluje první hodnotu. A hlavně ji po čase uklidni. Produkt plný věčných štítků „Nové!“ vypadá jako výloha, která zapomněla sundat vánoční soby v červnu.
+
+### Zapoj správnou roli u zákazníka
+
+B2B adopce často selže, protože produkt komunikuje s člověkem, který nemůže změnu prosadit. Koncový uživatel vidí funkci, ale nemá oprávnění. Admin má oprávnění, ale nerozumí pracovnímu dopadu. Manažer chce výsledek, ale neví, co má tým nastavit.
+
+Rozděl komunikaci podle role:
+
+- **Admin:** nastavení, oprávnění, bezpečnost, dopad na data, možnost vypnutí.
+- **Manažer:** jaký proces se zrychlí, jak pozná hodnotu, co má říct týmu.
+- **Koncový uživatel:** první krok, běžné použití, limity, kam napsat při potížích.
+- **Obchodní nebo success kontakt:** proč funkce vznikla, jak ji vysvětlit, kdy nabídnout pomoc.
+
+U větších změn pošli zákazníkovi jednoduchý „adopční balíček“: krátké shrnutí, odkaz na návod, doporučený první scénář, text pro interní sdílení a datum, kdy se k tomu společně vrátíte. Je to nudné? Možná. Funguje to? Podezřele často.
+
+### Pracuj s neadopcí jako se signálem
+
+Když zákazníci funkci nepoužívají, neznamená to automaticky, že jsou líní, neinformovaní nebo „potřebují edukaci“. Možná funkce neřeší dost ostrý problém. Možná je špatně umístěná. Možná vyžaduje změnu procesu, kterou nikdo u zákazníka nevlastní. Možná konkuruje starému workaroundu, který je sice ošklivý, ale známý.
+
+Ptej se v tomto pořadí:
+
+1. **Věděli o funkci správní lidé?**
+2. **Pochopili, jaký výsledek přináší?**
+3. **Mohli ji bezpečně vyzkoušet?**
+4. **Byl první krok dost jednoduchý?**
+5. **Měla funkce jasného vlastníka na straně zákazníka?**
+6. **Doručila hodnotu dost rychle?**
+7. **Nevzniklo nové riziko, které zákazník nechtěl nést?**
+
+Teprve potom řeš další banner, e-mail nebo onboardingový checklist. Více komunikace neopraví slabou hodnotu. Jen ji hlasitěji oznámí.
+
+### Z adopce udělej dvoutýdenní review
+
+Po větším releasu si nastav krátké review. Ne za půl roku, kdy už nikdo neví, proč funkce vznikla. Ideálně po dvou týdnech nebo po dosažení rozumného počtu prvních použití.
+
+Review otázky:
+
+- Kolik cílových účtů o funkci vědělo?
+- Kolik účtů dokončilo první hodnotový scénář?
+- Kde se cesta lámala?
+- Jaké dotazy přišly na podporu?
+- Co říkají zákazníci kvalitativně?
+- Jaká část původního problému zůstává nevyřešená?
+- Co odstraníme, přepíšeme, doplníme nebo přestaneme měřit?
+
+Výstup review má být rozhodnutí, ne jen další dashboard. Například: upravit mikrocopy, doplnit oprávnění, vytvořit help článek, kontaktovat tři zákazníky, stáhnout rušivý banner nebo přiznat, že funkce potřebuje produktovou změnu.
+
+### Checklist: adopce nové funkce
+
+- Je napsaná definice adopce jako dokončený pracovní výsledek?
+- Víme, které role u zákazníka musí změnu pochopit?
+- Má funkce připravený první bezpečný scénář použití?
+- Měříme dopad agregovaně po účtech nebo workflow, ne detailní sledování lidí?
+- Existuje help článek, interní text pro zákazníka nebo stručný návod?
+- Má support připravené odpovědi na očekávané dotazy?
+- Víme, kdy adopční komunikaci vypnout nebo ztišit?
+- Je naplánované dvoutýdenní review dopadu?
+
+### Šablona: adopční karta funkce
+
+```markdown
+## Adopční karta: [název funkce]
+
+### Problém
+- Původní zákaznický problém:
+- Cílový segment / typ účtu:
+- Role, kterým změna pomáhá:
+
+### Definice adopce
+- První hodnotový scénář:
+- Signál dokončení:
+- Co není adopce, i když to vypadá dobře:
+
+### Cesta zákazníka
+- Povědomí:
+- Porozumění:
+- První bezpečný pokus:
+- První dokončená práce:
+- Předání týmu:
+- Návyk:
+
+### Komunikace a podpora
+- Kanály:
+- Help / návod:
+- Text pro administrátora:
+- Support odpovědi:
+
+### Privacy-first měření
+- Agregované metriky:
+- Data, která nesbíráme:
+- Retence adopčních dat:
+- Vlastník review:
+
+### Review
+- Datum review:
+- Co se povedlo:
+- Kde se cesta láme:
+- Rozhodnutí: ponechat / upravit / více vysvětlit / stáhnout
+```
+
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha DK o adopci nové funkce bez produktového stalkingu: definice adopce jako pracovního výsledku, mapa adopční cesty, agregované měření po účtech a scénářích, kontextová pomoc, zapojení správných rolí, práce s neadopcí, dvoutýdenní review, checklist a adopční karta.
 - **2026-09-16:** Doplněna příloha DJ o release komunikaci bez ohňostroje: plán komunikace už při návrhu změny, volba kanálů podle dopadu, psaní z pohledu práce zákazníka, privacy-first segmentace bez sledování jednotlivců, přechod u změn návyků, changelog jako trust asset, checklist, mini šablona oznámení a release karta.
 - **2026-09-16:** Doplněna příloha DI o převodu produktového rozhodnutí do roadmapového slotu: vrstvy roadmapy, formulace slotu podle zákaznického výsledku, kapacita, vstupní/výstupní/stop kritéria, opatrná komunikace závazků, privacy-first review před vývojem, postup releasu, komunikace zpět, checklist a šablona roadmapového slotu.
 - **2026-09-16:** Doplněna příloha DH o převodu feedbacku na produktové rozhodnutí bez scope creepu: práce s problémem místo požadavku, varianty menší než nová funkce, typy rozhodnutí, privacy-first filtr, mini-memo, odmítání požadavků, checklist a šablona rozhodovací karty.
