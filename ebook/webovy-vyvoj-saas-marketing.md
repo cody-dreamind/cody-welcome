@@ -19761,7 +19761,190 @@ Dobrá komunikace neříká jen „přidali jsme export“. Říká „zkrátili
 - Další rozhodnutí:
 ```
 
+
+## Příloha DJ: Release komunikace bez ohňostroje, ticha a zbytečných trackerů
+
+Roadmapový slot je slib práce. Release komunikace je okamžik, kdy zákazník zjistí, jestli tým skutečně doručil hodnotu, nebo jen přesunul položku do sloupce „Done“. Malý SaaS tým často podcení právě tuhle fázi: funkce je hotová, testy prošly, deploy svítí zeleně — a zákazník o změně neví, nechápe ji, nebo ji použije špatně.
+
+Dobrá release komunikace není marketingový ohňostroj. Je to provozní disciplína. Má říct správným lidem, co se změnilo, proč na tom záleží, jak to bezpečně použít a kde najdou detaily. Privacy-first přístup k tomu přidává ještě jednu důležitou věc: komunikace nesmí být záminka ke sledování každého kliknutí, otevírání e-mailu a individuálního chování uživatelů.
+
+### Release začíná už při návrhu změny
+
+Když tým začne psát oznámení až po deployi, obvykle vznikne technický popis: „Přidali jsme možnost filtrovat záznamy podle stavu.“ To je pravda, ale ne hodnota. Lepší je mít komunikační poznámku už u roadmapového slotu:
+
+- komu změna pomáhá,
+- jaký problém řeší,
+- co je nové v běžné práci zákazníka,
+- co se nemění,
+- kdo potřebuje akci,
+- jaké riziko nebo omezení musíme férově zmínit.
+
+Tahle poznámka chrání tým před dvěma extrémy. První je nafouknutí drobné změny do „revoluce“. Druhý je ticho u změny, která zákazníkovi reálně šetří práci. Obě chyby snižují důvěru: jedna slibuje víc, než dodává; druhá schovává hodnotu, za kterou zákazník platí.
+
+### Ne každý release potřebuje stejný kanál
+
+Komunikační kanál vybírej podle dopadu, ne podle zvyku. Když každá drobnost dostane e-mail, zákazníci se naučí e-maily ignorovat. Když zásadní změna skončí jen v changelogu, tým si sám sabotovává adopci.
+
+Praktické rozlišení:
+
+- **Tichý release:** drobná oprava, zlepšení stability, interní změna bez dopadu na workflow.
+- **Changelog:** viditelné zlepšení, které se hodí mít dohledatelné, ale nevyžaduje akci.
+- **In-app oznámení:** změna ovlivňuje práci uživatele přímo v produktu.
+- **E-mail zákazníkům:** změna přináší obchodní hodnotu, vyžaduje rozhodnutí nebo mění důležitý proces.
+- **Help článek:** funkce má postup, nastavení, oprávnění nebo časté otázky.
+- **Individuální zpráva:** změna vznikla z konkrétního feedbacku, pilotu nebo slíbeného závazku.
+
+Codyho komentář: Changelog není hřbitov commitů. Je to veřejná stopa, že produkt žije a tým ví, proč něco mění. Pokud z něj čtenář pochopí jen to, že „optimalizováno API“, tak gratuluju — vyhráli jste tombolu interního žargonu.
+
+### Piš z pohledu práce zákazníka
+
+Release text má začít výsledkem, ne implementací. Zákazníka obvykle nezajímá, že jste přepsali dotaz, přidali index nebo sjednotili komponentu. Zajímá ho, že najde rizikové položky rychleji, udělá méně chyb, snáz předá práci kolegovi nebo získá přehled bez exportu.
+
+Slabý release text:
+
+> Přidali jsme nový filtr podle stavu a upravili tabulku objednávek.
+
+Lepší release text:
+
+> V objednávkách teď rychle najdete položky, které čekají na schválení. Stačí v horním filtru zvolit „Čeká na akci“ a tým vidí, co má řešit jako první.
+
+Dobrá struktura krátkého oznámení:
+
+1. **Co je nové:** jedna věta o výsledku.
+2. **Pro koho to je:** role nebo situace.
+3. **Jak začít:** první krok v produktu.
+4. **Co si pohlídat:** oprávnění, limity, změna procesu.
+5. **Kam dál:** odkaz na help článek, changelog nebo podporu.
+
+### Segmentuj bez šmírování
+
+Personalizace release komunikace nemusí znamenat sledování jednotlivců. U B2B SaaS často stačí segmentace podle účtu, tarifu, zapnutého modulu nebo role — ideálně z dat, která produkt už legitimně potřebuje pro svůj provoz. Není nutné budovat tajnou detektivku o tom, kdo kolikrát najel myší na tlačítko.
+
+Privacy-first segmentace může vypadat takto:
+
+- e-mail jen administrátorům účtů, kde je daný modul aktivní,
+- in-app banner jen na stránce, které se změna týká,
+- changelog veřejně přes RSS a přímý odkaz,
+- help článek bez externích trackerů a bez marketingových pixelů,
+- adopce měřená agregovaně: kolik účtů funkci použilo, ne kdo přesně co dělal v každé minutě.
+
+Pokud chceš měřit dopad releasu, začni otázkou: „Jaké rozhodnutí podle dat uděláme?“ Pokud žádné, data nesbírej. Pokud ano, hledej nejmenší signál: počet aktivovaných účtů, počet dokončených workflow, pokles support dotazů, kvalitativní odpovědi od zákazníků.
+
+### Nepřekvapuj změnami, které mění návyk
+
+Některé releasy nejsou jen nové funkce. Mění umístění akce, oprávnění, texty, výchozí nastavení, exporty, limity nebo práci více rolí najednou. U takových změn nestačí „nasadit a oznámit“. Potřebují přechod.
+
+U změn návyku si připrav:
+
+- krátké oznámení předem,
+- datum změny,
+- možnost vyzkoušet novou variantu,
+- jasné vysvětlení, co se stane se stávajícími daty,
+- fallback nebo support plán pro první dny,
+- interní odpovědi pro support a obchod.
+
+Nejhorší release komunikace je ta, která zákazníka donutí psát: „Kam zmizelo tlačítko?“ To není engagement. To je požární hlášení.
+
+### Changelog jako důvěryhodná historie produktu
+
+Veřejný changelog je jednoduchý trust asset. Ukazuje, že produkt se zlepšuje, tým opravuje chyby a umí komunikovat bez nadsázky. Nemusí obsahovat interní detaily ani bezpečnostní citlivosti. Má být čitelný, dohledatelný a stabilní.
+
+Dobrá položka changelogu obsahuje:
+
+- datum vydání,
+- typ změny: nové / zlepšeno / opraveno / změněno / bezpečnost,
+- krátký popis hodnoty,
+- případný dopad na uživatele,
+- odkaz na dokumentaci,
+- u větších změn informaci o migraci nebo přechodném období.
+
+Privacy-first detail: changelog publikuj jako obyčejnou stránku s RSS nebo Atom feedem. Neskrývej ho za přihlášení, pokud nejde o zákaznicky citlivé informace. Zákazník, partner i interní tým tak mají jeden zdroj pravdy bez sociálních sítí, pixelů a algoritmického šumu.
+
+### Release checklist
+
+Před oznámením změny projdi tento krátký checklist:
+
+- Je jasné, jaký zákaznický problém release řeší?
+- Víme, koho se změna týká a koho ne?
+- Je text napsaný jazykem práce zákazníka, ne interní implementace?
+- Existuje help článek nebo krátký postup pro složitější změnu?
+- Má support připravenou odpověď na očekávané otázky?
+- Je měření dopadu agregované a úměrné rozhodnutí, které chceme udělat?
+- Neobsahuje oznámení zbytečná osobní data, interní názvy zákazníků nebo citlivé provozní detaily?
+- Víme, kdy se k dopadu releasu vrátíme?
+
+### Mini šablona release oznámení
+
+```markdown
+## [Název změny]
+
+**Co je nové:**
+[Jedna věta o výsledku pro zákazníka.]
+
+**Pro koho:**
+[Role, segment nebo situace.]
+
+**Jak začít:**
+[První krok v produktu.]
+
+**Co se nemění:**
+[Hranice změny, aby nevznikla falešná očekávání.]
+
+**Na co si dát pozor:**
+[Oprávnění, limity, migrace, dopad na proces.]
+
+**Více informací:**
+[Odkaz na help článek / changelog / podporu.]
+
+**Privacy-first poznámka:**
+[Dopad měříme agregovaně; nesledujeme individuální chování nad rámec provozní potřeby.]
+```
+
+### Release karta: [název změny]
+
+```markdown
+## Release karta: [název změny]
+
+### Kontext
+- Roadmapový slot / rozhodnutí:
+- Problém zákazníka:
+- Cílový segment / role:
+- Datum vydání:
+
+### Dopad
+- Co zákazník po releasu zvládne lépe:
+- Co se mění v běžném workflow:
+- Co se nemění:
+- Rizika nebo omezení:
+
+### Komunikace
+- Kanály: changelog / in-app / e-mail / help / individuální zpráva
+- Kdo text píše:
+- Kdo text schvaluje:
+- Kdy oznámení odejde:
+- Odkazy na dokumentaci:
+
+### Support
+- Očekávané otázky:
+- Připravená odpověď:
+- Vlastník supportu:
+- Datum první kontroly dotazů:
+
+### Privacy-first kontrola
+- Jaká data používáme pro segmentaci:
+- Je segmentace nutná?
+- Jak měříme dopad agregovaně:
+- Jaké údaje v komunikaci nesmí být:
+- Kdy smažeme pracovní poznámky:
+
+### Review dopadu
+- Metrika nebo signál úspěchu:
+- Datum review:
+- Rozhodnutí po review: ponechat / upravit / více vysvětlit / stáhnout
+```
+
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha DJ o release komunikaci bez ohňostroje: plán komunikace už při návrhu změny, volba kanálů podle dopadu, psaní z pohledu práce zákazníka, privacy-first segmentace bez sledování jednotlivců, přechod u změn návyků, changelog jako trust asset, checklist, mini šablona oznámení a release karta.
 - **2026-09-16:** Doplněna příloha DI o převodu produktového rozhodnutí do roadmapového slotu: vrstvy roadmapy, formulace slotu podle zákaznického výsledku, kapacita, vstupní/výstupní/stop kritéria, opatrná komunikace závazků, privacy-first review před vývojem, postup releasu, komunikace zpět, checklist a šablona roadmapového slotu.
 - **2026-09-16:** Doplněna příloha DH o převodu feedbacku na produktové rozhodnutí bez scope creepu: práce s problémem místo požadavku, varianty menší než nová funkce, typy rozhodnutí, privacy-first filtr, mini-memo, odmítání požadavků, checklist a šablona rozhodovací karty.
 - **2026-09-16:** Doplněna příloha DG o zákaznickém feedback loopu bez nekonečných dotazníků: zdroje signálů, triage, privacy-first práce s poznámkami, prioritizace, uzavírání smyčky a šablona feedback karty.
