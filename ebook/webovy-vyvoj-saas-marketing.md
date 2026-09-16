@@ -19589,7 +19589,180 @@ Pokud některý bod chybí, neznamená to automaticky stop. Znamená to „dopl�
 - Další rozhodnutí:
 ```
 
+## Příloha DI: Roadmapový slot z produktového rozhodnutí bez ztráty důvěry
+
+Produktové rozhodnutí samo o sobě ještě nic nezmění. Je to jen dobře pojmenovaný záměr. Skutečná práce začíná ve chvíli, kdy se z rozhodnutí stane roadmapový slot: konkrétní kus práce s vlastníkem, hranicemi, termínem, riziky, komunikačním plánem a jasným důvodem, proč má přednost před jinými věcmi.
+
+Malý SaaS tým nepotřebuje obří roadmapový systém. Potřebuje způsob, jak zabránit tomu, aby se každé „ano“ okamžitě proměnilo ve slib zákazníkovi, každé „možná“ ve skrytý dluh a každé „později“ v backlogové smetiště. Tahle příloha navazuje na rozhodovací kartu z feedbacku a ukazuje, jak přenést vybrané rozhodnutí do plánu bez divadla.
+
+### Roadmapa není kalendář přání
+
+Roadmapa není seznam všeho, co by bylo pěkné mít. Je to veřejnější forma rozhodování: co teď posune produkt, zákazníky a byznys nejvíc, a co vědomě počká.
+
+U malého SaaS stačí tři vrstvy:
+
+- **Teď:** práce na nejbližší 1–3 týdny, kterou tým opravdu dodává.
+- **Dále:** dobře pochopené problémy, které mají šanci dostat slot v příštím cyklu.
+- **Později / možná:** validované směry bez závazku termínu.
+
+Všechno ostatní je archiv signálů, ne roadmapa. To je důležité. Když má roadmapa padesát položek, nikomu nepomáhá rozhodovat. Jen vytváří iluzi kontroly a jemný zápach budoucího zklamání.
+
+### Slot začíná problémem, ne názvem funkce
+
+Roadmapový slot by neměl nést název typu „Excel export v2“. Lepší název je „Zjednodušit měsíční report pro účetní“. První varianta tlačí tým do konkrétní implementace. Druhá drží fokus na výsledku.
+
+Každý slot popiš jednou krátkou větou:
+
+> Pro [segment] zlepšíme [situaci], aby mohli [měřitelný nebo pozorovatelný výsledek], bez [zásadní omezení nebo riziko].
+
+Příklad:
+
+> Pro provozní manažery servisních firem zjednodušíme měsíční předání zakázek účetní, aby export zabrali minuty místo hodin, bez zpřístupnění osobních poznámek techniků.
+
+Tahle věta je malá, ale silná. Nutí tým říct, pro koho to je, jaká změna má nastat a kde je privacy-first hranice.
+
+### Kapacita je tvrdší než nadšení
+
+Než slot dostane místo v plánu, projdi kapacitu. Ne optimistickou. Skutečnou. Tým, který vedle vývoje řeší support, prodej, incidenty a zákaznické hovory, nemá čtyřicet čistých hodin týdně na feature delivery. Má rozkouskovanou kapacitu, kterou je potřeba chránit.
+
+Praktické pravidlo pro malé týmy:
+
+- nech si rezervu na bugy a support,
+- plánuj méně než kapacitní tabulka dovoluje,
+- nerozepisuj slot na deset mikrofunkcí,
+- ke každému slotu přidej „co neděláme“,
+- velké věci rozděl na dodání hodnoty, ne na technické vrstvy.
+
+Když neumíš slot dodat v malém užitečném řezu, pravděpodobně ještě nemáš dost dobré pochopení problému. Nebo se snažíš do jedné položky schovat půl produktu. To je běžné. A přesně proto má slot mít hranice.
+
+### Definuj výstup, vstup i stop signály
+
+Roadmapový slot potřebuje tři typy kritérií.
+
+**Vstupní kritéria:** bez nich slot nesmí začít. Například: máme ověřený problém u tří zákazníků, známe datové dopady, máme návrh UX, víme, kdo bude testovat.
+
+**Výstupní kritéria:** podle nich poznáš, že je slot hotový. Například: zákazník umí exportovat report bez supportu, dokumentace je aktualizovaná, audit log zachytí stažení exportu, staré ruční kroky jsou zrušené.
+
+**Stop signály:** podmínky, kdy práci zastavíš nebo zmenšíš. Například: potřebovali bychom ukládat víc osobních dat, než dává smysl; zákaznický problém se ukáže jako okrajový; implementace by rozbila jednoduchý model oprávnění.
+
+Stop signály nejsou pesimismus. Jsou brzdy na produktový autopilot. Bez nich tým často pokračuje jen proto, že už začal.
+
+### Komunikuj závazek opatrně
+
+Roadmapa snadno vyrobí sliby, které tým nechtěl dát. Slova jako „brzy“, „v Q4“, „už pracujeme“ nebo „bude příští měsíc“ mají pro zákazníka váhu. Používej je jen tehdy, když za nimi stojí reálný slot a kapacita.
+
+Bezpečnější komunikační vrstvy:
+
+- **Zvažujeme:** rozumíme problému, ale není závazek.
+- **Prozkoumáváme:** sbíráme scénáře a dopady.
+- **Plánujeme:** slot má vlastníka a pravděpodobný cyklus.
+- **Stavíme:** práce běží a rozsah je uzavřený.
+- **Dostupné pro test:** vybraní zákazníci mohou zkoušet.
+- **Vydáno:** funkce je dokumentovaná, podporovaná a měřená.
+
+Tohle není slovíčkaření. Je to prevence ztráty důvěry. Zákazník odpustí, že něco není hotové. Hůř odpouští, když má pocit, že mu tým prodal mlhu s termínem.
+
+### Privacy-first review před začátkem práce
+
+Každý slot, který sahá na data, oprávnění, exporty, integrace, notifikace nebo analytiku, musí projít krátkým privacy-first review. Ne až před releasem. Před začátkem práce.
+
+Zeptej se:
+
+- Jaká nová data vzniknou?
+- Jsou osobní, zákaznická, provozní nebo jen agregovaná?
+- Kdo k nim bude mít přístup?
+- Potřebujeme změnit dokumentaci, DPA, subprocesory nebo retenční pravidla?
+- Dá se řešení postavit s menším datovým rozsahem?
+- Má zákazník kontrolu nad exportem, smazáním nebo vypnutím funkce?
+- Přidáváme závislost na dodavateli mimo Evropu nebo mimo současný důvěryhodný provozní model?
+
+Výsledek review má být krátký zápis. Pokud je odpověď „nevíme“, slot ještě není připravený. A pokud je odpověď „potřebujeme sledovat každého uživatele detailně“, Cody zvedá obočí tak vysoko, že by se na něm dala sušit dokumentace.
+
+### Rozděl release na interní, beta a veřejný krok
+
+Ne každá věc musí jít rovnou všem. U citlivějších změn je lepší tříkrokový release:
+
+1. **Interní ověření:** tým projde scénář se syntetickými nebo anonymizovanými daty.
+2. **Beta s vybranými zákazníky:** testují lidé, kteří problém opravdu mají a chápou omezení.
+3. **Veřejné vydání:** funkce má dokumentaci, support poznámky, changelog a jasné limity.
+
+Beta není výmluva pro polotovar. Je to řízené učení. Musí mít časové omezení, seznam očekávaných otázek a rozhodnutí, co se stane po skončení: vydat, zmenšit, přepracovat nebo zahodit.
+
+### Roadmapový slot musí mít komunikaci zpět
+
+Pokud slot vznikl z feedbacku, zavři smyčku. Nestačí vydat funkci a doufat, že si toho zákazník všimne mezi fakturou, fakturou a další fakturou.
+
+Připrav tři zprávy:
+
+- **Pro zákazníky, kteří dali signál:** „Řešili jsme problém, který jste popisovali. Tady je, co je nové, co to řeší a co zatím ne.“
+- **Pro support a obchod:** stručný interní popis scénáře, limitů a odpovědí na časté otázky.
+- **Pro changelog / dokumentaci:** veřejný text bez interního chaosu, bez slibů navíc a bez sběru zbytečných dat.
+
+Dobrá komunikace neříká jen „přidali jsme export“. Říká „zkrátili jsme měsíční předání účetní a export záměrně neobsahuje interní poznámky techniků“. To je rozdíl mezi funkcí a důvěryhodným produktem.
+
+### Checklist: roadmapový slot z rozhodnutí
+
+- [ ] Slot navazuje na konkrétní rozhodovací kartu nebo validovaný problém.
+- [ ] Název slotu popisuje výsledek zákazníka, ne jen funkci.
+- [ ] Je jasné, pro jaký segment a scénář slot existuje.
+- [ ] Tým ví, co do rozsahu nepatří.
+- [ ] Existují vstupní, výstupní a stop kritéria.
+- [ ] Privacy-first review proběhlo před začátkem práce.
+- [ ] Je určen vlastník, tester a komunikační vlastník.
+- [ ] Release má plán: interní ověření, beta nebo rovnou veřejné vydání.
+- [ ] Support a obchod vědí, co říkat a co neslibovat.
+- [ ] Po vydání je naplánované vyhodnocení dopadu.
+
+### Šablona: roadmapový slot
+
+```markdown
+## Roadmapový slot: [výsledek / problém]
+
+### Kontext
+- Navazuje na rozhodnutí / feedback kartu:
+- Segment:
+- Scénář zákazníka:
+- Proč teď:
+
+### Cíl
+- Jednovětý cíl:
+- Očekávaný výsledek pro zákazníka:
+- Očekávaný výsledek pro byznys:
+
+### Rozsah
+- Děláme:
+- Neděláme:
+- Závislosti:
+- Rizika:
+
+### Kritéria
+- Vstupní kritéria:
+- Výstupní kritéria:
+- Stop signály:
+
+### Privacy-first review
+- Nová data:
+- Přístupy a role:
+- Retence / export / mazání:
+- Dokumentace nebo DPA změny:
+- Dodavatelé / integrace:
+
+### Release
+- Interní ověření:
+- Beta / pilot:
+- Veřejné vydání:
+- Changelog:
+- Support poznámky:
+
+### Vyhodnocení
+- Metrika nebo signál úspěchu:
+- Datum review:
+- Co jsme se naučili:
+- Další rozhodnutí:
+```
+
 ## Pracovní log
+- **2026-09-16:** Doplněna příloha DI o převodu produktového rozhodnutí do roadmapového slotu: vrstvy roadmapy, formulace slotu podle zákaznického výsledku, kapacita, vstupní/výstupní/stop kritéria, opatrná komunikace závazků, privacy-first review před vývojem, postup releasu, komunikace zpět, checklist a šablona roadmapového slotu.
 - **2026-09-16:** Doplněna příloha DH o převodu feedbacku na produktové rozhodnutí bez scope creepu: práce s problémem místo požadavku, varianty menší než nová funkce, typy rozhodnutí, privacy-first filtr, mini-memo, odmítání požadavků, checklist a šablona rozhodovací karty.
 - **2026-09-16:** Doplněna příloha DG o zákaznickém feedback loopu bez nekonečných dotazníků: zdroje signálů, triage, privacy-first práce s poznámkami, prioritizace, uzavírání smyčky a šablona feedback karty.
 - **2026-09-16:** Doplněna příloha DF o referenčním příběhu po prvním placeném kvartálu: průběžný sběr podkladů, úrovně interní/anonymizované/veřejné případovky, otázky na změnu práce, struktura case study, opatrná práce s čísly, schvalování, bezpečné screenshoty, privacy-first distribuce, checklist a šablona referenční karty.
