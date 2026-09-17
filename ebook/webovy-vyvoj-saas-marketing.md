@@ -24542,7 +24542,170 @@ Privacy-first není brzda follow-upu. Je to filtr, který zabrání tomu, aby se
 - Rozhodnutí po kontrole: ponechat / iterovat / zrušit / znovu otevřít
 ```
 
+
+## Příloha EK: Automatizace týmové práce bez robotického chaosu a interního dohledu
+
+Automatizace v malém SaaS týmu má být jako dobrý parťák: připomene, připraví, zkontroluje a ušetří opakování. Nemá být jako hyperaktivní kancelářský skřítek, který každé tři minuty pošle notifikaci, přesune ticket, vyrobí komentář a ještě se tváří, že právě zvýšil produktivitu. Špatná automatizace nezrychluje práci. Jen zrychluje šíření nepořádku.
+
+Dobrá automatizace začíná nudnou otázkou: které opakované rozhodnutí, předání nebo kontrola bere týmu energii a má dost jasná pravidla, aby ji šlo bezpečně převést do systému? Pokud odpověď zní „nevíme přesně, ale AI to nějak vyřeší“, zastav. Nejdřív pojmenuj proces. Automatizovat chaos je jen dražší chaos s hezčím logem.
+
+> Codyho komentář: Automatizace není strategie. Je to zesilovač. Když zesílíš dobrý proces, tým si oddychne. Když zesílíš špatný proces, dostaneš orchestrující peklo s webhooky. Gratuluju, vyrobil jsi interní techno.
+
+### Začni seznamem opakování
+
+Než vybereš nástroj, napiš si týdenní inventuru opakovaných činností. Nehledej hned „AI use-casy“. Hledej věty, které tým říká pořád dokola:
+
+- „Zase jsme zapomněli poslat follow-up.“
+- „Kdo má aktualizovat changelog?“
+- „Proč support neví, že se to změnilo?“
+- „Kde je poslední verze exportu?“
+- „Kdo má zkontrolovat nové subprocesory?“
+- „Proč se release zase řeší ručně v pěti vláknech?“
+
+Z každé věty udělej kandidáta na automatizaci. Potom ho ohodnoť podle tří kritérií: četnost, riziko chyby a jasnost pravidel. Nejlepší první automatizace nejsou ty nejvíc sexy. Jsou to ty, které se dějí často, mají jasný spouštěč a když selžou, stojí tým zbytečný čas.
+
+Příklad dobrého kandidáta: po uzavření rozhodovací karty se automaticky vytvoří checklist pracovních, dokumentačních a komunikačních kroků. Spouštěč je jasný, výstup je předvídatelný a tým pořád drží kontrolu nad obsahem.
+
+Příklad špatného kandidáta: systém automaticky mění priority roadmapy podle počtu zmínek ve Slacku. To není produktové řízení. To je anketa mezi nejhlasitějšími lidmi s API klíčem.
+
+### Automatizuj předání, ne úsudek
+
+V malém týmu je největší úspora často v předávkách. Ne v tom, že systém rozhodne za lidi, ale že připraví správný kontext na správném místě. Automatizace má vytáhnout práci z lidské paměti do procesu.
+
+Dobré oblasti pro začátek:
+
+- **Release:** po dokončení změny připravit draft changelogu, připomenout aktualizaci nápovědy a přidat kontrolu support makra.
+- **Support:** z označeného ticketu vytvořit produktový signál bez kopírování osobních údajů.
+- **Onboarding:** po založení účtu připravit interní kartu zákazníka s minimem potřebných dat a jasným vlastníkem.
+- **Incident:** po změně stavu incidentu připravit další komunikační krok a odkaz na runbook.
+- **Vendor review:** jednou za kvartál připomenout kontrolu subprocesorů, přístupů a retenčních pravidel.
+- **Rozhodnutí:** po verdiktu založit navazující úkoly a připomenout datum vyhodnocení.
+
+Úsudek zůstává u lidí. Automatizace může navrhnout, předvyplnit, zkontrolovat nebo upozornit. Nemá sama rozhodovat o cenách, mazání dat, přístupech, smluvních závazcích nebo zákaznické komunikaci bez lidského schválení.
+
+### Každý automat má mít vlastníka
+
+Automatizace bez vlastníka stárne rychleji než landing page s textem „již brzy“. Někdo musí vědět, proč existuje, kde běží, co dělá, jak se vypne a jak poznat, že škodí.
+
+U každé automatizace eviduj:
+
+- **Účel:** jaký konkrétní problém řeší.
+- **Spouštěč:** co ji zapne.
+- **Výstup:** co přesně vytvoří, změní nebo pošle.
+- **Vlastník:** kdo odpovídá za funkčnost a revizi.
+- **Datový rozsah:** s jakými daty pracuje.
+- **Bezpečnostní brzda:** kdy se automatizace zastaví nebo předá člověku.
+- **Revize:** kdy se kontroluje, jestli pořád dává smysl.
+
+Bez vlastníka se z automatu stane duch v systému. Občas něco udělá, všichni se leknou a nikdo neví, jestli je to chyba, funkce nebo rituál z roku 2024.
+
+### Privacy-first automatizace sbírá minimum
+
+Automatizace svádí ke kopírování dat mezi nástroji. „Pošleme to i sem, ať je to pohodlné.“ Přesně tady vzniká datový cirkus. Jeden support ticket se objeví v projektovém nástroji, poznámkách, AI promptu, CRM, interním chatu a exportu pro reporting. Pak se někdo zeptá na smazání dat a tým zjistí, že osobní údaj má víc životů než kočka.
+
+Privacy-first pravidla:
+
+- Nepřenášej celé zprávy, když stačí odkaz na původní záznam.
+- Nekopíruj osobní údaje do úkolů, pokud nejsou nutné pro práci.
+- Před odesláním do AI nebo externí služby používej anonymizovaný souhrn.
+- Rozliš interní provozní data, zákaznická data a citlivé údaje.
+- Loguj jen to, co potřebuješ pro ladění a audit.
+- Nastav retenci výstupů automatu stejně pečlivě jako retenci původních dat.
+- U každé integrace si napiš, kdo je správcem, kdo zpracovatelem a kde data končí.
+
+Praktický vzor: místo aby automat zkopíroval celé znění zákaznického e-mailu do issue, vytvoří úkol „Prověřit opakovaný požadavek na export fakturačních položek“, přidá interní kategorii, agregovaný dopad a odkaz na původní ticket v support systému. Vývojář dostane kontext, ale ne zbytečnou osobní stopu.
+
+### Notifikace jsou náklad, ne bonus
+
+Každá notifikace někoho vytrhne. Automatizace, která posílá hodně zpráv, může snadno vyrobit víc rušení než užitku. Proto nastav pravidlo: automat má informovat jen tehdy, když zpráva vyžaduje akci, rozhodnutí nebo vědomé potvrzení.
+
+Tři úrovně automatických výstupů:
+
+- **Tichý záznam:** změna se jen zapíše do systému nebo logu.
+- **Digest:** více událostí se shrne jednou denně nebo týdně.
+- **Okamžitá notifikace:** pouze pro blokery, incidenty, bezpečnostní rizika nebo termíny s jasným vlastníkem.
+
+Příklad: automat pro obsahový systém nemusí hlásit každé vytvoření návrhu článku. Stačí týdenní digest: co bylo publikováno, co čeká na review, co nemá vlastníka a co potřebuje zdroj. Naopak automat pro incidentovou komunikaci má upozornit hned, protože čas je součást problému.
+
+### Testuj automatizaci na malém provozu
+
+Novou automatizaci nenasazuj rovnou jako železné pravidlo. Nejprve ji nech běžet v „draft“ režimu. Ať připravuje návrhy, které člověk schválí. Po dvou týdnech zkontroluj, kolikrát návrh pomohl, kolikrát byl špatně a kolik času reálně ušetřil.
+
+Dobré metriky nejsou počet spuštění ani počet vytvořených úkolů. To jsou jen konfety. Sleduj raději:
+
+- kolik ručního kopírování zmizelo,
+- kolik follow-upů se neztratilo,
+- kolik chyb automat zachytil před zákazníkem,
+- kolik notifikací bylo skutečně akčních,
+- kolikrát bylo potřeba zásah člověka,
+- zda automatizace snížila nebo zvýšila množství osobních dat v nástrojích.
+
+Po testu rozhodni: ponechat, upravit, rozšířit nebo smazat. Smazání automatizace je legitimní úspěch, pokud tým zjistí, že nepomáhá. Ne každý webhook si zaslouží důchodový plán.
+
+### Checklist: automatizace bez chaosu
+
+- Má automatizace jeden jasný pracovní problém?
+- Je spouštěč jednoznačný a ověřitelný?
+- Je výstup konkrétní, dohledatelný a vratný?
+- Existuje vlastník automatu?
+- Ví tým, jak automatizaci vypnout?
+- Zůstává úsudek u člověka tam, kde jde o zákazníky, peníze, práva nebo data?
+- Přenáší se jen minimální potřebná data?
+- Neobsahují výstupy zbytečné osobní údaje?
+- Má automatizace tichý režim, digest nebo jasně omezené notifikace?
+- Proběhl test v draft režimu před ostrým nasazením?
+- Existuje datum revize?
+- Je automatizace zdokumentovaná v interní wiki nebo provozním seznamu?
+
+### Šablona: karta automatizace
+
+```markdown
+## Automatizace: [název]
+
+### Problém
+- Jaká opakovaná práce mizí:
+- Jak často se děje:
+- Jaké riziko vzniká bez automatu:
+
+### Spouštěč
+- Událost / stav / čas:
+- Podmínky spuštění:
+- Kdy se automat nespustí:
+
+### Výstup
+- Co automat vytvoří nebo změní:
+- Kde je výstup vidět:
+- Kdo výstup schvaluje:
+
+### Vlastnictví
+- Vlastník automatu:
+- Záložní osoba:
+- Kde je dokumentace:
+- Jak se automat vypne:
+
+### Privacy-first kontrola
+- Použitá data:
+- Osobní údaje:
+- Minimalizace / anonymizace:
+- Retence výstupů:
+- Externí služby nebo subprocesoři:
+
+### Notifikace
+- Tichý záznam / digest / okamžitá zpráva:
+- Komu se posílá:
+- Kdy je zpráva akční:
+
+### Test a revize
+- Draft režim od–do:
+- Měřený přínos:
+- Známé chyby:
+- Rozhodnutí po testu: ponechat / upravit / rozšířit / smazat
+- Datum další revize:
+```
+
 ## Pracovní log
+
+- **2026-09-17:** Doplněna příloha EK o automatizaci týmové práce bez robotického chaosu: výběr opakovaných procesů, automatizace předávek místo úsudku, vlastnictví automatů, privacy-first minimalizace dat, notifikační pravidla, test v draft režimu, checklist a karta automatizace.
 
 - **2026-09-17:** Doplněna příloha EJ o převodu rozhodnutí do konkrétní práce: výstupní balíček, rozdělení pracovní/paměťové/komunikační stopy, vlastnictví follow-upu, Definition of Done pro rozhodnutí, kontrolní bod, privacy-first kontrola, checklist a follow-up karta.
 
