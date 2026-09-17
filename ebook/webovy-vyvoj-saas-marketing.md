@@ -20467,7 +20467,173 @@ U veřejných změn můžeš část učení převést i do changelogu nebo člá
 - Dopad na roadmapu:
 ```
 
+## Příloha DN: Produktový dluh po releasu bez tichého bahna
+
+Každý release něco zlepší a skoro každý release po sobě něco nechá. Nedokončený edge case. Dočasné copy. Ruční workaround v supportu. Feature flag, který měl být odstraněný „příští týden“. Produktový dluh není ostuda. Ostuda je dělat, že neexistuje, dokud se z něj nestane bažina, ve které tým ztratí boty, roadmapu i chuť žít.
+
+Produktový dluh je rozdíl mezi tím, jak produkt funguje dnes, a tím, jak by měl fungovat, aby se dal bezpečně provozovat, vysvětlit, prodávat a rozvíjet. Není to jen technický dluh. Patří sem i nejasné UX, staré nápovědy, ruční procesy, neuklizená data, slabé interní nástroje a rozhodnutí, která kdysi dávala smysl, ale dnes už jen zabírají místo.
+
+> Codyho komentář: Produktový dluh je jako šuplík s kabely. Jeden kabel navíc nevadí. Po roce už tam najdeš nabíječku k Nokii, tři HDMI adaptéry a vlastní pochybnosti.
+
+### Dluh pojmenuj hned po releasu
+
+Nejlepší čas zapsat produktový dluh je ve chvíli, kdy je ještě čerstvý. Tým si pamatuje, proč kompromis vznikl, jaké měl alternativy a co by se mělo dodělat. Po třech měsících už zůstane jen neurčité „to je nějaký divný, radši na to nesahej“.
+
+Po každém větším releasu si polož tři otázky:
+
+- **Co jsme vědomě zjednodušili, aby release mohl ven?**
+- **Co dnes funguje jen díky ruční práci, workaroundu nebo trpělivosti zákazníka?**
+- **Co bude dražší opravit za měsíc než tento týden?**
+
+Zápis nemusí být dlouhý. Stačí název, dopad, vlastník, riziko a návrh dalšího kroku. Důležité je, aby dluh nebyl schovaný v hlavě jednoho vývojáře nebo v komentáři u uzavřeného pull requestu.
+
+### Rozliš typy produktového dluhu
+
+Jeden seznam „TODO někdy“ je hřbitov dobrých úmyslů. Produktový dluh rozděl podle toho, jaký dopad má na zákazníka a tým:
+
+- **UX dluh:** uživatel se v produktu zbytečně ztrácí, potřebuje nápovědu nebo dělá chyby.
+- **Provozní dluh:** tým musí něco ručně kontrolovat, opravovat, importovat nebo vysvětlovat.
+- **Datový dluh:** pole, exporty, logy nebo retence neodpovídají tomu, co produkt slibuje.
+- **Obchodní dluh:** pricing, onboarding nebo sales materiály slibují víc, než produkt doručuje.
+- **Dokumentační dluh:** nápověda, changelog nebo interní runbooky neodpovídají realitě.
+- **Technický dluh:** kód, architektura, testy nebo infrastruktura brzdí bezpečný vývoj.
+
+Tohle členění brání tomu, aby všechno skončilo u vývoje. Některý dluh opraví produktový text, některý support makro, některý pricing stránka a některý opravdu refaktor. Když všechno označíš jako technický dluh, produkt se tváří, že za něj může jen kód. To je pohodlné, ale málokdy pravdivé.
+
+### Každý dluh musí mít dopad, ne jen název
+
+„Uklidit onboarding“ není dobrý záznam. Nikdo neví, co znamená uklidit, proč na tom záleží a kdy je hotovo. Lepší záznam vypadá takto:
+
+- **Název:** onboarding po importu CSV neukazuje další krok.
+- **Dopad na zákazníka:** nový zákazník po importu neví, jestli má pozvat tým, nebo nastavit první projekt.
+- **Dopad na tým:** support posílá ruční e-mail s návodem asi u každého třetího pilotu.
+- **Riziko:** nižší aktivace a více dotazů v prvním týdnu.
+- **Návrh:** doplnit prázdný stav, checklist a krátký odkaz do nápovědy.
+- **Stop kritérium:** pokud za dva týdny nepřijdou další dotazy k tomuto kroku, stačí textová oprava.
+
+Dopad chrání backlog před kosmetickým perfekcionismem. Ne každý špatně pojmenovaný button je krize. Ale button, kvůli kterému zákazník smaže data místo exportu, je kandidát na okamžitou opravu a možná i kafe bez kofeinu, protože tým už ho má dost.
+
+### Nedělej z dluhu druhou roadmapu
+
+Produktový dluh se nemá tvářit jako paralelní tajná roadmapa. Pokud má vlastní priority, vlastní seznam a vlastní porady, vznikne konflikt: nové funkce proti úklidu. Lepší je dluh napojit na běžný plán práce.
+
+Praktický rytmus:
+
+1. Po releasu zapiš nové položky dluhu do jednoduchého registru.
+2. Jednou týdně označ položky s vysokým rizikem pro zákazníka, bezpečnost nebo provoz.
+3. Při plánování sprintu nebo týdenní práce vyber jednu až tři položky, které souvisí s aktuální oblastí produktu.
+4. U větších položek vytvoř normální produktové rozhodnutí nebo roadmapový slot.
+5. Jednou měsíčně archivuj položky, které už nejsou relevantní.
+
+Dluh se nejlépe splácí tam, kde tým právě pracuje. Když upravuješ billing, ukliď i billing copy, starý export a nápovědu. Když měníš onboarding, zavři i ruční workaroundy v supportu. Kontext je levnější než heroický „debt week“, po kterém všichni slíbí, že už nikdy.
+
+### Privacy-first dluh je zvláštní priorita
+
+Privacy-first provoz má vlastní druh dluhu: data, která už nepotřebuješ, souhlasy bez jasného účelu, staré exporty, příliš dlouhé retenční lhůty, interní přístupy bez vlastníka nebo logy s citlivými údaji. Tenhle dluh je nebezpečný, protože často není vidět v UI. Zákazník netuší, že problém existuje, dokud není pozdě.
+
+Privacy-first položky si zaslouží vyšší prioritu, pokud:
+
+- zpracováváš více údajů, než produkt potřebuje,
+- data zůstávají v systému déle, než je domluvený účel,
+- interní tým má širší přístup, než potřebuje,
+- export nebo log obsahuje údaje, které nemají opustit původní kontext,
+- dokumentace a realita se rozešly.
+
+Tady nečekej na velký refaktor. Často pomůže malý zásah: zkrátit retenci konkrétního logu, omezit sloupce v exportu, odstranit nepoužívané pole, doplnit vlastnictví přístupu nebo přepsat support postup tak, aby si nevyžadoval screenshot s osobními údaji.
+
+### Ruční workaround má datum expirace
+
+Malý SaaS tým bude mít ruční workaroundy vždycky. To je v pořádku. Problém začíná, když se z dočasného postupu stane neviditelná provozní závislost. Každý workaround proto musí mít expiraci.
+
+Příklad:
+
+- **Workaround:** support ručně spouští reimport dat u zákazníků s velkým CSV.
+- **Vlastník:** support lead.
+- **Expirace:** konec měsíce.
+- **Trigger pro automatizaci:** více než pět reimportů měsíčně nebo jeden zákazník čeká déle než jeden pracovní den.
+- **Bezpečnost:** support nesmí upravovat soubor lokálně; pracuje jen přes interní nástroj s auditní stopou.
+
+Workaround bez expirace je produktová hypotéka. Chvíli ti pomůže koupit čas, ale úroky platíš nervy týmu.
+
+### Měř dluh přes tření, ne přes počet položek
+
+Počet položek v registru dluhu není dobrá metrika. Aktivní tým bude vždycky vytvářet i odhalovat nové položky. Důležitější je tření:
+
+- kolik support dotazů vzniká kvůli známému dluhu,
+- kolik ručních zásahů tým dělá týdně,
+- kolik incidentů nebo bugů souvisí se starým kompromisem,
+- kolik času trvá bezpečně dodat změnu v dané oblasti,
+- kolikrát zákazník narazí na nejasnost ve stejné cestě.
+
+Privacy-first varianta měření: sleduj agregovaně účty, scénáře a typy problémů, ne jednotlivé lidi. Nepotřebuješ vědět, že Jana v úterý třikrát klikla na špatné místo. Potřebuješ vědět, že 40 % nových účtů po importu neudělá další krok a support k tomu má opakovaný dotaz.
+
+### Dluh také maž
+
+Registr dluhu není archiv hanby. Položky mohou zastarat. Některé problémy zmizí změnou produktu, jiné už nejsou důležité, protože segment odešel, workflow se vypnulo nebo zákazníci používají produkt jinak.
+
+Jednou měsíčně projdi starší položky a rozhodni:
+
+- **splácíme teď,** protože dopad je jasný,
+- **spojujeme s plánovanou prací,** protože kontext přijde brzy,
+- **sledujeme,** protože chybí dost signálu,
+- **zavíráme,** protože položka už nedává smysl,
+- **eskalujeme,** protože jde o bezpečnost, právní riziko nebo důvěru.
+
+Mazání není ignorování. Je to údržba systému, aby důležité věci nebyly pohřbené mezi starými poznámkami typu „možná někdy přepsat modal“. Možná jo. Možná taky svět přežije.
+
+### Checklist: produktový dluh po releasu
+
+- [ ] Po releasu proběhlo krátké review kompromisů a workaroundů.
+- [ ] Každá položka dluhu má typ, dopad, vlastníka a návrh dalšího kroku.
+- [ ] Privacy-first položky jsou označené zvlášť a mají jasnou prioritu.
+- [ ] Ruční workaroundy mají datum expirace nebo trigger pro automatizaci.
+- [ ] Dluh se plánuje v kontextu aktuální práce, ne jako paralelní tajná roadmapa.
+- [ ] Měří se tření v supportu, provozu a zákaznické cestě, ne jen počet položek.
+- [ ] Staré a nerelevantní položky se jednou měsíčně zavírají nebo archivují.
+- [ ] Dokumentace, nápověda a changelog se aktualizují spolu s opravou dluhu.
+
+### Šablona: karta produktového dluhu
+
+```markdown
+## Produktový dluh: [název]
+
+### Typ
+- UX / provozní / datový / obchodní / dokumentační / technický
+
+### Kontext
+- Vzniklo při:
+- Proč jsme kompromis přijali:
+- Dotčená část produktu:
+
+### Dopad
+- Dopad na zákazníka:
+- Dopad na tým:
+- Riziko při odkladu:
+
+### Privacy-first kontrola
+- Týká se osobních nebo zákaznických dat?
+- Existuje nadbytečný sběr, přístup, log nebo export?
+- Jaké minimum dat stačí pro opravu?
+
+### Návrh dalšího kroku
+- Malá oprava:
+- Větší varianta:
+- Stop kritérium:
+
+### Vlastnictví
+- Vlastník:
+- Termín review:
+- Vazba na roadmapu / release:
+
+### Uzavření
+- Rozhodnutí:
+- Co se změnilo:
+- Co jsme se naučili:
+```
+
 ## Pracovní log
+
+- **2026-09-17:** Doplněna příloha DN o produktovém dluhu po releasu: rozlišení typů dluhu, zápis dopadu, napojení na roadmapu, privacy-first priorita, expirace workaroundů, měření tření, měsíční úklid, checklist a karta produktového dluhu.
 - **2026-09-16:** Doplněna příloha DM o post-release review bez vanity metrik: plánování vyhodnocení před releasem, měření výsledku/tření/důvěry, privacy-first agregace, review rytmus, explicitní rozhodnutí, support digest, dokumentace učení, checklist a review karta.
 - **2026-09-16:** Doplněna příloha DL o úklidu starého workflow po adopci nové funkce: rozlišení ztišení/zmrazení/ukončení, migrační mapa, komunikace podle dopadu, privacy-first úklid dat, kvalitativní měření, rollback myšlenka, aktualizace dokumentace, checklist a karta úklidu workflow.
 - **2026-09-16:** Doplněna příloha DK o adopci nové funkce bez produktového stalkingu: definice adopce jako pracovního výsledku, mapa adopční cesty, agregované měření po účtech a scénářích, kontextová pomoc, zapojení správných rolí, práce s neadopcí, dvoutýdenní review, checklist a adopční karta.
