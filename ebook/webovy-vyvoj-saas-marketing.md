@@ -23327,7 +23327,176 @@ Každé školení měj v katalogu s názvem, cílem, vlastníkem, poslední revi
 - Navazující úkol:
 ```
 
+## Příloha ED: Kompetenční mapa týmu bez HR tabulky a interního dohledu
+
+Malý SaaS tým nepotřebuje korporátní matici se sto políčky, barevnými kolečky a tajemným skóre „strategická agilita 3/5“. Potřebuje vědět, kdo umí bezpečně rozhodnout, kdo potřebuje oporu, kde hrozí úzké hrdlo a co se musí naučit dřív, než tým přidá další zákazníky nebo funkce.
+
+Kompetenční mapa není nástroj na hodnocení lidí. Je to provozní mapa rizik a růstu. Když se používá špatně, stane se z ní tabulka pro mikromanagement. Když se používá dobře, pomáhá plánovat onboarding, školení, párování, zastupitelnost a nábor bez paniky.
+
+> Codyho komentář: Pokud se člověk dozví o své „kompetenční mezeře“ poprvé v hodnotícím formuláři, není to mapa. Je to past s pastelovým designem.
+
+### Mapuj schopnosti podle práce, ne podle titulů
+
+Začni tím, co tým reálně dělá. Ne tím, jak se jmenují role na LinkedInu. U malého SaaS bývají důležité schopnosti napříč funkcemi:
+
+- pochopit zákaznický problém a převést ho do produktu,
+- navrhnout bezpečné datové toky,
+- upravit landing page bez rozbití SEO,
+- vyřešit incident v první hodině,
+- napsat srozumitelný support follow-up,
+- připravit release poznámky,
+- zkontrolovat privacy dopad nové integrace,
+- rozhodnout, co se do sprintu nevejde.
+
+Každou schopnost napiš jako pozorovatelné chování. „Zná backend“ je mlha. „Umí navrhnout změnu databázového schématu, napsat migraci, připravit rollback a vysvětlit dopad na zákaznická data“ už je použitelný popis.
+
+Dobrá kompetenční mapa odpovídá na otázku: **když se tato práce objeví zítra, kdo ji zvládne bezpečně, kdo s podporou a kdo se ji má naučit?**
+
+### Použij tři úrovně místo falešné přesnosti
+
+Číselné škály často vypadají vědecky, ale v malém týmu spíš vytváří hádky. Rozdíl mezi 3 a 4 z 5 nikdo nedokáže konzistentně vysvětlit. Lepší jsou tři praktické úrovně:
+
+- **Učí se:** člověk rozumí kontextu, ale potřebuje vedení, review nebo párování.
+- **Dělá samostatně:** zvládne běžný případ, ví kdy eskalovat a umí výsledek zdokumentovat.
+- **Učí ostatní:** zvládne nestandardní případy, zlepšuje postup a předává znalost dál.
+
+Tahle škála je užitečná, protože vede k akci. Když je někdo ve fázi „učí se“, plánuješ párování a menší úkoly. Když dělá samostatně, dostává vlastnictví běžné práce. Když učí ostatní, nesmí zůstat jediným nositelem znalosti — jeho práce má vytvářet dokumentaci, šablony a lepší systém.
+
+### Odděl kompetenci od kapacity
+
+Někdo může umět incidenty skvěle řešit, ale nemá na ně kapacitu. Někdo může být schopný mentor, ale aktuálně táhne release a support. Kompetenční mapa proto nesmí automaticky znamenat přidělení práce.
+
+U každé kritické oblasti rozliš:
+
+- **schopnost:** člověk práci umí,
+- **dostupnost:** má na ni v daném období prostor,
+- **vlastnictví:** má právo rozhodovat,
+- **zástup:** někdo jiný zvládne nouzový režim,
+- **riziko:** co se stane, když člověk vypadne.
+
+Tohle chrání seniorní lidi před tichým trestem za kompetenci. Nejlepší člověk na problém nemá být automaticky hasičem všeho. Jinak tým neškáluje schopnosti, jen přetěžuje nejspolehlivější lidi.
+
+### Privacy-first kompetenční mapa
+
+Kompetenční mapa obsahuje citlivý interní kontext. Ne proto, že by byla právně vždy zvláštní kategorií dat, ale protože může ovlivnit důvěru, kariéru a vyjednávací pozici lidí. Proto s ní zacházej jako s interním dokumentem s omezeným přístupem.
+
+Pravidla:
+
+- zapisuj schopnosti vztahující se k práci, ne osobnostní soudy,
+- nepiš diagnózy typu „není dost strategický“ nebo „má slabou energii“,
+- uveď vlastníka dokumentu a datum revize,
+- omez přístup na lidi, kteří mapu opravdu potřebují,
+- nepoužívej mapu jako skrytý podklad pro trestání,
+- po změně role nebo odchodu člověka mapu aktualizuj,
+- pracovní poznámky z rozvojových rozhovorů neukládej déle, než je potřeba.
+
+Privacy-first přístup tady neznamená, že se o dovednostech nesmí mluvit. Znamená, že se z nich nestane interní sledovací systém. Lidé mají vědět, co je v mapě napsané, proč to existuje a jak se údaj používá.
+
+### Najdi single points of failure
+
+Kompetenční mapa má rychle ukázat místa, kde tým stojí na jednom člověku. Typické rizikové oblasti:
+
+- produkční deploy a rollback,
+- billing a fakturační výjimky,
+- přístup k hostingovým účtům,
+- privacy dokumentace a subprocesor list,
+- incidentová komunikace,
+- klíčové zákaznické demo,
+- obsahový publikační proces,
+- technická rozhodnutí kolem databáze.
+
+U každé oblasti si polož tři otázky:
+
+1. Kdo to umí dnes udělat bezpečně?
+2. Kdo zvládne nouzový postup podle runbooku?
+3. Co musíme napsat, nacvičit nebo automatizovat, aby zástup nebyl divadlo?
+
+Pokud je odpověď na první otázku jedno jméno a na druhou ticho, máš provozní dluh. Ne nutně katastrofu, ale dluh, který se má objevit v plánu práce.
+
+### Propoj mapu s učením, ne s ročním hodnocením
+
+Kompetenční mapa má být živý nástroj pro týdenní a měsíční plánování. Nepatří do šuplíku „HR ceremonie“. Používej ji při:
+
+- plánování onboardingových úkolů,
+- výběru témat interního školení,
+- sestavování dvojic na párování,
+- rozhodování, kdo povede incident nebo demo,
+- přípravě náborového profilu,
+- revizi bus factor rizik,
+- návrhu automatizací a šablon.
+
+Rozvojový plán nemusí mít dvacet cílů. Stačí jeden konkrétní posun za měsíc: „Jana zvládne samostatně připravit release poznámky podle šablony“, „Petr projde s Martinem jeden billing edge case“, „Lucka převezme nouzový runbook pro status page“.
+
+### Aktualizuj mapu po skutečné práci
+
+Nejhorší moment pro aktualizaci kompetenční mapy je dlouhý meeting, kde si lidé z paměti vzpomínají, co kdo asi umí. Lepší je aktualizovat ji po konkrétní práci:
+
+- po incidentu,
+- po release,
+- po prvním samostatném demo callu,
+- po dokončeném interním školení,
+- po předání znalosti,
+- po support eskalaci,
+- po úspěšném onboardingu nového člověka.
+
+Změna v mapě má být doložená pozorováním, ne dojmem. „Zvládl samostatně obnovu testovací zálohy podle runbooku“ je lepší než „působí jistěji“. Praktický důkaz je laskavější i přesnější.
+
+### Checklist: kompetenční mapa bez šmírování
+
+- [ ] Mapa vychází z reálné práce, ne z obecných titulů.
+- [ ] Každá schopnost je popsaná jako pozorovatelné chování.
+- [ ] Používají se tři akční úrovně: učí se, dělá samostatně, učí ostatní.
+- [ ] Kompetence je oddělená od kapacity a vlastnictví.
+- [ ] Kritické oblasti mají aspoň nouzový zástup nebo plán jeho vytvoření.
+- [ ] Dokument má vlastníka, datum revize a omezený přístup.
+- [ ] Lidé vědí, co je o nich v mapě napsané a proč.
+- [ ] Mapa se používá k učení, onboardingu a snižování rizik, ne k tichému trestání.
+- [ ] Privacy-first pravidla brání osobnostním soudům a zbytečným poznámkám.
+- [ ] Po každém větším incidentu, release nebo předání znalosti proběhne krátká aktualizace.
+
+### Šablona: karta kompetenční oblasti
+
+```markdown
+## Kompetenční oblast: [název]
+
+### Proč je důležitá
+- Dopad na produkt / zákazníka:
+- Riziko při výpadku:
+- Související runbooky / dokumentace:
+
+### Pozorovatelné schopnosti
+- Schopnost 1:
+- Schopnost 2:
+- Schopnost 3:
+- Co sem nepatří:
+
+### Lidé a úroveň
+- Učí se:
+- Dělá samostatně:
+- Učí ostatní:
+- Nouzový zástup:
+
+### Kapacita a vlastnictví
+- Aktuální vlastník:
+- Kdo má čas pomáhat:
+- Kdo je přetížený:
+- Co nesmí stát na jednom člověku:
+
+### Privacy-first kontrola
+- Kdo má k mapě přístup:
+- Jaké poznámky se nesmí zapisovat:
+- Datum poslední revize:
+- Kdy se údaje mažou nebo zjednodušují:
+
+### Rozvojový krok
+- Nejbližší praktický úkol:
+- Párování / školení:
+- Kritérium samostatnosti:
+- Kdy mapu aktualizujeme:
+```
+
 ## Pracovní log
+- **2026-09-17:** Doplněna příloha ED o kompetenční mapě týmu bez HR tabulky a interního dohledu: schopnosti podle práce, tři akční úrovně, oddělení kompetence od kapacity, privacy-first zacházení s interními poznámkami, hledání single points of failure, propojení s učením, checklist a karta kompetenční oblasti.
 - **2026-09-17:** Doplněna příloha EC o interním školení bez slide divadla: pracovní výsledek před tématem, scénáře z reality, krátký aktivní formát, aktualizace systému po školení, privacy-first tréninkové materiály, ověření místo docházky, opakovatelný rytmus, checklist a karta školení.
 - **2026-09-17:** Doplněna příloha EB o předávání znalostí bez bus factor paniky: mapa kritických znalostí, rozlišení faktů/rozhodnutí/dovedností, vrstvené runbooky, privacy-first tréninkové materiály, párování na úsudek, měření samostatnosti, checklist a karta předání znalosti.
 - **2026-09-17:** Doplněna příloha EA o udržení seniorního člověka bez zlaté klece: kontrola reality role, konkrétní vliv, ochrana hluboké práce, viditelný mentoring, růstové cesty mimo management, včasné retenční signály, privacy-first interní poznámky, šestiměsíční rytmus, checklist a retenční karta seniora.
