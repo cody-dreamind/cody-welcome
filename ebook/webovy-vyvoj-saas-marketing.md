@@ -4424,7 +4424,7 @@ Nejbezpečnější první krok je interní asistent pro tým. Má menší reputa
 
 - shrnutí dlouhého support vlákna před odpovědí,
 - návrh prvního draftu odpovědi zákazníkovi,
-- vyhledávání v interní dokumentaci a runboocích,
+- vyhledávání v interní dokumentaci a provozních postupech,
 - příprava release notes z changelogu,
 - kontrola textu landing page proti positioningu,
 - návrh testovacích scénářů pro novou funkci.
@@ -21663,8 +21663,164 @@ Ke každému rozhodnutí přidej datum další kontroly. Zrušení pravidla nen�
 - Jak poznáme, že nová verze funguje:
 ```
 
+## Příloha DU: Archivace týmových pravidel bez hřbitova dokumentů
+
+Týmové pravidlo má mít životní cyklus. Vznikne z rozhodnutí, pomáhá v práci, projde revizí a jednoho dne se možná zruší. Jenže zrušené pravidlo často nezmizí čistě. Zůstane v nějaké wiki stránce, staré šabloně issue, onboarding dokumentu, pull request checklistu nebo v hlavě člověka, který před dvěma lety řešil incident. Výsledek? Tým neví, co vlastně platí. Noví lidé dostávají protichůdné instrukce a staré dokumenty se tváří důležitě jen proto, že mají hodně nadpisů.
+
+Archivace pravidel není administrativní pohřeb. Je to údržba důvěryhodnosti interní dokumentace. Pokud tým ví, že staré věci jsou označené, dohledatelné a nepletou se do aktuální práce, začne dokumentaci brát vážněji. A to je pro malý SaaS tým obrovská výhoda: méně opakovaných debat, méně „kde to vlastně máme?“ a méně rozhodnutí podle archeologických vrstev v Notionu.
+
+Codyho komentář: dokumentace bez archivu je jako kuchyňská zásuvka s kabely. Všechno se možná někdy hodí, ale nikdo neví, proč je tam nabíječka k telefonu z roku 2014.
+
+### Rozliš archiv, zrušení a nahrazení
+
+Ne každé staré pravidlo má stejný osud. Před úklidem si ujasni, co se s ním děje:
+
+- **Archivované pravidlo** už není aktivní, ale stojí za to zachovat jeho historii, protože vysvětluje minulá rozhodnutí, incident nebo zákaznický závazek.
+- **Zrušené pravidlo** už nepomáhá a není potřeba ho dál držet jako pracovní ani historický artefakt mimo krátkou poznámku v rozhodovacím deníku.
+- **Nahrazené pravidlo** už neplatí ve staré podobě, ale jeho hodnota pokračuje v nové verzi, jiné šabloně nebo automatizované kontrole.
+- **Sloučené pravidlo** se spojilo s jiným mantinelem, aby tým neměl dvě podobné instrukce na dvou místech.
+
+Toto rozlišení brání tomu, aby se archiv stal jen jemnější verzí nepořádku. Archiv má vysvětlovat minulost, ne řídit přítomnost.
+
+### Aktivní pravidla drž na jednom místě
+
+Než začneš archivovat, vytvoř jednoduchý seznam aktivních pravidel. Nemusí to být velký portál. Stačí stránka „Aktivní týmová pravidla“ s odkazy na aktuální mantinely. Každá položka by měla mít:
+
+- název pravidla,
+- oblast, které se týká,
+- vlastníka,
+- datum poslední revize,
+- odkaz na pracovní místo, kde se pravidlo používá,
+- stav: aktivní / v revizi / nahrazované.
+
+Když existuje jeden autoritativní seznam, můžeš u starých stránek napsat jasně: „Toto pravidlo už není aktivní. Aktuální pravidlo je tady.“ Bez tohoto seznamu bude tým dál googlit ve vlastní wiki a vybírat si pravidla podle nejhezčího názvu. Což je roztomilé, ale nebezpečné.
+
+### Archivovaná stránka musí křičet, že je archivovaná
+
+Archivované pravidlo nesmí vypadat jako aktuální dokument. Na začátek dej výrazný blok:
+
+> **Archivováno:** toto pravidlo už není aktivní od [datum]. Důvod: [stručně]. Aktuální pravidlo / náhrada: [odkaz]. Vlastník archivu: [jméno nebo role].
+
+Tento blok je důležitější než dlouhá historie. Člověk, který stránku najde přes vyhledávání, potřebuje během pěti vteřin vědět, jestli ji má použít. Archiv není detektivka. Návštěvník nemá luštit, jestli „poslední aktualizace 2024“ znamená stabilitu, nebo zapomenutý sklep.
+
+### Odstraň staré odkazy z pracovního toku
+
+Archivace není hotová, dokud staré pravidlo pořád visí v místech, kde tým pracuje. Zkontroluj hlavně:
+
+- šablony issue a pull requestů,
+- release checklisty,
+- onboarding dokumenty,
+- runbooky a incidentové postupy,
+- interní školení a nahrávky,
+- odkazy v knowledge base,
+- automatické komentáře botů,
+- odkazy v produktových nebo obchodních šablonách.
+
+Praktický postup: u každého archivovaného pravidla udělej krátký „link audit“. Vyhledej jeho název, starý slug, klíčovou frázi a odkaz. Všechna pracovní místa přesměruj na aktuální pravidlo nebo odkaz smaž. Historické odkazy v rozhodovacím deníku mohou zůstat, pokud jsou jasně označené jako historie.
+
+### Privacy-first archiv není skládka citlivých dat
+
+U pravidel kolem dat, bezpečnosti a zákaznických závazků pozor na jednu past: archivované dokumenty často obsahují příklady, screenshoty, incidentové detaily nebo jména zákazníků. Když dokument přestane být aktivní, neznamená to, že může dál držet všechno navždy.
+
+Před archivací zkontroluj:
+
+- jestli dokument obsahuje osobní údaje,
+- jestli obsahuje zákaznická jména nebo interní identifikátory,
+- jestli jsou screenshoty anonymizované,
+- jestli staré příklady pořád musí zůstat v plném detailu,
+- jestli archiv neobsahuje přístupové postupy, které už nemají být široce viditelné,
+- kdo archiv může číst.
+
+Často stačí jednoduchá redakce: nahradit jméno zákazníka typem zákazníka, odstranit ID účtu, zkrátit incidentový detail a ponechat poučení. Archiv má držet znalost, ne zbytečná data. Privacy-first hodnota se pozná i podle toho, jak tým zachází se starými dokumenty, ne jen podle nového formuláře na webu.
+
+### Nahrazené pravidlo propoj obousměrně
+
+Když pravidlo nahradíš novým, propojení musí fungovat oběma směry. Starý dokument odkazuje na nový a nový dokument stručně vysvětluje, co nahradil. Díky tomu se dá dohledat kontext bez kopání v historii commitu nebo Slacku.
+
+Dobrá poznámka v novém pravidle může vypadat takto:
+
+> Nahrazuje pravidlo „Kontrola nových integrací“ z 2026-06. Důvod změny: původní pravidlo bylo příliš široké a zpomalovalo technické integrace bez zákaznických dat. Nová verze rozlišuje nízké a vysoké datové riziko.
+
+Taková poznámka šetří budoucí debaty. Když se někdo zeptá „proč jsme to zjednodušili?“, odpověď už existuje.
+
+### Nastav retenční rytmus pro archiv
+
+Archiv není věčný sklad. Jednou za kvartál nebo půl roku projdi archivovaná pravidla a rozděl je do tří skupin:
+
+1. **Ponechat:** pořád vysvětlují důležitý kontext, zákaznický závazek nebo bezpečnostní rozhodnutí.
+2. **Zestručnit:** stačí zachovat shrnutí, důvod a odkaz na následné rozhodnutí.
+3. **Smazat / přesunout do rozhodovacího deníku:** dokument už nemá hodnotu mimo historickou zmínku.
+
+Nemusíš mazat agresivně. Ale když archiv nikdy nečistíš, za rok bude stejně nedůvěryhodný jako původní wiki chaos. Cílem není dokonalá informační architektura. Cílem je, aby se tým nebál dokumenty otevřít.
+
+### Archivace jako součást revize pravidla
+
+Nejlevnější archivace je ta, kterou uděláš hned při rozhodnutí o zrušení nebo nahrazení. Přidej proto do revizní karty pravidla krátkou sekci:
+
+- Co se stane se starým dokumentem?
+- Kde je aktuální náhrada?
+- Které odkazy musíme upravit?
+- Jaké citlivé údaje musíme odstranit?
+- Kdy archiv znovu zkontrolujeme?
+
+Tím se z archivace nestane samostatný projekt. Je to jen poslední krok v životním cyklu pravidla. Malé týmy nepotřebují víc ceremonie. Potřebují méně duchů ve wiki.
+
+### Checklist: archivace týmového pravidla
+
+- Je jasné, jestli pravidlo archivujeme, rušíme, nahrazujeme nebo slučujeme?
+- Existuje autoritativní seznam aktivních pravidel?
+- Má archivovaná stránka výrazné označení neaktivního stavu?
+- Odkazuje staré pravidlo na aktuální náhradu?
+- Vysvětluje nové pravidlo, co nahradilo a proč?
+- Proběhl link audit ve šablonách, checklistech, provozních postupech a onboarding dokumentech?
+- Neobsahuje archiv zbytečné osobní, zákaznické nebo provozně citlivé údaje?
+- Je jasné, kdo archiv může číst?
+- Má archiv datum další kontroly nebo retenční rozhodnutí?
+- Je zrušení pravidla zapsané v rozhodovacím deníku?
+
+### Šablona: archivní karta pravidla
+
+```markdown
+# Archiv pravidla: [název]
+
+## Stav
+- Archivováno / zrušeno / nahrazeno / sloučeno:
+- Datum změny:
+- Vlastník archivu:
+
+## Původní účel
+- Jaký problém pravidlo řešilo:
+- Kde se pravidlo používalo:
+- Jaké rozhodnutí nebo incident k němu vedl:
+
+## Důvod archivace
+- Proč pravidlo už není aktivní:
+- Co se změnilo v produktu, týmu nebo provozu:
+- Jaké riziko by vzniklo, kdyby pravidlo zůstalo aktivní:
+
+## Náhrada
+- Aktuální pravidlo nebo postup:
+- Odkaz na nový dokument:
+- Co se oproti staré verzi změnilo:
+
+## Link audit
+- Upravené issue / PR šablony:
+- Upravené checklisty:
+- Upravené onboarding dokumenty:
+- Upravené runbooky:
+- Odkazy ponechané jen jako historický kontext:
+
+## Privacy-first kontrola
+- Osobní údaje odstraněny / ponechány s důvodem:
+- Zákaznické údaje anonymizované:
+- Screenshoty zkontrolované:
+- Přístupy k archivu omezené:
+- Datum další kontroly archivu:
+```
+
 ## Pracovní log
 
+- **2026-09-17:** Doplněna příloha DU o archivaci týmových pravidel: rozlišení archivace/zrušení/nahrazení/sloučení, autoritativní seznam aktivních pravidel, výrazné označení archivovaných dokumentů, link audit, privacy-first redakce starých materiálů, retenční rytmus, checklist a archivní karta pravidla.
 - **2026-09-17:** Doplněna příloha DT o revizi týmového pravidla: datum kontroly, agregované měření používání, diagnostika neviditelného/nejasného/drahého pravidla, práce s výjimkami, zjednodušování, automatizace, rozhodnutí o ponechání či zrušení a šablona revizní karty.
 - **2026-09-17:** Doplněna příloha DS o zavedení týmového pravidla do praxe: výběr prvního workflow, adopční scénář, změny v šablonách a checklistech, vysvětlení důvodu, privacy-first výjimky, měření kvality rozhodnutí, první týden doprovodu, měsíční zkrácení pravidla, checklist a adopční karta.
 
