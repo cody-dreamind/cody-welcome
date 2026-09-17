@@ -21249,6 +21249,12 @@ Dobrá výjimka obsahuje:
 
 Výjimka bez expirace je nové pravidlo, jen zbaběle maskované. Ano, věta je trochu přísná. Ale taky pravdivá, což je nepříjemná kombinace.
 
+### Pravidla musí jít i zrušit
+
+Pravidlo, které nejde zrušit, není týmová paměť. Je to malý interní zákoník s ambicí růst do obludy. Proto si už při zavedení napiš, kdy pravidlo přestane dávat smysl: například po odstranění starého workflow, po nasazení bezpečnější integrace, po změně cenového modelu nebo po třech měsících bez jediné výjimky.
+
+Rušení pravidel dělej stejně viditelně jako jejich zavádění. Zapiš důvod, datum a místo, odkud se pravidlo odstranilo. Pokud pravidlo zmizí potichu, tým neví, jestli se změnila realita, nebo jen někdo uklidil checklist příliš nadšeně.
+
 ### Checklist: převod rozhodnutí na pravidlo
 
 - Je rozhodnutí opakovatelné, nebo šlo jen o jednorázový případ?
@@ -21313,7 +21319,7 @@ Výjimka bez expirace je nové pravidlo, jen zbaběle maskované. Ano, věta je 
 
 ## Pracovní log
 
-- **2026-09-17:** Doplněna příloha DR o převodu produktového rozhodnutí do týmového pravidla: výběr opakovatelných rozhodnutí, psaní mantinelů, zapojení do issue/PR/release workflow, privacy-first měření, vlastnictví, výjimky, checklist a šablona karty týmového pravidla.
+- **2026-09-17:** Doplněna příloha DR o převodu produktového rozhodnutí do týmového pravidla: výběr opakovatelných rozhodnutí, psaní mantinelů, zapojení do issue/PR/release workflow, privacy-first měření, vlastnictví, výjimky, rušení pravidel, checklist a šablona karty týmového pravidla.
 
 - **2026-09-17:** Doplněna příloha DQ o rozhodovacím deníku produktu: kdy zapisovat rozhodnutí, jak formulovat závazek, propojení s prací, privacy-first stopa, rozlišení rozhodnutí/hypotézy/pravidla, review podmínky, aktualizace historie, checklist a šablona karty produktového rozhodnutí.
 
