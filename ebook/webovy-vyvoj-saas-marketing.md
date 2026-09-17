@@ -22971,7 +22971,190 @@ Na každém bodě má vzniknout rozhodnutí, ne jen pocit. Například: „zruš
 - Datum další kontroly:
 ```
 
+
+## Příloha EB: Předávání znalostí bez bus factor paniky a interního šmírování
+
+Jakmile malý SaaS tým začne růst, objeví se tichý strašák: jeden člověk ví, jak funguje billing, druhý drží v hlavě onboarding, třetí jako jediný rozumí importům a zakladatel pořád zná polovinu historických důvodů, proč se něco nesmí měnit. To není znalostní výhoda. To je provozní mina s hezkým názvem „zatím to nějak zvládáme“.
+
+Předávání znalostí není jednorázové školení. Je to systém, který zmenšuje závislost na jednotlivcích, zrychluje rozhodování a chrání důvěru zákazníků i týmu. Cílem není udělat z každého člověka kopii seniora. Cílem je, aby důležité věci nebyly uvězněné v hlavě jednoho člověka, soukromém chatu nebo pět let starém vlákně s názvem „rychlá otázka“.
+
+> Codyho komentář: Bus factor není metrika pro pesimisty. Je to kontrolka, že firma stojí na lidské paměti místo na systému. A lidská paměť má skvělý uptime přesně do chvíle, kdy někdo odjede na dovolenou.
+
+### Začni mapou kritických znalostí
+
+Nejdřív nepotřebuješ wiki. Potřebuješ vědět, co by firmu bolelo, kdyby zítra nebylo dostupné. Udělej si jednoduchou mapu oblastí, které jsou důležité pro provoz, prodej, produkt a podporu.
+
+Typické oblasti v malém SaaS:
+
+- **Produkční provoz:** deploy, rollback, monitoring, incidenty, zálohy, obnovy.
+- **Zákaznické procesy:** onboarding, support, eskalace, fakturace, zrušení účtu.
+- **Produktová rozhodnutí:** proč existují klíčová workflow, jaké kompromisy už tým udělal, co se nesmí rozbít.
+- **Technická architektura:** datový model, integrace, importy, billing, oprávnění, limity.
+- **Obchod a marketing:** positioning, ideální zákazník, kvalifikace leadů, demo call, obsahový systém.
+- **Privacy a compliance:** datová mapa, subprocesoři, retenční pravidla, žádosti subjektů údajů, přístupy.
+
+Ke každé oblasti napiš tři údaje: kdo ji dnes drží, kde je autoritativní dokumentace a co se stane, když člověk není týden dostupný. Pokud odpověď zní „napíšeme mu“, právě jsi našel riziko. Gratuluju, nekřičí, ale existuje.
+
+### Rozliš tři druhy znalostí
+
+Ne každá znalost se předává stejným způsobem. Když všechno nacpeš do wiki, vznikne knihovna, kde pravda umírá mezi screenshoty ze starého adminu.
+
+Prakticky rozlišuj:
+
+1. **Fakta:** aktuální stav systému, URL, role, limity, kontakty, konfigurace, SLA, ceny, procesní kroky.
+2. **Rozhodnutí:** proč se něco udělalo právě takhle, jaké alternativy se odmítly a za jakých podmínek by se rozhodnutí měnilo.
+3. **Dovednosti:** jak člověk diagnostikuje problém, vede demo, řeší eskalaci nebo navrhuje bezpečný import.
+
+Fakta patří do krátké dokumentace. Rozhodnutí patří do rozhodovacího deníku. Dovednosti se nejlépe předávají společnou prací, nahraným walkthrough, párováním nebo review reálného případu.
+
+Příklad: „Billing používá měsíční limity podle počtu aktivních projektů“ je fakt. „Vybrali jsme projekty místo uživatelů, protože zákazníci sdílí účty v malých týmech a user-based cena trestala adopci“ je rozhodnutí. „Jak poznat, že zákazník jen špatně pochopil limit, a ne že máme bug ve výpočtu“ je dovednost.
+
+### Udělej z předání malý produkt
+
+Předání znalostí má mít cílového uživatele. Tím může být nový vývojář, support člověk, zakladatel, který už nechce schvalovat každou výjimku, nebo budoucí on-call služba. Když nevíš, pro koho předáváš, dokumentace bude buď moc obecná, nebo moc detailní.
+
+Dobrá předávací karta odpovídá na otázky:
+
+- Co člověk po přečtení zvládne udělat?
+- Co pořád nesmí dělat bez konzultace?
+- Jak pozná, že je situace riziková?
+- Kde je poslední pravda?
+- Kdo je náhradní kontakt?
+- Jak se karta aktualizuje po změně?
+
+Předání dokonči praktickou zkouškou. Ne stylem „přečti si to a dej vědět“. To je dokumentační karaoke. Lepší je: nový vlastník provede sandboxový deploy, vyřeší cvičnou support eskalaci, vysvětlí billing pravidlo zákaznickým jazykem nebo projde anonymizovaný incident a navrhne další krok.
+
+### Předávej ve vrstvách, ne v románu
+
+Malý tým nepotřebuje dvousetstránkový manuál. Potřebuje vrstvy, které se dají číst podle situace.
+
+Použij čtyři vrstvy:
+
+1. **Mapa:** co oblast obsahuje a kdo za ni odpovídá.
+2. **Runbook:** konkrétní postup pro opakované situace.
+3. **Rozhodovací kontext:** proč je systém navržený tak, jak je.
+4. **Tréninkové scénáře:** praktické příklady, na kterých se člověk naučí úsudek.
+
+U každé vrstvy drž jiný tón. Mapa má být krátká. Runbook má být krokový a nudný, protože v incidentu nechceš poezii. Rozhodovací kontext může být delší, ale musí obsahovat datum a podmínky změny. Tréninkový scénář má být realistický, včetně nejasností.
+
+Příklad vrstvení pro import dat:
+
+- **Mapa:** importy jsou pro CSV zakázek, kontaktů a historických aktivit; vlastníkem je produktový tým; support smí spustit pouze validaci.
+- **Runbook:** jak převzít soubor, odstranit osobní data z testovací kopie, spustit validaci, oznámit chyby, připravit rollback.
+- **Rozhodovací kontext:** proč nepodporujeme libovolné sloupce, proč import běží dávkově a proč zákazník dostává preview.
+- **Trénink:** zákazník pošle CSV s duplicitami, chybějícím souhlasem a interními poznámkami; cílem je bezpečně odmítnout část dat a navrhnout další krok.
+
+### Privacy-first předávání znalostí
+
+Předávání znalostí často svádí k tomu, že se do dokumentace kopírují reálné zákaznické e-maily, screenshoty produkčních dat, celé logy nebo exporty. Nedělej to automaticky. Interní vzdělávání není volná vstupenka k šíření osobních dat po firmě.
+
+Pravidla:
+
+- Používej anonymizované nebo syntetické příklady, pokud reálná data nejsou nezbytná.
+- Když reálný případ potřebuješ, odstraň identifikátory, smluvní detaily a obsah, který není nutný pro lekci.
+- U screenshotů kontroluj jména, e-maily, adresy, IP adresy, tokeny, poznámky a URL s parametry.
+- U logů vybírej jen relevantní úsek a rediguj citlivé hodnoty.
+- U záznamů hovorů nastav retenci a přístup podle účelu, ne podle pohodlí.
+- Napiš ke každému tréninkovému materiálu, odkud pochází a kdy se má odstranit nebo revidovat.
+
+Privacy-first předávání znalostí má jednu velkou výhodu: nutí tým popsat princip, ne jen ukázat cizí data. Když jde problém vysvětlit bez reálných osobních údajů, dokumentace bývá lepší a bezpečnější.
+
+### Párování používej na úsudek, ne na všechno
+
+Párování je drahé. Použij ho tam, kde předáváš úsudek, ne klikání. Klikací postup patří do runbooku nebo krátkého videa. Párování patří k situacím, kde jsou trade-offy: zákaznická eskalace, incident, návrh migrace, bezpečnostní výjimka, demo pro složitého zákazníka.
+
+Dobrá párovací hodina má strukturu:
+
+1. **Kontext:** co řešíme a proč je to důležité.
+2. **Pozorování:** zkušenější člověk ukáže postup nahlas.
+3. **Převzetí:** druhý člověk udělá další krok a vysvětluje myšlení.
+4. **Review:** pojmenují se rozhodnutí, rizika a nejasnosti.
+5. **Zápis:** vznikne jedna aktualizace dokumentace nebo runbooku.
+
+Bez posledního bodu párování zůstane v hlavě účastníků. To je lepší než nic, ale pořád je to znalostní půjčka, ne kapitál.
+
+### Měř předání podle samostatnosti
+
+Předání znalostí není hotové ve chvíli, kdy vznikne dokument. Je hotové ve chvíli, kdy tým zvládne bezpečně jednat bez původního vlastníka.
+
+Měř jednoduché signály:
+
+- kolik kroků zvládne nový vlastník bez asistence,
+- kolik dotazů se opakuje po předání,
+- kolik incidentů nebo eskalací stále končí u původního člověka,
+- jestli dokáže někdo další aktualizovat runbook po změně,
+- zda nováček rozumí nejen postupu, ale i hranicím,
+- jestli se zkrátil čas od problému k rozhodnutí.
+
+Nepoužívej to jako osobní výkonovou metriku. Cílem není říct „Petr se ptá moc často“. Cílem je zjistit, že runbook chybí, kontext je nejasný nebo rozhodovací práva nejsou předaná.
+
+### Checklist: znalosti nejsou rukojmí
+
+- [ ] Máme mapu kritických oblastí a lidí, kteří je dnes drží.
+- [ ] U každé oblasti víme, kde je autoritativní dokumentace.
+- [ ] Rozlišujeme fakta, rozhodnutí a dovednosti.
+- [ ] Předávací materiály mají jasného cílového uživatele.
+- [ ] Každé důležité předání končí praktickou zkouškou.
+- [ ] Runbooky jsou krátké, krokové a použitelné pod tlakem.
+- [ ] Rozhodovací kontext obsahuje důvody, alternativy a podmínky změny.
+- [ ] Tréninkové příklady nepoužívají zbytečná osobní ani zákaznická data.
+- [ ] Párování předává úsudek, ne rutinní klikání.
+- [ ] Samostatnost měříme jako kvalitu systému, ne jako bič na jednotlivce.
+
+### Šablona: karta předání znalosti
+
+```markdown
+## Karta předání znalosti: [oblast]
+
+### Účel
+- Proč je oblast důležitá:
+- Co se rozbije, když znalost chybí:
+- Cílový uživatel karty:
+
+### Současný stav
+- Současný vlastník:
+- Náhradní kontakt:
+- Autoritativní dokumentace:
+- Poslední revize:
+
+### Fakta
+- Klíčové systémy / URL:
+- Limity a pravidla:
+- Opakované postupy:
+- Bezpečnostní hranice:
+
+### Rozhodovací kontext
+- Proč je řešení navržené takto:
+- Odmítnuté alternativy:
+- Kdy rozhodnutí znovu otevřít:
+- Známé kompromisy:
+
+### Dovednosti k předání
+- Co se nedá naučit jen čtením:
+- Párovací scénář:
+- Cvičný případ:
+- Kritéria samostatnosti:
+
+### Privacy-first kontrola
+- Obsahuje karta reálná zákaznická data?
+- Co bylo anonymizováno:
+- Kdo má ke kartě přístup:
+- Retence tréninkových materiálů:
+
+### Praktická zkouška
+- Úkol:
+- Výsledek:
+- Co bylo nejasné:
+- Co aktualizujeme v dokumentaci:
+
+### Stav předání
+- Co je hotové:
+- Co zbývá:
+- Datum další revize:
+```
+
 ## Pracovní log
+- **2026-09-17:** Doplněna příloha EB o předávání znalostí bez bus factor paniky: mapa kritických znalostí, rozlišení faktů/rozhodnutí/dovedností, vrstvené runbooky, privacy-first tréninkové materiály, párování na úsudek, měření samostatnosti, checklist a karta předání znalosti.
 - **2026-09-17:** Doplněna příloha EA o udržení seniorního člověka bez zlaté klece: kontrola reality role, konkrétní vliv, ochrana hluboké práce, viditelný mentoring, růstové cesty mimo management, včasné retenční signály, privacy-first interní poznámky, šestiměsíční rytmus, checklist a retenční karta seniora.
 
 - **2026-09-17:** Doplněna příloha DZ o prvním seniorním hiru bez kultu zachránce: definice problému před inzerátem, rozlišení experta/vlastníka/multiplikátora, onboardingový balíček, vrstvené přístupy, první úkol, postupné předání rozhodnutí, systémové měření dopadu, privacy-first onboarding, checklist a šablona karty hire.
