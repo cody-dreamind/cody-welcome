@@ -22381,7 +22381,205 @@ Nenechávej kategorii „ještě se uvidí“. Ta je procesní kompost. Když ne
 - Kde se pravidla objeví ve workflow:
 - Kdy proběhne další revize:
 
+## Příloha DY: Škálování malého týmu bez manažerského divadla
+
+Malý SaaS tým se dá zničit dvěma opačnými způsoby. První je chaos: všechno se řeší v chatu, každý drží kus reality v hlavě a zákazník čeká, protože nikdo neví, kdo má míč. Druhý je předčasná korporace: role, procesy, meetingy, tabulky a statusy přijdou dřív než skutečná potřeba. Obě cesty vypadají jinak, ale výsledek je stejný: méně práce, více únavy a spousta vysvětlování, proč se „to nějak zaseklo“.
+
+Škálování týmu není o tom, že z pěti lidí uděláš malou napodobeninu firmy se sto lidmi. Je to o tom, že se rozhodneš, které informace, odpovědnosti a rituály už nesmí záviset na paměti zakladatele. Pokud tým roste, musí růst hlavně schopnost dělat dobrá rozhodnutí bez neustálého vyrušování.
+
+> Codyho komentář: Nejhorší fáze růstu je moment, kdy už nejste garáž, ale pořád se tváříte, že kalendář je sprosté slovo. Pak se z improvizace stane provozní model. Gratuluju, právě jste vynalezli chaos jako službu.
+
+### Nejdřív škáluj odpovědnost, ne meetingy
+
+Když se tým začne zvětšovat, první instinkt bývá přidat synchronizaci. Denní standup, týdenní planning, status meeting, produktový meeting, marketingový meeting, support review. Některé z nich mohou být užitečné. Ale pokud nejsou jasné odpovědnosti, meetingy jen přesouvají nejasnost z chatu do kalendáře.
+
+Začni mapou odpovědností:
+
+- kdo vlastní produktové rozhodnutí,
+- kdo vlastní zákaznickou komunikaci,
+- kdo vlastní provozní stabilitu,
+- kdo schvaluje práci s citlivými daty,
+- kdo rozhoduje o výjimkách,
+- kdo zavírá rozpracované věci.
+
+Odpovědnost neznamená, že člověk všechno dělá sám. Znamená, že ví, kdy má rozhodnout, koho přizvat a co po rozhodnutí zaznamenat. Pokud odpovědnost není pojmenovaná, tým si ji bude přehazovat jako horký brambor. A zákazníkovi je úplně jedno, že brambor byl organizačně velmi komplexní.
+
+Praktické pravidlo: každá opakovaná oblast práce má mít jednoho vlastníka, jeden pracovní prostor a jednu definici hotovo. Bez toho bude růst jen zesilovat šum.
+
+### Vytvoř role z práce, ne z titulů
+
+Malý tým často nepotřebuje nové manažerské titulky. Potřebuje pojmenovat typy práce, které už existují. „Head of Everything Important“ zní dramaticky, ale v praxi nepomůže. Lepší je rozlišit role podle rozhodnutí, která dělají.
+
+Příklad pro malý SaaS:
+
+- **Produktový vlastník:** drží problém, prioritu a dopad na zákazníka.
+- **Technický vlastník:** drží architekturu, kvalitu, bezpečnost a provozní rizika.
+- **Zákaznický vlastník:** drží onboarding, support, zpětnou vazbu a očekávání.
+- **Go-to-market vlastník:** drží positioning, obsah, distribuci a kvalitu leadů.
+- **Privacy vlastník:** drží datovou mapu, přístupy, dodavatele a retenční pravidla.
+
+Jedna osoba může mít víc rolí. To je v malém týmu normální. Důležité je, aby role nebyla skrytá. Jakmile se něco pokazí, tým nemá hledat viníka. Má vědět, kdo svolá rozhodnutí, kdo dodá kontext a kdo zapíše změnu pravidla.
+
+Role pravidelně reviduj. Pokud někdo drží tři kritické oblasti a je jediný, kdo zná kontext, nemáš seniorního hrdinu. Máš single point of failure v mikině.
+
+### Udržuj krátké komunikační dráhy
+
+S růstem týmu přibývá možností, kde se informace ztratí. Proto potřebuješ jasně říct, co patří do kterého kanálu. Ne proto, aby někdo mohl napomínat kolegy za špatný emoji výběr. Ale proto, aby důležité informace přežily víc než jedno odpoledne.
+
+Jednoduché dělení:
+
+- **Chat:** rychlá koordinace, dotazy, upozornění, operativa.
+- **Ticket:** práce, která má výsledek, vlastníka a stav.
+- **Rozhodovací deník:** změny směru, výjimky, priority a trade-offy.
+- **Wiki:** stabilní pravidla, runbooky, onboardingové materiály.
+- **CRM nebo zákaznický záznam:** obchodní a support kontext k účtu.
+
+Pokud rozhodnutí vznikne v chatu, přesuň jeho výsledek na trvalé místo. Ne celé drama. Jen rozhodnutí, důvod a dopad. Tým nepotřebuje archeologii konverzace, potřebuje vědět, co platí.
+
+Privacy-first detail: citlivá zákaznická data nepatří do náhodných chatových vláken jen proto, že je to pohodlné. Pro screenshoty, exporty a logy nastav schválené místo, expiraci a pravidlo redakce. Pohodlí je fajn. Nekontrolované kopie dat v deseti nástrojích už tak roztomilé nejsou.
+
+### Deleguj s kontextem, ne jen s úkolem
+
+Špatná delegace zní: „Mrkni na onboarding.“ Dobrá delegace říká, jaký výsledek chceme, proč na tom záleží, jaká jsou omezení a podle čeho poznáme, že je hotovo.
+
+Pro každý důležitější úkol předej čtyři vrstvy:
+
+1. **Výsledek:** co se má změnit pro zákazníka nebo tým.
+2. **Kontext:** proč to řešíme právě teď a co už víme.
+3. **Mantinely:** co nesmí být porušeno, včetně privacy-first pravidel.
+4. **Kontrola:** kdy se vrátíme k výsledku a podle čeho ho vyhodnotíme.
+
+Příklad slabého zadání: „Zlepši pricing stránku.“
+
+Lepší zadání: „Cílem je snížit počet demo callů s firmami, které nejsou vhodné pro náš segment. Uprav pricing stránku tak, aby jasněji popsala pro koho produkt je, jaké jsou limity tarifů a co je potřeba pro pilot. Neměň ceny bez rozhodnutí. Nesbírej další osobní údaje ve formuláři. Hotovo je, když sales za dva týdny označí méně nekvalifikovaných leadů a zákazníci na callu neopakují stejné otázky.“
+
+Takové zadání je delší než věta v chatu, ale kratší než tři opravné meetingy.
+
+### Chraň hlubokou práci před provozním šumem
+
+Jak tým roste, přibývá dotazů. Dotazy jsou často známka zdraví: lidé se snaží rozhodovat správně. Problém nastane, když každý dotaz přeruší člověka, který právě řeší složitý problém.
+
+Nastav jednoduché rytmy:
+
+- urgentní provozní problémy mají jasný eskalační kanál,
+- běžné produktové dotazy se sbírají do denního nebo obdenního bloku,
+- rozhodnutí s dopadem na roadmapu jdou do rozhodovacího deníku,
+- support otázky se proměňují v interní odpovědi nebo veřejnou dokumentaci,
+- opakované dotazy spouští úpravu pravidla, ne další připomínání.
+
+Cílem není zakázat komunikaci. Cílem je zabránit tomu, aby se celý tým choval jako živý notifikační systém. Pokud člověk musí každých deset minut potvrdit drobnost, nemá odpovědnost. Má roli lidského tlačítka „OK“.
+
+### Najímej podle úzkého hrdla, ne podle nálady
+
+První nábory v malém SaaS často selhávají, protože tým najímá podle bolesti, která je nejhlasitější, ne podle úzkého hrdla, které nejvíc brzdí růst. „Nestíháme“ není dostatečný důvod. Potřebuješ vědět, co přesně nestíháte a jaká práce se po náboru uvolní.
+
+Před náborem si odpověz:
+
+- Které rozhodnutí čeká příliš dlouho?
+- Která práce se opakuje a nejde dobře automatizovat?
+- Který zákaznický moment trpí kvůli nedostatku kapacity?
+- Které riziko už nechceme nést v hlavě jednoho člověka?
+- Co přestaneme dělat, až nová role nastoupí?
+
+Poslední otázka je nejdůležitější. Pokud po náboru nikdo nic nepustí, jen přidáš další koordinační vrstvu. Nový člověk pak nedostane prostor, jen zdědí chaos a Slack plný historických kompromisů.
+
+Privacy-first pohled na nábor: nový člověk nemá automaticky dostat přístup ke všemu, „aby mohl pracovat“. Přístupy dávej podle role, s revizí po zkušebním období a s jasným offboardingem. Minimum dat není brzda důvěry. Je to brzda průšvihu.
+
+### Automatizuj předávky, ne úsudek
+
+Automatizace je skvělá pro opakovatelné přenosy informací: vytvoření ticketu z formuláře, připomenutí revize přístupu, generování checklistu před releasem, upozornění na chybějící vlastníky. Je mizerná náhrada za úsudek tam, kde chybí jasné pravidlo.
+
+Před automatizací se ptej:
+
+- Je proces stabilní aspoň několik týdnů?
+- Víme, co je správný výstup?
+- Existuje vlastník výjimky?
+- Nezvyšuje automatizace množství sbíraných dat?
+- Dokážeme chybnou automatizaci rychle vypnout?
+
+Automatizuj hlavně předávky mezi rolemi. Například: když se uzavře placený pilot, automaticky vznikne onboardingový checklist, úkol pro fakturaci, revize přístupů a připomínka prvního kvartálního review. To je užitečné. Automaticky posílat zákazníkovi generické „personalizované“ e-maily podle každého kliknutí je spíš datový cirkus s mašlí.
+
+### Měř zdraví týmu bez sledování lidí
+
+Škálování týmu potřebuje signály. Neznamená to měřit počet zpráv, aktivitu v nástroji nebo rychlost pohybu myši. To je cesta k nedůvěře a falešným metrikám.
+
+Sleduj raději agregované provozní ukazatele:
+
+- kolik rozhodnutí čeká déle než týden,
+- kolik úkolů nemá vlastníka,
+- kolik support dotazů se opakuje,
+- kolik release blokuje nejasné pravidlo,
+- kolik přístupů nebylo revidováno včas,
+- kolik incidentů mělo stejnou kořenovou příčinu.
+
+Tyto metriky neříkají „Pepa je pomalý“. Říkají „systém má díru“. A přesně to chceš při růstu vědět. Pokud měříš lidi místo systému, lidé se naučí optimalizovat chování pro metriku. Pokud měříš tok práce, můžeš zlepšovat prostředí.
+
+### Checklist: škálování malého SaaS týmu
+
+- Máme pojmenované vlastníky pro produkt, techniku, zákaznickou komunikaci, go-to-market a privacy.
+- Každá opakovaná oblast práce má pracovní prostor, vlastníka a definici hotovo.
+- Víme, která rozhodnutí patří do chatu, ticketu, rozhodovacího deníku, wiki a zákaznického záznamu.
+- Delegované úkoly obsahují výsledek, kontext, mantinely a kontrolu.
+- Urgentní provoz má vlastní eskalační cestu, aby neničil hlubokou práci.
+- Před náborem víme, které úzké hrdlo řešíme a co po nástupu přestaneme dělat.
+- Přístupy nových lidí odpovídají roli, ne pohodlí.
+- Automatizujeme stabilní předávky, ne nejasná rozhodnutí.
+- Zdraví týmu měříme přes tok práce a opakované problémy, ne přes sledování jednotlivců.
+
+### Šablona: karta škálování týmu
+
+## Škálování týmu: [oblast / období]
+
+### Spouštěč
+
+- Co se mění:
+- Proč to řešíme teď:
+- Jaké úzké hrdlo chceme odstranit:
+
+### Role a vlastnictví
+
+| Oblast | Vlastník | Rozhoduje o | Zástup / fallback |
+|---|---|---|---|
+| Produkt | [jméno/role] | [typ rozhodnutí] | [kdo pomůže] |
+| Technika | [jméno/role] | [typ rozhodnutí] | [kdo pomůže] |
+| Zákazníci | [jméno/role] | [typ rozhodnutí] | [kdo pomůže] |
+| Go-to-market | [jméno/role] | [typ rozhodnutí] | [kdo pomůže] |
+| Privacy | [jméno/role] | [typ rozhodnutí] | [kdo pomůže] |
+
+### Komunikační pravidla
+
+- Co zůstává v chatu:
+- Co musí být v ticketu:
+- Co patří do rozhodovacího deníku:
+- Co se zapisuje do wiki:
+- Co patří do zákaznického záznamu:
+
+### Privacy-first kontrola
+
+- Nové přístupy:
+- Citlivá data v supportu:
+- Exporty a sdílení:
+- Dodavatelé a nástroje:
+- Revize po zkušebním období:
+
+### Signály zdraví
+
+- Čekající rozhodnutí:
+- Úkoly bez vlastníka:
+- Opakované support dotazy:
+- Release blokery:
+- Opakované incidenty:
+
+### Rozhodnutí
+
+- Co měníme hned:
+- Co automatizujeme:
+- Co přestaneme dělat:
+- Kdy vyhodnotíme dopad:
+
 ## Pracovní log
+
+- **2026-09-17:** Doplněna příloha DY o škálování malého SaaS týmu bez manažerského divadla: odpovědnosti před meetingy, role podle práce, komunikační dráhy, delegování s kontextem, ochrana hluboké práce, nábor podle úzkého hrdla, privacy-first přístupy, automatizace předávek, zdravé metriky, checklist a karta škálování týmu.
 
 - **2026-09-17:** Doplněna příloha DX o auditu týmových pravidel před růstem týmu: spouštěče auditu, rozdělení pravidel podle dopadu, test nováčkem, škálování špatných návyků, privacy-first kontrola, checklist a šablona auditní karty.
 
