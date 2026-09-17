@@ -22779,7 +22779,201 @@ Tohle není nedůvěra. Je to ochrana zákazníků, firmy i nového člověka. N
 - Eskalační hranice:
 ```
 
+## Příloha EA: Udržení seniorního člověka bez zlaté klece a tichého vyhoření
+
+První seniorní hire je velká věc. Ale skutečná práce nezačíná podpisem smlouvy. Začíná ve chvíli, kdy senior zjistí, jestli firma umí využít jeho úsudek, nebo ho jen přidá do kalendáře jako další drahý router na meetingy. Seniorní člověk neodchází jen kvůli penězům. Odchází, když nemá vliv, kontext, důvěru, prostor na hlubokou práci nebo pocit, že jeho práce mění systém.
+
+Udržení seniora neznamená postavit kolem něj zlatou klec. Znamená vytvořit prostředí, kde jeho zkušenost zrychluje tým, snižuje chaos a zvyšuje kvalitu rozhodnutí. Když senior funguje jen jako hasič, je to drahá známka špatného systému. Když funguje jako multiplikátor, tým se učí rozhodovat lépe i bez něj.
+
+> Codyho komentář: Senior není firemní talisman, kterého posadíš do Slacku a čekáš, že aura vyřeší backlog. Potřebuje jasné vlastnictví, přístup k rozhodnutím a právo říct „tohle je zbytečně složité“ dřív, než složitost dostane vlastní roadmapu.
+
+### Retence začíná smlouvou s realitou
+
+Nejhorší způsob, jak přijít o seniora, je prodat mu při náboru jinou firmu, než do které nastoupí. Pokud slíbíš technické vlastnictví, ale pak každé rozhodnutí končí u zakladatele, vznikne frustrace. Pokud slíbíš produktový vliv, ale senior jen přepisuje ticket po ticketu, začne mentálně odcházet dřív, než pošle výpověď.
+
+První retenční pravidlo je jednoduché: opakovaně kontroluj shodu mezi tím, co bylo slíbeno, a tím, co člověk opravdu žije.
+
+Po prvním měsíci se zeptej:
+
+- Co z reality odpovídá očekávání?
+- Co je horší, než jsme řekli při náboru?
+- Kde máš pocit, že nemáš dost kontextu?
+- Kde máš odpovědnost bez rozhodovací pravomoci?
+- Co bychom měli změnit dřív, než si na špatný stav zvykneme?
+
+Tyto otázky nejsou HR wellness kolečko. Jsou diagnostika systému. Senior obvykle rychle vidí tření, které tým roky normalizoval. Pokud se první signály zametou pod koberec, koberec se brzy začne tvářit jako organizační struktura.
+
+### Vliv musí být konkrétní, ne dekorativní
+
+Seniorní lidé chtějí mít dopad. „Budeš mít velký vliv“ je ale nebezpečně měkká věta. Vliv musí být pojmenovaný v konkrétních oblastech:
+
+- **Architektura:** která rozhodnutí může člověk udělat sám, která musí konzultovat a která vyžadují širší dohodu.
+- **Produkt:** jak se jeho technické nebo provozní poznatky dostávají do roadmapy.
+- **Kvalita:** kde může měnit Definition of Done, testovací standardy nebo release proces.
+- **Mentoring:** kolik času má věnovat rozvoji lidí a jak se pozná, že to funguje.
+- **Dluh:** jak může otevřít téma technického, produktového nebo procesního dluhu bez toho, aby byl označen za brzdu.
+
+Vliv bez mandátu je divadlo. Mandát bez kontextu je riziko. Senior proto potřebuje obojí: jasné mantinely i přístup k důvodům, proč firma dělá věci právě tak.
+
+Praktický nástroj je **mapa rozhodovacích práv**. Pro každou důležitou oblast napiš, kdo rozhoduje, kdo dodává vstup, kdo má právo veta a kde stačí informovat ostatní po rozhodnutí. Ne proto, aby vznikla procesní kniha tlustá jako zimní kabát. Proto, aby člověk nemusel hádat, jestli zrovna šlape někomu na území.
+
+### Chraň hlubokou práci před kalendářovým plevelem
+
+Seniorní člověk často dostává nejvíc pozvánek, protože „k tomu bude mít určitě názor“. Ano, bude. Ale pokud každý názor stojí hodinu synchronního času, firma postupně přemění senioritu na meetingovou pěnu.
+
+Nastav jednoduchá pravidla:
+
+- Meeting se seniorem musí mít rozhodnutí, ne jen téma.
+- Pokud jde o kontext, napiš stručné memo předem.
+- Pokud jde o review, připrav konkrétní otázky a očekávaný výstup.
+- Pokud jde o status, použij asynchronní update.
+- Pokud senior nemá změnit výsledek, nepotřebuje být v místnosti.
+
+Dobrý senior potřebuje bloky na přemýšlení, návrh systému, čtení kódu, psaní rozhodnutí a mentorování. To se nevejde mezi sedm půlhodinových callů jako sušenka mezi dveře. Chráněný čas není benefit. Je to výrobní kapacita.
+
+### Mentoring nesmí být neviditelná práce navíc
+
+Senior často přirozeně pomáhá ostatním: vysvětluje kontext, reviewuje návrhy, uklidňuje incidenty, učí lidi lépe uvažovat. Pokud se tahle práce neuzná, vznikne dvojí směna: přes den pomoc týmu, večer vlastní úkoly. To je recept na vyhoření s prémiovou fakturou.
+
+Mentoring proto dej do plánu, ne do volného času. Konkrétně:
+
+- Vyhraď pravidelný prostor na pairing, design review nebo office hours.
+- Domluv, které typy dotazů mají jít za seniorem a které má řešit dokumentace.
+- Sleduj, jestli se stejné otázky opakují; pokud ano, chybí systémový materiál.
+- Měř dopad mentoringu přes samostatnost týmu, ne přes počet schůzek.
+- Chraň seniora před tím, aby se stal jedinou živou dokumentací.
+
+Seniorní člověk má zvyšovat kapacitu týmu, ne suplovat interní vyhledávač. Když se mentoring opakuje ve stejné podobě, převeď ho do checklistu, runbooku, příkladu nebo šablony.
+
+### Kariérní růst nemusí znamenat manažerskou židli
+
+Malé firmy často udělají zvláštní věc: najmou skvělého experta a za odměnu ho začnou tlačit do managementu, i když ho zajímá systém, produkt nebo architektura. Výsledek? Firma přijde o experta a získá nešťastného manažera. To je výměna jako z bazaru, kde nikdo nevyhrál.
+
+Nabídni více cest růstu:
+
+- **Expertní cesta:** hlubší technické nebo doménové vlastnictví, standardy, architektura, kvalita.
+- **Produktová cesta:** vliv na discovery, roadmapu, zákaznické učení a rozhodovací mema.
+- **Multiplikátorská cesta:** mentoring, interní vzdělávání, šablony, review rituály, zvyšování samostatnosti lidí.
+- **Provozní cesta:** spolehlivost, incidenty, observabilita, bezpečnost, nákladová disciplína.
+- **Manažerská cesta:** vedení lidí, nábor, prioritizace kapacit, rozvoj týmu.
+
+Každá cesta musí mít jasný dopad a uznání. Pokud firma oceňuje jen počet podřízených, vyšle expertům zprávu, že opravdový růst znamená opustit práci, ve které jsou nejlepší.
+
+### Retenční signály sleduj dřív než výpověď
+
+Výpověď není první signál. Je to pozdní účet za dlouho ignorované tření. U seniorů sleduj hlavně změny v chování:
+
+- přestávají otevírat systémová témata,
+- méně komentují rozhodnutí, která dřív aktivně zlepšovali,
+- začnou dělat jen explicitně zadané úkoly,
+- vyhýbají se mentoringu, protože „na to není čas“,
+- častěji říkají, že něco „nemá cenu řešit“,
+- ztrácí energii u oblastí, které je dřív bavily.
+
+Tyto signály nejsou důkaz problému, ale důvod k rozhovoru. Rozhovor má být konkrétní, ne terapeutická mlha. Ptej se na rozhodování, kapacitu, energii, vliv a překážky. Nezačínej větou „jsi nějaký tichý“. To zní jako Slack verze detektiva v levném seriálu.
+
+Lepší otázky:
+
+- Kde máš pocit, že opakovaně narážíš na stejnou překážku?
+- Které rozhodnutí by se bez tebe mělo dělat lépe?
+- Co ti bere nejvíc energie mimo samotnou práci?
+- Kde vidíš dluh, který už začíná stát tým důvěru nebo rychlost?
+- Co bych měl jako zakladatel přestat držet u sebe?
+
+### Privacy-first retence: důvěra i uvnitř firmy
+
+Privacy-first kultura nekončí u zákaznických dat. Týká se i interní práce s lidmi. Udržení seniora neznamená sledovat jeho aktivitu, počet commitů, minuty online nebo mikrosignály v nástrojích. To je cesta k nedůvěře a falešným metrikám.
+
+Místo sledování jednotlivce používej signály práce a systému:
+
+- kvalita rozhodnutí,
+- rychlost předávání kontextu,
+- počet opakovaných blokérů,
+- stabilita release procesu,
+- snížení závislosti na jednom člověku,
+- lepší samostatnost méně zkušených lidí,
+- menší počet ad hoc eskalací.
+
+Interní poznámky z 1:1 drž stručné, účelové a s rozumnou retencí. Nezapisuj osobní detaily, které nejsou potřeba pro spolupráci. Přístup k poznámkám o lidech omez na ty, kteří ho opravdu potřebují. I uvnitř firmy platí: když data nepotřebuješ, nesbírej je. Když je potřebuješ, vysvětli proč.
+
+### Retenční rytmus pro prvních šest měsíců
+
+Prvních šest měsíců rozhoduje o tom, jestli se senior usadí jako součást systému, nebo jen vydrží pár kvartálů ze slušnosti.
+
+Praktický rytmus:
+
+1. **Po 30 dnech:** kontrola reality proti náborovým slibům, mapa kontextu, první tření.
+2. **Po 60 dnech:** vyjasnění rozhodovacích práv, první systémová změna, ochrana času.
+3. **Po 90 dnech:** review dopadu, nastavení dlouhodobého vlastnictví, úprava role.
+4. **Po 4 měsících:** audit mentoringové zátěže a závislosti týmu na seniorovi.
+5. **Po 5 měsících:** rozhovor o růstové cestě, ne jen o úkolech na další sprint.
+6. **Po 6 měsících:** retenční review: co posílit, co odebrat, co předat, co změnit v systému.
+
+Na každém bodě má vzniknout rozhodnutí, ne jen pocit. Například: „zrušíme povinnou účast na status meetingu“, „předáme architektonická rozhodnutí do memo procesu“, „zavedeme office hours místo náhodných pingů“ nebo „přesuneme část mentoringu do šablon“.
+
+### Checklist: senior zůstává, protože má dopad
+
+- [ ] Realita role odpovídá tomu, co bylo řečeno při náboru.
+- [ ] Senior má jasně pojmenované oblasti vlivu a rozhodovací pravomoci.
+- [ ] Kalendář chrání bloky na hlubokou práci.
+- [ ] Mentoring je součást práce, ne neviditelný bonus po večerech.
+- [ ] Existuje růstová cesta mimo management.
+- [ ] Opakované otázky se převádí do dokumentace nebo šablon.
+- [ ] Retenční signály se řeší dřív než výpověď.
+- [ ] Interní práce s poznámkami a daty o lidech je privacy-first.
+- [ ] Tým se postupně stává méně závislý na jednom seniorovi.
+- [ ] Zakladatel pravidelně pouští rozhodnutí, která už nemá držet.
+
+### Šablona: retenční karta seniora
+
+```markdown
+## Retenční karta: [role / člověk]
+
+### Slíbená role
+- Co jsme slíbili při náboru:
+- Co je dnes realita:
+- Největší rozdíl:
+
+### Vliv
+- Oblasti samostatného rozhodování:
+- Oblasti ke konzultaci:
+- Oblasti bez vlastnictví:
+- Chybějící kontext:
+
+### Hluboká práce
+- Chráněné bloky:
+- Meetingy k odstranění:
+- Asynchronní náhrady:
+- Největší zdroj přerušování:
+
+### Mentoring
+- Koho člověk podporuje:
+- Opakované otázky:
+- Co převést do dokumentace:
+- Jak poznáme větší samostatnost týmu:
+
+### Růstová cesta
+- Preferovaná cesta:
+- Nové vlastnictví:
+- Co už nedává smysl:
+- Další tříměsíční výsledek:
+
+### Privacy-first kontrola
+- Kde jsou poznámky uložené:
+- Kdo k nim má přístup:
+- Co se nemaže a proč:
+- Datum revize poznámek:
+
+### Rozhodnutí z review
+- Co měníme hned:
+- Co sledujeme:
+- Co předává zakladatel:
+- Datum další kontroly:
+```
+
 ## Pracovní log
+- **2026-09-17:** Doplněna příloha EA o udržení seniorního člověka bez zlaté klece: kontrola reality role, konkrétní vliv, ochrana hluboké práce, viditelný mentoring, růstové cesty mimo management, včasné retenční signály, privacy-first interní poznámky, šestiměsíční rytmus, checklist a retenční karta seniora.
+
 - **2026-09-17:** Doplněna příloha DZ o prvním seniorním hiru bez kultu zachránce: definice problému před inzerátem, rozlišení experta/vlastníka/multiplikátora, onboardingový balíček, vrstvené přístupy, první úkol, postupné předání rozhodnutí, systémové měření dopadu, privacy-first onboarding, checklist a šablona karty hire.
 
 - **2026-09-17:** Doplněna příloha DY o škálování malého SaaS týmu bez manažerského divadla: odpovědnosti před meetingy, role podle práce, komunikační dráhy, delegování s kontextem, ochrana hluboké práce, nábor podle úzkého hrdla, privacy-first přístupy, automatizace předávek, zdravé metriky, checklist a karta škálování týmu.
