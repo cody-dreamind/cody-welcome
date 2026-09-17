@@ -20947,7 +20947,195 @@ Důležité je neotevírat vše znovu. Firewall není retrospektiva celého prod
 - Datum dalšího firewall review:
 ```
 
+
+## Příloha DQ: Rozhodovací deník produktu bez alibismu a paměťové mlhy
+
+Malý SaaS tým často netrpí nedostatkem nápadů. Trpí tím, že po třech měsících nikdo přesně neví, proč se něco rozhodlo, jaké byly alternativy a co mělo být signálem úspěchu. Pak se vrací staré debaty, roadmapa bobtná a každý nový člen týmu musí archeologicky dolovat kontext ze Slacku, e-mailů a polozapomenutých poznámek.
+
+Rozhodovací deník není byrokracie. Je to brzda proti paměťové mlze. Pomáhá týmu dělat méně opakovaných debat, lépe chránit důvěru zákazníků a rychleji poznat, jestli rozhodnutí pořád platí.
+
+> Codyho komentář: Nejhorší firemní dokumentace není ta, která chybí. Nejhorší je ta, která existuje jen jako „někde jsme to řešili“. To je digitální obdoba ponožky ztracené v pračce.
+
+### Zapisuj jen rozhodnutí, která mění směr nebo závazek
+
+Deník nemá zachytit každé tlačítko, každou barvu a každou kosmetickou úpravu. Když budeš zapisovat všechno, přestane to číst každý včetně autora. Smysl mají hlavně rozhodnutí, která:
+
+- mění produktovou prioritu,
+- přidávají nebo ruší větší funkci,
+- vytváří závazek vůči zákazníkovi,
+- mění cenotvorbu, onboarding nebo podporu,
+- přidávají nový typ dat, integraci nebo oprávnění,
+- odkládají známý problém vědomým kompromisem,
+- mají dopad na provozní náklady, bezpečnost nebo právní riziko.
+
+Praktické pravidlo: pokud by nové vysvětlení rozhodnutí zabralo víc než pět minut na poradě, patří do deníku. Pokud stačí jedna věta v pull requestu, deník nech spát.
+
+### Rozhodnutí piš jako produktový závazek, ne jako poznámku z porady
+
+Slabý zápis vypadá takto:
+
+> „Dohodli jsme se, že onboarding upravíme později.“
+
+Silnější zápis říká:
+
+> „V aktuálním releasu necháváme onboarding bez samoobslužného průvodce, protože první tři zákazníci budou onboardováni ručně. Pokud se do 30 dnů objeví více než pět opakovaných dotazů na stejný krok nebo ruční onboarding přesáhne dvě hodiny na účet, vrátíme průvodce do roadmapy.“
+
+Druhá varianta má kontext, důvod, hranici a signál návratu. To je rozdíl mezi pamětí produktu a poznámkou, která za týden připomíná vzkaz napsaný na ubrousek.
+
+Každý zápis by měl odpovědět na sedm otázek:
+
+1. Co jsme rozhodli?
+2. Proč teď?
+3. Jaké alternativy jsme zvažovali?
+4. Jaký dopad čekáme na zákazníka, tým a provoz?
+5. Jak poznáme, že rozhodnutí funguje?
+6. Kdy nebo při jakém signálu se k němu vrátíme?
+7. Jaký je privacy-first dopad?
+
+Nemusí to být román. Stačí krátký strukturovaný zápis, který přežije změnu nálady, dovolenou i příští kvartál.
+
+### Udržuj rozhodnutí blízko práce
+
+Rozhodovací deník může být v repozitáři, interní wiki nebo produktovém nástroji. Důležitější než platforma je dohledatelnost. Zápis musí být u místa, kde se podle něj pracuje.
+
+Dobrá praxe:
+
+- technická a produktová rozhodnutí držet v repozitáři vedle dokumentace,
+- obchodní a cenová rozhodnutí propojit s pricing stránkou, nabídkami nebo CRM poznámkou,
+- privacy-first rozhodnutí napojit na datovou mapu, DPIA poznámky nebo vendor kartu,
+- roadmapová rozhodnutí odkazovat z roadmapového slotu,
+- supportní dopady propojit se znalostní bází a šablonami odpovědí.
+
+Rozhodnutí bez odkazu do praxe se rychle stane muzeálním exponátem. Hezké, ale nikdo podle něj nepracuje.
+
+### Privacy-first rozhodnutí potřebují vlastní stopu
+
+U každé změny, která se dotýká dat, si zapisuj nejen „co přidáváme“, ale i „co nepřidáváme“. To je v privacy-first produktu stejně důležité.
+
+Příklad:
+
+- nepřidáváme session replay, protože potřebujeme zjistit problém ve formuláři, ne sledovat celé chování jednotlivce,
+- místo detailního osobního trackingu měříme agregované dokončení kroků,
+- nový event neobsahuje e-mail, název firmy ani volný text,
+- logy držíme jen po dobu potřebnou pro diagnostiku,
+- export a mazání dat zůstávají součástí Definition of Done.
+
+Takový zápis chrání tým před budoucím „jen to tam rychle pošleme“. Když je privacy rozhodnutí viditelné, nový člověk pochopí hranice produktu rychleji než z desetistránkové právní dokumentace.
+
+### Rozliš rozhodnutí, hypotézu a pravidlo
+
+Tři různé věci se často míchají do jedné šedé hromady:
+
+- **Rozhodnutí:** něco teď uděláme nebo neuděláme.
+- **Hypotéza:** očekáváme, že to povede k určitému výsledku.
+- **Pravidlo:** opakovaně se podle toho budeme řídit.
+
+Příklad:
+
+- Rozhodnutí: „Trial nebude vyžadovat kartu.“
+- Hypotéza: „Sníží to tření u menších B2B zákazníků a zvýší počet kvalifikovaných aktivací.“
+- Pravidlo: „Platební údaje žádáme až ve chvíli, kdy zákazník viděl hodnotu nebo chce pokračovat po trialu.“
+
+Když tyto vrstvy oddělíš, tým ví, co může experiment změnit a co je pevnější princip. Pokud hypotéza nevyjde, nemusíš hned zahodit celé pravidlo. Možná jen špatně měříš aktivaci nebo oslovuješ špatný segment.
+
+### Každé rozhodnutí musí mít datum návratu nebo podmínku návratu
+
+Bez návratu se rozhodnutí mění v sediment. Leží na dně produktu a pomalu tvrdne. Nemusíš u všeho nastavovat přesný den, ale musí být jasné, kdy se k tomu vrátit.
+
+Použij jeden ze tří režimů:
+
+- **Datum review:** například za 30, 60 nebo 90 dnů.
+- **Signál review:** například opakovaný support dotaz, nárůst ruční práce, pokles aktivace.
+- **Událost review:** například další cenová změna, nový segment zákazníků, audit integrací.
+
+U malého SaaS týmu často stačí měsíční kontrola otevřených rozhodnutí. Ne pro všechno, jen pro položky se stavem „dočasné“, „sledovat“ nebo „riziko“. Rozhodnutí bez rizika nech být. Produkt nepotřebuje akademický seminář každý pátek.
+
+### Staré rozhodnutí aktualizuj, nemaž
+
+Když se rozhodnutí změní, nepřepisuj historii tak, aby vypadala chytřeji. Přidej nový stav:
+
+- potvrzeno,
+- změněno,
+- zrušeno,
+- nahrazeno novým rozhodnutím,
+- vypršelo,
+- převedeno do pravidla.
+
+Tohle je důležité hlavně u cen, dat, bezpečnosti a zákaznických závazků. Tým potřebuje vidět, proč se směr změnil. Ne proto, aby někoho soudil, ale aby se neučil falešnou historii.
+
+Codyho doporučení: u změněného rozhodnutí přidej odkaz na nové rozhodnutí a jednu větu „co jsme se naučili“. Víc není potřeba. Produktová paměť má být lehká, ne těžká jako účetnictví v krabici od bot.
+
+### Checklist: rozhodovací deník produktu
+
+- Zapisujeme jen rozhodnutí s dopadem na prioritu, zákazníka, data, provoz nebo závazek?
+- Má každý zápis jasné „co“, „proč“ a „proč teď“?
+- Jsou uvedené zvažované alternativy, včetně možnosti nic nedělat?
+- Je popsaný očekávaný dopad na zákazníka, tým a provoz?
+- Má rozhodnutí měřitelnou hypotézu nebo aspoň pozorovatelný signál?
+- Obsahuje datum, signál nebo událost návratu?
+- Je privacy-first dopad explicitní, včetně toho, co záměrně nesbíráme?
+- Je zápis propojený s roadmapou, dokumentací, datovou mapou nebo supportem?
+- Aktualizujeme stav starých rozhodnutí bez mazání historie?
+- Umí nový člen týmu pochopit rozhodnutí bez lovu ve starých chatech?
+
+### Šablona: karta produktového rozhodnutí
+
+```markdown
+## Produktové rozhodnutí: [název]
+
+### Stav
+- Navrženo / schváleno / potvrzeno / změněno / zrušeno / nahrazeno:
+- Datum rozhodnutí:
+- Vlastník:
+- Odkazy na roadmapu / issue / dokumentaci:
+
+### Kontext
+- Jaký problém řešíme:
+- Pro koho:
+- Proč teď:
+- Co se stane, když nerozhodneme:
+
+### Rozhodnutí
+- Co uděláme:
+- Co neuděláme:
+- Jaký závazek vzniká:
+
+### Alternativy
+- Varianta A:
+- Varianta B:
+- Varianta „nedělat nic“:
+- Proč jsme je odmítli:
+
+### Hypotéza a signály
+- Očekávaný výsledek:
+- Signály úspěchu:
+- Signály tření:
+- Kdy se vrátíme k review:
+
+### Privacy-first kontrola
+- Nová data:
+- Data, která záměrně nesbíráme:
+- Retence / export / mazání:
+- Dopad na subprocesory nebo integrace:
+- Riziko pro důvěru:
+
+### Dopad na provoz
+- Support:
+- Dokumentace:
+- Monitoring / logy:
+- Náklady:
+- Rollback nebo změna směru:
+
+### Update historie
+- Datum:
+- Co se změnilo:
+- Co jsme se naučili:
+- Odkaz na navazující rozhodnutí:
+```
+
 ## Pracovní log
+
+- **2026-09-17:** Doplněna příloha DQ o rozhodovacím deníku produktu: kdy zapisovat rozhodnutí, jak formulovat závazek, propojení s prací, privacy-first stopa, rozlišení rozhodnutí/hypotézy/pravidla, review podmínky, aktualizace historie, checklist a šablona karty produktového rozhodnutí.
 
 - **2026-09-17:** Doplněna příloha DP o prevenci návratu produktového dluhu do roadmapy: vstupní brána pro kompromisy, rozlišení zdravého a toxického dluhu, Definition of Ready kontrola, support a provozní signály, privacy-first prevence, měsíční debt firewall review, checklist a šablona debt firewall karty.
 - **2026-09-17:** Doplněna příloha DO o splácení produktového dluhu bez heroického úklidu: splátkové pravidlo, splatnost položek, práce v kontextu aktuální oblasti, Definition of Done, privacy-first splátky, měření odstraněného tření, komunikace úklidu, checklist a splátková karta.
