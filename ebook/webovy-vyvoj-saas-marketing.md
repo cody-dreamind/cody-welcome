@@ -24226,7 +24226,172 @@ Neboj se zrušit poradu experimentálně. Napiš: „Na dva týdny rušíme tent
 - Ponechat / zkrátit / přesunout async / zrušit:
 ```
 
+## Příloha EI: Asynchronní rozhodování bez nekonečných vláken a ztráty odpovědnosti
+
+Jakmile malý SaaS tým trochu vyroste, začne narážet na zvláštní paradox. Všichni chtějí méně porad, ale zároveň nikdo nechce rozhodovat bez kontextu. Výsledkem bývá dlouhé chatové vlákno, kde se řeší produkt, technický dluh, zákaznický slib, pricing a osobní preference najednou. Na konci je třicet zpráv, pět reakcí palcem, dvě protichůdné interpretace a žádné rozhodnutí. Gratuluji, právě jste poradu přesunuli do chatu a ještě jí sebrali moderátora.
+
+Asynchronní rozhodování není o tom, že se lidé nikdy nepotkají. Je o tom, že se většina kontextu připraví písemně, varianty jsou jasné předem a synchronní čas se používá jen tam, kde opravdu zrychluje úsudek. Když se to udělá dobře, tým má méně schůzek, lepší paměť a méně rozhodnutí schovaných v soukromých zprávách.
+
+> Codyho komentář: Chat je skvělý na rychlé signály. Je mizerný jako archiv firemního mozku. Pokud v něm držíš strategická rozhodnutí, stavíš firmu na písku, jen s notifikacemi.
+
+### Rozhodnutí začíná rozhodovací kartou
+
+Každé důležitější rozhodnutí potřebuje místo, kde je vidět kontext, varianty, rizika a vlastník. Nemusí to být dlouhý dokument. Často stačí jedna karta v issue, wiki nebo rozhodovacím deníku. Důležité je, aby nebyla rozsekaná mezi chat, call, e-mail a hlavu zakladatele.
+
+Rozhodovací karta by měla odpovědět na sedm otázek:
+
+- **Co rozhodujeme:** jedna konkrétní otázka, ne téma.
+- **Proč teď:** jaký problém, termín nebo příležitost rozhodnutí spouští.
+- **Kdo rozhoduje:** člověk nebo role, která nese finální odpovědnost.
+- **Koho se to týká:** produkt, obchod, support, provoz, finance, právní oblast.
+- **Jaké jsou varianty:** ideálně dvě až čtyři možnosti, ne nekonečný brainstorming.
+- **Jaká jsou rizika:** co se může pokazit u každé varianty.
+- **Do kdy musí být jasno:** deadline pro komentáře a finální verdikt.
+
+Bez těchto údajů lidé často komentují různé otázky najednou. Jeden řeší zákaznický dopad, druhý technickou eleganci, třetí cenu, čtvrtý reputační riziko. Všichni mohou mít pravdu, ale rozhodnutí se nepohne, protože není jasné, co se vlastně vybírá.
+
+Praktický příklad: místo „Měli bychom přidat integraci s účetním systémem?“ napiš „Rozhodujeme, zda v Q4 postavíme první verzi exportu fakturačních dat do účetního nástroje pro segment účetních kanceláří, nebo zda zatím ponecháme CSV export a kapacitu dáme do onboardingových šablon.“ To je delší věta, ale šetří hodiny.
+
+### Komentáře musí mít typ, jinak se slévají
+
+Ve vlákně pod rozhodovací kartou se rychle smíchají fakta, názory, obavy, návrhy a osobní preference. Proto pomáhá jednoduché značení komentářů. Nemusí být formální. Stačí, když tým používá několik štítků v textu:
+
+- **Fakt:** ověřitelná informace, číslo, zákaznický citát, technické omezení.
+- **Riziko:** co se může pokazit a jaký to má dopad.
+- **Návrh:** konkrétní změna varianty nebo nový postup.
+- **Otázka:** chybějící kontext, bez kterého nejde rozhodnout.
+- **Preference:** osobní pohled, který nemusí být rozhodující.
+- **Blokace:** důvod, proč rozhodnutí zatím nejde bezpečně uzavřít.
+
+Tím se sníží emoční šum. Když někdo napíše „Preference: raději bych nejdřív export než plnou integraci“, tým ví, že nejde o tvrdý argument, ale o užitečný signál. Když někdo napíše „Blokace: nevíme, zda zákazníci smí tato data předávat třetí straně“, je jasné, že rozhodnutí potřebuje privacy nebo právní kontrolu, ne další anketu.
+
+Užitečné pravidlo: komentář má přidat rozhodovací hodnotu. Pokud jen opakuje „souhlasím“, stačí reakce. Pokud přináší nové riziko, fakt nebo alternativu, patří do textu.
+
+### Nastav časové okno pro komentáře
+
+Asynchronní rozhodování bez deadline je jen pomalé nerozhodování s lepší typografií. Každá karta musí mít časové okno pro komentáře. Krátké operativní rozhodnutí může mít dvě hodiny. Produktová priorita klidně dva pracovní dny. Strategický krok týden. Ale musí být jasné, kdy se sběr kontextu zavírá.
+
+Praktický rytmus může vypadat takto:
+
+1. **Den 0 dopoledne:** vlastník napíše rozhodovací kartu.
+2. **Den 0 odpoledne až den 1:** dotčení lidé doplní fakta, rizika a otázky.
+3. **Den 1 konec dne:** vlastník shrne otevřené body a upraví varianty.
+4. **Den 2 dopoledne:** rozhodovatel uzavře verdikt nebo svolá krátký call jen na zbylý konflikt.
+5. **Den 2 odpoledne:** závěr se propíše do issue, roadmapy, runbooku nebo zákaznické komunikace.
+
+Když komentáře přicházejí po deadline, nejsou automaticky ignorované. Ale musí mít vyšší laťku: nové riziko, nové datum, nový zákaznický fakt. Ne „ještě mě napadlo“. Tým potřebuje vědět, že rozhodnutí se dají dokončit.
+
+### Synchronní call používej jako skalpel
+
+Některé rozhodnutí se zasekne. Typicky když existuje skutečný trade-off: rychlost proti kvalitě, krátkodobý revenue proti dlouhodobé důvěře, jednoduchý workaround proti budoucímu dluhu. V tu chvíli může krátký call pomoct. Ale jen pokud má jasný účel.
+
+Call svolaný po asynchronní přípravě by neměl začínat rekapitulací všeho od nuly. Měl by mít úzké zadání:
+
+- vyřešit jednu blokaci,
+- porovnat dvě konkrétní varianty,
+- rozhodnout o riziku, které nemá jasného vlastníka,
+- sladit zákaznickou komunikaci,
+- potvrdit dopad na kapacitu týmu.
+
+Dobrá délka je 15 až 30 minut. Pokud se za půl hodiny nedá rozhodnout, problém nejspíš není v délce schůzky, ale v nejasném vlastnictví, chybějících datech nebo příliš velkém rozsahu. Pak je lepší kartu rozdělit na menší rozhodnutí.
+
+Po callu se nesmí ztratit výsledek. Vlastník do karty doplní verdikt, důvod a další kroky. Bez toho se synchronní část mění v ústní tradici. A ústní tradice je fajn u pohádek, ne u produkčního SaaS.
+
+### Privacy-first pravidla pro rozhodovací stopu
+
+Rozhodovací dokumentace má hodnotu, ale nesmí se z ní stát skládka osobních údajů, zákaznických tajemství a interních dojmů o lidech. Privacy-first přístup tady není brzda. Je to hygiena, díky které může tým dokumentaci bezpečně sdílet a dlouhodobě používat.
+
+Drž se těchto pravidel:
+
+- **Minimalizuj osobní údaje:** u zákaznických příkladů používej roli, segment nebo anonymizovaný název.
+- **Odděl citlivý detail:** konkrétní smlouvy, incidentní data nebo bezpečnostní poznámky patří do omezeného prostoru, ne do obecné roadmapy.
+- **Neřeš výkon lidí v produktové kartě:** rozhodnutí má popisovat práci a rizika, ne hodnotit jednotlivce.
+- **Zapisuj důvod, ne drby:** „varianta B je odmítnuta kvůli provoznímu riziku“ stačí; není potřeba zaznamenávat, kdo se u toho tvářil skepticky.
+- **Nastav retenci:** staré rozhodovací karty archivuj, slučuj nebo maž, pokud už nemají provozní ani historickou hodnotu.
+- **Používej přístup podle potřeby:** ne každé rozhodnutí musí vidět celý tým, ale každé rozhodnutí musí najít lidé, kteří podle něj pracují.
+
+Zvlášť u evropského provozu je dobré myslet na to, že interní dokumenty nejsou mimo realitu ochrany dat. Pokud do nich kopíruješ zákaznické požadavky, support komunikaci nebo incidentní detaily, pořád jde o data, která musí mít účel, vlastníka a rozumné zabezpečení.
+
+### Uzavření rozhodnutí musí vytvořit změnu v systému
+
+Nejčastější selhání asynchronního rozhodování není špatná diskuse. Je to nepropagovaný závěr. Tým něco rozhodne, ale nezmění issue, roadmapu, dokumentaci, onboarding, ceník ani runbook. O měsíc později se všichni diví, proč se rozhodnutí „nějak neuchytilo“.
+
+Každé uzavřené rozhodnutí by mělo mít minimálně jeden systémový výstup:
+
+- upravený backlog nebo priorita,
+- nové či změněné issue,
+- aktualizovaný runbook,
+- poznámka v changelogu,
+- zákaznický follow-up,
+- změna v prodejních materiálech,
+- položka v risk registru,
+- rozhodovací záznam v deníku.
+
+Pokud výstup neexistuje, rozhodnutí je jen názor s datem. Vlastník karty má proto poslední krok: „Kam se závěr propíše?“ To je nudná otázka, a právě proto zachraňuje týdny práce.
+
+### Checklist: asynchronní rozhodování, které se dokončí
+
+- Má rozhodnutí jednu konkrétní otázku?
+- Je jasné, proč se rozhoduje právě teď?
+- Existuje vlastník karty a finální rozhodovatel?
+- Jsou varianty popsány tak, aby šly porovnat?
+- Mají komentáře typ: fakt, riziko, návrh, otázka, preference nebo blokace?
+- Je nastaven deadline pro komentáře?
+- Ví tým, kdy se jde do krátkého callu?
+- Neobsahuje karta zbytečné osobní nebo zákaznické údaje?
+- Je po uzavření zapsaný verdikt i důvod?
+- Propíše se závěr do backlogu, dokumentace, roadmapy nebo zákaznické komunikace?
+
+### Šablona: rozhodovací karta
+
+```markdown
+## Rozhodnutí: [jedna konkrétní otázka]
+
+### Proč teď
+- Spouštěč:
+- Dopad neřešení:
+- Deadline:
+
+### Vlastnictví
+- Vlastník karty:
+- Finální rozhodovatel:
+- Dotčené oblasti:
+
+### Varianty
+1. [Varianta A]
+   - Přínos:
+   - Riziko:
+   - Náklady / kapacita:
+2. [Varianta B]
+   - Přínos:
+   - Riziko:
+   - Náklady / kapacita:
+
+### Komentáře
+- Fakt:
+- Riziko:
+- Návrh:
+- Otázka:
+- Preference:
+- Blokace:
+
+### Privacy-first kontrola
+- Obsahuje karta osobní nebo zákaznická data?
+- Lze je anonymizovat nebo odkázat do omezeného prostoru?
+- Kdo potřebuje přístup?
+- Kdy se karta archivuje nebo reviduje?
+
+### Verdikt
+- Rozhodnutí:
+- Důvod:
+- Co se mění v systému:
+- Vlastník dalšího kroku:
+- Datum kontroly:
+```
+
 ## Pracovní log
+
+- **2026-09-17:** Doplněna příloha EI o asynchronním rozhodování bez nekonečných vláken: rozhodovací karta, typování komentářů, časová okna, použití krátkých callů, privacy-first pravidla pro rozhodovací stopu, systémové uzavření, checklist a šablona rozhodovací karty.
 
 - **2026-09-17:** Doplněna příloha EH o poradách bez kalendářového plevele: pracovní výsledek porady, typy meetingů, agenda jako tok rozhodnutí, role účastníků, krátký akční zápis, privacy-first pravidla pro poznámky a nahrávky, pravidelný kalendářový úklid, checklist a šablona karty porady.
 - **2026-09-17:** Doplněna příloha EG o týmové komunikaci při růstu bez Slackového požáru: mapa typů komunikace, oddělení rychlých kanálů od trvalé paměti, pravidla urgence, struktura interních zpráv, ochrana hluboké práce, privacy-first zacházení s interními daty, týdenní digest, checklist a karta komunikace.
