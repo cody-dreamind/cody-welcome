@@ -22214,7 +22214,176 @@ Po prvním měsíci se zeptej nového člověka na tři věci: které pravidlo m
 - Zpětná vazba po 30 dnech:
 ```
 
+## Příloha DX: Audit týmových pravidel před růstem týmu bez procesního balastu
+
+Růst týmu často odhalí, že pravidla byla napsaná pro pět lidí, kteří seděli u jednoho stolu a znali všechny výjimky zpaměti. Jakmile přibude další role, externista, nový zákaznický segment nebo druhý produktový proud, tichá dohoda se začne lámat. Ne proto, že jsou lidé neschopní. Protože kontext už nejde držet v hlavách.
+
+Audit týmových pravidel před růstem není compliance divadlo. Je to kontrola, jestli pravidla pořád pomáhají práci, nebo jen zabírají místo ve wiki. Cílem není vyrobit dokonalou procesní příručku, která by se dala použít jako zarážka dveří. Cílem je nechat jen pravidla, která chrání kvalitu, rychlost rozhodování, zákaznickou důvěru a privacy-first provoz.
+
+> Codyho komentář: Pokud pravidlo nikdo neumí najít, vysvětlit ani použít v reálném úkolu, není to pravidlo. Je to archeologický exponát s URL.
+
+### Audit spusť před změnou kapacity
+
+Nečekej, až tým naroste a procesy začnou hořet. Audit udělej před konkrétním spouštěčem:
+
+- najímáš první support nebo sales roli,
+- přibíráš externistu do vývoje nebo marketingu,
+- otevíráš druhý produktový stream,
+- přecházíš z pilotů do placeného provozu,
+- začínáš pracovat s citlivějším typem zákaznických dat,
+- chystáš větší release, který změní onboarding nebo support.
+
+Dobrý audit se ptá: „Která pravidla musí být stabilní, aby nový člověk mohl pracovat bezpečně bez deseti dotazů denně?“ Špatný audit se ptá: „Kolik dokumentů nám chybí, abychom vypadali dospěle?“ Druhá otázka vede k byrokracii. První k provozní použitelnosti.
+
+Praktický postup: vezmi posledních deset rozhodnutí, incidentů, support eskalací a onboardingových otázek. Pokud se stejný problém opakuje, pravidlo buď chybí, je špatně umístěné, nebo ho nikdo nepoužívá.
+
+### Rozděl pravidla podle dopadu na práci
+
+Ne všechna pravidla mají stejnou váhu. Před růstem týmu je rozděl do čtyř skupin:
+
+- **Bezpečnostní pravidla:** přístupy, produkční data, incidenty, zálohy, exporty, mazání.
+- **Produktová pravidla:** priorizace, Definition of Done, release komunikace, práce s feedbackem.
+- **Zákaznická pravidla:** support tone of voice, reakční časy, eskalace, schvalování případovek.
+- **Provozní pravidla:** meetingy, rozhodovací deník, dokumentace, vlastnictví úkolů.
+
+Každá skupina potřebuje jinou hloubku. Bezpečnostní a privacy-first pravidla musí být přesná, auditovatelná a snadno dohledatelná. Produktová pravidla mají být spíš mantinely pro rozhodování. Zákaznická pravidla potřebují příklady dobrých odpovědí. Provozní pravidla mají být krátká, jinak se z nich stane rituální tanec kolem backlogu.
+
+Příklad: „Nikdy neposílej produkční export do osobního e-mailu“ patří mezi tvrdá pravidla. „Před novou funkcí nejdřív popiš zákaznický problém“ je mantinel. Míchat oba typy do jednoho dokumentu je recept na chaos: buď bude všechno znít jako zákon, nebo se důležitá bezpečnostní pravidla utopí mezi doporučeními.
+
+### Každé pravidlo otestuj na nováčkovi
+
+Nejrychlejší test pravidla je jednoduchý: přečte si ho člověk, který v týmu není od začátku, a dokáže podle něj udělat správný krok?
+
+Testuj tři scénáře:
+
+1. **Najít:** Ví nováček, kde pravidlo hledat v okamžiku práce?
+2. **Pochopit:** Rozumí, proč pravidlo existuje a kdy se spouští?
+3. **Použít:** Dokáže podle něj rozhodnout bez další porady?
+
+Pokud pravidlo projde jen první částí, je to dokumentace. Pokud projde prvními dvěma, je to dobré vysvětlení. Pokud projde všemi třemi, je to pracovní nástroj.
+
+Ukázka slabého pravidla: „Citlivá data sdílíme bezpečně.“
+
+Lepší verze: „Zákaznický export s osobními údaji posíláme jen přes schválený firemní kanál, s expirací odkazu a pouze lidem uvedeným v ticketu nebo smlouvě. Pokud si nejsi jistý, export neposílej a označ vlastníka účtu.“
+
+Rozdíl není v délce, ale v použitelnosti. Druhá verze říká co, kudy, komu, kdy zastavit a koho zapojit.
+
+### Najdi pravidla, která škálují špatné chování
+
+Některá pravidla vypadají rozumně, dokud je tým malý. Při růstu ale násobí špatné návyky. Typické příklady:
+
+- každý požadavek musí schválit founder,
+- každá výjimka se řeší soukromou zprávou,
+- dokumentace se aktualizuje „až bude čas“,
+- roadmapa se mění podle posledního hlasitého zákazníka,
+- support má hledat odpovědi ve starých chatech,
+- analytika se doplňuje až po releasu.
+
+Před růstem týmu takové pravidlo buď přepiš, nebo zruš. Pokud founder schvaluje každou drobnost, není to kontrola kvality. Je to úzké hrdlo s hezkou kalendářovou ikonkou. Pokud se výjimky řeší jen v chatu, nový člověk nikdy neuvidí skutečná pravidla hry.
+
+Praktická otázka pro audit: „Co se stane, když podle tohoto pravidla začne pracovat pět dalších lidí?“ Pokud odpověď zní „budeme mít pětkrát víc dotazů“, pravidlo není připravené na růst.
+
+### Privacy-first audit pravidel začni daty
+
+Privacy-first provoz nestojí na tom, že ve footeru svítí hezká věta o soukromí. Stojí na drobných pravidlech, která každý den určují, kde končí data, kdo je vidí a jak dlouho zůstávají v systému.
+
+Při auditu projdi minimálně tato místa:
+
+- **Přístupy:** kdo získá účet, kdo ho schvaluje, kdy se odebírá.
+- **Exporty:** kdo je smí vytvořit, kam se ukládají, kdy expirují.
+- **Support:** jak se pracuje se screenshoty, logy a zákaznickými příklady.
+- **Marketing:** jak se sbírá souhlas, jak se eviduje odhlášení a preference.
+- **Analytika:** které události se měří agregovaně a které se nesbírají vůbec.
+- **AI nástroje:** jaká data do nich nesmí, kdo schvaluje nový use-case.
+- **Dodavatelé:** kdo kontroluje subprocesory, region zpracování a možnost exportu.
+
+U každého pravidla si napiš jednu větu: „Toto pravidlo chrání před…“ Pokud ji neumíš doplnit, pravidlo je možná jen zvyklost. Pokud ji doplníš a riziko je vysoké, pravidlo potřebuje vlastníka, revizi a místo v onboardingu.
+
+### Zkrať pravidla na rozhodovací otázky
+
+Před růstem týmu nepomáhá přidat další desetistránkový manuál. Pomáhá převést pravidla do otázek, které se objeví přímo v práci.
+
+Příklady:
+
+- Před novou událostí v analytice: „Umíme výsledek změřit agregovaně?“
+- Před importem dat: „Máme mapu polí, rollback a retenční plán?“
+- Před release oznámením: „Říkáme zákazníkovi změnu jeho práce, ne jen název funkce?“
+- Před novou integrací: „Víme, kde budou data fyzicky zpracovaná?“
+- Před support odpovědí se screenshotem: „Neobsahuje obrázek osobní nebo zákaznická data navíc?“
+
+Takové otázky patří do pull request šablon, ticketů, checklistů, release karet nebo support makra. Wiki je archiv. Workflow je místo, kde pravidlo opravdu žije.
+
+### Audit konči rozhodnutím, ne pocitem
+
+Po auditu má každé pravidlo skončit v jedné z pěti kategorií:
+
+- **Ponechat:** funguje, je aktuální a lidé ho používají.
+- **Zkrátit:** smysl je dobrý, text je zbytečně dlouhý.
+- **Přesunout:** pravidlo je správné, ale není v místě práce.
+- **Přepsat:** pravidlo neříká dost konkrétně, co dělat.
+- **Archivovat:** pravidlo už neplatí nebo chrání před starým problémem.
+
+Nenechávej kategorii „ještě se uvidí“. Ta je procesní kompost. Když nevíš, nastav vlastníka a datum rozhodnutí. Audit má snížit nejasnost, ne ji přejmenovat na „otevřené téma“.
+
+### Checklist: audit pravidel před růstem týmu
+
+- Máme jasný spouštěč auditu: nový člověk, nový stream, citlivější data nebo větší release.
+- Pravidla jsou rozdělená podle dopadu: bezpečnostní, produktová, zákaznická a provozní.
+- Každé důležité pravidlo jde najít v místě práce, nejen ve wiki.
+- Nový člověk dokáže podle pravidla udělat správný první krok.
+- Tvrdá privacy-first pravidla jsou oddělená od doporučení a mají vlastníka.
+- Neaktuální pravidla jsou archivovaná, ne jen ignorovaná.
+- Výjimky mají viditelný záznam, důvod a datum revize.
+- Výsledek auditu má konkrétní rozhodnutí: ponechat, zkrátit, přesunout, přepsat nebo archivovat.
+
+### Šablona: karta auditu týmových pravidel
+
+## Audit pravidel: [oblast / tým / datum]
+
+### Spouštěč
+
+- Co se mění v týmu nebo produktu:
+- Proč audit děláme teď:
+- Která práce se má zjednodušit:
+
+### Rozsah
+
+- Bezpečnostní pravidla:
+- Produktová pravidla:
+- Zákaznická pravidla:
+- Provozní pravidla:
+
+### Signály z praxe
+
+- Opakované dotazy:
+- Incidenty nebo skoro-incidenty:
+- Support eskalace:
+- Onboardingové záseky:
+
+### Privacy-first kontrola
+
+- Přístupy:
+- Exporty:
+- Support data:
+- Analytika:
+- Dodavatelé:
+- AI nástroje:
+
+### Rozhodnutí
+
+| Pravidlo | Stav | Akce | Vlastník | Termín |
+|---|---|---|---|---|
+| [název] | ponechat / zkrátit / přesunout / přepsat / archivovat | [konkrétní krok] | [jméno/role] | [datum] |
+
+### Kontrola po zavedení
+
+- Jak poznáme, že pravidla pomáhají:
+- Kde se pravidla objeví ve workflow:
+- Kdy proběhne další revize:
+
 ## Pracovní log
+
+- **2026-09-17:** Doplněna příloha DX o auditu týmových pravidel před růstem týmu: spouštěče auditu, rozdělení pravidel podle dopadu, test nováčkem, škálování špatných návyků, privacy-first kontrola, checklist a šablona auditní karty.
 
 - **2026-09-17:** Doplněna příloha DW o onboardingu do týmových pravidel: vrstvy pravidel, praktické scénáře, zapojení do workflow, první a druhý týden zaučení, privacy-first předávání kontextu, výjimky, měření samostatnosti, checklist a onboardingová karta.
 
