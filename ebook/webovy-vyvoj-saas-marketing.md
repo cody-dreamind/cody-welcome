@@ -22577,7 +22577,210 @@ Tyto metriky neříkají „Pepa je pomalý“. Říkají „systém má díru�
 - Co přestaneme dělat:
 - Kdy vyhodnotíme dopad:
 
+## Příloha DZ: První seniorní hire bez kultu zachránce a ztráty kontroly
+
+První seniorní člověk v malém SaaS týmu je lákavá zkratka. Zakladatelé jsou unavení, backlog roste, zákazníci chtějí víc a v hlavě se objeví věta: „Najmeme někoho zkušeného a ono se to vyřeší.“ Nevyřeší. Seniorní hire není magický čistič chaosu. Pokud přijde do nepojmenované práce, zdědí mlhu, politiku, neviditelná očekávání a přístup do systémů, které nikdo pořádně nerevidoval.
+
+Dobrý první senior nepřináší jen výkon. Přináší lepší rozhodování, schopnost učit tým, klid v provozu a odvahu říct, že některé věci se nemají dělat vůbec. Aby to fungovalo, musíš před náborem vědět, jaký typ odpovědnosti vlastně kupuješ. Jinak místo posily najmeš drahou naději v lidské podobě. A naděje, jak známo, nemá SLA.
+
+> Codyho komentář: Seniorní člověk má zmenšit chaos, ne stát se novým místem, kam se chaos nosí na podpis. Pokud po měsíci všichni čekají na „toho seniora“, nenajali jste lídra. Vytvořili jste lidský bottleneck s pěkným LinkedIn profilem.
+
+### Nejdřív napiš problém, ne pracovní inzerát
+
+Pracovní inzerát často začíná seznamem technologií. To je pohodlné, ale slabé. Malý SaaS tým nepotřebuje „React/Nest/Postgres seniora“ jako samostatnou odpověď. Potřebuje vyřešit konkrétní provozní nebo růstovou bolest.
+
+Před náborem napiš jednu stránku:
+
+- jaká práce se dnes zasekává,
+- jaké rozhodnutí zakladatelé drží příliš dlouho u sebe,
+- jaký typ rizika už tým neumí bezpečně nést,
+- jaký zákaznický dopad má současný stav,
+- co se musí zlepšit za prvních devadesát dní.
+
+Příklad špatného zadání: „Potřebujeme senior developera, aby zrychlil vývoj.“
+
+Lepší zadání: „Potřebujeme člověka, který převezme technické vlastnictví onboardingu, zkrátí dobu od podpisu po první hodnotu, nastaví bezpečný release rytmus a sníží závislost na zakladateli při produkčních zásazích.“
+
+Rozdíl je obrovský. První věta hledá ruce. Druhá hledá odpovědnost.
+
+### Rozliš experta, vlastníka a multiplikátora
+
+Ne každý seniorní člověk pomůže stejným způsobem. Před pohovory si ujasni, který typ role hledáš:
+
+- **Expert:** vyřeší hluboký technický problém, například výkon, bezpečnost, architekturu nebo datový model.
+- **Vlastník:** převezme oblast, drží rozhodnutí, komunikuje dopady a dotahuje práci do provozu.
+- **Multiplikátor:** zlepší práci ostatních lidí, nastaví standardy, mentoring a opakovatelné postupy.
+
+V malém SaaS bývá největší hodnota v kombinaci vlastníka a multiplikátora. Samotný expert může být skvělý, ale pokud jeho výstup zůstane v hlavě nebo v jedné složité části kódu, tým se nestane silnějším. Jen získá další místo, kterému nerozumí.
+
+Praktická otázka do pohovoru: „Popiš situaci, kdy jsi zlepšil práci týmu tak, aby tě u ní po čase nepotřeboval.“ Pokud člověk mluví jen o svém výkonu, je to signál. Ne nutně špatný, ale víš, co kupuješ.
+
+### Připrav předávku před nástupem
+
+Onboarding seniorního člověka není o tom, že mu dáš přístup do repozitáře a pozveš ho na pět callů. Senior sice umí hledat, ale nemá hádat firemní archeologii. Připrav vstupní balíček, který ukáže, jak se u vás dělají rozhodnutí.
+
+Minimum pro první týden:
+
+- produktový kontext a cílový zákazník,
+- mapa hlavních systémů a integrací,
+- poslední tři důležitá produktová rozhodnutí,
+- největší technické a provozní dluhy,
+- support témata za poslední měsíc,
+- pravidla pro práci s daty, logy, přístupy a AI nástroji,
+- seznam lidí, kteří drží klíčový kontext.
+
+Vstupní balíček nemusí být dokonalý. Má být pravdivý. Pokud něco nevíš, napiš „nevíme“. To je lepší než sebevědomý dokument, který realitu popisuje asi jako cestovní katalog popisuje deštivý kemp.
+
+### Nedávej plný přístup první den
+
+Seniorní důvěra neznamená okamžitý přístup ke všemu. Privacy-first provoz stojí na tom, že přístup odpovídá účelu a fázi práce. První týdny nejsou výjimka jen proto, že člověk působí schopně.
+
+Navrhni přístup ve vrstvách:
+
+1. **Den 1:** dokumentace, lokální vývoj, demo prostředí, anonymizovaná data, read-only pohled na provozní dashboardy.
+2. **Týden 1:** vybrané repozitáře, issue systém, staging, support kontext bez citlivých detailů.
+3. **Týden 2–4:** produkční read-only přístupy podle role, auditní logy, omezené incidentové zapojení.
+4. **Po ověření:** produkční zápisové přístupy, deploy práva, správa integrací nebo zákaznických exportů.
+
+Každá vrstva má mít vlastníka, důvod a datum revize. Když někdo říká „dejme mu radši všechno, ať se nezdržuje“, přelož si to jako „nechce se nám přemýšlet o riziku“. To je lidské. Ale ne profesionální.
+
+### První úkol musí ukázat způsob práce
+
+Nedávej prvnímu seniorovi hned největší požár. Ani ho neposílej „něco si najít“. Vyber úkol, který je dost reálný, aby odhalil systém, ale dost omezený, aby měl jasný konec.
+
+Dobré první úkoly:
+
+- zmapovat kritickou část onboardingu a navrhnout jedno zlepšení,
+- zrevidovat release checklist a doplnit chybějící rollback krok,
+- opravit drobný produkční problém v oblasti, kde je dobrý runbook,
+- napsat technické rozhodovací memo k jedné známé bolesti,
+- projít support téma a převést ho na malou produktovou úpravu.
+
+Špatné první úkoly:
+
+- „přepiš architekturu“,
+- „vezmi si celý billing“,
+- „zaveď nám proces“,
+- „řekni nám, co děláme špatně“,
+- „rychle zachraň zákazníka, kterého jsi nikdy neviděl“.
+
+První úkol není jen test schopností. Je to test kompatibility s kulturou rozhodování. Sleduj, jestli člověk klade otázky, zapisuje předpoklady, chrání zákaznická data a umí navrhnout menší bezpečný krok místo velkého gesta.
+
+### Předávej rozhodnutí postupně
+
+Zakladatelé často udělají jednu ze dvou chyb. Buď nového seniora nepustí k ničemu důležitému, takže se stane drahým vykonavatelem. Nebo mu předají celou oblast bez kontextu, takže první měsíc hasí i staré sliby, o kterých nevěděl.
+
+Použij tři úrovně předání:
+
+1. **Stínování:** senior sleduje rozhodnutí, ptá se a zapisuje, co chybí v dokumentaci.
+2. **Společné rozhodnutí:** senior připraví varianty, zakladatel nebo původní vlastník doplní kontext a rozhodnutí se zapíše.
+3. **Samostatné vlastnictví:** senior rozhoduje v domluvených mantinelech a zpětně reportuje dopad.
+
+U každé oblasti napiš mantinely: rozpočet, bezpečnostní hranice, datové hranice, zákaznický dopad, situace vyžadující eskalaci. Bez mantinelů není autonomie. Je to jen tiché doufání, že dva lidé mají v hlavě stejnou firmu.
+
+### Měř úspěch přes změnu systému
+
+Seniorní hire se nemá hodnotit jen podle počtu ticketů. To je lákavě jednoduché a často úplně mimo. Lepší je sledovat, jestli se po jeho příchodu zlepšuje systém práce.
+
+Signály dobrého dopadu:
+
+- méně rozhodnutí čeká na zakladatele,
+- méně produkčních zásahů probíhá bez runbooku,
+- tým má jasnější Definition of Done,
+- onboarding nové práce obsahuje méně ústního vysvětlování,
+- citlivá data se méně kopírují do ad hoc nástrojů,
+- zákaznické problémy se převádějí do menších a lépe popsaných změn,
+- po incidentu vzniká poučení, ne jen únava.
+
+Měř hlavně trend. První měsíc může být pomalejší, protože dobrý člověk odhalí nepořádek. To není selhání. Selhání je, když po třech měsících stále všechno závisí na jeho osobní přítomnosti a tým má jen nový seznam věcí, kterým nerozumí.
+
+### Privacy-first onboarding seniora
+
+Seniorní lidé často pracují rychle a mají návyk používat vlastní nástroje. To může být produktivní, ale v privacy-first SaaS musí mít hranice.
+
+Ujasni hned na začátku:
+
+- kam se smí ukládat pracovní poznámky,
+- zda lze používat osobní AI nástroje a s jakými daty,
+- jak se redigují screenshoty a logy,
+- kde se drží zákaznický kontext,
+- jak dlouho se uchovávají onboardingové poznámky,
+- kdo schvaluje nové dodavatele,
+- co nikdy neopouští evropský provozní kontext.
+
+Tohle není nedůvěra. Je to ochrana zákazníků, firmy i nového člověka. Nejhorší je, když senior udělá rozumnou věc podle svých starých návyků a tým až zpětně zjistí, že tím porušil nevyřčené pravidlo. Nevyřčené pravidlo je jen past v kostýmu kultury.
+
+### Checklist: první seniorní hire
+
+- Je jasně popsaný problém, který má hire řešit?
+- Víme, jestli hledáme experta, vlastníka, multiplikátora nebo kombinaci?
+- Má role první devadesátidenní výsledek?
+- Existuje vstupní balíček s produktem, architekturou, rozhodnutími a provozem?
+- Jsou přístupy vrstvené podle účelu a fáze onboardingu?
+- Má první úkol jasný konec a ukazuje způsob práce?
+- Jsou předání rozhodnutí rozdělena na stínování, společné rozhodnutí a samostatné vlastnictví?
+- Jsou privacy-first pravidla napsaná prakticky, ne jen hodnotově?
+- Víme, podle čeho poznáme systémový dopad po 30, 60 a 90 dnech?
+
+### Šablona: karta prvního seniorního hire
+
+```markdown
+## Seniorní hire: [role / oblast]
+
+### Problém
+- Co se dnes zasekává:
+- Jaký má problém dopad na zákazníka:
+- Jaký má problém dopad na tým:
+
+### Typ role
+- Expert / vlastník / multiplikátor:
+- Proč právě tento typ:
+- Co role nemá řešit:
+
+### Prvních 90 dní
+- Výsledek po 30 dnech:
+- Výsledek po 60 dnech:
+- Výsledek po 90 dnech:
+- Signály úspěchu:
+
+### Onboardingový balíček
+- Produktový kontext:
+- Systémová mapa:
+- Rozhodovací deník:
+- Provozní runbooky:
+- Support témata:
+- Dluh a rizika:
+
+### Přístupy
+- Den 1:
+- Týden 1:
+- Týden 2–4:
+- Po ověření:
+- Datum revize přístupů:
+
+### Privacy-first pravidla
+- Zákaznická data:
+- Logy a screenshoty:
+- AI nástroje:
+- Dodavatelé:
+- Retence poznámek:
+
+### První úkol
+- Zadání:
+- Mantinely:
+- Definition of Done:
+- Kdo dává kontext:
+- Kdy proběhne review:
+
+### Předání rozhodnutí
+- Oblast ke stínování:
+- Oblast ke společnému rozhodnutí:
+- Oblast k samostatnému vlastnictví:
+- Eskalační hranice:
+```
+
 ## Pracovní log
+- **2026-09-17:** Doplněna příloha DZ o prvním seniorním hiru bez kultu zachránce: definice problému před inzerátem, rozlišení experta/vlastníka/multiplikátora, onboardingový balíček, vrstvené přístupy, první úkol, postupné předání rozhodnutí, systémové měření dopadu, privacy-first onboarding, checklist a šablona karty hire.
 
 - **2026-09-17:** Doplněna příloha DY o škálování malého SaaS týmu bez manažerského divadla: odpovědnosti před meetingy, role podle práce, komunikační dráhy, delegování s kontextem, ochrana hluboké práce, nábor podle úzkého hrdla, privacy-first přístupy, automatizace předávek, zdravé metriky, checklist a karta škálování týmu.
 
