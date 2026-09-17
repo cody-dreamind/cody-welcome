@@ -21485,8 +21485,187 @@ Krátká pravidla přežijí. Dlouhá pravidla se mění v tapetu.
 - Rozhodnutí po review: ponechat / zkrátit / upravit / zrušit
 ```
 
+
+## Příloha DT: Revize týmového pravidla bez byrokratické mumifikace
+
+Týmové pravidlo není kamenná deska z hory procesů. Je to pracovní pomůcka. Pokud pravidlo po zavedení nikdo nepoužívá, možná je špatně napsané, špatně umístěné, nebo už neřeší skutečný problém. Nejhorší varianta je tvářit se, že pravidlo platí, zatímco ho tým obchází tichou dohodou. To není autonomie. To je interní divadlo s kulisami z Confluence.
+
+Revize pravidla má jednoduchý cíl: zjistit, jestli pravidlo pořád chrání důležitou hodnotu, zrychluje rozhodování a nepřidává víc tření než užitku. U privacy-first SaaS je to obzvlášť důležité, protože pravidla kolem dat, analytiky, přístupů a dodavatelů musí být živá. Produkt se mění, zákazníci se mění, integrace přibývají a staré formulace začnou časem protékat jako stará střecha.
+
+Codyho komentář: pravidlo bez revize je jako firewall, který nikdo neaktualizuje, protože „zatím přece funguje“. Ano, dokud ne.
+
+### Nastav datum kontroly už při zavedení
+
+Každé nové pravidlo musí mít datum první revize. Bez něj se z pravidla stane permanentní nános. U malého týmu stačí jednoduchý rytmus:
+
+- **Po 2 týdnech:** kontrola, jestli pravidlo vůbec někdo viděl a použil.
+- **Po 6 týdnech:** kontrola, jestli pravidlo mění rozhodnutí, nebo jen přidává políčko.
+- **Po 3 měsících:** rozhodnutí, jestli pravidlo zůstává, mění se, slučuje s jiným, nebo končí.
+- **Po incidentu nebo výrazné chybě:** mimořádná revize bez čekání na kalendář.
+- **Při změně právního, datového nebo vendor kontextu:** kontrola dopadu na pravidlo.
+
+Datum revize neznamená schůzku na dvě hodiny. Často stačí patnáct minut a pět otázek. Důležité je, aby pravidlo mělo vlastníka. „Tým“ není vlastník. Tým je mlha s kalendářem.
+
+### Měř používání pravidla bez sledování lidí
+
+Cílem není zjistit, který vývojář pravidlo třikrát zapomněl. Cílem je zjistit, jestli systém práce pravidlo připomíná ve správném okamžiku. Měř proto agregované signály, ne osobní výkon.
+
+Použitelné signály:
+
+- kolik relevantních issue nebo PR mělo vyplněnou kontrolní otázku,
+- kolik návrhů bylo kvůli pravidlu upraveno před implementací,
+- kolik výjimek bylo schváleno a proč,
+- kolik problémů pravidlo zachytilo před releasem,
+- kolik support dotazů nebo incidentů souviselo s porušením pravidla,
+- kolikrát tým pravidlo obcházel, protože bylo nejasné nebo moc těžké.
+
+Privacy-first přístup tady znamená dvě věci: nepoužívej revizi pravidla jako individuální dohled a nesbírej zbytečně detailní pracovní stopu lidí. Pokud potřebuješ důkaz, použij vzorky z issue, anonymizované příklady a agregované počty. Pravidlo má zlepšit systém, ne vyrábět malý interní panoptikon.
+
+### Rozliš tři typy problému
+
+Když pravidlo nefunguje, neznamená to automaticky, že je špatné. Nejprve zjisti, který problém řešíš.
+
+1. **Pravidlo je neviditelné.** Lidé ho neporušují schválně, jen se neobjevuje v jejich práci. Řešení: přesunout ho do šablony, checklistu, review kroku nebo automatické připomínky.
+2. **Pravidlo je nejasné.** Lidé nevědí, co přesně znamená. Řešení: přepsat ho na konkrétní otázku, doplnit příklady a vyjasnit výjimky.
+3. **Pravidlo je moc drahé.** Dodržení zabere neúměrně času nebo blokuje běžnou práci. Řešení: zjednodušit mantinel, automatizovat kontrolu, nebo pravidlo omezit jen na rizikové scénáře.
+
+Příklad: pravidlo „každá integrace musí mít datovou kartu“ může být správné, ale moc těžké pro drobný webhook bez osobních dat. Lepší verze může říct: „Datovou kartu vyplňujeme pro integrace, které zpracovávají zákaznická, uživatelská nebo obchodně citlivá data; technické integrace bez těchto dat projdou zkrácenou kontrolou.“
+
+Tím pravidlo nezměkne. Jen přestane trestat nízkorizikovou práci.
+
+### Kontroluj výjimky jako první
+
+Výjimky jsou nejlepší diagnostika pravidla. Když jich je moc, pravidlo je buď špatně napsané, nebo tým řeší jinou realitu, než pravidlo předpokládá. Když nejsou žádné, nemusí to znamenat dokonalost. Může to znamenat, že lidé výjimky nezapisují.
+
+U každé výjimky se ptej:
+
+- Proč byla potřeba?
+- Šlo o jednorázovou situaci, nebo opakovaný vzor?
+- Jaké riziko vzniklo pro zákazníka, data, podporu nebo provoz?
+- Kdo výjimku schválil a kdy se znovu zkontroluje?
+- Má pravidlo dostat novou variantu, nebo výjimka zůstane výjimkou?
+
+Privacy-first pravidla by měla mít výjimky obzvlášť viditelné. Ne proto, aby se tým bál. Protože výjimka kolem dat je často místo, kde později vznikne auditní otázka, zákaznický dotaz nebo bezpečnostní nepříjemnost s vůní mokrého koberce.
+
+### Zjednodušuj text, ne hodnotu
+
+Revize pravidla často skončí tím, že se přidají další odstavce. To je lákavé, ale nebezpečné. Pravidlo má být čitelnější než problém, který řeší. Když se do něj nevejde jasná formulace, rozděl ho.
+
+Dobrá revize může udělat jednu z těchto věcí:
+
+- přepsat pravidlo z abstraktní věty na kontrolní otázku,
+- přidat dva konkrétní příklady povoleného a zakázaného chování,
+- zúžit pravidlo jen na rizikové situace,
+- přesunout detail do šablony a nechat v pravidle jen mantinel,
+- sloučit dvě překrývající se pravidla,
+- zrušit pravidlo, které už chrání jen historickou bolest.
+
+Příklad před revizí:
+
+> Při práci s daty dbáme na minimalizaci a nepoužíváme osobní údaje, pokud to není nezbytné.
+
+Příklad po revizi:
+
+> Nová analytická událost nesmí obsahovat e-mail, jméno, název souboru, obsah zprávy ani volný text od uživatele. Pokud bez detailu nejde vyhodnotit dopad funkce, navrhni agregovaný stav nebo kategorii a výjimku zapiš do rozhodovacího deníku.
+
+Druhá verze je delší, ale praktičtější. Člověk podle ní umí jednat.
+
+### Automatizuj jen stabilní pravidla
+
+Ne každé pravidlo patří rovnou do CI, lintu nebo povinného workflow. Nejdřív ho ověř ručně. Automatizace špatného pravidla jen rychleji vyrábí frustraci.
+
+Automatizovat dává smysl, když:
+
+- pravidlo je opakovatelné a má jasný výsledek,
+- falešné poplachy jsou vzácné,
+- tým chápe, proč kontrola existuje,
+- existuje jednoduchý postup, jak chybu opravit,
+- výjimka se dá zapsat a zkontrolovat.
+
+Příklady vhodné automatizace:
+
+- kontrola, že nová migrace má rollback poznámku,
+- kontrola zakázaných polí v analytickém event slovníku,
+- šablona PR s povinnou otázkou na nový datový tok,
+- pravidelný report otevřených výjimek s datem expirace,
+- upozornění na vendora bez vyplněného vlastníka a exit plánu.
+
+Naopak opatrně s automatizací, která vyhodnocuje kontext, záměr nebo kvalitu komunikace. Tam je lepší krátké peer review než robotické razítko. Ano, říká to AI asistent. Ironie zaznamenána, ale pořád pravda.
+
+### Udělej z revize rozhodnutí
+
+Revize pravidla nesmí skončit větou „probráno“. Výstupem má být jedno ze čtyř rozhodnutí:
+
+1. **Ponechat:** pravidlo funguje a není potřeba změna.
+2. **Upravit:** pravidlo je užitečné, ale potřebuje jasnější formulaci, lepší umístění nebo jednodušší výjimky.
+3. **Zúžit / rozšířit:** pravidlo má platit jen pro část práce, nebo naopak pokrýt nový typ rizika.
+4. **Zrušit:** pravidlo už nepomáhá, překrývá se s jiným nebo chrání minulý problém.
+
+Ke každému rozhodnutí přidej datum další kontroly. Zrušení pravidla není selhání. Je to úklid. A úklid procesů je jedna z nejlevnějších forem produktivity.
+
+### Checklist revize týmového pravidla
+
+- Má pravidlo vlastníka a datum revize?
+- Objevuje se pravidlo tam, kde vzniká relevantní práce?
+- Umí tým vysvětlit pravidlo jednou větou?
+- Existují konkrétní příklady povoleného a zakázaného chování?
+- Zachytilo pravidlo za poslední období reálný problém?
+- Nevyžaduje pravidlo zbytečně osobní sledování práce lidí?
+- Jsou výjimky zapsané, odůvodněné a časově omezené?
+- Nejde stejnou hodnotu chránit jednodušším mantinelem?
+- Je pravidlo vhodné pro automatizaci, nebo potřebuje lidský úsudek?
+- Skončila revize rozhodnutím: ponechat, upravit, zúžit/rozšířit, nebo zrušit?
+
+## Revize pravidla: [název]
+
+```markdown
+# Revize pravidla: [název]
+
+## Kontext
+- Původní rozhodnutí:
+- Vlastník pravidla:
+- Kde pravidlo žije:
+- Datum zavedení:
+- Datum revize:
+
+## Signály používání
+- Kde se pravidlo objevilo v práci:
+- Kolik relevantních změn ho použilo:
+- Kolik návrhů pravidlo změnilo:
+- Kolik výjimek vzniklo:
+- Jaké problémy pravidlo zachytilo:
+
+## Problémy
+- Je pravidlo neviditelné?
+- Je pravidlo nejasné?
+- Je pravidlo moc drahé?
+- Obchází se pravidlo v praxi?
+- Co zbytečně zpomaluje tým:
+
+## Privacy-first kontrola
+- Vyžaduje pravidlo sledování konkrétních lidí?
+- Dá se vyhodnocovat agregovaně?
+- Pracuje s osobními nebo zákaznickými daty?
+- Jsou výjimky časově omezené?
+- Je potřeba aktualizovat datovou mapu, vendor kartu nebo dokumentaci?
+
+## Rozhodnutí
+- Ponechat / upravit / zúžit / rozšířit / zrušit:
+- Co přesně se mění:
+- Kdo změnu provede:
+- Kde se změna projeví:
+- Datum další kontroly:
+
+## Komunikace týmu
+- Jednověté vysvětlení změny:
+- Kde se oznámí:
+- Kdo musí změnu znát:
+- Jak poznáme, že nová verze funguje:
+```
+
 ## Pracovní log
 
+- **2026-09-17:** Doplněna příloha DT o revizi týmového pravidla: datum kontroly, agregované měření používání, diagnostika neviditelného/nejasného/drahého pravidla, práce s výjimkami, zjednodušování, automatizace, rozhodnutí o ponechání či zrušení a šablona revizní karty.
 - **2026-09-17:** Doplněna příloha DS o zavedení týmového pravidla do praxe: výběr prvního workflow, adopční scénář, změny v šablonách a checklistech, vysvětlení důvodu, privacy-first výjimky, měření kvality rozhodnutí, první týden doprovodu, měsíční zkrácení pravidla, checklist a adopční karta.
 
 - **2026-09-17:** Doplněna příloha DR o převodu produktového rozhodnutí do týmového pravidla: výběr opakovatelných rozhodnutí, psaní mantinelů, zapojení do issue/PR/release workflow, privacy-first měření, vlastnictví, výjimky, rušení pravidel, checklist a šablona karty týmového pravidla.
