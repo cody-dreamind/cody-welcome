@@ -23654,7 +23654,205 @@ Nezapomeň na „co přestane dělat“. Bez toho se z povýšení stane jen vy�
 - Datum kontroly:
 ```
 
+
+## Příloha EF: První manažer v malém SaaS týmu bez ztráty řemesla
+
+První manažer v malém SaaS týmu není dekorace do organizačního diagramu. Je to změna operačního systému. Pokud se role vytvoří jen proto, že „už bychom měli mít leadery“, tým získá další schůzky, ale ne nutně lepší rozhodnutí. Pokud se vytvoří dobře, uvolní zakladatele, ochrání soustředěnou práci a zmenší chaos, který dřív všichni statečně hasili po večerech.
+
+Nejdřív si ujasni, jestli opravdu potřebuješ manažera, nebo jen lepší pravidla. Malý tým často netrpí nedostatkem řízení, ale nedostatkem jasného vlastnictví: nikdo neví, kdo rozhoduje o prioritách, kdo drží kvalitu, kdo komunikuje incidenty a kdo řekne „ne“ dalšímu urgentnímu nápadu. Manažer má smysl až ve chvíli, kdy je práce opakovaně blokovaná koordinací lidí, ne jen technickým dluhem.
+
+> Codyho komentář: První manažer nemá být lidská notifikace. Pokud jeho hlavní práce je připomínat dospělým lidem, že mají zavřít tickety, problém není v absenci manažera, ale v rozbitém systému práce.
+
+### Rozliš manažera, tech leada a provozního vlastníka
+
+V malém SaaS týmu se tyto role často slepí do jednoho člověka. Krátkodobě to může fungovat, ale musí být jasné, co právě dělá:
+
+- **Manažer lidí:** řeší kapacitu, očekávání, zpětnou vazbu, růst, konflikty a zdraví týmu.
+- **Tech lead:** drží technickou kvalitu, rozhoduje architekturu a pomáhá týmu dělat dobrá technická rozhodnutí.
+- **Provozní vlastník:** hlídá běžící službu, incidenty, podporu, monitoring, release rytmus a provozní rizika.
+- **Produktový partner:** pomáhá spojit technickou práci se zákaznickou hodnotou a obchodním dopadem.
+
+Jeden člověk může dočasně držet dvě role, ale neměl by potají držet všechny čtyři. Výsledkem bývá neviditelná práce, přetížení a zvláštní stav, kdy tým má „manažera“, ale pořád se musí na všechno ptát zakladatele.
+
+Praktická otázka před jmenováním zní: **který typ rozhodnutí dnes nejvíc brzdí tým?** Pokud technická kvalita, potřebuješ možná tech leada. Pokud kapacita a očekávání, manažera lidí. Pokud incidenty a release chaos, provozního vlastníka. Pokud se plete všechno dohromady, začni mapou odpovědností, ne pracovním titulem.
+
+### Nech manažera odstranit práci, ne přidat ceremonie
+
+První manažerská role má být měřitelná podle toho, co zjednoduší. Nový manažer by měl během prvních šesti týdnů najít a odstranit konkrétní tření:
+
+- zkrátit rozhodovací frontu,
+- zpřesnit priority,
+- snížit počet ručních předávek,
+- vyčistit opakované nejasnosti v backlogu,
+- sjednotit pravidla pro podporu a incidenty,
+- zlepšit onboarding nových lidí,
+- chránit čas na hlubokou práci.
+
+Pozor na opačný efekt: manažer převezme chaos a začne ho profesionálně distribuovat. Přibude status meeting, tabulka pro tabulku a reporting, který nikdo nepoužije. To není řízení. To je administrativní cosplay s kalendářem.
+
+Dobrý start je „audit tření“. Manažer projde poslední měsíc práce a sepíše, kde se tým zasekával: čekání na rozhodnutí, nejasný zadavatel, špatně připravené issue, chybějící testovací data, nejasná priorita, slabá komunikace změny zákazníkům. Z toho vybere dvě věci, které opraví systémově.
+
+### Deleguj rozhodovací práva veřejně
+
+Nejhorší varianta je manažer bez pravomocí. Vypadá jako odpovědná osoba, ale každé důležité rozhodnutí se stejně vrací k zakladateli. Tým pak získá prostředníka, ne rychlost.
+
+Jasně napiš, o čem může první manažer rozhodovat sám:
+
+- pořadí práce v rámci schváleného cíle,
+- rozdělení kapacity mezi support, vývoj a technický dluh,
+- pravidla týmového rytmu,
+- eskalace incidentů podle předem domluvených hranic,
+- doporučení k náboru a onboardingu,
+- drobné procesní změny bez dopadu na zákaznický slib.
+
+Stejně důležité je napsat, co zůstává u zakladatele nebo vedení: změna obchodního modelu, významná cenová politika, právní závazky, velké infrastrukturní náklady, zásadní produktový pivot nebo komunikace citlivého incidentu směrem ven.
+
+Rozhodovací práva dej do dokumentu, který tým skutečně používá. Ne do zapomenutého PDF. Ideálně k týmovým pravidlům, onboardingové stránce a šabloně pro produktová rozhodnutí.
+
+### Chraň řemeslo seniorních lidí
+
+Klasická past: nejlepší seniorní člověk se stane manažerem, protože „už to přirozeně dělá“. O měsíc později nemá čas na architekturu, mentoring ani hlubokou práci. Tým přišel o seniorní výkon a získal člověka zavaleného schůzkami.
+
+Před změnou role si polož tři otázky:
+
+- Chce ten člověk opravdu pracovat s lidmi, nebo jen zachraňuje tým?
+- Které technické odpovědnosti mu zůstanou a které předá?
+- Jak poznáme, že role týmu pomáhá, ne jen pohlcuje nejlepšího člověka?
+
+Pokud senior přechází do manažerské role, udělej přechod postupně. První měsíc ať drží jen omezenou část lidí nebo oblastí. Zbytek jeho původní práce musí mít vlastníka. „Bude dělat oboje“ je plán jen do chvíle, než přijde první incident, urgentní zákazník a nemoc v týmu. Tedy přibližně do úterý.
+
+### Nastav zdravý rytmus 1:1
+
+Individuální rozhovory nejsou terapeutická show ani status report. Jsou to krátké pravidelné kontroly kapacity, překážek, očekávání a rozvoje. U malého týmu stačí jednoduchý rytmus:
+
+- **Každé 2 týdny:** 25 minut 1:1 s každým člověkem.
+- **Každý měsíc:** krátká kontrola priorit, kapacity a hlavního rizika.
+- **Každé čtvrtletí:** hlubší rozhovor o dopadu, růstu a roli.
+- **Ad hoc:** okamžitě při konfliktu, přetížení nebo nejasné odpovědnosti.
+
+Dobré otázky pro 1:1:
+
+- Co ti teď nejvíc brání dělat dobrou práci?
+- Které rozhodnutí čeká zbytečně dlouho?
+- Kde máme nejasná očekávání?
+- Co bych měl jako manažer přestat dělat?
+- Která práce má dopad, ale není vidět?
+- Co se opakuje tak často, že to máme zautomatizovat nebo zdokumentovat?
+
+Poznámky z 1:1 piš střídmě. Zaznamenávej závazky, rozhodnutí a úkoly, ne osobní detaily. Pokud něco nepatří do pracovního systému, pravděpodobně to nepatří ani do firemní poznámky.
+
+### Privacy-first manažerská práce
+
+Manažer pracuje s citlivým kontextem: výkon, zdraví týmu, konflikty, nábor, rozvoj, osobní preference a někdy i osobní situace. Privacy-first přístup tady není hezká nálepka. Je to ochrana důvěry.
+
+Pravidla:
+
+- Sbírej jen poznámky, které mají jasný pracovní účel.
+- Odděl osobní důvěrné informace od pracovních závazků.
+- Přístup k manažerským poznámkám drž minimální.
+- Neposílej citlivé informace do nástrojů bez jasného důvodu a smluvního rámce.
+- Nepoužívej AI nástroje na shrnutí osobních rozhovorů, pokud nemáš výslovně vyřešený účel, informování lidí a zpracování dat.
+- Po změně role nebo odchodu člověka smaž nebo anonymizuj poznámky, které už nemají účel.
+
+Manažerský systém má pomáhat lidem dělat lepší práci, ne vytvářet tajný archiv nálad. Pokud by se člověk styděl ukázat poznámku dotčenému zaměstnanci, je to signál k přepsání nebo smazání.
+
+### První 30denní plán manažera
+
+První měsíc nemá být revoluce. Má být diagnostika, malé opravy a získání důvěry.
+
+**Týden 1: Kontext**
+
+- přečíst týmová pravidla, roadmapu, poslední rozhodnutí a incidenty,
+- projít backlog a aktuální cíle,
+- domluvit 1:1 se všemi lidmi,
+- zapsat hlavní oblasti odpovědnosti.
+
+**Týden 2: Tření**
+
+- najít 5 opakovaných blokátorů,
+- rozlišit procesní, technické a kapacitní problémy,
+- vybrat jednu rychlou opravu,
+- pojmenovat rozhodnutí, která se zbytečně vrací k zakladateli.
+
+**Týden 3: První systémová změna**
+
+- upravit jednu šablonu, runbook nebo meeting,
+- odstranit jeden zbytečný reporting,
+- vyjasnit vlastnictví jedné oblasti,
+- ověřit, jestli změna týmu opravdu šetří čas.
+
+**Týden 4: Dohoda o roli**
+
+- sepsat rozhodovací práva,
+- domluvit rytmus 1:1 a týmové kontroly,
+- nastavit privacy pravidla pro poznámky,
+- vybrat další dvě oblasti ke zlepšení.
+
+Na konci měsíce má být jasné, co manažer vlastní, co nevlastní, jaká rozhodnutí může dělat a jak tým pozná, že role přináší hodnotu.
+
+### Checklist: první manažer bez ztráty řemesla
+
+- Víme, jaký konkrétní problém má role vyřešit.
+- Rozlišili jsme manažera lidí, tech leada a provozního vlastníka.
+- Role má veřejně popsaná rozhodovací práva.
+- Zakladatel ví, která rozhodnutí už nebude držet u sebe.
+- Seniorní řemeslo se neztratilo v kalendáři schůzek.
+- První manažer má 30denní plán místo neurčitého „zlepši tým“.
+- 1:1 mají jasný účel a omezené poznámky.
+- Citlivé informace se nesypou do nástrojů bez kontroly.
+- První úspěch role je odstranění tření, ne přidání meetingů.
+- Po měsíci proběhne krátká revize dopadu role.
+
+### Šablona: karta první manažerské role
+
+
+```markdown
+## První manažerská role: [oblast / tým]
+
+### Proč role vzniká
+- Konkrétní problém:
+- Dopad na tým / zákazníky:
+- Co se stane, když roli nezavedeme:
+
+### Rozsah role
+- Manažer lidí:
+- Tech lead:
+- Provozní vlastník:
+- Produktový partner:
+
+### Rozhodovací práva
+- Rozhoduje samostatně:
+- Doporučuje:
+- Eskaluje:
+- Nerozhoduje:
+
+### Prvních 30 dní
+- Kontext:
+- Audit tření:
+- První systémová změna:
+- Revize role:
+
+### Rytmus práce
+- 1:1:
+- Týmová kontrola:
+- Rozhodovací zápisy:
+- Aktualizace pravidel:
+
+### Privacy-first kontrola
+- Kde jsou manažerské poznámky:
+- Kdo k nim má přístup:
+- Co se nesmí ukládat:
+- Retence / mazání:
+
+### Měření dopadu
+- Jaké tření se snížilo:
+- Které rozhodnutí se zrychlilo:
+- Co se zjednodušilo:
+- Datum další kontroly:
+```
+
 ## Pracovní log
+- **2026-09-17:** Doplněna příloha EF o prvním manažerovi v malém SaaS týmu: rozlišení manažera, tech leada a provozního vlastníka, odstranění tření místo ceremonií, veřejná rozhodovací práva, ochrana seniorního řemesla, rytmus 1:1, privacy-first manažerské poznámky, 30denní plán, checklist a karta role.
 - **2026-09-17:** Doplněna příloha EE o kariérní cestě v malém SaaS týmu: typy dopadu místo titulů, oddělení odborné a manažerské cesty, očekávání jako pozorovatelné chování, návaznost rozvoje na potřeby týmu, privacy-first kariérní poznámky, čtvrtletní rozhovor, pravidla povýšení, checklist a kariérní karta role.
 - **2026-09-17:** Doplněna příloha ED o kompetenční mapě týmu bez HR tabulky a interního dohledu: schopnosti podle práce, tři akční úrovně, oddělení kompetence od kapacity, privacy-first zacházení s interními poznámkami, hledání single points of failure, propojení s učením, checklist a karta kompetenční oblasti.
 - **2026-09-17:** Doplněna příloha EC o interním školení bez slide divadla: pracovní výsledek před tématem, scénáře z reality, krátký aktivní formát, aktualizace systému po školení, privacy-first tréninkové materiály, ověření místo docházky, opakovatelný rytmus, checklist a karta školení.
