@@ -23495,7 +23495,167 @@ Změna v mapě má být doložená pozorováním, ne dojmem. „Zvládl samostat
 - Kdy mapu aktualizujeme:
 ```
 
+## Příloha EE: Kariérní cesta v malém týmu bez korporátního labyrintu
+
+Malý SaaS tým často čeká s kariérní cestou příliš dlouho. Nejdřív se řeší produkt, zákazníci, support, incidenty, billing a občas i tajemná otázka, kdo zase změnil `.env`. Jenže jakmile tým roste, lidé potřebují vědět, jak se mohou posouvat, aniž by museli předstírat zájem o management nebo čekat na firemní organigram z budoucnosti.
+
+Kariérní cesta v malém týmu nemá být HR brožura. Má být dohoda o tom, jak roste odpovědnost, dopad, samostatnost a důvěra. Když chybí, tým začne odměňovat hlasitost, dostupnost večer a schopnost hasit požáry. To je sice efektní, ale jen do chvíle, než všichni vyhoří a produkt začne připomínat opuštěný sklad s webhooky.
+
+> Codyho komentář: Kariérní cesta není žebřík do nebe. Je to mapa, aby člověk nelezl po stejném žebříku pořád dokola a neříkalo se tomu „nová výzva“.
+
+### Začni typy dopadu, ne názvy pozic
+
+Názvy jako junior, medior, senior, lead nebo principal jsou užitečné jen tehdy, když tým rozumí, co za nimi znamená práce. V malém SaaS je lepší nejdřív popsat typy dopadu:
+
+- **Dopad na úkol:** člověk dobře dokončuje svěřené věci.
+- **Dopad na oblast:** člověk vlastní část produktu, procesu nebo zákaznické zkušenosti.
+- **Dopad na systém:** člověk zlepšuje způsob práce týmu, snižuje rizika a předává znalosti.
+- **Dopad na směr:** člověk pomáhá vybírat správné problémy, ne jen řešit zadané úkoly.
+
+Tahle vrstva je důležitější než titul. Dva lidé se stejným názvem role mohou mít úplně jiný dopad. Jeden senior může být technický specialista na databáze, druhý multiplikátor, který zjednoduší celý release proces. Oba jsou hodnotní, ale růst a očekávání u nich vypadají jinak.
+
+Praktický postup: vezmi posledních deset důležitých výsledků týmu a napiš, jaký typ dopadu byl potřeba. Kde stačilo dobře dokončit úkol? Kde bylo potřeba vlastnictví oblasti? Kde pomohlo změnit systém? Z toho vznikne reálná kariérní mapa, ne katalog přání.
+
+### Odděl odbornou a manažerskou cestu
+
+Klasická chyba malých firem: nejlepší specialista dostane za odměnu lidi. Někdy to funguje. Často tím ale tým přijde o výborného odborníka a získá unaveného manažera, který nikdy nechtěl řešit dovolené, konflikty a rozpočty.
+
+Proto drž dvě legitimní cesty:
+
+- **Odborná cesta:** hlubší expertiza, systémové zlepšování, technická a produktová rozhodnutí, mentoring, standardy.
+- **Manažerská cesta:** rozvoj lidí, kapacita týmu, priority, komunikace, odpovědnost za pracovní prostředí.
+
+Ani jedna nesmí být „lepší“. Pokud se vyšší vliv a lepší odměna dají získat jen přes management, firma potichu nutí experty odejít z práce, ve které jsou nejlepší. Odborná cesta musí mít vlastní popis vlivu: rozhodovací práva, očekávané výstupy, mentoring, odpovědnost za kvalitu systému a viditelnost dopadu.
+
+### Popiš očekávání jako chování
+
+Kariérní cesta musí být čitelná v každodenní práci. Vyhýbej se větám typu „projevuje strategické myšlení“ nebo „má ownership mindset“. To je mlha v drahém saku.
+
+Lepší jsou pozorovatelná očekávání:
+
+- před implementací ověří dopad na zákaznická data,
+- u větší změny navrhne rollback a komunikační plán,
+- při incidentu oddělí fakta, hypotézy a další kroky,
+- z opakovaného support dotazu vytvoří návrh zlepšení produktu,
+- po dokončení úkolu doplní dokumentaci nebo checklist,
+- umí říct ne funkci, která nepodporuje aktuální cíl,
+- předá znalost tak, aby ji další člověk dokázal použít bez dozoru.
+
+Každé očekávání by mělo mít příklad. Ne proto, aby se z lidí staly stroje na formuláře, ale aby se snížila hra na interpretaci. Když člověk ví, jak vypadá dobrá práce, může se k ní přiblížit bez čtení myšlenek zakladatele.
+
+### Růst navazuj na skutečné mezery týmu
+
+Rozvoj lidí nesmí být oddělený od reality firmy. Pokud tým trpí na pomalé releasy, slabý onboarding zákazníků a nejasné incidenty, kariérní růst by měl směřovat do těchto oblastí. Jinak vznikne hezký rozvojový plán, který neřeší nic důležitého.
+
+U každého člověka hledej průnik tří věcí:
+
+1. co ho dlouhodobě zajímá,
+2. kde má dnes největší šanci růst,
+3. co tým opravdu potřebuje zlepšit.
+
+Příklad: vývojář chce růst technicky, tým má slabý release proces a zákazníci trpí na drobné regresní chyby. Dobrá rozvojová cesta může být vlastnictví release checklistu, automatizace smoke testů a vedení post-release review. To není školení „staň se seniornější“. To je konkrétní práce s dopadem.
+
+### Privacy-first kariérní poznámky
+
+Kariérní dokumentace obsahuje citlivé informace: ambice, obavy, slabá místa, zpětnou vazbu, platová očekávání a někdy i zdravotní nebo osobní kontext. Proto nesmí skončit v chaotickém sdíleném dokumentu s přístupem „kdo ví, ten ví“.
+
+Pravidla pro malý tým:
+
+- rozvojové poznámky ukládej odděleně od běžné projektové dokumentace,
+- zapisuj pracovní pozorování, ne osobnostní nálepky,
+- sdílej jen závěry potřebné pro plánování práce,
+- citlivé osobní detaily do týmové mapy vůbec nepatří,
+- nastav vlastníka, přístup a dobu uchování,
+- při změně role nebo odchodu člověka poznámky projdi a smaž, co už není potřeba,
+- člověk má vědět, jaké závěry se o jeho růstu používají.
+
+Privacy-first tady není brzda upřímnosti. Je to ochrana důvěry. Lidé se budou bavit otevřeněji, když vědí, že jejich nejistoty nejsou palivo pro tajný interní scoring.
+
+### Udělej kariérní rozhovor krátký a pravidelný
+
+Není potřeba čekat na roční hodnocení. V malém týmu je lepší lehký čtvrtletní rytmus. Třicet až čtyřicet pět minut stačí, pokud se mluví konkrétně.
+
+Agenda:
+
+- Co se za poslední období povedlo a mělo dopad?
+- Kde člověk získal větší samostatnost?
+- Co ho zbytečně brzdilo?
+- Která schopnost nebo oblast má růst příště?
+- Jaký konkrétní úkol ověří posun?
+- Co musí změnit tým, aby růst nebyl jen individuální heroismus?
+
+Výstupem rozhovoru nemá být dlouhý zápis. Stačí jeden rozvojový krok, jeden systémový blocker a datum další kontroly. Pokud po rozhovoru nevznikne žádná změna v práci, byl to jen terapeutický meeting s firemním pozadím.
+
+### Povýšení nesmí být překvapení
+
+Dobré povýšení potvrzuje realitu, která už je vidět. Špatné povýšení je motivační injekce bez změny odpovědnosti. V malém týmu by mělo být jasné:
+
+- jaký dopad člověk už opakovaně ukázal,
+- jak se změní jeho rozhodovací práva,
+- co přestane dělat,
+- co začne vlastnit,
+- jak tým pozná, že nová role funguje,
+- jak se aktualizují přístupy, dokumentace a komunikační rytmus.
+
+Nezapomeň na „co přestane dělat“. Bez toho se z povýšení stane jen vyšší titul nalepený na stejný backlog. Každý růst odpovědnosti potřebuje uvolnit kapacitu, jinak tým odměňuje lidi novou prací bez prostoru ji dělat dobře.
+
+### Checklist: kariérní cesta bez labyrintu
+
+- Máme popsané typy dopadu, ne jen názvy pozic.
+- Odborná cesta má stejnou legitimitu jako manažerská.
+- Očekávání jsou napsaná jako pozorovatelné chování.
+- Rozvojové kroky navazují na skutečné potřeby týmu.
+- Kariérní poznámky mají omezený přístup a retenční pravidla.
+- Čtvrtletní rozhovor končí jedním konkrétním úkolem.
+- Povýšení potvrzuje už prokázaný dopad.
+- Nová odpovědnost obsahuje i rozhodnutí, co člověk přestane dělat.
+- Kompetenční mapa a kariérní cesta se aktualizují po reálné práci, ne po dojmu.
+
+### Šablona: kariérní karta role
+
+
+```markdown
+## Kariérní karta: [role / oblast]
+
+### Typ dopadu
+- Úkol / oblast / systém / směr:
+- Proč je tento dopad pro tým důležitý:
+
+### Očekávané chování
+- Běžná práce:
+- Samostatné rozhodování:
+- Předávání znalostí:
+- Privacy-first odpovědnost:
+
+### Odborná cesta
+- Hlubší expertiza:
+- Systémové zlepšení:
+- Mentoring / standardy:
+
+### Manažerská cesta
+- Péče o kapacitu:
+- Rozvoj lidí:
+- Prioritizace a komunikace:
+
+### Rozvojový krok
+- Konkrétní úkol:
+- Jak poznáme posun:
+- Co tým změní, aby to šlo:
+
+### Privacy-first kontrola
+- Kde jsou uložené poznámky:
+- Kdo má přístup:
+- Co se smaže po změně role:
+
+### Povýšení / změna role
+- Prokázaný dopad:
+- Nová rozhodovací práva:
+- Co člověk přestává dělat:
+- Datum kontroly:
+```
+
 ## Pracovní log
+- **2026-09-17:** Doplněna příloha EE o kariérní cestě v malém SaaS týmu: typy dopadu místo titulů, oddělení odborné a manažerské cesty, očekávání jako pozorovatelné chování, návaznost rozvoje na potřeby týmu, privacy-first kariérní poznámky, čtvrtletní rozhovor, pravidla povýšení, checklist a kariérní karta role.
 - **2026-09-17:** Doplněna příloha ED o kompetenční mapě týmu bez HR tabulky a interního dohledu: schopnosti podle práce, tři akční úrovně, oddělení kompetence od kapacity, privacy-first zacházení s interními poznámkami, hledání single points of failure, propojení s učením, checklist a karta kompetenční oblasti.
 - **2026-09-17:** Doplněna příloha EC o interním školení bez slide divadla: pracovní výsledek před tématem, scénáře z reality, krátký aktivní formát, aktualizace systému po školení, privacy-first tréninkové materiály, ověření místo docházky, opakovatelný rytmus, checklist a karta školení.
 - **2026-09-17:** Doplněna příloha EB o předávání znalostí bez bus factor paniky: mapa kritických znalostí, rozlišení faktů/rozhodnutí/dovedností, vrstvené runbooky, privacy-first tréninkové materiály, párování na úsudek, měření samostatnosti, checklist a karta předání znalosti.
