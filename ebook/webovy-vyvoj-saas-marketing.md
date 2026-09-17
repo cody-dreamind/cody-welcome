@@ -23153,7 +23153,182 @@ Nepoužívej to jako osobní výkonovou metriku. Cílem není říct „Petr se 
 - Datum další revize:
 ```
 
+## Příloha EC: Interní školení bez slide divadla a ztraceného kontextu
+
+Jakmile tým předá první znalosti, přijde další lákavá past: udělat z toho „školení“. Rezervuje se hodina, někdo otevře třicet slidů, všichni zdvořile kývají a za dva týdny se stejně ptají na stejnou věc. Ne proto, že jsou líní. Protože pasivní školení bez praktického použití je často jen firemní kino s horším popcornem.
+
+Interní školení v malém SaaS týmu má mít jiný účel: zrychlit bezpečnou samostatnost. Člověk má po školení zvládnout konkrétní situaci lépe než před ním — vyřešit typický support dotaz, provést bezpečný import, připravit demo, zkontrolovat release, napsat zákaznický update nebo poznat, kdy má zastavit a eskalovat.
+
+> Codyho komentář: Jestli se po školení jediný měřitelný výstup jmenuje „účastníci byli seznámeni“, gratuluju, právě vznikl procesní amulet. Vypadá důležitě, ale před incidentem tě neochrání.
+
+### Začni pracovním výsledkem, ne tématem
+
+Téma „školení k billing systému“ je moc široké. Pracovní výsledek je lepší: „support dokáže zákazníkovi vysvětlit limit projektu, poznat chybnou fakturaci a založit eskalaci bez kopírování osobních dat do chatu.“ Takový výsledek určuje obsah, scénáře i ověření.
+
+Před přípravou školení napiš jednu větu:
+
+- **Po školení člověk zvládne:** [konkrétní úkol / rozhodnutí / situaci].
+- **Bezpečná hranice je:** [co už nesmí dělat sám].
+- **Důkaz zvládnutí je:** [praktický výstup, ne docházka].
+
+Příklady dobrých výsledků:
+
+- Nový vývojář provede lokální reprodukci chyby a doplní minimální bug report.
+- Support rozliší incident, běžný dotaz a produktový požadavek.
+- Obchodník vysvětlí privacy-first provoz bez slibů, které produkt neumí splnit.
+- Produktový člověk zapíše rozhodnutí tak, aby za tři měsíce dávalo smysl.
+- On-call člověk projde runbook a ví, kdy zastavit změny.
+
+Když výsledek neumíš formulovat, školení ještě není připravené. Možná potřebuješ nejdřív runbook, mapu odpovědností nebo rozhodnutí o tom, kdo vlastně co smí dělat.
+
+### Použij scénáře z reality
+
+Nejlepší interní školení nevychází ze seznamu funkcí, ale z opakovaných situací. Vezmi posledních deset support dotazů, tři incidenty, pět demo callů, dva pokažené handoffy nebo jeden nepříjemný import. Odstraň osobní a zákaznická data, nech strukturu problému a postav školení kolem ní.
+
+Scénář má obsahovat:
+
+- **kontext:** co se stalo a kdo je zapojený,
+- **úkol:** co má účastník rozhodnout nebo udělat,
+- **nejasnost:** co není na první pohled jasné,
+- **riziko:** co se pokazí při špatném postupu,
+- **správný další krok:** ne vždy finální odpověď, často eskalace.
+
+Příklad pro support:
+
+> Zákazník píše, že mu zmizel export zakázek. V účtu vidíš, že export doběhl, ale soubor už není dostupný. Zákazník tlačí, protože má uzávěrku. Co ověříš, co mu odpovíš a co nesmíš poslat do interního chatu?
+
+Tohle učí úsudek. Nejen klikání. A přesně úsudek je v malém týmu nejdražší část práce.
+
+### Drž formát krátký a aktivní
+
+Interní školení nemusí být dlouhé. Často funguje lépe 35 minut praktického workshopu než dvouhodinová prezentace s historickým úvodem od roku založení firmy.
+
+Jednoduchý formát:
+
+1. **5 minut — proč:** jaký problém školení řeší a kde se používá.
+2. **10 minut — minimální kontext:** nejdůležitější pravidla, limity a odkazy.
+3. **15 minut — scénář:** účastníci řeší konkrétní případ.
+4. **5 minut — kontrola hranic:** co dělat sám, kdy eskalovat, co zapisovat.
+5. **5 minut — úprava dokumentace:** co bylo nejasné, hned se doplní.
+
+Pokud školení potřebuje víc času, rozděl ho na vrstvy. První vrstva má naučit bezpečný základ. Druhá vrstva řeší výjimky. Třetí vrstva patří pokročilým vlastníkům oblasti. Ne každý musí znát všechno. Každý musí vědět, kdy je mimo bezpečnou zónu.
+
+### Školení má aktualizovat systém
+
+Dobré školení nevzdělává jen lidi. Zlepšuje dokumentaci, produkt i proces. Pokud se pět lidí ptá na stejnou věc, není problém v pěti lidech. Je to signál, že pravidlo, UI, runbook nebo onboarding nejsou dost jasné.
+
+Po každém školení zachyť:
+
+- které otázky se opakovaly,
+- kde scénář nebyl srozumitelný,
+- jaký odkaz chyběl,
+- co se muselo vysvětlovat ústně,
+- které rozhodnutí nemá vlastníka,
+- co by šlo automatizovat nebo přesunout do produktu.
+
+Z toho udělej jednu drobnou změnu: doplň runbook, uprav help článek, přidej kontrolu do release checklistu, zkrať formulář, přepiš mikrocopy v adminu nebo založ produktový úkol. Když školení nevede k lepšímu systému, budeš stejné školení opakovat jako firemní sezónní rituál.
+
+### Privacy-first pravidla pro tréninkové materiály
+
+Interní školení často pracuje s reálnými příklady. Právě tady se snadno nenápadně rozmnoží zákaznická data: screenshot v prezentaci, export v příloze, nahrávka hovoru, citace z ticketu, kopie e-mailu. Všechno „jen interně“. A přesně tak vzniká datový bordel s visačkou vzdělávání.
+
+Pravidla pro privacy-first školení:
+
+- Používej anonymizované nebo syntetické scénáře, pokud reálná data nejsou nutná.
+- Pokud ukazuješ screenshot, odstraň jména, e-maily, tokeny, ID účtů, domény a volný text.
+- Nahrávky používej jen s jasným účelem, omezeným přístupem a retenční dobou.
+- Tréninkové exporty ukládej odděleně od produkčních dat a označ je jako testovací.
+- Nepřenášej zákaznický kontext do nástrojů, které nejsou schválené pro daný typ dat.
+- Po školení smaž pracovní kopie, které nemají dlouhodobý účel.
+
+Privacy-first školení není sterilní. Je připravené tak, aby lidé pochopili realitu bez zbytečného šíření dat. Když potřebuješ ukázat skutečný případ, popiš strukturu problému a ponech jen data, která jsou nezbytná pro rozhodnutí.
+
+### Ověření místo docházky
+
+Docházka říká, že člověk byl v místnosti. Neříká, že umí udělat práci. U kritických oblastí měř praktické zvládnutí.
+
+Použij jednoduché ověření:
+
+- účastník vyřeší modelový případ,
+- napíše zákaznickou odpověď,
+- najde správný runbook a použije ho,
+- pojmenuje rizika a eskalační hranice,
+- doplní chybějící část dokumentace,
+- vysvětlí rozhodnutí vlastními slovy.
+
+Výsledek neukládej jako osobní skóre do tabulky hanby. Zapiš stav schopnosti v kontextu role: „může řešit běžné exportní dotazy“, „billing výjimky zatím eskalovat“, „incidentovou komunikaci dělat s review“. To pomáhá plánovat provoz bez interního šmírování.
+
+### Udělej z toho opakovatelný rytmus
+
+Malý tým nepotřebuje akademii s logem. Potřebuje lehký rytmus:
+
+- **Měsíčně:** jedno školení podle největšího opakovaného tření.
+- **Po incidentu:** krátký trénink podle postmortemu.
+- **Po větší změně produktu:** scénář pro support, obchod a onboarding.
+- **Při nástupu člověka:** základní sada bezpečných scénářů podle role.
+- **Při předání vlastnictví:** ověřovací workshop s novým vlastníkem.
+
+Každé školení měj v katalogu s názvem, cílem, vlastníkem, poslední revizí a odkazem na materiály. Katalog nemá být knihovna všeho. Má odpovědět na otázku: „Když do týmu přijde člověk nebo se změní proces, co mu pustíme do ruky?“
+
+### Checklist: interní školení bez zbytečného cirkusu
+
+- [ ] Školení má jeden konkrétní pracovní výsledek.
+- [ ] Je jasné, kdo je cílový účastník a co po školení smí dělat.
+- [ ] Materiál vychází z reálných scénářů, ne ze seznamu funkcí.
+- [ ] Reálná zákaznická data jsou anonymizovaná nebo nahrazená syntetickými.
+- [ ] Součástí je praktické ověření, ne jen účast.
+- [ ] Po školení vznikne aspoň jedna úprava dokumentace, produktu nebo procesu.
+- [ ] Materiály mají vlastníka, datum revize a retenční pravidlo.
+- [ ] Výsledky školení se nepoužívají jako mikromanagement lidí.
+- [ ] Eskalační hranice jsou napsané lidsky a konkrétně.
+- [ ] Katalog školení pomáhá onboardingu a předávání vlastnictví.
+
+### Šablona: karta interního školení
+
+```markdown
+## Interní školení: [název]
+
+### Účel
+- Proč školení existuje:
+- Cílová role / tým:
+- Po školení člověk zvládne:
+- Bezpečná hranice:
+
+### Kontext
+- Související proces / produktová oblast:
+- Autoritativní dokumentace:
+- Vlastník školení:
+- Poslední revize:
+
+### Scénáře
+- Scénář 1:
+- Scénář 2:
+- Scénář 3:
+- Co je záměrně nejasné:
+
+### Privacy-first příprava
+- Použitá data:
+- Co bylo anonymizováno:
+- Kde jsou materiály uložené:
+- Kdo má přístup:
+- Retence pracovních kopií:
+
+### Praktické ověření
+- Úkol:
+- Kritéria zvládnutí:
+- Kdy eskalovat:
+- Co ještě vyžaduje review:
+
+### Zlepšení systému
+- Opakované otázky:
+- Chybějící dokumentace:
+- Produktové tření:
+- Procesní změna:
+- Navazující úkol:
+```
+
 ## Pracovní log
+- **2026-09-17:** Doplněna příloha EC o interním školení bez slide divadla: pracovní výsledek před tématem, scénáře z reality, krátký aktivní formát, aktualizace systému po školení, privacy-first tréninkové materiály, ověření místo docházky, opakovatelný rytmus, checklist a karta školení.
 - **2026-09-17:** Doplněna příloha EB o předávání znalostí bez bus factor paniky: mapa kritických znalostí, rozlišení faktů/rozhodnutí/dovedností, vrstvené runbooky, privacy-first tréninkové materiály, párování na úsudek, měření samostatnosti, checklist a karta předání znalosti.
 - **2026-09-17:** Doplněna příloha EA o udržení seniorního člověka bez zlaté klece: kontrola reality role, konkrétní vliv, ochrana hluboké práce, viditelný mentoring, růstové cesty mimo management, včasné retenční signály, privacy-first interní poznámky, šestiměsíční rytmus, checklist a retenční karta seniora.
 
