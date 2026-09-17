@@ -23851,7 +23851,190 @@ Na konci měsíce má být jasné, co manažer vlastní, co nevlastní, jaká ro
 - Datum další kontroly:
 ```
 
+## Příloha EG: Týmová komunikace při růstu bez Slackového požáru
+
+Jakmile malý SaaS tým vyroste z pár lidí na více rolí, komunikace začne bolet dřív než architektura. Ne proto, že by lidé neuměli mluvit. Protože se z jedné společné místnosti stane síť rozhodnutí, kontextů, výjimek a nevyřčených očekávání. Pokud se to neuchopí vědomě, tým začne řídit notifikace. A notifikace, jak víme, nejsou dobrý CEO. Maximálně nervózní papoušek s přístupem k mobilu.
+
+Cílem není mít méně komunikace za každou cenu. Cílem je mít správnou komunikaci ve správném kanálu, s jasným výsledkem a bez zbytečného sběru interních dat. Dobrý komunikační systém chrání soustředěnou práci, zrychluje rozhodnutí a dává novým lidem možnost pochopit kontext bez archeologické výpravy do tří let starých chatů.
+
+> Codyho komentář: Když se ve firmě každá otázka řeší jako urgentní zpráva, urgentní není všechno. Jen nikdo nenavrhl klidnější cestu.
+
+### Začni mapou komunikačních typů
+
+Nejdřív rozděl komunikaci podle účelu, ne podle nástroje. Nástroj je až druhý krok. Malý tým obvykle potřebuje pět typů komunikace:
+
+- **Operativní blokace:** něco stojí a potřebuje rychlou pomoc.
+- **Rozhodnutí:** tým potřebuje vědět, co platí, kdo rozhodl a proč.
+- **Pracovní kontext:** informace k issue, zákazníkovi, incidentu, návrhu nebo experimentu.
+- **Zpětná vazba:** reakce na práci, proces, kvalitu nebo spolupráci.
+- **Sociální vrstva:** lidský kontakt, lehké sdílení, humor, oslavy a týmová energie.
+
+Když se všech pět typů míchá v jednom kanálu, vznikne chaos. Rozhodnutí zapadne mezi vtipy, blokace soutěží s oznámením oběda a pracovní kontext se ztratí v dlouhém vlákně. Výsledek: lidé se bojí něco přehlédnout, takže kontrolují všechno. Produktivita se tváří jako aktivita, ale ve skutečnosti jen bliká.
+
+Praktický začátek: napiš pro tým jednu stránku „kdy komunikujeme kam“. Nemusí být dokonalá. Stačí, když odstraní největší nejasnosti.
+
+### Odděl rychlé kanály od trvalé paměti
+
+Chat je dobrý na rychlost. Není dobrý jako dlouhodobá paměť firmy. Pokud rozhodnutí existuje jen v chatu, jako by mělo expirační dobu jogurtu. Nový člověk ho nenajde, starý člověk si ho pamatuje jinak a tým po třech měsících znovu řeší stejnou věc.
+
+Jednoduché pravidlo:
+
+- **Chat:** krátká koordinace, rychlé dotazy, upozornění, lidský kontakt.
+- **Issue / ticket:** práce, která má výsledek, vlastníka a stav.
+- **Rozhodovací deník:** rozhodnutí, která mění pravidla, priority nebo architekturu.
+- **Wiki / runbook:** postupy, pravidla, onboarding, opakovatelné znalosti.
+- **Status page / incident log:** provozní události a zákaznický dopad.
+
+Tohle není byrokracie. Je to prevence interního ztrácení paměti. Chat může rozhodnutí oznámit, ale nemá být jediným místem, kde rozhodnutí žije.
+
+Dobrá praxe: po důležitém vlákně někdo napíše krátké shrnutí do autoritativního místa a do chatu pošle odkaz. Ne screenshot. Ne „někde výše“. Odkaz. Internet ho vymyslel už dávno, používejme tu technologickou divočinu naplno.
+
+### Nastav pravidla urgence
+
+Bez pravidel urgence začne všechno vypadat naléhavě. Lidé pak přepínají kontext kvůli věcem, které klidně mohly počkat do odpoledne. Tým potřebuje společný slovník:
+
+- **Teď:** produkční incident, bezpečnostní problém, blokace zákazníka, výpadek platby nebo kritická chyba.
+- **Dnes:** práce blokuje jiného člověka nebo release, ale nejde o incident.
+- **Tento týden:** rozhodnutí je důležité, ale není potřeba vytrhnout lidi z práce.
+- **Až bude prostor:** nápad, zlepšení, otázka bez okamžitého dopadu.
+
+Každá úroveň má mít očekávaný kanál. Produkční incident může mít telefon, speciální incident kanál nebo jasný eskalační postup. Běžný nápad nemá právo probudit tým večer jen proto, že zakladatel zrovna dostal inspiraci ve sprše.
+
+Užitečné je také pravidlo „bez odpovědi neznamená ignoraci“. Pokud tým chrání hlubokou práci, musí být normální, že lidé nereagují okamžitě na věci, které nejsou urgentní. Jinak se z asynchronní komunikace stane jen synchronní vyrušování s horší ergonomií.
+
+### Piš zprávy jako malé zadání
+
+Dobrá interní zpráva šetří čas adresátovi. Špatná zpráva přenáší práci s pochopením na druhou stranu. Rozdíl často dělá struktura.
+
+Místo:
+
+„Mrkneš na ten problém s fakturací?“
+
+Lepší:
+
+„Potřebuju rozhodnout do dneška 15:00, jestli u zákazníka Novák s.r.o. ručně opravíme fakturu, nebo počkáme na hotfix. Kontext je v issue #123. Dopad: zákazník nemůže dokončit platbu. Navrhuju ruční opravu a hotfix zítra.“
+
+Zpráva má obsahovat:
+
+- **co potřebuji:** rozhodnutí, kontrolu, informaci, pomoc nebo jen vědomí,
+- **do kdy:** konkrétní termín nebo „není urgentní“,
+- **kontext:** odkaz na issue, dokument, zákaznický případ nebo incident,
+- **dopad:** co se stane, když se to nevyřeší,
+- **návrh:** preferovaná varianta, pokud ji máš.
+
+Tohle není formálnost. Je to laskavost k mozku ostatních lidí. A mozek ostatních lidí je důležitá infrastruktura.
+
+### Chraň soustředěnou práci komunikačními okny
+
+Vývoj, design, obsah, strategie i support potřebují různé režimy. Pokud celý den teče proud drobných dotazů, tým sice komunikuje, ale hlubší práce se rozpadá na drobky.
+
+Zaveď komunikační okna:
+
+- dopolední blok bez neurgentních schůzek,
+- pevné časy pro triage supportu,
+- denní nebo obdenní kontrolu rozhodovacích front,
+- jasné „office hours“ pro produktové a technické otázky,
+- týdenní shrnutí změn místo průběžného šumu.
+
+Nejde o to zakázat kontakt. Jde o to, aby tým věděl, kdy se soustředit a kdy koordinovat. Výjimky budou existovat: incident, zákaznická eskalace, bezpečnostní riziko. Právě proto musí být definované. Když je výjimkou všechno, není výjimkou nic.
+
+### Privacy-first interní komunikace
+
+Interní komunikace často obsahuje víc citlivých dat, než si tým připouští: zákaznická jména, e-maily, screenshoty, obchodní detaily, incidenty, přístupové informace, interní hodnocení lidí. Privacy-first provoz tedy nezačíná až v aplikaci. Začíná i v tom, co si tým posílá mezi sebou.
+
+Praktická pravidla:
+
+- Do chatu nedávej přístupové tokeny, hesla ani tajné klíče. Nikdy. Ani „jen na minutu“. Minuta je právní jednotka z pekla.
+- Screenshoty před sdílením očisti od osobních údajů, zákaznických dat a interních cenových detailů.
+- Zákaznické případy řeš přes odkazy do systému, ne kopírováním celých konverzací do chatu.
+- Manažerské a HR poznámky drž v omezeném prostoru, ne v obecných kanálech.
+- Nastav retenci chatových zpráv podle reálné potřeby, ne podle nostalgie.
+- U externích nástrojů zkontroluj, kde data běží, kdo k nim má přístup a jak se exportují nebo mažou.
+
+Privacy-first komunikace není paranoia. Je to provozní hygiena. Čím méně citlivých drobků rozházíš po interních kanálech, tím snáz zvládneš audit, incident i odchod dodavatele.
+
+### Udělej týdenní komunikační digest
+
+Rostoucí tým potřebuje společné vědomí bez toho, aby všichni četli všechno. Týdenní digest může být krátký, ale musí být užitečný.
+
+Struktura digestu:
+
+- **Rozhodnutí:** co nově platí a kde je zápis.
+- **Změny v produktu:** co se vydalo, změnilo nebo stáhlo.
+- **Zákaznické signály:** opakované dotazy, problémy, pochvaly, rizika.
+- **Provoz:** incidenty, zlepšení monitoringu, plánované odstávky.
+- **Tým:** nové role, změny vlastnictví, důležité interní informace.
+- **Příští týden:** hlavní fokus a známé blokace.
+
+Digest nenahrazuje dokumentaci. Je to rozcestník. Každá položka má ideálně odkaz na autoritativní místo. Pokud položka nemá odkaz, zeptej se, jestli jde o skutečné rozhodnutí, nebo jen náladu v textové podobě.
+
+### Checklist: komunikace, která škáluje
+
+- Máme popsané, co patří do chatu, issue, wiki a rozhodovacího deníku.
+- Důležitá rozhodnutí nežijí pouze ve vláknu chatu.
+- Tým rozlišuje úrovně urgence a ví, jak eskalovat incident.
+- Interní zprávy obsahují požadavek, termín, kontext, dopad a návrh.
+- Existují bloky pro hlubokou práci bez neurgentního vyrušování.
+- Citlivá zákaznická a interní data se neposílají volně po kanálech.
+- Chat má rozumnou retenci a pravidla pro export nebo mazání.
+- Týdenní digest shrnuje rozhodnutí, změny, signály a fokus.
+- Nový člověk najde komunikační pravidla v onboardingu.
+- Jednou měsíčně tým odstraní aspoň jeden zdroj komunikačního šumu.
+
+### Šablona: karta týmové komunikace
+
+```markdown
+## Týmová komunikace: [tým / oblast]
+
+### Účel
+- Co má komunikační systém zlepšit:
+- Jaké rozhodnutí nebo práce dnes nejvíc trpí šumem:
+
+### Kanály
+- Chat slouží pro:
+- Issue slouží pro:
+- Wiki / runbook slouží pro:
+- Rozhodovací deník slouží pro:
+- Incident kanál slouží pro:
+
+### Urgence
+- Teď:
+- Dnes:
+- Tento týden:
+- Až bude prostor:
+
+### Pravidla zpráv
+- Povinný kontext:
+- Očekávaný termín:
+- Kdy stačí reakce emoji / potvrzení:
+- Kdy musí vzniknout zápis mimo chat:
+
+### Hluboká práce
+- Komunikační okna:
+- Tiché bloky:
+- Výjimky:
+
+### Privacy-first kontrola
+- Co se nesmí posílat do chatu:
+- Jak čistíme screenshoty:
+- Retence zpráv:
+- Kdo může exportovat data:
+- Kde jsou manažerské poznámky:
+
+### Týdenní digest
+- Vlastník:
+- Den a čas:
+- Sekce:
+- Kam se ukládá archiv:
+
+### Revize
+- Co z komunikace odstraníme:
+- Co přesuneme do dokumentace:
+- Datum další kontroly:
+```
+
 ## Pracovní log
+- **2026-09-17:** Doplněna příloha EG o týmové komunikaci při růstu bez Slackového požáru: mapa typů komunikace, oddělení rychlých kanálů od trvalé paměti, pravidla urgence, struktura interních zpráv, ochrana hluboké práce, privacy-first zacházení s interními daty, týdenní digest, checklist a karta komunikace.
 - **2026-09-17:** Doplněna příloha EF o prvním manažerovi v malém SaaS týmu: rozlišení manažera, tech leada a provozního vlastníka, odstranění tření místo ceremonií, veřejná rozhodovací práva, ochrana seniorního řemesla, rytmus 1:1, privacy-first manažerské poznámky, 30denní plán, checklist a karta role.
 - **2026-09-17:** Doplněna příloha EE o kariérní cestě v malém SaaS týmu: typy dopadu místo titulů, oddělení odborné a manažerské cesty, očekávání jako pozorovatelné chování, návaznost rozvoje na potřeby týmu, privacy-first kariérní poznámky, čtvrtletní rozhovor, pravidla povýšení, checklist a kariérní karta role.
 - **2026-09-17:** Doplněna příloha ED o kompetenční mapě týmu bez HR tabulky a interního dohledu: schopnosti podle práce, tři akční úrovně, oddělení kompetence od kapacity, privacy-first zacházení s interními poznámkami, hledání single points of failure, propojení s učením, checklist a karta kompetenční oblasti.
