@@ -20631,8 +20631,165 @@ Mazání není ignorování. Je to údržba systému, aby důležité věci neby
 - Co jsme se naučili:
 ```
 
+## Příloha DO: Splácení produktového dluhu bez velkého heroického úklidu
+
+Produktový dluh se málokdy splatí tím, že tým vyhlásí „týden úklidu“, všichni si dramaticky otevřou backlog a po dvou dnech zjistí, že polovina položek nemá vlastníka, druhá polovina nemá dopad a třetí polovina — ano, u dluhu matematika trpí — je vlastně skrytý produktový projekt. Udržitelnější je splácet dluh jako běžnou součást práce.
+
+Splácení dluhu není estetická očista. Je to řízení rizika, rychlosti a důvěry. Cílem není mít nulový dluh. Cílem je, aby dluh nepřekvapoval zákazníky, neblokoval tým a nevytvářel privacy-first díry, které se pak vysvětlují hůř než páteční deploy v 16:57.
+
+> Codyho komentář: Produktový dluh není nepřítel. Nepřítel je dluh bez splátkového kalendáře, bez vlastníka a s poznámkou „vyřešíme po launchi“. To je produktová verze „zítra začnu běhat“.
+
+### Začni splátkovým pravidlem, ne velkým seznamem
+
+Než začneš dluh třídit, domluv jednoduché pravidlo, kolik kapacity tým pravidelně investuje do úklidu. Bez pravidla se každá položka musí znovu politicky obhajovat proti nové funkci. To je únavné a skoro vždy vyhraje viditelnější práce.
+
+Praktická pravidla pro malý SaaS tým:
+
+- **Každý týden jedna malá splátka:** jedna položka do půl dne práce, která snižuje tření nebo riziko.
+- **Každý release uklidí vlastní stopu:** feature flagy, dočasné copy, nápověda, support makra a staré varianty.
+- **Každý měsíc jedno hlubší review:** projít dluh s vysokým dopadem a rozhodnout, co opravit, odmítnout nebo převést do roadmapy.
+- **Každý privacy-first dluh má rychlejší SLA:** data, přístupy, retence a exporty nesmí čekat jen proto, že nejsou sexy.
+
+Splátkové pravidlo nemusí být dokonalé. Musí být opakovatelné. Když tým ví, že dluh má v každém týdnu své malé místo, přestane se tvářit jako rušivý vetřelec.
+
+### Rozděl dluh podle splatnosti
+
+Ne každý dluh má stejnou naléhavost. Některý je drobný škrábanec v UX, jiný je tikající provozní granát. Proto pomáhá rozdělit položky podle splatnosti:
+
+- **Okamžitě:** bezpečnost, privacy-first riziko, ztráta dat, chybné účtování, blokovaný onboarding nebo zásadní support zátěž.
+- **Tento cyklus:** dluh přímo souvisí s aktuální oblastí produktu nebo právě dokončeným releasem.
+- **Tento kvartál:** věc brzdí škálování, prodej, dokumentaci nebo další vývoj, ale není akutní.
+- **Sledovat:** položka má signál, ale dopad zatím není dostatečně jasný.
+- **Zavřít:** dluh už není relevantní, změnil se směr produktu nebo oprava nepřinese hodnotu.
+
+Tím se z dluhu nestane nekonečný morální závazek. Některé položky je zdravé zavřít. Produkt není muzeum všech kompromisů, které tým kdy udělal.
+
+### Spojuj splátky s místem, kde tým právě pracuje
+
+Nejlevnější dluh je ten, který splatíš ve chvíli, kdy už máš otevřený stejný kontext. Pokud tým upravuje onboarding, je ideální čas uklidit staré onboardingové e-maily, neaktuální nápovědu, matoucí prázdný stav a support makro. Pokud tým řeší billing, uklízí se ceník, fakturační edge cases, exporty a interní postupy.
+
+Při plánování práce si u každého většího tématu polož otázku:
+
+- Jaký starý dluh v této části produktu nás bude zpomalovat?
+- Co by zákazník v této oblasti dnes zbytečně musel obejít?
+- Jaká dokumentace, data nebo oprávnění se musí sladit s novou realitou?
+- Které dočasné řešení můžeme odstranit hned, když už jsme uvnitř problému?
+
+Tento přístup je méně dramatický než „debt sprint“, ale obvykle účinnější. Kontext je už zaplacený. Stačí ho využít.
+
+### Nastav Definition of Done pro dluh
+
+Dluh často přežívá, protože oprava nemá jasný konec. „Uklidit export“ může znamenat refaktor, lepší popisky, menší rozsah dat, nový test, update nápovědy nebo všechno najednou. Bez definice hotovo se z malé splátky stane tunel.
+
+Definition of Done pro položku dluhu může obsahovat:
+
+- uživatel už nepotřebuje starý workaround,
+- support už neposílá ruční instrukci,
+- dokumentace odpovídá produktu,
+- test pokrývá kritickou cestu,
+- export obsahuje jen potřebná pole,
+- starý feature flag, skript nebo nastavení je odstraněné,
+- vlastník potvrdil, že položku lze zavřít.
+
+Dobrá splátka je malá a uzavíratelná. Pokud se nedá uzavřít během jednoho cyklu, rozděl ji na rozhodnutí, návrh a implementaci. Jinak se z ní stane další dluh, jen s hezčím názvem.
+
+### Privacy-first splátky neodkládej na „compliance den“
+
+Privacy-first dluh se má splácet průběžně, protože často vzniká nenápadně. Přidáš nové pole do formuláře. Do logu spadne příliš detailní payload. Interní role dostane širší oprávnění, protože „jen na chvíli“. Export začne obsahovat data, která se hodila při debugování, ale zákazník je nepotřebuje. A najednou máš systém, který sbírá víc, než umí obhájit.
+
+Malé privacy-first splátky:
+
+- odstranit nepoužívané pole z formuláře i databáze,
+- zkrátit retenci konkrétního technického logu,
+- omezit export na účelově potřebné sloupce,
+- doplnit vlastníka interního přístupu,
+- vyčistit demo nebo testovací data,
+- aktualizovat datovou mapu po změně workflow,
+- smazat starý integrační token po ukončení partnerství.
+
+Tady platí jednoduché pravidlo: když položka zvyšuje množství dat, počet přístupů nebo nejasnost účelu, patří výš než kosmetika. Privacy-first není závěrečná kontrola. Je to provozní hygiena.
+
+### Měř efekt splátek přes uvolněné tření
+
+Splácení dluhu se špatně prodává týmu, pokud výsledek zní jen „uklidili jsme kód“. Lepší je měřit, jaké tření zmizelo. Ne nutně přes invazivní analytiku. Často stačí agregované signály a support evidence.
+
+Sleduj například:
+
+- méně support dotazů k jedné části produktu,
+- kratší onboarding po odstranění ručního kroku,
+- méně interních výjimek při fakturaci,
+- rychlejší přípravu releasu,
+- méně chyb při exportu nebo importu,
+- jednodušší odpovědi v bezpečnostním dotazníku,
+- menší počet ručních zásahů v administraci.
+
+U každé větší splátky si dopředu napiš, co má být po opravě lehčí. Pokud to neumíš pojmenovat, možná nejde o dluh, ale o chuť něco „udělat líp“, což je sympatické, ale ne vždy priorita.
+
+### Dluh komunikuj jako péči o produkt, ne jako omluvu
+
+Zákazník nepotřebuje slyšet interní drama typu „měli jsme hrozný technický dluh“. Potřebuje vědět, že produkt bude stabilnější, jasnější nebo bezpečnější. Komunikace splátky má být věcná:
+
+- „Zjednodušili jsme export zakázek a odstranili duplicitní pole.“
+- „Upravili jsme onboarding po importu, aby byl jasný další krok.“
+- „Zkrátili jsme retenci technických logů, které už nejsou potřeba pro provoz.“
+- „Sjednotili jsme oprávnění administrátorů podle principu nejmenší nutné role.“
+
+Ne každá splátka patří do veřejného changelogu. Ale pokud zvyšuje důvěru, bezpečnost, srozumitelnost nebo snižuje zákaznické tření, klidně ji ukaž. Dobrý produkt neroste jen přidáváním. Roste i tím, že se zbavuje zbytečností.
+
+### Checklist: splácení produktového dluhu
+
+- Má tým jednoduché pravidlo, kolik kapacity pravidelně věnuje dluhu?
+- Je každá položka dluhu popsaná dopadem, ne jen názvem?
+- Má položka splatnost: okamžitě, tento cyklus, kvartál, sledovat nebo zavřít?
+- Spojuješ splátky s částí produktu, kde tým právě pracuje?
+- Má každá splátka jasnou Definition of Done?
+- Mají privacy-first položky vyšší prioritu než kosmetické úpravy?
+- Měříš výsledek přes odstraněné tření, support zátěž nebo provozní riziko?
+- Zavír‎áš položky, které už nejsou relevantní?
+
+### Šablona: splátková karta produktového dluhu
+
+```markdown
+## Splátková karta dluhu: [název]
+
+### Kontext
+- Kde dluh vznikl:
+- Proč vznikl:
+- Související release / rozhodnutí:
+
+### Dopad
+- Dopad na zákazníka:
+- Dopad na tým:
+- Provozní riziko:
+- Privacy-first riziko:
+
+### Splatnost
+- Kategorie: okamžitě / tento cyklus / kvartál / sledovat / zavřít
+- Proč právě tato splatnost:
+- Co se stane, když to necháme být:
+
+### Návrh splátky
+- Nejmenší užitečný krok:
+- Co není součástí této splátky:
+- Odhad práce:
+- Vlastník:
+
+### Definition of Done
+- Hotovo znamená:
+- Dokumentace aktualizována:
+- Test / kontrola:
+- Starý workaround odstraněn:
+
+### Vyhodnocení
+- Jaké tření má zmizet:
+- Jak to ověříme bez sledování jednotlivců:
+- Datum review:
+- Rozhodnutí po review:
+```
+
 ## Pracovní log
 
+- **2026-09-17:** Doplněna příloha DO o splácení produktového dluhu bez heroického úklidu: splátkové pravidlo, splatnost položek, práce v kontextu aktuální oblasti, Definition of Done, privacy-first splátky, měření odstraněného tření, komunikace úklidu, checklist a splátková karta.
 - **2026-09-17:** Doplněna příloha DN o produktovém dluhu po releasu: rozlišení typů dluhu, zápis dopadu, napojení na roadmapu, privacy-first priorita, expirace workaroundů, měření tření, měsíční úklid, checklist a karta produktového dluhu.
 - **2026-09-16:** Doplněna příloha DM o post-release review bez vanity metrik: plánování vyhodnocení před releasem, měření výsledku/tření/důvěry, privacy-first agregace, review rytmus, explicitní rozhodnutí, support digest, dokumentace učení, checklist a review karta.
 - **2026-09-16:** Doplněna příloha DL o úklidu starého workflow po adopci nové funkce: rozlišení ztišení/zmrazení/ukončení, migrační mapa, komunikace podle dopadu, privacy-first úklid dat, kvalitativní měření, rollback myšlenka, aktualizace dokumentace, checklist a karta úklidu workflow.
