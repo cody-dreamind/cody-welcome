@@ -24033,7 +24033,202 @@ Digest nenahrazuje dokumentaci. Je to rozcestník. Každá položka má ideáln�
 - Datum další kontroly:
 ```
 
+## Příloha EH: Porady, které rozhodují, bez kalendářového plevele
+
+Růst týmu poznáš mimo jiné podle kalendáře. Nejdřív je prázdný a každý si říká, že porady jsou problém velkých firem. Pak přijdou první zákazníci, support, roadmapa, incidenty, hiring, finance, marketing a najednou má tým v kalendáři pravidelný rituál na všechno. Porada o prioritách. Porada o poradě. Tichý smutek v půlhodinovém slotu.
+
+Porady nejsou samy o sobě zlo. Špatná porada je jen drahý způsob, jak společně nedokončit myšlenku. Dobrá porada naopak urychlí rozhodnutí, srovná kontext a zabrání tomu, aby se stejná otázka řešila pětkrát v chatu. Rozdíl není v nástroji ani v tom, jestli kamera svítí. Rozdíl je v jasném účelu, přípravě, vlastníkovi a výstupu.
+
+> Codyho komentář: Kalendář je produktový backlog tvé pozornosti. Když do něj pustíš plevel, neroste strategie, ale únava.
+
+### Každá porada musí mít pracovní výsledek
+
+Neplánuj poradu podle tématu. Plánuj ji podle výsledku. „Marketing“ není výsledek. „Rozhodnout, jestli příští měsíc spustíme pilotní kampaň na účetní firmy“ už výsledek je. Téma zve všechny možné odbočky. Výsledek drží pozornost.
+
+Před vytvořením nebo ponecháním opakované porady si polož tři otázky:
+
+- **Jaké rozhodnutí, sladění nebo kontrola má po poradě existovat?**
+- **Kdo musí být u toho, aby výsledek platil?**
+- **Co se stane, když se porada tento týden nekoná?**
+
+Pokud odpověď na třetí otázku zní „asi nic“, porada není rituál. Je to kalendářová dekorace. Zruš ji, nahraď asynchronním update nebo ji dělej jen při konkrétní potřebě.
+
+Dobré výsledky porad jsou například:
+
+- rozhodnutí o prioritě na další týden,
+- vyřešená blokace mezi dvěma oblastmi,
+- schválený rozsah releasu,
+- jasný další krok u zákaznického rizika,
+- aktualizovaný incident runbook,
+- uzavřená otázka, která by jinak hnila v chatu.
+
+Špatné výsledky jsou mlhavé: „probrali jsme“, „syncnuli jsme se“, „otevřeli jsme téma“. To může být užitečný mezikrok, ale samo o sobě to nestačí. Po dobré poradě musí jít napsat jedna věta: „Platí X, vlastníkem je Y, další kontrola je Z.“
+
+### Rozliš typy porad a nemíchej je dohromady
+
+Malý SaaS tým obvykle potřebuje několik různých formátů. Každý má jiné tempo a jiný výstup. Když je smícháš, vznikne schůzka, která začne supportem, skončí architekturou a po cestě omylem rozhodne ceník.
+
+Praktické rozdělení:
+
+- **Operační standup:** krátké odblokování práce; výstupem jsou blokace a vlastníci.
+- **Rozhodovací porada:** výběr varianty; výstupem je zapsané rozhodnutí.
+- **Produktové review:** kontrola dopadu práce; výstupem je učení a další krok.
+- **Incident review:** pochopení selhání bez honu na viníka; výstupem je prevence.
+- **Strategická porada:** směr, trade-offy a kapacita; výstupem je priorita, ne seznam přání.
+- **1:1:** spolupráce, růst a překážky člověka; výstupem je bezpečný pracovní kontext a konkrétní dohoda.
+
+Každý typ by měl mít vlastní rytmus. Standup může být denní, ale jen pokud opravdu odblokovává práci. Produktové review může být týdenní nebo čtrnáctidenní. Strategická porada často stačí jednou měsíčně, pokud tým průběžně vede rozhodovací deník a nepoužívá strategii jako odpadkový koš na všechno, co nemá majitele.
+
+Nejhorší formát je „všechno trochu“. Všichni přijdou, nikdo neví proč, agenda vzniká za pochodu a nejhlasitější téma vyhraje. To není řízení. To je improvizované divadlo s pozvánkou v kalendáři.
+
+### Agenda není seznam bodů, ale tok rozhodnutí
+
+Agenda typu „produkt, marketing, support“ je jen nadpis. Užitečná agenda říká, co se má stát u každého bodu. Stačí jednoduchý zápis:
+
+- **Bod:** Zpožděný onboarding zákazníka Alfa.
+- **Typ:** rozhodnutí.
+- **Kontext:** zákazník čeká na import dat, vývoj má hotfix rozpracovaný.
+- **Varianty:** ruční import dnes, hotfix zítra, posun onboardingu.
+- **Návrh vlastníka:** ruční import dnes a hotfix dokončit bez slibu zákazníkovi.
+- **Potřebný výstup:** kdo co udělá do kdy.
+
+Taková agenda dělá dvě věci. Zaprvé nutí vlastníka připravit myšlenku předem. Zadruhé dává účastníkům možnost říct: „Tady nejsem potřeba“ nebo „chybí člověk, který rozhodnutí ponese“. Obojí je zdravé.
+
+U opakovaných porad používej stabilní strukturu. Například týdenní produktový rytmus může mít pět částí:
+
+1. Co se změnilo od minula.
+2. Která rozhodnutí čekají.
+3. Které blokace brání dokončení.
+4. Co se vypouští nebo posouvá.
+5. Co se zapíše do rozhodovacího deníku, roadmapy nebo issue.
+
+Stabilní struktura neznamená nudu. Znamená menší mentální režii. Tým nemusí pokaždé vymýšlet, jak spolu mluvit, a může řešit obsah.
+
+### Pozvi nejmenší užitečnou skupinu
+
+Porada není interní newsletter. Nepozývej lidi „pro jistotu“. Každý další účastník platí časem, přepnutím kontextu a často i tím, že začne mlčet, protože místnost je moc velká. Menší skupina s jasnými právy rozhoduje rychleji než velká skupina, která se bojí někoho opomenout.
+
+Použij jednoduché role:
+
+- **Vlastník:** připraví agendu, drží výstup, zapíše závěr.
+- **Rozhodovatel:** má právo říct poslední slovo, když nejde o konsenzus.
+- **Konzultant:** přináší expertizu nebo riziko, ale nemusí být u celé schůzky.
+- **Informovaný:** nepotřebuje být v místnosti, stačí mu zápis nebo digest.
+
+Když někdo v poradě nemá roli, nejspíš tam nemá být. To neznamená tajnůstkářství. Znamená respekt k jeho práci. Transparentnost se dá řešit zápisem, odkazem a možností doplnit komentář, ne tím, že všichni sedí na všem.
+
+U důležitých rozhodnutí je férové dopředu říct, jestli tým hledá konsenzus, doporučení nebo jen připomínky. Lidé jsou méně frustrovaní, když vědí, jaký typ vlivu mají. „Chci slyšet rizika, rozhodnu dnes po poradě“ je mnohem lepší než předstírat demokratický proces a pak stejně rozhodnout bokem.
+
+### Zápis má být krátký, dohledatelný a akční
+
+Zápis z porady není stenografický záznam reality show. Má uchovat to, co bude tým potřebovat později: rozhodnutí, důvod, vlastníka, termín, odkazy a otevřená rizika. Všechno ostatní je šum.
+
+Minimalistický zápis:
+
+- **Rozhodnutí:** co platí.
+- **Důvod:** proč jsme vybrali tuto variantu.
+- **Dopad:** koho nebo čeho se to týká.
+- **Vlastník:** kdo nese další krok.
+- **Termín:** kdy se má něco stát.
+- **Odkazy:** issue, dokument, zákaznický případ, incident.
+- **Review:** kdy se k tomu vrátíme, pokud jde o hypotézu.
+
+Zápis patří tam, kde se práce opravdu řídí. Pokud se týká issue, dej ho do issue. Pokud mění pravidlo, dej ho do týmového pravidla. Pokud mění produktový směr, dej ho do rozhodovacího deníku. Samostatné nekonečné dokumenty se zápisy bývají hřbitovem dobrých úmyslů.
+
+Dobré pravidlo: zápis musí být hotový do konce porady nebo nejpozději ten samý den. Když zápis vzniká po týdnu, už to není zápis. Je to literární rekonstrukce podle přeživších.
+
+### Privacy-first pravidla pro porady
+
+Interní porady často obsahují zákaznické případy, osobní poznámky, obchodní informace a provozní rizika. To je důvod k disciplíně. Privacy-first přístup neznamená, že se tým bojí mluvit. Znamená, že ví, co kam patří a co se nemá ukládat zbytečně.
+
+Praktická pravidla:
+
+- **Nepřenášej osobní data do kalendářových názvů.** Název „Riziko: Novák s.r.o. — platební problém“ může být viditelnější, než chceš. Stačí interní identifikátor nebo odkaz do správného systému.
+- **Nahrávky používej výjimečně.** Pokud nahrávka není nutná, nedělej ji. Pokud nutná je, řekni proč, kde bude uložená, kdo ji smaže a kdy.
+- **Zákaznický kontext drž v autoritativním místě.** Porada může odkazovat na CRM, ticket nebo issue, ale nemá kopírovat citlivé detaily do náhodných poznámek.
+- **Osobní poznámky z 1:1 nejsou týmová dokumentace.** Do sdíleného systému patří jen dohody a pracovní kroky, ne intimní deník manažera.
+- **Retence platí i pro zápisy.** Staré taktické zápisy nemusí žít věčně. Dlouhodobě drž rozhodnutí, pravidla a důležité provozní poučení.
+
+U citlivých témat začni poradou tak, že pojmenuješ hranice: co zapisujeme, co nezapisujeme, co půjde do sdíleného výstupu a co zůstává jen jako dočasný kontext. Tým tím získá bezpečí a zároveň se vyhne internímu datovému smetišti.
+
+### Ruš porady stejně aktivně, jako je zakládáš
+
+Každá opakovaná porada by měla mít datum revize. Když vznikne nový rytmus, nastav kontrolu třeba za čtyři týdny. Ptej se:
+
+- Pomáhá porada rozhodovat rychleji?
+- Chodí správní lidé?
+- Má každé setkání jasný výstup?
+- Co by šlo přesunout do asynchronního update?
+- Který bod se opakuje, ale nic nemění?
+- Kdy poradu zrušíme nebo zkrátíme?
+
+Porady mají tendenci přežívat svůj účel. Tým se změní, produkt se změní, zákaznický tlak se změní, ale kalendář statečně drží starou realitu jako muzeum. Proto potřebuješ kalendářový úklid. Jednou měsíčně projdi opakované schůzky a každé dej jeden verdikt: ponechat, zkrátit, změnit účastníky, přesunout asynchronně, nebo zrušit.
+
+Neboj se zrušit poradu experimentálně. Napiš: „Na dva týdny rušíme tento sync. Pokud vznikne konkrétní blokace, založíme ad hoc rozhodovací slot.“ Když se nic nerozbije, gratuluju. Právě jsi našel čas, který byl maskovaný jako spolupráce.
+
+### Checklist: porady bez kalendářového plevele
+
+- Má porada jasný pracovní výsledek, ne jen téma?
+- Je zřejmé, jestli jde o rozhodnutí, sladění, review nebo 1:1?
+- Existuje vlastník agendy a zápisu?
+- Jsou pozvaní jen lidé s konkrétní rolí?
+- Je předem jasné, jaký typ vlivu účastníci mají?
+- Obsahuje agenda kontext, varianty a potřebný výstup?
+- Končí porada rozhodnutím, vlastníkem, termínem nebo vědomým odložením?
+- Je zápis uložený v místě, kde se podle něj opravdu pracuje?
+- Neobsahuje zápis zbytečná osobní nebo zákaznická data?
+- Má opakovaná porada datum revize nebo podmínku zrušení?
+
+### Šablona: karta porady
+
+```markdown
+## Porada: [název]
+
+### Účel
+- Jaký pracovní výsledek má vzniknout:
+- Co se stane, když se porada nekoná:
+
+### Typ
+- Rozhodnutí / sladění / review / incident / 1:1 / strategie:
+- Frekvence:
+- Délka:
+
+### Role
+- Vlastník:
+- Rozhodovatel:
+- Konzultanti:
+- Informovaní pouze zápisem:
+
+### Agenda
+- Bod 1:
+  - Kontext:
+  - Varianty:
+  - Potřebný výstup:
+- Bod 2:
+  - Kontext:
+  - Varianty:
+  - Potřebný výstup:
+
+### Výstup
+- Rozhodnutí / dohoda:
+- Vlastník dalšího kroku:
+- Termín:
+- Odkaz na issue / dokument / rozhodovací deník:
+
+### Privacy-first kontrola
+- Zapisujeme jen nutná data:
+- Citlivé detaily jsou v autoritativním systému:
+- Nahrávka ano/ne a proč:
+- Retence zápisu:
+
+### Revize porady
+- Datum další kontroly:
+- Ponechat / zkrátit / přesunout async / zrušit:
+```
+
 ## Pracovní log
+
+- **2026-09-17:** Doplněna příloha EH o poradách bez kalendářového plevele: pracovní výsledek porady, typy meetingů, agenda jako tok rozhodnutí, role účastníků, krátký akční zápis, privacy-first pravidla pro poznámky a nahrávky, pravidelný kalendářový úklid, checklist a šablona karty porady.
 - **2026-09-17:** Doplněna příloha EG o týmové komunikaci při růstu bez Slackového požáru: mapa typů komunikace, oddělení rychlých kanálů od trvalé paměti, pravidla urgence, struktura interních zpráv, ochrana hluboké práce, privacy-first zacházení s interními daty, týdenní digest, checklist a karta komunikace.
 - **2026-09-17:** Doplněna příloha EF o prvním manažerovi v malém SaaS týmu: rozlišení manažera, tech leada a provozního vlastníka, odstranění tření místo ceremonií, veřejná rozhodovací práva, ochrana seniorního řemesla, rytmus 1:1, privacy-first manažerské poznámky, 30denní plán, checklist a karta role.
 - **2026-09-17:** Doplněna příloha EE o kariérní cestě v malém SaaS týmu: typy dopadu místo titulů, oddělení odborné a manažerské cesty, očekávání jako pozorovatelné chování, návaznost rozvoje na potřeby týmu, privacy-first kariérní poznámky, čtvrtletní rozhovor, pravidla povýšení, checklist a kariérní karta role.
