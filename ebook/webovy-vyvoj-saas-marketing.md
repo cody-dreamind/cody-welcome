@@ -20787,8 +20787,169 @@ Ne každá splátka patří do veřejného changelogu. Ale pokud zvyšuje důvě
 - Rozhodnutí po review:
 ```
 
+## Příloha DP: Prevence návratu produktového dluhu do roadmapy
+
+Produktový dluh se dá splácet donekonečna, pokud tým nezmění způsob, jakým nový dluh vzniká. To je produktová verze vytírání podlahy během otevřeného kohoutku. Hezké gesto, mokré ponožky pořád stejné. Po splátkách proto musí přijít prevence: jednoduchá pravidla, která brání tomu, aby se stejné kompromisy vracely do každého releasu.
+
+Prevence dluhu neznamená zakázat kompromisy. Malý SaaS bez kompromisů většinou neexistuje, jen o nich lže v roadmapě. Smyslem je rozlišit vědomý dluh s vlastníkem od tichého bahna, které se tváří jako „rychlá drobnost“ a za tři měsíce drží pohromadě billing, onboarding i support makra.
+
+> Codyho komentář: Dobrý kompromis má cedulku, vlastníka a datum kontroly. Špatný kompromis má Slack zprávu „to pak uklidíme“ a následně archeologický význam.
+
+### Vytvoř vstupní bránu pro nové kompromisy
+
+Ne každý kompromis potřebuje poradu. Každý kompromis ale potřebuje minimální zápis, pokud ovlivňuje zákaznickou zkušenost, data, support, provoz nebo budoucí vývoj. Vstupní brána je krátká sada otázek před tím, než se rychlé řešení dostane do releasu.
+
+Ptej se:
+
+- Jaký problém řešíme tímto zjednodušením?
+- Co vědomě necháváme horší, ruční nebo dočasné?
+- Koho to může později bolet: zákazníka, support, vývoj, obchod, privacy nebo provoz?
+- Jak poznáme, že kompromis splnil účel a může pryč?
+- Kdo ho vlastní po releasu?
+
+Brána nemá brzdit tým. Má zabránit tomu, aby se „dočasně“ stalo architektonickým stylem. Když odpovědi nejdou napsat do pěti minut, kompromis pravděpodobně není malý.
+
+### Rozliš zdravý a toxický dluh
+
+Zdravý dluh zkracuje cestu k ověření hodnoty. Toxický dluh zkracuje cestu k chaosu. Rozdíl často není v technické čistotě, ale v dopadu a viditelnosti.
+
+Zdravý dluh má tyto znaky:
+
+- vznikl kvůli jasnému zákaznickému nebo obchodnímu cíli,
+- má omezený rozsah,
+- je viditelný v kartě práce nebo release poznámce,
+- má vlastníka a datum review,
+- nezvyšuje zbytečně množství osobních dat,
+- neblokuje bezpečné ukončení, export nebo podporu zákazníka.
+
+Toxický dluh vypadá jinak:
+
+- vznikl jen proto, že se nikomu nechtělo rozhodnout,
+- rozlévá se přes více částí produktu,
+- vyžaduje ruční zásahy bez dokumentace,
+- přidává výjimky do supportu nebo fakturace,
+- zhoršuje vysvětlitelnost produktu zákazníkovi,
+- zvyšuje data, oprávnění nebo retenci bez jasného účelu.
+
+Zdravý dluh může být dobrý obchod. Toxický dluh je půjčka od budoucího týmu s úrokem ve formě incidentů, pomalejšího vývoje a otrávených zákazníků.
+
+### Přidej dluhovou kontrolu do Definition of Ready
+
+Definition of Ready není byrokratický kobereček před backlogem. Je to filtr, jestli je práce připravená tak, aby z ní automaticky nevypadl nový bordel. U větších změn stačí krátká dluhová kontrola před začátkem vývoje.
+
+Praktická kontrola:
+
+- Má změna jasný cílový výsledek, nebo jen seznam obrazovek?
+- Víme, které staré workflow, data nebo dokumentace se tím dotkne?
+- Existuje část, kterou vědomě necháváme mimo první verzi?
+- Bude zákazník potřebovat migraci, nápovědu nebo oznámení?
+- Mění se role, přístupy, exporty, logy nebo retence?
+- Máme domluvené stop kritérium, kdy řešení nezvětšovat?
+
+Když na tyto otázky nikdo neumí odpovědět, tým pravděpodobně nevstupuje do vývoje, ale do mlhy. A mlha je drahá, i když má hezký ticket.
+
+### Hlídací signály hledej v supportu a provozu
+
+Nový dluh se často neukáže v backlogu. Ukáže se v opakovaných dotazech, ručních opravách, interních návodech, workaroundech a zvláštních větách typu „u tohoto zákazníka to musíme dělat jinak“. Proto prevence dluhu potřebuje jednoduché senzory mimo vývoj.
+
+Signály návratu dluhu:
+
+- support posílá stejný ruční postup vícekrát za měsíc,
+- onboarding potřebuje vysvětlit výjimku, která není v produktu vidět,
+- obchod slibuje obcházení standardního procesu,
+- administrace má akce, které umí provést jen jeden člověk,
+- fakturace nebo export vyžaduje ruční kontrolu,
+- dokumentace říká něco jiného než aktuální produkt,
+- tým drží starý feature flag, protože se bojí ho vypnout.
+
+Tyto signály neznamenají automaticky „všechno opravit“. Znamenají „zapsat, rozhodnout, vlastnit“. Bez zápisu se dluh stává firemní folklórní tradicí. To zní roztomile, dokud folklór neposílá špatné faktury.
+
+### Privacy-first prevence začíná u návrhu
+
+Privacy-first dluh nevzniká jen špatným nástrojem. Vzniká i malou produktovou větou: „Pro jistotu si to uložíme.“ Pokud tým neumí říct, k čemu údaj slouží, jak dlouho ho drží a kdo ho potřebuje, je to dluh ještě před prvním commitem.
+
+Před přidáním nového pole, eventu, logu nebo oprávnění se ptej:
+
+- Jaké rozhodnutí nebo funkci tento údaj podporuje?
+- Dá se účel splnit agregovaně, anonymně nebo kratší retencí?
+- Uvidí zákazník, proč údaj potřebujeme?
+- Umíme údaj exportovat nebo odstranit bez ruční archeologie?
+- Nepřidáváme přístup interní roli jen proto, že je to pohodlné?
+- Co se stane, když tento údaj vůbec sbírat nebudeme?
+
+Prevence je tady levnější než pozdější úklid. Odstranit zbytečné pole po měsících je těžší než ho nepřidat. Přesně ten typ geniality, kterou člověk objeví až po třetím refaktoru.
+
+### Zaveď měsíční „debt firewall“ review
+
+Jednou měsíčně si projdi nové kompromisy, workaroundy a výjimky. Ne jako velkou terapii backlogu, ale jako firewall: co pouštíme dál, co blokujeme a co převádíme na vědomý plán.
+
+Agenda na 30 minut:
+
+1. Projít nové kompromisy z posledního měsíce.
+2. Vybrat položky, které zvyšují zákaznické tření nebo provozní riziko.
+3. Označit privacy-first položky, které potřebují rychlejší řešení.
+4. Rozhodnout: zavřít, sledovat, splatit, převést do roadmapy.
+5. Přiřadit vlastníka a datum review pouze položkám, které zůstávají otevřené.
+
+Důležité je neotevírat vše znovu. Firewall není retrospektiva celého produktu. Je to krátká kontrola, jestli tým nevyrábí dluh rychleji, než ho umí splácet.
+
+### Checklist: prevence návratu produktového dluhu
+
+- Má každý větší kompromis vlastníka a datum review?
+- Je jasné, proč kompromis vznikl a jaký výsledek měl umožnit?
+- Rozlišujeme zdravý dluh od toxického dluhu?
+- Obsahuje Definition of Ready kontrolu dopadu na data, support, dokumentaci a provoz?
+- Sledujeme opakované support dotazy jako signál nového dluhu?
+- Má každá dočasná výjimka stop kritérium?
+- Kontrolujeme nové osobní údaje, logy, eventy a oprávnění už při návrhu?
+- Mažeme nebo zavíráme položky, které ztratily význam?
+- Probíhá krátké měsíční review nových kompromisů?
+- Umí tým říct „tohle teď vědomě dlužíme“ bez trapného ticha?
+
+### Šablona: debt firewall karta
+
+```markdown
+## Debt firewall: [oblast / release / měsíc]
+
+### Kontext
+- Období:
+- Procházené releasy / změny:
+- Účastníci:
+
+### Nové kompromisy
+- Kompromis:
+- Proč vznikl:
+- Dopad na zákazníka / tým:
+- Vlastník:
+- Datum review:
+
+### Privacy-first kontrola
+- Nová data / eventy / logy:
+- Nové role nebo přístupy:
+- Retence / export / mazání:
+- Riziko:
+
+### Signály z provozu
+- Opakované support dotazy:
+- Ruční workaroundy:
+- Výjimky v onboardingu, fakturaci nebo administraci:
+- Neaktuální dokumentace:
+
+### Rozhodnutí
+- Zavřít:
+- Sledovat:
+- Splatit v dalším cyklu:
+- Převést do roadmapy:
+
+### Kontrola příště
+- Co má zmizet:
+- Jak to ověříme bez sledování jednotlivců:
+- Datum dalšího firewall review:
+```
+
 ## Pracovní log
 
+- **2026-09-17:** Doplněna příloha DP o prevenci návratu produktového dluhu do roadmapy: vstupní brána pro kompromisy, rozlišení zdravého a toxického dluhu, Definition of Ready kontrola, support a provozní signály, privacy-first prevence, měsíční debt firewall review, checklist a šablona debt firewall karty.
 - **2026-09-17:** Doplněna příloha DO o splácení produktového dluhu bez heroického úklidu: splátkové pravidlo, splatnost položek, práce v kontextu aktuální oblasti, Definition of Done, privacy-first splátky, měření odstraněného tření, komunikace úklidu, checklist a splátková karta.
 - **2026-09-17:** Doplněna příloha DN o produktovém dluhu po releasu: rozlišení typů dluhu, zápis dopadu, napojení na roadmapu, privacy-first priorita, expirace workaroundů, měření tření, měsíční úklid, checklist a karta produktového dluhu.
 - **2026-09-16:** Doplněna příloha DM o post-release review bez vanity metrik: plánování vyhodnocení před releasem, měření výsledku/tření/důvěry, privacy-first agregace, review rytmus, explicitní rozhodnutí, support digest, dokumentace učení, checklist a review karta.
