@@ -21818,7 +21818,213 @@ Tím se z archivace nestane samostatný projekt. Je to jen poslední krok v živ
 - Datum další kontroly archivu:
 ```
 
+
+## Příloha DV: Předání vlastnictví týmového pravidla bez ztráty kontextu
+
+Pravidlo bez vlastníka je jako zapomenutý smoke test: chvíli všichni předstírají, že existuje, a pak se diví, že nikoho nevarovalo. Jakmile tým začne pravidla archivovat, revidovat a zkracovat, potřebuje ještě jednu disciplínu: umět předat jejich vlastnictví bez toho, aby se z pravidla stal osiřelý dokument v rohu wiki.
+
+Předání vlastnictví není HR formalita. Je to produktově-provozní pojistka. U každého pravidla někdo musí rozumět tomu, proč vzniklo, kde se používá, jaké riziko hlídá a kdy ho bude bezpečné změnit nebo zrušit. Pokud tahle znalost zůstane jen v hlavě jednoho člověka, tým nemá pravidlo. Má ústní tradici s Markdown dekorací.
+
+Cílem předání není vytvořit složitý proces. Cílem je, aby nový vlastník dokázal po týdnu odpovědět na tři otázky:
+
+- Proč pravidlo existuje?
+- Kde pravidlo ovlivňuje práci týmu nebo produkt?
+- Co by se pokazilo, kdybychom ho změnili, ignorovali nebo smazali?
+
+### Vlastnictví pravidla není vlastnictví pravdy
+
+Vlastník pravidla není diktátor procesu. Je to člověk, který drží kontext, sbírá signály a umí navrhnout změnu. Rozhodnutí může pořád dělat tým, product lead nebo zakladatel. Vlastník jen brání tomu, aby se pravidlo měnilo podle posledního hlasitého dojmu.
+
+Dobré vlastnictví znamená:
+
+- znát původ pravidla,
+- rozumět jeho praktickému použití,
+- vědět, kde je pravidlo zapojené do šablon, checklistů, automatizací nebo review,
+- sledovat výjimky a tření,
+- umět říct, kdy pravidlo ztratilo smysl,
+- chránit privacy-first hodnotu, kvůli které pravidlo často vzniklo.
+
+Špatné vlastnictví vypadá takto: „Tohle pravidlo má na starosti Petra, takže bez Petry se o něm nebavíme.“ To není odpovědnost. To je úzké hrdlo s lidským jménem.
+
+Lepší věta: „Petra drží kontext pravidla, ale změna se rozhoduje podle signálů, rizik a dopadu na práci.“
+
+### Předávej pravidlo jako malý produkt
+
+Každé důležité pravidlo má uživatele. Někdo ho čte, někdo podle něj vyplňuje issue, někdo kvůli němu mění release postup, někdo díky němu nemusí řešit incident. Předání proto popiš stejně jako předání malé produktové oblasti.
+
+Minimum předání:
+
+- **Účel:** jaký problém pravidlo řeší.
+- **Rozsah:** na které situace se vztahuje a na které ne.
+- **Dopad:** co pravidlo chrání nebo zrychluje.
+- **Napojení:** kde je pravidlo vložené do práce týmu.
+- **Historie:** proč vzniklo, co už se měnilo, jaké výjimky proběhly.
+- **Rizika:** co se stane při špatném použití.
+- **Review:** kdy se má pravidlo znovu zkontrolovat.
+
+Příklad: pravidlo „Nepřidáváme nový externí skript na web bez vendor karty“ není jen věta o bezpečnosti. Má napojení na vývoj webu, marketingové kampaně, měření konverzí, DPA dokumentaci, CSP hlavičky a možná i build pipeline. Nový vlastník musí vědět, kde se pravidlo projeví, jinak ho při první urgentní kampani někdo obejde, protože „to přece byl jen malý pixel“. Ano, malý pixel. Velký bordel. Klasika.
+
+### Udělej mapu dotykových míst
+
+Nejčastější problém při předání pravidla je skrytá integrace. Dokument říká jednu věc, ale pravidlo reálně žije jinde: v issue šabloně, pull request checklistu, onboarding dokumentu, release runbooku, automatickém testu nebo v hlavách lidí, kteří ho vysvětlují nováčkům.
+
+Proto při předání vždy vytvoř mapu dotykových míst:
+
+- hlavní dokument pravidla,
+- rozhodovací deník nebo incident, ze kterého pravidlo vzniklo,
+- aktivní checklisty,
+- issue a PR šablony,
+- automatizace nebo kontroly,
+- onboarding materiály,
+- zákaznická dokumentace, pokud pravidlo ovlivňuje komunikaci ven,
+- archivované staré verze.
+
+Mapa nemusí být krásná. Stačí odrážky s odkazy. Důležité je, aby nový vlastník nemusel hrát detektivku „Kde všude se tahle věta rozmnožila?“ Detektivky patří do knihovny, ne do provozu SaaS.
+
+### Předání ověř praktickou změnou
+
+Předání je hotové až ve chvíli, kdy nový vlastník udělá jednu malou bezpečnou změnu nebo review. Ne proto, abychom ho zkoušeli jako ve škole, ale protože skutečné porozumění se ukáže až při použití.
+
+Dobré první úkoly:
+
+- doplnit chybějící odkaz v mapě dotykových míst,
+- zkrátit nejasnou formulaci pravidla,
+- projít poslední tři výjimky a shrnout vzor,
+- aktualizovat datum další revize,
+- ověřit, že pravidlo sedí s aktuální šablonou issue,
+- odstranit citlivý screenshot ze staré verze dokumentu,
+- doplnit příklad správného a špatného použití.
+
+Vyhni se tomu, aby první úkol nového vlastníka byl velký rewrite. To je zbytečně riskantní. Nejdřív ať osahá realitu, potom ať řeže do struktury.
+
+### Privacy-first předání chrání kontext i data
+
+Při předávání pravidel se často sdílí víc detailů, než je potřeba. Historie incidentů, screenshoty zákaznických účtů, ukázky ticketů, interní poznámky, jména lidí, konkrétní e-maily. To všechno může být užitečný kontext, ale ne všechno patří do předávacího dokumentu.
+
+Privacy-first předání má dvě vrstvy:
+
+1. **Nový vlastník dostane dost kontextu pro rozhodování.**
+2. **Nepřebírá zbytečné osobní nebo zákaznické údaje.**
+
+Prakticky to znamená:
+
+- incidenty popisuj přes dopad a příčinu, ne přes jména zákazníků,
+- screenshoty nahrazuj anonymizovanými ukázkami,
+- konkrétní tickety linkuj jen tehdy, když je nový vlastník opravdu potřebuje,
+- staré exporty nepřikládej do předávací karty,
+- přístupy předávej přes správce hesel a role, ne přes zprávy,
+- po předání odeber přístupy člověku, který už pravidlo nevlastní, pokud je nepotřebuje.
+
+Codyho komentář: „Pro jistotu ti nasdílím celý incidentový archiv“ není důvěra. Je to datový koberec, pod který jednou někdo zakopne.
+
+### Rozliš dočasného a dlouhodobého vlastníka
+
+Ne každé předání znamená trvalou změnu. Někdy člověk odchází na dovolenou, někdy se mění produktová oblast, někdy pravidlo dočasně přebírá někdo kvůli releasu. Zapiš typ předání, protože podle něj se liší hloubka.
+
+- **Dočasné zastoupení:** nový člověk řeší jen otázky a urgentní výjimky, velké změny počkají.
+- **Dlouhodobé předání:** nový člověk přebírá review, změny i odpovědnost za mapu dotykových míst.
+- **Předání před archivací:** nový člověk má ověřit, jestli pravidlo ještě má smysl, ne ho udržovat navždy.
+- **Předání při rozdělení oblasti:** jedno pravidlo se může rozpadnout na dvě menší vlastnictví.
+
+U dočasného zastoupení stačí krátká karta: co neporušit, na koho eskalovat, které výjimky jsou zakázané. U dlouhodobého předání je potřeba historie a praktické ověření.
+
+### Předávací rozhovor drž krátký a konkrétní
+
+Předání pravidla nemá být hodinová prohlídka muzea procesů. Ideální je 30 minut nad konkrétní kartou.
+
+Agenda:
+
+1. **5 minut:** proč pravidlo vzniklo.
+2. **10 minut:** kde se používá a co chrání.
+3. **5 minut:** poslední výjimky nebo tření.
+4. **5 minut:** privacy-first rizika a přístupy.
+5. **5 minut:** první malý úkol nového vlastníka.
+
+Po schůzce nový vlastník upraví předávací kartu vlastními slovy. To je důležité. Když člověk jen kývne, může kývat i náhodný fikus. Když pravidlo přeformuluje, ukáže, že mu rozumí.
+
+### Když vlastník odchází narychlo
+
+Realita není vždy elegantní. Lidé odcházejí, mění priority, onemocní nebo prostě už nemají kapacitu. Proto by u klíčových pravidel měl existovat minimální záchranný režim.
+
+Záchranný režim pro pravidlo:
+
+- hlavní dokument má jasného náhradníka,
+- důvod vzniku je zapsaný v rozhodovacím deníku,
+- poslední review není starší než domluvený limit,
+- pravidlo má mapu dotykových míst,
+- kritické přístupy nejsou navázané na osobní účet vlastníka,
+- tým ví, kdo rozhoduje o urgentní výjimce.
+
+Nejde o paranoiu. Jde o to, aby provoz nestál na tom, že jeden člověk si pamatuje, proč v roce 2024 někdo zakázal konkrétní typ integrace.
+
+### Checklist: předání vlastnictví pravidla
+
+- Je jasné, jestli jde o dočasné, dlouhodobé nebo archivační předání?
+- Má pravidlo aktuálního vlastníka a případného náhradníka?
+- Rozumí nový vlastník původu pravidla a problému, který řeší?
+- Je popsán rozsah: kdy pravidlo platí a kdy ne?
+- Existuje mapa dotykových míst v dokumentech, šablonách, automatizacích a onboardingu?
+- Jsou známé poslední výjimky, tření a otevřené otázky?
+- Proběhla privacy-first kontrola předávaného kontextu?
+- Neobsahuje předávací karta zbytečné osobní nebo zákaznické údaje?
+- Jsou přístupy předané přes role a správce hesel, ne přes chat?
+- Odeberou se po předání nepotřebné přístupy původnímu vlastníkovi?
+- Má nový vlastník první malý ověřovací úkol?
+- Je nastavené datum další revize pravidla?
+
+### Šablona: předávací karta pravidla
+
+```markdown
+# Předání pravidla: [název]
+
+## Typ předání
+- Dočasné / dlouhodobé / před archivací / rozdělení oblasti:
+- Původní vlastník:
+- Nový vlastník:
+- Náhradník:
+- Datum předání:
+
+## Účel pravidla
+- Jaký problém pravidlo řeší:
+- Co pravidlo chrání:
+- Co by se stalo bez pravidla:
+
+## Rozsah
+- Kdy pravidlo platí:
+- Kdy pravidlo neplatí:
+- Kdo může schválit výjimku:
+
+## Mapa dotykových míst
+- Hlavní dokument:
+- Rozhodovací deník / incident:
+- Issue a PR šablony:
+- Checklisty:
+- Automatizace:
+- Onboarding dokumenty:
+- Zákaznická dokumentace:
+- Archivované verze:
+
+## Poslední signály
+- Poslední výjimky:
+- Nejčastější tření:
+- Otevřené otázky:
+- Datum další revize:
+
+## Privacy-first kontrola
+- Předávané materiály neobsahují zbytečné osobní údaje:
+- Zákaznické příklady jsou anonymizované:
+- Přístupy předané přes role / správce hesel:
+- Nepotřebné přístupy k odebrání:
+
+## Ověřovací úkol
+- První malý úkol nového vlastníka:
+- Termín:
+- Jak poznáme, že předání proběhlo:
+```
+
 ## Pracovní log
+
+- **2026-09-17:** Doplněna příloha DV o předání vlastnictví týmového pravidla: role vlastníka, předání pravidla jako malého produktu, mapa dotykových míst, praktické ověření předání, privacy-first zacházení s kontextem, rozlišení dočasného a dlouhodobého předání, záchranný režim, checklist a předávací karta.
 
 - **2026-09-17:** Doplněna příloha DU o archivaci týmových pravidel: rozlišení archivace/zrušení/nahrazení/sloučení, autoritativní seznam aktivních pravidel, výrazné označení archivovaných dokumentů, link audit, privacy-first redakce starých materiálů, retenční rytmus, checklist a archivní karta pravidla.
 - **2026-09-17:** Doplněna příloha DT o revizi týmového pravidla: datum kontroly, agregované měření používání, diagnostika neviditelného/nejasného/drahého pravidla, práce s výjimkami, zjednodušování, automatizace, rozhodnutí o ponechání či zrušení a šablona revizní karty.
