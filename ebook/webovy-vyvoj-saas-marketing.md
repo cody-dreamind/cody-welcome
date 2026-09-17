@@ -21317,7 +21317,177 @@ Rušení pravidel dělej stejně viditelně jako jejich zavádění. Zapiš dův
 ```
 
 
+## Příloha DS: Zavedení týmového pravidla bez školení, které všichni prospí
+
+Týmové pravidlo začne mít hodnotu až ve chvíli, kdy změní běžnou práci. Ne když se schválí. Ne když se uloží do wiki. Ne když ho někdo slavnostně přečte na poradě a tři lidé u toho předstírají, že si nepíší nákupní seznam. Pravidlo funguje teprve tehdy, když ho tým potká ve správném nástroji, ve správném okamžiku a v tak krátké podobě, že nejde rozumně ignorovat.
+
+Zavedení pravidla proto není interní školení. Je to produktová změna uvnitř týmu. Má uživatele, adopční cestu, tření, výjimky, měření a údržbu. Když k pravidlům přistoupíš stejně jako k dobré funkci v SaaS, přestanou být dekorací a začnou šetřit chyby, čas i důvěru.
+
+### Začni jedním pracovním místem, ne velkou kampaní
+
+Nové pravidlo se často pokazí tím, že se ho tým snaží „komunikovat všude“. Výsledek: Slack oznámení, wiki stránka, meeting, komentář v ticketu, připomínka v PR a za týden už nikdo neví, co platí. Lepší je vybrat jedno místo, kde pravidlo nejčastěji rozhoduje o kvalitě práce.
+
+Příklady:
+
+- pravidlo pro produktovou analytiku patří do návrhu události a PR checklistu,
+- pravidlo pro vendor review patří do vendor karty a nákupního requestu,
+- pravidlo pro export dat patří do Definition of Done u funkcí s datovým výstupem,
+- pravidlo pro release komunikaci patří do release checklistu,
+- pravidlo pro práci se support daty patří do support makra a eskalačního postupu.
+
+První adopce má být úzká. Vyber jednu cestu, kde bude pravidlo vidět a kde sníží reálné riziko. Až tam funguje, rozšiřuj ho dál.
+
+Codyho komentář: pokud pravidlo potřebuje hodinovou prezentaci, aby ho lidé pochopili, není to pravidlo. Je to interní opera. Možná krásná, ale nikdo nemá lístek.
+
+### Před zavedením napiš adopční scénář
+
+Adopční scénář popisuje, kdo pravidlo potká, kdy ho potká a co má udělat jinak. Bez toho zůstane pravidlo v režimu „všichni o tom nějak víme“, což je organizační verze mlhy nad rybníkem.
+
+Krátký adopční scénář:
+
+1. **Spouštěč:** vývojář navrhuje novou analytickou událost.
+2. **Moment pravidla:** v issue šabloně vyplní účel měření a typ dat.
+3. **Kontrola:** PR checklist se ptá, jestli payload neobsahuje osobní údaje, volný text nebo obsah práce zákazníka.
+4. **Výjimka:** pokud je potřeba citlivější údaj, produktový vlastník zapíše důvod, dobu platnosti a méně invazivní alternativu.
+5. **Doklad:** odkaz na rozhodnutí zůstane v issue nebo rozhodovacím deníku.
+
+Takový scénář je malý, ale konkrétní. Neříká jen „dbejme na privacy“. Říká: tady klikni, tady se zamysli, tady zastav práci, pokud pravidlo nesedí.
+
+### Zaveď pravidlo jako změnu nástroje
+
+Lidé se nechovají podle dokumentů. Chovají se podle prostředí. Pokud prostředí podporuje starý návyk, pravidlo bude prohrávat. Proto při zavedení pravidla uprav nástroj, šablonu nebo workflow.
+
+Užitečné zásahy:
+
+- přidej jednu otázku do issue šablony,
+- přidej jednu položku do PR checklistu,
+- vytvoř mini šablonu pro výjimku,
+- doplň příklad dobrého a špatného řešení,
+- nastav připomínku na review pravidla,
+- propoj pravidlo s existující kartou rozhodnutí, vendor kartou nebo release kartou.
+
+Nejlepší pravidlo je často jen jedna nová otázka ve správném místě. Ne další dokument. Ne další meeting. Jen malá brzda před špatným rozhodnutím.
+
+### Vysvětli důvod, ne jen zákaz
+
+Pravidlo bez důvodu vypadá jako libovůle. Tým ho začne obcházet, protože nevidí, jakou škodu má zastavit. Každé pravidlo proto potřebuje krátké „proč“ v lidském jazyce.
+
+Slabé vysvětlení:
+
+> Neposílejte volný text do analytiky.
+
+Lepší vysvětlení:
+
+> Volný text může obsahovat osobní údaje, obchodní tajemství nebo obsah zákaznické práce. Pro rozhodnutí o adopci funkce nám stačí agregovaný stav, typ akce a technický výsledek.
+
+Tým pak chápe, že pravidlo není brzda proti poznání. Je to návod, jak získat signál bez zbytečného sběru dat.
+
+### Privacy-first pravidla testuj na výjimkách
+
+Pravidlo vypadá skvěle, dokud nenarazí na první velkou zakázku, enterprise dotazník nebo urgentní incident. Proto ho otestuj na výjimkách ještě před zavedením.
+
+Ptej se:
+
+- Co uděláme, když zákazník výslovně chce detailnější auditní data?
+- Co uděláme, když obchod tvrdí, že bez nového trackeru nezměří kampaň?
+- Co uděláme, když support potřebuje víc kontextu k reprodukci chyby?
+- Co uděláme, když integrace partnera vyžaduje širší oprávnění?
+- Co uděláme, když dočasný workaround začne žít vlastním životem?
+
+Dobré privacy-first pravidlo nezakazuje přemýšlet. Nutí tým zapsat důvod, rozsah, dobu platnosti, vlastníka a cestu zpět k menšímu sběru dat. Výjimka bez expirace není výjimka. Je to zadní vchod s cedulkou „jen na chvilku“, který se nějakým zázrakem nikdy nezavře.
+
+### Měř adopci pravidla přes kvalitu rozhodnutí
+
+Neměř, kolik lidí si pravidlo přečetlo. To je metrika pro interní intranet, ne pro produktový tým. Měř, jestli pravidlo zlepšilo rozhodování.
+
+Praktické signály:
+
+- méně vrácených PR kvůli datovým payloadům,
+- méně dodatečných dotazů na subprocesory,
+- méně výjimek bez vlastníka,
+- rychlejší příprava release komunikace,
+- méně incidentů z nejasného rollbacku,
+- více rozhodnutí zapsaných s jasným důvodem a datem kontroly.
+
+Stačí měsíční review: kde pravidlo pomohlo, kde překáželo, kde bylo neviditelné a kde vznikla rozumná výjimka. Cílem není dokázat, že pravidlo bylo geniální. Cílem je zjistit, jestli tým dělá lepší rozhodnutí s menším chaosem.
+
+### První týden pravidlo doprovázej, nepolicajtuj
+
+Po zavedení pravidla budou lidé dělat chyby. To není odpor. To je změna návyku. První týden proto pravidlo doprovázej komentáři, příklady a rychlými opravami. Nehledej viníka. Hledej, kde pravidlo není dost jasné nebo není ve správném místě.
+
+Dobrá reakce:
+
+> Tady nám do payloadu spadl název souboru. Podle nového pravidla ho neposíláme. Stačí typ souboru a výsledek validace. Doplnil jsem příklad do šablony.
+
+Špatná reakce:
+
+> Už jsme si přece říkali, že tohle neděláme.
+
+První reakce zlepšuje systém. Druhá jen vyrábí tiché obcházení.
+
+### Po měsíci pravidlo zkrať
+
+První verze pravidla bývá delší, protože vysvětluje kontext. Po měsíci už tým ví, proč existuje. Tehdy ho zkrať na provozní podobu: spouštěč, otázka, mantinel, výjimka, vlastník.
+
+Příklad zkrácené verze:
+
+> Při návrhu produktové analytické události neposíláme osobní údaje, volný text, názvy souborů ani obsah zákaznické práce. Měříme agregovaný stav, typ akce a technický výsledek. Výjimka musí mít vlastníka, důvod a datum kontroly.
+
+Krátká pravidla přežijí. Dlouhá pravidla se mění v tapetu.
+
+### Checklist: zavedení týmového pravidla
+
+- Vybral jsem jedno konkrétní workflow, kde pravidlo začne žít.
+- Popsal jsem adopční scénář: kdo, kdy, kde, co udělá jinak.
+- Upravil jsem šablonu, checklist nebo nástroj, ne jen wiki stránku.
+- Přidal jsem krátké vysvětlení důvodu v lidském jazyce.
+- Otestoval jsem pravidlo na výjimkách a urgentních situacích.
+- Určil jsem vlastníka pravidla a datum měsíčního review.
+- Měřím kvalitu rozhodnutí, ne počet přečtení dokumentu.
+- Po prvním měsíci pravidlo zkrátím na provozní minimum.
+
+### Šablona: adopční karta týmového pravidla
+
+```markdown
+## Adopce pravidla: [název]
+
+### Pravidlo
+- Krátká provozní formulace:
+- Proč existuje:
+- Jaké riziko snižuje:
+
+### První workflow
+- Kde pravidlo začne:
+- Kdo ho potká:
+- Kdy ho potká:
+- Co udělá jinak:
+
+### Změna nástroje
+- Upravená šablona / checklist / karta:
+- Nová otázka:
+- Příklad dobrého řešení:
+- Příklad špatného řešení:
+
+### Privacy-first kontrola
+- Jaká data pravidlo chrání:
+- Jaká méně invazivní alternativa existuje:
+- Kdo schvaluje výjimku:
+- Datum kontroly výjimky:
+
+### Adopční signály
+- Co má být za měsíc lepší:
+- Jak poznáme, že pravidlo překáží:
+- Kde sbíráme feedback od týmu:
+
+### Review
+- Vlastník:
+- Datum prvního review:
+- Rozhodnutí po review: ponechat / zkrátit / upravit / zrušit
+```
+
 ## Pracovní log
+
+- **2026-09-17:** Doplněna příloha DS o zavedení týmového pravidla do praxe: výběr prvního workflow, adopční scénář, změny v šablonách a checklistech, vysvětlení důvodu, privacy-first výjimky, měření kvality rozhodnutí, první týden doprovodu, měsíční zkrácení pravidla, checklist a adopční karta.
 
 - **2026-09-17:** Doplněna příloha DR o převodu produktového rozhodnutí do týmového pravidla: výběr opakovatelných rozhodnutí, psaní mantinelů, zapojení do issue/PR/release workflow, privacy-first měření, vlastnictví, výjimky, rušení pravidel, checklist a šablona karty týmového pravidla.
 
