@@ -24389,7 +24389,162 @@ Pokud výstup neexistuje, rozhodnutí je jen názor s datem. Vlastník karty má
 - Datum kontroly:
 ```
 
+## Příloha EJ: Převod rozhodnutí do práce bez ztraceného follow-upu
+
+Rozhodnutí samo o sobě nic nezmění. Je to jen hezky oblečený záměr, dokud se nepřepíše do konkrétní práce, dokumentace, komunikace a odpovědností. Malé SaaS týmy často umí rozhodnout docela rychle, ale ztrácí energii v následném převodu: někdo si něco zapamatuje, někdo založí úkol bez kontextu, někdo čeká na potvrzení a za dva týdny se zjistí, že všichni mysleli trochu jinou věc.
+
+Follow-up není administrativní ocásek za rozhodnutím. Je to místo, kde se pozná kvalita řízení. Dobře uzavřené rozhodnutí má jasný pracovní dopad, vlastníka, termín a stopu v systému. Špatně uzavřené rozhodnutí má nadšený souhlas ve vlákně a potom ticho. Ticho je mimochodem nejdražší projektový nástroj, jen se špatně fakturuje.
+
+> Codyho komentář: Pokud po rozhodnutí nevznikne žádný úkol, změna v roadmapě ani aktualizace dokumentace, pravděpodobně jste nerozhodli. Jen jste společně vyrobili pocit pokroku. Krásné, lidské, naprosto zrádné.
+
+### Každé rozhodnutí musí mít výstupní balíček
+
+Po uzavření rozhodovací karty nevyráběj jen větu „schváleno“. Vytvoř malý výstupní balíček, který převede verdikt do provozní reality. Balíček nemusí být dlouhý, ale musí být úplný.
+
+Minimální výstupní balíček obsahuje:
+
+- **Verdikt:** co přesně bylo rozhodnuto a která varianta padla.
+- **Důvod:** proč tým vybral právě tuto možnost.
+- **Dopad:** co se mění pro produkt, zákazníky, tým, provoz nebo obchod.
+- **První úkoly:** konkrétní další kroky s vlastníkem a termínem.
+- **Dokumentace:** kde se musí změna propsat, aby ji lidé našli i za měsíc.
+- **Komunikace:** kdo musí být informovaný a jakým kanálem.
+- **Kontrola:** kdy se ověří, jestli rozhodnutí funguje.
+
+Praktický příklad: tým rozhodne, že místo plné integrace s účetním systémem udělá nejdřív strukturovaný export. Výstupní balíček nesmí skončit u „jdeme do CSV exportu“. Musí říct, kdo připraví datový rozsah, kdo navrhne UI, kdo ověří formát se dvěma zákazníky, kde se upraví pricing stránka, kdo napíše help článek a kdy se rozhodne, jestli export stačí, nebo je potřeba integrace.
+
+### Rozliš práci, dokumentaci a komunikaci
+
+Jedna častá chyba je házet všechno do jednoho issue. Výsledkem je úkol, který obsahuje vývoj, zákaznický e-mail, změnu runbooku, úpravu fakturace a ještě poznámku „ověřit privacy“. Takový úkol vypadá důležitě, ale špatně se dokončuje, protože nemá jedno jasné kritérium hotovo.
+
+Po rozhodnutí rozděl následky do tří stop:
+
+- **Pracovní stopa:** issue, ticket nebo backlog položka pro konkrétní realizaci.
+- **Paměťová stopa:** aktualizace wiki, runbooku, rozhodovacího deníku, produktové dokumentace nebo architektury.
+- **Komunikační stopa:** interní oznámení, zákaznický changelog, support makro, obchodní poznámka nebo onboardingový text.
+
+Tři stopy neznamenají tři byrokratické ceremonie. Znamenají, že tým nemíchá stavbu, paměť a sdělení do jedné hromady. Vývojář potřebuje vědět, co postavit. Support potřebuje vědět, co říct zákazníkovi. Budoucí tým potřebuje vědět, proč to tak je.
+
+### Vlastník rozhodnutí není automaticky vlastník všech úkolů
+
+Člověk, který rozhodnutí uzavřel, nemusí dělat všechno. Ale musí zajistit, že follow-up existuje. To je důležitý rozdíl. Rozhodovatel je garant převodu, ne univerzální nosič práce.
+
+Dobrá praxe:
+
+- rozhodovatel uzavře verdikt a vytvoří výstupní balíček,
+- jednotlivé pracovní úkoly předá konkrétním vlastníkům,
+- každý vlastník potvrdí rozsah a termín,
+- jedna osoba hlídá, že se pracovní, paměťová a komunikační stopa nerozjedou,
+- po dokončení se karta rozhodnutí doplní o odkaz na výsledek.
+
+Tím se sníží riziko, že rozhodnutí zůstane u člověka, který má největší kontext, ale nejmenší kapacitu. Zakladatelé tím trpí často: rozhodnou, vysvětlí, slíbí follow-up, mezitím řeší tři obchodní hovory a za týden nikdo neví, jestli se něco děje. Systém má chránit i zakladatele před vlastním optimismem.
+
+### Definuj „hotovo“ pro rozhodnutí, ne jen pro úkol
+
+Definition of Done u vývojového úkolu nestačí. Rozhodnutí může být technicky implementované, ale provozně nedokončené. Funkce existuje, ale support o ní neví. Pricing stránka říká starou věc. Onboarding vede zákazníka jinudy. Interní runbook popisuje minulý proces. Produkt je hotový, realita ne.
+
+U každého důležitějšího rozhodnutí si napiš rozhodovací Definition of Done:
+
+- změna je implementovaná nebo procesně zavedená,
+- dotčená dokumentace je aktualizovaná,
+- dotčené role dostaly srozumitelnou informaci,
+- zákaznická komunikace odpovídá realitě,
+- měření dopadu je připravené bez zbytečného sběru osobních dat,
+- existuje datum krátkého vyhodnocení,
+- starý postup byl zrušen, archivován nebo jasně označený jako dočasný.
+
+Tohle pravidlo je zvlášť důležité u privacy-first provozu. Nestačí změnit formulář nebo export. Musíš vědět, zda se změnil rozsah sbíraných dat, kdo má přístup, jak dlouho se data drží, kde je popsán účel a jestli support nezačne posílat citlivé informace do nástroje, který na to není určený.
+
+### Přidej kontrolní bod, ale nedělej z něj poradu navždy
+
+Každé rozhodnutí má mít kontrolní bod. Ne proto, aby se všechno donekonečna otevíralo, ale aby tým věděl, jestli se realita potkala s očekáváním. Kontrolní bod může být desetiminutový async update: co jsme slíbili, co se stalo, co měníme.
+
+Užitečné kontrolní otázky:
+
+- Splnil výsledek původní pracovní problém?
+- Vzniklo méně ruční práce, nebo jsme ji jen přesunuli jinam?
+- Rozumí změně zákazníci, support a obchod?
+- Objevilo se nové provozní nebo privacy riziko?
+- Je potřeba další iterace, nebo stačí rozhodnutí uzavřít?
+- Co smažeme, zjednodušíme nebo přestaneme dělat?
+
+Kontrolní bod by měl být krátký a předem omezený. Pokud se z něj stane pravidelná porada bez jasného výstupu, vytvořil follow-up nový plevel. A plevel, jak ví každý zahradník i produktový manažer, roste hlavně tam, kde se nikdo nedívá.
+
+### Privacy-first follow-up
+
+Převod rozhodnutí do práce je ideální chvíle pro kontrolu dat. V této fázi totiž ještě není pozdě změnit návrh, ale už je dost jasné, co se bude opravdu dělat.
+
+U každého rozhodnutí, které se dotýká zákaznických dat, interních poznámek, analytiky, AI nástrojů, supportu nebo integrací, polož tyto otázky:
+
+- Přidáváme nový typ dat, nebo jen lépe používáme existující?
+- Je sběr dat nutný pro zákaznický výsledek, nebo jen pohodlný pro tým?
+- Umíme měřit dopad agregovaně místo sledování jednotlivců?
+- Musí data opustit evropský provoz nebo autoritativní systém?
+- Kdo přesně dostane přístup a kdy se přístup odebere?
+- Je potřeba upravit dokumentaci, onboarding, podmínky nebo interní runbook?
+- Jak zákazník pozná, že má nad svými daty kontrolu?
+
+Privacy-first není brzda follow-upu. Je to filtr, který zabrání tomu, aby se malé rozhodnutí změnilo v dlouhodobý datový dluh.
+
+### Checklist: rozhodnutí převedené do práce
+
+- Verdikt je zapsaný jednou větou a nejde si ho vyložit třemi způsoby.
+- Existuje výstupní balíček: důvod, dopad, úkoly, dokumentace, komunikace, kontrola.
+- Pracovní úkoly mají vlastníky, termíny a jasné kritérium hotovo.
+- Dokumentace byla aktualizovaná ve správném autoritativním místě.
+- Dotčené role vědí, co se mění a co mají dělat jinak.
+- Starý postup je zrušený, archivovaný nebo označený jako dočasný.
+- Privacy-first kontrola proběhla před implementací, ne až po ní.
+- Kontrolní bod má datum, otázky a omezený rozsah.
+
+### Šablona: follow-up karta rozhodnutí
+
+```markdown
+## Follow-up rozhodnutí: [název]
+
+### Verdikt
+- Co bylo rozhodnuto:
+- Proč tato varianta:
+- Co se výslovně nerozhodlo:
+
+### Dopad
+- Produkt:
+- Zákazníci:
+- Support / obchod:
+- Provoz:
+- Dokumentace:
+
+### Pracovní stopa
+- Úkol 1 / vlastník / termín:
+- Úkol 2 / vlastník / termín:
+- Kritérium hotovo:
+
+### Paměťová stopa
+- Aktualizovat wiki / runbook / roadmapu:
+- Odkaz na autoritativní dokument:
+- Co archivovat nebo odstranit:
+
+### Komunikační stopa
+- Interní oznámení:
+- Zákaznické sdělení:
+- Support makro / FAQ:
+
+### Privacy-first kontrola
+- Nová nebo změněná data:
+- Přístupy:
+- Retence:
+- Agregované měření dopadu:
+- Potřebná aktualizace dokumentace:
+
+### Kontrolní bod
+- Datum kontroly:
+- Otázky k vyhodnocení:
+- Rozhodnutí po kontrole: ponechat / iterovat / zrušit / znovu otevřít
+```
+
 ## Pracovní log
+
+- **2026-09-17:** Doplněna příloha EJ o převodu rozhodnutí do konkrétní práce: výstupní balíček, rozdělení pracovní/paměťové/komunikační stopy, vlastnictví follow-upu, Definition of Done pro rozhodnutí, kontrolní bod, privacy-first kontrola, checklist a follow-up karta.
 
 - **2026-09-17:** Doplněna příloha EI o asynchronním rozhodování bez nekonečných vláken: rozhodovací karta, typování komentářů, časová okna, použití krátkých callů, privacy-first pravidla pro rozhodovací stopu, systémové uzavření, checklist a šablona rozhodovací karty.
 
