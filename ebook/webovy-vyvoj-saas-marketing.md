@@ -22022,7 +22022,201 @@ Nejde o paranoiu. Jde o to, aby provoz nestál na tom, že jeden člověk si pam
 - Jak poznáme, že předání proběhlo:
 ```
 
+
+## Příloha DW: Onboarding do týmových pravidel bez procesního křtu ohněm
+
+Nový člověk v malém SaaS týmu nepotřebuje první týden dostat dvacet dokumentů, sedm záznamů incidentů a tajemný vzkaz „kdyby něco, ptej se“. To není onboarding. To je escape room s firemním logem. Pokud tým postupně buduje pravidla, rozhodovací deník a provozní checklisty, musí mít také jednoduchý způsob, jak do nich nováčka zapojit bez zahlcení.
+
+Onboarding do pravidel má jeden cíl: nový člověk má rychle pochopit, která pravidla chrání zákazníka, tým, produkt a data. Nemusí znát celou historii firmy. Musí vědět, kde jsou mantinely, proč existují a co udělat, když narazí na výjimku.
+
+Dobře vedený onboarding do pravidel odpoví na čtyři otázky:
+
+- Co se u nás rozhoduje podle pravidel, a co podle úsudku?
+- Která pravidla jsou bezpečnostní, privacy-first nebo zákaznicky kritická?
+- Kde najdu aktuální verzi pravidla?
+- Jak navrhnu změnu, když pravidlo v praxi drhne?
+
+### Nezačínej seznamem všech pravidel
+
+Nejhorší onboarding je poslat novému člověku wiki a říct: „Tady je všechno.“ Všechno znamená nic. Nováček nepozná, co je aktuální, co je historická vrstva, co je doporučení a co je tvrdý provozní mantinel. Výsledkem je buď paralýza, nebo tichá ignorace.
+
+Lepší je rozdělit pravidla do tří vrstev:
+
+- **Startovní pravidla:** věci, které člověk musí znát před první samostatnou prací.
+- **Kontextová pravidla:** věci, které pozná při konkrétním workflow.
+- **Referenční pravidla:** věci, které existují pro audit, incidenty nebo výjimečné situace.
+
+Startovní vrstva má být krátká. Pro nového vývojáře to může být práce s produkčními daty, review změn, release postup, incidentová eskalace a pravidlo pro externí služby. Pro marketingového člověka zase publikace obsahu, souhlas se sběrem kontaktů, schvalování externích skriptů a práce s referencemi zákazníků.
+
+Codyho komentář: Když nováčkovi dáš první den čtyřicet pravidel, nenaučíš ho proces. Naučíš ho předstírat, že četl wiki. To je drahý druh divadla.
+
+### Každé pravidlo ukaž v reálné situaci
+
+Pravidla se špatně učí jako teorie. „Minimalizujeme osobní údaje“ zní hezky, ale člověk potřebuje vidět, co to znamená v pull requestu, kampani, support ticketu nebo exportu dat.
+
+U každého startovního pravidla přidej jeden scénář:
+
+- **Pravidlo:** Nepoužíváme živá zákaznická data v demo prostředí.
+- **Situace:** Obchodník chce ukázat zákazníkovi podobný účet jako referenci.
+- **Správný postup:** Použije připravený demo tenant se syntetickými daty.
+- **Špatný postup:** Udělá screenshot reálného účtu a zamázne dvě pole.
+- **Proč:** Chráníme důvěru zákazníků a snižujeme riziko úniku dat.
+
+Scénář nemusí být dlouhý. Stačí, aby nováček poznal typické pokušení. Právě tam se pravidla lámou: ne v ideálním procesu, ale ve chvíli, kdy někdo spěchá, chce pomoct a řekne si, že „tentokrát to nevadí“.
+
+### Přidej pravidla do workflow, ne jen do školení
+
+Jednorázové školení rychle vyprchá. Workflow zůstává. Pokud je pravidlo důležité, musí se objevit tam, kde člověk pracuje.
+
+Praktická místa pro zapojení pravidel:
+
+- issue šablona pro novou funkci,
+- pull request checklist,
+- release checklist,
+- obsahový brief,
+- šablona zákaznického e-mailu,
+- support triage,
+- vendor karta,
+- onboarding checklist pro první týden.
+
+Příklad: místo samostatného dokumentu „Pravidla pro analytiku“ dej do checklistu nové landing page otázky: Jaké eventy měříme? Proč je potřebujeme? Jsou agregované? Vyžadují souhlas? Kde je popsaný účel v privacy dokumentaci? Tím se pravidlo stane součástí práce, ne nástěnnou dekorací.
+
+### První týden: uč jen pravidla s vysokým dopadem
+
+Nový člověk první týden vstřebává produkt, lidi, nástroje, zákazníky i interní jazyk. Nepřidávej k tomu encyklopedii procesů. Vyber pravidla, jejichž porušení by způsobilo reálnou škodu.
+
+Prioritu mají pravidla, která chrání:
+
+- produkční data,
+- zákaznickou důvěru,
+- bezpečnost přístupů,
+- veřejnou komunikaci,
+- fakturaci a smluvní závazky,
+- incidentovou reakci,
+- compliance dokumentaci.
+
+Všechno ostatní může přijít postupně v kontextu. Pokud člověk první týden nepíše pricing stránku, nepotřebuje detailně znát všechna pravidla cenotvorby. Stačí vědět, kde je najde a koho se ptát.
+
+### Druhý týden: nech nováčka pravidlo použít
+
+Pasivní čtení nestačí. Druhý týden dej novému člověku malý úkol, kde pravidlo bezpečně použije. Nech ho například:
+
+- zkontrolovat issue podle šablony,
+- doplnit privacy-first otázky do briefu,
+- projít starší pull request a najít, kde se pravidlo objevilo,
+- vytvořit syntetický příklad pro dokumentaci,
+- navrhnout zjednodušení jedné nejasné věty,
+- popsat vlastními slovy, kdy eskalovat výjimku.
+
+Úkol má být malý a vratný. Cílem není výkon, ale porozumění. Když se nováček ptá, je to dobré znamení. Horší je tichý souhlas, po kterém přijde první produkční překvapení. A překvapení v produkci je jen incident, který si ještě nevzal kravatu.
+
+### Privacy-first onboarding neznamená ukázat všechno
+
+Při zaučování se snadno sklouzne k tomu, že novému člověku nasdílíš historické tickety, zákaznické příklady, exporty a screenshoty, aby „měl kontext“. Jenže privacy-first tým předává znalost, ne zbytečná data.
+
+Bezpečnější postup:
+
+- používej anonymizované příklady,
+- reálné zákaznické odkazy sdílej jen při jasné potřebě,
+- incidenty popisuj přes příčinu a dopad, ne přes osobní detaily,
+- ukázky dat dělej syntetické,
+- přístupy dávej postupně podle role,
+- po onboardingovém období odeber dočasné přístupy.
+
+Dobrá onboardingová karta může obsahovat „typické situace“, ale nemá obsahovat celé zákaznické vlákno. Pokud je pro pochopení pravidla potřeba reálný případ, raději z něj vytvoř anonymizovanou mini case study.
+
+### Uč i právo na otázku a výjimku
+
+Pravidla nejsou náboženství. Nový člověk musí vědět, jak se ptát a jak navrhnout výjimku. Jinak se stane jedna ze dvou věcí: buď bude pravidla slepě následovat i tam, kde nedávají smysl, nebo je začne obcházet, protože neví, jak legálně říct „tady to drhne“.
+
+U každého důležitého pravidla proto napiš:
+
+- kdo drží kontext,
+- kdo schvaluje výjimku,
+- jak se výjimka zapisuje,
+- kdy je výjimka zakázaná,
+- kdy se má pravidlo po výjimce revidovat.
+
+Příklad: „Nový marketingový nástroj lze vyzkoušet jen po vendor kartě. Výjimku pro jednorázový test schvaluje product/ops, ale nikdy se nesmí posílat osobní údaje zákazníků bez zpracovatelské smlouvy a jasného účelu.“
+
+Tohle je praktické. Neříká jen „ne“. Říká, kudy vede bezpečná cesta.
+
+### Měř onboarding podle samostatnosti, ne podle podpisu
+
+Podpis pod dokumentem neznamená pochopení. Lepší signály jsou praktické:
+
+- nováček umí najít aktuální pravidlo,
+- dokáže vysvětlit důvod pravidla vlastními slovy,
+- použije pravidlo v prvním workflow,
+- zeptá se na výjimku dřív, než něco obejde,
+- navrhne zlepšení nejasné části,
+- nerozšiřuje přístupy nebo data „pro jistotu“.
+
+Po prvním měsíci se zeptej nového člověka na tři věci: které pravidlo mu pomohlo, které bylo nejasné a které působilo zbytečně. To je skvělý audit čitelnosti. Když pravidlu nerozumí nový člověk, možná není hloupý nový člověk. Možná je hloupě napsané pravidlo. Ano, i dokumenty mají ego. Jen ho neumí přiznat.
+
+### Checklist: onboarding do týmových pravidel
+
+- Má nový člověk krátký seznam startovních pravidel podle role?
+- Jsou pravidla rozdělená na startovní, kontextová a referenční?
+- Má každé startovní pravidlo praktický scénář správného a špatného použití?
+- Jsou důležitá pravidla zapojená do issue, PR, release nebo obsahových šablon?
+- Učí první týden jen pravidla s vysokým dopadem?
+- Má druhý týden jeden malý úkol, kde pravidlo použije?
+- Používají se anonymizované nebo syntetické příklady místo živých zákaznických dat?
+- Jsou přístupy přidělené postupně podle role?
+- Je jasné, kdo schvaluje výjimky a jak se zapisují?
+- Měří se pochopení podle použití v praxi, ne podle podpisu?
+- Proběhne po měsíci krátká zpětná vazba na čitelnost pravidel?
+
+### Šablona: onboardingová karta pravidel
+
+```markdown
+# Onboarding do pravidel: [role / oblast]
+
+## Startovní pravidla
+- Pravidlo 1:
+  - Proč existuje:
+  - Kde je aktuální verze:
+  - Typická situace:
+  - Správný postup:
+  - Špatný postup:
+  - Vlastník:
+
+- Pravidlo 2:
+  - Proč existuje:
+  - Kde je aktuální verze:
+  - Typická situace:
+  - Správný postup:
+  - Špatný postup:
+  - Vlastník:
+
+## Kontextová pravidla
+- Workflow / situace:
+- Kde se pravidla objeví v šablonách:
+- Kdy je číst:
+
+## Výjimky
+- Kdo drží kontext:
+- Kdo schvaluje výjimku:
+- Kde se výjimka zapisuje:
+- Kdy je výjimka zakázaná:
+
+## Privacy-first kontrola
+- Příklady jsou anonymizované nebo syntetické:
+- Reálná zákaznická data nejsou součástí onboardingu bez jasné potřeby:
+- Přístupy jsou přidělené podle role:
+- Dočasné přístupy k odebrání po onboardingu:
+
+## Praktické ověření
+- Malý úkol pro 2. týden:
+- Jak poznáme, že člověk pravidlu rozumí:
+- Otázky / nejasnosti:
+- Zpětná vazba po 30 dnech:
+```
+
 ## Pracovní log
+
+- **2026-09-17:** Doplněna příloha DW o onboardingu do týmových pravidel: vrstvy pravidel, praktické scénáře, zapojení do workflow, první a druhý týden zaučení, privacy-first předávání kontextu, výjimky, měření samostatnosti, checklist a onboardingová karta.
 
 - **2026-09-17:** Doplněna příloha DV o předání vlastnictví týmového pravidla: role vlastníka, předání pravidla jako malého produktu, mapa dotykových míst, praktické ověření předání, privacy-first zacházení s kontextem, rozlišení dočasného a dlouhodobého předání, záchranný režim, checklist a předávací karta.
 
