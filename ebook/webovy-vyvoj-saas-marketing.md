@@ -21133,7 +21133,187 @@ Codyho doporučení: u změněného rozhodnutí přidej odkaz na nové rozhodnut
 - Odkaz na navazující rozhodnutí:
 ```
 
+## Příloha DR: Z rozhodnutí do týmového pravidla bez procesního betonu
+
+Produktový rozhodovací deník je užitečný jen do chvíle, než se z něj stane hřbitov chytrých vět. Rozhodnutí má změnit chování týmu: co se navrhuje, co se staví, co se kontroluje, co se odmítá a co se zákazníkům slibuje. Pokud po měsíci nikdo nepozná, že rozhodnutí existuje, nebylo to rozhodnutí. Byla to literární aktivita. Gratuluju, máte interní novelu.
+
+Týmové pravidlo není totéž co proces. Proces říká, jak se něco dělá krok za krokem. Pravidlo říká, jaký mantinel už nepřekračujeme. Malý SaaS tým nepotřebuje dvacetistránkovou směrnici pro každý release. Potřebuje několik jasných pravidel, která se objeví v práci přesně ve chvíli, kdy se podle nich má rozhodovat.
+
+### Převáděj jen opakovatelná rozhodnutí
+
+Ne každé rozhodnutí patří do pravidel. Jednorázové rozhodnutí typu „tento zákaznický import uděláme ručně“ zůstane v rozhodovacím deníku, případně v zákaznické kartě. Do týmového pravidla patří až rozhodnutí, které se pravděpodobně vrátí.
+
+Příklady rozhodnutí, která dávají smysl převést na pravidlo:
+
+- „Nová integrace nesmí být schválena bez datové karty.“
+- „Každý export musí mít strojově čitelnou podobu a lidsky čitelný popis.“
+- „Žádná nová analytická událost nesmí obsahovat volný text od uživatele.“
+- „Trial může žádat jen údaje nutné k aktivačnímu scénáři.“
+- „Feature flag musí mít vlastníka, datum kontroly a podmínku vypnutí.“
+
+Naopak pravidlem nemá být všechno, co někoho zrovna naštvalo. Jedna nepříjemná chyba není automaticky důvod vytvořit nový formulář. Nejdřív se ptej: vrátí se tahle situace? Bude mít opakované dopady? Pomůže pravidlo lidem rozhodnout rychleji?
+
+Codyho komentář: pravidlo je dobré tehdy, když zkrátí debatu a zvýší kvalitu rozhodnutí. Pokud jen přidá další políčko do nástroje, které všichni mechanicky odkliknou, je to procesní třpytka. Hezká, zbytečná, trochu smutná.
+
+### Pravidlo napiš jako mantinel, ne jako filozofii
+
+Špatné pravidlo zní: „Budeme dbát na soukromí uživatelů při práci s analytickými daty.“ To je hezké, ale v praxi to neříká skoro nic. Dobré pravidlo zní: „Do produktové analytiky neposíláme e-mail, jméno, obsah zprávy, název souboru ani volný text z formuláře.“
+
+Pravidlo musí mít tři části:
+
+1. **Spouštěč:** kdy se pravidlo použije.
+2. **Mantinel:** co se smí, nesmí nebo musí ověřit.
+3. **Výjimka:** kdo ji může schválit a jak se zapíše.
+
+Praktický příklad:
+
+> Při návrhu nové produktové analytické události nesmí payload obsahovat osobní údaje, volný text, názvy souborů ani obsah zákaznické práce. Pokud tým potřebuje měřit kvalitu konkrétního scénáře, použije agregovaný stav, typ akce nebo technický výsledek. Výjimku schvaluje vlastník produktu a zapíše ji do rozhodovacího deníku s datem kontroly.
+
+Tohle je použitelné. Vývojář ví, co nemá posílat. Produkt ví, jak navrhnout signál. Support ví, proč se některé otázky neměří „hezky detailně“. A privacy-first hodnota není plakát na zdi, ale konkrétní brzda v návrhu.
+
+### Umísti pravidlo tam, kde vzniká práce
+
+Nejčastější chyba: pravidlo se napíše do wiki, která se otevře jen při onboardingu nového člověka nebo při archeologickém výzkumu. Pravidlo musí žít v místě, kde tým dělá rozhodnutí.
+
+Použitelná místa:
+
+- **Issue šablona:** pravidla pro nové funkce, integrace, analytiku, migrace a importy.
+- **Definition of Ready:** pravidla před vstupem do sprintu nebo pracovního týdne.
+- **Pull request checklist:** technická pravidla, bezpečnost, logging, migrace, přístupnost.
+- **Release checklist:** pravidla pro komunikaci, changelog, support, rollback a datové dopady.
+- **Vendor karta:** pravidla pro nové nástroje, subprocesory a přístupy.
+- **Support makra:** pravidla pro sdílení dat, eskalace a sliby zákazníkům.
+
+Když pravidlo patří jen do wiki, bude porušované slušnými lidmi, kteří ho prostě neviděli. To není morální selhání. To je špatné umístění.
+
+### Z pravidla udělej otázku v checklistu
+
+Dobré pravidlo se dá převést na otázku, kterou tým umí rychle zodpovědět.
+
+Příklady:
+
+- „Obsahuje tato změna nový datový tok?“
+- „Vzniká nový subprocesor nebo nový přístup k zákaznickým datům?“
+- „Umí zákazník výsledek exportovat bez žádosti na support?“
+- „Má workaround datum expirace?“
+- „Měříme výsledek práce, nebo chování konkrétního člověka?“
+- „Je rollback popsaný dost konkrétně na to, aby ho někdo provedl v pátek odpoledne?“
+
+Otázka je lepší než dlouhý odstavec, protože zastaví práci ve správný moment. Nemusí vychovávat tým. Stačí, když mu připomene, že teď se rozhoduje o něčem důležitém.
+
+### Privacy-first pravidla musí chránit i před dobrými nápady
+
+Nejnebezpečnější privacy rizika nevznikají jen ze špatných úmyslů. Často vznikají z dobrých nápadů: „Pojďme lépe pochopit onboarding“, „Pojďme zjistit, co uživatelé píšou do formuláře“, „Pojďme si na support poslat celý kontext, ať nemusíme hledat.“
+
+Privacy-first pravidlo má tým chránit právě v těchto momentech. Neříká „nikdy nic neměř“. Říká: nejdřív zjisti, jestli se stejná otázka nedá zodpovědět méně invazivně.
+
+Praktická hierarchie měření:
+
+1. **Technický stav:** proběhlo / neproběhlo, chyba / úspěch, čas běhu, velikost dávky.
+2. **Agregovaný výsledek:** počet aktivovaných účtů, dokončené importy, exporty za týden.
+3. **Segment bez identifikace osoby:** typ plánu, velikost účtu, země provozu, jazyk rozhraní.
+4. **Ruční kvalitativní vzorek:** pár schválených zákaznických rozhovorů nebo anonymizovaných support případů.
+5. **Citlivější data:** jen pokud existuje jasný účel, právní základ, retenční pravidlo, přístupové omezení a lepší varianta nestačí.
+
+Takhle se soukromí nestává brzdou produktu. Stává se metodou lepšího návrhu. Místo „sebereme všechno a pak se uvidí“ tým začne otázkou „co přesně potřebujeme vědět, abychom udělali lepší rozhodnutí?“
+
+### Pravidla musí mít vlastníka a datum revize
+
+Pravidlo bez vlastníka zastará. Pravidlo bez revize zkamení. A zkamenělé pravidlo je horší než žádné pravidlo, protože se tváří jako moudrost, i když už jen blokuje práci.
+
+Každé pravidlo má mít:
+
+- vlastníka,
+- datum vzniku,
+- důvod vzniku,
+- odkaz na původní rozhodnutí,
+- místa, kde je pravidlo zapojené,
+- datum revize nebo podmínku revize,
+- seznam výjimek nebo odkaz na výjimky.
+
+Revize nemusí být velká porada. Stačí jednou za měsíc projít pravidla, která měla výjimku, způsobila tření nebo se dotkla releasu. Otázka není „líbí se nám pravidlo?“ Otázka je „pomáhá pořád dělat lepší rozhodnutí?“
+
+### Výjimky zapisuj bez dramatu
+
+Výjimka není ostuda. Ostuda je výjimka, která se tváří, že neexistuje. Malý SaaS někdy udělá ruční workaround, dočasný export, speciální onboarding nebo integrační kompromis. To je realita. Důležité je, aby výjimka měla konec.
+
+Dobrá výjimka obsahuje:
+
+- proč pravidlo nejde dodržet,
+- pro koho výjimka platí,
+- jaké riziko vzniká,
+- jak se riziko omezuje,
+- kdy výjimka končí,
+- kdo ji schválil,
+- co se musí změnit, aby už výjimka nebyla potřeba.
+
+Výjimka bez expirace je nové pravidlo, jen zbaběle maskované. Ano, věta je trochu přísná. Ale taky pravdivá, což je nepříjemná kombinace.
+
+### Checklist: převod rozhodnutí na pravidlo
+
+- Je rozhodnutí opakovatelné, nebo šlo jen o jednorázový případ?
+- Dá se pravidlo napsat jako konkrétní mantinel?
+- Je jasné, kdy se pravidlo spouští?
+- Je popsáno, kdo může schválit výjimku?
+- Je pravidlo umístěné v issue, PR, release nebo vendor workflow?
+- Dá se pravidlo převést na checklistovou otázku?
+- Má pravidlo vlastníka a datum revize?
+- Chrání pravidlo privacy-first hodnotu bez zbytečného blokování práce?
+- Existuje odkaz na původní rozhodnutí?
+- Ví support, obchod a vývoj, že pravidlo existuje?
+
+### Šablona: karta týmového pravidla
+
+```markdown
+## Týmové pravidlo: [název]
+
+### Stav
+- Návrh / aktivní / v revizi / zrušené:
+- Vlastník:
+- Datum vzniku:
+- Datum revize:
+
+### Původ
+- Odkaz na rozhodnutí:
+- Problém, který pravidlo řeší:
+- Co se stane, když pravidlo neexistuje:
+
+### Spouštěč
+- Kdy se pravidlo použije:
+- Kdo ho má vidět:
+- V jakém workflow se kontroluje:
+
+### Mantinel
+- Co se musí stát:
+- Co se nesmí stát:
+- Jaká je minimální kvalita výstupu:
+
+### Privacy-first kontrola
+- Jaká data pravidlo chrání:
+- Jak snižuje sběr nebo šíření dat:
+- Jak se řeší výjimka:
+
+### Zapojení do práce
+- Issue šablona:
+- PR checklist:
+- Release checklist:
+- Support / obchod / dokumentace:
+
+### Výjimky
+- Kdo může schválit výjimku:
+- Jak se výjimka zapisuje:
+- Maximální platnost výjimky:
+
+### Revize
+- Signály, že pravidlo pomáhá:
+- Signály, že pravidlo škodí:
+- Rozhodnutí po revizi:
+```
+
+
 ## Pracovní log
+
+- **2026-09-17:** Doplněna příloha DR o převodu produktového rozhodnutí do týmového pravidla: výběr opakovatelných rozhodnutí, psaní mantinelů, zapojení do issue/PR/release workflow, privacy-first měření, vlastnictví, výjimky, checklist a šablona karty týmového pravidla.
 
 - **2026-09-17:** Doplněna příloha DQ o rozhodovacím deníku produktu: kdy zapisovat rozhodnutí, jak formulovat závazek, propojení s prací, privacy-first stopa, rozlišení rozhodnutí/hypotézy/pravidla, review podmínky, aktualizace historie, checklist a šablona karty produktového rozhodnutí.
 
