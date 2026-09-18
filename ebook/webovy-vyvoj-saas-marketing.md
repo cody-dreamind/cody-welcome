@@ -27395,7 +27395,179 @@ Doporučený rytmus: krátká kontrola při každém větším releasu a hlubš�
 - Co spustí povinnou aktualizaci:
 
 
+## Příloha FB: Zpracovatelská smlouva bez copy-paste compliance a obchodní brzdy
+
+Zpracovatelská smlouva, často DPA, není právní PDF, které se podepíše, založí a při auditu slavnostně objeví jako archeologický nález. Pro malý SaaS je to provozní dohoda o tom, kdo o datech rozhoduje, kdo s nimi pracuje, jaká technická a organizační opatření drží riziko pod kontrolou a co se stane při změně, incidentu nebo odchodu zákazníka.
+
+GDPR v článku 28 říká, že zpracování zpracovatelem má být upraveno smlouvou nebo jiným právním aktem, který mimo jiné popisuje předmět a dobu zpracování, povahu a účel zpracování, typ osobních údajů, kategorie subjektů údajů a práva a povinnosti správce. Oficiální text je v EUR-Lexu: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX:32016R0679. Český ÚOOÚ k roli zpracovatele připomíná, že obsah smlouvy nemá být jen slepý opis článku 28, ale konkrétní úprava práv a povinností stran: https://uoou.gov.cz/poradna/poradna-gdpr/zpracovatel. EDPB k rozlišení správce a zpracovatele vydal pokyny 07/2020: https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en.
+
+> Codyho komentář: DPA je jako bezpečnostní pás. Není sexy, nikdo ho nechce číst po večeři, ale ve chvíli nárazu je rozdíl mezi „uff“ a „tak tohle bude drahé“.
+
+### Nejdřív určete role, ne právní názvy
+
+Nejčastější zmatek vzniká tím, že tým automaticky napíše „jsme zpracovatel“, protože to zní méně odpovědně. Jenže role nevzniká podle toho, co je pohodlné v šabloně. Vzniká podle reality: kdo určuje účel a prostředky zpracování.
+
+Prakticky:
+
+- **Zákazník jako správce:** typicky když SaaS zpracovává data zákazníkových klientů, zaměstnanců nebo kontaktů podle pokynů zákazníka.
+- **SaaS jako zpracovatel:** platforma data hostuje, ukládá, zpřístupňuje, zálohuje a technicky provozuje, ale neurčuje obchodní účel dat zákazníka.
+- **SaaS jako správce:** u vlastních účtů, fakturace, bezpečnostních logů, supportu, marketingové komunikace nebo vlastních analytických dat.
+- **Společné správcovství:** řeš jen tehdy, když obě strany společně určují účely a podstatné prostředky zpracování. Nestrkej ho do smlouvy „pro jistotu“.
+
+U každého produktu si udělej jednoduchou tabulku: datová oblast, subjekt údajů, účel, kdo rozhoduje, kdo provádí zpracování, jaký dokument to kryje. Tahle tabulka často odhalí, že jedna SaaS služba má více rolí najednou. To je normální. Nenormální je tvářit se, že vše spadne pod jednu kouzelnou větu.
+
+### DPA musí popisovat skutečný provoz
+
+Dobrá zpracovatelská smlouva odpovídá na otázky, které zákazník i provozní tým opravdu potřebují:
+
+- Jaká data do služby typicky vstupují?
+- Kdo k nim může mít přístup a za jakých podmínek?
+- Kde jsou data uložená a kdo jsou subprocesoři?
+- Jak dlouho se drží produkční data, zálohy, logy a supportní přílohy?
+- Jak zákazník získá export a jak se data smažou po ukončení služby?
+- Co se stane při bezpečnostním incidentu?
+- Jak probíhá změna subprocesora nebo infrastruktury?
+
+Pokud smlouva říká „zpracovatel přijme vhodná technická a organizační opatření“, ale nikde není popsáno, co to znamená, je to slabé. Lepší je stručná příloha: šifrování přenosu, oddělení tenantů, role-based access, audit log kritických akcí, zálohy, monitoring, omezený supportní přístup, pravidelný access review a retenční pravidla. Ne proto, aby právník zatleskal. Protože podle toho tým reálně provozuje službu.
+
+### Přílohy jsou lepší než román v hlavním textu
+
+U malého SaaS se osvědčuje držet hlavní DPA stabilní a konkrétní provozní detaily dát do příloh:
+
+- **Příloha A — Popis zpracování:** účel, doba, typy údajů, kategorie subjektů, zákaznické pokyny.
+- **Příloha B — Bezpečnostní opatření:** technická, organizační a procesní opatření.
+- **Příloha C — Subprocesoři:** název, účel, země/region, typ služby, odkaz na další informace.
+- **Příloha D — Retence a mazání:** provozní data, zálohy, logy, support, export.
+- **Příloha E — Incidenty a komunikace:** kontakty, lhůty interního oznámení, obsah prvního updateu.
+
+Výhoda je jednoduchá: když změníš subprocesora nebo retenční dobu logů, nemusíš přepisovat celý právní román. Aktualizuješ správnou přílohu, oznámíš změnu podle smlouvy a držíš historickou stopu.
+
+### Subprocesoři nejsou seznam log na webu
+
+Subprocesor je každý dodavatel, který pro tebe zpracovává osobní údaje zákazníkových subjektů. Typicky hosting, databáze, e-mailová infrastruktura, support systém, monitoring, error tracking, zálohy nebo AI služba, pokud do ní posíláš zákaznický obsah.
+
+Privacy-first přístup znamená:
+
+- preferuj evropské dodavatele a EU/EHP regiony,
+- u každého subprocesora popiš účel, ne jen značku,
+- neposílej do externích nástrojů payloady, když stačí technické metriky,
+- drž veřejný nebo zákaznicky dostupný seznam subprocesorů,
+- nastav proces oznámení změny dřív, než změna nastane,
+- uměj vysvětlit, proč subprocesora potřebuješ.
+
+Příklad špatného seznamu: „AWS, Mailgun, Sentry, Stripe.“
+
+Příklad použitelného seznamu: „Hosting aplikace a databáze v EU regionu; transakční e-maily pro systémové notifikace; error tracking bez ukládání zákaznických payloadů; platební zpracování fakturačních údajů.“
+
+Zákazník nepotřebuje lovit význam názvů nástrojů. Potřebuje vědět, kudy data tečou.
+
+### Auditní právo řeš prakticky
+
+Větší zákazníci se někdy ptají na audit. Malý SaaS nemusí hned slibovat osobní návštěvy serverovny, kterou stejně nemá. Může ale nabídnout rozumný model:
+
+- standardní bezpečnostní a privacy dokumentaci,
+- vyplněný bezpečnostní dotazník,
+- přehled subprocesorů,
+- shrnutí posledního access review,
+- potvrzení o testu obnovy ze zálohy,
+- řízený call s technickým nebo bezpečnostním vlastníkem,
+- možnost hlubšího auditu za předem dohodnutých podmínek.
+
+Hlavní pravidlo: audit nesmí ohrozit bezpečnost ostatních zákazníků. Do smlouvy napiš, že audit probíhá přiměřeně, po předchozí dohodě, bez přístupu k datům jiných zákazníků a s ochranou důvěrných informací.
+
+### Incidentní část nesmí začínat až incidentem
+
+DPA má popsat, jak zpracovatel pomůže správci při porušení zabezpečení osobních údajů. V praxi to znamená, že už předem víš:
+
+- komu zákazníkovi píšeš,
+- kdo interně incident klasifikuje,
+- jak rychle posíláš první oznámení,
+- jaké informace v oznámení budou,
+- jak průběžně aktualizuješ stav,
+- jak po incidentu předáš postmortem nebo technické shrnutí.
+
+Neslibuj „okamžitě“ jen proto, že to zní hezky. Slib konkrétní proces: bez zbytečného odkladu, s prvním praktickým updateem po ověření základních faktů a s doplňováním dalších informací. Rychlá nepřesná panika je horší než věcný první update s jasným „co víme / co ještě ověřujeme / co jsme udělali“.
+
+### DPA má být součást prodeje, ne brzda prodeje
+
+Když DPA začneš řešit až ve chvíli, kdy zákazník posílá vlastní právní oddělení, obchod se zpomalí. Připrav si dopředu balíček:
+
+- veřejnou nebo sdílenou privacy stránku,
+- vlastní DPA šablonu,
+- seznam subprocesorů,
+- bezpečnostní opatření ve stručné řeči,
+- retenční pravidla,
+- odpovědi na nejčastější dotazy k datům,
+- kontakt pro bezpečnostní a privacy otázky.
+
+Pak prodej nemusí pokaždé lovit odpovědi v chatu typu „hele, kde vlastně držíme logy?“. Má zdroj pravdy. A zákazník vidí, že privacy není dekorace na landing page.
+
+### Checklist: DPA bez compliance divadla
+
+- [ ] Máme jasně určené role pro každou datovou oblast.
+- [ ] DPA popisuje reálný účel, dobu, typy údajů a kategorie subjektů.
+- [ ] Bezpečnostní opatření jsou konkrétní a odpovídají provozu.
+- [ ] Seznam subprocesorů obsahuje účel, region a typ služby.
+- [ ] Změna subprocesora má proces oznámení a námitky.
+- [ ] Retence, export a mazání jsou popsány i pro zálohy, logy a support.
+- [ ] Incidentní komunikace má kontakty, odpovědnosti a realistický postup.
+- [ ] Auditní právo chrání bezpečnost ostatních zákazníků.
+- [ ] DPA je dostupná obchodnímu týmu před podpisem zákazníka.
+- [ ] Při změně architektury nebo nástroje aktualizujeme přílohy.
+
+### Šablona: karta zpracovatelské smlouvy
+
+## DPA karta: [zákazník / produkt / tarif]
+
+### Role a rozsah
+
+- Správce:
+- Zpracovatel:
+- Datové oblasti:
+- Subjekty údajů:
+- Účely zpracování:
+- Doba zpracování:
+
+### Data a provoz
+
+- Typy osobních údajů:
+- Produkční úložiště / region:
+- Zálohy:
+- Logy:
+- Supportní data:
+- Export:
+- Mazání po ukončení:
+
+### Subprocesoři
+
+- Název:
+- Účel:
+- Region:
+- Jaká data:
+- Odkaz na dokumentaci:
+- Datum poslední kontroly:
+
+### Bezpečnostní opatření
+
+- Přístupová práva:
+- Šifrování:
+- Audit log:
+- Monitoring:
+- Access review:
+- Test obnovy:
+- Incidentní kontakt:
+
+### Obchodní a právní stav
+
+- Verze DPA:
+- Podepsáno dne:
+- Odchylky od standardu:
+- Otevřené otázky:
+- Další review:
+
+
 ## Pracovní log
+- **2026-09-18:** Doplněna příloha FB o zpracovatelských smlouvách pro malý SaaS: určení rolí správce/zpracovatele, konkrétní DPA přílohy, subprocesoři, auditní právo, incidentní část, obchodní balíček, checklist a DPA karta.
 - **2026-09-18:** Doplněna příloha FA o DPIA pro malý SaaS: kdy posouzení vlivu řešit, formulace rozhodnutí, datový tok, rizika z pohledu člověka, praktická opatření, stop pravidla před spuštěním, práce s právníkem, živé review, checklist a DPIA karta.
 - **2026-09-18:** Doplněna příloha EZ o logování a observabilitě bez datového vysavače: rozdělení technických, auditních a produktových signálů, strukturované logy bez payloadů, automatická redakce citlivých dat, retence, dashboardy, alerty, vendor kontrola, incident follow-up, checklist a observační karta.
 - **2026-09-18:** Doplněna příloha EY o aktualizaci závislostí bez supply-chain rulety: inventář balíčků a image, rizikové fronty aktualizací, OWASP/OSV/OpenSSF zdroje, lockfile pravidla, privacy-first kontrola SDK, týdenní rytmus, checklist a karta závislosti.
