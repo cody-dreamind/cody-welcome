@@ -26462,7 +26462,153 @@ Privacy-first tým umí říct: „Kontrolujeme oprávnění, protože chráním
 > Codyho komentář: Dobrá revize oprávnění není o tom, že všem všechno zakážeš. Je o tom, že každý přístup má smysl, vlastníka a konec. Bez toho se ze systému stane hotelový minibar: nikdo přesně neví, kdo co vzal, ale účet jednou přijde.
 
 
+
+## Příloha EW: Správa tajemství a API klíčů bez sdíleného poznámkového pekla
+
+Tajemství v SaaS nejsou jen hesla. Jsou to API klíče, tokeny, webhook signing secrets, databázové přístupy, privátní certifikáty, SMTP údaje, recovery kódy a někdy i obyčejný export s osobními daty, který někdo „na chvíli“ hodil do chatu. Na chvíli v historii chatu znamená často navždy. Digitální archeologové budoucnosti budou mít radost, bezpečnostní audit méně.
+
+Cílem není udělat z malého týmu bankovní trezor s patnácti schvalovacími kolečky. Cílem je mít systém, ve kterém se tajemství neválí v repozitáři, lidi vědí, kde je hledat, a výměna klíče není drama na celý den.
+
+### Nejdřív pojmenuj, co je tajemství
+
+Tým často chrání jen to, co se jmenuje „password“. Jenže útočník je kreativnější než názvosloví v `.env.example`. Za tajemství považuj všechno, co umožní přístup, podpis, odeslání zprávy, změnu konfigurace nebo čtení neveřejných dat.
+
+Praktická klasifikace:
+
+- **Přístupová tajemství:** hesla, API tokeny, OAuth client secrets, SSH klíče.
+- **Podpisová tajemství:** webhook secrets, JWT signing keys, privátní certifikáty.
+- **Provozní tajemství:** databázové connection stringy, SMTP údaje, storage credentials.
+- **Recovery tajemství:** záložní kódy, break-glass účty, seed fráze, admin tokeny.
+- **Dočasná citlivá data:** produkční exporty, diagnostické balíčky, incidentní dumpy.
+
+Každý typ má mít vlastní pravidla. Recovery kód nepatří do stejného režimu jako testovací token pro lokální sandbox. A produkční databázové heslo už vůbec nepatří do Slacku s komentářem „pak smažu“. Nesmažeš. Nebo smažeš a někde zůstane preview, notifikace, log, záloha a screenshot. Internet má paměť jako slon po třech espressech.
+
+### Zdroj pravdy musí být jeden
+
+Malý tým potřebuje jedno oficiální místo, kde tajemství žijí. Ne pět míst podle toho, kdo byl zrovna vzhůru při prvním deployi. Typicky to může být správa secrets v hostingu, samostatný password manager pro tým nebo vault. Důležité je, aby bylo jasné:
+
+- kdo smí tajemství číst,
+- kdo ho smí měnit,
+- kde se promítá do aplikace,
+- jak se rotuje,
+- kdo je vlastník služby,
+- kdy bylo naposledy zkontrolované.
+
+Do repozitáře patří maximálně názvy proměnných, dokumentace účelu a bezpečné příklady. Soubor `.env.example` má ukazovat tvar konfigurace, ne reálné hodnoty. Pokud bez tajemství nejde aplikaci spustit lokálně, vytvoř lokální sandbox hodnoty nebo vývojářský onboarding, který bezpečně vysvětlí, kde je získat.
+
+### Odděl prostředí a práva
+
+Jedno tajemství pro development, staging i produkci je pohodlné přesně do chvíle, než se pohodlí promění v incident. Prostředí odděluj tak, aby únik vývojového tokenu neotevřel produkční data.
+
+Minimum pro SaaS:
+
+- **Lokální vývoj:** sandbox klíče, testovací data, žádná produkční oprávnění.
+- **Staging:** data anonymizovaná nebo syntetická, samostatné integrace, jasně označené e-maily.
+- **Produkce:** nejmenší nutná oprávnění, audit změn, omezený počet lidí s přístupem.
+- **Break-glass režim:** nouzový přístup pro incident, časově omezený a po použití povinně revidovaný.
+
+Stejně důležité je oddělit účel. Klíč pro čtení fakturačních stavů nemá umět měnit zákaznická data. Token pro webhook nemá mít právo volat administrační API. Pokud nástroj neumí jemná oprávnění, ber to jako riziko při výběru dodavatele, ne jako drobnou kosmetiku.
+
+### Rotace nesmí být sváteční rituál
+
+Rotace tajemství se často odkládá, protože nikdo neví, co se rozbije. To je signál, že chybí mapa závislostí. U každého důležitého tajemství si drž krátkou kartu:
+
+- název a účel,
+- vlastník,
+- prostředí,
+- služby, které ho používají,
+- způsob nasazení nové hodnoty,
+- plánovaný interval revize,
+- postup nouzové rotace.
+
+Rotace nemusí znamenat měnit všechno každý týden. Znamená mít proces, který zvládneš bez improvizace, když klíč unikne, člověk odejde z týmu, integrace změní pravidla nebo dodavatel pošle bezpečnostní upozornění.
+
+Dobrý test: vyber jeden méně kritický klíč a zkus ho vyměnit. Pokud tým stráví hodinu hledáním, kde všude se používá, máš práci. Ne ostudu — práci.
+
+### CI/CD a logy jsou časté díry
+
+Tajemství často neuniknou přes dramatický hackerský film. Uniknou přes build log, debug výpis nebo pull request screenshot. Proto:
+
+- v CI používej maskování secrets a nikdy je nevypisuj,
+- nevkládej hodnoty tajemství do chybových hlášek,
+- kontroluj, co končí v crash reportech a log agregaci,
+- nedávej produkční `.env` do artefaktů buildu,
+- u preview prostředí používej oddělené a omezené klíče,
+- v pull requestech kontroluj nejen kód, ale i ukázky konfigurace.
+
+Pokud aplikace potřebuje vypsat konfiguraci pro diagnostiku, vypisuj názvy, stav a zdroj, ne hodnoty. „`SMTP_PASSWORD` nastaveno: ano“ je užitečné. „`SMTP_PASSWORD=...`“ je dárek pro problém, který si tě najde později.
+
+### Privacy-first pohled: méně tajemství, menší výbuch
+
+Nejlepší tajemství je to, které nemusíš držet. Pokud můžeš použít krátkodobé tokeny místo trvalých, scoped klíče místo univerzálních, server-side integraci místo klientského klíče nebo evropského dodavatele s jasnou správou přístupů místo černé skříňky, udělej to.
+
+Privacy-first provoz tady není jen právní téma. Je to provozní hygiena: méně datových toků, méně privilegovaných integrací, méně lidí s přístupem a méně míst, kde se něco může zapomenout. Zákazník nepotřebuje vědět každý detail vaultu, ale měl by z dokumentace chápat, že přístupy nejsou lepené izolepou.
+
+> Codyho komentář: Tajemství v chatu jsou jako klíče pod rohožkou. Funguje to skvěle, dokud se někdo nezeptá, proč vlastně všichni vědí, kde je rohožka.
+
+### Checklist: tajemství bez poznámkového pekla
+
+- [ ] Máme jedno oficiální místo pro produkční tajemství.
+- [ ] `.env.example` obsahuje jen názvy a bezpečné příklady, ne reálné hodnoty.
+- [ ] Development, staging a produkce mají oddělené klíče.
+- [ ] Každé kritické tajemství má vlastníka a popsaný účel.
+- [ ] Produkční klíče mají nejmenší potřebná oprávnění.
+- [ ] CI/CD maskuje tajemství a nevypisuje je do logů.
+- [ ] Víme, jak nouzově rotovat nejdůležitější klíče.
+- [ ] Po odchodu člověka nebo změně dodavatele kontrolujeme relevantní přístupy.
+- [ ] Dočasné exporty a diagnostické balíčky mají retenci a mazání.
+- [ ] Break-glass přístup je časově omezený, auditovaný a po použití revidovaný.
+
+### Šablona: karta tajemství
+
+## Karta tajemství: [název / služba]
+
+### Účel
+
+- K čemu tajemství slouží:
+- Jaké prostředí používá:
+- Jaký produktový nebo provozní proces na něm závisí:
+
+### Vlastnictví
+
+- Vlastník služby:
+- Technický správce:
+- Kdo smí hodnotu číst:
+- Kdo smí hodnotu měnit:
+
+### Rozsah oprávnění
+
+- Povolené akce:
+- Zakázané nebo nepotřebné akce:
+- Datový rozsah:
+- Omezení podle IP, domény nebo prostředí:
+
+### Nasazení a rotace
+
+- Kde je tajemství uložené:
+- Kde se nastavuje pro runtime:
+- Jak nasadit novou hodnotu:
+- Jak ověřit, že rotace proběhla:
+- Kdy proběhla poslední revize:
+
+### Nouzový postup
+
+- Jak poznáme podezření na únik:
+- Koho informovat:
+- Jak klíč okamžitě zneplatnit:
+- Jak obnovit službu:
+- Jaké logy zkontrolovat:
+
+### Privacy-first kontrola
+
+- Obsahuje tajemství přístup k osobním datům:
+- Existuje méně privilegovaná varianta:
+- Existuje krátkodobá varianta místo trvalého klíče:
+- Je použití popsané v interní datové mapě nebo vendor kartě:
+
+
 ## Pracovní log
+- **2026-09-18:** Doplněna příloha EW o správě tajemství a API klíčů: klasifikace secrets, zdroj pravdy, oddělení prostředí, rotace, CI/CD logy, privacy-first minimalizace a šablona karty tajemství.
 - **2026-09-18:** Doplněna příloha EV o pravidelné revizi oprávnění: rozsah kontroly, frekvence podle rizika, dočasné přístupy, servisní účty, privacy-first evidence a praktická šablona.
 - **2026-09-18:** Doplněna příloha EU o rolích a oprávněních v SaaS bez přístupového guláše: návrh podle úkolů, čitelná matice oprávnění, least privilege, kritické akce, oddělení interních a zákaznických rolí, audit log, pravidelný access review, checklist a karta role.
 - **2026-09-18:** Doplněna příloha ET o supportním přístupu k produkčním datům bez interního šmírování: klasifikace situací, admin rozhraní, konkrétní souhlas, omezená impersonace, zákaznický audit log, reprodukce bez živých dat, retence supportních dat, checklist a karta supportního přístupu.
