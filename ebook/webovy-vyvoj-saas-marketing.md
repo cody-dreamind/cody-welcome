@@ -27876,7 +27876,175 @@ Důvěra začíná už tím, jak se chová stránka o důvěře. Když trust cen
 - Soulad s realitou provozu ověřen dne:
 
 
+## Příloha FE: Marketingová atribuce bez sledovacího bludiště
+
+Marketingová atribuce je lákavá past. Zakladatel chce vědět, odkud přišel zákazník. Obchod chce vědět, která kampaň vydělala. Marketing chce vědět, co škálovat. A pak někdo otevře nástroj, který slíbí „kompletní customer journey“, jenže za cenu banneru přes půl obrazovky, hromady cookie kategorií, externích skriptů a pocitu, že web právě spolkl malý reklamní průmysl.
+
+Privacy-first SaaS nemusí být slepý. Jen musí přijmout, že dokonalá atribuce je často dražší než rozhodnutí, která z ní reálně vypadnou. Cílem není sledovat každého člověka od prvního kliknutí po fakturu. Cílem je mít dost dobrý signál pro rozumné rozhodnutí: kam investovat čas, co přestat dělat a co zlepšit.
+
+> Codyho komentář: Pokud potřebuješ třicetidenní cross-device fingerprinting, abys zjistil, jestli článek přinesl kvalitní leady, možná problém není v atribuci. Možná je článek jen digitální polystyren.
+
+### Nejdřív se zeptej, jaké rozhodnutí atribuce podporuje
+
+Před nasazením měření napiš konkrétní rozhodnutí, které má atribuce zlepšit. Bez toho se z ní stane sbírání dat „pro jistotu“. A jistota je v marketingu často jen dražší forma úzkosti.
+
+Dobré otázky:
+
+- **Které kanály přivádí kvalitní poptávky?** Ne nejvíc návštěv, ale leady, které se hodí do cílovky.
+- **Který obsah pomáhá před obchodním hovorem?** Články, checklisty, případové studie, dokumentace.
+- **Které kampaně přináší špatné fit leady?** Levná návštěvnost může být drahá, když zahlcuje support a sales.
+- **Kde se lidé zaseknou?** Landing page, formulář, pricing, demo request, onboarding.
+- **Co má smysl opakovat příští měsíc?** Rozhodnutí o rozpočtu, tématech a distribuci.
+
+Slabé zadání zní: „Chceme vědět všechno o cestě uživatele.“ Silnější zadání zní: „Chceme jednou měsíčně rozhodnout, které dva distribuční kanály dostanou další čas a které jeden měsíc vypneme.“ Druhé zadání vede k jednoduchému systému. První vede k dashboardu, kterému nikdo nevěří.
+
+### Měř zdroj, ne člověka
+
+Privacy-first atribuce má stát na agregovaných signálech, ne na dlouhodobém sledování konkrétní osoby napříč webem. V B2B SaaS obvykle nepotřebuješ vědět, že stejný člověk četl tři články v pondělí večer, klikl z mobilu ve středu a v pátek poslal formulář z firemního notebooku. Potřebuješ vědět, že téma „export dat“ opakovaně přivádí poptávky od správného segmentu.
+
+Praktické minimum:
+
+- používej UTM parametry pro kampaně a distribuční zdroje,
+- ukládej zdroj poptávky do CRM nebo jednoduché tabulky,
+- rozlišuj organický obsah, referral, přímý kontakt, partnerské odkazy a placenou kampaň,
+- měř konverze agregovaně po týdnech nebo měsících,
+- neukládej celý referer do zákaznického profilu, pokud ho nepotřebuješ,
+- u leadu uchovej jen zdroj, který pomůže obchodnímu nebo marketingovému rozhodnutí.
+
+Příklad jednoduchého pole u leadu:
+
+- **source_category:** organic / referral / partner / paid / direct / event
+- **source_detail:** název článku, partnera, kampaně nebo akce
+- **landing_page:** první důležitá stránka, například `/privacy-first-saas`
+- **declared_need:** co člověk napsal do formuláře
+- **fit:** dobrý / nejistý / mimo cílovku
+
+Tohle stačí pro velkou část rozhodování. Ano, neodpoví to na všechno. Ale odpoví to na to, co tým reálně zvládne použít.
+
+### UTM pravidla musí být nudná a konzistentní
+
+UTM parametry jsou malé, ale dokážou vyrobit velký chaos. Když jeden člověk píše `linkedin`, druhý `LinkedIn`, třetí `li` a čtvrtý do `utm_campaign` vloží celý haiku popis, měření se rozpadne dřív než pondělní disciplína.
+
+Zaveď jednoduchou konvenci:
+
+- **utm_source:** konkrétní místo původu, například `linkedin`, `rss`, `partner-novak`, `newsletter`.
+- **utm_medium:** typ kanálu, například `organic`, `email`, `paid`, `referral`, `event`.
+- **utm_campaign:** obchodní nebo obsahová iniciativa, například `saas-audit-2026-09`.
+- **utm_content:** varianta odkazu, pokud opravdu testuješ více textů nebo CTA.
+- **utm_term:** nech prázdné, pokud nemáš jasný důvod.
+
+Pravidlo: raději méně hodnot a stejné názvy než kreativní taxonomie pokaždé jinak. Jednou měsíčně projdi nové hodnoty a oprav překlepy v reportu. Nemusíš kvůli tomu budovat datový sklad. Stačí tabulka „povolené hodnoty“ a člověk, který má poslední slovo.
+
+### Přímé odkazy a RSS jsou atribuční signál taky
+
+Privacy-first marketing často používá kanály, které nejsou dokonale měřitelné: RSS, přímé odkazy, doporučení v komunitě, organické zmínky, dark social, osobní e-maily. To není chyba. To je realita. Lidé nejsou laboratorní myši s QR kódem na čele.
+
+Místo boje o perfektní tracking používej kombinaci signálů:
+
+- krátká otázka ve formuláři „Kde jste na nás narazili?“ s volným textem,
+- vlastní landing page pro důležitý obsah nebo partnerství,
+- jednoduché aliasy URL pro offline akce a prezentace,
+- měsíční vyhodnocení kvalitativních odpovědí ze sales hovorů,
+- sledování trendu přímých návštěv po větší publikaci nebo eventu,
+- porovnání témat obsahu s tématy reálných poptávek.
+
+Volný text ve formuláři bývá překvapivě užitečný. Není dokonalý, ale často odhalí věci, které tracking nevidí: doporučení od konkrétního člověka, interní Slack zákazníka, starší článek, konferenci nebo „poslal mi to kolega“. Přesně tyhle signály pomáhají budovat distribuční systém, ne jen honit poslední klik.
+
+### Přiřaď hodnotu podle kvality, ne jen podle objemu
+
+Největší chyba u atribuce je počítat jen návštěvy a formuláře. Malý SaaS nepotřebuje nejvíc leadů. Potřebuje dost správných leadů, které mají problém, rozpočet, pravomoc a důvod jednat.
+
+Do měsíčního vyhodnocení dej kvalitu:
+
+- počet relevantních poptávek podle segmentu,
+- počet domluvených hovorů,
+- počet pilotů nebo nabídek,
+- typ problému, který lead popsal,
+- průměrnou velikost příležitosti,
+- důvod odmítnutí nebo ztráty,
+- míru zahlcení týmu nekvalitními dotazy.
+
+Příklad: kanál A přinese 500 návštěv a 20 formulářů, ale 18 lidí chce něco mimo produkt. Kanál B přinese 80 návštěv a 4 formuláře, z toho 3 přesně odpovídají cílovce. Pokud koukáš jen na objem, zabiješ kanál B. Pokud koukáš na kvalitu, možná jsi našel nejlepší distribuční stopu.
+
+### Retence marketingových dat má mít konec
+
+Marketingová data mají tendenci zůstat navždy, protože „co kdyby“. Jenže privacy-first provoz potřebuje i konec. U atributů kampaní si nastav retenci podle toho, jak dlouho je skutečně používáš pro rozhodování.
+
+Praktický model:
+
+- agregované měsíční reporty můžeš držet dlouhodobě,
+- detail lead source u aktivních obchodních příležitostí drž po dobu obchodního cyklu,
+- surové exporty z kampaní smaž po vyhodnocení,
+- osobní poznámky ze sales hovorů pravidelně čistěte od zbytečných detailů,
+- experimentální tracking vypni po skončení experimentu,
+- staré UTM hodnoty archivuj, ale nepoužívej pro nové kampaně.
+
+Když datový bod nepomáhá rozhodnutí, reportu, právní povinnosti ani zákaznické službě, má odejít. Ano, i když má hezký graf. Grafy jsou jako pokojové rostliny: když je necháš bez účelu, časem jen zabírají místo a někdo je musí zalévat.
+
+### Checklist: atribuce bez sledovacího bludiště
+
+- [ ] Víme, která rozhodnutí má atribuce podporovat.
+- [ ] Měříme kanály a kampaně agregovaně, ne zbytečné sledování jednotlivců.
+- [ ] Máme jednotná UTM pravidla a seznam povolených hodnot.
+- [ ] U leadu ukládáme jen zdroj, detail kampaně a obchodně užitečný kontext.
+- [ ] Formulář obsahuje volitelnou otázku na zdroj objevení.
+- [ ] Reportujeme kvalitu poptávek, ne jen návštěvnost.
+- [ ] Přímé odkazy, RSS a doporučení vyhodnocujeme i kvalitativně.
+- [ ] Surová marketingová data mažeme po vyhodnocení.
+- [ ] Každý nový měřicí nástroj posuzujeme jako potenciálního subprocesora.
+- [ ] Dokážeme vysvětlit zákazníkovi, proč dané marketingové údaje držíme.
+
+### Šablona: atribuční karta kampaně
+
+## Atribuční karta: [kampaň / obsah / kanál]
+
+### Rozhodnutí
+
+- Jaké rozhodnutí má tato kampaň podpořit:
+- Kdy budeme rozhodovat:
+- Kdo rozhoduje:
+
+### Zdroj a značení
+
+- utm_source:
+- utm_medium:
+- utm_campaign:
+- Cílová stránka:
+- Alternativní přímý odkaz:
+
+### Data
+
+- Jaká data sbíráme:
+- Proč je potřebujeme:
+- Kde jsou uložena:
+- Kdo k nim má přístup:
+- Kdy je smažeme nebo agregujeme:
+
+### Kvalita leadů
+
+- Cílový segment:
+- Co považujeme za dobrý lead:
+- Co považujeme za špatný fit:
+- Jak zachytíme kvalitativní signály:
+
+### Vyhodnocení
+
+- Výsledek:
+- Co zopakujeme:
+- Co zastavíme:
+- Co upravíme v nabídce nebo obsahu:
+
+### Privacy-first kontrola
+
+- Potřebujeme cookie consent:
+- Vzniká nový subprocesor:
+- Existuje jednodušší varianta měření:
+- Je retence jasně omezená:
+
+---
+
 ## Pracovní log
+- **2026-09-18:** Doplněna příloha FE o marketingové atribuci bez sledovacího bludiště: rozhodnutí před měřením, agregované zdroje místo sledování osob, UTM pravidla, přímé odkazy a RSS jako signály, hodnocení kvality leadů, retence marketingových dat, checklist a atribuční karta kampaně.
 - **2026-09-18:** Doplněna příloha FD o trust centru pro B2B SaaS: vrstvy informací podle citlivosti, obchodní otázky zákazníků, férová práce s certifikacemi, subprocesory, aktualizační rytmus, privacy-first publikování, checklist a šablona trust centrum karty.
 - **2026-09-18:** Doplněna příloha FC o bezpečnostních dotaznících v B2B sales: znalostní báze odpovědí, důkazy a limity, security pack, odpovědi „ano/částečně/kompenzujeme/mimo rozsah“, privacy-first konzistence, kvalifikace detailních dotazníků, checklist a karta bezpečnostní odpovědi.
 - **2026-09-18:** Doplněna příloha FB o zpracovatelských smlouvách pro malý SaaS: určení rolí správce/zpracovatele, konkrétní DPA přílohy, subprocesoři, auditní právo, incidentní část, obchodní balíček, checklist a DPA karta.
