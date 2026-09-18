@@ -27566,7 +27566,160 @@ Pak prodej nemusí pokaždé lovit odpovědi v chatu typu „hele, kde vlastně 
 - Další review:
 
 
+## Příloha FC: Bezpečnostní dotazníky v B2B sales bez týdenního lovu odpovědí
+
+Čím víc se SaaS blíží firemním zákazníkům, tím častěji přijde bezpečnostní nebo privacy dotazník. Někdy má deset otázek, jindy dvě stě řádků v tabulce, která vypadá jako archeologický nález z oddělení procurementu. Pro malý tým to může být časová díra: obchod čeká, technik loví odpovědi, právník opravuje formulace a zákazník mezitím neví, jestli produkt působí důvěryhodně.
+
+Dotazník ale není nepřítel. Je to signál, že zákazník bere riziko vážně. Cílem není odpovědět „ano“ na všechno. Cílem je odpovědět rychle, pravdivě a konzistentně — a mít jasno, kde je produkt silný, kde má kompenzační opatření a kde zatím neslibuje věci, které neumí doručit.
+
+> Codyho komentář: Nejhorší odpověď na bezpečnostní dotazník není „ne“. Nejhorší je optimistické „ano“, které znamená „někdo mi říkal, že to snad máme“. Compliance karaoke nechme na firemní večírky.
+
+### Udělej z dotazníků znalostní bázi, ne improvizaci
+
+První zákaznický dotazník bude bolet. Druhý už by neměl bolet stejně. Každou odpověď, kterou jednou ověříš, ulož do interní znalostní báze. Ne jako volný text v chatu, ale jako odpověď s vlastníkem, datem poslední kontroly a odkazem na důkaz.
+
+Rozděl odpovědi do oblastí:
+
+- **Organizace a odpovědnost:** kdo vlastní bezpečnost, privacy, incidenty a zákaznickou komunikaci.
+- **Přístupová práva:** role, MFA, access review, supportní přístup, offboarding.
+- **Data a hosting:** region provozu, typy dat, zálohy, logy, retence, export a mazání.
+- **Aplikační bezpečnost:** vývojový proces, code review, dependency updates, testování, oddělení prostředí.
+- **Provoz:** monitoring, incident management, disaster recovery, zálohování a test obnovy.
+- **Subprocesoři:** nástroje, účel, region, smluvní stav, datum poslední revize.
+
+U každé odpovědi si poznamenej, jestli je veřejně sdílitelná, sdílitelná pod NDA, nebo jen interní. Ne všechno patří do sales přílohy. Třeba detailní popis interní infrastruktury může zákazníkovi pomoct, ale také zbytečně zvětšit bezpečnostní stopu.
+
+### Odpověď má mít důkaz, ne jen sebevědomí
+
+Bezpečnostní dotazníky často svádí k jednoslovným odpovědím. „Máte MFA?“ Ano. „Šifrujete data?“ Ano. „Máte incident response proces?“ Ano. Jenže dobrá odpověď říká i rozsah a důkaz.
+
+Lepší struktura odpovědi:
+
+- **Krátká odpověď:** ano / ne / částečně / nevztahuje se.
+- **Rozsah:** kterých systémů, rolí nebo dat se odpověď týká.
+- **Důkaz:** odkaz na interní dokument, screenshot nastavení, audit log, proces, runbook nebo veřejnou stránku.
+- **Limit:** co odpověď nepokrývá nebo co je plánované.
+- **Vlastník:** kdo může odpověď potvrdit a aktualizovat.
+
+Příklad:
+
+> „MFA vyžadujeme pro interní účty s přístupem k produkčním systémům a administraci. Přístupy revidujeme kvartálně a při offboardingu rušíme ihned. Důkaz: interní access review záznam, správa identit, offboarding checklist. Veřejně nesdílíme detailní konfiguraci poskytovatele identity.“
+
+Tohle působí lépe než univerzální „ano“, protože zákazník vidí proces. A pokud něco zatím nemáš, napiš to férově: „Nemáme formální certifikaci, ale máme tyto kontroly a plán revize.“ U malého SaaS je poctivost často důvěryhodnější než divadelní enterprise slovník.
+
+### Standardní security pack šetří obchod i techniky
+
+Místo čekání na každý nový dotazník připrav sdílitelný balíček. Ne jako sto stran PDF, které nikdo nečte, ale jako přehled s odkazy na detaily.
+
+Security pack může obsahovat:
+
+- stručný popis architektury bez citlivých detailů,
+- přehled datových toků a regionů,
+- seznam subprocesorů,
+- bezpečnostní opatření v běžném jazyce,
+- incidentní kontakty a základní postup,
+- pravidla retence, exportu a mazání,
+- popis zálohování a obnovy,
+- odpovědi na nejčastější otázky,
+- datum poslední aktualizace.
+
+Výhoda je jednoduchá: zákazník často nepotřebuje vlastní excelový rituál, pokud dostane kvalitní podklad. A když dotazník stejně pošle, tým odpovídá z jednoho zdroje pravdy. Žádné lovení v hlavách lidí, kteří jsou zrovna na dovolené nebo předstírají, že neslyší Slack.
+
+### „Ano, ale“ je někdy nejlepší odpověď
+
+Ne každá zákaznická otázka sedí na tvůj produkt. Dotazník může být napsaný pro banku, nemocnici nebo globální korporaci, i když prodáváš jednoduchý B2B SaaS pro dvacetičlenný tým. Slepě se snažit vyhovět každému řádku vede k přestavbě produktu podle cizího procurement templatu.
+
+Rozlišuj čtyři typy odpovědí:
+
+- **Ano:** kontrola existuje a vztahuje se na dotazovaný rozsah.
+- **Částečně:** kontrola existuje pro část systému nebo jiným způsobem.
+- **Ne, kompenzujeme:** požadovanou kontrolu nemáš, ale riziko snižuje jiné opatření.
+- **Ne, mimo rozsah:** požadavek nedává smysl pro typ služby, tarif nebo datový tok.
+
+Příklad: zákazník se ptá na dedikovanou instanci pro každý tenant. Pokud máš bezpečně navržený multi-tenant SaaS, odpověď nemusí být „neumíme“. Může znít: „Standardní tarif běží v multi-tenant architektuře s oddělením dat na úrovni organizace, serverovou autorizací a audit logem. Dedikované prostředí nabízíme jen u enterprise provozu po samostatném posouzení.“
+
+Taková odpověď chrání produkt i obchod. Neprodáváš něco, co nechceš provozovat, a zároveň zákazníkovi vysvětluješ, jaké riziko je reálně řešené.
+
+### Privacy-first odpovědi musí být konzistentní s produktem
+
+Pokud na webu tvrdíš, že provozuješ privacy-first SaaS v Evropě, bezpečnostní dotazník je místo, kde se to ukáže. Nestačí napsat „respektujeme soukromí“. Odpovědi musí sedět s architekturou, subprocesory, analytikou, supportem i retenčními pravidly.
+
+Zkontroluj hlavně:
+
+- zda region hostingu odpovídá veřejnému tvrzení,
+- jestli analytika a marketingové nástroje nesbírají víc dat, než popisuješ,
+- zda supportní přístup k produkčním datům má audit a důvod,
+- jestli logy neobsahují celé payloady nebo citlivý obsah,
+- zda export a mazání dat fungují i po ukončení zákazníka,
+- jestli subprocesoři nejsou přidávaní bez review.
+
+Bezpečnostní dotazník je dobrý detektor marketingových zkratek. Když neumíš jednoduše doložit vlastní privacy-first větu, není chyba v dotazníku. Je čas opravit provoz nebo text.
+
+### Kdy dotazník odmítnout nebo zpoplatnit
+
+Ne každý dotazník má stejnou hodnotu. Pokud malý lead pošle dvousetřádkový enterprise formulář před prvním hovorem, je rozumné říct, že detailní bezpečnostní review děláš až u kvalifikované příležitosti. Jinak se tým stane bezplatnou compliance kanceláří pro lidi, kteří možná nikdy nekoupí.
+
+Praktická pravidla:
+
+- Krátké obecné otázky odpovídej rychle ze security packu.
+- Detailní dotazník řeš až po kvalifikaci potřeby, rozpočtu a datového rizika.
+- Požadavky na nestandardní dokumenty nebo schůzky zahrň do enterprise procesu.
+- Pokud zákazník chce audit nebo rozsáhlé právní posouzení, stanov vlastníka a časový box.
+- U menších tarifů jasně řekni, jaký bezpečnostní rozsah je součástí služby.
+
+To není neochota. To je kapacitní hygiena. Dobrý zákazník ocení, že bezpečnost děláš systematicky, ne chaoticky na zavolání.
+
+### Checklist: bezpečnostní dotazníky bez chaosu
+
+- [ ] Máme interní znalostní bázi odpovědí s vlastníkem a datem poslední kontroly.
+- [ ] Každá odpověď má rozsah, důkaz a případný limit.
+- [ ] Security pack pokrývá architekturu, data, subprocesory, retenci, incidenty a zálohy.
+- [ ] Obchod ví, kdy poslat security pack a kdy eskalovat technický dotaz.
+- [ ] Odpovědi rozlišují ano, částečně, kompenzaci a mimo rozsah.
+- [ ] Privacy-first tvrzení ve webu, DPA a dotaznících jsou konzistentní.
+- [ ] Detailní dotazníky řešíme až u kvalifikovaných obchodních příležitostí.
+- [ ] Citlivé technické detaily sdílíme jen v rozumném rozsahu a podle potřeby.
+- [ ] Po každém dotazníku doplníme nové ověřené odpovědi do znalostní báze.
+- [ ] Jednou za kvartál kontrolujeme, jestli odpovědi stále odpovídají realitě.
+
+### Šablona: karta bezpečnostní odpovědi
+
+## Bezpečnostní odpověď: [téma / otázka]
+
+### Otázka
+
+- Původní znění:
+- Kategorie:
+- Typická varianta otázky:
+- Sdílení: veřejné / NDA / interní
+
+### Odpověď
+
+- Krátká odpověď:
+- Rozsah:
+- Důkaz:
+- Limit:
+- Kompenzační opatření:
+
+### Vlastnictví
+
+- Vlastník odpovědi:
+- Technický garant:
+- Právní / privacy garant:
+- Datum poslední kontroly:
+- Další review:
+
+### Navazující dokumenty
+
+- Security pack:
+- DPA / subprocesoři:
+- Incident runbook:
+- Access review:
+- Retenční karta:
+
+
 ## Pracovní log
+- **2026-09-18:** Doplněna příloha FC o bezpečnostních dotaznících v B2B sales: znalostní báze odpovědí, důkazy a limity, security pack, odpovědi „ano/částečně/kompenzujeme/mimo rozsah“, privacy-first konzistence, kvalifikace detailních dotazníků, checklist a karta bezpečnostní odpovědi.
 - **2026-09-18:** Doplněna příloha FB o zpracovatelských smlouvách pro malý SaaS: určení rolí správce/zpracovatele, konkrétní DPA přílohy, subprocesoři, auditní právo, incidentní část, obchodní balíček, checklist a DPA karta.
 - **2026-09-18:** Doplněna příloha FA o DPIA pro malý SaaS: kdy posouzení vlivu řešit, formulace rozhodnutí, datový tok, rizika z pohledu člověka, praktická opatření, stop pravidla před spuštěním, práce s právníkem, živé review, checklist a DPIA karta.
 - **2026-09-18:** Doplněna příloha EZ o logování a observabilitě bez datového vysavače: rozdělení technických, auditních a produktových signálů, strukturované logy bez payloadů, automatická redakce citlivých dat, retence, dashboardy, alerty, vendor kontrola, incident follow-up, checklist a observační karta.
