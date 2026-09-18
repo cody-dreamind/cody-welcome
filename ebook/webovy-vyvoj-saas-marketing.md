@@ -28202,7 +28202,189 @@ Pokud má stránka historickou hodnotu nebo zpětné odkazy, nevyhazuj ji potich
 
 ---
 
+## Příloha FG: Produktový příběh bez buzzwordů, superhrdinů a marketingové mlhy
+
+Malý SaaS často neumí říct, proč existuje. Produkt funguje, tým ví, co staví, první zákazníci možná přikyvují — ale web, demo call a obchodní e-mail zní pokaždé jinak. Jednou je to „platforma pro digitální transformaci“, podruhé „AI workflow hub“, potřetí „jednoduchý nástroj na plánování práce“. Zákazník pak nemá problém s funkcemi. Má problém pochopit, co si vlastně kupuje.
+
+Produktový příběh není pohádka pro investory. Je to praktická kostra komunikace: jak popisujeme problém, komu pomáháme, proč řešení dává smysl, jaké změny zákazník uvidí a čemu se vědomě vyhýbáme. Dobrý příběh sjednotí homepage, demo, onboarding, případové studie, cenovou stránku i odpovědi v supportu.
+
+> Codyho komentář: Když produkt neumíš vysvětlit bez slov „revoluční“, „komplexní“ a „end-to-end“, pravděpodobně ještě nevysvětluješ produkt. Jen zapaluješ mlhovač.
+
+### Příběh začíná starým světem
+
+Zákazník nepotřebuje slyšet, že máš krásnou architekturu. Potřebuje poznat svoji současnou bolest. Začni tím, jak dnes vypadá jeho práce: kde vzniká zmatek, co se dělá ručně, co se ztrácí mezi lidmi a proč současný postup přestává stačit.
+
+Praktická struktura starého světa:
+
+- **Situace:** kdo něco řeší a v jakém provozním kontextu.
+- **Tření:** co je pomalé, nepřehledné, drahé, rizikové nebo opakované.
+- **Dopad:** jak se problém projevuje v penězích, čase, důvěře, kvalitě nebo riziku.
+- **Dosavadní náhrady:** tabulky, e-maily, chaty, ruční exporty, poradové rituály, improvizace.
+- **Okamžik zlomu:** proč starý způsob začíná bolet právě teď.
+
+Slabá verze: „Firmy potřebují moderní nástroj pro správu procesů.“
+
+Silnější verze: „Servisní tým vyrostl z pěti lidí na dvacet, ale zakázky pořád plánuje přes telefon, e-mail a jednu tabulku. Každá změna směny spustí řetěz dotazů, technici nemají poslední verzi informací a majitel řeší operativu místo růstu.“
+
+Druhá verze není delší proto, že by se chtěla předvádět. Je konkrétní. Člověk z cílovky si řekne: „Jo, tohle znám.“ A to je první konverze — ne kliknutí, ale rozpoznání.
+
+### Zákazník je hlavní postava, ne produkt
+
+Produktový příběh se často pokazí tím, že firma udělá hrdinu ze sebe. „My jsme vyvinuli, my nabízíme, my umožňujeme.“ Jenže zákazník nekupuje produkt proto, aby obdivoval tým. Kupuje ho, aby sám dosáhl lepšího výsledku.
+
+Změň perspektivu:
+
+- místo „náš dashboard zobrazuje přehled zakázek“ napiš „provozní vidí, které zakázky dnes hrozí skluzem“;
+- místo „máme automatické notifikace“ napiš „technik dostane změnu dřív, než vyjede na špatnou adresu“;
+- místo „integrujeme účetní systém“ napiš „fakturace nevzniká ručním přepisem z poznámek“;
+- místo „nabízíme detailní reporty“ napiš „majitel každý pátek ví, co brzdilo kapacitu týmu“.
+
+Produkt je průvodce a nástroj. Hlavní postava je zákazník před změnou a po změně. Tohle není jen copywriting. Pomáhá to rozhodnout, které funkce ukázat v demu, které screenshoty dát na web a co vyhodit z prezentace.
+
+### Slib musí být konkrétní a splnitelný
+
+Marketingová mlha často vzniká ze strachu slíbit něco jasně. Tým raději napíše „zefektivníme vaše procesy“, protože se to nedá snadno vyvrátit. Jenže se to taky nedá snadno koupit.
+
+Silnější slib má tři vlastnosti:
+
+- **Konkrétní výsledek:** co se změní v práci zákazníka.
+- **Rozsah:** pro jaký typ firmy, týmu nebo scénáře slib platí.
+- **Mantinely:** co produkt neslibuje, aby nevznikla falešná očekávání.
+
+Příklad:
+
+„Pomáháme servisním firmám s 5–30 techniky plánovat zakázky tak, aby každý člověk viděl aktuální práci, změny se neztrácely v telefonu a majitel měl každý týden přehled o kapacitě. Nejsme ERP pro výrobní holdingy. Jsme provozní vrstva pro týmy, které vyrostly z tabulek.“
+
+Tohle je obchodně použitelnější než „komplexní platforma pro efektivní správu terénních operací“. Konkrétní slib přitáhne správné zákazníky a zároveň odfiltruje ty, pro které by produkt byl trápení převlečené za příležitost.
+
+### Důkazy patří blízko ke slibu
+
+Každý silný slib potřebuje důkaz. Nemusí to být hned velká případová studie s logem korporace. U mladého SaaS stačí menší, ale konkrétní signály.
+
+Použitelné důkazy:
+
+- **Scénář před a po:** jak se změnil konkrétní proces.
+- **Citace zákazníka:** věta, která popisuje dopad vlastními slovy zákazníka.
+- **Screenshot nebo krátké video:** důkaz, že produkt není jen slíbená kouzelná skříňka.
+- **Číslo z pilotu:** čas ušetřený v konkrétním workflow, počet zrušených ručních kroků, rychlejší reakce.
+- **Provozní transparentnost:** kde produkt běží, jak se pracuje s daty, co se neloguje zbytečně.
+- **Limity:** co zatím neumíte a jak zákazník pozná, že není vhodný fit.
+
+Privacy-first produkty mají jednu výhodu: mohou důvěru stavět i na zdrženlivosti. Když řekneš „nemáme session replay, nevytváříme individuální marketingové profily a analytiku používáme agregovaně“, není to omluva. Je to důkaz hodnoty. Jen to musí být napsané lidsky, ne jako compliance zaklínadlo.
+
+### Jedna verze pro web, demo i onboarding
+
+Produktový příběh nesmí žít jen v hlavě zakladatele. Potřebuje krátkou interní kartu, ze které vychází tým. Jinak sales slibuje jednu věc, web druhou, produkt onboarding třetí a support hasí očekávání, která nikdo neměl vytvořit.
+
+Vytvoř jednu základní verzi a používej ji všude:
+
+- **Homepage:** nejkratší verze problému, výsledku a důkazu.
+- **Produktová stránka:** scénáře použití a rozdíl před/po.
+- **Demo call:** příběh jako agenda, ne jako desetiminutový monolog.
+- **Onboarding:** první kroky odpovídají slibovanému výsledku.
+- **Dokumentace:** vysvětluje hlavní workflow stejnými slovy jako web.
+- **Support:** odpovědi potvrzují mantinely, neprodávají jiné očekávání.
+- **Changelog:** nové funkce se popisují dopadem na příběh, ne jen technickou změnou.
+
+Když se příběh změní, aktualizuj ho jako produktovou dokumentaci. Ne jako kreativní náladu. Změna positioning věty může ovlivnit prodej, onboarding, cenotvorbu i roadmapu.
+
+### Vyhoď slova, která nic neriskují
+
+Některá slova jsou bezpečná, protože nic neříkají. „Inovativní“, „intuitivní“, „robustní“, „komplexní“, „moderní“, „škálovatelný“, „digitální transformace“. Občas mají místo, ale často jen vycpávají věty, které se bojí být přesné.
+
+Praktický test: u každého přídavného jména se zeptej „oproti čemu a jak to poznám?“
+
+- „Intuitivní onboarding“ → „První zakázku založí provozní za deset minut podle průvodce.“
+- „Robustní reporting“ → „Každý pátek ukáže vytížení týmu, skluz zakázek a nejčastější důvod přeplánování.“
+- „Bezpečné řešení“ → „Přístupy jsou oddělené podle rolí, supportní zásah se loguje a zákazník vidí export svých dat.“
+- „Snadná integrace“ → „CSV import zvládne tým bez vývojáře; API integraci řešíme v placeném pilotu.“
+
+Konkrétnost může být méně elegantní. Ale prodává líp, protože snižuje nejistotu.
+
+### Příběh testuj v rozhovorech, ne v zrcadle
+
+Produktový příběh není hotový tím, že zní dobře týmu. Testuj ho na lidech z cílovky. Pošli krátkou verzi do e-mailu, použij ji v úvodu demo callu, dej ji na landing page, otevři s ní článek. Sleduj, kde lidé přikyvují, kde se ptají, kde začnou vyprávět vlastní situaci a kde jen zdvořile mlčí.
+
+Dobré testovací otázky:
+
+- Poznáváte v tom svoji situaci?
+- Která část je nejpřesnější a která zní mimo?
+- Jak byste ten problém popsali vlastními slovy?
+- Co byste museli vidět, abyste věřili slibu?
+- Pro koho by to podle vás nebylo vhodné?
+- Jaké slovo nebo věta vám zní jako marketingová mlha?
+
+Neber zpětnou vazbu jako hlasování o každé větě. Hledej vzory. Pokud tři lidé opraví stejný výraz, je to signál. Pokud jeden člověk chce úplně jiný produkt, je to možná jen špatný fit.
+
+### Checklist: produktový příběh bez mlhy
+
+- Umíme popsat starý svět zákazníka konkrétní situací, ne abstraktním trendem?
+- Je zákazník hlavní postava a produkt nástroj, ne obráceně?
+- Má slib jasný výsledek, cílový segment a mantinely?
+- Máme ke slibu důkazy: scénář, citaci, screenshot, číslo z pilotu nebo provozní transparentnost?
+- Používáme stejný příběh na webu, v demu, onboardingu, dokumentaci a supportu?
+- Umíme říct, pro koho produkt není?
+- Vyhodili jsme slova, která nejdou ověřit nebo vysvětlit?
+- Testovali jsme příběh s lidmi z cílovky, ne jen interně?
+- Obsahuje příběh privacy-first hodnotu jako součást důvěry, ne jako poznámku pod čarou?
+
+### Šablona: karta produktového příběhu
+
+## Produktový příběh: [produkt / segment]
+
+### Starý svět
+
+- Kdo řeší problém:
+- V jaké situaci:
+- Co se dnes děje ručně, pomalu nebo chaoticky:
+- Jaký je dopad:
+- Proč starý způsob přestává stačit:
+
+### Nový svět
+
+- Jak má vypadat práce po změně:
+- Který první výsledek má zákazník uvidět:
+- Co se zjednoduší:
+- Co se zpřehlední:
+- Co se přestane dělat ručně:
+
+### Slib a mantinely
+
+- Jednovětý slib:
+- Pro koho přesně:
+- Pro koho ne:
+- Co neslibujeme:
+- Jak poznáme dobrý fit:
+
+### Důkazy
+
+- Scénář před/po:
+- Screenshot nebo demo:
+- Citace zákazníka:
+- Měřitelný signál:
+- Privacy-first důkaz důvěry:
+
+### Použití v komunikaci
+
+- Homepage:
+- Demo call:
+- Onboarding:
+- Dokumentace:
+- Support:
+- Changelog:
+
+### Testování
+
+- Kde příběh testujeme:
+- Jaké otázky klademe:
+- Jaké námitky se opakují:
+- Co upravíme v další verzi:
+- Vlastník a datum revize:
+
+---
+
 ## Pracovní log
+- **2026-09-18:** Doplněna příloha FG o produktovém příběhu bez buzzwordů: starý svět zákazníka, zákazník jako hlavní postava, konkrétní a splnitelný slib, důkazy blízko slibu, sjednocení webu/dema/onboardingu, testování v rozhovorech, checklist a karta produktového příběhu.
 - **2026-09-18:** Doplněna příloha FF o obsahové knihovně bez chaotického publikování: sběr opakovaných zákaznických otázek, úrovně viditelnosti, jeden zdroj pro více formátů, distribuce přes vlastní web/RSS/přímé odkazy, revize a archivace obsahu, checklist a karta obsahového aktiva.
 - **2026-09-18:** Doplněna příloha FE o marketingové atribuci bez sledovacího bludiště: rozhodnutí před měřením, agregované zdroje místo sledování osob, UTM pravidla, přímé odkazy a RSS jako signály, hodnocení kvality leadů, retence marketingových dat, checklist a atribuční karta kampaně.
 - **2026-09-18:** Doplněna příloha FD o trust centru pro B2B SaaS: vrstvy informací podle citlivosti, obchodní otázky zákazníků, férová práce s certifikacemi, subprocesory, aktualizační rytmus, privacy-first publikování, checklist a šablona trust centrum karty.
