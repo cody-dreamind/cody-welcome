@@ -26931,7 +26931,245 @@ Výjimka bez data expirace není výjimka. Je to nový standard, jen se stydí z
 - Existuje jednodušší nebo EU-friendly alternativa:
 
 
+## Příloha EZ: Logování a observabilita bez datového vysavače
+
+Bez logů a monitoringu je SaaS jako auto bez palubní desky: jede, dokud nejede, a pak všichni koukají do motoru s baterkou v puse. Jenže opačný extrém je stejně nebezpečný. Když aplikace loguje celé requesty, e-maily, tokeny, IP adresy, obsah formulářů, interní poznámky a odpovědi třetích služeb „pro jistotu“, nevzniká observabilita. Vzniká datový vysavač, který při prvním incidentu nebo žádosti zákazníka ukáže, že firma sbírala mnohem víc, než uměla vysvětlit.
+
+Privacy-first observabilita má jednoduchý cíl: zjistit rychle, co se rozbilo, koho se to týká, jaký je dopad a co s tím udělat — bez toho, aby tým plošně sledoval jednotlivé uživatele nebo ukládal citlivá data do logovací služby.
+
+Zdroje k bezpečnostnímu a privacy kontextu: OWASP Logging Cheat Sheet doporučuje logovat bezpečnostně relevantní události, ale zároveň chránit logy před citlivými daty a zneužitím — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html. Evropská komise popisuje zásady GDPR včetně minimalizace údajů, omezení účelu a omezení uložení — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en. ENISA dlouhodobě zdůrazňuje význam logování a monitoringu pro detekci incidentů a řízení cloudové bezpečnosti — https://www.enisa.europa.eu/topics/cloud-and-big-data/cloud-security.
+
+### Nejdřív odděl tři druhy signálů
+
+Malý tým často hází všechno do jednoho koše: aplikační logy, analytiku, auditní stopu, monitoring výkonu, zákaznické chování, debug výpisy i supportní poznámky. Pak nikdo neví, co je provozní informace a co osobní údaj. Začni rozdělením:
+
+- **Technická observabilita:** chyby, latence, stav front, vytížení, externí API, health checky, release verze, joby a výjimky.
+- **Bezpečnostní a auditní logy:** přihlášení, změny oprávnění, exporty, mazání, změny fakturace, přístup supportu, administrátorské akce.
+- **Produktová analytika:** agregované používání funkcí, aktivace, dokončení workflow, zájem o obsah, konverze bez sledování jednotlivců.
+
+Každý typ má jiný účel, jinou retenci, jiné oprávnění a jinou citlivost. Když se smíchají, vznikne buď slepota, nebo riziko. Debug log z vývoje nemá mít stejnou životnost jako auditní stopa změny oprávnění. Produktová metrika nemá obsahovat payload zákaznického dokumentu. A bezpečnostní log nemá být otevřený každému, kdo umí kliknout na dashboard.
+
+### Loguj události, ne celý život uživatele
+
+Dobré logování popisuje, že se něco stalo. Špatné logování ukládá všechno, co šlo kolem. Rozdíl je obrovský.
+
+Místo tohoto:
+
+- celý HTTP request včetně hlaviček,
+- kompletní tělo formuláře,
+- celý objekt uživatele,
+- tokeny, cookies a session identifikátory,
+- obsah dokumentu nebo zprávy,
+- odpověď platební brány v plném znění,
+
+loguj raději strukturovanou událost:
+
+- čas,
+- služba a prostředí,
+- verze aplikace,
+- typ události,
+- výsledek: úspěch / chyba / odmítnuto,
+- interní korelační ID,
+- tenant nebo účet v pseudonymizované podobě,
+- chybový kód,
+- bezpečný technický kontext.
+
+Příklad bezpečnější události:
+
+```text
+event=invoice_export_failed
+environment=production
+release=2026.09.18-1
+tenant_hash=tn_8f3a...
+request_id=req_42a...
+error_code=storage_timeout
+status=failed
+duration_ms=1840
+```
+
+Takový log pomůže ladit problém, ale zbytečně neukládá jméno zákazníka, e-mail, obsah faktury ani token k úložišti. Když později potřebuješ zjistit konkrétní dopad, spojíš korelační ID s oprávněným interním nástrojem, ne s plošně čitelným logem.
+
+> Codyho komentář: „Logujme všechno, třeba se to bude hodit“ je technická verze věty „nechám si v garáži každou krabici od roku 2009“. Jednou to možná pomůže. Do té doby o to zakopáváš.
+
+### Redakce citlivých dat musí být automatická
+
+Spoléhat na to, že vývojář nikdy omylem nezaloguje heslo, token nebo osobní údaj, je krásná víra v lidstvo. Do kostela dobré, do produkce slabé. Potřebuješ technické zábrany:
+
+- centrální logger místo náhodných `console.log`,
+- maskování známých polí jako `password`, `token`, `authorization`, `cookie`, `secret`, `apiKey`, `email`, `phone`,
+- allowlist polí, která se smí logovat,
+- blokaci logování celého request body v produkci,
+- test, který hledá tajemství a osobní údaje v ukázkových log výstupech,
+- pravidla pro třetí SDK, která posílají chyby ven z aplikace.
+
+Allowlist je praktičtější než blacklist. Blacklist vždycky prohraje s kreativitou názvů jako `customerAccessMagicThing`. U citlivých částí aplikace loguj jen předem schválená pole. Všechno ostatní pryč.
+
+U error monitoringu si dej pozor na automatické zachytávání lokálních proměnných a stack trace s daty. Stack trace je užitečný. Stack trace s obsahem zákaznického importu je právní a reputační dietní plán — hubne důvěra.
+
+### Auditní log není debug log
+
+Auditní log má odpovědět na otázku: kdo udělal důležitou akci, kdy, v jakém rozsahu a s jakým výsledkem. Není to místo pro ladicí výpisy ani pro detaily, které nikdo nemá číst.
+
+Do auditního logu patří hlavně:
+
+- přihlášení a podezřelé pokusy,
+- změny rolí a oprávnění,
+- vytvoření, export, smazání nebo obnovení dat,
+- změny fakturace a nastavení organizace,
+- zapnutí integrace nebo webhooku,
+- použití supportního přístupu,
+- změna bezpečnostního nastavení,
+- administrátorský zásah.
+
+Každá auditní událost má mít stabilní schéma: typ akce, aktér, cílový objekt, tenant, výsledek, čas, zdroj a korelační ID. U zákaznického audit logu piš lidsky: „Uživatel Jana Nováková exportoval seznam objednávek“ je užitečnější než `EXPORT_ENTITY_BULK_SUCCESS_42`.
+
+Privacy-first detail: zákazník by měl vidět relevantní auditní stopu svého účtu, ale ne interní poznámky týmu, debug payloady nebo identifikátory jiných tenantů. Multi-tenant hranice platí i pro logy.
+
+### Retence logů má být kratší než pohodlí
+
+Logy mají tendenci žít věčně, protože mazání nikoho netěší. Jenže GDPR princip omezení uložení říká, že osobní údaje nemají být uchovávány déle, než je nutné pro účel. I když se snažíš osobní údaje v logu minimalizovat, pořád může jít o data spojená s účtem, zařízením nebo chováním.
+
+Praktická retenční matice:
+
+- **Debug logy:** v produkci velmi krátce, typicky dny, a jen při řešení konkrétního problému.
+- **Aplikační chyby:** týdny až nižší měsíce podle provozní potřeby.
+- **Výkonnostní metriky:** agregovaně delší dobu, detailní vzorky kratší.
+- **Bezpečnostní logy:** déle podle rizika, interních pravidel a právních potřeb.
+- **Zákaznický audit log:** podle smlouvy, očekávání zákazníka a účelu služby.
+- **Produktová analytika:** agregovat a mazat detail, jakmile už není potřeba.
+
+Nejhorší varianta je „retence: dokud nedojde disk“. Disk je špatný právník.
+
+### Dashboardy mají vést k akci
+
+Observabilita není sbírka grafů na televizi v kanceláři. Každý panel má odpovídat na rozhodovací otázku:
+
+- Běží služba pro zákazníky?
+- Zhoršil release chybovost nebo latenci?
+- Selhává externí integrace?
+- Roste fronta úloh, kterou brzy nestihneme zpracovat?
+- Dopadá chyba na jednoho zákazníka, segment nebo všechny?
+- Potřebujeme rollback, komunikaci nebo supportní zásah?
+
+Pro malý SaaS stačí několik vrstev:
+
+- **Health panel:** dostupnost, latence, error rate, stav databáze, fronty, externí služby.
+- **Release panel:** porovnání před a po nasazení, chybové kódy, nové výjimky, rollback signály.
+- **Customer impact panel:** počet dotčených tenantů, typ dopadu, kritičnost zákazníků bez zveřejnění citlivých detailů.
+- **Security panel:** neobvyklé přihlášení, zamítnuté akce, změny oprávnění, support access.
+
+Když dashboard nevede k žádné akci, je to dekorace. Hezká, ale pořád dekorace.
+
+### Alerty nastav podle dopadu, ne podle nervozity
+
+Alert fatigue je skutečný problém: když systém křičí kvůli každé drobnosti, tým ho přestane poslouchat. Alert má znamenat: někdo musí jednat.
+
+Dobré alerty:
+
+- mají jasného vlastníka,
+- popisují dopad na zákazníka,
+- odkazují na runbook,
+- obsahují korelační ID nebo dotčenou službu,
+- mají prioritu,
+- samy se zavřou, když stav pomine,
+- nerozesílají citlivá data do chatu.
+
+Špatný alert: „Error count high.“
+
+Lepší alert: „Checkout API má 8 % chyb za 5 minut, dopad na produkční platby, runbook: payment-timeout, poslední release: 2026.09.18-1.“
+
+Privacy-first pravidlo: do Slacku, Telegramu nebo e-mailu neposílej osobní údaje zákazníků. Alert může obsahovat interní ID a odkaz na chráněný systém. Chat není trezor. Je to spíš hlučná kuchyňka s historií.
+
+### Externí observability nástroj je subprocesor, ne tapeta
+
+Jakmile posíláš logy, chyby, trace nebo produktové události do externí služby, řešíš dodavatele. Zeptej se:
+
+- kde jsou data zpracována a uložena,
+- kdo má přístup k logům,
+- jaká je výchozí retence,
+- zda lze vypnout zachytávání payloadů,
+- zda podporuje EU region nebo self-hosted režim,
+- jak řeší mazání a export,
+- jak je popsaný v DPA a seznamu subprocesorů,
+- jestli ho umíš opustit bez ztráty provozní slepoty.
+
+Pro privacy-first SaaS je často lepší menší, srozumitelná observabilita pod vlastní kontrolou než velký kokpit, který sbírá polovinu internetu. Pokud používáš cloudovou službu mimo EU nebo bez jasného nastavení dat, musí pro ni existovat opravdu dobrý důvod a dokumentace.
+
+### Incident začíná logy, ale nekončí u nich
+
+Při incidentu logy pomáhají rychle najít rozsah a příčinu. Jenže po incidentu musí následovat úklid:
+
+- zkontroluj, zda se do logů nedostala citlivá data,
+- pokud ano, omez přístup a nastav mazání,
+- oprav logger nebo redakční pravidla,
+- doplň test, aby se chyba neopakovala,
+- aktualizuj runbook,
+- napiš do postmortemu, jaké signály chyběly nebo šuměly.
+
+Velmi praktická otázka po každém větším výpadku: „Který graf nebo log by nám zkrátil čas do diagnózy o polovinu?“ Pokud odpověď existuje, doplň ho. Pokud ne, nepřidávej další graf jen proto, že se po incidentu všichni cítí provinile.
+
+### Checklist: observabilita bez vysavače
+
+- Máme oddělené technické logy, auditní logy a produktovou analytiku.
+- V produkci nelogujeme celé requesty, odpovědi, tokeny, cookies ani formulářová data.
+- Logger používá allowlist polí a automatické maskování citlivých hodnot.
+- Auditní log má stabilní schéma a zákazník vidí jen svůj relevantní rozsah.
+- Retence logů je popsaná podle účelu a typu dat.
+- Alerty obsahují dopad, vlastníka a runbook, ne osobní údaje.
+- Externí observability nástroje jsou zapsané ve vendor mapě a DPA.
+- Dashboardy odpovídají na rozhodovací otázky, ne na estetickou potřebu mít graf.
+- Po incidentu kontrolujeme, zda logy samy nevytvořily další riziko.
+- Produktová analytika pracuje agregovaně a nepotřebuje profily jednotlivců.
+
+### Šablona: observační karta
+
+## Observability karta: [služba / oblast]
+
+### Účel
+
+- Jaké rozhodnutí nebo reakci má observabilita podpořit:
+- Kritické scénáře:
+- Kdo je vlastník:
+
+### Signály
+
+- Technické metriky:
+- Logované události:
+- Auditní události:
+- Produktové agregace:
+
+### Data a minimalizace
+
+- Pole povolená v logu:
+- Pole zakázaná v logu:
+- Maskování / pseudonymizace:
+- Zachytávání payloadů vypnuto kde:
+
+### Retence a přístup
+
+- Retence detailních logů:
+- Retence agregací:
+- Kdo má přístup:
+- Jak se přístup reviduje:
+
+### Alerty a runbooky
+
+- Kritické alerty:
+- Prahy podle dopadu:
+- Runbook odkazy:
+- Komunikační kanál:
+
+### Vendor a privacy-first kontrola
+
+- Nástroj / služba:
+- Region zpracování:
+- DPA / subprocesor zapsán:
+- Export a mazání:
+- Existuje jednodušší nebo EU/self-hosted alternativa:
+
+
 ## Pracovní log
+- **2026-09-18:** Doplněna příloha EZ o logování a observabilitě bez datového vysavače: rozdělení technických, auditních a produktových signálů, strukturované logy bez payloadů, automatická redakce citlivých dat, retence, dashboardy, alerty, vendor kontrola, incident follow-up, checklist a observační karta.
 - **2026-09-18:** Doplněna příloha EY o aktualizaci závislostí bez supply-chain rulety: inventář balíčků a image, rizikové fronty aktualizací, OWASP/OSV/OpenSSF zdroje, lockfile pravidla, privacy-first kontrola SDK, týdenní rytmus, checklist a karta závislosti.
 - **2026-09-18:** Doplněna příloha EX o reakci na bezpečnostní incident bez paniky: klasifikace incidentů, první hodina, posouzení osobních údajů, GDPR ohlašování podle ÚOOÚ/EDPB, věcná komunikace, postmortem, checklist a incident karta.
 - **2026-09-18:** Doplněna příloha EW o správě tajemství a API klíčů: klasifikace secrets, zdroj pravdy, oddělení prostředí, rotace, CI/CD logy, privacy-first minimalizace a šablona karty tajemství.
