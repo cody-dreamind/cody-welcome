@@ -24854,7 +24854,158 @@ Důležité je omezit výstup. Jedno review, jedna až tři změny. Když z kaž
 - Datum další revize:
 ```
 
+## Příloha EM: Odměňování a bonusy bez metrikové pasti a interní soutěže
+
+Jakmile tým začne měřit práci, velmi rychle přijde další otázka: neměli bychom podle toho taky odměňovat? Zní to logicky. Když chceme víc výkonu, dáme bonus za výkon. Když chceme rychlejší support, dáme bonus za rychlost. Když chceme víc uzavřených ticketů, dáme bonus za uzavřené tickety. A pak se všichni tváří překvapeně, že tým začne optimalizovat přesně tu věc, kterou jsme mu zaplatili — i když to zhorší produkt, zákaznickou zkušenost nebo spolupráci.
+
+Odměňování v malém SaaS týmu má být jednoduché, čitelné a férové. Nemá z lidí dělat závodníky v interní tabulce. Produkt nevzniká jako individuální sport. Vzniká souhrou vývoje, podpory, obchodu, dokumentace, provozu, designu, komunikace a rozhodování. Pokud odměny posilují jen jednu viditelnou část práce, tým se začne trhat přesně ve švech, které potřebuješ držet pohromadě.
+
+> Codyho komentář: Bonus za počet uzavřených ticketů je jako platit kuchaře podle počtu vydaných talířů bez ochutnání jídla. V tabulce to vypadá výborně. Hosté mezitím jedí chaos s přílohou.
+
+### Odděl mzdu, uznání a bonus
+
+První krok je pojmenovat, co vlastně odměna řeší. V malých firmách se často smíchá mzda, jednorázové poděkování, podíl na výsledku, retenční nabídka a kompenzace za chaos. Výsledek je nečitelný systém, kde nikdo neví, jestli dostal bonus za dopad, loajalitu, přesčasy nebo proto, že se ozval nejhlasitěji.
+
+Praktické rozdělení:
+
+- **Základní odměna:** férová kompenzace za roli, odpovědnost, senioritu a tržní realitu.
+- **Růst mzdy:** dlouhodobý posun podle rozšířeného dopadu, schopností a odpovědnosti.
+- **Uznání:** rychlé konkrétní poděkování za dobrý zásah, pomoc nebo zlepšení systému.
+- **Bonus:** předem popsaná odměna za výsledek, který tým umí ovlivnit bez poškození kvality.
+- **Podíl na úspěchu:** širší sdílení výsledku firmy, typicky navázané na zdravý business, ne na mikrometriky.
+
+Tohle rozdělení uklidňuje očekávání. Člověk nemá hádat, jestli se má o zvýšení mzdy hlásit přes mimořádné hrdinství. A tým nemá čekat, že každý dobrý čin musí mít finanční štítek. Některé věci patří do kultury uznání, jiné do kompenzačního systému.
+
+### Bonus nesmí rozbíjet spolupráci
+
+Nejhorší bonus je takový, který vytvoří lokální vítěze a systémové poražené. Obchod má bonus za nové kontrakty, takže slíbí funkce, které produkt nestíhá. Support má bonus za rychlé uzavření ticketů, takže zavírá konverzace dřív, než je problém opravdu pochopený. Vývoj má bonus za rychlost dodání, takže roste technický dluh. Marketing má bonus za leady, takže přinese hromadu kontaktů bez nákupního záměru.
+
+U každého bonusu se ptej:
+
+- Jaké chování tím podporujeme?
+- Jak by šel bonus „obehrát“?
+- Kdo ponese náklady, když lidé optimalizují jen tuto metriku?
+- Jak poznáme, že se nezhoršila kvalita, důvěra nebo spolupráce?
+- Je výsledek opravdu pod vlivem lidí, kterým bonus slibujeme?
+- Neodměňujeme náhodou hašení problému, který jsme měli odstranit ze systému?
+
+Příklad: bonus za „počet nových zákazníků“ může motivovat k prodeji špatným zákazníkům. Lepší je kombinovat nové zákazníky s kvalitou fitu, aktivací, prvním dosaženým výsledkem a absencí nepoctivých slibů. Ještě lepší je u malého týmu uvažovat o týmovém bonusu za zdravý kvartální výsledek, kde se hodnotí růst, retence, provozní klid a zákaznický dopad společně.
+
+### Používej týmové cíle, ale s ochrannými mantinely
+
+Týmový bonus je často zdravější než individuální závod. Podporuje spolupráci a připomíná, že SaaS je systém. Jenže i týmový bonus potřebuje mantinely. Když tým dostane bonus za jeden agresivní cíl, může krátkodobě obětovat věci, které se projeví později: kvalitu, dokumentaci, podporu, bezpečnost, dostupnost nebo důvěru zákazníků.
+
+Dobré bonusové pravidlo má proto tři vrstvy:
+
+- **Výsledek:** co chceme posunout, například aktivované zákazníky, retenci, stabilitu nebo dokončený strategický milník.
+- **Kvalitativní mantinel:** co se nesmí zhoršit, například incidenty, support zátěž, reklamace, technický dluh nebo bezpečnostní nálezy.
+- **Etický mantinel:** co se nesmí stát, například tlak na zákazníka, sběr zbytečných dat, manipulativní prodej nebo obcházení interních pravidel.
+
+Příklad týmového cíle: „Do konce kvartálu zkrátit čas k první hodnotě u nového zákazníka o třetinu oproti vlastnímu výchozímu stavu, bez zvýšení počtu kritických support dotazů a bez přidání nových trackerů.“ To je mnohem lepší než „víc registrací“. Registrace může být šum. První hodnota je produktový signál.
+
+### Neplať za hrdinství, které vzniklo špatným systémem
+
+Malé týmy rády oceňují lidi, kteří zachraňují situace. To je lidské. Někdo v noci opraví incident, někdo zvládne těžkého zákazníka, někdo ručně poskládá report pro důležitou schůzku. Poděkování je na místě. Problém nastává, když firma začne hrdinství systematicky odměňovat víc než prevenci.
+
+Pokud bonusy opakovaně dostávají lidé, kteří hasí požáry, zkontroluj, proč požáry vznikají:
+
+- Chybí monitoring nebo alerty?
+- Jsou release příliš riskantní?
+- Je support bez znalostní báze?
+- Slíbili jsme zákazníkovi výjimku bez produktu?
+- Má jeden člověk monopol na kritickou znalost?
+- Neexistuje runbook?
+- Je backlog plný dluhů, které nikdo neumí prodat jako práci?
+
+Oceň zásah, ale z bonusu udělej i signál ke zlepšení systému. Když někdo zachrání incident, další odměnitelný výsledek nemá být „příště zachraň rychleji“. Má to být „odstranili jsme příčinu, napsali runbook, přidali test, snížili riziko opakování“.
+
+### Transparentnost neznamená mzdový reality show
+
+Férovost vyžaduje srozumitelnost, ne nutně veřejné tabulky všech částek. Malý tým by měl vědět, jak se odměny určují, kdy se revidují, kdo rozhoduje a podle jakých principů. Nemusí to znamenat, že každá individuální mzda visí na nástěnce. Důležité je, aby systém nebyl tajná loterie.
+
+Minimum transparentnosti:
+
+- Popiš pásma nebo úrovně rolí, i když jsou zatím jednoduché.
+- Řekni, kdy se mzdy a bonusy revidují.
+- Odděl výkonový feedback od momentu vyjednávání o penězích.
+- Vysvětli, co je firma schopná finančně nést.
+- U bonusu předem napiš pravidla, ne až po výsledku.
+- U výjimek napiš důvod a datum další revize.
+- Nedělej překvapivé individuální dohody, které rozbijí důvěru týmu.
+
+Transparentnost je i ochrana zakladatele. Když pravidla nejsou napsaná, každá diskuse o odměně začíná od nuly a končí pocitem, že rozhoduje nálada, vyjednávací síla nebo poslední krize.
+
+### Privacy-first kompenzační poznámky
+
+Odměňování je citlivá oblast. Obsahuje osobní údaje, finanční informace, hodnocení práce, někdy zdravotní nebo rodinný kontext a vyjednávací historii. To není materiál pro sdílenou náhodnou tabulku, kam má přístup půlka firmy, externí konzultant a starý účet ve zkušebním HR nástroji.
+
+Praktická pravidla:
+
+- Kompenzační data drž v co nejmenším počtu systémů.
+- Přístup má mít jen člověk, který ho opravdu potřebuje.
+- Osobní poznámky z 1:1 nepatří do bonusového dashboardu.
+- Nepoužívej skryté aktivity z nástrojů jako podklad pro odměny.
+- Ukládej rozhodnutí, ne každý pracovní dojem.
+- Nastav retenci pro staré pracovní poznámky a výjimky.
+- Při exportech pro účetnictví sdílej jen nutný rozsah.
+- Automatizované skóre nepoužívej jako černou skříňku pro peníze.
+
+Privacy-first princip tady není brzda. Je to základ důvěry. Když lidé vědí, že firma zachází opatrně s jejich osobními a finančními daty, snáze věří i ostatním procesům.
+
+### Checklist: bonusy bez metrikové pasti
+
+- Víme, co je mzda, co uznání a co bonus?
+- Má každý bonus předem popsaná pravidla?
+- Podporuje bonus spolupráci, ne interní závod?
+- Má bonus kvalitativní a etické mantinely?
+- Dá se metrika obejít způsobem, který poškodí zákazníka nebo produkt?
+- Neodměňujeme opakované hrdinství místo prevence?
+- Je výsledek pod reálným vlivem odměňovaného týmu?
+- Je jasné, kdo rozhoduje o výjimkách?
+- Jsou kompenzační data uložená bezpečně a s omezeným přístupem?
+- Umíme bonus zrušit, když začne vyrábět špatné chování?
+
+### Šablona: bonusová karta
+
+```markdown
+## Bonusová karta: [název bonusu]
+
+### Účel
+- Jaké chování nebo výsledek podporuje:
+- Proč je to důležité právě teď:
+- Koho se týká:
+
+### Výsledek
+- Primární cíl:
+- Jak se měří:
+- Výchozí stav:
+- Období:
+
+### Mantinely
+- Co se nesmí zhoršit:
+- Jak poznáme manipulaci nebo špatnou optimalizaci:
+- Kdy se bonus nevyplatí ani při dosažení čísla:
+
+### Férovost
+- Kdo může výsledek ovlivnit:
+- Jak řešíme závislosti mimo tým:
+- Jak komunikujeme výjimky:
+
+### Privacy-first kontrola
+- Jaká data používáme:
+- Kdo k nim má přístup:
+- Co se nesbírá:
+- Retence podkladů:
+
+### Revize
+- Vlastník pravidel:
+- Datum vyhodnocení:
+- Co upravíme pro další období:
+```
+
 ## Pracovní log
+
+- **2026-09-18:** Doplněna příloha EM o odměňování a bonusech bez metrikové pasti: rozlišení mzdy, uznání a bonusu, ochrana spolupráce, týmové cíle s mantinely, neodměňování systémového hrdinství, transparentnost, privacy-first zacházení s kompenzačními daty, checklist a bonusová karta.
 
 - **2026-09-18:** Doplněna příloha EL o měření týmové práce bez interního dohledu: systémové metriky místo žebříčků lidí, výběr metrik podle rozhodnutí, privacy-first pravidla pro interní data, kombinace čísel s kontextem, health review, checklist a karta týmové metriky.
 
