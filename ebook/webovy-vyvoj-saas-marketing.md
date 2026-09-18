@@ -27168,7 +27168,235 @@ Velmi praktická otázka po každém větším výpadku: „Který graf nebo log
 - Existuje jednodušší nebo EU/self-hosted alternativa:
 
 
+
+## Příloha FA: DPIA pro malý SaaS bez právního divadla
+
+Posouzení vlivu na ochranu osobních údajů, zkráceně DPIA, zní jako dokument, který se píše v zasedačce bez oken a s kávou z automatu. Ve skutečnosti je to velmi užitečný produktový nástroj: donutí tě říct, co zpracováváš, proč, jaké riziko tím vytváříš lidem a co s tím uděláš dřív, než to pustíš do světa.
+
+Základní právní rámec je v článku 35 GDPR, který řeší posouzení vlivu při zpracování pravděpodobně představujícím vysoké riziko pro práva a svobody lidí — viz text na Portálu veřejné správy / EUR-Lex: https://portal.gov.cz/informace/obecne-narizeni-o-ochrane-osobnich-udaju-gdpr-INF-367 a https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX:32016R0679. Praktický český kontext k DPIA popisuje ÚOOÚ: https://uoou.gov.cz/profesional/posouzeni-vlivu-na-ochranu-osobnich-udaju-dpia. Evropský sbor pro ochranu osobních údajů navazuje metodikou k posouzení vysokého rizika a DPIA: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/data-protection-impact-assessments-dpias_en.
+
+Codyho komentář: DPIA není kouzelný právní štít. Je to brzda proti produktovému nadšení typu „pojďme si pro jistotu uložit všechno, třeba se to jednou hodí“. A přesně tuhle brzdu malý SaaS potřebuje.
+
+### Kdy DPIA vůbec řešit
+
+DPIA nepiš pro každou změnu barvy tlačítka. Řeš ji ve chvíli, kdy nový proces, funkce nebo integrace může lidem reálně zasáhnout do soukromí, práv nebo rozhodování. Typické signály:
+
+- začínáš zpracovávat citlivější kategorie dat,
+- kombinuješ data z více zdrojů,
+- automatizovaně vyhodnocuješ chování lidí,
+- zavádíš monitoring, profilování nebo scoring,
+- pracuješ s velkým objemem údajů,
+- přidáváš AI funkci nad zákaznickými daty,
+- zapojuješ nového dodavatele, který dostává přístup k osobním údajům,
+- měníš účel dat, která už máš.
+
+Malý B2B SaaS často řekne: „My přece nejsme banka ani nemocnice.“ Jasně, gratuluju, žádné bílé pláště. Jenže i běžný SaaS může mít citlivý kontext: HR data, obchodní komunikaci, interní dokumenty, faktury, IP adresy, support tickety, auditní logy nebo produktovou telemetrii. Riziko nevzniká jen z kategorie dat. Vzniká i z toho, co z nich jde odvodit.
+
+Praktické pravidlo: pokud by zákazník při demo callu položil otázku „A co přesně s těmi daty děláte?“ a ty bys začal mluvit pomaleji, je čas na krátké DPIA.
+
+### DPIA začni rozhodnutím, ne formulářem
+
+Nejhorší DPIA je dokument, který vznikne až po implementaci, kdy už všichni jen hledají větu, která hotové rozhodnutí omluví. Začni dřív a polož jednu větu:
+
+> Chceme spustit [funkci/proces], který zpracovává [typ dat], aby [účel], a potřebujeme rozhodnout, zda je riziko přijatelné a jaká opatření udělat před spuštěním.
+
+Příklad:
+
+> Chceme spustit AI asistenta pro třídění support ticketů, který bude číst obsah ticketů, metadata účtu a historii komunikace, aby navrhl prioritu a odpověď, a potřebujeme rozhodnout, zda je riziko přijatelné bez ukládání promptů u externího modelu.
+
+Tahle věta pomáhá víc než deset prázdných kolonek. Najednou víš, co posuzuješ, proč to existuje a kde může být problém.
+
+### Popiš tok dat jako produktový scénář
+
+DPIA nemá být právnická mlha. Popiš scénář tak, aby mu rozuměl vývojář, support i obchod:
+
+1. kdo data zadává,
+2. odkud data přichází,
+3. kde se ukládají,
+4. kdo k nim má přístup,
+5. komu se předávají,
+6. jak dlouho zůstávají,
+7. jak se mažou nebo exportují,
+8. co se stane při incidentu.
+
+U každého kroku napiš konkrétní pole. Ne „uživatelská data“, ale „e-mail administrátora, jméno, role, IP adresa posledního přihlášení, text ticketu, přílohy“. Pokud nevíš, jaké pole aplikace zpracovává, DPIA už splnila první účel: našla slepé místo.
+
+Privacy-first trik: kresli datový tok v nejmenší možné verzi. Až potom doplňuj výjimky. Pokud začneš diagramem všech existujících systémů, skončíš s mapou metra, kterou nikdo nechce udržovat.
+
+### Riziko posuzuj z pohledu člověka
+
+Technický tým má tendenci ptát se: „Jak moc je to bezpečné pro nás?“ DPIA se ptá jinak: „Co se může stát člověku, jehož údaje zpracováváme?“
+
+Příklady rizik:
+
+- uživatel je nesprávně označen jako rizikový,
+- zaměstnanec zákazníka je sledován víc, než čeká,
+- support vidí data, která nepotřebuje,
+- AI nástroj vytvoří odpověď z citlivého kontextu,
+- export obsahuje údaje jiné organizace,
+- logy uloží token nebo obsah formuláře,
+- zákazník neví, kde jeho data končí,
+- smazání účtu neodstraní kopie v integrovaných nástrojích.
+
+Riziko zapiš ve formátu:
+
+- **Scénář:** co se může stát.
+- **Dopad na člověka:** ztráta důvěrnosti, nesprávné rozhodnutí, ztráta kontroly, reputační škoda, finanční dopad.
+- **Pravděpodobnost:** nízká / střední / vysoká.
+- **Závažnost:** nízká / střední / vysoká.
+- **Opatření:** co konkrétně změníme.
+- **Zbytkové riziko:** co zůstává po opatření.
+
+Nepředstírej přesnost na dvě desetinná místa. DPIA není pojišťovací kalkulačka. Stačí poctivá klasifikace, která vede k rozhodnutí.
+
+### Opatření mají měnit produkt, ne jen dokument
+
+Když DPIA skončí větou „uživatelé jsou informováni v podmínkách“, je to často málo. Informování je důležité, ale samo o sobě neřeší špatný návrh systému.
+
+Dobrá opatření jsou technická, procesní i komunikační:
+
+- minimalizuj pole, která vůbec sbíráš,
+- vypni ukládání promptů, payloadů nebo citlivých příloh,
+- nahraď detailní eventy agregacemi,
+- zkrať retenci,
+- odděl role a přístupy,
+- přidej audit log pro zákazníka,
+- zaveď ruční kontrolu pro riziková automatická rozhodnutí,
+- umožni export a mazání,
+- popiš funkci v trust page nebo nápovědě,
+- nastav vendor kartu a DPA pro dodavatele,
+- přidej test, který hlídá, že se zakázaná data nelogují.
+
+U každého opatření napiš vlastníka a termín. „Mělo by se“ je hřbitov dobrých nápadů. „Do releasu `2026-10-05` vypne Petr ukládání raw promptů“ už je práce.
+
+### Kdy funkci nespustit
+
+Ne každé riziko jde vyřešit během sprintu. Funkci nespouštěj, pokud:
+
+- neumíš popsat datový tok,
+- nevíš, kde jsou data uložena,
+- dodavatel neposkytuje dostatečné informace o zpracování,
+- riziko dopadá na lidi a nemáš žádné reálné opatření,
+- zákazník by funkci rozumně nečekal,
+- potřebuješ souhlas, ale neumíš ho férově získat ani odvolat,
+- automatizace může ovlivnit člověka a nemáš možnost kontroly.
+
+Tohle není brzda růstu. Je to ochrana reputace. Malý SaaS má jednu obrovskou výhodu: může změnit design dřív, než z něj udělá legacy systém s právním dluhopisem kolem krku.
+
+### Zapoj právníka ve správný moment
+
+DPIA nemusí začínat právníkem. První verzi často nejlépe napíše produktový vlastník s vývojářem a člověkem, který rozumí zákazníkovi. Právník nebo DPO má přijít ve chvíli, kdy je jasný scénář, tok dat a prvotní rizika.
+
+Co právníkovi neposílat:
+
+- vágní popis „budeme používat AI“,
+- screenshoty bez datového toku,
+- hotovou implementaci s otázkou „je to OK?“.
+
+Co poslat:
+
+- jedno rozhodnutí,
+- popis dat,
+- účel zpracování,
+- seznam dodavatelů,
+- rizika a navržená opatření,
+- otevřené otázky.
+
+Výsledek bude rychlejší, levnější a méně bolestivý. Právník není kompilátor svědomí. Dej mu vstup, se kterým může pracovat.
+
+### DPIA udržuj jako živý záznam
+
+DPIA není relikvie do složky `legal/final-final-2.pdf`. Aktualizuj ji, když:
+
+- přidáš nový účel zpracování,
+- změníš dodavatele,
+- rozšíříš data o nové pole,
+- zapojíš AI nebo automatizované rozhodování,
+- otevřeš funkci novému typu zákazníků,
+- změníš retenci,
+- nastane incident nebo skoro-incident,
+- zákazník položí otázku, na kterou dokument neumí odpovědět.
+
+Doporučený rytmus: krátká kontrola při každém větším releasu a hlubší review jednou za půl roku u rizikových oblastí. Ano, zní to nudně. Ale nudná evidence je lepší než kreativní vysvětlování po incidentu.
+
+### Checklist: DPIA bez právního divadla
+
+- Víme, jakou funkci nebo proces posuzujeme.
+- Máme popsaný účel zpracování jednou srozumitelnou větou.
+- Známe konkrétní datová pole, ne jen obecné kategorie.
+- Máme datový tok od vstupu po smazání.
+- Víme, kdo má k datům přístup a proč.
+- Posoudili jsme rizika z pohledu člověka, ne jen firmy.
+- Každé významné riziko má technické nebo procesní opatření.
+- Zbytkové riziko je pojmenované a někdo ho schválil.
+- Dodavatelé jsou v datové mapě, vendor kartě a DPA.
+- Retence, export a mazání jsou popsané prakticky.
+- Dokument se aktualizuje při změně účelu, dat, dodavatele nebo automatizace.
+- Výsledek DPIA vedl k produktové změně, ne jen k delšímu dokumentu.
+
+### Šablona: DPIA karta
+
+## DPIA karta: [funkce / proces]
+
+### Rozhodnutí
+
+- Co chceme spustit:
+- Proč to děláme:
+- Kdo je vlastník:
+- Datum posouzení:
+- Stav: návrh / schváleno / nespouštět / přepracovat
+
+### Data a účel
+
+- Kategorie lidí:
+- Datová pole:
+- Účel zpracování:
+- Právní základ k ověření:
+- Co nesbíráme záměrně:
+
+### Tok dat
+
+- Zdroj dat:
+- Uložení:
+- Přístupy:
+- Dodavatelé:
+- Export:
+- Mazání:
+- Retence:
+
+### Rizika
+
+- Riziko 1:
+  - Dopad na člověka:
+  - Pravděpodobnost:
+  - Závažnost:
+  - Opatření:
+  - Zbytkové riziko:
+- Riziko 2:
+  - Dopad na člověka:
+  - Pravděpodobnost:
+  - Závažnost:
+  - Opatření:
+  - Zbytkové riziko:
+
+### Opatření před spuštěním
+
+- Technické změny:
+- Procesní změny:
+- Komunikace k zákazníkovi:
+- Dokumentace / trust page:
+- Testy a kontroly:
+
+### Schválení a review
+
+- Schválil:
+- Otevřené otázky:
+- Datum další revize:
+- Co spustí povinnou aktualizaci:
+
+
 ## Pracovní log
+- **2026-09-18:** Doplněna příloha FA o DPIA pro malý SaaS: kdy posouzení vlivu řešit, formulace rozhodnutí, datový tok, rizika z pohledu člověka, praktická opatření, stop pravidla před spuštěním, práce s právníkem, živé review, checklist a DPIA karta.
 - **2026-09-18:** Doplněna příloha EZ o logování a observabilitě bez datového vysavače: rozdělení technických, auditních a produktových signálů, strukturované logy bez payloadů, automatická redakce citlivých dat, retence, dashboardy, alerty, vendor kontrola, incident follow-up, checklist a observační karta.
 - **2026-09-18:** Doplněna příloha EY o aktualizaci závislostí bez supply-chain rulety: inventář balíčků a image, rizikové fronty aktualizací, OWASP/OSV/OpenSSF zdroje, lockfile pravidla, privacy-first kontrola SDK, týdenní rytmus, checklist a karta závislosti.
 - **2026-09-18:** Doplněna příloha EX o reakci na bezpečnostní incident bez paniky: klasifikace incidentů, první hodina, posouzení osobních údajů, GDPR ohlašování podle ÚOOÚ/EDPB, věcná komunikace, postmortem, checklist a incident karta.
