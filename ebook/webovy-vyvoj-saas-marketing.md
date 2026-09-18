@@ -25665,7 +25665,152 @@ Pokud review odhalí díru, neopravuj jen konkrétní incident. Přidej položku
 - Co přidáváme do checklistu:
 
 
+## Příloha ER: Zastupování během dovolených bez provozní paniky a skrytého dohledu
+
+Dovolená v malém SaaS týmu není luxusní výpadek z reality. Je to normální součást udržitelného provozu. Pokud se služba rozklepe pokaždé, když jeden člověk vypne notebook na týden, tým nemá problém s dovolenou. Má problém s vlastnictvím, dokumentací a přístupem k riziku.
+
+Zastupování není o tom, aby každý uměl všechno. To je krásná pohádka, obvykle vyprávěná lidmi, kteří nikdy neviděli produkční incident v pátek odpoledne. Cílem je, aby kritické věci měly jasný minimální servis: kdo pozná problém, kdo rozhodne, kdo komunikuje a kde najde postup.
+
+Privacy-first tým k tomu přidává ještě jednu zásadu: zástup nemá dostat víc dat a práv, než potřebuje. Dovolená není důvod rozdávat admin přístupy jako letáky na veletrhu.
+
+### Mapa zastupitelnosti místo hrdinských jednotlivců
+
+Začni jednoduchou mapou oblastí, ne seznamem lidí. U každé oblasti napiš vlastníka, zástup, minimální postup a riziko, když nikdo nereaguje.
+
+Typické oblasti:
+
+- **Produkční provoz:** monitoring, incidenty, deploye, rollback.
+- **Zákaznická podpora:** urgentní dotazy, billing, export dat, žádosti o smazání.
+- **Obchod:** otevřené nabídky, piloty, demo hovory, follow-upy.
+- **Finance:** faktury, platby, upomínky, změny tarifů.
+- **Bezpečnost a privacy:** přístupy, subprocesorové otázky, podezřelé události, žádosti subjektů údajů.
+- **Produktové rozhodování:** blokující otázky, schvalování rozsahu, změny priorit.
+
+U každé oblasti si nastav tři úrovně:
+
+- **Běžné čeká:** může počkat do návratu vlastníka.
+- **Zástup řeší:** má jasný runbook a práva.
+- **Eskalace:** musí se rozhodnout hned a je jasné, komu volat.
+
+Tím se sníží počet zpráv typu „promiň, že ruším dovolenou, ale jen rychle“. Tahle věta je provozní plíseň. Jednou nevadí, opakovaně znamená, že systém spoléhá na paměť člověka místo na proces.
+
+### Předávka před dovolenou má být krátká a konkrétní
+
+Předávka nemá být román. Stačí jedna stránka pro každou oblast, která může během nepřítomnosti pálit. Dobrá předávka obsahuje:
+
+- co je právě otevřené,
+- co může počkat,
+- co nesmí počkat,
+- kde je runbook,
+- kdo má rozhodovací právo,
+- jaké jsou známé rizikové body,
+- co se nesmí dělat bez vlastníka.
+
+Příklad:
+
+> Tento týden běží pilot u zákazníka A. Pokud přijde dotaz na import, odpověz podle šablony v dokumentaci a nabídni termín po mém návratu. Pokud import spadne s chybou validace, zkontroluj log podle runbooku a eskaluj Petrovi. Nepouštěj ruční úpravu dat bez druhého páru očí.
+
+Tohle je užitečné, protože zástup ví, kde má jednat a kde má brzdit. Špatná předávka zní: „Kdyby něco, napiš.“ To není předávka. To je pozvánka k rušení.
+
+### Přístupy: dočasně, účelově, vratně
+
+Zastupování často odhalí přístupový chaos. Buď zástup nemá přístup k ničemu, takže musí nahánět člověka na pláži, nebo má přístup úplně ke všemu, protože „to tak bylo nejjednodušší“. Obě varianty jsou špatně.
+
+Praktické pravidlo:
+
+- přístup se váže na konkrétní oblast a období,
+- má vlastníka, který ho schválil,
+- je zaznamenaný v evidenci přístupů,
+- po návratu se zkontroluje a zbytečné oprávnění se odebere,
+- u citlivých dat je lepší dočasný omezený přístup než trvalý admin účet „pro jistotu“.
+
+U supportu to může znamenat, že zástup vidí metadata tiketu a historii komunikace, ale ne všechny exportované soubory. U produkce může mít právo restartovat službu podle runbooku, ale ne měnit billing databázi. U privacy agendy může umět přijmout žádost a potvrdit lhůtu interně, ale finální odpověď připraví pověřený člověk nebo právní kontakt.
+
+### Dovolená jako test dokumentace
+
+Každá nepřítomnost je levný test toho, jestli dokumentace žije. Když zástup třikrát neví, kde něco najít, není to selhání zástupu. Je to signál, že dokumentace není navržená pro použití pod tlakem.
+
+Po návratu si dej patnáctiminutové review:
+
+- Co šlo vyřešit bez rušení?
+- Kde chyběl runbook?
+- Kde byl přístup moc široký nebo moc úzký?
+- Který zákaznický dotaz se opakoval?
+- Které rozhodnutí zůstalo viset?
+- Co doplníme do dokumentace tento týden?
+
+Nepiš z toho trestní spis. Cílem není najít viníka, ale odstranit příští tření. Jedna dobrá úprava runbooku po každé dovolené udělá za půl roku víc než velký dokumentační sprint, který všichni odkládají jako návštěvu zubaře.
+
+### Komunikace se zákazníky bez interních detailů
+
+Zákazník nemusí vědět, kdo je na dovolené a proč. Potřebuje vědět, co může čekat. Pokud konkrétní člověk obvykle řeší klíčový účet, nastav jednoduchou zprávu:
+
+- kdo ho zastupuje,
+- jaké věci zástup vyřeší hned,
+- co se posune na návrat,
+- jaká je urgentní cesta pro provozní problém.
+
+Nepiš „jsem pryč, odpověď může trvat“. Napiš „běžné produktové dotazy řeší tým na supportu, urgentní provozní věci označte jako urgentní a dostanou se k on-call zástupu“. To je rozdíl mezi pryč a řízeným provozem.
+
+### Checklist: zastupování bez paniky
+
+- [ ] Kritické oblasti mají vlastníka i zástup.
+- [ ] U každé oblasti je jasné, co čeká, co řeší zástup a co se eskaluje.
+- [ ] Před dovolenou existuje krátká předávka otevřených věcí.
+- [ ] Zástup má přístup jen k datům a nástrojům, které opravdu potřebuje.
+- [ ] Dočasné přístupy mají datum kontroly nebo odebrání.
+- [ ] Runbooky jsou použitelné bez znalosti interních zkratek.
+- [ ] Zákazníci vědí, kudy řešit urgentní věci, aniž by znali interní chaos.
+- [ ] Po návratu proběhne krátké review a jedna konkrétní úprava dokumentace.
+- [ ] Dovolená není považovaná za incident, ale za normální provozní stav.
+
+## Karta zastupování: [oblast / období]
+
+### Kontext
+
+- Vlastník oblasti:
+- Zástup:
+- Období nepřítomnosti:
+- Dotčené zákaznické nebo interní procesy:
+
+### Otevřené věci
+
+- Co běží:
+- Co může počkat:
+- Co nesmí počkat:
+- Známá rizika:
+
+### Rozhodovací práva
+
+- Co může zástup rozhodnout sám:
+- Co vyžaduje druhý pár očí:
+- Co se bez vlastníka nedělá:
+- Eskalační kontakt:
+
+### Přístupy a data
+
+- Potřebné nástroje:
+- Potřebné typy dat:
+- Dočasná oprávnění:
+- Datum kontroly po návratu:
+
+### Runbooky a komunikace
+
+- Odkazy na postupy:
+- Šablony odpovědí:
+- Zákaznické oznámení:
+- Interní poznámky pro review:
+
+### Review po návratu
+
+- Co se vyřešilo bez rušení:
+- Kde chyběl kontext:
+- Kde byl přístup špatně nastavený:
+- Co doplňujeme do dokumentace:
+
+
 ## Pracovní log
+- **2026-09-18:** Doplněna příloha ER o zastupování během dovolených bez provozní paniky: mapa zastupitelnosti, krátká předávka, dočasné přístupy, dokumentační review, zákaznická komunikace, checklist a karta zastupování.
 - **2026-09-18:** Doplněna příloha EQ o offboardingu lidí v malém SaaS týmu: mapa dopadu, rušení přístupů, předání znalostí, komunikace, privacy-first pravidla, exit rozhovor, review a šablona offboarding karty.
 - **2026-09-18:** Doplněna příloha EP o prvních 90 dnech po nástupu: fáze onboardingu, první týden jako release, výsledková očekávání, check-iny, práce s varovnými signály, privacy-first pravidla, 90denní review, checklist a onboardingová karta.
 
