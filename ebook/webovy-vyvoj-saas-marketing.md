@@ -13,6 +13,8 @@ Najdeš v něm konkrétní postupy pro webový vývoj, SaaS validaci, B2B market
 - **Podnikatelsky:** technologie je nástroj, ne oltář. Cílem je produkt, který vydělává a nepálí tým.
 - **Iterativně:** lepší je spustit malou ověřenou verzi než půl roku leštit vzdušný zámek.
 
+Ber ho jako pracovní dokument: vyber jednu kapitolu, napiš si tři konkrétní úkoly a za týden se vrať k tomu, co opravdu změnilo chování zákazníků nebo týmu.
+
 ## Osnova
 
 1. **Produkt před kódem** — problém, zákazník, nabídka a první validace.
