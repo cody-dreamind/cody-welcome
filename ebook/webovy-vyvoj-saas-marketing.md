@@ -28383,7 +28383,210 @@ Neber zpětnou vazbu jako hlasování o každé větě. Hledej vzory. Pokud tři
 
 ---
 
+## Příloha FH: Zákaznický výzkum bez nahrávacího fetiše a dotazníkového pekla
+
+Zákaznický výzkum má malému SaaS týmu pomoct pochopit rozhodování, jazyk a reálné tření zákazníků. Nemá být sběrem všeho, co jde uložit, protože „třeba se to jednou hodí“. To „třeba“ je obvykle hřbitov dat, odpovědnosti a špatných produktových závěrů.
+
+Privacy-first výzkum začíná jednoduchou disciplínou: ptej se na rozhodnutí, která potřebuješ udělat, a sbírej jen data, která k nim opravdu použiješ. Když nevíš, jak z odpovědi vznikne produktová změna, marketingová věta nebo obchodní rozhodnutí, otázka do výzkumu nepatří.
+
+> Codyho komentář: Nejhorší výzkumná otázka je „řekněte nám cokoli“. Lidé ti opravdu řeknou cokoli. A pak budeš mít třicet stran dojmů, ze kterých nejde rozhodnout ani barva tlačítka, natož produktová strategie.
+
+### Začni rozhodnutím, ne otázkami
+
+Než otevřeš kalendář nebo formulář, napiš jedno rozhodnutí, které má výzkum podpořit. Třeba: „Máme stavět import z účetního systému jako první placený modul?“ nebo „Rozumí cílovka našemu novému positioningu?“
+
+Dobré výzkumné rozhodnutí má:
+
+- **kontext:** který segment, produktová část nebo obchodní situace se řeší,
+- **nejistotu:** co dnes nevíme a proč na tom záleží,
+- **dopad:** co uděláme jinak podle výsledku,
+- **hranici:** co výzkum neřeší,
+- **termín:** kdy musí být jasno, aby tým nečekal věčně.
+
+Slabé zadání: „Zjistit, co zákazníci chtějí.“
+
+Silnější zadání: „Do konce týdne zjistit, jestli servisní firmy u importu zakázek nejvíc řeší rychlost nastavení, kvalitu dat, nebo odpovědnost za chyby, abychom rozhodli pořadí onboardingových kroků.“
+
+Když je rozhodnutí konkrétní, výzkum je kratší, odpovědi jsou použitelnější a nemusíš ukládat půlku života zákazníka jen proto, že rozhovor byl „zajímavý“.
+
+### Vyber nejmenší metodu, která stačí
+
+Ne každá otázka potřebuje hodinový rozhovor, nahrávku a přepis. Malý tým by měl volit metodu podle míry nejistoty a rizika.
+
+Praktický výběr:
+
+- **Krátký e-mail:** když ověřuješ slovník, prioritu nebo reakci na jednu konkrétní větu.
+- **15minutový rozhovor:** když potřebuješ pochopit současný proces a nákupní motivaci.
+- **Pozorování práce:** když lidé neumí přesně popsat workflow, ale jde ho vidět při používání nástroje.
+- **Prototypový test:** když ověřuješ pochopitelnost obrazovky, formuláře nebo onboardingu.
+- **Analýza supportu:** když se problém opakuje v tiketech, e-mailech nebo demo callech.
+- **Malý dotazník:** když už znáš možnosti a potřebuješ zjistit četnost, ne objevovat svět.
+
+Dotazník není náhrada za přemýšlení. Pokud nevíš, jaké odpovědi čekáš, dotazník často vyrobí jen kvantifikovanou mlhu. Nejdřív mluv s několika lidmi, až potom škáluj otázky do širšího vzorku.
+
+### Nahrávej jen tehdy, když máš důvod
+
+Nahrávka rozhovoru je pohodlná, ale citlivá. Obsahuje hlas, někdy obrazovku, jména zákazníků, interní procesy, obchodní informace a občas i údaje, které ve výzkumu vůbec nepotřebuješ. Proto z ní nedělej výchozí nastavení.
+
+Rozumné pravidlo:
+
+- **Bez nahrávky:** běžný discovery rozhovor, kde stačí poznámky a anonymizované citace.
+- **Audio nahrávka:** když potřebuješ přesné formulace zákazníka pro positioning nebo analýzu námitek.
+- **Video/screen recording:** jen když testuješ konkrétní rozhraní a vizuální průběh je důležitý.
+- **Žádná nahrávka u citlivých situací:** finance, personální procesy, zdravotní data, interní incidenty nebo cokoliv, kde by záznam zvyšoval riziko.
+
+Před nahráváním řekni lidsky, proč nahráváš, kdo k záznamu bude mít přístup, jak dlouho ho uložíš a že účastník může odmítnout bez dopadu na vztah. Po rozhovoru si co nejdřív udělej poznámky, vytáhni anonymizované insighty a nahrávku smaž podle předem domluvené retence.
+
+Privacy-first varianta je často nejlepší i produktově: místo nekonečného archivu hovorů máš krátké, čisté závěry, které tým opravdu čte.
+
+### Otázky mají mapovat minulost, ne fantazii
+
+Lidé jsou kreativní, když mluví o budoucnosti. Řeknou, že by určitě používali dashboard, platili za integraci a každý pátek četli report. Pak přijde realita, faktura a plný kalendář. Proto se ptej hlavně na nedávné chování.
+
+Lepší otázky:
+
+- Kdy jste tento problém řešili naposledy?
+- Co jste udělali jako první krok?
+- Kdo další do toho vstoupil?
+- Kolik času nebo peněz vás to přibližně stálo?
+- Co jste zkusili předtím a proč to nestačilo?
+- Co se stane, když problém nevyřešíte?
+- Podle čeho poznáte, že nové řešení stojí za změnu?
+
+Horší otázky:
+
+- Používali byste tuto funkci?
+- Kolik byste za to zaplatili?
+- Líbí se vám náš nápad?
+- Chtěli byste modernější workflow?
+
+Budoucnost se samozřejmě ptát můžeš, ale ber ji jako hypotézu, ne jako důkaz. Reálnější signál je minulá bolest, existující náhradní řešení, ochota investovat čas do pilotu a konkrétní další krok.
+
+### Zpracuj poznámky do insightů, ne stenozáznamu
+
+Poznámky z výzkumu nejsou archiv literatury. Tým potřebuje vědět, co z nich plyne. Po každém kole rozhovorů udělej krátkou syntézu: vzory, rozpory, citace, rizika a doporučení.
+
+Použitelný formát insightu:
+
+- **Pozorování:** co se opakovalo nebo překvapilo.
+- **Důkaz:** anonymizovaná citace, scénář nebo počet výskytů.
+- **Význam:** proč to mění naše chápání zákazníka.
+- **Doporučení:** co navrhuješ změnit v produktu, webu, sales nebo onboardingu.
+- **Míra jistoty:** silný signál, střední signál, slabý signál.
+
+Příklad: „Tři ze čtyř servisních firem neodmítly import kvůli technické složitosti, ale kvůli strachu z nepořádku v datech. Doporučení: onboarding musí začít náhledem a validací dat před prvním ostrým importem, ne seznamem podporovaných formátů.“
+
+Tohle je rozhodovací materiál. Ne sbírka hezkých vět v nástroji, kam se tým bojí podívat.
+
+### Udržuj výzkumný repozitář jako živou paměť
+
+Výzkum má smysl jen tehdy, když se k němu tým umí vrátit. Zároveň nesmí vzniknout osobní datový sklad. Vytvoř jednoduchý repozitář insightů, ne databázi lidí.
+
+Co ukládat:
+
+- výzkumné rozhodnutí a datum,
+- segment nebo typ zákazníka,
+- anonymizované shrnutí,
+- hlavní insighty,
+- rozhodnutí, která z výzkumu vznikla,
+- odkazy na upravené části produktu, webu nebo dokumentace,
+- datum další revize.
+
+Co raději neukládat dlouhodobě:
+
+- celé nahrávky bez jasného důvodu,
+- přepisy se jmény a interními detaily,
+- osobní poznámky typu „působí chaoticky“,
+- citlivé provozní informace zákazníka,
+- kontaktní údaje lidí, kteří už nejsou relevantní pro další komunikaci.
+
+Výzkumná paměť má pomáhat produktu, ne vytvářet stínový CRM systém. Pokud potřebuješ kontaktovat účastníka znovu, eviduj to v běžném CRM nebo zákaznickém systému s jasným účelem a retencí.
+
+### Zapoj tým bez divadla
+
+Zakladatel nebo produktový člověk nemusí být jediný, kdo slyší zákazníka. Obchod, support, vývoj i design mají vidět opakující se vzory. Ale ne každý musí sedět na každém hovoru a sbírat si vlastní dojmy.
+
+Praktický rytmus:
+
+- jednou týdně sdílej tři nejdůležitější výzkumné signály,
+- u každého signálu řekni, jaké rozhodnutí ovlivní,
+- pozvi vývojáře nebo designéra jen na rozhovory, kde jejich přítomnost opravdu pomůže,
+- supportní poznatky převáděj do témat, ne do seznamu stížností,
+- obchodní námitky ověřuj v produktu, ne jen v argumentačním manuálu,
+- po měsíci smaž nebo anonymizuj pracovní materiály, které už nejsou potřeba.
+
+Tým nemusí mít kult výzkumu. Stačí, když zákaznické poznání pravidelně mění backlog, web, onboarding a podporu.
+
+### Checklist: zákaznický výzkum bez datového přestřelu
+
+- Má výzkum jedno konkrétní rozhodnutí, které má podpořit?
+- Víme, co po výzkumu uděláme jinak?
+- Vybrali jsme nejmenší metodu, která stačí pro danou nejistotu?
+- Ptáme se hlavně na minulé chování a konkrétní situace?
+- Nahráváme jen tam, kde je k tomu jasný důvod?
+- Umíme účastníkovi vysvětlit účel, přístup, retenci a možnost odmítnout záznam?
+- Anonymizujeme insighty dřív, než je sdílíme napříč týmem?
+- Mažeme pracovní materiály, které už nepotřebujeme?
+- Převádíme výzkum do rozhodnutí v produktu, webu, sales nebo onboardingu?
+- Má každý výzkumný insight vlastníka a datum revize?
+
+### Šablona: karta zákaznického výzkumu
+
+## Výzkum: [téma / rozhodnutí]
+
+### Rozhodnutí
+
+- Co potřebujeme rozhodnout:
+- Proč na tom záleží:
+- Co uděláme podle výsledku:
+- Co je mimo rozsah:
+- Termín rozhodnutí:
+
+### Metoda
+
+- Typ výzkumu:
+- Segment účastníků:
+- Počet rozhovorů / odpovědí:
+- Bez nahrávky / audio / video:
+- Důvod nahrávání, pokud existuje:
+
+### Otázky
+
+- Hlavní situace z minulosti:
+- Současné náhradní řešení:
+- Dopad problému:
+- Nákupní nebo provozní překážky:
+- Důkaz, který by změnil názor:
+
+### Insighty
+
+- Pozorování 1:
+- Důkaz:
+- Význam:
+- Doporučení:
+- Míra jistoty:
+
+### Privacy-first kontrola
+
+- Jaké osobní údaje sbíráme:
+- Kde jsou uložené:
+- Kdo k nim má přístup:
+- Kdy smažeme pracovní materiály:
+- Co sdílíme jen anonymizovaně:
+
+### Navazující práce
+
+- Produkt:
+- Web / messaging:
+- Sales:
+- Onboarding:
+- Support:
+- Vlastník a datum revize:
+
+---
+
 ## Pracovní log
+- **2026-09-18:** Doplněna příloha FH o zákaznickém výzkumu bez datového přestřelu: rozhodnutí před otázkami, volba nejmenší metody, opatrné nahrávání, otázky na minulé chování, syntéza insightů, výzkumný repozitář, zapojení týmu, checklist a karta zákaznického výzkumu.
 - **2026-09-18:** Doplněna příloha FG o produktovém příběhu bez buzzwordů: starý svět zákazníka, zákazník jako hlavní postava, konkrétní a splnitelný slib, důkazy blízko slibu, sjednocení webu/dema/onboardingu, testování v rozhovorech, checklist a karta produktového příběhu.
 - **2026-09-18:** Doplněna příloha FF o obsahové knihovně bez chaotického publikování: sběr opakovaných zákaznických otázek, úrovně viditelnosti, jeden zdroj pro více formátů, distribuce přes vlastní web/RSS/přímé odkazy, revize a archivace obsahu, checklist a karta obsahového aktiva.
 - **2026-09-18:** Doplněna příloha FE o marketingové atribuci bez sledovacího bludiště: rozhodnutí před měřením, agregované zdroje místo sledování osob, UTM pravidla, přímé odkazy a RSS jako signály, hodnocení kvality leadů, retence marketingových dat, checklist a atribuční karta kampaně.
