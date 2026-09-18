@@ -26769,7 +26769,170 @@ Privacy-first postmortem neobsahuje zbytečné osobní detaily. Pokud někdo ud�
 - Aktualizované runbooky:
 
 
+## Příloha EY: Aktualizace závislostí bez supply-chain rulety a pátečních požárů
+
+Moderní SaaS nestojí jen na vlastním kódu. Stojí na frameworku, balíčcích, kontejnerech, CI akcích, image v registru, SDK knihovnách, transpilerech, build pluginech a malých utilitách, které někdo napsal před pěti lety, protože neuměl spát a potřeboval levně řešit datumy. To není výtka. Open source je skvělý. Jenže každá závislost je zároveň závazek: musíš vědět, proč ji používáš, kdo ji udržuje, jak ji aktualizuješ a co uděláš, když se v ní objeví kritická zranitelnost.
+
+Supply-chain bezpečnost v malém týmu nesmí být akademická disciplína. Cílem není vyrobit tabulku s tisíci řádky, kterou nikdo nečte. Cílem je mít jednoduchý systém, který odlišuje běžné aktualizace od urgentních oprav, drží rizikové knihovny pod kontrolou a nezpůsobuje víc výpadků než samotné zranitelnosti.
+
+### Nejdřív si udělej inventář
+
+Nemůžeš řídit závislosti, o kterých nevíš. Začni u tří vrstev:
+
+- **Aplikační závislosti:** `package-lock.json`, `pnpm-lock.yaml`, `composer.lock`, `requirements.txt`, `poetry.lock`, `Gemfile.lock`, `go.sum` a podobně.
+- **Runtime a infrastruktura:** Docker base image, Node/PHP/Python verze, databázové image, reverse proxy, systémové balíčky.
+- **Vývojová a CI vrstva:** GitHub Actions, build pluginy, lintovací nástroje, deploy nástroje, testovací služby.
+
+U každé vrstvy si polož otázku: kdy se aktualizuje, kdo vlastní rozhodnutí, jak se testuje a jak rychle umíme vydat bezpečnostní opravu. Bez toho bude tým reagovat stylem „někdo někde psal, že je něco rozbité“ — což je přesně tak profesionální, jak to zní.
+
+Praktický minimální inventář:
+
+- název balíčku nebo image,
+- účel v produktu,
+- prostředí: produkce / build / vývoj,
+- kritičnost: nízká / střední / vysoká,
+- vlastník v týmu,
+- způsob aktualizace,
+- poslední review,
+- známé výjimky.
+
+### Aktualizace rozděl podle rizika
+
+Ne všechny aktualizace patří do stejného režimu. Patch verze testovací knihovny nepotřebuje stejnou pozornost jako zranitelnost v autentizaci nebo serializaci vstupů.
+
+Použij čtyři fronty:
+
+- **Urgentní bezpečnostní oprava:** potvrzená zranitelnost s dopadem na produkci, autentizaci, autorizaci, data zákazníků, API vstupy, templating, deserializaci, uploady, tokeny nebo šifrování.
+- **Rychlá údržba:** minor/patch aktualizace produkčních knihoven bez známého breaking change, typicky jednou týdně nebo jednou za dva týdny.
+- **Plánovaná migrace:** major verze frameworku, runtime nebo ORM, kde hrozí změna chování a potřebuje vlastní testovací plán.
+- **Úklid mrtvých závislostí:** balíčky, které už produkt nepotřebuje, ale zůstaly po starém experimentu.
+
+Tahle klasifikace chrání tým před dvěma extrémy: ignorovat všechno, dokud nehoří server, nebo naopak každé ráno rozbít produkt kvůli automatickému updatu balíčku na centrování divu. Ano, i to je civilizační riziko.
+
+### Automatizuj upozornění, ne slepý merge
+
+Nástroje mají hlídat signály, ne samy rozhodovat o produkci. Pro malé týmy je dobrý model:
+
+- automatický pull request pro běžné aktualizace,
+- CI testy a build jako první filtr,
+- ruční review pro produkční a bezpečnostní změny,
+- samostatný release u rizikových aktualizací,
+- rollback plán pro změny runtime, databází a autentizace.
+
+Pro skenování známých zranitelností můžeš použít více zdrojů podle ekosystému. OWASP Dependency-Check je software composition analysis nástroj pro hledání známých veřejně publikovaných zranitelností v závislostech: https://owasp.org/projects/dependency-check. OSV-Scanner od Googlu pracuje s databází OSV a cílí na zranitelnosti v open-source závislostech: https://google.github.io/osv-scanner/. OpenSSF Scorecard hodnotí bezpečnostní heuristiky open-source projektů a může pomoci při posuzování rizika knihovny, ale sám upozorňuje, že nejde o univerzální definitivní verdikt: https://github.com/ossf/scorecard.
+
+> Codyho komentář: Skóre nástroje není mozek. Je to kouřový detektor. Když pípá, podívej se. Když nepípá, stejně občas zkontroluj, jestli kuchyň nestojí v plamenech.
+
+### Lockfile je bezpečnostní dokument
+
+Lockfile není otravný soubor, který „nějak vznikl“. Je to záznam toho, co se opravdu dostane do buildu. Bez lockfile nemáš reprodukovatelné instalace a každé nasazení může potichu použít jinou transitive dependency.
+
+Pravidla:
+
+- Lockfile patří do repozitáře u aplikací a služeb.
+- CI má instalovat závislosti deterministicky (`npm ci`, `pnpm install --frozen-lockfile`, odpovídající režim v jiném ekosystému).
+- Produkční build nemá stahovat závislosti z náhodných míst bez kontroly.
+- Změna lockfile v pull requestu je normální review materiál, ne šum.
+- Pokud se mění stovky transitive balíčků, PR potřebuje jasné vysvětlení a silnější test.
+
+U citlivých projektů zvaž pinování verzí i pro CI akce a Docker image. Tag `latest` je pohodlný, ale v produkčním řetězci znamená „věřím budoucnosti, že mě nepřekvapí“. Budoucnost je kreativní potvora.
+
+### Kritická závislost potřebuje vlastní kartu
+
+Ne každá knihovna si zaslouží dokumentaci. Ale knihovna, která drží autentizaci, platby, šifrování, multi-tenant izolaci, oprávnění, parsování uživatelských souborů nebo komunikaci s produkční databází, už není „jen balíček“. Je to součást bezpečnostního modelu.
+
+U kritické závislosti si zapiš:
+
+- proč ji používáme,
+- co by se rozbilo při kompromitaci,
+- zda má aktivní údržbu,
+- jaké alternativy existují,
+- jak rychle ji umíme vyměnit nebo obejít,
+- jaké testy chrání její chování,
+- kdo sleduje bezpečnostní oznámení.
+
+Tohle zní jako práce navíc, dokud nepřijde incident. Pak je to rozdíl mezi řízenou opravou a kolektivním archeologickým výzkumem v repozitáři.
+
+### Privacy-first pohled na závislosti
+
+Závislost není problém jen kvůli bezpečnosti. Je to i privacy otázka. SDK pro analytiku, chat widget, chybové hlášení, CRM integrace nebo platební knihovna může sbírat metadata, posílat data mimo EU, přidávat cookies, logovat payloady nebo rozšiřovat seznam subprocesorů.
+
+Před přidáním nové závislosti se ptej:
+
+- Posílá data mimo naši infrastrukturu?
+- Obsahuje telemetrii nebo volání domů?
+- Potřebuje osobní údaje, nebo jí stačí anonymní technický signál?
+- Zpracovává zákaznický obsah, IP adresy, identifikátory účtů nebo e-maily?
+- Máme ji v datové mapě, vendor kartě a dokumentaci subprocesorů?
+- Existuje jednodušší self-hosted nebo EU-friendly varianta?
+
+U privacy-first SaaS je někdy nejlepší bezpečnostní rozhodnutí nepřidat balíček vůbec. Každá externí knihovna má náklady: upgrade, audit, licenční režim, incident reakce, dokumentace a důvěra zákazníka.
+
+### Týdenní rytmus bez paniky
+
+Jednou týdně udělej krátkou závislostní hygienu:
+
+1. Projdi automatické update PR.
+2. Odděl bezpečnostní věci od běžné údržby.
+3. Slouč malé bezpečné patche po testech.
+4. Vytvoř samostatné úkoly pro major migrace.
+5. Smaž nepoužívané knihovny.
+6. Zapiš výjimky, které vědomě odkládáš.
+
+Výjimka bez data expirace není výjimka. Je to nový standard, jen se stydí za svoje jméno. Pokud odkládáš aktualizaci kvůli riziku, napiš proč, kdo rozhodl, kdy se k tomu vrátíte a jaké kompenzační opatření zatím platí.
+
+### Checklist: závislosti bez rulety
+
+- Máme lockfile a CI používá deterministickou instalaci.
+- Víme, které závislosti běží v produkci a které jen ve vývoji.
+- Kritické knihovny mají vlastníka a krátkou kartu rizika.
+- Bezpečnostní upozornění chodí do kanálu, který někdo opravdu sleduje.
+- Běžné aktualizace mají pravidelný rytmus, ne náhodné hrdinství.
+- Major upgrady mají vlastní plán, testy a rollback.
+- Nepoužívané závislosti průběžně mažeme.
+- Nové SDK kontrolujeme i z pohledu dat, telemetrie, cookies a subprocesorů.
+- Výjimky mají vlastníka, důvod a datum revize.
+- Po bezpečnostní aktualizaci ověříme, že se změna opravdu dostala do produkčního artefaktu.
+
+### Šablona: karta závislosti
+
+## Závislost: [název]
+
+### Základ
+
+- Ekosystém:
+- Verze:
+- Prostředí: produkce / build / vývoj
+- Vlastník:
+- Účel:
+
+### Riziko
+
+- Kritičnost: nízká / střední / vysoká
+- Dotčené oblasti: auth / billing / data / upload / UI / CI / jiné
+- Dopad kompromitace:
+- Známé alternativy:
+- Možnost rychlého odstranění:
+
+### Aktualizace
+
+- Zdroj upozornění:
+- Běžný rytmus aktualizace:
+- Poslední review:
+- Odložené aktualizace a důvod:
+- Datum další revize:
+
+### Privacy-first kontrola
+
+- Posílá data mimo aplikaci:
+- Obsahuje telemetrii:
+- Pracuje s osobními údaji:
+- Je v datové mapě / vendor kartě:
+- Existuje jednodušší nebo EU-friendly alternativa:
+
+
 ## Pracovní log
+- **2026-09-18:** Doplněna příloha EY o aktualizaci závislostí bez supply-chain rulety: inventář balíčků a image, rizikové fronty aktualizací, OWASP/OSV/OpenSSF zdroje, lockfile pravidla, privacy-first kontrola SDK, týdenní rytmus, checklist a karta závislosti.
 - **2026-09-18:** Doplněna příloha EX o reakci na bezpečnostní incident bez paniky: klasifikace incidentů, první hodina, posouzení osobních údajů, GDPR ohlašování podle ÚOOÚ/EDPB, věcná komunikace, postmortem, checklist a incident karta.
 - **2026-09-18:** Doplněna příloha EW o správě tajemství a API klíčů: klasifikace secrets, zdroj pravdy, oddělení prostředí, rotace, CI/CD logy, privacy-first minimalizace a šablona karty tajemství.
 - **2026-09-18:** Doplněna příloha EV o pravidelné revizi oprávnění: rozsah kontroly, frekvence podle rizika, dočasné přístupy, servisní účty, privacy-first evidence a praktická šablona.
