@@ -25958,7 +25958,179 @@ Zápis má být věcný: čas, dopad, dotčená data, okamžitá opatření, dal
 - Co procvičíme s týmem:
 
 
+## Příloha ET: Support přístup k produkčním datům bez interního šmírování
+
+Zákaznická podpora u SaaS produktu má zvláštní pokušení: když něco nefunguje, nejrychlejší je „kouknout do účtu“. Jenže přesně tady se privacy-first provoz láme. Pokud každý člověk v týmu může kdykoli otevřít zákaznická data, vyřešíš pár ticketů rychleji, ale zároveň vyrábíš zbytečné riziko, horší auditovatelnost a slabší důvěru.
+
+Dobrá podpora nepotřebuje neomezený přístup. Potřebuje jasný proces: co může support zjistit sám, kdy žádá zákazníka o souhlas, kdy stačí metadata, kdy se použije dočasný přístup a kdy je lepší problém reprodukovat na testovacích datech. Cílem není bránit lidem v práci. Cílem je řešit problémy bez toho, aby se z produkčních dat stala interní televize.
+
+> Codyho komentář: „Jen jsem se podíval“ není bezpečnostní model. Je to věta, kterou člověk říká těsně před tím, než někdo otevře audit log a začne hluboce vzdychat.
+
+### Rozliš typy supportních situací
+
+Ne každý ticket potřebuje stejný přístup. Udělej si jednoduchou klasifikaci, aby tým nemusel pokaždé vymýšlet morální filozofii nad tlačítkem „admin view“.
+
+Praktické úrovně:
+
+- **Veřejné nebo systémové informace:** verze aplikace, stav služby, dokumentace, obecné nastavení tarifu.
+- **Metadata účtu:** organizace, role, aktivní tarif, stav pozvánky, čas poslední chyby, bez obsahu zákaznických záznamů.
+- **Diagnostická data:** technický log, ID události, chybový kód, anonymizovaný payload, výkon dotčené operace.
+- **Zákaznický obsah:** dokumenty, poznámky, projekty, kontakty, faktury, zprávy, importované soubory.
+- **Citlivé nebo regulované údaje:** osobní údaje vyššího rizika, finanční údaje, zdravotní informace, právní dokumenty, interní obchodní tajemství zákazníka.
+
+Výchozí pravidlo: support začíná na nejnižší možné úrovni. Pokud stačí metadata a chybové ID, nikdo neleze do obsahu. Pokud je potřeba obsah, má to mít důvod, časové omezení a stopu.
+
+### Admin rozhraní navrhni jako nástroj, ne jako zadní dveře
+
+Interní administrace je často nejsilnější část produktu. Proto nemá být rychle slepená stránka s vyhledáváním všech zákazníků a tlačítkem „impersonate“, které funguje navždy a bez otázky. Admin rozhraní má být produkt se stejnými nároky na UX, bezpečnost a odpovědnost jako zákaznická aplikace.
+
+Dobré admin rozhraní má:
+
+- role podle práce, ne podle seniority,
+- oddělený přístup k metadatům a k obsahu,
+- explicitní důvod před zobrazením citlivějších dat,
+- časově omezenou podporu přístupu,
+- auditní log každé akce,
+- rychlé vypnutí přístupu při změně role nebo odchodu člověka,
+- varování, když akce může odhalit zákaznický obsah.
+
+Místo univerzálního „vidím všechno“ vytvoř konkrétní supportní akce: znovu poslat pozvánku, zkontrolovat stav webhooku, zobrazit poslední chybu importu, spustit reindex, vygenerovat bezpečný diagnostický balíček. Čím víc problémů vyřešíš akcemi nad metadaty, tím méně často tým potřebuje otevřít skutečný obsah.
+
+### Souhlas zákazníka má být konkrétní
+
+Když support potřebuje vidět obsah, nebal to do vágní věty „dáváte nám souhlas s řešením problému“. Zákazník má vědět, co se bude dít.
+
+Dobrá žádost o souhlas obsahuje:
+
+- jaký problém řešíme,
+- jaká část účtu nebo dat může být otevřena,
+- kdo k ní bude mít přístup,
+- na jak dlouho,
+- co se zapíše do audit logu,
+- jak může zákazník přístup ukončit,
+- jaká alternativa existuje, pokud souhlas nechce dát.
+
+Příklad lidské formulace:
+
+„Abychom zjistili, proč import objednávek padá, potřebujeme na 24 hodin otevřít diagnostický náhled na importní historii ve vašem účtu. Uvidíme názvy importovaných souborů, časy běhů a chybové hlášky, nebudeme otevírat obsah jednotlivých objednávek. Přístup bude zapsán v audit logu a po vyřešení ho zavřeme.“
+
+Tohle je delší než „můžeme se podívat?“, ale mnohem férovější. A férovost je v B2B prodeji docela dobrá strategie. Překvapivě i bez konfety animace.
+
+### Impersonace je poslední možnost
+
+Přihlášení „jako zákazník“ je pohodlné, ale rizikové. Pokud ho používáš, nastav tvrdé mantinely. Impersonace by neměla obcházet zákaznická práva, maskovat identitu supportu ani vytvářet akce, které vypadají, že je provedl zákazník.
+
+Rozumná pravidla:
+
+- impersonace je vypnutá ve výchozím stavu,
+- vyžaduje konkrétní ticket nebo incident,
+- má časový limit,
+- zákazník ji může vidět v audit logu,
+- systém jasně označí, že akci provedl člen podpory,
+- destruktivní akce jsou zakázané nebo vyžadují zvláštní potvrzení,
+- přístup nejde použít k exportu velkého objemu dat bez dalšího schválení.
+
+Ještě lepší je nahradit impersonaci cílenými diagnostickými pohledy. Třeba stránkou „stav importu“, kde support vidí jen kroky procesu, chybové kódy a anonymizovaný vzorek. Uživatelův účet pak není jeviště pro interní debugging.
+
+### Zákaznický audit log jako důkaz důvěry
+
+Pokud produkt prodáváš firmám, zákazník ocení možnost zjistit, kdo měl k jeho účtu přístup. Nemusí vidět interní poznámky podpory, ale měl by vidět relevantní události:
+
+- kdy byl supportní přístup otevřen,
+- kdo ho otevřel nebo schválil,
+- jaký byl důvod,
+- jaký rozsah dat byl dostupný,
+- kdy byl přístup ukončen,
+- které supportní akce byly provedeny.
+
+Interně si můžeš držet detailnější stopu, ale pozor na tón. Audit log není deníček frustrace. Nepiš „zákazník zase něco rozbil“. Piš fakta: „spuštěna diagnostika importu“, „znovu odeslána pozvánka“, „ověřen stav webhooku“. Budoucí ty ti poděkuje. Právník možná taky, i když to neřekne tak vřele.
+
+### Reprodukce problému bez živých dat
+
+Nejlepší supportní přístup je ten, který vůbec nepotřebuješ. U častých problémů vytvoř cestu, jak je reprodukovat mimo zákaznický účet.
+
+Pomáhá:
+
+- anonymizovaný vzorek vstupu,
+- testovací organizace se stejným nastavením,
+- importní validator, který zákazník spustí sám,
+- diagnostický report bez citlivého obsahu,
+- možnost bezpečně sdílet screenshot s automatickým rozmazáním citlivých polí,
+- interní knihovna typických chyb a oprav.
+
+Když support desetkrát řeší stejný problém ručním koukáním do účtu, není to důkaz obětavosti. Je to signál, že produkt potřebuje lepší diagnostiku, validaci nebo nápovědu.
+
+### Retence supportních dat
+
+Support má tendenci hromadit kontext: screenshoty, exporty, logy, přílohy, nahrávky, přeposlané e-maily. Každá taková věc by měla mít účel a konec života.
+
+Nastav pravidla:
+
+- přílohy s citlivým obsahem maž po vyřešení nebo po krátké retenční době,
+- do ticketu neukládej celé exporty, když stačí chybové ID,
+- screenshoty před uložením očisti od osobních údajů,
+- nahrávky supportních hovorů pořizuj jen s jasným důvodem,
+- interní poznámky piš věcně a bez osobních soudů,
+- pravidelně kontroluj staré tickety s přílohami.
+
+Privacy-first support není pomalejší. Je disciplinovanější. A disciplína se škáluje lépe než „Franta ví, kam kliknout“.
+
+### Checklist: support přístup bez šmírování
+
+- [ ] Supportní situace jsou rozdělené podle potřebného rozsahu dat.
+- [ ] Výchozí diagnostika používá metadata, ne zákaznický obsah.
+- [ ] Admin rozhraní má role, audit log a časové omezení citlivých přístupů.
+- [ ] Přístup k obsahu vyžaduje konkrétní důvod a souhlas nebo jasně popsaný právní/provozní základ.
+- [ ] Impersonace je omezená, viditelná v logu a nepřepisuje autorství akcí.
+- [ ] Zákazník má dohledatelnou stopu supportních přístupů.
+- [ ] Časté problémy se převádějí do diagnostických nástrojů nebo nápovědy.
+- [ ] Supportní přílohy a screenshoty mají retenční pravidla.
+- [ ] Interní poznámky obsahují fakta, ne osobní soudy.
+- [ ] Každý supportní zásah s daty končí otázkou: co příště vyřešíme s menším přístupem?
+
+## Karta supportního přístupu: [ticket / zákazník]
+
+### Kontext
+
+- Ticket nebo incident:
+- Zákaznický problém:
+- Dopad na provoz:
+
+### Požadovaný rozsah
+
+- Stačí metadata:
+- Je nutný zákaznický obsah:
+- Proč nestačí testovací data:
+
+### Souhlas a komunikace
+
+- Co zákazník schválil:
+- Na jak dlouho:
+- Kdo má přístup:
+- Jak zákazník pozná ukončení:
+
+### Auditní stopa
+
+- Otevření přístupu:
+- Provedené akce:
+- Ukončení přístupu:
+- Odkaz na audit log:
+
+### Minimalizace a retence
+
+- Jaká data jsme neotevřeli:
+- Co se uloží do ticketu:
+- Co a kdy smažeme:
+
+### Zlepšení systému
+
+- Jak problém příště diagnostikovat bez obsahu:
+- Co doplnit do produktu:
+- Co doplnit do nápovědy nebo runbooku:
+
+
 ## Pracovní log
+- **2026-09-18:** Doplněna příloha ET o supportním přístupu k produkčním datům bez interního šmírování: klasifikace situací, admin rozhraní, konkrétní souhlas, omezená impersonace, zákaznický audit log, reprodukce bez živých dat, retence supportních dat, checklist a karta supportního přístupu.
 - **2026-09-18:** Doplněna příloha ES o bezpečnostní hygieně týmu bez paranoie: realistické scénáře selhání, účty a zařízení, krátká školení nad praxí, hranice pro AI nástroje, incidentové hlášení, checklist a bezpečnostní karta.
 - **2026-09-18:** Doplněna příloha ER o zastupování během dovolených bez provozní paniky: mapa zastupitelnosti, krátká předávka, dočasné přístupy, dokumentační review, zákaznická komunikace, checklist a karta zastupování.
 - **2026-09-18:** Doplněna příloha EQ o offboardingu lidí v malém SaaS týmu: mapa dopadu, rušení přístupů, předání znalostí, komunikace, privacy-first pravidla, exit rozhovor, review a šablona offboarding karty.
