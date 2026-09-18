@@ -25003,7 +25003,168 @@ Privacy-first princip tady není brzda. Je to základ důvěry. Když lidé věd
 - Co upravíme pro další období:
 ```
 
+## Příloha EN: Zpětná vazba a konflikty bez pasivní agrese a personálních spisů
+
+Jakmile tým vyroste za hranici několika lidí, nestačí spoléhat na to, že si všichni „nějak řeknou“. Neřeknou. Jeden člověk nechce vypadat konfliktně, druhý si myslí, že jeho frustrace je všem jasná, třetí píše ironické komentáře do ticketů a čtvrtý potichu přestává spolupracovat. Výsledek není klid. Je to dluh v mezilidském provozu.
+
+Zpětná vazba v malém SaaS týmu nemá být korporátní divadlo s formulářem o šesti hodnotách. Má chránit práci, důvěru a tempo učení. Konflikt není automaticky problém. Problém je konflikt bez bezpečného procesu: bez kontextu, bez konkrétnosti, bez dohody a bez hranic pro osobní data.
+
+> Codyho komentář: Pasivní agrese je monitoring bez alertů. Systém už hoří, ale dashboard se tváří zeleně, protože nikdo nechtěl být „ten negativní“.
+
+### Odděl zpětnou vazbu od výbuchu
+
+Zpětná vazba není ventilace frustrace. Když člověk přijde rozhozený a chce „to konečně říct naplno“, často nejdřív potřebuje zklidnit situaci, ne rovnou psát verdikt o kolegovi. Dobrá zpětná vazba popisuje konkrétní chování, dopad a další krok. Špatná zpětná vazba lepí člověku nálepku.
+
+Rozdíl:
+
+- **Nálepka:** „Jsi nespolehlivý.“
+- **Konkrétní pozorování:** „U posledních tří release ticketů chyběl update v domluvený den.“
+- **Dopad:** „Support pak nevěděl, co říct zákazníkovi.“
+- **Žádost:** „Potřebujeme buď krátký update do 15:00, nebo předem říct, že termín neplatí.“
+
+Tým by měl mít jednoduché pravidlo: kritika bez příkladu nejde do rozhodování. Pokud někdo neumí uvést situaci, čas, chování a dopad, jde zatím o pocit nebo signál. I ten může být důležitý, ale nesmí se tvářit jako rozsudek.
+
+### Používej krátký model SBI-D
+
+Pro malý tým stačí jednoduchý formát: situace, behaviour, impact, dohoda. Česky: situace, chování, dopad, dohoda. Není to akademická magie. Je to pojistka proti tomu, aby se feedback nezměnil v osobní útok nebo nekonečné vysvětlování minulosti.
+
+Praktická věta:
+
+„Na pondělním plánování, když jsi bez kontextu změnil prioritu importu dat, dopadlo to tak, že vývoj zahodil půl dne rozpracované práce. Příště potřebujeme nejdřív krátce říct důvod změny a ověřit dopad na rozdělané úkoly. Souhlas?“
+
+Proč to funguje:
+
+- Situace brání zobecnění typu „ty vždycky“.
+- Chování drží debatu u pozorovatelných věcí.
+- Dopad ukazuje, proč na tom záleží.
+- Dohoda mění feedback na budoucí práci.
+
+Není cílem vyhrát debatu. Cílem je zlepšit další interakci. Pokud po feedbacku není jasné, co se má příště stát jinak, byla to spíš stížnost než pracovní rozhovor.
+
+### Konflikt pojmenuj brzy a nízkoúrovňově
+
+Nečekej, až konflikt vyroste do velké konfrontace. V malém SaaS týmu se napětí často projeví dřív v detailech: pozdní odpovědi, obcházení člověka, ostré komentáře v pull requestu, schůzky bez pozvaného vlastníka, pasivní souhlas a následná sabotáž priorit. To jsou provozní signály, ne charakterové vady.
+
+Nízkoprahové věty:
+
+- „Mám pocit, že si nerozumíme v prioritě tohoto úkolu. Můžeme si sladit očekávání?“
+- „V komentářích to začíná být ostřejší než užitečné. Pojďme oddělit technický problém od tónu.“
+- „Tady se nám míchá rozhodnutí a frustrace. Nejdřív zavřeme rozhodnutí, pak dořešíme proces.“
+- „Nechci z toho dělat drama, ale nechci to ani nechat hnít. Co je podle tebe hlavní třecí bod?“
+
+Tohle není měkkost. Je to údržba systému. Stejně jako nečekáš s incidentem, až spadne celé API, nečekej s konfliktem, až lidé přestanou spolupracovat.
+
+### Manažer má moderovat proces, ne psát rozsudek
+
+Když se do konfliktu vloží manažer nebo zakladatel, jeho první práce není rozhodnout, kdo je „ten problémový“. První práce je vytvořit bezpečný proces: vyslechnout strany, oddělit fakta od interpretací, zapsat pracovní dopad a domluvit další krok.
+
+Praktický postup:
+
+1. Každého se zeptej na konkrétní situace, ne na obecný charakter druhého člověka.
+2. Zapiš shodná fakta zvlášť od rozdílných interpretací.
+3. Pojmenuj pracovní dopad: termín, kvalita, zákazník, týmová spolupráce, rozhodování.
+4. Domluv malý test změny na nejbližší týden nebo sprint.
+5. Nastav kontrolní bod a ukonči ho, když se věc stabilizuje.
+
+Manažer nemusí být terapeut. Nemá sbírat osobní životopisy frustrací. Má chránit práci a důvěru. Pokud konflikt souvisí s bezpečností, diskriminací, obtěžováním nebo právním rizikem, je to jiný režim: jasná eskalace, omezený přístup k informacím a případně externí odborná pomoc.
+
+### Zpětná vazba patří blízko k práci
+
+Čím déle čekáš, tím víc se z konkrétní situace stává příběh. Lidé doplňují motivy, zapomínají detaily a začínají obhajovat identitu místo práce. Proto má být většina feedbacku krátká, konkrétní a blízko situaci.
+
+Dobré příležitosti:
+
+- po dokončení náročného ticketu,
+- po demo callu,
+- po incidentu,
+- po nejasném rozhodnutí,
+- po ostřejším review,
+- po předávce mezi týmy,
+- po support eskalaci.
+
+Neznamená to řešit všechno okamžitě veřejně. Někdy stačí krátká soukromá zpráva: „Můžeme si dnes dát 10 minut k tomu review? Chci sladit tón a očekávání, ne rozjíždět soud.“ Časná zpětná vazba šetří budoucí velké rozhovory.
+
+### Privacy-first pravidla pro citlivé rozhovory
+
+Feedback a konflikty generují citlivá data: poznámky o výkonu, vztazích, emocích, zdraví, rodinném kontextu nebo finančním tlaku. Malý tým má tendenci psát všechno do sdílené wiki nebo chatu, protože je to pohodlné. Nedělej to. Pohodlí není právní ani lidská strategie.
+
+Pravidla:
+
+- Do trvalých systémů ukládej rozhodnutí a pracovní dohody, ne surové emoce.
+- Osobní poznámky z rozhovoru drž mimo produktové nástroje a běžné tickety.
+- Přístup k citlivým poznámkám omez na minimum lidí.
+- Nepoužívej nahrávání schůzek jako výchozí nastavení.
+- Nevyhodnocuj lidi skrytými metrikami z chatu, commitu nebo nástrojů.
+- Staré konfliktní poznámky pravidelně maž nebo archivuj podle jasné retence.
+- Pokud sdílíš shrnutí s týmem, popisuj změnu procesu, ne osobní detaily.
+
+Privacy-first tým nemusí mlčet o problémech. Jen nemusí vyrábět personální archeologii, která bude za dva roky škodit víc než původní konflikt.
+
+### Udělej z konfliktu změnu systému
+
+Nejlepší konflikt je ten, který po vyřešení zlepší systém. Když se lidé opakovaně hádají o priority, možná chybí pravidla rozhodování. Když vznikají ostré komentáře v review, možná chybí standard pro pull requesty. Když support obviňuje vývoj a vývoj support, možná chybí společná definice incidentu nebo eskalace.
+
+Po každém významnějším konfliktu se zeptej:
+
+- Jaké pravidlo bylo nejasné?
+- Jaké očekávání nebylo napsané?
+- Kde chyběl vlastník?
+- Jaký signál jsme ignorovali příliš dlouho?
+- Co můžeme změnit, aby se to příště řešilo dřív?
+- Jakou část problému jsme vytvořili špatným procesem?
+
+Tady se zpětná vazba propojuje s provozem firmy. Konflikt není jen mezilidský incident. Často je to symptom špatného rozhraní mezi rolemi, prioritami a očekáváními.
+
+### Checklist: feedback bez pasivní agrese
+
+- Popisujeme konkrétní situaci, ne nálepku člověka?
+- Umíme říct chování, dopad a žádost?
+- Řešíme konflikt dřív, než se stane týmovou legendou?
+- Oddělujeme fakta, interpretace a emoce?
+- Má rozhovor jasnou pracovní dohodu?
+- Víme, kdo moderuje proces, když konflikt eskaluje?
+- Ukládáme jen nutné poznámky a chráníme citlivá data?
+- Nepoužíváme skryté metriky jako podklad pro hodnocení lidí?
+- Měníme po konfliktu systém, ne jen náladu?
+- Máme kontrolní bod, který se dá ukončit?
+
+### Šablona: karta feedbacku
+
+```markdown
+## Feedback karta: [situace / téma]
+
+### Situace
+- Kdy a kde se to stalo:
+- Kdo byl zapojený:
+- Jaký pracovní kontext tomu předcházel:
+
+### Chování
+- Co bylo pozorovatelné:
+- Co není jisté a je jen interpretace:
+
+### Dopad
+- Dopad na práci:
+- Dopad na zákazníka / tým / kvalitu:
+- Co se stane, když to necháme být:
+
+### Dohoda
+- Co příště uděláme jinak:
+- Kdo za změnu odpovídá:
+- Kdy se k tomu vrátíme:
+
+### Privacy-first kontrola
+- Co opravdu potřebujeme uložit:
+- Kdo k tomu má mít přístup:
+- Kdy poznámku smažeme nebo archivujeme:
+
+### Systémová změna
+- Jaké pravidlo nebo proces upravíme:
+- Jak zabráníme opakování:
+```
+
 ## Pracovní log
+
+- **2026-09-18:** Doplněna příloha EN o zpětné vazbě a konfliktech bez pasivní agrese: konkrétní feedback, model situace–chování–dopad–dohoda, nízkoprahové řešení konfliktů, role manažera, privacy-first poznámky, checklist a feedback karta.
 
 - **2026-09-18:** Doplněna příloha EM o odměňování a bonusech bez metrikové pasti: rozlišení mzdy, uznání a bonusu, ochrana spolupráce, týmové cíle s mantinely, neodměňování systémového hrdinství, transparentnost, privacy-first zacházení s kompenzačními daty, checklist a bonusová karta.
 
