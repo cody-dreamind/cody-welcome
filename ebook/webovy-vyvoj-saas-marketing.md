@@ -26129,7 +26129,198 @@ Privacy-first support není pomalejší. Je disciplinovanější. A disciplína 
 - Co doplnit do nápovědy nebo runbooku:
 
 
+
+## Příloha EU: Role a oprávnění v SaaS bez přístupového guláše
+
+Malý SaaS často začne jednoduše: jeden admin účet, pár interních lidí a důvěra, že „se v tom nikdo nebude hrabat“. To je roztomilé asi jako heslo `admin123` na produkci. Jakmile přibudou zákazníci, support, integrace, účetnictví a první externí spolupracovník, přístupy se začnou množit rychleji než nápady na „jen malou feature“.
+
+Dobře navržené role nejsou byrokracie. Jsou provozní brzda proti dvěma extrémům: buď má každý všechno, nebo se každý požadavek mění v lov na člověka, který může kliknout na správné tlačítko. Cílem je, aby lidé mohli dělat svou práci, ale aby systém nepouštěl citlivá data tam, kde stačí souhrn, stav nebo anonymizovaný kontext.
+
+Codyho komentář: Oprávnění nejsou sexy feature. Ale v den, kdy nový kolega omylem smaže zákazníkovi data nebo bývalý dodavatel pořád vidí produkci, najednou vypadají jako nejlevnější pojištění ve firmě.
+
+### Začni úkoly, ne tituly
+
+Nejhorší způsob návrhu rolí je podle firemních titulů. „Admin“, „manažer“ a „uživatel“ vypadají přehledně, dokud nezjistíš, že obchodník potřebuje vidět fakturační stav, support potřebuje metadata účtu, účetní potřebuje export dokladů a produktový člověk potřebuje agregovanou statistiku použití bez osobních dat.
+
+Lepší začátek je seznam pracovních úkolů:
+
+- kdo zakládá a ruší uživatele,
+- kdo mění billing a tarif,
+- kdo vidí obsah zákaznických záznamů,
+- kdo může spouštět exporty,
+- kdo nastavuje integrace,
+- kdo čte audit log,
+- kdo může impersonovat nebo žádat dočasný supportní přístup,
+- kdo mění bezpečnostní nastavení,
+- kdo spravuje retenční pravidla.
+
+Z těchto úkolů pak vzniknou role. Ne obráceně. Titul člověka je organizační informace. Oprávnění je provozní riziko.
+
+Praktický vzor pro malý B2B SaaS:
+
+- **Owner:** smlouvy, billing, bezpečnostní nastavení, správa adminů.
+- **Admin:** uživatelé, běžné nastavení workspace, integrace v rámci účtu.
+- **Member:** každodenní práce s produktem bez práv měnit kritické nastavení.
+- **Billing:** faktury, tarif, platební údaje, ale ne obsah práce týmu.
+- **Support viewer:** metadata a auditní informace pro řešení ticketu, ideálně bez obsahu.
+- **Read-only auditor:** čtení nastavení a logů bez možnosti změn.
+
+Nemusíš mít všechny role hned. Ale musíš vědět, které schopnosti se nesmí schovat pod jedno magické tlačítko „admin“.
+
+### Matice oprávnění musí být čitelná lidem
+
+Role nestačí popsat v kódu. Potřebuješ jednoduchou matici, kterou pochopí produkt, support i zákazník. Řádky jsou akce, sloupce role, buňky říkají „ano“, „ne“, „jen vlastní data“, „jen se souhlasem“, „jen dočasně“.
+
+Mini příklad:
+
+| Akce | Owner | Admin | Member | Billing | Support |
+| --- | --- | --- | --- | --- | --- |
+| Pozvat uživatele | ano | ano | ne | ne | ne |
+| Změnit tarif | ano | ne | ne | ano | ne |
+| Vidět obsah záznamů | ano | podle nastavení | vlastní / týmové | ne | jen se souhlasem |
+| Exportovat data | ano | podle nastavení | omezeně | účetní export | ne |
+| Číst audit log | ano | ano | ne | jen billing | jen ticket |
+| Měnit retenci | ano | ne | ne | ne | ne |
+
+Tahle tabulka je užitečná i pro prodej. Když se zákazník zeptá, jestli jde oddělit účetní od provozních dat, odpověď nemá být improvizované „nějak to půjde“. Máš ukázat pravidlo.
+
+### Least privilege není heslo na plakát
+
+Princip nejmenších oprávnění říká: dej člověku jen to, co potřebuje pro konkrétní práci, a nic navíc. V praxi se často rozbije na pohodlnosti. Někdo potřebuje jednou za měsíc export, tak dostane trvalého admina. Externista pomáhá s integrací, tak dostane přístup k celému workspace. Support řeší bug, tak kouká do produkčních dat bez jasné hranice.
+
+Privacy-first varianta je nudnější, ale lepší:
+
+- přístup je vázaný na úkol,
+- oprávnění má časové omezení,
+- citlivé akce vyžadují potvrzení nebo druhý krok,
+- supportní přístup se zaznamená do audit logu,
+- exporty mají vlastní oprávnění,
+- interní lidé nemají defaultně přístup k obsahu zákaznické práce.
+
+U malé aplikace to nemusí znamenat složitý IAM systém. Stačí začít třemi kroky: oddělit billing od obsahu, oddělit support metadata od zákaznického obsahu a zavést časově omezené zvýšení práv pro výjimečné situace.
+
+### Kritické akce patří za druhý krok
+
+Ne všechny akce mají stejnou váhu. Změna názvu projektu není totéž jako smazání workspace. Role by měly rozlišovat běžnou práci a kritické zásahy.
+
+Kritické akce typicky jsou:
+
+- smazání účtu nebo workspace,
+- změna vlastníka,
+- zapnutí nebo vypnutí SSO,
+- změna retenčních pravidel,
+- export všech dat,
+- rotace API klíčů,
+- změna webhooks a integrací s citlivými daty,
+- hromadná pozvánka uživatelů,
+- přístup supportu k obsahu zákaznických dat.
+
+Druhý krok nemusí být vždy dvoufaktor v produktovém smyslu. Může to být potvrzovací dialog s konkrétním dopadem, e-mail vlastníkovi, waiting period, schválení druhým adminem nebo dočasný „break-glass“ režim s povinným důvodem.
+
+Špatné potvrzení: „Opravdu pokračovat?“
+
+Dobré potvrzení: „Smažeš workspace ACME včetně 14 uživatelů a 23 projektů. Export před smazáním nebyl vytvořen. Tato akce se naplánuje na 7 dní a owner dostane oznámení.“
+
+### Interní role odděl od zákaznických rolí
+
+V SaaS se často pletou dvě vrstvy: role zákazníka uvnitř jeho účtu a role interního týmu provozovatele. To je bezpečnostní mlha. Zákaznický admin nemá být totéž jako interní admin. Interní support nemá být „superadmin všeho“, pokud mu stačí vidět stav účtu, logy a technické metadata.
+
+Doporučené oddělení:
+
+- **Customer roles:** owner, admin, member, billing, auditor.
+- **Internal roles:** support, operations, finance, developer, security reviewer.
+- **Emergency role:** dočasný break-glass přístup s přísným logováním a následným review.
+
+Každá interní role má mít jasný účel. Developer typicky nepotřebuje vidět zákaznický obsah v produkci. Finance nepotřebuje supportní poznámky. Marketing nepotřebuje seznam aktivních uživatelů se všemi identifikátory, když stačí agregace.
+
+### Audit log má být srozumitelný a užitečný
+
+Audit log není skládka technických událostí. Má odpovědět na otázky: kdo, co, kdy, odkud a proč. Pro citlivé akce přidej důvod a vazbu na ticket nebo rozhodnutí.
+
+Užitečná auditní událost:
+
+- `2026-09-18 08:42` — interní support otevřel metadata účtu ACME kvůli ticketu `SUP-1842`, bez přístupu k obsahu.
+- `2026-09-18 08:47` — owner ACME schválil dočasný supportní přístup k projektu „Fakturace“, platnost 2 hodiny.
+- `2026-09-18 09:05` — support ukončil přístup, nebyl proveden export.
+
+Neužitečná auditní událost:
+
+- `user.updated`
+- `admin_action=true`
+- `access changed`
+
+Audit log by měl být čitelný pro provoz i zákazníka. Pokud mu rozumí jen autor ORM vrstvy v úterý po třetí kávě, není to audit log, ale archeologická výzva.
+
+### Role pravidelně uklízej
+
+Oprávnění stárnou. Lidé mění práci, projekty končí, dodavatelé odcházejí, piloti se mění v produkci a někde v rohu pořád žije účet „temporary-migration-final“. Proto potřebuješ pravidelný access review.
+
+Pro malý tým stačí měsíční nebo čtvrtletní rytmus podle rizika:
+
+- seznam lidí s admin právy,
+- seznam externích účtů,
+- seznam dlouho nepoužitých účtů,
+- seznam aktivních API klíčů,
+- seznam break-glass použití,
+- kontrola rolí u největších zákazníků,
+- kontrola interních nástrojů, kde se kopírují zákaznická data.
+
+Výstup review nemá být „proběhlo“. Výstup má být změna: odebrané účty, snížená oprávnění, rotované klíče, doplněný runbook, upravená role.
+
+### Checklist: role bez přístupového guláše
+
+- [ ] Máme seznam pracovních úkolů, ne jen názvy rolí.
+- [ ] Billing práva jsou oddělená od obsahu zákaznické práce.
+- [ ] Support má defaultně metadata, ne plný obsah.
+- [ ] Kritické akce mají druhý krok nebo časové omezení.
+- [ ] Interní role jsou oddělené od zákaznických rolí.
+- [ ] Exporty, mazání a retenční změny mají vlastní oprávnění.
+- [ ] Audit log ukazuje kdo, co, kdy, proč a v jakém rozsahu.
+- [ ] Dočasné zvýšení práv má expiraci a důvod.
+- [ ] Externisté a dodavatelé mají samostatné účty, ne sdílené přístupy.
+- [ ] Access review probíhá v pravidelném rytmu a končí konkrétními změnami.
+
+## Karta role a oprávnění: [role / scénář]
+
+### Účel
+
+- Proč role existuje:
+- Jakou práci má umožnit:
+- Jaké riziko má omezit:
+
+### Povolené akce
+
+- Běžné akce:
+- Kritické akce:
+- Akce vyžadující schválení:
+
+### Datový rozsah
+
+- Jaká data role vidí:
+- Jaká data nevidí:
+- Jaké exporty smí spouštět:
+
+### Čas a vlastnictví
+
+- Kdo roli přiděluje:
+- Kdy role expiruje nebo se reviduje:
+- Jak se role odebírá:
+
+### Audit a komunikace
+
+- Co se zapisuje do audit logu:
+- Kdo dostane oznámení:
+- Jak zákazník pozná citlivý zásah:
+
+### Privacy-first kontrola
+
+- Lze práci udělat s menším rozsahem dat?
+- Lze použít agregaci, metadata nebo testovací kopii?
+- Je přístup dočasný, zdůvodněný a dohledatelný?
+
+
 ## Pracovní log
+- **2026-09-18:** Doplněna příloha EU o rolích a oprávněních v SaaS bez přístupového guláše: návrh podle úkolů, čitelná matice oprávnění, least privilege, kritické akce, oddělení interních a zákaznických rolí, audit log, pravidelný access review, checklist a karta role.
 - **2026-09-18:** Doplněna příloha ET o supportním přístupu k produkčním datům bez interního šmírování: klasifikace situací, admin rozhraní, konkrétní souhlas, omezená impersonace, zákaznický audit log, reprodukce bez živých dat, retence supportních dat, checklist a karta supportního přístupu.
 - **2026-09-18:** Doplněna příloha ES o bezpečnostní hygieně týmu bez paranoie: realistické scénáře selhání, účty a zařízení, krátká školení nad praxí, hranice pro AI nástroje, incidentové hlášení, checklist a bezpečnostní karta.
 - **2026-09-18:** Doplněna příloha ER o zastupování během dovolených bez provozní paniky: mapa zastupitelnosti, krátká předávka, dočasné přístupy, dokumentační review, zákaznická komunikace, checklist a karta zastupování.
