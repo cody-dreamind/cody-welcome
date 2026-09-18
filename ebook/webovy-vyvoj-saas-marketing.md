@@ -28585,7 +28585,182 @@ Tým nemusí mít kult výzkumu. Stačí, když zákaznické poznání pravideln
 
 ---
 
+
+## Příloha FI: CRM a follow-up bez stalkingu, chaosu a falešné osobnosti
+
+CRM má být paměť obchodního procesu, ne policejní spis na každého člověka, který si jednou otevřel pricing. Malý SaaS tým nepotřebuje vědět, jakou barvu ponožek měl lead při návštěvě webu. Potřebuje vědět, kdo má reálný problém, jaký další krok byl domluvený, co jsme slíbili a kdy se ozvat znovu.
+
+Privacy-first CRM stojí na jednoduché větě: ukládáme jen informace, které pomáhají férově pokračovat v obchodní konverzaci nebo dodat službu. Všechno ostatní je datový prach. A prach se v CRM mění na špatné segmentace, trapné automatizace a interní chaos.
+
+> Codyho komentář: Když CRM potřebuje tři obrazovky políček, aby sis vzpomněl, proč máš zákazníkovi zavolat, problém není v zákazníkovi. Problém je v tom, že obchodní proces cosplayuje enterprise software.
+
+### Začni pipeline podle rozhodnutí, ne podle fantazie
+
+Pipeline nemá popisovat optimistickou pohádku „lead → deal → sláva“. Má popisovat rozhodnutí, která se opravdu dějí na straně zákazníka i týmu. Každý stav v CRM by měl mít jasnou vstupní podmínku, výstupní podmínku a vlastníka dalšího kroku.
+
+Praktická B2B SaaS pipeline může vypadat takto:
+
+- **Nový kontakt:** máme jméno, firmu a důvod kontaktu, ale ještě nevíme, jestli problém existuje.
+- **Kvalifikovaný problém:** lead popsal konkrétní bolest, dopad a aktuální způsob řešení.
+- **Domluvené demo nebo konzultace:** existuje termín, účastníci a očekávání schůzky.
+- **Nabídka / pilot:** zákazník dostal konkrétní návrh rozsahu, ceny, rizik a dalšího kroku.
+- **Rozhodování u zákazníka:** víme, kdo rozhoduje, co blokuje posun a kdy se vrátit.
+- **Vyhráno / ztraceno / odloženo:** stav má důvod, ne jen pocit obchodníka.
+
+Vyhni se stavům typu „možná“, „hot prospect“, „follow-up soon“ nebo „čekáme“. To nejsou stavy, to jsou omluvy. Dobrý stav říká, co je potřeba udělat. Špatný stav jen uklidňuje tým, že se něco děje.
+
+### Minimální CRM karta stačí víc než datový román
+
+U každého leadu ukládej jen tolik, aby další člověk v týmu dokázal navázat bez trapného „připomeňte mi, o čem jsme mluvili“. Základní karta může být překvapivě krátká.
+
+Minimum pro smysluplný B2B follow-up:
+
+- **Firma a role:** kdo mluví a proč má na problém vliv.
+- **Problém:** konkrétní bolest popsaná jazykem zákazníka.
+- **Dopad:** čas, peníze, reputace, riziko nebo kapacita, které problém žere.
+- **Současné řešení:** tabulka, ruční práce, jiný nástroj, agentura, interní hack.
+- **Další krok:** co přesně se má stát, kdo to udělá a do kdy.
+- **Sliby a omezení:** co jsme slíbili dodat, neposílat nebo prověřit.
+- **Souhlas s komunikací:** jaký typ komunikace dává smysl a odkud kontakt přišel.
+
+Nepotřebuješ ukládat osobní poznámky typu „má rád cyklistiku“ jen proto, že to někdo řekl na callu. Pokud to přímo nepomáhá dodat hodnotu nebo respektovat preference komunikace, nepatří to do CRM. Lidskost se nedělá databází koníčků. Lidskost se dělá tím, že si pamatuješ domluvy a neztrácíš čas druhé strany.
+
+### Follow-up má být užitečný, ne automatický hluk
+
+Automatizace follow-upu je dobrý sluha a výborný výrobce trapnosti. Pokud pošle stejnou sekvenci člověku, který už odmítl, čeká na právníka nebo řeší interní incident, není to škálování obchodu. Je to škálování ignorance.
+
+Každý follow-up by měl projít třemi otázkami:
+
+1. **Má příjemce důvod to dostat právě teď?**
+2. **Navazuje zpráva na konkrétní kontext, ne na obecný drip scénář?**
+3. **Je jasné, jak může komunikaci ukončit nebo změnit její frekvenci?**
+
+Dobré follow-upy připomínají hodnotu a další krok. Špatné follow-upy připomínají jen to, že máš nastavený nástroj.
+
+Příklad praktického follow-upu:
+
+> Dobrý den, minule jste říkal, že největší problém je ruční skládání týdenního reportu ze tří zdrojů. Posílám slíbený návrh pilotu: první týden napojení dat, druhý týden ověření reportu s vaším týmem, třetí týden rozhodnutí, jestli to šetří dost času. Pokud teď není vhodná chvíle, stačí napsat „ozvěte se v listopadu“ a posunu si to.
+
+Tenhle follow-up je konkrétní, respektuje kontext a dává jednoduchou možnost říct ne. Žádné „jen se připomínám“ pětkrát za sebou. To není obchod, to je digitální klepání na okno.
+
+### Segmentace podle potřeby, ne podle sledovací magie
+
+Segmentace má pomáhat poslat relevantní informaci správné skupině. Nemá vytvářet pocit, že lead žije pod mikroskopem. U malého SaaS většinou stačí několik praktických segmentů:
+
+- **Problém:** reporting, onboarding, integrace, compliance, zákaznická podpora.
+- **Fáze:** objevování, pilot, rozhodování, zákazník, odložený zájem.
+- **Velikost provozu:** sólista, malý tým, rostoucí firma, víc poboček.
+- **Riziko nákupu:** technické, právní, rozpočtové, organizační.
+- **Preferovaný kanál:** e-mail, call, osobní schůzka, dokumentace, RSS/novinky.
+
+Vyhni se segmentům postaveným na mikrosignálech typu „otevřel e-mail třikrát v úterý večer“. Takové signály jsou často šum, technicky nespolehlivé a vedou k přehnaně osobním zprávám. Lepší je jeden jasně vyřčený problém než deset behaviorálních drobků.
+
+### CRM potřebuje hygienu, jinak začne lhát
+
+Staré CRM záznamy vypadají nevinně, ale umí otrávit marketing, sales forecast i produktové priority. Když nikdo neví, jestli je kontakt aktuální, proč byl označen jako příležitost nebo jestli souhlasí s další komunikací, tým začne rozhodovat podle smetí.
+
+Zaveď jednoduchý rytmus úklidu:
+
+- **Týdně:** projdi otevřené příležitosti bez dalšího kroku.
+- **Měsíčně:** uzavři nebo odlož staré dealy bez aktivity.
+- **Čtvrtletně:** zkontroluj segmenty, zdroje leadů a kvalitu poznámek.
+- **Pololetně:** smaž nebo anonymizuj kontakty, u kterých není jasný účel dalšího držení.
+- **Po každé kampani:** doplň, co přineslo kvalitní konverzace, ne jen počet leadů.
+
+CRM hygiena není administrativní trest. Je to ochrana týmu před iluzí, že pipeline je větší, než opravdu je. Méně záznamů s jasným dalším krokem je lepší než tisíc kontaktů ve stavu „někdy se ozveme“.
+
+### Předávky mezi marketingem, obchodem a produktem
+
+CRM je jedno z mála míst, kde se potkává marketingová realita, obchodní realita a produktová realita. Aby z něj nebyl jen seznam kontaktů, musí umět předávat signály.
+
+Marketing potřebuje vědět:
+
+- které otázky se opakují před první schůzkou,
+- jaké články nebo stránky pomáhají kvalifikovat dobré leady,
+- kde lidé nechápou nabídku,
+- které zdroje přivádí relevantní firmy, ne jen provoz.
+
+Produkt potřebuje vědět:
+
+- jaké problémy se opakují napříč segmenty,
+- které požadavky jsou blokátor nákupu,
+- kde zákazník žádá integraci, export nebo auditní stopu,
+- jaké sliby obchod často musí vysvětlovat nebo brzdit.
+
+Obchod potřebuje vědět:
+
+- co produkt umí dnes,
+- co je experiment, roadmapa nebo výjimka,
+- jaké privacy-first argumenty může říkat bez přehánění,
+- kdy raději říct „tohle pro vás nejsme“.
+
+Nejlepší CRM není nástroj. Je to dohoda, že každý důležitý obchodní signál má místo, vlastníka a pravidelný rytmus vyhodnocení.
+
+### Checklist: CRM bez stalkingu
+
+- Má každý stav pipeline jasnou vstupní a výstupní podmínku?
+- Má každá otevřená příležitost konkrétní další krok s datem a vlastníkem?
+- Ukládáme jen data, která pomáhají navázat, dodat službu nebo respektovat preference?
+- Umíme vysvětlit, odkud kontakt přišel a proč ho dál kontaktujeme?
+- Mají automatické follow-upy bezpečnostní brzdu pro kontext, odmítnutí a odložení?
+- Nepoužíváme mikrosledování jako náhražku skutečného zájmu?
+- Čistí někdo pravidelně staré dealy, kontakty a segmenty?
+- Dostává produkt z CRM shrnutí opakovaných problémů, ne jen jednotlivé anekdoty?
+- Má zákazník jednoduchou možnost změnit frekvenci komunikace nebo ji ukončit?
+- Ví tým, jaké poznámky do CRM nepatří?
+
+### Šablona: CRM karta příležitosti
+
+## CRM příležitost: [firma / segment]
+
+### Kontext
+
+- Firma / segment:
+- Kontaktní role:
+- Zdroj kontaktu:
+- Důvod prvního zájmu:
+- Preferovaný kanál komunikace:
+
+### Problém a dopad
+
+- Popis problému jazykem zákazníka:
+- Současné řešení:
+- Dopad na čas / peníze / riziko / reputaci:
+- Co se stane, když se problém nevyřeší:
+
+### Stav obchodu
+
+- Aktuální fáze pipeline:
+- Další krok:
+- Vlastník dalšího kroku:
+- Termín:
+- Blokery rozhodnutí:
+
+### Sliby a mantinely
+
+- Co jsme slíbili dodat:
+- Co je výslovně mimo rozsah:
+- Potřebné produktové / technické ověření:
+- Privacy-first argumenty, které můžeme bezpečně použít:
+
+### Follow-up
+
+- Poslední kontakt:
+- Další plánovaná zpráva:
+- Užitečný obsah k poslání:
+- Kdy komunikaci ukončit nebo odložit:
+
+### CRM hygiena
+
+- Datum poslední revize:
+- Držená data mají jasný účel: ano/ne
+- Data k odstranění nebo anonymizaci:
+- Poznámky, které nepatří do CRM:
+
+---
+
 ## Pracovní log
+- **2026-09-18:** Doplněna příloha FI o CRM a follow-upu bez stalkingu: pipeline podle rozhodnutí, minimální CRM karta, užitečný follow-up, rozumná segmentace, CRM hygiena, předávky mezi marketingem, obchodem a produktem, checklist a šablona příležitosti.
 - **2026-09-18:** Doplněna příloha FH o zákaznickém výzkumu bez datového přestřelu: rozhodnutí před otázkami, volba nejmenší metody, opatrné nahrávání, otázky na minulé chování, syntéza insightů, výzkumný repozitář, zapojení týmu, checklist a karta zákaznického výzkumu.
 - **2026-09-18:** Doplněna příloha FG o produktovém příběhu bez buzzwordů: starý svět zákazníka, zákazník jako hlavní postava, konkrétní a splnitelný slib, důkazy blízko slibu, sjednocení webu/dema/onboardingu, testování v rozhovorech, checklist a karta produktového příběhu.
 - **2026-09-18:** Doplněna příloha FF o obsahové knihovně bez chaotického publikování: sběr opakovaných zákaznických otázek, úrovně viditelnosti, jeden zdroj pro více formátů, distribuce přes vlastní web/RSS/přímé odkazy, revize a archivace obsahu, checklist a karta obsahového aktiva.
