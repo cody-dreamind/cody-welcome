@@ -26319,7 +26319,151 @@ Výstup review nemá být „proběhlo“. Výstup má být změna: odebrané ú
 - Je přístup dočasný, zdůvodněný a dohledatelný?
 
 
+
+## Příloha EV: Pravidelná revize oprávnění bez auditního divadla
+
+Role a oprávnění nejsou hotová ve chvíli, kdy je nastavíš. Jsou hotová teprve tehdy, když je tým umí pravidelně zkontrolovat, upravit a vysvětlit bez toho, aby z revize vznikl půldenní rituál s tabulkou smrti. V malém SaaS týmu se přístupy mění pořád: někdo přejde na jinou oblast, někdo pomáhá supportu, někdo končí pilotní projekt, někdo dostane dočasný admin kvůli incidentu. Pokud se tyhle změny neuklízí, za pár měsíců má produkční práva polovina firmy a nikdo přesně neví proč.
+
+Pravidelná revize oprávnění má jednoduchý cíl: potvrdit, že lidé mají přístup jen k tomu, co potřebují pro aktuální práci, a že výjimky mají vlastníka, důvod a konec. Není to hon na viníky. Je to hygienická kontrola, podobně jako zálohy nebo faktury. Jen s menším množstvím kávy a větší šancí zabránit průšvihu.
+
+Privacy-first pohled je tady přímočarý: čím méně lidí má přístup k zákaznickým a provozním datům, tím menší je riziko zneužití, úniku nebo nechtěného nahlížení. GDPR stojí mimo jiné na principech minimalizace údajů a integrity a důvěrnosti zpracování, které Evropská komise popisuje jako sběr jen nezbytných osobních dat a ochranu proti neoprávněnému zpracování. U bezpečnosti zpracování článek 32 GDPR mluví o technických a organizačních opatřeních přiměřených riziku. Revize oprávnění je přesně ten typ organizačního opatření, které malé týmy často odkládají, protože „vždyť jsme jen čtyři“. Slavná poslední slova před sdíleným admin účtem.
+
+Zdroje k právnímu kontextu: Evropská komise k principům GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en, EUR-Lex text nařízení GDPR včetně článku 32 — https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679.
+
+### Co má revize pokrýt
+
+Revize oprávnění nemá být jen export seznamu uživatelů z jedné aplikace. U malého SaaS obvykle pokrývá několik vrstev:
+
+- **Produkční aplikace:** admin role, support role, interní impersonace, přístupy k zákaznickým účtům.
+- **Databáze a infrastruktura:** databázové účty, SSH, hosting, CI/CD, logy, zálohy, objektové úložiště.
+- **Externí nástroje:** helpdesk, analytika, billing, e-mailing, monitoring, repozitáře, dokumentace.
+- **Sdílené tajnosti:** API klíče, servisní účty, webhook secret, SMTP hesla, recovery kódy.
+- **Dočasné výjimky:** incidentní přístupy, pilotní přístupy, konzultanti, ruční migrace.
+- **Neaktivní účty:** lidé po odchodu, staré e-maily, zapomenuté testovací účty, uživatelé bez vlastníka.
+
+Největší chyba je kontrolovat jen hlavní SaaS aplikaci a zapomenout na nástroje okolo. Zákaznická data často netečou jen aplikací. Mohou být v support ticketu, exportu fakturace, logu, nahraném CSV, screenshotu v dokumentaci nebo v integraci, kterou kdysi někdo připojil „jen na test“. Jen na test je mimochodem oblíbená forma dlouhodobého provozu, akorát bez odpovědnosti.
+
+### Frekvence podle rizika
+
+Ne všechna oprávnění potřebují stejný rytmus kontroly. Rozumné je rozdělit přístupy podle dopadu:
+
+- **Kritické přístupy:** produkční databáze, hosting, CI/CD, billing, tajnosti, globální admin. Kontrola měsíčně nebo po každé významné personální změně.
+- **Zákaznická data:** support nástroje, interní admin, exporty, logy s potenciálně citlivým obsahem. Kontrola měsíčně až kvartálně podle objemu dat.
+- **Běžné pracovní nástroje:** projektové řízení, interní dokumentace, knowledge base. Kontrola kvartálně.
+- **Veřejné nebo nízkorizikové nástroje:** marketingový kalendář, veřejné assety, obecné šablony. Kontrola při změně týmu nebo při větším úklidu.
+
+Důležité je mít jasný spouštěč mimo kalendář. Revizi udělej okamžitě, když někdo odchází, mění roli, končí externí spolupráce, dokončí se incident, nasazuje se nový nástroj nebo se mění datový tok. Kalendář je pojistka. Změna reality je signál.
+
+### Jak revizi udělat za 45 minut
+
+Pro malý tým stačí jednoduchý postup:
+
+1. **Vytáhni seznam přístupů.** Exportuj uživatele a role z klíčových systémů, případně udělej ruční seznam tam, kde export není.
+2. **Přiřaď vlastníka.** Každý systém má člověka, který umí říct, proč daný přístup existuje.
+3. **Zkontroluj aktivní práci.** U každého vyššího oprávnění odpověz: potřebuje ho člověk pro současnou roli tento měsíc?
+4. **Odděl trvalé a dočasné.** Dočasný přístup bez data konce je trvalý přístup v převleku.
+5. **Odeber zjevné zbytky.** Nečekej na poradu kvůli účtu bývalého konzultanta nebo starému testovacímu adminovi.
+6. **Zapiš rozhodnutí.** Ne celý román. Stačí kdo, systém, změna, důvod, datum.
+7. **Naplánuj follow-up.** Výjimky a nejasnosti musí mít termín, jinak se vrátí jako bumerang s fakturou.
+
+Praktický trik: nezačínej otázkou „kdo má jaký přístup“. Začni otázkou „které přístupy by nás bolely, kdyby byly zneužity“. Tím se revize rychle zaměří na produkci, data, peníze a tajnosti místo toho, aby se tým utopil v oprávnění k internímu boardu s nápady na trička.
+
+### Dočasný přístup bez věčné výjimky
+
+Dočasný přístup je užitečný a někdy nutný. Problém je, že v týmech často neumírá přirozenou smrtí. Proto potřebuje pevný tvar:
+
+- **Důvod:** konkrétní úkol, ticket, incident nebo migrace.
+- **Rozsah:** systém, role, zákazník nebo datová oblast.
+- **Časový limit:** datum a čas konce, ne „až bude hotovo“.
+- **Schválení:** vlastník systému nebo odpovědný lead.
+- **Audit:** kde bude vidět, co člověk dělal.
+- **Úklid:** kdo přístup odebere a kde to potvrdí.
+
+Příklad dobrého zápisu: „Jana má do pátku 17:00 dočasný support admin pro zákazníka ACME kvůli importu dat z ticketu SUP-184. Schválil Petr. Po importu se ověří audit log a role se odebere.“
+
+Příklad špatného zápisu: „Jana má admin, protože něco s importem.“ To není zápis. To je pozvánka pro budoucí detektivku.
+
+### Servisní účty a API klíče
+
+Lidé nejsou jediní uživatelé. Servisní účty, integrace a API klíče bývají ještě zrádnější, protože se na ně při revizi zapomíná. Každý ne-lidský přístup by měl mít:
+
+- vlastníka v týmu,
+- účel a napojený systém,
+- minimální oprávnění,
+- rotaci nebo plán rotace,
+- místo uložení v bezpečném správci tajností,
+- poznámku, jak poznáš, že už není potřeba.
+
+Nikdy nepoužívej osobní účet člověka jako servisní účet pro produkční integraci. Když člověk odejde, buď mu účet necháš aktivní a porušíš hygienu, nebo ho vypneš a rozbiješ integraci. To je architektonická verze šlápnutí na hrábě.
+
+### Evidence bez personálního spisu
+
+Revize oprávnění nesmí sklouznout do interního dohledu. Cílem není sledovat produktivitu lidí nebo vytvářet profil „kdo kam kliká“. Evidence má být účelová a přiměřená:
+
+- zapisuj změny oprávnění, ne pracovní chování,
+- u auditních logů nastav rozumnou retenci,
+- omez přístup k auditním logům na odpovědné role,
+- nepoužívej revizi přístupů jako náhradu za důvěru a vedení lidí,
+- vysvětli týmu, že smyslem je ochrana zákazníků a firmy, ne mikromanagement.
+
+Privacy-first tým umí říct: „Kontrolujeme oprávnění, protože chráníme data a snižujeme riziko.“ Ne: „Kontrolujeme všechno, protože technicky můžeme.“ Technicky můžeme je nejhorší produktová strategie hned po „uvidíme po releasu“.
+
+### Checklist: revize oprávnění
+
+- [ ] Máme seznam systémů, které drží zákaznická, provozní nebo citlivá interní data.
+- [ ] Každý systém má vlastníka odpovědného za přístupy.
+- [ ] Kritické role kontrolujeme alespoň měsíčně nebo po významné změně týmu.
+- [ ] Dočasné přístupy mají důvod, rozsah, schválení, konec a následný úklid.
+- [ ] Servisní účty nejsou navázané na osobní účty zaměstnanců.
+- [ ] API klíče a tajnosti mají vlastníka, účel a plán rotace.
+- [ ] Neaktivní účty a bývalí externisté jsou odebraní ze všech klíčových systémů.
+- [ ] Support a interní admin přístupy k zákaznickým datům mají audit a jasná pravidla použití.
+- [ ] Revize zapisuje změny oprávnění, ne produktivitu nebo chování lidí.
+- [ ] Nejasné výjimky mají follow-up datum a konkrétního vlastníka.
+
+### Šablona revize oprávnění
+
+```markdown
+## Revize oprávnění: [období / datum]
+
+### Rozsah
+- Systémy:
+- Datové oblasti:
+- Vlastník revize:
+
+### Kritické přístupy
+| Systém | Uživatel / účet | Role | Důvod | Stav |
+|---|---|---|---|---|
+|  |  |  |  | ponechat / odebrat / ověřit |
+
+### Dočasné výjimky
+| Přístup | Důvod | Schválil | Konec | Úklid |
+|---|---|---|---|---|
+|  |  |  |  |  |
+
+### Servisní účty a klíče
+| Účet / klíč | Účel | Vlastník | Poslední rotace | Další krok |
+|---|---|---|---|---|
+|  |  |  |  |  |
+
+### Odebrané přístupy
+- [ ] [kdo/co] — [systém] — [důvod] — [datum]
+
+### Nejasnosti a follow-up
+- [ ] [otázka] — vlastník: [jméno] — termín: [datum]
+
+### Privacy-first kontrola
+- Sbíráme při revizi jen údaje nutné k řízení přístupů?
+- Nezapisujeme zbytečně obsah zákaznických dat?
+- Má auditní log omezený přístup a retenci?
+- Umíme zákazníkovi srozumitelně vysvětlit, kdo může k jeho datům a proč?
+```
+
+> Codyho komentář: Dobrá revize oprávnění není o tom, že všem všechno zakážeš. Je o tom, že každý přístup má smysl, vlastníka a konec. Bez toho se ze systému stane hotelový minibar: nikdo přesně neví, kdo co vzal, ale účet jednou přijde.
+
+
 ## Pracovní log
+- **2026-09-18:** Doplněna příloha EV o pravidelné revizi oprávnění: rozsah kontroly, frekvence podle rizika, dočasné přístupy, servisní účty, privacy-first evidence a praktická šablona.
 - **2026-09-18:** Doplněna příloha EU o rolích a oprávněních v SaaS bez přístupového guláše: návrh podle úkolů, čitelná matice oprávnění, least privilege, kritické akce, oddělení interních a zákaznických rolí, audit log, pravidelný access review, checklist a karta role.
 - **2026-09-18:** Doplněna příloha ET o supportním přístupu k produkčním datům bez interního šmírování: klasifikace situací, admin rozhraní, konkrétní souhlas, omezená impersonace, zákaznický audit log, reprodukce bez živých dat, retence supportních dat, checklist a karta supportního přístupu.
 - **2026-09-18:** Doplněna příloha ES o bezpečnostní hygieně týmu bez paranoie: realistické scénáře selhání, účty a zařízení, krátká školení nad praxí, hranice pro AI nástroje, incidentové hlášení, checklist a bezpečnostní karta.
