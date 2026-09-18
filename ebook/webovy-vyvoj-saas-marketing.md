@@ -25809,7 +25809,157 @@ Nepiš „jsem pryč, odpověď může trvat“. Napiš „běžné produktové 
 - Co doplňujeme do dokumentace:
 
 
+## Příloha ES: Bezpečnostní hygiena týmu bez paranoie a školení pro školení
+
+Bezpečnost v malém SaaS týmu se často pohybuje mezi dvěma karikaturami. Buď se neřeší vůbec, protože „jsme malí a nikoho nezajímáme“, nebo se z ní stane rituální divadlo plné zákazů, které lidé obcházejí, protože jim brání v práci. Ani jedna cesta není dospělý provoz.
+
+Dobrá bezpečnostní hygiena je nudná, opakovatelná a přiměřená riziku. Nezačíná prezentací o kybernetických hrozbách, ale otázkou: jaké chyby by nás opravdu bolely, jak by k nim mohlo dojít a co nastavíme tak, aby běžný člověk nemusel být bezpečnostní ninja každý den od devíti do pěti.
+
+Privacy-first tým má v bezpečnosti výhodu: když sbírá méně dat, má méně věcí, které může ztratit. To ale není omluvenka pro chaos. I malý produkt potřebuje základní pravidla pro hesla, přístupy, zařízení, sdílení souborů, práci s incidenty a bezpečné používání AI nástrojů.
+
+### Začni seznamem reálných selhání
+
+Nejprve si napiš deset scénářů, které jsou pro tvůj tým pravděpodobné. Ne hollywoodský útok v kapuci, ale každodenní provozní realitu:
+
+- někdo pošle export zákaznických dat do špatného vlákna,
+- bývalý dodavatel má stále přístup do nástroje,
+- support zkopíruje citlivá data do AI chatu,
+- účet bez dvoufaktoru převezme útočník,
+- notebook se ztratí ve vlaku,
+- produkční tajemství skončí v repozitáři,
+- zákaznický soubor zůstane ve sdíleném disku bez vlastníka,
+- interní screenshot ukáže osobní údaje při demo hovoru,
+- někdo schválí podezřelou fakturu přes urgenci v chatu,
+- testovací prostředí obsahuje živá data bez důvodu.
+
+U každého scénáře napiš tři věci: jak mu předcházíme, jak ho poznáme a co uděláme první hodinu po zjištění. Tím vznikne bezpečnostní systém, který řeší skutečné riziko, ne abstraktní strašení.
+
+### Hygiena účtů musí být jednodušší než výmluvy
+
+Lidé neporušují bezpečnost jen proto, že jsou nezodpovědní. Často proto, že bezpečný postup je pomalejší než zkratka. Proto nastav pravidla tak, aby byla bezpečná cesta zároveň nejjednodušší.
+
+Minimum pro malý SaaS tým:
+
+- každý používá správce hesel,
+- dvoufaktorové ověření je povinné u e-mailu, repozitářů, hostingu, analytiky, podpory a billing nástrojů,
+- sdílené účty jsou výjimka s vlastníkem a důvodem,
+- admin práva nejsou výchozí stav,
+- přístupy se kontrolují aspoň jednou měsíčně,
+- nové nástroje se nezavádějí bez otázky „jaká data tam potečou?“.
+
+Praktický trik: udělej krátký interní seznam „kritických účtů“. Ne proto, aby vznikla další tabulka pro radost tabulkářů, ale aby tým věděl, kde se kompromitace opravdu počítá. Kritický účet není jen server. Je to i e-mail zakladatele, fakturační systém, DNS, repozitář, zákaznický support a nástroj, který umí exportovat data.
+
+### Zařízení nejsou soukromý ostrov
+
+Remote tým často bere notebook jako osobní prostor. To je lidsky pochopitelné, ale firemní práce na zařízení znamená základní provozní pravidla. Nemusí to být těžký dohled nad každým klikem. Stačí jasná minimální laťka.
+
+Dobré minimum:
+
+- disk je šifrovaný,
+- systém a prohlížeč se aktualizují,
+- obrazovka se zamyká po krátké nečinnosti,
+- pracovní data nejsou rozházená po osobních cloudech,
+- citlivé soubory mají vlastníka a datum smazání,
+- při ztrátě zařízení existuje jednoduchý postup, komu hned napsat.
+
+Privacy-first komentář: interní bezpečnost nemá být záminka pro plošné sledování lidí. Není potřeba logovat každou minutu aktivity, aby tým věděl, že notebook má šifrovaný disk a aktualizovaný systém. Kontroluj stav rizika, ne život člověka.
+
+### Školení má končit změnou chování
+
+Bezpečnostní školení, po kterém lidé jen odkliknou test, je často drahá forma zapomínání. Lepší je krátké opakované cvičení nad reálnými situacemi.
+
+Jednou měsíčně vyber jeden scénář:
+
+- podezřelý e-mail od „zákazníka“ s přílohou,
+- žádost o export dat přes support,
+- faktura s naléhavou změnou bankovního účtu,
+- screenshot s osobními údaji před sdílením,
+- nový AI nástroj, do kterého někdo chce nahrát zákaznický dokument.
+
+Tým během patnácti minut odpoví na otázky: co je riziko, co ověřujeme, komu to eskalujeme, jaká data nesmíme poslat dál a co doplníme do dokumentace. Výstupem není skóre jednotlivce. Výstupem je lepší postup.
+
+### AI nástroje potřebují vlastní hranice
+
+AI asistenti jsou užiteční, ale bezpečnostně zrádní právě tím, že působí jako běžný textový editor. Tým musí mít jednoduché pravidlo, co se do nich smí a nesmí dávat.
+
+Rozumné rozdělení:
+
+- **Volné:** veřejný obsah, anonymizované ukázky, generické nápady, interní text bez zákaznických dat.
+- **Opatrně:** technické chyby bez tajemství, ukázky logů po redakci, návrhy odpovědí bez identifikace zákazníka.
+- **Zakázané bez schválení:** osobní údaje, exporty databází, smlouvy, přístupové tokeny, obchodní tajemství, zdravotní nebo finanční citlivosti.
+
+Když někdo potřebuje AI použít nad citlivým materiálem, nemá improvizovat. Má existovat schválená cesta: anonymizace, interní model, smluvně ošetřený nástroj, nebo ruční práce. Ano, ruční práce pořád existuje. Staré dobré kladivo, jen s menším hype cyklem.
+
+### Incident není ostuda, ticho je ostuda
+
+Lidé musí vědět, že nahlášení chyby je správné chování. Pokud první člověk, který přizná omyl, dostane veřejnou lekci, příště se problém schová déle. Bezpečnostní kultura se pozná podle toho, co se stane po malé chybě.
+
+Nastav krátký interní postup:
+
+- kdo přijímá bezpečnostní hlášení,
+- jak rychle reaguje,
+- co se zapisuje,
+- kdo rozhoduje o komunikaci se zákazníkem,
+- kdy se zapojuje právní nebo privacy kontakt,
+- jak se po incidentu mění systém.
+
+Zápis má být věcný: čas, dopad, dotčená data, okamžitá opatření, další kroky. Nepiš román o pocitech a neukládej zbytečné osobní soudy. I incidentová dokumentace je datová stopa.
+
+### Checklist: bezpečnostní hygiena bez paranoie
+
+- [ ] Máme seznam realistických bezpečnostních scénářů.
+- [ ] Kritické účty mají povinný dvoufaktor a jasného vlastníka.
+- [ ] Sdílené účty jsou výjimka, ne norma.
+- [ ] Přístupy se kontrolují pravidelně a po změnách v týmu.
+- [ ] Zařízení splňují minimální bezpečnostní laťku bez plošného dohledu.
+- [ ] Tým ví, co se smí a nesmí vkládat do AI nástrojů.
+- [ ] Bezpečnostní školení řeší konkrétní scénáře z reality.
+- [ ] Existuje jednoduchá cesta pro nahlášení incidentu nebo podezření.
+- [ ] Incidentové poznámky sbírají fakta, ne osobní soudy.
+- [ ] Po každém bezpečnostním problému vznikne jedna změna systému.
+
+## Bezpečnostní karta: [oblast / scénář]
+
+### Scénář
+
+- Co se může stát:
+- Koho se to týká:
+- Jaká data nebo systémy jsou v riziku:
+
+### Prevence
+
+- Nastavená pravidla:
+- Technická opatření:
+- Kdo je vlastník:
+
+### Detekce
+
+- Jak problém poznáme:
+- Kdo dostane upozornění:
+- Kde hledáme první fakta:
+
+### První hodina
+
+- Koho kontaktovat:
+- Co hned zastavit nebo omezit:
+- Co nezapomenout zaznamenat:
+
+### Privacy-first kontrola
+
+- Jak minimalizujeme dotčená data:
+- Co nemažeme kvůli vyšetření:
+- Co smažeme po uzavření:
+- Jak informujeme dotčené lidi, pokud je potřeba:
+
+### Změna systému
+
+- Co upravíme v nástroji:
+- Co doplníme do dokumentace:
+- Co procvičíme s týmem:
+
+
 ## Pracovní log
+- **2026-09-18:** Doplněna příloha ES o bezpečnostní hygieně týmu bez paranoie: realistické scénáře selhání, účty a zařízení, krátká školení nad praxí, hranice pro AI nástroje, incidentové hlášení, checklist a bezpečnostní karta.
 - **2026-09-18:** Doplněna příloha ER o zastupování během dovolených bez provozní paniky: mapa zastupitelnosti, krátká předávka, dočasné přístupy, dokumentační review, zákaznická komunikace, checklist a karta zastupování.
 - **2026-09-18:** Doplněna příloha EQ o offboardingu lidí v malém SaaS týmu: mapa dopadu, rušení přístupů, předání znalostí, komunikace, privacy-first pravidla, exit rozhovor, review a šablona offboarding karty.
 - **2026-09-18:** Doplněna příloha EP o prvních 90 dnech po nástupu: fáze onboardingu, první týden jako release, výsledková očekávání, check-iny, práce s varovnými signály, privacy-first pravidla, 90denní review, checklist a onboardingová karta.
