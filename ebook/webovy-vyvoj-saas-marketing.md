@@ -25504,7 +25504,169 @@ Pokud spolupráce nepokračuje, i odchod má být profesionální: jasný důvod
 - Další kroky:
 ```
 
+
+## Příloha EQ: Offboarding lidí bez chaosu, hořkosti a zapomenutých přístupů
+
+Odchod člověka z malého SaaS týmu není jen administrativní tečka. Je to test, jestli firma opravdu ví, kde má znalosti, přístupy, odpovědnosti a citlivá data. Když offboarding proběhne špatně, zůstane po něm směs tichých dluhů: neodevzdané kontexty, aktivní účty, nedořešené zákaznické sliby a kolegové, kteří se bojí zeptat, co se vlastně stalo.
+
+Dobrý offboarding má tři cíle:
+
+1. **Bezpečně uzavřít přístupy a odpovědnosti.**
+2. **Zachovat znalosti, které tým potřebuje pro provoz.**
+3. **Odejít férově, bez zbytečného divadla a bez interního šmírování.**
+
+> Codyho komentář: Offboarding není firemní rozchodový e-mail s větou „přejeme hodně úspěchů“. Je to provozní proces. Když ho nemáš, tvůj skutečný systém řízení přístupů je nostalgie a štěstí. Romantické, ale ne moc bezpečné.
+
+### Začni mapou dopadu, ne kalendářovou panikou
+
+První otázka není „kdy odevzdá notebook“, ale „co se po jeho odchodu může rozbít“. U každého odchodu si napiš jednoduchou mapu dopadu:
+
+- **Produkty a služby:** za které části systému měl člověk odpovědnost.
+- **Zákazníci:** u kterých zákazníků držel kontext, vztah nebo rozpracovaný závazek.
+- **Přístupy:** jaké účty, klíče, repozitáře, nástroje a produkční systémy používal.
+- **Znalosti:** co ví jen on nebo ona a tým to potřebuje znát.
+- **Rozhodnutí:** jaké rozpracované návrhy, dohody nebo rizika by mohly zapadnout.
+
+Praktický příklad: odchází vývojář, který spravoval billing. Mapa dopadu neříká jen „odebrat GitHub“. Říká: kdo převezme fakturační integraci, kde je runbook pro selhané platby, kdo má kontakt na podporu platební brány, kde jsou testovací scénáře a které plánované změny se musí přesunout v roadmapě.
+
+### Přístupy ruš podle rizika, ne podle pocitu
+
+Offboarding musí mít jasný seznam přístupů. Ne proto, že lidem nevěříš, ale protože bezpečnost nemá stát na náladě. Rozděl přístupy do tří skupin:
+
+- **Okamžitě při konci spolupráce:** produkce, hosting, databáze, platební systémy, správci identit, e-mailové účty, správci domén, tajné klíče.
+- **Po předání práce:** projektové nástroje, dokumentace, design soubory, support systémy, CRM a interní wiki.
+- **Po uzavření administrativy:** účetní systémy, HR nástroje, výplatní portály a právní dokumenty.
+
+U vysoce citlivých rolí si připrav i rotaci sdílených tajemství. Jestli člověk znal produkční API klíč, nestačí odebrat účet. Klíč se musí otočit. Sdílený účet je v offboardingu vždycky malé přiznání, že někde chybí lepší správa identit.
+
+### Předání znalostí musí být krátké a použitelné
+
+Nenuť odcházejícího člověka psát román „všechno, co jsem kdy dělal“. Vznikne dokument, který nikdo nečte a všichni se tváří, že ano. Lepší je krátké předání podle situací:
+
+- **Když se rozbije X, podívej se do Y a zavolej Z.**
+- **Největší riziko v mojí oblasti je A, protože B.**
+- **Rozpracované věci jsou C, D a E; doporučený další krok je F.**
+- **Dokumentace je tady, ale pozor na zastaralou část G.**
+- **Neviditelné dohody se zákazníky jsou H a I.**
+
+Předání má skončit aktualizací systému, ne jen schůzkou. Pokud se něco řekne na hovoru, ale nedostane se to do issue, wiki, runbooku nebo zákaznické poznámky, tým to za měsíc znovu loví v mlze. A mlha je skvělá v lese, ne v provozu SaaS.
+
+### Komunikace má být věcná a lidská
+
+Interní oznámení odchodu nemusí obsahovat detaily, které týmu nepřísluší. Stačí:
+
+- kdo odchází a kdy,
+- kdo přebírá hlavní odpovědnosti,
+- jak se mění kontaktní body pro zákazníky nebo projekty,
+- kde se řeší otázky k předání,
+- poděkování bez nuceného divadla.
+
+Zákazníkům komunikuj změnu jen tehdy, když se jich reálně dotkne. Pokud odchází account manažer, pošli krátké oznámení s novým kontaktem a potvrzením, že závazky pokračují. Nepiš korporátní mlhu typu „v rámci optimalizace týmu“. Napiš prostě: „Od 1. října bude váš hlavní kontakt Jana. Má předané otevřené body a příští týden se vám ozve s krátkým shrnutím.“
+
+### Privacy-first offboarding chrání obě strany
+
+Při odchodu je lákavé začít sbírat všechno „pro jistotu“: soukromé poznámky, kompletní historii chatu, detaily konfliktů, osobní hodnocení, screenshoty a dojmy. Nedělej z offboardingu archeologii emocí. Sbírej jen to, co má jasný účel.
+
+Dobrá pravidla:
+
+- **Neukládej osobní dojmy bez účelu.** Pokud řešíš výkon nebo konflikt, drž se konkrétních situací, dohod a rozhodnutí.
+- **Odděl pracovní data od soukromí.** Firemní zařízení a účty uzavři podle pravidel, ale neprocházej osobní obsah bez jasného právního a provozního důvodu.
+- **Zkrať retenční dobu náborových a HR poznámek.** Ne všechno musí žít navždy jen proto, že disk je levný.
+- **Minimalizuj přístup k exit poznámkám.** Ne každý manažer potřebuje číst citlivý kontext každého odchodu.
+- **Zákaznická data nepoužívej jako paměťovou pomůcku.** Předání zákazníka patří do CRM nebo support systému v omezeném a věcném rozsahu.
+
+Privacy-first offboarding není o tom, že se nic nezapisuje. Je o tom, že se zapisuje přesně to, co pomáhá kontinuitě a bezpečnosti, ne všechno, co se někomu honí hlavou v posledním týdnu.
+
+### Exit rozhovor má hledat systém, ne viníka
+
+Exit rozhovor je užitečný, pokud není terapeutické divadlo ani výslech. Cílem je najít opakující se tření v systému:
+
+- co člověku nejvíc bránilo dělat dobrou práci,
+- které procesy byly zbytečně těžké,
+- kde tým ztrácel kontext,
+- co by firma měla opravit pro dalšího člověka,
+- jaké riziko odchod odhalil.
+
+Neptej se jen „proč odcházíš“. To často přijde pozdě. Ptej se: „Kdybys měl chránit tým před jedním opakovaným problémem, který by to byl?“ Z takové odpovědi může vzniknout konkrétní změna: lepší onboarding, jasnější vlastnictví, méně přerušení, lepší dokumentace nebo úprava roadmapy.
+
+### Poslední den není konec procesu
+
+Skutečný test offboardingu přijde za dva až čtyři týdny. Udělej krátké review:
+
+- byly všechny kritické přístupy odebrané,
+- převzaté úkoly mají vlastníky,
+- zákazníci neztratili kontinuitu,
+- dokumentace stačila při první reálné situaci,
+- objevily se znalosti, které byly jen v hlavě odcházejícího člověka,
+- tým ví, co se má zlepšit pro příště.
+
+Pokud review odhalí díru, neopravuj jen konkrétní incident. Přidej položku do offboarding checklistu. Proces má růst z reality, ne z HR šablony nalezené ve složce „final_final_v3“.
+
+### Checklist: offboarding bez chaosu
+
+- [ ] Máme mapu dopadu: produkty, zákazníci, přístupy, znalosti a rozpracovaná rozhodnutí.
+- [ ] Kritické přístupy jsou odebrané nebo naplánované k odebrání podle rizika.
+- [ ] Sdílená tajemství a produkční klíče jsou po odchodu rotované, pokud je člověk znal.
+- [ ] Každá předaná oblast má nového vlastníka a jasné „hotovo“.
+- [ ] Důležité znalosti jsou v issue, wiki, runbooku nebo zákaznickém systému, ne jen v nahrávce hovoru.
+- [ ] Interní komunikace je věcná, lidská a neobsahuje citlivé detaily bez důvodu.
+- [ ] Zákazníci dostali nový kontakt, pokud se jich změna týká.
+- [ ] Exit poznámky jsou minimalizované, omezeně přístupné a mají retenční pravidlo.
+- [ ] Po dvou až čtyřech týdnech proběhlo review dopadu.
+
+### Šablona: offboarding karta
+
+## Offboarding: [jméno / role]
+
+### Kontext
+
+- Poslední pracovní den:
+- Typ odchodu:
+- Hlavní oblasti odpovědnosti:
+
+### Mapa dopadu
+
+- Produkty / systémy:
+- Zákazníci / partneři:
+- Rozpracované úkoly:
+- Rozhodnutí a rizika:
+
+### Přístupy
+
+- Kritické účty k odebrání:
+- Klíče a tajemství k rotaci:
+- Nástroje k ponechání do předání:
+- Potvrzení dokončení:
+
+### Předání znalostí
+
+- Runbooky k aktualizaci:
+- Dokumentace k doplnění:
+- Neviditelné dohody:
+- Doporučený nástupce oblasti:
+
+### Komunikace
+
+- Interní oznámení:
+- Zákaznické oznámení:
+- Nový kontaktní bod:
+
+### Privacy-first kontrola
+
+- Jaké osobní údaje ukládáme a proč:
+- Kdo má přístup k exit poznámkám:
+- Kdy se poznámky smažou nebo anonymizují:
+
+### Review po odchodu
+
+- Datum review:
+- Co se rozbilo:
+- Co se zlepšilo:
+- Co přidáváme do checklistu:
+
+
 ## Pracovní log
+- **2026-09-18:** Doplněna příloha EQ o offboardingu lidí v malém SaaS týmu: mapa dopadu, rušení přístupů, předání znalostí, komunikace, privacy-first pravidla, exit rozhovor, review a šablona offboarding karty.
 - **2026-09-18:** Doplněna příloha EP o prvních 90 dnech po nástupu: fáze onboardingu, první týden jako release, výsledková očekávání, check-iny, práce s varovnými signály, privacy-first pravidla, 90denní review, checklist a onboardingová karta.
 
 - **2026-09-18:** Doplněna příloha EO o náboru a onboardingu bez datového přestřelu: role brief, férový inzerát, pracovní vzorek, strukturované hodnocení, minimalizace náborových dat, privacy-first retence, onboarding a karta role.
