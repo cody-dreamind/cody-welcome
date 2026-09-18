@@ -17874,7 +17874,7 @@ Po každé takové změně doplň řádek, datum a vlastníka. Pokud mapa žije 
 - [European Commission: What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en) — shrnutí principů jako účelové omezení, minimalizace, přesnost, omezení uložení a zabezpečení.
 - [EDPB: Data controller or data processor — Data protection guide for small business](https://www.edpb.europa.eu/sme/learn-the-basics/data-controller-or-data-processor_en) — vysvětlení rolí správce a zpracovatele pro malé firmy.
 - [EDPB: Guidelines 07/2020 on the concepts of controller and processor in the GDPR](https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en) — podrobnější vodítka k rolím, smluvním vztahům a odpovědnostem.
-- [EDPB: Do I need a record of processing?](https://www.edpb.europa.eu/node/5350_sk) — stručné vysvětlení záznamů o činnostech zpracování a jejich praktického smyslu.
+- [EDPB: Do I need a record of processing?](https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en) — stručné vysvětlení záznamů o činnostech zpracování a jejich praktického smyslu.
 
 
 ## Příloha CZ: Nákladová mapa SaaS bez panického škrtání a sledování lidí
@@ -25162,7 +25162,189 @@ Tady se zpětná vazba propojuje s provozem firmy. Konflikt není jen mezilidsk�
 - Jak zabráníme opakování:
 ```
 
+## Příloha EO: Nábor a onboarding bez datového přestřelu
+
+Malý SaaS tým často nabírá pozdě: až když zakladatel nestíhá support, vývojář přeskakuje mezi pěti prioritami a marketing je soubor dobrých úmyslů v poznámkách. Pak přijde panika, copy-paste inzerát, deset rozhovorů bez jasných kritérií a nakonec rozhodnutí podle dojmu. To je drahé. Nejen penězi, ale i energií týmu a důvěrou kandidátů.
+
+Dobrý nábor není hon na „rockstara“. Je to produktový proces: víš, jaký problém řešíš, jak poznáš dobrý výsledek, jaká data opravdu potřebuješ a jak člověku po nástupu pomůžeš uspět. Privacy-first přístup tady není brzda. Je to známka profesionality: uchazeč nemusí odevzdat půl života jen proto, že firma neumí formulovat roli.
+
+> Codyho komentář: Náborový formulář, který chce rodinný stav, datum narození, fotku a motivační dopis na juniorní pozici, není „pečlivý výběr“. Je to datový vysavač s kravatou.
+
+### Začni problémem role, ne seznamem přání
+
+Než napíšeš inzerát, pojmenuj práci, kterou má nový člověk převzít. Role není sbírka nástrojů. „Umí React, SQL, SEO, Figma, HubSpot, fakturaci a občas uvaří kafe“ není role, ale zoufalý nákupní seznam. Praktická role má jasný účel, první výsledky a hranice.
+
+Role brief by měl odpovědět:
+
+- Jaký problém týmu bude tato role řešit?
+- Co dnes kvůli chybějící roli stojí, padá nebo se odkládá?
+- Jak poznáme po 30, 60 a 90 dnech, že nábor pomohl?
+- Jaké dovednosti jsou nutné hned a co se dá doučit?
+- S kým bude člověk nejčastěji spolupracovat?
+- Jaká rozhodnutí bude smět dělat samostatně?
+
+Příklad pro B2B SaaS:
+
+- **Špatně:** „Hledáme growth marketéra.“
+- **Lépe:** „Hledáme člověka, který během 90 dní postaví opakovatelný obsahový a distribuční rytmus pro české B2B leady, aby zakladatel nemusel každý týden improvizovat LinkedIn posty a landing page copy.“
+
+Druhá formulace už ukazuje výsledek, kontext a měřitelnost. Kandidát ví, do čeho jde. Tým ví, podle čeho vybírá.
+
+### Inzerát má filtrovat férově
+
+Inzerát není billboard plný buzzwordů. Je to rozhraní mezi firmou a kandidátem. Čím přesnější je, tím méně času spálíš na nevhodných pohovorech. Férový inzerát popisuje práci realisticky: co bude člověk dělat, v jakém rytmu, s jakou mírou autonomie, jaké jsou nepříjemné části a jak vypadá výběrové řízení.
+
+Dobrá struktura:
+
+- **Kontext firmy:** co stavíte, pro koho a v jaké fázi jste.
+- **Účel role:** proč role vzniká právě teď.
+- **První výsledky:** co má být hotové během prvních 90 dní.
+- **Nutné dovednosti:** jen ty, bez kterých role fakt nejde.
+- **Výhodou:** věci navíc, které nejsou skrytým požadavkem.
+- **Spolupráce:** remote/hybrid, časová zóna, meetingový rytmus.
+- **Proces:** kroky, odhad času, kdo bude u rozhovorů.
+- **Datová transparentnost:** jaká data sbíráte, proč a jak dlouho je držíte.
+
+Privacy-first detail: pokud nepotřebuješ fotku, datum narození, adresu bydliště, rodinný stav nebo rodné číslo, neptej se na ně. ÚOOÚ ve své sekci pro zaměstnavatele připomíná, že v českém kontextu lze po uchazeči v souvislosti s jednáním před vznikem pracovního poměru chtít jen údaje bezprostředně související s uzavřením pracovní smlouvy; zmiňuje i omezení údajů typu politické postoje, náboženství, sexuální orientace a další chráněné oblasti. Viz přehled ÚOOÚ: https://uoou.gov.cz/profesional/qa-otazky-a-odpovedi/zamestnavatele
+
+### Výběr opři o pracovní vzorek
+
+Rozhovor odhalí komunikaci, ale často špatně simuluje práci. Kandidát může být skvělý řečník a slabý v doručování. Nebo tichý, ale výborný v řešení problémů. Proto do výběru dej malý pracovní vzorek, který odpovídá realitě role.
+
+Příklady:
+
+- **Product designer:** navrhni zlepšení onboarding kroku podle krátkého zadání a vysvětli trade-offy.
+- **Backend vývojář:** projdi malý návrh API a pojmenuj rizika v datech, výkonu a bezpečnosti.
+- **Marketer:** uprav positioning landing page pro konkrétní segment a napiš distribuční plán.
+- **Support/CS:** odpověz na simulovaný zákaznický problém a navrhni, co z něj dostat do produktu.
+- **Operations:** navrhni runbook pro opakující se ruční proces.
+
+Pravidla férového pracovního vzorku:
+
+- Zadání má být krátké a časově omezené.
+- Nepoužívej reálnou práci zdarma jako náhradu dodavatele.
+- Předem řekni, podle čeho budeš hodnotit.
+- Pokud je úkol delší nebo komerčně použitelný, zaplať ho.
+- Neposílej kandidátovi interní data, která nepotřebuje.
+- Umožni kandidátovi vysvětlit rozhodnutí, ne jen odevzdat výstup.
+
+Cílem není nachytat člověka. Cílem je vidět, jak přemýšlí v podmínkách podobných práci.
+
+### Interview skóruj, jinak vyhraje poslední dojem
+
+Bez struktury vyhrává kandidát, který měl nejlepší energii v posledním callu, podobný humor jako zakladatel nebo nejhlasitějšího interního zastánce. To není výběr. To je sociální loterie. Malý tým nepotřebuje složitý HR systém, ale potřebuje jednoduchou hodnoticí tabulku.
+
+Hodnoticí karta může mít pět oblastí:
+
+- **Schopnost řešit hlavní problém role.**
+- **Kvalita komunikace a práce s nejistotou.**
+- **Samostatnost a schopnost dotahovat věci.**
+- **Spolupráce s týmem a zákaznický kontext.**
+- **Privacy-first a bezpečnostní citlivost tam, kde role pracuje s daty.**
+
+Každou oblast hodnotíš krátce: silný signál, střední signál, slabý signál, bez dat. „Bez dat“ je důležité. Znamená to: nevíme, nebudeme si vymýšlet. Pokud chceš lepší rozhodnutí, doplň otázku nebo pracovní vzorek. Ne psychologii z horoskopu.
+
+### Minimalizuj náborová data
+
+Nábor typicky vytváří víc osobních dat, než si tým uvědomuje: CV, e-maily, poznámky z rozhovorů, pracovní úkoly, reference, platová očekávání, interní komentáře, záznamy z videohovorů. Každý kus dat má mít účel, vlastníka, přístup a retenční dobu.
+
+Praktické nastavení:
+
+- CV a portfolio ukládej jen na místě určeném pro nábor, ne rozházeně po chatech.
+- Poznámky piš k pracovnímu výkonu a roli, ne k osobním dojmům typu „divný vibe“.
+- Nepořizuj nahrávky pohovorů jako výchozí nastavení.
+- Reference ověřuj až u finalistů a s vědomím kandidáta.
+- Po uzavření výběru smaž data kandidátů, které dál nepotřebuješ, nebo si vyžádej jasný souhlas pro talent pool.
+- Omez přístup: celý tým nemusí číst všechna CV a poznámky.
+- Zapiš nábor do evidence zpracování, pokud už takovou evidenci vedeš.
+
+EDPB v praktickém průvodci pro malé organizace připomíná, že pokud chce firma uchovávat CV pro budoucí náborová řízení, má řešit souhlas kandidáta; v přehledu k evidenci zpracování uvádí nábor jako příklad procesu, kde je potřeba vědět, kdo má k datům přístup a zda dochází k předání mimo EHP. Užitečné odkazy: https://www.edpb.europa.eu/sme/find-practical-info/faq_en a https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en
+
+### Onboarding je pokračování náboru
+
+Podepsaná smlouva není konec náboru. Je to začátek doručování slibu. Pokud inzerát slíbil autonomii, ale první měsíc člověk čeká na přístupy a neví, kde je dokumentace, důvěra klesá. Onboarding má mít stejnou kvalitu jako produktový onboarding: rychlý první úspěch, jasný kontext, bezpečné prostředí pro otázky.
+
+Prvních 14 dní:
+
+- připravené přístupy podle role, ne plošný admin všude,
+- uvítací dokument s produktem, zákazníky a rytmem týmu,
+- první malý úkol, který má skutečnou hodnotu,
+- buddy nebo kontaktní člověk pro provozní otázky,
+- mapa systémů: kde je práce, dokumentace, support a rozhodnutí,
+- bezpečnostní a privacy-first minimum: hesla, MFA, data, zákaznické informace,
+- krátká kontrola po prvním týdnu.
+
+Prvních 30 dní:
+
+- společně projít očekávání z role briefu,
+- uzavřít první menší výstup,
+- sepsat otázky a mezery v dokumentaci,
+- dát oboustranný feedback,
+- ověřit, že přístupy odpovídají práci,
+- vyčistit dočasná onboardingová oprávnění,
+- aktualizovat onboarding checklist podle reality.
+
+Onboarding není jen pro nováčka. Je to test interního systému. Když nováček nedokáže pochopit produkt, zákazníka nebo proces, možná není problém v něm. Možná máte znalosti zamčené v hlavách zakladatelů.
+
+### Checklist: nábor bez datového přestřelu
+
+- Má role jasný problém a 90denní výsledky?
+- Oddělili jsme nutné dovednosti od přání?
+- Inzerát popisuje realitu práce, ne jen firemní poezii?
+- Ví kandidát předem kroky výběrového řízení?
+- Ptáme se jen na údaje související s rolí a smluvním jednáním?
+- Má pracovní vzorek rozumný rozsah a jasná kritéria?
+- Hodnotíme strukturovaně, ne podle posledního dojmu?
+- Ukládáme poznámky k práci, ne osobní soudy?
+- Máme retenční pravidlo pro CV, úkoly a pohovorové poznámky?
+- Má onboarding připravené přístupy, první úkol a bezpečnostní minimum?
+- Kontrolujeme po nástupu, jestli jsme splnili sliby z náboru?
+
+### Šablona: karta role a onboardingu
+
+```markdown
+## Karta role: [název role]
+
+### Proč role vzniká
+- Problém týmu:
+- Co se dnes kvůli tomu odkládá nebo kazí:
+- Proč teď:
+
+### Výsledky do 90 dní
+- 30 dní:
+- 60 dní:
+- 90 dní:
+
+### Nutné dovednosti
+- Bez čeho role nejde:
+- Co se dá doučit:
+- Co je pouze výhoda:
+
+### Výběrový proces
+- Kroky:
+- Pracovní vzorek:
+- Hodnoticí kritéria:
+- Kdo rozhoduje:
+
+### Privacy-first nábor
+- Jaká data sbíráme:
+- Proč je potřebujeme:
+- Kde jsou uložená:
+- Kdo k nim má přístup:
+- Kdy je smažeme:
+
+### Onboarding
+- Přístupy před nástupem:
+- První užitečný úkol:
+- Buddy / kontaktní osoba:
+- Bezpečnostní minimum:
+- Kontrola po 7 dnech:
+- Kontrola po 30 dnech:
+```
+
 ## Pracovní log
+
+- **2026-09-18:** Doplněna příloha EO o náboru a onboardingu bez datového přestřelu: role brief, férový inzerát, pracovní vzorek, strukturované hodnocení, minimalizace náborových dat, privacy-first retence, onboarding a karta role.
 
 - **2026-09-18:** Doplněna příloha EN o zpětné vazbě a konfliktech bez pasivní agrese: konkrétní feedback, model situace–chování–dopad–dohoda, nízkoprahové řešení konfliktů, role manažera, privacy-first poznámky, checklist a feedback karta.
 
