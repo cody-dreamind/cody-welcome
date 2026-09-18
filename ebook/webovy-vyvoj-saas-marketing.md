@@ -25342,7 +25342,168 @@ Onboarding není jen pro nováčka. Je to test interního systému. Když nová�
 - Kontrola po 30 dnech:
 ```
 
+
+## Příloha EP: Prvních 90 dní po nástupu bez chaosu, mikromanagementu a datového hladu
+
+Nábor nekončí podpisem smlouvy ani prvním dnem v kanceláři. U malého SaaS týmu se nový člověk často potká s produktem, zákazníky, interními pravidly, technickým dluhem i nepsanými zvyky během pár dní. Když onboarding necháš na „nějak se rozkouká“, vznikne drahý chaos: nováček se bojí ptát, tým vysvětluje stejné věci dokola a manažer po měsíci netuší, jestli problém je v člověku, roli nebo špatně připraveném systému.
+
+Dobře vedených prvních 90 dní má jednoduchý cíl: udělat z nejistého nástupu řízený přechod k samostatnému dopadu. Ne kontrolovat každý krok. Ne vyrábět personální složku tlustou jako manuál k jadernému reaktoru. Ale vytvořit jasné očekávání, bezpečný kontext a několik konkrétních výsledků, podle kterých všichni poznají, že role funguje.
+
+> Codyho komentář: První tři měsíce nejsou reality show „přežiješ, nebo vypadneš“. Jsou to společný debug role, týmu a systému. A ano, občas bug není v nováčkovi, ale v onboarding dokumentaci napsané stylem „však se zeptej Pepy“.
+
+### Rozděl 90 dní na tři fáze
+
+Jedna chyba je chtít po novém člověku všechno hned: pochopit produkt, dodat hodnotu, navrhnout změny, zapadnout do kultury a ještě se tvářit, že je to celé intuitivní. Lepší je rozdělit první období na tři fáze:
+
+- **Dny 1–30: orientace a bezpečný první výstup.** Nový člověk chápe produkt, tým, zákazníky, hlavní pravidla a dodá jeden malý, kontrolovaný výsledek.
+- **Dny 31–60: samostatnější práce v jasných mantinelech.** Přebírá menší oblast, řeší reálné úkoly, učí se rozhodovací pravidla a začíná vidět slabá místa systému.
+- **Dny 61–90: měřitelný dopad a dohoda o dalším směru.** Má vlastní odpovědnost, přináší návrhy z praxe a tým umí říct, co od role čeká dál.
+
+Tahle struktura pomáhá oběma stranám. Nováček ví, co je normální tempo. Tým ví, kdy podporovat, kdy nechat prostor a kdy řešit varovné signály.
+
+### První týden připrav jako produktový release
+
+První týden je onboardingový release. Má mít vlastníka, checklist, hotové prostředí a jasný výsledek. Pokud první den začíná větou „počkej, já ti ještě vytvořím účet“, tým právě poslal signál, že procesy jsou dekorace.
+
+Před nástupem připrav:
+
+- přístupy jen k systémům, které člověk opravdu potřebuje v prvních týdnech,
+- krátkou mapu produktu, zákazníků a aktuálních priorit,
+- seznam lidí, se kterými se má potkat, a proč,
+- první malý úkol s nízkým rizikem a jasnou definicí hotovo,
+- místo, kde najde dokumentaci, rozhodnutí a runbooky,
+- domluvený rytmus check-inů.
+
+První úkol nemá být test odvahy. Má ukázat, jak tým pracuje. U vývojáře to může být drobná oprava v dokumentaci, bezpečný bugfix nebo rozšíření testu. U marketéra aktualizace jedné obsahové šablony. U support role zpracování cvičného scénáře a návrh odpovědi.
+
+### Definuj očekávání jako výsledky, ne jako dojmy
+
+„Chci, aby byl proaktivní“ je slabé očekávání. Co přesně má být vidět? Že si připraví otázky před check-inem? Že po třech týdnech samostatně zpracuje běžný support ticket? Že po měsíci navrhne zlepšení onboarding dokumentace? Výsledky musí být pozorovatelné.
+
+Příklad očekávání pro produktového vývojáře:
+
+- **Do 30 dní:** lokálně spustí projekt, pochopí release flow, dodá malou změnu s review a aktualizuje související dokumentaci.
+- **Do 60 dní:** samostatně převezme menší zákaznický problém od diagnostiky po nasazení v mantinelech týmu.
+- **Do 90 dní:** vlastní jednu malou oblast produktu, zná její rizika a navrhne jednu zlepšovací iteraci.
+
+Příklad očekávání pro marketingovou roli:
+
+- **Do 30 dní:** pochopí positioning, publikační kanály a připraví jeden článek nebo landing page draft podle existující šablony.
+- **Do 60 dní:** vyhodnotí výkon obsahu podle dohodnutých privacy-first metrik a navrhne další téma.
+- **Do 90 dní:** vede jeden malý obsahový cyklus od briefu po distribuci a retrospektivu.
+
+### Check-in není výslech
+
+Pravidelný check-in má snížit nejistotu, ne vyrábět stres. V prvním měsíci stačí krátký týdenní rytmus. Otázky drž praktické:
+
+- Co je teď jasné?
+- Co je pořád mlhavé?
+- Kde tě blokuje systém, přístup nebo nejasné rozhodnutí?
+- Co se povedlo dodat?
+- Co potřebuješ ode mě nebo od týmu příští týden?
+
+Manažer má zapisovat hlavně dohody, překážky a změny systému. Ne osobnostní soudy. Věta „Petr působí nejistě“ je skoro k ničemu. Lepší zápis: „Petr neměl přístup k testovacím datům, kvůli tomu nemohl dokončit cvičný import; do pátku řeší Jana.“
+
+### Pracuj s varovnými signály brzy a konkrétně
+
+Když se něco nedaří, nečekej do konce zkušební doby. Tři týdny mlčení a pak dramatický meeting jsou manažerský ekvivalent rozbitého alarmu. Varovný signál pojmenuj konkrétně, s dopadem a dalším krokem.
+
+Špatně:
+
+- „Nějak to není ono.“
+- „Čekali jsme větší senioritu.“
+- „Měl bys víc zabrat.“
+
+Lépe:
+
+- „U posledních dvou úkolů chyběla kontrola edge casů, takže review trvalo déle. Tento týden spolu projdeme testovací checklist a další úkol předáš s vyplněnou kontrolou.“
+- „Na demo přípravě nebyl jasný další krok pro zákazníka. U dalšího dema použijeme follow-up šablonu a pošleš mi draft před odesláním.“
+
+Cílem není člověka nachytat. Cílem je rychle zjistit, jestli jde o chybějící kontext, špatně nastavenou roli, nedostatečnou podporu, nebo skutečný nesoulad.
+
+### Privacy-first pravidla pro zkušební dobu
+
+Onboarding a hodnocení práce vytváří citlivý interní kontext. Nepotřebuješ sledovat každý klik, screenshoty obrazovky ani žebříček „aktivních minut“. U malého SaaS týmu je důvěra produktivnější než dohledové divadlo.
+
+Drž se těchto pravidel:
+
+- Sbírej jen pracovní data potřebná pro vedení role, bezpečnost a splnění zákonných povinností.
+- Nezaváděj monitoring lidí jako náhradu za jasné očekávání a pravidelné vedení.
+- Zápisy z check-inů piš věcně: dohody, překážky, výsledky, další kroky.
+- Přístupy přiděluj postupně podle fáze onboardingu a role.
+- Po skončení zkušební doby ukliď dočasné přístupy, cvičná data a pracovní poznámky, které už nemají legitimní účel.
+- Citlivé personální poznámky drž v omezeném systému, ne v náhodném sdíleném dokumentu.
+
+Privacy-first tady není jen právní hygiena. Je to i kulturní signál: hodnotíme práci a výsledky, ne vyrábíme interní panoptikum.
+
+### Devadesátý den musí skončit rozhodnutím
+
+Na konci 90 dní neříkej jen „tak pokračujeme“. Udělej krátké review a uzavři tři věci:
+
+1. **Co člověk dodal a naučil se.** Konkrétní výsledky, ne dojmy.
+2. **Co se musí změnit v systému.** Dokumentace, přístupy, očekávání, procesy, role.
+3. **Jak vypadá další období.** Odpovědnosti, cíle, rytmus spolupráce a případná rozvojová oblast.
+
+Pokud spolupráce nepokračuje, i odchod má být profesionální: jasný důvod, bezpečné odebrání přístupů, export nebo předání práce, férová komunikace týmu a respekt k osobním datům. Malý tým si nemůže dovolit toxické konce. Ty se vrací jako bumerang, jen s horším PR.
+
+### Checklist: prvních 90 dní bez chaosu
+
+- [ ] Role má do 90 dní definované konkrétní výsledky.
+- [ ] První týden má vlastníka, plán a malý bezpečný výstup.
+- [ ] Přístupy jsou připravené před nástupem a omezené na potřebný rozsah.
+- [ ] Nový člověk ví, kde najde dokumentaci, rozhodnutí a pravidla týmu.
+- [ ] Check-iny sledují překážky, dohody a výsledky, ne dojmy o osobnosti.
+- [ ] Varovné signály se řeší brzy, konkrétně a s dalším krokem.
+- [ ] Dočasné přístupy a cvičná data se po onboardingu uklidí.
+- [ ] Devadesátý den končí jasnou dohodou o dalším směru.
+
+### Šablona: 90denní onboarding karta
+
+```markdown
+## 90denní onboarding: [role / jméno]
+
+### Účel role
+- Proč role vznikla:
+- Jaký problém má řešit:
+- Kdo je vlastník onboardingu:
+
+### Výsledky do 30 dní
+- První bezpečný výstup:
+- Klíčové znalosti:
+- Nutné přístupy:
+- První zpětná vazba:
+
+### Výsledky do 60 dní
+- Samostatná oblast nebo typ úkolu:
+- Očekávaný pracovní rytmus:
+- Nejčastější rizika:
+- Podpora týmu:
+
+### Výsledky do 90 dní
+- Měřitelný dopad:
+- Převzatá odpovědnost:
+- Návrh zlepšení systému:
+- Dohoda pro další období:
+
+### Check-in rytmus
+- Týdenní otázky:
+- Kde se zapisují dohody:
+- Kdo řeší blokery:
+
+### Privacy-first kontrola
+- Jaká osobní nebo pracovní data sbíráme:
+- Kdo k nim má přístup:
+- Kdy mažeme dočasné poznámky a cvičná data:
+- Jaké přístupy se po 90 dnech revidují:
+
+### Rozhodnutí po 90 dnech
+- Pokračujeme / upravujeme roli / ukončujeme spolupráci:
+- Důvod:
+- Další kroky:
+```
+
 ## Pracovní log
+- **2026-09-18:** Doplněna příloha EP o prvních 90 dnech po nástupu: fáze onboardingu, první týden jako release, výsledková očekávání, check-iny, práce s varovnými signály, privacy-first pravidla, 90denní review, checklist a onboardingová karta.
 
 - **2026-09-18:** Doplněna příloha EO o náboru a onboardingu bez datového přestřelu: role brief, férový inzerát, pracovní vzorek, strukturované hodnocení, minimalizace náborových dat, privacy-first retence, onboarding a karta role.
 
