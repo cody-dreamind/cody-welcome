@@ -26607,7 +26607,170 @@ Privacy-first provoz tady není jen právní téma. Je to provozní hygiena: mé
 - Je použití popsané v interní datové mapě nebo vendor kartě:
 
 
+## Příloha EX: Reakce na bezpečnostní incident bez paniky, mlžení a právního freestyle
+
+Bezpečnostní incident není jen „něco spadlo“. U SaaS produktu může znamenat chybu v oprávnění, omylem zveřejněný export, uniklý API klíč, podezřelé přihlášení administrátora, špatně nastavený bucket, phishing v týmu nebo deploy, který poslal zákaznická data na špatné místo. Nejhorší reakce malého týmu je kombinace chaosu, hrdinství a ticha. Tedy přesně ta směs, ze které se rodí legendární věta: „My jsme mysleli, že to bude v pohodě.“ Nebude. Internet si pamatuje.
+
+Cílem incident procesu není mít korporátní krizový bunkr. Cílem je rychle zjistit, co se stalo, zastavit škodu, uchovat důkazy, rozhodnout o povinnostech, srozumitelně komunikovat a po incidentu zlepšit systém. Privacy-first přístup tady znamená dvě věci: chránit lidi, jejichž data mohla být dotčená, a zároveň nesbírat při vyšetřování víc interních a osobních dat, než je nutné.
+
+### Incident nejdřív klasifikuj
+
+První otázka není „kdo za to může“. První otázka je: **co je ohrožené a jak rychle to musíme zastavit**.
+
+Použij jednoduchou klasifikaci:
+
+- **Technický incident bez dat:** výpadek služby, chyba deploye, problém výkonu, nedostupnost integrace.
+- **Bezpečnostní incident bez potvrzeného přístupu k osobním datům:** pokus o útok, podezřelé přihlášení, uniklý token s omezenými právy, malware na zařízení bez zákaznických dat.
+- **Podezření na porušení zabezpečení osobních údajů:** možný neoprávněný přístup, ztráta, změna, smazání nebo zpřístupnění osobních dat.
+- **Potvrzené porušení zabezpečení osobních údajů:** existuje rozumná jistota, že osobní data byla kompromitována.
+- **Kritický incident:** aktivní útok, kompromitovaný produkční účet, únik citlivých dat, dopad na více zákazníků nebo riziko pro práva a svobody lidí.
+
+U GDPR incidentů počítej čas od chvíle, kdy máš rozumnou míru jistoty, že bezpečnostní incident vedl ke kompromitaci osobních údajů. ÚOOÚ uvádí, že správce má porušení zabezpečení osobních údajů ohlásit bez zbytečného odkladu a pokud možno do 72 hodin od okamžiku, kdy se o něm dozvěděl, pokud není nepravděpodobné, že by mělo za následek riziko pro práva a svobody fyzických osob: https://uoou.gov.cz/profesional/poruseni-zabezpeceni-osobnich-udaju. EDPB stejnou logiku shrnuje pro malé firmy v průvodci k data breaches: https://www.edpb.europa.eu/sme/assess-the-risks/data-breaches_en.
+
+> Codyho komentář: 72 hodin není čas na přemýšlení, jestli incident pojmenujeme „nestandardní provozní okolnost“. Je to čas na zjištění faktů, omezení škody a rozhodnutí, jestli ohlašovat.
+
+### První hodina: zastav krvácení
+
+V první hodině se nepiše postmortem ani nepronáší velké projevy. Dělají se malé, tvrdé kroky:
+
+- **Urči incident ownera.** Jeden člověk drží časovou osu, rozhodnutí a další kroky.
+- **Zastav aktivní škodu.** Vypni kompromitovaný klíč, odpoj integraci, zablokuj účet, rollbackni deploy, zavři veřejný přístup.
+- **Chraň důkazy.** Nečisti logy, nemaž podezřelé účty bez záznamu, nepiš si poznámky jen do chatu.
+- **Omez přístup.** Do vyšetřování patří jen lidé, kteří opravdu musí pomoci.
+- **Zapiš čas.** Kdy signál přišel, kdo ho viděl, kdy vzniklo podezření, kdy byla potvrzena kompromitace.
+- **Rozděl komunikaci.** Interní technický kanál, rozhodovací kanál a případná zákaznická komunikace nemají být jedna zmatená nudle.
+
+První hodina má vyprodukovat krátký stav:
+
+- Co víme jistě:
+- Co je pravděpodobné:
+- Co zatím nevíme:
+- Co už je zastavené:
+- Co běží dál:
+- Jaký je nejbližší deadline pro další rozhodnutí:
+
+### Rozhodni, zda jde o osobní údaje
+
+Ne každý bezpečnostní incident je GDPR breach. Ale u SaaS produktů je osobní údaj často blíž, než se zdá: e-mail, jméno, IP adresa v logu, identifikátor účtu, fakturační údaje, support ticket, obsah zákaznického exportu nebo metadata o používání služby.
+
+Praktické otázky:
+
+- Dotýká se incident dat, podle kterých lze přímo nebo nepřímo identifikovat člověka?
+- Jde o zákaznická data, interní HR data, support komunikaci, billing, logy nebo analytiku?
+- Byla data zpřístupněna neoprávněné osobě, ztracena, změněna, smazána nebo dočasně nedostupná?
+- Je dopad jen technický, nebo může poškodit práva a svobody lidí?
+- Jsme správce, zpracovatel, nebo obojí v různých částech produktu?
+
+Pokud jsi zpracovatel pro zákazníka, musíš správce informovat bez zbytečného odkladu. EDPB v pokynech k ohlašování incidentů připomíná, že zpracovatel má správce upozornit rychle a doplňovat informace postupně, aby správce mohl splnit vlastní lhůty: https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en.
+
+### Ohlášení není přiznání viny
+
+Malé týmy se někdy bojí ohlášení, protože ho vnímají jako veřejné přiznání selhání. Ve skutečnosti je to součást odpovědného provozu. ÚOOÚ zároveň uvádí, že při posouzení je důležité, jaká bezpečnostní opatření správce měl před incidentem a jaká nápravná opatření přijal bezprostředně po zjištění porušení: https://uoou.gov.cz/profesional/poruseni-zabezpeceni-osobnich-udaju.
+
+Do rozhodnutí si zapiš:
+
+- zda jde o porušení zabezpečení osobních údajů,
+- zda je pravděpodobné riziko pro práva a svobody lidí,
+- zda je pravděpodobné vysoké riziko a je potřeba komunikovat i dotčeným osobám,
+- jaké údaje a kategorie osob jsou dotčené,
+- kolika lidí se incident přibližně týká,
+- jaká opatření už byla přijata,
+- kdo rozhodnutí schválil a kdy.
+
+Když nemáš všechny informace, nečekej pasivně na dokonalost. Zapiš známý stav, otevřené otázky a plán doplnění. ÚOOÚ má pro ohlášení dostupný formulář: https://uoou.gov.cz/ohlaseni-poruseni-zabezpeceni-osobnich-udaju-dle-gdpr. Pokud ohlášení pošleš později než do 72 hodin, musíš vysvětlit důvody zpoždění.
+
+### Komunikuj věcně a bez marketingové mlhy
+
+Incidentová komunikace má být krátká, konkrétní a užitečná. Nepiš „naše systémy mohly být ovlivněny třetí stranou“. Napiš, co se stalo, koho se to týká, co tým udělal, co má udělat zákazník a kdy přijde další update.
+
+Dobrá zpráva zákazníkovi má strukturu:
+
+- **Co se stalo:** stručný popis bez spekulací.
+- **Koho se to týká:** dotčené účty, období, typ dat.
+- **Co jsme udělali:** zastavení přístupu, rotace klíčů, oprava chyby, kontrola logů.
+- **Co doporučujeme:** změna hesla, kontrola přístupů, opatrnost vůči phishingu, kontakt na podporu.
+- **Co bude dál:** další update, postmortem, dlouhodobé opatření.
+- **Kontakt:** jedna adresa nebo kanál pro dotazy.
+
+Interně platí podobné pravidlo: žádné hledání viníka v prvních hodinách, žádné screenshoty osobních dat do chatu, žádné kopírování exportů do náhodných nástrojů. Pokud potřebuješ pracovat s důkazem, ulož ho řízeně, popiš účel, omez přístup a nastav retenci.
+
+### Postmortem má zlepšit systém, ne vyrobit oběť
+
+Po stabilizaci udělej postmortem do 5 pracovních dnů. Krátké, konkrétní a veřejně použitelné aspoň v interní podobě. Cílem není najít člověka, který „klikl špatně“. Cílem je najít systémové díry: chybějící limit, špatné oprávnění, nejasný runbook, ruční krok bez kontroly, přístup bez expirace, alert bez vlastníka.
+
+Postmortem má obsahovat:
+
+- časovou osu,
+- dopad na zákazníky a data,
+- detekční signál,
+- kořenové příčiny,
+- co fungovalo dobře,
+- co nefungovalo,
+- konkrétní preventivní úkoly s vlastníkem a termínem,
+- rozhodnutí o aktualizaci dokumentace, testů, monitoringu a školení.
+
+Privacy-first postmortem neobsahuje zbytečné osobní detaily. Pokud někdo udělal chybu, řeší se proces: proč byla chyba možná, proč nebyla zachycena a jak snížit šanci opakování.
+
+### Checklist: incident bez paniky
+
+- Máme incident ownera a časovou osu.
+- Zastavili jsme aktivní škodu nebo máme jasný containment plán.
+- Uchovali jsme relevantní logy a důkazy bez zbytečného šíření dat.
+- Víme, zda incident zasahuje osobní údaje.
+- Víme, zda vystupujeme jako správce nebo zpracovatel.
+- Posoudili jsme riziko pro práva a svobody lidí.
+- Rozhodli jsme o ohlášení ÚOOÚ, informování správce nebo informování dotčených osob.
+- Máme zákaznickou komunikaci bez mlžení a bez spekulací.
+- Rotovali jsme dotčené klíče, hesla a tokeny.
+- Naplánovali jsme postmortem a preventivní opatření.
+
+### Šablona: incident karta
+
+## Incident: [název]
+
+### Základ
+
+- Datum a čas prvního signálu:
+- Incident owner:
+- Zasažená služba:
+- Stav: otevřeno / stabilizováno / uzavřeno
+- Závažnost:
+
+### Co víme
+
+- Potvrzená fakta:
+- Pravděpodobné příčiny:
+- Otevřené otázky:
+- Dotčené systémy:
+
+### Data a privacy
+
+- Dotčené osobní údaje:
+- Kategorie subjektů údajů:
+- Přibližný počet osob:
+- Správce / zpracovatel:
+- Riziko pro práva a svobody:
+- Rozhodnutí o ohlášení:
+
+### Opatření
+
+- Okamžité zastavení škody:
+- Rotované klíče nebo hesla:
+- Změny oprávnění:
+- Komunikace zákazníkům:
+- Komunikace úřadu nebo správci:
+
+### Follow-up
+
+- Postmortem datum:
+- Preventivní úkoly:
+- Vlastníci:
+- Termíny:
+- Aktualizované runbooky:
+
+
 ## Pracovní log
+- **2026-09-18:** Doplněna příloha EX o reakci na bezpečnostní incident bez paniky: klasifikace incidentů, první hodina, posouzení osobních údajů, GDPR ohlašování podle ÚOOÚ/EDPB, věcná komunikace, postmortem, checklist a incident karta.
 - **2026-09-18:** Doplněna příloha EW o správě tajemství a API klíčů: klasifikace secrets, zdroj pravdy, oddělení prostředí, rotace, CI/CD logy, privacy-first minimalizace a šablona karty tajemství.
 - **2026-09-18:** Doplněna příloha EV o pravidelné revizi oprávnění: rozsah kontroly, frekvence podle rizika, dočasné přístupy, servisní účty, privacy-first evidence a praktická šablona.
 - **2026-09-18:** Doplněna příloha EU o rolích a oprávněních v SaaS bez přístupového guláše: návrh podle úkolů, čitelná matice oprávnění, least privilege, kritické akce, oddělení interních a zákaznických rolí, audit log, pravidelný access review, checklist a karta role.
