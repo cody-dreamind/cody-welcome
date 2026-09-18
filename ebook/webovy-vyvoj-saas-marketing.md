@@ -24703,7 +24703,160 @@ Po testu rozhodni: ponechat, upravit, rozšířit nebo smazat. Smazání automat
 - Datum další revize:
 ```
 
+## Příloha EL: Měření týmové práce bez interního dohledu a metrikového cirkusu
+
+Jakmile malý SaaS tým začne růst, objeví se pokušení všechno měřit. Počet commitů, počet ticketů, rychlost odpovědí, čas v nástroji, počet komentářů, počet meetingů, počet „aktivních“ lidí. Vypadá to vědecky. Ve skutečnosti to často jen přesune nejistotu manažera do tabulky a tým naučí hrát metrikovou hru.
+
+Dobré měření týmové práce nemá dokazovat, že lidé pracují. Má ukázat, kde se práce zasekává, kde vzniká riziko a kde tým potřebuje lepší systém. Pokud metrika slouží hlavně k porovnávání jednotlivců, sledování aktivity nebo výrobě tlaku, je to dohled s hezčím dashboardem. A dohled není produktivita. Je to jen drahý způsob, jak lidem říct, že jim nevěříš.
+
+> Codyho komentář: Počet zpráv ve Slacku není známka výkonu. Je to často jen měření hluku. Kdyby šlo produktivitu měřit podle počtu notifikací, nejvýkonnější člen týmu by byl bot, který každé ráno napíše „friendly reminder“ a všichni ho tajně nenávidí.
+
+### Měř systém, ne osobnost
+
+První pravidlo: týmové metriky mají popisovat tok práce, ne hodnotu člověka. Člověk není ticket factory. Když někdo vyřeší jeden složitý problém, může mít menší počet uzavřených úkolů než člověk, který opraví deset překlepů. Bez kontextu je číslo jen sebevědomý nesmysl.
+
+Lepší otázky pro měření:
+
+- Kde práce čeká nejdéle?
+- Kolik věcí je rozpracovaných najednou?
+- Kolik práce se vrací kvůli nejasnému zadání?
+- Kolik rozhodnutí nemá vlastníka?
+- Kolik incidentů vzniklo opakováním stejné chyby?
+- Kolik support dotazů ukazuje na problém v produktu nebo dokumentaci?
+- Kolik automatizací, pravidel nebo procesů už nikdo nereviduje?
+
+Tahle čísla neříkají „Pepa je pomalý“. Říkají „proces má úzké hrdlo“, „zadání je měkké“, „předání nefunguje“ nebo „tým má moc otevřených front“. To je užitečné. Tým s tím může něco dělat bez hledání viníka.
+
+### Vyber jen pár metrik pro rozhodnutí
+
+Metrika má mít adresáta a rozhodnutí. Pokud nevíš, kdo podle ní co změní, pravděpodobně ji nepotřebuješ. Dashboard, na který se všichni jednou týdně podívají a nikdo podle něj nejedná, je digitální akvárium. Hezké, uklidňující, zbytečné.
+
+Pro malý tým stačí začít pěti oblastmi:
+
+- **Tok práce:** kolik položek je ve stavu „čeká“, „blokováno“ nebo „review“.
+- **Kvalita zadání:** kolik úkolů se vrací pro doplnění kontextu.
+- **Spolehlivost:** kolik změn způsobilo incident, regresi nebo support špičku.
+- **Znalostní dluh:** kolik kritických oblastí má jen jednoho člověka, který jim rozumí.
+- **Komunikační zátěž:** kolik rozhodnutí se řeší v chatu místo v trvalé rozhodovací stopě.
+
+Každá metrika má vést k akci. Když roste počet blokovaných úkolů, tým nezakládá výkonnostní pohovor. Hledá blokery: chybí rozhodnutí, čeká se na zákazníka, není jasný vlastník, testovací prostředí nefunguje, review je přetížené. Měření má otevřít problém, ne zavřít diskusi.
+
+### Nedělej žebříčky lidí
+
+Žebříčky jednotlivců jsou lákavé, protože vypadají jednoduše. Kdo má nejvíc uzavřených ticketů? Kdo odpověděl nejrychleji? Kdo udělal nejvíc review? Jenže jednoduché měření často vyrábí jednoduché chování: lidé si vybírají menší úkoly, komentují pro počet, řeší rychlé věci místo důležitých a vyhýbají se neviditelné práci.
+
+V malém SaaS týmu je spousta hodnotné práce nepočitatelná na kusy:
+
+- vyjasnění problému před vývojem,
+- uklidnění zákazníka při incidentu,
+- zjednodušení scope,
+- mentoring kolegy,
+- prevence špatného rozhodnutí,
+- odstranění zbytečného procesu,
+- zlepšení dokumentace tak, že se na ni nikdo nemusí ptát.
+
+Když měříš jen viditelné výstupy, tým začne zanedbávat práci, která drží produkt pohromadě. Proto používej agregované týmové metriky a osobní rozvoj řeš kvalitativně: pravidelným 1:1, konkrétním feedbackem, ukázkami práce a dohodou na očekáváních.
+
+### Privacy-first pravidla pro interní data
+
+Interní metriky jsou taky data o lidech. Nejsou automaticky nevinné jen proto, že se týkají zaměstnanců nebo spolupracovníků. Pokud měříš práci, měříš chování, rytmus, komunikaci a někdy i nepřímo zdraví týmu. S tím se zachází opatrně.
+
+Praktická pravidla:
+
+- Sbírej jen data, která potřebuješ pro konkrétní rozhodnutí týmu.
+- Preferuj agregované pohledy za tým, projekt nebo workflow.
+- Nezaváděj skryté sledování aktivity v nástrojích.
+- Jasně řekni, co se měří, proč a kdo k tomu má přístup.
+- Nepoužívej interní metriky pro překvapivé hodnocení lidí.
+- Nastav retenci: stará provozní data nemají žít věčně.
+- Odděl provozní signály od osobních poznámek z 1:1.
+- U citlivých témat používej ruční syntézu místo exportu surových dat.
+
+Příklad: místo sledování, kdo přesně kdy odpověděl v chatu, může tým jednou týdně zhodnotit počet rozhodnutí, která zůstala viset bez vlastníka, a počet témat, která se musela přesunout z chatu do rozhodovací karty. To chrání lidi i práci.
+
+### Kombinuj čísla s příběhem
+
+Číslo ukáže, že se něco děje. Příběh vysvětlí proč. Když se prodlužuje review, může to znamenat přetížení seniorů, příliš velké pull requesty, nejasná kritéria kvality, chybějící testy nebo prostě náročnější fázi produktu. Bez rozhovoru uděláš špatné rozhodnutí s velkou sebedůvěrou. To je oblíbený manažerský sport, ale nedoporučuju.
+
+Každý týden si k metrikám napiš krátkou interpretaci:
+
+- Co se zlepšilo?
+- Co se zhoršilo?
+- Co je jen jednorázový výkyv?
+- Jaký kontext číslo nevysvětluje?
+- Jaké rozhodnutí z toho plyne?
+- Co zkusíme změnit do příštího týdne?
+
+Tím se z dashboardu stane pracovní nástroj. Ne nástěnka, u které se tým tváří vážně a pak jde dělat úplně to samé.
+
+### Zaveď týmový health review
+
+Jednou za dva týdny udělej krátké health review. Ne retrospektivu na všechno. Jen kontrolu, jestli systém práce drží. Stačí 30 minut a tři vstupy: pár agregovaných metrik, seznam blokátorů a jeden kvalitativní signál od týmu.
+
+Agenda může vypadat takto:
+
+1. **Tok práce:** co čeká, co je blokované a proč.
+2. **Kvalita vstupů:** které úkoly měly slabé zadání.
+3. **Zátěž týmu:** kde vzniká přetížení nebo rušení.
+4. **Rizika:** co by mohlo způsobit incident, zpoždění nebo ztrátu znalosti.
+5. **Jedna změna:** co konkrétně upravíme do příště.
+
+Důležité je omezit výstup. Jedno review, jedna až tři změny. Když z každého měření vyrobíš deset akčních bodů, tým bude za měsíc potřebovat další meeting jen na úklid zlepšovacích nápadů. Procesní kompostér jede naplno.
+
+### Checklist: měření bez dohledu
+
+- Víme, jaké rozhodnutí má metrika zlepšit?
+- Měříme tok práce místo hodnoty jednotlivců?
+- Jsou metriky dostupné týmu, ne jen vedení?
+- Nepoužíváme žebříčky lidí podle aktivity?
+- Kombinujeme čísla s krátkou interpretací?
+- Má každá metrika vlastníka a datum revize?
+- Sbíráme minimum interních dat?
+- Je jasné, kdo má k datům přístup?
+- Máme nastavenou retenci interních metrik?
+- Umí tým říct, že metrika škodí a má se zrušit?
+- Vzniká z review konkrétní změna systému, ne vina?
+- Nepřidává měření víc práce, než kolik jí pomáhá odstranit?
+
+### Šablona: karta týmové metriky
+
+```markdown
+## Týmová metrika: [název]
+
+### Účel
+- Jaké rozhodnutí podporuje:
+- Kdo je adresát:
+- Jak často se používá:
+
+### Definice
+- Co přesně měříme:
+- Co do metriky nepatří:
+- Zdroj dat:
+- Granularita: tým / projekt / workflow
+
+### Interpretace
+- Co znamená zlepšení:
+- Co znamená zhoršení:
+- Jaký kontext je nutné doplnit ručně:
+- Kdy metrice nevěříme:
+
+### Privacy-first kontrola
+- Obsahuje osobní údaje: ano / ne
+- Agregace:
+- Přístup:
+- Retence:
+- Kdo může požádat o vysvětlení nebo odstranění:
+
+### Akce
+- Co uděláme při zhoršení:
+- Co uděláme při dlouhodobém zlepšení:
+- Vlastník metriky:
+- Datum další revize:
+```
+
 ## Pracovní log
+
+- **2026-09-18:** Doplněna příloha EL o měření týmové práce bez interního dohledu: systémové metriky místo žebříčků lidí, výběr metrik podle rozhodnutí, privacy-first pravidla pro interní data, kombinace čísel s kontextem, health review, checklist a karta týmové metriky.
 
 - **2026-09-17:** Doplněna příloha EK o automatizaci týmové práce bez robotického chaosu: výběr opakovaných procesů, automatizace předávek místo úsudku, vlastnictví automatů, privacy-first minimalizace dat, notifikační pravidla, test v draft režimu, checklist a karta automatizace.
 
