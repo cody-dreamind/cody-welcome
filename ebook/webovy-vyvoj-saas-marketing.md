@@ -27718,7 +27718,166 @@ To není neochota. To je kapacitní hygiena. Dobrý zákazník ocení, že bezpe
 - Retenční karta:
 
 
+## Příloha FD: Trust centrum bez bezpečnostního divadla a zbytečného odhalování
+
+Jakmile začne SaaS prodávat firmám, opakují se stejné otázky: kde běží data, kdo k nim má přístup, jak řešíte incidenty, jaké používáte subprocesory a jestli máte nějaký bezpečnostní dokument, který nejde dohledat jen v hlavě jednoho vývojáře. Trust centrum je odpověď na tyto otázky dřív, než z nich vznikne třídenní e-mailový ping-pong.
+
+Trust centrum ale nemá být výkladní skříň plná compliance slovíček. Má být praktická, pravdivá a průběžně udržovaná stránka nebo sada dokumentů, které zákazníkovi pomůžou vyhodnotit riziko. U malého SaaS často stačí jednoduchá veřejná stránka, neveřejný security pack pod NDA a interní evidence důkazů.
+
+> Codyho komentář: Trust centrum není místo, kde napíšeš „bezpečnost bereme vážně“ dvanácti způsoby. To je ekvivalent cedule „jídlo je jedlé“ před restaurací. Důvěru dělají konkrétní informace, hranice a aktualizace.
+
+### Rozděl informace podle citlivosti
+
+Největší chyba je dát všechno buď veřejně na web, nebo všechno schovat za obchodníka. Veřejná část má rychle odpovědět na běžné otázky a posílit důvěru. Neveřejná část má pomoci zákazníkovi s nákupním a bezpečnostním posouzením. Interní část drží důkazy, které zákazníkovi nepatří do ruky v plném detailu.
+
+Praktické vrstvy:
+
+- **Veřejná vrstva:** hostingový region, typy dat, obecná bezpečnostní opatření, kontakt pro bezpečnostní hlášení, status page, odkaz na subprocesory, principy retence a exportu.
+- **Zákaznická vrstva:** security pack, DPA přílohy, detailnější popis provozu, odpovědi na časté dotazníky, incidentní komunikační proces.
+- **Interní vrstva:** screenshoty konfigurací, auditní záznamy, access review, výsledky obnovy ze záloh, detailní diagramy infrastruktury, runbooky.
+
+Veřejně piš dost konkrétně, aby text nebyl marketingová mlha, ale ne tak detailně, aby sis vytvořil bezpečnostní mapu pro útočníka. Například „produkční přístupy jsou omezené, chráněné MFA a pravidelně revidované“ je lepší než seznam konkrétních interních účtů, poskytovatelů a rolí.
+
+### Trust centrum má odpovídat na obchodní otázky
+
+Zákazník se většinou neptá na bezpečnost proto, že miluje tabulky. Ptá se, protože potřebuje vědět, jestli může službu použít bez zbytečného rizika. Proto piš trust centrum jazykem rozhodnutí, ne jazykem interní architektury.
+
+Dobrá stránka odpoví hlavně na:
+
+- **Kde jsou data?** region provozu, zálohy, logy, supportní nástroje a subprocesoři.
+- **Kdo se k nim může dostat?** interní role, supportní přístup, schvalování výjimek, offboarding.
+- **Jak dlouho data držíte?** provozní data, logy, zálohy, supportní komunikace, export a mazání.
+- **Co se stane při incidentu?** detekce, odpovědnost, komunikace, dokumentace a následné zlepšení.
+- **Jak zákazník získá kontrolu?** export, nastavení rolí, auditní log, možnosti omezení dat, kontaktní cesta.
+
+U každé odpovědi se ptej: pomůže to bezpečnostnímu, právnímu nebo nákupnímu člověku udělat rozhodnutí? Pokud ne, patří to spíš do interní wiki nebo do technické dokumentace.
+
+### Neopisuj certifikace, které nemáš
+
+Malý SaaS často nemá ISO 27001, SOC 2 nebo formální audit. To není konec světa. Horší je tvářit se, že „prakticky něco podobného máme“, a pak pod tlakem enterprise zákazníka vyrábět sliby na koleni.
+
+Férový přístup:
+
+- řekni, které certifikace nebo audity máš,
+- řekni, které nemáš,
+- popiš konkrétní kontroly, které už děláš,
+- ukaž, co je na roadmapě,
+- odděl standardní provoz od enterprise výjimek.
+
+Příklad formulace:
+
+> „Aktuálně nemáme certifikaci ISO 27001 ani SOC 2. Provozujeme ale řízené přístupy s MFA, oddělená prostředí, pravidelné aktualizace závislostí, zálohy s testem obnovy a incidentní runbook. Formální audit zvažujeme podle požadavků zákaznického segmentu a obchodního dopadu.“
+
+Tohle je slabší než certifikace, ale silnější než nafouknuté nic. Zákazník ví, co kupuje. A ty nevytvoříš compliance dluh, který tě doběhne při prvním větším tendru.
+
+### Subprocesory ukaž jako mapu rizika
+
+Seznam subprocesorů nesmí být odkladiště log. Má říct, kdo pomáhá službu provozovat a jaký typ dat může zpracovávat. Privacy-first SaaS by měl u každého dodavatele umět vysvětlit účel, region a důvod výběru.
+
+Minimální pole:
+
+- název dodavatele,
+- účel použití,
+- typ služby,
+- typy zpracovaných dat,
+- region provozu nebo zpracování,
+- odkaz na bezpečnostní nebo privacy dokumentaci,
+- datum poslední revize,
+- alternativní plán při ukončení.
+
+Pokud používáš evropský hosting, evropskou analytiku a minimum marketingových trackerů, řekni to nahlas. Ne jako moralizování, ale jako obchodní výhodu: zákazník nemusí řešit zbytečné datové přenosy, cookie chaos a vendor lock-in jen proto, že někdo do webu vložil „standardní“ skript.
+
+### Aktualizace musí mít vlastní rytmus
+
+Trust centrum zestárne rychleji než firemní hrnek s logem po rebrandu. Stačí nový subprocesor, změna hostingu, úprava retence logů nebo nový supportní nástroj — a veřejný text už neodpovídá realitě.
+
+Nastav jednoduchý rytmus:
+
+- **Při každé změně dodavatele:** aktualizuj subprocesory a interní vendor kartu.
+- **Při změně datového toku:** uprav popis zpracování, DPA přílohy a security pack.
+- **Po incidentu:** doplň procesní poučení, ne citlivé detaily incidentu.
+- **Jednou za kvartál:** projdi veřejnou stránku proti reálnému provozu.
+- **Jednou ročně:** udělej hlubší review s vlastníky produktu, provozu, podpory a právních dokumentů.
+
+U stránky zobraz datum poslední aktualizace. Je to malá věc, ale u bezpečnostních materiálů dělá hodně. Dokument bez data vypadá jako PDF z archeologického výkopu.
+
+### Trust centrum nemá sbírat leady za každou cenu
+
+Je lákavé zamknout všechno za formulář. Jenže privacy-first přístup znamená dát základní informace dostupné bez sledování a bez výměny e-mailu za důvěru. Pokud zákazník teprve vyhodnocuje produkt, nepotřebuje hned spadnout do sekvence „Ahoj, všiml jsem si, že ses díval na bezpečnost“.
+
+Doporučený model:
+
+- veřejné principy, subprocesory a kontakt nech otevřené,
+- citlivější security pack posílej na vyžádání nebo po NDA,
+- stahování veřejných dokumentů neměř na úroveň jednotlivce,
+- nepřidávej social pixely, heatmapy a zbytečné fingerprinting skripty,
+- pokud měříš návštěvnost trust centra, drž se agregovaných statistik.
+
+Důvěra začíná už tím, jak se chová stránka o důvěře. Když trust centrum otevře šest trackerů, tři reklamní skripty a cookie banner velikosti billboardu, sdělení se poněkud… no, samo zpracuje do koše.
+
+### Checklist: trust centrum bez divadla
+
+- Má veřejná stránka jasně popsané regiony, data, přístupy, retenci, incidenty a kontakt?
+- Jsou citlivé technické detaily oddělené do neveřejné zákaznické nebo interní vrstvy?
+- Je seznam subprocesorů aktuální, s účelem, regionem a datovým rozsahem?
+- Jsou formulace sladěné s DPA, privacy policy, security packem a reálným provozem?
+- Je u dokumentů datum poslední aktualizace a vlastník?
+- Je jasné, které certifikace máte, nemáte a co místo nich prakticky děláte?
+- Lze zákazníkovi poslat security pack bez týdenního lovu odpovědí?
+- Neobsahuje trust centrum zbytečné trackery, lead-gating nebo agresivní marketing?
+
+### Šablona: trust centrum karta
+
+## Trust centrum: [produkt / služba]
+
+### Veřejná stránka
+
+- URL:
+- Vlastník:
+- Datum poslední aktualizace:
+- Hlavní publikum:
+- Kontakt pro bezpečnostní otázky:
+
+### Základní informace
+
+- Hosting a region:
+- Typy zákaznických dat:
+- Zálohy a retence:
+- Logy a observabilita:
+- Export a mazání:
+
+### Přístupy a provoz
+
+- Produkční přístupy:
+- Supportní přístup:
+- MFA a access review:
+- Offboarding:
+- Incidentní proces:
+
+### Subprocesoři
+
+- Autoritativní seznam:
+- Datum poslední revize:
+- Nové změny od minulé revize:
+- Rizikové otevřené otázky:
+
+### Zákaznické materiály
+
+- Security pack:
+- DPA přílohy:
+- Standardní odpovědi na dotazníky:
+- Materiály pod NDA:
+
+### Privacy-first kontrola
+
+- Veřejná stránka bez zbytečných trackerů:
+- Agregované měření místo sledování jednotlivců:
+- Otevřené informace bez nuceného lead formuláře:
+- Soulad s realitou provozu ověřen dne:
+
+
 ## Pracovní log
+- **2026-09-18:** Doplněna příloha FD o trust centru pro B2B SaaS: vrstvy informací podle citlivosti, obchodní otázky zákazníků, férová práce s certifikacemi, subprocesory, aktualizační rytmus, privacy-first publikování, checklist a šablona trust centrum karty.
 - **2026-09-18:** Doplněna příloha FC o bezpečnostních dotaznících v B2B sales: znalostní báze odpovědí, důkazy a limity, security pack, odpovědi „ano/částečně/kompenzujeme/mimo rozsah“, privacy-first konzistence, kvalifikace detailních dotazníků, checklist a karta bezpečnostní odpovědi.
 - **2026-09-18:** Doplněna příloha FB o zpracovatelských smlouvách pro malý SaaS: určení rolí správce/zpracovatele, konkrétní DPA přílohy, subprocesoři, auditní právo, incidentní část, obchodní balíček, checklist a DPA karta.
 - **2026-09-18:** Doplněna příloha FA o DPIA pro malý SaaS: kdy posouzení vlivu řešit, formulace rozhodnutí, datový tok, rizika z pohledu člověka, praktická opatření, stop pravidla před spuštěním, práce s právníkem, živé review, checklist a DPIA karta.
