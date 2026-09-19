@@ -28952,7 +28952,185 @@ Tím se handoff mění z administrativy na učení. Sales prodává přesněji, 
 
 ---
 
+
+## Příloha FK: Implementační plán po nákupu bez nekonečného projektu a datového přetlaku
+
+Jakmile je handoff hotový, přichází další past: tým začne onboardovat, ale ve skutečnosti spustí malý konzultační projekt bez konce. Všichni mají dobrý úmysl, zákazník je čerstvě nadšený, a tak se do plánu nasype import historických dat, integrace na tři systémy, přejmenování rolí, školení všech oddělení a „ještě jeden drobný custom report“. Drobný. Jistě. Stejně drobný jako bagr v obýváku.
+
+Implementační plán má chránit dvě věci: první hodnotu pro zákazníka a kapacitu týmu. Není to tabulka úkolů pro interní klid. Je to dohoda, co se musí stát, aby zákazník začal produkt používat v reálném provozu, a co může počkat, dokud se ověří první přínos. Privacy-first přístup navíc říká: nenasávej data jen proto, že by se jednou mohla hodit. Každý import, integrace a přístup musí mít účel.
+
+> Codyho komentář: Implementace bez scope je jako backlog po dvojitém espressu. Vypadá produktivně, ale za hodinu máš jen třicet nových slibů a žádný první úspěch.
+
+### Implementace není seznam přání
+
+Zákazník po nákupu často začne přemýšlet šířeji než během prodeje. To je normální. Produkt najednou není hypotéza, ale nástroj, který by mohl vyřešit víc věcí. Právě tady musí tým rozlišit implementaci od budoucí roadmapy.
+
+Do první implementace patří jen úkoly, které přímo podporují aktivační moment. Všechno ostatní je kandidát na pozdější fázi. Praktická otázka zní:
+
+> Kdybychom tento úkol neudělali v prvních 30 dnech, zabrání to zákazníkovi zažít slíbenou hodnotu?
+
+Pokud odpověď není jasné „ano“, úkol pravděpodobně nepatří do první fáze. Může být důležitý, jen není první. Tým by měl mít odvahu říct: „Zaznamenáváme to, ale teď chráníme první výsledek.“ To není lenost. To je řízení adopce.
+
+Rozděl požadavky do tří košů:
+
+- **Nutné pro první hodnotu:** bez toho zákazník nezačne smysluplně používat produkt.
+- **Důležité pro rozšíření:** zvyšuje hodnotu, ale může počkat po prvním výsledku.
+- **Pěkné, ale riskantní:** customizace, historická data, okrajové scénáře a nápady bez jasného dopadu.
+
+### První plán má mít konec, vlastníka a měřitelný výstup
+
+Dobrý implementační plán se nevejde do věty „nějak to nastavíme“. Musí mít jasný konec. Ne konec ve smyslu „všechno je dokonalé“, ale konec první fáze: zákazník používá produkt pro konkrétní proces a umí ukázat první výsledek.
+
+Minimální plán obsahuje:
+
+- **cíl fáze:** co má být po implementaci možné,
+- **rozsah:** co je uvnitř a co je mimo první fázi,
+- **role:** kdo rozhoduje, kdo dodává data, kdo testuje a kdo schvaluje,
+- **milníky:** nejbližší kroky, ne dekorativní Gantt,
+- **kritéria hotovo:** podle čeho se pozná, že první fáze skončila,
+- **rizika:** věci, které mohou posunout termín nebo změnit rozsah,
+- **privacy-first kontrolu:** jaká data se použijí, proč a jak dlouho.
+
+Příklad: místo „implementujeme reporting“ napiš „do 21 dnů spustíme týdenní provozní report pro tým podpory se třemi agregovanými metrikami: počet otevřených požadavků, medián doby první odpovědi a počet eskalací; bez detailního sledování jednotlivých agentů“. To je plán, se kterým se dá pracovat. Je konkrétní, měřitelný a nepředstírá, že zákazník potřebuje datový chrám.
+
+### Import historických dat je dluh, ne automatická výhra
+
+Historická data zní lákavě. Zákazník chce „mít všechno pohromadě“ a tým chce být vstřícný. Jenže import historie často sežere víc času než první hodnota. Staré exporty bývají nečisté, neúplné, duplicitní a plné polí, která nikdo nedokáže vysvětlit. Navíc se tím zvětšuje rozsah zpracování dat.
+
+Před každým historickým importem polož čtyři otázky:
+
+1. **K jakému rozhodnutí nebo procesu budou historická data sloužit?**
+2. **Stačí importovat jen poslední období nebo agregovaný souhrn?**
+3. **Která pole jsou opravdu nutná pro produktovou hodnotu?**
+4. **Kdy se importovaná data smažou nebo převedou do běžné retence?**
+
+Často stačí importovat aktivní záznamy, otevřené případy nebo posledních pár měsíců provozu. Zbytek může zůstat v archivu zákazníka, exportovaný do čitelného formátu. Privacy-first implementace nemusí být asketická, ale má být přiměřená. Když produkt pomáhá řídit aktuální práci, nepotřebuje automaticky pět let osobní historie jen proto, aby tabulka vypadala plnější.
+
+### Integrace plánuj podle toku práce, ne podle loga v prezentaci
+
+Integrace jsou v B2B prodeji magnet. Každý chce vědět, jestli se produkt propojí s tím, co už používá. Problém je, že integrace může být buď klíčový pracovní tok, nebo jen logo, které dobře vypadá ve slajdu. Implementační plán musí poznat rozdíl.
+
+U každé integrace popiš:
+
+- jaký proces propojuje,
+- jaká data tečou dovnitř a ven,
+- kdo je vlastníkem dat na obou stranách,
+- co se stane při výpadku,
+- jestli existuje ruční fallback,
+- jak se integrace otestuje na neprodukčních datech,
+- jak se omezí přístupová práva a retence.
+
+Pokud integrace nepodporuje první hodnotu, dej ji do druhé fáze. Zákazník obvykle lépe přijme postup „nejdřív spustíme základní workflow, pak napojíme automatizaci“ než stav „čekáme tři týdny na API token a zatím se neděje nic viditelného“.
+
+### Školení má být situační, ne univerzitní semestr
+
+Další častý omyl: tým naplánuje velké školení pro všechny uživatele ještě předtím, než je jasné, jak budou produkt používat. Výsledkem je hodinový průlet funkcemi, ze kterého si lidé pamatují dvě věci: kde je tlačítko nastavení a že to bude „asi někde v mailu“.
+
+Lepší je školit podle situace:
+
+- **Administrátor:** role, přístupy, bezpečnost, fakturace, základní konfigurace.
+- **Běžný uživatel:** jeden typický pracovní scénář od začátku do konce.
+- **Manažer:** interpretace výstupů, limity metrik, rozhodovací rytmus.
+- **Support nebo interní champion:** jak sbírat zpětnou vazbu a kdy eskalovat problém.
+
+Každé školení má mít krátký cíl a následný úkol v produktu. Pokud člověk po školení nic neudělá, byl to spíš webinář než onboarding. Praktická zásada: raději tři krátké situační návody než jeden dlouhý „kompletní přehled“.
+
+### Změny rozsahu zapisuj jako obchodní rozhodnutí
+
+Implementace se bude měnit. Objeví se nové požadavky, chybějící data, interní politika zákazníka nebo technický limit. Problém není změna. Problém je změna, která se tváří jako drobnost a nikdo ji nezapíše.
+
+Každá změna rozsahu by měla mít krátký záznam:
+
+- co se mění,
+- proč se to mění,
+- jaký to má dopad na termín, cenu, bezpečnost nebo data,
+- kdo změnu schválil,
+- co se odkládá místo toho.
+
+Tím se chrání tým i zákazník. Ne proto, aby se někdo mohl později vymlouvat, ale aby implementace nezmutovala do nekonečného projektu. Pokud zákazník přidá integraci, možná se odloží historický import. Pokud chce širší rollout, možná se nejdřív omezí custom reporting. Kapacita není kouzelný hrnec.
+
+### První provozní review rozhoduje o další fázi
+
+Po první fázi nedělej jen oslavný e-mail. Udělej krátké provozní review: co funguje, co brzdí adopci, co se ukázalo jako zbytečné a co má být další krok. Ideálně do 30 dnů od spuštění první hodnoty.
+
+Review má odpovědět na otázky:
+
+- Zažil zákazník aktivační moment?
+- Používá produkt reálný tým, nebo jen interní champion?
+- Které požadavky se ukázaly jako opravdu důležité?
+- Která data jsme nasbírali zbytečně nebo je můžeme smazat?
+- Je další fáze rozšíření, stabilizace, nebo korekce očekávání?
+
+Bez review tým často automaticky pokračuje v původním seznamu přání. Jenže po prvních týdnech už ví víc. Možná integrace není tak důležitá, ale chybí lepší role. Možná report stačí jednodušší, ale zákazník potřebuje jasnější proces eskalace. Implementační plán má zůstat živý, ne tvrdohlavý.
+
+### Checklist: implementační plán bez nekonečného projektu
+
+- Je první fáze navázaná na konkrétní aktivační moment?
+- Má plán jasný rozsah, vlastníka, milníky a kritéria hotovo?
+- Jsou požadavky rozdělené na nutné pro první hodnotu, důležité později a pěkné, ale rizikové?
+- Má každý import dat jasný účel, minimální rozsah a retenční pravidlo?
+- Víme u každé integrace, jaký pracovní tok podporuje a co se stane při výpadku?
+- Neškolíme všechny na všechno, ale role podle reálných scénářů?
+- Zapisujeme změny rozsahu včetně dopadu na termín, cenu, bezpečnost a data?
+- Má zákazník ruční fallback pro kritické kroky první fáze?
+- Proběhne provozní review do 30 dnů od prvního měřitelného výsledku?
+- Mažeme nebo archivujeme implementační data, která už nemají účel?
+
+### Šablona: karta implementační fáze
+
+## Implementační fáze: [zákazník / produkt / období]
+
+### Cíl fáze
+
+- Aktivační moment:
+- První měřitelný výsledek:
+- Termín dokončení první fáze:
+- Kritéria hotovo:
+
+### Rozsah
+
+- Uvnitř první fáze:
+- Mimo první fázi:
+- Požadavky pro druhou fázi:
+- Otevřené otázky:
+
+### Role
+
+- Vlastník za dodavatele:
+- Vlastník za zákazníka:
+- Technický kontakt:
+- Schvalovatel:
+- Budoucí hlavní uživatelé:
+
+### Data a integrace
+
+- Nutná data:
+- Zdroj dat:
+- Pole, která se neimportují:
+- Integrace v první fázi:
+- Ruční fallback:
+- Retence implementačních dat:
+
+### Milníky
+
+- Krok 1:
+- Krok 2:
+- Krok 3:
+- Test první hodnoty:
+- Provozní review:
+
+### Rizika a změny
+
+- Rizika adopce:
+- Technická rizika:
+- Privacy-first rizika:
+- Schválené změny rozsahu:
+- Odložené položky:
+
+---
+
 ## Pracovní log
+- **2026-09-19:** Doplněna příloha FK o implementačním plánu po nákupu: ochrana první hodnoty, řízení rozsahu, importy dat, integrace, situační školení, změny scope, provozní review, checklist a karta implementační fáze.
 - **2026-09-19:** Doplněna příloha FJ o předání z obchodu do onboardingu: handoff karta, první úspěch, negativní kontext, privacy-first rozsah dat, agenda meetingu a zpětná vazba do obchodu.
 - **2026-09-18:** Doplněna příloha FI o CRM a follow-upu bez stalkingu: pipeline podle rozhodnutí, minimální CRM karta, užitečný follow-up, rozumná segmentace, CRM hygiena, předávky mezi marketingem, obchodem a produktem, checklist a šablona příležitosti.
 - **2026-09-18:** Doplněna příloha FH o zákaznickém výzkumu bez datového přestřelu: rozhodnutí před otázkami, volba nejmenší metody, opatrné nahrávání, otázky na minulé chování, syntéza insightů, výzkumný repozitář, zapojení týmu, checklist a karta zákaznického výzkumu.
