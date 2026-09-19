@@ -231,6 +231,8 @@ Naopak často nepotřebuješ individuální profily návštěvníků, agresivní
 
 Dobrá praxe je oddělit **produktová rozhodnutí** od **reklamního sledování**. Produktová analytika pomáhá zlepšit web a službu. Reklamní sledování má vyšší riziko pro důvěru, souhlas i datové toky, takže musí mít opravdu jasný důvod.
 
+Praktický test: ke každé metrice napiš jedno rozhodnutí, které podle ní uděláš příští měsíc. Pokud žádné rozhodnutí neexistuje, metrika je jen dekorace v dashboardu — hezká, ale hladová po pozornosti.
+
 ### Obsah jako dlouhodobé aktivum
 
 Blog nebo znalostní báze nejsou jen SEO krmivo. Jsou způsob, jak ukázat přemýšlení firmy před prvním hovorem. V evropském privacy-first kontextu má obsah ještě jednu výhodu: funguje bez toho, aby musel návštěvníka pronásledovat po internetu.
