@@ -32542,7 +32542,199 @@ Kvalitativně si čti důvody. Ne jako záminku k manipulaci, ale jako produktov
 - Navazující support krok:
 - Poučení pro produkt nebo pricing:
 
+## Příloha GE: Billing runbook před koncem měsíce bez ruční paniky a účetního detektiva
+
+Konec měsíce je v SaaS provozu zvláštní rituál. Produkt chce vydávat funkce, support řeší zákazníky, obchod dohání podpisy a finance se snaží pochopit, proč se u tří workspace potkala sleva, kredit, upgrade a faktura v jiné měně. Pokud billing žije jen v hlavě jednoho člověka, měsíční uzávěrka se změní v detektivku s nepříjemným soundtrackem.
+
+Billing runbook není byrokratická ozdoba. Je to krátký pracovní postup, který říká, co se kontroluje před uzávěrkou, kdo co vlastní, jak se řeší výjimky a jaké datové stopy opravdu potřebuješ. Privacy-first přístup tady znamená hlavně disciplínu: méně exportů do tabulek, méně posílání fakturačních detailů po chatu a více jasných pravidel přímo v systému.
+
+### Runbook začni kalendářem, ne panikou
+
+Měsíční billing má mít rytmus. Když první kontrolu děláš až v den vystavení faktur, každý malý nesoulad je požár. Lepší je rozdělit práci do několika jednoduchých bodů.
+
+Praktický rytmus:
+
+- **Týden před koncem měsíce:** zkontroluj nové smlouvy, plánované změny tarifů, končící trialy a ruční výjimky.
+- **Tři pracovní dny před koncem:** projdi otevřené billing tickety, nevyřešené kredity, refundace a problematické platby.
+- **Den před uzávěrkou:** zmraz ruční změny mimo urgentní opravy a potvrď, kdo schvaluje výjimky.
+- **Den uzávěrky:** spusť kontrolní checklist a zaznamenej jen rozdíly, ne román o každé faktuře.
+- **Den po uzávěrce:** vyhodnoť chyby, dotazy zákazníků a úpravy, které patří do backlogu.
+
+Tento rytmus nemusí být složitý. Důležité je, aby všichni věděli, kdy už se změna neřeší „jen tak bokem“. Bokem je totiž přesně to místo, kde vznikají účetní duchové.
+
+### Odděl zákaznickou změnu od interní opravy
+
+V billingu se často míchají dvě věci: zákazník něco změnil, nebo tým opravuje vlastní chybu. Tyto situace mají jinou komunikaci, jiný schvalovací režim a jiný dopad na důvěru.
+
+Zákaznická změna může být:
+
+- upgrade,
+- downgrade,
+- změna fakturační periody,
+- přidání sedadel,
+- zrušení add-onu,
+- změna fakturačních údajů.
+
+Interní oprava může být:
+
+- špatně nastavená sleva,
+- duplicitní faktura,
+- špatně propsaný tarif,
+- opožděný kredit,
+- chybný daňový údaj,
+- ruční zásah po incidentu.
+
+U zákaznické změny stačí potvrdit, co si zákazník vybral a odkdy to platí. U interní opravy přidej omluvu, stručné vysvětlení a informaci, že zákazník nemusí dělat nic navíc. Nepřenášej účetní chaos na člověka, který si jen chtěl koupit software, ne stát se externím auditorem tvého SaaSu.
+
+### Výjimky drž v jedné evidenci
+
+Největší riziko měsíčního billingu nejsou standardní tarify. Jsou to výjimky. Sleva pro prvního zákazníka, kredit za incident, individuální splatnost, ruční převod workspace, enterprise pilot, barter, partnerská dohoda. Každá výjimka může být rozumná. Deset výjimek bez evidence je produktový kompost.
+
+Evidence výjimky má obsahovat:
+
+- zákazníka nebo workspace,
+- typ výjimky,
+- důvod,
+- částku nebo rozsah,
+- datum začátku,
+- datum konce nebo kontroly,
+- schvalovatele,
+- dopad na fakturaci,
+- odkaz na ticket, smlouvu nebo rozhodnutí.
+
+Privacy-first pravidlo: do evidence nedávej zbytečné osobní poznámky. „Majitel byl naštvaný v hovoru“ do billing evidence nepatří. „Kredit 20 % za incident ze dne X, schválil Y, platí pro fakturu Z“ stačí. Emoce řeš v podpoře, účetnictví potřebuje fakta.
+
+### Kontrola dat má chránit peníze i soukromí
+
+Před uzávěrkou zkontroluj nejen částky, ale i datové toky. Billing bývá napojený na platební bránu, účetní systém, CRM, helpdesk a někdy i analytiku. Každá kopie fakturačních dat zvyšuje riziko omylu i úniku.
+
+Ptej se:
+
+- Kde vzniká pravda o tarifu a částce?
+- Kde vzniká pravda o fakturačních údajích?
+- Které systémy dostávají osobní údaje zákazníka?
+- Které exporty vznikají jen kvůli ruční kontrole?
+- Kdo má přístup k fakturám, kreditům a platební historii?
+- Jak dlouho držíme pracovní exporty po uzávěrce?
+
+Cílem není zakázat finance. Cílem je, aby finance nemusely každý měsíc vyrábět novou datovou skládku. Pokud se kontrola pravidelně dělá v tabulce, zvaž, jestli nemá být report přímo v adminu s omezeným přístupem a bez zbytečných osobních detailů.
+
+### Před uzávěrkou řeš otevřené hrany
+
+Billing chyba často nevznikne tím, že systém neumí vystavit fakturu. Vznikne tím, že někdo nechal otevřenou hranu: zákazník čeká na odpověď, sleva nemá schválení, upgrade je domluvený v e-mailu, ale ne v systému, nebo support slíbil kredit a nikdo ho nezapsal.
+
+Otevřené hrany:
+
+- pending upgrade nebo downgrade,
+- neuzavřená refundace,
+- slibovaný kredit bez částky,
+- trial, který má přejít na placený režim,
+- workspace bez jasného vlastníka fakturace,
+- neúspěšná platba s ruční domluvou,
+- změna právního subjektu zákazníka,
+- ruční oprava DPH nebo adresy.
+
+Každá hrana potřebuje rozhodnutí: dokončit teď, odložit s vlastníkem, nebo výslovně vyloučit z aktuální uzávěrky. Nejhorší stav je „někdo se k tomu vrátí“. Někdo je v provozu obvykle nikdo, jen s hezčí bundou.
+
+### Komunikace po uzávěrce má být krátká a dohledatelná
+
+Po vystavení faktur neposílej zákazníkovi román. Pošli jasné potvrzení, pokud se ho týká změna, oprava, kredit nebo neobvyklá částka. Standardní faktura může odejít standardní cestou. Výjimka potřebuje lidský kontext.
+
+Dobrá zpráva obsahuje:
+
+- co se stalo,
+- které období řeší,
+- jaká částka nebo kredit se použil,
+- zda má zákazník něco udělat,
+- kde najde doklad,
+- kam se obrátit s dotazem.
+
+Špatná zpráva obsahuje interní zkratky, nejasné částky a větu „systém to tak spočítal“. Systém nic nespočítal sám od sebe. Někdo ho navrhl, nastavil a provozuje. To je nepříjemné, ale taky osvobozující: můžeš to opravit.
+
+### Měsíční review billingu má končit změnou systému
+
+Po uzávěrce si udělej krátké review. Ne kvůli obviňování, ale kvůli snížení opakované práce. Pokud se stejný typ chyby vrací třikrát, není to chyba člověka. Je to chybějící pravidlo, slabé UI, špatný stavový model nebo nejasná odpovědnost.
+
+Sleduj agregovaně:
+
+- počet ručních zásahů,
+- počet kreditů a refundací,
+- nejčastější důvod billing ticketů,
+- počet oprav faktur,
+- nejasné nebo chybějící schválení výjimek,
+- čas strávený uzávěrkou,
+- počet exportů mimo hlavní systémy.
+
+Ke každému opakovanému problému přiřaď jednu z akcí: upravit produkt, doplnit admin, změnit text v ceníku, zlepšit onboarding, upravit smluvní šablonu, nebo přidat automatickou kontrolu. Pokud review skončí jen povzdechem, byl to meeting, ne zlepšení.
+
+### Checklist: billing runbook před koncem měsíce
+
+- Máme jasný kalendář kontrol před uzávěrkou.
+- Víme, kdo vlastní billing změny, výjimky, kredity a refundace.
+- Ruční výjimky mají důvod, schvalovatele a datum kontroly.
+- Otevřené billing tickety jsou vyřešené nebo výslovně odložené.
+- Zákaznické změny a interní opravy se komunikují jiným tónem.
+- Kontrolujeme, kde vzniká pravda o tarifu, částce a fakturačních údajích.
+- Pracovní exporty mají omezený přístup a jasnou dobu života.
+- Nestandardní faktury mají dohledatelný kontext.
+- Po uzávěrce vyhodnocujeme opakované chyby a převádíme je do backlogu.
+- Billing review vede k úpravě systému, ne jen k dalšímu hrdinství financí.
+
+### Mini šablona: měsíční billing karta
+
+## Měsíční billing karta: [měsíc / produkt]
+
+### Kalendář
+
+- Kontrola výjimek:
+- Kontrola ticketů:
+- Zmrazení ručních změn:
+- Uzávěrka:
+- Review po uzávěrce:
+
+### Odpovědnosti
+
+- Billing vlastník:
+- Finance vlastník:
+- Support kontakt:
+- Produktový kontakt:
+- Schvalovatel výjimek:
+
+### Výjimky
+
+- Počet aktivních výjimek:
+- Nové výjimky tento měsíc:
+- Končící výjimky:
+- Výjimky bez data kontroly:
+- Navazující rozhodnutí:
+
+### Otevřené hrany
+
+- Neuzavřené upgrady / downgrady:
+- Kredity a refundace:
+- Neúspěšné platby:
+- Změny fakturačních údajů:
+- Ruční opravy:
+
+### Privacy-first kontrola
+
+- Použité exporty:
+- Kdo měl k exportům přístup:
+- Kdy se exporty smažou:
+- Nové datové toky:
+- Přístupy k billing systému ke kontrole:
+
+### Review
+
+- Nejčastější chyba:
+- Nejčastější dotaz zákazníků:
+- Ruční práce k automatizaci:
+- Úprava dokumentace:
+- Úkol do backlogu:
+
+
 ## Pracovní log
+- **2026-09-19:** Doplněna příloha GE o měsíčním billing runbooku: kalendář kontrol, oddělení zákaznických změn od interních oprav, evidence výjimek, privacy-first kontrola datových toků, otevřené hrany před uzávěrkou, komunikace, review, checklist a měsíční billing karta.
 - **2026-09-19:** Doplněna příloha GD o upgradech, downgradech a změnách tarifů: typy změn, okamžitý upgrade, férový downgrade, limity bez datových rukojmí, evidence výjimek, čitelná fakturační komunikace, privacy-first kontrola, metriky, checklist a karta změny tarifu.
 
 
