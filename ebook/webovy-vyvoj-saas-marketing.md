@@ -32733,7 +32733,191 @@ Ke každému opakovanému problému přiřaď jednu z akcí: upravit produkt, do
 - Úkol do backlogu:
 
 
+## Příloha GF: Reklamace faktur a billing support bez defenzivy, mlžení a datového přebytku
+
+Fakturační dotaz je zvláštní typ supportu. Zákazník často nepíše proto, že chce diskutovat účetnictví. Píše proto, že něco narušilo jeho pocit kontroly: částka nesedí, kredit se nepropsal, změna tarifu dopadla jinak, než čekal, nebo fakturu dostal člověk, který vůbec netuší, co se v produktu děje.
+
+Špatná reakce zní: „Podle systému je vše správně.“ Možná je. Ale zákazník právě říká, že jeho mentální model správný není. Dobrá reakce proto nejdřív rekonstruuje příběh faktury: co se stalo, proč se to stalo, jaký je dopad a co uděláme dál.
+
+> Codyho komentář: Billing support není bitva o to, kdo má pravdu v tabulce. Je to šance ukázat, že i peníze umíte řešit srozumitelně. Ano, i faktura může mít UX. Bohužel.
+
+### Reklamaci neber jako útok, ale jako signál nejasnosti
+
+U malého SaaS se billing spor často objeví tam, kde produktové, obchodní a účetní informace nejsou propojené. Obchod slíbil slevu, support schválil kredit, zákazník změnil tarif uprostřed období, finance vystavily doklad podle aktuálního systému a výsledkem je ticket s předmětem „Faktura nesedí“.
+
+První krok není obhajoba. První krok je klasifikace:
+
+- **Nesrozumitelná faktura:** částka je správně, ale zákazník nerozumí položkám.
+- **Chybný tarif nebo období:** systém účtoval jiné období, plán nebo počet jednotek.
+- **Nepropsaná výjimka:** sleva, kredit, refundace nebo kompenzace existuje, ale není na dokladu.
+- **Duplicitní platba:** zákazník zaplatil víckrát nebo přes špatnou platební cestu.
+- **Neoprávněné užití:** zákazník tvrdí, že službu nepoužíval, účet měl být zrušený nebo změnu neautorizoval.
+- **Interní chyba procesu:** ruční zásah, migrace, změna ceníku nebo import dat vytvořil špatný výsledek.
+
+Každý typ má jiný postup. Pokud tým řeší všechno jako „billing ticket“, skončí u improvizace. Pokud má kategorie, umí rychle rozhodnout, kdo je vlastník a jaký výsledek je férový.
+
+### Odpověď má začít potvrzením problému
+
+Zákazník u peněz nechce slyšet dlouhý právní monolog. Chce vědět, že jste dotaz převzali, kdy dostane odpověď a zda má mezitím něco dělat.
+
+Dobrá první odpověď může být jednoduchá:
+
+„Díky, prověříme fakturu a navazující změny v tarifu. Do jednoho pracovního dne pošleme stručné vysvětlení položek a pokud najdeme chybu, rovnou navrhneme opravu. Platbu zatím nemusíte řešit, dokud reklamaci neuzavřeme.“
+
+Tahle věta dělá čtyři věci:
+
+- potvrzuje, že dotaz nezapadl,
+- pojmenovává rozsah kontroly,
+- nastavuje časové očekávání,
+- snižuje stres kolem splatnosti.
+
+U větších B2B zákazníků přidej interní referenci: číslo faktury, workspace, období a kontaktní osobu. Ne proto, abys působil úředně, ale aby se všichni bavili o stejném dokladu.
+
+### Rekonstrukce faktury musí být auditovatelná
+
+Když řešíš reklamaci, potřebuješ umět složit časovou osu. Ne detektivku z dvaceti screenshotů v chatu, ale krátký auditní příběh:
+
+1. Jaký tarif platil na začátku období.
+2. Jaké změny proběhly během období.
+3. Kdo změnu udělal nebo schválil.
+4. Jaké slevy, kredity nebo výjimky byly aktivní.
+5. Jak billing systém spočítal výslednou částku.
+6. Jaký doklad a platební stav vznikl.
+
+Pokud některý krok neumíš doložit, neznamená to automaticky, že má pravdu zákazník. Znamená to ale, že proces má mezeru. A mezera u peněz se nelepí stylem „příště si dáme pozor“. Lepí se systémovou změnou: audit log, karta výjimky, pravidlo pro změnu tarifu, lepší text na pricing stránce nebo kontrola před uzávěrkou.
+
+Prakticky pomáhá mít u každého billing ticketu samostatnou interní poznámku „zdroje rozhodnutí“. Ta obsahuje odkazy na fakturu, subscription stav, kartu výjimky, relevantní e-mail a případné produktové logy. Do zákaznické komunikace pak posíláš jen srozumitelný výsledek, ne interní suroviny.
+
+### Privacy-first billing support nevyváží účetnictví do chatu
+
+Faktury obsahují osobní a obchodní údaje. Support proto nesmí reflexivně kopírovat celé doklady do Slacku, chatu s dodavatelem nebo náhodného AI nástroje. Stačí málo a z fakturačního dotazu je datový chaos.
+
+Privacy-first pravidla:
+
+- **Sdílej minimum:** v interní diskuzi často stačí číslo faktury, workspace ID a problémová položka.
+- **Neposílej celé exporty:** pokud musíš řešit detail, pošli odkaz do systému s řízeným přístupem.
+- **Rediguj přebytečná data:** DIČ, adresy, kontakty a platební údaje nepatří do běžného support vlákna, pokud nejsou pro rozhodnutí nutné.
+- **Odděl účetní doklady od produktových logů:** nepřelévej jedno do druhého jen proto, že je to pohodlné.
+- **Nastav retenci příloh:** stažené PDF faktury, CSV exporty a screenshoty maž po uzavření podle pravidel týmu.
+- **Zákaznické vysvětlení piš lidsky:** není potřeba posílat technický audit log, když stačí říct, která položka vznikla proč.
+
+Pokud používáš externí účetní kancelář nebo billing nástroj, měj jasno, kdo vidí jaké údaje a proč. Fakturační podpora je typický prostor, kde se do procesu postupně přidají „dočasní pomocníci“ a za půl roku nikdo neví, kdo má přístup k čemu. To je compliance verze ponožek ztracených v pračce.
+
+### Rozhodnutí musí mít předem dané možnosti
+
+Billing spor nemá končit pokaždé novou filozofickou debatou. Tým by měl mít omezenou sadu výsledků:
+
+- **Faktura je správně a vysvětlíme ji.** Přidáme lepší popis položek nebo odkaz na pravidla.
+- **Faktura je správně, ale komunikace byla špatná.** Nabídneme goodwill kredit nebo jasnější postup do budoucna.
+- **Faktura je chybná.** Vystavíme opravu, dobropis, kredit nebo novou fakturu podle účetního procesu.
+- **Výjimka byla slíbená, ale nepropsaná.** Uznáme výjimku a doplníme ji do evidence s datem konce.
+- **Chybí důkaz autorizace.** Zastavíme vymáhání sporné části a zlepšíme autorizační pravidla.
+- **Jde o opakovaný pattern.** Vedle konkrétní opravy vytvoříme produktový nebo procesní úkol.
+
+Každý výsledek potřebuje vlastníka. Support může vysvětlit a koordinovat, ale nemá sám potají měnit finance. Finance mohou opravit doklad, ale nemají samy rozhodovat o zákaznickém vztahu. Produkt může upravit systém, ale nemá přepisovat účetní realitu. Role se musí doplňovat, ne si házet horkou fakturu jako bramboru.
+
+### Komunikace výsledku má být konkrétní a krátká
+
+Závěrečná odpověď by měla mít stejnou strukturu bez ohledu na výsledek:
+
+- co jsme prověřili,
+- co jsme zjistili,
+- jaký je výsledek,
+- co uděláme dál,
+- jestli zákazník musí něco udělat.
+
+Příklad, když je chyba na vaší straně:
+
+„Prověřili jsme fakturu 2026-09-104 za období září. Sleva z pilotní dohody se nepropsala do billing systému, takže faktura byla vystavena o 2 400 Kč vyšší. Vystavíme opravný doklad a pošleme ho dnes do 16:00. Původní fakturu prosím neplaťte; nová částka bude uvedená v opravném dokladu. Interně jsme doplnili datum konce slevy do evidence výjimek, aby se to neopakovalo.“
+
+Příklad, když je faktura správně:
+
+„Prověřili jsme tarif, období i změnu počtu aktivních uživatelů. Faktura odpovídá navýšení ze 14 na 18 uživatelů od 12. září; poměrná částka je uvedená na řádku ‚navýšení kapacity‘. Chápu, že popis řádku nebyl moc čitelný. Do další faktury doplníme jasnější text a posílám krátké vysvětlení výpočtu.“
+
+Tohle je lepší než „dle obchodních podmínek“. Obchodní podmínky jsou užitečné jako opora, ne jako štít proti rozhovoru.
+
+### Reklamace má zlepšit produkt, ne jen uklidit ticket
+
+Každý billing spor má po uzavření krátké review. Ne schůzku na hodinu. Stačí jedna poznámka:
+
+- Byl problém ve výpočtu, komunikaci, procesu nebo očekávání?
+- Šlo o jednorázovou výjimku, nebo opakovatelný pattern?
+- Můžeme problém odstranit změnou UI, textu, pravidla nebo automatizace?
+- Je potřeba upravit help článek, pricing stránku nebo onboarding?
+- Vznikl privacy risk kvůli tomu, kde jsme sdíleli data?
+
+Nejlepší billing support snižuje počet budoucích ticketů. Pokud se tři zákazníci ptají na stejnou položku, problém není ve třech zákaznících. Problém je v názvu položky, timing komunikace nebo pricing modelu.
+
+### Checklist: reklamace faktur a billing support
+
+- Máme kategorie fakturačních dotazů a víme, kdo je řeší.
+- První odpověď potvrzuje převzetí, časový rámec a doporučení k platbě.
+- U každé reklamace umíme složit časovou osu tarifu, změn, slev a dokladů.
+- Support nesdílí celé faktury a exporty mimo systémy s řízeným přístupem.
+- Rozhodnutí má jednu z předem daných možností a jasného vlastníka.
+- Opravy faktur dělá finance proces, ne improvizovaný support zásah.
+- Zákazník dostane stručné vysvětlení v lidském jazyce.
+- Opakované dotazy vedou ke změně textu, UI, dokumentace nebo pravidla.
+- Stažené přílohy a screenshoty mají retenci a po uzavření se mažou.
+- Billing review převádí poučení do backlogu nebo provozní dokumentace.
+
+### Mini šablona: billing support karta
+
+## Billing support karta: [zákazník / faktura]
+
+### Základ
+
+- Zákazník / workspace:
+- Číslo faktury:
+- Období:
+- Typ dotazu:
+- Vlastník řešení:
+- Termín odpovědi:
+
+### Rekonstrukce
+
+- Tarif na začátku období:
+- Změny v období:
+- Aktivní slevy / kredity:
+- Autor změny:
+- Relevantní doklady:
+- Interní zdroje rozhodnutí:
+
+### Privacy-first kontrola
+
+- Jaká data byla potřeba:
+- Kde byla data sdílena:
+- Kdo měl přístup:
+- Přílohy ke smazání:
+- Retenční poznámka:
+
+### Rozhodnutí
+
+- Výsledek:
+- Oprava / kredit / vysvětlení:
+- Schvalovatel:
+- Dopad na další faktury:
+- Účetní navazující krok:
+
+### Komunikace
+
+- První odpověď odeslána:
+- Finální odpověď odeslána:
+- Co má udělat zákazník:
+- Co uděláme my:
+- Navazující help článek / úprava textu:
+
+### Poučení
+
+- Kořenová příčina:
+- Opakovatelný pattern:
+- Úkol do backlogu:
+- Úprava dokumentace:
+- Datum review:
+
+
 ## Pracovní log
+- **2026-09-19:** Doplněna příloha GF o reklamacích faktur a billing supportu: klasifikace dotazů, první odpověď, rekonstrukce faktury, privacy-first práce s doklady, rozhodovací možnosti, zákaznická komunikace, review, checklist a billing support karta.
 - **2026-09-19:** Doplněna příloha GE o měsíčním billing runbooku: kalendář kontrol, oddělení zákaznických změn od interních oprav, evidence výjimek, privacy-first kontrola datových toků, otevřené hrany před uzávěrkou, komunikace, review, checklist a měsíční billing karta.
 - **2026-09-19:** Doplněna příloha GD o upgradech, downgradech a změnách tarifů: typy změn, okamžitý upgrade, férový downgrade, limity bez datových rukojmí, evidence výjimek, čitelná fakturační komunikace, privacy-first kontrola, metriky, checklist a karta změny tarifu.
 
