@@ -29129,7 +29129,160 @@ Bez review tým často automaticky pokračuje v původním seznamu přání. Jen
 
 ---
 
+## Příloha FL: Customer success rytmus po implementaci bez account management divadla
+
+Implementace skončila, zákazník poprvé používá produkt v reálném provozu a tým si na vteřinu oddychne. Právě tady ale často začíná tichý problém: všichni čekají, že hodnota bude „nějak“ pokračovat sama. Obchod už loví další deal, produkt řeší nové funkce, support čeká na ticket a zákazník mezitím pomalu sklouzává do režimu „máme to koupené, ale nevíme, jestli nám to ještě pomáhá“.
+
+Customer success rytmus není další vrstva schůzek ani luxus pro enterprise týmy. Je to jednoduchý systém, který pravidelně ověřuje, jestli zákazník pořád získává hodnotu, jestli se nezměnil jeho kontext a jestli se z produktu nestala jen zapomenutá položka ve fakturách. Privacy-first verze navíc neznamená sledovat každé kliknutí jednotlivce. Znamená používat minimum signálů, mluvit s lidmi včas a opírat se o agregovaná data tam, kde stačí.
+
+> Codyho komentář: Pokud se o zákazníkovi dozvíš problém až z výpovědi smlouvy, není to „churn insight“. Je to účet za ticho.
+
+### Success není spokojenost, ale opakovaně dosažený výsledek
+
+Spokojený zákazník může produkt stejně opustit. Měl milý onboarding, hezké demo a rychlou podporu, ale pokud produkt nepřináší měřitelný výsledek, rozpočet časem vyhraje nad sympatií. Customer success proto nezačínej otázkou „jsou spokojení?“, ale otázkou „jaký výsledek se má pravidelně opakovat?“
+
+Příklad pro malý B2B SaaS:
+
+- zákazník každý týden zavře plánování práce bez ručního slučování tabulek,
+- obchodní tým má po každém leadu jasný další krok,
+- podpora vidí eskalace dřív, než se z nich stane požár,
+- manažer dostane agregovaný provozní přehled bez sledování jednotlivců,
+- účetní tým odesílá fakturaci bez ruční kontroly pěti exportů.
+
+Každý z těchto výsledků lze ověřit bez invazivního trackingu. Stačí kombinovat několik signálů: aktivní účty na úrovni organizace, dokončené klíčové workflow, počet ručních zásahů, support témata a krátký kvalitativní feedback. Nehledej dokonalé skóre. Hledej včasný signál, že hodnota slábne.
+
+### Prvních 90 dní po implementaci rozhoduje o zvyku
+
+Po implementaci by nemělo následovat prázdno. Prvních 90 dní je období, kdy se produkt mění z novinky na pracovní zvyk. Pokud zákazník produkt používá jen tehdy, když mu to někdo připomene, adopce ještě není vyhraná.
+
+Praktický rytmus může vypadat takto:
+
+- **Den 7:** krátká kontrola, jestli první workflow proběhlo bez blokátorů.
+- **Den 21:** kontrola prvního měřitelného výsledku a odstranění tření.
+- **Den 45:** ověření, jestli se produkt dostal do běžného pracovního rytmu týmu.
+- **Den 75:** rozhodnutí, co rozšířit, zjednodušit nebo zastavit.
+- **Den 90:** review hodnoty, další fáze a případná úprava plánu.
+
+Tenhle rytmus nemusí znamenat pět dlouhých callů. Někdy stačí e-mail, krátká zpráva, asynchronní dotazník nebo patnáctiminutová kontrola. Důležité je, aby kontakt měl jasný účel. „Jen se hlásím“ je obchodní vata. Lepší je: „Minule jsme chtěli snížit ruční kontrolu reportu na jeden krok. Vidím, že workflow běží u dvou týmů, ale třetí ho nepoužívá. Máme opravit nastavení, nebo je tam jiný proces?“
+
+### Health score bez šmírovacího kokpitu
+
+Health score se snadno zvrhne v dashboard, který vypadá chytře a nic neříká. Malý tým nepotřebuje prediktivní chrám z dvaceti metrik. Potřebuje jednoduchý semafor, který upozorní na riziko a vyvolá lidskou akci.
+
+Začni čtyřmi skupinami signálů:
+
+- **Hodnota:** proběhl klíčový workflow v posledním období?
+- **Zapojení:** používá produkt víc než jeden člověk nebo jeden osamělý hrdina?
+- **Tření:** opakují se stejné support dotazy, workaroundy nebo ruční zásahy?
+- **Vztah:** existuje aktivní kontakt, který rozumí přínosu a umí rozhodovat?
+
+Každou skupinu hodnoť jednoduše: zelená, žlutá, červená. Nepotřebuješ přesnou matematiku, pokud by jen zakryla nejistotu. Zelená znamená pokračovat v rytmu, žlutá znamená domluvit konkrétní nápravu a červená znamená řešit riziko se zákazníkem otevřeně. Cílem není dokazovat, že zákazník je „aktivní“. Cílem je vědět, komu pomoct dřív, než je pozdě.
+
+Privacy-first pravidlo: health score má být na úrovni účtu, týmu nebo procesu, ne jako žebříček jednotlivých zaměstnanců zákazníka. Pokud data nestačí agregovaně, pravděpodobně měříš víc, než potřebuješ.
+
+### Business review bez prezentace pro prezentaci
+
+Quarterly business review zní korporátně, ale jeho zdravá verze je užitečná i pro malé SaaS. Jen nesmí sklouznout do slajdů, kde dodavatel zákazníkovi půl hodiny ukazuje vlastní produktové metriky a čeká potlesk. Review má odpovědět na tři otázky:
+
+1. Jakou hodnotu produkt za poslední období reálně přinesl?
+2. Co zákazníkovi brání získat víc hodnoty?
+3. Jaké jedno až tři rozhodnutí uděláme pro další období?
+
+Dobré review začíná zákazníkovým kontextem. Změnil se tým? Přibyl nový proces? Změnily se priority? Produkt, který byl ideální při nákupu, může po třech měsících potřebovat jiné nastavení. Proto si na review připrav spíš pracovní podklady než divadelní prezentaci.
+
+Struktura 45minutového review:
+
+- **5 minut:** co se změnilo u zákazníka,
+- **10 minut:** co se podařilo podle domluvených výsledků,
+- **10 minut:** kde je tření, riziko nebo nízká adopce,
+- **10 minut:** návrh dalšího kroku nebo rozšíření,
+- **10 minut:** dohoda, vlastník, termín a zápis.
+
+Výstupem nemá být „děkujeme za čas“. Výstupem má být konkrétní rozhodnutí: například zjednodušit workflow, proškolit novou roli, vypnout nepoužívanou integraci, připravit další tým, nebo naopak přiznat, že produkt pro daný use-case zatím nedává smysl.
+
+### Expandi až po hodnotě, ne po faktuře
+
+Rozšíření zákazníka je lákavé. Další tým, vyšší tarif, víc integrací, větší smlouva. Jenže expansion prodej bez dosažené hodnoty působí jako hladový account management: „Ještě jste pořádně nezačali používat první věc, nechcete koupit druhou?“ To není růst, to je prosba o churn s odkladem.
+
+Signály připravenosti na rozšíření:
+
+- zákazník umí vlastními slovy popsat přínos,
+- klíčový workflow běží opakovaně bez asistence dodavatele,
+- existuje interní vlastník, který produkt obhajuje,
+- další tým má podobný problém, ne jen volný rozpočet,
+- support dotazy se týkají rozšíření hodnoty, ne základní orientace.
+
+Když tyto signály chybí, rozšíření odlož. Nejdřív oprav adopci. Dlouhodobě je zdravější menší zákazník, který produkt skutečně používá, než větší faktura, která se za půl roku vrátí jako nepříjemný e-mail.
+
+### Privacy-first success dokumentace
+
+Customer success pracuje s citlivým kontextem: kdo u zákazníka rozhoduje, kde vzniká odpor, jaké procesy selhávají, jaké interní změny se chystají. To jsou obchodně i osobně citlivé informace. Nepatří do chaotických poznámek, nekonečných CRM polí ani sdílených dokumentů bez retence.
+
+U každého zákazníka drž jen informace, které pomáhají poskytovat službu:
+
+- aktuální cíl zákazníka,
+- domluvené výsledky a milníky,
+- kontaktní role, ne zbytečné osobní detaily,
+- otevřená rizika a blokátory,
+- rozhodnutí z review,
+- datum další kontroly,
+- retenční pravidlo pro staré poznámky.
+
+Nevytvářej interní psychologické profily lidí u zákazníka. Věta „finanční ředitelka je opatrná u rozpočtu a chce vidět dopad na cash-flow“ je pracovní kontext. Věta „je problémová a všechno blokuje“ je odpad, který jednou někdo trapně najde. A bude to zasloužené.
+
+### Checklist pro customer success rytmus
+
+- Je u každého zákazníka jasně popsaný očekávaný výsledek po implementaci?
+- Existuje 30/60/90denní rytmus kontrol bez zbytečných schůzek?
+- Měříš zdraví účtu agregovaně, ne jako dohled nad jednotlivci?
+- Má každý rizikový účet konkrétní další krok, vlastníka a termín?
+- Probíhá pravidelné review hodnoty, ne jen prezentace funkcí?
+- Nabízíš rozšíření až ve chvíli, kdy je dosažená první hodnota?
+- Má success dokumentace jasnou retenci a minimum osobních poznámek?
+- Ví produktový tým, které success poznatky se opakují napříč zákazníky?
+
+### Mini šablona: karta zákaznického success rytmu
+
+```markdown
+## Customer success karta: [zákazník / tým]
+
+### Očekávaný výsledek
+- Hlavní pracovní výsledek:
+- Jak ho poznáme v praxi:
+- Kdo u zákazníka výsledek vlastní:
+
+### Rytmus prvních 90 dní
+- Den 7 kontrola:
+- Den 21 kontrola:
+- Den 45 kontrola:
+- Den 75 kontrola:
+- Den 90 review:
+
+### Health signály
+- Hodnota: zelená / žlutá / červená — důvod:
+- Zapojení: zelená / žlutá / červená — důvod:
+- Tření: zelená / žlutá / červená — důvod:
+- Vztah: zelená / žlutá / červená — důvod:
+
+### Rizika a další krok
+- Největší riziko:
+- Dohodnutý další krok:
+- Vlastník:
+- Termín:
+
+### Privacy-first poznámky
+- Jaká zákaznická data pro success používáme:
+- Co měříme jen agregovaně:
+- Co do poznámek nepatří:
+- Kdy staré poznámky smažeme nebo zestručníme:
+```
+
+---
+
+
 ## Pracovní log
+
+- **2026-09-19:** Doplněna příloha FL o customer success rytmu po implementaci: výsledky místo spokojenosti, 90denní rytmus, jednoduchý health score bez šmírování, business review, expansion po hodnotě, privacy-first dokumentace, checklist a success karta.
 - **2026-09-19:** Doplněna příloha FK o implementačním plánu po nákupu: ochrana první hodnoty, řízení rozsahu, importy dat, integrace, situační školení, změny scope, provozní review, checklist a karta implementační fáze.
 - **2026-09-19:** Doplněna příloha FJ o předání z obchodu do onboardingu: handoff karta, první úspěch, negativní kontext, privacy-first rozsah dat, agenda meetingu a zpětná vazba do obchodu.
 - **2026-09-18:** Doplněna příloha FI o CRM a follow-upu bez stalkingu: pipeline podle rozhodnutí, minimální CRM karta, užitečný follow-up, rozumná segmentace, CRM hygiena, předávky mezi marketingem, obchodem a produktem, checklist a šablona příležitosti.
