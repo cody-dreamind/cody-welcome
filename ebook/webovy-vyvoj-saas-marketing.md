@@ -28759,7 +28759,201 @@ Nejlepší CRM není nástroj. Je to dohoda, že každý důležitý obchodní s
 
 ---
 
+## Příloha FJ: Předání z obchodu do onboardingu bez ztráty kontextu a přepáleného sběru dat
+
+Vyhraný obchod není konec. Je to okamžik, kdy zákazník přestane poslouchat sliby a začne měřit realitu. Pokud se mezi podpisem, platbou a prvním používáním ztratí kontext, onboarding začíná trapnou větou: „Můžete nám ještě jednou popsat, co vlastně potřebujete?“ To je jako pozvat člověka na večeři a u dveří se zeptat, kdo je.
+
+Malý SaaS tým nepotřebuje složitý customer success aparát. Potřebuje spolehlivé předání: co zákazník koupil, proč to koupil, co jsme mu slíbili, co jsme výslovně neslíbili a jak poznáme, že první týdny dávají hodnotu. Privacy-first přístup k tomu přidává ještě jednu podmínku: nepřenášet do onboardingu datový šrot jen proto, že se nasbíral cestou.
+
+> Codyho komentář: Handoff není interní ceremoniál. Je to pojistka proti tomu, aby zákazník po podpisu zjistil, že firma má výborný sales deck a paměť zlaté rybky.
+
+### Handoff začíná už během prodeje
+
+Nejhorší předání je to, které se začne řešit až po výhře. Obchod během kvalifikace a dema sbírá informace, které onboarding později zoufale potřebuje: rozhodovací kritéria, technické mantinely, obavy, termíny, sliby a interní politiku zákazníka. Když tyto informace skončí jen v hlavě obchodníka nebo v desetiminutovém hlasovém vzkazu, tým si koleduje o chaos.
+
+Už v CRM si proto označuj údaje, které budou po výhře potřeba:
+
+- **Důvod nákupu:** proč zákazník jedná právě teď.
+- **Očekávaný výsledek:** jaký konkrétní stav chce po prvním měsíci vidět.
+- **Aktivační moment:** co musí zákazník zažít, aby řekl „aha, tohle funguje“.
+- **Kritické osoby:** kdo rozhoduje, kdo bude nástroj používat a kdo může adopci zablokovat.
+- **Technické předpoklady:** integrace, importy, přístupy, domény, fakturace, bezpečnostní omezení.
+- **Sliby a výjimky:** co bylo součástí nabídky, co je mimo rozsah a co je zatím jen možnost.
+
+Tohle není další administrativa pro radost manažerů. Je to způsob, jak obchod neprodává izolovaně od reality produktu. Každý slib, který onboarding nedokáže dodat, se v prvních týdnech vrátí jako support ticket, ztracená důvěra nebo sleva.
+
+### Jedna handoff karta je lepší než pět meetingů
+
+Předávací meeting má smysl jen tehdy, když se opírá o krátkou handoff kartu. Bez ní se z meetingu stane volné vyprávění, kde se důležité věci pletou s dojmy. Karta nutí tým oddělit fakta, domněnky a otevřené otázky.
+
+Dobrá handoff karta se vejde na jednu obrazovku a odpovídá na šest otázek:
+
+1. **Koho onboardujeme?** Firma, role, tým, počet uživatelů, kontaktní osoba.
+2. **Proč koupili?** Problém, dopad, spouštěč rozhodnutí.
+3. **Co má být první úspěch?** Měřitelný aktivační moment.
+4. **Co jsme slíbili?** Funkce, rozsah, termíny, materiály, podpora.
+5. **Kde jsou rizika?** Technické, organizační, právní, časové nebo komunikační blokery.
+6. **Jaká data opravdu potřebujeme?** Jen data nutná pro nastavení, migraci, podporu a komunikaci.
+
+Pokud karta nejde vyplnit, obchod pravděpodobně není tak jasný, jak vypadá. To neznamená, že se má zastavit. Znamená to, že první onboardingový krok musí být doplnění kontextu, ne okamžité posílání návodů a pozvánek.
+
+### Zákazník nesmí opakovat celý prodejní rozhovor
+
+Při prvním onboarding callu má zákazník poznat, že tým poslouchal. Nemusíš recitovat všechno, co řekl v sales procesu, ale měl by slyšet vlastní realitu zpátky.
+
+Místo:
+
+> Tak nám řekněte, co od toho očekáváte.
+
+Lepší:
+
+> Z předchozí domluvy máme, že hlavním cílem je do tří týdnů odstranit ruční skládání reportu a dát provoznímu týmu jeden přehled nad otevřenými zakázkami. Dnes si potvrdíme datové zdroje, role a první měřitelný výstup. Sedí to pořád?
+
+Rozdíl je obrovský. První verze říká „začínáme od nuly“. Druhá říká „navazujeme“. Zákazník může opravit detaily, ale nemusí znovu prodávat vlastní problém firmě, které už zaplatil.
+
+### První úspěch musí být menší než celá implementace
+
+Onboarding často selhává, protože tým zamění první úspěch za kompletní nasazení. Zákazník nepotřebuje v prvních dnech vidět všechno. Potřebuje zažít jasný posun, který potvrzuje nákupní rozhodnutí.
+
+Příklady dobrého prvního úspěchu:
+
+- servisní firma vidí pět aktuálních zakázek ve společném přehledu místo tří tabulek,
+- obchodní tým dostane první automatický týdenní report bez ručního exportu,
+- zákaznická podpora vyřeší první typický dotaz přes novou znalostní bázi,
+- manažer vidí jednoduchý dashboard se třemi metrikami, podle kterých opravdu rozhoduje,
+- compliance člověk dostane datovou mapu a potvrzení, kde jsou uložená data.
+
+První úspěch má být malý, viditelný a propojený s důvodem nákupu. Když se první měsíc utopí v nastavování rolí, barev, edge-case importů a interních debatách o názvosloví, nadšení mizí. Produkt může být technicky správně, ale zákazník nezažil hodnotu.
+
+### Předávej i negativní kontext
+
+Handoff, který předává jen pozitivní informace, je marketingový leták. Onboarding potřebuje i nepříjemné věci: obavy zákazníka, nevyřešené otázky, limity produktu, interní odpor, cenové napětí a oblasti, kde obchod raději nic neslíbil.
+
+Do předání patří například:
+
+- zákazník má špatnou zkušenost s předchozím dodavatelem,
+- rozhodovatel není budoucí každodenní uživatel,
+- tým zákazníka se bojí změny procesu,
+- zákazník očekává integraci, která zatím není hotová,
+- právní nebo bezpečnostní kontrola ještě není dokončená,
+- cena byla schválená jen pro pilot, ne pro dlouhodobý rollout.
+
+Negativní kontext není pomluva zákazníka. Je to mapa rizik. Když ji onboarding nezná, šlápne přesně tam, kde je mina.
+
+### Privacy-first handoff neznamená slepý handoff
+
+Minimalizace dat neznamená, že tým nesmí nic vědět. Znamená to, že každá předaná informace má mít účel. Onboarding nepotřebuje historii všech otevření e-mailů, interní poznámky o osobnosti kontaktu ani behaviorální drobky z webu. Potřebuje provozní kontext, smluvní mantinely a data nutná pro dodání služby.
+
+Praktické pravidlo:
+
+- **Předat:** problém, domluvy, role, technické požadavky, preferovaný kanál, nezbytné kontakty, bezpečnostní omezení.
+- **Nepředávat:** zbytečné osobní poznámky, spekulace, detailní tracking aktivity, data bez jasného účelu, citlivé informace mimo rozsah služby.
+- **Doplnit souhlas nebo účel:** pokud se mění typ komunikace, rozsah zpracování nebo zapojení dalších osob.
+
+Když zákazník po podpisu přechází z marketingové komunikace do servisní komunikace, tým by měl vědět, proč mu píše. Ne proto, že „je v databázi“, ale proto, že je potřeba dodat objednanou službu, domluvit nastavení nebo splnit podporu.
+
+### Předávací meeting má jasnou agendu
+
+Krátký interní handoff meeting stačí. Ideálně 15–20 minut, žádný divadelní výbor. Cílem není převyprávět celý obchod, ale potvrdit plán prvních kroků a rizika.
+
+Agenda:
+
+1. **Shrnutí zákazníka:** segment, tým, hlavní kontakt.
+2. **Důvod nákupu:** problém, dopad, rozhodovací kritéria.
+3. **První úspěch:** co má být hotovo a kdy.
+4. **Sliby a mantinely:** co je v rozsahu a co není.
+5. **Rizika:** adopce, integrace, data, termíny, očekávání.
+6. **Další kroky:** kdo kontaktuje zákazníka, kdy a s jakým cílem.
+
+Na konci meetingu musí být jasné tři věci: kdo vlastní onboarding, jaký je první zákaznický krok a co se nesmí zapomenout. Pokud po meetingu vznikne jen dobrý pocit, nebyl to handoff. Byl to podcast.
+
+### Onboarding feedback se musí vracet do obchodu
+
+Předání není jednosměrná pošta. Obchod potřebuje vědět, jestli jeho sliby odpovídají realitě. Pokud onboarding opakovaně řeší stejné nedorozumění, problém není jen u zákazníků. Problém je v positioning, pricing stránce, demo scénáři nebo kvalifikaci.
+
+Každý měsíc si položte otázky:
+
+- Které sliby zákazníci pochopili jinak než tým?
+- Které informace nám při předání nejčastěji chyběly?
+- Které typy zákazníků se aktivují rychle a které drhnou?
+- Které funkce obchod často používá jako argument, ale onboarding s nimi bojuje?
+- Kde musíme upravit nabídku, demo, FAQ nebo smluvní mantinely?
+
+Tím se handoff mění z administrativy na učení. Sales prodává přesněji, onboarding začíná rychleji a produkt lépe vidí, kde je slib větší než realita.
+
+### Checklist: handoff bez ztráty kontextu
+
+- Má každá vyhraná příležitost vyplněnou handoff kartu před prvním onboarding krokem?
+- Je jasný důvod nákupu a očekávaný první úspěch?
+- Ví onboarding, co bylo slíbeno, co je mimo rozsah a co je jen možnost?
+- Jsou rizika popsaná konkrétně, ne jen jako „náročný zákazník“?
+- Nepřenášíme do onboardingu data bez jasného účelu?
+- Má zákazník první zprávu, která navazuje na předchozí domluvy?
+- Existuje vlastník onboardingu a datum prvního měřitelného výsledku?
+- Vrací se poznatky z onboardingu zpět do sales, marketingu a produktu?
+- Umíme bezpečně říct „tohle jsme neslíbili“ bez paniky a výmluv?
+- Je po 30 dnech jasné, zda zákazník zažil hodnotu, nebo jen absolvoval nastavení?
+
+### Šablona: handoff karta zákazníka
+
+## Handoff zákazníka: [firma / tým]
+
+### Základ
+
+- Firma / tým:
+- Segment:
+- Kontaktní osoba a role:
+- Rozhodovatel:
+- Budoucí hlavní uživatelé:
+- Vlastník onboardingu:
+
+### Důvod nákupu
+
+- Problém popsaný jazykem zákazníka:
+- Dopad problému:
+- Proč zákazník jedná teď:
+- Rozhodovací kritéria:
+
+### První úspěch
+
+- Aktivační moment:
+- První měřitelný výsledek:
+- Termín:
+- Jak zákazník pozná, že onboarding funguje:
+
+### Sliby a mantinely
+
+- Co bylo slíbeno:
+- Co je mimo rozsah:
+- Co vyžaduje technické ověření:
+- Otevřené otázky:
+
+### Rizika
+
+- Technická rizika:
+- Organizační rizika:
+- Právní / bezpečnostní rizika:
+- Rizika očekávání:
+
+### Data a privacy-first kontrola
+
+- Data nutná pro nastavení:
+- Data nutná pro migraci nebo import:
+- Kontakty nutné pro komunikaci:
+- Data, která nepřenášet dál:
+- Retence onboardingových poznámek:
+
+### Další kroky
+
+- První zpráva zákazníkovi:
+- První onboarding call:
+- Příprava před callem:
+- Interní kontrola po 30 dnech:
+
+---
+
 ## Pracovní log
+- **2026-09-19:** Doplněna příloha FJ o předání z obchodu do onboardingu: handoff karta, první úspěch, negativní kontext, privacy-first rozsah dat, agenda meetingu a zpětná vazba do obchodu.
 - **2026-09-18:** Doplněna příloha FI o CRM a follow-upu bez stalkingu: pipeline podle rozhodnutí, minimální CRM karta, užitečný follow-up, rozumná segmentace, CRM hygiena, předávky mezi marketingem, obchodem a produktem, checklist a šablona příležitosti.
 - **2026-09-18:** Doplněna příloha FH o zákaznickém výzkumu bez datového přestřelu: rozhodnutí před otázkami, volba nejmenší metody, opatrné nahrávání, otázky na minulé chování, syntéza insightů, výzkumný repozitář, zapojení týmu, checklist a karta zákaznického výzkumu.
 - **2026-09-18:** Doplněna příloha FG o produktovém příběhu bez buzzwordů: starý svět zákazníka, zákazník jako hlavní postava, konkrétní a splnitelný slib, důkazy blízko slibu, sjednocení webu/dema/onboardingu, testování v rozhovorech, checklist a karta produktového příběhu.
