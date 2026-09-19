@@ -31616,8 +31616,183 @@ To jsou provozní metriky, ne sledování lidí. Pomohou ti najít tření: tře
 - Je potřeba upravit nápovědu nebo proces:
 
 
+## Příloha FZ: Datová inventura před expanzí produktu bez toho, aby se z ní stal archeologický výkop
+
+Expanze produktu často vypadá nevinně: nový trh, nový balíček, nový integrační partner, nová role v aplikaci. Jenže každé rozšíření mění i datovou realitu. Přibudou nové formuláře, nové exporty, nové oprávnění, nový důvod proč si někdo řekne „tohle si radši uložíme, třeba se to bude hodit“. A přesně tak vzniká datový sklep, kde jednou najdeš tři roky starý CSV export, pět nepoužívaných polí a integraci, na kterou si pamatuje už jen bývalý kolega a možná jedna kávová skvrna.
+
+Datová inventura před expanzí není právnický rituál. Je to produktová brzda proti tomu, aby růst znamenal nekontrolovaný sběr dat, horší bezpečnost a složitější podporu. Cílem není vše zastavit. Cílem je vědět, jaká data nová etapa opravdu potřebuje, kdo za ně odpovídá a kdy mají zmizet.
+
+### Začni rozhodnutím, které expanze vyžaduje
+
+Nejdřív pojmenuj, co se má po expanzi změnit. Datová inventura bez produktového rozhodnutí se rychle změní v tabulku pro tabulku. Tým pak kontroluje všechno, ale neví proč.
+
+Praktické otázky:
+
+- **Nový trh:** mění se jazyk, fakturace, support, právní dokumenty nebo hostingová očekávání?
+- **Nový segment:** potřebuje jiný onboarding, jiné role, jiné reporty nebo jiné retenční lhůty?
+- **Nová integrace:** jaká data potečou ven, jaká dovnitř a kdo řeší chyby synchronizace?
+- **Nový tarif:** přidává oprávnění, auditní logy, exporty, limity nebo SLA?
+- **Nový use-case:** pracuje s citlivějšími daty než současný produkt?
+
+Výstupem této části má být jedna věta: „Expanze vyžaduje tato nová data a tyto nové datové toky, protože bez nich nejde dodat slíbený výsledek.“ Pokud taková věta nejde napsat, expanze je ještě moc mlhavá.
+
+### Udělej mapu současných datových míst
+
+Před přidáním nových dat se podívej, kde data žijí už dnes. Nejen v databázi. Malý SaaS má data často rozlezlá v support nástroji, CRM, e-mailu, analytice, logách, noteboocích, exportech, platební bráně, fakturačním systému a interní dokumentaci.
+
+Stačí jednoduchá tabulka:
+
+- **Místo:** aplikace, databáze, storage, CRM, support, e-mail, analytika, logy.
+- **Typ dat:** účet, kontakt, fakturace, produktové události, support zprávy, technické logy.
+- **Účel:** proč data existují a jaké rozhodnutí nebo proces podporují.
+- **Vlastník:** kdo odpovídá za správnost, přístupy a úklid.
+- **Retence:** jak dlouho data držíme a proč.
+- **Export / mazání:** jak data dostane zákazník ven a jak se řeší ukončení.
+
+Nedělej z toho šestiměsíční audit. První verze má být užitečná za jedno odpoledne. Když narazíš na neznámé datové místo, označ ho červeně a přiřaď vlastníka. Nečekej na dokonalou jistotu; čekání je jen luxusní forma prokrastinace s compliance parfémem.
+
+### Nová data musí projít testem potřebnosti
+
+Každé nové pole, event, dokument nebo oprávnění projdi přes jednoduchý filtr:
+
+1. **Jaký zákaznický nebo provozní výsledek tím podporujeme?**
+2. **Dá se výsledek dodat bez tohoto údaje?**
+3. **Stačí méně přesný, agregovaný nebo dočasný údaj?**
+4. **Kdo údaj uvidí a kdo ho může exportovat?**
+5. **Kdy údaj smažeme nebo anonymizujeme?**
+6. **Co se stane, když údaj unikne nebo bude špatně?**
+
+Příklad: chceš přidat „velikost firmy“ do onboarding formuláře. Potřebuješ ji pro nastavení produktu, nebo jen pro pozdější segmentaci? Pokud jen pro segmentaci, možná stačí dobrovolná volba v obchodním kontextu, ne povinné pole při registraci.
+
+Příklad z B2B: zákazník chce auditní logy pro administrátory. To dává smysl, ale loguj akce a technický kontext, ne celé payloady. „Uživatel změnil roli člena workspace“ je užitečné. Ukládat celé předchozí a nové hodnoty včetně citlivých poznámek už může být datový toaster hozený do vany.
+
+### Integrace posuzuj jako datové hranice
+
+Expanze často přinese integraci: účetnictví, CRM, helpdesk, SSO, datový sklad, notifikace, platební nástroj. Každá integrace je hranice důvěry. Nestačí říct „má API, super“. Potřebuješ vědět, co přes hranici teče a jak se to vypíná.
+
+U každé integrace si napiš:
+
+- jaký problém řeší,
+- kdo ji potřebuje a ve kterém tarifu,
+- jaká data posílá ven,
+- jaká data přijímá zpět,
+- jak se řeší chyba nebo duplicitní synchronizace,
+- kdo má administrátorský přístup,
+- jak zákazník integraci odpojí,
+- co zůstane po odpojení a jak dlouho.
+
+Privacy-first varianta je preferovat explicitní zapnutí integrace zákazníkem, jasný popis rozsahu a možnost jednoduchého vypnutí. Integrace nemá být tajná chodba za knihovnou. Má být dveře se štítkem.
+
+### Přístupy rozšiřuj podle rolí, ne podle naléhavosti
+
+Nový segment nebo trh často znamená víc lidí v provozu: support, obchod, onboarding, partner, externí účetní, implementační konzultant. Nejrychlejší cesta je dát všem široký přístup. Nejlepší cesta k průšvihu taky.
+
+Před expanzí si připrav role:
+
+- **Support:** vidí kontext účtu a poslední technické události, ale ne fakturační detaily mimo potřebu.
+- **Obchod:** vidí obchodní historii a stav pilotu, ne zákaznický obsah uvnitř produktu.
+- **Onboarding:** vidí nastavení workspace, importní stav a checklist, ne tajemství zákazníka.
+- **Finance:** vidí fakturaci, platby a daňové údaje, ne produktové logy.
+- **Admin:** má vyšší oprávnění, ale vše citlivé se loguje a pravidelně reviduje.
+
+Když někdo potřebuje dočasný přístup kvůli incidentu nebo migraci, dej ho časově omezeně a zapiš důvod. Dočasný přístup bez expirace je jen trvalý přístup v kostýmu.
+
+### Dokumentace musí držet krok s produktem
+
+Datová inventura není hotová, dokud se změny nepromítnou do veřejné i interní dokumentace. Pokud zákazník po expanzi nepochopí, co se s daty děje, problém není v zákazníkovi. Problém je v tom, že produkt mluví rychleji než dokumentace.
+
+Aktualizuj minimálně:
+
+- privacy policy nebo přehled zpracování,
+- seznam subprocesorů, pokud přibyl dodavatel,
+- DPA přílohy u B2B zákazníků, pokud se mění rozsah,
+- help články k exportu, mazání a integracím,
+- interní runbook pro support a incidenty,
+- onboarding texty, pokud sbíráš nové údaje.
+
+Dobrá dokumentace nemusí být dlouhá. Musí být konkrétní. „Data používáme ke zlepšení služeb“ je mlha. „Produktové události používáme v agregované podobě k měření aktivace workspace a držíme je 13 měsíců“ je věta, podle které se dá rozhodovat.
+
+### Před spuštěním udělej datový go/no-go
+
+Expanze by neměla jít ven jen proto, že feature flag je zelený. Udělej krátký datový go/no-go meeting. Třicet minut stačí, když máš podklady.
+
+Agenda:
+
+1. Jaká nová data vznikají?
+2. Jaké nové datové toky a integrace přibyly?
+3. Kdo má nově přístup?
+4. Jak zákazník data exportuje, opraví nebo smaže?
+5. Co se změnilo v dokumentaci?
+6. Jaké riziko vědomě přijímáme a kdo ho vlastní?
+7. Co musí být opraveno před spuštěním?
+
+Go/no-go nemá být soudní proces. Je to zdravá kontrola, že růst nepřepisuje hodnoty produktu. Když něco není hotové, rozhodni: blokuje launch, nebo jde do jasně termínovaného follow-upu? Bez vlastníka a termínu to není follow-up. Je to přání do studny.
+
+### Checklist: datová inventura před expanzí
+
+- [ ] Máme jednu větu, proč expanze potřebuje nová data nebo datové toky.
+- [ ] Zmapovali jsme současná datová místa mimo hlavní databázi.
+- [ ] Každé nové pole nebo event prošel testem potřebnosti.
+- [ ] Nové integrace mají popsaný účel, rozsah dat, vypnutí a retenci.
+- [ ] Role a přístupy odpovídají práci, ne naléhavosti.
+- [ ] Dočasné přístupy mají expiraci a důvod.
+- [ ] Dokumentace pro zákazníky i interní tým odpovídá nové realitě.
+- [ ] Export, mazání a offboarding fungují i pro nový scénář.
+- [ ] Vznikla go/no-go poznámka s vlastníky rizik.
+- [ ] Follow-up úkoly mají datum, vlastníka a jasný důkaz dokončení.
+
+### Mini šablona: karta datové expanze
+
+## Karta datové expanze: [produkt / trh / tarif / integrace]
+
+### Kontext
+
+- Co expanduje:
+- Pro koho:
+- Jaký nový výsledek slibujeme:
+- Datum plánovaného spuštění:
+
+### Nová data
+
+- Nová pole / dokumenty / eventy:
+- Účel každého údaje:
+- Méně invazivní alternativa:
+- Retence:
+
+### Datové toky
+
+- Nové interní toky:
+- Nové externí integrace:
+- Data posílaná ven:
+- Data přijímaná zpět:
+- Vypnutí integrace:
+
+### Přístupy
+
+- Nové role:
+- Dočasné přístupy:
+- Auditní logy:
+- Vlastník kontroly přístupů:
+
+### Dokumentace
+
+- Veřejné stránky k aktualizaci:
+- DPA / subprocesoři:
+- Help články:
+- Interní runbooky:
+
+### Go/no-go
+
+- Blokující rizika:
+- Přijatá rizika:
+- Follow-up úkoly:
+- Vlastník rozhodnutí:
+
+> Codyho komentář: Expanze bez datové inventury je jako stěhování kanceláře bez seznamu klíčů. Všichni se tváří, že to nějak dopadne, dokud někdo nezjistí, že sklad, serverovna a kávovar patří pořád někomu jinému.
+
 ## Pracovní log
 
+- **2026-09-19:** Doplněna příloha FZ o datové inventuře před expanzí produktu: rozhodnutí před sběrem, mapa datových míst, test potřebnosti, integrace jako hranice důvěry, role přístupů, dokumentace, go/no-go kontrola, checklist a karta datové expanze.
 - **2026-09-19:** Doplněna příloha FY o obnově účtu a změně vlastníka workspace: oddělení osobní identity, workspace a fakturace, samoobslužná obnova, rozhodovací strom převodu, omezení support pravomocí, minimalizace důkazů, hygiena po převodu, komunikační šablony, metriky, checklist a karta obnovy workspace.
 
 - **2026-09-19:** Doplněna příloha FX o správě secrets a API klíčů: definice secretů, inventář podle dopadu, bezpečné ukládání mimo kód a chat, lokální vývoj, CI/CD rizika, rotace, logování, zákaznická tajemství, incident postup, checklist a secret karta.
