@@ -29280,8 +29280,158 @@ Nevytvářej interní psychologické profily lidí u zákazníka. Věta „finan
 ---
 
 
+## Příloha FM: Obnova smlouvy a prevence churnu bez poslední minutové paniky
+
+Obnova smlouvy není datum v kalendáři, kdy zákazníkovi pošleš fakturu a držíš palce. Je to výsledek předchozích měsíců: jestli zákazník chápe hodnotu, má interního vlastníka, používá produkt v reálném procesu a ví, co se stane dál. Pokud se renewal řeší až dva týdny před koncem období, tým většinou už neprodává hodnotu. Hasičsky obhajuje, proč zákazník nemá odejít.
+
+Churn prevention není manipulace, slevová loterie ani nervózní sekvence follow-upů. V privacy-first SaaS je to hlavně provozní disciplína: včas vidět slábnoucí hodnotu, mluvit otevřeně, nabídnout menší rozsah tam, kde dává smysl, a umožnit férový odchod tam, kde produkt už nepomáhá.
+
+> Codyho komentář: Renewal kalendář není připomínka „začni panikařit“. Je to připomínka „už dávno jsi měl mít jasno, proč zákazník pokračuje“.
+
+### Renewal začíná hned po prvním dosaženém výsledku
+
+Nejlepší obnovu smlouvy připravíš ve chvíli, kdy zákazník poprvé získá slíbený výsledek. Tehdy má smysl výsledek pojmenovat, uložit a domluvit další očekávání. Ne jako právnický artefakt, ale jako jednoduchou pracovní stopu: co se povedlo, komu to pomohlo, jak často se to má opakovat a co bude další meta.
+
+Praktická renewal stopa může obsahovat:
+
+- původní důvod nákupu,
+- první dosažený výsledek,
+- metriky nebo důkazy hodnoty na úrovni týmu či firmy,
+- otevřená rizika adopce,
+- rozhodnutí z posledního business review,
+- datum dalšího hodnotového milníku,
+- datum renewal rozhodnutí, ne jen datum konce smlouvy.
+
+Rozdíl je zásadní. Datum konce smlouvy říká, kdy vyprší papír. Datum renewal rozhodnutí říká, kdy zákazník reálně musí vědět, jestli pokračuje, mění rozsah nebo končí. U větších B2B zákazníků to může být klidně 60–120 dní před koncem, protože uvnitř běží rozpočty, schvalování a interní politika. Malý tým nepotřebuje složitý enterprise proces, ale potřebuje vědět, kdy se rozhoduje.
+
+### Churn signály hledej před výpovědí
+
+Výpověď je pozdní signál. Před ní obvykle přichází slabší vzorce: mizí interní vlastník, klíčové workflow se používá nepravidelně, zákazník odkládá review, opakují se stejné support dotazy, nebo se produkt přesouvá z „řeší nám problém“ do „někde to máme“.
+
+Sleduj hlavně kombinace signálů:
+
+- **Hodnota slábne:** zákazník nedosahuje domluveného výsledku nebo ho neumí popsat.
+- **Vlastník zmizel:** champion odešel, změnil roli nebo už nemá vliv.
+- **Tření roste:** přibývají workaroundy, ruční exporty, nespokojené komentáře.
+- **Rozpočet se mění:** zákazník konsoliduje nástroje nebo snižuje náklady.
+- **Ticho houstne:** zákazník neodpovídá, ruší review a neposílá rozhodnutí.
+
+Privacy-first pravidlo: churn signály nepotřebují sledovat jednotlivé zaměstnance. Většinou stačí účetní úroveň, dokončené klíčové workflow, support témata, změny kontaktů a kvalitativní poznámky z domluvených rozhovorů. Pokud tvůj „churn model“ vyžaduje detailní sledování každého kliknutí lidí u zákazníka, pravděpodobně měříš víc, než dokážeš obhájit.
+
+### Renewal plán rozděl na časové zóny
+
+Renewal je klidnější, když má tým jasný rytmus. Nečekej na poslední měsíc. Rozděl období před obnovou na jednoduché zóny podle délky smlouvy a velikosti zákazníka.
+
+Příklad pro roční B2B smlouvu:
+
+- **120 dní před koncem:** interní kontrola zdraví účtu, hodnoty, rizik a vlastníka.
+- **90 dní před koncem:** rozhovor se zákazníkem o hodnotě, změnách kontextu a dalším období.
+- **60 dní před koncem:** návrh pokračování, úpravy rozsahu nebo rozšíření.
+- **30 dní před koncem:** administrativní dotažení, objednávka, fakturace, případně plán odchodu.
+- **Po obnově:** krátké shrnutí, co se mění a jaký je další hodnotový milník.
+
+U měsíčních tarifů bude rytmus lehčí: například měsíční health review u rizikových účtů, čtvrtletní kontrola hodnoty u stabilních účtů a jasný proces pro downgrade nebo odchod. Důležité je, aby každý rizikový zákazník měl konkrétní další krok. „Budeme sledovat“ je firemní verze koukání na kouř a doufání, že to není požár.
+
+### Nabídni změnu rozsahu dřív než slevu
+
+Když zákazník váhá, první reflex bývá sleva. Sleva ale často maskuje skutečný problém: produkt se nepoužívá, rozsah je moc velký, zákazník změnil priority, nebo původní use-case už není důležitý. Sleva může pomoct krátkodobě, ale pokud neopraví hodnotu, jen odloží churn.
+
+Lepší pořadí možností:
+
+1. **Opravit adopci:** odstranit blokátor, zjednodušit workflow, proškolit novou roli.
+2. **Změnit rozsah:** menší tarif, méně modulů, jiný tým, jiný use-case.
+3. **Změnit rytmus podpory:** dočasně více asistence nebo jasnější success plán.
+4. **Upravit komerční podmínky:** sleva výměnou za konkrétní závazek, ne za ticho.
+5. **Férově ukončit:** export, předání, smazání dat a získání upřímného feedbacku.
+
+Když nabídneš downgrade dřív než výpověď, často zachráníš vztah i data o reálné hodnotě produktu. Zákazník nemusí zůstat za každou cenu v nejvyšším tarifu. Zdravý menší účet, který produkt používá, je lepší než nafouknutá smlouva čekající na explozi.
+
+### Exit rozhovor není soudní proces
+
+Někteří zákazníci odejdou. To není vždy selhání. Selhání je odejít bez pochopení důvodu, bez dobrého exportu a s hořkou pachutí. Exit rozhovor má být krátký, věcný a bezpečný. Neobhajuj se. Nepřemlouvej. Zjisti, co se změnilo a co z toho může zlepšit produkt, onboarding, pricing nebo marketing.
+
+Dobré otázky:
+
+- Jaký byl původní důvod nákupu a kdy přestal platit?
+- Který slib produktu se naplnil a který ne?
+- Co bylo zbytečně složité nebo drahé vůči hodnotě?
+- Kdo nebo co produkt nahradí?
+- Co bychom museli změnit, aby dávalo smysl vrátit se?
+- Jaký export, smazání nebo předání potřebujete pro bezpečné ukončení?
+
+Neukládej citlivé osobní drby typu „nový manažer tomu nerozumí“ nebo „tým je chaotický“. Zapiš produktový význam: změna vlastníka, změna priority, chybějící integrace, nedostatečný use-case fit, slabá adopce. I churn data mají mít retenci a minimální rozsah.
+
+### Win-back bez trapného pronásledování
+
+Zákazník, který odešel férově, se může vrátit. Ale jen pokud po odchodu nedostane sérii zoufalých e-mailů ve stylu „stýská se nám“. Win-back má být založený na konkrétní změně, ne na sentimentu.
+
+Smysluplný win-back důvod:
+
+- vyřešili jste blokátor, kvůli kterému zákazník odešel,
+- přibyla integrace, kterou potřeboval,
+- produkt se zjednodušil pro jeho use-case,
+- změnil se pricing nebo menší balíček,
+- zákazník má nový kontext a sám projevil zájem.
+
+Stačí jedna až dvě dobře načasované zprávy s přímým důvodem. Bez pixelů, bez skrytého sledování otevření, bez předstírání osobní blízkosti. Pokud zákazník nereaguje, nech ho být. Důstojnost je taky growth strategie, jen ji v tabulkách občas nevidět.
+
+### Checklist: obnova smlouvy bez churn paniky
+
+- Má každý zákazník pojmenovaný původní důvod nákupu a očekávaný výsledek?
+- Znáš datum renewal rozhodnutí, ne jen datum konce smlouvy?
+- Existuje 120/90/60/30denní rytmus pro roční smlouvy nebo lehčí varianta pro měsíční tarify?
+- Sleduješ churn signály na úrovni účtu či týmu, ne invazivně na úrovni jednotlivců?
+- Má rizikový zákazník konkrétní další krok, vlastníka a termín?
+- Nabízíš opravu adopce nebo změnu rozsahu dřív než automatickou slevu?
+- Umíš zákazníkovi bezpečně ukončit službu, exportovat data a smazat, co už není potřeba?
+- Převádíš exit poznatky do produktu, onboardingu, pricingu nebo marketingu?
+- Má win-back jasný důvod a respektuje ticho zákazníka?
+
+### Mini šablona: renewal karta
+
+```markdown
+## Renewal karta: [zákazník / smlouva]
+
+### Kontext
+- Původní důvod nákupu:
+- První dosažený výsledek:
+- Aktuální očekávaný výsledek:
+- Interní vlastník u zákazníka:
+
+### Termíny
+- Konec smlouvy / období:
+- Datum renewal rozhodnutí:
+- 90denní kontrola:
+- 60denní návrh pokračování:
+- 30denní administrace:
+
+### Health a rizika
+- Hodnota: zelená / žlutá / červená — důvod:
+- Adopce: zelená / žlutá / červená — důvod:
+- Vztah: zelená / žlutá / červená — důvod:
+- Komerční riziko:
+- Největší blokátor:
+
+### Návrh pokračování
+- Zachovat rozsah:
+- Změnit rozsah:
+- Rozšířit po dosažené hodnotě:
+- Downgrade varianta:
+- Exit plán, pokud pokračování nedává smysl:
+
+### Další krok
+- Dohodnutá akce:
+- Vlastník:
+- Termín:
+- Co nesbírat ani neukládat:
+```
+
+---
+
+
 ## Pracovní log
 
+- **2026-09-19:** Doplněna příloha FM o obnově smlouvy a prevenci churnu: renewal stopa, včasné churn signály, 120/90/60/30denní rytmus, změna rozsahu před slevou, exit rozhovor, win-back bez stalkingu, checklist a renewal karta.
 - **2026-09-19:** Doplněna příloha FL o customer success rytmu po implementaci: výsledky místo spokojenosti, 90denní rytmus, jednoduchý health score bez šmírování, business review, expansion po hodnotě, privacy-first dokumentace, checklist a success karta.
 - **2026-09-19:** Doplněna příloha FK o implementačním plánu po nákupu: ochrana první hodnoty, řízení rozsahu, importy dat, integrace, situační školení, změny scope, provozní review, checklist a karta implementační fáze.
 - **2026-09-19:** Doplněna příloha FJ o předání z obchodu do onboardingu: handoff karta, první úspěch, negativní kontext, privacy-first rozsah dat, agenda meetingu a zpětná vazba do obchodu.
