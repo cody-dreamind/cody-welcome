@@ -32348,7 +32348,203 @@ Nedávej do evidence celé interní diskuze. Stačí rozhodnutí a důkaz. Pokud
 - Potřebná úprava pravidel:
 - Vlastník navazující práce:
 
+
+## Příloha GD: Upgrade, downgrade a změny tarifu bez billing chaosu a pocitu pasti
+
+Změna tarifu je jeden z těch momentů, kde se ukáže, jestli má SaaS férový obchodní model, nebo jen hezky nalakovanou pastičku na kreditku. Zákazník chce přidat lidi, ubrat rozsah, přejít na roční platbu, zrušit doplněk, vrátit se z enterprise pilotu na menší balíček nebo jen pochopit, proč se mu změnila částka na faktuře. Pokud na to nemáš proces, každý případ se řeší ručně, support se hádá s financemi, produkt se bojí změn a zákazník má pocit, že si objednal software a dostal únikovou místnost.
+
+Dobrá změna tarifu má tři vlastnosti: zákazník ví, co se mění, systém ví, odkdy to platí, a účetnictví ví, proč vznikla konkrétní částka. Privacy-first hodnota je v tom, že k rozhodnutí nepotřebuješ sledovat každý pohyb uživatele. Stačí jasná pravidla, auditovatelná změna a minimum dat navíc.
+
+### Nejdřív odděl typy změn
+
+Ne každá změna tarifu je obchodní drama. Když všechny házíš do jedné krabice, skončíš u ručního schvalování každé blbosti. Rozděl změny podle dopadu na službu, peníze a data.
+
+Praktické typy:
+
+- **Upgrade:** zákazník získává vyšší limit, více funkcí, více uživatelů nebo vyšší SLA.
+- **Downgrade:** zákazník snižuje rozsah, tarif, počet sedadel nebo vypíná placený doplněk.
+- **Změna billing periody:** měsíční na roční, roční na měsíční, případně změna data obnovy.
+- **Přidání nebo odebrání add-onu:** samostatný modul, extra kapacita, integrační balíček, priorita podpory.
+- **Konsolidace účtů:** sloučení workspace, převod pod jinou organizaci, sjednocení fakturace.
+- **Výjimka:** individuální sleva, prodloužený trial, ruční kredit, dočasné navýšení limitu.
+
+Každý typ potřebuje vlastní pravidlo. Upgrade může být okamžitý, protože zákazník chce větší hodnotu hned. Downgrade často potřebuje kontrolu dopadu, protože nižší tarif nemusí podporovat aktuální počet uživatelů, integrací nebo uložených dat. Změna periody zase potřebuje jasně vysvětlit poměrnou částku. Ano, prorata je slovo, které zní jako účetní zaklínadlo, ale zákazníkovi stačí: „účtujeme rozdíl od dneška do konce aktuálního období“.
+
+### Upgrade má být rychlý, ale ne mlhavý
+
+Upgrade je dobrý moment. Zákazník říká, že potřebuje víc hodnoty. Nezkaz to tím, že mu zobrazíš tři nejasné částky, pět potvrzení a žádné vysvětlení, kdy se co aktivuje.
+
+Před potvrzením upgradu ukaž:
+
+- nový tarif nebo doplněk,
+- hlavní nové limity a funkce,
+- okamžitou částku dnes,
+- novou opakovanou částku,
+- datum další obnovy,
+- kdo změnu provádí,
+- jestli se mění zpracování dat nebo subprocesor.
+
+Pokud upgrade odemyká funkce, které pracují s citlivějšími daty, nesmí být schované jen v ceníku. Příklad: vyšší tarif obsahuje auditní logy, SSO, exporty nebo pokročilé integrace. To je obchodně super, ale provozně to mění datovou stopu. Zobraz stručný privacy-first blok: „Tato funkce ukládá auditní události po 12 měsíců“ nebo „Tato integrace odešle vybraná data do účetního systému, který zapnete v nastavení.“
+
+Codyho komentář: upgrade bez vysvětlení je jako výtah bez tlačítek. Možná jede nahoru, ale zákazník netuší kam a trochu se bojí.
+
+### Downgrade není trest za menší potřebu
+
+Downgrade bývá citlivější než upgrade. Zákazník možná šetří, mění tým, dokončil projekt, nebo jen zjistil, že vyšší tarif nepotřebuje. Pokud z downgradu uděláš psychologickou překážkovou dráhu, krátkodobě možná zachráníš pár eur. Dlouhodobě spálíš důvěru.
+
+Férový downgrade má jasný postup:
+
+1. Ukaž, co zákazník ztratí.
+2. Zkontroluj, zda aktuální účet splňuje limity nižšího tarifu.
+3. Nabídni export nebo úklid před změnou, pokud hrozí omezení dat.
+4. Řekni, kdy změna začne platit.
+5. Potvrď dopad na fakturaci.
+6. Po změně pošli krátké shrnutí.
+
+Důležité je rozlišit omezení funkce a rukojmí dat. Pokud nižší tarif nepodporuje pokročilé reporty, je v pořádku je vypnout. Není v pořádku schovat zákazníkova data za vyšší tarif bez možnosti exportu. Privacy-first SaaS má umět říct: „Funkce končí, data si můžete vyexportovat do tohoto data.“ Ne: „Zaplať, nebo tvoje historie zmizí v účetním Bermudském trojúhelníku.“
+
+### Změny limitů musí mít ochranné zábradlí
+
+Tarify často stojí na limitech: počet uživatelů, projektů, workspace, automatizací, API požadavků, uložených souborů, integračních toků nebo support úrovně. Při změně tarifu musí systém vědět, co udělat, když aktuální stav přesahuje nový limit.
+
+Dobré vzory:
+
+- **Soft limit:** zákazník může tarif změnit, ale nové položky už nepřidá, dokud se nevejde do limitu.
+- **Grace period:** zákazník má 14 nebo 30 dní na úklid před tvrdým omezením.
+- **Archivace místo mazání:** nadlimitní projekty se zamknou pro úpravy, ale zůstanou čitelné a exportovatelné.
+- **Admin upozornění:** dopad vidí správce workspace, ne každý běžný uživatel.
+- **Jasný seznam blokátorů:** systém ukáže přesně, co brání downgradu.
+
+Vyhni se automatickému mazání kvůli změně tarifu. Mazání je datové rozhodnutí, ne billing trik. Pokud zákazník opravdu chce snížit rozsah, dej mu bezpečnou cestu: export, archivace, potvrzení, retenční pravidlo.
+
+### Ruční výjimky zapisuj jako dluh
+
+Každý malý SaaS bude mít výjimky. První velký zákazník dostane historickou cenu. Partner má přechodný kredit. Někdo potřebuje dočasně navýšit limit kvůli migraci. To není hřích. Hřích je, když o tom ví jen zakladatel, jedna poznámka v CRM a démon jménem „to si pamatuju“.
+
+U každé výjimky zapiš:
+
+- důvod,
+- vlastníka,
+- schvalovatele,
+- přesný rozsah,
+- datum začátku,
+- datum kontroly nebo konce,
+- dopad na fakturaci,
+- dopad na funkce a data.
+
+Výjimka bez data kontroly se stává novým tarifem, jen hůř dokumentovaným. Až budeš za rok dělat pricing audit, budeš děkovat minulému já, pokud místo detektivky najdeš normální kartu rozhodnutí.
+
+### Fakturační komunikace má být čitelná pro člověka
+
+Zákazník nepotřebuje znát interní billing model. Potřebuje pochopit, proč platí právě tolik. Po každé změně pošli stručné shrnutí v lidské řeči.
+
+Mini vzor zprávy:
+
+> Změnili jsme váš tarif z Growth na Team od 19. září 2026. Nové limity platí okamžitě. Dnes účtujeme poměrnou částku za období do 30. září 2026. Další pravidelná platba bude 1. října 2026 ve výši podle tarifu Team. Přehled změn a faktury najdete v nastavení fakturace.
+
+Tahle zpráva má být nudná. Nuda je u fakturace kompliment. Kreativita patří do produktu, ne do vysvětlování, proč někdo zaplatil o 37 % víc než minule.
+
+### Privacy-first kontrola změny tarifu
+
+Změna tarifu často odemyká nové možnosti sběru nebo zobrazení dat. Proto ji ber jako malý privacy review bod, ne jen jako změnu ceny.
+
+Zkontroluj:
+
+- zda nový tarif zapíná nové integrace nebo exporty,
+- zda se mění retenční lhůta pro logy, auditní záznamy nebo reporty,
+- zda přibývají nové role a oprávnění,
+- zda support nebo obchod získá nový pohled do zákaznického účtu,
+- zda se mění subprocesor nebo region zpracování,
+- zda zákazník dostane jasnou informaci před aktivací.
+
+Neznamená to zastavit každý upgrade právním kolečkem. Znamená to mít v produktu a dokumentaci místo, kde je dopad popsaný. Privacy-first není „nikdy nic neměřit“. Je to „měřit a zpřístupňovat jen to, co umíme obhájit“.
+
+### Měř změny tarifů bez sledování jednotlivců
+
+Billing metriky jsou užitečné, ale nepotřebují šmírovat jednotlivé uživatele. Sleduj agregovaně:
+
+- počet upgradů podle tarifu,
+- počet downgrade žádostí a dokončení,
+- nejčastější blokátory downgradu,
+- počet ručních výjimek,
+- objem kreditů po změnách tarifu,
+- počet support ticketů k fakturaci,
+- churn po změně ceny nebo limitů.
+
+Kvalitativně si čti důvody. Ne jako záminku k manipulaci, ale jako produktový signál. Pokud lidé často downgraduji kvůli „nevyužitému vyššímu tarifu“, možná nemáš problém s cenou, ale s aktivací hodnoty. Pokud často nerozumí prorata částce, problém není zákazník. Problém je tvoje vysvětlení.
+
+### Checklist: změna tarifu bez chaosu
+
+- Máme rozlišený upgrade, downgrade, změnu periody, add-on, konsolidaci a výjimku.
+- Před potvrzením zákazník vidí okamžitou částku, budoucí částku a datum další obnovy.
+- Downgrade ukazuje konkrétní dopad na funkce, limity a data.
+- Nadlimitní data se nemažou automaticky bez exportu, archivace a potvrzení.
+- Ruční výjimky mají vlastníka, důvod, schvalovatele a datum kontroly.
+- Změny tarifu se zapisují do auditní stopy workspace.
+- Support má jasný rozhodovací strom a nemusí improvizovat v každém ticketu.
+- Privacy-first kontrola řeší nové integrace, role, retenci a datové toky.
+- Fakturační komunikace je čitelná a bez marketingového mlžení.
+- Agregované metriky ukazují, kde tarifní model vytváří tření.
+
+### Mini šablona: karta změny tarifu
+
+## Karta změny tarifu: [workspace / zákazník]
+
+### Základ
+
+- Typ změny:
+- Původní tarif:
+- Nový tarif:
+- Datum požadavku:
+- Datum účinnosti:
+- Kdo změnu provedl:
+
+### Fakturace
+
+- Okamžitá částka:
+- Nová opakovaná částka:
+- Datum další obnovy:
+- Kredit nebo poměrná částka:
+- Faktura / daňový doklad:
+- Účetní poznámka:
+
+### Produktový dopad
+
+- Nové funkce:
+- Ztracené funkce:
+- Nové limity:
+- Nadlimitní položky:
+- Grace period:
+- Potřebný export nebo archivace:
+
+### Privacy-first kontrola
+
+- Nové datové toky:
+- Nové role nebo oprávnění:
+- Nové integrace:
+- Změna retence:
+- Změna subprocesora nebo regionu:
+- Informace zákazníkovi:
+
+### Výjimky
+
+- Existuje individuální sleva nebo kredit:
+- Schvalovatel:
+- Důvod:
+- Datum kontroly:
+- Podmínka ukončení:
+
+### Komunikace
+
+- Potvrzení odesláno:
+- Shrnutí změny:
+- Odkaz na fakturaci:
+- Navazující support krok:
+- Poučení pro produkt nebo pricing:
+
 ## Pracovní log
+- **2026-09-19:** Doplněna příloha GD o upgradech, downgradech a změnách tarifů: typy změn, okamžitý upgrade, férový downgrade, limity bez datových rukojmí, evidence výjimek, čitelná fakturační komunikace, privacy-first kontrola, metriky, checklist a karta změny tarifu.
+
 
 - **2026-09-19:** Doplněna příloha GC o refundacích a kreditech: rozlišení refundace, kreditu a kompenzace, provozní politika, rozhodovací strom supportu, privacy-first evidence, komunikace výsledku, checklist a refund karta.
 
