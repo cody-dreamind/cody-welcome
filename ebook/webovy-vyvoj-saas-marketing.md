@@ -32916,7 +32916,193 @@ Nejlepší billing support snižuje počet budoucích ticketů. Pokud se tři z�
 - Datum review:
 
 
+## Příloha GG: Kontrola příjmů a billing reconciliation bez excelového hororu
+
+Billing není hotový ve chvíli, kdy odejde faktura. Hotový je až tehdy, když víš, že objednávka, tarif, vystavený doklad, přijatá platba a účetní export spolu dávají smysl. U malého SaaS se tahle kontrola často odkládá, protože „zatím je zákazníků málo“. Přesně tehdy je ale nejlepší nastavit jednoduchý systém, než se z toho stane archeologický výzkum v tabulkách.
+
+Reconciliation neboli párování příjmů není jen účetní hygiena. Je to produktový signál. Ukazuje, kde se zákazník zasekl, kde pricing mate, kde automatizace posílá špatný údaj a kde tým ručně lepí výjimky, které měly být dávno v produktu.
+
+> Codyho komentář: Pokud každý měsíc hledáš rozdíl „jen pár stovek“, nehledáš pár stovek. Hledáš proces, který se naučil lhát potichu.
+
+### Začni jedním zdrojem pravdy pro obchodní událost
+
+Nejdřív si pojmenuj, co je pro produkt obchodní událost. Typicky to není „někdo klikl na tlačítko“, ale jasný stav: vznikla objednávka, začalo předplatné, změnil se tarif, vznikla faktura, proběhla platba, vznikl kredit nebo bylo předplatné ukončeno.
+
+Každá taková událost má mít vlastní identifikátor a minimum potřebných údajů:
+
+- **ID události:** stabilní technický identifikátor, který projde přes billing, support i export.
+- **Workspace nebo zákazník:** obchodní entita, ne nutně osobní e-mail každého uživatele.
+- **Typ události:** objednávka, platba, refundace, kredit, změna tarifu, storno.
+- **Částka a měna:** hodnota, daňový režim a případné zaokrouhlení.
+- **Stav:** čeká, dokončeno, selhalo, vráceno, ručně upraveno.
+- **Časové razítko:** kdy událost vznikla a kdy byla naposledy změněna.
+
+Privacy-first princip je jednoduchý: pro párování příjmů nepotřebuješ kompletní profil uživatele, historii klikání ani obsah jeho dat. Potřebuješ obchodní referenci, stav a částku. Všechno navíc je často jen budoucí bezpečnostní problém v hezkém svetru.
+
+### Páruj podle stavů, ne podle pocitu
+
+Měsíční kontrola musí být reprodukovatelná. Když ji udělají dva lidé, mají dojít ke stejnému výsledku. Proto nestačí „mrknout do Stripe, banky a účetnictví“. Potřebuješ stavový seznam, kde je vidět, co se s každou položkou stalo.
+
+Praktické minimální párování:
+
+1. **Objednávka v produktu:** zákazník vybral tarif nebo potvrdil změnu.
+2. **Billing záznam:** vznikla plánovaná fakturace nebo payment intent.
+3. **Doklad:** byl vystaven doklad nebo interní billing záznam pro účetnictví.
+4. **Platba:** peníze dorazily, selhaly, čekají nebo byly vráceny.
+5. **Export:** položka odešla do účetního procesu bez ručního přepisování.
+6. **Výjimka:** rozdíl má popsaný důvod, vlastníka a termín uzavření.
+
+Příklad: zákazník upgradoval 18. den v měsíci, systém dopočítal poměrnou částku, platba selhala, dunning poslal dvě výzvy, zákazník zaplatil kartou po třech dnech a účetní export má jednu konečnou položku. To je v pořádku, pokud je každý krok dohledatelný. Problém je, když support vidí „aktivní“, účetnictví „neuhrazeno“ a produkt „premium“. To už není billing, to je tichá improvizace.
+
+### Rozdíly rozděl podle typu dopadu
+
+Ne každý nesoulad je stejně nebezpečný. Když všechno házíš do jedné hromady, tým řeší drobnosti a přehlédne průšvih. Rozdíly rozděl podle dopadu:
+
+- **Finanční dopad:** chybí platba, dvojitá platba, špatná částka, nejasný kredit.
+- **Zákaznický dopad:** zákazník přišel o přístup, dostal špatnou výzvu nebo nevidí doklad.
+- **Účetní dopad:** export má jiný stav než billing nebo doklad chybí v procesu.
+- **Produktový dopad:** tarif, limit nebo workspace stav neodpovídá platbě.
+- **Privacy dopad:** při řešení se zbytečně kopírují osobní údaje do chatu, tabulky nebo ticketu.
+
+U každého typu si předem napiš, kdo rozhoduje. Support může opravit kontaktní e-mail pro fakturaci, ale nemá ručně měnit historickou částku bez auditní stopy. Vývojář může opravit chybný stav v produktu, ale nemá si kvůli tomu exportovat celý seznam zákazníků do lokálního souboru.
+
+### Udělej z výjimek frontu, ne hřbitov
+
+Výjimka není poznámka „dořešit“. Výjimka je pracovní položka. Má mít prioritu, vlastníka a další krok. Jinak se z ní stane měsíční rituál, kdy všichni vědí, že tam „něco visí“, ale nikdo už neví proč.
+
+Dobrá evidence výjimek obsahuje:
+
+- **co nesedí,** například částka, stav, doklad, zákaznický přístup,
+- **kde nesedí,** produkt, platební brána, účetní export, support systém,
+- **jaký je dopad,** peníze, zákazník, reporting, compliance, důvěra,
+- **kdo vlastní řešení,** konkrétní člověk nebo role,
+- **do kdy se uzavře,** ideálně před další uzávěrkou,
+- **jak zabráníš opakování,** automatizace, validace, text v UI, runbook.
+
+Když se stejný typ výjimky opakuje třikrát, už to není výjimka. Je to backlog item s falešným knírem.
+
+### Privacy-first kontrola chrání i tým
+
+Při párování příjmů často vzniká tlak „pošli mi export všeho“. Odolej. Velké exporty jsou pohodlné jen do chvíle, než je někdo zapomene v e-mailu, stáhne na osobní notebook nebo přepošle do nástroje, který k tomu nikdy neměl být použitý.
+
+Bezpečnější postup:
+
+- exportuj jen období a položky, které kontroluješ,
+- používej interní ID místo osobních e-mailů všude, kde to stačí,
+- osobní a fakturační údaje zobrazuj jen rolím, které je opravdu potřebují,
+- nesoulady řeš přes odkaz na interní záznam, ne kopírováním dat do chatu,
+- dočasné pracovní exporty maž po uzavření kontroly,
+- opakované dotazy převeď do reportu nebo admin obrazovky místo ručního dumpu.
+
+U malého týmu je tohle možná největší úleva: když máš dobré interní reference, nepotřebuješ pokaždé otevírat citlivá data. A když je nepotřebuješ otevírat, nemáš je kde omylem rozlít. Internet už má dost loužiček.
+
+### Kontroluj i negativní scénáře
+
+Billing reconciliation není jen o úspěšných platbách. Nejvíc chyb vzniká v okrajích: trial skončil, platba selhala, zákazník změnil kartu, někdo udělil kredit, workspace byl převeden, došlo k refundaci nebo ručnímu zásahu.
+
+Jednou měsíčně projdi minimálně tyto fronty:
+
+- aktivní workspace bez úspěšné platby po skončení ochranného období,
+- zaplacené předplatné bez odpovídajícího aktivního přístupu,
+- refundace bez poznámky k důvodu,
+- kredity bez data expirace nebo dalšího kroku,
+- ruční změny tarifu provedené mimo běžný flow,
+- neuzavřené dunning případy,
+- položky v exportu, které nemají vazbu na interní událost.
+
+Nemusíš z toho dělat korporátní kontrolní věž. Stačí malý report s počtem položek, trendem proti minulému měsíci a seznamem věcí, které vyžadují rozhodnutí.
+
+### Automatizuj varování dřív než opravy
+
+První automatizace nemusí nic měnit. Stačí, když upozorní. Automatická oprava billing dat je citlivá, protože může ovlivnit přístup zákazníka i peníze. Automatické varování je bezpečnější první krok.
+
+Začni těmito alerty:
+
+- zákazník je aktivní, ale poslední platba je starší než očekávaný interval,
+- platba je úspěšná, ale workspace zůstal v omezeném režimu,
+- doklad nebo export čeká déle než stanovený interní limit,
+- refundace nemá důvod nebo odkaz na ticket,
+- ruční billing změna nemá schvalovací poznámku,
+- měsíční rozdíl mezi billing reportem a exportem překročil interní toleranci.
+
+Teprve když varování dva až tři cykly funguje a nemá falešné poplachy, rozhodni, co se má opravovat automaticky. U peněz platí staré pravidlo: robot může hlásit, ale neměl by hned sahat do trezoru, pokud jste ho předtím naučili jen otevírat dveře.
+
+### Měsíční review má skončit zlepšením systému
+
+Na konci kontroly si nepiš jen „sedí / nesedí“. Napiš, co systém naučíš příště. Billing je opakovaný proces, takže každá ruční kontrola má být investice do menší ruční kontroly příště.
+
+Dobré závěry review:
+
+- přidat validační pravidlo při změně tarifu,
+- upravit text e-mailu po selhané platbě,
+- doplnit interní ID do účetního exportu,
+- přidat admin filtr pro neuzavřené výjimky,
+- omezit export osobních údajů v měsíční kontrole,
+- doplnit runbook pro refundace nebo kredity.
+
+Když každý měsíc zlepšíš jednu věc, za půl roku máš billing, který není perfektní, ale je čitelný, auditovatelný a méně závislý na hrdinství jednoho člověka.
+
+### Checklist: kontrola příjmů a billing reconciliation
+
+- Má každá obchodní událost stabilní ID použitelné napříč produktem, billingem a supportem?
+- Je jasné, který systém je zdroj pravdy pro tarif, platbu, doklad a zákaznický přístup?
+- Existuje měsíční seznam položek ve stavech čeká, zaplaceno, selhalo, vráceno a výjimka?
+- Jsou rozdíly rozdělené podle finančního, zákaznického, účetního, produktového a privacy dopadu?
+- Má každá výjimka vlastníka, termín a další krok?
+- Používá kontrola interní ID místo osobních údajů všude, kde to stačí?
+- Mažou se dočasné exporty po dokončení kontroly?
+- Kontrolují se negativní scénáře: refundace, kredity, dunning, ruční změny a převody workspace?
+- Existují alerty na nejčastější nesoulady před tím, než vznikne měsíční požár?
+- Končí review konkrétní systémovou změnou, ne jen povzdechem nad tabulkou?
+
+### Mini šablona: reconciliation karta
+
+```text
+Reconciliation karta: [měsíc / produkt]
+
+Rozsah kontroly:
+- Období:
+- Produkty / tarify:
+- Zahrnuté systémy:
+- Vyloučené položky a proč:
+
+Zdroje pravdy:
+- Tarif a stav workspace:
+- Billing události:
+- Platby:
+- Doklady / export:
+- Support výjimky:
+
+Souhrn:
+- Očekávané příjmy:
+- Přijaté platby:
+- Refundace / kredity:
+- Otevřené rozdíly:
+- Dopad na zákazníky:
+
+Výjimky:
+- ID výjimky:
+- Typ dopadu:
+- Popis:
+- Vlastník:
+- Termín:
+- Další krok:
+
+Privacy-first kontrola:
+- Použité osobní údaje:
+- Proč byly nutné:
+- Dočasné exporty a datum smazání:
+- Přístupy použité při kontrole:
+
+Zlepšení systému:
+- Co se opakovalo:
+- Co automatizujeme:
+- Co upravíme v UI / e-mailu / runbooku:
+- Kdo to dokončí:
+```
+
 ## Pracovní log
+- **2026-09-19:** Doplněna příloha GG o kontrole příjmů a billing reconciliation: zdroj pravdy pro obchodní události, párování stavů, rozdělení nesouladů, evidence výjimek, privacy-first práce s exporty, kontrola negativních scénářů, alerty, checklist a reconciliation karta.
 - **2026-09-19:** Doplněna příloha GF o reklamacích faktur a billing supportu: klasifikace dotazů, první odpověď, rekonstrukce faktury, privacy-first práce s doklady, rozhodovací možnosti, zákaznická komunikace, review, checklist a billing support karta.
 - **2026-09-19:** Doplněna příloha GE o měsíčním billing runbooku: kalendář kontrol, oddělení zákaznických změn od interních oprav, evidence výjimek, privacy-first kontrola datových toků, otevřené hrany před uzávěrkou, komunikace, review, checklist a měsíční billing karta.
 - **2026-09-19:** Doplněna příloha GD o upgradech, downgradech a změnách tarifů: typy změn, okamžitý upgrade, férový downgrade, limity bez datových rukojmí, evidence výjimek, čitelná fakturační komunikace, privacy-first kontrola, metriky, checklist a karta změny tarifu.
