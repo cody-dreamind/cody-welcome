@@ -32160,7 +32160,197 @@ Každá výjimka má mít konec, vlastníka a poznámku v billing kartě. „Je�
 - Povinná poznámka:
 - Datum další kontroly:
 
+## Příloha GC: Refundace a kredity bez chaosu, hádek a účetního ping-pongu
+
+Refundace v SaaS nejsou jen účetní operace. Jsou to malé testy důvěry. Zákazník buď odchází s pocitem „škoda, ale fér“, nebo s pocitem „už nikdy“. A protože špatný pocit má v B2B světě překvapivě dlouhou paměť, vyplatí se mít pravidla dřív, než se první nepříjemná situace objeví v inboxu.
+
+Malý tým často řeší refundace improvizovaně: někdo něco slíbil na callu, někdo jiný vystavil fakturu, zákazník čeká, účetní se ptá, support hledá kontext a produkt mezitím žije vlastním životem. Výsledek? Tři vlákna, čtyři názory a jeden člověk, který si přeje být radši květinářem. Hezké, ale nepraktické.
+
+Dobrá refund politika má být krátká, viditelná a použitelná. Ne právní labyrint. Zákazník má vědět, kdy má nárok na vrácení peněz, kdy dává větší smysl kredit, kdo rozhoduje o výjimce a co se stane s daty po ukončení služby.
+
+### Rozliš refundaci, kredit a kompenzaci
+
+Ne každé „vrátíme peníze“ znamená totéž. Když tým nerozlišuje typ nápravy, vznikají špatné precedentní sliby.
+
+Používej tři základní kategorie:
+
+- **Refundace:** peníze se vrací zákazníkovi, typicky kvůli chybné platbě, duplicitní fakturaci, omylu nebo férovému ukončení krátce po nákupu.
+- **Kredit:** zákazník nedostane peníze zpět, ale získá hodnotu do budoucna — měsíc navíc, sleva na další období nebo interní kredit na službu.
+- **Kompenzace:** náprava za konkrétní problém, například prodloužený výpadek, špatně doručenou službu nebo výrazné selhání podpory.
+
+Refundace je finanční závazek. Kredit je produktový závazek. Kompenzace je vztahový závazek. Každý z nich má mít vlastní důvod, vlastní schvalování a vlastní zápis. Jinak se z toho stane účetní guláš s příchutí „ale minule jste nám to dali“.
+
+### Napiš politiku, které rozumí i člověk mimo firmu
+
+Refund pravidla nemusí být dlouhá. Naopak. Čím víc výjimek a právnických formulací, tím méně je tým používá. Praktická politika pro malý SaaS odpovídá na šest otázek:
+
+1. Kdy zákazník může požádat o refundaci?
+2. Kdy nabízíme kredit místo vrácení peněz?
+3. Jaké situace řeší support sám a kdy eskaluje?
+4. Jak dlouho trvá vyřízení?
+5. Co se stane se službou, přístupem a daty?
+6. Jak se zákazník dozví výsledek?
+
+Příklad jednoduchého pravidla:
+
+> Pokud došlo k duplicitní platbě, chybné fakturaci nebo technickému problému na naší straně, refundaci řešíme prioritně. Pokud zákazník službu nechce dál používat, nabídneme férové ukončení, export dat a podle situace refundaci nevyužitého období nebo kredit.
+
+Tohle není náhrada za právní text ani obchodní podmínky. Je to provozní vrstva, podle které tým jedná konzistentně. Právní dokumenty jsou mapa. Support potřebuje i volant.
+
+### Vytvoř rozhodovací strom pro support
+
+Support nemá při každé žádosti vymýšlet filozofii spravedlnosti. Potřebuje rozhodovací strom, který pokryje běžné případy a jasně označí výjimky.
+
+Praktický strom:
+
+- **Duplicitní platba:** ověř platbu, připrav refundaci, informuj billing kontakt, zapiš důvod.
+- **Omylem zakoupený tarif:** pokud zákazník rychle reaguje a službu reálně nezačal používat, nabídni downgrade, kredit nebo refundaci podle pravidel.
+- **Nespokojenost s produktem:** zjisti konkrétní důvod, nabídni export a ukončení; refundaci řeš podle období, využití a původního slibu.
+- **Výpadek nebo chyba služby:** spoj refundaci s incidentem, dopadem a kompenzační politikou, ne s náladou supportu.
+- **Interní obchodní slib:** najdi původní komunikaci, ověř kdo co slíbil, vyřeš férově a uprav interní pravidla, aby se to neopakovalo.
+
+Každá větev má mít výstup: refundace, kredit, zamítnutí s vysvětlením, eskalace nebo kombinace. Slovo „zamítnutí“ nezní hezky, ale i ne má být profesionální, konkrétní a bez pasivní agrese. Nejsme bankovní chatbot v pátek odpoledne.
+
+### Odděl finanční rozhodnutí od produktového smutku
+
+Když zákazník odchází, tým má tendenci řešit všechno najednou: proč odchází, jestli je produkt špatný, kdo za to může, jestli vracet peníze a zda poslat tři follow-upy. To je moc emocí na jeden ticket.
+
+Rozděl proces na dvě vrstvy:
+
+- **Finanční vrstva:** částka, období, typ nápravy, schválení, účetní krok, komunikace výsledku.
+- **Produktová vrstva:** důvod odchodu, chybějící funkce, kvalita onboardingu, očekávání vs. realita, poznatek pro roadmapu.
+
+Finanční vrstva musí být uzavřená rychle. Produktová vrstva může jít do review, backlogu nebo rozhovoru. Nemíchej je tak, že zákazník čeká na peníze, protože tým zrovna diskutuje, jestli modul reportingu „už konečně předělat“. Ano, možná ano. Ale nejdřív vrať, co vrátit máš.
+
+### Privacy-first refund proces drží data na uzdě
+
+Žádost o refundaci často obsahuje citlivý kontext: finanční potíže, interní změny ve firmě, nespokojenost s konkrétní osobou nebo důvody ukončení spolupráce. To nepatří do náhodných poznámek, analytických eventů ani marketingových segmentů.
+
+Privacy-first pravidla:
+
+- Do refund karty ukládej jen důvod v kategorii, ne celý emocionální román z e-mailu.
+- Platební údaje drž u platebního poskytovatele nebo účetního systému, ne v support poznámkách.
+- Produktový tým dostává agregované důvody odchodu, ne kompletní zákaznickou korespondenci.
+- Marketing nedostává seznam lidí, kteří žádali refundaci, aby jim poslal „win-back masáž“.
+- Přístup k refundacím mají jen role, které řeší billing, support a schválení výjimek.
+- Po uzavření případu zůstává auditní stopa, ale ne zbytečné osobní detaily.
+
+Codyho komentář: Refundace není behaviorální datový poklad. Je to provozní událost. Když z ní uděláš palivo pro remarketing, možná zachráníš jedno euro. A možná spálíš důvěru, která měla cenu tisíc eur. Gratuluju, ekonomie s klaunským nosem.
+
+### Komunikuj výsledek bez mlžení
+
+Zákazník má po rozhodnutí dostat jasnou odpověď. Ne „prověříme možnosti“, když už je rozhodnuto. Ne „systém to nedovoluje“, když ve skutečnosti nechceš udělat výjimku. A už vůbec ne ticho.
+
+Dobrý výsledek obsahuje:
+
+- rozhodnutí: refundace, kredit, kompenzace nebo zamítnutí,
+- důvod v jedné až dvou větách,
+- částku nebo rozsah kreditu,
+- očekávaný termín zpracování,
+- dopad na účet, přístup a data,
+- odkaz na export nebo další krok.
+
+Příklad:
+
+> Díky za vysvětlení. Platbu za zářijové období vrátíme, protože tarif byl omylem aktivovaný dvakrát. Refundaci jsme předali ke zpracování, potvrzení pošleme billing kontaktu. Workspace zůstává v tarifu Team a data se tím nemění.
+
+Když refundaci neposkytneš, pořád můžeš být férový:
+
+> Refundaci za už vyčerpané období neposkytneme, protože služba byla aktivně používaná a faktura odpovídá objednanému tarifu. Účet můžeme ukončit ke konci období, připravit export dat a vypnout automatické prodloužení.
+
+Tvrdé ne nemusí být protivné. Stačí, když není mlhavé.
+
+### Udržuj účetní a produktovou stopu propojenou, ne slitou
+
+Refundace musí být dohledatelná. Ne proto, že milujeme tabulky. Protože bez dohledatelnosti se tým za půl roku hádá, proč zákazník dostal kredit, kdo ho schválil a jestli se náhodou stejná věc neopakuje pořád dokola.
+
+Minimální evidence:
+
+- ID zákazníka nebo workspace,
+- typ nápravy,
+- částka nebo rozsah kreditu,
+- období, kterého se týká,
+- kategorie důvodu,
+- schvalovatel,
+- odkaz na fakturu nebo billing záznam,
+- datum uzavření,
+- produktový poznatek, pokud existuje.
+
+Nedávej do evidence celé interní diskuze. Stačí rozhodnutí a důkaz. Pokud se z refundací začnou opakovat stejné důvody, není to účetní problém. Je to signál pro produkt, onboarding, pricing nebo sales očekávání.
+
+### Checklist: refundace a kredity
+
+- Máme krátkou refund politiku, které rozumí support, obchod i zákazník.
+- Rozlišujeme refundaci, kredit a kompenzaci.
+- Support má rozhodovací strom pro běžné případy a jasnou eskalaci výjimek.
+- Finanční rozhodnutí oddělujeme od produktového review.
+- Zákazník vždy dostane konkrétní výsledek, důvod, termín a dopad na účet.
+- Refund evidence obsahuje jen nezbytné údaje a kategorii důvodu.
+- Produktový tým vidí agregované vzory, ne citlivé detaily z jednotlivých žádostí.
+- Marketing nepoužívá refundace jako segment pro automatizovaný tlak.
+- Každá výjimka má schvalovatele, důvod a datum další kontroly pravidla.
+- Opakované refund důvody řešíme jako systémový problém, ne jako otravné tickety.
+
+### Mini šablona: refund karta
+
+## Refund karta: [zákazník / workspace / období]
+
+### Kontext
+
+- Typ žádosti:
+- Tarif:
+- Období:
+- Dotčená faktura nebo platba:
+- Primární kontakt:
+
+### Důvod
+
+- Kategorie důvodu:
+- Stručné vysvětlení:
+- Je důvod na naší straně:
+- Je důvod opakovaný:
+
+### Rozhodnutí
+
+- Refundace / kredit / kompenzace / zamítnutí:
+- Částka nebo rozsah:
+- Schvalovatel:
+- Datum rozhodnutí:
+- Účetní krok:
+
+### Dopad na službu
+
+- Zůstává účet aktivní:
+- Mění se tarif:
+- Končí automatické prodloužení:
+- Je potřeba export dat:
+- Retence po ukončení:
+
+### Komunikace
+
+- Odeslaná zpráva zákazníkovi:
+- Termín zpracování:
+- Kdo dostane potvrzení:
+- Další krok podpory:
+
+### Privacy-first kontrola
+
+- Jaké osobní údaje ukládáme:
+- Kdo má k záznamu přístup:
+- Co předáváme účetnímu systému:
+- Co předáváme produktovému týmu:
+- Kdy záznam revidujeme nebo minimalizujeme:
+
+### Poučení
+
+- Produktový signál:
+- Sales nebo onboarding signál:
+- Potřebná úprava pravidel:
+- Vlastník navazující práce:
+
 ## Pracovní log
+
+- **2026-09-19:** Doplněna příloha GC o refundacích a kreditech: rozlišení refundace, kreditu a kompenzace, provozní politika, rozhodovací strom supportu, privacy-first evidence, komunikace výsledku, checklist a refund karta.
 
 - **2026-09-19:** Doplněna příloha GB o dunningu a záchraně plateb: typy platebních problémů, ochranné období, férová komunikace, billing role, privacy-first data, omezený režim, měření, výjimky a šablona dunning karty.
 
