@@ -31431,7 +31431,194 @@ Nejhorší reakce je tajně přepsat hodnotu a doufat, že tím příběh konč�
 - Koho informovat:
 - Důkaz dokončení nápravy:
 
+## Příloha FY: Obnova účtu a změna vlastníka workspace bez identity chaosu
+
+U malého B2B SaaS se dřív nebo později stane obyčejně trapná, ale provozně nebezpečná věc: zákazník ztratí přístup, odejde jediný admin, firma změní doménu, někdo smaže druhý faktor, nebo se účetní ptá, proč faktury chodí člověku, který už tam rok nepracuje. Není to sexy produktová funkce. Je to ale přesně ten detail, podle kterého zákazník pozná, jestli provozuješ dospělý produkt, nebo digitální stan u dálnice.
+
+Obnova účtu není jen support ticket. Je to kombinace identity, bezpečnosti, práv zákazníka, obchodního vztahu a důvěry. Když ji uděláš příliš snadnou, útočníkům otevřeš dveře. Když ji uděláš příliš tvrdou, legitimní zákazník zůstane venku a začne si říkat, jestli vendor lock-in náhodou nemá horší účes než enterprise software z roku 2009.
+
+### Rozliš osobní účet, zákaznický workspace a fakturační vztah
+
+První chyba je říkat všemu „účet“. V SaaS musíš oddělit minimálně tři vrstvy:
+
+- **Osobní identita:** konkrétní člověk, jeho e-mail, přihlášení, druhý faktor a auditní stopa.
+- **Workspace / organizace:** zákaznický prostor, data, role, integrace, nastavení a členové týmu.
+- **Fakturační vztah:** právnická osoba, tarif, platební metoda, fakturační e-mail, objednávka a smluvní kontakt.
+
+Tyto vrstvy se často překrývají, ale nesmí být slepené. Když odejde admin, nechceš smazat organizaci. Když se změní fakturační kontakt, nechceš automaticky dát člověku přístup k zákaznickým datům. Když někdo ztratí heslo, nechceš mu jen proto dovolit měnit vlastnictví workspace.
+
+Praktické pravidlo: každá akce obnovy musí říct, které vrstvy se dotýká. „Reset hesla“ je jiná akce než „převod vlastnictví workspace“ a úplně jiná akce než „změna fakturačního subjektu“.
+
+### Samoobslužná obnova má mít úzký rozsah
+
+Samoobsluha je skvělá, pokud řeší běžné situace bez rizika pro ostatní. Typicky:
+
+- reset hesla přes ověřený e-mail,
+- změna hesla po přihlášení,
+- nastavení nebo obnova druhého faktoru pomocí záložních kódů,
+- pozvánka dalšího admina existujícím adminem,
+- změna osobních preferencí uživatele.
+
+Samoobsluha nemá bez další kontroly řešit převod vlastnictví organizace, vypnutí 2FA pro admina s přístupem k produkčním datům, změnu fakturační entity nebo export všech dat. Tam už nejde jen o pohodlí. Tam jde o kontrolu nad zákaznickým prostorem.
+
+U každé samoobslužné akce nastav krátkou bezpečnostní brzdu: potvrzovací e-mail, auditní log, upozornění ostatním adminům a možnost vrátit změnu, pokud je to technicky bezpečné. Ne proto, aby produkt otravoval. Protože „někdo nám převzal účet“ je support ticket, který nechceš číst u pondělní kávy.
+
+### Změna vlastníka workspace potřebuje rozhodovací strom
+
+Převod vlastnictví workspace je citlivý, protože nový vlastník může spravovat členy, data, integrace, billing a někdy i export. Nestačí věta „pošlete nám e-mail“. Potřebuješ rozhodovací strom.
+
+Začni otázkou: existuje aktuální admin, který se může přihlásit?
+
+Pokud ano, nejbezpečnější cesta je samoobslužná: admin pozve nového admina, předá vlastnictví a případně odebere sám sebe. Support může poslat návod, ale nemá dělat převod za zákazníka.
+
+Pokud aktuální admin neexistuje nebo je nedostupný, přichází ruční ověření. Tam si připrav důkazy podle typu zákazníka:
+
+- e-mail z domény zákazníka nestačí jako jediný důkaz, ale je dobrý signál,
+- shoda s fakturačním kontaktem pomáhá, ale nedává automaticky právo k datům,
+- smluvní kontakt nebo statutární zástupce má vyšší váhu,
+- interní objednávka, číslo smlouvy nebo poslední faktura mohou pomoci ověřit vztah,
+- potvrzení více existujících členů workspace je dobrý druhý signál,
+- u citlivých workspace je fér zavést čekací lhůtu a oznámení původním adminům.
+
+Codyho komentář: nejlepší proces není ten nejrychlejší. Nejlepší proces je ten, který legitimní zákazník pochopí i ve stresu a útočník ho nemůže jednoduše obejít jedním přesvědčivým e-mailem.
+
+### Support nesmí dostat kouzelnou hůlku
+
+Nejnebezpečnější anti-pattern je interní tlačítko „přepnout vlastníka“ bez pravidel. Dřív nebo později ho někdo použije pod tlakem, protože zákazník píše velkými písmeny a obchodník dýchá supportu na záda. Gratuluju, právě vznikla díra v řízení přístupu.
+
+Interní nástroje musí mít mantinely:
+
+- support může zahájit žádost, ale kritickou změnu schvaluje druhý člověk,
+- každá změna vlastníka má povinný důvod a odkaz na ticket,
+- systém automaticky upozorní staré adminy a nové vlastníky,
+- převod nejde udělat, pokud nejsou splněné minimální důkazy,
+- všechny kroky se ukládají do auditního logu,
+- u enterprise nebo citlivých zákazníků platí delší schvalovací cesta.
+
+Pokud jsi malý tým, druhý člověk nemusí být bezpečnostní oddělení s laserovým ukazovátkem. Stačí zakladatel, senior vývojář nebo někdo, kdo rozumí dopadu. Důležité je, aby převod nebyl rozhodnutí jednoho unaveného člověka v support frontě.
+
+### Privacy-first obnova minimalizuje sběr dokladů
+
+Při ručním ověření se snadno sklouzne k tomu, že začneš žádat občanky, výpisy z rejstříku, pracovní smlouvy a screenshoty z interních systémů zákazníka. To je datový vysavač v převleku za bezpečnost. Většinou to nepotřebuješ.
+
+Privacy-first přístup říká: sbírej jen důkazy, které jsou nutné pro konkrétní rozhodnutí, a drž je krátce. Pokud stačí ověřit vztah přes smluvní kontakt a fakturační údaje, nechtěj osobní doklady. Pokud potřebuješ potvrzení od statutára, požádej o formální e-mail z firemní domény nebo podepsaný dokument přes zavedený kanál zákazníka, ne o kopii pasu do support chatu.
+
+Do ticketu ukládej shrnutí ověření, ne zbytečné přílohy. Například:
+
+> Ověřeno podle smluvního kontaktu, poslední faktury a potvrzení dvou členů workspace. Převod schválil [interní schvalovatel]. Přílohy odstraněny po dokončení žádosti.
+
+Tohle je nudné. Nudné je dobré. Nudné procesy méně často končí bezpečnostním incidentem.
+
+### Po převodu udělej hygienu workspace
+
+Předáním vlastnictví práce nekončí. Nový vlastník často přebírá workspace po člověku, který odešel, byl externista, nebo už nikdo neví, proč měl pět integrací a tři API klíče. Převod je ideální chvíle pro mini audit.
+
+Po změně vlastníka doporuč zákazníkovi:
+
+- projít seznam členů a odebrat neaktivní lidi,
+- zkontrolovat admin role,
+- rotovat API klíče, pokud původní admin spravoval integrace,
+- ověřit fakturační a bezpečnostní kontakty,
+- stáhnout nebo aktualizovat záložní kódy pro 2FA,
+- projít poslední auditní události,
+- nastavit alespoň dva aktivní adminy.
+
+Tohle může být automatický checklist v aplikaci nebo krátký e-mail po převodu. Nepotřebuješ zákazníka mentorovat jako bezpečnostní kazatel. Stačí jasně říct: „Vlastnictví je převedené, teď si prosím zkontrolujte tyto věci.“
+
+### Obnova přístupu má mít komunikační šablony
+
+Ve stresu se píše špatně. Proto si připrav šablony dopředu. Potřebuješ minimálně čtyři:
+
+1. samoobslužný návod pro reset hesla a 2FA,
+2. odpověď pro převod vlastnictví, když existuje aktivní admin,
+3. odpověď pro ruční ověření bez aktivního admina,
+4. potvrzení po dokončení převodu s bezpečnostním checklistem.
+
+Dobrá šablona neříká jen „pošlete nám důkazy“. Říká proč, co přesně stačí, co neposílat a jak dlouho proces obvykle trvá. Tím chráníš zákazníka i support.
+
+Příklad krátké formulace:
+
+> Kvůli ochraně dat ve workspace nemůžeme převést vlastnictví jen na základě běžného e-mailu. Pošlete prosím potvrzení ze smluvního nebo fakturačního kontaktu a uveďte, kdo má být nový vlastník. Neposílejte osobní doklady ani interní dokumenty, pokud si o ně výslovně neřekneme.
+
+### Měř kvalitu procesu, ne zvědavost na lidi
+
+U obnovy účtů nepotřebuješ profilovat jednotlivce. Potřebuješ vědět, jestli proces funguje:
+
+- kolik žádostí se vyřešilo samoobslužně,
+- kolik žádostí potřebovalo ruční ověření,
+- kolik žádostí bylo odmítnuto jako rizikové,
+- medián času do vyřešení podle typu žádosti,
+- kolik převodů vyžadovalo druhé schválení,
+- kolik incidentů nebo stížností vzniklo po převodu.
+
+To jsou provozní metriky, ne sledování lidí. Pomohou ti najít tření: třeba chybějící záložní kódy 2FA, špatně popsané role nebo fakt, že zákazníci nechávají jediného admina v organizaci častěji, než by bylo zdrávo.
+
+### Checklist: obnova účtu a převod workspace
+
+- [ ] Produkt rozlišuje osobní účet, workspace a fakturační vztah.
+- [ ] Reset hesla a běžné 2FA scénáře mají bezpečnou samoobsluhu.
+- [ ] Převod vlastníka workspace má rozhodovací strom podle dostupnosti aktuálního admina.
+- [ ] Support nemůže kriticky měnit vlastnictví bez důvodu, auditu a druhého schválení.
+- [ ] Ruční ověření sbírá jen minimální nutné důkazy.
+- [ ] Citlivé přílohy se po vyřízení mažou nebo nahrazují stručným záznamem.
+- [ ] Starý i nový vlastník dostanou oznámení o změně.
+- [ ] Po převodu zákazník dostane checklist členů, rolí, API klíčů a kontaktů.
+- [ ] Existují šablony pro nejčastější obnovovací scénáře.
+- [ ] Proces se měří agregovaně podle času, typu žádosti a rizikových odmítnutí.
+
+### Mini šablona: karta obnovy workspace
+
+## Karta obnovy workspace: [zákazník / workspace]
+
+### Žádost
+
+- Typ žádosti: reset / 2FA / převod vlastníka / billing kontakt / jiný
+- Žadatel:
+- Workspace:
+- Datum žádosti:
+- Kritičnost:
+
+### Kontext
+
+- Existuje aktivní admin: ano / ne / nevíme
+- Dotčené vrstvy: osobní účet / workspace / billing / data export
+- Riziko neoprávněného převodu: nízké / střední / vysoké
+- Zákaznická data v dosahu: ano / ne / nepřímo
+
+### Ověření
+
+- Použité důkazy:
+- Co nebylo potřeba sbírat:
+- Interní schvalovatel:
+- Odkaz na ticket:
+- Citlivé přílohy odstraněny: ano / ne / nevznikly
+
+### Provedení
+
+- Provedená změna:
+- Kdo změnu provedl:
+- Čas změny:
+- Oznámení odesláno komu:
+- Auditní log ověřen:
+
+### Následná hygiena
+
+- Nový vlastník dostal checklist: ano / ne
+- Doporučená kontrola členů:
+- Doporučená kontrola API klíčů:
+- Doporučená kontrola billing kontaktů:
+- Follow-up datum:
+
+### Uzavření
+
+- Výsledek:
+- Poučení pro produkt/support:
+- Je potřeba upravit nápovědu nebo proces:
+
+
 ## Pracovní log
+
+- **2026-09-19:** Doplněna příloha FY o obnově účtu a změně vlastníka workspace: oddělení osobní identity, workspace a fakturace, samoobslužná obnova, rozhodovací strom převodu, omezení support pravomocí, minimalizace důkazů, hygiena po převodu, komunikační šablony, metriky, checklist a karta obnovy workspace.
 
 - **2026-09-19:** Doplněna příloha FX o správě secrets a API klíčů: definice secretů, inventář podle dopadu, bezpečné ukládání mimo kód a chat, lokální vývoj, CI/CD rizika, rotace, logování, zákaznická tajemství, incident postup, checklist a secret karta.
 
