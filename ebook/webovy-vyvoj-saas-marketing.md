@@ -31969,7 +31969,200 @@ Privacy-first pravidlo: při analýze dopadu nepotřebuješ rozpitvat každého 
 - Kdo vlastní komunikaci:
 - Kdy audit zopakujeme:
 
+## Příloha GB: Dunning a záchrana plateb bez nátlaku, ostudy a zbytečného sběru dat
+
+Neúspěšná platba není automaticky signál, že zákazník odchází. Často je to expirovaná karta, limit, změna banky, interní schvalování faktury nebo prostě člověk, který měl zrovna den plný požárů. Malý SaaS tým z toho může udělat buď nepříjemný hon na peníze, nebo klidný provozní proces, který chrání cash flow i důvěru.
+
+Dunning není spamová sekvence typu „zaplať, nebo ti vypneme kyslík“. Je to řízená komunikace po platebním problému: co se stalo, jak to opravit, jak dlouho služba poběží, co se stane s daty a kde zákazník najde pomoc.
+
+### Nejdřív rozliš typ platebního problému
+
+Ne všechny neuhrazené platby mají stejný význam. Pokud je tým hází do jednoho pytle, bude buď moc tvrdý, nebo moc měkký.
+
+Rozliš minimálně:
+
+- **Selhání karty:** karta expirovala, banka odmítla platbu, nestačil limit nebo bylo potřeba silnější ověření.
+- **Neuhrazená faktura:** zákazník platí převodem, ale faktura čeká na interní schválení.
+- **Billing změna:** zákazník měnil tarif, DIČ, fakturační e-mail nebo vlastníka workspace.
+- **Skutečný churn signál:** zákazník produkt nepoužívá, nereaguje a platbu neřeší.
+- **Interní chyba:** špatně nastavený tarif, duplicita faktury, chybně spárovaná platba.
+
+Každý typ potřebuje jiný tón. U selhání karty stačí jasný odkaz na aktualizaci platby. U interní chyby se omlouváš a opravuješ. U churn signálu se nesnažíš zákazníka umlátit automatizací, ale nabídneš férové ukončení, export a poslední možnost ozvat se.
+
+### Nastav ochranné období, které odpovídá hodnotě služby
+
+Okamžité vypnutí při první neúspěšné platbě je krátkozraké. Zvlášť u B2B produktu, kde služba často podporuje každodenní práci týmu. Na druhou stranu nekonečný přístup bez platby vytváří provozní riziko.
+
+Praktický model pro malý SaaS:
+
+- **Den 0:** platba selže, systém pošle klidné upozornění vlastníkovi billing účtu.
+- **Den 2–3:** druhá zpráva vysvětlí dopad a nabídne jednoduchou opravu.
+- **Den 7:** upozornění, že pokud platba nebude vyřešena, workspace přejde do omezeného režimu.
+- **Den 10–14:** omezený režim: data jsou dostupná, ale nejdou vytvářet nové projekty, pozvánky nebo automatizace.
+- **Den 30+:** uzamčení s možností exportu a kontaktu podpory.
+
+U enterprise zákazníků může dávat smysl delší okno, ale jen pokud je zapsané ve smlouvě, SLA nebo interní billing kartě. Jinak vzniká šedá zóna, kde rozhoduje momentální nálada. A nálada je skvělá na kávu, ne na finanční provoz.
+
+### Komunikuj věcně, ne výhrůžně
+
+Dunning e-mail má být krátký, konkrétní a použitelný. Nepotřebuje falešnou naléhavost, červené bannery ani pasivně agresivní věty. Stačí odpovědět na čtyři otázky:
+
+1. Co se stalo?
+2. Co má zákazník udělat?
+3. Do kdy je potřeba to vyřešit?
+4. Co se stane, pokud se to nevyřeší?
+
+Špatně:
+
+> Vaše platba selhala. Pokud okamžitě nezaplatíte, váš účet bude deaktivován.
+
+Lépe:
+
+> Nepodařilo se nám zpracovat platbu za tarif Team. Služba běží dál do 14. října 2026. Platební údaje můžete upravit zde: [odkaz]. Pokud platbu nestihnete vyřešit, workspace přejde do režimu pouze pro čtení. Data zůstanou dostupná pro export.
+
+Jasný tón snižuje počet ticketů. Zákazník nemusí hádat, jestli přijde o data, jestli má psát účetní nebo jestli má panikařit. Nemá. Panika je drahá feature.
+
+### Billing přístup dej správným lidem
+
+Platební problém často řeší někdo jiný než každodenní uživatel produktu. Pokud upozornění posíláš jen administrátorovi, který už ve firmě nepracuje, dunning se promění v archeologii.
+
+V produktu proto odděl:
+
+- **vlastníka workspace,** který nese hlavní odpovědnost,
+- **billing kontakt,** který dostává faktury a platební upozornění,
+- **technického správce,** který řeší integrace a dopady omezení,
+- **běžné uživatele,** kteří nemají vidět platební detaily.
+
+U malých týmů to může být jedna osoba. U rostoucího zákazníka ne. Produkt by měl dovolit přidat alespoň jeden záložní billing kontakt, ideálně bez toho, aby dostal přístup k zákaznickým datům nebo nastavení celého workspace.
+
+### Privacy-first dunning sbírá jen minimum dat
+
+Billing je citlivá oblast. Není důvod posílat do marketingového nástroje detailní stav plateb, poslední čtyři číslice karty, fakturační adresu nebo interní poznámky podpory.
+
+Privacy-first nastavení:
+
+- e-mailová automatizace dostane jen událost typu `payment_failed`, jazyk, tarif a odkaz do bezpečného billing portálu,
+- platební údaje zpracovává platební poskytovatel, ne vlastní databáze aplikace,
+- interní logy neobsahují celé fakturační údaje ani bankovní detaily,
+- support vidí stav platby a doporučený postup, ne víc dat „pro jistotu“,
+- po vyřešení problému se do produktových metrik ukládá agregovaný signál, ne detailní finanční profil člověka.
+
+Codyho komentář: Nejlepší billing data jsou ta, která vůbec nemusíš chránit, protože je nemáš. Ano, je to méně sexy než obří dashboard. Ale taky méně žalovatelné. Drobnost.
+
+### Omezený režim navrhni jako bezpečný most
+
+Když platba zůstane nevyřešená, omezený režim má chránit produkt, ale nemá trestat zákazníka zbytečně tvrdě. Cílem je udržet možnost nápravy a odchodu bez rukojmí.
+
+Dobré omezení:
+
+- zachová přihlášení vlastníka a billing kontaktu,
+- umožní aktualizovat platební metodu,
+- umožní stáhnout faktury a exportovat data,
+- zastaví nákladné akce, například nové automatizace, velké exporty nebo API zápisy,
+- jasně zobrazí stav účtu a další krok.
+
+Špatné omezení:
+
+- schová data bez vysvětlení,
+- znemožní přístup k fakturám,
+- blokuje export,
+- mate běžné uživatele technickou chybou,
+- nutí zákazníka psát support kvůli každé maličkosti.
+
+Pokud zákazník nemůže zaplatit ani odejít, nevzniká retence. Vzniká frustrace s fakturou.
+
+### Měř záchranu plateb bez stalkingu
+
+Dunning potřebuje metriky, ale ne detailní sledování každého kliknutí jednotlivce. Stačí provozní přehled, který ukáže, jestli proces funguje.
+
+Sleduj agregovaně:
+
+- kolik plateb selhalo v daném týdnu,
+- kolik se obnovilo automaticky,
+- kolik se obnovilo po první, druhé a třetí zprávě,
+- kolik workspace skončilo v omezeném režimu,
+- kolik zákazníků požádalo o pomoc,
+- kolik odchodů mělo platební problém jako poslední signál.
+
+Jednou měsíčně se podívej na vzorky komunikace a ticketů. Ne proto, abys hodnotil lidi, ale abys našel tření: nejasný text, špatný odkaz, chybějící billing kontakt, nepochopené termíny, příliš krátké ochranné období.
+
+### Připrav výjimky dřív, než nastanou
+
+Bez pravidel se výjimky dělají podle hlasitosti zákazníka. To je nefér a časem neudržitelné. Měj jednoduchý seznam situací, kdy tým může prodloužit ochranné období nebo obnovit přístup.
+
+Příklady férových výjimek:
+
+- zákazník prokazatelně řeší interní fakturační proces,
+- platba selhala kvůli chybě poskytovatele nebo vlastní aplikace,
+- zákazník je v aktivním pilotu se smluvně domluveným vyúčtováním,
+- účet má vysoký provozní dopad a existuje jasný kontakt na rozhodovatele,
+- zákazník potřebuje krátké okno pro export dat.
+
+Každá výjimka má mít konec, vlastníka a poznámku v billing kartě. „Ještě chvilku“ není datum. Je to pozvánka pro budoucí chaos.
+
+### Checklist: dunning bez nátlaku
+
+- Máme rozlišené selhání karty, faktury, billing změny, churn signál a interní chybu.
+- Zákazník ví, do kdy služba běží a kdy přijde omezený režim.
+- Dunning e-maily říkají co se stalo, co udělat, do kdy a s jakým dopadem.
+- Workspace má samostatný billing kontakt nebo alespoň záložního vlastníka.
+- Omezený režim zachová export, faktury a možnost opravit platbu.
+- Marketingové a analytické nástroje nedostávají detailní platební údaje.
+- Support má jasný postup pro výjimky, prodloužení a interní chyby.
+- Měříme obnovu plateb agregovaně, bez sledování jednotlivých uživatelů.
+- Po uzamčení účtu existuje férový proces exportu a retenční lhůta.
+
+### Mini šablona: dunning karta
+
+## Dunning karta: [produkt / tarif]
+
+### Události
+
+- Selhání platby:
+- Neuhrazená faktura:
+- Interní billing chyba:
+- Churn signál:
+
+### Časová osa
+
+- Den 0:
+- Den 3:
+- Den 7:
+- Den 14:
+- Den 30:
+
+### Komunikace
+
+- Primární příjemce:
+- Záložní příjemce:
+- Text první zprávy:
+- Text před omezením:
+- Text po omezení:
+
+### Omezený režim
+
+- Co zůstává dostupné:
+- Co je blokované:
+- Jak obnovit plný přístup:
+- Jak stáhnout data:
+
+### Privacy-first kontrola
+
+- Která data předáváme platebnímu poskytovateli:
+- Která data posíláme do e-mailové automatizace:
+- Kdo interně vidí stav platby:
+- Kdy mažeme nebo agregujeme provozní záznamy:
+
+### Výjimky
+
+- Kdo je může schválit:
+- Maximální prodloužení:
+- Povinná poznámka:
+- Datum další kontroly:
+
 ## Pracovní log
+
+- **2026-09-19:** Doplněna příloha GB o dunningu a záchraně plateb: typy platebních problémů, ochranné období, férová komunikace, billing role, privacy-first data, omezený režim, měření, výjimky a šablona dunning karty.
 
 - **2026-09-19:** Doplněna příloha GA o pricing auditu bez matení zákazníků: hodnotová metrika, tarify, limity, slevy, změny cen, privacy-first kontrola, checklist a pricing audit karta.
 
