@@ -29429,8 +29429,178 @@ Stačí jedna až dvě dobře načasované zprávy s přímým důvodem. Bez pix
 ---
 
 
+## Příloha FN: SLA a provozní závazky bez slibů, které malý tým neunese
+
+SLA vypadá jako nudná smluvní tabulka, dokud nezačne incident. Pak se z ní najednou stane otázka důvěry: co přesně jste slíbili, komu to platí, jak rychle reagujete a co zákazník může čekat, když služba neběží. Malý SaaS tým často udělá jednu ze dvou chyb. Buď neslíbí nic a působí amatérsky, nebo slíbí enterprise úroveň dostupnosti, podpory a kompenzací, kterou nedokáže provozně unést.
+
+Zdravé SLA není marketingová póza. Je to provozní smlouva mezi produktem, zákazníkem a týmem. Má říkat pravdu o tom, co umíte doručit opakovaně, jaké situace rozlišujete a jak komunikujete, když se něco pokazí. Privacy-first přístup k tomu přidává ještě jednu vrstvu: při řešení problémů nesmí tým sahat po zákaznických datech jen proto, že je to pohodlnější.
+
+> Codyho komentář: SLA není kouzelný štít proti incidentům. Je to slib, že při incidentu nebudete improvizovat jako kapela bez bubeníka.
+
+### Nejdřív odděl dostupnost, reakci a řešení
+
+Když zákazník řekne „potřebujeme garanci“, většinou tím nemyslí jednu věc. Může chtít dostupnost aplikace, rychlou reakci podpory, jasnou eskalaci, obnovu dat, bezpečnostní postup, nebo prostě jistotu, že se neztratí v e-mailu. Pokud to všechno hodíš do jedné věty „garantujeme podporu“, zaděláváš si na nedorozumění.
+
+Rozlišuj minimálně tři typy závazků:
+
+- **Dostupnost služby:** kdy má být produkt dostupný a co se do dostupnosti počítá.
+- **Reakční doba:** kdy zákazník dostane první lidskou nebo provozně smysluplnou odpověď.
+- **Doba řešení:** jak rychle se snažíte problém odstranit, pokud je to pod vaší kontrolou.
+
+Reakční doba není totéž co oprava. Slíbit „vyřešíme do 2 hodin“ u incidentů, kde může být závislost na hostingu, platební bráně nebo zákaznické konfiguraci, je dobrodružství pro lidi, kteří mají rádi studený pot. Lepší je slíbit rychlou reakci, transparentní aktualizace a jasný postup eskalace.
+
+### Definuj priority podle dopadu, ne podle hlasitosti
+
+SLA má chránit zákazníka i tým před tím, aby nejhlasitější požadavek vždy vyhrál. Priorita incidentu nebo support ticketu musí vycházet z dopadu na provoz, bezpečnost a data, ne z toho, kolik vykřičníků je v e-mailu.
+
+Jednoduchá prioritizace:
+
+- **P1 — kritický dopad:** služba je nedostupná pro většinu zákazníků, nejde dokončit zásadní workflow, nebo existuje podezření na bezpečnostní incident.
+- **P2 — vysoký dopad:** důležitá část produktu nefunguje, existuje workaround, ale výrazně komplikuje práci.
+- **P3 — běžný problém:** chyba omezuje konkrétní scénář, ale hlavní provoz běží.
+- **P4 — dotaz nebo drobnost:** vysvětlení, kosmetická chyba, požadavek na zlepšení nebo nízkoriziková konfigurace.
+
+Důležité je říct, kdo prioritu určuje a kdy se může změnit. Ticket může začít jako P3 a po zjištění rozsahu přejít na P1. Nebo naopak: zákazník hlásí „všechno je rozbité“, ale ukáže se, že jde o jedno špatné nastavení v jeho účtu. Priorita není nálepka ega. Je to pracovní odhad dopadu.
+
+### Provozní hodiny nejsou ostuda
+
+Malý tým nemusí předstírat nepřetržitý enterprise support. Pokud nemáte 24/7 službu, nepište jazykem, který ji naznačuje. Zákazník raději dostane pravdivé provozní hodiny než falešnou jistotu, která se rozpadne v pátek večer.
+
+Prakticky popiš:
+
+- kdy tým běžně reaguje,
+- jak se řeší kritické incidenty mimo běžnou dobu,
+- které tarify nebo smlouvy mají rozšířenou podporu,
+- jak zákazník pozná, že jde o incident a ne běžný požadavek,
+- kde najde status page nebo provozní aktualizace.
+
+Pokud nabízíš vyšší podporu jen některým zákazníkům, napiš to jasně. Není nefér mít rozdílné úrovně služby. Nefér je tvářit se, že všichni mají stejný závazek, a pak v zákulisí ručně upřednostňovat největší faktury bez pravidel.
+
+### Kompenzace mají motivovat k férovosti, ne k účetnímu divadlu
+
+Service credits nebo jiné kompenzace mohou dávat smysl, ale u malého SaaS je nepřeceňuj. Zákazníkovi při výpadku většinou nepomůže sleva v řádu procent tolik jako rychlá komunikace, oprava a prevence opakování. Kompenzace má být férové uznání dopadu, ne náhrada za provozní disciplínu.
+
+Předem si ujasni:
+
+- při jakém typu nedostupnosti vzniká nárok,
+- zda zákazník musí žádost podat, nebo kompenzaci nabídnete sami,
+- jaký je strop kompenzace,
+- co se nepočítá do výpadku, například plánovaná údržba nebo problém mimo vaši kontrolu,
+- jak se komunikuje postmortem u většího incidentu.
+
+Codyho pravidlo: kompenzace nesmí být tak složitá, že její vyřízení stojí víc důvěry než samotný incident. Když už se něco pokazilo, nedělej ze zákazníka ještě právního archeologa.
+
+### Privacy-first incident support: minimum dat, maximum kontextu
+
+Při řešení problémů je lákavé otevřít databázi, stáhnout export, kouknout do účtu zákazníka a „rychle se podívat“. Přesně tady vznikají špatné návyky. Support a provoz potřebují diagnostiku, ale ne neomezený přístup k obsahu zákaznických dat.
+
+Nastav pravidla:
+
+- preferuj technické logy, agregované metriky a anonymní identifikátory,
+- přístup do zákaznického účtu používej jen se zdůvodněním a auditní stopou,
+- citlivé příklady si vyžádej od zákazníka vědomě, ne tajně,
+- screenshoty a exporty maž po vyřešení podle retenčního pravidla,
+- do ticketů nekopíruj víc osobních dat, než je nutné,
+- u bezpečnostních incidentů odděl technickou komunikaci od právních a zákaznických oznámení.
+
+Dobrá support diagnostika neznamená vědět o zákazníkovi všechno. Znamená vědět dost na opravu problému a umět vysvětlit, proč byl konkrétní přístup potřeba.
+
+### Plánovaná údržba má být produktová zkušenost
+
+Údržba není jen technická událost. Je to zákaznický moment, kdy testuješ, jestli produkt působí spolehlivě. I krátké okno může vyvolat nervozitu, pokud zákazník neví, co se děje, proč se to děje a zda musí něco udělat.
+
+Pro plánovanou údržbu měj jednoduchý standard:
+
+- oznam ji předem s jasným dopadem,
+- vybírej čas podle zákaznického používání, ne jen podle pohodlí vývojáře,
+- napiš, zda bude služba nedostupná, zpomalená nebo jen riziková,
+- připrav rollback plán,
+- po dokončení potvrď výsledek,
+- pokud se údržba protáhne, komunikuj dřív, než se zákazník začne ptát.
+
+Privacy-first poznámka: status page a incidentové aktualizace mají informovat, ne odhalovat. Nepiš detaily, které by útočníkovi pomohly nebo zákazníkovi zbytečně odkryly cizí problém.
+
+### SLA musí odpovídat architektuře i ceně
+
+Nemůžeš levně prodávat produkt s provozními závazky, které vyžadují drahý tým, redundanci a nepřetržitý dohled. Pokud chceš slibovat vysokou dostupnost, rychlou reakci a přísné obnovy, musí tomu odpovídat architektura, monitoring, zálohy, incident proces i cena.
+
+U každého závazku si polož otázky:
+
+- Umíme to měřit bez ručního dohledávání?
+- Máme alert, který nás upozorní dřív než zákazník?
+- Máme člověka nebo službu, která umí reagovat v slíbeném čase?
+- Máme runbook pro nejpravděpodobnější selhání?
+- Máme otestovaný rollback nebo obnovu?
+- Je cena služby dostatečná pro tuto provozní úroveň?
+
+Pokud je odpověď „ne“, závazek nezahazuj automaticky. Buď ho uprav, nebo si ho dej do roadmapy jako provozní investici. Jen ho neslibuj předem. Sliby se škálují hůř než kód.
+
+### Checklist: SLA bez přestřelených slibů
+
+- Jsou oddělené závazky dostupnosti, reakční doby a řešení?
+- Definuješ priority podle dopadu na provoz, bezpečnost a data?
+- Jsou provozní hodiny napsané pravdivě a srozumitelně?
+- Ví zákazník, kam hlásit incident a kde sledovat aktualizace?
+- Má každá priorita vlastní reakční postup a eskalaci?
+- Jsou kompenzace jednoduché, férové a provozně zvládnutelné?
+- Má support pravidla pro minimální práci se zákaznickými daty?
+- Existuje standard pro plánovanou údržbu a rollback?
+- Odpovídají provozní sliby architektuře, monitoringu, týmu a ceně?
+- Reviduješ SLA po větších incidentech, změně tarifu nebo změně architektury?
+
+### Mini šablona: SLA karta služby
+
+```markdown
+## SLA karta: [produkt / tarif / zákazník]
+
+### Rozsah služby
+- Na co se SLA vztahuje:
+- Na co se SLA nevztahuje:
+- Provozní hodiny podpory:
+- Kanál pro incidenty:
+- Status page / provozní aktualizace:
+
+### Priority
+- P1 kritický dopad — definice:
+- P2 vysoký dopad — definice:
+- P3 běžný problém — definice:
+- P4 dotaz nebo drobnost — definice:
+
+### Reakce a komunikace
+- První reakce pro P1:
+- První reakce pro P2:
+- Aktualizace během incidentu:
+- Eskalace:
+- Kdo komunikuje se zákazníkem:
+
+### Dostupnost a údržba
+- Cílová dostupnost:
+- Plánovaná údržba:
+- Výjimky:
+- Rollback postup:
+- Postmortem pravidlo:
+
+### Privacy-first provoz
+- Jaká diagnostická data používáme:
+- Kdy je povolen přístup do zákaznického účtu:
+- Jak zapisujeme auditní stopu:
+- Kdy mažeme screenshoty, exporty a dočasné podklady:
+- Co do ticketů nikdy nekopírujeme:
+
+### Kompenzace a revize
+- Kdy vzniká nárok na kompenzaci:
+- Strop kompenzace:
+- Jak se kompenzace žádá nebo nabízí:
+- Datum poslední revize SLA:
+- Co je potřeba zlepšit před vyšším SLA:
+```
+
+---
+
+
 ## Pracovní log
 
+- **2026-09-19:** Doplněna příloha FN o SLA a provozních závazcích bez přestřelených slibů: dostupnost vs. reakce vs. řešení, priority podle dopadu, provozní hodiny, kompenzace, privacy-first incident support, plánovaná údržba, checklist a SLA karta.
 - **2026-09-19:** Doplněna příloha FM o obnově smlouvy a prevenci churnu: renewal stopa, včasné churn signály, 120/90/60/30denní rytmus, změna rozsahu před slevou, exit rozhovor, win-back bez stalkingu, checklist a renewal karta.
 - **2026-09-19:** Doplněna příloha FL o customer success rytmu po implementaci: výsledky místo spokojenosti, 90denní rytmus, jednoduchý health score bez šmírování, business review, expansion po hodnotě, privacy-first dokumentace, checklist a success karta.
 - **2026-09-19:** Doplněna příloha FK o implementačním plánu po nákupu: ochrana první hodnoty, řízení rozsahu, importy dat, integrace, situační školení, změny scope, provozní review, checklist a karta implementační fáze.
