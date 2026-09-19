@@ -29949,8 +29949,178 @@ Měsíční review nemá týmu přidat další rituál pro kalendářovou okrasu
 
 ---
 
+## Příloha FQ: Čtvrtletní strategické rozhodnutí bez korporátního divadla
+
+Měsíční provozní review říká, jestli produkt běží zdravě. Čtvrtletní strategické rozhodnutí říká, čemu se tým bude skutečně věnovat dál. To je jiný sport. Když ho malý SaaS tým zamění za tříhodinové listování dashboardy, skončí s dvaceti prioritami, třemi novými iniciativami, nulovým odložením práce a klasickou větou „nějak to zvládneme“. Nezvládnete. Kalendář není nafukovací matrace.
+
+Čtvrtletí je dost dlouhé na to, aby vznikl měřitelný posun, a dost krátké na to, aby špatná sázka nezničila rok. Cílem není vyrobit dokonalou strategii. Cílem je vybrat omezený počet sázek, jasně říct, co se kvůli nim nedělá, a zapsat rozhodnutí tak, aby se k němu šlo za měsíc vrátit bez archeologické expedice ve Slacku.
+
+### Strategie začíná volbou, ne seznamem přání
+
+Dobrá strategie pro malý tým má ostří. Neříká jen „budeme růst“, „zlepšíme produkt“ a „posílíme marketing“. To jsou přání na firemní dort. Strategická volba říká:
+
+- komu chceme v příštím období pomoct výrazně lépe,
+- jaký problém nebo fázi zákaznické cesty zlepšíme,
+- jak poznáme, že se posun povedl,
+- co kvůli tomu vědomě odkládáme,
+- jaké riziko přijímáme.
+
+Příklad slabé priority: „Zlepšit onboarding.“
+
+Příklad silnější priority: „Do konce čtvrtletí zkrátit čas od podpisu po první samostatné použití z typických 14 dnů na 7 dnů u servisních firem do 30 zaměstnanců, a to bez importu celé historické databáze.“
+
+Druhá věta obsahuje zákazníka, výsledek, metriku, rozsah i mantinel. Tým z ní ví, co má zkoumat, stavět, měřit a odmítat.
+
+### Připrav rozhodovací podklady, ne prezentační karaoke
+
+Strategický meeting nepotřebuje třicet slidů. Potřebuje krátké podklady, které se dají přečíst předem. Ideální rozsah pro malý tým je jedna až tři stránky:
+
+- **Co jsme slíbili minulé čtvrtletí:** cíle, rozhodnutí, odložené věci.
+- **Co se opravdu stalo:** zákaznická hodnota, revenue, churn rizika, provoz, support, marketing.
+- **Co jsme se naučili:** tři až pět poznatků, ne výpis všeho, co se pohnulo.
+- **Jaké máme možnosti:** maximálně tři realistické sázky pro další období.
+- **Co doporučujeme:** jedna hlavní volba a důvod.
+
+Podklady mají být čitelné i pro člověka, který nebyl u každého interního rozhovoru. Když rozhodnutí nejde vysvětlit stručně, často ještě není připravené. A když naopak vyžaduje dvacet grafů bez jasné otázky, nejspíš měříte víc, než rozhodujete.
+
+### Vyber jednu hlavní sázku a dvě podpůrné
+
+Malý tým by si měl na čtvrtletí vybrat jednu hlavní strategickou sázku. Ne pět. Jednu. K ní mohou existovat dvě podpůrné iniciativy, které pomáhají hlavnímu směru nebo chrání provoz.
+
+Praktické rozdělení:
+
+- **Hlavní sázka:** změna, která má posunout produkt nebo obchodní model.
+- **Podpůrná iniciativa 1:** práce, která snižuje riziko hlavní sázky.
+- **Podpůrná iniciativa 2:** provozní nebo marketingová práce, která brání úniku hodnoty.
+
+Příklad:
+
+- Hlavní sázka: zrychlit onboarding pro nový segment účetních kanceláří.
+- Podpora 1: vytvořit importní šablony a validační reporty pro nejčastější datové zdroje.
+- Podpora 2: napsat tři praktické návody a jeden veřejný checklist pro samostatné spuštění.
+
+Takové čtvrtletí má tah. Všechno ostatní musí projít filtrem: pomáhá to hlavní sázce, chrání to provoz, nebo je to jen nápad v převleku za prioritu?
+
+### Odložené věci zapiš stejně poctivě jako priority
+
+Strategie bez seznamu „neděláme“ je jen optimismus s kalendářem. Odložené věci nejsou selhání. Jsou ochrana týmu před tříštěním.
+
+Do strategického zápisu patří:
+
+- funkce, které se v tomto čtvrtletí nestaví,
+- segmenty, které aktivně necílíme,
+- marketingové kanály, které netestujeme,
+- technické refaktory, které počkají,
+- integrace, které nepřidáme jen kvůli jednomu logu v prezentaci.
+
+Odloženou práci neuklízej do mlhy. Napiš k ní důvod: „čekáme na tři další zákaznické signály“, „nejdřív musíme snížit support zátěž“, „nemáme bezpečný datový model“, „není jasný obchodní dopad“. Tým pak ví, že nejde o zapomenutí, ale o vědomé rozhodnutí.
+
+### Privacy-first kontrola patří do strategie, ne až do právního závěru
+
+Každá větší sázka mění datovou stopu produktu. Nový segment může znamenat citlivější data. Nová integrace může přidat subprocesora. Nový marketingový kanál může svádět k agresivnějšímu sledování lidí. Proto má strategické rozhodnutí obsahovat privacy-first kontrolu už na začátku.
+
+Ptej se:
+
+- Jaká nová data budeme potřebovat a proč?
+- Můžeme rozhodnutí udělat s agregovanými nebo anonymizovanými signály?
+- Přibývá nový dodavatel, API, analytika nebo export?
+- Zůstávají data v Evropě a pod naší kontrolou?
+- Je pro zákazníka srozumitelné, co se mění?
+- Kdy nová data smažeme, pokud experiment nevyjde?
+
+Privacy-first strategie není brzda růstu. Je to způsob, jak růst bez budoucího úklidu po datové párty. A datová párty má vždycky horší ráno než normální párty.
+
+### Rozhodnutí převeď do rytmu práce
+
+Strategický zápis je k ničemu, pokud zůstane ve složce „Q-planning-final-final2“. Do týdne po rozhodnutí musí vzniknout pracovní rytmus:
+
+- rozdělené iniciativy na první měsíční milníky,
+- jasní vlastníci,
+- první zákaznické rozhovory nebo testy,
+- rozhodnutí, co se zastaví v backlogu,
+- jednoduchý dashboard nebo review otázky,
+- termín měsíční kontroly směru.
+
+Neplánuj celé čtvrtletí do posledního ticketu. Naplánuj první měsíc konkrétně, druhý rámcově a třetí jako prostor pro reakci. Tím chráníš směr i učení. Produktový plán není železniční jízdní řád. Spíš mapa v dešti: víš, kam jdeš, ale občas musíš obejít bahno.
+
+### Agenda na 90 minut
+
+Krátký strategický meeting pro malý tým může vypadat takto:
+
+1. **10 minut:** připomenutí minulé sázky a toho, co se opravdu stalo.
+2. **15 minut:** nejdůležitější zákaznické, obchodní a provozní poznatky.
+3. **20 minut:** porovnání maximálně tří možností pro další čtvrtletí.
+4. **20 minut:** výběr hlavní sázky, podpůrných iniciativ a mantinelů.
+5. **10 minut:** privacy-first kontrola nové datové stopy.
+6. **10 minut:** seznam věcí, které se vědomě nedělají.
+7. **5 minut:** vlastníci, první kroky a datum měsíční kontroly.
+
+Pokud se tým zasekne, nepřidávej čas. Zapiš otevřenou otázku a rozhodni, jaký signál chybí. Někdy je nejlepší strategické rozhodnutí říct: „Nejsme připraveni vybrat, během deseti dnů ověříme dvě konkrétní neznámé.“ To je pořád lepší než falešná jistota s pěkným titulkem.
+
+### Checklist: čtvrtletní strategie bez divadla
+
+- [ ] Máme jednu hlavní sázku, ne seznam přání.
+- [ ] Víme, pro koho a jaký výsledek se má zlepšit.
+- [ ] Každá iniciativa má vlastníka a první měsíční milník.
+- [ ] Zapsali jsme, co se vědomě nedělá.
+- [ ] Rozhodnutí vychází ze zákaznických signálů, ne jen z interní nálady.
+- [ ] Privacy-first kontrola proběhla před spuštěním práce.
+- [ ] Víme, jaká nová data vzniknou a kdy se smažou, pokud experiment skončí.
+- [ ] Máme datum měsíční kontroly směru.
+- [ ] Strategický zápis je kratší než průměrný román o projektovém řízení.
+
+### Mini šablona: čtvrtletní strategická karta
+
+## Strategická karta: [produkt / čtvrtletí]
+
+### Kontext
+
+- Co jsme slíbili minule:
+- Co se povedlo:
+- Co se nepovedlo:
+- Nejdůležitější poznatek:
+
+### Hlavní sázka
+
+- Pro koho:
+- Jaký výsledek chceme změnit:
+- Proč právě teď:
+- Jak poznáme úspěch:
+- Největší riziko:
+
+### Podpůrné iniciativy
+
+- Iniciativa 1:
+- Iniciativa 2:
+- První měsíční milníky:
+- Vlastníci:
+
+### Vědomě neděláme
+
+- Odložené funkce:
+- Odložené segmenty:
+- Odložené kanály:
+- Důvod odložení:
+
+### Privacy-first kontrola
+
+- Nová data:
+- Noví dodavatelé nebo integrace:
+- Retence:
+- Informování zákazníků:
+- Stop pravidla:
+
+### Kontrola směru
+
+- Datum měsíční kontroly:
+- Otázky pro kontrolu:
+- Rozhodnutí, které uděláme po prvním měsíci:
+
+---
+
 ## Pracovní log
 
+- **2026-09-19:** Doplněna příloha FQ o čtvrtletním strategickém rozhodování pro malý SaaS: jedna hlavní sázka, podpůrné iniciativy, vědomě odložené věci, privacy-first kontrola, 90minutová agenda, checklist a strategická karta.
 - **2026-09-19:** Doplněna příloha FP o měsíčním provozním review: otázky před metrikami, jednostránkový přehled, oddělení signálů od šumu, privacy-first kontrola, zápis rozhodnutí, 60minutová agenda, checklist a provozní karta.
 - **2026-09-19:** Doplněna příloha FO o kapacitním plánu podpory: počítání support práce, rozdělení typů dotazů, rotace vlastníků, řízené eskalace do vývoje, dokumentace jako kapacitní nástroj, privacy-first přístupové stupně, support dluh, agregované metriky, checklist a support capacity karta.
 - **2026-09-19:** Doplněna příloha FN o SLA a provozních závazcích bez přestřelených slibů: dostupnost vs. reakce vs. řešení, priority podle dopadu, provozní hodiny, kompenzace, privacy-first incident support, plánovaná údržba, checklist a SLA karta.
