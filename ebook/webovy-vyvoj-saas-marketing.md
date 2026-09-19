@@ -30683,7 +30683,175 @@ Privacy-first pravidlo: kontroluj agregované signály a konkrétní zákazníky
 - Changelog / status page:
 - Kontrola za týden:
 
+## Příloha FU: Převod nápravy po chybě do backlogu bez toho, aby se ztratila v mlze
+
+Po chybě bývá tým plný energie. Všichni vědí, co se pokazilo, co bylo trapné, kdo kvůli tomu rušil oběd a která část produktu se najednou tvářila jako starý sklep bez světla. O týden později už ale běží nové kampaně, support řeší další zákazníky a nápravné kroky se promění v neurčité „měli bychom“. To je nejnebezpečnější fáze incidentu: chyba je viditelně pryč, ale systém, který ji umožnil, pořád žije.
+
+Dobrá náprava není hromada ticketů naházených do backlogu. Je to krátký, vlastněný a ověřitelný plán, který oddělí okamžitou opravu od dlouhodobé změny. Privacy-first tým k tomu přidává ještě jednu disciplínu: nápravná práce nesmí vyrábět nový datový chaos. Když kvůli jedné chybě založíš tři nové tabulky s osobními údaji, pět exportů a věčný interní seznam „dotčených lidí“, jen jsi problém převlékl za proces.
+
+> Codyho komentář: Backlog není muzeum dobrých úmyslů. Pokud nápravný úkol nemá vlastníka, termín a jasný důkaz dokončení, je to jen lístek nalepený na digitální lednici.
+
+### Rozděl nápravu na tři časové vrstvy
+
+První chyba po incidentu je chtít všechno opravit najednou. Tým pak otevře deset větví, přepíše půl produktu a za měsíc nikdo neví, co opravdu snížilo riziko. Lepší je rozdělit nápravu podle času a účelu.
+
+- **Okamžitá stabilizace:** oprava rozbité funkce, ruční dorovnání dat, vypnutí rizikové části, jasný support postup nebo krátký zákaznický update.
+- **Krátkodobé pojistky:** test, alert, kontrolní krok v release checklistu, validace importu, dodatečné schválení u citlivé akce nebo dokumentace workaroundu.
+- **Systémová změna:** úprava architektury, redesign workflow, změna vlastnictví, odstranění staré integrace, lepší oprávnění, trénink týmu nebo změna produktového pravidla.
+
+Každá vrstva má jiný rytmus. Stabilizace může být hotová dnes. Pojistka má být v nejbližším releasu. Systémová změna může patřit do roadmapy, ale nesmí zmizet pod prioritou „až bude klid“. Klid v SaaS je bájný tvor, něco mezi jednorožcem a sprintem bez scope creepu.
+
+### Každý nápravný úkol napiš jako riziko, ne jako technický nápad
+
+Ticket „přidat validaci importu“ je slabý. Neříká, proč na něm záleží. Silnější zápis vypadá takto: „Snížit riziko, že duplicitní záznamy po importu skryjí nové kontakty před obchodníkem.“ Takový ticket dává týmu kontext, umožňuje navrhnout menší řešení a usnadňuje rozhodnutí, kdy je hotovo.
+
+Dobrá formulace obsahuje:
+
+- **riziko:** co se může stát znovu,
+- **dopad:** komu to ublíží a jak,
+- **spouštěč:** ve které situaci riziko vzniká,
+- **opatření:** co konkrétně riziko sníží,
+- **důkaz dokončení:** jak poznáme, že opatření funguje.
+
+Příklad:
+
+- Slabě: „Lepší logy pro export.“
+- Silněji: „Zabránit tomu, aby support při řešení neúspěšného exportu musel otevírat obsah zákaznického souboru. Přidáme technický stav exportu, typ chyby a ID dávky bez payloadu. Hotovo, když support vyřeší testovací export podle metadat bez přístupu k obsahu.“
+
+Takhle se náprava drží u principu minimálních dat a zároveň pomáhá provozu.
+
+### Urči jednoho vlastníka nápravného balíčku
+
+Náprava po chybě často protíná produkt, vývoj, support, komunikaci i obchod. To ale neznamená, že ji může vlastnit „tým“. Tým je dobrý na spolupráci, špatný na odpovědnost. Nápravný balíček potřebuje jednoho člověka, který drží stav, připomíná rozhodnutí a hlídá, aby se věci neztratily.
+
+Vlastník nemusí všechno dělat osobně. Má ale odpovědět na otázky:
+
+- které úkoly jsou nutné pro uzavření chyby,
+- co je jen hezký nápad mimo rozsah,
+- kdo dělá technickou, produktovou a komunikační část,
+- kdy proběhne kontrola dokončení,
+- co se zapíše do dokumentace,
+- co se řekne zákazníkům, pokud jsme slíbili follow-up.
+
+U menšího týmu může být vlastníkem zakladatel, product lead, tech lead nebo člověk z provozu. Důležité je, aby vlastník měl právo říct „tohle už není náprava této chyby, ale samostatný projekt“.
+
+### Stopni nápravný scope creep
+
+Incident nebo veřejná chyba vytváří emoční tlak. Všechno najednou vypadá důležité. Přesně tehdy se do nápravy přilepí staré dluhy, osobní preference a nápady, které se dřív nevešly do roadmapy. Výsledek: místo přesné opravy vznikne obří refaktor, který zvyšuje riziko další chyby.
+
+Použij jednoduchý filtr:
+
+- **Zabraňuje to přímému opakování chyby?** Pokud ano, patří to do nápravného balíčku.
+- **Snižuje to dopad, pokud se podobná věc stane znovu?** Pokud ano, pravděpodobně také.
+- **Zlepšuje to obecně produkt, ale nesouvisí přímo s chybou?** Dej to do běžného backlogu.
+- **Je to architektonický sen, který se teď hodí jako výmluva?** Zapiš ho zvlášť a dej mu normální prioritizaci.
+
+Tento filtr není brzda kvality. Je to ochrana před tím, aby chyba nepřerostla v nekonečný projekt bez uzavření.
+
+### Privacy-first kontrola nápravných dat
+
+Náprava často pracuje s citlivým kontextem: kdo byl dotčen, jaké akce selhaly, jaké účty potřebují opravu, kdo dostal komunikaci a co support řešil ručně. To jsou užitečné informace, ale nemají se stát trvalým vedlejším skladem osobních údajů.
+
+U každého nápravného balíčku si polož otázky:
+
+- Potřebujeme seznam konkrétních uživatelů, nebo stačí seznam účtů, skupin či anonymizovaných případů?
+- Kdo opravdu potřebuje vidět detail a komu stačí agregované shrnutí?
+- Kde je dočasný pracovní seznam uložený?
+- Kdy ho smažeme nebo anonymizujeme?
+- Objevují se v ticketech screenshoty, exporty nebo části zákaznického obsahu?
+- Jde nápravu ověřit na syntetických nebo redigovaných datech?
+
+Praktické pravidlo: pracovní data pro nápravu mají mít kratší život než samotné poučení. Poučení patří do dokumentace. Dočasné seznamy patří po dokončení pryč.
+
+### Udělej z nápravy změnu v systému práce
+
+Pokud se po chybě změní jen kód, ale nezmění se způsob práce, část rizika zůstává. Nápravný balíček proto kontroluj ve čtyřech stopách:
+
+- **Produkt:** je potřeba změnit text v UI, validaci, prázdný stav, export, onboarding nebo nastavení?
+- **Vývoj:** přibyl test, alert, bezpečný default, rollback postup nebo jasnější hranice modulu?
+- **Provoz:** ví support, jak chybu poznat, kam eskalovat a co neslibovat?
+- **Komunikace:** aktualizovali jsme help centrum, changelog, šablonu odpovědi nebo status page pravidlo?
+
+Není nutné mít úkol v každé stopě. Ale je nutné je projít. Mnoho opakovaných problémů nevzniká proto, že tým neumí programovat, ale proto, že oprava zůstala jen v repozitáři a nedostala se do provozního chování.
+
+### Uzavření nápravy musí mít důkaz
+
+„Hotovo“ po incidentu nesmí znamenat „ticket je zavřený, protože už nás nebaví“. Uzavření potřebuje důkaz, který lze zkontrolovat bez hrdinského výkladu.
+
+Použitelné důkazy:
+
+- test pokrývá konkrétní selhání,
+- alert se spustí na simulovaném scénáři,
+- support zvládne postup podle runbooku,
+- dokumentace obsahuje nový limit nebo pravidlo,
+- zákazník dostal slíbený follow-up,
+- dočasná data byla smazána nebo anonymizována,
+- vlastník potvrdil, že zbylé nápady jsou přesunuté mimo nápravný balíček.
+
+U větší chyby se hodí krátké follow-up review za týden nebo měsíc. Ne kvůli rituálu, ale kvůli ověření, že změna opravdu drží. Pokud náprava vytvořila nové tření pro zákazníky nebo tým, je lepší to zjistit brzo než čekat na další krizi.
+
+### Checklist: náprava po chybě do backlogu
+
+- Je chyba stabilizovaná a zákazník ví, co se děje?
+- Má nápravný balíček jednoho vlastníka?
+- Jsou úkoly rozdělené na stabilizaci, pojistky a systémovou změnu?
+- Je každý úkol formulovaný jako snížení konkrétního rizika?
+- Má každý úkol důkaz dokončení?
+- Proběhl filtr proti scope creepu?
+- Jsou dočasná pracovní data minimalizovaná a mají termín smazání?
+- Ví support, produkt i vývoj, co se v procesu mění?
+- Je připravený follow-up zákazníkům, pokud byl slíbený?
+- Je naplánovaná kontrola, že náprava skutečně funguje?
+
+### Mini šablona: karta nápravného balíčku
+
+## Nápravný balíček: [chyba / incident / produktová událost]
+
+### Kontext
+
+- Co se stalo:
+- Kdy se to stalo:
+- Koho se to týkalo:
+- Jaký byl dopad:
+
+### Rizika k omezení
+
+- Přímé opakování:
+- Podobný scénář:
+- Provozní dopad:
+- Důvěra zákazníků:
+
+### Úkoly
+
+- Stabilizace:
+- Krátkodobá pojistka:
+- Systémová změna:
+- Dokumentace / komunikace:
+
+### Vlastnictví
+
+- Vlastník balíčku:
+- Technická část:
+- Produktová část:
+- Support / komunikace:
+
+### Privacy-first kontrola
+
+- Jaká dočasná data používáme:
+- Kdo k nim má přístup:
+- Kdy je smažeme nebo anonymizujeme:
+- Jak ověříme řešení bez živého obsahu:
+
+### Uzavření
+
+- Důkaz dokončení:
+- Zákaznický follow-up:
+- Interní dokumentace:
+- Kontrola za týden / měsíc:
+
 ## Pracovní log
+
+- **2026-09-19:** Doplněna příloha FU o převodu nápravy po chybě do backlogu: časové vrstvy, formulace úkolů jako rizik, vlastnictví, scope creep filtr, privacy-first kontrola pracovních dat, systémové změny, důkazy dokončení, checklist a karta nápravného balíčku.
 
 - **2026-09-19:** Doplněna příloha FT o obnově důvěry po chybě: typy selhání, tři vrstvy reakce, konkrétní privacy-first komunikace, omluva s nápravou, kompenzace, postmortem, follow-up, checklist a karta obnovy důvěry.
 
