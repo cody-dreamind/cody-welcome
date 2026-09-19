@@ -30118,8 +30118,227 @@ Pokud se tým zasekne, nepřidávej čas. Zapiš otevřenou otázku a rozhodni, 
 
 ---
 
+## Příloha FR: Roční produktový a datový úklid bez paniky
+
+Malý SaaS často začne elegantně: pár tabulek, pár integrací, jeden jasný tok dat. Po roce má ale produkt vedlejší importy, staré feature flagy, zapomenuté testovací účty, archivované exporty a tři nástroje, které „se kdysi zkoušely“. To není selhání. To je běžná daň za učení. Selhání začíná až ve chvíli, kdy nikdo neví, co z toho pořád běží, kdo k tomu má přístup a proč se to ještě drží.
+
+Roční úklid není právnický rituál ani trest pro tým. Je to produktová údržba důvěry. Jednou za rok se zastavíš, projdeš produkt, data, dodavatele a veřejné sliby, a vyhodíš věci, které už nepomáhají. GDPR k tomu dává dobrý základ: osobní údaje mají být přiměřené, omezené na nezbytný rozsah a uchovávané jen po potřebnou dobu. Oficiální text najdeš v [GDPR na EUR-Lexu](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng). Praktický výklad odpovědností mezi správcem a zpracovatelem shrnují [EDPB Guidelines 07/2020](https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en).
+
+> Codyho komentář: Roční úklid dat je jako vyklízení skladu. Rozdíl je v tom, že zapomenutá paleta šroubků většinou nespustí bezpečnostní incident. Zapomenutý export zákaznických dat už by mohl. Zábava pro celou rodinu, jen bez popcornu.
+
+### Začni inventurou hodnoty, ne strachem
+
+Nejhorší začátek ročního review je věta: „Musíme projít GDPR.“ Tým se okamžitě mentálně přesune do sklepa, kde žije šanon. Lepší je otázka: „Co v produktu, datech a provozu už nepřináší hodnotu?“
+
+Rozděl inventuru na čtyři oblasti:
+
+- **Produkt:** funkce, workflow, experimenty, feature flagy, staré onboardingové kroky.
+- **Data:** tabulky, eventy, exporty, logy, zálohy, testovací datasety, support přílohy.
+- **Dodavatelé:** analytika, e-mailing, CRM, hosting, monitoring, AI nástroje, integrační platformy.
+- **Veřejné sliby:** privacy policy, subprocesor list, dokumentace, ceník, SLA, trust centrum.
+
+U každé položky se neptej jen „je to legální?“. Ptej se taky:
+
+- Pomáhá to zákazníkovi nebo týmu dnes?
+- Má to vlastníka?
+- Víme, jaká data tím protékají?
+- Má to jasnou retenční dobu?
+- Umíme to vypnout bez rozbití produktu?
+
+Pokud odpověď zní „asi“, zapiš riziko. Pokud odpověď zní „nikdo neví“, máš kandidáta na úklid.
+
+### Udělej mapu datové stopy produktu
+
+Roční review nepotřebuje dokonalý enterprise katalog. Stačí praktická mapa datové stopy, která ukáže, kde osobní nebo zákaznická data vznikají, kam tečou a kdy mizí.
+
+Začni hlavními produktovými cestami:
+
+1. registrace a vytvoření účtu,
+2. onboarding a import dat,
+3. každodenní používání produktu,
+4. fakturace a komunikace,
+5. zákaznická podpora,
+6. export, vypovězení služby a smazání účtu.
+
+U každé cesty zapiš:
+
+- jaká data vznikají,
+- kdo je vidí,
+- v jakém systému jsou uložena,
+- jak dlouho tam zůstávají,
+- co se stane po ukončení účtu,
+- jaký externí dodavatel je zpracovává.
+
+Tahle mapa má dvě výhody. Zaprvé najdeš zbytečná data. Zadruhé získáš podklad pro lepší support, bezpečnostní dotazníky a onboarding enterprise zákazníků. Privacy-first dokumentace není jen compliance; je to obchodní zkratka pro zákazníka, který se ptá: „Můžeme vám věřit?“
+
+### Odstraň staré experimenty a tiché integrace
+
+Nejvíc rizik často nevzniká v hlavním produktu, ale v malých „dočasných“ věcech:
+
+- landing page s dávno skončenou kampaní,
+- formulář napojený na starý spreadsheet,
+- export posílaný do nástroje, který nikdo nepoužívá,
+- testovací webhook do bývalého prototypu,
+- starý trial účet s admin právy,
+- feature flag, který měl běžet týden a běží devět měsíců.
+
+Roční úklid by měl mít pravidlo: každá integrace musí mít aktivní důvod, vlastníka a datum příští kontroly. Když ho nemá, vypnout, archivovat nebo přesunout do plánu opravy. U dodavatelů ověř také roli správce/zpracovatele, smluvní základ, region zpracování a seznam subprocesorů. EDPB k rolím správce a zpracovatele vydal [Guidelines 07/2020](https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en), které se hodí při rozhodování, jestli dodavatel jen zpracovává data podle tvých instrukcí, nebo sám určuje účely zpracování.
+
+Praktický postup:
+
+1. Vytáhni seznam všech API klíčů, OAuth aplikací, webhooků a automatizací.
+2. Označ položky bez vlastníka.
+3. U každé položky ověř poslední reálné použití.
+4. Nepoužívané položky vypni nejdřív v testu, pak v produkci.
+5. Zapiš, co bylo vypnuto a jak se ověřilo, že produkt dál funguje.
+
+### Zkontroluj retenci jako produktovou vlastnost
+
+Retence dat nemá být poznámka v dokumentu. Má být chování systému. Když zákazník smaže účet, produkt má vědět, co se smaže hned, co se anonymizuje, co musí zůstat kvůli účetnictví a co zmizí po doběhu záloh.
+
+Jednoduchá retenční tabulka může mít sloupce:
+
+- typ dat,
+- účel,
+- právní nebo obchodní důvod,
+- primární úložiště,
+- retenční doba,
+- způsob smazání nebo anonymizace,
+- vlastník,
+- důkaz o kontrole.
+
+Privacy-first SaaS by měl při ročním review projít aspoň tři scénáře:
+
+- **Běžné ukončení zákazníka:** export, potvrzení, vypnutí přístupů, plán smazání.
+- **Žádost subjektu údajů:** dohledání dat, odpověď, výjimky, evidence vyřízení.
+- **Interní ukončení experimentu:** smazání testovacích dat, vypnutí eventů, archiv poznatků bez osobních údajů.
+
+Pokud produkt neumí smazání provést technicky, nezakrývej to textem v policy. Zapiš technický dluh a dej mu prioritu podle rizika. Text bez schopnosti systému je jen dobře naformátovaná iluze.
+
+### Porovnej veřejné sliby s realitou
+
+Roční review musí zkontrolovat, jestli web a dokumentace odpovídají tomu, jak produkt skutečně funguje. Ne proto, že by tým chtěl klamat. Spíš proto, že produkt se mění rychleji než stránky „Privacy“, „Security“ a „Subprocessors“.
+
+Projdi hlavně:
+
+- privacy policy,
+- cookie lištu a seznam cookies,
+- subprocesory,
+- trust centrum,
+- SLA a incidentovou komunikaci,
+- marketingové texty o bezpečnosti,
+- onboardingové e-maily,
+- help centrum a návody k exportu nebo mazání dat.
+
+U každého veřejného slibu si napiš jednu ze tří značek:
+
+- **Sedí:** text odpovídá realitě.
+- **Zpřesnit:** text je pravdivý, ale moc obecný.
+- **Opravit:** text slibuje něco, co systém nebo proces nedělá.
+
+Opravy slibů dělej poctivě. Lepší je říct „data mažeme do 30 dnů po ukončení účtu, zálohy doběhnou podle retenčního plánu“ než mlžit větou „vaše data jsou u nás v bezpečí“. To druhé zní hezky, ale neříká nic. Tedy kromě toho, že copywriter měl kávu.
+
+### Udělej malý incident drill
+
+Součástí ročního úklidu má být krátké cvičení: co uděláme, když zjistíme únik dat, chybný export nebo neoprávněný přístup? Nečekej na skutečný incident, abys zjistil, kdo má komu zavolat.
+
+Vyber jeden realistický scénář, například:
+
+- zákazník omylem viděl data jiného zákazníka,
+- export šel na špatný e-mail,
+- API klíč dodavatele byl omylem zveřejněn,
+- admin účet bývalého kolegy zůstal aktivní.
+
+Za 30 minut projdi:
+
+1. kdo incident přijímá,
+2. kdo rozhoduje o závažnosti,
+3. kde se zastaví další škoda,
+4. kdo zjišťuje rozsah dopadu,
+5. kdo komunikuje se zákazníky,
+6. kde se ukládá postmortem,
+7. jak se rozhodne o případné notifikaci.
+
+Pro breach proces používej oficiální výklad a lokální právní radu, ne intuici z týmového chatu. EDPB má k ohlašování porušení zabezpečení osobních údajů samostatné [Guidelines 9/2022](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-92022-personal-data-breach-notification-under_en). Tým nemusí při cvičení řešit paragrafy nazpaměť, ale musí vědět, kde je runbook a kdo drží odpovědnost.
+
+### Výstup má být krátký seznam rozhodnutí
+
+Roční úklid nesmí skončit dvacetistránkovým dokumentem, který nikdo neotevře. Výstupem má být rozhodovací seznam:
+
+- co mažeme,
+- co vypínáme,
+- co opravujeme,
+- co dokumentujeme,
+- co necháváme vědomě být,
+- co zkontrolujeme za čtvrtletí.
+
+Každá položka potřebuje vlastníka a termín. Ideálně také riziko: nízké, střední, vysoké. Vysoké riziko bez vlastníka je jen hezký způsob, jak říct „čekáme na průšvih“.
+
+### Checklist: roční produktový a datový úklid
+
+- [ ] Máme seznam hlavních produktových cest a dat, která v nich vznikají.
+- [ ] Prošli jsme aktivní i historické integrace, API klíče, webhooky a automatizace.
+- [ ] Každý dodavatel má vlastníka, účel, region zpracování a datum další kontroly.
+- [ ] Nepoužívané experimenty, formuláře, landing pages a exporty mají rozhodnutí: vypnout, archivovat, nebo opravit.
+- [ ] Retenční tabulka odpovídá tomu, co systém opravdu umí.
+- [ ] Privacy policy, subprocesory, cookies, trust centrum a SLA odpovídají realitě.
+- [ ] Proběhl krátký incident drill s jedním realistickým scénářem.
+- [ ] Výstup review je seznam rozhodnutí s vlastníkem a termínem.
+- [ ] Zákazníkům neslibujeme víc, než produkt a procesy skutečně doručují.
+
+### Mini šablona: roční úklidová karta
+
+## Roční úklidová karta: [produkt / rok]
+
+### Rozsah
+
+- Datum review:
+- Účastníci:
+- Produktové oblasti:
+- Systémy a dodavatelé:
+
+### Datová stopa
+
+- Nová data za poslední rok:
+- Data bez jasného účelu:
+- Exporty a dočasné datasety:
+- Retenční nesoulady:
+
+### Integrace a dodavatelé
+
+- Noví dodavatelé:
+- Nepoužívané integrace:
+- API klíče a webhooky k vypnutí:
+- Subprocesory k aktualizaci:
+
+### Veřejné sliby
+
+- Privacy policy:
+- Cookies:
+- Trust centrum:
+- SLA a incidenty:
+- Dokumentace exportu a mazání:
+
+### Incident drill
+
+- Scénář:
+- Co fungovalo:
+- Co chybělo:
+- Opravy runbooku:
+
+### Rozhodnutí
+
+- Mažeme:
+- Vypínáme:
+- Opravujeme:
+- Dokumentujeme:
+- Kontrola za čtvrtletí:
+
+---
+
 ## Pracovní log
 
+- **2026-09-19:** Doplněna příloha FR o ročním produktovém a datovém úklidu: inventura hodnoty, mapa datové stopy, staré integrace, retence, kontrola veřejných slibů, incident drill, checklist a úklidová karta.
 - **2026-09-19:** Doplněna příloha FQ o čtvrtletním strategickém rozhodování pro malý SaaS: jedna hlavní sázka, podpůrné iniciativy, vědomě odložené věci, privacy-first kontrola, 90minutová agenda, checklist a strategická karta.
 - **2026-09-19:** Doplněna příloha FP o měsíčním provozním review: otázky před metrikami, jednostránkový přehled, oddělení signálů od šumu, privacy-first kontrola, zápis rozhodnutí, 60minutová agenda, checklist a provozní karta.
 - **2026-09-19:** Doplněna příloha FO o kapacitním plánu podpory: počítání support práce, rozdělení typů dotazů, rotace vlastníků, řízené eskalace do vývoje, dokumentace jako kapacitní nástroj, privacy-first přístupové stupně, support dluh, agregované metriky, checklist a support capacity karta.
