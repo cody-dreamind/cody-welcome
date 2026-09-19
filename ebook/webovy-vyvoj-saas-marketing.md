@@ -30336,7 +30336,189 @@ Každá položka potřebuje vlastníka a termín. Ideálně také riziko: nízk�
 
 ---
 
+## Příloha FS: Ukončení funkce nebo produktu bez datových rukojmí a spálené důvěry
+
+Každý produkt jednou něco vypne. Někdy je to malá funkce, kterou používali tři lidé. Někdy staré API. Někdy celý produkt, který už nedává obchodní ani technický smysl. Zdravý tým nepoznáš podle toho, že nikdy nic neukončuje. Poznáš ho podle toho, že umí ukončovat férově: s předstihem, s exportem, s jasným datovým plánem a bez věty „to nejde, protože systém“.
+
+Ukončování je součást produktové strategie. Když staré věci běží věčně, tým platí údržbu, dokumentace lže, support musí znát historické výjimky a zákazníci nevědí, čemu mají věřit. Privacy-first ukončení přidává ještě jednu vrstvu: zákazník nesmí ztratit kontrolu nad daty jen proto, že dodavatel přestal mít chuť danou věc provozovat.
+
+Právní rámec k tomu dává několik užitečných mantinelů. GDPR řeší právo na výmaz v článku 17 a právo na přenositelnost údajů v článku 20 v oficiálním textu [Regulation (EU) 2016/679 na EUR-Lexu](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng). EDPB navíc vydal praktické [guidelines k právu na přenositelnost údajů](https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en), které připomínají, že export má být strukturovaný, běžně používaný a strojově čitelný tam, kde právo dopadá. Neznamená to, že každá produktová tabulka musí mít kouzelné tlačítko „migruj ke konkurenci“. Znamená to, že odchod zákazníka nesmí být past.
+
+> Codyho komentář: Vendor lock-in je jako hotel, kde ti při odjezdu řeknou, že kufr je součástí pokoje. Technicky kreativní, obchodně krátkozraké a lidsky dost otravné.
+
+### Rozliš tři typy ukončení
+
+Než napíšeš zákazníkům, pojmenuj typ změny. Každý má jiný rytmus, rizika a komunikaci.
+
+- **Ukončení funkce:** vypínáš jednu část produktu, ale služba pokračuje. Typicky starý report, integrace, editor, importér nebo experimentální modul.
+- **Ukončení rozhraní:** vypínáš API endpoint, webhook, exportní formát, starou verzi SDK nebo integrační tokeny. Tady bolí hlavně partneři a interní automatizace zákazníků.
+- **Ukončení produktu nebo tarifu:** zákazník musí přejít jinam, migrovat data, změnit proces nebo uzavřít smluvní vztah.
+
+U malých změn může stačit jednoduchý changelog a in-app upozornění. U rozhraní a celého produktu potřebuješ migrační plán. Čím víc je změna navázaná na provoz zákazníka, tím víc se musí podobat projektu, ne oznámení v patičce e-mailu.
+
+První otázky:
+
+- Kdo bude reálně zasažen?
+- Jak poznáme, že danou funkci nebo API ještě někdo používá?
+- Jaký je bezpečný náhradní postup?
+- Jaká data musí zákazník dostat před vypnutím?
+- Kdo vlastní komunikaci, support a technické vypnutí?
+
+Bez odpovědí na tyhle otázky nevypínej. Ne proto, že by staré věci měly žít věčně, ale protože chaos kolem ukončení stojí víc než samotná údržba o měsíc déle.
+
+### Nejdřív změř dopad bez sledovacího přestřelu
+
+Před vypnutím potřebuješ vědět, koho se změna týká. To ale neznamená zapnout šmírovací režim a sledovat každý klik konkrétního uživatele. Stačí provozní signály, které odpovídají na otázku dopadu.
+
+Praktické privacy-first měření:
+
+- počet účtů nebo workspace, které funkci použily za posledních 30, 90 a 180 dní,
+- počet aktivních API tokenů volajících starý endpoint,
+- agregovaný objem exportů nebo importů,
+- seznam zákazníků s aktivní smluvní závislostí na funkci,
+- support tickety, které se k funkci vážou,
+- interní runbooky a automatizace, které na ní stojí.
+
+Pokud musíš identifikovat konkrétní zákazníky kvůli komunikaci, drž seznam úzký, účelový a dočasný. Nepřidávej novou produktovou telemetrii jen proto, aby ukončení vypadalo vědecky. Zákazníka zajímá, jestli bude mít čas a data na přechod, ne jestli tvůj dashboard umí třicet odstínů odchodu.
+
+### Dej zákazníkům férové okno
+
+Dobré ukončení má časovou osu. Špatné ukončení má překvapení.
+
+Pro malý SaaS se osvědčuje tento rytmus:
+
+1. **Interní rozhodnutí:** proč se věc ukončuje, co ji nahrazuje, kdo je vlastník.
+2. **Tichá příprava:** exporty, dokumentace, migrační návod, support odpovědi, test vypnutí.
+3. **První oznámení:** jasný důvod, datum vypnutí, koho se změna týká, co má udělat.
+4. **Připomenutí:** podle rizika 30, 14 a 7 dní před vypnutím.
+5. **Zmrazení:** zákazník už nemá zakládat nové závislosti na staré věci.
+6. **Vypnutí:** technicky kontrolované, s monitoringem a připraveným rollbackem, pokud jde o kritický provoz.
+7. **Dočištění:** data, přístupy, dokumentace, subprocesoři, veřejné stránky.
+
+Délka okna záleží na kritičnosti. Starý filtr v administraci může mít dva týdny. API, které zákazníci napojili do svých procesů, potřebuje spíš měsíce. Celý produkt nebo tarif vyžaduje individuální komunikaci a často i smluvní kontrolu.
+
+### Export není laskavost, ale součást důvěry
+
+Ukončení bez exportu je datové rukojmí. Export ale nemusí být obří enterprise portál. Může to být dobře zdokumentovaný CSV, JSON, ZIP s přílohami nebo kombinace exportních souborů a popisu polí.
+
+Kvalitní export má:
+
+- jasný rozsah dat,
+- strojově čitelný formát,
+- popis sloupců a časových zón,
+- oddělení osobních, provozních a fakturačních dat,
+- informaci, co v exportu záměrně není,
+- datum vytvoření a expiraci odkazu,
+- bezpečné doručení oprávněné osobě.
+
+U B2B SaaS je dobré rozlišit tři vrstvy:
+
+- **Zákaznická pracovní data:** projekty, položky, nastavení, dokumenty, komentáře, exporty z produktu.
+- **Účetní a smluvní data:** faktury, objednávky, historie tarifů, smluvní dokumenty.
+- **Provozní metadata:** logy, auditní záznamy, bezpečnostní záznamy, support historie.
+
+Ne všechno patří do stejného exportu a ne všechno se smaže ve stejný den. Některá data musí zůstat kvůli účetnictví, právním nárokům nebo bezpečnosti. To je v pořádku, pokud je to popsané, omezené a časově řízené. Nejhorší odpověď zákazníkovi je: „Něco tu asi zůstane.“ To je compliance horor v papučích.
+
+### Připrav migrační návod místo marketingové omluvy
+
+Zákazník nepotřebuje poetický e-mail o „nové kapitole“. Potřebuje vědět, co má udělat v pondělí ráno.
+
+Migrační návod by měl obsahovat:
+
+- koho se změna týká,
+- co přestane fungovat,
+- přesné datum a čas vypnutí,
+- doporučenou náhradu,
+- postup exportu,
+- známá omezení exportu,
+- postup ověření po migraci,
+- kontakt na podporu,
+- datum, do kdy bude dostupná stará dokumentace.
+
+Pokud existuje náhradní funkce ve stejném produktu, ukaž rozdíl na konkrétním příkladu. Pokud zákazník musí odejít jinam, nesnaž se tvářit, že se nic neděje. Doporuč otevřený formát, vysvětli postup a nech zákazníka rozhodnout. Privacy-first přístup není jen o tom, kde běží server. Je to i férovost v okamžiku, kdy už obchodně nevyhráváš.
+
+### Vypnutí musí mít technický runbook
+
+Ukončení není jen komunikace. Je to release. A release bez runbooku je optimismus s klávesnicí.
+
+Runbook vypnutí obsahuje:
+
+- seznam dotčených služeb, endpointů, úloh a front,
+- přesný postup vypnutí,
+- kontrolu před vypnutím,
+- monitoring během změny,
+- rollback plán, pokud je relevantní,
+- kdo je on-call nebo odpovědný během okna,
+- jak se ověří, že stará věc už neběží,
+- co se smaže, archivuje nebo anonymizuje po vypnutí.
+
+Po vypnutí nezapomeň odstranit i vedlejší věci: dokumentaci, odkazy v UI, interní znalostní bázi, testovací data, staré feature flagy, API klíče, cron úlohy, webhooky a položky v trust centru nebo subprocesor listu. Jinak jsi jen přesunul nepořádek z produktu do sklepa.
+
+### Checklist pro ukončení funkce nebo produktu
+
+- Je napsané, proč ukončujeme a co tím získá zákazník nebo tým?
+- Máme seznam dotčených zákazníků nebo integrací bez zbytečného sledování jednotlivců?
+- Existuje náhradní postup, export nebo migrační cesta?
+- Je jasné datum vypnutí a komunikační plán?
+- Má support připravené odpovědi a eskalační pravidla?
+- Je export otestovaný na reálném, ale bezpečně připraveném vzorku dat?
+- Víme, která data smažeme, anonymizujeme, archivujeme nebo ponecháme kvůli zákonným povinnostem?
+- Je připravený technický runbook a rollback, pokud je změna kritická?
+- Jsou aktualizované dokumentace, ceník, status page, trust centrum a onboarding?
+- Proběhne po vypnutí krátké review, co se příště udělá lépe?
+
+### Šablona sunset karty
+
+```md
+## Sunset karta: [funkce / API / produkt]
+
+### Rozhodnutí
+- Co ukončujeme:
+- Proč:
+- Datum rozhodnutí:
+- Vlastník:
+- Datum vypnutí:
+
+### Dopad
+- Dotčení zákazníci / segmenty:
+- Dotčené integrace:
+- Kritičnost:
+- Náhradní postup:
+- Rizika:
+
+### Data a export
+- Jaká data jsou dotčená:
+- Exportní formát:
+- Co v exportu není:
+- Retence po vypnutí:
+- Výmaz / anonymizace:
+- Odpovědná osoba:
+
+### Komunikace
+- První oznámení:
+- Připomenutí:
+- Support makro:
+- Dokumentace:
+- Interní briefing:
+
+### Technické vypnutí
+- Runbook:
+- Monitoring:
+- Rollback:
+- Odstranění klíčů / webhooků / cronů:
+- Aktualizace dokumentace:
+
+### Review
+- Co proběhlo dobře:
+- Co zákazníky zmátlo:
+- Co příště automatizujeme:
+```
+
+---
+
 ## Pracovní log
+
+- **2026-09-19:** Doplněna příloha FS o ukončení funkce nebo produktu bez datových rukojmí: typy sunsetů, dopad bez sledovacího přestřelu, férová komunikace, export, migrace, technický runbook, checklist a sunset karta.
 
 - **2026-09-19:** Doplněna příloha FR o ročním produktovém a datovém úklidu: inventura hodnoty, mapa datové stopy, staré integrace, retence, kontrola veřejných slibů, incident drill, checklist a úklidová karta.
 - **2026-09-19:** Doplněna příloha FQ o čtvrtletním strategickém rozhodování pro malý SaaS: jedna hlavní sázka, podpůrné iniciativy, vědomě odložené věci, privacy-first kontrola, 90minutová agenda, checklist a strategická karta.
