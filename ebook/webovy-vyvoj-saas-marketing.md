@@ -30849,7 +30849,182 @@ U větší chyby se hodí krátké follow-up review za týden nebo měsíc. Ne k
 - Interní dokumentace:
 - Kontrola za týden / měsíc:
 
+## Příloha FV: Znalostní báze z provozních poučení bez hromady mrtvých dokumentů
+
+Každý malý SaaS tým časem nasbírá poklady: odpovědi na těžké support dotazy, rozhodnutí z incidentů, postupy pro ruční opravy, vysvětlení podivných integrací, argumenty z prodeje a poznámky z onboardingů. Problém je, že tyhle poklady často žijí v chatu, hlavě jednoho člověka nebo ve třech různých dokumentech s názvem „final-final-v2“. To není znalostní báze. To je archeologická lokalita s přístupem přes Slackové vyhledávání, čili civilizační úpadek s notifikacemi.
+
+Dobrá znalostní báze není archiv všeho. Je to provozní paměť týmu: krátká, použitelná, pravidelně čištěná a bezpečná vůči datům zákazníků.
+
+### Znalostní báze má začínat rozhodnutím, ne nástrojem
+
+Nástroj je až třetí otázka. První dvě zní:
+
+1. **Které opakované situace chceme zrychlit nebo zpřesnit?**
+2. **Kdo podle znalostní báze opravdu pracuje?**
+
+Jinou bázi potřebuje support, jinou vývoj, jinou obchod a jinou founder. Pokud všechno smícháš do jednoho nekonečného prostoru, vznikne dokumentační skládka. Lidé pak přestanou hledat, protože ví, že hledání bude bolet. A když hledání bolí, tým se vrátí k nejdražšímu nástroji: přerušování kolegů.
+
+Začni pěti kategoriemi:
+
+- **Zákaznické odpovědi:** vysvětlení funkcí, limity, typické námitky, bezpečnostní otázky.
+- **Provozní postupy:** incidenty, obnovy, ruční zásahy, release kroky, přístupy.
+- **Produktová rozhodnutí:** proč něco existuje, proč něco neexistuje, jaké kompromisy tým přijal.
+- **Implementační vzory:** onboarding, importy, integrace, migrace, SLA, piloty.
+- **Interní pravidla:** privacy-first zásady, klasifikace dat, komunikace, eskalace.
+
+Každá kategorie musí mít jasného vlastníka. Ne „tým“. Tým je krásné slovo pro situaci, kdy to nedělá nikdo.
+
+### Každý článek piš pro jeden konkrétní moment použití
+
+Špatný článek: „Integrace“.
+
+Lepší článek: „Jak zkontrolovat, proč se zákazníkovi nespustil webhook po zaplacení faktury“.
+
+Nejlepší znalostní články mají úzký scénář. Člověk je otevře ve chvíli, kdy něco řeší, a do tří minut ví, co udělat. Nepotřebuje historii civilizace, potřebuje bezpečný další krok.
+
+Praktická struktura článku:
+
+- **Kdy použít:** jedna věta, která vymezuje situaci.
+- **Rychlá diagnóza:** 3–5 kontrolních otázek.
+- **Postup:** konkrétní kroky v bezpečném pořadí.
+- **Rizika:** co se nesmí udělat bez schválení.
+- **Privacy-first poznámka:** jaká data lze číst, maskovat nebo mazat.
+- **Kdy eskalovat:** jasná hranice pro předání dál.
+- **Poslední ověření:** krátký test, že řešení opravdu pomohlo.
+
+> Codyho komentář: Dobrý interní článek není román. Je to mapa z minového pole. Když je literárně krásná, ale člověk podle ní šlápne na minu, gratuluju, napsali jsme poezii pro právní oddělení.
+
+### Zachycuj poučení hned po události
+
+Znalostní báze se nejlépe plní po reálné práci, ne při dokumentačním sprintu jednou za půl roku. Po incidentu, onboardingovém záseku, support eskalaci nebo složitém prodejním hovoru si polož tři otázky:
+
+- Co jsme dnes řešili podruhé nebo potřetí?
+- Co věděl jen jeden člověk?
+- Který krok byl rizikový pro data, dostupnost nebo důvěru zákazníka?
+
+Pokud odpověď existuje, vzniká kandidát na článek. Nemusí být dokonalý. Stačí první verze: název, kontext, postup, vlastník a datum revize. Perfekcionismus je častý důvod, proč dokumentace nevznikne vůbec. První verze může být syrová, ale musí být použitelná.
+
+Dobrý rytmus pro malý tým:
+
+- **Denně:** pokud někdo opakovaně vysvětluje totéž, přidá krátkou poznámku.
+- **Týdně:** owner projde nové poznámky a promění je na články.
+- **Měsíčně:** tým smaže nebo archivuje zastaralé věci.
+- **Po incidentu:** vznikne nebo se upraví minimálně jeden provozní článek.
+- **Po onboardingu:** doplní se odpovědi na nejasnosti, které zákazník skutečně měl.
+
+### Privacy-first znalostní báze neukládá zákaznické detaily z lenosti
+
+Interní dokumentace často nenápadně bobtná o citlivá data. Screenshot s e-mailem zákazníka. Výpis z logu s tokenem. Ukázka faktury. Kopie support konverzace. Jednou se to hodí, podruhé se to zapomene, potřetí to někdo nasdílí moc široce. Gratuluju, máme datový cirkus v PDF.
+
+Pravidlo je jednoduché: znalostní báze má ukládat postup, ne zákaznický životopis.
+
+Používej tyto návyky:
+
+- Nahrazuj jména zákazníků rolemi: „zákazník A“, „admin“, „koncový uživatel“.
+- Maskuj e-maily, ID účtů, domény, tokeny, IP adresy a interní URL.
+- Screenshoty používej jen tam, kde nestačí text, a před uložením je očisti.
+- Logy vkládej jen jako minimální výřez bez tajných hodnot.
+- U článků s citlivým provozním postupem nastav omezený přístup.
+- Každý článek s reálným incidentem musí mít datum revize a vlastníka.
+
+Privacy-first přístup neznamená, že dokumentace bude chudší. Znamená, že bude profesionálnější. Tým se naučí popsat podstatu problému bez tahání osobních nebo zákaznických dat tam, kde nejsou potřeba.
+
+### Vyhledatelnost je produktová vlastnost dokumentace
+
+Když článek existuje, ale nikdo ho nenajde, prakticky neexistuje. Vyhledatelnost není luxus. Je to rozdíl mezi „máme znalostní bázi“ a „máme digitální půdu“.
+
+Zaveď jednoduché konvence:
+
+- Název začíná slovesem nebo situací: „Jak obnovit…“, „Když zákazník hlásí…“, „Kontrola před…“.
+- Každý článek má štítky podle oblasti: `support`, `billing`, `incident`, `privacy`, `import`, `sales`.
+- Synonyma dej přímo do úvodu: „faktura / invoice / billing doklad“.
+- Na konci článku odkazuj na související postupy.
+- Zastaralé články nelepíš, ale archivuješ nebo slučuješ.
+
+Nejdůležitější je pojmenování podle jazyka lidí, kteří hledají. Vývojář možná řekne „asynchronní job selhal“. Zákaznická podpora bude hledat „nepřišel e-mail po registraci“. Článek může mít technickou přesnost uvnitř, ale název a úvod musí respektovat realitu uživatele.
+
+### Znalostní bázi měř podle sníženého tření
+
+Nepotřebuješ složitou analytiku nad interní dokumentací. Sleduj pár signálů:
+
+- Kolik dotazů v chatu končí odkazem na existující článek?
+- Které články se opakovaně používají při onboardingu nových lidí?
+- Které postupy snížily počet eskalací?
+- Které články byly označené jako nejasné nebo zastaralé?
+- Kolik provozních situací pořád závisí na jednom člověku?
+
+Metrika není počet článků. Sto špatných článků je jen dražší chaos. Cílem je méně přerušování, rychlejší onboarding, bezpečnější provoz a konzistentnější odpovědi zákazníkům.
+
+### Udělej z dokumentace součást Definition of Done
+
+Pokud dokumentace vzniká „až bude čas“, nebude nikdy. Čas je mýtické zvíře, něco jako jednorožec, jen méně praktické.
+
+U vybraných typů práce proto přidej dokumentaci přímo do Definition of Done:
+
+- Nová funkce je hotová až ve chvíli, kdy má interní support poznámku.
+- Nová integrace je hotová až ve chvíli, kdy existuje troubleshooting postup.
+- Incident je uzavřený až ve chvíli, kdy je upravený runbook.
+- Nový pricing nebo tarif je hotový až ve chvíli, kdy obchod a support ví, jak ho vysvětlit.
+- Změna v datech je hotová až ve chvíli, kdy je jasná retence, export a mazání.
+
+Tím se znalostní báze přestane chovat jako vedlejší úkol. Stane se součástí produktu.
+
+### Checklist: znalostní báze, která neumře po dvou týdnech
+
+- [ ] Máme 3–5 kategorií podle skutečných pracovních situací.
+- [ ] Každá kategorie má vlastníka, ne anonymní „tým“.
+- [ ] Články popisují konkrétní moment použití, ne obecné téma.
+- [ ] Každý postup obsahuje rizika, eskalaci a poslední ověření.
+- [ ] Do článků nevkládáme nemaskovaná zákaznická data, tokeny ani logy.
+- [ ] Citlivé provozní články mají omezený přístup.
+- [ ] Po incidentu nebo složité eskalaci vznikne nebo se upraví článek.
+- [ ] Jednou měsíčně mažeme, slučujeme nebo archivujeme zastaralé články.
+- [ ] Názvy článků odpovídají tomu, jak lidé opravdu hledají.
+- [ ] Dokumentace je součást Definition of Done u funkcí, integrací a incidentů.
+
+### Mini šablona: karta znalostního článku
+
+## Znalostní článek: [situace / postup]
+
+### Kdy použít
+
+- Situace:
+- Kdo typicky řeší:
+- Kdy článek nepoužít:
+
+### Rychlá diagnóza
+
+- Otázka 1:
+- Otázka 2:
+- Otázka 3:
+
+### Postup
+
+1. První bezpečný krok:
+2. Kontrola výsledku:
+3. Další krok:
+
+### Rizika a hranice
+
+- Co se nesmí dělat bez schválení:
+- Kdy eskalovat:
+- Kdo rozhoduje:
+
+### Privacy-first poznámky
+
+- Jaká data lze použít:
+- Co maskovat:
+- Co neukládat do článku:
+
+### Revize
+
+- Vlastník:
+- Poslední aktualizace:
+- Další revize:
+
 ## Pracovní log
+
+- **2026-09-19:** Doplněna příloha FV o znalostní bázi z provozních poučení: kategorie, články pro konkrétní situace, zachytávání po událostech, privacy-first pravidla, vyhledatelnost, měření tření, Definition of Done, checklist a šablona znalostního článku.
 
 - **2026-09-19:** Doplněna příloha FU o převodu nápravy po chybě do backlogu: časové vrstvy, formulace úkolů jako rizik, vlastnictví, scope creep filtr, privacy-first kontrola pracovních dat, systémové změny, důkazy dokončení, checklist a karta nápravného balíčku.
 
