@@ -29600,8 +29600,195 @@ Pokud je odpověď „ne“, závazek nezahazuj automaticky. Buď ho uprav, nebo
 ---
 
 
+## Příloha FO: Kapacitní plán podpory bez vyhoření, hrdinství a falešného 24/7
+
+SLA říká, co zákazníkům slibuješ. Kapacitní plán podpory říká, jestli to tým opravdu unese. Bez něj se malý SaaS snadno dostane do pasti: na webu vypadá profesionálně, ve smlouvě slibuje rychlé reakce, ale reálně každá větší vlna ticketů znamená přerušení vývoje, únavu zakladatelů a support řešený večer po dětech, večeři a třetí kávě. Romantika startupu, jen s víc šedými vlasy.
+
+Dobrá podpora není jen rychlost odpovědi. Je to systém, který chrání zákazníka, produkt i tým. Má jasné vstupy, priority, vlastníky, limity a zpětnou vazbu do vývoje. Privacy-first provoz k tomu přidává důležitý detail: kapacitu nesmíš dohánět tím, že všem v týmu rozdáš široký přístup k zákaznickým datům, protože „jinak se to nestíhá“.
+
+> Codyho komentář: Support bez kapacitního plánu je jako restaurace bez kuchyně. Hosté možná chvíli vidí hezké menu, ale pak někdo musí reálně uvařit.
+
+### Spočítej podporu jako práci, ne jako rušení
+
+První chyba je mentální. Tým bere podporu jako něco, co se děje „vedle práce“. Jenže odpovědi zákazníkům, diagnostika, opravy dat, vysvětlování změn, psaní návodů a eskalace incidentů jsou práce. Pokud je nedáš do kapacity, stejně si ji vezmou — jen neřízeně.
+
+Začni jednoduchým měsíčním odhadem:
+
+- kolik ticketů nebo zákaznických dotazů přijde týdně,
+- kolik z nich je rychlá odpověď do 10 minut,
+- kolik vyžaduje technickou diagnostiku,
+- kolik končí úpravou dokumentace nebo produktu,
+- kolik práce způsobí jeden nový zákazník v prvních 30 dnech,
+- kolik času vezmou pravidelné business review, onboardingy a renewal přípravy.
+
+Nemusíš mít dokonalá čísla. Stačí první odhad podle posledních čtyř týdnů. Cílem není postavit akademický model, ale přestat předstírat, že support je bezedný šuplík na všechno, co se nevešlo do roadmapy.
+
+### Rozděl kapacitu podle typů práce
+
+Ne každý support má stejnou povahu. Když všechno padá do jedné fronty, tým začne míchat urgentní incidenty, běžné otázky, onboarding, feature requesty a účetní dotazy. Výsledek: nikdo neví, co má počkat, co má eskalovat a co má být přepsáno do dokumentace.
+
+Praktické rozdělení:
+
+- **Provozní incidenty:** výpadky, chyby v kritickém workflow, bezpečnostní podezření.
+- **Produktová pomoc:** jak něco nastavit, proč se něco chová určitým způsobem, kde najít funkci.
+- **Onboardingové otázky:** první import, role, oprávnění, integrace, základní nastavení.
+- **Administrativa:** fakturace, změny tarifu, smluvní dodatky, přístupy.
+- **Feedback a požadavky:** návrhy funkcí, bolestivé workaroundy, signály k roadmapě.
+
+Každá skupina může mít jinou odpovědnost a rytmus. Incident patří do provozního kanálu. Opakovaná produktová otázka patří do znalostní báze. Feature request patří do feedback procesu, ne do nekonečného support vlákna s nejasným slibem.
+
+### Nastav rotační vlastnictví, ne permanentní pohotovost jednoho člověka
+
+V malém týmu často všechno drží jeden člověk, protože „zná zákazníky“. Krátkodobě je to efektivní. Dlouhodobě je to provozní riziko. Když tento člověk onemocní, odjede nebo prostě vyhoří, support začne ztrácet paměť i kvalitu.
+
+Lepší je rotační vlastnictví:
+
+- jeden člověk je v daném týdnu první filtr podpory,
+- druhý člověk je technická eskalace pro složitější věci,
+- obchodní nebo success vlastník drží kontext vztahu se zákazníkem,
+- produkt jednou týdně čte support digest a vybírá systémové problémy,
+- zakladatelé řeší výjimky, ne každou běžnou otázku.
+
+Rotace nemusí znamenat 24/7 on-call. U malého B2B SaaS často stačí jasný pracovní režim, definice kritických eskalací a dohoda, kdy se sahá mimo běžnou dobu. Důležité je, aby support nebyl neviditelná daň jednoho člověka.
+
+### Chraň vývoj před support chaosem, ale ne před realitou
+
+Vývojáři nemají být trvale přilepení na support frontě. Zároveň nesmí žít v blaženém oddělení od zákaznické reality. Zdravý model je řízený kontakt: vývoj dostává kvalitní eskalace, ne syrový chaos.
+
+Dobrá eskalace obsahuje:
+
+- co zákazník chtěl udělat,
+- jaký byl očekávaný výsledek,
+- co se stalo místo toho,
+- jaký je dopad na práci zákazníka,
+- jaký je dočasný workaround,
+- odkazy na relevantní logy nebo anonymní identifikátory,
+- informaci, jestli je potřeba zákazníkovi něco slíbit nebo jen vyšetřit.
+
+Špatná eskalace vypadá takto: „Klient píše, že mu to nejde, můžeš na to mrknout?“ To není ticket, to je zaklínadlo. Vývoj pak ztrácí čas detektivkou, kterou měl support zúžit už na vstupu.
+
+### Dokumentace je kapacitní nástroj, ne odkladiště textů
+
+Znalostní báze se často píše až tehdy, když tým nestíhá. To je pozdě. Dokumentace má být součástí support kapacity od začátku: každá opakovaná otázka je kandidát na krátký návod, lepší onboardingový text nebo úpravu UI.
+
+Jednoduché pravidlo:
+
+- otázka položená poprvé se odpoví normálně,
+- otázka položená podruhé dostane interní poznámku,
+- otázka položená potřetí dostane veřejný nebo zákaznický návod,
+- otázka položená podesáté je pravděpodobně produktový problém, ne dokumentační problém.
+
+Dokumentace nemusí být román. Často stačí stránka „Jak pozvat kolegu“, „Jak exportovat data“, „Jak změnit fakturační údaje“ nebo „Co znamenají role v účtu“. Krátký přesný návod šetří víc kapacity než velký help center projekt, který se spustí až příští kvartál. Tedy nikdy, protože příští kvartál už bude hořet něco jiného.
+
+### Privacy-first support potřebuje přístupové stupně
+
+Když tým nestíhá, roste pokušení dát supportu větší přístupy. Jenže rychlost nesmí být výmluva pro zbytečné nahlížení do zákaznických dat. Kapacitní plán musí počítat i s tím, kdo smí vidět jaký typ informací.
+
+Praktické stupně přístupu:
+
+- **Bez přístupu k obsahu:** support vidí stav účtu, tarif, technické ID a metadata potřebná k triage.
+- **Dočasný diagnostický přístup:** časově omezený přístup se zdůvodněním a auditní stopou.
+- **Zákazníkem poskytnutý kontext:** screenshot, export nebo příklad, který zákazník vědomě předal.
+- **Technická eskalace:** přístup jen pro konkrétní incident nebo opravu, ne jako běžný režim.
+- **Bezpečnostní režim:** oddělený postup pro podezření na únik dat, zneužití účtu nebo chybné oprávnění.
+
+Do ticketů nepatří celé exporty, osobní údaje navíc ani kopie citlivých zpráv jen proto, že se to hodí pro kontext. Pokud potřebuješ příklad, ulož minimum a po vyřešení ho smaž podle retenčního pravidla. Support systém není datový sklad s emotivním názvem.
+
+### Support dluh zapisuj stejně vážně jako technický dluh
+
+Support dluh vzniká, když tým opakovaně řeší stejný problém ručně, ale nikdy ho nepřevede do produktu, dokumentace nebo automatizace. Je zákeřný, protože nevypadá jako velká chyba. Jen každý týden sežere pár hodin a trochu vůle žít.
+
+Typické formy support dluhu:
+
+- ruční opravy dat po každém importu,
+- opakované vysvětlování nejasného nastavení,
+- skryté chyby, které se nikdy nedostanou do backlogu,
+- onboardingové kroky, které pořád vyžadují zásah týmu,
+- ruční odpovědi na stejné fakturační otázky,
+- výjimky pro velké zákazníky bez dokumentace.
+
+Jednou týdně vyber 3–5 signálů ze supportu a rozhodni: dokumentace, produktová změna, automatizace, obchodní upřesnění, nebo vědomě nedělat nic. Nejhorší možnost je nechat vše v ticket systému a tvářit se, že fronta sama od sebe zestárne do moudrosti.
+
+### Sleduj zdraví podpory bez šmírování lidí
+
+Měření podpory nemusí znamenat sledovat každé kliknutí zákazníka ani hodnotit lidi podle stresových metrik. Potřebuješ znát kapacitu a kvalitu, ne vytvářet call centrum v mikroskopu.
+
+Stačí několik agregovaných ukazatelů:
+
+- počet nových ticketů týdně podle typu,
+- median první reakce podle priority,
+- počet eskalací do vývoje,
+- podíl opakovaných otázek,
+- počet ticketů, které vedly k úpravě dokumentace nebo produktu,
+- počet otevřených ticketů starších než dohodnutý limit,
+- subjektivní týdenní zatížení support vlastníka.
+
+Poslední bod je důležitý. Když čísla vypadají dobře, ale člověk na support rotaci je každý pátek vyždímaný jako citrón po marketingovém webináři, kapacita není zdravá. Agregovaná metrika má otevřít rozhovor, ne trestat.
+
+### Checklist pro kapacitní plán podpory
+
+- Máme spočítaný hrubý objem support práce za poslední 4 týdny.
+- Support dělíme na incidenty, produktovou pomoc, onboarding, administrativu a feedback.
+- Víme, kdo je tento týden první filtr a kdo technická eskalace.
+- Kritické eskalace mají jasnou minimální strukturu.
+- Opakované otázky pravidelně převádíme do dokumentace, produktu nebo automatizace.
+- Přístupy k zákaznickým datům jsou odstupňované, časově omezené a auditované.
+- Jednou týdně vzniká support digest pro produkt a customer success.
+- Měříme kapacitu agregovaně, ne sledováním jednotlivců bez důvodu.
+- Support dluh má vlastní seznam a pravidelnou revizi.
+- SLA sliby odpovídají reálné kapacitě týmu.
+
+### Mini šablona: support capacity karta
+
+## Support capacity karta: [produkt / období]
+
+### Objem práce
+
+- Počet ticketů týdně:
+- Nejčastější typy dotazů:
+- Největší zdroj eskalací:
+- Odhad hodin týdně:
+
+### Role a rotace
+
+- První filtr:
+- Technická eskalace:
+- Success / obchodní kontext:
+- Backup:
+
+### SLA a priority
+
+- Kritické priority:
+- Běžné reakční časy:
+- Provozní hodiny:
+- Výjimky:
+
+### Dokumentace a produkt
+
+- Otázky k přepsání do návodu:
+- Produktové tření k řešení:
+- Automatizace k prověření:
+- Support dluh:
+
+### Privacy-first kontrola
+
+- Jaká data support vidí běžně:
+- Kdy je potřeba dočasný přístup:
+- Kde je auditní stopa:
+- Co se maže po vyřešení:
+
+### Rozhodnutí pro další týden
+
+- Co zjednodušíme:
+- Co předáme do produktu:
+- Co přestaneme dělat ručně:
+- Co musíme upravit ve SLA nebo komunikaci:
+
+---
+
 ## Pracovní log
 
+- **2026-09-19:** Doplněna příloha FO o kapacitním plánu podpory: počítání support práce, rozdělení typů dotazů, rotace vlastníků, řízené eskalace do vývoje, dokumentace jako kapacitní nástroj, privacy-first přístupové stupně, support dluh, agregované metriky, checklist a support capacity karta.
 - **2026-09-19:** Doplněna příloha FN o SLA a provozních závazcích bez přestřelených slibů: dostupnost vs. reakce vs. řešení, priority podle dopadu, provozní hodiny, kompenzace, privacy-first incident support, plánovaná údržba, checklist a SLA karta.
 - **2026-09-19:** Doplněna příloha FM o obnově smlouvy a prevenci churnu: renewal stopa, včasné churn signály, 120/90/60/30denní rytmus, změna rozsahu před slevou, exit rozhovor, win-back bez stalkingu, checklist a renewal karta.
 - **2026-09-19:** Doplněna příloha FL o customer success rytmu po implementaci: výsledky místo spokojenosti, 90denní rytmus, jednoduchý health score bez šmírování, business review, expansion po hodnotě, privacy-first dokumentace, checklist a success karta.
