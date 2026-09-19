@@ -30516,7 +30516,176 @@ Po vypnutí nezapomeň odstranit i vedlejší věci: dokumentaci, odkazy v UI, i
 
 ---
 
+## Příloha FT: Obnova důvěry po chybě bez omluvného divadla
+
+Každý tým někdy něco pokazí. Release rozbije důležitý workflow, migrace se protáhne, e-mail odejde špatné skupině, support slíbí termín, který produkt nedodá, nebo se změní podmínky rychleji, než zákazníci stihnou pochopit proč. Rozdíl mezi zdravým a nezdravým produktem není v tom, že zdravý produkt nikdy nechybuje. Rozdíl je v tom, že chybu nezabalí do mlhy, nezmizí na tři dny a nepředstírá, že „malé procento uživatelů“ je totéž co „lidé, kterým jsme zkomplikovali práci“.
+
+Důvěra se obnovuje konkrétním chováním. Nestačí napsat „omlouváme se za nepříjemnosti“. To je textová výplň, ne náprava. Zákazník potřebuje vědět, co se stalo, jestli se ho to týká, co má udělat teď, co děláš ty a kdy přijde další informace. Privacy-first přístup k tomu přidává jednu důležitou zásadu: i při opravě chyby sbírej jen data, která opravdu potřebuješ k nápravě. Krize není volná vstupenka k datovému vysavači.
+
+> Codyho komentář: Nejhorší omluva je ta, která zní jako právní oddělení převlečené za robota. Lidská chyba potřebuje lidskou odpověď, ne kouřovou clonu z pasivu.
+
+### Nejdřív pojmenuj typ ztráty důvěry
+
+Ne každá chyba je incident, ale každá chyba může poškodit vztah. První krok je rozlišit, co se vlastně stalo.
+
+- **Provozní chyba:** výpadek, pomalost, rozbitá funkce, špatná migrace, ztracené nastavení nebo problém s fakturací.
+- **Komunikační chyba:** zákazník dostal nejasnou informaci, pozdní odpověď, protichůdné instrukce nebo slib, který nebyl splněn.
+- **Produktové zklamání:** změna chování produktu, zrušená funkce, horší UX, nepovedený redesign nebo nečekaná změna ceny.
+- **Datová obava:** zákazník neví, kdo viděl jeho data, kam data odešla, jak dlouho zůstávají uložená nebo jestli byl porušen jeho interní proces.
+- **Opakovaný vzorec:** jednotlivá chyba by šla odpustit, ale zákazník vidí sérii drobných selhání a začíná pochybovat o spolehlivosti týmu.
+
+Typ chyby určuje tón i nápravu. Provozní chyba potřebuje časovou osu a technickou opravu. Komunikační chyba potřebuje převzít odpovědnost a sladit kanály. Produktové zklamání potřebuje vysvětlit rozhodnutí a nabídnout přechod. Datová obava potřebuje přesnost, klid a jasný rozsah.
+
+### Reaguj ve třech vrstvách
+
+Dobrá reakce má tři vrstvy: okamžité uklidnění, praktickou pomoc a systémovou nápravu. Když jedna chybí, komunikace kulhá.
+
+**Okamžité uklidnění** odpovídá na otázku „víte o tom a řešíte to?“ Patří sem stručné potvrzení problému, rozsah dopadu, dočasné omezení a čas další aktualizace. Tady není prostor pro dlouhé vysvětlování ani hledání viníka.
+
+**Praktická pomoc** říká zákazníkovi, co má udělat teď. Může jít o náhradní postup, export, ruční opravu, prodloužení lhůty, prioritu v supportu nebo jednoduchý návod. Pokud zákazník musí odhadovat, jestli má čekat, přepnout proces nebo kontaktovat support, komunikace je nedostatečná.
+
+**Systémová náprava** ukazuje, co se změní, aby se chyba neopakovala. Nemusí to být román. Stačí konkrétní seznam: doplněný test, změna release checklistu, lepší kontrola e-mailových segmentů, alert, interní review, jasnější dokumentace nebo omezení rizikové funkce.
+
+### Mluv konkrétně, ale neprozrazuj víc dat, než musíš
+
+Transparentnost není totéž co zveřejnění všeho. Dobrý privacy-first tým umí být konkrétní a zároveň chránit zákazníky, zaměstnance i bezpečnostní detaily.
+
+Piš konkrétně:
+
+- co bylo rozbité,
+- od kdy do kdy problém trval,
+- koho se týkal podle segmentu nebo scénáře,
+- jaký byl viditelný dopad,
+- co je opravené,
+- co ještě běží,
+- kdy přijde další update.
+
+Nepatří sem interní jména lidí, zbytečné osobní údaje, screenshoty zákaznických dat, detailní technické návody zneužitelné útočníkem ani spekulace, které budeš za hodinu opravovat. Když něco nevíš, napiš to. „Zatím ověřujeme rozsah“ je lepší než falešná jistota.
+
+### Omluva musí obsahovat nápravu
+
+Dobrá omluva není sebeponížení. Je to převzetí odpovědnosti a nabídka dalšího kroku.
+
+Použitelná struktura:
+
+1. **Přiznání dopadu:** „Víme, že vám to zdrželo fakturaci / onboarding / práci týmu.“
+2. **Stručné vysvětlení:** „Při změně importu jsme chybně zpracovali duplicity u části účtů.“
+3. **Náprava:** „Data jsme opravili, dotčené účty označili a přidali kontrolu před uložením.“
+4. **Další krok pro zákazníka:** „Zkontrolujte prosím tento report; pokud nesedí, odpovězte na tento e-mail.“
+5. **Další krok od týmu:** „Do pátku pošleme krátké shrnutí změn v procesu importu.“
+
+Slabá omluva: „Omlouváme se za komplikace způsobené technickou chybou.“
+
+Silnější omluva: „V úterý mezi 9:10 a 11:35 se u části importů nezobrazily nové kontakty v seznamu, i když byly uložené. Víme, že to mohlo zdržet obchodní follow-up. Problém jsme opravili, importy znovu přepočítali a přidali kontrolu, která podobný stav zastaví před dokončením importu.“
+
+### Kompenzace není náhrada za vysvětlení
+
+Sleva, kredit nebo měsíc zdarma může být férový krok. Ale sama o sobě důvěru neopraví. Pokud zákazník neví, co se stalo a proč by se to nemělo opakovat, kompenzace působí jako ticho koupené poukázkou.
+
+Kompenzaci zvaž podle dopadu:
+
+- zákazník nemohl používat placenou část služby,
+- tým mu způsobil měřitelnou ruční práci navíc,
+- chyba zasáhla smluvně slíbený rozsah,
+- zákazník musel posunout vlastní termín,
+- opakovaný problém ukazuje, že samotná omluva nestačí.
+
+U malého SaaS může být často cennější rychlá ruční pomoc než automatický kredit. Například: „Pomůžeme vám zkontrolovat import a připravíme opravený export“ může mít větší hodnotu než symbolická sleva, která zákazníkovi nevrátí večer strávený opravou dat.
+
+### Udělej důvěryhodné postmortem
+
+Postmortem není hledání viníka. Je to způsob, jak přepsat systém, který chybu umožnil. Pro zákazníky stačí krátká veřejná nebo poloveřejná verze, podle citlivosti události. Interně může být detailnější.
+
+Dobré postmortem obsahuje:
+
+- časovou osu,
+- dopad na zákazníky,
+- kořenovou příčinu nebo nejlepší známé vysvětlení,
+- co fungovalo dobře,
+- co zdrželo nápravu,
+- konkrétní preventivní opatření,
+- vlastníka a termín každého opatření,
+- privacy-first kontrolu dat použitých při vyšetřování.
+
+Vyhni se větám typu „selhal lidský faktor“. Lidský faktor skoro vždy znamená, že systém spoléhal na hrdinství, paměť nebo ruční kontrolu bez opory. Lepší otázka zní: co můžeme změnit v procesu, testech, oprávněních, dokumentaci nebo rozhraní, aby příště člověk nemusel být kouzelník?
+
+### Po nápravě sleduj důvěru, ne jen ticket
+
+Ticket zavřený neznamená vztah opravený. Po větší chybě si nastav krátké follow-up okno. Ne proto, abys zákazníka otravoval, ale abys ověřil, že náprava skutečně fungovala.
+
+Sleduj:
+
+- jestli se zákazník vrátil k běžnému používání,
+- jestli se neobjevují opakované dotazy na stejný problém,
+- jestli support odpovídá konzistentně,
+- jestli dokumentace odráží nový stav,
+- jestli obchod nebo account management ví, co se stalo,
+- jestli se podobná chyba neukazuje v jiném segmentu.
+
+Privacy-first pravidlo: kontroluj agregované signály a konkrétní zákazníky řeš jen tam, kde existuje jasný vztah k nápravě. Nedělej z obnovy důvěry záminku pro permanentní monitoring jednotlivců.
+
+### Checklist obnovy důvěry
+
+- Máme pojmenovaný typ chyby a její dopad?
+- Víme, koho se problém týkal, bez zbytečného rozšíření sběru dat?
+- Poslali jsme první stručnou informaci s časem další aktualizace?
+- Existuje náhradní postup nebo ruční pomoc?
+- Je omluva konkrétní a obsahuje nápravu?
+- Máme rozhodnuto, zda dává smysl kompenzace?
+- Zapsali jsme systémová opatření s vlastníkem a termínem?
+- Aktualizovali jsme dokumentaci, support makra a changelog?
+- Smazali nebo omezili dočasné seznamy dotčených účtů?
+- Ověřili jsme po opravě, že zákazník už má funkční cestu dál?
+
+### Mini šablona: karta obnovy důvěry
+
+## Karta obnovy důvěry: [chyba / událost]
+
+### Kontext
+
+- Co se stalo:
+- Kdy jsme to zjistili:
+- Kdo je vlastník komunikace:
+- Kdo je vlastník technické nápravy:
+
+### Dopad
+
+- Dotčený scénář:
+- Dotčené účty nebo segmenty:
+- Co zákazník viděl:
+- Co zákazník musel udělat navíc:
+
+### Komunikace
+
+- První zpráva odeslána:
+- Další update:
+- Kanály:
+- Odpovědi pro support:
+
+### Náprava
+
+- Okamžitý workaround:
+- Trvalá oprava:
+- Preventivní opatření:
+- Vlastník a termín:
+
+### Privacy-first kontrola
+
+- Jaká data jsme použili k vyšetření:
+- Kdo k nim měl přístup:
+- Dočasné seznamy smažeme kdy:
+- Co se nesmí objevit ve veřejné komunikaci:
+
+### Follow-up
+
+- Zákazníci ke kontrole:
+- Dokumentace k aktualizaci:
+- Changelog / status page:
+- Kontrola za týden:
+
 ## Pracovní log
+
+- **2026-09-19:** Doplněna příloha FT o obnově důvěry po chybě: typy selhání, tři vrstvy reakce, konkrétní privacy-first komunikace, omluva s nápravou, kompenzace, postmortem, follow-up, checklist a karta obnovy důvěry.
 
 - **2026-09-19:** Doplněna příloha FS o ukončení funkce nebo produktu bez datových rukojmí: typy sunsetů, dopad bez sledovacího přestřelu, férová komunikace, export, migrace, technický runbook, checklist a sunset karta.
 
