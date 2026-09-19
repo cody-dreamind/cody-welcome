@@ -31790,7 +31790,188 @@ Go/no-go nemá být soudní proces. Je to zdravá kontrola, že růst nepřepisu
 
 > Codyho komentář: Expanze bez datové inventury je jako stěhování kanceláře bez seznamu klíčů. Všichni se tváří, že to nějak dopadne, dokud někdo nezjistí, že sklad, serverovna a kávovar patří pořád někomu jinému.
 
+## Příloha GA: Pricing audit bez matení zákazníků, skrytých limitů a datového hladu
+
+Cena není jen číslo na stránce. Je to slib, hranice produktu a filtr zákazníků. Když je pricing nejasný, obchod pak hasí zmatek, support vysvětluje výjimky a zákazník má pocit, že se ho produkt snaží nachytat. To je krátkodobě možná chytré účetnictví. Dlouhodobě je to důvěrový dluh s úroky jak z nebankovní půjčky.
+
+Privacy-first SaaS má v pricingu jednu velkou výhodu: může prodávat srozumitelnost. Žádné skryté trackovací balíčky, žádné „kontaktujte sales“ u základní informace, žádné limity schované v patičce. Cena má zákazníkovi pomoct rozhodnout, ne ho zatlačit do callu, kde se teprve dozví, co vlastně kupuje.
+
+### Audit pricingu začni otázkou, co zákazník opravdu kupuje
+
+Nejdřív si napiš větu: „Zákazník nám platí za to, že…“ Pokud odpověď zní „za přístup k platformě“, je to málo. Přístup k platformě není výsledek. Výsledek je například:
+
+- rychlejší zpracování zakázek,
+- méně ruční administrativy,
+- bezpečnější předávání dat,
+- lepší přehled pro vedení,
+- méně support chaosu,
+- jistější splnění interních pravidel.
+
+Pricing se má odvíjet od hodnoty, kterou zákazník vnímá. Ne od toho, jak je databáze hezky normalizovaná. Pokud zákazník platí za méně chyb v procesu, cenová metrika by měla souviset s objemem práce, týmem nebo hodnotou provozu. Pokud platí za bezpečné sdílení dat, cena se může opírat o počet workspace, úroveň oprávnění, auditní funkce nebo rozsah podpory.
+
+Špatný signál: zákazník musí před nákupem pochopit interní architekturu produktu, aby věděl, který tarif potřebuje.
+
+Dobrý signál: zákazník se najde v jedné situaci a ví, co udělat dál.
+
+### Tarif není skladiště funkcí, ale rozhodovací pomůcka
+
+Tři balíčky fungují jen tehdy, když každý říká jiný příběh. Ne když prostřední má „o trochu víc všeho“ a enterprise je tmavý obdélník s nápisem „zavolejte nám, ať se pobavíme o vašem rozpočtu“.
+
+Praktické rozdělení:
+
+- **Start:** pro tým, který chce ověřit proces a nepotřebuje složité řízení práv.
+- **Growth:** pro tým, kde už produkt používá víc rolí a hodnota závisí na spolupráci.
+- **Business / Scale:** pro firmu, která potřebuje auditovatelnost, integrace, SLA, pokročilá oprávnění a jistotu podpory.
+
+Každý tarif by měl mít:
+
+- jasný profil zákazníka,
+- hlavní hodnotový slib,
+- 3–5 zásadních rozdílů,
+- viditelné limity,
+- jednoduché doporučení „vyberte tento tarif, pokud…“,
+- férové vysvětlení, kdy tarif není vhodný.
+
+> Codyho komentář: Když je pricing tabulka delší než návod k pračce a zákazník pořád neví, co koupit, problém není v zákazníkovi. Problém je v tabulce. A možná trochu v našem ego-driven feature katalogu.
+
+### Limity musí chránit produkt, ne trestat úspěch zákazníka
+
+Limity jsou legitimní. Malý tým nemůže slíbit nekonečné exporty, neomezené úložiště, milion integrací a podporu do pěti minut. Jenže limit má být pochopitelný a předvídatelný.
+
+Dobré limity:
+
+- odpovídají skutečným nákladům nebo provozní zátěži,
+- chrání výkon služby pro všechny zákazníky,
+- dají se vysvětlit jednou větou,
+- mají upozornění před dosažením hranice,
+- umožňují férový upgrade nebo domluvu.
+
+Špatné limity:
+
+- schovávají základní použitelnost produktu,
+- nutí zákazníka sbírat víc dat, než potřebuje,
+- penalizují tým za běžný růst,
+- objeví se až ve faktuře,
+- mění se bez komunikace.
+
+U privacy-first produktu si dej pozor na metriky, které vytvářejí datový hlad. Pokud účtuješ podle „aktivních kontaktů“, může to zákazníka motivovat k masivnímu importu a dlouhé retenci osobních údajů. Pokud účtuješ podle událostí, může tým začít sbírat všechno, protože „se to přece měří“. Cenová metrika není neutrální. Formuje chování.
+
+### Slevy a výjimky zapisuj jako produktový dluh
+
+Sleva není hřích. Hřích je sleva, o které za tři měsíce nikdo neví, proč vznikla. Každá výjimka v ceně, limitu nebo podpoře by měla mít důvod, vlastníka a datum revize.
+
+Typické zdravé důvody pro výjimku:
+
+- pilot s jasným rozsahem a koncem,
+- neziskový nebo vzdělávací scénář odpovídající strategii,
+- větší zákazník s delším nákupním procesem,
+- kompenzace za konkrétní provozní problém,
+- dočasný přechod ze starého tarifu.
+
+Typické nezdravé důvody:
+
+- „nechtěli jsme přijít o deal“,
+- „konkurence prý stojí míň“,
+- „zakladatel to slíbil v hovoru“,
+- „nějak to potom vymyslíme“,
+- „je to jen jeden zákazník“ — slavná poslední věta před tabulkou výjimek.
+
+V praxi stačí jednoduchá evidence: zákazník, typ výjimky, proč existuje, kdo ji schválil, kdy se reviduje, jaký má dopad na support a provoz. Pokud výjimka vyžaduje speciální zacházení s daty nebo přístupy, musí projít privacy-first kontrolou stejně jako nová funkce.
+
+### Pricing stránka má prodávat i důvěru
+
+Pricing stránka není jen pro lidi, kteří kliknou na „koupit“. Čtou ji i zákazníci před interním doporučením, technický člověk před bezpečnostním dotazníkem, founder konkurence a občas někdo, kdo chce zjistit, jestli jste dospělý produkt nebo improvizovaný formulář s loginem.
+
+Na stránce by mělo být vidět:
+
+- co je zahrnuté v ceně,
+- jak funguje upgrade a downgrade,
+- jak se řeší zrušení účtu,
+- jestli je export dat dostupný bez doprošování,
+- kde jsou hranice podpory,
+- jaké jsou privacy-first zásady,
+- co se stane při překročení limitů,
+- jestli jsou ceny bez DPH nebo s DPH, pokud je to relevantní pro publikum.
+
+Nepoužívej falešnou naléhavost, pokud není pravdivá. „Sleva končí dnes“ je levný trik, když končí každý den. B2B zákazník nepotřebuje cirkusový gong. Potřebuje podklady, které může poslat dál.
+
+### Změna cen je komunikační projekt
+
+Zdražení nebo změna balíčků není jen úprava tabulky. Je to zásah do důvěry. Připrav ho jako malý projekt:
+
+1. **Důvod:** proč se cena mění — vyšší hodnota, náklady, nová podpora, nové limity, sjednocení starých tarifů.
+2. **Dopad:** koho se změna týká a koho ne.
+3. **Přechod:** od kdy platí nové ceny, jak dlouho běží staré podmínky, jestli existuje grandfathering.
+4. **Volba:** co může zákazník udělat — zůstat, změnit tarif, exportovat data, probrat variantu.
+5. **Support:** kdo odpovídá na otázky a kde je interní FAQ.
+6. **Review:** co po změně sleduješ — ne jen revenue, ale i důvěru, churn, typy námitek a zatížení podpory.
+
+Privacy-first pravidlo: při analýze dopadu nepotřebuješ rozpitvat každého uživatele do behaviorálního profilu. Stačí zákaznické účty, tarif, smluvní podmínky, agregované využití a obchodní kontext. Cílem je férově komunikovat, ne vyrobit psychologický scoring ochoty zaplatit.
+
+### Checklist: pricing audit
+
+- Má každý tarif jasně popsaného ideálního zákazníka?
+- Je hlavní cenová metrika napojená na hodnotu, ne na interní technickou náhodu?
+- Jsou limity viditelné před nákupem?
+- Ví zákazník, co se stane při překročení limitu?
+- Jsou export, zrušení účtu a downgrade srozumitelně popsané?
+- Nevyžaduje pricing zbytečný sběr nebo dlouhou retenci osobních dat?
+- Jsou slevy a výjimky evidované s datem revize?
+- Má sales tým stejný výklad tarifů jako web?
+- Existuje interní FAQ pro námitky, bezpečnostní otázky a billing situace?
+- Je změna cen plánovaná jako komunikace, ne jako tichý deploy?
+
+### Mini šablona: pricing audit karta
+
+## Pricing audit karta: [produkt / datum]
+
+### Kontext
+
+- Proč audit děláme:
+- Hlavní zákaznické segmenty:
+- Aktuální tarify:
+- Nejčastější pricing námitky:
+
+### Hodnota a metrika
+
+- Za jaký výsledek zákazník platí:
+- Aktuální cenová metrika:
+- Je metrika srozumitelná zákazníkovi:
+- Riziko datového hladu:
+
+### Tarify a limity
+
+- Tarif Start / základní:
+- Tarif Growth / hlavní:
+- Tarif Business / vyšší:
+- Nejasné nebo skryté limity:
+- Limity k přepracování:
+
+### Výjimky
+
+- Aktivní slevy:
+- Speciální smluvní podmínky:
+- Výjimky v podpoře nebo SLA:
+- Datum další revize:
+
+### Privacy-first kontrola
+
+- Nutí pricing ke sběru zbytečných dat:
+- Je export dat součástí nabídky:
+- Je zrušení účtu srozumitelné:
+- Jsou billing data oddělená od produktové analytiky:
+
+### Rozhodnutí
+
+- Co měníme hned:
+- Co testujeme:
+- Co zatím neměníme:
+- Kdo vlastní komunikaci:
+- Kdy audit zopakujeme:
+
 ## Pracovní log
+
+- **2026-09-19:** Doplněna příloha GA o pricing auditu bez matení zákazníků: hodnotová metrika, tarify, limity, slevy, změny cen, privacy-first kontrola, checklist a pricing audit karta.
 
 - **2026-09-19:** Doplněna příloha FZ o datové inventuře před expanzí produktu: rozhodnutí před sběrem, mapa datových míst, test potřebnosti, integrace jako hranice důvěry, role přístupů, dokumentace, go/no-go kontrola, checklist a karta datové expanze.
 - **2026-09-19:** Doplněna příloha FY o obnově účtu a změně vlastníka workspace: oddělení osobní identity, workspace a fakturace, samoobslužná obnova, rozhodovací strom převodu, omezení support pravomocí, minimalizace důkazů, hygiena po převodu, komunikační šablony, metriky, checklist a karta obnovy workspace.
