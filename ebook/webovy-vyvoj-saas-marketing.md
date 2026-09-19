@@ -31209,7 +31209,231 @@ Každé rozhodnutí má mít vlastníka a termín. Bez toho se audit změní v d
 - Termín:
 - Důkaz dokončení:
 
+## Příloha FX: Správa secrets a API klíčů bez tajných pokladů v repozitáři
+
+Každý SaaS má tajemství. Ne ta dramatická typu „founder jednou přepsal produkční databázi přes páteční večer“ — i když, ruku na srdce, takové historky v týmech existují. Prakticky jde o API klíče, databázová hesla, podpisové tokeny, webhook secret, SSH klíče, přístupové údaje k platební bráně, e-mailové SMTP účty, CI/CD tokeny a produkční proměnné prostředí.
+
+Pro malý tým je největší riziko, že secrets nejsou spravované jako systém, ale jako folklór. Něco je v `.env`, něco v hostingu, něco v CI, něco v chatu, něco v dokumentaci a něco ví jen člověk, který „to tehdy nastavoval“. Dokud všechno běží, vypadá to levně. Při incidentu, odchodu člověka nebo rotaci klíčů se ukáže, že levné to nebylo. Jen faktura přišla později.
+
+OWASP Secrets Management Cheat Sheet zdůrazňuje centralizaci, přehled, omezení přístupů, logování a rotaci secrets jako základní stavební kameny správy tajemství: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html. OWASP Cryptographic Storage Cheat Sheet zároveň připomíná základní hygienu: neukládat klíče do zdrojového kódu ani verzovacího systému a chránit konfigurační soubory s citlivými hodnotami: https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html.
+
+> Codyho komentář: Tajemství v repozitáři není „technický dluh“. Je to los do tomboly, kde hlavní cenou je incident, víkendová rotace klíčů a velmi tiché přemýšlení, proč jsme to vlastně nechali projít review.
+
+### Nejdřív pojmenuj, co je secret
+
+První krok není koupit vault. První krok je domluvit se, co tým považuje za secret. Bez toho každý používá vlastní intuici a intuice v bezpečnosti funguje podobně jako deštník z papíru.
+
+Za secret považuj minimálně:
+
+- **Přístupové údaje:** hesla, tokeny, SSH klíče, deploy klíče, service account credentials.
+- **Databázové údaje:** connection stringy, hesla, privátní certifikáty, replikační účty.
+- **API klíče:** platební brány, e-mailové služby, mapy, AI API, analytika, storage, CRM.
+- **Podpisové hodnoty:** JWT signing secret, webhook secret, session secret, šifrovací klíče.
+- **CI/CD hodnoty:** registry tokeny, cloud tokeny, release klíče, package publishing tokeny.
+- **Produkční konfigurace:** hodnoty, které samy o sobě nejsou heslo, ale prozrazují interní infrastrukturu nebo umožňují útok.
+
+Naopak ne všechno v konfiguraci je secret. Název veřejného hostu, feature flag bez bezpečnostního dopadu nebo veřejný identifikátor projektu může být obyčejná konfigurace. Rozlišení je důležité, protože když označíš všechno za tajné, tým přestane brát tajné věci vážně. Když za tajné neoznačíš nic, tým jednou najde produkční token v issue komentáři. To je zase jiný druh edukace, méně příjemný.
+
+### Udělej inventář podle dopadu, ne podle náhodného pořadí
+
+Secrets inventář nemusí být složitý. Stačí tabulka nebo krátký dokument, který odpoví na otázku: „Kdyby tahle hodnota unikla, co se stane a jak ji otočíme?“
+
+U každého secretu eviduj:
+
+- název a účel,
+- systém, kde je uložený,
+- prostředí: lokální / staging / produkce,
+- vlastník,
+- kdo ho může číst nebo měnit,
+- dopad úniku: nízký / střední / vysoký / kritický,
+- postup rotace,
+- poslední rotace nebo datum vytvoření,
+- kde se používá,
+- zda má omezený scope.
+
+Nejdřív zmapuj kritické secrets: produkční databáze, billing, e-mailová infrastruktura, CI/CD deploy, domény, object storage a signing secrets. Marketingový API klíč do testovacího nástroje počká. Produkční token s právem mazat zákaznická data nepočká, jen zatím zdvořile mlčí.
+
+### Secrets nepatří do kódu, dokumentace ani chatu
+
+Základní pravidlo je jednoduché: repozitář obsahuje kód a bezpečné příklady, ne reálná tajemství. Dokumentace obsahuje postup, ne hodnotu. Chat obsahuje domluvu, ne heslo.
+
+Dobrá struktura:
+
+- `.env.example` ukazuje názvy proměnných a bezpečné ukázkové hodnoty.
+- Reálné hodnoty jsou v secret manageru, hostingu, CI/CD secrets nebo password manageru.
+- Produkční secrets nejsou v lokálních souborech vývojářů, pokud to není výjimečně nutné.
+- Dokumentace popisuje, kdo secret vydává, jak se rotuje a kde je uložený.
+- Do issue, pull requestů a chatu se dávají redigované hodnoty typu `sk_live_...abcd`, ne celé tokeny.
+
+Praktický pattern pro dokumentaci:
+
+```text
+PAYMENT_WEBHOOK_SECRET
+- Účel: ověření webhooků z platební brány
+- Uložení: produkční hosting secrets + staging hosting secrets
+- Vlastník: backend owner
+- Rotace: podle runbooku „Rotace webhook secretu“
+- Nikdy neposílat do chatu; v logu pouze poslední 4 znaky
+```
+
+To je dost konkrétní na provoz, ale neobsahuje to hodnotu. Přesně tak to má být.
+
+### Lokální vývoj potřebuje bezpečné pohodlí
+
+Když je bezpečný postup otravný, tým si vytvoří nebezpečnou zkratku. Lokální vývoj proto musí být pohodlný, ale ne bezbřehý.
+
+Praktická pravidla:
+
+- Používej `.env.example` a onboarding skript, který ověří chybějící proměnné.
+- Lokální prostředí má vlastní testovací klíče, ne produkční kopii.
+- Vývojář má získat secrets přes schválený kanál, ne přes „pošlu ti to do zprávy“.
+- Přístupy do externích služeb omez podle prostředí a účelu.
+- Testovací data nesmí vyžadovat produkční secrets ani produkční zákaznická data.
+- Pokud vývojář nepotřebuje danou integraci, aplikace má umět běžet s vypnutým modulem nebo mockem.
+
+Privacy-first vývoj má jednu důležitou výhodu: když už od začátku minimalizuješ data, méně secrets otevírá cestu k citlivým věcem. Malý rozsah dat není jen právní nebo produktová hodnota. Je to i bezpečnostní zjednodušení.
+
+### CI/CD secrets jsou zvláštní kategorie rizika
+
+CI/CD je mocné místo. Umí sestavit aplikaci, nasadit produkci, publikovat balíčky a někdy číst proměnné, které by neměl vidět skoro nikdo. Proto si zaslouží vlastní kontrolu.
+
+Zkontroluj hlavně:
+
+- **Scope tokenů:** token pro deploy nemá mít práva k fakturaci, databázím a všemu ostatnímu jen proto, že to bylo nejrychlejší.
+- **Branch ochrany:** produkční secrets se nemají zpřístupnit každému branch buildu nebo neověřenému pull requestu.
+- **Forky:** workflow z forků nesmí omylem dostat citlivé secrets.
+- **Logy:** build log nesmí vypsat celé proměnné prostředí ani debug výstup s tokeny.
+- **Ruční joby:** produkční deploy nebo rotace klíčů má mít jasné oprávnění a auditní stopu.
+- **Package publish:** token pro publikaci balíčků má být oddělený od běžného deploy tokenu.
+
+Jednoduchý test: kdyby někdo změnil CI konfiguraci v pull requestu, dostane se k produkčnímu secretu? Pokud odpověď zní „nejsem si jistý“, je to práce na tento týden, ne na další kvartál.
+
+### Rotace není panika, ale nacvičený postup
+
+Rotace klíčů se často odkládá, protože tým neví, co všechno se rozbije. To je přesně důvod, proč má existovat runbook. Ne proto, aby se rotovalo každý pátek pro pocit ctnosti, ale aby se při skutečné potřebě nerozhodovalo za běhu.
+
+Rotaci plánuj pro čtyři situace:
+
+- pravidelná preventivní rotace kritických secrets,
+- odchod člověka s přístupem k citlivým hodnotám,
+- podezření na únik,
+- změna dodavatele, infrastruktury nebo deployment procesu.
+
+Runbook rotace má obsahovat:
+
+- kde se vytvoří nový secret,
+- kam se nasadí,
+- jak dlouho poběží starý a nový souběžně,
+- jak ověříš funkčnost,
+- kdy starý secret zneplatníš,
+- jaké logy a metriky sleduješ,
+- komu dáš vědět, pokud změna může ovlivnit zákazníky.
+
+U webhooků a podpisových klíčů je často potřeba přechodové období, kdy aplikace přijímá starý i nový podpis. U databázových hesel může pomoci nový uživatel, postupné přepnutí a až potom zrušení starého. U tokenů bez možnosti souběhu musí být krátké servisní okno nebo pečlivý deploy plán.
+
+### Logy nesmí být skládka tajemství
+
+Secrets často uniknou ne přes repozitář, ale přes logy. Vývojář přidá debug, knihovna vypíše request header, chyba ukáže connection string, support export skončí v ticketu a najednou se tajemství rozmnožilo do pěti systémů.
+
+Nastav pravidla:
+
+- Nikdy neloguj celé tokeny, hesla, cookies, autorizační hlavičky ani connection stringy.
+- Pokud potřebuješ identifikovat klíč, loguj jen prefix nebo poslední čtyři znaky.
+- Rediguj známé názvy polí: `password`, `token`, `secret`, `authorization`, `cookie`, `api_key`.
+- Chybové hlášky pro uživatele nesmí obsahovat interní konfiguraci.
+- Support exporty musí být očištěné od secrets a citlivých interních hodnot.
+- Retence logů má odpovídat účelu, ne touze skladovat všechno „pro jistotu“.
+
+Tohle je privacy-first i bezpečnostní pravidlo zároveň. Méně citlivých hodnot v logách znamená menší dopad incidentu, jednodušší odpovědi zákazníkům a méně nervózní pohledy do monitoringu ve 23:17.
+
+### Odděl zákaznická tajemství od interních secrets
+
+Některé SaaS produkty ukládají tajemství zákazníků: API klíče jejich systémů, webhook tokeny, přístupové údaje k integracím, certifikáty nebo privátní konfiguraci. To je vyšší liga než vlastní interní secrets, protože únik nebolí jen tebe. Bolí zákazníka a jeho zákazníky.
+
+Pravidla pro zákaznické secrets:
+
+- ukládej je šifrovaně a odděleně od běžných profilových dat,
+- nikdy je po uložení nezobrazuj celé zpět v administraci,
+- umožni zákazníkovi rotaci bez kontaktování supportu,
+- do logů ukládej jen redigovaný identifikátor,
+- support nemá vidět hodnotu, pokud to není výjimečně nutné a auditované,
+- export dat musí jasně rozlišit, zda obsahuje secrets, nebo jen metadata integrací.
+
+Pokud zákazník potřebuje propojit svůj systém, nejdřív se ptej, zda opravdu musíš držet jeho dlouhodobý token. Někdy stačí OAuth flow, omezený scope, krátkodobý token, webhook podpis nebo jednosměrný export. Nejbezpečnější secret je ten, který vůbec neskladuješ.
+
+### Incident se secretem řeš jako samostatný typ události
+
+Únik nebo podezření na únik secretu není obyčejný bug. Potřebuje rychlý a klidný postup.
+
+Minimální incident postup:
+
+1. **Zastav šíření:** smaž veřejný výskyt, zavři sdílený dokument, stáhni log export, znepřístupni odkaz.
+2. **Rotuj hodnotu:** neřeš dlouho, jestli ji někdo zneužil; nejdřív ji zneplatni bezpečným postupem.
+3. **Zkontroluj použití:** projdi logy, auditní stopu, neobvyklé požadavky a změny konfigurace.
+4. **Zmapuj dopad:** jaká data nebo akce secret umožňoval.
+5. **Oprav systémovou příčinu:** proč se secret dostal tam, kam neměl.
+6. **Komunikuj podle dopadu:** interně vždy, zákazníkům tehdy, když mohli být ovlivněni.
+
+Nejhorší reakce je tajně přepsat hodnotu a doufat, že tím příběh končí. Nekončí. Končí až ve chvíli, kdy rozumíš dopadu a zamezíš opakování.
+
+### Checklist: secrets hygiena pro malý SaaS
+
+- [ ] Máme definici toho, co v našem produktu považujeme za secret.
+- [ ] Existuje inventář kritických secrets s vlastníkem, dopadem a postupem rotace.
+- [ ] Reálné secrets nejsou v repozitáři, dokumentaci, issue ani chatu.
+- [ ] `.env.example` obsahuje jen názvy proměnných a bezpečné ukázky.
+- [ ] Lokální vývoj používá testovací hodnoty, ne produkční klíče.
+- [ ] CI/CD secrets mají omezený scope a nejsou dostupné neověřeným PR nebo forkům.
+- [ ] Logy redigují tokeny, hesla, cookies, autorizační hlavičky a connection stringy.
+- [ ] Produkční secrets mají popsaný a otestovaný postup rotace.
+- [ ] Zákaznické secrets ukládáme odděleně, šifrovaně a nezobrazujeme je celé zpět.
+- [ ] Při úniku secretu existuje incident postup: zastavit šíření, rotovat, zkontrolovat použití, opravit příčinu.
+
+### Mini šablona: secret karta
+
+## Secret karta: [název hodnoty]
+
+### Základ
+
+- Účel:
+- Prostředí: lokální / staging / produkce
+- Vlastník:
+- Systém uložení:
+- Kde se používá:
+
+### Riziko
+
+- Typ secretu:
+- Dopad úniku: nízký / střední / vysoký / kritický
+- Přístup mají:
+- Scope omezení:
+- Zákaznická data v dosahu: ano / ne / nepřímo
+
+### Provoz
+
+- Jak vytvořit nový secret:
+- Jak nasadit změnu:
+- Jak ověřit funkčnost:
+- Jak zneplatnit starý secret:
+- Kdy rotovat:
+
+### Logy a dokumentace
+
+- Co se smí logovat:
+- Co se nesmí logovat:
+- Redigovaný formát:
+- Odkaz na runbook:
+
+### Incident
+
+- První krok při podezření na únik:
+- Kde zkontrolovat použití:
+- Koho informovat:
+- Důkaz dokončení nápravy:
+
 ## Pracovní log
+
+- **2026-09-19:** Doplněna příloha FX o správě secrets a API klíčů: definice secretů, inventář podle dopadu, bezpečné ukládání mimo kód a chat, lokální vývoj, CI/CD rizika, rotace, logování, zákaznická tajemství, incident postup, checklist a secret karta.
 
 - **2026-09-19:** Doplněna příloha FW o auditu přístupů pro malý privacy-first SaaS: inventář systémů, role podle práce, sdílené účty, dočasné externí přístupy, rytmus auditů, kritické systémy, offboarding, checklist a přístupová karta.
 
