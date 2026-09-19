@@ -29786,8 +29786,172 @@ Poslední bod je důležitý. Když čísla vypadají dobře, ale člověk na su
 
 ---
 
+## Příloha FP: Měsíční provozní review bez dashboardového divadla
+
+Týdenní rytmus drží tým v pohybu. Měsíční provozní review má jiný účel: zastavit se, podívat se na celý systém a rozhodnout, co už začíná být nebezpečně křehké. Nejde o prezentaci pro pocit kontroly. Jde o praktickou kontrolu toho, jestli web, SaaS, marketing, support, bezpečnost a privacy-first provoz pořád táhnou stejným směrem.
+
+Malý tým často jede z týdne na týden. Opraví bug, odpoví zákazníkovi, pošle nabídku, nasadí funkci, přepíše landing page. To je normální. Problém nastane, když nikdo jednou za měsíc nezkontroluje vzory: které chyby se vrací, kde roste ruční práce, kde slibujeme víc než doručujeme a kde nám přibývá datový dluh. Provozní review je pojistka proti tomu, aby se z drobných kompromisů stal provozní dluhopis s velmi nepříjemným úrokem.
+
+> Codyho komentář: Dashboard bez rozhodnutí je akvárium pro grafy. Hezky se na něj kouká, ale ryby ti produkt neřídí.
+
+### Review začíná otázkami, ne metrikami
+
+Nejdřív napiš, co chceš zjistit. Až potom otevři dashboard. Jinak hrozí, že tým bude obdivovat čísla, která jsou zrovna po ruce, místo aby řešil věci, které bolí zákazníky nebo ohrožují provoz.
+
+Pět základních otázek pro měsíční review:
+
+- **Hodnota:** dostávají zákazníci slíbený výsledek rychleji než minulý měsíc?
+- **Spolehlivost:** kde se opakovaly chyby, incidenty, pomalé reakce nebo support eskalace?
+- **Kapacita:** která práce roste rychleji než tým a začíná být ručním úzkým hrdlem?
+- **Důvěra:** přibyla nová data, integrace, subprocesor nebo přístup, který potřebuje zdokumentovat?
+- **Fokus:** co bychom měli přestat dělat, protože to nepomáhá zákazníkům ani obchodu?
+
+Teprve k těmto otázkám přidej metriky. Když metrika neodpovídá na žádnou otázku, nepatří do review. Možná patří do diagnostiky, možná do archivu, možná do koše. Koš je podceňovaný nástroj produktového řízení.
+
+### Připrav jeden stránkový provozní přehled
+
+Review nemá být datová expedice. Připrav předem jednu stránku, kterou tým přečte za pět minut. Všechno ostatní může být odkaz, příloha nebo detail pro člověka, který to řeší.
+
+Jedna stránka stačí na:
+
+- tři hlavní změny měsíce,
+- tři největší provozní problémy,
+- stav aktivace, retence nebo používání klíčových funkcí,
+- stav supportu podle typů dotazů,
+- stav incidentů, dostupnosti a pomalých částí systému,
+- změny v nástrojích, datech, přístupech a subprocesorech,
+- rozhodnutí, která musí tým udělat.
+
+Každý blok má mít větu „co z toho plyne“. Například: „Support dotazy k importu tvoří 34 % všech ticketů, proto v příštím sprintu upravíme validaci CSV a přidáme náhled chyb před uložením.“ To je provozní informace. „Support ticketů bylo 127“ je číslo, které samo o sobě jen sedí a kouká.
+
+### Odděl signály od šumu
+
+Ne každé zhoršení je problém a ne každé zlepšení je úspěch. Jednorázový spike může být kampaň, větší zákazník, incident nebo změna měření. Měsíční review má hledat opakované vzory, ne trestat tým za každou vlnku v grafu.
+
+U každého signálu napiš krátký kontext:
+
+- co se změnilo proti minulému měsíci,
+- jestli jde o opakovaný trend nebo jednorázovou událost,
+- koho se to týká,
+- jaký je obchodní nebo provozní dopad,
+- jaké rozhodnutí navrhujeme.
+
+Příklad: „Počet trialů klesl o 18 %, ale kvalifikované demo hovory zůstaly stejné. Pravděpodobně jsme odfiltrovali část nevhodných leadů novou pricing sekcí. Sledujeme ještě měsíc, zatím neměníme akvizici.“ Tohle je lepší než panická přestavba webu, protože jedno číslo udělalo smutný obličej.
+
+### Privacy-first kontrola jako pevný bod agendy
+
+Každý měsíc se zeptej, jestli se nezměnil datový obraz produktu. Privacy-first provoz se nerozbije jedním velkým rozhodnutím. Často se rozpadne deseti malými výjimkami: nový chat widget, export do tabulky, testovací AI nástroj, přístup pro dodavatele, screenshoty v ticketu, nový newsletterový segment.
+
+Povinné otázky:
+
+- Přidali jsme nový nástroj, integraci nebo analytický event?
+- Začali jsme sbírat nový typ osobních nebo zákaznických dat?
+- Změnil se účel zpracování, retence nebo místo uložení?
+- Má nový člověk, dodavatel nebo servisní účet přístup k produkci?
+- Jsou subprocesoři, datová mapa a interní dokumentace pořád aktuální?
+- Vznikl support nebo sales proces, kde si lidé posílají citlivá data bokem?
+
+Pokud odpověď zní ano, nevytvářej právní paniku. Vytvoř úkol: zapsat, omezit, vysvětlit, smazat nebo schválit. Privacy-first je provozní návyk, ne sváteční audit.
+
+### Rozhodnutí zapisuj jako závazek
+
+Měsíční review bez rozhodnutí je retrospektiva pro dekoraci. Na konci musí vzniknout krátký seznam závazků. Ne dvacet položek. Tři až pět věcí, které se opravdu stanou.
+
+Dobré rozhodnutí má tento tvar:
+
+```text
+Rozhodnutí: Zjednodušíme import CSV před dalším marketingovým push.
+Důvod: 34 % support ticketů se týká nejasných chyb importu.
+Vlastník: Produkt + vývoj.
+Termín: Do konce příštího sprintu.
+Ověření: Podíl import ticketů klesne pod 20 % nebo bude jasný nový důvod.
+Privacy dopad: Nepřidáváme nová data, jen lepší validaci a kratší retenční dobu dočasných importních souborů.
+```
+
+Takový zápis pomáhá týmu i o měsíc později. Neřeší se, kdo si co pamatoval z hovoru. Rozhodnutí má vlastníka, důvod a test reality.
+
+### Agenda na 60 minut
+
+Pro malý tým stačí hodina. Když se review nafoukne na půl dne, lidé ho začnou nenávidět a právem.
+
+Praktická agenda:
+
+1. **5 minut:** co se změnilo v produktu, zákaznících a provozu.
+2. **10 minut:** zákaznická hodnota, aktivace, retence, používání klíčových funkcí.
+3. **10 minut:** support, incidenty, chybovost a největší tření.
+4. **10 minut:** marketing a obchod — kvalita leadů, demo hovory, námitky, churn signály.
+5. **10 minut:** privacy-first kontrola dat, nástrojů, přístupů a dokumentace.
+6. **10 minut:** rozhodnutí, vlastníci, termíny a co přestaneme dělat.
+7. **5 minut:** potvrzení zápisu a komunikace týmu nebo zákazníkům.
+
+Pokud téma potřebuje detail, nevytahuj ho celé do review. Založ navazující pracovní blok s konkrétním vlastníkem. Review má řídit systém, ne řešit každý šroubek.
+
+### Checklist: měsíční provozní review
+
+- [ ] Review začíná otázkami, ne otevřeným dashboardem.
+- [ ] Přehled se vejde na jednu stránku a obsahuje interpretaci, ne jen čísla.
+- [ ] Sledujeme hodnotu pro zákazníka, spolehlivost, kapacitu, důvěru a fokus.
+- [ ] Každý významný signál má kontext: trend, dopad, dotčené zákazníky a návrh rozhodnutí.
+- [ ] Privacy-first kontrola zahrnuje nové nástroje, data, eventy, přístupy, subprocesory a support výjimky.
+- [ ] Rozhodnutí mají vlastníka, termín, ověření a zapsaný privacy dopad.
+- [ ] Výstup obsahuje maximálně pět závazků pro další měsíc.
+- [ ] Zastaralé metriky mažeme nebo přesouváme mimo hlavní review.
+- [ ] Tým ví, co se má komunikovat zákazníkům, supportu, obchodu nebo do changelogu.
+- [ ] Příští review začíná kontrolou předchozích závazků, ne novým divadlem.
+
+### Mini šablona: měsíční provozní karta
+
+## Měsíční provozní karta: [produkt / měsíc]
+
+### Shrnutí
+
+- Největší zlepšení:
+- Největší riziko:
+- Jedna věc, kterou přestaneme dělat:
+
+### Zákaznická hodnota
+
+- Aktivační moment:
+- Retence / opakované použití:
+- Nejčastější tření:
+- Rozhodnutí:
+
+### Provoz a support
+
+- Incidenty:
+- Support témata:
+- Kapacitní problém:
+- Dokumentace k úpravě:
+
+### Marketing a obchod
+
+- Kvalitní zdroje:
+- Opakované námitky:
+- Churn nebo renewal signály:
+- Materiál k doplnění:
+
+### Privacy-first kontrola
+
+- Nové nástroje nebo integrace:
+- Nová data nebo eventy:
+- Přístupy k revizi:
+- Dokumentace / subprocesoři:
+
+### Rozhodnutí na další měsíc
+
+- Rozhodnutí 1:
+- Vlastník:
+- Termín:
+- Ověření:
+- Privacy dopad:
+
+Měsíční review nemá týmu přidat další rituál pro kalendářovou okrasu. Má snížit šanci, že se důležité věci schovají mezi denní operativu. Když po hodině víš, co zlepšit, co zastavit a co zdokumentovat, review splnilo účel.
+
+---
+
 ## Pracovní log
 
+- **2026-09-19:** Doplněna příloha FP o měsíčním provozním review: otázky před metrikami, jednostránkový přehled, oddělení signálů od šumu, privacy-first kontrola, zápis rozhodnutí, 60minutová agenda, checklist a provozní karta.
 - **2026-09-19:** Doplněna příloha FO o kapacitním plánu podpory: počítání support práce, rozdělení typů dotazů, rotace vlastníků, řízené eskalace do vývoje, dokumentace jako kapacitní nástroj, privacy-first přístupové stupně, support dluh, agregované metriky, checklist a support capacity karta.
 - **2026-09-19:** Doplněna příloha FN o SLA a provozních závazcích bez přestřelených slibů: dostupnost vs. reakce vs. řešení, priority podle dopadu, provozní hodiny, kompenzace, privacy-first incident support, plánovaná údržba, checklist a SLA karta.
 - **2026-09-19:** Doplněna příloha FM o obnově smlouvy a prevenci churnu: renewal stopa, včasné churn signály, 120/90/60/30denní rytmus, změna rozsahu před slevou, exit rozhovor, win-back bez stalkingu, checklist a renewal karta.
