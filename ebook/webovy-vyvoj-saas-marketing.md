@@ -31022,7 +31022,196 @@ Tím se znalostní báze přestane chovat jako vedlejší úkol. Stane se souč�
 - Poslední aktualizace:
 - Další revize:
 
+## Příloha FW: Audit přístupů bez paranoie a bez sdílených hesel v šuplíku
+
+Přístupy jsou jedna z těch věcí, které v malém týmu vypadají nudně, dokud nudné být nepřestanou. První verze SaaS často vzniká v režimu „pošli mi pozvánku, potřebuju to rychle opravit“. To je lidské. Problém nastane, když se z rychlé výjimky stane provozní standard a po roce nikdo neví, kdo má admin práva, proč je má a jestli účet člověka, který pomáhal s kampaní v dubnu, pořád vidí produkční data v září.
+
+Audit přístupů nemusí být korporátní horor s třiceti tabulkami a pocitem, že i kávovar potřebuje vlastní IAM strategii. Pro malý privacy-first SaaS stačí pravidelný, krátký a důsledný rytmus: víme, kdo má kam přístup, proč ho potřebuje, na jak dlouho a jak rychle ho umíme odebrat.
+
+> Codyho komentář: Bezpečnost přístupů není o tom, že nikomu nevěříme. Je o tom, že nechceme, aby důvěra v lidi závisela na tom, jestli si někdo před dvěma lety pamatoval odebrat účet v nástroji, který už skoro nepoužíváme. To není důvěra, to je archeologie s rizikem.
+
+### Začni seznamem systémů, ne seznamem lidí
+
+První chyba auditu je začít otázkou „kdo má jaká práva“. To zní logicky, ale rychle narazíš na to, že tým ani nemá kompletní seznam míst, kde práva existují. Začni proto inventářem systémů.
+
+Rozděl je do pěti skupin:
+
+- **Produkce:** hosting, databáze, object storage, CI/CD, secrets, monitoring, logy.
+- **Zákaznická práce:** support inbox, CRM, helpdesk, onboardingové dokumenty, call nástroje.
+- **Finanční a právní provoz:** fakturace, účetnictví, smlouvy, bankovní exporty, podpisové nástroje.
+- **Marketing a obsah:** web, CMS, analytika, newsletter, RSS tooling, plánovače obsahu.
+- **Interní spolupráce:** chat, dokumentace, projektový nástroj, repozitáře, password manager.
+
+U každého systému si napiš tři věci: vlastník, typ dat a kritičnost. Vlastník není člověk, který nástroj kdysi založil. Vlastník je člověk, který dnes umí rozhodnout, kdo má mít přístup a co se stane při incidentu.
+
+### Role popiš podle práce, ne podle ega
+
+„Admin“ není role. Je to kouzelné tlačítko, kterým se z dobrého dne může stát špatný den. Role mají odpovídat skutečné práci.
+
+Praktické role pro malý SaaS:
+
+- **Owner:** rozhoduje o konfiguraci, fakturaci, bezpečnostních výjimkách a obnově po incidentu.
+- **Operator:** řeší běžný provoz, support eskalace, onboarding a drobné konfigurace.
+- **Developer:** nasazuje, ladí technické chyby, čte technické logy, ale nemusí vidět zákaznický obsah.
+- **Support:** vidí jen údaje potřebné pro vyřešení konkrétního požadavku.
+- **Finance:** pracuje s fakturací, platbami a účetními podklady, ne s produktovými daty.
+- **Marketing:** spravuje obsah a kampaně, ne produkční databázi ani seznam všech zákaznických událostí.
+- **External:** časově omezený přístup pro dodavatele nebo konzultanta.
+
+Každá role by měla mít popis ve formátu: „může dělat X, nesmí dělat Y, přístup se reviduje Z“. Když to nejde napsat, role je moc široká nebo systém neumí práva rozdělit. V takovém případě to zapiš jako riziko, ne jako věc, kterou budeme potichu ignorovat, protože „teď je toho hodně“.
+
+### Sdílené účty jsou dluh, ne proces
+
+Sdílený účet často vznikne nevinně: jeden login do starého nástroje, jeden e-mail pro podporu, jeden admin účet v CMS. Jenže sdílený účet má tři zásadní problémy:
+
+1. Nevíš, kdo co udělal.
+2. Neumíš odebrat přístup jednomu člověku bez změny hesla všem.
+3. Často končí v chatu, poznámce nebo prohlížeči bez pořádné kontroly.
+
+Privacy-first tým by měl sdílené účty postupně rušit. Když to nástroj neumí, nastav aspoň kompenzační opatření:
+
+- účet je uložený jen v password manageru,
+- má dlouhé unikátní heslo a zapnuté MFA,
+- přístup k záznamu má jen omezená skupina,
+- použití účtu se zapisuje do krátkého interního logu,
+- existuje datum, kdy nástroj nahradíme nebo přístup rozdělíme.
+
+Sdílený účet bez vlastníka je červená vlajka. Sdílený účet s právem měnit data zákazníků je červená vlajka s megafonem.
+
+### Přístupy dávej dočasně, pokud je práce dočasná
+
+Dodavatel, externí vývojář, auditor, copywriter, konzultant nebo zákazník v pilotu často nepotřebuje trvalý přístup. Potřebuje přístup pro konkrétní úkol. To je velký rozdíl.
+
+Před udělením dočasného přístupu si napiš:
+
+- proč přístup vzniká,
+- jaký nejmenší rozsah stačí,
+- jaká data budou viditelná,
+- kdo přístup schválil,
+- kdy automaticky nebo ručně skončí,
+- kdo ověří odebrání.
+
+U externích rolí je dobré nastavit výchozí pravidlo: žádný přístup do produkčních dat, pokud neexistuje konkrétní důvod a schválení. Když externista potřebuje řešit produkční chybu, připrav minimální výřez, anonymizovaný export, testovací reprodukci nebo sdílenou obrazovku s interním člověkem. Někdy je to pomalejší. Ale „rychlejší“ není argument pro to, aby citlivá data viděl každý, kdo zrovna pomáhá hasit požár.
+
+### Audit dělej v rytmu, který tým opravdu zvládne
+
+Roční audit je lepší než žádný audit. Čtvrtletní je lepší než roční. Měsíční mini kontrola je nejlepší tam, kde se tým rychle mění nebo často zapojuje externisty.
+
+Praktický rytmus:
+
+- **Při nástupu:** přístup podle role, ne podle kopírování práv předchozího člověka.
+- **Při změně práce:** odebrat staré přístupy dřív, než přidáš nové.
+- **Při odchodu:** checklist odebrání ve stejný den, u citlivých systémů okamžitě.
+- **Měsíčně:** projít externí účty, sdílené účty a admin role.
+- **Čtvrtletně:** projít všechny kritické systémy a vlastníky.
+- **Po incidentu:** ověřit, jestli přístupová práva incident nezhoršila.
+
+Audit nemusí trvat dlouho. U malého týmu často stačí 45 minut, pokud máš připravenou tabulku systémů a rolí. Nejdelší bývá první průchod. Další už je údržba, ne detektivka.
+
+### Kritické systémy mají mít silnější pravidla
+
+Ne každý nástroj potřebuje stejnou míru kontroly. Účet pro plánování příspěvků na blog je jiná liga než přístup k produkční databázi. Rozliš minimálně tři úrovně:
+
+- **Nízké riziko:** veřejný obsah, interní organizační pomůcky, nástroje bez zákaznických dat.
+- **Střední riziko:** CRM, support, analytika, dokumentace, marketingové kontakty, fakturační přehledy.
+- **Vysoké riziko:** produkční data, secrets, infrastruktura, CI/CD, bankovní a právní systémy, admin účty.
+
+Pro vysoké riziko nastav tvrdší pravidla:
+
+- MFA je povinné, ne doporučené.
+- Admin práva má minimum lidí.
+- Přístup přes osobní účty, ne sdílené loginy.
+- Každá výjimka má vlastníka a datum revize.
+- Přístup k živým datům má jasný účel a stopu.
+- Secrets nejsou v dokumentaci, chatu ani lokálních poznámkách.
+
+Tohle není bezpečnostní divadlo. Je to provozní hygiena. Malý tým nemá kapacitu řešit zbytečný incident jen proto, že někde zůstal starý admin účet po testovací integraci.
+
+### Offboarding je produktový proces, ne trapné loučení v kalendáři
+
+Když někdo odchází z projektu, přístupová práva musí skončit stejně systematicky jako pracovní vztah. Offboarding není nedůvěra. Je to respekt k zákazníkům, týmu i člověku, který odchází. Nikdo nechce mít za rok aktivní účet v produktu, kde už dávno nepracuje.
+
+Minimální offboarding checklist:
+
+- odebrat přístup do kritických systémů,
+- převést vlastnictví dokumentů, repo práv, domén a fakturačních kontaktů,
+- zkontrolovat osobní API tokeny a deploy klíče,
+- zrušit nebo přesměrovat pracovní e-mailové aliasy,
+- předat otevřené incidenty, zákaznické závazky a rozpracované úkoly,
+- zaznamenat datum odebrání přístupů,
+- ověřit, že člověk nezůstal jako owner nástroje nebo integrace.
+
+U founderů, adminů a externistů s produkčním přístupem přidej ještě rotaci citlivých tokenů, kontrolu posledních aktivit a revizi automatizací, které běžely pod jejich účtem.
+
+### Přístupový audit má končit rozhodnutím
+
+Výstupem auditu nemá být pocit „něco jsme prošli“. Výstupem má být krátký seznam rozhodnutí:
+
+- komu se přístup ponechává a proč,
+- komu se přístup odebírá,
+- kde se mění role,
+- které sdílené účty se ruší nebo kompenzují,
+- které systémy nemají vlastníka,
+- které výjimky mají deadline,
+- jaký nástroj nebo proces je potřeba zlepšit.
+
+Každé rozhodnutí má mít vlastníka a termín. Bez toho se audit změní v dokumentační wellness. Hezký pocit, nulová změna.
+
+### Checklist: audit přístupů pro malý SaaS
+
+- [ ] Máme seznam všech systémů, kde existují účty nebo práva.
+- [ ] Každý systém má vlastníka a úroveň rizika.
+- [ ] Kritické systémy mají povinné MFA a minimum adminů.
+- [ ] Role jsou popsané podle práce, ne podle titulů.
+- [ ] Sdílené účty jsou buď zrušené, nebo mají kompenzační pravidla.
+- [ ] Externí přístupy mají účel, vlastníka a datum ukončení.
+- [ ] Offboarding obsahuje odebrání práv, převod vlastnictví a kontrolu tokenů.
+- [ ] Produkční data nejsou dostupná lidem, kteří je nepotřebují pro konkrétní práci.
+- [ ] Secrets nejsou uložené v dokumentaci, chatu ani běžných poznámkách.
+- [ ] Každý audit končí seznamem rozhodnutí s vlastníkem a termínem.
+
+### Mini šablona: přístupová karta systému
+
+## Přístupová karta: [systém / nástroj]
+
+### Základ
+
+- Vlastník:
+- Účel systému:
+- Úroveň rizika: nízká / střední / vysoká
+- Typy dat:
+
+### Role
+
+- Owner:
+- Operator:
+- Support / finance / marketing:
+- External:
+
+### Pravidla
+
+- MFA:
+- Sdílené účty:
+- Maximální doba externího přístupu:
+- Kdo schvaluje výjimky:
+
+### Aktuální kontrola
+
+- Přístupy ponechat:
+- Přístupy odebrat:
+- Role změnit:
+- Tokeny nebo klíče zkontrolovat:
+
+### Rozhodnutí
+
+- Úkol:
+- Vlastník:
+- Termín:
+- Důkaz dokončení:
+
 ## Pracovní log
+
+- **2026-09-19:** Doplněna příloha FW o auditu přístupů pro malý privacy-first SaaS: inventář systémů, role podle práce, sdílené účty, dočasné externí přístupy, rytmus auditů, kritické systémy, offboarding, checklist a přístupová karta.
 
 - **2026-09-19:** Doplněna příloha FV o znalostní bázi z provozních poučení: kategorie, články pro konkrétní situace, zachytávání po událostech, privacy-first pravidla, vyhledatelnost, měření tření, Definition of Done, checklist a šablona znalostního článku.
 
