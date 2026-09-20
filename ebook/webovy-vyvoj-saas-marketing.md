@@ -33101,7 +33101,184 @@ Zlepšení systému:
 - Kdo to dokončí:
 ```
 
+
+## Příloha GH: Fakturační export pro účetnictví bez datového výprodeje
+
+Billing není hotový ve chvíli, kdy zákazník zaplatí. Hotový je až tehdy, když účetnictví dostane čitelný export, support umí dohledat konkrétní případ a produktový tým ví, že kvůli tomu nevznikl další tajný sklad osobních údajů. U malého SaaS je to často opomíjená část provozu: aplikace vypadá elegantně, ale jednou měsíčně někdo ručně slepuje CSV, faktury, poznámky ze supportu a screenshoty z platební brány.
+
+Dobře navržený fakturační export má tři cíle:
+
+1. **Účetnictví dostane konzistentní podklady** bez lovení informací v pěti systémech.
+2. **Tým umí zpětně vysvětlit každou položku** bez archeologické expedice v chatech.
+3. **Osobní data neopouštějí produkt zbytečně**, protože export není smetiště „pro jistotu“.
+
+> Codyho komentář: CSV soubor není skládka. Když do něj nasypeš všechno, co databáze zná, nevznikne lepší účetnictví. Vznikne menší GDPR horor s oddělovačem středník.
+
+### Začni účelem exportu, ne sloupci
+
+První otázka nezní „co umíme vyexportovat“, ale „kdo s tím bude co dělat“. Jiný export potřebuje účetní firma, jiný interní finance review a jiný support při řešení reklamace faktury. Když všechny scénáře nacpeš do jednoho souboru, vznikne tabulka s padesáti sloupci, které nikdo nechápe a všichni se bojí smazat.
+
+Rozděl exporty podle účelu:
+
+- **Účetní export:** doklady, částky, měna, datum plnění nebo vystavení, daňové členění, interní ID a účetní poznámka.
+- **Platební export:** transakce, stav platby, poplatky, párovací reference, refundace a chargebacky.
+- **Produktový billing export:** workspace ID, tarif, období, limity, proration, kredity a stav přístupu.
+- **Support výpis:** jen konkrétní případ, časová osa a minimální sada údajů pro vysvětlení zákazníkovi.
+- **Manažerský souhrn:** agregované příjmy, výjimky, otevřené rozdíly a trend bez detailů jednotlivců.
+
+Každý export by měl mít vlastní definici: účel, vlastníka, frekvenci, příjemce, retenční dobu a minimální sadu polí. Bez toho se z exportů stanou malé datové sklady, které nikdo formálně nespravuje.
+
+### Stabilní identifikátory jsou lepší než osobní údaje
+
+Účetnictví i support často potřebují položku dohledat, ale ne vždy potřebují vidět celé jméno, e-mail nebo fakturační kontakt. Tam, kde to jde, používej stabilní interní ID:
+
+- `workspace_id` pro zákaznický prostor,
+- `customer_id` pro fakturační entitu,
+- `invoice_id` pro doklad,
+- `subscription_id` pro tarifní vztah,
+- `payment_id` pro platbu,
+- `adjustment_id` pro refundaci, kredit nebo ruční opravu.
+
+Osobní údaje přidávej jen tam, kde mají jasný účel. Účetní doklad může potřebovat fakturační údaje. Interní reconciliation tabulka často nepotřebuje osobní e-mail vůbec. Support výpis pro jeden ticket nepotřebuje export všech zákazníků.
+
+Praktické pravidlo: pokud se sloupec používá jen k tomu, aby člověk „poznal, o koho jde“, zkus ho nahradit interním ID a odkazem do systému s řízeným přístupem. Data pak zůstávají ve správném nástroji a export slouží jen své práci.
+
+### Verze exportu šetří nervy při změnách
+
+Export bez verze je časovaná bomba. Jednou přidáš nový typ kreditu, změníš název tarifu nebo upravíš formát data a najednou účetní import spadne v nejhorší možný den. Proto každý pravidelný export označ verzí a changelogem.
+
+Stačí jednoduchý systém:
+
+- název exportu, například `monthly_accounting_export`,
+- verze schématu, například `v1.3`,
+- datum změny,
+- seznam přidaných, změněných a odstraněných polí,
+- poznámka, jestli je změna zpětně kompatibilní,
+- ukázkový řádek pro test importu.
+
+Nové sloupce přidávej raději na konec a neměň význam existujících polí bez oznámení. Pokud musíš změnit význam, vytvoř novou verzi exportu a nech starou běžet ještě krátké přechodné období. Ano, je to nudné. Nudné účetní exporty jsou přesně ta kategorie nudnosti, kterou chceš.
+
+### Export má mít vlastní kontrolu kvality
+
+Před odesláním nebo uložením exportu zkontroluj aspoň základní věci:
+
+- počet řádků odpovídá počtu očekávaných dokladů nebo transakcí,
+- součet částek sedí proti billing systému,
+- měny a daňové režimy nejsou smíchané bez označení,
+- refundace a kredity mají vazbu na původní doklad nebo důvod,
+- žádný řádek nemá prázdné povinné ID,
+- časové období odpovídá názvu souboru,
+- export neobsahuje testovací data z produkce ani produkční data z testu.
+
+U opakovaného exportu se vyplatí mít automatickou validační zprávu: počet položek, součty, počet výjimek, počet refundací, počet ručních zásahů a seznam chyb. Když report ukáže „0 chyb“, člověk má pořád kontrolovat smysl. Ale nemusí ručně počítat každou buňku jako mnich v klášteře tabulek.
+
+### Privacy-first pravidla pro sdílení exportů
+
+Největší riziko exportů není jen obsah. Je to způsob, jakým putují dál. Soubor stažený z administrace a poslaný e-mailem třem lidem má úplně jiný rizikový profil než export uložený v řízeném úložišti s expirací a omezeným přístupem.
+
+Pro malý SaaS nastav jednoduchá pravidla:
+
+- Exporty s osobními údaji neposílej do běžných chatů.
+- Sdílej je přes řízené úložiště s přístupem jen pro konkrétní roli.
+- Každý dočasný export má datum smazání.
+- Příjemce dostane jen export, který odpovídá jeho účelu.
+- Pokud účetní potřebuje opakovaný přístup, vytvoř stabilní proces místo měsíčního přeposílání příloh.
+- Citlivé exporty neukládej lokálně déle, než je nutné pro kontrolu.
+- V ticketu piš interní ID a závěr, ne celé řádky z exportu.
+
+Tohle není paranoia. Je to provozní hygiena. Čím menší tým, tím méně lidí může hlídat každou výjimku, takže proces musí být jednoduchý a těžko pokazitelný.
+
+### Účetní komunikace má být součástí runbooku
+
+Účetní nebo externí finance partner nemá hádat, co znamená nový sloupec `adjustment_reason`. K exportu přidej krátký datový slovník a kontakt pro dotazy. Ušetříš tím ping-pong typu „co je to kredit za onboarding“ a „proč je tady záporná položka“.
+
+Datový slovník nemusí být román. Pro každý sloupec stačí:
+
+- název pole,
+- lidský význam,
+- formát,
+- povinné nebo volitelné,
+- zdroj v systému,
+- příklad hodnoty,
+- poznámka k výjimkám.
+
+Když se změní pricing, refund politika nebo struktura tarifů, aktualizuj i slovník. Jinak bude účetnictví dohánět produkt podle stop v CSV, což je sice dobrodružné, ale jen pokud máš rád kancelářské únikové hry.
+
+### Exporty měř podle tření, ne podle počtu souborů
+
+Smyslem není mít víc exportů. Smyslem je méně ručního vysvětlování. Sleduj proto jednoduché signály:
+
+- kolik dotazů od účetnictví vzniklo po měsíční uzávěrce,
+- kolik položek bylo opraveno ručně,
+- kolik exportů obsahovalo chybějící povinné údaje,
+- kolik dočasných souborů čeká na smazání,
+- kolik billing výjimek se opakuje už třetí měsíc,
+- kolik support ticketů vzniklo kvůli nejasné fakturaci.
+
+Tyto metriky stačí držet agregovaně. Nepotřebuješ sledovat jednotlivé účetní, support lidi ani zákazníky. Potřebuješ vědět, kde systém vyrábí tření a jak ho příští měsíc snížit.
+
+### Checklist: fakturační export bez datového výprodeje
+
+- Má každý export jasný účel, příjemce a vlastníka?
+- Existuje minimální sada polí pro účetnictví, platby, produktový billing a support zvlášť?
+- Používají interní kontroly stabilní ID místo osobních údajů všude, kde to stačí?
+- Je export označen verzí schématu a má changelog změn?
+- Existuje datový slovník pro účetnictví nebo finance partnera?
+- Proběhne před sdílením kontrola počtu řádků, součtů, povinných ID a období?
+- Jsou refundace, kredity a ruční opravy propojené s důvodem a původní položkou?
+- Mají dočasné exporty datum smazání a omezený přístup?
+- Neposílají se exporty s osobními údaji přes běžné chaty nebo dlouhé e-mailové řetězce?
+- Končí měsíční review exportů jednou konkrétní úpravou procesu nebo schématu?
+
+### Mini šablona: exportní karta
+
+```text
+Exportní karta: [název exportu / verze]
+
+Účel:
+- Pro koho je export:
+- Jaké rozhodnutí nebo proces podporuje:
+- Frekvence:
+- Vlastník:
+
+Rozsah:
+- Období:
+- Zahrnuté produkty / tarify:
+- Zahrnuté stavy:
+- Výjimky mimo export:
+
+Pole:
+- Povinná ID:
+- Částky a měny:
+- Doklady:
+- Platby:
+- Refundace / kredity:
+- Osobní údaje a proč jsou nutné:
+
+Kvalita:
+- Počet řádků:
+- Kontrolní součty:
+- Chybějící povinná pole:
+- Ruční zásahy:
+- Testovací položky odstraněny:
+
+Sdílení:
+- Příjemci:
+- Úložiště:
+- Expirace / datum smazání:
+- Přístupy:
+- Zákaz kopírování do chatů potvrzen:
+
+Změny:
+- Verze schématu:
+- Co se změnilo:
+- Zpětná kompatibilita:
+- Informováni příjemci:
+- Další zlepšení pro příští běh:
+```
+
 ## Pracovní log
+- **2026-09-20:** Doplněna příloha GH o fakturačních exportech pro účetnictví bez datového výprodeje: účely exportů, stabilní ID, verzování schématu, kontrola kvality, privacy-first sdílení, účetní datový slovník, metriky tření, checklist a exportní karta.
 - **2026-09-19:** Doplněna příloha GG o kontrole příjmů a billing reconciliation: zdroj pravdy pro obchodní události, párování stavů, rozdělení nesouladů, evidence výjimek, privacy-first práce s exporty, kontrola negativních scénářů, alerty, checklist a reconciliation karta.
 - **2026-09-19:** Doplněna příloha GF o reklamacích faktur a billing supportu: klasifikace dotazů, první odpověď, rekonstrukce faktury, privacy-first práce s doklady, rozhodovací možnosti, zákaznická komunikace, review, checklist a billing support karta.
 - **2026-09-19:** Doplněna příloha GE o měsíčním billing runbooku: kalendář kontrol, oddělení zákaznických změn od interních oprav, evidence výjimek, privacy-first kontrola datových toků, otevřené hrany před uzávěrkou, komunikace, review, checklist a měsíční billing karta.
