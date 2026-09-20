@@ -35176,7 +35176,215 @@ Rozhodnutí z review:
 ```
 
 
+
+## Příloha GT: Nákupní komise a interní obhajoba bez šmírovacích PDF a sales divadla
+
+U malého B2B SaaS se často stane zvláštní věc: člověk, který produkt chce, není člověk, který ho může sám koupit. Nadšený uživatel musí přesvědčit šéfa, finance, IT, bezpečnost, právní oddělení nebo kolegu, který má trauma z posledního „jednoduchého nástroje“, jenž se po třech měsících změnil v provozní hydru.
+
+Tady mnoho týmů zbytečně prohrává. Mají hezkou landing page, umí udělat demo, ale nedají championovi materiály, se kterými interně obstojí. Místo toho pošlou dlouhé PDF, tabulku funkcí a „kdyby něco, ozvěte se“. To není enablement. To je obchodní verze hození zákazníka do řeky s tím, že plavání je intuitivní.
+
+Privacy-first přístup je v této fázi obrovská výhoda. Nepotřebuješ sledovat, kdo otevřel kterou stránku PDF, kolik sekund koukal na cenovou tabulku a jestli si materiál přeposlal kolegyni. Potřebuješ vytvořit jasné, sdílené a důvěryhodné podklady, které zákazník může použít bez pocitu, že se za ním táhne remarketingový ocásek.
+
+### Nejdřív pojmenuj nákupní komisi
+
+Nákupní komise nemusí být formální výbor. V malé firmě to může být majitel, provozní člověk a externí účetní. Ve střední firmě to může být uživatel, šéf týmu, IT správce a člověk odpovědný za smlouvy. Důležité je vědět, kdo má jaký typ obavy.
+
+Typické role:
+
+- **Champion:** produkt chce, protože mu řeší konkrétní bolest.
+- **Ekonomický rozhodovatel:** zajímá ho cena, návratnost a riziko zbytečného výdaje.
+- **Technický validátor:** řeší integrace, bezpečnost, dostupnost, export a provoz.
+- **Právní nebo compliance člověk:** řeší smlouvy, zpracování dat, subprocesory a retenční pravidla.
+- **Budoucí uživatelé:** řeší, jestli jim nástroj přidá práci nebo ji opravdu ubere.
+- **Skeptik:** neblokuje vždy zlomyslně; často chrání tým před dalším nástrojem, který nikdo nebude používat.
+
+Pro každou roli si napiš jednu větu: „Co musí vědět, aby neměla důvod říct ne?“ Tím nevyrábíš manipulaci. Vyrábíš ohleduplnou komunikaci.
+
+### Champion potřebuje munici, ne další demo
+
+Když se zákazník zeptá „máte něco, co můžu poslat interně?“, neznamená to „pošlete mi všechno“. Znamená to: „Pomozte mi vysvětlit hodnotu lidem, kteří u dema nebyli.“
+
+Dobrá champion sada obsahuje:
+
+- jednostránkové shrnutí problému, řešení a výsledku,
+- krátký popis pro koho produkt je a pro koho není,
+- orientační dopad v čase, penězích nebo snížení rizika,
+- bezpečnostní a privacy-first shrnutí,
+- jasný popis implementace a očekávané práce zákazníka,
+- odpovědi na nejčastější námitky,
+- doporučený další krok.
+
+Nepiš materiál jako reklamu. Piš ho jako interní poznámku, kterou by si zákazník mohl dát do Slacku, e-mailu nebo podkladu pro poradu. Věty mají být krátké, konkrétní a bez žargonu.
+
+Příklad špatné věty: „Naše platforma zajišťuje komplexní synergii napříč procesy.“
+
+Příklad užitečné věty: „Tým přestane ručně přepisovat požadavky z e-mailu do tabulky; každý požadavek dostane stav, vlastníka a historii změn.“
+
+### Každá role chce jiný důkaz
+
+Jedna univerzální prezentace obvykle nestačí. Ne proto, že by lidé byli rozmazlení, ale protože každý nese jiné riziko.
+
+Pro ekonomického rozhodovatele připrav:
+
+- model návratnosti s jednoduchými vstupy,
+- porovnání ceny s náklady současného problému,
+- jasné hranice pilotu,
+- co se stane, když se pilot nepovede.
+
+Pro technického validátora připrav:
+
+- architekturu na jedné stránce,
+- seznam integrací a exportů,
+- základní bezpečnostní opatření,
+- dostupnost, zálohy, obnovu a kontakt pro incidenty.
+
+Pro právní nebo compliance kontrolu připrav:
+
+- přehled zpracovávaných dat,
+- seznam subprocesorů,
+- retenční pravidla,
+- postup mazání a exportu,
+- odpovědnou osobu nebo kontakt pro dotazy.
+
+Pro budoucí uživatele připrav:
+
+- krátký scénář běžného dne,
+- co se změní první týden,
+- jak vypadá onboarding,
+- kam posílat otázky,
+- co produkt záměrně nedělá.
+
+Codyho komentář: nejlepší prodejní materiál je často ten, který se nebojí říct „tohle neumíme“ a „tohle není pro vás“. Ano, bolí to ego. Ale šetří to support, churn a sobotní debugování očekávání, které nikdy nemělo vzniknout.
+
+### Privacy-first materiály nesmí být trojský kůň
+
+Klasický sales stack často tlačí na sledovací odkazy, trackované dokumenty, obohacování kontaktů a automatizované sekvence podle mikrochování. U privacy-first značky je to dvojitý problém: právní riziko a hodnotový nesoulad. Nemůžeš na webu slibovat respekt k datům a pak interní podklady zabalit do šmírovacího papíru.
+
+Bezpečnější pravidla:
+
+- posílej běžné odkazy na veřejné nebo chráněné stránky bez osobního trackingu,
+- PDF používej jen tam, kde zákazník potřebuje stabilní dokument,
+- místo sledování otevření se ptej na další krok přímo,
+- nepřidávej lidi do sekvencí bez jasného kontextu a souhlasu,
+- interní poznámky ukládej jako rozhodnutí a potřeby, ne jako psychologický profil,
+- materiály pravidelně aktualizuj, aby zákazník nepřeposílal staré sliby.
+
+Pokud potřebuješ měřit zájem o materiály, drž se agregované úrovně: které stránky pomáhají v rozhodování, na které otázky se zákazníci opakovaně ptají, které námitky blokují další krok. To stačí. Nemusíš vědět, že konkrétní člověk otevřel „security.pdf“ v 22:41 z mobilu. To není insight, to je digitální koukání přes rameno.
+
+### Interní business case má být jednoduchý
+
+Champion často nepotřebuje „deck“. Potřebuje business case, který obstojí na poradě. Ten by měl mít jasnou strukturu:
+
+1. Jaký problém řešíme.
+2. Jak se řeší dnes.
+3. Co nás současný stav stojí.
+4. Co se změní s produktem.
+5. Kolik bude stát pilot nebo první rok.
+6. Jak poznáme, že to funguje.
+7. Jaká jsou rizika a jak je omezíme.
+8. Co je další rozhodnutí.
+
+Do business case nedávej deset metrik. Vyber dvě až tři. Například: čas ruční práce týdně, počet chyb v procesu a rychlost reakce na zákaznický požadavek. Pokud nejde dopad spočítat přesně, napiš rozsah a předpoklady. Lepší poctivý odhad než falešná přesnost.
+
+### Námitky zpracuj jako produktovou dokumentaci
+
+Námitky nejsou otravný hluk. Jsou to chybějící části rozhodovací dokumentace. Když se stejná otázka opakuje třikrát, nepatří jen do CRM poznámky. Patří do FAQ, security stránky, pricing stránky, onboarding materiálu nebo roadmapového rozhodnutí.
+
+Typické námitky a užitečné odpovědi:
+
+- **„Je to drahé.“** Ukaž náklad současného problému, rozsah pilotu a co lze bezpečně nechat mimo první fázi.
+- **„Nemáme kapacitu na implementaci.“** Ukaž první týden krok za krokem a co uděláte za zákazníka.
+- **„Bojíme se vendor lock-inu.“** Ukaž export, offboarding a datový formát.
+- **„Co bezpečnost?“** Ukaž bezpečnostní shrnutí bez marketingové mlhy.
+- **„Co když to tým nebude používat?“** Ukaž aktivační moment, školení a plán kontroly adopce.
+- **„Už máme nástroj.“** Ukaž rozdíl v konkrétním workflow, ne v seznamu funkcí.
+
+Po každém ztraceném dealu se zeptej: chyběl důkaz, chyběl materiál, nebo produkt opravdu neseděl? Každá varianta vede k jiné práci.
+
+### Rozhodovací balíček udržuj jako živý systém
+
+Sales materiály mají nepříjemnou schopnost zestárnout potichu. Logo zákazníka v referenci se změní, subprocesor už není aktuální, screenshot ukazuje staré UI, pricing se posune a bezpečnostní odpověď slibuje něco, co už tým dělá jinak.
+
+Jednou měsíčně projdi:
+
+- zda se nezměnila cena, balíčky nebo pilotní nabídka,
+- zda bezpečnostní a privacy-first informace odpovídají realitě,
+- zda odkazy vedou na aktuální stránky,
+- které otázky z posledních obchodních rozhovorů chybí v materiálech,
+- jestli champion sada pořád vysvětluje produkt lidsky,
+- které materiály nikdo nepoužívá a proč.
+
+Tady se hodí jednoduchý vlastník. Ne „sales“. Konkrétní člověk. Když materiál nemá vlastníka, stane se z něj firemní archeologie.
+
+### Checklist: interní obhajoba bez sales divadla
+
+- Víme, kdo je champion a kdo další ovlivňuje rozhodnutí.
+- Máme jednostránkové shrnutí pro interní přeposlání.
+- Máme business case s problémem, dopadem, cenou, riziky a dalším krokem.
+- Máme bezpečnostní a privacy-first shrnutí bez osobního trackingu dokumentů.
+- Máme technický podklad pro integrace, export, dostupnost a incidenty.
+- Máme odpovědi na nejčastější námitky.
+- Materiály říkají i to, pro koho produkt není.
+- Každý odkaz nebo PDF má vlastníka a datum poslední aktualizace.
+- Po win/loss review převádíme opakované otázky do dokumentace.
+- Nesledujeme jednotlivce napříč materiály; měříme kvalitu rozhodování a opakující se tření.
+
+### Mini šablona: rozhodovací balíček
+
+```markdown
+## Rozhodovací balíček: [zákazník / segment / příležitost]
+
+### Kontext
+- Champion:
+- Další role v rozhodnutí:
+- Hlavní problém:
+- Současné řešení:
+- Dopad současného stavu:
+
+### Navržený výsledek
+- Co se změní:
+- Co se nezmění:
+- První měřitelný úspěch:
+- Doporučený rozsah pilotu:
+
+### Ekonomika
+- Cena pilotu / první fáze:
+- Odhad úspory nebo přínosu:
+- Předpoklady:
+- Riziko, pokud se nic nezmění:
+
+### Technika a provoz
+- Integrace:
+- Export dat:
+- Dostupnost a zálohy:
+- Support a incidentní kontakt:
+
+### Privacy-first a compliance
+- Zpracovávaná data:
+- Subprocesoři:
+- Retence:
+- Mazání a offboarding:
+- Materiály bez osobního trackingu: ano/ne
+
+### Námitky
+- Námitka 1:
+  - Odpověď:
+  - Chybějící důkaz:
+- Námitka 2:
+  - Odpověď:
+  - Chybějící důkaz:
+
+### Další rozhodnutí
+- Kdo rozhoduje:
+- Do kdy:
+- Co potřebuje:
+- Náš další krok:
+```
+
+
 ## Pracovní log
+
+- **2026-09-20:** Doplněna příloha GT o nákupní komisi a interní obhajobě: champion sada, business case, role v rozhodnutí, privacy-first materiály bez trackingu, námitky, checklist a šablona rozhodovacího balíčku.
 - **2026-09-20:** Doplněna příloha GS o win/loss analýze bez vyšetřování zákazníků: definice stavů, minimální data, dobrovolné rozhovory, klasifikace důvodů, práce s výhrami, privacy-first hranice, měsíční rozhodovací review, checklist a win/loss karta.
 - **2026-09-20:** Doplněna příloha GR o post-launch follow-upu bez otravování: třídění signálů, kontextové odpovědi, rychlost reakcí, privacy-first CRM, konec sekvencí, převod otázek do produktu, metriky kvality, checklist a follow-up karta.
 - **2026-09-20:** Doplněna příloha GQ o launch komunikaci bez hype a remarketingového ocasu: typy launchů, launch promise, assety, sekvence vln, privacy-first měření, námitky, review, checklist a launch karta.
