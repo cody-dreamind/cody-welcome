@@ -17875,7 +17875,7 @@ Po každé takové změně doplň řádek, datum a vlastníka. Pokud mapa žije 
 ### Zdroje k datovým mapám a záznamům zpracování
 
 - [European Commission: Application of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/application-gdpr_en) — praktický přehled, kdy GDPR dopadá na firmy, jak se řeší malé organizace, záznamy činností a role správce/zpracovatele.
-- [European Commission: What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en) — shrnutí principů jako účelové omezení, minimalizace, přesnost, omezení uložení a zabezpečení.
+- [European Commission: What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en) — shrnutí principů jako účelové omezení, minimalizace, přesnost, omezení uložení a zabezpečení.
 - [EDPB: Data controller or data processor — Data protection guide for small business](https://www.edpb.europa.eu/sme/learn-the-basics/data-controller-or-data-processor_en) — vysvětlení rolí správce a zpracovatele pro malé firmy.
 - [EDPB: Guidelines 07/2020 on the concepts of controller and processor in the GDPR](https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en) — podrobnější vodítka k rolím, smluvním vztahům a odpovědnostem.
 - [EDPB: Do I need a record of processing?](https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en) — stručné vysvětlení záznamů o činnostech zpracování a jejich praktického smyslu.
@@ -35979,7 +35979,160 @@ Privacy-first úklid:
 ```
 
 
+## Příloha GX: 60–90 dní po go-live bez adopční únavy, expanzního nátlaku a datového mikroskopu
+
+První měsíc po go-live ukáže, jestli se produkt technicky a procesně usadil. Druhý a třetí měsíc ukážou něco důležitějšího: jestli se z něj stal přirozený pracovní návyk. Tady už zákazník neřeší jen „funguje to?“, ale „chceme s tím žít další rok?“. A malý SaaS tým neřeší jen support, ale obnovitelnou hodnotu, rozumnou expanzi a riziko tichého návratu ke starým tabulkám.
+
+60–90denní fáze je nebezpečná tím, že vypadá klidně. Požár z prvního týdne je pryč, Slack už nebzučí každou hodinu a projektový tým se rád přesune k dalšímu zákazníkovi. Jenže právě v téhle chvíli se často rodí budoucí churn: lidé produkt používají méně, data nejsou úplná, interní sponsor ztrácí argumenty a nikdo nechce být první, kdo řekne, že novinka nějak vyšuměla.
+
+> Codyho komentář: První měsíc po go-live je záchranka. Druhý a třetí měsíc jsou fyzioterapie. Méně sirén, víc nudných cviků — a právě ty rozhodují, jestli bude zákazník chodit normálně, nebo kulhat do obnovy smlouvy.
+
+### Přepni z implementace na adopční rytmus
+
+Po 30 dnech už nemá dávat smysl řídit zákazníka jako projekt s nekonečným seznamem úkolů. Potřebuješ adopční rytmus: několik pravidelných signálů, krátké review a jasná rozhodnutí.
+
+Praktický rytmus pro dny 31–90:
+
+- **týden 5:** ověř, které role produkt používají samostatně a které čekají na pomoc,
+- **týden 6:** zkontroluj kvalitu dat, opakované workaroundy a nejčastější support témata,
+- **týden 8:** udělej krátké value review se sponsorem a jedním praktickým uživatelem,
+- **týden 10:** navrhni jednu adopční opravu, jednu dokumentační opravu a jednu možnou expanzi,
+- **týden 12:** rozhodni, jestli zákazník míří ke standardnímu provozu, rozšíření, nebo záchrannému plánu.
+
+Nejde o kalendářové divadlo. Cílem je, aby se tým nedíval na zákazníka až ve chvíli, kdy renewal svítí červeně. Pokud se v 60. dni dozvíš, že lidé pořád kopírují data bokem do Excelu, ještě s tím něco uděláš. Pokud se to dozvíš tři týdny před obnovou, máš jen hezký slide a špatnou náladu.
+
+### Měř zdraví účtu podle pracovních výsledků
+
+Health score pro malý SaaS nemusí být algoritmus s padesáti proměnnými a tajemným skóre 73,2. Často stačí tabulka s pěti signály, které jsou srozumitelné zákazníkovi i týmu.
+
+Použij jednoduchou škálu zelená / žlutá / červená:
+
+- **pracovní výsledek:** zákazník pravidelně dokončuje klíčové workflow,
+- **šířka adopce:** používají produkt role, které ho skutečně potřebují,
+- **kvalita dat:** vstupy jsou kompletní, aktuální a bez ručních oprav mimo systém,
+- **support zátěž:** dotazy klesají, nebo se mění z blockerů na běžné zlepšování,
+- **sponsor signál:** rozhodující člověk umí jednou větou říct, jakou hodnotu produkt přinesl.
+
+Privacy-first verze health score nevyžaduje sledovat každého člověka zvlášť. Většinu signálů získáš agregovaně: počet dokončených workflow, počet týmů s aktivním procesem, kategorie support dotazů, kvalita importů, poznámky z review. Pokud potřebuješ pracovat s konkrétními uživateli, dělej to kvůli podpoře, bezpečnosti nebo jasně domluvenému onboarding cíli — ne kvůli internímu sportu v profilování lidí.
+
+Tady se hodí připomenout evropské minimum: GDPR staví mimo jiné na zásadách minimalizace údajů, přesnosti a omezení uložení; Evropská komise je shrnuje v přehledu principů zpracování a EDPB k tomu vydává vodítka k ochraně údajů už v návrhu a ve výchozím nastavení. Pro malý SaaS to znamená jednoduchou otázku před každou metrikou: opravdu ji potřebujeme pro rozhodnutí, nebo jen krmíme dashboard?
+
+### Najdi tiché návraty ke starému procesu
+
+Největší riziko 60–90denní fáze není hlasitý odpor. Ten je aspoň vidět. Horší je tichý návrat ke starému procesu.
+
+Typické signály:
+
+- tým exportuje data a upravuje je mimo produkt,
+- klíčové rozhodnutí se pořád dělá v původní tabulce,
+- jedna osoba funguje jako lidský most mezi starým a novým systémem,
+- uživatelé čekají na „toho jednoho kolegu“, místo aby práci dokončili sami,
+- zákazník řeší problémy interně a support se o nich dozví až pozdě,
+- sponsor mluví o produktu v minulém čase: „to jsme zavedli“, ne „takhle teď pracujeme“.
+
+Náprava nemusí být velká. Někdy stačí lepší šablona importu, kratší návod, jasnější oprávnění, automatické připomenutí v produktu nebo rozhodnutí odstranit nepoužívaný krok. Důležité je nebrat workaround jako selhání zákazníka. Workaround je zpráva od reality. Realita je protivná, ale má skvělý uptime.
+
+### Expanzi navrhuj jako pokračování hodnoty, ne jako lov peněz
+
+Po dvou až třech měsících se přirozeně objeví otázka: co dál? Tady se láme rozdíl mezi důvěryhodným partnerem a hladovým account managerem s tabulkou kvartálu.
+
+Dobrá expanze vychází z pozorované hodnoty:
+
+- zákazník dokončil základní workflow a potřebuje přidat další tým,
+- ruční workaround jasně ukazuje na placený modul,
+- data jsou stabilní a dávají smysl pro automatizaci,
+- sponsor potřebuje reporting pro další interní skupinu,
+- produkt odstranil konkrétní náklad a zákazník chce stejný efekt jinde.
+
+Špatná expanze vychází z tvého stresu:
+
+- „už dlouho nic nepřikoupili“,
+- „máme novou funkci, musíme ji někomu prodat“,
+- „tarif má limit, tak je zatlačíme“,
+- „vidíme, že se přihlásilo víc lidí, šup s nimi do vyššího plánu“.
+
+Privacy-first expanze se dá formulovat férově: „Vidíme, že tým A pravidelně dokončuje X. Pokud chcete stejný výsledek pro tým B, dává smysl druhá fáze. Nepotřebujeme k tomu sledovat jednotlivce, stačí nám potvrdit rozsah, data a odpovědnosti.“ Tohle je obchod bez slídění. Ano, existuje. Není to jednorožec, jen méně otravný obchodník.
+
+### Udělej 90denní review jako rozhodovací dokument
+
+Na konci třetího měsíce připrav krátké review. Nemá mít třicet slidů. Má odpovědět na otázku, jestli produkt plní slíbenou práci a co má být další konkrétní krok.
+
+Struktura 90denního review:
+
+1. **Slíbený výsledek:** co jsme chtěli změnit v práci zákazníka.
+2. **Dosažené výsledky:** co se opravdu děje, ideálně v agregovaných číslech a příkladech.
+3. **Tření:** kde produkt, data nebo proces pořád překážejí.
+4. **Rizika:** co může ohrozit dlouhodobé používání.
+5. **Rozhodnutí:** standardní provoz, adopční oprava, expanze, nebo záchranný plán.
+6. **Datový úklid:** co už nepotřebujeme držet z implementace, pilotu a supportu.
+
+Datový úklid do review patří schválně. Po implementaci často zůstanou dočasné exporty, testovací soubory, screeny, přístupy, poznámky z workshopů a duplicitní zákaznická data. Když je neuklidíš po 90 dnech, budou v systému strašit ještě při auditu. A audit je v zásadě horor, jen místo bubáka přijde tabulka.
+
+### Checklist 60–90denní adopce
+
+- Máme napsaný pracovní výsledek, který má zákazník opakovaně dokončovat.
+- Sledujeme agregované signály adopce, ne detailní šmírování jednotlivců.
+- Víme, které role produkt používají samostatně a které se zasekávají.
+- Máme seznam workaroundů a rozhodnutí, co s nimi uděláme.
+- Support dotazy třídíme podle příčiny, nejen podle rychlosti odpovědi.
+- Sponsor umí popsat hodnotu produktu vlastními slovy.
+- Expanzi navrhujeme jen tam, kde navazuje na skutečnou hodnotu.
+- Po 90 dnech mažeme nebo archivujeme dočasná implementační data.
+- Review končí rozhodnutím, vlastníkem a datem další kontroly.
+
+### 90denní adopční karta
+
+```markdown
+## 90denní adopční karta: [zákazník / produkt / období]
+
+Slíbený pracovní výsledek:
+-
+
+Agregované signály adopce:
+- Dokončená klíčová workflow:
+- Zapojené týmy / role:
+- Support blokery:
+- Workaroundy mimo produkt:
+
+Health stav:
+- Pracovní výsledek: zelená / žlutá / červená
+- Šířka adopce: zelená / žlutá / červená
+- Kvalita dat: zelená / žlutá / červená
+- Support zátěž: zelená / žlutá / červená
+- Sponsor signál: zelená / žlutá / červená
+
+Tichý návrat ke starému procesu:
+- Kde se děje:
+- Proč se děje:
+- Co opravíme:
+
+Možná expanze:
+- Na jakou hodnotu navazuje:
+- Jaká data / přístupy vyžaduje:
+- Co zákazník získá:
+- Co zákazník nemusí sdílet:
+
+Datový úklid po implementaci:
+- Dočasné exporty ke smazání:
+- Testovací účty / přístupy ke zrušení:
+- Workshop poznámky k archivaci nebo smazání:
+- Retenční rozhodnutí:
+
+Rozhodnutí po 90 dnech:
+- Standardní provoz / adopční oprava / expanze / záchranný plán:
+- Vlastník:
+- Termín další kontroly:
+```
+
+### Zdroje pro tuto přílohu
+
+- Evropská komise: přehled principů GDPR včetně minimalizace údajů, přesnosti a omezení uložení — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- European Data Protection Board: privacy by design and by default — https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en
+
+
 ## Pracovní log
+
+- **2026-09-20:** Doplněna příloha GX o 60–90denní adopci po go-live: adopční rytmus, health score podle pracovních výsledků, tiché návraty ke starému procesu, férová expanze, 90denní review, datový úklid, checklist a adopční karta.
 
 - **2026-09-20:** Doplněna příloha GW o prvních 30 dnech po go-live: definice živého provozu, fáze stabilizace/opakování/rozhodnutí, support jako adopční signál, privacy-first měření workflow, komunikační rytmus, vypínání staré cesty, churn rizika, 30denní review, checklist a go-live karta.
 - **2026-09-20:** Doplněna příloha GV o implementaci po podpisu: rozlišení onboardingu, implementace, customizace, migrace a adopce, implementační karta, řízení scope creepu, auditovatelný datový přenos, první produkční den, adopční signály, review, checklist a šablona implementační karty.
