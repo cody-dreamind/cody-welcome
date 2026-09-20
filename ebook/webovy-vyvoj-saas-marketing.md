@@ -36783,7 +36783,182 @@ Privacy-first kontrola:
 ```
 
 
+## Příloha HC: Customer health score bez věštění z kliků, interní paniky a sledování jednotlivců
+
+Customer health score je užitečný jen tehdy, když pomáhá včas poznat, že zákazník potřebuje pozornost. Jakmile se z něj stane tajemné číslo, které kombinuje poslední login, počet kliků, tón e-mailu, počet otevřených newsletterů a fázi měsíce, je to spíš astrologie v tabulce. A ještě taková ta astrologie, která chce rozpočet na nový tracking nástroj.
+
+Malý SaaS nepotřebuje dokonalý prediktivní model. Potřebuje jednoduchý systém, který oddělí zdravý účet od účtu v riziku, pomůže týmu jednat včas a nebude při tom budovat behaviorální profil každého člověka. Health score má být provozní kompas, ne šmírovací mikroskop.
+
+> Codyho komentář: Když skóre neumíš vysvětlit zákaznickému týmu jednou větou, nebude podle něj nikdo dobře jednat. „Má 73 bodů, protože algoritmus cítí churn“ není strategie. To je horoskop s exportem do CSV.
+
+### Nejdřív definuj zdraví podle výsledku zákazníka
+
+Zdravý zákazník není ten, kdo kliká nejvíc. Zdravý zákazník je ten, kdo opakovaně dokončuje práci, kvůli které produkt koupil, má jasného vlastníka na své straně, rozumí hodnotě a nemá otevřené zásadní blokery.
+
+Začni jednoduchou větou:
+
+„Zákazník je zdravý, když [konkrétní tým] pravidelně dokončí [konkrétní workflow] s [měřitelným nebo pozorovatelným výsledkem] a ví, kdo řeší otázky kolem provozu.“
+
+Příklady:
+
+- účetní tým každý měsíc uzavře fakturační export bez ručních oprav,
+- provozní tým vyřeší interní žádosti v dohodnutém čase a má dohledatelné rozhodnutí,
+- marketingový tým publikuje obsah přes vlastní kanály bez závislosti na reklamním pixelu,
+- zakladatel dostane jednou týdně přehled stavu bez ručního sběru dat.
+
+Tím se skóre posune z „aktivita v aplikaci“ na „pracovní výsledek“. A to je rozdíl mezi produktovým řízením a počítáním digitálních stop ve sněhu.
+
+### Používej malé množství signálů
+
+Health score má být čitelné. Když do něj nacpeš dvacet metrik, nikdo nebude vědět, co změna znamená. Začni pěti až sedmi signály, které opravdu umíš vysvětlit a ovlivnit.
+
+Praktické signály pro B2B SaaS:
+
+- **dokončené workflow:** proběhla práce, kvůli které zákazník platí,
+- **stabilita rytmu:** workflow se opakuje v očekávaném intervalu,
+- **blokery:** otevřené kritické tikety, nevyřešené importy, čekající integrace,
+- **champion:** existuje aktivní člověk, který produktu interně rozumí,
+- **hodnotový důkaz:** zákazník umí pojmenovat přínos nebo úsporu,
+- **fakturační stav:** platba není v dlouhém prodlení a nejsou sporné položky,
+- **změnové riziko:** reorganizace, odchod vlastníka, změna nástroje nebo rozpočtu.
+
+Všimni si, že většina signálů nevyžaduje sledování jednotlivých uživatelů. Některé jsou agregované produktové události, jiné pochází ze supportu, obchodního kontextu nebo zákaznického review. To je zdravější než tajně měřit, kdo kolikrát najel myší nad tlačítko.
+
+### Rozděl skóre na stav, ne na falešnou přesnost
+
+Číslo 0–100 vypadá vědecky, ale často jen zakrývá nejistotu. Malému týmu většinou stačí stavový model:
+
+- **zelená:** zákazník dokončuje hlavní workflow, nemá kritický blocker a ví, jak pokračovat,
+- **žlutá:** hodnota existuje, ale je tam riziko, zpoždění, slabý champion nebo nejasný další krok,
+- **červená:** hlavní workflow neběží, zákazník je frustrovaný, chybí vlastník nebo hrozí odchod,
+- **šedá:** nemáme dost kontextu a musíme ho férově doplnit.
+
+Šedá je důležitá. Bez ní tým začne hádat. A hádání je jen levná verze špatné analytiky. Když nevíš, řekni „nevíme“ a domluv další krok: krátký check-in, kontrolu implementace, odpověď na otevřený tiket nebo business review.
+
+Pokud chceš bodové skóre, drž ho jako pomocný detail, ne jako pravdu. Například: zelená 3, žlutá 2, červená 1, šedá 0 u každého signálu. Výsledkem není přesná diagnóza, ale přehled, kde se má tým podívat.
+
+### Každý stav musí mít akci
+
+Health score bez akce je dekorace dashboardu. A dekorace dashboardu je nejdražší forma tapety, kterou si startup může pořídit.
+
+Ke každému stavu napiš předem reakci:
+
+- **zelená:** udržet rytmus, připravit hodnotové shrnutí, nehrotit zbytečný kontakt,
+- **žlutá:** pojmenovat riziko, přiřadit vlastníka, domluvit jeden konkrétní další krok,
+- **červená:** eskalovat, vyjasnit blocker, nabídnout recovery plán a nastavit datum rozhodnutí,
+- **šedá:** doplnit kontext bez nátlaku, neprodávat a nevyvozovat závěry.
+
+Důležité: reakce nemá být automaticky obchodní. Když je zákazník ve žluté kvůli nejasnému importu, nepotřebuje nabídku vyššího tarifu. Potřebuje opravený importní návod, technický call nebo jasnou odpověď. Upsell na bolavé místo je jako prodávat běžecké boty člověku, kterému právě hoří kuchyň.
+
+### Privacy-first health score minimalizuje interní zvědavost
+
+Zákaznické zdraví lze řídit bez detailního sledování jednotlivců. Drž se těchto pravidel:
+
+- měř stav účtu, týmu nebo workflow, ne osobní profil pracovníka,
+- ukládej jen signály, které vedou k rozhodnutí nebo pomoci,
+- nepoužívej skryté pixelové sledování v dokumentech, e-mailech a PDF,
+- nepřenášej obsah zákaznických dat do scoringu, pokud stačí technický nebo agregovaný signál,
+- nastav retenci poznámek z review, supportu a health změn,
+- citlivé poznámky piš věcně a bez psychologických diagnóz.
+
+Dobrá poznámka zní: „Import se dvakrát zpozdil kvůli chybějící mapě polí, další krok má Petr do pátku.“ Špatná poznámka zní: „Zákazník je negativní, asi rezistentní vůči změně.“ To druhé nepomáhá produktu, supportu ani důvěře. Jen to z interního systému dělá klub domněnek.
+
+### Health review dělej v rytmu, který tým unese
+
+Skóre nemá být ruční festival každý den. Pro malé SaaS obvykle stačí tři úrovně:
+
+- **týdenně:** projít červené a nové žluté účty,
+- **měsíčně:** zkontrolovat všechny aktivní zákazníky a trendy,
+- **čtvrtletně:** upravit signály podle reality produktu a zákaznického lifecycle.
+
+Na týdenním review řeš jen akce. Ne debatu o filozofii skóre. Ta patří do čtvrtletního review. Jinak skončíš tím, že tým 45 minut diskutuje, jestli je „středně žlutá“ víc žlutá než „lehce oranžová“. Produkt mezitím tiše kouká z kouta a čeká, jestli někdo opraví onboarding.
+
+### Kombinuj čísla s lidským kontextem
+
+Agregovaná data jsou užitečná, ale nejsou celá pravda. Zákazník může používat produkt méně, protože dokončil sezónní projekt. Nebo ho používá hodně, protože musí obcházet chybějící funkci. Vysoká aktivita není vždy zdraví. Někdy je to symptom bolesti.
+
+Proto ke každé změně stavu přidej krátký důvod:
+
+- co se změnilo,
+- proč si myslíme, že to znamená riziko nebo příležitost,
+- jaký důkaz máme,
+- co uděláme dál,
+- kdy stav znovu zkontrolujeme.
+
+Tím chráníš tým před dvěma extrémy: slepou vírou v dashboard a čistě pocitovým account managementem. Obojí umí napáchat škody. První elegantně, druhé hlučně.
+
+### Z health score dělej produktovou práci
+
+Když se stejné riziko opakuje u více zákazníků, není to jen customer success úkol. Je to produktový signál.
+
+Příklady převodu do backlogu:
+
+- mnoho žlutých účtů kvůli importu → lepší importní validace a demo data,
+- chybějící champion po onboardingu → šablona interního předání a role ownera,
+- opakované dotazy na oprávnění → přepsat role, dokumentaci a prázdné stavy,
+- červené účty po změně ceny → jasnější pricing komunikace a limitní politika,
+- nízké opakování workflow → upravit aktivaci, připomenutí nebo hodnotové review.
+
+Health score není jen detektor churnu. Je to mapa tření. Pokud ji používáš jen k tomu, aby obchodní tým posílal víc e-mailů, pálíš jeden z nejlepších produktových zdrojů.
+
+### Checklist: customer health score bez šmírování
+
+- Definovali jsme zdraví podle dokončené práce zákazníka.
+- Používáme malý počet signálů, které umíme vysvětlit.
+- Rozlišujeme zelený, žlutý, červený a šedý stav.
+- Každý stav má předem popsanou akci.
+- Sledujeme účet, tým nebo workflow, ne detailní profil jednotlivce.
+- Nepoužíváme skryté pixely v dokumentech, e-mailech ani PDF.
+- Poznámky píšeme věcně, krátce a s jasným dalším krokem.
+- Týdenní review řeší hlavně červené a nové žluté účty.
+- Opakované health signály převádíme do produktu, dokumentace nebo onboardingu.
+- Šedé účty nehodnotíme podle pocitu; doplňujeme kontext férovou otázkou.
+
+### Mini šablona: health karta zákazníka
+
+```markdown
+## Health karta: [zákazník / účet / období]
+
+Stav:
+- Zelená / žlutá / červená / šedá:
+- Datum poslední změny:
+- Vlastník interně:
+
+Definice hodnoty:
+- Hlavní workflow zákazníka:
+- Jak poznáme, že workflow běží:
+- Poslední doložený hodnotový moment:
+
+Signály:
+- Dokončené workflow:
+- Stabilita rytmu:
+- Otevřené blokery:
+- Champion / vlastník u zákazníka:
+- Fakturační nebo smluvní riziko:
+- Změnové riziko:
+
+Privacy-first poznámka:
+- Jaké signály jsou agregované:
+- Jaké poznámky obsahují osobní údaje:
+- Retence poznámek:
+- Co nesledujeme:
+
+Akce:
+- Další konkrétní krok:
+- Kdo ho udělá:
+- Do kdy:
+- Kdy znovu zkontrolujeme stav:
+
+Produktový signál:
+- Je problém jednorázový, nebo opakovaný?
+- Patří do dokumentace, onboardingu, produktu nebo support procesu?
+- Odkaz na issue / rozhodnutí:
+```
+
+
 ## Pracovní log
+
+- **2026-09-20:** Doplněna příloha HC o customer health score bez sledování jednotlivců: definice zdraví podle pracovního výsledku, malé množství signálů, stavový model zelená/žlutá/červená/šedá, akce podle stavu, privacy-first hranice, health review rytmus, převod signálů do produktu, checklist a health karta.
 
 - **2026-09-20:** Doplněna příloha HB o zákaznickém vzdělávání bez obsahového skladiště: mapa pracovních situací, minimální vzdělávací systém, praktické návody jako runbooky, střídmé video, in-app nápověda, support jako zdroj priorit, údržba obsahu, checklist a vzdělávací karta.
 
