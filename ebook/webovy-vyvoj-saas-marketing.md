@@ -34997,7 +34997,187 @@ Review:
 ```
 
 
+## Příloha GS: Win/loss analýza bez vyšetřování zákazníků a ego divadla
+
+Po launchi a follow-upu přijde nepříjemně užitečná část: zjistit, proč někdo koupil, proč někdo nekoupil a proč někdo zůstal viset v tichu. Win/loss analýza není hledání viníka. Není to ani rituál, kde si tým potvrdí, že „lead nebyl kvalitní“ a jde se dál. Je to způsob, jak převést obchodní realitu do lepší nabídky, produktu, webu a podpory.
+
+Malý SaaS tým má výhodu: nemusí stavět korporátní výzkumné oddělení. Stačí pravidelně a poctivě zaznamenat pár rozhodnutí zákazníků, doplnit krátký rozhovor tam, kde to dává smysl, a jednou měsíčně udělat závěry. Nejde o dokonalou statistiku. Jde o praktické učení.
+
+Privacy-first win/loss drží jednoduchou hranici: zkoumáš rozhodnutí, ne člověka. Nehrabeš se v osobním životě kontaktu, neobohacuješ profil o data z pochybných databází a nespojuješ jeho chování napříč internetem. Ptáš se férově, ukládáš málo a závěry anonymizuješ, kdykoliv nepotřebuješ konkrétní identitu.
+
+### Nejdřív definuj, co je win, loss a no decision
+
+Bez definic vznikne chaos. Obchod řekne, že lead je ztracený. Produkt řekne, že zákazník jen čeká na funkci. Marketing řekne, že to byl špatný segment. A všichni mají trochu pravdu, což je nejhorší druh pravdy pro rozhodování.
+
+Praktické kategorie:
+
+- **Win:** zákazník zaplatil, podepsal pilot, aktivoval placený plán nebo udělal jiný předem definovaný závazek.
+- **Loss:** zákazník explicitně odmítl, vybral konkurenci, rozpočet skončil jinde nebo produkt nesplnil kritickou podmínku.
+- **No decision:** zákazník nereaguje, rozhodnutí odložil, interně nemá vlastníka nebo problém není dost bolestivý.
+- **Bad fit:** zákazník chce něco, co produkt strategicky nemá dělat.
+- **Not now:** problém existuje, ale časování, kapacita nebo priorita zatím nesedí.
+
+Rozlišuj hlavně loss a no decision. Když zákazník vybral konkurenci kvůli chybějící integraci, je to jiný signál než ticho po třetím follow-upu. První může změnit roadmapu nebo positioning. Druhé může znamenat slabou naléhavost, špatný timing nebo příliš mlhavou nabídku.
+
+### Sbírej minimum dat, ale sbírej je konzistentně
+
+Win/loss analýza často selže dvěma způsoby: tým nesbírá nic, nebo sbírá všechno. Nic nepomůže. Všechno vytvoří datový močál, kde je víc komentářů než rozhodnutí.
+
+U každého případu stačí uložit:
+
+- segment a typ firmy,
+- problém, který zákazník pojmenoval,
+- stav rozhodnutí: win, loss, no decision, bad fit, not now,
+- hlavní důvod rozhodnutí,
+- kdo nebo co rozhodnutí ovlivnilo,
+- jaký materiál nebo část produktu hrála roli,
+- další konkrétní akce pro produkt, marketing nebo sales,
+- datum posledního férového kontaktu.
+
+Nepotřebuješ ukládat domněnky typu „neměl budget, protože působil nervózně“. To není insight, to je literární útvar. Pokud nevíš, napiš „nevíme“. Tohle jedno slovo je v business review často hodnotnější než deset sebevědomých fabulací.
+
+### Rozhovor má být krátký a dobrovolný
+
+Ne každý zákazník ti dá zpětnou vazbu. A to je v pořádku. Win/loss rozhovor má být pozvánka, ne výslech. Ideálně ho odděl od obchodního tlaku: cílem není znovu otevřít deal, ale pochopit rozhodnutí.
+
+Krátká pozvánka může znít:
+
+> Díky za otevřenost kolem rozhodnutí. Pomohlo by nám lépe pochopit, co hrálo hlavní roli. Měl/a byste 15 minut na krátký feedback call? Nebudeme nic prodávat, jen se zeptáme na pár věcí a závěry použijeme interně pro zlepšení produktu a komunikace.
+
+Otázky drž konkrétní:
+
+- Jaký problém jste původně chtěli vyřešit?
+- Co vám v nabídce dávalo největší smysl?
+- Co vás naopak brzdilo nebo znejistilo?
+- S čím jste nás porovnávali?
+- Kdybychom mohli zlepšit jednu věc, která by to byla?
+- Co by se muselo změnit, aby dávalo smysl se k tématu vrátit?
+
+Nedělej z toho terapii. Nepřesvědčuj zákazníka, že se rozhodl špatně. Když začneš obhajovat produkt, přestaneš poslouchat.
+
+### Důvody odmítnutí rozděl podle toho, kdo je může ovlivnit
+
+Surové důvody jsou matoucí. „Cena“ může znamenat, že produkt nemá dost hodnoty, že pricing stránka špatně vysvětluje balíčky, že zákazník není správný segment, nebo že firma zrovna škrtá rozpočet. Proto každý důvod přelož do oblasti, která s ním může něco udělat.
+
+Rozumné skupiny:
+
+- **Produkt:** chybějící funkce, slabý onboarding, nejasný workflow, integrace, výkon, spolehlivost.
+- **Nabídka:** špatně popsaná hodnota, nejasná cena, slabé garance, málo důkazů, špatný balíček.
+- **Důvěra:** bezpečnost, data, reference, evropský provoz, support, dlouhodobá udržitelnost.
+- **Proces:** pomalá reakce, nejasný další krok, chybějící materiál pro rozhodovatele, procurement.
+- **Segment:** zákazník má jiný use-case, jinou velikost, jiný rozpočet nebo jiné regulatorní potřeby.
+- **Timing:** priorita není teď, čeká se na interní změnu, budgetový cyklus nebo kapacitu týmu.
+
+Tahle klasifikace chrání tým před zkratkou „zlevníme“. Někdy je cena opravdu problém. Často je ale problém v tom, že zákazník nevidí dostatečně jasný dopad, riziko změny je větší než slib, nebo mu chybí materiál pro interní obhajobu.
+
+### Win případy jsou stejně důležité jako loss případy
+
+Týmy rády pitvají prohry a berou výhry jako samozřejmost. Chyba. Win ti říká, kde je produkt nejsilnější, jakým jazykem zákazník popisuje hodnotu a co bylo rozhodující pro důvěru.
+
+U každé výhry se zeptej:
+
+- Proč zákazník jednal právě teď?
+- Jaký konkrétní moment posunul rozhodnutí dopředu?
+- Který argument, důkaz nebo ukázka fungoval nejlépe?
+- Jaké obavy musel překonat?
+- Kdo interně produkt prosadil?
+- Co můžeme zopakovat u podobného segmentu?
+
+Z výher často vznikne nejlepší marketingový jazyk. Ne proto, že zákazníka použiješ jako chodící reklamu bez souhlasu, ale protože pochopíš slova, kterými reálně pojmenovává hodnotu. Pokud chceš citaci nebo case study, požádej o výslovný souhlas a ukaž finální znění před publikací.
+
+### Privacy-first analýza nepoužívá datové dopování
+
+Win/loss se dá dělat čistě. Nepotřebuješ heatmapy s identifikací lidí, nahrávání obrazovek bez jasného souhlasu ani enrichment databáze, které ti k pracovnímu e-mailu přilepí půl internetu.
+
+Stačí kombinace:
+
+- dobrovolná zpětná vazba,
+- poznámky z obchodních a support interakcí,
+- agregované webové a produktové signály,
+- anonymizované důvody rozhodnutí,
+- interní review s jasným vlastníkem změn.
+
+Pokud používáš záznam hovoru, přepis nebo AI shrnutí, řekni to předem a ukládej jen to, co potřebuješ. Citlivé části smaž. Přístup k poznámkám o zákaznických rozhodnutích dej jen lidem, kteří je potřebují pro produkt, podporu nebo obchod. Win/loss není firemní bulvár.
+
+> Codyho komentář: Když potřebuješ k pochopení ztraceného dealu sledovat člověka napříč internetem, možná problém není v datech. Možná neumíš položit slušnou otázku.
+
+### Měsíční review musí skončit rozhodnutím
+
+Win/loss report, který skončí slajdem „key learnings“, je jen drahý deník. Každé review má skončit jedním až třemi rozhodnutími.
+
+Příklady dobrých výstupů:
+
+- upravit hero sekci, protože zákazníci nechápou hlavní use-case,
+- doplnit privacy a hosting FAQ, protože opakovaně brzdí nákup,
+- vytvořit interní materiál pro ekonomického rozhodovatele,
+- změnit kvalifikační otázku v demo formuláři,
+- přesunout konkrétní integraci v roadmapě,
+- přestat aktivně oslovovat segment, který opakovaně končí jako bad fit.
+
+Každé rozhodnutí napiš jako úkol s vlastníkem a datem kontroly. Jinak se z win/loss analýzy stane rituální seance, kde všichni souhlasí, že „musíme lépe komunikovat hodnotu“. Ano, a voda je mokrá. Co konkrétně změníš do pátku?
+
+### Checklist: win/loss analýza bez ego divadla
+
+- Máš jasně definované stavy win, loss, no decision, bad fit a not now?
+- Ukládáš minimum konzistentních dat místo dlouhých dojmologických poznámek?
+- Ptáš se zákazníků dobrovolně a bez dalšího prodejního tlaku?
+- Rozděluješ důvody podle oblasti, která je může ovlivnit?
+- Analyzuješ výhry stejně poctivě jako prohry?
+- Nepoužíváš enrichment, tajné sledování nebo zbytečně osobní profily?
+- Máš pravidelné měsíční review s jedním až třemi rozhodnutími?
+- Převádíš poznatky do webu, produktu, dokumentace, pricingu nebo kvalifikace?
+- Mažeš nebo anonymizuješ poznámky, které už nepotřebuješ?
+
+### Mini šablona: win/loss karta
+
+```markdown
+## Win/loss karta: [zákazník / segment / období]
+
+Základ:
+- Segment:
+- Use-case:
+- Velikost týmu / firmy:
+- Vlastník případu:
+- Stav: win / loss / no decision / bad fit / not now
+
+Rozhodnutí:
+- Co zákazník řešil:
+- Hlavní důvod rozhodnutí:
+- Co rozhodnutí urychlilo:
+- Co rozhodnutí brzdilo:
+- S čím nás porovnával:
+- Kdo byl interní rozhodovatel / zastánce:
+
+Signály:
+- Obchodní poznámky:
+- Support / onboarding poznámky:
+- Agregované produktové nebo webové signály:
+- Co nevíme:
+
+Privacy-first hranice:
+- Jaký byl důvod uložení poznámek:
+- Co ukládáme:
+- Co neukládáme:
+- Kdo má přístup:
+- Kdy poznámky smažeme nebo anonymizujeme:
+
+Dopad:
+- Produktová změna:
+- Marketingová změna:
+- Sales / demo změna:
+- Dokumentace / FAQ změna:
+- Pricing / balíček změna:
+
+Rozhodnutí z review:
+- Vlastník:
+- Termín:
+- Jak poznáme zlepšení:
+- Kontrola za měsíc:
+```
+
+
 ## Pracovní log
+- **2026-09-20:** Doplněna příloha GS o win/loss analýze bez vyšetřování zákazníků: definice stavů, minimální data, dobrovolné rozhovory, klasifikace důvodů, práce s výhrami, privacy-first hranice, měsíční rozhodovací review, checklist a win/loss karta.
 - **2026-09-20:** Doplněna příloha GR o post-launch follow-upu bez otravování: třídění signálů, kontextové odpovědi, rychlost reakcí, privacy-first CRM, konec sekvencí, převod otázek do produktu, metriky kvality, checklist a follow-up karta.
 - **2026-09-20:** Doplněna příloha GQ o launch komunikaci bez hype a remarketingového ocasu: typy launchů, launch promise, assety, sekvence vln, privacy-first měření, námitky, review, checklist a launch karta.
 - **2026-09-20:** Doplněna příloha GP o komunitním růstu bez pronásledování lidí: rozlišení publika, komunity a kanálu, výběr komunit podle problému, důkaz práce, vlastní komunitní prostor, privacy-first hranice, moderace, dopadové měření, checklist a komunitní karta.
