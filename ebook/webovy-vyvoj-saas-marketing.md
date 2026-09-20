@@ -33968,7 +33968,163 @@ Rozhodnutí:
 ```
 
 
+## Příloha GM: Rozpočet na růstové experimenty bez pálení peněz a sledovacího cirkusu
+
+Růstový experiment má být řízený pokus, ne elegantní způsob, jak vyhodit peníze do reklamní pece a pak říct „algoritmus se učil“. Malý SaaS tým nepotřebuje obří growth aparát. Potřebuje jasně oddělit peníze na ověřování, peníze na škálování a peníze, které se nemají utratit vůbec, protože by jen maskovaly slabou nabídku.
+
+Dobře nastavený experiment budget chrání tři věci najednou: cashflow, pozornost týmu a důvěru zákazníků. Když víš, kolik můžeš bezpečně zkusit, kdy pokus zastavit a jaký signál hledáš, marketing přestane být ruleta s lepším fontem.
+
+### Nejdřív pojmenuj typ experimentu
+
+Ne každý růstový pokus má stejný účel. Když je všechny hodíš do jedné tabulky „marketing“, vznikne mlha. Rozděl experimenty minimálně do čtyř typů:
+
+- **Akutní validace nabídky:** ověřuje, jestli cílovka rozumí problému a chce udělat další krok.
+- **Kanálový test:** ověřuje, jestli konkrétní kanál přivádí správné lidi, ne jen návštěvy.
+- **Konverzní test:** zlepšuje stránku, demo flow, pricing nebo onboarding.
+- **Škálovací pokus:** navyšuje už funkční kanál s jasným limitem rizika.
+
+Rozdíl je důležitý. U validace nabídky nečekáš okamžitý zisk. U škálování už bys měl mít důkaz, že kanál umí přinést kvalitní poptávku. Pokud tým škáluje něco, co ještě nevalidoval, neříkej tomu růst. Říkej tomu drahé přání.
+
+### Každý experiment musí mít strop ztráty
+
+Experiment bez finančního stropu není experiment, ale otevřený kohoutek. Před startem napiš maximální částku, maximální čas týmu a okamžik, kdy se pokus zastaví. Strop nemá být jen reklamní spend. Do nákladu patří i příprava landing page, psaní obsahu, obchodní hovory, vyhodnocení a případné změny v produktu.
+
+Praktický zápis může vypadat takto:
+
+- **Finanční limit:** maximálně 12 000 Kč externích nákladů.
+- **Časový limit:** maximálně 12 hodin týmu.
+- **Doba běhu:** 14 dní nebo 30 kvalifikovaných návštěv, podle toho, co nastane dřív.
+- **Stop signál:** méně než 3 relevantní reakce od cílovky.
+- **Pokračovací signál:** alespoň 2 kvalifikované demo poptávky nebo 5 odpovědí s konkrétní bolestí.
+
+Codyho komentář: Nejlepší rozpočtové pravidlo pro malý tým je nudné: „Když nevíme, co se chceme naučit, neutrácíme.“ CFO by zatleskal. Growth hacker by si povzdechl. Produkt by přežil.
+
+### Budget rozděl na učení a škálování
+
+Jedna kapsa na všechno svádí k tomu, že úspěšný test vyžere peníze na další učení, nebo naopak tým pořád testuje a nikdy nepřitlačí na funkční kanál. Rozděl rozpočet třeba takto:
+
+- **Učení:** malé testy nabídky, rozhovory, landing pages, obsahové sondy, niche kampaně.
+- **Optimalizace:** vylepšení konverze, onboarding, demo materiály, prodejní podklady.
+- **Škálování:** kanály, které už mají opakovaný signál kvality.
+- **Rezerva:** neplánované příležitosti, partnerství, rychlé opravy tření.
+
+Pro velmi malý SaaS stačí měsíční budget v jednoduché tabulce. Důležité není mít deset kategorií, ale vědět, kdy peníze slouží učení a kdy už mají přinášet návratnost. Pokud se experiment nepřeklopí do rozhodnutí, byl to jen drahý meeting se statistikou.
+
+### Metriky vybírej podle rozhodnutí, ne podle dashboardu
+
+Experiment nemá měřit všechno. Má odpovědět na jednu otázku. U B2B SaaS je často lepší sledovat méně kvalitních signálů než stovky anonymních událostí.
+
+Příklady dobrých otázek:
+
+- Rozumí cílovka nové formulaci problému?
+- Přichází z kanálu lidé se správnou rolí a situací?
+- Zvyšuje nová stránka počet kvalifikovaných poptávek, ne jen kliků?
+- Zkracuje nový demo materiál čas do rozhodnutí?
+- Pomáhá obsah obchodním hovorům, nebo jen sbírá náhodnou návštěvnost?
+
+Když otázka zní „zvedne to návštěvnost“, pravděpodobně je moc slabá. Návštěvnost je často jen šum v hezkém grafu. U malého týmu je důležitější, jestli experiment posunul zákazníka blíž k pochopení hodnoty, schůzce, pilotu nebo platbě.
+
+### Privacy-first růst nepotřebuje osobní mikroskop
+
+Růstový rozpočet nesmí být záminka pro datový výprodej. U většiny raných experimentů nepotřebuješ profilovat jednotlivce napříč weby, kupovat invazivní publika ani obohacovat leady o osobní údaje z pochybných databází. Potřebuješ jasný zdroj návštěvy, agregovaný výkon kampaně a kvalitativní zpětnou vazbu od lidí, kteří dobrovolně odpověděli.
+
+Privacy-first pravidla pro experimenty:
+
+- měř agregovaně a s minimem identifikátorů,
+- používej UTM parametry střídmě a čitelně,
+- nevkládej do URL osobní údaje ani interní poznámky,
+- odděl marketingová data od supportu a fakturace,
+- ukládej jen data, která opravdu potřebuješ k rozhodnutí,
+- u placených kampaní preferuj přímé landing pages před sledovacími skripty třetích stran,
+- po vyhodnocení smaž pracovní exporty a nech jen experiment kartu.
+
+Tohle není brzda růstu. Je to konkurenční výhoda. Když zákazník vidí, že i marketing děláš střídmě a férově, podporuje to stejný slib jako produkt: kontrola nad daty, méně chaosu, víc důvěry.
+
+### Vyhodnocení dělej jako rozhodnutí, ne jako report
+
+Po skončení experimentu nestačí napsat „výsledky byly smíšené“. To je věta, která by měla mít vlastní parkovací místo v pekle projektového řízení. Každý experiment musí skončit jedním z pěti rozhodnutí:
+
+- **Zastavit:** signál je slabý a další peníze by jen prodlužovaly nejistotu.
+- **Upravit a zopakovat:** hypotéza dává smysl, ale provedení mělo zjevnou chybu.
+- **Přenést do produktu:** experiment ukázal tření, které má vyřešit funkce, onboarding nebo dokumentace.
+- **Předat do sales / contentu:** vznikly otázky, objections nebo formulace, které patří do obchodních materiálů.
+- **Škálovat:** signál je dostatečně kvalitní a tým nastaví nový rozpočet s dalším stropem.
+
+Rozhodnutí zapisuj hned. Za měsíc už si nikdo nebude pamatovat, proč tým vypnul kampaň, která měla „docela dobré kliky“. A když si to nepamatuje tým, začne stejnou chybu opakovat pod novým názvem.
+
+### Chraň tým před experimentálním dluhem
+
+Každý test vytváří stopu: landing page, reklamní varianty, e-mailový text, segment, poznámky z hovorů, dočasné měření. Pokud to po sobě neuklidíš, vznikne experimentální dluh. Za tři měsíce nikdo neví, která stránka je aktuální, jaké tvrzení už neplatí a proč v analytice existuje sedm podobných kampaní.
+
+Po každém pokusu udělej úklid:
+
+- vypni nepoužívané kampaně a formuláře,
+- archivuj nebo smaž dočasné stránky,
+- přesuň použitelné formulace do obsahové knihovny,
+- smaž nepotřebné exporty,
+- aktualizuj rozhodnutí v roadmapě,
+- označ experiment jako uzavřený.
+
+Úklid není administrativní nuda. Je to ochrana před tím, aby budoucí tým nerozhodoval podle historického bordelu. Technický dluh má aspoň výmluvu, že často vznikl rychlostí. Experimentální dluh vzniká většinou tím, že nikdo nechtěl zavřít tabulku.
+
+### Checklist: rozpočet na růstové experimenty
+
+- Má každý experiment jasný typ: validace, kanál, konverze nebo škálování?
+- Je před startem napsaná jedna otázka, na kterou experiment odpovídá?
+- Má experiment finanční, časový a datový limit?
+- Je jasný stop signál i pokračovací signál?
+- Rozlišuje tým peníze na učení, optimalizaci, škálování a rezervu?
+- Měří se kvalita poptávky, ne jen návštěvnost a kliky?
+- Nepoužívá experiment zbytečné trackery, osobní profily nebo datové obohacování?
+- Jsou pracovní exporty po vyhodnocení smazané nebo omezené retenčním pravidlem?
+- Končí experiment rozhodnutím: zastavit, upravit, přenést, předat nebo škálovat?
+- Má experiment vlastníka, datum vyhodnocení a jasný další krok?
+
+### Mini šablona: growth experiment karta
+
+```text
+Growth experiment karta: [název / období]
+
+Typ experimentu:
+- Validace nabídky / kanálový test / konverzní test / škálování:
+- Cílový segment:
+- Vlastník:
+
+Hypotéza:
+- Co si myslíme:
+- Proč si to myslíme:
+- Co by nás přesvědčilo, že se mýlíme:
+
+Rozpočet:
+- Finanční limit:
+- Časový limit týmu:
+- Doba běhu:
+- Rezerva / výjimky:
+
+Signály:
+- Hlavní rozhodovací metrika:
+- Kvalitativní signály:
+- Stop signál:
+- Pokračovací signál:
+
+Privacy-first kontrola:
+- Jaká data sbíráme:
+- Jaká data záměrně nesbíráme:
+- Kde data leží:
+- Kdy mažeme pracovní exporty:
+- Kdo má přístup:
+
+Vyhodnocení:
+- Výsledek:
+- Rozhodnutí: zastavit / upravit / přenést / předat / škálovat
+- Co se mění v produktu, marketingu nebo sales:
+- Další krok:
+- Datum kontroly:
+```
+
+
 ## Pracovní log
+- **2026-09-20:** Doplněna příloha GM o rozpočtu na růstové experimenty: typy experimentů, stropy ztráty, rozdělení budgetu, metriky podle rozhodnutí, privacy-first měření, vyhodnocení, úklid experimentálního dluhu, checklist a growth experiment karta.
 - **2026-09-20:** Doplněn krátký odstavec k příloze GL o mimořádném runway review: jasné spouštěče změn místo pocitového finančního poplachu.
 - **2026-09-20:** Doplněna příloha GL o runway plánu pro malý SaaS: tři scénáře runway, rozhodovací hranice, reverzibilita nákladů, vrstvy příjmů, privacy-first reportování, propojení s produktovou strategií, interní komunikace, checklist a runway karta.
 - **2026-09-20:** Doplněna příloha GK o kontrole nákladů a unit economics pro malý SaaS: rozdělení nákladů podle chování, volba jednotky, hrubá marže, segmentová náročnost, férové limity, privacy-first měření, cost review, checklist a unit economics karta.
