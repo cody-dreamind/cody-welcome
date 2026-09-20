@@ -36130,7 +36130,185 @@ Rozhodnutí po 90 dnech:
 - European Data Protection Board: privacy by design and by default — https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en
 
 
+## Příloha GY: Renewal a prodloužení smlouvy bez vydírání daty, paniky a poslední šance
+
+Renewal není administrativní datum v kalendáři. Je to zkouška, jestli zákazník dokáže obhájit pokračování produktu bez toho, aby sis musel vymýšlet dramatické slevy, falešnou urgentnost nebo „ještě poslední QBR“ tři dny před koncem smlouvy. Dobře vedený renewal začíná měsíce předem: v kvalitě onboardingu, adopci, supportu, fakturaci, dokumentaci hodnoty a férovém zacházení s daty.
+
+Malý SaaS tým často bere renewal jako obchodní úkol. Částečně je to pravda, ale jen částečně. Renewal je společný výsledek produktu, podpory, implementace, bezpečnosti a komunikace. Pokud zákazník po roce neví, co služba přinesla, není to chyba kalendáře. Je to signál, že hodnota nebyla průběžně viditelná.
+
+> Codyho komentář: Renewal se nedělá tak, že zákazníkovi pošleš fakturu a modlíš se, aby byl zrovna na dovolené někdo, kdo umí rušit SaaS. To není retence, to je digitální tichá pošta se špatnou karmou.
+
+### Renewal začíná už při prvním slibu
+
+Zákazník neobnovuje abstraktní software. Obnovuje očekávání, které sis s ním dohodl. Proto musí být od začátku jasné, jaký výsledek má produkt přinést, kdo ho bude hodnotit a podle čeho poznáte, že spolupráce funguje.
+
+Už při podpisu nebo placeném pilotu si ulož do zákaznické karty:
+
+- **původní důvod nákupu:** jaký problém byl dost drahý nebo bolestivý,
+- **očekávaný výsledek:** co se mělo zrychlit, zlevnit, zpřehlednit nebo zjednodušit,
+- **rozhodovací role:** kdo produkt používá, kdo ho platí a kdo ho interně obhajuje,
+- **kritické datum:** kdy se bude hodnotit pokračování, rozpočet nebo další fáze,
+- **důkaz hodnoty:** jaký signál bude stačit k obhajobě dalšího období.
+
+Tohle není CRM ornament. Je to prevence proti situaci, kdy po roce zjišťuješ, že zákazník měřil úspěch úplně jinak než ty. Pokud jsi prodával „méně ruční práce“, nestačí u renewalu ukázat počet přihlášení. Ukaž zkrácený proces, méně chyb, menší support zátěž nebo konkrétní pracovní výsledek.
+
+### Vytvoř renewal timeline bez poslední paniky
+
+Renewal má mít jednoduchou časovou osu. Nemusí být korporátní proces s dvanácti handoffy, ale musí být dost brzy na to, aby šlo něco opravit.
+
+Praktická timeline pro roční smlouvu:
+
+- **120 dní před koncem:** zkontroluj stav účtu, adopci, otevřené závazky a rizika,
+- **90 dní před koncem:** domluv value review se sponsorem a praktickým vlastníkem procesu,
+- **60 dní před koncem:** pošli shrnutí hodnoty, otevřených témat a návrh dalšího období,
+- **45 dní před koncem:** vyřeš námitky, bezpečnostní dotazy, fakturační změny a procurement,
+- **30 dní před koncem:** potvrď variantu prodloužení, termíny, cenu a administrativní kroky,
+- **po prodloužení:** uzavři poučení a nastav nový plán hodnoty pro další období.
+
+U měsíčních tarifů bude timeline kratší, ale princip je stejný: nenech renewal zredukovat na reakci na neuhrazenou fakturu. Pokud zákazník potřebuje interní schválení, bezpečnostní dotazník nebo rozpočtový cyklus, tvůj „rychlý follow-up“ na poslední chvíli mu nepomůže. Jen mu připomene, že jsi o jeho realitě nepřemýšlel.
+
+### Hodnotu shrnuj jako pracovní změnu
+
+Renewal prezentace nemá být přehlídka funkcí, které tým za rok vydal. Zákazníka zajímá, co se změnilo u něj. Přehled hodnoty piš jako stručný pracovní dokument, který champion může přeposlat dál bez toho, aby k němu musel nahrávat komentář a omluvný taneček.
+
+Dobré shrnutí obsahuje:
+
+- **původní stav:** jak zákazník pracoval před nasazením,
+- **současný stav:** které workflow běží v produktu a kdo je používá,
+- **konkrétní výsledky:** čas, kvalita, rychlost, spolehlivost, méně chyb nebo lepší dohledatelnost,
+- **vyřešené překážky:** co se během roku opravilo, zjednodušilo nebo zdokumentovalo,
+- **zbývající rizika:** co ještě brání vyšší hodnotě,
+- **návrh dalšího období:** pokračování, adopční oprava, expanze nebo změna rozsahu.
+
+Když nemáš tvrdá čísla, použij kvalitativní důkazy: citace z review, opakující se support témata, konkrétní proces před a po, screenshot pracovního toku bez osobních dat. Lepší je poctivá malá evidence než nafouknutý graf, který vypadá chytře jen do první otázky CFO.
+
+### Renewal rizika řeš dřív než v obchodním hovoru
+
+Renewal riziko málokdy vznikne v den, kdy zákazník řekne „musíme to promyslet“. Většinou se skládá po malých vrstvách: pomalá adopce, neuzavřený bug, slabý sponsor, změna týmu, nejasná cena, chybějící bezpečnostní podklad, tichý návrat ke starému procesu.
+
+Rozděl rizika do čtyř skupin:
+
+- **hodnota:** zákazník nevidí dostatečný dopad,
+- **adopce:** produkt používá málo rolí nebo jen jeden nadšenec,
+- **provoz:** opakují se chyby, support blokery nebo datové problémy,
+- **nákup:** změnil se rozpočet, procurement, vlastník nebo interní priority.
+
+Ke každému riziku napiš jednu realistickou opravu. Ne „zlepšit adopci“, ale „do 14 dnů udělat 30minutový workshop pro vedoucí směny a odstranit dvě nejčastější překážky ve workflow“. Ne „přesvědčit CFO“, ale „poslat jednostránkový business case se současnou cenou, návrhem dalšího období a seznamem nákladů, které produkt snižuje“.
+
+### Privacy-first renewal nepoužívá data jako rukojmí
+
+Nejhorší renewal taktika je dělat z dat zákazníka páku. „Když neprodloužíte, přijdete o všechno“ není obchodní argument. Je to varovný štítek na vztahu.
+
+Privacy-first renewal má jasná pravidla:
+
+- zákazník ví, jak exportovat svá data ještě před krizí,
+- retenční lhůty jsou popsané lidsky a bez právnického kouře,
+- po ukončení existuje srozumitelný postup pro export, mazání a potvrzení,
+- demo hodnoty nepoužívá osobní profily ani zbytečné detailní logy,
+- obchodní tým nemá širší přístup k datům, než potřebuje pro obhajobu hodnoty,
+- slevy nejsou výměnou za skryté sledování nebo širší souhlasy.
+
+Zákazník, který ví, že může odejít důstojně, paradoxně často zůstává raději. Důvěra roste tam, kde nejsou zamčené dveře. Export a offboarding nejsou nepřítel retence; jsou důkaz, že produkt stojí na hodnotě, ne na technickém rukojmí.
+
+### Cena se má vysvětlit dřív než faktura
+
+Pokud se mění cena, limit, tarif nebo rozsah, renewal není místo pro překvapení. Zákazník má dostat srozumitelné vysvětlení: co se mění, proč, odkdy, jaké má možnosti a co se stane, když nic neudělá.
+
+Férová cenová komunikace:
+
+- oddělí inflaci nákladů, změnu rozsahu a přechod na nový tarif,
+- ukáže současné využití v agregované podobě,
+- nabídne varianty místo jednoho ultimáta,
+- zachová možnost exportu a ukončení bez trestného labyrintu,
+- uvede datum účinnosti a kontaktní cestu pro otázky,
+- neopírá se o manipulativní odpočty typu „zbývá 7 hodin na normální zacházení“.
+
+Když produkt zdražuje, nesnaž se to schovat do malé poznámky ve faktuře. Krátký férový e-mail s kontextem je méně bolestivý než překvapení v účetnictví. Lidé nesnáší zdražení méně než pocit, že z nich někdo udělal statisty ve vlastní objednávce.
+
+### Po renewalu uzavři smyčku
+
+Prodloužení smlouvy není konec práce. Je to začátek dalšího cyklu hodnoty. Hned po renewalu aktualizuj zákaznickou kartu, nastav nové cíle a zapiš, proč zákazník zůstal — nebo proč má pořád pochybnosti.
+
+Po úspěšném prodloužení zapiš:
+
+- hlavní důvod pokračování,
+- rozhodující důkaz hodnoty,
+- otevřená rizika pro další období,
+- domluvené adopční nebo produktové kroky,
+- změny v rolích a kontaktech,
+- termín příštího value review.
+
+Po neúspěšném renewalu zapiš stejně disciplinovaně, ale bez lovu viníků. Důvod ztráty účtu má být vstup pro produkt, onboarding, support, pricing nebo positioning. Ne munice do interního divadla, kde každý dokáže, že za to mohl někdo jiný. To umí i levná kancelářská židle.
+
+### Checklist: renewal bez paniky
+
+- Máme u zákazníka uložený původní důvod nákupu a očekávaný výsledek?
+- Víme, kdo produkt používá, kdo ho platí a kdo ho interně obhajuje?
+- Spustili jsme renewal timeline dost brzy na opravy, ne jen na urgenci?
+- Máme shrnutí hodnoty jako pracovní změnu, ne seznam vydaných funkcí?
+- Jsou rizika rozdělená na hodnotu, adopci, provoz a nákup?
+- Umí zákazník exportovat data a zná postup při ukončení?
+- Jsou cenové změny vysvětlené dřív než ve faktuře?
+- Končí renewal konkrétním plánem další hodnoty?
+
+### Mini šablona: renewal karta
+
+```markdown
+## Renewal karta: [zákazník / období]
+
+Smluvní kontext:
+- Datum konce období:
+- Tarif / rozsah:
+- Vlastník u nás:
+- Sponsor u zákazníka:
+- Praktický vlastník procesu:
+
+Původní důvod nákupu:
+- Problém:
+- Očekávaný výsledek:
+- Důkaz hodnoty:
+
+Aktuální stav:
+- Klíčové workflow v provozu:
+- Adopce podle rolí:
+- Support / provozní témata:
+- Otevřené závazky:
+
+Hodnota:
+- Konkrétní pracovní změna:
+- Kvantitativní signál:
+- Kvalitativní signál:
+- Co se ještě nepovedlo:
+
+Rizika:
+- Hodnota:
+- Adopce:
+- Provoz:
+- Nákup / rozpočet:
+
+Privacy-first kontrola:
+- Potřebná data pro renewal:
+- Data, která nepoužijeme:
+- Export / offboarding postup připomenut:
+- Retenční nebo mazací téma:
+
+Návrh dalšího období:
+- Varianta pokračování:
+- Cena / rozsah:
+- Adopční oprava:
+- Možná expanze:
+- Další value review:
+
+Rozhodnutí:
+- Prodlouženo / neprodlouženo / čeká:
+- Důvod:
+- Další krok:
+- Vlastník:
+```
+
 ## Pracovní log
+
+- **2026-09-20:** Doplněna příloha GY o renewalu a prodloužení smlouvy: vazba na původní slib, renewal timeline, shrnutí hodnoty, práce s riziky, privacy-first export a offboarding, férová cenová komunikace, uzavření smyčky, checklist a renewal karta.
 
 - **2026-09-20:** Doplněna příloha GX o 60–90denní adopci po go-live: adopční rytmus, health score podle pracovních výsledků, tiché návraty ke starému procesu, férová expanze, 90denní review, datový úklid, checklist a adopční karta.
 
