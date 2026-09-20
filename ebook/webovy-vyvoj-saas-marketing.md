@@ -33277,7 +33277,169 @@ Změny:
 - Další zlepšení pro příští běh:
 ```
 
+## Příloha GI: Finance handoff bez ztraceného kontextu mezi produktem, supportem a účetnictvím
+
+Fakturační export je soubor. Finance handoff je dohoda, co se s ním stane, kdo za co odpovídá a jak se billing výjimky vrátí zpátky do produktu místo toho, aby žily navždy v komentářích, chatech a hlavě jedné nepostradatelné osoby. U malého SaaS bývá tahle hranice neviditelná: produkt změní tarif, support slíbí kredit, účetnictví dostane export a někdo po měsíci zjistí, že všichni měli trochu jinou verzi reality. Gratuluji, vznikl startupový účetní jazz.
+
+Dobře udělaný handoff má čtyři cíle:
+
+1. **Finance ví, co se stalo** a nemusí rekonstruovat produktové rozhodnutí z faktury.
+2. **Support ví, co smí slíbit** a co už musí schválit billing owner.
+3. **Produkt vidí opakované tření** a nepovažuje ruční opravy za běžný provoz.
+4. **Zákaznická data zůstávají pod kontrolou**, protože kontext se předává strukturovaně a minimalisticky.
+
+> Codyho komentář: Nejhorší billing proces není ten, který má chybu. Nejhorší je ten, kde se chyba vyřeší ručně, nikdo ji nezapíše, zákazník je spokojený a za měsíc se stejný problém vrátí v dražším kabátě.
+
+### Handoff začíná slovníkem událostí
+
+Nejdřív sjednoť jazyk. Když produkt říká „změna tarifu“, support „upgrade“, finance „úprava předpisu“ a zákazník „proč mám jinou částku“, tým bude ztrácet čas překladem. Vytvoř krátký slovník billing událostí, který používají všechny role.
+
+Praktické minimum:
+
+- **Nové předplatné:** vznik placeného vztahu pro workspace nebo zákaznickou entitu.
+- **Obnova:** pokračování placeného období bez změny podmínek.
+- **Upgrade:** zákazník dostává vyšší hodnotu nebo vyšší limit.
+- **Downgrade:** zákazník přechází na nižší balíček, nižší limit nebo levnější režim.
+- **Kredit:** interní snížení budoucí platby nebo kompenzace bez okamžité refundace.
+- **Refundace:** vrácení peněz za konkrétní platbu nebo její část.
+- **Ruční oprava:** zásah mimo standardní automatiku, který musí mít důvod a vlastníka.
+- **Billing incident:** chyba systému nebo procesu, která může ovlivnit více zákazníků.
+
+Každá událost by měla mít vlastní minimální sadu polí: interní ID, typ události, datum, částku nebo dopad, důvod, schvalovatele, zákaznickou komunikaci a odkaz na související doklad nebo ticket. Nepotřebuješ k ní přikládat kompletní historii účtu, pokud stačí stabilní ID a řízený odkaz do systému.
+
+### Role musí být nudně jasné
+
+Billing handoff se rozbije, když všichni „nějak pomáhají“ a nikdo není vlastníkem. U malého týmu nemusí existovat velké oddělení financí, ale role musí být pojmenované. Jeden člověk může držet více rolí, jen nesmí být nejasné, kterou roli právě vykonává.
+
+Rozumné rozdělení:
+
+- **Produkt:** navrhuje tarify, limity, změny v aplikaci a dopady na zákaznickou zkušenost.
+- **Support / customer success:** sbírá zákaznický kontext, vysvětluje fakturaci a eskaluje výjimky.
+- **Billing owner:** schvaluje nestandardní kredity, refundace, ruční opravy a dopady na přístup.
+- **Finance / účetnictví:** kontroluje doklady, účetní exporty, uzávěrku a otázky k párování.
+- **Engineering:** opravuje systémové chyby, automatizuje opakované ruční zásahy a hlídá auditovatelnost.
+
+U každé role napiš, co smí rozhodnout samostatně a kde musí eskalovat. Například support může slíbit vysvětlení a předběžný čas odpovědi, ale kredit nad předem domluvený limit schvaluje billing owner. Finance může vrátit export k opravě, ale nemá ručně měnit produktová data bez zaznamenané události. Jasné hranice nejsou byrokracie. Jsou airbag.
+
+### Kontext předávej jako kartu, ne jako román
+
+Když support předává billing případ financím nebo produktu, nemá posílat román o celé zákaznické historii. Potřebuje stručnou kartu, která odpoví na otázky: co se stalo, čeho se to týká, jaký je dopad, co už bylo zákazníkovi řečeno a co má další role rozhodnout.
+
+Dobrá handoff karta obsahuje:
+
+- typ billing události,
+- interní ID workspace, zákazníka, faktury nebo platby,
+- stručný popis problému zákaznickým jazykem,
+- očekávání zákazníka,
+- navržené řešení nebo otázku k rozhodnutí,
+- finanční dopad,
+- dopad na přístup k produktu,
+- stav zákaznické komunikace,
+- deadline a vlastníka dalšího kroku.
+
+Privacy-first pravidlo: karta má obsahovat jen tolik osobních údajů, kolik další role opravdu potřebuje. U interního řešení často stačí ID a odkaz do systému. Pokud karta opouští hlavní nástroj, musí mít omezený přístup a jasnou retenci.
+
+### Uzávěrka není detektivní hra
+
+Měsíční uzávěrka by neměla být okamžik, kdy tým poprvé zjistí, kolik výjimek během měsíce vzniklo. Handoff proto rozděl na průběžnou práci a uzávěrkový rituál.
+
+Průběžně zapisuj:
+
+- nové ruční opravy,
+- schválené kredity,
+- refundace čekající na zpracování,
+- faktury s otevřenou reklamací,
+- změny tarifů s dopadem na aktuální období,
+- systémové chyby, které ovlivnily cenu, přístup nebo doklad.
+
+Před uzávěrkou projdi jen otevřené a rizikové položky. Ne celý vesmír. Cílem je odpovědět: co brání čistému exportu, co musí dostat účetnictví jako poznámku, co musí být opraveno v produktu a co je vědomá obchodní výjimka.
+
+### Výjimka bez návratu do produktu je dluh
+
+Každá opakovaná billing výjimka je produktový signál. Pokud support třikrát měsíčně vysvětluje stejný proration problém, není to jen support problém. Je to problém textu, UI, cenového modelu nebo fakturační logiky.
+
+Po uzávěrce udělej krátké review:
+
+- které výjimky se opakovaly,
+- které vyžadovaly ruční zásah,
+- co zákazníci nechápali,
+- co účetnictví muselo doptávat,
+- kde chyběla data nebo byla naopak zbytečná,
+- která změna by příští měsíc ušetřila nejvíc tření.
+
+Výstupem nemá být velká prezentace. Stačí jeden backlog item, jedna úprava runbooku nebo jedno zpřesnění exportu. Malý stabilní rytmus porazí jednorázový „billing transformation workshop“, což je fráze, po které i tiskárna začne potichu plakat.
+
+### Handoff měř podle kvality rozhodnutí
+
+Nesleduj počet předaných karet jako výkon. Vysoký počet může znamenat dobrý proces, ale taky špatný produkt. Lepší metriky jsou:
+
+- počet otevřených billing výjimek před uzávěrkou,
+- průměrný čas od eskalace k rozhodnutí,
+- počet případů vrácených kvůli chybějícímu kontextu,
+- počet ručních oprav opakovaných více než dvakrát,
+- počet zákaznických dotazů ke stejné fakturační situaci,
+- počet exportních nebo účetních dotazů po uzávěrce,
+- počet dočasných souborů nebo výpisů po datu expirace.
+
+Tyto metriky drž agregovaně. Cílem není hodnotit jednotlivce, ale zlepšovat systém. Když čísla ukazují, že handoff selhává, neptej se „kdo to pokazil“, ale „kde proces vyžaduje hrdinu“.
+
+### Checklist: finance handoff bez ztraceného kontextu
+
+- Má tým společný slovník billing událostí?
+- Je jasné, kdo smí schválit kredit, refundaci, ruční opravu a změnu přístupu?
+- Existuje handoff karta pro support, finance, produkt a engineering?
+- Obsahuje karta stabilní ID místo zbytečných osobních údajů všude, kde to stačí?
+- Jsou otevřené výjimky viditelné před měsíční uzávěrkou, ne až po ní?
+- Má každá výjimka vlastníka dalšího kroku a deadline?
+- Vrací se opakované billing problémy do backlogu nebo runbooku?
+- Ví účetnictví, které výjimky jsou vědomé obchodní rozhodnutí a které jsou chyba?
+- Mají dočasné exporty, výpisy a přílohy omezený přístup a datum smazání?
+- Končí měsíční review jednou konkrétní změnou procesu, textu, UI nebo exportu?
+
+### Mini šablona: finance handoff karta
+
+```text
+Finance handoff karta: [zákazník / workspace / období]
+
+Základ:
+- Typ události:
+- Workspace ID:
+- Customer ID:
+- Invoice / payment ID:
+- Ticket / odkaz do systému:
+
+Kontext:
+- Co se stalo:
+- Jak to popsal zákazník:
+- Co už bylo zákazníkovi řečeno:
+- Očekávání zákazníka:
+- Deadline odpovědi:
+
+Dopad:
+- Finanční dopad:
+- Dopad na přístup k produktu:
+- Dotčené období:
+- Dotčený tarif / limit:
+- Je to ruční výjimka, nebo systémová chyba:
+
+Rozhodnutí:
+- Navržené řešení:
+- Kdo schvaluje:
+- Stav schválení:
+- Co má udělat finance:
+- Co má udělat support:
+- Co má udělat produkt / engineering:
+
+Privacy-first kontrola:
+- Obsahuje karta jen nutné osobní údaje:
+- Kde je karta uložená:
+- Kdo má přístup:
+- Datum smazání dočasných příloh:
+- Má případ přejít do backlogu nebo runbooku:
+```
+
 ## Pracovní log
+- **2026-09-20:** Doplněna příloha GI o finance handoffu mezi produktem, supportem a účetnictvím: slovník billing událostí, role, handoff karta, uzávěrkový rytmus, převod výjimek do backlogu, metriky kvality, privacy-first checklist a šablona karty.
 - **2026-09-20:** Doplněna příloha GH o fakturačních exportech pro účetnictví bez datového výprodeje: účely exportů, stabilní ID, verzování schématu, kontrola kvality, privacy-first sdílení, účetní datový slovník, metriky tření, checklist a exportní karta.
 - **2026-09-19:** Doplněna příloha GG o kontrole příjmů a billing reconciliation: zdroj pravdy pro obchodní události, párování stavů, rozdělení nesouladů, evidence výjimek, privacy-first práce s exporty, kontrola negativních scénářů, alerty, checklist a reconciliation karta.
 - **2026-09-19:** Doplněna příloha GF o reklamacích faktur a billing supportu: klasifikace dotazů, první odpověď, rekonstrukce faktury, privacy-first práce s doklady, rozhodovací možnosti, zákaznická komunikace, review, checklist a billing support karta.
