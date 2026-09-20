@@ -34611,7 +34611,203 @@ Rozhodnutí po review:
 ```
 
 
+## Příloha GQ: Launch komunikace bez hype, falešné urgence a remarketingového ocasu
+
+Launch není ohňostroj. Je to koordinovaný moment, ve kterém dáš správným lidem jasný důvod vyzkoušet, koupit, doporučit nebo aspoň pochopit, co se změnilo. Malý SaaS nepotřebuje „velké odhalení“, které dva dny bliká na LinkedInu a pak zmizí v algoritmickém bahně. Potřebuje launch, který vytvoří srozumitelnou stopu: stránku, příběh, důkaz, nabídku, odpovědi na námitky a další kroky.
+
+Nejhorší launch je ten, který se tváří jako světová událost, ale zákazník z něj nepozná tři základní věci: pro koho to je, co přesně se změnilo a proč má jednat právě teď. Druhý nejhorší launch je ten, který honí pozornost přes sledovací pixely, agresivní retargeting a formuláře sbírající data „pro jistotu“. To není růst. To je digitální lep na boty.
+
+Privacy-first launch staví na opaku: přímé odkazy, RSS, vlastní web, transparentní formuláře, dobrovolné odběry, měření agregovaných signálů a férová komunikace. Cílem je, aby zákazník měl kontrolu nad tím, co sdílí, a tým měl dost signálů pro rozhodnutí bez šmírování jednotlivců.
+
+### Nejdřív pojmenuj typ launch momentu
+
+Ne každý launch má stejný účel. Když používáš jeden univerzální checklist na všechno, skončíš buď přepálenou kampaní kvůli malé funkci, nebo slabým oznámením u věci, která si zaslouží obchodní pozornost.
+
+Praktické typy launchů:
+
+- **Produktový launch:** nová služba, nový SaaS, nový samostatný modul.
+- **Feature launch:** funkce, která mění pracovní postup zákazníka.
+- **Segment launch:** stejný produkt, ale nová nabídka pro jiný typ zákazníka.
+- **Pricing launch:** změna tarifů, balíčků, limitů nebo cenové metriky.
+- **Trust launch:** zveřejnění status page, bezpečnostní dokumentace, exportů, privacy centra nebo datové politiky.
+- **Content launch:** větší průvodce, kalkulátor, šablona, benchmark nebo veřejný nástroj.
+- **Partner launch:** společná nabídka s partnerem, integrace nebo doporučený workflow.
+
+Každý typ má jiný primární výsledek. Produktový launch má získat první vážné zájemce. Feature launch má aktivovat existující zákazníky a snížit tření. Trust launch má zlepšit důvěru v nákupu, ne nutně vyvolat okamžitý nával poptávek. Content launch má otevřít rozhovory a zvýšit kvalitu inboundu.
+
+### Launch promise napiš jako rozhodnutí zákazníka
+
+Launch texty často popisují, co tým dodal: „Přidali jsme nový dashboard, role a exporty.“ To je dobré do changelogu. Pro launch je lepší říct, jaké rozhodnutí nebo práci to zákazníkovi zjednodušuje.
+
+Slabé sdělení:
+
+- „Spouštíme nový reporting modul s grafy a exporty.“
+
+Silnější sdělení:
+
+- „Obchodní tým konečně vidí, které poptávky uvízly, bez pátečního ručního reportu v pěti tabulkách.“
+
+Launch promise může mít jednoduchou strukturu:
+
+- **Pro koho:** konkrétní role, segment nebo situace.
+- **Problém:** co dnes bolí, stojí čas nebo vytváří riziko.
+- **Změna:** co je nově možné.
+- **Důkaz:** ukázka, screenshot, scénář, pilotní výsledek nebo zákaznická věta.
+- **Další krok:** demo, pilot, dokumentace, export, šablona, trial nebo rozhovor.
+
+Pokud launch promise nejde napsat bez žargonu, produkt pravděpodobně není připravený na veřejnou komunikaci. To neznamená, že funkce je špatná. Znamená to, že tým ještě nemá jasně pojmenovanou hodnotu.
+
+### Připrav launch assety jako systém, ne jako poslední paniku
+
+Launch není jen jeden post. Jeden post je pozvánka. Systém launch assetů je sada materiálů, které pomáhají různým lidem udělat další krok bez zbytečného vysvětlování.
+
+Minimální sada pro malý SaaS:
+
+- **Launch stránka:** jedna kanonická URL s problémem, nabídkou, ukázkami, FAQ a CTA.
+- **Changelog položka:** stručné technické shrnutí pro existující uživatele.
+- **E-mail pro zákazníky:** co se mění, koho se to týká, co mají udělat.
+- **Krátký veřejný post:** lidské vysvětlení s přímým odkazem, ne jen screenshot a výkřik.
+- **Demo scénář:** 5–7 minut, které ukážou hodnotu v pracovním kontextu.
+- **Interní FAQ:** odpovědi pro obchod, support a zakladatele.
+- **Support makra:** hotové odpovědi na očekávané dotazy.
+- **Měření:** jednoduchý seznam signálů, které po launchi vyhodnotíš.
+
+Větší launch může přidat video, webinář, partnerský pack, případovou studii nebo porovnávací stránku. Ale nejdřív musí fungovat základ: jeden jasný odkaz, jedna jasná nabídka, jedna jasná cesta dál.
+
+### Sekvence je důležitější než hlasitost
+
+Malý tým často udělá chybu, že všechno vypálí v jeden den a pak čeká. Lepší je launch rozdělit do vln, aby měl tým čas reagovat, sbírat otázky a vylepšovat sdělení.
+
+Praktická sekvence:
+
+1. **Interní readiness:** support, obchod, dokumentace, měření, rollback a odpovědi na námitky.
+2. **Tichý launch pro vybrané zákazníky:** ověření, jestli sdělení a onboarding dávají smysl.
+3. **Zákaznické oznámení:** existující uživatelé dostanou konkrétní postup a kontext.
+4. **Veřejná publikace:** launch stránka, changelog, RSS, sociální příspěvky, komunitní sdílení.
+5. **Follow-up podle signálů:** odpovědi na nejčastější otázky, rozšíření FAQ, druhý post s ukázkou.
+6. **Review:** co se lidé snažili pochopit, kde vypadli, co změnit v produktu nebo komunikaci.
+
+Tahle sekvence chrání tým před zbytečnou panikou. Když se objeví chyba, není to rovnou veřejný požár. Když zákazníci nerozumí nabídce, máš čas ji upravit dřív, než začneš utrácet pozornost i peníze.
+
+### Privacy-first launch nepoužívá lidi jako stopovací materiál
+
+Launch měření nemusí znamenat sledování každého pohybu. Většinou stačí kombinace agregovaných dat a kvalitativních signálů.
+
+Měřitelné signály bez datového cirkusu:
+
+- návštěvnost launch stránky podle zdroje na agregované úrovni,
+- kliky na hlavní CTA bez ukládání osobních profilů,
+- počet dobrovolných odpovědí, demo žádostí nebo pilotních poptávek,
+- kvalita otázek ve formuláři nebo e-mailu,
+- počet aktivací u existujících zákazníků,
+- support dotazy podle tématu,
+- konverze z přímých odkazů, RSS a newsletteru,
+- počet lidí, kteří sdíleli odkaz dobrovolně a veřejně,
+- obchodní dopad po týdnu, měsíci a kvartálu.
+
+Co launch nepotřebuje:
+
+- remarketingový pixel kvůli každému návštěvníkovi,
+- skryté obohacování kontaktů,
+- povinný formulář pro stažení základní informace,
+- nahrávání celých session bez silného důvodu,
+- automatické přidání komunitních kontaktů do CRM,
+- „personalizované“ follow-upy založené na tajném sledování.
+
+Jestli chceš sbírat e-mail, řekni proč. Například: „Pošleme ti pozvánku na demo a jeden follow-up s materiály.“ To je fér. „Stáhni si PDF“ a potom tři měsíce honit člověka automatizací, to je marketingový ekvivalent upíra s tabulkou.
+
+### Připrav odpovědi na námitky před zveřejněním
+
+Launch často selže ne proto, že lidé nemají zájem, ale proto, že tým neumí rychle odpovědět na praktické námitky. Námitky nejsou nepřátelé. Jsou mapa toho, co zákazník potřebuje vědět, aby mohl jednat.
+
+Typické námitky:
+
+- Kolik času zabere nasazení?
+- Co se stane s našimi existujícími daty?
+- Kde jsou data uložená a kdo k nim má přístup?
+- Jak funguje export nebo odchod?
+- Jak se mění cena nebo tarif?
+- Co když funkci nechceme používat?
+- Jak to zapadá do našeho současného workflow?
+- Máte příklad pro firmu podobnou nám?
+
+Ke každé námitce napiš krátkou odpověď, odkaz na detail a jasný další krok. Support tým by neměl v den launchu lovit odpovědi v hlavě zakladatele. Zakladatel má lovit maximálně kávu.
+
+### Launch review dělej po vlnách, ne podle nálady
+
+Vyhodnocení launchu má mít tři časové vrstvy. Každá odpovídá na jinou otázku.
+
+- **Po 24 hodinách:** Rozumí lidé sdělení? Není rozbitá cesta k dalšímu kroku? Nevzniká support požár?
+- **Po 7 dnech:** Které kanály přinesly kvalitní signály? Jaké otázky se opakují? Co upravit v dokumentaci, stránce nebo demu?
+- **Po 30 dnech:** Přinesl launch obchodní nebo produktový dopad? Změnila se aktivace, kvalita leadů, retence nebo expanze? Co zopakovat a co už nedělat?
+
+Review nesmí skončit větou „mělo to dobrý reach“. Reach je užitečný jen tehdy, když pomohl správným lidem udělat správný krok. Pokud launch přinesl málo poptávek, ale hodně dobrých otázek, může to být úspěch pro další iteraci. Pokud přinesl tisíce návštěv a nula relevantních rozhovorů, je to spíš drahý ohňostroj.
+
+### Checklist: launch komunikace bez hype a šmírování
+
+- Je jasné, jaký typ launch momentu děláš?
+- Má launch jednu hlavní promise napsanou jazykem zákazníka?
+- Existuje kanonická launch stránka s přímou URL?
+- Máš připravený changelog, zákaznický e-mail, veřejný post a interní FAQ?
+- Ví support a obchod, jak odpovídat na očekávané námitky?
+- Je sekvence rozdělená na interní readiness, tichý launch, zákaznické oznámení a veřejnou vlnu?
+- Měříš agregované signály a dobrovolné akce, ne tajné profily jednotlivců?
+- Je jasně popsáno, proč sbíráš e-mail nebo jiné kontaktní údaje?
+- Existuje plán 24h, 7denního a 30denního review?
+- Víš, co se stane, pokud launch odhalí chybu, nejasnost nebo vyšší support zátěž?
+
+### Mini šablona: launch karta
+
+```markdown
+## Launch karta: [produkt / funkce / obsah]
+
+Základ:
+- Typ launchu:
+- Pro koho je:
+- Hlavní problém:
+- Launch promise:
+- Primární CTA:
+- Kanonická URL:
+
+Assety:
+- Launch stránka:
+- Changelog:
+- Zákaznický e-mail:
+- Veřejný post:
+- Demo scénář:
+- Interní FAQ:
+- Support makra:
+
+Sekvence:
+- Interní readiness datum:
+- Tichý launch komu:
+- Zákaznické oznámení:
+- Veřejná vlna:
+- Follow-up témata:
+
+Privacy-first měření:
+- Agregované metriky:
+- Dobrovolné signály:
+- Co nesbíráme:
+- Retence launch dat:
+- Kdo má přístup:
+
+Námitky:
+- Top 5 očekávaných otázek:
+- Odpovědi / odkazy:
+- Vlastník aktualizace FAQ:
+
+Review:
+- 24h kontrola:
+- 7denní kontrola:
+- 30denní kontrola:
+- Rozhodnutí: zopakovat / upravit / ukončit / rozšířit
+- Další krok:
+```
+
+
 ## Pracovní log
+- **2026-09-20:** Doplněna příloha GQ o launch komunikaci bez hype a remarketingového ocasu: typy launchů, launch promise, assety, sekvence vln, privacy-first měření, námitky, review, checklist a launch karta.
 - **2026-09-20:** Doplněna příloha GP o komunitním růstu bez pronásledování lidí: rozlišení publika, komunity a kanálu, výběr komunit podle problému, důkaz práce, vlastní komunitní prostor, privacy-first hranice, moderace, dopadové měření, checklist a komunitní karta.
 - **2026-09-20:** Doplněna příloha GO o partnerské distribuci bez leadového handlu: mapa partnerů, konkrétní partnerská nabídka, privacy-first hranice sdílení dat, partner pack, měření kvality vztahu, referral pravidla, checklist a partnerská karta.
 - **2026-09-20:** Doplněna příloha GN o kanálovém mixu a atribuci bez sledování lidí napříč internetem: role kanálů, rozhodovací atribuce, kombinace agregovaných a kvalitativních signálů, střídmé UTM, měsíční review, práce s direct zdroji, checklist a kanálová karta.
