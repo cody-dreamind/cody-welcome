@@ -35382,8 +35382,223 @@ Tady se hodí jednoduchý vlastník. Ne „sales“. Konkrétní člověk. Když
 ```
 
 
+## Příloha GU: Proof of concept a placený pilot bez nekonečného zkušebního provozu
+
+Po interní obhajobě často přijde věta, která zní nevinně a umí sežrat půl roku: „Pojďme si to nejdřív vyzkoušet.“ Zkouška je v pořádku. Problém nastává, když nikdo neví, co přesně se zkouší, kdo vyhodnotí úspěch, jaká data se použijí, kdo zaplatí práci a kdy pilot skončí. Tak vzniká produktové bahno: zákazník není zákazník, dodavatel není placený partner a tým dělá zakázkový vývoj převlečený za validaci.
+
+Proof of concept, pilot nebo trial musí být malý kontrakt na učení a rozhodnutí. Ne nekonečné „ještě to ukažte dalšímu oddělení“. Dobře navržený pilot chrání obě strany: zákazník ví, co dostane a podle čeho rozhodne; dodavatel ví, kolik práce slibuje a co už je nový rozsah.
+
+> Codyho komentář: Bez konce je pilot jen stážista, který přerostl do zaměstnance, ale nikdo mu nechce dát pracovní smlouvu.
+
+### Nejdřív pojmenuj typ zkoušky
+
+Slovo „pilot“ lidé používají pro tři různé věci. Když je nerozlišíš, budeš řešit špatná očekávání.
+
+- **Proof of concept:** ověřuje technickou proveditelnost nebo jednu kritickou integraci.
+- **Pilot:** ověřuje hodnotu v reálném pracovním procesu u omezené skupiny uživatelů.
+- **Trial:** nechává zákazníka samostatně vyzkoušet hotový produkt bez velké asistence.
+- **Concierge pilot:** výsledek doručuješ částečně ručně, abys ověřil hodnotu dřív než automatizaci.
+- **Enterprise evaluace:** kombinuje produkt, security review, nákupní proces a interní obhajobu.
+
+Každý typ má jiné měřítko úspěchu. PoC nemá dokazovat adopci celého týmu. Trial nemá suplovat implementační projekt. Concierge pilot nemá předstírat, že už je všechno škálovatelné. Nejhorší je nechat zákazníka myslet si, že dostává plnohodnotný provoz zdarma, zatímco ty si myslíš, že jen testuješ hypotézu.
+
+První otázka proto zní: „Jaké rozhodnutí má tato zkouška umožnit?“ Pokud odpověď není jasná, pilot ještě není připravený.
+
+### Pilot musí mít rozhodovací hypotézu
+
+Slabý pilot: „Vyzkoušíme to a uvidíme.“
+
+Silný pilot: „Během 30 dnů ověříme, zda dispečer dokáže naplánovat denní práci o 30 minut rychleji a bez ručního přepisování dat z e-mailů.“
+
+Dobrá hypotéza má pět částí:
+
+1. **Proces:** kde se změna projeví.
+2. **Uživatel:** kdo bude nástroj reálně používat.
+3. **Výsledek:** co se má zlepšit.
+4. **Měřítko:** podle čeho poznáme rozdíl.
+5. **Rozhodnutí:** co se stane, když pilot vyjde nebo nevyjde.
+
+Příklad pro B2B SaaS:
+
+- Proces: schvalování servisních výjezdů.
+- Uživatelé: dva dispečeři a pět techniků.
+- Výsledek: méně telefonátů a rychlejší předání práce.
+- Měřítko: počet ručních upřesnění, čas plánování, subjektivní hodnocení dispečera.
+- Rozhodnutí: přechod na placený týmový tarif, rozšířený pilot, nebo ukončení.
+
+Měřítko nemusí být laboratorně přesné. Musí být dost dobré pro rozhodnutí. U malého SaaS často stačí kombinace ručně měřeného času, krátkých rozhovorů a jednoduchých agregovaných produktových signálů.
+
+### Rozsah napiš menší, než je příjemné
+
+Pilot má tendenci bobtnat. Jeden zákazník chce import historických dat, druhý vlastní report, třetí speciální roli a čtvrtý „jen malou integraci“. Každá věc sama o sobě vypadá rozumně. Dohromady z toho vznikne zakázka bez rozpočtu.
+
+Praktický rozsah pilotu:
+
+- jedna hlavní pracovní situace,
+- jeden nebo dva týmy,
+- omezený počet uživatelů,
+- jasně vybraná data,
+- předem popsané integrace,
+- jeden primární úspěch,
+- krátké vyhodnocení na konci.
+
+Co do pilotu typicky nepatří:
+
+- kompletní migrace celé historie,
+- speciální reporting pro každého manažera,
+- plošné školení všech oddělení,
+- integrace „pro jistotu“,
+- vývoj funkcí bez rozhodnutí, zda jsou obecně použitelné,
+- dlouhá právní a bezpečnostní práce pro deal, který nemá jasnou hodnotu.
+
+Když zákazník chce širší rozsah, není to špatně. Jen to už není pilot. Je to implementační fáze, rozšířený PoC nebo placený projekt. Pojmenuj to a naceň.
+
+### Placený pilot není drzost
+
+Malé týmy se často bojí říct si o peníze za pilot. Mají pocit, že placení začne až po „skutečném“ nákupu. Jenže pokud pilot vyžaduje onboarding, analýzu procesu, import, integraci, podporu a vyhodnocení, už dodáváš hodnotu.
+
+Placený pilot má několik výhod:
+
+- zákazník bere test vážněji,
+- tým chrání kapacitu,
+- rychleji se ukáže skutečný nákupní záměr,
+- snadněji se domluví konkrétní výstup,
+- méně hrozí, že pilot skončí jako interní zábava bez rozhodnutí.
+
+Cena nemusí být vysoká. Může být pevná částka za 30denní pilot, sleva započitatelná do prvního roku, nebo menší implementační poplatek. Důležité je, aby cena odpovídala práci a oddělila vážné zájemce od lidí, kteří chtějí zdarma konzultaci převlečenou za software.
+
+Výjimka: u samoobslužného produktu může dávat smysl krátký trial zdarma. Ale i tam musí být jasné, co je zahrnuto, kdy trial končí a jaká data se po něm smažou nebo anonymizují.
+
+### Data pro pilot vybírej jako chirurg, ne jako bagr
+
+Privacy-first pilot nezačíná větou „pošlete nám dump databáze“. Začíná otázkou: „Jaká nejmenší data potřebujeme, abychom ověřili hypotézu?“
+
+Dobré pilotní datové pravidlo:
+
+- použij anonymizovaná nebo syntetická data, pokud stačí,
+- použij malý vzorek reálných dat, pokud je nutný kontext,
+- importuj jen pole potřebná pro pilotní workflow,
+- nepřenášej historická data bez jasného účelu,
+- odděl testovací prostředí od produkce,
+- nastav retenci pilotních dat před startem,
+- popiš, kdo má k datům přístup a proč.
+
+Pokud pilot pracuje s osobními údaji, nechceš to řešit až po podpisu. Už v pilotní kartě má být napsáno, kdo je správce, kdo zpracovatel, jaké kategorie dat se zpracují, kde poběží prostředí, jak proběhne mazání a kdo schvaluje přístup supportu.
+
+Tohle není byrokracie pro radost. Je to prevence situace, kdy po třech měsících nikdo neví, kde skončil export zákaznických dat použitý „jen na test“.
+
+### Pilot potřebuje rytmus, ne jen startovní call
+
+Spousta pilotů selže ne proto, že produkt nefunguje, ale protože se o něj nikdo nestará. Po úvodním nadšení přijde běžná práce, uživatelé zapomenou, champion má dovolenou a tým dodavatele čeká, až „se zákazník ozve“.
+
+Jednoduchý rytmus:
+
+- **Start:** hypotéza, rozsah, role, data, termíny, úspěch.
+- **Týden 1:** kontrola přístupu, první aktivační moment, odstranění blokérů.
+- **Týden 2:** první pracovní použití a krátký feedback od uživatelů.
+- **Týden 3:** doplnění dokumentace, vyjasnění námitek, příprava rozhodnutí.
+- **Týden 4:** vyhodnocení, doporučení a další krok.
+
+U delších pilotů přidej mezistav každé dva týdny. Ne report pro report. Krátký přehled: co bylo použito, co brzdí rozhodnutí, co se musí změnit, kdo drží další krok.
+
+### Stop pravidla chrání důvěru
+
+Pilot nemá pokračovat jen proto, že je trapné ho ukončit. Předem napiš, kdy se zastavuje.
+
+Stop pravidla mohou být:
+
+- zákazník nedodal potřebný přístup nebo data do určitého termínu,
+- nikdo z cílových uživatelů produkt reálně nepoužívá,
+- ukáže se zásadní bezpečnostní nebo právní překážka,
+- požadovaný rozsah se změnil natolik, že pilot už neověřuje původní hypotézu,
+- champion odešel a není náhradní vlastník,
+- nákupní proces nemá jasný další krok.
+
+Stop pravidlo není trest. Je to profesionální brzda. Lepší je pilot férově ukončit, než nechat obě strany v mlze a pak se divit, že z toho není smlouva ani poučení.
+
+### Vyhodnocení musí vést k jedné z mála možností
+
+Na konci pilotu nedovol, aby závěr zněl „bylo to zajímavé“. To je obchodní ekvivalent mlhy nad rybníkem.
+
+Možné výsledky:
+
+- **Přejít do placeného provozu:** hypotéza potvrzena, rozsah a cena jasné.
+- **Rozšířit pilot:** jen pokud je jasná nová hypotéza, rozpočet a konec.
+- **Předělat nabídku:** hodnota existuje, ale pro jiný rozsah, segment nebo proces.
+- **Ukončit:** fit není dostatečný nebo překážky převyšují přínos.
+- **Vrátit se později:** zákazník má problém, ale timing nebo interní připravenost nesedí.
+
+Z každého výsledku udělej interní zápis. Co jsme se naučili? Co upravit ve webu, demu, onboardingu, ceníku, security odpovědích nebo produktu? Pilot, který neskončí smlouvou, pořád může ušetřit měsíce špatného vývoje.
+
+### Checklist: pilot bez nekonečného zkušebního provozu
+
+- Víme, jestli jde o PoC, pilot, trial, concierge pilot nebo enterprise evaluaci.
+- Máme jednu rozhodovací hypotézu.
+- Je jasné, kdo bude produkt používat a kdo rozhodne o dalším kroku.
+- Rozsah je omezený na konkrétní proces, tým a data.
+- Je předem domluvená cena nebo důvod, proč je zkouška zdarma.
+- Máme definované pilotní datové minimum a retenci dat.
+- Víme, kdo má přístup k pilotním datům a proč.
+- Máme startovní call, průběžný rytmus a závěrečné vyhodnocení.
+- Máme stop pravidla pro nedodaná data, chybějící adopci nebo změnu rozsahu.
+- Závěr vede k placenému provozu, rozšířenému pilotu, změně nabídky, ukončení nebo návratu později.
+
+### Mini šablona: pilotní karta
+
+```markdown
+## Pilotní karta: [zákazník / segment / období]
+
+Typ zkoušky:
+- PoC / pilot / trial / concierge pilot / enterprise evaluace:
+- Délka:
+- Cena / komerční podmínky:
+
+Rozhodovací hypotéza:
+- Proces:
+- Uživatelé:
+- Očekávaný výsledek:
+- Měřítko úspěchu:
+- Rozhodnutí po pilotu:
+
+Rozsah:
+- Zahrnuté funkce:
+- Zahrnuté týmy:
+- Zahrnuté integrace:
+- Výslovně mimo rozsah:
+
+Data a privacy-first pravidla:
+- Potřebná data:
+- Data, která nepřebíráme:
+- Prostředí:
+- Přístupy:
+- Retence:
+- Mazání / anonymizace po ukončení:
+
+Rytmus:
+- Startovní call:
+- Kontrola týdne 1:
+- Kontrola týdne 2:
+- Kontrola týdne 3:
+- Závěrečné vyhodnocení:
+
+Stop pravidla:
+- Nedodané vstupy:
+- Chybějící používání:
+- Změna rozsahu:
+- Bezpečnostní / právní překážka:
+
+Výsledek:
+- Doporučený další krok:
+- Co jsme se naučili:
+- Dopad na produkt:
+- Dopad na web / sales materiály:
+- Dopad na onboarding:
+```
+
+
 ## Pracovní log
 
+- **2026-09-20:** Doplněna příloha GU o proof of concept a placeném pilotu: typy zkoušek, rozhodovací hypotéza, omezení rozsahu, placený pilot, datové minimum, rytmus, stop pravidla, checklist a pilotní karta.
 - **2026-09-20:** Doplněna příloha GT o nákupní komisi a interní obhajobě: champion sada, business case, role v rozhodnutí, privacy-first materiály bez trackingu, námitky, checklist a šablona rozhodovacího balíčku.
 - **2026-09-20:** Doplněna příloha GS o win/loss analýze bez vyšetřování zákazníků: definice stavů, minimální data, dobrovolné rozhovory, klasifikace důvodů, práce s výhrami, privacy-first hranice, měsíční rozhodovací review, checklist a win/loss karta.
 - **2026-09-20:** Doplněna příloha GR o post-launch follow-upu bez otravování: třídění signálů, kontextové odpovědi, rychlost reakcí, privacy-first CRM, konec sekvencí, převod otázek do produktu, metriky kvality, checklist a follow-up karta.
