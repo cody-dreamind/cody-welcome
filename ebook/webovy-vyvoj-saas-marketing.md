@@ -35790,8 +35790,198 @@ Rozhodnutí po review:
 ```
 
 
+## Příloha GW: Prvních 30 dní po go-live bez adopční mlhy a supportního požáru
+
+Go-live je hezké slovo. Zní jako konfety, screenshot na LinkedIn a pocit, že projekt konečně doběhl do cíle. Jenže u SaaS produktu je go-live spíš první pracovní pondělí po svatbě: slavnost skončila, všichni mají očekávání a teď se ukáže, jestli spolu ten nový proces umí žít i při běžném stresu.
+
+Prvních 30 dní po spuštění rozhoduje o tom, jestli zákazník produkt opravdu přijme, nebo ho bude tolerovat jako další firemní nástroj, který „někdo nahoře koupil“. Malý SaaS tým si nemůže dovolit čekat tři měsíce, až se adopce nějak vyvine. Potřebuje jednoduchý, lidský a privacy-first systém, který zachytí tření brzy, pomůže uživatelům dokončit skutečnou práci a zároveň nevytvoří interní panoptikum nad každým kliknutím.
+
+> Codyho komentář: Go-live bez 30denního plánu je jako vypustit kachnu na dálnici a říkat tomu mobilita. Někam se pohne, ale KPI bych z toho radši nedělal.
+
+### Nejdřív definuj, co znamená živý provoz
+
+Živý provoz neznamená, že se někdo poprvé přihlásil. Neznamená ani to, že účet existuje a faktura odešla. Pro každý produkt musí být jasně napsané, jaký pracovní výsledek má po go-live nastat.
+
+Příklady dobrých definic:
+
+- účetní tým vystavil první fakturační export bez zásahu dodavatele,
+- marketingový tým publikoval první kampaň přes nový workflow,
+- support vyřešil prvních deset tiketů v novém systému,
+- zákazník importoval schválenou sadu dat a ověřil tři klíčové záznamy,
+- manažer získal první týdenní přehled bez ručního skládání tabulek.
+
+Špatná definice je „uživatelé se přihlásili“. Přihlášení je technická událost, ne obchodní hodnota. Pokud tým měří jen loginy, bude optimalizovat připomínky, ne práci. To je rychlá cesta k otravě zákazníka a k dashboardu, který sice svítí zeleně, ale realita mezitím tiše hnije v rohu.
+
+### Rozděl prvních 30 dní na tři fáze
+
+Třicet dní po spuštění se dá řídit jednoduše: stabilizace, opakování, rozhodnutí.
+
+**Dny 1–7: stabilizace.** Cílem není růst používání za každou cenu. Cílem je odstranit blokery, potvrdit první hodnotu a zajistit, že zákazník ví, kam se ozvat. Sleduj první dokončený workflow, kritické chyby, dotazy na nejasné kroky a místa, kde se tým vrací ke starému procesu.
+
+**Dny 8–21: opakování.** Tady se ukáže, jestli první úspěch nebyla jen řízená ukázka. Produkt se musí dostat do běžného rytmu zákazníka. Sleduj opakované použití, počet ručních obcházek, kvalitu vstupních dat, support témata a zapojení rolí, které nebyly na implementačním callu nejhlasitější.
+
+**Dny 22–30: rozhodnutí.** Na konci měsíce musí být jasné, co zůstává v provozu, co se upraví, co přejde do druhé fáze a co se škrtá. Review nemá být oslava ani výslech. Má to být pracovní rozhodnutí: pokračujeme standardně, upravujeme onboarding, přidáváme placenou fázi, nebo řešíme riziko churnu.
+
+### Support v prvním měsíci není běžný support
+
+První měsíc po go-live má jiný charakter než normální provoz. Dotazy nejsou jen jednotlivé tikety. Jsou to signály, že dokumentace, produkt, data nebo očekávání někde nedosedly.
+
+Rozděl dotazy do kategorií:
+
+- **blokery:** bez odpovědi nejde dokončit práci,
+- **nejasnosti:** uživatel tápe, ale existuje cesta,
+- **datové problémy:** import, kvalita dat, duplicity, chybějící pole,
+- **procesní tření:** produkt funguje, ale nezapadá do denního rytmu,
+- **očekávání:** zákazník čekal něco jiného než dodaný rozsah,
+- **nápady:** užitečné návrhy, které nejsou nutné pro první měsíc.
+
+Každý dotaz by měl skončit jedním z výstupů: odpověď zákazníkovi, oprava dokumentace, úprava onboarding šablony, produktový backlog, placená druhá fáze, nebo uzavřené „teď ne“. Bez tohoto třídění se support změní v hlučný kompost. Něco z něj možná vyroste, ale nejdřív to bude smrdět.
+
+### Měř adopci podle práce, ne podle sledování lidí
+
+Privacy-first adopční měření nepotřebuje nahrávat session replaye, profilovat jednotlivce ani sbírat každý pohyb myši. Většinou stačí několik agregovaných signálů, které odpovídají na otázku: pomohl produkt dokončit slíbenou práci?
+
+Užitečné signály:
+
+- počet dokončených klíčových workflow za týden,
+- počet účtů nebo týmů, které workflow dokončily alespoň jednou,
+- podíl procesů dokončených bez zásahu supportu,
+- počet blokujících dotazů podle kategorie,
+- počet ručních workaroundů, které zákazník pořád používá,
+- čas od go-live k prvnímu skutečnému výsledku,
+- kvalita dat po importu nebo prvních transakcích.
+
+Vyhni se metrikám typu „aktivní uživatel otevřel tři obrazovky“. Pokud nedokážeš říct, jaké rozhodnutí podle metriky uděláš, neměř ji. Pokud musíš sledovat osobu, vysvětli proč, minimalizuj rozsah, nastav retenci a dej tomu jasné oprávnění. Jinak měř agregovaně a drž se pracovních výsledků.
+
+### Zákazník potřebuje jasný rytmus, ne náhodné check-iny
+
+Po spuštění nastav jednoduchý komunikační rytmus. Nemusí být těžkopádný, ale musí být předvídatelný.
+
+Praktický rytmus:
+
+- den 1: potvrzení spuštění, kontakty, známá rizika a první cíl,
+- den 3: krátká kontrola blockerů a dat,
+- den 7: review prvního týdne a rozhodnutí o úpravách,
+- den 14: kontrola opakovaného používání a podpory,
+- den 21: příprava 30denního review,
+- den 30: rozhodnutí o dalším režimu.
+
+Každý kontakt má mít důvod. „Jen se ozývám“ není důvod, to je zvuk CRM automatu, který se učí napodobovat člověka. Lepší je napsat: „Vidíme, že export proběhl dvakrát bez chyby, ale importní validace vrátila 18 odmítnutých řádků. Chceme ve čtvrtek projít, jestli jde o kvalitu zdrojových dat, nebo o pravidlo, které máme upravit.“
+
+### Stará cesta musí mít plán vypnutí
+
+Adopce se často tváří jako problém nového produktu, ale ve skutečnosti je problémem starého procesu, který nikdo nevypnul. Lidé budou používat starou tabulku, starý e-mailový alias nebo starý ruční export, dokud je to dovoleno a pohodlné.
+
+Po go-live proto pojmenuj:
+
+- který starý proces má skončit,
+- od kdy už nemá být zdrojem pravdy,
+- kdo smí udělat výjimku,
+- jak se výjimka zapisuje,
+- kde zákazník najde nový postup,
+- co se stane se starými daty a odkazy.
+
+Nejde o tvrdý zákaz ze dne na den. Jde o řízený přechod. Pokud stará cesta zůstane navždy otevřená, nový produkt bude jen další vrstva práce. A další vrstva práce není transformace. Je to palačinka z procesního utrpení.
+
+### Churn riziko řeš včas a konkrétně
+
+První měsíc umí odhalit churn dřív, než zákazník řekne slovo „rušíme“. Signály bývají nenápadné: vlastník u zákazníka přestane odpovídat, klíčový workflow se neopakuje, support řeší pořád stejnou věc, tým se vrací ke starému nástroji, nebo se všechny otázky točí kolem toho, co bylo mimo rozsah.
+
+Dobrá reakce není slevový reflex. Nejdřív zjisti typ problému:
+
+- **hodnota:** produkt neřeší dost důležitou práci,
+- **adopce:** lidé nevědí, jak produkt zapojit do rutiny,
+- **data:** vstupy jsou horší, než se čekalo,
+- **scope:** zákazník potřebuje něco mimo dohodu,
+- **důvěra:** po chybě nebo nejasnosti klesla jistota,
+- **sponzor:** interní vlastník nemá čas nebo politickou podporu.
+
+Teprve potom navrhni krok. Někdy pomůže školení. Někdy oprava dokumentace. Někdy druhá implementační fáze. Někdy férové přiznání, že zákazník koupil moc brzy nebo pro špatný scénář. To bolí, ale méně než půl roku předstírání.
+
+### Třicetidenní review musí skončit rozhodnutím
+
+Na konci prvního měsíce udělej krátké review se zákazníkem i interně. Nepotřebuješ obří prezentaci. Stačí jedna stránka se čtyřmi bloky: co funguje, co drhne, co rozhodujeme, co mažeme nebo uklízíme.
+
+Výstupy review:
+
+- potvrzený produkční režim,
+- seznam oprav v dokumentaci a onboarding materiálech,
+- produktové úkoly oddělené od zákaznických výjimek,
+- rozhodnutí o druhé fázi nebo rozšíření,
+- rizika pro renewal nebo adopci,
+- úklid dočasných přístupů, importních souborů a testovacích dat,
+- interní poučení pro další implementaci.
+
+Privacy-first část review je stejně důležitá jako produktová. Zkontroluj, zda po implementaci nezůstaly zbytečné exporty, ruční přístupy, dočasné účty, testovací kanály nebo interní poznámky s osobními údaji. Úspěšný go-live není hotový, dokud po něm nezůstane uklizená datová stopa.
+
+### Checklist: prvních 30 dní po go-live
+
+- [ ] Máme konkrétní definici živého provozu podle dokončené práce.
+- [ ] První měsíc je rozdělený na stabilizaci, opakování a rozhodnutí.
+- [ ] Support dotazy třídíme podle typu signálu, ne jen podle naléhavosti.
+- [ ] Adopci měříme agregovaně podle workflow a výsledků.
+- [ ] Neměříme jednotlivce bez jasného účelu, minima dat a retence.
+- [ ] Zákazník zná kontakty, rytmus check-inů a první cílový výsledek.
+- [ ] Starý proces má plán vypnutí nebo omezení.
+- [ ] Churn signály řešíme podle příčiny, ne automatickou slevou.
+- [ ] 30denní review končí rozhodnutím o dalším režimu.
+- [ ] Po go-live uklízíme dočasné účty, exporty, testovací data a přístupy.
+
+### Mini šablona: 30denní go-live karta
+
+```markdown
+## 30denní go-live karta: [zákazník / produkt / období]
+
+Definice živého provozu:
+- První pracovní výsledek:
+- Opakovaný workflow:
+- Starý proces, který má skončit:
+- Datum produkčního režimu:
+
+Rytmus:
+- Den 1:
+- Den 3:
+- Den 7:
+- Den 14:
+- Den 21:
+- Den 30:
+
+Adopční signály:
+- Dokončené workflow:
+- Použití bez supportu:
+- Ruční workaroundy:
+- Blokery:
+- Nejasnosti:
+- Datové problémy:
+
+Support témata:
+- Opakované dotazy:
+- Chybějící dokumentace:
+- Produktové tření:
+- Očekávání mimo rozsah:
+- Nápady do druhé fáze:
+
+Privacy-first úklid:
+- Dočasné exporty:
+- Testovací data:
+- Dočasné účty:
+- Interní poznámky:
+- Přístupy:
+- Retence:
+
+30denní rozhodnutí:
+- Produkční režim:
+- Druhá fáze:
+- Produktový backlog:
+- Dokumentace:
+- Riziko churnu:
+- Poučení pro další implementaci:
+```
+
+
 ## Pracovní log
 
+- **2026-09-20:** Doplněna příloha GW o prvních 30 dnech po go-live: definice živého provozu, fáze stabilizace/opakování/rozhodnutí, support jako adopční signál, privacy-first měření workflow, komunikační rytmus, vypínání staré cesty, churn rizika, 30denní review, checklist a go-live karta.
 - **2026-09-20:** Doplněna příloha GV o implementaci po podpisu: rozlišení onboardingu, implementace, customizace, migrace a adopce, implementační karta, řízení scope creepu, auditovatelný datový přenos, první produkční den, adopční signály, review, checklist a šablona implementační karty.
 - **2026-09-20:** Doplněna příloha GU o proof of concept a placeném pilotu: typy zkoušek, rozhodovací hypotéza, omezení rozsahu, placený pilot, datové minimum, rytmus, stop pravidla, checklist a pilotní karta.
 - **2026-09-20:** Doplněna příloha GT o nákupní komisi a interní obhajobě: champion sada, business case, role v rozhodnutí, privacy-first materiály bez trackingu, námitky, checklist a šablona rozhodovacího balíčku.
