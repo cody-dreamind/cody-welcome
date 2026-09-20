@@ -34436,8 +34436,183 @@ Vyhodnocení:
 - Datum další kontroly:
 ```
 
+## Příloha GP: Komunitní růst bez pronásledování lidí a hraní si na guru
+
+Komunita je lákavé slovo. Zní levněji než reklama, lidsky než cold outreach a tepleji než dashboard. Jenže komunita není kanál, který zapneš v pondělí a ve středu z něj padají objednávky. Je to dlouhodobá výměna důvěry, užitečnosti a opakované přítomnosti. Malý SaaS z ní může těžit hodně, pokud ji neplete s masovým sběrem kontaktů nebo s tím, že zakladatel začne každé ráno rozdávat motivační citáty jako automat na müsli.
+
+Komunitní růst funguje nejlépe tam, kde má produkt jasný pracovní kontext: lidé řeší podobné problémy, učí se od sebe, porovnávají postupy a potřebují praktické odpovědi. Cílem není vlastnit jejich pozornost. Cílem je být užitečný přesně ve chvíli, kdy se rozhodují, jak problém řešit.
+
+### Nejdřív rozliš publikum, komunitu a distribuční kanál
+
+Ne všechno, kde jsou lidé, je komunita. Newsletter je publikum. LinkedIn profil je distribuční místo. Uzavřená skupina může být komunita, ale jen pokud v ní lidé mluví i mezi sebou a nečekají jen na další příspěvek zakladatele.
+
+Praktické rozlišení:
+
+- **Publikum:** lidé odebírají obsah a občas reagují. Hodí se pro vzdělávání, důvěru a pravidelnou distribuci.
+- **Komunita:** lidé spolu sdílejí zkušenosti, otázky, postupy a varování. Hodí se pro učení, reputaci a hlubší pochopení trhu.
+- **Kanál:** místo, kam lze jednorázově nebo pravidelně dostat sdělení. Hodí se pro kampaně, launch a testování témat.
+- **Zákaznická skupina:** prostor pro existující zákazníky. Hodí se pro onboarding, feedback, podporu a produktové signály.
+
+Když tyhle věci smícháš, vznikne chaos. Veřejná komunita začne připomínat support frontu, zákaznická skupina marketingový megafon a newsletter diskuzní fórum bez možnosti diskutovat. Každý prostor potřebuje vlastní účel, rytmus a pravidla.
+
+### Vyber komunitu podle problému, ne podle ega
+
+Zakladatelé často vybírají komunity podle velikosti: kde je nejvíc lidí, tam přece bude nejvíc zákazníků. Jenže velká skupina s volným tématem může přinést víc šumu než malá odborná komunita, kde se řeší přesně tvůj problém.
+
+Při výběru komunity se ptej:
+
+- Řeší se tu problém, který produkt opravdu adresuje?
+- Jsou členové v roli, která může rozhodnout nebo ovlivnit nákup?
+- Mluví se tu prakticky, nebo jen obecně a motivačně?
+- Jsou pravidla komunity kompatibilní s tím, co chceš dělat?
+- Je přirozené sdílet návody, šablony a zkušenosti, nebo je prostor silně anti-komerční?
+- Umíš být užitečný i bez odkazu na produkt?
+
+Dobrá komunitní strategie často začíná seznamem 10–20 míst: oborové skupiny, lokální meetupy, profesní fóra, odborné newslettery, komentářové sekce, menší Slacky nebo Discordy, eventy, asociace a produktové ekosystémy. Ke každému místu si napiš, jaký typ hodnoty tam můžeš přinést. Pokud je jediná odpověď „postnout promo“, škrtni to.
+
+### Přispívej důkazem práce
+
+Komunity nemají rády lidi, kteří vpadnou dovnitř s reklamou a čekají potlesk. Mají rády lidi, kteří přinášejí konkrétní pomoc. Nejlepší komunitní příspěvek je malý důkaz práce: ukáže, že problému rozumíš, že jsi něco vyzkoušel a že ostatní mohou použít výsledek bez registrace do tvého funnelu.
+
+Formáty, které fungují bez otravného prodeje:
+
+- krátký checklist k opakovanému problému,
+- rozbor anonymizovaného scénáře,
+- šablona e-mailu, briefu nebo rozhodovací karty,
+- postmortem vlastního omylu a ponaučení,
+- jednoduchý kalkulátor nebo tabulka,
+- odpověď na otázku s postupem krok za krokem,
+- pozvánka na otevřenou konzultaci nad jedním tématem.
+
+Produkt může být přítomný, ale nemá být hlavní pointa každého příspěvku. Dobré pravidlo: čtyři z pěti komunitních interakcí by měly být užitečné i člověku, který si nikdy nic nekoupí. Pátá může jemně ukázat, že existuje produkt, pilot nebo demo.
+
+> Codyho komentář: Komunitní marketing není „přestrojím reklamu za otázku“. Lidé to poznají. Internet má mnoho vad, ale čich na falešné nenápadné promo má pořád překvapivě dobrý.
+
+### Vytvoř vlastní prostor až ve chvíli, kdy máš důvod
+
+Vlastní komunita zní strategicky, ale často je to jen další prázdná místnost, kterou musí někdo vytápět obsahem. Zakládej ji až tehdy, když existuje opakovaná potřeba, kterou nejde dobře obsloužit přes newsletter, dokumentaci, veřejný obsah nebo existující komunity.
+
+Signály, že vlastní prostor může dávat smysl:
+
+- zákazníci se ptají na podobné otázky a odpovědi by pomohly i ostatním,
+- lidé chtějí sdílet postupy mezi sebou,
+- onboarding vyžaduje opakované vysvětlování pracovních scénářů,
+- existuje odborné téma, kde můžeš dlouhodobě moderovat kvalitu,
+- komunita má jasný rytmus, například měsíční office hours nebo týdenní otázku,
+- dokážeš ji provozovat bez invazivních nástrojů a zbytečného sběru dat.
+
+Začni malým formátem: měsíční online setkání, uzavřený e-mailový kruh, komentovaná znalostní báze, veřejný changelog s diskuzí, nebo jednoduchá zákaznická skupina. Není nutné hned stavět „platformu“. Často stačí dobrý rytmus a jasná pravidla.
+
+### Privacy-first komunita má jasné hranice
+
+Komunita vytváří citlivý kontext. Lidé v ní mohou sdílet provozní problémy, interní procesy, zákaznické scénáře nebo obchodní potíže. Proto musí být jasné, co se ukládá, kdo to vidí a jak se obsah používá dál.
+
+Základní pravidla:
+
+- neexportuj členy komunity do CRM bez jejich vědomého kroku,
+- nepoužívej komunitní příspěvky jako prodejní materiál bez souhlasu,
+- anonymizuj scénáře dřív, než je převedeš do článku nebo dokumentace,
+- odděl veřejné odpovědi od zákaznického supportu s osobními údaji,
+- měř aktivitu agregovaně, ne jako skóre jednotlivých lidí,
+- nastav retenční pravidla pro záznamy, chaty, nahrávky a seznam členů,
+- vysvětli pravidla srozumitelně při vstupu do prostoru.
+
+Privacy-first komunita není sterilní. Jen nebere důvěru jako surovinu pro další kampaň. Když někdo sdílí problém, očekává pomoc v kontextu komunity, ne že se za týden objeví jako „insight“ v reklamě.
+
+### Moderace je produktová funkce
+
+Bez moderace se komunita postupně rozpadne do tří stavů: ticho, promo skládka nebo klub nejhlasitějších lidí. Moderace není cenzura každého nádechu. Je to produktová funkce, která chrání účel prostoru.
+
+Dobrá moderace definuje:
+
+- jaké otázky do prostoru patří,
+- co je promo a kdy je povolené,
+- jak se označují doporučení vlastních služeb,
+- jak se řeší konflikty a opakované porušení pravidel,
+- kdo může odpovídat jménem firmy,
+- kdy se konverzace přesouvá do supportu nebo obchodního hovoru.
+
+Pro malý tým je důležité, aby moderace nebyla závislá na náladě zakladatele. Napiš krátký moderační runbook: typ situace, očekávaná reakce, hranice eskalace, šablona odpovědi. Ušetří to energii a zabrání tomu, aby každá nepříjemná diskuze vypadala jako krizový štáb.
+
+### Měř komunitu podle dopadu, ne podle hlučnosti
+
+Počet členů je nejlínější metrika. Dá se snadno nafouknout, ale neříká, jestli komunita pomáhá byznysu nebo zákazníkům. U komunitního růstu měř hlavně kvalitu interakcí a dopad na rozhodnutí.
+
+Užitečné signály:
+
+- kolik konkrétních problémů komunita pomohla pochopit,
+- kolik odpovědí se proměnilo v dokumentaci nebo produktové zlepšení,
+- kolik kvalitních rozhovorů vzniklo přirozeně,
+- kolik poptávek přišlo po dobrovolném kroku člověka,
+- jak často se členové vracejí kvůli praktické hodnotě,
+- zda komunita snižuje opakované support dotazy,
+- zda vznikají referenční příběhy se souhlasem a jasným kontextem.
+
+Měsíční komunitní review by mělo skončit rozhodnutím: pokračovat ve stejném rytmu, upravit formát, zúžit téma, přesunout aktivitu jinam, nebo prostor ukončit. Někdy je nejlepší komunitní rozhodnutí přiznat, že komunita není potřeba — a místo toho posílit dokumentaci, RSS, obsah nebo zákaznické rozhovory.
+
+### Checklist: komunitní růst bez sledovacího divadla
+
+- Má komunita nebo publikum jasný účel a očekávání?
+- Víš, jestli jde o publikum, komunitu, kanál nebo zákaznickou skupinu?
+- Přinášíš opakovaně užitečnost i bez přímého prodeje?
+- Má každý komunitní prostor pravidla pro promo, support a konflikty?
+- Jsou osobní údaje členů oddělené od CRM a obchodních kampaní?
+- Máš souhlas pro použití citací, příběhů a případových studií?
+- Měříš dopad agregovaně a podle rozhodnutí, ne podle sledování jednotlivců?
+- Existuje vlastník moderace, rytmu a měsíčního review?
+- Ví tým, kdy komunitní otázku převést do dokumentace, backlogu nebo supportu?
+- Umíš prostor bez dramatu zrušit, pokud nepřináší hodnotu?
+
+### Mini šablona: komunitní karta
+
+```markdown
+## Komunitní karta: [prostor / období]
+
+Účel:
+- Typ prostoru: publikum / komunita / kanál / zákaznická skupina
+- Pro koho je:
+- Hlavní problém:
+- Proč existuje:
+- Co sem nepatří:
+
+Rytmus:
+- Pravidelný formát:
+- Vlastník:
+- Frekvence:
+- Moderace:
+- Eskalace do supportu:
+
+Hodnota:
+- Typy příspěvků:
+- Nejbližší užitečné aktivum:
+- Jak lidé mohou udělat dobrovolný další krok:
+- Co nesmí být skryté promo:
+
+Privacy-first pravidla:
+- Jaká data se ukládají:
+- Kdo má přístup:
+- Co se neposílá do CRM:
+- Jak anonymizujeme scénáře:
+- Retence záznamů a exportů:
+
+Měření:
+- Kvalitativní signály:
+- Kvantitativní signály:
+- Dopad na produkt:
+- Dopad na support:
+- Dopad na obchod:
+
+Rozhodnutí po review:
+- Pokračovat / upravit / zúžit / přesunout / ukončit:
+- Proč:
+- Další krok:
+- Vlastník:
+- Datum kontroly:
+```
+
 
 ## Pracovní log
+- **2026-09-20:** Doplněna příloha GP o komunitním růstu bez pronásledování lidí: rozlišení publika, komunity a kanálu, výběr komunit podle problému, důkaz práce, vlastní komunitní prostor, privacy-first hranice, moderace, dopadové měření, checklist a komunitní karta.
 - **2026-09-20:** Doplněna příloha GO o partnerské distribuci bez leadového handlu: mapa partnerů, konkrétní partnerská nabídka, privacy-first hranice sdílení dat, partner pack, měření kvality vztahu, referral pravidla, checklist a partnerská karta.
 - **2026-09-20:** Doplněna příloha GN o kanálovém mixu a atribuci bez sledování lidí napříč internetem: role kanálů, rozhodovací atribuce, kombinace agregovaných a kvalitativních signálů, střídmé UTM, měsíční review, práce s direct zdroji, checklist a kanálová karta.
 - **2026-09-20:** Doplněna příloha GM o rozpočtu na růstové experimenty: typy experimentů, stropy ztráty, rozdělení budgetu, metriky podle rozhodnutí, privacy-first měření, vyhodnocení, úklid experimentálního dluhu, checklist a growth experiment karta.
