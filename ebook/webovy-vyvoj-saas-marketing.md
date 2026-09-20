@@ -33438,7 +33438,189 @@ Privacy-first kontrola:
 - Má případ přejít do backlogu nebo runbooku:
 ```
 
+## Příloha GJ: Cashflow výhled pro malý SaaS bez falešné jistoty a invaze do soukromí
+
+Billing ti řekne, co se stalo. Cashflow výhled má říct, co se pravděpodobně stane s penězi v příštích týdnech a měsících. U malého SaaS je to rozdíl mezi klidným rozhodnutím a dramatickým „proč jsme to nevěděli dřív“. Jenže cashflow se často plete s věštěním z dashboardu: vezme se MRR, přidá optimismus, odečte se realita a vznikne tabulka, která vypadá přesně, dokud nepřijde první větší refundace, opožděná faktura nebo roční sleva.
+
+Dobrý cashflow výhled není křišťálová koule. Je to praktická mapa nejbližších finančních rizik, která týmu pomáhá rozhodovat o vývoji, marketingu, hiringu a provozních rezervách. A privacy-first verze se nesnaží vycucat maximum dat ze zákazníků. Pracuje s obchodními událostmi, agregacemi a jasně omezeným kontextem.
+
+> Codyho komentář: Forecast, který má tři desetinná místa, ale ignoruje jednu nezaplacenou enterprise fakturu, je jako luxusní kompas nalepený na bramboru. Hezké, ale neřiď podle toho loď.
+
+### Začni časovým horizontem, ne jedním velkým číslem
+
+Cashflow výhled musí odpovídat na konkrétní otázku. Jinak z něj vznikne nekonečná tabulka, kde každý řádek působí důležitě a nikdo podle ní nic neudělá. Rozděl výhled na tři horizonty:
+
+- **14 dní:** přežijeme bez překvapení nejbližší platby, mzdy, dodavatele a větší refundace?
+- **30 dní:** víme, které příjmy jsou jisté, rizikové nebo závislé na ručním zásahu?
+- **90 dní:** máme dost prostoru na produktová, marketingová a nákladová rozhodnutí?
+
+Krátký horizont řeší likviditu. Střední horizont řeší provozní jistotu. Delší horizont řeší strategii, ale už s větší nejistotou. Nemíchej je do jednoho „cash forecast“ čísla, protože pak tým neví, jestli řeší tento pátek, konec měsíce nebo další kvartál.
+
+Praktický rytmus pro malý SaaS:
+
+- jednou týdně aktualizuj 14denní a 30denní výhled,
+- jednou měsíčně aktualizuj 90denní scénáře,
+- po větší cenové změně, incidentu, ročním kontraktu nebo churnu udělej mimořádný přepočet,
+- staré forecasty nemaž hned; nech si je pro učení, kde ses pravidelně mýlil.
+
+### Příjmy rozděl podle jistoty, ne podle přání
+
+Ne každý očekávaný příjem má stejnou váhu. Zaplacená karta je něco jiného než slíbená objednávka. Faktura po splatnosti je něco jiného než roční kontrakt s automatickou obnovou. Když to smícháš, forecast bude působit lépe, než je realita.
+
+Používej jednoduché kategorie:
+
+- **Jisté příjmy:** už zaplacené platby, potvrzené obnovy s nízkým rizikem, opakované platby bez známého problému.
+- **Pravděpodobné příjmy:** faktury v běžné splatnosti, obnovy bez varovného signálu, piloty se schválenou objednávkou.
+- **Rizikové příjmy:** dunning, sporné faktury, zákazníci po downgrade signálu, platby závislé na ručním schválení.
+- **Spekulativní příjmy:** sales pipeline, ústní zájem, upsell bez podpisu, očekávaný launch nového tarifu.
+
+Do základního cashflow počítej jen jisté a rozumně pravděpodobné příjmy. Rizikové položky drž jako samostatný blok. Spekulativní příjmy patří do scénáře, ne do provozní jistoty. Ano, je to méně sexy. Ale bankovní účet sexy nezajímá.
+
+### Výdaje označ podle možnosti zásahu
+
+Výdaje nejsou jen seznam plateb. Některé jsou pevné, některé variabilní a některé jsou rozhodnutí, které může tým odložit, zmenšit nebo úplně zrušit. Cashflow výhled má ukázat, kde máš páku.
+
+Rozděl výdaje na:
+
+- **Pevné závazky:** mzdy, daně, účetnictví, hosting, kritické licence, splátky a smlouvy.
+- **Provozní variabilní náklady:** e-mail, transakční poplatky, úložiště, výpočetní výkon, support nástroje.
+- **Růstové výdaje:** kampaně, obsahová výroba, eventy, partnerské aktivity, externí marketing.
+- **Investiční rozhodnutí:** nový modul, větší redesign, migrace infrastruktury, jednorázový audit.
+- **Rezerva na výjimky:** refundace, kredity, právní konzultace, incident response, neočekávané servisní práce.
+
+Ke každé významné položce přidej značku: **nelze odložit**, **lze snížit**, **lze posunout**, **lze zrušit**. To je důležitější než přesná kategorie v účetnictví, protože cashflow výhled má pomoct rozhodnout, co dělat, když realita zabolí.
+
+### Pracuj se scénáři, ne s jednou předpovědí
+
+Jedna předpověď svádí k falešné jistotě. Lepší jsou tři scénáře:
+
+- **Base scénář:** běžný provoz bez velkých překvapení.
+- **Conservative scénář:** část rizikových příjmů se opozdí, část upgradeů nevyjde, dunning něco sežere.
+- **Stress scénář:** větší zákazník nezaplatí včas, přijde refundace, kampaň se neposune do příjmů, náklady zůstanou.
+
+Každý scénář by měl odpovědět na tři otázky:
+
+1. Kolik hotovosti máme na konci období?
+2. Kdy se dostaneme pod bezpečnou rezervu?
+3. Jaké rozhodnutí musíme udělat nejpozději dnes, za týden nebo do konce měsíce?
+
+Bez rozhodovací hranice je scénář jen divadlo. Například: pokud conservative scénář ukáže rezervu pod dva měsíce provozu, zastavíme nové růstové výdaje. Pokud stress scénář spadne pod jeden měsíc, řešíme ceny, náklady a platební podmínky okamžitě.
+
+### Privacy-first forecast nepotřebuje profilovat zákazníky
+
+Cashflow výhled často sklouzne k tomu, že tým začne přilepovat k finančním položkám osobní poznámky: kdo je „problémový“, kdo „asi odejde“, kdo „má divné chování“. To je špatně provozně i lidsky. Forecast má pracovat s obchodními stavy, ne s osobními dojmy.
+
+Stačí ti:
+
+- interní zákaznické nebo workspace ID,
+- typ smlouvy nebo tarifu,
+- stav platby,
+- datum splatnosti nebo obnovy,
+- riziková kategorie,
+- finanční dopad,
+- vlastník dalšího kroku,
+- odkaz do systému s řízeným přístupem.
+
+Do forecastu nepatří celé e-maily, poznámky ze sales callů, osobní charakteristiky kontaktů ani kopie dokladů, pokud nejsou nutné. Pokud finanční tým potřebuje detail, má ho dohledat v systému, kde jsou přístupy, logy a retence. Forecast je pracovní mapa, ne datový trezor.
+
+### Propoj forecast s produktovým rozhodováním
+
+Cashflow není jen finance. Ovlivňuje produkt i marketing. Když víš, že příští dva měsíce jsou těsné, možná nemá smysl začínat velký experiment s dlouhou návratností. Když máš stabilní rezervu, můžeš si dovolit investovat do lepšího onboardingu, bezpečnosti nebo dokumentace.
+
+Typické produktové vazby:
+
+- vysoký churn v forecastu znamená ověřit aktivaci, hodnotu a onboarding,
+- opakované dunning riziko znamená zlepšit billing UX a platební komunikaci,
+- odložené upgrade příjmy znamenají zkontrolovat, jestli zákazník rozumí vyššímu tarifu,
+- vysoké provozní náklady na zákazníka znamenají řešit limity, architekturu nebo pricing metriku,
+- velká závislost na jednom zákazníkovi znamená přehodnotit roadmapu a obchodní riziko.
+
+Cílem není, aby produktový tým četl účetní výkazy. Cílem je, aby viděl, kde peněžní realita ukazuje produktové tření.
+
+### Měř přesnost forecastu bez lovu viníků
+
+Každý forecast bude špatně. Otázka je, jestli se z něj učíš. Jednou měsíčně porovnej odhad s realitou a zapiš rozdíly podle příčiny:
+
+- opožděné platby,
+- nečekané refundace nebo kredity,
+- přeceněný upsell,
+- podceněné variabilní náklady,
+- fakturační chyba,
+- změna platebních podmínek,
+- chybějící informace ze supportu nebo sales.
+
+Nepoužívej review jako popravu autora tabulky. Použij ho k vylepšení modelu. Pokud se pravidelně mýlíš v dunningu, uprav pravděpodobnost příjmů. Pokud podceňuješ cloud náklady, přidej technický limit. Pokud chybí informace ze supportu, zlepši handoff kartu. Forecast má být každým měsícem méně naivní.
+
+### Checklist: cashflow výhled pro malý SaaS
+
+- Má forecast oddělený 14denní, 30denní a 90denní horizont?
+- Jsou příjmy rozdělené na jisté, pravděpodobné, rizikové a spekulativní?
+- Nejsou spekulativní sales příjmy započítané do provozní jistoty?
+- Jsou výdaje označené podle možnosti zásahu: nelze odložit, lze snížit, posunout nebo zrušit?
+- Existuje base, conservative a stress scénář?
+- Má každý scénář rozhodovací hranici a konkrétní další krok?
+- Pracuje forecast primárně s interními ID a agregacemi místo osobních poznámek?
+- Jsou detailní doklady a komunikace uložené jen v systémech s řízeným přístupem?
+- Vidí produktový tým opakované finanční signály, které ukazují na produktové tření?
+- Porovnává tým každý měsíc forecast s realitou a upravuje pravidla?
+
+### Mini šablona: cashflow forecast karta
+
+```text
+Cashflow forecast karta: [období / produkt]
+
+Horizont:
+- 14 dní:
+- 30 dní:
+- 90 dní:
+- Datum poslední aktualizace:
+- Vlastník forecastu:
+
+Příjmy:
+- Jisté příjmy:
+- Pravděpodobné příjmy:
+- Rizikové příjmy:
+- Spekulativní příjmy mimo základní scénář:
+- Největší otevřená rizika:
+
+Výdaje:
+- Pevné závazky:
+- Variabilní provozní náklady:
+- Růstové výdaje:
+- Investiční rozhodnutí:
+- Rezerva na výjimky:
+
+Scénáře:
+- Base scénář:
+- Conservative scénář:
+- Stress scénář:
+- Bezpečná rezerva:
+- Bod, kdy musíme rozhodnout:
+
+Produktové signály:
+- Churn / downgrade signály:
+- Dunning / opožděné platby:
+- Upsell / obnovy:
+- Náklady na provoz zákazníků:
+- Doporučená produktová akce:
+
+Privacy-first kontrola:
+- Použitá osobní data:
+- Proč jsou nutná:
+- Interní ID místo osobních údajů:
+- Kde jsou uložené detaily:
+- Retence forecastu a exportů:
+
+Review:
+- Co se proti minulému forecastu změnilo:
+- Kde jsme se minule mýlili:
+- Jak upravíme pravidla:
+- Kdo udělá další krok:
+```
+
+
 ## Pracovní log
+- **2026-09-20:** Doplněna příloha GJ o cashflow výhledu pro malý SaaS: horizonty 14/30/90 dní, třídění příjmů podle jistoty, zásahovost výdajů, scénáře, privacy-first práci s forecastem, produktové signály, review přesnosti, checklist a forecast karta.
 - **2026-09-20:** Doplněna příloha GI o finance handoffu mezi produktem, supportem a účetnictvím: slovník billing událostí, role, handoff karta, uzávěrkový rytmus, převod výjimek do backlogu, metriky kvality, privacy-first checklist a šablona karty.
 - **2026-09-20:** Doplněna příloha GH o fakturačních exportech pro účetnictví bez datového výprodeje: účely exportů, stabilní ID, verzování schématu, kontrola kvality, privacy-first sdílení, účetní datový slovník, metriky tření, checklist a exportní karta.
 - **2026-09-19:** Doplněna příloha GG o kontrole příjmů a billing reconciliation: zdroj pravdy pro obchodní události, párování stavů, rozdělení nesouladů, evidence výjimek, privacy-first práce s exporty, kontrola negativních scénářů, alerty, checklist a reconciliation karta.
