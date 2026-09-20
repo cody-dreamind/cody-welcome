@@ -33800,7 +33800,172 @@ Rozhodnutí:
 ```
 
 
+## Příloha GL: Runway plán pro malý SaaS bez panického škrtání a růstových pohádek
+
+Cashflow výhled říká, co se pravděpodobně stane s penězi v příštích týdnech. Runway plán přidává nepříjemnější otázku: kolik času má firma na rozumná rozhodnutí, než začne rozhodovat strach. U malého SaaS není runway jen investorská metrika. Je to provozní brzda, plán odolnosti a ochrana týmu před tím, aby každá faktura z cloudu působila jako malý hororový trailer.
+
+Dobře vedený runway plán neslouží k tomu, aby tým každý den koukal na jedno číslo a dramaticky vzdychal. Má pomoct včas rozhodnout, jestli zrychlit prodej, zvednout ceny, omezit náklady, změnit scope produktu, odložit hiring, nebo otevřeně komunikovat s partnery. Privacy-first verze navíc nepotřebuje detailně pitvat jednotlivé zákazníky. Stačí pracovat s agregovanými scénáři, segmenty, závazky a rozhodovacími hranicemi.
+
+> Codyho komentář: Runway není věštecká koule. Je to palubní deska. Když svítí kontrolka paliva, nevedeš filozofickou debatu o budoucnosti mobility. Podíváš se na mapu, zvolíš benzínku a přestaneš zbytečně šlapat na plyn.
+
+### Začni třemi verzemi runway, ne jedním číslem
+
+Jedno číslo vypadá elegantně, ale snadno vytvoří falešný klid. „Máme runway osm měsíců“ může znamenat úplně jinou realitu podle toho, jestli počítáš s obnovami smluv, novým prodejem, růstem infrastruktury, plánovaným náborem nebo splatností větších faktur. Proto používej tři vrstvy:
+
+- **Konzervativní runway:** počítá jen s hotovostí, jistými příjmy a závazky, které opravdu musí odejít.
+- **Realistická runway:** přidává pravděpodobné obnovy, běžný nový prodej a očekávaný churn.
+- **Růstová runway:** zahrnuje plánované investice, hiring, kampaně, nové funkce a optimističtější obchodní scénář.
+
+Konzervativní scénář chrání přežití. Realistický scénář řídí běžný provoz. Růstový scénář ukazuje, co si můžeš dovolit, pokud se plán daří. Když tým používá jen růstovou verzi, je to méně plán a více firemní fanfikce.
+
+### Rozhodovací hranice nastav předem
+
+Runway plán má hodnotu jen tehdy, když z něj plynou akce. Nestačí říct „budeme to sledovat“. Potřebuješ hranice, které spustí konkrétní rozhodnutí. Jinak se špatné zprávy budou každý týden jen přesouvat v kalendáři jako neoblíbená schůzka.
+
+Příklad praktických hranic:
+
+- **12+ měsíců konzervativní runway:** můžeš dělat běžné produktové investice a testovat růstové kanály.
+- **9–12 měsíců:** každá větší investice musí mít jasný očekávaný dopad a vlastníka.
+- **6–9 měsíců:** stop pro nové dlouhodobé závazky bez schválení; prioritou je revenue, retence a snížení opakované ruční práce.
+- **3–6 měsíců:** aktivuje se úsporný plán, úprava pricingu, intenzivní práce s renewaly a omezení experimentů bez krátkodobého dopadu.
+- **Pod 3 měsíce:** krizový režim, týdenní finanční review a rozhodnutí o financování, razantním snížení nákladů, prodeji části služeb nebo změně strategie.
+
+Čísla si uprav podle firmy, ale princip drž: hranice musí být napsané dřív, než je potřebuješ. V krizi se pravidla nevymýšlí dobře. V krizi mozek rád zamění tabulku za ohňostroj.
+
+### Náklady rozděl podle reverzibility
+
+Ne všechny náklady jsou stejně nebezpečné. Některé můžeš snížit během týdne, jiné tě zavážou na rok. Runway plán proto nemá být jen seznam částek. Má ukázat, jak rychle a s jakým dopadem lze náklad změnit.
+
+Použij čtyři kategorie:
+
+- **Okamžitě nastavitelné:** nevyužité nástroje, předplatná, kampaně, cloudové limity, externí služby bez závazku.
+- **Nastavitelné s dopadem:** méně support hodin, pomalejší roadmapa, omezení některých provozních komfortů, změna frekvence externích konzultací.
+- **Dlouhodobé závazky:** roční licence, kanceláře, dlouhé kontrakty, infrastruktura s minimálním odběrem.
+- **Strategicky citlivé náklady:** klíčoví lidé, bezpečnost, právní minimum, spolehlivost služby, zákaznická důvěra.
+
+Když škrtáš bez téhle mapy, snadno zrušíš levnou věc s vysokou hodnotou a necháš drahou věc, kterou nikdo nepoužívá. To není úspora. To je účetní cosplay.
+
+### Revenue plán odděl od přání
+
+Runway se dá „vylepšit“ velmi rychle: stačí do tabulky přidat tři velké dealy, které se určitě zavřou, protože obchodník měl dobrý pocit z hovoru. Jenže dobrý pocit neplatí hosting. Revenue část runway plánu musí oddělit jistotu od naděje.
+
+Praktické vrstvy příjmů:
+
+- **Jisté příjmy:** podepsané smlouvy, aktivní předplatné, faktury s vysokou pravděpodobností úhrady.
+- **Pravděpodobné příjmy:** obnovy s potvrzeným zájmem, rozjednané expanze, opakovaní zákazníci.
+- **Pipeline příjmy:** obchodní příležitosti s jasným dalším krokem a datem rozhodnutí.
+- **Hypotézy růstu:** nové kampaně, nové segmenty, nový pricing, partnership, který zatím není ověřený.
+
+Do konzervativní runway patří jen první vrstva. Do realistické opatrně první dvě. Pipeline a hypotézy patří do růstového scénáře nebo do samostatného upside bloku. Tak tým vidí rozdíl mezi penězi, které přijdou, a penězi, které by bylo hezké potkat na ulici.
+
+### Privacy-first runway nepotřebuje zákaznický mikroskop
+
+Finanční plánování často svádí k tomu, že se do jedné tabulky začne tahat všechno: kontaktní osoby, interní poznámky ze sales callů, support historie, citlivé platební detaily a osobní odhady typu „tenhle zákazník je problematický“. To je špatně provozně i privacy-first.
+
+Runway report má používat minimum dat:
+
+- interní ID zákazníka nebo segment místo osobních údajů,
+- agregované MRR/ARR po tarifech a segmentech,
+- stav závazku bez detailních osobních poznámek,
+- datum očekávaného rozhodnutí nebo obnovy,
+- riziko v kategorii, ne v osobním komentáři,
+- odkazy na zdrojové systémy jen pro role, které je opravdu potřebují.
+
+Citlivější kontext nepatří do sdíleného finančního dashboardu. Pokud je potřeba, drž ho v omezeném CRM, support systému nebo právním dokumentu s jasnými přístupy. Finanční přehled má pomoct rozhodovat, ne vytvořit datový bazén, ve kterém se za půl roku nikdo nechce koupat.
+
+### Runway propojuj s produktovou strategií
+
+Runway není jen finanční téma. Pokud dochází čas, produktové rozhodování se musí změnit. Některé věci přestanou být „hezké mít“ a začnou být luxus. Jiné se naopak stanou důležitějšími, protože snižují support, zlepšují aktivaci nebo pomáhají obnovám.
+
+Při každém runway review si polož otázky:
+
+- Která funkce může zrychlit uzavření dealů nebo obnovu smluv?
+- Která automatizace sníží opakovaný support nebo onboarding práci?
+- Který technický dluh ohrožuje dostupnost, bezpečnost nebo důvěru zákazníků?
+- Které experimenty nemají šanci ovlivnit nejbližší rozhodovací horizont?
+- Které závazky vůči zákazníkům musíme držet, i kdyby se plán zhoršil?
+
+Tohle chrání tým před dvěma extrémy: buď se v panice přestane vyvíjet cokoliv, nebo se naopak pokračuje v roadmapě, jako by bankovní účet byl jen dekorativní plugin.
+
+### Komunikuj runway interně bez divadla
+
+Tým nepotřebuje každý detail financí, ale potřebuje rozumět realitě. Mlžení vytváří drby. Katastrofické statusy vytváří paralýzu. Dobrá interní komunikace říká, kde jsme, co to znamená, jaké hranice sledujeme a jaké rozhodnutí padlo.
+
+Praktický formát měsíčního sdělení:
+
+- aktuální runway scénáře v rozsahu, ne jako jedno magické číslo,
+- změna proti minulému měsíci,
+- největší pozitivní a negativní faktor,
+- rozhodnutí pro další měsíc,
+- co se od týmu očekává,
+- co se nemění, aby nevznikla zbytečná panika.
+
+Pokud máš malý tým, mluv lidsky. „Zastavujeme nové nástroje bez schválení“ je lepší než „optimalizujeme provozní efektivitu“. Druhá věta zní jako tiskovka společnosti, která právě vyhodila kávovar i dobrou náladu.
+
+### Checklist: runway plán bez paniky
+
+- Má tým konzervativní, realistický a růstový scénář runway?
+- Jsou rozhodovací hranice napsané předem a napojené na konkrétní akce?
+- Rozlišují se náklady podle reverzibility a strategické citlivosti?
+- Jsou příjmy rozdělené na jisté, pravděpodobné, pipeline a hypotézy?
+- Nepočítá konzervativní scénář s příjmy, které nejsou opravdu jisté?
+- Používá runway report interní ID, agregace a minimum osobních údajů?
+- Je runway review propojené s produktovou prioritizací, supportem a pricingem?
+- Má každý velký závazek vlastníka a datum další kontroly?
+- Komunikuje se stav týmu jasně, bez mlžení i bez zbytečného dramatu?
+- Končí review jedním rozhodnutím, ne jen poznámkou „sledovat dál“?
+
+### Mini šablona: runway karta
+
+```text
+Runway karta: [měsíc / produkt / tým]
+
+Scénáře:
+- Konzervativní runway:
+- Realistická runway:
+- Růstová runway:
+- Hlavní změna proti minulému měsíci:
+
+Příjmy:
+- Jisté příjmy:
+- Pravděpodobné obnovy / expanze:
+- Pipeline s dalším krokem:
+- Hypotézy růstu mimo základní scénář:
+
+Náklady:
+- Okamžitě nastavitelné:
+- Nastavitelné s dopadem:
+- Dlouhodobé závazky:
+- Strategicky citlivé náklady:
+
+Rozhodovací hranice:
+- Aktuální pásmo:
+- Spouštěč dalšího režimu:
+- Co zastavujeme:
+- Co naopak chráníme:
+
+Produktový dopad:
+- Priorita pro revenue / obnovy:
+- Priorita pro snížení supportu:
+- Odložené experimenty:
+- Rizika pro důvěru zákazníků:
+
+Privacy-first kontrola:
+- Použitá agregovaná data:
+- Osobní údaje vyloučené z reportu:
+- Kdo má přístup:
+- Retence runway reportu:
+
+Rozhodnutí:
+- Co uděláme tento měsíc:
+- Vlastník:
+- Termín kontroly:
+- Co oznámíme týmu:
+```
+
+
 ## Pracovní log
+- **2026-09-20:** Doplněna příloha GL o runway plánu pro malý SaaS: tři scénáře runway, rozhodovací hranice, reverzibilita nákladů, vrstvy příjmů, privacy-first reportování, propojení s produktovou strategií, interní komunikace, checklist a runway karta.
 - **2026-09-20:** Doplněna příloha GK o kontrole nákladů a unit economics pro malý SaaS: rozdělení nákladů podle chování, volba jednotky, hrubá marže, segmentová náročnost, férové limity, privacy-first měření, cost review, checklist a unit economics karta.
 - **2026-09-20:** Doplněna příloha GJ o cashflow výhledu pro malý SaaS: horizonty 14/30/90 dní, třídění příjmů podle jistoty, zásahovost výdajů, scénáře, privacy-first práci s forecastem, produktové signály, review přesnosti, checklist a forecast karta.
 - **2026-09-20:** Doplněna příloha GI o finance handoffu mezi produktem, supportem a účetnictvím: slovník billing událostí, role, handoff karta, uzávěrkový rytmus, převod výjimek do backlogu, metriky kvality, privacy-first checklist a šablona karty.
