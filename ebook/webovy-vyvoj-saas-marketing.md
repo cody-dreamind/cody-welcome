@@ -34123,7 +34123,157 @@ Vyhodnocení:
 ```
 
 
+## Příloha GN: Kanálový mix a atribuce bez sledování lidí napříč internetem
+
+Když růstový rozpočet začne fungovat, přijde další lákavá past: chtít přesně vědět, která reklama, článek, post, doporučení a mikropohyb prstu „způsobily“ nákup. Jenže malý B2B SaaS většinou nepotřebuje dokonalou atribuci. Potřebuje rozumně chápat, odkud přichází kvalitní poptávka, co pomáhá obchodním rozhovorům a kde tým pálí čas nebo peníze bez návratnosti.
+
+Privacy-first atribuce není slepota. Je to disciplína, která raději kombinuje agregovaná čísla, přímou otázku zákazníkovi, kvalitativní poznámky ze sales procesu a jednoduché kanálové review. Cílem není sledovat člověka napříč internetem jako unavený digitální detektiv. Cílem je rozhodnout, kam dát další energii.
+
+> Codyho komentář: Pokud tvůj atribučně-marketingový model vyžaduje víc špionáže než dobrý krimi seriál, možná nemáš analytiku. Možná máš jen drahý důkaz, že zákazník existuje.
+
+### Kanály rozděl podle role v zákaznické cestě
+
+Ne každý kanál má přinášet okamžitou demo poptávku. Některé kanály vytváří důvěru, jiné vysvětlují problém, další pomáhají uzavřít rozhodnutí a některé jsou jen distribuční potrubí. Když je hodnotíš stejnou metrikou, začneš trestat kanály, které dělají důležitou práci dřív, než zákazník vyplní formulář.
+
+Praktické rozdělení:
+
+- **Objev:** SEO články, partnerství, komunitní zmínky, podcasty, doporučení.
+- **Porozumění:** návody, srovnání, checklisty, webináře, případové studie.
+- **Důvěra:** bezpečnostní profil, privacy stránka, reference, transparentní roadmapa.
+- **Konverze:** landing page, demo formulář, pricing, pilotní nabídka.
+- **Retence a expanze:** zákaznické vzdělávání, changelog, produktové e-maily, support obsah.
+
+U každého kanálu si napiš jeho hlavní práci. Blogový článek nemusí rovnou generovat objednávku, pokud zkracuje sales call o patnáct minut a pomáhá zákazníkovi pochopit riziko. Naopak placená kampaň s krásnou návštěvností je slabá, pokud přivádí lidi mimo cílovku.
+
+### Atribuci stav na rozhodnutí, ne na iluzi přesnosti
+
+Dokonalá atribuce v B2B je často pohádka s hezkým dashboardem. Jeden člověk čte článek, druhý řeší rozpočet, třetí přijde na demo a čtvrtý podepisuje smlouvu. Mezitím proběhne doporučení v chatu, interní porada a starý kontakt z konference. Snažit se to celé narvat do jednoho posledního kliknutí je jako měřit kvalitu restaurace podle toho, kdo otevřel dveře.
+
+Místo toho si definuj rozhodnutí, která má atribuce podporovat:
+
+- Máme přidat další obsah do této tematické oblasti?
+- Má smysl pokračovat v konkrétním partnerství?
+- Přivádí placený kanál správné role a situace?
+- Pomáhá nový srovnávací článek obchodníkům vysvětlit hodnotu?
+- Je komunitní práce dlouhodobě důležitá, nebo jen pocitově příjemná?
+
+Když nevíš, jaké rozhodnutí metrika ovlivní, neměř ji. Nebo ji aspoň neposílej do dashboardu, kde bude předstírat důležitost.
+
+### Používej kombinaci signálů
+
+Privacy-first kanálové review stojí na kombinaci slabších, ale férových signálů. Žádný z nich sám o sobě neřekne celou pravdu. Společně ale ukazují dost na to, aby malý tým rozhodoval lépe.
+
+Použitelné signály:
+
+- **Agregovaná návštěvnost:** odkud přišly návštěvy na důležité stránky.
+- **Kvalifikované konverze:** demo poptávky, piloty, odpovědi, přímé e-maily.
+- **Self-reported source:** jednoduchá otázka „Jak jste se o nás dozvěděli?“.
+- **Sales poznámky:** co zákazník zmínil jako důvod zájmu nebo důvěry.
+- **Obsahová asistence:** které články, checklisty nebo stránky tým posílá v obchodním procesu.
+- **Retenční signály:** jestli zákazníci z daného kanálu dobře chápou produkt a zůstávají.
+
+Otázka „Jak jste se o nás dozvěděli?“ je překvapivě silná. Není dokonalá, ale často odhalí věci, které analytika nevidí: doporučení od známého, interní Slack, starý newsletter, přednášku nebo článek sdílený kolegou. Ulož odpověď jako krátký textový signál, ne jako start detektivního profilu.
+
+### UTM drž stručné a lidsky čitelné
+
+UTM parametry jsou užitečné, dokud se z nich nestane skládka interních kódů. Dobré UTM pomáhají pochopit zdroj kampaně v agregaci. Špatné UTM protékají do CRM, e-mailů, screenshotů a logů s informacemi, které tam nemají být.
+
+Pravidla pro střídmé UTM:
+
+- používej krátké názvy zdrojů a kampaní,
+- nevkládej do URL osobní údaje, e-mail, firmu ani interní poznámky,
+- drž jednotný slovník pro `source`, `medium` a `campaign`,
+- nepřidávej parametr jen proto, že ho nástroj nabízí,
+- pravidelně uklízej staré kampaně a sjednocuj překlepy,
+- dokumentuj význam kampaní v kanálové kartě, ne v názvu URL.
+
+Příklad rozumného zápisu: `utm_source=partner-web&utm_medium=referral&utm_campaign=privacy-checklist-q4`. Příklad špatného zápisu: URL s osobním e-mailem, názvem firmy, interní segmentací nebo poznámkou typu „hot_lead_ceo“. To nepatří do odkazu. To patří maximálně do interního CRM s jasným účelem a přístupem.
+
+### Kanálové review dělej měsíčně
+
+Kanálový mix se nerozhoduje denní panikou. U malého SaaS dává smysl měsíční review, kde tým projde, co přineslo kvalitní signály, co jen spotřebovalo kapacitu a co potřebuje delší horizont. Cílem není zabít všechno, co nemá okamžitou konverzi. Cílem je vědět, proč kanál držíš.
+
+Měsíční otázky:
+
+- Které kanály přinesly kvalifikovanou poptávku?
+- Které kanály přinesly důvěru nebo zkrátily obchodní vysvětlování?
+- Které kanály generují špatný fit a support budoucí bolesti?
+- Kde jsme utratili peníze nebo čas bez jasného učení?
+- Co přesuneme do škálování, co necháme běžet a co zastavíme?
+- Jaké pracovní exporty, kampaně nebo reporty smažeme?
+
+Review má skončit změnou: upravený budget, nová stránka, ukončený kanál, lepší dotaz ve formuláři, nový partner brief nebo rozhodnutí, že kanál potřebuje ještě dva měsíce pozorování.
+
+### Nepodceňuj přímé a tmavé zdroje
+
+„Direct“ a nejasné zdroje nejsou odpad. Často ukrývají doporučení, bookmarky, sdílení v soukromých chatech, interní firemní komunikaci nebo návraty lidí, kteří už tě znají. U privacy-first přístupu je část nejistoty normální cena za to, že zákazníky nesleduješ po každém kroku.
+
+Místo agresivního dohledávání použij jednoduché doplňky:
+
+- otázku ve formuláři,
+- krátkou poznámku po demo callu,
+- tag „doporučení“ bez ukládání zbytečných osobních detailů,
+- samostatné landing pages pro větší partnerství,
+- unikátní, ale neosobní odkazy pro kampaně,
+- kvalitativní zápis v měsíčním review.
+
+Nejistota není selhání. Selhání je předstírat přesnost, kterou nemáš, a dělat podle ní drahá rozhodnutí.
+
+### Checklist: kanálový mix bez sledovacího cirkusu
+
+- Každý kanál má přiřazenou roli v zákaznické cestě.
+- Atribuce podporuje konkrétní rozhodnutí, ne jen hezký dashboard.
+- Formulář obsahuje dobrovolnou otázku na zdroj kontaktu.
+- UTM parametry neobsahují osobní údaje ani interní poznámky.
+- Marketingová data jsou oddělená od supportu a fakturace.
+- Měsíční review hodnotí kvalitu poptávky, ne jen návštěvnost.
+- Přímé a nejasné zdroje se interpretují opatrně, bez invazivního dohledávání.
+- Po vyhodnocení se mažou pracovní exporty a staré reporty.
+- Kanály s dlouhým horizontem mají vlastní očekávání a nepadají kvůli poslednímu kliku.
+- Každé rozhodnutí má další krok, vlastníka a datum kontroly.
+
+### Mini šablona: kanálová karta
+
+```markdown
+## Kanálová karta: [kanál / období]
+
+Role kanálu:
+- Objev / porozumění / důvěra / konverze / retence:
+- Pro jaký segment:
+- Jaký problém nebo situaci řeší:
+
+Investice:
+- Peníze:
+- Čas týmu:
+- Externí dodavatelé:
+- Experiment nebo dlouhodobý kanál:
+
+Signály:
+- Agregovaná návštěvnost:
+- Kvalifikované poptávky:
+- Self-reported source odpovědi:
+- Sales poznámky:
+- Obsah posílaný v obchodním procesu:
+- Retenční nebo fit signály:
+
+Privacy-first kontrola:
+- Jaká data měříme:
+- Proč jsou nutná:
+- Kde jsou uložená:
+- Kdo k nim má přístup:
+- Co smažeme po review:
+
+Rozhodnutí:
+- Zastavit / upravit / držet / škálovat:
+- Proč:
+- Další krok:
+- Vlastník:
+- Datum kontroly:
+```
+
+
 ## Pracovní log
+- **2026-09-20:** Doplněna příloha GN o kanálovém mixu a atribuci bez sledování lidí napříč internetem: role kanálů, rozhodovací atribuce, kombinace agregovaných a kvalitativních signálů, střídmé UTM, měsíční review, práce s direct zdroji, checklist a kanálová karta.
 - **2026-09-20:** Doplněna příloha GM o rozpočtu na růstové experimenty: typy experimentů, stropy ztráty, rozdělení budgetu, metriky podle rozhodnutí, privacy-first měření, vyhodnocení, úklid experimentálního dluhu, checklist a growth experiment karta.
 - **2026-09-20:** Doplněn krátký odstavec k příloze GL o mimořádném runway review: jasné spouštěče změn místo pocitového finančního poplachu.
 - **2026-09-20:** Doplněna příloha GL o runway plánu pro malý SaaS: tři scénáře runway, rozhodovací hranice, reverzibilita nákladů, vrstvy příjmů, privacy-first reportování, propojení s produktovou strategií, interní komunikace, checklist a runway karta.
