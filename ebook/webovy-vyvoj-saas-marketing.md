@@ -36956,7 +36956,207 @@ Produktový signál:
 ```
 
 
+## Příloha HD: Recovery plán pro rizikového zákazníka bez paniky, viny a datového nátlaku
+
+Rizikový zákazník není chyba v CRM. Je to situace, ve které se původní slib produktu rozchází s realitou zákazníka. Někdy za to může špatný onboarding. Někdy změna týmu. Někdy produkt opravdu nesedí. A někdy si tým jen všiml rizika pozdě, protože dashboard vypadal zeleně, zatímco zákazník už tři týdny obcházel produkt starou tabulkou.
+
+Recovery plán má jeden cíl: rychle, férově a konkrétně zjistit, jestli jde účet vrátit ke smysluplné hodnotě. Není to divadelní „save motion“, kde zákazník dostane slevu, tři omluvné e-maily a slib, že roadmapa určitě jednou všechno spraví. Je to krátký pracovní plán s vlastníkem, rozhodovacím bodem a hranicí, kdy se má tým přestat snažit zachraňovat špatný fit.
+
+> Codyho komentář: Nejhorší recovery plán je „budeme víc komunikovat“. To je jako říct, že požár uhasíme lepší atmosférou. Potřebuješ vodu, hasiče, pojmenovaný zdroj ohně a někoho, kdo nebude během zásahu prodávat upgrade.
+
+### Nejdřív rozliš typ rizika
+
+Ne každý červený účet potřebuje stejnou reakci. Když tým hodí všechna rizika do jedné kolonky „churn danger“, začne dělat univerzální follow-upy. Ty většinou nikoho nezachrání, jen zvýší počet e-mailů v už tak unavené schránce.
+
+Začni klasifikací:
+
+- **hodnotové riziko:** zákazník nedosahuje výsledku, kvůli kterému produkt koupil,
+- **implementační riziko:** produkt ještě není správně nasazený, data nejsou připravená nebo chybí integrace,
+- **adopční riziko:** řešení funguje, ale lidé ho nepoužívají v běžném pracovním rytmu,
+- **vztahové riziko:** odešel champion, změnil se vlastník nebo interní priorita,
+- **cenové riziko:** zákazník hodnotu vidí, ale cena, rozsah nebo nákupní proces se dostaly do sporu,
+- **produktové riziko:** chybí zásadní schopnost a obcházení je dražší než přínos,
+- **fit riziko:** zákazník ve skutečnosti potřebuje jiný typ řešení.
+
+Každý typ rizika má jiný lék. Implementační problém řeší technický plán. Adopční problém řeší změna pracovního rytmu. Cenový spor řeší obchodní a hodnotová komunikace. Fit riziko někdy řeší slušný odchod, ne další kvartál přesvědčování.
+
+### Recovery hypotéza musí být konkrétní
+
+Bez hypotézy se recovery mění v nekonečné „zkusíme ještě něco“. Napiš jednu větu:
+
+„Věříme, že účet se vrátí do zdravého stavu, pokud do [datum] odstraníme [konkrétní blocker] a zákazník bude schopen [konkrétní workflow] bez [konkrétní náhradní práce].“
+
+Příklady:
+
+- „Do 14 dnů opravíme import duplicit a zákazník zvládne měsíční report bez ručního slučování tabulek.“
+- „Do konce měsíce najdeme nového vlastníka u zákazníka a nastavíme týdenní provozní rytmus pro první tým.“
+- „Během dvou týdnů nahradíme obecné školení třemi situačními návody pro dispečery a ověříme, že směna dokončí hlavní workflow.“
+- „Do další fakturace vysvětlíme změnu limitů, nabídneme férovou variantu rozsahu a zákazník rozhodne, jestli hodnota odpovídá ceně.“
+
+Dobrá hypotéza je nepříjemně konkrétní. Díky tomu je vidět, kdo co udělá a kdy poznáte, jestli to funguje. Špatná hypotéza zní „zlepšíme zákaznickou zkušenost“. To je nálada, ne plán.
+
+### Recovery call není další demo
+
+Když je zákazník v riziku, často už nepotřebuje znovu vidět produkt. Potřebuje, aby někdo přesně pochopil, kde se zlomila cesta k hodnotě. Recovery call proto drž krátký, pracovní a bez obranné pózy.
+
+Agenda na 30 minut:
+
+1. **5 minut — rámec:** „Chceme zjistit, jestli a jak dává smysl účet vrátit k hodnotě. Nebudeme dnes prodávat další rozsah.“
+2. **10 minut — fakta:** co mělo fungovat, co funguje, co nefunguje, jaký má problém dopad.
+3. **10 minut — možnosti:** jedna až tři realistické varianty nápravy, včetně varianty férového ukončení.
+4. **5 minut — rozhodnutí:** další krok, vlastník, datum kontroly a kritérium úspěchu.
+
+Otázky, které fungují:
+
+- „Který pracovní výsledek dnes pořád nedostáváte?“
+- „Co jste museli obejít ručně?“
+- „Kdo u vás nese dopad, když to nefunguje?“
+- „Co by se muselo stát, abyste za 30 dní řekli: ano, má smysl pokračovat?“
+- „Je problém v produktu, procesu, datech, rozhodnutí, nebo prioritě?“
+
+Naopak se vyhni otázkám typu „Jak bychom vás mohli udělat šťastnějšími?“ Jsou milé, ale moc široké. V recovery potřebuješ pracovní realitu, ne básnický večer.
+
+### Slibuj jen to, co umíš dodat rychle
+
+Rizikový účet svádí k heroickým slibům. „Dodáme to do roadmapy.“ „Přidáme integraci.“ „Uděláme custom report.“ Jenže když slíbíš velkou věc bez kapacity, získáš krátkodobý klid a dlouhodobě horší důvěru.
+
+Rozděl možnosti na čtyři typy:
+
+- **rychlá oprava:** bug, konfigurace, importní validace, dokumentace, drobná úprava workflow,
+- **procesní pomoc:** workshop, handoff, šablona interní komunikace, nový vlastník, změna rytmu,
+- **produktová změna:** skutečná úprava produktu s odhadem, prioritou a rizikem,
+- **obchodní změna:** úprava rozsahu, pauza, snížení plánu, přechod na jiný tarif, ukončení.
+
+Recovery plán by měl stát hlavně na prvních dvou typech. Produktovou změnu slibuj jen tehdy, když je užitečná i pro další zákazníky nebo strategicky zásadní. Obchodní změnu používej jako férové narovnání hodnoty, ne jako koberec, pod který zameteš produktový problém.
+
+### Privacy-first recovery nebere data jako rukojmí
+
+U rizikového zákazníka je snadné sklouznout k přehnanému sledování: otevřel e-mail, stáhl PDF, kdo se přihlásil, kolikrát klikl, kdo četl návrh smlouvy. To může vypadat jako kontrola situace, ale často je to jen nervozita převlečená za analytiku.
+
+Drž recovery datově střídmé:
+
+- používej agregované signály účtu nebo workflow, ne behaviorální profil jednotlivců,
+- neinstaluj nové trackery jen proto, že je zákazník v riziku,
+- nepoužívej sledovací pixely v záchranných dokumentech, prezentacích ani e-mailech,
+- poznámky ze schůzek piš věcně a bez psychologizování lidí,
+- zákaznická data používej jen v rozsahu nutném pro odstranění blockeru,
+- po uzavření recovery smaž nebo zkrať pracovní poznámky, které už nemají provozní důvod.
+
+To není jen etika. Je to i lepší práce. Když tým přestane sbírat všechno, musí přesněji pojmenovat, co vlastně potřebuje vědět. A často zjistí, že místo desetibodového profilu stačí jedna otázka: „Běží hlavní workflow bez ručního obcházení?“
+
+### Rozhodovací bod musí být předem
+
+Recovery bez konce vysává tým i zákazníka. Nastav rozhodovací bod hned na začátku:
+
+- datum review,
+- očekávaný pracovní výsledek,
+- co musí dodat tým,
+- co musí dodat zákazník,
+- co se stane při úspěchu,
+- co se stane při neúspěchu.
+
+Praktický model:
+
+- **7 dní:** odstranění akutního blockeru nebo potvrzení, že cesta existuje,
+- **14 dní:** první dokončené workflow nebo ověřený náhradní proces,
+- **30 dní:** rozhodnutí pokračovat, změnit rozsah, pozastavit nebo ukončit.
+
+Když zákazník nedodá součinnost, není to automaticky jeho vina. Může to být signál, že problém není priorita, champion nemá mandát nebo produkt nesedí do reality firmy. I to je informace. Jen ji nesmíš donekonečna překrývat dalšími check-iny.
+
+### Sleva není recovery plán
+
+Sleva může pomoct, pokud cena dočasně neodpovídá dodané hodnotě. Ale sleva nevyřeší špatný onboarding, chybějící integraci ani slabý produktový fit. Když tým nabízí slevu dřív než diagnostiku, učí zákazníka, že problém se řeší tlakem na cenu.
+
+Než nabídneš obchodní úpravu, odpověz:
+
+- Jaký konkrétní slib jsme nesplnili?
+- Je problém dočasný, nebo strukturální?
+- Má sleva kompenzovat nedodanou hodnotu, nebo jen oddálit odchod?
+- Co se musí změnit, aby po slevě nebyla stejná situace?
+- Umíme úpravu vysvětlit i dalším zákazníkům bez rozbití cenové logiky?
+
+Někdy je férovější nabídnout snížení rozsahu, pauzu nebo ukončení s exportem než lámat zákazníka do pokračování. Privacy-first produkt má důvěru i při odchodu. Možná se zákazník vrátí později. A i kdyby ne, odejde s pocitem, že se s ním nehrálo retention divadlo.
+
+### Recovery výsledek vrať do systému
+
+Každý recovery případ je drahý zdroj učení. Po uzavření udělej krátké interní review:
+
+- Co byl původní slib?
+- Kde se slib rozpadl?
+- Byl problém v prodeji, onboardingu, produktu, dokumentaci, supportu nebo fitu?
+- Který signál jsme mohli vidět dřív?
+- Co změníme, aby se stejný typ rizika neopakoval?
+
+Výstup nemá být román. Stačí jedna karta, jeden produktový úkol, jedna změna v onboardingu nebo jedna věta do sales handoffu. Bez toho bude tým každý měsíc hrdinsky zachraňovat stejný problém. A hrdinství je v provozu často jen špatně pojmenovaný procesní dluh.
+
+### Checklist: recovery plán bez nátlaku
+
+- Víme, jaký typ rizika řešíme.
+- Máme jednu konkrétní recovery hypotézu.
+- Recovery call není demo ani upsell schůzka.
+- Slibujeme jen věci, které umíme dodat nebo férově odmítnout.
+- Každý krok má vlastníka, datum a kritérium úspěchu.
+- Nepřidáváme nové sledování lidí jen kvůli riziku churnu.
+- Poznámky píšeme věcně, krátce a s retenčním pravidlem.
+- Sleva není první reakce; nejdřív diagnostikujeme hodnotu a blocker.
+- Rozhodovací bod je předem známý zákazníkovi i internímu týmu.
+- Výsledek recovery vracíme do produktu, onboardingu, dokumentace nebo sales procesu.
+
+### Mini šablona: recovery karta
+
+```markdown
+## Recovery karta: [zákazník / účet / období]
+
+Stav:
+- Aktuální health stav:
+- Typ rizika:
+- Vlastník recovery interně:
+- Vlastník u zákazníka:
+
+Recovery hypotéza:
+- Věříme, že účet se vrátí do zdravého stavu, pokud:
+- Do kdy:
+- Jak poznáme úspěch:
+
+Fakta:
+- Původní slib:
+- Co dnes nefunguje:
+- Dopad na zákazníka:
+- Co už jsme zkusili:
+
+Plán:
+- Krok 1 / vlastník / datum:
+- Krok 2 / vlastník / datum:
+- Krok 3 / vlastník / datum:
+
+Privacy-first hranice:
+- Jaká data opravdu potřebujeme:
+- Co nebudeme sledovat:
+- Retence pracovních poznámek:
+- Je potřeba export, mazání nebo omezení přístupu?
+
+Rozhodovací bod:
+- Datum review:
+- Varianta při úspěchu:
+- Varianta při neúspěchu:
+- Férový exit scénář:
+
+Poučení:
+- Co změníme v produktu:
+- Co změníme v onboardingu / supportu:
+- Co změníme v sales handoffu:
+```
+
+### Zdroje pro tuto přílohu
+
+- Evropská komise shrnuje principy GDPR včetně minimalizace dat a omezení účelu: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- EDPB vydal pokyny k článku 25 GDPR o data protection by design and by default: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- Plné znění GDPR na EUR-Lexu obsahuje článek 5 o principech zpracování a článek 25 o ochraně údajů už od návrhu a ve výchozím nastavení: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+
+
 ## Pracovní log
+
+- **2026-09-20:** Doplněna příloha HD o recovery plánu pro rizikového zákazníka: typy rizik, recovery hypotéza, pracovní recovery call, realistické sliby, privacy-first hranice bez sledovacích triků, rozhodovací bod, práce se slevou, převod poučení do systému, checklist a recovery karta.
 
 - **2026-09-20:** Doplněna příloha HC o customer health score bez sledování jednotlivců: definice zdraví podle pracovního výsledku, malé množství signálů, stavový model zelená/žlutá/červená/šedá, akce podle stavu, privacy-first hranice, health review rytmus, převod signálů do produktu, checklist a health karta.
 
