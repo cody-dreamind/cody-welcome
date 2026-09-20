@@ -37154,7 +37154,217 @@ Poučení:
 - Plné znění GDPR na EUR-Lexu obsahuje článek 5 o principech zpracování a článek 25 o ochraně údajů už od návrhu a ve výchozím nastavení: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
 
 
+## Příloha HE: Zrušení, downgrade a férový odchod bez retenční pasti, dark patternů a datových rukojmí
+
+Zákazník, který chce odejít, není nepřítel. Je to člověk nebo firma, která právě říká: „V téhle podobě pro nás služba nemá dostatečnou hodnotu.“ Malý SaaS má samozřejmě právo zachraňovat účet, nabídnout downgrade nebo vyjasnit nedorozumění. Nemá ale právo udělat z odchodu únikovou místnost s pěti dveřmi, třemi telefonáty a tlačítkem schovaným vedle kaktusu.
+
+Férový exit je součást produktu. Když zákazník ví, že může odejít bez trestu a exportovat svá data, má paradoxně menší strach začít. Privacy-first značka se nepozná podle toho, jak krásně mluví o důvěře při prodeji, ale podle toho, jak se chová ve chvíli, kdy už neprodává.
+
+### Nejdřív rozliš tři různé situace
+
+„Chci skončit“ může znamenat několik věcí. Pokud je hodíš do jednoho retenčního workflow, vytvoříš chaos a zbytečný tlak.
+
+- **Downgrade:** zákazník chce menší rozsah, levnější plán, méně uživatelů nebo pauzu v růstu.
+- **Dočasné pozastavení:** zákazník má sezónní výpadek, reorganizaci, změnu rozpočtu nebo čeká na interní rozhodnutí.
+- **Ukončení účtu:** zákazník už službu nechce nebo nesmí používat a potřebuje export, vypnutí přístupů a jasné datum konce.
+
+Každá situace má jiný dobrý výsledek. U downgradu je cílem najít udržitelný rozsah. U pauzy je cílem snížit riziko zbytečné ztráty bez falešných slibů. U ukončení je cílem čistý, bezpečný a dokumentovaný odchod.
+
+Prakticky: v administraci i supportu používej samostatné důvody a stavy. „Cancellation requested“ nestačí. Lepší je `downgrade_requested`, `pause_requested`, `termination_requested`, `export_pending`, `account_closed`. I interní názvy mají vliv na chování týmu. Když systém každého odcházejícího zákazníka nazve „save opportunity“, tým začne slyšet hlavně sebe.
+
+### Exit cesta musí být stejně srozumitelná jako nákup
+
+Pokud jde službu objednat online, neměl by být odchod dramaticky těžší než nákup. Ne vždy to znamená jedno tlačítko pro všechny B2B scénáře — u větších smluv může být potřeba řešit výpovědní lhůtu, fakturaci, exporty, předání vlastnictví nebo bezpečnostní potvrzení. Ale i tehdy musí být jasné, co se stane dál.
+
+Minimální férová exit stránka obsahuje:
+
+- aktuální plán a datum další fakturace,
+- podmínky výpovědi nebo downgrade podle smlouvy,
+- možnost exportu dat a popis formátů,
+- dopad na uživatele, integrace a automatizace,
+- datum vypnutí služby nebo změny plánu,
+- kontakt na člověka, pokud je potřeba řešit B2B výjimku,
+- potvrzení bez manipulativního textu.
+
+Špatný vzor: „Opravdu chcete zahodit všechen pokrok? Váš tým bude zklamaný.“
+
+Lepší vzor: „Po ukončení účtu zůstanou exporty dostupné do 30 dnů. Přístupy vypneme 31. 10. 2026. Fakturace skončí podle smlouvy k tomuto datu. Před potvrzením si stáhněte export nebo požádejte o pomoc s migrací.“
+
+> Codyho komentář: Pokud musí zákazník napsat na support jen proto, aby zjistil, kde se ruší účet, není to customer success. Je to kancelářská verze labyrintu pro minotaura s platební kartou.
+
+### Retence nesmí být překážka
+
+Retenční nabídka je v pořádku, pokud zákazníkovi opravdu pomáhá. Není v pořádku, pokud blokuje jeho rozhodnutí. Rozdíl je jednoduchý: nabídka je volitelná, překážka je povinná.
+
+Férové retenční prvky:
+
+- nabídka downgradu, pokud zákazník platí za zbytečný rozsah,
+- pauza nebo archivní režim, pokud produkt používá sezónně,
+- pomoc s nastavením, pokud odchází kvůli nevyřešenému problému,
+- export a migrační konzultace, pokud už je rozhodnutý odejít.
+
+Manipulativní retenční prvky:
+
+- povinný telefonát před zrušením,
+- tlačítko „ne, nechci zlepšit svůj byznys“,
+- opakované potvrzovací obrazovky bez nové informace,
+- schování ukončení pod neurčitý text typu „správa preference účtu“,
+- sleva ukázaná až po několika odmítnutích,
+- nemožnost exportu před zrušením.
+
+EDPB ve svých pokynech k deceptive design patterns popisuje vzory jako „Privacy Maze“, „Too Many Options“ nebo „Continuous prompting“. I když jsou pokyny zaměřené na sociální platformy, princip je použitelný obecně: rozhraní nemá člověka tlačit do rozhodnutí proti jeho zájmům tím, že cestu záměrně zkomplikuje.
+
+### Downgrade navrhuj podle hodnoty, ne podle paniky
+
+Downgrade je zdravý nástroj. Ne každý zákazník potřebuje vyšší tarif navždy. Pokud malý tým po implementaci zjistí, že používá jen tři klíčové workflow, může menší plán zvýšit dlouhodobou důvěru víc než nucené držení drahého balíčku.
+
+Dobrá downgrade logika:
+
+- ukaž, co se změní okamžitě a co až po konci období,
+- pojmenuj limity nového tarifu lidsky,
+- upozorni na funkce, které zákazník aktivně používá,
+- nedělej z downgrade trest ztrátou exportu nebo historie,
+- nech zákazníka stáhnout data i před změnou plánu,
+- interně sleduj dopad na hodnotu, ne jen ztracené MRR.
+
+Příklad užitečné věty:
+
+> „Na nižším plánu zůstanou vaše projekty a historie zachované, ale automatické reporty poběží jen jednou týdně. Exporty budou dostupné stejně jako dnes.“
+
+Příklad špatné věty:
+
+> „Přechodem na nižší plán přijdete o prémiovou výhodu, která chrání vaše podnikání.“
+
+První věta pomáhá rozhodnout. Druhá věta mlátí zákazníka strachem po klávesnici.
+
+### Data nesmí být rukojmí
+
+Exit bez exportu je vendor lock-in. Někdy legální, skoro vždy nedůvěryhodný. Privacy-first SaaS má mít od začátku plán, jak zákazník dostane svá data ven v rozumném formátu.
+
+Minimální exportní standard:
+
+- **Strojově čitelná data:** CSV, JSON nebo jiný běžný formát podle typu dat.
+- **Dokumentace polí:** krátký popis sloupců, stavů a ID vazeb.
+- **Přílohy a soubory:** jasný způsob stažení nebo strukturovaný archiv.
+- **Auditní informace:** odděleně podle citlivosti a oprávnění.
+- **Časové okno:** konkrétní doba dostupnosti exportu po ukončení.
+- **Bezpečné doručení:** odkaz s expirací, role-based přístup, žádné posílání citlivých dat přes náhodné e-maily.
+
+U osobních údajů musí odchod respektovat i práva subjektů údajů. GDPR obsahuje právo na výmaz v článku 17 a obecné principy jako minimalizace, omezení účelu a omezení uložení v článku 5. Prakticky to znamená, že ukončení účtu nemá vytvořit věčné skladiště dat „pro jistotu“. Potřebuješ retenční pravidlo: co smažeš hned, co držíš kvůli účetnictví nebo právnímu nároku, co anonymizuješ a co zůstane v zálohách jen do přirozené rotace.
+
+### Zrušení musí mít provozní runbook
+
+Bez runbooku se exit řeší pokaždé jinak. Jednou někdo vypne účet před exportem, podruhé zůstane aktivní integrace, potřetí support zapomene odstranit přístupy externímu konzultantovi. A pak všichni předstírají překvapení, jako kdyby procesy vznikaly kouzlem.
+
+Runbook pro ukončení účtu by měl pokrýt:
+
+1. **Přijetí žádosti:** kdo ji může podat, jak ověřit oprávnění, jak potvrdit přijetí.
+2. **Fakturační dopad:** datum konce, dobropis, poslední faktura, smluvní výpověď.
+3. **Export:** kdo ho spouští, kde se uloží, jak dlouho je dostupný.
+4. **Přístupy:** interní role, zákaznické účty, API klíče, integrace, SSO.
+5. **Data:** mazání, anonymizace, retence, zálohy, auditní stopa.
+6. **Komunikace:** potvrzení zákazníkovi, instrukce pro migraci, závěrečné shrnutí.
+7. **Poučení:** důvod odchodu, dopad na produkt, rozhodnutí pro tým.
+
+U B2B zákazníků přidej jasné pravidlo vlastnictví účtu. Pokud účet ruší jeden administrátor, ale smluvní vlastník je jiná osoba, proces musí chránit firmu i uživatele. Nejde o byrokracii. Jde o to, aby rozladěný admin omylem nevypnul službu celé firmě v pátek v 16:58. Pátek v 16:58 je mimochodem čas, kdy software páchá největší dramaturgické zločiny.
+
+### Exit rozhovor má být krátký a dobrovolný
+
+Zpětná vazba při odchodu je cenná, ale nesmí být mýtná brána. Dej zákazníkovi možnost říct důvod jedním klikem nebo krátkou poznámkou. Pokud chce mluvit, nabídni rozhovor. Pokud nechce, respektuj to.
+
+Dobré důvody pro exit formulář:
+
+- „Chybí nám konkrétní funkce“
+- „Cena neodpovídá hodnotě“
+- „Přecházíme na jiné řešení“
+- „Projekt skončil“
+- „Produkt byl příliš složitý“
+- „Interně nemáme kapacitu“
+- „Privacy / compliance požadavek“
+- „Jiné“
+
+Neptej se na víc dat, než použiješ. Pokud důvod odchodu skončí jen v dashboardu, který nikdo neotevře, je to další datový suvenýr. Lepší je měsíční churn review s pěti kvalitními poznámkami než tabulka se stovkou povinných polí.
+
+### Po odchodu uzavři smyčku
+
+Odchod zákazníka má dopad na produkt, marketing, sales, onboarding i support. Pokud se poznatek ztratí v CRM poznámce, tým si koleduje o opakování stejné chyby.
+
+Po každém významnějším odchodu si napiš krátkou exit kartu:
+
+- Co zákazník původně kupoval?
+- Který slib jsme splnili a který ne?
+- Byl problém ve fitu, produktu, ceně, podpoře, implementaci nebo změně u zákazníka?
+- Co jsme mohli poznat dřív?
+- Co změníme v sales kvalifikaci, onboardingu, produktu nebo dokumentaci?
+- Je potřeba upravit retenční nebo datové pravidlo?
+
+Tahle práce není o sebeobviňování. Je to servisní prohlídka systému. Jeden odchod může být náhoda. Tři podobné odchody jsou produktová zpráva napsaná zákazníky bez toho, aby si účtovali konzultantský den.
+
+### Checklist: zrušení a downgrade bez retenční pasti
+
+- Máme oddělený proces pro downgrade, pauzu a ukončení účtu.
+- Zákazník vidí datum konce, dopad na fakturaci a dopad na data před potvrzením.
+- Retenční nabídka je volitelná, ne povinná překážka.
+- Export je dostupný před ukončením a v běžném strojově čitelném formátu.
+- Máme retenční pravidlo pro produktová data, fakturační data, support historii, logy a zálohy.
+- Ukončení vypíná přístupy, API klíče, integrace a role podle runbooku.
+- Exit feedback je krátký, dobrovolný a použitelný pro rozhodnutí.
+- Nepoužíváme manipulativní texty, opakované potvrzování bez nové informace ani schované rušení.
+- Po významném odchodu vznikne exit karta s jedním konkrétním poučením.
+- Jednou za čtvrtletí kontrolujeme, jestli zrušení účtu stále odpovídá produktu, smlouvám a privacy dokumentaci.
+
+### Mini šablona: exit a downgrade karta
+
+```markdown
+## Exit / downgrade karta: [zákazník / účet / datum]
+
+Typ změny:
+- Downgrade / pauza / ukončení:
+- Požadované datum:
+- Smluvní nebo fakturační omezení:
+
+Kontext:
+- Původní zakoupený výsledek:
+- Aktuální používané workflow:
+- Hlavní důvod změny:
+- Je zákazník rozhodnutý, nebo hledá alternativu?
+
+Nabídnuté možnosti:
+- Downgrade:
+- Pauza / archivní režim:
+- Pomoc s problémem:
+- Export / migrace:
+
+Privacy-first a data:
+- Jaký export zákazník potřebuje:
+- Kdo má oprávnění export stáhnout:
+- Co smažeme hned:
+- Co držíme kvůli právním nebo účetním důvodům:
+- Kdy proběhne další retenční krok / rotace záloh:
+
+Provozní kroky:
+- Fakturace:
+- Přístupy:
+- API klíče a integrace:
+- Support / CSM potvrzení:
+- Závěrečný e-mail:
+
+Poučení:
+- Co byl hlavní systémový signál:
+- Co změníme v produktu:
+- Co změníme v onboardingu / sales / dokumentaci:
+```
+
+### Zdroje pro tuto přílohu
+
+- EDPB Guidelines 03/2022 popisují deceptive design patterns včetně vzorů jako „Privacy Maze“, „Too Many Options“ a „Continuous prompting“: https://www.edpb.europa.eu/documents/guideline/guidelines-032022-on-deceptive-design-patterns-in-social-media-platform_en
+- Evropská komise shrnuje Consumer Rights Directive a právo spotřebitelů na informace i zrušení online nákupů v EU: https://commission.europa.eu/law/law-topic/consumer-protection-law/consumer-contract-law/consumer-rights-directive_en
+- Plné znění GDPR na EUR-Lexu obsahuje článek 5 o principech zpracování a článek 17 o právu na výmaz: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+
+
 ## Pracovní log
+
+- **2026-09-20:** Doplněna příloha HE o zrušení, downgrade a férovém odchodu: rozlišení downgradu/pauzy/ukončení, srozumitelná exit cesta, retenční nabídky bez překážek, export a retence dat, provozní runbook, dobrovolný exit feedback, checklist a exit/downgrade karta.
 
 - **2026-09-20:** Doplněna příloha HD o recovery plánu pro rizikového zákazníka: typy rizik, recovery hypotéza, pracovní recovery call, realistické sliby, privacy-first hranice bez sledovacích triků, rozhodovací bod, práce se slevou, převod poučení do systému, checklist a recovery karta.
 
