@@ -34806,7 +34806,199 @@ Review:
 ```
 
 
+## Příloha GR: Post-launch follow-up bez otravování, ztráty kontextu a CRM divadla
+
+Launch skončil. Lidé viděli stránku, někdo kliknul, někdo odpověděl, někdo poslal dotaz, někdo mlčel a někdo si produkt uložil do záložek s mentální poznámkou „někdy“. V tuhle chvíli se rozhoduje, jestli launch zůstane jednorázovým výkřikem, nebo se promění v učení, vztahy a obchodní příležitosti.
+
+Post-launch follow-up není automatická série sedmi e-mailů, která člověku každé dva dny připomíná, že „ještě nevyužil unikátní šanci“. To je digitální verze prodavače, který běží za zákazníkem až na parkoviště. Dobrý follow-up je služba: doplní kontext, odpoví na otázku, nabídne další krok a respektuje, že druhá strana má vlastní čas, priority a právo nereagovat.
+
+Privacy-first follow-up drží jednoduchou zásadu: navazuješ na dobrovolný signál, ne na tajné sledování. Když někdo odpověděl na e-mail, požádal o demo, stáhl veřejnou šablonu s jasným vysvětlením odběru nebo se přihlásil k novinkám, máš důvod pokračovat. Když někdo jen navštívil stránku, neznamená to, že je připravený na osobní hon. Web není lovecký revír.
+
+### Nejdřív rozděl signály podle síly
+
+Po launchi vznikne směs signálů. Když je hodíš do jednoho pytle, buď začneš otravovat lidi, kteří dali jen slabý signál, nebo přehlédneš vážné zájemce, kteří potřebují rychlou odpověď.
+
+Praktické rozdělení:
+
+- **Přímý obchodní signál:** žádost o demo, odpověď na nabídku, poptávka pilotu, konkrétní otázka na cenu, bezpečnost nebo migraci.
+- **Aktivační signál:** existující zákazník funkci zapnul, pozval kolegu, dokončil nový workflow nebo narazil na limit.
+- **Obsahový signál:** člověk odpověděl na článek, sdílel checklist, položil otázku k tématu nebo se přihlásil k odběru.
+- **Podpůrný signál:** support dotaz, nejasnost v dokumentaci, chyba v cestě, žádost o vysvětlení.
+- **Tichý agregovaný signál:** návštěvnost stránky, kliknutí na CTA, čtenost changelogu, bez identifikace jednotlivců.
+
+Každý typ signálu potřebuje jiný follow-up. Demo žádost má dostat rychlou lidskou odpověď. Support dotaz má skončit opravou dokumentace nebo produktu. Obsahový signál může dostat doplnění a pozvánku k dobrovolnému odběru. Tichý agregovaný signál má pomoct upravit stránku, ne spustit detektivní hon na jednotlivce.
+
+### Follow-up piš podle kontextu, ne podle šablonového zoufalství
+
+Šablony jsou užitečné, pokud zrychlují poctivou odpověď. Jsou škodlivé, když maskují, že tým neví, proč píše. Každý follow-up by měl projít třemi otázkami:
+
+- **Na co přesně navazujeme?** Odpověď, dotaz, demo, aktivace, problém, veřejná reakce?
+- **Jakou hodnotu přidáváme?** Odpověď, příklad, návod, odkaz, nabídka hovoru, oprava?
+- **Jaký je férový další krok?** Odpovědět, vybrat termín, vyzkoušet scénář, poslat detail, nic nedělat?
+
+Slabý follow-up:
+
+- „Jen připomínám náš nový modul, máte zájem o schůzku?“
+
+Silnější follow-up:
+
+- „Ptal jste se, jestli reporting zvládne oddělit aktivní a ztracené poptávky. Přidal jsem krátký příklad se třemi stavy pipeline a exportem pro pondělní poradu. Pokud chcete, můžeme to projít na 20 minutách — jinak stačí odpovědět, který stav vám dnes chybí.“
+
+Rozdíl je v respektu. Druhá zpráva ukazuje, že člověka posloucháš, nepoužíváš ho jako položku v sekvenci.
+
+### Nastav rychlost podle rizika a hodnoty
+
+Ne všechny follow-upy musí být okamžité. Ale některé ano. Malý tým potřebuje jednoduché SLA, aby neztratil příležitost a zároveň se neutopil v reaktivním režimu.
+
+Doporučený rytmus:
+
+- **Demo, pilot nebo cenový dotaz:** odpověď do jednoho pracovního dne, u aktivního launch týdne ideálně v řádu hodin.
+- **Bezpečnostní, privacy nebo procurement otázka:** potvrdit přijetí rychle, detail dodat s vlastníkem a termínem.
+- **Support problém po launchi:** klasifikovat dopad, opravit cestu nebo doplnit workaround.
+- **Obsahová reakce:** odpovědět lidsky, nabídnout související materiál bez automatického prodeje.
+- **Agregovaný pokles v cestě:** upravit text, CTA, FAQ nebo onboarding, ne psát jednotlivcům bez jasného důvodu.
+
+Rychlost neznamená paniku. Znamená předem vědět, které signály mají obchodní nebo důvěrový dopad. Když se po launchi opakuje otázka „kde jsou data uložená?“, není to jen support. Je to informace, že launch stránka nebo trust centrum neodpovídá na nákupní realitu.
+
+### Privacy-first CRM má být deník rozhodnutí, ne šuplík na osobní drobky
+
+CRM po launchi často bobtná. Tým do něj ukládá poznámky, domněnky, screenshoty, přeposlané e-maily a interní komentáře, které by nikdo nechtěl číst před zákazníkem. To je nebezpečné provozně i důvěrově.
+
+Ukládej jen to, co pomůže navázat vztah nebo splnit povinnost:
+
+- kdo se ozval a za jakou firmu,
+- na jaký signál navazuješ,
+- jaký problém řeší,
+- co bylo slíbeno,
+- kdo je vlastník dalšího kroku,
+- datum poslední férové interakce,
+- souhlas nebo legitimní důvod komunikace, pokud je relevantní,
+- odkazy na veřejné nebo interně schválené materiály.
+
+Neukládej:
+
+- osobní domněnky o motivaci člověka,
+- citlivé údaje, které nepotřebuješ,
+- kompletní interní přepisy bez důvodu,
+- data získaná z obohacovacích nástrojů bez jasného právního a etického základu,
+- „skóre zájmu“ založené na tajném sledování chování napříč webem.
+
+> Codyho komentář: CRM má pomáhat pamatovat si závazky, ne dělat z obchodníka amatérského špiona s barevným dashboardem.
+
+### Follow-up sekvence má mít konec
+
+Automatizace bez konce je nejrychlejší cesta k otrávenému publiku. Každá post-launch sekvence musí mít jasné zastavení: člověk odpověděl, odhlásil se, vybral jiný krok, nereagoval po rozumném počtu pokusů, nebo se ukázalo, že nabídka není relevantní.
+
+Jednoduchá B2B sekvence může vypadat takto:
+
+1. **Reakce na signál:** konkrétní odpověď, odkaz, nabídka dalšího kroku.
+2. **Praktické doplnění:** příklad použití, checklist, krátké video nebo FAQ k opakované námitce.
+3. **Poslední férové uzavření:** „Nechci vás honit. Pokud je to relevantní později, tady je přímý odkaz a kontakt.“
+
+Tři kroky často stačí. Pokud potřebuješ sedm pokusů, problém možná není v kadenci, ale v relevanci. U existujících zákazníků může být follow-up delší, pokud souvisí s aktivací nebo změnou služby, ale i tam musí být jasné, proč zprávy chodí a jak je vypnout.
+
+### Z opakovaných odpovědí dělej produktovou práci
+
+Post-launch follow-up není jen sales. Je to výzkum v pohybu. Každá opakovaná otázka říká, že někde chybí vysvětlení, důkaz nebo funkce.
+
+Typické převody do backlogu:
+
+- „Jak to migrujeme?“ → přidat migrační návod, importní checklist nebo onboarding balíček.
+- „Kde jsou data?“ → doplnit trust stránku, subprocesory a provozní popis.
+- „Kolik to stojí při našem objemu?“ → zpřesnit ceník, kalkulačku nebo příklad tarifů.
+- „Může to používat jen část týmu?“ → vysvětlit role, limity a pilotní scénář.
+- „Co když odejdeme?“ → ukázat export, retenční pravidla a offboarding.
+- „Jak poznáme úspěch?“ → připravit metriky pilotu a šablonu vyhodnocení.
+
+Důležité je nezaměnit jednotlivou námitku za univerzální pravdu. Jedna otázka je signál. Tři podobné otázky jsou téma. Téma s obchodním dopadem je kandidát na produktovou změnu, dokumentaci nebo novou stránku.
+
+### Měř follow-up podle kvality, ne podle počtu dotyků
+
+Follow-up dashboard nemá odměňovat tým za to, že poslal hodně zpráv. To je metrika pro spamovací továrnu, ne pro důvěryhodný SaaS.
+
+Lepší metriky:
+
+- čas do první odpovědi u silných signálů,
+- procento follow-upů s jasným dalším krokem,
+- počet opakovaných otázek převedených do FAQ, dokumentace nebo produktu,
+- kvalita demo rozhovorů podle fitu, ne jen počet schůzek,
+- aktivace existujících zákazníků po relevantním oznámení,
+- počet odhlášení nebo negativních reakcí jako varování,
+- obchodní dopad po 30/60/90 dnech,
+- počet kontaktů, které byly férově uzavřeny místo nekonečného nahánění.
+
+Privacy-first měření používá agregace a kontext. Nepotřebuje vědět, že konkrétní člověk otevřel e-mail šestkrát ve 23:14. Potřebuje vědět, jestli zpráva vedla k odpovědi, rozhodnutí nebo lepší dokumentaci.
+
+### Checklist: post-launch follow-up bez otravování
+
+- Máš rozdělené signály podle síly a typu?
+- Ví tým, které signály vyžadují rychlou lidskou odpověď?
+- Navazuje každý follow-up na konkrétní dobrovolný kontext?
+- Přidává zpráva hodnotu, nebo jen připomíná tvoji existenci?
+- Má sekvence jasný konec a jednoduchou možnost odhlášení nebo uzavření?
+- Ukládáš v CRM jen údaje potřebné pro vztah, závazek nebo další krok?
+- Nepoužíváš tajné sledování jako záminku k osobnímu oslovení?
+- Převádíš opakované otázky do dokumentace, FAQ, webu nebo produktu?
+- Měříš kvalitu odpovědí a dopad, ne počet odeslaných zpráv?
+- Máš 30/60/90denní review, které rozhodne, co opakovat, opravit nebo ukončit?
+
+### Mini šablona: follow-up karta
+
+```markdown
+## Follow-up karta: [launch / segment / období]
+
+Kontext:
+- Launch:
+- Segment:
+- Období:
+- Vlastník:
+
+Signály:
+- Přímé obchodní signály:
+- Aktivační signály:
+- Obsahové signály:
+- Support témata:
+- Agregované signály:
+
+Pravidla reakce:
+- Demo / pilot SLA:
+- Privacy / security dotazy SLA:
+- Support SLA:
+- Obsahové reakce:
+- Kdy kontakt uzavíráme:
+
+Privacy-first CRM:
+- Co ukládáme:
+- Co neukládáme:
+- Právní / etický důvod kontaktu:
+- Retence poznámek:
+- Kdo má přístup:
+
+Sekvence:
+- První odpověď:
+- Praktické doplnění:
+- Poslední férové uzavření:
+- Odhlášení / stop pravidlo:
+
+Produktové učení:
+- Opakované otázky:
+- Dopad na FAQ:
+- Dopad na dokumentaci:
+- Dopad na produkt:
+- Dopad na pricing / onboarding:
+
+Review:
+- 30denní závěr:
+- 60denní závěr:
+- 90denní závěr:
+- Co zopakovat:
+- Co ukončit:
+- Další konkrétní změna:
+```
+
+
 ## Pracovní log
+- **2026-09-20:** Doplněna příloha GR o post-launch follow-upu bez otravování: třídění signálů, kontextové odpovědi, rychlost reakcí, privacy-first CRM, konec sekvencí, převod otázek do produktu, metriky kvality, checklist a follow-up karta.
 - **2026-09-20:** Doplněna příloha GQ o launch komunikaci bez hype a remarketingového ocasu: typy launchů, launch promise, assety, sekvence vln, privacy-first měření, námitky, review, checklist a launch karta.
 - **2026-09-20:** Doplněna příloha GP o komunitním růstu bez pronásledování lidí: rozlišení publika, komunity a kanálu, výběr komunit podle problému, důkaz práce, vlastní komunitní prostor, privacy-first hranice, moderace, dopadové měření, checklist a komunitní karta.
 - **2026-09-20:** Doplněna příloha GO o partnerské distribuci bez leadového handlu: mapa partnerů, konkrétní partnerská nabídka, privacy-first hranice sdílení dat, partner pack, měření kvality vztahu, referral pravidla, checklist a partnerská karta.
