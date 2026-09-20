@@ -33619,7 +33619,189 @@ Review:
 ```
 
 
+## Příloha GK: Kontrola nákladů a unit economics bez finanční mlhy a zákaznického mikroskopu
+
+Cashflow říká, jestli má firma kyslík. Kontrola nákladů a unit economics říká, jestli produkt dýchá zdravě, nebo jen elegantně pálí peníze v cloudu, supportu a ručních výjimkách. U malého SaaS je tahle disciplína nepříjemně praktická: nemusíš mít finanční oddělení o deseti lidech, ale musíš vědět, jestli každý nový zákazník přináší opakovatelnou hodnotu, nebo jen další provozní závazek.
+
+Nejde o to vytvořit korporátní tabulkový chrám. Jde o jednoduchý rytmus, který propojí pricing, infrastrukturu, support, onboarding a produktová rozhodnutí. Privacy-first verze navíc nezkoumá každého uživatele pod lupou. Vystačí si s agregovanými segmenty, interními identifikátory, rozumnými kategoriemi nákladů a jasným účelem měření.
+
+> Codyho komentář: Pokud nevíš, kolik tě stojí obsloužit zákazníka, pricing je spíš horoskop než strategie. A horoskop má jednu výhodu: aspoň nepředstírá, že je fakturační model.
+
+### Nejdřív odděl náklady podle chování
+
+První chyba je házet všechny náklady do jednoho pytle a pak se divit, že nikdo neví, co s nimi. Náklady se nechovají stejně. Některé rostou s počtem zákazníků, jiné s objemem dat, další s interní složitostí a některé jsou prostě daň za existenci firmy.
+
+Pro malý SaaS stačí čtyři základní skupiny:
+
+- **Fixní provozní náklady:** hosting základních služeb, monitoring, účetnictví, domény, základní nástroje týmu.
+- **Variabilní produktové náklady:** výpočetní výkon, úložiště, e-mailové odesílání, API volání, transakční poplatky.
+- **Zákaznické obslužné náklady:** onboarding, support, ruční importy, individuální nastavení, konzultace.
+- **Růstové náklady:** obsah, kampaně, partnerské aktivity, sales nástroje, eventy.
+
+Každá skupina odpovídá na jinou otázku. Fixní náklady řeší minimální velikost firmy. Variabilní náklady řeší škálování. Obslužné náklady ukazují produktové tření. Růstové náklady říkají, jestli akvizice dává smysl.
+
+### Unit economics začni jednotkou, kterou tým chápe
+
+„Unit economics“ zní jako pojem z prezentace pro investory, ale v praxi je to obyčejná otázka: jaká jednotka má nést ziskovost produktu? U SaaS to může být workspace, firma, aktivní tým, fakturovaný účet, projekt, transakce nebo datový objem. Špatně zvolená jednotka rozbije celý pohled.
+
+Vyber jednotku podle toho, co opravdu vytváří náklady a hodnotu:
+
+- Pokud zákazník platí za tým, sleduj **workspace** nebo **organizaci**.
+- Pokud náklady rostou podle aktivit, sleduj **počet zpracovaných událostí** nebo **workflow běhů**.
+- Pokud je hlavní zátěž úložiště, sleduj **objem dat** a **retenci**.
+- Pokud support závisí na složitosti zákazníka, sleduj **typ segmentu** a **implementační náročnost**.
+
+Nevybírej jednotku jen proto, že se dobře vyjímá v dashboardu. Jednotka má pomoct rozhodovat o ceně, limitech, automatizaci a prioritách vývoje.
+
+### Hrubá marže není jen číslo pro finance
+
+Hrubá marže u SaaS není abstraktní finanční dekorace. Ukazuje, kolik příjmu zůstává po přímých nákladech na doručení služby. Když ji ignoruješ, můžeš prodávat tarify, které vypadají úspěšně, ale v tichosti žerou kapacitu týmu.
+
+Pro praktické řízení si spočítej aspoň orientačně:
+
+- měsíční příjem segmentu nebo tarifu,
+- variabilní produktové náklady na tento segment,
+- běžnou podporu a onboarding přepočtené na odhadovaný čas,
+- transakční a billing poplatky,
+- větší ruční výjimky, které se opakují.
+
+Nemusíš mít dokonalé účetní rozlišení od prvního dne. Stačí konzistentní odhad, který každý měsíc zpřesňuješ. Důležité je oddělit jednorázové náklady od opakovaných. Jednorázový náročný onboarding může být v pořádku, pokud vede k dlouhé retenci. Opakovaná ruční práce každý měsíc je jiný příběh — to už je produktový dluh v obleku účetní položky.
+
+### Segmenty porovnávej podle náročnosti, ne podle sympatií
+
+Ne každý zákazník se stejným MRR je stejně zdravý pro firmu. Jeden platí stabilně, používá standardní workflow a občas pošle užitečný feedback. Druhý platí stejně, ale potřebuje speciální export, ruční opravy, časté billing výjimky a tři schůzky kvůli každé drobnosti.
+
+Porovnávej segmenty podle kombinace:
+
+- průměrný příjem,
+- variabilní náklady,
+- počet support požadavků,
+- délka onboardingu,
+- počet výjimek,
+- churn nebo downgrade riziko,
+- strategická hodnota pro produkt.
+
+Pozor: náročný zákazník nemusí být špatný zákazník. Může ukazovat cestu k lepšímu enterprise tarifu, automatizaci nebo novému modulu. Špatné je jen nevědět, že je náročný, a tvářit se, že všichni zákazníci mají stejný dopad.
+
+### Limity mají chránit jednotkovou ekonomiku i zákazníka
+
+Produktové limity nejsou trest. Jsou dohoda o férovém používání služby. Když tarify nemají limity, náklady se schovají do infrastruktury a supportu. Když jsou limity příliš agresivní, zákazník má pocit pasti. Dobré limity vysvětlují, co je běžné použití, kdy je čas přejít výš a proč to dává smysl.
+
+Praktické limity mohou být:
+
+- počet uživatelů nebo týmů,
+- počet projektů, workspace nebo klientů,
+- objem uložených dat,
+- počet automatizací, exportů nebo API volání,
+- délka historie,
+- úroveň podpory,
+- dostupnost pokročilých auditních nebo bezpečnostních funkcí.
+
+Každý limit by měl mít jasnou větu pro zákazníka: „Tento limit existuje, protože chrání výkon, předvídatelnost nákladů a férovou cenu pro ostatní.“ Pokud limit neumíš lidsky vysvětlit, možná je to jen účetní nervozita převlečená za produktové pravidlo.
+
+### Privacy-first nákladové měření nepoužívá osobní profily
+
+K řízení nákladů nepotřebuješ vědět, který konkrétní člověk klikl na co v úterý večer. Potřebuješ vědět, které produktové scénáře, tarify a segmenty vytvářejí zátěž. To jde měřit bez osobního mikroskopu.
+
+Drž se těchto pravidel:
+
+- používej interní ID workspace nebo zákaznického účtu místo jmen lidí,
+- pracuj s agregacemi po tarifech, segmentech a typech operací,
+- do nákladových exportů nedávej obsah zpráv, souborů ani poznámek ze supportu,
+- citlivé detaily drž v původních systémech s řízeným přístupem,
+- nastav retenci nákladových reportů podle účelu, ne „navždy pro jistotu“,
+- odděl produktovou analytiku od účetních dokladů a support komunikace.
+
+Privacy-first přístup není překážka dobrých čísel. Je to filtr, který nutí tým ptát se: opravdu tento údaj potřebujeme pro rozhodnutí o nákladech?
+
+### Nákladové anomálie řeš jako produktové signály
+
+Když náklady vyskočí, není cílem jen najít viníka a poslat mu pasivně agresivní zprávu. Nákladová anomálie je často signál, že produkt dovoluje drahé chování bez zpětné vazby, že chybí limit, že onboarding učí špatný postup nebo že pricing neodpovídá realitě.
+
+Typické signály:
+
+- jeden tarif generuje neúměrně vysoké API nebo e-mailové náklady,
+- malý segment vyžaduje velké množství ruční podpory,
+- importy a exporty zabírají víc času než samotné používání produktu,
+- dlouhá retence dat vytváří náklady bez zákaznické hodnoty,
+- zákazníci naráží na limity, kterým nerozumí,
+- interní tým opakovaně opravuje stejné billing nebo onboarding chyby.
+
+Každý takový signál převeď na rozhodnutí: upravit limit, změnit tarif, automatizovat proces, zlepšit dokumentaci, zkrátit retenci, nebo udělat férovou komunikaci zákazníkům.
+
+### Měsíční cost review má být krátké a rozhodovací
+
+Cost review nemá být tříhodinová tabulková pouť. Pro malý tým stačí 45 minut měsíčně, pokud má jasnou strukturu:
+
+1. Co se změnilo proti minulému měsíci?
+2. Které náklady rostou rychleji než příjmy?
+3. Který segment nebo tarif má nejlepší a nejhorší jednotkovou ekonomiku?
+4. Které výjimky se opakují?
+5. Jaké jedno produktové nebo pricing rozhodnutí uděláme?
+6. Jaký privacy-first úklid je potřeba v reportech, exportech nebo přístupech?
+
+Výstupem má být rozhodnutí, ne jen poznámka „sledovat dál“. „Sledovat dál“ je často hezký způsob, jak říct „bojíme se rozhodnout“. Pokud problém ještě není zralý, definuj hranici: při jaké hodnotě, četnosti nebo dopadu zasáhneš.
+
+### Checklist: kontrola nákladů a unit economics
+
+- Jsou náklady rozdělené na fixní, variabilní produktové, zákaznické obslužné a růstové?
+- Má tým vybranou jednotku, podle které hodnotí ziskovost produktu?
+- Počítá se orientační hrubá marže po tarifech nebo segmentech?
+- Jsou jednorázové implementační náklady oddělené od opakované ruční práce?
+- Porovnávají se segmenty podle náročnosti, ne jen podle MRR?
+- Mají produktové limity jasné vysvětlení pro zákazníka?
+- Nepoužívají nákladové reporty osobní profily, obsah komunikace nebo zbytečné detaily?
+- Jsou nákladové anomálie převáděné na produktová, pricing nebo provozní rozhodnutí?
+- Probíhá krátké měsíční cost review s jedním jasným výstupem?
+- Má každý report vlastníka, účel a retenční pravidlo?
+
+### Mini šablona: unit economics karta
+
+```text
+Unit economics karta: [produkt / tarif / segment]
+
+Jednotka:
+- Co je jednotka měření:
+- Proč dává smysl:
+- Co do jednotky nepatří:
+- Vlastník metriky:
+
+Příjmy:
+- Měsíční příjem segmentu:
+- Typické rozmezí účtu:
+- Obnovy / churn / downgrade signály:
+- Výjimky v ceně:
+
+Náklady:
+- Fixní alokované náklady:
+- Variabilní produktové náklady:
+- Support a onboarding čas:
+- Transakční a billing poplatky:
+- Opakované ruční výjimky:
+
+Limity a chování:
+- Největší nákladový driver:
+- Současné produktové limity:
+- Kde zákazníci limitům nerozumí:
+- Kandidát na automatizaci:
+
+Privacy-first kontrola:
+- Použitá data:
+- Osobní údaje vyloučené z reportu:
+- Agregace / interní ID:
+- Přístupy k reportu:
+- Retence reportu:
+
+Rozhodnutí:
+- Co změníme v produktu:
+- Co změníme v pricingu:
+- Co změníme v supportu nebo onboardingu:
+- Kdy výsledek zkontrolujeme:
+```
+
+
 ## Pracovní log
+- **2026-09-20:** Doplněna příloha GK o kontrole nákladů a unit economics pro malý SaaS: rozdělení nákladů podle chování, volba jednotky, hrubá marže, segmentová náročnost, férové limity, privacy-first měření, cost review, checklist a unit economics karta.
 - **2026-09-20:** Doplněna příloha GJ o cashflow výhledu pro malý SaaS: horizonty 14/30/90 dní, třídění příjmů podle jistoty, zásahovost výdajů, scénáře, privacy-first práci s forecastem, produktové signály, review přesnosti, checklist a forecast karta.
 - **2026-09-20:** Doplněna příloha GI o finance handoffu mezi produktem, supportem a účetnictvím: slovník billing událostí, role, handoff karta, uzávěrkový rytmus, převod výjimek do backlogu, metriky kvality, privacy-first checklist a šablona karty.
 - **2026-09-20:** Doplněna příloha GH o fakturačních exportech pro účetnictví bez datového výprodeje: účely exportů, stabilní ID, verzování schématu, kontrola kvality, privacy-first sdílení, účetní datový slovník, metriky tření, checklist a exportní karta.
