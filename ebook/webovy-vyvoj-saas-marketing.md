@@ -36306,8 +36306,160 @@ Rozhodnutí:
 - Vlastník:
 ```
 
+
+## Příloha GZ: Expanze u stávajícího zákazníka bez land-and-expand manipulace a datového přejídání
+
+Expanze je zdravá jen tehdy, když vychází z reálné hodnoty. Pokud zákazník používá produkt, obnovil smlouvu a má jasnější představu o dopadu, je logické hledat další tým, workflow, integraci nebo tarif. Ale „land and expand“ se snadno zvrhne v taktiku, kde se nejdřív prodá levný vstup, potom se zákazník zamkne daty a nakonec se mu účtuje každé normální použití jako překvapení v krabici. To není růst. To je vztahová daň.
+
+Dobrá expanze u malého SaaS má tři podmínky: zákazník ví, proč rozšiřuje, tým ví, co rozšíření provozně znamená, a data se nesbírají jen proto, že by se možná jednou hodila do hezkého grafu. Expanze má být pokračování užitečné práce, ne nový prodejní cirkus v cizím kabátu.
+
+> Codyho komentář: Nejlepší upsell není věta „máte nárok na premium“. Nejlepší upsell je moment, kdy zákazník sám řekne: „Tohle už nám funguje tady, šlo by to použít i v druhém týmu?“ V tu chvíli neprodávej ohňostroj. Pomoz mu nerozbít to, co už funguje.
+
+### Rozlišuj čtyři typy expanze
+
+Ne každé rozšíření je stejné. Když je házíš do jedné CRM kolonky „upsell“, ztratíš kontext a začneš zákazníkovi nabízet věci, které s jeho realitou nesouvisí.
+
+Prakticky rozlišuj:
+
+- **více uživatelů:** produkt používá stejný tým, ale zapojí se další role,
+- **více workflow:** stejný tým začne řešit další opakovaný proces,
+- **více týmů nebo poboček:** produkt se kopíruje do podobného prostředí,
+- **vyšší provozní závazek:** zákazník potřebuje lepší SLA, podporu, správu rolí, audit nebo integrace.
+
+Každý typ má jiné riziko. Přidat deset uživatelů může být hlavně onboardingový problém. Přidat druhou pobočku už může znamenat rozdílná oprávnění, lokální zvyklosti a nové datové toky. Vyšší SLA zase není jen vyšší cena; je to závazek, že malý tým zvládne dostupnost, reakční dobu a eskalace bez hrdinského nočního divadla.
+
+### Hledej expanzi podle pracovních signálů, ne podle šmírování
+
+Privacy-first expanze nestojí na sledování každého kliknutí jednotlivce. Stačí kombinovat agregované signály a lidský kontext. Zákazník nepotřebuje, abys věděl, kdo v úterý v 9:41 otevřel třetí záložku. Potřebuje, abys poznal, kde produkt zjevně řeší opakovanou práci a kde by další rozsah dával smysl.
+
+Použitelné signály:
+
+- **opakované workflow:** stejný proces proběhne stabilně několikrát za měsíc,
+- **organická poptávka:** zákazník se ptá na další tým, export, roli nebo integraci,
+- **support vzory:** více lidí řeší podobnou otázku, protože produkt přerostl původní tým,
+- **ruční obchvaty:** zákazník si mimo produkt vytváří tabulky, duplicity nebo improvizace,
+- **hodnotové momenty:** produkt prokazatelně šetří čas, snižuje chyby nebo zlepšuje dohledatelnost.
+
+Tyto signály zapisuj na úrovni účtu nebo workflow, ne jako behaviorální profil jednotlivce. Když potřebuješ konkrétní detail, ptej se férově: „Vidíme, že tento proces běží častěji. Chcete probrat, jestli dává smysl zapojit další tým?“ To je normální obchodní péče. Tajné skórování lidí v pozadí je datový sliz.
+
+### Expanzi kvalifikuj stejně přísně jako nový prodej
+
+Stávající zákazník není automaticky dobrý kandidát na rozšíření. Někdy je nejlepší expanzi odmítnout nebo odložit, protože základní adopce ještě není stabilní. Pokud první tým sotva používá základní workflow, přidat další pobočku znamená rozšířit chaos. Gratuluji, právě jsi horizontálně škáloval problém.
+
+Před návrhem expanze si polož otázky:
+
+- **Je současné použití stabilní?** Produkt není jen jednorázově nasazený, ale skutečně se používá.
+- **Existuje jasný druhý problém?** Rozšíření řeší konkrétní workflow, ne abstraktní „více možností“.
+- **Má zákazník vlastníka změny?** Někdo uvnitř firmy umí rozšíření vysvětlit a koordinovat.
+- **Zvládneme provozní dopad?** Support, onboarding, integrace a fakturace mají kapacitu.
+- **Je datový rozsah přiměřený?** Nepotřebujeme sbírat nové kategorie dat jen kvůli obchodní ambici.
+
+Pokud odpověď na dvě a více otázek není jasné ano, expanzi nejdřív připrav. Oprav onboarding, doplň dokumentaci, vyřeš otevřený bug, domluv championy, zmenši rozsah. Expanze má zvyšovat důvěru, ne dokazovat, že obchodní plán má větší ego než produkt.
+
+### Navrhuj expanzi jako volitelnou pracovní změnu
+
+Rozšiřovací nabídka má být čitelná a srovnatelná. Zákazník má rozumět, co přesně přibude, kolik to stojí, jaký dopad se čeká, co se nezmění a jak může případně couvnout. Skryté limity a překvapivé poplatky jsou rychlá cesta k tomu, aby se z upsellu stal důvod pro churn.
+
+Dobrá expanzní nabídka obsahuje:
+
+- **rozsah:** které týmy, workflow, integrace nebo role přibudou,
+- **očekávaný výsledek:** jakou pracovní změnu má rozšíření přinést,
+- **cenu a metriky:** co je účtováno, kde jsou limity a co je férové použití,
+- **implementační plán:** kdo co připraví, kdy a s jakým minimem ruční práce,
+- **datové změny:** jaká data nově potečou systémem, proč a jak dlouho se drží,
+- **exit možnost:** jak rozšíření zmenšit, vypnout nebo oddělit bez držení dat jako rukojmí.
+
+U B2B SaaS často funguje „expanzní pilot“: omezené rozšíření na jeden tým, jednu pobočku nebo jeden proces na 30–60 dní. Cíl není další nekonečná zkušební verze zdarma. Cíl je ověřit, že rozšíření přináší hodnotu a nezatíží zákazníka ani dodavatele víc, než dává smysl.
+
+### Nepoužívej cenu jako past
+
+Cenová expanze má být předvídatelná. Pokud zákazník najednou platí víc jen proto, že produkt konečně začal používat, bude mít pocit, že byl potrestán za úspěch. To neznamená, že nemáš růst s hodnotou. Znamená to, že cenová metrika musí být vysvětlitelná a zákazník musí dopředu vědět, kdy se mění.
+
+Férové cenové principy:
+
+- **limit je viditelný předem:** zákazník ví, kdy se blíží hraně tarifu,
+- **překročení není trest:** nejdřív upozorni, potom nabídni varianty,
+- **metrika souvisí s hodnotou:** účtuješ podle týmů, workflow, objemu nebo závazku, ne podle náhodných technických detailů,
+- **downgrade je možný:** zákazník může rozsah zmenšit bez ztráty datového exportu,
+- **výjimky mají datum konce:** sleva, kredit nebo přechodné období nesmí žít věčně v účetním podzemí.
+
+Codyho praktické pravidlo: pokud zákazník potřebuje spreadsheet, aby pochopil fakturu po expanzi, není to „enterprise pricing“. Je to domácí úkol, který jsi mu hodil na stůl.
+
+### Udržuj expanzi provozně jednoduchou
+
+Expanze, která zní obchodně skvěle, může provozně zničit malý tým. Druhá pobočka přinese jiné role. Nová integrace přinese výpadky třetí strany. Vyšší tarif přinese očekávání rychlejší podpory. Pokud to nemáš připravené, prodáváš budoucí incident.
+
+Před spuštěním rozšíření si připrav:
+
+- onboardingový plán pro nové uživatele nebo týmy,
+- aktualizovanou znalostní bázi a interní support poznámky,
+- jasnou správu rolí a přístupů,
+- kontrolu datových toků a retenčních pravidel,
+- billing scénář pro první fakturační období po změně,
+- odpověď na otázku, co se stane, když rozšíření nebude fungovat.
+
+Nejlepší expanze působí nudně: zákazník ví, co se stane, tým ví, co má udělat, faktura dává smysl a data netečou do pěti nových nástrojů jen proto, že někdo chtěl „lepší insight“. Nudné je v provozu kompliment.
+
+### Checklist privacy-first expanze
+
+Před návrhem rozšíření si projdi:
+
+- máme důkaz, že současný rozsah zákazníkovi přináší hodnotu,
+- víme, jaký konkrétní nový problém expanze řeší,
+- zákazník má interního vlastníka změny,
+- umíme rozšíření dodat bez neřízeného scope creepu,
+- cena, limity a dopad na fakturaci jsou srozumitelné předem,
+- nové role a přístupy odpovídají principu nejmenších oprávnění,
+- nové datové toky mají jasný účel, právní a provozní oporu,
+- export a zmenšení rozsahu zůstávají férové,
+- support ví, co se mění a jak odpovídat,
+- po 30–60 dnech je naplánované review rozšíření.
+
+## Expanzní karta: [zákazník / tým / workflow]
+
+```markdown
+# Expanzní karta: [zákazník / tým / workflow]
+
+## Současný stav
+- Původní problém:
+- Dnes používané workflow:
+- Důkaz hodnoty:
+- Otevřená rizika:
+
+## Návrh rozšíření
+- Typ expanze: více uživatelů / workflow / týmů / SLA / integrace
+- Nový problém, který řešíme:
+- Očekávaný pracovní výsledek:
+- Interní vlastník u zákazníka:
+
+## Rozsah
+- Co přibude:
+- Co výslovně nepřibude:
+- Implementační kroky:
+- Stop pravidla nebo pilotní hranice:
+
+## Cena a billing
+- Cenová změna:
+- Metrika účtování:
+- Limity a upozornění:
+- Dopad na nejbližší fakturu:
+
+## Privacy-first kontrola
+- Nové kategorie dat:
+- Nové přístupy a role:
+- Retence / export / vypnutí:
+- Subprocesoři nebo integrace:
+
+## Review
+- Datum review:
+- Metrika úspěchu:
+- Zpětná vazba zákazníka:
+- Rozhodnutí: pokračovat / upravit / vrátit zpět
+```
+
 ## Pracovní log
 
+- **2026-09-20:** Doplněna příloha GZ o expanzi u stávajícího zákazníka: typy rozšíření, pracovní signály bez sledování jednotlivců, kvalifikace upsellu, férová cenová komunikace, provozní připravenost, checklist a expanzní karta.
 - **2026-09-20:** Doplněna příloha GY o renewalu a prodloužení smlouvy: vazba na původní slib, renewal timeline, shrnutí hodnoty, práce s riziky, privacy-first export a offboarding, férová cenová komunikace, uzavření smyčky, checklist a renewal karta.
 
 - **2026-09-20:** Doplněna příloha GX o 60–90denní adopci po go-live: adopční rytmus, health score podle pracovních výsledků, tiché návraty ke starému procesu, férová expanze, 90denní review, datový úklid, checklist a adopční karta.
