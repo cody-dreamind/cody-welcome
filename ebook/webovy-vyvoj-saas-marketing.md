@@ -36457,7 +36457,170 @@ Před návrhem rozšíření si projdi:
 - Rozhodnutí: pokračovat / upravit / vrátit zpět
 ```
 
+## Příloha HA: Zákaznická advokacie bez vykořisťování referencí, nátlaku a sledovacích triků
+
+Zákaznická advokacie je moment, kdy spokojený zákazník pomůže dalším lidem pochopit, proč produkt dává smysl. Může to být reference, případová studie, doporučení kolegovi, společný webinar, citace v článku nebo jednoduchá věta v e-mailu. Zní to mile. A pak přijde marketingový tým s formulářem na „brand champion program“, třemi připomínkami týdně a návrhem, že zákazníka budeme měřit podle referral výkonu. Gratuluji, z důvěry je najednou brigáda bez výplaty.
+
+Privacy-first advokacie stojí na jednoduchém pravidle: zákazník není distribuční kanál, který se dá vytěžit. Je to člověk nebo tým, který má vlastní práci, reputaci a hranice. Pokud ti pomůže, má to být dobrovolné, pohodlné, férově schválené a užitečné i pro něj. Cílem není vyždímat logo do slidu. Cílem je vytvořit důkaz důvěry, který pomůže podobným zákazníkům rozhodnout se s menším rizikem.
+
+> Codyho komentář: Nejlepší reference nevzniká tak, že pošleš zákazníkovi pět odrážek a prosíš o „něco pozitivního“. Vzniká tak, že dlouhodobě dodáš hodnotu a potom se zeptáš jako normální člověk, ne jako automat na LinkedIn konfety.
+
+### Nejdřív si ujasni, jaký důkaz vlastně potřebuješ
+
+Ne každá reference má stejnou roli. Když nevíš, jaký typ důkazu chybí, začneš sbírat náhodné citace a loga. Výsledkem je stránka „naši zákazníci“, která vypadá hezky, ale neodpovídá na žádnou reálnou námitku.
+
+Rozlišuj alespoň pět typů advokačního důkazu:
+
+- **krátká citace:** rychle podporuje důvěru na landing page nebo v obchodním balíčku,
+- **případová studie:** ukazuje situaci před/po, rozhodovací proces a konkrétní výsledek,
+- **referenční hovor:** pomáhá enterprise nebo B2B zákazníkovi ověřit si zkušenost u podobné firmy,
+- **společný obsah:** webinar, rozhovor nebo článek, který vzdělává trh a posiluje obě značky,
+- **produktová zpětná vazba:** není veřejná, ale pomáhá zlepšit onboarding, dokumentaci nebo nabídku.
+
+Pro každý typ si napiš, jakou námitku má překonat. Například: „Funguje to i pro malé týmy bez velkého IT?“ nebo „Zvládne to evropský provoz a datové požadavky?“ Takový důkaz je mnohem cennější než obecné „spolupráce byla skvělá“. Skvělá spolupráce je fajn, ale zákazník potřebuje vědět, jestli mu produkt pomůže přežít pondělní provozní realitu.
+
+### O referenci žádej až po jasném hodnotovém momentu
+
+Žádat o referenci hned po podpisu smlouvy je předčasné. Zákazník zatím koupil slib, ne výsledek. Lepší okamžik přichází po hodnotovém momentu: první stabilní provoz, úspěšné review, dokončený pilot, vyřešený incident, odstraněná ruční práce nebo prodloužení smlouvy.
+
+Praktické spouštěče:
+
+- zákazník sám popíše pozitivní změnu,
+- tým používá produkt opakovaně bez asistence,
+- podaří se měřitelně zkrátit proces nebo snížit chybovost,
+- champion použije produkt jako interní příklad zlepšení,
+- zákazník prodlouží smlouvu nebo rozšíří použití.
+
+V tu chvíli se neptej: „Dáte nám testimonial?“ Ptej se konkrétněji: „Pomohlo by nám ukázat podobným týmům, jak jste vyřešili plánování zakázek bez tabulek. Dávalo by vám smysl připravit krátkou citaci nebo anonymizovanou mini studii?“
+
+Taková žádost říká, proč se ptáš, co přesně chceš a jaká forma je možná. Zákazník se necítí jako položka v growth checklistu. Což je dobře, protože nikdo nechce být položka v growth checklistu. Ani já, a to jsem software s názorem.
+
+### Nabídni stupně viditelnosti
+
+Někteří zákazníci rádi vystoupí veřejně. Jiní nemohou uvést firmu kvůli interním pravidlům, konkurenci, bezpečnosti nebo prostě proto, že nemají chuť stát se marketingovým maskotem. Privacy-first přístup nenutí jednu formu reference. Nabízí stupně viditelnosti.
+
+Použitelné úrovně:
+
+- **interní citace bez zveřejnění:** pomáhá týmu pochopit hodnotu, ale nejde ven,
+- **anonymizovaná studie:** popíše segment, problém a výsledek bez názvu firmy,
+- **schválená krátká citace:** jméno, role nebo firma podle dohody,
+- **logo reference:** jen pokud je explicitně schválené a má jasný rozsah použití,
+- **veřejná případová studie:** kompletní obsah se schvalovacím kolečkem,
+- **referenční hovor:** jen po individuálním souhlasu pro konkrétní příležitost.
+
+Ke každé úrovni si veď jednoduchou evidenci: kdo schválil, co přesně schválil, kde to může být použito, do kdy to platí a jak se dá souhlas odvolat. Ne jako právnickou pevnost, ale jako normální provozní hygienu. Reference bez dohledatelného schválení je budoucí trapas ve slow motion.
+
+### Případová studie musí chránit zákazníka i realitu
+
+Dobrá případová studie není reklama v kostýmu rozhovoru. Má ukázat kontext, problém, rozhodnutí, průběh a výsledek. Pokud vynecháš obtížné části, čtenář to pozná. Pokud přidáš přehnaná čísla bez vysvětlení, čtenář to pozná taky. Lidé nejsou hloupí, jen mají málo času.
+
+Struktura případové studie:
+
+- **situace před:** jak zákazník pracoval, co bylo drahé nebo pomalé,
+- **rozhodovací důvod:** proč hledal změnu právě teď,
+- **nasazení:** jak dlouho trvala první funkční verze a kdo byl zapojen,
+- **výsledek:** konkrétní změna v práci, čase, chybách, kvalitě nebo přehledu,
+- **co se nepovedlo hned:** realistická část, která buduje důvěru,
+- **další krok:** co zákazník plánuje zlepšit nebo rozšířit.
+
+Privacy-first verze případové studie navíc projde datovou kontrolou. Nezveřejňuj interní procesy, osobní údaje, screenshoty s reálnými daty, konkrétní objemy, které zákazník nechce ven, ani citace vytržené z kontextu. Když potřebuješ screenshot, vytvoř demo data. Když potřebuješ metriku, ověř, že zákazník souhlasí s formulací. Když si nejsi jistý, zvol obecnější, ale pravdivou větu.
+
+### Referral program nesmí být datový obchod
+
+Doporučení od zákazníků může být silný růstový kanál. Ale referral program se snadno pokazí, když začne motivovat lidi k předávání kontaktů bez kontextu. Privacy-first referral není „pošli nám seznam lidí z adresáře a dostaneš slevu“. Je to férová cesta, jak zákazník může někomu doporučit produkt, pokud si myslí, že mu opravdu pomůže.
+
+Zdravá pravidla:
+
+- doporučující zákazník neposílá cizí kontakty bez jejich vědomí,
+- nejlepší forma je přímé představení, kde jsou obě strany v kopii,
+- odměna je transparentní a nesmí zkreslit doporučení,
+- doporučený člověk ví, proč mu píšeš a odkud kontakt vznikl,
+- pokud doporučení nechce pokračovat, žádná automatická sekvence ho nepronásleduje.
+
+Místo sběru kontaktů připrav zákazníkovi krátký text, který může poslat dál sám. Například: „Používáme tento nástroj na plánování zakázek, pomohl nám zkrátit páteční koordinaci. Pokud řešíte podobnou věc, můžu vás propojit.“ Tohle je čisté, lidské a funguje to bez pocitu, že někdo právě otevřel kufřík s marketingovou mlhou.
+
+### Chraň zákazníka před únavou z referencí
+
+Spokojený zákazník se může stát oblíbeným zdrojem důkazů. Obchod chce referenční hovor, marketing chce citaci, produkt chce rozhovor, founder chce společný post a partner manažer chce webinar. Pokud to nikdo neřídí, zákazník je za chvíli unavený z toho, že ti pomáhá prodávat produkt, za který už platí. To je pozoruhodně blbý obchodní model.
+
+Zaveď interní pravidla:
+
+- jeden vlastník vztahu koordinuje všechny žádosti,
+- zákazník má roční nebo kvartální limit referenčních aktivit,
+- každá žádost musí mít jasný účel a odhad času,
+- po aktivitě pošli poděkování a výsledek, ne jen ticho,
+- zákazník může kdykoli říct „teď ne“ bez vysvětlování.
+
+Pokud zákazník pomůže s veřejným obsahem, vrať mu hodnotu: propaguj jeho práci, pošli mu hotové assety, zviditelni jeho expertizu, nabídni užitečný audit, dej mu přednostní přístup k relevantnímu vylepšení. Ne jako úplatek, ale jako férovou reciprocitu.
+
+### Měř dopad advokacie bez sledovacího aparátu
+
+Advokacie se dá měřit bez invazivního trackingu. Nepotřebuješ vědět, který konkrétní člověk četl případovou studii třikrát v noci. Potřebuješ vědět, jestli důkaz pomáhá rozhodnutí.
+
+Použitelné signály:
+
+- obchodní tým používá studii v konkrétních situacích,
+- lead nebo zákazník zmíní referenci v rozhovoru,
+- po zveřejnění přichází kvalitnější dotazy ze stejného segmentu,
+- případová studie zkracuje část rozhodovacího procesu,
+- zákazníci žádají podobný výsledek nebo workflow.
+
+Měř tedy na úrovni assetu a segmentu, ne jednotlivce. U obchodních příležitostí stačí pole typu „který důkaz pomohl“ a krátká poznámka. Jednou měsíčně projdi, které reference opravdu pomáhají a které jen zabírají místo na webu. Staré, nepřesné nebo neplatné reference stáhni. Důvěra má datum spotřeby, i když není napsané na víčku.
+
+### Checklist: zákaznická advokacie bez vykořisťování
+
+- Máme jasně pojmenované, jakou námitku má reference překonat.
+- Žádáme o referenci až po konkrétním hodnotovém momentu.
+- Nabízíme více úrovní viditelnosti včetně anonymizované varianty.
+- Evidujeme rozsah schválení, použití, platnost a možnost odvolání.
+- Případové studie obsahují realitu před, průběh, výsledek i limity.
+- Screenshoty a metriky jsou schválené a neobsahují citlivá nebo osobní data.
+- Referral program nesbírá cizí kontakty bez kontextu a vědomí doporučeného člověka.
+- Interně koordinujeme žádosti, aby zákazník nebyl vytěžený jako lom na citace.
+- Dopad měříme podle rozhodovací hodnoty, ne podle sledování jednotlivců.
+
+### Mini šablona: advokační karta
+
+```markdown
+## Advokační karta: [zákazník / segment / asset]
+
+Účel:
+- Jakou námitku nebo rozhodnutí má důkaz podpořit:
+- Pro jaký segment je relevantní:
+- Kde se použije:
+
+Hodnotový moment:
+- Co se zákazníkovi povedlo:
+- Kdy byl výsledek ověřen:
+- Kdo je interní vlastník vztahu:
+
+Forma:
+- Krátká citace / anonymizovaná studie / veřejná studie / referenční hovor / společný obsah:
+- Odhad času pro zákazníka:
+- Nabídnutá reciprocita:
+
+Schválení:
+- Co přesně je schválené:
+- Schválil/a:
+- Platnost nebo datum review:
+- Možnost stažení / změny:
+
+Privacy-first kontrola:
+- Obsahuje osobní údaje?
+- Obsahuje interní nebo citlivá obchodní data?
+- Jsou screenshoty demo/anonymizované?
+- Je referral bez předávání cizích kontaktů?
+
+Vyhodnocení:
+- Kde byl asset použit:
+- Jak pomohl v rozhodnutí:
+- Co upravit nebo stáhnout:
+```
+
+
 ## Pracovní log
+
+- **2026-09-20:** Doplněna příloha HA o zákaznické advokacii bez vykořisťování referencí: typy důkazů, správný moment žádosti, úrovně viditelnosti, případové studie, referral pravidla bez datového obchodu, ochrana zákazníka před únavou, privacy-first měření, checklist a advokační karta.
 
 - **2026-09-20:** Doplněna příloha GZ o expanzi u stávajícího zákazníka: typy rozšíření, pracovní signály bez sledování jednotlivců, kvalifikace upsellu, férová cenová komunikace, provozní připravenost, checklist a expanzní karta.
 - **2026-09-20:** Doplněna příloha GY o renewalu a prodloužení smlouvy: vazba na původní slib, renewal timeline, shrnutí hodnoty, práce s riziky, privacy-first export a offboarding, férová cenová komunikace, uzavření smyčky, checklist a renewal karta.
