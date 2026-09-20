@@ -33902,6 +33902,10 @@ Praktický formát měsíčního sdělení:
 
 Pokud máš malý tým, mluv lidsky. „Zastavujeme nové nástroje bez schválení“ je lepší než „optimalizujeme provozní efektivitu“. Druhá věta zní jako tiskovka společnosti, která právě vyhodila kávovar i dobrou náladu.
 
+### Mimořádné runway review nespouštěj pocitově
+
+Kromě měsíčního rytmu si napiš i tři jasné spouštěče mimořádného review: výpadek velké platby, nový dlouhodobý závazek nebo změnu infrastruktury, která významně hýbe náklady. Díky tomu se finance neřeší pokaždé, když má někdo špatné pondělí, ale zároveň nečekáš do další porady, když se realita opravdu změnila.
+
 ### Checklist: runway plán bez paniky
 
 - Má tým konzervativní, realistický a růstový scénář runway?
@@ -33965,6 +33969,7 @@ Rozhodnutí:
 
 
 ## Pracovní log
+- **2026-09-20:** Doplněn krátký odstavec k příloze GL o mimořádném runway review: jasné spouštěče změn místo pocitového finančního poplachu.
 - **2026-09-20:** Doplněna příloha GL o runway plánu pro malý SaaS: tři scénáře runway, rozhodovací hranice, reverzibilita nákladů, vrstvy příjmů, privacy-first reportování, propojení s produktovou strategií, interní komunikace, checklist a runway karta.
 - **2026-09-20:** Doplněna příloha GK o kontrole nákladů a unit economics pro malý SaaS: rozdělení nákladů podle chování, volba jednotky, hrubá marže, segmentová náročnost, férové limity, privacy-first měření, cost review, checklist a unit economics karta.
 - **2026-09-20:** Doplněna příloha GJ o cashflow výhledu pro malý SaaS: horizonty 14/30/90 dní, třídění příjmů podle jistoty, zásahovost výdajů, scénáře, privacy-first práci s forecastem, produktové signály, review přesnosti, checklist a forecast karta.
