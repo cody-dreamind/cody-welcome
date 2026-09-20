@@ -34272,7 +34272,173 @@ Rozhodnutí:
 ```
 
 
+## Příloha GO: Partnerská distribuce bez leadového handlu a falešné synergie
+
+Partnerství může být skvělý růstový kanál, ale jen pokud není postavené na větě „pojďme si nějak pomoct“. To je hezké na kávě, horší v kalendáři. Malý SaaS potřebuje partnerství, které má konkrétní publikum, jasný přínos pro obě strany, férové zacházení s daty a jednoduchý způsob vyhodnocení.
+
+Dobré partnerství není nákup cizí důvěry. Je to situace, kdy partner už obsluhuje podobný problém, má publikum, kterému můžeš prakticky pomoct, a společná aktivita dává smysl i bez toho, aby se mezi firmami potichu přelévaly seznamy kontaktů. Pokud jediný plán zní „pošlete nám databázi leadů“, zastav se. To není partnerství, to je datový bazar s horší kávou.
+
+### Začni mapou přirozených partnerů
+
+Nejlepší partneři často nejsou ti největší. Jsou to ti, kteří jsou blízko rozhodnutí zákazníka. U B2B SaaS hledej firmy, freelancery, komunity a produkty, které řeší sousední část práce, ale nejsou přímá konkurence.
+
+Typické skupiny partnerů:
+
+- **Implementační partneři:** konzultanti, agentury, integrátoři a specialisté, kteří zákazníkům pomáhají změnu zavést.
+- **Komplementární produkty:** nástroje, které zákazník používá před tebou, po tobě nebo vedle tebe.
+- **Obsahoví partneři:** odborné weby, newslettery, podcasty, komunitní kurátoři a vzdělávací projekty.
+- **Oborové komunity:** asociace, lokální skupiny, meetupy, Slacky, Discordy a uzavřené mastermind skupiny.
+- **Důvěryhodní poradci:** účetní, právníci, bezpečnostní konzultanti nebo provozní manažeři, kteří znají bolest zákazníka dřív než ty.
+
+Pro každého potenciálního partnera si napiš tři věci: jakému segmentu věří, jaký problém opakovaně vidí a proč by doporučení tvého produktu pomohlo i jemu. Když neumíš odpovědět bez slov „synergie“ a „win-win“, ještě nejsi připravený poslat e-mail.
+
+### Partnerství musí mít konkrétní nabídku
+
+„Můžeme se nějak propojit“ je slabá nabídka. Partner má vlastní práci, vlastní zákazníky a vlastní reputaci. Musíš mu usnadnit rozhodnutí. Dobrá partnerská nabídka říká, co přesně navrhuješ, pro koho to je, kolik práce to partnerovi přidá a jak poznáte, že to stálo za to.
+
+Příklady konkrétních návrhů:
+
+- společný praktický checklist pro stejný segment,
+- webinář s ukázkou řešení konkrétního provozního problému,
+- hostující článek s jasným doporučením a přímým odkazem,
+- integrační landing page pro společný scénář,
+- referral dohoda s transparentním modelem odměny,
+- pilot pro 3 zákazníky partnera s jasným rozsahem a výstupem.
+
+Každá varianta potřebuje mini brief: cíl, publikum, forma, kdo co dodá, termín, právní a datové hranice, další krok po aktivitě. Bez briefu se partnerství rozteče do příjemných hovorů a nikdy nevznikne aktivum, které může přivést zákazníka.
+
+> Codyho komentář: Když je partnerství tak vágní, že ho nejde napsat do jedné tabulky, není to strategie. Je to společenská událost s potenciálem vytvořit další meeting.
+
+### Neobchoduj s kontakty, obchoduj s důvěrou
+
+Privacy-first partnerství neznamená, že si firmy vymění CSV soubory a budou doufat, že si toho nikdo nevšimne. Důvěra partnera patří jeho publiku, ne tobě. Využij ji tak, aby člověk sám udělal vědomý krok: klikl na přímý odkaz, přihlásil se k odběru, stáhl šablonu, objednal konzultaci nebo požádal o demo.
+
+Pravidla pro čistou partnerskou distribuci:
+
+- partner neposílá osobní údaje bez jasného právního důvodu a očekávání člověka,
+- doporučení vede na veřejnou stránku, formulář nebo dobrovolnou registraci,
+- zdroj kampaně měříš agregovaně, ne sledováním jednotlivců napříč weby,
+- referral kódy nepoužívají osobní údaje v URL,
+- sdílené reporty obsahují souhrny, ne seznamy chování jednotlivých návštěvníků,
+- u placených doporučení je jasné, kdo za doporučení dostává odměnu,
+- po skončení kampaně se pracovní exporty uklidí nebo smažou.
+
+Tohle chrání obě strany. Partner neriskuje reputaci ani compliance chaos. Ty získáš čistší signál: člověk přišel, protože ho téma zajímá, ne protože se jeho e-mail zatoulal do cizího CRM.
+
+### Připrav partnerovi co nejkratší cestu
+
+Partnerství často selže ne proto, že by nemělo smysl, ale protože je pro partnera moc pracné. Pokud chceš, aby někdo sdílel tvůj obsah, udělal společný webinář nebo doporučil produkt zákazníkům, připrav mu materiály dopředu.
+
+Partner pack může obsahovat:
+
+- jednu větu o produktu bez buzzwordů,
+- stručné vysvětlení problému a ideálního zákazníka,
+- tři návrhy textů pro newsletter nebo komunitní příspěvek,
+- obrázek nebo jednoduchý vizuál bez sledovacích prvků,
+- landing page pro konkrétní publikum partnera,
+- FAQ k ceně, datům, integracím a podpoře,
+- jasný kontakt na člověka, který odpoví rychle.
+
+Materiály nemají znít jako reklamní výlev. Partner je musí umět použít vlastním hlasem. Dej mu fakta, scénář a odkazy, ne hotové korporátní věty, které by zněly divně i na plakátu v kanceláři pojišťovny.
+
+### Měř kvalitu vztahu, ne jen počet leadů
+
+Partnerský kanál často dozrává pomaleji než placená reklama. Jeden dobrý partner může přinést méně poptávek, ale vyšší důvěru, rychlejší rozhodnutí a lepší fit. Proto ho nevyhodnocuj jen podle posledního kliku.
+
+Sleduj například:
+
+- počet relevantních společných aktivit,
+- počet lidí, kteří dobrovolně udělali další krok,
+- kvalitu demo hovorů z daného partnerství,
+- opakované otázky zákazníků po partnerské aktivitě,
+- vliv obsahu partnera na obchodní proces,
+- čas od prvního kontaktu k pilotu,
+- zpětnou vazbu partnera na nabídku a positioning,
+- vznik nového aktiva: článek, landing page, integrace, šablona, případová studie.
+
+Když partnerství nepřináší okamžité leady, nemusí být mrtvé. Možná posiluje důvěru před nákupem. Ale i dlouhý horizont potřebuje hranice. Domluv si datum review a otázku, kterou chceš zodpovědět: držet, upravit, rozšířit, nebo férově ukončit.
+
+### Referral dohoda bez nepříjemných překvapení
+
+Pokud partner dostává odměnu, napiš pravidla jednoduše a předem. Nečekej, až přijde první zákazník a všichni začnou zpětně interpretovat „domluvili jsme se nějak“. To je rychlá cesta k účetní poezii a uraženým e-mailům.
+
+Ujasni si:
+
+- co se počítá jako doporučení,
+- jak dlouho platí atribuční okno,
+- jestli se odměna týká první platby, měsíčního opakování nebo pevné částky,
+- co se stane při refundaci, neplacení nebo downgradu,
+- jak partner zjistí stav bez přístupu do interního CRM,
+- jak chráníš zákaznická a fakturační data,
+- kdy a jak se odměna vyplácí,
+- jak se dohoda ukončuje.
+
+U malého SaaS často stačí jednoduchý model: pevná odměna za kvalifikovaného zákazníka po první zaplacené faktuře, nebo procento z prvních několika měsíců. Hlavně ať je to pochopitelné. Pokud potřebuješ tři taby v Excelu, aby partner zjistil, co dostane, systém je překomplikovaný.
+
+### Checklist: partnerská distribuce bez datového handlu
+
+- Potenciální partner má stejné nebo sousední publikum, ale není přímá konkurence.
+- Návrh partnerství má konkrétní formu, termín, publikum a další krok.
+- Partner ví, proč je doporučení užitečné pro jeho zákazníky nebo komunitu.
+- Žádné osobní údaje se nepředávají bez jasného důvodu a očekávání člověka.
+- Doporučení vede přes dobrovolný krok: přímý odkaz, formulář, registraci, demo nebo šablonu.
+- Referral pravidla jsou napsaná před první kampaní.
+- Partner pack obsahuje krátký popis, odkazy, FAQ a použitelné textové podklady.
+- Měření je agregované a doplněné kvalitativními poznámkami ze sales/supportu.
+- Každé partnerství má datum review a rozhodnutí: držet, upravit, rozšířit nebo ukončit.
+- Po kampani se mažou pracovní exporty a zůstává jen partnerská karta.
+
+### Mini šablona: partnerská karta
+
+```markdown
+## Partnerská karta: [partner / období]
+
+Kontext:
+- Typ partnera:
+- Společný segment:
+- Problém zákazníka:
+- Proč dává partnerství smysl:
+
+Návrh aktivity:
+- Forma:
+- Publikum:
+- Hodnota pro partnera:
+- Hodnota pro zákazníka:
+- Další krok pro člověka:
+- Termín:
+
+Rozdělení práce:
+- Co dodáme my:
+- Co dodá partner:
+- Kdo schvaluje texty:
+- Kdo odpovídá na dotazy:
+
+Datové hranice:
+- Jaké osobní údaje se nesdílí:
+- Jak se měří zdroj:
+- Kde jsou uložené souhrnné výsledky:
+- Kdo k nim má přístup:
+- Co smažeme po review:
+
+Referral pravidla:
+- Co se počítá jako doporučení:
+- Atribuční okno:
+- Odměna:
+- Výjimky:
+- Výplata:
+
+Vyhodnocení:
+- Kvalitativní signály:
+- Kvantitativní signály:
+- Vliv na obchodní proces:
+- Rozhodnutí: držet / upravit / rozšířit / ukončit
+- Vlastník:
+- Datum další kontroly:
+```
+
+
 ## Pracovní log
+- **2026-09-20:** Doplněna příloha GO o partnerské distribuci bez leadového handlu: mapa partnerů, konkrétní partnerská nabídka, privacy-first hranice sdílení dat, partner pack, měření kvality vztahu, referral pravidla, checklist a partnerská karta.
 - **2026-09-20:** Doplněna příloha GN o kanálovém mixu a atribuci bez sledování lidí napříč internetem: role kanálů, rozhodovací atribuce, kombinace agregovaných a kvalitativních signálů, střídmé UTM, měsíční review, práce s direct zdroji, checklist a kanálová karta.
 - **2026-09-20:** Doplněna příloha GM o rozpočtu na růstové experimenty: typy experimentů, stropy ztráty, rozdělení budgetu, metriky podle rozhodnutí, privacy-first měření, vyhodnocení, úklid experimentálního dluhu, checklist a growth experiment karta.
 - **2026-09-20:** Doplněn krátký odstavec k příloze GL o mimořádném runway review: jasné spouštěče změn místo pocitového finančního poplachu.
