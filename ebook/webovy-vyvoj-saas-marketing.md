@@ -36618,7 +36618,174 @@ Vyhodnocení:
 ```
 
 
+## Příloha HB: Zákaznické vzdělávání bez akademie pro akademii, sledování lekcí a obsahového skladiště
+
+Zákaznické vzdělávání zní jako krásná disciplína: návody, kurzy, webináře, znalostní báze, onboardingové e-maily, videa a možná i certifikace. Potom se ale malý SaaS tým probudí uprostřed noci a zjistí, že má třicet neaktuálních článků, pět verzí stejného návodu, tři hodiny videa, které nikdo nechce sledovat, a zákazníky, kteří stejně píšou na support: „Kde najdu export?“ Výborně. Vytvořili jsme obsahový sklad, ne vzdělávání.
+
+Dobré zákaznické vzdělávání není knihovna všeho, co produkt umí. Je to systém, který zákazníkovi pomáhá dokončit důležité pracovní kroky s menším stresem, menším počtem chyb a menší závislostí na supportu. Privacy-first verze navíc nepotřebuje sledovat každý scroll, každé zastavení videa a každou minutu v kurzu. Stačí vědět, jestli lidé zvládnou udělat práci, kvůli které si produkt pořídili.
+
+> Codyho komentář: Nejlepší help centrum není to, které má nejvíc článků. Je to to, které zákazník nepotřebuje číst dvakrát. Ano, je to nudnější metrika. Právě proto funguje.
+
+### Nejdřív vzdělávej podle práce, ne podle funkcí
+
+Nejčastější chyba je strukturovat vzdělávání podle menu v aplikaci. „Sekce uživatelé“, „sekce fakturace“, „sekce nastavení“, „sekce integrace“. To dává smysl týmu, který produkt stavěl. Zákazník ale nepřichází s otázkou „jaká tlačítka jsou v modulu správy“. Přichází s úkolem: pozvat kolegu, nastavit první projekt, importovat data, schválit objednávku, připravit report nebo zrušit přístup bývalému zaměstnanci.
+
+Začni proto mapou pracovních situací:
+
+- **první úspěch:** co musí nový zákazník zvládnout během prvního dne,
+- **opakovaná práce:** co bude dělat každý týden nebo měsíc,
+- **rizikové akce:** co může poškodit data, přístupy nebo billing,
+- **výjimečné situace:** export, migrace, změna vlastníka, incident, odchod zaměstnance,
+- **rozhodovací momenty:** kdy zákazník potřebuje vysvětlit hodnotu interně.
+
+Teprve potom k nim přiřaď obsah. Jeden pracovní úkol může potřebovat krátký článek, šablonu e-mailu, screenshot, checklist nebo dvouminutové video. Jiný úkol nepotřebuje obsah vůbec, ale lepší prázdný stav v aplikaci. Pokud se každý týden ptají tři lidé na stejnou věc, není to automaticky důvod napsat delší článek. Možná je to důvod přejmenovat tlačítko.
+
+### Vytvoř minimální vzdělávací systém
+
+Malý SaaS nepotřebuje univerzitu. Potřebuje několik spolehlivých cest, které pokrývají nejdůležitější situace. Začni malou sadou, která se dá udržovat.
+
+Praktické minimum:
+
+- **startovní průvodce:** jeden článek nebo stránka pro první nastavení,
+- **pět kritických návodů:** nejčastější pracovní postupy, ne marketingový katalog funkcí,
+- **bezpečnostní a datové návody:** export, mazání, role, přístupy, auditní stopa,
+- **šablony pro zákazníka:** interní oznámení změny, pozvánka kolegům, checklist před importem,
+- **FAQ pro rozhodovatele:** cena, data, provoz, integrace, odchod, support,
+- **release vzdělávání:** krátké vysvětlení důležitých změn po releasu.
+
+Každý kus obsahu musí mít vlastníka a datum review. Pokud nikdo neví, kdo článek udržuje, článek už začal umírat. Jen zatím nesmrdí.
+
+### Piš návody jako runbook, ne jako brožuru
+
+Návod má člověka dovést z bodu A do bodu B. Nemá dokazovat, že produktový tým zná všechna přídavná jména. Dobrý návod je konkrétní, krátký a bezpečný.
+
+Struktura praktického návodu:
+
+1. **Kdy ho použít:** jedna věta se situací.
+2. **Co budeš potřebovat:** role, oprávnění, data, rozhodnutí.
+3. **Kroky:** očíslované, testovatelné a bez skrytých předpokladů.
+4. **Kontrola výsledku:** jak poznám, že je hotovo.
+5. **Časté chyby:** co se typicky pokazí a jak se vrátit zpět.
+6. **Dopad na data:** co se uloží, odešle, smaže nebo zpřístupní.
+7. **Kdy kontaktovat support:** jasná hranice, kdy už nemá smysl zápasit.
+
+Privacy-first návody mají ještě jednu výhodu: nutí tým přesně popsat datové dopady. Když neumíš jednoduše vysvětlit, co se stane s importovaným souborem, jak dlouho ho držíš a kdo k němu má přístup, problém není ve wordingové jemnosti. Problém je v provozu.
+
+### Video používej jako doplněk, ne jako výmluvu
+
+Video je skvělé pro ukázku toku, kontextu nebo nového konceptu. Je mizerné jako jediný zdroj pravdy pro přesný postup. Zákazník nechce proklikávat osm minut záznamu, aby našel jednu volbu v nastavení. To není vzdělávání, to je digitální úniková hra.
+
+Používej video tam, kde přidává hodnotu:
+
+- první orientace v produktu,
+- ukázka workflow před pilotem,
+- vysvětlení změny po větším releasu,
+- interní enablement pro championy,
+- záznam webináře doplněný kapitolami a textovým shrnutím.
+
+Ke každému videu přidej textovou verzi nebo alespoň kapitoly, klíčové kroky a odkazy na konkrétní návody. Video bez textové alternativy je špatně dohledatelné, hůř přístupné a těžko udržovatelné. Navíc při každé produktové změně nemusíš přetáčet celou pohádku o tlačítku, které se přesunulo o 12 pixelů doprava.
+
+### Vzdělávání v produktu drž střídmé
+
+In-app nápověda umí být užitečná. Umí být také otravná jako obchodník, který se objeví pokaždé, když sáhneš na kliku. Tooltips, bannery, průvodci a checklisty používej jen tam, kde člověk opravdu potřebuje kontext v daném okamžiku.
+
+Dobré použití:
+
+- prázdný stav vysvětluje první krok,
+- riziková akce ukáže dopad a možnost návratu,
+- nový uživatel dostane krátký seznam prvních úkolů,
+- složitá konfigurace odkazuje na detailní návod,
+- změna po releasu je vysvětlena jednou a dá se zavřít.
+
+Špatné použití:
+
+- průvodce překrývá UI, které si chce člověk sám prohlédnout,
+- tooltip opakuje text tlačítka jinými slovy,
+- banner nutí číst marketing při práci,
+- onboarding vyžaduje data, která nejsou nutná,
+- nápověda sbírá detailní behaviorální stopu jen proto, že to nástroj umožňuje.
+
+Privacy-first pravidlo: měř agregovaně a účelově. Nepotřebuješ vědět, že Jana z účtárny zavřela tooltip po 3,7 sekundách. Potřebuješ vědět, jestli se po úpravě nápovědy snížil počet support dotazů k importu a jestli víc týmů dokončilo bezpečný první import.
+
+### Support je zdroj vzdělávacích priorit
+
+Support tikety nejsou jen požáry. Jsou to hlasité signály, kde vzdělávání, UI nebo onboarding nefungují. Jednou týdně projdi dotazy a rozděl je podle příčiny:
+
+- chybí návod,
+- návod existuje, ale nejde najít,
+- návod je neaktuální,
+- UI vede člověka špatným směrem,
+- produkt neumí vyřešit běžný scénář,
+- zákazník má interní procesní problém mimo produkt.
+
+Každá kategorie má jinou odpověď. Chybějící návod dopíšeš. Neviditelný návod propojíš z aplikace nebo onboardingového e-mailu. Neaktuální návod opravíš a dáš mu vlastníka. Špatné UI nejde donekonečna léčit články. A procesní problém může potřebovat šablonu, ne další obrazovku v produktu.
+
+### Udržuj obsah jako produkt
+
+Vzdělávací obsah má svůj životní cyklus. Vznikne, pomůže, zastará, sloučí se, smaže se. Pokud staré články nikdy nemažeš, zákazník postupně ztratí důvěru ve všechno, co najde. Jeden zastaralý screenshot umí zkazit víc důvěry než žádný screenshot.
+
+Zaveď jednoduchá pravidla:
+
+- každý článek má vlastníka,
+- každý článek má datum poslední kontroly,
+- kritické návody se kontrolují při každém releasu, který mění daný tok,
+- podobné články se slučují,
+- neaktuální obsah se archivuje nebo přesměruje,
+- support má snadnou cestu nahlásit chybu v dokumentaci.
+
+Nejlepší dokumentace není ta, která nikdy nestárne. Taková neexistuje. Nejlepší dokumentace je ta, u které je jasné, kdo ji opraví, když zestárne.
+
+### Checklist: zákaznické vzdělávání bez obsahového skladiště
+
+- Máme mapu pracovních situací, ne jen seznam funkcí.
+- Startovní průvodce vede k prvnímu hodnotovému momentu.
+- Kritické návody obsahují kroky, kontrolu výsledku, časté chyby a datový dopad.
+- Video má textové shrnutí, kapitoly nebo odkaz na přesný návod.
+- In-app nápověda pomáhá v kontextu a dá se snadno zavřít.
+- Měříme dopad agregovaně: méně dotazů, méně chyb, rychlejší dokončení práce.
+- Support dotazy převádíme na úpravy obsahu, UI nebo produktu.
+- Každý článek má vlastníka a datum review.
+- Zastaralý obsah mažeme, slučujeme nebo přesměrováváme.
+- Nesbíráme detailní behaviorální data jen proto, že vzdělávací nástroj umí špehovat jako fretka na kofeinu.
+
+### Mini šablona: vzdělávací karta
+
+```markdown
+## Vzdělávací karta: [pracovní situace / segment]
+
+Situace:
+- Jakou práci chce zákazník dokončit:
+- Kdy v životním cyklu zákazníka nastává:
+- Jaké riziko vzniká, když ji nezvládne:
+
+Cílový výsledek:
+- Jak poznáme, že zákazník uspěl:
+- Jaký je první bezpečný krok:
+- Jaká role nebo oprávnění jsou potřeba:
+
+Obsah:
+- Typ: článek / checklist / video / šablona / in-app nápověda:
+- Krátký název:
+- Kde se na něj odkazuje:
+- Co se má po releasu kontrolovat:
+
+Privacy-first kontrola:
+- Jaká data zákazník používá:
+- Co se ukládá, exportuje, maže nebo zpřístupňuje:
+- Je možné postup vyzkoušet na demo datech?
+- Měříme dopad agregovaně bez sledování jednotlivců?
+
+Údržba:
+- Vlastník:
+- Datum posledního review:
+- Signály ze supportu:
+- Co sloučit, smazat nebo přepsat:
+```
+
+
 ## Pracovní log
+
+- **2026-09-20:** Doplněna příloha HB o zákaznickém vzdělávání bez obsahového skladiště: mapa pracovních situací, minimální vzdělávací systém, praktické návody jako runbooky, střídmé video, in-app nápověda, support jako zdroj priorit, údržba obsahu, checklist a vzdělávací karta.
 
 - **2026-09-20:** Doplněna příloha HA o zákaznické advokacii bez vykořisťování referencí: typy důkazů, správný moment žádosti, úrovně viditelnosti, případové studie, referral pravidla bez datového obchodu, ochrana zákazníka před únavou, privacy-first měření, checklist a advokační karta.
 
