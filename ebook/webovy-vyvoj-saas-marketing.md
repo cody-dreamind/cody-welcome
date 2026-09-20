@@ -35596,8 +35596,203 @@ Výsledek:
 ```
 
 
+## Příloha GV: Implementace po podpisu bez chaosu, skrytého scope creepu a datového bordelu
+
+Podepsaná objednávka není cíl. Je to začátek nejrizikovější části vztahu: zákazník už uvěřil slibu, ale ještě neviděl stabilní změnu ve své práci. Právě tady se láme důvěra. Malý SaaS tým často umí udělat dobré demo, dobrý pilot i slušný sales follow-up, ale po podpisu spadne do improvizace: někdo posílá přístupy e-mailem, někdo ladí import přes chat, někdo slíbí drobnou úpravu „jen pro jistotu“ a onboarding se změní v divoký Slack kanál s přílohami, screenshoty a polovičními rozhodnutími.
+
+Implementace má být krátký, řízený přechod od nákupu k reálnému provozu. Ne druhý pilot. Ne zakázkový vývoj schovaný pod slovem onboarding. Ne administrativní mlha, kde zákazník netuší, co se děje, a tým nemá jeden zdroj pravdy.
+
+> Codyho komentář: Po podpisu už není čas hrát si na kouzelníka. Zákazník nepotřebuje dým a zrcadla, ale plán, datum, odpovědné lidi a produkt, který ráno funguje i bez hrdinského programátora v pyžamu.
+
+### Nejdřív odděl onboarding, implementaci a customizaci
+
+Tyto tři pojmy se v malých týmech rády slepí dohromady. Pak se špatně řídí očekávání i cena.
+
+- **Onboarding:** naučení zákazníka používat existující produkt v jeho situaci.
+- **Implementace:** nastavení účtu, rolí, dat, integrací a provozního rytmu.
+- **Customizace:** změna produktu nebo konfigurace mimo standardní vzor.
+- **Migrace:** přesun dat ze starého systému do nového pracovního toku.
+- **Adopce:** skutečné používání lidmi, kteří mají změnit svůj denní návyk.
+
+Každá část má jiné riziko. Onboarding se dá zlepšit dokumentací a šablonami. Implementace potřebuje projektové řízení. Customizace potřebuje obchodní rozhodnutí, protože se snadno promění v produktový dluh. Migrace potřebuje datovou disciplínu. Adopce potřebuje komunikaci, ne jen přístupové údaje.
+
+První implementační schůzka proto nemá být „ukažme si aplikaci ještě jednou“. Má potvrdit, co přesně se zavádí, kdo za to na obou stranách odpovídá, jaká data půjdou do systému a podle čeho poznáme, že zákazník je v produkčním provozu.
+
+### Vytvoř jednu implementační kartu
+
+Implementace potřebuje jeden čitelný dokument. Ne deset vláken a tři tabulky. Implementační karta je malý kontrakt na realitu: shrnuje rozsah, termíny, role, data, rizika a další krok.
+
+Minimální obsah:
+
+- **Cíl:** jaký pracovní výsledek má být po implementaci možný.
+- **Rozsah:** které týmy, scénáře, funkce a integrace jsou zahrnuté.
+- **Mimo rozsah:** co se teď výslovně neřeší.
+- **Role:** vlastník na straně zákazníka, technický kontakt, produktový kontakt, support.
+- **Milníky:** příprava, nastavení, import, školení, první provozní den, review.
+- **Data:** zdroj, formát, nezbytná pole, retenční pravidla, mazání dočasných souborů.
+- **Rizika:** chybějící vstupy, interní schválení, kvalita dat, závislost na třetí straně.
+- **Rozhodnutí:** co se musí potvrdit před spuštěním.
+
+Karta nemusí být složitá. Může to být stránka v Markdownu, issue v repozitáři, záznam v interní wiki nebo projektový brief. Důležité je, aby měla vlastníka a aby se podle ní opravdu pracovalo.
+
+### Scope creep zastavuj slušně a brzy
+
+Po podpisu se objeví věty typu „ještě by se hodilo“, „u nás je to trochu specifické“ nebo „tohle jsme mysleli samozřejmě taky“. Někdy je to legitimní upřesnění. Jindy začátek neplacené zakázky.
+
+Pravidlo pro malý tým:
+
+- pokud požadavek pomáhá splnit původní implementační cíl, zařaď ho do plánu,
+- pokud mění cílový proces, napiš variantu a dopad na termín,
+- pokud vyžaduje vývoj nové funkce, dej ho do produktového rozhodnutí,
+- pokud je užitečný jen pro jednoho zákazníka, naceň ho jako custom práci nebo odmítni,
+- pokud není potřeba pro první produkční den, odlož ho na post-launch review.
+
+Dobrá odpověď na scope creep není suché „ne“. Lepší je: „Rozumím, tohle může dávat smysl ve druhé fázi. Pro první spuštění držíme rozsah na A, B a C, aby tým začal používat nový proces do pátku. Dopad této úpravy dopíšeme do backlogu a rozhodneme po prvním týdnu provozu.“
+
+Tím chráníš zákazníka před vlastní lavinou nápadů. Ano, i zákazníci potřebují občas chránit před sebou. Je to péče, jen s menším množstvím aromaterapie.
+
+### Datový přenos dělej nudně a auditovatelně
+
+Nejnebezpečnější část implementace bývá import a sdílení dat. Tady se láme privacy-first provoz. Není v pořádku, aby zákazník poslal export celé databáze na osobní e-mail, někdo ho stáhl do Downloads, upravil v tabulkovém editoru a pak zapomněl smazat.
+
+Bezpečnější postup:
+
+- předem popiš, jaká data jsou nutná a proč,
+- přijímej data přes dohodnutý bezpečný kanál,
+- preferuj testovací, anonymizovaná nebo zúžená data pro první kontrolu,
+- odděl produkční import od ladění transformační logiky,
+- zapisuj, kdo měl k datům přístup a kdy,
+- maž dočasné soubory po ověření importu,
+- zákazníkovi potvrď, co bylo importováno a co bylo odmítnuto.
+
+U malého SaaS to nemusí znamenat enterprise divadlo. Stačí jasná importní karta, kontrolní seznam a disciplína. Privacy-first není počet razítek. Je to schopnost vysvětlit, proč se data zpracovala, kde byla, kdo je viděl a kdy zmizí, pokud už nejsou potřeba.
+
+### První produkční den připrav jako událost
+
+Spuštění není okamžik, kdy pošleš login. Spuštění je první den, kdy lidé pracují novým způsobem. Proto potřebuje plán.
+
+Před prvním produkčním dnem ověř:
+
+- účty, role a oprávnění,
+- hlavní workflow od začátku do konce,
+- importovaná data a jejich kvalitu,
+- notifikace a e-mailové šablony,
+- kontakt pro podporu a eskalaci,
+- rychlý návod pro běžné situace,
+- fallback, pokud něco selže.
+
+První den buď dostupný. Ne proto, abys všechno ručně zachraňoval, ale aby zákazník cítil, že změna má oporu. Krátké ranní potvrzení, odpolední kontrola a jasný support kanál často udělají víc než hodinové školení týden předem.
+
+### Adopci měř podle práce, ne podle přihlášení
+
+To, že se někdo přihlásil, ještě neznamená, že produkt používá. Implementace je hotová až tehdy, když se změnil pracovní tok.
+
+Lepší adopční signály:
+
+- první reálný úkol dokončený v systému,
+- první export nebo report použitý v rozhodnutí,
+- snížení ručního přepisování,
+- méně dotazů na stejný stav,
+- pravidelný týdenní rytmus bez asistence dodavatele,
+- zákaznický vlastník umí zaučit dalšího člověka.
+
+Měř agregovaně a s respektem. Nepotřebuješ sledovat každé kliknutí konkrétního zaměstnance. Potřebuješ vědět, jestli tým umí dokončit klíčovou práci. Pokud ne, problém nemusí být v lenosti uživatelů. Často je v nejasném procesu, špatném nastavení rolí, slabém návodu nebo v tom, že produkt vyžaduje změnu návyku, kterou nikdo interně neodkomunikoval.
+
+### Post-implementační review uzavírá smyčku
+
+Do dvou týdnů po spuštění udělej krátké review. Ne jako formální ceremonii, ale jako rozhodovací bod.
+
+Otázky:
+
+- Co dnes funguje lépe než před implementací?
+- Kde se lidé pořád vrací ke starému procesu?
+- Jaké dotazy se opakovaly na supportu?
+- Co jsme museli řešit ručně?
+- Která nastavení mají být standardní pro další zákazníky?
+- Které požadavky patří do produktu, dokumentace nebo placené custom práce?
+- Jaká dočasná data, účty a přístupy máme uklidit?
+
+Výstupem nemá být dlouhý zápis pro archivní skříně digitálního prachu. Výstupem mají být rozhodnutí: co zlepšit v produktu, co přidat do onboarding šablony, co příště nedělat a co komunikovat zákazníkovi jako další krok.
+
+### Checklist: implementace po podpisu bez chaosu
+
+- [ ] Máme jednu implementační kartu s cílem, rozsahem, rolemi a termíny.
+- [ ] Je jasně oddělený onboarding, implementace, customizace, migrace a adopce.
+- [ ] Víme, co je výslovně mimo rozsah první fáze.
+- [ ] Každý nový požadavek umíme zařadit: do rozsahu, do druhé fáze, do produktu nebo do placené custom práce.
+- [ ] Data přijímáme jen přes dohodnutý bezpečný kanál.
+- [ ] Importujeme jen data potřebná pro potvrzený workflow.
+- [ ] Dočasné soubory, testovací exporty a zbytečné přístupy mají termín úklidu.
+- [ ] První produkční den má podporu, fallback a jasný komunikační kanál.
+- [ ] Adopci měříme podle dokončené práce, ne podle vanity loginů.
+- [ ] Post-implementační review končí konkrétními rozhodnutími.
+
+### Mini šablona: implementační karta
+
+```markdown
+## Implementační karta: [zákazník / produkt / období]
+
+Cíl implementace:
+- Pracovní výsledek:
+- Co má být možné po spuštění:
+- Co se zlepší proti současnému stavu:
+
+Rozsah:
+- Týmy:
+- Uživatelé / role:
+- Workflow:
+- Funkce:
+- Integrace:
+- Mimo rozsah:
+
+Role:
+- Vlastník u zákazníka:
+- Technický kontakt zákazníka:
+- Produktový vlastník na naší straně:
+- Support / eskalace:
+
+Milníky:
+- Kickoff:
+- Nastavení prostředí:
+- Import / migrace:
+- Školení:
+- První produkční den:
+- Review:
+
+Data a privacy-first pravidla:
+- Potřebná data:
+- Data, která nepřebíráme:
+- Kanál předání:
+- Přístupy:
+- Dočasné soubory:
+- Retence:
+- Úklid po spuštění:
+
+Rizika:
+- Chybějící vstupy:
+- Kvalita dat:
+- Závislosti na třetích stranách:
+- Interní schválení:
+- Adopční rizika:
+
+Adopční signály:
+- První dokončený workflow:
+- Opakované použití:
+- Support dotazy:
+- Starý proces, který má skončit:
+
+Rozhodnutí po review:
+- Co zlepšit v produktu:
+- Co zlepšit v dokumentaci:
+- Co přidat do onboarding šablony:
+- Co nabídnout jako druhou fázi:
+- Co uklidit / smazat:
+```
+
+
 ## Pracovní log
 
+- **2026-09-20:** Doplněna příloha GV o implementaci po podpisu: rozlišení onboardingu, implementace, customizace, migrace a adopce, implementační karta, řízení scope creepu, auditovatelný datový přenos, první produkční den, adopční signály, review, checklist a šablona implementační karty.
 - **2026-09-20:** Doplněna příloha GU o proof of concept a placeném pilotu: typy zkoušek, rozhodovací hypotéza, omezení rozsahu, placený pilot, datové minimum, rytmus, stop pravidla, checklist a pilotní karta.
 - **2026-09-20:** Doplněna příloha GT o nákupní komisi a interní obhajobě: champion sada, business case, role v rozhodnutí, privacy-first materiály bez trackingu, námitky, checklist a šablona rozhodovacího balíčku.
 - **2026-09-20:** Doplněna příloha GS o win/loss analýze bez vyšetřování zákazníků: definice stavů, minimální data, dobrovolné rozhovory, klasifikace důvodů, práce s výhrami, privacy-first hranice, měsíční rozhodovací review, checklist a win/loss karta.
