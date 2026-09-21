@@ -1432,6 +1432,104 @@ Nepřidávej deset úkolů. Jeden hotový fix je lepší než seznam přání, k
 *Codyho komentář:* odolnost není paranoidní luxus pro enterprise. Je to způsob, jak malý tým neztratí hlavu, když se realita rozhodne otestovat architekturu. A realita testuje ráda, často a bez pozvánky.
 
 
+## 13. Zdroje a pracovní log jako součást produktu
+
+E-book, dokumentace, privacy stránka i interní playbook mají jednu společnou vlastnost: když je nikdo neudržuje, pomalu se mění v muzeum dobrých úmyslů. V malém týmu je proto lepší mít méně dokumentů, ale takové, které se opravdu používají při rozhodování.
+
+Tahle kapitola je krátká provozní brzda. Neřeší další velkou strategii. Řeší, jak udržet doporučení, odkazy, checklisty a změny živé, ověřitelné a praktické.
+
+### 13.1 Každý zdroj musí mít důvod
+
+Odkaz v textu není dekorace. Má čtenáři říct: „Tady je původ tvrzení, můžeš si ho ověřit.“ Pokud zdroj nedokážeš přiřadit ke konkrétní větě, doporučení nebo povinnosti, zvaž, jestli v e-booku vůbec má být.
+
+Praktické pravidlo pro práci se zdroji:
+
+- **Právní povinnost:** odkazuj na primární nebo autoritativní zdroj, typicky EU instituci, dozorový úřad nebo oficiální dokument.
+- **Technický standard:** odkazuj na dokumentaci standardu, specifikaci nebo oficiální doporučení správce technologie.
+- **Produktové doporučení:** pokud jde o Codyho zkušenost, označ ji jako komentář nebo praktický názor.
+- **Konkrétní nástroj:** před zveřejněním ověř aktuální dokumentaci, ceny, region provozu a podmínky zpracování dat.
+- **Statistika nebo benchmark:** přidej datum, metodiku nebo alespoň kontext, odkud číslo pochází.
+
+Špatně:
+
+> Firmy dnes musí používat moderní analytiku.
+
+Lépe:
+
+> Pro rozhodování stačí agregované metriky, pokud nepotřebuješ identifikovat konkrétního člověka. To je Codyho produktový názor, ne právní rada.
+
+Nejlépe:
+
+> Pokud se opíráš o souhlas, ověř, že splňuje požadavky na svobodný, konkrétní, informovaný a jednoznačný projev vůle podle pokynů EDPB ke consentu: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+
+### 13.2 Jak aktualizovat e-book bez chaosu
+
+E-book se má vyvíjet stejně jako produkt: malými dokončenými změnami. Jedna iterace má mít jasný rozsah a viditelný výsledek. Přidat jednu užitečnou podkapitolu je lepší než rozepsat pět sekcí a nechat v nich poznámky typu „TODO: doplnit magii“.
+
+Vzor jedné dobré iterace:
+
+1. Vyber konkrétní slabé místo: chybějící kapitola, zastaralý zdroj, nejasný checklist.
+2. Ověř, jestli téma obsahuje aktuální fakta nebo právní/technické povinnosti.
+3. Napiš praktický text s příkladem, doporučením nebo checklistem.
+4. Přidej zdroje přímo do textu nebo do sekce zdrojů.
+5. Zapiš změnu do pracovního logu.
+6. Zkontroluj diff a teprve potom commituj.
+
+Takový rytmus pomáhá i marketingu. Když má e-book jasný pracovní log, můžeš z něj později vytáhnout články, interní checklisty, onboarding materiály nebo lead magnet bez toho, aby někdo dva dny pátral, co se vlastně změnilo.
+
+### 13.3 Pracovní log není formalita
+
+Pracovní log má odpovědět na otázku: „Co se od minule zlepšilo?“ Ne na otázku: „Kolik slov jsme dnes vyprodukovali, aby tabulka vypadala spokojeně?“
+
+Dobrá položka logu:
+
+- má datum,
+- popisuje dokončenou změnu,
+- říká rozsah konkrétně,
+- nepřehání dopad,
+- dá se podle ní najít relevantní část e-booku.
+
+Příklady:
+
+- `2026-09-21: Doplněna kapitola 13.1–13.5 o správě zdrojů, pracovním logu a údržbě e-booku.`
+- `2026-09-21: Aktualizován odkaz na WCAG 2.2 a doplněn checklist přístupnosti pro formuláře.`
+
+Horší položka:
+
+- `2026-09-21: Něco upraveno.`
+
+To je logovací ekvivalent cedule „tady někde je problém“. Díky, detektive.
+
+### 13.4 Mini redakční checklist
+
+Před každým commitem projdi krátký redakční checklist:
+
+- [ ] Text je česky, praktický a srozumitelný pro malý tým nebo podnikatele.
+- [ ] Každá nová kapitola obsahuje konkrétní doporučení, příklad nebo checklist.
+- [ ] Aktuální fakta, právní povinnosti, ceny, benchmarky a nástroje mají ověřený zdroj.
+- [ ] Codyho názory jsou označené jako komentář, ne jako univerzální pravda.
+- [ ] Privacy-first hodnota je zachovaná: minimum dat, evropský provoz, žádné zbytečné trackery.
+- [ ] Nový text nenutí čtenáře kupovat nástroj, když stačí jednodušší proces.
+- [ ] Pracovní log popisuje skutečně dokončenou iteraci.
+
+### 13.5 Jak z e-booku těžit další výstupy
+
+Hotový e-book nemá zůstat zamčený jako PDF, které někdo stáhne a už nikdy neotevře. Ber ho jako zdrojový materiál pro opakované použití.
+
+Z jedné kapitoly může vzniknout:
+
+- článek na blog,
+- krátký checklist pro klienta,
+- interní auditní šablona,
+- podklad pro landing page,
+- série krátkých postů do RSS nebo newsletteru,
+- onboarding materiál pro nového člena týmu.
+
+Privacy-first distribuce znamená: publikuj primárně na vlastním webu, nabídni RSS, posílej přímé odkazy a nespoléhej na to, že algoritmus sociální sítě laskavě doručí tvoji práci lidem, kteří ji chtějí číst. Algoritmus je kolega, který chodí pozdě a neříká proč.
+
+*Codyho komentář:* dokumentace je produkt. Když je užitečná, šetří čas, snižuje riziko a pomáhá prodávat. Když je mrtvá, jen zabírá místo ve složce s názvem „final_final_v3“.
+
+
 ## Zdroje
 
 - Evropská komise: principy GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -1453,6 +1551,7 @@ Nepřidávej deset úkolů. Jeden hotový fix je lepší než seznam přání, k
 
 ## Pracovní log
 
+- 2026-09-21: Doplněna kapitola 13.1–13.5 o správě zdrojů, aktualizaci e-booku, pracovním logu, redakčním checklistu a využití obsahu pro další výstupy.
 - 2026-09-21: Doplněna kapitola 12.1–12.6 o provozní odolnosti, zálohách, incident response kartě, komunikaci při výpadku a kvartálním cvičení.
 - 2026-09-21: Doplněna kapitola 11.1–11.5 o privacy-first metrikách, jednoduchém dashboardu, eventech bez šmírování a týdenní interpretaci dat.
 - 2026-09-21: Doplněna příloha 10.5 se šablonou datové mapy pro formuláře, účty, analytiku, logy, fakturaci, podporu a newsletter.
