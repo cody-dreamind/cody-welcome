@@ -159,12 +159,126 @@ Mini-cvičení na 20 minut:
 
 ---
 
+
+## 2. Technický základ moderního webu
+
+### 2.1 Informační architektura: web jako mapa rozhodnutí
+
+Technický základ nezačíná frameworkem. Začíná tím, že návštěvník ví, kde je, co může udělat a proč by ho to mělo zajímat. Informační architektura je nudný název pro velmi praktickou věc: jak uspořádat obsah tak, aby člověk nemusel přemýšlet víc, než je nutné.
+
+U malého firemního webu nebo SaaS landing page si nejdřív napiš seznam rozhodnutí, která má návštěvník udělat. Ne seznam komponent. Ne seznam animací. Rozhodnutí.
+
+Typická rozhodnutí:
+
+- „Je to pro mě?“
+- „Řeší to problém, který opravdu mám?“
+- „Rozumím tomu, jak služba funguje?“
+- „Věřím tomu dost na demo, trial nebo poptávku?“
+- „Najdu rychle cenu, kontakt, dokumentaci nebo privacy informace?“
+
+Z toho vznikne navigace. Ne opačně. Pokud máš v menu sedm položek, ale žádná neodpovídá na rozhodnutí zákazníka, máš hezký seznam interních ambicí, ne navigaci.
+
+Praktický vzor pro první verzi:
+
+- **Homepage:** nabídka, důkaz, hlavní CTA.
+- **Řešení / Use cases:** konkrétní scénáře podle cílovek nebo problémů.
+- **Produkt / Jak to funguje:** workflow, screenshoty, ukázka výsledku.
+- **Ceník:** model, co je zahrnuto, pro koho je který plán.
+- **Zdroje / Blog:** návody, případovky, odpovědi na časté otázky.
+- **Soukromí:** data, dodavatelé, cookies, kontakt pro práva subjektů údajů.
+
+Privacy-first poznámka: stránka „Soukromí“ má být dostupná z patičky i z míst, kde sbíráš údaje. Pokud máš formulář, napiš u něj krátce, co se s údaji stane. Ne až v PDF zakopaném pod třemi kliky. To už není transparentnost, to je právnický escape room.
+
+### 2.2 Výkon: rychlost není dekorace
+
+Výkon webu není jen skóre v nástroji. Je to součást prodeje. Pomalá stránka zvyšuje tření přesně ve chvíli, kdy se návštěvník rozhoduje. Google pro Core Web Vitals uvádí tři hlavní metriky uživatelské zkušenosti: LCP pro načtení hlavního obsahu, INP pro odezvu na interakce a CLS pro vizuální stabilitu. Orientační hranice „good“ jsou LCP do 2,5 s, INP do 200 ms a CLS do 0,1 na 75. percentilu návštěv: https://web.dev/articles/defining-core-web-vitals-thresholds
+
+Pro malý tým z toho plyne jednoduché pořadí práce:
+
+1. **Nejdřív odstraň zbytečnosti.** Každý skript třetí strany je kandidát na audit.
+2. **Optimalizuj hlavní obsah.** Hero obrázek, fonty, CSS a serverová odezva často rozhodují o LCP.
+3. **Zkrať dlouhé JavaScript úlohy.** INP trpí, když prohlížeč nemůže reagovat na kliknutí, protože počítá něco pro marketingový widget.
+4. **Rezervuj místo pro média.** Obrázky, embed prvky a bannery bez rozměrů jsou klasická CLS past.
+5. **Měř reálné stránky, ne jen homepage.** Ceník, detail článku a registrační flow bývají důležitější než perfektní úvodní stránka.
+
+Konkrétní technická doporučení:
+
+- Používej statické generování nebo server-side rendering tam, kde dává smysl pro rychlý první render.
+- Posílej obrázky ve správné velikosti a moderním formátu, ale měj rozumný fallback.
+- Fonty načítej střídmě; dvě řezy často stačí. Design přežije, uživatel taky.
+- Třetí strany přidávej až po otázce: „Co přesně získáme a jaká data za to platíme?“
+- Analytiku drž agregovanou a jednoduchou. Privacy-friendly měření je často rychlejší i čistší.
+
+*Codyho komentář:* nejlevnější optimalizace je nenainstalovat věc, kterou nepotřebuješ. Odstranit pět zbytečných skriptů je elegantnější než statečně ladit jejich následky.
+
+### 2.3 Přístupnost: kvalita pro všechny, nejen checkbox
+
+Přístupnost není speciální režim pro „někoho jiného“. Je to dobré rozhraní pro lidi v reálném světě: na mobilu, ve stresu, s horším zrakem, s klávesnicí, se čtečkou, na pomalém připojení nebo po třetí kávě, kdy už mozek renderuje v beta verzi.
+
+W3C doporučuje používat WCAG 2.2 jako aktuální stabilní standard pro webovou přístupnost: https://www.w3.org/TR/wcag/ Přístupnost staví na čtyřech principech: obsah má být vnímatelný, ovladatelný, srozumitelný a robustní.
+
+Praktické minimum pro SaaS a marketingový web:
+
+- **Sémantické HTML:** tlačítko je `button`, odkaz je `a`, nadpisy tvoří logickou osnovu.
+- **Klávesnice:** všechny interaktivní prvky jdou ovládat bez myši a focus je vidět.
+- **Kontrast:** text a tlačítka musí být čitelná i na horším displeji.
+- **Formuláře:** každý input má label, jasnou chybu a popis, co se má opravit.
+- **Alt texty:** obrázky, které nesou informaci, ji mají popsanou; dekorace se netváří jako obsah.
+- **Žádné pasti:** modaly, menu a cookie dialogy nesmí uzamknout člověka ani čtečku.
+
+Přístupnost testuj ručně i automaticky. Automatický audit najde část problémů, ale nepozná, jestli text dává smysl, jestli CTA odpovídá kontextu nebo jestli formulář člověka neurazí pasivně-agresivní hláškou „invalid input“.
+
+### 2.4 SEO technický základ bez magie
+
+SEO není kouzelná vrstva, kterou naliješ na hotový web. Je to kombinace srozumitelného obsahu, technicky čitelné struktury a důvěryhodných signálů. Google ve svém SEO Starter Guide zdůrazňuje, že cílem je pomoci vyhledávačům web najít, procházet, indexovat a pochopit: https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+
+Pro první verzi webu si pohlídej:
+
+- Jednu jasnou `h1` na stránku a logickou hierarchii nadpisů.
+- Unikátní `<title>` a meta description pro důležité stránky.
+- Kanonické URL, aby nevznikaly duplicity přes parametry nebo varianty adres.
+- `sitemap.xml` a `robots.txt`, ale bez víry, že opraví špatnou architekturu.
+- Interní odkazy mezi souvisejícími stránkami a články.
+- Strukturovaná data tam, kde opravdu odpovídají obsahu.
+- Čitelné URL bez interních kódů, datumu jen tam, kde má význam.
+
+Privacy-first marketingový detail: sociální sdílecí skripty, reklamní pixely a agresivní remarketing nejsou podmínkou SEO. Pro obsahový web často stačí kvalitní text, rychlé načítání, RSS feed, přímé odkazy a konzistentní distribuce. Méně šmírování, víc užitečnosti. Radikální koncept, já vím.
+
+### 2.5 Checklist technického základu
+
+Před spuštěním technické první verze si odškrtni:
+
+- [ ] Navigace odpovídá rozhodnutím návštěvníka, ne interním oddělením.
+- [ ] Každá klíčová stránka má jasný účel a jedno primární CTA.
+- [ ] Web má měřitelný výkonový rozpočet: obrázky, fonty, JS a třetí strany.
+- [ ] Core Web Vitals kontroluješ na důležitých šablonách, ne jen na homepage.
+- [ ] Základní ovládání funguje klávesnicí.
+- [ ] Formuláře mají labely, jasné chyby a lidské mikrotexty.
+- [ ] Každá důležitá stránka má unikátní title, description a kanonickou URL.
+- [ ] `sitemap.xml`, `robots.txt` a RSS feed jsou v repozitáři nebo generované buildem.
+- [ ] Privacy stránka vysvětluje nástroje, účely zpracování a kontakt pro dotazy.
+- [ ] Každý externí skript má vlastníka, důvod a datum posledního přezkoumání.
+
+Mini-cvičení na 30 minut:
+
+1. Otevři web v anonymním okně na mobilní šířce.
+2. Bez scrollování napiš, co produkt dělá a jaký je další krok.
+3. Projdi hlavní CTA jen klávesnicí.
+4. Vypiš všechny skripty třetích stran a u každého napiš, proč existuje.
+5. Jeden skript smaž nebo odlož. Pokud žádný nejde smazat, pravděpodobně právě lžeš sám sobě. Jemně, ale lžeš.
+
+---
+
 ## Zdroje
 
 - Evropská komise: principy GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 - European Data Protection Board: Guidelines 05/2020 on consent under Regulation 2016/679 — https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
 - Evropská komise: ochrana dat a soukromí online — https://commission.europa.eu/digital-life/protecting-your-data-and-privacy_en
+- web.dev: How the Core Web Vitals metrics thresholds were defined — https://web.dev/articles/defining-core-web-vitals-thresholds
+- W3C: Web Content Accessibility Guidelines (WCAG) 2.2 — https://www.w3.org/TR/wcag/
+- Google Search Central: SEO Starter Guide — https://developers.google.com/search/docs/fundamentals/seo-starter-guide
 
 ## Pracovní log
 
+- 2026-09-21: Doplněna kapitola 2.1–2.5 o informační architektuře, výkonu, přístupnosti, technickém SEO a privacy-first auditu externích skriptů.
 - 2026-09-21: Založena struktura e-booku, doplněna pracovní osnova a dokončena kapitola 1.1–1.5 o strategii webu, MVP rozsahu a privacy-first rozhodování v Evropě.
