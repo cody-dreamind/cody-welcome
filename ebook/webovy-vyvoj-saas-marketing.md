@@ -44,7 +44,13 @@ Praktický český e-book od Codyho z Dreamindu pro malé týmy, freelancery a z
 8. **Auditní šablony pro opakované použití**
    - Rychlý audit webu, SaaS onboardingu, marketingu a privacy provozu
    - Praktické tabulky a otázky pro týdenní kontrolu
-9. **Zdroje a pracovní log**
+9. **Jak z e-booku udělat živý systém**
+   - Rozhodovací tabule, měření a měsíční revize
+   - Privacy-first kontrola před novou funkcí
+10. **Přílohy a šablony pro kopírování**
+   - Jednostránkový launch brief
+   - Šablona produktové stránky a měsíční provozní kontrola
+11. **Zdroje a pracovní log**
    - Ověřené odkazy
    - Průběžný log změn e-booku
 
@@ -1071,6 +1077,110 @@ Mazání je podceňovaná produktová disciplína. Každý nepoužívaný formul
 *Codyho komentář:* největší konkurenční výhoda malého týmu není nekonečný backlog. Je to schopnost rychle pochopit realitu, udělat rozumné rozhodnutí a nenechat za sebou datový bordel. Elegantní? Ano. Trochu nudné? Taky. Ale nudný provoz je přesně ten druh magie, který zákazníci milují, protože se nerozbíjí v pátek večer.
 
 
+## 10. Přílohy a šablony pro kopírování
+
+Tahle kapitola je méně esej a víc dílna. Když se tým zasekne, často nepotřebuje další inspiraci, ale prázdnou šablonu, kterou někdo během hodiny vyplní. Následující bloky jsou záměrně jednoduché: můžeš je vložit do dokumentu, issue, poznámky nebo interní wiki a používat opakovaně.
+
+Pravidlo pro všechny šablony: co nejde vyplnit konkrétně, není připravené. Prázdná políčka nejsou ostuda. Jsou radar.
+
+### 10.1 Jednostránkový launch brief
+
+Použij ho před spuštěním nové landing page, mikroproduktu, kampaně nebo větší funkce. Cílem není vyrobit dokonalý projektový dokument. Cílem je zabránit tomu, aby se tým po spuštění hádal, co vlastně znamená „funguje“.
+
+| Otázka | Odpověď |
+| --- | --- |
+| Co spouštíme? |  |
+| Pro koho to je? |  |
+| Jaký problém řešíme? |  |
+| Jak poznáme první úspěch? |  |
+| Jaký je hlavní další krok pro návštěvníka nebo uživatele? |  |
+| Jaká data kvůli tomu sbíráme? |  |
+| Kde data poběží a kdo k nim má přístup? |  |
+| Co vědomě nespouštíme v první verzi? |  |
+| Kdo je vlastník po spuštění? |  |
+
+Dobře vyplněný brief může vypadat třeba takhle:
+
+- Spouštíme landing page pro privacy-first audit B2B webu.
+- Cílový segment jsou malé SaaS týmy v Česku a EU, které mají web, formuláře a základní analytiku, ale nemají jistotu, kde končí data.
+- Úspěch je pět kvalifikovaných poptávek za měsíc nebo tři rozhovory, ze kterých vznikne jasnější nabídka.
+- Sbíráme jen jméno, e-mail, URL webu a volitelnou poznámku. Žádné reklamní pixely, žádné heatmapy, žádné tajné „jen pro optimalizaci“ skripty.
+
+*Codyho komentář:* launch brief není brzda kreativity. Je to bezpečnostní pás. Není sexy, dokud nenarazíš.
+
+### 10.2 Šablona produktové stránky
+
+Produktová stránka má vést člověka od pochopení k rozhodnutí. Následující struktura funguje pro službu, SaaS modul i jednoduchý digitální produkt:
+
+1. **Hero:** jedna věta hodnoty, pro koho to je a hlavní CTA.
+2. **Situace zákazníka:** tři konkrétní problémy, ve kterých se cílový segment pozná.
+3. **Jak to funguje:** tři až pět kroků od prvního kontaktu po výsledek.
+4. **Co dostaneš:** konkrétní výstupy, ne interní aktivity.
+5. **Důvěra:** ukázka práce, reference, screenshot, metodika nebo mini případová studie.
+6. **Cena nebo model spolupráce:** jasně popsat, jak se počítá rozsah, i když částka není veřejná.
+7. **Privacy-first blok:** jaká data sbíráme, proč, kde běží a co neděláme.
+8. **FAQ:** námitky, rizika, čas, vlastnictví dat, technické limity.
+9. **CTA:** jeden hlavní další krok, opakovaný na konci.
+
+Krátká kontrola textu:
+
+- Je v prvních pěti sekundách jasné, co stránka nabízí?
+- Je jasné, pro koho nabídka není?
+- Popisujeme výsledek zákazníka, ne jen práci dodavatele?
+- Má stránka jeden primární další krok?
+- Umíme privacy-first část přečíst nahlas bez právnického kašle?
+
+### 10.3 Měsíční provozní kontrola
+
+Jednou za měsíc si vezmi jednu hodinu a projdi tento checklist. Ideálně s člověkem z produktu, marketingu a techniky. Pokud jsi sólo zakladatel, gratuluji, máš meeting sám se sebou. Aspoň nikdo nepřijde pozdě.
+
+| Oblast | Otázka | Akce |
+| --- | --- | --- |
+| Nabídka | Rozumí nový návštěvník do 5 sekund, co děláme? |  |
+| Web | Je některá důležitá stránka pomalá, neaktuální nebo matoucí? |  |
+| Produkt | Kde uživatelé nejčastěji ztrácí tempo před aktivací? |  |
+| Marketing | Který obsah přinesl nejlepší kvalitativní signál? |  |
+| Data | Sbíráme něco, co nepoužíváme k rozhodování nebo provozu? |  |
+| Dodavatelé | Přibyl nový nástroj, export nebo integrace? |  |
+| Podpora | Která otázka zákazníků se opakuje a má být vysvětlená lépe? |  |
+| Backlog | Co můžeme smazat, protože už to není důležité? |  |
+
+Výstupem nejsou zápisky na tři stránky. Výstupem jsou maximálně tři rozhodnutí:
+
+- jedna věc opravit;
+- jedna věc změřit nebo ověřit;
+- jedna věc smazat nebo přestat dělat.
+
+### 10.4 Šablona privacy-first rozhodnutí
+
+Když tým zvažuje nový nástroj, tracking, CRM integraci, AI asistenta nebo automatizaci, použij tento krátký záznam:
+
+| Položka | Vyplnit |
+| --- | --- |
+| Název změny |  |
+| Proč ji potřebujeme |  |
+| Jaké údaje vzniknou nebo se odešlou |  |
+| Právní nebo smluvní role dodavatele |  |
+| Region zpracování a uložení dat |  |
+| Retence a mazání |  |
+| Alternativa s menším množstvím dat |  |
+| Rozhodnutí | schválit / upravit / odmítnout |
+| Datum další kontroly |  |
+
+Praktické pravidlo: pokud nevíš, kam data tečou, rozhodnutí je „upravit“, ne „schválit“. Ne proto, že jsme paranoidní. Protože neznalost toku dat není strategie, ale loterie v tričku „move fast“.
+
+### 10.5 Checklist použitelných šablon
+
+- Má každá šablona jasného vlastníka?
+- Dá se vyplnit během hodiny, ne během kvartálu?
+- Vede k rozhodnutí, ne jen k popisu stavu?
+- Obsahuje otázku na data, dodavatele a retenci?
+- Je v ní prostor říct „tohle zatím neděláme“?
+- Umí tým po měsíci poznat, jestli šablona opravdu pomohla?
+
+*Codyho komentář:* dobrá šablona je jako dobrý formulář: nepředstírá inteligenci, ale sbírá přesně to, co je potřeba k dalšímu kroku. Špatná šablona je jen tabulka, která si oblékla kravatu.
+
+
 ## Zdroje
 
 - Evropská komise: principy GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -1090,6 +1200,7 @@ Mazání je podceňovaná produktová disciplína. Každý nepoužívaný formul
 
 ## Pracovní log
 
+- 2026-09-21: Doplněna kapitola 10.1–10.5 s kopírovatelnými šablonami pro launch brief, produktovou stránku, měsíční provozní kontrolu a privacy-first rozhodnutí.
 - 2026-09-21: Doplněna kapitola 9.1–9.5 o tom, jak z e-booku udělat živý provozní systém s rozhodovací tabulí, měřením, privacy kontrolou a měsíční revizí.
 - 2026-09-21: Doplněna kapitola 8.1–8.5 s opakovatelnými auditními šablonami pro homepage, SaaS onboarding, marketing, privacy-first provoz a týdenní rituál.
 - 2026-09-21: Doplněna kapitola 7.1–7.5 s praktickým 30denním plánem zavedení doporučení z e-booku do webu, SaaS produktu, marketingu a provozu.
