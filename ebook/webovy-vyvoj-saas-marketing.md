@@ -267,7 +267,105 @@ Mini-cvičení na 30 minut:
 4. Vypiš všechny skripty třetích stran a u každého napiš, proč existuje.
 5. Jeden skript smaž nebo odlož. Pokud žádný nejde smazat, pravděpodobně právě lžeš sám sobě. Jemně, ale lžeš.
 
+
 ---
+
+## 3. SaaS v praxi
+
+### 3.1 Onboarding: první hodnota dřív než první frustrace
+
+SaaS onboarding není prohlídka všech tlačítek. Je to krátká cesta od „nevím, jestli mi to pomůže“ k „aha, tohle řeší můj problém“. Čím menší tým produkt provozuje, tím důležitější je onboarding navrhnout jednoduše: méně ruční podpory, méně vysvětlování po e-mailu a méně zákazníků, kteří odejdou jen proto, že se zasekli na třetím kroku.
+
+Dobrá první zkušenost má tři vlastnosti:
+
+1. **Je konkrétní:** uživatel ví, co má udělat jako první.
+2. **Je krátká:** první užitečný výsledek přijde během minut, ne po víkendu konfigurace.
+3. **Je vratná:** uživatel se nebojí kliknout, protože chyby jdou opravit.
+
+Typická chyba je začít registrací, potom zobrazit prázdný dashboard a říct: „Tak tady to máte.“ Prázdný stav ale není neutrální. Je to moment, kdy člověk přemýšlí, jestli má zavřít tab. Každý prázdný stav proto potřebuje ukázat další krok, příklad dat nebo bezpečné demo.
+
+Praktický onboarding pro malý SaaS může vypadat takhle:
+
+- **Krok 1:** vytvoř první projekt, workspace nebo účet zákazníka.
+- **Krok 2:** vyber jeden hlavní cíl, například „sbírat poptávky“, „pozvat klienta“ nebo „nahrát katalog“.
+- **Krok 3:** ukaž hotový příklad, aby uživatel viděl, jak má vypadat výsledek.
+- **Krok 4:** nabídni import nebo ruční vložení minimální sady dat.
+- **Krok 5:** potvrď úspěch a doporuč jednu navazující akci.
+
+Neptej se na všechno předem. Pokud údaj nepotřebuješ k první hodnotě, odlož ho. Fakturační adresa, velikost firmy, interní role nebo „jak jste se o nás dozvěděli“ můžou počkat. Onboarding není formulářová zpovědnice.
+
+*Codyho komentář:* když se uživatel poprvé přihlásí, nemá náladu vyplňovat tvůj CRM sen. Chce zjistit, jestli produkt funguje. Pomoz mu vyhrát malou první bitvu.
+
+### 3.2 Aktivace: jedna metrika, kterou poznáš i bez datového cirkusu
+
+Aktivace znamená, že uživatel udělal akci, po které má výrazně větší šanci produkt dál používat. Není to totéž co registrace. Registrace říká „někdo zkusil dveře“. Aktivace říká „někdo vešel dovnitř a našel první důvod zůstat“.
+
+Příklady aktivačních momentů:
+
+- Nástroj pro poptávky: uživatel vytvoří formulář a přijme první odeslanou poptávku.
+- Projektový SaaS: uživatel založí projekt, přidá úkol a pozve kolegu nebo klienta.
+- Newsletter nástroj: uživatel vytvoří seznam, připraví první koncept a pošle testovací e-mail.
+- Klientský portál: agentura pozve prvního klienta a klient otevře sdílený dokument.
+
+Vyber jednu aktivační metriku pro první verzi. Ne deset. Jedna stačí k tomu, aby tým věděl, co zlepšovat. Můžeš ji měřit i privacy-first způsobem: uložit událost na serveru k internímu účtu, agregovat počty za období a nepoužívat reklamní identifikátory ani cross-site sledování.
+
+U každé aktivační metriky si napiš:
+
+- **Co přesně se stalo:** konkrétní akce, ne pocit.
+- **Kdy se to má stát:** například do 24 hodin od registrace nebo během prvního týdne.
+- **Proč to znamená hodnotu:** jaký problém uživatel vyřešil.
+- **Jak tomu pomáhá onboarding:** který krok uživatele dovede k výsledku.
+- **Co uděláš, když se to neděje:** změna textu, ukázková data, lepší prázdný stav, kratší formulář.
+
+Tady je jednoduchý pracovní zápis:
+
+> Uživatel je aktivovaný, když do 48 hodin od registrace vytvoří první projekt a pozve alespoň jednoho spolupracovníka. Znamená to, že pochopil základní hodnotu sdíleného pracovního prostoru. Pokud se to neděje, zkrátíme registraci a přidáme ukázkový projekt.
+
+Tohle není vědecký článek, ale rozhodovací nástroj. Jakmile máš první zákazníky, metriku zpřesníš podle reálného chování a rozhovorů.
+
+### 3.3 Trial a pricing bez divadla
+
+Trial má zákazníkovi pomoct ověřit hodnotu. Nemá být labyrint, kde se musí zadat karta, odkliknout tři checkboxy a doufat, že se za čtrnáct dní nezapomene zrušit předplatné. Krátkodobě tím možná zvedneš konverzi. Dlouhodobě si pěstuješ nedůvěru, support tikety a reputaci produktu, který se prodává pastičkou. Gratuluju, growth hacking objevil lepidlo na myši.
+
+Pro malé SaaS dávají smysl tři jednoduché modely:
+
+- **Free trial bez karty:** nejlepší pro produkty, kde hodnota vznikne rychle a chceš snížit tření.
+- **Demo nebo audit před trialem:** vhodné pro dražší B2B produkt, kde je potřeba kontext.
+- **Freemium s limity:** použitelné jen tehdy, když umíš náklady držet pod kontrolou a free uživatelé nejsou support peklo.
+
+Ceník má odpovědět na praktické otázky:
+
+- Pro koho je který tarif?
+- Co je v ceně a co už je doplněk?
+- Jaké jsou limity: uživatelé, projekty, úložiště, odeslané e-maily, API volání?
+- Dá se odejít a exportovat data?
+- Jak se řeší DPH, faktury a evropský provoz?
+- Co se stane po skončení trialu?
+
+Privacy-first detail: už v ceníku a onboardingových textech vysvětli, že zákazník může exportovat svá data, smazat účet a zjistit, kde data běží. Není to jen právní hygiene. Je to prodejní argument pro evropské firmy, které nechtějí vysvětlovat každou integraci svému DPO, účetnímu a internímu skeptikovi jménem Petr.
+
+### 3.4 Checklist pro SaaS první zkušenost
+
+Před spuštěním trialu nebo první veřejné bety si projdi:
+
+- [ ] Uživatel po registraci vidí jasný další krok, ne prázdnou nástěnku.
+- [ ] První hodnota je dosažitelná bez podpory a bez čtení dlouhé dokumentace.
+- [ ] Každý prázdný stav ukazuje příklad, akci nebo vysvětlení.
+- [ ] Aktivační metrika je jedna konkrétní událost, kterou tým chápe stejně.
+- [ ] Trial jasně říká, kdy končí a co se stane potom.
+- [ ] Ceník vysvětluje limity, doplňky, fakturaci a export dat.
+- [ ] Produkt má bezpečný způsob, jak pozvat kolegu nebo klienta bez odhalení zbytečných údajů.
+- [ ] Zákazník umí stáhnout nebo smazat svá data bez detektivní práce.
+- [ ] Support kontakt je viditelný v okamžicích, kde se uživatel může zaseknout.
+- [ ] Interně víš, kdo sleduje onboardingové chyby a jak rychle se opravují.
+
+Mini-cvičení na 45 minut:
+
+1. Vytvoř nový testovací účet a nahraj si obrazovku prvních deseti minut.
+2. Zapiš každý moment, kdy nevíš, co dál.
+3. U každého prázdného stavu doplň jednu ukázku nebo jednu jasnou akci.
+4. Zkrať registrační formulář o jedno pole.
+5. Napiš jednovětou definici aktivace a dej ji do produktového backlogu.
 
 ## Zdroje
 
@@ -280,5 +378,6 @@ Mini-cvičení na 30 minut:
 
 ## Pracovní log
 
+- 2026-09-21: Doplněna kapitola 3.1–3.4 o SaaS onboardingu, aktivační metrice, trialu, pricingu a checklistu první zkušenosti.
 - 2026-09-21: Doplněna kapitola 2.1–2.5 o informační architektuře, výkonu, přístupnosti, technickém SEO a privacy-first auditu externích skriptů.
 - 2026-09-21: Založena struktura e-booku, doplněna pracovní osnova a dokončena kapitola 1.1–1.5 o strategii webu, MVP rozsahu a privacy-first rozhodování v Evropě.
