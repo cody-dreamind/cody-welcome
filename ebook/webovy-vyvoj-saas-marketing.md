@@ -592,6 +592,125 @@ Mini-cvičení na 60 minut:
 5. Sepiš první verzi incident kontaktů: technika, obchod, právní konzultace, zákaznická komunikace.
 
 
+## 6. Produktivita pro malé týmy
+
+### 6.1 Rozhodovací log: paměť týmu bez archeologie
+
+Malý tým nepotřebuje procesní chrám. Potřebuje vědět, proč se rozhodl právě takhle, kdo za rozhodnutí ručí a kdy se k němu vrátit. Bez toho se po třech měsících začne opakovat klasická SaaS detektivka: „Proč jsme vlastně vybrali tenhle nástroj?“ „Kdo chtěl tu integraci?“ „Proč je v databázi pole `legacy_temp_final2`?“
+
+Rozhodovací log je jednoduchý dokument, ne korporátní svitek. Každé důležité rozhodnutí zapiš v pěti bodech:
+
+- **Datum:** kdy rozhodnutí vzniklo.
+- **Kontext:** jaký problém řešíme a co se změnilo.
+- **Rozhodnutí:** co konkrétně děláme.
+- **Alternativy:** co jsme zvažovali a proč jsme to odmítli.
+- **Revize:** kdy nebo při jakém signálu rozhodnutí znovu otevřeme.
+
+Příklad:
+
+> 2026-09-21 — Pro první verzi používáme server-side rendering a jednoduché markdownové stránky místo headless CMS. Důvod: rychlé spuštění, méně dodavatelů, menší provozní riziko. CMS otevřeme znovu, až bude obsah spravovat někdo mimo vývojový tým nebo bude více než 50 publikovaných stránek.
+
+Tento zápis šetří schůzky. Nemusíš si pamatovat náladu z meetingu, protože máš stopu rozhodnutí. A když se situace změní, rozhodnutí můžeš změnit bez pocitu, že někdo „prohrál“. Vyhrává produkt, což je příjemná novinka v žánru meetingových dramat.
+
+*Codyho komentář:* nejhorší dokumentace není ta krátká. Nejhorší je ta, která předstírá jistotu a neříká, jaké kompromisy tým udělal. Kompromisy nejsou ostuda. Jsou mapa minového pole.
+
+### 6.2 Backlog jako systém toku, ne skládka přání
+
+Backlog není místo, kam odložíš každou myšlenku, aby se necítila odmítnutá. Backlog je výrobní linka rozhodnutí. Pokud v něm leží stovky položek bez vlastníka, priorita není „nízká“. Priorita je „nikdo se k tomu nechce přiznat“.
+
+Kanban Guide popisuje definici workflow mimo jiné přes to, kde práce začíná a končí, jak se řídí rozpracovanost, jaká pravidla posouvají položky mezi stavy a jak tým pracuje se service level expectation. Zdroj: https://kanbanguides.org/the-kanban-guide/ Pro malý SaaS si z toho vezmi praktické minimum: zviditelni práci, omez rozpracovanost a napiš pravidla tak, aby je pochopil i člověk, který nebyl na posledním callu.
+
+Jednoduchý backlog může mít tyto stavy:
+
+1. **Inbox:** nápady bez závazku. Sem smí cokoli, ale nic tu nesmí hnít věčně.
+2. **Triage:** položky, které stojí za krátké posouzení.
+3. **Ready:** práce připravená k realizaci, má jasný výsledek a kritéria hotovo.
+4. **Doing:** omezený počet aktivních položek. Tady platí WIP limit.
+5. **Review:** kontrola, test, text, právní nebo produktová zpětná vazba.
+6. **Done:** hotovo znamená nasazeno, zdokumentováno nebo jinak doručeno, ne „skoro“.
+
+Pravidla pro zdravý backlog:
+
+- Inbox čisti jednou týdně; smaž duplicity a nápady bez vazby na cíl.
+- Položka v `Ready` musí mít vlastníka, očekávaný výsledek a kritéria dokončení.
+- Do `Doing` neber novou práci, dokud nedokončíš nebo vědomě nezastavíš starou.
+- Technický dluh piš jako riziko nebo náklad, ne jako neurčité „refactor later“.
+- Každý větší úkol musí říct, jak ovlivní zákazníka, provoz, příjmy nebo riziko.
+
+Privacy-first detail: do backlogu nedávej osobní údaje zákazníků, celé e-mailové konverzace ani screenshoty s citlivými daty. Popiš problém anonymně a odkaz na zdroj drž v nástroji, kde k němu mají přístup jen lidé, kteří ho opravdu potřebují. Backlog není datový sklad. Backlog má být plán práce, ne compliance past s barevnými štítky.
+
+### 6.3 Týdenní rytmus: méně rituálů, víc rozhodnutí
+
+Produktivita malého týmu nestojí na tom, že každý den poslušně odříká status. Stojí na rytmu, který odhaluje blokery, chrání soustředění a pravidelně nutí tým rozhodnout, co teď není důležité. To poslední bolí, takže se tomu říká „prioritizace“, aby to znělo civilizovaně.
+
+Doporučený týdenní rytmus pro malý web/SaaS tým:
+
+- **Pondělí: plán týdne na 30 minut.** Vyber 1–3 hlavní výsledky týdne, ne 17 přání.
+- **Denně: asynchronní check-in.** Co jsem dokončil, co dnes posunu, kde jsem zaseknutý. Pokud není blokér, není potřeba schůzka.
+- **Středa: krátká kontrola rizik.** Nestaví se něco, co už nedává smysl? Nečekáme na rozhodnutí?
+- **Pátek: demo a úklid.** Ukaž hotové věci, zavři drobnosti, zapiš rozhodnutí a smaž šum z backlogu.
+- **Jednou měsíčně: provozní revize.** Dodavatelé, incidenty, náklady, měření, privacy změny a technický dluh.
+
+U každého rituálu si polož otázku: „Jaké rozhodnutí díky tomu uděláme?“ Pokud žádné, rituál je podezřelý. Může zůstat jako sociální moment, ale neměl by se tvářit jako řízení produktu.
+
+Dobrý týdenní plán má tři vrstvy:
+
+1. **Výsledek:** co bude na konci týdne viditelně lepší.
+2. **Důkaz:** jak poznáme, že je hotovo.
+3. **Riziko:** co nás může zablokovat a kdo to řeší.
+
+Příklad:
+
+- Výsledek: nový pricing page vysvětluje rozdíly mezi tarify.
+- Důkaz: stránka je nasazená, má title, meta description, CTA a prošla kontrolou přístupnosti.
+- Riziko: nejsou jasné limity tarifů; rozhodnutí má do úterý dodat zakladatel.
+
+### 6.4 Automatizace, která pomáhá, ne maskuje chaos
+
+Automatizace je skvělá, když zjednodušuje opakovanou práci. Je nebezpečná, když jen rychleji šíří špatné rozhodnutí. Neautomatizuj proces, kterému nerozumíš. Nejdřív ho jednou proveď ručně, zapiš kroky, najdi výjimky a teprve potom přemýšlej, co má dělat stroj.
+
+Dobří kandidáti na automatizaci:
+
+- kontrola rozbitých odkazů a základního SEO před deployem;
+- pravidelné zálohy a test obnovy;
+- upozornění na chyby formulářů a neodeslané notifikace;
+- generování sitemap, RSS a changelogu;
+- kontrola závislostí a bezpečnostních aktualizací;
+- jednoduchý report návštěvnosti bez invazivního profilování.
+
+Špatní kandidáti na automatizaci:
+
+- automatické obesílání kontaktů bez jasného souhlasu;
+- generování velkého množství průměrného obsahu bez editace;
+- mazání dat bez auditní stopy;
+- nasazování bez testů a rollback plánu;
+- synchronizace osobních údajů do nástrojů, které nepotřebují celý dataset.
+
+Privacy-first automatizační pravidlo je jednoduché: každá automatizace musí mít vlastníka, log, minimální oprávnění a vypínač. Když něco posílá data ven, musí být jasné kam, proč, jak dlouho a kdo to umí zastavit.
+
+### 6.5 Checklist produktivity malého týmu
+
+Před dalším sprintem, týdnem nebo větší změnou si projdi:
+
+- [ ] Máme 1–3 hlavní výsledky týdne, ne seznam přání bez konce.
+- [ ] Každá položka v `Ready` má vlastníka, kritéria hotovo a jasný dopad.
+- [ ] Rozpracovanost je omezená a tým ví, co se nesmí začít, dokud něco neskončí.
+- [ ] Důležitá rozhodnutí zapisujeme včetně alternativ a spouštěče revize.
+- [ ] Backlog neobsahuje zbytečná osobní data ani citlivé screenshoty.
+- [ ] Týdenní rituály vedou ke konkrétním rozhodnutím nebo je zkracujeme.
+- [ ] Automatizace má vlastníka, log, minimální oprávnění a vypínač.
+- [ ] Jednou měsíčně kontrolujeme dodavatele, náklady, incidenty a privacy dopady.
+- [ ] Hotovo znamená doručeno uživateli nebo provozu, ne jen přesunuté do jiné kolonky.
+
+Mini-cvičení na 45 minut:
+
+1. Vyber jednu aktuální položku v backlogu a napiš k ní kritéria hotovo.
+2. Najdi jednu rozpracovanou věc, kterou tento týden zastavíš nebo dokončíš.
+3. Zapiš jedno důležité rozhodnutí z posledních 14 dnů do rozhodovacího logu.
+4. Zkontroluj jeden automatizovaný proces a pojmenuj jeho vlastníka.
+5. Smaž nebo anonymizuj citlivý detail z backlogu, který tam nemá co dělat.
+
+
 ## Zdroje
 
 - Evropská komise: principy GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -607,8 +726,11 @@ Mini-cvičení na 60 minut:
 - Evropská komise: obligations when processing data — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en
 - European Data Protection Board: Guidelines 07/2020 on controller and processor concepts — https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
 - Evropská komise: Standard Contractual Clauses for international transfers — https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en
+- Kanban Guides: The Kanban Guide — https://kanbanguides.org/the-kanban-guide/
+
 ## Pracovní log
 
+- 2026-09-21: Doplněna kapitola 6.1–6.5 o produktivitě malého týmu, rozhodovacím logu, backlogu, týdenním rytmu a bezpečné automatizaci.
 - 2026-09-21: Doplněna kapitola 5.1–5.5 o datové mapě, minimalizaci, dodavatelích, retenci, exportu a incidentním checklistu privacy-first provozu v Evropě.
 - 2026-09-21: Doplněna kapitola 4.1–4.4 o marketingu bez invazivního trackingu, obsahové strategii, distribuci, UTM disciplíně a checklistu kampaně.
 - 2026-09-21: Doplněna kapitola 3.1–3.4 o SaaS onboardingu, aktivační metrice, trialu, pricingu a checklistu první zkušenosti.
