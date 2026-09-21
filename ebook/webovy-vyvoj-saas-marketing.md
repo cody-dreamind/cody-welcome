@@ -38174,8 +38174,170 @@ Nouzová rotace má mít krátký runbook:
 
 Privacy-first poznámka: při rotaci se nesnaž dohledat „kdo za to může“ přes zbytečně detailní sledování lidí. Hledej technickou příčinu, rozsah dopadu a procesní opravu. Viník bývá často systém bez vlastníka, ne jeden unavený vývojář s kávou v ruce a pátečním deployem na krku.
 
+### Nejdřív rozliš typ úniku
+
+Nouzová rotace se zpomalí ve chvíli, kdy tým řeší všechno stejným tónem. Jinak se pracuje s API klíčem třetí strany, jinak s databázovým heslem, jinak s privátním klíčem pro podepisování tokenů a jinak se zákaznickým webhook secretem. První otázka proto není „kdo to udělal“, ale „co přesně mohlo získat neoprávněný přístup a k čemu“.
+
+Praktické třídění:
+
+- **Aplikační secret:** databáze, cache, message broker, storage, SMTP, interní API.
+- **Deploy secret:** CI/CD token, registry token, SSH klíč, cloud credential, přístup k hostingu.
+- **Zákaznický secret:** zákaznický API klíč uložený v produktu, OAuth token, webhook podpis.
+- **Podpisový klíč:** JWT, session cookies, reset hesla, magic link, platební webhooky.
+- **Vývojářský secret:** lokální `.env`, osobní access token, testovací token se skutečnými právy.
+
+Každý typ má jiný dopad. Únik read-only tokenu do staging monitoringu není stejný průšvih jako produkční storage klíč s právem mazat data. Malý tým nemusí mít bezpečnostní operační centrum, ale musí mít schopnost během pár minut říct: „toto je rozsah, toto je vlastník, toto je první bezpečný krok“.
+
+### Zastavení rizika má přednost před dokonalou analýzou
+
+Když je secret pravděpodobně venku, nejdřív sniž dopad. Dokonalý timeline incidentu může počkat. Pokud můžeš klíč rovnou zneplatnit bez výpadku, udělej to. Pokud by zneplatnění rozbilo produkci, nejdřív omez oprávnění, zablokuj podezřelý rozsah, odpoj veřejný přístup, vypni postiženou integraci nebo přepni službu do omezeného režimu.
+
+Dobré nouzové pořadí:
+
+1. **Izoluj místo úniku:** smaž veřejný gist, stáhni chybně zveřejněný artefakt, znepřístupni log, zavři leakující endpoint.
+2. **Zkrať oprávnění:** pokud nelze hned rotovat, dočasně omez scope, IP rozsah, tenant, prostředí nebo rate limit.
+3. **Vytvoř náhradu:** nový secret generuj ve správném systému, ne ručně v poznámce.
+4. **Nasaď dvojitý běh:** pokud služba podporuje dva aktivní klíče, pusť nový klíč vedle starého a starý vypni až po ověření.
+5. **Zneplatni původní hodnotu:** nenechávej starý secret „ještě do zítřka“, pokud nemáš výslovný časově omezený důvod.
+
+Codyho komentář: „Necháme to doběhnout přes víkend“ je věta, která zní manažersky klidně a bezpečnostně jako housle na Titanicu.
+
+### Mapa závislostí šetří hodiny stresu
+
+Rotace bolí hlavně tam, kde nikdo neví, kdo secret používá. Proto má mít každý důležitý secret vlastní kartu už před incidentem. Když karta neexistuje, vytvoř ji během incidentu aspoň v nouzové podobě: název, vlastník, účel, prostředí, spotřebitelé, oprávnění, úložiště, poslední rotace, postup ověření.
+
+Při mapování projdi:
+
+- runtime proměnné v produkci a stagingu,
+- CI/CD proměnné a deployment secrets,
+- cron úlohy, workery a jednorázové skripty,
+- integrace třetích stran a webhooky,
+- lokální vývojové instrukce,
+- dokumentaci, onboarding návody a runbooky,
+- logy a monitoring, jestli secret náhodou neteče do výstupu,
+- zálohy konfiguračních souborů a staré release artefakty.
+
+U malého SaaS je často nejhorší schovaný spotřebitel: starý noční job, který jednou měsíčně synchronizuje fakturaci, nebo testovací webhook, který pořád míří na produkční účet. Proto do runbooku patří i kontrola „co běží mimo hlavní aplikaci“.
+
+### Komunikace má být klidná, krátká a užitečná
+
+Incident se secrets není prostor pro román. Interně potřebuješ sdělit stav, dopad a další krok. Externě komunikuješ jen tehdy, když existuje dopad na zákazníka, riziko pro jeho data, výpadek, změna integračních údajů nebo povinnost podle smlouvy či zákona. Pokud se jedná o osobní údaje a riziko pro subjekty údajů, řeš to podle GDPR incidentového procesu, ne podle pocitu v Slacku.
+
+Interní update může vypadat takto:
+
+```md
+Stav: řešíme podezření na únik [typ secretu].
+Dopad: zatím potvrzeno [prostředí / služba / integrace].
+Akce: starý secret je [omezen / zneplatněn], nový je nasazen v [prostředí].
+Riziko pro zákaznická data: [nepotvrzeno / žádné známé / vyhodnocujeme].
+Další update: [čas].
+```
+
+Zákaznický update má být ještě kratší. Neuváděj tajné hodnoty, interní cesty ani detaily, které by pomohly útočníkovi. Zákazník potřebuje vědět, co se stalo, co to znamená pro něj, co má udělat a kdy dostane další informaci.
+
+### Ověření nesmí vyzradit nový secret
+
+Po rotaci se často spěchá a tým začne logovat všechno. To je přesně moment, kdy vzniká druhý incident. Ověřuj chování, ne hodnotu tajemství. Kontroluj stav připojení, HTTP statusy, healthchecky, audit události, počty chyb, úspěšné background joby a integrační callbacky. Nikdy nevypisuj secret do logu „jen na chvíli“.
+
+Bezpečné ověřovací kroky:
+
+- aplikace nastartuje bez chyb konfigurace,
+- kritická cesta zákazníka projde na stagingu i produkci,
+- background joby doběhnou bez autentizačních chyb,
+- webhooky přijímají nové podpisy,
+- starý secret už nejde použít,
+- logy neobsahují novou ani starou hodnotu,
+- monitoring neukazuje nárůst 401/403/5xx chyb,
+- support má krátké vysvětlení pro případ dotazů.
+
+Pokud produkt podporuje zákaznické API klíče, nabídni zákazníkům samoobslužnou rotaci: vytvořit nový klíč, otestovat ho, zneplatnit starý, stáhnout audit událost. Ruční ticket na každý klíč je v malém týmu pochopitelný začátek, ale nemá být cílový stav.
+
+### Prevence je levnější než heroický noční zásah
+
+Nouzová rotace odhalí, kde je systém křehký. Po incidentu nedělej jen „hotovo, zavřít“. Přidej jednu nebo dvě změny, které příště zkrátí čas reakce. Ne deset ambiciózních OKR, která zemřou v backlogu vedle „přepsat frontend“.
+
+Užitečné preventivní kroky:
+
+- zapnout secret scanning v repozitářích,
+- přidat pre-commit nebo CI kontrolu na známé formáty tokenů,
+- přesunout dlouhodobé hodnoty do spravovaného secrets manageru,
+- nahradit dlouhožijící klíče krátkodobými credentials tam, kde to platforma umí,
+- rozdělit jeden všemocný klíč na více úzce scoped klíčů,
+- přidat vlastníka a datum review ke každému kritickému secretu,
+- dokumentovat dvouklíčovou rotaci pro služby, které ji podporují,
+- odstranit secrets z historických návodů, screenshotů a onboarding materiálů.
+
+Privacy-first provoz v Evropě k tomu přidává ještě jednu hranici: neexportuj incidentové logy do náhodného SaaS nástroje jen proto, že má hezký dashboard. Pokud potřebuješ sdílet důkazy s dodavatelem, minimalizuj je, rediguj citlivé hodnoty a drž je v prostředí, které odpovídá tvým datovým závazkům.
+
+### Checklist: nouzová rotace secrets
+
+- Je jasné, jaký typ secretu unikl nebo mohl uniknout?
+- Má secret vlastníka, účel a známé spotřebitele?
+- Je riziko omezené dřív, než začne dlouhá analýza?
+- Je nový secret uložený ve schváleném úložišti?
+- Byly aktualizované všechny runtime, CI/CD, cron a integrační závislosti?
+- Je stará hodnota zneplatněná nebo časově omezená s konkrétním deadline?
+- Jsou ověřené kritické scénáře bez logování tajných hodnot?
+- Jsou logy, artefakty a dokumentace zkontrolované na únik původního secretu?
+- Je rozhodnuto, zda je potřeba zákaznická, smluvní nebo regulatorní komunikace?
+- Vznikla po incidentu jedna konkrétní preventivní změna?
+
+### Mini šablona: karta nouzové rotace
+
+```md
+## Karta nouzové rotace: [secret / služba / datum]
+
+### Shrnutí
+- Typ secretu:
+- Prostředí:
+- Vlastník:
+- Důvod rotace:
+- Čas zjištění:
+- Čas omezení rizika:
+- Čas plného zneplatnění staré hodnoty:
+
+### Dopad
+- Dotčené služby:
+- Dotčení zákazníci / segmenty:
+- Riziko pro osobní údaje:
+- Výpadek nebo degradace služby:
+
+### Závislosti
+- Runtime:
+- CI/CD:
+- Cron / workery:
+- Integrace:
+- Dokumentace:
+
+### Provedené kroky
+- Izolace úniku:
+- Nový secret vytvořen kde:
+- Nasazení:
+- Ověření:
+- Starý secret zneplatněn:
+
+### Komunikace
+- Interní update:
+- Zákaznický update:
+- Dodavatel / partner:
+- Regulatorní posouzení:
+
+### Prevence
+- Root cause:
+- Procesní oprava:
+- Technická oprava:
+- Datum dalšího review:
+```
+
+### Zdroje pro tuto přílohu
+
+- OWASP Secrets Management Cheat Sheet: centralizovaná správa, provisioning, audit, rotace a oddělení secrets od kódu: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- OWASP Developer Guide, Protect Data Everywhere: doporučení ukládat klíče a aplikační secrets do vhodného vaultu a stavět aplikace tak, aby zvládaly rotaci: https://devguide.owasp.org/en/04-design/02-web-app-checklist/08-protect-data/
+- NIST SP 800-57 Part 1 Rev. 5: obecná doporučení pro key management, kryptoperiody, revokaci a práci s kompromitovanými klíči: https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final
+- NIST SP 800-63B: autentizace a session management, užitečné hlavně pro tokeny, sessions a přihlašovací tajemství: https://pages.nist.gov/800-63-4/sp800-63b.html
+
 ## Pracovní log
-- **2026-09-21:** Doplněna příloha HJ o nouzové rotaci secrets: rychlé omezení rizika, mapování závislostí, bezpečné uložení náhrady, ověření provozu, uzavření incidentu a privacy-first hranice bez lovu viníka.
+- **2026-09-21:** Rozšířena příloha HJ o nouzové rotaci secrets: typy úniků, zastavení rizika, mapování závislostí, bezpečné ověření bez logování tajných hodnot, komunikaci, prevenci, checklist, kartu nouzové rotace a zdroje OWASP/NIST.
 
 - **2026-09-21:** Doplněna příloha HI o API klíčích, servisních účtech a technických přístupech: vlastnictví, účel, nejmenší oprávnění, rotace, secrets management, zákaznická správa klíčů, audit logy, rate limiting, incidenty, checklist a karta technického přístupu.
 
