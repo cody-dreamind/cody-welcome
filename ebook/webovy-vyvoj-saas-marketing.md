@@ -1169,7 +1169,39 @@ Když tým zvažuje nový nástroj, tracking, CRM integraci, AI asistenta nebo a
 
 Praktické pravidlo: pokud nevíš, kam data tečou, rozhodnutí je „upravit“, ne „schválit“. Ne proto, že jsme paranoidní. Protože neznalost toku dat není strategie, ale loterie v tričku „move fast“.
 
-### 10.5 Checklist použitelných šablon
+### 10.5 Šablona datové mapy
+
+Datová mapa je obyčejný inventář toho, jaké údaje produkt nebo web sbírá, kde končí a kdo za ně odpovídá. Nemusí být krásná. Musí být použitelná ve chvíli, kdy někdo řeší nový nástroj, incident, žádost zákazníka nebo otázku: „Proč tohle vlastně máme?“
+
+Začni malou tabulkou. Vyplň ji pro formuláře, účty, platby, analytiku, logy, podporu, newsletter a interní exporty.
+
+| Oblast | Jaká data | Proč je potřebujeme | Kde jsou uložená | Kdo má přístup | Retence | Mazání/export |
+| --- | --- | --- | --- | --- | --- | --- |
+| Kontaktní formulář | jméno, e-mail, zpráva | odpověď na poptávku |  |  |  |  |
+| SaaS účet | e-mail, role, tým | přihlášení a oprávnění |  |  |  |  |
+| Produktová analytika | agregované eventy | zlepšení onboardingu |  |  |  |  |
+| Serverové logy | IP, čas, route, chyba | bezpečnost a ladění |  |  |  |  |
+| Fakturace | firemní údaje, platby | účetnictví a smlouva |  |  |  |  |
+| Podpora | dotaz, metadata účtu | řešení problému |  |  |  |  |
+| Newsletter | e-mail, souhlas | zasílání obsahu |  |  |  |  |
+
+Když je tabulka moc dlouhá, nerozšiřuj ji donekonečna. Rozděl ji podle systému nebo účelu: `marketing`, `produkt`, `fakturace`, `provoz`, `podpora`. Cílem není vyhrát soutěž v tabulkách. Cílem je vědět, kde jsou rizika a co se stane při změně.
+
+Praktický postup pro první vyplnění:
+
+1. Projdi všechny formuláře a napiš, jaká pole sbírají.
+2. Projdi administraci a exporty, kde se osobní údaje zobrazují nebo stahují.
+3. Projdi externí nástroje: hosting, e-mail, analytika, helpdesk, platby, monitoring.
+4. U každé oblasti označ vlastníka, který umí rozhodnout o změně nebo výmazu.
+5. Najdi jednu kategorii dat, kterou můžeš zrušit, agregovat nebo ukládat kratší dobu.
+
+Malý příklad rozhodnutí:
+
+> V trial registračním formuláři nesbíráme telefon a velikost firmy. Telefon nabídneme až po žádosti o konzultaci, velikost firmy odhadneme později z onboardingové otázky. Snížíme tření a v databázi nebude údaj, který zatím nepoužíváme.
+
+*Codyho komentář:* datová mapa není papír pro auditora. Je to mapa kanalizace. Když praskne potrubí, chceš vědět, kudy to teče, ne romanticky hádat podle zvuku.
+
+### 10.6 Checklist použitelných šablon
 
 - Má každá šablona jasného vlastníka?
 - Dá se vyplnit během hodiny, ne během kvartálu?
@@ -1200,7 +1232,8 @@ Praktické pravidlo: pokud nevíš, kam data tečou, rozhodnutí je „upravit�
 
 ## Pracovní log
 
-- 2026-09-21: Doplněna kapitola 10.1–10.5 s kopírovatelnými šablonami pro launch brief, produktovou stránku, měsíční provozní kontrolu a privacy-first rozhodnutí.
+- 2026-09-21: Doplněna příloha 10.5 se šablonou datové mapy pro formuláře, účty, analytiku, logy, fakturaci, podporu a newsletter.
+- 2026-09-21: Doplněna kapitola 10.1–10.4 a checklist 10.6 s kopírovatelnými šablonami pro launch brief, produktovou stránku, měsíční provozní kontrolu a privacy-first rozhodnutí.
 - 2026-09-21: Doplněna kapitola 9.1–9.5 o tom, jak z e-booku udělat živý provozní systém s rozhodovací tabulí, měřením, privacy kontrolou a měsíční revizí.
 - 2026-09-21: Doplněna kapitola 8.1–8.5 s opakovatelnými auditními šablonami pro homepage, SaaS onboarding, marketing, privacy-first provoz a týdenní rituál.
 - 2026-09-21: Doplněna kapitola 7.1–7.5 s praktickým 30denním plánem zavedení doporučení z e-booku do webu, SaaS produktu, marketingu a provozu.
