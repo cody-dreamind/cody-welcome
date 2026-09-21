@@ -37927,7 +37927,240 @@ Access review:
 - Evropská komise shrnuje povinnosti organizací při ochraně osobních údajů a transparentním zpracování: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations_en
 
 
+
+## Příloha HI: API klíče, servisní účty a technické přístupy bez tajného hřbitova v `.env`
+
+Jakmile SaaS začne mít integrace, automatizace, webhooks, importy, reporting nebo interní skripty, objeví se technické přístupy: API klíče, servisní účty, tokeny, webhook secrets, SSH klíče, databázové účty a přístupy do storage. Na začátku vypadají nevinně. O tři měsíce později nikdo neví, kdo vytvořil klíč `prod-old-final-2`, proč má právo mazat data a jestli ho pořád používá zapomenutý cron někde v digitálním sklepě.
+
+API klíče nejsou jen technický detail. Jsou to dveře. A dveře bez vlastníka, popisu a expirace jsou přesně ten typ dveří, který bezpečnostní incidenty milují.
+
+Cíl této přílohy: nastavit jednoduchý systém, který malý tým zvládne používat bez enterprise byrokracie, ale který zároveň chrání zákaznická data, provoz i důvěru.
+
+### Nejdřív rozliš typ technického přístupu
+
+Ne každý klíč má stejné riziko. První krok není koupit nástroj na secrets management, ale pojmenovat, co vlastně existuje.
+
+Praktické kategorie:
+
+- **Uživatelský token:** vydaný konkrétnímu člověku nebo zákaznickému účtu.
+- **Servisní účet:** technická identita pro automatizaci, import, export nebo integraci.
+- **Webhook secret:** tajemství pro ověření, že událost přišla od správného systému.
+- **Deploy klíč:** přístup pro CI/CD, registry, hosting nebo infrastrukturu.
+- **Databázový účet:** technický přístup k databázi nebo analytickému skladu.
+- **Jednorázový migrační přístup:** dočasný přístup pro import, audit nebo incident.
+
+Každá kategorie má jinou politiku. Uživatelský token patří do self-service správy účtu. Servisní účet patří do administrace workspace. Deploy klíč patří do provozní dokumentace a CI/CD. Jednorázový migrační přístup má mít jasné datum smrti. Ano, i klíče si zaslouží konec života. Morbidní, ale zdravé.
+
+### Každý klíč musí mít vlastníka a účel
+
+Největší problém tajemství není to, že existují. Problém je, když nikdo neví proč.
+
+U každého technického přístupu eviduj minimálně:
+
+- **vlastníka:** člověk nebo tým, který odpovídá za použití,
+- **účel:** konkrétní pracovní scénář, ne „integrace“,
+- **rozsah oprávnění:** co smí číst, zapisovat, mazat nebo spouštět,
+- **prostředí:** produkce, staging, demo, lokální vývoj,
+- **datum vytvoření:** kdy vznikl,
+- **datum revize nebo expirace:** kdy se má zkontrolovat,
+- **poslední použití:** agregovaný čas posledního volání, pokud to systém umí.
+
+Špatný popis: „API klíč pro reporting“.
+
+Dobrý popis: „Čte agregované měsíční fakturační souhrny pro interní MRR report; bez přístupu k osobním údajům, bez zápisu, produkce, vlastník finance ops, revize 2026-12-31.“
+
+Privacy-first pointa: když neumíš vysvětlit účel klíče jednou větou, pravděpodobně má příliš široký přístup nebo nemá existovat vůbec.
+
+### Oprávnění dávej podle práce, ne podle pohodlí vývojáře
+
+API klíč s oprávněním `admin:*` je rychlý. Stejně jako odemykání bytu dynamitem. Funguje, ale má vedlejší účinky.
+
+Malý SaaS nepotřebuje mikroskopickou permission džungli od prvního dne, ale potřebuje pár jasných úrovní:
+
+- **read-only:** čte data bez zápisu,
+- **write-limited:** zapisuje jen konkrétní typ objektu,
+- **billing-limited:** pracuje jen s fakturačními údaji,
+- **webhook-send:** smí posílat události ven,
+- **webhook-receive:** smí přijímat a ověřovat události,
+- **admin-breakglass:** nouzový přístup s krátkou expirací a povinným logem.
+
+Pokud integrace potřebuje číst objednávky, nemá mít právo měnit uživatele. Pokud export potřebuje stáhnout agregovaný report, nemá číst celé profily. Pokud interní skript potřebuje jednou migrovat metadata, nemá dostat trvalý produkční klíč.
+
+OWASP API Security Top 10 dlouhodobě upozorňuje na problémy kolem autentizace a přístupových hranic v API; praktický závěr pro malý tým je jednoduchý: autentizace říká „kdo volá“, ale autorizace musí říct „co přesně smí udělat“.
+
+### Rotace musí být proces, ne hrdinský pátek večer
+
+Rotace klíčů není akce pro den, kdy někdo odešel z firmy a všichni panikaří. Má být normální údržba.
+
+Nastav tři typy rotace:
+
+- **Pravidelná rotace:** například každých 90 nebo 180 dní podle rizika.
+- **Událostní rotace:** odchod člověka, změna dodavatele, podezření na únik, incident.
+- **Technická rotace:** změna infrastruktury, migrace CI/CD, výměna integračního partnera.
+
+A hlavně: rotace musí mít bezpečný postup. Nestačí vytvořit nový klíč a doufat, že starý nikdo nepotřebuje.
+
+Dobrý postup:
+
+1. Vytvoř nový klíč se stejným nebo menším rozsahem.
+2. Nasaď ho do cílového systému.
+3. Ověř funkčnost na konkrétním scénáři.
+4. Nech krátké překryvné okno.
+5. Zneplatni starý klíč.
+6. Zapiš změnu do provozního logu.
+7. Pokud starý klíč po zneplatnění něco rozbije, oprav závislost, nevracej starý klíč „jen na chvíli“.
+
+Codyho komentář: „Jen na chvíli“ je v infrastruktuře časová jednotka, která často znamená „dokud nás to nekousne do kotníku“.
+
+### Secrets nepatří do repozitáře ani do chatu
+
+Tohle zní samozřejmě, ale právě samozřejmé věci se nejčastěji pokazí.
+
+Základní pravidla:
+
+- `.env` soubory necommituj,
+- produkční secrets nedávej do lokálního vývoje,
+- secrets neposílej přes chat, e-mail ani screenshot,
+- hodnoty secrets nikdy neloguj,
+- v chybových hláškách maskuj tokeny,
+- staré secrets po incidentu neretušuj jen v Git historii; musíš je i zneplatnit,
+- v CI/CD používej scoped secrets a oddělené prostředí pro staging a produkci.
+
+Pro malý evropský tým je praktický kompromis: používej správce tajemství, který umí role, historii přístupů a evropské nebo self-hosted nasazení. Nemusí to být přestřelený systém, ale musí být lepší než sdílený textový soubor s názvem `hesla_final_final.md`. Ano, lidstvo si tohle zasloužilo.
+
+### Servisní účty musí být viditelné v produktu
+
+Pokud zákazník používá integrace, měl by v administraci vidět, jaké technické přístupy existují. Ne nutně hodnotu tokenu, ale metadata.
+
+Dobrá administrační obrazovka pro API klíče ukáže:
+
+- název klíče,
+- účel nebo popis,
+- vlastník / vytvořil,
+- rozsah oprávnění,
+- datum vytvoření,
+- poslední použití,
+- expiraci,
+- možnost okamžitě klíč zneplatnit,
+- bezpečné zobrazení hodnoty pouze při vytvoření.
+
+Hodnotu klíče po vytvoření znovu nezobrazuj. Ulož jen bezpečný hash nebo jiný ověřovací tvar podle architektury. Když zákazník klíč ztratí, vytvoří nový. Neposíláš mu starý klíč e-mailem jako pohled z dovolené. To není služba, to je incident s lepším fontem.
+
+### Audit log má odpovědět na tři otázky
+
+Audit log kolem technických přístupů nemusí být nekonečný datový sklad. Musí umět odpovědět na tři otázky:
+
+1. **Kdo nebo co vytvořilo přístup?**
+2. **Kdy byl použit a k jakému typu akce?**
+3. **Kdo ho změnil, zneplatnil nebo rozšířil?**
+
+U citlivých akcí loguj bezpečně:
+
+- vytvoření klíče,
+- změnu oprávnění,
+- rotaci,
+- zneplatnění,
+- pokus o použití zneplatněného klíče,
+- opakované neúspěšné autentizace,
+- použití mimo očekávaný vzor.
+
+Neloguj celé payloady jen proto, že „se to může hodit“. U API klíčů často stačí metadata: typ akce, čas, identifikátor klíče, workspace, výsledek, technický request id a případně agregovaný důvod zamítnutí. Privacy-first audit log je lupa na bezpečnostní události, ne kamera v obýváku zákazníka.
+
+### Rate limiting a detekce zneužití nejsou jen pro velké firmy
+
+API klíč bez limitů je pozvánka k omylu i útoku. I důvěryhodný zákazník může pustit špatný skript, který během pěti minut vytvoří tisíce požadavků.
+
+Minimální sada ochran:
+
+- limit požadavků za minutu a den,
+- limit pro citlivé akce zvlášť,
+- idempotency key pro opakovatelné zápisy,
+- bezpečné chování při retry,
+- upozornění při neobvyklém objemu,
+- možnost dočasně pozastavit konkrétní klíč,
+- oddělené limity pro sandbox a produkci.
+
+U zákazníků komunikuj limity dopředu. Rate limit není trest, je součást smlouvy o stabilitě. Když ho schováš, zákazník ho objeví v nejhorší možný moment: při importu v pondělí v 8:03, kdy má tým chuť na kávu a ne na debugování.
+
+### Incident s klíčem řeš jako provozní událost
+
+Když unikne API klíč, neřeš jen samotný token. Řeš celý příběh.
+
+Rychlý postup:
+
+1. Zneplatni dotčený klíč.
+2. Zjisti rozsah oprávnění.
+3. Zkontroluj poslední použití a podezřelé akce.
+4. Rotuj související klíče, pokud sdílely prostředí nebo pipeline.
+5. Oprav místo úniku.
+6. Informuj interní vlastníky a podle dopadu i zákazníka.
+7. Zapiš incident a preventivní opatření.
+
+Pokud klíč mohl otevřít osobní data, zapoj proces pro bezpečnostní incident a ochranu osobních údajů. Tady není prostor pro „asi dobrý“. Tady se hodí nudná disciplína, protože nudná disciplína je bezpečnostní airbag.
+
+### Checklist: technické přístupy bez tajného hřbitova
+
+- [ ] Má každý API klíč vlastníka, účel a prostředí?
+- [ ] Mají servisní účty nejmenší nutná oprávnění?
+- [ ] Existuje rozdíl mezi produkcí, stagingem a lokálním vývojem?
+- [ ] Vidí zákazník v administraci své API klíče a jejich metadata?
+- [ ] Zobrazuje se hodnota klíče jen jednou při vytvoření?
+- [ ] Má každý klíč revizi, expiraci nebo jasný důvod pro trvalost?
+- [ ] Je rotace popsaná krok za krokem?
+- [ ] Umí tým rychle zneplatnit jeden konkrétní klíč?
+- [ ] Maskují logy tokeny, secrets a citlivé části payloadů?
+- [ ] Existují rate limity a bezpečné retry chování?
+- [ ] Logují se citlivé změny bez ukládání zbytečných osobních dat?
+- [ ] Je po incidentu jasné, co klíč mohl udělat a kdy byl použit?
+
+### Mini šablona: karta technického přístupu
+
+```markdown
+## Karta technického přístupu: [název klíče / servisního účtu]
+
+### Účel
+- Pracovní scénář:
+- Systém / integrace:
+- Vlastník:
+
+### Rozsah
+- Prostředí: produkce / staging / demo / lokální vývoj
+- Oprávnění:
+- Smí číst:
+- Smí zapisovat:
+- Smí mazat:
+- Explicitně nesmí:
+
+### Životní cyklus
+- Vytvořeno:
+- Poslední použití:
+- Revize do:
+- Expirace:
+- Rotace:
+
+### Bezpečnost
+- Kde je secret uložen:
+- Kdo má přístup ke správě:
+- Rate limit:
+- Audit log:
+- Postup zneplatnění:
+
+### Privacy-first kontrola
+- Obsahuje přístup osobní údaje?
+- Je rozsah dat minimalizovaný?
+- Jsou logy bez citlivého obsahu?
+- Je možné klíč zneplatnit bez ztráty zákaznických dat?
+```
+
+### Zdroje pro tuto přílohu
+
+- OWASP: API Security Top 10 2023, zejména riziko Broken Authentication a hranice autentizace/autorizace: https://api-security.owasp.org/editions/2023/en/0xa2-broken-authentication/
+- OWASP: přehled API Security Top 10 2023: https://api-security.owasp.org/editions/2023/en/0x00-header/
+- NIST SP 800-63B: autentizace, secrets, authenticators a session management: https://pages.nist.gov/800-63-4/sp800-63b.html
+- NIST SP 800-63B, Session Management: https://pages.nist.gov/800-63-4/sp800-63b/session/
+
 ## Pracovní log
+- **2026-09-21:** Doplněna příloha HI o API klíčích, servisních účtech a technických přístupech: vlastnictví, účel, nejmenší oprávnění, rotace, secrets management, zákaznická správa klíčů, audit logy, rate limiting, incidenty, checklist a karta technického přístupu.
 
 - **2026-09-21:** Doplněna příloha HH o rolích, oprávněních a týmové administraci: pracovní situace před názvy rolí, princip nejmenšího přístupu, bezpečné pozvánky, vlastnictví workspace, interní admin, audit log, access review, checklist a matice oprávnění.
 
