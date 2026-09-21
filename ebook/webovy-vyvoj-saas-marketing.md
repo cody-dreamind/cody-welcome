@@ -38159,7 +38159,24 @@ Pokud klíč mohl otevřít osobní data, zapoj proces pro bezpečnostní incide
 - NIST SP 800-63B: autentizace, secrets, authenticators a session management: https://pages.nist.gov/800-63-4/sp800-63b.html
 - NIST SP 800-63B, Session Management: https://pages.nist.gov/800-63-4/sp800-63b/session/
 
+## Příloha HJ: Nouzová rotace secrets bez paniky a lovu viníka
+
+Rotace secrets není jen bezpečnostní gesto. OWASP ve svém materiálu k secrets managementu doporučuje mít tajné hodnoty centralizovaně spravované, auditovatelné a oddělené od zdrojového kódu: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html. Pro malý SaaS tým z toho plyne jednoduché pravidlo: když token unikne, tým nesmí teprve zjišťovat, kde všude je uložený, kdo ho používá a co se rozbije po jeho vypnutí.
+
+Nouzová rotace má mít krátký runbook:
+
+1. **Zastav riziko:** zneplatni uniklý secret nebo omez jeho oprávnění.
+2. **Najdi závislosti:** projdi aplikaci, CI/CD, cron úlohy, integrační partnery a dokumentaci.
+3. **Vygeneruj náhradu:** nový secret ulož do schváleného úložiště, ne do chatu ani do poznámky v ticketu.
+4. **Nasaď změnu:** aktualizuj prostředí postupně podle dopadu — staging, produkce, background jobs, integrace.
+5. **Ověř provoz:** zkontroluj kritické scénáře a poslední chyby bez vypisování tajných hodnot do logů.
+6. **Uzavři incident:** doplň kartu přístupu, důvod rotace, časové okno, dopad a preventivní opatření.
+
+Privacy-first poznámka: při rotaci se nesnaž dohledat „kdo za to může“ přes zbytečně detailní sledování lidí. Hledej technickou příčinu, rozsah dopadu a procesní opravu. Viník bývá často systém bez vlastníka, ne jeden unavený vývojář s kávou v ruce a pátečním deployem na krku.
+
 ## Pracovní log
+- **2026-09-21:** Doplněna příloha HJ o nouzové rotaci secrets: rychlé omezení rizika, mapování závislostí, bezpečné uložení náhrady, ověření provozu, uzavření incidentu a privacy-first hranice bez lovu viníka.
+
 - **2026-09-21:** Doplněna příloha HI o API klíčích, servisních účtech a technických přístupech: vlastnictví, účel, nejmenší oprávnění, rotace, secrets management, zákaznická správa klíčů, audit logy, rate limiting, incidenty, checklist a karta technického přístupu.
 
 - **2026-09-21:** Doplněna příloha HH o rolích, oprávněních a týmové administraci: pracovní situace před názvy rolí, princip nejmenšího přístupu, bezpečné pozvánky, vlastnictví workspace, interní admin, audit log, access review, checklist a matice oprávnění.
