@@ -37738,7 +37738,198 @@ Výsledek období:
 - Evropská komise shrnuje základní pravidla ochrany dat pro firmy a organizace včetně transparentnosti a práv subjektů údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations_en
 
 
+## Příloha HH: Role, oprávnění a týmová administrace bez bezpečnostního divadla a interního šmírování
+
+Týmová administrace v SaaS produktu vypadá nudně. Pozvánky, role, práva, vlastník účtu, audit log. Žádný ohňostroj. Jenže právě tady se často rozhoduje, jestli zákazník produkt zavede do firmy, nebo ho po pilotu odloží se slovy „tohle radši nebudeme pouštět lidem“.
+
+Dobře navržené role nejsou jen bezpečnostní funkce. Jsou obchodní argument, onboardingový nástroj a privacy-first závazek. Zákazník chce vědět, kdo může co vidět, kdo může měnit nastavení, kdo může exportovat data a co se stane, když člověk odejde z firmy. Pokud odpověď zní „to nějak vyřeší admin“, nemáš administraci. Máš optimismus v kabátu.
+
+### Začni pracovními situacemi, ne názvy rolí
+
+Nejhorší role model vzniká tak, že tým otevře tabulku a začne vymýšlet jména: owner, admin, manager, editor, viewer, super viewer, admin plus, admin ultra a někde v koutě brečí support. Lepší je začít situacemi:
+
+- Kdo zakládá workspace a přijímá smluvní odpovědnost?
+- Kdo zve nové lidi a odebírá přístupy?
+- Kdo vidí fakturaci a mění tarif?
+- Kdo může exportovat data?
+- Kdo nastavuje integrace a API tokeny?
+- Kdo může měnit kritická workflow pravidla?
+- Kdo pouze pracuje s běžnými záznamy?
+- Kdo potřebuje jen číst výstupy nebo reporty?
+
+Teprve potom vytvoř role. U malého B2B SaaS často stačí čtyři:
+
+- **Vlastník:** smluvní a bezpečnostní odpovědnost, billing, převod vlastnictví, mazání workspace.
+- **Administrátor:** správa lidí, nastavení, integrace, exporty podle pravidel.
+- **Člen:** běžná práce v produktu bez kritických změn účtu.
+- **Pozorovatel:** čtení vybraných výstupů bez změn a exportů.
+
+Pokud potřebuješ víc rolí, napiš proč. Ne „protože enterprise“. Konkrétně: jiný proces, jiná odpovědnost, jiný datový rozsah nebo jiné riziko.
+
+### Oprávnění navrhuj podle nejmenšího nutného přístupu
+
+Privacy-first administrace stojí na jednoduchém principu: člověk má dostat přístup k tomu, co potřebuje pro práci, ne k tomu, co by se mu někdy mohlo hodit. OWASP ve svých doporučeních k autorizaci zdůrazňuje mimo jiné deny-by-default, ověřování oprávnění na serveru a princip nejmenších práv. Přeloženo do provozu malého SaaS: UI tlačítko není bezpečnostní hranice.
+
+Praktická pravidla:
+
+- Kontroluj oprávnění v backendu u každé citlivé akce.
+- Výchozí stav nové role má být omezený, ne všemocný.
+- Exporty, integrace, billing, mazání a změny oprávnění jsou citlivé akce.
+- Interní podpora má mít oddělené oprávnění od zákaznického admina.
+- Dočasný přístup musí mít expiraci.
+- Kritické akce mají být auditované.
+
+Příklad špatného modelu: každý administrátor může exportovat všechna data, zvát lidi, měnit billing, přidávat integrace a mazat účet.
+
+Příklad lepšího modelu: administrátor spravuje uživatele a nastavení, ale export zákaznických dat vyžaduje zvláštní oprávnění nebo potvrzení vlastníka. Billing vidí jen vlastník a finanční role. API tokeny spravuje technická role. Mazání workspace má dvoukrokové potvrzení a čekací dobu.
+
+### Pozvánky jsou bezpečnostní produkt
+
+Pozvánka do týmu není jen e-mail s tlačítkem. Je to moment, kdy do systému přibývá nový člověk s konkrétními právy. Proto má být pozvánka čitelná, omezená a auditovatelná.
+
+Dobrá pozvánka obsahuje:
+
+- kdo pozval,
+- do jakého workspace,
+- s jakou rolí,
+- kdy pozvánka expiruje,
+- co se stane po přijetí,
+- kam se obrátit, pokud pozvánka nedává smysl.
+
+Nedělej z pozvánky marketingový newsletter. Člověk potřebuje pochopit kontext a bezpečně se přihlásit. Pokud pozvánka obsahuje tracking pixel, tři UTM parametry a tlačítko „objevte sílu produktivity“, někdo si spletl onboarding s reklamním letákem.
+
+Privacy-first detail: nepřijímej pozvánku jen podle tajného odkazu, pokud tím člověk získá citlivý přístup. Vyžaduj přihlášení nebo ověření e-mailu, pozvánku po expiraci zneplatni a po přijetí zapiš auditní událost.
+
+### Vlastnictví workspace musí být explicitní
+
+Každý týmový účet potřebuje jasného vlastníka. Ne proto, aby měl někdo korunku, ale proto, aby bylo jasné, kdo řeší billing, smluvní rozhodnutí, exporty, zrušení účtu a bezpečnostní eskalace.
+
+Typické scénáře, které musí mít postup:
+
+- vlastník odchází z firmy,
+- vlastník ztratil přístup k e-mailu,
+- firma chce převést vlastnictví na jinou osobu,
+- zákazník má spor mezi dvěma interními týmy,
+- účet spravovala agentura a zákazník ho chce převzít,
+- vlastník nereaguje a hrozí zastavení provozu.
+
+Pro malé SaaS stačí jednoduchý převodní proces: žádost, ověření oprávněné osoby, potvrzení současného vlastníka nebo alternativní firemní důkaz, auditní záznam a notifikace dotčeným adminům. Není potřeba z toho dělat notářský muzikál. Ale nesmí to být ani „napište nám z libovolného Gmailu a my to přepneme“.
+
+### Interní admin nesmí být okno do cizí firmy
+
+Podpora někdy potřebuje vidět stav účtu, chyby, plán, poslední bezpečnostní události nebo konfiguraci integrace. To neznamená, že má mít volný výhled do obsahu zákaznické práce.
+
+Rozděl interní admin na vrstvy:
+
+- **Provozní metadata:** stav účtu, tarif, technické chyby, poslední přihlášení, konfigurace.
+- **Support pohled:** vybrané informace nutné k řešení konkrétního ticketu.
+- **Citlivý přístup:** dočasný, schválený, auditovaný a ideálně bez masového čtení obsahu.
+- **Administrátorské zásahy:** změny billing stavu, obnovení přístupu, ruční opravy dat, deaktivace účtu.
+
+Každá vrstva má mít vlastní pravidla. Pokud support potřebuje pomoci zákazníkovi s importem, nemusí číst všechny obchodní poznámky v účtu. Pokud technik řeší incident, nepotřebuje exportovat celý workspace do lokálního notebooku. Pohodlí interního týmu není dost dobrý důvod pro neomezený přístup.
+
+> Codyho komentář: Interní admin je jako klíč od technické místnosti. Hodí se, když praskne potrubí. Není to pozvánka chodit zákazníkovi po bytě a hodnotit knihovnu.
+
+### Audit log má být použitelný, ne dekorativní
+
+Audit log není odkladiště všeho. Pokud do něj zapisuješ každé najetí myší, nikdo ho nebude číst. Pokud do něj nezapisuješ změnu role, export dat a vytvoření API tokenu, je k ničemu.
+
+Do audit logu patří hlavně:
+
+- přihlášení a bezpečnostní změny,
+- pozvánky, přijetí pozvánek a odebrání uživatelů,
+- změny rolí a oprávnění,
+- exporty a mazání dat,
+- vytvoření, použití a zneplatnění API tokenů,
+- změny integrací,
+- billing a změny tarifu,
+- zásahy interní podpory.
+
+U každé události drž minimum: kdo, kdy, co změnil, v jakém workspace, z jakého rozhraní a jaký byl výsledek. Citlivý obsah změny neukládej, pokud ho nepotřebuješ. Audit log má pomoci rekonstruovat odpovědnost, ne vytvořit druhou tajnou databázi osobních údajů.
+
+### Role pravidelně uklízej
+
+Práva stárnou rychleji než dokumentace. Lidé mění týmy, agentury končí spolupráci, externisté dokončí implementaci a testovací admin účty zůstanou. Tohle je tichý bezpečnostní dluh.
+
+Zaveď čtvrtletní access review:
+
+- seznam všech uživatelů s admin a export právy,
+- seznam interních lidí s přístupem do zákaznického adminu,
+- seznam aktivních API tokenů a integrací,
+- kontrolu pozvánek, které zůstaly viset,
+- kontrolu bývalých zaměstnanců, agentur a partnerů,
+- zápis změn a vlastníka dalšího kroku.
+
+U větších zákazníků nabídni jednoduchý export uživatelů a rolí. Ne jako enterprise upsell, ale jako důkaz kontroly. Zákazník, který umí snadno zkontrolovat přístupy, má menší důvod vytvářet vlastní chaotické tabulky mimo produkt.
+
+### Checklist: role a oprávnění privacy-first
+
+- [ ] Role vycházejí z pracovních situací, ne z interních pocitů.
+- [ ] Backend kontroluje oprávnění u každé citlivé akce.
+- [ ] Exporty, billing, integrace, API tokeny a mazání mají zvláštní pravidla.
+- [ ] Pozvánky mají roli, kontext, expiraci a auditní záznam.
+- [ ] Workspace má jasného vlastníka a převodní proces.
+- [ ] Interní admin ukazuje minimum dat nutných k řešení problému.
+- [ ] Citlivý interní přístup je dočasný, schválený a auditovaný.
+- [ ] Audit log zapisuje důležité změny bez zbytečného obsahu.
+- [ ] Čtvrtletně probíhá review adminů, externistů, integrací a tokenů.
+- [ ] Dokumentace zákazníkovi vysvětluje role lidskou řečí.
+
+## Matice oprávnění: [produkt / workspace]
+
+```md
+Kontext:
+- Produkt:
+- Segment zákazníka:
+- Nejcitlivější data v účtu:
+- Kritické akce:
+
+Role:
+- Vlastník:
+- Administrátor:
+- Člen:
+- Pozorovatel:
+- Interní support:
+
+Citlivé akce:
+- Pozvat uživatele:
+- Změnit roli:
+- Exportovat data:
+- Nastavit integraci:
+- Vytvořit API token:
+- Změnit tarif / billing:
+- Smazat workspace:
+- Převést vlastnictví:
+
+Pozvánky:
+- Expirace:
+- Ověření identity:
+- Co vidí pozvaný člověk:
+- Co se zapisuje do audit logu:
+
+Interní přístup:
+- Kdo smí otevřít zákaznický účet:
+- Jaký důvod musí uvést:
+- Jak dlouho přístup platí:
+- Kdo reviewuje zásahy:
+
+Access review:
+- Frekvence:
+- Vlastník kontroly:
+- Co se kontroluje:
+- Jak se evidují změny:
+```
+
+### Zdroje pro tuto přílohu
+
+- Plné znění GDPR na EUR-Lexu uvádí v článku 5 principy minimalizace, přesnosti, omezení uložení, integrity a důvěrnosti: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+- OWASP Authorization Cheat Sheet shrnuje praktiky jako deny-by-default, least privilege a kontrolu autorizace v aplikační vrstvě: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- Evropská komise shrnuje povinnosti organizací při ochraně osobních údajů a transparentním zpracování: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations_en
+
+
 ## Pracovní log
+
+- **2026-09-21:** Doplněna příloha HH o rolích, oprávněních a týmové administraci: pracovní situace před názvy rolí, princip nejmenšího přístupu, bezpečné pozvánky, vlastnictví workspace, interní admin, audit log, access review, checklist a matice oprávnění.
 
 - **2026-09-21:** Doplněna příloha HG o zákaznické komunitě a zpětné vazbě bez platformního rukojmí: účel komunity, volba kanálu, strukturovaný feedback, veřejná pravidla, privacy-first měření, moderace, uzavírání smyčky, exit proces, checklist a komunitní karta.
 
