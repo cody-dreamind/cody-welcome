@@ -476,6 +476,122 @@ Mini-cvičení na 60 minut:
 5. Vypiš všechny marketingové skripty a jeden z nich odeber, odlož nebo zdokumentuj.
 
 
+## 5. Privacy-first provoz v Evropě
+
+### 5.1 Datová mapa: vědět, co vůbec držíš
+
+Privacy-first provoz nezačíná cookie lištou. Začíná nudnou, ale extrémně užitečnou otázkou: **jaká data máme, proč je máme a kde fyzicky nebo smluvně končí?** Bez odpovědi se z každého dalšího nástroje stává malý hazard. A hazard je zábava možná v kasinu, ne v produkční databázi.
+
+Pro malý web nebo SaaS si udělej datovou mapu v tabulce. Nemusí to být enterprise obluda s padesáti sloupci. Stačí přehled, který dokážeš vysvětlit vývojáři, zakladateli i zákazníkovi:
+
+| Oblast | Příklad dat | Proč je sbíráme | Kde jsou uložená | Kdo k nim má přístup | Retence |
+|---|---|---|---|---|---|
+| Účet | e-mail, jméno, firma | přihlášení a fakturace | EU databáze | support, admin | po dobu účtu + zákonné lhůty |
+| Formulář | zpráva, kontakt | odpověď na poptávku | e-mail / CRM | obchod | 6–24 měsíců podle procesu |
+| Produktová analytika | agregované události | zlepšení onboardingu | EU analytika | produktový tým | 6–12 měsíců |
+| Serverové logy | IP, user-agent, URL | bezpečnost a debugging | EU hosting | vývoj / ops | 7–30 dní |
+| Newsletter | e-mail, souhlas | posílání novinek | EU mailing nástroj | marketing | do odhlášení |
+
+Nejdřív mapuj realitu, ne ideální stav. Pokud zjistíš, že se formuláře posílají do pěti schránek, backup běží do cizího regionu a starý chatbot pořád posílá data někam za oceán, není to selhání mapy. To je přesně její práce: rozsvítit místa, kde se systém tváří jednoduše, ale chová se jako datový ježek.
+
+Evropská komise u GDPR zdůrazňuje principy jako zákonnost, transparentnost, minimalizace, přesnost, omezení uložení a integrita/confidentialita. Přeloženo do provozní řeči: nesbírej data jen proto, že by se jednou mohla hodit, a když už je sbíráš, měj pro ně jasný důvod, přístupová pravidla a datum úklidu. Zdroj: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
+*Codyho komentář:* datová mapa je jako technický dluhoměr. Nevyřeší problém sama, ale přestaneš žít v krásné iluzi, že „to někde máme pod kontrolou“.
+
+### 5.2 Minimalizace jako produktové rozhodnutí
+
+Minimalizace dat není právní dekorace. Je to produktové a bezpečnostní rozhodnutí. Každé nové pole ve formuláři zvyšuje tření pro uživatele, práci pro tým a dopad incidentu. Když se zeptáš na telefon, datum narození a velikost firmy, musíš umět říct, proč to potřebuješ právě teď — ne „možná se bude hodit obchodníkovi“.
+
+Praktické pravidlo pro formuláře:
+
+- **Poptávka:** jméno, e-mail, zpráva; telefon jen volitelně.
+- **Registrace do SaaS:** e-mail a heslo nebo magic link; firemní údaje až ve chvíli, kdy jsou potřeba.
+- **Trial:** ptej se na segment a cíl produktu, ne na dvacet marketingových polí.
+- **Newsletter:** e-mail a jasný souhlas; jméno jen pokud personalizace opravdu dává hodnotu.
+- **Support:** sbírej kontext chyby, ale ne celé databázové exporty do ticketu.
+
+Minimalizace se hodí i v architektuře. Odděl obsah zprávy od analytiky, fakturační údaje od produktových eventů a administrační poznámky od dat, která exportuje zákazník. Když potom řešíš žádost o přístup, výmaz nebo export, nemusíš lovit osobní údaje v každé logovací větě.
+
+U SaaS produktu si nastav tyto zásady:
+
+- nová funkce má v zadání sekci „jaká data přidává“;
+- každý nový externí nástroj má vlastníka a důvod použití;
+- testovací prostředí nepoužívá produkční osobní data, pokud to není opravdu nezbytné;
+- debug logy nesmí obsahovat hesla, tokeny, celé zprávy z formulářů ani platební detaily;
+- export zákaznických dat je navržený jako funkce, ne jako ruční SQL rituál při úplňku.
+
+### 5.3 Dodavatelé, zpracovatelé a subdodavatelé
+
+Jakmile používáš hosting, e-mailing, analytiku, helpdesk, platební bránu nebo monitoring, nejsi na data sám. Některé nástroje budou zpracovatelé, některé samostatní správci a u některých je potřeba číst dokumentaci opatrněji než ceník cloudových egress poplatků.
+
+EDPB ve vodítkách k rolím správce a zpracovatele vysvětluje, že správce určuje účely a prostředky zpracování, zatímco zpracovatel zpracovává osobní údaje jménem správce. Prakticky: když provozuješ SaaS a zákazník ti svěří data svých uživatelů, často budeš pro zákazníka zpracovatel. Když rozhoduješ o vlastním marketingu, jsi správce. Zdroj: https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
+
+Před nasazením nového dodavatele si ověř:
+
+- kde se data ukládají a zpracovávají;
+- zda nabízí zpracovatelskou smlouvu / DPA;
+- jaké používá subdodavatele a jestli jejich seznam umí oznamovat;
+- jak řeší export a výmaz dat;
+- jaké má bezpečnostní certifikace nebo alespoň veřejně popsaná opatření;
+- zda posílá data mimo EU/EHP a na jakém právním základě;
+- jestli se dá služba používat bez zbytečných marketingových trackerů.
+
+Pokud dodavatel exportuje osobní údaje mimo EU/EHP, nestačí mávnout rukou nad větou „we are GDPR compliant“. Evropská komise popisuje standardní smluvní doložky jako předem schválený mechanismus pro některé přenosy do třetích zemí, ale pořád musíš rozumět konkrétnímu toku dat, účelu a riziku. Zdroj: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en
+
+Privacy-first preferované pořadí pro malé týmy:
+
+1. Evropský dodavatel s EU hostingem a jasnou DPA.
+2. Dodavatel mimo EU, ale s EU regionem, SCC a dobrou dokumentací.
+3. Externí služba jen pro anonymní nebo agregovaná data.
+4. Vlastní provoz, pokud je jednodušší než smluvní a datová akrobacie.
+
+*Codyho komentář:* self-hosting není automaticky svatý grál. Špatně spravovaný vlastní server je jen velmi osobní způsob, jak vyrobit bezpečnostní průšvih. Privacy-first znamená kontrolu a odpovědnost, ne romantiku kolem SSH.
+
+### 5.4 Retence, export a incidenty
+
+Data mají mít životní cyklus. Vzniknou, používají se, archivují se, smažou se. Pokud poslední krok chybí, databáze se časem promění v muzeum rizik. A muzeum rizik nemá hezký merch.
+
+Nastav retenci podle typu dat:
+
+- **Serverové logy:** krátce, typicky dny až týdny podle bezpečnostní potřeby.
+- **Analytické eventy:** agregovaně déle, surové události kratší dobu.
+- **Poptávky:** smaž nebo anonymizuj po obchodním cyklu, pokud nevznikl zákaznický vztah.
+- **Účetní a fakturační data:** drž podle zákonných povinností, odděleně od produktové analytiky.
+- **Neaktivní účty:** definuj proces upozornění, exportu a smazání/anonymizace.
+- **Backupy:** dokumentuj dobu uchování a postup, kdy se smazaná data definitivně propíšou i do záloh.
+
+Už při návrhu produktu mysli na tři provozní situace:
+
+1. **Zákazník chce export.** Umíš mu dát čitelný balíček dat bez ruční práce vývojáře?
+2. **Zákazník chce výmaz.** Víš, co se smaže hned, co se anonymizuje a co musí zůstat kvůli zákonu?
+3. **Stane se incident.** Víš, kdo rozhoduje, kde jsou logy, komu voláš a jak rychle zjistíš rozsah?
+
+Evropská komise mezi povinnostmi uvádí i témata jako posouzení dopadu, pověřenec pro ochranu osobních údajů a ohlašování porušení zabezpečení podle rizika. Ne každý malý projekt potřebuje všechno ve stejné míře, ale každý projekt potřebuje vědět, kdy se z běžné chyby stává právní a komunikační problém. Zdroj: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en
+
+### 5.5 Checklist privacy-first provozu
+
+Před spuštěním nebo větší změnou produktu si projdi:
+
+- [ ] Máme datovou mapu pro účty, formuláře, analytiku, logy, newsletter a platby.
+- [ ] U každé kategorie dat víme účel, umístění, přístupy a retenci.
+- [ ] Formuláře sbírají jen data potřebná pro aktuální krok.
+- [ ] Produkční osobní data netečou do testovacího prostředí bez jasného důvodu.
+- [ ] Logy neobsahují hesla, tokeny, platební údaje ani celé citlivé zprávy.
+- [ ] Každý dodavatel má vlastníka, DPA nebo zdokumentovaný právní režim.
+- [ ] Víme, kteří dodavatelé posílají data mimo EU/EHP a proč.
+- [ ] Máme proces pro export, výmaz a uzavření účtu.
+- [ ] Backupy mají definovanou retenci a obnovovací test.
+- [ ] Existuje jednoduchý incident plán: kdo rozhoduje, kdo komunikuje, kde hledáme fakta.
+
+Mini-cvičení na 60 minut:
+
+1. Vypiš deset míst, kde produkt nebo web ukládá osobní údaje.
+2. U každého napiš účel a retenci jednou větou.
+3. Najdi jeden údaj, který sbíráš zbytečně, a odstraň ho z formuláře nebo backlogu.
+4. Vyber jednoho dodavatele a ověř jeho DPA, region a subdodavatele.
+5. Sepiš první verzi incident kontaktů: technika, obchod, právní konzultace, zákaznická komunikace.
+
+
 ## Zdroje
 
 - Evropská komise: principy GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -488,8 +604,12 @@ Mini-cvičení na 60 minut:
 - Google Search Central: SEO Starter Guide — https://developers.google.com/search/docs/fundamentals/seo-starter-guide
 - Google Search Central: Creating helpful, reliable, people-first content — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 
+- Evropská komise: obligations when processing data — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en
+- European Data Protection Board: Guidelines 07/2020 on controller and processor concepts — https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
+- Evropská komise: Standard Contractual Clauses for international transfers — https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en
 ## Pracovní log
 
+- 2026-09-21: Doplněna kapitola 5.1–5.5 o datové mapě, minimalizaci, dodavatelích, retenci, exportu a incidentním checklistu privacy-first provozu v Evropě.
 - 2026-09-21: Doplněna kapitola 4.1–4.4 o marketingu bez invazivního trackingu, obsahové strategii, distribuci, UTM disciplíně a checklistu kampaně.
 - 2026-09-21: Doplněna kapitola 3.1–3.4 o SaaS onboardingu, aktivační metrice, trialu, pricingu a checklistu první zkušenosti.
 - 2026-09-21: Doplněna kapitola 2.1–2.5 o informační architektuře, výkonu, přístupnosti, technickém SEO a privacy-first auditu externích skriptů.
