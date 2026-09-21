@@ -64,6 +64,10 @@ Praktický český e-book od Codyho z Dreamindu pro malé týmy, freelancery a z
 14. **Zdroje a pracovní log**
    - Ověřené odkazy
    - Průběžný log změn e-booku
+15. **Podpora a dokumentace jako růstový kanál**
+   - Knowledge base, šablony odpovědí a zpětná vazba
+   - Jak z podpory dělat produktové učení bez sběru zbytečných dat
+   - Checklist podpory pro malý SaaS tým
 
 ---
 
@@ -1659,6 +1663,118 @@ Privacy-first distribuce znamená: publikuj primárně na vlastním webu, nabíd
 *Codyho komentář:* dokumentace je produkt. Když je užitečná, šetří čas, snižuje riziko a pomáhá prodávat. Když je mrtvá, jen zabírá místo ve složce s názvem „final_final_v3“.
 
 
+
+## 15. Podpora a dokumentace jako růstový kanál
+
+Podpora není jen místo, kam padají problémy. Je to nejrychlejší zpětná vazba k tomu, jestli produkt, web a onboarding říkají pravdu. Když se stejný dotaz opakuje potřetí, není to „otravný zákazník“. Je to produktový signál s neonovou cedulí.
+
+Malý SaaS tým nemusí mít helpdesk armádu, chatbot na všechno a pětistupňový proces eskalace. Potřebuje hlavně systém, který:
+
+- zachytí dotaz,
+- rychle ho přiřadí správnému člověku,
+- vrátí odpověď do dokumentace,
+- ukáže, který problém má řešit produkt, ne další lidská improvizace.
+
+### 15.1 Knowledge base začíná u nejčastějších rozhodnutí
+
+Dobrá znalostní báze není encyklopedie produktu. Je to zkratka k rozhodnutí: „Umím to nastavit?“, „Je to pro mě bezpečné?“, „Kolik práce mě čeká?“, „Co se stane, když udělám chybu?“
+
+Začni pěti typy článků:
+
+1. **První nastavení** — co musí uživatel udělat, aby získal první hodnotu.
+2. **Časté chyby** — co znamená konkrétní hláška a jak ji opravit.
+3. **Integrace** — co se přenáší, kam, jak často a kdo k tomu má přístup.
+4. **Fakturace a účet** — jak změnit tarif, stáhnout doklad, zrušit účet nebo exportovat data.
+5. **Soukromí a bezpečnost** — kde běží data, jak dlouho se drží a jak se dá požádat o výmaz.
+
+Každý článek piš podle stejného vzoru:
+
+- **Kdy to použít:** jedna věta.
+- **Co potřebuješ předem:** role, oprávnění, vstupy.
+- **Postup:** krátké kroky v pořadí.
+- **Jak poznáš, že je hotovo:** konkrétní výsledek.
+- **Co dělat, když to selže:** nejčastější oprava a kontakt.
+
+*Codyho komentář:* nejlepší dokumentace není ta, která má nejvíc stránek. Je to ta, po které člověk nemusí psát na podporu větu „zkoušel jsem všechno“. To je většinou lež i volání o pomoc zároveň.
+
+### 15.2 Šablony odpovědí bez robotického tónu
+
+Šablony odpovědí šetří čas, ale nesmí z podpory udělat automat na omluvy. Používej je jako kostru, ne jako masku.
+
+Dobrá šablona má čtyři části:
+
+1. **Pojmenování problému:** „Vidím, že se import zastavil na kroku mapování sloupců.“
+2. **Pravděpodobná příčina:** „Nejčastěji se to stane, když CSV obsahuje prázdný povinný sloupec.“
+3. **Konkrétní další krok:** „Zkontroluj prosím sloupec `email` a spusť import znovu.“
+4. **Bezpečný fallback:** „Když to nepomůže, pošli nám ukázku hlavičky souboru bez osobních dat.“
+
+Privacy-first detail je důležitý: nikdy automaticky nežádej celý export databáze, screenshot s osobními údaji nebo přístup do účtu, pokud stačí anonymizovaná ukázka. Podpora často sbírá víc dat než produkt, protože „to pomůže debugovat“. Pomůže. Ale taky to vytvoří zbytečné riziko.
+
+Praktická věta do podpory:
+
+> Pošlete nám prosím jen strukturu souboru a jednu anonymizovanou řádku. Osobní údaje zákazníků nepotřebujeme.
+
+Tohle je malá formulace, ale velký signál důvěry.
+
+### 15.3 Z podpory dělej produktový backlog
+
+Každý opakovaný dotaz má skončit v jedné ze čtyř kategorií:
+
+- **Dokumentace:** uživatel jen nenašel odpověď.
+- **UX:** uživatel by to pochopil, kdyby rozhraní lépe vedlo.
+- **Produktová mezera:** produkt neumí scénář, který dává smysl.
+- **Obchodní nesoulad:** marketing slíbil něco, co produkt nedoručuje.
+
+Jednou týdně si vezmi deset posledních dotazů a ke každému napiš jednu větu: „Jak zabráníme tomu, aby se to stalo znovu?“ Někdy odpověď bude článek. Někdy lepší prázdný stav v aplikaci. Někdy změna textu na landing page. A někdy nepříjemné zjištění, že prodáváš moc širokou věc moc různým lidem.
+
+Minimální tabulka pro podporu:
+
+| Dotaz | Kategorie | Odpověď dnes | Systémová oprava | Priorita |
+| --- | --- | --- | --- | --- |
+| Import CSV padá | UX | Poslat postup kontroly sloupců | Validace před importem | Vysoká |
+| Kde stáhnu fakturu? | Dokumentace | Poslat odkaz | Přidat článek a odkaz do účtu | Střední |
+| Jde nastavit více rolí? | Produktová mezera | Popsat aktuální stav | Prozkoumat týmové role | Nízká |
+
+Tím se z podpory stane radar, ne jen hasicí přístroj.
+
+### 15.4 Metriky podpory, které nelezou lidem pod kůži
+
+Podporu jde měřit bez sledování každého pohybu uživatele. Pro malý tým stačí pár agregovaných ukazatelů:
+
+- počet nových dotazů týdně,
+- podíl opakovaných témat,
+- čas do první odpovědi,
+- počet dotazů vyřešených odkazem na dokumentaci,
+- počet produktových úprav vzniklých z podpory,
+- počet situací, kde bylo nutné požádat o osobní data kvůli debugování.
+
+Poslední metrika je obzvlášť užitečná. Pokud často potřebuješ osobní data, možná chybí lepší logování, anonymizované diagnostické ID nebo export nastavení bez citlivého obsahu.
+
+Privacy-first diagnostika může vypadat takhle:
+
+- uživatel vidí veřejné ID chyby,
+- podpora podle ID najde technický stav bez obsahu zákaznických dat,
+- citlivé hodnoty jsou v logu maskované,
+- detailní export uživatel posílá jen dobrovolně a s jasným účelem,
+- po vyřešení incidentu se dočasné soubory mažou podle retence.
+
+To není paranoia. To je uklizený provoz, který se nemusí tvářit překvapeně, až někdo položí otázku „proč jste to vlastně potřebovali?“
+
+### 15.5 Checklist podpory pro malý SaaS tým
+
+- [ ] Máme jednu jasnou e-mailovou adresu nebo formulář pro podporu.
+- [ ] Uživatel ví, kdy může čekat první odpověď.
+- [ ] Pět nejčastějších dotazů má vlastní krátký článek v dokumentaci.
+- [ ] Šablony odpovědí obsahují konkrétní další krok, ne jen omluvu.
+- [ ] Při debugování nejdřív žádáme anonymizovaná data nebo technické ID.
+- [ ] Opakované dotazy jednou týdně převádíme na dokumentační, UX nebo produktové úkoly.
+- [ ] Každá změna v produktu má kontrolu, jestli nepotřebuje aktualizovat dokumentaci.
+- [ ] Dokumentace obsahuje jasný návod na export, výmaz a zrušení účtu.
+- [ ] Podpora nepřidává externí nástroje bez otázky: kde budou data a kdo k nim má přístup?
+
+*Codyho komentář:* podpora je marketing, který začne až po prodeji. Když je rychlá, lidská a šetrná k datům, lidé si ji pamatují víc než slogan v hero sekci. A často ji doporučí dál, což je hezké, protože referral nepotřebuje cookies. Konečně marketing, který se nemusí schovávat za consent banner.
+
+
 ## Zdroje
 
 - Evropská komise: principy GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -1682,6 +1798,7 @@ Privacy-first distribuce znamená: publikuj primárně na vlastním webu, nabíd
 
 ## Pracovní log
 
+- 2026-09-21: Doplněna kapitola 15.1–15.5 o zákaznické podpoře, znalostní bázi, šablonách odpovědí, převodu dotazů do backlogu a privacy-first diagnostice.
 - 2026-09-21: Doplněna kapitola 13.1–13.5 o konverzních formulářích, souhlasu, newsletterech a privacy-first měření bez profilování jednotlivců.
 - 2026-09-21: Doplněna kapitola 14.1–14.5 o správě zdrojů, aktualizaci e-booku, pracovním logu, redakčním checklistu a využití obsahu pro další výstupy.
 - 2026-09-21: Doplněna kapitola 12.1–12.6 o provozní odolnosti, zálohách, incident response kartě, komunikaci při výpadku a kvartálním cvičení.
