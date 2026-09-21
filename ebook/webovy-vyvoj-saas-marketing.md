@@ -367,17 +367,130 @@ Mini-cvičení na 45 minut:
 4. Zkrať registrační formulář o jedno pole.
 5. Napiš jednovětou definici aktivace a dej ji do produktového backlogu.
 
+
+---
+
+## 4. Marketing bez invazivního trackingu
+
+### 4.1 Obsahová strategie: piš pro rozhodnutí, ne pro algoritmus
+
+Marketing privacy-first neznamená marketing potmě. Znamená, že místo sledování lidí napříč internetem postavíš systém, který jim pomáhá udělat lepší rozhodnutí. To je pomalejší než koupit reklamní pixel, ale dlouhodobě zdravější: obsah zůstává tvůj, odkazy zůstávají funkční a důvěra se neprodává po dávkách dat brokerům.
+
+Google ve své dokumentaci k užitečnému obsahu doporučuje tvořit obsah primárně pro lidi, ne pro získání pozic ve vyhledávání: https://developers.google.com/search/docs/fundamentals/creating-helpful-content Pro malý evropský SaaS je to praktické pravidlo, ne morální plakát. Pokud článek opravdu odpovídá na otázku zákazníka, může fungovat v organickém vyhledávání, v přímém odkazu, v obchodním e-mailu, v dokumentaci i jako odpověď supportu.
+
+Začni mapou rozhodnutí zákazníka:
+
+1. **Problém:** „Proč se mi tohle děje a jak to pojmenovat?“
+2. **Možnosti:** „Jaké jsou cesty řešení a kdy která dává smysl?“
+3. **Rizika:** „Na co si dát pozor technicky, právně, finančně nebo provozně?“
+4. **Výběr:** „Jak porovnat dodavatele, nástroje nebo architekturu?“
+5. **Implementace:** „Jak to zavést bez chaosu a zbytečných nákladů?“
+
+Z takové mapy vzniknou lepší témata než z generického seznamu klíčových slov. Místo „SaaS onboarding“ napiš třeba „Jak navrhnout první 10 minut v B2B SaaS, aby uživatel našel hodnotu“. Místo „GDPR web“ napiš „Jak vysvětlit privacy-first provoz na landing page bez právnické mlhy“. Konkrétnost prodává, protože snižuje nejistotu.
+
+Praktické formáty pro malý tým:
+
+- **Návod:** konkrétní postup krok za krokem, ideálně s checklistem.
+- **Rozhodovací článek:** kdy použít variantu A, B nebo C.
+- **Případová studie:** problém, omezení, řešení, výsledek, poučení.
+- **Rozbor chyby:** co se nepovedlo, proč a jak tomu příště předejít.
+- **Šablona:** brief, auditní seznam, otázky pro dodavatele nebo plán spuštění.
+
+Každý text by měl mít jeden jasný další krok. Ne deset výzev k akci jako tržiště na pouti. U technického článku může být CTA „stáhnout checklist“, u případovky „domluvit konzultaci“, u produktového návodu „vyzkoušet demo“. Když nevíš, co má čtenář udělat potom, článek není hotový.
+
+*Codyho komentář:* obsah není levnější reklama. Je to veřejně viditelný důkaz, jak přemýšlíš. Pokud je text plytký, škáluješ plytkost. To je sice výkon, ale ne výhra.
+
+### 4.2 Distribuce bez závislosti na platformách
+
+Největší chyba obsahového marketingu je napsat dobrý text a pak ho hodit jen na sociální síť, kde za dva dny zmizí v algoritmické polévce. Sociální kanály můžou být užitečné, ale nesmí být jediným místem, kde obsah žije. Domov obsahu má být web, který vlastníš a umíš exportovat.
+
+Privacy-first distribuční minimum:
+
+- **Vlastní URL:** každý článek, případovka a checklist má stabilní adresu.
+- **RSS feed:** lidé můžou sledovat novinky bez účtu u platformy a bez newsletterového nátlaku.
+- **Přímé odkazy:** sdílej normální odkazy, ne embed widgety a share skripty.
+- **E-mail jen se souhlasem:** newsletter má jasné přihlášení, jednoduché odhlášení a žádné schované účely.
+- **Recyklace obsahu:** z jednoho článku udělej krátký post, odpověď do FAQ, slide do obchodní prezentace nebo část dokumentace.
+
+Evropská komise u GDPR připomíná, že lidé mají právo vznést námitku proti použití osobních údajů pro přímý marketing a že firmy musí respektovat pravidla pro přímý marketing i podle ePrivacy pravidel: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/application-gdpr_en a https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en Praktický dopad: neposílej marketingové e-maily lidem jen proto, že máš jejich adresu z vizitky, poptávky nebo starého exportu. Souhlas, očekávání a možnost odhlášení nejsou administrativní šikana. Jsou základní údržba důvěry.
+
+U newsletteru si pohlídej:
+
+- přihlašovací formulář říká, co bude chodit a jak často;
+- souhlas není schovaný v obchodních podmínkách;
+- odhlášení je v každém e-mailu a funguje bez přihlášení;
+- seznam nepředáváš nástrojům mimo EU bez jasného důvodu a dokumentace;
+- neměříš otevření přes sledovací pixel, pokud to není nutné a právně ošetřené;
+- neimportuješ kontakty „pro jistotu“, protože jistota se pak často jmenuje spam.
+
+### 4.3 UTM disciplína a jednoduché měření
+
+Měřit se dá i bez sledování člověka přes půl internetu. Pro malé týmy je často užitečnější vědět, které kanály přivádějí kvalitní poptávky, než stavět detailní psychologický profil každého návštěvníka. Začni s tím, co opravdu potřebuješ k rozhodování.
+
+Základní sada metrik:
+
+- **Návštěvy klíčových stránek:** homepage, ceník, demo, kontakt, privacy stránka.
+- **Konverze:** odeslaná poptávka, registrace, rezervované demo, stažený checklist.
+- **Zdroj návštěvy:** přímý odkaz, organické vyhledávání, partnerský web, newsletter, kampaň.
+- **Kvalita leadu:** jestli poptávka odpovídá cílovce a má reálný obchodní potenciál.
+- **Obsahový přínos:** které články podporují obchodní rozhovory, ne jen které měly nejvíc zobrazení.
+
+UTM parametry používej střídmě a konzistentně. Domluv si názvy jednou a drž je. Například:
+
+- `utm_source=rss`, `utm_medium=feed`, `utm_campaign=launch-checklist`
+- `utm_source=newsletter`, `utm_medium=email`, `utm_campaign=saas-onboarding`
+- `utm_source=partner-web`, `utm_medium=referral`, `utm_campaign=privacy-audit`
+
+Nepřidávej UTM na interní odkazy. Rozbiješ si tím čitelnost dat a analytika začne připomínat archeologii po výbuchu spreadsheetu. Interní cestu sleduj agregovaně přes stránky a události, ne přepisováním zdroje návštěvy.
+
+Privacy-first analytika v praxi:
+
+- agreguj data, kde to stačí;
+- anonymizuj nebo vůbec neukládej IP adresy, pokud je nepotřebuješ;
+- nastav krátkou retenční dobu pro surové logy;
+- dokumentuj, jaké události sbíráš a proč;
+- nepoužívej cross-site identifikátory pro běžné produktové otázky;
+- u formulářů odděl analytickou událost od obsahu zprávy.
+
+### 4.4 Checklist marketingu bez sledovacího panoptika
+
+Před publikováním kampaně nebo obsahového sprintu si odškrtni:
+
+- [ ] Každý obsahový kus odpovídá na konkrétní rozhodnutí zákazníka.
+- [ ] Článek má stabilní URL, title, meta description a jasný další krok.
+- [ ] Důležitý obsah je na vlastním webu, ne jen na sociální platformě.
+- [ ] Web má RSS nebo jiný přímý způsob sledování novinek bez účtu u platformy.
+- [ ] Newsletter má srozumitelný souhlas, očekávanou frekvenci a funkční odhlášení.
+- [ ] UTM názvy jsou domluvené a nepoužívají se na interní odkazy.
+- [ ] Analytika měří agregované rozhodovací signály, ne zvědavost týmu.
+- [ ] Každý marketingový nástroj má popsané, kde běží data a kdo k nim má přístup.
+- [ ] Externí skripty nejsou přidané jen proto, že „to tak dělá konkurence“.
+- [ ] Před spuštěním kampaně existuje plán, co uděláš podle výsledků.
+
+Mini-cvičení na 60 minut:
+
+1. Vyber jeden článek nebo landing page a napiš, jaké zákaznické rozhodnutí podporuje.
+2. Doplň do něj jeden konkrétní příklad, screenshot, šablonu nebo checklist.
+3. Přidej jasné CTA, které odpovídá fázi rozhodování.
+4. Zkontroluj, jestli se obsah dá sledovat přes RSS nebo přímý odkaz.
+5. Vypiš všechny marketingové skripty a jeden z nich odeber, odlož nebo zdokumentuj.
+
+
 ## Zdroje
 
 - Evropská komise: principy GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 - European Data Protection Board: Guidelines 05/2020 on consent under Regulation 2016/679 — https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
 - Evropská komise: ochrana dat a soukromí online — https://commission.europa.eu/digital-life/protecting-your-data-and-privacy_en
+- Evropská komise: application of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/application-gdpr_en
+- Evropská komise: dealing with requests from individuals — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
 - web.dev: How the Core Web Vitals metrics thresholds were defined — https://web.dev/articles/defining-core-web-vitals-thresholds
 - W3C: Web Content Accessibility Guidelines (WCAG) 2.2 — https://www.w3.org/TR/wcag/
 - Google Search Central: SEO Starter Guide — https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+- Google Search Central: Creating helpful, reliable, people-first content — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 
 ## Pracovní log
 
+- 2026-09-21: Doplněna kapitola 4.1–4.4 o marketingu bez invazivního trackingu, obsahové strategii, distribuci, UTM disciplíně a checklistu kampaně.
 - 2026-09-21: Doplněna kapitola 3.1–3.4 o SaaS onboardingu, aktivační metrice, trialu, pricingu a checklistu první zkušenosti.
 - 2026-09-21: Doplněna kapitola 2.1–2.5 o informační architektuře, výkonu, přístupnosti, technickém SEO a privacy-first auditu externích skriptů.
 - 2026-09-21: Založena struktura e-booku, doplněna pracovní osnova a dokončena kapitola 1.1–1.5 o strategii webu, MVP rozsahu a privacy-first rozhodování v Evropě.
