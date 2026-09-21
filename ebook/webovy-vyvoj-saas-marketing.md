@@ -54,7 +54,10 @@ Praktický český e-book od Codyho z Dreamindu pro malé týmy, freelancery a z
    - Jednoduchý dashboard pro malé týmy
    - Jak měřit rozhodnutí, ne sledovat lidi
    - Týdenní otázky k interpretaci dat
-12. **Zdroje a pracovní log**
+12. **Provozní odolnost a incidenty**
+   - Zálohy, eskalace, incident response a obnova služby
+   - Jak nacvičit výpadek bez korporátního divadla
+13. **Zdroje a pracovní log**
    - Ověřené odkazy
    - Průběžný log změn e-booku
 
@@ -1321,6 +1324,114 @@ Tohle je lepší než „konverze padá, změňme barvu tlačítka“. Barva tla
 *Codyho komentář:* dobré měření není o tom vědět o lidech víc. Je o tom dělat méně hloupých rozhodnutí. To je skromnější cíl než vševědoucnost, ale výrazně zdravější pro produkt i nervy.
 
 
+
+## 12. Provozní odolnost a incidenty
+
+Privacy-first provoz není jen o tom, že nepoužíváš zbytečné trackery. Je to i schopnost říct: když se něco rozbije, víme kdo rozhoduje, co obnovujeme jako první, komu píšeme a jak poznáme, že je služba zase bezpečná. Bez toho je i nejhezčí evropský hosting jen drahý generátor adrenalinu.
+
+Malý tým nepotřebuje stodvacetistránkový krizový manuál. Potřebuje krátký, živý dokument, který někdo opravdu otevře v pátek večer, když formulář neposílá poptávky, databáze hlásí chyby nebo se v logu objeví podezřelý přístup. ENISA ve svých materiálech pro malé a střední podniky zdůrazňuje praktické kroky ke zlepšení kybernetické odolnosti a samostatně popisuje incident response plán jako součást připravenosti organizace. Přeloženo z úředničtiny do lidského jazyka: připrav si plán dřív, než ho budeš potřebovat.
+
+### 12.1 Co musí přežít první hodinu výpadku
+
+Začni mapou kritických toků. Ne technickou mapou všeho, co existuje, ale seznamem věcí, které přímo bolí zákazníky nebo obchod.
+
+Příklad pro malý SaaS:
+
+| Tok | Co se stane při výpadku | První reakce | Vlastník |
+| --- | --- | --- | --- |
+| Přihlášení | Uživatelé se nedostanou do aplikace | Ověřit auth, session storage a poslední deploy | Technický vlastník |
+| Platby | Noví zákazníci nezaplatí nebo se neprodlouží tarif | Pozastavit změny v pricingu, zkontrolovat webhooky | Produkt + finance |
+| Kontaktní formulář | Ztrácíš poptávky | Přepnout na záložní e-mail nebo statickou stránku | Marketing |
+| Admin akce | Tým nemůže řešit zákazníky | Ruční workaround s auditním zápisem | Support |
+| Analytika | Nemáš data o návštěvnosti | Nic urgentního, pokud běží produkt | Nikdo nepanikaří |
+
+Všimni si posledního řádku. Ne každý výpadek má stejnou prioritu. Když nejde analytika, ale zákazníci pracují, není to stejný požár jako rozbitý login. Tohle rozlišení šetří nervy i špatná rozhodnutí.
+
+*Codyho komentář:* nejhorší incidenty často nevzniknou samotnou chybou, ale tím, že pět lidí současně „něco zkusí“. Incident bez koordinace je páteční deploy v kostýmu katastrofy.
+
+### 12.2 Zálohy nejsou strategie, dokud je neobnovíš
+
+Většina týmů říká „máme zálohy“. Méně týmů ví, kdy naposledy obnovily produkční kopii do testovacího prostředí. A přesně tam se láme chleba. Záloha, kterou nikdo nezkusil obnovit, je spíš modlitba než provozní opatření.
+
+Minimální pravidla:
+
+- **Databáze:** automatická záloha, jasná retence, šifrování a pravidelný test obnovy.
+- **Soubory:** oddělené úložiště pro uživatelská data, exportovatelný formát, žádné ruční „někde to máme“.
+- **Konfigurace:** produkční env proměnné musí mít vlastní bezpečné úložiště, ne historii v chatu.
+- **Kód:** repozitář musí obsahovat instrukce, jak službu spustit a nasadit.
+- **Domény a DNS:** přístupy nesmí viset na jednom člověku bez náhradního postupu.
+
+Do provozního dokumentu napiš dvě hodnoty: **RPO** a **RTO**. RPO říká, kolik dat můžeš při obnově realisticky ztratit. RTO říká, za jak dlouho musí být služba zpět. Nemusíš začít dokonalostí. Pro malý SaaS může být první realistická verze třeba: „u kritické databáze ztratit maximálně 24 hodin dat a obnovit službu do 4 hodin“. Důležité je, aby tým věděl, jestli je to přijatelné pro zákazníky a smlouvy.
+
+### 12.3 Incident response karta pro malý tým
+
+Místo románu vytvoř jednu kartu. Musí být dostupná i mimo primární nástroje — ideálně exportovaná jako PDF nebo uložená v interní wiki, ke které se dostaneš i při výpadku aplikace.
+
+Šablona:
+
+```text
+Název incidentu:
+Datum a čas začátku:
+Kdo incident vede:
+Kdo komunikuje se zákazníky:
+Dotčené systémy:
+Dopad na zákazníky:
+První hypotéza:
+Co jsme už zkontrolovali:
+Dočasné opatření:
+Rozhodnutí a čas:
+Kdy posíláme další update:
+Kritéria ukončení incidentu:
+Poučení po incidentu:
+```
+
+Tahle karta má dvě funkce. První je praktická: nezapomeneš na důležité kroky. Druhá je psychologická: zpomalí paniku. Když lidé zapisují rozhodnutí, méně často se vrhají do náhodných oprav, které rozbijí další tři věci. Ano, papír občas porazí dashboard. Technologie se s tím nějak vyrovná.
+
+### 12.4 Komunikace: pravda, čas a další krok
+
+Při incidentu zákazníci nepotřebují literární drama. Potřebují vědět tři věci:
+
+1. **Co je ovlivněné.** Například „nejde přihlášení“, ne „někteří uživatelé mohou pozorovat degradaci“.
+2. **Co děláš.** Krátce a konkrétně: „vracíme poslední release“, „obnovujeme databázi ze zálohy“, „čekáme na potvrzení od poskytovatele plateb“.
+3. **Kdy bude další update.** I kdyby odpověď byla „za 30 minut dáme další stav“.
+
+Privacy-first tón znamená i opatrnost v komunikaci. Neposílej do hromadného e-mailu interní logy, IP adresy, screenshoty administračních obrazovek ani osobní údaje zákazníků. Pokud incident zahrnuje osobní data, odděl technickou komunikaci od právního posouzení a drž se ověřených faktů.
+
+### 12.5 Cvičení výpadku na 45 minut
+
+Jednou za čtvrtletí udělej malé cvičení. Nemusí to být válečná hra s projektorem a vážnou hudbou. Stačí vzít jeden scénář a projít ho podle karty.
+
+Scénáře:
+
+- Přestane fungovat kontaktní formulář a zjistíš to až druhý den.
+- Poslední deploy rozbije přihlášení pro část uživatelů.
+- Externí platební služba neposílá webhooky.
+- Někdo omylem smaže produkční záznamy.
+- Dodavatel analytiky nebo e-mailingu má výpadek mimo EU region.
+
+Po cvičení zapiš tři věci:
+
+- co šlo dobře,
+- co chybělo,
+- jakou jednu změnu uděláš tento týden.
+
+Nepřidávej deset úkolů. Jeden hotový fix je lepší než seznam přání, který bude hnít vedle backlogu s názvem „Q2 priority“. Všichni víme, jak to dopadá.
+
+### 12.6 Checklist provozní odolnosti
+
+- [ ] Existuje seznam kritických toků a každý má vlastníka.
+- [ ] U každého kritického toku víš, jaký má dopad na zákazníky a obchod.
+- [ ] Databázové zálohy jsou automatické, šifrované a alespoň občas testované obnovou.
+- [ ] RPO a RTO jsou napsané lidsky a schválené produktově, ne jen technicky.
+- [ ] Incident response karta je dostupná mimo primární aplikaci.
+- [ ] Tým ví, kdo při incidentu rozhoduje a kdo komunikuje ven.
+- [ ] Komunikační šablony neobsahují osobní údaje, interní logy ani zbytečné technické detaily.
+- [ ] Jednou za čtvrtletí proběhne krátké cvičení výpadku.
+- [ ] Po incidentu vznikne krátké poučení a maximálně několik konkrétních úkolů.
+
+*Codyho komentář:* odolnost není paranoidní luxus pro enterprise. Je to způsob, jak malý tým neztratí hlavu, když se realita rozhodne otestovat architekturu. A realita testuje ráda, často a bez pozvánky.
+
+
 ## Zdroje
 
 - Evropská komise: principy GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -1337,9 +1448,12 @@ Tohle je lepší než „konverze padá, změňme barvu tlačítka“. Barva tla
 - European Data Protection Board: Guidelines 07/2020 on controller and processor concepts — https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
 - Evropská komise: Standard Contractual Clauses for international transfers — https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en
 - Kanban Guides: The Kanban Guide — https://kanbanguides.org/the-kanban-guide/
+- ENISA: Cybersecurity guide for SMEs — 12 steps to securing your business — https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
+- ENISA Secure by Design playbook: Incident response and recovery — https://github.com/enisaeu/enisa-sbd-playbook/blob/main/playbooks/12-incident-response-and-recovery.md
 
 ## Pracovní log
 
+- 2026-09-21: Doplněna kapitola 12.1–12.6 o provozní odolnosti, zálohách, incident response kartě, komunikaci při výpadku a kvartálním cvičení.
 - 2026-09-21: Doplněna kapitola 11.1–11.5 o privacy-first metrikách, jednoduchém dashboardu, eventech bez šmírování a týdenní interpretaci dat.
 - 2026-09-21: Doplněna příloha 10.5 se šablonou datové mapy pro formuláře, účty, analytiku, logy, fakturaci, podporu a newsletter.
 - 2026-09-21: Doplněna kapitola 10.1–10.4 a checklist 10.6 s kopírovatelnými šablonami pro launch brief, produktovou stránku, měsíční provozní kontrolu a privacy-first rozhodnutí.
