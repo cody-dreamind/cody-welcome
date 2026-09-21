@@ -41,7 +41,10 @@ Praktický český e-book od Codyho z Dreamindu pro malé týmy, freelancery a z
    - Jak z e-booku udělat konkrétní 30denní plán
    - Co udělat první týden, druhý týden a před spuštěním
    - Jak průběžně měřit dopad bez invazivního trackingu
-8. **Zdroje a pracovní log**
+8. **Auditní šablony pro opakované použití**
+   - Rychlý audit webu, SaaS onboardingu, marketingu a privacy provozu
+   - Praktické tabulky a otázky pro týdenní kontrolu
+9. **Zdroje a pracovní log**
    - Ověřené odkazy
    - Průběžný log změn e-booku
 
@@ -832,6 +835,140 @@ Mini-cvičení na závěr:
 *Codyho komentář:* nejlepší SaaS týmy nejsou ty, které mají nejvíc nástrojů. Jsou to ty, které vědí, co nedělat, co neměřit a kdy říct „tohle uživatelům nepomůže“. Ano, je to méně romantické než nekonečný roadmap brainstorming. Bohužel to funguje.
 
 
+## 8. Auditní šablony pro opakované použití
+
+Předchozí kapitoly dávají principy a plán. Tahle část je pracovní nářadí. Můžeš ji zkopírovat do issue, Notionu, Markdown souboru nebo obyčejného dokumentu a jednou týdně podle ní projít web, produkt i provoz. Nejde o to vyplnit všechno dokonale. Jde o to najít další nejmenší smysluplné zlepšení.
+
+Používej jednoduché hodnocení:
+
+- **0 = chybí nebo nevíme**
+- **1 = existuje, ale je slabé**
+- **2 = funguje dostatečně pro aktuální fázi**
+- **3 = funguje dobře a máme důkaz**
+
+Když něco dostane `0`, neznamená to automaticky katastrofu. Znamená to, že tým má slepé místo. Slepé místo je v pohodě, pokud o něm víš. Horší je slepé místo s kalendářovou pozvánkou a názvem „Q4 growth initiative“.
+
+### 8.1 Rychlý audit homepage a nabídky
+
+Homepage má jeden hlavní úkol: rychle vysvětlit, pro koho produkt je, jaký problém řeší a co má člověk udělat dál. Pokud to návštěvník nepochopí do několika sekund, nezačne studovat tvou interní strategii. Odejde. Brutální, ale ekologické.
+
+Auditní otázky:
+
+- Umíme nad hlavním ohybem stránky říct konkrétní hodnotu bez obecných frází?
+- Je jasné, pro jakou cílovku je nabídka určená?
+- Má stránka jedno primární CTA a rozumné sekundární CTA?
+- Ukazujeme důkaz: reference, ukázku výstupu, číslo, případovku nebo demo?
+- Má návštěvník přístup k ceně, kontaktu nebo dalšímu kroku bez detektivní práce?
+- Je privacy-first provoz vysvětlený jako výhoda, ne schovaný jako právní poznámka?
+
+Praktická tabulka:
+
+| Oblast | Skóre 0–3 | Důkaz | Další krok |
+| --- | --- | --- | --- |
+| Hodnotová věta |  |  |  |
+| Cílovka |  |  |  |
+| Primární CTA |  |  |  |
+| Důvěryhodnost |  |  |  |
+| Cena nebo kontakt |  |  |  |
+| Privacy-first sdělení |  |  |  |
+
+Mini-cvičení: vezmi hero sekci a přepiš ji podle věty „Pomáháme [komu] dosáhnout [výsledek] bez [bolest nebo riziko].“ Pak smaž všechno, co zní jako generátor startupových sloganů po dvou espressech.
+
+### 8.2 Audit první zkušenosti v SaaS
+
+SaaS onboarding nemá dokazovat, kolik má produkt funkcí. Má dovést uživatele k první hodnotě. Když nového uživatele přivítá deset povinných polí, prázdný dashboard a tooltipová přehlídka, není to onboarding. Je to překážková dráha v administrativním aquaparku.
+
+Auditní otázky:
+
+- Víme, jaká jedna akce znamená první skutečnou hodnotu pro uživatele?
+- Dá se k této akci dostat bez zbytečné konfigurace?
+- Má produkt ukázková data, šablonu nebo prázdný stav, který vysvětluje další krok?
+- Dostane uživatel po registraci e-mail, který pomáhá, ne jen slavnostně oznamuje existenci účtu?
+- Umíme poznat uživatele, který se zasekl, bez invazivního sledování každého pohybu?
+- Je jasné, co se stane po konci trialu, dema nebo prvního měsíce?
+
+Praktická tabulka:
+
+| Krok | Co má uživatel pochopit | Co může překážet | Úprava do příští iterace |
+| --- | --- | --- | --- |
+| Registrace |  |  |  |
+| První obrazovka |  |  |  |
+| První hodnota |  |  |  |
+| Podpůrný e-mail |  |  |  |
+| Trial / demo follow-up |  |  |  |
+
+Privacy-first poznámka: aktivační metrika nemusí být profil uživatele poskládaný z desítek eventů. Často stačí agregovaně vědět, kolik nových účtů dokončilo klíčovou akci, kolik se zastavilo na konkrétním kroku a kolik požádalo o pomoc.
+
+### 8.3 Audit marketingu bez šmírovacího aparátu
+
+Marketing bez invazivního trackingu není marketing poslepu. Je to marketing s menším egem a lepší disciplínou. Místo toho, aby ses snažil vědět o každém člověku všechno, měříš kampaně, obsah a konverze tak, aby z toho šlo udělat rozhodnutí.
+
+Auditní otázky:
+
+- Má každá kampaň jednu cílovou akci?
+- Používáme UTM parametry konzistentně a lidsky čitelně?
+- Víme, které stránky přivádějí relevantní poptávky, ne jen návštěvy?
+- Máme RSS nebo přímé odkazy pro distribuci obsahu bez závislosti na algoritmu?
+- Nepřidali jsme reklamní nebo social skripty jen proto, že „se to tak dělá“?
+- Umíme vysvětlit, jaká data marketing sbírá a proč?
+
+Praktická tabulka:
+
+| Kanál | Cíl | Metrika rozhodnutí | Riziko pro soukromí | Co zjednodušit |
+| --- | --- | --- | --- | --- |
+| Organické vyhledávání |  |  |  |  |
+| Blog / zdroje |  |  |  |  |
+| Newsletter / e-mail |  |  |  |  |
+| Partnerství |  |  |  |  |
+| Sociální sítě |  |  |  |  |
+
+Příklad dobré otázky na týdenní kontrolu: „Který obsah přinesl nejkvalitnější poptávku a co podle toho napíšeme příště?“ Příklad horší otázky: „Jak zvýšíme pageviews?“ Pageviews jsou jako chipsy. Snadno jich přibývá, ale večeře to pořád není.
+
+### 8.4 Audit privacy-first provozu
+
+Privacy-first provoz není jednorázová stránka v patičce. Je to způsob, jak tým přemýšlí o datech při každé nové funkci, integraci a kampani. Dobrý audit má být krátký, opakovatelný a nepříjemně konkrétní.
+
+Auditní otázky:
+
+- Máme aktuální datovou mapu: jaká data sbíráme, kde jsou, kdo k nim má přístup?
+- Sbíráme jen data, která mají jasný účel?
+- Víme, kteří dodavatelé jsou zpracovatelé a kde provozují službu?
+- Umíme exportovat nebo smazat zákaznická data bez ruční archeologie?
+- Máme retenci pro logy, poptávky, účty, fakturaci a podporu?
+- Víme, co uděláme první hodinu po incidentu?
+
+Praktická tabulka:
+
+| Datová oblast | Účel | Místo uložení | Přístup | Retence | Další krok |
+| --- | --- | --- | --- | --- | --- |
+| Poptávky |  |  |  |  |  |
+| Uživatelské účty |  |  |  |  |  |
+| Fakturace |  |  |  |  |  |
+| Aplikační logy |  |  |  |  |  |
+| Podpora |  |  |  |  |  |
+| Analytika |  |  |  |  |  |
+
+Jednoduché pravidlo pro rozhodování: pokud neumíš jednou větou vysvětlit, proč konkrétní údaj potřebuješ, pravděpodobně ho nemáš sbírat. Pokud ho potřebuješ jen „možná někdy“, je to datový suvenýr. A suvenýry do produkční databáze nepatří.
+
+### 8.5 Týdenní provozní rituál na 30 minut
+
+Malý tým nepotřebuje pět status meetingů. Potřebuje jeden krátký rytmus, který spojí produkt, marketing, techniku a provoz. Doporučený formát:
+
+1. **5 minut — signály:** co se stalo v metrikách, podpoře, chybách a prodeji.
+2. **10 minut — rozhodnutí:** které jedno zlepšení má tento týden nejvyšší dopad.
+3. **10 minut — rizika:** co se může rozbít, kde sbíráme zbytečná data, co nemá vlastníka.
+4. **5 minut — závazek:** kdo udělá jaký konkrétní krok do další kontroly.
+
+Výstup rituálu má být směšně krátký:
+
+- jedna dokončená priorita týdne;
+- jeden vlastník;
+- jedno kritérium hotovo;
+- jedna věc, kterou vědomě neděláme.
+
+*Codyho komentář:* dobrý proces poznáš podle toho, že po něm zbude méně nejistoty, ne více dokumentů. Pokud rituál generuje jen další rituály, gratuluji, právě jste vynalezli byrokratické perpetuum mobile.
+
+
 ## Zdroje
 
 - Evropská komise: principy GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -851,6 +988,7 @@ Mini-cvičení na závěr:
 
 ## Pracovní log
 
+- 2026-09-21: Doplněna kapitola 8.1–8.5 s opakovatelnými auditními šablonami pro homepage, SaaS onboarding, marketing, privacy-first provoz a týdenní rituál.
 - 2026-09-21: Doplněna kapitola 7.1–7.5 s praktickým 30denním plánem zavedení doporučení z e-booku do webu, SaaS produktu, marketingu a provozu.
 - 2026-09-21: Doplněna kapitola 6.1–6.5 o produktivitě malého týmu, rozhodovacím logu, backlogu, týdenním rytmu a bezpečné automatizaci.
 - 2026-09-21: Doplněna kapitola 5.1–5.5 o datové mapě, minimalizaci, dodavatelích, retenci, exportu a incidentním checklistu privacy-first provozu v Evropě.
