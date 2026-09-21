@@ -37542,7 +37542,205 @@ Výsledek:
 - Evropská komise shrnuje základní pravidla GDPR pro organizace včetně minimalizace, transparentnosti a práv subjektů údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations_en
 
 
+## Příloha HG: Zákaznická komunita a zpětná vazba bez platformního rukojmí, datového hladu a falešného engagementu
+
+Komunita kolem B2B SaaS není automaticky Slack workspace, Discord server nebo další newsletter, který lidé otevřou dvakrát a pak ho nechají tiše hnít vedle „Q2 strategy update“. Dobrá komunita je místo, kde zákazníci rychleji řeší práci, učí se od sebe, posílají kvalitnější zpětnou vazbu a cítí, že produkt má směr.
+
+Privacy-first komunita má navíc jednu důležitou hranici: nesmí být jen záminka pro další sledování, profilování a sběr dat. Když komunita potřebuje deset nástrojů, tři pixely, neveřejné skóre aktivity a export reakcí do CRM, něco se pokazilo. Pravděpodobně komunita. Možná lidstvo. Ale začněme komunitou.
+
+### Nejdřív si ujasni účel komunity
+
+Slovo „komunita“ je nebezpečně měkké. Každý si pod ním představí něco jiného: support fórum, beta program, vzdělávací klub, partnerský kanál, zákaznickou radu nebo veřejný produktový prostor. Než vytvoříš další kanál, napiš jednu větu:
+
+> Tato komunita pomáhá [konkrétním lidem] dělat [konkrétní práci] lépe díky [konkrétnímu typu interakce].
+
+Příklady:
+
+- **Support komunita:** zákazníci si najdou odpověď na opakující se otázky a tým vidí, co dokumentace nevysvětluje.
+- **Beta komunita:** vybraní zákazníci testují konkrétní workflow před plošným release.
+- **Vzdělávací komunita:** zákazníci sdílí postupy, šablony a provozní zkušenosti z podobných týmů.
+- **Advisory komunita:** několik dobrých zákazníků pomáhá prioritizovat strategické směry produktu.
+- **Partnerská komunita:** implementační partneři sdílí best practices a opakované integrační scénáře.
+
+Každý typ potřebuje jiný rytmus, pravidla a míru otevřenosti. Jedna univerzální „komunita pro všechny“ často skončí jako hluk s hezkým logem.
+
+### Vyber kanál podle práce, ne podle módnosti
+
+Nástroj není strategie. Pro malý evropský SaaS je často lepší začít nudně:
+
+- veřejná znalostní báze s možností poslat návrh,
+- RSS feed pro produktové novinky,
+- jednoduchý formulář pro strukturovanou zpětnou vazbu,
+- pravidelný otevřený office hours call,
+- malý e-mailový kruh pro beta zákazníky,
+- zákaznická rada jednou za kvartál.
+
+Chat platforma dává smysl až ve chvíli, kdy zákazníci opravdu potřebují průběžnou vzájemnou interakci. Pokud jen potřebuješ odpovědi na otázky, napiš lepší dokumentaci. Pokud potřebuješ roadmap signály, vytvoř feedback proces. Pokud chceš jen „víc engagementu“, dej si kafe, projdi pipeline a neubližuj internetu.
+
+Codyho komentář: Komunita není místo, kde firma přesune práci zákazníků na zákazníky. Je to produktový závazek. Když otevřeš prostor pro lidi, musíš ho moderovat, udržovat a vracet z něj hodnotu zpět.
+
+### Zpětnou vazbu sbírej strukturovaně
+
+Nejhorší feedback systém je nekonečný seznam přání bez kontextu. „Přidejte export do PDF“ může znamenat compliance potřebu, interní reporting, workaround pro chybějící sdílení, nebo jen zvyk z jiného nástroje. Bez kontextu se z feedbacku stává hlasování o tlačítkách.
+
+Každý návrh ukládej minimálně s těmito poli:
+
+- **Kdo:** segment zákazníka a role, ne zbytečný osobní detail.
+- **Situace:** kdy problém vzniká a co se zákazník snaží dokončit.
+- **Dopad:** čas, riziko, peníze, frustrace nebo blokace procesu.
+- **Současný workaround:** jak to řeší teď.
+- **Frekvence:** jednorázový problém, týdenní bolest nebo kritická denní práce.
+- **Citace:** krátký přesný výrok zákazníka, pokud máš svolení ho interně použít.
+- **Další krok:** odpověď, experiment, roadmap kandidát, dokumentace nebo zamítnutí.
+
+Tím chráníš produkt před loudest-customer-driven development. Hlasitý zákazník může mít pravdu, ale nemá automaticky roadmapu v kapse.
+
+### Veřejná zpětná vazba potřebuje jasná pravidla
+
+Veřejný feedback portál vypadá transparentně, ale umí vyrobit tlak, který nemá s dobrým produktem moc společného. Hlasování může zvýhodnit populární drobnosti před nudnými systémovými opravami. Veřejné komentáře mohou obsahovat citlivé informace. A otevřená roadmapa může slíbit víc, než tým dokáže dodat.
+
+Pokud používáš veřejný prostor, nastav pravidla:
+
+- Nezveřejňuj zákaznická data, screenshoty, e-maily ani interní procesy.
+- Neber počet hlasů jako automatické pořadí práce.
+- U každého stavu vysvětli, co znamená: „zvažujeme“, „v návrhu“, „stavíme“, „vydáno“, „neplánujeme“.
+- U starých návrhů pravidelně zavírej smyčku.
+- Nepoužívej veřejný portál jako náhradu za skutečné rozhovory.
+- Nikdy neslibuj datum jen proto, že se diskuse rozjela víc, než je příjemné.
+
+Praktická věta do portálu:
+
+> Hlasování bereme jako jeden ze signálů. Prioritu určujeme podle dopadu na práci zákazníků, strategického směru, provozní náročnosti a bezpečnosti dat.
+
+Tohle zní méně sexy než „vaše hlasy rozhodují“. Je to ale pravdivější. A pravda má v produktovém řízení nepříjemnou výhodu: později méně vybuchuje.
+
+### Privacy-first komunita minimalizuje profilování
+
+Komunitní nástroje svádí k měření všeho: počet přihlášení, reakcí, přečtených příspěvků, délka sezení, kliky, heatmapy, scoring uživatelů. Většina z toho je pro malé B2B SaaS zbytečný šum.
+
+Stačí ti jednodušší metriky:
+
+- kolik opakovaných support dotazů komunita nebo znalostní báze snížila,
+- kolik kvalitních produktových signálů vzniklo za měsíc,
+- kolik návrhů skončilo v dokumentaci, produktu nebo jasném zamítnutí,
+- kolik zákazníků se dobrovolně zapojilo do beta testu,
+- jak rychle tým uzavírá smyčku u důležitých témat,
+- jaké tři pracovní problémy se opakovaly nejčastěji.
+
+Princip je jednoduchý: měř práci komunity, ne soukromý život lidí v komunitě. Pokud nepotřebuješ individuální behaviorální historii k dodání hodnoty, nesbírej ji. GDPR v článku 5 pracuje mimo jiné s principy účelového omezení, minimalizace a omezení uložení; pro komunitní provoz je to velmi praktický filtr, ne právnická dekorace.
+
+### Moderace je produktová funkce
+
+Komunita bez moderace rychle spadne do jedné ze tří pastí: ticho, chaos, nebo pár dominantních hlasů. Moderace není cenzura. Je to údržba užitečného prostoru.
+
+Minimální pravidla moderace:
+
+- žádné sdílení osobních údajů třetích osob,
+- žádné screenshoty zákaznických dat,
+- žádný nátlak na ostatní zákazníky,
+- jasné označení zaměstnanců firmy,
+- odpověď týmu u kritických vláken do předem slíbeného času,
+- přesun support incidentů do bezpečného soukromého kanálu,
+- pravidelné shrnutí, co komunita ovlivnila.
+
+Moderátor by měl mít jednoduchý runbook: kdy odpovědět veřejně, kdy vlákno zavřít, kdy požádat o soukromé detaily, kdy eskalovat bezpečnostní problém a kdy vytvořit produktovou kartu.
+
+### Uzavírej smyčku, jinak feedback umře
+
+Lidé neposílají zpětnou vazbu proto, aby se z ní stal interní štítek „maybe later“. Když se nic nevrací zpět, komunita se naučí mlčet.
+
+Uzavření smyčky může být krátké:
+
+- „Díky, zařadili jsme to do výzkumu pro Q4.“
+- „Vyřešili jsme to dokumentací, protože problém byl nejasný postup, ne chybějící funkce.“
+- „Nebudeme to stavět, protože by to rozbilo jednoduchost produktu pro hlavní segment.“
+- „Spouštíme beta test pro tři zákazníky, kteří tento problém řeší týdně.“
+- „Vydáno: tady je changelog a migrační poznámka.“
+
+Nejlepší produktové týmy umí říct „ne“ tak, že zákazník chápe proč. Ne každé „ne“ potěší. Ale srozumitelné „ne“ buduje víc důvěry než mlhavé „zvážíme“ na věčnost.
+
+### Komunita má mít exit a archivaci
+
+Stejně jako produkt potřebuje offboarding, komunita potřebuje pravidla odchodu. Člověk musí vědět, jak odejít, co se stane s jeho příspěvky, jak požádat o smazání nebo anonymizaci osobních údajů a kde najde veřejně dostupné informace bez účtu.
+
+Prakticky:
+
+- veřejné znalosti drž v dokumentaci, ne jen v uzavřeném chatu,
+- produktové novinky publikuj přes web a RSS, ne pouze v platformě,
+- u komunitního účtu měj jasný postup deaktivace,
+- u citací a případových příkladů eviduj souhlas nebo jiný vhodný právní základ,
+- u beta skupin stanov konec programu a archivaci dat,
+- pravidelně maž neaktivní exporty, staré seznamy a dočasné tabulky.
+
+Privacy-first komunita nemá zákazníka zamknout. Má mu pomoct i tehdy, když nechce další účet, další aplikaci a další notifikace. Což je, upřímně, docela zdravý lidský instinkt.
+
+### Checklist: komunita a feedback bez datového hladu
+
+- Má komunita jednu jasnou pracovní větu účelu?
+- Víme, zda stavíme support, beta, vzdělávání, advisory nebo partnerský prostor?
+- Existuje veřejná dokumentace nebo RSS alternativa pro lidi mimo platformu?
+- Sbíráme u feedbacku situaci, dopad, workaround a frekvenci?
+- Oddělujeme hlasy od priority a prioritu od slibů?
+- Má veřejný feedback prostor pravidla pro citlivá data?
+- Měříme kvalitu signálů, ne sledování jednotlivců?
+- Má moderátor runbook pro incidenty, osobní údaje a eskalace?
+- Uzavíráme smyčku u návrhů, které přijmeme i zamítneme?
+- Ví zákazník, jak odejít a co se stane s jeho daty?
+
+### Mini šablona: komunitní a feedback karta
+
+```markdown
+## Komunitní / feedback karta: [kanál / segment / období]
+
+Účel:
+- Komu komunita pomáhá:
+- Jakou práci zlepšuje:
+- Jaký typ interakce podporuje:
+- Co do komunity nepatří:
+
+Kanály:
+- Primární kanál:
+- Veřejná alternativa bez účtu:
+- RSS / changelog / dokumentace:
+- Soukromý support kanál pro citlivé věci:
+
+Feedback pravidla:
+- Povinný kontext návrhu:
+- Jak značíme dopad:
+- Jak oddělujeme hlasy od priority:
+- Jak uzavíráme smyčku:
+
+Privacy-first kontrola:
+- Jaká osobní data sbíráme:
+- Proč je potřebujeme:
+- Jak dlouho je držíme:
+- Kdo k nim má přístup:
+- Jak člověk odejde / požádá o smazání:
+
+Moderace:
+- Kdo moderuje:
+- Reakční čas u kritických témat:
+- Eskalace bezpečnostních nebo datových problémů:
+- Pravidelný komunitní souhrn:
+
+Výsledek období:
+- 3 nejdůležitější pracovní signály:
+- Co šlo do produktu:
+- Co šlo do dokumentace:
+- Co jsme odmítli a proč:
+- Co změníme v komunitním provozu:
+```
+
+### Zdroje pro tuto přílohu
+
+- Plné znění GDPR na EUR-Lexu obsahuje v článku 5 principy zpracování včetně účelového omezení, minimalizace dat a omezení uložení: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+- EDPB Guidelines 05/2020 k souhlasu podle GDPR vysvětlují požadavky na svobodný, konkrétní, informovaný a jednoznačný souhlas: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
+- Evropská komise shrnuje základní pravidla ochrany dat pro firmy a organizace včetně transparentnosti a práv subjektů údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations_en
+
+
 ## Pracovní log
+
+- **2026-09-21:** Doplněna příloha HG o zákaznické komunitě a zpětné vazbě bez platformního rukojmí: účel komunity, volba kanálu, strukturovaný feedback, veřejná pravidla, privacy-first měření, moderace, uzavírání smyčky, exit proces, checklist a komunitní karta.
 
 - **2026-09-21:** Doplněna příloha HF o reaktivaci bývalých zákazníků bez stalkingu: rozlišení důvodů odchodu, nový důvod k oslovení, privacy-first hranice, krátká sekvence, bezpečný návratový krok, měření kvality návratů, checklist a reaktivační karta.
 
