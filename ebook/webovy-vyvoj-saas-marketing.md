@@ -37,7 +37,11 @@ Praktický český e-book od Codyho z Dreamindu pro malé týmy, freelancery a z
    - Rozhodovací log, backlog, týdenní rytmus a automatizace
    - Jak nepřepálit procesy dřív než má produkt zákazníky
    - Checklista před spuštěním a po spuštění
-7. **Zdroje a pracovní log**
+7. **Akční plán zavedení**
+   - Jak z e-booku udělat konkrétní 30denní plán
+   - Co udělat první týden, druhý týden a před spuštěním
+   - Jak průběžně měřit dopad bez invazivního trackingu
+8. **Zdroje a pracovní log**
    - Ověřené odkazy
    - Průběžný log změn e-booku
 
@@ -711,6 +715,123 @@ Mini-cvičení na 45 minut:
 5. Smaž nebo anonymizuj citlivý detail z backlogu, který tam nemá co dělat.
 
 
+## 7. Akční plán: 30 dní od chaosu k použitelnému systému
+
+E-book je hezký, ale sám o sobě nic nespustí. Markdown neumí prodávat, nasazovat ani odpovídat zákazníkům. Umí ale donutit tým přemýšlet strukturovaně, což je u malého SaaS překvapivě vzácná superschopnost.
+
+Tahle kapitola převádí předchozí části do 30denního plánu. Ne jako korporátní transformační program s logem ve tvaru šipky, ale jako realistický postup pro malý tým, který má málo času, hodně kontextu v hlavách a potřebuje udělat viditelný posun.
+
+### 7.1 Týden 1: srovnej nabídku a rozhodnutí
+
+První týden neřeš redesign. Nejdřív zjisti, jestli web a produkt vůbec říkají něco konkrétního. Pokud nabídka není jasná, každý další optimalizační krok jen rychleji posílá lidi do mlhy.
+
+Výstup týdne:
+
+- jedna věta hodnoty pro hlavní cílovou skupinu;
+- seznam 3 nejčastějších problémů zákazníka;
+- rozhodnutí, co je primární CTA na webu;
+- mapa hlavních stránek a jejich účelu;
+- první verze rozhodovacího logu.
+
+Praktický postup:
+
+1. Otevři homepage a bez kontextu napiš, co přesně produkt slibuje.
+2. Vymaž nebo přepiš všechny věty, které by seděly na libovolnou agenturu nebo SaaS.
+3. U každé hlavní stránky napiš, jaké rozhodnutí má návštěvník udělat.
+4. Vytvoř soubor `decision-log.md` a zapiš první tři produktová rozhodnutí.
+5. Zkontroluj, jestli privacy stránka mluví lidsky, nejen právnicky.
+
+*Codyho komentář:* první týden je o ostrosti. Když neumíš říct, pro koho web je, analytika ti to později neprozradí. Jen ti dá graf, jak moc lidé nerozuměli.
+
+### 7.2 Týden 2: oprav technický základ a měř jen to, co použiješ
+
+Druhý týden patří základům, které nejsou sexy, ale drží celý systém pohromadě: rychlost, metadata, přístupnost, formuláře, monitoring a jednoduché měření. Cílem není honit skóre pro skóre. Cílem je odstranit překážky, které zbytečně brání důvěře a konverzi.
+
+Výstup týdne:
+
+- každá důležitá stránka má unikátní title, meta description a čitelné URL;
+- formuláře mají jasné chybové stavy, anti-spam ochranu a potvrzení odeslání;
+- existuje základní monitoring dostupnosti a chyb;
+- analytika měří stránky, zdroje návštěvnosti a hlavní konverze bez osobního profilování;
+- externí skripty jsou zdokumentované včetně důvodu a datového dopadu.
+
+Praktický postup:
+
+1. Projdi pět nejdůležitějších URL a oprav titulky, popisy, nadpisy a CTA.
+2. Otestuj web na mobilu, pomalém připojení a s klávesnicí místo myši.
+3. Odešli testovací formulář a ověř, že zpráva dorazí, dává smysl a neobsahuje zbytečná data.
+4. Sepiš všechny externí skripty a u každého rozhodni: ponechat, nahradit, odstranit.
+5. Nastav jednoduchý týdenní report: návštěvy, top stránky, zdroje, konverze, chyby.
+
+Privacy-first pravidlo: pokud z metriky neplyne rozhodnutí, pravděpodobně ji nemusíš sbírat. Malý tým nepotřebuje datový sklad na každé mrknutí kurzoru. Potřebuje vědět, co funguje, co se rozbilo a kde lidé naráží.
+
+### 7.3 Týden 3: zlepši první zkušenost v produktu
+
+Třetí týden se přesouvá z webu do produktu. U SaaS nestačí, že lidé kliknou na „Vyzkoušet“. Skutečný úspěch je, když poprvé zažijí hodnotu a chápou, proč se mají vrátit.
+
+Výstup týdne:
+
+- definovaná aktivační metrika;
+- onboarding vede uživatele k první hodnotě, ne k vyplnění profilu pro radost databáze;
+- trial nebo demo má jasný další krok;
+- zákaznická podpora ví, jak poznat zaseknutého uživatele;
+- existuje krátký checklist pro ruční kontrolu nového účtu.
+
+Praktický postup:
+
+1. Vyber jednu akci, po které uživatel reálně pochopí hodnotu produktu.
+2. Odstraň z onboardingu vše, co není nutné před touto akcí.
+3. Přidej příkladová data, prázdné stavy nebo průvodce tam, kde uživatel neví, co dál.
+4. Napiš tři podpůrné e-maily: uvítání, pomoc při zaseknutí, další krok po aktivaci.
+5. U každého e-mailu zkontroluj souhlas, účel a možnost odhlášení, pokud jde o marketing.
+
+Dobrá první zkušenost se pozná tak, že ji zvládne i člověk, který nemá zakladatele na telefonu. Pokud musíš každému novému zákazníkovi vysvětlovat totéž ručně, není to zákaznická péče. Je to bug s lidským hlasem.
+
+### 7.4 Týden 4: připrav provoz, obsah a rytmus zlepšování
+
+Čtvrtý týden propojí produkt, marketing a provoz do systému, který se dá udržet. Tady vzniká rozdíl mezi „spustili jsme web“ a „máme stroj, který se každý týden zlepšuje“.
+
+Výstup týdne:
+
+- publikační plán na 4–6 týdnů;
+- backlog seřazený podle dopadu a rizika;
+- retence dat a export jsou popsané aspoň v první verzi;
+- incidentní postup má vlastníka;
+- tým má týdenní rytmus kontroly metrik, podpory a priorit.
+
+Praktický postup:
+
+1. Naplánuj čtyři praktické články nebo landing pages podle reálných otázek zákazníků.
+2. Ke každému obsahu napiš jednu cílovou akci: demo, kontakt, trial, stažení checklistu, přímý odkaz.
+3. Projdi backlog a nech jen položky, které mají vlastníka, důkaz hotovo a jasný dopad.
+4. Zapiš, jak dlouho držíš poptávky, účty, logy, fakturační údaje a podpůrné konverzace.
+5. Udělej 30minutovou retrospektivu: co zrychlilo důvěru, co brzdilo práci, co smažeme.
+
+### 7.5 Finální checklist po 30 dnech
+
+Po měsíci bys neměl mít dokonalý produkt. Měl bys mít systém, který jde dál zlepšovat bez chaosu. To je mnohem cennější než jednorázový sprint s krásným burn-outem v ceně.
+
+- [ ] Umíme jednou větou říct, komu pomáháme a s čím.
+- [ ] Homepage, ceník, kontakt a privacy stránka mají jasný účel a další krok.
+- [ ] Technické SEO, základní výkon a přístupnost nejsou ostuda schovaná pod kobercem.
+- [ ] Formuláře fungují, logují chyby a nesbírají data „pro jistotu“.
+- [ ] Onboarding vede k první hodnotě co nejkratší cestou.
+- [ ] Marketing měří kampaně bez invazivního profilování uživatelů.
+- [ ] Dodavatelé a externí skripty mají jasný účel, vlastníka a datový dopad.
+- [ ] Backlog má omezenou rozpracovanost a položky mají kritéria hotovo.
+- [ ] Existuje rozhodovací log, retence dat a základní incidentní postup.
+- [ ] Tým má týdenní rytmus: metriky, zákaznické signály, priority, jedno zlepšení.
+
+Mini-cvičení na závěr:
+
+1. Vyber jednu věc, kterou po 30 dnech vypneš, protože nepřináší hodnotu.
+2. Vyber jednu věc, kterou zautomatizuješ, protože je opakovaná a dobře pochopená.
+3. Vyber jednu věc, kterou budeš měřit další měsíc, protože podle ní opravdu rozhodneš.
+4. Vyber jednu privacy-first výhodu, kterou napíšeš přímo do prodejního textu.
+
+*Codyho komentář:* nejlepší SaaS týmy nejsou ty, které mají nejvíc nástrojů. Jsou to ty, které vědí, co nedělat, co neměřit a kdy říct „tohle uživatelům nepomůže“. Ano, je to méně romantické než nekonečný roadmap brainstorming. Bohužel to funguje.
+
+
 ## Zdroje
 
 - Evropská komise: principy GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -730,6 +851,7 @@ Mini-cvičení na 45 minut:
 
 ## Pracovní log
 
+- 2026-09-21: Doplněna kapitola 7.1–7.5 s praktickým 30denním plánem zavedení doporučení z e-booku do webu, SaaS produktu, marketingu a provozu.
 - 2026-09-21: Doplněna kapitola 6.1–6.5 o produktivitě malého týmu, rozhodovacím logu, backlogu, týdenním rytmu a bezpečné automatizaci.
 - 2026-09-21: Doplněna kapitola 5.1–5.5 o datové mapě, minimalizaci, dodavatelích, retenci, exportu a incidentním checklistu privacy-first provozu v Evropě.
 - 2026-09-21: Doplněna kapitola 4.1–4.4 o marketingu bez invazivního trackingu, obsahové strategii, distribuci, UTM disciplíně a checklistu kampaně.
