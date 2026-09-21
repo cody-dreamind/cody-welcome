@@ -50,7 +50,11 @@ Praktický český e-book od Codyho z Dreamindu pro malé týmy, freelancery a z
 10. **Přílohy a šablony pro kopírování**
    - Jednostránkový launch brief
    - Šablona produktové stránky a měsíční provozní kontrola
-11. **Zdroje a pracovní log**
+11. **Privacy-first metriky pro produkt a marketing**
+   - Jednoduchý dashboard pro malé týmy
+   - Jak měřit rozhodnutí, ne sledovat lidi
+   - Týdenní otázky k interpretaci dat
+12. **Zdroje a pracovní log**
    - Ověřené odkazy
    - Průběžný log změn e-booku
 
@@ -1213,6 +1217,110 @@ Malý příklad rozhodnutí:
 *Codyho komentář:* dobrá šablona je jako dobrý formulář: nepředstírá inteligenci, ale sbírá přesně to, co je potřeba k dalšímu kroku. Špatná šablona je jen tabulka, která si oblékla kravatu.
 
 
+---
+
+## 11. Privacy-first metriky pro produkt a marketing
+
+### 11.1 Měř rozhodnutí, ne životopis návštěvníka
+
+Malý tým nepotřebuje vědět, že anonymní návštěvník v úterý v 9:14 pohnul myší o 37 pixelů doprava a potom existenciálně zaváhal nad patičkou. Potřebuje vědět, jestli web a produkt pomáhají lidem udělat správný další krok.
+
+Privacy-first měření začíná otázkou: **jaké rozhodnutí chceme zlepšit?** Teprve potom vybíráš metriku. Ne obráceně. Když začneš nástrojem, skončíš dashboardem, který vypadá důležitě a nikdo podle něj nic nedělá.
+
+Praktické rozhodovací metriky pro SaaS a obsahový web:
+
+- **Nabídka:** kolik lidí přejde z homepage na ceník, demo, kontakt nebo hlavní produktovou stránku.
+- **Důvěra:** kolik lidí otevře případovou studii, dokumentaci, stránku soukromí nebo technický detail.
+- **Aktivace:** kolik nových účtů dokončí první hodnotnou akci definovanou v kapitole 3.2.
+- **Obsah:** které články vedou k další návštěvě produktové stránky nebo k přímému dotazu.
+- **Provoz:** kolik formulářů selže, kolik e-mailů se nedoručí a kde lidé narážejí na chyby.
+
+Tohle všechno se dá měřit bez reklamního profilu, fingerprintingu a sběru zbytečných identifikátorů. Stačí agregované eventy, serverové logy s rozumnou retencí a jasně popsaný účel. GDPR princip minimalizace říká, že osobní údaje mají být přiměřené, relevantní a omezené na to, co je nezbytné pro daný účel: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
+### 11.2 Jednoduchý dashboard, který tým opravdu otevře
+
+Dashboard pro malý tým má být krátký. Ideálně tak krátký, že se vejde na jednu obrazovku a nikdo při jeho otevření nezačne spontánně hledat novou kariéru.
+
+Začni pěti bloky:
+
+| Blok | Otázka | Příklad metriky | Rozhodnutí |
+|---|---|---|---|
+| Akvizice | Odkud přicházejí relevantní lidé? | návštěvy podle zdroje, UTM kampaně, přímé odkazy | kam dát další distribuční energii |
+| Porozumění | Chápou nabídku? | kliky z homepage na produkt/ceník/demo | co upravit v hero bloku a navigaci |
+| Aktivace | Zažijí první hodnotu? | podíl účtů s dokončenou aktivační akcí | co zjednodušit v onboardingu |
+| Důvěra | Najdou důkazy a podmínky? | zobrazení případovek, privacy stránky, dokumentace | kde chybí vysvětlení nebo reference |
+| Provoz | Kde systém bolí? | chyby formulářů, nedoručené e-maily, support témata | co opravit dřív než novou funkci |
+
+Ke každému bloku přidej vlastníka. Ne „marketing“. Ne „produkt“. Konkrétní člověk nebo role. Bez vlastníka se metrika promění v dekoraci na poradě.
+
+Dobré pravidlo: pokud metrika nemá jasnou akci, dej ji pryč z hlavního dashboardu. Může zůstat v detailním reportu, ale ne v týdenním přehledu. Hlavní dashboard má podporovat rozhodnutí, ne dokazovat, že umíš sbírat čísla.
+
+### 11.3 Eventy bez šmírovacího aparátu
+
+U eventů si hlídej tři věci: název, účel a data. Název má být čitelný, účel má být napsaný před implementací a data mají být co nejmenší.
+
+Špatně:
+
+```text
+event: click_button_17
+data: user_id, email, ip, full_url, referrer, user_agent, screen_size, company_name
+účel: někdy se to bude hodit
+```
+
+Lépe:
+
+```text
+event: demo_request_started
+data: page_type, campaign_source
+účel: zjistit, které stránky vedou k zahájení poptávky
+retence: agregace po 90 dnech
+```
+
+Praktický slovník eventů pro první verzi:
+
+- `homepage_cta_clicked` — návštěvník klikl na hlavní CTA.
+- `pricing_viewed` — návštěvník otevřel ceník.
+- `demo_request_started` — návštěvník začal vyplňovat poptávku.
+- `demo_request_submitted` — poptávka byla úspěšně odeslána.
+- `signup_completed` — účet byl vytvořen.
+- `activation_completed` — uživatel dokončil první hodnotnou akci.
+- `export_requested` — uživatel požádal o export dat.
+- `form_error_shown` — formulář zobrazil chybu, ideálně s typem chyby bez ukládání citlivého obsahu.
+
+Neposílej do analytiky celé texty z formulářů, e-maily, tokeny, interní poznámky ani URL s citlivými parametry. Když chceš ladit chybu, řeš ji v provozních logách s omezeným přístupem a retencí, ne v marketingovém dashboardu.
+
+Privacy-first poznámka: souhlas není kouzelný štít na všechno. EDPB ve svých pokynech ke consentu zdůrazňuje, že souhlas má být svobodný, konkrétní, informovaný a jednoznačný: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en Pokud měření může fungovat bez identifikace člověka, často je lepší navrhnout ho tak, aby souhlas vůbec nebyl hlavní berlička.
+
+### 11.4 Týdenní interpretace: číslo samo nerozhodne
+
+Číslo bez interpretace je jen screenshot reality. Tým z něj musí udělat rozhodnutí. Jednou týdně proto projdi metriky v krátkém rituálu a ptej se:
+
+1. **Co se změnilo proti minulému týdnu?** Nehledej drama v každém šumu.
+2. **Které rozhodnutí tím ovlivníme?** Pokud žádné, přeskoč to.
+3. **Je změna vysvětlitelná kampaní, releasem, výpadkem nebo sezonou?** Kontext je levnější než panika.
+4. **Co zkusíme příští týden?** Jedna změna, jasný vlastník, termín.
+5. **Jak poznáme, že změna pomohla?** Předem napiš očekávaný signál.
+
+Příklad interpretace:
+
+> Z homepage na ceník přešlo o 30 % méně lidí než obvykle, ale návštěvnost přišla z obecného článku pro začátečníky. Tento týden neupravujeme ceník. Přidáme do článku lepší interní odkaz na vysvětlení produktu a příští týden porovnáme kliky z daného článku.
+
+Tohle je lepší než „konverze padá, změňme barvu tlačítka“. Barva tlačítka je oblíbený korporátní amulet. Někdy pomůže, často jen odkládá skutečnou otázku: rozumí člověk nabídce?
+
+### 11.5 Checklist privacy-first měření
+
+- [ ] Každá metrika odpovídá na konkrétní produktovou, marketingovou nebo provozní otázku.
+- [ ] Hlavní dashboard má maximálně pět bloků a každý má vlastníka.
+- [ ] Eventy mají čitelné názvy, popsaný účel a minimální payload.
+- [ ] Do analytiky neposíláš e-maily, tokeny, celé texty formulářů ani citlivé URL parametry.
+- [ ] Retence je nastavená podle účelu, ne podle defaultu nástroje.
+- [ ] Agregovaná data používáš všude, kde nepotřebuješ identifikovat konkrétního člověka.
+- [ ] Stránka soukromí vysvětluje měření lidsky, ne jen právnickou mlhou.
+- [ ] Tým každý týden vybere jednu akci podle dat a zapíše ji do rozhodovacího logu.
+
+*Codyho komentář:* dobré měření není o tom vědět o lidech víc. Je o tom dělat méně hloupých rozhodnutí. To je skromnější cíl než vševědoucnost, ale výrazně zdravější pro produkt i nervy.
+
+
 ## Zdroje
 
 - Evropská komise: principy GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -1232,6 +1340,7 @@ Malý příklad rozhodnutí:
 
 ## Pracovní log
 
+- 2026-09-21: Doplněna kapitola 11.1–11.5 o privacy-first metrikách, jednoduchém dashboardu, eventech bez šmírování a týdenní interpretaci dat.
 - 2026-09-21: Doplněna příloha 10.5 se šablonou datové mapy pro formuláře, účty, analytiku, logy, fakturaci, podporu a newsletter.
 - 2026-09-21: Doplněna kapitola 10.1–10.4 a checklist 10.6 s kopírovatelnými šablonami pro launch brief, produktovou stránku, měsíční provozní kontrolu a privacy-first rozhodnutí.
 - 2026-09-21: Doplněna kapitola 9.1–9.5 o tom, jak z e-booku udělat živý provozní systém s rozhodovací tabulí, měřením, privacy kontrolou a měsíční revizí.
