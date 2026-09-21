@@ -38336,7 +38336,220 @@ Privacy-first provoz v Evropě k tomu přidává ještě jednu hranici: neexport
 - NIST SP 800-57 Part 1 Rev. 5: obecná doporučení pro key management, kryptoperiody, revokaci a práci s kompromitovanými klíči: https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final
 - NIST SP 800-63B: autentizace a session management, užitečné hlavně pro tokeny, sessions a přihlašovací tajemství: https://pages.nist.gov/800-63-4/sp800-63b.html
 
+## Příloha HK: Webhooky a inbound integrace bez slepé důvěry, duplicit a datového průvanu
+
+Webhook vypadá jako drobnost: někdo pošle `POST`, ty si ho přečteš a něco se stane. V praxi je to malá vstupní brána do produktu. Když ji navrhneš ledabyle, dostaneš duplicitní faktury, rozházené stavy objednávek, podpůrný tým lovící „proč se to nespustilo“ a bezpečnostní díru, která se tváří jako integrace.
+
+Privacy-first SaaS nebere inbound integrace jako magický tunel důvěry. Bere je jako řízený kontrakt: jasný účel, minimální data, ověřitelný podpis, idempotentní zpracování, rozumné limity, auditovatelný log a plán rotace secretů.
+
+> Codyho komentář: Webhook bez podpisu je jako nechat klíč pod rohožkou a říkat tomu „developer experience“. Pohodlné to je. Chytré už méně.
+
+### Nejdřív pojmenuj, co webhook skutečně mění
+
+Každý inbound webhook zařaď do jedné ze čtyř kategorií:
+
+- **Informační signál:** například „platba čeká“, „soubor byl zpracován“, „ticket změnil stav“.
+- **Stavová změna:** například „platba uhrazena“, „subscription zrušena“, „doklad vystaven“.
+- **Spouštěč práce:** například „vytvoř onboarding task“, „pošli interní upozornění“, „zahaj import“.
+- **Citlivá změna:** například billing, přístup, mazání dat, změna vlastníka nebo bezpečnostní událost.
+
+Čím víc webhook mění stav produktu, tím přísnější má být ověření, limity, opakovatelnost a lidská viditelnost. Notifikace do interního kanálu snese jednodušší režim. Webhook, který mění oprávnění nebo fakturaci, potřebuje téměř stejnou disciplínu jako veřejné API.
+
+### Kontrakt napiš dřív než endpoint
+
+Webhook endpoint nemá vznikat stylem „něco přijde, nějak to naparsujeme“. Před implementací napiš malý kontrakt:
+
+- jaký je účel webhooku,
+- kdo je odesílatel a kdo interní vlastník,
+- jaký event typ přijímáš,
+- jaké pole je stabilní ID události,
+- jaké pole je stabilní ID objektu,
+- jak dlouho držíš raw payload,
+- co se stane při duplicitě,
+- co se stane při neznámém event typu,
+- jak webhook vypneš bez deploye.
+
+Praktický rozdíl je obrovský. Když později přijde incident, nepotřebuješ číst kód jako detektivku. Otevřeš kartu integrace a víš, jestli je problém v podpisu, mapování eventu, duplicitě, nebo ve změně schématu u dodavatele.
+
+### Ověřuj původ, ne jen URL
+
+To, že požadavek přišel na tajnou URL, není bezpečnostní model. Tajná URL se dá omylem zalogovat, poslat do chatu, uložit v testovacím nástroji nebo zkopírovat do dokumentace. Minimální obrana pro důležité webhooky:
+
+- používej podpis payloadu pomocí sdíleného secretu nebo asymetrického klíče,
+- podepisuj i timestamp, ne jen tělo požadavku,
+- odmítej staré požadavky mimo krátké časové okno,
+- porovnávej podpis konstantním časem, pokud to tvůj stack umožňuje,
+- drž secrets mimo repozitář a mimo běžné logy,
+- připrav rotaci secretu bez výpadku.
+
+OWASP API Security Top 10 2023 upozorňuje mimo jiné na slabou autentizaci, neomezenou spotřebu zdrojů, SSRF, špatnou konfiguraci a nebezpečnou konzumaci externích API; webhooky se těchto kategorií dotýkají velmi často, i když se netváří jako „velké API“: https://api-security.owasp.org/editions/2023/en/0x11-t10/
+
+NIST SP 800-57 Part 1 Rev. 5 popisuje správu kryptografických klíčů v celém životním cyklu — generování, uložení, použití i zničení. Pro SaaS tým z toho plyne jednoduché pravidlo: webhook secret není poznámka v `.env`, ale klíč s vlastníkem, účelem, datem rotace a postupem při kompromitaci: https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final
+
+### Idempotence není luxus, ale pojistka proti chaosu
+
+Spousta poskytovatelů posílá webhook opakovaně, když nedostane rychlou nebo správnou odpověď. Síť také občas selže ve chvíli, kdy tvoje aplikace už práci provedla, ale odesílatel se to nedozvěděl. Bez idempotence pak jeden event vytvoří dvě faktury, dva onboarding tasky nebo dvě změny stavu.
+
+Základní vzor:
+
+1. Přijmi požadavek.
+2. Ověř podpis, timestamp a velikost payloadu.
+3. Ulož `event_id`, `provider`, `event_type`, čas přijetí a hash payloadu.
+4. Pokud `event_id` už existuje, vrať úspěch a nic znovu nespouštěj.
+5. Zařaď práci do fronty nebo interního jobu.
+6. Stav zpracování drž odděleně od raw požadavku.
+
+Když poskytovatel nemá stabilní `event_id`, vytvoř vlastní idempotency key z kombinace poskytovatele, typu eventu, ID objektu, časového okna a významného stavu. Není to dokonalé, ale je to lepší než doufat, že internet bude dneska hodný.
+
+### Raw payload drž krátce a rozumně
+
+Debugging webhooků svádí k tomu ukládat všechno navždy. Privacy-first přístup je jiný: ulož jen to, co potřebuješ pro zpracování, audit a krátké řešení incidentu. Raw payload s osobními údaji má mít retenční dobu, maskování v UI a omezený přístup.
+
+Praktické nastavení pro malý SaaS:
+
+- **Technický log:** event ID, provider, typ, status, čas, chyba, hash payloadu; drž déle, protože neobsahuje zbytečná osobní data.
+- **Raw payload:** drž krátce, například několik dní až týdnů podle rizika a potřeby podpory.
+- **Citlivá pole:** maskuj v administraci a nikdy je neposílej do běžných notifikací.
+- **Export pro support:** používej výřez, ne kompletní tělo požadavku.
+- **Mazání účtu:** zkontroluj, zda webhook log neudržuje data déle než hlavní produkt.
+
+Tady se vyplatí nudná disciplína. Když zákazník požádá o vysvětlení zpracování dat, nechce slyšet „asi to někde máme v logách“. Chce slyšet, co sbíráš, proč, na jak dlouho a kdo se k tomu dostane.
+
+### Limity chrání produkt i peněženku
+
+Webhook endpoint je veřejný vstup. I když je určený pro jednoho poskytovatele, technicky ho může zkoušet kdokoliv. OWASP u API4:2023 zmiňuje riziko neomezené spotřeby zdrojů: chybějící limity na velikost, počet operací, paměť, čas zpracování nebo náklady mohou vést k výpadku i finančnímu průšvihu: https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/
+
+Minimum pro webhooky:
+
+- maximální velikost request body,
+- timeout na zpracování,
+- rate limit podle provideru a endpointu,
+- fronta s limitem paralelního zpracování,
+- odmítnutí neznámých metod a content typů,
+- alert na neobvyklý počet chyb nebo eventů,
+- ruční kill switch pro konkrétní integraci.
+
+Kill switch není selhání produktu. Je to bezpečnostní pás. Když dodavatel omylem začne posílat tisíce duplicit, chceš integraci zastavit konfiguračně, ne čekat na deploy v neděli večer.
+
+### Chyby vracej jednoduše, interně loguj užitečně
+
+Odesílateli nevracej román. Webhook odpověď má být stručná a bezpečná. Interní log má být bohatší, ale ne zvědavý.
+
+Dobré rozdělení:
+
+- **Externí odpověď:** stavový kód, obecná chyba, žádné secrety, žádná osobní data.
+- **Interní technický log:** correlation ID, provider, event ID, event typ, fáze zpracování, bezpečně zkrácená chyba.
+- **Support pohled:** čitelný stav typu „čeká“, „zpracováno“, „odmítnuto podpisem“, „duplicitní“, „neznámý typ“.
+- **Produktový pohled:** co webhook změnil v účtu zákazníka a proč.
+
+Nejhorší varianta je log, který má buď všechno včetně citlivých dat, nebo skoro nic. První varianta je privacy problém. Druhá varianta je provozní peklo v tričku „minimalismus“.
+
+### Schéma verzuj jako veřejný kontrakt
+
+I inbound webhook od cizí služby potřebuje vlastní interní schéma. Nespoléhej na to, že tvar payloadu zůstane navždy stejný. Překládej externí eventy do interních událostí:
+
+- `provider.invoice.paid` → `billing_payment_confirmed`,
+- `provider.subscription.deleted` → `subscription_cancel_requested`,
+- `provider.file.processed` → `import_source_ready`.
+
+Tím izoluješ zbytek aplikace od změn dodavatele. Když se změní externí payload, upravíš adaptér, ne celý produkt. A když dodavatele vyměníš, nemusíš přepsat interní workflow.
+
+U každé mapované události drž:
+
+- aktuální verzi mapování,
+- příklad payloadu bez citlivých dat,
+- povinná pole,
+- fallback při chybějícím poli,
+- testovací scénáře,
+- vlastníka integrace.
+
+### Testuj negativní scénáře, nejen šťastnou cestu
+
+Webhook, který projde jen „happy path“ testem, je napůl hotový. Přidej testovací sadu pro situace, které se v provozu opravdu stávají:
+
+- chybí podpis,
+- podpis je špatný,
+- timestamp je starý,
+- payload je příliš velký,
+- event přijde dvakrát,
+- event přijde v jiném pořadí,
+- provider pošle neznámý typ,
+- interní job selže po uložení eventu,
+- zákazník už neexistuje,
+- související subscription je v jiném stavu.
+
+U stavových změn testuj i pořadí. Například `payment_failed` po `subscription_cancelled` nemusí znamenat totéž jako `payment_failed` před zrušením. Bez explicitního stavového modelu vznikne produktová magie, a produktová magie je jen bug, který zatím nosí plášť.
+
+### Checklist: webhooky bez slepé důvěry
+
+- [ ] Každý webhook má vlastníka, účel a kartu integrace.
+- [ ] Endpoint ověřuje podpis, timestamp a velikost payloadu.
+- [ ] Secret je uložený bezpečně, má plán rotace a není v repozitáři.
+- [ ] Zpracování je idempotentní podle stabilního event ID nebo náhradního klíče.
+- [ ] Raw payload má jasnou retenci, maskování a omezený přístup.
+- [ ] Technický log neobsahuje zbytečná osobní data ani secrety.
+- [ ] Endpoint má rate limit, timeout, limit velikosti a kill switch.
+- [ ] Externí eventy se mapují na interní události přes adaptér.
+- [ ] Existují testy pro duplicity, starý timestamp, špatný podpis a neznámý event.
+- [ ] Support umí najít stav webhooku podle zákazníka, event ID nebo correlation ID.
+
+### Mini šablona: karta webhook integrace
+
+## Karta webhook integrace: [provider / účel]
+
+### Základ
+
+- **Provider:**
+- **Interní vlastník:**
+- **Účel:**
+- **Endpoint:**
+- **Kritičnost:** informační / stavová / spouštěč práce / citlivá změna
+- **Kill switch:** kde a kdo ho smí použít
+
+### Bezpečnost
+
+- **Metoda ověření:** podpis / mTLS / allowlist / kombinace
+- **Secret vlastník:**
+- **Rotace:**
+- **Časové okno pro timestamp:**
+- **Rate limit:**
+- **Maximální velikost payloadu:**
+
+### Zpracování
+
+- **Event ID:**
+- **Idempotency pravidlo:**
+- **Interní event:**
+- **Fronta / job:**
+- **Retry strategie:**
+- **Stavy zpracování:**
+
+### Data a retence
+
+- **Přijímaná pole:**
+- **Osobní údaje:**
+- **Raw payload retence:**
+- **Maskování v UI:**
+- **Přístup pro support:**
+- **Mazání při odchodu zákazníka:**
+
+### Provoz
+
+- **Alerty:**
+- **Dashboard:**
+- **Runbook incidentu:**
+- **Testovací payloady:**
+- **Poslední review:**
+
+### Zdroje pro tuto přílohu
+
+- OWASP API Security Top 10 2023 — přehled hlavních rizik API včetně autentizace, resource consumption, SSRF, misconfiguration a unsafe consumption of APIs: https://api-security.owasp.org/editions/2023/en/0x11-t10/
+- OWASP API4:2023 Unrestricted Resource Consumption — limity velikosti, frekvence, času a nákladů u API požadavků: https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/
+- NIST SP 800-57 Part 1 Rev. 5 — doporučení pro životní cyklus kryptografických klíčů a key management: https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final
+
 ## Pracovní log
+
+- **2026-09-21:** Doplněna příloha HK o webhook integracích a inbound vstupech: klasifikace webhooků, kontrakt integrace, podpisy a timestampy, idempotence, retence raw payloadů, limity, bezpečné logování, verzování schématu, negativní testy, checklist a karta webhook integrace.
 - **2026-09-21:** Rozšířena příloha HJ o nouzové rotaci secrets: typy úniků, zastavení rizika, mapování závislostí, bezpečné ověření bez logování tajných hodnot, komunikaci, prevenci, checklist, kartu nouzové rotace a zdroje OWASP/NIST.
 
 - **2026-09-21:** Doplněna příloha HI o API klíčích, servisních účtech a technických přístupech: vlastnictví, účel, nejmenší oprávnění, rotace, secrets management, zákaznická správa klíčů, audit logy, rate limiting, incidenty, checklist a karta technického přístupu.
