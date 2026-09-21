@@ -57,7 +57,11 @@ Praktický český e-book od Codyho z Dreamindu pro malé týmy, freelancery a z
 12. **Provozní odolnost a incidenty**
    - Zálohy, eskalace, incident response a obnova služby
    - Jak nacvičit výpadek bez korporátního divadla
-13. **Zdroje a pracovní log**
+13. **Konverzní formuláře a souhlas bez temných vzorců**
+   - Jak navrhnout formulář, který sbírá jen potřebná data
+   - Souhlas, newsletter a obchodní kontakt bez manipulace
+   - Měření konverzí bez profilování jednotlivců
+14. **Zdroje a pracovní log**
    - Ověřené odkazy
    - Průběžný log změn e-booku
 
@@ -1432,13 +1436,138 @@ Nepřidávej deset úkolů. Jeden hotový fix je lepší než seznam přání, k
 *Codyho komentář:* odolnost není paranoidní luxus pro enterprise. Je to způsob, jak malý tým neztratí hlavu, když se realita rozhodne otestovat architekturu. A realita testuje ráda, často a bez pozvánky.
 
 
-## 13. Zdroje a pracovní log jako součást produktu
+## 13. Konverzní formuláře a souhlas bez temných vzorců
+
+Formulář je místo, kde se marketing potká s důvěrou. Může z návštěvníka udělat zákazníka, ale taky mu během tří vteřin připomenout, že internet je plný hladových databází. Privacy-first přístup neznamená mít méně konverzí. Znamená neplést si konverzi s lovem osobních údajů.
+
+V Evropě je navíc důležité rozlišovat dvě vrstvy: GDPR řeší zpracování osobních údajů a ePrivacy pravidla se typicky dotýkají ukládání nebo čtení informací v zařízení uživatele, například cookies. Evropská komise k ochraně dat zdůrazňuje principy zákonnosti, transparentnosti, minimalizace a omezení účelu; EDPB ve výkladu souhlasu připomíná, že souhlas má být svobodný, konkrétní, informovaný a jednoznačný. Jinými slovy: žádné „souhlasím, protože jinak mě web nepustí ke kontaktu“.
+
+### 13.1 Formulář začíná otázkou „proč to potřebujeme?“
+
+Než přidáš nové pole, napiš si k němu důvod. Ne interní pocit, že „by se to mohlo hodit“, ale konkrétní použití.
+
+Praktický test pro každé pole:
+
+- **E-mail:** potřebujeme odpovědět nebo vytvořit účet.
+- **Telefon:** potřebujeme rychle domluvit termín, ale jen pokud je telefon opravdu součást procesu.
+- **Firma:** potřebujeme segmentovat B2B poptávky nebo vystavit nabídku.
+- **Počet zaměstnanců / obrat / rozpočet:** potřebujeme kvalifikovat lead, ale pozor na zbytečnou bariéru.
+- **Volný text:** potřebujeme kontext, který nejde rozumně pokrýt výběrem.
+
+Když u pole nedokážeš napsat větu „bez této informace nemůžeme udělat další krok, protože…“, pole smaž. Formulář není špajz na budoucí nápady.
+
+Příklad jednoduchého B2B kontaktního formuláře:
+
+| Pole | Povinné? | Důvod |
+| --- | --- | --- |
+| Jméno | ano | lidské oslovení v odpovědi |
+| E-mail | ano | kam poslat odpověď |
+| Firma | ne | lepší kontext, ale neblokuje kontakt |
+| Co řešíte? | ano | kvalifikace problému bez dlouhého dotazníku |
+| Chci newsletter | ne | samostatný souhlas, oddělený od poptávky |
+
+### 13.2 Souhlas není univerzální lepidlo
+
+Souhlas se často používá jako kouzelná náplast na všechno. Není. Pro některé zpracování může existovat jiný právní základ, například plnění smlouvy nebo oprávněný zájem; u marketingových e-mailů, profilování nebo nepovinných cookies je ale potřeba být obzvlášť opatrný a řešit konkrétní účel i možnost odmítnout.
+
+Dobrá praxe pro souhlas:
+
+- nepředzaškrtávej políčka,
+- nespojuj souhlas s newsletterem a odesláním poptávky do jedné věty,
+- napiš jasně, k čemu souhlas slouží,
+- uveď, jak ho lze odvolat,
+- neblokuj základní službu souhlasem, který pro ni není nutný,
+- ukládej pouze důkaz, který potřebuješ: čas, verzi textu souhlasu a zdroj.
+
+Špatně:
+
+> Odesláním formuláře souhlasíte se vším, co nás kdy napadne.
+
+Lépe:
+
+> Souhlasím se zasíláním praktických tipů od Dreamindu e-mailem. Souhlas můžu kdykoli odvolat odkazem v každém e-mailu.
+
+Ještě lépe: vedle toho jasně řekni, že samotná odpověď na poptávku newsletter nevyžaduje.
+
+*Codyho komentář:* když musí být text souhlasu napsaný právničtinou tak hustou, že by v ní uvízla i ponorka, produkt tím nezískává důvěru. Jen přenáší úzkost na uživatele.
+
+### 13.3 Konverze bez profilování jednotlivců
+
+Měřit formuláře jde i bez toho, aby sis stavěl soukromý detektivní seriál o každém návštěvníkovi. Pro většinu malých týmů stačí agregované odpovědi na tři otázky:
+
+1. Kolik lidí formulář zobrazilo?
+2. Kolik lidí ho odeslalo?
+3. Ze kterých obsahových nebo kampanových vstupů chodí nejkvalitnější poptávky?
+
+Privacy-first měření formuláře může vypadat takto:
+
+- měř event `contact_form_view` bez osobních údajů,
+- měř event `contact_form_submit` bez obsahu zprávy,
+- ukládej UTM parametry jen v rozumné podobě a jen pro vyhodnocení kampaně,
+- nespojuj analytiku s CRM profilem, pokud k tomu nemáš jasný důvod,
+- neodesílej obsah formuláře do externích reklamních systémů,
+- pravidelně maž testovací a spamové záznamy.
+
+Příklad rozhodnutí:
+
+| Otázka | Privacy-first odpověď |
+| --- | --- |
+| Potřebujeme vědět, kdo formulář opustil? | Ne, stačí agregovaná míra dokončení. |
+| Potřebujeme nahrávat session replay? | Ne jako výchozí stav; nejdřív oprav zjevné UX problémy. |
+| Potřebujeme posílat lead do reklamní platformy? | Ne, pokud cílem není placený remarketing a uživatel k tomu nedal jasný souhlas. |
+| Potřebujeme uložit IP adresu u poptávky? | Jen pokud existuje konkrétní bezpečnostní nebo právní důvod. |
+
+### 13.4 Malý formulářový playbook pro SaaS
+
+Pro SaaS produkt typicky existují tři formulářové scénáře: registrace, kontakt na obchod a podpora. Každý má jiný účel a neměl by se tvářit jako stejný trychtýř.
+
+**Registrace:**
+
+- chtěj e-mail a heslo, případně magic link,
+- profilové údaje doplň až ve chvíli, kdy pomáhají aktivaci,
+- vysvětli, proč je účet potřeba,
+- po registraci ukaž první konkrétní krok, ne prázdný dashboard.
+
+**Kontakt na obchod:**
+
+- ptej se na problém, ne jen na velikost firmy,
+- nabídni alternativu: e-mail, kalendář nebo krátký formulář,
+- neslibuj „ozveme se brzy“, napiš konkrétní očekávání,
+- odděl obchodní kontakt od newsletteru.
+
+**Podpora:**
+
+- předvyplň údaje, které už o přihlášeném uživateli máš,
+- nechtěj opakovaně informace, které jsou v účtu,
+- umožni přiložit screenshot nebo popsat kroky k reprodukci,
+- po odeslání ukaž číslo požadavku nebo jasný další krok.
+
+Mini šablona potvrzení po odeslání:
+
+> Díky, zpráva dorazila. Odpovíme nejpozději do jednoho pracovního dne. Poslali jsme ti kopii na e-mail. Pokud chceš doplnit detail, odpověz přímo na potvrzovací zprávu.
+
+Tohle je drobnost, ale snižuje nejistotu. A nejistota je konverzní daň, kterou si týmy často účtují samy sobě.
+
+### 13.5 Checklist formuláře před spuštěním
+
+- [ ] Každé pole má napsaný konkrétní účel.
+- [ ] Povinná jsou jen pole nutná pro další krok.
+- [ ] Newsletter nebo marketingový souhlas je oddělený od hlavního formuláře.
+- [ ] Text souhlasu je konkrétní, srozumitelný a není předzaškrtnutý.
+- [ ] Uživatel vidí, co se stane po odeslání a kdy může čekat reakci.
+- [ ] Analytika měří agregované odeslání, ne obsah zprávy.
+- [ ] Data z formuláře nejdou do reklamních systémů bez jasného důvodu a souhlasu.
+- [ ] Spam ochrana neblokuje běžné uživatele a nepřidává zbytečný externí tracking.
+- [ ] Retence poptávek je omezená: staré leady nejsou archiv sentimentu navždy.
+- [ ] Privacy informace jsou dostupné u formuláře nebo jedním jasným odkazem.
+
+## 14. Zdroje a pracovní log jako součást produktu
 
 E-book, dokumentace, privacy stránka i interní playbook mají jednu společnou vlastnost: když je nikdo neudržuje, pomalu se mění v muzeum dobrých úmyslů. V malém týmu je proto lepší mít méně dokumentů, ale takové, které se opravdu používají při rozhodování.
 
 Tahle kapitola je krátká provozní brzda. Neřeší další velkou strategii. Řeší, jak udržet doporučení, odkazy, checklisty a změny živé, ověřitelné a praktické.
 
-### 13.1 Každý zdroj musí mít důvod
+### 14.1 Každý zdroj musí mít důvod
 
 Odkaz v textu není dekorace. Má čtenáři říct: „Tady je původ tvrzení, můžeš si ho ověřit.“ Pokud zdroj nedokážeš přiřadit ke konkrétní větě, doporučení nebo povinnosti, zvaž, jestli v e-booku vůbec má být.
 
@@ -1462,7 +1591,7 @@ Nejlépe:
 
 > Pokud se opíráš o souhlas, ověř, že splňuje požadavky na svobodný, konkrétní, informovaný a jednoznačný projev vůle podle pokynů EDPB ke consentu: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
 
-### 13.2 Jak aktualizovat e-book bez chaosu
+### 14.2 Jak aktualizovat e-book bez chaosu
 
 E-book se má vyvíjet stejně jako produkt: malými dokončenými změnami. Jedna iterace má mít jasný rozsah a viditelný výsledek. Přidat jednu užitečnou podkapitolu je lepší než rozepsat pět sekcí a nechat v nich poznámky typu „TODO: doplnit magii“.
 
@@ -1477,7 +1606,7 @@ Vzor jedné dobré iterace:
 
 Takový rytmus pomáhá i marketingu. Když má e-book jasný pracovní log, můžeš z něj později vytáhnout články, interní checklisty, onboarding materiály nebo lead magnet bez toho, aby někdo dva dny pátral, co se vlastně změnilo.
 
-### 13.3 Pracovní log není formalita
+### 14.3 Pracovní log není formalita
 
 Pracovní log má odpovědět na otázku: „Co se od minule zlepšilo?“ Ne na otázku: „Kolik slov jsme dnes vyprodukovali, aby tabulka vypadala spokojeně?“
 
@@ -1491,7 +1620,7 @@ Dobrá položka logu:
 
 Příklady:
 
-- `2026-09-21: Doplněna kapitola 13.1–13.5 o správě zdrojů, pracovním logu a údržbě e-booku.`
+- `2026-09-21: Doplněna kapitola 14.1–14.5 o správě zdrojů, pracovním logu a údržbě e-booku.`
 - `2026-09-21: Aktualizován odkaz na WCAG 2.2 a doplněn checklist přístupnosti pro formuláře.`
 
 Horší položka:
@@ -1500,7 +1629,7 @@ Horší položka:
 
 To je logovací ekvivalent cedule „tady někde je problém“. Díky, detektive.
 
-### 13.4 Mini redakční checklist
+### 14.4 Mini redakční checklist
 
 Před každým commitem projdi krátký redakční checklist:
 
@@ -1512,7 +1641,7 @@ Před každým commitem projdi krátký redakční checklist:
 - [ ] Nový text nenutí čtenáře kupovat nástroj, když stačí jednodušší proces.
 - [ ] Pracovní log popisuje skutečně dokončenou iteraci.
 
-### 13.5 Jak z e-booku těžit další výstupy
+### 14.5 Jak z e-booku těžit další výstupy
 
 Hotový e-book nemá zůstat zamčený jako PDF, které někdo stáhne a už nikdy neotevře. Ber ho jako zdrojový materiál pro opakované použití.
 
@@ -1541,6 +1670,8 @@ Privacy-first distribuce znamená: publikuj primárně na vlastním webu, nabíd
 - W3C: Web Content Accessibility Guidelines (WCAG) 2.2 — https://www.w3.org/TR/wcag/
 - Google Search Central: SEO Starter Guide — https://developers.google.com/search/docs/fundamentals/seo-starter-guide
 - Google Search Central: Creating helpful, reliable, people-first content — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+- Evropská komise: ePrivacy Directive — https://digital-strategy.ec.europa.eu/en/policies/eprivacy-directive
+- EUR-Lex: Directive 2002/58/EC on privacy and electronic communications — https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32002L0058
 
 - Evropská komise: obligations when processing data — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en
 - European Data Protection Board: Guidelines 07/2020 on controller and processor concepts — https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
@@ -1551,7 +1682,8 @@ Privacy-first distribuce znamená: publikuj primárně na vlastním webu, nabíd
 
 ## Pracovní log
 
-- 2026-09-21: Doplněna kapitola 13.1–13.5 o správě zdrojů, aktualizaci e-booku, pracovním logu, redakčním checklistu a využití obsahu pro další výstupy.
+- 2026-09-21: Doplněna kapitola 13.1–13.5 o konverzních formulářích, souhlasu, newsletterech a privacy-first měření bez profilování jednotlivců.
+- 2026-09-21: Doplněna kapitola 14.1–14.5 o správě zdrojů, aktualizaci e-booku, pracovním logu, redakčním checklistu a využití obsahu pro další výstupy.
 - 2026-09-21: Doplněna kapitola 12.1–12.6 o provozní odolnosti, zálohách, incident response kartě, komunikaci při výpadku a kvartálním cvičení.
 - 2026-09-21: Doplněna kapitola 11.1–11.5 o privacy-first metrikách, jednoduchém dashboardu, eventech bez šmírování a týdenní interpretaci dat.
 - 2026-09-21: Doplněna příloha 10.5 se šablonou datové mapy pro formuláře, účty, analytiku, logy, fakturaci, podporu a newsletter.
