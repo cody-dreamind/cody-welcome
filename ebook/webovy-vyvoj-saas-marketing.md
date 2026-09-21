@@ -969,6 +969,108 @@ Výstup rituálu má být směšně krátký:
 *Codyho komentář:* dobrý proces poznáš podle toho, že po něm zbude méně nejistoty, ne více dokumentů. Pokud rituál generuje jen další rituály, gratuluji, právě jste vynalezli byrokratické perpetuum mobile.
 
 
+## 9. Jak z e-booku udělat živý systém
+
+E-book je užitečný jen tehdy, když podle něj někdo něco změní. Pokud skončí jako hezký Markdown v repozitáři, je to pořád lepší než powerpoint ve sdíleném disku, ale jen o kousek. Cílem není „mít přečteno“. Cílem je mít lepší web, jasnější produkt, méně zbytečných dat a marketing, který dokáže fungovat i bez sledovacího cirkusu.
+
+Praktický způsob použití je jednoduchý: z každé kapitoly si vezmi jeden výstup, který jde zkontrolovat. Ne pocit. Ne „budeme se tím zabývat“. Konkrétní artefakt.
+
+Příklad:
+
+- Z kapitoly 1 vznikne jedna věta hodnoty a seznam cílových segmentů.
+- Z kapitoly 2 vznikne technický audit webu a seznam blokujících oprav.
+- Z kapitoly 3 vznikne aktivační metrika a checklist onboardingu.
+- Z kapitoly 4 vznikne obsahový plán a jednoduchá UTM disciplína.
+- Z kapitoly 5 vznikne datová mapa a seznam dodavatelů.
+- Z kapitoly 6 vznikne rozhodovací log a týdenní rytmus.
+- Z kapitoly 7 vznikne 30denní plán.
+- Z kapitoly 8 vzniknou opakovatelné auditní šablony.
+
+Když má kapitola výstup, dá se použít. Když má jen inspiraci, dá se maximálně sdílet ve Slacku s komentářem „tohle je zajímavé“ — a pak na to všichni zapomenou, protože přišel další požár.
+
+### 9.1 Rozhodovací tabule: jeden přehled pro celý tým
+
+Vytvoř si jednoduchou tabuli s pěti sloupci:
+
+| Oblast | Aktuální stav | Největší riziko | Další krok | Vlastník |
+| --- | --- | --- | --- | --- |
+| Nabídka |  |  |  |  |
+| Web |  |  |  |  |
+| Produkt |  |  |  |  |
+| Marketing |  |  |  |  |
+| Data a privacy |  |  |  |  |
+| Provoz týmu |  |  |  |  |
+
+Pravidlo: každý řádek má mít právě jeden další krok. Pokud máš tři další kroky, nemáš plán, ale frontu přání. Vyber ten, který nejvíc sníží riziko nebo nejrychleji přinese jasnější signál od zákazníků.
+
+Dobrý další krok:
+
+- „Přepsat hero blok homepage podle segmentu účetních kanceláří.“
+- „Odstranit nepoužívaný analytický skript a ověřit, že měříme jen pageview a konverzi.“
+- „Doplnit do onboardingu ukázkový projekt, aby uživatel viděl hodnotu do pěti minut.“
+
+Slabý další krok:
+
+- „Zlepšit web.“
+- „Vyřešit marketing.“
+- „Podívat se na GDPR.“
+
+To nejsou úkoly. To jsou mlžné útvary s ambicí stát se stresem.
+
+### 9.2 Měř méně věcí, ale používej je při rozhodování
+
+Privacy-first přístup neznamená, že neměříš nic. Znamená, že neměříš věci jen proto, že to nástroj umí. Každá metrika má projít otázkou: „Jaké rozhodnutí podle ní uděláme?“ Pokud odpověď neexistuje, metrika je dekorace.
+
+Minimální sada pro malý web nebo SaaS:
+
+- **Návštěvy důležitých stránek** — homepage, ceník, demo, obsahové články.
+- **Konverzní akce** — odeslání poptávky, registrace, rezervace dema, stažení checklistu.
+- **Aktivace v produktu** — první akce, která uživateli ukáže hodnotu.
+- **Kvalitativní signály** — odpovědi zákazníků, důvody odmítnutí, otázky z podpory.
+- **Provozní zdraví** — chyby, dostupnost, incidenty, čas reakce.
+
+Ke každé metrice napiš jednu větu:
+
+> Když se tato metrika změní, uděláme **[konkrétní rozhodnutí]**.
+
+Příklad: „Když návštěvnost ceníku roste, ale poptávky ne, zkontrolujeme jasnost nabídky, CTA a očekávání kolem ceny.“ To je použitelné. „Chceme víc návštěv“ je jen hladový algoritmus převlečený za strategii.
+
+### 9.3 Privacy-first kontrola před každou novou funkcí
+
+Před každou funkcí, integrací nebo kampaní si dej pětiminutovou kontrolu:
+
+1. Jaká osobní nebo provozní data kvůli tomu vzniknou?
+2. Potřebujeme je opravdu, nebo by stačil agregát či anonymnější signál?
+3. Kde data fyzicky a smluvně skončí?
+4. Kdo k nim bude mít přístup?
+5. Jak dlouho je budeme držet a jak je smažeme?
+6. Umíme to vysvětlit zákazníkovi lidskou větou?
+
+Pokud se tým zasekne už u třetí otázky, není to selhání. Je to přesně důvod, proč kontrola existuje. Levnější je zastavit rizikovou integraci před spuštěním než později rozmotávat, proč se kontakty zákazníků objevily ve třech nástrojích, dvou exportech a jednom „dočasném“ spreadsheetu z loňska.
+
+### 9.4 Měsíční revize: co ponechat, zlepšit a smazat
+
+Jednou měsíčně projdi e-book jako provozní manuál, ne jako knihu. Vezmi poslední rozhodovací tabuli a označ:
+
+- **Ponechat:** funguje, má vlastníka, přináší signál nebo hodnotu.
+- **Zlepšit:** dává smysl, ale je slabé místo v textu, procesu nebo měření.
+- **Smazat:** nepoužívá se, nikdo podle toho nerozhoduje, nebo to zvyšuje riziko.
+
+Mazání je podceňovaná produktová disciplína. Každý nepoužívaný formulář, starý skript, prázdná landing page nebo zapomenutý export dat je malý dluh. Jeden nevadí. Dvacet už je sklep plný krabic, ve kterém někdo jednou hledá fakturu a najde bezpečnostní incident.
+
+### 9.5 Checklist živého systému
+
+- Má každá kapitola jeden konkrétní výstup?
+- Existuje jedna tabule s oblastí, rizikem, dalším krokem a vlastníkem?
+- Ví tým, které metriky používá k rozhodování a které jen sleduje ze zvyku?
+- Prochází každá nová integrace privacy-first kontrolou?
+- Má datová mapa vlastníka a pravidelnou revizi?
+- Umíme během 30 minut říct, co tento měsíc ponecháme, zlepšíme a smažeme?
+- Je další krok tak malý, že ho někdo opravdu dokončí tento týden?
+
+*Codyho komentář:* největší konkurenční výhoda malého týmu není nekonečný backlog. Je to schopnost rychle pochopit realitu, udělat rozumné rozhodnutí a nenechat za sebou datový bordel. Elegantní? Ano. Trochu nudné? Taky. Ale nudný provoz je přesně ten druh magie, který zákazníci milují, protože se nerozbíjí v pátek večer.
+
+
 ## Zdroje
 
 - Evropská komise: principy GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -988,6 +1090,7 @@ Výstup rituálu má být směšně krátký:
 
 ## Pracovní log
 
+- 2026-09-21: Doplněna kapitola 9.1–9.5 o tom, jak z e-booku udělat živý provozní systém s rozhodovací tabulí, měřením, privacy kontrolou a měsíční revizí.
 - 2026-09-21: Doplněna kapitola 8.1–8.5 s opakovatelnými auditními šablonami pro homepage, SaaS onboarding, marketing, privacy-first provoz a týdenní rituál.
 - 2026-09-21: Doplněna kapitola 7.1–7.5 s praktickým 30denním plánem zavedení doporučení z e-booku do webu, SaaS produktu, marketingu a provozu.
 - 2026-09-21: Doplněna kapitola 6.1–6.5 o produktivitě malého týmu, rozhodovacím logu, backlogu, týdenním rytmu a bezpečné automatizaci.
