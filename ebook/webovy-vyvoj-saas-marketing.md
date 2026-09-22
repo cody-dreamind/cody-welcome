@@ -362,6 +362,249 @@ Moderní web není ten, který má nejvíc technologií. Moderní web je ten, kt
 
 ---
 
+# 3. SaaS produkt: od první verze k provozu, který neshoří
+
+SaaS není jen aplikace v prohlížeči s měsíční platbou. Je to závazek, že produkt bude dostupný, srozumitelný, bezpečný, obnovitelný a dlouhodobě udržitelný. První verze nemusí mít všechno. Musí ale mít jasnou hodnotu, férový onboarding, základní provozní disciplínu a plán, co se stane, když se něco pokazí.
+
+Největší chyba malých SaaS týmů není málo funkcí. Největší chyba je, že si spletou „rychle vydat“ s „nemít žádný provozní systém“. MVP bez logů, záloh, jasného vlastníka incidentů a jednoduchého procesu podpory není štíhlé. Je to loterie v mikině.
+
+> Codyho komentář: Pokud produkt vydělává peníze i ve chvíli, kdy spíš, gratuluji — máš SaaS. Pokud se ale při každém erroru musíš probudit, ručně hledat logy a modlit se k databázi, máš spíš digitální tamagoči.
+
+## První verze: jedna bolest, jeden slib, jeden úspěch
+
+První verze SaaS má řešit jeden konkrétní problém pro jeden jasný typ zákazníka. Ne „platformu pro všechno“. Platforma vzniká až po opakovaném důkazu, že lidé platí za jádro problému.
+
+Dobrá věta pro MVP:
+
+```text
+Produkt pomáhá [konkrétní roli] udělat [konkrétní práci] bez [největší frustrace] a úspěch poznáme podle [měřitelný výsledek].
+```
+
+Příklad:
+
+```text
+Produkt pomáhá malým agenturám schvalovat texty s klientem bez chaosu v e-mailech a úspěch poznáme podle toho, že klient schválí první výstup bez ručního dohledávání verzí.
+```
+
+Do první verze patří:
+
+- jeden primární workflow,
+- jedno jasné nastavení účtu nebo workspace,
+- jednoduché pozvání kolegy nebo klienta, pokud je spolupráce součást hodnoty,
+- férový onboarding bez povinného sales divadla,
+- ruční fallback pro podporu, import nebo opravu dat.
+
+Do první verze obvykle nepatří:
+
+- složitý marketplace,
+- pět cenových plánů,
+- vlastní no-code builder,
+- pokročilá role-based administrace pro hypotetický enterprise,
+- dashboard s dvaceti grafy, které nikdo neumí použít.
+
+Jednoduchý test: kdyby ses měl za první verzi stydět před investorem, ale nebál ses ji dát deseti skutečným zákazníkům, jsi pravděpodobně blízko správnému rozsahu. Investor chce příběh. Zákazník chce ušetřit nervy.
+
+## Architektura pro malý tým
+
+Malý tým potřebuje architekturu, která se dá pochopit, nasadit a obnovit. Ne architekturu, která dobře vypadá na konferenčním diagramu. První technické rozhodnutí proto není „microservices nebo monolit“. Je to „kdo bude schopný opravit problém v pátek večer bez archeologického výkopu?“
+
+Praktická výchozí volba:
+
+- modulární monolit nebo malý počet služeb,
+- jedna primární databáze,
+- jasné hranice pro zákaznická data,
+- automatizované migrace databáze,
+- jednoduchý staging,
+- opakovatelné nasazení z Git repozitáře,
+- infrastruktura popsaná alespoň natolik, aby šla znovu vytvořit.
+
+Kdy oddělovat službu:
+
+- má jiný bezpečnostní profil,
+- má výrazně jiný výkonový režim,
+- musí běžet nezávisle při výpadku hlavní aplikace,
+- má jiný tým nebo jasného vlastníka,
+- její selhání nesmí shodit hlavní produkt.
+
+Kdy službu neoddělovat:
+
+- jen proto, že „to tak dělají velcí hráči“,
+- když nemáš monitoring ani pro současnou aplikaci,
+- když neumíš popsat hranici dat,
+- když by nasazení nové verze vyžadovalo ruční choreografii přes tři terminály.
+
+Privacy-first dopad: čím víc služeb a externích integrací, tím víc míst, kde mohou skončit zákaznická data. U každé hranice si napiš, co přes ni teče. Ne až při auditu. Hned.
+
+## Onboarding bez nátlaku
+
+Onboarding není série modálních oken, která uživateli vysvětlí, že produkt je údajně jednoduchý. Dobrý onboarding dovede člověka k první hodnotě co nejkratší cestou.
+
+Měř první hodnotu, ne jen registraci. U různých SaaS produktů to může být:
+
+- první vytvořený projekt,
+- první pozvaný klient,
+- první importovaný dokument,
+- první publikovaná stránka,
+- první automatizace, která skutečně doběhla,
+- první úspěšně odeslaný report.
+
+Příklad aktivace:
+
+```text
+Registrace dokončena: účet existuje.
+Aktivace dokončena: uživatel vytvořil první projekt, pozval klienta a klient otevřel odkaz.
+```
+
+To druhé je důležitější. Registrace je administrativní událost. Aktivace je důkaz hodnoty.
+
+Privacy-first onboarding:
+
+- neptej se na údaje, které nepotřebuješ před první hodnotou,
+- dovol přeskočit nepovinné kroky,
+- vysvětli, proč chceš název firmy, telefon nebo fakturační údaje,
+- neposílej produktová data do marketingových nástrojů,
+- nabídni export dat už od začátku, i kdyby byl jednoduchý.
+
+Dobrá onboardingová obrazovka říká: „Tady je další krok a proč se vyplatí.“ Špatná říká: „Vyplň ještě sedm polí, protože náš CRM démon má hlad.“
+
+## Platby, fakturace a hranice vlastních sil
+
+Platby vypadají jako detail, dokud neřešíš první reklamaci, dobropis nebo neúspěšné obnovení předplatného. U evropského SaaS je rozumné rozhodnout brzy, co budeš dělat sám a co svěříš specializované službě.
+
+Rozhodovací otázky:
+
+- Potřebuješ jednorázové platby, předplatné, nebo obojí?
+- Prodáváš firmám, spotřebitelům, nebo mixu?
+- Budeš řešit DPH v různých zemích?
+- Má zákazník dostat fakturu automaticky?
+- Co se stane při selhání platby?
+- Jak rychle umíš zablokovat, obnovit nebo ručně upravit účet?
+
+Pro první verzi často stačí méně automatizace a více jasnosti. Ručně vyřešená faktura pro prvních deset B2B zákazníků může být lepší než tři týdny vývoje elegantního fakturačního labyrintu. Ale ruční proces musí být zapsaný. Jinak se z něj stane folklór.
+
+Šablona pro platební rozhodnutí:
+
+```text
+Typ zákazníka:
+Typ platby:
+Kdo vystavuje fakturu:
+Co se děje při neúspěšné platbě:
+Kdy se omezuje přístup:
+Jak zákazník získá historii faktur:
+Jak řešíme refundaci:
+Kde končí platební data:
+Kdo má přístup do platebního systému:
+```
+
+Nejcitlivější pravidlo: neukládej platební údaje sám, pokud k tomu nemáš opravdu dobrý důvod a odpovídající bezpečnostní proces. Tokenizace a specializovaný poskytovatel plateb nejsou slabost. Jsou zdravý respekt k riziku.
+
+## Bezpečnost jako součást produktu
+
+Bezpečnost není jednorázový audit před větším zákazníkem. Je to vlastnost produktu, která se skládá z malých rozhodnutí: jak se přihlašuje, co se loguje, kdo vidí data, jak se testují změny a jak rychle umíš reagovat.
+
+OWASP ASVS popisuje ověřitelné bezpečnostní požadavky pro webové aplikace a služby a dá se použít jako praktický checklist pro vývoj i testování ([OWASP: Application Security Verification Standard](https://owasp.org/projects/asvs)). NIST ve své řadě Digital Identity Guidelines řeší mimo jiné autentizaci, správu autentizátorů a federaci identit; revize 4 byla publikována jako novější verze těchto doporučení ([NIST: SP 800-63 Digital Identity Guidelines](https://www.nist.gov/identity-access-management/projects/nist-special-publication-800-63-digital-identity-guidelines)). Pro malý SaaS z toho neplyne povinnost kopírovat všechno, ale dobrý směr: přihlašování a správa účtů nejsou místo pro kreativní improvizaci.
+
+Minimum pro první placenou verzi:
+
+- hashování hesel moderním algoritmem a bezpečná resetovací flow,
+- možnost MFA alespoň pro administrátory a citlivé účty,
+- oddělení běžných uživatelů od administrace,
+- auditní záznamy pro kritické akce,
+- ochrana proti běžným chybám typu XSS, CSRF a injekce,
+- bezpečné session cookies,
+- rate limiting na přihlášení a citlivé endpointy,
+- žádné tajné klíče v repozitáři,
+- pravidelná aktualizace závislostí.
+
+Privacy-first bezpečnostní detail: logy nesmí být skládka osobních údajů. Loguj identifikátor události, typ chyby, technický kontext a korelační ID. Neloguj celé formuláře, přístupové tokeny, hesla, platební údaje ani obsah zákaznických dokumentů. Debug režim v produkci je jako otevřená lednice v létě — chvíli to vypadá pohodlně, pak to začne smrdět.
+
+## Zálohy, export a obnova
+
+Záloha není hotová ve chvíli, kdy někde existuje soubor. Záloha je hotová ve chvíli, kdy jsi ověřil obnovu. ENISA ve svém průvodci cloudovou bezpečností pro malé a střední firmy upozorňuje na rizika spojená s cloudem včetně dostupnosti, závislosti na poskytovateli a ztráty dat ([ENISA: Cloud Security Guide for SMEs](https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes)). Pro SaaS je to velmi praktické: zákazníka nezajímá, že „backup job běžel“. Zajímá ho, jestli dostane data zpátky.
+
+Základní provozní pravidla:
+
+- zálohuj databázi automaticky,
+- zálohuj také soubory a objektové úložiště,
+- drž kopii mimo hlavní produkční účet,
+- šifruj zálohy,
+- testuj obnovu v pravidelném intervalu,
+- dokumentuj čas obnovy a maximální možnou ztrátu dat,
+- umožni zákazníkovi export vlastních dat v použitelném formátu.
+
+Mini slovník pro rozhodování:
+
+- **RPO**: kolik dat si můžeš dovolit ztratit, například posledních 15 minut nebo poslední den.
+- **RTO**: jak rychle musí být služba zpět, například do 2 hodin.
+- **Restore test**: praktická zkouška, že ze zálohy opravdu vznikne funkční prostředí.
+
+Pro první verzi si napiš realistické hodnoty. Neslibuj enterprise dostupnost, pokud máš jeden server, jeden databázový účet a monitoring složený z nervózního pohledu do terminálu. Férovost je lepší než marketingový cosplay.
+
+## Podpora, incidenty a lidský tón
+
+SaaS provoz není jen kód. Je to i komunikace, když něco nefunguje. Malý tým nepotřebuje hned veřejný status page s orchestriálním logem. Potřebuje vědět, kdo odpovídá, kde se problém zapisuje a jak zákazník dostane pravdivou informaci.
+
+Jednoduchý incident postup:
+
+1. Potvrď problém a rozsah.
+2. Zastav zhoršování situace.
+3. Informuj dotčené zákazníky jednoduchou větou.
+4. Oprav nebo obejdi problém.
+5. Zapiš příčinu a prevenci.
+6. Zkontroluj, jestli incident neznamená bezpečnostní nebo právní povinnost.
+
+Příklad zprávy zákazníkovi:
+
+```text
+Dnes mezi 10:20 a 10:47 nebylo možné vytvořit nový projekt. Existující projekty byly dostupné. Problém jsme opravili a přidali kontrolu migrací před nasazením. Pokud se vám akce nezdařila, zkuste ji prosím znovu; data z rozpracovaných projektů nebyla ztracena.
+```
+
+Tohle je lepší než „někteří uživatelé mohli zaznamenat degradovanou zkušenost“. Lidé nejsou monitorovací sondy. Řekni, co se stalo, kdy, koho se to týkalo a co mají udělat.
+
+## Checklist: první provozuschopná verze SaaS
+
+- [ ] Umíme jednou větou popsat primární práci produktu?
+- [ ] Má první verze jeden jasný workflow k první hodnotě?
+- [ ] Víme, která data zákazníka ukládáme a proč?
+- [ ] Máme staging a opakovatelné nasazení?
+- [ ] Máme automatické zálohy a alespoň jeden test obnovy?
+- [ ] Umíme exportovat zákaznická data?
+- [ ] Máme základní monitoring dostupnosti a chyb?
+- [ ] Máme bezpečné přihlášení, reset hesla a pravidla pro administrátory?
+- [ ] Neobsahují logy citlivý obsah ani tajné klíče?
+- [ ] Máme popsaný postup pro incident a podporu?
+- [ ] Je jasné, které externí služby dostávají data a kde je zpracují?
+- [ ] Umíme ručně vyřešit platbu, refundaci nebo obnovu účtu?
+
+## Mini šablona provozního listu
+
+Použij pro každý SaaS produkt ještě před prvními platícími zákazníky.
+
+```text
+Název produktu:
+Primární zákazník:
+První hodnota v produktu:
+Kritické workflow:
+Kritická data:
+Hlavní databáze:
+Soubory a přílohy:
+Zálohování:
+Poslední test obnovy:
+RPO:
+RTO:
+Monitoring:
+Kdo řeší incident:
+Kdo komunikuje se zákazníky:
+Externí služby s přístupem k datům:
+Export dat:
+Největší známé riziko:
+Další provozní zlepšení:
+```
+
+První SaaS verze nemusí být dokonalá. Musí být poctivá. Když zákazník svěří produktu práci, data a peníze, zaslouží si víc než hezké UI. Zaslouží si systém, který má brzdy, zrcátka, servisní plán a řidiče, který se nedívá jen na počet registrací.
+
+---
+
 # 5. Privacy-first analytika a experimenty
 
 Analytika má odpovídat na otázky, ne sbírat digitální otisky pro případ, že se jednou budou hodit. U malého webu nebo SaaS produktu většinou nepotřebuješ znát „všechno o každém“. Potřebuješ vědět, jestli lidé najdou hodnotu, kde se zaseknou a která změna reálně pomohla.
@@ -550,6 +793,9 @@ Privacy-first neznamená slepý provoz. Znamená to mít dost dat pro dobré roz
 - European Data Protection Board: [Legal basis](https://www.edpb.europa.eu/topics/key-gdpr-concepts/legal-basis_en)
 - European Data Protection Board: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en)
 - CNIL: [Sheet n°16: Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
+- OWASP: [Application Security Verification Standard](https://owasp.org/projects/asvs)
+- NIST: [SP 800-63 Digital Identity Guidelines](https://www.nist.gov/identity-access-management/projects/nist-special-publication-800-63-digital-identity-guidelines)
+- ENISA: [Cloud Security Guide for SMEs](https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes)
 - MDN Web Docs: [How to structure a web form](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/How_to_structure_a_web_form)
 - web.dev: [Core Web Vitals](https://web.dev/articles/vitals)
 
@@ -557,6 +803,7 @@ Privacy-first neznamená slepý provoz. Znamená to mít dost dat pro dobré roz
 
 # Pracovní log
 
+- 2026-09-22: Dopsána kapitola „SaaS produkt: od první verze k provozu, který neshoří“ s důrazem na MVP rozsah, onboarding, bezpečnost, zálohy, incidenty a provozní checklist.
 - 2026-09-22: Dopsána kapitola „Základy moderního webového vývoje pro podnikatele“ se zaměřením na architekturu podle rizika, semantické HTML, výkon, formuláře, externí skripty, přístupnost a technický checklist.
 - 2026-09-22: Dopsána kapitola „Strategie webu“ s praktickým modelem rozhodnutí návštěvníka, privacy-first pravidly, checklistem a šablonou strategického zadání.
 - 2026-09-22: Založena plnohodnotná struktura e-booku po zjištění, že soubor obsahoval jen placeholder; dopsána kapitola „Privacy-first analytika a experimenty“ včetně checklistu, šablony datové mapy a ověřených zdrojů.
