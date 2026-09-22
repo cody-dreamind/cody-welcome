@@ -840,6 +840,49 @@ Francouzský úřad CNIL uvádí, že cookies pro měření návštěvnosti moho
 
 > Codyho komentář: Pokud má analytika vlastní marketingové oddělení, vlastní reklamní síť a vlastní chuť propojovat data napříč internetem, není to měření návštěvnosti. Je to hladový vysavač v kravatě.
 
+## Cookie lišta bez temných vzorů
+
+Nejlepší cookie lišta je ta, kterou vůbec nepotřebuješ. Pokud web používá jen technické cookies nutné pro provoz, přihlášení, bezpečnost nebo uložení rozpracovaného formuláře, řeš hlavně srozumitelnou informaci v patičce a privacy policy. ÚOOÚ ve svých otázkách a odpovědích k cookies rozlišuje technické cookies od netechnických cookies pro sledování návštěvnosti, preference nebo marketing; u čistě technických cookies podle něj není nutné zavádět cookie lištu, ale informační povinnost zůstává ([ÚOOÚ: Cookies — otázky a odpovědi](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies)).
+
+Jakmile přidáš netechnické měření, reklamní pixel, remarketing, embedded obsah s vlastním sledováním nebo nástroj, který ukládá identifikátor do zařízení návštěvníka, vstupuješ do režimu souhlasu. Český ÚOOÚ k principu opt-in uvádí, že technické cookies jsou výjimka, ale u ostatních cookies musí mít uživatel možnost souhlas jednoduše odmítnout nebo odvolat bez újmy ([ÚOOÚ: Cookies od začátku roku 2022 pouze se souhlasem](https://uoou.gov.cz/media-publikace/tiskove-zpravy/cookies-od-zacatku-roku-2022-pouze-se-souhlasem)). EDPB ve zprávě Cookie Banner Taskforce zároveň upozorňuje na problematické praktiky jako chybějící odmítnutí ve stejné vrstvě, předem zaškrtnuté volby nebo design, který člověka tlačí k přijetí ([EDPB: Cookie Banner Taskforce report](https://www.edpb.europa.eu/documents/task-force-report/report-of-the-work-undertaken-by-the-cookie-banner-taskforce_en)).
+
+Praktický privacy-first postup:
+
+1. Sepiš všechny cookies, localStorage položky a externí skripty.
+2. Označ, které jsou technicky nutné a proč.
+3. U každé netechnické položky napiš účel, poskytovatele, zemi provozu, retenci a právní bázi.
+4. Vyhoď vše, co neumíš obhájit jednou větou.
+5. Teprve potom navrhni lištu — ne obráceně.
+
+Dobrá lišta má být krátká, férová a použitelná:
+
+- tlačítka „Přijmout“ a „Odmítnout“ jsou ve stejné vrstvě,
+- odmítnutí není schované v nastavení ani v odstavci textu,
+- žádné předem zapnuté netechnické kategorie,
+- nastavení kategorií je dostupné bez nátlaku,
+- souhlas jde později změnit stejně snadno,
+- web funguje i bez netechnických cookies.
+
+Špatná lišta říká „Vaše soukromí je pro nás důležité“ a pak nabídne obří zelené tlačítko „Souhlasím“ vedle nenápadného textového odkazu „spravovat možnosti“ někde u zemského jádra. To není respekt. To je UX v kostýmu právního oddělení.
+
+Mini příklad pro B2B web:
+
+```text
+Technické cookies:
+- session_id: udržení formuláře a bezpečnost, platnost relace
+
+Analytika:
+- self-hosted agregované měření bez reklamních identifikátorů
+- účel: pochopit návštěvnost stránek a chyby formulářů
+- retence: 12 měsíců
+- bez propojování s reklamními sítěmi
+
+Marketingové cookies:
+- nepoužíváme
+```
+
+> Codyho komentář: Cookie lišta nemá být test charakteru návštěvníka. Má být férová dohoda: tady je co měříme, tady je proč, a tady je stejně snadné „ne“.
+
 ## Jak navrhnout eventy bez stalkingu
 
 Dobré eventy popisují akci v produktu, ne identitu člověka.
@@ -1950,6 +1993,9 @@ Nejlepší 30denní plán není největší. Je to ten, který přežije kontakt
 - European Data Protection Board: [Legal basis](https://www.edpb.europa.eu/topics/key-gdpr-concepts/legal-basis_en)
 - European Data Protection Board: [Guidelines 07/2020 on the concepts of controller and processor in the GDPR](https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en)
 - European Data Protection Board: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en)
+- European Data Protection Board: [Report of the work undertaken by the Cookie Banner Taskforce](https://www.edpb.europa.eu/documents/task-force-report/report-of-the-work-undertaken-by-the-cookie-banner-taskforce_en)
+- ÚOOÚ: [Cookies — otázky a odpovědi](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies)
+- ÚOOÚ: [Cookies od začátku roku 2022 pouze se souhlasem](https://uoou.gov.cz/media-publikace/tiskove-zpravy/cookies-od-zacatku-roku-2022-pouze-se-souhlasem)
 - CNIL: [Sheet n°16: Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
 - OWASP: [Application Security Verification Standard](https://owasp.org/projects/asvs)
 - NIST: [SP 800-63 Digital Identity Guidelines](https://www.nist.gov/identity-access-management/projects/nist-special-publication-800-63-digital-identity-guidelines)
@@ -1971,6 +2017,7 @@ Nejlepší 30denní plán není největší. Je to ten, který přežije kontakt
 
 # Pracovní log
 
+- 2026-09-22: Rozšířena kapitola o privacy-first analytice o podkapitolu „Cookie lišta bez temných vzorů“ s praktickým postupem inventury cookies, férovým návrhem souhlasu, B2B příkladem a ověřenými zdroji ÚOOÚ a EDPB.
 - 2026-09-22: Přidán závěr e-booku s 30denním plánem zavedení privacy-first webu nebo SaaS, týdenními výstupy, praktickým postupem, checklistem a šablonou plánu.
 - 2026-09-22: Dopsána kapitola „Checklisty, šablony a provozní rutiny“ s týdenní, měsíční a čtvrtletní rutinou, rozhodovacím deníkem, incidentovou mini rutinou a provozní nástěnkou.
 - 2026-09-22: Dopsána kapitola „Evropský provoz: data, hosting, zálohy a smlouvy“ s datovou mapou, výběrem hostingu, DPA/subprocesory, zálohami, přístupy, exit plánem a provozním checklistem.
