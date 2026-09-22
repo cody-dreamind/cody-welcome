@@ -196,6 +196,172 @@ Strategie webu nemusí být padesátistránkový dokument. Stačí jedna dobrá 
 
 ---
 
+# 2. Základy moderního webového vývoje pro podnikatele
+
+Moderní webový vývoj není závod v tom, kdo použije čerstvější framework. Je to disciplína, jak doručit rychlý, srozumitelný, bezpečný a udržovatelný web, který lidem funguje i mimo ideální podmínky. Podnikatel nepotřebuje znát každý detail bundleru. Potřebuje vědět, kde vznikají drahé chyby: v nejasném zadání, přehnané složitosti, slabém obsahu, pomalém načítání, rozbitých formulářích a nekontrolovaném množství externích skriptů.
+
+Základní pravidlo: web má nejdřív fungovat jako dokument, pak jako aplikace. HTML má nést význam, CSS vzhled a JavaScript chování. Když se bez JavaScriptu nezobrazí ani základní text nebo kontakt, není to moderní. Je to křehké.
+
+> Codyho komentář: Framework je skvělý sluha a příšerný náboženský konflikt. Pokud web prodává službu, zákazník nepozná, jestli tlačítko renderoval React, Astro nebo skromný HTML soubor. Pozná, jestli našel odpověď.
+
+## Architektura podle rizika, ne podle ega
+
+Nejdřív si rozděl web na tři typy částí:
+
+1. **Obsahové stránky** — homepage, služby, články, dokumentace, reference.
+2. **Interaktivní části** — kalkulačka, konfigurátor, formulář, klientská zóna.
+3. **Provozní vrstva** — hosting, logy, zálohy, monitoring, formulářové e-maily, analytika.
+
+Každá část si zaslouží jinou míru složitosti. Obsahové stránky mají být co nejvíc statické, rychlé a snadno upravitelné. Interaktivní části mohou používat víc JavaScriptu, ale jen tam, kde přidává hodnotu. Provozní vrstva má být nudná, dokumentovaná a obnovitelná. Nudná infrastruktura je kompliment, ne urážka.
+
+Praktický model rozhodování:
+
+- Pokud stránka hlavně vysvětluje, preferuj statické generování nebo server-side renderování.
+- Pokud uživatel vyplňuje citlivější data, minimalizuj externí skripty a logování.
+- Pokud část webu rozhoduje o tržbách, měj monitoring a ruční fallback.
+- Pokud funkce není kritická, nenech ji blokovat načtení stránky.
+- Pokud nástroj přináší závislost na datech mimo Evropu, napiš si důvod a alternativy.
+
+## Semantické HTML je obchodní výhoda
+
+Semantické HTML není akademická elegance. Pomáhá vyhledávačům, čtečkám obrazovky, automatizacím, AI nástrojům i obyčejným lidem na horším zařízení. MDN u formulářů zdůrazňuje mimo jiné význam správného propojení popisků a polí, aby uživatelé i asistivní technologie chápali, co mají vyplnit ([MDN: How to structure a web form](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/How_to_structure_a_web_form)).
+
+Příklad špatně:
+
+```html
+<div>Telefon</div>
+<input>
+```
+
+Příklad lépe:
+
+```html
+<label for="phone">Telefon</label>
+<input id="phone" name="phone" autocomplete="tel">
+```
+
+Ten rozdíl vypadá malý, ale v praxi rozhoduje o použitelnosti formuláře, kvalitě autofillu a schopnosti testovat web automaticky. U B2B webu je formulář často nejdražší místo celé stránky. Když je rozbitý, všechny kampaně jen rychleji posílají lidi do zdi.
+
+Minimum pro každou důležitou stránku:
+
+- jeden jasný `<h1>` odpovídající obsahu stránky,
+- logická hierarchie nadpisů,
+- skutečné odkazy pro navigaci, ne klikací divy,
+- formulářová pole s `<label>`, `name`, validací a srozumitelnou chybou,
+- textové alternativy u významových obrázků,
+- kontakt dostupný i bez modalu a bez sledovacího skriptu třetí strany.
+
+## Výkon: rychlost je důvěra
+
+Rychlost webu není jen technická metrika. Je to pocit, že firma ví, co dělá. Když se stránka loudá, bliká a po načtení posune tlačítko pod prstem, působí to amatérsky i u krásného designu.
+
+Google ve svých Core Web Vitals používá metriky jako Largest Contentful Paint, Cumulative Layout Shift a Interaction to Next Paint pro hodnocení uživatelské zkušenosti s načítáním, stabilitou a odezvou stránky ([web.dev: Core Web Vitals](https://web.dev/articles/vitals)). Neber to jako posvátný žebříček, ale jako užitečný signál. Podnikatelsky důležitější otázka zní: dostane se člověk rychle k obsahu a může udělat další krok bez frustrace?
+
+Nejčastější brzdy firemních webů:
+
+- obří hero obrázek bez správné velikosti,
+- fonty z několika externích zdrojů,
+- video na pozadí načtené hned při startu,
+- pět analytických a reklamních skriptů,
+- chat widget, který nikdo neobsluhuje,
+- stránka postavená jako aplikace, i když je to katalog služeb.
+
+Praktický výkonový postup:
+
+1. Změř homepage, hlavní službu a kontaktní stránku.
+2. Zkontroluj velikost obrázků a načítání fontů.
+3. Odlož nedůležité skripty až po hlavním obsahu.
+4. Vyhoď nástroje, které nemají vlastníka ani jasný přínos.
+5. Přidej monitoring dostupnosti a chyb formulářů.
+
+Privacy-first bonus: čím méně externích skriptů, tím méně právních otázek, rychlejší web a menší plocha pro poruchy. Krásná trojkombinace. Skoro podezřele rozumné.
+
+## Formuláře: malé workflow, velká odpovědnost
+
+Formulář není jen pár polí. Je to mini produkt. Má vstup, validaci, potvrzení, doručení, logování chyb a následnou akci v týmu. Pokud některý krok není jasný, zákazník to odnese tichem.
+
+Dobrý kontaktní formulář:
+
+- sbírá jen údaje potřebné pro první reakci,
+- vysvětluje, co se stane po odeslání,
+- potvrzuje úspěšné odeslání na stránce i e-mailem, pokud to dává smysl,
+- neukládá citlivé údaje do běžných analytických eventů,
+- má ochranu proti spamu bez agresivního sledování,
+- zapisuje chyby tak, aby šly opravit, ale neukládá zbytečný obsah zprávy do logů.
+
+Příklad rozumné mikrocopy:
+
+```text
+Ozveme se do dvou pracovních dnů. Neposílej sem hesla ani citlivá data — na technické detaily si případně domluvíme bezpečný kanál.
+```
+
+Tohle není paranoia. Je to provozní hygiena. Lidé občas vloží do formuláře všechno, co mají po ruce. Web je má jemně vést k bezpečnějšímu chování.
+
+## Externí služby: audit před vložením skriptu
+
+Každý externí skript je malá smlouva s cizím provozem. Přidává síťové požadavky, právní otázky, riziko výpadku a často i přenos dat mimo tvou kontrolu. To neznamená, že nikdy nepoužiješ externí službu. Znamená to, že ji nepřidáš jen proto, že „to tak dělají všichni“.
+
+Před vložením skriptu si odpověz:
+
+- Jaký konkrétní problém řeší?
+- Kdo v týmu je vlastník a bude ho kontrolovat?
+- Jaká data skript vidí?
+- Kde se data ukládají a jak dlouho?
+- Existuje evropská nebo self-hosted alternativa?
+- Dá se funkce načíst až po interakci uživatele?
+- Co se stane, když služba vypadne?
+
+Codyho doporučení: u marketingového webu začínej bez reklamních pixelů, bez heatmap a bez chat widgetu. Nejdřív měj dobrý obsah, jasné CTA, dostupný kontakt, RSS a jednoduchou analytiku. Přidávej až po důkazu, že konkrétní nástroj pomůže rozhodnutí, ne jen zvědavosti.
+
+## Přístupnost jako normální kvalita
+
+Přístupnost není speciální režim pro „někoho jiného“. Je to kvalita rozhraní pro všechny: člověka na mobilu na slunci, unaveného zakladatele ve vlaku, uživatele s klávesnicí, zákazníka s horším zrakem i vyhledávač, který potřebuje pochopit strukturu stránky.
+
+Kontroluj hlavně:
+
+- jestli se dá web ovládat klávesnicí,
+- jestli je vidět focus stav,
+- jestli texty mají dostatečný kontrast,
+- jestli formulářové chyby říkají, co opravit,
+- jestli odkazy dávají smysl i bez okolního textu,
+- jestli modaly a menu nejdou do slepé uličky.
+
+Pokud si máš vybrat mezi efektní animací a čitelným formulářem, vyber formulář. Animace může potěšit. Funkční formulář zaplatí fakturu.
+
+## Checklist: technický základ před spuštěním
+
+- Hlavní stránky mají jasný účel, `<title>`, meta description a jeden hlavní nadpis.
+- Navigace a kontaktní cesta fungují bez nutnosti spouštět marketingové skripty.
+- Formuláře mají popisky, validaci, potvrzení a ošetřené chyby.
+- Obrázky jsou optimalizované, mají správné rozměry a významové alternativy.
+- Externí skripty mají vlastníka, důvod a zapsaný datový dopad.
+- Web má základní monitoring dostupnosti a chybových stavů.
+- Analytika měří cíle, ne osobní zvědavost týmu.
+- RSS, přímé odkazy a čitelné URL fungují jako nezávislé distribuční kanály.
+
+## Mini šablona technického rozhodnutí
+
+Použij ji pokaždé, když chceš přidat novou technologii, knihovnu nebo externí službu:
+
+```text
+Název změny:
+Jaký problém řeší:
+Která část webu ji potřebuje:
+Co se stane, když ji nepřidáme:
+Jaká data uvidí:
+Kde se data zpracují:
+Alternativa bez externí služby:
+Vliv na rychlost načtení:
+Vliv na přístupnost:
+Vlastník v týmu:
+Datum kontroly po nasazení:
+Rozhodnutí:
+```
+
+Moderní web není ten, který má nejvíc technologií. Moderní web je ten, který splní svoji práci, dá se bezpečně provozovat a nebude za rok připomínat půdu plnou kabelů, které se nikdo bojí vytáhnout.
+
+---
+
 # 5. Privacy-first analytika a experimenty
 
 Analytika má odpovídat na otázky, ne sbírat digitální otisky pro případ, že se jednou budou hodit. U malého webu nebo SaaS produktu většinou nepotřebuješ znát „všechno o každém“. Potřebuješ vědět, jestli lidé najdou hodnotu, kde se zaseknou a která změna reálně pomohla.
@@ -384,10 +550,13 @@ Privacy-first neznamená slepý provoz. Znamená to mít dost dat pro dobré roz
 - European Data Protection Board: [Legal basis](https://www.edpb.europa.eu/topics/key-gdpr-concepts/legal-basis_en)
 - European Data Protection Board: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en)
 - CNIL: [Sheet n°16: Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
+- MDN Web Docs: [How to structure a web form](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/How_to_structure_a_web_form)
+- web.dev: [Core Web Vitals](https://web.dev/articles/vitals)
 
 ---
 
 # Pracovní log
 
+- 2026-09-22: Dopsána kapitola „Základy moderního webového vývoje pro podnikatele“ se zaměřením na architekturu podle rizika, semantické HTML, výkon, formuláře, externí skripty, přístupnost a technický checklist.
 - 2026-09-22: Dopsána kapitola „Strategie webu“ s praktickým modelem rozhodnutí návštěvníka, privacy-first pravidly, checklistem a šablonou strategického zadání.
 - 2026-09-22: Založena plnohodnotná struktura e-booku po zjištění, že soubor obsahoval jen placeholder; dopsána kapitola „Privacy-first analytika a experimenty“ včetně checklistu, šablony datové mapy a ověřených zdrojů.
