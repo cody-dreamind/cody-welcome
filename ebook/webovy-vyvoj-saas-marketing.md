@@ -469,6 +469,98 @@ Privacy-first onboarding:
 
 Dobrá onboardingová obrazovka říká: „Tady je další krok a proč se vyplatí.“ Špatná říká: „Vyplň ještě sedm polí, protože náš CRM démon má hlad.“
 
+## Retence bez šmírování: jak poznat, že produkt drží hodnotu
+
+Retence není trik v e-mailové automatizaci. Retence je důkaz, že se lidé k produktu vrací, protože jim opakovaně šetří čas, vydělává peníze, snižuje riziko nebo zjednodušuje práci. Když produkt hodnotu nedodává, nepomůže ani pět „We miss you“ e-mailů s veselým maskotem. Jen se z maskota stane otravný svědek selhání.
+
+U malého SaaS začni jednoduchou otázkou: „Co by zákazníkovi chybělo, kdybychom produkt zítra vypnuli?“ Pokud odpověď zní „možná dashboard“, je to slabé. Lepší odpověď je „přišel by o schvalovací historii“, „musel by ručně posílat reporty klientům“, „ztratil by přehled o stavu zakázek“ nebo „neměl by bezpečný export dat pro audit“.
+
+### Tři signály zdravé retence
+
+Nemusíš hned stavět datový sklad. Pro první verzi stačí tři signály, které zvládne sledovat i malý tým:
+
+1. **Opakovaná hodnota** — uživatel pravidelně dokončuje klíčovou akci, kvůli které produkt existuje.
+2. **Rostoucí kontext** — v produktu přibývají projekty, dokumenty, klienti, automatizace nebo jiné pracovní objekty.
+3. **Důvod k návratu** — produkt má přirozený rytmus: týdenní report, měsíční fakturaci, denní kontrolu fronty, kvartální audit.
+
+Příklad pro B2B reportingový SaaS:
+
+```text
+Slabý signál: uživatel se přihlásil třikrát za týden.
+Silný signál: uživatel vytvořil report, odeslal ho klientovi a klient otevřel sdílený odkaz.
+```
+
+Přihlášení samo o sobě neříká skoro nic. Člověk se může přihlásit i proto, že hledá tlačítko pro zrušení účtu. Klíčová akce je lepší proxy pro hodnotu.
+
+### Jak měřit retenci privacy-first
+
+Privacy-first retence znamená, že neměříš člověka jako podezřelý objekt, ale produktovou hodnotu jako pracovní výsledek. Prakticky:
+
+- používej agregované metriky tam, kde nepotřebuješ detail uživatele,
+- sleduj stav účtu nebo workspace spíš než každé kliknutí,
+- nepropojuj produktové chování s reklamními profily,
+- drž analytické eventy čitelné a omezené na jasný účel,
+- nastav retenční dobu pro produktové logy,
+- umožni export a smazání dat podle pravidel produktu a smlouvy.
+
+Dobrá eventová věta zní:
+
+```text
+Workspace dokončil měsíční report pro klienta.
+```
+
+Horší eventová věta zní:
+
+```text
+Uživatel 123 klikl v 09:41:12 na každý prvek obrazovky a pošleme to do tří marketingových nástrojů, protože grafy jsou hezké.
+```
+
+První pomáhá pochopit hodnotu. Druhé pomáhá hlavně vytvořit budoucí úklidový problém.
+
+### Retenční rozhovory místo hádání z grafu
+
+Když máš prvních 5 až 20 aktivních zákazníků, největší chyba je schovat se za metriky. Zavolej jim. Ne na „demo upsellu“, ale na krátký retenční rozhovor.
+
+Otázky:
+
+- Co jste naposledy v produktu udělali a proč?
+- Který výsledek by vám chyběl, kdyby produkt nebyl?
+- Co pořád řešíte mimo produkt v tabulce, e-mailu nebo chatu?
+- Kde se bojíte, že něco pokazíte?
+- Co by muselo být lepší, abyste produkt doporučili podobné firmě?
+
+Zapisuj odpovědi jazykem zákazníka. Tohle není jen produktový výzkum. Je to materiál pro onboarding, help centrum, landing page i prodejní argumenty.
+
+> Codyho komentář: Nejlevnější retenční analytika je často obyčejný hovor se zákazníkem. Má jen jednu nevýhodu: nejde se u něj tvářit, že „data ukazují“, když ve skutečnosti jen nemáme odvahu se zeptat.
+
+### Praktický retenční plán na první měsíc
+
+Pro nový SaaS si nastav jednoduchou rutinu:
+
+- Vyber jednu aktivační událost a jednu opakovanou hodnotovou událost.
+- Každý týden zkontroluj, kolik nových účtů se dostalo k aktivační události.
+- U účtů, které aktivaci nedokončily, najdi nejčastější překážku.
+- U aktivních účtů sleduj, zda se vrací k hodnotové události.
+- Jednou týdně kontaktuj 2 až 3 zákazníky s konkrétní otázkou, ne obecným „jak se vám líbí produkt?“.
+- Každý měsíc rozhodni jednu změnu onboardingu, dokumentace nebo produktu podle zjištění.
+
+Mini šablona retenčního listu:
+
+```text
+Produkt:
+Typ zákazníka:
+Aktivační událost:
+Opakovaná hodnotová událost:
+Přirozený rytmus použití:
+Nejčastější překážka aktivace:
+Nejčastější důvod návratu:
+Otázka pro tento týden:
+Jedna změna, kterou provedeme:
+Jak poznáme, že pomohla:
+```
+
+Retence není jen číslo pro investory. Je to provozní zpětná vazba, jestli produkt opravdu patří do pracovního dne zákazníka. A když nepatří, je fér to zjistit dřív, než začneš škálovat akvizici. Nalévat marketing do děravého produktu je jako doplňovat vodu do cedníku a říkat tomu růst.
+
 ## Platby, fakturace a hranice vlastních sil
 
 Platby vypadají jako detail, dokud neřešíš první reklamaci, dobropis nebo neúspěšné obnovení předplatného. U evropského SaaS je rozumné rozhodnout brzy, co budeš dělat sám a co svěříš specializované službě.
@@ -2292,6 +2384,7 @@ Launch je jen začátek zpětné vazby. Pokud checklist pomůže spustit menší
 
 # Pracovní log
 
+- 2026-09-22: Doplněna SaaS podkapitola „Retence bez šmírování“ s privacy-first signály hodnoty, rozhovory se zákazníky, měsíční retenční rutinou a vyplnitelnou šablonou.
 - 2026-09-22: Doplněna příloha „Launch checklist pro privacy-first web nebo SaaS“ se strategickou, technickou, datovou, distribuční a první týden provozní kontrolou včetně vyplnitelné šablony.
 - 2026-09-22: Doplněna příloha se scorecardem pro výběr privacy-first nástrojů, včetně bodování, B2B příkladu a kritérií pro odmítnutí nástroje.
 - 2026-09-22: Doplněn závěr o 90minutový startovací workshop pro zavedení privacy-first webu nebo SaaS, včetně průběhu, výstupů a vyplnitelné šablony.
