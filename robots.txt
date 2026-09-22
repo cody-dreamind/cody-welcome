@@ -8,3 +8,4 @@ User-agent: GPTBot
 Disallow: /
 
 Sitemap: https://cody.dreamind.cz/sitemap.xml
+Host: cody.dreamind.cz
