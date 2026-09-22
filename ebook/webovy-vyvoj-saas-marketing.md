@@ -23,6 +23,7 @@ Praktický český e-book od Codyho pro malé firmy, freelancery a zakladatele S
 8. Evropský provoz: data, hosting, zálohy a smlouvy
 9. Checklisty, šablony a provozní rutiny
 10. Závěr: 30denní plán zavedení privacy-first webu nebo SaaS
+11. Bonusy a přílohy: workshop a scorecard pro výběr nástrojů
 
 ---
 
@@ -2040,6 +2041,101 @@ Další kontrola:
 
 > Codyho komentář: Workshop je dobrý tehdy, když po něm někdo ví, co má v pondělí otevřít za soubor, stránku nebo issue. Pokud po něm vznikne jen další schůzka, gratuluji, právě jste objevili perpetuum mobile na kalendářový chaos.
 
+
+## Příloha: Scorecard pro výběr nástroje
+
+Nejrychlejší způsob, jak si rozbít privacy-first provoz, je vložit do stacku nástroj jen proto, že ho někdo viděl v hezkém vlákně na LinkedInu. Nástroj sám o sobě není strategie. Je to závazek: technický, finanční, smluvní, bezpečnostní a často i kulturní. Proto se vyplatí mít jednoduchou scorecard, kterou použiješ pokaždé, když chceš přidat analytiku, CRM, formulář, chat, platební doplněk, AI službu nebo marketingovou automatizaci.
+
+Scorecard nemá zabít rychlost. Má zabít impulzivní rozhodnutí. Rozdíl je zásadní. Rychlé rozhodnutí může být skvělé, pokud víš, podle čeho rozhoduješ. Impulzivní rozhodnutí je jen sprint do mlhy s kreditkou v ruce.
+
+### Pět otázek před testem nástroje
+
+1. **Jaký problém řešíme?** Napiš jednu větu. Pokud věta obsahuje „možná se bude hodit“, nástroj zatím nepotřebuješ.
+2. **Jaká data nástroj uvidí?** Rozliš anonymní provozní data, kontaktní údaje, obsah zákazníků, platební údaje a citlivější interní informace.
+3. **Kde data fyzicky a smluvně končí?** Evropský provoz, jasná role správce/zpracovatele a dohledatelní subprocesorové nejsou detail. Jsou základní hygienická vrstva.
+4. **Co se stane, když nástroj vypneme?** Musí existovat export, náhradní postup nebo možnost odejít bez obchodní paralýzy.
+5. **Kdo nástroj vlastní provozně?** Každý nástroj bez vlastníka se časem změní v digitální půdu: nikdo tam nechodí, ale všichni se bojí něco vyhodit.
+
+Tahle pětice navazuje na principy minimalizace a účelového omezení podle GDPR, na bezpečnostní doporučení pro malé firmy a na praktickou logiku vendor managementu. Právní výklad si nech na právníka; provozní otázky si ale musí umět položit tým sám.
+
+### Bodovací tabulka
+
+Použij stupnici 0–2 body:
+
+- **0 bodů**: nevíme, chybí informace nebo odpověď nevyhovuje.
+- **1 bod**: částečně vyhovuje, ale máme riziko nebo ruční kompenzaci.
+- **2 body**: vyhovuje a máme ověřený důkaz, odkaz nebo interní rozhodnutí.
+
+```text
+Nástroj:
+Účel:
+Vlastník:
+Datum hodnocení:
+
+1. Účel je jasný a měřitelný: 0 / 1 / 2
+Poznámka:
+
+2. Sbírá jen nezbytná data: 0 / 1 / 2
+Poznámka:
+
+3. Umíme popsat tok dat a místo zpracování: 0 / 1 / 2
+Poznámka:
+
+4. Máme smluvní podklady nebo podmínky k revizi: 0 / 1 / 2
+Poznámka:
+
+5. Známe subprocesory nebo navazující služby: 0 / 1 / 2
+Poznámka:
+
+6. Přístupy jdou řídit po rolích a odebrat: 0 / 1 / 2
+Poznámka:
+
+7. Existuje export nebo plán odchodu: 0 / 1 / 2
+Poznámka:
+
+8. Nástroj nezhorší výkon, UX ani důvěru: 0 / 1 / 2
+Poznámka:
+
+9. Umíme ho provozně kontrolovat každý měsíc: 0 / 1 / 2
+Poznámka:
+
+10. Má jasný přínos proti jednodušší alternativě: 0 / 1 / 2
+Poznámka:
+
+Celkem:
+Rozhodnutí: přijmout / pilotovat / odložit / odmítnout
+Další kontrola:
+```
+
+Moje doporučení: pod 12 bodů nástroj nepouštěj do ostrého provozu. Mezi 12 a 16 body ho dej jen do omezeného pilotu s jasným datem vyhodnocení. Nad 16 bodů může dávat smysl, ale pořád platí, že „dobré skóre“ není bianko šek. Je to vstup do rozhodnutí, ne rozhodnutí samotné.
+
+### Příklad: formulářový nástroj pro B2B leady
+
+Řekněme, že tým chce nový formulářový nástroj, protože stávající kontaktní formulář posílá e-maily bez dobrého třídění. Praktický postup:
+
+- Účel: získat kvalifikované B2B poptávky a poslat je do interního procesu.
+- Data: jméno, pracovní e-mail, firma, zpráva, souhlas s kontaktováním, technické metadata nutné pro doručení.
+- Minimum: žádné skryté marketingové identifikátory, žádné enrichment skripty bez důvodu, žádné povinné telefonní číslo, pokud ho obchod opravdu nepotřebuje.
+- Provoz: ideálně EU hosting nebo jasně popsané zpracování, audit subprocesorů, možnost exportu a smazání.
+- Alternativa: vlastní jednoduchý formulář s ukládáním do interního systému může být lepší než komplexní platforma, pokud tým nepotřebuje automatizace.
+
+Rozhodnutí může znít: „Pilotujeme 30 dní jen na stránce Kontakt, sbíráme pouze nezbytná pole, po měsíci vyhodnotíme počet relevantních poptávek, spam, rychlost zpracování a dopad na technický provoz.“ To je zdravější než „nasadíme nový nástroj všude, protože má hezké dashboardy“. Dashboard je někdy jen tapeta s grafy.
+
+### Kdy říct ne i dobrému nástroji
+
+Nástroj může být kvalitní a přesto nevhodný. Řekni ne, když:
+
+- přínos řeší jen nepohodlí týmu, ale přidává riziko zákazníkům;
+- neumíš vysvětlit, proč nestačí jednodušší interní postup;
+- dodavatel mlží o datech, subprocesorech nebo exportu;
+- nástroj vyžaduje plošný tracking pro drobný marketingový přínos;
+- tým nemá kapacitu nástroj udržovat, dokumentovat a kontrolovat;
+- odchod by byl dražší než problém, který nástroj řeší.
+
+Privacy-first stack není sbírka asketických omezení. Je to sada vědomých voleb. Někdy vybereš robustní placený nástroj, protože ušetří riziko a práci. Jindy napíšeš malý interní skript, protože externí platforma by kvůli jedné metrice tahala přes půl Evropy datový cirkus na kolečkách.
+
+> Codyho komentář: Nejlepší nástroj je ten, který po šesti měsících pořád víš, proč používáš. Pokud jediná dokumentace zní „to nastavil někdo před námi“, gratuluji, našli jste archeologický nález, ne stack.
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -2072,6 +2168,7 @@ Další kontrola:
 
 # Pracovní log
 
+- 2026-09-22: Doplněna příloha se scorecardem pro výběr privacy-first nástrojů, včetně bodování, B2B příkladu a kritérií pro odmítnutí nástroje.
 - 2026-09-22: Doplněn závěr o 90minutový startovací workshop pro zavedení privacy-first webu nebo SaaS, včetně průběhu, výstupů a vyplnitelné šablony.
 - 2026-09-22: Rozšířena kapitola o privacy-first analytice o podkapitolu „Cookie lišta bez temných vzorů“ s praktickým postupem inventury cookies, férovým návrhem souhlasu, B2B příkladem a ověřenými zdroji ÚOOÚ a EDPB.
 - 2026-09-22: Přidán závěr e-booku s 30denním plánem zavedení privacy-first webu nebo SaaS, týdenními výstupy, praktickým postupem, checklistem a šablonou plánu.
