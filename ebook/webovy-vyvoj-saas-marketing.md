@@ -1985,6 +1985,61 @@ Neděláme zatím:
 
 Nejlepší 30denní plán není největší. Je to ten, který přežije kontakt s realitou. Pokud po měsíci víš lépe, komu web slouží, jaká data sbíráš, proč používáš konkrétní nástroje a co budeš zlepšovat dál, udělal jsi velký krok. Ne hlučný. Ale užitečný. A to je přesně ten typ kroku, který má v evropském privacy-first provozu smysl.
 
+## Bonus: 90minutový startovací workshop
+
+Když nechceš začínat měsíc tím, že všem pošleš dlouhý dokument a budeš doufat, že ho někdo přečte, udělej krátký workshop. Devadesát minut stačí na to, aby se tým shodl na směru, rizicích a prvních úkolech. Nesmí se z toho stát filozofický festival. Cílem je pracovní dohoda, ne skupinová terapie s post-ity.
+
+Pozvi jen lidi, kteří umí rozhodnout nebo dodat vstup: produkt, vývoj, marketing, obchod, provoz a někdo, kdo rozumí datům nebo právní odpovědnosti. U malého týmu to klidně budou tři lidé v různých rolích. To nevadí. Horší je mít deset lidí, kteří se bojí říct „nevím“.
+
+Průběh:
+
+1. **10 minut — pracovní věta**: napište jednu větu, komu web nebo produkt pomáhá, s čím a jaký další krok má člověk udělat.
+2. **15 minut — mapa rozhodnutí**: vypište hlavní stránky nebo obrazovky a otázku, kterou má každá z nich zodpovědět.
+3. **20 minut — datová inventura**: projděte formuláře, analytiku, externí skripty a nástroje; ke každému napište účel a vlastníka.
+4. **15 minut — rizika**: označte tři největší slabiny: technické, právní, marketingové nebo provozní.
+5. **20 minut — první backlog**: vyberte maximálně pět úkolů na první týden, každý s vlastníkem a kritériem hotovo.
+6. **10 minut — rozhodnutí a zápis**: potvrďte, co se tento měsíc nedělá, aby plán nezačal bobtnat jako špatně hlídaný CMS.
+
+Výstup workshopu má být krátký. Ideálně jedna stránka, kterou jde otevřít před každou týdenní kontrolou.
+
+```text
+Workshop: privacy-first web / SaaS start
+Datum:
+Účastníci:
+
+Pracovní věta:
+
+Hlavní rozhodnutí návštěvníka nebo uživatele:
+
+Nejdůležitější stránky / obrazovky:
+- Název:
+  Otázka uživatele:
+  Další krok:
+
+Data a nástroje:
+- Nástroj / skript:
+  Účel:
+  Jaká data:
+  Vlastník:
+  Ponechat / omezit / odstranit:
+
+Top 3 rizika:
+1.
+2.
+3.
+
+Úkoly na první týden:
+- Úkol:
+  Vlastník:
+  Hotovo znamená:
+
+Tento měsíc záměrně neděláme:
+
+Další kontrola:
+```
+
+> Codyho komentář: Workshop je dobrý tehdy, když po něm někdo ví, co má v pondělí otevřít za soubor, stránku nebo issue. Pokud po něm vznikne jen další schůzka, gratuluji, právě jste objevili perpetuum mobile na kalendářový chaos.
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -2017,6 +2072,7 @@ Nejlepší 30denní plán není největší. Je to ten, který přežije kontakt
 
 # Pracovní log
 
+- 2026-09-22: Doplněn závěr o 90minutový startovací workshop pro zavedení privacy-first webu nebo SaaS, včetně průběhu, výstupů a vyplnitelné šablony.
 - 2026-09-22: Rozšířena kapitola o privacy-first analytice o podkapitolu „Cookie lišta bez temných vzorů“ s praktickým postupem inventury cookies, férovým návrhem souhlasu, B2B příkladem a ověřenými zdroji ÚOOÚ a EDPB.
 - 2026-09-22: Přidán závěr e-booku s 30denním plánem zavedení privacy-first webu nebo SaaS, týdenními výstupy, praktickým postupem, checklistem a šablonou plánu.
 - 2026-09-22: Dopsána kapitola „Checklisty, šablony a provozní rutiny“ s týdenní, měsíční a čtvrtletní rutinou, rozhodovacím deníkem, incidentovou mini rutinou a provozní nástěnkou.
