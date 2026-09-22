@@ -2136,6 +2136,130 @@ Privacy-first stack není sbírka asketických omezení. Je to sada vědomých v
 
 > Codyho komentář: Nejlepší nástroj je ten, který po šesti měsících pořád víš, proč používáš. Pokud jediná dokumentace zní „to nastavil někdo před námi“, gratuluji, našli jste archeologický nález, ne stack.
 
+
+## Příloha: Launch checklist pro privacy-first web nebo SaaS
+
+Spuštění není jeden magický okamžik, kdy někdo zmáčkne tlačítko a všichni zatleskají. Spuštění je krátké období, kdy se potká strategie, technika, obsah, měření, podpora a trochu zdravé nervozity. Privacy-first launch checklist pomáhá nepustit ven web nebo SaaS, který sice vypadá hotově, ale při prvním kontaktu s realitou začne sbírat zbytečná data, posílat formuláře do prázdna nebo skrývat kontakt za designovou mlhu.
+
+Smyslem checklistu není všechno zdržet. Smyslem je zachytit chyby, které jsou po spuštění dražší než před ním. Malý tým nepotřebuje korporátní „go-live ceremony“. Potřebuje jasný seznam: co musí fungovat, kdo to ověřil, kde je plán návratu a co se bude sledovat první týden.
+
+> Codyho komentář: Launch bez checklistu je jako deploy v pátek večer s větou „to bude dobrý“. Technicky to může vyjít. Sociálně to zanechá jizvy.
+
+### 1. Strategická připravenost
+
+Nejdřív ověř, že tým ví, co vlastně spouští. Pokud se v den launch řeší, pro koho web je, není to launch. Je to veřejná porada s URL adresou.
+
+- [ ] Máme jednu pracovní větu webu nebo produktu.
+- [ ] Primární publikum je jasné a není to „všichni“.
+- [ ] Hlavní CTA odpovídá skutečnému dalšímu kroku.
+- [ ] Každá hlavní stránka podporuje konkrétní rozhodnutí návštěvníka.
+- [ ] Texty vysvětlují problém, výsledek, průběh a důkaz důvěry.
+- [ ] Víme, co se po launchi nebude měnit první týden, pokud nenastane chyba.
+
+Praktický test: dej homepage člověku mimo tým a požádej ho, aby do jedné minuty řekl, co firma nabízí, komu a co má udělat dál. Pokud začne hádat, nejde o UX problém. Jde o problém jasnosti.
+
+### 2. Technická připravenost
+
+Technická kontrola má být nudná, konkrétní a opakovatelná. Neptej se „vypadá to dobře?“. Ptej se „funguje to na pomalém připojení, bez přihlášení, bez cookies, s klávesnicí a po chybě formuláře?“
+
+- [ ] Web běží přes HTTPS a přesměrování z HTTP funguje.
+- [ ] Důležité stránky vrací správné stavové kódy.
+- [ ] Navigace funguje na mobilu, desktopu i klávesnici.
+- [ ] Formuláře mají potvrzení, chybové stavy a záložní kontakt.
+- [ ] Základní obsah je dostupný i bez marketingových skriptů.
+- [ ] `robots.txt`, `sitemap.xml`, titulky a meta popisy odpovídají publikovanému obsahu.
+- [ ] Favicon, Open Graph obrázky a sdílené náhledy nejsou rozbité.
+- [ ] Máme jednoduchý rollback nebo možnost rychle vrátit předchozí verzi.
+
+U SaaS přidej ještě:
+
+- [ ] Registrace, přihlášení, reset hesla a odhlášení prošly ručním testem.
+- [ ] Nový uživatel ví, jak dokončit první hodnotnou akci.
+- [ ] Prázdné stavy v aplikaci pomáhají, nevyčítají.
+- [ ] Kritické akce mají potvrzení nebo možnost opravy.
+- [ ] E-maily z produktu mají správného odesílatele, smysluplný předmět a funkční odkazy.
+
+### 3. Privacy-first kontrola dat
+
+Tady se často láme důvěra. Launch je ideální moment odstranit „dočasné“ skripty, testovací pixely, zbytečná pole a staré integrace. Dočasné věci mají v digitálním světě životnost středověkého hradu.
+
+- [ ] Máme seznam všech externích skriptů a vlastníka každého z nich.
+- [ ] Každý formulář sbírá jen data potřebná pro konkrétní účel.
+- [ ] Analytika měří agregovaně a bez reklamních pixelů při prvním načtení.
+- [ ] Cookie lišta, pokud je potřeba, nepoužívá nátlak ani předvolené marketingové souhlasy.
+- [ ] Zásady ochrany soukromí odpovídají skutečnému provozu, ne plánům z loňska.
+- [ ] Víme, kam odchází e-maily z formulářů a kdo k nim má přístup.
+- [ ] Testovací data, účty a ukázkové osobní údaje jsou odstraněné.
+- [ ] Přístup do administrace mají jen lidé, kteří ho opravdu potřebují.
+
+Privacy-first launch otázka zní: „Umíme zákazníkovi lidsky vysvětlit, co o něm víme a proč?“ Pokud odpověď vyžaduje tři právníky, dvě tabulky a omluvný úsměv, vrať se k datové mapě.
+
+### 4. Obsah a distribuce
+
+Launch bez distribuce je tiché otevření obchodu v lese. Privacy-first distribuce ale neznamená spamovat sociální sítě a čekat na algoritmické požehnání. Znamená připravit vlastní kanály, přímé odkazy a obsah, který jde sdílet bez sledovacích berliček.
+
+- [ ] Máme krátké oznámení pro web, RSS nebo blog.
+- [ ] Máme přímý odkaz, který funguje bez přesměrovávacích měřicích služeb.
+- [ ] Interní tým ví, co sdílet a jak vysvětlit hlavní hodnotu.
+- [ ] Reference, případové studie nebo ukázky jsou schválené.
+- [ ] Kontakt a další krok jsou dostupné i lidem, kteří nechtějí vyplnit formulář.
+- [ ] FAQ odpovídá na nejčastější námitky před obchodním hovorem.
+- [ ] RSS kanál nebo jiný přímý odběr obsahu je dohledatelný, pokud web publikuje články.
+
+Dobrá launch zpráva nemusí být dlouhá. Stačí říct: co je nové, komu to pomůže, proč to vzniklo, jak to vyzkoušet a jak dát zpětnou vazbu. Všechno ostatní je konfeta. Konfety jsou fajn, dokud nezakrývají tlačítko.
+
+### 5. První týden po spuštění
+
+První týden nesmí být jen čekání na komplimenty. Sleduj provozní signály, kvalitu poptávek a zpětnou vazbu. Nepropadej panice z každého čísla. Jednotky návštěvníků nejsou statistika. Jsou to lidé, kteří ti ukazují, kde je web srozumitelný a kde zakopává.
+
+- [ ] Každý den kontrolujeme dostupnost, formuláře a chybové logy.
+- [ ] Sbíráme konkrétní zpětnou vazbu do jednoho dokumentu nebo issue listu.
+- [ ] Neopravujeme kosmetiku dřív než chyby v porozumění, kontaktu nebo registraci.
+- [ ] Sledujeme kvalitu poptávek, ne jen počet návštěv.
+- [ ] Rozlišujeme urgentní opravy, drobná vylepšení a nápady na později.
+- [ ] Po týdnu uděláme krátkou retrospektivu a vybereme jednu další iteraci.
+
+### Mini šablona launch plánu
+
+```text
+Launch:
+Datum spuštění:
+Vlastník:
+
+Hlavní cíl spuštění:
+Primární publikum:
+Hlavní CTA:
+
+Před spuštěním musí být hotovo:
+-
+-
+-
+
+Kontroly v den spuštění:
+- Dostupnost:
+- Formuláře / registrace:
+- Analytika:
+- Soukromí a externí skripty:
+- SEO a sdílení:
+
+Rollback nebo nouzový postup:
+
+První týden sledujeme:
+-
+-
+-
+
+Co záměrně neřešíme během prvního týdne:
+
+Retrospektiva:
+Datum:
+Otázka 1: Co fungovalo?
+Otázka 2: Kde lidé váhali?
+Otázka 3: Co opravíme jako první?
+```
+
+Launch je jen začátek zpětné vazby. Pokud checklist pomůže spustit menší, čistší a důvěryhodnější verzi, splnil práci. Velké věci nemusí startovat hlučně. Stačí, když startují poctivě a dají se zlepšovat bez datového bordelu v kufru.
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -2168,6 +2292,7 @@ Privacy-first stack není sbírka asketických omezení. Je to sada vědomých v
 
 # Pracovní log
 
+- 2026-09-22: Doplněna příloha „Launch checklist pro privacy-first web nebo SaaS“ se strategickou, technickou, datovou, distribuční a první týden provozní kontrolou včetně vyplnitelné šablony.
 - 2026-09-22: Doplněna příloha se scorecardem pro výběr privacy-first nástrojů, včetně bodování, B2B příkladu a kritérií pro odmítnutí nástroje.
 - 2026-09-22: Doplněn závěr o 90minutový startovací workshop pro zavedení privacy-first webu nebo SaaS, včetně průběhu, výstupů a vyplnitelné šablony.
 - 2026-09-22: Rozšířena kapitola o privacy-first analytice o podkapitolu „Cookie lišta bez temných vzorů“ s praktickým postupem inventury cookies, férovým návrhem souhlasu, B2B příkladem a ověřenými zdroji ÚOOÚ a EDPB.
