@@ -68,6 +68,10 @@ Praktický český e-book od Codyho z Dreamindu pro malé týmy, freelancery a z
    - Knowledge base, šablony odpovědí a zpětná vazba
    - Jak z podpory dělat produktové učení bez sběru zbytečných dat
    - Checklist podpory pro malý SaaS tým
+16. **Přístupnost jako produktová výhoda**
+   - WCAG, EAA a praktický audit bez korporátní mlhy
+   - Formuláře, navigace, obsah a testování s klávesnicí
+   - Checklist přístupnosti pro malý web nebo SaaS
 
 ---
 
@@ -1774,6 +1778,114 @@ To není paranoia. To je uklizený provoz, který se nemusí tvářit překvapen
 
 *Codyho komentář:* podpora je marketing, který začne až po prodeji. Když je rychlá, lidská a šetrná k datům, lidé si ji pamatují víc než slogan v hero sekci. A často ji doporučí dál, což je hezké, protože referral nepotřebuje cookies. Konečně marketing, který se nemusí schovávat za consent banner.
 
+## 16. Přístupnost jako produktová výhoda
+
+Přístupnost se často řeší pozdě, draze a s výrazem člověka, který právě objevil další auditní tabulku. Chyba. U webu a SaaS produktu je přístupnost součást kvality: pomáhá lidem s postižením, lidem na mobilu, lidem ve stresu, lidem s dočasným zraněním i člověku, který se snaží kliknout na tlačítko ve vlaku mezi dvěma tunely.
+
+W3C popisuje WCAG 2.2 jako standard s testovatelnými kritérii rozdělenými do principů vnímatelnosti, ovladatelnosti, srozumitelnosti a robustnosti: https://www.w3.org/TR/WCAG22/ W3C zároveň doporučuje používat nejnovější verzi WCAG, protože obsah splňující WCAG 2.2 splňuje i WCAG 2.1 a 2.0: https://www.w3.org/WAI/standards-guidelines/wcag/
+
+V Evropě navíc nejde jen o dobrý zvyk. European Accessibility Act zavádí společné požadavky na přístupnost pro vybrané produkty a služby, mimo jiné e-commerce, bankovní služby, elektronické komunikace, e-booky a některá zařízení; členské státy měly směrnici převést do práva do června 2022 a podle Evropské komise začala pravidla platit v červnu 2025: https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en a https://commission.europa.eu/news-and-media/news/eu-becomes-more-accessible-all-2025-07-31_en
+
+*Codyho komentář:* i když na tebe konkrétní povinnost nedopadá, ber přístupnost jako produktovou disciplínu. Nepřístupný web je jako obchod s krásnou výlohou a zamčenými dveřmi. Designér pláče esteticky, zákazník odchází prakticky.
+
+### 16.1 Začni nejrizikovější cestou uživatele
+
+Neaudituj nejdřív všechny stránky najednou. Vyber jednu cestu, kde chyba bolí nejvíc:
+
+1. návštěvník pochopí nabídku,
+2. otevře ceník,
+3. vyplní poptávku nebo registraci,
+4. potvrdí e-mail,
+5. udělá první hodnotnou akci v produktu.
+
+U téhle cesty projdi přístupnost ručně. Automatické nástroje pomůžou najít část problémů, ale neřeknou ti, jestli text dává smysl, jestli se formulář dá dokončit bez myši nebo jestli chybová hláška opravdu pomáhá.
+
+První praktický test na 30 minut:
+
+- Odpoj myš a projdi hlavní cestu jen klávesnicí.
+- Sleduj, jestli je vidět fokus u odkazů, tlačítek a formulářových polí.
+- Zkontroluj, jestli pořadí tabulátoru odpovídá vizuální logice stránky.
+- Ověř, že modal, menu nebo cookie dialog nepůsobí jako past, ze které nejde odejít.
+- Zvětši stránku na 200 % a podívej se, jestli se obsah nerozpadne.
+- Přepni systém do tmavého režimu nebo vysokého kontrastu, pokud ho produkt podporuje.
+
+Výsledek zapiš jako backlog, ne jako pocit. Například: „Na stránce ceníku není viditelný fokus na tlačítku Objednat demo“ je úkol. „Přístupnost horší“ je mlha s klávesnicí.
+
+### 16.2 Text a struktura jsou levná přístupnost
+
+Nejrychlejší zlepšení často nejsou technická kouzla, ale obyčejná disciplína v obsahu.
+
+Dobrá struktura stránky:
+
+- má jeden jasný hlavní nadpis,
+- používá nadpisy podle významu, ne podle velikosti fontu,
+- dává odkazům konkrétní text místo „klikněte zde“,
+- vysvětluje zkratky a interní pojmy,
+- nepřenáší důležitou informaci jen barvou,
+- má popisky u formulářových polí, ne jen placeholdery.
+
+Příklad slabého textu odkazu:
+
+> Více informací najdete zde.
+
+Lepší:
+
+> Přečtěte si checklist privacy-first formuláře.
+
+U SaaS produktu si dej pozor hlavně na prázdné stavy a chyby. „Něco se pokazilo“ je technicky pravda, ale produktově k ničemu. Lepší je: „Platba neprošla. Zkontrolujte kartu nebo zkuste jinou metodu. Peníze jsme nestrhli.“ To je informace, se kterou uživatel něco udělá.
+
+Privacy-first detail: pokud používáš nástroje pro záznam session replay, heatmapy nebo detailní sledování chování, přístupnost tím neopravíš. Jen získáš citlivější data o frustrovaných lidech. Nejprve oprav texty, ovládání a strukturu. Méně šmírování, více řemesla.
+
+### 16.3 Formuláře: místo, kde přístupnost vydělává peníze
+
+Formulář je obchodní i právní minové pole. Když je nepřístupný, ztrácíš poptávky. Když sbírá zbytečná data, zvyšuješ privacy riziko. Když chybí srozumitelný souhlas, přidáváš si práci do budoucna.
+
+Praktická pravidla:
+
+- Každé pole má viditelný label.
+- Chyba je u konkrétního pole a říká, jak ji opravit.
+- Povinná pole jsou označená před odesláním, ne až po první chybě.
+- Autocomplete pomáhá u běžných údajů, pokud neohrožuje bezpečnost.
+- Tlačítko říká výsledek akce: „Odeslat poptávku“, ne neurčité „Pokračovat“.
+- Souhlas s newsletterem je samostatný a nepředzaškrtnutý.
+- Odeslaný formulář potvrdí, co se stane dál a kdy přijde odpověď.
+
+Testuj i negativní scénáře. Zadej špatný e-mail, prázdné povinné pole, příliš dlouhou zprávu, pomalé připojení a dvojklik na tlačítko. Produkt, který zvládne jen ideálního uživatele v ideálním počasí, není produkt. Je to demo s optimismem.
+
+### 16.4 Technický základ bez hrdinství
+
+Přístupný front-end obvykle začíná nudně: správné HTML, rozumné komponenty a minimum zbytečných vrstev.
+
+Priorita pro malý tým:
+
+1. **Semantika:** používej skutečná tlačítka pro akce a odkazy pro navigaci.
+2. **Fokus:** nikdy neodstraň outline bez náhrady, která je viditelná.
+3. **Kontrast:** text musí být čitelný v běžném prostředí, ne jen na monitoru designéra.
+4. **Stavy:** hover nestačí; mysli na focus, active, disabled, loading a error.
+5. **Média:** obrázky mají smysluplný alt text, dekorace prázdný alt, video titulky.
+6. **Komponenty:** modal, dropdown a combobox nepředstírej divem, pokud neumíš správně ošetřit klávesnici a ARIA.
+
+Používej knihovny, které přístupnost řeší systematicky, ale neber je jako imunitu. Komponenta může být technicky dobrá a přesto ji jde rozbít špatným textem, kontrastem nebo integrací.
+
+### 16.5 Checklist přístupnosti pro malý web nebo SaaS
+
+Před spuštěním projdi:
+
+- [ ] Hlavní uživatelská cesta jde dokončit jen klávesnicí.
+- [ ] Fokus je viditelný na všech interaktivních prvcích.
+- [ ] Nadpisy tvoří logickou strukturu stránky.
+- [ ] Odkazy mají konkrétní text a dávají smysl mimo kontext.
+- [ ] Formuláře mají labely, popisy chyb a jasné potvrzení po odeslání.
+- [ ] Informace není sdělená jen barvou, ikonou nebo animací.
+- [ ] Kontrast textu je ověřený alespoň na klíčových stránkách.
+- [ ] Obrázky mají smysluplný alt text nebo jsou označené jako dekorativní.
+- [ ] Modaly, menu a dialogy nejdou „zaseknout“ bez myši.
+- [ ] Cookie nebo consent dialog neblokuje obsah nepřístupným způsobem.
+- [ ] Privacy stránka je dostupná z formulářů, patičky a onboardingových míst.
+- [ ] Backlog obsahuje přístupnost jako běžnou kvalitu, ne jako jednorázový projekt.
+
+Mini-cvičení na konec týdne: vyber jednu stránku, projdi ji klávesnicí, oprav tři největší překážky a zapiš, co se změnilo. Příští týden udělej totéž s onboardingem. Přístupnost se nejlépe zlepšuje pravidelně, ne heroickým auditem noc před launchem.
+
 
 ## Zdroje
 
@@ -1784,6 +1896,9 @@ To není paranoia. To je uklizený provoz, který se nemusí tvářit překvapen
 - Evropská komise: dealing with requests from individuals — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
 - web.dev: How the Core Web Vitals metrics thresholds were defined — https://web.dev/articles/defining-core-web-vitals-thresholds
 - W3C: Web Content Accessibility Guidelines (WCAG) 2.2 — https://www.w3.org/TR/wcag/
+- W3C WAI: WCAG 2 Overview — https://www.w3.org/WAI/standards-guidelines/wcag/
+- Evropská komise: European Accessibility Act (EAA) — https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en
+- Evropská komise: The EU becomes more accessible for all — https://commission.europa.eu/news-and-media/news/eu-becomes-more-accessible-all-2025-07-31_en
 - Google Search Central: SEO Starter Guide — https://developers.google.com/search/docs/fundamentals/seo-starter-guide
 - Google Search Central: Creating helpful, reliable, people-first content — https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 - Evropská komise: ePrivacy Directive — https://digital-strategy.ec.europa.eu/en/policies/eprivacy-directive
@@ -1798,6 +1913,7 @@ To není paranoia. To je uklizený provoz, který se nemusí tvářit překvapen
 
 ## Pracovní log
 
+- 2026-09-22: Doplněna kapitola 16.1–16.5 o přístupnosti jako produktové výhodě, WCAG/EAA kontextu, klávesnicovém testování, formulářích a checklistu pro malý web nebo SaaS.
 - 2026-09-21: Doplněna kapitola 15.1–15.5 o zákaznické podpoře, znalostní bázi, šablonách odpovědí, převodu dotazů do backlogu a privacy-first diagnostice.
 - 2026-09-21: Doplněna kapitola 13.1–13.5 o konverzních formulářích, souhlasu, newsletterech a privacy-first měření bez profilování jednotlivců.
 - 2026-09-21: Doplněna kapitola 14.1–14.5 o správě zdrojů, aktualizaci e-booku, pracovním logu, redakčním checklistu a využití obsahu pro další výstupy.
