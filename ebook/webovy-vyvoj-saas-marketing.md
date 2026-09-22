@@ -1159,6 +1159,284 @@ Když budeš tuhle šablonu používat poctivě, obsah se začne chovat jako sys
 
 ---
 
+# 7. Produktivita malého týmu s AI asistenty
+
+AI asistent není kouzelný zaměstnanec v cloudu. Je to rychlý spolupracovník, který umí zrychlit návrh textu, rešerši, přípravu variant, kontrolu konzistence a rutinní přepisování. Ale pořád potřebuje zadání, hranice a člověka, který ví, co je dobrý výsledek. Když mu dáš chaos, vrátí ti rychlejší chaos. Gratuluju, právě jsi automatizoval zmatek.
+
+Pro malý tým je AI největší výhoda tam, kde se opakuje stejný typ práce: články, specifikace, obchodní e-maily, zápisy ze schůzek, analýza zpětné vazby, kontrola checklistů, návrhy testovacích scénářů nebo příprava dokumentace. Cílem není nahradit úsudek. Cílem je snížit tření mezi nápadem a hotovou verzí.
+
+> Codyho komentář: AI je skvělá lopata. Ale lopata sama nerozhodne, kde má být zahrada a kde kanalizace. To je pořád na člověku.
+
+## Začni mapou práce, ne výběrem nástroje
+
+Než začneš řešit, který model, plugin nebo aplikaci používat, sepiš si práci podle toku hodnoty. V malém týmu typicky najdeš pět druhů úkolů:
+
+1. **Vymýšlení** — názvy, koncepty, osnovy, varianty nabídky, otázky pro rozhovor.
+2. **Syntéza** — shrnutí dlouhých podkladů, zápisů, zpětné vazby nebo výzkumu.
+3. **Produkce** — první verze článků, dokumentace, e-mailů, landing pages nebo skriptů.
+4. **Kontrola** — hledání rozporů, chybějících kroků, bezpečnostních rizik a nejasností.
+5. **Přepis** — úprava tónu, zkrácení, lokalizace, převod do checklistu nebo tabulky.
+
+Každý typ práce potřebuje jiné zadání. Na vymýšlení chceš šíři a varianty. Na kontrolu chceš přísná kritéria. Na produkci chceš jasný kontext, cílového čtenáře, formát a příklady. Pokud používáš jeden univerzální prompt na všechno, je to jako používat šroubovák jako lžíci. Jde to, ale hosté si všimnou.
+
+Praktické cvičení na 30 minut:
+
+```text
+1. Vezmi posledních 20 úkolů z týmu.
+2. Označ je jako vymýšlení, syntéza, produkce, kontrola nebo přepis.
+3. U každého napiš, jak často se opakuje.
+4. Vyber tři úkoly, které jsou časté a mají nízké riziko.
+5. Z nich udělej první AI workflow.
+```
+
+Nízké riziko znamená, že chyba nezpůsobí právní problém, únik dat, finanční škodu ani rozbití důvěry zákazníka. Příklady: návrh osnovy článku, první verze interního checklistu, zkrácení dlouhého zápisu. Nevhodný první experiment: automatické odpovědi zákazníkům na citlivé reklamace, generování smluv bez kontroly nebo rozhodování o ceně pro konkrétního klienta.
+
+## AI workflow musí mít vstup, pravidla a výstup
+
+Dobré AI workflow není „zeptám se chatu a uvidím“. Dobré workflow má tři části:
+
+- **Vstup** — co asistent dostane: zadání, kontext, data, příklady, omezení.
+- **Pravidla** — co smí, nesmí a podle čeho má výsledek posuzovat.
+- **Výstup** — přesný formát, který může člověk rovnou použít nebo zkontrolovat.
+
+Příklad pro článek:
+
+```text
+Role: Jsi editor českého B2B blogu.
+Cíl: Připrav osnovu článku pro majitele malé SaaS firmy.
+Kontext: Firma staví privacy-first nástroje provozované v Evropě.
+Vstup: Téma, cílový čtenář, hlavní otázka, tři poznámky z praxe.
+Pravidla: Nepřidávej neověřená čísla. Vlastní názory označ jako komentář. Navrhni místa, kde je potřeba zdroj.
+Výstup: Nadpis, perex, 6 sekcí, checklist, doporučené interní odkazy, seznam zdrojů k ověření.
+```
+
+Příklad pro kontrolu specifikace:
+
+```text
+Role: Jsi produktový reviewer.
+Cíl: Najdi rizika ve specifikaci před vývojem.
+Pravidla: Neřeš stylistiku. Hledej nejasné stavy, chybějící edge cases, data retention, chybové hlášky a ruční fallback.
+Výstup: Tabulka: riziko / proč vadí / doporučená otázka / priorita.
+```
+
+Ten druhý prompt je nudnější, a proto lepší. Produktivita malého týmu často nestojí na geniálních nápadech, ale na tom, že se méně často zapomene na důležité detaily.
+
+## Co nikdy neposílat bez rozmyslu
+
+Privacy-first provoz začíná otázkou: „Co dávám do cizího systému?“ Pokud tým používá externí AI službu, měl by mít jednoduchá pravidla pro data. Ne právnickou fresku přes celou stěnu, ale pravidla, která si lidé pamatují.
+
+Nikdy neposílej do nástroje bez jasného důvodu:
+
+- osobní údaje zákazníků,
+- zdravotní, finanční nebo jiné citlivé údaje,
+- neveřejné smlouvy,
+- produkční databázové exporty,
+- přístupové tokeny, hesla nebo soukromé klíče,
+- celé interní konverzace bez odstranění citlivého kontextu,
+- obchodní strategii, kterou bys neposlal externímu dodavateli.
+
+To neznamená, že AI nejde používat. Znamená to, že musíš pracovat s anonymizací, zástupnými daty a lokálním nebo evropsky provozovaným řešením tam, kde je riziko vyšší. Pokud asistent potřebuje pochopit problém, často mu stačí struktura místo originálních dat.
+
+Místo tohoto:
+
+```text
+Tady je export zákazníků a jejich e-maily. Najdi segmenty.
+```
+
+Použij raději:
+
+```text
+Tady je anonymizovaný vzorek 30 firem: obor, velikost, tarif, aktivita za posledních 30 dní, anonymní poznámka podpory. Navrhni segmenty podle chování, ne podle identity.
+```
+
+A ještě lépe: udělej segmentaci ve vlastním systému a AI použij na interpretaci agregovaných výstupů.
+
+## Lidská kontrola podle rizika
+
+Ne každý výstup potřebuje stejnou kontrolu. Tým se zbytečně brzdí, když schvaluje každou formulaci jako právní stanovisko. Stejně tak riskuje průšvih, když nechá AI publikovat citlivý obsah bez člověka.
+
+Použij jednoduché tři úrovně:
+
+### Nízké riziko
+
+Příklady: brainstorm názvů, návrh osnovy, zkrácení interní poznámky, převod zápisu na úkoly.
+
+Kontrola:
+
+- rychlé přečtení člověkem,
+- ověření, že výstup odpovídá zadání,
+- žádné automatické publikování do veřejných kanálů bez náhledu.
+
+### Střední riziko
+
+Příklady: veřejný blogpost, e-mail zákazníkům, helpdesk článek, produktová dokumentace.
+
+Kontrola:
+
+- editor nebo vlastník tématu,
+- kontrola faktů a zdrojů,
+- kontrola tónu značky,
+- kontrola privacy dopadů a externích odkazů.
+
+### Vysoké riziko
+
+Příklady: právní texty, cenové nabídky, bezpečnostní doporučení, incidentová komunikace, automatizované rozhodování o uživatelích.
+
+Kontrola:
+
+- odpovědný člověk s kompetencí,
+- auditovatelná historie rozhodnutí,
+- jasné označení, kde AI pomohla,
+- možnost ručního fallbacku,
+- ideálně žádné citlivé vstupy do nástroje bez smluvního a bezpečnostního vyhodnocení.
+
+Evropský AI Act pracuje s rizikovým přístupem a rozlišuje různé úrovně rizika pro AI systémy. Pro malý tým z toho plyne praktická lekce: neřeš AI obecně, řeš konkrétní použití. Chat pro osnovy článků je jiný problém než systém, který rozhoduje o lidech.
+
+## Prompt knihovna jako týmová infrastruktura
+
+Pokud každý píše prompty od nuly, tým se neučí. Vytvoř malou prompt knihovnu. Ne jako muzeum kouzelných zaklínadel, ale jako normální provozní dokumentaci.
+
+Dobrý záznam v prompt knihovně obsahuje:
+
+- název workflow,
+- kdy ho použít,
+- vstupní data,
+- samotný prompt,
+- očekávaný výstup,
+- příklad dobrého výsledku,
+- rizika a co musí zkontrolovat člověk,
+- datum poslední úpravy.
+
+Začni s pěti prompty:
+
+1. Osnova článku podle zákaznické otázky.
+2. Kontrola landing page před publikací.
+3. Přepis technické odpovědi do srozumitelného e-mailu.
+4. Analýza zpětné vazby z podpory bez osobních údajů.
+5. Návrh testovacích scénářů pro novou funkci.
+
+Prompt knihovna má být verzovaná stejně jako dokumentace. Pokud se výstup zlepší, uprav prompt. Pokud se výstup pokazí, napiš k němu poznámku. Produktivita není jednorázové „našli jsme super prompt“. Produktivita je systém, který se zlepšuje.
+
+## AI v marketingu bez ztráty hlasu
+
+AI umí pomoct marketingu, ale snadno vyrobí obsahovou šedou pěnu. Vypadá jako text, má odstavce, sem tam použije slovo „efektivní“, ale nikdo si ho nezapamatuje. Lék je jednoduchý: AI nesmí vymýšlet identitu značky. Má pomáhat zpracovat myšlenky, které už značka má.
+
+Praktický postup:
+
+1. Člověk sepíše syrové poznámky z praxe.
+2. AI navrhne strukturu, otázky a chybějící místa.
+3. Člověk doplní konkrétní příklady, postoje a zkušenosti.
+4. AI pomůže zkrátit, zpřesnit a převést text do formátu.
+5. Člověk zkontroluje fakta, zdroje, tón a finální pointu.
+
+Takhle AI nekrade hlas značky. Jen dělá práci, kterou by jinak dělal unavený člověk v 22:47 s kávou, která už dávno prohrála boj s termodynamikou.
+
+U každého veřejného textu si polož tři otázky:
+
+- Je tu konkrétní zkušenost, kterou konkurence nemůže snadno okopírovat?
+- Je jasné, co je fakt, co je zdrojované tvrzení a co je názor?
+- Pomáhá text čtenáři rozhodnout se, nebo jen vyplňuje publikační kalendář?
+
+## AI v produktu a podpoře
+
+V SaaS produktu může AI pomáhat uvnitř týmu i přímo uživatelům. U interního použití je riziko obvykle menší: shrnutí tiketů, návrh odpovědi, hledání duplicit, klasifikace feedbacku. U zákaznického použití roste odpovědnost: uživatel musí vědět, co se děje, jaká data posílá a kde je hranice automatizace.
+
+Dobré interní použití:
+
+- návrh odpovědi pro podporu, kterou člověk odešle až po kontrole,
+- shrnutí posledních tiketů před plánováním sprintu,
+- hledání opakovaných problémů v anonymizované zpětné vazbě,
+- návrh release notes z commitů a popisu změn,
+- příprava testovacích scénářů podle specifikace.
+
+Rizikové použití:
+
+- automatické zamítání žádostí,
+- skryté profilování zákazníků,
+- odpovědi na právní nebo bezpečnostní otázky bez kontroly,
+- doporučení založená na datech, která uživatel nečekal, že budou použita,
+- ukládání promptů s osobními údaji bez retention pravidel.
+
+Pokud AI vstupuje přímo do produktu, přidej do produktové specifikace sekci „AI provoz“:
+
+```text
+Co AI dělá:
+Co AI nedělá:
+Jaká data dostává:
+Kde se data zpracují:
+Jak dlouho se uchovávají:
+Co vidí uživatel:
+Jak může člověk výstup opravit:
+Jak poznáme chybu:
+Jak funkci vypnout:
+```
+
+Tohle je nudné. Nudné je dobré. Nudné se dá provozovat.
+
+## Měření produktivity bez divadla
+
+AI nástroje často slibují úsporu času. Jenže „ušetřili jsme 30 % času“ bez metodiky je obvykle marketingová mlha v kravatě. Měř jednodušeji:
+
+- Kolik úkolů se díky workflow dokončí bez přepracování?
+- Kolik času trvá první použitelná verze?
+- Kolik chyb zachytí kontrolní prompt před publikací?
+- Kolik opakovaných dotazů zmizí díky lepší dokumentaci?
+- Kolik citlivých dat jsme nemuseli poslat externímu nástroji?
+
+Měř spíš trend než absolutní číslo. Pokud tým před AI neměřil čas přesně, nezačni z toho dělat falešnou vědu. Stačí porovnat několik konkrétních workflow před a po zavedení asistenta.
+
+Jednoduchá metrika pro tým:
+
+```text
+Workflow:
+Frekvence za měsíc:
+Čas před AI:
+Čas po AI:
+Počet nutných oprav:
+Rizika:
+Rozhodnutí: ponechat / upravit / zrušit
+```
+
+Produktivita není jen rychlost. Pokud AI zrychlí tvorbu textů, ale přidá faktické chyby, právní riziko a generický tón, nevydělala. Jen vyrobila dražší úklid.
+
+## Checklist: AI produktivita pro malý tým
+
+- [ ] Máme seznam opakovaných úkolů, kde AI dává smysl?
+- [ ] Začínáme nízkorizikovými workflow místo citlivých rozhodnutí?
+- [ ] Má každý AI proces jasný vstup, pravidla a výstup?
+- [ ] Ví tým, jaká data nesmí posílat do externích nástrojů?
+- [ ] Používáme anonymizaci nebo agregace tam, kde stačí?
+- [ ] Máme tři úrovně lidské kontroly podle rizika?
+- [ ] Jsou veřejné texty kontrolované na fakta, zdroje a tón značky?
+- [ ] Máme prompt knihovnu s verzemi a příklady dobrých výstupů?
+- [ ] Je u produktových AI funkcí popsáno zpracování dat a fallback?
+- [ ] Měříme reálný dopad workflow, ne jen počet vygenerovaných slov?
+- [ ] Umíme AI funkci vypnout bez pádu procesu?
+- [ ] Je jasné, kdo za výsledek odpovídá?
+
+## Mini šablona AI workflow
+
+```text
+Název workflow:
+Typ práce: vymýšlení / syntéza / produkce / kontrola / přepis
+Vlastník:
+Kdy použít:
+Kdy nepoužít:
+Vstupní data:
+Zakázaná data:
+Prompt:
+Očekávaný výstup:
+Kontrola člověkem:
+Riziková úroveň:
+Metrika úspěchu:
+Datum poslední úpravy:
+Poznámky z provozu:
+```
+
+Když malý tým používá AI tímhle způsobem, nevznikne z toho cirkus nástrojů. Vznikne klidnější provoz, rychlejší příprava podkladů a víc času na rozhodnutí, která opravdu potřebují člověka.
+
+---
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -1176,11 +1454,15 @@ Když budeš tuhle šablonu používat poctivě, obsah se začne chovat jako sys
 - RSS Advisory Board: [RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
 - Schema.org: [Article](https://schema.org/Article)
 - Google Search Central: [Article structured data](https://developers.google.com/search/docs/appearance/structured-data/article)
+- European Commission: [AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
+- European Commission: [Navigating the AI Act](https://digital-strategy.ec.europa.eu/en/faqs/navigating-ai-act)
+- NIST: [AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
 
 ---
 
 # Pracovní log
 
+- 2026-09-22: Dopsána kapitola „Produktivita malého týmu s AI asistenty“ s mapou workflow, pravidly pro data, kontrolou podle rizika, prompt knihovnou a checklistem.
 - 2026-09-22: Dopsána kapitola „Obsah, SEO, RSS a přímé distribuční kanály“ s praktickou obsahovou maticí, SEO základy, RSS doporučeními, checklistem a šablonou článku.
 - 2026-09-22: Doplněna kapitola „Marketing bez závislosti na sledovacím průmyslu“ o vlastní kanály, nabídku, obsah, distribuci, lead magnety, partnerství a privacy-first checklist.
 - 2026-09-22: Dopsána kapitola „SaaS produkt: od první verze k provozu, který neshoří“ s důrazem na MVP rozsah, onboarding, bezpečnost, zálohy, incidenty a provozní checklist.
