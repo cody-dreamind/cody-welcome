@@ -1602,6 +1602,197 @@ Evropský provoz je ve výsledku hlavně disciplína. Neznamená nejpomalejší 
 
 ---
 
+# 9. Checklisty, šablony a provozní rutiny
+
+Dobrá strategie se pozná až podle toho, co tým dělá opakovaně. Jednorázový audit je fajn, ale pokud po něm nikdo nehlídá formuláře, zálohy, obsah, přístupy a metriky, web se pomalu vrátí do chaosu. Ne dramaticky. Spíš takovým tím tichým způsobem, kdy se tři měsíce nikdo nepodívá do logů a pak se zjistí, že hlavní formulář posílal poptávky do e-mailové černé díry. Elegantní? Ne. Běžné? Bohužel ano.
+
+Provozní rutina není byrokracie. Je to ochrana pozornosti. Malý tým nepotřebuje stovky procesů, ale pár pravidelných kontrol, které zabrání drahým překvapením. Cílem není všechno měřit, všechno schvalovat a všechno zapisovat. Cílem je vědět, co je důležité, kdo to vlastní a kdy se na to někdo naposledy podíval.
+
+> Codyho komentář: Nejlepší proces je tak nudný, že ho jde udělat i v pondělí ráno před kávou. Pokud rutina vyžaduje rituální tabulku o patnácti záložkách, tým ji bude kreativně ignorovat. A bude mít pravdu.
+
+## Týdenní provozní rytmus
+
+Týdenní kontrola má být krátká. Patnáct až třicet minut stačí, pokud se dělá pravidelně a má jasný seznam. Nemá řešit redesign, produktovou strategii ani filozofii brandu. Má ověřit, že web a marketingové kanály pořád pracují.
+
+Týdenní kontrola pro web a SaaS:
+
+- projdi hlavní stránku, kontaktní stránku a nejdůležitější landing page,
+- otestuj hlavní formulář nebo registraci až po potvrzení,
+- zkontroluj dostupnost webu a poslední chyby,
+- podívej se na top stránky a nejdůležitější konverzní akce,
+- ověř, že nové články nebo změny mají správné odkazy,
+- vyber jednu drobnou opravu s vysokým dopadem.
+
+Výstup má být jednoduchý:
+
+```text
+Týden:
+Kontroloval:
+Co funguje:
+Co nefunguje:
+Jedna priorita na příští týden:
+Blokery:
+```
+
+Pokud z týdenní kontroly vznikne dvacet úkolů, není to týdenní kontrola. Je to archeologický výzkum. Zapiš nálezy, ale vyber jednu až tři věci, které se opravdu udělají.
+
+## Měsíční revize obsahu a metrik
+
+Měsíční revize je místo, kde se potká obsah, obchod a produkt. Tady už nejde jen o technické zdraví. Ptáš se, jestli web pořád odpovídá na správné otázky a jestli obsah podporuje rozhodnutí zákazníků.
+
+Otázky pro měsíční revizi:
+
+- Které stránky přivádějí kvalitní návštěvnost?
+- Které články někdo čte, ale nevedou k dalšímu kroku?
+- Které dotazy zákazníků se opakují v e-mailech, hovorech nebo podpoře?
+- Máme stránku, která na tyto dotazy odpovídá?
+- Jsou ceny, proces, termíny a kontaktní cesta stále pravdivé?
+- Neobsahuje web staré sliby, staré screenshoty nebo staré reference?
+
+Privacy-first pohled: nepotřebuješ znát identitu každého návštěvníka. Stačí vidět vzory. Když lidé chodí na článek o ceně implementace a pak mizí, možná nepotřebuješ agresivnější remarketing. Možná potřebuješ lepší vysvětlení rozpočtu, rizik a dalšího kroku.
+
+Měsíční revize může končit třemi typy úkolů:
+
+1. **Opravit** — nepravdivý text, rozbitý odkaz, slabá mikrocopy, starý screenshot.
+2. **Doplnit** — nový odstavec, FAQ, srovnání variant, šablona, příklad.
+3. **Zrušit** — stránka, skript, formulářové pole nebo kampaň, která nemá smysl.
+
+Mazání je podceňovaná marketingová disciplína. Každý zbytečný prvek bere pozornost něčemu, co by mohlo fungovat.
+
+## Čtvrtletní provozní audit
+
+Čtvrtletně si zaslouží pozornost věci, které nejsou vidět každý den: přístupy, zálohy, smlouvy, externí služby, bezpečnostní nastavení a exit plán. Tady se malý tým často spoléhá na paměť. Paměť je ale špatný ticketovací systém. Má nízkou dostupnost, divné API a občas odejde na dovolenou.
+
+Čtvrtletní audit:
+
+- zkontroluj seznam externích služeb a jejich vlastníky,
+- odeber účty lidem, kteří už přístup nepotřebují,
+- ověř, že zálohy existují a jedna obnova jde skutečně provést,
+- projdi formuláře a datovou mapu,
+- zkontroluj DNS, domény, TLS certifikáty a expirace,
+- ověř, že kritické služby mají alternativní kontakt nebo postup,
+- projdi nejdůležitější smlouvy, DPA a seznam subprocesorů,
+- aktualizuj incidentový kontakt a komunikační šablony.
+
+Nemusí to být audit na sto stran. Stačí přehled, který odpoví na otázku: „Když zítra něco spadne, víme co dělat?“
+
+## Rozhodovací deník
+
+U malého webu a SaaS produktu vzniká spousta drobných rozhodnutí: proč se vybral hosting, proč se nepoužil reklamní pixel, proč je registrace jen přes e-mail, proč se sbírá jen minimum údajů, proč se neposílá newsletter přes platformu s pochybným datovým tokem. Po půl roce si to nikdo nepamatuje.
+
+Rozhodovací deník šetří budoucí hádky. Nemusí být dlouhý. Každý větší krok zapiš jedním blokem:
+
+```text
+Datum:
+Rozhodnutí:
+Kontext:
+Zvažované možnosti:
+Vybraná možnost:
+Proč:
+Rizika:
+Kdy rozhodnutí znovu otevřít:
+```
+
+Příklad:
+
+```text
+Rozhodnutí: Nepřidáváme reklamní pixel na homepage.
+Proč: Aktuálně nemáme placenou kampaň, která by ho potřebovala, a nechceme zvyšovat datový dopad webu bez jasného přínosu.
+Kdy znovu otevřít: Až bude existovat konkrétní kampaň, rozpočet, právní posouzení a plán měření bez zbytečného sběru dat.
+```
+
+Takový zápis není brzda. Je to pojistka proti budoucímu „proč jsme to vlastně udělali?“.
+
+## Incidentová mini rutina
+
+Incident není jen velký bezpečnostní průšvih. Incident je i rozbitý formulář, výpadek plateb, chybné ceny, omylem zveřejněný interní dokument nebo deploy, který shodil část webu. Malý tým potřebuje jednoduchý postup, který funguje i pod stresem.
+
+Základní postup:
+
+1. Pojmenuj problém jednou větou.
+2. Urči dopad na uživatele a data.
+3. Zastav zhoršování situace.
+4. Oprav nebo zapni fallback.
+5. Informuj dotčené lidi přiměřeně dopadu.
+6. Zapiš příčinu a prevenci.
+
+Šablona zápisu:
+
+```text
+Datum a čas:
+Co se stalo:
+Koho se to dotklo:
+Jaká data mohla být zasažena:
+Co jsme udělali hned:
+Trvalá oprava:
+Co změníme v procesu:
+Kdo je vlastník:
+```
+
+Codyho doporučení: u incidentů piš lidsky. Ne „došlo k degradaci služby“, když ve skutečnosti nešel odeslat formulář. Lidé odpustí chybu snáz než mlhu.
+
+## Checklist: provozní rutina malého týmu
+
+- [ ] Máme týdenní kontrolu hlavních stránek, formulářů a dostupnosti.
+- [ ] Jednou měsíčně revidujeme obsah, metriky a nejčastější otázky zákazníků.
+- [ ] Čtvrtletně kontrolujeme přístupy, zálohy, externí služby a smlouvy.
+- [ ] Každá kritická služba má vlastníka a popsaný důvod použití.
+- [ ] Máme jednoduchý rozhodovací deník pro větší technické a marketingové volby.
+- [ ] Víme, kde jsou uložené domény, DNS, hosting, analytika a zdrojový kód.
+- [ ] Umíme obnovit web nebo data bez hrdinského improvizování.
+- [ ] Incidenty zapisujeme stručně, věcně a s prevencí do budoucna.
+- [ ] Pravidelně mažeme nepotřebné skripty, stránky, přístupy a formulářová pole.
+- [ ] Privacy-first pravidla jsou součástí rutiny, ne jen textu v patičce.
+
+## Mini šablona provozní nástěnky
+
+Tahle šablona se hodí jako jedna stránka v repozitáři, interní dokumentaci nebo týmovém wiki. Není určena pro veřejné sdílení, pokud obsahuje kontakty, interní služby nebo bezpečnostní detaily.
+
+```text
+Projekt:
+Produkční URL:
+Repozitář:
+Hosting:
+DNS / doména:
+Analytika:
+Formuláře:
+E-mailové odesílání:
+Zálohy:
+Monitoring:
+
+Vlastníci:
+- Produkt:
+- Technický provoz:
+- Obsah:
+- Marketing:
+- Privacy / data:
+
+Týdenní kontrola:
+- Den:
+- Odpovědná osoba:
+- Kontrolované stránky:
+
+Měsíční revize:
+- Den:
+- Hlavní otázky:
+- Výstup:
+
+Čtvrtletní audit:
+- Příští termín:
+- Rozsah:
+- Poslední test obnovy:
+
+Nouzový postup:
+- Kdo rozhoduje:
+- Kde vypnout kampaně:
+- Kde najít přístupy:
+- Jak informovat zákazníky:
+```
+
+Provoz webu a SaaS není glamour. Nikdo netleská, když záloha funguje, formulář doručuje a DNS nehoří. Ale přesně tyhle nenápadné věci tvoří důvěru. Marketing přivede pozornost. Produkt dá hodnotu. Provoz rozhodne, jestli se na to dá spolehnout.
+
+---
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -1631,6 +1822,7 @@ Evropský provoz je ve výsledku hlavně disciplína. Neznamená nejpomalejší 
 
 # Pracovní log
 
+- 2026-09-22: Dopsána kapitola „Checklisty, šablony a provozní rutiny“ s týdenní, měsíční a čtvrtletní rutinou, rozhodovacím deníkem, incidentovou mini rutinou a provozní nástěnkou.
 - 2026-09-22: Dopsána kapitola „Evropský provoz: data, hosting, zálohy a smlouvy“ s datovou mapou, výběrem hostingu, DPA/subprocesory, zálohami, přístupy, exit plánem a provozním checklistem.
 - 2026-09-22: Dopsána kapitola „Produktivita malého týmu s AI asistenty“ s mapou workflow, pravidly pro data, kontrolou podle rizika, prompt knihovnou a checklistem.
 - 2026-09-22: Dopsána kapitola „Obsah, SEO, RSS a přímé distribuční kanály“ s praktickou obsahovou maticí, SEO základy, RSS doporučeními, checklistem a šablonou článku.
