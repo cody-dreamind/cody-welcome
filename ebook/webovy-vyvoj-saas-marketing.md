@@ -960,6 +960,205 @@ Privacy-first neznamená slepý provoz. Znamená to mít dost dat pro dobré roz
 
 ---
 
+# 6. Obsah, SEO, RSS a přímé distribuční kanály
+
+Obsah není jen „blog, aby bylo co sdílet“. Pro malou firmu nebo SaaS je obsah obchodní infrastruktura: vysvětluje problém, zkracuje podporu, pomáhá obchodu, buduje důvěru a dává lidem důvod vracet se bez toho, aby je někdo naháněl reklamním pixelem po půlce internetu.
+
+Dobrá obsahová strategie má tři vrstvy:
+
+- odpovídá na otázky, které už zákazník má,
+- ukazuje konkrétní způsob práce a rozhodování,
+- umožňuje přímý odběr přes RSS, záložku, dokumentaci nebo e-mail bez nátlaku.
+
+SEO v privacy-first pojetí není trikování algoritmu. Je to disciplína: jasné stránky, dobré titulky, rychlý web, technicky čitelná struktura a obsah, který opravdu pomáhá. Google Search Central ve svém SEO starter guide dlouhodobě zdůrazňuje užitečný obsah, popisné titulky, srozumitelné URL a technicky přístupné stránky. Jinými slovy: když web dává smysl lidem, má mnohem větší šanci dávat smysl i vyhledávačům.
+
+> Codyho komentář: Nejlepší SEO hack je napsat stránku tak dobře, že ji nemusíš zachraňovat osmi pluginy, třemi pop-upy a motivačním citátem v patičce. Ano, technologie pomáhá. Ne, nenahradí myšlenku.
+
+## Obsahová matice podle rozhodnutí
+
+Nezačínej otázkou „o čem budeme psát?“. Začni otázkou „jaké rozhodnutí má obsah pomoct udělat?“ Tím se vyhneš generickým článkům typu „5 důvodů proč digitalizovat firmu“, které znějí jako leták z tiskárny, která už sama rezignovala.
+
+Praktická matice:
+
+| Fáze rozhodování | Co člověk řeší | Typ obsahu | Příklad |
+| --- | --- | --- | --- |
+| Problém | „Něco nám nefunguje, ale neumím to pojmenovat.“ | vysvětlující článek | Jak poznat, že vám web brzdí obchod |
+| Možnosti | „Jaké jsou varianty řešení?“ | srovnání, checklist | Webflow, vlastní vývoj nebo šablona: kdy co dává smysl |
+| Důvěra | „Umí tahle firma pracovat s naším typem problému?“ | případová studie | Jak jsme zjednodušili onboarding B2B SaaS |
+| Nákup | „Co přesně dostanu a co se bude dít?“ | stránka služby, FAQ | Audit webu: výstupy, cena, postup |
+| Retence | „Jak z produktu dostanu víc hodnoty?“ | návody, dokumentace | Jak nastavit první privacy-first eventy |
+
+Každý kus obsahu by měl mít jasnou roli. Pokud článek neumíš přiřadit k rozhodnutí, bude pravděpodobně sloužit jen internímu pocitu, že „publikujeme“. To je drahá forma uklidňování.
+
+## SEO základ bez magie
+
+Technické SEO pro menší web není nekonečný seznam nástrojů. Základ je překvapivě přízemní:
+
+- jedna stránka má jedno jasné téma,
+- titulek stránky odpovídá tomu, co člověk hledá,
+- meta description férově vysvětluje, co stránka nabízí,
+- URL je krátká a čitelná,
+- nadpisy tvoří logickou strukturu,
+- obrázky mají smysluplný alternativní text,
+- interní odkazy pomáhají najít související obsah,
+- sitemap pomáhá vyhledávačům objevit důležité URL,
+- `robots.txt` neblokuje omylem důležité stránky,
+- kanonická URL řeší duplicity u podobného obsahu.
+
+Příklad slabého titulku:
+
+```text
+Služby | Dreamind
+```
+
+Příklad lepšího titulku:
+
+```text
+Vývoj privacy-first SaaS aplikací pro evropské firmy | Dreamind
+```
+
+Ten druhý není delší proto, že by měl soutěžit v olympiádě klíčových slov. Je lepší, protože říká obor, typ výstupu, hodnotu i segment.
+
+U článků používej jednoduchou pracovní šablonu:
+
+```text
+Primární otázka čtenáře:
+Krátká odpověď:
+Kdy to platí:
+Kdy to neplatí:
+Konkrétní postup:
+Checklist:
+Další krok:
+```
+
+Tahle šablona nutí text sloužit člověku, ne jen zaplnit redakční kalendář.
+
+## Strukturovaná data bez přehánění
+
+Strukturovaná data jsou způsob, jak vyhledávačům strojově popsat obsah stránky. Pro články může dávat smysl `Article`, pro FAQ samostatný typ podle aktuálních pravidel vyhledávačů a pro firmu základní informace o organizaci. Schema.org poskytuje slovník typů a vlastností, Google Search Central pak popisuje, jak vybrané typy podporuje ve výsledcích hledání.
+
+Pravidlo pro malý tým: přidávej jen strukturovaná data, která odpovídají viditelnému obsahu stránky. Pokud je něco jen v JSON-LD a člověk to na stránce nevidí, je to podezřelé. SEO nemá být paralelní realita.
+
+Minimální JSON-LD pro článek může obsahovat:
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Jak navrhnout privacy-first analytiku pro SaaS",
+  "author": {
+    "@type": "Organization",
+    "name": "Dreamind"
+  },
+  "datePublished": "2026-09-22",
+  "dateModified": "2026-09-22"
+}
+```
+
+Nepotřebuješ tím obalit celý internet. Stačí pomoct strojům pochopit to, co už je kvalitně napsané pro lidi.
+
+## RSS jako tichý superkanál
+
+RSS je krásně nudná technologie. A právě proto je skvělá. Nevyžaduje algoritmus, reklamní účet, remarketingový pixel ani další platformu, která se jedno úterý rozhodne, že organický dosah je teď historická kuriozita.
+
+RSS 2.0 specifikace definuje jednoduchý formát feedu: kanál má název, odkaz, popis a položky s obsahem. Pro čtenáře to znamená možnost sledovat web ve vlastní čtečce. Pro firmu to znamená distribuční kanál, který nepotřebuje sledovat jednotlivce.
+
+Privacy-first výhody RSS:
+
+- odběr nevyžaduje e-mail,
+- čtenář si vybírá vlastní aplikaci,
+- firma nemusí posílat sledovací odkazy,
+- obsah zůstává dostupný i mimo sociální sítě,
+- web není závislý na jednom cizím algoritmu.
+
+Praktické minimum pro web:
+
+- odkaz na RSS v hlavičce nebo patičce,
+- autodiscovery tag v HTML,
+- validní feed pro články,
+- stabilní URL feedu, třeba `/rss.xml`,
+- plný obsah nebo aspoň férový výtah bez klikací manipulace.
+
+HTML autodiscovery vypadá takto:
+
+```html
+<link rel="alternate" type="application/rss+xml" title="Cody blog" href="https://cody.dreamind.cz/rss.xml">
+```
+
+RSS není náhrada za vše. Je to pojistka. Když se sociální síť rozhodne změnit pravidla, přímý kanál dál funguje.
+
+## Přímé odkazy místo platformní mlhy
+
+Každý důležitý obsah má mít vlastní stabilní URL. Ne jen post na sociální síti, ne jen PDF v e-mailu, ne jen stránku schovanou za formulářem.
+
+Dobrá URL:
+
+```text
+https://cody.dreamind.cz/clanky/privacy-first-analytika-saas
+```
+
+Slabá URL:
+
+```text
+https://example.com/post?id=8472&utm_campaign=mega_q4_final_final_v3
+```
+
+Stabilní URL umožňuje odkazování, archivaci, sdílení, interní prolinkování i návrat po měsících. Pro B2B obsah je to zásadní: rozhodování často netrvá jeden klik, ale týdny. Lidé si odkazy posílají v týmu, ukládají do dokumentů a vrací se k nim před schůzkou.
+
+UTM parametry používej střídmě. Pro kampaň stačí vědět, odkud přišla návštěva na úrovni kanálu. Není potřeba vyrábět URL, která vypadá jako faktura od energetické společnosti.
+
+## Obsahová rutina pro malý tým
+
+Nejlepší redakční plán je takový, který přežije běžný týden. Tedy týden, kdy někdo onemocní, zákazník chce změnu, produkce hoří a kalendář připomíná Tetris po třetím espressu.
+
+Praktická měsíční rutina:
+
+1. Vyber jedno hlavní téma podle obchodní priority.
+2. Sepiš pět reálných otázek zákazníků k tématu.
+3. Z jedné otázky udělej hlubší článek.
+4. Z dalších otázek udělej krátké FAQ bloky nebo dokumentaci.
+5. Propoj článek se stránkou služby, případovou studií nebo produktem.
+6. Přidej článek do RSS a sitemap.
+7. Po týdnu zkontroluj, jestli lidé čtou, klikají na další krok nebo posílají dotazy.
+
+Obsah nevzniká jen v marketingu. Vzniká v podpoře, obchodu, vývoji a onboardingových hovorech. Pokud se stejná otázka objeví třikrát, je to kandidát na článek nebo dokumentaci.
+
+## Checklist: obsah, SEO a přímé kanály
+
+- [ ] Má každý článek jasnou otázku, na kterou odpovídá?
+- [ ] Je vidět, pro koho text je a pro koho není?
+- [ ] Má stránka unikátní `<title>` a meta description?
+- [ ] Je URL krátká, čitelná a stabilní?
+- [ ] Používáme nadpisy podle struktury, ne podle velikosti písma?
+- [ ] Má web aktuální sitemap a správně nastavený `robots.txt`?
+- [ ] Jsou kanonické URL nastavené u duplicitních nebo podobných stránek?
+- [ ] Existuje RSS feed a je viditelně odkazovaný?
+- [ ] Nevyžadujeme e-mail tam, kde stačí přímý odkaz nebo RSS?
+- [ ] Jsou strukturovaná data pravdivá a odpovídají obsahu stránky?
+- [ ] Má každý důležitý obsah další logický krok?
+- [ ] Měříme úspěch obsahu bez sběru zbytečných osobních údajů?
+
+## Mini šablona pro článek
+
+```text
+Název:
+Primární čtenář:
+Rozhodnutí, kterému článek pomáhá:
+Hlavní otázka:
+Krátká odpověď:
+Konkrétní doporučení:
+Příklad z praxe:
+Checklist:
+Interní odkazy:
+Další krok:
+Zdroje:
+Privacy poznámka:
+```
+
+Když budeš tuhle šablonu používat poctivě, obsah se začne chovat jako systém. Ne jako hromada hezkých textů, které se statečně tváří, že spolu souvisí.
+
+---
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -971,11 +1170,18 @@ Privacy-first neznamená slepý provoz. Znamená to mít dost dat pro dobré roz
 - ENISA: [Cloud Security Guide for SMEs](https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes)
 - MDN Web Docs: [How to structure a web form](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/How_to_structure_a_web_form)
 - web.dev: [Core Web Vitals](https://web.dev/articles/vitals)
+- Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
+- Google Search Central: [Build and submit a sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap)
+- Google Search Central: [Introduction to robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/intro)
+- RSS Advisory Board: [RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
+- Schema.org: [Article](https://schema.org/Article)
+- Google Search Central: [Article structured data](https://developers.google.com/search/docs/appearance/structured-data/article)
 
 ---
 
 # Pracovní log
 
+- 2026-09-22: Dopsána kapitola „Obsah, SEO, RSS a přímé distribuční kanály“ s praktickou obsahovou maticí, SEO základy, RSS doporučeními, checklistem a šablonou článku.
 - 2026-09-22: Doplněna kapitola „Marketing bez závislosti na sledovacím průmyslu“ o vlastní kanály, nabídku, obsah, distribuci, lead magnety, partnerství a privacy-first checklist.
 - 2026-09-22: Dopsána kapitola „SaaS produkt: od první verze k provozu, který neshoří“ s důrazem na MVP rozsah, onboarding, bezpečnost, zálohy, incidenty a provozní checklist.
 - 2026-09-22: Dopsána kapitola „Základy moderního webového vývoje pro podnikatele“ se zaměřením na architekturu podle rizika, semantické HTML, výkon, formuláře, externí skripty, přístupnost a technický checklist.
