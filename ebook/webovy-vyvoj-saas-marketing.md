@@ -76,6 +76,10 @@ Praktický český e-book od Codyho z Dreamindu pro malé týmy, freelancery a z
    - Kde AI opravdu šetří čas a kde jen přidává riziko
    - Promptování, kontrola výstupů, data a odpovědnost
    - Checklist privacy-first AI funkce před nasazením
+18. **B2B prodej bez stalkingu**
+   - Jak stavět důvěru před prvním kontaktem
+   - Outbound, CRM disciplína a follow-up bez nátlaku
+   - Checklist obchodního procesu pro malý tým
 
 ---
 
@@ -2005,6 +2009,102 @@ Před nasazením AI asistenta do webu nebo SaaS produktu projdi:
 Mini-cvičení na 30 minut: vyber jednu AI funkci, kterou by tým chtěl přidat. Napiš její vstup, výstup, zakázané chování, datovou mapu a bezpečné selhání. Pokud se nevejde na jednu stránku, nejspíš ještě nevíš, co stavíš.
 
 
+## 18. B2B prodej bez stalkingu
+
+### 18.1 Důvěra vzniká dřív než první e-mail
+
+B2B prodej malého SaaS týmu často nezačíná demem. Začíná tím, že si někdo potichu projde web, dokumentaci, reference, ceník, changelog, podporu a možná i RSS. Pokud tam nenajde odpovědi, obchodník pak v callu hasí nejistotu, kterou mohl web vyřešit sám.
+
+Privacy-first obchod neznamená „neměřit nic“ ani „neprodávat“. Znamená to, že místo špehování každého pohybu návštěvníka stavíš systém důvěry:
+
+- jasná nabídka na produktové stránce,
+- konkrétní use casy podle typu zákazníka,
+- transparentní ceník nebo aspoň vysvětlení cenového modelu,
+- dokumentace základních integrací a exportu dat,
+- stránka o bezpečnosti, hostingu, zálohách a subdodavatelích,
+- jednoduchý kontakt bez formulářového výslechu,
+- veřejné odpovědi na nejčastější námitky.
+
+Když tyhle věci chybí, tým začne sahat po náhražkách: agresivní remarketing, session replay, enrichment databáze, nekonečné pop-upy a „rychlý call?“ po každém kliknutí. To není obchodní strategie. To je digitální nervozita v saku.
+
+Praktický úkol: napiš si deset otázek, které by rozumný B2B zákazník položil před nákupem. Pak ke každé doplň, kde na webu najde odpověď. Pokud odpověď existuje jen v hlavě zakladatele, není součástí prodejního procesu.
+
+### 18.2 Outbound bez právního a reputačního minového pole
+
+Outbound může fungovat, ale musí být přesný, relevantní a uklizený. V Evropě navíc naráží na kombinaci GDPR, ePrivacy pravidel a národních implementací. Evropská komise připomíná, že pro přímý marketing e-mailem je potřeba řešit i pravidla ePrivacy Directive, nejen obecný právní základ podle GDPR: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/application-gdpr_en. EDPB ve vodítkách k oprávněnému zájmu zdůrazňuje, že přímý marketing nemá automaticky zelenou jen proto, že Recital 47 GDPR připouští, že může být oprávněným zájmem; vždy je potřeba posoudit účel, nezbytnost a práva člověka: https://www.edpb.europa.eu/system/files/2024-10/edpb_guidelines_202401_legitimateinterest_en.pdf.
+
+Pro malý tým z toho plyne jednoduchá pracovní disciplína:
+
+1. **Neposílej masovou mlhu.** Každý kontakt musí mít konkrétní důvod, proč by pro něj zpráva mohla být relevantní.
+2. **Neobcházej opt-out.** Odhlášení nebo námitka musí být okamžitě respektovaná a zapsaná.
+3. **Nekupuj pochybné databáze.** Pokud nevíš, odkud kontakt pochází a jaký byl účel sběru, nevíš dost.
+4. **Piš jako člověk.** Jedna krátká zpráva s jasným důvodem je lepší než automatizovaná kadence o sedmi „jen se připomínám“ dílech.
+5. **Odděl sales poznámky od osobních profilů.** CRM má popisovat obchodní situaci, ne sbírat osobní drby.
+6. **Zapiš právní úvahu.** U každého typu outboundu měj v interním logu, na jakém základě kontaktuješ, odkud je kontakt a jak řešíš námitku.
+
+Tohle není právní rada; konkrétní kampaně konzultuj podle země, typu kontaktu a kanálu. Je to ale dobrý provozní standard, který snižuje šanci, že si tým splete prodej s obtěžováním.
+
+### 18.3 CRM jako paměť vztahu, ne skladiště lidí
+
+CRM je užitečné, pokud pomáhá týmu pokračovat v konverzaci bez chaosu. CRM je škodlivé, pokud se z něj stane šuplík na cokoliv, co jde zjistit o člověku.
+
+Minimální privacy-first CRM karta pro B2B SaaS:
+
+| Pole | Proč existuje | Retence |
+| --- | --- | --- |
+| Firma a veřejný web | Kontext obchodního vztahu | Dokud je lead aktivní nebo zákazník |
+| Kontaktní osoba a pracovní e-mail | Domluva schůzky a obchodní komunikace | Podle obchodního cyklu a námitek |
+| Zdroj kontaktu | Audit původu a relevance | Stejně dlouho jako lead |
+| Potřeba / use case | Aby follow-up nebyl generický | Aktualizovat po každém hovoru |
+| Stav dalšího kroku | Operativní řízení obchodu | Mazat po uzavření nebo archivaci |
+| Námitka / důvod ztráty | Produktové učení | Agregovat, osobní detaily mazat |
+
+Co do CRM nepatří bez velmi dobrého důvodu:
+
+- soukromé profily a osobní informace nesouvisející s nákupem,
+- poznámky typu „vypadá zoufale, tlačit na cenu“,
+- automaticky nasbírané enrichment údaje bez zdroje,
+- dlouhé přepisy hovorů bez retence,
+- citlivé údaje zákazníkových klientů.
+
+CRM by mělo umět jednoduché věci: ukázat další krok, historii domluvy, zdroj kontaktu, oprávnění týmu a možnost smazání nebo exportu. Pokud kvůli prodeji potřebuješ tajnou datovou laboratoř, pravděpodobně nemáš problém s daty, ale s nabídkou.
+
+### 18.4 Follow-up, který nepůsobí jako rozbitý robot
+
+Follow-up je služba zákazníkovi, pokud navazuje na reálný zájem. Je otrava, pokud jen simuluje naléhavost. Malý tým by měl mít jednoduchý rytmus:
+
+- po schůzce do 24 hodin poslat shrnutí, slíbené odkazy a další krok,
+- po týdnu jednou připomenout konkrétní otevřenou otázku,
+- po další pauze poslat užitečný materiál nebo případovou poznámku,
+- potom lead uzavřít jako neaktivní a dál ho netlačit,
+- pokud člověk požádá o konec komunikace, okamžitě skončit.
+
+Dobrá follow-up zpráva má tři věty:
+
+> Díky za včerejší call, řešili jsme hlavně export dat a onboarding týmu. Posílám slíbený checklist a krátký popis našeho EU provozu. Pokud dává smysl pokračovat, navrhuji příští krok: 30min technické demo s vaším administrátorem.
+
+Špatná follow-up zpráva:
+
+> Jen posouvám nahoru. Měli jste možnost se podívat? Bump. Bump. Bump.
+
+Ano, i obchodní schránka má důstojnost. Překvapivě.
+
+### 18.5 Checklist B2B prodeje bez stalkingu
+
+- [ ] Produktová stránka odpovídá na hlavní nákupní otázky bez nutnosti callu.
+- [ ] Web má jasnou stránku o bezpečnosti, hostingu, datech a subdodavatelích.
+- [ ] Každý outbound kontakt má zapsaný zdroj a konkrétní důvod relevance.
+- [ ] Tým respektuje odhlášení, námitky a žádosti o ukončení komunikace okamžitě.
+- [ ] CRM obsahuje jen data potřebná pro obchodní vztah a další krok.
+- [ ] Lead má definovanou retenci: aktivní, vyhraný, ztracený, neaktivní, smazat/anonymizovat.
+- [ ] Follow-up kadence je krátká, konkrétní a bez manipulativního nátlaku.
+- [ ] Obchodní námitky se agregují do produktového backlogu bez zbytečných osobních detailů.
+- [ ] Tým umí vysvětlit, proč daného člověka kontaktoval a odkud má jeho údaje.
+- [ ] Žádný nový sales nástroj nejde do provozu bez otázky: kde jsou data a kdo k nim má přístup?
+
+Mini-cvičení: projdi posledních deset leadů v CRM. U každého zkontroluj zdroj, další krok, důvod relevance a retenci. Pokud u tří nebo více neumíš odpovědět, nejdřív ukliď CRM a až potom řeš další automatizaci.
+
+
 ## Zdroje
 
 - Evropská komise: principy GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -2030,9 +2130,11 @@ Mini-cvičení na 30 minut: vyber jednu AI funkci, kterou by tým chtěl přidat
 - ENISA Secure by Design playbook: Incident response and recovery — https://github.com/enisaeu/enisa-sbd-playbook/blob/main/playbooks/12-incident-response-and-recovery.md
 - Evropská komise: AI Act / regulatory framework for artificial intelligence — https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
 - Evropská komise: AI Act enters into force — https://ec.europa.eu/commission/presscorner/detail/en/ip_24_4123
+- EDPB: Guidelines 1/2024 on processing of personal data based on Article 6(1)(f) GDPR — https://www.edpb.europa.eu/system/files/2024-10/edpb_guidelines_202401_legitimateinterest_en.pdf
 
 ## Pracovní log
 
+- 2026-09-22: Doplněna kapitola 18.1–18.5 o B2B prodeji bez stalkingu, důvěře před prvním kontaktem, outbound disciplíně, CRM minimalizaci a follow-upu bez nátlaku.
 - 2026-09-22: Doplněna kapitola 17.1–17.5 o AI asistentech v SaaS, promptu jako produktovém rozhraní, datové minimalizaci, bezpečné automatizaci a checklistu privacy-first AI funkce.
 - 2026-09-22: Doplněna kapitola 16.1–16.5 o přístupnosti jako produktové výhodě, WCAG/EAA kontextu, klávesnicovém testování, formulářích a checklistu pro malý web nebo SaaS.
 - 2026-09-21: Doplněna kapitola 15.1–15.5 o zákaznické podpoře, znalostní bázi, šablonách odpovědí, převodu dotazů do backlogu a privacy-first diagnostice.
