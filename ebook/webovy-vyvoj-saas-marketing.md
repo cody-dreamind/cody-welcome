@@ -72,6 +72,10 @@ Praktický český e-book od Codyho z Dreamindu pro malé týmy, freelancery a z
    - WCAG, EAA a praktický audit bez korporátní mlhy
    - Formuláře, navigace, obsah a testování s klávesnicí
    - Checklist přístupnosti pro malý web nebo SaaS
+17. **AI asistenti a automatizace v SaaS**
+   - Kde AI opravdu šetří čas a kde jen přidává riziko
+   - Promptování, kontrola výstupů, data a odpovědnost
+   - Checklist privacy-first AI funkce před nasazením
 
 ---
 
@@ -1887,6 +1891,120 @@ Před spuštěním projdi:
 Mini-cvičení na konec týdne: vyber jednu stránku, projdi ji klávesnicí, oprav tři největší překážky a zapiš, co se změnilo. Příští týden udělej totéž s onboardingem. Přístupnost se nejlépe zlepšuje pravidelně, ne heroickým auditem noc před launchem.
 
 
+## 17. AI asistenti a automatizace v SaaS
+
+### 17.1 Nejdřív workflow, potom model
+
+AI funkce v SaaS produktu nemá začínat otázkou „jaký model použijeme?“. To je jako stavět restauraci otázkou, jakou troubu koupit, a až potom řešit, jestli vůbec někdo chce jíst. Začni workflow: kde uživatel ztrácí čas, kde opakuje rozhodnutí a kde mu dobrý návrh pomůže udělat další krok.
+
+Dobré první use casy pro malý SaaS:
+
+- návrh odpovědi v zákaznické podpoře,
+- shrnutí dlouhé konverzace nebo incidentu,
+- kontrola formuláře před odesláním,
+- návrh checklistu podle vybraného typu projektu,
+- třídění interních poznámek do backlogu,
+- generování první verze dokumentace z existujících rozhodnutí.
+
+Slabé první use casy:
+
+- autonomní mazání dat bez člověka ve smyčce,
+- automatické právní závěry bez revize,
+- rozhodování o ceně, kreditu nebo přístupu bez vysvětlitelného procesu,
+- „AI chatbot na všechno“, který neumí říct „nevím“.
+
+Praktický test: pokud neumíš popsat vstup, očekávaný výstup, kontrolu kvality a bezpečné selhání, funkce ještě není připravená. To není brzda inovací. To je brzda průšvihů, což je můj oblíbený typ brzdy.
+
+### 17.2 Datová pravidla pro AI funkce
+
+Privacy-first AI začíná stejnou otázkou jako zbytek e-booku: jaká data opravdu potřebujeme? U AI je pokušení poslat do modelu „celý kontext“, protože model pak zní chytřeji. Jenže celý kontext často znamená osobní údaje, obchodní tajemství, interní poznámky a věci, které uživatel nikdy nečekal v automatickém zpracování.
+
+Minimální sada pravidel:
+
+1. **Odděl systémové instrukce od uživatelských dat.** Uživatelův text není pokyn k administraci systému.
+2. **Rediguj citlivé údaje před odesláním.** E-mail, telefon, tokeny, fakturační údaje a interní identifikátory často nejsou nutné.
+3. **Loguj metadata, ne celé prompty.** Pro debugging stačí typ úlohy, čas, délka vstupu, výsledek validace a chybový stav.
+4. **Nastav retenci.** Prompt a výstup nemají žít věčně jen proto, že disk je levný.
+5. **Ukaž uživateli, kdy mluví AI.** Transparentnost není dekorace, ale důvěra.
+6. **Dej možnost lidské kontroly.** Hlavně tam, kde výstup putuje k zákazníkovi nebo mění data.
+
+Evropský AI Act pracuje s rizikovým přístupem a pravidly pro různé typy systémů; Evropská komise vysvětluje rámec a cíle regulace na stránce k AI Actu: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai. U malého SaaS týmu to neznamená paniku, ale disciplínu: vědět, zda AI funkce jen pomáhá psát text, nebo už ovlivňuje práva, přístup ke službě, pracovní rozhodnutí či jiné citlivé oblasti.
+
+Z pohledu ochrany dat zůstává důležitý GDPR princip minimalizace a účelového omezení. Pokud AI funkce potřebuje osobní údaje, musí být jasné proč, jak dlouho a kdo k nim má přístup. V e-booku už máme GDPR principy ve zdrojích; u AI je jen těžší si nenamlouvat, že „model to potřebuje všechno“. Většinou nepotřebuje.
+
+*Codyho komentář:* AI bez datové mapy je kouzelnická show s účetnictvím v klobouku. Efektní, dokud se někdo nezeptá, kam zmizel králík a zákaznický export.
+
+### 17.3 Prompt jako produktové rozhraní
+
+Prompt není interní magie. Je to produktové rozhraní mezi uživatelem, daty a modelem. Proto má mít stejnou péči jako formulář nebo API endpoint.
+
+Dobrá šablona promptu obsahuje:
+
+- roli a úkol,
+- povolený rozsah informací,
+- jasný formát výstupu,
+- kritéria kvality,
+- instrukci pro nejistotu,
+- pravidlo, co nikdy nedělat.
+
+Příklad pro návrh odpovědi v podpoře:
+
+> Jsi asistent podpory pro B2B SaaS. Navrhni odpověď v češtině podle uvedeného ticketu a interní poznámky. Nepřidávej sliby, které nejsou v interní poznámce. Pokud chybí informace, napiš otázky pro operátora. Výstup rozděl na „návrh odpovědi“ a „co ověřit před odesláním“.
+
+Tahle šablona je lepší než „odpověz zákazníkovi“, protože brání halucinovanému optimismu. A halucinovaný optimismus je v podpoře jen dražší verze průšvihu.
+
+K promptu přidej testovací sadu:
+
+- jednoduchý běžný dotaz,
+- naštvaný zákazník,
+- chybějící informace,
+- citlivé údaje ve vstupu,
+- pokus uživatele obejít pravidla,
+- jazyková kombinace, kterou zákazníci reálně používají.
+
+Každou změnu promptu ber jako změnu produktu. Zapiš, co se mění, proč a jak poznáš zlepšení.
+
+### 17.4 Automatizace bez slepé důvěry
+
+AI automatizace má tři bezpečné režimy:
+
+1. **Navrhni:** model připraví návrh a člověk rozhodne.
+2. **Zkontroluj:** model upozorní na riziko, duplicitu nebo chybějící údaj.
+3. **Proveď omezený krok:** model spustí akci jen v jasně ohraničeném scénáři s audit logem.
+
+Pro začátek preferuj první dva režimy. Třetí přidej až tehdy, když máš validaci, rollback a dobrý audit log. U SaaS produktu je rozdíl mezi „AI navrhla štítek“ a „AI změnila zákazníkovi plán“. První je užitečné. Druhé je právní a podpůrný ohňostroj, pokud to uděláš bez pojistek.
+
+Před automatickou akcí si polož otázky:
+
+- Umíme vysvětlit, proč akce proběhla?
+- Umíme ji vrátit zpět?
+- Uvidí ji člověk v audit logu?
+- Má uživatel možnost opravy?
+- Co se stane při špatném výstupu?
+- Jsou vstupní data přesná a aktuální?
+
+Privacy-first provoz navíc znamená, že AI nástroj není výmluva pro nové trackery. Nepřidávej session replay, fingerprinting nebo hromadné ukládání promptů jen proto, že „potřebujeme zlepšovat model“. Nejdřív zlepšuj produkt vlastními testovacími sadami, agregovanou zpětnou vazbou a dobrovolnými reporty.
+
+### 17.5 Checklist privacy-first AI funkce
+
+Před nasazením AI asistenta do webu nebo SaaS produktu projdi:
+
+- [ ] Máme popsaný konkrétní workflow problém, ne jen „chceme AI“.
+- [ ] Víme, jaká data jdou do modelu a proč.
+- [ ] Citlivá data redigujeme nebo neposíláme, pokud nejsou nutná.
+- [ ] Uživatel pozná, kdy je výstup generovaný AI.
+- [ ] Výstup má lidskou kontrolu tam, kde může ovlivnit zákazníka, cenu, přístup nebo data.
+- [ ] Prompt má testovací sadu pro běžné, hraniční i škodlivé vstupy.
+- [ ] Logujeme jen to, co potřebujeme pro provoz a bezpečnost.
+- [ ] Máme retenci promptů, výstupů a diagnostických dat.
+- [ ] Dodavatel AI je zapsaný v datové mapě včetně regionu, rolí a subdodavatelů.
+- [ ] Umíme funkci vypnout bez rozbití hlavního produktu.
+- [ ] Máme audit log pro akce, které mění stav systému.
+- [ ] V pracovním logu evidujeme změny promptu stejně jako změny kódu.
+
+Mini-cvičení na 30 minut: vyber jednu AI funkci, kterou by tým chtěl přidat. Napiš její vstup, výstup, zakázané chování, datovou mapu a bezpečné selhání. Pokud se nevejde na jednu stránku, nejspíš ještě nevíš, co stavíš.
+
+
 ## Zdroje
 
 - Evropská komise: principy GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -1910,9 +2028,12 @@ Mini-cvičení na konec týdne: vyber jednu stránku, projdi ji klávesnicí, op
 - Kanban Guides: The Kanban Guide — https://kanbanguides.org/the-kanban-guide/
 - ENISA: Cybersecurity guide for SMEs — 12 steps to securing your business — https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
 - ENISA Secure by Design playbook: Incident response and recovery — https://github.com/enisaeu/enisa-sbd-playbook/blob/main/playbooks/12-incident-response-and-recovery.md
+- Evropská komise: AI Act / regulatory framework for artificial intelligence — https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+- Evropská komise: AI Act enters into force — https://ec.europa.eu/commission/presscorner/detail/en/ip_24_4123
 
 ## Pracovní log
 
+- 2026-09-22: Doplněna kapitola 17.1–17.5 o AI asistentech v SaaS, promptu jako produktovém rozhraní, datové minimalizaci, bezpečné automatizaci a checklistu privacy-first AI funkce.
 - 2026-09-22: Doplněna kapitola 16.1–16.5 o přístupnosti jako produktové výhodě, WCAG/EAA kontextu, klávesnicovém testování, formulářích a checklistu pro malý web nebo SaaS.
 - 2026-09-21: Doplněna kapitola 15.1–15.5 o zákaznické podpoře, znalostní bázi, šablonách odpovědí, převodu dotazů do backlogu a privacy-first diagnostice.
 - 2026-09-21: Doplněna kapitola 13.1–13.5 o konverzních formulářích, souhlasu, newsletterech a privacy-first měření bez profilování jednotlivců.
