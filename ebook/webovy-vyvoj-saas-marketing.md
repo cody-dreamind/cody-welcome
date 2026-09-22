@@ -605,6 +605,179 @@ První SaaS verze nemusí být dokonalá. Musí být poctivá. Když zákazník 
 
 ---
 
+# 4. Marketing bez závislosti na sledovacím průmyslu
+
+Marketing není synonymum pro remarketingový pixel, cookie banner na půl obrazovky a tabulku plnou UTM parametrů, kterým už nerozumí ani člověk, který je vytvořil. Dobrý marketing pomáhá správným lidem pochopit správnou věc ve správný čas. Sledovací průmysl k tomu může vypadat jako zkratka, ale často přidá závislost, právní riziko, pomalejší web a nepříjemný pocit, že firma potřebuje vědět víc, než je slušné.
+
+Privacy-first marketing nestojí na tom, že zavřeš oči a budeš doufat. Stojí na vlastních kanálech, kvalitním obsahu, měření agregovaných signálů a respektu k člověku. Neptá se „jak návštěvníka doženeme po celém internetu“, ale „jak mu dáme dost důvodů vrátit se dobrovolně“.
+
+> Codyho komentář: Pokud musí značka člověka pronásledovat reklamou tři týdny po tom, co omylem klikl na ceník, možná není problém v atribuci. Možná je problém v nabídce. Au, já vím.
+
+## Vlastní kanály jsou pojistka proti chaosu
+
+Platformy mění algoritmy, reklamní účty padají, sociální sítě střídají módní vlny a organický dosah občas připomíná loterii, jen bez roztomilého moderátora. Proto má firma budovat kanály, které opravdu vlastní nebo má pod kontrolou.
+
+Základní sada:
+
+- web s čitelnými URL a kvalitní interní navigací,
+- blog nebo znalostní báze,
+- RSS feed pro lidi, kteří chtějí sledovat obsah bez sociálních sítí,
+- e-mailový seznam založený na jasném souhlasu,
+- dokumentace, případové studie a šablony,
+- přímé kontaktní cesty bez povinného účtu u třetí strany.
+
+Sociální sítě a reklamu klidně používej jako distribuční vrstvu, ne jako hlavní sklad hodnoty. Článek publikovaný jen na platformě je pronajatý byt. Článek na vlastním webu je majetek, který může roky přivádět lidi přes vyhledávání, odkazy, RSS i doporučení.
+
+Praktický model: každá důležitá myšlenka má mít domov na webu. Z ní pak vzniknou krátké varianty pro LinkedIn, e-mail, prezentaci, obchodní follow-up nebo interní checklist. Ne obráceně. Když je původní obsah jen příspěvek v cizím feedu, za měsíc hledáš vlastní nápad jako ponožku po praní.
+
+## Nabídka před kampaní
+
+Než pustíš kampaň, zkontroluj, jestli je jasná nabídka. Spousta marketingu nefunguje ne proto, že má špatně nastavený kanál, ale protože posílá lidi na stránku, která neumí odpovědět na základní otázky.
+
+Marketingová stránka má rychle vysvětlit:
+
+- pro koho nabídka je,
+- jaký konkrétní problém řeší,
+- co zákazník dostane,
+- jak probíhá další krok,
+- kolik to přibližně stojí nebo podle čeho se cena určuje,
+- proč firmě věřit,
+- jak se zachází s daty.
+
+Příklad slabého sdělení:
+
+```text
+Pomáháme firmám růst pomocí inovativních digitálních řešení.
+```
+
+Příklad lepšího sdělení:
+
+```text
+Navrhujeme a provozujeme B2B weby a interní AI nástroje pro české firmy, které chtějí méně ruční práce, rychlejší poptávky a evropskou kontrolu nad daty.
+```
+
+Druhá věta není dokonalá poezie, ale dává člověku materiál k rozhodnutí. Ví, co se dělá, pro koho, proč a jakou hodnotu firma chrání.
+
+## Obsah, který prodává bez nátlaku
+
+Obsahový marketing často selže ve dvou extrémech. Buď je to SEO kaše bez názoru, nebo deníček zakladatele bez užitku pro zákazníka. Dobrá cesta je mezi: praktický obsah, který řeší reálný problém a zároveň ukazuje způsob myšlení firmy.
+
+Typy obsahu, které fungují pro menší B2B a SaaS týmy:
+
+- **Návody**: „Jak připravit zadání pro nový web bez zbytečných koleček.“
+- **Checklisty**: „Co zkontrolovat před spuštěním kontaktního formuláře.“
+- **Srovnání rozhodnutí**: „Statický web, CMS nebo SaaS administrace?“
+- **Případové studie**: problém, postup, výsledek, poučení.
+- **Rozbory chyb**: co se pokazilo, jak se tomu příště vyhnout.
+- **Šablony**: zadání, datová mapa, provozní list, obsahový brief.
+
+Každý obsahový kus by měl mít jednu další akci. Ne nutně agresivní prodej. Může to být stažení šablony, přečtení související kapitoly, objednání konzultace, přihlášení k RSS nebo otevření dokumentace. Bez další akce obsah končí v mlze. S příliš agresivní akcí působí jako obchodník, který v kavárně přisedne bez pozvání. Najdi normální střed.
+
+## Distribuce bez šmírovacích berliček
+
+Distribuce není jednorázové „sdílel jsem článek, teď čekám na slávu“. Je to systém opakovaného používání obsahu v různých kontextech.
+
+Jeden kvalitní článek může vzniknout znovu jako:
+
+- krátký post se silnou myšlenkou,
+- carousel nebo jednoduchý obrázek s checklistem,
+- e-mail pro existující kontakty,
+- odpověď v obchodním follow-upu,
+- interní dokument pro tým,
+- odkaz v dokumentaci produktu,
+- sekce v nabídce nebo prezentaci.
+
+Privacy-first pravidlo: distribuuj odkaz na vlastní web a měř hlavně agregovaný dopad. Nepotřebuješ na každého návštěvníka nalepit reklamní známku. Stačí vědět, že článek přivedl relevantní návštěvy, lidé pokračovali na související stránku a část z nich udělala férový další krok.
+
+UTM parametry používej střídmě. Hodí se pro odlišení kampaně nebo kanálu, ale nemají obsahovat osobní údaje, interní poznámky ani identifikátory jednotlivců. Dobře:
+
+```text
+?utm_source=newsletter&utm_medium=email&utm_campaign=webovy_audit
+```
+
+Špatně:
+
+```text
+?utm_source=ondrej_export&utm_campaign=lead_petr_novak_hot_urgent
+```
+
+To druhé je přesně ten typ „chytrého“ nápadu, který později skončí v privacy policy jako trapná archeologie.
+
+## Lead magnet bez datového hamounství
+
+Lead magnet má nabídnout hodnotu výměnou za kontakt. Férové. Ale ne každý PDF soubor musí být za e-mail. Někdy je lepší dát šablonu volně a získat důvěru. Kontakt chtěj až ve chvíli, kdy je jasné, proč dává smysl.
+
+Rozumné varianty:
+
+- veřejný checklist bez formuláře,
+- šablona dostupná přímo na stránce,
+- e-mail jen pro navazující sérii nebo konzultaci,
+- formulář s minimem polí,
+- jasné vysvětlení, co člověk dostane a jak často se ozveš.
+
+Příklad mikrocopy:
+
+```text
+Pošleme vám šablonu zadání a maximálně tři navazující e-maily k přípravě projektu. Žádný reklamní pixel, žádné předávání kontaktu partnerům. Odhlášení je v každém e-mailu.
+```
+
+Ano, je to delší než „Stáhnout zdarma“. Ale taky to zní jako firma, která má páteř, ne jako automat na sběr kontaktů.
+
+## Partnerství a komunita místo honby za dojmy
+
+Malé firmy často přeceňují placené kampaně a podceňují vztahy. Jeden dobrý partnerský odkaz, doporučení v oborové komunitě nebo kvalitní hostující článek může mít větší hodnotu než tisíc anonymních návštěv z kampaně, která přivedla lidi jen proto, že banner zrovna blikl dost nahlas.
+
+Hledej místa, kde se tvoji zákazníci už učí a rozhodují:
+
+- profesní komunity,
+- oborové newslettery,
+- podcasty a webináře,
+- lokální podnikatelské skupiny,
+- open-source projekty,
+- partnerské integrace,
+- doporučení od komplementárních služeb.
+
+Nabídni konkrétní hodnotu: checklist, audit, technický rozbor, praktickou ukázku, šablonu nebo férovou případovku. Nezačínej tím, že chceš „spolupráci“. Začni tím, co bude užitečné pro jejich publikum. Marketing, který respektuje komunitu, nepotřebuje tolik triků.
+
+## Checklist: marketing bez závislosti na sledování
+
+- [ ] Má každá kampaň jasnou nabídku a cílovou stránku?
+- [ ] Existuje vlastní webová verze každého důležitého obsahu?
+- [ ] Funguje RSS nebo jiný přímý odběr bez sociální sítě?
+- [ ] Sbírá formulář jen údaje potřebné pro slíbený účel?
+- [ ] UTM parametry neobsahují osobní údaje ani interní poznámky?
+- [ ] Umíme vyhodnotit výkon kampaně agregovaně?
+- [ ] Nejsou reklamní a sociální skripty načtené automaticky všem?
+- [ ] Má každý externí marketingový nástroj vlastníka a datovou mapu?
+- [ ] Vysvětluje stránka zacházení s daty lidsky a stručně?
+- [ ] Má obsah jasnou další akci bez nátlakových triků?
+
+## Mini šablona marketingové kampaně
+
+Použij před spuštěním newsletteru, reklamy, série postů nebo partnerství.
+
+```text
+Název kampaně:
+Primární publikum:
+Problém publika:
+Nabídka:
+Cílová stránka:
+Hlavní sdělení:
+Primární další akce:
+Sekundární další akce:
+Kanály distribuce:
+Co měříme:
+Co záměrně neměříme:
+Sbírané osobní údaje:
+Externí nástroje:
+Datum vyhodnocení:
+Rozhodnutí po vyhodnocení:
+```
+
+Marketing bez šmírování není slabší marketing. Je to marketing, který musí být užitečnější, jasnější a poctivější, protože se nemůže schovat za nekonečné dohánění lidí po internetu. To je nepříjemná disciplína. A právě proto je tak dobrá.
+
+---
+
 # 5. Privacy-first analytika a experimenty
 
 Analytika má odpovídat na otázky, ne sbírat digitální otisky pro případ, že se jednou budou hodit. U malého webu nebo SaaS produktu většinou nepotřebuješ znát „všechno o každém“. Potřebuješ vědět, jestli lidé najdou hodnotu, kde se zaseknou a která změna reálně pomohla.
@@ -803,6 +976,7 @@ Privacy-first neznamená slepý provoz. Znamená to mít dost dat pro dobré roz
 
 # Pracovní log
 
+- 2026-09-22: Doplněna kapitola „Marketing bez závislosti na sledovacím průmyslu“ o vlastní kanály, nabídku, obsah, distribuci, lead magnety, partnerství a privacy-first checklist.
 - 2026-09-22: Dopsána kapitola „SaaS produkt: od první verze k provozu, který neshoří“ s důrazem na MVP rozsah, onboarding, bezpečnost, zálohy, incidenty a provozní checklist.
 - 2026-09-22: Dopsána kapitola „Základy moderního webového vývoje pro podnikatele“ se zaměřením na architekturu podle rizika, semantické HTML, výkon, formuláře, externí skripty, přístupnost a technický checklist.
 - 2026-09-22: Dopsána kapitola „Strategie webu“ s praktickým modelem rozhodnutí návštěvníka, privacy-first pravidly, checklistem a šablonou strategického zadání.
