@@ -2845,6 +2845,219 @@ Další zlepšení:
 
 Disaster recovery plán nemusí být dlouhý. Má být použitelný ve chvíli, kdy je tým unavený, zákazníci se ptají a monitoring bliká jako vánoční stromek s úzkostí. Jedna stránka s pravdivými prioritami je lepší než dvacetistránkový dokument, který nikdo neotevře.
 
+
+## Příloha: Cenová stránka pro SaaS bez nátlaku
+
+Cenová stránka není tabulka s měsíční částkou. Je to rozhodovací nástroj. Dobrý pricing pomůže člověku rychle pochopit, který tarif je pro něj, co dostane, co nedostane, kdy má mluvit s obchodem a jestli se může produktu bezpečně dotknout bez toho, aby skončil v CRM jako lovná zvěř v reflexní vestě.
+
+Špatná cenová stránka se snaží schovat rozhodnutí za „kontaktujte nás“, falešnou naléhavost, nepřehledné limity a hvězdičky menší než svědomí reklamního pixelu. Privacy-first cenová stránka dělá opak: vysvětluje hodnotu, ukazuje limity, sbírá minimum dat a nechává člověka odejít s pocitem, že mu nikdo nenastavil past.
+
+> Codyho komentář: Když potřebuješ deset triků, aby někdo klikl na dražší tarif, problém možná není v psychologii prodeje. Možná je ten tarif jen špatně vysvětlený.
+
+### Začni podle segmentu, ne podle interní fantazie
+
+Tarify nemají být pojmenované podle toho, jak hezky vypadají v tabulce. Mají odpovídat typickým situacím zákazníků. Malý tým řeší něco jiného než agentura, rostoucí B2B firma nebo enterprise zákazník s bezpečnostním dotazníkem.
+
+Praktické dělení:
+
+| Segment | Co obvykle potřebuje | Jak to říct na cenové stránce |
+| --- | --- | --- |
+| Jednotlivec nebo freelancer | rychle vyzkoušet hodnotu, nízké riziko, jasné limity | „Pro samostatné profesionály, kteří chtějí vyřešit jeden konkrétní workflow.“ |
+| Malý tým | spolupráci, role, historii, jednoduchou fakturaci | „Pro týmy, které potřebují sdílet práci a mít přehled bez složité administrace.“ |
+| Rostoucí firma | oprávnění, integrace, podporu, kontrolu nad daty | „Pro firmy, které produkt používají v provozu a potřebují řídit přístupy i procesy.“ |
+| Enterprise / regulovaný provoz | smlouvy, bezpečnostní dokumentaci, auditní stopu, individuální podmínky | „Pro organizace s požadavky na bezpečnost, smlouvy, compliance a větší objem.“ |
+
+Ne každý SaaS potřebuje čtyři tarify. Někdy stačí dva veřejné plány a jeden individuální. Důležité je, aby rozdíl mezi nimi nebyl jen „víc všeho“, ale konkrétní změna situace zákazníka.
+
+### Vysvětli hodnotu před funkcemi
+
+Funkce patří do tabulky. Hodnota patří nad ni. Před porovnáním tarifů napiš krátkou odpověď na tři otázky:
+
+- Pro koho je produkt nejlepší?
+- Jaký výsledek pomáhá vytvořit?
+- Podle čeho si má člověk vybrat tarif?
+
+Příklad úvodu:
+
+```text
+Vyberte plán podle toho, kolik lidí bude produkt pravidelně používat a jestli potřebujete týmová oprávnění. Pokud začínáte, zvolte Start. Pokud už produkt propojujete s obchodem, podporou nebo interními procesy, zvolte Team.
+```
+
+Taková věta není sexy. Je užitečná. A užitečnost na pricingu vyhrává nad poetikou, protože člověk zrovna počítá peníze.
+
+### Tarify piš jako rozhodnutí
+
+Každý tarif má mít čtyři vrstvy:
+
+1. **Název a krátké určení** — pro koho je.
+2. **Hlavní výsledek** — co člověk získá.
+3. **Limity** — počet uživatelů, projektů, požadavků, úložiště nebo podpory.
+4. **Další krok** — koupit, vyzkoušet, objednat demo, napsat dotaz.
+
+Příklad karty tarifu:
+
+```text
+Start
+Pro jednotlivce a malé projekty, které chtějí ověřit hodnotu bez složitého nastavování.
+
+Obsahuje:
+- 1 uživatele
+- 3 aktivní projekty
+- základní export
+- e-mailovou podporu
+
+Neobsahuje:
+- týmové role
+- auditní historii
+- vlastní smluvní podmínky
+
+Další krok: Vyzkoušet na 14 dní
+```
+
+Všimni si části „Neobsahuje“. Ta není slabost. Je to prevence špatného nákupu. Pokud člověk potřebuje auditní historii, nechceš, aby si koupil levný tarif, naštval se a za týden psal podporu ve stylu „kde to je?“.
+
+### Co neskrývat pod hvězdičku
+
+Hvězdičky a drobný text nejsou zakázané kouzlo, ale používej je střídmě. Některé informace mají být viditelné hned, protože mění rozhodnutí.
+
+Na pricingu ukaž přímo:
+
+- zda jsou ceny bez DPH nebo včetně DPH,
+- jestli je možné měsíční i roční placení,
+- co se stane po skončení trialu,
+- jak funguje zrušení předplatného,
+- jaké jsou hlavní limity tarifu,
+- jestli zákazník může exportovat svá data,
+- kde jsou data provozována nebo jaký je výchozí privacy-first závazek.
+
+Privacy-first věta nemusí být dlouhá:
+
+```text
+Nepoužíváme reklamní pixely na cenové stránce. Měříme jen agregovanou návštěvnost a klíčové akce, abychom věděli, jestli je stránka srozumitelná.
+```
+
+Tohle pomáhá dvěma skupinám: zákazníkům, kteří soukromí řeší, a internímu týmu, který má jasné hranice měření.
+
+### CTA bez manipulace
+
+Cenová stránka může mít silné CTA a přitom nebýt manipulativní. Rozdíl je v tom, jestli tlačítko pomáhá rozhodnutí, nebo tlačí na úzkost.
+
+Dobrá CTA:
+
+- „Vyzkoušet Start“
+- „Objednat demo pro tým“
+- „Porovnat tarify“
+- „Zeptat se na bezpečnost“
+- „Stáhnout fakturační údaje“
+
+Podezřelá CTA:
+
+- „Poslední šance“ bez skutečného důvodu,
+- „Jen dnes“ opakované každý den,
+- „Nechci růst“ jako odmítací tlačítko,
+- formulář s povinným telefonem pro stažení ceníku,
+- demo bez možnosti položit otázku e-mailem.
+
+> Codyho komentář: Pokud tlačítko uráží člověka za to, že nechce kliknout, není to growth hacking. Je to jen nedospělý UX s kravatou.
+
+### B2B dotazy pod cenou
+
+U B2B SaaS často nestačí cena. Rozhodovatelé se ptají na bezpečnost, data, fakturaci, podporu a smlouvy. Přidej krátkou sekci „Časté otázky před nákupem“.
+
+Otázky, které se vyplatí zodpovědět:
+
+- Kde jsou provozována data?
+- Lze uzavřít DPA nebo dodat bezpečnostní podklady?
+- Jak fungují role a přístupy?
+- Co se stane s daty po zrušení účtu?
+- Lze exportovat data ve čitelném formátu?
+- Jak rychle odpovídá podpora?
+- Kdo dostává faktury a jak se mění fakturační údaje?
+
+Nemusíš prozradit vše veřejně. Ale čím víc běžných odpovědí dáš na stránku, tím méně e-mailového ping-pongu čeká obchod i zákazníka.
+
+### Měření pricingu bez šmírování
+
+Cenovou stránku lze zlepšovat bez sledování jednotlivců napříč internetem. Měř agregované signály a kvalitativní zpětnou vazbu.
+
+Užitečné signály:
+
+- návštěvy cenové stránky,
+- kliknutí na jednotlivá CTA,
+- přechod z pricingu na FAQ, bezpečnost nebo kontakt,
+- počet dokončených trialů podle tarifu,
+- otázky položené přes kontaktní formulář,
+- důvody, proč lidé zvolili vyšší nebo nižší tarif.
+
+Co raději nedělat jako výchozí stav:
+
+- reklamní remarketing na návštěvníky pricingu,
+- session replay bez silného důvodu a jasného souhlasu,
+- obohacování návštěvníků podle IP o firmografická data,
+- automatické skórování leadů bez vysvětlení a kontroly,
+- ukládání obsahu formulářů do analytických eventů.
+
+Pricing je citlivé místo. Člověk tam přemýšlí o penězích, riziku a důvěře. Chovej se podle toho.
+
+### Checklist cenové stránky
+
+- [ ] Je jasné, pro koho je každý tarif?
+- [ ] Vysvětluje stránka hodnotu ještě před tabulkou funkcí?
+- [ ] Jsou hlavní limity viditelné bez drobného textu?
+- [ ] Je uvedeno, zda jsou ceny s DPH nebo bez DPH?
+- [ ] Je jasné, co se stane po skončení trialu?
+- [ ] Má zákazník férovou cestu ke zrušení nebo dotazu?
+- [ ] Jsou B2B otázky o datech, bezpečnosti a fakturaci dostupné přímo na stránce?
+- [ ] Nepoužívá stránka falešnou naléhavost nebo ponižující odmítací texty?
+- [ ] Měříme jen signály, které opravdu pomáhají zlepšit rozhodování?
+- [ ] Je privacy-first závazek napsaný lidsky, ne jen schovaný v patičce?
+
+### Mini šablona cenové stránky
+
+```text
+Hlavní věta pricingu:
+Pro koho je produkt nejlepší:
+Jak vybrat tarif:
+
+Tarif 1:
+Název:
+Pro koho:
+Hlavní výsledek:
+Cena:
+Limity:
+Neobsahuje:
+CTA:
+
+Tarif 2:
+Název:
+Pro koho:
+Hlavní výsledek:
+Cena:
+Limity:
+Neobsahuje:
+CTA:
+
+Individuální plán:
+Pro koho:
+Kdy dává smysl:
+Co musí zákazník vědět před kontaktem:
+CTA:
+
+FAQ před nákupem:
+1.
+2.
+3.
+4.
+
+Privacy-first poznámka:
+Co měříme:
+Co záměrně neměříme:
+Kdo pricing jednou měsíčně vyhodnocuje:
+Další iterace:
+```
+
+Cenová stránka má být klidné místo pro rozhodnutí. Když vysvětluje hodnotu, limity, data a další krok bez triků, prodává lépe dlouhodobě. Možná nepřinutí každého kliknout dnes. Ale přitáhne lidi, kteří vědí, co kupují — a to je pro SaaS mnohem zdravější než sbírka zmatených trialů.
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -2877,6 +3090,7 @@ Disaster recovery plán nemusí být dlouhý. Má být použitelný ve chvíli, 
 
 # Pracovní log
 
+- 2026-09-22: Doplněna příloha „Cenová stránka pro SaaS bez nátlaku“ s návrhem tarifů podle segmentů, férovým CTA, B2B FAQ, privacy-first měřením, checklistem a vyplnitelnou šablonou.
 - 2026-09-22: Doplněna příloha „Mini disaster recovery plán pro malý SaaS“ s prioritizací kritických částí, RTO/RPO, restore testem, ručními fallbacky, incidentovou komunikací, checklistem a vyplnitelnou šablonou.
 - 2026-09-22: Doplněna příloha „Privacy-first onboarding pro SaaS“ s první hodnotnou akcí, měřením bez obsahu uživatelských dat, produktovým průvodcem, férovými e-maily, datovými hranicemi, checklistem a šablonou plánu.
 - 2026-09-22: Doplněna příloha „Šablona privacy-first landing page“ s praktickou strukturou hero sekce, bolestí, procesu, důvěry, férového CTA, datové poznámky, checklistu a vyplnitelnou šablonou.
