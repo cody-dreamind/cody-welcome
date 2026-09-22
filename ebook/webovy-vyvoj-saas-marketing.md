@@ -80,6 +80,10 @@ Praktický český e-book od Codyho z Dreamindu pro malé týmy, freelancery a z
    - Jak stavět důvěru před prvním kontaktem
    - Outbound, CRM disciplína a follow-up bez nátlaku
    - Checklist obchodního procesu pro malý tým
+19. **Changelog, release komunikace a adopce funkcí**
+   - Jak oznamovat změny bez produktového ohňostroje
+   - Release poznámky, onboarding novinek a interní rytmus
+   - Checklist změny před zveřejněním
 
 ---
 
@@ -2105,6 +2109,122 @@ Ano, i obchodní schránka má důstojnost. Překvapivě.
 Mini-cvičení: projdi posledních deset leadů v CRM. U každého zkontroluj zdroj, další krok, důvod relevance a retenci. Pokud u tří nebo více neumíš odpovědět, nejdřív ukliď CRM a až potom řeš další automatizaci.
 
 
+## 19. Changelog, release komunikace a adopce funkcí
+
+### 19.1 Changelog není skládka commitů
+
+Changelog má zákazníkovi pomoct pochopit, co se změnilo a proč by ho to mělo zajímat. Není to výpis interních commitů, technických ticketů a vět typu „minor improvements“. To je informační šum v kabátě produktové komunikace.
+
+U malého SaaS týmu má dobrý changelog tři úkoly:
+
+1. **Udržet důvěru.** Zákazník vidí, že produkt žije a že se opravují reálné věci.
+2. **Zvýšit adopci.** Nová funkce se začne používat, protože někdo vysvětlil její konkrétní přínos.
+3. **Zmenšit podporu.** Část dotazů se vyřeší veřejnou poznámkou, návodem nebo screenshotem.
+
+Piš changelog podle dopadu, ne podle interní struktury týmu. Uživatel většinou nepotřebuje vědět, že jste „refaktorovali modul billing-service“. Potřebuje vědět, že faktury se teď exportují rychleji, mají jasnější názvy souborů a export už nespadne při větším počtu položek.
+
+Praktický formát jedné položky:
+
+- **Co se změnilo:** jedna věta bez žargonu.
+- **Pro koho to je:** role, tým nebo use case.
+- **Proč je to užitečné:** konkrétní výsledek.
+- **Jak to zapnout nebo najít:** cesta v produktu.
+- **Co se může změnit v workflow:** dopad na zvyky uživatele.
+
+Příklad:
+
+> Přidali jsme uložené filtry v přehledu leadů. Obchodní týmy si teď mohou uložit vlastní pohledy jako „nové poptávky“, „čeká na odpověď“ nebo „aktivní enterprise jednání“ a nemusí každý týden znovu skládat stejné filtry. Najdeš je v CRM → Leady → Uložené pohledy.
+
+Tohle je použitelné. „Added saved filters to leads table“ je sice kratší, ale zákazníkovi nechává zbytečně moc práce.
+
+### 19.2 Release komunikace podle velikosti změny
+
+Ne každá změna si zaslouží fanfáry. Když oznámíš každou drobnost jako revoluci, lidé tě přestanou číst. Když naopak neoznámíš důležitou změnu workflow, lidé ji nebudou používat nebo se naštvou. Produktová komunikace potřebuje dávkování.
+
+Rozděl změny do čtyř úrovní:
+
+- **Tichá oprava:** bugfix bez dopadu na workflow. Patří do changelogu, ne do e-mailu.
+- **Viditelné zlepšení:** lepší filtr, export, formulář nebo rychlost. Patří do changelogu a případně do in-app oznámení.
+- **Nová schopnost:** funkce, která mění práci části uživatelů. Patří do changelogu, krátkého návodu a cíleného oznámení relevantním účtům.
+- **Změna pravidel hry:** pricing, práva, migrace, ukončení funkce, bezpečnostní změna. Patří do samostatné komunikace s jasným termínem, dopadem a kontaktem.
+
+Privacy-first pravidlo: cílení oznámení dělej podle účtu, role nebo aktivované funkce, ne podle šmírovacího profilu. Nepotřebuješ vědět, že uživatel třikrát váhal nad tlačítkem. Stačí vědět, že jeho tým používá modul, kterého se změna týká.
+
+U větších změn připrav dvě verze textu:
+
+- **Krátká verze do produktu:** 2–3 věty, odkaz na detail.
+- **Delší verze do changelogu nebo blogu:** kontext, příklad, screenshot, dopad na workflow.
+
+Tím zabráníš tomu, aby produkt vypadal jako nástěnka na školním výletě. Uživatel má v aplikaci pracovat, ne číst román o novém dropdownu.
+
+### 19.3 Adopce funkce začíná před releasem
+
+Nová funkce není hotová ve chvíli, kdy projde merge. Hotová je až tehdy, když správní lidé pochopí, kdy ji použít, proč ji použít a co jim ušetří. To je nepříjemná pravda pro všechny, kdo mají rádi zelené pipeline a neradi píšou vysvětlení.
+
+Před releasem si napiš mini adopční plán:
+
+- Který segment uživatelů má změnu vidět jako první?
+- Jaký problém jim řešíme?
+- Jaký existující zvyk nahrazujeme nebo zlepšujeme?
+- Co musí být v dokumentaci aktualizované?
+- Jak poznáme, že funkci lidé pochopili?
+- Co uděláme, když ji nikdo nepoužije?
+
+Měření adopce drž jednoduché a agregované. Místo sledování jednotlivců měř:
+
+- počet účtů, které funkci zapnuly,
+- počet týmů, které ji použily opakovaně,
+- počet podpůrných dotazů k danému workflow,
+- počet chyb nebo rollbacků,
+- kvalitativní zpětnou vazbu od zákazníků.
+
+U produktů pro B2B se často vyplatí přidat „adopční trigger“ do zákaznické podpory nebo account managementu: pokud tým funkci nevyužije do 30 dnů od oznámení a přitom řeší problém, pro který vznikla, napiš jim lidskou zprávu s konkrétním tipem. Bez sledovací creepy omáčky. Prostě: „Všimli jsme si, že řešíte exporty pro účetní. Přidali jsme uložené exportní šablony, tady je návod.“
+
+*Codyho komentář:* nejlepší growth hack je často obyčejné vysvětlení. Strašně nepopulární, protože se nedá prodat jako sedmivrstvá AI revenue orchestration platforma. Funguje ale podezřele často.
+
+### 19.4 Interní release rytmus pro malý tým
+
+Malý tým nepotřebuje enterprise release proces s patnácti komisemi. Potřebuje rytmus, který sníží chaos a přitom nezabije rychlost.
+
+Praktický týdenní release rytmus:
+
+- **Pondělí:** potvrdit, co jde tento týden ven a co se odkládá.
+- **Středa:** zkontrolovat dokumentaci, migrace, podporu a rizika.
+- **Čtvrtek:** připravit changelog, screenshoty, interní poznámky a případné oznámení.
+- **Pátek:** raději nenasazovat velké rizikové změny, pokud tým nechce víkendový sport jménem „proč nám nejde billing“.
+
+U každé větší změny měj krátkou release kartu:
+
+- název změny,
+- vlastník,
+- koho se týká,
+- riziko pro data nebo dostupnost,
+- dopad na dokumentaci,
+- dopad na podporu,
+- plán rollbacku,
+- text oznámení,
+- metrika úspěchu.
+
+Privacy-first položka nesmí chybět: mění se sběr dat, retence, export, subdodavatel nebo účel zpracování? Pokud ano, release není jen produktový. Je i provozní a právní. Aktualizuj datovou mapu, privacy text a interní podporu dřív, než uživatel položí nepříjemnou otázku. Nepříjemná otázka položená zákazníkem je levnější než nepříjemná otázka položená regulátorem, ale obě bolí.
+
+### 19.5 Checklist změny před zveřejněním
+
+Před publikací release poznámky nebo oznámení si odškrtni:
+
+- [ ] Umíme změnu vysvětlit jednou větou bez interního žargonu.
+- [ ] Víme, pro koho je změna relevantní a koho nemá rušit.
+- [ ] Changelog popisuje dopad na uživatele, ne jen technickou implementaci.
+- [ ] Dokumentace, nápověda nebo screenshoty odpovídají nové realitě.
+- [ ] Podpora ví, co se změnilo, jak odpovědět a kam eskalovat problém.
+- [ ] Máme plán rollbacku nebo aspoň jasné bezpečné selhání.
+- [ ] Víme, jak změnu změříme agregovaně a bez profilování jednotlivců.
+- [ ] Pokud změna ovlivňuje data, aktualizovali jsme datovou mapu a privacy texty.
+- [ ] Uživatel má jasný další krok: vyzkoušet, zapnout, přečíst návod nebo nic nedělat.
+- [ ] Interně je zapsané, proč změna vznikla a jak poznáme, že se povedla.
+
+Mini-cvičení na 30 minut: vezmi poslední tři releasy a přepiš jejich poznámky do formátu „co se změnilo / pro koho / proč je to užitečné / kde to najdu“. Pokud to nejde napsat bez interního slovníku, release ještě nebyl produktově dovysvětlený.
+
+
 ## Zdroje
 
 - Evropská komise: principy GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
@@ -2134,6 +2254,7 @@ Mini-cvičení: projdi posledních deset leadů v CRM. U každého zkontroluj zd
 
 ## Pracovní log
 
+- 2026-09-22: Doplněna kapitola 19.1–19.5 o changelogu, release komunikaci, adopci funkcí, interním release rytmu a privacy-first checklistu změny.
 - 2026-09-22: Doplněna kapitola 18.1–18.5 o B2B prodeji bez stalkingu, důvěře před prvním kontaktem, outbound disciplíně, CRM minimalizaci a follow-upu bez nátlaku.
 - 2026-09-22: Doplněna kapitola 17.1–17.5 o AI asistentech v SaaS, promptu jako produktovém rozhraní, datové minimalizaci, bezpečné automatizaci a checklistu privacy-first AI funkce.
 - 2026-09-22: Doplněna kapitola 16.1–16.5 o přístupnosti jako produktové výhodě, WCAG/EAA kontextu, klávesnicovém testování, formulářích a checklistu pro malý web nebo SaaS.
