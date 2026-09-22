@@ -2708,6 +2708,143 @@ Další iterace:
 
 Onboarding není hotový nikdy. Ale první verze může být velmi dobrá, když se drží jedné hodnotné akce, férové komunikace a minimálního sběru dat. Uživatel nepotřebuje, aby ho produkt sledoval jako podezřelého. Potřebuje, aby ho produkt dovedl k výsledku.
 
+## Příloha: Mini disaster recovery plán pro malý SaaS
+
+Disaster recovery zní jako něco, co řeší banky, nemocnice a lidé s příliš mnoha monitory. Ve skutečnosti je to obyčejná odpověď na otázku: „Co uděláme, když produkt zítra ráno nejde, data jsou poškozená nebo nám odejde dodavatel?“ Malý tým nepotřebuje román. Potřebuje krátký plán, který jde použít ve stresu.
+
+Nejhorší plán obnovy je ten, který existuje jen v hlavě jednoho člověka. Druhý nejhorší je ten, který vypadá skvěle v dokumentu, ale nikdo ho nikdy nezkusil. Cíl není dramatická dokonalost. Cíl je vědět, co obnovit jako první, kdo rozhoduje, kde jsou přístupy, jak dlouho výpadek uneseme a jak zákazníkům říct pravdu bez paniky.
+
+> Codyho komentář: Když se něco rozbije, lidé nepotřebují hrdinu. Potřebují checklist, přístup do monitoringu a někoho, kdo napíše srozumitelnou větu zákazníkům. Plášť nech doma, bude se motat do kabelů.
+
+### Urči, co je opravdu kritické
+
+Ne všechno v produktu má stejnou prioritu. Marketingový blog může počkat. Přihlašování, databáze, platby, formuláře a zákaznické exporty většinou ne. Když nemáš priority předem, při incidentu se tým začne hádat uprostřed kouře.
+
+Rozděl systém do tří tříd:
+
+| Třída | Co sem patří | Cíl při výpadku |
+| --- | --- | --- |
+| Kritické | přihlášení, databáze, hlavní produktová akce, platby, formuláře s leady | obnovit jako první nebo mít ruční náhradní postup |
+| Důležité | administrace, e-maily, analytika, dokumentace, integrační úlohy | obnovit po stabilizaci kritických částí |
+| Odložitelné | blog, kosmetické funkce, interní dashboardy, sekundární reporty | neblokovat obnovu produktu |
+
+Praktický test: pokud výpadek dané části znamená ztrátu zákazníkovy práce, peněz nebo důvěry, je kritická. Pokud jen zhorší pohodlí týmu, pravděpodobně počká.
+
+### Nastav RTO a RPO lidsky
+
+RTO říká, jak dlouhý výpadek ještě uneseš. RPO říká, kolik dat si můžeš dovolit ztratit. Nepotřebuješ akademickou definici na nástěnce. Potřebuješ čísla, podle kterých navrhneš zálohy a obnovu.
+
+Příklad pro malý B2B SaaS:
+
+```text
+Hlavní aplikace: RTO 4 hodiny, RPO 1 hodina
+Databáze zákaznických projektů: RTO 4 hodiny, RPO 15 minut
+Marketingový web: RTO 24 hodin, RPO 24 hodin
+Analytika: RTO 72 hodin, RPO 24 hodin
+```
+
+Čísla musí odpovídat realitě. Pokud chceš RPO 15 minut, ale zálohuješ jednou denně, nemáš plán. Máš hezky pojmenované přání.
+
+### Zálohy bez testu nejsou zálohy
+
+Záloha je užitečná až ve chvíli, kdy ji umíš obnovit. Jednou měsíčně si proto udělej malý restore test do odděleného prostředí. Ne do produkce, pokud nechceš adrenalinový sport zdarma.
+
+Co testovat:
+
+- existuje poslední očekávaná záloha,
+- jde stáhnout bez speciálního přístupu jednoho člověka,
+- jde obnovit do čistého prostředí,
+- aplikace nad obnovenými daty nastartuje,
+- citlivá data při testu neopustí kontrolované prostředí,
+- po testu se dočasné prostředí smaže.
+
+U privacy-first provozu je důležité i to, kde zálohy fyzicky leží, kdo k nim má přístup a jak dlouho se drží. Záloha není výjimka z pravidel ochrany dat. Je to jejich zkouška v těžším režimu.
+
+### Připrav ruční fallback
+
+Malý tým často nepotřebuje druhou kompletní infrastrukturu. Potřebuje ruční náhradní cestu pro nejdůležitější procesy.
+
+Příklady:
+
+- formulář nejde: dočasně zobraz e-mail a krátký text, co má zákazník poslat,
+- platební brána nejde: umožni vystavit fakturu ručně,
+- administrace nejde: měj interní postup pro bezpečnou opravu přes server nebo databázi,
+- e-mailing nejde: zveřejni stav na status stránce a pošli zprávu ručně z domény,
+- integrace s externí službou nejde: frontuj úlohy a zákazníkovi ukaž stav „zpracujeme později“.
+
+Fallback má být jednoduchý a předem napsaný. Během incidentu nevymýšlej texty, kde se omlouváš „za případné nepříjemnosti“ jako robot po kurzíku korporátní mlhy. Napiš: co se děje, koho se to týká, co děláš, kdy dáš další aktualizaci.
+
+### Komunikace při incidentu
+
+Mlčení je nejrychlejší způsob, jak malý technický problém změnit v problém důvěry. Nemusíš zákazníkům posílat technickou pitvu. Musíš jim dát pravdivý stav a další krok.
+
+Krátká šablona první zprávy:
+
+```text
+Aktuálně řešíme výpadek [část služby]. Týká se to [koho / jaké akce]. Data chráníme a priorita je obnovení [konkrétní funkce]. Další aktualizaci dáme nejpozději v [čas].
+```
+
+Krátká šablona po opravě:
+
+```text
+Výpadek [část služby] je vyřešen. Trval přibližně [čas]. Dopad byl [stručně]. Udělali jsme [opatření] a do [datum] doplníme [prevence]. Díky za trpělivost.
+```
+
+Pokud incident zasáhne osobní data, neimprovizuj. Aktivuj odpovědnou osobu, zapiš časovou osu, odděl fakta od domněnek a postupuj podle právního a bezpečnostního procesu. Tohle je přesně chvíle, kdy se vyplatí mít kontakty a role napsané předem.
+
+### Checklist obnovy po výpadku
+
+- [ ] Máme seznam kritických částí produktu?
+- [ ] Má každá kritická část stanovené RTO a RPO?
+- [ ] Víme, kde jsou zálohy a kdo k nim má přístup?
+- [ ] Proběhl za poslední měsíc restore test?
+- [ ] Existuje ruční fallback pro formulář, platby a zákaznickou podporu?
+- [ ] Máme připravené šablony incidentové komunikace?
+- [ ] Víme, kdo rozhoduje o veřejné komunikaci?
+- [ ] Máme kontakt na hosting, doménu, e-mail, platební bránu a klíčové dodavatele?
+- [ ] Umíme po incidentu udělat krátké postmortem bez hledání viníka?
+- [ ] Máme plán, jak po testu nebo incidentu bezpečně smazat dočasná data?
+
+### Mini šablona disaster recovery plánu
+
+```text
+Produkt / služba:
+Vlastník provozu:
+Zástupce:
+
+Kritické části:
+1. Název:
+   RTO:
+   RPO:
+   Kde jsou zálohy:
+   Jak ověřit obnovu:
+   Ruční fallback:
+
+2. Název:
+   RTO:
+   RPO:
+   Kde jsou zálohy:
+   Jak ověřit obnovu:
+   Ruční fallback:
+
+Kontakty:
+- Hosting:
+- DNS / doména:
+- E-mail:
+- Platební brána:
+- Právní / DPO kontakt:
+
+První interní zpráva při incidentu:
+První zákaznická zpráva:
+Interval aktualizací:
+
+Poslední restore test:
+Výsledek testu:
+Další zlepšení:
+```
+
+Disaster recovery plán nemusí být dlouhý. Má být použitelný ve chvíli, kdy je tým unavený, zákazníci se ptají a monitoring bliká jako vánoční stromek s úzkostí. Jedna stránka s pravdivými prioritami je lepší než dvacetistránkový dokument, který nikdo neotevře.
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -2740,6 +2877,7 @@ Onboarding není hotový nikdy. Ale první verze může být velmi dobrá, když
 
 # Pracovní log
 
+- 2026-09-22: Doplněna příloha „Mini disaster recovery plán pro malý SaaS“ s prioritizací kritických částí, RTO/RPO, restore testem, ručními fallbacky, incidentovou komunikací, checklistem a vyplnitelnou šablonou.
 - 2026-09-22: Doplněna příloha „Privacy-first onboarding pro SaaS“ s první hodnotnou akcí, měřením bez obsahu uživatelských dat, produktovým průvodcem, férovými e-maily, datovými hranicemi, checklistem a šablonou plánu.
 - 2026-09-22: Doplněna příloha „Šablona privacy-first landing page“ s praktickou strukturou hero sekce, bolestí, procesu, důvěry, férového CTA, datové poznámky, checklistu a vyplnitelnou šablonou.
 - 2026-09-22: Doplněna SaaS podkapitola „Retence bez šmírování“ s privacy-first signály hodnoty, rozhovory se zákazníky, měsíční retenční rutinou a vyplnitelnou šablonou.
