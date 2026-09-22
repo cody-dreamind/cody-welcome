@@ -2541,6 +2541,173 @@ Co záměrně neměříme:
 
 Landing page není izolovaný ostrov. Má navazovat na článek, případovou studii, dokumentaci, nabídku i reálný obchodní proces. Když stránka slibuje konzultaci a tým potom pošle generický e-mail za deset dní, problém není v konverzním poměru. Problém je v provozu. A provoz, jak už víme, má nepříjemný zvyk říkat pravdu.
 
+## Příloha: Privacy-first onboarding pro SaaS
+
+Onboarding není série e-mailů, která nového uživatele utluče funkcemi. Je to krátká cesta k prvnímu smysluplnému výsledku. U malého SaaS produktu je onboarding často rozdíl mezi „zajímavé, někdy se vrátím“ a „aha, tohle mi šetří práci už dnes“.
+
+Privacy-first onboarding má ještě jednu výhodu: nemusíš sledovat každý pohyb myši, abys poznal, jestli uživatel dostal hodnotu. Stačí navrhnout produkt tak, aby hlavní kroky byly jasné, dobrovolné a měřitelné bez sběru zbytečných osobních dat.
+
+> Codyho komentář: Pokud onboarding potřebuje dvacet automatizovaných e-mailů, pět modálních oken a detektivní analytiku, problém možná není v uživateli. Možná produkt šeptá místo toho, aby normálně vysvětlil první krok.
+
+### Začni první hodnotnou akcí
+
+Nejdřív definuj jednu akci, po které má uživatel reálný důvod se vrátit. Ne registraci. Ne otevření dashboardu. Skutečnou hodnotu.
+
+Příklady:
+
+- analytický nástroj: první přidaný web a ověřený měřicí kód,
+- fakturační SaaS: první odeslaná testovací faktura,
+- rezervační systém: první vytvořená služba a veřejný rezervační odkaz,
+- knowledge base: první publikovaný článek,
+- CRM pro malé týmy: první importovaný kontakt a naplánovaný další krok.
+
+Tahle akce se stane severkou onboardingu. Všechno, co k ní nepomáhá, odlož. Profilová fotka, barva tlačítek a integrace s pěti nástroji počkají. První hodnota má přednost před kosmetikou.
+
+### Měř méně kroků, ale přesněji
+
+Privacy-first onboarding nemusí ignorovat data. Jen je potřeba měřit kroky, které mají smysl, a nesbírat obsah, který uživatel zadává.
+
+Rozumné eventy:
+
+```text
+signup_completed
+workspace_created
+first_project_created
+first_public_link_created
+invite_sent
+trial_limit_reached
+export_completed
+```
+
+Špatné eventy:
+
+```text
+input_field_text_changed
+email_subject_typed
+customer_note_created_with_content
+user_hovered_pricing_button_17_times
+```
+
+Měř stav a dokončení, ne soukromý obsah práce. Pokud potřebuješ znát kvalitu prvního výstupu, ptej se uživatele nebo analyzuj anonymizované vzory až po jasném souhlasu a dobrém důvodu. Produktová zvědavost není legitimní důvod sbírat všechno.
+
+### Ukaž cestu uvnitř produktu
+
+Dobrý onboarding má být vidět přímo v produktu. E-mail je připomínka, ne berlička pro špatné rozhraní.
+
+Praktická struktura prvního dashboardu:
+
+1. Krátká věta, co má uživatel udělat jako první.
+2. Tři až pět kroků s jasným stavem dokončení.
+3. Ukázková data nebo šablona, aby člověk nezačínal z prázdna.
+4. Viditelný kontakt na podporu nebo odkaz na dokumentaci.
+5. Možnost přeskočit průvodce bez trestu.
+
+Příklad:
+
+```text
+Dokonči první rezervační stránku za 10 minut.
+
+[ ] Přidej službu
+[ ] Nastav dostupné časy
+[ ] Zkopíruj veřejný odkaz
+[ ] Otestuj rezervaci
+
+Nechceš průvodce? Přeskočit a otevřít celý dashboard.
+```
+
+Nenuť uživatele do umělé sekvence, pokud už ví, co dělá. Povinný produktový tur je jako prodavač, který zákazníkovi brání dojít k regálu, protože musí nejdřív slyšet historii firmy.
+
+### E-maily: krátké, užitečné a férové
+
+Onboardingové e-maily mají pomáhat, ne maskovat slabý produkt. Posílej je podle jasného důvodu, ne podle touhy „zůstat top of mind“.
+
+Minimalistická série pro trial:
+
+| Kdy | Cíl | Obsah |
+| --- | --- | --- |
+| Ihned po registraci | Orientace | přihlašovací odkaz, první krok, odkaz na nápovědu |
+| Po 24 hodinách bez první hodnotné akce | Pomoc | jedna konkrétní rada a možnost odpovědět člověku |
+| Po dokončení první hodnotné akce | Posílení hodnoty | další doporučený krok, ne seznam všech funkcí |
+| Tři dny před koncem trialu | Férové rozhodnutí | co uživatel vytvořil, co zůstane dostupné, jak pokračovat nebo exportovat data |
+
+Každý e-mail by měl projít testem: kdyby ho uživatel dostal v rušném dni, pochopí do deseti vteřin, proč mu přišel? Pokud ne, smaž ho nebo přepiš.
+
+### Datové hranice už při onboardingu
+
+Nový uživatel je v křehké fázi důvěry. Neptej se na věci, které nepotřebuješ pro první výsledek.
+
+Nevhodné otázky při registraci:
+
+- telefonní číslo, když produkt funguje čistě online,
+- velikost firmy, když nemění onboarding,
+- detailní rozpočet, když člověk teprve testuje,
+- marketingový souhlas před vysvětlením hodnoty,
+- povinný import kontaktů před vytvořením prvního projektu.
+
+Lepší přístup:
+
+- povinné minimum: e-mail, heslo nebo magic link,
+- volitelné otázky až ve chvíli, kdy zlepší doporučení,
+- jasné vysvětlení, proč se ptáš,
+- možnost pokračovat bez odpovědi,
+- export a smazání dat viditelně v nastavení.
+
+Krátká věta do registrace:
+
+```text
+Pro založení účtu potřebujeme jen e-mail. Další údaje doplníš dobrovolně, pokud ti pomohou nastavit produkt rychleji.
+```
+
+### Checklist onboardingové iterace
+
+- [ ] Je definovaná první hodnotná akce?
+- [ ] Vede první obrazovka uživatele k této akci?
+- [ ] Má uživatel šablonu nebo ukázková data, aby nezačínal z prázdna?
+- [ ] Měříme dokončení klíčových kroků bez obsahu uživatelských dat?
+- [ ] Umí uživatel přeskočit průvodce?
+- [ ] Posíláme jen e-maily s jasným užitečným důvodem?
+- [ ] Má každý onboardingový e-mail jednu akci?
+- [ ] Nepožadujeme data, která nejsou nutná pro první hodnotu?
+- [ ] Je vidět cesta k exportu nebo smazání dat?
+- [ ] Má tým rutinu pro kontrolu neúspěšných onboardingů alespoň jednou měsíčně?
+
+### Mini šablona onboardingového plánu
+
+```text
+Produkt:
+Primární uživatel:
+První hodnotná akce:
+Co musí uživatel udělat před ní:
+Co může počkat:
+
+První obrazovka po registraci:
+Kroky průvodce:
+1.
+2.
+3.
+
+Eventy, které měříme:
+-
+-
+-
+
+Data, která záměrně nesbíráme:
+-
+-
+
+Onboardingové e-maily:
+1. Ihned po registraci:
+2. Po neaktivitě:
+3. Po první hodnotné akci:
+4. Před koncem trialu:
+
+Signály, že onboarding selhává:
+Měsíční otázka pro tým:
+Další iterace:
+```
+
+Onboarding není hotový nikdy. Ale první verze může být velmi dobrá, když se drží jedné hodnotné akce, férové komunikace a minimálního sběru dat. Uživatel nepotřebuje, aby ho produkt sledoval jako podezřelého. Potřebuje, aby ho produkt dovedl k výsledku.
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -2573,6 +2740,7 @@ Landing page není izolovaný ostrov. Má navazovat na článek, případovou st
 
 # Pracovní log
 
+- 2026-09-22: Doplněna příloha „Privacy-first onboarding pro SaaS“ s první hodnotnou akcí, měřením bez obsahu uživatelských dat, produktovým průvodcem, férovými e-maily, datovými hranicemi, checklistem a šablonou plánu.
 - 2026-09-22: Doplněna příloha „Šablona privacy-first landing page“ s praktickou strukturou hero sekce, bolestí, procesu, důvěry, férového CTA, datové poznámky, checklistu a vyplnitelnou šablonou.
 - 2026-09-22: Doplněna SaaS podkapitola „Retence bez šmírování“ s privacy-first signály hodnoty, rozhovory se zákazníky, měsíční retenční rutinou a vyplnitelnou šablonou.
 - 2026-09-22: Doplněna příloha „Launch checklist pro privacy-first web nebo SaaS“ se strategickou, technickou, datovou, distribuční a první týden provozní kontrolou včetně vyplnitelné šablony.
