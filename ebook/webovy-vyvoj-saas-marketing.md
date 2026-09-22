@@ -1437,15 +1437,184 @@ Když malý tým používá AI tímhle způsobem, nevznikne z toho cirkus nástr
 
 ---
 
+# 8. Evropský provoz: data, hosting, zálohy a smlouvy
+
+Evropský provoz není nálepka do patičky. Je to soubor rozhodnutí: kde běží aplikace, kdo vidí data, jak se obnovuje provoz, co je ve smlouvách a jak rychle umíš zákazníkovi odpovědět, když se zeptá na soukromí. Dobrá zpráva: malý tým nemusí mít právní oddělení ani enterprise bezpečnostní divadlo. Potřebuje pořádek, jasné hranice a pár nudných rutin, které se skutečně dodržují.
+
+Privacy-first provoz začíná jednoduchou větou:
+
+```text
+Víme, jaká data sbíráme, proč je sbíráme, kde jsou uložená, kdo k nim má přístup a jak je umíme smazat nebo vyexportovat.
+```
+
+Pokud na tu větu neumíš odpovědět bez hodinového lovení v e-mailech, nemáš provozní strategii. Máš archeologické naleziště SaaS účtů.
+
+> Codyho komentář: Největší riziko malých týmů nebývá jeden zlý hacker v kapuci. Často je to pět let starý účet v nástroji, který už nikdo nepoužívá, ale pořád má export zákazníků. Kapuce volitelná, chaos povinný.
+
+## Datová mapa před výběrem hostingu
+
+Nejdřív si napiš datovou mapu, až potom řeš poskytovatele. Hosting v EU je skvělý začátek, ale sám o sobě nestačí. Pokud formuláře posíláš do amerického CRM, logy do externí observability služby a marketingové skripty do tří reklamních platforem, „server ve Frankfurtu“ tě nespasí.
+
+Datovou mapu drž krátkou a živou. Pro každý typ dat stačí:
+
+| Typ dat | Proč je máme | Kde jsou | Kdo má přístup | Retence | Export/smazání |
+| --- | --- | --- | --- | --- | --- |
+| Kontaktní formulář | odpověď na poptávku | e-mail + CRM | obchod, jednatel | 12 měsíců bez vztahu | ručně z CRM a mailboxu |
+| Účet v SaaS | přihlášení a provoz služby | primární databáze | podpora, admin | po dobu účtu + účetní minimum | self-service export |
+| Analytika webu | zlepšení obsahu | EU analytika | produkt, marketing | agregovaně 13 měsíců | bez osobního profilu |
+| Chybové logy | ladění incidentů | logovací systém | vývoj | 30 dní | rotace logů |
+
+Retence nemusí být dokonalá na první dobrou. Musí být vědomá. „Navždy, protože default“ není strategie. Je to digitální půda, jen bez vůně sena.
+
+## Hosting: vybírej podle kontroly, ne podle hype
+
+Při výběru hostingu nebo PaaS řeš čtyři věci: umístění dat, provozní přístup, obnovitelnost a smluvní podklady.
+
+Dobré otázky pro poskytovatele:
+
+- V jakých regionech jsou primární data, zálohy a logy?
+- Kteří subdodavatelé se mohou dostat k datům nebo provozním metadatům?
+- Existuje zpracovatelská smlouva podle GDPR a seznam subprocesorů?
+- Jak funguje export dat při odchodu?
+- Jaké jsou limity podpory, dostupnosti a obnovy po incidentu?
+- Umíme provoz obnovit jinde, pokud služba zdraží nebo skončí?
+
+U jednoduchého webu často stačí statický hosting, evropské úložiště, vlastní doména, jednoduchý build a zálohovaný repozitář. U SaaS už řeš databázi, fronty, objektové úložiště, e-maily, monitoring, tajné klíče a incidenty. Každá další služba zvyšuje nejen schopnosti, ale i odpovědnost.
+
+Praktické pravidlo:
+
+- **Web s obsahem:** minimum JavaScriptu, statické stránky, EU analytika, RSS, zálohovaný zdroják.
+- **Lead-gen web:** formuláře s jasným účelem, omezená retence, ošetřené přílohy, spam ochrana bez invazivního trackingu.
+- **SaaS:** oddělené produkční a testovací prostředí, šifrované zálohy, audit přístupů, incident postup, export zákaznických dat.
+- **Citlivější B2B provoz:** smluvní přílohy, bezpečnostní dotazník, řízené role, pravidelné testy obnovy.
+
+## Smlouvy: méně magie, víc jasných rolí
+
+GDPR rozlišuje role správce a zpracovatele podle toho, kdo určuje účely a prostředky zpracování. Evropská komise k tomu uvádí praktický přehled rolí i to, že povinnosti zpracovatele vůči správci mají být popsané ve smlouvě nebo jiném závazném aktu. EDPB má k pojmům správce a zpracovatel samostatné pokyny. V praxi to znamená: když používáš externí službu pro hosting, e-mailing, CRM, podporu nebo analytiku, musíš vědět, v jaké roli vystupuje a co se s daty děje.
+
+Minimum pro malý tým:
+
+- seznam dodavatelů, kteří zpracovávají osobní údaje,
+- odkaz na jejich DPA nebo zpracovatelskou smlouvu,
+- seznam subprocesorů nebo místo, kde je dodavatel zveřejňuje,
+- informace o umístění dat a případných transferech mimo EHP,
+- kontakt pro bezpečnostní nebo privacy dotazy,
+- rozhodnutí, proč je nástroj potřeba.
+
+Nedělej ze smluv papírový oltář. Dělej z nich provozní pomůcku. Když zákazník pošle bezpečnostní dotazník, nechce slyšet „zeptáme se vývojáře, co si pamatuje“. Chce rychlou, klidnou odpověď.
+
+## Zálohy a obnova: záloha bez testu je přání
+
+Zálohy nejsou hotové tím, že někde existuje soubor s dnešním datem. Hotové jsou až ve chvíli, kdy z nich umíš obnovit provoz. ENISA ve svých materiálech pro malé a střední podniky opakovaně zdůrazňuje řízení rizik, kontinuitu provozu a otázky, které si má firma klást při pořizování cloudových služeb. Přeloženo do Codyho jazyka: jestli nevíš, jak dlouho trvá obnova, tak nemáš RTO. Máš horoskop.
+
+Pro každý důležitý systém si nastav:
+
+- **RPO** — kolik dat si můžeš dovolit ztratit,
+- **RTO** — jak dlouho může služba realisticky neběžet,
+- **frekvenci záloh** — denně, hodinově, průběžně podle hodnoty dat,
+- **místo záloh** — oddělené od primární infrastruktury,
+- **šifrování a přístupy** — kdo může zálohy číst a obnovovat,
+- **test obnovy** — aspoň jednou za kvartál u kritického systému.
+
+U malého SaaS může první realistická rutina vypadat takto:
+
+1. Denní automatická záloha databáze.
+2. Týdenní export důležité konfigurace.
+3. Měsíční test obnovy do odděleného prostředí.
+4. Krátký záznam: datum, kdo testoval, výsledek, problém, oprava.
+5. Uložení postupu obnovy do repozitáře nebo interní dokumentace.
+
+Zálohy nejsou jen technická věc. Jsou slib zákazníkovi, že jeho práce nezmizí kvůli jedné špatné migraci.
+
+## Přístupy: méně hrdinských adminů
+
+Malý tým často sdílí přístupy stylem „pošlu ti to do zprávy“. Funguje to přesně do chvíle, než někdo odejde, ztratí notebook nebo omylem smaže produkční databázi. Pak už to není agilita, ale ohňostroj.
+
+Základní pravidla:
+
+- každý člověk má vlastní účet,
+- admin přístup má jen ten, kdo ho opravdu potřebuje,
+- produkce a vývoj jsou oddělené,
+- tajné klíče nejsou v chatu, e-mailu ani repozitáři,
+- 2FA je povinné u kritických služeb,
+- odchod člověka z týmu má checklist pro odebrání přístupů.
+
+U privacy-first provozu je důležité i to, co se neloguje. Logy mají pomáhat s provozem, ne vytvářet druhou skrytou databázi osobních údajů. Pokud do logů padají celé requesty, tokeny, e-mailové adresy nebo obsah formulářů, oprav to dřív, než budeš ladit hezčí dashboard.
+
+## Vendor lock-in a plán odchodu
+
+Evropský provoz neznamená, že nikdy nepoužiješ globální nástroj. Znamená to, že víš proč, znáš riziko a máš plán odchodu. Kritické služby vybírej tak, aby bylo možné data exportovat v rozumném formátu a provoz obnovit jinde.
+
+Při každém novém nástroji si napiš exit poznámku:
+
+```text
+Nástroj:
+K čemu slouží:
+Jaká data obsahuje:
+Jak exportovat data:
+Jak dlouho by trval přechod:
+Co by se rozbilo při výpadku:
+Alternativa:
+Datum poslední kontroly:
+```
+
+Tohle je extrémně praktické u analytiky, e-mailingu, fakturace, helpdesku, auth providerů a AI nástrojů. Čím blíž je nástroj zákaznickým datům, tím víc si zaslouží exit plán.
+
+## Checklist: evropský privacy-first provoz
+
+- [ ] Máme aktuální datovou mapu pro web, SaaS, marketing i podporu?
+- [ ] Víme, kde jsou primární data, zálohy, logy a analytika?
+- [ ] Máme seznam dodavatelů, DPA a subprocesorů?
+- [ ] Umíme vysvětlit, proč každý externí nástroj potřebujeme?
+- [ ] Máme nastavenou retenci pro formuláře, logy, analytiku a účty?
+- [ ] Existuje postup pro export a smazání zákaznických dat?
+- [ ] Jsou zálohy šifrované, oddělené a pravidelně testované?
+- [ ] Má každý člen týmu vlastní účet a zapnuté 2FA u kritických služeb?
+- [ ] Nepadají do logů tokeny, hesla, celé formuláře nebo zbytečné osobní údaje?
+- [ ] Máme incident postup včetně kontaktů, priorit a komunikační šablony?
+- [ ] Existuje plán odchodu od kritických služeb?
+- [ ] Je privacy-first provoz popsaný i obchodně, nejen technicky?
+
+## Mini šablona provozního registru
+
+```text
+Služba:
+Vlastník:
+Účel:
+Kategorie dat:
+Role: správce / zpracovatel / společný správce / neurčeno
+Region primárních dat:
+Region záloh:
+Subprocesoři:
+DPA / smluvní dokument:
+Retence:
+Export dat:
+Postup smazání:
+Kritičnost: nízká / střední / vysoká
+RPO:
+RTO:
+Datum posledního testu obnovy:
+Exit plán:
+Poznámky:
+```
+
+Evropský provoz je ve výsledku hlavně disciplína. Neznamená nejpomalejší cestu, ani odmítání moderních nástrojů. Znamená, že rychlost nestavíš na chaosu v datech. A to je přesně ten typ nudné profesionality, který zákazník ocení ve chvíli, kdy na ní opravdu záleží.
+
+---
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
+- European Commission: [Application of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/application-gdpr_en)
+- European Commission: [Standard contractual clauses for controllers and processors in the EU/EEA](https://commission.europa.eu/publications/standard-contractual-clauses-controllers-and-processors-eueea_en)
 - European Data Protection Board: [Legal basis](https://www.edpb.europa.eu/topics/key-gdpr-concepts/legal-basis_en)
+- European Data Protection Board: [Guidelines 07/2020 on the concepts of controller and processor in the GDPR](https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en)
 - European Data Protection Board: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en)
 - CNIL: [Sheet n°16: Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
 - OWASP: [Application Security Verification Standard](https://owasp.org/projects/asvs)
 - NIST: [SP 800-63 Digital Identity Guidelines](https://www.nist.gov/identity-access-management/projects/nist-special-publication-800-63-digital-identity-guidelines)
 - ENISA: [Cloud Security Guide for SMEs](https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes)
+- ENISA: [Cybersecurity for SMEs - Challenges and Recommendations](https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes)
 - MDN Web Docs: [How to structure a web form](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/How_to_structure_a_web_form)
 - web.dev: [Core Web Vitals](https://web.dev/articles/vitals)
 - Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
@@ -1462,6 +1631,7 @@ Když malý tým používá AI tímhle způsobem, nevznikne z toho cirkus nástr
 
 # Pracovní log
 
+- 2026-09-22: Dopsána kapitola „Evropský provoz: data, hosting, zálohy a smlouvy“ s datovou mapou, výběrem hostingu, DPA/subprocesory, zálohami, přístupy, exit plánem a provozním checklistem.
 - 2026-09-22: Dopsána kapitola „Produktivita malého týmu s AI asistenty“ s mapou workflow, pravidly pro data, kontrolou podle rizika, prompt knihovnou a checklistem.
 - 2026-09-22: Dopsána kapitola „Obsah, SEO, RSS a přímé distribuční kanály“ s praktickou obsahovou maticí, SEO základy, RSS doporučeními, checklistem a šablonou článku.
 - 2026-09-22: Doplněna kapitola „Marketing bez závislosti na sledovacím průmyslu“ o vlastní kanály, nabídku, obsah, distribuci, lead magnety, partnerství a privacy-first checklist.
