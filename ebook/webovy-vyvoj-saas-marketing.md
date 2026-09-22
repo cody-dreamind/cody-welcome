@@ -2352,6 +2352,195 @@ Otázka 3: Co opravíme jako první?
 
 Launch je jen začátek zpětné vazby. Pokud checklist pomůže spustit menší, čistší a důvěryhodnější verzi, splnil práci. Velké věci nemusí startovat hlučně. Stačí, když startují poctivě a dají se zlepšovat bez datového bordelu v kufru.
 
+
+## Příloha: Šablona privacy-first landing page
+
+Landing page má jednu práci: pomoct správnému člověku rozhodnout se, jestli je nabídka pro něj a co má udělat dál. Nemá vyhrát soutěž v efektech, posbírat co nejvíc cookies ani převléct nejasnou nabídku za gradient. Privacy-first landing page staví důvěru tím, že je konkrétní, rychlá, čitelná a férová ohledně dat.
+
+Použij ji pro novou službu, pilotní SaaS, lead magnet, produktovou kampaň nebo registrační stránku. Není to dogma. Je to kostra, která pomáhá udržet stránku srozumitelnou.
+
+> Codyho komentář: Landing page bez jasné nabídky je jen draze hostovaný plakát. Hezký plakát možná potěší designéra, ale zákazník pořád neví, proč má kliknout.
+
+### 1. Hero sekce: kdo, problém, výsledek
+
+První obrazovka má odpovědět na tři otázky:
+
+- Pro koho to je?
+- Jaký problém to řeší?
+- Co bude lepší, když člověk udělá další krok?
+
+Dobrá struktura:
+
+```text
+Nadpis: [konkrétní výsledek] pro [konkrétní typ zákazníka]
+Podnadpis: Jednou až dvěma větami vysvětli problém, způsob řešení a hranice.
+Hlavní CTA: konkrétní akce bez nátlaku
+Vedlejší CTA: méně závazná možnost pro opatrného návštěvníka
+Důkaz: krátká reference, ukázka výstupu, číslo z vlastního provozu nebo jasný proces
+```
+
+Příklad:
+
+```text
+Privacy-first web pro B2B firmy, které chtějí víc poptávek bez reklamního sledování
+
+Navrhneme a postavíme rychlý web s jasnou nabídkou, měřením bez zbytečných osobních dat a provozem pod kontrolou v Evropě.
+
+CTA: Domluvit úvodní konzultaci
+Vedlejší CTA: Stáhnout launch checklist
+```
+
+Slabý hero typicky říká „inovativní digitální řešení pro váš růst“. To může znamenat web, CRM, kouzelnou tabulku nebo velmi ambiciózní PowerPoint. Konkrétnost prodává lépe než mlha.
+
+### 2. Sekce bolesti: pojmenuj realitu zákazníka
+
+Nezačínej výčtem funkcí. Začni situacemi, ve kterých se zákazník pozná.
+
+Příklady pro web nebo SaaS:
+
+- „Máte návštěvnost, ale lidé se neptají na cenu ani další krok.“
+- „Formulář sbírá moc údajů a tým stejně neví, které poptávky jsou kvalitní.“
+- „Marketing chce měřit víc, právní tým chce sbírat míň a vývoj nechce další skript.“
+- „Produkt má registrace, ale málo lidí dokončí první hodnotnou akci.“
+
+Každou bolest spoj s důsledkem. Ne dramaticky, ale prakticky:
+
+```text
+Když návštěvník nepochopí nabídku do první minuty, nezačne přemýšlet hlouběji. Odejít je pro něj levnější než luštit interní názvy služeb.
+```
+
+### 3. Řešení: ukaž proces, ne kouzlo
+
+Lidé nevěří obecným slibům. Věří procesu, který si umí představit. Popiš tři až pět kroků.
+
+Příklad:
+
+1. Zmapujeme hlavní práci webu a datové toky.
+2. Přepíšeme nabídku do jazyka zákazníka.
+3. Navrhneme stránku podle rozhodnutí návštěvníka.
+4. Postavíme rychlou verzi bez zbytečných externích skriptů.
+5. Po spuštění zkontrolujeme formuláře, metriky a první zpětnou vazbu.
+
+Každý krok má mít výstup. Ne „workshop“. Raději „jednostránkové strategické zadání“. Ne „analýza“. Raději „seznam skriptů, dat a rizik“. Výstupy snižují nejistotu.
+
+### 4. Důvěra: důkaz bez divadla
+
+Důvěra nemusí být stěna log. Vyber důkazy, které odpovídají rozhodnutí návštěvníka.
+
+Možnosti:
+
+- krátká případová studie,
+- ukázka před a po,
+- citace zákazníka,
+- transparentní popis metodiky,
+- veřejný checklist,
+- screenshot anonymizovaného výstupu,
+- jasně popsané hranice služby.
+
+Privacy-first důvěra může vypadat i takto:
+
+```text
+Co záměrně neděláme:
+- nenasazujeme reklamní pixely při prvním načtení,
+- nevyžadujeme e-mail pro materiály, které mohou být veřejné,
+- nesbíráme do analytiky obsah formulářů,
+- nenavrhneme nástroj, u kterého neumíme vysvětlit datový dopad.
+```
+
+Tohle je silnější než univerzální fráze o bezpečnosti. Ukazuje konkrétní hranice.
+
+### 5. CTA: férový další krok
+
+CTA nemá člověka zatlačit do rohu. Má mu dát jasnou volbu.
+
+Dobré CTA:
+
+- „Domluvit 30minutovou konzultaci“
+- „Poslat stručné zadání“
+- „Stáhnout checklist bez registrace“
+- „Prohlédnout ukázkový audit“
+- „Otevřít dokumentaci“
+
+Slabé CTA:
+
+- „Odeslat“
+- „Zjistit více“
+- „Začněte transformaci“
+- „Klikněte zde“
+
+U formuláře napiš, co se stane po odeslání:
+
+```text
+Ozveme se do dvou pracovních dnů. Data použijeme jen pro odpověď na poptávku. Pokud nechceš vyplňovat formulář, napiš přímo na e-mail.
+```
+
+Tahle jedna věta často udělá víc pro důvěru než deset ikon štítu.
+
+### 6. Datová poznámka na stránce
+
+Krátká privacy poznámka patří přímo k místu, kde člověk předává data. Nejen do patičky.
+
+Mini verze:
+
+```text
+Měříme jen agregovanou návštěvnost a odeslání formuláře. Nepoužíváme reklamní pixely ani remarketingové cookies.
+```
+
+Verze pro formulář:
+
+```text
+Údaje z formuláře použijeme pro zpracování poptávky. Neukládáme je do marketingové analytiky a neposíláme je reklamním sítím.
+```
+
+Pokud používáš další nástroje, nepiš pohádku. Napiš realitu. Privacy-first není „nemáme žádná data“. Je to „sbíráme jen to, co dává smysl, a umíme to vysvětlit“.
+
+### Checklist landing page před publikací
+
+- [ ] Nadpis říká konkrétní výsledek a publikum.
+- [ ] Podnadpis vysvětluje problém, řešení a hranice.
+- [ ] Hlavní CTA popisuje konkrétní akci.
+- [ ] Vedlejší CTA nabízí méně závaznou cestu.
+- [ ] Stránka obsahuje praktický důkaz, ne jen obecný slib.
+- [ ] Formulář sbírá jen nezbytná pole.
+- [ ] U formuláře je napsané, co se stane po odeslání.
+- [ ] Privacy poznámka je u místa sběru dat.
+- [ ] Stránka funguje bez reklamních a marketingových skriptů.
+- [ ] URL je krátká, čitelná a stabilní.
+- [ ] Stránka má další krok pro lidi, kteří ještě nejsou připraveni koupit.
+
+### Mini šablona landing page
+
+```text
+Název kampaně:
+Primární publikum:
+Jedna bolest:
+Slíbený výsledek:
+Hlavní CTA:
+Vedlejší CTA:
+
+Hero nadpis:
+Hero podnadpis:
+
+3 situace, ve kterých se zákazník pozná:
+-
+-
+-
+
+Proces řešení:
+1.
+2.
+3.
+
+Důkaz důvěry:
+Privacy poznámka:
+Formulářová pole:
+Co se stane po odeslání:
+Metriky úspěchu:
+Co záměrně neměříme:
+```
+
+Landing page není izolovaný ostrov. Má navazovat na článek, případovou studii, dokumentaci, nabídku i reálný obchodní proces. Když stránka slibuje konzultaci a tým potom pošle generický e-mail za deset dní, problém není v konverzním poměru. Problém je v provozu. A provoz, jak už víme, má nepříjemný zvyk říkat pravdu.
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -2384,6 +2573,7 @@ Launch je jen začátek zpětné vazby. Pokud checklist pomůže spustit menší
 
 # Pracovní log
 
+- 2026-09-22: Doplněna příloha „Šablona privacy-first landing page“ s praktickou strukturou hero sekce, bolestí, procesu, důvěry, férového CTA, datové poznámky, checklistu a vyplnitelnou šablonou.
 - 2026-09-22: Doplněna SaaS podkapitola „Retence bez šmírování“ s privacy-first signály hodnoty, rozhovory se zákazníky, měsíční retenční rutinou a vyplnitelnou šablonou.
 - 2026-09-22: Doplněna příloha „Launch checklist pro privacy-first web nebo SaaS“ se strategickou, technickou, datovou, distribuční a první týden provozní kontrolou včetně vyplnitelné šablony.
 - 2026-09-22: Doplněna příloha se scorecardem pro výběr privacy-first nástrojů, včetně bodování, B2B příkladu a kritérií pro odmítnutí nástroje.
