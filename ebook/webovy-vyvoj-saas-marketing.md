@@ -22,6 +22,7 @@ Praktický český e-book od Codyho pro malé firmy, freelancery a zakladatele S
 7. Produktivita malého týmu s AI asistenty
 8. Evropský provoz: data, hosting, zálohy a smlouvy
 9. Checklisty, šablony a provozní rutiny
+10. Závěr: 30denní plán zavedení privacy-first webu nebo SaaS
 
 ---
 
@@ -1791,7 +1792,155 @@ Nouzový postup:
 
 Provoz webu a SaaS není glamour. Nikdo netleská, když záloha funguje, formulář doručuje a DNS nehoří. Ale přesně tyhle nenápadné věci tvoří důvěru. Marketing přivede pozornost. Produkt dá hodnotu. Provoz rozhodne, jestli se na to dá spolehnout.
 
+
 ---
+
+# 10. Závěr: 30denní plán zavedení privacy-first webu nebo SaaS
+
+E-book bez dalšího kroku je hezký šanon. A šanony mají jednu zásadní nevýhodu: tváří se důležitě, ale samy nic neopraví. Proto tahle závěrečná kapitola převádí předchozí témata do 30denního plánu, který zvládne malý tým, freelancer nebo zakladatel SaaS bez toho, aby se z toho stal půlroční „digitální transformační program“ s logem v PowerPointu.
+
+Princip je jednoduchý: nejdřív ujasnit účel, potom zmenšit rizika, potom zlepšit měření a nakonec zavést rutinu. Nepotřebuješ všechno přepsat najednou. Potřebuješ každý týden odstranit jeden kus chaosu.
+
+> Codyho komentář: Privacy-first provoz není asketický klášter pro webaře. Je to normální disciplína: sbírat méně věcí, lépe jim rozumět a nenechat firemní data válet po deseti nástrojích jen proto, že někdo klikl na „Start free trial“.
+
+## Týden 1: Ujasni účel a hranice
+
+První týden není o kódu. Je o rozhodnutí, co web nebo produkt opravdu dělá. Bez toho budeš optimalizovat náhodné části systému a říkat tomu strategie.
+
+Výstupy týdne:
+
+- jedna pracovní věta webu nebo produktu,
+- seznam hlavních cílových skupin,
+- mapa hlavních stránek nebo obrazovek,
+- seznam dat, která skutečně potřebuješ,
+- seznam věcí, které naopak sbírat nechceš.
+
+Praktický postup:
+
+1. Napiš jednu větu: „Pomáháme komu, s čím a jaký další krok má udělat.“
+2. U každé hlavní stránky doplň otázku, na kterou má odpovědět.
+3. Projdi všechny formuláře a škrtni pole, která nejsou nutná pro další krok.
+4. Sepiš všechny externí služby: hosting, analytika, formuláře, chat, e-mail, platby, CRM.
+5. U každé služby napiš, jaká data přes ni tečou a proč.
+
+Na konci týdne by měl být systém čitelnější. Ne dokonalý. Čitelný. To je důležitý rozdíl, protože čitelnost je předpoklad opravitelnosti.
+
+## Týden 2: Upevni technický základ
+
+Druhý týden patří technice, ale pořád prakticky. Cílem není přepsat stack podle posledního trendu. Cílem je odstranit věci, které zbytečně zvyšují riziko, zpomalují web nebo matou návštěvníky.
+
+Výstupy týdne:
+
+- rychlá kontrola výkonu a hlavních šablon,
+- funkční formuláře s jasným potvrzením,
+- základní SEO technika,
+- aktualizovaný `robots.txt`, `sitemap.xml` a kanonické URL,
+- rozhodnutí, které externí skripty zůstanou a které půjdou pryč.
+
+Praktický postup:
+
+1. Otevři hlavní stránky na mobilu a napiš tři věci, které brzdí pochopení nabídky.
+2. Zkontroluj nadpisy, titulky, meta description a interní odkazy.
+3. Otestuj formuláře: chybové stavy, potvrzení, doručení a ukládání dat.
+4. Projdi externí skripty a nech jen ty, u kterých umíš obhájit účel.
+5. U kritických částí napiš, kdo je vlastník a kde se řeší incident.
+
+Typická rychlá výhra: odstranit nepoužívaný widget, který tahá externí skript, zpomaluje stránku a přitom nepřináší jediný jasný užitek. Takové věci jsou digitální prach. Nejsou dramatické, jen se lepí všude.
+
+## Týden 3: Změř méně, ale lépe
+
+Třetí týden je o analytice. Ne o tom, jak z návštěvníka vyždímat maximum signálů. O tom, jak získat dost informací pro rozhodování bez zbytečného profilování.
+
+Výstupy týdne:
+
+- seznam klíčových metrik,
+- návrh privacy-first eventů,
+- jednoduchý měsíční report,
+- oddělení provozních metrik od marketingových domněnek,
+- pravidlo pro mazání nebo agregaci starých dat.
+
+Praktický postup:
+
+1. Vyber maximálně pět metrik, které opravdu použiješ při rozhodování.
+2. U každé metriky napiš, jaké rozhodnutí podle ní můžeš udělat.
+3. Navrhni eventy bez osobních údajů a bez zbytečných detailů.
+4. Sleduj raději dokončení důležitých kroků než mikropohyby myší.
+5. Připrav šablonu měsíčního reportu: co se změnilo, proč asi, co zkusíme dál.
+
+Dobrá metrika má následnou akci. Pokud sleduješ číslo jen proto, že ho nástroj umí ukázat, je to zábava pro dashboard, ne řízení produktu.
+
+## Týden 4: Zaveď rutinu a rozhodni další iteraci
+
+Čtvrtý týden rozhodne, jestli změny přežijí déle než první nadšení. Bez rutiny se i dobrý web pomalu vrací do chaosu: přibývají skripty, formuláře bobtnají, staré stránky nikdo nemaže a dokumentace existuje jen v hlavě člověka, který je zrovna na dovolené.
+
+Výstupy týdne:
+
+- týdenní provozní checklist,
+- měsíční revize obsahu a metrik,
+- čtvrtletní audit přístupů, smluv a záloh,
+- rozhodovací deník,
+- backlog dalších zlepšení podle dopadu.
+
+Praktický postup:
+
+1. Zaveď 30minutovou týdenní kontrolu dostupnosti, formulářů a hlavních stránek.
+2. Nastav měsíční revizi obsahu: co aktualizovat, sloučit, smazat nebo doplnit.
+3. Zapiš čtvrtletní audit přístupů, vendorů, záloh a obnovy.
+4. Každé větší rozhodnutí ukládej do jednoduchého rozhodovacího deníku.
+5. Vyber jednu další oblast na následující měsíc: onboarding, obsah, výkon, bezpečnost nebo automatizace.
+
+## 30denní checklist
+
+- [ ] Máme jednu pracovní větu webu nebo produktu.
+- [ ] Víme, jaký hlavní další krok má návštěvník udělat.
+- [ ] Hlavní stránky odpovídají na otázky zákazníka, ne jen na interní strukturu firmy.
+- [ ] Formuláře sbírají jen data potřebná pro konkrétní účel.
+- [ ] Externí služby jsou sepsané v datové mapě.
+- [ ] Každý externí skript má vlastníka a důvod použití.
+- [ ] SEO základ je technicky v pořádku: titulky, popisy, kanonické URL, sitemap a robots.
+- [ ] Analytika měří rozhodnutí, ne zvědavost.
+- [ ] Eventy neobsahují osobní údaje ani zbytečné identifikátory.
+- [ ] Existuje měsíční report s interpretací a dalším krokem.
+- [ ] Zálohy mají popsanou obnovu, nejen dobrý pocit.
+- [ ] Přístupy mají vlastníky a pravidelnou revizi.
+- [ ] Rozhodnutí se zapisují tak, aby šla za půl roku pochopit.
+- [ ] Tým ví, co dělat při incidentu.
+- [ ] Privacy-first pravidla jsou součástí provozu, ne marketingová dekorace.
+
+## Mini šablona 30denního plánu
+
+```text
+Projekt:
+Období:
+Vlastník:
+
+Hlavní cíl na 30 dní:
+
+Týden 1 — účel a data:
+- Výstup:
+- Riziko:
+- Hotovo kdy:
+
+Týden 2 — technický základ:
+- Výstup:
+- Riziko:
+- Hotovo kdy:
+
+Týden 3 — měření:
+- Výstup:
+- Riziko:
+- Hotovo kdy:
+
+Týden 4 — rutina:
+- Výstup:
+- Riziko:
+- Hotovo kdy:
+
+Další měsíc řešíme:
+Neděláme zatím:
+```
+
+Nejlepší 30denní plán není největší. Je to ten, který přežije kontakt s realitou. Pokud po měsíci víš lépe, komu web slouží, jaká data sbíráš, proč používáš konkrétní nástroje a co budeš zlepšovat dál, udělal jsi velký krok. Ne hlučný. Ale užitečný. A to je přesně ten typ kroku, který má v evropském privacy-first provozu smysl.
 
 # Zdroje
 
@@ -1822,6 +1971,7 @@ Provoz webu a SaaS není glamour. Nikdo netleská, když záloha funguje, formul
 
 # Pracovní log
 
+- 2026-09-22: Přidán závěr e-booku s 30denním plánem zavedení privacy-first webu nebo SaaS, týdenními výstupy, praktickým postupem, checklistem a šablonou plánu.
 - 2026-09-22: Dopsána kapitola „Checklisty, šablony a provozní rutiny“ s týdenní, měsíční a čtvrtletní rutinou, rozhodovacím deníkem, incidentovou mini rutinou a provozní nástěnkou.
 - 2026-09-22: Dopsána kapitola „Evropský provoz: data, hosting, zálohy a smlouvy“ s datovou mapou, výběrem hostingu, DPA/subprocesory, zálohami, přístupy, exit plánem a provozním checklistem.
 - 2026-09-22: Dopsána kapitola „Produktivita malého týmu s AI asistenty“ s mapou workflow, pravidly pro data, kontrolou podle rizika, prompt knihovnou a checklistem.
