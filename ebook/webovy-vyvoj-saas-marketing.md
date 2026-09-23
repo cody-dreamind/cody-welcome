@@ -3502,6 +3502,192 @@ Revize po týdnu:
 
 Distribuce bez šmírování není slabší marketing. Je to marketing, který si buduje vlastní infrastrukturu důvěry: dobré URL, dobré odpovědi, dobré vztahy a minimum datového balastu. Když to funguje, lidé se nevracejí proto, že je pronásleduje pixel. Vracejí se proto, že ví, kde najdou užitečnou odpověď.
 
+## Příloha: Reference a případovky bez datového cirkusu
+
+Reference prodávají, protože snižují riziko. Zákazník si neříká jen „mají hezký web“, ale hlavně „někdo podobný mi už věřil a dopadlo to dobře“. Problém je, že reference se často sbírají chaoticky: někde v e-mailu, někde ve Slacku, někde ve fakturační historii, někde v CRM poznámce. Pak tým začne lepit loga, citace a výsledky dohromady stylem „vždyť oni by určitě souhlasili“. To je marketingový optimismus v kostýmu malé právní miny.
+
+Privacy-first přístup neznamená, že nebudeš používat reference. Znamená, že je budeš sbírat s respektem, jasným účelem a co nejmenším množstvím údajů. Evropská komise ve shrnutí principů GDPR připomíná mimo jiné zákonnost, férovost, transparentnost, účelové omezení, minimalizaci dat a omezení doby uložení: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en). Přeloženo do normální řeči: nesbírej víc, než potřebuješ, řekni proč to sbíráš a neměj v marketingové složce věci, které už dávno nemají důvod existovat.
+
+> Codyho komentář: Nejlepší reference není ta nejhlasitější. Nejlepší reference je ta, kterou můžeš použít i za rok bez pocitu, že by ses měl tvářit nenápadně a rychle zavřít notebook.
+
+### Co je dobrá reference
+
+Dobrá reference není obecná pochvala. „Byli jsme spokojení“ je milé, ale obchodně slabé. Fungující reference pomáhá dalšímu člověku poznat vlastní situaci a udělat bezpečnější rozhodnutí.
+
+Hledej čtyři prvky:
+
+- Kontext: kdo měl problém a v jaké situaci byl.
+- Bolest: co nefungovalo před spoluprací.
+- Změna: co se po spolupráci zlepšilo.
+- Důvěryhodný detail: konkrétní proces, výsledek, rozhodnutí nebo poučení.
+
+Slabá citace:
+
+```text
+Dreamind nám dodal skvělé řešení a spolupráce byla profesionální.
+```
+
+Silnější citace:
+
+```text
+Před spoluprací jsme měli poptávky rozházené mezi e-mailem, tabulkou a telefonem. Dreamind nám pomohl navrhnout jednoduchý webový formulář, interní workflow a privacy-first měření. Teď víme, odkud přichází kvalitní poptávky, ale nesbíráme zbytečné údaje o lidech, kteří jen prochází web.
+```
+
+Ještě lepší je krátká případovka, která ukáže cestu. Ne heroický příběh typu „z nuly na jednorožce“, ale obyčejný problém, rozumné rozhodnutí a měřitelný posun.
+
+### Souhlas není interní pocit
+
+Pokud chceš zveřejnit jméno člověka, název firmy, logo, citaci, fotku nebo detail projektu, potřebuješ jasně vědět, na jakém základě to děláš. U jednoduchých B2B referencí je praktické mít explicitní potvrzení: co se smí použít, kde se to smí použít a jestli existují omezení. Evropský sbor pro ochranu osobních údajů řeší podmínky souhlasu v dokumentu [Guidelines 05/2020 on consent](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en). Pro e-book z toho ber hlavně pracovní disciplínu: souhlas nemá být schovaný, nejasný nebo vynucený.
+
+Praktická žádost o referenci může vypadat takto:
+
+```text
+Ahoj [jméno],
+
+rádi bychom na webu použili krátkou referenci k projektu [název/projekt].
+
+Navržený text:
+„[citace]“
+
+Rádi bychom uvedli:
+- název firmy:
+- jméno a roli:
+- logo firmy:
+- odkaz na web:
+- stručný popis výsledku:
+
+Použití: web Dreamindu, případová studie, obchodní prezentace a organická distribuce odkazu.
+Nepoužijeme to v reklamních systémech ani nepřidáme sledovací pixely kvůli této referenci.
+
+Je to za vás v pořádku? Klidně upravte text nebo napište, co nemáme uvádět.
+```
+
+Tahle zpráva není právnická poezie, ale dělá tři důležité věci: ukazuje přesné znění, říká použití a dává druhé straně možnost upravit rozsah. U větších klientů počítej s tím, že reference půjde přes marketing, právní oddělení nebo account managera. Není to zdržování. Je to normální provoz dospělého B2B vztahu.
+
+### Logo wall bez přehánění
+
+Loga známých klientů umí pomoct, ale taky umí působit lacině. Hlavně když web naznačuje větší spolupráci, než jaká opravdu proběhla. Pokud jsi pro firmu udělal dvouhodinový workshop, neprezentuj to vedle dlouhodobých klientů bez kontextu. Důvěra se nezvyšuje velikostí loga, ale přesností tvrzení.
+
+Rozumné kategorie:
+
+- Klienti: proběhla placená spolupráce se smluvním vztahem.
+- Vybrané projekty: konkrétní dodávka, kterou můžeš stručně popsat.
+- Workshopy a konzultace: kratší spolupráce, která nemá vypadat jako implementace.
+- Partneři: oboustranný vztah, ne zákaznická reference.
+
+U každé kategorie měj interně uložené potvrzení, co smíš ukazovat. Pokud máš jen logo bez citace, i tak si pohlídej svolení s použitím značky. Některé firmy mají pravidla pro logo, barvy, ochrannou zónu nebo zákaz použití v konkrétních kontextech.
+
+### Případovka jako rozhodovací nástroj
+
+Případovka nemá být literární pomník dodavateli. Má pomoct podobnému zákazníkovi pochopit, jestli je řešení relevantní. Piš ji jako rozhodovací dokument, ne jako tiskovou zprávu.
+
+Struktura případovky:
+
+1. Situace před projektem: co bylo nepohodlné, drahé, pomalé nebo rizikové.
+2. Cíl: jaké rozhodnutí nebo výsledek měl projekt umožnit.
+3. Přístup: co jste udělali a proč právě tak.
+4. Privacy-first hranice: co jste záměrně neměřili, nesbírali nebo neposílali třetím stranám.
+5. Výsledek: konkrétní dopad, ideálně kombinace čísla a kvalitativního postřehu.
+6. Poučení: co byste příště udělali stejně nebo jinak.
+
+Příklad privacy-first formulace:
+
+```text
+Místo reklamních pixelů jsme měřili pouze agregované návštěvy klíčových stránek, odeslané formuláře a zdrojovou stránku bez individuálního profilování. Týmu to stačilo pro rozhodnutí, které sekce webu posílit, a zároveň nevznikla zbytečná databáze chování jednotlivých návštěvníků.
+```
+
+Tento detail je silný, protože neříká jen „jsme privacy-first“. Ukazuje provozní volbu. A provozní volby jsou důvěryhodnější než hodnotové plakáty.
+
+### Co raději anonymizovat
+
+Ne každá dobrá reference musí být podepsaná. U citlivějších oborů, interních procesů nebo projektů s konkurenční výhodou může být anonymizovaná případovka férovější i užitečnější.
+
+Anonymizuj hlavně:
+
+- interní obchodní čísla, která nejsou veřejná,
+- jména lidí, kteří nejsou veřejnými zástupci firmy,
+- screenshoty administračních rozhraní s reálnými daty,
+- bezpečnostní detaily infrastruktury,
+- informace o interních procesech, které by mohly klienta poškodit,
+- přesné náklady, marže nebo pipeline údaje bez výslovného schválení.
+
+Dobrá anonymizace není „rozmažu logo a nechám v URL název firmy“. Zkontroluj text, obrázky, metadata souborů, alt texty, názvy exportů i interní poznámky v dokumentu. Ano, je to nudné. Ale nudné bezpečnostní návyky jsou levnější než zábavné incidenty.
+
+### Interní evidence referencí
+
+Reference se rozpadnou, když jsou jen v hlavách obchodníků. Vytvoř jednoduchou tabulku nebo Markdown registr. Nepotřebuješ složité CRM pole; potřebuješ dohledatelnost.
+
+Minimální sloupce:
+
+| Pole | Co znamená |
+|---|---|
+| Klient / projekt | Název firmy nebo anonymní označení |
+| Typ použití | Logo, citace, případovka, prezentace, sociální příspěvek |
+| Schválený text | Přesné znění, které prošlo potvrzením |
+| Schválil | Osoba nebo role na straně klienta |
+| Datum schválení | Kdy bylo potvrzeno použití |
+| Omezení | Kde se nesmí použít, expirace, nutná anonymizace |
+| Zdroj potvrzení | E-mail, smlouva, ticket, dokument |
+| Revize | Datum další kontroly |
+
+Jednou za čtvrtletí projdi, jestli reference pořád sedí. Zákazník mohl změnit značku, ukončit produkt, přejít do jiného segmentu nebo prostě už nechce být na webu. Privacy-first značka se nepozná podle toho, že nikdy nic nesbírá. Pozná se podle toho, že ví, co má, proč to má a kdy to má uklidit.
+
+### Checklist reference před publikací
+
+- Máme jasně schválené přesné znění citace?
+- Víme, kde smíme referenci použít?
+- Nepůsobí logo nebo formulace silněji než skutečný rozsah spolupráce?
+- Neobsahuje případovka interní čísla, screenshoty nebo citlivé detaily bez schválení?
+- Je jasné, jestli jde o klienta, partnera, workshop nebo jiný typ vztahu?
+- Umíme dohledat zdroj potvrzení?
+- Má reference vlastníka, který ji jednou za čas zreviduje?
+- Měříme výkon reference jen agregovaně, bez profilování jednotlivých návštěvníků?
+
+### Mini šablona žádosti a evidence reference
+
+```text
+Název klienta/projektu:
+Typ reference:
+- logo / citace / případovka / prezentace / anonymní příklad
+
+Proč ji chceme použít:
+Jakému zákaznickému rozhodnutí pomáhá:
+
+Navržený text:
+"..."
+
+Schválené údaje:
+- firma:
+- jméno:
+- role:
+- logo:
+- odkaz:
+- výsledky / čísla:
+
+Použití:
+- web:
+- obchodní prezentace:
+- blog / případová studie:
+- sociální příspěvek:
+- placená reklama: ano/ne
+
+Omezení:
+- neuvádět:
+- anonymizovat:
+- platnost / datum revize:
+
+Potvrzení:
+- schválil:
+- datum:
+- odkaz na e-mail/dokument:
+
+Privacy-first poznámka:
+- jaká data kvůli referenci nebudeme sbírat:
+- jak budeme měřit výkon agregovaně:
+```
+
+Reference jsou důkaz důvěry, ne těžba sociálního kapitálu. Když je sbíráš férově, získáš dvojí výhodu: zákazník se necítí použitý jako reklamní rekvizita a nový návštěvník vidí, že tvoje privacy-first hodnoty nejsou jen v patičce webu.
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -3534,6 +3720,7 @@ Distribuce bez šmírování není slabší marketing. Je to marketing, který s
 
 # Pracovní log
 
+- 2026-09-23: Doplněna příloha „Reference a případovky bez datového cirkusu“ s postupem sběru souhlasů, strukturou případovky, anonymizací, evidencí, checklistem a šablonou žádosti o referenci.
 - 2026-09-23: Doplněna příloha „Distribuční plán bez platformní závislosti“ s modelem vlastněných, vypůjčených a lidských kanálů, týdenním rytmem, privacy-first měřením, checklistem a vyplnitelnou šablonou.
 - 2026-09-23: Doplněna příloha „Měsíční audit webu bez trackingového plevele“ s postupem kontroly externích skriptů, formulářů, privacy slibu, skórováním a vyplnitelnou šablonou auditu.
 - 2026-09-23: Doplněna příloha „Datová mapa pro web a SaaS bez detektivní kanceláře“ s minimální strukturou evidence dat, inventurou nástrojů, rolí dodavatelů, retenční rutinou, checklistem a vyplnitelnou šablonou.
