@@ -3058,6 +3058,169 @@ Další iterace:
 
 Cenová stránka má být klidné místo pro rozhodnutí. Když vysvětluje hodnotu, limity, data a další krok bez triků, prodává lépe dlouhodobě. Možná nepřinutí každého kliknout dnes. Ale přitáhne lidi, kteří vědí, co kupují — a to je pro SaaS mnohem zdravější než sbírka zmatených trialů.
 
+## Příloha: Datová mapa pro web a SaaS bez detektivní kanceláře
+
+Datová mapa je jednoduchý přehled toho, jaká data sbíráš, proč je sbíráš, kde leží, kdo k nim má přístup a kdy je mažeš. Není to dokument pro šanon, který se otevře až při panice. Je to provozní nástroj pro rozhodování: když chce marketing nový formulář, produkt nový event a obchod nový CRM export, datová mapa řekne, jestli to dává smysl.
+
+Oficiální evropské zdroje GDPR popisují principy jako účelové omezení, minimalizaci údajů, přesnost, omezení uložení, integritu a důvěrnost; pro malé týmy je praktický překlad jednoduchý: nesbírej data „kdyby náhodou“, neukládej je navždy a neukazuj je lidem, kteří je nepotřebují. Viz zdroje European Commission k principům GDPR a EDPB ke konceptům správce a zpracovatele.
+
+> Codyho komentář: Datová mapa je jako mapa kabelů v serverovně. Není sexy, dokud něco nehoří. Pak je najednou nejkrásnější dokument ve firmě.
+
+### Začni u rozhodnutí, ne u tabulky
+
+Nejdřív si napiš, jaká rozhodnutí datová mapa pomáhá dělat. Jinak z ní vznikne úřední sudoku.
+
+Typická rozhodnutí:
+
+- Smíme přidat nový nástroj do webu nebo produktu?
+- Potřebujeme pro konkrétní měření souhlas, nebo nám stačí technicky nezbytné zpracování?
+- Kdo má přístup k poptávkám, fakturám, support tiketům a produktovým datům?
+- Kde jsou data fyzicky nebo smluvně provozovaná?
+- Jak rychle umíme vyřídit export, opravu nebo smazání dat?
+- Co vypneme jako první, když nástroj začne být rizikový, drahý nebo zbytečný?
+
+Pro web nebo malý SaaS stačí začít s pěti oblastmi: návštěvnost, formuláře, účet a produkt, fakturace, podpora. Každá oblast má vlastní riziko. Anonymní počet návštěv článku není totéž co obsah support konverzace se zákaznickými daty. Házet všechno do jedné hromady je pohodlné, ale přesně tak vzniká chaos s kravatou.
+
+### Minimální sloupce datové mapy
+
+Použij tabulku, kterou pochopí zakladatel, vývojář i člověk z marketingu. Pokud ji musí vysvětlovat právník se třemi kávami, je moc složitá.
+
+```text
+Oblast:
+Konkrétní data:
+Účel:
+Právní nebo provozní důvod:
+Kde data vznikají:
+Kde jsou uložená:
+Dodavatel / nástroj:
+Role dodavatele:
+Region provozu:
+Kdo má přístup:
+Doba uchování:
+Jak data exportujeme:
+Jak data mažeme:
+Poznámka k riziku:
+Vlastník ve firmě:
+Datum poslední kontroly:
+```
+
+Příklad pro privacy-first analytiku:
+
+```text
+Oblast: Návštěvnost webu
+Konkrétní data: agregované pageviews, referrer, země, zařízení, prohlížeč
+Účel: zjistit, které stránky pomáhají návštěvníkům a kde web ztrácí srozumitelnost
+Právní nebo provozní důvod: měření kvality webu s minimalizací dat
+Kde data vznikají: veřejný web
+Kde jsou uložená: analytický nástroj v EU režimu
+Dodavatel / nástroj: privacy-first analytika bez reklamního profilu
+Role dodavatele: zpracovatel nebo samostatný poskytovatel podle smlouvy
+Region provozu: EU
+Kdo má přístup: majitel, marketing, správce webu
+Doba uchování: například 12 až 24 měsíců podle reálné potřeby trendů
+Jak data exportujeme: CSV / API / administrace
+Jak data mažeme: podle retenčního nastavení nebo ručně v administraci
+Poznámka k riziku: neukládat full IP, user ID ani obsah formulářů
+Vlastník ve firmě: marketing / produkt
+Datum poslední kontroly: RRRR-MM-DD
+```
+
+Nejdůležitější sloupec je „Účel“. Když ho neumíš vyplnit jednou větou, data pravděpodobně sbíráš ze zvyku. A zvyk není strategie, jenom starý bug v obleku.
+
+### Inventura nástrojů: najdi tiché pasažéry
+
+Datová mapa není jen seznam databází. Patří do ní i nástroje, které se časem nenápadně přilepily na provoz.
+
+Projdi hlavně:
+
+- webové skripty v hlavičce a patičce,
+- formuláře, chat widgety a kalendáře,
+- CRM, e-mailing a helpdesk,
+- fakturační systém a platební bránu,
+- hosting, logování, monitoring a zálohy,
+- AI nástroje používané pro podporu, marketing nebo analýzu dat,
+- exporty v tabulkách, sdílené disky a ruční kopie dat.
+
+Praktický postup: otevři web v prohlížeči, zkontroluj síťové requesty, projdi repozitář kvůli externím skriptům a pak se zeptej týmu: „Kam ještě kopírujeme data, když spěcháme?“ Poslední otázka bývá nejvýživnější. Tam často bydlí historická tabulka `final_final_leads_2024.xlsx`, která by měla jít na zasloužený odpočinek.
+
+### Role: správce, zpracovatel a odpovědnost
+
+U každého nástroje si napiš roli. Ne proto, aby ses tvářil právně nad věcí, ale abys věděl, kdo za co odpovídá. EDPB ve svých pokynech k rolím správce a zpracovatele řeší, kdo určuje účely a prostředky zpracování a kdo zpracovává data pro někoho jiného. Pro malý tým z toho plyne jednoduchý návyk: když nástroj dostává osobní data zákazníků, potřebuješ rozumět smluvnímu vztahu, subprocesorům, regionu provozu a tomu, jak data dostaneš pryč.
+
+Do mapy si k dodavateli přidej tři otázky:
+
+- Máme s ním smlouvu nebo podmínky, kterým někdo rozumí?
+- Víme, kde data zpracovává a kdo jsou jeho další dodavatelé?
+- Umíme exportovat a smazat data bez prosebné pouti přes support?
+
+Když odpověď zní třikrát „ehm“, nástroj není nutně zakázaný. Ale patří do rizikového seznamu a nesmí se tvářit jako samozřejmost.
+
+### Retence: data nemají být digitální půda na půdě
+
+Každý řádek datové mapy má mít dobu uchování. Ne navždy. Ne „dokud se někdo nezeptá“. Konkrétně.
+
+Příklady praktických retenčních pravidel:
+
+- Poptávky z webu: 6 až 12 měsíců, pokud nevznikne obchodní vztah.
+- Support tikety: podle potřeby podpory, smlouvy a bezpečnostních důvodů; staré přílohy čistit zvlášť.
+- Technické logy: krátké období pro diagnostiku a bezpečnost, ne nekonečný archiv chování lidí.
+- Analytické agregace: držet tak dlouho, jak pomáhají trendům; surová data minimalizovat.
+- Neaktivní trial účty: jasné upozornění, exportní možnost a smazání podle předem daného pravidla.
+
+Pokud potřebuješ držet data kvůli účetnictví, smlouvě nebo bezpečnosti, napiš proč. Pokud je držíš, protože „by se někdy mohly hodit“, napiš raději datum smazání. Budoucí já ti pošle imaginární dort.
+
+### Měsíční rutina datové mapy
+
+Datová mapa stárne rychleji než homepage hero text. Stačí jeden nový widget, jedna automatizace nebo jeden ruční export a mapa už lže. Proto z ní udělej krátkou měsíční rutinu.
+
+Postup na 30 minut:
+
+1. Otevři seznam nástrojů a označ nové nebo nepoužívané položky.
+2. Zkontroluj, jestli se nezměnil účel sběru dat.
+3. Vyber jeden rizikovější nástroj a ověř export, mazání a přístupy.
+4. Zkontroluj, jestli někdo nemá přístup jen ze setrvačnosti.
+5. Zapiš rozhodnutí: ponechat, omezit, nahradit, vypnout.
+
+Výsledek nemusí být román. Stačí poznámka: „Kalendářový nástroj ponechán, sbírá jen jméno a e-mail pro rezervaci schůzky, přístup má obchod, další kontrola za 3 měsíce.“ To je použitelnější než desetistránkový dokument, který všichni obcházejí s úctou a hrůzou.
+
+### Checklist datové mapy
+
+- [ ] Má každý typ dat jasný účel?
+- [ ] Víme, kde data vznikají a kde jsou uložená?
+- [ ] Je u každého nástroje jasný vlastník ve firmě?
+- [ ] Máme u dodavatelů ověřený region provozu a smluvní základ?
+- [ ] Neukládáme data do ručních exportů bez pravidel?
+- [ ] Má každý řádek nastavenou dobu uchování?
+- [ ] Umíme data exportovat a smazat prakticky, ne jen teoreticky?
+- [ ] Mají přístup jen lidé, kteří ho opravdu potřebují?
+- [ ] Kontrolujeme mapu aspoň jednou měsíčně?
+- [ ] Je u sporných nástrojů jasné rozhodnutí: ponechat, omezit, nahradit nebo vypnout?
+
+### Mini šablona datové mapy
+
+```text
+Název služby / oblasti:
+Vlastník:
+Proč data zpracováváme:
+Jaká data:
+Obsahuje citlivá nebo vysoce riziková data? Ano / Ne
+Kde data vznikají:
+Kde data leží:
+Dodavatelé:
+Region provozu:
+Kdo má přístup:
+Retence:
+Export:
+Mazání:
+Co měříme:
+Co záměrně neměříme:
+Riziko:
+Další akce:
+Datum další kontroly:
+```
+
+Dobrá datová mapa nebrzdí marketing ani produkt. Naopak jim šetří čas, protože se nemusí pokaždé hádat od nuly. Když víš, co sbíráš a proč, můžeš rychleji říct ano dobrému nápadu a rychleji říct ne datovému luxusu, který by přinesl víc rizika než hodnoty.
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -3090,6 +3253,7 @@ Cenová stránka má být klidné místo pro rozhodnutí. Když vysvětluje hodn
 
 # Pracovní log
 
+- 2026-09-23: Doplněna příloha „Datová mapa pro web a SaaS bez detektivní kanceláře“ s minimální strukturou evidence dat, inventurou nástrojů, rolí dodavatelů, retenční rutinou, checklistem a vyplnitelnou šablonou.
 - 2026-09-22: Doplněna příloha „Cenová stránka pro SaaS bez nátlaku“ s návrhem tarifů podle segmentů, férovým CTA, B2B FAQ, privacy-first měřením, checklistem a vyplnitelnou šablonou.
 - 2026-09-22: Doplněna příloha „Mini disaster recovery plán pro malý SaaS“ s prioritizací kritických částí, RTO/RPO, restore testem, ručními fallbacky, incidentovou komunikací, checklistem a vyplnitelnou šablonou.
 - 2026-09-22: Doplněna příloha „Privacy-first onboarding pro SaaS“ s první hodnotnou akcí, měřením bez obsahu uživatelských dat, produktovým průvodcem, férovými e-maily, datovými hranicemi, checklistem a šablonou plánu.
