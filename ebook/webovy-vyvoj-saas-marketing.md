@@ -162,6 +162,8 @@ Jak to komunikovat bez moralizování:
 
 Tohle jsou malé věty, ale dělají velký rozdíl. Říkají: víme, co děláme, a nebudeme s vašimi daty dělat cirkus s konfetami.
 
+Krátká verze pro homepage může znít takhle: „Web měříme jen tak, abychom poznali, co lidem pomáhá. Nepoužíváme reklamní pixely, neschováváme sledování za designové triky a dáváme přednost evropským službám, které umíme vysvětlit.“ Je to copy, které neprodává strach. Prodává klid.
+
 ## Checklist: strategie webu před designem
 
 - [ ] Má web jednu hlavní pracovní větu?
