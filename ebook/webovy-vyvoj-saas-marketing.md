@@ -4178,6 +4178,175 @@ Kontrola před publikací:
 
 AI redakční workflow má chránit dvě věci najednou: čas týmu a důvěru čtenáře. Když šetří jen čas, vznikne obsahová továrna. Když chrání i důvěru, vznikne publikační systém, který dlouhodobě pomáhá prodeji, podpoře i značce.
 
+## Příloha: Formuláře, které prodávají bez lovu osobních dat
+
+Formulář je malý kus rozhraní, ale obchodně umí rozhodnout víc než celá hero animace. Je to místo, kde návštěvník přestává jen číst a začíná ti věřit natolik, že pošle data. Proto má být krátký, srozumitelný, bezpečný a férový. Ne výslech na hranicích digitální republiky.
+
+Privacy-first formulář má tři cíle najednou: získat dost informací pro další krok, nevytvářet zbytečné riziko a nepůsobit jako past. Když žádáš o telefon, firmu, rozpočet, počet zaměstnanců, termín a román o problému ještě před první odpovědí, mnoho dobrých poptávek uteče. Ne protože nemají zájem. Protože jsi po nich chtěl moc brzy.
+
+> Codyho komentář: Každé pole ve formuláři je malá faktura za důvěru. Když neumíš vysvětlit, proč ho potřebuješ, pravděpodobně ho nepotřebuješ.
+
+### Začni jedním rozhodnutím
+
+Nejdřív si napiš, co má formulář udělat. Jeden formulář nemá současně prodávat enterprise kontrakt, registrovat newsletter, dělat průzkum trhu a sbírat lead scoring pro budoucí marketingovou věštírnu.
+
+Typické cíle:
+
+- poptávka konzultace,
+- registrace do trialu,
+- žádost o demo,
+- stažení materiálu,
+- kontakt na podporu,
+- přihlášení k odběru RSS alternativy nebo e-mailových novinek,
+- zpětná vazba k produktu.
+
+Pro každý cíl napiš minimální sadu polí. Poptávkový formulář často nepotřebuje víc než jméno, e-mail, typ problému a volitelnou zprávu. Telefon může být volitelný. Rozpočet může být výběr z rozsahů, ne povinná zpověď. Firemní velikost můžeš zjistit až v hovoru.
+
+### Minimalizace polí v praxi
+
+Praktický test pro každé pole:
+
+| Pole | Otázka | Rozhodnutí |
+| --- | --- | --- |
+| Jméno | Pomůže oslovit člověka lidsky? | většinou ano |
+| E-mail | Je nutný pro odpověď? | ano |
+| Telefon | Je nutný hned, nebo až po domluvě? | často volitelné |
+| Firma | Pomůže pochopit kontext? | volitelné nebo podle B2B situace |
+| Rozpočet | Pomůže kvalifikovat poptávku? | spíš rozsah, ne přesná částka |
+| Text zprávy | Pomůže připravit odpověď? | ano, ale s nápovědou |
+| Marketingový souhlas | Je oddělený od poptávky? | musí být samostatný a nepředvyplněný |
+
+U každého pole přidej mikrotext, pokud by člověk mohl váhat. Například: „Telefon je volitelný, ozveme se primárně e-mailem.“ Taková věta umí zvýšit důvěru víc než další ikonka štítu.
+
+### Chybové stavy bez frustrace
+
+Formulář má být laskavý i ve chvíli, kdy něco selže. Chybová hláška „Invalid input“ je programátorský povzdech, ne pomoc uživateli.
+
+Dobrá chybová hláška:
+
+- říká, co je špatně,
+- ukazuje, jak to opravit,
+- je u konkrétního pole,
+- nezahazuje už vyplněná data,
+- funguje i pro čtečky obrazovky,
+- není napsaná jako obvinění.
+
+Příklad:
+
+```text
+E-mail nevypadá platně. Zkontroluj prosím, jestli obsahuje @ a doménu, třeba firma.cz.
+```
+
+Lepší než:
+
+```text
+Error: validation failed.
+```
+
+U přístupnosti se drž základů: každé pole má mít viditelný label, chybová zpráva má být propojená s polem a povinná pole mají být označená srozumitelně. W3C ve WCAG popisuje principy identifikace chyb a podpory opravy vstupu; není to ozdoba pro audity, ale praktická ochrana před ztracenými konverzemi.
+
+### Spam ochrana bez sledovacího tanku
+
+Spam ochrana je nutná, ale nemusí znamenat těžký externí skript na každé stránce. Nejdřív použij jednodušší vrstvy:
+
+- honeypot pole skryté pro lidi, viditelné pro boty,
+- časový limit mezi načtením a odesláním,
+- rate limiting podle IP nebo session,
+- serverovou validaci všech polí,
+- blokaci očividných vzorů spamu,
+- potvrzovací e-mail tam, kde dává smysl.
+
+Externí captcha nebo antispam službu ber jako poslední možnost, ne výchozí reflex. Pokud ji použiješ, napiš do datové mapy, jaká data odchází, komu, na jakém právním základě a jestli existuje méně invazivní alternativa.
+
+### Bezpečnostní minimum
+
+Formulář není jen UX. Je to vstup do systému. Bezpečnostní minimum:
+
+- validuj na serveru, ne jen v prohlížeči,
+- nastav maximální délky polí,
+- ukládej jen data, která opravdu potřebuješ,
+- nevracej uživateli interní chyby nebo stack trace,
+- chraň akce proti CSRF, pokud mění stav nebo pracují s přihlášeným uživatelem,
+- loguj technické chyby bez obsahu citlivých zpráv,
+- neposílej citlivý obsah do analytiky,
+- u příloh kontroluj typ, velikost a následné zpracování.
+
+OWASP doporučení pro validaci vstupů a ochranu proti CSRF ber jako praktický základ. Ne proto, že se hezky vyjímají ve zdrojích, ale protože většina formulářových průšvihů začíná přesně tím, že někdo věřil vstupu až moc.
+
+### Potvrzení po odeslání
+
+Po odeslání má člověk vědět, co se stane dál. Nestačí „Děkujeme“. To je slušné, ale slabé.
+
+Lepší potvrzení:
+
+```text
+Díky, zpráva dorazila. Ozveme se do dvou pracovních dnů na e-mail, který jsi uvedl/a. Data použijeme jen pro vyřízení této poptávky. Pokud chceš něco doplnit, napiš přímo na ahoj@example.cz.
+```
+
+Tahle zpráva dělá čtyři věci: potvrzuje doručení, nastavuje očekávání, vysvětluje práci s daty a dává alternativní kontakt.
+
+### Retence formulářových dat
+
+Formulářová data nemají žít věčně jen proto, že databáze má místo. Nastav jednoduchá pravidla:
+
+- neúspěšné spam pokusy maž rychle,
+- běžné poptávky drž jen po dobu obchodního procesu a rozumné návazné lhůty,
+- support požadavky drž podle potřeby podpory a smluvních závazků,
+- marketingové souhlasy eviduj odděleně od obchodní poptávky,
+- exporty do tabulek pravidelně maž nebo anonymizuj,
+- jednou měsíčně zkontroluj, jestli formulář neposílá data do nástroje, který už nepoužíváš.
+
+Největší riziko často není hlavní databáze. Je to starý export ve sdílené složce, automatický e-mail do pěti schránek nebo CRM pole, které už nikdo neumí vysvětlit.
+
+### Checklist formuláře
+
+- Má formulář jeden jasný účel?
+- Je každé pole nutné pro další krok?
+- Jsou citlivá nebo obchodně citlivá pole volitelná, pokud nejsou nezbytná?
+- Má každé pole srozumitelný label?
+- Jsou chybové hlášky konkrétní a užitečné?
+- Neztrácí se vyplněná data po validační chybě?
+- Probíhá serverová validace?
+- Existuje ochrana proti spamu bez zbytečného sledování?
+- Ví uživatel po odeslání, kdy a jak dostane odpověď?
+- Je jasné, jak dlouho se data drží a kam se posílají?
+- Neodchází obsah formuláře do analytiky, reklamních systémů nebo zbytečných notifikací?
+
+### Mini šablona návrhu formuláře
+
+```text
+Název formuláře:
+
+Účel:
+
+Další krok po odeslání:
+
+Povinná pole:
+- pole:
+- proč je nutné:
+
+Volitelná pole:
+- pole:
+- proč může pomoct:
+
+Data se ukládají do:
+
+Data se posílají komu:
+
+Retence:
+
+Spam ochrana:
+
+Chybové stavy:
+
+Potvrzovací zpráva:
+
+Alternativní kontakt:
+```
+
+Dobrý formulář nepůsobí jako překážka. Působí jako férová dohoda: ty nám dáš jen to, co potřebujeme k odpovědi, a my s tím nebudeme dělat digitální cirkus. Přesně tak má vypadat prodej bez šmírování.
+
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -4205,11 +4374,15 @@ AI redakční workflow má chránit dvě věci najednou: čas týmu a důvěru �
 - European Commission: [AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
 - European Commission: [Navigating the AI Act](https://digital-strategy.ec.europa.eu/en/faqs/navigating-ai-act)
 - NIST: [AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
+- OWASP Cheat Sheet Series: [Input Validation Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html)
+- OWASP Cheat Sheet Series: [Cross-Site Request Forgery Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)
+- W3C WAI: [Understanding Error Identification](https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html)
 
 ---
 
 # Pracovní log
 
+- 2026-09-23: Doplněna příloha „Formuláře, které prodávají bez lovu osobních dat“ s minimalizací polí, přístupnými chybovými stavy, spam ochranou bez zbytečného sledování, bezpečnostním minimem, retenčními pravidly, checklistem a vyplnitelnou šablonou.
 - 2026-09-23: Doplněna příloha „AI redakční workflow bez obsahové fabriky“ s bezpečným postupem práce s AI, pravidly pro data, lidskou editací, privacy-first recyklací obsahu, checklistem a vyplnitelnou šablonou zadání.
 - 2026-09-23: Doplněna příloha „Zákaznická podpora a feedback bez šmírování“ s minimálním datovým standardem ticketu, triáží podle dopadu, šablonami odpovědí, měřením podpory, retenčními pravidly, checklistem a vyplnitelnou šablonou.
 - 2026-09-23: Doplněna příloha „Sales follow-up bez otravování a šmírování“ s jednoduchou pipeline, rytmem navazování, šablonami e-mailů, privacy-first měřením, retenčními pravidly, checklistem a vyplnitelnou šablonou.
