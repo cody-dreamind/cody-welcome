@@ -3878,6 +3878,197 @@ Výsledek:
 
 Sales follow-up není disciplína pro lidi, kteří rádi „tlačí na pilu“. Je to provozní rutina pro týmy, které nechtějí zahazovat dobré příležitosti a zároveň nechtějí dělat marketing jako datová vysavačová služba. Když máš jasný další krok, slušnou zprávu a čistou evidenci, působíš profesionálněji než devadesát procent inboxového chaosu.
 
+## Příloha: Zákaznická podpora a feedback bez šmírování
+
+Podpora je často první místo, kde se privacy-first slib potká s realitou. Na webu můžeš mít krásnou větu o evropském provozu, ale když pak zákazník napíše dotaz a tým začne kopírovat screenshoty, celé databázové řádky a interní poznámky do náhodného nástroje, důvěra se rozpadá rychleji než pondělní todo list po třetí schůzce.
+
+Dobrá podpora nepotřebuje vědět všechno. Potřebuje vědět dost na vyřešení problému, rozlišit jednotlivý incident od opakovaného vzoru a poslat zpět užitečnou odpověď. Feedback zase nemá být nekonečný sklad přání. Má pomáhat rozhodovat, co zlepšit, co vysvětlit a co slušně odmítnout.
+
+> Codyho komentář: Support inbox není produktová věštírna. Je to místo, kde zákazníci často přesně ukážou, co v produktu, webu nebo komunikaci není dost jasné. Jen to nesmíš utopit v chaotických štítcích typu „urgentní asi možná“.
+
+### Co do podpory patří
+
+U každého ticketu si nastav minimální datový standard. Cílem je mít dost kontextu, ale nesbírat údaje ze zvyku. To je praktická aplikace principu minimalizace dat z GDPR: zpracovávej jen to, co je pro účel potřebné, přiměřené a relevantní. V e-booku to není právní stanovisko, ale dobrý provozní kompas.
+
+Minimální sada pro většinu B2B SaaS ticketů:
+
+- identifikace zákazníka nebo workspace,
+- kontaktní osoba pro odpověď,
+- stručný popis problému vlastními slovy zákazníka,
+- typ problému: chyba, dotaz, fakturace, nápad, onboarding, bezpečnost,
+- dopad: blokuje práci, zpomaluje práci, kosmetika, doporučení,
+- stav řešení a odpovědná osoba,
+- datum poslední odpovědi a další krok.
+
+Co tam naopak obvykle nepatří:
+
+- celé exporty osobních dat, pokud stačí ID záznamu,
+- hesla, tokeny, API klíče nebo celé hlavičky requestů,
+- nahrávky obrazovky s citlivými údaji bez domluveného postupu,
+- interní pomluvy zákazníka, protože „to přece nikdo neuvidí“,
+- nekonečná historie komunikace z jiných kanálů bez jasného účelu.
+
+Praktické pravidlo: pokud by ses styděl poslat obsah ticketu zákazníkovi jako export jeho dat, nepiš to tam. Ano, je to nepříjemně dobrý filtr.
+
+### Triáž podle dopadu
+
+Podpora se nesmí řídit jen tím, kdo píše nejhlasitěji. Nastav jednoduchou triáž podle dopadu na práci zákazníka a rizika pro data.
+
+| Priorita | Kdy použít | Reakce |
+| --- | --- | --- |
+| P0 | Bezpečnostní problém, únik dat, výpadek kritické funkce | okamžitě, incidentový režim |
+| P1 | Zákazník nemůže dokončit klíčovou práci | rychlá ruční pomoc a průběžná komunikace |
+| P2 | Chyba má workaround, ale bolí | zařadit do oprav a říct realistický další krok |
+| P3 | Dotaz, drobnost, kosmetika, nápad | odpovědět, označit vzor, netvářit se jako požár |
+
+U privacy-first provozu přidej ještě jeden štítek: „data risk“. Ten neříká, že je zákazník důležitější. Říká, že ticket může obsahovat citlivé údaje, bezpečnostní dopad nebo právně relevantní komunikaci. Takové tickety mají mít přísnější přístup, kratší retenční dobu a jasnější auditní stopu.
+
+### Feedback není backlog
+
+Největší chyba produktového týmu je přepsat každý zákaznický nápad přímo do backlogu. Backlog pak vypadá jako sklad náhradních kabelů: všechno se jednou může hodit, ale nikdo neví k čemu.
+
+Feedback převáděj na rozhodovací otázky:
+
+- Jaký problém zákazník reálně řeší?
+- Jak často se tento problém opakuje?
+- Je to problém správného segmentu zákazníků?
+- Lze ho vyřešit lepším textem, onboardingem nebo dokumentací?
+- Zlepší řešení retenci, aktivaci nebo důvěru?
+- Vyžaduje řešení nová data, nové oprávnění nebo nový dodavatelský nástroj?
+
+Příklad:
+
+```text
+Zákazník říká: „Chci export všech aktivit do tabulky.“
+
+Slabý zápis do backlogu:
+- Přidat export aktivit.
+
+Lepší zápis:
+- Problém: zákazník potřebuje jednou měsíčně doložit internímu týmu, co se v účtu změnilo.
+- Segment: B2B týmy nad 10 uživatelů.
+- Možná řešení: auditní přehled v aplikaci, měsíční PDF, export omezený na metadata.
+- Privacy dopad: export nesmí obsahovat obsah soukromých poznámek bez oprávnění.
+```
+
+Takhle najednou neřešíš „udělejme CSV, protože CSV zní produktově“. Řešíš skutečné rozhodnutí.
+
+### Šablony odpovědí, které nezabijí lidskost
+
+Šablony jsou skvělé, pokud zrychlují odpověď a nezní jako odmítavý automat. Každá šablona má mít tři části: uznání situace, konkrétní další krok a datovou opatrnost.
+
+#### Když potřebuješ doplnit informace
+
+```text
+Díky za popis, tohle zní jako něco, co stojí za rychlou kontrolu.
+
+Pošli nám prosím ještě:
+- přibližný čas, kdy se problém stal,
+- stránku nebo část aplikace, kde se to objevilo,
+- co jsi čekal/a, že se stane.
+
+Prosím neposílej hesla, tokeny ani screenshoty s osobními údaji. Pokud bude potřeba detailnější ukázka, domluvíme bezpečnější postup.
+```
+
+#### Když problém opravuješ
+
+```text
+Díky, problém jsme zařadili jako chybu s dopadem na práci uživatele.
+
+Teď děláme dvě věci:
+1. hledáme bezpečný workaround, aby šla práce dokončit,
+2. ověřujeme příčinu, aby se chyba nevracela.
+
+Další update pošleme nejpozději [čas/datum]. Do ticketu ukládáme jen informace potřebné pro řešení problému.
+```
+
+#### Když nápad odmítáš
+
+```text
+Díky za nápad — dává smysl chápat, proč by to pomohlo.
+
+Teď ho ale nezařadíme do vývoje, protože by přidal složitost a vyžadoval sběr dat, kterým se chceme v produktu vyhnout. Pro tvůj případ doporučujeme [alternativa].
+
+Poznamenali jsme si problém, ne jen požadovanou funkci. Pokud se bude opakovat u více zákazníků, vrátíme se k němu s řešením, které nebude zbytečně nafukovat datovou stopu.
+```
+
+### Měření podpory bez falešných KPI
+
+Podpora svádí k metrikám, které vypadají dobře v dashboardu a špatně v realitě. Průměrný čas odpovědi je užitečný, ale sám o sobě nic neříká o kvalitě řešení. Počet zavřených ticketů je ještě horší, pokud tým zavírá problémy místo toho, aby je řešil.
+
+Lepší sada metrik:
+
+- čas do první smysluplné odpovědi,
+- počet ticketů podle dopadu,
+- podíl problémů vyřešených bez předání vývojářům,
+- opakované problémy podle tématu,
+- počet ticketů, které vedly ke zlepšení dokumentace nebo produktu,
+- počet ticketů s potenciálním datovým rizikem.
+
+Neukládej obsah ticketů do analytiky. Pokud potřebuješ měřit témata, používej štítky a agregace. Obsah zpráv patří do support nástroje s jasným přístupem, retencí a exportem, ne do obecného event streamu.
+
+### Retence a mazání support dat
+
+Support data mají po čase ztrácet hodnotu a získávat riziko. Proto si nastav jednoduché pravidlo retence.
+
+Příklad:
+
+- otevřené tickety: držet do vyřešení,
+- běžné uzavřené tickety: anonymizovat nebo smazat po 12–24 měsících podle potřeby podpory,
+- bezpečnostní a právně relevantní tickety: držet podle interní politiky a právního důvodu,
+- produktové poznatky: převést do anonymizované podoby bez osobních údajů,
+- screenshoty a přílohy: mazat dřív než samotný text ticketu, pokud nejsou dál potřebné.
+
+Důležité je oddělit poznatek od osoby. Věta „tři zákazníci nerozumí nastavení fakturačních údajů“ je pro produkt užitečnější a bezpečnější než historický román v support vlákně.
+
+### Checklist supportu a feedbacku
+
+- Má každý ticket jasný účel a odpovědnou osobu?
+- Neposíláme zákazníka zbytečně pro citlivé screenshoty nebo exporty?
+- Máme štítek pro potenciální datové nebo bezpečnostní riziko?
+- Rozlišujeme chybu, dotaz, nápad, fakturaci a onboarding?
+- Převádíme feedback na problém, ne rovnou na funkci?
+- Máme domluvenou retenční dobu pro tickety a přílohy?
+- Umíme z podpory každý měsíc vytáhnout 3–5 produktových poznatků?
+- Nehodnotíme podporu jen podle rychlosti zavírání ticketů?
+
+### Mini šablona support systému
+
+```text
+Ticket:
+- ID:
+- zákazník / workspace:
+- kontaktní osoba:
+- typ: chyba / dotaz / fakturace / nápad / onboarding / bezpečnost
+- priorita: P0 / P1 / P2 / P3
+- data risk: ano / ne / nejisté
+
+Popis problému:
+- co zákazník řeší:
+- očekávaný výsledek:
+- skutečný výsledek:
+- dopad na práci:
+
+Řešení:
+- odpovědná osoba:
+- workaround:
+- další krok:
+- termín další odpovědi:
+
+Produktový poznatek:
+- opakuje se problém? ano / ne
+- týká se správného segmentu? ano / ne
+- lze vyřešit dokumentací nebo onboardingem?
+- vyžaduje nové zpracování dat?
+
+Retence:
+- obsahuje přílohy? ano / ne
+- přílohy smazat kdy:
+- ticket smazat / anonymizovat kdy:
+```
+
+Podpora je marketing po nákupu. Když funguje dobře, zákazník nemá pocit, že komunikuje s procesem, ale s týmem, který chápe jeho práci. Privacy-first přístup tomu nepřekáží. Naopak pomáhá: méně zbytečných dat, méně chaosu, rychlejší rozhodnutí a víc důvěry.
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -3910,6 +4101,7 @@ Sales follow-up není disciplína pro lidi, kteří rádi „tlačí na pilu“.
 
 # Pracovní log
 
+- 2026-09-23: Doplněna příloha „Zákaznická podpora a feedback bez šmírování“ s minimálním datovým standardem ticketu, triáží podle dopadu, šablonami odpovědí, měřením podpory, retenčními pravidly, checklistem a vyplnitelnou šablonou.
 - 2026-09-23: Doplněna příloha „Sales follow-up bez otravování a šmírování“ s jednoduchou pipeline, rytmem navazování, šablonami e-mailů, privacy-first měřením, retenčními pravidly, checklistem a vyplnitelnou šablonou.
 - 2026-09-23: Doplněna příloha „Reference a případovky bez datového cirkusu“ s postupem sběru souhlasů, strukturou případovky, anonymizací, evidencí, checklistem a šablonou žádosti o referenci.
 - 2026-09-23: Doplněna příloha „Distribuční plán bez platformní závislosti“ s modelem vlastněných, vypůjčených a lidských kanálů, týdenním rytmem, privacy-first měřením, checklistem a vyplnitelnou šablonou.
