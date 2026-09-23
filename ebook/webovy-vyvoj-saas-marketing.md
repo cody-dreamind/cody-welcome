@@ -3688,6 +3688,194 @@ Privacy-first poznámka:
 
 Reference jsou důkaz důvěry, ne těžba sociálního kapitálu. Když je sbíráš férově, získáš dvojí výhodu: zákazník se necítí použitý jako reklamní rekvizita a nový návštěvník vidí, že tvoje privacy-first hodnoty nejsou jen v patičce webu.
 
+## Příloha: Sales follow-up bez otravování a šmírování
+
+Spousta malých SaaSů a studií ztrácí poptávky ne proto, že mají slabý produkt, ale protože nemají žádný systém navazování. Buď se ozvou jednou a pak čekají na zázrak, nebo naopak pošlou sérii generických e-mailů, které smrdí automatizací na pět metrů. Privacy-first follow-up je třetí cesta: jasný, užitečný, krátký a založený na kontextu, který ti člověk opravdu dal.
+
+Cíl follow-upu není někoho ulovit. Cíl je usnadnit mu rozhodnutí. To zní méně dramaticky než „growth engine“, ale funguje to líp a nevypadáš u toho jako sleva na školení LinkedIn guruů.
+
+### Co si smíš pamatovat
+
+Základní pravidlo: eviduj jen informace, které pomáhají pokračovat v rozhovoru nebo dodat službu. U B2B poptávky typicky stačí:
+
+- jméno a pracovní kontakt,
+- firma a role,
+- co člověk řeší,
+- jaký výsledek očekává,
+- odhad termínu,
+- domluvený další krok,
+- stav komunikace,
+- datum posledního kontaktu,
+- poznámka k preferovanému kanálu.
+
+Nepotřebuješ tajný profil člověka, skóre z deseti nástrojů, pixel na každém kroku ani detailní historii každého otevření e-mailu. Pokud nevíš, proč údaj držíš, pravděpodobně ho držet nemáš. GDPR princip minimalizace není designová brzda, ale dobrý produktový filtr: méně dat znamená méně rizika, méně údržby a méně trapných vysvětlování.
+
+### Pipeline podle rozhodnutí, ne podle ega
+
+Pipeline nemusí mít dvacet stavů. Pro malý tým stačí jednoduchý tok:
+
+1. **Nová poptávka** — člověk napsal, ale ještě nevíš dost.
+2. **Kvalifikováno** — chápeš problém, rozpočetový rámec, termín a rozhodovací proces.
+3. **Návrh odeslán** — zákazník má konkrétní další krok.
+4. **Čeká na rozhodnutí** — víš, kdy a proč se ozvat.
+5. **Vyhráno** — předáváš do onboardingu nebo dodávky.
+6. **Uzavřeno bez obchodu** — víš důvod a případně termín budoucího návratu.
+
+Každý stav musí odpovědět na otázku: „Co má teď udělat náš tým nebo zákazník?“ Pokud stav odpověď nemá, je to jen dekorace v CRM.
+
+### Rytmus follow-upu
+
+Praktický rytmus pro B2B poptávku může vypadat takto:
+
+- **Den 0:** odpověď na poptávku, potvrzení kontextu, návrh dalšího kroku.
+- **Den 2 až 3:** doplnění užitečné informace, pokud zákazník nereaguje.
+- **Den 7:** krátké připomenutí s jednou konkrétní otázkou.
+- **Den 14:** férové uzavření smyčky: „Mám to zatím nechat být?“
+- **Za 60 až 90 dní:** pouze pokud existuje reálný důvod návratu, například sezóna, plánovaný rozpočet nebo slíbená revize.
+
+Tohle není dogma. Je to startovní rytmus. Důležité je, aby každá zpráva měla užitek sama o sobě. „Jen se připomínám“ je e-mailová verze klepání lžičkou o hrnek. Raději napiš: „Posílám tři otázky, podle kterých poznáte, jestli má teď redesign smysl.“
+
+### Šablony, které nezní jako robot v saku
+
+Dobrá šablona drží strukturu, ale nechává prostor pro konkrétní kontext.
+
+První odpověď:
+
+```text
+Dobrý den,
+
+díky za zprávu. Chápu to tak, že řešíte [problém] a cílem je [výsledek].
+
+Abychom navrhli rozumný další krok, potřebuji si ověřit tři věci:
+1. [otázka k rozsahu]
+2. [otázka k termínu]
+3. [otázka k rozhodování]
+
+Pokud se hodí, navrhuji [konkrétní další krok].
+
+Cody
+```
+
+Užitečné připomenutí:
+
+```text
+Dobrý den,
+
+navazuji na [téma]. Nechci vás nahánět — posílám jen krátké shrnutí, které může pomoct s rozhodnutím:
+
+- pokud je priorita [A], dává smysl začít [krokem],
+- pokud je priorita [B], nejdřív bych ověřil [riziko],
+- pokud se projekt odsouvá, stačí mi napsat „později“ a nechám to být.
+
+Chcete, abych připravil jednoduchý návrh dalšího kroku?
+```
+
+Uzavření smyčky:
+
+```text
+Dobrý den,
+
+naposledy se připomínám k [téma]. Pokud to teď není priorita, je to úplně v pořádku — nechci vám přidávat další šum do inboxu.
+
+Mám poptávku zatím uzavřít, nebo se mám ozvat v [měsíc / období]?
+```
+
+Vidíš ten trik? Žádný trik. Jen respekt k času druhého člověka. Revoluční technologie: slušnost.
+
+### Co neautomatizovat
+
+Automatizace je užitečná pro připomenutí týmu, ne pro bezhlavé bombardování kontaktů. Automatizuj:
+
+- interní úkol „ozvat se v pátek“,
+- kontrolu, jestli má poptávka další krok,
+- upozornění na dlouho otevřený návrh,
+- pravidelný export zálohy CRM,
+- měsíční úklid starých leadů.
+
+Neautomatizuj bez rozmyslu:
+
+- osobní odpověď na konkrétní bolest,
+- cenovou nabídku,
+- reakci po odmítnutí,
+- dotazy na citlivé interní informace,
+- „breakup“ e-maily posílané plošně všem.
+
+Když automatizace zvyšuje přesnost týmu, je to pomocník. Když jen zvyšuje počet odeslaných zpráv, je to továrna na otravu.
+
+### Privacy-first měření sales procesu
+
+Sales můžeš měřit bez otevřených pixelů a invazivního trackingu. Sleduj agregovaně:
+
+- počet nových poptávek za týden,
+- zdroj poptávky na úrovni kanálu, ne osoby,
+- podíl poptávek s jasným dalším krokem,
+- průměrný čas první odpovědi,
+- podíl návrhů, které dostaly odpověď,
+- nejčastější důvody ztráty,
+- počet starých kontaktů určených ke smazání nebo archivaci.
+
+Tohle stačí pro řízení. Nepotřebuješ vědět, že konkrétní člověk otevřel e-mail v 22:43 z mobilu. Potřebuješ vědět, jestli tvoje nabídka pomáhá zákazníkovi udělat rozhodnutí.
+
+### Retence kontaktů
+
+Ne každý lead má bydlet v CRM navždy. Nastav jednoduché pravidlo:
+
+- aktivní obchodní komunikace: držet po dobu jednání,
+- prohrané poptávky bez dalšího zájmu: archivovat a po stanovené době smazat nebo anonymizovat,
+- zákazníci: držet podle smlouvy, účetnictví a podpory,
+- newsletter nebo produktové novinky: pouze podle samostatného přihlášení,
+- kontakty z akcí: poslat jednu kontextovou zprávu, ne automaticky přidat do kampaně.
+
+Codyho komentář: Nejlepší CRM hygiena je věta „tohle už nepotřebujeme“. Říkej ji často. Datový nepořádek je jako krabice kabelů — jednou za rok si namluvíš, že se budou hodit, a pak stejně koupíš nový USB-C.
+
+### Checklist sales follow-upu
+
+- Každá poptávka má jasný další krok.
+- Každý kontakt má důvod, proč je uložený.
+- Každý follow-up přidává kontext nebo pomáhá rozhodnutí.
+- Žádná zpráva nestaví na skrytém sledování chování.
+- CRM neobsahuje citlivé poznámky, které bys nechtěl ukázat zákazníkovi.
+- Staré leady mají retenční pravidlo.
+- Newsletter a sales komunikace nejsou zamíchané do jedné šedé hmoty.
+- Tým měří proces agregovaně, ne mikrosledováním lidí.
+
+### Mini šablona sales pipeline
+
+```text
+Kontakt:
+- jméno:
+- firma:
+- role:
+- e-mail / telefon:
+- preferovaný kanál:
+
+Kontext:
+- problém:
+- očekávaný výsledek:
+- termín:
+- rozhodující osoba / proces:
+- odhadovaný rozpočetový rámec:
+
+Stav:
+- fáze pipeline:
+- poslední kontakt:
+- další krok:
+- datum dalšího kroku:
+- odpovědná osoba:
+
+Privacy-first poznámka:
+- proč kontakt evidujeme:
+- jaká data nebudeme sbírat:
+- kdy kontakt zkontrolujeme / smažeme / anonymizujeme:
+
+Výsledek:
+- vyhráno / prohráno / odloženo:
+- důvod:
+- poučení pro nabídku nebo web:
+```
+
+Sales follow-up není disciplína pro lidi, kteří rádi „tlačí na pilu“. Je to provozní rutina pro týmy, které nechtějí zahazovat dobré příležitosti a zároveň nechtějí dělat marketing jako datová vysavačová služba. Když máš jasný další krok, slušnou zprávu a čistou evidenci, působíš profesionálněji než devadesát procent inboxového chaosu.
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -3720,6 +3908,7 @@ Reference jsou důkaz důvěry, ne těžba sociálního kapitálu. Když je sbí
 
 # Pracovní log
 
+- 2026-09-23: Doplněna příloha „Sales follow-up bez otravování a šmírování“ s jednoduchou pipeline, rytmem navazování, šablonami e-mailů, privacy-first měřením, retenčními pravidly, checklistem a vyplnitelnou šablonou.
 - 2026-09-23: Doplněna příloha „Reference a případovky bez datového cirkusu“ s postupem sběru souhlasů, strukturou případovky, anonymizací, evidencí, checklistem a šablonou žádosti o referenci.
 - 2026-09-23: Doplněna příloha „Distribuční plán bez platformní závislosti“ s modelem vlastněných, vypůjčených a lidských kanálů, týdenním rytmem, privacy-first měřením, checklistem a vyplnitelnou šablonou.
 - 2026-09-23: Doplněna příloha „Měsíční audit webu bez trackingového plevele“ s postupem kontroly externích skriptů, formulářů, privacy slibu, skórováním a vyplnitelnou šablonou auditu.
