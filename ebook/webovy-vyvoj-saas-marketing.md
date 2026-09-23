@@ -4069,6 +4069,115 @@ Retence:
 
 Podpora je marketing po nákupu. Když funguje dobře, zákazník nemá pocit, že komunikuje s procesem, ale s týmem, který chápe jeho práci. Privacy-first přístup tomu nepřekáží. Naopak pomáhá: méně zbytečných dat, méně chaosu, rychlejší rozhodnutí a víc důvěry.
 
+## Příloha: AI redakční workflow bez obsahové fabriky
+
+AI umí zrychlit tvorbu obsahu, ale taky umí vyrobit dokonale hladký text, který nikomu nepomůže. Pro malý tým je největší hodnota AI v tom, že zrychlí přípravu, strukturu, kontrolu a recyklaci obsahu. Ne v tom, že za firmu začne předstírat vlastní zkušenost.
+
+Privacy-first redakční workflow má dvě zásady: nesypat do nástrojů citlivá data a nepouštět ven text, který nikdo lidsky nepodepsal. AI je parťák na návrh, ne autor bez odpovědnosti. Ano, je to méně magické. Zato méně trapné.
+
+> Codyho komentář: Když článek zní jako univerzální LinkedIn polévka, čtenář pozná, že ho nikdo nevařil pro něj. AI má pomoct najít lepší tvar myšlenky, ne zalít internet další omáčkou.
+
+### Rozděl práci na čtyři fáze
+
+Místo promptu „napiš článek o X“ používej čtyři samostatné kroky. Každý má jiný účel a jinou kontrolu.
+
+1. **Zadání:** komu text pomáhá, jaké rozhodnutí řeší a co má čtenář udělat dál.
+2. **Struktura:** osnova, otázky čtenáře, příklady, námitky a checklist.
+3. **Draft:** první verze textu podle schválené osnovy.
+4. **Editace:** zpřesnění, zkrácení, ověření faktů, doplnění vlastního postoje a odstranění generické vaty.
+
+Tím zabráníš tomu, aby AI rovnou napsala dlouhý text na špatné zadání. Špatné zadání ve větším rozsahu není produktivita. Je to rychlejší cesta do koše.
+
+### Co do AI nedávat
+
+Do externího AI nástroje nepatří nic, co bys bez rozmyslu neposlal dodavateli e-mailem.
+
+Prakticky to znamená:
+
+- nevepisuj osobní údaje zákazníků, pokud to není nezbytné a smluvně pokryté,
+- nevkládej celé interní databáze, exporty CRM nebo support tickety,
+- anonymizuj názvy klientů, e-maily, čísla objednávek a neveřejné ceny,
+- u citlivých témat pracuj s agregovaným shrnutím místo surových dat,
+- do promptu piš kontext rozhodnutí, ne interní šuplík plný detailů.
+
+Bezpečný vstup vypadá třeba takto:
+
+```text
+Pomoz mi navrhnout osnovu článku pro malé B2B SaaS týmy. Téma: jak zlepšit onboarding bez sledování každého kliknutí. Cílový čtenář: zakladatel nebo produktový manažer. Nepoužívej konkrétní zákaznická data. Výstup: osnova s praktickými příklady a checklistem.
+```
+
+### Redakční role člověka
+
+Člověk není jen korektor překlepů. Má dodat zkušenost, rozhodnutí a odpovědnost.
+
+Před publikací si polož pět otázek:
+
+- Je v textu něco, co víme z vlastní praxe?
+- Pozná čtenář, pro koho článek je a pro koho není?
+- Jsou doporučení proveditelná během jednoho týdne?
+- Neobsahuje text tvrzení, které vyžaduje zdroj a žádný zdroj nemá?
+- Je jasné, kde mluvíme jako firma a kde jde o Codyho komentář?
+
+Pokud odpověď na první otázku zní „ne“, text ještě není hotový. Může být gramaticky krásný, ale obchodně prázdný.
+
+### Privacy-first recyklace obsahu
+
+Jeden dobrý text může mít víc životů bez toho, aby ses stal rukojmím algoritmu.
+
+Z jedné kapitoly, článku nebo případovky vytvoř:
+
+- krátký praktický checklist na konec článku,
+- interní sales poznámku pro obchodní hovory,
+- odpověď do FAQ nebo dokumentace,
+- RSS anotaci s přímým odkazem,
+- krátký e-mail existujícím klientům, pokud s tím počítá jejich vztah s firmou,
+- příspěvek na sociální síť bez sledovacích parametrů a bez nátlakového tónu.
+
+Měření drž jednoduché: návštěvy stránky, přímé odpovědi, poptávky, kvalita dotazů, počet opakovaně použitých částí. Nepotřebuješ vědět, že Franta scrolloval do 73 %. Potřebuješ vědět, jestli text pomohl správnému člověku udělat správné rozhodnutí.
+
+### Checklist AI redakčního workflow
+
+- Má každý text jasné publikum, problém a další krok?
+- Je prompt bez osobních a citlivých dat?
+- Jsou fakta, právní tvrzení, ceny a aktuální trendy ověřené ze zdrojů?
+- Doplnil člověk vlastní zkušenost, příklad nebo názor?
+- Zmizely generické fráze typu „v dnešní digitální době“?
+- Má text checklist nebo konkrétní postup?
+- Existuje plán, jak text využít v RSS, dokumentaci, sales nebo podpoře?
+- Ví tým, kdo text finálně schválil?
+
+### Mini šablona redakčního zadání pro AI
+
+```text
+Téma:
+
+Cílový čtenář:
+
+Situace čtenáře:
+- co řeší:
+- čeho se bojí:
+- jaké rozhodnutí má udělat:
+
+Privacy hranice:
+- nepoužívat osobní údaje:
+- nepoužívat názvy klientů:
+- nepoužívat neveřejné ceny nebo smlouvy:
+
+Výstup:
+- formát:
+- délka:
+- tón:
+- povinné části: příklad / checklist / šablona / Codyho komentář
+
+Kontrola před publikací:
+- fakta ověřena:
+- vlastní zkušenost doplněna:
+- CTA je férové:
+- distribuce: web / RSS / dokumentace / sales / podpora
+```
+
+AI redakční workflow má chránit dvě věci najednou: čas týmu a důvěru čtenáře. Když šetří jen čas, vznikne obsahová továrna. Když chrání i důvěru, vznikne publikační systém, který dlouhodobě pomáhá prodeji, podpoře i značce.
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -4101,6 +4210,7 @@ Podpora je marketing po nákupu. Když funguje dobře, zákazník nemá pocit, �
 
 # Pracovní log
 
+- 2026-09-23: Doplněna příloha „AI redakční workflow bez obsahové fabriky“ s bezpečným postupem práce s AI, pravidly pro data, lidskou editací, privacy-first recyklací obsahu, checklistem a vyplnitelnou šablonou zadání.
 - 2026-09-23: Doplněna příloha „Zákaznická podpora a feedback bez šmírování“ s minimálním datovým standardem ticketu, triáží podle dopadu, šablonami odpovědí, měřením podpory, retenčními pravidly, checklistem a vyplnitelnou šablonou.
 - 2026-09-23: Doplněna příloha „Sales follow-up bez otravování a šmírování“ s jednoduchou pipeline, rytmem navazování, šablonami e-mailů, privacy-first měřením, retenčními pravidly, checklistem a vyplnitelnou šablonou.
 - 2026-09-23: Doplněna příloha „Reference a případovky bez datového cirkusu“ s postupem sběru souhlasů, strukturou případovky, anonymizací, evidencí, checklistem a šablonou žádosti o referenci.
