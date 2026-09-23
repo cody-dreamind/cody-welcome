@@ -3221,6 +3221,144 @@ Datum další kontroly:
 
 Dobrá datová mapa nebrzdí marketing ani produkt. Naopak jim šetří čas, protože se nemusí pokaždé hádat od nuly. Když víš, co sbíráš a proč, můžeš rychleji říct ano dobrému nápadu a rychleji říct ne datovému luxusu, který by přinesl víc rizika než hodnoty.
 
+## Příloha: Měsíční audit webu bez trackingového plevele
+
+Web a SaaS se málokdy rozbijí najednou. Častěji zarůstají. Jeden vložený skript kvůli kampani, jeden zapomenutý formulář, jeden kalendářový widget, jeden experiment „jen na chvíli“ a za půl roku nikdo přesně neví, co se načítá, kam tečou data a proč stránka najednou váží jako menší lednička. Měsíční audit není byrokracie. Je to zahradničení: vytahat plevel dřív, než přeroste produkt.
+
+Privacy-first audit má jednoduchý cíl: ověřit, že web pořád dělá svoji práci s minimem dat, minimem třetích stran a maximem kontroly. Nejde o to mít dokonalý dokument. Jde o to udržet provoz čitelný pro tým i zákazníky.
+
+> Codyho komentář: Nejlevnější externí skript je ten, který vůbec nenačteš. Má nulovou latenci, nulový vendor lock-in a nulovou šanci, že se za půl roku někdo zeptá: „Kdo tam dal tohle?“
+
+### Co kontrolovat každý měsíc
+
+Začni jednou stránkou, ne celým vesmírem. Vezmi homepage, nejdůležitější landing page nebo registrační tok. Pokud najdeš problém tam, teprve potom rozšiřuj kontrolu na zbytek webu.
+
+Kontroluj pět oblastí:
+
+- **Externí requesty:** jaké domény se načítají, kdo je vlastní a jestli jsou pořád potřeba.
+- **Formuláře:** jaká pole sbírají, kam se odesílají a jestli se data neposílají i službám, které je nepotřebují.
+- **Cookies a local storage:** co se ukládá v prohlížeči, proč a jestli je to srozumitelně popsané.
+- **Výkon:** jestli marketingové doplňky nezpomalily načtení, hlavně na mobilu.
+- **Obsah důvěry:** jestli privacy slib, kontakt, informace o provozu a alternativy k formuláři odpovídají realitě.
+
+Praktický postup je nudný, a tím pádem dobrý: otevři stránku v anonymním okně, zapni síťový panel v prohlížeči, načti ji bez přihlášení a zapiš všechny domény mimo vlastní web. Potom klikni na hlavní CTA, odešli testovací formulář do bezpečného testovacího režimu nebo aspoň projdi kroky až před odeslání. Cílem není hackerská magie. Cílem je zjistit, jestli se web nechová jinak, než si tým myslí.
+
+### Rozhodovací pravidlo pro každý skript
+
+U každého externího skriptu použij jednoduchou otázku: „Co se stane, když ho dnes vypneme?“
+
+Možné odpovědi:
+
+- **Web přestane fungovat:** skript je kritický, musí mít vlastníka, dokumentaci a monitoring.
+- **Ztratíme důležité měření:** ověř, jestli měření nejde udělat agregovaněji nebo server-side bez osobních profilů.
+- **Ztratíme pohodlí týmu:** porovnej pohodlí s dopadem na výkon, soukromí a závislost.
+- **Nestane se skoro nic:** vypnout, odstranit, poděkovat za služby a poslat do digitálního důchodu.
+
+Tohle pravidlo je krutě praktické. Spousta nástrojů přežívá jen proto, že se jich nikdo nezeptal na smysl existence. Web není muzeum starých kampaní.
+
+### Audit formulářů: největší malé riziko
+
+Formuláře vypadají nevinně, ale často sbírají nejcennější data: jméno, e-mail, telefon, firmu, rozpočet, zprávu, někdy i popis interního problému. Proto si zaslouží větší péči než animovaný hover efekt na tlačítku.
+
+U každého formuláře zkontroluj:
+
+- zda každé pole opravdu pomáhá odpovědět nebo odbavit požadavek,
+- jestli je jasné, co se po odeslání stane,
+- kdo dostane e-mailovou notifikaci,
+- zda se data ukládají do databáze, CRM, tabulky nebo jen e-mailu,
+- jak dlouho se data drží,
+- jestli existuje ruční postup pro smazání nebo export,
+- jestli formulář funguje i bez reklamních nebo social skriptů.
+
+Příklad úpravy:
+
+```text
+Před auditem:
+Formulář sbírá jméno, e-mail, telefon, firmu, web, obrat, počet zaměstnanců a volnou zprávu. Data padají do CRM, e-mailu a automatizačního nástroje.
+
+Po auditu:
+Formulář sbírá jméno, e-mail, firmu a zprávu. Telefon je volitelný. Obrat a počet zaměstnanců se řeší až v kvalifikačním hovoru. Data jdou do CRM a notifikace jednomu týmu, ne pěti lidem pro jistotu.
+```
+
+Méně polí často zlepší i konverzi. Hlavně ale sníží riziko, že budeš skladovat data, která nepotřebuješ. A data, která nepotřebuješ, jsou jako krabice kabelů v šuplíku: jednou možná užitečné, prakticky pořád překážejí.
+
+### Audit obsahu: slib musí sedět s provozem
+
+Privacy-first komunikace nesmí být marketingová poleva na trackingovém dortu. Když web říká „respektujeme soukromí“, ale při načtení pošle návštěvníka přes pět reklamních sítí, důvěra se netvoří. Rozpadá se tiše a rychle.
+
+Jednou měsíčně porovnej texty s realitou:
+
+- Pokud píšeš „bez zbytečných trackerů“, ověř seznam externích domén.
+- Pokud píšeš „provoz v Evropě“, ověř hlavní hosting, analytiku, formuláře a zálohy.
+- Pokud nabízíš RSS, zkontroluj, že feed funguje a je viditelně odkazovaný.
+- Pokud uvádíš kontaktní e-mail, pošli test a ověř doručení.
+- Pokud slibuješ export nebo smazání dat, ověř, že tým ví, jak na to.
+
+Tahle kontrola není jen právní hygiena. Je to produktová pravdivost. Lidé poznají, když značka mluví jasně a drží se při zemi.
+
+### Skóre auditu: zelená, oranžová, červená
+
+Aby audit neskončil jako lyrická poznámka v dokumentu, dej mu jednoduché skóre.
+
+```text
+Zelená:
+- všechny externí skripty mají jasný účel,
+- formuláře sbírají jen nutná data,
+- nejsou nalezené neznámé domény,
+- privacy text odpovídá realitě,
+- další akce jsou malé nebo žádné.
+
+Oranžová:
+- existuje skript bez vlastníka,
+- některá pole formuláře jsou sporná,
+- data tečou do nástroje, který nemá jasnou retenční rutinu,
+- privacy text je moc obecný,
+- do příštího měsíce je potřeba konkrétní náprava.
+
+Červená:
+- načítá se neznámý nebo zjevně zbytečný tracking,
+- data z formuláře chodí na příliš mnoho míst,
+- tým neumí data exportovat nebo smazat,
+- web tvrdí něco, co provoz nepotvrzuje,
+- změna má prioritu před další kampaní.
+```
+
+Červená není ostuda. Ostuda je tvářit se, že červená je vlastně „strategická ambice“. Když problém najdeš včas, je to úspěch auditu, ne selhání týmu.
+
+### Mini šablona měsíčního auditu
+
+```text
+Datum auditu:
+Kontrolovaná stránka nebo tok:
+Kontroloval:
+
+Externí domény nalezené při prvním načtení:
+Domény po kliknutí na hlavní CTA:
+Nové nebo neznámé skripty:
+Skripty k vypnutí:
+
+Kontrolované formuláře:
+Pole k odstranění nebo změně:
+Kam data odcházejí:
+Retence ověřena? Ano / Ne
+
+Cookies / local storage:
+Nejasné položky:
+
+Výkonové poznámky:
+Obsahové poznámky k privacy slibu:
+
+Skóre: Zelená / Oranžová / Červená
+Tři konkrétní akce do dalšího měsíce:
+Vlastník akce 1:
+Vlastník akce 2:
+Vlastník akce 3:
+```
+
+Měsíční audit nemusí trvat dlouho. U malého webu stačí 30 až 45 minut. Důležitá je pravidelnost. Když web udržuješ průběžně, nemusíš jednou ročně dělat velkou očistu, při které všichni zjistí, že půlka skriptů patří kampani, kterou už si nikdo nepamatuje.
+
+Nejlepší výsledek auditu je jednoduchá věta: „Víme, co se načítá, proč to tam je, kdo za to odpovídá a co vypneme, když to přestane dávat smysl.“ To je privacy-first provoz v praxi. Žádné divadlo, žádné konfety, jen čistý web, který se nemusí stydět za vlastní síťový panel.
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -3253,6 +3391,7 @@ Dobrá datová mapa nebrzdí marketing ani produkt. Naopak jim šetří čas, pr
 
 # Pracovní log
 
+- 2026-09-23: Doplněna příloha „Měsíční audit webu bez trackingového plevele“ s postupem kontroly externích skriptů, formulářů, privacy slibu, skórováním a vyplnitelnou šablonou auditu.
 - 2026-09-23: Doplněna příloha „Datová mapa pro web a SaaS bez detektivní kanceláře“ s minimální strukturou evidence dat, inventurou nástrojů, rolí dodavatelů, retenční rutinou, checklistem a vyplnitelnou šablonou.
 - 2026-09-22: Doplněna příloha „Cenová stránka pro SaaS bez nátlaku“ s návrhem tarifů podle segmentů, férovým CTA, B2B FAQ, privacy-first měřením, checklistem a vyplnitelnou šablonou.
 - 2026-09-22: Doplněna příloha „Mini disaster recovery plán pro malý SaaS“ s prioritizací kritických částí, RTO/RPO, restore testem, ručními fallbacky, incidentovou komunikací, checklistem a vyplnitelnou šablonou.
