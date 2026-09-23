@@ -3359,6 +3359,149 @@ Měsíční audit nemusí trvat dlouho. U malého webu stačí 30 až 45 minut. 
 
 Nejlepší výsledek auditu je jednoduchá věta: „Víme, co se načítá, proč to tam je, kdo za to odpovídá a co vypneme, když to přestane dávat smysl.“ To je privacy-first provoz v praxi. Žádné divadlo, žádné konfety, jen čistý web, který se nemusí stydět za vlastní síťový panel.
 
+## Příloha: Distribuční plán bez platformní závislosti
+
+Obsah bez distribuce je poznámkový blok s lepším CSS. A distribuce postavená jen na algoritmu jedné sociální sítě je zase pronajatý billboard v cizím městě, kde ti mohou přes noc přepsat pravidla. Privacy-first marketing proto nestaví na tom, že budeš lidi donekonečna pronásledovat pixelovým lasem. Staví na tom, že vytvoříš užitečný obsah, dáš mu stabilní adresu a nabídneš lidem několik přímých způsobů, jak se k němu vracet.
+
+Distribuční plán není tabulka „kam všude to nasdílet“. Je to systém, který říká: kdo má obsah najít, jakou cestou, jak poznáme užitek a jak nezáviset na jednom kanálu. Malý tým nepotřebuje být všude. Potřebuje být spolehlivě tam, kde zákazník dělá rozhodnutí.
+
+> Codyho komentář: Algoritmus je fajn sluha a mizerný pronajímatel. Když je celý marketing postavený na cizím feedu, nestavíš dům. Stavíš stánek na cizím festivalu a doufáš, že tě zítra nepřesunou vedle toi-toiek.
+
+### Tři vrstvy distribuce
+
+Rozděl kanály podle míry kontroly. Ne podle toho, co je zrovna hlučné.
+
+**1. Vlastněné kanály**
+
+To jsou místa, která máš pod kontrolou: web, blog, dokumentace, RSS feed, changelog, produktová nápověda, e-mail posílaný lidem, kteří ho opravdu chtějí, a přímé odkazy v obchodních materiálech. Tady má žít primární verze obsahu. Pokud článek existuje jen jako příspěvek na sociální síti, je to spíš nájemní obsah než firemní aktivum.
+
+Pravidlo: každý důležitý obsah má mít stabilní URL na vlastním webu. Sociální sítě, newslettery a partnerské zmínky mají odkazovat tam, ne nahrazovat zdroj.
+
+**2. Vypůjčené kanály**
+
+Sem patří sociální sítě, komunity, marketplace profily, katalogy, hostované blogy, podcasty a partnerské weby. Jsou užitečné, protože přinášejí nové publikum. Ale pravidla určuje někdo jiný. Používej je jako rozhlas po městě, ne jako archiv firmy.
+
+Pravidlo: z vypůjčeného kanálu vždy veď člověka na přímý zdroj — článek, checklist, demo, dokumentaci, RSS nebo kontaktní stránku.
+
+**3. Lidské kanály**
+
+Nejvíc podceňovaná distribuce je ruční a vztahová: obchodní follow-up, odpověď na konkrétní dotaz, odkaz v nabídce, doporučení partnerovi, interní sdílení zákaznickému týmu, osobní zpráva člověku, kterému obsah fakt pomůže. Tady nepotřebuješ tracking. Potřebuješ úsudek.
+
+Pravidlo: po publikaci si napiš deset konkrétních lidí nebo firem, kterým může obsah pomoct. Ne spam. Kontextová zpráva s jednou větou proč.
+
+### Jeden obsah, pět použití
+
+Malý tým nemá vyrábět nekonečný proud nových věcí. Má umět z jedné dobré věci vytěžit několik férových formátů.
+
+Příklad pro článek „Jak vybrat privacy-first analytiku pro B2B web“:
+
+- hlavní článek na webu se stabilní URL,
+- krátký checklist ke stažení nebo zkopírování přímo v článku,
+- tři krátké posty: problém, rozhodovací kritéria, častá chyba,
+- odstavec do nabídky nebo obchodního follow-upu,
+- interní poznámka pro tým podpory: jak odpovídat na dotazy k analytice.
+
+Tím nevzniká pět různých kampaní. Vzniká jeden tematický balíček. Každý formát má jiný účel, ale stejný zdroj pravdy.
+
+### Distribuce před publikací
+
+Distribuce se nemá řešit až po kliknutí na „publikovat“. To je jako řešit pozvánky až po svatbě. Před psaním si odpověz:
+
+- Kdo přesně má obsah použít?
+- Jaké rozhodnutí mu má pomoct udělat?
+- Kde takový člověk běžně hledá odpověď?
+- Jaký interní tým obsah využije: obchod, podpora, produkt, vedení?
+- Jaká jedna metrika ukáže, že obsah sloužil, ne jen existoval?
+
+Prakticky: pokud článek píšeš kvůli obchodním dotazům, připrav rovnou i krátkou verzi pro e-mail. Pokud kvůli SEO, promysli interní odkazy a strukturu. Pokud kvůli edukaci zákazníků, doplň ho do nápovědy nebo onboardingové sekvence. Pokud kvůli důvěře, dej ho do sekce s bezpečností, provozem nebo metodikou.
+
+### Měření bez stalkingu
+
+U distribuce nepotřebuješ vědět, že Franta z účetního oddělení četl článek ve středu v tramvaji a pak si třikrát povzdechl. Potřebuješ vědět, jestli kanál přivádí správný typ pozornosti.
+
+Stačí měřit agregovaně:
+
+- návštěvy konkrétní URL podle referreru,
+- kliknutí na hlavní CTA v článku,
+- počet odpovědí nebo kvalifikovaných poptávek, které obsah zmiňují,
+- interní použití: kolikrát obchod nebo podpora poslala odkaz zákazníkovi,
+- návratnost tématu: zda se k němu vyplatí udělat navazující obsah.
+
+UTM parametry používej střídmě a čitelně. Nepiš do nich osobní údaje, názvy konkrétních firem ani interní poznámky. Dobré UTM říká „zdroj a účel kampaně“. Špatné UTM je detektivní deník v URL.
+
+### Redakční distribuční rytmus
+
+Jednoduchý rytmus pro jeden kvalitní článek týdně:
+
+**Pondělí:** vyber otázku zákazníka, rozhodnutí a primární URL.
+
+**Úterý:** napiš článek a doplň checklist nebo šablonu.
+
+**Středa:** připrav tři krátké výtahy pro vypůjčené kanály a jeden odstavec pro obchodní použití.
+
+**Čtvrtek:** publikuj na webu, zkontroluj interní odkazy, RSS, metadata a čitelnost na mobilu.
+
+**Pátek:** rozešli obsah ručně tam, kde dává smysl: zákaznický follow-up, partner, interní tým, komunitní odpověď.
+
+**Další týden:** zkontroluj agregovaná data, dotazy a reakce. Rozhodni, jestli téma rozšířit, přepsat nebo nechat být.
+
+Tenhle rytmus je záměrně obyčejný. Obyčejné systémy se dodržují. Geniální tabulky s patnácti stavy a barevnými emoji často umřou dřív než první kampaň.
+
+### Checklist distribučního plánu
+
+- [ ] Hlavní obsah má stabilní URL na vlastním webu.
+- [ ] Existuje krátký popis problému, pro koho je obsah a jaké rozhodnutí pomáhá udělat.
+- [ ] Článek obsahuje konkrétní další krok: checklist, šablonu, kontakt, demo nebo odkaz na související stránku.
+- [ ] Vypůjčené kanály odkazují na vlastní zdroj, ne nahrazují celý obsah.
+- [ ] RSS nebo jiný přímý odběr je dostupný bez sledovacích skriptů.
+- [ ] Obchod, podpora nebo produkt ví, kdy má obsah použít.
+- [ ] Měření je agregované a neobsahuje osobní údaje v URL parametrech.
+- [ ] Po týdnu je naplánovaná krátká revize: co fungovalo, co ne a co příště zjednodušit.
+
+### Mini šablona distribučního plánu
+
+```text
+Název obsahu:
+Primární URL:
+
+Komu pomáhá:
+Jaké rozhodnutí řeší:
+Hlavní další krok:
+
+Vlastněné kanály:
+- Web/blog:
+- RSS/changelog:
+- Dokumentace/nápověda:
+- Interní odkazy:
+
+Vypůjčené kanály:
+- Sociální síť nebo komunita:
+- Partnerský kanál:
+- Katalog / marketplace / hostovaný výstup:
+
+Lidská distribuce:
+- 5 konkrétních zákazníků nebo leadů:
+- 3 partneři nebo známí:
+- Interní tým, který má obsah používat:
+
+Krátké výtahy:
+- 1 věta:
+- 1 odstavec:
+- 3 body:
+
+Privacy-first měření:
+- Agregovaná metrika:
+- CTA nebo další krok:
+- Co nebudeme měřit:
+
+Revize po týdnu:
+- Co přivedlo užitečnou pozornost:
+- Jaké dotazy vznikly:
+- Co upravit nebo rozšířit:
+```
+
+Distribuce bez šmírování není slabší marketing. Je to marketing, který si buduje vlastní infrastrukturu důvěry: dobré URL, dobré odpovědi, dobré vztahy a minimum datového balastu. Když to funguje, lidé se nevracejí proto, že je pronásleduje pixel. Vracejí se proto, že ví, kde najdou užitečnou odpověď.
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -3391,6 +3534,7 @@ Nejlepší výsledek auditu je jednoduchá věta: „Víme, co se načítá, pro
 
 # Pracovní log
 
+- 2026-09-23: Doplněna příloha „Distribuční plán bez platformní závislosti“ s modelem vlastněných, vypůjčených a lidských kanálů, týdenním rytmem, privacy-first měřením, checklistem a vyplnitelnou šablonou.
 - 2026-09-23: Doplněna příloha „Měsíční audit webu bez trackingového plevele“ s postupem kontroly externích skriptů, formulářů, privacy slibu, skórováním a vyplnitelnou šablonou auditu.
 - 2026-09-23: Doplněna příloha „Datová mapa pro web a SaaS bez detektivní kanceláře“ s minimální strukturou evidence dat, inventurou nástrojů, rolí dodavatelů, retenční rutinou, checklistem a vyplnitelnou šablonou.
 - 2026-09-22: Doplněna příloha „Cenová stránka pro SaaS bez nátlaku“ s návrhem tarifů podle segmentů, férovým CTA, B2B FAQ, privacy-first měřením, checklistem a vyplnitelnou šablonou.
