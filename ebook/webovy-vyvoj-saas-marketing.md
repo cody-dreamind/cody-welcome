@@ -5145,6 +5145,164 @@ Poznámky k rizikům:
 Dodavatelé nejsou jednorázové rozhodnutí. Jsou to živé závislosti. Dobrý privacy-first tým proto nekupuje nástroje stylem „vypadá to hezky, dej tam kartu“. Kupuje je tak, aby za půl roku věděl, co používá, proč to používá, kde jsou data a jak se z toho dá odejít bez požáru.
 
 
+## Příloha: Roadmapa SaaS bez feature factory
+
+Roadmapa není seznam přání, který se tváří jako strategie. Je to provozní dohoda o tom, jaké problémy bude produkt řešit, proč právě teď a podle čeho poznáš, že práce měla smysl. U malého SaaS je roadmapa často rozdíl mezi soustředěným produktem a nekonečnou frontou „ještě malých úprav“, které vypadají nevinně, dokud nesní celý tým.
+
+Feature factory vzniká nenápadně. Jeden zákazník chce export do speciálního formátu, druhý chce vlastní pole, třetí chce integraci, obchod slíbí „rychlou drobnost“ a zakladatel má pocit, že růst znamená hlavně přidávat. Jenže produkt bez jasné prioritizace se časem mění na sklad kompromisů. Každá nová funkce má cenu: návrh, vývoj, testy, dokumentaci, podporu, bezpečnost, monitoring, migrace, práva, mazání dat a vysvětlování uživatelům.
+
+> Codyho komentář: Nejlevnější funkce je ta, kterou nemusíš postavit, podporovat, vysvětlovat ani jednou za kvartál litovat. Produktový minimalismus není lenost. Je to provozní hygiena.
+
+### Začni problémem, ne funkcí
+
+Každá položka roadmapy má začínat problémem uživatele nebo firmy. Ne „přidat dashboard“, ale „zákazník neumí rychle poznat, jestli se onboarding zasekl“. Ne „AI shrnutí“, ale „support tráví moc času čtením dlouhých ticketů před první odpovědí“. Funkce je jen jedna možná odpověď.
+
+Dobrá roadmapová položka obsahuje:
+
+- problém, který řeší,
+- skupinu uživatelů, které se týká,
+- důkaz, že problém existuje,
+- návrh nejmenšího užitečného řešení,
+- rizika pro data, podporu a provoz,
+- metriku úspěchu,
+- rozhodnutí, co se naopak dělat nebude.
+
+Slabá položka vypadá takhle:
+
+```text
+Přidat pokročilé reporty.
+```
+
+Lepší položka:
+
+```text
+Manažeři malých týmů neumí jednou týdně zjistit, které projekty stojí kvůli chybějící odpovědi. Ověříme jednoduchý týdenní přehled se třemi stavy a odkazem do detailu. Nebudeme zatím stavět vlastní report builder ani export všech polí.
+```
+
+Rozdíl je v tom, že druhá verze umožňuje říct „hotovo“, „nefungovalo“ nebo „zúžit“. První verze jen otevírá nekonečnou díru do backlogu.
+
+### Tři koše priorit
+
+Malý tým nepotřebuje složitý prioritizační ceremoniál. Potřebuje společný jazyk. Prakticky fungují tři koše:
+
+| Koš | Co do něj patří | Typická otázka |
+| --- | --- | --- |
+| Růst hodnoty | Funkce, které pomáhají uživateli rychleji dosáhnout výsledku | Pomůže to uživateli častěji uspět? |
+| Snížení tření | Opravy, UX zjednodušení, dokumentace, onboarding | Kde lidé zbytečně padají nebo se ptají? |
+| Provozní odolnost | Bezpečnost, výkon, monitoring, data, interní nástroje | Co nás později draze doběhne? |
+
+Každá roadmapa má mít mix všech tří. Pokud máš jen růst hodnoty, produkt se může technicky rozpadat. Pokud máš jen provozní odolnost, uživatelé nevidí zlepšení. Pokud máš jen snížení tření, můžeš se zaseknout v ladění detailů bez strategického posunu.
+
+Praktické pravidlo pro měsíční plán:
+
+- jedna věc, která zvedá hodnotu produktu,
+- jedna věc, která zjednodušuje uživatelskou cestu,
+- jedna věc, která snižuje provozní riziko.
+
+Není nutné, aby všechny tři byly stejně velké. Důležité je, aby žádná oblast dlouhodobě nezmizela.
+
+### Privacy-first filtr pro každou funkci
+
+U SaaS roadmapy se privacy-first přístup neřeší až v právní kontrole před spuštěním. Má být součástí prioritizace. Každá nová funkce může změnit datový profil produktu: začne ukládat nové údaje, posílat notifikace, generovat logy, používat AI, napojovat integraci nebo dávat administrátorům širší přístup.
+
+Před zařazením do vývoje si polož pět otázek:
+
+- Jaká nová data budeme sbírat nebo odvozovat?
+- Potřebujeme je opravdu ukládat, nebo stačí spočítat výsledek dočasně?
+- Kdo k datům získá přístup a proč?
+- Jak dlouho je budeme držet a jak je smažeme?
+- Přidává funkce nový externí nástroj, subprocesora nebo přesun dat mimo EU/EEA?
+
+Když odpovědi neznáš, funkce není připravená. Ne proto, že právník řekl „ne“. Protože tým zatím nerozumí vlastnímu produktu.
+
+### Ověření před vývojem
+
+Ne každou věc musíš ověřovat stejným způsobem. Malá UX úprava nepotřebuje měsíční výzkum. Velká funkce, která mění datový model, onboarding nebo cenový plán, si ověření zaslouží.
+
+Rychlé metody:
+
+- **Support mining:** projdi posledních 20 relevantních ticketů a najdi opakující se problém.
+- **Sales mining:** zapiš námitky a otázky z posledních obchodních hovorů.
+- **Concierge test:** vyřeš problém ručně pro 3 zákazníky a sleduj, co je opravdu cenné.
+- **Fake door:** ukaž férové tlačítko nebo popis plánované funkce a sbírej zájem bez slibu termínu.
+- **Prototyp v dokumentu:** pošli jednoduchý návrh workflow zákazníkovi a ptej se, kde by se zasekl.
+
+Privacy-first poznámka: při ověřování nesbírej víc dat, než potřebuješ. U rozhovorů si zapiš závěr, ne kompletní osobní profil člověka. U fake door testu neukládej detailní behaviorální stopu, pokud ti stačí agregovaný počet kliknutí a následná dobrovolná zpětná vazba.
+
+### Roadmapa jako závazek k výsledku
+
+Roadmapa nemá slibovat přesné datum každé funkce, pokud ho neumíš dodržet. Lepší je komunikovat úrovně jistoty:
+
+- **Teď:** věci v aktuálním cyklu, které tým aktivně staví.
+- **Další:** problémy připravené k řešení, ale s možností změny pořadí.
+- **Později:** důležité směry bez slibu termínu.
+- **Nebudeme dělat:** věci mimo strategii, které by produkt rozředily.
+
+Sekce „nebudeme dělat“ je podceňovaný zázrak. Pomáhá obchodu, podpoře i zákazníkům pochopit hranice produktu. Když ji napíšeš slušně, nepůsobí arogantně. Působí dospěle.
+
+Příklad:
+
+```text
+Nebudeme stavět univerzální CRM. Produkt bude dál řešit onboarding B2B zákazníků a integrace s CRM necháme přes API nebo ověřené konektory.
+```
+
+Tohle chrání tým před tím, aby z dobrého úzkého produktu vznikl průměrný všeuměl.
+
+### Pravidlo mazání backlogu
+
+Backlog není muzeum nápadů. Pokud položka leží rok bez vlastníka, důkazu a dalšího kroku, není to strategie. Je to digitální prach. Jednou měsíčně backlog projdi a označ položky:
+
+- **stavět** — má důkaz, vlastníka a jasný další krok,
+- **ověřit** — problém zní důležitě, ale chybí důkaz,
+- **zaparkovat** — dobrý nápad, ale teď mimo fokus,
+- **smazat** — bez důkazu, bez vlastníka, bez dopadu.
+
+Mazání backlogu bolí jen poprvé. Pak je to osvobozující. Tým konečně vidí pár důležitých věcí místo stovky polomrtvých lístků.
+
+### Checklist roadmapy bez feature factory
+
+- [ ] Každá větší položka začíná problémem, ne názvem funkce?
+- [ ] Má položka jasnou skupinu uživatelů a důkaz z reality?
+- [ ] Víme, jaké nové datové riziko funkce přidává?
+- [ ] Máme nejmenší užitečnou verzi řešení?
+- [ ] Je jasné, co se v této iteraci dělat nebude?
+- [ ] Roadmapa obsahuje hodnotu, snížení tření i provozní odolnost?
+- [ ] Umíme výsledek změřit bez sledovacího přebytku?
+- [ ] Existuje vlastník rozhodnutí a datum revize?
+- [ ] Komunikujeme jistotu férově: teď, další, později, nebudeme dělat?
+- [ ] Mažeme staré backlog položky bez důkazu a vlastníka?
+
+### Mini šablona roadmapové položky
+
+```text
+Název pracovně:
+
+Problém:
+
+Komu problém vadí:
+
+Důkaz / zdroj signálu:
+
+Nejmenší užitečné řešení:
+
+Co teď záměrně neděláme:
+
+Datový dopad:
+
+Externí služby / integrace:
+
+Metrika úspěchu:
+
+Rizika:
+
+Vlastník:
+
+Datum revize:
+```
+
+Dobrá roadmapa není křišťálová koule. Je to způsob, jak se rozhodovat pod nejistotou, aniž by tým každý týden podlehl nejhlasitějšímu požadavku. Privacy-first SaaS vyhrává tím, že je užitečný, srozumitelný a provozně klidný. Ne tím, že má nejdelší changelog v okolí.
+
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -5194,6 +5352,7 @@ Dodavatelé nejsou jednorázové rozhodnutí. Jsou to živé závislosti. Dobrý
 
 # Pracovní log
 
+- 2026-09-26: Doplněna příloha „Roadmapa SaaS bez feature factory“ s prioritizací podle problémů, třemi koši roadmapy, privacy-first filtrem funkcí, ověřováním před vývojem, pravidlem mazání backlogu, checklistem a šablonou roadmapové položky.
 - 2026-09-26: Doplněna příloha „Dodavatelé a DPA bez právního mlžení“ s kategorizací dodavatelů podle datového rizika, praktickou kontrolou DPA, subprocesory, exit plánem, nákupním pravidlem, checklistem a vyplnitelným registrem dodavatelů.
 - 2026-09-26: Doplněna příloha „Doména, DNS a doručitelnost bez technického chaosu“ s evidencí vlastnictví domény, úklidem DNS, SPF/DKIM/DMARC, TLS/CAA/DNSSEC, subdoménami, privacy-first doručitelností, checklistem a vyplnitelnou šablonou provozního listu.
 - 2026-09-26: Doplněna příloha „Přístupy a offboarding bez bezpečnostního divadla“ s modelem vlastnictví přístupů, rolemi podle práce, pravidly pro sdílené účty a tokeny, offboardingem, revizemi, checklistem a vyplnitelnou šablonou registru.
