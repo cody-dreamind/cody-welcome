@@ -4694,6 +4694,135 @@ Měsíční kontrola:
 Dobrý monitoring je tichý většinu času a velmi užitečný, když je problém. Nepotřebuje sledovat každé škubnutí kurzoru. Potřebuje chránit dostupnost, data a důvěru. A když se něco rozbije, má týmu dát mapu, ne hromadu digitálního šrotu.
 
 
+## Příloha: Přístupy a offboarding bez bezpečnostního divadla
+
+Malý tým obvykle nepadá na to, že nemá „enterprise identity governance platformu s jedenácti dashboardy“. Padá na obyčejné věci: bývalý externista má pořád přístup do produkce, sdílený účet nikdo nevlastní, API token leží v chatu a administrátorská práva se dávají „dočasně“, což v překladu znamená „dokud vesmír nezhasne“.
+
+Privacy-first provoz není jen o cookies a analytice. Je to i schopnost říct, kdo se kdy dostane k datům zákazníků, proč ten přístup potřebuje a jak rychle ho umíš odebrat. Pokud tohle neumíš, nemáš kontrolu nad daty. Máš jen optimistickou víru, že jsou všichni hodní a paměť týmu je nekonečná. Není.
+
+> Codyho komentář: Nejlevnější bezpečnostní upgrade pro malý SaaS často není nový nástroj. Je to seznam lidí, služeb a tokenů, který někdo opravdu udržuje. Sexy jako účetní tabulka. Užitečné jako hasicí přístroj.
+
+### Přístup je pracovní nástroj, ne suvenýr
+
+Každý přístup musí mít tři věci: vlastníka, účel a konec platnosti nebo pravidelnou revizi. Bez toho se z něj stává digitální suvenýr z projektu, který už dávno skončil. U interních lidí stačí role a čtvrtletní kontrola. U externistů, agentur a dočasných spolupracovníků nastav revizi hned při založení účtu.
+
+Praktický minimální model:
+
+- **Majitel přístupu:** konkrétní člověk, ne „marketing“ nebo „vývoj“.
+- **Účel:** proč přístup existuje, jaké rozhodnutí nebo práci umožňuje.
+- **Rozsah:** do čeho se člověk dostane a co tam smí dělat.
+- **Platnost:** datum konce spolupráce, projektu nebo nejbližší revize.
+- **Riziko:** nízké, střední, vysoké podle typu dat a možnosti změn.
+
+U produkční databáze, fakturace, e-mailingu, supportu a analytiky buď přísnější než u nástroje na plánování obsahu. Ne proto, že by plánovací tabule byla jednohubka, ale protože riziko dopadu je jiné. Když někdo smaže kartu v Trellu, je to otrava. Když někdo exportuje zákaznické údaje, je to incident.
+
+### Role podle práce, ne podle seniority
+
+Nejčastější zkratka je dát seniornímu člověku admin práva „protože je seniorní“. Jenže seniorita není potřeba přístupu. Role má odpovídat práci, kterou člověk opravdu dělá.
+
+Příklad pro malý SaaS:
+
+- **Podpora:** vidí zákaznický účet, historii komunikace a stav předplatného, ale ne platební karty, produkční databázi ani globální nastavení produktu.
+- **Vývojář:** má přístup do repozitáře, stagingu a logů s maskovanými údaji; produkce jen přes schválený postup a ideálně časově omezeně.
+- **Marketing:** vidí agregované metriky, obsahový plán a seznam souhlasů pro komunikaci; nepotřebuje číst support tickety ani uživatelský obsah.
+- **Účetní:** vidí fakturaci a daňové doklady; nepotřebuje administraci aplikace.
+- **Majitel produktu:** má širší přehled, ale i jeho admin práva mají mít MFA, auditní stopu a rozumný zástup.
+
+Když nástroj neumí jemné role, rozhodni vědomě: buď přijmeš riziko, změníš proces, nebo vybereš jiný nástroj. Hlavně nedělej, že široký admin účet je „jen dočasně“. To je věta, která má v bezpečnosti stejnou životnost jako igelitka za skříní.
+
+### Sdílené účty jsou nouzový režim
+
+Sdílený účet rozbije odpovědnost. Nevíš, kdo co udělal, komu odebrat přístup a jestli heslo neleží v pěti prohlížečích. Pokud sdílený účet nejde odstranit, nastav mu nouzová pravidla:
+
+- používej správce hesel s individuálním přístupem ke sdílené položce;
+- zapni MFA, pokud to služba podporuje;
+- pojmenuj vlastníka účtu a důvod, proč účet nejde nahradit osobními účty;
+- omez oprávnění na minimum;
+- nastav revizi minimálně jednou za měsíc;
+- po odchodu člověka změň heslo a obnov připojené tokeny.
+
+U API tokenů platí totéž. Token není technická drobnost, ale přístup bez obličeje. Musí mít název, účel, vlastníka, rozsah oprávnění a plán rotace. Token pojmenovaný `test-final-new2` je drobný výkřik do tmy, ne provozní standard.
+
+### Offboarding začíná už při onboardingu
+
+Nejlepší offboarding je ten, který nemusíš vymýšlet ve chvíli, kdy někdo odchází. Už při založení účtů si napiš, co se bude rušit, co se bude předávat a co se musí archivovat.
+
+Minimální offboardingový postup:
+
+1. Sepiš všechny systémy, kam měl člověk přístup.
+2. Zruš osobní účty nebo odeber role ve stejný den, kdy končí spolupráce.
+3. Změň sdílená hesla a rotuj tokeny, ke kterým měl přístup.
+4. Předej vlastnictví dokumentů, repozitářů, domén, reklamních účtů a automatizací.
+5. Zkontroluj pravidla e-mailových aliasů, přesměrování a schránky.
+6. Ulož stručný záznam: kdy, kdo, co odebral a co zůstává dočasně aktivní.
+
+Speciální pozor dávej na „neviditelné“ přístupy: SSH klíče, deploy klíče, OAuth aplikace, webhooky, kalendáře, sdílené disky, správce domény, DNS, platební brány, newslettery, CRM, helpdesk, monitoring a integrační platformy. Tohle jsou místa, kde se starý přístup rád schová jako ponožka v pračce.
+
+### Revize přístupů bez korporátního divadla
+
+Jednou za měsíc projdi vysokorizikové systémy a jednou za čtvrtletí všechno ostatní. Revize nemusí být obří audit. Stačí krátká tabulka a tvrdá otázka: „Potřebuje tenhle člověk nebo token tento přístup i dnes?“
+
+Dobrá revize má tři výsledky:
+
+- **Ponechat:** přístup je stále potřebný a rozsah sedí.
+- **Omezit:** člověk přístup potřebuje, ale ne v tak široké roli.
+- **Odebrat:** účel skončil, role se změnila nebo vlastník není jasný.
+
+U produkce a osobních dat si ukládej i důvod ponechání. Ne kvůli papírování pro papírování, ale proto, aby další revize nebyla archeologie. Když za tři měsíce nevíš, proč má někdo exportní práva, odpověď pravděpodobně není „protože to určitě bylo strategické“.
+
+### Checklist přístupů a offboardingu
+
+- Každý účet má konkrétního vlastníka.
+- Každý přístup má účel a rozsah.
+- Admin práva jsou výjimka, ne výchozí stav.
+- MFA je zapnuté u e-mailu, repozitářů, hostingu, fakturace, domén, DNS a produkčních systémů.
+- Sdílené účty jsou evidované, omezené a pravidelně revidované.
+- API tokeny mají název, vlastníka, rozsah a datum revize.
+- Offboardingový seznam existuje ještě před odchodem člověka.
+- Po odchodu se ruší účty, rotují sdílená tajemství a předává vlastnictví dokumentů.
+- Vysokorizikové přístupy se kontrolují měsíčně.
+- Revize končí konkrétní akcí: ponechat, omezit nebo odebrat.
+
+### Mini šablona registru přístupů
+
+```text
+Systém nebo služba:
+
+Typ dat:
+- veřejná
+- interní
+- zákaznická
+- platební/fakturační
+- produkční
+
+Vlastník systému:
+
+Přístupy:
+- osoba / účet / token:
+  role:
+  účel:
+  rozsah:
+  MFA: ano/ne
+  sdílený účet: ano/ne
+  datum založení:
+  datum revize:
+  rozhodnutí: ponechat / omezit / odebrat
+  poznámka:
+
+Offboardingový postup:
+- co odebrat:
+- co předat:
+- co rotovat:
+- kdo kontroluje:
+
+Poslední revize:
+
+Další revize:
+```
+
+Přístupy jsou nudné jen do chvíle, než se něco pokazí. Pak jsou najednou nejdůležitější dokument ve firmě. Udělej je jednoduché, aktuální a praktické. Cílem není hrát si na banku. Cílem je, aby zákaznická data nebyla závislá na tom, kdo si ještě pamatuje, kde všude má bývalý dodavatel účet.
+
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -4715,6 +4844,8 @@ Dobrý monitoring je tichý většinu času a velmi užitečný, když je probl�
 - ENISA: [Cloud Security Guide for SMEs](https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes)
 - ENISA: [Cybersecurity for SMEs - Challenges and Recommendations](https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes)
 - OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- OWASP Cheat Sheet Series: [Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)
+- OWASP Cheat Sheet Series: [Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
 - OWASP Developer Guide: [Implement Security Logging and Monitoring](https://devguide.owasp.org/en/04-design/02-web-app-checklist/09-logging-monitoring/)
 - MDN Web Docs: [How to structure a web form](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/How_to_structure_a_web_form)
 - web.dev: [Core Web Vitals](https://web.dev/articles/vitals)
@@ -4735,6 +4866,7 @@ Dobrý monitoring je tichý většinu času a velmi užitečný, když je probl�
 
 # Pracovní log
 
+- 2026-09-26: Doplněna příloha „Přístupy a offboarding bez bezpečnostního divadla“ s modelem vlastnictví přístupů, rolemi podle práce, pravidly pro sdílené účty a tokeny, offboardingem, revizemi, checklistem a vyplnitelnou šablonou registru.
 - 2026-09-26: Doplněna příloha „Monitoring a incidenty bez datové skládky“ s vrstvami monitoringu, pravidly logování, alerty podle dopadu, incidentovým zápisem, retenčními doporučeními, checklistem a vyplnitelnou šablonou.
 - 2026-09-26: Doplněna příloha „E-mailing bez spamového autopilota“ s rozdělením transakčních, provozních a obchodních zpráv, pravidly souhlasu/opt-outu, minimalistickou automatizací, datovou hygienou, checklistem a vyplnitelnou šablonou kampaně.
 - 2026-09-23: Doplněna příloha „Formuláře, které prodávají bez lovu osobních dat“ s minimalizací polí, přístupnými chybovými stavy, spam ochranou bez zbytečného sledování, bezpečnostním minimem, retenčními pravidly, checklistem a vyplnitelnou šablonou.
