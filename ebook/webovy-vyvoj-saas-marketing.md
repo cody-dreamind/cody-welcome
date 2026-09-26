@@ -4823,6 +4823,177 @@ Další revize:
 Přístupy jsou nudné jen do chvíle, než se něco pokazí. Pak jsou najednou nejdůležitější dokument ve firmě. Udělej je jednoduché, aktuální a praktické. Cílem není hrát si na banku. Cílem je, aby zákaznická data nebyla závislá na tom, kdo si ještě pamatuje, kde všude má bývalý dodavatel účet.
 
 
+## Příloha: Doména, DNS a doručitelnost bez technického chaosu
+
+Doména je malý řádek v prohlížeči, ale provozně je to jedna z nejdůležitějších věcí ve firmě. Když ztratíš přístup k doméně, nevypadne jen web. Může přestat fungovat e-mail, přihlášení přes odkazy, zákaznická podpora, fakturace, reset hesel, API webhooky i reputace značky. Přesto se domény v malých firmách často spravují stylem „někdo to kdysi koupil na firemní kartu, snad víme kde“.
+
+Privacy-first provoz nezačíná až u analytiky. Začíná u vlastnictví identity na internetu: domény, DNS, TLS certifikátů a e-mailové autentizace. Když je tahle vrstva uklizená, web působí důvěryhodněji, e-maily méně padají do spamu a při incidentu nemusíš archeologicky kopat ve starých fakturách.
+
+> Codyho komentář: Doména je firemní občanka. Když ji drží bývalý freelancer na svém soukromém účtu, není to „rychlé řešení“. Je to escape room s fakturací.
+
+### Vlastnictví domény bez osobních účtů
+
+První pravidlo: doména má být ve vlastnictví firmy, ne konkrétního člověka mimo firmu. To neznamená, že ji nesmí spravovat dodavatel. Znamená to, že hlavní účet, fakturační kontakt a obnova přístupu jsou pod kontrolou vlastníka projektu.
+
+Minimální nastavení:
+
+- registrátor je známý a zapsaný v interním registru přístupů,
+- fakturační e-mail patří firmě, ne soukromé schránce jednotlivce,
+- účet u registrátora má zapnuté MFA,
+- existují alespoň dva odpovědní lidé pro nouzový přístup,
+- doména má zapnuté automatické prodloužení a platnou platební metodu,
+- administrativní kontakt neukazuje zbytečná osobní data veřejně,
+- změny DNS nejdou dělat bez dohledatelného přístupu.
+
+U registračních dat počítej s tím, že po GDPR se veřejná dostupnost osobních údajů ve WHOIS/RDDS výrazně omezila. ICANN k registračním datům popisuje, že přístup k neveřejným údajům je řešen přes pravidla a žádosti, ne jako volně otevřený telefonní seznam ([ICANN: Registration Data Policy](https://www.icann.org/resources/pages/registration-data-policy-2024-02-21-en)). Prakticky: nespoléhej na to, že při krizi „nějak dohledáš majitele domény ve WHOIS“. Měj vlastní evidenci.
+
+### DNS záznamy jako provozní dokumentace
+
+DNS není jen technické podzemí. Je to mapa toho, kam firma posílá provoz a kterým službám věří. Každý DNS záznam by měl mít důvod, vlastníka a datum poslední kontroly.
+
+Praktická tabulka:
+
+| Typ záznamu | K čemu slouží | Co kontrolovat |
+| --- | --- | --- |
+| A/AAAA | kam míří web nebo server | patří IP adresa aktuálnímu hostingu? není tam starý staging? |
+| CNAME | alias na jinou službu | víš, kdo službu provozuje a kde jsou data? |
+| MX | příjem e-mailů | míří na aktuální e-mailovou službu? |
+| TXT | ověření služeb, SPF, DMARC | nejsou tu historická ověření nástrojů? |
+| CAA | kdo smí vydat TLS certifikát | odpovídá používané certifikační autoritě? |
+| NS | autoritativní nameservery | nejsou nameservery u starého dodavatele? |
+
+Každý kvartál projdi DNS a polož si u každého záznamu tři otázky: používáme to ještě, kdo za to odpovídá a co se stane, když to smažeme? Pokud odpověď neznáš, záznam nemaž impulzivně. Označ ho jako nejasný, dohledat, a dej mu termín. DNS archeologie se dělá s helmou, ne s kladivem.
+
+### E-mailová autentizace: SPF, DKIM, DMARC
+
+Pokud posíláš e-maily z vlastní domény, nastav SPF, DKIM a DMARC. Ne kvůli tomu, že zkratky vypadají bezpečně. Kvůli tomu, aby příjemci dokázali ověřit, že zpráva opravdu souvisí s tvojí doménou a že podvodník nemůže tak snadno posílat e-maily tvým jménem.
+
+Google ve svých požadavcích pro odesílatele uvádí autentizaci e-mailů pomocí SPF nebo DKIM a pro hromadné odesílatele také DMARC; požaduje také snadné odhlášení a nízkou míru spamu ([Google: Email sender guidelines](https://support.google.com/a/answer/81126)). Yahoo ve svých požadavcích pro odesílatele podobně řeší SPF/DKIM, DMARC, nízké stížnosti a odhlášení ([Yahoo Sender Hub: Sender requirements](https://senders.yahooinc.com/best-practices/)). To není kosmetika. Je to vstupenka do normální doručitelnosti.
+
+Jednoduchý postup:
+
+1. Sepiš všechny služby, které posílají e-mail z domény: firemní e-mail, fakturace, helpdesk, newsletter, aplikace, formuláře.
+2. U každé služby zjisti, jaké SPF/DKIM záznamy vyžaduje.
+3. SPF drž krátký a bez duplicit. Pozor na limit DNS lookupů.
+4. Zapni DKIM pro každou službu, která ho umí.
+5. Nastav DMARC nejdřív v režimu `p=none`, sleduj reporty a až po úklidu přejdi na přísnější politiku.
+6. Odděl transakční a marketingové odesílání, pokud posíláš větší objemy.
+
+Příklad rozumné DMARC startovací politiky:
+
+```text
+v=DMARC1; p=none; rua=mailto:dmarc-reporty@example.cz; adkim=s; aspf=s
+```
+
+Po kontrole legitimních zdrojů můžeš přejít na `quarantine` a později na `reject`. Nedělej to v pátek odpoledne. Tohle je přesně ten typ změny, který se tváří jako jeden TXT záznam, ale umí rozbít faktury, reset hesel i pozvánky do kalendáře.
+
+### TLS, CAA a DNSSEC
+
+HTTPS je dnes samozřejmost, ale i samozřejmosti potřebují údržbu. Kontroluj expiraci certifikátů, přesměrování z HTTP na HTTPS a to, zda všechny produkční subdomény používají platný certifikát.
+
+CAA záznam říká, které certifikační autority smějí vydávat certifikáty pro doménu. Není povinný pro každý malý web, ale je to užitečná bezpečnostní pojistka, pokud víš, kdo certifikáty vydává. Cloudflare v dokumentaci popisuje, že CAA omezuje autority oprávněné vydat certifikát pro doménu ([Cloudflare: CAA records](https://developers.cloudflare.com/ssl/edge-certificates/additional-options/certificate-authority-authorization/)). Privacy-first poznámka: CAA není důvod používat konkrétní CDN. Je to DNS mechanismus; nastav ho tam, kde DNS spravuješ.
+
+DNSSEC přidává k DNS kryptografické ověření, že odpověď nebyla po cestě podvržena. CZ.NIC vysvětluje DNSSEC jako technologii, která chrání DNS odpovědi před podvržením ([CZ.NIC: DNSSEC](https://www.nic.cz/page/430/dnssec/)). U českých domén je dobré ověřit, jestli registrátor DNSSEC podporuje a jestli ho umíš provozně udržet. Špatně spravovaný DNSSEC může způsobit nedostupnost domény, takže zapnutí patří do plánované změny s kontrolou, ne do půlnočního klikání pro pocit bezpečí.
+
+### Subdomény a staré služby
+
+Subdomény jsou oblíbené hřbitovy starých experimentů. `test.example.cz`, `old.example.cz`, `demo.example.cz`, `beta.example.cz` — každá může mířit na službu, která už neexistuje, nebo hůř, na službu, kterou může převzít někdo cizí.
+
+Pravidla:
+
+- každá produkční subdoména má vlastníka,
+- každá dočasná subdoména má datum expirace,
+- staging a interní prostředí nejsou veřejně indexovatelná,
+- staré CNAME záznamy po zrušení služby mizí,
+- subdomény pro zákaznické projekty mají jasné oddělení od hlavní firemní domény,
+- wildcard DNS se používá jen tehdy, když máš opravdu dobrý důvod.
+
+U SaaS produktů si dej zvláštní pozor na zákaznické subdomény. Pokud zákazník používá vlastní doménu, dokumentuj proces ověření, odebrání a změny vlastníka. Nechceš, aby po ukončení smlouvy zůstaly viset záznamy, které míří na tvou infrastrukturu a nikdo je nespravuje.
+
+### Doručitelnost bez šmírování
+
+Doručitelnost se často řeší jako marketingová magie. Ve skutečnosti stojí na třech obyčejných věcech: technická autenticita, dobrý seznam a užitečný obsah.
+
+Privacy-first přístup:
+
+- nesleduj otevření přes pixel jako hlavní metriku,
+- nepřidávej do každého odkazu agresivní osobní identifikátory,
+- respektuj odhlášení okamžitě,
+- neposílej z jedné domény úplně všechno,
+- udržuj seznam čistý a nemaž reputaci domény starými kontakty,
+- transakční e-maily drž oddělené od marketingu.
+
+Měř raději kliky na přímé odkazy, odpovědi, konverze a kvalitu poptávek. Když newsletter nemá trackovací pixel, nezhroutí se vesmír. Jen budeš muset psát věci, na které lidé opravdu klikají nebo odpovídají. Hrůza, marketing bude muset být užitečný.
+
+### Checklist domény, DNS a e-mailu
+
+- Je doména registrovaná na firmu nebo odpovědný vlastnický účet?
+- Má registrátor zapnuté MFA a aktuální fakturaci?
+- Existuje interní záznam, kde je doména registrovaná a kdo má přístup?
+- Má každá DNS položka důvod, vlastníka a datum poslední kontroly?
+- Jsou odstraněné staré ověřovací TXT záznamy a nepoužívané CNAME?
+- Je zapnutý SPF, DKIM a DMARC alespoň v monitorovacím režimu?
+- Víš, které služby posílají e-mail z domény?
+- Jsou transakční a marketingové e-maily oddělené podle rizika?
+- Hlídáš expiraci TLS certifikátů?
+- Dává CAA smysl pro používané certifikační autority?
+- Je DNSSEC buď správně zapnutý, nebo vědomě odložený s důvodem?
+- Mají dočasné subdomény datum expirace?
+- Je jasný proces pro zrušení zákaznické domény nebo subdomény?
+
+### Mini šablona doménového provozního listu
+
+```text
+Doména:
+
+Registrátor:
+
+Vlastnický účet:
+
+Fakturační kontakt:
+
+Nouzový kontakt 1:
+
+Nouzový kontakt 2:
+
+MFA zapnuto:
+
+Auto-renew zapnuto:
+
+DNS správce:
+
+Nameservery:
+
+Web hosting / cílová infrastruktura:
+
+E-mailová služba:
+
+Služby odesílající e-mail:
+- služba:
+- účel:
+- SPF/DKIM stav:
+- vlastník:
+
+DMARC politika:
+
+TLS certifikáty:
+
+CAA stav:
+
+DNSSEC stav:
+
+Dočasné subdomény:
+
+Poslední revize:
+
+Další revize:
+
+Poznámky k rizikům:
+```
+
+Doména a DNS nejsou kreativní část projektu. Jsou to koleje. Když jsou rovné, nikdo je neřeší a vlak jede. Když jsou rozbité, je úplně jedno, jak krásný máš web, jak chytrý máš onboarding a jak elegantní máš pricing. Lidé se k tomu prostě nedostanou.
+
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -4861,11 +5032,17 @@ Přístupy jsou nudné jen do chvíle, než se něco pokazí. Pak jsou najednou 
 - OWASP Cheat Sheet Series: [Input Validation Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html)
 - OWASP Cheat Sheet Series: [Cross-Site Request Forgery Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)
 - W3C WAI: [Understanding Error Identification](https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html)
+- Google Workspace Admin Help: [Email sender guidelines](https://support.google.com/a/answer/81126)
+- Yahoo Sender Hub: [Sender requirements and recommendations](https://senders.yahooinc.com/best-practices/)
+- ICANN: [Registration Data Policy](https://www.icann.org/resources/pages/registration-data-policy-2024-02-21-en)
+- Cloudflare Docs: [CAA records](https://developers.cloudflare.com/ssl/edge-certificates/additional-options/certificate-authority-authorization/)
+- CZ.NIC: [DNSSEC](https://www.nic.cz/page/430/dnssec/)
 
 ---
 
 # Pracovní log
 
+- 2026-09-26: Doplněna příloha „Doména, DNS a doručitelnost bez technického chaosu“ s evidencí vlastnictví domény, úklidem DNS, SPF/DKIM/DMARC, TLS/CAA/DNSSEC, subdoménami, privacy-first doručitelností, checklistem a vyplnitelnou šablonou provozního listu.
 - 2026-09-26: Doplněna příloha „Přístupy a offboarding bez bezpečnostního divadla“ s modelem vlastnictví přístupů, rolemi podle práce, pravidly pro sdílené účty a tokeny, offboardingem, revizemi, checklistem a vyplnitelnou šablonou registru.
 - 2026-09-26: Doplněna příloha „Monitoring a incidenty bez datové skládky“ s vrstvami monitoringu, pravidly logování, alerty podle dopadu, incidentovým zápisem, retenčními doporučeními, checklistem a vyplnitelnou šablonou.
 - 2026-09-26: Doplněna příloha „E-mailing bez spamového autopilota“ s rozdělením transakčních, provozních a obchodních zpráv, pravidly souhlasu/opt-outu, minimalistickou automatizací, datovou hygienou, checklistem a vyplnitelnou šablonou kampaně.
