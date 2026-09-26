@@ -4347,6 +4347,162 @@ Alternativní kontakt:
 Dobrý formulář nepůsobí jako překážka. Působí jako férová dohoda: ty nám dáš jen to, co potřebujeme k odpovědi, a my s tím nebudeme dělat digitální cirkus. Přesně tak má vypadat prodej bez šmírování.
 
 
+## Příloha: E-mailing bez spamového autopilota
+
+E-mail je pořád jeden z nejlepších vlastněných kanálů. Není závislý na algoritmu sociální sítě, dá se dobře archivovat, funguje pro B2B i SaaS a člověk se k němu může vrátit. Právě proto se s ním ale musí zacházet opatrně. Jakmile z něj uděláš stroj na „ještě jedno připomenutíčko“, důvěra mizí rychleji než rozpočet na performance kampaň.
+
+Privacy-first e-mailing nestaví na tom, že sleduješ každé otevření, každý klik a každý nádech příjemce. Staví na tom, že posíláš méně zpráv, lepší obsah a jasně říkáš, proč člověku píšeš. V českém prostředí navíc nestačí řešit jen GDPR. Obchodní sdělení mají vlastní pravidla podle zákona č. 480/2004 Sb. a ÚOOÚ k nim dlouhodobě vydává praktické výklady.
+
+> Codyho komentář: Když potřebuješ pět automatických připomínek, aby si člověk všiml nabídky, možná není problém v automatizaci. Možná je nabídka jen převlečená prosba o pozornost.
+
+### Rozděl zprávy podle účelu
+
+Nejdřív odděl tři typy e-mailů. Míchání kategorií je nejrychlejší cesta k právnímu i reputačnímu bahnu.
+
+| Typ zprávy | Příklad | Praktické pravidlo |
+| --- | --- | --- |
+| Transakční zpráva | potvrzení objednávky, reset hesla, faktura, bezpečnostní upozornění | Posílej jen to, co je nutné pro službu nebo účet. Nepřibaluj reklamní blok „když už jsme tady“. |
+| Produktová provozní zpráva | oznámení změny funkce, výpadek, změna podmínek, migrace dat | Vysvětli dopad na uživatele a další krok. Neprodávej uvnitř krizové komunikace. |
+| Obchodní sdělení | newsletter, akce, nabídka konzultace, upsell, pozvánka na placený workshop | Měj jasný právní základ, identitu odesílatele a snadné odhlášení. |
+
+Pokud máš pochybnost, počítej se zprávou jako s obchodním sdělením. ÚOOÚ vykládá obchodní sdělení široce: nejde jen o slevový newsletter, ale také o zprávy podporující zboží, služby nebo image podnikatele. To je přesně ten typ definice, který marketing rád ignoruje a právník pak smutně tiskne PDF.
+
+### Souhlas, zákazník a opt-out bez kouzel
+
+Pro běžný newsletter potenciálním zájemcům je bezpečný výchozí režim jednoduchý: získat aktivní, prokazatelný a srozumitelný souhlas. Ne předem zaškrtnuté políčko. Ne „souhlasím s obchodními podmínkami a taky s celým vesmírem“. Samostatný souhlas, jasný účel, identita odesílatele a informace, jak se odhlásit.
+
+U stávajících zákazníků může za určitých podmínek fungovat opt-out režim pro vlastní obdobné výrobky nebo služby. ÚOOÚ k tomu uvádí, že vztah se zákazníkem může odůvodnit zasílání obchodních sdělení bez předchozího souhlasu, pokud zákazník dostal možnost zasílání odmítnout už při získání kontaktu a také v každé další zprávě. Tohle ale není univerzální propustka na libovolný e-mailový ohňostroj.
+
+Prakticky:
+
+- zákazník koupil konkrétní službu nebo produkt,
+- píšeš mu k vlastním obdobným službám nebo produktům,
+- už při získání e-mailu měl jasnou možnost odmítnout marketing,
+- v každém dalším e-mailu má jednoduché a bezplatné odhlášení,
+- eviduješ, proč mu píšeš a kdy marketing odmítl,
+- po odmítnutí už mu obchodní sdělení neposíláš.
+
+U B2B kontaktů nepropadej iluzi, že firemní e-mail je mimo hru. Pravidla obchodních sdělení se netýkají jen spotřebitelů. Navíc osobní údaje fyzických osob ve firmách pořád zůstávají osobními údaji, pokud jde například o jméno, pracovní e-mail nebo roli.
+
+### Měření bez pixelové posedlosti
+
+Klasický e-mail marketing často stojí na open-rate pixelu. Ten ale měří čím dál hůř a zároveň přidává vrstvu sledování, kterou u privacy-first značky nechceš vysvětlovat trapným odstavcem v zásadách zpracování. Lepší je měřit méně věcí, které opravdu pomáhají rozhodovat.
+
+Místo posedlosti otevřeními sleduj:
+
+- kolik lidí se dobrovolně přihlásilo přes konkrétní zdroj,
+- kolik lidí kliklo na primární odkaz v kampani,
+- kolik lidí odpovědělo lidskou odpovědí,
+- kolik lidí se odhlásilo po konkrétním typu obsahu,
+- kolik poptávek nebo registrací přišlo z označeného odkazu,
+- kolik lidí zůstává aktivních bez toho, abys je naháněl slevou.
+
+Technicky stačí jednoduché UTM parametry na vlastních odkazech, agregované statistiky v privacy-first analytice a ruční vyhodnocení odpovědí. Pokud používáš e-mailingový nástroj, vypni sledování otevření jako výchozí nastavení, nebo si aspoň napiš, proč ho opravdu potřebuješ. „Protože dashboard vypadá smutně“ není důvod. Je to estetický smutek, ne metrika.
+
+### Minimalistická automatizace
+
+Automatizace je užitečná, když pomáhá člověku udělat další rozumný krok. Je škodlivá, když jen maskuje nedostatek relevance.
+
+Dobré automatizace:
+
+- potvrzení přihlášení a nastavení očekávání,
+- doručení slíbeného materiálu,
+- krátký onboarding po registraci do SaaS,
+- připomenutí nedokončeného technického kroku, pokud je pro uživatele užitečné,
+- upozornění na konec trialu s férovým vysvětlením,
+- follow-up po webináři s odkazem na záznam a jedním jasným dalším krokem.
+
+Slabé automatizace:
+
+- pět e-mailů po stažení checklistu během tří dnů,
+- falešná urgence bez reálného důvodu,
+- „jen se připomínám“ bez nové hodnoty,
+- maskování hromadné sekvence jako osobní zprávy,
+- automatické reaktivace lidí, kteří už opakovaně nereagují,
+- kombinace transakční zprávy a prodejního nátlaku.
+
+Každá automatizace má mít stop pravidlo. Když člověk odpoví, odhlásí se, koupí, dokončí krok nebo je dlouho neaktivní, sekvence se má zastavit nebo změnit. Automatizace bez stop pravidel je robot s megafonem.
+
+### Datová hygiena seznamu
+
+E-mailový seznam není trofej. Je to závazek. Čím větší a starší seznam, tím víc musíš řešit původ kontaktů, souhlasy, odhlášení a retenci.
+
+Minimální evidence u kontaktu:
+
+- zdroj kontaktu,
+- datum přihlášení nebo vzniku zákaznického vztahu,
+- účel komunikace,
+- právní základ nebo režim komunikace,
+- stav souhlasu nebo opt-outu,
+- datum poslední relevantní interakce,
+- segment bez citlivých profilů,
+- datum plánované revize nebo smazání.
+
+Segmenty drž praktické a hrubé: zákazník, trial, partner, zájemce o konkrétní téma, odběratel newsletteru. Vyhýbej se segmentům typu „pravděpodobně zranitelný“, „finančně zoufalý“, „kliká v noci“ nebo jiným marketingovým hororům v Excelu. Pokud by ses styděl segment přečíst nahlas zákazníkovi, nedávej ho do systému.
+
+### Příklad: férová e-mailová sekvence po stažení checklistu
+
+Situace: B2B návštěvník si stáhne checklist k auditu webu. Chce praktický materiál, ne digitální únos.
+
+Rozumná sekvence:
+
+1. Ihned: doručení checklistu, shrnutí co obsahuje, odkaz na RSS nebo další zdroje.
+2. Za 3 dny: jeden praktický tip k prvnímu kroku auditu a možnost odpovědět s dotazem.
+3. Za 10 dní: krátká ukázka, jak audit vypadá v praxi, plus férová nabídka konzultace.
+4. Konec: žádné nekonečné „breaking news“ bez přihlášení k newsletteru.
+
+Už v prvním e-mailu vysvětli, co ještě přijde. Pokud chceš posílat pravidelný newsletter, požádej o samostatné přihlášení. Stažení checklistu není bianco šek na doživotní proud „hodnotného obsahu“, což je marketingový výraz pro „nechceme říct reklama“.
+
+### Checklist e-mailingu bez šmírování
+
+- Jsou transakční, provozní a obchodní zprávy oddělené?
+- Víš u každého kontaktu, odkud pochází a proč mu píšeš?
+- Má newsletter aktivní a doložitelný souhlas, pokud nejde o jasný zákaznický opt-out režim?
+- Má zákazník možnost odmítnout marketing při získání kontaktu i v každé zprávě?
+- Je odhlášení jednoduché, bez přihlášení do účtu a bez psychologických triků?
+- Nepřidáváš reklamu do transakčních nebo bezpečnostních zpráv?
+- Měříš hlavně kliky, odpovědi a konverze místo sledování otevření?
+- Má každá automatizace jasné stop pravidlo?
+- Mažeš nebo anonymizuješ dlouhodobě neaktivní kontakty?
+- Umíš zákazníkovi jednou větou vysvětlit, proč daný e-mail dostal?
+
+### Mini šablona e-mailové kampaně
+
+```text
+Název kampaně:
+
+Typ zprávy:
+- transakční / provozní / obchodní
+
+Cílová skupina:
+
+Proč těmto lidem smíme psát:
+
+Hlavní hodnota pro příjemce:
+
+Primární CTA:
+
+Co se měří:
+
+Co se neměří:
+
+Odhlášení nebo stop pravidlo:
+
+Retence dat:
+
+Kdy kampaň končí:
+
+Kontrola před odesláním:
+- identita odesílatele:
+- jasný předmět:
+- žádné zbytečné osobní údaje:
+- funkční odhlášení:
+- test odkazu:
+```
+
+Dobře udělaný e-mailing působí jako služba, ne jako pasti na kliky. Když posíláš zprávy, které bys klidně poslal i jednomu konkrétnímu člověku ručně, jsi blízko správnému tónu. Když jen ladíš frekvenci obtěžování, je čas zastavit sekvenci a vrátit se k nabídce.
+
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -4358,6 +4514,10 @@ Dobrý formulář nepůsobí jako překážka. Působí jako férová dohoda: ty
 - European Data Protection Board: [Report of the work undertaken by the Cookie Banner Taskforce](https://www.edpb.europa.eu/documents/task-force-report/report-of-the-work-undertaken-by-the-cookie-banner-taskforce_en)
 - ÚOOÚ: [Cookies — otázky a odpovědi](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies)
 - ÚOOÚ: [Cookies od začátku roku 2022 pouze se souhlasem](https://uoou.gov.cz/media-publikace/tiskove-zpravy/cookies-od-zacatku-roku-2022-pouze-se-souhlasem)
+- ÚOOÚ: [GDPR a přímý elektronický marketing](https://uoou.gov.cz/novinky/obchodni-sdeleni/gdpr-a-primy-elektronicky-marketing)
+- ÚOOÚ: [Obchodní sdělení — otázky a odpovědi](https://uoou.gov.cz/index.php/profesional/qa-otazky-a-odpovedi/obchodni-sdeleni)
+- ÚOOÚ: [Často kladené otázky k zákonu č. 480/2004 Sb.](https://uoou.gov.cz/cinnost/obchodni-sdeleni/casto-kladene-otazky-k-zakonu-c-4802004-sb)
+- Zákony pro lidi: [Zákon č. 480/2004 Sb.](https://www.zakonyprolidi.cz/cs/2004-480)
 - CNIL: [Sheet n°16: Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
 - OWASP: [Application Security Verification Standard](https://owasp.org/projects/asvs)
 - NIST: [SP 800-63 Digital Identity Guidelines](https://www.nist.gov/identity-access-management/projects/nist-special-publication-800-63-digital-identity-guidelines)
@@ -4382,6 +4542,7 @@ Dobrý formulář nepůsobí jako překážka. Působí jako férová dohoda: ty
 
 # Pracovní log
 
+- 2026-09-26: Doplněna příloha „E-mailing bez spamového autopilota“ s rozdělením transakčních, provozních a obchodních zpráv, pravidly souhlasu/opt-outu, minimalistickou automatizací, datovou hygienou, checklistem a vyplnitelnou šablonou kampaně.
 - 2026-09-23: Doplněna příloha „Formuláře, které prodávají bez lovu osobních dat“ s minimalizací polí, přístupnými chybovými stavy, spam ochranou bez zbytečného sledování, bezpečnostním minimem, retenčními pravidly, checklistem a vyplnitelnou šablonou.
 - 2026-09-23: Doplněna příloha „AI redakční workflow bez obsahové fabriky“ s bezpečným postupem práce s AI, pravidly pro data, lidskou editací, privacy-first recyklací obsahu, checklistem a vyplnitelnou šablonou zadání.
 - 2026-09-23: Doplněna příloha „Zákaznická podpora a feedback bez šmírování“ s minimálním datovým standardem ticketu, triáží podle dopadu, šablonami odpovědí, měřením podpory, retenčními pravidly, checklistem a vyplnitelnou šablonou.
