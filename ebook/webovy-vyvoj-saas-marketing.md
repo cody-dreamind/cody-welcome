@@ -4503,6 +4503,197 @@ Kontrola před odesláním:
 Dobře udělaný e-mailing působí jako služba, ne jako pasti na kliky. Když posíláš zprávy, které bys klidně poslal i jednomu konkrétnímu člověku ručně, jsi blízko správnému tónu. Když jen ladíš frekvenci obtěžování, je čas zastavit sekvenci a vrátit se k nabídce.
 
 
+## Příloha: Monitoring a incidenty bez datové skládky
+
+Monitoring má odpovědět na jednoduchou otázku: funguje služba pro lidi, kteří ji potřebují? Nemá se z něj stát druhý produkt, který potichu sbírá víc dat než samotná aplikace. Malý web nebo SaaS nepotřebuje hned velitelské centrum s dvaceti dashboardy. Potřebuje včas poznat výpadek, chybu po nasazení, bezpečnostně podezřelou událost a problém, který reálně bolí zákazníka.
+
+Privacy-first monitoring tedy není „neměřit nic“. Je to měřit věci, které pomáhají provozu, a záměrně nesbírat obsah, tajemství a identifikátory, které k řešení problému nepotřebuješ. OWASP v doporučeních k logování připomíná, že logy mohou obsahovat osobní i citlivé informace a mají mít proces pro monitorování, alerting a reporting ([OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). Evropský princip minimalizace a omezení uložení říká totéž jiným jazykem: zpracovávej jen potřebná data a neuchovávej je déle, než je nutné ([European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)).
+
+> Codyho komentář: Logy jsou jako bezpečnostní kamera ve skladu. Pomáhají, když se něco pokazí. Ale když ji namíříš lidem do klávesnice a necháš záznam navždy, už to není bezpečnost. Je to digitální zvědavost s fakturou.
+
+### Čtyři vrstvy monitoringu
+
+Začni čtyřmi vrstvami. Každá má jiný účel a jinou datovou přísnost.
+
+| Vrstva | Co hlídá | Co typicky stačí | Co raději nesbírat |
+| --- | --- | --- | --- |
+| Dostupnost | web odpovídá, TLS certifikát platí, klíčové URL vrací správný stav | URL, čas kontroly, HTTP status, délka odezvy, region kontroly | celé odpovědi s osobními daty, cookies, obsah formulářů |
+| Aplikační chyby | výjimky, selhání formulářů, chyby plateb, nefunkční integrace | typ chyby, verze aplikace, endpoint, trace ID, anonymizovaný kontext | request body, hesla, tokeny, plné hlavičky, obsah zpráv |
+| Bezpečnostní události | podezřelé přihlášení, změna oprávnění, selhání MFA, masivní pokusy | účet nebo interní ID, typ události, výsledek, čas, IP jen když máš důvod a retenci | hesla, session tokeny, recovery kódy, kompletní osobní profil |
+| Produktový signál | lidé dokončí důležitý tok, narazí na překážku, používají klíčovou funkci | agregovaná událost, plán/tarif, technický kontext, denní součet | přesné chování jednotlivce napříč webem, obsah dokumentů, citlivá pole |
+
+Největší chyba je míchat tyto vrstvy dohromady. Když nástroj pro produktovou analytiku dostává stejná data jako bezpečnostní log, máš zbytečně velké riziko. Když uptime monitoring ukládá celé HTML odpovědi z neveřejné aplikace, ukládá možná i data zákazníků. Když error tracking automaticky posílá request body třetí straně, máš problém dřív, než přijde první incident.
+
+### Co logovat a co nikdy
+
+Dobré logy mají pomoct rekonstruovat událost bez toho, aby se z nich stal archiv soukromí. OWASP Developer Guide doporučuje u bezpečnostního logování pracovat s časem, závažností, označením bezpečnostní události, identitou účtu, korelačními identifikátory, výsledkem události a popisem ([OWASP Developer Guide: Implement Security Logging and Monitoring](https://devguide.owasp.org/en/04-design/02-web-app-checklist/09-logging-monitoring/)). Přeloženo do podnikatelské řeči: potřebuješ vědět, co se stalo, kde, kdy, s jakým výsledkem a jak to najít napříč systémy.
+
+Praktické minimum log záznamu:
+
+```text
+timestamp:
+service:
+environment:
+severity:
+event_type:
+outcome:
+request_id:
+account_id_or_internal_reference:
+route_or_action:
+app_version:
+short_message:
+```
+
+Co do produkčních logů standardně nepatří:
+
+- hesla, API klíče, session tokeny a resetovací odkazy,
+- celé request/response body z formulářů,
+- platební údaje a kopie fakturačních dokumentů,
+- celé e-maily, chatové zprávy nebo soubory zákazníka,
+- zbytečně přesná geolokace,
+- debug výpisy s konfigurací serveru,
+- dlouhodobě uložené IP adresy bez jasného důvodu,
+- data třetích osob, která zákazník vložil do aplikace.
+
+Pokud něco z toho dočasně potřebuješ kvůli ladění, udělej z toho řízenou výjimku: zapnout jen pro konkrétní problém, na omezený čas, s omezeným přístupem a s jasným smazáním. Debug mód na produkci není stav. Je to návštěva zubaře: krátká, nepříjemná a nemá se z ní stát životní styl.
+
+### Alerty podle dopadu
+
+Alert, který pípá pořád, se rychle změní na šum. Alert, který mlčí při skutečném výpadku, je dekorace. Nastav upozornění podle dopadu na uživatele a obchod, ne podle technického ega.
+
+Tři úrovně stačí:
+
+| Úroveň | Příklad | Reakce |
+| --- | --- | --- |
+| Kritické | web nejde, přihlášení nefunguje, formulář nepřijímá poptávky, platby padají | okamžitě řešit, mít vlastníka, krátká interní poznámka, po opravě záznam do logu incidentů |
+| Důležité | zvýšená chybovost po deployi, pomalé odpovědi, nefunkční integrace u části uživatelů | řešit v pracovní době nebo podle SLA, sledovat trend, informovat dotčené zákazníky podle dopadu |
+| Informační | jednorázový pád méně důležité úlohy, blížící se expirace certifikátu, nízké místo na disku | zařadit do provozní rutiny, nebudit nikoho ve tři ráno kvůli kosmetice |
+
+Pro malý tým je lepší pět dobrých alertů než padesát špatných. Začni tímto minimem:
+
+- homepage a klíčová landing page odpovídají,
+- formulář nebo registrační tok projde testem,
+- certifikát neexpiruje v nejbližších dnech,
+- aplikace nemá prudký nárůst 5xx chyb,
+- fronta e-mailů nebo úloh se nezasekla,
+- záloha proběhla a občas se testuje obnova.
+
+Produktová analytika nemá suplovat monitoring. Když se rozbije checkout, nechceš to zjistit z poklesu konverzí za týden. Chceš to vědět hned a s minimem dat, která stačí k opravě.
+
+### Incidentový zápis bez románu
+
+Incident není ostuda. Ostuda je nemít stopu, co se stalo, kdo rozhodl, co se opravilo a co se změní příště. ENISA v materiálech pro malé a střední podniky zdůrazňuje potřebu praktických opatření ke zlepšení kybernetické odolnosti, včetně přípravy na incidenty a obnovu ([ENISA: Cybersecurity for SMEs](https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes)). Nemusíš psát soudní spis. Stačí krátký, pravdivý záznam.
+
+Minimální struktura incidentu:
+
+```text
+Název incidentu:
+Datum a čas zjištění:
+Kdo incident převzal:
+Dopad na uživatele:
+Dopad na data:
+Dotčené služby:
+Časová osa:
+Co jsme udělali hned:
+Co je potřeba udělat později:
+Komunikace zákazníkům:
+Poučení:
+Datum uzavření:
+```
+
+Do zápisu piš fakta. Nehledej viníka během hašení. Pokud je problém v procesu, napiš proces. Pokud je problém v automatizaci, napiš automatizaci. Pokud je problém v tom, že jeden člověk drží všechno v hlavě, napiš „bus factor: jeden člověk a káva“ a naprav to.
+
+### Privacy-first nastavení nástrojů
+
+U každého monitorovacího, logovacího nebo error-tracking nástroje si polož stejné otázky jako u analytiky:
+
+- Kde jsou data fyzicky uložena?
+- Kdo je provozovatel a jaké má subprocesory?
+- Posíláme do nástroje osobní údaje, nebo jen technické události?
+- Umíme maskovat citlivá pole před odesláním?
+- Jak dlouho se data drží?
+- Umíme export a smazání?
+- Má k nástroji přístup jen ten, kdo ho opravdu potřebuje?
+- Je nástroj nutný v prohlížeči uživatele, nebo stačí server-side sběr?
+
+Preferuj evropský provoz a nástroje, kde umíš nastavit retenci, maskování a přístupy. Pokud používáš mimoevropský nástroj, musíš mít důvod, smluvní základ a jasně popsaný tok dat. Ne proto, aby ses bál technologií. Protože provozní pohodlí není dobrý důvod pro nekontrolovaný export produkčních detailů.
+
+### Retence logů
+
+Retence logů má být rozhodnutí, ne výchozí hodnota dodavatele. Různé logy potřebují různou dobu uchování.
+
+Praktický start:
+
+- uptime výsledky: 30 až 90 dní pro trend dostupnosti,
+- aplikační chyby: 30 až 90 dní podle rychlosti vývoje,
+- bezpečnostní události: déle podle rizika, smluv a zákonných povinností,
+- debug logy: hodiny až jednotky dní,
+- incidentový zápis: držet jako provozní dokumentaci, ale bez zbytečných osobních údajů.
+
+Retence se má pravidelně kontrolovat. Když tým neví, proč drží logy dva roky, pravděpodobně je drží moc dlouho. Když je maže po jednom dni a neumí vyšetřit incident, maže je moc rychle. Privacy-first neznamená amnézie. Znamená přiměřenost.
+
+### Checklist monitoringu bez datové skládky
+
+- [ ] Máme uptime kontrolu klíčových veřejných URL.
+- [ ] Testujeme i skutečný obchodní tok, například formulář nebo registraci.
+- [ ] Produkční logy neobsahují hesla, tokeny, request body ani citlivá pole.
+- [ ] Každý log má účel: dostupnost, chyba, bezpečnost nebo produktový signál.
+- [ ] Máme trace/request ID pro propojení událostí bez kopírování osobních dat.
+- [ ] Alerty jsou rozdělené podle dopadu na uživatele.
+- [ ] Víme, kdo řeší kritický alert.
+- [ ] Máme jednoduchou šablonu incidentového zápisu.
+- [ ] Máme nastavenou retenci pro jednotlivé typy logů.
+- [ ] Přístupy do monitoringu jsou omezené a pravidelně kontrolované.
+- [ ] Externí monitorovací nástroje mají popsané umístění dat a subprocesory.
+- [ ] Umíme dočasně zapnout detailnější logování a zase ho vypnout.
+
+### Mini šablona provozního monitoringu
+
+```text
+Služba nebo web:
+
+Kritické uživatelské toky:
+-
+-
+-
+
+Uptime kontroly:
+- URL:
+  očekávaný status:
+  frekvence:
+  alert komu:
+
+Aplikační chyby:
+- nástroj:
+- maskovaná pole:
+- retence:
+- kdo má přístup:
+
+Bezpečnostní události:
+- co logujeme:
+- kde logy leží:
+- retence:
+- kdo kontroluje:
+
+Alerty:
+- kritické:
+- důležité:
+- informační:
+
+Incidentový kanál:
+
+Šablona incidentu uložena zde:
+
+Měsíční kontrola:
+- funkčnost alertů:
+- retence:
+- přístupy:
+- poslední incidenty:
+```
+
+Dobrý monitoring je tichý většinu času a velmi užitečný, když je problém. Nepotřebuje sledovat každé škubnutí kurzoru. Potřebuje chránit dostupnost, data a důvěru. A když se něco rozbije, má týmu dát mapu, ne hromadu digitálního šrotu.
+
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -4523,6 +4714,8 @@ Dobře udělaný e-mailing působí jako služba, ne jako pasti na kliky. Když 
 - NIST: [SP 800-63 Digital Identity Guidelines](https://www.nist.gov/identity-access-management/projects/nist-special-publication-800-63-digital-identity-guidelines)
 - ENISA: [Cloud Security Guide for SMEs](https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes)
 - ENISA: [Cybersecurity for SMEs - Challenges and Recommendations](https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes)
+- OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- OWASP Developer Guide: [Implement Security Logging and Monitoring](https://devguide.owasp.org/en/04-design/02-web-app-checklist/09-logging-monitoring/)
 - MDN Web Docs: [How to structure a web form](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/How_to_structure_a_web_form)
 - web.dev: [Core Web Vitals](https://web.dev/articles/vitals)
 - Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
@@ -4542,6 +4735,7 @@ Dobře udělaný e-mailing působí jako služba, ne jako pasti na kliky. Když 
 
 # Pracovní log
 
+- 2026-09-26: Doplněna příloha „Monitoring a incidenty bez datové skládky“ s vrstvami monitoringu, pravidly logování, alerty podle dopadu, incidentovým zápisem, retenčními doporučeními, checklistem a vyplnitelnou šablonou.
 - 2026-09-26: Doplněna příloha „E-mailing bez spamového autopilota“ s rozdělením transakčních, provozních a obchodních zpráv, pravidly souhlasu/opt-outu, minimalistickou automatizací, datovou hygienou, checklistem a vyplnitelnou šablonou kampaně.
 - 2026-09-23: Doplněna příloha „Formuláře, které prodávají bez lovu osobních dat“ s minimalizací polí, přístupnými chybovými stavy, spam ochranou bez zbytečného sledování, bezpečnostním minimem, retenčními pravidly, checklistem a vyplnitelnou šablonou.
 - 2026-09-23: Doplněna příloha „AI redakční workflow bez obsahové fabriky“ s bezpečným postupem práce s AI, pravidly pro data, lidskou editací, privacy-first recyklací obsahu, checklistem a vyplnitelnou šablonou zadání.
