@@ -4994,6 +4994,157 @@ Poznámky k rizikům:
 Doména a DNS nejsou kreativní část projektu. Jsou to koleje. Když jsou rovné, nikdo je neřeší a vlak jede. Když jsou rozbité, je úplně jedno, jak krásný máš web, jak chytrý máš onboarding a jak elegantní máš pricing. Lidé se k tomu prostě nedostanou.
 
 
+## Příloha: Dodavatelé a DPA bez právního mlžení
+
+Privacy-first provoz nestojí jen na tom, co naprogramuješ. Stojí i na tom, komu pustíš data do ruky. Hosting, analytika, e-mailing, CRM, helpdesk, monitoring, platební brána, AI nástroje, formuláře, zálohy — každá služba může být buď rozumný pomocník, nebo nenápadný únik kontroly. Ne proto, že by dodavatelé byli automaticky zlí. Spíš proto, že malé týmy často naklikají pět nástrojů dřív, než si někdo položí nudnou, ale zásadní otázku: kdo je tady správce, kdo zpracovatel a co přesně se s daty děje?
+
+Evropská komise připomíná, že zpracovatel může zapojit dalšího zpracovatele jen s předchozím písemným souhlasem správce a musí poskytovat dostatečné záruky technických a organizačních opatření ([European Commission: Application of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/application-gdpr_en)). EDPB ve výkladu pro malé firmy také zdůrazňuje odpovědnost správce za vlastní soulad s GDPR i za volbu zpracovatele ([EDPB: Data controller or data processor](https://www.edpb.europa.eu/sme/learn-the-basics/data-controller-or-data-processor_en)). Přeloženo z právničtiny: když si vybereš nástroj, který neumíš vysvětlit, problém není jen u nástroje. Je i u tebe.
+
+> Codyho komentář: DPA není magický PDF amulet. Je to provozní brzda proti chaosu. Pokud nikdo neví, kde dokument leží, kdy byl schválen a co v něm dodavatel slíbil, tak ho máš spíš pro pocit než pro řízení rizika.
+
+### Rozděl dodavatele podle dat, ne podle ceny
+
+Nezačínej tabulkou „kolik to stojí měsíčně“. Začni tím, jaká data dodavatel vidí a jak moc je kritický pro provoz. Levný nástroj s přístupem ke všem zákaznickým zprávám může být větší riziko než dražší hosting s jasnou smlouvou, EU regionem a dobře popsanými subprocesory.
+
+Praktické kategorie:
+
+| Kategorie | Příklady | Minimální kontrola |
+| --- | --- | --- |
+| Kritická infrastruktura | hosting, databáze, zálohy, DNS | EU/EEA region, DPA, subprocesory, zálohy, export, incidenty |
+| Komunikační nástroje | e-mail, helpdesk, CRM | účel dat, retence, export, přístupy, DPA |
+| Marketing a analytika | měření návštěvnosti, kampaně, formuláře | cookies, tracking, IP/data minimalizace, souhlas, opt-out |
+| Produktové nástroje | onboarding, feedback, feature flags | rozsah uživatelských dat, pseudonymizace, mazání |
+| AI a automatizace | asistenti, přepisy, shrnutí, obohacování | zákaz citlivých dat bez důvodu, trénování na datech, region, logy |
+| Interní produktivita | dokumenty, projektové řízení, poznámky | přístupy, sdílení, export, vlastnictví účtu |
+
+U každé kategorie si napiš „nejhorší rozumný scénář“. Ne hollywoodský útok s kapucí, ale obyčejnou poruchu: dodavatel změní podmínky, služba zdraží, data nejdou exportovat, support nereaguje, subprocesor se přesune mimo EU, někdo zapomene odebrat přístup externistovi. Tohle jsou reálné příběhy, ne bezpečnostní cosplay.
+
+### Co má být v DPA prakticky čitelné
+
+DPA neboli smlouva o zpracování osobních údajů má odpovídat tomu, co se opravdu děje v provozu. Evropská komise zveřejňuje standardní smluvní doložky pro vztah správce a zpracovatele podle článku 28 GDPR ([European Commission: SCCs for controllers and processors in the EU/EEA](https://commission.europa.eu/publications/standard-contractual-clauses-controllers-and-processors-eueea_en)). Nemusíš z toho dělat večerní četbu s čajem, ale musíš vědět, jestli tvůj dodavatel pokrývá podstatné věci.
+
+Minimum, které chceš umět dohledat:
+
+- kdo je správce a kdo zpracovatel,
+- jaký je předmět a účel zpracování,
+- jaké kategorie osobních údajů služba zpracovává,
+- jaké kategorie subjektů údajů se týkají,
+- kde se data fyzicky nebo smluvně zpracovávají,
+- kdo jsou subprocesoři a jak se oznamují změny,
+- jak dodavatel pomáhá s právy subjektů údajů,
+- jak se řeší bezpečnostní incidenty,
+- co se stane s daty po ukončení služby,
+- jak lze data exportovat a smazat.
+
+Pokud dodavatel neumí říct, kde jsou data, kdo k nim má přístup a jak je smažeš, není to jen právní nejasnost. Je to produktový signál. Možná má skvělé UI, ale provozně tě nechává v mlze. A mlha je hezká jen na fotkách Šumavy.
+
+### Subprocesoři: seznam, který se má číst
+
+Subprocesor je další služba v řetězci. Typicky cloud, e-mailová infrastruktura, podpora, logování nebo analytika, kterou používá tvůj dodavatel. U privacy-first provozu nechceš jen vědět, že „nějaké subprocesory máme“. Chceš seznam, který umíš zkontrolovat.
+
+Rozumný postup:
+
+1. U každého kritického dodavatele otevři seznam subprocesorů.
+2. Zapiš hlavní infrastrukturu a země/regiony zpracování.
+3. Ověř, jestli dodavatel nabízí oznámení změn e-mailem nebo přes administraci.
+4. Ulož datum poslední kontroly do registru dodavatelů.
+5. U nového subprocesora se ptej, jestli mění riziko, ne jen jestli zní známě.
+
+Nejde o to odmítnout každou globální službu automaticky. Jde o vědomé rozhodnutí. Dreamind výchozí hodnota je evropský provoz a kontrola nad daty. Pokud zvolíš výjimku, napiš proč, jaká data odchází, jak dlouho tam jsou a jaký je exit plán.
+
+### Exit plán před podpisem
+
+Nejlepší čas řešit odchod od dodavatele je před tím, než se na něm staneš závislý. Jakmile je nástroj plný zákaznických dat, automatizací, integrací a interních procesů, vyjednávací pozice se zmenší.
+
+Před nasazením si odpověz:
+
+- Umíme vyexportovat všechna důležitá data ve srozumitelném formátu?
+- Jsou exporty dostupné bez podpory dodavatele?
+- Víme, jak dlouho trvá migrace na alternativu?
+- Máme vlastní kopii kritických šablon, obsahu a nastavení?
+- Co se stane s daty po zrušení účtu?
+- Umíme službu vypnout bez výpadku webu nebo produktu?
+
+U malého SaaS je dobrý exit plán klidně jen jedna stránka. Důležité je, aby existoval dřív než panika.
+
+### Privacy-first nákupní pravidlo
+
+Každý nový nástroj projdi jednou větou:
+
+```text
+Použijeme [nástroj] pro [účel], bude zpracovávat [data], v režimu [správce/zpracovatel], s uložením [region], s retencí [doba], vlastníkem [člověk] a exit plánem [stručně].
+```
+
+Příklad:
+
+```text
+Použijeme evropskou analytiku pro měření návštěvnosti webu, bude zpracovávat agregované údaje o návštěvách bez reklamních profilů, dodavatel je zpracovatel, data zůstávají v EU regionu, retence je 24 měsíců, vlastníkem je marketing lead a export je dostupný z administrace.
+```
+
+Když tu větu nedokážeš vyplnit, nástroj zatím nenasazuj. Není to byrokracie. Je to pojistka proti tomu, aby se z webu stal vánoční stromek cizích skriptů.
+
+### Checklist dodavatele před nasazením
+
+- [ ] Víme, jaký problém nástroj řeší a proč nestačí jednodušší alternativa?
+- [ ] Je jasné, zda dodavatel vystupuje jako správce, zpracovatel nebo samostatný správce?
+- [ ] Máme DPA nebo jiné odpovídající smluvní ujednání?
+- [ ] Známe region zpracování a případné přenosy mimo EU/EEA?
+- [ ] Máme seznam subprocesorů a způsob oznámení změn?
+- [ ] Víme, jaká osobní data se do nástroje nesmí vkládat?
+- [ ] Je zapnuté MFA a role odpovídají práci lidí?
+- [ ] Máme nastavenou retenci, export a mazání dat?
+- [ ] Má nástroj vlastníka v týmu a datum další revize?
+- [ ] Existuje exit plán pro vypnutí nebo migraci?
+
+### Mini šablona registru dodavatelů
+
+```text
+Název dodavatele:
+
+Účel použití:
+
+Vlastník v týmu:
+
+Kategorie nástroje:
+
+Správce / zpracovatel / jiná role:
+
+Typy zpracovaných dat:
+
+Kategorie subjektů údajů:
+
+Region zpracování:
+
+Přenos mimo EU/EEA:
+
+DPA / smluvní dokument:
+
+Subprocesoři:
+
+Oznámení změn subprocesorů:
+
+Retence dat:
+
+Export dat:
+
+Mazání po ukončení:
+
+Přístupy a MFA:
+
+Zakázaná data pro tento nástroj:
+
+Alternativa / exit plán:
+
+Datum poslední revize:
+
+Datum další revize:
+
+Poznámky k rizikům:
+```
+
+Dodavatelé nejsou jednorázové rozhodnutí. Jsou to živé závislosti. Dobrý privacy-first tým proto nekupuje nástroje stylem „vypadá to hezky, dej tam kartu“. Kupuje je tak, aby za půl roku věděl, co používá, proč to používá, kde jsou data a jak se z toho dá odejít bez požáru.
+
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -5001,6 +5152,7 @@ Doména a DNS nejsou kreativní část projektu. Jsou to koleje. Když jsou rovn
 - European Commission: [Standard contractual clauses for controllers and processors in the EU/EEA](https://commission.europa.eu/publications/standard-contractual-clauses-controllers-and-processors-eueea_en)
 - European Data Protection Board: [Legal basis](https://www.edpb.europa.eu/topics/key-gdpr-concepts/legal-basis_en)
 - European Data Protection Board: [Guidelines 07/2020 on the concepts of controller and processor in the GDPR](https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en)
+- European Data Protection Board: [Data controller or data processor](https://www.edpb.europa.eu/sme/learn-the-basics/data-controller-or-data-processor_en)
 - European Data Protection Board: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en)
 - European Data Protection Board: [Report of the work undertaken by the Cookie Banner Taskforce](https://www.edpb.europa.eu/documents/task-force-report/report-of-the-work-undertaken-by-the-cookie-banner-taskforce_en)
 - ÚOOÚ: [Cookies — otázky a odpovědi](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies)
@@ -5042,6 +5194,7 @@ Doména a DNS nejsou kreativní část projektu. Jsou to koleje. Když jsou rovn
 
 # Pracovní log
 
+- 2026-09-26: Doplněna příloha „Dodavatelé a DPA bez právního mlžení“ s kategorizací dodavatelů podle datového rizika, praktickou kontrolou DPA, subprocesory, exit plánem, nákupním pravidlem, checklistem a vyplnitelným registrem dodavatelů.
 - 2026-09-26: Doplněna příloha „Doména, DNS a doručitelnost bez technického chaosu“ s evidencí vlastnictví domény, úklidem DNS, SPF/DKIM/DMARC, TLS/CAA/DNSSEC, subdoménami, privacy-first doručitelností, checklistem a vyplnitelnou šablonou provozního listu.
 - 2026-09-26: Doplněna příloha „Přístupy a offboarding bez bezpečnostního divadla“ s modelem vlastnictví přístupů, rolemi podle práce, pravidly pro sdílené účty a tokeny, offboardingem, revizemi, checklistem a vyplnitelnou šablonou registru.
 - 2026-09-26: Doplněna příloha „Monitoring a incidenty bez datové skládky“ s vrstvami monitoringu, pravidly logování, alerty podle dopadu, incidentovým zápisem, retenčními doporučeními, checklistem a vyplnitelnou šablonou.
