@@ -6797,6 +6797,198 @@ Poznámky:
 
 Přístupnost je povedená tehdy, když ji uživatel nemusí obdivovat. Prostě web použije. A ty místo výmluv dostaneš víc dokončených úkolů, méně zbytečných dotazů a produkt, který se nechová jako klub s tajným vstupem.
 
+## Příloha: SaaS metriky bez vanity dashboardu
+
+SaaS bez metrik je jako řídit dodávku podle nálady spolujezdce. Někdy to vyjde, ale většinou jen proto, že silnice byla zrovna rovná. Metriky mají pomoct týmu rozhodovat: co zlepšit, co zastavit, komu pomoct a kde se produkt pálí o vlastní procesy. Nemají sloužit jako blikající nástěnka pro pocit důležitosti.
+
+Privacy-first přístup neznamená, že nic neměříš. Znamená, že měříš jen to, co umíš obhájit účelem, rozhodnutím a retenční dobou. Pokud číslo nevede k lepšímu rozhodnutí, je to dekorace. A dekorace v databázi umí být překvapivě drahá.
+
+> Codyho komentář: Nejhorší dashboard je ten, který ukazuje třicet grafů a žádnou odpověď. To už není analytika. To je tapeta pro porady, kde se všichni tváří, že „trend je zajímavý“.
+
+### Začni rozhodnutími, ne grafy
+
+Než otevřeš analytický nástroj, napiš si rozhodnutí, která chceš pravidelně dělat. Malý SaaS obvykle nepotřebuje korporátní kokpit. Potřebuje pár otázek, které se každý týden vrací.
+
+Praktické otázky:
+
+- Přicházejí do produktu správní lidé?
+- Dokážou noví uživatelé dokončit první hodnotnou akci?
+- Vracejí se zákazníci k funkci, kvůli které platí?
+- Kde se ztrácí poptávky, trialy nebo platby?
+- Které segmenty potřebují podporu, lepší onboarding nebo jiný pricing?
+- Co zvyšuje riziko churnu dřív, než zákazník odejde?
+
+Ke každé otázce přiřaď jedno rozhodnutí. Například: „Když méně než polovina nových trialů dokončí první projekt, tento týden neupravujeme pricing, ale onboarding.“ Tím se z metriky stane pracovní nástroj, ne horoskop s osou Y.
+
+### Metriky rozděl podle rytmu
+
+Ne všechny metriky patří na stejnou obrazovku. Některé sleduješ denně, jiné týdně a jiné měsíčně. Když je smícháš dohromady, tým začne reagovat na šum.
+
+Denní kontrola má být provozní:
+
+- počet chyb v klíčových tocích,
+- výpadky plateb, e-mailů nebo integrací,
+- počet nových kritických support ticketů,
+- dokončení hlavních formulářů nebo registrací,
+- podezřelé skoky ve spamových registracích.
+
+Týdenní kontrola má být produktová:
+
+- dokončení první hodnotné akce,
+- aktivace podle segmentu,
+- používání hlavních funkcí,
+- důvody kontaktování podpory,
+- výsledky posledních experimentů.
+
+Měsíční kontrola má být obchodní:
+
+- nové placené účty,
+- rozšíření a zrušení,
+- kvalita akvizičních kanálů,
+- trend retence,
+- zdraví pipeline a cash-flow.
+
+Tímhle rozdělením zabráníš tomu, aby se tým každý den stresoval měsíčními čísly, která se stejně nedají opravit jedním odpolednem.
+
+### Vanity metriky poznáš podle slabého slovesa
+
+Vanity metrika často zní dobře, ale neříká, co máš udělat. „Návštěvy rostou“ je slabé. „Více návštěvníků z organického vyhledávání dokončuje poptávkový formulář“ už je použitelné. Rozdíl je v tom, že druhá věta spojuje kanál, chování a výsledek.
+
+Podezřelé metriky:
+
+- celkové pageviews bez kontextu stránky,
+- počet registrovaných účtů bez aktivace,
+- počet stažení lead magnetu bez následného kroku,
+- počet odeslaných e-mailů bez odpovědí nebo konverzí,
+- průměrné hodnoty bez segmentů,
+- „engagement“ definovaný tak široce, že se do něj vejde i omylem otevřená záložka.
+
+U každé metriky dopiš větu:
+
+```text
+Když se tato metrika změní o ___, uděláme ___, protože ___ .
+```
+
+Pokud větu neumíš doplnit, metrika zatím nepatří na hlavní dashboard. Může zůstat v exploraci, ale nemá řídit tým.
+
+### Privacy-first eventy
+
+Eventy pojmenovávej podle akce v produktu, ne podle člověka. Nepotřebuješ vědět, že „Jan Novák z firmy X klikl ve 14:03 na třetí tlačítko“. Často stačí vědět, že v daném období proběhlo dokončení určitého kroku v určitém segmentu.
+
+Dobré eventy:
+
+- `trial_started`,
+- `first_project_created`,
+- `invite_sent`,
+- `integration_connected`,
+- `report_exported`,
+- `subscription_started`,
+- `subscription_cancelled`.
+
+U každého eventu si napiš:
+
+- účel měření,
+- vlastníka metriky,
+- zda se ukládá identifikátor uživatele, účtu nebo jen agregace,
+- jak dlouho se detail drží,
+- kdy se event smaže nebo agreguje,
+- jaké rozhodnutí z něj vzniká.
+
+Minimalistické pravidlo: detail drž jen tam, kde slouží konkrétnímu zákaznickému nebo provoznímu účelu. Pro dlouhodobý trend většinou stačí agregace po dnech, týdnech nebo segmentech.
+
+### Segmentace bez profilování
+
+Segmentace je užitečná, když vysvětluje rozdílné potřeby. Je škodlivá, když se z ní stane tichý profilovací stroj. Malý SaaS obvykle nepotřebuje detailní behaviorální profily. Potřebuje vědět, zda se produkt jinak používá podle typu zákazníka, plánu nebo use-casu.
+
+Bezpečnější segmenty:
+
+- tarif nebo balíček,
+- typ účtu: freelancer, malá firma, agentura, interní tým,
+- zvolený use-case při onboardingu,
+- země provozu jen tam, kde řeší jazyk, fakturaci nebo podporu,
+- kanál akvizice v agregované podobě,
+- stáří účtu v týdnech nebo měsících.
+
+Vyhni se segmentům, které nepotřebuješ pro produktové rozhodnutí: přesná poloha, zařízení konkrétní osoby, individuální historie klikání napříč weby nebo importované marketingové profily. To není „lepší poznání zákazníka“. To je datový batoh, se kterým se špatně utíká při incidentu.
+
+### Jedna severní hvězda a pár strážných metrik
+
+North Star metrika má popsat hodnotu, kterou zákazník skutečně získává. Nemá to být číslo, které jde snadno nafouknout kampaní. Pokud prodáváš nástroj na dokumentaci, může být lepší měřit počet týmů, které každý týden aktualizují důležitou stránku, než počet vytvořených dokumentů. Vytvořit chaos umí každý. Udržet užitečnou znalost je výkon.
+
+Vedle hlavní metriky měj strážné metriky, které hlídají, že růst neničí kvalitu:
+
+- počet support ticketů na aktivní účet,
+- doba do první hodnotné akce,
+- počet chyb v klíčových tocích,
+- míra rušení po prvním měsíci,
+- počet incidentů souvisejících s daty,
+- objem ručně opravovaných účtů.
+
+Když hlavní metrika roste, ale strážné metriky hoří, nemáš růst. Máš přetlak v potrubí.
+
+### Dashboard pro tým, ne pro ego
+
+Dobrá metrická stránka má být krátká. Ideálně se vejde na jednu obrazovku a každé číslo má vlastníka. Pokud metrika nemá vlastníka, nikdo ji nezlepší. Pokud nemá definici, každý ji bude vykládat jinak.
+
+Struktura týdenního dashboardu:
+
+- hlavní metrika hodnoty,
+- aktivace nových účtů,
+- retence aktivních účtů,
+- kvalita akvizice,
+- provozní zdraví,
+- tři poznámky: co se změnilo, proč se to asi stalo, co uděláme dál.
+
+Nejdůležitější část dashboardu není graf. Je to poznámka „co uděláme dál“. Bez ní je dashboard jen dražší screenshot.
+
+### Checklist SaaS metrik bez vanity dashboardu
+
+- Máme vypsaná rozhodnutí, která metriky podporují.
+- Každá hlavní metrika má jasnou definici a vlastníka.
+- Denní, týdenní a měsíční metriky nejsou smíchané v jednom stresovém guláši.
+- Eventy měří akce, ne zbytečné osobní detaily.
+- Detailní data mají účel, retenční dobu a plán agregace nebo smazání.
+- Segmenty pomáhají produktu, ne tichému profilování.
+- Dashboard obsahuje i strážné metriky kvality a podpory.
+- Každý týden vznikne konkrétní rozhodnutí nebo vědomé „nic neměníme“.
+
+### Mini šablona metrikového listu
+
+```text
+Název metriky:
+
+Otázka, na kterou odpovídá:
+
+Rozhodnutí, které podporuje:
+
+Přesná definice:
+
+Zdroj dat:
+
+Vlastník:
+
+Rytmus kontroly:
+denně / týdně / měsíčně / kvartálně
+
+Segmenty:
+
+Jaká osobní data se ukládají:
+
+Retence detailu:
+
+Kdy se data agregují nebo mažou:
+
+Prahová hodnota pro akci:
+
+Co uděláme, když metrika klesne:
+
+Co uděláme, když metrika roste, ale strážné metriky se zhorší:
+
+Poznámky:
+```
+
+Metriky jsou povedené tehdy, když se podle nich tým chová klidněji a přesněji. Ne když má víc grafů. Cílem není vědět o uživateli všechno. Cílem je vědět dost na to, abys zlepšil produkt, podpořil zákazníka a nepostavil si při tom vlastní malý sledovací průmysl.
+
 # Zdroje
 
 - W3C: [Web Content Accessibility Guidelines (WCAG) 2.2](https://www.w3.org/TR/wcag/)
@@ -6853,6 +7045,7 @@ Přístupnost je povedená tehdy, když ji uživatel nemusí obdivovat. Prostě 
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „SaaS metriky bez vanity dashboardu“ s rozhodovacími metrikami, rytmem kontrol, privacy-first eventy, segmentací bez profilování, strážnými metrikami, checklistem a vyplnitelnou šablonou metrikového listu.
 - 2026-09-27: Doplněna příloha „Přístupnost webu bez alibistického checklistu“ s proudem úkolů, semantickým HTML, kontrastem, alt texty, formuláři, 45minutovým auditem, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Migrace webu bez SEO ztrát a datového bordelu“ s URL mapou, pravidly pro obsah, analytiku, formuláře, den spuštění, týdenní kontrolu, checklistem a vyplnitelnou šablonou migračního plánu.
 - 2026-09-27: Doplněna příloha „Předání webu nebo SaaS bez ztracených klíčů“ s inventářem dodaných částí, pravidly pro přístupy, provozním runbookem, datovou částí, předávací schůzkou, checklistem a vyplnitelným předávacím protokolem.
