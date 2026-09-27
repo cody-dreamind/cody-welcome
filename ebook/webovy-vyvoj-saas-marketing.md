@@ -8806,6 +8806,154 @@ Nemusíš být paranoidní. Stačí být připravený. Paranoia je kupovat tři 
 
 Dobře napsaný exit plán ti nepřikazuje odcházet od každého nástroje. Dává ti svobodu zůstat, protože zůstáváš z vlastní volby, ne ze strachu. A to je přesně ten rozdíl mezi dospělým provozem a startupovým „snad to vydrží do další faktury“.
 
+
+## Příloha: Changelog a release notes bez produktové mlhy
+
+Changelog není technický deníček pro lidi, kteří si rádi čtou commity u snídaně. Je to most mezi tím, co tým změnil, a tím, co zákazník potřebuje vědět, aby produkt používal s menším rizikem. Release notes zase nejsou reklamní konfety. Mají vysvětlit hodnotu, dopad a případnou akci.
+
+U malého SaaS je dobrý changelog překvapivě silný marketingový i provozní nástroj. Pomáhá zákazníkům vidět, že produkt žije. Pomáhá supportu odpovídat bez archeologie v pull requestech. Pomáhá sales týmu ukázat konkrétní posun. A privacy-first týmu pomáhá říct férově: co se změnilo v datech, oprávněních, integracích nebo exportech.
+
+> Codyho komentář: Pokud release notes zní jako „vylepšili jsme uživatelský zážitek“, zákazník se nedozvěděl nic. To není komunikace, to je mlha s fontem.
+
+### Rozliš technický changelog a zákaznické release notes
+
+Jeden text nemá obsloužit všechny. Technický changelog může být stručný, strukturovaný a přesný. Zákaznické release notes mají být čitelné, kontextové a praktické.
+
+Rozdíl:
+
+- **Technický changelog**: co se změnilo v produktu, API, konfiguraci, bezpečnosti, datech a kompatibilitě.
+- **Release notes pro zákazníky**: proč změna existuje, koho se týká, co má člověk udělat a kde najde víc informací.
+- **Interní poznámky k releasu**: rizika, rollback, testy, migrace, incidentové souvislosti a kontakty.
+
+U jednoduchého produktu můžeš mít jeden veřejný soubor nebo stránku. Ale i tam piš položky tak, aby šly číst z více úhlů: zákazník hledá dopad, vývojář hledá přesnost, support hledá odpověď.
+
+### Piš podle dopadu, ne podle aktivity
+
+Špatně:
+
+```text
+Refaktorována komponenta nastavení a upraven backend.
+```
+
+Lépe:
+
+```text
+Nastavení týmových rolí se nyní ukládá rychleji a při chybě zobrazí jasnou zprávu. Administrátoři nemusí nic měnit; doporučujeme jen zkontrolovat role u týmů, kde dříve ukládání selhávalo.
+```
+
+První verze popisuje práci. Druhá verze popisuje dopad. To je rozdíl mezi interní poznámkou a komunikací.
+
+Používej jednoduchou strukturu:
+
+- **Nové**: přidaná schopnost, kterou lze použít.
+- **Změněno**: úprava existujícího chování.
+- **Opraveno**: chyba, která už nemá nastávat.
+- **Bezpečnost**: změna, která snižuje riziko nebo upravuje ochranu.
+- **Data a soukromí**: změna v osobních datech, exportu, retenci, integracích nebo měření.
+- **Deprecace**: funkce nebo API, které bude odstraněno nebo nahrazeno.
+
+Inspirace z přístupu Keep a Changelog je užitečná hlavně proto, že nutí oddělit typy změn a psát je pro lidi, ne jen pro git historii. SemVer je zase dobrý jazyk pro technické verze, pokud má produkt API nebo integrace. Neznamená to, že každá marketingová landing page potřebuje tříčíslicovou verzi. Znamená to, že rozbíjející změna nemá být schovaná mezi kosmetikou.
+
+### Privacy-first položky nesmí být schované
+
+Když změna ovlivňuje data, napiš to přímo. Ne právnickým mlžením, ale lidsky.
+
+Příklady:
+
+- „Přidali jsme export fakturačních kontaktů do CSV. Export je dostupný pouze administrátorům a stahovaný soubor není automaticky posílán do e-mailu.“
+- „Zkrátili jsme výchozí retenci diagnostických logů ze 30 na 14 dní. Agregované provozní metriky zůstávají bez obsahu uživatelských zpráv.“
+- „Nová integrace kalendáře vyžaduje oprávnění ke čtení dostupnosti, ne ke čtení obsahu událostí.“
+- „Odstraňujeme starý webhook, který posílal zbytečně široký payload. Nový payload obsahuje jen identifikátor události, stav a čas.“
+
+Tahle transparentnost není přiznání slabosti. Je to signál dospělého provozu. Zákazník nemusí hádat, jestli se mu produkt potichu rozlezl do dat, která nepotřebuje.
+
+### Release notes jako distribuční kanál
+
+Release notes mohou být víc než stránka „co je nového“. Můžeš je použít jako zdroj pro RSS, e-mail zákazníkům, krátký příspěvek na LinkedIn, interní update pro sales a odpověď supportu. Privacy-first varianta je jednoduchá: jednou napiš kvalitní zdrojový text a pak ho ručně nebo poloautomaticky zkrať pro kanály, které opravdu používáš.
+
+Rozumný rytmus:
+
+- malé opravy zapisuj průběžně do changelogu,
+- uživatelsky významné změny shrň jednou týdně nebo jednou za sprint,
+- bezpečnostní a datové změny komunikuj podle dopadu samostatně,
+- rozbíjející změny oznam s předstihem a jasným migračním návodem,
+- pro dlouhodobé zákazníky drž archiv dostupný přes přímý odkaz nebo RSS.
+
+Nepřidávej sledovací pixely do release e-mailů jen proto, že jde měřit otevření. Pokud potřebuješ vědět, zda změna pomohla, měř produktové dopady agregovaně: méně ticketů ke konkrétní chybě, více dokončených exportů, méně selhání formuláře, méně dotazů na nastavení.
+
+### Deprecace piš jako pomoc, ne jako výhrůžku
+
+Deprecace je test důvěry. Když zákazník zjistí, že mu za týden vypneš API, protože „technický dluh“, nebude obdivovat tvou agilitu. Bude hledat exit plán. A možná právem.
+
+Dobrá deprekační zpráva obsahuje:
+
+1. Co končí nebo se mění.
+2. Koho se to týká.
+3. Proč se to děje.
+4. Do kdy stará varianta funguje.
+5. Jak přejít na novou variantu.
+6. Jak poznat, že se zákazníka změna týká.
+7. Kam se obrátit, když migrace nejde.
+
+Příklad:
+
+```text
+Starý endpoint /api/v1/leads ukončíme 2027-03-31. Týká se jen účtů, které endpoint volaly po 2026-09-01. Nový endpoint /api/v2/leads vrací stejné lead ID, ale už neposílá poznámky z interního CRM, protože je integrace nepotřebuje. Migrační návod je v dokumentaci a v administraci ukazujeme seznam posledních volání starého endpointu.
+```
+
+Tady je vidět technický dopad, datová změna i časový plán. Žádné drama. Jen dospělá komunikace.
+
+### Checklist changelogu a release notes
+
+- [ ] Máme jedno místo, kde se změny zapisují průběžně.
+- [ ] Rozlišujeme technický changelog, zákaznické release notes a interní release poznámky.
+- [ ] Každá položka říká dopad, ne jen aktivitu týmu.
+- [ ] Bezpečnostní, datové a privacy změny mají vlastní viditelnou kategorii.
+- [ ] Rozbíjející změny obsahují termín, migrační návod a kontakt.
+- [ ] Release notes lze sledovat přes přímou URL nebo RSS.
+- [ ] Support ví, kde hledat poslední změny a jak je vysvětlit.
+- [ ] U e-mailové distribuce nepřidáváme zbytečné trackovací prvky.
+- [ ] Archiv starších změn zůstává dostupný i po redesignu webu.
+- [ ] Po releasu kontrolujeme dopad podle produktových signálů, ne podle vanity otevření e-mailu.
+
+### Mini šablona release notes
+
+```markdown
+# Release notes: [verze nebo datum]
+
+## Shrnutí pro zákazníky
+- Co je nejdůležitější:
+- Koho se změna týká:
+- Co má zákazník udělat:
+
+## Nové
+- [Název změny]: dopad pro uživatele, kde funkci najde, případně omezení.
+
+## Změněno
+- [Název změny]: co se chová jinak a proč.
+
+## Opraveno
+- [Chyba]: jak se projevovala a kdy je oprava dostupná.
+
+## Bezpečnost, data a soukromí
+- [Změna]: jaký typ dat, oprávnění, retence nebo integrace se mění.
+
+## Deprecace a migrace
+- Co končí:
+- Datum ukončení:
+- Doporučený přechod:
+- Jak ověřit dopad:
+- Kontakt pro pomoc:
+
+## Interní poznámka
+- Rizika releasu:
+- Rollback plán:
+- Ověřené testy:
+- Odpovědný člověk:
+```
+
+Changelog je malá věc, která odhalí velkou kulturu. Buď tým chápe, že produkt existuje pro zákazníky a provoz, nebo jen vyrábí změny. Dobré release notes říkají: víme, co jsme změnili, víme, proč to pomáhá, a neskrýváme dopady do kouřové clony.
+
 # Zdroje
 
 - European Data Protection Board: [Personal data breaches](https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en)
@@ -8868,6 +9016,9 @@ Dobře napsaný exit plán ti nepřikazuje odcházet od každého nástroje. Dá
 - OpenAPI Initiative: [OpenAPI Specification](https://spec.openapis.org/oas/)
 - AsyncAPI Initiative: [AsyncAPI documentation](https://www.asyncapi.com/docs)
 - RFC Editor: [RFC 9457 — Problem Details for HTTP APIs](https://www.rfc-editor.org/rfc/rfc9457.html)
+- Keep a Changelog: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
+- Semantic Versioning: [Semantic Versioning 2.0.0](https://semver.org/)
+- GitHub Docs: [Managing releases in a repository](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository)
 - Playwright: [Trace Viewer](https://playwright.dev/docs/trace-viewer-intro)
 - OWASP: [Web Security Testing Guide](https://wstg.owasp.org/)
 - web.dev: [Web Vitals](https://web.dev/articles/vitals)
@@ -8876,6 +9027,7 @@ Dobře napsaný exit plán ti nepřikazuje odcházet od každého nástroje. Dá
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „Changelog a release notes bez produktové mlhy“ s rozlišením technického changelogu a zákaznických release notes, privacy-first komunikací datových změn, deprekačním postupem, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Vendor lock-in a exit plán bez dramatu“ s rozlišením rizik dodavatelů, inventářem nástrojů, datovými hranicemi, testováním exportů, fallback scénáři, otázkami pro výběr dodavatelů, checklistem a vyplnitelnou šablonou exit plánu.
 - 2026-09-27: Doplněna příloha „Kvalifikace leadů bez detektivního scoringu“ s fit matrix, kvalifikačním formulářem, strukturou úvodního callu, pravidly automatizace, slušným odmítnutím, checklistem a vyplnitelnou šablonou kvalifikačního listu.
 - 2026-09-27: Doplněna příloha „QA a release rutina bez testovacího divadla“ s rizikovou mapou produktu, vrstvením testů, krátkým release checklistem, privacy-first QA scénáři, bug reportem, metrikami kvality a vyplnitelnou šablonou QA plánu.
