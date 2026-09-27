@@ -9112,6 +9112,210 @@ Největší hodnota téhle rutiny není tabulka. Je to klid. Tým ví, proč dě
 
 Backlog má být mapa, ne bažina. Když udržíš položky malé, zdůvodněné a datově střídmé, produkt se bude zlepšovat bez toho, aby ses probudil s dvaceti integracemi, pěti pixely a pocitem, že tě vlastní vlastní roadmapa.
 
+## Příloha: Partnerské kampaně bez sledovacího cirkusu
+
+Partnerství je jedna z nejlepších marketingových cest pro malou firmu nebo SaaS: někdo, komu už cílovka věří, tě doporučí ve správném kontextu. Jenže hodně partnerských programů se historicky stavělo na kupě sledovacích odkazů, cizích skriptů, remarketingových publik a „měření všeho, co se pohne“. To je pohodlné pro report, ale často špatné pro důvěru.
+
+Privacy-first partnerství funguje jinak. Nesnaží se dokázat každou korunu za cenu datového kombajnu. Snaží se nastavit férovou dohodu, jasnou nabídku, měření na úrovni kampaně a jednoduchý proces vyhodnocení.
+
+> Codyho komentář: Pokud potřebuješ k jednomu doporučení tři pixely, dvě cookie lišty a pocit, že návštěvník prošel letištní kontrolou, možná nemáš partnerský program. Možná máš jen analytický escape room.
+
+### Začni typem partnerství
+
+Ne každé partnerství je affiliate. Když všechno nacpeš do jednoho modelu „provize za konverzi“, začneš optimalizovat podle toho, co se dobře měří, ne podle toho, co dobře funguje.
+
+Praktické typy partnerství:
+
+- **Doporučení mezi službami:** agentura doporučí SaaS, SaaS doporučí konzultanta, účetní doporučí nástroj klientovi.
+- **Společný obsah:** článek, webinář, checklist, případová studie nebo podcastový díl.
+- **Balíček služeb:** dva dodavatelé nabídnou společný výsledek, například nový web plus měření bez reklamních pixelů.
+- **Integrace produktů:** nástroj A se propojí s nástrojem B a společně řeší jeden konkrétní workflow problém.
+- **Referral program:** zákazník doporučí dalšího zákazníka a získá férovou odměnu nebo kredit.
+
+U každého typu si napiš, co je hlavní hodnota pro koncového člověka. Pokud je odpověď jen „získáme leady“, partnerství bude působit jako převlečená reklama.
+
+### Dohoda před odkazem
+
+Než vytvoříš landing page nebo kód kupónu, domluv tři věci: nabídku, odpovědnost a datové hranice.
+
+Dobrá partnerská dohoda odpoví:
+
+- Co přesně partner doporučuje a komu?
+- Jaký problém tím koncový zákazník řeší?
+- Kdo odpovídá na dotazy před nákupem?
+- Kdo řeší podporu po nákupu?
+- Jak se pozná kvalifikovaný lead, trial, objednávka nebo aktivace?
+- Jaká data se mezi partnery sdílí a jak dlouho?
+- Co se nikdy nesdílí, ani kdyby to bylo marketingově lákavé?
+
+Datově střídmá dohoda je často jednodušší než velký tracking systém. Partner nepotřebuje vidět každý pohyb uživatele na webu. Potřebuje vědět, zda jeho doporučení přináší správný typ poptávek a zda se spolupráce vyplatí.
+
+### Měření kampaně bez osobního profilu
+
+Pro většinu menších partnerských kampaní stačí kombinace čtyř prvků:
+
+- samostatná landing page s čitelnou URL,
+- jednoduchý UTM parametr nebo interní označení kampaně,
+- dobrovolné pole „Jak jste se o nás dozvěděli?“ ve formuláři,
+- ruční měsíční vyhodnocení kvality leadů.
+
+Příklad:
+
+```text
+/partneri/agentura-nova-vlna
+utm_source=nova-vlna
+utm_medium=partner
+utm_campaign=privacy-web-audit
+```
+
+Tím zjistíš, že přišla poptávka z konkrétní partnerské kampaně. Nepotřebuješ vědět, které další stránky člověk navštívil před třemi týdny, co měl v košíku u někoho jiného a jestli v úterý klikl na banner při kávě.
+
+U SaaS produktu si můžeš přidat neosobní eventy:
+
+- návštěva partnerské landing page,
+- odeslaný formulář,
+- vytvořený trial s partnerským zdrojem,
+- dokončená první hodnotná akce,
+- přechod na placený tarif.
+
+Důležité je neměřit obsah zákaznických dat. U projektového nástroje nepotřebuješ do eventu posílat název projektu. U fakturačního SaaS nepotřebuješ částku faktury. Stačí stav workflow.
+
+### Kupony, kódy a férová atribuce
+
+Partnerský kód může být užitečný, ale nemá být náhradou za důvěru. Pokud kód používáš, udělej ho čitelný a vysvětli ho přímo na stránce.
+
+Dobře:
+
+```text
+Partner Nova Vlna vám dává 20% slevu na první měsíc auditu. Kód: NOVAVLNA20.
+```
+
+Slabě:
+
+```text
+Zadejte promo kód pro speciální nabídku. Podmínky se mohou změnit.
+```
+
+U B2B služeb často funguje lépe jednoduchá atribuce podle landing page a poznámky v CRM než agresivní affiliate platforma. Když se zákazník rozhoduje tři týdny a mluví se třemi lidmi, stejně nebudeš mít dokonale čistý atribuční model. A to je v pořádku. Cílem není laboratorní přesnost, ale dost dobré rozhodnutí.
+
+### Co partnerovi neposílat
+
+Tady se láme privacy-first hodnota. Partnerství není omluva pro volné sdílení kontaktů a detailů o uživatelích.
+
+Standardně neposílej:
+
+- kompletní seznam leadů bez jasného důvodu,
+- osobní poznámky z obchodních callů,
+- obsah support ticketů,
+- interní skóre zákazníka,
+- detailní produktové chování konkrétní osoby,
+- exporty kontaktů pro další newsletter bez samostatného souhlasu,
+- nahrávky schůzek nebo přepisy bez jasné potřeby.
+
+Co obvykle stačí sdílet:
+
+- počet návštěv nebo poptávek z kampaně,
+- počet kvalifikovaných příležitostí,
+- počet uzavřených obchodů,
+- souhrnná zpětná vazba typu „nejvíc rezonovalo téma X“,
+- domluvená provize nebo kredit,
+- anonymizované poučení pro další kampaň.
+
+Když partner potřebuje víc dat, vrať se k otázce: Jaké rozhodnutí bez těch dat neumí udělat? Pokud žádné, data neposílej. Datová dieta není lakota. Je to provozní hygiena.
+
+### Partnerská landing page
+
+Partnerská stránka má návštěvníkovi rychle vysvětlit tři věci: proč mu partner doporučuje právě tebe, co konkrétně dostane a co se stane po odeslání formuláře.
+
+Struktura stránky:
+
+1. **Kontext doporučení:** „Přicházíte od [partner], proto jsme připravili [nabídka].“
+2. **Problém:** pojmenuj situaci, kterou cílovka řeší.
+3. **Výsledek:** napiš, co bude po spolupráci lepší.
+4. **Proces:** tři kroky od kontaktu po výstup.
+5. **Datová poznámka:** stručně řekni, co měříš a co nesdílíš.
+6. **CTA:** jedna hlavní akce.
+7. **FAQ:** cena, čas, kdo bude komunikovat, co dostane partner.
+
+Příklad datové poznámky:
+
+```text
+Tuhle stránku měříme jen na úrovni kampaně, abychom věděli, zda doporučení dává smysl. Partnerovi neposíláme obsah formuláře ani vaše osobní údaje bez důvodu a domluvy.
+```
+
+Taková věta je malá, ale dělá velký rozdíl. Návštěvník ví, že partnerství není skrytý datový výměnný obchod.
+
+### Vyhodnocení jednou měsíčně
+
+Partnerské kampaně často umírají na dvě věci: nikdo je nevyhodnocuje, nebo se vyhodnocují jen podle povrchových čísel.
+
+Měsíční rutina na 30 minut:
+
+- projdi počet návštěv, poptávek, trialů nebo objednávek,
+- označ kvalitu leadů: dobrý fit, možný fit, špatný fit,
+- napiš tři konkrétní poznatky z komunikace,
+- zkontroluj, zda se nesbírá víc dat, než je potřeba,
+- domluv s partnerem jednu úpravu pro další měsíc,
+- rozhodni: pokračovat, upravit, pozastavit.
+
+Nejlepší partnerské programy nejsou ty, které mají nejvíc odkazů. Jsou to ty, kde oba partneři pravidelně ladí kvalitu doporučení.
+
+### Checklist partnerské kampaně bez sledovacího cirkusu
+
+- [ ] Máme jasně popsaný typ partnerství.
+- [ ] Nabídka dává hodnotu koncovému zákazníkovi, ne jen oběma firmám.
+- [ ] Je domluveno, kdo řeší obchod, podporu a reklamace.
+- [ ] Měříme kampaň na úrovni zdroje, ne detailního osobního profilu.
+- [ ] Neposíláme partnerovi obsah formulářů automaticky.
+- [ ] Landing page vysvětluje kontext doporučení.
+- [ ] Datová poznámka říká, co měříme a co nesdílíme.
+- [ ] Kupon nebo partnerský kód má jasné podmínky.
+- [ ] Vyhodnocujeme kvalitu leadů, nejen jejich počet.
+- [ ] Máme datum revize a možnost spolupráci férově ukončit.
+
+### Mini šablona partnerské kampaně
+
+```markdown
+# Partnerská kampaň: [název]
+
+## Partner
+- Název:
+- Kontakt:
+- Typ partnerství:
+- Proč dává partnerství smysl pro zákazníka:
+
+## Nabídka
+- Cílovka:
+- Problém:
+- Slibovaný výsledek:
+- Sleva / bonus / obsah:
+- Platnost nabídky:
+
+## Datové hranice
+- Co měříme:
+- Co sdílíme s partnerem:
+- Co nesdílíme:
+- Retence kampaně:
+- Vlastník datové kontroly:
+
+## Landing page
+- URL:
+- Hlavní CTA:
+- Formulářová pole:
+- Datová poznámka:
+- FAQ otázky:
+
+## Vyhodnocení
+- Návštěvy / poptávky / trialy:
+- Kvalitní příležitosti:
+- Uzavřené obchody:
+- Co fungovalo:
+- Co upravit:
+- Pokračovat / upravit / pozastavit:
+```
+
+Partnerství má být zkratka k důvěře, ne zkratka kolem soukromí. Když nastavíš nabídku, měření a sdílení dat jednoduše, bude se lépe spát tobě, partnerovi i člověku, který kliknul na doporučení. A spánek je podceňovaný growth hack. Bohužel nejde dát do dashboardu jako gradientový graf.
+
 # Zdroje
 
 - European Data Protection Board: [Personal data breaches](https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en)
@@ -9185,6 +9389,7 @@ Backlog má být mapa, ne bažina. Když udržíš položky malé, zdůvodněné
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „Partnerské kampaně bez sledovacího cirkusu“ s typy partnerství, datově střídmým měřením kampaní, pravidly pro kupony a atribuci, partnerskou landing page, měsíčním vyhodnocením, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Prioritizace backlogu bez produktového hazardu“ s rozlišením signálů a rozhodnutí, jednoduchým skórováním, datovým filtrem, rozdělením backlogu na police, týdenní rutinou, checklistem a vyplnitelnou šablonou prioritizačního listu.
 - 2026-09-27: Doplněna příloha „Changelog a release notes bez produktové mlhy“ s rozlišením technického changelogu a zákaznických release notes, privacy-first komunikací datových změn, deprekačním postupem, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Vendor lock-in a exit plán bez dramatu“ s rozlišením rizik dodavatelů, inventářem nástrojů, datovými hranicemi, testováním exportů, fallback scénáři, otázkami pro výběr dodavatelů, checklistem a vyplnitelnou šablonou exit plánu.
