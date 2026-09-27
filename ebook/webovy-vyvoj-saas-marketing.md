@@ -5735,6 +5735,192 @@ Kritérium pro návrat zpět:
 Produktové experimenty mají být nástroj učení, ne továrna na výmluvy. Když je navrhneš dobře, pomohou zlepšovat web i SaaS bez toho, aby sis z návštěvníků dělal datový důl. A to je přesně typ růstu, který jde obhájit technicky, obchodně i lidsky.
 
 
+## Příloha: Interní dokumentace bez firemního archeologického muzea
+
+Malý tým nepotřebuje tisícistránkový portál, který se tváří jako knihovna národní banky. Potřebuje místo, kde najde aktuální odpověď na otázku: „Jak to děláme a proč?“ Interní dokumentace má zkracovat rozhodování, předávání práce a onboarding. Když místo toho jen roste, stane se z ní digitální půda, kde se občas najde starý modem, tři verze cenové politiky a jeden dokument s názvem „final_final_opravdu2“.
+
+Dobrá knowledge base není cíl sama o sobě. Je to provozní nástroj. Má pomáhat týmu dělat konzistentní rozhodnutí bez toho, aby každý problém začínal Slack detektivkou.
+
+> Codyho komentář: Dokumentace, kterou nikdo neotevře, není dokumentace. Je to interní fanfikce o tom, jak jednou budeme organizovaní.
+
+### Začni typy znalostí
+
+Nejdřív rozděl znalosti podle toho, k čemu slouží. Jedna velká složka „Dokumenty“ je pozvánka do chaosu.
+
+Praktické členění:
+
+- **Rozhodnutí**: proč jsme něco zvolili, kdo rozhodl, kdy se má rozhodnutí revidovat.
+- **Procesy**: jak opakovaně děláme konkrétní práci, například release, fakturaci, podporu nebo publikaci článku.
+- **Runbooky**: co dělat při incidentu, výpadku, chybě v platbách nebo problému s doručitelností e-mailů.
+- **Produktové znalosti**: popis funkcí, omezení, roadmapové záměry a známé kompromisy.
+- **Zákaznický kontext**: segmenty, typické otázky, anonymizované příklady a poučení ze sales/supportu.
+- **Pravidla práce s daty**: co smí být v nástroji, co ne, jak dlouho data držíme a kdo je vlastník.
+
+Každý typ má jiný rytmus aktualizace. Runbook musí být přesný. Strategické rozhodnutí může být kratší, ale musí mít kontext. Zákaznický insight má být anonymizovaný, aby pomáhal produktu a zároveň nevyráběl interní databázi osobních detailů.
+
+### Jedna stránka, jeden vlastník, jedno datum revize
+
+Nejčastější důvod, proč dokumentace umírá: nikdo neví, kdo za ni odpovídá. Stránky bez vlastníka se tváří neutrálně, ale ve skutečnosti jsou nebezpečné. Lidé jim buď věří příliš, nebo je ignorují úplně.
+
+Každá důležitá stránka má mít nahoře tři údaje:
+
+```text
+Vlastník:
+Poslední aktualizace:
+Zkontrolovat znovu do:
+```
+
+Tohle není byrokracie. Je to pojistka proti tichému zastarávání. Pokud dokument říká, jak řešit incidenty, a nebyl kontrolovaný rok, je to spíš historický dokument než provozní opora.
+
+U menšího týmu stačí jednoduché pravidlo: při každé změně procesu se aktualizuje nejbližší související stránka. Když stránka neexistuje, vytvoří se krátká. Když stránka existuje a neodpovídá realitě, realita vyhrává a dokument se opraví. Ano, bolí to méně než tři měsíce žít podle neexistujícího procesu.
+
+### Rozhodovací deník místo nekonečných porad
+
+Rozhodnutí se ztrácí rychleji než heslo k testovacímu účtu. Po měsíci si tým pamatuje výsledek, ale ne důvody. Po půl roce pak někdo otevře stejnou debatu a všichni se tváří, že tentokrát to bude kreativní. Nebude. Bude to repríza.
+
+Rozhodovací deník má být krátký:
+
+- problém,
+- zvažované možnosti,
+- vybrané řešení,
+- proč jsme odmítli ostatní možnosti,
+- rizika,
+- datum revize.
+
+Příklad:
+
+```text
+Rozhodnutí: Nepoužijeme reklamní remarketingový pixel na landing page.
+
+Problém: Chceme měřit výkon kampaně, ale nechceme přidávat sledovací skripty třetích stran při prvním načtení.
+
+Možnosti:
+- remarketingový pixel,
+- server-side agregované měření kampaní,
+- ruční vyhodnocení podle UTM a poptávkového formuláře.
+
+Vybráno: agregované UTM vyhodnocení + ruční kvalifikace poptávek.
+
+Proč: Stačí pro obchodní rozhodnutí, snižuje externí skripty a podporuje privacy-first pozici značky.
+
+Revize: po 2 kampaních nebo při změně akviziční strategie.
+```
+
+Takový zápis šetří budoucímu týmu nervy. Neříká jen „co“, ale hlavně „proč“. A „proč“ je rozdíl mezi dokumentací a šumem.
+
+### Knowledge base pro AI asistenty
+
+Pokud tým používá AI asistenty, interní dokumentace získává druhou práci: být kvalitním kontextem. Asistent dokáže pomoct s návrhem odpovědi, analýzou procesu nebo tvorbou šablony, ale jen pokud mu dáš čisté a bezpečné podklady.
+
+Privacy-first pravidla pro AI kontext:
+
+- do obecných promptů nedávej osobní údaje zákazníků,
+- zákaznické příklady anonymizuj nebo zobecni,
+- interní obchodní čísla označ podle citlivosti,
+- odděl veřejné znalosti od interních provozních detailů,
+- nepoužívej neověřené AI shrnutí jako zdroj pravdy,
+- výstupy AI vždy kontroluje člověk, který rozumí dopadu.
+
+Praktický trik: ke každé stránce přidej blok „Použitelné pro AI?“. Třeba:
+
+```text
+Použitelné pro AI: ano, po odstranění jmen zákazníků a konkrétních částek.
+Citlivost: interní.
+Zakázané použití: kopírovat do externích nástrojů bez schválení.
+```
+
+Tohle pomáhá týmu pracovat rychleji a zároveň nevyrábět datový únik jen proto, že někdo chtěl hezčí e-mail.
+
+### Vyhledávání je součást architektury
+
+Dokumentace bez vyhledávání je jako sklad bez světla. Něco tam je, ale všichni raději zavolají člověku, který „to asi ví“. Jenže ten člověk pak dělá místo práce živý index.
+
+Pojmenovávej stránky podle slov, která tým opravdu používá. Ne „Proces obchodního předkvalifikačního kontaktu“, ale „Kvalifikace poptávky“. Ne „Incidentní eskalační procedura“, ale „Co dělat při výpadku“. Interní dokumentace má být najitelná, ne slavnostní.
+
+Ke každé stránce přidej:
+
+- 3 až 5 klíčových slov,
+- odkazy na související stránky,
+- stručné shrnutí nahoře,
+- jasný stav: návrh, platné, zastaralé, archiv.
+
+Archiv není koš. Archiv říká: „Tohle už není platné, ale necháváme to kvůli historii.“ Koš říká: „Tohle nepotřebujeme.“ Pokud tyto dvě věci pleteš, buď smažeš důležitý kontext, nebo se utopíš ve starém nepořádku.
+
+### Měsíční úklid bez dokumentačního maratonu
+
+Dokumentace se nemá uklízet jednou za rok v panice. Stačí 45 minut měsíčně.
+
+Postup:
+
+1. Vyber 5 nejpoužívanějších stránek.
+2. Zkontroluj, jestli odpovídají realitě.
+3. Najdi 3 stránky bez vlastníka nebo revize.
+4. Označ zastaralé stránky jako archiv, nebo je oprav.
+5. Přidej jednu chybějící stránku, na kterou se tým opakovaně ptá.
+
+Měřit můžeš velmi jednoduše:
+
+- kolik opakovaných dotazů zmizelo,
+- kolik nováčků našlo odpověď bez přerušení kolegy,
+- kolik rozhodnutí se podařilo dohledat,
+- kolik dokumentů má vlastníka a datum revize.
+
+Nepotřebuješ sledovat, kdo co četl po vteřinách. To už je produktivní cosplay se špetkou kancelářské špionáže. Stačí vědět, jestli dokumentace pomáhá práci.
+
+### Checklist interní dokumentace
+
+- Má každá důležitá stránka vlastníka, datum aktualizace a datum revize?
+- Existuje jasné členění na rozhodnutí, procesy, runbooky, produktové znalosti, zákaznický kontext a datová pravidla?
+- Jsou citlivé informace označené a nejsou zbytečně kopírované do obecných nástrojů?
+- Obsahují runbooky konkrétní kroky, ne jen obecné fráze?
+- Dá se dokument najít podle slov, která tým reálně používá?
+- Jsou zastaralé stránky označené jako archiv, nebo smazané?
+- Má tým měsíční 45minutovou rutinu úklidu?
+- Je jasné, které části dokumentace se smí použít jako kontext pro AI asistenty?
+
+### Mini šablona stránky v knowledge base
+
+```text
+Název stránky:
+
+Typ znalosti:
+rozhodnutí / proces / runbook / produkt / zákaznický kontext / datové pravidlo
+
+Stav:
+návrh / platné / zastaralé / archiv
+
+Vlastník:
+
+Poslední aktualizace:
+
+Zkontrolovat znovu do:
+
+Shrnutí ve 3 větách:
+
+Kdy stránku použít:
+
+Kdy stránku nepoužít:
+
+Postup nebo hlavní body:
+
+Odkazy na související stránky:
+
+Citlivost dat:
+veřejné / interní / důvěrné / obsahuje osobní údaje
+
+Použitelné pro AI:
+ano / ano po anonymizaci / ne
+
+Co se nesmí kopírovat mimo tým:
+
+Historie změn:
+
+Otázky k doplnění:
+```
+
+Interní dokumentace má být živý pracovní systém, ne pomník produktivity. Když je krátká, vlastněná, dohledatelná a bezpečná pro práci s daty, pomáhá týmu růst bez toho, aby každá nová otázka začínala větou: „Kdo si pamatuje, jak jsme to minule dělali?“
+
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -5784,6 +5970,7 @@ Produktové experimenty mají být nástroj učení, ne továrna na výmluvy. Kd
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „Interní dokumentace bez firemního archeologického muzea“ s typy znalostí, vlastnictvím stránek, rozhodovacím deníkem, pravidly pro AI kontext, vyhledáváním, měsíční úklidovou rutinou, checklistem a šablonou knowledge base stránky.
 - 2026-09-27: Doplněna příloha „Produktové experimenty bez profilování uživatelů“ s hypotézami, agregovaným měřením, férovými variantami, experimentovým deníkem, příkladem cenové stránky, checklistem a šablonou experimentu.
 - 2026-09-27: Doplněna příloha „Mikrocopy a UX texty bez manipulace“ s pravidly pro tlačítka, formuláře, chybové hlášky, prázdné stavy, onboarding, potvrzení, 45minutový audit, checklist a šablonu UX textu.
 - 2026-09-26: Doplněna příloha „Roadmapa SaaS bez feature factory“ s prioritizací podle problémů, třemi koši roadmapy, privacy-first filtrem funkcí, ověřováním před vývojem, pravidlem mazání backlogu, checklistem a šablonou roadmapové položky.
