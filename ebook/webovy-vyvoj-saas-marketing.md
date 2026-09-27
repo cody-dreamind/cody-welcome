@@ -8954,6 +8954,164 @@ Tady je vidět technický dopad, datová změna i časový plán. Žádné drama
 
 Changelog je malá věc, která odhalí velkou kulturu. Buď tým chápe, že produkt existuje pro zákazníky a provoz, nebo jen vyrábí změny. Dobré release notes říkají: víme, co jsme změnili, víme, proč to pomáhá, a neskrýváme dopady do kouřové clony.
 
+## Příloha: Prioritizace backlogu bez produktového hazardu
+
+Backlog není seznam přání, kde vyhrává nejhlasitější člověk v místnosti. Je to zásobník investičních rozhodnutí. Každá položka bere čas, pozornost, testování, podporu a budoucí údržbu. Když se backlog neřídí, začne se tvářit jako strategie. Není. Je to spíš sklep plný věcí „to se jednou bude hodit“ — a všichni víme, jak ten sklep voní.
+
+Privacy-first tým má ještě jeden důvod prioritizovat poctivě: ne každá funkce, která slibuje lepší konverzi, stojí za nové sledování, novou integraci nebo nové osobní údaje. Dobrá priorita není jen „kolik to vydělá“, ale také „jakou kontrolu nad produktem, daty a důvěrou si tím necháme“.
+
+### Nejdřív odděl vstupy od rozhodnutí
+
+Do backlogu může přijít hodně signálů:
+
+- zákaznický rozhovor,
+- ticket podpory,
+- obchodní námitka,
+- vlastní pozorování z analytiky,
+- technický dluh,
+- nápad zakladatele,
+- regulatorní nebo bezpečnostní požadavek,
+- požadavek velkého zákazníka.
+
+Chyba je dělat z každého signálu úkol. Signál říká: „tady se něco děje“. Úkol říká: „tohle přesně uděláme“. Mezi tím má být krátké rozhodnutí.
+
+Praktický zápis signálu:
+
+| Pole | Příklad |
+| --- | --- |
+| Zdroj | 3 zákazníci v posledních 30 dnech zmínili export faktur. |
+| Kontext | Účetní potřebují měsíční export do vlastního systému. |
+| Dopad | Bez exportu tráví administrátor cca 30 minut měsíčně ručním přepisem. |
+| Důkaz | Ticket #124, #139, rozhovor s firmou Novák & syn. |
+| Datový dopad | Není potřeba nové sledování, jen export existujících fakturačních údajů. |
+| Možné řešení | CSV export za vybrané období. |
+
+Tím zabráníš tomu, aby se z věty „jeden klient by chtěl dashboard“ stal třítýdenní výlet do říše grafů, filtrů a smutného supportu.
+
+### Použij jednoduchý skórovací model, ale neuctívej ho
+
+Skórování má pomoct srovnat položky, ne nahradit úsudek. Pro malý web nebo SaaS stačí pět kritérií od 1 do 5:
+
+| Kritérium | Otázka | 1 bod | 5 bodů |
+| --- | --- | --- | --- |
+| Dopad na zákazníka | Změní to reálně výsledek nebo úsporu práce? | kosmetika | zásadní zlepšení rozhodnutí nebo práce |
+| Obchodní dopad | Pomůže to příjmu, retenci nebo kvalifikaci? | slabý nepřímý vliv | přímý vliv na prodej, aktivaci nebo retenci |
+| Důkaz | Máme signály z praxe? | jen názor | opakované signály nebo měřitelný problém |
+| Náročnost opačně | Jak snadné je to dodat a udržet? | drahé a složité | malé, jasné, dobře testovatelné |
+| Datová střídmost | Přidává to sledování, údaje nebo dodavatele? | výrazně přidává riziko | nevyžaduje nová osobní data ani tracker |
+
+Součet není rozsudek. Je to začátek debaty. Položka s nižším skóre může mít prioritu, pokud řeší bezpečnost, důvěru nebo blokuje důležitého zákazníka. Jen to napiš nahlas do rozhodovací poznámky.
+
+> Codyho komentář: Když někdo řekne „tohle je strategické“, přelož si to jako „ještě jsme nenapsali, proč to má přeskočit frontu“. Strategické věci existují, jasně. Ale i strategie má unést dvě věty vysvětlení.
+
+### Datový filtr před zařazením do práce
+
+U každé větší položky si polož čtyři privacy-first otázky:
+
+- Potřebujeme pro řešení nová osobní data, nebo stačí data, která už oprávněně máme?
+- Přidáváme novou třetí stranu, skript, pixel, SDK nebo externí úložiště?
+- Umíme funkci vysvětlit uživateli lidsky, bez právnického kouře?
+- Má položka jasnou retenci, export a případné smazání dat?
+
+Pokud odpověď smrdí, položku nezakazuj automaticky. Označ ji jako rizikovou a napiš bezpečnější variantu. Například místo „nahrávat celé session replaye“ může být lepší „sbírat agregovaný údaj o kroku, kde lidé opouštějí formulář, a doplnit tři uživatelské rozhovory“. Méně šmírování, víc porozumění. Krásná výměna.
+
+### Rozděl backlog na čtyři police
+
+Jedna fronta pro všechno je past. Smíchá bezpečnostní opravu, nápad na novou integraci, přepsání hero textu i úklid staré knihovny. Pak se o tom nedá rozumně rozhodovat.
+
+Použij čtyři police:
+
+1. **Povinné a rizikové** — bezpečnost, právní požadavky, kritické chyby, ztráta dat, fakturace.
+2. **Růst a aktivace** — věci, které pomáhají návštěvníkovi, leadu nebo novému uživateli dojít k hodnotě.
+3. **Retence a provoz** — zlepšení, která snižují podporu, churn, ruční práci nebo provozní riziko.
+4. **Sázky a experimenty** — nápady s nejistým dopadem, které mají mít malé ověření před velkou stavbou.
+
+Každá police má jiný typ rozhodnutí. Kritickou bezpečnostní opravu neskóruj proti novému blogovému filtru. To je jako porovnávat hasicí přístroj s novou sedačkou do kanceláře. Obě věci se hodí, ale jen jedna řeší kouř z kuchyňky.
+
+### Malé ověření před velkou funkcí
+
+Když je položka velká a nejistá, nejdřív navrhni nejmenší ověření:
+
+- landing blok místo celé nové služby,
+- ruční concierge proces místo automatizace,
+- export CSV místo plné integrace,
+- jeden e-mail s jasnou nabídkou místo kampaně s pěti segmenty,
+- prototyp ve Figmě místo vývoje,
+- rozhovor se třemi zákazníky místo dalšího dashboardu.
+
+Příklad: zákazníci chtějí „napojení na účetnictví“. To může znamenat deset různých věcí. První iterace nemusí být obousměrná integrace s OAuth, webhooks a supportem pro každou účetní galaxii. Může to být CSV export s jasným formátem, návodem a třemi testovacími zákazníky. Když se ukáže, že export nestačí a všichni chtějí stejný systém, máš důkaz. Ne věštění z produktové koule.
+
+### Týdenní prioritizační rutina
+
+Jednou týdně stačí 30 až 45 minut:
+
+1. Projdi nové signály a sluč duplicity.
+2. U top položek doplň důkaz, dopad a datový dopad.
+3. Přesuň urgentní rizika do samostatné fronty.
+4. Vyber maximálně tři položky pro další detailní rozpad.
+5. U každé položky napiš „definition of done“.
+6. Zapiš, co se vědomě odkládá a proč.
+
+Největší hodnota téhle rutiny není tabulka. Je to klid. Tým ví, proč dělá zrovna tohle, a zákazník časem pozná, že produkt roste podle skutečných problémů, ne podle nálady úterý odpoledne.
+
+### Checklist prioritizace backlogu
+
+- [ ] Má každá položka jasný zdroj signálu?
+- [ ] Je u důležitých položek popsaný zákaznický nebo provozní dopad?
+- [ ] Rozlišujeme signál, problém a konkrétní řešení?
+- [ ] Má položka datový dopad: nová data, nový dodavatel, nová retence?
+- [ ] Umíme velkou nejistou položku ověřit menší iterací?
+- [ ] Máme oddělenou frontu pro bezpečnostní, právní a provozní rizika?
+- [ ] Nepřeskakují položky frontu bez napsaného důvodu?
+- [ ] Je u vybraných úkolů jasná definice hotovo?
+- [ ] Víme, které položky tento týden vědomě neděláme?
+- [ ] Mažeme nebo archivujeme staré položky, které už nemají vlastníka ani důkaz?
+
+### Mini šablona prioritizačního listu
+
+```markdown
+# Priorita backlogu: [název]
+
+## Signál
+- Zdroj:
+- Datum:
+- Kdo problém zažil:
+- Odkaz na ticket / rozhovor / poznámku:
+
+## Problém
+- Co uživatel nebo tým neumí dnes udělat:
+- Jaký má problém dopad:
+- Jak často se objevuje:
+
+## Návrh řešení
+- Nejmenší užitečná varianta:
+- Co záměrně neděláme:
+- Definition of done:
+
+## Skóre
+- Dopad na zákazníka (1–5):
+- Obchodní dopad (1–5):
+- Důkaz (1–5):
+- Náročnost opačně (1–5):
+- Datová střídmost (1–5):
+- Celkem:
+
+## Datový dopad
+- Nová osobní data:
+- Nový dodavatel / skript / SDK:
+- Retence:
+- Export nebo smazání:
+- Bezpečnější alternativa:
+
+## Rozhodnutí
+- Udělat teď / ověřit / odložit / zahodit:
+- Důvod:
+- Vlastník:
+- Datum revize:
+```
+
+Backlog má být mapa, ne bažina. Když udržíš položky malé, zdůvodněné a datově střídmé, produkt se bude zlepšovat bez toho, aby ses probudil s dvaceti integracemi, pěti pixely a pocitem, že tě vlastní vlastní roadmapa.
+
 # Zdroje
 
 - European Data Protection Board: [Personal data breaches](https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en)
@@ -9027,6 +9185,7 @@ Changelog je malá věc, která odhalí velkou kulturu. Buď tým chápe, že pr
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „Prioritizace backlogu bez produktového hazardu“ s rozlišením signálů a rozhodnutí, jednoduchým skórováním, datovým filtrem, rozdělením backlogu na police, týdenní rutinou, checklistem a vyplnitelnou šablonou prioritizačního listu.
 - 2026-09-27: Doplněna příloha „Changelog a release notes bez produktové mlhy“ s rozlišením technického changelogu a zákaznických release notes, privacy-first komunikací datových změn, deprekačním postupem, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Vendor lock-in a exit plán bez dramatu“ s rozlišením rizik dodavatelů, inventářem nástrojů, datovými hranicemi, testováním exportů, fallback scénáři, otázkami pro výběr dodavatelů, checklistem a vyplnitelnou šablonou exit plánu.
 - 2026-09-27: Doplněna příloha „Kvalifikace leadů bez detektivního scoringu“ s fit matrix, kvalifikačním formulářem, strukturou úvodního callu, pravidly automatizace, slušným odmítnutím, checklistem a vyplnitelnou šablonou kvalifikačního listu.
