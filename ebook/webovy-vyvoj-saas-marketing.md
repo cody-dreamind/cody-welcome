@@ -8413,6 +8413,186 @@ Kvalita není oddělení. Je to způsob, jak tým zachází se změnou. Čím me
 
 QA má být brzda jen tehdy, když jedeš do zdi. Ve všech ostatních případech je to volant, mapa a kontrolka paliva. Méně heroismu, více rutiny. Produkt pak působí klidněji — a klid je v B2B SaaS překvapivě dobrý prodejní argument.
 
+
+## Příloha: Kvalifikace leadů bez detektivního scoringu
+
+Lead scoring často začíná nevinně: pár bodů za návštěvu cenové stránky, pár bodů za stažení PDF, pár bodů za otevření e-mailu. Pak se nenápadně rozroste v malou detektivní kancelář, kde obchod řeší, kdo klikl na jaký odstavec, místo aby řešil, jestli člověk opravdu potřebuje pomoc. U malého B2B webu nebo SaaS je to zbytečně složité a často i obchodně líné. Lepší kvalifikace nevzniká z většího sledování, ale z lepších otázek, jasnější nabídky a poctivějšího třídění poptávek.
+
+Privacy-first kvalifikace leadů stojí na jednoduchém principu: sbírej jen data, která člověk vědomě poskytne nebo která opravdu potřebuješ pro další krok. Nepotřebuješ tajně vědět, že někdo třikrát otevřel stránku „O nás“. Potřebuješ vědět, jaký problém řeší, jak velké je riziko, kdo rozhoduje, jaký má časový horizont a jestli umíš férově pomoct.
+
+> Codyho komentář: Když obchodní proces potřebuje poznat zákazníka podle stop v křoví, možná není „data-driven“. Možná jen neumí položit normální otázku.
+
+### Začni kvalifikačním rozhodnutím
+
+Nejdřív si napiš, co má kvalifikace rozhodnout. Ne „ohodnotit lead“, ale konkrétně:
+
+- máme nabídnout úvodní konzultaci,
+- máme poslat samoobslužný materiál,
+- máme doporučit jiného dodavatele,
+- máme odmítnout poptávku, protože je mimo zaměření,
+- máme zapojit technického člověka,
+- máme řešit bezpečnostní nebo právní otázky dřív než cenu.
+
+Každé rozhodnutí potřebuje jiné informace. Pokud prodáváš SaaS pro týmy, možná potřebuješ znát velikost týmu, aktuální nástroj a hlavní bolest. Pokud děláš zakázkový web, potřebuješ účel projektu, rozpočetový rámec, časový tlak a kdo bude dodávat obsah. Pokud nabízíš AI automatizaci, potřebuješ vědět, kde jsou data, kdo k nim smí a jaký proces má být automatizovaný.
+
+Špatná kvalifikační otázka je taková, která se ptá jen proto, že by se mohla někdy hodit. Dobrá otázka mění další krok.
+
+### Použij fit matrix místo tajného skóre
+
+Místo bodového systému si vytvoř jednoduchou fit matrix. Je čitelná pro tým, dá se vysvětlit zákazníkovi a nepotřebuje skryté sledování.
+
+Praktické kategorie:
+
+- **Silný fit**: problém přesně odpovídá nabídce, existuje jasný vlastník, časový rámec je konkrétní, data a přístupy jsou řešitelné.
+- **Možný fit**: problém sedí částečně, ale chybí rozhodovatel, rozsah je nejasný nebo zákazník potřebuje nejdřív edukaci.
+- **Slabý fit**: poptávka míří mimo specializaci, rozpočet a očekávání se nepotkávají, zákazník chce věci, které firma z principu nedělá.
+- **Nefit**: projekt by vyžadoval temné vzory, zbytečné sledování, nejasné nakládání s daty nebo práci mimo kompetenci.
+
+Tohle je mnohem užitečnější než „lead má 73 bodů“. Body vypadají vědecky, ale často jen zakrývají subjektivní dojem. Fit matrix nutí tým říct proč.
+
+Příklad pro privacy-first webovou agenturu:
+
+```text
+Silný fit:
+- B2B služba nebo SaaS v Evropě
+- potřeba jasnějšího webu, analytiky nebo automatizace
+- ochota pracovat s minimem trackerů
+- dostupný vlastník projektu
+- realistický časový a rozpočtový rámec
+
+Slabý fit:
+- požadavek na agresivní pop-upy a reklamní pixely jako hlavní strategii
+- chybějící obsah i vlastník projektu
+- očekávání „udělejte nám virál“ bez nabídky a distribuce
+- neochota řešit data, přístupy a odpovědnost
+```
+
+### Formulář má kvalifikovat i edukovat
+
+Kontaktní formulář nemusí být dlouhý jako daňové přiznání pro kyborgy. Může být krátký, ale chytrý. Každé pole má mít důvod a ideálně i vysvětlení.
+
+Dobrá minimální sada pro B2B poptávku:
+
+- jméno,
+- pracovní e-mail,
+- firma nebo projekt,
+- co chcete zlepšit,
+- jak brzy to potřebujete řešit,
+- volitelně rozpočtový rámec nebo velikost projektu,
+- souhlas s tím, že údaje použiješ k odpovědi na poptávku.
+
+U rozpočtu se neboj nabídnout rozsahy. Lidé často neví přesnou částku, ale ví, jestli řeší projekt za desítky tisíc, stovky tisíc nebo dlouhodobý produktový provoz. Rozsahy šetří čas oběma stranám a nejsou nátlakové, pokud jsou vysvětlené lidsky.
+
+Příklad mikrocopy:
+
+```text
+Rozpočtový rámec nám pomůže doporučit správný další krok. Pokud si nejste jistí, vyberte nejbližší odhad — není to závazná nabídka.
+```
+
+Privacy-first detail: Nepřidávej do formuláře skryté obohacování o firmografická data, fingerprinting nebo tiché napojení na reklamní publika. Pokud chceš vědět velikost firmy, zeptej se. Když člověk nechce odpovědět, možná to pro první krok nepotřebuješ.
+
+### Kvalifikační call veď podle rozhodnutí
+
+Úvodní call nemá být neřízený rozhovor, kde se všichni příjemně shodnou, že „by to chtělo nějak posunout“. Má mít strukturu. Ne korporátní výslech, ale jasný rámec.
+
+Jednoduchá agenda na 25 minut:
+
+1. Kontext: co se děje a proč teď.
+2. Dopad: co problém stojí čas, peníze, důvěru nebo růst.
+3. Současný stav: co už existuje, jaké jsou limity a kdo se toho dotýká.
+4. Data a přístupy: jaká data jsou zapojená a kde jsou hranice.
+5. Rozhodování: kdo musí souhlasit a podle čeho se rozhodne.
+6. Další krok: nabídka, audit, workshop, nebo slušné odmítnutí.
+
+Po callu pošli krátké shrnutí. Ne desetistránkový zápis. Stačí problém, navržený další krok, otevřené otázky, datové hranice a kdo co dodá. Tím vzniká důvěra rychleji než automatizovaným „nurturingem“ s osmi e-maily o tom, že digitální transformace je důležitá. Ano, děkujeme, všimli jsme si.
+
+### Automatizace ano, ale bez falešné intimity
+
+Automatizace kvalifikace má pomáhat s pořádkem, ne předstírat osobní vztah. Klidně si nastav:
+
+- automatické potvrzení přijetí poptávky,
+- interní notifikaci podle typu problému,
+- šablonu follow-upu po callu,
+- připomínku otevřených otázek,
+- jednoduchý stav v CRM: nový, čeká na odpověď, kvalifikovaný, nabídka, uzavřeno, odmítnuto.
+
+Vyhni se automatizacím typu „viděli jsme, že jste se vrátili na naši cenovou stránku“. I když to nástroj umožňuje, působí to jako prodavač, který vyskočí zpoza regálu. B2B důvěra se staví lépe přes užitečné shrnutí, jasné podmínky a schopnost říct „tohle pro vás nejsme správní my“.
+
+### Odmítnutí je také součást kvalifikace
+
+Dobře nastavený proces umí poptávku odmítnout slušně a rychle. To není ztráta. To je ochrana kapacity, reputace i zákazníka.
+
+Užitečné odmítnutí obsahuje:
+
+- poděkování,
+- stručný důvod,
+- případně doporučený typ dodavatele nebo další krok,
+- žádné falešné naděje,
+- informaci, co se stane s předanými údaji podle tvých retenčních pravidel.
+
+Příklad:
+
+```text
+Díky za popis projektu. Podle toho, co píšete, hledáte hlavně výkonnostní reklamní správu s agresivním retargetingem. To není směr, kterým pracujeme — zaměřujeme se na privacy-first weby, SaaS a analytiku bez zbytečného sledování. Doporučil bych hledat specialistu na placené kampaně, ideálně někoho, kdo vám zároveň pomůže udržet datové hranice. Vaši poptávku nebudeme dál zpracovávat mimo odpověď na tento e-mail.
+```
+
+Odmítnutí může být nejlepší marketing. Ukazuje hodnoty bez moralizování.
+
+### Checklist kvalifikace leadů bez detektivního scoringu
+
+- Víme, jaké rozhodnutí má kvalifikace udělat.
+- Formulář sbírá jen údaje potřebné pro první odpověď nebo další krok.
+- Každé pole má jasný důvod a srozumitelnou mikrocopy.
+- Nepoužíváme skryté obohacování leadů ani reklamní publika bez vědomého souhlasu.
+- Máme fit matrix: silný fit, možný fit, slabý fit, nefit.
+- Úvodní call má strukturu a končí jasným dalším krokem.
+- Po callu posíláme krátké shrnutí včetně otevřených otázek a datových hranic.
+- CRM stav popisuje realitu, ne marketingové sny.
+- Automatizace pomáhá s pořádkem, ale nepředstírá osobní dohled.
+- Umíme poptávku slušně odmítnout a držíme retenční pravidla.
+
+### Mini šablona kvalifikačního listu
+
+```markdown
+# Kvalifikace leadu: [firma / projekt]
+
+## Základ
+- Kontakt:
+- Firma / projekt:
+- Datum poptávky:
+- Zdroj poptávky:
+
+## Problém
+- Co chce zákazník změnit:
+- Proč teď:
+- Dopad problému:
+
+## Fit
+- Kategorie: silný fit / možný fit / slabý fit / nefit
+- Proč:
+- Rizika:
+- Co ještě nevíme:
+
+## Data a provoz
+- Jaká data se budou řešit:
+- Kdo má přístupy:
+- Privacy-first hranice:
+
+## Rozhodování
+- Rozhodovatelé:
+- Časový rámec:
+- Rozpočtový rámec:
+- Kritéria úspěchu:
+
+## Další krok
+- Doporučený krok:
+- Vlastník:
+- Termín:
+- Pokud odmítnuto, důvod a retenční poznámka:
+```
+
+Dobrá kvalifikace není o tom, že z anonymního návštěvníka vyrobíš profil. Je o tom, že z konkrétní poptávky uděláš férové rozhodnutí. Méně lovu, víc řemesla. A jako bonus: obchod pak působí dospěleji, protože neslibuje všechno všem.
+
 # Zdroje
 
 - European Data Protection Board: [Personal data breaches](https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en)
@@ -8483,6 +8663,7 @@ QA má být brzda jen tehdy, když jedeš do zdi. Ve všech ostatních případe
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „Kvalifikace leadů bez detektivního scoringu“ s fit matrix, kvalifikačním formulářem, strukturou úvodního callu, pravidly automatizace, slušným odmítnutím, checklistem a vyplnitelnou šablonou kvalifikačního listu.
 - 2026-09-27: Doplněna příloha „QA a release rutina bez testovacího divadla“ s rizikovou mapou produktu, vrstvením testů, krátkým release checklistem, privacy-first QA scénáři, bug reportem, metrikami kvality a vyplnitelnou šablonou QA plánu.
 - 2026-09-27: Doplněna příloha „Lokální vývoj a secrets bez chaosu“ s oddělením konfigurace podle prostředí, pravidly pro secrets, syntetickými seed daty, git hygienou, onboardingem vývojáře, CI/CD kontrolami, checklistem a vyplnitelnou šablonou provozního listu.
 - 2026-09-27: Doplněna příloha „Incidentová komunikace bez paniky a mlžení“ s rolemi pro malý tým, vyhodnocením dopadu na osobní data, status komunikací, postmortemem, checklistem a šablonou incidentového záznamu.
