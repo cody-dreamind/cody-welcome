@@ -6449,6 +6449,205 @@ jméno / role / datum
 
 Předání je poslední místo, kde můžeš levně odstranit budoucí chaos. Když ho odflákneš, zaplatíš později — při incidentu, redesignu, změně dodavatele nebo ve chvíli, kdy zákazník požádá o informaci, kterou „určitě někde máme“. Dobře předaný projekt není jen profesionální tečka. Je to pojistka proti tomu, aby se z webu nebo SaaS stal rukojmí jednoho člověka, jedné agentury nebo jednoho zapomenutého účtu.
 
+## Příloha: Migrace webu bez SEO ztrát a datového bordelu
+
+Migrace webu není jen „překlopíme nový design a dáme si kafe“. Je to změna adres, obsahu, infrastruktury, analytiky, formulářů, DNS, e-mailů a často i interních zvyklostí. Když se udělá dobře, návštěvník si skoro ničeho nevšimne. Když se udělá špatně, firma přijde o organickou návštěvnost, formuláře, historické odkazy a schopnost vysvětlit, kde vlastně skončila data ze starého webu.
+
+Google u přesunů webu doporučuje mimo jiné připravit nový web, důkladně ho otestovat, vytvořit mapování starých URL na nové, nastavit přesměrování a sledovat provoz na starých i nových adresách ([Google Search Central: Site moves and migrations](https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes)). To zní technicky, ale pro podnikatele je pointa jednoduchá: migrace není jeden deploy. Je to řízený provozní projekt.
+
+> Codyho komentář: Nejhorší migrace je ta, kde se všichni hádají o odstín tlačítka a nikdo nemá seznam starých URL. Designové oko pláče, SEO také, a server si mezitím dělá 404 karaoke.
+
+### Co migrace skutečně mění
+
+Migrace může být malá nebo velká. Malá změna je přesun několika článků, úprava struktury URL nebo výměna formulářového nástroje. Velká změna je nový web, nový CMS, nová doména, nové hostingové prostředí nebo spojení více webů do jednoho.
+
+Před začátkem napiš, co se mění:
+
+- doména nebo subdomény,
+- URL struktura a slugy,
+- CMS nebo framework,
+- obsah a informační architektura,
+- formuláře a příjem poptávek,
+- analytika a události,
+- externí skripty,
+- hosting a region provozu,
+- DNS, TLS a e-mailová doručitelnost,
+- datové úložiště, exporty a retence.
+
+Když se mění všechno najednou, roste riziko. Pokud to jde, odděl technickou migraci od obsahového redesignu. Ne proto, že by změna byla zakázaná, ale protože při problému potřebuješ vědět, co ho způsobilo. Když v jeden den změníš doménu, texty, CMS, analytiku, formuláře a strukturu ceníku, debugování připomíná detektivku napsanou člověkem, který neměl rád čtenáře.
+
+### URL mapa je páteř migrace
+
+URL mapa říká, kam vede každá důležitá stará adresa. Bez ní se migrace mění v loterii. Začni exportem starých URL ze sitemap, CMS, serverových logů, analytiky a ruční kontroly nejdůležitějších stránek. Google výslovně doporučuje mapovat staré URL na nové cíle a začít důležitými URL ze sitemap, logů, analytiky a odkazů ([Google Search Central: Site moves and migrations](https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes)).
+
+Praktické rozdělení URL:
+
+- **Přesunuto jedna ku jedné** — stará stránka má jasný nový ekvivalent.
+- **Sloučeno** — více starých stránek vede na jednu lepší stránku.
+- **Rozděleno** — jedna stará stránka má více nových cílových částí.
+- **Zrušeno** — obsah už nedává smysl a má vracet 404 nebo 410.
+- **Dočasně zachováno** — starý obsah zůstane kvůli přechodnému období.
+
+Trvalé přesměrování se běžně řeší HTTP stavem `301 Moved Permanently`; MDN ho popisuje jako indikaci, že zdroj byl definitivně přesunut na URL v hlavičce `Location` ([MDN: 301 Moved Permanently](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/301)). Nepřesměrovávej všechno na homepage. To je jako říct návštěvníkovi: „Vím, že hledáš fakturu, ale tady máš recepci.“
+
+Příklad jednoduché URL mapy:
+
+```text
+Stará URL                         Nová URL                         Stav
+/sluzby                           /webovy-vyvoj                    301
+/sluzby/seo                       /obsah-seo-rss                   301
+/blog/stary-clanek                /blog/novy-slug                  301
+/akce-2022                        -                                410
+/kontakt                          /kontakt                         beze změny
+```
+
+### Obsah nepřesouvej jako skladiště
+
+Migrace je ideální chvíle rozhodnout, co má na webu dál žít. Ne každý starý článek, landing page nebo PDF si zaslouží nový pokoj s výhledem. Ale mazání musí být vědomé.
+
+U každé důležité stránky se ptej:
+
+- Přináší organickou návštěvnost nebo kvalitní poptávky?
+- Má externí odkazy, které by byla škoda zahodit?
+- Odpovídá aktuální nabídce a positioning firmě?
+- Obsahuje osobní údaje, staré reference nebo zastaralé sliby?
+- Dá se sloučit s lepší stránkou?
+- Má smysl ji ponechat v archivu?
+
+Privacy-first pohled je tady užitečný: starý obsah často obsahuje zapomenuté formuláře, vložená videa, trackery, PDF s metadaty, staré skripty a obrázky z cizích CDN. Migrace není jen kopírování obsahu. Je to hygienická kontrola.
+
+### Analytika a události předem
+
+U migrace se často řeší vzhled a redirecty, ale zapomene se na měření. Pak nový web sice běží, ale tým neví, jestli fungují poptávky, důležité odkazy, RSS odběry nebo stažení dokumentů.
+
+Před migrací si napiš měřicí plán:
+
+- které stránky jsou kritické,
+- jaké konverze opravdu potřebuješ sledovat,
+- které události zůstávají,
+- které události se ruší,
+- jak se změní názvy URL v reportech,
+- kdo po spuštění kontroluje data,
+- jak dlouho držíš staré analytické exporty.
+
+Privacy-first varianta: měř agregovaně a jen to, co pomáhá rozhodování. Není nutné profilovat jednotlivce, aby ses dozvěděl, že po migraci přestal fungovat formulář. Potřebuješ jasný signál, ne digitální paparazzi tým.
+
+### Formuláře a kontaktní cesty
+
+Nejdražší rozbitá věc po migraci bývá formulář. Všechno vypadá hezky, ale poptávky padají do prázdna, potvrzovací e-mail nedorazí nebo validace odmítá normální telefonní číslo.
+
+Před ostrým spuštěním otestuj:
+
+- kontaktní formulář,
+- poptávkový formulář,
+- newsletter nebo RSS odkazy,
+- transakční e-maily,
+- antispam ochranu,
+- chybové stavy,
+- potvrzení po odeslání,
+- mobilní vyplnění,
+- ruční fallback přes e-mail nebo telefon.
+
+Ke každému formuláři napiš, kam data tečou a jak dlouho tam zůstávají. Jestli se při migraci mění nástroj, exportuj jen potřebná data a zbytek podle retenčního plánu smaž. „Pro jistotu si necháme všechno“ je věta, která obvykle znamená „nemáme datovou mapu a doufáme, že se nikdo nezeptá“.
+
+### Den spuštění
+
+Den migrace má mít jednoduchý scénář. Ne hrdinskou improvizaci.
+
+Praktický postup:
+
+1. Zamkni obsahové změny nebo si jasně označ poslední export.
+2. Zálohuj starý web, databázi, DNS nastavení a konfiguraci formulářů.
+3. Nasad nový web na produkci nebo přepni DNS podle plánu.
+4. Ověř TLS, hlavní stránky, formuláře, RSS, sitemap a robots.txt.
+5. Otestuj vzorek nejdůležitějších 301 redirectů.
+6. Zkontroluj 404 stránky a serverové logy.
+7. Sleduj analytiku, poptávky a monitoring.
+8. Sepiš první zjištění do migračního deníku.
+
+Po spuštění neoslavuj moc brzy. První hodina ověří, že web žije. První dny ukážou, jestli fungují odkazy, indexace, formuláře a provozní rutina.
+
+### Týden po migraci
+
+První týden je kontrolní fáze. Každý den projdi krátký seznam:
+
+- nové 404 chyby,
+- nejnavštěvovanější staré URL bez vhodného cíle,
+- pokles nebo výpadek poptávek,
+- chybové e-maily,
+- pomalé stránky,
+- špatné kanonické URL,
+- nechtěné `noindex`,
+- chybějící stránky v sitemap,
+- staré externí skripty, které se neměly vrátit,
+- data, která zůstala ve starém nástroji.
+
+Neřeš jen SEO. Řeš obchodní a provozní dopad. Pokud po migraci klesne návštěvnost blogu o pár procent, ale poptávky fungují a staré trackery zmizely, může to být přijatelná daň za lepší web. Pokud návštěvnost vypadá krásně, ale nechodí žádné formuláře, máš problém s naleštěným grafem.
+
+### Checklist migrace
+
+- [ ] Existuje seznam starých důležitých URL?
+- [ ] Má každá důležitá stará URL nový cíl nebo vědomé rozhodnutí 404/410?
+- [ ] Jsou 301 redirecty otestované na vzorku hlavních stránek?
+- [ ] Je nová sitemap aktuální a odkazuje na kanonické URL?
+- [ ] Nezůstalo na produkci omylem `noindex` nebo blokující `robots.txt`?
+- [ ] Fungují formuláře, potvrzení, antispam a doručování e-mailů?
+- [ ] Je jasné, kam tečou data z formulářů a jak dlouho se drží?
+- [ ] Jsou odstraněné zbytečné externí skripty a staré trackery?
+- [ ] Je nastaven monitoring hlavních stránek a formulářů?
+- [ ] Existuje migrační deník s odpovědnou osobou a kontrolami po spuštění?
+
+### Mini šablona migračního plánu
+
+```text
+Název migrace:
+
+Důvod migrace:
+
+Co se mění:
+doména / URL / CMS / hosting / obsah / formuláře / analytika / jiné
+
+Co se nemění:
+
+Odpovědná osoba:
+
+Datum plánovaného spuštění:
+
+Nízkorizikové okno pro spuštění:
+
+Zálohy před spuštěním:
+
+URL mapa:
+stará URL / nová URL / stav / poznámka
+
+Kritické stránky k ověření:
+1.
+2.
+3.
+
+Kritické formuláře a kontaktní cesty:
+1.
+2.
+3.
+
+Měřené události po migraci:
+
+Externí skripty povolené na novém webu:
+služba / účel / typ dat / vlastník
+
+Retence starých dat a exportů:
+
+Rollback plán:
+
+Kontroly první hodinu:
+
+Kontroly první týden:
+
+Poznámky po spuštění:
+```
+
+Migrace je povedená tehdy, když se nový web lépe používá, staré odkazy vedou správně, data nejsou rozházená po nástrojích a tým ví, co sledovat. Nejde o to, aby se nic nezměnilo. Jde o to, aby změna byla řízená, vysvětlitelná a vratná tam, kde to dává smysl. To je rozdíl mezi profesionální migrací a digitálním stěhováním, při kterém někdo zapomněl krabici s DNS pod schody.
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -6479,6 +6678,9 @@ Předání je poslední místo, kde můžeš levně odstranit budoucí chaos. Kd
 - Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
 - Google Search Central: [Build and submit a sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap)
 - Google Search Central: [Introduction to robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/intro)
+- Google Search Central: [Site moves and migrations](https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes)
+- Google Search Central: [Redirects and Google Search](https://developers.google.com/search/docs/crawling-indexing/301-redirects)
+- MDN Web Docs: [301 Moved Permanently](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/301)
 - RSS Advisory Board: [RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
 - Schema.org: [Article](https://schema.org/Article)
 - Google Search Central: [Article structured data](https://developers.google.com/search/docs/appearance/structured-data/article)
@@ -6498,6 +6700,7 @@ Předání je poslední místo, kde můžeš levně odstranit budoucí chaos. Kd
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „Migrace webu bez SEO ztrát a datového bordelu“ s URL mapou, pravidly pro obsah, analytiku, formuláře, den spuštění, týdenní kontrolu, checklistem a vyplnitelnou šablonou migračního plánu.
 - 2026-09-27: Doplněna příloha „Předání webu nebo SaaS bez ztracených klíčů“ s inventářem dodaných částí, pravidly pro přístupy, provozním runbookem, datovou částí, předávací schůzkou, checklistem a vyplnitelným předávacím protokolem.
 - 2026-09-27: Doplněna příloha „Nabídkový dokument bez buzzwordové mlhy“ s praktickou strukturou proposalu, vymezením rozsahu, datovou částí, variantami podle rizika, milníky, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Retenční kalendář bez datového syslení“ s účely dat, typickými zapomenutými kopiemi, rutinou mazání, zálohami, pravidly pro AI výstupy, checklistem a vyplnitelnou šablonou.
