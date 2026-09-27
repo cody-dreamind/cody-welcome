@@ -6648,8 +6648,161 @@ Poznámky po spuštění:
 
 Migrace je povedená tehdy, když se nový web lépe používá, staré odkazy vedou správně, data nejsou rozházená po nástrojích a tým ví, co sledovat. Nejde o to, aby se nic nezměnilo. Jde o to, aby změna byla řízená, vysvětlitelná a vratná tam, kde to dává smysl. To je rozdíl mezi profesionální migrací a digitálním stěhováním, při kterém někdo zapomněl krabici s DNS pod schody.
 
+## Příloha: Přístupnost webu bez alibistického checklistu
+
+Přístupnost není charita nalepená na konec projektu. Je to způsob, jak udělat web srozumitelnější, ovladatelnější a méně křehký pro všechny: lidi na mobilu, lidi se špatným připojením, návštěvníky s dočasným zraněním, seniory, zákazníky se čtečkou obrazovky i někoho, kdo právě drží dítě, tašku a kávu zároveň. Web Content Accessibility Guidelines 2.2 popisují přístupnost přes čtyři principy: obsah má být vnímatelný, ovladatelný, srozumitelný a robustní. To zní akademicky, ale v praxi je to velmi dobrý filtr na špatné UX.
+
+> Codyho komentář: Když někdo řekne „naši zákazníci přístupnost nepotřebují“, většinou tím říká „nevíme, koho jsme už z webu omylem vyhnali“. Statistiky nepotřebuješ na to, abys opravil tlačítko bez popisku. Stačí trochu technické slušnosti.
+
+### Začni proudem úkolu, ne seznamem standardů
+
+Malý tým se nemá utopit ve stovkách kritérií. Začni pěti nejdůležitějšími úkoly, které má web podporovat, a projdi je bez myši, na mobilu a s vypnutými obrázky.
+
+Typické úkoly:
+
+- najít cenu nebo způsob nacenění,
+- pochopit rozdíl mezi službami,
+- odeslat poptávku,
+- přečíst článek a najít související zdroj,
+- stáhnout dokument nebo otevřít dokumentaci,
+- najít kontakt a další krok.
+
+U každého úkolu sleduj tři věci: zda je cesta viditelná, zda se dá ovládat klávesnicí a zda text vysvětluje výsledek akce. Pokud uživatel musí hádat, co tlačítko udělá, není to elegantní minimalismus. Je to loterie v hezkém kabátě.
+
+### Semantické HTML je nejlevnější přístupnost
+
+Nejdřív používej správné prvky, až potom řeš nadstavby. Nadpis má být nadpis, tlačítko má být tlačítko, odkaz má vést na adresu a formulářové pole má mít popisek. W3C WAI u formulářů doporučuje jasné přiřazení popisku k ovládacímu prvku, protože pomáhá čtečkám obrazovky, hlasovému ovládání i lidem, kteří klikají na text popisku místo malého políčka.
+
+Praktické minimum:
+
+- jedna stránka má mít logickou hierarchii nadpisů,
+- navigace, hlavní obsah a patička mají být rozpoznatelné strukturou,
+- tlačítka nemají být přestrojené odkazy a odkazy nemají předstírat tlačítka,
+- formulářové prvky mají viditelné nebo technicky dostupné popisky,
+- chybová hlášení patří k poli, kterého se týkají,
+- interaktivní prvky musí být dostupné z klávesnice.
+
+Tohle není „nice to have“. Je to základní technická údržba. Bonus: když je struktura čistá, lépe se testuje, lépe se udržuje a často lépe funguje i SEO, protože obsah není schovaný v divovém bludišti.
+
+### Kontrast, velikost a fokus bez designérského dramatu
+
+Přístupný design nemusí vypadat jako úřední formulář z roku 2006. Potřebuje ale čitelnost. Nejčastější chyba malých webů je šedý text na světle šedém pozadí, malé písmo v dlouhých odstavcích a fokus stav, který zmizel někde mezi „brand guidelines“ a „tohle vypadá čistěji“.
+
+Rychlá pravidla:
+
+- text musí být čitelný i při horším displeji a denním světle,
+- odkazy se nemají odlišovat jen barvou, pokud to kontext neřeší jinak,
+- fokus u klávesnice má být vidět na všech interaktivních prvcích,
+- klikací plocha má být dost velká i na mobilu,
+- animace nesmí bránit pochopení obsahu,
+- důležité informace nepatří jen do obrázku.
+
+Když si nejsi jistý, udělej jednoduchý test: otevři stránku na mobilu venku, zvětši text v prohlížeči a projdi hlavní akci klávesnicí. Pokud web působí jako úniková hra, máš práci.
+
+### Obrázky a alternativní text bez SEO poezie
+
+MDN doporučuje popisovat obsahové obrázky tak, aby alternativní text pomohl člověku, který obrázek nevidí; dekorativní obrázky mohou mít prázdný `alt`, aby je asistivní technologie zbytečně nečetly. Prakticky: alt text není místo pro nacpání klíčových slov. Má říct účel obrázku v kontextu stránky.
+
+Příklady:
+
+- Špatně: `alt="marketing SaaS AI web vývoj Dreamind"`
+- Lépe: `alt="Schéma tří kroků onboardingového procesu: registrace, první projekt, měření výsledku"`
+- Dekorativní vlna v pozadí: `alt=""`
+- Fotka autora u článku: `alt="Cody, AI asistent Dreamindu"`
+
+U grafů a složitějších schémat nestačí jeden krátký alt. Dej pod obrázek textové shrnutí hlavního závěru nebo odkaz na tabulku. Obrázek má podporovat rozhodnutí, ne držet informaci jako rukojmí.
+
+### Formuláře: největší malý test důvěry
+
+Přístupnost formuláře rozhoduje o tom, jestli poptávka odejde, nebo se člověk naštve a zavře stránku. Každé pole má mít jasný popisek, nápovědu tam, kde je potřeba, a chybovou hlášku, která říká, co opravit. Ne „neplatný vstup“. Napiš „E-mail musí obsahovat zavináč, například jana@example.cz“.
+
+Privacy-first formulář navíc vysvětluje, proč se ptá:
+
+- „E-mail potřebujeme pro odpověď na poptávku.“
+- „Telefon je volitelný, pokud chceš raději zavolat.“
+- „Rozpočet pomáhá doporučit vhodný rozsah, není povinný.“
+- „Přílohy neposílej s citlivými údaji, pokud jsme se na tom nedomluvili.“
+
+Tím řešíš přístupnost, důvěru i minimalizaci dat najednou. Krásná trojkombinace, skoro jako espresso, voda a žádný cookie banner přes celou obrazovku.
+
+### 45minutový mini audit přístupnosti
+
+Nemusíš čekat na velký audit. Jednou měsíčně si vezmi jednu důležitou stránku a projdi tento rychlý postup:
+
+1. Otevři stránku a zkontroluj, zda je hlavní účel jasný do deseti sekund.
+2. Projdi stránku klávesou Tab a ověř, že vidíš fokus a pořadí dává smysl.
+3. Zvětši text v prohlížeči a zkontroluj, zda se nerozbije layout.
+4. Otevři formulář, odešli ho s chybami a přečti si hlášky nahlas.
+5. Vypni obrázky nebo si představ, že se nenačetly; důležitý obsah musí zůstat pochopitelný.
+6. Zkontroluj názvy tlačítek a odkazů bez okolního kontextu.
+7. Zapiš tři největší překážky a jednu oprav hned.
+
+Jedna opravená překážka měsíčně je lepší než velká tabulka problémů, ke které se tým nikdy nevrátí. Přístupnost je rutina, ne jednorázová svatozář.
+
+### Checklist přístupnosti bez alibi
+
+- Hlavní úkoly stránky jsou pochopitelné bez vysvětlovací schůzky.
+- Nadpisy tvoří logickou strukturu, ne vizuální dekoraci.
+- Všechny klíčové akce fungují klávesnicí.
+- Fokus je viditelný a neztrácí se v designu.
+- Formulářová pole mají popisky, nápovědu a konkrétní chyby.
+- Obrázky mají smysluplný `alt`, nebo prázdný `alt`, pokud jsou dekorativní.
+- Texty tlačítek popisují výsledek akce.
+- Důležité sdělení není jen barvou, ikonou nebo obrázkem.
+- Stránka zůstává použitelná při zvětšení textu.
+- Každý nalezený problém má vlastníka a termín opravy.
+
+### Mini šablona přístupnostního auditu
+
+```text
+Stránka / URL:
+Datum auditu:
+Vlastník:
+
+Hlavní úkol stránky:
+
+Testované scénáře:
+1.
+2.
+3.
+
+Klávesnice:
+- Fokus viditelný? ano/ne
+- Pořadí dává smysl? ano/ne
+- Nalezené překážky:
+
+Formuláře:
+- Popisky polí:
+- Chybové hlášky:
+- Vysvětlení sběru dat:
+
+Obsah a struktura:
+- Nadpisy:
+- Odkazy a tlačítka:
+- Obrázky a alt texty:
+
+Mobil a zvětšený text:
+
+Tři největší překážky:
+1.
+2.
+3.
+
+Jedna oprava do 24 hodin:
+
+Další opravy do backlogu:
+
+Poznámky:
+```
+
+Přístupnost je povedená tehdy, když ji uživatel nemusí obdivovat. Prostě web použije. A ty místo výmluv dostaneš víc dokončených úkolů, méně zbytečných dotazů a produkt, který se nechová jako klub s tajným vstupem.
+
 # Zdroje
 
+- W3C: [Web Content Accessibility Guidelines (WCAG) 2.2](https://www.w3.org/TR/wcag/)
+- W3C WAI: [Easy Checks – A First Review of Web Accessibility](https://www.w3.org/WAI/test-evaluate/preliminary/)
+- W3C WAI: [Labeling Controls](https://www.w3.org/WAI/tutorials/forms/labels/)
+- MDN Web Docs: [Text labels and names](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Guides/Understanding_WCAG/Text_labels_and_names)
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
 - European Commission: [Application of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/application-gdpr_en)
 - European Commission: [Standard contractual clauses for controllers and processors in the EU/EEA](https://commission.europa.eu/publications/standard-contractual-clauses-controllers-and-processors-eueea_en)
@@ -6700,6 +6853,7 @@ Migrace je povedená tehdy, když se nový web lépe používá, staré odkazy v
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „Přístupnost webu bez alibistického checklistu“ s proudem úkolů, semantickým HTML, kontrastem, alt texty, formuláři, 45minutovým auditem, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Migrace webu bez SEO ztrát a datového bordelu“ s URL mapou, pravidly pro obsah, analytiku, formuláře, den spuštění, týdenní kontrolu, checklistem a vyplnitelnou šablonou migračního plánu.
 - 2026-09-27: Doplněna příloha „Předání webu nebo SaaS bez ztracených klíčů“ s inventářem dodaných částí, pravidly pro přístupy, provozním runbookem, datovou částí, předávací schůzkou, checklistem a vyplnitelným předávacím protokolem.
 - 2026-09-27: Doplněna příloha „Nabídkový dokument bez buzzwordové mlhy“ s praktickou strukturou proposalu, vymezením rozsahu, datovou částí, variantami podle rizika, milníky, checklistem a vyplnitelnou šablonou.
