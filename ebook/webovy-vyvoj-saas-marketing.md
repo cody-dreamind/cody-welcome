@@ -7656,6 +7656,232 @@ Rozhodnutí pro příští revizi:
 
 Bezpečnostní hlavičky jsou dobrý příklad toho, jak privacy-first přístup šetří práci. Když web stojí na vlastních assetech, přímých odkazech, jednoduché analytice a minimálním počtu externích skriptů, bezpečnostní politika je kratší, čitelnější a lépe udržitelná. Méně magie, méně výjimek, méně nočních zpráv typu „proč se nám po deployi nezobrazuje formulář“.
 
+## Příloha: API dokumentace bez support ping-pongu
+
+API dokumentace není dekorace pro vývojáře, kteří mají rádi YAML a tiché utrpení. Je to obchodní a provozní nástroj. Dobrá dokumentace zkracuje integraci, snižuje počet dotazů na podporu, pomáhá bezpečnostnímu review a drží hranice dat dřív, než někdo pošle do requestu půlku CRM „protože se to může hodit“.
+
+Privacy-first API dokumentace má navíc jednu důležitou práci: říct nejen _jak_ endpoint zavolat, ale také _jaká data se posílají, proč se posílají, jak dlouho se drží a co se nikdy posílat nemá_. To zní suše. Přesně proto to funguje. Suché hranice jsou lepší než mokrá panika při incidentu.
+
+> Codyho komentář: API bez dokumentace je jako dveře bez kliky. Technicky možná existují, ale každý příchozí začne bušit do zdi a psát supportu.
+
+### Začni jedním integračním příběhem
+
+Nezačínej seznamem endpointů. Začni příběhem člověka nebo systému, který chce něco dokončit.
+
+Dobré integrační příběhy:
+
+- „CRM pošle nový lead do SaaS a uloží zpět stav zpracování.“
+- „E-shop vytvoří fakturační kontakt a stáhne PDF dokladu.“
+- „Interní nástroj načte agregované metriky bez osobních dat.“
+- „Partner získá seznam dostupných termínů a vytvoří rezervaci.“
+
+Ke každému příběhu napiš:
+
+1. kdo integraci používá,
+2. jaký výsledek má vzniknout,
+3. jaká data jsou nutná,
+4. jaká data jsou zakázaná,
+5. co se stane při chybě,
+6. jak se integrace bezpečně vypne.
+
+Teprve potom popisuj endpointy. Vývojář potřebuje syntax. Firma potřebuje hranice. Dokumentace má dodat obojí.
+
+### Minimální struktura dobré API dokumentace
+
+Pro malé B2B SaaS často stačí jednoduchá struktura. Nemusíš mít portál s animovaným maskotem, který mrká při každém `curl` příkladu. Stačí, když je dokumentace přesná, verzovaná a použitelná.
+
+Praktické minimum:
+
+- rychlý start s jedním funkčním příkladem,
+- autentizace a práce s tokeny,
+- datový model a povinná pole,
+- endpointy podle úkolů, ne podle interních modulů,
+- chybové odpovědi a retry pravidla,
+- limity a očekávané objemy,
+- changelog a pravidla verzování,
+- privacy poznámka u citlivých polí,
+- kontakt pro bezpečnostní nebo integrační problém.
+
+U každého endpointu přidej krátkou větu „Použij, když…“ a „Nepoužívej, když…“. Tím zabráníš kreativnímu zneužití endpointu pro věc, kterou měl řešit úplně jiný proces.
+
+Příklad:
+
+```text
+POST /contacts
+
+Použij, když potřebuješ vytvořit nový fakturační nebo obchodní kontakt.
+Nepoužívej pro ukládání poznámek z obchodního hovoru, interních štítků nebo volného profilu osoby.
+```
+
+Tohle je malý text, ale velká brzda proti datovému bordelu.
+
+### Specifikace jako zdroj pravdy
+
+Pro HTTP API se vyplatí držet strojově čitelnou specifikaci. OpenAPI popisuje rozhraní tak, aby mu rozuměli lidé i nástroje: dokumentace, klientské knihovny, validátory nebo testy. U event-driven architektury se často hodí AsyncAPI, protože popisuje zprávy, kanály a události, ne jen request/response svět.
+
+Specifikace ale není kouzelný amulet. Když je ručně udržovaná bokem a nikdo ji nekontroluje proti realitě, bude lhát s krásnou syntaxí. Lepší je napojit ji na vývojový proces:
+
+- změna API vyžaduje změnu specifikace,
+- pull request kontroluje validitu specifikace,
+- dokumentace se generuje ze stejného zdroje,
+- breaking change musí být vidět v changelogu,
+- příklady se testují proti testovacímu prostředí,
+- staré verze mají jasné datum podpory.
+
+Malý tým nemusí generovat všechno. Ale měl by mít jedno místo, kde je pravda. Pokud pravda bydlí v hlavě seniorního vývojáře, je to single point of failure s účesem.
+
+### Chyby piš pro integraci, ne pro interní log
+
+Chybová odpověď má pomoct klientovi rozhodnout, co dál. Nemá vyzradit stack trace, SQL fragment, interní název mikroservisy nebo poetický výbuch frameworku.
+
+Dobrá chybová odpověď říká:
+
+- co se stalo,
+- jestli má smysl request opakovat,
+- které pole je špatně,
+- jaký stabilní kód může klient zpracovat,
+- kde najít dokumentaci.
+
+Pro HTTP API se hodí držet jednotný formát chyb. RFC 9457 definuje `application/problem+json`, tedy standardizovaný způsob, jak vracet strojově čitelné informace o problému v HTTP odpovědi. Prakticky to znamená, že klient nemusí pro každý endpoint hádat jiný tvar chyby.
+
+Příklad bezpečné validační chyby:
+
+```json
+{
+  "type": "https://docs.example.cz/problems/invalid-request",
+  "title": "Neplatný požadavek",
+  "status": 400,
+  "detail": "Pole email nemá platný formát.",
+  "error_code": "contact.email_invalid",
+  "fields": [
+    { "name": "email", "code": "invalid_format" }
+  ]
+}
+```
+
+Co do chyby nepatří:
+
+- stack trace,
+- interní ID serveru bez účelu,
+- celé původní payloady,
+- osobní údaje navíc,
+- názvy tajných konfigurací,
+- vtipné hlášky, které znemožní automatické zpracování.
+
+Vtip patří do e-booku. API chyba má být nudná a užitečná. Ano, i mě to bolí.
+
+### Privacy-first poznámky přímo u polí
+
+Nečekej, že si integrátor přečte samostatnou privacy stránku a pak zázračně pochopí každý parametr. U citlivých polí napiš účel přímo do dokumentace.
+
+Příklad popisu pole:
+
+```text
+phone_number
+Typ: string, volitelné
+Účel: pouze pro domluvení servisního termínu.
+Neposílej: marketingové preference, interní poznámky, historii komunikace.
+Retence: podle retenčního pravidla pro servisní zakázky.
+```
+
+Stejně popiš i metadata. Právě metadata bývají tichý problém: IP adresa, user agent, interní ID, štítky, zdroj kampaně, referrer, poznámky operátora. Každé vypadá malé. Dohromady umí vytvořit profil, který nikdo vědomě neschválil.
+
+Privacy-first pravidlo:
+
+```text
+Pokud pole neumíš vysvětlit jednou větou a přiřadit k účelu, do API nepatří.
+```
+
+### Sandbox bez produkčních dat
+
+API dokumentace má obsahovat sandbox nebo alespoň testovací postup. Ale sandbox nesmí být kopie produkce s přelepeným názvem. Testovací prostředí má mít syntetická data, oddělené tokeny, omezené e-maily a jasnou značku, že nejde o produkci.
+
+Do dokumentace napiš:
+
+- jak získat sandbox přístup,
+- jak se liší od produkce,
+- jaká data se smí posílat,
+- jak se resetují testovací objekty,
+- jestli sandbox posílá e-maily nebo webhooky,
+- jak poznat testovací a produkční token,
+- jak se reportuje chyba v integraci.
+
+U webhooků přidej i podpis payloadu, časové okno platnosti a replay ochranu. Integrátor potřebuje vědět, jak ověřit, že událost opravdu poslal tvůj systém a že ji někdo nepřehrává jako starou kazetu z devadesátek.
+
+### Changelog a deprecace bez překvapení
+
+API změny jsou citlivější než změny textu na webu. Když rozbiješ endpoint, nerozbiješ jen svůj produkt. Rozbiješ cizí proces, který na tobě závisí. To je skvělý způsob, jak si vytvořit komunitu lidí, kteří o tobě mluví velmi živě a ne úplně v marketingových personách.
+
+Každá změna v changelogu má říct:
+
+- co se změnilo,
+- od kdy změna platí,
+- koho se týká,
+- jestli je kompatibilní zpětně,
+- co má integrátor upravit,
+- dokdy poběží staré chování,
+- kde je příklad nové implementace.
+
+U deprecace dej lidem čas, migrační návod a kontakt. Pokud musíš něco vypnout rychle kvůli bezpečnosti, napiš to přímo. Bezpečnostní důvod je legitimní. Mlžení není.
+
+### Checklist API dokumentace
+
+- [ ] Existuje jeden jasný integrační příběh pro rychlý start.
+- [ ] Každý endpoint má účel, příklad requestu a příklad odpovědi.
+- [ ] Citlivá pole mají popsaný účel a hranice použití.
+- [ ] Chyby mají jednotný tvar a stabilní kódy.
+- [ ] Dokumentace neukazuje produkční osobní data.
+- [ ] Sandbox používá oddělené tokeny a syntetická data.
+- [ ] Webhooky mají podpis, časové okno a replay ochranu.
+- [ ] Specifikace je verzovaná a kontrolovaná v pull requestech.
+- [ ] Changelog rozlišuje kompatibilní a breaking změny.
+- [ ] Deprecace má datum, migrační návod a kontakt.
+
+### Mini šablona API stránky
+
+```markdown
+# [Název integračního úkolu]
+
+## Kdy použít
+- Úkol:
+- Typický uživatel/integrátor:
+- Výsledek:
+
+## Datové hranice
+- Nutná data:
+- Zakázaná data:
+- Citlivá pole:
+- Retence:
+
+## Autentizace
+- Typ tokenu:
+- Scope:
+- Prostředí:
+
+## Endpointy
+### [METODA] [cesta]
+- Použij, když:
+- Nepoužívej, když:
+- Request:
+- Response:
+- Chyby:
+
+## Sandbox
+- Jak získat přístup:
+- Testovací data:
+- Omezení:
+
+## Změny a podpora
+- Verze:
+- Poslední změna:
+- Deprecace:
+- Kontakt:
+```
+
+Dobrá API dokumentace je tichý obchodník, supporták a bezpečnostní kolega v jednom. Když ji napíšeš prakticky, integrace se zrychlí a zároveň neotevřeš datovou skládku. A to je přesně ten druh elegance, který nevypadá sexy na konferenčním slidu, ale šetří peníze každý týden.
+
+
+
 # Zdroje
 
 - W3C: [Web Content Accessibility Guidelines (WCAG) 2.2](https://www.w3.org/TR/wcag/)
@@ -7713,11 +7939,15 @@ Bezpečnostní hlavičky jsou dobrý příklad toho, jak privacy-first přístup
 - MDN Web Docs: [Strict-Transport-Security header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security)
 - MDN Web Docs: [Permissions-Policy header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Permissions-Policy)
 - OWASP Cheat Sheet Series: [HTTP Headers Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html)
+- OpenAPI Initiative: [OpenAPI Specification](https://spec.openapis.org/oas/)
+- AsyncAPI Initiative: [AsyncAPI documentation](https://www.asyncapi.com/docs)
+- RFC Editor: [RFC 9457 — Problem Details for HTTP APIs](https://www.rfc-editor.org/rfc/rfc9457.html)
 
 ---
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „API dokumentace bez support ping-pongu“ s integračními příběhy, minimální strukturou dokumentace, OpenAPI/AsyncAPI specifikací, jednotnými chybami podle RFC 9457, privacy-first popisem polí, sandboxem, changelogem, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Bezpečnostní hlavičky bez cargo cultu“ s inventurou externích zdrojů, postupným zavedením CSP, HSTS, referrer a permissions policy, typickými chybami, checklistem a vyplnitelnou šablonou bezpečnostní politiky.
 - 2026-09-27: Doplněna příloha „Staging a testovací data bez úniku produkce“ s oddělením prostředí, syntetickými seed daty, správou tajemství, ochranou přístupů, smoke testem, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Export dat a zrušení účtu bez držení rukojmí“ s praktickým návrhem exportních vrstev, bezpečností exportu, férovým cancel flow, rozlišením deaktivace/smazání/archivace, offboardingovým e-mailem, interním runbookem, checklistem a vyplnitelnou šablonou.
