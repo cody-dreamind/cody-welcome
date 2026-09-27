@@ -7251,6 +7251,216 @@ Poznámky pro příští revizi:
 Férový export a zrušení účtu nejsou známka slabosti. Jsou známka dospělého produktu. Když zákazníkovi dovolíš odejít důstojně, zvyšuješ šanci, že se někdy vrátí, doporučí tě dál nebo aspoň neodejde s pocitem, že musel uniknout oknem.
 
 
+
+## Příloha: Staging a testovací data bez úniku produkce
+
+Staging prostředí je skvělý sluha a mizerný trezor. Má pomoct ověřit release, integrace, e-maily, migrace a hraniční stavy před nasazením. Nemá být pohodlnou kopií produkce, kam se „dočasně“ nalije databáze zákazníků, protože se to zrovna hodí k testu. Dočasně je mimochodem nejdelší časová jednotka v IT. Hned po „jen rychlý hotfix“.
+
+Cíl stagingu není absolutní věrnost produkci. Cíl je dostatečná podobnost pro rozhodnutí, zda je změna připravená ven, aniž by tým zbytečně rozšiřoval riziko osobních údajů, obchodních dat a tajemství. GDPR princip minimalizace a omezení účelu je v tomhle nudně praktický: když pro test nepotřebuješ reálné osobní údaje, nenos je do testu jen proto, že se dobře klikají.
+
+> Codyho komentář: Produkční data ve stagingu jsou jako vzít si originál rodného listu na paintball. Možná se nic nestane. Ale když ano, budeš vypadat velmi kreativně a velmi nezodpovědně zároveň.
+
+### Rozděl prostředí podle účelu
+
+Malý tým nepotřebuje pět prostředí, která nikdo neumí udržet. Potřebuje jasnou hranici mezi vývojem, stagingem a produkcí.
+
+Praktické minimum:
+
+- Lokální vývoj: rychlé ověření změn na syntetických datech.
+- Preview prostředí: krátkodobé URL pro konkrétní pull request nebo větev.
+- Staging: stabilnější kopie aplikace pro smoke test, integrace a akceptaci.
+- Produkce: ostrý provoz se zákazníky, reálnými daty a nejpřísnějšími přístupy.
+
+Každé prostředí má mít vlastní databázi, vlastní úložiště souborů, vlastní API klíče a vlastní e-mailovou konfiguraci. Pokud staging používá produkční klíče, není to staging. Je to produkce s falešným knírem.
+
+Doporučené pravidlo:
+
+```text
+Čím blíž je prostředí produkci, tím víc se podobá architekturou. Ne daty.
+```
+
+Architektura může být podobná: stejný typ databáze, podobné fronty, podobné deploy kroky, podobná konfigurace reverzní proxy. Data mají být bezpečně vytvořená pro test: syntetická, anonymizovaná nebo výrazně omezená.
+
+### Testovací data: syntetická, anonymizovaná, nebo žádná
+
+Nejdřív se zeptej, co přesně chceš testem ověřit.
+
+Pokud testuješ layout, texty, formuláře, platební flow, oprávnění, e-mailové šablony nebo onboarding, obvykle stačí syntetická data. Vytvoř si sadu fiktivních zákazníků, tarifů, faktur, objednávek a incidentů. Dej jim realistickou strukturu, ale ne reálné osoby.
+
+Příklad syntetické sady pro B2B SaaS:
+
+- Firma „Severní Sova s.r.o.“ s tarifem Team.
+- Uživatel „Eva Testovací“ s rolí admin.
+- Uživatel „Petr Čtenář“ s rolí viewer.
+- Tři projekty: aktivní, pozastavený, archivovaný.
+- Dvě faktury: zaplacená a po splatnosti.
+- Jeden import s chybou a jeden dokončený export.
+
+Pokud testuješ výkon, migrace nebo datové hraniční stavy, možná potřebuješ produkčně podobný objem. To ještě neznamená produkční osobní údaje. Vygeneruj objem synteticky, případně použij anonymizovaný dataset, u kterého nejde rozumně obnovit identitu člověka.
+
+Pozor na pseudonymizaci. Když jen přepíšeš jména, ale necháš e-maily, telefonní čísla, IP adresy, interní poznámky, URL souborů nebo unikátní kombinace chování, data pořád mohou být citlivá. Anonymizace není kosmetický filtr. Je to návrh datové sady tak, aby z ní nešel zpátky složit člověk.
+
+### Seed data jako součást produktu
+
+Testovací data nepatří do něčí hlavy ani do starého SQL dumpu pojmenovaného `final_final_staging.sql`. Patří do verzovaného seed skriptu nebo fixture balíčku, který tým umí spustit opakovaně.
+
+Dobrá seed data mají:
+
+- jasný účel: onboarding demo, smoke test, oprávnění, fakturace, migrace,
+- stabilní identifikátory: stejné testovací účty a scénáře,
+- dokumentovaný reset: jak se prostředí vrátí do čistého stavu,
+- bezpečný obsah: žádné reálné e-maily zákazníků, tokeny, soubory ani interní poznámky,
+- vlastníka: někdo odpovídá za aktualizaci při změně produktu.
+
+Příklad struktury:
+
+```text
+/tests/data/
+  seed-basic.ts          # minimální sada pro lokální vývoj
+  seed-billing.ts        # fakturace, tarify, platební stavy
+  seed-permissions.ts    # role, pozvánky, omezení přístupu
+  seed-edge-cases.ts     # dlouhé názvy, diakritika, prázdné stavy
+  README.md              # jak seed spustit a kdy ho aktualizovat
+```
+
+Když přidáš novou produktovou funkci, přidej k ní jeden testovací scénář. Ne proto, že checklist chce oběť. Protože za tři měsíce někdo bude potřebovat ověřit release v pátek v 16:40 a syntetická data mu zachrání víkend.
+
+### Tajemství a klíče drž odděleně
+
+Staging nesmí mít přístup k produkčním tajemstvím. OWASP ve svých doporučeních pro správu tajemství zdůrazňuje oddělení produkčních a vývojových tajemství; prakticky to znamená samostatné klíče, samostatné role a možnost klíče rychle rotovat bez dopadu na produkci.
+
+Co oddělit vždy:
+
+- databázová hesla,
+- API tokeny třetích stran,
+- SMTP/API klíče pro e-maily,
+- webhook secrets,
+- platební brány a jejich testovací režimy,
+- objektová úložiště,
+- OAuth aplikace,
+- administrátorské účty,
+- šifrovací klíče a signing secrets.
+
+Pro staging nastav bezpečné výchozí mantinely:
+
+- E-maily neposílej skutečným zákazníkům; používej sandbox inbox, přepis příjemce nebo blokaci domén.
+- Webhooky směruj na testovací endpointy.
+- Platební bránu používej v testovacím režimu.
+- Externí integrace označ jasným prefixem, například `[STAGING]`.
+- Produkční administrátor nemá automaticky právo číst staging a naopak.
+
+Důležité je i logování. Když staging pomáhá ladit chyby, svádí to logovat všechno. Jenže log s osobními údaji je také datový sklad. Maskuj tokeny, e-maily, hlavičky, session identifikátory a obsahy polí, které nejsou nutné pro diagnostiku.
+
+### Přístupy: staging není veřejné hřiště
+
+Staging bývá slabší než produkce: méně monitoringu, méně pozornosti, slabší hesla, veřejné URL a „dočasné“ účty. Útočník ale neřeší název prostředí. Řeší, co z něj jde získat.
+
+Praktická pravidla:
+
+- Staging chraň přihlášením, IP allowlistem nebo jiným přístupovým filtrem.
+- Nepovoluj indexaci ve vyhledávačích; použij `noindex`, ochranu přístupu a rozumný `robots.txt`, ale nespoléhej na `robots.txt` jako na zabezpečení.
+- Nepoužívej jednoduchá sdílená hesla typu `demo/demo`.
+- Testovací účty dávej do správce hesel nebo identity systému.
+- Pravidelně maž preview prostředí po sloučení nebo zavření větve.
+- Přístupy do stagingu kontroluj při stejném offboardingu jako ostatní firemní nástroje.
+
+Pokud staging obsahuje i jen omezeně citlivá data, měl by být v registru dodavatelů, datové mapě a retenčním kalendáři. Ne jako právní paráda pro šanon, ale aby tým věděl, co existuje a kdo to má pod kontrolou.
+
+### Release test bez produkčního dumpu
+
+Před nasazením si vytvoř krátký smoke test. Nemá ověřit všechno. Má rychle potvrdit, že kritické cesty fungují.
+
+Příklad pro SaaS:
+
+1. Přihlášení testovacího admina.
+2. Vytvoření nového projektu.
+3. Pozvání uživatele s nižší rolí.
+4. Akce, kterou nový release mění.
+5. Fakturační nebo tarifní obrazovka.
+6. Export dat.
+7. Odhlášení a kontrola, že chráněná stránka není dostupná.
+8. Jeden negativní test: uživatel bez oprávnění se nedostane k cizím datům.
+
+Když smoke test selže, neřeš filozofii. Release se zastaví, chyba se zapíše, opraví se příčina a test se zopakuje. Není ostuda zastavit release. Ostuda je pouštět ho dál jen proto, že „už jsme všem řekli, že dneska deployujeme“.
+
+### Checklist stagingu bez úniku produkce
+
+- Má staging vlastní databázi, úložiště, API klíče a e-mailový režim?
+- Je jasně zakázané kopírovat produkční data bez schváleného účelu a ochrany?
+- Existuje seed skript nebo fixture sada pro běžné scénáře?
+- Umí tým prostředí resetovat bez ručního kouzlení v databázi?
+- Jsou testovací e-maily blokované, přesměrované nebo sandboxované?
+- Jsou tokeny, session hodnoty a citlivá pole maskované v logách?
+- Je staging chráněný před veřejným přístupem a indexací?
+- Mažou se preview prostředí po sloučení nebo zavření větve?
+- Jsou staging přístupy součástí onboardingu a offboardingu?
+- Má release krátký smoke test s pozitivními i negativními scénáři?
+
+### Mini šablona stagingového provozního listu
+
+```text
+Název prostředí:
+
+Účel prostředí:
+- Lokální vývoj / preview / staging / demo / jiné:
+
+Vlastník prostředí:
+
+Kdo má přístup:
+- Vývoj:
+- Support:
+- Klient / externí tester:
+- Jiní:
+
+Ochrana přístupu:
+- Přihlášení:
+- IP allowlist / VPN:
+- Noindex:
+- Další:
+
+Databáze:
+- Název / služba:
+- Obsahuje produkční data? Ano / Ne
+- Pokud ano, proč a na jak dlouho:
+- Anonymizace / syntetická data:
+
+Seed data:
+- Umístění skriptu:
+- Jak spustit:
+- Jak resetovat:
+- Hlavní testovací scénáře:
+
+Tajemství a integrace:
+- Správa tajemství:
+- E-mailový režim:
+- Platební režim:
+- Webhooky:
+- OAuth / SSO:
+
+Logování:
+- Co se loguje:
+- Co se maskuje:
+- Retence logů:
+
+Preview prostředí:
+- Kdy vzniká:
+- Kdy se maže:
+- Kdo odpovídá za úklid:
+
+Smoke test před releasem:
+1.
+2.
+3.
+4.
+5.
+
+Poslední revize:
+Další revize:
+Poznámky:
+```
+
+Staging má být bezpečný cvičný prostor, ne zadní dveře do produkce. Když ho navrhneš dobře, urychlí vývoj, zklidní release a sníží riziko, že se testovací pohodlí promění v datový incident. A to je přesně ten typ nudy, který mám v provozu rád.
+
 # Zdroje
 
 - W3C: [Web Content Accessibility Guidelines (WCAG) 2.2](https://www.w3.org/TR/wcag/)
@@ -7279,6 +7489,8 @@ Férový export a zrušení účtu nejsou známka slabosti. Jsou známka dospěl
 - OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - OWASP Cheat Sheet Series: [Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)
 - OWASP Cheat Sheet Series: [Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
+- OWASP Cheat Sheet Series: [Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
+- OWASP Cheat Sheet Series: [CI/CD Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/CI_CD_Security_Cheat_Sheet.html)
 - OWASP Developer Guide: [Implement Security Logging and Monitoring](https://devguide.owasp.org/en/04-design/02-web-app-checklist/09-logging-monitoring/)
 - MDN Web Docs: [How to structure a web form](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/How_to_structure_a_web_form)
 - web.dev: [Core Web Vitals](https://web.dev/articles/vitals)
@@ -7307,6 +7519,7 @@ Férový export a zrušení účtu nejsou známka slabosti. Jsou známka dospěl
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „Staging a testovací data bez úniku produkce“ s oddělením prostředí, syntetickými seed daty, správou tajemství, ochranou přístupů, smoke testem, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Export dat a zrušení účtu bez držení rukojmí“ s praktickým návrhem exportních vrstev, bezpečností exportu, férovým cancel flow, rozlišením deaktivace/smazání/archivace, offboardingovým e-mailem, interním runbookem, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „SaaS metriky bez vanity dashboardu“ s rozhodovacími metrikami, rytmem kontrol, privacy-first eventy, segmentací bez profilování, strážnými metrikami, checklistem a vyplnitelnou šablonou metrikového listu.
 - 2026-09-27: Doplněna příloha „Přístupnost webu bez alibistického checklistu“ s proudem úkolů, semantickým HTML, kontrastem, alt texty, formuláři, 45minutovým auditem, checklistem a vyplnitelnou šablonou.
