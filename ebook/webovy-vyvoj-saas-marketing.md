@@ -9316,6 +9316,200 @@ Nejlepší partnerské programy nejsou ty, které mají nejvíc odkazů. Jsou to
 
 Partnerství má být zkratka k důvěře, ne zkratka kolem soukromí. Když nastavíš nabídku, měření a sdílení dat jednoduše, bude se lépe spát tobě, partnerovi i člověku, který kliknul na doporučení. A spánek je podceňovaný growth hack. Bohužel nejde dát do dashboardu jako gradientový graf.
 
+## Příloha: Obsahový refresh bez honby za algoritmem
+
+Starší článek, landing page nebo dokumentace často nepotřebuje nový kabát. Potřebuje přesnější odpověď, lepší strukturu a pár poctivých aktualizací. Obsahový refresh není trik na vyhledávač. Je to údržba důvěry. Pokud stránka pořád dostává návštěvy, odkazy nebo obchodní dotazy, zaslouží si stejnou péči jako produktová funkce.
+
+Špatný refresh vypadá tak, že někdo přepíše nadpis, doplní aktuální rok do titulku, přidá tři buzzwordy a odškrtne úkol. Dobře, gratuluji, stránka má nový klobouk. Problém je, že pořád kulhá.
+
+Dobrý refresh začíná otázkou: „Co se má po přečtení změnit pro člověka, který stránku otevřel dnes?“
+
+### Vyber stránky podle dopadu, ne podle nostalgie
+
+Neobnovuj obsah jen proto, že je starý. Některé staré články jsou pořád užitečné, některé nové jsou mrtvé už od publikace. Prioritu dej stránkám, které mají praktický dopad na rozhodování návštěvníka.
+
+Vyber kandidáty podle kombinace těchto signálů:
+
+- stránka přivádí relevantní návštěvy z vyhledávání, RSS, přímých odkazů nebo partnerů,
+- obchod nebo podpora na ni často odkazuje,
+- obsahuje postup, který se v produktu nebo službě změnil,
+- odpovídá na otázku, kterou zákazníci pořád řeší,
+- má dobrý potenciál, ale slabou strukturu nebo nejasné CTA,
+- obsahuje zastaralé právní, technické nebo cenové tvrzení.
+
+Privacy-first přístup tady pomáhá: nepotřebuješ sledovat jednotlivé lidi. Stačí agregované signály, interní zpětná vazba, dotazy zákazníků a zdravý rozum. Ten poslední nástroj je nepopulární, protože nemá enterprise dashboard.
+
+### Udělej rychlý obsahový audit
+
+Než začneš přepisovat, projdi stránku jako člověk, který má málo času a žádný kontext. Pokud odpověď nenajde rychle, problém není v jeho trpělivosti. Problém je v obsahu.
+
+Audit na 20 minut:
+
+1. Napiš jednou větou, komu stránka pomáhá.
+2. Napiš jednou větou, jaké rozhodnutí má podpořit.
+3. Označ odstavce, které jen vyplňují prostor.
+4. Označ tvrzení, která potřebují zdroj nebo aktualizaci.
+5. Zkontroluj, zda první obrazovka říká konkrétní hodnotu.
+6. Najdi místo, kde má návštěvník udělat další krok.
+7. Zkontroluj, jestli stránka nesbírá víc dat, než potřebuje.
+
+Příklad výsledku auditu:
+
+```text
+Stránka pomáhá zakladatelům B2B SaaS rozhodnout, zda potřebují vlastní status page.
+Problém: článek vysvětluje principy, ale chybí mu rozhodovací checklist a příklad pro malý tým.
+Akce: doplnit scénář, checklist, datovou poznámku a odkaz na incidentovou rutinu.
+```
+
+### Rozděl změny na tři typy
+
+Při refreshi nemíchej všechno do jedné hromady. Jinak skončíš u nekonečného přepisování, které nikdo nevydá.
+
+**1. Přesnost**
+
+Oprav fakta, názvy, odkazy, screenshoty, příklady a postupy. Pokud píšeš o právních povinnostech, cenách, standardech nebo konkrétních nástrojích, ověř aktuální zdroje a přidej odkaz přímo k tvrzení nebo do zdrojů.
+
+**2. Použitelnost**
+
+Zlepši strukturu, nadpisy, shrnutí, příklady a checklist. Často stačí doplnit sekci „Kdy to použít“, „Kdy to nepoužít“ nebo „První krok za 30 minut“.
+
+**3. Distribuce**
+
+Uprav titulek, meta description, interní odkazy, RSS popisek a krátké shrnutí pro přímé sdílení. Cílem není nahnat lidi do platformního trychtýře. Cílem je dát jim jasný důvod kliknout a ještě jasnější důvod zůstat.
+
+> Codyho komentář: Nejlepší SEO refresh je ten, po kterém je stránka užitečnější i kdyby zítra vyhledávače odjely na wellness pobyt a týden nikomu nic neukázaly.
+
+### Nepřepisuj hlas, zpřesni pomoc
+
+U starších textů je lákavé všechno přepsat do nového stylu. Jenže konzistentní hlas značky je aktivum. Pokud článek funguje, zachovej jeho tón a oprav hlavně to, co brání užitku.
+
+Praktická pravidla:
+
+- zkrať úvod, pokud neříká problém a slib výsledku,
+- přidej konkrétní příklad tam, kde je jen obecná rada,
+- nahraď interní slang jazykem zákazníka,
+- doplň rozhodovací kritéria místo vágních doporučení,
+- odstraň odstavce, které opakují stejnou myšlenku,
+- přidej přímý další krok: checklist, kontakt, dokumentaci, RSS nebo související článek.
+
+Příklad slabé věty:
+
+```text
+Naše řešení pomáhá firmám optimalizovat digitální procesy.
+```
+
+Lepší verze:
+
+```text
+Pomůžeme ti zmapovat opakující se ruční práci v obchodě a navrhnout první automatizaci, kterou tým zvládne používat bez nového datového chaosu.
+```
+
+Ta druhá věta je delší, ale nese konkrétní situaci, výsledek i hranici. To je obchodně užitečnější než pět slov v mlze.
+
+### Aktualizuj interní odkazy jako navigaci, ne jako pavučinu
+
+Interní odkazy nejsou jen SEO dekorace. Jsou navigace pro člověka, který řeší problém po krocích. Po refreshi se vždy zeptej: „Kam má čtenář logicky pokračovat?“
+
+Dobré interní odkazy:
+
+- vedou na pokračování stejného rozhodnutí,
+- vysvětlují technický detail zmíněný v textu,
+- ukazují šablonu nebo checklist,
+- pomáhají s dalším krokem v nákupu nebo implementaci,
+- mají popisný text odkazu, ne „klikněte zde“.
+
+Špatné interní odkazy:
+
+- vedou na náhodné stránky jen kvůli počtu odkazů,
+- používají stejný anchor text všude,
+- odvádějí člověka před dokončením hlavního rozhodnutí,
+- schovávají důležitou odpověď za několik kliknutí.
+
+Obsahový refresh má web zpřehlednit. Pokud po něm vznikne labyrint, neudělal jsi content ops. Udělal jsi escape room.
+
+### Měř změnu střídmě
+
+Po refreshi sleduj agregované signály. Nepotřebuješ znát každý pohyb myši. Potřebuješ vědět, jestli stránka lépe pomáhá.
+
+Rozumné signály:
+
+- počet návštěv stránky v čase,
+- počet kliknutí na hlavní CTA,
+- počet relevantních poptávek nebo registrací,
+- dotazy, které po přečtení stále chodí na podporu,
+- interní zpětná vazba od obchodu nebo zákaznické péče,
+- počet přímých odkazů z newsletteru, RSS čteček nebo partnerských stránek, pokud ho umíš měřit bez osobního profilu.
+
+Neřeš samostatně metriky, které nevedou k rozhodnutí. Pokud stránka získá víc impresí, ale přivádí horší dotazy, není to výhra. Je to hezčí siréna.
+
+### Refresh plán na 60 minut
+
+Když máš málo času, použij jednoduchý sprint:
+
+1. **10 minut:** vyber jednu stránku a napiš její rozhodovací úlohu.
+2. **10 minut:** označ zastaralá tvrzení, slabé odstavce a chybějící příklady.
+3. **20 minut:** přepiš nejdůležitější části: úvod, strukturu, příklad, CTA.
+4. **10 minut:** doplň interní odkazy, zdroje a datovou poznámku.
+5. **10 minut:** zkontroluj titulky, meta description, RSS shrnutí a další krok.
+
+Není cílem udělat z každé stránky román. Cílem je posunout ji z „nějaký obsah“ na „užitečný pracovní nástroj“.
+
+### Checklist obsahového refreshe
+
+- [ ] Víme, pro koho stránka je.
+- [ ] Víme, jaké rozhodnutí má podpořit.
+- [ ] Úvod rychle říká problém a výsledek.
+- [ ] Zastaralá tvrzení jsou opravená nebo odstraněná.
+- [ ] Aktuální fakta, právní povinnosti, ceny a nástroje mají zdroj.
+- [ ] Text obsahuje konkrétní příklad, checklist nebo šablonu.
+- [ ] CTA odpovídá fázi rozhodování návštěvníka.
+- [ ] Interní odkazy vedou na logické další kroky.
+- [ ] Stránka nesbírá zbytečná osobní data.
+- [ ] Měření je agregované a má jasný účel.
+- [ ] Datum aktualizace je zapsané tam, kde to čtenáři pomůže.
+- [ ] Existuje plán, kdy stránku znovu zkontrolujeme.
+
+### Mini šablona obsahového refreshe
+
+```markdown
+# Refresh stránky: [název / URL]
+
+## Rozhodovací úloha
+- Cílový čtenář:
+- Problém:
+- Rozhodnutí po přečtení:
+- Hlavní další krok:
+
+## Audit
+- Co je stále užitečné:
+- Co je zastaralé:
+- Co je nejasné:
+- Co chybí:
+- Co smazat:
+
+## Úpravy
+- Přesnost:
+- Použitelnost:
+- Interní odkazy:
+- CTA:
+- Zdroje:
+- Datová poznámka:
+
+## Privacy-first měření
+- Co měříme:
+- Proč to měříme:
+- Co neměříme:
+- Kdo výsledek vyhodnotí:
+
+## Kontrola po vydání
+- Datum vydání:
+- Datum první kontroly:
+- Signály ke sledování:
+- Rozhodnutí po kontrole:
+```
+
+Obsahový refresh je jedna z nejlevnějších forem produktové práce. Bereš něco, co už existuje, a děláš z toho lepší odpověď. Bez sledovacího cirkusu, bez falešné urgentnosti a bez toho, aby ses tvářil, že změna data v titulku je strategie. Není. Je to jen kosmetika s kalendářem.
+
 # Zdroje
 
 - European Data Protection Board: [Personal data breaches](https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en)
@@ -9389,6 +9583,7 @@ Partnerství má být zkratka k důvěře, ne zkratka kolem soukromí. Když nas
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „Obsahový refresh bez honby za algoritmem“ s výběrem stránek podle dopadu, rychlým auditem, rozdělením změn na přesnost/použitelnost/distribuci, střídmým měřením, 60minutovým plánem, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Partnerské kampaně bez sledovacího cirkusu“ s typy partnerství, datově střídmým měřením kampaní, pravidly pro kupony a atribuci, partnerskou landing page, měsíčním vyhodnocením, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Prioritizace backlogu bez produktového hazardu“ s rozlišením signálů a rozhodnutí, jednoduchým skórováním, datovým filtrem, rozdělením backlogu na police, týdenní rutinou, checklistem a vyplnitelnou šablonou prioritizačního listu.
 - 2026-09-27: Doplněna příloha „Changelog a release notes bez produktové mlhy“ s rozlišením technického changelogu a zákaznických release notes, privacy-first komunikací datových změn, deprekačním postupem, checklistem a vyplnitelnou šablonou.
