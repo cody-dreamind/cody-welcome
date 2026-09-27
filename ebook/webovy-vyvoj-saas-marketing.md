@@ -8071,6 +8071,199 @@ Tohle je nudná hygiena, která chrání tým před druhým incidentem vytvořen
 Incidentová komunikace má jeden jednoduchý cíl: snížit nejistotu. Ne vyhrát PR soutěž, ne znít neprůstřelně, ne ukázat, že tým zná slovo „mitigace“. Když zákazník po přečtení ví, co se stalo, co to znamená pro něj a kdy dostane další informaci, udělal jsi kus dobré práce.
 
 
+## Příloha: Lokální vývoj a secrets bez chaosu
+
+Lokální vývoj je místo, kde se malé týmy často tváří, že bezpečnost začíná až v produkci. Nezačíná. Začíná ve chvíli, kdy někdo pošle kolegovi `.env` přes chat, použije produkční dump pro testování nebo nechá API klíč v historii gitu. Produkce pak jen zdědí chaos, který vznikl na notebooku u kafe.
+
+Dobrá zpráva: bezpečný lokální vývoj nemusí být korporátní rituál s padesáti formuláři. Stačí pár nudných pravidel, která tým opravdu dodržuje. OWASP ve svých materiálech ke správě tajemství a CI/CD opakovaně zdůrazňuje oddělení tajemství od zdrojového kódu, omezení přístupů a kontrolu automatizovaných pipeline ([OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html), [OWASP CI/CD Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/CI_CD_Security_Cheat_Sheet.html)). Přeloženo do řeči malého SaaS: klíče nepatří do repozitáře, testy nepotřebují reálné zákazníky a každý token má mít majitele.
+
+> Codyho komentář: Nejhorší bezpečnostní politika je „všichni víme, co děláme“. Nevíme. Jsme lidi. Občas máme pátek, hlad a otevřených třicet tabů. Proto potřebujeme jednoduchý systém, ne hrdinskou paměť.
+
+### Rozděl konfiguraci podle prostředí
+
+Každý projekt by měl mít jasně oddělené hodnoty pro lokál, staging a produkci. Nejen technicky, ale i mentálně. Lokální vývoj má sloužit k práci na funkcích, ne k náhodnému přístupu do živých dat. Staging má ověřovat release, ne být druhou produkcí bez pravidel. Produkce má být chráněná, auditovatelná a přístupná jen přes nutné role.
+
+Praktické minimum:
+
+- `.env.example` obsahuje názvy proměnných, bezpečné placeholdery a krátké vysvětlení,
+- skutečný `.env` je v `.gitignore`,
+- produkční secrets se nikdy nekopírují do lokálního prostředí,
+- staging používá vlastní klíče a vlastní databázi,
+- každý externí token má uvedený účel, vlastníka a datum revize,
+- rotace klíče je popsaná tak, aby ji zvládl někdo jiný než původní autor.
+
+Příklad dobrého `.env.example`:
+
+```env
+APP_ENV=local
+APP_URL=http://localhost:3000
+
+# Lokální databáze bez produkčních dat.
+DATABASE_URL=postgres://app:app@localhost:5432/app_local
+
+# Testovací SMTP nebo lokální mail catcher, ne produkční odesílání.
+SMTP_HOST=localhost
+SMTP_PORT=1025
+
+# Placeholder. Skutečná hodnota se bere ze správce secrets.
+PAYMENT_API_KEY=replace-with-development-key
+```
+
+Tahle ukázka neříká jen „co vyplnit“. Říká i „co sem nepatří“. To je rozdíl mezi dokumentací a pastí.
+
+### Secrets nejsou poznámka v chatu
+
+Tajemství se často neprovalí sofistikovaným útokem, ale obyčejnou pohodlností. Klíč skončí ve Slacku, v screenshotu, v issue, v AI promptu, v exportu logů nebo v historii commitu. Jakmile se tajemství rozleze do více kanálů, nejde ho spolehlivě „vzít zpátky“. Musí se rotovat.
+
+Jednoduchá pravidla pro tým:
+
+- Klíče se předávají jen přes správce secrets nebo bezpečný jednorázový kanál.
+- Do chatu se neposílají celé tokeny, ani „jen dočasně“.
+- Do ticketů a dokumentace patří název proměnné, ne její hodnota.
+- Screenshoty terminálu se před sdílením kontrolují.
+- AI asistenti nedostávají produkční secrets ani dumpy konfigurace.
+- Když se klíč objeví v gitu nebo chatu, neřeší se mazáním zprávy, ale rotací.
+
+Mini rozhodovací pravidlo: pokud by hodnota umožnila přístup, změnu dat, odesílání e-mailů, platbu, deployment nebo čtení zákaznického obsahu, je to secret. Chovej se k tomu podle toho. Žádné „ale vždyť je to jen staging“. Staging bývá často most do produkce v legračním převleku.
+
+### Lokální data: raději syntetická než pohodlná
+
+Produkční databázový dump v lokálu je pohodlný jako motorová pila v obýváku. Občas se hodí, ale nechceš ji mít jako standardní vybavení. Pro běžný vývoj používej syntetická seed data, anonymizované vzorky nebo malé ručně připravené scénáře.
+
+Dobrá lokální data mají tři vlastnosti:
+
+1. **Jsou bezpečná** — neobsahují reálné osobní údaje, zprávy, tokeny ani fakturační detaily.
+2. **Jsou reprezentativní** — pokrývají běžné i hraniční stavy produktu.
+3. **Jsou obnovitelná** — dají se vygenerovat znovu stejným příkazem.
+
+Příklad seed scénářů pro malý B2B SaaS:
+
+- nový účet bez dat,
+- účet po prvním onboardingu,
+- účet s více členy týmu,
+- účet s expirujícím tarifem,
+- účet s chybou fakturace,
+- účet se zrušením a exportem dat,
+- účet s dlouhým názvem firmy a diakritikou,
+- účet s prázdnými stavy, aby se testovalo mikrocopy.
+
+Tohle pomůže vývoji víc než náhodný dump tisíců reálných řádků. Vývojář rychle najde stav, který potřebuje, a tým nemusí vysvětlovat, proč má každý notebook malou zoo zákaznických dat.
+
+### Git hygiena: prevence je levnější než omluva
+
+Repozitář je dlouhá paměť projektu. Co se jednou dostane do historie, může žít v klonech, forkech, CI cache a zálohách. Proto je lepší zabránit úniku před commitem než potom uklízet digitální konfety.
+
+Praktická opatření:
+
+- používej `.gitignore` pro `.env`, lokální databáze, exporty a dočasné soubory,
+- měj `.env.example`, aby lidé nemuseli kopírovat reálný `.env`,
+- zapni lokální nebo CI kontrolu na náhodně commitnuté secrets,
+- při úniku klíče rotuj hodnotu a zkontroluj logy použití,
+- neukládej produkční exporty do repozitáře ani „jen na chvíli“,
+- u veřejných repozitářů počítej s tím, že chybu někdo najde rychleji než ty.
+
+Když tajemství unikne do gitu, samotné přepsání historie nestačí. Pomůže snížit viditelnost, ale nemůžeš spoléhat, že všechny kopie zmizely. Bezpečná odpověď je rotace, kontrola dopadu a zápis do incidentového nebo provozního deníku.
+
+### Onboarding vývojáře bez lovu pokladů
+
+Nový člověk by neměl první den hádat, které proměnné potřebuje, komu napsat o přístup a proč lokální projekt posílá e-maily zákazníkům. Onboarding do vývoje má být reproducible. Ano, to je anglicky, protože „znovuvyrobitelný“ zní jako součástka do traktoru.
+
+Minimum pro dobrý vývojářský onboarding:
+
+- jeden příkaz nebo krátký postup pro spuštění lokálního prostředí,
+- seznam nutných nástrojů a verzí,
+- `.env.example` s komentáři,
+- bezpečný způsob získání development secrets,
+- seed příkaz pro testovací data,
+- smoke test po spuštění,
+- kontaktní osoba pro přístupy,
+- pravidla, co se nesmí dávat do AI nástrojů a ticketů.
+
+Příklad onboardingového kroku:
+
+```text
+1. Zkopíruj .env.example do .env.
+2. Vygeneruj lokální databázi: npm run db:reset -- --seed.
+3. Development secrets si vyžádej ve správci secrets ve skupině dev-app-local.
+4. Ověř spuštění: npm run test:smoke.
+5. Nepracuj s produkčními exporty bez schváleného důvodu a zápisu v datové mapě.
+```
+
+Tohle šetří čas seniorům, snižuje počet divných lokálních hacků a hlavně brání tomu, aby se bezpečnost řešila až v okamžiku průšvihu.
+
+### CI/CD: automatizace nesmí být kouzelná skříňka
+
+Pipeline má často víc práv než běžný vývojář. Umí sestavit aplikaci, číst secrets, publikovat build, spouštět migrace a někdy i deployovat do produkce. Proto si zaslouží stejnou pozornost jako administrační účet.
+
+Zkontroluj:
+
+- které secrets pipeline vidí,
+- jestli se secrets neposílají do logů,
+- kdo může měnit workflow soubory,
+- jestli pull request zvenku nemá přístup k citlivým hodnotám,
+- jestli produkční deploy vyžaduje jasnou větev, tag nebo schválení,
+- jestli rollback nevyžaduje člověka, který je zrovna na dovolené,
+- jestli build artefakty neobsahují `.env`, source mapy s citlivými cestami nebo interní exporty.
+
+Privacy-first pohled: CI/CD nemá být další datová skládka. Logy z buildu mají pomáhat ladit deployment, ne archivovat obsah proměnných, HTTP hlaviček, zákaznických payloadů nebo interních tokenů.
+
+### Checklist lokálního vývoje a secrets
+
+- [ ] Projekt má aktuální `.env.example` bez reálných tajemství.
+- [ ] Skutečné `.env` soubory, exporty a lokální databáze jsou mimo git.
+- [ ] Produkční secrets se nepoužívají pro lokální vývoj.
+- [ ] Development a staging mají vlastní omezené klíče.
+- [ ] Seed data jsou syntetická nebo bezpečně anonymizovaná.
+- [ ] Nový vývojář dokáže spustit projekt podle dokumentace bez lovení v chatu.
+- [ ] CI/CD pipeline má jen nutná oprávnění a chrání secrets v logách.
+- [ ] Existuje postup pro rotaci klíče při úniku.
+- [ ] AI nástroje nedostávají produkční konfiguraci ani zákaznická data.
+- [ ] Revize secrets a přístupů má vlastníka a termín.
+
+### Mini šablona provozního listu pro secrets
+
+```text
+# Secrets a lokální vývoj: [projekt]
+
+## Prostředí
+- Local:
+- Staging:
+- Production:
+
+## Konfigurace
+- Umístění .env.example:
+- Správce secrets:
+- Kdo schvaluje přístup:
+- Kdo vlastní revizi:
+
+## Zakázané postupy
+- Produkční dump v lokálu:
+- Posílání secrets v chatu:
+- Vkládání konfigurace do AI nástrojů:
+- Sdílení screenshotů s tokeny:
+
+## Seed data
+- Příkaz pro vytvoření:
+- Pokryté scénáře:
+- Obsahuje reálná data? ne / ano, důvod:
+- Datum poslední kontroly:
+
+## CI/CD
+- Které secrets pipeline používá:
+- Kdo může měnit workflow:
+- Jak se chrání logy:
+- Jak se dělá rollback:
+
+## Rotace
+- Kdy se klíče rotují pravidelně:
+- Co dělat při úniku:
+- Kde se zapíše incident:
+- Datum příští revize:
+```
+
+Lokální vývoj má být rychlý, ale ne bez paměti. Když tým ví, odkud bere konfiguraci, jak vytváří testovací data a co dělat při úniku klíče, ubude improvizace. A improvizace je skvělá v jazzu, horší v zacházení s produkčními tokeny.
+
+
 # Zdroje
 
 - European Data Protection Board: [Personal data breaches](https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en)
@@ -8138,6 +8331,7 @@ Incidentová komunikace má jeden jednoduchý cíl: snížit nejistotu. Ne vyhr�
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „Lokální vývoj a secrets bez chaosu“ s oddělením konfigurace podle prostředí, pravidly pro secrets, syntetickými seed daty, git hygienou, onboardingem vývojáře, CI/CD kontrolami, checklistem a vyplnitelnou šablonou provozního listu.
 - 2026-09-27: Doplněna příloha „Incidentová komunikace bez paniky a mlžení“ s rolemi pro malý tým, vyhodnocením dopadu na osobní data, status komunikací, postmortemem, checklistem a šablonou incidentového záznamu.
 - 2026-09-27: Doplněna příloha „API dokumentace bez support ping-pongu“ s integračními příběhy, minimální strukturou dokumentace, OpenAPI/AsyncAPI specifikací, jednotnými chybami podle RFC 9457, privacy-first popisem polí, sandboxem, changelogem, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Bezpečnostní hlavičky bez cargo cultu“ s inventurou externích zdrojů, postupným zavedením CSP, HSTS, referrer a permissions policy, typickými chybami, checklistem a vyplnitelnou šablonou bezpečnostní politiky.
