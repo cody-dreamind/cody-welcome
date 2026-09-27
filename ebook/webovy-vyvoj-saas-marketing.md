@@ -5530,6 +5530,211 @@ Co záměrně neříkáme marketingovým jazykem:
 Mikrocopy je drobná práce s velkým pákovým efektem. Když je dobré, produkt působí klidně, férově a kompetentně. Když je špatné, i technicky výborný SaaS začne působit jako pojišťovací formulář po třetí kávě. Privacy-first značka se nepozná jen podle zásad ochrany osobních údajů. Pozná se podle každého malého textu, který uživateli říká pravdu v momentě rozhodnutí.
 
 
+## Příloha: Produktové experimenty bez profilování uživatelů
+
+Experimentování je zdravé. Šmírovací experimentování zdravé není. Malý SaaS nebo web nepotřebuje hned sledovat každý pohyb kurzoru, skládat psychologické profily a posílat data do pěti reklamních systémů. Potřebuje vědět, jestli změna pomohla správnému rozhodnutí: registraci, odeslání poptávky, pochopení ceny, dokončení onboardingu nebo návratu ke klíčové funkci.
+
+Privacy-first experiment má být malý, srozumitelný a vratný. Jeho cílem není „vytěžit uživatele“, ale zlepšit produkt bez zbytečného sběru dat.
+
+> Codyho komentář: Když experiment potřebuje tolik osobních dat, že k němu musíš kreslit detektivní nástěnku se špendlíky, možná netestuješ hypotézu. Možná jen hledáš výmluvu pro datový bordel.
+
+### Začni hypotézou, ne nástrojem
+
+Špatný začátek zní: „Nasadíme A/B testing platformu a uvidíme.“ Dobrý začátek zní: „Myslíme si, že lidé nerozumí rozdílu mezi tarify, protože často klikají na FAQ a nepokračují na kontakt. Zkusíme přepsat cenovou sekci a budeme sledovat počet kvalifikovaných kliknutí na konzultaci.“
+
+Praktická šablona hypotézy:
+
+```text
+Věříme, že [konkrétní problém]
+způsobuje [pozorovaný dopad].
+Když změníme [jednu věc],
+mělo by se zlepšit [jedna hlavní metrika],
+aniž by se zhoršilo [ochranná metrika].
+```
+
+Příklad pro SaaS:
+
+```text
+Věříme, že noví uživatelé odkládají pozvánku týmu,
+protože nevidí, proč je potřeba už v prvním nastavení.
+Když přidáme krátké vysvětlení a možnost pozvat tým později,
+mělo by se zlepšit dokončení onboardingu,
+aniž by se zhoršil počet aktivních týmových účtů po 14 dnech.
+```
+
+Tahle formulace chrání před dvěma problémy: testováním všeho najednou a vítězstvím podle jedné líbivé metriky, která ve skutečnosti škodí produktu.
+
+### Co měřit anonymně nebo agregovaně
+
+Ne každý experiment potřebuje uživatelskou identitu. U marketingového webu často stačí agregované události: zobrazení stránky, kliknutí na konkrétní CTA, odeslání formuláře, otevření RSS odkazu nebo stažení checklistu. U SaaS produktu můžeš sledovat produktové milníky bez ukládání obsahu uživatelských dat.
+
+Rozumné eventy:
+
+- `pricing_cta_clicked`,
+- `demo_request_sent`,
+- `onboarding_step_completed`,
+- `team_invite_skipped`,
+- `export_created`,
+- `rss_link_opened`,
+- `docs_search_used`.
+
+Rizikové eventy:
+
+- celé vyhledávací dotazy obsahující osobní údaje,
+- hodnoty z formulářových polí,
+- názvy projektů, klientů nebo dokumentů,
+- e-mailové adresy v parametrech URL,
+- session replay na stránkách s citlivým obsahem,
+- kombinace dat, podle které jde snadno poznat konkrétního člověka.
+
+Dobré pravidlo: event má popsat akci, ne obsah života uživatele. „Uživatel vytvořil export“ je provozní signál. „Uživatel exportoval seznam zákazníků firmy X“ je zbytečně citlivý detail.
+
+### Varianty bez temných vzorů
+
+Experiment není omluva pro manipulaci. Netestuj, jestli lidé víc klikají, když jim skryješ cenu, předvyplníš souhlas, zamlčíš storno nebo uděláš odmítnutí složitější než přijetí. Možná tím krátkodobě zvedneš metriku. Dlouhodobě tím zvedneš počet lidí, kteří ti nevěří.
+
+Férové experimenty:
+
+- jasnější nadpis hero sekce,
+- kratší formulář,
+- lepší vysvětlení rozdílů mezi tarify,
+- jiné pořadí často kladených otázek,
+- viditelnější informace o evropském provozu,
+- konkrétnější text potvrzení po odeslání,
+- lepší prázdný stav v aplikaci.
+
+Podezřelé experimenty:
+
+- falešná časová naléhavost,
+- schované odmítnutí marketingového souhlasu,
+- „nejpopulárnější“ tarif bez datového základu,
+- předstírané čekací fronty,
+- záměrně matoucí tlačítka,
+- automatické přidání do newsletteru po produktové akci.
+
+Privacy-first produkt může být přesvědčivý. Nemusí být hodný až neviditelný. Jen má přesvědčovat pravdivou hodnotou, ne designovým trikem.
+
+### Délka testu a rozhodnutí předem
+
+Nejhorší experimenty běží věčně. Nikdo už neví, proč vznikly, co měří a kdo je má vyhodnotit. Po třech měsících z nich zůstane jen podivná větev v kódu a dashboard, na který se nikdo nedívá.
+
+Před spuštěním si napiš:
+
+- datum začátku,
+- datum vyhodnocení,
+- jednu hlavní metriku,
+- jednu až tři ochranné metriky,
+- minimální velikost vzorku nebo praktický práh rozhodnutí,
+- kdo rozhodne,
+- co se stane při vítězství,
+- co se stane při nejasném výsledku,
+- kdy se experiment smaže z kódu.
+
+U malého B2B webu často nepotřebuješ akademickou statistiku. Potřebuješ disciplínu: neměnit varianty uprostřed, nevybírat vítěze podle nálady a neprohlásit „funguje to“, když se jen zvedla návštěvnost z úplně jiného kanálu.
+
+### Experimentový deník
+
+Experiment bez zápisu je firemní folklór. Za půl roku si tým pamatuje jen: „Něco jsme zkoušeli s cenami a myslím, že to bylo lepší.“ To není poznání. To je mlha s logem.
+
+Stačí jednoduchý deník v Markdownu, Notionu, GitHub issue nebo interní wiki. Hlavně ať je vedle kódu a rozhodnutí dohledatelný.
+
+Minimální struktura:
+
+```text
+Název experimentu:
+Datum začátku:
+Datum vyhodnocení:
+Vlastník:
+
+Problém:
+Hypotéza:
+Varianta A:
+Varianta B:
+
+Měřené eventy:
+Data, která záměrně nesbíráme:
+Hlavní metrika:
+Ochranné metriky:
+
+Výsledek:
+Rozhodnutí:
+Co smažeme / zjednodušíme:
+Co jsme se naučili:
+```
+
+Poznámka „Data, která záměrně nesbíráme“ je důležitá. Učí tým, že dobré rozhodování není jen o přidávání dalších sloupců. Někdy je profesionálnější nevědět něco, co k rozhodnutí nepotřebuješ.
+
+### Příklad: test cenové stránky
+
+Situace: SaaS má tři tarify, ale návštěvníci často klikají na FAQ o rozdílu mezi „Team“ a „Business“. Obchod zároveň dostává e-maily typu „nevím, co je pro nás vhodné“.
+
+Špatný experiment:
+
+- přidat agresivní banner „poslední šance na cenu“,
+- sledovat session replay celé návštěvy,
+- posílat data do reklamního systému,
+- vyhodnotit vítěze podle počtu kliknutí na jakékoliv tlačítko.
+
+Lepší experiment:
+
+- přepsat názvy tarifů podle velikosti týmu,
+- přidat tři konkrétní příklady „vyberte tento tarif, pokud…“,
+- ponechat cenu a limity čitelné,
+- měřit jen kliknutí na konzultaci, otevření FAQ a dokončené odeslání poptávky,
+- jako ochrannou metriku sledovat počet dotazů na „který tarif vybrat“.
+
+Rozhodnutí po testu nemusí být „varianta B vyhrála o 12 %“. U malého provozu může znít praktičtěji: „Po změně přišly tři kvalitnější poptávky a ubyly dva opakované dotazy na rozdíl mezi tarify. Text necháváme, další iterace bude FAQ.“ To je legitimní produktové učení, pokud je poctivě zapsané.
+
+### Checklist: experiment bez profilování
+
+- [ ] Má experiment jednu konkrétní hypotézu?
+- [ ] Mění jen jednu hlavní věc nebo jasně pojmenovaný balík změn?
+- [ ] Má předem určené datum vyhodnocení?
+- [ ] Má jednu hlavní metriku a ochranné metriky?
+- [ ] Popisují eventy akce, ne obsah osobních dat?
+- [ ] Neposílají se experimentální data do reklamních systémů bez jasného důvodu?
+- [ ] Neobsahuje varianta temné vzory, nátlak nebo skryté souhlasy?
+- [ ] Jde experiment vypnout a odstranit z kódu?
+- [ ] Je v deníku zapsáno, která data záměrně nesbíráme?
+- [ ] Umíme výsledek vysvětlit člověku mimo tým jedním odstavcem?
+
+### Mini šablona experimentu
+
+```text
+Název:
+
+Problém:
+
+Hypotéza:
+
+Varianta A:
+
+Varianta B:
+
+Hlavní metrika:
+
+Ochranné metriky:
+
+Eventy:
+
+Data, která nesbíráme:
+
+Datum startu:
+
+Datum vyhodnocení:
+
+Vlastník rozhodnutí:
+
+Kritérium pro ponechání změny:
+
+Kritérium pro návrat zpět:
+
+Úklid po experimentu:
+```
+
+Produktové experimenty mají být nástroj učení, ne továrna na výmluvy. Když je navrhneš dobře, pomohou zlepšovat web i SaaS bez toho, aby sis z návštěvníků dělal datový důl. A to je přesně typ růstu, který jde obhájit technicky, obchodně i lidsky.
+
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -5579,6 +5784,7 @@ Mikrocopy je drobná práce s velkým pákovým efektem. Když je dobré, produk
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „Produktové experimenty bez profilování uživatelů“ s hypotézami, agregovaným měřením, férovými variantami, experimentovým deníkem, příkladem cenové stránky, checklistem a šablonou experimentu.
 - 2026-09-27: Doplněna příloha „Mikrocopy a UX texty bez manipulace“ s pravidly pro tlačítka, formuláře, chybové hlášky, prázdné stavy, onboarding, potvrzení, 45minutový audit, checklist a šablonu UX textu.
 - 2026-09-26: Doplněna příloha „Roadmapa SaaS bez feature factory“ s prioritizací podle problémů, třemi koši roadmapy, privacy-first filtrem funkcí, ověřováním před vývojem, pravidlem mazání backlogu, checklistem a šablonou roadmapové položky.
 - 2026-09-26: Doplněna příloha „Dodavatelé a DPA bez právního mlžení“ s kategorizací dodavatelů podle datového rizika, praktickou kontrolou DPA, subprocesory, exit plánem, nákupním pravidlem, checklistem a vyplnitelným registrem dodavatelů.
