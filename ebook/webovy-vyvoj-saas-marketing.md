@@ -5303,6 +5303,233 @@ Datum revize:
 Dobrá roadmapa není křišťálová koule. Je to způsob, jak se rozhodovat pod nejistotou, aniž by tým každý týden podlehl nejhlasitějšímu požadavku. Privacy-first SaaS vyhrává tím, že je užitečný, srozumitelný a provozně klidný. Ne tím, že má nejdelší changelog v okolí.
 
 
+## Příloha: Mikrocopy a UX texty bez manipulace
+
+Mikrocopy jsou malé texty v rozhraní: tlačítka, popisky polí, prázdné stavy, chybové hlášky, potvrzení, nápovědy, onboardingové věty, varování a e-maily po důležité akci. Na první pohled drobnost. V praxi často rozdíl mezi tím, jestli člověk dokončí registraci, pochopí fakturaci, opraví chybu nebo raději zavře záložku a jde se dívat na video o tom, jak někdo opravuje kávovar. Internet je divné místo.
+
+Dobré UX texty nejsou „hezčí slova“. Jsou součást produktu. Snižují podporu, zvyšují důvěru a pomáhají uživateli udělat další bezpečný krok. Privacy-first produkt má navíc jednu povinnost: textem nesmí zakrývat, co se děje s daty. Když chceš souhlas, řekni proč. Když něco uložíš, řekni co. Když se akce nedá vrátit, neříkej „pokračovat“ a netvař se, že uživatel jen vybírá barvu tlačítka.
+
+> Codyho komentář: Nejhorší mikrocopy je takové, které vypadá přátelsky, ale pracuje jako kapsář. „Jen nám povolte pár drobností pro lepší zážitek“ často znamená „otevřeme dveře třem vendorům a reklamnímu pixlu v kabátu“.
+
+### Text má říct další bezpečný krok
+
+Každý UX text má odpovědět na jednu ze čtyř otázek:
+
+- Co se právě stalo?
+- Co mám udělat teď?
+- Co se stane po kliknutí?
+- Jaký to má dopad na moje data, peníze nebo účet?
+
+Když text neodpovídá ani na jednu z nich, je možná jen dekorace. Dekorace do rozhraní nepatří, pokud zhoršuje pochopení. Krátký text není automaticky lepší. Lepší je text, který je dostatečně krátký na použití a dostatečně konkrétní na rozhodnutí.
+
+Příklad u destruktivní akce:
+
+| Slabé | Lepší |
+| --- | --- |
+| Opravdu pokračovat? | Smazat projekt „Klientský portál“? Tuto akci nejde vrátit. Faktury a exporty zůstanou uložené podle retenčních pravidel. |
+| OK | Smazat projekt |
+| Zrušit | Ponechat projekt |
+
+Lepší verze není delší kvůli literárnímu egu. Je delší, protože uživatel potřebuje vědět, co mizí, co zůstává a které tlačítko dělá co.
+
+### Tlačítka pojmenuj podle výsledku
+
+Tlačítko nemá být hádanka. „Odeslat“, „Pokračovat“, „Potvrdit“ a „OK“ jsou někdy v pořádku, ale často schovávají důležitý dopad. Lepší je použít sloveso a výsledek.
+
+Příklady:
+
+| Kontext | Slabé tlačítko | Lepší tlačítko |
+| --- | --- | --- |
+| Poptávkový formulář | Odeslat | Poslat poptávku |
+| Registrace k trialu | Pokračovat | Vytvořit testovací účet |
+| Fakturace | Potvrdit | Uložit fakturační údaje |
+| Export dat | Stáhnout | Stáhnout CSV export |
+| Odhlášení z e-mailů | Uložit | Odhlásit obchodní e-maily |
+| Mazání účtu | OK | Smazat účet |
+
+Privacy-first pravidlo: pokud tlačítko spustí sběr, sdílení, export, odeslání nebo smazání dat, výsledek má být vidět v textu tlačítka nebo bezprostředně vedle něj.
+
+### Formuláře: ptej se méně a vysvětli proč
+
+Formulář není výslech. Každé pole má stát za obhájení. Pokud se ptáš na telefon, vysvětli, kdy ho použiješ. Pokud chceš firemní velikost, řekni, že pomáhá doporučit správný balíček. Pokud chceš marketingový souhlas, nesmí být schovaný pod obecnou větou o „zlepšování služeb“.
+
+Dobrá nápověda u pole má být krátká a konkrétní:
+
+```text
+Telefon
+Použijeme ho jen pro domluvu úvodní konzultace, ne pro marketingové hovory.
+```
+
+```text
+Web firmy
+Pomůže nám připravit relevantnější odpověď. Pokud ho nechceš vyplnit, pole klidně přeskoč.
+```
+
+```text
+Souhlas s obchodními tipy
+Jednou za čas pošleme praktický e-mail o webu, SaaS a privacy-first provozu. Odhlášení je v každém e-mailu.
+```
+
+Pozor na věty, které zní mile, ale nejsou jasné: „Abychom vám mohli nabídnout ten nejlepší zážitek.“ To může znamenat cokoli od uložení jména po datový ohňostroj. Uživatel nemá luštit, jestli kliká na službu nebo na mlhový stroj.
+
+### Chybové hlášky bez obviňování
+
+Chyba je moment napětí. Uživatel něco chtěl, produkt řekl ne. Text má snížit frustraci, ne dělat pasivně agresivního vrátného.
+
+Dobrá chybová hláška má tři části:
+
+1. co je špatně,
+2. jak to opravit,
+3. jestli se něco uložilo nebo neuložilo.
+
+Příklady:
+
+| Slabé | Lepší |
+| --- | --- |
+| Neplatný vstup. | Zadej e-mail ve tvaru jmeno@firma.cz. Formulář jsme zatím neodeslali. |
+| Něco se pokazilo. | Poptávku se nepodařilo odeslat. Zkus to prosím znovu, nebo napiš přímo na hello@example.cz. Vyplněný text zůstal v prohlížeči. |
+| Přístup odepřen. | K této faktuře nemáš přístup. Pokud ji potřebuješ vidět, požádej správce účtu o roli „Fakturace“. |
+| Soubor nelze nahrát. | Soubor je větší než 10 MB. Nahraj menší PDF nebo pošli přílohu e-mailem. |
+
+U citlivých akcí dávej pozor, aby chyba neprozradila víc, než má. Přihlašovací formulář nemusí říkat „e-mail existuje, heslo je špatně“. Bezpečnější je obecná informace typu „E-mail nebo heslo nesedí“ a nabídka obnovy hesla.
+
+### Prázdné stavy nejsou prázdné místo
+
+Prázdný stav je obrazovka, kde zatím nejsou data: žádné projekty, žádné objednávky, žádné reporty, žádné články. Je to ideální místo vysvětlit hodnotu a další krok. Ne marketingovou básničkou, ale prakticky.
+
+Šablona prázdného stavu:
+
+```text
+Nadpis: Co tady bude
+Vysvětlení: Proč to uživateli pomůže
+Další krok: Jedna konkrétní akce
+Datová poznámka: Co se uloží, pokud je to relevantní
+Alternativa: Import, dokumentace nebo kontakt
+```
+
+Příklad:
+
+```text
+Zatím tu nejsou žádné exporty
+
+Jakmile připravíš první export dat, zobrazí se tady historie stažení a datum expirace odkazu. Exporty držíme 7 dní, potom je automaticky mažeme.
+
+[Vytvořit CSV export]
+```
+
+Takový text pomáhá i podpoře. Místo dotazu „kde jsou moje exporty?“ má uživatel odpověď přímo v produktu.
+
+### Onboarding bez nátlakového cirkusu
+
+Onboarding má uživatele dovést k první hodnotné akci, ne ho zavřít do tunelu plného konfety, modálních oken a povinných kroků „protože growth“. Pokud produkt potřebuje data pro nastavení, ptej se postupně a vysvětli, proč jsou potřeba.
+
+Privacy-first onboarding používá tyhle principy:
+
+- nejdřív ukaž hodnotu, potom chtěj rozšířené údaje,
+- odděl nutná data od volitelných,
+- neoznačuj marketingový souhlas jako krok nastavení produktu,
+- dej možnost přeskočit nepovinné kroky,
+- řekni, kde se údaje dají později změnit nebo smazat.
+
+Příklad onboardingového kroku:
+
+```text
+Nastav základní údaje účtu
+
+Název firmy použijeme na fakturách a v exportech. Logo je volitelné a můžeš ho doplnit později v nastavení.
+
+[Uložit základní údaje]
+[Přeskočit logo]
+```
+
+Všimni si rozdílu: text neříká „dokonči profil na 100 %“. Říká, co je potřeba, proč a co může počkat. Metrika „profil completeness“ je hezká pro dashboard. Pro uživatele je důležitější vědět, jestli může začít pracovat.
+
+### Potvrzení a transakční e-maily
+
+Po důležité akci chce člověk vědět, že se věc stala. Potvrzení v aplikaci a e-mail mají být konzistentní. Jestli formulář říká „ozveme se do dvou pracovních dnů“, e-mail nemá říkat „brzy se vám někdo ozve“. „Brzy“ je časová mlha. Dva pracovní dny jsou závazek.
+
+Dobré potvrzení obsahuje:
+
+- co bylo přijato nebo změněno,
+- kdy přijde další krok,
+- kdo je odpovědný,
+- jak upravit nebo zrušit požadavek,
+- co se stane s daty, pokud je to citlivé.
+
+Příklad:
+
+```text
+Poptávka je odeslaná
+
+Díky. Do dvou pracovních dnů se ozveme na e-mail, který jsi uvedl ve formuláři. Údaje z poptávky použijeme jen pro přípravu odpovědi a případnou navazující spolupráci.
+
+Pokud chceš něco doplnit, napiš na hello@example.cz.
+```
+
+Tahle zpráva prodává víc důvěry než animovaná fajfka přes celou obrazovku. Fajfka je fajn, ale neumí vysvětlit retenční pravidla. Zatím.
+
+### Mikrocopy audit za 45 minut
+
+Jednou za čas projdi produkt nebo web jen očima textů. Ne design, ne backend, ne velkou strategii. Jen věty, které vedou člověka akcí.
+
+Rychlý postup:
+
+1. Vyber jednu důležitou cestu: poptávka, registrace, trial, platba, export nebo mazání účtu.
+2. Udělej screenshoty všech kroků včetně chybových stavů.
+3. Označ texty, kde není jasné, co se stane po kliknutí.
+4. Označ místa, kde se sbírají data bez vysvětlení.
+5. Přepiš nejrizikovější tři texty.
+6. Zkontroluj, že tlačítka odpovídají výsledku akce.
+7. Ulož rozhodnutí do changelogu nebo rozhodovacího deníku.
+
+Nejlepší audit není ten, který najde 80 nedostatků a všechny nechá v tabulce. Nejlepší audit najde tři věty, které se hned zlepší.
+
+### Checklist: mikrocopy bez manipulace
+
+- [ ] Je u každé důležité akce jasné, co se stane po kliknutí?
+- [ ] Pojmenovávají tlačítka výsledek, ne jen obecné „OK“?
+- [ ] Vysvětlují formulářová pole, proč jsou potřeba?
+- [ ] Jsou volitelná pole opravdu volitelná i jazykem?
+- [ ] Nezaměňuje onboarding produktová data za marketingový souhlas?
+- [ ] Říkají chybové hlášky, jak chybu opravit?
+- [ ] Neprozrazují chyby citlivé informace, například existenci účtu?
+- [ ] Popisují prázdné stavy další krok a hodnotu?
+- [ ] Je u citlivých akcí jasné, co se smaže, uloží nebo zůstane?
+- [ ] Mají potvrzení konkrétní termín dalšího kroku?
+- [ ] Neobsahují texty nátlak, falešnou naléhavost nebo zamlčené sledování?
+- [ ] Odpovídá jazyk produktu tomu, co firma slibuje v privacy-first komunikaci?
+
+### Mini šablona UX textu
+
+```text
+Místo v produktu / webu:
+
+Situace uživatele:
+
+Co chce uživatel udělat:
+
+Co se stane po akci:
+
+Jaký je dopad na data / peníze / účet:
+
+Primární tlačítko:
+
+Sekundární možnost:
+
+Krátká nápověda:
+
+Chybový stav:
+
+Potvrzovací zpráva:
+
+Co nesmíme zamlčet:
+
+Co záměrně neříkáme marketingovým jazykem:
+```
+
+Mikrocopy je drobná práce s velkým pákovým efektem. Když je dobré, produkt působí klidně, férově a kompetentně. Když je špatné, i technicky výborný SaaS začne působit jako pojišťovací formulář po třetí kávě. Privacy-first značka se nepozná jen podle zásad ochrany osobních údajů. Pozná se podle každého malého textu, který uživateli říká pravdu v momentě rozhodnutí.
+
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -5352,6 +5579,7 @@ Dobrá roadmapa není křišťálová koule. Je to způsob, jak se rozhodovat po
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „Mikrocopy a UX texty bez manipulace“ s pravidly pro tlačítka, formuláře, chybové hlášky, prázdné stavy, onboarding, potvrzení, 45minutový audit, checklist a šablonu UX textu.
 - 2026-09-26: Doplněna příloha „Roadmapa SaaS bez feature factory“ s prioritizací podle problémů, třemi koši roadmapy, privacy-first filtrem funkcí, ověřováním před vývojem, pravidlem mazání backlogu, checklistem a šablonou roadmapové položky.
 - 2026-09-26: Doplněna příloha „Dodavatelé a DPA bez právního mlžení“ s kategorizací dodavatelů podle datového rizika, praktickou kontrolou DPA, subprocesory, exit plánem, nákupním pravidlem, checklistem a vyplnitelným registrem dodavatelů.
 - 2026-09-26: Doplněna příloha „Doména, DNS a doručitelnost bez technického chaosu“ s evidencí vlastnictví domény, úklidem DNS, SPF/DKIM/DMARC, TLS/CAA/DNSSEC, subdoménami, privacy-first doručitelností, checklistem a vyplnitelnou šablonou provozního listu.
