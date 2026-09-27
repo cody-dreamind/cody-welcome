@@ -5921,6 +5921,155 @@ Otázky k doplnění:
 Interní dokumentace má být živý pracovní systém, ne pomník produktivity. Když je krátká, vlastněná, dohledatelná a bezpečná pro práci s daty, pomáhá týmu růst bez toho, aby každá nová otázka začínala větou: „Kdo si pamatuje, jak jsme to minule dělali?“
 
 
+
+## Příloha: Retenční kalendář bez datového syslení
+
+Retence dat je nudné téma jen do chvíle, než zjistíš, že firma drží pět let staré exporty leadů, testovací databáze s reálnými e-maily a logy plné parametrů z formulářů. Pak už to není nuda. Je to archeologie s právním oddělením v přilbě.
+
+Privacy-first provoz nestojí na tom, že nikdy nic neuložíš. Stojí na tom, že víš, proč data ukládáš, kdo je potřebuje, kdy se mají smazat a jak poznáš, že se to opravdu stalo. Evropská komise u principů GDPR připomíná data minimisation a storage limitation: zpracovávat jen nutná osobní data a nedržet je déle, než je potřeba pro daný účel ([European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)). Prakticky řečeno: data nejsou suvenýry z provozu.
+
+> Codyho komentář: „Možná se to někdy bude hodit“ je výborná věta pro šuplík s kabely. Pro osobní data je to slabý plán.
+
+### Retence začíná účelem
+
+Nejdřív neřeš počet dnů. Nejdřív napiš účel. Stejný e-mail může být v různých kontextech úplně jiný typ dat:
+
+- e-mail v poptávce slouží k odpovědi a obchodnímu navázání,
+- e-mail v účtu slouží k přihlášení, fakturaci a bezpečnostním upozorněním,
+- e-mail v newsletteru slouží k odběru obsahu,
+- e-mail v logu je často jen vedlejší efekt, který tam vůbec neměl být.
+
+Každý účel má mít vlastní retenční pravidlo. Pokud všechno skončí v jedné hromadě „kontakty“, nebudeš umět rozumně mazat bez rizika, že smažeš účet aktivního zákazníka nebo naopak držíš starý lead navždy.
+
+Praktický model:
+
+| Typ dat | Účel | Příklad retence | Vlastník |
+| --- | --- | --- | --- |
+| Poptávky z webu | odpověď a obchodní kontext | krátce po uzavření nebo odmítnutí případu | obchod / zakladatel |
+| Support tickety | řešení problému a historie služby | podle životního cyklu zákazníka a rizika služby | podpora |
+| Technické logy | diagnostika chyb a bezpečnost | co nejkratší praktické okno | vývoj / provoz |
+| Fakturační doklady | účetnictví a zákonné povinnosti | podle účetních pravidel, ne marketingové nálady | finance |
+| Newsletter odběry | zasílání obsahu | do odhlášení nebo neaktivity podle pravidel seznamu | marketing |
+| Produktová analytika | zlepšení produktu | agregovaně, anonymně nebo krátce pseudonymně | produkt |
+
+Konkrétní lhůty si nastav podle právního základu, smluv, oboru a účetních povinností. Tohle není právní rada; je to provozní kostra, která zabrání tomu, aby se z databáze stal digitální sklep.
+
+### Kde data nejčastěji zůstávají omylem
+
+Mazání z hlavní aplikace nestačí. Data často přežijí v místech, která nikdo neukazuje na demo callu:
+
+- exporty v tabulkách,
+- e-mailové přílohy,
+- CRM poznámky,
+- support nástroje,
+- staging databáze,
+- zálohy,
+- logy a monitoring,
+- nahrávky schůzek,
+- AI prompty a výstupy,
+- staré integrační fronty,
+- lokální soubory u dodavatelů.
+
+Retenční kalendář proto nemá být jen seznam tabulek v databázi. Má pokrýt pracovní realitu týmu. Pokud obchodník jednou měsíčně exportuje leady do spreadsheetu „jen pro jistotu“, je spreadsheet součást systému. Gratuluju, máš další databázi, jen ošklivější.
+
+### Mazání jako rutina, ne heroický projekt
+
+Nejhorší retenční plán je ten, který čeká na velký úklid jednou za tři roky. Malý tým potřebuje opakovatelnou rutinu:
+
+1. **Měsíčně** zkontroluj nové nástroje a exporty.
+2. **Čtvrtletně** projdi datové kategorie s vlastníky.
+3. **Po incidentu** ověř, jestli logy neobsahují víc dat, než mají.
+4. **Při odchodu dodavatele** potvrď smazání nebo předání dat.
+5. **Při změně produktu** aktualizuj retenční pravidla před spuštěním funkce.
+
+Mazání nemusí být všude automatické hned první den. Ale každá datová kategorie má mít alespoň ruční postup, vlastníka a datum další revize. Automatizuj teprve to, čemu rozumíš. Jinak jen rychleji mažeš špatné věci.
+
+### Zálohy bez falešných slibů
+
+Zálohy jsou zvláštní případ. Nemusí být praktické mazat jeden konkrétní záznam ze všech historických záloh okamžitě. Ale musíš vědět:
+
+- jak dlouho zálohy žijí,
+- kdo k nim má přístup,
+- jestli jsou šifrované,
+- jak se obnovují,
+- kdy se staré zálohy přepisují nebo ničí,
+- jak zabráníš návratu smazaných dat po obnově.
+
+Praktický postup po obnově ze zálohy: měj seznam smazaných nebo anonymizovaných záznamů za období od vzniku zálohy do obnovy a po restore je znovu promítni. U malého SaaS to může být jednoduchá tabulka s ID účtu, typem požadavku, datem a stavem. Není to sexy. Funguje to. Což je u obnovy dat docela důležité.
+
+### AI asistenti a retenční hranice
+
+Pokud tým používá AI asistenty, retenční kalendář musí říct, co do nich nepatří a jak se zachází s výstupy. Nejde jen o vstupní prompt. Citlivá data se mohou objevit i v mezivýstupech, shrnutích, návrzích e-mailů nebo poznámkách z hovoru.
+
+Bezpečné pravidlo:
+
+- do AI neposílej osobní data, pokud k tomu nemáš jasný důvod a schválený nástroj,
+- před analýzou supportu anonymizuj jména, e-maily, domény a volné texty,
+- výstupy s osobními údaji ukládej podle stejné retence jako zdrojová data,
+- prompt knihovnu piš tak, aby pracovala se zástupnými hodnotami,
+- u dodavatelů AI ověř, kde se data zpracují a zda se používají k trénování.
+
+Codyho komentář: AI je skvělý parťák na strukturu a návrhy. Není to odpadkový koš na export celé databáze, i když má sebevědomý placeholder „paste data here“.
+
+### Checklist retenčního kalendáře
+
+- [ ] Má každá datová kategorie popsaný účel?
+- [ ] Má každá kategorie vlastníka?
+- [ ] Je jasné, kde data fyzicky a nástrojově leží?
+- [ ] Rozlišujeme hlavní systém, exporty, logy, zálohy a AI výstupy?
+- [ ] Máme pravidlo pro aktivní zákazníky, bývalé zákazníky a neaktivní leady?
+- [ ] Víme, které lhůty vycházejí z právní nebo účetní povinnosti?
+- [ ] Máme postup pro ruční smazání, když automatizace neexistuje?
+- [ ] Umíme doložit, že mazání proběhlo?
+- [ ] Kontrolujeme nové nástroje před tím, než do nich pošleme data?
+- [ ] Má retenční plán datum další revize?
+
+### Mini šablona retenčního pravidla
+
+```text
+Název datové kategorie:
+
+Příklad dat:
+
+Účel zpracování:
+
+Právní nebo provozní důvod:
+
+Kde data vznikají:
+
+Kde se ukládají:
+
+Kdo je vlastník:
+
+Kdo má přístup:
+
+Výchozí retenční pravidlo:
+
+Co spouští smazání nebo anonymizaci:
+
+Jak se mazání provádí:
+automaticky / ručně / kombinace
+
+Jak se mazání ověřuje:
+
+Výjimky:
+
+Zálohy a restore postup:
+
+Exporty a kopie:
+
+AI použití:
+povoleno / povoleno po anonymizaci / zakázáno
+
+Datum poslední kontroly:
+
+Datum další kontroly:
+
+Poznámky:
+```
+
+Retenční kalendář není dokument pro šuplík. Je to provozní brzda proti datovému syslení. Když je krátký, konkrétní a pravidelně kontrolovaný, zmenšuje riziko, zrychluje odpovědi na požadavky zákazníků a nutí tým přemýšlet o datech jako o odpovědnosti, ne jako o nekonečné zásobě pro „možná někdy“.
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -5970,6 +6119,7 @@ Interní dokumentace má být živý pracovní systém, ne pomník produktivity.
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „Retenční kalendář bez datového syslení“ s účely dat, typickými zapomenutými kopiemi, rutinou mazání, zálohami, pravidly pro AI výstupy, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Interní dokumentace bez firemního archeologického muzea“ s typy znalostí, vlastnictvím stránek, rozhodovacím deníkem, pravidly pro AI kontext, vyhledáváním, měsíční úklidovou rutinou, checklistem a šablonou knowledge base stránky.
 - 2026-09-27: Doplněna příloha „Produktové experimenty bez profilování uživatelů“ s hypotézami, agregovaným měřením, férovými variantami, experimentovým deníkem, příkladem cenové stránky, checklistem a šablonou experimentu.
 - 2026-09-27: Doplněna příloha „Mikrocopy a UX texty bez manipulace“ s pravidly pro tlačítka, formuláře, chybové hlášky, prázdné stavy, onboarding, potvrzení, 45minutový audit, checklist a šablonu UX textu.
