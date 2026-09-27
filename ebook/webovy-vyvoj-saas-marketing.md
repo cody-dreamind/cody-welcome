@@ -7882,8 +7882,199 @@ Dobrá API dokumentace je tichý obchodník, supporták a bezpečnostní kolega 
 
 
 
+## Příloha: Incidentová komunikace bez paniky a mlžení
+
+Incident není jen technický problém. Je to test důvěry. Malý web, SaaS nebo agentura nemusí mít krizové oddělení s vlastním logem a pěti lidmi v tmavých rolácích. Musí ale vědět, kdo rozhoduje, co se stalo, koho se to týká, co se už udělalo a co se řekne zákazníkům bez paniky, slibotechny a právnické mlhy.
+
+U incidentů platí nepříjemná pravda: největší škodu často neudělá první chyba, ale chaotická komunikace po ní. Když zákazník dostane tři různé verze, tým maže logy omylem a obchod zatím slibuje „všechno je v pohodě“, důvěra teče rychleji než staging databáze v pátek večer.
+
+> Codyho komentář: Incidentový plán není pesimismus. Je to deštník. Nevoláš déšť, jen nechceš stát uprostřed náměstí s notebookem nad hlavou a tvrdit, že mraky jsou growth opportunity.
+
+### Nejdřív odděl fakta, dopady a hypotézy
+
+První zápis incidentu nemá být román. Má rozdělit tři věci:
+
+- **Fakta:** co víme jistě, kdy to začalo, které služby jsou zasažené.
+- **Dopady:** koho a jak to omezuje, jaká data nebo funkce mohou být dotčené.
+- **Hypotézy:** co si myslíme, ale ještě nemáme ověřené.
+
+Tohle rozdělení chrání tým před dvěma extrémy: mlčením a přestřeleným oznámením. Mlčení vytváří podezření. Přestřelené oznámení vytváří paniku. Dobrá první zpráva říká: víme o problému, řešíme ho, tady je dopad, další update bude v konkrétní čas.
+
+Příklad interního zápisu:
+
+```text
+Čas zjištění: 2026-09-27 09:14 UTC
+Služba: zákaznický portál
+Stav: část uživatelů nemůže stáhnout faktury
+Fakta: API vrací chybu 500 pro endpoint /invoices/export
+Dopad: export faktur nefunguje, faktury v aplikaci jsou viditelné
+Data: zatím nevidíme známku neoprávněného přístupu
+Hypotéza: chyba po ranním deployi exportní služby
+Další krok: rollback + kontrola logů
+Další update: 10:00 UTC
+```
+
+### Incidentové role pro malý tým
+
+I dvoučlenný tým potřebuje role. Nemusí to být nové pracovní pozice, stačí klobouky pro daný incident.
+
+Minimální role:
+
+- **Velitel incidentu:** drží prioritu, rozhoduje o dalším kroku a brání chaosu.
+- **Technický řešitel:** opravuje, sbírá důkazy, dokumentuje změny.
+- **Komunikátor:** píše statusy zákazníkům, obchodnímu týmu a partnerům.
+- **Datový hlídač:** posuzuje, zda může jít o osobní data, a hlídá právní/delegační kroky.
+
+V malém týmu může jeden člověk držet dvě role, ale neměl by současně opravovat produkci a psát zákazníkům uklidňující prózu. To končí větou „už to asi jede“, což je krásná ukázka technického optimismu a špatná krizová komunikace.
+
+### Kdy řešit osobní data
+
+Pokud incident může zahrnovat osobní data, přepni do přísnějšího režimu. EDPB shrnuje, že porušení zabezpečení osobních údajů může zahrnovat zničení, ztrátu, změnu, neoprávněné zpřístupnění nebo přístup k osobním údajům a že organizace musí incidenty dokumentovat a správně vyhodnocovat. EDPB také uvádí, že některé incidenty vyžadují oznámení dozorovému úřadu do 72 hodin a v některých případech i komunikaci dotčeným osobám ([EDPB: Personal data breaches](https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en), [EDPB: Guidelines 9/2022](https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en)).
+
+Prakticky to znamená: jakmile existuje rozumná možnost, že se incident týká osobních dat, nečekej na stoprocentní jistotu. Založ incidentový záznam, začni sbírat fakta a zapoj člověka odpovědného za ochranu dat. U malého SaaS to může být zakladatel, externí právník nebo DPO dodavatele, pokud ho máš smluvně.
+
+Do prvního vyhodnocení napiš:
+
+- jaké kategorie dat mohly být dotčené,
+- kolik účtů nebo osob může být zasažených,
+- zda šlo o přístup, ztrátu, změnu nebo nedostupnost,
+- zda jsou data šifrovaná nebo jinak chráněná,
+- kdo měl k datům potenciálně přístup,
+- jaké okamžité kroky snížily riziko,
+- zda je potřeba oznámení úřadu nebo zákazníkům.
+
+Nejde o právní stanovisko. Jde o to, aby rozhodnutí nestálo na dojmu typu „snad dobrý“. To je metoda vhodná pro výběr pizzy, ne pro incident s daty.
+
+### Status page a přímá komunikace
+
+Privacy-first komunikace preferuje přímé a srozumitelné kanály: status stránku, e-mail zákazníkům, RSS/Atom feed pro technické aktualizace, dokumentované changelogy. Ne každý incident patří na sociální síť. Pokud je zákazník zasažený, má dostat informaci tam, kde ji opravdu uvidí a kde ji může dohledat.
+
+Dobrá veřejná aktualizace obsahuje:
+
+- stav služby,
+- dopad na uživatele,
+- co tým právě dělá,
+- co má zákazník udělat,
+- čas další aktualizace,
+- odkaz na detailnější záznam po vyřešení.
+
+Příklad:
+
+```text
+Zaznamenali jsme problém s exportem faktur v zákaznickém portálu.
+Faktury jsou v aplikaci viditelné, ale část exportů končí chybou.
+Pracujeme na rollbacku poslední změny a kontrolujeme logy.
+Nemáme zatím známku neoprávněného přístupu k datům.
+Další aktualizaci zveřejníme v 10:00 UTC.
+```
+
+Všimni si dvou věcí: zpráva neslibuje víc, než ví, a neplýtvá omluvným kouřem. Omluva je důležitá, ale až po dopadu. Nejdřív řekni, co se děje a co má člověk udělat.
+
+### Komunikace po vyřešení
+
+Po vyřešení incidentu napiš krátký postmortem. Ne jako detektivku, kde je vrahem „lidský faktor“. To je fráze, která často znamená „systém byl křehký a nechceme to říct nahlas“.
+
+Postmortem má obsahovat:
+
+- časovou osu,
+- skutečnou příčinu,
+- dopad na zákazníky,
+- dopad na data,
+- co problém vyřešilo,
+- co se změní, aby se neopakoval,
+- kdo vlastní následné úkoly,
+- datum kontroly nápravných opatření.
+
+Pokud incident odhalil slabý proces, napiš to. Zákazníci často odpustí chybu. Hůř odpouštějí mlžení, přehazování viny a marketingovou poezii místo odpovědnosti.
+
+### Interní důkazy bez datového chaosu
+
+Při incidentu sbírej důkazy, ale nesbírej všechno navždy. Logy, screenshoty, exporty a komunikační vlákna patří do zabezpečeného incidentového prostoru s omezenými přístupy. Pokud obsahují osobní data, označ je a nastav retenci.
+
+Pravidla:
+
+- incidentové materiály nepatří do veřejného issue trackeru,
+- citlivé logy neposílej do běžného chatu,
+- do postmortemu vkládej jen nutné ukázky,
+- přístup dej podle role v incidentu,
+- po uzavření nastav datum revize a mazání,
+- tajemství a tokeny po incidentu rotuj, nearchivuj pro nostalgii.
+
+Tohle je nudná hygiena, která chrání tým před druhým incidentem vytvořeným během vyšetřování prvního. Ano, i to se stává. Software je velmi kreativní ve špatných dnech.
+
+### Checklist incidentové komunikace
+
+- [ ] Máme určeného velitele incidentu.
+- [ ] Máme oddělená fakta, dopady a hypotézy.
+- [ ] Víme, které služby a zákazníci jsou zasažení.
+- [ ] Posoudili jsme, zda mohou být dotčená osobní data.
+- [ ] Existuje interní záznam s časovou osou.
+- [ ] První externí update říká dopad a čas další zprávy.
+- [ ] Komunikace neslibuje neověřené závěry.
+- [ ] Incidentové důkazy jsou uložené bezpečně a s omezeným přístupem.
+- [ ] Po vyřešení vznikne postmortem s nápravnými opatřeními.
+- [ ] Retence incidentových materiálů má vlastní datum revize.
+
+### Mini šablona incidentového záznamu
+
+```markdown
+# Incident: [název]
+
+## Základ
+- ID incidentu:
+- Čas zjištění:
+- Stav:
+- Velitel incidentu:
+- Komunikátor:
+- Technický řešitel:
+- Datový hlídač:
+
+## Dopad
+- Zasažené služby:
+- Zasažení zákazníci/skupiny:
+- Dopad na funkce:
+- Dopad na data:
+- Dočasné řešení pro zákazníky:
+
+## Osobní data
+- Kategorie dat:
+- Počet potenciálně dotčených osob/účtů:
+- Typ porušení: přístup / ztráta / změna / nedostupnost
+- Ochranná opatření:
+- Potřeba oznámení úřadu:
+- Potřeba komunikace dotčeným osobám:
+
+## Časová osa
+- [čas] Co se stalo:
+- [čas] Co jsme udělali:
+- [čas] Co jsme oznámili:
+
+## Komunikace
+- První interní update:
+- První externí update:
+- Další update v:
+- Finální zpráva/postmortem:
+
+## Nápravná opatření
+- Opatření:
+- Vlastník:
+- Termín:
+- Kontrola provedena dne:
+
+## Retence záznamu
+- Uložiště:
+- Přístupy:
+- Datum revize:
+- Datum smazání/archivace:
+```
+
+Incidentová komunikace má jeden jednoduchý cíl: snížit nejistotu. Ne vyhrát PR soutěž, ne znít neprůstřelně, ne ukázat, že tým zná slovo „mitigace“. Když zákazník po přečtení ví, co se stalo, co to znamená pro něj a kdy dostane další informaci, udělal jsi kus dobré práce.
+
+
 # Zdroje
 
+- European Data Protection Board: [Personal data breaches](https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en)
+- European Data Protection Board: [Guidelines 9/2022 on personal data breach notification under GDPR](https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en)
 - W3C: [Web Content Accessibility Guidelines (WCAG) 2.2](https://www.w3.org/TR/wcag/)
 - W3C WAI: [Easy Checks – A First Review of Web Accessibility](https://www.w3.org/WAI/test-evaluate/preliminary/)
 - W3C WAI: [Labeling Controls](https://www.w3.org/WAI/tutorials/forms/labels/)
@@ -7947,6 +8138,7 @@ Dobrá API dokumentace je tichý obchodník, supporták a bezpečnostní kolega 
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „Incidentová komunikace bez paniky a mlžení“ s rolemi pro malý tým, vyhodnocením dopadu na osobní data, status komunikací, postmortemem, checklistem a šablonou incidentového záznamu.
 - 2026-09-27: Doplněna příloha „API dokumentace bez support ping-pongu“ s integračními příběhy, minimální strukturou dokumentace, OpenAPI/AsyncAPI specifikací, jednotnými chybami podle RFC 9457, privacy-first popisem polí, sandboxem, changelogem, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Bezpečnostní hlavičky bez cargo cultu“ s inventurou externích zdrojů, postupným zavedením CSP, HSTS, referrer a permissions policy, typickými chybami, checklistem a vyplnitelnou šablonou bezpečnostní politiky.
 - 2026-09-27: Doplněna příloha „Staging a testovací data bez úniku produkce“ s oddělením prostředí, syntetickými seed daty, správou tajemství, ochranou přístupů, smoke testem, checklistem a vyplnitelnou šablonou.
