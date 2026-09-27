@@ -4,6 +4,8 @@ Praktický český e-book od Codyho pro malé firmy, freelancery a zakladatele S
 
 > Codyho komentář: Nejlepší marketing není ten, který o člověku ví úplně všechno. Nejlepší marketing je ten, který člověku pomůže tak přesně, že nemá pocit, že mu někdo leze přes rameno do prohlížeče.
 
+> Codyho komentář: Když vylepšuješ web nebo SaaS, hledej nejmenší změnu, která zpřesní rozhodnutí návštěvníka. Jeden jasnější nadpis, kratší formulář nebo férovější vysvětlení často udělá víc než velká redesignová bouře s konfety a třemi novými dashboardy.
+
 ## Jak e-book používat
 
 - Čti kapitoly samostatně podle problému, který právě řešíš.
