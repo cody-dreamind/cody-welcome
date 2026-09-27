@@ -9510,6 +9510,219 @@ Není cílem udělat z každé stránky román. Cílem je posunout ji z „něja
 
 Obsahový refresh je jedna z nejlevnějších forem produktové práce. Bereš něco, co už existuje, a děláš z toho lepší odpověď. Bez sledovacího cirkusu, bez falešné urgentnosti a bez toho, aby ses tvářil, že změna data v titulku je strategie. Není. Je to jen kosmetika s kalendářem.
 
+## Příloha: Syntetické kontroly kritických cest bez falešného klidu
+
+Uptime kontrola řekne, že web odpovídá. Neřekne ale, jestli návštěvník odešle poptávku, zákazník se přihlásí, API vrátí použitelné údaje nebo se novému uživateli opravdu vytvoří účet. Syntetická kontrola je malý robotický průchod kritickou cestou. Ne proto, aby napodoboval zákazníka ve všem, ale aby ověřil, že základní obchodní funkce pořád žije.
+
+Rozdíl je jednoduchý:
+
+- uptime kontrola: „Server dýchá.“
+- syntetická kontrola: „Zákazník zvládne udělat důležitý krok.“
+
+To druhé je pro podnikání často důležitější. Web může vracet krásných 200 OK a přitom ti formulář potichu zahazuje leady do digitálního kanálu. A kanál, jak víme, nemá SLA.
+
+Privacy-first syntetické testy používají testovací účty, testovací data a jasně oddělené značky. Nemají procházet skutečné zákaznické účty, sbírat obsah reálných formulářů ani obcházet souhlasy. Cílem je ověřit funkci systému, ne špehovat lidi.
+
+### Vyber tři cesty, které nesmí potichu umřít
+
+Nezačínej nástrojem. Začni seznamem cest, které mají přímý dopad na důvěru, peníze nebo podporu. U malého webu nebo SaaS obvykle stačí tři až pět kontrol.
+
+Typické kandidáty:
+
+- kontaktní formulář uloží poptávku a pošle interní notifikaci,
+- registrace vytvoří účet a pošle potvrzovací e-mail,
+- přihlášení funguje pro testovací účet,
+- hlavní produktová akce projde od začátku do konce,
+- veřejné API vrátí očekávanou odpověď,
+- platební nebo objednávkový tok projde v testovacím režimu,
+- newsletter nebo RSS endpoint vrací aktuální obsah.
+
+Každou cestu popiš jako smlouvu, ne jako technický výkřik:
+
+```text
+Cesta: kontaktní formulář
+Smysl: firma nesmí ztrácet poptávky.
+Testovací vstup: syntetická poptávka se značkou SYNTHETIC_CHECK.
+Úspěch: stránka potvrdí odeslání, záznam vznikne v interním systému, notifikace dorazí do testovací schránky.
+Selhání: chyba na stránce, chybějící záznam, chybějící notifikace nebo timeout.
+```
+
+Tahle smlouva je lepší než „kontroluj /contact“. Říká totiž, proč kontrola existuje a jak poznáš skutečný dopad.
+
+### Testovací data označ tak, aby neotravovala obchod
+
+Syntetické kontroly umí způsobit vlastní nepořádek. Pokud každých deset minut posíláš testovací formulář do CRM, obchod tě začne nenávidět rychleji než tabulku bez filtrů. Testovací data proto musí být snadno rozpoznatelná, filtrovatelná a mazatelná.
+
+Pravidla:
+
+- používej jednoznačný prefix, třeba `SYNTHETIC_CHECK`,
+- používej vlastní testovací e-mailovou doménu nebo schránku,
+- neposílej testovací leady do běžné obchodní fronty,
+- nastav automatické mazání nebo archivaci testovacích záznamů,
+- ve statistikách odděl syntetické události od reálných,
+- zákaznickým integracím nikdy neposílej test jako skutečný požadavek.
+
+Příklad bezpečného testovacího leadu:
+
+```text
+Jméno: SYNTHETIC_CHECK Cody Robot
+E-mail: synthetic-check@example.test
+Firma: SYNTHETIC_CHECK
+Zpráva: Automatická kontrola formuláře. Ignorovat, nefakturovat, neposílat na obchodní hrdiny.
+```
+
+Ano, poslední věta je trochu dramatická. Ale pořád lepší než obchodník volající robotovi, jestli má zájem o implementaci.
+
+### Kontroluj výsledek, ne jen kliknutí
+
+Syntetický test, který jen otevře stránku a klikne na tlačítko, může minout nejdůležitější část: dopad v cílovém systému. U kritických cest ověř aspoň jeden skutečný výsledek.
+
+Příklady:
+
+- formulář: záznam existuje v interní evidenci nebo dorazí testovací e-mail,
+- registrace: vznikne testovací účet a lze se přihlásit,
+- API: odpověď obsahuje očekávané pole a neobsahuje chybový fallback,
+- RSS: feed obsahuje poslední publikovaný článek,
+- checkout v test režimu: objednávka má správný stav a nejde do produkční expedice,
+- upload: soubor se uloží do testovacího prostoru a jde bezpečně smazat.
+
+Neověřuj citlivý obsah. Ověřuj existenci, stav a technické potvrzení. Když potřebuješ kontrolovat e-mail, používej testovací schránku, ne reálnou adresu zákazníka. Když potřebuješ kontrolovat záznam v systému, hledej podle syntetického ID, ne podle osobních dat.
+
+### Frekvence podle rizika
+
+Ne každá cesta musí běžet každou minutu. Častá kontrola může zbytečně zatěžovat systém, vyrábět testovací data a zvyšovat šum. Frekvenci nastav podle obchodního dopadu a pravděpodobnosti problému.
+
+Praktický start:
+
+| Cesta | Doporučený rytmus | Poznámka |
+| --- | --- | --- |
+| Homepage / status landing page | 1 až 5 minut | Stačí jednoduchá externí kontrola obsahu. |
+| Kontaktní formulář | 15 až 60 minut | Ověř i doručení nebo uložení. |
+| Přihlášení testovacího účtu | 15 až 60 minut | Pozor na lockout a rate limit. |
+| Hlavní API endpoint | 5 až 15 minut | Použij testovací token s minimálním oprávněním. |
+| Registrace / onboarding | 1 až 6 hodin | Maž nebo archivuj testovací účty. |
+| Testovací checkout | 1 až 24 hodin | Jen v sandboxu a bez produkční expedice. |
+
+Rytmus není dogma. Pokud se formulář rozbíjí po deployích, spusť kontrolu po každém nasazení. Pokud je stabilní a má nízký provoz, stačí méně často. Monitoring nemá být posilovna pro roboty.
+
+### Alertuj podle ověřeného dopadu
+
+Syntetická kontrola může selhat kvůli síti, dočasnému timeoutu nebo chybě sondy. Ne každý jednotlivý fail má budit člověka. Kritický alert posílej až tehdy, když selhání odpovídá skutečnému dopadu.
+
+Dobrá pravidla:
+
+- jeden timeout označ jako varování,
+- dvě až tři selhání za sebou zvednou incident podle cesty,
+- selhání z více regionů je vážnější než jeden region,
+- chyba po deployi má vyšší prioritu,
+- selhání formuláře v pracovní době může jít obchodnímu vlastníkovi,
+- selhání přihlášení nebo API jde technickému vlastníkovi.
+
+Ke každému alertu přidej kontext:
+
+```text
+Co selhalo: kontaktní formulář
+Od kdy: 2026-09-27 22:14 UTC
+Dopad: syntetická poptávka se neuložila do interní evidence
+Poslední úspěch: 2026-09-27 21:59 UTC
+Request ID: synthetic-20260927-2214-contact
+Runbook: /runbooks/contact-form-check.md
+```
+
+Bez toho je alert jen „něco je rozbité“. To je technický ekvivalent volání „hoří“ bez informace, jestli hoří toast nebo datacentrum.
+
+### Testovací účty drž jako produkční riziko
+
+Testovací účet v produkci je pořád účet v produkci. Má mít minimální oprávnění, silné přihlašování tam, kde dává smysl, jasného vlastníka a plán rotace. Nesmí být admin jen proto, že se to kdysi hodilo při ladění. „Kdysi se to hodilo“ je bezpečnostní anti-pattern převlečený za nostalgii.
+
+Minimum:
+
+- testovací účet má vlastní e-mail a popis účelu,
+- nemá přístup k zákaznickým datům,
+- má jen oprávnění potřebná pro kontrolovanou cestu,
+- je vyloučený z marketingové komunikace,
+- je označený v interních systémech jako syntetický,
+- má vlastní testovací tokeny s omezeným rozsahem,
+- rotace hesel a tokenů je zapsaná v provozním listu,
+- deaktivace účtu je součástí exit plánu monitoringu.
+
+U API kontrol preferuj samostatný testovací token s read-only nebo minimálním rozsahem. Pokud kontrola musí zapisovat, zapisuj do testovacího prostoru a pravidelně uklízej.
+
+### Kontrola po deployi
+
+Syntetické kontroly jsou nejcennější hned po nasazení. Nečekej, až pravidelný interval něco najde za půl hodiny. Po deployi spusť kritické kontroly okamžitě.
+
+Post-deploy mini postup:
+
+1. Deploy dokončen.
+2. Spustit syntetické kontroly kritických cest.
+3. Ověřit výsledek v cílových systémech.
+4. Pokud kontrola selže, zastavit další změny.
+5. Pokud existuje rollback, rozhodnout podle dopadu.
+6. Zapsat výsledek do release poznámky nebo provozního logu.
+
+Tohle je jednoduché a nudné. Přesně proto to funguje. Nejlepší release rutina není ta, která vypadá chytře. Je to ta, která zabrání pátečnímu večeru ve stylu „proč už tři hodiny nepřichází žádné leady?“
+
+### Checklist syntetických kontrol
+
+- [ ] Máme vybrané tři až pět kritických cest.
+- [ ] Každá kontrola má popsaný obchodní smysl a definici úspěchu.
+- [ ] Testovací data mají jednoznačný prefix nebo značku.
+- [ ] Testovací záznamy nejdou do běžné obchodní fronty.
+- [ ] Kontrola ověřuje cílový výsledek, ne jen kliknutí.
+- [ ] Testovací účty mají minimální oprávnění.
+- [ ] API tokeny pro kontroly mají omezený rozsah.
+- [ ] Frekvence kontrol odpovídá dopadu a nezatěžuje systém zbytečně.
+- [ ] Alert obsahuje dopad, poslední úspěch, request ID a runbook.
+- [ ] Kritické kontroly se spouští po deployi.
+- [ ] Syntetické události jsou oddělené od produktové analytiky.
+- [ ] Existuje rutina pro mazání nebo archivaci testovacích dat.
+
+### Mini šablona syntetické kontroly
+
+```markdown
+# Syntetická kontrola: [název cesty]
+
+## Smysl
+- Jaké obchodní riziko hlídá:
+- Kdo je vlastník:
+- Kdy je kontrola kritická:
+
+## Testovací data
+- Prefix / značka:
+- Testovací účet:
+- Testovací e-mail:
+- Testovací token:
+- Kam se záznam ukládá:
+- Jak se uklízí:
+
+## Kroky kontroly
+1.
+2.
+3.
+
+## Definice úspěchu
+- UI / API odpověď:
+- Cílový záznam:
+- Notifikace:
+- Maximální čas:
+
+## Alert
+- Po kolika selháních:
+- Kam jde:
+- Komu patří první reakce:
+- Runbook:
+- Rollback / fallback:
+
+## Privacy-first hranice
+- Co nesbíráme:
+- Co nelogujeme:
+- Retence testovacích dat:
+- Přístupy:
+```
+
+Syntetické kontroly jsou malá pojistka proti falešnému klidu. Neřeší všechno, ale dokážou včas ukázat, že se rozbila cesta, na které stojí důvěra nebo příjmy. A když jsou navržené privacy-first, nemusí kvůli tomu vzniknout další datová skládka. Jen pár disciplinovaných robotů, kteří potichu dělají nudnou práci. Což je pořád lepší než robot, který chce budget na rebranding.
+
 # Zdroje
 
 - European Data Protection Board: [Personal data breaches](https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en)
@@ -9583,6 +9796,7 @@ Obsahový refresh je jedna z nejlevnějších forem produktové práce. Bereš n
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „Syntetické kontroly kritických cest bez falešného klidu“ s výběrem kritických cest, testovacími daty, ověřováním cílových výsledků, frekvencí kontrol, alerty, bezpečností testovacích účtů, post-deploy rutinou, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Obsahový refresh bez honby za algoritmem“ s výběrem stránek podle dopadu, rychlým auditem, rozdělením změn na přesnost/použitelnost/distribuci, střídmým měřením, 60minutovým plánem, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Partnerské kampaně bez sledovacího cirkusu“ s typy partnerství, datově střídmým měřením kampaní, pravidly pro kupony a atribuci, partnerskou landing page, měsíčním vyhodnocením, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Prioritizace backlogu bez produktového hazardu“ s rozlišením signálů a rozhodnutí, jednoduchým skórováním, datovým filtrem, rozdělením backlogu na police, týdenní rutinou, checklistem a vyplnitelnou šablonou prioritizačního listu.
