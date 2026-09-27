@@ -8264,6 +8264,155 @@ Privacy-first pohled: CI/CD nemá být další datová skládka. Logy z buildu m
 Lokální vývoj má být rychlý, ale ne bez paměti. Když tým ví, odkud bere konfiguraci, jak vytváří testovací data a co dělat při úniku klíče, ubude improvizace. A improvizace je skvělá v jazzu, horší v zacházení s produkčními tokeny.
 
 
+
+## Příloha: QA a release rutina bez testovacího divadla
+
+Kvalita webu nebo SaaS nevzniká tím, že tým před releasem „ještě rychle všechno prokliká“. To je spíš rituál pro uklidnění svědomí. Skutečná QA rutina má pomoct najít chyby v místech, kde by bolely zákazníka, obchod nebo provoz. A má být tak malá, aby ji tým dělal pokaždé, ne jen když má volnější pátek a káva zrovna chutná jako optimismus.
+
+Moderní testování není jedna magická vrstva. Playwright například podporuje end-to-end testy a jeho Trace Viewer umožňuje po selhání projít jednotlivé kroky testu, DOM snapshoty, síťové požadavky a konzoli ([Playwright Trace Viewer](https://playwright.dev/docs/trace-viewer-intro)). OWASP Web Security Testing Guide zase připomíná, že bezpečnostní testování má být metodické a pokrývat různé oblasti aplikace, ne jen náhodný lov chyb ([OWASP Web Security Testing Guide](https://wstg.owasp.org/)). U výkonu dává smysl hlídat uživatelsky orientované metriky jako LCP, INP a CLS podle Core Web Vitals ([web.dev: Web Vitals](https://web.dev/articles/vitals)).
+
+> Codyho komentář: Nejlepší QA není nekonečný checklist. Nejlepší QA je malá sada nudných návyků, které zabrání tomu, aby se zákazník stal bezplatným testovacím oddělením. Zákazník má platit fakturu, ne debugovat tvůj checkout.
+
+### Začni rizikovou mapou produktu
+
+Nejdřív si napiš, co se nesmí rozbít. Ne z pohledu technické elegance, ale z pohledu škody. Jinou váhu má překlep v blogu, jinou nefunkční platba, neodeslaný kontaktní formulář, špatně nastavené oprávnění nebo export dat, který obsahuje cizí záznamy.
+
+Rozděl části produktu do čtyř kategorií:
+
+- **Peníze** — objednávka, platba, fakturace, upgrade, downgrade, zrušení tarifu.
+- **Důvěra** — login, reset hesla, role, export dat, smazání účtu, souhlasy.
+- **Poptávky** — formuláře, kalendář, e-mailové notifikace, lead magnety, kontaktní údaje.
+- **Viditelnost** — homepage, cenová stránka, SEO šablony, status page, dokumentace.
+
+Každá kategorie má mít několik kritických scénářů. Ty se testují před releasem ručně nebo automaticky. Zbytek se řeší podle rizika, ne podle ambice mít „100% coverage“, která vypadá hezky v prezentaci a občas nic neříká o skutečné důvěře.
+
+### Testovací pyramida pro malý tým
+
+Malý tým nepotřebuje testovací impérium. Potřebuje vrstvy, které se doplňují:
+
+- **Statické kontroly**: typy, lint, formátování, kontrola mrtvých odkazů, kontrola secrets před commitem.
+- **Unit testy**: výpočty, validace, oprávnění, transformace dat a malé funkce bez prohlížeče.
+- **Integrační testy**: formulář uloží data, webhook projde validací, e-mailová fronta dostane správnou zprávu.
+- **End-to-end smoke testy**: návštěvník projde hlavní cestu, zákazník se přihlásí, admin nevidí cizí data.
+- **Ruční kontrola**: text, důvěryhodnost, design, edge cases a rozhodnutí, která automat zatím neumí posoudit.
+
+Praktické pravidlo: automatizuj věci, které se často opakují a mají jasný očekávaný výsledek. Ručně kontroluj věci, kde záleží na úsudku, kontextu nebo tónu komunikace.
+
+### Release checklist, který nezabije tempo
+
+Release checklist má být krátký. Pokud má třicet bodů, tým ho začne přeskakovat. Pokud má osm bodů a jasného vlastníka, má šanci přežít kontakt s realitou.
+
+Minimum před nasazením:
+
+1. Prošly automatické kontroly a testy pro změněné části.
+2. Kritické cesty z rizikové mapy jsou ověřené.
+3. Migrace databáze má rollback nebo aspoň jasný nouzový plán.
+4. Nové eventy v analytice neobsahují osobní data ani obsah zpráv.
+5. Externí skripty, cookies a formuláře odpovídají privacy slibu webu.
+6. Změny v textech, cenách nebo právních stránkách zkontroloval člověk, který rozumí dopadu.
+7. Monitoring a alerty vědí, co se po releasu může pokazit.
+8. Tým ví, kdo sleduje první hodinu po nasazení.
+
+U menšího webu to může být patnáct minut. U SaaS s platbami a daty zákazníků klidně hodina. Důležité je, že release není jen technická událost. Je to změna v důvěře mezi produktem a uživatelem.
+
+### Privacy-first QA scénáře
+
+Privacy-first QA není jen „máme cookie lištu“. Testuj, jestli produkt skutečně drží datové hranice.
+
+Příklady scénářů:
+
+- Uživatel bez souhlasu nespustí marketingové měření.
+- Kontaktní formulář neposílá zbytečná pole do CRM.
+- Export dat obsahuje jen data daného účtu.
+- Admin s omezenou rolí nevidí citlivé sekce.
+- E-mailová notifikace neobsahuje víc osobních údajů, než příjemce potřebuje.
+- Logy neukládají celé zprávy, tokeny, hesla ani obsah formulářů.
+- Testovací prostředí nepoužívá produkční databázový dump.
+- AI asistent v interním workflow nedostává secrets ani zákaznický obsah bez jasného důvodu.
+
+Tohle jsou často lepší testy důvěry než další pixel-perfect kontrola tlačítka. Tlačítko může být o dva pixely vedle. Cizí faktura v exportu je jiná liga. Taková ta liga, kde už nikdo netleská.
+
+### Chyby zapisuj jako rozhodovací materiál
+
+Bug report nemá být literární útvar ani výkřik do tmy. Má pomoct rychle rozhodnout, jestli chybu opravit hned, dát do backlogu, nebo ji vědomě přijmout.
+
+Dobrý bug report obsahuje:
+
+- krátký název problému,
+- prostředí a verzi,
+- kroky k reprodukci,
+- očekávaný výsledek,
+- skutečný výsledek,
+- dopad na uživatele nebo provoz,
+- screenshot, trace nebo log bez citlivých dat,
+- návrh priority a vlastníka.
+
+U privacy nebo bezpečnostních chyb přidej ještě otázku: „Mohlo dojít k přístupu k osobním datům, jejich změně, ztrátě nebo zveřejnění?“ Pokud odpověď není jasné „ne“, nejde jen o bug. Je to potenciální incident a patří do incidentové rutiny.
+
+### Měření kvality bez vanity metrik
+
+Počítat počet testů je lákavé, ale samo o sobě to neříká, jestli produkt funguje lépe. Sleduj raději signály, které pomáhají rozhodovat:
+
+- kolik kritických chyb uniklo do produkce,
+- kolik releasů vyžadovalo rollback nebo hotfix,
+- jak dlouho trvá od nahlášení kritické chyby k opravě,
+- které části produktu se rozbíjejí opakovaně,
+- kolik support ticketů vzniká kvůli nejasnému UX,
+- jestli se po releasu zhoršily hlavní konverzní nebo provozní cesty.
+
+Kvalita není oddělení. Je to způsob, jak tým zachází se změnou. Čím menší tým, tím víc potřebuje jednoduchý systém, protože nemá kapacitu na heroické zachraňování každého releasu.
+
+### Checklist QA a releasu
+
+- Máme rizikovou mapu kritických cest.
+- Každá kritická cesta má ruční nebo automatický smoke test.
+- Testovací data neobsahují produkční osobní údaje.
+- Release checklist má vlastníka a vejde se na jednu stránku.
+- Nové eventy a logy neukládají citlivý obsah.
+- Rollback nebo nouzový plán je popsaný před releasem.
+- První hodinu po nasazení někdo sleduje monitoring a support.
+- Bug reporty obsahují dopad, reprodukci a důkaz bez citlivých dat.
+- Opakované chyby se řeší systémově, ne jen další záplatou.
+- Kvalita se měří podle dopadu na uživatele, ne podle počtu zelených odznáčků.
+
+### Mini šablona QA plánu
+
+```markdown
+# QA plán: [produkt / release]
+
+## Kritické cesty
+- [cesta]: [proč je riziková]
+- [cesta]: [proč je riziková]
+
+## Automatické kontroly
+- Typy:
+- Lint/formát:
+- Unit testy:
+- Integrační testy:
+- E2E smoke testy:
+
+## Privacy-first kontroly
+- Cookies a souhlasy:
+- Logy:
+- Exporty:
+- Role a oprávnění:
+- Testovací data:
+
+## Release plán
+- Datum a čas:
+- Vlastník releasu:
+- Rollback / nouzový postup:
+- Monitoring po nasazení:
+
+## Výsledek
+- Nasazeno / odloženo:
+- Důvod:
+- Nalezené chyby:
+- Follow-up úkoly:
+```
+
+QA má být brzda jen tehdy, když jedeš do zdi. Ve všech ostatních případech je to volant, mapa a kontrolka paliva. Méně heroismu, více rutiny. Produkt pak působí klidněji — a klid je v B2B SaaS překvapivě dobrý prodejní argument.
+
 # Zdroje
 
 - European Data Protection Board: [Personal data breaches](https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en)
@@ -8326,11 +8475,15 @@ Lokální vývoj má být rychlý, ale ne bez paměti. Když tým ví, odkud ber
 - OpenAPI Initiative: [OpenAPI Specification](https://spec.openapis.org/oas/)
 - AsyncAPI Initiative: [AsyncAPI documentation](https://www.asyncapi.com/docs)
 - RFC Editor: [RFC 9457 — Problem Details for HTTP APIs](https://www.rfc-editor.org/rfc/rfc9457.html)
+- Playwright: [Trace Viewer](https://playwright.dev/docs/trace-viewer-intro)
+- OWASP: [Web Security Testing Guide](https://wstg.owasp.org/)
+- web.dev: [Web Vitals](https://web.dev/articles/vitals)
 
 ---
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „QA a release rutina bez testovacího divadla“ s rizikovou mapou produktu, vrstvením testů, krátkým release checklistem, privacy-first QA scénáři, bug reportem, metrikami kvality a vyplnitelnou šablonou QA plánu.
 - 2026-09-27: Doplněna příloha „Lokální vývoj a secrets bez chaosu“ s oddělením konfigurace podle prostředí, pravidly pro secrets, syntetickými seed daty, git hygienou, onboardingem vývojáře, CI/CD kontrolami, checklistem a vyplnitelnou šablonou provozního listu.
 - 2026-09-27: Doplněna příloha „Incidentová komunikace bez paniky a mlžení“ s rolemi pro malý tým, vyhodnocením dopadu na osobní data, status komunikací, postmortemem, checklistem a šablonou incidentového záznamu.
 - 2026-09-27: Doplněna příloha „API dokumentace bez support ping-pongu“ s integračními příběhy, minimální strukturou dokumentace, OpenAPI/AsyncAPI specifikací, jednotnými chybami podle RFC 9457, privacy-first popisem polí, sandboxem, changelogem, checklistem a vyplnitelnou šablonou.
