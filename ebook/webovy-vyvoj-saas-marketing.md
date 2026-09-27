@@ -6252,6 +6252,203 @@ Další krok:
 
 Nabídka má být dost konkrétní na to, aby chránila obě strany, a dost srozumitelná na to, aby ji přečetl člověk, který nemá čas dekódovat agenturní poezii. Když klient po přečtení ví, co kupuje, proč to dává smysl, jaká data budou ve hře a co se stane dál, nabídka splnila svou práci.
 
+## Příloha: Předání webu nebo SaaS bez ztracených klíčů
+
+Předání projektu není slavnostní e-mail s větou „hotovo, tady máte login“. Dobré předání je okamžik, kdy klient nebo interní tým dokáže systém provozovat, obnovit, upravit a bezpečně rozvíjet i bez člověka, který ho právě postavil. Pokud po předání pořád jen jeden vývojář ví, kde běží produkce, kdo vlastní doménu a jak se restartuje worker, projekt není předaný. Je jen opuštěný s úsměvem.
+
+Privacy-first předání má ještě jednu vrstvu navíc: nestačí předat funkce. Musíš předat i odpovědnost za data. Kde vznikají, kam tečou, kdo k nim má přístup, jak dlouho zůstávají v systému a co se stane při incidentu. Bez toho se z každého „malého webu“ postupně stane datová půda, kde vedle starého vánočního banneru leží export kontaktů z roku, který už radši nikdo nevyslovuje.
+
+> Codyho komentář: Nejlepší předávací protokol je nudný. Když v něm není drama, improvizace a „zeptáme se Franty, až se vrátí z dovolené“, znamená to, že funguje.
+
+### Co má předání vyřešit
+
+Předávací protokol má odpovědět na pět praktických otázek:
+
+- Co přesně bylo dodáno?
+- Kde to běží a kdo to vlastní?
+- Jak se to nasazuje, zálohuje a obnovuje?
+- Jaká data systém zpracovává a kdo za ně odpovídá?
+- Co se má dělat při běžné změně, chybě nebo incidentu?
+
+Když jedna z odpovědí chybí, předání není hotové. Hezký web bez přístupu k DNS je jako firemní auto bez klíčků. Možná vypadá dobře, ale daleko s ním nedojedeš.
+
+### Inventář dodaných částí
+
+Začni jednoduchým inventářem. Nepiš román, piš seznam, který přežije i změnu týmu.
+
+U webu typicky uveď:
+
+- produkční URL,
+- testovací nebo preview URL,
+- repozitář se zdrojovým kódem,
+- použité frameworky a hlavní knihovny,
+- hosting a region provozu,
+- doménového registrátora a DNS správce,
+- analytiku, formuláře, e-mailové služby a další integrace,
+- dokumentaci, design soubory a grafické podklady.
+
+U SaaS doplň:
+
+- databáze a jejich účel,
+- úložiště souborů,
+- fronty, cron úlohy nebo workery,
+- platební systém,
+- transakční e-maily,
+- administraci,
+- monitoring a alerty,
+- proces migrací a rollbacku.
+
+Privacy-first pravidlo: u každé služby napiš, zda zpracovává osobní údaje, provozní metadata, technické logy nebo jen veřejný obsah. Jedna věta stačí. Ticho nestačí.
+
+### Přístupy předávej přes role, ne přes hesla v chatu
+
+Předání přístupů má být řízený proces, ne archeologická výprava do historie konverzací. Neposílej hesla e-mailem, ve Slacku ani v dokumentu, který se jmenuje `final-final-passwords.xlsx`. Ano, i když je to „jen dočasně“. Dočasně je v IT často jednotka času mezi dneškem a tepelnou smrtí vesmíru.
+
+Praktický postup:
+
+1. Sepiš všechny systémy, kde existuje účet, token nebo role.
+2. Urči vlastníka každého systému na straně klienta nebo firmy.
+3. Přidej nové účty konkrétním lidem podle role.
+4. Ověř, že se umí přihlásit a mají správná oprávnění.
+5. Odstraň dočasné účty, staré tokeny a přístupy dodavatelů, které už nejsou potřeba.
+6. Ulož záznam do registru přístupů.
+
+U menšího projektu stačí tabulka. U většího použij správce hesel a role v jednotlivých službách. Cíl není bezpečnostní divadlo. Cíl je, aby správný člověk měl správný přístup a nikdo jiný neměl přístup „protože se to kdysi hodilo“.
+
+### Provozní runbook
+
+Runbook je krátký návod pro běžné provozní situace. Nemusí popisovat celý vesmír. Má pomoct ve chvíli, kdy někdo potřebuje rychle udělat bezpečné rozhodnutí.
+
+Minimální runbook pro web:
+
+- jak spustit projekt lokálně,
+- jak nasadit změnu,
+- kde zkontrolovat build a deployment,
+- kde najít produkční logy,
+- jak ověřit formulář a odesílání e-mailů,
+- kde upravit základní obsah,
+- jak obnovit poslední funkční verzi.
+
+Minimální runbook pro SaaS:
+
+- jak zjistit stav aplikace,
+- jak ověřit databázi a migrace,
+- jak pozastavit rizikovou integraci,
+- jak obnovit službu po běžném výpadku,
+- kdo schvaluje zásah do produkčních dat,
+- jak komunikovat incident zákazníkům,
+- kde je poslední test obnovy ze zálohy.
+
+Piš runbook tak, aby podle něj postupoval i člověk, který projekt nevyvíjel. Když návod začíná větou „to je jasné“, není to návod. Je to past s přátelským úsměvem.
+
+### Datová část předání
+
+Předání bez datové části je neúplné. I malý web může mít kontaktní formulář, analytiku, serverové logy, zálohy, e-mailové notifikace a CRM integraci. Každý z těchto prvků může nést osobní údaje nebo provozní metadata.
+
+Do předání napiš:
+
+- jaké kategorie dat systém sbírá,
+- proč se sbírají,
+- kde jsou uložené,
+- kdo k nim má přístup,
+- jak dlouho se drží,
+- jak se mažou,
+- jak se exportují při ukončení spolupráce,
+- kdo je interní vlastník rozhodnutí o datech.
+
+Nemusí to být právnický traktát. Má to být provozní mapa. Když někdo za půl roku dostane dotaz „smažte moje údaje“, nemá odpověď hledat v paměti člověka, který mezitím přešel na pěstování rajčat a klidnější život.
+
+### Předávací schůzka
+
+Předávací schůzka má být praktická demonstrace, ne průvodní ceremonie. Ideální formát je 60 až 90 minut:
+
+1. Projdi inventář systému.
+2. Ukaž produkční provoz a administraci.
+3. Proveď malou bezpečnou změnu od lokálního spuštění po nasazení.
+4. Ukaž logy, monitoring a zálohy.
+5. Projdi datovou mapu a retenční pravidla.
+6. Sepiš otevřené otázky a vlastníky.
+
+Na konci schůzky má být jasné, kdo přebírá jakou část. Ne „firma“. Konkrétní člověk nebo role. Firma je skvělý právní pojem, ale špatně odpovídá na incidenty ve středu večer.
+
+### Checklist předání
+
+- [ ] Existuje seznam všech dodaných částí a jejich URL nebo umístění?
+- [ ] Je jasné, kdo vlastní doménu, DNS, hosting a repozitář?
+- [ ] Jsou předané přístupy přes osobní účty a role, ne sdíleným heslem?
+- [ ] Byly odstraněny dočasné účty, tokeny a nepotřebné dodavatelské přístupy?
+- [ ] Existuje krátký runbook pro nasazení, logy, zálohy a rollback?
+- [ ] Je popsané, jaká data systém zpracovává a kde leží?
+- [ ] Je uvedená retence pro formuláře, logy, exporty a zálohy?
+- [ ] Je otestované, že klient nebo interní tým umí provést základní provozní kroky?
+- [ ] Jsou známé otevřené body, rizika a další doporučené iterace?
+- [ ] Je jasné, kdo řeší incidenty a komu se ozvat mimo běžnou změnu?
+
+### Mini šablona předávacího protokolu
+
+```text
+Název projektu:
+
+Datum předání:
+
+Předává:
+
+Přebírá:
+
+Produkční URL:
+
+Preview / staging URL:
+
+Repozitář:
+
+Hosting a region provozu:
+
+Doména a DNS:
+
+Hlavní technologie:
+
+Dodané části:
+1.
+2.
+3.
+
+Integrace a externí služby:
+služba / účel / typ dat / vlastník / poznámka
+
+Přístupy:
+systém / vlastník / role / stav předání / poznámka
+
+Zálohy:
+co se zálohuje / frekvence / kde / test obnovy / odpovědná osoba
+
+Nasazení:
+stručný postup nebo odkaz na dokumentaci
+
+Rollback:
+stručný postup nebo odkaz na dokumentaci
+
+Monitoring a logy:
+kde / kdo sleduje / kdy vzniká alert
+
+Datová mapa:
+kategorie dat / účel / umístění / přístup / retence / mazání
+
+Otevřené body:
+1.
+2.
+3.
+
+Doporučené další iterace:
+1.
+2.
+3.
+
+Schválení předání:
+jméno / role / datum
+```
+
+Předání je poslední místo, kde můžeš levně odstranit budoucí chaos. Když ho odflákneš, zaplatíš později — při incidentu, redesignu, změně dodavatele nebo ve chvíli, kdy zákazník požádá o informaci, kterou „určitě někde máme“. Dobře předaný projekt není jen profesionální tečka. Je to pojistka proti tomu, aby se z webu nebo SaaS stal rukojmí jednoho člověka, jedné agentury nebo jednoho zapomenutého účtu.
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -6301,6 +6498,7 @@ Nabídka má být dost konkrétní na to, aby chránila obě strany, a dost sroz
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „Předání webu nebo SaaS bez ztracených klíčů“ s inventářem dodaných částí, pravidly pro přístupy, provozním runbookem, datovou částí, předávací schůzkou, checklistem a vyplnitelným předávacím protokolem.
 - 2026-09-27: Doplněna příloha „Nabídkový dokument bez buzzwordové mlhy“ s praktickou strukturou proposalu, vymezením rozsahu, datovou částí, variantami podle rizika, milníky, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Retenční kalendář bez datového syslení“ s účely dat, typickými zapomenutými kopiemi, rutinou mazání, zálohami, pravidly pro AI výstupy, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Interní dokumentace bez firemního archeologického muzea“ s typy znalostí, vlastnictvím stránek, rozhodovacím deníkem, pravidly pro AI kontext, vyhledáváním, měsíční úklidovou rutinou, checklistem a šablonou knowledge base stránky.
