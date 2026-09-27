@@ -7461,6 +7461,201 @@ Poznámky:
 
 Staging má být bezpečný cvičný prostor, ne zadní dveře do produkce. Když ho navrhneš dobře, urychlí vývoj, zklidní release a sníží riziko, že se testovací pohodlí promění v datový incident. A to je přesně ten typ nudy, který mám v provozu rád.
 
+
+
+## Příloha: Bezpečnostní hlavičky bez cargo cultu
+
+Bezpečnostní hlavičky nejsou kouzelná páska přes špatnou aplikaci. Jsou to dopravní značky pro prohlížeč: říkají, odkud se smí načítat skripty, jestli se má používat HTTPS, kdo může stránku vložit do iframe, kolik informací má odcházet v referreru a jaká citlivá oprávnění má web vůbec smět požadovat. Když je nastavíš dobře, snížíš dopad chyb. Když je nastavíš slepě podle náhodného blogpostu z roku „tenkrát to fungovalo“, rozbiješ checkout, obrázky, fonty nebo administraci. Krásná práce, Sherlocku.
+
+Cíl není mít nejdelší seznam hlaviček. Cíl je mít malou, srozumitelnou politiku, která odpovídá tomu, co web opravdu používá. Privacy-first web má navíc příjemnou výhodu: čím méně externích skriptů, pixelů, CDN a embedů, tím jednodušší bezpečnostní politika. Minimalismus tady není estetika. Je to levnější provozní kontrola.
+
+> Codyho komentář: Content Security Policy je jako dveřník v klubu. Když mu nedáš seznam hostů, pustí dovnitř divné existence. Když mu dáš hysterický seznam, nepustí ani kapelu. Potřebuješ realitu, ne ego.
+
+### Začni inventurou toho, co web načítá
+
+Nejdřív zjisti, co stránka skutečně tahá zvenku. Otevři hlavní stránky, administraci, formuláře, blog, checkout, přihlášení a dokumentaci. V prohlížeči zkontroluj síťové požadavky a napiš si domény podle účelu.
+
+Praktické skupiny:
+
+- vlastní doména a API,
+- fonty a statické assety,
+- obrázky a video,
+- analytika,
+- platební brána,
+- mapy, kalendáře nebo vložený obsah,
+- helpdesk, chat nebo formulářová služba,
+- vývojové a preview domény.
+
+U každé externí domény si polož tři otázky:
+
+1. Potřebujeme ji pro hlavní uživatelský úkol?
+2. Umíme ji nahradit vlastním hostingem, statickým souborem nebo přímým odkazem?
+3. Posílá se tam něco, co by uživatel nečekal?
+
+Pokud odpověď na první otázku není jasná, doména do bezpečnostní politiky nepatří. Nejdřív ji odstraň, potom piš CSP. Jinak budeš jen bezpečně dokumentovat vlastní nepořádek.
+
+### Content Security Policy po krocích
+
+Content Security Policy říká prohlížeči, odkud smí stránka načítat skripty, styly, obrázky, fonty, formuláře nebo rámce. Začni v režimu reportování, ne ostrým blokováním. Hlavička `Content-Security-Policy-Report-Only` ti ukáže, co by se rozbilo, aniž bys to rovnou rozbil návštěvníkům.
+
+Rozumný postup:
+
+- nastav základní politiku pro jednu důležitou šablonu,
+- otestuj hlavní tok uživatele,
+- projdi chyby v konzoli a reportech,
+- odeber zbytečné externí zdroje,
+- teprve potom přepni na ostrou hlavičku `Content-Security-Policy`,
+- drž rozdíl mezi produkcí, stagingem a lokálním vývojem v konfiguraci, ne v ručním přepisování.
+
+Základní startovací politika pro jednoduchý obsahový web může vypadat takto:
+
+```text
+default-src 'self';
+base-uri 'self';
+form-action 'self';
+frame-ancestors 'none';
+object-src 'none';
+img-src 'self' data:;
+font-src 'self';
+style-src 'self';
+script-src 'self';
+upgrade-insecure-requests;
+```
+
+Tohle není univerzální recept. Je to startovní bod. Jakmile máš platební bránu, vložené video, mapu nebo externí formulář, musíš politiku rozšířit vědomě a úzce. Nepřidávej `https:` všude jen proto, že to rychle umlčí chyby. To je jako vypnout alarm, protože ruší zloděje.
+
+### HTTPS a HSTS nastav až po ověření
+
+`Strict-Transport-Security` říká prohlížeči, že má pro danou doménu používat HTTPS. Je to výborné pravidlo, ale špatně nastavené může bolet, hlavně u subdomén. Než přidáš `includeSubDomains`, ověř, že všechny důležité subdomény opravdu fungují přes HTTPS a že nepoužíváš starou službu, která pořád visí někde v koutě jako zapomenutá vánoční ozdoba.
+
+Bezpečný postup:
+
+1. Ověř HTTPS na hlavní doméně i subdoménách.
+2. Začni kratší dobou platnosti, například několik hodin nebo dní.
+3. Sleduj chyby a podporu.
+4. Postupně prodluž `max-age`.
+5. `includeSubDomains` přidej až po inventuře subdomén.
+6. Preload řeš jen tehdy, když rozumíš návratnosti a riziku.
+
+Pro malý web je lepší pomalé jisté nastavení než dramatické „zapneme všechno a uvidíme“. Uvidíš hlavně paniku.
+
+### Rámce, referrery a oprávnění
+
+Vedle CSP a HSTS se vyplatí nastavit několik dalších hlaviček, které dávají prohlížeči jasné hranice.
+
+Praktické minimum:
+
+- `X-Content-Type-Options: nosniff` brání prohlížeči hádat typ souboru jinak, než server říká.
+- `Referrer-Policy: strict-origin-when-cross-origin` omezuje, kolik informací odchází při kliknutí na cizí doménu.
+- `Permissions-Policy` vypíná nepoužívaná oprávnění, například kameru, mikrofon nebo geolokaci.
+- `frame-ancestors` v CSP chrání proti nechtěnému vložení stránky do iframe.
+
+Privacy-first pohled je jednoduchý: pokud web nepotřebuje kameru, mikrofon, geolokaci, akcelerometr nebo clipboard, nemá smysl nechávat prohlížeči prostor se na to ptát. Uživatel ti nedal web proto, aby si stránka hrála na švýcarský nůž s podezřelou kapsou.
+
+Příklad `Permissions-Policy` pro běžný marketingový web:
+
+```text
+Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+```
+
+Pokud máš SaaS, který opravdu používá některé oprávnění, povol ho jen tam, kde je potřeba. Ne globálně pro celý web.
+
+### Chyby, které vídám pořád
+
+Nejčastější problém není absence hlaviček. Je to falešná jistota.
+
+Typické chyby:
+
+- CSP obsahuje `unsafe-inline` a `unsafe-eval`, protože se nechtělo řešit build.
+- V politice je `*`, protože někdo chtěl rychle opravit rozbitý widget.
+- Produkční CSP obsahuje vývojové domény a localhost.
+- HSTS má `includeSubDomains`, ale staré subdomény nejsou pod kontrolou.
+- Hlavičky se nastavují jen na HTML, ale ne na relevantní odpovědi aplikace.
+- Nikdo neví, kdo smí přidat novou externí doménu.
+- Reporty z CSP nikdo nečte, takže z nich je jen hlučný tapetový vzor.
+
+Dobré pravidlo pro tým:
+
+```text
+Nová externí doména je změna architektury, ne drobný detail ve footeru.
+```
+
+Když marketing chce nový nástroj, produkt chce nový widget nebo support chce nový chat, musí projít stejnou otázkou: jaká data odchází, kdo je zpracovává, odkud se skript načítá, jak ho vypneme a proč nestačí přímý odkaz nebo server-side integrace.
+
+### Checklist bezpečnostních hlaviček
+
+- Máme inventuru externích domén a účelů.
+- CSP jsme nejdřív testovali přes `Report-Only`.
+- Produkční CSP nepovoluje wildcard `*` bez jasného důvodu.
+- `script-src` a `connect-src` obsahují jen nezbytné zdroje.
+- `frame-ancestors` odpovídá tomu, zda stránku někdo oprávněně vkládá.
+- HSTS je zapnuté až po ověření HTTPS na subdoménách.
+- Referrer policy neposílá zbytečné detaily cizím webům.
+- Permissions policy vypíná nepoužívaná oprávnění.
+- Nové externí skripty mají vlastníka, důvod a datum revize.
+- Hlavičky testujeme po deployi, ne jen v lokálním pocitu vítězství.
+
+### Mini šablona bezpečnostní politiky webu
+
+```text
+Web / aplikace:
+
+Vlastník bezpečnostních hlaviček:
+
+Datum poslední revize:
+
+Hlavní typ webu:
+- obsahový web / SaaS / e-shop / klientská zóna / dokumentace / jiné:
+
+Externí domény a účel:
+1. Doména:
+   Účel:
+   Typ dat:
+   Vlastník v týmu:
+   Lze nahradit přímým odkazem nebo vlastním hostingem? Ano / Ne
+
+2. Doména:
+   Účel:
+   Typ dat:
+   Vlastník v týmu:
+   Lze nahradit přímým odkazem nebo vlastním hostingem? Ano / Ne
+
+CSP režim:
+- Report-Only od:
+- Ostré blokování od:
+- Kam chodí reporty:
+- Kdo reporty kontroluje:
+
+Základní direktivy:
+- default-src:
+- script-src:
+- style-src:
+- img-src:
+- font-src:
+- connect-src:
+- form-action:
+- frame-ancestors:
+
+HTTPS / HSTS:
+- max-age:
+- includeSubDomains: Ano / Ne
+- preload: Ano / Ne
+- Ověřené subdomény:
+
+Další hlavičky:
+- X-Content-Type-Options:
+- Referrer-Policy:
+- Permissions-Policy:
+
+Známé výjimky a důvod:
+
+Co se má znovu ověřit po příštím deployi:
+
+Rozhodnutí pro příští revizi:
+```
+
+Bezpečnostní hlavičky jsou dobrý příklad toho, jak privacy-first přístup šetří práci. Když web stojí na vlastních assetech, přímých odkazech, jednoduché analytice a minimálním počtu externích skriptů, bezpečnostní politika je kratší, čitelnější a lépe udržitelná. Méně magie, méně výjimek, méně nočních zpráv typu „proč se nám po deployi nezobrazuje formulář“.
+
 # Zdroje
 
 - W3C: [Web Content Accessibility Guidelines (WCAG) 2.2](https://www.w3.org/TR/wcag/)
@@ -7514,11 +7709,16 @@ Staging má být bezpečný cvičný prostor, ne zadní dveře do produkce. Kdy�
 - ICANN: [Registration Data Policy](https://www.icann.org/resources/pages/registration-data-policy-2024-02-21-en)
 - Cloudflare Docs: [CAA records](https://developers.cloudflare.com/ssl/edge-certificates/additional-options/certificate-authority-authorization/)
 - CZ.NIC: [DNSSEC](https://www.nic.cz/page/430/dnssec/)
+- MDN Web Docs: [Content-Security-Policy header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy)
+- MDN Web Docs: [Strict-Transport-Security header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security)
+- MDN Web Docs: [Permissions-Policy header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Permissions-Policy)
+- OWASP Cheat Sheet Series: [HTTP Headers Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html)
 
 ---
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „Bezpečnostní hlavičky bez cargo cultu“ s inventurou externích zdrojů, postupným zavedením CSP, HSTS, referrer a permissions policy, typickými chybami, checklistem a vyplnitelnou šablonou bezpečnostní politiky.
 - 2026-09-27: Doplněna příloha „Staging a testovací data bez úniku produkce“ s oddělením prostředí, syntetickými seed daty, správou tajemství, ochranou přístupů, smoke testem, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Export dat a zrušení účtu bez držení rukojmí“ s praktickým návrhem exportních vrstev, bezpečností exportu, férovým cancel flow, rozlišením deaktivace/smazání/archivace, offboardingovým e-mailem, interním runbookem, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „SaaS metriky bez vanity dashboardu“ s rozhodovacími metrikami, rytmem kontrol, privacy-first eventy, segmentací bez profilování, strážnými metrikami, checklistem a vyplnitelnou šablonou metrikového listu.
