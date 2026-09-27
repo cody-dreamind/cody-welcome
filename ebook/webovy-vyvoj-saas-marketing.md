@@ -9723,6 +9723,202 @@ Tohle je jednoduché a nudné. Přesně proto to funguje. Nejlepší release rut
 
 Syntetické kontroly jsou malá pojistka proti falešnému klidu. Neřeší všechno, ale dokážou včas ukázat, že se rozbila cesta, na které stojí důvěra nebo příjmy. A když jsou navržené privacy-first, nemusí kvůli tomu vzniknout další datová skládka. Jen pár disciplinovaných robotů, kteří potichu dělají nudnou práci. Což je pořád lepší než robot, který chce budget na rebranding.
 
+
+## Příloha: Rozpočet webu a SaaS bez skrytého provozního dluhu
+
+Rozpočet na web nebo SaaS se často tváří jako jednoduchá tabulka: design, vývoj, hosting, marketing. Jenže skutečný život je trochu méně elegantní a trochu víc připomíná sklep, kam někdo deset let odkládal kabely „pro jistotu“. Do rozpočtu patří i údržba, bezpečnost, obsah, měření, podpora, právní minimum, přístupy, zálohy a čas lidí, kteří budou produkt provozovat po spuštění.
+
+Privacy-first rozpočet není automaticky dražší. Je jen poctivější: nepočítá s tím, že náklady schováš do sledovacích skriptů, nejasných dodavatelů, chaotických exportů nebo budoucího „to nějak vyřešíme“. Když víš, co tě provoz stojí, můžeš lépe rozhodovat, co automatizovat, co zjednodušit a co vůbec nedělat.
+
+### Rozděl rozpočet podle životního cyklu
+
+Nedělej jeden velký pytel „web“. Rozděl náklady podle toho, kdy vznikají a jaké rozhodnutí podporují:
+
+1. **Strategie a zadání** — cíle, cílové skupiny, nabídka, rozsah, datové hranice, měřicí plán.
+2. **Vytvoření** — UX, design, texty, vývoj, integrace, migrace obsahu, přístupnost, technické SEO.
+3. **Spuštění** — doména, DNS, e-mailová doručitelnost, monitoring, zálohy, právní texty, testování kritických cest.
+4. **Provoz** — hosting, aktualizace, bezpečnostní opravy, obsahový refresh, zákaznická podpora, analytika, drobný vývoj.
+5. **Změny a růst** — experimenty, nové funkce, lokalizace, integrace, migrace, kampaně, partnerství.
+6. **Ukončení nebo migrace** — export dat, předání, archivace, odpojení služeb, zrušení přístupů.
+
+Praktický trik: u každé položky napiš, jestli je **jednorázová**, **měsíční**, **čtvrtletní**, nebo **spouštěná událostí**. Tím rychle zjistíš, jestli máš rozpočet na projekt, nebo jen hezkou cenovku za první deploy.
+
+### Počítej náklady na rozhodnutí, ne jen na software
+
+Nástroj za pár eur měsíčně může být levný. Nástroj, který každý měsíc sežere tři hodiny ruční práce, dvě hodiny vysvětlování a jeden mini incident v datech, levný není. Proto ke každé službě přidej tyto neviditelné náklady:
+
+- **Čas nastavení** — kdo službu zavede, zdokumentuje a otestuje.
+- **Čas provozu** — kdo řeší aktualizace, faktury, incidenty a dotazy.
+- **Čas učení** — kdo umí nástroj používat bez toho, aby z něj vznikl interní escape room.
+- **Riziko dat** — jaká osobní nebo obchodně citlivá data přes službu tečou.
+- **Exit náklady** — jak rychle lze odejít, vyexportovat data a nahradit službu.
+
+Codyho komentář: Nejlevnější SaaS je někdy ten, který vůbec nekoupíš. Druhý nejlevnější je ten, který používáš nudně, konzistentně a bez patnácti integrací, které vznikly v pátek odpoledne „jen na chvíli“.
+
+### Vytvoř tři rozpočtové varianty podle rizika
+
+Místo jedné nabídky připrav tři varianty. Ne podle toho, kolik animací se vejde na homepage, ale podle provozního rizika:
+
+| Varianta | Pro koho je | Typický rozsah | Co nesmí chybět |
+| --- | --- | --- | --- |
+| **Lean** | Ověření nabídky, jednoduchý web, malý provoz | Statický web, základní formulář, jednoduchá analytika, manuální procesy | Jasný vlastník, minimální monitoring, export obsahu, bezpečný formulář |
+| **Provozní minimum** | Web nebo SaaS, který už generuje poptávky nebo tržby | CMS nebo aplikace, role, zálohy, monitoring, provozní runbook, měsíční rutina | Přístupy, zálohy, incidentový postup, datová mapa, pravidelný obsahový refresh |
+| **Růstová infrastruktura** | Produkt s týmem, integracemi a vyšším dopadem výpadku | Více prostředí, CI/CD, audit logy, detailnější metriky, podpora, dokumentace | Exit plán, vendor audit, retenční pravidla, syntetické kontroly, roadmapa provozního dluhu |
+
+Tahle tabulka pomáhá prodávat i rozhodovat. Zakladatel nebo klient nevybírá „levné vs. drahé“, ale „jaké riziko jsme ochotni nést“. To je dospělejší rozhovor. Ano, méně sexy než gradientové tlačítko, ale obvykle užitečnější.
+
+### Odděl vývojový dluh od provozního dluhu
+
+Vývojový dluh znamená, že kód bude později těžší měnit. Provozní dluh znamená, že tým nebude vědět, co dělat, když se něco stane. Oba bolí, ale každý jinak.
+
+Příklady vývojového dluhu:
+
+- komponenty bez jasného vlastnictví,
+- integrace bez testů,
+- ruční deploy,
+- nepojmenované environment proměnné,
+- chybějící typy nebo dokumentace API.
+
+Příklady provozního dluhu:
+
+- nikdo neví, kde jsou zálohy,
+- faktury chodí na osobní e-mail bývalého dodavatele,
+- přístupy nejsou evidované,
+- incidenty se řeší jen v chatu,
+- data se mažou podle nálady, nikoli podle retenčního pravidla.
+
+Do rozpočtu dej obě kategorie. Když šetříš, rozhodni vědomě, který dluh bereš a kdy ho splatíš. „Teď to neřešíme“ je přijatelné pouze tehdy, když má datum návratu. Jinak je to jen lístek do tomboly o budoucí průšvih.
+
+### Privacy-first položky dej do rozpočtu viditelně
+
+Soukromí nesmí být schované jako poznámka pod čarou. V rozpočtu má mít vlastní řádky, protože jinak zmizí při prvním škrtání:
+
+- datová mapa a účely zpracování,
+- kontrola formulářů a retenčních pravidel,
+- výběr evropského nebo dobře smluvně ošetřeného provozu,
+- DPA a subprocesory u kritických dodavatelů,
+- cookie a tracking inventura,
+- export nebo smazání dat na žádost uživatele,
+- dokumentace přístupů a offboarding.
+
+Nejde o právnickou parádu. Jde o to, aby produkt nevyrůstal na hromadě dat, která nikdo nepotřebuje, ale všichni se tváří, že jsou „možná jednou užitečná“. V Evropě je navíc lepší mít kontrolu nad daty jako součást návrhu, ne jako krizovou opravu po e-mailu od nespokojeného uživatele.
+
+### Měsíční provozní budget plánuj jako kapacitu
+
+U malých týmů je největší limit často čas, ne faktura za hosting. Proto si u každého měsíce rezervuj provozní kapacitu. Minimum pro menší web nebo SaaS:
+
+- **30 minut** kontrola dostupnosti, chyb, formulářů a doručitelnosti.
+- **45 minut** obsahový nebo produktový refresh podle priorit.
+- **30 minut** kontrola přístupů, záloh a otevřených bezpečnostních úkolů.
+- **30 minut** vyhodnocení metrik a rozhodnutí, co dál.
+- **15 minut** úklid dokumentace: co se změnilo, co se má smazat, co musí vědět další člověk.
+
+Dvě až tři hodiny měsíčně dokážou zachránit víc peněz než heroická rekonstrukce po roce zanedbávání. A hlavně: když je provozní čas v kalendáři, není to „až bude chvíle“. Chvíle totiž nikdy nepřijde. Má jiné plány.
+
+### Jak škrtat bez sabotáže
+
+Když rozpočet nevychází, neškrtni automaticky testy, monitoring nebo dokumentaci. To je jako šetřit na brzdách, protože auto ještě nejede rychle. Škrtej podle pořadí:
+
+1. **Nice-to-have vizuální efekty** — pokud nepomáhají rozhodnutí uživatele.
+2. **Nadměrné integrace** — pokud nepřinášejí měřitelnou úsporu času nebo lepší službu.
+3. **Příliš detailní personalizace** — pokud vyžaduje sběr dat, který není nutný.
+4. **Komplexní automatizace** — pokud proces ještě není ověřený ručně.
+5. **Rozsah obsahu** — raději méně kvalitních stránek než katalog prázdných slibů.
+
+Naopak neškrtej bez náhradního plánu:
+
+- zálohy,
+- kontrolu přístupů,
+- bezpečnostní aktualizace,
+- monitoring kritických cest,
+- export dat,
+- základní dokumentaci provozu.
+
+### Rozpočtový rozhovor s klientem nebo týmem
+
+Dobrá otázka nezní: „Kolik na to máme?“ Lepší sada otázek:
+
+- Co se stane, když web týden nefunguje?
+- Co se stane, když přestane chodit formulář?
+- Která data by byla problém ztratit?
+- Která data bychom raději vůbec neměli sbírat?
+- Kdo bude produkt provozovat po spuštění?
+- Jak poznáme, že investice splnila účel?
+- Co musí jít vypnout, exportovat nebo předat?
+
+Z odpovědí často vypadne rozumnější rozpočet než z odhadu „kolik stojí web“. Web totiž nestojí jen peníze. Stojí rozhodnutí, pozornost a disciplínu.
+
+### Checklist rozpočtu bez skrytého provozního dluhu
+
+- [ ] Rozpočet je rozdělený na strategii, vytvoření, spuštění, provoz, růst a ukončení.
+- [ ] Každá položka má označení jednorázová / měsíční / čtvrtletní / událostní.
+- [ ] U kritických nástrojů jsou uvedené časové, datové a exit náklady.
+- [ ] Existují alespoň dvě varianty podle rizika, ne jen podle rozsahu funkcí.
+- [ ] Privacy-first položky jsou viditelné a nejsou schované v obecném „compliance“.
+- [ ] Rozpočet obsahuje pravidelnou měsíční provozní kapacitu.
+- [ ] Je jasné, co se škrtá jako první a co se neškrtá bez náhradního plánu.
+- [ ] Vývojový a provozní dluh jsou pojmenované, vlastněné a mají datum revize.
+- [ ] Rozpočet počítá s předáním, exportem nebo ukončením služby.
+- [ ] Tým ví, podle jakých signálů se rozpočet navýší, zjednoduší nebo zastaví.
+
+### Mini šablona rozpočtového listu
+
+```markdown
+# Rozpočtový list: [projekt / produkt]
+
+## Kontext
+- Cíl projektu:
+- Vlastník rozpočtu:
+- Vlastník provozu:
+- Kritické cesty:
+- Největší riziko výpadku:
+
+## Jednorázové náklady
+| Oblast | Položka | Odhad | Vlastník | Poznámka |
+| --- | --- | --- | --- | --- |
+| Strategie | | | | |
+| Design / UX | | | | |
+| Vývoj | | | | |
+| Obsah | | | | |
+| Spuštění | | | | |
+| Privacy-first minimum | | | | |
+
+## Pravidelné náklady
+| Položka | Frekvence | Cena / čas | Vlastník | Riziko při zanedbání |
+| --- | --- | --- | --- | --- |
+| Hosting | měsíčně | | | |
+| Monitoring | měsíčně | | | |
+| Zálohy | měsíčně | | | |
+| Aktualizace | měsíčně | | | |
+| Obsahový refresh | měsíčně | | | |
+| Přístupy a bezpečnost | čtvrtletně | | | |
+
+## Provozní dluh
+- Co vědomě odkládáme:
+- Proč je to přijatelné:
+- Do kdy se k tomu vrátíme:
+- Kdo hlídá revizi:
+
+## Privacy-first hranice
+- Jaká data nesbíráme:
+- Kde data běží:
+- Kdo má přístup:
+- Jak se exportují:
+- Jak se mažou:
+
+## Škrtací pravidla
+- Co škrtáme první:
+- Co neškrtáme bez náhrady:
+- Jak poznáme, že je varianta příliš riziková:
+
+## Rozhodnutí
+- Vybraná varianta:
+- Důvod:
+- Datum revize:
+```
+
+Rozpočet není tabulka pro účetní rituál. Je to mapa závazků. Když do ní dáš i provoz, soukromí, údržbu a exit, produkt začne působit méně jako jednorázová kampaň a víc jako služba, které může zákazník věřit. A důvěra je v SaaS pořád jedna z mála věcí, které nejde jednoduše doinstalovat přes plugin.
+
 # Zdroje
 
 - European Data Protection Board: [Personal data breaches](https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en)
@@ -9796,6 +9992,7 @@ Syntetické kontroly jsou malá pojistka proti falešnému klidu. Neřeší vše
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „Rozpočet webu a SaaS bez skrytého provozního dluhu“ s rozdělením nákladů podle životního cyklu, TCO pohledem na nástroje, variantami podle rizika, rozlišením vývojového a provozního dluhu, privacy-first položkami, škrtacími pravidly, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Syntetické kontroly kritických cest bez falešného klidu“ s výběrem kritických cest, testovacími daty, ověřováním cílových výsledků, frekvencí kontrol, alerty, bezpečností testovacích účtů, post-deploy rutinou, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Obsahový refresh bez honby za algoritmem“ s výběrem stránek podle dopadu, rychlým auditem, rozdělením změn na přesnost/použitelnost/distribuci, střídmým měřením, 60minutovým plánem, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Partnerské kampaně bez sledovacího cirkusu“ s typy partnerství, datově střídmým měřením kampaní, pravidly pro kupony a atribuci, partnerskou landing page, měsíčním vyhodnocením, checklistem a vyplnitelnou šablonou.
