@@ -6989,6 +6989,268 @@ Poznámky:
 
 Metriky jsou povedené tehdy, když se podle nich tým chová klidněji a přesněji. Ne když má víc grafů. Cílem není vědět o uživateli všechno. Cílem je vědět dost na to, abys zlepšil produkt, podpořil zákazníka a nepostavil si při tom vlastní malý sledovací průmysl.
 
+
+## Příloha: Export dat a zrušení účtu bez držení rukojmí
+
+Dobrý SaaS se pozná i podle toho, jak se chová, když zákazník odchází. Nejen když platí, chválí a kliká na tlačítka přesně podle produktového plánu. Export dat, zrušení účtu a férové ukončení služby nejsou vedlejší obrazovky pro právní oddělení. Jsou to důkaz důvěry.
+
+Pokud zákazník ví, že může odejít bez datového únosu, paradoxně se mu snáz zůstává. Nemusí se bát, že se z produktu stane hotel California s fakturací. Privacy-first SaaS má ukázat: data jsou tvoje, služba je naše práce, vztah je dobrovolný.
+
+> Codyho komentář: Lock-in není strategie. Je to přiznání, že se bojíš férového srovnání. Lepší je držet zákazníka hodnotou než exportním tlačítkem schovaným v podzemí nastavení.
+
+### Co má zákazník umět odnést
+
+Ne každý export musí být obří ZIP archiv s celou historií vesmíru. Ale zákazník má mít jasně popsané, co si může stáhnout, v jakém formátu a co v exportu z bezpečnostních důvodů není.
+
+Typické exportní vrstvy:
+
+- základní profil účtu,
+- projekty, položky, záznamy nebo dokumenty vytvořené zákazníkem,
+- faktury a účetní doklady,
+- seznam členů týmu a rolí,
+- nastavení workspace nebo projektu,
+- auditní/provozní záznamy v rozumném rozsahu,
+- přílohy nebo soubory, pokud jsou součástí produktu,
+- integrační konfigurace bez tajných tokenů.
+
+U každé vrstvy si napiš jednoduchou větu:
+
+```text
+Zákazník může exportovat ___ ve formátu ___, protože ___ .
+```
+
+Příklad:
+
+```text
+Zákazník může exportovat seznam projektů ve formátu CSV a JSON, protože ho může potřebovat pro reporting, migraci nebo archivaci mimo naši službu.
+```
+
+Tohle cvičení rychle odhalí datové bahno. Pokud neumíš říct, proč data držíš a jak je zákazník dostane ven, pravděpodobně nemáš produktovou architekturu, ale skladiště s přihlášením.
+
+### Formáty: čitelné, běžné a bez kouzel
+
+Export není místo pro kreativní proprietární formát, který otevře jen tvoje aplikace ve čtvrtek po úplňku. Cílem je, aby zákazník data opravdu použil.
+
+Praktické minimum:
+
+- CSV pro tabulková data,
+- JSON pro strukturovaná data a integrace,
+- PDF pro faktury, smluvní dokumenty a lidsky čitelné potvrzení,
+- ZIP pro balík více souborů,
+- README soubor s popisem struktury exportu.
+
+Když export obsahuje více tabulek, přidej `README.md` nebo `manifest.json`. Uveď v něm datum exportu, časové pásmo, seznam souborů, kódování, verzi schématu a stručný popis sloupců. Tenhle malý soubor šetří hodiny podpory a působí profesionálněji než magický archiv jménem `export_final_final_2.zip`.
+
+Příklad struktury:
+
+```text
+export-2026-09-27/
+  README.md
+  account.json
+  projects.csv
+  team-members.csv
+  invoices/
+    2026-001.pdf
+    2026-002.pdf
+  attachments/
+    ...
+```
+
+### Export není bezpečnostní díra
+
+Tlačítko „Stáhnout všechno“ je citlivá funkce. Má pomáhat zákazníkovi, ne útočníkovi. Proto export navrhuj jako bezpečnostní proces, ne jen další akci v menu.
+
+Doporučená pravidla:
+
+- export smí spustit jen vlastník účtu nebo role s výslovným oprávněním,
+- u citlivých exportů vyžaduj opětovné ověření přihlášení,
+- po vytvoření exportu pošli notifikaci vlastníkům účtu,
+- odkaz na export nech žít krátce,
+- velké exporty generuj asynchronně a audituj,
+- do exportu nikdy nevkládej tajné tokeny, API klíče ani hashe hesel,
+- do auditního logu ulož kdo, kdy a jaký typ exportu spustil.
+
+Privacy-first paradox: dobrý export chrání právo zákazníka odejít, ale zároveň nesmí otevřít vrata komukoli, kdo se dostal k jedné relaci v prohlížeči. Pohodlí je fajn. Účet vykradený přes pohodlný export už méně. To je takové UX s mírnou příchutí požáru.
+
+### Zrušení účtu bez nátlakové stezky
+
+Cancel flow má být jasný, klidný a férový. Může nabídnout alternativy, ale nesmí z člověka dělat laboratorní myš v bludišti.
+
+Dobré ukončení obsahuje:
+
+- jasné vysvětlení, co se stane s placením,
+- datum konce přístupu nebo konce fakturačního období,
+- možnost stáhnout data před deaktivací,
+- informaci, co bude s daty po ukončení,
+- jednoduché potvrzení bez manipulativních textů,
+- kontakt na podporu pro komplikované B2B případy,
+- potvrzovací e-mail se shrnutím.
+
+Špatné vzory:
+
+- schovat zrušení jen za podporu,
+- vyžadovat telefonát bez provozního důvodu,
+- používat tlačítka typu „Ano, chci zničit svůj úspěch“,
+- po zrušení dál posílat akviziční sekvence,
+- mazat účet okamžitě bez šance stáhnout důležitá data,
+- tvářit se, že pauza, downgrade a zrušení jsou jedno a totéž.
+
+Jestli potřebuješ důvod odchodu, zeptej se volitelně. Jedna krátká otázka stačí. Odcházející zákazník není focus group, kterou jsi právě unesl do formuláře.
+
+### Deaktivace, smazání a archivace nejsou totéž
+
+Ukončení účtu má mít několik stavů. Když je nemáš pojmenované, tým začne improvizovat a zákazníci dostanou tři různé odpovědi podle toho, kdo má zrovna službu.
+
+Praktické stavy:
+
+- aktivní účet,
+- zrušené obnovování předplatného,
+- účet v ochranné lhůtě pro export,
+- deaktivovaný účet bez běžného přístupu,
+- smazaný účet,
+- anonymizovaný historický záznam pro agregované statistiky,
+- zákonně nebo účetně držené doklady mimo produktová data.
+
+Ke každému stavu napiš:
+
+- kdo ho může nastavit,
+- co vidí zákazník,
+- co vidí podpora,
+- jak dlouho stav trvá,
+- co se děje s daty,
+- jak se dá stav vrátit zpět, pokud vůbec.
+
+Největší riziko je slovo „smazáno“, když ve skutečnosti data dál žijí v zálohách, support systému, e-mailingu a starém exportu na disku. Nepoužívej sliby, které neumíš provozně splnit. Raději napiš přesně: produktová data smažeme do určité interní lhůty, některé účetní doklady zůstávají v oddělené evidenci a zálohy se přepíšou podle retenčního cyklu.
+
+### Offboardingový e-mail, který pomáhá
+
+Po zrušení účtu pošli krátký e-mail. Ne jako poslední zoufalý prodejní výkřik, ale jako servisní shrnutí.
+
+Měl by obsahovat:
+
+- potvrzení zrušení,
+- datum ukončení služby nebo přístupu,
+- odkaz na export dat, pokud je dostupný,
+- informaci o retenční lhůtě,
+- kontakt pro fakturační nebo technické dotazy,
+- možnost dát zpětnou vazbu jedním odkazem,
+- žádné sledovací pixely a žádné drama.
+
+Příklad:
+
+```text
+Předmět: Potvrzení zrušení účtu
+
+Ahoj,
+
+potvrzujeme zrušení účtu [název účtu]. Přístup zůstane aktivní do [datum].
+
+Data si můžeš stáhnout tady: [exportní odkaz]
+Odkaz bude dostupný do [datum].
+
+Produktová data budeme po ukončení držet podle našeho retenčního pravidla: [stručně]. Fakturační doklady zůstávají odděleně podle účetních potřeb.
+
+Pokud je něco špatně nebo potřebuješ pomoct s migrací, napiš na [kontakt].
+
+Díky, že jsi produkt používal/a.
+```
+
+Tón má být klidný. Žádné „budeš nám chybět“ pětkrát za sebou, žádné animované slzy, žádný kupón ukrytý mezi výčitkami. Lidskost ano, citové vydírání ne.
+
+### Interní runbook pro odchod zákazníka
+
+B2B zákazník často neodchází jedním kliknutím. Má faktury, tým, integrace, API tokeny, data v projektech a možná i ruční domluvy. Proto potřebuješ interní runbook.
+
+Runbook má odpovědět:
+
+- kdo kontroluje nezaplacené faktury,
+- kdo zákazníkovi nabídne export nebo migraci,
+- kdo vypíná integrace,
+- kdo ruší API tokeny,
+- kdo kontroluje support tickety,
+- kdo potvrzuje smazání nebo anonymizaci,
+- kdo aktualizuje CRM nebo obchodní evidenci,
+- kdo zapíše důvod odchodu, pokud ho zákazník dobrovolně poskytl.
+
+U malého týmu to může být jedna stránka v interní dokumentaci. Důležité je, aby existovala dřív než první naštvaný enterprise zákazník s právníkem v kopii. To je totiž špatný moment na vymýšlení procesu. Lehce adrenalinový, ale špatný.
+
+### Checklist exportu a ukončení účtu
+
+- Umíme říct, která data zákazník může exportovat a proč.
+- Export používá běžné formáty jako CSV, JSON, PDF nebo ZIP.
+- Export obsahuje README nebo manifest s popisem souborů.
+- Citlivý export vyžaduje správnou roli a ideálně opětovné ověření.
+- Exportní odkazy mají omezenou životnost.
+- Cancel flow jasně říká, co se stane s přístupem, platbou a daty.
+- Zrušení účtu není schované za zbytečný telefonát.
+- Důvod odchodu je dobrovolný, krátký a bez nátlaku.
+- Rozlišujeme deaktivaci, smazání, anonymizaci a účetní archivaci.
+- Potvrzovací e-mail neobsahuje trackery ani manipulační texty.
+- Interní runbook říká, kdo řeší fakturaci, integrace, tokeny a data.
+- Retenční pravidla odpovídají tomu, co skutečně umíme provozně splnit.
+
+### Mini šablona exportního a offboardingového plánu
+
+```text
+Produkt / služba:
+
+Vlastník procesu:
+
+Jaká data lze exportovat:
+1.
+2.
+3.
+
+Formáty exportu:
+- CSV:
+- JSON:
+- PDF:
+- ZIP:
+
+Kdo smí export spustit:
+
+Vyžaduje export opětovné ověření? Ano / Ne
+
+Jak dlouho žije exportní odkaz:
+
+Co v exportu nikdy není:
+- API klíče
+- hesla / hashe hesel
+- interní poznámky podpory
+- jiné:
+
+Stavy účtu při ukončení:
+1. Aktivní:
+2. Zrušené obnovování:
+3. Ochranná lhůta pro export:
+4. Deaktivováno:
+5. Smazáno / anonymizováno:
+
+Retenční pravidla:
+- Produktová data:
+- Faktury a účetní doklady:
+- Support komunikace:
+- Logy:
+- Zálohy:
+
+Text potvrzovacího e-mailu:
+
+Interní kroky:
+- Fakturace:
+- Export / migrace:
+- Integrace:
+- API tokeny:
+- Support tickety:
+- CRM / evidence:
+
+Dobrovolná otázka na důvod odchodu:
+
+Poznámky pro příští revizi:
+```
+
+Férový export a zrušení účtu nejsou známka slabosti. Jsou známka dospělého produktu. Když zákazníkovi dovolíš odejít důstojně, zvyšuješ šanci, že se někdy vrátí, doporučí tě dál nebo aspoň neodejde s pocitem, že musel uniknout oknem.
+
+
 # Zdroje
 
 - W3C: [Web Content Accessibility Guidelines (WCAG) 2.2](https://www.w3.org/TR/wcag/)
@@ -7045,6 +7307,7 @@ Metriky jsou povedené tehdy, když se podle nich tým chová klidněji a přesn
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „Export dat a zrušení účtu bez držení rukojmí“ s praktickým návrhem exportních vrstev, bezpečností exportu, férovým cancel flow, rozlišením deaktivace/smazání/archivace, offboardingovým e-mailem, interním runbookem, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „SaaS metriky bez vanity dashboardu“ s rozhodovacími metrikami, rytmem kontrol, privacy-first eventy, segmentací bez profilování, strážnými metrikami, checklistem a vyplnitelnou šablonou metrikového listu.
 - 2026-09-27: Doplněna příloha „Přístupnost webu bez alibistického checklistu“ s proudem úkolů, semantickým HTML, kontrastem, alt texty, formuláři, 45minutovým auditem, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Migrace webu bez SEO ztrát a datového bordelu“ s URL mapou, pravidly pro obsah, analytiku, formuláře, den spuštění, týdenní kontrolu, checklistem a vyplnitelnou šablonou migračního plánu.
