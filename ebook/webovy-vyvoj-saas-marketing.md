@@ -6070,6 +6070,186 @@ Poznámky:
 
 Retenční kalendář není dokument pro šuplík. Je to provozní brzda proti datovému syslení. Když je krátký, konkrétní a pravidelně kontrolovaný, zmenšuje riziko, zrychluje odpovědi na požadavky zákazníků a nutí tým přemýšlet o datech jako o odpovědnosti, ne jako o nekonečné zásobě pro „možná někdy“.
 
+## Příloha: Nabídkový dokument bez buzzwordové mlhy
+
+Dobrá nabídka není PDF s logem, třemi módními slovy a větou „řešení na míru“. Dobrá nabídka je rozhodovací dokument. Má klientovi pomoct pochopit, co se bude dělat, proč zrovna takhle, co je mimo rozsah, jak se pozná úspěch a jaká data budou při spolupráci vznikat. Když tohle nabídka neumí, prodává hlavně naději. Naděje je fajn v poezii, v projektu je lepší mít rozsah.
+
+U webového vývoje, SaaS implementací, marketingu i AI automatizací se nabídky často rozbijí na dvou extrémech. Buď jsou moc technické a klient nerozumí hodnotě, nebo jsou moc marketingové a tým později neví, co vlastně slíbil. Privacy-first nabídka musí přidat ještě třetí rozměr: jasně říct, jak se bude zacházet s daty, přístupy, analytikou a externími nástroji.
+
+> Codyho komentář: Když nabídka zní jako generátor LinkedIn statusů po třetím espressu, není ambiciózní. Je nebezpečně mlhavá.
+
+### Začni rozhodnutím, které má klient udělat
+
+Nabídku nepiš jako seznam práce. Piš ji jako odpověď na klientovo rozhodnutí: „Máme do toho jít s vámi, teď, za těchto podmínek?“ Každá část nabídky má tomuhle rozhodnutí pomáhat.
+
+Praktická struktura úvodní části:
+
+- výchozí situace klienta,
+- problém nebo příležitost vlastními slovy klienta,
+- dopad, pokud se nic nezmění,
+- doporučený směr řešení,
+- co bude po dokončení jiné.
+
+Příklad slabé věty:
+
+```text
+Vytvoříme moderní web s důrazem na UX a SEO.
+```
+
+Lepší verze:
+
+```text
+Navrhneme a postavíme web, který menším B2B firmám během první návštěvy vysvětlí rozdíl mezi vašimi službami, zkrátí úvodní obchodní call a přivede poptávky přes formulář s minimem osobních údajů.
+```
+
+Druhá věta není jen hezčí. Dává týmu zadání, klientovi očekávání a projektu měřitelný směr.
+
+### Rozsah piš ve výsledcích, ne v aktivitách
+
+Klienta většinou nezajímá, že proběhne „workshop, wireframy, implementace komponent a nastavení analytiky“. Zajímá ho, co z toho dostane a co s tím bude moct dělat.
+
+Místo aktivit proto popiš výstupy:
+
+- strategické zadání webu se schválenou hlavní cílovou akcí,
+- informační architektura a návrh klíčových stránek,
+- produkční web včetně responzivního rozhraní,
+- základní SEO nastavení a technická indexovatelnost,
+- privacy-first analytika bez reklamních pixelů,
+- předávací dokumentace a provozní checklist.
+
+Aktivity můžeš doplnit, ale až jako způsob dodání. Výsledek má být hlavní hvězda. Aktivita je jen kulisa, i když má hezký název v angličtině.
+
+### Mimo rozsah napiš slušně a konkrétně
+
+Mimo rozsah není pasivně-agresivní poznámka. Je to ochrana vztahu. Čím dřív řekneš, co nabídka neobsahuje, tím menší šance, že se z projektu stane nekonečný bufet požadavků.
+
+Dobré formulace:
+
+- Součástí není průběžná tvorba blogových článků po spuštění webu.
+- Součástí není správa placených kampaní ani nasazení reklamních pixelů.
+- Součástí není migrace historických CRM dat, pokud nebude samostatně odsouhlasena.
+- Součástí není právní revize textů, smluv ani zásad zpracování osobních údajů.
+- Součástí není tvorba individuálních integrací mimo uvedené systémy.
+
+Privacy-first varianta mimo rozsah je obzvlášť důležitá: pokud klient později požádá o nástroj, který sbírá víc dat, než projekt potřebuje, musí být jasné, že to není „malá drobnost“, ale nové rozhodnutí s dopadem na provoz.
+
+### Data a přístupy dej přímo do nabídky
+
+Nabídka má obsahovat krátkou datovou část. Ne právnickou zeď textu, ale praktický popis toho, co bude tým potřebovat a co nebude sbírat.
+
+Minimum:
+
+- jaké přístupy budou potřeba,
+- kdo je poskytne a kdy,
+- jak se budou předávat bezpečně,
+- jaká data se budou používat při návrhu a testování,
+- zda se budou používat reálná zákaznická data, nebo anonymizované vzorky,
+- jaké externí nástroje projekt předpokládá,
+- co se po dokončení smaže, předá nebo ponechá.
+
+Příklad datové poznámky:
+
+```text
+Pro návrh a implementaci nebudeme potřebovat export databáze zákazníků. Pokud bude nutné ověřit formulář nebo napojení CRM, použijeme testovací data nebo anonymizovaný vzorek. Přístupy budeme přebírat přes dohodnutý správce hesel, nikoli e-mailem nebo chatem.
+```
+
+Tohle je malý odstavec s velkým efektem. Ukazuje profesionalitu, chrání klienta a zabraňuje klasickému „pošlete nám všechno, nějak se tím proklikáme“.
+
+### Varianty nabídky dělej podle rizika
+
+Tři balíčky jsou užitečné jen tehdy, když reprezentují skutečně jiné rozhodnutí. Nestačí „Basic, Pro, Enterprise“ s různým počtem podstránek. Lepší je ukázat rozdíl v riziku, rychlosti a míře jistoty.
+
+Příklad pro webový projekt:
+
+- Start: rychlé zpřesnění nabídky, landing page, základní měření, vhodné pro ověření trhu.
+- Growth: kompletní web, obsahová struktura, technické SEO, analytika, vhodné pro aktivní prodej.
+- Scale: web, integrace, dokumentace, provozní rutiny, předávka týmu, vhodné pro firmu s více lidmi a větším dopadem výpadku.
+
+Každá varianta má mít jasné kompromisy. Levnější varianta nesmí působit jako trest za menší rozpočet. Má být férově užší. Dražší varianta nemá být nafouknutá vata. Má snižovat konkrétní riziko.
+
+### Platební a schvalovací milníky
+
+U projektů nad pár dnů práce nedávej všechno do jednoho neurčitého termínu. Rozděl nabídku na milníky, které mají výstup a rozhodnutí.
+
+Praktický model:
+
+- Zahájení: potvrzené zadání, přístupy, fakturace zálohy.
+- Návrh: schválená struktura, textový směr, rozsah stránek.
+- Implementace: funkční verze ke kontrole, seznam otevřených bodů.
+- Spuštění: doména, měření, formuláře, přesměrování, základní monitoring.
+- Předání: dokumentace, přístupy, retenční pravidla, backlog dalších zlepšení.
+
+Ke každému milníku napiš, kdo schvaluje a co se stane, když schválení nepřijde včas. Není to nedůvěra. Je to ochrana kalendáře před projektem, který usne ve schvalovacím limbu a pak se probudí v pátek v 16:40.
+
+### Checklist nabídky bez mlhy
+
+- [ ] Je v první třetině jasně popsaný klientův problém?
+- [ ] Popisuje nabídka výsledky, ne jen aktivity?
+- [ ] Je jasné, co je mimo rozsah?
+- [ ] Obsahuje nabídka datovou a přístupovou část?
+- [ ] Jsou varianty rozlišené podle rizika, rychlosti nebo jistoty?
+- [ ] Má každá varianta jasné kompromisy?
+- [ ] Jsou uvedené milníky, výstupy a schvalovací body?
+- [ ] Je jasné, co klient musí dodat před startem?
+- [ ] Neobsahuje nabídka reklamní pixely nebo invazivní nástroje jako výchozí volbu?
+- [ ] Dá se z nabídky po podpisu vytvořit projektový plán bez luštění křišťálové koule?
+
+### Mini šablona nabídky
+
+```text
+Název nabídky:
+
+Klient:
+
+Datum:
+
+Platnost nabídky do:
+
+Výchozí situace:
+
+Hlavní problém nebo příležitost:
+
+Doporučený směr řešení:
+
+Co bude po dokončení jiné:
+
+Výstupy projektu:
+1.
+2.
+3.
+
+Mimo rozsah:
+1.
+2.
+3.
+
+Datové a přístupové předpoklady:
+
+Použité nástroje a provozní poznámky:
+
+Varianta 1:
+cena / rozsah / kompromis / vhodné pro
+
+Varianta 2:
+cena / rozsah / kompromis / vhodné pro
+
+Varianta 3:
+cena / rozsah / kompromis / vhodné pro
+
+Milníky:
+1. výstup / schvaluje / fakturace
+2. výstup / schvaluje / fakturace
+3. výstup / schvaluje / fakturace
+
+Co potřebujeme od klienta před startem:
+
+Rizika a otevřené otázky:
+
+Další krok:
+```
+
+Nabídka má být dost konkrétní na to, aby chránila obě strany, a dost srozumitelná na to, aby ji přečetl člověk, který nemá čas dekódovat agenturní poezii. Když klient po přečtení ví, co kupuje, proč to dává smysl, jaká data budou ve hře a co se stane dál, nabídka splnila svou práci.
+
 # Zdroje
 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
@@ -6119,6 +6299,7 @@ Retenční kalendář není dokument pro šuplík. Je to provozní brzda proti d
 
 # Pracovní log
 
+- 2026-09-27: Doplněna příloha „Nabídkový dokument bez buzzwordové mlhy“ s praktickou strukturou proposalu, vymezením rozsahu, datovou částí, variantami podle rizika, milníky, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Retenční kalendář bez datového syslení“ s účely dat, typickými zapomenutými kopiemi, rutinou mazání, zálohami, pravidly pro AI výstupy, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Interní dokumentace bez firemního archeologického muzea“ s typy znalostí, vlastnictvím stránek, rozhodovacím deníkem, pravidly pro AI kontext, vyhledáváním, měsíční úklidovou rutinou, checklistem a šablonou knowledge base stránky.
 - 2026-09-27: Doplněna příloha „Produktové experimenty bez profilování uživatelů“ s hypotézami, agregovaným měřením, férovými variantami, experimentovým deníkem, příkladem cenové stránky, checklistem a šablonou experimentu.
