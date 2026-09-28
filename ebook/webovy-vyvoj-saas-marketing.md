@@ -10978,7 +10978,144 @@ Externí role:
 Datum kontroly přístupů:
 ```
 
+
+## Příloha: Incidentová komunikace a status page bez mlhy
+
+Incident není jen technický problém. Je to test důvěry. Když služba spadne, formulář přestane odesílat poptávky nebo se pokazí platby, zákazníka většinou nezajímá interní drama v deploy pipeline. Zajímá ho, jestli víš, že je problém, jestli na něm pracuješ, jestli existuje náhradní postup a kdy dostane další informaci.
+
+Dobrá incidentová komunikace není marketingová poezie. Je krátká, pravdivá, pravidelná a nepředstírá jistotu tam, kde ji tým ještě nemá. Malý SaaS nebo web pro B2B klienty nemusí mít korporátní krizové centrum. Potřebuje jasný rytmus, odpovědnost a pár předem napsaných šablon, aby v panice nevznikaly věty typu „někteří uživatelé mohou zaznamenat snížený komfort“. Překlad: něco hoří, ale bojíme se říct co.
+
+> Codyho komentář: Nejhorší status page je ta, která svítí zeleně, zatímco zákazníci posílají screenshoty chyby. To není optimismus. To je veřejná fikce s uptime fontem.
+
+### Kdy komunikovat veřejně
+
+Ne každý drobný bug potřebuje status page. Ale pokud problém brání zákazníkovi dokončit důležitou akci, opakuje se, trvá déle než pár minut nebo se týká dat, komunikuj. Mlčení si lidé nevykládají jako klid. Vykládají si ho jako chaos.
+
+Praktické pravidlo:
+
+- **Interní poznámka** stačí pro drobné chyby bez dopadu na zákazníky.
+- **Cílená zpráva** patří zákazníkům, kterých se problém přímo týká.
+- **Status page** použij u výpadků, zpomalení, rozbitých plateb, přihlášení, API, e-mailů nebo klíčových integrací.
+- **Osobní kontakt** použij u velkých B2B klientů, citlivých dat a incidentů s obchodním dopadem.
+
+Nečekej na dokonalou diagnózu. První zpráva může říct: „Víme o problému s odesíláním formulářů, prověřujeme příčinu a další aktualizaci dáme do 30 minut.“ To je mnohem lepší než hodinu ladit dokonalý odstavec, zatímco zákazník mačká refresh jako sportovec na olympiádě.
+
+### Co do první zprávy patří
+
+První zpráva má čtyři části: co se děje, koho se to týká, co tým dělá a kdy přijde další update. Nehádej příčinu. Neslibuj čas opravy, pokud ho nevíš. Nepiš interní stack trace. Nepoužívej fráze, které chrání ego místo zákazníka.
+
+Dobrá první zpráva:
+
+```text
+Evidujeme problém s přihlášením do administrace. Veřejný web zůstává dostupný, ale část zákazníků se nemusí dostat do účtu. Problém prověřujeme a další aktualizaci zveřejníme do 30 minut.
+```
+
+Slabá první zpráva:
+
+```text
+Náš tým momentálně analyzuje nestandardní chování některých komponent v infrastruktuře. Děkujeme za pochopení.
+```
+
+Druhá zpráva má přidat posun: zúžení dopadu, náhradní postup, obnovenou část služby nebo informaci, že vyšetřování pokračuje. Pokud se nic nezměnilo, řekni to. Pravidelný rytmus je důležitější než falešné novinky.
+
+### Náhradní postup je zlato
+
+U každé kritické cesty si dopředu napiš, co má zákazník dělat, když automatika selže. Když nejde formulář, kam má poslat e-mail? Když nejde platba, jde vystavit faktura ručně? Když nejde klientská zóna, může podpora ověřit stav objednávky?
+
+Náhradní postup má být konkrétní:
+
+- e-mail pro urgentní kontakt,
+- telefon nebo chat jen pro kritické zákazníky,
+- ruční zadání objednávky,
+- dočasný formulář bez složité integrace,
+- statická stránka s instrukcemi,
+- možnost stáhnout důležitý soubor z alternativního odkazu.
+
+Privacy-first poznámka: náhradní postup nesmí být datová divočina. Když při výpadku přesměruješ lidi do sdílené tabulky, kam všichni vidí všechno, sice jsi „rychlý“, ale taky sis otevřel nový problém. Nouzový režim má sbírat minimum údajů a mít jasné mazání po vyřešení incidentu.
+
+### Status page bez trackerů a marketingového balastu
+
+Status page má být rychlá, dostupná a jednoduchá. Nemá načítat reklamní pixely, heatmapy ani newsletterové pop-upy. V incidentu lidé nechtějí konverzní funnel. Chtějí vědět, jestli služba funguje.
+
+Minimum status page:
+
+- aktuální stav hlavních komponent,
+- čas poslední aktualizace,
+- stručný popis dopadu,
+- historie incidentu v čase,
+- odkaz na podporu nebo náhradní postup,
+- možnost sledovat aktualizace přes RSS nebo e-mail bez marketingového souhlasu.
+
+Pokud používáš externí status page službu, zeptej se stejně jako u každého nástroje: kde jsou data, kdo má přístup, jak se dá exportovat historie, jestli stránka funguje i při výpadku hlavního webu a jestli umí jednoduché odběry bez sledovacího cirkusu. Status page na stejné infrastruktuře jako rozbitá aplikace je jako nouzový východ zamčený zevnitř. Hezký nápis, nulová pomoc.
+
+### Po incidentu napiš krátký postmortem
+
+Postmortem není hon na viníka. Je to způsob, jak snížit šanci opakování. U malého týmu stačí jedna stránka: časová osa, dopad, příčina, co fungovalo, co nefungovalo a tři konkrétní úkoly.
+
+Dobré otázky:
+
+- Jak jsme problém zjistili?
+- Jak dlouho trvalo potvrdit dopad?
+- Která kontrola chyběla?
+- Který alert byl užitečný a který jen dělal hluk?
+- Co zákazníkům chybělo v komunikaci?
+- Jaké osobní údaje se během řešení zbytečně objevily v chatech, exportech nebo screenshotech?
+- Co smažeme, anonymizujeme nebo přesuneme do bezpečnějšího procesu?
+
+Každý postmortem musí skončit úkoly s vlastníkem a termínem. „Zlepšíme monitoring“ není úkol. „Přidat syntetickou kontrolu přihlášení a alert na 3 po sobě jdoucí selhání do pátku“ už úkol je. Nudné? Ano. Užitečné? Taky ano. Vítej v provozu, tady konfety nahrazuje checklist.
+
+### Checklist: incidentová komunikace bez mlhy
+
+- [ ] Máme definované, kdy incident komunikujeme veřejně a kdy cíleně.
+- [ ] První zpráva obsahuje dopad, rozsah, aktuální akci a čas další aktualizace.
+- [ ] Nepíšeme odhady příčiny, dokud nejsou ověřené.
+- [ ] Každá kritická cesta má náhradní postup.
+- [ ] Nouzové postupy sbírají minimum osobních údajů.
+- [ ] Status page běží mimo hlavní infrastrukturu služby.
+- [ ] Status page nemá reklamní pixely, heatmapy ani zbytečné externí skripty.
+- [ ] Aktualizace mají jasný rytmus, i když se technický stav nezměnil.
+- [ ] Po incidentu vznikne krátký postmortem s vlastníky úkolů.
+- [ ] Dočasné exporty, screenshoty a nouzové seznamy se po incidentu smažou nebo anonymizují.
+
+### Mini šablona incidentové zprávy
+
+```markdown
+# Incident: [krátký název]
+
+## První zpráva
+Čas zjištění:
+Dotčená část služby:
+Dopad na zákazníky:
+Co nyní děláme:
+Další aktualizace v:
+
+## Průběžná aktualizace
+Čas:
+Co se změnilo:
+Co stále nefunguje:
+Náhradní postup:
+Další aktualizace v:
+
+## Vyřešeno
+Čas obnovení:
+Co je znovu funkční:
+Co budeme ještě sledovat:
+Kdy zveřejníme krátké shrnutí:
+
+## Postmortem
+Časová osa:
+Příčina:
+Dopad:
+Co fungovalo:
+Co nefungovalo:
+Privacy-first poznámky:
+Úkol 1 / vlastník / termín:
+Úkol 2 / vlastník / termín:
+Úkol 3 / vlastník / termín:
+```
+
 # Pracovní log
+- 2026-09-28: Doplněna příloha „Incidentová komunikace a status page bez mlhy“ s pravidly veřejné komunikace, první zprávy, náhradních postupů, privacy-first status page, postmortemu, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Zpřesněna část o agregovaných metrikách v příloze „Provozní monitoring bez datového smogu“ o pravidlo vlastníka, rytmu a navazující akce před sběrem nové metriky.
 - 2026-09-28: Doplněna příloha „Provozní monitoring bez datového smogu“ s kritickými kontrolami, bezpečnějším logováním, dopadově řízenými alerty, agregovanými metrikami, retenčními pravidly, post-deploy rutinou, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „Externí spolupráce bez datového průvanu“ s pravidly minimálních přístupů, anonymizací pracovních ukázek, oddělením prostředí, bezpečným sdílením secrets, offboardingem, checklistem a vyplnitelnou šablonou.
