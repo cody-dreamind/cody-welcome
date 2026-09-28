@@ -14341,7 +14341,189 @@ Datum post-incident review:
 - Atlassian Statuspage: Incident communication tips — https://support.atlassian.com/statuspage/docs/incident-communication-tips/
 - Atlassian: Incident response handbook — https://www.atlassian.com/incident-management/handbook/incident-response
 
+# Příloha: DPIA bez právního kouře a produktové paralýzy
+
+DPIA neboli posouzení vlivu na ochranu osobních údajů není slohová práce pro šanon, který se otevře až při kontrole. Je to praktický způsob, jak předem zjistit, jestli nová funkce, integrace nebo datový tok nemůže lidem ublížit víc, než si tým připouští v euforii z roadmapy.
+
+Pro malý web nebo SaaS není cílem vyrábět právní román. Cílem je umět říct: co zpracováváme, proč to potřebujeme, komu to může škodit, jak riziko snižujeme a kdo rozhodl, že zbytkové riziko je přijatelné. Když tohle neumíš říct bez tří porad a nervózního listování v Notionu, DPIA ti pravděpodobně pomůže.
+
+> Codyho komentář: Nejhorší DPIA je ta, která vznikne až po nasazení problematické funkce. To už není posouzení vlivu. To je pitva s tabulkou.
+
+## Kdy zpozornět
+
+GDPR v článku 35 říká, že DPIA se provádí před zpracováním, které pravděpodobně povede k vysokému riziku pro práva a svobody fyzických osob. Evropský sbor pro ochranu osobních údajů k tomu uvádí vodítka a ÚOOÚ publikuje české materiály a seznamy operací, které pomáhají vyhodnotit, kdy je DPIA potřeba.
+
+V praxi zpozorni hlavně u těchto situací:
+
+- systematické profilování nebo automatizované vyhodnocování lidí,
+- rozsáhlejší práce se zvláštními kategoriemi údajů,
+- monitoring chování lidí napříč produktem nebo prostředím,
+- kombinování dat z více zdrojů do nového profilu,
+- nové technologie s nejasným dopadem na soukromí,
+- zpracování údajů zranitelnějších skupin,
+- funkce, která může lidem znemožnit přístup ke službě, nabídce nebo právu.
+
+U běžného kontaktního formuláře DPIA typicky nebude potřeba. U AI funkce, která analyzuje zákaznické konverzace, doporučuje další obchodní kroky a ukládá behaviorální profil, už bych byl výrazně opatrnější. A ano, „ale konkurence to má taky“ není riziková analýza. To je jen stádní pud v business casual košili.
+
+## DPIA spusť jako produktový checkpoint
+
+DPIA má proběhnout před spuštěním rizikového zpracování. Nejlepší místo v malém týmu je proto produktový checkpoint před implementací nebo před pilotem s reálnými daty.
+
+Praktický postup:
+
+1. Napiš jednu větu, co chceš spustit.
+2. Popiš, jaká osobní data se mají použít.
+3. Urči, kdo je správce, kdo zpracovatel a kteří dodavatelé se zapojují.
+4. Zkontroluj, jestli existuje méně invazivní varianta.
+5. Sepiš rizika pro člověka, ne jen rizika pro firmu.
+6. Navrhni opatření a ověř, jestli reálně snižují riziko.
+7. Rozhodni: spustit, upravit, odložit, nebo zahodit.
+
+Produktové pravidlo: pokud neumíš vysvětlit přínos funkce bez slov „nasbíráme víc dat a pak uvidíme“, zastav se. Privacy-first produkt nezačíná sběrem dat pro budoucí nápad. Začíná konkrétní uživatelskou hodnotou.
+
+## Popis zpracování piš jako mapu toku
+
+První část DPIA má být pochopitelná i pro člověka mimo právní tým. Popiš tok dat tak, aby šel zkontrolovat technicky i obchodně.
+
+Minimální mapa:
+
+- odkud data vznikají,
+- co přesně se sbírá,
+- proč se sbírá,
+- kde se ukládá,
+- kdo k tomu má přístup,
+- komu se data předávají,
+- jak dlouho se drží,
+- jak se mažou nebo anonymizují,
+- co vidí uživatel a co může ovlivnit.
+
+Příklad špatného popisu:
+
+```text
+Budeme analyzovat chování uživatelů pro zlepšení produktu.
+```
+
+Příklad lepšího popisu:
+
+```text
+U přihlášených administrátorů ukládáme agregované události dokončení onboardingových kroků: vytvoření workspace, přidání prvního člena, vytvoření prvního projektu. Neukládáme obsah projektu, texty úkolů ani jména pozvaných lidí do analytického nástroje. Události se používají k vyhodnocení, kde onboarding selhává, a mažou se po 13 měsících.
+```
+
+Ten druhý popis možná není sexy. Ale dá se podle něj rozhodovat. Sexy necháme homepage animaci, ta aspoň nikoho neprofiluje.
+
+## Riziko posuzuj očima člověka
+
+Častá chyba: tým hodnotí hlavně riziko pro firmu. „Co když dostaneme pokutu?“ je legitimní otázka, ale DPIA řeší primárně dopad na lidi.
+
+Ptej se:
+
+- Může člověk ztratit kontrolu nad daty?
+- Může vzniknout nepřesný závěr, který ho poškodí?
+- Může být někdo vyloučen z nabídky, podpory nebo služby?
+- Může dojít k nechtěnému odhalení citlivého kontextu?
+- Může kombinace dat vytvořit profil, který člověk nečeká?
+- Může dodavatel data použít mimo náš účel?
+- Bude pro člověka srozumitelné, co se děje?
+
+U každého rizika napiš pravděpodobnost, dopad a navržené opatření. Nepiš jen „nízké riziko“, protože to hezky vypadá. Napiš proč. Když riziko snižuješ, uveď konkrétní mechanismus: minimalizace polí, agregace, pseudonymizace, kratší retence, ruční kontrola automatického výstupu, role-based přístup, zákaz použití obsahu pro trénink, oddělené prostředí, auditní log.
+
+## Nejdřív hledej méně datovou variantu
+
+Privacy-first DPIA má jednu zlatou otázku: „Umíme stejný účel splnit s menším množstvím dat, kratší retencí nebo agregovaně?“
+
+Příklady:
+
+- Místo nahrávání celých session replay ukládej jen agregované kroky funnelu.
+- Místo ukládání obsahu promptů ukládej typ úlohy a technický výsledek.
+- Místo exportu všech CRM dat do marketingového nástroje posílej jen segment a interní ID.
+- Místo trvalého admin přístupu dodavateli dej časově omezený přístup přes schválený ticket.
+- Místo automatického rozhodnutí použij doporučení s lidskou kontrolou.
+
+Tahle fáze často ušetří víc práce než samotné psaní DPIA. Když snížíš rozsah zpracování, snížíš i bezpečnostní, právní a reputační riziko. Bonus: méně dat se také levněji zálohuje, migruje a vysvětluje zákazníkům.
+
+## Kdy konzultovat a kdy nespouštět
+
+Pokud i po navržených opatřeních zůstává vysoké riziko, které neumíš dostatečně snížit, není to jen „poznámka pro právníka“. Je to stopka pro produktové rozhodnutí. GDPR počítá i s předchozí konzultací s dozorovým úřadem podle článku 36, pokud správce nemůže vysoké riziko zmírnit.
+
+Prakticky pro malý tým:
+
+- nespouštěj pilot s reálnými daty, dokud není jasné, jak riziko snížit,
+- zapoj DPO nebo externí privacy konzultaci u hraničních případů,
+- neber souhlas jako univerzální náplast na špatný návrh,
+- nezaměňuj bezpečnostní opatření za právní důvod zpracování,
+- dokumentuj i rozhodnutí funkci nespustit nebo zmenšit.
+
+Rozhodnutí „nebudeme to dělat“ je legitimní produktový výstup. V privacy-first firmě není zahozený invazivní nápad selhání. Je to úspora budoucího průšvihu.
+
+## Checklist: DPIA bez paralýzy
+
+- Je jasně popsán účel zpracování?
+- Je ověřeno, zda je DPIA povinná nebo rozumná jako dobrovolný checkpoint?
+- Je popsán tok dat od sběru po výmaz?
+- Je určeno, kdo je správce, zpracovatel a subprocesor?
+- Je ověřena méně datová varianta?
+- Jsou rizika popsána z pohledu lidí, ne jen firmy?
+- Má každé významné riziko konkrétní opatření?
+- Je retence přiměřená účelu?
+- Jsou přístupy omezené podle rolí a času?
+- Je jasné, co uvidí uživatel v informacích o zpracování?
+- Je rozhodnutí zaznamenané s vlastníkem a datem revize?
+
+## Mini šablona DPIA karty
+
+```text
+# DPIA karta: [funkce / zpracování]
+
+## Základ
+Vlastník:
+Datum:
+Stav: návrh / schváleno / upravit / zastaveno
+Proč posuzujeme:
+
+## Účel
+Jakou práci má zpracování udělat:
+Pro koho:
+Méně datová alternativa:
+
+## Data
+Kategorie údajů:
+Zdroj údajů:
+Zvláštní kategorie údajů: ano/ne
+Příjemci a dodavatelé:
+Umístění dat:
+Retence:
+
+## Rizika pro lidi
+Riziko 1:
+Pravděpodobnost:
+Dopad:
+Opatření:
+Zbytkové riziko:
+
+Riziko 2:
+Pravděpodobnost:
+Dopad:
+Opatření:
+Zbytkové riziko:
+
+## Rozhodnutí
+Spustit / upravit / odložit / zastavit:
+Podmínky spuštění:
+Kdo schválil:
+Další revize:
+```
+
+## Zdroje
+
+- GDPR, článek 35: Posouzení vlivu na ochranu osobních údajů — https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- EDPB: Data protection impact assessment — https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/data-protection-impact-assessment_en
+- EDPB: Guidelines on Data Protection Impact Assessment and high risk processing, WP248 rev.01 — https://www.edpb.europa.eu/documents/guideline/data-protection-impact-assessments-high-risk-processing_en
+- ÚOOÚ: DPIA — Posouzení vlivu na ochranu osobních údajů — https://uoou.gov.cz/profesional/metodiky-a-doporuceni-pro-spravce/posouzeni-vlivu-na-ochranu-osobnich-udaju
+- ÚOOÚ: Q&A k posouzení vlivu na ochranu osobních údajů — https://uoou.gov.cz/profesional/qa-otazky-a-odpovedi/posouzeni-vlivu-na-ochranu-osobnich-udaju
+
 # Pracovní log
+
+- 2026-09-28: Doplněna příloha „DPIA bez právního kouře a produktové paralýzy“ s praktickým rozhodovacím postupem, mapou datového toku, riziky z pohledu člověka, méně datovými variantami, pravidly pro konzultaci, checklistem, vyplnitelnou DPIA kartou a ověřenými zdroji GDPR, EDPB a ÚOOÚ.
 - 2026-09-28: Doplněna příloha „Status page a komunikace výpadků bez kouřové clony“ s rozlišením interního a veřejného stavu, první incidentovou zprávou, aktualizačním rytmem, privacy-first pravidly pro status notifikace, bezpečným workaroundem, post-incident shrnutím, checklistem, šablonou komunikace a ověřenými zdroji NIST a Atlassian.
 - 2026-09-28: Doplněna příloha „Zálohy a obnova bez falešného pocitu bezpečí“ s praktickým modelem RPO/RTO, pravidlem více oddělených kopií, ochranou proti ransomware, restore testem, privacy pravidly pro výmazy v zálohách, runbookem, checklistem, backup kartou a ověřenými zdroji NIST, CISA a ENISA.
 - 2026-09-28: Obnoven plný obsah e-booku po omylem zkráceném posledním commitu a doplněna příloha „Registr subprocesorů bez tabulkového pekla“ s praktickým seznamem polí, rozdělením dodavatelů podle dopadu, privacy-first filtrem, schvalovacím postupem, komunikací změn, kvartální rutinou, checklistem, šablonou registru a ověřenými zdroji GDPR, EDPB a Evropské komise.
