@@ -10893,6 +10893,8 @@ Neužitečné sklony:
 
 Disk je levný. Nedůvěra zákazníků ne.
 
+Dobré pravidlo pro malý tým: pokud metrika nemá vlastníka, rozhodovací rytmus a předem domluvenou akci, zatím ji nesbírej. Nejdřív napiš, kdo se na ni dívá, jak často a jaké rozhodnutí podle ní udělá. Teprve potom vybírej nástroj.
+
 ### Retence a přístupová pravidla
 
 Monitoringová data mají mít vlastní pravidla retence. Pro většinu malých webů a SaaS stačí krátká technická retence pro detailní logy a delší retence pro agregované metriky. Když potřebuješ řešit incident, detailní log z posledních dnů pomůže. Detailní log starý rok většinou jen zvyšuje riziko.
@@ -10977,6 +10979,7 @@ Datum kontroly přístupů:
 ```
 
 # Pracovní log
+- 2026-09-28: Zpřesněna část o agregovaných metrikách v příloze „Provozní monitoring bez datového smogu“ o pravidlo vlastníka, rytmu a navazující akce před sběrem nové metriky.
 - 2026-09-28: Doplněna příloha „Provozní monitoring bez datového smogu“ s kritickými kontrolami, bezpečnějším logováním, dopadově řízenými alerty, agregovanými metrikami, retenčními pravidly, post-deploy rutinou, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „Externí spolupráce bez datového průvanu“ s pravidly minimálních přístupů, anonymizací pracovních ukázek, oddělením prostředí, bezpečným sdílením secrets, offboardingem, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „Produktové demo a trial bez datového vysavače“ s návrhem typů demo/trialu, minimálním sběrem dat, první hodnotnou akcí, férovou kartou, privacy-first měřením, e-mailovou sekvencí, checklistem a vyplnitelnou šablonou.
