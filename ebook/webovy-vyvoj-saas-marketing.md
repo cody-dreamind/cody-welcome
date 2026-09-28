@@ -11114,7 +11114,188 @@ Privacy-first poznámky:
 Úkol 3 / vlastník / termín:
 ```
 
+# Příloha: Nákup SaaS nástrojů bez firemního bazaru dat
+
+Nový nástroj je v malé firmě lákavě jednoduché řešení. Někdo najde hezkou aplikaci, přihlásí se přes firemní e-mail, napojí kalendář, nahraje kontakty, přidá platební kartu a najednou má firma další místo, kde žijí zákaznická data. Bez vlastníka. Bez retenčního pravidla. Bez exit plánu. Gratuluju, právě jste pořídili software a adoptovali datové štěně.
+
+Privacy-first nákup neznamená, že každý nástroj musí projít tříměsíční komisí s razítkem a šustěním papírů. Znamená to, že před zaplacením víš, proč nástroj potřebuješ, jaká data do něj půjdou, kdo za něj odpovídá, jak se z něj odejde a co se stane, když dodavatel zdraží, změní podmínky nebo začne přidávat funkce, které s tvým účelem nesouvisí.
+
+> Codyho komentář: Nejlevnější SaaS je často ten, který nekoupíš. Druhý nejlevnější je ten, který koupíš s jasným účelem, vlastníkem a datovou hranicí. Všechno ostatní je předplatné za budoucí chaos.
+
+### Začni problémem, ne nástrojem
+
+Než otevřeš katalog nástrojů, napiš jednu větu:
+
+```text
+Potřebujeme zlepšit [konkrétní proces], protože dnes ztrácíme [čas / kvalitu / příležitosti / důvěru] a úspěch poznáme podle [měřitelného signálu].
+```
+
+Příklady:
+
+- „Potřebujeme sjednotit zákaznické dotazy, protože odpovědi jsou rozházené v e-mailu a chatu; úspěch poznáme podle toho, že každý dotaz má vlastníka a odpověď do 1 pracovního dne.“
+- „Potřebujeme zrychlit přípravu nabídek, protože obchod přepisuje stejné bloky textu; úspěch poznáme podle šablony, kterou zvládne upravit konzultant bez vývojáře.“
+- „Potřebujeme sledovat stav kritických cest, protože výpadky zjišťujeme od zákazníků; úspěch poznáme podle alertu před první externí stížností.“
+
+Pokud věta nejde napsat, problém ještě není připravený na nákup. Možná stačí šablona, interní checklist, menší úprava existujícího systému nebo lepší dohoda v týmu.
+
+### Rozděl nákup podle datového rizika
+
+Stejný schvalovací proces pro ikonkový nástroj a zákaznické CRM je zbytečný extrém. Použij tři úrovně:
+
+| Úroveň | Typ nástroje | Příklad dat | Minimální kontrola |
+| --- | --- | --- | --- |
+| Nízké riziko | Bez osobních nebo zákaznických dat | veřejné obrázky, interní poznámky bez klientů | vlastník, cena, exit |
+| Střední riziko | Omezená osobní data nebo interní provoz | pracovní e-maily, úkoly, obchodní poznámky | datová mapa, přístupy, retence, export |
+| Vysoké riziko | Zákaznická, finanční, zdravotní, citlivá nebo bezpečnostní data | CRM, support, fakturace, produkční logy | DPA, subprocesory, bezpečnost, region, audit, exit test |
+
+Tahle tabulka není právní analýza. Je to rychlý filtr, který zabrání tomu, aby se nástroj s produkčními daty schvaloval stylem „vypadá pěkně a mají dark mode“.
+
+### Datová hranice před trialem
+
+Trial není výmluva pro nahrání celé databáze. Před testem si urč:
+
+- jaká data do nástroje smí jít,
+- jaká data tam nikdy nepůjdou,
+- jestli použiješ syntetická nebo anonymizovaná data,
+- kdo má přístup,
+- kdy se trial účet smaže,
+- jak se stáhne nebo vymaže testovací obsah.
+
+Pro B2B SaaS stačí často testovat na třech fiktivních firmách, pěti anonymizovaných ticketech nebo ručně vytvořeném procesu. Pokud dodavatel tvrdí, že bez produkčních dat nejde nic ověřit, zbystři. Možná má pravdu u integrace. Možná jen potřebuje rychlejší cestu k tvému adresáři.
+
+Evropský rámec ochrany osobních údajů stojí mimo jiné na zásadách minimalizace dat, omezení účelu a omezení uložení; Evropská komise je shrnuje v přehledu principů GDPR: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en. U návrhu a výchozího nastavení zpracování se hodí také vodítka EDPB k článku 25 GDPR „data protection by design and by default“: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en.
+
+### Vyžádej si odpovědi dřív než fakturu
+
+U středního a vysokého rizika se ptej před nákupem. Ne po prvním incidentu, kdy už všichni dělají archeologii v e-mailu.
+
+Minimum otázek:
+
+- Kde jsou data uložená a kde se zpracovávají?
+- Kdo jsou subprocesoři a jak se oznamují změny?
+- Existuje DPA a odpovídá skutečnému zpracování?
+- Jak funguje export dat?
+- Jak funguje smazání účtu a dat?
+- Jaké jsou retenční lhůty pro běžná data, logy, zálohy a podporu?
+- Jaké role a oprávnění nástroj podporuje?
+- Má nástroj auditní log pro důležité akce?
+- Dá se vypnout sdílení dat do tréninku, benchmarků nebo marketingových analýz?
+- Co se stane po ukončení smlouvy?
+
+Dobré znamení: dodavatel odpoví konkrétně, odkáže na bezpečnostní dokumentaci a rozlišuje role správce/zpracovatele. Špatné znamení: pošle obecnou stránku „we take privacy seriously“ a tři odstavce o inovacích. To je firemní parfém, ne odpověď.
+
+### Rozhodnutí dej do nákupního listu
+
+Každý schválený nástroj potřebuje krátký záznam. Ne román. Stačí jedna stránka, která přežije změnu lidí v týmu.
+
+Záznam obsahuje:
+
+- název nástroje a odkaz na administraci,
+- vlastníka v týmu,
+- účel použití,
+- datovou kategorii,
+- schválené typy dat,
+- zakázané typy dat,
+- přístupová pravidla,
+- retenční pravidlo,
+- měsíční nebo roční cenu,
+- datum další kontroly,
+- exit postup.
+
+Tím z nákupu uděláš provozní rozhodnutí, ne jen účetní položku. Až se za půl roku někdo zeptá, proč platíte tři podobné nástroje, nebude odpověď „protože Honza něco testoval a pak odešel do lesa“.
+
+### Preferuj evropský provoz, ale nepřestávej myslet
+
+Evropský provoz je silná výchozí preference, ne magické požehnání. EU hosting, evropský dodavatel a jasná smluvní dokumentace obvykle snižují právní i provozní tření. Pořád ale kontroluj:
+
+- zda se data neposílají do externích analytických, supportních nebo AI služeb,
+- zda dodavatel nepoužívá subprocesory mimo EU bez jasného mechanismu,
+- zda umí export a smazání,
+- zda má rozumné role a auditní log,
+- zda cena dává smysl i při růstu týmu.
+
+Privacy-first není nálepka „EU good, všechno ostatní bad“. Je to schopnost vysvětlit, kde data jsou, proč tam jsou, kdo k nim může a jak je dostaneš pryč.
+
+### Po nákupu udělej 30denní kontrolu
+
+Největší rozdíl mezi dobrým a špatným nákupem se ukáže po měsíci. Proto si rovnou při schválení nastav kontrolu:
+
+- používá se nástroj opravdu pro původní účel?
+- kolik lidí má přístup a kdo ho nepotřebuje?
+- nevznikl nový export, napojení nebo ruční workaround?
+- jsou v nástroji jen schválené datové typy?
+- funguje export?
+- ví tým, kdy nástroj použít a kdy ne?
+- má cenu pokračovat, omezit rozsah, nebo nástroj zrušit?
+
+U nízkého rizika stačí deset minut. U vyššího rizika z kontroly udělej krátký záznam do rozhodovacího deníku. Hlavní je nebýt sběratel předplatných. SaaS archeologie není obor, který chceš financovat.
+
+### Checklist: nákup SaaS bez firemního bazaru dat
+
+- [ ] Máme napsaný problém, ne jen název nástroje.
+- [ ] Víme, jak poznáme úspěch nákupu.
+- [ ] Nástroj je zařazený do nízkého, středního nebo vysokého datového rizika.
+- [ ] Trial používá syntetická, anonymizovaná nebo jasně omezená data.
+- [ ] Máme určené povolené a zakázané typy dat.
+- [ ] Známe region zpracování a hlavní subprocesory.
+- [ ] U rizikovějšího nástroje máme DPA nebo odpovídající smluvní dokumentaci.
+- [ ] Víme, jak funguje export, smazání a ukončení služby.
+- [ ] Máme vlastníka nástroje a datum další kontroly.
+- [ ] Přístupy odpovídají reálné práci, ne organizační lenosti.
+- [ ] Nástroj je zapsaný v datové mapě nebo registru dodavatelů.
+- [ ] Po 30 dnech proběhne kontrola skutečného používání.
+
+### Mini šablona nákupního listu SaaS
+
+```markdown
+# Nákup SaaS: [název nástroje]
+
+## Problém
+Jaký proces řešíme:
+Proč to řešíme teď:
+Jak poznáme úspěch:
+
+## Riziko
+Úroveň rizika: nízké / střední / vysoké
+Schválené typy dat:
+Zakázané typy dat:
+Použijeme v trialu produkční data? ano/ne
+Pokud ano, proč nestačí syntetická/anonymizovaná data:
+
+## Dodavatel
+Web / administrace:
+Region zpracování:
+Subprocesoři:
+DPA / smluvní dokumentace:
+Bezpečnostní dokumentace:
+
+## Provoz
+Vlastník v týmu:
+Kdo má přístup:
+Role a oprávnění:
+Retence dat:
+Auditní log:
+
+## Finance
+Cena nyní:
+Cena při růstu týmu / objemu:
+Co zrušíme nebo nahradíme:
+
+## Exit
+Export dat:
+Smazání účtu:
+Náhradní postup:
+Spouštěč odchodu:
+
+## Rozhodnutí
+Schváleno / zamítnuto / trial:
+Vlastník rozhodnutí:
+Datum kontroly po 30 dnech:
+Poznámky:
+```
+
 # Pracovní log
+- 2026-09-28: Doplněna příloha „Nákup SaaS nástrojů bez firemního bazaru dat“ s problémovou větou před nákupem, rozdělením podle datového rizika, pravidly pro trial bez produkčních dat, otázkami na dodavatele, evropským provozním filtrem, 30denní kontrolou, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „Incidentová komunikace a status page bez mlhy“ s pravidly veřejné komunikace, první zprávy, náhradních postupů, privacy-first status page, postmortemu, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Zpřesněna část o agregovaných metrikách v příloze „Provozní monitoring bez datového smogu“ o pravidlo vlastníka, rytmu a navazující akce před sběrem nové metriky.
 - 2026-09-28: Doplněna příloha „Provozní monitoring bez datového smogu“ s kritickými kontrolami, bezpečnějším logováním, dopadově řízenými alerty, agregovanými metrikami, retenčními pravidly, post-deploy rutinou, checklistem a vyplnitelnou šablonou.
