@@ -10389,7 +10389,222 @@ Jasná komunikace není slabost. Je to prevence supportového ohňostroje.
 
 Exit plán je nudný jen do chvíle, než ho potřebuješ. Pak je to rozdíl mezi řízenou změnou a improvizovaným divadlem, kde hlavní roli hraje panika a vedlejší roli faktura za další měsíc nástroje, který už nechceš používat.
 
+---
+
+## Příloha: Produktové demo a trial bez datového vysavače
+
+Demo nebo trial má ukázat hodnotu produktu, ne otestovat trpělivost člověka formulářem, který vypadá jako žádost o hypotéku. U malého SaaS je pokušení jasné: „Když už někdo chce vyzkoušet produkt, vezměme si rovnou firmu, telefon, velikost týmu, rozpočet, roli, obor, oblíbenou barvu a jméno psa.“ Jenže čím víc polí na začátku, tím víc lidí odpadne ještě před tím, než uvidí hodnotu.
+
+Privacy-first trial stojí na opačném principu: nejdřív dej uživateli bezpečně ochutnat hodnotu, potom se ptej na data, která opravdu potřebuješ pro další krok. GDPR tomu říká minimalizace údajů: osobní údaje mají být přiměřené, relevantní a omezené na to, co je nezbytné pro daný účel. Stejný směr podporuje i privacy by design a by default: ochrana dat nemá být nalepená až po launchi, ale zabudovaná do návrhu produktu od začátku.
+
+> Codyho komentář: Trial není výslech. Trial je ochutnávka. Když kavárna před prvním espressem chce datum narození, velikost firmy a souhlas s pěti integracemi, asi si dáš kafe jinde.
+
+### Vyber správný typ dema
+
+Ne každému produktu sedí stejný vstup. Nejhorší je slepě okopírovat model „book a demo“, protože ho má konkurence. Někdy je to správně, někdy jen schováváš produkt za kalendář, protože onboarding ještě kulhá.
+
+Základní možnosti:
+
+- **Interaktivní veřejné demo**: dobré pro produkty, kde se dá ukázat workflow bez osobních dat; uživatel kliká v připraveném sandboxu.
+- **Self-service trial**: dobrý pro SaaS, kde člověk zvládne první hodnotnou akci bez konzultanta.
+- **Guided trial**: vhodný pro složitější B2B nástroje; uživatel začne sám, ale má jasnou možnost zavolat si pomoc.
+- **Konzultační demo**: vhodné pro enterprise, citlivé integrace nebo produkt, který vyžaduje procesní změnu.
+- **Video demo s technickým FAQ**: vhodné jako první filtr před živým hovorem, aby obchod neopakoval stále stejné věci.
+
+Praktické pravidlo: čím víc osobních nebo firemních dat potřebuješ, tím jasněji musíš vysvětlit proč. „Abychom vás lépe poznali“ není vysvětlení. „Počet uživatelů potřebujeme pro návrh migrace a cenového rozsahu“ už vysvětlení je.
+
+### Nejmenší možný vstup
+
+Rozděl data na tři vrstvy: nutná pro spuštění, užitečná pro pomoc a hezká pro obchod. Do prvního kroku patří jen první vrstva.
+
+Příklad pro běžný SaaS trial:
+
+```text
+Nutné pro spuštění:
+- e-mail
+- heslo nebo magic link
+- souhlas s obchodními podmínkami
+
+Užitečné po první hodnotné akci:
+- typ použití
+- velikost týmu v rozsahu
+- hlavní problém, který chce uživatel řešit
+
+Hezké pro obchod, ale ne pro start:
+- telefon
+- rozpočet
+- přesný počet zaměstnanců
+- roční obrat
+- detailní role v nákupním procesu
+```
+
+Tahle struktura chrání konverzi i důvěru. Uživatel se dostane k hodnotě rychleji a ty zároveň nesbíráš data, která ještě neumíš férově použít.
+
+Privacy-first detail: pokud trial nepotřebuje telefon, nechtěj telefon. Pokud ho potřebuje až sales tým po kvalifikaci, požádej o něj v okamžiku, kdy dává smysl. Kontext je UX. Bez kontextu je stejné pole otravné.
+
+### První hodnotná akce
+
+Trial nemá začít dashboardem, který ukazuje nulu. Nula projektů, nula dat, nula radosti. První obrazovka má uživatele dovést k jedné hodnotné akci.
+
+Dobré první akce:
+
+- vytvořit první projekt ze šablony,
+- nahrát ukázkový CSV soubor bez osobních dat,
+- projít demo workspace,
+- vygenerovat první report z testovacích dat,
+- nastavit jeden veřejný widget,
+- pozvat kolegu až po vytvoření pracovního prostoru,
+- propojit integraci až ve chvíli, kdy je jasné, co poteče kam.
+
+Špatný začátek trialu:
+
+- prázdný dashboard,
+- povinné propojení kalendáře hned po registraci,
+- žádost o platební kartu bez vysvětlení,
+- dotazník o deseti otázkách před prvním kliknutím,
+- import produkčních dat bez sandbox režimu.
+
+Cílem je vytvořit malé „aha“. Ne masivní implementaci. Pokud produkt potřebuje reálná data, nabídni nejdřív demo data a jasně odděl sandbox od produkčního prostředí.
+
+### Kdy chtít kartu a kdy ne
+
+Platební karta před trialem může dávat smysl u produktů s drahým provozem, rizikem zneužití nebo jasnou transakční hodnotou. Ale nesmí to být trik. Pokud kartu chceš, řekni proč, kdy se účtuje, jak přijde připomenutí a jak se trial ruší.
+
+Férový text:
+
+```text
+Kartu potřebujeme kvůli ochraně před zneužitím exportů a vysokým výpočetním nákladům. Trial je 14 dní zdarma. Tři dny před koncem pošleme připomenutí a zrušení je dostupné přímo v nastavení účtu.
+```
+
+Ještě lepší, pokud to produkt dovolí: trial bez karty, ale s limity. Například omezený počet projektů, exportů, testovacích záznamů nebo členů týmu. Limity mají chránit provoz, ne potichu trestat uživatele.
+
+### Měření trialu bez šmírování
+
+Trial se dá zlepšovat i bez detailního sledování každého pohybu myši. Měř hlavně produktové milníky, které přímo souvisí s hodnotou.
+
+Privacy-first události:
+
+- `trial_started`,
+- `demo_workspace_opened`,
+- `first_project_created`,
+- `sample_data_used`,
+- `integration_connected`,
+- `team_member_invited`,
+- `export_completed`,
+- `trial_cancelled`,
+- `plan_selected`.
+
+U každé události si napiš účel. Pokud ho neumíš napsat, událost smaž. Nepotřebuješ nahrávky session, heatmapy ani reklamní identifikátory k tomu, abys zjistil, že lidé nedokončí první projekt, protože tlačítko je schované pod třemi záložkami. Někdy je analytika jen drahý způsob, jak se vyhnout otevření vlastního produktu.
+
+Doporučené minimum:
+
+```text
+Událost: first_project_created
+Účel: ověřit, jestli onboarding vede k první hodnotné akci.
+Data: anonymizovaný účetní identifikátor, tarif, čas od registrace v hodinách.
+Neposílat: název projektu, obsah dat, jména členů týmu, text poznámek.
+Retence: agregované metriky dlouhodobě, detailní technické logy krátce podle provozní potřeby.
+```
+
+### Trial e-maily, které nepůsobí jako robot s megafonem
+
+E-maily v trialu mají pomáhat, ne nahánět. Nepiš každý den jen proto, že to umí automatizace. Piš ve chvíli, kdy zpráva odstraní překážku.
+
+Jednoduchá sekvence:
+
+1. **Uvítání**: jeden další krok, odkaz na demo data, kontakt na pomoc.
+2. **Po neaktivitě**: nabídka nejkratší cesty k první hodnotě, ne výčitka.
+3. **Po první hodnotné akci**: doporučení dalšího kroku podle kontextu.
+4. **Před koncem trialu**: férové připomenutí, co se stane s účtem a daty.
+5. **Po zrušení**: krátká možnost říct důvod, bez emocionální manipulace.
+
+Příklad e-mailu po neaktivitě:
+
+```text
+Předmět: Chceš trial vyzkoušet na demo datech?
+
+Ahoj,
+vidím jen to, že trial zatím nemá vytvořený první projekt. Pokud nechceš začínat vlastními daty, můžeš použít připravený demo workspace:
+[Otevřít demo workspace]
+
+Když produkt nebude sedět, účet zrušíš přímo v nastavení. Žádná detektivka.
+
+Cody
+```
+
+Všimni si formulace „vidím jen to“. Uživatel nemusí mít pocit, že ho někdo pozoruje přes rameno. Transparentnost je produktová funkce.
+
+### Checklist: demo a trial bez datového vysavače
+
+- [ ] Umíme jednou větou říct, co má uživatel během trialu zažít.
+- [ ] První krok vyžaduje jen data nutná pro spuštění.
+- [ ] Telefon, velikost firmy a rozpočet nejsou povinné před první hodnotou.
+- [ ] Demo data jsou jasně oddělená od produkčních dat.
+- [ ] Trial má jednu první hodnotnou akci, ne prázdný dashboard.
+- [ ] Platební karta je buď volitelná, nebo férově vysvětlená.
+- [ ] Produktové události nemají obsah uživatelských dat.
+- [ ] Každá měřená událost má napsaný účel.
+- [ ] E-mailová sekvence pomáhá podle stavu trialu, ne podle marketingového kalendáře.
+- [ ] Zrušení účtu a export dat jsou dostupné bez kontaktování podpory.
+- [ ] Retence detailních trial dat je omezená a zdokumentovaná.
+- [ ] Sales tým ví, kdy smí požádat o další údaje a proč.
+
+### Šablona návrhu trialu
+
+```text
+Produkt:
+Segment uživatele:
+Hlavní slib trialu:
+První hodnotná akce:
+
+Vstupní data nutná pro spuštění:
+1.
+2.
+3.
+
+Data odložená na později:
+1. údaj:
+   kdy se zeptáme:
+   proč:
+2. údaj:
+   kdy se zeptáme:
+   proč:
+
+Demo nebo sandbox data:
+- co obsahují:
+- jak jsou označená:
+- jak zabráníme nahrání citlivých dat omylem:
+
+Měřené milníky:
+1. událost:
+   účel:
+   data, která neposíláme:
+2. událost:
+   účel:
+   data, která neposíláme:
+
+Trial e-maily:
+- uvítání:
+- neaktivita:
+- první hodnota:
+- konec trialu:
+- zrušení:
+
+Férové zrušení:
+- kde se ruší:
+- co se stane s daty:
+- jak dlouho držíme technické logy:
+```
+
+### Zdroje
+
+- EUR-Lex: [GDPR, článek 5 — zásady zpracování osobních údajů a minimalizace údajů](https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1671832038722&uri=CELEX%3A32016R0679)
+- EUR-Lex: [GDPR, článek 25 — data protection by design and by default](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=oj%3AJOL_2016_119_R)
+- European Data Protection Board: [Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en)
+
+
 # Pracovní log
+- 2026-09-28: Doplněna příloha „Produktové demo a trial bez datového vysavače“ s návrhem typů demo/trialu, minimálním sběrem dat, první hodnotnou akcí, férovou kartou, privacy-first měřením, e-mailovou sekvencí, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „Exit plán dodavatele bez paniky“ s rozdělením dodavatelů podle kritičnosti, ověřováním exportu, mapou DNS/e-mailů/webhooků, migračním postupem, zákaznickou komunikací, checklistem a vyplnitelnou šablonou.
 
 - 2026-09-28: Doplněna příloha „Rozhodovací deník pro web a SaaS bez firemní amnézie“ s pravidly, co zapisovat, jasnou rozhodovací větou, vlastníkem a revizí, privacy-first filtrem, vazbou na backlog/runbooky/datovou mapu, checklistem a vyplnitelnou šablonou.
