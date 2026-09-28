@@ -10806,7 +10806,178 @@ Potvrzený úklid pracovních kopií:
 Poznámky pro budoucí spolupráci:
 ```
 
+## Příloha: Provozní monitoring bez datového smogu
+
+Monitoring webu nebo SaaS má jednu jednoduchou práci: říct včas, že se něco důležitého rozbilo. Nemá z něj vzniknout paralelní analytický vesmír, kde se z každého požadavku stane životopis návštěvníka. Malý tým nepotřebuje sbírat všechno. Potřebuje vědět, jestli lidé mohou použít produkt, jestli klíčové cesty fungují a jestli incident nezůstane schovaný až do chvíle, kdy napíše naštvaný zákazník.
+
+Privacy-first monitoring proto odděluje tři věci: technické zdraví služby, produktové metriky a individuální uživatelské chování. Technické zdraví sleduj přes agregované signály. Produktové metriky drž v minimálním rozsahu. Individuální chování sbírej jen tehdy, když je pro to jasný důvod, krátká retence a srozumitelná komunikace.
+
+> Codyho komentář: Monitoring, který tě upozorní na výpadek, je hasičák. Monitoring, který si pamatuje každé nadechnutí návštěvníka, je soused s dalekohledem. Jeden chceš mít. Druhého spíš ne.
+
+### Co opravdu monitorovat
+
+Začni od kritických slibů, ne od nástroje. Pokud web slibuje poptávkový formulář, monitoruj odeslání formuláře. Pokud SaaS slibuje fakturaci, monitoruj vytvoření faktury, export PDF a doručení e-mailu. Pokud máš marketingový web, monitoruj dostupnost hlavních stránek, funkčnost navigace a načítání klíčových assetů.
+
+Praktické minimum:
+
+- dostupnost homepage a hlavní landing page,
+- funkčnost přihlášení nebo registrace,
+- odeslání hlavního formuláře do testovacího cíle,
+- stav databáze, front a úložiště,
+- chybovost API podle endpointů,
+- základní výkon: pomalé odpovědi, timeouty a neúspěšné deploye,
+- expirace certifikátů, domén a důležitých tokenů.
+
+Tohle stačí překvapivě často. Pokud přidáváš další signál, napiš k němu větu: „Když se tento signál zhorší, uděláme konkrétně toto.“ Když odpověď neexistuje, signál zatím nepotřebuješ.
+
+### Logy bez osobního deníčku návštěvníka
+
+Logy jsou užitečné, ale snadno se promění ve skládku osobních údajů. V logu nepotřebuješ celý obsah formuláře, plný e-mail, telefon, text zprávy ani kompletní URL s citlivými parametry. Potřebuješ čas, typ chyby, trasu, anonymní request ID, stavový kód, dobu odezvy a kontext, který pomůže opravit problém.
+
+Bezpečnější pravidla:
+
+- z formulářů loguj jen technický výsledek, ne obsah polí,
+- query parametry ukládej jen po allowlistu,
+- IP adresu zkrať, hashuj nebo vůbec neukládej, pokud ji nepotřebuješ,
+- user agent ber jako diagnostický signál, ne jako identitu,
+- tokeny, cookies a autorizační hlavičky vždy rediguj,
+- produkční logy neposílej do nástroje mimo Evropský hospodářský prostor bez jasného důvodu a smluvního krytí,
+- nastav retenci podle potřeby opravy, ne podle kapacity disku.
+
+Příklad dobrého logu:
+
+```text
+2026-09-28T08:15:03Z level=error route=/api/contact status=502 request_id=req_7f3 duration_ms=940 upstream=mail_worker
+```
+
+Příklad špatného logu:
+
+```text
+Kontakt od Jana Nováka, jan@example.com, telefon..., zpráva..., cookie..., celý token..., protože co kdyby se to jednou hodilo.
+```
+
+To druhé se jednou hodí hlavně právníkovi protistrany. Gratulujeme, vyhráli jste compliance bingo.
+
+### Alerty nastav podle dopadu
+
+Ne každý červený graf je incident. Alert má probudit člověka jen tehdy, když je potřeba zásah. Jinak si tým vypěstuje reflex „to zase něco pípá“ a opravdový problém zapadne mezi šum.
+
+Rozděl alerty na tři úrovně:
+
+- **Okamžitý zásah:** služba je nedostupná, nejde se přihlásit, nejde zaplatit, selhává hlavní formulář.
+- **Pracovní den:** roste chybovost, zpomalují odpovědi, padá méně důležitý cron, blíží se expirace certifikátu.
+- **Týdenní kontrola:** drobné chyby v obsahu, 404 z externích odkazů, výkyvy v neklíčových metrikách.
+
+Ke každému alertu napiš runbook: co zkontrolovat, kde jsou logy, jaký je bezpečný rollback, komu napsat a kdy informovat zákazníky. Alert bez runbooku je jen dramatický budík.
+
+### Metriky drž agregované
+
+Pro produktové rozhodování většinou stačí agregace. Neptej se „co přesně dělal konkrétní člověk ve 14:03“, ale „kolik lidí dokončilo klíčový krok a kde se tok láme“. U privacy-first provozu je dobrá výchozí metrika počet dokončení důležité akce za den nebo týden, rozdělený podle typu zákazníka nebo tarifu jen tehdy, když je to opravdu užitečné.
+
+Užitečné agregace:
+
+- počet úspěšných registrací,
+- počet dokončených objednávek nebo poptávek,
+- počet chyb podle typu a endpointu,
+- median a p95 doby odezvy,
+- počet aktivních firemních účtů za období,
+- počet podpůrných ticketů podle kategorie.
+
+Neužitečné sklony:
+
+- nahrávání relací bez jasného důvodu,
+- heatmapa na každé stránce „pro jistotu“,
+- ukládání obsahu vstupních polí,
+- spojování technických logů s marketingovým profilem,
+- nekonečná retence „protože disk je levný“.
+
+Disk je levný. Nedůvěra zákazníků ne.
+
+### Retence a přístupová pravidla
+
+Monitoringová data mají mít vlastní pravidla retence. Pro většinu malých webů a SaaS stačí krátká technická retence pro detailní logy a delší retence pro agregované metriky. Když potřebuješ řešit incident, detailní log z posledních dnů pomůže. Detailní log starý rok většinou jen zvyšuje riziko.
+
+Praktický model:
+
+- detailní aplikační logy: dny až nízké týdny podle provozního rizika,
+- bezpečnostní logy: podle interní potřeby a právního posouzení,
+- agregované provozní metriky: měsíce až roky, pokud neobsahují osobní údaje,
+- debug výpisy: vypnout po vyřešení problému,
+- exporty pro dodavatele: mazat po dokončení zakázky.
+
+Přístupy dej jen lidem, kteří je opravdu potřebují. Vývojář nemusí vidět marketingové identifikátory. Marketer nemusí vidět chybové stack traces. Externista má dostat časově omezený přístup, ne doživotní permanentku do zákulisí.
+
+### Monitoring po deployi
+
+Po každém větším deployi si nastav krátké okno zvýšené pozornosti. Neznamená to sedět dvě hodiny u grafů jako pilot před přistáním v mlze. Znamená to mít konkrétní seznam věcí, které ověříš.
+
+Po deployi zkontroluj:
+
+- stránka se načítá bez serverové chyby,
+- hlavní syntetická kontrola prošla,
+- chybovost API neroste,
+- formulář nebo checkout funguje v testovacím scénáři,
+- logy neobsahují nové chyby s vysokou četností,
+- e-mailové a frontové úlohy doběhly,
+- rollback je stále možný.
+
+Pokud se něco rozbije, nejdřív obnov funkci, potom analyzuj. Akademická debata nad perfektní příčinou je krásná věc, ale zákazník zatím kouká na 500. Priorita je jasná.
+
+### Checklist: monitoring bez datového smogu
+
+- [ ] Máme seznam kritických cest, které musí fungovat.
+- [ ] Každá kritická cesta má syntetickou nebo manuální kontrolu.
+- [ ] Logy neobsahují obsah formulářů, tokeny, cookies ani citlivé query parametry.
+- [ ] Alerty jsou rozdělené podle dopadu a nebudí tým kvůli šumu.
+- [ ] Ke kritickým alertům existuje krátký runbook.
+- [ ] Detailní logy mají omezenou retenci.
+- [ ] Agregované metriky stačí pro produktová rozhodnutí bez sledování jednotlivců.
+- [ ] Přístupy k monitoringu odpovídají rolím.
+- [ ] Externisté mají časově omezené přístupy.
+- [ ] Po deployi existuje konkrétní kontrolní rutina.
+
+### Mini šablona monitoringového listu
+
+```markdown
+# Monitoring: [web / produkt / služba]
+
+## Kritické sliby
+1. [Co musí zákazník vždy zvládnout]
+2. [Druhá kritická cesta]
+3. [Třetí kritická cesta]
+
+## Kontroly
+Kontrola:
+Frekvence:
+Definice úspěchu:
+Co se nesmí logovat:
+
+## Alerty
+Okamžitý zásah:
+Pracovní den:
+Týdenní kontrola:
+
+## Runbook
+Kde jsou logy:
+První kontrola:
+Rollback:
+Kontakt pro incident:
+Zákaznická komunikace:
+
+## Retence
+Detailní logy:
+Agregované metriky:
+Debug výpisy:
+Exporty pro dodavatele:
+
+## Přístupy
+Interní role:
+Externí role:
+Datum kontroly přístupů:
+```
+
 # Pracovní log
+- 2026-09-28: Doplněna příloha „Provozní monitoring bez datového smogu“ s kritickými kontrolami, bezpečnějším logováním, dopadově řízenými alerty, agregovanými metrikami, retenčními pravidly, post-deploy rutinou, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „Externí spolupráce bez datového průvanu“ s pravidly minimálních přístupů, anonymizací pracovních ukázek, oddělením prostředí, bezpečným sdílením secrets, offboardingem, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „Produktové demo a trial bez datového vysavače“ s návrhem typů demo/trialu, minimálním sběrem dat, první hodnotnou akcí, férovou kartou, privacy-first měřením, e-mailovou sekvencí, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „Exit plán dodavatele bez paniky“ s rozdělením dodavatelů podle kritičnosti, ověřováním exportu, mapou DNS/e-mailů/webhooků, migračním postupem, zákaznickou komunikací, checklistem a vyplnitelnou šablonou.
