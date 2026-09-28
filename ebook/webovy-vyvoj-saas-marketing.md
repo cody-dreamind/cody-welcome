@@ -11294,7 +11294,201 @@ Datum kontroly po 30 dnech:
 Poznámky:
 ```
 
+# Příloha: AI chatbot na webu bez datového vysavače
+
+Chatbot na webu může být užitečný. Umí návštěvníkovi najít správnou službu, vysvětlit ceník, poslat odkaz na dokumentaci, předvyplnit poptávku nebo odbavit běžný dotaz mimo pracovní dobu. Stejně rychle se ale může změnit v drahý a právně nehezký vysavač dat: sbírá osobní údaje, posílá celé konverzace třetí straně, slibuje věci, které firma neumí dodat, a ještě se tváří jako „chytrý asistent“, protože slovo chatbot už zní moc rok 2017.
+
+Privacy-first chatbot nezačíná výběrem modelu. Začíná rozhodnutím, co má návštěvníkovi bezpečně pomoct vyřešit a co naopak nikdy dělat nemá. Pokud na webu stačí dobré FAQ, vyhledávání, kontaktní formulář a pár jasných CTA, nezačínej chatbotem. Chatbot má smysl teprve ve chvíli, kdy zkracuje cestu k odpovědi lépe než statický obsah a umíš kontrolovat jeho datovou stopu.
+
+> Codyho komentář: Chatbot není strategie podpory. Je to rozhraní. Když za ním není dobrý obsah, jasné hranice a člověk pro složité případy, jen automatizuješ nejistotu s hezčím smajlíkem.
+
+### Nejprve napiš práci chatbota
+
+Jedna věta stačí:
+
+```text
+Chatbot pomáhá [typ návštěvníka] rychle najít [typ odpovědi / další krok] bez sběru [zakázaná data] a složité případy předává [kanál / člověk].
+```
+
+Příklady:
+
+- „Chatbot pomáhá majiteli B2B firmy vybrat správnou službu a poslat krátkou poptávku bez sběru detailů o zaměstnancích, rozpočtech nebo zákaznických datech.“
+- „Chatbot pomáhá uživateli SaaS najít článek v dokumentaci a u složitých chyb vytvoří ticket bez ukládání celého obsahu obrazovky.“
+- „Chatbot pomáhá návštěvníkovi porozumět rozdílům mezi tarify, ale nesmí doporučovat právní, zdravotní ani finanční postupy.“
+
+Pokud věta obsahuje „odpoví na všechno“, vrať se o krok zpátky. „Všechno“ je produktový rozsah pro malé peklo s velkým logem.
+
+### Rozděl dotazy podle rizika
+
+Ne všechny konverzace jsou stejné. Pro malý web nebo SaaS stačí tři úrovně:
+
+| Úroveň | Co chatbot smí řešit | Co má předat člověku |
+| --- | --- | --- |
+| Nízké riziko | odkazy na služby, dokumentaci, otevírací informace, obecné vysvětlení produktu | stížnosti, osobní údaje, fakturace |
+| Střední riziko | orientační výběr balíčku, kvalifikační otázky, vytvoření obecné poptávky | smluvní detaily, bezpečnostní incidenty, citlivá data |
+| Vysoké riziko | ideálně vůbec ne automaticky, maximálně nasměrování na kontakt | právní rady, zdravotní témata, finance, personalistika, přístup k účtu, produkční chyby s osobními daty |
+
+Pravidlo je jednoduché: čím větší dopad špatné odpovědi, tím méně autonomie. U vysokého rizika má chatbot spíš rozpoznat hranici a nabídnout bezpečný kontakt než improvizovat. Generativní sebevědomí je krásné, dokud nezačne vyrábět závazné sliby.
+
+### Řekni jasně, že jde o AI
+
+Návštěvník má vědět, že mluví s automatizovaným systémem, ne s člověkem. Evropská komise u AI Actu uvádí, že u systémů jako chatboti mají být lidé informováni, že komunikují se strojem; přehled a pokyny k transparentnosti najdeš na stránce Komise k AI Actu a čl. 50: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai a https://digital-strategy.ec.europa.eu/en/policies/guidelines-ai-transparency-obligations.
+
+Praktická věta nad chatem:
+
+```text
+Jsem automatizovaný AI asistent. Pomůžu najít informace na webu a připravit dotaz. Nepište sem citlivé údaje, hesla ani zákaznická data. Složitější věci předáme člověku.
+```
+
+Tohle není právní alibismus. Je to dobré UX. Lidé pak ví, jak kanál používat bezpečně. A firma má menší šanci, že jí v konverzacích skončí rodná čísla, tokeny, interní smlouvy nebo kompletní výpis incidentu. Internet je kreativní sběrna překvapení, nepomáhej mu.
+
+### Datová hranice před prvním promptem
+
+Před nasazením si napiš, co se odesílá modelu a co se ukládá lokálně.
+
+Minimum rozhodnutí:
+
+- zda se ukládá celá konverzace, nebo jen agregované signály,
+- jak dlouho se logy drží,
+- kdo má k logům přístup,
+- jestli se konverzace používají pro trénink, ladění nebo evaluaci,
+- jak se anonymizují ukázky pro zlepšování odpovědí,
+- jak uživatel získá lidský kontakt bez dalšího vysvětlování robotovi,
+- jak se smažou omylem zadaná citlivá data.
+
+U zákaznické podpory obvykle nepotřebuješ ukládat celé konverzace navždy. Pro zlepšování stačí vzorky bez identifikátorů, počty nevyřešených dotazů, témata dotazů a ručně označené selhání. Pokud chceš ukládat přesné přepisy, měj jasný účel, retenci a přístupová práva. GDPR pořád nezmizelo jen proto, že odpověď generuje model s futuristickým názvem.
+
+### Obsahová základna je lepší než improvizace
+
+Nejbezpečnější chatbot odpovídá z kontrolované znalostní báze: stránky služeb, dokumentace, ceník, FAQ, provozní informace, kontakty, podmínky. Pokud odpověď není v povolených zdrojích, má říct „nevím“ a nabídnout další krok.
+
+Dobrá znalostní báze pro chatbota:
+
+- má krátké a aktuální odpovědi,
+- rozlišuje veřejné informace a interní instrukce,
+- obsahuje datum poslední revize u citlivých témat,
+- má vlastníka za každou oblast,
+- používá jednoduchý jazyk místo interního žargonu,
+- odkazuje na zdrojovou stránku, aby si člověk mohl odpověď ověřit.
+
+Pokud chatbot odpovídá na ceník, musí zdrojový ceník existovat. Pokud vysvětluje bezpečnost, musí čerpat ze schválené bezpečnostní stránky. Pokud vytváří poptávku, musí použít stejnou datovou minimalizaci jako formulář. Chatbot nemá být paralelní realita firmy.
+
+### Guardrails nejsou kouzelná zeď
+
+Systémové instrukce, filtry a pravidla jsou užitečné, ale nejsou náhrada za omezení funkcí. Nejlepší ochrana je nedat chatbotu přístup k tomu, co nepotřebuje.
+
+Praktické hranice:
+
+- žádný přístup k administraci bez silného důvodu,
+- žádné automatické změny účtu bez potvrzení a auditního logu,
+- žádné čtení produkčních dat jen proto, že „by to bylo pohodlné“,
+- žádné posílání tajemství do modelu,
+- žádné sliby ceny, termínu nebo právního výkladu bez schváleného zdroje,
+- jasný fallback na člověka.
+
+U produktových agentů platí ještě tvrdší pravidlo: akce musí být oddělené podle rizika. Vyhledat článek v nápovědě je nízké riziko. Změnit tarif, smazat účet nebo poslat zákaznická data do externí integrace je jiná liga. Tam chceš potvrzení, log, limit a možnost vrátit změnu.
+
+### Měř užitečnost, ne šmírování
+
+Chatbot se dá zlepšovat bez behaviorálního detektivního románu.
+
+Stačí sledovat:
+
+- počet zahájených konverzací,
+- podíl konverzací s vyřešením nebo klikem na doporučený zdroj,
+- témata, kde chatbot často říká „nevím“,
+- podíl předání člověku,
+- spokojenost po odpovědi jednoduchým hodnocením,
+- počet detekovaných pokusů zadat citlivá data,
+- počet oprav znalostní báze po chybné odpovědi.
+
+Nepotřebuješ profilovat návštěvníka napříč webem, ukládat kompletní historii pro marketing ani spojovat chat s reklamními pixely. Pokud chatbot pomáhá, poznáš to i z agregovaných signálů a reálných zákaznických dotazů.
+
+### Před spuštěním udělej červený test
+
+Než chatbot pustíš na produkci, zkus ho rozbít. Ne proto, že jsi zlomyslný. Protože návštěvníci, boti a konkurence budou kreativnější než interní demo.
+
+Testuj:
+
+- jestli přizná, že je AI,
+- jestli odmítne citlivá data a hesla,
+- jestli nehalucinuje cenu nebo termín,
+- jestli neodkazuje na neexistující služby,
+- jestli umí říct „nevím“,
+- jestli předá člověku složité a rizikové případy,
+- jestli v logu nekončí víc dat, než potřebuješ,
+- jestli odpovědi zůstávají v jazyce a tónu značky,
+- jestli funguje bez marketingových trackerů v chat widgetu.
+
+U opakovaných selhání neopravuj jen prompt. Často je problém ve zdrojích, rozsahu nebo chybějícím procesu předání člověku.
+
+### Checklist: chatbot bez datového vysavače
+
+- [ ] Má chatbot jednu jasnou pracovní větu?
+- [ ] Je na webu zřetelně uvedeno, že jde o AI nebo automatizovaný systém?
+- [ ] Má uživatel jasnou instrukci, co do chatu nepsat?
+- [ ] Víme, jaká data se posílají modelu?
+- [ ] Víme, co se ukládá, kdo k tomu má přístup a kdy se to maže?
+- [ ] Jsou zakázané kategorie dat napsané konkrétně?
+- [ ] Odpovědi čerpají z kontrolované znalostní báze?
+- [ ] Má chatbot bezpečný fallback na člověka?
+- [ ] Máme testy pro citlivé dotazy, hallucinační odpovědi a předání člověku?
+- [ ] Měříme užitečnost agregovaně bez reklamních pixelů a profilování?
+- [ ] Má každá změna znalostní báze vlastníka?
+- [ ] Je v dokumentaci uveden poskytovatel, region, subprocesoři a tréninkové nastavení?
+
+### Mini šablona návrhu chatbota
+
+```text
+# AI chatbot: [web / produkt]
+
+## Práce chatbota
+Komu pomáhá:
+Jaký problém řeší:
+Hlavní bezpečný výstup:
+Co nikdy nedělá:
+
+## Datová hranice
+Povolená data:
+Zakázaná data:
+Data posílaná modelu:
+Data ukládaná v logu:
+Retence:
+Přístupy k logům:
+Použití pro trénink / evaluaci:
+
+## Znalostní báze
+Povolené zdroje:
+Vlastník zdrojů:
+Rytmus revize:
+Jak chatbot cituje nebo odkazuje zdroj:
+
+## Fallback
+Kdy předává člověku:
+Kam předává:
+Jaká data předává:
+SLA odpovědi:
+
+## Testy před spuštěním
+Citlivá data:
+Halucinace ceny / termínu:
+Neexistující služba:
+Žádost o právní / finanční / zdravotní radu:
+Prompt injection:
+Chybějící odpověď:
+
+## Měření
+Agregované metriky:
+Zakázané metriky:
+Datum první kontroly:
+Vlastník:
+```
+
+AI chatbot má být malý, slušný a užitečný. Když návštěvníkovi pomůže rychleji najít odpověď a firmě nezaloží nový sklad osobních dat, dává smysl. Když jen překrývá špatný obsah a sbírá konverzace „pro jistotu“, je to drahý formulář s halucinacemi. A to už radši obyčejný kontakt, RSS a dobře napsané FAQ. Staromódní? Možná. Funkční? Překvapivě často.
+
+
 # Pracovní log
+- 2026-09-28: Doplněna příloha „AI chatbot na webu bez datového vysavače“ s vymezením práce chatbota, rizikovými kategoriemi dotazů, transparentním označením AI, datovou hranicí, kontrolovanou znalostní bází, guardrails, privacy-first měřením, testovacím postupem, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „Nákup SaaS nástrojů bez firemního bazaru dat“ s problémovou větou před nákupem, rozdělením podle datového rizika, pravidly pro trial bez produkčních dat, otázkami na dodavatele, evropským provozním filtrem, 30denní kontrolou, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „Incidentová komunikace a status page bez mlhy“ s pravidly veřejné komunikace, první zprávy, náhradních postupů, privacy-first status page, postmortemu, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Zpřesněna část o agregovaných metrikách v příloze „Provozní monitoring bez datového smogu“ o pravidlo vlastníka, rytmu a navazující akce před sběrem nové metriky.
