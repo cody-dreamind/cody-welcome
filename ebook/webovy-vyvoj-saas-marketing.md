@@ -12938,7 +12938,210 @@ Další úprava:
 - ENISA: Cybersecurity guide for SMEs — https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
 
 
+
+# Příloha: Role a přístupová práva bez interního labyrintu
+
+Přístupová práva jsou jedna z věcí, které malé týmy často řeší až ve chvíli, kdy už je pozdě. Na začátku má admina každý, protože „jsme přece tři a věříme si“. Pak přijde první externista, první zákaznický workspace, první integrace, první supportní zásah a najednou nikdo neví, kdo může exportovat data, kdo vidí fakturaci, kdo může mazat projekty a kdo má pořád přístup, i když už půl roku pracuje jinde. Gratuluji, právě vznikl bezpečnostní escape room. Jen bohužel bez zábavné části.
+
+Privacy-first SaaS nepotřebuje složitý enterprise IAM hrad s padacím mostem. Potřebuje jednoduchý, dokumentovaný a pravidelně kontrolovaný model rolí. Cíl není mít sto rolí. Cíl je, aby každý člověk, služba a integrace měla jen přístup, který potřebuje pro konkrétní práci, a aby se dalo rychle zjistit, proč ho má.
+
+OWASP Authorization Cheat Sheet doporučuje explicitní autorizační kontroly, princip nejmenších oprávnění a centrálně spravovatelný přístupový model. OWASP ASVS v části V4 Access Control pracuje se stejným směrem: přístup k funkcím, datům a zdrojům má být ověřen podle konkrétní autorizace, ne podle optimistického pocitu v kódu ([OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html), [OWASP ASVS](https://owasp.org/projects/asvs)).
+
+> Codyho komentář: Nejhorší role v systému je „admin, protože to bylo nejrychlejší“. Druhá nejhorší je „dočasný admin“, který přežil tři redesigny, dva dodavatele a jednu firemní vánoční party.
+
+## Začni prací, ne názvem role
+
+Role nevymýšlej od stolu podle organizační fantazie. Začni prací, kterou lidé v produktu opravdu dělají.
+
+Příklady pracovních potřeb:
+
+- majitel workspace spravuje fakturaci, členy a zrušení účtu,
+- marketér upravuje veřejný obsah a vidí agregované metriky,
+- support řeší tickety, ale nečte data zákazníka bez důvodu,
+- účetní vidí faktury a platby, ale ne produktová data,
+- vývojář spravuje integrace, ale v produkci nemá plošný přístup k osobním datům,
+- externista pracuje jen na jednom projektu a jen po dobu spolupráce.
+
+Z těchto potřeb teprve skládej role. Jednoduchý SaaS často vystačí s tímto základem:
+
+```text
+Owner       správa workspace, fakturace, členové, mazání účtu
+Admin       správa nastavení a členů bez vlastnických akcí
+Member      běžná práce v produktu
+Billing     faktury, platby, daňové údaje
+Support     řešení konkrétních požadavků se záznamem důvodu
+Viewer      čtení vybraných výstupů bez úprav
+External    omezený projektový přístup s expirací
+```
+
+Nedávej roli podle prestiže. Dávej ji podle práce. Když někdo řekne „potřebuji admina“, zeptej se: „Na jakou konkrétní akci?“ Velmi často nepotřebuje admina. Potřebuje jednu schopnost, třeba pozvat člena týmu nebo stáhnout fakturu.
+
+## Oprávnění piš jako slovesa a objekty
+
+Role jsou jen obal. Důležitější jsou oprávnění. Piš je ve formátu sloveso + objekt + rozsah.
+
+Příklady:
+
+- `invite_member:workspace`
+- `update_billing:workspace`
+- `view_invoice:workspace`
+- `export_contacts:project`
+- `delete_project:project`
+- `view_support_context:ticket`
+- `rotate_api_key:integration`
+
+Takový zápis nutí tým říct, co se vlastně povoluje. „Admin přístup“ je mlha. `export_contacts:project` je konkrétní rozhodnutí s dopadem na data.
+
+U každého citlivého oprávnění si napiš tři věci:
+
+1. Kdo ho smí mít běžně.
+2. Kdy se uděluje dočasně.
+3. Jak se auditují jeho použití.
+
+Citlivá oprávnění jsou hlavně exporty, mazání, změny fakturace, správa členů, správa API klíčů, přístup k supportnímu kontextu, změny integračních URL a akce s dopadem na osobní data. Když se taková akce stane, auditní log má říct kdo, kdy, co, kde a proč — bez zapisování zbytečného obsahu.
+
+## Nepleť role, tarif a důvěru
+
+Častá chyba: role se začnou míchat s cenovými tarify. Například „Business user“ má víc funkcí než „Basic user“, ale zároveň se tím maskuje přístup k datům. Tarif říká, za co zákazník platí. Role říká, co smí konkrétní člověk dělat. Tyto dvě věci spolu mohou souviset, ale nemají být jedna tabulka v převleku.
+
+Praktické pravidlo:
+
+- Tarif odemyká produktové možnosti pro workspace.
+- Role omezuje akce konkrétního člověka uvnitř workspace.
+- Feature flag řídí postupné uvedení funkce.
+- Autorizační kontrola rozhoduje při každém požadavku.
+
+Pokud má zákazník vyšší tarif, neznamená to, že každý člen týmu smí exportovat všechna data. Pokud je uživatel zakladatel firmy, neznamená to, že má automaticky přístup do všech zákaznických workspace. Pokud je někdo vývojář, neznamená to, že má číst produkční data „pro jistotu“. Tohle není nedůvěra. To je normální provozní hygiena.
+
+## Dočasný přístup má mít konec
+
+Dočasný přístup bez expirace není dočasný. Je to archeologický nález budoucího auditu.
+
+Používej dočasné udělení přístupu pro:
+
+- supportní zásah v konkrétním ticketu,
+- externí spolupráci,
+- incidentové řešení,
+- migraci dat,
+- kontrolu fakturace,
+- jednorázový export.
+
+Každý dočasný přístup má mít:
+
+- vlastníka, který ho schválil,
+- důvod,
+- rozsah,
+- čas konce,
+- auditní záznam použití,
+- automatické odebrání nebo minimálně kontrolní připomínku.
+
+U citlivých zákaznických dat preferuj režim „požádat a zdůvodnit“ před trvalým supportním superpřístupem. Support má být schopný pomoci, ale nemá sedět na univerzálním klíči od všech bytů v paneláku. A pokud už univerzální klíč existuje, měl by být zamčený, logovaný a používaný výjimečně.
+
+## Service accounts nejsou odpadkový koš
+
+Integrace, cron joby, deploy skripty a automatizace často používají technické účty. Ty bývají nebezpečné, protože se netváří jako lidé, nikdo je pravidelně nekontroluje a jejich klíče se někdy válejí v konfiguraci jako zapomenuté ponožky.
+
+Pro service accounts platí ještě přísnější pravidla:
+
+- jeden účet pro jeden účel,
+- žádné sdílené „automation-admin“ monstrum,
+- minimální oprávnění,
+- jasný vlastník,
+- rotace secrets,
+- oddělení produkce a testu,
+- audit akcí podle účtu a korelačního ID.
+
+Když integrace potřebuje jen odeslat webhook o nové objednávce, nemá mít právo číst všechny zákazníky. Když cron generuje měsíční report, nemá mazat workspace. Když deploy skript aktualizuje konfiguraci, nemá exportovat faktury. Zní to banálně, ale právě banální pravidla zachraňují systémy před kreativní katastrofou.
+
+## Offboarding je součást role modelu
+
+Role model není hotový, dokud neumí bezpečně odebrat přístup. Offboarding řeš stejně pečlivě jako onboarding.
+
+Minimální offboarding checklist:
+
+- odebrat přístup do produktu a administrace,
+- zrušit nebo převést API klíče vlastněné člověkem,
+- odebrat přístup do e-mailu, analytiky, hostingu, repozitářů a ticketingu,
+- zkontrolovat sdílené dokumenty a heslové trezory,
+- převést vlastnictví automatizací a integračních účtů,
+- ověřit, že externista nemá přístup k testovacím datům,
+- zapsat datum a osobu, která offboarding provedla.
+
+Privacy-first detail: po odchodu člověka nemaž auditní stopu jeho pracovních akcí, pokud ji potřebuješ pro bezpečnost a provozní odpovědnost. Naopak smaž nebo anonymizuj to, co už nepotřebuješ pro legitimní účel. Rozdíl mezi odpovědností a hromaděním dat je malý v tabulce, ale velký v kultuře.
+
+## Čtvrtletní revize oprávnění
+
+Jednou za čtvrtletí projdi přístupy. Ne jako divadelní audit, kde se odklikne export z administrace. Udělej krátkou pracovní schůzku s vlastníky oblastí.
+
+Otázky pro revizi:
+
+- Kdo má owner/admin role a proč?
+- Které role nebyly použité posledních 90 dní?
+- Které dočasné přístupy stále existují?
+- Které service accounts nemají jasného vlastníka?
+- Které externí nástroje mají přístup k datům přes API?
+- Které akce s dopadem na data nejsou auditované?
+- Které role jsou moc široké a dají se rozdělit?
+
+Výstupem má být krátký seznam změn: odebrat, zúžit, zdokumentovat, otestovat. Pokud revize skončí větou „všechno dobrý“, aniž by se něco změnilo, pravděpodobně jste se jen hezky prošli kolem rizika.
+
+## Checklist: role bez interního labyrintu
+
+- Role vycházejí z konkrétní práce, ne z firemní hierarchie.
+- Citlivá oprávnění jsou popsaná jako akce nad konkrétním objektem.
+- Tarif, role, feature flag a autorizace nejsou smíchané do jedné mlhy.
+- Exporty, mazání, fakturace, API klíče a supportní přístup mají auditní stopu.
+- Dočasný přístup má důvod, rozsah, vlastníka a konec.
+- Service accounts mají jeden účel, minimální práva a vlastníka.
+- Externisté mají omezený přístup s expirací.
+- Offboarding zahrnuje produkt, nástroje, API klíče, repozitáře i sdílené dokumenty.
+- Čtvrtletní revize oprávnění má konkrétní výstupy.
+- U každé nové role je napsáno, co záměrně neumí.
+
+## Mini šablona matice rolí
+
+```text
+# Role: [název]
+
+## Práce role
+K čemu role slouží:
+Kdo ji běžně dostává:
+Kdo ji nesmí dostat:
+
+## Povolené akce
+- [akce:objekt:rozsah]
+- [akce:objekt:rozsah]
+
+## Zakázané akce
+- [co role záměrně neumí]
+- [co musí řešit jiná role]
+
+## Datový dopad
+Jaká osobní nebo obchodní data role vidí:
+Jaké exporty umožňuje:
+Jaké akce se auditují:
+
+## Dočasné udělení
+Kdy je možné:
+Kdo schvaluje:
+Maximální délka:
+Jak se odebere:
+
+## Revize
+Vlastník role:
+Rytmus kontroly:
+Poslední změna:
+```
+
+## Zdroje
+
+- OWASP Authorization Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP Application Security Verification Standard — https://owasp.org/projects/asvs
+- OWASP Developer Guide: Enforce Access Controls — https://devguide.owasp.org/en/04-design/02-web-app-checklist/07-access-controls/
+- NIST SP 800-53 Rev. 5, AC-6 Least Privilege — https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final
+
 # Pracovní log
+- 2026-09-28: Doplněna příloha „Role a přístupová práva bez interního labyrintu“ s návrhem rolí podle práce, zápisem oprávnění jako akcí nad objekty, oddělením tarifů od autorizace, dočasnými přístupy, service accounts, offboardingem, čtvrtletní revizí, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „E-mailová doména bez doručovací loterie“ s rozdělením e-mailových toků, minimem SPF/DKIM/DMARC, privacy-first pravidly obsahu, měřením bez sledovacích pixelů, měsíční provozní rutinou, checklistem, šablonou e-mailové karty a ověřenými zdroji RFC a ENISA.
 - 2026-09-28: Doplněna příloha „Webhooky a API integrace bez datového trychtýře“ s mapou událostí, minimalizací payloadu, ověřením podpisů, ochranou proti replay, idempotentním zpracováním, frontami, pravidly pro odchozí webhooky, dokumentací, checklistem, šablonou integrační karty a ověřenými zdroji OWASP a NIST.
 - 2026-09-28: Doplněna příloha „Rotace API klíčů a secrets bez nočního infarktu“ s inventářem secrets podle dopadu, rozdělením podle životnosti, bezpečným uložením, postupem rotace, pravidlem minimálních oprávnění, reakcí na únik, kontrolním rytmem, checklistem, šablonou a ověřenými zdroji OWASP, GitHub Docs a ENISA.
