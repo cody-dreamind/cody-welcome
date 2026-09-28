@@ -12766,7 +12766,180 @@ Datum poslední revize:
 - OWASP: Web Service Security Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Web_Service_Security_Cheat_Sheet.html
 
 
+# Příloha: E-mailová doména bez doručovací loterie
+
+E-mail je pořád jeden z nejdůležitějších kanálů pro SaaS i webové projekty. Posílá potvrzení registrace, reset hesla, faktury, bezpečnostní upozornění, pozvánky do týmu i obchodní follow-up. A právě proto je nebezpečné brát ho jako detail, který „nějak pošle SMTP“. Špatně nastavená doména umí zničit onboarding, podporu i reputaci firmy tiše a pomalu. Žádný dramatický výbuch. Jen zákazník, který nikdy nedostal pozvánku. Krásná tragédie ve složce Spam.
+
+Privacy-first přístup k e-mailu neznamená posílat méně důležitých zpráv. Znamená posílat jen zprávy, které mají jasný účel, minimální obsah osobních dat, ověřitelný původ a provozní monitoring. E-mailová důvěra se skládá z techniky, obsahu a disciplíny.
+
+> Codyho komentář: E-mailová reputace je jako dobré jméno v malém městě. Buduje se dlouho, ztratí se rychle a výmluva „ale u mě to fungovalo“ nikoho nezajímá.
+
+## Rozděl typy e-mailů podle rizika
+
+Než začneš řešit SPF, DKIM a DMARC, napiš si, co vlastně posíláš. Jedna doména často míchá provozní zprávy, marketing, obchod, podporu a vývojové testy. To je recept na chaos.
+
+Praktické rozdělení:
+
+- **Transakční e-maily**: reset hesla, ověření účtu, pozvánka do workspace, faktura, bezpečnostní upozornění.
+- **Provozní e-maily**: plánovaná odstávka, změna podmínek, incidentová informace, upozornění na limit.
+- **Produktové e-maily**: onboardingový tip, připomenutí nedokončeného nastavení, měsíční report.
+- **Obchodní e-maily**: follow-up po poptávce, nabídka, připomenutí konzultace.
+- **Marketingové e-maily**: newsletter, oznámení novinky, obsahový digest.
+
+Pro malý SaaS je rozumné oddělit minimálně transakční a marketingové posílání. Ne proto, že by marketing byl sprosté slovo, ale protože reset hesla nesmí doplácet na experiment s předmětem newsletteru. Když se marketingová reputace poškodí, kritické zprávy mají pořád šanci dorazit.
+
+Příklad jednoduché doménové hygieny:
+
+```text
+hello@example.com          běžná lidská komunikace
+support@example.com        podpora
+notify@example.com         transakční a provozní zprávy
+newsletter@example.com     obsahový mailing
+```
+
+U větších projektů může dávat smysl samostatná subdoména pro transakční posílání, například `notify.example.com`, a jiná pro newsletter. Důležité je, aby každá měla jasného vlastníka, účel a monitoring.
+
+## SPF, DKIM a DMARC jako minimum důvěry
+
+SPF říká, které servery mohou posílat e-mail jménem domény. DKIM přidává kryptografický podpis zprávy. DMARC navazuje na SPF a DKIM a umožňuje doméně říct příjemcům, co mají dělat, když ověření nevyjde. Technické detaily popisují příslušné RFC dokumenty: SPF v RFC 7208, DKIM v RFC 6376 a DMARC v RFC 7489 ([RFC 7208](https://www.rfc-editor.org/rfc/rfc7208), [RFC 6376](https://www.rfc-editor.org/rfc/rfc6376), [RFC 7489](https://www.rfc-editor.org/rfc/rfc7489)).
+
+Podnikatelsky řečeno: tyto záznamy pomáhají příjemcům poznat, že zpráva opravdu souvisí s tvou doménou a není to jen někdo v kapuci, kdo se tváří jako tvoje fakturace. Kapuce není povinná, ale dramaticky pomáhá představivosti.
+
+Minimální postup:
+
+1. Sepiš všechny služby, které posílají e-maily za doménu.
+2. U každé zjisti požadované SPF, DKIM a případně návratovou doménu.
+3. Sniž počet posílajících služeb na minimum.
+4. Nastav DKIM pro každou službu, která ho podporuje.
+5. Začni DMARC politikou pro monitoring a sbírej reporty.
+6. Po kontrole legitimních odesílatelů postupně zpřísňuj politiku.
+
+U DMARC nezačínej heroicky tvrdou politikou, pokud nevíš, kdo všechno za doménu posílá. Nejdřív monitoring, pak úklid, potom zpřísnění. E-mailová odvaha bez inventáře je jen dražší forma hazardu.
+
+## Obsah e-mailu: méně dat, víc jasnosti
+
+E-mail není bezpečný archiv. Neposílej v něm hesla, tokeny, celé dokumenty, osobní údaje navíc ani citlivé technické detaily. Uživatel potřebuje vědět, co se stalo a co má udělat. Nepotřebuje dostat polovinu databáze v HTML tabulce.
+
+Dobrá transakční zpráva má:
+
+- jasného odesílatele,
+- konkrétní předmět,
+- jednu hlavní akci,
+- vysvětlení, proč ji uživatel dostal,
+- odkaz na bezpečný detail v aplikaci,
+- kontakt na podporu,
+- minimum osobních dat.
+
+Příklad pro pozvánku do SaaS:
+
+```text
+Předmět: Pozvánka do workspace Acme v [Produkt]
+
+Dobrý den,
+Jan Novák vás pozval do workspace Acme v [Produkt].
+
+Pozvánku přijmete zde: [jednorázový odkaz]
+
+Odkaz platí 48 hodin. Pokud jste pozvánku nečekali, zprávu ignorujte nebo nám napište na support@example.com.
+```
+
+Tahle zpráva neprozrazuje zbytečný obsah workspace, seznam členů ani obchodní detaily. Dává kontext a bezpečný další krok. Přesně tak má provozní e-mail pracovat: stručně, jasně, bez bulvárního apetitu po datech.
+
+## Tracking v e-mailu není povinná výbava
+
+Otevření e-mailu je nespolehlivý signál a často znamená načítání sledovacího pixelu. U privacy-first provozu si polož jednoduchou otázku: opravdu potřebujeme vědět, kdo otevřel konkrétní zprávu, nebo nám stačí agregovaně měřit doručení, odražení, kliknutí na důležité odkazy a odpovědi?
+
+Pro transakční a provozní e-maily doporučuji:
+
+- neměřit otevření přes pixel,
+- neměnit každý odkaz na trackingový redirect, pokud to není nutné,
+- ukládat jen technické doručovací události potřebné pro podporu,
+- mít krátkou retenci detailních logů,
+- neukládat obsah e-mailu do analytiky,
+- měřit úspěch podle dokončené akce v produktu, ne podle šmírovacího pocitu z inboxu.
+
+Pro marketingový obsah můžeš pracovat s agregovanými signály: počet odeslaných, doručených, odhlášení, odpovědí a kliknutí na hlavní odkazy. Když potřebuješ personalizaci, drž ji u dat, která uživatel vědomě poskytl nebo která vyplývají z legitimního vztahu s produktem. Ne z detektivního románu poskládaného z pixelů.
+
+## Doručitelnost je provozní rutina
+
+E-mail se rozbije nenápadně. Někdo změní DNS, přidá nový nástroj, zapomene ověřit DKIM, odejde člověk s přístupem do mailingové služby nebo se začne posílat moc zpráv z testovacího prostředí. Proto doručitelnost patří do provozní rutiny, ne do panického pátečního večera.
+
+Měsíční kontrola:
+
+- seznam služeb, které posílají za doménu,
+- platnost DKIM záznamů,
+- SPF bez zbytečných historických služeb,
+- DMARC reporty a neznámí odesílatelé,
+- bounce rate u důležitých typů zpráv,
+- test resetu hesla a pozvánky do účtu,
+- kontrola odhlašovacích odkazů u marketingu,
+- revize přístupů do e-mailových nástrojů.
+
+Privacy-first detail: doručovací logy mají obsahovat technický stav, čas, typ zprávy a korelační ID. Nemají obsahovat celé tělo e-mailu ani citlivý obsah. Pokud support potřebuje řešit „nedorazila faktura“, má vidět, zda byla zpráva odeslána, doručena, odražena nebo blokována. Nemusí číst všechno, co v ní bylo.
+
+## Checklist: e-mailová doména bez loterie
+
+- Máme seznam všech služeb, které posílají e-maily za doménu.
+- Transakční a marketingové posílání mají oddělený účel a vlastníka.
+- SPF neobsahuje historické služby, které už nepoužíváme.
+- DKIM je nastavený pro každého legitimního poskytovatele.
+- DMARC běží minimálně v monitorovacím režimu a někdo čte reporty.
+- Kritické e-maily neobsahují hesla, tokeny, celé dokumenty ani zbytečná osobní data.
+- Reset hesla, ověření účtu a pozvánka do workspace jsou pravidelně testované.
+- Marketingové e-maily mají jasné odhlášení a neblokují provozní komunikaci.
+- Detailní doručovací logy mají omezenou retenci a omezený přístup.
+- E-mailové nástroje mají offboardingový postup pro odchozí členy týmu.
+
+## Mini šablona e-mailové karty
+
+```markdown
+# E-mailový tok: [název]
+
+## Účel
+Typ zprávy:
+Pro koho je:
+Kdy se spouští:
+Vlastník:
+
+## Odesílání
+Odesílací adresa:
+Použitá služba:
+Doména / subdoména:
+SPF zahrnuto:
+DKIM selector:
+DMARC dopad:
+
+## Obsah
+Předmět:
+Hlavní akce:
+Jaká osobní data obsahuje:
+Co záměrně neposíláme:
+Bezpečnostní poznámka:
+
+## Měření a logy
+Co měříme:
+Co neměříme:
+Kde je doručovací log:
+Retence detailních logů:
+Kdo má přístup:
+
+## Kontrola
+Testovací scénář:
+Poslední test:
+Známé riziko:
+Další úprava:
+```
+
+## Zdroje
+
+- RFC 7208: Sender Policy Framework — https://www.rfc-editor.org/rfc/rfc7208
+- RFC 6376: DomainKeys Identified Mail Signatures — https://www.rfc-editor.org/rfc/rfc6376
+- RFC 7489: Domain-based Message Authentication, Reporting, and Conformance — https://www.rfc-editor.org/rfc/rfc7489
+- ENISA: Cybersecurity guide for SMEs — https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
+
+
 # Pracovní log
+- 2026-09-28: Doplněna příloha „E-mailová doména bez doručovací loterie“ s rozdělením e-mailových toků, minimem SPF/DKIM/DMARC, privacy-first pravidly obsahu, měřením bez sledovacích pixelů, měsíční provozní rutinou, checklistem, šablonou e-mailové karty a ověřenými zdroji RFC a ENISA.
 - 2026-09-28: Doplněna příloha „Webhooky a API integrace bez datového trychtýře“ s mapou událostí, minimalizací payloadu, ověřením podpisů, ochranou proti replay, idempotentním zpracováním, frontami, pravidly pro odchozí webhooky, dokumentací, checklistem, šablonou integrační karty a ověřenými zdroji OWASP a NIST.
 - 2026-09-28: Doplněna příloha „Rotace API klíčů a secrets bez nočního infarktu“ s inventářem secrets podle dopadu, rozdělením podle životnosti, bezpečným uložením, postupem rotace, pravidlem minimálních oprávnění, reakcí na únik, kontrolním rytmem, checklistem, šablonou a ověřenými zdroji OWASP, GitHub Docs a ENISA.
 - 2026-09-28: Doplněna příloha „Auditní logy bez špehovacího archivu“ s výběrem událostí podle dopadu, strukturou auditní události, pravidly proti ukládání tajemství, retenčním modelem, přístupovými rolemi, zákaznickým výřezem, vazbou na incidentový runbook, checklistem, šablonou a ověřenými zdroji EDPB a ENISA.
