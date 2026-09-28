@@ -11773,7 +11773,213 @@ Známé výjimky:
 Mini design systém je dobrý tehdy, když zrychlí běžnou práci a zpomalí špatná rozhodnutí. Nemusí být velký. Musí být používaný. Pokud po něm tým sáhne dřív, než vytvoří sedmou variantu stejného tlačítka, vyhrál jsi malou, ale důležitou válku proti chaosu.
 
 
+
+# Příloha: SLA a servisní sliby bez korporátní mlhy
+
+SLA není kouzelné číslo v patičce ceníku. Je to dohoda o tom, co zákazník může čekat, když produkt používá pro skutečnou práci. U malého SaaS nebo webového provozu nemusí mít SLA dvacet stran a tři právní přílohy. Musí být hlavně realistické, měřitelné, provozně zvládnutelné a napsané tak, aby mu rozuměl zákazník i tým.
+
+Největší chyba je slibovat dostupnost, reakční dobu nebo prioritu podpory podle marketingového přání, ne podle schopnosti provozu. Pokud máš jeden člověk-tým, jeden hlavní server a monitoring, který se ozve jen v pracovní době, neslibuj enterprise režim. Slibuj poctivě to, co umíš doručit — a napiš, jak budeš komunikovat, když se něco pokazí.
+
+> Codyho komentář: SLA není místo pro machrování. Je to místo, kde se marketing potká s realitou, supportem, monitoringem a kalendářem. Když tam realita chybí, zákazník ji objeví při prvním incidentu. To bývá dražší než upřímnost.
+
+### Odděl dostupnost, reakci a vyřešení
+
+Tři pojmy se často hází do jednoho pytle, ale znamenají něco jiného:
+
+- **Dostupnost** říká, jestli služba funguje pro zákazníka.
+- **Reakční doba** říká, kdy tým potvrdí, že problém převzal.
+- **Doba vyřešení** říká, kdy bude problém odstraněný nebo obejitý.
+
+Neslibuj „vyřešíme do 2 hodin“, pokud ve skutečnosti myslíš „do 2 hodin odpovíme“. To není detail. To je rozdíl mezi důvěrou a frustrací.
+
+Lepší formulace:
+
+```text
+Kritické incidenty potvrzujeme v pracovní době do 1 hodiny. Cílem je obnovit základní funkci co nejdříve nebo nabídnout náhradní postup. Přesný čas vyřešení závisí na povaze problému; průběžné aktualizace posíláme podle dopadu.
+```
+
+Tohle je méně efektní než „garantujeme vyřešení do hodiny“, ale je to pravdivější. A pravdivé sliby se lépe provozují.
+
+### Definuj kritičnost podle dopadu
+
+Priorita nemá vycházet z toho, kdo píše nejhlasitěji. Má vycházet z dopadu na práci zákazníka.
+
+Praktické rozdělení:
+
+| Priorita | Dopad | Příklad | Reakce |
+| --- | --- | --- | --- |
+| P1 kritická | většina zákazníků nemůže používat hlavní funkci | nejde přihlášení, nejde odeslat objednávka, výpadek API | okamžitě podle provozního režimu |
+| P2 vysoká | důležitá funkce nefunguje části zákazníků | selhává export, integrace má chyby, platby padají u části transakcí | rychle v pracovní době nebo podle tarifu |
+| P3 běžná | problém má workaround nebo omezený dopad | chyba v UI, ruční oprava dat, nejasná hláška | plánovaně |
+| P4 nízká | dotaz, kosmetika, nápad | textová chyba, návrh vylepšení | podle kapacity |
+
+Do priority nepatří jen technická závažnost. Patří tam i obchodní a provozní kontext. Chyba v exportu může být běžná v pondělí a kritická den před účetní uzávěrkou. Proto má support umět přidat kontext, ale ne přepisovat realitu podle emocí.
+
+### Sliby napiš zákaznickým jazykem
+
+Zákazník nepotřebuje vědět, že „probíhá degradace služby v regionu eu-central“. Potřebuje vědět, co nejde, koho se to týká a co má udělat.
+
+Slabé SLA copy:
+
+```text
+Dostupnost služby je poskytována best-effort s prioritizovanou podporou dle interní klasifikace incidentů.
+```
+
+Lepší:
+
+```text
+Službu monitorujeme automaticky. Pokud vypadne hlavní funkce, řešíme ji před běžnými požadavky a na stavové stránce napíšeme, co nefunguje, koho se problém týká a kdy přidáme další informaci.
+```
+
+Tahle věta není právní dokument. Je to zákaznické vysvětlení. Právní a obchodní dokumenty mohou být přesnější, ale veřejný text má být srozumitelný. Ideálně obojí neříká dvě různé věci.
+
+### Vytvoř servisní úrovně podle provozu, ne podle ceníkové fantazie
+
+Pokud máš více tarifů, nedělej z podpory marketingovou past. Rozdíl mezi tarify může být férový, ale musí odpovídat reálné kapacitě.
+
+Příklad jednoduchých úrovní:
+
+| Úroveň | Pro koho | Podpora | Incidenty | Co neslibuje |
+| --- | --- | --- | --- | --- |
+| Start | menší týmy, nekritické použití | e-mail v pracovní době | základní komunikace při plošném incidentu | garantovanou individuální reakci do hodin |
+| Team | provozní použití v týmu | priorita pro blokující problémy | rychlejší triáž a průběžné aktualizace | nepřetržitý telefonický support |
+| Business | kritičtější procesy | dohodnutý kontakt a eskalace | jasný postup, kontakty a postmortem u většího dopadu | zázraky mimo sjednaný režim |
+
+Důležité je napsat i to, co tarif neobsahuje. Ne jako výmluvu, ale jako prevenci špatného očekávání. Pokud zákazník potřebuje 24/7 pohotovost, nemá si koupit tarif, který obsluhuje tým v pracovní době. To není selhání prodeje. To je ochrana vztahu.
+
+### Privacy-first SLA chrání i data
+
+Servisní sliby nejsou jen o rychlosti. Privacy-first provoz musí říct také, jak se při řešení problémů pracuje s daty.
+
+Do servisních pravidel přidej:
+
+- že support nikdy nechce hesla, tokeny ani recovery kódy,
+- jak zákazník bezpečně předá screenshot nebo ukázku problému,
+- kdo má přístup k support tiketům,
+- kdy se používá anonymizovaný reprodukční příklad,
+- jak dlouho se drží přílohy v tiketech,
+- jak se komunikuje bezpečnostní nebo datový incident,
+- kde zákazník najde export nebo postup smazání dat.
+
+Praktická věta do podpory:
+
+```text
+Neposílejte nám hesla, API klíče ani celé exporty produkčních dat. Pokud budeme potřebovat detailnější ukázku, domluvíme bezpečný postup nebo anonymizovaný vzorek.
+```
+
+Tohle šetří čas i riziko. A ano, pořád se najde někdo, kdo pošle heslo do screenshotu. Proto má tým vědět, jak takovou přílohu rychle odstranit a jak zákazníka navést bezpečněji.
+
+### Měř SLA bez šmírování
+
+SLA se dá měřit bez toho, aby ses z podpory stal datový vysavač. Nepotřebuješ ukládat celé zprávy do analytiky. Stačí strukturované metriky:
+
+- čas přijetí ticketu,
+- priorita,
+- čas první odpovědi,
+- čas obnovy funkce nebo uzavření,
+- dotčená oblast produktu,
+- zda byl použit workaround,
+- zda vznikl úkol do produktu nebo dokumentace.
+
+Obsah komunikace patří do support nástroje s přístupovými pravidly a retencí. Analytika podpory má pracovat se štítky a agregací. Věta „za měsíc jsme měli 12 dotazů k exportu faktur“ je užitečná. Kopie všech ticketů v marketingovém dashboardu je sbírka budoucích problémů.
+
+### Sliby musí mít interní runbook
+
+Veřejný slib bez interního postupu je jen přání v hezké sazbě. Ke každé servisní úrovni napiš interní runbook:
+
+```text
+Když přijde P1:
+1. potvrdit příjem,
+2. ověřit dopad,
+3. založit incident v interním kanálu,
+4. určit vlastníka,
+5. publikovat nebo aktualizovat status,
+6. spustit technickou diagnostiku,
+7. nabídnout workaround, pokud existuje,
+8. po vyřešení zapsat příčinu a následné kroky.
+```
+
+Runbook nemusí být dlouhý. Musí být použitelný ve stresu. Pokud incidentový postup chápe jen jeden člověk, nemáš proces. Máš folklór.
+
+### Kdy SLA veřejně ukázat
+
+Veřejné SLA dává smysl, když zákazník podle něj rozhoduje nákup nebo provoz. U raného produktu může stačit stránka „Podpora a provoz“, která férově popíše dostupnost, pracovní dobu, komunikační kanály a incidentovou komunikaci.
+
+Postup podle zralosti:
+
+1. **První zákazníci:** jednoduchý text o podpoře, kontaktu a hranicích.
+2. **Rostoucí SaaS:** veřejná stránka podpory, status page, interní incidentový runbook.
+3. **B2B provoz:** servisní úrovně podle tarifu, obchodní příloha, kontakty a eskalace.
+4. **Kritické nasazení:** individuálně sjednané SLA, test obnovy, bezpečnostní a datové postupy.
+
+Nepředstírej čtvrtou úroveň, když jsi na druhé. Zákazníkům víc pomůže upřímný režim než enterprise slovník bez enterprise provozu.
+
+### Checklist: SLA bez korporátní mlhy
+
+- [ ] Rozlišujeme dostupnost, reakční dobu a dobu vyřešení.
+- [ ] Priority incidentů vycházejí z dopadu na zákazníka.
+- [ ] Veřejný text podpory je srozumitelný a nelže slovy typu „best-effort“ bez vysvětlení.
+- [ ] Servisní úrovně odpovídají skutečné kapacitě týmu.
+- [ ] Ceník jasně říká, co podpora obsahuje i neobsahuje.
+- [ ] Support nikdy nevyžaduje hesla, tokeny ani celé produkční exporty.
+- [ ] Metriky podpory jsou agregované a neukládají obsah ticketů do analytiky.
+- [ ] P1/P2 incidenty mají interní runbook a vlastníka.
+- [ ] Existuje náhradní komunikační kanál při výpadku hlavní aplikace.
+- [ ] Po větším incidentu vzniká krátký zápis, co se stalo a co se změní.
+
+### Mini šablona servisního slibu
+
+```text
+# Servisní slib: [produkt / tarif]
+
+## Pro koho je určený
+Typ zákazníka:
+Kritičnost použití:
+Hlavní pracovní scénář:
+
+## Dostupnost
+Co monitorujeme:
+Co považujeme za výpadek:
+Co do dostupnosti nepočítáme:
+
+## Podpora
+Kanály:
+Pracovní doba:
+První reakce:
+Co podpora řeší:
+Co podpora neřeší:
+
+## Priority
+P1 kritická:
+P2 vysoká:
+P3 běžná:
+P4 nízká:
+
+## Incidentová komunikace
+Kde informujeme:
+Kdy posíláme první zprávu:
+Jak často aktualizujeme:
+Kdy posíláme postmortem:
+
+## Privacy-first hranice
+Co zákazník nikdy neposílá:
+Jak bezpečně předat ukázku problému:
+Kdo má přístup k tiketům:
+Retence příloh:
+
+## Interní provoz
+Vlastník SLA:
+Runbook:
+Monitoring:
+Náhradní kanál:
+Poslední revize:
+```
+
+SLA má být most mezi slibem a provozem. Když je napsané poctivě, pomáhá obchodu prodávat správným zákazníkům, supportu nastavovat očekávání a týmu prioritizovat práci. Když je napsané jako mlha, přidá jen další dokument, který nikdo nechce číst — až do chvíle, kdy se všechno rozbije.
+
+
 # Pracovní log
+- 2026-09-28: Doplněna příloha „SLA a servisní sliby bez korporátní mlhy“ s rozlišením dostupnosti, reakční doby a vyřešení, prioritami incidentů podle dopadu, servisními úrovněmi, privacy-first pravidly podpory, měřením bez ukládání obsahu ticketů, interním runbookem, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „Design systém pro malý web a SaaS bez komponentového divadla“ s inventurou opakovaných částí, tokeny podle účelu, komponentovými kartami, stavovými obrazovkami, privacy komponentami, dokumentační a release rutinou, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „AI chatbot na webu bez datového vysavače“ s vymezením práce chatbota, rizikovými kategoriemi dotazů, transparentním označením AI, datovou hranicí, kontrolovanou znalostní bází, guardrails, privacy-first měřením, testovacím postupem, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „Nákup SaaS nástrojů bez firemního bazaru dat“ s problémovou větou před nákupem, rozdělením podle datového rizika, pravidly pro trial bez produkčních dat, otázkami na dodavatele, evropským provozním filtrem, 30denní kontrolou, checklistem a vyplnitelnou šablonou.
