@@ -9919,6 +9919,214 @@ Z odpovědí často vypadne rozumnější rozpočet než z odhadu „kolik stoj�
 
 Rozpočet není tabulka pro účetní rituál. Je to mapa závazků. Když do ní dáš i provoz, soukromí, údržbu a exit, produkt začne působit méně jako jednorázová kampaň a víc jako služba, které může zákazník věřit. A důvěra je v SaaS pořád jedna z mála věcí, které nejde jednoduše doinstalovat přes plugin.
 
+
+## Příloha: Rozhodovací deník pro web a SaaS bez firemní amnézie
+
+Malé týmy často netrpí nedostatkem nápadů. Trpí tím, že si po třech týdnech nepamatují, proč něco slíbily, proč něco odmítly a proč se zrovna tahle integrace stala „dočasným“ řešením na dva roky. Rozhodovací deník je jednoduchá pojistka proti firemní amnézii. Neřeší politiku, nevyžaduje komisi a nepotřebuje nový nástroj se slonem v logu. Stačí pravidelně zapisovat důležitá rozhodnutí tak, aby se k nim tým dokázal vrátit.
+
+U webu, SaaS a marketingu je to obzvlášť užitečné, protože mnoho rozhodnutí není čistě technických. Míchá se v nich obchod, produkt, data, právní riziko, podpora, zákaznická zkušenost a ego. A ego má bohužel velmi dobrý marketingový rozpočet.
+
+Rozhodovací deník neznamená zapisovat každé tlačítko. Znamená zachytit rozhodnutí, která mění směr, závazky, data, náklady nebo riziko.
+
+### Co do deníku patří
+
+Zapisuj hlavně rozhodnutí, která budeš později vysvětlovat, kontrolovat nebo možná litovat. To zní dramaticky, ale přesně tam deník šetří čas.
+
+Do deníku patří například:
+
+- výběr hostingu, analytiky, CRM, e-mailingového nástroje nebo platební brány,
+- rozhodnutí sbírat nebo nesbírat konkrétní údaj ve formuláři,
+- změna cenové stránky, balíčků nebo trialu,
+- odložení bezpečnostní, přístupnostní nebo provozní práce,
+- spuštění nové kampaně s partnerem,
+- změna retenční doby dat,
+- rozhodnutí nepoužít populární nástroj kvůli datovým hranicím,
+- velké zjednodušení produktu, které může krátkodobě vypadat jako krok zpět.
+
+Naopak do deníku nepatří každá drobná úprava textu, běžný bugfix nebo interní debata, která nemá dopad na zákazníka, data, peníze nebo provoz. Když zapisuješ všechno, deník se změní ve skládku. A skládka, jak víme, má mizerné vyhledávání.
+
+### Piš rozhodnutí jako větu, ne jako mlhu
+
+Špatný zápis:
+
+```text
+Analytika — vyřešit později.
+```
+
+Lepší zápis:
+
+```text
+Pro první veřejnou verzi použijeme pouze privacy-first agregovanou analytiku bez reklamních pixelů. Detailní produktové eventy odkládáme do chvíle, kdy budeme mít jasně popsané aktivační metriky a retenční pravidla.
+```
+
+Rozdíl je obrovský. První zápis je poznámka z porady. Druhý je rozhodnutí, které má důvod, hranici a podmínku návratu.
+
+Dobrá rozhodovací věta obsahuje:
+
+- **co se rozhodlo**,
+- **proč právě teď**,
+- **jaké alternativy byly odmítnuté**,
+- **jaké riziko vědomě přijímáš**,
+- **kdy se k rozhodnutí vrátíš**.
+
+Nemusí to být román. Stačí taková míra detailu, aby nový člověk v týmu pochopil kontext bez archeologické výpravy po chatech.
+
+### Rozhodnutí má vlastníka a datum návratu
+
+Každé důležité rozhodnutí potřebuje vlastníka. Ne proto, aby bylo koho obvinit při požáru, ale aby bylo jasné, kdo hlídá revizi. Bez vlastníka se rozhodnutí změní v atmosférický jev: „nějak jsme se tehdy shodli“. To je věta, po které v kanceláři začnou samovolně vadnout rostliny.
+
+Ke každému záznamu přidej:
+
+- **vlastníka rozhodnutí** — člověk nebo role,
+- **datum rozhodnutí**,
+- **datum revize**,
+- **spouštěč revize** — například růst provozu, nový typ zákazníka, incident, změna dodavatele, překročení nákladů,
+- **stav** — platné, nahrazené, čeká na revizi, zrušené.
+
+Příklad:
+
+```text
+Rozhodnutí: Pro kontaktní formulář nebudeme vyžadovat telefon.
+Vlastník: obchod / produkt
+Důvod: Chceme snížit vstupní bariéru a sbírat jen údaje nutné pro první odpověď.
+Riziko: U některých urgentních poptávek bude následná domluva pomalejší.
+Revize: Za 60 dní nebo při více než 20 % poptávek, kde chybějící telefon prodlouží obchodní cyklus.
+```
+
+Tohle je mnohem lepší než nekonečná debata „telefon ano/ne“ každé pondělí. Rozhodnutí má hypotézu a jasný návrat.
+
+### Privacy-first filtr u každého většího rozhodnutí
+
+U webu a SaaS přidej k rozhodovacímu deníku krátký datový filtr. Ne jako compliance divadlo, ale jako praktický reflex.
+
+Ptej se:
+
+- Jaká osobní, obchodní nebo provozní data rozhodnutí ovlivňuje?
+- Přidáváme nového dodavatele, skript, API nebo ruční export?
+- Kde data poběží a kdo k nim bude mít přístup?
+- Lze stejného cíle dosáhnout s menším množstvím dat?
+- Zhoršuje rozhodnutí export, smazání nebo odchod zákazníka?
+- Vzniká nový pravidelný úkol pro provozní tým?
+
+Příklad produktového rozhodnutí:
+
+```text
+Nápad: Personalizovat onboarding podle oboru firmy.
+Privacy-first varianta: Zeptáme se na obor volitelně a použijeme ho pouze k výběru úvodních příkladů v aplikaci. Neposíláme ho do reklamních nástrojů a neukládáme ho jako skrytý scoringový signál.
+```
+
+Codyho komentář: Privacy-first rozhodování není brzda. Je to připomínka, že „mohli bychom to měřit“ není totéž jako „měli bychom to měřit“. Ano, tragédie pro dashboardové maximalisty. Přežijí.
+
+### Jak deník vést prakticky
+
+Začni obyčejně. Jeden Markdown soubor v repozitáři, jedna tabulka v interním nástroji nebo jedna stránka ve znalostní bázi. Důležitější než nástroj je rytmus.
+
+Praktická rutina:
+
+1. Na konci každé produktové nebo provozní porady zapiš maximálně tři rozhodnutí.
+2. Jednou týdně projdi rozhodnutí se stavem „čeká na revizi“.
+3. Jednou měsíčně zkontroluj rozhodnutí s datovým dopadem.
+4. Při incidentu, migraci nebo větší kampani vždy otevři související staré zápisy.
+5. Když rozhodnutí nahradíš, nemaž ho. Označ ho jako nahrazené a odkaž na nové.
+
+Tím vznikne historie, která pomáhá. Ne historie, která trestá. Rozhodovací deník nemá být soudní spis. Má být mapa, proč tým šel tam, kam šel.
+
+### Spoj deník s backlogem a runbooky
+
+Rozhodnutí bez návaznosti je hezká věta. Rozhodnutí s návazností mění práci.
+
+U každého záznamu si poznač, kam dopadá:
+
+- **backlog** — vzniká úkol, experiment nebo dluh,
+- **runbook** — mění se provozní postup,
+- **datová mapa** — přibývá nebo mizí datový tok,
+- **support** — mění se odpověď zákazníkům,
+- **marketing** — mění se slib na webu, case study nebo landing page,
+- **rozpočet** — vzniká pravidelný náklad nebo úspora.
+
+Příklad:
+
+```text
+Rozhodnutí: Zrušíme heatmapový nástroj na marketingovém webu.
+Dopad: Aktualizovat datovou mapu, odstranit skript, upravit měsíční audit externích skriptů, přepsat interní poznámku k měření landing pages.
+```
+
+Takhle se privacy-first hodnota dostane z deklarace do provozu. Nejen „vážíme si soukromí“, ale „tady je konkrétní stopa rozhodnutí, které kvůli tomu mění produkt“.
+
+### Nejčastější chyby rozhodovacího deníku
+
+- **Příliš mnoho zápisů** — tým zapisuje drobnosti a nikdo už nepozná, co je důležité.
+- **Žádná alternativa** — po měsíci není jasné, proč se nevybrala jiná cesta.
+- **Bez revize** — rozhodnutí žije navždy, i když se změnil kontext.
+- **Bez vlastníka** — každý souhlasí, nikdo nehlídá.
+- **Bez datového filtru** — produktové rozhodnutí nečekaně vytvoří nový datový tok.
+- **Mazání starých rozhodnutí** — tým ztratí kontext a zopakuje stejnou debatu.
+
+Nejlepší rozhodovací deník je krátký, čitelný a používaný. Horší je dlouhý, krásný a mrtvý. Nejhorší je žádný, protože pak rozhoduje paměť. A paměť je výborná hlavně v tom, že sebevědomě vyrábí nepřesnosti.
+
+### Checklist rozhodovacího deníku
+
+- [ ] Tým ví, která rozhodnutí se zapisují a která ne.
+- [ ] Každý zápis má jasnou rozhodovací větu.
+- [ ] U důležitých rozhodnutí jsou uvedené odmítnuté alternativy.
+- [ ] Každé rozhodnutí má vlastníka a datum revize.
+- [ ] Zápis obsahuje vědomě přijatá rizika.
+- [ ] U produktových, marketingových a provozních rozhodnutí je vyplněný datový filtr.
+- [ ] Rozhodnutí odkazuje na související backlog, runbook, datovou mapu nebo rozpočet.
+- [ ] Nahrazená rozhodnutí zůstávají dohledatelná.
+- [ ] Tým jednou týdně kontroluje rozhodnutí čekající na revizi.
+- [ ] Deník se používá při incidentu, migraci, větší kampani nebo změně dodavatele.
+
+### Mini šablona rozhodovacího záznamu
+
+```markdown
+# Rozhodnutí: [krátký název]
+
+## Základ
+- Datum:
+- Vlastník:
+- Stav: platné / čeká na revizi / nahrazené / zrušené
+- Datum revize:
+- Spouštěč revize:
+
+## Rozhodovací věta
+Rozhodli jsme se [co] kvůli [důvod], přestože [vědomé riziko]. K rozhodnutí se vrátíme, pokud [podmínka].
+
+## Kontext
+- Jaký problém řešíme:
+- Pro koho je rozhodnutí důležité:
+- Jaký je očekávaný dopad:
+
+## Alternativy
+| Varianta | Proč ano | Proč ne |
+| --- | --- | --- |
+| | | |
+| | | |
+
+## Privacy-first filtr
+- Jaká data rozhodnutí ovlivňuje:
+- Přidává nového dodavatele nebo skript:
+- Kde data běží:
+- Kdo má přístup:
+- Lze sběr dat zmenšit:
+- Dopad na export, smazání nebo odchod zákazníka:
+
+## Dopady do práce
+- Backlog:
+- Runbook:
+- Datová mapa:
+- Support:
+- Marketing:
+- Rozpočet:
+
+## Kontrola
+- Jak poznáme, že rozhodnutí funguje:
+- Jak poznáme, že škodí:
+- Co uděláme při revizi:
+```
+
+Rozhodovací deník je nudná super schopnost. Nedělá efektní demo, ale po půl roce zachrání hodiny debat, sníží počet opakovaných omylů a ukáže, že privacy-first není jen hezká věta v patičce webu. Je to způsob, jak tým přemýšlí, zapisuje a nenechá svoje budoucí já hádat, co si minulé já myslelo. Což je laskavost, kterou si zaslouží každý produkt i každý unavený páteční deploy.
+
 # Zdroje
 
 - European Data Protection Board: [Personal data breaches](https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en)
@@ -9992,6 +10200,7 @@ Rozpočet není tabulka pro účetní rituál. Je to mapa závazků. Když do n�
 
 # Pracovní log
 
+- 2026-09-28: Doplněna příloha „Rozhodovací deník pro web a SaaS bez firemní amnézie“ s pravidly, co zapisovat, jasnou rozhodovací větou, vlastníkem a revizí, privacy-first filtrem, vazbou na backlog/runbooky/datovou mapu, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Rozpočet webu a SaaS bez skrytého provozního dluhu“ s rozdělením nákladů podle životního cyklu, TCO pohledem na nástroje, variantami podle rizika, rozlišením vývojového a provozního dluhu, privacy-first položkami, škrtacími pravidly, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Syntetické kontroly kritických cest bez falešného klidu“ s výběrem kritických cest, testovacími daty, ověřováním cílových výsledků, frekvencí kontrol, alerty, bezpečností testovacích účtů, post-deploy rutinou, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Obsahový refresh bez honby za algoritmem“ s výběrem stránek podle dopadu, rychlým auditem, rozdělením změn na přesnost/použitelnost/distribuci, střídmým měřením, 60minutovým plánem, checklistem a vyplnitelnou šablonou.
