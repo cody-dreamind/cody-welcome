@@ -14187,7 +14187,162 @@ Incident kontakt:
 - ENISA: Technical implementation guidance on cybersecurity risk-management measures, kapitola 4.2 Backup and redundancy management — https://www.enisa.europa.eu/sites/default/files/2025-06/ENISA_Technical_implementation_guidance_on_cybersecurity_risk_management_measures_version_1.0.pdf
 - ENISA: Threat Landscape for Ransomware Attacks, doporučení pro ověřené a izolované zálohy — https://www.enisa.europa.eu/sites/default/files/publications/ENISA%20Threat%20Landscape%20for%20Ransomware%20Attacks.pdf
 
+# Příloha: Status page a komunikace výpadků bez kouřové clony
+
+Status page není marketingová landing page s optimismem na steroidech. Je to provozní slib: když služba zlobí, zákazník nemusí psát na podporu, refreshovat aplikaci a hádat, jestli problém sedí u něj, u tebe, nebo někde v DNS podsvětí.
+
+U malého SaaS nemusí být status page velký projekt. Může začít jako jednoduchá stránka s aktuálním stavem, historií incidentů, kontaktní cestou a pravidlem, kdy se aktualizuje. Důležité je, aby fungovala i ve chvíli, kdy hlavní aplikace nejde. Status page hostovaná ve stejném prostředí jako rozbitý produkt je hezká ironie, ale špatný plán.
+
+> Codyho komentář: Výpadek bolí. Mlčení bolí víc. A mlžení bolí úplně nejvíc, protože zákazník pak neopravuje jen workflow, ale i důvěru v tebe.
+
+## Rozliš interní a veřejný stav
+
+Ne každý technický problém patří okamžitě na veřejnou status page. Každý významný dopad na zákazníka tam ale patří rychle, stručně a bez divadla. Interní incident kanál řeší diagnostiku. Veřejná komunikace řeší dopad, očekávání a další aktualizaci.
+
+Praktické rozdělení:
+
+- **Interní signál:** alert, chyba v logu, zpomalená fronta, výpadek jednoho workeru bez dopadu na zákazníka.
+- **Veřejný incident:** zákazník nemůže používat důležitou funkci, data se nezpracují v očekávaném čase, přihlášení nefunguje, platby selhávají, exporty nejdou stáhnout.
+- **Bezpečnostní incident:** existuje podezření na neoprávněný přístup, únik dat nebo porušení integrity. Tady status page nenahrazuje právní a bezpečnostní postupy, jen pomáhá řídit provozní komunikaci.
+
+NIST ve své příručce pro zvládání bezpečnostních incidentů rozděluje práci do přípravy, detekce a analýzy, containment/eradication/recovery a poučení po incidentu. Pro status page je z toho klíčové hlavně to, že komunikace není poslední kosmetický krok, ale součást procesu ([NIST SP 800-61 Rev. 2](https://www.nist.gov/publications/computer-security-incident-handling-guide)).
+
+## První zpráva má potvrdit dopad, ne vyřešit vesmír
+
+První veřejná zpráva nemusí znát příčinu. Má dát zákazníkovi jistotu, že problém vidíš, chápeš dopad a řekneš, kdy přijde další informace. Atlassian ve svých doporučeních ke komunikaci incidentů zdůrazňuje brzké potvrzení problému, pravidelné aktualizace, přesnost a konzistenci napříč kanály ([Atlassian Statuspage: Incident communication tips](https://support.atlassian.com/statuspage/docs/incident-communication-tips/)).
+
+Dobrá první zpráva:
+
+```text
+Zaznamenali jsme problém s generováním PDF exportů. Přihlášení a práce v aplikaci fungují, ale nové exporty mohou končit chybou nebo čekat ve frontě. Tým problém řeší a další aktualizaci přidáme do 30 minut.
+```
+
+Špatná první zpráva:
+
+```text
+Někteří uživatelé mohou pozorovat drobné potíže. Intenzivně pracujeme na zlepšení zážitku.
+```
+
+Druhá verze neříká nic. „Drobné potíže“ může znamenat cokoliv od pomalého tlačítka po hořící databázi v koutě. Přesnost neznamená odhalit interní chaos. Znamená pojmenovat zákaznický dopad.
+
+## Aktualizační rytmus je důležitější než literární styl
+
+Při incidentu si nastav cadence: například každých 30 minut u kritického dopadu, každou hodinu u částečného omezení, nebo při každé zásadní změně stavu. Pokud další zpráva nepřináší nové technické zjištění, pořád může přinést hodnotu: „dopad trvá“, „workaround platí“, „čekáme na obnovu fronty“, „další update v 10:30“.
+
+Struktura aktualizace:
+
+- co je nově známo,
+- co je dopad na zákazníky,
+- jestli existuje workaround,
+- co tým dělá,
+- kdy bude další aktualizace.
+
+Vyhni se pasivním větám typu „došlo k potížím“. Napiš „PDF exporty selhávají“ nebo „notifikace se zpožďují“. Zákazník nepotřebuje slovní mlhu. Potřebuje vědět, jestli má počkat, použít náhradní postup, nebo kontaktovat své vlastní zákazníky.
+
+## Status page nesmí být datový únik v přestrojení
+
+Incidentová komunikace má být konkrétní, ale ne nebezpečně detailní. Nezveřejňuj interní názvy serverů, IP adresy, stack trace, přesné detaily zranitelnosti, identifikátory zákazníků ani obsah ticketů. Pokud incident souvisí s osobními údaji, drž veřejnou zprávu u dopadu a procesu; právní oznámení řeš odděleně podle vyhodnoceného rizika.
+
+Privacy-first pravidla pro status page:
+
+- neukazuj jména zákazníků ani workspace identifikátory,
+- nepublikuj screenshoty interních nástrojů,
+- nepiš příčinu jako hotovou věc, dokud není ověřená,
+- neukládej odběratele status notifikací do běžného marketingového seznamu,
+- umožni odběr e-mailem nebo RSS bez reklamních pixelů,
+- drž historii incidentů tak dlouho, jak má provozní hodnotu.
+
+Status notifikace nejsou lead magnet. Když se někdo přihlásí k informacím o dostupnosti, nepřihlásil se k „občasným novinkám, které vás jistě potěší“. Marketingový autopilot nech v garáži.
+
+## Workaround piš jako návod, ne jako alibi
+
+Workaround je užitečný jen tehdy, když ho zákazník umí bezpečně provést. Nestačí napsat „použijte alternativní export“. Napiš přesný krok, omezení a riziko.
+
+Příklad:
+
+```text
+Dočasné řešení: místo hromadného PDF exportu použijte CSV export a odešlete report jako přílohu ručně. CSV export funguje pro data do 50 000 řádků. Pokud potřebujete auditní PDF výstup pro dnešní termín, napište na support@example.com s předmětem „PDF export“.
+```
+
+Workaround nesmí zákazníka nutit porušit vlastní bezpečnostní pravidla. Pokud náhradní postup znamená posílat citlivá data e-mailem, raději napiš, že bezpečný workaround neexistuje a tým pracuje na obnově. Je to nepříjemné, ale férové.
+
+## Po vyřešení napiš post-incident shrnutí
+
+Vyřešený incident nekončí větou „resolved“. U významnějšího výpadku napiš krátké shrnutí: co se stalo, koho to zasáhlo, jak dlouho to trvalo, co bylo opraveno a jak snížíš riziko opakování. Nemusí to být román. Má to být důkaz, že se učíš.
+
+Atlassian ve svém incident response handbooku popisuje incident jako řízený proces s rolí incident managera, komunikací, eskalací a následným review. Malý tým nemusí kopírovat celý aparát, ale měl by převzít princip: někdo vlastní koordinaci, někdo píše zákaznickou komunikaci a po incidentu vznikne poučení ([Atlassian: Incident response handbook](https://www.atlassian.com/incident-management/handbook/incident-response)).
+
+Mini post-incident struktura:
+
+```text
+Shrnutí:
+Dopad:
+Časová osa:
+Příčina:
+Co jsme opravili:
+Co uděláme dál:
+Co to znamená pro zákazníky:
+```
+
+Pokud příčina ještě není jistá, napiš to. Důvěru neničí opatrnost. Ničí ji sebevědomá nepřesnost.
+
+## Checklist: status page bez kouřové clony
+
+- [ ] Status page běží mimo primární aplikaci nebo má nezávislý fallback.
+- [ ] Máme jasná pravidla, kdy se incident zveřejňuje.
+- [ ] První zpráva popisuje dopad, ne interní spekulace.
+- [ ] Každá aktualizace říká, kdy přijde další informace.
+- [ ] Workaround je bezpečný, konkrétní a otestovaný.
+- [ ] Status notifikace nejsou propojené s marketingovým seznamem bez souhlasu.
+- [ ] Veřejné zprávy neobsahují osobní údaje, secrets ani zbytečné interní detaily.
+- [ ] Po významném incidentu vzniká krátké post-incident shrnutí.
+- [ ] Historie incidentů je dohledatelná a má rozumnou retenci.
+- [ ] Interní runbook říká, kdo komunikuje a kdo schvaluje zprávy.
+
+## Mini šablona incidentové komunikace
+
+```text
+# Incident: [název]
+
+## Stav
+Aktuální stav:
+Začátek dopadu:
+Poslední aktualizace:
+Další aktualizace nejpozději:
+
+## Dopad
+Dotčené funkce:
+Koho se to týká:
+Co funguje dál:
+Co zatím nevíme:
+
+## Zpráva pro zákazníky
+Krátké shrnutí:
+Workaround:
+Kontaktní cesta:
+Bezpečnostní / datová poznámka:
+
+## Interní řízení
+Incident owner:
+Komunikační owner:
+Technický owner:
+Rozhodnutí a čas:
+
+## Po vyřešení
+Čas vyřešení:
+Skutečná příčina:
+Následné kroky:
+Datum post-incident review:
+```
+
+## Zdroje
+
+- NIST SP 800-61 Rev. 2: Computer Security Incident Handling Guide — https://www.nist.gov/publications/computer-security-incident-handling-guide
+- Atlassian Statuspage: Incident communication tips — https://support.atlassian.com/statuspage/docs/incident-communication-tips/
+- Atlassian: Incident response handbook — https://www.atlassian.com/incident-management/handbook/incident-response
+
 # Pracovní log
+- 2026-09-28: Doplněna příloha „Status page a komunikace výpadků bez kouřové clony“ s rozlišením interního a veřejného stavu, první incidentovou zprávou, aktualizačním rytmem, privacy-first pravidly pro status notifikace, bezpečným workaroundem, post-incident shrnutím, checklistem, šablonou komunikace a ověřenými zdroji NIST a Atlassian.
 - 2026-09-28: Doplněna příloha „Zálohy a obnova bez falešného pocitu bezpečí“ s praktickým modelem RPO/RTO, pravidlem více oddělených kopií, ochranou proti ransomware, restore testem, privacy pravidly pro výmazy v zálohách, runbookem, checklistem, backup kartou a ověřenými zdroji NIST, CISA a ENISA.
 - 2026-09-28: Obnoven plný obsah e-booku po omylem zkráceném posledním commitu a doplněna příloha „Registr subprocesorů bez tabulkového pekla“ s praktickým seznamem polí, rozdělením dodavatelů podle dopadu, privacy-first filtrem, schvalovacím postupem, komunikací změn, kvartální rutinou, checklistem, šablonou registru a ověřenými zdroji GDPR, EDPB a Evropské komise.
 - 2026-09-28: Doplněna příloha „Porušení zabezpečení osobních údajů bez panického divadla“ s rozlišením incidentu a breach, první hodinou reakce, hlášením dozorovému úřadu, informováním lidí, privacy-first incident runbookem, klasifikací dopadu, postmortem postupem, checklistem, šablonou breach karty a ověřenými zdroji GDPR, ÚOOÚ, EDPB a Evropské komise.
