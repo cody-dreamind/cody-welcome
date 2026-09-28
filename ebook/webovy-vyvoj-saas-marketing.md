@@ -13140,7 +13140,202 @@ Poslední změna:
 - OWASP Developer Guide: Enforce Access Controls — https://devguide.owasp.org/en/04-design/02-web-app-checklist/07-access-controls/
 - NIST SP 800-53 Rev. 5, AC-6 Least Privilege — https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final
 
+# Příloha: Retenční politika bez digitálního syslení
+
+Retence dat je nudné téma jen do chvíle, než někdo najde šest let starý export kontaktů, log s tokenem nebo testovací databázi plnou produkčních zákazníků. Pak se z nudného tématu stane dobrodružství. A dobrodružství v provozu SaaS obvykle znamená, že někdo pije kávu ve 2:17 ráno a tváří se statečně.
+
+Dobrá retenční politika neříká „všechno mažeme hned“. Říká: víme, proč data držíme, kde jsou, kdo za ně odpovídá, kdy přestanou být potřebná a jak je bezpečně smažeme nebo anonymizujeme. GDPR v čl. 5 pracuje s principem omezení uložení: osobní data mají být uchována v identifikovatelné podobě jen po dobu nezbytnou pro daný účel ([EUR-Lex: GDPR, čl. 5](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679)). EDPB v příručce pro malé firmy prakticky dodává, že organizace má mít interní politiku retenčních dob podle účelů a postup pro mazání dat ([EDPB: Data protection basics](https://www.edpb.europa.eu/sme/learn-the-basics/data-protection-basics_en)).
+
+> Codyho komentář: Retence není úklid jednou za rok. Je to designové rozhodnutí. Když systém neumí zapomenout, bude si pamatovat i věci, které už dávno nemají žádnou hodnotu — jen riziko.
+
+## Začni účelem, ne tabulkou
+
+Nejhorší retenční politika začíná větou „v databázi máme tabulku users“. Nejlepší začíná větou „tato data potřebujeme pro konkrétní účel“. Tabulka je technický detail. Účel je důvod, proč data vůbec existují.
+
+Praktické účely pro web a SaaS:
+
+- odpověď na poptávku,
+- vytvoření a správa účtu,
+- poskytování služby,
+- fakturace a účetnictví,
+- bezpečnostní audit,
+- řešení podpory,
+- produktová analytika v agregované podobě,
+- právní obrana konkrétního nároku,
+- archivace veřejného obsahu.
+
+Ke každému účelu napiš: jaká data sbíráš, kdy účel končí, co se stane potom a kdo to kontroluje. „Pro jistotu“ není účel. Je to mlha v kabátu.
+
+Příklad:
+
+```text
+Účel: Odpověď na poptávku z webového formuláře
+Data: jméno, e-mail, firma, zpráva, souhlas s odpovědí, čas odeslání
+Konec účelu: poptávka je vyřízena nebo obchodně uzavřena
+Další krok: převést do CRM jen relevantní obchodní záznam, zbytek smazat
+Vlastník: obchod / projektový manažer
+Kontrola: měsíční kontrola otevřených poptávek
+```
+
+## Rozděl data podle životnosti
+
+Ne všechna data mají stejnou dobu života. Když nastavíš jednu dlouhou retenci pro všechno, přenášíš nejdelší povinnost na data, která ji nepotřebují. EDPB ve zprávě k právu na výmaz upozorňuje, že i malé organizace mívají problém rozlišit správné retenční doby pro různé operace a někdy aplikují nejdelší dobu plošně ([EDPB CEF report 2025, část 4.2.5](https://www.edpb.europa.eu/system/files/2026-02/edpb_cef-report_2025_right-to-erasure_en.pdf)). To je pohodlné, ale drahé na riziko.
+
+Použij jednoduché kategorie:
+
+- **Krátká provozní data** — session stav, jednorázové tokeny, dočasné uploady, spam kontrola.
+- **Pracovní data** — poptávky, support tickety, drafty, importní soubory.
+- **Zákaznická data služby** — obsah a nastavení, která zákazník aktivně používá.
+- **Fakturační a smluvní data** — údaje nutné pro účetnictví, daně a smluvní historii.
+- **Bezpečnostní data** — auditní logy, přihlášení, změny oprávnění, incidentové záznamy.
+- **Agregovaná analytika** — metriky bez identifikace jednotlivce.
+
+U každé kategorie si napiš maximální dobu v identifikovatelné podobě. Pokud přesnou dobu určuje zákon nebo smlouva, odkaž na ni v interním dokumentu. Pokud ji neurčuje, nastav vlastní rozumnou dobu podle účelu a rizika. Hlavní je umět ji vysvětlit.
+
+## Mazání navrhni jako funkci produktu
+
+Mazání není údržbářský skript, který někdo jednou napíše a pak se ho všichni bojí spustit. Je to součást produktu. Když uživatel zruší účet, exportuje data, smaže projekt nebo vyprší trial, systém má vědět, co přesně se stane.
+
+Pro každou důležitou událost definuj retenční následky:
+
+- vypršení nepotvrzené registrace,
+- ukončení trialu,
+- zrušení předplatného,
+- smazání workspace,
+- uzavření support ticketu,
+- dokončení importu,
+- vyřízení poptávky,
+- odvolání souhlasu,
+- žádost o výmaz.
+
+Příklad pro trial:
+
+```text
+Událost: Trial skončil bez aktivace placeného účtu
+Okamžitě: zastavit produktové e-maily mimo nutné provozní oznámení
+Po 30 dnech: smazat pracovní produktová data, pokud zákazník nepožádal o prodloužení
+Po 90 dnech: smazat účetní neaktivní metadata, která nejsou nutná pro bezpečnost nebo právní důvod
+Zůstává: agregovaná metrika trial conversion bez identifikace osoby
+```
+
+Čísla v příkladu nejsou univerzální právní rada. Jsou pracovní model. V reálném produktu je slaď s právním důvodem, smlouvou, lokálními účetními povinnostmi a rizikem služby.
+
+## Anonymizace není přejmenování sloupce
+
+Anonymizace znamená, že člověka už nejde rozumně identifikovat. Nestačí přepsat e-mail na `user123@example.com`, když vedle zůstane IP adresa, unikátní kombinace firmy, času, URL a interního ID. To je spíš pseudonymizace — užitečná bezpečnostní technika, ale pořád práce s osobními daty.
+
+Privacy-first produkt má používat anonymizaci hlavně tam, kde data potřebuje pro dlouhodobé učení, ne pro kontakt s konkrétním člověkem:
+
+- agregované měsíční metriky návštěvnosti,
+- počty dokončených onboarding kroků,
+- souhrnné chybovosti formulářů,
+- trendy ve využití funkcí,
+- statistiku typů support dotazů,
+- interní plánování kapacity.
+
+Když můžeš rozhodovat z agregátu, nedrž identifikovatelnou historii. Pokud potřebuješ konkrétní záznam pro support, drž ho po dobu supportního účelu. Jakmile účel skončí, nech si jen to, co ještě opravdu potřebuješ.
+
+## Importy a exporty mají vlastní život
+
+Importní CSV, exporty dat, diagnostické balíčky a přílohy v ticketech bývají retenční minové pole. Často se vytvoří mimo hlavní datový model, uloží do objektového storage a nikdo je nezapočítá do „skutečných dat“. Jenže právě tam bývá největší bordel.
+
+Pravidla:
+
+- každý importní soubor má expiraci,
+- každý export má vlastníka a konec dostupnosti,
+- diagnostické balíčky se ukládají jen po dobu řešení ticketu,
+- odkazy na exporty jsou časově omezené,
+- exporty se neukládají do veřejně indexovatelných cest,
+- přílohy se kontrolují na citlivý obsah podle účelu,
+- po smazání projektu se smažou i odvozené importní a exportní artefakty.
+
+Pokud zákazník stáhne export, nemusíš vědět navždy, že si ho stáhl třikrát v úterý. Pro bezpečnost může stačit auditní událost s časem, účtem a typem exportu, ne kopie obsahu exportu.
+
+## Retence musí být viditelná v datové mapě
+
+Retenční pravidlo, které není v datové mapě, je přání. Přání je hezké, ale databáze na něj obvykle nereaguje.
+
+Do datové mapy přidej u každé datové kategorie:
+
+- účel,
+- právní důvod nebo smluvní důvod,
+- systém, kde data žijí,
+- primární vlastník,
+- běžná retenční doba,
+- spouštěč mazání,
+- způsob mazání nebo anonymizace,
+- výjimky,
+- poslední kontrola.
+
+Pro privacy-first SaaS je užitečné mít i „retenční backlog“: seznam míst, kde mazání ještě není automatické. Ne jako důkaz selhání, ale jako pracovní pravdu. Lepší přiznaný backlog než magická věta „data mažeme průběžně“, kterou nikdo neumí ukázat.
+
+## Testuj mazání stejně jako registraci
+
+Tým často testuje onboarding, platbu a hlavní produktovou akci. Mazání se netestuje, protože je nepříjemné. Přitom právě tam vznikají zbytky: soubory v úložišti, cache, search index, fronty, logy, analytické eventy, e-mailing, CRM, helpdesk a zálohy.
+
+Jednou za čtvrtletí proveď restore-and-delete cvičení:
+
+1. Vytvoř testovací workspace se syntetickými daty.
+2. Projdi běžné akce: registrace, import, export, ticket, fakturační test.
+3. Spusť zrušení účtu nebo smazání workspace.
+4. Ověř databázi, storage, search index, fronty a externí nástroje.
+5. Zapiš zbytky a oprav je podle rizika.
+
+Pozor na zálohy: mazání v produkci neznamená okamžité přepsání všech historických backupů. Musíš ale vědět, jak dlouho zálohy žijí, kdo k nim má přístup a jak zajistíš, že se smazaná data nevrátí při obnově bez následného mazacího procesu.
+
+## Checklist: retenční politika bez syslení
+
+- [ ] Má každá datová kategorie jasný účel?
+- [ ] Je u každé kategorie napsaná retenční doba nebo pravidlo konce?
+- [ ] Rozlišujeme pracovní data, fakturační data, bezpečnostní logy a agregovanou analytiku?
+- [ ] Umíme vysvětlit, proč data po skončení účelu ještě držíme?
+- [ ] Máme postup pro smazání nebo anonymizaci po ukončení účtu?
+- [ ] Mají importy, exporty a diagnostické balíčky expiraci?
+- [ ] Víme, kde všude vznikají kopie dat mimo hlavní databázi?
+- [ ] Testujeme mazání včetně storage, cache, front a externích nástrojů?
+- [ ] Máme retenční pravidla v datové mapě?
+- [ ] Existuje vlastník, který retenční politiku reviduje aspoň čtvrtletně?
+
+## Mini šablona retenční karty
+
+```text
+# Datová kategorie: [název]
+
+## Účel
+Proč data existují:
+Kdy účel končí:
+
+## Rozsah
+Jaká pole / soubory / eventy obsahuje:
+Kde se ukládá:
+Kde vznikají kopie:
+
+## Retence
+Běžná doba uchování:
+Spouštěč smazání:
+Způsob smazání / anonymizace:
+Výjimky:
+
+## Přístupy
+Vlastník:
+Kdo smí data vidět:
+Které akce se auditují:
+
+## Provozní kontrola
+Jak se ověřuje mazání:
+Poslední test:
+Další revize:
+```
+
+## Zdroje
+
+- GDPR, čl. 5: zásady zpracování včetně omezení uložení a odpovědnosti správce — https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+- EDPB: Data protection basics for small business — https://www.edpb.europa.eu/sme/learn-the-basics/data-protection-basics_en
+- EDPB Coordinated Enforcement Framework report 2025, část 4.2.5 o potížích s retenčními dobami — https://www.edpb.europa.eu/system/files/2026-02/edpb_cef-report_2025_right-to-erasure_en.pdf
+- SDEU, C-77/21 Digi: testovací databáze a omezení uložení — https://eur-lex.europa.eu/legal-content/en/ALL/?uri=CELEX%3A62021CJ0077
+
 # Pracovní log
+- 2026-09-28: Doplněna příloha „Retenční politika bez digitálního syslení“ s praktickým modelem účelů, kategorií dat podle životnosti, návrhem mazání jako produktové funkce, pravidly pro anonymizaci, importy/exporty, datovou mapu, testování mazání, checklistem, vyplnitelnou retenční kartou a ověřenými zdroji GDPR, EDPB a SDEU.
 - 2026-09-28: Doplněna příloha „Role a přístupová práva bez interního labyrintu“ s návrhem rolí podle práce, zápisem oprávnění jako akcí nad objekty, oddělením tarifů od autorizace, dočasnými přístupy, service accounts, offboardingem, čtvrtletní revizí, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „E-mailová doména bez doručovací loterie“ s rozdělením e-mailových toků, minimem SPF/DKIM/DMARC, privacy-first pravidly obsahu, měřením bez sledovacích pixelů, měsíční provozní rutinou, checklistem, šablonou e-mailové karty a ověřenými zdroji RFC a ENISA.
 - 2026-09-28: Doplněna příloha „Webhooky a API integrace bez datového trychtýře“ s mapou událostí, minimalizací payloadu, ověřením podpisů, ochranou proti replay, idempotentním zpracováním, frontami, pravidly pro odchozí webhooky, dokumentací, checklistem, šablonou integrační karty a ověřenými zdroji OWASP a NIST.
