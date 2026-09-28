@@ -12576,7 +12576,198 @@ Kdy eskalovat privacy posouzení:
 - ENISA: Cybersecurity guide for SMEs, praktický bezpečnostní rámec pro malé a střední firmy — https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
 
 
+# Příloha: Webhooky a API integrace bez datového trychtýře
+
+Webhook je malá věc s velkým dopadem. Platební brána pošle informaci o zaplacení, CRM oznámí nový kontakt, helpdesk předá ticket, aplikace spustí automatizaci. Vypadá to jako technická drobnost: přijde HTTP požadavek, něco se uloží a jede se dál. Jenže právě tady často vznikne tichý datový trychtýř, který posílá osobní data do dalších služeb, logů, testovacích prostředí a notifikací, aniž by si toho někdo všiml.
+
+Privacy-first integrace nezačíná otázkou „umí to poslat všechno?“. Začíná otázkou „co přesně potřebujeme přijmout, proč, jak dlouho to držíme a kdo to uvidí?“ Ano, je to méně sexy než naklikat pět automatizací za odpoledne. Ale taky je to rozdíl mezi provozem, který máš pod kontrolou, a firemním potrubím, kde data tečou jako v komiksu o instalatérovi.
+
+> Codyho komentář: Integrace má být most, ne vysavač. Když propojíš dvě služby, nemáš automaticky právo posílat mezi nimi celý životopis zákazníka včetně poznámek, nálady a oblíbené fakturační bolesti.
+
+### Začni mapou událostí
+
+Nejdřív si napiš seznam událostí, které opravdu potřebuješ. Ne endpointy, ne payloady, ne názvy vendorů. Události z pohledu produktu a provozu.
+
+Příklady dobrých událostí:
+
+- objednávka byla zaplacena,
+- subscription byla zrušena,
+- faktura se nepodařila zaplatit,
+- uživatel požádal o export dat,
+- zákazník změnil tarif,
+- ticket přešel do stavu „čeká na zákazníka“.
+
+U každé události si řekni:
+
+- co se má stát v našem systému,
+- která data jsou pro to nutná,
+- která data jsou pohodlná, ale zbytečná,
+- zda událost obsahuje osobní nebo citlivější obchodní data,
+- jaký je dopad, když událost přijde pozdě, dvakrát nebo vůbec.
+
+To poslední je důležité. Webhook není telefonát od boha backendu. Síť může spadnout, dodavatel může poslat retry, tvůj endpoint může vrátit chybu a stejná událost může dorazit znovu. Návrh musí počítat s opakováním, zpožděním a ruční opravou.
+
+### Payload zmenši před uložením
+
+Mnoho služeb posílá ve webhooku víc dat, než potřebuješ. To neznamená, že je máš všechna uložit. Ideální příjem webhooku vypadá takto:
+
+1. ověřit původ a podpis,
+2. uložit minimální technický záznam o přijetí,
+3. z payloadu vybrat jen potřebná pole,
+4. zbytek zahodit,
+5. zpracovat událost idempotentně,
+6. auditovat výsledek bez ukládání celého obsahu.
+
+Praktický příklad: platební webhook nemusí ukládat celou fakturační adresu do produktové databáze, pokud aplikace potřebuje jen `customer_id`, `invoice_id`, stav platby, částku, měnu a čas události. Detail faktury může zůstat v účetním systému nebo platební bráně, kde má jasný účel a retenční pravidla.
+
+Minimalizace payloadu není jen právní cvičení. Zmenšuje dopad incidentu, zrychluje ladění a chrání tým před tím, aby omylem posílal osobní data do Slacku, logů nebo AI nástroje při debugování.
+
+### Podpis, timestamp a ochrana proti replay
+
+Webhook endpoint nesmí věřit tomu, že požadavek je pravý jen proto, že přišel na dlouhou URL. Tajná URL není bezpečnostní model. Minimum je podpis payloadu sdíleným secretem nebo jiný mechanismus ověření, který doporučuje dodavatel.
+
+Bezpečný příjem webhooku typicky kontroluje:
+
+- podpis vypočtený z těla požadavku,
+- časové okno události nebo timestampu,
+- unikátní ID události pro deduplikaci,
+- očekávaný typ události,
+- velikost payloadu,
+- metodu a content type,
+- rate limit nebo frontu pro špičky.
+
+Ochrana proti replay útoku je jednoduchá myšlenka: starý platný požadavek nemá jít použít znovu jako nový. NIST popisuje replay resistance jako vlastnost, kdy výstup autentizace nelze znovu použít pro budoucí autentizaci; u webhooků se stejný princip prakticky řeší časovým oknem a evidencí již zpracovaných ID událostí (https://pages.nist.gov/800-63-4/sp800-63b/authenticators/). OWASP API Security Top 10 zároveň připomíná rizika kolem autorizace objektů a neomezené spotřeby zdrojů, což u veřejných integračních endpointů platí dvojnásob (https://api-security.owasp.org/editions/2023/en/0x11-t10/).
+
+### Idempotence je pojistka proti chaosu
+
+Idempotence znamená, že opakované zpracování stejné události nezpůsobí dvojí škodu. Když webhook o zaplacení dorazí třikrát, nemáš třikrát aktivovat tarif, poslat tři e-maily a vytvořit tři fakturační poznámky.
+
+Praktický postup:
+
+- každá událost má externí `event_id`, které ukládáš,
+- před zpracováním ověříš, zda už bylo `event_id` přijato,
+- stavové změny děláš transakčně nebo přes frontu,
+- výsledek zpracování zapisuješ jako `received`, `processed`, `ignored`, `failed`,
+- ruční retry používá stejný mechanismus jako automatický retry,
+- vedlejší efekty, například e-mail, se spouští až po úspěšné změně stavu.
+
+U SaaS produktu si dej pozor hlavně na změny tarifu, billing, mazání účtu, importy dat a události, které spouští externí zprávy. Tam je dvojité zpracování drahé nejen technicky, ale i reputačně. Zákazník, který dostane třikrát e-mail „vaše platba selhala“, nezačne obdivovat tvůj distribuovaný systém. Začne pochybovat, jestli víš, co děláš.
+
+### Odděl příjem, frontu a zpracování
+
+Webhook endpoint má odpovědět rychle. Nemá v jednom requestu dělat dlouhý import, volat pět dalších API, generovat PDF a posílat notifikace. Lepší model:
+
+- přijmout a ověřit požadavek,
+- uložit minimální událost nebo ji vložit do fronty,
+- rychle vrátit odpověď dodavateli,
+- zpracování udělat na pozadí,
+- chyby řešit přes retry a dead-letter seznam.
+
+Tím snižuješ riziko timeoutů a duplicitních opakování. Zároveň dostaneš lepší provozní přehled: vidíš, co přišlo, co čeká, co selhalo a co potřebuje ruční zásah.
+
+Privacy-first detail: fronta ani dead-letter úložiště nejsou odpadkový koš na celé payloady. Pokud do nich ukládáš osobní data, musí mít stejná pravidla jako databáze: účel, přístup, retenci a mazání.
+
+### Outgoing webhooky neber jako nevinné URL
+
+Když tvůj produkt umožní zákazníkům nastavit vlastní webhook URL, řešíš opačný problém: tvůj server bude posílat požadavky ven. To může být užitečné, ale i nebezpečné. Bez kontroly se dá server zneužít k volání interních adres, metadata endpointů nebo citlivých síťových rozsahů.
+
+Minimální pravidla pro odchozí webhooky:
+
+- povolit jen `https://`, pokud neexistuje velmi dobrý důvod pro výjimku,
+- blokovat interní IP rozsahy, localhost a metadata endpointy,
+- kontrolovat DNS i po přesměrování,
+- omezit velikost odpovědi a timeout,
+- neposílat secrets v URL,
+- podepisovat odchozí payloady,
+- dát zákazníkovi testovací událost a dokumentaci podpisu,
+- umožnit webhook vypnout bez podpory.
+
+Tady se potkává bezpečnost s produktem. Dobře navržená integrace není jen checkbox „webhooky podporujeme“. Je to dokumentovaný kanál, kde zákazník ví, co přijde, jak ověřit původ, jaké události existují a jak řešit retry.
+
+### Dokumentace integrace musí říkat i co neposíláš
+
+U každé integrace napiš veřejně nebo interně:
+
+- jaké události posílá a přijímá,
+- jaká pole jsou povinná,
+- jaká pole jsou osobní data,
+- jak ověřit podpis,
+- jak funguje retry,
+- jak dlouho držíš technické záznamy,
+- kde se dá integrace vypnout,
+- co se záměrně neposílá.
+
+Věta „neposíláme obsah zpráv, pouze ID ticketu a změnu stavu“ je skvělá. Pomáhá zákazníkovi, supportu i budoucímu auditu. Stejně tak „payload neukládáme celý; po ověření vybíráme jen potřebná pole“. To není nuda. To je prodej důvěry v technickém kabátku.
+
+### Checklist: webhooky a API integrace bez trychtýře
+
+- Má každá integrace jasný účel a vlastníka.
+- Máme seznam událostí, které přijímáme nebo posíláme.
+- U každé události víme, která pole jsou nutná a která zbytečná.
+- Příchozí webhooky ověřují podpis, timestamp a unikátní ID události.
+- Zpracování je idempotentní a zvládá opakované doručení.
+- Endpoint rychle odpovídá a dlouhou práci předává do fronty nebo background jobu.
+- Logy neukládají celé payloady ani secrets.
+- Dead-letter události mají retenci a omezený přístup.
+- Odchozí webhooky blokují interní adresy a nebezpečné přesměrování.
+- Dokumentace říká, jak ověřit podpis, jak funguje retry a co se neposílá.
+
+### Mini šablona integrační karty
+
+```markdown
+# Integrace: [název]
+
+## Účel
+Proč existuje:
+Vlastník:
+Kritičnost:
+
+## Směr
+Příchozí webhooky:
+Odchozí webhooky:
+Používaná API:
+
+## Události
+Název události:
+Co spouští:
+Nutná pole:
+Zbytečná pole, která zahazujeme:
+Obsahuje osobní data: ano/ne
+
+## Bezpečnost
+Ověření podpisu:
+Timestamp okno:
+Deduplikace podle:
+Rate limit / fronta:
+
+## Zpracování
+Kde se událost uloží:
+Jak se zpracuje:
+Co se stane při chybě:
+Jak funguje ruční retry:
+
+## Privacy-first hranice
+Co neposíláme:
+Co neukládáme:
+Retence technických záznamů:
+Kdo má přístup:
+
+## Dokumentace
+Odkaz pro tým:
+Odkaz pro zákazníka:
+Datum poslední revize:
+```
+
+### Zdroje
+
+- OWASP: API Security Top 10 2023 — https://api-security.owasp.org/editions/2023/en/0x11-t10/
+- OWASP: Webhook Security Guidelines Cheat Sheet draft — https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets_draft/Webhook_Security_Guidelines_Cheat_Sheet.md
+- NIST SP 800-63B, replay resistance — https://pages.nist.gov/800-63-4/sp800-63b/authenticators/
+- OWASP: Web Service Security Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Web_Service_Security_Cheat_Sheet.html
+
+
 # Pracovní log
+- 2026-09-28: Doplněna příloha „Webhooky a API integrace bez datového trychtýře“ s mapou událostí, minimalizací payloadu, ověřením podpisů, ochranou proti replay, idempotentním zpracováním, frontami, pravidly pro odchozí webhooky, dokumentací, checklistem, šablonou integrační karty a ověřenými zdroji OWASP a NIST.
 - 2026-09-28: Doplněna příloha „Rotace API klíčů a secrets bez nočního infarktu“ s inventářem secrets podle dopadu, rozdělením podle životnosti, bezpečným uložením, postupem rotace, pravidlem minimálních oprávnění, reakcí na únik, kontrolním rytmem, checklistem, šablonou a ověřenými zdroji OWASP, GitHub Docs a ENISA.
 - 2026-09-28: Doplněna příloha „Auditní logy bez špehovacího archivu“ s výběrem událostí podle dopadu, strukturou auditní události, pravidly proti ukládání tajemství, retenčním modelem, přístupovými rolemi, zákaznickým výřezem, vazbou na incidentový runbook, checklistem, šablonou a ověřenými zdroji EDPB a ENISA.
 - 2026-09-28: Doplněna příloha „Produktová dokumentace pro SaaS bez podpůrného chaosu“ s rozdělením dokumentace podle práce zákazníka, vrstvami rychlého startu/návodů/reference, jednotnou šablonou článku, vazbou na support, férovým popisem omezení, privacy-first datovými vysvětlivkami, navigací, revizní rutinou, checklistem a vyplnitelnou šablonou.
