@@ -14010,7 +14010,185 @@ Odhad času migrace:
 - EDPB: Guidelines 07/2020 on the concepts of controller and processor in the GDPR — https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en
 - European Commission: Rules for business and organisations, controllers and processors — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/controller-processor/what-data-controller-or-data-processor_en
 
+# Příloha: Zálohy a obnova bez falešného pocitu bezpečí
+
+Záloha není soubor někde v cloudu. Záloha je schopnost vrátit službu do použitelného stavu ve chvíli, kdy je někdo unavený, databáze je rozbitá a zákazník se ptá, jestli má panikařit. U malého SaaS nebo webového provozu se často dělá jedna zásadní chyba: tým kontroluje, že se „něco zálohuje“, ale netestuje, jestli se z toho dá skutečně obnovit provoz.
+
+Privacy-first přístup k zálohám má dvě strany. První je odolnost: zákaznická data nemají zmizet jen proto, že selhal disk, migrace nebo administrátorský klik. Druhá je minimalizace: zálohy nesmí být tajný archiv všeho navždy. I záloha je zpracování dat, má mít účel, retenci, přístupy a plán výmazu.
+
+> Codyho komentář: Backup, který nikdo nikdy neobnovil, je spíš uklidňující amulet než provozní jistota. Hezký pocit, horší realita.
+
+## Začni otázkou, co musí přežít
+
+Nejdřív si napiš seznam věcí, bez kterých služba nejde rozumně provozovat. Nezačínej nástrojem. Začni dopadem.
+
+Pro malý web nebo SaaS typicky řešíš:
+
+- produkční databázi,
+- nahrané soubory a uživatelský obsah,
+- konfiguraci aplikace,
+- secrets a šifrovací klíče,
+- zdrojový kód a infrastrukturu jako kód,
+- e-mailové šablony a transakční nastavení,
+- DNS záznamy a doménovou konfiguraci,
+- dokumentaci obnovy a kontakty na dodavatele.
+
+Ke každé položce dopiš dvě čísla:
+
+- **RPO**: kolik dat si můžeš dovolit ztratit, například 15 minut, 1 hodinu nebo 24 hodin.
+- **RTO**: za jak dlouho musí být služba zpět v použitelném stavu.
+
+Příklad pro malý B2B SaaS:
+
+| Komponenta | RPO | RTO | Poznámka |
+| --- | --- | --- | --- |
+| Produkční databáze | 1 hodina | 4 hodiny | klíčová zákaznická data |
+| Uploady zákazníků | 24 hodin | 8 hodin | obnovitelné podle dopadu |
+| Marketingový web | 24 hodin | 24 hodin | statický rebuild stačí |
+| Dokumentace obnovy | 0 | 1 hodina | musí být dostupná mimo primární systém |
+
+RPO a RTO nejsou ozdoba pro auditora. Jsou to provozní sliby. Když si napíšeš RPO 15 minut, ale zálohuješ jednou denně, dokument lže. A dokumenty, které lžou, mají zvláštní talent selhat přesně v pátek večer.
+
+## Použij pravidlo více kopií, ale přelož ho do reality
+
+Klasické pravidlo 3-2-1 říká: tři kopie dat, dvě různá média nebo prostředí, jedna kopie mimo primární lokalitu. U malého SaaS to nemusí znamenat páskové knihovny a dramatickou hudbu. Znamená to, že jedna chyba, jeden účet nebo jeden útok nesmí smazat všechno.
+
+Praktická minimalistická varianta:
+
+- produkční data v primárním evropském regionu,
+- automatická databázová záloha do odděleného úložiště,
+- pravidelný export kritických dat nebo snapshot do druhého účtu / druhé služby,
+- offline nebo silně oddělená kopie pro nejkritičtější data,
+- dokumentovaný postup obnovy mimo primární aplikaci.
+
+Oddělení je důležitější než marketingový název úložiště. Pokud kompromitovaný administrátorský účet může smazat produkci i všechny zálohy, nemáš zálohovací strategii. Máš jednu větší hromádku nervozity.
+
+## Zálohy chraň před ransomwarem i vlastní rukou
+
+Ransomware a útočníci často nehledají jen produkční databázi. Hledají i zálohy, protože bez nich má oběť menší vyjednávací sílu. Proto zálohy potřebují vlastní ochrannou vrstvu.
+
+Minimum:
+
+- šifrování záloh v klidu i při přenosu,
+- oddělené účty nebo role pro tvorbu a mazání záloh,
+- omezení mazání přes object lock, immutable storage nebo podobný mechanismus tam, kde dává smysl,
+- MFA pro administrátorské účty,
+- logování přístupů k zálohám,
+- pravidelná kontrola, že zálohy nejsou přístupné veřejně,
+- jasný postup pro rotaci klíčů a secrets.
+
+Pozor na jednu past: neměnitelné zálohy nejsou omluva pro nekonečnou retenci osobních údajů. Pokud nastavíš immutable úložiště na dva roky „pro jistotu“, možná tím zlepšíš odolnost, ale zhoršíš datovou hygienu. Retence záloh má odpovídat riziku, právním povinnostem a zákaznickému slibu.
+
+## Obnova je test, ne teorie
+
+Jednou za měsíc nebo alespoň jednou za kvartál proveď malý restore test. Nemusíš hned simulovat pád celé firmy. Stačí obnovit databázi do izolovaného prostředí a ověřit, že aplikace nad ní nastartuje.
+
+Test obnovy má mít konkrétní scénář:
+
+1. Vyber poslední dostupnou zálohu.
+2. Obnov ji do izolovaného prostředí bez přístupu zákazníků.
+3. Spusť migrační nebo validační kontrolu.
+4. Ověř počet klíčových záznamů a integritu vazeb.
+5. Zkontroluj, že se neobnovily staré secrets do aktivního provozu.
+6. Změř skutečný čas obnovy.
+7. Zapiš problém, rozhodnutí a další krok.
+
+Test obnovy bez zápisu je poloviční hodnota. Za tři měsíce si nikdo nebude pamatovat, jestli restore trval 18 minut nebo 3 hodiny, protože chyběla jedna proměnná prostředí.
+
+## Zálohy nesmí obcházet práva lidí
+
+Když člověk požádá o výmaz, často nejde okamžitě přepsat všechny historické zálohy. To ale neznamená, že zálohy mohou být trvalý stínový archiv. Praktické řešení je kombinace krátké retence, evidence výmazu a pravidla, že obnovená data se po restore znovu podrobí aktuálním výmazům.
+
+Provozní pravidlo může znít takto:
+
+```text
+Zálohy držíme 30 dní. Žádosti o výmaz evidujeme v aktivním systému. Pokud obnovujeme ze zálohy, před návratem do produkce znovu aplikujeme evidované výmazy a anonymizace, aby se stará data nevrátila do provozu.
+```
+
+Tohle je jednoduché, ale zásadní. Bez podobného pravidla může incident obnovy tiše zrušit předchozí privacy práci. Gratuluji, vytvořil sis datový zombie film, jen bez popcornu.
+
+## Dokumentace obnovy musí být dostupná mimo havárii
+
+Runbook obnovy neukládej jen do systému, který bude při incidentu nedostupný. Měj kopii v bezpečném, odděleném místě: interní wiki s offline exportem, zabezpečený password manager, šifrovaný repozitář nebo nouzový dokument dostupný malému počtu lidí.
+
+Runbook má obsahovat:
+
+- kdo rozhoduje o obnově,
+- kde jsou zálohy,
+- jak se získá přístup,
+- jaké klíče a secrets jsou potřeba,
+- v jakém pořadí se obnovují komponenty,
+- jak se ověřuje integrita dat,
+- kdy se komunikuje zákazníkům,
+- jak se po obnově vypíná nouzový režim.
+
+Nejlepší runbook je nudný. Pokud při incidentu musí tým improvizovat poetický epos o tom, kde asi leží dump databáze, runbook prohrál.
+
+## Checklist: zálohy bez falešné jistoty
+
+- [ ] Má každá kritická komponenta stanovené RPO a RTO?
+- [ ] Existuje alespoň jedna záloha oddělená od primárního účtu nebo prostředí?
+- [ ] Jsou zálohy šifrované a přístupné jen omezeným rolím?
+- [ ] Umí někdo obnovit službu bez autora původní infrastruktury?
+- [ ] Proběhl za poslední kvartál restore test?
+- [ ] Měříme skutečný čas obnovy, ne optimistický odhad?
+- [ ] Víme, jak se po obnově znovu aplikují výmazy a anonymizace?
+- [ ] Máme log přístupů k zálohám a změnám retenčních pravidel?
+- [ ] Jsou DNS, secrets a konfigurační soubory zahrnuté v obnově?
+- [ ] Je runbook dostupný mimo primární systém?
+
+## Mini šablona backup karty
+
+```text
+# Backup karta: [systém / komponenta]
+
+## Rozsah
+Co zálohujeme:
+Co záměrně nezálohujeme:
+Kritičnost:
+Vlastník:
+
+## Cíle obnovy
+RPO:
+RTO:
+Priorita obnovy:
+Závislosti:
+
+## Umístění a ochrana
+Primární záloha:
+Oddělená kopie:
+Šifrování:
+Přístupové role:
+Mazání / immutable pravidla:
+Retence:
+
+## Test obnovy
+Poslední restore test:
+Výsledek:
+Skutečný čas obnovy:
+Nalezené problémy:
+Další kontrola:
+
+## Privacy poznámky
+Obsahuje osobní údaje: ano / ne
+Postup po DSAR výmazu:
+Postup po obnově ze starší zálohy:
+
+## Nouzové kontakty
+Technický vlastník:
+Dodavatel / hosting:
+Incident kontakt:
+```
+
+## Zdroje
+
+- NIST SP 800-34 Rev. 1: Contingency Planning Guide for Federal Information Systems — https://csrc.nist.gov/pubs/sp/800/34/r1/upd1/final
+- CISA: #StopRansomware Guide — https://www.cisa.gov/stopransomware/ransomware-guide
+- ENISA: Technical implementation guidance on cybersecurity risk-management measures, kapitola 4.2 Backup and redundancy management — https://www.enisa.europa.eu/sites/default/files/2025-06/ENISA_Technical_implementation_guidance_on_cybersecurity_risk_management_measures_version_1.0.pdf
+- ENISA: Threat Landscape for Ransomware Attacks, doporučení pro ověřené a izolované zálohy — https://www.enisa.europa.eu/sites/default/files/publications/ENISA%20Threat%20Landscape%20for%20Ransomware%20Attacks.pdf
+
 # Pracovní log
+- 2026-09-28: Doplněna příloha „Zálohy a obnova bez falešného pocitu bezpečí“ s praktickým modelem RPO/RTO, pravidlem více oddělených kopií, ochranou proti ransomware, restore testem, privacy pravidly pro výmazy v zálohách, runbookem, checklistem, backup kartou a ověřenými zdroji NIST, CISA a ENISA.
 - 2026-09-28: Obnoven plný obsah e-booku po omylem zkráceném posledním commitu a doplněna příloha „Registr subprocesorů bez tabulkového pekla“ s praktickým seznamem polí, rozdělením dodavatelů podle dopadu, privacy-first filtrem, schvalovacím postupem, komunikací změn, kvartální rutinou, checklistem, šablonou registru a ověřenými zdroji GDPR, EDPB a Evropské komise.
 - 2026-09-28: Doplněna příloha „Porušení zabezpečení osobních údajů bez panického divadla“ s rozlišením incidentu a breach, první hodinou reakce, hlášením dozorovému úřadu, informováním lidí, privacy-first incident runbookem, klasifikací dopadu, postmortem postupem, checklistem, šablonou breach karty a ověřenými zdroji GDPR, ÚOOÚ, EDPB a Evropské komise.
 - 2026-09-28: Doplněna příloha „Žádosti lidí o jejich data bez právního ping-pongu“ s provozním postupem pro GDPR žádosti, rozlišením práv, přiměřeným ověřením identity, datovou mapou, lidskými odpověďmi, výmazem a exportem, zapojením dodavatelů, interní evidencí, checklistem, DSAR kartou a ověřenými zdroji GDPR, EDPB a Evropské komise.
