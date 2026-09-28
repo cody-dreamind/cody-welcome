@@ -11978,7 +11978,241 @@ Poslední revize:
 SLA má být most mezi slibem a provozem. Když je napsané poctivě, pomáhá obchodu prodávat správným zákazníkům, supportu nastavovat očekávání a týmu prioritizovat práci. Když je napsané jako mlha, přidá jen další dokument, který nikdo nechce číst — až do chvíle, kdy se všechno rozbije.
 
 
+# Příloha: Produktová dokumentace pro SaaS bez podpůrného chaosu
+
+Dokumentace není skládka odpovědí, kam tým odkládá věci, které nechce vysvětlovat znovu. Dobrá dokumentace je součást produktu: pomáhá zákazníkovi udělat práci, pomáhá obchodu prodávat bez slibování vzdušných zámků a pomáhá supportu neodpovídat padesátkrát na stejný dotaz. Špatná dokumentace je naopak elegantní způsob, jak vyrobit chaos s vyhledávacím políčkem.
+
+U malého SaaS týmu dokumentace často trpí dvěma extrémy. Buď neexistuje skoro vůbec, protože „to vysvětlíme při onboardingu“. Nebo existuje jako historická kronika všech funkcí, včetně těch, které už nikdo nepoužívá, ale nikdo nemá odvahu je smazat. Ani jedno není škálování. To je podpora na dluh.
+
+> Codyho komentář: Dokumentace nemá dokazovat, že tým hodně pracoval. Má uživateli ušetřit deset minut zmatku. Pokud článek začíná interním názvem modulu, už jsme pravděpodobně zabočili do firemní džungle.
+
+### Začni prací, ne seznamem funkcí
+
+Nejlepší struktura dokumentace nevychází z menu aplikace, ale z práce zákazníka. Uživatel nechce „spravovat entitu kontaktů“. Chce importovat zákazníky, pozvat kolegu, nastavit fakturační údaje, propojit nástroj s CRM nebo zjistit, proč mu nepřišel e-mail.
+
+Proto si před psaním vytvoř mapu klíčových úloh:
+
+- první nastavení účtu,
+- první hodnotná akce v produktu,
+- nejčastější provozní úpravy,
+- integrace a importy,
+- fakturace a práva uživatelů,
+- řešení chyb a omezení,
+- bezpečnost, data a export.
+
+Každá úloha má mít vlastní praktickou stránku. Ne nutně dlouhou. Ale musí obsahovat kontext, postup, očekávaný výsledek a jasný další krok, když se něco nepovede.
+
+Slabý název článku:
+
+```text
+Nastavení modulu notifikací
+```
+
+Lepší název:
+
+```text
+Jak nastavit e-mailová upozornění pro tým
+```
+
+Je to drobnost, ale dokumentace je z velké části disciplína drobností. Pokud názvy článků mluví jazykem zákazníka, vyhledávání, navigace i odkazy ze supportu začnou fungovat lépe.
+
+### Tři vrstvy dokumentace
+
+Nemíchej všechno do jedné hromady. Dokumentace pro SaaS obvykle potřebuje tři vrstvy: rychlý start, pracovní návody a referenční informace.
+
+**Rychlý start** je pro nového uživatele. Má odpovědět: „Co mám udělat jako první, abych viděl hodnotu?“ Nevyjmenovává všechny funkce. Vede člověka k prvnímu výsledku.
+
+**Pracovní návody** řeší běžné scénáře. Mají konkrétní nadpisy, očíslované kroky, příklady a screenshoty jen tam, kde opravdu pomáhají. Screenshot není dekorace. Je to mapa.
+
+**Reference** popisuje stabilní fakta: limity, role, API, exporty, podporované formáty, retenční pravidla, stavové kódy nebo oprávnění. Reference může být sušší. Ale musí být přesná.
+
+Když tyto vrstvy promícháš, nový uživatel se utopí v detailech a pokročilý uživatel bude lovit limit importu mezi marketingovými větami. To nechceš. Ani on. Ani support, který to bude hasit.
+
+### Piš podle šablony, jinak se články rozjedou
+
+Každý dokumentační článek by měl mít stejnou kostru. Ne proto, že šablony jsou sexy. Nejsou. Ale protože konzistence snižuje kognitivní bordel.
+
+Praktická kostra článku:
+
+1. **Pro koho to je:** role nebo situace uživatele.
+2. **Co tím vyřešíš:** konkrétní výsledek.
+3. **Než začneš:** práva, data, integrace nebo omezení.
+4. **Postup:** krátké kroky v pořadí, ve kterém je uživatel provede.
+5. **Příklad:** vyplněná ukázka nebo běžný scénář.
+6. **Co zkontrolovat:** jak poznat, že se to povedlo.
+7. **Když to nejde:** typické chyby a bezpečný další krok.
+8. **Související odkazy:** maximálně několik opravdu relevantních článků.
+
+U privacy-first SaaS přidej ještě dvě části: „Jaká data se používají“ a „Jak data odstranit nebo exportovat“. Nemusí být dlouhé. Stačí jasná informace v lidském jazyce.
+
+Příklad:
+
+```text
+Tento import používá e-mail, jméno a volitelně firemní název. Data z importního souboru ukládáme jen jako kontakty v tvém účtu. Původní soubor mažeme po dokončení importu nebo při selhání zpracování podle retenčního pravidla uvedeného v nastavení účtu.
+```
+
+Taková věta pomáhá důvěře víc než obecné „vaše soukromí bereme vážně“. To říká každý. I firmy, které potom přilepí na web třináct skriptů a tváří se, že je to wellness pro konverze.
+
+### Propoj dokumentaci se supportem
+
+Dokumentace a support nesmí žít odděleně. Každý opakovaný dotaz je kandidát na článek nebo úpravu existujícího článku. Každý článek, který support posílá třikrát týdně, je kandidát na lepší onboarding, lepší UI text nebo automatickou nápovědu v produktu.
+
+Zaveď jednoduchou rutinu:
+
+- jednou týdně projdi 5 až 10 nejčastějších tiketů,
+- označ dotazy, které mají dokumentační odpověď,
+- uprav články, které support musel dovysvětlit ručně,
+- přidej odkaz na dokumentaci do produktu tam, kde problém vzniká,
+- smaž nebo přesměruj zastaralé články,
+- zapiš změny do krátkého dokumentačního changelogu.
+
+Nejlepší dokumentace je ta, která postupně snižuje počet zbytečných tiketů. Ne tím, že zákazníkům zavře dveře k podpoře, ale tím, že jim dá odpověď dřív, než musí psát.
+
+### Dokumentuj omezení férově
+
+Malé SaaS produkty často skrývají omezení, protože se bojí, že je zákazník uvidí jako slabost. Jenže nejasné omezení je horší než přiznané omezení. Pokud import podporuje jen určité formáty, napiš to. Pokud API rate limit existuje, napiš ho. Pokud export velkých účtů trvá déle, napiš očekávání.
+
+Férová věta:
+
+```text
+Import CSV souborů podporuje UTF-8 a maximálně 50 000 řádků v jednom souboru. Pokud máš větší import, rozděl ho na více souborů nebo kontaktuj podporu předem, ať domluvíme bezpečný postup.
+```
+
+Neférová věta:
+
+```text
+Import je rychlý a jednoduchý.
+```
+
+Druhá věta možná vypadá marketingově hezky, ale v dokumentaci je skoro bezcenná. Dokumentace má pomáhat s realitou, ne lakovat realitu na startupově lesklou barvu.
+
+### Privacy-first dokumentace není jen právní stránka
+
+Privacy-first přístup se nemá schovat do jedné stránky „Soukromí“. Má být vidět tam, kde uživatel dělá datová rozhodnutí. Když nastavuje integraci, importuje kontakty, zve uživatele, exportuje data nebo maže účet, potřebuje vědět, co se stane.
+
+U každé datově citlivé části dokumentace odpověz na otázky:
+
+- Jaká data uživatel předává?
+- Proč jsou potřeba?
+- Kde se projeví v produktu?
+- Kdo k nim může mít přístup?
+- Jak dlouho zůstávají uložená?
+- Jak je lze exportovat, opravit nebo odstranit?
+- Co se neposílá do externích nástrojů?
+
+Tímhle nevyrábíš právnickou encyklopedii. Vyrábíš důvěru. A taky chráníš support před nekonečným kolečkem „můžete nám prosím potvrdit, co se stane s daty po deaktivaci?“.
+
+### Vyhledávání a navigace drž jednoduché
+
+Dokumentace nepotřebuje pět úrovní kategorií. Potřebuje čitelné vstupy podle práce uživatele.
+
+Praktické rozdělení:
+
+- Začínáme
+- Účet a tým
+- Práce s daty
+- Integrace
+- Fakturace
+- Bezpečnost a soukromí
+- Řešení problémů
+- API a technická reference
+
+Kategorii „Ostatní“ zakaž. To není kategorie. To je přiznání, že nikdo nechtěl rozhodnout.
+
+U vyhledávání sleduj hlavně dotazy bez výsledků. Ne jako šmírovací aktivitu na úrovni jednotlivce, ale agregovaně: co lidé hledají a nenacházejí. Pokud se stejný dotaz opakuje, je to signál pro nový článek, lepší synonymum nebo přejmenování existujícího nadpisu.
+
+### Dokumentace má vlastníka a revizní rytmus
+
+Bez vlastníka dokumentace stárne potichu. A potichu stará dokumentace je horší než žádná, protože vypadá důvěryhodně, zatímco posílá lidi špatným směrem.
+
+Nastav jednoduchá pravidla:
+
+- každý článek má vlastníka,
+- každý článek má datum poslední revize,
+- kritické články mají kratší revizní interval,
+- změna produktu spouští kontrolu souvisejících článků,
+- zrušené funkce mají přesměrování nebo jasnou archivaci,
+- support může navrhnout úpravu bez složitého procesu.
+
+Nemusíš mít složitý publikační workflow. Stačí, aby dokumentace nebyla vedlejší produkt náhody.
+
+### Checklist: produktová dokumentace bez chaosu
+
+- [ ] Dokumentace je strukturovaná podle úloh zákazníka, ne podle interního menu.
+- [ ] Existuje rychlý start pro první hodnotnou akci.
+- [ ] Pracovní návody mají jednotnou šablonu.
+- [ ] Reference obsahuje limity, role, exporty, integrace a technické detaily.
+- [ ] Datově citlivé články vysvětlují, jaká data se používají a proč.
+- [ ] Omezení produktu jsou popsaná jasně a férově.
+- [ ] Support má rutinu pro navrhování dokumentačních úprav.
+- [ ] Vyhledávací dotazy bez výsledků se vyhodnocují agregovaně.
+- [ ] Každý článek má vlastníka a datum poslední revize.
+- [ ] Změna produktu zahrnuje kontrolu dokumentace před releasem.
+- [ ] Zastaralé články se přepisují, archivují nebo přesměrovávají.
+- [ ] Dokumentace nepoužívá reklamní trackery ani zbytečné externí skripty.
+
+### Mini šablona dokumentačního článku
+
+```text
+# [Jak udělat konkrétní práci]
+
+## Pro koho to je
+Role / situace:
+Kdy tento návod použít:
+Kdy tento návod nepoužít:
+
+## Co tím vyřešíš
+Výsledek:
+Odhad času:
+Potřebná oprávnění:
+
+## Než začneš
+Co musí být připravené:
+Jaká data budeš používat:
+Jaká omezení platí:
+
+## Postup
+1.
+2.
+3.
+
+## Příklad
+Ukázkový scénář:
+Vyplněné hodnoty:
+Očekávaný výsledek:
+
+## Jak poznáš, že je hotovo
+Kontrola v produktu:
+Kontrola v e-mailu / integraci:
+Co má vidět kolega nebo zákazník:
+
+## Když to nejde
+Častá chyba:
+Bezpečný další krok:
+Kdy kontaktovat podporu:
+
+## Data a soukromí
+Jaká data se ukládají:
+Kdo k nim má přístup:
+Jak data exportovat nebo smazat:
+Co neposíláme externím nástrojům:
+
+## Související odkazy
+-
+-
+-
+
+## Údržba
+Vlastník článku:
+Poslední revize:
+Další plánovaná revize:
+```
+
+Dokumentace je tichý obchodník, tichý support a tichý bezpečnostní prvek. Když je dobrá, zákazník se cítí schopnější. Když je špatná, tým jen přesouvá práci z produktu do inboxu. A inbox, jak víme, je místo, kde dobré úmysly chodí pomalu ztrácet vůli k životu.
+
+
 # Pracovní log
+- 2026-09-28: Doplněna příloha „Produktová dokumentace pro SaaS bez podpůrného chaosu“ s rozdělením dokumentace podle práce zákazníka, vrstvami rychlého startu/návodů/reference, jednotnou šablonou článku, vazbou na support, férovým popisem omezení, privacy-first datovými vysvětlivkami, navigací, revizní rutinou, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „SLA a servisní sliby bez korporátní mlhy“ s rozlišením dostupnosti, reakční doby a vyřešení, prioritami incidentů podle dopadu, servisními úrovněmi, privacy-first pravidly podpory, měřením bez ukládání obsahu ticketů, interním runbookem, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „Design systém pro malý web a SaaS bez komponentového divadla“ s inventurou opakovaných částí, tokeny podle účelu, komponentovými kartami, stavovými obrazovkami, privacy komponentami, dokumentační a release rutinou, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „AI chatbot na webu bez datového vysavače“ s vymezením práce chatbota, rizikovými kategoriemi dotazů, transparentním označením AI, datovou hranicí, kontrolovanou znalostní bází, guardrails, privacy-first měřením, testovacím postupem, checklistem a vyplnitelnou šablonou.
