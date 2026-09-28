@@ -13334,7 +13334,241 @@ Další revize:
 - EDPB Coordinated Enforcement Framework report 2025, část 4.2.5 o potížích s retenčními dobami — https://www.edpb.europa.eu/system/files/2026-02/edpb_cef-report_2025_right-to-erasure_en.pdf
 - SDEU, C-77/21 Digi: testovací databáze a omezení uložení — https://eur-lex.europa.eu/legal-content/en/ALL/?uri=CELEX%3A62021CJ0077
 
+# Příloha: Žádosti lidí o jejich data bez právního ping-pongu
+
+Privacy-first produkt se nepozná jen podle toho, že sbírá málo dat. Pozná se i podle toho, jak se chová, když se člověk zeptá: „Co o mně máte?“, „Opravíte to?“, „Smažete to?“ nebo „Pošlete mi export?“ Pokud se v tu chvíli spustí interní panika, hledání ve Slacku a lovení tabulek z pěti nástrojů, problém není člověk. Problém je proces.
+
+Cílem téhle přílohy není dělat právní stanovisko. Cílem je provozní rutina pro malý web nebo SaaS, aby žádosti podle GDPR nebyly pokaždé improvizované divadlo s excelovou oponou.
+
+> Codyho komentář: Když firma umí rychle najít a vysvětlit vlastní data, většinou má v pořádku i produkt. Když neumí, žádost uživatele jen rozsvítí bordel, který tam byl dávno před ní.
+
+## Nejdřív rozliš typ žádosti
+
+Ne každá zpráva „smažte mě“ znamená totéž. První krok je žádost zařadit, potvrdit přijetí a určit vlastníka. GDPR pracuje s několika právy lidí nad jejich osobními údaji; Evropská komise i EDPB mezi nimi uvádějí zejména právo na informace, přístup, opravu, výmaz, omezení zpracování, přenositelnost, námitku a ochranu před čistě automatizovaným rozhodováním.
+
+Praktické typy pro SaaS:
+
+- **Informace:** člověk chce vědět, jaká data sbíráš a proč.
+- **Přístup:** chce kopii nebo přehled osobních údajů.
+- **Oprava:** chce opravit nepřesné údaje.
+- **Výmaz:** chce smazat účet nebo konkrétní data.
+- **Omezení:** chce dočasně zastavit určité zpracování.
+- **Přenositelnost:** chce data ve strojově čitelném formátu.
+- **Námitka:** nechce konkrétní zpracování, typicky marketing nebo profilování.
+
+Do ticketu si napiš typ žádosti, datum přijetí, kanál, identitu žadatele, dotčený účet/workspace, vlastníka a cílový termín odpovědi. Evropská komise uvádí, že organizace mají odpovědět bez zbytečného odkladu a zpravidla do jednoho měsíce od přijetí žádosti; proto si termín hlídej hned od začátku, ne až ve chvíli, kdy kalendář začne syčet.
+
+## Potvrď identitu, ale nesbírej další kufr dat
+
+U žádostí o přístup, export nebo výmaz musíš vědět, že jednáš se správným člověkem. Zároveň ale nechceš z ověření identity udělat novou databázi dokladů. Ptej se jen na to, co odpovídá riziku.
+
+Nízké riziko:
+
+- uživatel je přihlášený v účtu,
+- žádost přijde z ověřeného e-mailu účtu,
+- žádost se týká běžného exportu vlastních dat.
+
+Vyšší riziko:
+
+- žádost přichází z jiné adresy,
+- žádá se výmaz celého firemního workspace,
+- žádost se týká administrátorských práv,
+- existuje spor mezi uživateli stejné organizace,
+- data obsahují citlivější obchodní nebo osobní údaje.
+
+Pravidlo: pokud potřebuješ dodatečné ověření, vysvětli proč, použij nejméně invazivní variantu a nastav expiraci. Kopie občanky v supportním inboxu je přesně ten typ „řešení“, který vytvoří druhý problém.
+
+## Měj datovou mapu použitelnou pro odpověď
+
+Žádost nejde vyřídit z hlavy. Potřebuješ vědět, kde data žijí. Datová mapa nemusí být akademická freska. Stačí pracovní evidence:
+
+- produktová databáze,
+- fakturace a účetnictví,
+- support/tickety,
+- e-mailing a transakční zprávy,
+- analytika,
+- auditní a bezpečnostní logy,
+- soubory a exporty,
+- zálohy,
+- dodavatelé a subprocesoři.
+
+U každé oblasti si napiš:
+
+```text
+Kde data jsou:
+Jaký identifikátor používáme:
+Kdo má přístup:
+Jak se exportují:
+Jak se opravují:
+Jak se mažou nebo anonymizují:
+Jaká je retence:
+Které výjimky platí:
+```
+
+Největší past jsou okrajové kopie: CSV exporty, diagnostické balíčky, přílohy v supportu, dočasné importy, logy s e-mailem v URL a ruční tabulky „jen pro tuhle kampaň“. Přesně tam privacy-first provoz nejčastěji zakopne o vlastní ponožky.
+
+## Odpověď piš lidsky a konkrétně
+
+Odpověď nemá být právní kouřová clona. Člověk má pochopit, co se stalo a co dostane. Piš krátce:
+
+- co jsi přijal,
+- jakou identitu nebo oprávnění potřebuješ ověřit,
+- co uděláš,
+- kdy odpovíš,
+- co případně nejde splnit a proč,
+- jak se může člověk ozvat, pokud nesouhlasí.
+
+Příklad potvrzení:
+
+```text
+Dobrý den,
+
+potvrzujeme přijetí žádosti o přístup k osobním údajům pro účet [e-mail / workspace]. Žádost jsme zaevidovali dne [datum]. Nejprve ověříme, že jste oprávněná osoba k danému účtu, a potom připravíme přehled dat, která k účtu zpracováváme.
+
+Odpovíme bez zbytečného odkladu, nejpozději do [datum]. Pokud budeme potřebovat doplnění, ozveme se v tomto vlákně.
+
+Cody tým
+```
+
+Když žádost odmítáš nebo omezuješ, napiš důvod. Evropská komise uvádí, že při odmítnutí má organizace informovat o důvodech a možnosti stížnosti k dozorovému úřadu nebo soudní nápravě. Prakticky: žádné „nejde“. Napiš „nejde kvůli X, protože Y, a tady je co můžeme udělat místo toho“.
+
+## Výmaz není vždy okamžité spálení všeho
+
+Výmaz dat je potřeba vysvětlit přesně. Některá data smažeš nebo anonymizuješ hned, jiná musíš držet kvůli smlouvě, účetnictví, bezpečnosti nebo obraně právních nároků. To ale neznamená, že můžeš nechat všechno všude navždy.
+
+Rozděl výsledek do čtyř skupin:
+
+- **Smazáno:** data už nejsou v aktivním systému.
+- **Anonymizováno:** nejde je spojit s konkrétní osobou rozumnými prostředky.
+- **Dočasně ponecháno:** držíš je kvůli jasnému účelu a retenční době.
+- **Nedotčeno:** nejde o osobní data žadatele nebo nejsi správný správce.
+
+Příklad odpovědi:
+
+```text
+Aktivní uživatelský účet jsme smazali. Fakturační doklady držíme po dobu vyžadovanou účetními předpisy. Bezpečnostní logy s omezeným technickým identifikátorem držíme po dobu [doba] kvůli ochraně služby a potom je mažeme/agregujeme. Zálohy se přepisují podle retenčního cyklu [doba]; smazaná data se při případné obnově zpracují podle interního mazacího postupu.
+```
+
+Tohle je férovější než slib „všechno jsme hned smazali“, když ve skutečnosti leží kopie v záloze, ve fakturaci a v supportním exportu.
+
+## Export připrav tak, aby byl použitelný
+
+Přístup nebo přenositelnost dat není jen ZIP soubor bez popisu. Export má být srozumitelný, bezpečný a přiměřený.
+
+Dobrý export obsahuje:
+
+- běžné formáty jako CSV, JSON nebo PDF,
+- README s popisem souborů,
+- čas vytvoření exportu,
+- účet/workspace, ke kterému se vztahuje,
+- vysvětlení, co export neobsahuje a proč,
+- expiraci odkazu,
+- bezpečný způsob doručení.
+
+Nedělej:
+
+- posílání exportu jako nechráněnou přílohu na libovolný e-mail,
+- přimíchání dat jiných uživatelů stejného workspace bez kontroly oprávnění,
+- export interních poznámek podpory, které nejsou osobními údaji žadatele,
+- export secrets, tokenů nebo bezpečnostních detailů, které by ohrozily službu.
+
+U B2B SaaS si dej extra pozor na vztah osoba versus firma. Uživatel může mít práva k vlastním osobním údajům, ale nemusí mít právo stáhnout celou historii firmy. Tady pomáhá role model, administrátorské oprávnění a jasné podmínky workspace.
+
+## Zapoj dodavatele dřív, než hoří termín
+
+Pokud používáš externí nástroje, musíš vědět, jak pomáhají s právy subjektů údajů. Ne až v den žádosti. U každého dodavatele si zapiš:
+
+- jestli je správce nebo zpracovatel,
+- jak najde data podle identifikátoru,
+- jak se dělá export,
+- jak se dělá výmaz nebo anonymizace,
+- jaká je retenční doba,
+- komu se píše podpora,
+- jak dlouho obvykle reaguje.
+
+DPA a vendor dotazník nejsou jen šuplíková právničina. Jsou to provozní návod, jestli žádost vyřídíš včas, nebo budeš po třech týdnech psát do podpory nástroje, který odpoví robotem jménem „Customer Happiness Nebula“.
+
+## Interní evidence chrání tebe i člověka
+
+Každou žádost eviduj. Evidence nemá obsahovat víc dat, než potřebuješ, ale má ukázat, že proces proběhl.
+
+Minimální evidence:
+
+- ID žádosti,
+- datum přijetí,
+- typ žádosti,
+- identifikátor účtu,
+- ověření identity nebo oprávnění,
+- dotčené systémy,
+- rozhodnutí,
+- datum odpovědi,
+- kdo žádost vyřídil,
+- odkaz na interní záznam bez zbytečných kopií dat.
+
+Do evidence nepatří plné exporty, kopie dokladů bez expirace ani celé e-mailové vlákno s citlivými detaily. Evidence má dokazovat proces, ne archivovat člověka podruhé.
+
+## Checklist: žádosti lidí bez ping-pongu
+
+- [ ] Máme veřejně dostupný kontakt nebo formulář pro privacy žádosti?
+- [ ] Umíme rozlišit přístup, opravu, výmaz, omezení, přenositelnost a námitku?
+- [ ] Evidujeme datum přijetí a cílový termín odpovědi?
+- [ ] Ověřujeme identitu přiměřeně riziku, ne plošně přes doklady?
+- [ ] Máme datovou mapu použitelnou pro vyhledání dat?
+- [ ] Víme, která data smažeme, anonymizujeme nebo ponecháme kvůli zákonné povinnosti?
+- [ ] Umíme připravit bezpečný export v běžném formátu?
+- [ ] Máme postup pro B2B workspace, kde je více uživatelů a rolí?
+- [ ] Víme, jak žádost vyřídit u dodavatelů a subprocesorů?
+- [ ] Máme šablonu odpovědi pro potvrzení, splnění i odmítnutí žádosti?
+- [ ] Evidujeme vyřízení bez ukládání zbytečných kopií osobních údajů?
+- [ ] Revidujeme proces aspoň jednou za půl roku nebo po složité žádosti?
+
+## Mini šablona DSAR karty
+
+```text
+# Žádost: [ID]
+
+## Přijetí
+Datum přijetí:
+Kanál:
+Žadatel:
+Účet / workspace:
+Typ žádosti:
+Cílový termín odpovědi:
+
+## Ověření
+Jak byla ověřena identita / oprávnění:
+Je potřeba doplnění:
+Datum doplnění:
+
+## Rozsah
+Dotčené systémy:
+Dodavatelé:
+Data k exportu:
+Data k opravě:
+Data k výmazu / anonymizaci:
+Data ponechaná kvůli povinnosti:
+
+## Odpověď
+Rozhodnutí:
+Datum odpovědi:
+Co bylo předáno:
+Co bylo odmítnuto nebo omezeno a proč:
+Další kontakt / možnost stížnosti:
+
+## Interní poznámka
+Poučení pro proces:
+Další revize:
+```
+
+## Zdroje
+
+- GDPR, kapitola III a články 12–23: práva subjektu údajů a pravidla pro jejich výkon — https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+- EDPB: Respect individuals’ rights, praktický průvodce pro malé firmy k právům lidí podle GDPR — https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_en
+- European Commission: Dealing with requests from individuals, pravidlo odpovědi bez zbytečného odkladu a zpravidla do jednoho měsíce — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+- European Commission: Information for individuals, přehled práv na informace, přístup, opravu, výmaz, omezení, přenositelnost a námitku — https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+
 # Pracovní log
+- 2026-09-28: Doplněna příloha „Žádosti lidí o jejich data bez právního ping-pongu“ s provozním postupem pro GDPR žádosti, rozlišením práv, přiměřeným ověřením identity, datovou mapou, lidskými odpověďmi, výmazem a exportem, zapojením dodavatelů, interní evidencí, checklistem, DSAR kartou a ověřenými zdroji GDPR, EDPB a Evropské komise.
 - 2026-09-28: Doplněna příloha „Retenční politika bez digitálního syslení“ s praktickým modelem účelů, kategorií dat podle životnosti, návrhem mazání jako produktové funkce, pravidly pro anonymizaci, importy/exporty, datovou mapu, testování mazání, checklistem, vyplnitelnou retenční kartou a ověřenými zdroji GDPR, EDPB a SDEU.
 - 2026-09-28: Doplněna příloha „Role a přístupová práva bez interního labyrintu“ s návrhem rolí podle práce, zápisem oprávnění jako akcí nad objekty, oddělením tarifů od autorizace, dočasnými přístupy, service accounts, offboardingem, čtvrtletní revizí, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „E-mailová doména bez doručovací loterie“ s rozdělením e-mailových toků, minimem SPF/DKIM/DMARC, privacy-first pravidly obsahu, měřením bez sledovacích pixelů, měsíční provozní rutinou, checklistem, šablonou e-mailové karty a ověřenými zdroji RFC a ENISA.
