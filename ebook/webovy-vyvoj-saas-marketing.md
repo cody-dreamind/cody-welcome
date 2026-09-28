@@ -12425,7 +12425,159 @@ Kdy eskalovat privacy / právní posouzení:
 - ENISA: Technical implementation guidance on cybersecurity risk-management measures, část k identitám, přístupům a auditovatelnosti — https://www.enisa.europa.eu/sites/default/files/2025-06/ENISA_Technical_implementation_guidance_on_cybersecurity_risk_management_measures_version_1.0.pdf
 
 
+# Příloha: Rotace API klíčů a secrets bez nočního infarktu
+
+Secrets jsou věci, které dávají systému právo něco udělat: API klíče, databázová hesla, webhook signing secrets, privátní klíče, recovery tokeny, deploy tokeny nebo přístupové údaje k e-mailové službě. Nejsou to „konfigurační drobnosti“. Jsou to malé dálkové ovladače k tvému provozu. A když se ztratí, produkt najednou nehledá bug, ale hasičák.
+
+Dobrá správa secrets není o paranoidním divadle. Je o tom, že umíš odpovědět na čtyři otázky: kde secret žije, kdo k němu má přístup, co se stane při úniku a jak ho vyměníš bez rozbití produkce.
+
+> Codyho komentář: Secret, který nejde bezpečně otočit, není secret. Je to časovaná nálož s proměnnou expirací a náladou pondělního rána.
+
+### Udělej inventář podle dopadu
+
+Začni tabulkou, ne nákupem dalšího vaultu. Pro každý secret si napiš:
+
+- název a službu,
+- prostředí: lokál, staging, produkce,
+- co secret umožňuje,
+- kdo ho může číst nebo měnit,
+- kde je uložený,
+- kdy byl naposledy otočený,
+- jak se pozná kompromitace,
+- jaký je postup rotace.
+
+Největší prioritu mají secrets, které umí číst osobní data, posílat e-maily, měnit DNS, deployovat produkci, přistupovat k databázi nebo spouštět platby. Klíč pro testovací widget je nepříjemnost. Produkční databázové heslo v repozitáři je provozní horor, jen bez soundtracku.
+
+### Odděl typy secrets podle životnosti
+
+Ne každý secret má stejný režim. Když je hodíš do jednoho pytle, skončíš buď u přehnané byrokracie, nebo u chaosu.
+
+- Krátkodobé tokeny: ideálně expirují samy a používají se pro jednorázové operace.
+- Dlouhodobé API klíče: potřebují vlastníka, účel, omezený rozsah a plán rotace.
+- Webhook secrets: chrání ověření příchozích zpráv a musí jít měnit s přechodným obdobím.
+- Databázová hesla: musí být oddělená podle prostředí a rolí, ne sdílený univerzální klíč od všech dveří.
+- Recovery údaje: mají být chráněné ještě přísněji než běžný provozní přístup.
+
+Praktické pravidlo: čím širší dopad secret má, tím méně lidí ho smí vidět a tím lépe musí být popsaný postup obnovy.
+
+### Nedávej secrets do míst, která neumí mlčet
+
+Secrets nepatří do repozitáře, issue trackeru, chatu, e-mailu, screenshotu, logu ani dokumentace. Patří do správce secrets, bezpečného prostředí CI/CD nebo do provozního prostředí, kde je aplikace čte jako runtime konfiguraci.
+
+U malého týmu stačí jednoduché pravidlo: člověk nesmí muset secret zkopírovat do chatu, aby práce pokračovala. Pokud to musí udělat, workflow je rozbité. Vytvoř bezpečný kanál: vault, správce hesel s auditovatelným sdílením, deployment secret store nebo krátkodobý přístup přes role.
+
+Do dokumentace zapisuj jména proměnných a účel, ne hodnoty:
+
+```text
+DATABASE_URL — produkční připojení pro aplikaci, čte pouze runtime.
+EMAIL_API_KEY — posílání transakčních e-mailů, vlastník: provoz.
+WEBHOOK_SIGNING_SECRET — ověření příchozích webhooků od platební brány.
+```
+
+### Rotaci navrhni jako release, ne jako paniku
+
+Rotace secretu má být normální provozní úkon. Napiš ji tak, aby ji zvládl někdo jiný než člověk, který ji dělal minule.
+
+Základní postup:
+
+1. Ověř, kde se secret používá.
+2. Vytvoř nový secret s minimálním potřebným oprávněním.
+3. Přidej nový secret do cílového prostředí.
+4. Nasaď aplikaci tak, aby používala nový secret.
+5. Ověř kritickou cestu: login, platba, e-mail, webhook, export.
+6. Zneplatni starý secret.
+7. Zapiš rotaci do provozního logu.
+
+U webhooků a integrací, které podporují dva aktivní podpisové klíče, použij přechodné období. Nejdřív přijímej starý i nový podpis, potom přepni odesílatele, ověř provoz a až nakonec starý secret vypni. Tohle je nudné. Nuda je v provozu kompliment.
+
+### Dej klíčům nejmenší možná práva
+
+Jeden superklíč pro všechno je pohodlný jen do chvíle, než uteče. Vytvářej oddělené klíče podle účelu: jeden pro čtení, jiný pro zápis, zvláštní pro billing, zvláštní pro e-mail, zvláštní pro importy. Kde to služba umožňuje, omez klíč na konkrétní projekt, prostředí, IP rozsah, doménu nebo endpoint.
+
+Privacy-first pohled: klíč, který nepotřebuje číst osobní data, je číst nemá. Marketingový export nepotřebuje admin přístup. Monitoring nepotřebuje obsah zpráv. CI nepotřebuje produkční databázi, pokud jen staví frontend. Jo, i když by to bylo „rychlejší“.
+
+### Připrav reakci na únik
+
+Když se secret objeví v repozitáři nebo logu, neřeš jen smazání řádku. Historie, cache, forky, build logy a obraz kontejneru mohou hodnotu držet dál. Bezpečný postup je:
+
+- okamžitě secret zneplatnit nebo otočit,
+- zkontrolovat, kde mohl být použit,
+- projít logy podle časového okna,
+- ověřit dopad na osobní data,
+- odstranit secret z míst, kde nemá být,
+- doplnit prevenci: secret scanning, pre-commit kontrolu nebo lepší CI pravidlo,
+- zapsat incident a změnit runbook.
+
+Pokud únik mohl vést k neoprávněnému přístupu k osobním datům, zapoj privacy/právní posouzení. Ne proto, že milujeme papírování. Protože GDPR incidenty se neřeší pocitem, ale dopadem, časem a důkazy.
+
+### Nastav jednoduchý rytmus kontroly
+
+Malý tým nepotřebuje bezpečnostní operu o pěti dějstvích. Potřebuje pravidelný rytmus:
+
+- týdně: zkontrolovat nové secrets v CI/CD a produkčním prostředí,
+- měsíčně: projít klíče s vysokým dopadem,
+- kvartálně: otočit vybrané dlouhodobé secrets nebo ověřit, že rotace funguje,
+- po odchodu člověka nebo dodavatele: odebrat přístupy a otočit sdílené secrets,
+- po incidentu: zapsat poučení a automatizovat prevenci.
+
+Nejlepší kontrola je ta, která končí odstraněním zbytečného secretu. Každý klíč, který neexistuje, nemusíš chránit. To je zen, ale s méně kadidlem a víc provozní hodnotou.
+
+### Checklist: secrets bez nočního infarktu
+
+- Máme inventář produkčních secrets a jejich vlastníky.
+- Každý secret má jasný účel a minimální oprávnění.
+- Secrets nejsou v repozitáři, chatu, dokumentaci ani logu.
+- Produkce, staging a lokální vývoj nepoužívají stejné hodnoty.
+- Rotace kritických secrets je popsaná krok za krokem.
+- Umíme rychle zneplatnit klíč při úniku.
+- CI/CD má nastavenou ochranu proti nechtěnému commitnutí secrets.
+- Po odchodu člověka nebo dodavatele existuje offboardingový krok pro přístupy a secrets.
+- Logy neobsahují tokeny, hesla, podpisy webhooků ani celé autorizační hlavičky.
+- Pro secrets s osobními daty existuje vazba na incidentový runbook.
+
+### Mini šablona secrets inventáře
+
+```markdown
+# Secret: [název]
+
+## Účel
+K čemu slouží:
+Služba / integrace:
+Prostředí:
+
+## Dopad
+Co umožňuje:
+Má přístup k osobním datům: ano/ne
+Kritičnost: nízká / střední / vysoká
+
+## Uložení a přístup
+Kde je uložený:
+Kdo ho může číst:
+Kdo ho může měnit:
+Jak se přístup auditují:
+
+## Rotace
+Kdy byl naposledy otočený:
+Kdy se má otočit příště:
+Postup rotace:
+Kritická cesta k ověření:
+
+## Incident
+Jak secret zneplatnit:
+Kde hledat možné použití:
+Kdy eskalovat privacy posouzení:
+```
+
+### Zdroje
+
+- OWASP: Secrets Management Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- OWASP: Logging Cheat Sheet, část k datům, která se nemají logovat — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- GitHub Docs: Secret scanning a push protection — https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning
+- ENISA: Cybersecurity guide for SMEs, praktický bezpečnostní rámec pro malé a střední firmy — https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
+
+
 # Pracovní log
+- 2026-09-28: Doplněna příloha „Rotace API klíčů a secrets bez nočního infarktu“ s inventářem secrets podle dopadu, rozdělením podle životnosti, bezpečným uložením, postupem rotace, pravidlem minimálních oprávnění, reakcí na únik, kontrolním rytmem, checklistem, šablonou a ověřenými zdroji OWASP, GitHub Docs a ENISA.
 - 2026-09-28: Doplněna příloha „Auditní logy bez špehovacího archivu“ s výběrem událostí podle dopadu, strukturou auditní události, pravidly proti ukládání tajemství, retenčním modelem, přístupovými rolemi, zákaznickým výřezem, vazbou na incidentový runbook, checklistem, šablonou a ověřenými zdroji EDPB a ENISA.
 - 2026-09-28: Doplněna příloha „Produktová dokumentace pro SaaS bez podpůrného chaosu“ s rozdělením dokumentace podle práce zákazníka, vrstvami rychlého startu/návodů/reference, jednotnou šablonou článku, vazbou na support, férovým popisem omezení, privacy-first datovými vysvětlivkami, navigací, revizní rutinou, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „SLA a servisní sliby bez korporátní mlhy“ s rozlišením dostupnosti, reakční doby a vyřešení, prioritami incidentů podle dopadu, servisními úrovněmi, privacy-first pravidly podpory, měřením bez ukládání obsahu ticketů, interním runbookem, checklistem a vyplnitelnou šablonou.
