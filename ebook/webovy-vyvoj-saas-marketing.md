@@ -10198,7 +10198,199 @@ Rozhodovací deník je nudná super schopnost. Nedělá efektní demo, ale po p�
 
 ---
 
+## Příloha: Exit plán dodavatele bez paniky
+
+Dodavatel, nástroj nebo hosting může být skvělý a stejně jednou přijde den, kdy z něj budeš potřebovat odejít. Ne nutně kvůli průšvihu. Možná vyrosteš, změní se cena, změní se podmínky, firma skončí, produkt se prodá, nebo zjistíš, že data potřebuješ blíž k týmu v Evropě. Exit plán není výraz nedůvěry. Je to pojistka proti tomu, aby se z dobré volby nestala klec se subscription fakturou.
+
+Privacy-first provoz má jednu jednoduchou otázku: „Umíme odejít bez ztráty kontroly nad daty, zákazníky a provozem?“ Pokud odpověď zní „asi jo“, tak odpověď ve skutečnosti zní „nevíme“. A „nevíme“ je nejdražší hostingový tarif, jen se tak nejmenuje.
+
+> Codyho komentář: Vendor lock-in nevypadá dramaticky. Vypadá jako malá poznámka „export bude řešit někdo později“. Ten někdo jsi budoucí ty, unavený ve čtvrtek večer. Buď na něj hodný.
+
+### Co má mít každý exit plán
+
+Exit plán nemusí být třicetistránkový dokument s razítkem, které by záviděla i byrokracie. Pro malý web nebo SaaS stačí jedna stránka, která odpoví na praktické otázky.
+
+Minimum:
+
+- jaká data u dodavatele jsou,
+- kdo je vlastníkem účtu a plateb,
+- jak se data exportují,
+- v jakém formátu export dostaneš,
+- jak často se export nebo záloha ověřuje,
+- kdo umí službu nahradit,
+- co se stane s DNS, e-maily, webhooky a integracemi,
+- jak dlouho po ukončení dodavatel data drží,
+- co musíš smazat nebo archivovat interně.
+
+Rozdíl mezi „máme exit plán“ a „někdo to určitě nějak vyřeší“ poznáš při prvním incidentu. Plán šetří čas právě ve chvíli, kdy ho nejmíň máš.
+
+### Rozděl dodavatele podle kritičnosti
+
+Ne každý nástroj potřebuje stejnou přípravu. Export poznámek z plánovací aplikace bolí méně než ztracená databáze zákazníků. Začni jednoduchým rozdělením.
+
+**Kritická vrstva**
+
+Sem patří hosting, databáze, DNS, e-mailová infrastruktura, platby, autentizace a zálohy. Výpadek nebo zablokování účtu zastaví provoz, prodej nebo podporu.
+
+U kritické vrstvy chtěj:
+
+- jasného vlastníka účtu,
+- dvoufaktorové ověření,
+- dokumentovaný export,
+- test obnovy,
+- alternativní postup při výpadku,
+- smluvní a datové podmínky uložené na jednom místě.
+
+**Důležitá vrstva**
+
+Sem patří CRM, analytika, helpdesk, emailing, projektové řízení, formuláře a automatizace. Výpadek nezastaví celý produkt, ale rozbije komunikaci nebo rozhodování.
+
+U důležité vrstvy chtěj:
+
+- měsíční nebo čtvrtletní export podle objemu dat,
+- jasný seznam polí, která opravdu používáš,
+- náhradní ruční proces,
+- omezené role pro lidi a integrace,
+- pravidlo, co se po ukončení smaže.
+
+**Pohodlná vrstva**
+
+Sem patří doplňkové nástroje, které zrychlují práci, ale nejsou zdrojem pravdy. Pokud zmizí, tým si zanadává, dá si kávu a pokračuje. Tady stačí vědět, že v nich nejsou citlivá data a že výstupy nejsou zamčené v proprietárním formátu.
+
+### Export není záloha, dokud ho neotevřeš
+
+Mnoho týmů má pocit bezpečí, protože nástroj nabízí export. Jenže export, který nikdo nikdy neotevřel, je spíš talisman než provozní jistota.
+
+Ověření exportu udělej takto:
+
+1. Stáhni malý vzorek dat.
+2. Otevři ho mimo původní nástroj.
+3. Zkontroluj diakritiku, časová pásma a přílohy.
+4. Ověř, zda export obsahuje ID, stav, datum vytvoření a vazby mezi záznamy.
+5. Zkus z něj obnovit jeden reálný scénář.
+6. Zapiš, co chybí a kdo to řeší.
+
+Příklad pro helpdesk:
+
+```text
+Scénář: Potřebujeme dohledat historii komunikace se zákazníkem po ukončení nástroje.
+Export obsahuje: ticket ID, předmět, stav, prioritu, autora, čas, text zpráv.
+Chybí: interní poznámky a přílohy.
+Rozhodnutí: Přílohy nebudeme v helpdesku držet déle než 12 měsíců; důležité smluvní soubory patří do dokumentového úložiště, ne do ticketu.
+```
+
+Tohle je přesně typ malého zjištění, které se vyplatí udělat před krizí. Krize má totiž mizerný UX.
+
+### DNS a e-mail: malá změna, velká exploze
+
+Nejčastější provozní překvapení při odchodu od dodavatele nejsou samotná data. Jsou to napojení kolem: DNS záznamy, e-mailové domény, ověřovací tokeny, webhooky, API klíče, redirecty, cron úlohy a fakturační webhooks.
+
+Před změnou si napiš mapu:
+
+- domény a subdomény,
+- DNS záznamy řízené dodavatelem,
+- e-mailové záznamy SPF, DKIM a DMARC,
+- webhooky do plateb, formulářů, CRM a supportu,
+- API klíče a jejich oprávnění,
+- automatizace, které závisí na URL nebo tokenu,
+- lidé, kteří mají admin přístup,
+- místa, kde je veřejně odkazovaná stará URL.
+
+Privacy-first doporučení: nesbírej víc integrací, než dokážeš rozumně vysvětlit. Každý webhook je malý datový most. Když už ho stavíš, napiš na něj ceduli: odkud, kam, proč a kdo ho umí vypnout.
+
+### Migrační den bez hrdinství
+
+Migrace se nemá spoléhat na jednoho hrdinu, který „to má v hlavě“. Hrdina onemocní, má dovolenou nebo zrovna bojuje s tiskárnou. Plán má být čitelný i pro druhého člověka.
+
+Jednoduchý migrační plán:
+
+1. Vyhlásit časové okno a vlastníka změny.
+2. Udělat poslední export nebo snapshot.
+3. Pozastavit automatizace, které by mohly zapisovat do starého systému.
+4. Přepnout DNS, webhooky nebo integrační klíče.
+5. Ověřit jeden hlavní uživatelský scénář.
+6. Ověřit jeden interní scénář podpory nebo administrace.
+7. Nechat starý systém jen pro čtení po domluvenou dobu.
+8. Po kontrole dat zrušit přístupy a naplánovat smazání.
+
+U malého SaaS může být hlavní scénář třeba: registrace, platba, přihlášení, vytvoření prvního projektu a odeslání transakčního e-mailu. U webu to může být: načtení hlavních stránek, odeslání formuláře, doručení e-mailu a funkční redirecty.
+
+### Co říct zákazníkům
+
+Ne každá migrace potřebuje velké oznámení. Pokud se nic nemění pro uživatele a riziko je malé, stačí interní záznam. Pokud ale může dojít ke krátkému výpadku, změně zpracovatele, změně regionu nebo dopadu na data, komunikuj jasně a předem.
+
+Dobrá zpráva obsahuje:
+
+- co se mění,
+- kdy se to mění,
+- jaký dopad to má na zákazníka,
+- co se nemění,
+- koho kontaktovat při problému,
+- jestli se mění zpracování osobních údajů nebo smluvní dokumentace.
+
+Příklad krátké provozní zprávy:
+
+```text
+Ve středu 14:00–15:00 budeme přesouvat e-mailovou infrastrukturu na nové evropské prostředí. Web i aplikace zůstanou dostupné, ale některé notifikace mohou dorazit se zpožděním. Nemění se obsah účtu ani přihlášení. Pokud po 15:00 neuvidíte očekávaný e-mail, napište nám na podporu.
+```
+
+Jasná komunikace není slabost. Je to prevence supportového ohňostroje.
+
+### Checklist: exit plán dodavatele
+
+- Máme seznam kritických, důležitých a pohodlných dodavatelů.
+- U každého kritického dodavatele víme, kdo vlastní účet a platby.
+- Víme, jak exportovat data a v jakém formátu.
+- Export jsme otevřeli mimo původní nástroj.
+- Máme popsané DNS, e-mailové záznamy, webhooky a API klíče.
+- U citlivých dat víme, kde jsou smlouvy, DPA a retenční pravidla.
+- Máme náhradní ruční postup pro klíčové procesy.
+- Máme plán, jak po odchodu zrušit přístupy a požádat o smazání dat.
+- Máme připravenou krátkou zákaznickou komunikaci pro změny s dopadem.
+- Exit plán kontrolujeme aspoň jednou za čtvrtletí u kritických služeb.
+
+### Mini šablona exit plánu
+
+```text
+## Dodavatel / nástroj
+- Název:
+- Kritičnost: kritická / důležitá / pohodlná
+- Vlastník účtu:
+- Platební kontakt:
+- Typ dat:
+- Osobní údaje: ano / ne / nevím
+- Region provozu:
+- Smlouva / DPA uložená kde:
+
+## Export a obnova
+- Jak exportovat:
+- Formát exportu:
+- Co export neobsahuje:
+- Poslední test exportu:
+- Kdo umí obnovu ověřit:
+
+## Napojení
+- Domény / DNS:
+- E-mailové záznamy:
+- Webhooky:
+- API klíče:
+- Automatizace:
+- Veřejné odkazy:
+
+## Odchod
+- Náhradní řešení:
+- Ruční fallback:
+- Migrační okno:
+- Rizika:
+- Zákaznická komunikace:
+- Zrušení přístupů:
+- Žádost o smazání dat:
+```
+
+Exit plán je nudný jen do chvíle, než ho potřebuješ. Pak je to rozdíl mezi řízenou změnou a improvizovaným divadlem, kde hlavní roli hraje panika a vedlejší roli faktura za další měsíc nástroje, který už nechceš používat.
+
 # Pracovní log
+- 2026-09-28: Doplněna příloha „Exit plán dodavatele bez paniky“ s rozdělením dodavatelů podle kritičnosti, ověřováním exportu, mapou DNS/e-mailů/webhooků, migračním postupem, zákaznickou komunikací, checklistem a vyplnitelnou šablonou.
 
 - 2026-09-28: Doplněna příloha „Rozhodovací deník pro web a SaaS bez firemní amnézie“ s pravidly, co zapisovat, jasnou rozhodovací větou, vlastníkem a revizí, privacy-first filtrem, vazbou na backlog/runbooky/datovou mapu, checklistem a vyplnitelnou šablonou.
 - 2026-09-27: Doplněna příloha „Rozpočet webu a SaaS bez skrytého provozního dluhu“ s rozdělením nákladů podle životního cyklu, TCO pohledem na nástroje, variantami podle rizika, rozlišením vývojového a provozního dluhu, privacy-first položkami, škrtacími pravidly, checklistem a vyplnitelnou šablonou.
