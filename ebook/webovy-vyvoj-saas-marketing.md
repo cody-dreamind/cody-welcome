@@ -13567,7 +13567,222 @@ Další revize:
 - European Commission: Dealing with requests from individuals, pravidlo odpovědi bez zbytečného odkladu a zpravidla do jednoho měsíce — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
 - European Commission: Information for individuals, přehled práv na informace, přístup, opravu, výmaz, omezení, přenositelnost a námitku — https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
 
+# Příloha: Porušení zabezpečení osobních údajů bez panického divadla
+
+Bezpečnostní incident je technický problém. Porušení zabezpečení osobních údajů je technický, právní, komunikační a důvěrový problém najednou. A právě proto se nedá řešit stylem „nejdřív všechno hasíme a za tři dny zjistíme, že jsme měli něco někam hlásit“. To je provozní verze hledání klíčů v kabátu, který už hoří.
+
+GDPR definuje porušení zabezpečení osobních údajů jako porušení bezpečnosti, které vede k náhodnému nebo protiprávnímu zničení, ztrátě, pozměnění, neoprávněnému zpřístupnění nebo přístupu k osobním údajům. Prakticky: nejde jen o únik databáze. Může jít i o omylem poslaný export špatnému zákazníkovi, veřejně dostupný backup, ztracený notebook bez šifrování, špatně nastavená práva v klientské zóně nebo logy s osobními údaji v nástroji, kam neměly doputovat.
+
+> Codyho komentář: Incidentový proces není přiznání, že jsi nemehlo. Je to důkaz, že počítáš s realitou. Realita má totiž talent rozbít i ty věci, které v pondělí vypadaly „úplně v pohodě“.
+
+## Nejdřív odděl incident od breach
+
+Každý breach je incident, ale ne každý incident je breach. Tohle rozlišení šetří čas i nervy.
+
+Příklady provozních incidentů bez osobních údajů:
+
+- výpadek veřejného webu bez dopadu na data,
+- chyba v cache statických obrázků,
+- nefunkční platební webhook bez expozice zákaznických údajů,
+- selhaný deploy, který jen vrátí starší verzi stránky.
+
+Příklady možného porušení zabezpečení osobních údajů:
+
+- zákazník vidí cizí fakturu nebo ticket,
+- interní export kontaktů odešel na špatný e-mail,
+- debug log obsahuje e-maily, IP adresy nebo tokeny a byl odeslán do externího nástroje,
+- útočník získal přístup k administraci,
+- veřejný bucket obsahoval nahrané přílohy uživatelů,
+- záloha produkční databáze skončila v testovacím prostředí s volnějším přístupem.
+
+První otázka tedy nezní „máme právní problém?“. Zní: „Mohlo dojít ke zničení, ztrátě, změně, neoprávněnému zpřístupnění nebo přístupu k osobním údajům?“ Pokud ano, zapni breach runbook. Nečekej, až budeš mít detektivní román se závěrečnou scénou v knihovně.
+
+## První hodina rozhoduje o kvalitě odpovědi
+
+V první hodině nepotřebuješ dokonalou analýzu. Potřebuješ zastavit škodu, zachovat důkazy a spustit správné hodiny.
+
+Minimální postup:
+
+1. **Zastav expozici:** vypni veřejný odkaz, zablokuj token, odeber chybnou roli, zastav job, izoluj účet.
+2. **Zachovej důkazy:** ulož časovou osu, relevantní logy, commit, konfiguraci a kdo co udělal.
+3. **Urči datové kategorie:** kontaktní údaje, fakturace, obsah zpráv, soubory, logy, identifikátory, zvláštní kategorie.
+4. **Odhadni rozsah:** kolik lidí, kolik záznamů, které workspace, jak dlouho expozice trvala.
+5. **Urči role:** jsi správce, zpracovatel, nebo obojí podle konkrétního vztahu?
+6. **Založ kartu incidentu:** jeden zdroj pravdy, žádné rozhodování přes ztracené chatové vlákno.
+
+Když jsi zpracovatel pro klienta, často musíš informovat správce bez zbytečného odkladu podle smlouvy a DPA. Nečekej na kompletní forenzní výsledek, pokud klient potřebuje začít vlastní posouzení. Napiš, co víš, co nevíš a kdy dodáš další update.
+
+## Hlášení dozorovému úřadu: riziko, ne ego
+
+GDPR článek 33 říká, že správce má porušení zabezpečení osobních údajů oznámit příslušnému dozorovému úřadu bez zbytečného odkladu a pokud možno do 72 hodin od okamžiku, kdy se o něm dozvěděl, pokud není nepravděpodobné, že by incident představoval riziko pro práva a svobody fyzických osob. Když oznámení přijde později, má obsahovat důvody zpoždění.
+
+Přeloženo do provozu: není to „72 hodin od momentu, kdy jsme si interně jistí na 100 %“. Je to od chvíle, kdy máš rozumné vědomí, že se mohlo stát porušení osobních údajů. Pokud si nejsi jistý, dokumentuj, proč vyhodnocuješ riziko tak či onak.
+
+Hlášení typicky potřebuje:
+
+- povahu porušení,
+- kategorie a přibližný počet dotčených lidí,
+- kategorie a přibližný počet dotčených záznamů,
+- kontakt na pověřence nebo odpovědnou osobu,
+- pravděpodobné důsledky,
+- přijatá nebo navržená opatření.
+
+ÚOOÚ má k dispozici informace k ohlašování porušení zabezpečení a zdůrazňuje, že cílem oznámení je umožnit dozorovému úřadu posoudit dopady a případně doporučit další postup. Praktický závěr: piš věcně, strukturovaně a bez marketingové mlhy. Úřad nepotřebuje slyšet, že „bezpečnost berete vážně“. Potřebuje fakta.
+
+## Informování lidí: jasně, bez strašení a bez uklidňovací mlhy
+
+GDPR článek 34 řeší komunikaci dotčeným osobám. Pokud porušení pravděpodobně povede k vysokému riziku pro práva a svobody lidí, správce má informovat dotčené osoby bez zbytečného odkladu. Ne každé hlášení úřadu tedy automaticky znamená e-mail všem zákazníkům, ale když vysoké riziko existuje, komunikace má být srozumitelná.
+
+Dobrý e-mail člověku říká:
+
+- co se stalo,
+- kdy se to stalo nebo kdy jste to zjistili,
+- jaká data mohla být dotčena,
+- co jste už udělali,
+- co má udělat člověk,
+- kam se může obrátit,
+- kdy přijde další update, pokud ještě nejsou všechna fakta.
+
+Špatný e-mail říká: „Došlo k bezpečnostní události, vaše data jsou pro nás prioritou.“ To není informace. To je firemní mlha v kravatě.
+
+Příklad stručné zprávy:
+
+```text
+Zjistili jsme, že dne [datum] byl po dobu [doba] veřejně dostupný export podpůrných ticketů pro část zákazníků. Export mohl obsahovat jméno, e-mail, název firmy a text ticketu. Hesla ani platební údaje v exportu nebyly.
+
+Veřejný přístup jsme zrušili v [čas], přístupový klíč jsme rotovali a kontrolujeme logy stažení. Pokud jste v ticketech posílali citlivé údaje nebo tokeny, doporučujeme je preventivně změnit.
+
+Další update pošleme nejpozději [datum/čas]. Kontakt: [e-mail].
+```
+
+Všimni si: žádná poezie o bezpečnostní prioritě. Jen fakta, dopad a další krok.
+
+## Privacy-first incident runbook minimalizuje sekundární škody
+
+Při incidentu je lákavé exportovat všechno všem do všeho. Nedělej to. Vyšetřování nesmí vytvořit druhý únik.
+
+Pravidla:
+
+- incident řeš v omezeném interním prostoru s jasnými přístupy,
+- do chatu neposílej celé databázové výpisy,
+- pro ukázky používej redigované záznamy,
+- tajemství a tokeny ber jako kompromitované, ne jako screenshotovou dekoraci,
+- logy stahuj jen v nezbytném rozsahu,
+- externím konzultantům dej časově omezený přístup,
+- po incidentu smaž pracovní exporty podle karty incidentu.
+
+Privacy-first přístup tady není brzda. Je to pojistka, že při řešení požáru nevyleješ benzín do chodby.
+
+## Klasifikace dopadu pro malý SaaS
+
+Jednoduchá klasifikace pomůže týmu rozhodnout bez nekonečné porady.
+
+| Úroveň | Příklad | Akce |
+|---|---|---|
+| Nízká | Interní chyba bez osobních údajů nebo s anonymními agregáty | Opravit, zapsat, poučit se |
+| Střední | Omezený přístup k běžným kontaktním údajům, malý počet lidí, rychle zastaveno | Breach karta, posouzení rizika, možné hlášení |
+| Vysoká | Cizí zákaznická data, obsah komunikace, fakturace, větší rozsah | Okamžitá eskalace, právní posouzení, pravděpodobné hlášení |
+| Kritická | Hesla, tokeny, zvláštní kategorie dat, systematický neoprávněný přístup | Krizový režim, hlášení, komunikace lidem, forenzní podpora |
+
+Tabulka není náhrada právního posouzení. Je to startovní mapa, aby první reakce nebyla „počkejme do pondělí, třeba to zmizí“. Spoiler: nezmizí. Maximálně se to objeví v horším kontextu.
+
+## Po incidentu oprav systém, ne jen symptom
+
+Postmortem má být bez obviňování, ale ne bez odpovědnosti. Hledej, co umožnilo chybu: slabé role, chybějící review, ruční exporty, příliš široké tokeny, neexistující test mazání, žádný monitoring veřejných bucketů, špatná dokumentace.
+
+Výstup po incidentu:
+
+- krátká časová osa,
+- kořenové příčiny,
+- co fungovalo,
+- co selhalo,
+- konkrétní změny v produktu nebo provozu,
+- vlastník každé změny,
+- termín kontroly,
+- aktualizace runbooku.
+
+Nejhorší závěr je „budeme opatrnější“. Opatrnost není kontrolní mechanismus. Lepší závěr je „produkční exporty budou mít automatickou expiraci 24 hodin, zákaznické přílohy nepůjdou sdílet veřejným odkazem bez explicitní volby a každý nový bucket dostane policy test v CI“.
+
+## Checklist: breach reakce bez paniky
+
+- [ ] Umíme během hodiny zjistit, jestli incident zahrnuje osobní údaje?
+- [ ] Máme jednu kartu incidentu jako zdroj pravdy?
+- [ ] Víme, kdo rozhoduje o právním posouzení a komunikaci?
+- [ ] Umíme rozlišit roli správce a zpracovatele pro konkrétní službu?
+- [ ] Evidujeme čas zjištění incidentu a důležité mezníky?
+- [ ] Máme postup pro zastavení expozice bez mazání důkazů?
+- [ ] Umíme odhadnout kategorie dat, lidí a záznamů?
+- [ ] Posuzujeme riziko pro práva a svobody lidí, ne jen reputační riziko firmy?
+- [ ] Víme, kdy a jak hlásit dozorovému úřadu?
+- [ ] Máme šablonu zprávy pro dotčené osoby?
+- [ ] Chráníme incidentové exporty, screenshoty a logy před sekundárním únikem?
+- [ ] Po incidentu vzniknou konkrétní technická nebo procesní opatření?
+
+## Mini šablona breach karty
+
+```text
+# Incident / breach: [ID]
+
+## Základ
+Datum a čas zjištění:
+Kdo incident nahlásil:
+Vlastník incidentu:
+Správce / zpracovatel:
+Dotčená služba:
+
+## Popis
+Co se stalo:
+Jak byl incident zjištěn:
+Časový rozsah expozice:
+Aktuální stav:
+
+## Data
+Kategorie osobních údajů:
+Kategorie dotčených osob:
+Přibližný počet osob:
+Přibližný počet záznamů:
+Zvláštní kategorie / citlivý obsah:
+Tokeny / hesla / secrets:
+
+## Opatření
+Okamžité zastavení škody:
+Rotace klíčů / hesel:
+Omezení přístupů:
+Zachované důkazy:
+Pracovní exporty a jejich retence:
+
+## Posouzení
+Riziko pro práva a svobody lidí:
+Vysoké riziko pro dotčené osoby:
+Důvody rozhodnutí:
+Potřeba hlášení dozorovému úřadu:
+Potřeba informovat osoby:
+
+## Komunikace
+Úřad informován dne:
+Dotčené osoby informovány dne:
+Klient / správce informován dne:
+Veřejná komunikace / status page:
+Další update:
+
+## Poučení
+Kořenové příčiny:
+Co fungovalo:
+Co selhalo:
+Nápravná opatření:
+Vlastníci a termíny:
+Datum revize runbooku:
+```
+
+## Zdroje
+
+- GDPR, články 4, 33 a 34: definice porušení zabezpečení, hlášení dozorovému úřadu a komunikace dotčeným osobám — https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+- ÚOOÚ: Ohlašování případů porušení zabezpečení osobních údajů — https://uoou.gov.cz/profesional/poruseni-zabezpeceni-osobnich-udaju
+- EDPB: Guidelines 9/2022 on personal data breach notification under GDPR — https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-92022-personal-data-breach-notification-under_en
+- European Commission: What if my company/organisation fails to comply with data protection rules? — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/enforcement-and-sanctions/sanctions/what-if-my-companyorganisation-fails-comply-data-protection-rules_en
+
 # Pracovní log
+- 2026-09-28: Doplněna příloha „Porušení zabezpečení osobních údajů bez panického divadla“ s rozlišením incidentu a breach, první hodinou reakce, hlášením dozorovému úřadu, informováním lidí, privacy-first incident runbookem, klasifikací dopadu, postmortem postupem, checklistem, šablonou breach karty a ověřenými zdroji GDPR, ÚOOÚ, EDPB a Evropské komise.
 - 2026-09-28: Doplněna příloha „Žádosti lidí o jejich data bez právního ping-pongu“ s provozním postupem pro GDPR žádosti, rozlišením práv, přiměřeným ověřením identity, datovou mapou, lidskými odpověďmi, výmazem a exportem, zapojením dodavatelů, interní evidencí, checklistem, DSAR kartou a ověřenými zdroji GDPR, EDPB a Evropské komise.
 - 2026-09-28: Doplněna příloha „Retenční politika bez digitálního syslení“ s praktickým modelem účelů, kategorií dat podle životnosti, návrhem mazání jako produktové funkce, pravidly pro anonymizaci, importy/exporty, datovou mapu, testování mazání, checklistem, vyplnitelnou retenční kartou a ověřenými zdroji GDPR, EDPB a SDEU.
 - 2026-09-28: Doplněna příloha „Role a přístupová práva bez interního labyrintu“ s návrhem rolí podle práce, zápisem oprávnění jako akcí nad objekty, oddělením tarifů od autorizace, dočasnými přístupy, service accounts, offboardingem, čtvrtletní revizí, checklistem a vyplnitelnou šablonou.
