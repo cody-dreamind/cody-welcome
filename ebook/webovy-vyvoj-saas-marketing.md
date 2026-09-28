@@ -12211,7 +12211,222 @@ Další plánovaná revize:
 Dokumentace je tichý obchodník, tichý support a tichý bezpečnostní prvek. Když je dobrá, zákazník se cítí schopnější. Když je špatná, tým jen přesouvá práci z produktu do inboxu. A inbox, jak víme, je místo, kde dobré úmysly chodí pomalu ztrácet vůli k životu.
 
 
+# Příloha: Auditní logy bez špehovacího archivu
+
+Auditní log není produktová analytika s detektivním kloboukem. Je to provozní stopa, která pomáhá odpovědět na otázky: kdo provedl důležitou změnu, kdy se to stalo, čeho se změna týkala a jaký byl bezpečný další krok. Když auditní log sbírá všechno, začne být drahý, rizikový a skoro nepoužitelný. Když nesbírá nic, tým při incidentu hádá z kávové sedliny. To je sice poetické, ale zákazníkům se to blbě vysvětluje.
+
+Privacy-first auditní log má být úzký, srozumitelný a přiměřený riziku. Neslouží k profilování lidí. Neslouží k měření každého kliknutí. Neslouží k tomu, aby se z administrace stal kamerový systém. Slouží k důvěře, bezpečnosti a provozní odpovědnosti.
+
+> Codyho komentář: Nejlepší auditní log je nudný. Když ho otevřeš, máš vidět jasné události, ne román o tom, kam se uživatel podíval myší. Nudné systémy často přežijí déle než geniální dashboardy s ohňostrojem.
+
+### Začni událostmi s dopadem
+
+Nejprve napiš seznam událostí, které mění stav produktu, bezpečnost nebo zákaznická data. Teprve potom řeš technologii.
+
+Do auditního logu typicky patří:
+
+- přihlášení administrátora nebo pokus o přihlášení s vyšším rizikem,
+- změna role, oprávnění nebo členství v týmu,
+- vytvoření, změna nebo zrušení API tokenu,
+- export dat, hromadné stažení nebo import,
+- změna fakturačních údajů, tarifu nebo vlastníka účtu,
+- změna bezpečnostního nastavení, domény, SSO nebo webhooku,
+- smazání důležitého záznamu,
+- změna retenčního pravidla nebo privacy nastavení.
+
+Do auditního logu většinou nepatří:
+
+- každý hover, scroll a pohyb v UI,
+- obsah soukromých zpráv a poznámek,
+- kompletní hodnota před a po změně, pokud obsahuje osobní nebo citlivá data,
+- technický šum, který nikdo neumí vyhodnotit,
+- data sbíraná „kdyby se někdy hodila“.
+
+Dobrá věta pro návrh zní:
+
+```text
+Auditní log zaznamenává události, které mění oprávnění, bezpečnost, data zákazníka nebo smluvní stav účtu.
+```
+
+### Struktura jedné auditní události
+
+Každá událost má být čitelná pro člověka a zároveň použitelná pro filtraci. Nezapisuj jen technický řádek typu `user.update.success`. To je pro stroj, ne pro tým.
+
+Praktická minimální struktura:
+
+- `čas`: kdy se událost stala, ideálně v UTC,
+- `aktor`: uživatel, služba nebo systémová úloha, která změnu spustila,
+- `akce`: co se stalo,
+- `objekt`: čeho se změna týkala,
+- `výsledek`: úspěch, zamítnutí, chyba nebo částečné dokončení,
+- `kontext`: rozumně omezené technické údaje pro vyšetření,
+- `request_id` nebo `correlation_id`: vazba na aplikační logy,
+- `důvod`, pokud ho uživatel zadává u rizikové operace.
+
+Příklad pro administraci:
+
+```text
+2026-09-28T11:00:00Z | ondrej@example.cz | změnil roli uživatele | jana@example.cz | member -> admin | úspěch | request_id=req_123
+```
+
+Lepší varianta pro privacy-first provoz je uložit interní ID a e-mail zobrazit jen oprávněným administrátorům. Pro běžný export auditního logu často stačí pseudonymizovaný identifikátor a jasný popis akce.
+
+### Nezapisuj tajemství ani obsah komunikace
+
+Auditní log se často stane novou citlivou databází, aniž si toho tým všimne. Pokud do něj uložíš tokeny, celé payloady webhooků, obsah formulářů nebo poznámky zákazníků, vytvoříš další místo, které musíš chránit, mazat, exportovat a vysvětlovat.
+
+Pravidlo:
+
+```text
+Do auditního logu patří důkaz o akci, ne kopie všech dat, kterých se akce dotkla.
+```
+
+Místo celé hodnoty ukládej:
+
+- typ změny,
+- bezpečný identifikátor objektu,
+- hash nebo poslední čtyři znaky tokenu, pokud potřebuješ rozlišit klíče,
+- rozsah dopadu,
+- výsledek kontroly oprávnění,
+- odkaz na interní incident nebo ticket.
+
+U API tokenů například nezapisuj token. Zapiš, že token vznikl, kdo ho vytvořil, pro jakou integraci byl označený, jaké měl scope a kdy expiruje. Token samotný do logu nepatří. Token v logu je jako náhradní klíč pod rohožkou, jen s lepším timestampem.
+
+### Retence podle účelu, ne podle kapacity disku
+
+Retence auditních logů má vycházet z účelu. Pro malý SaaS často dává smysl rozdělit logy do vrstev:
+
+- bezpečnostní a administrátorské události: delší retence,
+- běžné změny nastavení účtu: střední retence,
+- technické diagnostické vazby: kratší retence,
+- detailní debug logy: krátká retence a vypínat po vyřešení problému.
+
+Nepiš si automaticky „uchovávat navždy“. Navždy je jen jiný výraz pro „někdo to jednou zapomene smazat a právník se bude smát takovým tím smutným smíchem“.
+
+U každé kategorie si zapiš:
+
+- proč ji sbíráš,
+- kdo ji čte,
+- jak dlouho ji držíš,
+- kdy se maže nebo agreguje,
+- zda jde exportovat zákazníkovi,
+- co se stane při zrušení účtu.
+
+### Přístup k auditním logům je privilegium
+
+Auditní logy nesmí být volně dostupné každému, kdo má přístup do administrace. Obsahují bezpečnostní stopu a někdy i osobní údaje v podobě identifikátorů, IP rozsahů, e-mailů nebo názvů objektů.
+
+Praktické role:
+
+- běžný člen týmu vidí jen vlastní nedávné bezpečnostní události,
+- vlastník účtu vidí audit účtu a změny členů,
+- support vidí omezený výřez potřebný k řešení ticketu,
+- bezpečnostní nebo provozní role vidí širší stopu,
+- externista nevidí auditní logy bez konkrétního důvodu.
+
+Změny v oprávnění k auditním logům loguj také. Ano, auditní log loguje přístup k auditnímu logu. Je to trochu jako bezpečnostní matrjoška, ale dává to smysl.
+
+### Udělej z logu nástroj pro zákazníka
+
+U B2B SaaS je auditní log součást důvěry. Zákazník nechce jen věřit, že má produkt bezpečnost pod kontrolou. Chce mít možnost zkontrolovat, co se v jeho účtu stalo.
+
+Zákaznické zobrazení by mělo umět:
+
+- filtrovat podle období, akce a aktora,
+- exportovat přiměřený výřez,
+- vysvětlit události lidským jazykem,
+- ukázat změny rolí a tokenů,
+- zobrazit neúspěšné bezpečnostní pokusy, pokud to pomáhá obraně,
+- skrýt citlivé technické detaily, které by zvyšovaly riziko zneužití.
+
+Nepřidávej do zákaznického auditního logu produktovou analytiku. „Uživatel klikl na stránku Ceník“ není auditní událost. „Uživatel exportoval všechny faktury za poslední rok“ auditní událost je.
+
+### Propoj audit s incidentovým postupem
+
+Auditní log je užitečný jen tehdy, když ho tým umí použít. Do incidentového runbooku přidej rychlý postup:
+
+1. Najdi časové okno incidentu.
+2. Vyfiltruj rizikové akce: role, tokeny, exporty, mazání, změny domény a webhooků.
+3. Spoj auditní události s aplikačními logy přes `request_id`.
+4. Ověř dopad na zákaznická data.
+5. Zapiš rozhodnutí do incidentového záznamu.
+6. Pokud jde o osobní údaje, posuď oznamovací povinnost podle interního GDPR postupu.
+
+EDPB ve svých materiálech k porušení zabezpečení osobních údajů zdůrazňuje dokumentaci, vyhodnocení rizika a v některých případech oznámení dozorovému úřadu do 72 hodin. Malý tým z toho nemusí dělat právní divadlo, ale musí mít proces dřív, než nastane průšvih. Viz zdroje níže.
+
+### Checklist: auditní logy bez špehovacího archivu
+
+- Máme seznam auditních událostí podle dopadu, ne podle zvědavosti.
+- Každá událost má aktora, akci, objekt, čas, výsledek a korelační ID.
+- Do logů neukládáme tajemství, celé payloady ani obsah komunikace.
+- Ukládáme jen bezpečný kontext potřebný k vyšetření nebo důvěře zákazníka.
+- Retence je rozdělená podle účelu a rizika.
+- Přístup k auditním logům je omezený rolí a sám se loguje.
+- Zákazník vidí srozumitelný výřez událostí svého účtu.
+- Incidentový runbook říká, jak auditní log použít.
+- Export auditního logu neobsahuje víc dat než samotné UI.
+- Jednou za čtvrtletí kontrolujeme, zda logujeme málo, dost a správně.
+
+### Mini šablona auditního návrhu
+
+```markdown
+# Auditní log: [produkt / modul]
+
+## Účel
+Proč log existuje:
+Kdo ho používá:
+Jaké rozhodnutí pomáhá udělat:
+
+## Události
+Bezpečnostní události:
+Administrátorské změny:
+Datové exporty / importy:
+Fakturační nebo smluvní změny:
+Co záměrně nelogujeme:
+
+## Struktura události
+Čas:
+Aktor:
+Akce:
+Objekt:
+Výsledek:
+Korelační ID:
+Bezpečný kontext:
+
+## Privacy-first hranice
+Zakázané hodnoty v logu:
+Pseudonymizace / maskování:
+Kdo vidí osobní identifikátory:
+
+## Přístupy
+Role s plným přístupem:
+Role s omezeným přístupem:
+Zákaznický výřez:
+Jak se loguje přístup k logu:
+
+## Retence
+Kategorie logů:
+Doba uchování:
+Mazání / agregace:
+Export při zrušení účtu:
+
+## Incidentové použití
+Kde je runbook:
+Jak najít časové okno:
+Jak propojit s aplikačními logy:
+Kdy eskalovat privacy / právní posouzení:
+```
+
+### Zdroje
+
+- EDPB: přehled k porušení zabezpečení osobních údajů a oznamování incidentů — https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en
+- EDPB: Guidelines 9/2022 on personal data breach notification under GDPR — https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en
+- ENISA: Cybersecurity guide for SMEs, praktický průvodce pro malé a střední firmy — https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes
+- ENISA: Technical implementation guidance on cybersecurity risk-management measures, část k identitám, přístupům a auditovatelnosti — https://www.enisa.europa.eu/sites/default/files/2025-06/ENISA_Technical_implementation_guidance_on_cybersecurity_risk_management_measures_version_1.0.pdf
+
+
 # Pracovní log
+- 2026-09-28: Doplněna příloha „Auditní logy bez špehovacího archivu“ s výběrem událostí podle dopadu, strukturou auditní události, pravidly proti ukládání tajemství, retenčním modelem, přístupovými rolemi, zákaznickým výřezem, vazbou na incidentový runbook, checklistem, šablonou a ověřenými zdroji EDPB a ENISA.
 - 2026-09-28: Doplněna příloha „Produktová dokumentace pro SaaS bez podpůrného chaosu“ s rozdělením dokumentace podle práce zákazníka, vrstvami rychlého startu/návodů/reference, jednotnou šablonou článku, vazbou na support, férovým popisem omezení, privacy-first datovými vysvětlivkami, navigací, revizní rutinou, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „SLA a servisní sliby bez korporátní mlhy“ s rozlišením dostupnosti, reakční doby a vyřešení, prioritami incidentů podle dopadu, servisními úrovněmi, privacy-first pravidly podpory, měřením bez ukládání obsahu ticketů, interním runbookem, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „Design systém pro malý web a SaaS bez komponentového divadla“ s inventurou opakovaných částí, tokeny podle účelu, komponentovými kartami, stavovými obrazovkami, privacy komponentami, dokumentační a release rutinou, checklistem a vyplnitelnou šablonou.
