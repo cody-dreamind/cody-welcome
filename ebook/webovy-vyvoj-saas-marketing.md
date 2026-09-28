@@ -11487,7 +11487,294 @@ Vlastník:
 AI chatbot má být malý, slušný a užitečný. Když návštěvníkovi pomůže rychleji najít odpověď a firmě nezaloží nový sklad osobních dat, dává smysl. Když jen překrývá špatný obsah a sbírá konverzace „pro jistotu“, je to drahý formulář s halucinacemi. A to už radši obyčejný kontakt, RSS a dobře napsané FAQ. Staromódní? Možná. Funkční? Překvapivě často.
 
 
+
+# Příloha: Design systém pro malý web a SaaS bez komponentového divadla
+
+Design systém nemusí být obří knihovna komponent, kterou po třech měsících používá už jen jeden designer a jeden frontendista pod tlakem kofeinu. Pro malý web nebo SaaS stačí praktický systém rozhodnutí: jak vypadají texty, barvy, formuláře, tlačítka, stavy, prázdné obrazovky, chyby a opakované části produktu. Cílem není mít „design systém“, protože to zní dospěle. Cílem je nemuset pokaždé znovu vymýšlet, jak má vypadat obyčejné upozornění nebo cenová karta.
+
+Dobrý mini design systém šetří čas, zvyšuje důvěryhodnost a pomáhá privacy-first provozu. Když jsou formuláře, souhlasy, chybové hlášky a nastavení účtu konzistentní, uživatel se nemusí učit pokaždé nové mikropravidlo. A když tým ví, které komponenty smí sbírat data a jak se mají popisovat, nevzniká datový cirkus maskovaný jako UX.
+
+> Codyho komentář: Komponentová knihovna bez pravidel je šuplík s nářadím, kde je šest kladiv, žádný metr a všichni tvrdí, že to je „škálovatelné“.
+
+### Začni inventurou opakování
+
+Nejdřív projdi aktuální web nebo aplikaci a napiš si, co se opakuje. Nezačínej Figma souborem ani npm balíčkem. Začni realitou.
+
+Hledej hlavně:
+
+- tlačítka a odkazy,
+- formulářová pole,
+- chybové a úspěšné stavy,
+- karty služeb, tarifů nebo funkcí,
+- tabulky a seznamy,
+- navigaci,
+- modální okna a potvrzení,
+- onboardingové kroky,
+- prázdné stavy,
+- systémové e-maily,
+- privacy texty u formulářů, souhlasů a nastavení účtu.
+
+Ke každé položce si poznamenej tři věci:
+
+```text
+Kde se opakuje:
+Co má uživatel pochopit:
+Jaké riziko vznikne, když bude varianta nekonzistentní:
+```
+
+Příklad: tlačítko „Odeslat poptávku“ se opakuje na homepage, stránce služby a v kontaktním formuláři. Uživatel má pochopit, že jde o nezávazný první kontakt. Riziko nekonzistence je, že jednou tlačítko působí jako objednávka, jinde jako dotaz a ve formuláři nikdo neví, co se stane po odeslání. To není estetický problém. To je obchodní i důvěrový problém.
+
+### Tokeny jsou dohoda, ne barevná poezie
+
+Design tokeny jsou pojmenované hodnoty: barvy, mezery, velikosti písma, rádiusy, stíny, případně animace. Pro malý tým stačí málo tokenů, ale musí mít jasný význam.
+
+Místo „modrá 500“ je často praktičtější:
+
+```text
+barva/akce/primarni
+barva/text/hlavni
+barva/text/tlumena
+barva/stav/uspech
+barva/stav/varovani
+barva/stav/chyba
+barva/pozadi/stranka
+barva/pozadi/karta
+mezera/xs
+mezera/s
+mezera/m
+mezera/l
+radius/karta
+radius/formular
+```
+
+Token má odpovídat účelu. Když později změníš vizuální styl, význam zůstane. Primární akce zůstane primární akce, i když už nebude modrá, ale třeba tmavě zelená. Ano, barvy mají kariérní změny taky.
+
+Privacy-first detail: vytvoř token nebo textový vzor pro datové poznámky u formulářů. Například:
+
+```text
+Použijeme jen pro odpověď na tuto poptávku. Nepřidáváme tě automaticky do newsletteru.
+```
+
+Když je takový text součást systému, nepíše se pokaždé znovu. Tím klesá riziko, že někde vznikne mlhavé „odesláním souhlasíte se vším od teď až do tepelné smrti vesmíru“.
+
+### Komponenty popiš podle práce
+
+Komponenta není jen vizuální objekt. Je to opakovaná práce v rozhraní. Každá důležitá komponenta má mít krátkou kartu:
+
+```text
+Název:
+Kdy použít:
+Kdy nepoužít:
+Povinné části:
+Varianty:
+Prázdný stav:
+Chybový stav:
+Přístupnost:
+Datové dopady:
+Příklad dobrého textu:
+```
+
+Příklad pro kontaktní formulář:
+
+```text
+Název: Krátký poptávkový formulář
+Kdy použít: První kontakt u služby nebo konzultace.
+Kdy nepoužít: Sběr support ticketů, registrace do aplikace, newsletter.
+Povinné části: jméno, e-mail, krátký popis problému, privacy poznámka, alternativa kontaktu.
+Varianty: služba, audit, obecný dotaz.
+Prázdný stav: žádný; formulář má být rovnou použitelný.
+Chybový stav: konkrétní oprava u pole, žádné obecné „něco se pokazilo“.
+Přístupnost: label u každého pole, chybová hláška propojená s polem, použitelná klávesnicí.
+Datové dopady: údaje slouží pouze k odpovědi, nepřidávat do marketingové databáze bez samostatného kroku.
+Příklad textu: „Napiš dvě věty o problému. Ozveme se s dalším krokem.“
+```
+
+Taková karta vypadá obyčejně, ale drží pohromadě design, vývoj, copywriting, obchod i soukromí. To je na malý tým docela solidní multipack.
+
+### Stavové obrazovky jsou součást produktu
+
+Mnoho webů vypadá dobře jen ve šťastné cestě. Jakmile není žádný obsah, něco selže nebo uživatel nemá oprávnění, najednou se objeví texty jako „Error 403“ a „Undefined“. To je produktový ekvivalent pokrčení ramen.
+
+Mini design systém má popsat alespoň tyto stavy:
+
+- načítání,
+- prázdný stav,
+- úspěch,
+- varování,
+- chyba,
+- nedostupnost služby,
+- nedostatečné oprávnění,
+- čekání na ruční akci týmu,
+- konec trialu nebo omezení tarifu.
+
+Každý stav má odpovědět na tři otázky:
+
+1. Co se stalo?
+2. Co může uživatel udělat teď?
+3. Co udělá systém nebo tým dál?
+
+Špatně:
+
+```text
+Chyba. Zkuste to znovu.
+```
+
+Lépe:
+
+```text
+Poptávku se nepodařilo odeslat. Zkontroluj připojení a zkus to znovu. Pokud chyba trvá, napiš nám přímo na hello@example.cz — text si zatím necháme v prohlížeči, neposíláme ho nikam dalšímu.
+```
+
+Tohle je delší, ale užitečné. Uživatel ví, co se děje, má náhradní cestu a zároveň rozumí práci s daty.
+
+### Privacy komponenty navrhuj jako první třídu
+
+Privacy-first web nemá mít soukromí nalepené v patičce jako právní náplast. Soukromí se projevuje v rozhraní.
+
+Do design systému proto patří:
+
+- datová poznámka u formuláře,
+- odkaz na zásady zpracování v kontextu, kde dávají smysl,
+- stav „data exportována“,
+- stav „účet čeká na smazání“,
+- potvrzení před destruktivní akcí,
+- nastavení e-mailových preferencí,
+- informace o tom, co se měří a proč,
+- vzor pro souhlas, pokud je opravdu potřeba,
+- vzor pro odmítnutí nepovinného sledování bez manipulace.
+
+Praktické pravidlo: pokud komponenta pracuje s osobními nebo firemně citlivými daty, má mít v popisu sekci „Datové dopady“. Ne právnický román. Stačí lidsky:
+
+```text
+Sbírá: e-mail, text zprávy.
+Nesbírá: telefon, velikost firmy, rozpočet.
+Ukládá se: do schránky a CRM pro odpověď.
+Retence: podle interní datové mapy.
+Uživatel vidí: krátkou poznámku u formuláře.
+```
+
+Tým tím získá jednoduchou brzdu proti „přidejme ještě jedno políčko, třeba se bude hodit“. Většina políček, která se „třeba budou hodit“, se pak hodí hlavně do auditu ostudy.
+
+### Dokumentace má být blízko práce
+
+Design systém pro malý tým nemusí mít vlastní portál. Stačí Markdown v repozitáři, stránka v dokumentaci, sdílený Figma soubor nebo jednoduchý interní web. Důležité je, aby dokumentace byla blízko rozhodnutí.
+
+Minimum dokumentace:
+
+```text
+/design-system/
+  01-zaklady.md
+  02-tokeny.md
+  03-komponenty.md
+  04-formulare-a-data.md
+  05-stavy-a-chyby.md
+  06-release-rutina.md
+```
+
+U každé komponenty přidej:
+
+- screenshot nebo odkaz na návrh,
+- odkaz na implementaci,
+- ukázku textu,
+- pravidla pro použití,
+- známé výjimky,
+- vlastníka.
+
+Vlastník není proto, aby si někdo připadal důležitě. Je proto, aby při otázce „můžeme ten formulář použít i pro onboarding?“ existoval člověk, který rozhodne, místo aby se tým tři dny díval na komentáře ve Figmě jako na archeologické naleziště.
+
+### Release rutina chrání systém před rozpadem
+
+Design systém se nerozpadne najednou. Rozpadá se drobnými výjimkami, které nikdo nevrátí zpět.
+
+Zaveď jednoduchou rutinu:
+
+- při nové obrazovce zkontroluj, jestli už existuje vhodná komponenta,
+- pokud vznikne nová varianta, napiš proč,
+- jednou měsíčně projdi výjimky,
+- nepoužívané varianty smaž nebo označ jako zastaralé,
+- při změně tokenu zkontroluj kritické obrazovky,
+- u privacy komponent vždy ověř text a datové dopady.
+
+Příklad rozhodnutí:
+
+```text
+Měníme sekundární tlačítko z outline na jemně vyplněné, protože outline varianta v kartách splývala s pozadím. Dopad: cenová stránka, onboarding, nastavení účtu. Privacy texty beze změny.
+```
+
+Tohle je malé, konkrétní a dohledatelné. Přesně typ záznamu, který za půl roku zachrání tým před větou „proč to tady vypadá jinak?“
+
+### Checklist: mini design systém bez divadla
+
+- [ ] Máme inventuru opakovaných UI částí.
+- [ ] Máme pojmenované základní tokeny podle účelu, ne jen podle barvy.
+- [ ] Každá klíčová komponenta má popis práce, variant a chybových stavů.
+- [ ] Formuláře mají datovou poznámku a minimální sadu polí.
+- [ ] Privacy související komponenty jsou v systému jako první třída, ne jako text v patičce.
+- [ ] Chybové, prázdné a nedostupné stavy říkají, co se stalo a co dál.
+- [ ] Dokumentace obsahuje odkazy na návrh, implementaci a vlastníka.
+- [ ] Nové výjimky se zapisují a jednou měsíčně čistí.
+- [ ] Nepoužívané varianty se mažou nebo označují jako zastaralé.
+- [ ] Před releasem kontrolujeme kritické obrazovky a formuláře.
+
+### Mini šablona komponentové karty
+
+```text
+# Komponenta: [název]
+
+## Práce komponenty
+Komponenta pomáhá uživateli [konkrétní úkol].
+
+## Kdy použít
+- [situace 1]
+- [situace 2]
+
+## Kdy nepoužít
+- [situace 1]
+- [situace 2]
+
+## Povinné části
+- [část]
+- [část]
+
+## Varianty
+- Výchozí:
+- Sekundární:
+- Chybová:
+- Prázdná:
+
+## Texty
+Nadpis:
+Popis:
+CTA:
+Chybová hláška:
+Úspěšná hláška:
+
+## Přístupnost
+Labely:
+Klávesnice:
+Kontrast:
+Chybové vazby:
+
+## Datové dopady
+Sbírá:
+Nesbírá:
+Ukládá se:
+Retence:
+Co říkáme uživateli:
+
+## Vlastník a údržba
+Vlastník:
+Odkaz na návrh:
+Odkaz na implementaci:
+Poslední revize:
+Známé výjimky:
+```
+
+Mini design systém je dobrý tehdy, když zrychlí běžnou práci a zpomalí špatná rozhodnutí. Nemusí být velký. Musí být používaný. Pokud po něm tým sáhne dřív, než vytvoří sedmou variantu stejného tlačítka, vyhrál jsi malou, ale důležitou válku proti chaosu.
+
+
 # Pracovní log
+- 2026-09-28: Doplněna příloha „Design systém pro malý web a SaaS bez komponentového divadla“ s inventurou opakovaných částí, tokeny podle účelu, komponentovými kartami, stavovými obrazovkami, privacy komponentami, dokumentační a release rutinou, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „AI chatbot na webu bez datového vysavače“ s vymezením práce chatbota, rizikovými kategoriemi dotazů, transparentním označením AI, datovou hranicí, kontrolovanou znalostní bází, guardrails, privacy-first měřením, testovacím postupem, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „Nákup SaaS nástrojů bez firemního bazaru dat“ s problémovou větou před nákupem, rozdělením podle datového rizika, pravidly pro trial bez produkčních dat, otázkami na dodavatele, evropským provozním filtrem, 30denní kontrolou, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „Incidentová komunikace a status page bez mlhy“ s pravidly veřejné komunikace, první zprávy, náhradních postupů, privacy-first status page, postmortemu, checklistem a vyplnitelnou šablonou.
