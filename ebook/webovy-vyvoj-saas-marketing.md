@@ -10603,7 +10603,211 @@ Férové zrušení:
 - European Data Protection Board: [Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en)
 
 
+
+## Příloha: Externí spolupráce bez datového průvanu
+
+Freelancer, agentura nebo konzultant umí malému týmu zrychlit práci brutálně. Taky ale umí omylem otevřít víc dveří, než je potřeba. Ne proto, že by byl zlý. Spíš proto, že „pošli mi přístup a já se na to mrknu“ je nejrychlejší věta k provoznímu průvanu.
+
+Cílem není externisty dusit procesem. Cílem je dát jim přesně tolik kontextu, přístupů a dat, kolik potřebují pro konkrétní výsledek. Nic míň, protože by se práce zasekla. Nic víc, protože pak už neřídíš spolupráci, ale doufáš.
+
+> Codyho komentář: Dobrý onboarding externisty není hrad z formulářů. Je to cedule „tudy se jde, tady nesahat, když hoří, volej sem“.
+
+### Začni výsledkem, ne přístupem
+
+Než někomu pošleš pozvánku do repozitáře, analytiky nebo administrace, napiš pracovní zadání ve třech větách:
+
+```text
+Potřebujeme dodat: [konkrétní výstup]
+Externista k tomu musí vidět: [minimum kontextu]
+Externista k tomu nemusí vidět: [citlivé nebo zbytečné části]
+```
+
+Příklad pro copywritera:
+
+```text
+Potřebujeme dodat: návrh textu landing page pro nový B2B audit.
+Externista k tomu musí vidět: brief služby, anonymizované otázky zákazníků, současný web a tón komunikace.
+Externista k tomu nemusí vidět: CRM, konkrétní obchodní e-maily, fakturaci ani interní poznámky k leadům.
+```
+
+Příklad pro vývojáře:
+
+```text
+Potřebujeme dodat: opravu formuláře a lepší validaci chyb.
+Externista k tomu musí vidět: repozitář, lokální dev instrukce, testovací e-mailovou schránku a staging.
+Externista k tomu nemusí vidět: produkční databázi, platební systém ani administraci hostingu mimo staging deploy.
+```
+
+Tohle jednoduché rozdělení často ušetří víc rizika než složitý bezpečnostní dokument, který nikdo nečte.
+
+### Udělej přístupovou mapu
+
+Každá externí spolupráce má mít přístupovou mapu. Klidně v obyčejné tabulce. Důležité je, aby bylo vidět, kdo má co, proč a dokdy.
+
+Minimum sloupců:
+
+- osoba nebo firma,
+- role ve spolupráci,
+- systémy, kam má přístup,
+- typ přístupu: čtení, zápis, admin, deploy, fakturace,
+- důvod přístupu,
+- datum vytvoření,
+- datum revize nebo odebrání,
+- vlastník uvnitř týmu.
+
+Špatný signál: „Má přístup, protože ho měl už u minulého projektu.“ Přístup není suvenýr. Když se mění projekt, mění se i důvod.
+
+### Sdílej ukázky, ne živá data
+
+Externista často potřebuje vidět realitu: typické poptávky, chování uživatelů, chyby v produktu, obsah ticketů. To neznamená, že potřebuje celé živé CRM nebo export databáze.
+
+Lepší postup:
+
+1. Vyber pět až deset reprezentativních příkladů.
+2. Odstraň osobní údaje, interní poznámky a obchodní detaily, které nesouvisí s úkolem.
+3. Označ, co je skutečný vzor a co je syntetický příklad.
+4. Přidej kontext: proč je příklad důležitý, co se z něj má pochopit.
+5. Ulož sdílený balíček na místo, které jde po skončení spolupráce rychle odpojit.
+
+Příklad anonymizace pro marketingový audit:
+
+```text
+Původní poznámka:
+Jan Novák z Firma ABC psal po callu, že jejich CFO blokuje cenu a že srovnávají s konkurencí X.
+
+Bezpečnější pracovní vzor:
+B2B lead z výrobní firmy po úvodním callu řešil interní schválení ceny a porovnával nabídku s levnější alternativou. Námitka: nejistá návratnost v prvních 3 měsících.
+```
+
+Externista dostane obchodní insight, ale ne zbytečné osobní a firemní detaily.
+
+### Odděl prostředí podle rizika
+
+Ne každý přístup je stejný. Čtení dokumentace není totéž jako přístup k produkčním logům. Staging není produkce. A „jen na chvilku admin“ je oblíbená poslední věta před tím, než někdo smaže něco důležitého s výrazem překvapeného sysla.
+
+Praktické dělení:
+
+- **Veřejný kontext:** web, dokumentace, veřejné články, release notes.
+- **Pracovní kontext:** briefy, anonymizované příklady, projektová komunikace.
+- **Vývojové prostředí:** repozitář, lokální `.env.example`, seed data, staging.
+- **Citlivý provoz:** produkční data, fakturace, zákaznická komunikace, access management.
+- **Kritická kontrola:** DNS, hosting, platební brány, e-mailová doména, zálohy.
+
+Externista by měl běžně pracovat v prvních třech vrstvách. Do citlivého provozu jen s jasným důvodem, časovým omezením a dohledem vlastníka. Kritická kontrola má zůstat uvnitř týmu, pokud nejde o výslovně domluvenou provozní roli.
+
+### Secrets neposílej chatem
+
+Přístupové údaje a tokeny nepatří do chatu, e-mailu ani komentáře v ticketu. Ani když „je to jen staging“. Staging se časem zvláštně často promění v poloprodukci, protože realita má smysl pro humor.
+
+Bezpečnější pravidla:
+
+- používej správce hesel nebo nástroj na jednorázové sdílení tajemství,
+- posílej pozvánky na osobní účty, ne sdílené účty typu `agency@firma.cz`,
+- preferuj role a skupiny před ručním přidělováním práv,
+- nastav dvoufaktorové ověření tam, kde přístup může změnit data,
+- nikdy neposílej produkční dump „jen pro lokální test“,
+- tokeny po skončení spolupráce rotuj, pokud mohly být zkopírované mimo kontrolované úložiště.
+
+Důležité je rozlišit heslo a oprávnění. Když má externista vlastní účet s omezenou rolí, můžeš přístup odebrat. Když sdílíš jeden univerzální admin účet, nemáš spolupráci pod kontrolou. Máš společné auto s klíčky pod rohožkou.
+
+### Komunikace: jedno místo pravdy
+
+Externí spolupráce se rozpadá, když část zadání žije v e-mailu, část v chatu, část v hovoru a část v hlavě zakladatele. To není agilita. To je archeologie.
+
+Pro každou spolupráci určete:
+
+- kde je aktuální zadání,
+- kde se hlásí blokery,
+- kde se schvalují změny rozsahu,
+- kde jsou odkazy na přístupy a pracovní materiály,
+- kdo rozhoduje při sporu o prioritu,
+- jak vypadá hotovo.
+
+Privacy-first detail: do projektového nástroje nepatří plné přepisy zákaznických komunikací, pokud nejsou nutné. Často stačí shrnutí problému, segment a dopad. Čím méně citlivých dat v běžných nástrojích koluje, tím jednodušší je spolupráci po čase uklidit.
+
+### Offboarding je součást dodávky
+
+Spolupráce nekončí poslední fakturou. Končí až ve chvíli, kdy tým umí výsledek převzít a přístupy jsou uklizené.
+
+Offboarding udělej jako malý checklist:
+
+- výstupy jsou předané na domluveném místě,
+- dokumentace obsahuje provozní poznámky a známá omezení,
+- otevřené úkoly mají vlastníka,
+- přístupy jsou odebrané nebo snížené,
+- sdílené odkazy jsou zkontrolované,
+- tokeny a webhooky jsou rotované tam, kde to dává smysl,
+- externista potvrdil smazání lokálních kopií pracovních dat, pokud je měl,
+- tým ví, koho kontaktovat při pozdějším dotazu.
+
+U kreativní práce navíc zapiš, které zdrojové soubory patří firmě a kde jsou uložené. U vývoje zapiš, jak změnu nasadit, testovat a vrátit zpět. U marketingu zapiš, které kampaně, odkazy a UTM značky zůstávají aktivní.
+
+### Checklist: externí spolupráce bez datového průvanu
+
+- [ ] Zadání říká konkrétní výstup, ne jen obecnou aktivitu.
+- [ ] Je jasné, jaký kontext externista potřebuje a co nepotřebuje.
+- [ ] Existuje přístupová mapa s vlastníkem a datem revize.
+- [ ] Produkční data nejsou sdílená, pokud to není nezbytné.
+- [ ] Pracovní příklady jsou anonymizované nebo syntetické.
+- [ ] Externista používá vlastní účet, ne sdílený admin účet.
+- [ ] Secrets nejsou posílané chatem ani e-mailem.
+- [ ] Staging a testovací data jsou oddělené od produkce.
+- [ ] Je domluvené jedno místo pravdy pro zadání a rozhodnutí.
+- [ ] Offboarding obsahuje předání výstupů, odebrání přístupů a úklid dat.
+
+### Mini šablona onboardingového listu externisty
+
+```text
+# Externí spolupráce: [projekt / dodavatel]
+
+## Cíl spolupráce
+Výstup:
+Termín:
+Vlastník uvnitř týmu:
+Rozhoduje o rozsahu:
+
+## Kontext
+Co externista musí vědět:
+1.
+2.
+3.
+
+Co externista vědět nemusí:
+1.
+2.
+3.
+
+## Přístupy
+Systém:
+Role:
+Důvod:
+Vytvořeno dne:
+Revize / odebrání dne:
+Vlastník přístupu:
+
+## Data
+Použitá pracovní data:
+Anonymizace nebo syntetická data:
+Data, která nesmí opustit interní prostředí:
+Retence pracovních kopií:
+
+## Komunikace
+Místo pravdy pro zadání:
+Kanál pro blokery:
+Rytmus kontroly:
+Definice hotovo:
+
+## Offboarding
+Předané výstupy:
+Dokumentace:
+Odebrané přístupy:
+Rotované tokeny:
+Potvrzený úklid pracovních kopií:
+Poznámky pro budoucí spolupráci:
+```
+
 # Pracovní log
+- 2026-09-28: Doplněna příloha „Externí spolupráce bez datového průvanu“ s pravidly minimálních přístupů, anonymizací pracovních ukázek, oddělením prostředí, bezpečným sdílením secrets, offboardingem, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „Produktové demo a trial bez datového vysavače“ s návrhem typů demo/trialu, minimálním sběrem dat, první hodnotnou akcí, férovou kartou, privacy-first měřením, e-mailovou sekvencí, checklistem a vyplnitelnou šablonou.
 - 2026-09-28: Doplněna příloha „Exit plán dodavatele bez paniky“ s rozdělením dodavatelů podle kritičnosti, ověřováním exportu, mapou DNS/e-mailů/webhooků, migračním postupem, zákaznickou komunikací, checklistem a vyplnitelnou šablonou.
 
