@@ -17779,7 +17779,231 @@ To nejsou opatření. To jsou přání s helmou.
 - [EUR-Lex: Directive (EU) 2022/2555 — NIS2](https://eur-lex.europa.eu/eli/dir/2022/2555/oj)
 - [ENISA: Threats and Incidents](https://www.enisa.europa.eu/topics/state-of-cybersecurity-in-the-eu/threats-and-incidents)
 
+# Příloha: Produktové rozhovory bez výslechu a datového lovu
+
+Produktový rozhovor má pomoct pochopit, jak člověk přemýšlí, rozhoduje se a kde se zasekne. Nemá být skrytý formulář, policejní výslech ani levná náhrada za analytiku se slovy „jen nám řekněte všechno“. U privacy-first SaaS je rozhovor obzvlášť cenný právě proto, že sbírá méně dat, ale víc kontextu. Když se ptáš dobře, nepotřebuješ sledovat každý pohyb myši jako digitální ornitolog s dalekohledem.
+
+Rozhovory jsou užitečné pro nové funkce, onboarding, cenovou stránku, dokumentaci, retenci i podporu. Největší chyba je brát je jako volné povídání bez cíle. Druhá největší chyba je nahrávat všechno, přepisovat všechno, ukládat všechno a pak doufat, že se v tom jednou najde strategie. Nenajde. Najde se tam jen chaos, osobní údaje a budoucí bolehlav.
+
+> Codyho komentář: Kvalitní produktový rozhovor není o tom, aby zákazník navrhl funkci. Je o tom, aby tým pochopil situaci, ve které zákazník funkci vůbec začne potřebovat.
+
+## Nejdřív napiš výzkumné rozhodnutí
+
+Před pozvánkou si napiš jednu větu: jaké rozhodnutí má rozhovor zlepšit. Pokud ji neumíš napsat, rozhovor bude sběr zajímavostí. Zajímavosti jsou fajn u kávy, horší v roadmapě.
+
+Dobré výzkumné otázky:
+
+- Proč noví uživatelé nedokončí první důležitý krok?
+- Jak zákazníci popisují problém předtím, než hledají řešení?
+- Které informace chybí na cenové stránce při B2B rozhodování?
+- Co musí zákazník ukázat kolegovi, aby mohl službu obhájit?
+- Které části onboardingu působí nedůvěryhodně nebo zbytečně složitě?
+
+Slabé otázky:
+
+- Co byste chtěli v produktu?
+- Líbí se vám náš nový design?
+- Používali byste AI modul?
+- Kolik byste za to dali?
+
+Slabé otázky často vedou k hypotetickým odpovědím. Prakticky cennější jsou otázky na poslední konkrétní situaci: kdy jste to naposledy řešili, co jste zkusili, kdo do toho mluvil, co vás zdrželo, podle čeho jste se rozhodli.
+
+## Pozvánka musí být férová
+
+Pozvánka má být krátká, srozumitelná a bez nátlaku. Člověk má vědět, proč ho zveš, kolik času to zabere, jestli se bude nahrávat, kdo uvidí poznámky a že může odmítnout bez dopadu na službu. Pokud dáváš odměnu, napiš ji rovnou. Nech z toho nedělat tajemnou loterii, kde výhra je další kalendářová pozvánka.
+
+Minimální text pozvánky:
+
+```text
+Ahoj [jméno],
+
+zlepšujeme [část produktu] a rád bych pochopil, jak dnes řešíte [situace].
+Šlo by o 30 minutový rozhovor. Nejde o prodejní call.
+
+Budeme si psát poznámky. Nahrávání použijeme jen pokud s tím budete výslovně souhlasit; nahrávku po shrnutí smažeme do [doba]. Citace použijeme jen anonymizovaně nebo po samostatném schválení.
+
+Odmítnutí samozřejmě nijak neovlivní používání služby.
+
+Díky!
+```
+
+Pokud jde o zákazníky v EU, ber nahrávky, přepisy a citace jako osobní data, dokud nejsou bezpečně anonymizované. Evropská komise připomíná základní práva lidí u zpracování osobních údajů včetně transparentních informací a přístupu k údajům. EDPB ve svých pokynech ke souhlasu zdůrazňuje, že souhlas má být svobodný, konkrétní, informovaný a jednoznačný. Přeloženo do normální řeči: neschovávej nahrávání do kalendáře jako ninja checkbox.
+
+## Nahrávka není výchozí režim
+
+Nahrávka je pohodlná pro tým, ne automaticky nutná pro výzkum. Výchozí režim může být ruční zápis. Nahrávku používej, když:
+
+- potřebuješ přesně citovat formulaci zákazníka,
+- rozhovor vede jeden člověk a nestíhá zapisovat,
+- řešíš složité workflow nebo obrazovku,
+- máš jasnou retenci a omezené přístupy,
+- účastník s nahráváním aktivně souhlasil.
+
+Nahrávku nepoužívej, když:
+
+- se řeší citlivé obchodní nebo osobní informace,
+- účastník váhá nebo souhlas působí vynuceně,
+- stačí stručné závěry,
+- nemáš nastavené mazání,
+- nemáš pod kontrolou, kde přepisovací nástroj data zpracuje.
+
+Privacy-first minimum: pokud nahrávku vytvoříš, po zpracování ji smaž a ponech jen anonymizované poznámky, rozhodnutí a případné schválené citace. Surová nahrávka není znalost. Je to rizikový mezistupeň.
+
+## Scénář drž krátký a otevřený
+
+Scénář rozhovoru není dotazník s třiceti body. Lepší je 5 až 7 otevřených otázek a prostor na doptání.
+
+Struktura 30minutového rozhovoru:
+
+1. **2 minuty** — připomenutí účelu, nahrávání, použití poznámek.
+2. **5 minut** — kontext člověka a jeho role.
+3. **10 minut** — poslední konkrétní situace nebo problém.
+4. **8 minut** — cesta, překážky, rozhodování, workaroundy.
+5. **3 minuty** — co by udělalo situaci jednodušší.
+6. **2 minuty** — souhlas s případnou citací, další kontakt, poděkování.
+
+Ptejte se na minulost a realitu:
+
+- „Kdy jste to naposledy řešili?“
+- „Co byl první signál, že je problém?“
+- „Koho jste do toho museli zapojit?“
+- „Kde jste hledali odpověď?“
+- „Co jste udělali místo našeho produktu?“
+- „Co by se stalo, kdyby se to nevyřešilo?“
+
+Vyhýbej se otázkám, které podsouvají odpověď: „Bylo by super, kdybychom vám přidali automatizaci, že jo?“ To není výzkum. To je kompliment v převleku za metodiku.
+
+## Poznámky anonymizuj už při zápisu
+
+Nečekej na anonymizaci „později“. Později je místo, kam chodí datová hygiena umřít.
+
+Zapisuj:
+
+- segment zákazníka místo jména,
+- roli místo konkrétní osoby,
+- problém vlastními slovy zákazníka,
+- dopad na práci nebo obchod,
+- workaround,
+- důkaz nebo citaci bez identifikátorů,
+- odkaz na souhlas, pokud citaci chceš použít veřejně.
+
+Nezapisuj, pokud to není nutné:
+
+- celé jméno účastníka v každé poznámce,
+- e-mail, telefon nebo interní ID zákazníka,
+- názvy třetích stran, které nejsou relevantní,
+- obsah obrazovky, faktur, smluv nebo ticketů,
+- osobní detaily mimo výzkumný účel.
+
+Praktická forma zápisu:
+
+| Pole | Příklad |
+|---|---|
+| Segment | B2B SaaS, 20–50 lidí |
+| Role | Operations manager |
+| Situace | Před měsíčním reportem ručně spojuje data ze tří nástrojů |
+| Bolest | Neví, kterému číslu věřit |
+| Workaround | Export do tabulky a ruční kontrola |
+| Citace | „Nejhorší je, že chyba se objeví až na poradě.“ |
+| Produktový dopad | Potřebujeme ukázat zdroj a čas poslední synchronizace |
+
+## Syntéza není cherry-picking
+
+Po třech až pěti rozhovorech nedělej závěr stylem „jeden člověk řekl přesně to, co jsme chtěli slyšet, takže hurá do sprintu“. Hledej vzory, rozpory a otázky, které zůstaly otevřené.
+
+Jednoduchá syntéza:
+
+- **Vzory:** co se opakovalo u více lidí.
+- **Rozpory:** kde se segmenty liší.
+- **Citace:** krátké anonymizované formulace, které vysvětlují problém.
+- **Důsledky:** co to znamená pro produkt, web, onboarding nebo dokumentaci.
+- **Rozhodnutí:** co uděláme, co neuděláme a co ověříme dál.
+
+Každý závěr označ sílou důkazu:
+
+- **Silný signál:** opakuje se napříč segmenty a podporují ho i provozní data.
+- **Střední signál:** opakuje se u několika lidí, ale potřebuje další ověření.
+- **Slabý signál:** zajímavá jednotlivost, ne rozhodnutí pro roadmapu.
+
+## Výzkumné poznatky musí mít retenci
+
+Výzkumné poznámky nejsou věčné. Nastav retenci podle užitečnosti:
+
+- surové nahrávky: dny až týdny podle potřeby zpracování,
+- přepisy: krátce, pokud nejsou anonymizované,
+- anonymizované poznámky: podle životnosti produktu nebo tématu,
+- schválené citace: dokud platí souhlas a kontext,
+- seznam účastníků: jen pro evidenci souhlasu, odměn a případného follow-upu.
+
+Odděl seznam účastníků od výzkumných poznámek. V poznámkách používej kód rozhovoru nebo segment. Když někdo požádá o výmaz nebo omezení, nechceš hledat jeho jméno v pěti náhodných dokumentech s názvem „research_final_final_opravdu“.
+
+## Checklist: produktové rozhovory bez datového lovu
+
+- [ ] Máme napsané rozhodnutí, které má výzkum zlepšit.
+- [ ] Pozvánka říká účel, délku, použití poznámek a nahrávání.
+- [ ] Nahráváme jen s aktivním souhlasem a jasnou retencí.
+- [ ] Víme, kde se případná nahrávka a přepis zpracují.
+- [ ] Zapisujeme segmenty, role a situace místo zbytečných identifikátorů.
+- [ ] Citace anonymizujeme nebo používáme jen se samostatným schválením.
+- [ ] Syntéza rozlišuje silné, střední a slabé signály.
+- [ ] Surové podklady mažeme podle předem daného pravidla.
+- [ ] Výstup končí rozhodnutím, ne jen hezkým dokumentem.
+
+## Mini šablona výzkumné karty
+
+```markdown
+# Výzkumná karta: [téma]
+
+## Rozhodnutí
+- Jaké rozhodnutí má výzkum zlepšit:
+- Co už víme:
+- Co nesmíme sbírat:
+
+## Účastníci
+- Segment:
+- Role:
+- Počet rozhovorů:
+- Odměna / poděkování:
+
+## Data a souhlas
+- Budeme nahrávat? ano / ne
+- Kde se zpracuje nahrávka nebo přepis:
+- Retence surových podkladů:
+- Retence anonymizovaných poznámek:
+- Kdo má přístup:
+
+## Scénář
+1. Kontext a role
+2. Poslední konkrétní situace
+3. Kroky a workaroundy
+4. Dopad problému
+5. Co by pomohlo
+
+## Syntéza
+- Opakující se vzory:
+- Rozpory mezi segmenty:
+- Schválené / anonymizované citace:
+- Silné signály:
+- Slabé signály:
+
+## Rozhodnutí
+- Uděláme:
+- Neuděláme:
+- Ověříme dál:
+- Vlastník:
+- Termín:
+```
+
+## Zdroje
+
+- [European Commission: Data protection under GDPR](https://commission.europa.eu/law/law-topic/data-protection/data-protection-eu_en)
+- [EDPB: Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en)
+- [Nielsen Norman Group: User Interviews](https://www.nngroup.com/articles/user-interviews/)
+- [Nielsen Norman Group: Interviewing Users](https://www.nngroup.com/articles/interviewing-users/)
+
 # Pracovní log
+
+- 2026-09-29: Doplněna příloha „Produktové rozhovory bez výslechu a datového lovu“ s praktickým postupem pro výzkumné rozhodnutí, férovou pozvánku, nahrávání a retenci, scénář rozhovoru, anonymizované poznámky, syntézu signálů, checklist, výzkumnou kartu a ověřené zdroje Evropské komise, EDPB a Nielsen Norman Group.
 
 - 2026-09-29: Doplněna příloha „Incident response bez paniky a datového požáru“ s praktickým rozdělením incidentů, první hodinou reakce, rolemi, triáží podle dopadu, data breach posouzením, komunikací, časovou osou, postmortem, checklistem, incident kartou a ověřenými zdroji Evropské komise, EDPB, EUR-Lex a ENISA.
 
