@@ -19394,7 +19394,213 @@ SLA má být most mezi obchodem, produktem, podporou a provozem. Když je napsan
 
 ---
 
+# Příloha: Dodavatelské přístupy a servisní účty bez klíčů pod rohožkou
+
+Malý tým často nezačne bezpečnostní průšvih sofistikovaným útokem. Začne ho tím, že „dočasně“ pošle dodavateli admin účet, nechá starý API token v produkci, sdílí jeden servisní účet mezi třemi integracemi a nikdo už neví, kdo přesně má kam přístup. To není zlá vůle. To je provozní entropie v montérkách.
+
+Privacy-first provoz neznamená, že nikdy nikomu nedáš přístup. Znamená, že každý přístup má účel, vlastníka, rozsah, expiraci a auditní stopu. Dodavatel nemá dostat klíče od celého domu jen proto, že potřebuje opravit jednu zásuvku.
+
+> Codyho komentář: Sdílený admin účet je jako firemní deštník. Všichni přísahají, že ho vrátí. Pak přijde déšť, audit nebo incident a najednou je deštník v paralelním vesmíru.
+
+## Nejdřív odděl lidi, systémy a dodavatele
+
+Přístupy se nemají řídit podle nálady v chatu, ale podle typu identity. Minimálně rozlišuj:
+
+- interní uživatel: člověk z týmu,
+- externí dodavatel: člověk mimo tým, který pracuje na konkrétním úkolu,
+- servisní účet: ne-lidská identita pro integraci, cron, worker nebo CI/CD,
+- nouzový účet: výjimečný break-glass přístup pro incident,
+- veřejný nebo anonymní přístup: dokumentace, status page, landing page.
+
+Každý typ má jiný režim. Interní účet má onboarding a offboarding. Dodavatel má omezený čas a rozsah. Servisní účet má technický účel a rotaci tajemství. Nouzový účet má být zamčený, monitorovaný a otestovaný. Anonymní přístup nesmí omylem otevírat interní data.
+
+Praktické minimum: v tabulce nebo interní kartě eviduj, kdo nebo co přístup používá, proč existuje, jaká data vidí, kdo je vlastník, kdy se má zkontrolovat a jak se vypíná. Bez vlastníka je přístup sirotek. A sirotci v IAM nebývají roztomilí.
+
+## Dodavatel dostává práci, ne celé království
+
+Externí dodavatel často potřebuje přístup rychle: opravit web, nastavit analytiku, zkontrolovat fakturaci, napojit API, vyřešit incident. Rychlost je v pořádku. Problém je, když rychlost vymaže hranice.
+
+Dobré zadání přístupu odpoví na pět otázek:
+
+- Jakou konkrétní práci má dodavatel udělat?
+- Jaký minimální přístup k tomu potřebuje?
+- Potřebuje produkci, nebo stačí staging/export/anonymizovaný vzorek?
+- Kdy přístup vyprší?
+- Kdo ověří, že po dokončení zmizel?
+
+Příklad: místo „dejme agentuře admin do CMS“ napiš: „Agentura má na 14 dní editor přístup jen do blogových článků a mediální knihovny, bez uživatelů, objednávek, fakturace a nastavení integrací.“ To je rozdíl mezi spoluprací a bezpečnostním výletem bez mapy.
+
+Pokud dodavatel potřebuje produkční data, ptej se proč. Často stačí screenshot, staging, anonymizovaný export nebo společná obrazovka bez předání účtu. Produkční přístup má být vědomé rozhodnutí, ne defaultní pozvánka.
+
+## Servisní účty pojmenuj podle účelu
+
+Servisní účet není „robot@firma.cz“. To je technická mlha. Název má říct, co účet dělá a kde běží.
+
+Lepší názvy:
+
+- `svc-billing-webhook-prod`,
+- `svc-search-indexer-prod`,
+- `svc-backup-readonly-prod`,
+- `svc-ci-deploy-staging`,
+- `svc-rss-publisher-prod`.
+
+Ke každému servisnímu účtu napiš:
+
+- účel,
+- prostředí,
+- vlastník,
+- povolené akce,
+- přístup k datům,
+- kde je tajemství uložené,
+- rotační rytmus,
+- plán vypnutí.
+
+Servisní účet nesmí být pohodlná náhrada za lidského admina. Nemá se přes něj ručně klikat do administrace. Nemá mít e-mailovou schránku plnou resetů hesel. Nemá mít globální oprávnění jen proto, že v první verzi integrace nebyl čas. První verze může být jednoduchá, ale ne slepá.
+
+## Least privilege není paranoia, ale úklid
+
+Princip nejmenších oprávnění říká: účet má mít jen ta práva, která potřebuje pro svou práci. OWASP ho doporučuje jako základ robustní autorizace a upozorňuje, že chyby v přístupových právech mohou otevřít osobní údaje, soubory, databázové záznamy nebo rizikové akce. CISA ve svých doporučeních IAM výslovně zahrnuje i servisní a systémové účty, nejen lidské uživatele.
+
+V praxi to znamená:
+
+- integrace pro fakturační export nepotřebuje mazat zákazníky,
+- analytics worker nepotřebuje číst obsah zpráv,
+- backup účet nepotřebuje zapisovat do produkční databáze,
+- support role nepotřebuje měnit billing nastavení,
+- CI/CD pro staging nepotřebuje produkční tajemství,
+- agentura pro obsah nepotřebuje seznam uživatelů.
+
+Když nejde oprávnění jemně nastavit, ber to jako riziko nástroje. Někdy je to důvod nástroj odmítnout nebo ho používat jen s méně citlivými daty. Privacy-first provoz není jen o právních dokumentech. Je to i o tom, že rozhraní nedovolí zbytečně moc škody.
+
+## Expirace je levnější než hon na zapomenuté účty
+
+Každý externí přístup má mít datum konce. Ne „až se to dodělá“, protože to je v IT časová jednotka z pohádek. Konkrétní datum.
+
+Používej jednoduchá pravidla:
+
+- jednorázová konzultace: přístup na den nebo týden,
+- implementační sprint: přístup do konce sprintu plus krátká rezerva,
+- dlouhodobý dodavatel: měsíční nebo kvartální review,
+- incident: přístup jen po dobu zásahu a následné revize,
+- servisní účet: pravidelná kontrola podle rizika integrace.
+
+Pokud nástroj neumí expiraci přístupu, nastav si připomínku v kalendáři nebo issue trackeru. Není to elegantní, ale je to lepší než doufat, že si někdo za půl roku vzpomene. Doufání není kontrolní mechanismus. Je to jen pomalý bug.
+
+## Tajemství nepatří do chatu ani do e-mailu
+
+API klíče, hesla, tokeny a privátní certifikáty neposílej přes běžný chat, e-mail ani dokumenty. Ani „jen jednou“. Právě tak vznikají historické vrstvy tajemství, které pak nejdou dohledat.
+
+Praktický režim:
+
+- používej správce tajemství nebo password manager s auditní stopou,
+- předávej přístup přes role, ne přes sdílené heslo,
+- pro dodavatele vytvářej vlastní účet, ne kopii interního účtu,
+- tokeny omezuj rozsahem, prostředím a expirací,
+- po dokončení práce token otoč nebo zruš,
+- tajemství nikdy neukládej do repozitáře, screenshotu ani support ticketu.
+
+U malého týmu stačí začít obyčejně: jeden schválený password manager, pojmenované položky, skupiny podle rolí, zákaz sdílení přes chat a měsíční kontrola nových tajemství. Není třeba kupovat katedrálu IAM nástrojů dřív, než máš dveře na panty.
+
+## Auditní stopa má odpovědět na čtyři otázky
+
+U citlivých přístupů potřebuješ vědět:
+
+- kdo přístup použil,
+- kdy ho použil,
+- co změnil nebo četl,
+- kdo přístup schválil.
+
+Nemusíš logovat obsah zákaznických dat. Naopak: audit má popsat akci, ne znovu skladovat citlivý obsah. Dobrý auditní záznam vypadá například takto:
+
+```text
+2026-09-29 10:32 UTC | contractor:novak@example.eu | role:cms-editor | akce:update_article | objekt:blog_post_842 | schválil:owner@firma.eu | důvod:obsahový sprint září
+```
+
+Špatný auditní záznam je screenshot celé administrace s osobními údaji v poznámce „pro jistotu“. To není jistota. To je datový suvenýr.
+
+## Offboarding přístupů dělej jako rutinu
+
+Každý projekt s dodavatelem má mít závěrečný přístupový úklid. Ne jako drama, ale jako normální položku v done definici.
+
+Postup:
+
+1. Zkontroluj, které účty a tokeny byly vytvořené.
+2. Odeber lidské účty nebo změň jejich roli na neaktivní.
+3. Zruš dočasné tokeny a klíče.
+4. Otoč sdílená tajemství, pokud se jim nešlo vyhnout.
+5. Zkontroluj logy posledních přístupů.
+6. Přesuň dokumentaci do interní znalostní báze.
+7. Uzavři kartu přístupu s datem a vlastníkem.
+
+U dlouhodobých dodavatelů nedělej offboarding až při rozchodu. Dělej kvartální přístupové review: co pořád potřebují, co už nepotřebují a co mezitím vzniklo bokem. Shadow IT miluje boky.
+
+## Checklist: dodavatelské přístupy bez rohožky
+
+- [ ] Každý lidský i servisní přístup má vlastníka a účel.
+- [ ] Externí dodavatelé mají vlastní účty, ne sdílené interní identity.
+- [ ] Produkční přístup je výjimka s odůvodněním, ne default.
+- [ ] Servisní účty jsou pojmenované podle účelu a prostředí.
+- [ ] Oprávnění odpovídají konkrétní práci, ne pohodlí administrátora.
+- [ ] Dočasné přístupy mají expiraci nebo připomínku kontroly.
+- [ ] Tajemství se předávají přes schválený nástroj, ne přes chat/e-mail.
+- [ ] Auditní stopa ukládá akce a metadata, ne citlivý obsah.
+- [ ] Po dokončení práce proběhne odebrání účtů a rotace tokenů.
+- [ ] Kvartálně kontrolujeme aktivní dodavatele, servisní účty a staré tokeny.
+
+## Mini šablona přístupové karty
+
+```markdown
+# Přístupová karta: [dodavatel / servisní účet]
+
+## Identita
+Typ identity:
+Název účtu:
+Vlastník:
+Dodavatel / systém:
+
+## Účel
+Práce, kvůli které přístup existuje:
+Prostředí:
+Potřebná data:
+Nepovolená data:
+
+## Oprávnění
+Role:
+Povolené akce:
+Zakázané akce:
+Produkční přístup: ano/ne + důvod
+
+## Tajemství
+Kde jsou uložená:
+Kdo je může číst:
+Rotace:
+Poslední rotace:
+
+## Čas
+Začátek přístupu:
+Expirace / další review:
+Schválil:
+
+## Audit a offboarding
+Kde jsou logy:
+Co zkontrolovat při ukončení:
+Datum odebrání:
+Poznámka:
+```
+
+Dodavatelské přístupy nejsou jen bezpečnostní detail. Jsou to dveře do produktu, dat a důvěry zákazníků. Když jsou popsané, omezené a pravidelně uklízené, spolupráce je rychlejší i bezpečnější. Když jsou chaotické, každá další integrace přidává další klíč pod rohožku. A jednou někdo zjistí, že rohožka už je vlastně celý security model.
+
+## Zdroje
+
+- [OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)
+- [OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
+- [CISA: Identity and Access Management Recommended Best Practices for Administrators](https://www.cisa.gov/sites/default/files/2023-12/ESF%20IDENTITY%20AND%20ACCESS%20MANAGEMENT%20RECOMMENDED%20BEST%20PRACTICES%20FOR%20ADMINISTRATORS%20PP-23-0248_508C.pdf)
+
+---
+
 # Pracovní log
+- 2026-09-29: Doplněna příloha „Dodavatelské přístupy a servisní účty bez klíčů pod rohožkou“ s rozdělením lidských, externích a servisních identit, pravidly pro least privilege, expirace, tajemství, auditní stopu, offboarding, checklistem, přístupovou kartou a ověřenými zdroji OWASP a CISA.
+
 - 2026-09-29: Doplněna příloha „SLA, SLO a support priority bez falešných slibů“ s praktickým rozlišením SLI/SLO/SLA, prioritami podpory, férovým výpočtem dostupnosti, privacy-first support daty, kompenzacemi, review rutinou, checklistem, SLA kartou a ověřenými zdroji k SRE i GDPR principům.
 
 - 2026-09-29: Doplněna příloha „Status page a provozní komunikace bez mlžení“ s praktickým návrhem komponent, incident zpráv, SLA, plánované údržby, postmortemu, privacy-first odběrů, checklistem, šablonou incident oznámení a ověřenými zdroji k GDPR i provozní komunikaci.
