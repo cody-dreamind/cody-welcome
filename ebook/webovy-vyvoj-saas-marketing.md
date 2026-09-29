@@ -16990,7 +16990,231 @@ Mini pravidlo: podpora nesmí mít supermoc obejít bezpečnost bez záznamu, sc
 - W3C: Web Authentication Level 3 — https://www.w3.org/standards/history/webauthn-3/
 - FIDO Alliance: Passkeys — https://fidoalliance.org/passkeys/
 
+
+# Příloha: Admin rozhraní bez superuživatelského průšvihu
+
+Admin rozhraní je místo, kde malý SaaS často potichu hromadí největší riziko. Ve veřejné aplikaci se pečlivě řeší formuláře, consent, role a validace. Pak přijde interní panel a najednou má každý v týmu tlačítko „upravit zákazníka“, volné vyhledávání podle e-mailu, export do CSV a poznámku „jen pro support“. Gratuluju, právě vznikl datový kombajn v mikině s logem firmy.
+
+Dobrý admin není tajná zadní brána. Je to produkt pro interní tým, který má stejné nároky na bezpečnost, srozumitelnost a auditovatelnost jako zákaznická část. Rozdíl je jen v publiku: místo zákazníka slouží supportu, provozu, obchodu nebo financím. A právě proto musí být nudně omezený.
+
+> Codyho komentář: Nejlepší admin panel není ten, kde můžeš všechno. Nejlepší admin panel je ten, který ti nedovolí udělat pitomost v pátek v 16:58, kdy už mozek běží na režim toastovače.
+
+## Začni seznamem interních prací
+
+Než navrhneš obrazovky, napiš si, jaké konkrétní práce má interní tým dělat. Ne role, ne oddělení, ale práce.
+
+Příklady interních prací:
+
+- najít zákaznický účet podle domény nebo zákaznického ID,
+- ověřit stav platby a fakturačních údajů,
+- znovu poslat pozvánku uživateli,
+- dočasně prodloužit trial po domluvě s obchodem,
+- deaktivovat účet po žádosti zákazníka,
+- zobrazit poslední provozní chybu bez obsahu soukromých dat,
+- zkontrolovat historii změn oprávnění ve workspace.
+
+Každá práce má mít vlastníka, důvod a hranice. Pokud neumíš říct, kdo akci používá a proč, do adminu ji zatím nedávej. Interní pohodlí není samo o sobě dostatečný důvod ke čtení zákaznických dat.
+
+Jednoduchá věta pro návrh admin funkce:
+
+```text
+[Tým/role] potřebuje udělat [konkrétní akci], aby vyřešil [situaci], bez přístupu k [data, která k tomu nejsou nutná].
+```
+
+Příklad:
+
+```text
+Support potřebuje znovu poslat pozvánku uživateli, aby pomohl správci workspace dokončit onboarding, bez přístupu k obsahu projektů, souborů nebo interních poznámek zákazníka.
+```
+
+Tohle je malý text, ale velká pojistka. Chrání produkt před funkcemi typu „ukažme všechno, bude to rychlejší“. Rychlejší možná. Chytřejší ne.
+
+## Odděl čtení, změny a nevratné zásahy
+
+Admin oprávnění nerozděluj jen na „má přístup“ a „nemá přístup“. To je digitální varianta univerzálního klíče pod rohožkou. Rozděl akce podle dopadu.
+
+Praktické úrovně:
+
+- Čtení bezpečných metadat: stav účtu, tarif, doména, čas poslední aktivity v agregované podobě.
+- Čtení citlivějších údajů: fakturační kontakt, e-mail uživatele, auditní historie.
+- Běžné změny: znovu poslat pozvánku, upravit tarif podle objednávky, změnit stav trialu.
+- Rizikové změny: měnit role, deaktivovat uživatele, resetovat integraci, rušit předplatné.
+- Nevratné nebo právně citlivé akce: výmaz dat, export osobních údajů, zásah do retence, ruční změna fakturace.
+
+Čím vyšší dopad, tím víc brzd:
+
+- jasné potvrzení s popisem následku,
+- povinný důvod akce,
+- re-authentication u citlivých zásahů,
+- čtyřočkový režim u výmazu nebo ruční změny peněz,
+- auditní záznam, který nejde upravit přes stejné rozhraní.
+
+Ne každá brzda musí být korporátní schvalovací peklo. Někdy stačí věta „Tato akce deaktivuje uživatele ve všech workspaces. Napiš důvod.“ Lidé často dělají chyby ne proto, že jsou zlí, ale protože UI mlčí jako ryba.
+
+## Vyhledávání navrhni tak, aby nelákalo ke šmírování
+
+Interní vyhledávání je pohodlné a nebezpečné zároveň. Pokud dovolíš hledat podle libovolného textu přes zákaznická data, vytvoříš pokušení i incident v jednom balení.
+
+Bezpečnější pravidla:
+
+- preferuj zákaznické ID, workspace ID, doménu nebo číslo faktury,
+- e-mail používej jen tam, kde je opravdu pracovní identifikátor,
+- neumožňuj fulltext přes obsah zákaznických projektů, dokumentů nebo zpráv,
+- maskuj údaje, které support nepotřebuje vidět celé,
+- u citlivých detailů ukaž nejdřív metadata a teprve potom vyžádej důvod pro otevření detailu,
+- loguj, kdo vyhledával, co otevřel a proč.
+
+Příklad maskování:
+
+```text
+Uživatel: ja***@example.com
+Telefon: +420 *** *** 123
+Fakturační e-mail: bi***@firma.cz
+```
+
+Maskování není kouzelná anonymizace. Je to praktická ochrana proti zbytečnému koukání a screenshotům. Pokud člověk potřebuje plný údaj, ať existuje jasná akce „zobrazit celý údaj“ s důvodem a auditní stopou.
+
+## Interní poznámky nejsou volný deník
+
+Poznámky u zákazníka jsou užitečné, ale snadno se změní v neřízený archiv dojmů, osobních údajů a interních soudů. To je špatně pro zákazníka, tým i budoucí audit.
+
+Pravidla pro poznámky:
+
+- piš fakta, ne diagnózy zákazníka,
+- neukládej soukromé detaily z hovoru, pokud nejsou nutné pro vyřešení případu,
+- nepřepisuj obsah ticketu do poznámky jen proto, že „se to může hodit“,
+- odděl obchodní poznámky, support poznámky a bezpečnostní poznámky,
+- nastav retenci nebo revizi poznámek,
+- umožni zákazníkovi dostat relevantní export, pokud poznámky obsahují jeho osobní data.
+
+Špatná poznámka:
+
+```text
+Pan Novák je chaotik, pořád něco mění, volal z auta a říkal, že u nich ve firmě je bordel.
+```
+
+Lepší poznámka:
+
+```text
+2026-09-29: Správce požádal o prodloužení trialu do 2026-10-06 kvůli internímu schvalování. Schválil: Petra, obchod.
+```
+
+Interní poznámka má pomáhat dalšímu kroku. Nemá být psychologický román s fakturačním modulem.
+
+## Impersonace jen jako poslední možnost
+
+„Přihlásit se jako zákazník“ je jedna z nejnebezpečnějších funkcí v adminu. Někdy umí ušetřit čas při podpoře, ale zároveň otevírá přístup k reálnému prostředí zákazníka. Pokud ji zavedeš, nesmí být pohodlná jako tlačítko na kávovar.
+
+Bezpečnější alternativa pořadí:
+
+1. Nejdřív vytvoř diagnostické metadata bez obsahu zákaznických dat.
+2. Pak nabídni zákazníkovi možnost sdílet konkrétní obrazovku nebo dočasný support token.
+3. Teprve jako poslední možnost použij impersonaci.
+
+Pokud impersonaci opravdu potřebuješ:
+
+- vyžaduj konkrétní důvod a ticket ID,
+- omez dobu platnosti relace,
+- výrazně označ, že support jedná v cizím účtu,
+- zakaž citlivé akce, které support při impersonaci nepotřebuje,
+- loguj začátek, konec a provedené akce,
+- ideálně zobraz zákazníkovi historii support přístupů.
+
+Důležité pravidlo: support nemá během impersonace vidět víc než zákazník, kterému pomáhá. A rozhodně nemá obcházet zákaznické role jen proto, že „admin může všechno“.
+
+## Exporty drž pod zámkem
+
+CSV export je malá ikonka s velkým dopadem. V jedné vteřině přesune data z kontrolovaného systému do notebooku, e-mailu, sdíleného disku nebo někam, kde už neexistuje audit ani retence. Proto exporty nepatří mezi běžné pohodlné funkce.
+
+Pravidla pro interní exporty:
+
+- každý export musí mít účel,
+- exportuj minimum sloupců,
+- omez časové období,
+- přidej vodotisk nebo identifikaci exportu tam, kde to dává smysl,
+- nastav expiraci odkazu ke stažení,
+- loguj, kdo export vytvořil, jaký filtr použil a proč,
+- pravidelně kontroluj, zda export vůbec někdo potřebuje.
+
+Pokud tým opakovaně exportuje stejná data kvůli provoznímu reportu, nevyráběj další CSV. Vytvoř agregovaný dashboard bez osobních údajů. Export je nouzová cesta, ne distribuční kanál pro firemní zvědavost.
+
+## Admin musí mít vlastní auditní stopu
+
+Zákaznické auditní logy a interní admin logy nejsou totéž. Zákazník potřebuje vidět, co se stalo v jeho workspace. Provozní tým potřebuje vědět, co v adminu udělal interní člověk nebo servisní účet.
+
+Minimum pro admin audit:
+
+- kdo akci provedl,
+- kdy se stala,
+- nad jakým objektem,
+- jaký typ akce proběhl,
+- jaký byl důvod,
+- jaký byl výsledek,
+- odkud akce přišla v rozumné technické podobě.
+
+Do auditu nepatří celé payloady, tokeny, hesla, obsah dokumentů nebo volné osobní poznámky. Audit má dokazovat průběh akce, ne znovu kopírovat databázi do jiné databáze. Datová matrjoška není strategie.
+
+## Checklist: admin bez superuživatelského průšvihu
+
+Před nasazením interní admin funkce projdi tento checklist:
+
+- Je jasné, jakou interní práci funkce řeší?
+- Existuje vlastník funkce a tým, který ji smí používat?
+- Je oddělené čtení, běžná změna, riziková změna a nevratný zásah?
+- Vidí uživatel jen data potřebná pro danou práci?
+- Jsou citlivé údaje maskované nebo otevřené až po zdůvodnění?
+- Má každá riziková akce auditní záznam?
+- Existuje bezpečnější alternativa k impersonaci?
+- Jsou exporty omezené, zdůvodněné a dohledatelné?
+- Mají interní poznámky pravidla a retenci?
+- Umí tým rychle odebrat přístup člověku, který už admin nepotřebuje?
+
+## Mini šablona admin funkce
+
+```markdown
+# Admin funkce: [název]
+
+## Práce
+- Interní tým:
+- Situace, kterou řeší:
+- Proč nestačí zákaznické rozhraní:
+
+## Data
+- Zobrazená metadata:
+- Zobrazené osobní údaje:
+- Maskování:
+- Data, která se nesmí zobrazit:
+
+## Oprávnění
+- Kdo smí číst:
+- Kdo smí měnit:
+- Kdo smí schvalovat rizikové akce:
+- Kdy se oprávnění reviduje:
+
+## Akce
+- Běžné akce:
+- Rizikové akce:
+- Nevratné akce:
+- Potvrzení / re-authentication:
+
+## Audit
+- Co se loguje:
+- Povinný důvod:
+- Retence auditních záznamů:
+- Kdo audit kontroluje:
+
+## Exporty a impersonace
+- Export povolen: ano/ne
+- Omezení exportu:
+- Impersonace povolena: ano/ne
+- Náhradní bezpečnější postup:
+```
+
+Admin rozhraní má být interní pracovní stůl, ne tajná řídicí věž nad zákaznickými daty. Když ho navrhneš podle práce, minimálních oprávnění a auditní stopy, tým bude rychlejší i bezpečnější. Což je vzácná kombinace — skoro jako meeting, který opravdu skončil dřív.
+
 # Pracovní log
+
+- 2026-09-29: Doplněna příloha „Admin rozhraní bez superuživatelského průšvihu“ s návrhem interních prací, oddělením čtení a rizikových zásahů, bezpečnějším vyhledáváním, pravidly pro poznámky, impersonaci, exporty, auditní stopou, checklistem a vyplnitelnou šablonou.
 - 2026-09-29: Doplněna příloha „Přihlašování, účty a SSO bez identity cirkusu“ s minimálním účtem, passkeys, SSO, session managementem, recovery procesem, checklistem a vyplnitelnou identity kartou.
 
 - 2026-09-29: Doplněna příloha „Help centrum a dokumentace bez support chaosu“ s návrhem kategorií podle úloh, strukturou článku, bezpečnými screenshoty, FAQ podle ticketů, agregovaným měřením hledání, revizním rytmem, checklistem a šablonou článku.
