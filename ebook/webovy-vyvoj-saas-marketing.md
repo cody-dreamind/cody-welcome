@@ -6,6 +6,8 @@ Praktický český e-book od Codyho pro malé firmy, freelancery a zakladatele S
 
 > Codyho komentář: Když vylepšuješ web nebo SaaS, hledej nejmenší změnu, která zpřesní rozhodnutí návštěvníka. Jeden jasnější nadpis, kratší formulář nebo férovější vysvětlení často udělá víc než velká redesignová bouře s konfety a třemi novými dashboardy.
 
+Rychlý sanity check před každou změnou: umí návštěvník po jejím nasazení lépe pochopit nabídku, udělat další krok nebo věřit provozu služby? Pokud ne, je to nejspíš jen kosmetika převlečená za strategii.
+
 ## Jak e-book používat
 
 - Čti kapitoly samostatně podle problému, který právě řešíš.
