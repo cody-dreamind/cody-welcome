@@ -17390,7 +17390,194 @@ Poznámky:
 
 Dobré schvalování nástrojů není brzda inovací. Je to dopravní značení. Díky němu tým ví, kudy jet rychle, kde zpomalit a kde fakt neparkovat databázi zákazníků v nástroji, který našel někdo v komentářích pod LinkedIn postem. Moderní, elegantní a překvapivě méně hořlavé.
 
+# Příloha: Release notes a changelog bez marketingové mlhy
+
+Release notes nejsou povinná výzdoba po releasu. Jsou to provozní komunikace, důkaz vývoje produktu a tichý prodejní argument pro lidi, kteří se rozhodují, jestli ti můžou věřit. U SaaS navíc fungují jako most mezi produktem, podporou, obchodem a zákazníkem: co se změnilo, koho se to týká, co má udělat a kde najde detail.
+
+Když changelog píšeš jen jako „vylepšili jsme výkon a opravili chyby“, nepomáhá nikomu. Uživatel neví, jestli má něco přenastavit. Support neví, na co odkazovat. Obchod neví, jestli může zmínit novou funkci. A tým časem zapomene, proč změnu udělal. Projekt [Keep a Changelog](https://keepachangelog.com/) doporučuje psát changelog pro lidi, ne pro stroje, a rozlišovat typy změn jako přidané, změněné, opravené nebo odstraněné. [Semantic Versioning](https://semver.org/) zase dává technickým produktům jednoduchý jazyk pro očekávání kompatibility: major, minor a patch. Nemusíš z toho dělat náboženství, ale struktura šetří nervy.
+
+> Codyho komentář: Release note typu „misc improvements“ je komunikační ekvivalent pokrčení ramen. Nikdo se neurazí, ale nikomu to nepomůže. Takže vlastně ideální firemní status, pokud je cílem nezanechat stopu po smyslu.
+
+## Rozděl publikum, ne pravdu
+
+Jedna změna může potřebovat tři různé vrstvy komunikace:
+
+- uživatelskou: co se změnilo v produktu a co mám udělat,
+- obchodní: jak změna zvyšuje hodnotu nabídky,
+- technickou: co se mění v API, datech, limitech, výkonu nebo bezpečnosti.
+
+Neznamená to psát tři nesouvisející verze reality. Znamená to držet jednu pravdu a upravit hloubku. Veřejný changelog může říct: „Přidali jsme export faktur podle období.“ Dokumentace doplní parametry exportu. Interní poznámka pro support přidá známá omezení a vzor odpovědi zákazníkovi.
+
+Praktické pravidlo: každá release note má odpovědět na čtyři otázky:
+
+- Co je nové nebo jiné?
+- Koho se to týká?
+- Co má člověk udělat dál?
+- Kde najde detail nebo pomoc?
+
+Pokud odpověď na některou otázku neexistuje, možná nejde o release note, ale o interní poznámku.
+
+## Piš podle dopadu, ne podle ticketů
+
+Ticket říká, co udělal tým. Release note má říct, co se změnilo pro uživatele. To je zásadní rozdíl.
+
+Slabě:
+
+```text
+AB-1842: Upraven validační handler pro invoice export.
+```
+
+Lépe:
+
+```text
+Export faktur teď upozorní na chybějící DIČ ještě před stažením souboru, takže účetní nemusí chybu hledat až v importu.
+```
+
+Dobrá release note má konkrétní sloveso a výsledek. Přidali jsme, opravili jsme, zrychlili jsme, sjednotili jsme, odstranili jsme, zjednodušili jsme. Vyhni se mlze typu „optimalizováno“, „vylepšeno“, „úpravy v systému“. Když nejde říct dopad, napiš změnu interně a do veřejného changelogu ji nedávej.
+
+## Kategorie drž konzistentní
+
+Malý SaaS nepotřebuje román pro každý release. Pomůže ale stejná sada kategorií, aby lidé věděli, co hledat.
+
+Doporučené kategorie:
+
+- Přidáno: nová funkce, nová integrace, nový export, nové nastavení.
+- Změněno: upravené chování, přesunuté rozhraní, nový výchozí stav.
+- Opraveno: chyba, která měla dopad na uživatele nebo provoz.
+- Bezpečnost a soukromí: změna přístupů, logování, retence, šifrování, auditní stopa.
+- Výkon a spolehlivost: rychlost, dostupnost, stabilita, fronty, limity.
+- Odstraněno: funkce nebo API, které končí.
+- Akce vyžadována: migrace, přenastavení, nový klíč, změna oprávnění.
+
+Privacy-first produkt by měl mít samostatnou kategorii pro bezpečnost a soukromí. Ne proto, aby se tvářil ctnostně, ale aby zákazník nemusel hledat datové změny mezi kosmetikou tlačítek.
+
+## Nepiš víc dat, než release potřebuje
+
+Release notes často omylem prozradí víc, než mají. Třeba interní názvy zákazníků, screenshoty s e-maily, přesné bezpečnostní detaily, názvy zranitelných endpointů před plným rolloutem nebo metriky, které nechceš veřejně spojovat s produkcí.
+
+Privacy-first pravidla:
+
+- nescreenshotuj reálné zákaznické účty,
+- nepoužívej interní incidentová ID jako veřejný kontext,
+- neuváděj konkrétní zranitelnost dřív, než je bezpečně opravená a komunikace schválená,
+- nezmiňuj zákazníka bez souhlasu,
+- u datových změn řekni účel, rozsah a dopad, ne syrové interní detaily,
+- u AI funkcí řekni, jaká data funkce používá a jestli se posílají třetí straně.
+
+Příklad dobré privacy poznámky:
+
+```text
+Soukromí: Upravili jsme auditní log přístupů do fakturace. Nově ukládá typ akce, čas a roli uživatele, ale neukládá obsah fakturačních poznámek. Změna pomáhá rychleji řešit bezpečnostní dotazy bez rozšiřování ukládaných obchodních dat.
+```
+
+Tohle je konkrétní, srozumitelné a nehraje si na magii.
+
+## Breaking changes komunikuj dřív
+
+Pokud měníš API, oprávnění, exporty, ceny, dostupnost funkce nebo datový model, release note v den nasazení nestačí. Potřebuješ dopřednou komunikaci.
+
+Minimum pro breaking change:
+
+- oznámení předem podle dopadu,
+- datum účinnosti,
+- koho se změna týká,
+- co se stane, když zákazník nic neudělá,
+- migrační postup,
+- kontakt na podporu,
+- připomínka krátce před změnou,
+- záznam v changelogu po nasazení.
+
+U B2B SaaS je dobré mít stránku „Deprecations“ nebo aspoň sekci v dokumentaci. Napiš tam funkce, které končí, poslední podporované datum, náhradu a stav migrace. Nečekej, že zákazník čte každý blogpost. Má práci. Bohužel většinou ne jen obdivovat tvoje release notes.
+
+## Vydávej méně často, ale čitelně
+
+Pokud nasazuješ několikrát denně, neznamená to, že musíš veřejně psát deset mikro poznámek. Veřejný rytmus může být týdenní nebo dvoutýdenní, interní changelog může být detailnější a automatizovaný.
+
+Praktický rytmus pro malý tým:
+
+- průběžně znač změny v pull requestu nebo issue štítkem `release-note`,
+- jednou týdně vyber změny s dopadem na zákazníka,
+- seskup je podle kategorií,
+- doplň „akce vyžadována“, pokud existuje,
+- nechej support a produkt rychle zkontrolovat formulace,
+- publikuj na webu s RSS nebo přímým odkazem,
+- větší změny pošli zákazníkům e-mailem bez sledovacích pixelů.
+
+RSS je tady podceňovaný hrdina. Umožní zákazníkům sledovat změny bez sociálních sítí, remarketingu a platformního cirkusu. Přímý odkaz na changelog v aplikaci je ještě lepší: člověk řeší produkt, ne tvoji schopnost křičet na LinkedIn.
+
+## Release note není náhrada dokumentace
+
+Release note oznamuje změnu. Dokumentace učí práci. Help centrum řeší postup. API reference popisuje parametry. Status page řeší provozní stav. Nemíchej všechno dohromady.
+
+Dobré propojení:
+
+- changelog: „Přidali jsme export faktur podle období.“
+- dokumentace: „Jak export faktur nastavit krok za krokem.“
+- API reference: parametry endpointu, limity, chyby.
+- support šablona: odpověď pro zákazníka, kterému export neprošel.
+- interní poznámka: známé hrany, rollout, vlastník.
+
+Když se release note snaží být vším, bude dlouhá a nečitelná. Když je krátká bez odkazů, bude hezká a nepoužitelná. Zlatý střed je konkrétní změna, dopad a odkaz na detail.
+
+## Checklist: changelog bez mlhy
+
+- Každá položka popisuje dopad na uživatele, ne jen interní ticket.
+- Kategorie jsou konzistentní napříč releasy.
+- Změny týkající se dat, soukromí a bezpečnosti jsou viditelné samostatně.
+- Breaking changes mají datum, migrační postup a komunikaci předem.
+- Screenshoty neobsahují reálná osobní ani zákaznická data.
+- Release notes odkazují na dokumentaci, help centrum nebo API reference.
+- Veřejný changelog má přímou URL a ideálně RSS.
+- Interní tým ví, kdo changelog připravuje a kdo ho kontroluje.
+- Marketing nepřepisuje technickou pravdu do konfety řeči.
+- Staré release notes zůstávají dohledatelné.
+
+## Mini šablona release note
+
+```markdown
+# Release note: [název změny]
+
+## Kategorie
+- Přidáno / Změněno / Opraveno / Bezpečnost a soukromí / Výkon / Odstraněno / Akce vyžadována
+
+## Shrnutí pro uživatele
+- Co se změnilo:
+- Koho se to týká:
+- Proč je to užitečné:
+
+## Akce zákazníka
+- Je potřeba něco udělat: ano/ne
+- Termín:
+- Postup:
+
+## Data a soukromí
+- Mění se zpracování dat: ano/ne
+- Jaká data:
+- Retence nebo přístupy:
+- Odkaz na detail:
+
+## Dokumentace
+- Help článek:
+- API reference:
+- Support kontakt:
+
+## Interní kontrola
+- Vlastník změny:
+- Kontrola produktem:
+- Kontrola supportem:
+- Publikováno kde:
+```
+
+Release notes jsou malá věc s velkým efektem. Když je píšeš čitelně, zákazník vidí, že produkt žije. Když je píšeš konkrétně, support šetří čas. A když je píšeš privacy-first, ukazuješ, že datové změny nejsou schované v poznámce pod čarou velikosti elektronového mikroskopu.
+
+## Zdroje
+
+- [Keep a Changelog](https://keepachangelog.com/)
+- [Semantic Versioning](https://semver.org/)
+
 # Pracovní log
+
+- 2026-09-29: Doplněna příloha „Release notes a changelog bez marketingové mlhy“ s praktickým rozdělením publika, psaním podle dopadu místo ticketů, kategoriemi změn, privacy-first pravidly, komunikací breaking changes, publikačním rytmem, checklistem, vyplnitelnou šablonou a zdroji Keep a Changelog a Semantic Versioning.
 
 - 2026-09-29: Doplněna příloha „Schvalování nástrojů bez shadow IT safari“ s praktickým modelem rizik pro nové SaaS/AI nástroje, rychlou schvalovací bránou, katalogem povolených nástrojů, AI pravidly, offboardingem, checklistem, kartou nástroje a ověřenými zdroji ENISA, Evropské komise a EDPB.
 - 2026-09-29: Doplněna příloha „Admin rozhraní bez superuživatelského průšvihu“ s návrhem interních prací, oddělením čtení a rizikových zásahů, bezpečnějším vyhledáváním, pravidly pro poznámky, impersonaci, exporty, auditní stopou, checklistem a vyplnitelnou šablonou.
