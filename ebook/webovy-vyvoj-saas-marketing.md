@@ -18199,7 +18199,196 @@ Příklad dobré odpovědi:
 - [European Commission: Dealing with requests from individuals](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en)
 - [EDPB: Guidelines on the right to data portability under Regulation 2016/679, WP242 rev.01](https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en)
 
+# Příloha: Interní znalostní báze bez firemního datového skladiště
+
+Znalostní báze má malému týmu šetřit opakované vysvětlování, ne se proměnit v druhý internet, kde se ztratí citlivé poznámky, staré rozhodnutí a tři verze stejné pravdy. U webu a SaaS je to ještě důležitější: dokumentace produktu, provozu, marketingu, podpory a bezpečnosti bývá rozesetá v chatech, mailech, ticketovacím systému, drive složkách a hlavách lidí, kteří zrovna odjeli na dovolenou. To je napínavé jako detektivka, ale provozně dost hloupé.
+
+Privacy-first znalostní báze začíná opačně než běžný firemní wiki projekt. Neptá se „kam všechno uložíme?“, ale „které znalosti musí tým najít rychle, kdo je smí vidět, jak poznáme platnou verzi a kdy obsah smažeme?“ Pokud na tyhle otázky neumíš odpovědět, nástroj za tebe strategii nevymyslí. Jen udělá nepořádek hezčí.
+
+> Codyho komentář: Nejhorší znalostní báze není prázdná. Nejhorší je ta, která vypadá důvěryhodně, ale polovina článků je zastaralá. To je produktivita s nášlapnou minou.
+
+## Rozděl znalosti podle práce, ne podle organizačního chaosu
+
+Začni tím, jaké práce má znalostní báze podporovat. Pro malý webový nebo SaaS tým obvykle stačí několik kategorií:
+
+- produktová rozhodnutí,
+- provozní postupy,
+- zákaznická podpora,
+- marketing a obsah,
+- bezpečnost a přístupy,
+- dodavatelé a nástroje,
+- incidenty a poučení.
+
+Každá kategorie má mít vlastní pravidla pro citlivost a údržbu. Produktová rozhodnutí můžou být široce čitelná v týmu, ale zákaznické incidenty často obsahují osobní údaje, obchodní kontext nebo bezpečnostní detaily. To nepatří do otevřeného „všichni všechno vidí, protože jsme agilní“ prostoru.
+
+Praktický začátek:
+
+1. Vypiš deset dokumentů, které tým hledá nejčastěji.
+2. U každého napiš, kdo ho potřebuje a proč.
+3. Označ dokument jako veřejný interně, omezený nebo citlivý.
+4. Urči vlastníka, který odpovídá za aktuálnost.
+5. Nastav revizní interval: měsíc, kvartál nebo rok.
+
+Tohle je nudnější než výběr krásné wiki aplikace. Proto to funguje.
+
+## Každý dokument musí mít vlastníka a datum platnosti
+
+Interní dokument bez vlastníka je sirotek. Možná je užitečný, možná ne, ale nikdo za něj neručí. Do každého důležitého dokumentu dej krátkou hlavičku:
+
+```text
+Vlastník: [jméno / role]
+Stav: návrh / platné / zastaralé / archiv
+Platí od: [datum]
+Revize do: [datum]
+Citlivost: interní / omezené / citlivé
+Související systémy: [nástroje]
+```
+
+Když dokument zastará, nezkoušej ho potichu opravovat po třech letech. Označ ho jako zastaralý, přidej odkaz na novou verzi a archivuj ho. Tým musí vidět rozdíl mezi historií a aktuálním postupem. Historie je užitečná pro pochopení rozhodnutí, ale nemá se tvářit jako návod pro dnešek.
+
+Příklad: máš dokument „Jak řešíme refundy“. Pokud se změnil platební poskytovatel, účetní export nebo retenční pravidla, starý postup může způsobit chybné odpovědi zákazníkům a špatné zacházení s daty. Stačí jedna malá hlavička s platností a najednou je riziko menší.
+
+## Citlivé informace nepatří do volného fulltextu
+
+Znalostní báze často svádí k tomu, že se do ní ukládá všechno, protože „aspoň to najdeme“. Jenže fulltextové vyhledávání přes interní poznámky je nádherný způsob, jak omylem zpřístupnit věci, které měly zůstat v ticketu, účetním systému nebo bezpečnostním trezoru.
+
+Do běžné znalostní báze nepatří:
+
+- hesla, API klíče, recovery kódy a privátní tokeny,
+- celé zákaznické databáze nebo exporty,
+- kopie občanek, smluv nebo faktur bez jasného důvodu,
+- detailní osobní poznámky o zákaznících,
+- nahrávky schůzek a surové přepisy bez retence,
+- bezpečnostní zranitelnosti před vyřešením a omezením přístupů.
+
+Místo toho používej odkazy na systémy, kde data patří. Znalostní báze má říkat, jak s věcí pracovat, ne duplikovat celý datový vesmír. Když dokument potřebuje citlivý příklad, anonymizuj ho:
+
+```text
+Špatně: Zákazník Novák s e-mailem novak@example.com reklamoval fakturu 2026-0042.
+Lépe: B2B zákazník reklamoval fakturu kvůli rozdílu mezi objednaným tarifem a fakturovaným obdobím.
+```
+
+## Rozhodnutí ukládej jako rozhodnutí, ne jako nekonečnou debatu
+
+Chat je dobrý na diskusi, ale mizerný archiv rozhodnutí. Když důležité rozhodnutí zůstane jen ve vlákně, za měsíc nikdo neví, jestli platí, proč vzniklo a co se odmítlo.
+
+Používej krátký rozhodovací záznam:
+
+```text
+Rozhodnutí: [co jsme zvolili]
+Kontext: [proč to řešíme]
+Možnosti: [co jsme zvažovali]
+Vybraná varianta: [co platí]
+Důvod: [proč]
+Dopad na data: [žádný / nízký / střední / vysoký]
+Kontrola: [kdy se vrátíme k vyhodnocení]
+```
+
+U SaaS produktu to použiješ třeba pro výběr analytics nástroje, zavedení nové integrace, změnu onboardingového formuláře nebo rozhodnutí, že určitou metodu měření nepoužiješ, protože sbírá příliš mnoho dat. Odmítnutá možnost je často stejně důležitá jako ta vybraná. Chrání tým před opakováním stejné debaty v trochu jiném tričku.
+
+## AI nad znalostní bází potřebuje hranice
+
+AI vyhledávání a interní asistenti umí z dokumentace udělat užitečný pracovní nástroj. Ale jen pokud model nevidí víc, než má vidět uživatel. Základní pravidlo: AI vrstva nesmí obcházet oprávnění znalostní báze. Pokud juniorní marketér nemá přístup k incidentům s bezpečnostním dopadem, nesmí se k nim dostat ani přes chytrý dotaz typu „shrň mi všechny problémy zákazníků za poslední rok“.
+
+Před zapnutím AI nad interními dokumenty si odpověz:
+
+- Respektuje vyhledávání oprávnění podle uživatele?
+- Posílají se dokumenty mimo EU nebo mimo schválený okruh dodavatelů?
+- Ukládá poskytovatel dotazy a odpovědi pro trénink nebo zlepšování služby?
+- Umíme vypnout konkrétní kolekci dokumentů z indexace?
+- Máme log dotazů bez zbytečného ukládání citlivého obsahu?
+- Ví tým, co do asistenta nepatří?
+
+Pokud odpověď zní „nevím“, je to odpověď „zatím nezapínat“. Ano, je to méně sexy než demo. Ale méně sexy bývá často levnější než bezpečnostní incident s interním chatbotem, který se rozhodl být až moc nápomocný.
+
+## Retence platí i pro interní moudrost
+
+Ne všechno, co bylo jednou užitečné, má zůstat navždy. Znalostní báze potřebuje archivaci a mazání stejně jako CRM nebo analytika. Jinak se z ní stane skladiště starých kampaní, screenshotů, exportů a postupů, které už nikdo nepoužívá.
+
+Jednoduchý retenční model:
+
+- Aktuální postupy: držet, dokud platí, s pravidelnou revizí.
+- Rozhodovací záznamy: držet déle, protože vysvětlují historii produktu.
+- Incidentová poučení: držet podle provozní užitečnosti a citlivosti.
+- Dočasné pracovní poznámky: mazat po uzavření úkolu nebo projektu.
+- Citlivé přílohy: pokud nejdou anonymizovat, držet mimo wiki a s omezenou retencí.
+
+Revizi dělej dávkově. Jednou měsíčně projdi dokumenty s prošlou revizí. Jednou za kvartál projdi citlivé kolekce. Jednou ročně zkontroluj, jestli informační architektura pořád odpovídá tomu, jak tým skutečně pracuje.
+
+## Příklad pro malý SaaS tým
+
+Představ si tým o pěti lidech, který provozuje B2B SaaS. Místo jedné obří wiki složky si nastaví tyto prostory:
+
+- `Produkt`: roadmap rozhodnutí, release notes, onboardingové hypotézy.
+- `Provoz`: zálohy, deployment, incident response, monitoring.
+- `Podpora`: opakované dotazy, šablony odpovědí, eskalační postupy.
+- `Marketing`: messaging, obsahový plán, referenční pravidla.
+- `Bezpečnost`: přístupy, dodavatelé, data mapa, rizikové postupy.
+
+Každý prostor má vlastníka. Citlivé části nejsou automaticky dostupné všem. Když podpora řeší opakovaný problém, nevloží do dokumentace celý ticket se jménem zákazníka. Napíše anonymizovaný vzor: „Uživatel s rolí editor nevidí export, pokud workspace nemá zapnutý billing modul.“ To je užitečné, dohledatelné a zbytečně nešíří osobní údaje.
+
+## Checklist: znalostní báze bez datového skladiště
+
+- Má každá hlavní kategorie jasný účel a vlastníka?
+- Má každý důležitý dokument stav, datum platnosti a revizi?
+- Jsou citlivé dokumenty oddělené oprávněními?
+- Neobsahuje wiki hesla, tokeny, exporty nebo zbytečné osobní údaje?
+- Jsou rozhodnutí z chatů přepsaná do stručných rozhodovacích záznamů?
+- Respektuje případné AI vyhledávání stejná oprávnění jako běžný uživatel?
+- Existuje pravidlo, co se indexuje a co se z AI vrstvy vylučuje?
+- Má tým rutinu pro archivaci a mazání zastaralého obsahu?
+- Umí nový člověk najít pět nejdůležitějších postupů bez ptaní?
+- Je u každého externího nástroje jasné, kde dokumenty fyzicky a právně končí?
+
+## Mini šablona znalostní karty
+
+```markdown
+# Znalostní karta: [název]
+
+## Účel
+- Jakou práci dokument podporuje:
+- Kdo ho používá:
+- Kdy se má použít:
+
+## Vlastnictví
+- Vlastník:
+- Stav: návrh / platné / zastaralé / archiv
+- Platí od:
+- Revize do:
+
+## Citlivost
+- Úroveň: interní / omezené / citlivé
+- Obsahuje osobní údaje: ano / ne
+- Obsahuje zákaznická data: ano / ne
+- AI indexace povolena: ano / ne
+
+## Obsah
+- Shrnutí:
+- Postup:
+- Související systémy:
+- Související rozhodnutí:
+
+## Retence
+- Co se archivuje:
+- Co se maže:
+- Kdo kontroluje:
+
+## Změny
+- Poslední úprava:
+- Důvod změny:
+- Navazující úkoly:
+```
+
+## Zdroje
+
+- [European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
+- [European Commission: Data protection under GDPR — Your Europe](https://europa.eu/youreurope/business/governance-and-sustainability/digital-and-data-compliance/data-protection-gdpr/index_en.htm)
+- [EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)
+- [EDPB: Guidelines 4/2019 on Article 25 — Data Protection by Design and by Default](https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en)
+
 # Pracovní log
+
+- 2026-09-29: Doplněna příloha „Interní znalostní báze bez firemního datového skladiště“ s praktickou strukturou kategorií, vlastnictvím dokumentů, pravidly pro citlivé informace, rozhodovacími záznamy, AI vyhledáváním, retencí, SaaS příkladem, checklistem, znalostní kartou a ověřenými zdroji Evropské komise a EDPB.
 
 - 2026-09-29: Doplněna příloha „Offboarding zákazníka bez rukojmí a datového bordelu“ s praktickým postupem pro zrušení, pozastavení, převod a smazání účtu, použitelný export, datové kategorie, zálohy, integrace, retenční okno, support scénář, checklist, offboarding kartu a ověřené zdroje Evropské komise, EUR-Lex a EDPB.
 
