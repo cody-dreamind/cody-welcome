@@ -16589,7 +16589,223 @@ Tahle karta se hodí při migraci pošty, změně newsletterového nástroje, po
 - Google: Email sender guidelines — https://support.google.com/a/answer/81126
 - European Commission: GDPR principles — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 
+# Příloha: Help centrum a dokumentace bez support chaosu
+
+Dobré help centrum není hřbitov starých návodů. Je to provozní nástroj, který snižuje opakované dotazy, zrychluje onboarding a pomáhá zákazníkům udělat další krok bez čekání na odpověď. Pro malý SaaS nebo digitální službu je dokumentace často levnější než další člověk na podporu — pokud je psaná podle reálných problémů, ne podle interní struktury menu.
+
+Help centrum má být jednoduché, dohledatelné, pravidelně udržované a privacy-first. To znamená: žádné zbytečné trackingové widgety, žádné veřejné screenshoty se zákaznickými daty, žádné návody závislé na konkrétním člověku v týmu a žádný chaotický mix marketingu, podpory a právních slibů v jednom článku.
+
+> Codyho komentář: Dokumentace není místo, kde firma dokazuje, kolik toho ví. Je to místo, kde zákazník co nejrychleji zjistí, co má udělat. Ego patří do šuplíku, ne do FAQ.
+
+## Piš podle úloh, ne podle interních modulů
+
+Zákazník nehledá „správu entit v administračním subsystému“. Hledá „jak přidám kolegu“, „jak změním fakturační údaje“ nebo „proč mi nepřišel e-mail“. Struktura dokumentace má kopírovat jeho úkoly.
+
+Praktické kategorie:
+
+- Začínáme: první nastavení, přihlášení, pozvání týmu, základní pojmy.
+- Účet a fakturace: tarif, faktury, platební metoda, zrušení, export dat.
+- Bezpečnost a soukromí: přístupy, role, data, retence, auditní logy.
+- Integrace: API klíče, webhooky, limity, typické chyby.
+- Řešení problémů: nedoručené e-maily, importy, přihlášení, chyby formulářů.
+- Provozní změny: migrace, plánovaná údržba, známé incidenty.
+
+Když musíš článek zařadit do pěti kategorií, pravděpodobně není dost konkrétní. Rozděl ho. Dokumentace má radši deset krátkých odpovědí než jeden traktát, který začíná historií firmy a končí konfigurací DNS. Ano, DNS si zaslouží vlastní kobku.
+
+## Každý článek musí mít jednu jasnou práci
+
+Před psaním článku si napiš větu:
+
+```text
+Po přečtení článku má uživatel umět [konkrétní akce] bez kontaktování podpory.
+```
+
+Příklady dobrých cílů:
+
+- „Po přečtení článku umí správce pozvat nového uživatele a vybrat mu roli.“
+- „Po přečtení článku umí zákazník stáhnout fakturu za konkrétní období.“
+- „Po přečtení článku vývojář ví, jak ověřit podpis webhooku.“
+- „Po přečtení článku zakladatel ví, jak exportovat všechna data před ukončením služby.“
+
+Slabé cíle:
+
+- „Vysvětlit nastavení.“
+- „Popsat funkci.“
+- „Sepsat FAQ.“
+- „Ať máme něco v helpu.“
+
+Článek bez jasné práce se nedá dobře změřit ani udržovat. Když nevíš, co má vyřešit, nebudeš vědět, jestli je hotový.
+
+## Struktura článku, která šetří čas
+
+Nejlepší podpůrné články nejsou literární romány. Fungují jako mapa. Čtenář přijde ve stresu, často s konkrétní chybou. Dej mu odpověď rychle.
+
+Doporučená struktura:
+
+1. Krátká odpověď: co článek řeší a pro koho je.
+2. Předpoklady: co musí mít uživatel připravené.
+3. Postup krok za krokem.
+4. Ověření výsledku: jak pozná, že se to povedlo.
+5. Časté chyby a co znamenají.
+6. Co dělat, když to nepomůže.
+7. Datum poslední kontroly.
+
+Příklad začátku:
+
+```markdown
+# Jak pozvat kolegu do účtu
+
+Tento návod je pro správce pracovního prostoru. Ukáže, jak pozvat nového kolegu, vybrat mu roli a ověřit, že pozvánka dorazila.
+
+## Než začneš
+- Musíš mít roli Správce.
+- Potřebuješ pracovní e-mail kolegy.
+- Pokud používáte SSO, pozvánku může potvrdit jen účet ze schválené domény.
+```
+
+Tenhle styl není sexy, ale funguje. A support tým nepotřebuje sexy. Potřebuje méně opakovaných dotazů a méně zákazníků, kteří klikají naslepo jako ve výtahu bez popisků.
+
+## Screenshoty dělej bezpečně
+
+Screenshoty pomáhají, ale jsou častým zdrojem úniku dat. V malém týmu vznikají rychle: někdo otevře produkci, udělá výřez a nahraje ho do helpu. Najednou je veřejně vidět jméno zákazníka, e-mail, interní ID, cena, poznámka z CRM nebo název projektu.
+
+Bezpečnější postup:
+
+- používej demo účet s falešnými, ale realistickými daty,
+- před publikací kontroluj e-maily, jména, URL, tokeny a interní ID,
+- citlivé části rozhraní raději překresli nebo rozmaž ještě před exportem,
+- nahrávej obrázky do vlastního úložiště, ne do náhodné externí služby,
+- udržuj seznam screenshotů, které je nutné aktualizovat po změně UI.
+
+U privacy-first produktu je dokumentace součást důvěry. Když návštěvník v helpu uvidí cizí data, nebude si říkat „jak praktické“. Bude si říkat „aha, takhle možná jednou vystaví i nás“.
+
+## FAQ stav podle ticketů, ne podle fantazie
+
+FAQ nemá být seznam věcí, které chce firma říct. Má být seznam věcí, které se lidé opravdu ptají. Nejlepší zdroj jsou support tickety, obchodní hovory, onboarding a hledání v dokumentaci.
+
+Měsíční rutina:
+
+1. Vytáhni deset nejčastějších opakovaných dotazů.
+2. Označ, které už mají dobrý článek.
+3. U chybějících napiš krátkou odpověď nebo návod.
+4. U existujících článků doplň chybějící krok nebo lepší nadpis.
+5. Zkontroluj, jestli dotaz nevzniká kvůli špatnému UI nebo copy v produktu.
+
+Důležité: dokumentace nemá zakrývat produktové problémy. Když každý třetí zákazník nechápe stejnou obrazovku, nenapiš jen delší návod. Oprav obrazovku. Help centrum je detektor bolesti, ne skládka obkladů.
+
+## Vyhledávání měř bez profilu uživatele
+
+Vyhledávání v helpu je skvělý signál. Ukazuje, co lidé nemohou najít. Ale nepotřebuješ z něj stavět individuální profil zákazníka. Stačí agregace.
+
+Užitečné signály:
+
+- nejčastější hledané fráze,
+- fráze bez výsledku,
+- články s vysokým odchodem zpět do hledání,
+- články, po kterých často následuje kontakt na podporu,
+- témata, která rostou po nové release verzi.
+
+Privacy-first pravidla:
+
+- neukládej hledané fráze navždy,
+- odstraň z vyhledávání e-maily, tokeny a dlouhá čísla, pokud je to možné,
+- nespojuj help search s marketingovou identitou,
+- u přihlášené dokumentace používej agregace podle role nebo tarifu jen tehdy, když to opravdu pomáhá,
+- nedávej do helpu externí search widget jen proto, že má hezký dashboard.
+
+Cílem je zjistit, který článek chybí nebo je špatně pojmenovaný. Ne kdo přesně v úterý večer panikařil nad webhookem.
+
+## Právní a bezpečnostní články verzuj opatrně
+
+Články o zpracování dat, exportu, retenci, bezpečnosti, incidentech, SLA, fakturaci nebo rušení účtu nejsou obyčejný obsah. Lidé se na ně mohou odkazovat při rozhodování, nákupu nebo auditu. Proto potřebují vlastní režim.
+
+Minimum:
+
+- vlastník obsahu,
+- datum poslední právní nebo provozní kontroly,
+- historie významných změn,
+- jasné rozlišení mezi návodem a závazkem,
+- odkaz na oficiální podmínky, pokud článek jen vysvětluje proces,
+- interní review před publikací.
+
+Příklad formulace:
+
+```text
+Tento článek vysvětluje praktický postup exportu dat z aplikace. Nenahrazuje smluvní podmínky ani zpracovatelskou smlouvu; odkazy na závazné dokumenty najdeš na konci článku.
+```
+
+To není alibismus. Je to férovost. Dokumentace má pomáhat, ale nemá náhodně vytvářet závazky, které obchod, právo ani provoz neviděly.
+
+## Dokumentace má mít vlastníka a revizní rytmus
+
+Největší problém helpu není napsat první verzi. Největší problém je, že za půl roku popisuje tlačítko, které už neexistuje. Proto každý důležitý článek potřebuje vlastníka a kontrolu.
+
+Praktický revizní model:
+
+- kritické články: kontrola po každé produktové změně,
+- onboarding články: měsíčně nebo po větším releasu,
+- fakturace a bezpečnost: čtvrtletně plus po změně procesu,
+- běžné FAQ: podle ticketů a hledání,
+- zastaralé články: sloučit, přesměrovat nebo smazat.
+
+Do článku klidně napiš „naposledy zkontrolováno“. Je to malý signál důvěry. A interně je to výborná připomínka, že dokumentace není jednorázový projekt, ale zahrada. Bez údržby z ní bude džungle s občasným screenshotem z roku, kdy všichni nosili skinny jeans.
+
+## Checklist: help centrum bez support chaosu
+
+- [ ] Každý článek má jednu jasnou práci.
+- [ ] Kategorie odpovídají úlohám zákazníka, ne interním modulům.
+- [ ] Návody mají předpoklady, postup, ověření výsledku a časté chyby.
+- [ ] Screenshoty používají demo data a neobsahují e-maily, tokeny ani zákaznické údaje.
+- [ ] FAQ vychází z reálných ticketů, hledání a onboarding otázek.
+- [ ] Vyhledávání v helpu měříme agregovaně a s krátkou retencí.
+- [ ] Právní, bezpečnostní a fakturační články mají vlastníka a review.
+- [ ] Kritické články se kontrolují po release změnách.
+- [ ] Zastaralé články se slučují, přesměrovávají nebo mažou.
+- [ ] Help centrum neobsahuje zbytečné externí trackery ani reklamní skripty.
+
+## Mini šablona článku do help centra
+
+```markdown
+# [Jak udělat konkrétní věc]
+
+Krátce: Tento článek pomůže [role uživatele] udělat [konkrétní výsledek].
+
+## Než začneš
+- Potřebná role:
+- Potřebná data:
+- Omezení / poznámka:
+
+## Postup
+1. ...
+2. ...
+3. ...
+
+## Jak poznáš, že je hotovo
+- Ověření v aplikaci:
+- Ověření e-mailem / exportem / logem:
+
+## Časté chyby
+- Chyba:
+- Co znamená:
+- Jak ji opravit:
+
+## Když to nepomohlo
+- Kontakt:
+- Jaké informace poslat:
+- Co neposílat: hesla, tokeny, celé databázové exporty
+
+## Údržba
+- Vlastník článku:
+- Poslední kontrola:
+- Další kontrola:
+- Navázané produktové obrazovky:
+```
+
+Dokumentace není náplast na špatný produkt, ale dobrý produkt bez dokumentace zase nutí lidi ptát se na věci, které mohli vyřešit sami. Ideál je nudně praktický: jasné články, bezpečné screenshoty, agregované signály a pravidelná údržba. Přesně ten typ nudy, který šetří peníze.
+
 # Pracovní log
+
+- 2026-09-29: Doplněna příloha „Help centrum a dokumentace bez support chaosu“ s návrhem kategorií podle úloh, strukturou článku, bezpečnými screenshoty, FAQ podle ticketů, agregovaným měřením hledání, revizním rytmem, checklistem a šablonou článku.
 
 - 2026-09-29: Doplněna příloha „Domény, DNS a e-mailová důvěryhodnost bez doručovací magie“ s praktickým rozdělením odesílacích domén, SPF/DKIM/DMARC postupem, provozním čtením reportů, oddělením typů e-mailů, privacy-first trackingem, zahříváním domény, doménovou kartou, checklistem a ověřenými zdroji RFC, Google a Evropské komise.
 
