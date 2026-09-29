@@ -18618,7 +18618,213 @@ Privacy-first varianta: dokumentace běží na evropském hostingu, bez reklamn�
 - [OpenAPI Specification 3.0.4](https://spec.openapis.org/oas/v3.0.4.html)
 - [OpenAPI Security Considerations](https://github.com/OAI/OpenAPI-Specification/blob/main/SECURITY_CONSIDERATIONS.md)
 
+
+# Příloha: Metrikový dashboard bez vanity mlhy
+
+Dashboard pro malý web nebo SaaS nemá být kokpit dopravního letadla. Má být pracovní panel, který jednou týdně odpoví na tři otázky: přicházejí správní lidé, rozumí nabídce a umí udělat další krok? Všechno ostatní je buď diagnostika, nebo hezká mlha v grafu.
+
+Privacy-first dashboard začíná opačně než běžný marketingový reporting. Neptá se „co všechno můžeme měřit?“, ale „které rozhodnutí bez téhle metriky uděláme hůř?“. To je důležitý rozdíl. GDPR mezi základními principy uvádí minimalizaci údajů: osobní údaje mají být přiměřené, relevantní a omezené na to, co je nezbytné pro daný účel ([Evropská komise: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)). EDPB k privacy by design/default připomíná, že ochrana dat má být zabudovaná do systému od začátku a výchozí nastavení mají chránit jednotlivce ([EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)).
+
+> Codyho komentář: Dashboard, který ukazuje třicet grafů a žádné rozhodnutí, není analytika. Je to akvárium pro manažerskou úzkost.
+
+## Začni rozhodnutími, ne grafy
+
+Nejdřív napiš seznam opakovaných rozhodnutí, která chceš dělat lépe. Teprve potom k nim přiřaď metriky.
+
+Příklady rozhodnutí:
+
+- Máme upravit homepage, protože lidé nechápou hlavní nabídku?
+- Má smysl psát další obsah na stejné téma?
+- Funguje onboarding, nebo lidé uvíznou před první hodnotnou akcí?
+- Přináší konkrétní partnerský odkaz kvalitní poptávky?
+- Je problém v cenové stránce, formuláři, nebo ve špatně slíbené hodnotě?
+
+Ke každému rozhodnutí si napiš jednu hlavní metriku a jednu kontrolní metriku. Hlavní metrika říká, jestli se něco hýbe. Kontrolní metrika hlídá, že sis nepomohl špatným způsobem.
+
+Příklad:
+
+```text
+Rozhodnutí: Zjednodušit kontaktní stránku?
+Hlavní metrika: počet dokončených relevantních poptávek týdně
+Kontrolní metrika: podíl poptávek, na které obchod odpověděl do dvou pracovních dnů
+Co záměrně neměříme: obsah rozepsaného formuláře, heatmapy jednotlivých návštěvníků, session replay
+```
+
+## Tři vrstvy dashboardu
+
+Rozděl dashboard na tři vrstvy. Pomůže ti to neplést strategii, provoz a zvědavost.
+
+### 1. Zdraví webu nebo produktu
+
+Tahle vrstva říká, jestli základní cesta funguje.
+
+Sleduj například:
+
+- dostupnost webu a chybové stavy,
+- rychlost hlavních stránek,
+- úspěšnost odeslání formuláře,
+- počet relevantních konverzí,
+- základní trend návštěvnosti podle zdrojů.
+
+U privacy-first provozu je důležité, aby tahle vrstva fungovala i bez detailního profilování návštěvníků. CNIL u analytiky popisuje, že nástroje pro měření návštěvnosti typicky pracují s cookies nebo podobnými identifikátory a souhlas se může lišit podle účelu, konfigurace a lokálních pravidel ePrivacy ([CNIL: Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)). Praktický závěr: čím méně identifikátorů a čím agregovanější reporting, tím jednodušší provozní vysvětlení.
+
+### 2. Obchodní kvalita
+
+Tahle vrstva odděluje hezké grafy od peněz a důvěry.
+
+Sleduj například:
+
+- kolik poptávek odpovídá cílovému zákazníkovi,
+- kolik trialů dojde k první hodnotné akci,
+- kolik zákazníků pochopí cenu bez dalšího vysvětlování,
+- jak často se opakují stejné dotazy na podporu,
+- které obsahové stránky pomáhají obchodním rozhovorům.
+
+Nejde jen o počty. Jedna kvalitní B2B poptávka může mít větší hodnotu než tisíc návštěv z náhodného virálního příspěvku. Proto si u každé konverze definuj kvalitu. Třeba „obsahuje konkrétní problém, firemní kontext a způsob kontaktu“.
+
+### 3. Učení týmu
+
+Tahle vrstva říká, co se tým naučil a co udělá příště.
+
+Sleduj například:
+
+- experimenty spuštěné za poslední měsíc,
+- rozhodnutí přijatá na základě dat,
+- hypotézy, které se nepotvrdily,
+- stránky, které mají jasného vlastníka,
+- metriky, které se přestaly používat a mají být smazané.
+
+Metrika bez vlastníka časem zplesniví. Buď ji někdo používá, nebo pryč s ní. Dashboard není muzeum starých nápadů.
+
+## Vanity metriky poznáš podle toho, že se špatně používají
+
+Vanity metrika není špatná proto, že je vysoká. Je špatná proto, že svádí k pohodlnému závěru.
+
+Podezřelé metriky:
+
+- celkový počet návštěv bez rozlišení kvality,
+- počet zobrazení stránky bez vazby na další krok,
+- počet sledujících bez vlastního distribučního kanálu,
+- průměrný čas na stránce bez kontextu úkolu,
+- počet registrací bez aktivace,
+- počet odeslaných e-mailů bez odpovědí nebo užitečných akcí.
+
+Lepší formulace:
+
+```text
+Místo: Máme 20 000 návštěv měsíčně.
+Lépe: Máme 42 relevantních poptávek z organického obsahu, z toho 11 odpovídá ideálnímu zákazníkovi a 6 vedlo k dalšímu rozhovoru.
+```
+
+```text
+Místo: Trial registrace rostou.
+Lépe: Trial registrace rostou, ale první hodnotnou akci dokončí jen 18 % týmů. Příští iterace řeší onboarding, ne akvizici.
+```
+
+## Privacy-first události navrhuj jako slovník
+
+Události v analytice pojmenuj tak, aby neobsahovaly osobní údaje ani citlivý obsah. Event má říkat, co se stalo v produktu, ne kdo přesně co napsal.
+
+Dobré názvy:
+
+- `contact_form_submitted`,
+- `pricing_cta_clicked`,
+- `rss_link_opened`,
+- `trial_created`,
+- `first_project_created`,
+- `invoice_export_downloaded`.
+
+Špatné názvy nebo hodnoty:
+
+- e-mail v názvu eventu,
+- jméno firmy jako parametr,
+- text zprávy z formuláře,
+- celé URL s tokenem,
+- interní poznámka obchodníka,
+- obsah vyhledávacího dotazu, pokud může nést osobní nebo citlivé údaje.
+
+Mini pravidlo: co bys nechtěl omylem poslat do screenshotu dashboardu, neposílej ani do analytiky.
+
+## Týdenní metrický rituál
+
+Dashboard má smysl jen tehdy, když podle něj někdo pravidelně jedná. Pro malý tým stačí 25 minut týdně.
+
+Průběh:
+
+1. Otevři jen hlavní dashboard, ne deset nástrojů.
+2. Zkontroluj, jestli web nebo produkt neměl provozní problém.
+3. Vyber jednu metriku, která se změnila nejvíc.
+4. Zapiš nejpravděpodobnější vysvětlení, ale označ ho jako hypotézu.
+5. Rozhodni jednu konkrétní akci na příští týden.
+6. Zapiš, které metriky nikdo nepoužil a mají kandidovat na odstranění.
+
+Příklad akce:
+
+```text
+Pozorování: Cenovou stránku navštívilo méně lidí, ale více jich kliklo na konzultaci.
+Hypotéza: Nový odstavec s vysvětlením balíčků filtruje zvědavce a pomáhá kvalifikovaným lidem.
+Akce: Přidat podobné vysvětlení do hero sekce služby a sledovat kvalitu poptávek další dva týdny.
+```
+
+## Checklist: dashboard bez vanity mlhy
+
+- [ ] Každá metrika má rozhodnutí, kterému pomáhá.
+- [ ] Dashboard má maximálně několik hlavních grafů pro týdenní řízení.
+- [ ] Události neobsahují e-maily, jména, texty zpráv ani tokeny.
+- [ ] Formulářový obsah se neposílá do analytiky.
+- [ ] Existuje slovník eventů a jejich účel.
+- [ ] Každá metrika má vlastníka.
+- [ ] Nepoužívané metriky se mažou nebo archivují.
+- [ ] Kvalita poptávek se hodnotí lépe než jen počet návštěv.
+- [ ] Dashboard nevyžaduje reklamní pixely ani session replay jako výchozí režim.
+- [ ] Tým má krátký týdenní rituál, který končí jednou akcí.
+
+## Mini šablona metrikové karty
+
+```text
+# Metriková karta: [název]
+
+## Rozhodnutí
+Jaké rozhodnutí tahle metrika zlepšuje:
+Kdo rozhodnutí dělá:
+Jak často se metrika kontroluje:
+
+## Definice
+Název metriky:
+Přesná definice:
+Zdroj dat:
+Vlastník:
+
+## Datová hranice
+Obsahuje osobní údaje? ano/ne
+Posíláme do analytiky texty od uživatelů? ano/ne
+Retence:
+Kdo má přístup:
+
+## Použití
+Co znamená růst:
+Co znamená pokles:
+Jaká kontrolní metrika brání špatné interpretaci:
+Jaká akce typicky následuje:
+
+## Úklid
+Datum poslední kontroly:
+Použito v posledních 90 dnech? ano/ne
+Ponechat, změnit, nebo odstranit:
+```
+
+Metrický dashboard má být nudně užitečný. Když po jeho otevření tým ví, co opravit, co nechat být a co přestat měřit, funguje. Když jen roste počet grafů, je čas na metrický úklid. Ano, i grafy potřebují občas vynést koš.
+
+## Zdroje
+
+- [Evropská komise: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
+- [EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)
+- [CNIL: Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
+
+---
+
 # Pracovní log
+- 2026-09-29: Doplněna příloha „Metrikový dashboard bez vanity mlhy“ s rozhodovacím přístupem k metrikám, třemi vrstvami dashboardu, privacy-first slovníkem eventů, týdenním rituálem, checklistem a šablonou metrikové karty.
 
 - 2026-09-29: Doplněna příloha „API dokumentace bez úniků dat a supportového ping-pongu“ s praktickým modelem endpointů podle integrační práce, datovými hranicemi, OpenAPI kontraktem, bezpečnými příklady, chybovými stavy, autorizací, developer portálem, checklistem, API kartou a ověřenými zdroji OWASP a OpenAPI.
 
