@@ -19007,7 +19007,201 @@ Experimentování má být trpělivá disciplína, ne kasino s tlačítky. Když
 
 ---
 
+# Příloha: Status page a provozní komunikace bez mlžení
+
+Status page není marketingová vitrína pro dny, kdy všechno svítí zeleně. Je to dohoda se zákazníkem: když se něco pokazí, nebude muset lovit pravdu v tichu, Slacku, Twitteru/X, support inboxu a vlastním podezření. Dobrá status page snižuje paniku, šetří podporu a ukazuje, že tým rozlišuje mezi „máme problém“ a „máme problém, ale nechceme to říct“.
+
+Privacy-first provozní komunikace má ještě jednu výhodu: nemusíš kvůli důvěře nasazovat další sledovací vrstvu. Stačí jasná stránka, RSS nebo e-mailové odběry pro incidenty, veřejná historie a interní rytmus aktualizací. Méně divadla, víc faktů. Ano, je to nudnější. Přesně proto to funguje.
+
+> Codyho komentář: Nejhorší status page je ta, která tvrdí „All systems operational“ v momentě, kdy zákazníkům padá přihlášení. To není optimismus. To je digitální ekvivalent cedule „pes je hodný“, zatímco žvýká pošťáka.
+
+## Status page navrhni podle zákaznické práce
+
+Nezačínej seznamem serverů. Začni tím, co zákazník opravdu používá. Většinu lidí nezajímá, jestli problém běží v databázi, queue, edge cache nebo integrační vrstvě. Zajímá je, jestli se mohou přihlásit, odeslat formulář, zaplatit, exportovat data, používat API nebo přijímat e-maily.
+
+Dobré komponenty pro malý SaaS:
+
+- webová aplikace,
+- přihlášení a správa účtu,
+- API,
+- platby a fakturace,
+- e-mailové doručování,
+- importy a exporty,
+- veřejný web a dokumentace,
+- administrace podpory.
+
+Technické komponenty si nech interně. Veřejná status page má mluvit jazykem dopadu. Pokud výpadek databáze rozbije přihlášení i API, zákazník nepotřebuje číst „PostgreSQL cluster degraded“. Potřebuje vědět: „Přihlášení a API jsou částečně nedostupné; data nejsou ztracená; další aktualizace za 30 minut.“
+
+## Incident zpráva má mít rytmus
+
+Incidentová komunikace selhává často proto, že tým čeká na kompletní pravdu. Jenže zákazník během výpadku nepotřebuje dokonalý román. Potřebuje vědět, že o problému víš, jaký je dopad, co děláš a kdy se ozveš znovu.
+
+Minimální rytmus:
+
+1. **První potvrzení** — do několika minut od ověření problému.
+2. **Dopad** — co nefunguje, koho se to týká a co zatím nevíš.
+3. **Další aktualizace** — pevný čas další zprávy, i kdyby zněla „stále vyšetřujeme“.
+4. **Mitigace** — co je dočasně opravené nebo jaký existuje workaround.
+5. **Vyřešeno** — kdy služba znovu funguje a co má zákazník případně udělat.
+6. **Postmortem** — u vážnějších incidentů krátké shrnutí příčiny a prevence.
+
+Slabá zpráva:
+
+```text
+Máme technické potíže. Pracujeme na tom.
+```
+
+Lepší zpráva:
+
+```text
+Od 09:12 UTC evidujeme zvýšenou chybovost při přihlášení do aplikace. API a veřejný web zatím fungují. Příčinu ověřujeme v auth vrstvě. Další aktualizaci zveřejníme nejpozději v 09:45 UTC.
+```
+
+Rozdíl není v délce, ale v důvěře. Druhá zpráva přiznává nejistotu, ale dává rámec.
+
+## Nepleť status page s právním oznámením
+
+Veřejná status page nemá obsahovat osobní údaje, interní logy, IP adresy, e-mailové adresy zákazníků, názvy konkrétních zákaznických účtů ani bezpečnostní detaily, které by z incidentu udělaly návod. Pokud incident může zahrnovat porušení zabezpečení osobních údajů, řeš paralelně samostatný právní a bezpečnostní proces.
+
+GDPR rozlišuje provozní výpadek a porušení zabezpečení osobních údajů. Pokud jde o porušení zabezpečení, správce má podle článku 33 GDPR povinnost oznámit incident dozorovému úřadu bez zbytečného odkladu a pokud možno do 72 hodin, pokud je pravděpodobné riziko pro práva a svobody fyzických osob. To neznamená, že každé „API padá“ patří na úřad. Znamená to, že u incidentů s osobními údaji musí existovat samostatná triáž.
+
+Praktické pravidlo:
+
+- status page říká zákazníkům, co funguje a nefunguje,
+- interní incident karta drží časovou osu, důkazy a rozhodnutí,
+- právní triáž řeší osobní údaje, riziko a případné oznámení,
+- zákaznická komunikace řeší konkrétní dopad na dotčené lidi nebo firmy.
+
+Tyto vrstvy se mohou potkat, ale nemají se slít do jednoho chaotického dokumentu. Chaos je fajn v jazzové improvizaci, ne v incident response.
+
+## Odběr aktualizací bez platformní závislosti
+
+Status page má být dostupná i mimo sociální sítě. Pokud je jediný kanál pro provozní aktualizace Twitter/X nebo LinkedIn, vytváříš závislost na platformě, která může změnit pravidla, skrýt příspěvky, vyžadovat účet nebo rozbít embed. Pro privacy-first provoz je lepší mít vlastní URL a přímé odběry.
+
+Doporučené kanály:
+
+- veřejná status page na vlastní doméně nebo subdoméně,
+- RSS/Atom feed incidentů,
+- e-mailový odběr pouze pro provozní oznámení,
+- webhook pro enterprise zákazníky,
+- interní kanál pro tým,
+- krátký odkaz ve footeru aplikace a dokumentaci.
+
+U e-mailového odběru odděl provozní oznámení od marketingu. Člověk, který chce vědět o výpadku API, se nepřihlásil k „pěti tipům na růst produktivity“. Nepřilepuj mu newsletter jako bonusový parazit.
+
+## SLA piš jako závazek, ne jako mlhovinu
+
+SLA není talisman proti výpadkům. Je to popis toho, co zákazník může očekávat: dostupnost, podporované hodiny, reakční doby, výjimky, údržbová okna a kompenzace. Pokud SLA slibuje víc, než tým umí měřit a provozně udržet, bude z něj právní dekorace s drahou pachutí.
+
+U malého SaaS začni jednoduše:
+
+- jaké služby jsou zahrnuté,
+- jak se měří dostupnost,
+- co se do dostupnosti nepočítá,
+- jak se oznamuje plánovaná údržba,
+- jak rychle reaguje podpora podle závažnosti,
+- kde zákazník najde historii incidentů,
+- jaké jsou limity odpovědnosti a kompenzace.
+
+SLA a status page musí používat stejný slovník. Když SLA mluví o „kritické nedostupnosti produkční aplikace“, status page nemá incident schovat jako „minor degradation“. Slova jsou v provozu levná jen do chvíle, než jim zákazník přestane věřit.
+
+## Plánovanou údržbu oznamuj nudně a včas
+
+Plánovaná údržba je nejlepší incident, protože o něm víš dopředu. Přesto ji týmy často komunikují tak pozdě a neurčitě, že působí jako nehoda v obleku.
+
+Dobré oznámení obsahuje:
+
+- datum, čas a časové pásmo,
+- očekávanou délku,
+- dotčené služby,
+- očekávaný dopad,
+- jestli hrozí přerušení práce,
+- co má zákazník udělat předem,
+- kde budou aktualizace.
+
+Příklad:
+
+```text
+V sobotu 2026-10-10 od 21:00 do 22:00 UTC proběhne plánovaná údržba databázové vrstvy. Webová aplikace může být během okna až 10 minut nedostupná. API požadavky mohou krátce vracet chybu 503. Data zákazníků zůstávají zachovaná. Aktualizace zveřejníme na status page.
+```
+
+Pokud údržba dopadne dřív, napiš to. Pokud se protáhne, napiš to taky. Mlčení neurychluje migraci. Jen vyrábí support tikety.
+
+## Postmortem bez hledání obětního serveru
+
+Postmortem má vysvětlit, co se stalo, proč se to stalo, jaký byl dopad a co se změnilo, aby se problém neopakoval. Nemá hledat člověka, kterého tým rituálně obětuje ve veřejném textu.
+
+Struktura krátkého postmortemu:
+
+- shrnutí jednou větou,
+- časová osa,
+- dopad na zákazníky,
+- technická příčina v bezpečné míře detailu,
+- co fungovalo dobře,
+- co selhalo,
+- konkrétní opatření s vlastníkem a termínem,
+- jestli se incident týkal osobních údajů.
+
+U veřejné verze vynech interní zkratky, citlivé konfigurace a detaily, které zvyšují bezpečnostní riziko. U interní verze buď přesnější. Tým se z incidentu nenaučí nic, pokud postmortem zní jako firemní horoskop.
+
+## Checklist: status page bez mlžení
+
+- [ ] Status page popisuje zákaznické služby, ne jen interní infrastrukturu.
+- [ ] Každá komponenta má jasného vlastníka a způsob ověření stavu.
+- [ ] Incident zprávy obsahují dopad, čas, další aktualizaci a známá omezení.
+- [ ] Veřejné zprávy neobsahují osobní údaje, interní logy ani citlivé bezpečnostní detaily.
+- [ ] Existuje samostatná triáž pro incidenty s osobními údaji.
+- [ ] Provozní odběr je oddělený od marketingu.
+- [ ] Status page má přímou URL a ideálně RSS/Atom feed.
+- [ ] SLA používá stejný slovník jako status page.
+- [ ] Plánovaná údržba má oznámení s časovým pásmem, dopadem a očekávanou délkou.
+- [ ] U větších incidentů vzniká postmortem s konkrétními nápravnými opatřeními.
+
+## Mini šablona incident oznámení
+
+```text
+# Incident oznámení: [název]
+
+## Stav
+Vyšetřujeme / Identifikováno / Mitigováno / Vyřešeno
+
+## Dopad
+Dotčené služby:
+Dotčení zákazníci / segmenty:
+Co funguje:
+Co nefunguje:
+
+## Čas
+Začátek incidentu:
+Čas zjištění:
+Poslední aktualizace:
+Další aktualizace nejpozději:
+
+## Co děláme
+Aktuální krok:
+Workaround pro zákazníky:
+Riziko pro data: žádné / vyšetřujeme / potvrzené
+
+## Vyřešení
+Čas obnovy:
+Co má zákazník udělat:
+Bude postmortem? ano/ne
+```
+
+Status page je produktová funkce důvěry. Když ji připravíš před incidentem, vypadáš během problému jako tým. Když ji vymýšlíš až při výpadku, vypadáš jako skupina lidí, kteří společně hledají vypínač. Což je taky týmová aktivita, jen ne ta, kterou chceš prodávat.
+
+## Zdroje
+
+- [EUR-Lex: GDPR, článek 33 — oznamování porušení zabezpečení osobních údajů dozorovému úřadu](https://eur-lex.europa.eu/eli/reg/2016/679/oj)
+- [Evropská komise: Rules for business and organisations — personal data breach notification](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/controller-processor/what-data-breach-and-what-do-we-have-do-case-data-breach_en)
+- [Atlassian: Incident communication best practices](https://www.atlassian.com/incident-management/incident-communication)
+- [Uptime Kuma: Status Page](https://github.com/louislam/uptime-kuma/wiki/Status-Page)
+
+---
+
 # Pracovní log
+- 2026-09-29: Doplněna příloha „Status page a provozní komunikace bez mlžení“ s praktickým návrhem komponent, incident zpráv, SLA, plánované údržby, postmortemu, privacy-first odběrů, checklistem, šablonou incident oznámení a ověřenými zdroji k GDPR i provozní komunikaci.
+
 - 2026-09-29: Doplněna příloha „Experimenty a A/B testy bez manipulace“ s privacy-first postupem pro hypotézy, férové varianty, datovou hranici, vyhodnocení malých experimentů, checklist a šablonu experiment karty.
 
 - 2026-09-29: Doplněna příloha „Metrikový dashboard bez vanity mlhy“ s rozhodovacím přístupem k metrikám, třemi vrstvami dashboardu, privacy-first slovníkem eventů, týdenním rituálem, checklistem a šablonou metrikové karty.
