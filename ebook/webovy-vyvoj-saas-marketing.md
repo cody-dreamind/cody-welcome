@@ -18001,7 +18001,207 @@ Odděl seznam účastníků od výzkumných poznámek. V poznámkách používej
 - [Nielsen Norman Group: User Interviews](https://www.nngroup.com/articles/user-interviews/)
 - [Nielsen Norman Group: Interviewing Users](https://www.nngroup.com/articles/interviewing-users/)
 
+# Příloha: Offboarding zákazníka bez rukojmí a datového bordelu
+
+Zákazník, který odchází, není zrádce. Je to člověk nebo firma, která buď vyrostla jinam, zjistila, že produkt nepotřebuje, nebo prostě škrtá náklady. Pokud ho při odchodu potrestáš chaosem, skrytým tlačítkem, nečitelným exportem nebo nekonečným „kontaktujte sales“, dostaneš možná ještě jednu fakturu. Ale taky si vyrobíš nedůvěru, špatnou referenci a interní datový hřbitov.
+
+Privacy-first offboarding má jednoduchý cíl: zákazník musí vědět, co se stane s jeho účtem, daty, fakturami, přístupy a integracemi. Tým zase musí vědět, co smí smazat, co musí držet kvůli účetnictví nebo bezpečnosti, co má exportovat a kdy se uzavírá poslední přístup. Není to sexy growth hack. Je to provozní hygiena. Přesně ten typ práce, který nikdo nechce dělat, dokud se první enterprise zákazník nezeptá: „Jak dostaneme data ven?“
+
+> Codyho komentář: Nejlepší retention trik je produkt, ze kterého jde férově odejít. Paradoxně tím snižuješ strach z nákupu. Když zákazník ví, že nebude rukojmí, snáz řekne ano.
+
+## Offboarding navrhuj už při onboardingu
+
+Odchod zákazníka se nedá dobře vymyslet ve chvíli, kdy už se někdo zlobí na podpoře. Navrhni ho ve stejném dokumentu jako onboarding: jak účet vzniká, jak získává hodnotu, jak se předává do provozu a jak se jednou bezpečně zavře.
+
+Minimální offboardingová mapa:
+
+1. Kdo může účet zrušit nebo převést.
+2. Co se stane s uživateli ve workspace.
+3. Jaké datové exporty jsou dostupné.
+4. Jak dlouho trvá retenční okno po zrušení.
+5. Která data se mažou automaticky.
+6. Která data se drží kvůli právním, účetním nebo bezpečnostním důvodům.
+7. Jak se ruší API klíče, webhooky, SSO, fakturace a role.
+8. Jak zákazník dostane potvrzení o dokončení.
+
+Praktický příklad pro malý B2B SaaS: při zrušení workspace se okamžitě zastaví nová fakturace, deaktivují se aktivní integrace, účet přejde do režimu „jen čtení“ na 14–30 dní, administrátor si může stáhnout export a po retenční lhůtě se pracovní data smažou nebo anonymizují. Faktury a auditní záznamy nezmizí jen proto, že někdo klikl na „smazat účet“ — ale zákazník musí vědět proč.
+
+## Rozliš zrušení, pozastavení, převod a smazání
+
+Jedno tlačítko „Delete account“ často zakrývá čtyři různé práce. Když je nerozlišíš, vznikne chaos pro zákazníka i pro podporu.
+
+- **Zrušení předplatného:** končí placení a přístup k placeným funkcím, ale účet může ještě existovat.
+- **Pozastavení účtu:** zákazník dočasně nechce službu používat, ale nechce přijít o konfiguraci.
+- **Převod vlastnictví:** workspace přechází na jiného administrátora, firmu nebo fakturační kontakt.
+- **Smazání dat:** řeší se pracovní obsah, osobní údaje, logy, exporty, zálohy a právní výjimky.
+
+V UI i v dokumentaci piš přesně, která akce co znamená. „Zrušit tarif“ nesmí tajně znamenat „smazat projekt“. „Smazat účet“ nesmí potichu nechat aktivní webhook, který dál posílá data do třetího nástroje. A „pauza“ nesmí být marketingový slovník pro situaci, kdy zákazník pořád platí, jen se mu hůř odchází.
+
+## Export musí být použitelný, ne jen formálně existující
+
+GDPR zná právo na přenositelnost dat v článku 20 a Evropská komise ho popisuje jako možnost získat osobní údaje ve strukturovaném, běžně používaném a strojově čitelném formátu. EDPB zároveň vysvětluje, že data portability není totéž co obecný přístup ke všem datům; týká se hlavně dat poskytnutých subjektem údajů a zpracování založeného na souhlasu nebo smlouvě. Prakticky: export pro zákazníka musí být férový a srozumitelný, ale nemusí bezhlavě vylít interní poznámky, bezpečnostní signály nebo data třetích osob.
+
+Dobrý export má tři vrstvy:
+
+1. **Lidský balíček:** PDF/HTML shrnutí účtu, seznam projektů, fakturace, aktivních integrací, členů a nastavení.
+2. **Strojový balíček:** CSV nebo JSON se strukturou, verzí schématu, časovou zónou a popisem polí.
+3. **Technický manifest:** datum exportu, rozsah, počet záznamů, hash souborů, autor žádosti a retenční lhůta exportního odkazu.
+
+Neposílej export jako věčný veřejný odkaz. Lepší je krátce platný odkaz, auditní stopa stažení a možnost export znovu vygenerovat. U citlivějších účtů přidej druhé potvrzení administrátora nebo dočasné heslo sdílené jiným kanálem. Ano, je to méně pohodlné. Ale taky je to lepší než poslat zákaznickou databázi na odkaz, který někdo za rok najde v chatu. Gratuluju, právě jsi vynalezl incident.
+
+## Mazání dat rozděl podle kategorií
+
+„Smazali jsme účet“ je hezká věta do supportu, ale špatná interní specifikace. Pro produkt potřebuješ datové kategorie a pravidla.
+
+Příklad kategorií:
+
+- **Pracovní obsah zákazníka:** projekty, dokumenty, importy, položky v aplikaci, přílohy.
+- **Účetní data:** faktury, daňové doklady, platby, refundy, právní náležitosti.
+- **Bezpečnostní a auditní data:** přihlášení, změny rolí, API tokeny, administrátorské akce.
+- **Podpůrná komunikace:** tickety, e-maily, schválené interní poznámky.
+- **Produktová analytika:** agregované eventy, technické metriky, experimenty.
+- **Zálohy:** snapshoty, objektové úložiště, databázové dumpy, disaster recovery kopie.
+
+U každé kategorie si napiš: účel, právní nebo smluvní důvod, vlastník, standardní retence, výjimka, způsob anonymizace nebo mazání, kde se eviduje dokončení. GDPR neříká „smaž všechno vždycky hned“. Říká mimo jiné, že máš zpracovávat data pro jasné účely, minimalizovat je a umět vysvětlit, proč je držíš. Evropská komise k právům jednotlivců uvádí i právo na výmaz a omezení zpracování, ale ta práva mají kontext a výjimky.
+
+## Zálohy nejsou kouzelný úkryt
+
+Nejhorší odpověď na žádost o smazání je: „V produkci jsme to smazali, v zálohách se uvidí.“ Zálohy jsou nutné, ale nesmí být výmluva na nekonečné držení dat.
+
+Praktický model:
+
+- Produkční pracovní data smaž nebo anonymizuj podle retenčního pravidla.
+- V aktivních zálohách data nevyhledávej ručně, pokud to není technicky a bezpečnostně rozumné.
+- Měj pevnou retenční dobu záloh, po které staré snapshoty mizí.
+- Pokud obnovuješ starší zálohu, znovu aplikuj seznam mazacích požadavků nebo anonymizační migraci.
+- Do zákaznické komunikace napiš, že zálohy rotují podle provozního plánu a nejsou používány pro běžný provoz.
+
+Tím se vyhneš dvěma extrémům: nereálnému slibu „smažeme i každý byte v každé pásce do pěti minut“ a pohodlnému „zálohy neřešíme nikdy“. Privacy-first provoz je nudně konkrétní. Nudně konkrétní je dobře.
+
+## Integrace zavři dřív, než začnou strašit
+
+Odcházející zákazník často zapomene, že má aktivní webhooky, API tokeny, SSO konfiguraci, CRM synchronizaci, účetní export nebo no-code automatizaci. Pokud tyhle vazby nezavřeš, může produkt po zrušení dál posílat chyby, požadavky nebo kusy dat do starých systémů.
+
+Offboarding integrací udělej jako kontrolní sekci:
+
+1. Zneplatni API klíče a osobní tokeny.
+2. Vypni webhook endpointy a fronty pro workspace.
+3. Zastav plánované synchronizace.
+4. Odpoj OAuth aplikace a externí konektory.
+5. Zruš SSO metadata nebo je přesuň do archivního režimu.
+6. Vypni e-mailové automatizace, které by dál kontaktovaly uživatele.
+7. Zapiš do auditní stopy, kdo akci spustil a kdy doběhla.
+
+Zákazníkovi ukaž přehled „co bude odpojeno“. Ne každého zajímá technický detail, ale admin ocení, že ví, proč už mu za týden nepřijde pět set chyb z účetního systému.
+
+## Retenční okno používej jako službu, ne jako past
+
+Krátké retenční okno po zrušení je užitečné: zákazník si stáhne export, vyřeší faktury, předá vlastnictví a případně zrušení vezme zpět, pokud šlo o omyl. Ale retenční okno nesmí být temný vzor.
+
+Férové pravidlo:
+
+- Ukaž přesné datum, kdy se data smažou nebo anonymizují.
+- Vysvětli, co zůstane kvůli účetnictví, bezpečnosti nebo právní obraně.
+- Nabídni okamžité smazání, pokud je bezpečné a slučitelné s povinnostmi.
+- Neobnovuj marketingové e-maily jen proto, že zákazník exportoval data.
+- Neprodlužuj retenci potichu kvůli „možné budoucí reaktivaci“.
+
+U B2B produktů může dávat smysl poslat administrátorům jednu provozní připomínku: „Za 7 dní končí retenční okno, stáhněte si export.“ To je služba. Série pěti manipulativních e-mailů s titulkem „Neopouštěj nás 😭“ je trapas v HTML.
+
+## Podpora potřebuje scénář, ne improvizaci
+
+Offboarding často řeší support, ale rozhodnutí jsou produktová, právní a bezpečnostní. Připrav pro podporu krátký scénář.
+
+Scénář by měl odpovědět:
+
+- Jak ověřit, že žadatel má právo účet zrušit nebo exportovat.
+- Kdy eskalovat na vlastníka účtu, bezpečnost nebo finance.
+- Jak vysvětlit rozdíl mezi zrušením tarifu a smazáním dat.
+- Jak odpovědět na žádost o výmaz osobních údajů.
+- Jak poslat potvrzení o dokončení bez zbytečných dat.
+- Co nikdy neslibovat v chatu bez ověření.
+
+Příklad dobré odpovědi:
+
+> Díky, požadavek jsme přijali. Nejprve ověříme, že žádost posílá správce workspace. Po potvrzení zastavíme předplatné, připravíme export pracovních dat a po retenční lhůtě smažeme nebo anonymizujeme pracovní obsah podle naší retenční politiky. Fakturační a bezpečnostní záznamy uchováme jen v nezbytném rozsahu pro účetní, právní a bezpečnostní účely.
+
+## Checklist: offboarding bez rukojmí
+
+- Máme v produktu rozlišené zrušení tarifu, pozastavení, převod vlastnictví a smazání dat.
+- Administrátor vidí, co se stane s daty, přístupy, integracemi a fakturací.
+- Export má lidskou i strojovou podobu, dokumentované schéma a krátce platný odkaz.
+- Retenční lhůty jsou popsané podle kategorií dat, ne jednou mlhavou větou.
+- Zálohy mají rotaci a obnovovací postup, který respektuje dřívější mazací požadavky.
+- API klíče, webhooky, OAuth, SSO a plánované synchronizace se při offboardingu zavírají.
+- Support má ověřovací a eskalační scénář.
+- Zákazník dostane potvrzení o dokončení a ví, která data zůstala z oprávněných důvodů.
+- Marketingové nástroje nedostanou signál „zkus ho ulovit zpět“ bez jasného účelu a souhlasu.
+- Offboarding testujeme aspoň čtvrtletně na interním demo účtu.
+
+## Mini šablona offboarding karty
+
+```markdown
+# Offboarding karta: [produkt / workspace]
+
+## Typ akce
+- Zrušení tarifu:
+- Pozastavení:
+- Převod vlastnictví:
+- Smazání pracovních dat:
+- Žádost subjektu údajů:
+
+## Oprávněná osoba
+- Žadatel:
+- Role:
+- Ověření:
+- Schvalovatel:
+
+## Export
+- Rozsah:
+- Formát:
+- Schéma/verze:
+- Platnost odkazu:
+- Datum vygenerování:
+- Staženo:
+
+## Data a retence
+- Pracovní obsah:
+- Fakturace:
+- Audit a bezpečnost:
+- Podpora:
+- Analytika:
+- Zálohy:
+
+## Integrace
+- API klíče:
+- Webhooky:
+- OAuth/SSO:
+- Synchronizace:
+- E-mailové automatizace:
+
+## Komunikace
+- Potvrzení přijetí:
+- Připomínka konce retence:
+- Potvrzení dokončení:
+- Interní poznámka:
+
+## Uzavření
+- Vlastník:
+- Datum dokončení:
+- Výjimky:
+- Poučení pro produkt:
+```
+
+## Zdroje
+
+- [EUR-Lex: GDPR, Article 20 — Right to data portability](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679)
+- [European Commission: Information for individuals — data protection rights](https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en)
+- [European Commission: Dealing with requests from individuals](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en)
+- [EDPB: Guidelines on the right to data portability under Regulation 2016/679, WP242 rev.01](https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en)
+
 # Pracovní log
+
+- 2026-09-29: Doplněna příloha „Offboarding zákazníka bez rukojmí a datového bordelu“ s praktickým postupem pro zrušení, pozastavení, převod a smazání účtu, použitelný export, datové kategorie, zálohy, integrace, retenční okno, support scénář, checklist, offboarding kartu a ověřené zdroje Evropské komise, EUR-Lex a EDPB.
 
 - 2026-09-29: Doplněna příloha „Produktové rozhovory bez výslechu a datového lovu“ s praktickým postupem pro výzkumné rozhodnutí, férovou pozvánku, nahrávání a retenci, scénář rozhovoru, anonymizované poznámky, syntézu signálů, checklist, výzkumnou kartu a ověřené zdroje Evropské komise, EDPB a Nielsen Norman Group.
 
