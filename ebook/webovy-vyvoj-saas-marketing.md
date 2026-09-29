@@ -14521,7 +14521,219 @@ Další revize:
 - ÚOOÚ: DPIA — Posouzení vlivu na ochranu osobních údajů — https://uoou.gov.cz/profesional/metodiky-a-doporuceni-pro-spravce/posouzeni-vlivu-na-ochranu-osobnich-udaju
 - ÚOOÚ: Q&A k posouzení vlivu na ochranu osobních údajů — https://uoou.gov.cz/profesional/qa-otazky-a-odpovedi/posouzeni-vlivu-na-ochranu-osobnich-udaju
 
+
+# Příloha: SLA a SLO bez dostupnostního divadla
+
+SLA a SLO jsou užitečné jen tehdy, když pomáhají týmu i zákazníkovi chápat realitu služby. Když jsou napsané jako marketingová kouřová clona, stane se z nich past: slibuješ dostupnost, kterou neumíš měřit, podporu, kterou neumíš dodat, a kompenzace, které stejně nikoho neuklidní. Malý SaaS nepotřebuje enterprise divadlo. Potřebuje poctivě říct, co je kritické, jak se to měří, kdy se komunikuje problém a co se stane, když služba selže.
+
+SLA je závazek navenek. SLO je interní cíl kvality. SLI je měřítko, které ukazuje, jestli se cíli blížíš. Google SRE kniha popisuje právě tuhle logiku: SLI jsou indikátory, SLO jsou cíle a SLA jsou smluvní závazky se zákazníkem ([Google SRE: Service Level Objectives](https://sre.google/sre-book/service-level-objectives/)). Přeloženo do lidské řeči: nejdřív měř správnou věc, potom si nastav interní hranici a teprve nakonec slibuj světu.
+
+> Codyho komentář: „99,99 % dostupnost“ na webu s jedním serverem, jedním člověkem na telefonu a monitoringem v podobě „snad mi někdo napíše“ není SLA. Je to poezie. A poezie do smlouvy patří jen velmi opatrně.
+
+## Nezačínej procentem, začni dopadem
+
+Dostupnost se často prodává jako číslo. Jenže zákazníka nezajímá abstraktní procento. Zajímá ho, jestli může udělat práci, kvůli které produkt platí.
+
+Začni otázkami:
+
+- Která část produktu je pro zákazníka opravdu kritická?
+- Co je nepříjemnost a co je provozní stopka?
+- Jak rychle musí tým poznat problém?
+- Jak rychle musí zákazník dostat informaci?
+- Jaký ruční workaround dává smysl?
+
+Příklad pro B2B SaaS:
+
+| Oblast | Dopad výpadku | Praktický cíl |
+| --- | --- | --- |
+| Přihlášení | zákazník se nedostane k práci | vysoká priorita, syntetická kontrola |
+| Export dat | blokuje reporting a audit | sledovat úspěšnost exportu, mít ruční variantu |
+| Veřejný marketingový web | nepřichází poptávky | důležité, ale ne stejné jako produkční appka |
+| Notifikační e-maily | zákazník nemusí vidět změnu včas | fronta, retry, přehled nedoručení |
+| Interní administrace | tým hůř pomáhá zákazníkům | prioritizovat podle dopadu na podporu |
+
+Tím se vyhneš klasické chybě: jeden velký slib pro celý produkt. Homepage, aplikace, API, e-mailové fronty a exporty nemají stejný dopad. Proto nemají mít stejný provozní režim.
+
+## SLI měř tak, aby nešidily realitu
+
+SLI má být signál kvality služby, ne kosmetická metrika. Pokud měříš jen to, že server vrací `200 OK`, můžeš mít krásnou dostupnost a zároveň rozbitý login, prázdný dashboard nebo formulář, který se tváří jako odeslaný a data zahazuje do propasti.
+
+Užitečné SLI pro malý SaaS:
+
+- úspěšné přihlášení testovacího účtu,
+- načtení hlavního dashboardu do rozumného času,
+- úspěšné vytvoření klíčového záznamu,
+- úspěšný export vzorku dat,
+- doručení transakčního e-mailu do fronty,
+- chybovost API endpointů podle typu zákaznické akce,
+- doba odezvy pro kritické akce, ne jen průměr homepage.
+
+Špatné SLI:
+
+- průměrná odezva všech requestů dohromady,
+- počet návštěv marketingového webu,
+- „server žije“, když nežije hlavní workflow,
+- metrika z nástroje, kterému nikdo nerozumí.
+
+Privacy-first detail: syntetické kontroly dělej s testovacím účtem a testovacími daty. Nepoužívej reálné zákaznické účty jen proto, že je to pohodlné. Monitoring má hlídat službu, ne tajně vytvářet druhou databázi chování zákazníků.
+
+## SLO nastav jako interní brzdu
+
+SLO má týmu říkat, kdy už kvalita služby klesá pod přijatelnou hranici. Není to dekorace do Notionu. Je to provozní brzda.
+
+Praktický model:
+
+```text
+SLI: úspěšné dokončení kritického workflow „vytvořit report“
+SLO: 99,5 % úspěšných pokusů za posledních 30 dní
+Okno: klouzavých 30 dní
+Vyloučení: plánovaná údržba oznámená předem, testovací prostředí
+Akce při porušení: zastavit nové nerizikové funkce a opravit stabilitu
+```
+
+Error budget je jednoduchý princip: pokud si dovolíš určitou míru chyb, můžeš v rámci ní rozumně experimentovat. Když ji vyčerpáš, přestaneš tlačit nové změny a opravuješ spolehlivost. To je zdravější než nekonečná hádka „rychlost versus kvalita“.
+
+Pro malý tým stačí tři úrovně:
+
+| Stav | Co znamená | Co dělat |
+| --- | --- | --- |
+| Zelená | SLO drží, incidenty jsou výjimečné | pokračovat ve vývoji |
+| Žlutá | roste chybovost nebo se opakuje stejný problém | naplánovat stabilizační práci |
+| Červená | SLO je porušené nebo hrozí porušení | zastavit rizikové releasy, řešit příčinu |
+
+> Codyho komentář: Stabilita není nepřítel rychlosti. Stabilita je důvod, proč rychlost nezničí zákaznickou důvěru jako nákupní vozík bez kolečka.
+
+## SLA slibuj opatrně a čitelně
+
+SLA patří do smlouvy, obchodních podmínek nebo enterprise dodatku. Nemá být opsané od větší firmy jen proto, že to zní dospěle. NIST ve své cloudové referenční architektuře řadí SLA mezi klíčové prvky vztahu mezi poskytovatelem a zákazníkem cloudové služby ([NIST SP 500-292](https://www.nist.gov/publications/nist-cloud-computing-reference-architecture)). Pro malý SaaS to znamená hlavně: slib má být měřitelný, dohledatelný a provozně splnitelný.
+
+Dobrá SLA věta:
+
+```text
+Produkční aplikaci provozujeme s cílem měsíční dostupnosti 99,5 % pro přihlášení a hlavní pracovní workflow. Plánovanou údržbu oznamujeme minimálně 48 hodin předem, pokud nejde o bezpečnostní zásah. Incidenty s dopadem na zákazníky komunikujeme na status stránce a e-mailem podle závažnosti.
+```
+
+Slabá SLA věta:
+
+```text
+Garantujeme maximální dostupnost našich služeb a rychlou podporu.
+```
+
+To druhé nezaručuje skoro nic. Jen si koleduje o konflikt, protože každý si pod tím představí něco jiného.
+
+## Podpora není totéž co dostupnost
+
+SLA často míchá dvě různé věci: dostupnost služby a reakční dobu podpory. Odděl je.
+
+Příklad podpůrných priorit:
+
+| Priorita | Příklad | První reakce | Cíl řešení |
+| --- | --- | --- | --- |
+| P1 kritická | aplikace nejde používat většině zákazníků | do 1 hodiny v pracovní době / dle tarifu | workaround nebo obnova co nejdřív |
+| P2 vysoká | část zákazníků nemůže dokončit důležitý krok | do 4 pracovních hodin | oprava nebo náhradní postup |
+| P3 běžná | chyba bez zásadního dopadu | do 1 pracovního dne | zařadit do plánu oprav |
+| P4 dotaz | nastavení, vysvětlení, drobné úpravy | do 2 pracovních dnů | odpověď nebo doporučení |
+
+Pokud nemáš nonstop tým, neslibuj nonstop podporu. Můžeš mít monitoring a automatické alerty mimo pracovní dobu, ale člověk musí vědět, co to znamená. Férové „kritické incidenty hlídáme automaticky, běžnou podporu řešíme v pracovní dny“ je lepší než falešné „24/7“, kde v noci odpovídá jen bot s motivačním tónem.
+
+## Údržbu komunikuj dřív než zákazník pozná problém
+
+Plánovaná údržba je normální. Problém je, když se tváří jako překvapení.
+
+Minimum pro oznámení údržby:
+
+- co se bude měnit,
+- kdy začne a kdy má skončit,
+- kterých částí služby se dotkne,
+- jestli zákazník musí něco udělat,
+- kde bude průběžná aktualizace,
+- kontakt pro kritické dopady.
+
+Privacy-first detail: do status zpráv nedávej zákaznická jména, ID účtů, interní URL s tokeny, screenshoty z produkce ani logy. Status stránka je veřejná výloha provozu, ne skládka debug detailů.
+
+## Měsíční provozní rutina
+
+Jednou měsíčně projdi:
+
+1. Které SLO bylo nejblíž porušení?
+2. Který incident se opakoval?
+3. Který alert byl hlučný a nikdo mu nevěřil?
+4. Která metrika nepopisuje realitu zákazníka?
+5. Co zlepší stabilitu víc než další funkce?
+6. Je SLA pořád pravdivá vzhledem k týmu a infrastruktuře?
+
+Výstup nemusí být dlouhý. Stačí krátká poznámka: „Tento měsíc jsme měli dva výpadky exportu. Přidáváme syntetickou kontrolu exportu a retry fronty. Nové experimenty v exportech pozastavujeme do ověření.“
+
+## Checklist: SLA a SLO bez divadla
+
+- [ ] Máme rozlišené kritické workflow, marketingový web, API, e-maily a interní administraci?
+- [ ] Měříme aspoň jedno SLI, které odpovídá skutečné práci zákazníka?
+- [ ] Používáme testovací data pro syntetické kontroly?
+- [ ] Má každé SLO časové okno a jasnou reakci při porušení?
+- [ ] Neslibujeme dostupnost, kterou neumíme provozně doručit?
+- [ ] Oddělujeme dostupnost služby od reakční doby podpory?
+- [ ] Má plánovaná údržba jasný oznamovací postup?
+- [ ] Víme, co do status komunikace nepatří kvůli bezpečnosti a soukromí?
+- [ ] Revidujeme SLO aspoň měsíčně u kritických částí produktu?
+- [ ] Umíme zákazníkovi vysvětlit SLA lidsky bez právního kouře?
+
+## Mini šablona SLA/SLO karty
+
+```text
+# SLA/SLO karta: [služba / workflow]
+
+## Rozsah
+Služba nebo workflow:
+Zákaznický dopad:
+Kritičnost: nízká / střední / vysoká / kritická
+
+## SLI
+Co měříme:
+Jak měříme:
+Testovací účet / data:
+Frekvence měření:
+Kde je dashboard:
+
+## SLO
+Cíl:
+Časové okno:
+Co se počítá jako výpadek:
+Co se nepočítá:
+Akce při žlutém stavu:
+Akce při červeném stavu:
+
+## SLA
+Co slibujeme zákazníkovi:
+Kde je slib publikovaný:
+Komunikační kanál při incidentu:
+Plánovaná údržba — oznámení předem:
+Kompenzace / kredit, pokud existuje:
+
+## Podpora
+Priorita P1:
+Priorita P2:
+Priorita P3:
+Běžná pracovní doba podpory:
+Nouzový kontakt:
+
+## Revize
+Vlastník:
+Poslední revize:
+Další revize:
+Poznámky:
+```
+
+## Zdroje
+
+- Google SRE: Service Level Objectives — https://sre.google/sre-book/service-level-objectives/
+- Google SRE Workbook: Implementing SLOs — https://sre.google/workbook/implementing-slos/
+- NIST SP 500-292: NIST Cloud Computing Reference Architecture — https://www.nist.gov/publications/nist-cloud-computing-reference-architecture
+- ENISA: Cloud Security Guide for SMEs — https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes
+
+
 # Pracovní log
+
+- 2026-09-29: Doplněna příloha „SLA a SLO bez dostupnostního divadla“ s praktickým rozlišením SLI/SLO/SLA, měřením kritických workflow, interními brzdami, podporovými prioritami, údržbovou komunikací, měsíční rutinou, checklistem, šablonou SLA/SLO karty a ověřenými zdroji Google SRE, NIST a ENISA.
 
 - 2026-09-28: Doplněna příloha „DPIA bez právního kouře a produktové paralýzy“ s praktickým rozhodovacím postupem, mapou datového toku, riziky z pohledu člověka, méně datovými variantami, pravidly pro konzultaci, checklistem, vyplnitelnou DPIA kartou a ověřenými zdroji GDPR, EDPB a ÚOOÚ.
 - 2026-09-28: Doplněna příloha „Status page a komunikace výpadků bez kouřové clony“ s rozlišením interního a veřejného stavu, první incidentovou zprávou, aktualizačním rytmem, privacy-first pravidly pro status notifikace, bezpečným workaroundem, post-incident shrnutím, checklistem, šablonou komunikace a ověřenými zdroji NIST a Atlassian.
