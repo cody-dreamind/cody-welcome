@@ -17575,7 +17575,213 @@ Release notes jsou malá věc s velkým efektem. Když je píšeš čitelně, z�
 - [Keep a Changelog](https://keepachangelog.com/)
 - [Semantic Versioning](https://semver.org/)
 
+# Příloha: Incident response bez paniky a datového požáru
+
+Incident není až chvíle, kdy hoří produkce, Slack pípá jako mikrovlnka a někdo ve 2:13 ráno píše „asi nic“. Incident je každý stav, kdy je ohrožená dostupnost, integrita, důvěrnost nebo důvěra uživatelů. Pro malý web nebo SaaS to může být výpadek plateb, omylem zveřejněný export, chybně nastavený bucket, zranitelný plugin, uniklý API token, rozbitý deploy nebo podezřelý přístup do adminu.
+
+Privacy-first incident response má jednoduchý cíl: rychle omezit škodu, zjistit fakta, komunikovat bez mlžení a nezměnit vyšetřování v další datový únik. Ano, i panika má mít datovou minimalizaci. Civilizace ještě neumřela.
+
+> Codyho komentář: Nejhorší incidentový plán je ten, který vzniká během incidentu. To je jako kreslit mapu únikového východu kouřem na stěnu.
+
+## Definuj incident dřív, než nastane
+
+Malý tým nepotřebuje padesátistránkovou příručku. Potřebuje společný slovník. Bez něj se každá událost hádá od nuly: je to bug, bezpečnostní problém, GDPR incident, výpadek, nebo jen pondělí převlečené za infrastrukturu?
+
+Zaveď tři základní kategorie:
+
+- **Provozní incident**: služba nefunguje, je pomalá, nejde registrace, platba, přihlášení nebo kritické workflow.
+- **Bezpečnostní incident**: podezření na neoprávněný přístup, zneužití tokenu, zranitelnost, malware, kompromitovaný účet nebo změna mimo běžný proces.
+- **Incident osobních údajů**: porušení zabezpečení, které vede nebo může vést ke zničení, ztrátě, změně, neoprávněnému zpřístupnění nebo přístupu k osobním údajům.
+
+Třetí bod není poetika. GDPR používá pro „porušení zabezpečení osobních údajů“ právě logiku ztráty, změny, zpřístupnění nebo neoprávněného přístupu. Evropská komise zároveň připomíná, že správce má v relevantních případech hlásit porušení dozorovému úřadu bez zbytečného odkladu, obvykle do 72 hodin od zjištění. Proto se u incidentu nesmí dva dny čekat, jestli „se to samo uklidní“. To se obvykle uklidní jen v prezentaci pro vedení.
+
+## První hodina: zastavit krvácení, ne psát román
+
+První hodina rozhoduje o tom, jestli incident zůstane zvládnutelný. Cíl není vědět všechno. Cíl je zastavit šíření, zachovat důkazy a otevřít správné pracovní vlákno.
+
+Postup:
+
+1. Urči incident ownera pro aktuální událost.
+2. Založ jedno interní vlákno nebo incident dokument.
+3. Zapiš čas zjištění, zdroj hlášení a první hypotézu.
+4. Omez dopad: vypni klíč, revertni deploy, izoluj účet, zastav integraci, přepni fallback.
+5. Zachovej relevantní logy, ale nekopíruj celé databáze do chatu.
+6. Rozhodni, jestli jde o možný incident osobních údajů.
+7. Odděl technické řešení od komunikace.
+
+Praktický detail: interní incident kanál nesmí být datový vysavač. Do zpráv piš ID účtu, čas, systém a dopad. Nelep tam celé payloady, exporty zákazníků, screenshoty faktur nebo e-maily uživatelů. Když je potřeba citlivý důkaz, ulož ho do omezeného úložiště s přístupem jen pro incident tým a do chatu dej odkaz nebo hash.
+
+## Incident role pro malý tým
+
+I dvoučlenný tým může mít role. Jeden člověk může držet víc rolí, ale role musí být pojmenované.
+
+- **Incident owner** drží prioritu, časovou osu a rozhodnutí.
+- **Technický lead** řeší příčinu, mitigaci, rollback a ověření opravy.
+- **Komunikační lead** připravuje interní a externí zprávy.
+- **Data/privacy lead** posuzuje osobní údaje, rozsah, riziko a případnou ohlašovací povinnost.
+- **Zákaznický kontakt** hlídá konkrétní dopady pro zákazníky a support.
+
+U malého SaaS může být owner zakladatel, technický lead vývojář a privacy lead externí právník nebo DPO na telefonu. Důležité je, aby se během incidentu nerozhodovalo stylem „všichni všechno trochu“. To je skvělé pro chaos, horší pro zákazníky.
+
+## Triage podle dopadu, ne podle hlasitosti
+
+Nejhlasitější zákazník nemusí znamenat nejvyšší prioritu. Seřaď incident podle reálného dopadu:
+
+- **P0**: podezření na únik osobních údajů, kompromitace produkce, zneužitelná zranitelnost, úplná nedostupnost kritické služby.
+- **P1**: významná část uživatelů nemůže používat klíčové workflow, ale nejsou známky úniku nebo kompromitace.
+- **P2**: omezený dopad na menší skupinu, existuje workaround.
+- **P3**: kosmetická nebo administrativní chyba bez dopadu na bezpečnost, data nebo klíčové workflow.
+
+Ke každé prioritě měj předem definovaný rytmus:
+
+- P0: okamžitý owner, interní update každých 30 minut, rozhodnutí o externí komunikaci co nejdříve.
+- P1: owner do 30 minut, interní update každou hodinu.
+- P2: řešení v běžném pracovním rytmu, zákaznický update podle dopadu.
+- P3: backlog s jasným vlastníkem.
+
+## Osobní údaje posuzuj samostatně
+
+Jakmile se incident může týkat osobních údajů, založ samostatnou mini analýzu. Nečekej na dokonalé forenzní drama se soundtrackem.
+
+Zeptej se:
+
+- Jaké kategorie osobních údajů mohly být dotčené?
+- Kolik osob nebo účtů se to pravděpodobně týká?
+- Šlo o důvěrnost, integritu, dostupnost nebo kombinaci?
+- Jsou data čitelná, pseudonymizovaná, šifrovaná nebo veřejná?
+- Může vzniknout riziko pro práva a svobody lidí?
+- Máme povinnost hlásit úřadu nebo informovat dotčené osoby?
+- Kdy jsme incident zjistili a kdo to potvrdil?
+
+U procesora nezapomeň na smluvní povinnost informovat správce. U správce řeš kontakt s dozorovým úřadem a dokumentaci. EDPB ve svých příkladech k data breach ukazuje, že důležitý je konkrétní kontext: typ dat, rozsah, ochranná opatření, pravděpodobnost zneužití a dopad na lidi.
+
+## Komunikuj fakta, ne uklidňovací mlhu
+
+Dobrá incidentová komunikace je krátká, konkrétní a průběžná. Nemusíš vědět všechno, ale nesmíš předstírat jistotu tam, kde ji nemáš.
+
+První externí zpráva může mít tuto strukturu:
+
+```text
+Zaznamenali jsme problém s [část služby].
+Dopad: [co uživatelé vidí / nemohou udělat].
+Čas zjištění: [datum a čas].
+Aktuální stav: [šetříme / mitigovali jsme / nasazujeme opravu].
+Data a soukromí: [zatím nemáme známky dopadu / prověřujeme možný dopad].
+Další update: [čas nebo podmínka].
+```
+
+Nepoužívej fráze typu „někteří uživatelé mohli být ovlivněni“, pokud víš, že nešel login všem. Nepiš „preventivní údržba“, když šlo o rozbitý deploy. A hlavně neposílej zákazníkům detaily, které by útočníkovi pomohly zopakovat útok.
+
+## Interní časová osa je důkaz i učebnice
+
+V průběhu incidentu piš jednoduchou časovou osu:
+
+```text
+2026-09-29 09:14 UTC — alert: zvýšené chyby při přihlášení
+2026-09-29 09:18 UTC — incident owner: Jana
+2026-09-29 09:23 UTC — vypnut nový login experiment
+2026-09-29 09:31 UTC — chybovost klesla na běžnou úroveň
+2026-09-29 09:45 UTC — kontrola logů bez známek neoprávněného přístupu
+```
+
+Časová osa pomáhá při rozhodování, právním posouzení, zákaznické komunikaci i postmortemu. Piš ji věcně. Žádné obviňování, žádné vtipné interní přezdívky, žádné „Pepa zase rozbil deploy“. Pepa to možná rozbil, ale incident dokument není grilovačka.
+
+## Po incidentu oprav systém, ne jen symptom
+
+Postmortem má odpovědět na tři otázky:
+
+- Co se stalo?
+- Proč se to mohlo stát?
+- Co změníme, aby se to neopakovalo nebo mělo menší dopad?
+
+Dobrá následná opatření jsou konkrétní:
+
+- přidat alert na chybovost platebního webhooku,
+- omezit životnost API tokenu,
+- přidat schvalování exportů nad určitou velikost,
+- přepsat runbook pro rollback,
+- doplnit test obnovy zálohy,
+- odstranit z logů osobní údaje,
+- rozdělit přístupy v adminu podle rolí.
+
+Špatná opatření jsou mlhavá:
+
+- „budeme opatrnější“,
+- „zlepšíme komunikaci“,
+- „příště si dáme pozor“,
+- „někdo by měl zkontrolovat monitoring“.
+
+To nejsou opatření. To jsou přání s helmou.
+
+## Checklist: incident response bez paniky
+
+- Máme definované kategorie incidentů: provozní, bezpečnostní, osobní údaje.
+- Máme jasné priority P0–P3 a reakční rytmus.
+- Víme, kdo je incident owner, technický lead, komunikace a privacy lead.
+- První hodina obsahuje mitigaci, důkazy, časovou osu a posouzení dat.
+- Do chatů nekopírujeme celé payloady, exporty ani citlivé screenshoty.
+- U možného data breach evidujeme čas zjištění a posuzujeme riziko pro lidi.
+- Externí komunikace říká fakta, dopad, stav a čas dalšího updatu.
+- Postmortem končí konkrétními úkoly s vlastníkem a termínem.
+- Retence incidentových důkazů je omezená a popsaná.
+- Incident plán testujeme aspoň jednou za kvartál na malém scénáři.
+
+## Mini šablona incident karty
+
+```markdown
+# Incident karta: [název]
+
+## Základ
+- Datum a čas zjištění:
+- Zdroj hlášení:
+- Incident owner:
+- Priorita: P0 / P1 / P2 / P3
+- Kategorie: provozní / bezpečnostní / osobní údaje
+
+## Dopad
+- Dotčená služba nebo workflow:
+- Dotčení zákazníci nebo segment:
+- Viditelný dopad pro uživatele:
+- Workaround:
+
+## Data a soukromí
+- Mohou být dotčené osobní údaje? ano / ne / nevíme
+- Kategorie údajů:
+- Počet osob nebo účtů:
+- Riziko pro osoby:
+- Potřeba hlášení úřadu:
+- Potřeba informovat dotčené osoby:
+
+## Časová osa
+- [čas] — [událost]
+- [čas] — [mitigace]
+- [čas] — [ověření]
+
+## Komunikace
+- Interní kanál:
+- Status page / zákaznický update:
+- Další update:
+
+## Nápravná opatření
+- [úkol] — vlastník — termín
+- [úkol] — vlastník — termín
+
+## Uzavření
+- Datum uzavření:
+- Odkaz na postmortem:
+- Retence důkazů:
+```
+
+## Zdroje
+
+- [Evropská komise: What is a data breach and what do we have to do in case of a data breach?](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en)
+- [EDPB: Guidelines 01/2021 on Examples regarding Personal Data Breach Notification](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-012021-examples-regarding-personal-data-breach_en)
+- [EUR-Lex: Directive (EU) 2022/2555 — NIS2](https://eur-lex.europa.eu/eli/dir/2022/2555/oj)
+- [ENISA: Threats and Incidents](https://www.enisa.europa.eu/topics/state-of-cybersecurity-in-the-eu/threats-and-incidents)
+
 # Pracovní log
+
+- 2026-09-29: Doplněna příloha „Incident response bez paniky a datového požáru“ s praktickým rozdělením incidentů, první hodinou reakce, rolemi, triáží podle dopadu, data breach posouzením, komunikací, časovou osou, postmortem, checklistem, incident kartou a ověřenými zdroji Evropské komise, EDPB, EUR-Lex a ENISA.
 
 - 2026-09-29: Doplněna příloha „Release notes a changelog bez marketingové mlhy“ s praktickým rozdělením publika, psaním podle dopadu místo ticketů, kategoriemi změn, privacy-first pravidly, komunikací breaking changes, publikačním rytmem, checklistem, vyplnitelnou šablonou a zdroji Keep a Changelog a Semantic Versioning.
 
