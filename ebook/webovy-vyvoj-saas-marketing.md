@@ -16803,7 +16803,195 @@ Krátce: Tento článek pomůže [role uživatele] udělat [konkrétní výslede
 
 Dokumentace není náplast na špatný produkt, ale dobrý produkt bez dokumentace zase nutí lidi ptát se na věci, které mohli vyřešit sami. Ideál je nudně praktický: jasné články, bezpečné screenshoty, agregované signály a pravidelná údržba. Přesně ten typ nudy, který šetří peníze.
 
+# Příloha: Přihlašování, účty a SSO bez identity cirkusu
+
+Přihlášení je jedna z nejcitlivějších částí webu nebo SaaS. Uživatel tam předává důvěru ještě dřív, než vidí hodnotu produktu. Malý tým proto nesmí navrhovat registraci jako sběrnou stanici všeho, co by se „jednou mohlo hodit“. Dobré přihlašování je bezpečné, srozumitelné, obnovitelné a datově střídmé.
+
+Cíl není mít nejvíc možností přihlášení na světě. Cíl je, aby správný člověk bezpečně vstoupil do správného účtu, tým dokázal vyřešit ztrátu přístupu a firma nepěstovala identitní databázi větší než produkt samotný. Ano, login obrazovka není místo pro datový cosplay.
+
+> Codyho komentář: Když registrace po člověku chce datum narození, telefon, velikost firmy, obor, marketingový souhlas a krevní skupinu jen proto, aby si vyzkoušel demo, není to onboarding. Je to pohovor na letištní kontrole.
+
+## Začni minimálním účtem
+
+Nejdřív si napiš, co účet opravdu potřebuje k první hodnotné akci. Většina B2B SaaS produktů na začátku vystačí s pracovním e-mailem, ověřením adresy, názvem workspace a souhlasem s podmínkami. Všechno ostatní má přijít až ve chvíli, kdy to má jasný důvod.
+
+Praktické rozdělení polí:
+
+- Nutné při registraci: e-mail, heslo nebo passkey, potvrzení podmínek, případně název workspace.
+- Užitečné později: jméno, role v týmu, fakturační údaje, preferovaný jazyk.
+- Rizikové bez silného důvodu: telefon, datum narození, soukromá adresa, osobní sociální profily, volná poznámka k uživateli.
+- Zakázané jako pohodlná rezerva: údaje „pro jistotu“, které nikdo neumí napojit na konkrétní účel.
+
+GDPR princip minimalizace říká jednoduchou věc: sbírej a zpracovávej jen data potřebná pro daný účel. Evropská komise mezi základními principy uvádí také přesnost, omezení uložení a integritu s důvěrností. Přeloženo do produktového jazyka: méně polí, jasnější účel, kratší retence a lepší kontrola přístupů.
+
+## Registraci rozděl do dvou kroků
+
+První krok má dostat člověka dovnitř bezpečně. Druhý krok má doplnit kontext jen tehdy, když zlepší používání produktu.
+
+Dobrý první krok:
+
+1. Uživatel zadá e-mail.
+2. Vybere bezpečnou metodu přihlášení.
+3. Ověří e-mail přes odkaz nebo kód.
+4. Založí workspace nebo se připojí k pozvánce.
+5. Vidí první akci, která má hodnotu.
+
+Co nepatří do prvního kroku:
+
+- marketingový dotazník na pět obrazovek,
+- povinný telefon bez telefonického use casu,
+- výběr tarifu, pokud existuje trial nebo demo,
+- oborové segmenty, které tým stejně nepoužívá,
+- checkboxy, které směšují podmínky, newsletter a obchodní souhlas.
+
+Pokud obchod potřebuje segmentaci, ptej se později a férově: „Pomůže nám to nastavit demo. Můžeš přeskočit.“ Krásná věta. Produktová dospělost v osmi slovech.
+
+## Hesla drž jako nouzový režim, ne jako hrdinu
+
+Hesla jsou pořád běžná, ale nemají být jediný pilíř bezpečnosti. Pokud hesla podporuješ, udělej je nudně správně:
+
+- povol dlouhá hesla a správce hesel,
+- neblokuj vložení hesla ze schránky,
+- kontroluj známě kompromitovaná hesla, pokud to umíš bezpečně,
+- ukládej jen kvalitní hash s vhodným algoritmem a parametry,
+- nastav rate limiting a ochranu proti credential stuffingu,
+- posílej reset přes jednorázový odkaz s krátkou platností,
+- nikdy neposílej heslo e-mailem ani ho neukazuj v administraci.
+
+NIST SP 800-63B-4 je dobrý orientační zdroj pro autentizaci a správu autentizátorů. Není to český zákon pro každý SaaS, ale je to užitečný technický kompas: řeší úrovně ověření, autentizátory, session management i rizika kolem tajemství.
+
+## Passkeys nabídni jako lepší výchozí cestu
+
+Passkeys staví na kryptografických přihlašovacích údajích místo sdíleného hesla. FIDO Alliance je popisuje jako FIDO credentials a WebAuthn je standardizované webové API pro práci s public key credentials. Prakticky: služba neukládá uživatelovo heslo a přihlášení je odolnější proti phishingu, protože je svázané s konkrétní doménou.
+
+Jak passkeys zavést rozumně:
+
+- nabídni je jako doporučenou možnost, ne jako jedinou cestu pro všechny,
+- nech uživatele přidat více autentizátorů nebo obnovovacích cest,
+- u B2B účtů ukaž správci, kdo má passkey aktivní,
+- při ztrátě zařízení vyžaduj bezpečný recovery proces,
+- u citlivých akcí použij re-authentication, ne jen starou session,
+- dokumentuj, jak passkeys fungují pro uživatele bez bezpečnostního žargonu.
+
+Passkeys nejsou kouzelný prášek na všechny problémy. Pořád potřebuješ dobré recovery, správu relací, ochranu účtu a podporu pro situace, kdy člověk mění zařízení nebo organizace spravuje přístup centrálně.
+
+## SSO zaveď jako B2B bezpečnostní funkci
+
+SSO není jen enterprise checkbox pro dražší tarif. Pro B2B zákazníky může být zásadní, protože firma spravuje přístupy centrálně: onboarding, offboarding, MFA politiku, skupiny a audit.
+
+Praktický postup:
+
+1. Nejprve podporuj pozvánky a role v týmu.
+2. Pak přidej doménové ověření pro organizace.
+3. Následně SSO přes OIDC nebo SAML podle zákaznického segmentu.
+4. Přidej mapování rolí nebo skupin jen tam, kde ho někdo opravdu použije.
+5. Dokumentuj offboarding: co se stane, když uživatel odejde z firmy.
+
+Na co si dát pozor:
+
+- Nezakládej automaticky účty každému z domény bez schváleného pravidla.
+- Neber e-mailovou doménu jako jediný důkaz oprávnění.
+- Odděl osobní účet od firemního workspace.
+- Loguj změny identity provideru a správcovských nastavení.
+- Měj nouzový účet pro vlastníka, ale chraň ho přísněji.
+
+U malého SaaS často stačí SSO nabídnout až ve chvíli, kdy ho zákazníci opravdu chtějí. Ale datový model musí být připravený dřív: organizace, členství, role, pozvánky, auditní stopa a jasný vlastník workspace.
+
+## Session management piš jako bezpečnostní produkt
+
+Přihlášení není hotové po zadání hesla nebo passkey. Důležitá je i relace: jak dlouho trvá, kdy se obnovuje, kde se ukončí a co se stane při podezřelé aktivitě.
+
+Doporučení:
+
+- Ukaž uživateli aktivní relace a umožni je ukončit.
+- Po změně hesla, přidání passkey nebo zapnutí SSO nabídni odhlášení ostatních zařízení.
+- U citlivých akcí vyžaduj čerstvé ověření.
+- Administrátorské akce loguj do auditní stopy.
+- Session tokeny nikdy neposílej do URL.
+- U cookies nastav `HttpOnly`, `Secure` a rozumný `SameSite` režim.
+- Retenci session logů drž podle rizika, ne podle velikosti disku.
+
+Privacy-first přístup tady znamená: měř bezpečnostní signály, ne chování pro marketing. Je rozdíl mezi „neobvyklé přihlášení z nové země“ a „uživatel včera 17 minut koukal na pricing, pošleme mu nátlakový e-mail“. První je bezpečnost. Druhé je digitální funění za krkem.
+
+## Recovery musí být bezpečné i lidské
+
+Největší bezpečnostní díry často nejsou v přihlášení, ale v obnově účtu. Útočník nepotřebuje prolomit heslo, když podpora ochotně přepne e-mail podle prosebného ticketu.
+
+Bezpečný recovery proces:
+
+- definuj, kdo smí žádat obnovu účtu,
+- u firemních workspace zapoj vlastníka nebo správce,
+- ověřuj přes existující důvěryhodný kanál,
+- nepřijímej screenshot jako důkaz identity,
+- u citlivých účtů používej čekací lhůtu nebo druhé schválení,
+- každou obnovu zapiš do auditní stopy,
+- po obnově upozorni původní kontakt, pokud to není bezpečnostně rizikové.
+
+Mini pravidlo: podpora nesmí mít supermoc obejít bezpečnost bez záznamu, schválení a důvodu. Jinak jsi právě vyrobil nejdražší tlačítko v aplikaci.
+
+## Checklist: účet a přihlášení bez identity cirkusu
+
+- Má registrace jen pole nutná pro první hodnotnou akci?
+- Je marketingový souhlas oddělený od podmínek služby?
+- Umí uživatel používat správce hesel a vložit heslo ze schránky?
+- Existuje rate limiting pro přihlášení, reset hesla a ověřovací kódy?
+- Jsou passkeys nabídnuté s jasným recovery plánem?
+- Má B2B zákazník plán pro SSO, role, pozvánky a offboarding?
+- Vidí uživatel aktivní relace a umí je ukončit?
+- Vyžadují citlivé akce čerstvé ověření?
+- Je recovery proces popsaný, auditovaný a omezený rolí?
+- Mají identity logy jasnou retenci a přístupová pravidla?
+
+## Mini šablona identity karty
+
+```markdown
+# Identity karta: [produkt / workspace]
+
+## Účel účtu
+- První hodnotná akce:
+- Nutná registrační pole:
+- Pole odložená na později:
+
+## Metody přihlášení
+- Heslo: ano/ne, pravidla:
+- Passkeys: ano/ne, recovery:
+- SSO: ano/ne, typ a segment:
+
+## Role a přístupy
+- Role:
+- Kdo zve nové uživatele:
+- Kdo schvaluje změny správců:
+
+## Session a bezpečnost
+- Délka relace:
+- Re-authentication pro citlivé akce:
+- Aktivní relace viditelné uživateli:
+- Auditní události:
+
+## Recovery
+- Kdo může žádat obnovu:
+- Ověřovací kanály:
+- Kdo schvaluje výjimky:
+- Jak dlouho se drží záznam:
+
+## Data a retence
+- Identity data:
+- Bezpečnostní logy:
+- Retence:
+- Přístupy interního týmu:
+```
+
+## Zdroje
+
+- European Commission: GDPR principles — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- European Data Protection Board: Basic principles — https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
+- NIST SP 800-63B-4: Digital Identity Guidelines — Authentication and Authenticator Management — https://www.nist.gov/publications/nist-sp-800-63b-4digital-identity-guidelines-authentication-and-authenticator
+- NIST SP 800-63-4: Digital Identity Guidelines — https://pages.nist.gov/800-63-4/sp800-63.html
+- W3C: Web Authentication Level 3 — https://www.w3.org/standards/history/webauthn-3/
+- FIDO Alliance: Passkeys — https://fidoalliance.org/passkeys/
+
 # Pracovní log
+- 2026-09-29: Doplněna příloha „Přihlašování, účty a SSO bez identity cirkusu“ s minimálním účtem, passkeys, SSO, session managementem, recovery procesem, checklistem a vyplnitelnou identity kartou.
 
 - 2026-09-29: Doplněna příloha „Help centrum a dokumentace bez support chaosu“ s návrhem kategorií podle úloh, strukturou článku, bezpečnými screenshoty, FAQ podle ticketů, agregovaným měřením hledání, revizním rytmem, checklistem a šablonou článku.
 
