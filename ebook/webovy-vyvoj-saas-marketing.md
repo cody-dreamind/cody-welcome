@@ -17212,8 +17212,187 @@ Před nasazením interní admin funkce projdi tento checklist:
 
 Admin rozhraní má být interní pracovní stůl, ne tajná řídicí věž nad zákaznickými daty. Když ho navrhneš podle práce, minimálních oprávnění a auditní stopy, tým bude rychlejší i bezpečnější. Což je vzácná kombinace — skoro jako meeting, který opravdu skončil dřív.
 
+# Příloha: Schvalování nástrojů bez shadow IT safari
+
+Shadow IT vzniká ve chvíli, kdy tým začne používat nástroje mimo domluvený provozní rámec. Ne nutně ze zlé vůle. Často proto, že oficiální proces je pomalý, nejasný nebo vypadá jako by ho navrhl někdo, kdo naposledy instaloval software z cédéčka. Výsledek je ale stejný: zákaznická data, interní dokumenty, přístupové tokeny nebo marketingové seznamy se rozutečou do služeb, o kterých firma neví, nemá k nim DPA, neumí z nich exportovat data a neumí je při incidentu vypnout.
+
+ENISA u malých a středních firem výslovně zmiňuje shadow IT a osobní zařízení jako praktické riziko, které se zhoršilo s rozšířením práce na dálku ([ENISA: Cybersecurity for SMEs](https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes)). Evropská komise u NIS2 popisuje důraz na řízení kybernetických rizik a incidentové hlášení pro širší okruh sektorů; i když konkrétní dopad záleží na typu firmy a národní transpozici, princip je použitelný i pro menší SaaS: měj přehled o dodavatelích, přístupech a rizicích ([European Commission: NIS2 Directive](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive)). A EDPB u privacy by design připomíná, že ochrana dat má být zabudovaná už do návrhu, ne přilepená po nákupu nástroje ([EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)).
+
+> Codyho komentář: Zakázat všechny nové nástroje je jednoduché, ne chytré. Chytré je vytvořit tak rychlý a srozumitelný schvalovací proces, aby lidé neměli důvod kupovat SaaS potají na firemní kartu a modlit se ke svatému Exportu.
+
+## Proč lidé obcházejí oficiální proces
+
+Než začneš lovit viníky, zjisti příčinu. Shadow IT často není bezpečnostní problém jako první. Je to produktový problém interního provozu.
+
+Typické důvody:
+
+- tým potřebuje rychle vyřešit reálný problém a neví, koho se zeptat,
+- oficiální nástroj je pomalý, drahý nebo nepoužitelný,
+- schvalování trvá týdny a nikdo neřekne proč,
+- firma nemá seznam povolených alternativ,
+- lidé nerozumí rozdílu mezi veřejnými daty, interními daty a osobními údaji,
+- nástroj vypadá „jen na poznámky“, ale končí v něm zákaznické exporty,
+- AI nástroj slibuje magickou produktivitu a nikdo neřeší, co se posílá do promptu.
+
+Řešení tedy není jen bezpečnostní plakát. Potřebuješ interní „rychlou bránu“: kam napsat, jaké otázky odpovědět a kdy člověk dostane ano, ne nebo bezpečnější alternativu.
+
+## Tři úrovně schvalování
+
+Každý nástroj nepotřebuje stejné kolečko. Poznámkový editor pro veřejné texty není totéž co helpdesk s osobními údaji zákazníků nebo AI služba napojená na CRM. Rozděl nástroje podle rizika.
+
+### 1. Nízké riziko: veřejná nebo neosobní data
+
+Sem patří nástroje na veřejné rešerše, wireframy bez zákaznických dat, jednoduché grafické podklady nebo testovací utility bez účtů zákazníků.
+
+Pravidla:
+
+- nepoužívat produkční osobní data,
+- nepřidávat firemní tajemství,
+- nepřihlašovat se sdíleným heslem,
+- zapsat nástroj do jednoduchého seznamu, pokud se používá opakovaně,
+- odstranit účet, když už není potřeba.
+
+### 2. Střední riziko: interní provoz a omezená osobní data
+
+Sem spadá projektové řízení, dokumentace, support bez citlivých příloh, formulářové nástroje, analytika, transakční e-mail nebo nástroje pro obchodní pipeline.
+
+Pravidla:
+
+- ověřit region zpracování a subprocesory,
+- mít DPA nebo jasné podmínky zpracování,
+- zapnout SSO/MFA, pokud je dostupné,
+- nastavit role podle práce,
+- omezit exporty,
+- popsat retenci,
+- určit vlastníka nástroje.
+
+### 3. Vysoké riziko: zákaznická data, bezpečnost, finance a produkce
+
+Sem patří CRM s historií komunikace, databázové nástroje, monitoring s payloady, AI nad zákaznickými daty, fakturace, platební nástroje, identity provider, deployment, DNS, správce secrets a administrátorské konzole.
+
+Pravidla:
+
+- schválení vlastníkem produktu i provozu,
+- kontrola DPA, subprocesorů a umístění dat,
+- bezpečnostní nastavení před prvním importem,
+- auditní stopa a role,
+- exit plán před nasazením,
+- test exportu nebo migrace,
+- incidentový kontakt a postup vypnutí.
+
+## Rychlá nástrojová brána
+
+Schvalovací proces má být krátký, ale ne slepý. Pro většinu týmů stačí jeden interní formulář nebo issue šablona.
+
+Ptej se:
+
+- Jaký problém nástroj řeší?
+- Jaká data do něj půjdou?
+- Budou tam osobní údaje, zákaznický obsah, secrets nebo obchodní tajemství?
+- Kde služba data zpracovává a ukládá?
+- Má evropský region nebo evropskou alternativu?
+- Existuje DPA a seznam subprocesorů?
+- Kdo bude vlastníkem účtu?
+- Jak se řeší přístupy, MFA, SSO a offboarding?
+- Jak se data exportují a mažou?
+- Jaká je bezpečnější alternativa, pokud nástroj neprojde?
+
+U nízkého rizika může být odpověď do 24 hodin. U středního rizika třeba do tří pracovních dnů. U vysokého rizika dej jasný termín a mezikrok: „Můžeš zatím použít testovací data tady.“ Když lidem nabídneš bezpečný most, nebudou stavět tajný tunel.
+
+## Povolený katalog je lepší než zakázaná džungle
+
+Vytvoř krátký katalog schválených nástrojů. Ne jako korporátní encyklopedii, ale jako praktický seznam:
+
+- název nástroje,
+- účel,
+- povolené typy dat,
+- zakázané typy dat,
+- vlastník,
+- přihlašování,
+- region dat,
+- retence,
+- odkaz na DPA nebo bezpečnostní stránku,
+- datum poslední kontroly.
+
+Ke každému nástroji napiš větu „smí / nesmí“. Například: „Tento nástroj smí obsahovat veřejné marketingové texty a návrhy článků. Nesmí obsahovat zákaznické exporty, neveřejné finanční údaje, secrets ani osobní data z podpory.“ Je to nudné? Ano. Je to použitelné? Také ano. Vzácná kombinace, skoro jako dokumentace, kterou někdo opravdu čte.
+
+## AI nástroje potřebují zvláštní brzdu
+
+U AI služeb je riziko často nenápadné. Člověk nevkládá „databázi“, jen „malý výňatek“, „kus ticketu“, „část smlouvy“ nebo „screenshot adminu“. Jenže právě tyhle drobnosti často obsahují osobní údaje, obchodní tajemství, interní URL, tokeny nebo bezpečnostní indicie.
+
+Minimum pro AI nástroje:
+
+- rozdělit použití na veřejný obsah, interní obsah a zákaznická data,
+- zakázat vkládání secrets, přístupových tokenů, zdravotních/finančních detailů a celých zákaznických exportů,
+- používat anonymizované nebo syntetické ukázky,
+- ověřit, zda poskytovatel používá vstupy pro trénink nebo zlepšování služby,
+- mít variantu pro citlivější práci v kontrolovaném prostředí,
+- naučit tým psát prompty bez zbytečných identifikátorů.
+
+Privacy-first přístup k AI neznamená „AI nepoužívat“. Znamená nepoužívat zákaznická data jako testovací těsto pro každý nový model, který má hezkou landing page a tlačítko „Start free“.
+
+## Offboarding nástroje
+
+Nástroj má mít nejen onboarding, ale i odchod. Bez toho se katalog časem změní v muzeum účtů.
+
+Při zrušení nástroje projdi:
+
+- kdo má účet a kdo je vlastník workspace,
+- zda jsou data exportovaná, smazaná nebo archivovaná podle účelu,
+- zda jsou zrušené API klíče, webhooky a integrace,
+- zda je odebrané SSO nebo OAuth propojení,
+- zda je vypnuté automatické účtování,
+- zda jsou smazané dočasné exporty,
+- zda je aktualizovaná datová mapa a seznam subprocesorů,
+- zda tým ví, jakou alternativu používat dál.
+
+Nejhorší nástroje nejsou ty, které používáš. Nejhorší jsou ty, o kterých si myslíš, že je už nepoužíváš, ale pořád mají OAuth token do firemního účtu. To je bezpečnostní zombie. Stříbro nepomůže, revize ano.
+
+## Checklist: nástroje bez shadow IT
+
+- [ ] Má tým jasné místo, kam poslat žádost o nový nástroj?
+- [ ] Rozlišujeme nízké, střední a vysoké riziko nástroje?
+- [ ] Máme katalog schválených nástrojů s povolenými a zakázanými daty?
+- [ ] Každý nástroj má vlastníka a datum poslední kontroly?
+- [ ] U nástrojů se středním a vysokým rizikem řešíme DPA, region, subprocesory a retenci?
+- [ ] AI nástroje mají pravidla pro prompty a zakázaná data?
+- [ ] Offboarding lidí zahrnuje i přístupy do SaaS nástrojů mimo hlavní identity provider?
+- [ ] Offboarding nástroje ruší API klíče, webhooky, OAuth a účtování?
+- [ ] Existuje bezpečná alternativa, když požadovaný nástroj neprojde?
+- [ ] Jednou měsíčně kontrolujeme nové platby, OAuth aplikace a aktivní integrace?
+
+## Karta nástroje: [název]
+
+```text
+Název nástroje:
+Účel:
+Vlastník:
+Riziko: nízké / střední / vysoké
+Povolená data:
+Zakázaná data:
+Obsahuje osobní údaje: ano/ne
+Obsahuje zákaznický obsah: ano/ne
+Obsahuje secrets nebo technické přístupy: ano/ne
+Region zpracování:
+DPA / podmínky zpracování:
+Subprocesoři:
+Přihlášení: heslo / MFA / SSO
+Role a oprávnění:
+Retence:
+Export dat:
+Mazání dat:
+Integrace / API klíče / webhooky:
+Alternativa při zamítnutí:
+Datum schválení:
+Datum další kontroly:
+Poznámky:
+```
+
+Dobré schvalování nástrojů není brzda inovací. Je to dopravní značení. Díky němu tým ví, kudy jet rychle, kde zpomalit a kde fakt neparkovat databázi zákazníků v nástroji, který našel někdo v komentářích pod LinkedIn postem. Moderní, elegantní a překvapivě méně hořlavé.
+
 # Pracovní log
 
+- 2026-09-29: Doplněna příloha „Schvalování nástrojů bez shadow IT safari“ s praktickým modelem rizik pro nové SaaS/AI nástroje, rychlou schvalovací bránou, katalogem povolených nástrojů, AI pravidly, offboardingem, checklistem, kartou nástroje a ověřenými zdroji ENISA, Evropské komise a EDPB.
 - 2026-09-29: Doplněna příloha „Admin rozhraní bez superuživatelského průšvihu“ s návrhem interních prací, oddělením čtení a rizikových zásahů, bezpečnějším vyhledáváním, pravidly pro poznámky, impersonaci, exporty, auditní stopou, checklistem a vyplnitelnou šablonou.
 - 2026-09-29: Doplněna příloha „Přihlašování, účty a SSO bez identity cirkusu“ s minimálním účtem, passkeys, SSO, session managementem, recovery procesem, checklistem a vyplnitelnou identity kartou.
 
