@@ -18386,7 +18386,241 @@ Každý prostor má vlastníka. Citlivé části nejsou automaticky dostupné v�
 - [EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)
 - [EDPB: Guidelines 4/2019 on Article 25 — Data Protection by Design and by Default](https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en)
 
+# Příloha: API dokumentace bez úniků dat a supportového ping-pongu
+
+API dokumentace není jen technická příručka pro vývojáře. U SaaS produktu je to prodejní argument, onboardingový nástroj, bezpečnostní hranice a support filtr v jednom. Dobrá dokumentace zkracuje integraci. Špatná dokumentace vyrábí ticket za ticketem, posílá zákazníky do produkčního experimentování a občas omylem prozradí víc, než měla. Což je takový klasický startupový ohňostroj: hezké světlo, potom kouř a účet.
+
+Privacy-first API dokumentace má jednoduchý cíl: umožnit integraci bez toho, aby partner, zákazník nebo interní tým musel zbytečně vidět, posílat nebo ukládat osobní data. Dokumentace má popsat účel endpointu, datové minimum, oprávnění, limity, chybové stavy, retenci logů a bezpečný příklad. Pokud popisuje jen URL a JSON, je to polotovar.
+
+> Codyho komentář: API dokumentace je smlouva mezi produktem a integrátorem. Když v ní schováš nejasnosti, vrátí se ti jako produkční incident. API neumí ironii, bohužel.
+
+## Nejdřív popiš práci, potom endpointy
+
+Začni uživatelskou nebo integrační prací, ne seznamem tras. Integrátor většinou nechce volat `POST /v1/widgets`, protože miluje sloveso `POST`. Chce vytvořit objednávku, synchronizovat firmu, založit uživatele, stáhnout fakturu nebo dostat informaci o změně stavu.
+
+Praktický model:
+
+- **Use case:** co chce integrátor dokončit.
+- **Role:** kdo endpoint smí volat a za jakých podmínek.
+- **Datové minimum:** která pole jsou povinná, volitelná a zakázaná.
+- **Bezpečnost:** jaké oprávnění, token, scope nebo tenant hranice platí.
+- **Chování:** idempotence, limity, stránkování, chybové odpovědi a retry pravidla.
+- **Soukromí:** jaká osobní data se přenášejí, kde se logují a jak dlouho zůstávají.
+
+Příklad špatného úvodu:
+
+```text
+Endpoint vytvoří kontakt.
+```
+
+Příklad lepšího úvodu:
+
+```text
+Endpoint vytvoří obchodní kontakt v konkrétním workspace. Používej ho jen pro kontakty, se kterými má zákazník existující obchodní vztah nebo jiný doložený účel zpracování. Neposílej poznámky z CRM, volný text s historií komunikace ani data třetích osob. Pro opakované volání použij idempotency key.
+```
+
+Ten druhý text je delší, ale šetří právní, technický i supportní kyslík.
+
+## Každý endpoint potřebuje datovou hranici
+
+Nejčastější dokumentační chyba u API je tichý předpoklad, že „když pole existuje, může se poslat“. Nemůže. Každé pole má mít účel. Pokud účel neznáš, pole nemá být v příkladu, ve schématu ani ve volném textu.
+
+U každého endpointu si napiš tabulku polí:
+
+| Pole | Povinnost | Účel | Osobní údaj | Poznámka |
+|---|---:|---|---|---|
+| `company_id` | povinné | vazba na firmu | ne, pokud je interní ID | nepoužívat IČO jako univerzální identifikátor tam, kde stačí interní ID |
+| `email` | volitelné | kontakt pro doručení | ano | posílat jen pokud je nutný pro konkrétní tok |
+| `note` | zakázané v API | volný text | často ano | řešit přes samostatný endpoint s retenčním pravidlem, pokud je opravdu potřeba |
+
+Privacy-first doporučení:
+
+- Nepoužívej e-mail, telefon nebo jméno jako primární technický identifikátor, pokud stačí interní ID.
+- Volný text považuj za rizikové pole, protože v něm lidé rádi ukládají všechno od osobních poznámek po „dočasná“ hesla. Dočasná hesla jsou mimochodem věčná, jen se tak netváří.
+- Příklady v dokumentaci piš se syntetickými daty, ne s reálnými zákazníky.
+- U každého pole uveď, jestli se ukládá, jen zpracuje, nebo se ignoruje.
+- Pokud endpoint přijímá externí ID zákazníka, jasně napiš, zda se ukládá a zda se může objevit v exportech nebo logách.
+
+## OpenAPI používej jako kontrakt, ne jako dekoraci
+
+OpenAPI popis může vývojářům pomoct generovat klienty, validovat schémata a držet dokumentaci blíž realitě. Podle oficiální dokumentace OpenAPI umí popsat bezpečnostní schémata globálně i na úrovni konkrétní operace. To je přesně místo, kde má dokumentace říkat: tento endpoint chce bearer token, tento scope, tento tenant kontext a tento typ role.
+
+Minimum pro užitečný OpenAPI kontrakt:
+
+- Každá operace má `summary`, `description`, `operationId`, vstupy, výstupy a chybové odpovědi.
+- Schémata oddělují veřejné odpovědi od interních modelů. Databázový model není API kontrakt, je to jen zákulisí.
+- Security schemes nejsou jen globální poznámka. Citlivější endpointy mají konkrétní scopes nebo role.
+- Příklady odpovědí neobsahují reálné tokeny, reálné e-maily, reálná ID zákazníků ani produkční URL s tajnými parametry.
+- Breaking změny se řeší verzováním nebo migračním oknem, ne tichým „vždyť to používají jen tři zákazníci“. Ti tři zákazníci bývají zrovna ti nejhlasitější.
+
+Když OpenAPI soubor generuješ automaticky z kódu, přidej ruční revizi popisů, příkladů a bezpečnostních poznámek. Generátor umí vytáhnout typy. Neumí pochopit obchodní účel a datové riziko.
+
+## Příklady musí být bezpečné i kopírovatelné
+
+Vývojáři kopírují příklady. To není selhání, to je realita. Proto musí být bezpečné jako výchozí chování.
+
+Bezpečný příklad:
+
+```bash
+curl -X POST "https://api.example.eu/v1/invoices" \
+  -H "Authorization: Bearer $API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: inv_2026_09_29_001" \
+  -d '{
+    "customer_id": "cus_8f3a2c",
+    "currency": "EUR",
+    "items": [
+      { "name": "Monthly subscription", "quantity": 1, "unit_price": 4900 }
+    ]
+  }'
+```
+
+Proč je lepší:
+
+- token je proměnná, ne tajemství vložené do dokumentace,
+- zákazník je interní ID, ne e-mail,
+- idempotency key je ukázaná přímo v příkladu,
+- payload neobsahuje poznámky, rodná čísla, interní komentáře ani jiné suvenýry z datového sklepa.
+
+Do dokumentace přidej také špatné příklady, ale označ je jako anti-pattern. Lidé se často učí rychleji z konkrétního „tohle nedělej“ než z abstraktního „minimalizujte zpracování osobních údajů“.
+
+## Chybové stavy mají být užitečné, ne ukecané
+
+API chyba má pomoct integrátorovi opravit požadavek, ale nemá prozradit interní strukturu systému. OWASP REST Security Cheat Sheet doporučuje u chybových odpovědí neodhalovat zbytečné technické detaily. Prakticky: nevracej stack trace, SQL dotaz, interní název služby, přesný důvod selhání autentizace ani informaci, zda konkrétní e-mail existuje.
+
+Dobrá chyba:
+
+```json
+{
+  "error": "validation_failed",
+  "message": "Request contains invalid fields.",
+  "fields": {
+    "email": "Invalid format."
+  },
+  "request_id": "req_9f3c2a"
+}
+```
+
+Špatná chyba:
+
+```json
+{
+  "error": "User john@example.com exists in tenant 4821 but token lacks admin role. Query failed in internal_users_v2."
+}
+```
+
+První varianta pomáhá. Druhá varianta je skoro pohlednice útočníkovi. Stačí připsat „s pozdravem, vaše infrastruktura“.
+
+## Autorizace patří do dokumentace i testů
+
+OWASP API Security Top 10 2023 uvádí jako první riziko Broken Object Level Authorization: endpoint pracuje s ID objektu, ale server neověří, zda má volající právo právě k tomuto objektu. To není kosmetická chyba dokumentace, to je produkční průšvih převlečený za parametr.
+
+Dokumentace má u endpointu výslovně říct:
+
+- zda je objekt omezený na workspace, tenant, projekt nebo roli,
+- kdo může číst, vytvářet, měnit a mazat,
+- zda endpoint kontroluje vlastnictví každého objektu v poli, nejen prvního,
+- zda administrátorská role funguje napříč workspace, nebo jen uvnitř jednoho zákazníka,
+- jaký test musí projít před releasem.
+
+Testovací otázky:
+
+- Co se stane, když uživatel změní `customer_id` na cizí ID?
+- Co se stane, když pošle pole objektů a jeden objekt patří jinému tenantovi?
+- Co se stane, když běžný uživatel zavolá endpoint pro admin akci?
+- Co se stane, když partner použije expirovaný nebo odebraný scope?
+
+Pokud odpověď zní „frontend mu to nedovolí“, vrať se o tři políčka zpět. Frontend není bezpečnostní hranice. Frontend je hezké okno, které se dá otevřít DevTools.
+
+## Developer portál nemá být tracker v montérkách
+
+Developer portál často skončí nacpaný analytikou, chat widgety, heatmapami, video embedem a třemi externími fonty. U privacy-first produktu je lepší držet dokumentaci rychlou, čitelnou a měřenou střídmě.
+
+Měř užitečné agregace:
+
+- nejčtenější stránky dokumentace,
+- vyhledávání bez výsledku,
+- počet kopírování ukázkových snippetů jako agregovaný event,
+- chyby ve formuláři pro feedback,
+- počet otevření changelogu nebo migračních návodů.
+
+Neměř:
+
+- detailní pohyb kurzoru,
+- session replay vývojářů,
+- obsah API tokenů nebo payloadů,
+- kompletní vyhledávací dotazy, pokud mohou obsahovat zákaznická data,
+- cross-site profily návštěvníků.
+
+Privacy-first varianta: dokumentace běží na evropském hostingu, bez reklamních pixelů, s RSS nebo Atom feedem pro změny, s jednoduchým feedback formulářem a s veřejným changelogem. Když potřebuješ hlubší diagnostiku, řeš ji přes dobrovolný ticket s `request_id`, ne přes neviditelný sledovací koberec.
+
+## Checklist: API dokumentace bez úniků dat
+
+- [ ] Každý endpoint má popsaný use case, roli, oprávnění a datové minimum.
+- [ ] OpenAPI kontrakt obsahuje bezpečnostní schémata, chybové odpovědi a příklady.
+- [ ] Příklady používají syntetická data a proměnné pro tokeny.
+- [ ] Dokumentace rozlišuje povinná, volitelná a zakázaná pole.
+- [ ] Chybové zprávy neodhalují interní tabulky, stack trace, existenci účtů ani cizí tenanty.
+- [ ] Každý endpoint s ID objektu má uvedené tenant/workspace autorizační pravidlo.
+- [ ] Developer portál nemá reklamní trackery, session replay ani externí skripty bez jasného účelu.
+- [ ] Changelog API změn má RSS nebo přímý feed.
+- [ ] Dokumentace obsahuje kontaktní cestu pro bezpečnostní hlášení a integrační dotazy.
+- [ ] Před vydáním proběhla revize příkladů, jestli neobsahují reálná data nebo tajemství.
+
+## Mini šablona API karty
+
+```markdown
+# API karta: [endpoint / integrační práce]
+
+## Účel
+- Pro koho endpoint existuje:
+- Jakou práci dokončí:
+- Kdy se nemá používat:
+
+## Oprávnění
+- Auth metoda:
+- Scope / role:
+- Tenant nebo workspace hranice:
+- Test objektové autorizace:
+
+## Data
+- Povinná pole:
+- Volitelná pole:
+- Zakázaná nebo riziková pole:
+- Osobní údaje:
+- Retence logů:
+
+## Chování
+- Idempotence:
+- Rate limit:
+- Stránkování:
+- Retry pravidla:
+- Chybové odpovědi:
+
+## Příklady
+- Bezpečný curl příklad:
+- Bezpečná ukázka odpovědi:
+- Anti-pattern příklad:
+
+## Provoz
+- Vlastník endpointu:
+- Monitoring:
+- Changelog / verze:
+- Kontakt pro integrátory:
+```
+
+## Zdroje
+
+- [OWASP API Security Top 10 2023](https://api-security.owasp.org/editions/2023/en/0x11-t10/)
+- [OWASP API1:2023 Broken Object Level Authorization](https://api-security.owasp.org/editions/2023/en/0xa1-broken-object-level-authorization/)
+- [OWASP REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html)
+- [OpenAPI: Describing API Security](https://learn.openapis.org/specification/security.html)
+- [OpenAPI Specification 3.0.4](https://spec.openapis.org/oas/v3.0.4.html)
+- [OpenAPI Security Considerations](https://github.com/OAI/OpenAPI-Specification/blob/main/SECURITY_CONSIDERATIONS.md)
+
 # Pracovní log
+
+- 2026-09-29: Doplněna příloha „API dokumentace bez úniků dat a supportového ping-pongu“ s praktickým modelem endpointů podle integrační práce, datovými hranicemi, OpenAPI kontraktem, bezpečnými příklady, chybovými stavy, autorizací, developer portálem, checklistem, API kartou a ověřenými zdroji OWASP a OpenAPI.
 
 - 2026-09-29: Doplněna příloha „Interní znalostní báze bez firemního datového skladiště“ s praktickou strukturou kategorií, vlastnictvím dokumentů, pravidly pro citlivé informace, rozhodovacími záznamy, AI vyhledáváním, retencí, SaaS příkladem, checklistem, znalostní kartou a ověřenými zdroji Evropské komise a EDPB.
 
