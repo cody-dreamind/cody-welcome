@@ -15852,7 +15852,300 @@ Schůzky mají pomáhat rozhodovat, ne vytvářet paralelní datový sklad lidsk
 - European Commission: Guidelines on transparency obligations for providers and deployers of certain AI systems — https://digital-strategy.ec.europa.eu/en/policies/guidelines-ai-transparency-obligations
 
 
+
+# Příloha: Produktová telemetrie a feature flags bez šmírovacího motoru
+
+Produktová telemetrie je užitečná. Bez ní tým často neví, jestli lidé používají klíčovou funkci, kde onboarding teče do kanálu a jestli nová verze nerozbila půlku účtů. Problém začíná ve chvíli, kdy se z telemetrie stane tichý paralelní profilovací systém: každý klik, každé pole, každá chyba, každý člověk, navždy.
+
+Privacy-first přístup neříká „neměř nic“. Říká: měř to, co potřebuješ pro bezpečný a lepší produkt, odděl to od marketingového sledování a nedělej z uživatelů laboratorní myši s fakturou.
+
+*Codyho komentář:* Nejlepší produktová analytika je nudná. Když z ní nejde rekonstruovat celý pracovní den konkrétního člověka, ale jde poznat, že aktivace klesla po změně onboardingu, jsi na dobré cestě. Nuda zachraňuje právníky, vývojáře i zákaznickou důvěru. Romantika, jen s méně trackery.
+
+## Nejdřív napiš rozhodnutí, ne event
+
+Každý event musí mít vlastníka a rozhodnutí, kterému pomáhá. Pokud neumíš doplnit větu „Když tato metrika klesne/stoupne, uděláme…“, event je nejspíš jen zvědavost převlečená za produktové řízení.
+
+Špatné zadání:
+
+- Chceme vědět, co uživatelé dělají.
+- Pošleme do analytiky všechny kliky.
+- Pak se na to někdy podíváme.
+
+Lepší zadání:
+
+- Chceme zjistit, jestli nový onboarding zvyšuje dokončení prvního projektu.
+- Měříme pouze kroky `onboarding_started`, `first_project_created`, `first_invite_sent` a `onboarding_completed`.
+- Vyhodnocujeme agregovaně po účtu, segmentu tarifu a týdnu.
+- Pokud dokončení klesne o víc než 10 % proti předchozí verzi, vracíme změnu nebo spouštíme kvalitativní rozhovory.
+
+Tím si chráníš tým před nekonečným katalogem eventů, kterému po třech měsících nikdo nerozumí. A zároveň splňuješ základní privacy princip: účel před sběrem.
+
+## Rozděl telemetrii podle rizika
+
+Ne všechny signály jsou stejné. Malý SaaS si často vystačí se třemi vrstvami:
+
+1. **Provozní telemetrie** — chyby, latence, dostupnost, fronty, selhání integrací. Cíl je stabilita služby.
+2. **Produktová telemetrie** — aktivace, použití klíčových funkcí, dokončení workflow. Cíl je lepší produkt.
+3. **Marketingová analytika** — návštěvnost webu, kampaně, konverze z landing page. Cíl je akvizice.
+
+Tyto vrstvy nemíchej do jednoho nástroje, pokud nemusíš. Provozní logy nemají být marketingová databáze. Produktová telemetrie nemá automaticky proudit do reklamních publik. Marketingová analytika nemá ukládat obsah zákaznických projektů jen proto, že se to „hodí do dashboardu“.
+
+Praktický model:
+
+- Provozní signály drž u infrastruktury a SRE/provozního týmu.
+- Produktové signály agreguj na úroveň účtu, organizace nebo anonymního kohortu, kde to stačí.
+- Marketingové signály drž odděleně od obsahu aplikace a zákaznických dat.
+- Do CRM posílej jen obchodně relevantní milníky, ne detailní behaviorální historii.
+
+## Eventy navrhuj jako smlouvu
+
+Event není náhodná JSON taška. Je to smlouva mezi produktem, vývojem a lidmi, kteří data vyhodnocují. Když eventy vznikají živelně, skončíš s `button_clicked`, `click_button`, `ButtonClick`, `cta_press` a metrikou, které věří jen ten, kdo ji zrovna vymyslel.
+
+Minimální karta eventu:
+
+```md
+# Event: [název]
+
+## Účel
+- Jaké rozhodnutí podporuje:
+- Vlastník metriky:
+- Jak dlouho je event potřeba:
+
+## Spuštění
+- Kdy přesně se event odešle:
+- Kdy se neodešle:
+- Jak se chová při opakování / retry:
+
+## Data
+- Povolené vlastnosti:
+- Zakázané vlastnosti:
+- Úroveň identifikace: anonymní / účet / uživatel / administrátor
+
+## Vyhodnocení
+- Dashboard / dotaz:
+- Akční práh:
+- Datum revize:
+```
+
+Doporučené názvosloví:
+
+- používej minulý čas: `project_created`, `invoice_exported`, `member_invited`,
+- měř dokončené akce, ne každý pohyb myší,
+- vyhýbej se názvům podle UI prvků, protože UI se mění rychleji než účel,
+- vlastnosti drž stabilní a dokumentované,
+- nepřidávej volná textová pole.
+
+Příklad bezpečnějšího eventu:
+
+```json
+{
+  "event": "first_project_created",
+  "account_plan": "team",
+  "account_age_days_bucket": "0-7",
+  "source": "onboarding",
+  "feature_flag_variant": "guided_setup_v2"
+}
+```
+
+Příklad eventu, který si koleduje o problém:
+
+```json
+{
+  "event": "project_created",
+  "user_email": "eva@example.com",
+  "project_name": "Restrukturalizace HR smluv 2027",
+  "free_text_note": "obsah formuláře...",
+  "ip": "...",
+  "full_user_agent": "..."
+}
+```
+
+První varianta pomůže rozhodnout, jestli onboarding funguje. Druhá varianta dělá z produktové analytiky skládku osobních a obchodně citlivých dat. To nechceš. Ani v pátek. Hlavně ne v pátek.
+
+## Feature flags nejsou omluva pro permanentní experiment
+
+Feature flags jsou skvělé pro bezpečné releasy, postupné zapínání funkcí a rychlé vypnutí rizikové změny. Ale jakmile se z nich stane permanentní experimentální vrstva bez revizí, vzniká chaos: různí zákazníci vidí různé produkty, podpora netuší proč, dokumentace neplatí a telemetrie se nedá číst.
+
+Každý flag rozděl do jedné z kategorií:
+
+- **Release flag** — dočasné zapnutí nové funkce, krátká životnost.
+- **Ops flag** — bezpečnostní vypínač pro incident nebo zátěž.
+- **Permission flag** — řízený přístup k placené nebo beta funkci.
+- **Experiment flag** — test variant s předem určeným cílem a koncem.
+
+U každého flagu eviduj:
+
+- vlastníka,
+- důvod,
+- výchozí stav,
+- cílovou skupinu,
+- datum expirace,
+- dopad na data,
+- plán odstranění z kódu.
+
+Pravidlo pro malý tým: pokud flag nemá datum expirace, není to flag, ale nový kus dluhu s lepším marketingem.
+
+## Experimenty dělej s minimem osobních dat
+
+A/B test nepotřebuje vědět všechno o člověku. Často stačí varianta, kohorta, dokončená akce a časové okno. U B2B SaaS navíc často dává větší smysl vyhodnocovat na úrovni účtu než jednotlivce, protože rozhodnutí se dějí v týmu.
+
+Privacy-first experiment:
+
+- má hypotézu před spuštěním,
+- má jednu hlavní metriku,
+- má předem určenou dobu běhu,
+- nesbírá obsah práce zákazníka,
+- nepoužívá reklamní identifikátory,
+- neexportuje publika do reklamních systémů,
+- po vyhodnocení smaže nebo agreguje dočasná data.
+
+Příklad hypotézy:
+
+> Když v onboardingu ukážeme tři konkrétní kroky místo obecného prázdného dashboardu, více nových týmů vytvoří první projekt do 24 hodin.
+
+Metriky:
+
+- primární: podíl účtů s `first_project_created` do 24 hodin,
+- sekundární: počet podpůrných dotazů k onboardingu,
+- ochranná: nárůst chyb nebo odchodů z registrace.
+
+Co nesbírat:
+
+- názvy projektů,
+- texty poznámek,
+- e-maily pozvaných členů,
+- nahrávky session replay,
+- kompletní clickstream.
+
+## Session replay ber jako poslední možnost
+
+Nahrávání obrazovky, session replay a detailní heatmapy vypadají lákavě, protože manažer konečně „vidí uživatele“. Jenže často vidí víc, než by měl: osobní údaje ve formulářích, interní názvy zákaznických projektů, citlivé hodnoty v URL nebo obchodní informace.
+
+Pokud máš problém v UX, začni méně invazivně:
+
+1. agregovaná funnel metrika,
+2. anonymizované chyby a validace formulářů,
+3. dobrovolný rozhovor se zákazníkem,
+4. testovací účet a reprodukce scénáře,
+5. teprve potom velmi omezený replay s maskováním a jasným účelem.
+
+Když session replay opravdu používáš:
+
+- zapni maskování všech vstupních polí jako výchozí stav,
+- nikdy nenahrávej hesla, tokeny, platební údaje ani obsah dokumentů,
+- omez replay na konkrétní část aplikace a krátké období,
+- drž data v Evropě nebo u ověřeného zpracovatele s jasnou smlouvou,
+- nastav krátkou retenci,
+- dej interní přístup jen lidem, kteří řeší konkrétní problém,
+- dokumentuj, proč méně invazivní metoda nestačila.
+
+*Codyho komentář:* Session replay je produktový ekvivalent kamery v kanceláři. Někdy pomůže odhalit problém, ale pokud ji zapneš všude a navždy, není to UX výzkum. Je to reality show pro dashboard.
+
+## Retence: surová data krátce, agregace déle
+
+Surová produktová telemetrie rychle ztrácí hodnotu. Agregované trendy vydrží déle. Proto nastav dvě vrstvy retence:
+
+- **Surové eventy** — krátká retence, typicky týdny až nízké jednotky měsíců podle účelu.
+- **Agregované metriky** — delší retence, pokud už nejde rozumně zpětně identifikovat jednotlivce.
+
+Příklad pro malý SaaS:
+
+| Typ dat | Účel | Retence |
+|---|---|---:|
+| Debug eventy releasu | Ověření nové verze | 14–30 dní |
+| Produktové eventy aktivace | Zlepšení onboardingu | 3–6 měsíců |
+| Experimentální varianty | Vyhodnocení testu | Do konce testu + krátká kontrolní rezerva |
+| Agregované měsíční metriky | Trendy produktu | 12–24 měsíců |
+| Session replay | Diagnostika konkrétního problému | Co nejkratší, často dny |
+
+Nejde o univerzální právní radu. Jde o provozní disciplínu: čím detailnější data, tím kratší život. Čím širší přístup, tím méně detailů.
+
+## Dashboard má ukázat signál, ne šmírovací supervelmoc
+
+Dobrý dashboard odpoví na otázku, co udělat dál. Špatný dashboard ukáže padesát grafů a vytvoří iluzi kontroly.
+
+Doporučené dashboardy pro B2B SaaS:
+
+- **Aktivace** — kolik účtů dokončilo první hodnotnou akci.
+- **Adopce funkcí** — které klíčové workflow se reálně používá.
+- **Zdraví účtu** — agregovaný signál rizika odchodu bez čtení obsahu zákazníka.
+- **Release bezpečnost** — chyby a pokles dokončení po nové verzi.
+- **Experimenty** — stav hypotéz, variant a rozhodnutí.
+
+Na dashboard nepatří:
+
+- seznam „nejaktivnějších lidí“ bez jasného účelu,
+- detailní clickstream konkrétního uživatele,
+- obsah zákaznických polí,
+- osobní poznámky obchodníků,
+- exporty pro reklamní retargeting,
+- metriky, podle kterých nikdo nikdy nerozhoduje.
+
+## Checklist: telemetrie a flagy bez šmírování
+
+- Každý event má účel, vlastníka a rozhodnutí, které podporuje.
+- Eventy neposílají volný text, obsah dokumentů, hesla, tokeny ani platební údaje.
+- Produktová telemetrie je oddělená od marketingové analytiky a reklamních publik.
+- Feature flags mají kategorii, vlastníka, expiraci a plán odstranění.
+- Experimenty mají hypotézu, hlavní metriku, konec a minimální datový rozsah.
+- Session replay je vypnutý jako výchozí stav nebo výrazně omezený a maskovaný.
+- Surová data mají krátkou retenci, agregace se drží jen tak dlouho, jak dává smysl.
+- Dashboardy ukazují agregované signály, ne detailní životopis uživatele.
+- Přístup k analytickým datům mají jen lidé, kteří je potřebují pro konkrétní práci.
+- Jednou měsíčně proběhne revize nových eventů a starých flagů.
+
+## Mini šablona produktové telemetrie
+
+```md
+# Telemetrická karta: [produkt / workflow]
+
+## Účel
+- Produktové rozhodnutí:
+- Vlastník:
+- Datum revize:
+
+## Eventy
+- Povolené eventy:
+- Zakázané eventy:
+- Úroveň identifikace:
+
+## Feature flags
+- Aktivní flagy:
+- Vlastník každého flagu:
+- Expirace:
+- Plán odstranění:
+
+## Experimenty
+- Hypotéza:
+- Varianta A:
+- Varianta B:
+- Primární metrika:
+- Ochranná metrika:
+- Konec experimentu:
+
+## Data a retence
+- Surová data:
+- Agregovaná data:
+- Session replay / heatmapy:
+- Přístupové role:
+
+## Rozhodnutí
+- Co uděláme při zlepšení:
+- Co uděláme při zhoršení:
+- Co smažeme po vyhodnocení:
+```
+
+## Zdroje
+
+- European Commission: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- EDPB: Basic principles — https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
+- EDPB: Guidelines 05/2020 on consent under Regulation 2016/679 — https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
+- CNIL: Sheet n°16 — Use analytics on your websites and applications — https://www.cnil.fr/fr/node/677
+- CNIL: Cookies — solutions for audience measurement tools — https://www.cnil.fr/fr/cookies-solutions-pour-les-outils-de-mesure-daudience
+
 # Pracovní log
+
+- 2026-09-29: Doplněna příloha „Produktová telemetrie a feature flags bez šmírovacího motoru“ s praktickým modelem účelových eventů, rozdělením telemetrie podle rizika, pravidly pro feature flags, experimenty, session replay, retenci, dashboardy, checklistem, telemetrickou kartou a ověřenými zdroji Evropské komise, EDPB a CNIL.
 
 - 2026-09-29: Doplněna příloha „Schůzky, nahrávky a AI přepisy bez datového přepálení“ s rozdělením schůzek podle datového rizika, pravidly pro informování účastníků, rozdílem mezi nahrávkou a zápisem, bezpečným použitím AI přepisů, hygienou sdílení obrazovky, retenčním modelem, CRM pravidly, checklistem, meeting data kartou a ověřenými zdroji Evropské komise a EDPB.
 
