@@ -19199,7 +19199,204 @@ Status page je produktová funkce důvěry. Když ji připravíš před incident
 
 ---
 
+# Příloha: SLA, SLO a support priority bez falešných slibů
+
+SLA není kouzelná věta do obchodní nabídky. Je to provozní závazek, který musí tým umět splnit i v úterý večer, když zrovna nikdo nemá chuť hrát si na hasiče. Malé firmy a SaaS projekty často udělají jednu ze dvou chyb: buď neslíbí nic a zákazník při problému neví, na čem je, nebo slíbí „99,99 % dostupnost a odpověď do pěti minut“, protože to zní enterprise. Pak přijde první incident a realita vyfakturuje úroky.
+
+Dobrá dohoda o provozu má být nudná, jasná a měřitelná. Zákazník potřebuje vědět, co je kritické, jak rychle se tým ozve, kde bude komunikace, jak se počítá dostupnost a co se stane, když služba spadne. Tým zase potřebuje závazek, který nevyrobí permanentní pohotovost pro tři lidi a jednoho kaktusa na stole.
+
+> Codyho komentář: SLA, které nikdo neumí provozně obsloužit, není zákaznická péče. Je to marketingový dluh s tikající pojistkou.
+
+## Nejdřív odděl SLI, SLO a SLA
+
+Tyhle zkratky se pletou, protože vypadají jako heslo k routeru. Prakticky:
+
+- **SLI** je měřený signál: například procento úspěšných přihlášení, chybovost API, latence odpovědi nebo doručitelnost transakčních e-mailů.
+- **SLO** je interní cíl: například „99,5 % API požadavků za měsíc skončí úspěšně“.
+- **SLA** je externí závazek se zákazníkem: například dostupnost služby, reakční doby podpory nebo kompenzace při nesplnění.
+
+SLO si můžeš nastavit přísnější než SLA. To je zdravé. Interně chceš vidět problém dřív, než porušíš zákaznický slib. Pokud máš veřejnou SLA na 99,5 %, interní SLO může být 99,8 % a alert se spustí ještě před tím, než začneš pálit důvěru.
+
+Pro malý SaaS je lepší mít tři jednoduché SLO než dvacet metrik, které nikdo nečte:
+
+- úspěšné přihlášení a práce s účtem,
+- dostupnost klíčové produktové akce,
+- úspěšné zpracování datového toku, který zákazník považuje za výsledek.
+
+Ne všechno musí být uptime. Pokud produkt slibuje generování reportů, důležitější může být „reporty se dokončí do 10 minut“ než „frontend načetl prázdnou stránku s krásným spinnerem“.
+
+## SLA piš podle dopadu, ne podle technických vrstev
+
+Zákazník nekupuje databázi, queue ani CDN. Kupuje schopnost dokončit práci. Proto i SLA a support priority navrhuj podle dopadu:
+
+- **P1 — kritický výpadek:** většina zákazníků se nemůže přihlásit, používat klíčovou funkci nebo existuje podezření na bezpečnostní incident.
+- **P2 — vážné omezení:** významná funkce je nedostupná pro část zákazníků, existuje workaround, ale dopad je obchodně citelný.
+- **P3 — běžný problém:** chyba má omezený dopad, workaround existuje a nejde o bezpečnost ani ztrátu dat.
+- **P4 — dotaz nebo kosmetika:** nejde o výpadek, ale o vysvětlení, nastavení, drobnou chybu nebo produktový návrh.
+
+Ke každé prioritě napiš dvě věci: **čas první odpovědi** a **komunikační rytmus**. Nepleť si je s časem opravy. Slíbit opravu do dvou hodin je často hazard. Slíbit první reakci do dvou hodin a aktualizaci každých 60 minut je provozně čitelnější.
+
+Příklad pro malý B2B SaaS bez nonstop podpory:
+
+| Priorita | Dopad | První odpověď v pracovní době | Aktualizace | Kanál |
+| --- | --- | --- | --- | --- |
+| P1 | Klíčová služba nedostupná nebo podezření na data breach | do 30 minut | každých 30–60 minut | status page + e-mail dotčeným zákazníkům |
+| P2 | Vážné omezení bez plošného výpadku | do 4 hodin | 1–2× denně | support + případně status page |
+| P3 | Běžná chyba s workaroundem | do 1 pracovního dne | při změně stavu | support |
+| P4 | Dotaz, návrh, drobnost | do 2 pracovních dnů | podle potřeby | support |
+
+Pokud nemáš pohotovost, napiš to. Je férovější říct „kritické incidenty mimo pracovní dobu sledujeme pouze pro enterprise tarify“ než předstírat nepřetržitý provoz a v noci spát s mobilem v režimu „snad“. Upřímnost škáluje lépe než kofein.
+
+## Dostupnost počítej tak, aby nebyla trikem
+
+Dostupnost můžeš počítat různě, a právě proto musí být definice viditelná. Uveď:
+
+- měřené období: měsíc, kvartál nebo rok,
+- rozsah služby: které komponenty se počítají,
+- vyloučení: plánovaná údržba, chyba zákaznické integrace, zásah třetí strany mimo tvoji kontrolu,
+- metoda měření: interní monitoring, externí syntetický monitoring nebo kombinace,
+- časová zóna pro reportování.
+
+Špatná formulace:
+
+```text
+Garantujeme 99,9% dostupnost.
+```
+
+Lepší formulace:
+
+```text
+Dostupnost produkční aplikace počítáme měsíčně jako podíl minut, kdy se lze přihlásit a dokončit hlavní produktovou akci. Do výpočtu nezahrnujeme předem oznámenou plánovanou údržbu, výpadky zákaznické infrastruktury a chyby způsobené neplatnou konfigurací integrace.
+```
+
+Tohle není právní román. Je to prevence hádek. Pokud zákazník ví, co měříš, může ti důvěřovat i při horším měsíci.
+
+## Privacy-first support priorita nepotřebuje víc dat, než problém vyžaduje
+
+Při incidentu a support triáži je lákavé chtít „pošlete nám screenshot, export, HAR, logy, token, e-mail kolegy, rodné číslo babičky a ideálně celý prohlížeč v ZIPu“. Nedělej to. Diagnostika má mít datovou brzdu.
+
+Minimální sada pro support ticket:
+
+- kdo problém hlásí a za jaký účet nebo organizaci,
+- jaký krok se nepovedl,
+- přibližný čas a časová zóna,
+- viditelná chybová hláška nebo request ID,
+- dopad na práci zákazníka,
+- jestli jde o produkci, test nebo integraci.
+
+Citlivé přílohy chtěj jen tehdy, když bez nich nejde problém vyřešit. Pokud zákazník posílá screenshot, doporuč začernit osobní údaje a obchodní data. Pokud potřebuješ logy, nabídni bezpečný upload, časově omezený přístup a retenční pravidlo. Support inbox nemá být archeologické naleziště citlivých incidentů.
+
+## Kompenzace drž jednoduché a předem známé
+
+U placeného B2B SaaS může SLA obsahovat servisní kredity. Pokud je zavedeš, napiš je jednoduše:
+
+- kdy vzniká nárok,
+- jak se uplatňuje,
+- jaký je strop kompenzace,
+- co je vyloučené,
+- jestli kredit vrací peníze, nebo snižuje další fakturu.
+
+Malý tým nemusí hned vymýšlet složité procentní tabulky. Často stačí jednoduché pravidlo: pokud měsíční dostupnost klesne pod domluvenou hranici a zákazník byl reálně dotčen, nabídne se kredit na další období. Hlavní je, aby obchod nesliboval něco jiného než provoz.
+
+## SLA review dělej po incidentech i po růstu
+
+SLA není vytesané do kamene. Je to dohoda, která musí odpovídat produktu, týmu a zákazníkům. Reviduj ji:
+
+- po větším incidentu,
+- po přidání kritické integrace,
+- při změně tarifů,
+- když začneš obsluhovat enterprise zákazníky,
+- když se změní dostupnost podpory,
+- minimálně jednou za kvartál v provozní rutině.
+
+Při review se neptej jen „splnili jsme SLA?“. Ptej se:
+
+- varovalo interní SLO včas?
+- rozuměli zákazníci komunikaci?
+- byla priorita incidentu správná?
+- sbírali jsme zbytečně moc dat?
+- odpovídá závazek tomu, co tým skutečně zvládne?
+
+Když odpovědi bolí, je to dobré. SLA má bolet při revizi, ne při zákaznickém sporu.
+
+## Checklist: SLA bez falešných slibů
+
+- [ ] Máme jasně oddělené SLI, interní SLO a externí SLA.
+- [ ] SLA popisuje zákaznický dopad, ne interní technologické vrstvy.
+- [ ] Každá priorita má první reakci, komunikační rytmus a kanál.
+- [ ] Dostupnost má definované období, rozsah, výjimky a metodu měření.
+- [ ] Support ticket sbírá jen data potřebná pro řešení problému.
+- [ ] Pro citlivé přílohy existuje bezpečný upload a retence.
+- [ ] Obchodní nabídky neslibují víc, než provoz umí splnit.
+- [ ] Po incidentech a kvartálně kontrolujeme, jestli SLA odpovídá realitě.
+
+## Mini šablona SLA karty
+
+```markdown
+# SLA karta: [produkt / tarif]
+
+## Rozsah
+Platí pro:
+Neplatí pro:
+Měřené období:
+Časová zóna:
+
+## SLI a SLO
+Klíčový signál 1:
+Interní cíl:
+Alert hranice:
+
+Klíčový signál 2:
+Interní cíl:
+Alert hranice:
+
+## Externí SLA
+Dostupnost:
+Definice dostupnosti:
+Výjimky:
+Metoda měření:
+
+## Support priority
+P1 první odpověď:
+P1 aktualizace:
+P2 první odpověď:
+P2 aktualizace:
+P3 první odpověď:
+P4 první odpověď:
+
+## Data a soukromí
+Minimální data pro ticket:
+Citlivé přílohy:
+Retence ticketů:
+Kdo má přístup:
+
+## Kompenzace
+Kdy vzniká nárok:
+Forma kreditu:
+Strop:
+Proces uplatnění:
+
+## Review
+Vlastník:
+Datum poslední kontroly:
+Další kontrola:
+Co změnit:
+```
+
+SLA má být most mezi obchodem, produktem, podporou a provozem. Když je napsaná prakticky, zákazník ví, co čekat, a tým ví, co chránit. Když je napsaná jako kouřová clona, všichni se tváří profesionálně až do prvního incidentu. Pak se ukáže, jestli prodáváš službu, nebo powerpointovou pohádku.
+
+## Zdroje
+
+- [Google SRE Book: Service Level Objectives](https://sre.google/sre-book/service-level-objectives/)
+- [Google SRE Workbook: Implementing SLOs](https://sre.google/workbook/implementing-slos/)
+- [Atlassian: Incident management — SLAs, SLOs and SLIs](https://www.atlassian.com/incident-management/kpis/sla-vs-slo-vs-sli)
+- [Evropská komise: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
+
+---
+
 # Pracovní log
+- 2026-09-29: Doplněna příloha „SLA, SLO a support priority bez falešných slibů“ s praktickým rozlišením SLI/SLO/SLA, prioritami podpory, férovým výpočtem dostupnosti, privacy-first support daty, kompenzacemi, review rutinou, checklistem, SLA kartou a ověřenými zdroji k SRE i GDPR principům.
+
 - 2026-09-29: Doplněna příloha „Status page a provozní komunikace bez mlžení“ s praktickým návrhem komponent, incident zpráv, SLA, plánované údržby, postmortemu, privacy-first odběrů, checklistem, šablonou incident oznámení a ověřenými zdroji k GDPR i provozní komunikaci.
 
 - 2026-09-29: Doplněna příloha „Experimenty a A/B testy bez manipulace“ s privacy-first postupem pro hypotézy, férové varianty, datovou hranici, vyhodnocení malých experimentů, checklist a šablonu experiment karty.
