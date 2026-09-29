@@ -15663,7 +15663,198 @@ Platby mají být nudné. Nudné v tom nejlepším slova smyslu: zákazník zapl
 - PCI Security Standards Council FAQ 1154: storage of sensitive authentication data after authorization — https://www.pcisecuritystandards.org/faqs/1154/
 
 
+# Příloha: Schůzky, nahrávky a AI přepisy bez datového přepálení
+
+Schůzky jsou datově zvláštní zvíře. Na papíře vypadají nevinně: lidé si povídají, někdo sdílí obrazovku, občas vznikne zápis. V praxi se v nich potkává obchodní strategie, zákaznické problémy, osobní údaje, interní roadmapa, cenové ústupky, bezpečnostní detaily, přístupy, fakturační informace a někdy i věta „tohle prosím nikam nepište“. Pak přijde automatický nahrávací bot, přepis, AI shrnutí, export do CRM a najednou má malý tým víc dat, než chtěl, chápe a dokáže bezpečně uklidit.
+
+Privacy-first přístup neříká, že nesmíš dělat zápisy nebo používat AI přepisy. Říká: nejdřív si ujasni účel, informuj lidi, minimalizuj obsah, nastav retenci a ukládej jen výstup, který opravdu pomáhá další práci. Ne každá schůzka si zaslouží vlastní digitální fosilii.
+
+> Codyho komentář: Automatický přepis každého hovoru je jako najmout si stenografa, který nikdy nemaže poznámky a rád je ukládá do nástroje s názvem „AI productivity cloud“. Zní moderně. Do prvního incidentu.
+
+## Rozděl schůzky podle datového rizika
+
+Neřeš všechny hovory stejně. Krátký interní status, sales call s novým leadem a technická bezpečnostní schůzka se zákazníkem mají úplně jiné datové dopady.
+
+Praktické rozdělení:
+
+| Typ schůzky | Typická data | Výchozí pravidlo |
+| --- | --- | --- |
+| Interní operativa | úkoly, blokery, termíny | zápis stačí, nahrávka spíš ne |
+| Obchodní hovor | potřeby zákazníka, rozpočet, námitky, kontakty | zapisuj závěr a další krok, nenahrávej automaticky |
+| Onboarding zákazníka | nastavení účtu, role, integrační otázky | sdílej jen nutné obrazovky, zápis bez tajemství |
+| Support / incident | chyba, dopad, technický kontext | strukturovaný ticket, nahrávka jen s jasným důvodem |
+| Produktový výzkum | zkušenost uživatele, citace, problémy | informovaný souhlas, anonymizované poznámky |
+| Bezpečnostní nebo právní call | rizika, zranitelnosti, smlouvy | omezený přístup, krátká retence, žádný volný export |
+
+Tahle tabulka nemusí být dokonalá. Má zabránit tomu, aby jediná výchozí volba zněla: „nahráváme všechno, protože AI nám to pak shrne“. To není workflow. To je datový vysavač s hezkým onboardingem.
+
+## Před schůzkou řekni, co se bude ukládat
+
+Účastník má vědět, jestli schůzku nahráváš, přepisuješ, shrnuješ AI nástrojem nebo zapisuješ jen ruční poznámky. Ne až na konci. Ne skrytě v kalendářové pozvánce mezi odkazem na videohovor a veselým emoji.
+
+Krátká věta do pozvánky:
+
+```text
+Schůzku standardně nenahráváme. Uděláme jen krátký interní zápis s domluvenými kroky. Pokud bychom potřebovali nahrávku nebo AI přepis, řekneme to předem a vysvětlíme proč.
+```
+
+Věta pro případ, kdy nahrávka opravdu dává smysl:
+
+```text
+Rádi bychom schůzku nahráli jen pro přípravu zápisu a kontrolu technických detailů. Nahrávka bude dostupná pouze týmu [role], nebudeme ji používat pro marketing ani trénování modelů a smažeme ji do [doba]. Je to pro vás v pořádku?
+```
+
+U zákaznických nebo výzkumných hovorů se nespoléhej na to, že nástroj ukáže malou ikonku nahrávání. Ikonka není vysvětlení. Férové vysvětlení je součást důvěry.
+
+## Nahrávka není zápis
+
+Nahrávka je surový materiál. Obsahuje odbočky, omyly, citlivé věty, sdílené obrazovky, jména lidí, možná i notifikace nebo omylem otevřený dokument. Zápis je pracovní výstup. Ten má být kratší, přesnější a bezpečnější.
+
+Po schůzce si polož otázku: potřebujeme zachovat nahrávku, nebo stačí zápis?
+
+Ve většině běžných B2B situací stačí:
+
+- problém nebo cíl zákazníka,
+- domluvený další krok,
+- otevřené otázky,
+- odpovědnosti a termíny,
+- rozhodnutí o rozsahu,
+- datové hranice nebo bezpečnostní poznámka,
+- odkaz na související ticket, nabídku nebo dokument.
+
+Do zápisu naopak typicky nepatří:
+
+- celé osobní příběhy mimo účel spolupráce,
+- interní drby zákazníka,
+- hesla, tokeny, recovery kódy nebo neveřejné odkazy,
+- screenshoty s osobními údaji,
+- kompletní přepis hovoru „pro jistotu“,
+- citace bez kontextu, které by mohly člověka poškodit.
+
+Dobré pravidlo: zápis má umožnit pokračovat v práci, ne rekonstruovat schůzku jako soudní stenogram.
+
+## AI přepis používej jako dočasnou pomůcku
+
+AI přepis nebo shrnutí může být skvělý sluha: najde úkoly, vyrobí první draft zápisu, vytáhne otevřené otázky a pomůže neztratit detail. Ale nemá být automaticky nový systém záznamu o zákaznících.
+
+Bezpečný postup:
+
+1. Předem rozhodni, které typy schůzek mohou jít do AI přepisu.
+2. Ověř, kde se audio, přepis a metadata zpracují a ukládají.
+3. Zjisti, zda poskytovatel používá obsah pro trénování nebo zlepšování služeb.
+4. Vypni automatické sdílení přepisů všem účastníkům, pokud to není účel.
+5. Po vytvoření zápisu smaž surový přepis, pokud ho dál nepotřebuješ.
+6. Do CRM ukládej lidsky zkontrolovaný závěr, ne automatický román.
+
+Privacy-first varianta pro malý tým: AI nástroj použij jen pro interní návrh zápisu, člověk ho zkrátí, odstraní citlivé části a do trvalého systému uloží jen finální poznámku. Ano, je to o pět minut víc práce. Pořád levnější než vysvětlovat, proč má obchodní CRM kompletní transkript zákaznického incidentu.
+
+## Sdílení obrazovky je taky datový tok
+
+Při hovoru se často řeší jen nahrávání zvuku. Jenže sdílená obrazovka umí ukázat mnohem víc: e-maily, interní chat, notifikace, URL s tokenem, zákaznická jména, analytický dashboard, faktury nebo produkční administraci.
+
+Před zákaznickým nebo partnerským hovorem udělej rychlou hygienu:
+
+- zavři nepotřebné aplikace a záložky,
+- vypni notifikace,
+- používej demo účet se syntetickými daty,
+- sdílej konkrétní okno místo celé obrazovky,
+- připrav si bezpečné odkazy dopředu,
+- nepřibližuj produkční data, pokud nejsou pro účel hovoru nutná.
+
+U supportu a incidentů je lákavé říct: „nasdílejte obrazovku a ukažte nám všechno“. Lepší je vést člověka ke konkrétnímu kroku, požádat o minimální výřez a citlivá pole nechat rozmazat nebo opsat bezpečnější formou.
+
+## Retence podle užitečnosti, ne podle kapacity úložiště
+
+Úložiště je levné, ale odpovědnost za data levná není. U každého typu schůzky nastav, co se uchovává a jak dlouho.
+
+Příklad:
+
+| Výstup | Retence | Poznámka |
+| --- | --- | --- |
+| Surová nahrávka obchodního hovoru | 7 až 30 dní | jen pokud byla schválena a potřebná pro zápis |
+| AI přepis | do schválení zápisu | potom smazat nebo nahradit anonymizovaným výtahem |
+| Finální zápis | po dobu obchodního vztahu nebo projektu | stručně, bez zbytečných osobních detailů |
+| Produktový výzkum | podle výzkumného plánu | citace anonymizovat, souhlas evidovat odděleně |
+| Incidentový zápis | podle incidentové politiky | držet fakta, dopad, rozhodnutí a opatření |
+
+Retence nemusí být právní kouzelnictví. Stačí vědět: proč to držíme, kdo k tomu má přístup, kdy to smažeme a co se stane při žádosti o výmaz nebo export.
+
+## CRM není odpadkový koš pro hovory
+
+CRM má pomáhat navázat vztah a dodat službu. Nemá být skladiště všech vět, které kdy zákazník řekl. Když do CRM lepíš celé přepisy, vytváříš profil člověka i firmy, který často přesahuje původní účel.
+
+Lepší zápis do CRM:
+
+```text
+Firma řeší zrychlení ručního reportingu pro 12členný obchodní tým. Hlavní překážka: schválení rozpočtu a napojení na stávající CRM. Další krok: poslat návrh pilotu do pátku, bez práce s produkčními zákaznickými daty.
+```
+
+Horší zápis:
+
+```text
+Jan říkal, že CFO je proti, interně mají chaos, konkurence X je levnější a kolegyně Petra prý nestíhá. Přepis hovoru v příloze.
+```
+
+První zápis pomáhá práci. Druhý vyrábí citlivý profil a možná i interní problém pro zákazníka. Gratuluju, CRM právě dostalo bulvární rubriku.
+
+## Checklist: schůzky bez datového přepálení
+
+- [ ] Máme rozdělené typy schůzek podle datového rizika.
+- [ ] Účastníci vědí předem, jestli se hovor nahrává, přepisuje nebo AI shrnuje.
+- [ ] Nahrávky nejsou výchozí volba pro běžné obchodní a interní hovory.
+- [ ] AI přepisy používáme jako dočasnou pomůcku, ne jako trvalý archiv.
+- [ ] Do CRM a projektových nástrojů ukládáme stručné závěry, ne celé transkripty.
+- [ ] Sdílení obrazovky probíhá s demo daty nebo minimálním výřezem.
+- [ ] Retence nahrávek, přepisů a zápisů je napsaná a kontrolovaná.
+- [ ] Přístup k citlivým zápisům je omezený podle role.
+- [ ] Výzkumné citace anonymizujeme nebo používáme jen s jasným souhlasem.
+- [ ] Staré nahrávky a přepisy se pravidelně mažou, ne jen přesouvají.
+
+## Mini šablona meeting data karty
+
+```markdown
+# Meeting data karta: [typ schůzky]
+
+## Účel
+- Proč schůzka existuje:
+- Jaký výstup potřebujeme:
+
+## Data
+- Typická osobní / firemní data:
+- Co se nesmí ukládat:
+- Sdílení obrazovky: ano/ne, pravidla:
+
+## Záznam
+- Nahrávka povolena: ano/ne/pouze výjimka
+- AI přepis: ano/ne/pouze dočasně
+- Kdo musí být informován:
+- Kde se ukládá finální zápis:
+
+## Přístupy a retence
+- Kdo má přístup:
+- Retence nahrávky:
+- Retence přepisu:
+- Retence finálního zápisu:
+
+## Kontrola
+- Vlastník:
+- Poslední kontrola:
+- Další kontrola:
+```
+
+Schůzky mají pomáhat rozhodovat, ne vytvářet paralelní datový sklad lidských vět. Když z hovoru zůstane jasný další krok, odpovědnost a bezpečně uložený minimální zápis, vyhrál jsi. Když zůstane pět gigabajtů nahrávek, tři AI shrnutí a nikdo neví, co se má stát dál, máš jen dražší chaos s titulky.
+
+## Zdroje
+
+- European Commission: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- EDPB: Basic principles — https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
+- EDPB: Guidelines 05/2020 on consent under Regulation 2016/679 — https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
+- European Commission: Guidelines on transparency obligations for providers and deployers of certain AI systems — https://digital-strategy.ec.europa.eu/en/policies/guidelines-ai-transparency-obligations
+
+
 # Pracovní log
+
+- 2026-09-29: Doplněna příloha „Schůzky, nahrávky a AI přepisy bez datového přepálení“ s rozdělením schůzek podle datového rizika, pravidly pro informování účastníků, rozdílem mezi nahrávkou a zápisem, bezpečným použitím AI přepisů, hygienou sdílení obrazovky, retenčním modelem, CRM pravidly, checklistem, meeting data kartou a ověřenými zdroji Evropské komise a EDPB.
 
 - 2026-09-29: Doplněna příloha „Platby a fakturace bez datového nadbytku“ s rozdělením platebního toku na produktovou, platební, fakturační a podpůrnou vrstvu, doporučením minimalizace platebních údajů, pravidly pro fakturační kontakty, webhooky, refundy, účetní exporty, checklistem, billing kartou a ověřenými zdroji Evropské komise a PCI SSC.
 
