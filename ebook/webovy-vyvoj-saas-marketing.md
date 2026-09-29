@@ -16412,7 +16412,186 @@ Privacy-first pohled: evropský provoz a kontrola nad daty nejsou jen právní k
 - European Commission: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 - NIST Cybersecurity Framework 2.0: Quick-Start Guide for Cybersecurity Supply Chain Risk Management — https://csrc.nist.gov/pubs/sp/1305/final
 
+# Příloha: Domény, DNS a e-mailová důvěryhodnost bez doručovací magie
+
+E-mail je pořád jeden z nejcennějších kanálů pro web, SaaS i B2B obchod. Jenže doručitelnost není kouzlo, které se spraví tím, že přidáš do patičky „nechci spamovat, fakt“. Je to kombinace technického nastavení, reputace domény, rozumného objemu, kvalitního obsahu a férové práce s kontakty.
+
+Privacy-first přístup tady neznamená, že se e-mailu bojíš. Znamená, že posíláš méně zbytečných zpráv, lépe vysvětluješ důvod kontaktu, nesbíráš přehnaně detailní tracking a technicky chráníš doménu před zneužitím. E-mail má být přímý vztah, ne levnější billboard s pixelovým dalekohledem.
+
+> Codyho komentář: Když firma řeší doručitelnost až ve chvíli, kdy padá do spamu, je to jako řešit zálohy až poté, co server udělá „puf“. Romantické to není, ale preventivní nuda vyhrává.
+
+## Rozděl domény podle rizika
+
+Neposílej všechno z jedné domény. Hlavní firemní doména je reputační kapitál. Když ji poškodíš agresivní kampaní, testovacím skriptem nebo špatně nakonfigurovaným nástrojem, dopadne to i na běžnou komunikaci se zákazníky.
+
+Praktický model:
+
+- `example.cz` — hlavní web a lidská komunikace.
+- `app.example.cz` — aplikace nebo produktové rozhraní.
+- `mail.example.cz` nebo `notify.example.cz` — transakční zprávy z aplikace.
+- `news.example.cz` — newsletter nebo obsahové rozesílky.
+- `sandbox.example.cz` — testování šablon a integrací, nikdy ostré kampaně.
+
+U malého SaaS nemusíš mít deset domén. Stačí oddělit alespoň běžnou komunikaci, transakční e-maily a marketingové rozesílky. Když se něco pokazí, víš, kde hoří, a nemusíš hasit celou značku.
+
+## SPF, DKIM a DMARC nastav jako minimum, ne jako bonus
+
+SPF říká, které servery mohou za doménu posílat. DKIM přidává kryptografický podpis zprávy. DMARC říká příjemcům, co mají dělat, když kontrola selže, a umožňuje získávat reporty o zneužití domény. Samostatně to není neprůstřelná vesta, dohromady je to základní zámek na dveřích.
+
+Postup pro malý tým:
+
+1. Sepiš všechny nástroje, které posílají e-maily za tvoji doménu: pošta, fakturace, aplikace, newsletter, helpdesk, CRM.
+2. U každého nástroje zjisti doporučené DNS záznamy.
+3. SPF drž krátký a čitelný; nevrstvi do něj staré služby, které už neposílají.
+4. Zapni DKIM pro každého legitimního odesílatele.
+5. DMARC začni v režimu monitoringu (`p=none`), vyhodnoť reporty a postupně přejdi na přísnější politiku (`quarantine`, později `reject`).
+
+Příklad přemýšlení: pokud fakturační systém posílá faktury, musí být v DNS. Pokud starý marketingový nástroj už nepoužíváš, odstraň ho. E-mailová reputace nemá ráda muzeum historických integrací.
+
+## DMARC reporty čti provozně, ne paranoidně
+
+DMARC reporty mohou vypadat jako datová lavina. Cíl ale není přečíst každý řádek jako detektivku. Cíl je odpovědět na tři otázky:
+
+- Kdo legitimně posílá za naši doménu?
+- Kdo posílá nečekaně, ale možná kvůli zapomenuté integraci?
+- Kdo doménu zneužívá nebo falšuje?
+
+Privacy-first nastavení:
+
+- reporty posílej do specializované schránky nebo nástroje s jasným vlastníkem,
+- neukládej je déle, než potřebuješ pro provozní trend a audit,
+- nesdílej raw reporty široce po firmě,
+- do provozní dokumentace piš agregované závěry, ne náhodné adresy a payloady.
+
+Měsíční rutina může být jednoduchá: zkontroluj nové zdroje odesílání, porovnej je se seznamem schválených nástrojů, oprav DNS nebo integraci a zapiš rozhodnutí do doménové karty. Ano, je to nudné. Právě proto to funguje.
+
+## Transakční, provozní a marketingové e-maily nesmí splývat
+
+Transakční e-mail je například potvrzení registrace, reset hesla, faktura nebo bezpečnostní upozornění. Provozní e-mail může být oznámení údržby nebo změna podmínek. Marketingový e-mail prodává, zve, připomíná obsah nebo buduje poptávku.
+
+Problém nastane, když všechno posíláš stejným nástrojem, stejnou doménou a stejnou logikou odhlášení. Reset hesla se nemá chovat jako newsletter. Newsletter se nemá tvářit jako nutná provozní zpráva. A bezpečnostní upozornění nemá obsahovat marketingový banner, který křičí „ještě si kup vyšší tarif“. To je produktová etiketa na úrovni mokrého letáku na skle.
+
+Praktické pravidlo:
+
+- Transakční e-maily posílej rychle, spolehlivě a bez reklamního balastu.
+- Provozní zprávy posílej jen dotčeným lidem a vysvětli dopad.
+- Marketing posílej jen tam, kde máš právní základ, očekávání a jednoduché odhlášení.
+- Metriky drž oddělené: doručení resetu hesla není úspěch kampaně.
+
+## Tracking omez na to, co opravdu potřebuješ
+
+Otevírací pixely a detailní sledování kliknutí lákají, protože dávají hezká čísla. Jenže u mnoha rozhodnutí jsou méně užitečné, než vypadají. Mail klienti obrázky blokují, některé systémy proxy stahují obsah automaticky a část signálů je zkreslená. Navíc z privacy pohledu často sbíráš víc, než potřebuješ.
+
+Rozumnější model:
+
+- sleduj doručitelnost, bounces, spam complaints a odhlášení,
+- u kampaní měř agregované kliknutí na vlastní URL s UTM parametry,
+- nepoužívej tracking na bezpečnostní, fakturační a citlivé provozní zprávy,
+- u newsletteru jasně popiš, jaké měření používáš,
+- pokud nepotřebuješ individuální historii otevření, nesbírej ji.
+
+Privacy-first marketing má být dost přesný na rozhodnutí, ne dost invazivní na nepříjemný pocit. Pokud chceš zjistit, jestli obsah funguje, často stačí počet odpovědí, kliknutí na hlavní odkaz, návštěvnost článku a kvalita následných poptávek.
+
+## Zahřívání domény dělej pomalu a poctivě
+
+Nová doména nebo nový odesílací subdomain nemá reputaci. Když z ní hned pošleš tisíce e-mailů, vypadá to podezřele. Zahřívání znamená postupné navyšování objemu, posílání lidem, kteří zprávy opravdu očekávají, a pečlivé sledování problémů.
+
+Startovací postup:
+
+1. Začni transakčními nebo velmi očekávanými zprávami.
+2. První marketingovou rozesílku pošli menšímu, aktivnímu segmentu.
+3. Sleduj bounces, stížnosti, odhlášení a odpovědi.
+4. Neposílej koupeným seznamům. Vážně. Ani když Excel vypadá lákavě.
+5. Objem navyšuj jen tehdy, když metriky nevykazují problém.
+
+Když klesne doručitelnost, nepanikař tak, že pošleš další kampaň „pro jistotu“. Zastav objem, najdi příčinu, oprav DNS nebo seznam kontaktů a obnovuj reputaci pomalu.
+
+## Doménová karta šetří čas při každém incidentu
+
+Každá doména a subdoména, která posílá e-maily, má mít jednu jednoduchou kartu. Nemusí to být enterprise CMDB. Stačí živý dokument, který odpovídá na otázku: kdo za co posílá, proč, jak je to ověřené a kdo to umí vypnout.
+
+Minimum polí:
+
+- doména / subdoména,
+- účel odesílání,
+- vlastník,
+- poskytovatelé,
+- SPF / DKIM / DMARC stav,
+- typ zpráv,
+- tracking a metriky,
+- retenční pravidla,
+- postup vypnutí,
+- datum poslední kontroly.
+
+Tahle karta se hodí při migraci pošty, změně newsletterového nástroje, podezření na phishing i při obyčejné otázce „proč nám faktury padají do spamu?“ Bez ní začne archeologie v DNS. A DNS archeologie je zábava asi jako hledání ponožek v serverovně.
+
+## Checklist: e-mailová důvěryhodnost bez magie
+
+- [ ] Máme seznam všech služeb, které posílají za naši doménu.
+- [ ] Transakční, provozní a marketingové zprávy jsou oddělené podle účelu.
+- [ ] SPF obsahuje jen aktuální odesílatele.
+- [ ] DKIM je zapnutý pro každý legitimní odesílací nástroj.
+- [ ] DMARC je minimálně v monitoringu a má vlastní reportovací adresu.
+- [ ] Máme plán přechodu na přísnější DMARC politiku.
+- [ ] Nepoužíváme tracking v citlivých transakčních zprávách.
+- [ ] Marketingové měření je popsané a omezené na užitečné signály.
+- [ ] Nové domény zahříváme postupně a bez koupených seznamů.
+- [ ] Každá odesílací doména má vlastníka a postup vypnutí.
+
+## Mini šablona doménové e-mailové karty
+
+```markdown
+# E-mailová doménová karta: [doména / subdoména]
+
+## Účel
+- Typ zpráv:
+- Produkt / služba:
+- Vlastník:
+
+## Poskytovatelé
+- Poštovní služba:
+- Transakční e-mail:
+- Newsletter / marketing:
+- Helpdesk / CRM:
+
+## DNS a autentizace
+- SPF stav:
+- DKIM stav:
+- DMARC politika:
+- Reportovací adresa:
+- Datum poslední kontroly:
+
+## Data a měření
+- Jaké metriky sledujeme:
+- Používáme open tracking: ano/ne/proč
+- Používáme click tracking: ano/ne/proč
+- Retence reportů:
+
+## Provoz
+- Zahřívací plán:
+- Bounce / complaint práh pro zastavení:
+- Postup vypnutí:
+- Náhradní komunikační cesta:
+
+## Revize
+- Poslední kontrola:
+- Další kontrola:
+- Rozhodnutí / poznámky:
+```
+
+## Zdroje
+
+- RFC 7489: Domain-based Message Authentication, Reporting, and Conformance (DMARC) — https://www.rfc-editor.org/rfc/rfc7489
+- RFC 7208: Sender Policy Framework (SPF) — https://www.rfc-editor.org/rfc/rfc7208
+- RFC 6376: DomainKeys Identified Mail (DKIM) Signatures — https://www.rfc-editor.org/rfc/rfc6376
+- RFC 8461: SMTP MTA Strict Transport Security (MTA-STS) — https://www.rfc-editor.org/rfc/rfc8461
+- RFC 8460: SMTP TLS Reporting — https://www.rfc-editor.org/rfc/rfc8460
+- Google: Email sender guidelines — https://support.google.com/a/answer/81126
+- European Commission: GDPR principles — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
 # Pracovní log
+
+- 2026-09-29: Doplněna příloha „Domény, DNS a e-mailová důvěryhodnost bez doručovací magie“ s praktickým rozdělením odesílacích domén, SPF/DKIM/DMARC postupem, provozním čtením reportů, oddělením typů e-mailů, privacy-first trackingem, zahříváním domény, doménovou kartou, checklistem a ověřenými zdroji RFC, Google a Evropské komise.
 
 - 2026-09-29: Doplněna příloha „API integrace a webhooky bez datové exploze“ s praktickým postupem pro datové kontrakty, interní ID místo osobních údajů, bezpečné webhooky, rate limiting, tokeny, failover, logování, exit plán, checklist, integrační kartu a ověřené zdroje OWASP, Evropské komise a NIST.
 
