@@ -14982,7 +14982,206 @@ Retence reportu:
 - CISA: Vulnerability Disclosure Policy Template — https://www.cisa.gov/resources-tools/resources/vulnerability-disclosure-policy-template
 
 
+# Příloha: DPA a dodavatelská kontrola bez právnického pexesa
+
+DPA, tedy smlouva o zpracování osobních údajů, není PDF talisman proti průšvihu. Je to provozní dohoda: kdo co dělá, s jakými daty, proč, jak dlouho, kde, s jakými subdodavateli a co se stane, když něco shoří. Pokud ji tým vytáhne až při auditu nebo při podpisu enterprise zákazníka, je pozdě. Ne proto, že právník nestihne krásnou větu. Protože produkt už mezitím odeslal data do pěti nástrojů, které nikdo pořádně nezná.
+
+Privacy-first přístup neznamená, že nikdy nepoužiješ externí službu. Znamená, že každý dodavatel má jasnou práci, datovou hranici, vlastníka a exit plán. Bez toho se SaaS snadno promění v katalog nástrojů, kde každý něco měří, něco ukládá a všichni se tváří, že za to může „integrace“.
+
+> Codyho komentář: DPA není šanon. Je to brzda proti tomu, aby produktový tým omylem outsourcoval důvěru zákazníků do nástroje, který vybral podle nejhezčí landing page.
+
+## Nejdřív urči roli: správce, zpracovatel, nebo jen dodavatel infrastruktury
+
+První otázka není „máme DPA?“. První otázka je: jakou roli v tom toku máme my a jakou roli má dodavatel?
+
+Jednoduchý pracovní model:
+
+| Situace | Typická role firmy | Typická role dodavatele | Co řešit |
+| --- | --- | --- | --- |
+| SaaS ukládá zákaznické účty a obsah | správce nebo zpracovatel podle kontextu služby | hosting jako zpracovatel | DPA, region, subprocesory, bezpečnost, zálohy |
+| E-mailový nástroj posílá produktové notifikace | správce | zpracovatel | účel, šablony, kontakty, odhlášení, retence |
+| Účetní systém fakturuje zákazníky | správce pro fakturaci | často samostatný správce nebo zpracovatel podle nastavení | právní povinnost, přístupy, exporty |
+| Analytika měří agregovanou návštěvnost | správce | zpracovatel, pokud zpracovává identifikátory nebo osobní data | minimalizace, cookies, IP, retence |
+| Platební brána zpracuje platbu | správce pro objednávku | často samostatný správce pro platbu | předání dat, informování zákazníka, dokumentace |
+
+Nehádej roli podle loga dodavatele. Stejný nástroj může být zpracovatel v jednom toku a samostatný správce v jiném. Rozhoduje, kdo určuje účel a prostředky zpracování. Když si nejsi jistý, zapiš nejasnost do datové mapy a nech ji projít právníkem nebo DPO. Mlčení není strategie, jen hezky zabalená budoucí bolest.
+
+## DPA má být konkrétní, ne poetická
+
+Dobrá DPA odpovídá na provozní otázky. Když odpověď nenajdeš do deseti minut, dokument možná existuje, ale tým ho neumí použít.
+
+Minimum, které si zkontroluj:
+
+- předmět a délka zpracování,
+- účel zpracování,
+- typy osobních údajů,
+- kategorie dotčených lidí,
+- povinnosti a práva správce,
+- bezpečnostní opatření,
+- pravidla pro subprocesory,
+- pomoc při žádostech lidí o data,
+- pomoc při incidentech a porušení zabezpečení,
+- vrácení nebo výmaz dat po ukončení služby,
+- auditní práva nebo přiměřené důkazy o kontrole.
+
+Tohle není moje literární preference, ale praktické promítnutí požadavků GDPR na vztah správce a zpracovatele. Pro malý tým je důležité přeložit právní body do provozních polí: kdo má přístup, kde jsou data, jak se mažou, komu dodavatel předává další části práce a jak se dozvíš o změně.
+
+## Udělej DPA kartu ke každému významnému dodavateli
+
+Samotný PDF dokument je špatný pracovní nástroj. Vytvoř krátkou DPA kartu, která propojí smlouvu, datovou mapu a technický provoz. Karta nemusí být složitá. Má být rychle čitelná pro produkt, podporu, obchod i vedení.
+
+Praktická pole:
+
+- název dodavatele a služba,
+- vlastník ve firmě,
+- účel použití,
+- role dodavatele,
+- typy dat,
+- region uložení a zpracování,
+- subprocesory nebo odkaz na jejich seznam,
+- retence dat,
+- způsob exportu,
+- způsob smazání,
+- odkaz na DPA,
+- datum poslední kontroly,
+- rozhodnutí: schváleno, omezeno, nahrazuje se, nebo zakázáno.
+
+U privacy-first SaaS přidej ještě pole „méně datová varianta“. Například: místo session replaye použít dobrovolný feedback formulář; místo osobní analytiky agregované eventy; místo marketingového CRM jednoduchý seznam firemních kontaktů se zdrojem a opt-outem.
+
+## Dodavatelský onboarding piš jako kontrolní bránu
+
+Nový nástroj nesmí projít jen proto, že někdo řekl „to je industry standard“. Tohle slovní spojení už způsobilo víc bordelu než špatně pojmenovaná tabulka `users_old_final_2`.
+
+Před zapnutím nástroje projdi pět kroků:
+
+1. **Účel:** Jaký konkrétní problém řeší a proč nestačí existující řešení?
+2. **Data:** Jaká data do něj pošleme a která tam posílat nesmíme?
+3. **Role:** Je dodavatel zpracovatel, samostatný správce, nebo obojí podle toku?
+4. **Provoz:** Kde jsou data, jaká je retence, kdo má přístup a jak se exportují?
+5. **Exit:** Jak nástroj vypneme bez ztráty dat, lock-inu nebo chaosu v zákaznické komunikaci?
+
+Pokud nástroj neprojde účelem, neřeš DPA. Nejdřív odmítni špatný nápad. Právní dokument nemá legalizovat zbytečnost.
+
+## Změny subprocesorů sleduj bez paniky
+
+Dodavatelé mění subprocesory. Někdy kvůli infrastruktuře, někdy kvůli podpoře, někdy kvůli nové funkci. Cíl není panikařit nad každým e-mailem. Cíl je vědět, kdy změna mění riziko.
+
+Rozumný postup:
+
+- směruj oznámení o subprocesorech do jedné interní schránky nebo štítku,
+- při změně zkontroluj zemi, typ služby a dotčená data,
+- označ dopad: žádný, nízký, střední, vysoký,
+- u středního a vysokého dopadu aktualizuj DPA kartu,
+- pokud změna odporuje zákaznickému slibu nebo smlouvě, řeš námitku, omezení použití nebo náhradu nástroje,
+- jednou kvartálně projdi změny hromadně.
+
+Privacy-first pravidlo: zákazník nemá být překvapený, že jeho data putují jinam, než rozumně čekal. Pokud se dodavatelský řetězec začne podobat mapě metra po zemětřesení, je čas zjednodušovat.
+
+## Technická konfigurace je součást DPA
+
+DPA říká, co se má dít. Nastavení produktu rozhoduje, co se skutečně děje. Proto kontroluj smlouvu společně s konfigurací.
+
+Příklady kontrol:
+
+- vypnuté funkce, které sbírají zbytečný obsah obrazovky nebo zpráv,
+- omezená retence logů a eventů,
+- EU region tam, kde je dostupný a dává smysl,
+- SSO nebo aspoň vynucené MFA pro administrátory,
+- minimální role pro interní uživatele,
+- audit log pro citlivé akce,
+- vypnuté trénování, profilování nebo sekundární použití dat, pokud není výslovně potřeba a vysvětlené,
+- export a výmaz otestovaný na reálném sandboxu.
+
+Nepiš do privacy policy, že data minimalizuješ, pokud máš v nástroji zapnuté všechny sběrné funkce jen proto, že byly default. Default není morální kompas. Default je obchodní rozhodnutí výrobce.
+
+## Čtvrtletní review dodavatelů
+
+Jednou za čtvrtletí udělej krátkou provozní kontrolu. Ne audit s fanfárami. Spíš hygienu.
+
+Otázky pro review:
+
+- Používáme nástroj pořád aktivně?
+- Posíláme do něj stejná data jako při schválení?
+- Přibyly nové integrace, webhooks nebo exporty?
+- Změnili se subprocesoři, region nebo retenční pravidla?
+- Má dodavatel aktuální bezpečnostní nebo compliance dokumenty?
+- Umíme pořád data vyexportovat a smazat?
+- Je v nástroji někdo, kdo už nemá mít přístup?
+- Existuje jednodušší nebo více evropská alternativa?
+
+Výstupem review má být rozhodnutí, ne schůzka. Buď pokračujeme beze změny, omezíme data, upravíme konfiguraci, naplánujeme migraci, nebo nástroj vypneme.
+
+## Checklist: DPA bez právnického pexesa
+
+- [ ] Má každý významný dodavatel vlastníka ve firmě?
+- [ ] Víme, jestli je dodavatel zpracovatel nebo samostatný správce?
+- [ ] Máme uložený odkaz na DPA nebo smluvní podmínky zpracování?
+- [ ] Je v datové mapě účel, typ dat, region a retence?
+- [ ] Máme seznam subprocesorů nebo odkaz na aktuální stránku dodavatele?
+- [ ] Oznámení o změnách subprocesorů chodí na kontrolované místo?
+- [ ] Technická konfigurace odpovídá tomu, co slibujeme zákazníkům?
+- [ ] Neposíláme do nástroje data, která nepotřebuje pro svůj účel?
+- [ ] Umíme data vyexportovat a smazat?
+- [ ] Proběhlo poslední čtvrtletní review a má zapsané rozhodnutí?
+
+## Mini šablona DPA karty
+
+```markdown
+# DPA karta: [dodavatel / služba]
+
+## Základ
+Dodavatel:
+Služba:
+Interní vlastník:
+Datum schválení:
+Datum poslední kontroly:
+Stav: schváleno / omezeno / nahrazuje se / zakázáno
+
+## Účel a role
+Účel použití:
+Naše role:
+Role dodavatele:
+Odkaz na DPA:
+Odkaz na subprocesory:
+
+## Data
+Kategorie lidí:
+Typy dat:
+Citlivá nebo zvláštní data:
+Region zpracování:
+Retence:
+
+## Konfigurace
+EU region zapnut:
+MFA / SSO:
+Role a přístupy:
+Vypnuté zbytečné funkce:
+Audit log:
+
+## Exit
+Export dat:
+Výmaz dat:
+Náhradní řešení:
+Riziko lock-inu:
+
+## Rozhodnutí
+Schválil:
+Omezení použití:
+Další review:
+Poznámky:
+```
+
+## Zdroje
+
+- GDPR, článek 28: vztah správce a zpracovatele — https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- European Commission: What is a data controller or a data processor? — https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/controllerprocessor/what-data-controller-or-data-processor_en
+- EDPB: Guidelines 07/2020 on the concepts of controller and processor in the GDPR — https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en
+- EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default — https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and-default_en
+
+
 # Pracovní log
+
+- 2026-09-29: Doplněna příloha „DPA a dodavatelská kontrola bez právnického pexesa“ s praktickým rozlišením rolí dodavatelů, DPA kartou, onboardingovou bránou pro nové nástroje, kontrolou subprocesorů, technickou konfigurací, čtvrtletním review, checklistem, vyplnitelnou šablonou a ověřenými zdroji GDPR, Evropské komise a EDPB.
 
 - 2026-09-29: Doplněna příloha „Hlášení zranitelností bez bezpečnostního ping-pongu“ s praktickým nastavením security kontaktu, `security.txt`, triáží reportů, odpověďmi reportérovi, minimalizací dat, responsible disclosure pravidly, prioritami, postmortem, checklistem, šablonou security report karty a ověřenými zdroji RFC 9116, ENISA a CISA.
 
