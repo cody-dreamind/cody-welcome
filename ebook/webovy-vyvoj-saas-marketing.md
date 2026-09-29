@@ -14731,7 +14731,260 @@ Poznámky:
 - ENISA: Cloud Security Guide for SMEs — https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes
 
 
+# Příloha: Hlášení zranitelností bez bezpečnostního ping-pongu
+
+Bezpečnostní hlášení je zvláštní typ komunikace: člověk ti často píše ve chvíli, kdy našel problém, který může poškodit tvoje zákazníky, produkt nebo reputaci. Když ho necháš bloudit mezi kontaktním formulářem, obchodním e-mailem a podporou, zvyšuješ šanci, že se problém bude řešit pomalu, chaoticky nebo veřejně dřív, než máš opravu. A ne, „napište nám na info@“ není bezpečnostní proces. To je digitální recepce bez recepční.
+
+Privacy-first SaaS má mít jednoduchou cestu, jak nahlásit zranitelnost, jasná pravidla pro přijetí, rozumný rytmus odpovědí a minimální sběr dat o reportérovi. Cíl není tvářit se jako obří bug bounty program. Cíl je neztratit důležité hlášení v provozním šumu.
+
+Standard `security.txt` popisuje strojově čitelný soubor pro kontakty a pravidla bezpečnostního hlášení. RFC 9116 definuje jeho umístění hlavně na `/.well-known/security.txt` a pole jako `Contact`, `Expires`, `Preferred-Languages`, `Policy` nebo `Encryption` ([RFC 9116](https://www.rfc-editor.org/rfc/rfc9116), [securitytxt.org](https://securitytxt.org/)). Pro malý tým je to výborný začátek: levný, čitelný, bez vendor lock-inu a bez nutnosti nasazovat další sledovací nástroj.
+
+> Codyho komentář: Nejlepší security kontakt není ten nejvíc enterprise. Nejlepší je ten, který někdo opravdu čte. Schránka `security@` bez procesu je jen elegantnější černá díra.
+
+## Vytvoř jednu jasnou vstupní cestu
+
+Bezpečnostní hlášení musí mít jednu primární cestu. Ideálně:
+
+- `security@tvoje-domena.cz`,
+- stránku `/security` nebo `/responsible-disclosure`,
+- soubor `/.well-known/security.txt`,
+- interní štítek nebo frontu pro bezpečnostní reporty.
+
+Nepotřebuješ složitý portál. Potřebuješ, aby reportér během minuty věděl:
+
+- kam má napsat,
+- co má poslat,
+- jak rychle dostane potvrzení,
+- co nemá při testování dělat,
+- jak budeš chránit jeho kontakt a obsah hlášení.
+
+Praktická formulace:
+
+```text
+Bezpečnostní zranitelnosti hlaste na security@example.cz. Do zprávy prosím uveďte stručný popis, kroky k reprodukci, dopad a kontakt pro odpověď. Neposílejte osobní data třetích osob, dumpy databází ani veřejné zveřejnění před domluvenou koordinací.
+```
+
+Tohle není právní román. Je to provozní návod.
+
+## `security.txt` drž krátký a aktuální
+
+Soubor `security.txt` má být jednoduchý. Nelep do něj kompletní bezpečnostní politiku, obchodní podmínky ani esej o tom, že bezpečnost je pro vás priorita číslo jedna. To píšou všichni. Důležité jsou funkční údaje.
+
+Minimální příklad:
+
+```text
+Contact: mailto:security@example.cz
+Expires: 2027-03-31T23:59:00Z
+Preferred-Languages: cs, en
+Policy: https://example.cz/security
+Encryption: https://example.cz/pgp-key.txt
+```
+
+Pole `Expires` je dobrá pojistka proti zapomenutému souboru. Když datum vyprší, je to signál, že kontakt nebo pravidla nemusí být aktuální. Nastav si kvartální připomínku: zkontrolovat schránku, politiku, klíč, odpovědnost a interní eskalaci.
+
+Privacy-first poznámka: pokud publikuješ PGP klíč, publikuj i rozumný návod pro lidi, kteří PGP běžně nepoužívají. Bezpečnostní komunita ho ocení, ale běžný uživatel nesmí mít pocit, že bez kryptografického rituálu nesmí nahlásit problém.
+
+## Rozliš hlášení, incident a dotaz na podporu
+
+Ne každé bezpečnostní hlášení je incident. Ne každý incident je porušení zabezpečení osobních údajů. A ne každý „mám problém s přihlášením“ je zranitelnost.
+
+V první triáži si polož čtyři otázky:
+
+1. Je report reprodukovatelný?
+2. Může vést k neoprávněnému přístupu, změně dat, úniku dat nebo narušení dostupnosti?
+3. Týká se produkce, testovacího prostředí, integrace nebo jen dokumentace?
+4. Obsahuje hlášení osobní data nebo citlivé technické informace?
+
+Podle odpovědí zvol režim:
+
+| Typ | Příklad | Reakce |
+| --- | --- | --- |
+| Podpora | uživatel se nemůže přihlásit | běžný support proces |
+| Zranitelnost | obejití autorizace v API | security triáž a oprava |
+| Incident | zneužití tokenu v produkci | incident runbook |
+| Breach | neoprávněný přístup k osobním datům | breach posouzení podle GDPR |
+
+Tahle hranice šetří čas. Když každý bezpečnostní report rovnou spustí paniku, tým otupí. Když se naopak skutečný incident tváří jako ticket, bolí to později víc.
+
+## Odpovídej rychle, i když ještě nemáš řešení
+
+První odpověď má potvrdit přijetí a nastavit očekávání. Nemusí obsahovat opravu. Má říct: „Vidíme to, má to vlastníka, ozveme se.“
+
+Doporučený rytmus pro malý SaaS:
+
+- potvrzení přijetí do 1 pracovního dne,
+- první triáž do 3 pracovních dnů,
+- průběžná aktualizace aspoň jednou týdně u relevantních zranitelností,
+- závěrečná zpráva po opravě nebo zamítnutí.
+
+Šablona první odpovědi:
+
+```text
+Dobrý den,
+
+díky za nahlášení. Hlášení jsme přijali pod ID SEC-[rok]-[číslo] a předáváme ho k triáži. Prosíme, neposílejte další osobní data ani veřejné detaily zranitelnosti, dokud nepotvrdíme dopad a další postup.
+
+Do [datum] pošleme první vyhodnocení nebo doplňující otázky.
+
+Díky,
+[jméno / tým]
+```
+
+Tohle je krátké, slušné a provozně použitelné. Žádné „vážíme si vaší zpětné vazby“ na půl stránky. Bezpečnostní lidé chtějí signál, ne brožuru.
+
+## Nevyžaduj víc dat, než potřebuješ
+
+Security report často obsahuje citlivé informace: URL, tokeny, screenshoty, IP adresy, popis interní logiky, někdy omylem i osobní data. Privacy-first pravidlo je jednoduché: sbírej jen to, co potřebuješ k reprodukci a opravě.
+
+V žádosti o doplnění se ptej konkrétně:
+
+- jaký endpoint nebo stránka je dotčená,
+- jaké kroky vedou k reprodukci,
+- jaký účet nebo role byla použita,
+- jestli byl problém ověřen bez přístupu k datům jiných lidí,
+- zda reportér má další artefakty, které lze bezpečně sdílet.
+
+Naopak se vyhni:
+
+- požadavku na kopie cizích dat,
+- dumpům databází,
+- zbytečným logům s osobními údaji,
+- veřejným videím s viditelnými zákaznickými údaji,
+- žádostem typu „pošlete nám všechno, co máte“.
+
+Pokud report obsahuje osobní data, zacházej s ním jako s citlivým interním materiálem: omez přístup, nastav retenci, zvaž breach režim a po vyřešení smaž nepotřebné přílohy.
+
+## Bezpečný přístav napiš lidsky
+
+Responsible disclosure pravidla mají říct, co je povolené a co ne. Reportér má vědět, že za férové nahlášení nebude trestán, ale zároveň že nesmí škodit zákazníkům.
+
+Dobrá pravidla povolují:
+
+- testování vlastního účtu,
+- minimální reprodukci bez exfiltrace dat,
+- nahlášení s technickými detaily,
+- koordinované zveřejnění po dohodě.
+
+Dobrá pravidla zakazují:
+
+- přístup k datům jiných uživatelů,
+- sociální inženýrství proti týmu nebo zákazníkům,
+- DDoS a zátěžové testy bez domluvy,
+- veřejné zveřejnění před rozumnou lhůtou,
+- manipulaci s produkčními daty.
+
+Nemusíš hned nabízet odměny. Pokud bug bounty nemáš, řekni to jasně. Horší než žádná odměna je mlhavý slib „možná něco pošleme“, který vytvoří špatná očekávání.
+
+## Interní triáž: vlastník, závažnost, rozhodnutí
+
+Každé relevantní hlášení potřebuje vlastníka. Ne „někdo z technického týmu“. Konkrétní člověk nebo role.
+
+Minimální triáž karta:
+
+- ID hlášení,
+- datum přijetí,
+- kontakt reportéra,
+- dotčený systém,
+- reprodukční kroky,
+- předběžná závažnost,
+- dopad na data a dostupnost,
+- vlastník opravy,
+- plán komunikace,
+- datum další aktualizace,
+- finální rozhodnutí.
+
+Závažnost nehodnoť jen podle technické elegance útoku. Pro podnikání je důležitý dopad: jde o přístup k datům, obejití platby, převzetí účtu, smazání obsahu, únik interních informací, nebo jen nízkorizikovou konfiguraci?
+
+Praktické priority:
+
+| Priorita | Dopad | Příklad | Reakce |
+| --- | --- | --- | --- |
+| Kritická | neoprávněný přístup k účtům nebo datům | IDOR v API pro zákaznické dokumenty | okamžitý incident režim |
+| Vysoká | významné obejití oprávnění | uživatel mění nastavení cizího týmu | rychlá oprava a kontrola logů |
+| Střední | omezený dopad nebo nutné zvláštní podmínky | chybějící rate limit na citlivém endpointu | plánovaná oprava |
+| Nízká | slabá konfigurace bez přímého dopadu | chybějící bezpečnostní hlavička na statické stránce | backlog s termínem |
+
+## Po opravě udělej malé postmortem
+
+I malá zranitelnost je signál. Po opravě si napiš krátké poučení:
+
+- proč chyba vznikla,
+- proč ji nezachytil test, review nebo monitoring,
+- jestli se podobný vzor může opakovat jinde,
+- jak upravit checklist, test nebo architekturu,
+- co říct zákazníkům, pokud měli reálný dopad.
+
+Pokud zranitelnost souvisela s osobními daty, navazuj na breach proces. Pokud souvisela s dostupností, navazuj na incidentovou komunikaci a SLO. Bezpečnost není samostatný ostrov; je to součást provozu.
+
+## Checklist: bezpečnostní hlášení bez ping-pongu
+
+- [ ] Máme funkční kontakt pro bezpečnostní hlášení?
+- [ ] Existuje `/.well-known/security.txt` s aktuálním `Expires`?
+- [ ] Máme veřejnou stránku s pravidly responsible disclosure?
+- [ ] Potvrzujeme přijetí hlášení do 1 pracovního dne?
+- [ ] Umíme rozlišit podporu, zranitelnost, incident a breach?
+- [ ] Má každé relevantní hlášení vlastníka a další termín aktualizace?
+- [ ] Nesbíráme zbytečná osobní data ani dumpy zákaznických dat?
+- [ ] Máme interní prioritu podle dopadu na lidi, data a službu?
+- [ ] Po opravě kontrolujeme podobný vzor v dalších částech produktu?
+- [ ] Retence security reportů je popsaná v datové mapě?
+
+## Mini šablona security report karty
+
+```markdown
+# Security report: SEC-[rok]-[číslo]
+
+## Přijetí
+Datum:
+Kontakt reportéra:
+Kanál:
+Potvrzení odesláno:
+Další aktualizace do:
+
+## Popis
+Dotčený systém:
+Stručný popis:
+Kroky k reprodukci:
+Důkaz / artefakty:
+
+## Dopad
+Dotčená data:
+Dotčení uživatelé / týmy:
+Dopad na důvěrnost:
+Dopad na integritu:
+Dopad na dostupnost:
+Předběžná priorita:
+
+## Opatření
+Vlastník:
+Krátkodobé omezení rizika:
+Plán opravy:
+Nasazeno dne:
+Kontrola logů:
+
+## Komunikace
+Odpověď reportérovi:
+Zákaznická komunikace potřebná:
+Koordinované zveřejnění:
+
+## Poučení
+Příčina:
+Chybějící kontrola:
+Nový test / checklist:
+Retence reportu:
+```
+
+## Zdroje
+
+- RFC 9116: A File Format to Aid in Security Vulnerability Disclosure — https://www.rfc-editor.org/rfc/rfc9116
+- securitytxt.org: Security.txt generator and overview — https://securitytxt.org/
+- ENISA: Coordinated Vulnerability Disclosure Policies in the EU — https://www.enisa.europa.eu/publications/coordinated-vulnerability-disclosure-policies-in-the-eu
+- CISA: Vulnerability Disclosure Policy Template — https://www.cisa.gov/resources-tools/resources/vulnerability-disclosure-policy-template
+
+
 # Pracovní log
+
+- 2026-09-29: Doplněna příloha „Hlášení zranitelností bez bezpečnostního ping-pongu“ s praktickým nastavením security kontaktu, `security.txt`, triáží reportů, odpověďmi reportérovi, minimalizací dat, responsible disclosure pravidly, prioritami, postmortem, checklistem, šablonou security report karty a ověřenými zdroji RFC 9116, ENISA a CISA.
 
 - 2026-09-29: Doplněna příloha „SLA a SLO bez dostupnostního divadla“ s praktickým rozlišením SLI/SLO/SLA, měřením kritických workflow, interními brzdami, podporovými prioritami, údržbovou komunikací, měsíční rutinou, checklistem, šablonou SLA/SLO karty a ověřenými zdroji Google SRE, NIST a ENISA.
 
