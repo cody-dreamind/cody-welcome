@@ -18823,7 +18823,193 @@ Metrický dashboard má být nudně užitečný. Když po jeho otevření tým v
 
 ---
 
+# Příloha: Experimenty a A/B testy bez manipulace
+
+Experiment není záminka k tomu, aby web na uživatele zkoušel psychologické finty jako levný kouzelník na firemním večírku. Dobrý experiment má zlepšit rozhodnutí návštěvníka nebo hodnotu produktu. Špatný experiment jen hledá způsob, jak z člověka vyždímat kliknutí, registraci nebo souhlas, který by při férovém rozhraní nedal.
+
+Privacy-first experimentování stojí na třech pravidlech: testuj hypotézu, sbírej minimum dat a měř kvalitu výsledku, ne jen okamžitou konverzi. Pokud test zvedne počet registrací, ale přivede špatné zákazníky, zvýší podporu nebo zhorší důvěru, není to výhra. Je to jen konverzní iluze s účetním dopadem později.
+
+> Codyho komentář: Nejlepší A/B test je ten, po kterém zákazník neřekne „nachytali mě“, ale „aha, konečně tomu rozumím“.
+
+## Začni hypotézou, ne barvou tlačítka
+
+Barva tlačítka může mít smysl testovat až ve chvíli, kdy je jasné, co se člověk snaží pochopit. V malých týmech je skoro vždy větší páka v nabídce, textu, pořadí informací, cenové logice, důkazech důvěry nebo odstranění tření ve formuláři.
+
+Slabý experiment:
+
+```text
+Změníme zelené tlačítko na oranžové a uvidíme, co se stane.
+```
+
+Lepší experiment:
+
+```text
+Hypotéza: Lidé neklikají na konzultaci, protože nevědí, co se stane po odeslání formuláře.
+Změna: Pod CTA přidáme tři konkrétní kroky: odpověď do 1 pracovního dne, krátký call, návrh dalšího postupu.
+Měřítko: Kliknutí na CTA, dokončené formuláře a kvalita poptávek podle ručního vyhodnocení.
+```
+
+Hypotéza má mít tvar:
+
+```text
+Věříme, že [typ návštěvníka] má problém s [konkrétní nejistota / tření].
+Když změníme [konkrétní část webu], zlepší se [užitečné chování].
+Poznáme to podle [metrika] a ověříme kvalitu pomocí [kontrolní signál].
+```
+
+Bez kontrolního signálu je experiment nebezpečně pohodlný. Počet kliknutí se dá zvýšit i horším textem, nátlakem nebo matoucím rozhraním. Kontrolní signál říká, jestli kliknutí vedlo k lepšímu výsledku.
+
+## Co testovat jako první
+
+Pro web nebo raný SaaS má obvykle smysl toto pořadí:
+
+1. **Srozumitelnost nabídky** — hlavní nadpis, komu produkt pomáhá, jaký výsledek slibuje.
+2. **Důvěra** — reference, proces spolupráce, bezpečnost, data, ukázky výstupů.
+3. **Další krok** — konkrétní CTA, očekávání po kliknutí, alternativa pro lidi, kteří nejsou připraveni.
+4. **Formuláře** — počet polí, vysvětlení citlivých údajů, chybové stavy, potvrzení po odeslání.
+5. **Onboarding** — první hodnotná akce, ukázková data, prázdné stavy, férové e-maily.
+6. **Distribuční vstupy** — landing page pro konkrétní článek, partnerství, kampaň nebo segment.
+
+Naopak bych opatrně zacházel s testy, které tlačí na strach, umělou nedostupnost, falešnou urgentnost nebo záměrné zamlžení ceny. Krátkodobě mohou fungovat. Dlouhodobě učí zákazníka, že mu produkt nevěří — a on pak logicky nevěří produktu.
+
+## Experiment nesmí rozbít datovou hranici
+
+Před spuštěním testu si napiš, jaká data test opravdu potřebuje. Často stačí agregované události: zobrazení varianty, kliknutí na CTA, odeslání formuláře, vytvoření projektu nebo dokončení první hodnotné akce. Není nutné ukládat text zprávy, e-mail, jméno firmy ani kompletní session replay.
+
+Bezpečné eventy:
+
+- `experiment_variant_viewed`,
+- `pricing_explanation_expanded`,
+- `consultation_cta_clicked`,
+- `contact_form_submitted`,
+- `onboarding_step_completed`,
+- `rss_subscription_link_clicked`.
+
+Rizikové nebo zbytečné eventy:
+
+- `ondrej@example.com_clicked_enterprise_plan`,
+- text poptávky jako parametr,
+- interní obchodní skóre posílané do marketingového nástroje,
+- URL s pozvánkovým tokenem,
+- nahrávka obrazovky bez jasného důvodu a retence.
+
+Dobrá otázka před každým eventem: „Dokážeme podle téhle informace udělat lepší produktové rozhodnutí?“ Pokud ne, event smaž. Datová střídmost není brzda růstu. Je to uklizený stůl.
+
+## Férové varianty: obě musí být použitelné
+
+A/B test není férový, pokud jedna varianta záměrně zhoršuje srozumitelnost, skrývá odhlášení, komplikuje odmítnutí nebo tlačí člověka do volby, kterou by při klidném čtení neudělal. Evropské doporučení k deceptive design patternům řeší hlavně sociální platformy, ale princip je pro produktové rozhraní obecně užitečný: rozhraní nemá narušovat autonomii a informované rozhodnutí člověka.
+
+Praktická pravidla:
+
+- Varianta A i B musí jasně říkat cenu, závazek a další krok.
+- Odmítnutí nebo zavření nesmí být schválně těžší než přijetí.
+- Copy nesmí vytvářet falešnou naléhavost.
+- Souhlas se sledováním nesmí být zaměněný za souhlas s podmínkami služby.
+- Test nesmí skrývat důležité omezení produktu.
+- Pokud experiment ovlivňuje právní, platební nebo datové rozhodnutí, projdi ho předem ručně.
+
+> Codyho komentář: Když varianta vyhrává jen proto, že je uživatel unavenější, zmatenější nebo vystrašenější, není to optimalizace. Je to UX dluh s úrokem.
+
+## Malý tým nepotřebuje statistické divadlo
+
+U menších webů často nebude dost návštěv na učebnicově čisté A/B testování. To nevadí. Neznamená to, že máš předstírat statistickou jistotu. Znamená to kombinovat menší kvantitativní signály s kvalitativní kontrolou.
+
+Praktičtější postup:
+
+1. Sepiš hypotézu.
+2. Udělej změnu na jedné jasné stránce.
+3. Sleduj agregované signály dva až čtyři týdny podle návštěvnosti.
+4. Ručně vyhodnoť kvalitu poptávek, registrací nebo rozhovorů.
+5. Zapiš rozhodnutí: ponechat, vrátit, upravit, nebo testovat další hypotézu.
+
+Někdy je lepší postupné před/po měření než falešný A/B test s malým vzorkem. Jen si do poznámek poctivě napiš, že výsledek může ovlivnit sezónnost, nový článek, kampaň, incident nebo změna publika. Pokora v měření je levnější než sebevědomý omyl.
+
+## Experiment karta drží tým při zemi
+
+Každý experiment by měl mít kartu. Ne kvůli byrokracii, ale kvůli paměti. Za tři měsíce budeš jinak řešit stejnou otázku znovu, jen s jiným tlačítkem a stejným zmatením v očích.
+
+Karta má obsahovat:
+
+- rozhodnutí, které experiment podporuje,
+- hypotézu,
+- varianty,
+- datovou hranici,
+- primární metriku,
+- kontrolní metriku,
+- dobu běhu,
+- výsledek,
+- rozhodnutí,
+- datum úklidu eventů nebo ukončení sledování.
+
+Výsledek zapisuj i tehdy, když se hypotéza nepotvrdí. Nepovedený experiment je užitečný, pokud zabrání tomu, aby se stejná slepá ulička prodala příští měsíc jako „nový growth nápad“.
+
+## Checklist: experiment bez manipulace
+
+- [ ] Experiment má jednu konkrétní hypotézu.
+- [ ] Testovaná změna pomáhá rozhodnutí uživatele, ne jen tlaku na kliknutí.
+- [ ] Obě varianty jsou srozumitelné, použitelné a férové.
+- [ ] Nezamlčujeme cenu, závazek, omezení ani datové dopady.
+- [ ] Nesbíráme osobní údaje, texty zpráv ani tokeny do analytiky.
+- [ ] Primární metrika má kontrolní metriku kvality.
+- [ ] Výsledek hodnotíme i podle dopadu na podporu, důvěru nebo retenci.
+- [ ] Experiment má předem určenou dobu běhu nebo minimální rozhodovací bod.
+- [ ] Po ukončení mažeme zbytečné eventy a poznámky s citlivými údaji.
+- [ ] Závěr je zapsaný tak, aby ho pochopil člověk mimo původní tým.
+
+## Mini šablona experiment karty
+
+```text
+# Experiment karta: [název]
+
+## Rozhodnutí
+Jaké rozhodnutí chceme zlepšit:
+Pro koho:
+Na jaké stránce / v jakém kroku:
+
+## Hypotéza
+Věříme, že:
+Změníme:
+Očekávaný dopad:
+
+## Varianty
+Varianta A:
+Varianta B:
+Co se nesmí změnit:
+
+## Data
+Primární metrika:
+Kontrolní metrika:
+Eventy:
+Osobní údaje: ano/ne
+Retence poznámek:
+
+## Férovost
+Je cena / závazek jasný? ano/ne
+Je odmítnutí stejně snadné jako přijetí? ano/ne
+Obsahuje varianta nátlak nebo falešnou urgentnost? ano/ne
+
+## Vyhodnocení
+Začátek:
+Konec:
+Výsledek:
+Rozhodnutí: ponechat / vrátit / upravit / testovat dál
+Co jsme se naučili:
+Co uklidit:
+```
+
+Experimentování má být trpělivá disciplína, ne kasino s tlačítky. Když testy zpřesňují nabídku, snižují nejistotu a respektují datovou hranici, pomáhají růstu i důvěře. A důvěra je v Evropě pořád dobrý produktový feature. Jen se hůř dává do konfety grafu.
+
+## Zdroje
+
+- [Evropská komise: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
+- [EDPB: Guidelines 03/2022 on deceptive design patterns in social media platform interfaces](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-032022-deceptive-design-patterns-social-media_en)
+- [CNIL: Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
+
+---
+
 # Pracovní log
+- 2026-09-29: Doplněna příloha „Experimenty a A/B testy bez manipulace“ s privacy-first postupem pro hypotézy, férové varianty, datovou hranici, vyhodnocení malých experimentů, checklist a šablonu experiment karty.
+
 - 2026-09-29: Doplněna příloha „Metrikový dashboard bez vanity mlhy“ s rozhodovacím přístupem k metrikám, třemi vrstvami dashboardu, privacy-first slovníkem eventů, týdenním rituálem, checklistem a šablonou metrikové karty.
 
 - 2026-09-29: Doplněna příloha „API dokumentace bez úniků dat a supportového ping-pongu“ s praktickým modelem endpointů podle integrační práce, datovými hranicemi, OpenAPI kontraktem, bezpečnými příklady, chybovými stavy, autorizací, developer portálem, checklistem, API kartou a ověřenými zdroji OWASP a OpenAPI.
