@@ -16143,7 +16143,278 @@ Na dashboard nepatří:
 - CNIL: Sheet n°16 — Use analytics on your websites and applications — https://www.cnil.fr/fr/node/677
 - CNIL: Cookies — solutions for audience measurement tools — https://www.cnil.fr/fr/cookies-solutions-pour-les-outils-de-mesure-daudience
 
+# Příloha: API integrace a webhooky bez datové exploze
+
+API integrace jsou skvělé do chvíle, než se z nich stane potrubí, kterým posíláš všechno všude „pro jistotu“. Malý SaaS často nepotřebuje integrační platformu jak letiště ve Frankfurtu. Potřebuje pár dobře pojmenovaných toků, jasné vlastnictví, omezená data, dobré logy a plán, co se stane, když druhá strana spadne.
+
+Privacy-first API design není brzda. Je to způsob, jak zabránit tomu, aby se každá integrace časem změnila v nekontrolovaný export zákaznického života.
+
+## Každá integrace musí mít účel a vlastníka
+
+Než napíšeš první webhook, vyplň tři nudné řádky:
+
+- **Proč integrace existuje** — konkrétní rozhodnutí nebo akce, kterou umožňuje.
+- **Kdo ji vlastní** — člověk, ne „tým“ jako oblak zodpovědnosti.
+- **Kdy se znovu zkontroluje** — datum revize, ideálně jednou za čtvrtletí.
+
+Špatné zadání:
+
+> Pošleme zákaznická data do CRM, aby tam něco bylo.
+
+Dobré zadání:
+
+> Pošleme do CRM jen ID účtu, firmu, stav obchodní příležitosti a datum poslední kvalifikované akce, aby obchodník věděl, zda má navázat osobní follow-up.
+
+Rozdíl? V prvním případě vytváříš datový sklad z lenosti. Ve druhém podporuješ konkrétní proces.
+
+## Datový kontrakt piš dřív než kód
+
+API payload není jen technický detail. Je to dohoda o tom, jaká data opouštějí systém. Proto si ke každé integraci napiš datový kontrakt:
+
+```json
+{
+  "event": "account.activated",
+  "version": "1.0",
+  "occurred_at": "2026-09-29T08:00:00Z",
+  "account_id": "acc_123",
+  "plan": "team",
+  "activation_step": "first_project_created"
+}
+```
+
+Všimni si, co tam není:
+
+- jméno konkrétního uživatele,
+- e-mail, pokud není nutný,
+- obsah projektu,
+- interní poznámky,
+- celé zákaznické nastavení,
+- volný text z formuláře.
+
+Pravidlo pro payload: pokud pole neumíš obhájit jednou větou, pole smaž. Ano, je to brutální. Ale menší payload je levnější, bezpečnější a za půl roku se v něm vyznáš.
+
+## Používej interní ID místo osobních údajů
+
+Když dvě služby potřebují mluvit o stejném účtu, často nepotřebují vědět, kdo přesně za účtem stojí. Stačí stabilní interní identifikátor.
+
+Doporučený postup:
+
+1. Ve vlastním systému drž primární pravdu o zákazníkovi.
+2. Do externích nástrojů posílej interní ID, stav a minimální metadata.
+3. Osobní údaje posílej jen tam, kde jsou nutné pro účel služby.
+4. Pokud externí nástroj nepotřebuje e-mail, nedávej mu e-mail.
+5. Pokud potřebuje jen notifikaci o změně, pošli event bez profilu.
+
+Příklad:
+
+| Integrace | Potřebuje osobní údaje? | Minimalistický payload |
+|---|---|---|
+| Fakturace | Ano, fakturační údaje podle účelu | zákaznické ID, fakturační subjekt, položky, částka |
+| Produktová analytika | Většinou ne | account_id, event, plán, čas |
+| CRM | Někdy ano | firma, stav leadu, vlastník, opt-in stav |
+| Monitoring chyb | Ne | release, endpoint, error code, anonymní korelační ID |
+| E-mailing | Ano, pokud posílá e-mail | e-mail, jazyk, typ zprávy, odhlášení |
+
+*Codyho komentář:* Nejlepší osobní údaj v integraci je ten, který tam nikdy nedoputoval. Je těžké leaknout něco, co neexistuje. Hackeři tenhle trik nesnáší.
+
+## Webhooky navrhuj jako frontu, ne jako telefonát
+
+Webhook není „zavolej mi a já hned všechno vyřídím“. Webhook je zpráva, která může přijít pozdě, dvakrát, mimo pořadí nebo vůbec. Pokud s tím nepočítáš, vyrobíš si poruchu s vlastním logem.
+
+Praktické minimum:
+
+- každý webhook má unikátní `event_id`,
+- příjemce umí opakovaný event bezpečně ignorovat,
+- podpis webhooku se ověřuje před zpracováním,
+- časové razítko brání přehrání staré zprávy,
+- zpracování běží přes frontu nebo aspoň oddělený retry mechanismus,
+- chyba třetí strany nerozbije hlavní tok produktu,
+- payload se loguje jen v omezené a maskované podobě.
+
+Model zpracování:
+
+1. přijmout webhook,
+2. ověřit podpis,
+3. zkontrolovat čas a `event_id`,
+4. uložit minimální obálku zprávy,
+5. zařadit práci do fronty,
+6. odpovědět rychle,
+7. zpracovat asynchronně,
+8. uložit výsledek a případnou chybu.
+
+Tím oddělíš dostupnost svého produktu od nálady cizí služby.
+
+## Rate limit není nepřátelství, ale pojistka
+
+OWASP v API Security Top 10 2023 upozorňuje na riziko neomezené spotřeby zdrojů: API požadavky mohou stát bandwidth, CPU, paměť, úložiště nebo peníze za služby třetích stran. Proto API bez limitů není „přátelské“. Je nezajištěné.
+
+Zaveď limity podle typu klienta:
+
+| Klient | Limit | Reakce |
+|---|---:|---|
+| Veřejný formulář | nízký limit podle IP / session | zpomalit, odmítnout, nezapisovat spam |
+| Přihlášený uživatel | limit podle účtu a role | ukázat férovou chybu |
+| Interní integrace | limit podle tokenu | zalogovat, upozornit vlastníka |
+| Partner API | smluvní limit | vrátit `429`, nabídnout retry okno |
+| Webhook endpoint | ochrana proti burstu | fronta, deduplikace, alert |
+
+Důležité: limit nepiš jen kvůli bezpečnosti. Piš ho i kvůli rozpočtu. Jedna špatná smyčka v integraci umí vyrobit fakturu, která vypadá jako výkupné, jen je od cloud providera a má hezčí PDF.
+
+## Tokeny drž krátké, oddělené a pojmenované
+
+API token s názvem `PROD_KEY_FINAL_REAL` je volání o pomoc. Token má mít jasný rozsah, vlastníka a expiraci.
+
+Doporučená pravidla:
+
+- pro každou integraci samostatný token,
+- žádné sdílené tokeny mezi prostředími,
+- minimální oprávnění,
+- rotace po incidentu, odchodu dodavatele nebo významné změně,
+- tajemství jen ve správci secrets nebo produkčním environmentu,
+- nikdy ne v repozitáři, exportu supportu ani screenshotu,
+- u lidí preferuj SSO/MFA a role místo ručních klíčů.
+
+Příklad pojmenování:
+
+- `billing-stripe-prod-webhook-signing-secret`,
+- `crm-pipedrive-prod-write-opportunities`,
+- `monitoring-sentry-prod-ingest`,
+- `email-eu-prod-transactional-send`.
+
+Název tokenu má být nudný, ale čitelný. Nuda je v bezpečnosti kompliment.
+
+## Failover piš jako produktové chování
+
+Když spadne integrace, zákazník nemá vidět stack trace. Má vidět srozumitelné chování.
+
+Příklady:
+
+- Platba se nepodařila ověřit? Ukaž „ověřujeme platbu“ a zpracuj webhook později.
+- CRM je nedostupné? Nezablokuj registraci, jen ulož lead do retry fronty.
+- E-mail provider vrací chyby? Neposílej desetkrát stejnou zprávu, eskaluj stav.
+- Analytika je mimo provoz? Produkt běží dál. Analytika není kyslík.
+- Fakturační export selhal? Označ dávku jako neexportovanou a zopakuj ručně.
+
+Ke každé integraci napiš odpověď na otázku:
+
+> Co se stane se zákaznickým workflow, když je tato služba 30 minut nedostupná?
+
+Pokud odpověď zní „všechno spadne“, právě jsi našel prioritu.
+
+## Integrační logy nesmí být skládka payloadů
+
+Logování integrací je nutné, ale nesmí se z něj stát kopie všech dat. Loguj obálku a stav, ne celý obsah.
+
+Vhodné logy:
+
+- `integration_name`,
+- `event_id`,
+- `account_id` nebo korelační ID,
+- verze payloadu,
+- HTTP stav,
+- výsledek zpracování,
+- počet retry pokusů,
+- zkrácený typ chyby,
+- čas přijetí a zpracování.
+
+Nevhodné logy:
+
+- celé request/response body,
+- autorizační hlavičky,
+- API tokeny,
+- osobní údaje bez důvodu,
+- obsah dokumentů,
+- platební údaje,
+- volný text zákazníka.
+
+Pokud potřebuješ debug payload, zapni dočasný omezený režim, maskuj citlivá pole a nastav krátkou retenci. Debug mód bez expirace je budoucí incident v čekárně.
+
+## Vendor lock-in omez exportem a vypínacím plánem
+
+Každá integrace by měla mít exit plán. Ne proto, že dodavatel je špatný, ale protože ceny, podmínky, regiony, funkce a vlastnictví firem se mění.
+
+Minimum pro exit:
+
+- víš, jaká data u dodavatele jsou,
+- víš, jak je exportovat,
+- víš, jak dlouho export trvá,
+- víš, co se po vypnutí rozbije,
+- máš lokální mapu polí,
+- máš náhradní ruční proces pro kritické workflow,
+- máš postup odstranění dat po ukončení služby.
+
+Privacy-first pohled: evropský provoz a kontrola nad daty nejsou jen právní kolonka. Je to vyjednávací síla. Když umíš odejít, nemusíš přijmout každou horší změnu podmínek.
+
+## Checklist: API integrace bez datové exploze
+
+- Integrace má účel, vlastníka a datum další revize.
+- Payload obsahuje jen pole, která podporují konkrétní účel.
+- Osobní údaje jsou nahrazené interním ID všude, kde to jde.
+- Každý webhook má podpis, časové razítko, `event_id` a deduplikaci.
+- Zpracování webhooků je idempotentní a odolné vůči opakování.
+- Rate limit chrání infrastrukturu, rozpočet i služby třetích stran.
+- Tokeny jsou oddělené podle integrace, prostředí a oprávnění.
+- Selhání integrace má popsané zákaznické chování a retry postup.
+- Logy obsahují stav a korelační ID, ne celé payloady a tajemství.
+- Dodavatel má datovou kartu, exportní cestu a vypínací plán.
+- Jednou za čtvrtletí proběhne revize aktivních integrací.
+
+## Mini šablona integrační karty
+
+```md
+# Integrační karta: [název služby]
+
+## Účel
+- Produktový / obchodní účel:
+- Vlastník:
+- Datum revize:
+
+## Datový kontrakt
+- Směr toku:
+- Eventy / endpointy:
+- Povolená pole:
+- Zakázaná pole:
+- Verze payloadu:
+
+## Bezpečnost
+- Typ autentizace:
+- Rozsah oprávnění:
+- Umístění secretu:
+- Rotace:
+- Webhook podpis:
+
+## Provoz
+- Rate limit:
+- Retry pravidla:
+- Deduplikace:
+- Chování při výpadku:
+- Monitoring:
+
+## Data a retence
+- Osobní údaje:
+- Logovaná metadata:
+- Retence surových zpráv:
+- Retence agregací:
+- Export / smazání u dodavatele:
+
+## Exit plán
+- Ruční fallback:
+- Alternativní dodavatel / postup:
+- Kroky vypnutí:
+- Co se smaže po ukončení:
+```
+
+## Zdroje
+
+- OWASP API Security Top 10 2023 — https://api-security.owasp.org/editions/2023/en/0x11-t10/
+- OWASP API4:2023 Unrestricted Resource Consumption — https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/
+- OWASP API8:2023 Security Misconfiguration — https://api-security.owasp.org/editions/2023/en/0xa8-security-misconfiguration/
+- European Commission: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- NIST Cybersecurity Framework 2.0: Quick-Start Guide for Cybersecurity Supply Chain Risk Management — https://csrc.nist.gov/pubs/sp/1305/final
+
 # Pracovní log
+
+- 2026-09-29: Doplněna příloha „API integrace a webhooky bez datové exploze“ s praktickým postupem pro datové kontrakty, interní ID místo osobních údajů, bezpečné webhooky, rate limiting, tokeny, failover, logování, exit plán, checklist, integrační kartu a ověřené zdroje OWASP, Evropské komise a NIST.
 
 - 2026-09-29: Doplněna příloha „Produktová telemetrie a feature flags bez šmírovacího motoru“ s praktickým modelem účelových eventů, rozdělením telemetrie podle rizika, pravidly pro feature flags, experimenty, session replay, retenci, dashboardy, checklistem, telemetrickou kartou a ověřenými zdroji Evropské komise, EDPB a CNIL.
 
