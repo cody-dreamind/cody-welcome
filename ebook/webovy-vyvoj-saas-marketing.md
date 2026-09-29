@@ -15179,7 +15179,276 @@ Poznámky:
 - EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default — https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and-default_en
 
 
+# Příloha: Logování a auditní stopy bez datové skládky
+
+Logy jsou zvláštní věc. Když je nemáš, incident řešíš jako detektiv bez brýlí. Když jich máš moc, vytvoříš vlastní malý únik dat, jen hezky zabalený do JSONu. Privacy-first provoz proto neznamená „nelogovat nic“. Znamená logovat účelně, srozumitelně, bezpečně a jen tak dlouho, jak dává smysl.
+
+Pro malý web nebo SaaS je dobrý logovací systém hlavně praktická pojistka: poznáš rozbitý formulář, podezřelé přihlášení, chybné oprávnění, zneužitý API klíč nebo incident, který se začíná tvářit jako obyčejná chyba. OWASP zdůrazňuje, že aplikační logování doplňuje infrastrukturní logy a má být navržené už při požadavcích a designu, ne přilepené až po prvním průšvihu (OWASP Logging Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html).
+
+> Codyho komentář: Logy nejsou deníček aplikace. Aplikace si nemá zapisovat každé nadechnutí uživatele, jen události, které pomáhají provozu, bezpečnosti nebo férovému auditu. Jinak z toho není observabilita, ale firemní šmírovací kronika.
+
+## Nejdřív napiš účel logu
+
+Každý typ logu má mít účel. Bez účelu nejde rozhodnout, co sbírat, kdo k tomu smí, jak dlouho to držet a kdy to mazat.
+
+Praktické rozdělení:
+
+| Typ logu | Účel | Příklad události | Co typicky nepotřebuješ |
+| --- | --- | --- | --- |
+| Provozní log | Najít chyby a degradaci služby | `payment_callback_failed`, `email_delivery_error` | Celý obsah objednávky nebo zprávy |
+| Bezpečnostní log | Odhalit zneužití a útoky | opakované neúspěšné přihlášení, zakázaný přístup | Heslo, session token, celé request body |
+| Auditní stopa | Vysvětlit významnou změnu | změna role, export dat, smazání účtu | Neomezená historie klikání |
+| Produktová metrika | Zlepšit použitelnost | dokončený onboarding krok | Identita člověka, pokud stačí agregace |
+| Debug log | Krátkodobě opravit chybu | chybový stack trace v testu nebo omezeném režimu | Produkční osobní data „pro jistotu“ |
+
+NIST ve svém průvodci log managementem popisuje log management jako proces generování, přenosu, ukládání, přístupu a likvidace log dat; nejde tedy jen o zapnutí knihovny v aplikaci, ale o celý životní cyklus (NIST SP 800-92: https://csrc.nist.gov/pubs/sp/800/92/final). Pro malý tým si to přelož jednoduše: log musí mít vlastníka, retenční dobu, přístupová pravidla a mazací mechanismus.
+
+## Co logovat u webu a SaaS
+
+Začni událostmi, které mají jasnou provozní nebo bezpečnostní hodnotu.
+
+U webu:
+
+- odeslání a selhání kontaktního formuláře,
+- chyby serveru a nedostupnost klíčových stránek,
+- odmítnuté požadavky na administraci,
+- změny obsahu v CMS,
+- chyby při doručování transakčních e-mailů,
+- podezřele časté požadavky z jednoho zdroje.
+
+U SaaS:
+
+- registrace, přihlášení, odhlášení a reset hesla,
+- změny rolí, oprávnění a fakturačních údajů,
+- vytvoření, export nebo smazání významného objektu,
+- použití administrátorských funkcí,
+- neúspěšné pokusy o přístup mimo oprávnění,
+- změny API klíčů, webhooků a integračních nastavení.
+
+OWASP doporučuje logovat bezpečnostně relevantní události jako validační selhání, autentizační události, porušení přístupových pravidel a podezřelé změny stavu, ale zároveň varuje před zbytečným a citlivým obsahem v logu (OWASP Developer Guide: https://devguide.owasp.org/en/04-design/02-web-app-checklist/09-logging-monitoring/).
+
+Dobrá logovací událost odpovídá na pět otázek:
+
+```text
+Kdy se to stalo?
+Kde se to stalo?
+Jaký typ události to byl?
+Jaký objekt byl dotčen?
+Jaký byl výsledek?
+```
+
+U bezpečnostní události často přidáš ještě závažnost, zdrojový kontext a identifikátor uživatele nebo služby. Ale pozor: identifikátor nemusí být e-mail. Často stačí interní `user_id`, `team_id` nebo pseudonymizovaný hash.
+
+## Co do logů nepatří
+
+Zakázaný seznam je důležitější než oblíbený dashboard. Pokud tým neví, co se logovat nesmí, jednou se v logu objeví heslo, reset token nebo obsah soukromé zprávy. A samozřejmě přesně ve chvíli, kdy má k logům přístup půlka firmy, protože „řešíme urgentní bug“.
+
+Do běžných produkčních logů nepatří:
+
+- hesla, passkeys, jednorázové kódy a reset tokeny,
+- session tokeny, refresh tokeny a celé autorizační hlavičky,
+- celé request/response body u formulářů a API,
+- platební údaje a citlivé fakturační detaily,
+- obsah zákaznických souborů, zpráv, poznámek a promptů,
+- kompletní IP adresa tam, kde stačí zkrácení, hash nebo agregace,
+- URL s citlivými query parametry,
+- debug výpisy obsahující tajné proměnné prostředí.
+
+GDPR stojí na principech minimalizace a omezení uložení; Evropská komise je shrnuje jako povinnost sbírat jen data nutná pro daný účel a držet je jen po nezbytnou dobu (European Commission: GDPR principles: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en). Logy nejsou výjimka jen proto, že vypadají technicky. Pokud obsahují osobní údaje, pořád jsou to osobní údaje.
+
+Praktické pravidlo: pokud by tě vyděsilo vidět hodnotu v logu během sdílení obrazovky na support callu, pravděpodobně tam nemá být.
+
+## Log injection: malá chyba, velká ostuda
+
+Logy často obsahují data od uživatele: e-mail, název firmy, parametr URL, název souboru, text chyby. To je riziko. Útočník může do vstupu vložit znaky nového řádku, oddělovače nebo formát, který zfalšuje další log událost.
+
+Špatný příklad:
+
+```text
+login_failed email="jana@example.cz\nrole_changed user=attacker role=admin"
+```
+
+Když logovací systém neošetří nové řádky a oddělovače, může další člověk nebo automatizace vidět falešnou událost. OWASP proto doporučuje validovat, sanitizovat a správně kódovat data zapisovaná do logů, včetně ochrany proti CR/LF znakům a delimiterům.
+
+Praktický postup:
+
+- zapisuj logy strukturovaně, například JSON řádek na událost,
+- používej centrální logovací helper místo ručního skládání stringů,
+- normalizuj názvy událostí na předem definovaný slovník,
+- omez délku polí, která pochází od uživatele,
+- odstraň nebo escapuj nové řádky, tabulátory a oddělovače,
+- nikdy neparsuj bezpečnostní rozhodnutí z volného textu logu.
+
+Log má být důkazní stopa, ne kreativní literární žánr uživatelského vstupu.
+
+## Auditní stopa není analytika
+
+Auditní stopa říká, kdo nebo co provedlo významnou změnu. Analytika říká, jak se používá produkt. Když je smícháš, vznikne systém, který se špatně maže, těžko vysvětluje a snadno zneužívá.
+
+Auditní stopu používej pro:
+
+- změnu role nebo oprávnění,
+- pozvánku nebo odebrání člena týmu,
+- export dat,
+- smazání účtu nebo projektu,
+- změnu fakturačního nastavení,
+- vytvoření nebo rotaci API klíče,
+- změnu bezpečnostní konfigurace.
+
+Auditní záznam může vypadat takto:
+
+```json
+{
+  "event": "role.changed",
+  "occurred_at": "2026-09-29T03:00:00Z",
+  "actor_type": "user",
+  "actor_id": "usr_123",
+  "team_id": "team_456",
+  "object_type": "membership",
+  "object_id": "mbr_789",
+  "result": "success",
+  "risk": "medium"
+}
+```
+
+Všimni si, co tam není: celé jméno, e-mail, IP adresa v plné podobě, user agent, obsah účtu nebo nekonečný kontext. Pokud potřebuješ některé z těchto údajů pro konkrétní účel, napiš účel do auditní karty a nastav retenci.
+
+## Retence podle rizika
+
+Jedna retenční doba pro všechny logy je pohodlná, ale málokdy správná. Debug log z produkční chyby má jinou hodnotu než audit změny role. Bezpečnostní logy potřebuješ držet dost dlouho na detekci a vyšetření incidentu, ale ne navždy jen proto, že storage je levný.
+
+Praktický start pro malý SaaS:
+
+| Kategorie | Výchozí retence | Poznámka |
+| --- | --- | --- |
+| Debug logy s nízkou hodnotou | 7 až 14 dní | V produkci drž co nejméně a bez citlivých polí |
+| Provozní aplikační logy | 30 až 90 dní | Podle cyklu podpory a incidentů |
+| Bezpečnostní události | 90 až 180 dní | Delší jen s jasným důvodem a ochranou |
+| Audit významných změn | 6 až 24 měsíců | Podle smluv, rizika a compliance potřeb |
+| Agregované metriky | déle, pokud bez identifikace | Preferuj agregaci a anonymizaci |
+
+Tohle nejsou univerzální právní lhůty. Jsou to pracovní výchozí body. Důležité je mít pravidlo, umět ho vysvětlit a technicky ho vynucovat. Retence v dokumentu bez automatického mazání je jen přání s nadpisem.
+
+## Přístupy k logům omez tvrději než přístupy k dashboardům
+
+Logy často obsahují víc pravdy než produktové UI. Vidíš v nich chyby, identifikátory, IP adresy, interní ID, obchodní aktivitu i provozní slabiny. Přístup k logům proto není „jen pro vývojáře“. Je to citlivé oprávnění.
+
+Minimální pravidla:
+
+- běžný support vidí jen události potřebné pro konkrétní ticket,
+- vývojář vidí produkční logy jen přes roli a s časovým omezením,
+- bezpečnostní nebo administrátorské logy mají oddělený přístup,
+- přístupy do logovací platformy se revidují aspoň čtvrtletně,
+- export logů je samostatná auditovaná akce,
+- přístup k logům se ruší při offboardingu stejně jako přístup k produkci.
+
+Pokud používáš externí logovací službu, řeš ji stejně jako každého jiného subprocesora: region, DPA, subprocesory, retence, šifrování, export, výmaz a přístup podpory dodavatele. Privacy-first varianta preferuje evropský provoz a možnost držet citlivější logy pod vlastní kontrolou.
+
+## Monitoring bez alarmové mlhy
+
+Logy bez monitoringu jsou archiv. Monitoring bez priorit je siréna v kuchyni pokaždé, když někdo udělá toast.
+
+Začni třemi úrovněmi alertů:
+
+| Úroveň | Příklad | Reakce |
+| --- | --- | --- |
+| Kritická | nefunguje přihlášení, platby, formulář nebo API | okamžitý alert odpovědnému člověku |
+| Varování | zvýšená chybovost, opakované login pokusy, selhání webhooků | kontrola v pracovním rytmu nebo podle služby |
+| Informační | deploy, změna konfigurace, restart workeru | záznam bez buzení lidí |
+
+Dobrý alert má vlastníkovi říct:
+
+```text
+Co se stalo:
+Koho se to týká:
+Jaký je dopad:
+Kde je dashboard nebo log dotaz:
+Jaký je první krok:
+Kdy eskalovat:
+```
+
+Pokud alert vyžaduje deset minut hledání, co vlastně znamená, není alert. Je to hádanka s notifikací.
+
+## Privacy-first logovací karta
+
+Pro každou novou aplikaci, významný modul nebo externí logovací nástroj vyplň krátkou kartu. Zabere dvacet minut a ušetří hodiny dohadů.
+
+```text
+# Logovací karta: [systém / aplikace]
+
+## Účel
+Proč logujeme:
+Kdo je vlastník:
+Které incidenty nebo provozní otázky tím řešíme:
+
+## Události
+Povolené typy událostí:
+Zakázané typy událostí:
+Bezpečnostní události:
+Auditní události:
+
+## Data
+Identifikátory:
+Osobní údaje:
+Citlivá pole výslovně zakázaná:
+Maskování / pseudonymizace:
+
+## Retence
+Debug:
+Provozní logy:
+Bezpečnostní logy:
+Auditní stopa:
+Automatické mazání:
+
+## Přístupy
+Kdo čte:
+Kdo exportuje:
+Jak se přístup schvaluje:
+Jak se přístup reviduje:
+
+## Dodavatel / úložiště
+Kde jsou logy uložené:
+Region:
+DPA / smlouvy:
+Šifrování:
+Exit plán:
+
+## Monitoring
+Kritické alerty:
+Varování:
+Runbook:
+Poslední test alertu:
+```
+
+## Checklist: logování bez datové skládky
+
+- [ ] Má každý typ logu jasný účel?
+- [ ] Existuje seznam polí, která se nikdy nelogují?
+- [ ] Jsou tokeny, hesla, autorizační hlavičky a request body maskované nebo zakázané?
+- [ ] Jsou logy strukturované a chráněné proti log injection?
+- [ ] Rozlišujeme provozní logy, bezpečnostní logy, auditní stopu a analytiku?
+- [ ] Má každá kategorie logů vlastní retenční dobu?
+- [ ] Funguje automatické mazání podle retence?
+- [ ] Mají přístupy k logům vlastní schvalování a revizi?
+- [ ] Je export logů auditovaná akce?
+- [ ] Jsou alerty rozdělené podle dopadu, aby nevznikla alarmová mlha?
+- [ ] Umíme během incidentu rychle najít relevantní události bez lovení v osobních datech?
+- [ ] Je externí logovací služba prověřená stejně jako jiný významný dodavatel?
+
+Logování je jeden z nejlepších příkladů privacy-first přístupu v praxi. Nepopíráš realitu provozu. Jen odmítáš líné „uložme všechno, jednou se to může hodit“. Dobré logy jsou krátké, účelné, chráněné a použitelné. Špatné logy jsou datový sklep, kam se bojíš rozsvítit.
+
+## Zdroje
+
+- OWASP Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Developer Guide: Implement Security Logging and Monitoring — https://devguide.owasp.org/en/04-design/02-web-app-checklist/09-logging-monitoring/
+- NIST SP 800-92: Guide to Computer Security Log Management — https://csrc.nist.gov/pubs/sp/800/92/final
+- NIST SP 800-92 Rev. 1 Initial Public Draft: Cybersecurity Log Management Planning Guide — https://csrc.nist.gov/pubs/sp/800/92/r1/ipd
+- European Commission: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
+
 # Pracovní log
+
+- 2026-09-29: Doplněna příloha „Logování a auditní stopy bez datové skládky“ s praktickým rozdělením logů podle účelu, doporučením co logovat u webu a SaaS, seznamem zakázaných citlivých polí, ochranou proti log injection, oddělením auditní stopy od analytiky, retenčním modelem, pravidly přístupů, alerty, checklistem, vyplnitelnou logovací kartou a ověřenými zdroji OWASP, NIST a Evropské komise.
 
 - 2026-09-29: Doplněna příloha „DPA a dodavatelská kontrola bez právnického pexesa“ s praktickým rozlišením rolí dodavatelů, DPA kartou, onboardingovou bránou pro nové nástroje, kontrolou subprocesorů, technickou konfigurací, čtvrtletním review, checklistem, vyplnitelnou šablonou a ověřenými zdroji GDPR, Evropské komise a EDPB.
 
