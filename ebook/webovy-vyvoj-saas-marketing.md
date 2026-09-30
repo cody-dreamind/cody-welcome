@@ -23492,7 +23492,164 @@ Dobrý odchozí webhook:
 - OWASP Web Service Security Cheat Sheet doporučuje šifrovat komunikaci webových služeb dobře nastaveným TLS a řešit integritu i autentizaci transportu: https://cheatsheetseries.owasp.org/cheatsheets/Web_Service_Security_Cheat_Sheet.html
 - OWASP Logging Cheat Sheet připomíná, že logy nemají ukládat citlivé údaje, tajemství, autentizační tokeny ani data nad rámec provozního účelu: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 
+# Příloha: Staging a testovací data bez kopírování produkčního nepořádku
+
+Staging je místo, kde chceš odhalit chyby dřív než zákazník. Není to místo, kam se potichu zkopíruje produkční databáze, vypne se pár cronů a všichni doufají, že „to je jen interní“. Pokud staging obsahuje reálné osobní údaje, tajemství, faktury, interní poznámky a produkční tokeny, není to testovací prostředí. Je to druhá produkce bez produkční disciplíny. Tedy přesně ten typ nápadu, který zní levně jen do prvního incidentu.
+
+Privacy-first staging má dva cíle: věrně otestovat chování produktu a zároveň zbytečně nerozšiřovat okruh lidí, míst a nástrojů, které vidí skutečná zákaznická data. V malém týmu to není luxus. Je to provozní sebeobrana.
+
+> Codyho komentář: „Potřebujeme produkční dump do stagingu“ často znamená „nemáme dobrý způsob, jak vyrobit realistická testovací data“. To je řešitelný problém. Kopírovat zákazníky do každého kouta infrastruktury není řešení, to je digitální křeččí syslení s deploy tlačítkem.
+
+## Nejdřív si řekni, co staging opravdu ověřuje
+
+Staging nemusí být kopie všeho. Má být dost podobný produkci v těch vlastnostech, které chceš ověřit: konfigurace, migrace, integrace, oprávnění, e-maily, platební flow, výkon kritické cesty nebo chování front. Když nevíš, co staging ověřuje, skončí jako univerzální skládka „pro jistotu“.
+
+Rozděl testy podle účelu:
+
+- **UI a obsah**: potřebuješ realistické texty, role, prázdné stavy a chybové scénáře.
+- **Migrace databáze**: potřebuješ reprezentativní strukturu dat a hraniční případy, ne jména reálných zákazníků.
+- **Integrace**: potřebuješ sandbox účty, testovací webhooky a bezpečné secrets.
+- **Výkon**: potřebuješ objem a tvar dat, ale typicky ne původní identifikátory.
+- **Support workflow**: potřebuješ scénáře, které odpovídají realitě, ale ne skutečné tickety.
+
+Praktická otázka před každým importem dat zní: „Jakou vlastnost produkce bez těchto konkrétních osobních údajů nedokážeme otestovat?“ Pokud odpověď není přesvědčivá, data do stagingu nepatří.
+
+## Produkční data nejsou výchozí palivo
+
+Produkční data používej mimo produkci jen jako výjimku s jasným důvodem, časovým omezením a vlastníkem. Výchozí cesta má být syntetická data, anonymizovaný dataset nebo pseudonymizovaná kopie s odstraněnými přímými identifikátory a tajemstvími.
+
+Dobré testovací dataset minimum:
+
+- několik typických zákaznických účtů,
+- několik hraničních stavů: zrušený tarif, neúspěšná platba, neověřený e-mail, prázdný projekt,
+- role s různými oprávněními,
+- historická data pro reporty,
+- technicky divné, ale bezpečné hodnoty: dlouhé názvy, diakritika, emoji, různé měny, nulové hodnoty,
+- chybové scénáře pro formuláře, webhooky a exporty.
+
+Syntetická data nemusí být krásná. Musí být užitečná. Jestli tvůj testovací zákazník má firmu „Testovací s.r.o.“ a jeden projekt „Projekt“, moc toho neodhalí. Lepší je sada realistických, ale vymyšlených scénářů: „Agentura s pěti klienty“, „B2B firma s roční fakturací“, „uživatel bez dokončeného onboardingu“, „support účet pouze pro čtení“.
+
+## Anonymizace není přejmenování sloupce
+
+Nestačí nahradit jméno za „Jan Novák“ a nechat e-mail, telefon, adresu, poznámky a ID objednávek v původním stavu. Anonymizace má odstranit vazbu na konkrétní osobu. Pseudonymizace vazbu jen oslabuje a pořád obvykle pracuje s osobními údaji, pokud existuje možnost zpětného přiřazení. EDPB k anonymizaci a pseudonymizaci jasně rozlišuje, že anonymní data už nejsou spojitelná s jednotlivcem, zatímco pseudonymizace jen snižuje přímou linkovatelnost ([EDPB: Anonymisation / pseudonymisation](https://www.edpb.europa.eu/topics/ai-and-technology/anonymisation-pseudonymisation_en)).
+
+Prakticky to znamená:
+
+- smaž nebo nahraď e-maily, telefony, adresy a jména,
+- odstraň volné texty, kde lidé mohli napsat cokoliv,
+- přegeneruj interní identifikátory, pokud mohou být spojitelné s produkcí,
+- neimportuj soubory nahrané uživateli, pokud nejsou pro test skutečně nutné,
+- nahraď platební, API a integrační údaje sandbox hodnotami,
+- posuň nebo zhrubni časové údaje, pokud by kombinace detailů identifikovala zákazníka.
+
+Nejzrádnější jsou volné texty: poznámky u zákazníka, zprávy ve formuláři, názvy projektů, support tickety, komentáře v objednávkách. Právě tam lidé píšou citlivé věci, které schéma databáze neprozradí. Automatický skript, který maskuje jen sloupce `email` a `name`, je dobrý začátek, ne hotová bezpečnost.
+
+## Tajemství a integrace musí být oddělené
+
+Staging nesmí používat produkční secrets. Nikdy. Ani „jen na chvíli“. Odděl databázi, úložiště souborů, SMTP, platební bránu, webhook endpointy, API tokeny, OAuth aplikace a analytiku. Pokud staging omylem pošle e-mail reálnému zákazníkovi nebo zavolá produkční webhook, už netestuješ. Právě jsi vyrobil provozní incident s příchutí trapna.
+
+Bezpečný staging režim:
+
+- všechny odchozí e-maily jdou do testovací schránky nebo mail catcheru,
+- platební brána běží v sandboxu,
+- webhooks míří do testovacích endpointů,
+- externí integrace mají samostatné účty nebo jsou stubované,
+- analytika používá samostatný projekt bez reálných uživatelů,
+- produkční domény nejsou nastavené jako povolené callback URL.
+
+Do checklistu nasazení přidej jednoduchý test: „Umí staging poslat zprávu, platbu nebo webhook reálnému zákazníkovi?“ Správná odpověď je „ne“. Pokud je odpověď „snad ne“, ještě nejsi hotový.
+
+## Přístupy do stagingu neber jako volný vstup do šatny
+
+Staging často dostane víc lidí než produkce: vývojáři, testeři, obchod, podpora, externí dodavatelé. O to důležitější je nastavit role. Pokud staging obsahuje data podobná produkci, chovej se k němu jako k citlivému prostředí.
+
+Minimum:
+
+- SSO nebo aspoň silné účty bez sdílených hesel,
+- oddělené role pro vývoj, QA, podporu a externisty,
+- audit přihlášení a citlivých akcí,
+- pravidelný úklid účtů po skončení spolupráce,
+- zákaz exportů, pokud nejsou nutné pro test,
+- krátká retence databázových snapshotů.
+
+Privacy-first není o tom, že nikdo nic nevidí. Je o tom, že každý vidí jen to, co potřebuje pro konkrétní práci, a systém to umí vysvětlit i po třech měsících.
+
+## Refresh stagingu dělej jako proces, ne rituální dump
+
+Staging dataset časem zestárne. To je normální. Problém je, když jeho obnova znamená ruční export z produkce, pár náhodných SQL příkazů a modlitbu k démonům migrací. Udělej z refresh procesu opakovatelný skript.
+
+Dobrý refresh postup:
+
+1. Vytvoř snapshot produkce jen v bezpečném prostředí.
+2. Prožeň ho transformačním skriptem: odstranění tajemství, maskování, mazání volných textů, přegenerování identifikátorů.
+3. Ověř automatickým testem, že dataset neobsahuje e-maily mimo povolenou doménu, produkční tokeny ani reálné webhook URL.
+4. Nahraj výstup do stagingu.
+5. Zapiš datum, verzi skriptu, vlastníka a důvod obnovy.
+6. Smaž dočasné soubory podle retenčního pravidla.
+
+OWASP Web Security Testing Guide popisuje bezpečnostní testování jako součást celého vývojového cyklu a připomíná, že testovací data mají pomáhat odhalovat zranitelnosti co nejdřív, ne přidávat nové riziko ([OWASP WSTG](https://wstg.owasp.org/latest/2-Introduction/)). OWASP Logging Cheat Sheet zároveň doporučuje netahat do logů tajemství, tokeny ani data vyšší citlivosti, než logovací systém smí ukládat ([OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). Pro staging to platí dvojnásob: debug výpisy bývají ukecanější než produkce.
+
+## Checklist: staging bez produkčního nepořádku
+
+- [ ] Víme, jaké vlastnosti produktu staging ověřuje.
+- [ ] Máme syntetická nebo anonymizovaná testovací data pro hlavní scénáře.
+- [ ] Volné texty z produkce se do stagingu nekopírují bez zvláštního důvodu.
+- [ ] Produkční secrets, tokeny, SMTP a webhook URL jsou oddělené.
+- [ ] Odchozí e-maily a notifikace jsou zachycené v testovacím režimu.
+- [ ] Přístupy do stagingu mají role, vlastníky a úklidový rytmus.
+- [ ] Refresh datasetu běží opakovatelným skriptem, ne ručním kouzlením.
+- [ ] Existuje automatická kontrola proti úniku reálných e-mailů, tokenů a URL.
+- [ ] Snapshoty a dočasné exporty mají krátkou retenci.
+- [ ] Staging má vlastní logy a monitoring bez ukládání zbytečných osobních údajů.
+
+## Mini šablona staging karty
+
+```text
+# Staging karta: [produkt / prostředí]
+
+## Účel
+- Co zde ověřujeme:
+- Co zde záměrně neověřujeme:
+- Kritické scénáře:
+
+## Data
+- Zdroj testovacích dat:
+- Syntetická / anonymizovaná / pseudonymizovaná:
+- Pole, která se mažou:
+- Pole, která se maskují:
+- Volné texty:
+- Retence snapshotů:
+
+## Integrace
+- SMTP režim:
+- Platební brána:
+- Webhooky:
+- Analytika:
+- Externí API:
+
+## Přístupy
+- Role:
+- Externí dodavatelé:
+- Audit přístupů:
+- Poslední úklid účtů:
+
+## Refresh
+- Skript / postup:
+- Automatické kontroly:
+- Vlastník:
+- Poslední obnova:
+```
+
+## Zdroje
+
+- EDPB vysvětluje rozdíl mezi anonymizací a pseudonymizací: anonymizace má data zbavit spojitelnosti s jednotlivcem, zatímco pseudonymizace spojitelnost snižuje, ale nutně ji neruší: https://www.edpb.europa.eu/topics/ai-and-technology/anonymisation-pseudonymisation_en
+- OWASP Web Security Testing Guide popisuje bezpečnostní testování webových aplikací v životním cyklu vývoje a roli testovacích dat při odhalování zranitelností: https://wstg.owasp.org/latest/2-Introduction/
+- OWASP část k aplikační konfiguraci upozorňuje mimo jiné na rizika vývojových/debug nastavení a úniků citlivých dat v logování a konfiguraci: https://wstg.owasp.org/latest/4-Web_Application_Security_Testing/02-Configuration_and_Deployment_Management/02-Application_Platform_Configuration/
+- OWASP Logging Cheat Sheet doporučuje nelogovat citlivá data, tajemství, tokeny, session identifikátory ani data vyšší citlivosti, než logovací systém smí držet: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
 # Pracovní log
+- 2026-09-30: Doplněna příloha „Staging a testovací data bez kopírování produkčního nepořádku“ s rozdělením účelů stagingu, pravidly pro syntetická/anonymizovaná data, oddělením secrets a integrací, přístupy, refresh procesem, checklistem, staging kartou a ověřenými zdroji EDPB a OWASP.
+
 - 2026-09-30: Doplněna příloha „Webhooky a integrace bez slepé důvěry v cizí požadavky“ s mapou integrací, ověřováním podpisů, asynchronním zpracováním, idempotencí, validací payloadů, privacy-first logováním, retry/dead-letter postupem, pravidly pro odchozí webhooky, checklistem, webhook kartou a ověřenými zdroji GitHub, Stripe a OWASP.
 
 - 2026-09-30: Doplněna příloha „Přístupová práva v SaaS bez role ‚všechno všem‘“ s postupem od mapy citlivých akcí přes srozumitelné role, server-side autorizaci, druhé brzdy pro rizikové operace, auditní logy, support přístup, negativní testy, checklist, šablonu role karty a ověřené zdroje OWASP, NIST a EDPB.
