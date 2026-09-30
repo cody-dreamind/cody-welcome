@@ -21849,8 +21849,192 @@ Evropský provoz neznamená, že musíš všechno napsat sám. Znamená to, že 
 - OWASP Developer Guide: Secure by Default — https://devguide.owasp.org/en/04-design/02-web-app-checklist/01-secure-by-default/
 - NIST SP 800-218 Secure Software Development Framework — https://csrc.nist.gov/pubs/sp/800/218/final
 
+# Příloha: Bezpečnostní dotazníky v B2B salesu bez improvizačního divadla
+
+Bezpečnostní dotazník od zákazníka často přijde ve chvíli, kdy už obchod slaví skoro uzavřený deal. Pak se najednou zjistí, že odpovědi žijí ve třech hlavách, dvou starých dokumentech, jednom zapomenutém ticketu a v neurčité víře, že „to nějak máme“. Gratuluju, právě začíná improvizační divadlo s názvem Vendor Review.
+
+U privacy-first SaaS není bezpečnostní dotazník otrava navíc. Je to důkaz, že zákazník bere svoje data vážně. A pokud Dreamind říká „navrženo, postaveno a provozováno v Evropě“, musí to umět doložit klidně, konkrétně a bez lovení odpovědí v produkčním chaosu.
+
+Cíl není mít jednu univerzální magickou odpověď na všechno. Cíl je mít provozní pravdu připravenou tak, aby obchod, produkt, vývoj i vedení odpovídali stejně.
+
+## Nejdřív si vytvoř odpovědní banku
+
+Odpovědní banka je interní dokument, kde máš předpřipravené odpovědi na opakující se otázky zákazníků. Není to marketingový leták. Je to provozní zdroj pravdy.
+
+Začni kategoriemi:
+
+- hosting a region provozu,
+- datové typy a účely zpracování,
+- role a přístupová práva,
+- šifrování a secrets,
+- zálohy a obnova,
+- logování a auditní stopy,
+- incident response,
+- subprocesoři,
+- retence a mazání dat,
+- export a ukončení služby,
+- vývojový proces a změny,
+- podpora a servisní přístupy.
+
+Každá odpověď má mít vlastníka a datum poslední revize. Bez vlastníka se dokument stane muzeem optimismu. Vypadá hezky, ale nikdo neví, jestli exponát ještě platí.
+
+Příklad dobré odpovědi:
+
+```text
+Otázka: Kde jsou provozována zákaznická data?
+Odpověď: Produkční data služby provozujeme v evropském regionu. Přístup k produkci je omezen na určené role a používá se pouze pro provoz, podporu a bezpečnostní řešení. Pokud konkrétní instalace používá další subprocesory, jsou uvedeni v registru subprocesorů.
+Vlastník: provoz / bezpečnost
+Revize: 2026-09-30
+Důkaz: odkaz na datovou mapu, registr subprocesorů a provozní architekturu
+```
+
+Příklad slabé odpovědi:
+
+```text
+Data jsou v cloudu a všechno je bezpečné.
+```
+
+Codyho komentář: to není odpověď. To je kouřová clona s připojením k internetu.
+
+## Odpovídej přesně, ne hrdinsky
+
+Nejhorší odpověď v bezpečnostním dotazníku je taková, která se snaží znít lépe než realita. Zákazník se neptá proto, aby obdivoval tvoji slovní gymnastiku. Ptá se, protože má vlastní riziko.
+
+Když něco nemáš, napiš to pravdivě a přidej kompenzační opatření nebo plán:
+
+```text
+Nemáme formální certifikaci ISO 27001. Provozní opatření máme popsaná v interní bezpečnostní politice, pravidelně revidujeme přístupy, zálohy testujeme podle restore plánu a kritické změny evidujeme v rozhodovacím deníku. Certifikaci aktuálně neplánujeme pro tento typ služby; pokud bude pro váš nákup nezbytná, řekněte nám to prosím před technickým schválením.
+```
+
+To je lepší než neurčité „jsme v souladu s nejlepšími praktikami“. Nejlepší praktiky jsou jako „zdravý životní styl“ — zní dobře, dokud se někdo nezeptá, co přesně snídáš.
+
+## Rozliš veřejné, zákaznické a citlivé odpovědi
+
+Ne všechno patří do stejného dokumentu. Některé odpovědi můžeš dát veřejně na web. Některé jen zákazníkovi po obchodním kontextu. Některé vůbec neposílej e-mailem a řeš je na kontrolovaném callu nebo přes bezpečný prostor.
+
+Rozděl materiály do tří úrovní:
+
+1. **Veřejné informace** — privacy slib, obecný popis hostingu, základní bezpečnostní principy, kontakt pro bezpečnostní hlášení, subprocesorská stránka, pokud ji máš veřejnou.
+2. **Zákaznické informace** — detailnější popis architektury, support procesu, záloh, incidentů, retence, servisních přístupů a smluvních příloh.
+3. **Citlivé interní informace** — přesná síťová schémata, detailní seznam interních nástrojů, konkrétní bezpečnostní nastavení, neveřejné incidentové postupy, jména lidí s produkčním přístupem.
+
+Praktické pravidlo: odpověď má zákazníkovi umožnit vyhodnotit riziko, ne zjednodušit útok. Pokud by stejná informace pomohla útočníkovi víc než zákazníkovi, přepiš ji na vyšší úroveň abstrakce nebo nabídni řízené projednání.
+
+## Zapoj obchod, ale nenech ho odpovídat z hlavy
+
+Obchod má dotazník řídit procesně, ne vymýšlet odpovědi. Jeho práce je zjistit termín, nákupní kritéria, blokery a správné kontakty. Technické a bezpečnostní odpovědi musí vycházet z odpovědní banky a vlastníků.
+
+Jednoduchý flow:
+
+1. Obchod přijme dotazník a zaznamená termín, typ zákazníka a očekávanou hodnotu dealu.
+2. Označí otázky podle kategorií: standardní, nejasné, rizikové, právní, technické.
+3. Standardní odpovědi doplní z banky bez úprav významu.
+4. Nejasné a rizikové otázky pošle vlastníkům s konkrétním termínem.
+5. Finální verzi někdo zodpovědný zkontroluje před odesláním.
+6. Nové kvalitní odpovědi se vrátí do banky.
+
+Tím se z dotazníku nestane pokaždé nový projekt. Stane se z něj provozní rutina. Nudné? Ano. Funkční? Taky ano. A nudně funkční je v B2B bezpečnosti krásný kompliment.
+
+## Připrav důkazy, ne jen věty
+
+Zákazník často nechce dlouhý popis. Chce vědět, jestli existuje důkaz. Nemusíš hned posílat všechny interní dokumenty, ale musíš vědět, kde jsou.
+
+Udržuj odkazy na:
+
+- datovou mapu,
+- registr subprocesorů,
+- přístupovou matici,
+- restore testy,
+- incidentový runbook,
+- retenční pravidla,
+- vývojový a release proces,
+- záznamy o revizi přístupů,
+- vzor DPA nebo bezpečnostní přílohy,
+- status page nebo provozní historii, pokud ji sdílíš.
+
+Příklad odpovědi s důkazem:
+
+```text
+Přístupy k produkční administraci revidujeme minimálně čtvrtletně a při změně role nebo ukončení spolupráce. Revize se eviduje v interním provozním logu. Zákazníkům na vyžádání sdílíme shrnutí procesu, nikoli kompletní seznam interních účtů.
+```
+
+Tahle odpověď říká dost. Neprozrazuje zbytečně lidi, účty ani interní strukturu.
+
+## Nenech dotazník rozšířit sběr dat
+
+Bezpečnostní dotazníky občas sklouznou k tomu, že zákazník žádá informace, které nepotřebuje v detailu: jména všech administrátorů, konkrétní IP adresy, interní screenshoty, seznam nástrojů včetně neveřejných konfigurací. Někdy je to legitimní v enterprise kontextu. Někdy je to jen šablona, kterou někdo posílá všem.
+
+Privacy-first reakce není automatické „ne“. Je to klidné upřesnění účelu:
+
+```text
+Rozumíme, že potřebujete ověřit řízení produkčních přístupů. Kompletní seznam osob s interními rolemi nesdílíme mimo řízený auditní kontext. Můžeme potvrdit principy přístupu, revizní rytmus, způsob schvalování a poskytnout shrnutí procesu.
+```
+
+Stejně jako nechceš sbírat zbytečná data o zákazníkovi, nechceš zbytečně rozdávat data o svém provozu.
+
+## Udělej z dotazníků zpětnou vazbu pro produkt
+
+Opakující se otázky nejsou jen překážka v salesu. Jsou mapa důvěry. Když se pět zákazníků ptá na export dat, možná ho máš špatně vysvětlený. Když se pořád ptají na subprocesory, možná chybí veřejná stránka. Když řeší SSO, auditní logy nebo role, možná míříš do segmentu, který má jiné nároky než původní MVP.
+
+Každý měsíc si udělej krátké shrnutí:
+
+- které otázky se opakovaly,
+- co zpomalilo schválení,
+- kde odpověď nebyla jistá,
+- jaký důkaz chyběl,
+- co by mělo být veřejně v dokumentaci,
+- co je skutečný produktový požadavek a co jen nákupní šablona.
+
+Tím bezpečnostní dotazník přestane být administrativní opruz a začne být zdroj produktové strategie. Pořád trochu opruz, jasně. Ale užitečný opruz. To je v podnikání velmi běžná kategorie.
+
+## Checklist: bezpečnostní dotazníky bez improvizace
+
+- Existuje odpovědní banka pro opakující se bezpečnostní a privacy otázky.
+- Každá odpověď má vlastníka, datum revize a odkaz na důkaz nebo interní zdroj.
+- Odpovědi rozlišují veřejné, zákaznické a citlivé interní informace.
+- Obchod řídí proces, ale nevymýšlí technické odpovědi z hlavy.
+- Nejasné otázky mají určeného vlastníka a termín odpovědi.
+- Odpovědi nepřikrášlují realitu a jasně popisují kompenzační opatření.
+- Citlivé provozní detaily se nesdílí e-mailem bez důvodu a kontroly.
+- Dotazník se po odeslání vyhodnotí: co se opakovalo, co chybělo, co vylepšit.
+- Nové kvalitní odpovědi se vrací do odpovědní banky.
+- Produktový backlog sleduje opakované požadavky z bezpečnostních review.
+
+## Mini šablona odpovědní karty
+
+```markdown
+# Odpovědní karta: [téma / otázka]
+
+## Otázka zákazníka
+- Přesné znění:
+- Kategorie: hosting / přístupy / zálohy / incidenty / subprocesoři / retence / jiné
+
+## Standardní odpověď
+- Krátká odpověď:
+- Detailnější vysvětlení:
+- Co neslibujeme:
+
+## Důkaz nebo zdroj pravdy
+- Interní dokument:
+- Veřejný odkaz:
+- Smluvní příloha:
+- Vlastník důkazu:
+
+## Sdílení
+- Úroveň: veřejné / zákaznické / citlivé interní
+- Kdo smí odpověď poslat:
+- Kdy je potřeba schválení:
+
+## Revize
+- Vlastník odpovědi:
+- Poslední revize:
+- Další revize:
+- Poznámky z posledních dotazníků:
+```
+
 # Pracovní log
 
+- 2026-09-30: Doplněna příloha „Bezpečnostní dotazníky v B2B salesu bez improvizačního divadla“ s odpovědní bankou, pravidly přesných odpovědí, rozdělením veřejných/zákaznických/citlivých informací, procesem spolupráce obchodu a technických vlastníků, prací s důkazy, privacy-first hranicemi sdílení, měsíční zpětnou vazbou, checklistem a vyplnitelnou odpovědní kartou.
 - 2026-09-30: Doplněna příloha „Feature flagy a rollouty bez produkční rulety“ s rozlišením deployment/release/experiment, typy flagů podle životnosti, pravidlem že flag nenahrazuje autorizaci, rollout plánem, privacy-first měřením experimentů, testováním kill switchů, úklidem flag debt, checklistem, vyplnitelnou flag kartou a ověřenými zdroji Martin Fowler, OWASP a NIST.
 - 2026-09-30: Doplněna příloha „Incidentová komunikace a status page bez paniky a mlžení“ s dopadovou škálou P1–P4, rolemi, rytmem status updatů, privacy-first pravidly pro komunikaci, support makry, postmortem šablonou, checklistem a ověřenými zdroji Google SRE, NCSC a ENISA.
 - 2026-09-30: Doplněna příloha „Logování a observabilita bez datového smetiště“ s praktickým modelem logů, metrik, auditních událostí, syntetických kontrol, datovou hranicí, retencí, přístupovými pravidly, alerty, runbookem, checklistem, logovací kartou a ověřenými zdroji OWASP a NIST.
