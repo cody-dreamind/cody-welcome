@@ -22223,8 +22223,181 @@ U SaaS aplikace přidej ještě hranice:
 - [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - [W3C WCAG 2.2 Understanding: Labels or Instructions](https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions)
 
+# Příloha: Uploady a uživatelské soubory bez bezpečnostního průvanu
+
+Upload souboru vypadá jako drobná produktová funkce: člověk klikne, nahraje PDF, screenshot, CSV nebo obrázek a život jde dál. Jenže pro web nebo SaaS je upload malé letiště pro cizí obsah. Přistát může faktura, životopis, export z účetnictví, screenshot s tokenem, soubor se špatným typem, malware, obří ZIP nebo dokument s metadaty, která nikdo nechtěl vidět. Takže ne, upload není jen tlačítko „Vybrat soubor“. Je to bezpečnostní a privacy proces v převleku za formulář.
+
+Privacy-first přístup neznamená zakázat všechny přílohy. Znamená to chtít jen soubory, které opravdu potřebuješ, umět je bezpečně zpracovat, krátce držet a jasně vysvětlit, co se s nimi stane.
+
+> Codyho komentář: Každý upload box se tváří nevinně, dokud do něj někdo nenahraje `final_final_opravdu_final.xlsm`. Pak najednou všichni objevují krásu whitelistu.
+
+## Nejdřív napiš účel uploadu
+
+Každý upload má mít odpověď na čtyři otázky:
+
+- Proč soubor potřebujeme?
+- Jaké typy souborů přijímáme?
+- Kdo k nim bude mít přístup?
+- Kdy je smažeme?
+
+Pokud neumíš odpovědět, upload je možná jen pohodlná zkratka místo lepšího formuláře. Příklad: pro poptávku webu možná nepotřebuješ volnou přílohu. Stačí URL současného webu, krátký popis problému a možnost poslat podklady až po domluvě. Menší sběr dat, menší riziko, méně bordelu v inboxu. Ano, občas je produktivita jen bezpečnost v montérkách.
+
+## Povolené typy řeš whitelistem, ne optimismem
+
+Základní pravidlo: přijímej jen typy, které opravdu potřebuješ. Ne „všechno kromě exe“. Whitelist je čitelnější a bezpečnější.
+
+Praktický model:
+
+- pro faktury a dokumenty: PDF, případně obrázky,
+- pro import dat: CSV nebo konkrétní tabulkový formát,
+- pro screenshoty podpory: PNG, JPG, WebP,
+- pro technické podklady: ZIP jen výjimečně a s přísnější kontrolou,
+- pro marketingové podklady: samostatný proces mimo veřejný formulář.
+
+Kontroluj víc než příponu. Ověř MIME typ, velikost, strukturu souboru a chování po zpracování. OWASP File Upload Cheat Sheet doporučuje mimo jiné povolené přípony, validaci typu souboru, přejmenování souborů, limity velikosti, ukládání mimo webroot a kontrolu obsahu podle rizika.
+
+## Soubor nikdy neukládej pod původním jménem jako pravdu
+
+Původní název souboru je uživatelský vstup. Může obsahovat osobní údaje, interní název klienta, divné znaky, pokus o path traversal nebo jen kreativní chaos. Ukládej proto interní technický název a původní název ber jen jako zobrazovací metadata, ideálně očištěná.
+
+Bezpečnější přístup:
+
+- vygeneruj vlastní ID souboru,
+- původní název zkrať a sanitizuj,
+- nepoužívej název souboru v cestě na disku,
+- neumisťuj uploady do veřejného webrootu,
+- servíruj soubory přes kontrolovanou aplikační vrstvu,
+- nastav správné `Content-Type` a `Content-Disposition`,
+- u rizikových typů preferuj stažení místo inline zobrazení.
+
+Tohle není paranoia. To je prevence proti situaci, kdy zákaznický upload začne diktovat serveru, co má dělat. A server, chudák, je občas až moc poslušný.
+
+## Skenuj podle rizika, ale neslibuj magii
+
+Antivirová nebo malware kontrola je užitečná, ale není kouzelný filtr reality. U veřejných uploadů, support příloh, importů a souborů sdílených mezi uživateli má kontrola velký smysl. U interního procesu s ručním schvalováním může být jednodušší pravidlo: soubor se neotevírá lokálně, dokud není zkontrolovaný nebo převedený do bezpečnější podoby.
+
+Dobrý provozní postup:
+
+1. soubor uložit do karantény,
+2. ověřit typ, velikost a základní strukturu,
+3. spustit bezpečnostní kontrolu podle rizika,
+4. zpracovat soubor odděleně od hlavní aplikace,
+5. zpřístupnit výsledek až po úspěšné kontrole,
+6. chyby ukázat uživateli bez technických detailů a bez úniku interních cest.
+
+U importů CSV nebo tabulek navíc validuj obsah řádků, hlavičky, počet řádků, kódování a velikost. CSV import je pořád vstupní brána. Jen místo formuláře nosí brýle a tváří se kancelářsky.
+
+## Metadata jsou skrytá kapsa souboru
+
+Obrázky, PDF a dokumenty mohou obsahovat metadata: autora, název firmy, GPS souřadnice, interní cestu, komentáře, revize nebo názvy zařízení. Pokud soubor dál publikuješ, předáváš podpoře, používáš v případovce nebo posíláš dodavateli, metadata zkontroluj.
+
+Praktická pravidla:
+
+- veřejně publikované soubory čistit od nepotřebných metadat,
+- screenshoty z podpory před sdílením anonymizovat,
+- přílohy v ticketech držet kratší dobu než samotný ticket,
+- citlivé soubory nepřeposílat do marketingových nebo analytických nástrojů,
+- u exportů přidat manifest, co soubor obsahuje a co záměrně neobsahuje.
+
+Metadata jsou zrádná právě proto, že nejsou vidět na první pohled. Privacy-first provoz je hledá dřív než zákazník, auditor nebo sociální síť s láskou k náhledům.
+
+## Retence uploadů má být kratší než lenost týmu
+
+Soubory bývají velké, citlivé a zapomenutelné. To je skvělá kombinace pro budoucí průšvih. Každý typ uploadu má mít retenční pravidlo.
+
+Příklady:
+
+- screenshot v support ticketu: smazat po vyřešení a krátké reklamační lhůtě,
+- importní CSV: smazat hned po zpracování nebo po krátkém okně pro diagnostiku,
+- fakturační příloha: držet podle účetních a smluvních potřeb,
+- soubor v produktovém účtu: držet podle zákaznického nastavení a smlouvy,
+- veřejný mediální soubor: držet podle publikačního účelu.
+
+Důležité je oddělit původní upload od výsledku zpracování. Když uživatel nahraje CSV pro import kontaktů, často nepotřebuješ držet původní CSV navždy. Potřebuješ zpracovaná data, audit importu a možnost vysvětlit chybu. To jsou různé věci.
+
+## UX: odmítnutí souboru má pomoct, ne ponížit
+
+Chybová hláška „Invalid file“ je digitální pokrčení rameny. Lepší je říct, co se stalo a co má člověk udělat dál.
+
+Příklady:
+
+- „Soubor je větší než 10 MB. Nahraj menší PDF nebo nám napiš, pokud potřebuješ poslat větší podklady.“
+- „Tento formulář přijímá jen PDF, PNG a JPG. Dokument ve Wordu prosím exportuj do PDF.“
+- „Import se nepodařil, protože sloupec `email` chybí. Stáhni si ukázkovou šablonu CSV.“
+- „Soubor jsme nepřijali z bezpečnostních důvodů. Pokud jde o legitimní podklad, kontaktuj podporu.“
+
+U přístupnosti nezapomeň, že upload potřebuje label, instrukce předem, čitelnou chybu, stav nahrávání a možnost odstranit omylem přidaný soubor před odesláním. Drag-and-drop bez alternativního tlačítka je hezký trik, ne kompletní řešení.
+
+## Checklist: uploady bez bezpečnostního průvanu
+
+- Má každý upload jasný účel a vlastníka?
+- Přijímáme jen konkrétní povolené typy souborů?
+- Kontrolujeme příponu, MIME typ, velikost a strukturu?
+- Ukládáme soubory pod vlastním technickým ID?
+- Nejsou uploady přímo ve veřejném webrootu?
+- Máme karanténu nebo kontrolní krok pro rizikové soubory?
+- Čistíme metadata tam, kde se soubor dál sdílí nebo publikuje?
+- Má každý typ přílohy retenční pravidlo?
+- Umíme smazat původní importní soubor po zpracování?
+- Chybové hlášky říkají, co má uživatel udělat dál?
+- Přístup k souborům je logovaný a omezený podle role?
+- Víme, co se stane se soubory při zrušení účtu nebo exportu dat?
+
+## Mini šablona upload karty
+
+```markdown
+# Upload karta: [flow / typ souboru]
+
+## Účel
+- Proč soubor sbíráme:
+- Kdo je vlastník:
+- Kdo soubor používá:
+- Co se stane bez uploadu:
+
+## Povolené soubory
+- Povolené přípony:
+- Maximální velikost:
+- Počet souborů:
+- Zakázané typy:
+- Alternativní cesta pro výjimky:
+
+## Zpracování
+- Kam se soubor ukládá:
+- Jak se jmenuje interně:
+- Jak ověřujeme typ:
+- Bezpečnostní kontrola:
+- Zpracování / import:
+
+## Data a retence
+- Obsahuje osobní údaje: ano / ne / může obsahovat
+- Metadata čistíme: ano / ne / podle rizika
+- Retence původního souboru:
+- Retence výsledku zpracování:
+- Mazání při zrušení účtu:
+
+## Přístupy a audit
+- Kdo smí soubor číst:
+- Kdo smí soubor smazat:
+- Co logujeme:
+- Jak řešíme podezřelý soubor:
+
+## UX
+- Instrukce před uploadem:
+- Chyba při špatném typu:
+- Chyba při velkém souboru:
+- Stav nahrávání:
+```
+
+## Zdroje
+
+- OWASP File Upload Cheat Sheet popisuje validaci typů, přípon, velikostí, názvů souborů, umístění uploadů a další bezpečnostní kontroly: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+- OWASP Unrestricted File Upload vysvětluje rizika spojená s nahráváním souborů včetně spouštění kódu, phishingu, přepsání souborů a DoS: https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload
+- W3C Web Accessibility Initiative popisuje obecná pravidla pro přístupné formuláře, instrukce a chybové stavy: https://www.w3.org/WAI/tutorials/forms/
+- Evropská komise shrnuje princip minimalizace osobních údajů v GDPR: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
 # Pracovní log
 
+- 2026-09-30: Doplněna příloha „Uploady a uživatelské soubory bez bezpečnostního průvanu“ s účelem uploadů, whitelistem typů, bezpečným ukládáním názvů, karanténou, kontrolou metadat, retenčními pravidly, UX chybami, checklistem, upload kartou a ověřenými zdroji OWASP, W3C a Evropské komise.
 - 2026-09-30: Doplněna příloha „Vyhledávání na webu a v nápovědě bez datového vysavače“ s privacy-first přístupem k search analytics, minimalizací ukládaných dotazů, maskováním citlivých údajů, prací s nulovými výsledky, přístupností search pole, checklistem, search kartou a ověřenými zdroji Evropské komise, OWASP a W3C.
 - 2026-09-30: Doplněna příloha „Bezpečnostní dotazníky v B2B salesu bez improvizačního divadla“ s odpovědní bankou, pravidly přesných odpovědí, rozdělením veřejných/zákaznických/citlivých informací, procesem spolupráce obchodu a technických vlastníků, prací s důkazy, privacy-first hranicemi sdílení, měsíční zpětnou vazbou, checklistem a vyplnitelnou odpovědní kartou.
 - 2026-09-30: Doplněna příloha „Feature flagy a rollouty bez produkční rulety“ s rozlišením deployment/release/experiment, typy flagů podle životnosti, pravidlem že flag nenahrazuje autorizaci, rollout plánem, privacy-first měřením experimentů, testováním kill switchů, úklidem flag debt, checklistem, vyplnitelnou flag kartou a ověřenými zdroji Martin Fowler, OWASP a NIST.
