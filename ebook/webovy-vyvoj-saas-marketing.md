@@ -21451,7 +21451,211 @@ Privacy-first detail: do incidentového chatu nekopíruj celé requesty, e-maily
 - NIST: [SP 800-92 — Guide to Computer Security Log Management](https://csrc.nist.gov/pubs/sp/800/92/final)
 - NIST: [Log Management project](https://csrc.nist.gov/Projects/log-management)
 
+# Příloha: Incidentová komunikace a status page bez paniky a mlžení
+
+Výpadek není jen technický problém. Je to moment, kdy zákazník zjišťuje, jestli provozovatel ví, co dělá. Můžeš mít skvělý monitoring, pěkné grafy a čtyři druhy alertů, ale pokud během incidentu nikdo neví, kdo rozhoduje a co říct zákazníkům, tým začne vyrábět mlhu. A mlha je drahá: zvyšuje počet dotazů na podporu, stresuje obchod, zpomaluje techniky a kazí důvěru víc než samotný výpadek.
+
+Status page a incidentová komunikace proto nejsou PR dekorace. Jsou provozní nástroj. Mají odpovědět na tři otázky: co se děje, koho se to týká a kdy přijde další aktualizace. Nemusí znát finální příčinu hned. Musí ale být pravdivé, pravidelné a užitečné.
+
+> Codyho komentář: Nejhorší status update není „zatím nevíme“. Nejhorší status update je ticho převlečené za profesionalitu. Zákazník pak začne dělat vlastní forenzní fantasy román v inboxu.
+
+## Incident nejdřív rozděl podle dopadu
+
+Ne každý problém patří na veřejnou status page. Ne každý problém je ale „jen interní drobnost“. Pomůže jednoduchá škála podle dopadu na zákazníka:
+
+| Úroveň | Dopad | Komunikace |
+| --- | --- | --- |
+| P1 | služba je nedostupná nebo nejde kritický tok | status page, cílený e-mail větším zákazníkům, interní incident kanál |
+| P2 | část uživatelů má omezené funkce nebo výrazné zpomalení | status page nebo cílené oznámení podle rozsahu, support makro |
+| P3 | nekritická chyba s obchůzkou | support makro, poznámka do changelogu nebo help centra |
+| P4 | interní problém bez dopadu na zákazníka | interní záznam, bez externí komunikace |
+
+Tahle tabulka není o alibismu. Je to brzda proti dvěma extrémům: všechno tajit, nebo naopak posílat veřejnou sirénu kvůli každému škobrtnutí. Rozumná komunikace chrání pozornost zákazníka i týmu.
+
+## Role: kdo hasí, kdo mluví, kdo zapisuje
+
+U malého SaaS často jeden člověk dělá všechno. Při incidentu je ale užitečné role aspoň mentálně oddělit:
+
+- **Incident lead** rozhoduje o prioritě, svolává lidi a hlídá další krok.
+- **Technický řešitel** opravuje problém a nediktuje každých pět minut marketingový text.
+- **Komunikační vlastník** píše zákaznické aktualizace, support makra a interní shrnutí.
+- **Zapisovatel** drží časovou osu, odkazy na logy, rozhodnutí a následné úkoly.
+
+Google ve svých SRE materiálech opakovaně zdůrazňuje koordinaci, jasné vlastnictví a pravidelnou komunikaci během incidentů ([Google SRE: Incident Management Guide](https://sre.google/resources/practices-and-processes/incident-management-guide/), [SRE Book: Managing Incidents](https://sre.google/sre-book/managing-incidents/)). Nemusíš kopírovat proces pro obří infrastrukturu. Stačí vzít princip: v krizi má být jasné, kdo vede, kdo opravuje a kdo informuje.
+
+Praktické minimum pro malý tým: u P1 incidentu napiš do interního kanálu první zprávu v tomto formátu:
+
+```text
+Incident: [krátký název]
+Úroveň: P1/P2/P3
+Dopad: [koho a co to omezuje]
+Lead: [jméno]
+Technické řešení: [jméno]
+Komunikace: [jméno]
+Další update: [čas]
+Interní záznam: [odkaz]
+```
+
+Když je tým jednočlenný, bude tam tvoje jméno třikrát. To je v pořádku. Aspoň víš, které klobouky si právě střídáš, a nevypadáš jako procesní hydra po kávě.
+
+## První status update: rychlý, opatrný, užitečný
+
+První veřejná zpráva nemá dokazovat genialitu týmu. Má potvrdit, že o problému víš a pracuješ na něm.
+
+Dobrá první zpráva:
+
+```text
+Zaznamenali jsme problém s přihlášením části uživatelů. Tým ověřuje příčinu a pracuje na obnovení služby. Další aktualizaci zveřejníme do 30 minut.
+```
+
+Slabá první zpráva:
+
+```text
+Naši dodavatelé mají potíže, chyba není na naší straně. Sledujte další informace.
+```
+
+První varianta je věcná. Druhá varianta hází horký brambor a neříká, co má zákazník čekat. Pokud je opravdu problém u dodavatele, napiš to až ve chvíli, kdy to máš potvrzené a víš, jaký je dopad.
+
+U privacy-first provozu si dej pozor i na formulace. Neuváděj konkrétní zákazníky, interní IP adresy, názvy neveřejných systémů, tokeny, screenshoty logů ani detaily, které by z incidentu udělaly návod pro útočníka. Transparentnost není totéž co livestream z produkční kuchyně.
+
+## Aktualizace piš v rytmu, ne podle nervozity
+
+Když slíbíš další update do 30 minut, napiš ho i tehdy, když zatím nemáš finální řešení. Klidně krátce:
+
+```text
+Problém stále řešíme. Příčinu jsme zúžili na ověřování session po ranním nasazení. Přihlášení části uživatelů může dál selhávat. Další aktualizaci zveřejníme do 30 minut.
+```
+
+Rytmus komunikace snižuje počet individuálních dotazů. Zákazník nemusí hádat, jestli někdo žije. Support nemusí odpovídat každému zvlášť. Technici nejsou každých pět minut vytržení otázkou „tak co?“ — což je mimochodem nejrychlejší způsob, jak prodloužit opravu a zhoršit atmosféru.
+
+Pro menší SaaS se hodí jednoduchý rytmus:
+
+- P1: první zpráva do 15 minut od potvrzení dopadu, další update každých 30 minut.
+- P2: první zpráva do 30 minut, další update každých 60 minut nebo při změně stavu.
+- P3: komunikace v supportu nebo changelogu, pokud se problém týká více zákazníků.
+- Po vyřešení: závěrečné shrnutí dopadu, času a případných dalších kroků.
+
+Časy si uprav podle reality týmu. Důležité je mít je napsané před incidentem, ne je vymýšlet s tepem jak při sprintu na tramvaj.
+
+## Status page musí být nezávislá na hlavní aplikaci
+
+Status page, která běží na stejné infrastruktuře jako rozbitá aplikace, je trochu jako hasicí přístroj zamčený v hořící místnosti. Pro malý projekt nemusí být složitá, ale má přežít výpadek hlavního webu, databáze nebo CDN.
+
+Praktické varianty:
+
+- statická stránka hostovaná odděleně od aplikace,
+- jednoduchá status stránka u evropského poskytovatele,
+- veřejný RSS feed incidentů a změn stavu,
+- textová fallback stránka s kontaktem na podporu,
+- interní šablony pro ruční e-mail zákazníkům při velkém výpadku.
+
+Privacy-first detail: status page nemá potřebovat reklamní tracking, fingerprinting ani těžký JavaScript. Lidé na ni často přicházejí ve stresu a z různých sítí. Má se načíst rychle, říct pravdu a nabídnout odběr aktualizací bez datového cirkusu. RSS nebo e-mailová notifikace s minimem dat jsou důstojnější než „přihlas se přes sociální síť, abys zjistil, jestli ti funguje účet“. Ano, to je skutečně věta, kterou by měl někdo preventivně zakázat.
+
+## Support makra drž lidská
+
+Během incidentu support často odpovídá stejnou informaci dokola. Připrav si makra, ale nenech je znít jako robot z výtahu.
+
+Příklad pro P1:
+
+```text
+Dobrý den,
+
+aktuálně řešíme výpadek přihlášení, který se týká části účtů. Problém jsme potvrdili a průběžné aktualizace dáváme na [status page]. Další veřejný update bude nejpozději v [čas].
+
+Pokud potřebujete akutně získat konkrétní export nebo informaci, odpovězte prosím na tento e-mail a napište, co přesně potřebujete. Neposílejte nám hesla ani citlivá data.
+```
+
+Makro dělá čtyři věci: potvrzuje realitu, dává odkaz, nastavuje očekávání a chrání data. To je víc užitečné než „omlouváme se za nepříjemnosti“, které samo o sobě neřeší nic. Omluva je fajn, ale musí mít nohy.
+
+## Postmortem bez honu na viníka
+
+Po incidentu napiš krátké postmortem. Ne proto, aby se někdo veřejně posypal popelem, ale aby se neopakoval stejný typ selhání. NCSC ve své příručce pro malé firmy k reakci a obnově po kybernetickém incidentu zdůrazňuje přípravu, obnovu a poučení z incidentu ([NCSC: Response & Recovery](https://www.ncsc.gov.uk/collection/small-business-guidance--response-and-recovery)). ENISA zase dlouhodobě publikuje materiály k incident reporting mechanismům a koordinaci v evropském prostředí ([ENISA: Incident Reporting Mechanisms](https://www.enisa.europa.eu/topics/national-cyber-security-strategies/ncss-map/national-implementation/incident-reporting-mechanisms)).
+
+Mini postmortem pro SaaS:
+
+```text
+Incident:
+Datum a čas:
+Dopad na zákazníky:
+Jak jsme incident zjistili:
+Co fungovalo:
+Co selhalo:
+Kořenová příčina nebo nejlepší známé vysvětlení:
+Co jsme opravili hned:
+Co opravíme do 7 dnů:
+Co opravíme do 30 dnů:
+Co záměrně nebudeme dělat:
+Komunikační poučení:
+Datové a privacy poučení:
+```
+
+Poslední dvě položky jsou důležité. Incident není jen technická chyba. Může odhalit, že tým loguje moc dat, sdílí screenshoty do špatného kanálu, nemá jasný seznam zákazníků k informování nebo neumí rychle říct, zda došlo k dopadu na osobní údaje.
+
+## Checklist: incidentová komunikace bez paniky
+
+- Máme definované úrovně P1 až P4 podle dopadu na zákazníka.
+- U každé úrovně víme, kdy použít status page, e-mail, support makro nebo jen interní záznam.
+- Incident má lead, technického řešitele, komunikačního vlastníka a zapisovatele.
+- První veřejná zpráva potvrzuje dopad, další krok a čas další aktualizace.
+- Aktualizace vycházejí v předem daném rytmu, i když ještě není finální oprava.
+- Status page běží nezávisle na hlavní aplikaci a neobsahuje sledovací cirkus.
+- Support má připravená lidská makra pro nejčastější situace.
+- Do incidentových zpráv nedáváme osobní údaje, tokeny, interní IP adresy ani screenshoty citlivých logů.
+- Po vyřešení incidentu vznikne krátké postmortem s konkrétními úkoly.
+- Postmortem hodnotí i komunikaci, datovou hygienu a privacy dopady.
+- Následné úkoly mají vlastníka a termín, ne jen heroický povzdech „musíme to zlepšit“.
+
+## Mini šablona incidentové komunikační karty
+
+```text
+# Incidentová komunikační karta: [služba / oblast]
+
+## Úrovně dopadu
+- P1:
+- P2:
+- P3:
+- P4:
+
+## Role
+- Incident lead:
+- Technický řešitel:
+- Komunikační vlastník:
+- Zapisovatel:
+
+## Kanály
+- Status page:
+- Support e-mail:
+- Interní kanál:
+- Zákaznické kontakty:
+- RSS / odběr aktualizací:
+
+## Rytmus aktualizací
+- P1 první update:
+- P1 další update:
+- P2 první update:
+- P2 další update:
+
+## Datové hranice
+- Co se smí veřejně napsat:
+- Co patří jen do interního záznamu:
+- Co se nesmí kopírovat do chatu:
+- Kdo posuzuje možný dopad na osobní údaje:
+
+## Po incidentu
+- Šablona postmortem:
+- Kde se ukládají úkoly:
+- Termín review:
+```
+
+## Zdroje
+
+- Google SRE: [Incident Management Guide](https://sre.google/resources/practices-and-processes/incident-management-guide/)
+- Google SRE Book: [Managing Incidents](https://sre.google/sre-book/managing-incidents/)
+- NCSC: [Small Business Guide — Response & Recovery](https://www.ncsc.gov.uk/collection/small-business-guidance--response-and-recovery)
+- ENISA: [Incident Reporting Mechanisms](https://www.enisa.europa.eu/topics/national-cyber-security-strategies/ncss-map/national-implementation/incident-reporting-mechanisms)
+
 # Pracovní log
+- 2026-09-30: Doplněna příloha „Incidentová komunikace a status page bez paniky a mlžení“ s dopadovou škálou P1–P4, rolemi, rytmem status updatů, privacy-first pravidly pro komunikaci, support makry, postmortem šablonou, checklistem a ověřenými zdroji Google SRE, NCSC a ENISA.
 - 2026-09-30: Doplněna příloha „Logování a observabilita bez datového smetiště“ s praktickým modelem logů, metrik, auditních událostí, syntetických kontrol, datovou hranicí, retencí, přístupovými pravidly, alerty, runbookem, checklistem, logovací kartou a ověřenými zdroji OWASP a NIST.
 - 2026-09-30: Obnovena plná podoba e-booku po poškozeném posledním commitu a doplněna příloha „Doménová a DNS hygiena bez křehkého domečku z TXT záznamů“ s inventurou domén, e-mailovou ochranou, správou DNS záznamů, DNSSEC doporučeními, checklistem, šablonou doménové karty a ověřenými zdroji NCSC, GOV.UK a ICANN.
 - 2026-09-30: Doplněna příloha „Newsletter bez sledovacích pixelů a marketingového cirkusu“ s právním minimem, doporučením bez open trackingu, férovou segmentací, doručitelností, retenční rutinou, checklistem a vyplnitelnou šablonou.
