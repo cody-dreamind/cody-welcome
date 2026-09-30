@@ -23851,7 +23851,241 @@ Tohle měření má bezpečnostní účel. Nepotřebuje reklamní identifikátor
 - NIST SP 800-63B pokrývá autentizátory, obnovu a požadavky na digitální identitu: https://pages.nist.gov/800-63-4/sp800-63b.html
 - OWASP Logging Cheat Sheet připomíná, že bezpečnostní logy mají mít účel a nemají obsahovat tajné hodnoty, tokeny ani zbytečná citlivá data: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 
+# Příloha: Dunning, refundy a billing support bez finančního harampádí
+
+Tahle příloha navazuje na základní billing kapitolu a soustředí se na provozní vrstvu: neúspěšné platby, refundy, support přístupy a auditní stopu. Platební flow je jedno z míst, kde se privacy-first přístup rychle ukáže jako praktická disciplína, ne jako plakát na zdi. V malém SaaS se totiž snadno stane, že tým sbírá víc fakturačních údajů, než potřebuje, ukládá platební metadata do interních poznámek, posílá faktury přes náhodné e-maily, loguje celé webhook payloady a pak se diví, že účetnictví, support a produkt mají každý vlastní verzi pravdy. To je datový guláš s platební příchutí. Mňam, ale jen pro auditora.
+
+Dobré pravidlo: platební systém má umět vybrat peníze, vystavit doklad, spravovat předplatné a řešit reklamaci. Nemá se z něj stát druhý CRM, skrytý analytický sklad ani detektivní archiv všech pokusů o platbu.
+
+> Codyho komentář: Nejlepší platební integrace je ta, u které zákazník ví, co platí, účetní ví, co účtovat, support ví, co může opravit, a vývojář nemusí nikdy vidět číslo karty. Čtyři vítězství, žádný cirkus.
+
+## Začni datovou hranicí platebního flow
+
+Než vybereš platební bránu, napiš si, která data opravdu potřebuje tvoje aplikace a která má držet specializovaný platební poskytovatel nebo účetní systém.
+
+Typické vrstvy:
+
+- **Aplikace:** stav předplatného, tarif, interní zákaznické ID, poslední úspěšná platba, odkaz na zákazníka u platebního poskytovatele.
+- **Platební poskytovatel:** platební metoda, autorizace, charge, refund, 3-D Secure, vybrané údaje nutné pro zpracování platby.
+- **Fakturační/účetní systém:** fakturační údaje, daňové doklady, číselné řady, exporty pro účetnictví.
+- **Support:** bezpečný pohled na stav platby a faktury, ne plný finanční archiv.
+
+V aplikaci většinou nepotřebuješ ukládat čísla karet, CVV, celé adresy z každého neúspěšného pokusu ani kompletní payload každého platebního webhooku. Často stačí ukládat identifikátory, stav, částku, měnu, čas, tarif a odkaz do systému, který má pro platební data lepší bezpečnostní režim.
+
+Praktická minimální tabulka předplatného může obsahovat:
+
+- `workspace_id`,
+- `billing_provider_customer_id`,
+- `billing_provider_subscription_id`,
+- `plan_code`,
+- `status`,
+- `current_period_start`,
+- `current_period_end`,
+- `cancel_at_period_end`,
+- `last_payment_status`,
+- `updated_at`.
+
+To není sexy schéma, ale je bezpečné. A bezpečné schéma je sexy pro lidi, kteří už někdy čistili produkční databázi od zbytečných osobních údajů. Ano, takoví lidé existují. Někteří z nás dokonce pijí kávu.
+
+## Karty nepatří do tvé aplikace
+
+Pokud provozuješ malý SaaS, výchozí volba má být hosted checkout nebo bezpečné komponenty platebního poskytovatele. U Stripe Checkout například zákazník přechází na hostovanou platební stránku nebo používáš jejich připravené checkout komponenty; dokumentace Stripe výslovně popisuje hosted checkout jako variantu, kde platební stránku spravuje Stripe. Stripe také uvádí, že Checkout a Elements používají hostované platební pole pro citlivá karetní data a tím výrazně zjednodušují PCI zátěž.
+
+To neznamená, že odpovědnost magicky zmizí. Znamená to, že si záměrně nebereš do aplikace data, která nepotřebuješ a neumíš chránit lépe než specializovaný poskytovatel. PCI Security Standards Council navíc jasně uvádí, že ověřovací kódy karet typu CVV/CVC se po autorizaci nesmí ukládat ani se souhlasem zákazníka.
+
+Praktické pravidlo:
+
+- Neptej se na číslo karty ve vlastním formuláři, pokud k tomu nemáš velmi dobrý důvod a PCI proces.
+- Nikdy neukládej CVV/CVC.
+- Neloguj requesty z platební stránky tak, aby mohly obsahovat platební údaje.
+- V supportu nezobrazuj víc než poslední čtyři číslice karty, značku a expiraci, pokud je to vůbec potřeba.
+- Do interních poznámek nepiš „zákazník poslal kartu e-mailem“ včetně citlivého obsahu; takový e-mail řeš jako incident hygieny dat.
+
+## Fakturační údaje nejsou marketingový profil
+
+Fakturační údaje sbíráš kvůli smlouvě, daním, dokladům a podpoře. Ne proto, aby sis postavil bohatší profil zákazníka pro kampaně. GDPR principy účelového omezení, minimalizace a omezení uložení říkají jednoduchou věc: data mají mít konkrétní účel, mají být přiměřená a nemají se držet déle, než je potřeba. EDPB ve svém přehledu základních principů GDPR připomíná mimo jiné zákonnost, férovost, transparentnost, účelové omezení, minimalizaci, přesnost, omezení uložení a bezpečnost.
+
+U B2B SaaS si pro fakturaci často vystačíš s:
+
+- názvem firmy,
+- fakturační adresou,
+- IČO/DIČ podle trhu,
+- e-mailovou adresou pro doklady,
+- zemí a měnou,
+- případně objednávkovým číslem, pokud ho zákazník vyžaduje.
+
+Nepotřebuješ automaticky chtít telefon na finance, datum narození administrátora, osobní adresu uživatele nebo volné pole „poznámka“, do kterého zákazníci napíšou půlku interního nákupního procesu. Volná pole jsou magnet na osobní údaje. Když už je potřebuješ, napiš k nim jasně, co tam patří a co ne.
+
+Příklad textu u fakturační poznámky:
+
+```text
+Volitelné: interní objednávkové číslo nebo krátká poznámka pro fakturu. Nevkládejte platební údaje, rodná čísla, hesla ani jiné citlivé informace.
+```
+
+## Retence dokladů odděl od retence produktových dat
+
+Daňové a účetní doklady mají vlastní retenční režim. V Česku Finanční správa uvádí, že účetní jednotky standardně uchovávají účetní závěrku a výroční zprávu 10 let a účetní doklady, účetní knihy a další účetní záznamy 5 let, pokud zákon nestanoví jinak. U daňových dokladů k DPH Finanční správa ve své informaci k fakturaci uvádí uchování po dobu 10 let od konce zdaňovacího období, ve kterém se plnění uskutečnilo.
+
+To ale neznamená, že máš kvůli fakturám držet navždy i produktová data, session logy, exporty, support přílohy a marketingové události. Udělej dvě vrstvy retence:
+
+- **Dokladová retence:** faktury, dobropisy, auditní stopa dokladu, účetní exporty.
+- **Produktová retence:** workspace obsah, uživatelské logy, analytické agregace, support data, dočasné exporty.
+
+Když zákazník zruší účet, účetní doklady zůstanou podle právní povinnosti, ale produktová data mají projít samostatným ukončovacím procesem: export pro zákazníka, smazání nebo anonymizace podle smlouvy, odstranění dočasných souborů a omezení přístupů. Faktura není omluva pro věčné držení celého workspace.
+
+## Webhooky ukládej jako účetní signál, ne jako datový román
+
+Platební webhooky jsou provozně kritické: aktivují předplatné, zaznamenávají platbu, řeší selhání a refundy. Zároveň často obsahují víc dat, než potřebuje tvoje aplikace. Proto webhook po ověření podpisu převeď na vlastní interní událost.
+
+Místo ukládání celého payloadu si ulož například:
+
+- ID události u poskytovatele,
+- typ události,
+- ID zákazníka a předplatného u poskytovatele,
+- interní `workspace_id`,
+- částku a měnu, pokud je relevantní,
+- výsledek zpracování,
+- čas přijetí a čas zpracování,
+- hash nebo krátký technický fingerprint pro debug.
+
+Celý payload můžeš krátkodobě držet v omezeném debug režimu, ale jen pokud má jasnou retenci, omezený přístup a redakci citlivých polí. Výchozí nastavení má být: payload slouží ke zpracování, ne k archivaci.
+
+## Dunning komunikace má pomáhat, ne vydírat
+
+Dunning je proces připomínek při neúspěšné platbě. Může být užitečný, ale snadno sklouzne k manipulaci: červené bannery, panické texty, falešné urgence a osm e-mailů za tři dny. Privacy-first přístup tady znamená respektovat člověka i účetní realitu.
+
+Dobré dunning flow:
+
+1. První selhání: klidná informace, že platba neprošla, odkaz na bezpečnou správu platební metody.
+2. Druhé upozornění: vysvětlení dopadu na službu a datum, kdy se přístup omezí.
+3. Grace period: jasný počet dní, žádné překvapení.
+4. Omezení služby: zachovej přístup k fakturám, exportu dat a nastavení účtu.
+5. Po vyřešení: potvrzení, bez moralizování.
+
+Text nemusí být dramatický:
+
+```text
+Platba za váš tarif neprošla. Službu necháváme aktivní do 14. října, abyste měli čas upravit platební metodu nebo kontaktovat finance. Platební údaje zadáváte přes zabezpečenou stránku našeho platebního poskytovatele; číslo karty u nás neukládáme.
+```
+
+Tohle je lidské, konkrétní a zároveň uklidňuje privacy obavu.
+
+## Refund a storno potřebují stopu bez zbytečného dramatu
+
+Refundy a storna mají být snadno dohledatelné, ale nemají vyžadovat sběr citlivých důkazů. Support nepotřebuje screenshot celé bankovní aplikace. Většinou stačí e-mail účtu, číslo faktury, datum platby, částka a důvod v rozumné kategorii.
+
+Kategorie důvodů drž jednoduché:
+
+- omyl při objednávce,
+- duplicitní platba,
+- technický problém,
+- nespokojenost se službou,
+- změna interního rozhodnutí zákazníka,
+- jiný důvod bez povinného detailu.
+
+Interně eviduj, kdo refund schválil, kdy byl proveden, jaký doklad vznikl a jestli se mění stav předplatného. Nepiš do poznámky „zákazník je chaotik“. I když je. Interní poznámky jednou někdo exportuje, čte nebo předloží. Piš je tak, jako by je měl vidět rozumný člověk mimo tým.
+
+## Přístupy: finance, support a admin nemají vidět totéž
+
+Fakturační část SaaS často trpí rolí „kdo má admina, vidí všechno“. Lepší je oddělit pohledy podle práce.
+
+Příklad rolí:
+
+- **Owner zákaznického účtu:** správa tarifu, fakturační údaje, platební metoda přes poskytovatele, faktury.
+- **Billing manager zákazníka:** faktury, platební metoda, fakturační údaje, bez přístupu k produktovým datům.
+- **Interní support:** stav předplatného, faktury, poslední platby, možnost poslat bezpečný odkaz na aktualizaci platby, bez editace daňových údajů po vystavení dokladu.
+- **Finance:** doklady, exporty, refund workflow, účetní evidence, bez přístupu k obsahu workspace.
+- **Technický admin:** integrace a webhooky, bez zbytečného přístupu k fakturačním osobním údajům.
+
+Citlivé akce jako změna fakturačního e-mailu, ruční prodloužení tarifu, refund nebo změna zákaznického ID u poskytovatele loguj do auditní stopy. Auditní log tady není šmírování, ale ochrana před finančním chaosem.
+
+## Evropský provoz: ptej se, kudy tečou peníze i data
+
+Platební poskytovatel může být mimo EU nebo může používat globální subprocesory. To automaticky neznamená zákaz, ale znamená to povinnost vědět, co se děje. U každého poskytovatele plateb, fakturace a účetních exportů si ověř:
+
+- kde je poskytovatel usazený,
+- kdo je správcem a kdo zpracovatelem pro jednotlivé části,
+- kde jsou dostupné DPA a seznam subprocesorů,
+- jaké údaje se předávají mimo EU/EHP,
+- jak se řeší mazání zákazníka,
+- kdo má supportní přístup k datům,
+- jak stáhneš historii dokladů při odchodu.
+
+Privacy-first SaaS nemusí tvrdit, že nikdy nepoužije globální platební infrastrukturu. Má ale umět zákazníkovi férově říct: „Tady jsou data, tady je účel, tady je poskytovatel, tady je smluvní rámec a tady je naše datová hranice.“ To je dospělé. Tajemné mlčení není strategie, jen čekání na nepříjemný dotaz v enterprise security review.
+
+## Checklist: platby a fakturace bez finančního harampádí
+
+- Máme jasně rozdělená data mezi aplikaci, platebního poskytovatele, fakturaci a support.
+- V aplikaci neukládáme čísla karet, CVV/CVC ani zbytečná platební data.
+- Fakturační formulář sbírá jen údaje nutné pro doklad, smlouvu a daňové povinnosti.
+- Volná pole mají instrukci, že do nich nepatří citlivé informace.
+- Webhook payloady nepoužíváme jako dlouhodobý archiv.
+- Dunning e-maily jsou konkrétní, férové a obsahují bezpečný odkaz na úpravu platby.
+- Refund workflow má jasné schválení, auditní stopu a minimální požadavky na důkazy.
+- Fakturační doklady mají samostatnou retenci od produktových dat.
+- Role pro ownera, billing managera, support a finance nevidí stejný rozsah dat.
+- Máme uložené odkazy na DPA, subprocesory a exportní postup platebního/fakturačního poskytovatele.
+
+## Mini šablona billing karty
+
+```text
+# Billing karta: [produkt / tarif / workspace]
+
+## Účel
+- Co zákazník platí:
+- Kdy vzniká nárok na platbu:
+- Kdy vzniká faktura nebo daňový doklad:
+
+## Data v aplikaci
+- Interní zákaznické ID:
+- ID zákazníka u poskytovatele:
+- ID předplatného:
+- Stav předplatného:
+- Co výslovně neukládáme:
+
+## Fakturační údaje
+- Povinná pole:
+- Volitelná pole:
+- Kdo je může měnit:
+- Co se stane po vystavení dokladu:
+
+## Platby
+- Poskytovatel:
+- Hosted checkout / komponenty:
+- Kde se spravuje platební metoda:
+- Jak řešíme neúspěšnou platbu:
+
+## Retence
+- Doklady:
+- Produktová data po zrušení účtu:
+- Webhook logy:
+- Support záznamy:
+
+## Přístupy
+- Zákaznický owner:
+- Billing manager:
+- Interní support:
+- Finance:
+- Technický admin:
+
+## Exit
+- Jak exportujeme faktury:
+- Jak rušíme předplatné:
+- Jak mažeme nebo anonymizujeme produktová data:
+```
+
+## Zdroje
+
+- EDPB shrnuje základní principy GDPR včetně účelového omezení, minimalizace dat a omezení uložení: https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
+- Finanční správa popisuje náležitosti účetních dokladů a standardní lhůty úschovy účetních záznamů: https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/ucetnictvi/obecne-informace
+- Informace Generálního finančního ředitelství k fakturaci uvádí pravidla pro uchovávání daňových dokladů a zmiňuje desetiletou lhůtu pro daňové doklady k DPH: https://financnisprava.gov.cz/assets/cs/prilohy/d-seznam-dani/2013_Informace_GFR_k_fakturaci.PDF
+- Stripe Checkout dokumentace popisuje hostovanou checkout stránku a integrace přes Checkout Sessions: https://docs.stripe.com/payments/quickstart-checkout-sessions
+- Stripe průvodce PCI compliance vysvětluje, že Checkout a Elements používají hostovaná platební pole pro citlivá karetní data a mohou zjednodušit PCI zátěž: https://stripe.com/guides/pci-compliance
+- PCI Security Standards Council uvádí, že ověřovací kódy karet typu CVV/CVC nelze po autorizaci ukládat ani se souhlasem zákazníka: https://www.pcisecuritystandards.org/faqs/1280/
+
 # Pracovní log
+- 2026-09-30: Doplněna příloha „Dunning, refundy a billing support bez finančního harampádí“ s datovou hranicí platebního flow, doporučením pro hosted checkout, minimalizací fakturačních údajů, oddělením retenčních režimů, bezpečným webhook zpracováním, dunning komunikací, refund workflow, rolemi pro billing a ověřenými zdroji EDPB, Finanční správy, Stripe a PCI SSC.
+
 - 2026-09-30: Doplněna příloha „Obnova účtu a MFA bez bezpečnostního divadla“ s rozlišením resetu hesla, magic linku a MFA recovery, pravidly pro reset tokeny, bezpečnostní e-maily, relace po resetu, recovery kódy, support postup, checklist, recovery kartu a ověřené zdroje OWASP a NIST.
 
 - 2026-09-30: Doplněna příloha „Incidentová komunikace a status page bez mlžení“ s rozlišením typů incidentů, pravidly pro status page, první zprávou, rolemi v malém týmu, bezpečnostní/datovou komunikací, rytmem updatů, postmortemem, checklistem, incidentovou kartou a ověřenými zdroji GDPR, EDPB, ENISA a OWASP.
