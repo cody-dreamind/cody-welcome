@@ -20455,7 +20455,189 @@ Vlastník a datum poslední kontroly:
 - Evropská komise: [Legal grounds for processing data](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en)
 
 
+# Příloha: Roadmapa bez HIPPO efektu a produktového hazardu
+
+Roadmapa není slib, že tým v úterý v 15:40 doručí přesně tuhle funkci, protože si ji někdo napsal do tabulky během kafe. Roadmapa je pracovní dohoda o směru: jaké problémy teď řešíme, proč na nich záleží, jak poznáme posun a co vědomě necháváme na později. Když se z roadmapy stane seznam přání nejhlasitějšího člověka v místnosti, produkt přestává být řízený hodnotou a začne připomínat nákupní košík v hobbymarketu.
+
+HIPPO efekt je klasika: vyhraje Highest Paid Person's Opinion, tedy názor nejvýše placeného člověka. Někdy má pravdu. Často má jen nejhlasitější kalendář. Privacy-first SaaS nebo webový projekt potřebuje jiný režim: rozhodování podle zákaznické práce, dopadu, důvěry v důkazy, náročnosti, provozního rizika a datové hranice. Ne podle toho, kdo naposledy mluvil se zákazníkem v autě a zapamatoval si půl věty.
+
+> Codyho komentář: Roadmapa má být kompas, ne věštírna. Jakmile slibuje přesné funkce na půl roku dopředu bez prostoru pro učení, není strategická. Je jen sebevědomě nepřesná.
+
+## Začni problémy, ne funkcemi
+
+Nejčastější chyba roadmapy je, že začíná seznamem řešení. „Přidat dashboard“, „udělat mobilní appku“, „napojit CRM“, „AI doporučování“, „nový onboarding“. To všechno mohou být dobré nápady, ale bez problému jsou to jen líbivé štítky.
+
+Lepší zápis začíná takto:
+
+```text
+Kdo má problém: [segment]
+Co se mu nedaří: [konkrétní situace]
+Jaký to má dopad: [čas, peníze, riziko, důvěra]
+Jak to dnes obchází: [současné workaroundy]
+Jak poznáme zlepšení: [pozorovatelný signál]
+```
+
+Příklad pro B2B SaaS:
+
+```text
+Kdo má problém: administrátor menší firmy
+Co se mu nedaří: neví, kteří lidé mají stále přístup po změně role
+Jaký to má dopad: bezpečnostní riziko a ruční kontrola v tabulkách
+Jak to dnes obchází: jednou měsíčně exportuje uživatele a posílá seznam manažerům
+Jak poznáme zlepšení: administrátor dokáže za 10 minut zkontrolovat rizikové přístupy bez exportu osobních dat mimo systém
+```
+
+Teprve potom navrhuj řešení. Možná to nebude velký dashboard, ale jednoduchý filtr „účty bez aktivity 90 dní“, auditní karta a export jen pro oprávněné role. Méně efektní na prezentaci, mnohem užitečnější v provozu. Produktové zázraky bývají často převlečené obyčejné tabulky s jasným účelem.
+
+## Použij krátkou prioritizační kartu
+
+Malý tým nepotřebuje složitý scoring se sedmnácti vahami. Potřebuje jednotný způsob, jak nápady porovnat bez divadla. Každý větší nápad napiš do prioritizační karty:
+
+- **Problém**: jaká zákaznická nebo provozní bolest se řeší.
+- **Segment**: pro koho je změna důležitá.
+- **Dopad**: co se zlepší, když to vyjde.
+- **Důkaz**: odkud víme, že problém existuje.
+- **Náročnost**: vývoj, design, migrace, support, provoz.
+- **Riziko**: technické, bezpečnostní, datové, reputační.
+- **Datová hranice**: jaká data změna sbírá, zobrazuje nebo předává.
+- **Neřešíme**: jasně napsané věci mimo rozsah.
+
+Tahle karta má jednu hlavní výhodu: nutí tým říct „nevíme“. A to je produktově zdravé. Pokud má nápad vysoký dopad, ale slabý důkaz, možná nepatří rovnou do vývoje. Patří do rozhovorů, prototypu nebo ručního testu. Pokud má silný důkaz, ale vysoké datové riziko, možná potřebuje jiné řešení, ne větší databázi.
+
+Praktické skórování může být jednoduché:
+
+```text
+Dopad: 1–5
+Důvěra v důkaz: 1–5
+Náročnost: 1–5, kde 5 je nejtěžší
+Datové a provozní riziko: 1–5, kde 5 je nejrizikovější
+```
+
+Neber výsledné číslo jako pravdu. Ber ho jako začátek rozhovoru. Pokud dvě položky vyjdou podobně, vyhraje ta, která lépe podporuje strategii produktu a snižuje budoucí provozní bolest. Roadmapa nemá maximalizovat počet hotových ticketů. Má zvyšovat šanci, že produkt dělá správné věci.
+
+## Odděl discovery, delivery a provozní dluh
+
+Jedna roadmapa často míchá tři různé typy práce:
+
+- **Discovery**: potřebujeme se něco naučit, ověřit problém, pochopit segment nebo najít hranice řešení.
+- **Delivery**: víme dost a stavíme konkrétní změnu.
+- **Provozní dluh**: opravujeme křehkost, bezpečnost, dokumentaci, monitoring, přístupy, výkon nebo podporu.
+
+Když je neoddělíš, delivery vždycky sežere všechno ostatní. Discovery vypadá jako „méně produktivní“ práce, protože nemá velký release. Provozní dluh vypadá jako otrava, protože zákazník obvykle nevidí novou ikonku. Jenže obojí drží produkt při životě.
+
+Rozumný rytmus pro malý tým:
+
+- Každý týden mít jednu malou discovery aktivitu: rozhovor, analýzu support ticketů, prototyp, ruční test.
+- Každý sprint nebo dvoutýdenní cyklus vyhradit pevnou kapacitu na provozní dluh.
+- Každý měsíc revidovat, jestli delivery stále odpovídá největším problémům.
+- Každé větší rozhodnutí zapsat krátce, aby se za tři měsíce nemuselo archeologicky pátrat v chatu.
+
+> Codyho komentář: Pokud tým nemá čas na provozní dluh, bude ho mít později. Jen se tomu bude říkat incident, víkend nebo „rychle všichni na call“.
+
+## Privacy-first roadmapa má datovou brzdu
+
+Každý nápad, který přidává měření, personalizaci, automatizaci nebo integraci, musí projít datovou brzdou. Ne proto, že data jsou zlo. Data jsou užitečná. Ale špatně nasbíraná data jsou budoucí účet s úrokem.
+
+Před zařazením položky do roadmapy si polož otázky:
+
+- Sbíráme nová osobní data, nebo jen lépe používáme ta, která už máme?
+- Umíme stejný problém vyřešit agregovaně, anonymizovaně nebo ručním vzorkem?
+- Potřebujeme obsah uživatelských dat, nebo stačí metadata o procesu?
+- Bude změna vyžadovat nový externí nástroj, subprocesora nebo integraci mimo EU?
+- Jak dlouho budou data potřeba a kdo je bude moct vidět?
+- Co se stane při exportu, offboardingu a žádosti o smazání?
+
+Příklad: tým chce personalizovat onboarding podle chování uživatele. Privacy-first varianta nemusí znamenat detailní behaviorální profil. Může stačit, že uživatel sám vybere roli, velikost týmu a hlavní cíl. To je transparentní, užitečné a lépe vysvětlitelné. Navíc tím uživatele respektuješ jako člověka, ne jako stopu v event streamu.
+
+## Nech roadmapu mluvit s obchodem a podporou
+
+Roadmapa izolovaná v produktu rychle oslepne. Obchod ví, proč se dealy zasekávají. Podpora ví, kde lidé padají do frustrace. Vývoj ví, co je technicky křehké. Marketing ví, která tvrzení lidé nechápou. Každý má část mapy, ale nikdo nemá celou krajinu.
+
+Zaveď měsíční roadmap review v jednoduchém formátu:
+
+- 10 minut: nejdůležitější signály ze zákazníků, podpory a prodeje.
+- 10 minut: co jsme doručili a jaký to mělo dopad.
+- 10 minut: co jsme se naučili v discovery.
+- 10 minut: provozní rizika a dluh.
+- 10 minut: rozhodnutí, co se přesouvá, škrtá nebo zpřesňuje.
+
+Důležité pravidlo: review není aukce přání. Každý signál musí být konkrétní. „Zákazníci chtějí reporting“ je moc široké. Lepší je: „Tři administrátoři za poslední měsíc ručně skládali měsíční přehled pro vedení a exportovali data mimo aplikaci.“ To už je problém, který jde řešit.
+
+## Roadmapa má obsahovat i vědomé ne
+
+Dobrá roadmapa ukazuje nejen to, co plánuješ, ale i co teď vědomě neděláš. To šetří energii týmu i očekávání zákazníků. Když neřekneš „ne“, vznikne tiché „možná“, které se v hlavách lidí promění ve slib.
+
+Kategorie pro „teď ne“:
+
+- nápady mimo cílový segment,
+- funkce s vysokým datovým rizikem a nízkým dopadem,
+- integrace, které by vytvořily závislost na nevhodném dodavateli,
+- požadavky jednoho velkého zákazníka, které rozbijí produkt pro ostatní,
+- kosmetické změny bez dopadu na rozhodnutí nebo dokončení práce,
+- automatizace procesu, který ještě nikdo pořádně nerozumí.
+
+U každého „ne“ napiš důvod jednou větou. Ne omluvu. Důvod. Například:
+
+```text
+Teď nestavíme real-time uživatelské heatmapy, protože by přidaly vysoké datové riziko a současné rozhodnutí umíme udělat z agregovaných eventů a rozhovorů.
+```
+
+Tohle je silnější než „není kapacita“. Kapacita není strategie. Kapacita je realita, kterou strategie musí respektovat.
+
+## Checklist: roadmapa bez produktového hazardu
+
+- Každá větší položka začíná problémem, ne řešením.
+- U každé položky je jasný segment a důkaz, že problém existuje.
+- Roadmapa odděluje discovery, delivery a provozní dluh.
+- Datově rizikové položky mají popsanou datovou hranici a alternativy.
+- Tým pravidelně škrtá položky, které už nedávají smysl.
+- Obchod, podpora, vývoj a marketing mají prostor přinést konkrétní signály.
+- Roadmapa obsahuje i vědomé „teď ne“ s důvodem.
+- Prioritizace není jen číslo, ale zdokumentované rozhodnutí.
+- Slíbené termíny se používají jen tam, kde existuje reálný závazek.
+- Zákazníkům se komunikuje směr a řešený problém, ne interní ticketový kalendář.
+
+## Mini šablona roadmap karty
+
+```markdown
+# Roadmap karta: [název problému]
+
+## Segment
+- Pro koho je problém důležitý:
+- Jak často se objevuje:
+- Jaký má obchodní nebo provozní dopad:
+
+## Problém
+- Co se dnes nedaří:
+- Jak to lidé obcházejí:
+- Co se stane, když to nevyřešíme:
+
+## Důkaz
+- Zdroj signálu:
+- Síla důkazu:
+- Co ještě nevíme:
+
+## Možné řešení
+- Nejmenší užitečná verze:
+- Co výslovně není v rozsahu:
+- Jak poznáme zlepšení:
+
+## Data a provoz
+- Jaká data změna potřebuje:
+- Kdo k nim bude mít přístup:
+- Retence / mazání / export:
+- Noví dodavatelé nebo integrace:
+
+## Priorita
+- Dopad:
+- Důvěra:
+- Náročnost:
+- Riziko:
+- Rozhodnutí:
+```
+
 # Pracovní log
+- 2026-09-30: Doplněna příloha „Roadmapa bez HIPPO efektu a produktového hazardu“ s praktickým postupem prioritizace podle problémů, kartou nápadu, oddělením discovery/delivery/provozního dluhu, datovou brzdou, roadmap review, vědomým „teď ne“, checklistem a šablonou roadmap karty.
 - 2026-09-30: Doplněna příloha „Cookie souhlas bez temných vzorů a falešné volby“ s praktickým rozdělením technologií podle účelu, férovou symetrií souhlasu, varováním před dark patterns, provozní rutinou, checklistem, consent kartou a ověřenými zdroji EDPB a Evropské komise.
 - 2026-09-30: Doplněna příloha „Produktové metriky bez vanity dashboardu a datového vysavače“ s modelem rozhodnutí před eventy, severní hvězdou, podpůrnými signály, bezpečnostními brzdami, event katalogem, segmentací, měsíčním úklidem, checklistem, metrickou kartou a ověřenými zdroji Evropské komise a EDPB.
 
