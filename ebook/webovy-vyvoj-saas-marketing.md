@@ -20044,7 +20044,242 @@ Přístupnost není brzda rychlosti. Je to způsob, jak nestavět dluh, který p
 
 ---
 
+
+# Příloha: Produktové metriky bez vanity dashboardu a datového vysavače
+
+Produktové metriky mají pomáhat rozhodovat, ne vyrábět hezké grafy pro pondělní poradu. Malý SaaS nebo webová služba nepotřebuje znát každý pohyb kurzoru, každé scrollnutí a každý mikrosignál, který jde nacpat do event pipeline. Potřebuje vědět, jestli lidé rozumí hodnotě produktu, dokončí klíčovou akci, vrací se z dobrého důvodu a dostávají výsledek, za který má smysl platit.
+
+Privacy-first přístup tady není brzda. Je to filtr proti metrickému chaosu. Evropská komise u principů GDPR připomíná mimo jiné omezení účelu, minimalizaci údajů, omezení uložení a odpovědnost správce za prokázání souladu ([European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)). EDPB k článku 25 GDPR řeší data protection by design and by default jako návrhový princip, ne jako nálepku přilepenou na hotový systém ([EDPB: Guidelines 4/2019 on Article 25](https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en)). Přeloženo do řeči produktu: měř jen to, co má jasný účel, a už při návrhu funkce si řekni, co záměrně měřit nebudeš.
+
+> Codyho komentář: Pokud dashboard roste rychleji než produktové pochopení, nemáš analytiku. Máš akvárium s čísly. Hezky svítí, ale ryby ti strategii nenapíšou.
+
+## Začni rozhodnutím, ne eventem
+
+Nejhorší analytické zadání zní: „Pošleme tam všechny eventy, pak se uvidí.“ Uvidí se hlavně to, že tým za půl roku neví, co který event znamená, proč se sbírá a jestli ho smí použít pro nový účel. Lepší začátek je otázka: jaké rozhodnutí chceme díky metrice udělat?
+
+Praktický tvar:
+
+```text
+Potřebujeme rozhodnout, zda [změna / funkce / kanál] pomáhá [konkrétním uživatelům] dosáhnout [výsledku]. Proto budeme měřit [minimální signál] po dobu [časové okno] a nebudeme sbírat [zbytečná data].
+```
+
+Příklady:
+
+- Chceme vědět, jestli nový onboarding pomáhá dokončit první projekt. Měříme dokončení kroků a čas do první hodnotné akce, ne nahrávky obrazovky každého uživatele.
+- Chceme vědět, jestli dokumentace snižuje podporu. Měříme návštěvnost konkrétních návodů, vyhledávání v dokumentaci a počet ticketů k tématu, ne identitu každého čtenáře.
+- Chceme vědět, jestli pricing page vysvětluje tarify. Měříme kliknutí na férové CTA, dotazy k ceně a poměr kvalifikovaných poptávek, ne agresivní remarketing po každém návštěvníkovi.
+- Chceme vědět, jestli nová funkce drží hodnotu. Měříme opakované použití funkce v agregaci podle segmentu, ne obsah uživatelských dat uvnitř funkce.
+
+Metrika bez navázaného rozhodnutí je dekorace. A dekorace v databázi má nepříjemný zvyk časem získat status „kritického systému“, protože se jí nikdo nebojí vypnout.
+
+## Odděl produktové zdraví od marketingové zvědavosti
+
+Produktové metriky a marketingové metriky se často hází do jednoho pytle, ale mají jinou práci. Produktové zdraví odpovídá na otázku: dostávají uživatelé hodnotu? Marketingová efektivita odpovídá: přivádíme správné lidi správným způsobem? Když je smícháš, začneš optimalizovat produkt podle dat, která vznikla ještě před tím, než člověk pochopil nabídku.
+
+Privacy-first sada pro malý SaaS:
+
+- **Aktivace:** dokončil uživatel první hodnotnou akci?
+- **Adopce:** používá klíčovou funkci opakovaně?
+- **Retence:** vrací se proto, že produkt řeší reálnou práci?
+- **Kvalita:** kolik problémů vzniká na kritických cestách?
+- **Podpora:** které části produktu generují dotazy?
+- **Obchod:** které segmenty se mění v platící zákazníky bez nátlaku?
+
+Marketing může k tomu přidat zdroj návštěvy, kampaň, obsahovou stránku nebo referral. Ale nepotřebuje kvůli tomu automaticky znát osobní identitu každého návštěvníka. Pro mnoho rozhodnutí stačí agregace: kolik lidí přišlo na stránku, kolik pokračovalo, kolik dokončilo akci a jestli se změna drží i po týdnu.
+
+Pravidlo: identitu přidávej až ve chvíli, kdy bez ní nejde splnit legitimní produktový nebo smluvní účel. Ne proto, že „by se to jednou mohlo hodit“. Tohle je přesně ta věta, ze které rostou datové skládky.
+
+## Navrhni metriky ve třech vrstvách
+
+Jednoduchý model: severní hvězda, podpůrné signály a bezpečnostní brzdy.
+
+### 1. Severní hvězda
+
+Severní hvězda je jedna hlavní metrika hodnoty. Nemá to být obrat, počet registrací ani počet pageviews, pokud samy o sobě neříkají, že uživatel dostal výsledek.
+
+Příklady:
+
+- projektový nástroj: počet týmů, které týdně dokončí plánovanou práci,
+- fakturační SaaS: počet vystavených a odeslaných faktur bez chyby,
+- rezervační systém: počet úspěšně dokončených rezervací bez zásahu podpory,
+- obsahový web: počet čtenářů, kteří se vrací přes RSS nebo přímý odkaz a dočtou praktický návod,
+- B2B konzultační web: počet kvalifikovaných poptávek s jasným problémem, ne počet náhodných formulářů.
+
+Severní hvězda má mít jasný vztah k hodnotě pro zákazníka. Když se zlepší jen proto, že tým přidal tmavý vzor, je špatně definovaná.
+
+### 2. Podpůrné signály
+
+Podpůrné signály vysvětlují, proč se severní hvězda mění. Nemá jich být padesát. Pro jednu oblast vyber tři až pět.
+
+Příklad pro onboarding:
+
+- dokončení registrace,
+- vytvoření prvního projektu,
+- pozvání kolegy,
+- použití šablony,
+- návrat do 7 dnů.
+
+Příklad pro dokumentaci:
+
+- návštěvy klíčových návodů,
+- interní vyhledávací dotazy bez výsledku,
+- kliknutí na „kontaktovat podporu“ po přečtení návodu,
+- pokles ticketů k tématu,
+- aktualizované články za poslední měsíc.
+
+Tady je důležité nesklouznout k osobnímu sledování. U dokumentace často nepotřebuješ vědět, že konkrétní člověk četl článek v 10:43. Potřebuješ vědět, že lidé hledají „export dat“ a nenacházejí jasný postup.
+
+### 3. Bezpečnostní brzdy
+
+Bezpečnostní brzdy říkají, co se nesmí zhoršit, i kdyby hlavní metrika rostla.
+
+Příklady:
+
+- zrušení účtu nebo export dat nesmí být hůř dostupný než nákup,
+- konverze nesmí růst díky zavádějícím textům,
+- počet support ticketů nesmí růst rychleji než aktivace,
+- výkon stránky nesmí spadnout kvůli analytickým skriptům,
+- nové měření nesmí ukládat obsah uživatelských dat,
+- experiment nesmí zhoršit přístupnost kritické cesty.
+
+Bez brzd se z metrik stane hra. A hry mají jednu nevýhodu: lidé je začnou hrát, i když tím škodí produktu.
+
+## Event katalog drž krátký a s vlastníkem
+
+Event katalog je seznam toho, co měříš. Není to hřbitov JSON payloadů. Každý event má mít vlastníka, účel, retenční pravidlo a odpověď na otázku, jestli obsahuje osobní data.
+
+Minimální pole katalogu:
+
+```text
+Název eventu:
+Účel:
+Rozhodnutí, které podporuje:
+Vlastník:
+Kde vzniká:
+Kdy se posílá:
+Parametry:
+Obsahuje osobní data: ano/ne/nejisté
+Retence:
+Agregace:
+Kdo má přístup:
+Co záměrně neměříme:
+Datum poslední kontroly:
+```
+
+Dobré názvy eventů popisují dokončenou akci, ne interní implementaci:
+
+- `project_created`, ne `button_click_17`,
+- `invoice_sent`, ne `modal_submit`,
+- `export_requested`, ne `settings_blue_cta_clicked`,
+- `docs_search_no_result`, ne `input_enter_pressed`.
+
+Parametry drž nudné a předvídatelné. Například tarif, typ šablony, jazyk, anonymizovaný segment nebo typ zařízení. Vyhni se volným textům, názvům zákaznických projektů, e-mailům, IP adresám a obsahu dokumentů, pokud k tomu nemáš jasný účel, právní základ a ochranu. Volné textové pole v analytice je klasická cesta, jak si do dashboardu omylem natáhnout osobní údaje, tajemství nebo citlivý obsah. Datový vysavač opět vítězí nad zdravým rozumem.
+
+## Segmentuj bez šmírování
+
+Segmentace je užitečná, ale nemusí být invazivní. Produktový tým často potřebuje rozlišit malé týmy, agentury, enterprise zákazníky, trial a placené účty, nové a zkušené uživatele. Nepotřebuje ale automaticky profilovat jednotlivce podle všeho, co dělají.
+
+Bezpečnější segmenty:
+
+- typ účtu: trial, placený, interní test,
+- velikost týmu v hrubých pásmech,
+- tarif,
+- země nebo region na úrovni potřebné pro provoz, ne přesná poloha,
+- jazyk rozhraní,
+- zdroj registrace v agregaci,
+- produktová role, pokud ji uživatel sám nastaví.
+
+Rizikovější segmenty:
+
+- detailní behaviorální profily jednotlivců,
+- predikce citlivých vlastností,
+- spojování marketingových identifikátorů s produktovým účtem bez jasného účelu,
+- dlouhodobé ukládání surových eventů „pro jistotu“,
+- používání support obsahu jako analytického zdroje bez oddělení citlivých dat.
+
+Codyho praktické pravidlo: když segment neumíš vysvětlit zákazníkovi jednou větou bez pocitu trapnosti, znovu promysli, proč ho máš.
+
+## Udělej měsíční metrický úklid
+
+Analytika se nekazí jen tím, že něco neměří. Kazí se i tím, že měří staré věci, které už nikdo nepoužívá. Měsíční úklid zabere méně času než pozdější forenzní pátrání, proč dashboard ukazuje tři různé pravdy.
+
+Postup:
+
+1. Vyber všechny nové eventy za poslední měsíc.
+2. Ověř, že mají vlastníka a účel.
+3. Zkontroluj payloady proti osobním údajům a volným textům.
+4. Odstraň eventy bez rozhodnutí nebo bez čtenáře.
+5. Porovnej dashboardy s produktovými prioritami.
+6. U každé metriky napiš, jaké rozhodnutí naposledy změnila.
+7. Uprav retenční pravidla pro surová data a agregace.
+8. Zapiš změny do datové mapy.
+
+Pokud metrika za tři měsíce nezměnila žádné rozhodnutí, je kandidát na archivaci. Ne definitivně vždy, ale minimálně na otázku: proč ji pořád živíme?
+
+## Checklist: produktové metriky bez datového vysavače
+
+- [ ] Má každá hlavní metrika rozhodnutí, které podporuje?
+- [ ] Má produkt jednu severní hvězdu navázanou na hodnotu pro zákazníka?
+- [ ] Má každá oblast maximálně několik podpůrných signálů?
+- [ ] Existují bezpečnostní brzdy proti manipulaci, horší přístupnosti a horšímu supportu?
+- [ ] Má každý event vlastníka, účel, parametry a retenční pravidlo?
+- [ ] Neposílají se do analytiky volné texty, e-maily, názvy projektů nebo obsah zákaznických dat?
+- [ ] Stačí pro většinu rozhodnutí agregace místo identifikace jednotlivce?
+- [ ] Jsou marketingové a produktové metriky oddělené podle účelu?
+- [ ] Je segmentace vysvětlitelná zákazníkovi jednoduchou větou?
+- [ ] Probíhá měsíční úklid eventů a dashboardů?
+- [ ] Umíme říct, co záměrně neměříme a proč?
+- [ ] Je metrický katalog napojený na datovou mapu a retenční pravidla?
+
+## Mini šablona metrické karty
+
+```markdown
+# Metrická karta: [název metriky]
+
+## Rozhodnutí
+Jaké rozhodnutí má metrika podporovat:
+
+## Hodnota pro uživatele
+Jak souvisí s výsledkem zákazníka:
+
+## Definice
+Přesný výpočet:
+Časové okno:
+Segmenty:
+
+## Data
+Eventy / zdroje:
+Parametry:
+Osobní data: ano/ne/nejisté
+Agregace:
+Retence surových dat:
+Retence agregace:
+
+## Bezpečnostní brzdy
+Co se nesmí zhoršit:
+
+## Vlastnictví
+Vlastník:
+Kdo má přístup:
+Datum poslední kontroly:
+
+## Co neměříme
+Záměrně vynechaná data a důvod:
+```
+
+Produktové metriky mají být menší, ostřejší a užitečnější. Když tým umí říct „tahle metrika změnila toto rozhodnutí“, analytika pracuje. Když tým jen přidává eventy, protože to jde, pracuje hlavně budoucí úklidová četa. A ta většinou nemá dobrou náladu.
+
+## Zdroje
+
+- [European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
+- [European Commission: Obligations — data protection by design and by default](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en)
+- [EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en)
+
+---
+
 # Pracovní log
+- 2026-09-30: Doplněna příloha „Produktové metriky bez vanity dashboardu a datového vysavače“ s modelem rozhodnutí před eventy, severní hvězdou, podpůrnými signály, bezpečnostními brzdami, event katalogem, segmentací, měsíčním úklidem, checklistem, metrickou kartou a ověřenými zdroji Evropské komise a EDPB.
+
 - 2026-09-30: Doplněna příloha „Přístupnost webu a SaaS bez alibi a overlay kouzel“ s praktickým postupem pro kritické cesty, WCAG principy, komponenty, formuláře, testovací rutinu, dashboardy, dokumentaci, checklist, přístupnostní kartu a ověřené zdroje EU, MPO, W3C a WebAIM.
 
 - 2026-09-30: Doplněna příloha „Retence a mazání dat bez digitálního syslení“ s praktickým modelem retenčních vrstev, workflow mazání, pravidly pro zálohy a exporty, checklistem, retenční kartou a ověřenými zdroji Evropské komise, EUR-Lex, EDPB a CNIL.
