@@ -23513,7 +23513,188 @@ Dobrý odchozí webhook:
 - OWASP Web Service Security Cheat Sheet doporučuje šifrovat komunikaci webových služeb dobře nastaveným TLS a řešit integritu i autentizaci transportu: https://cheatsheetseries.owasp.org/cheatsheets/Web_Service_Security_Cheat_Sheet.html
 - OWASP Logging Cheat Sheet připomíná, že logy nemají ukládat citlivé údaje, tajemství, autentizační tokeny ani data nad rámec provozního účelu: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 
+# Příloha: Incidentová komunikace a status page bez mlžení
+
+Incident není jen technický stav. Je to okamžik, kdy zákazník zjišťuje, jestli ti může věřit i ve chvíli, kdy něco nefunguje. Malý tým často řeší monitoring, restart služby a databázi, ale zapomene na jednoduchou otázku: kdo komu řekne co, kdy a jakým jazykem? Ticho v incidentu nevypadá jako klid. Vypadá jako chaos s vypnutým mikrofonem.
+
+Dobrá incidentová komunikace není divadlo pro publikum. Je to provozní nástroj: snižuje počet duplicitních ticketů, chrání zákazníky před špatnými rozhodnutími, drží tým u jednoho zdroje pravdy a pomáhá po incidentu napsat lepší postmortem. Privacy-first přístup tu znamená dvě věci najednou: být dostatečně konkrétní pro zákazníka, ale neprozrazovat citlivé detaily, osobní údaje, interní infrastrukturu ani informace, které by útočníkům daly návod.
+
+> Codyho komentář: Nejhorší incidentová věta je „někteří uživatelé mohou pozorovat problémy“. To je kouřová clona, ne komunikace. Lepší je říct: „Přihlášení do administrace může selhávat. Veřejný web běží. Další update dáme v 10:30.“ Lidské, přesné, bez kabaretu.
+
+## Nejdřív odděl incident, výpadek a bezpečnostní událost
+
+Ne každá chyba je incident pro zákazníky a ne každý incident je porušení zabezpečení osobních údajů. Pokud všechno nazveš stejně, tým začne buď panikařit, nebo naopak ignorovat důležité signály.
+
+Praktické rozdělení:
+
+- **Provozní výpadek**: služba nefunguje nebo je výrazně zpomalená, ale nejsou indicie úniku nebo změny dat.
+- **Datová chyba**: služba běží, ale zobrazuje, zapisuje nebo synchronizuje špatná data.
+- **Bezpečnostní událost**: podezřelé přihlášení, zneužití API, škodlivý soubor, únik tokenu nebo chyba v oprávnění.
+- **Porušení zabezpečení osobních údajů**: událost dopadá na důvěrnost, dostupnost nebo integritu osobních údajů a potřebuje samostatné právní posouzení.
+
+GDPR v článku 33 řeší oznámení dozorovému úřadu bez zbytečného odkladu, pokud porušení zabezpečení osobních údajů pravděpodobně představuje riziko pro práva a svobody lidí; článek 34 pak řeší komunikaci subjektům údajů při vysokém riziku (oficiální znění: https://eur-lex.europa.eu/eli/reg/2016/679/oj). Pro malé SaaS z toho plyne jednoduchý provozní závěr: incidentová karta musí mít políčko „osobní údaje / riziko / kdo posuzuje“, ne jen technický popis.
+
+## Status page není reklamní plocha
+
+Status page má odpovědět na tři otázky: co je rozbité, koho se to týká a kdy přijde další update. Nepotřebuje marketingový tón, hero banner ani screenshot serverovny. Potřebuje být rychlá, dostupná mimo hlavní aplikaci a napsaná tak, aby ji pochopil člověk ve stresu.
+
+Minimum pro status page:
+
+- přehled komponent, které zákazník zná podle produktu, ne podle interní architektury,
+- aktuální stav: vyšetřujeme, identifikováno, opravujeme, sledujeme, vyřešeno,
+- čas poslední aktualizace a čas příští slíbené aktualizace,
+- dopad na zákazníky a doporučený workaround,
+- historie incidentů a údržby,
+- odběr přes RSS nebo e-mail bez marketingového přilepení.
+
+Privacy-first varianta status page raději mluví o dopadu než o interním detailu. „Export faktur se může zpozdit až o 30 minut“ je užitečnější než „worker invoice-export-eu-2 má zvýšenou latenci“. Interní název workeru nepomůže zákazníkovi a může zbytečně odhalit infrastrukturu.
+
+## První zpráva má být rychlá, ne dokonalá
+
+U incidentu často nevíš všechno hned. To není problém. Problém je předstírat jistotu nebo čekat hodinu na dokonalou formulaci. První zpráva má potvrdit, že o problému víš, jaký je viditelný dopad a kdy přijde další update.
+
+Šablona první zprávy:
+
+```text
+Vyšetřujeme problém s [část služby]. Dopad: [co zákazník pozoruje].
+Zatím nemáme potvrzený dopad na [data / platby / bezpečnost], ověřujeme to.
+Další update zveřejníme do [čas].
+```
+
+Příklad:
+
+```text
+Vyšetřujeme problém s přihlašováním do administrace. Veřejné weby zákazníků běží, ale část uživatelů se nemusí dostat do nastavení projektu. Zatím nemáme potvrzený dopad na zákaznická data, ověřujeme logy a přístupové události. Další update zveřejníme do 10:30.
+```
+
+Tahle zpráva není alibi. Je to závazek. Pokud slíbíš update v 10:30, napiš ho i ve chvíli, kdy zatím víš jen „stále opravujeme, rozsah se nemění“. Spolehlivý rytmus je během incidentu skoro stejně důležitý jako technická oprava.
+
+## Interní kanál musí mít jednoho kapitána
+
+Incident bez role incident commander se rychle změní v pět paralelních pravd. Jeden člověk má držet prioritu, čas dalšího updatu, rozhodnutí o eskalaci a finální poznámky. Nemusí to být nejzkušenější technik, ale musí mít mandát říct: „Teď neřešíme refaktor, teď obnovujeme službu.“
+
+Malý tým si vystačí s těmito rolemi:
+
+- **Incident commander**: řídí průběh, rozhoduje o prioritách a drží čas.
+- **Technický owner**: hledá příčinu a navrhuje opravu.
+- **Komunikace**: píše status page, zákaznické zprávy a interní shrnutí.
+- **Privacy/legal kontakt**: posuzuje osobní údaje, smlouvy, regulaci a povinnosti.
+
+U dvoučlenného týmu může jeden člověk držet více rolí, ale role musí být pojmenované. Jinak se stane klasika: všichni opravují, nikdo nekomunikuje, zákazníci píšou supportu a support nemá co říct. To je incident v incidentu, gratuluju, získal jsi bonusový level.
+
+## Bezpečnostní a datové incidenty komunikuj přes riziko, ne přes forenzní detaily
+
+Když incident může mít dopad na data nebo bezpečnost, komunikace musí být přesná a opatrná zároveň. Neříkej „data jsou v bezpečí“, dokud to neumíš doložit. Neříkej ani „uniklo všechno“, dokud to nevíš. Popiš potvrzený stav, ne hypotézy.
+
+Dobré formulace:
+
+- „Nemáme důkaz o neoprávněném přístupu k zákaznickým datům, ověřování pokračuje.“
+- „Potvrdili jsme neoprávněný přístup k metadatům účtu, nikoli k obsahu dokumentů.“
+- „Resetovali jsme dotčené tokeny a zákazníkům pošleme individuální instrukce.“
+- „Z preventivních důvodů doporučujeme rotaci API klíčů vytvořených před [datum].“
+
+Špatné formulace:
+
+- „Nemusíte se ničeho bát.“
+- „Byl to jen edge case.“
+- „Útočník by stejně nic nezískal.“
+- „Data pravděpodobně neunikla, ale nevíme.“
+
+EDPB má k notifikaci porušení zabezpečení osobních údajů samostatné příklady a scénáře v Guidelines 01/2021: https://www.edpb.europa.eu/documents/guideline/guidelines-012021-on-examples-regarding-personal-data-breach-notification_en. I když nejsi právník, pomůže ti to pochopit, že rozhodnutí „hlásit / nehlásit“ má vycházet z rizika pro lidi, ne z nálady týmu po třetí kávě.
+
+## Komunikační rytmus si připrav předem
+
+Incident není dobrý čas vymýšlet, kdo má přístup ke status page, kde je šablona e-mailu a jestli má support posílat stejnou odpověď všem. Připrav si rytmus dopředu.
+
+Doporučený rytmus:
+
+- první veřejná zpráva do 15–30 minut od potvrzení významného dopadu,
+- pravidelné updaty každých 30–60 minut u větších incidentů,
+- okamžitý update při změně dopadu nebo dostupném workaroundu,
+- po vyřešení krátké potvrzení a sledování stability,
+- do 3–5 pracovních dnů veřejné nebo zákaznické shrnutí podle závažnosti.
+
+ENISA ve svých materiálech k incidentům zdůrazňuje přípravu incident response plánu, komunikačních postupů a vazbu na příslušné autority nebo CSIRT podle kontextu organizace: https://tools.enisa.europa.eu/topics/risk-management/current-risk/bcm-resilience/bc-plan/incident-response-plan. U organizací spadajících do NIS2 se navíc objevuje strukturované hlášení významných incidentů, včetně časných varování a následných notifikací; ENISA shrnuje rámec incidentů a hrozeb zde: https://www.enisa.europa.eu/topics/state-of-cybersecurity-in-the-eu/threats-and-incidents. Pro malé firmy mimo regulovaný rozsah je to pořád dobrá inspirace: napiš si postup dřív, než ho budeš potřebovat.
+
+## Postmortem piš bez honu na viníka
+
+Postmortem má zlepšit systém, ne najít obětního maskota. Dobré shrnutí incidentu odpoví na to, co se stalo, proč se to stalo, jaký byl dopad, jak byla služba obnovena a co se změní, aby se riziko snížilo.
+
+Struktura postmortemu:
+
+- časová osa událostí,
+- viditelný dopad na zákazníky,
+- technická příčina v srozumitelném jazyce,
+- datový a bezpečnostní dopad,
+- co fungovalo dobře,
+- co zpomalilo obnovu,
+- konkrétní nápravná opatření s vlastníkem a termínem.
+
+Nepiš „zlepšíme monitoring“. Napiš „do 14 dnů přidáme alert na chybovost login callbacku nad 2 % po dobu 5 minut, vlastník: Petr“. Incident bez konkrétního follow-upu je drahý workshop o bolesti.
+
+## Checklist: incidentová komunikace bez mlžení
+
+- [ ] Máme rozlišené provozní, datové a bezpečnostní incidenty.
+- [ ] Víme, kdo může vyhlásit incident a kdo je incident commander.
+- [ ] Status page běží mimo hlavní aplikaci a má připravené komponenty.
+- [ ] Máme šablonu první zprávy, průběžného updatu a vyřešení.
+- [ ] Každý incident má čas příštího updatu.
+- [ ] Support má interní zdroj pravdy a nepíše odpovědi z fantazie.
+- [ ] U datového nebo bezpečnostního dopadu existuje samostatné privacy/legal posouzení.
+- [ ] Komunikace neobsahuje interní názvy systémů, tokeny, IP adresy ani zbytečné osobní údaje.
+- [ ] Po incidentu vznikne postmortem s vlastníky nápravných opatření.
+- [ ] RSS nebo přímý odběr statusu funguje bez marketingového trackingu.
+
+## Mini šablona incidentové karty
+
+```markdown
+# Incident karta: [název incidentu]
+
+## Stav
+- Stav: vyšetřujeme / identifikováno / opravujeme / sledujeme / vyřešeno
+- Incident commander:
+- Technický owner:
+- Komunikace:
+- Privacy/legal kontakt:
+
+## Dopad
+- Dotčené části služby:
+- Dotčení zákazníci / segment:
+- Viditelný symptom:
+- Workaround:
+- Dopad na osobní údaje: žádný / nejasný / potvrzený
+
+## Komunikace
+- První veřejná zpráva:
+- Další update do:
+- Kanály: status page / e-mail / support / administrace
+- Interní zdroj pravdy:
+
+## Oprava
+- Předpokládaná příčina:
+- Kroky obnovy:
+- Ověření stability:
+- Rollback plán:
+
+## Postmortem
+- Časová osa:
+- Root cause:
+- Co fungovalo:
+- Co zlepšit:
+- Nápravná opatření, vlastníci a termíny:
+```
+
+## Zdroje
+
+- GDPR článek 33 a 34 stanovují rámec pro oznámení porušení zabezpečení osobních údajů dozorovému úřadu a v některých případech také subjektům údajů: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- EDPB Guidelines 01/2021 uvádějí příklady vyhodnocování porušení zabezpečení osobních údajů a notifikačních scénářů: https://www.edpb.europa.eu/documents/guideline/guidelines-012021-on-examples-regarding-personal-data-breach-notification_en
+- ENISA Incident Response Plan popisuje potřebu připraveného incident response plánu a postupů pro zvládání incidentů: https://tools.enisa.europa.eu/topics/risk-management/current-risk/bcm-resilience/bc-plan/incident-response-plan
+- ENISA Threats and Incidents shrnuje evropský kontext incidentů, CSIRT a hlášení významných kybernetických incidentů včetně NIS2 rámce: https://www.enisa.europa.eu/topics/state-of-cybersecurity-in-the-eu/threats-and-incidents
+- OWASP Logging Cheat Sheet připomíná, že logy nemají obsahovat citlivé údaje, tokeny ani zbytečná osobní data; stejné pravidlo se hodí i pro incidentovou komunikaci: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
 # Pracovní log
+- 2026-09-30: Doplněna příloha „Incidentová komunikace a status page bez mlžení“ s rozlišením typů incidentů, pravidly pro status page, první zprávou, rolemi v malém týmu, bezpečnostní/datovou komunikací, rytmem updatů, postmortemem, checklistem, incidentovou kartou a ověřenými zdroji GDPR, EDPB, ENISA a OWASP.
+
 - 2026-09-30: Rozšířena příloha „Staging a testovací data bez úniku produkce“ o auditovatelný refresh testovacích dat, transformační skript, automatické kontroly proti úniku reálných e-mailů/tokenů/webhook URL, práci s volnými texty a ověřený zdroj EDPB k anonymizaci a pseudonymizaci.
 
 - 2026-09-30: Doplněna příloha „Webhooky a integrace bez slepé důvěry v cizí požadavky“ s mapou integrací, ověřováním podpisů, asynchronním zpracováním, idempotencí, validací payloadů, privacy-first logováním, retry/dead-letter postupem, pravidly pro odchozí webhooky, checklistem, webhook kartou a ověřenými zdroji GitHub, Stripe a OWASP.
