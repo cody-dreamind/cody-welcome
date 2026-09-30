@@ -22032,8 +22032,200 @@ Tím bezpečnostní dotazník přestane být administrativní opruz a začne bý
 - Poznámky z posledních dotazníků:
 ```
 
+# Příloha: Vyhledávání na webu a v nápovědě bez datového vysavače
+
+Interní vyhledávání je často podceňovaný produktový signál. Když člověk něco hledá na webu, v dokumentaci nebo v help centru, říká ti velmi přesně: „Tady mi něco chybí.“ Jenže z toho neplyne, že máš sbírat každý dotaz navždy, spojovat ho s identitou uživatele a posílat do pěti reklamních systémů. To není search analytics. To je detektivka s formulářovým polem.
+
+Dobré privacy-first vyhledávání pomáhá lidem najít odpověď rychleji a týmu ukazuje mezery v obsahu. Špatné vyhledávání vytváří další databázi osobních údajů, protože lidé do search boxu píšou e-maily, čísla objednávek, zdravotní poznámky, názvy klientů, interní projekty i zoufalé věty typu „nejde mi fakturace, pomóc“. Ano, search pole je malý zpovědní box. Chovej se podle toho.
+
+> Codyho komentář: Vyhledávací dotaz je často upřímnější než feedback formulář. Právě proto si zaslouží víc respektu a méně chamtivosti.
+
+## Nejdřív rozhodni, proč dotazy ukládáš
+
+Neukládej dotazy jen proto, že to nástroj umí. Ulož je jen tehdy, když z nich budeš dělat konkrétní rozhodnutí.
+
+Dobré důvody:
+
+- zjistit, která témata chybí v dokumentaci,
+- najít fráze, kterým lidé říkají jinak než tým,
+- odhalit stránky, které existují, ale nejsou nalezitelné,
+- zlepšit synonyma a navigaci,
+- prioritizovat články v help centru,
+- sledovat, jestli lidé po vyhledání našli výsledek bez kontaktování podpory.
+
+Slabé důvody:
+
+- „hodí se to do budoucna“,
+- „marketing chce všechna klíčová slova“,
+- „někdy z toho uděláme personalizaci“,
+- „konkurence má taky search dashboard“.
+
+Princip minimalizace v GDPR říká, že osobní data mají být přiměřená, relevantní a omezená na to, co je nutné pro daný účel. Evropská komise to shrnuje v části o [minimalizaci dat](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en). Prakticky: když potřebuješ měsíční seznam chybějících témat, nepotřebuješ k tomu dlouhodobou historii dotazů navázanou na konkrétního člověka.
+
+## Search pole je vstup od uživatele, ne čistý signál
+
+Vyhledávací dotaz ber jako nestrukturovaný uživatelský vstup. To znamená tři pravidla:
+
+1. může obsahovat osobní nebo citlivé údaje,
+2. může obsahovat technicky škodlivý obsah,
+3. může být úplně jiný, než tým čekal.
+
+U webu nebo SaaS proto nastav před uložením dotazu jednoduché filtry:
+
+- zkrať dotaz na rozumnou délku,
+- normalizuj mezery a řídicí znaky,
+- maskuj e-maily, telefonní čísla, tokeny a dlouhé identifikátory,
+- neukládej dotazy z administrace, pokud mohou obsahovat interní nebo zákaznická data,
+- neukládej vyhledávání v účtu, kde lidé hledají vlastní dokumenty, faktury nebo zprávy, pokud pro to nemáš jasný účel a pravidla.
+
+OWASP u logování doporučuje citlivé údaje neukládat přímo, ale odstraňovat, maskovat, sanitizovat, hashovat nebo šifrovat podle rizika. Stejnou logiku použij i na search analytics, protože uložené dotazy jsou v praxi také provozní log. Viz [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html).
+
+## Měř méně, ale užitečněji
+
+Pro většinu malých webů a B2B SaaS stačí agregovaná měsíční tabulka. Nezačínej personalizací. Začni otázkami:
+
+- Jaké dotazy neměly žádný výsledek?
+- Jaké dotazy vedly na špatný článek?
+- Jaké dotazy se opakují napříč zákazníky?
+- Které dotazy končí kontaktem na podporu?
+- Které dotazy signalizují chybějící produktovou funkci?
+
+U každého dotazu ukládej ideálně jen:
+
+- normalizovaný text dotazu,
+- počet výskytů za období,
+- počet nulových výsledků,
+- cílovou stránku nebo kategorii výsledku,
+- anonymní typ kontextu, například „veřejný web“, „dokumentace“, „help centrum“, „aplikace“.
+
+Neukládej jako výchozí režim:
+
+- e-mail uživatele,
+- IP adresu,
+- session ID,
+- celý referrer,
+- obsah účtu,
+- přesný čas každého dotazu,
+- kompletní historii vyhledávání jednoho člověka.
+
+Pokud opravdu potřebuješ ladit konkrétní problém, zapni detailnější režim jen dočasně, s jasnou expirací a omezeným přístupem. Debug režim bez konce je jen pomalé budování skládky.
+
+## Nulové výsledky jsou obsahový brief
+
+Nejužitečnější metrika není počet vyhledávání. Je to počet dotazů, které skončily bez dobré odpovědi.
+
+Každý měsíc si vezmi 20 nejčastějších nulových nebo slabých dotazů a rozděl je do čtyř košů:
+
+- **Chybí článek:** lidé hledají téma, které vůbec nemáš.
+- **Špatný slovník:** článek existuje, ale používá interní výraz místo jazyka zákazníka.
+- **Špatná navigace:** obsah existuje, ale nejde najít bez vyhledávání.
+- **Produktový signál:** lidé hledají funkci, nastavení nebo stav, který produkt neumí dobře vysvětlit.
+
+Z toho vznikne praktický plán:
+
+- přidej článek nebo FAQ,
+- doplň synonyma,
+- přejmenuj navigační položku,
+- uprav onboarding,
+- přidej vysvětlení přímo do produktu,
+- založ produktovou kartu do roadmapy.
+
+Takhle search analytics neslouží ke šmírování lidí, ale k opravě produktu. Elegantní, levné, skoro až podezřele rozumné.
+
+## Vyhledávání musí být přístupné a čitelné
+
+Search box není designová dekorace. Je to formulářový prvek, který má mít jasný popisek, predikovatelné chování a použitelnou klávesnici.
+
+Praktické minimum:
+
+- viditelný label nebo jasné textové označení, ne jen ikonka lupy,
+- placeholder nepoužívej jako jediný popisek,
+- tlačítko „Hledat“ má mít srozumitelný text nebo přístupný název,
+- výsledky oznamuj textem: „Nalezeno 12 výsledků“, „Nic jsme nenašli“,
+- nulový stav nabídne další krok, například odkazy na hlavní kategorie nebo kontakt,
+- klávesnice musí umět otevřít pole, projít návrhy a odeslat dotaz,
+- autocomplete nesmí přepisovat dotaz bez potvrzení.
+
+W3C u WCAG 2.2 vysvětluje kritérium [Labels or Instructions](https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions): uživatelé mají vědět, jaké informace mají zadat. U search pole to zní banálně, dokud nenarazíš na ikonu bez labelu a výsledky, které se po každém písmenu mění jako nervózní papoušek.
+
+## Doporučený privacy-first návrh pro malý web
+
+Pro veřejný web nebo dokumentaci začni tímto modelem:
+
+- vyhledávání běží na vlastním webu nebo u dodavatele s evropským provozem a rozumnou smluvní kontrolou,
+- dotazy se ukládají agregovaně po dnech nebo týdnech,
+- před uložením se maskují e-maily, telefony, tokeny a dlouhé identifikátory,
+- nulové výsledky se ukládají odděleně jako obsahový backlog,
+- surové dotazy se mažou rychle, například po 7–30 dnech, pokud je vůbec potřebuješ,
+- měsíční report obsahuje jen agregace a návrhy úprav obsahu,
+- žádné reklamní publikum, remarketing ani profilování z vyhledávacích dotazů.
+
+U SaaS aplikace přidej ještě hranice:
+
+- v účtových datech neměř obsah dotazu bez jasného účelu,
+- pro support ladění používej časově omezené debug logy,
+- administrátorům nezobrazuj citlivé dotazy celé, pokud stačí maskovaná verze,
+- ve veřejné dokumentaci odděl vyhledávání od zákaznického obsahu,
+- v DPA a registru zpracování uveď, jestli search dodavatel vidí osobní data.
+
+## Checklist: search bez datového vysavače
+
+- [ ] Víme, jaké rozhodnutí z vyhledávacích dat děláme.
+- [ ] Neukládáme dotazy navázané na identitu, pokud to není nutné.
+- [ ] Před uložením maskujeme e-maily, telefony, tokeny a dlouhé identifikátory.
+- [ ] Sledujeme nulové výsledky a slabé výsledky jako obsahový backlog.
+- [ ] Search pole má viditelný label nebo jinou jasnou instrukci.
+- [ ] Výsledky a nulové stavy jsou použitelné klávesnicí i čtečkou.
+- [ ] Retence surových dotazů je krátká a zdokumentovaná.
+- [ ] Přístup k dotazům má jen tým, který z nich zlepšuje obsah nebo produkt.
+- [ ] Vyhledávací data neposíláme do reklamních ani remarketingových systémů.
+- [ ] Jednou měsíčně mažeme nepotřebné exporty a uzavíráme vyřešené dotazy.
+
+## Mini šablona search karty
+
+```markdown
+# Search karta: [web / dokumentace / help centrum / aplikace]
+
+## Účel
+- Proč vyhledávání měříme:
+- Jaké rozhodnutí z dat děláme:
+- Vlastník rozhodnutí:
+
+## Data
+- Ukládaná pole:
+- Maskovaná pole:
+- Co výslovně neukládáme:
+- Retence surových dotazů:
+- Retence agregací:
+
+## Přístupnost
+- Label nebo instrukce:
+- Klávesnicové chování:
+- Nulový stav:
+- Oznámení počtu výsledků:
+
+## Provoz
+- Kdo má přístup k reportu:
+- Měsíční review datum:
+- Typické akce po review:
+- Dodavatel / hosting:
+
+## Backlog
+- Top nulové dotazy:
+- Nové články:
+- Synonyma k doplnění:
+- Produktové signály:
+```
+
+## Zdroje
+
+- [European Commission: Principles of the GDPR — data minimisation](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
+- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- [W3C WCAG 2.2 Understanding: Labels or Instructions](https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions)
+
 # Pracovní log
 
+- 2026-09-30: Doplněna příloha „Vyhledávání na webu a v nápovědě bez datového vysavače“ s privacy-first přístupem k search analytics, minimalizací ukládaných dotazů, maskováním citlivých údajů, prací s nulovými výsledky, přístupností search pole, checklistem, search kartou a ověřenými zdroji Evropské komise, OWASP a W3C.
 - 2026-09-30: Doplněna příloha „Bezpečnostní dotazníky v B2B salesu bez improvizačního divadla“ s odpovědní bankou, pravidly přesných odpovědí, rozdělením veřejných/zákaznických/citlivých informací, procesem spolupráce obchodu a technických vlastníků, prací s důkazy, privacy-first hranicemi sdílení, měsíční zpětnou vazbou, checklistem a vyplnitelnou odpovědní kartou.
 - 2026-09-30: Doplněna příloha „Feature flagy a rollouty bez produkční rulety“ s rozlišením deployment/release/experiment, typy flagů podle životnosti, pravidlem že flag nenahrazuje autorizaci, rollout plánem, privacy-first měřením experimentů, testováním kill switchů, úklidem flag debt, checklistem, vyplnitelnou flag kartou a ověřenými zdroji Martin Fowler, OWASP a NIST.
 - 2026-09-30: Doplněna příloha „Incidentová komunikace a status page bez paniky a mlžení“ s dopadovou škálou P1–P4, rolemi, rytmem status updatů, privacy-first pravidly pro komunikaci, support makry, postmortem šablonou, checklistem a ověřenými zdroji Google SRE, NCSC a ENISA.
