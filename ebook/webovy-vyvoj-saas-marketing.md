@@ -23264,7 +23264,237 @@ OWASP má samostatný materiál k regresnímu testování autorizace, který dop
 - NIST CSRC definuje least privilege jako omezení přístupu na oprávnění nutná pro splnění určených úkolů: https://csrc.nist.gov/glossary/term/least_privilege
 - EDPB v průvodci pro malé firmy vysvětluje data protection by design and by default, včetně minimalizace dat, omezení uložení a přístupnosti jen pro konkrétní účel: https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en
 
+# Příloha: Webhooky a integrace bez slepé důvěry v cizí požadavky
+
+Webhook je pohodlný způsob, jak se SaaS dozví, že se něco stalo jinde: proběhla platba, dorazil formulář, změnil se stav objednávky, někdo přidal commit nebo externí služba dokončila zpracování. Pohodlí má ale háček. Webhook endpoint je veřejná vstupní brána do tvého systému. Když ji navrhneš stylem „přijde JSON, tak mu věříme“, postavíš si malou automatizovanou díru ve zdi a ještě jí dáš hezkou URL.
+
+Privacy-first integrace není integrace bez dat. Je to integrace, která přijímá jen nutná data, ověřuje původ zprávy, zpracovává události idempotentně a nezapisuje do logů celý život zákazníka. Nudné? Ano. Přesně proto to funguje.
+
+> Codyho komentář: Webhook není kamarád, který zazvonil u dveří. Je to balíček položený před domem. Nejdřív zkontroluj štítek, pečeť a jestli jsi ho vůbec čekal. Pak teprve rozbaluj.
+
+## Začni mapou integrací
+
+Než začneš řešit kód, napiš si seznam všech příchozích a odchozích integrací. U každé integrace potřebuješ vědět:
+
+- kdo událost posílá,
+- proč ji přijímáš,
+- jaký byznys stav mění,
+- jaká data přichází,
+- jak ověřuješ podpis nebo původ,
+- co se stane při duplicitě, zpoždění nebo výpadku,
+- kdo je vlastník integrace.
+
+Příklad pro SaaS:
+
+| Integrace | Událost | Dopad | Kritičnost | Data |
+|---|---|---:|---:|---|
+| Platební brána | `invoice.paid` | prodlouží předplatné | vysoká | ID zákazníka, ID faktury, částka, měna |
+| Git hosting | `push` | spustí preview build | střední | repo, branch, commit SHA |
+| Formulář | `lead.created` | vytvoří poptávku | střední | jméno, e-mail, zpráva |
+| AI služba | `job.completed` | uloží výsledek úlohy | vysoká | ID úlohy, stav, odkaz na výsledek |
+
+Když tabulku neumíš vyplnit, integrace je provozní dluh převlečený za automatizaci.
+
+## Ověř podpis, ne jen tajnou URL
+
+Tajná adresa webhooku je slabá ochrana. URL může uniknout v logu, screenshotu, konfiguračním exportu nebo historii prohlížeče. Základ je podpis zprávy pomocí sdíleného tajemství nebo jiného ověřovacího mechanismu, který doporučuje konkrétní poskytovatel.
+
+GitHub například doporučuje používat webhook secret a ověřit podpis před dalším zpracováním, aby endpoint nezpracovával zprávy, které nebyly odeslány GitHubem nebo mohly být upraveny cestou. Stripe u webhooků pracuje se signing secret a hlavičkou podpisu; dobrá implementace používá raw request body, oficiální knihovnu nebo přesně popsaný algoritmus poskytovatele.
+
+Praktické pravidlo:
+
+1. Přijmi request.
+2. Zkontroluj metodu a `Content-Type`.
+3. Ověř podpis nad přesným raw tělem požadavku.
+4. Zkontroluj časové okno nebo unikátní ID doručení, pokud ho poskytovatel posílá.
+5. Teprve potom parsuj payload a posílej událost do fronty.
+
+Nedělej:
+
+- ověření až po změně stavu v databázi,
+- vlastní kryptografii „protože je to jen interní webhook“,
+- porovnávání podpisů obyčejným string porovnáním, pokud framework nabízí bezpečnější constant-time funkci,
+- ukládání webhook secretu do repozitáře,
+- vypnutí ověřování v produkci „dočasně“, což v překladu znamená do nejbližšího incidentu.
+
+## Zpracovávej rychle, práci odlož do fronty
+
+Webhook endpoint má potvrdit přijetí, ne dělat celou ekonomiku firmy v jednom HTTP requestu. GitHub ve svých best practices uvádí, že server má odpovědět 2xx do krátkého limitu a delší práci zpracovat asynchronně. To je dobré pravidlo obecně: endpoint ověří zprávu, uloží obálku události a vrátí odpověď. Vlastní práce běží ve frontě.
+
+Proč:
+
+- poskytovatelé webhooky opakují při timeoutu,
+- pomalý endpoint vytváří duplicitní události,
+- dlouhé zpracování zhoršuje debugování,
+- výpadek jedné závislosti nemá položit celý příjem událostí.
+
+Minimální architektura:
+
+```text
+HTTP endpoint → ověření podpisu → uložení delivery ID → fronta → worker → byznys změna → auditní událost
+```
+
+U malého SaaS může být „fronta“ klidně databázová tabulka se stavem `received`, `processing`, `processed`, `failed`. Nemusíš hned zavádět orchestrace, která vypadá jako letištní dispečink. Potřebuješ hlavně opakovatelnost a dohledatelnost.
+
+## Idempotence: stejná událost nesmí dvakrát účtovat
+
+Webhooky chodí víckrát. Někdy oprávněně, někdy kvůli retry logice, někdy kvůli ručnímu přeposlání. Proto musí být zpracování idempotentní: stejná událost se může přijmout opakovaně, ale byznys efekt proběhne jen jednou.
+
+U každé integrační události si ulož:
+
+- ID poskytovatele události nebo delivery ID,
+- zdroj integrace,
+- hash relevantního payloadu,
+- čas přijetí,
+- stav zpracování,
+- výsledek a případnou chybu.
+
+Příklad pravidla:
+
+```text
+Pokud už existuje úspěšně zpracovaná událost provider=stripe a event_id=evt_123, neprodlužuj předplatné znovu. Vrať technické OK a zapiš duplicitní doručení.
+```
+
+Tohle je rozdíl mezi robustním SaaS a účetním hororem, kde zákazník dostane tři faktury, protože někde škytla síť.
+
+## Validuj payload podle účelu
+
+Ověřený podpis neznamená, že máš bezhlavě věřit každému poli. Znamená jen, že zpráva pravděpodobně přišla od daného poskytovatele a nebyla cestou změněna. Pořád musíš validovat obsah.
+
+Kontroluj:
+
+- očekávaný typ události,
+- existenci zákazníka nebo tenant hranice,
+- měnu, částku a stav u plateb,
+- že objekt patří správnému účtu,
+- že přechod stavu dává smysl,
+- že ignoruješ pole, která nepotřebuješ.
+
+OWASP API Security Top 10 2023 upozorňuje na rizika kolem objektové a property-level autorizace. Pro webhooky to znamená jednoduchou věc: nestačí přijmout `customer_id` z payloadu a něco s ním udělat. Musíš ověřit vazbu na vlastní interní záznamy a nepouštět cizí objekt do špatného tenant prostoru.
+
+## Loguj obálku, ne celé osobní příběhy
+
+Webhook logy jsou lákavé. Když se něco pokazí, tým chce vidět payload. Jenže payload často obsahuje e-mail, jméno, adresu, položky objednávky, poznámky, metadata a občas i věci, které tam vůbec neměly být. Privacy-first přístup říká: loguj to, co potřebuješ pro provozní diagnózu, ne všechno pro jistotu.
+
+Do běžného logu patří:
+
+- zdroj integrace,
+- typ události,
+- delivery ID nebo event ID,
+- korelační ID,
+- výsledek ověření podpisu,
+- stav zpracování,
+- stručný kód chyby.
+
+Do běžného logu nepatří:
+
+- celé request body,
+- podpisové secrety,
+- tokeny,
+- celé adresy a kontaktní údaje,
+- obsah dokumentů, zpráv nebo komentářů,
+- platební údaje mimo nezbytné referenční ID.
+
+Pokud potřebuješ uložit payload pro retry, ulož ho šifrovaně, s krátkou retencí a omezeným přístupem. Debug režim má mít expiraci. Debug režim bez expirace je archiv incidentů, který jen čeká, až se stane dalším incidentem.
+
+## Retry a dead-letter queue nejsou detail
+
+Integrace selhávají. Poskytovatel pošle událost pozdě, tvůj worker spadne, databáze má výpadek nebo změna schématu rozbije parser. Potřebuješ vědět, co se stalo a jak událost bezpečně zopakovat.
+
+Minimální pravidla:
+
+- dočasné chyby opakuj s backoffem,
+- trvalé chyby pošli do `failed` stavu s důvodem,
+- ruční replay musí znovu projít idempotencí,
+- nikdy neopakuj událost tak, aby přeskočila ověření původu uloženého záznamu,
+- pro kritické integrace měj alert na frontu zaseknutých událostí.
+
+U plateb, přístupů a mazání dat si dej zvláštní pozor. Automatický retry nesmí opakovaně rušit účet, mazat data nebo měnit oprávnění bez kontrolní brzdy.
+
+## Odchozí webhooky: neposílej zákazníkům datový balík navíc
+
+Pokud tvůj SaaS posílá webhooky zákazníkům, platí stejná disciplína obráceně. Posílej jen události, které zákazník potřebuje, a payload navrhni jako produktové API, ne jako dump databázového řádku.
+
+Dobrý odchozí webhook:
+
+- má jasný seznam eventů,
+- má verzi payloadu,
+- obsahuje stabilní ID objektů,
+- má podpis zprávy,
+- má dokumentované retry chování,
+- neobsahuje interní poznámky a citlivá pole,
+- umožňuje zákazníkovi webhook vypnout nebo rotovat secret.
+
+Špatný odchozí webhook:
+
+- posílá `user` objekt se všemi poli,
+- mění strukturu bez verze,
+- nemá podpis,
+- při chybě posílá nekonečné retry bez limitu,
+- loguje odpovědi zákaznických endpointů včetně citlivých dat.
+
+## Checklist: webhooky bez slepé důvěry
+
+- [ ] Máme seznam všech příchozích a odchozích webhooků.
+- [ ] Každý webhook má vlastníka, účel a kritičnost.
+- [ ] Příchozí webhooky ověřují podpis nebo doporučený mechanismus poskytovatele.
+- [ ] Secret není v repozitáři a umíme ho rotovat.
+- [ ] Endpoint po ověření rychle ukládá událost a delší práci řeší asynchronně.
+- [ ] Zpracování je idempotentní podle event/delivery ID.
+- [ ] Payload validujeme podle typu události, tenant hranice a očekávaného stavu.
+- [ ] Běžné logy neobsahují celé payloady, tokeny ani zbytečné osobní údaje.
+- [ ] Retry a ruční replay znovu respektují idempotenci a bezpečnostní pravidla.
+- [ ] Odchozí webhooky mají verzi, podpis, dokumentaci a minimalistický payload.
+
+## Mini šablona webhook karty
+
+```markdown
+# Webhook karta: [název integrace]
+
+## Účel
+- Zdroj / cíl:
+- Události:
+- Jaké rozhodnutí nebo stav mění:
+- Kritičnost:
+
+## Bezpečnost
+- Ověření podpisu / původu:
+- Kde je secret uložen:
+- Rotace secretu:
+- Replay ochrana:
+
+## Data
+- Přijímaná / odesílaná pole:
+- Pole, která ignorujeme:
+- Osobní údaje:
+- Retence uloženého payloadu:
+
+## Zpracování
+- Idempotency klíč:
+- Fronta / worker:
+- Retry pravidla:
+- Dead-letter postup:
+
+## Provoz
+- Alerty:
+- Dashboard:
+- Vlastník:
+- Poslední test replaye:
+```
+
+## Zdroje
+
+- GitHub Docs doporučují ověřovat podpis webhook delivery pomocí webhook secretu před dalším zpracováním: https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries
+- GitHub Docs v best practices doporučují používat webhook secret, HTTPS, rychlou 2xx odpověď a řešit replay pomocí unikátní delivery hlavičky: https://docs.github.com/en/webhooks/using-webhooks/best-practices-for-using-webhooks
+- Stripe dokumentace k webhook endpointům popisuje výběr konkrétních eventů a konfiguraci endpointu místo bezhlavého posílání všeho: https://docs.stripe.com/api/webhook_endpoints/create
+- Stripe podpůrná dokumentace uvádí, že webhook deliveries obsahují ověřitelné podpisy a přichází z publikovaných IP adres: https://support.stripe.com/questions/why-is-stripe-trying-to-reach-my-webhook-endpoints
+- OWASP API Security Top 10 2023 upozorňuje mimo jiné na Broken Object Property Level Authorization, tedy riziko práce s objektovými poli bez správné autorizace: https://api-security.owasp.org/editions/2023/en/0x11-t10/
+- OWASP Web Service Security Cheat Sheet doporučuje šifrovat komunikaci webových služeb dobře nastaveným TLS a řešit integritu i autentizaci transportu: https://cheatsheetseries.owasp.org/cheatsheets/Web_Service_Security_Cheat_Sheet.html
+- OWASP Logging Cheat Sheet připomíná, že logy nemají ukládat citlivé údaje, tajemství, autentizační tokeny ani data nad rámec provozního účelu: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
 # Pracovní log
+- 2026-09-30: Doplněna příloha „Webhooky a integrace bez slepé důvěry v cizí požadavky“ s mapou integrací, ověřováním podpisů, asynchronním zpracováním, idempotencí, validací payloadů, privacy-first logováním, retry/dead-letter postupem, pravidly pro odchozí webhooky, checklistem, webhook kartou a ověřenými zdroji GitHub, Stripe a OWASP.
+
 - 2026-09-30: Doplněna příloha „Přístupová práva v SaaS bez role ‚všechno všem‘“ s postupem od mapy citlivých akcí přes srozumitelné role, server-side autorizaci, druhé brzdy pro rizikové operace, auditní logy, support přístup, negativní testy, checklist, šablonu role karty a ověřené zdroje OWASP, NIST a EDPB.
 
 - 2026-09-30: Doplněna příloha „CSV exporty a reporty bez tabulkového průšvihu“ s praktickým nastavením účelu exportu, minimalizací sloupců, ochranou proti CSV/formula injection, metadaty sloupců, řízením rolí, retencí souborů, UX brzdami proti omylům, checklistem, exportní kartou a ověřenými zdroji OWASP, EDPB, W3C a GOV.UK.
