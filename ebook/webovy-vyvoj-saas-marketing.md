@@ -22395,8 +22395,273 @@ U přístupnosti nezapomeň, že upload potřebuje label, instrukce předem, či
 - W3C Web Accessibility Initiative popisuje obecná pravidla pro přístupné formuláře, instrukce a chybové stavy: https://www.w3.org/WAI/tutorials/forms/
 - Evropská komise shrnuje princip minimalizace osobních údajů v GDPR: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 
+# Příloha: Lokalizace webu a SaaS bez jazykového guláše
+
+Lokalizace není jen překlad tlačítka „Submit“ na „Odeslat“. Je to schopnost produktu mluvit jazykem zákazníka, správně zacházet s daty, měnami, časem, právními texty a očekáváním lidí v konkrétním trhu. Když ji uděláš dobře, uživatel skoro nic nepozná. Když ji uděláš špatně, člověk zaplatí 1.234 Kč místo 1 234 Kč, dostane připomínku v jiném časovém pásmu a privacy notice v jazyce, kterému nerozumí. Elegantní cesta k support ticketu, jen co je pravda.
+
+Pro evropský privacy-first SaaS je lokalizace důležitá i strategicky. Evropa není jeden homogenní trh s jedním jazykem, jedním formátem faktur a jedním právním očekáváním. Český B2B zákazník často snese anglické UI, ale právní informace, fakturace, souhlasy, bezpečnostní komunikace a podpora musí být srozumitelné. Jinak produkt nevypadá globálně. Vypadá nedotaženě.
+
+> Codyho komentář: Lokalizace není kosmetika. Je to respekt k tomu, že zákazník nemá luštit tvůj interní svět jen proto, že framework měl výchozí locale `en-US` a nikdo se nechtěl hádat s datem.
+
+## Rozliš jazyk, region a trh
+
+První chyba je míchat dohromady jazyk, zemi, měnu a právní režim. Čeština neznamená automaticky Česká republika. Angličtina neznamená automaticky USA. Uživatel může chtít anglické rozhraní, českou fakturační adresu, platbu v eurech a dokumenty podle evropských pravidel.
+
+Přemýšlej ve čtyřech vrstvách:
+
+- **Jazyk UI:** texty v aplikaci, nápověda, chybové hlášky.
+- **Locale:** formát data, času, čísel, měny, desetinných oddělovačů a řazení.
+- **Trh:** ceny, daňové informace, fakturační požadavky, dostupnost funkcí.
+- **Právní a privacy kontext:** zásady zpracování dat, souhlasy, smlouvy, subprocesory, kontakt na podporu.
+
+Praktický příklad: firma ze Slovenska může používat aplikaci v češtině, platit v eurech, chtít fakturu se slovenskými údaji a mít administrátora, který preferuje anglické rozhraní. Pokud máš v databázi jedno pole `language` a podle něj odvozuješ všechno ostatní, zaděláváš si na chaos.
+
+Minimum pro SaaS profil:
+
+```text
+User interface language: cs / en / sk
+User locale: cs-CZ / sk-SK / en-GB
+Workspace billing country: CZ / SK / DE
+Billing currency: CZK / EUR
+Legal document language: cs / en / sk
+Timezone: Europe/Prague
+```
+
+Ne všechno musí být nastavitelné hned v první verzi. Ale datový model by neměl předpokládat, že svět končí za hranicí jedné země a jednoho formátu data.
+
+## Data, čas a měna: malé rozdíly, velké chyby
+
+Datum `03/04/2026` je krásný test pokory. Je to 3. dubna, nebo 4. března? Záleží na locale. Proto ve vnitřním systému ukládej čas strojově a jednoznačně, ale zobrazuj ho lidsky podle kontextu.
+
+Praktická pravidla:
+
+- Interně ukládej timestampy v jednoznačném formátu a s časovým pásmem.
+- V UI zobrazuj datum a čas podle locale uživatele nebo workspace.
+- U plánovaných událostí ukaž časové pásmo explicitně.
+- U faktur a plateb zobrazuj měnu s kódem tam, kde může dojít k záměně.
+- Nepiš vlastní formátovací funkce, pokud můžeš použít ověřené locale knihovny.
+- V exportech uváděj formát data ve sloupci nebo dokumentaci.
+
+Unicode CLDR je rozsáhlý zdroj locale dat pro formátování dat, časů, čísel, měn a dalších kulturně závislých hodnot (https://cldr.unicode.org/, https://cldr.unicode.org/index/cldr-spec). Pro vývojáře je praktický závěr jednoduchý: nesnaž se ručně vymyslet, jak se kde píše datum, měna nebo desetinná čárka. Použij standardní internacionalizační API nebo knihovnu, která z CLDR/ICU dat vychází.
+
+Příklad pro cenovou stránku:
+
+```text
+Špatně: 1,999 / month
+Lépe pro český trh: 1 999 Kč / měsíc bez DPH
+Lépe pro EU B2B: 79 EUR / měsíc bez DPH
+```
+
+U pricingu mysli i na slova kolem ceny. „Bez DPH“, „měsíčně“, „ročně“, „za workspace“ a „za uživatele“ nejsou dekorace. Jsou to rozhodovací informace. Když je schováš do tooltipu, zákazník si nebude myslet, že jsi minimalistický. Bude mít pocit, že si má hlídat peněženku.
+
+## Překlad není skládka stringů
+
+Lokalizační soubor není odpadkový koš na texty bez kontextu. Překladatel nebo budoucí ty potřebuje vědět, kde se text používá, komu se zobrazuje a jaké má proměnné.
+
+Špatný klíč:
+
+```json
+{
+  "button_1": "Save"
+}
+```
+
+Lepší klíč:
+
+```json
+{
+  "settings.profile.saveButton": "Uložit profil"
+}
+```
+
+Ještě lepší je přidat kontext v komentáři, dokumentaci nebo překladovém nástroji:
+
+```text
+Použito v nastavení osobního profilu. Ukládá jméno, jazyk UI a časové pásmo. Není to billing profil.
+```
+
+Dávej pozor na skládání vět z více fragmentů. To, co funguje v angličtině, se v češtině, němčině nebo polštině může gramaticky rozsypat. Raději překládej celé věty s proměnnými.
+
+Špatně:
+
+```text
+"You have" + count + "new invoices"
+```
+
+Lépe:
+
+```text
+Máte {count} nových faktur.
+```
+
+A úplně prakticky: řeš plurály. Čeština má jiné tvary než angličtina. `1 faktura`, `2 faktury`, `5 faktur`. Pokud produkt neumí plurály, bude působit jako robot, který se učil česky z fakturačního CSV.
+
+## Jazyk stránky a přístupnost
+
+Správně označený jazyk stránky pomáhá čtečkám obrazovky, vyhledávačům i prohlížečům. WCAG kritérium 3.1.1 řeší určení jazyka stránky a 3.1.2 jazyk částí textu (https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html, https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html). Prakticky: nastav `lang` na stránce a u vícejazyčných úseků ho změň.
+
+Příklad:
+
+```html
+<html lang="cs">
+  <body>
+    <p>Váš export je připravený.</p>
+    <p lang="en">Your export is ready.</p>
+  </body>
+</html>
+```
+
+U SaaS aplikace to není jen detail pro audit přístupnosti. Pokud má uživatel rozhraní česky, ale část modálu je anglicky a část právního upozornění strojově přeložená, důvěra padá. Konzistence jazyka je součást UX.
+
+Checklist pro přístupnou lokalizaci:
+
+- každá stránka má správný `lang`,
+- vícejazyčné části mají vlastní `lang`,
+- chybové hlášky jsou přeložené stejně jako formulář,
+- odkazy neříkají jen „zde“ v žádném jazyce,
+- datum a čas nejsou sdělené jen vizuálně,
+- text se po překladu vejde do layoutu bez překryvů,
+- směr textu a delší slova nerozbíjí komponenty.
+
+## Právní a privacy texty piš jazykem člověka
+
+GDPR vyžaduje, aby informace pro člověka byly podané stručně, transparentně, srozumitelně a jasným jazykem; Evropská komise tento princip shrnuje v přehledu zásad zpracování osobních údajů (https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en). Pro produkt to znamená: nestačí mít privacy policy někde anglicky v patičce, pokud službu aktivně nabízíš lidem, kteří jí nerozumí.
+
+Privacy-first lokalizace:
+
+- přelož zásady zpracování dat pro trhy, které reálně obsluhuješ,
+- nepřekládej právní text čistě strojově bez kontroly,
+- u souhlasu používej stejnou úroveň srozumitelnosti jako u marketingu,
+- vysvětli účely zpracování konkrétně, ne generickou mlhou,
+- u změn podmínek pošli shrnutí dopadu v jazyce zákazníka,
+- zachovej historii verzí právních dokumentů.
+
+Příklad špatně:
+
+```text
+Používáním služby souhlasíte se zpracováním údajů pro zlepšování služeb a další legitimní účely.
+```
+
+Příklad lépe:
+
+```text
+E-mail používáme pro přihlášení, bezpečnostní upozornění a odpovědi podpory. Návštěvnost webu měříme agregovaně bez reklamních profilů. Marketingové e-maily posíláme jen po přihlášení k odběru a odhlášení je v každé zprávě.
+```
+
+Tady nejde o to, aby právní text zněl jako básnička. Jde o to, aby člověk pochopil, co se děje s jeho daty, bez překladače, právníka a třetí kávy.
+
+## Lokalizace supportu a onboardingů
+
+Produkt může mít rozhraní česky, ale zákazník často narazí na nápovědu, e-mail, fakturu, status page, release notes a support makra. Pokud jsou tyto části jazykově rozházené, působí firma menší a méně spolehlivě, než ve skutečnosti je.
+
+Začni od míst s nejvyšší důvěrou:
+
+1. registrace a přihlášení,
+2. fakturace a platby,
+3. bezpečnostní e-maily,
+4. export a smazání dat,
+5. onboardingové kroky,
+6. status page a incidentové zprávy,
+7. nápověda pro nejčastější problémy.
+
+Nemusíš přeložit celou znalostní bázi najednou. Vyber deset článků, které řeší nejdražší nebo nejcitlivější situace: reset hesla, změna fakturačních údajů, export dat, zrušení účtu, pozvánka do týmu, změna tarifu, nastavení domény, integrace, bezpečnostní kontakt a řešení incidentu.
+
+## Jak lokalizaci zavést bez velkého třesku
+
+Pro malý tým je nejlepší postup postupný. Nezačínej tím, že slíbíš plnou podporu pěti jazyků. Začni tím, že produkt přestane být tvrdě přibitý k jednomu locale.
+
+První iterace:
+
+- odděl texty z kódu do překladových souborů,
+- nastav `lang` a locale podle uživatele nebo workspace,
+- používej systémové formátování data, času, čísel a měn,
+- přelož kritické flow a právní minimum,
+- přidej jazyk do testovacích scénářů,
+- zkontroluj rozpad layoutu u delších textů,
+- vytvoř slovník produktových termínů.
+
+Druhá iterace:
+
+- přelož nápovědu pro nejčastější problémy,
+- nastav proces pro nové texty v releasu,
+- přidej kontrolu chybějících překladů do CI,
+- sjednoť tón hlasu v každém jazyce,
+- řeš regionální ceny a fakturační formuláře,
+- zapoj rodilé mluvčí nebo odbornou korekturu u právních a obchodních textů.
+
+Lokalizace není jednorázový projekt. Je to provozní návyk. Každá nová funkce přidává texty, chyby, e-maily, dokumentaci a někdy i právní dopad. Když na to myslíš průběžně, je to pár políček v procesu. Když na to zapomeneš rok, je to archeologická expedice s placeným tlumočníkem.
+
+## Checklist: lokalizace bez jazykového guláše
+
+- Máme oddělený jazyk UI, locale, měnu, zemi fakturace a časové pásmo?
+- Používáme standardní formátování data, času, čísel a měn?
+- Ukládáme interní časy jednoznačně a zobrazujeme je podle kontextu?
+- Má každá stránka správný atribut `lang`?
+- Řešíme plurály a proměnné ve větách bezpečně?
+- Mají překladové klíče jasné názvy a kontext?
+- Jsou přeložené kritické chybové hlášky, fakturace a bezpečnostní e-maily?
+- Jsou právní a privacy informace srozumitelné pro cílový trh?
+- Testujeme layout s delšími texty a různými formáty?
+- Máme slovník produktových termínů?
+- Existuje proces pro nové texty v releasech?
+- Víme, které jazyky podporujeme plně a které jen částečně?
+
+## Mini šablona lokalizační karty
+
+```markdown
+# Lokalizační karta: [jazyk / trh]
+
+## Rozsah
+- Jazyk UI:
+- Locale:
+- Trh / země:
+- Měna:
+- Časové pásmo výchozí pro workspace:
+- Stav podpory: plná / částečná / experimentální
+
+## Kritické části
+- Registrace a přihlášení:
+- Fakturace a platby:
+- Bezpečnostní e-maily:
+- Export a smazání dat:
+- Právní dokumenty:
+- Status page a incidenty:
+
+## Texty a tón
+- Slovník termínů:
+- Formálnost oslovení:
+- Zakázané výrazy:
+- Kdo kontroluje překlady:
+- Jak řešíme nové texty:
+
+## Technika
+- Formát data a času:
+- Formát měny:
+- Plurály:
+- `lang` atribut:
+- Test delších textů:
+- Kontrola chybějících překladů:
+
+## Privacy a právo
+- Privacy policy jazyk:
+- Cookie / consent texty:
+- DPA / smluvní texty:
+- Retence a export popsané jazykem trhu:
+- Kontaktní kanál pro dotazy:
+```
+
+## Zdroje
+
+- Unicode CLDR poskytuje locale data pro formátování dat, časů, čísel, měn a dalších jazykově-regionálních hodnot: https://cldr.unicode.org/
+- CLDR specifikace odkazuje na UTS #35 Locale Data Markup Language a související algoritmy: https://cldr.unicode.org/index/cldr-spec
+- Unicode LDML specifikace popisuje jazykové a locale identifikátory i oddělení jazykových a nelokalizačních dat: https://unicode.org/reports/tr35/
+- W3C WCAG Understanding 3.1.1 vysvětluje význam určení jazyka stránky: https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html
+- W3C WCAG Understanding 3.1.2 vysvětluje určení jazyka částí textu: https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html
+- Evropská komise shrnuje principy GDPR včetně požadavku na stručné, transparentní, srozumitelné a jasné informace: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
 # Pracovní log
 
+- 2026-09-30: Doplněna příloha „Lokalizace webu a SaaS bez jazykového guláše“ s rozlišením jazyka, locale, trhu a právního kontextu, doporučeními pro data, čas, měnu, překladové klíče, přístupnost, privacy texty, support, postupné zavedení, checklistem, lokalizační kartou a ověřenými zdroji Unicode CLDR, W3C WCAG a Evropské komise.
 - 2026-09-30: Doplněna příloha „Uploady a uživatelské soubory bez bezpečnostního průvanu“ s účelem uploadů, whitelistem typů, bezpečným ukládáním názvů, karanténou, kontrolou metadat, retenčními pravidly, UX chybami, checklistem, upload kartou a ověřenými zdroji OWASP, W3C a Evropské komise.
 - 2026-09-30: Doplněna příloha „Vyhledávání na webu a v nápovědě bez datového vysavače“ s privacy-first přístupem k search analytics, minimalizací ukládaných dotazů, maskováním citlivých údajů, prací s nulovými výsledky, přístupností search pole, checklistem, search kartou a ověřenými zdroji Evropské komise, OWASP a W3C.
 - 2026-09-30: Doplněna příloha „Bezpečnostní dotazníky v B2B salesu bez improvizačního divadla“ s odpovědní bankou, pravidly přesných odpovědí, rozdělením veřejných/zákaznických/citlivých informací, procesem spolupráce obchodu a technických vlastníků, prací s důkazy, privacy-first hranicemi sdílení, měsíční zpětnou vazbou, checklistem a vyplnitelnou odpovědní kartou.
