@@ -20277,7 +20277,186 @@ Produktové metriky mají být menší, ostřejší a užitečnější. Když t�
 
 ---
 
+# Příloha: Cookie souhlas bez temných vzorů a falešné volby
+
+Cookie lišta není dekorace, právní talisman ani UX test trpělivosti. Je to rozhraní pro rozhodnutí člověka: dovolím webu nebo aplikaci něco uložit, měřit nebo propojit s dalším účelem? Když je odpověď schovaná za šedým tlačítkem, pěti obrazovkami a slovní mlhou, nejde o souhlas. Jde o nátlak v kabátě produktového designu.
+
+Privacy-first web má začít od jiné otázky: potřebujeme vůbec souhlas? Pokud měříš jen nezbytné technické fungování služby, může být odpověď často „ne“. Pokud chceš analytiku, remarketing, personalizaci nebo externí widgety, musíš oddělit účely, vysvětlit je lidsky a dát stejně snadnou cestu k odmítnutí jako k přijetí. EDPB v pokynech k souhlasu zdůrazňuje, že souhlas má být svobodný, konkrétní, informovaný a jednoznačný, a že odvolání má být stejně snadné jako udělení ([EDPB Guidelines 05/2020 on consent](https://www.edpb.europa.eu/sites/default/files/files/file1/edpb_guidelines_202005_consent_en.pdf)).
+
+> Codyho komentář: Když cookie banner potřebuje víc copywritingu než homepage, něco je špatně. Souhlas nemá být escape room pro lidi, kteří jen chtěli přečíst článek.
+
+## Nejdřív rozděl technologie podle účelu
+
+Neřeš „cookies“ jako jednu hromadu. Cookie je technický nosič, ne účel. Stejný web může používat nezbytnou session cookie pro přihlášení, preferenční nastavení jazyka, privacy-first analytiku, embedded video a reklamní pixel. Každá z těch věcí má jiný účel, riziko a právní režim.
+
+Praktické dělení pro malý web nebo SaaS:
+
+- **Nezbytné fungování**: přihlášení, CSRF ochrana, košík, bezpečnostní session, rate limiting.
+- **Preference**: jazyk, téma, zapamatování zavřeného nenutného panelu.
+- **Analytika**: měření návštěvnosti, konverzí, hledání, chyb ve flow.
+- **Marketing**: remarketing, reklamní publika, affiliate tracking, social pixely.
+- **Externí obsah**: mapy, videa, chat widget, social embed, platební prvky.
+- **Produktová telemetrie**: eventy uvnitř SaaS, feature usage, výkon kritických workflow.
+
+U každé položky si napiš: co přesně ukládá, komu data tečou, jak dlouho zůstávají, jestli je lze provozovat v EU a jestli funkce existuje i bez ní. Teprve potom navrhuj lištu. Obrácený postup vede k populární disciplíně „nalepíme banner a doufáme, že realita přestane existovat“. Spoiler: nepřestane.
+
+## Souhlas má být symetrický
+
+Dobrá cookie lišta má férovou geometrii. Přijmout i odmítnout musí být stejně viditelné, pochopitelné a rychlé. Pokud je „Přijmout vše“ velké barevné tlačítko a „Odmítnout“ schované v nastavení, už design tlačí uživatele jedním směrem. Evropská komise u Digital Services Act popisuje zákaz manipulačních rozhraní u online platforem jako ochranu před taktikami, které lidi vedou k rozhodnutím, která by jinak neudělali ([European Commission: Digital Services Act](https://digital-strategy.ec.europa.eu/en/policies/digital-services-act)).
+
+Minimum férové první vrstvy:
+
+- jasný krátký text bez právnického kouře,
+- tlačítko „Přijmout volitelné“ nebo „Přijmout vše“,
+- tlačítko „Odmítnout volitelné“ stejně dostupné,
+- odkaz „Nastavit podrobně“,
+- žádné předem zaškrtnuté volitelné kategorie,
+- žádné blokování obsahu kvůli marketingovým cookies.
+
+Příklad textu:
+
+```text
+Používáme nezbytné cookies pro fungování webu. Volitelně nám můžete povolit jednoduchou analytiku, abychom věděli, co lidem pomáhá. Nepoužíváme reklamní pixely ani prodej dat. Volbu můžete kdykoliv změnit.
+```
+
+Tlačítka:
+
+```text
+Odmítnout volitelné | Nastavit | Povolit analytiku
+```
+
+Všimni si, že text nelže. Neříká „zlepšujeme váš zážitek“, když ve skutečnosti posílá návštěvníka do reklamního publika. Nevyvolává paniku. Dává volbu.
+
+## Nastavení piš podle lidských rozhodnutí
+
+Detailní nastavení nemá být skládka vendorů. Uživatel typicky nerozhoduje podle názvu knihovny nebo cookie ID. Rozhoduje podle účelu. Proto používej kategorie, ale neschovávej za ně konkrétní služby.
+
+Dobrá karta kategorie obsahuje:
+
+- účel jednou větou,
+- zda je kategorie nezbytná nebo volitelná,
+- příklady dat,
+- příjemce nebo dodavatele,
+- retenční dobu,
+- dopad vypnutí,
+- odkaz na detailní zásady.
+
+Příklad pro privacy-first analytiku:
+
+```text
+Analytika
+Pomáhá nám poznat, které stránky a akce jsou užitečné. Měříme agregovaně a nepoužíváme reklamní profily.
+Dodavatel: [název služby], EU region.
+Data: stránka, referrer bez citlivých parametrů, zařízení v hrubé kategorii, čas návštěvy.
+Retence: 13 měsíců.
+Vypnutí: web bude fungovat stejně, jen neuvidíme agregované použití.
+```
+
+Pokud používáš nástroj, který neumíš takhle popsat, je to signál. Buď mu nerozumíš, nebo dělá víc, než potřebuješ. Oboje je problém.
+
+## Dark patterns, kterým se vyhni
+
+EDPB ve svých pokynech k dark patterns v rozhraních sociálních platforem popisuje manipulační vzory jako průběžné pobízení, privacy maze nebo zahlcení možnostmi; i mimo sociální sítě jsou tyto principy užitečné jako varovná mapa pro návrh rozhraní ([EDPB Guidelines 03/2022 on dark patterns](https://www.edpb.europa.eu/system/files/2022-03/edpb_03-2022_guidelines_on_dark_patterns_in_social_media_platform_interfaces_en.pdf)).
+
+Typické přešlapy u cookie a consent rozhraní:
+
+- **Falešná symetrie**: dvě tlačítka vypadají podobně, ale odmítnutí vede do dalšího kroku.
+- **Opt-out labyrint**: přijmout jde jedním klikem, odmítnout až po ručním vypnutí deseti přepínačů.
+- **Emoční nátlak**: „Pomozte nám přežít“ místo věcného popisu účelu.
+- **Vágní účely**: „partner experiences“ a „lepší služby“ bez konkrétního vysvětlení.
+- **Předem zapnuté volitelné kategorie**: uživatel má uklízet po tvém obchodním modelu.
+- **Nekonečné připomínání**: po odmítnutí se banner vrací tak často, až člověk klikne jen z únavy.
+- **Zamčený obsah**: běžný obsah se nedá číst bez souhlasu s volitelným trackingem.
+- **Skryté odvolání**: změna souhlasu je hluboko v patičce, účtu nebo vůbec nikde.
+
+Privacy-first varianta je nudnější a lepší: nabídni volbu, ulož ji, respektuj ji a dovol změnu. Žádné psychologické origami.
+
+## Kdy banner vůbec nepotřebuješ
+
+Nejlepší cookie banner je často žádný cookie banner. Pokud web používá jen nezbytné cookies a nepouští volitelné sledování, můžeš místo lišty použít krátké vysvětlení v zásadách soukromí nebo patičce. Tím zlepšíš UX a zároveň snížíš riziko, že lidé budou automaticky odklikávat cokoliv.
+
+Praktické alternativy:
+
+- serverové logy s krátkou retencí a anonymizací IP,
+- analytika bez cookies a bez cross-site identifikace,
+- self-hosted nebo EU-hosted privacy-first analytika,
+- embedded obsah až po kliknutí uživatele,
+- RSS a přímé odkazy místo social share skriptů,
+- kontaktní formulář bez marketingových enrichment skriptů.
+
+Tohle není askeze. Je to produktová disciplína. Čím méně externích skriptů pustíš na každou stránku, tím rychlejší, bezpečnější a vysvětlitelnější web máš.
+
+## Consent provozuj jako konfiguraci, ne jako obrázek
+
+Cookie souhlas není jednorázový design. Je to provozní konfigurace. Když přidáš nový nástroj, změníš analytiku nebo vložíš externí widget, musí se změnit i consent mapa. Jinak máš hezkou lištu, která popisuje minulost.
+
+Doporučená rutina:
+
+- při každém novém skriptu vyplň kartu účelu,
+- jednou měsíčně projdi seznam externích domén načítaných webem,
+- jednou kvartálně ověř, že odmítnutí opravdu blokuje volitelné skripty,
+- při změně dodavatele aktualizuj zásady a detail consentu,
+- po redesignu otestuj lištu klávesnicí a čtečkou obrazovky,
+- v SaaS odděl marketingový souhlas od produktových nastavení účtu.
+
+Technický test může být jednoduchý: otevři web v čistém profilu, odmítni volitelné cookies a zkontroluj síťové požadavky. Neměly by odcházet marketingové pixely, heatmapy ani analytika, kterou jsi označil jako volitelnou. Pokud odchází, design nelže záměrně, ale systém ano. Výsledek je pro uživatele stejný.
+
+## Checklist: cookie souhlas bez falešné volby
+
+- [ ] Máme inventář všech cookies, localStorage položek, pixelů a externích skriptů?
+- [ ] Je u každé položky jasný účel, dodavatel, retence a dopad vypnutí?
+- [ ] Rozlišujeme nezbytné, preferenční, analytické, marketingové a externí účely?
+- [ ] Nejsou volitelné kategorie předem zapnuté?
+- [ ] Je odmítnutí stejně snadné a viditelné jako přijetí?
+- [ ] Lze souhlas kdykoliv změnit bez hledání v labyrintu?
+- [ ] Po odmítnutí se opravdu nespustí volitelné skripty?
+- [ ] Nepoužíváme cookie wall pro běžný obsah?
+- [ ] Text říká konkrétně, co měříme a proč?
+- [ ] Preferujeme EU provoz, agregovaná data a minimum trackerů?
+- [ ] Testovali jsme banner klávesnicí a na mobilu?
+- [ ] Má změna nástroje jasný proces aktualizace consent mapy?
+
+## Mini šablona consent karty
+
+```text
+# Consent karta: [název účelu]
+
+Účel:
+
+Je nezbytný?
+
+Technologie:
+- cookies:
+- localStorage/sessionStorage:
+- externí skripty:
+
+Dodavatelé a region provozu:
+
+Jaká data vznikají:
+
+Komu data odcházejí:
+
+Retence:
+
+Dopad odmítnutí:
+
+Kde uživatel volbu změní:
+
+Test odmítnutí:
+
+Vlastník a datum poslední kontroly:
+```
+
+## Zdroje
+
+- EDPB: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/sites/default/files/files/file1/edpb_guidelines_202005_consent_en.pdf)
+- EDPB: [Guidelines 03/2022 on dark patterns in social media platform interfaces](https://www.edpb.europa.eu/system/files/2022-03/edpb_03-2022_guidelines_on_dark_patterns_in_social_media_platform_interfaces_en.pdf)
+- Evropská komise: [The Digital Services Act](https://digital-strategy.ec.europa.eu/en/policies/digital-services-act)
+- Evropská komise: [Legal grounds for processing data](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en)
+
+
 # Pracovní log
+- 2026-09-30: Doplněna příloha „Cookie souhlas bez temných vzorů a falešné volby“ s praktickým rozdělením technologií podle účelu, férovou symetrií souhlasu, varováním před dark patterns, provozní rutinou, checklistem, consent kartou a ověřenými zdroji EDPB a Evropské komise.
 - 2026-09-30: Doplněna příloha „Produktové metriky bez vanity dashboardu a datového vysavače“ s modelem rozhodnutí před eventy, severní hvězdou, podpůrnými signály, bezpečnostními brzdami, event katalogem, segmentací, měsíčním úklidem, checklistem, metrickou kartou a ověřenými zdroji Evropské komise a EDPB.
 
 - 2026-09-30: Doplněna příloha „Přístupnost webu a SaaS bez alibi a overlay kouzel“ s praktickým postupem pro kritické cesty, WCAG principy, komponenty, formuláře, testovací rutinu, dashboardy, dokumentaci, checklist, přístupnostní kartu a ověřené zdroje EU, MPO, W3C a WebAIM.
