@@ -22659,7 +22659,213 @@ Lokalizace není jednorázový projekt. Je to provozní návyk. Každá nová fu
 - W3C WCAG Understanding 3.1.2 vysvětluje určení jazyka částí textu: https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html
 - Evropská komise shrnuje principy GDPR včetně požadavku na stručné, transparentní, srozumitelné a jasné informace: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 
+
+# Příloha: Přístupy a offboarding bez sdíleného hesla v šuplíku
+
+Přístupy jsou tichá infrastruktura firmy. Když fungují, nikdo o nich nemluví. Když se pokazí, bývá pozdě: bývalý kolega má stále administrátorský účet, externista používá sdílené heslo, agentura má přístup do analytiky i po skončení smlouvy a nikdo přesně neví, kdo může exportovat zákaznická data. To není „malý provozní detail“. To je otevřené okno v přízemí.
+
+Privacy-first firma neřeší přístupy jen proto, že to vypadá dobře v bezpečnostním dotazníku. Řeší je proto, že kontrola nad daty začíná kontrolou nad lidmi, účty, rolemi a klíči. Menší tým nepotřebuje korporátní IAM monstrum s osmi komisemi. Potřebuje jasný seznam systémů, vlastníka každého přístupu, pravidlo nejmenších oprávnění a offboarding, který proběhne v den změny, ne „až bude chvíle“.
+
+> Codyho komentář: Sdílené heslo v tabulce je jako náhradní klíč pod rohožkou. Funguje skvěle hlavně pro lidi, kteří tam nemají co dělat.
+
+## Začni inventurou účtů, ne nákupem nástroje
+
+Než začneš řešit single sign-on, role nebo nový password manager, sepiš systémy, které mají přístup k datům, penězům, publikaci obsahu nebo provozu služby. U každého si napiš vlastníka a nejvyšší riziko.
+
+Praktické skupiny:
+
+- produkční infrastruktura, hosting, DNS a domény,
+- repozitáře, CI/CD, deployment a tajné proměnné,
+- databáze, zálohy, logy a analytika,
+- CRM, helpdesk, fakturace a e-mailing,
+- platební brána, účetnictví a bankovní nástroje,
+- design, obsah, CMS a sociální profily,
+- AI nástroje, automatizace a integrační platformy.
+
+U každého systému odpověz na pět otázek:
+
+1. Kdo je vlastník systému?
+2. Kdo má administrátorský přístup?
+3. Kdo má běžný pracovní přístup?
+4. Jak se přístup přidává, mění a odebírá?
+5. Kde je uložený záznam o poslední kontrole?
+
+Pokud odpověď zní „to ví asi Petr“, nemáš proces. Máš folklór.
+
+## Pravidlo nejmenšího oprávnění bez divadla
+
+Nejmenší oprávnění znamená, že člověk nebo integrace má jen takový přístup, který potřebuje pro konkrétní práci. OWASP u autorizace doporučuje mimo jiné „deny by default“ a kontrolu přístupů na serverové straně. V praxi to pro malý SaaS znamená jednoduchou věc: výchozí stav není „dej mu admina, ať nás neotravuje“. Výchozí stav je „co přesně potřebuje udělat?“
+
+Příklady:
+
+| Situace | Slabé řešení | Lepší řešení |
+| --- | --- | --- |
+| Copywriter upravuje blog | admin do celého CMS | role editor jen pro obsah |
+| Externí vývojář opravuje bug | plný přístup do produkční DB | staging data + časově omezený produkční přístup jen po schválení |
+| Agentura nastavuje kampaně | přístup do všech účtů natrvalo | oddělený účet agentury s omezenými právy a datem revize |
+| Support řeší ticket | export všech zákazníků | náhled jen na relevantní workspace a auditní záznam |
+| Automatizace posílá e-maily | univerzální API klíč | token jen pro konkrétní akci a prostředí |
+
+Důležité: autorizace není jen UI. Tlačítko může být schované, ale server musí stále ověřit, jestli uživatel smí akci provést. Jinak máš kosmetiku, ne bezpečnost.
+
+## Role piš podle práce, ne podle organizační poezie
+
+Role mají popisovat práci, ne interní status. „Super admin“, „manager“, „marketing“ a „externí“ jsou často moc široké. Lepší je začít od akcí.
+
+Příklad rolí pro menší SaaS:
+
+- `Owner`: smluvní vlastník účtu, fakturace, smazání workspace, správa adminů.
+- `Admin`: správa uživatelů, nastavení workspace, integrace, auditní přehledy.
+- `Editor`: tvorba a úprava obsahu nebo dat, která patří do běžné práce.
+- `Viewer`: čtení bez změn a exportů.
+- `Support`: omezený diagnostický přístup s auditním záznamem.
+- `Billing`: faktury, tarif, platební údaje bez přístupu k obsahu zákaznických dat.
+
+Privacy-first detail: export dat, mazání dat, změna vlastníka, změna fakturace a přístup k auditním logům mají být samostatně hlídané akce. Nepatří automaticky každému, kdo umí upravit název projektu.
+
+## Sdílené účty nahraď pojmenovanými účty
+
+Sdílený účet vypadá prakticky, dokud nepotřebuješ zjistit, kdo něco změnil. Pojmenované účty mají tři výhody: můžeš je odebrat konkrétnímu člověku, můžeš vynutit vícefaktorové ověření a auditní log dává smysl.
+
+Když nějaký nástroj sdílené účty vynucuje nebo neumí rozumné role, označ ho jako riziko. Nemusíš ho hned vyhodit, ale musíš vědět, že kolem něj potřebuješ kompenzační opatření:
+
+- uložit přístup jen v password manageru,
+- nastavit silné unikátní heslo a MFA, pokud je k dispozici,
+- omezit počet lidí, kteří ho znají,
+- po odchodu člena týmu heslo rotovat,
+- zapsat vlastníka a datum příští revize.
+
+U klíčových systémů ale sdílený účet neobhajuj pohodlím. DNS, hosting, repozitář, platební brána a databáze si zaslouží pojmenované účty. Ano, je to o trochu víc práce. Taky je o trochu méně infarktů.
+
+## Offboarding musí být checklist, ne vzpomínka
+
+Odchod člověka, změna agentury nebo konec externí spolupráce je nejčastější moment, kdy se přístupy zapomenou uklidit. Offboarding proto nesmí být neformální „někdo mu asi zrušil e-mail“. Má mít vlastníka, datum a seznam systémů.
+
+Doporučený postup:
+
+1. Urči datum a čas ukončení přístupů.
+2. Vypni primární identitu, e-mail a SSO.
+3. Odeber přístupy v systémech, které nejsou napojené na SSO.
+4. Rotuj sdílená hesla a tokeny, ke kterým měl člověk přístup.
+5. Předej vlastnictví dokumentů, repozitářů, domén, integrací a automatizací.
+6. Zkontroluj aktivní API klíče, SSH klíče a osobní access tokeny.
+7. Zapiš výsledek do offboarding záznamu.
+
+Speciální pozor na automatizace. Bývá běžné, že důležitý workflow běží pod osobním účtem někoho, kdo už je na Bali a firemní Slack má archivovaný pod složkou „minulý život“. Produkční automatizace mají běžet pod služební identitou, ne pod osobním účtem.
+
+## API klíče a tokeny ber jako přístupy lidí v převleku
+
+API klíč není technická drobnost. Je to přístup. Někdy silnější než uživatel, protože nemá únavu, dovolenou ani zdravý strach z tlačítka „Export all“.
+
+Minimální pravidla:
+
+- každý klíč má vlastníka, účel a prostředí,
+- produkční a vývojové klíče jsou oddělené,
+- klíč má jen potřebný scope,
+- tajné hodnoty nejsou v repozitáři ani v poznámkách,
+- rotace má plán, ne hrdinskou improvizaci,
+- nepoužívané klíče se mažou,
+- incident znamená okamžitou rotaci dotčených klíčů.
+
+U AI a automatizačních nástrojů přidej ještě jednu otázku: posílá klíč nebo integrace zákaznická data třetí straně? Pokud ano, musí to sedět s datovou mapou, smlouvami a slibem vůči uživateli. Jinak se z pohodlné automatizace stane datový tunel s hezkou ikonou.
+
+## Přístupy kontroluj pravidelně, ale krátce
+
+Access review nemusí být dvoudenní rituál s tabulkou, která vypadá jako trest za maturitu. Pro menší tým stačí měsíční nebo čtvrtletní kontrola nejdůležitějších systémů.
+
+Rychlý rytmus:
+
+- měsíčně: produkce, hosting, DNS, repozitáře, CI/CD, platební brána,
+- čtvrtletně: CRM, helpdesk, CMS, analytika, e-mailing, design a automatizace,
+- po každém odchodu: okamžitý offboarding checklist,
+- po incidentu: mimořádná revize účtů, rolí, tokenů a auditních logů.
+
+Výstupem kontroly nemá být krásný dokument. Výstupem má být seznam změn: komu odebrat přístup, komu snížit roli, který token zrušit, který systém napojit na SSO, který sdílený účet nahradit.
+
+## Privacy-first pravidla pro přístup k datům
+
+Přístupy nejsou jen bezpečnostní téma. Jsou to také privacy téma. Čím méně lidí a integrací vidí osobní údaje, tím menší je riziko úniku, chybného exportu i zbytečného interního šmírování.
+
+Praktická pravidla:
+
+- odděl pracovní metadata od obsahu zákaznických dat,
+- supportu zobrazuj jen data nutná k řešení ticketu,
+- citlivé údaje maskuj, pokud nejsou pro práci nezbytné,
+- exporty dat loguj a omez podle role,
+- auditní logy chraň před běžnou editací,
+- přístup do produkční databáze ber jako výjimku, ne denní nástroj,
+- pro analýzy používej agregace nebo anonymizované výstupy, pokud stačí.
+
+Tohle je přesně místo, kde privacy-first není plakát na webu, ale architektura provozu. Uživatel nevidí tvůj access review, ale cítí výsledek: méně zbytečného sběru, méně lidí u dat a jasnější odpovědnost.
+
+## Checklist: přístupy a offboarding bez sdíleného hesla
+
+- [ ] Máme seznam všech systémů s přístupem k datům, penězům nebo provozu?
+- [ ] Má každý systém vlastníka?
+- [ ] Víme, kdo má administrátorský přístup?
+- [ ] Používáme pojmenované účty místo sdílených účtů tam, kde to jde?
+- [ ] Mají role popsané konkrétní akce, ne jen názvy oddělení?
+- [ ] Platí výchozí pravidlo nejmenších oprávnění?
+- [ ] Jsou exporty, mazání a změna vlastníka chráněné zvlášť?
+- [ ] Máme offboarding checklist pro zaměstnance, externisty i agentury?
+- [ ] Rotujeme sdílená hesla a tokeny po odchodu člověka?
+- [ ] Běží produkční automatizace pod služební identitou?
+- [ ] Má každý API klíč vlastníka, účel, scope a prostředí?
+- [ ] Probíhá pravidelná kontrola nejrizikovějších přístupů?
+- [ ] Umíme rychle zjistit, kdo exportoval nebo změnil citlivá data?
+- [ ] Je přístup k produkční databázi výjimka s důvodem a záznamem?
+
+## Mini šablona access review karty
+
+```markdown
+# Access review karta: [systém]
+
+## Kontext
+- Systém:
+- Vlastník:
+- Kategorie: produkce / data / finance / obsah / support / marketing / automatizace
+- Kritičnost: vysoká / střední / nízká
+- Poslední kontrola:
+- Další kontrola:
+
+## Účty a role
+- Administrátoři:
+- Běžní uživatelé:
+- Externisté / agentury:
+- Služební účty:
+- Sdílené účty, pokud existují:
+
+## Data a akce
+- Jaká osobní data jsou dostupná:
+- Kdo může exportovat data:
+- Kdo může mazat data:
+- Kdo může měnit vlastníka / billing:
+- Kde je auditní log:
+
+## Klíče a integrace
+- API klíče:
+- SSH / deploy klíče:
+- Webhooky:
+- Automatizace:
+- Datum poslední rotace:
+
+## Změny po kontrole
+- Přístupy k odebrání:
+- Role ke snížení:
+- Tokeny k rotaci:
+- Rizika k dořešení:
+- Vlastník navazující akce:
+```
+
+## Zdroje
+
+- OWASP Authorization Cheat Sheet doporučuje mimo jiné „deny by default“, nejmenší oprávnění a konzistentní serverové kontroly autorizace: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP Developer Guide shrnuje access control principy včetně „deny by default“ a least privilege: https://devguide.owasp.org/en/04-design/02-web-app-checklist/07-access-controls/
+- NIST SP 800-63B popisuje authentication lifecycle management a práci s autentizátory v digitální identitě: https://pages.nist.gov/800-63-4/sp800-63b.html
+- ENISA Secure by Design and Default Playbook je praktický zdroj pro malé a střední firmy, které chtějí zavádět bezpečnostní principy provozně: https://www.enisa.europa.eu/publications/enisa-secure-by-design-and-default-playbook
+
 # Pracovní log
+- 2026-09-30: Doplněna příloha „Přístupy a offboarding bez sdíleného hesla v šuplíku“ s inventurou systémů, pravidlem nejmenších oprávnění, návrhem rolí, offboarding checklistem, správou API klíčů, privacy-first pravidly pro přístup k datům, access review šablonou a ověřenými zdroji OWASP, NIST a ENISA.
 
 - 2026-09-30: Doplněna příloha „Lokalizace webu a SaaS bez jazykového guláše“ s rozlišením jazyka, locale, trhu a právního kontextu, doporučeními pro data, čas, měnu, překladové klíče, přístupnost, privacy texty, support, postupné zavedení, checklistem, lokalizační kartou a ověřenými zdroji Unicode CLDR, W3C WCAG a Evropské komise.
 - 2026-09-30: Doplněna příloha „Uploady a uživatelské soubory bez bezpečnostního průvanu“ s účelem uploadů, whitelistem typů, bezpečným ukládáním názvů, karanténou, kontrolou metadat, retenčními pravidly, UX chybami, checklistem, upload kartou a ověřenými zdroji OWASP, W3C a Evropské komise.
