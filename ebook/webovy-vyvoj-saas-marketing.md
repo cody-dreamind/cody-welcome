@@ -22660,212 +22660,202 @@ Lokalizace není jednorázový projekt. Je to provozní návyk. Každá nová fu
 - Evropská komise shrnuje principy GDPR včetně požadavku na stručné, transparentní, srozumitelné a jasné informace: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 
 
-# Příloha: Přístupy a offboarding bez sdíleného hesla v šuplíku
 
-Přístupy jsou tichá infrastruktura firmy. Když fungují, nikdo o nich nemluví. Když se pokazí, bývá pozdě: bývalý kolega má stále administrátorský účet, externista používá sdílené heslo, agentura má přístup do analytiky i po skončení smlouvy a nikdo přesně neví, kdo může exportovat zákaznická data. To není „malý provozní detail“. To je otevřené okno v přízemí.
+# Příloha: Rate limiting a ochrana proti zneužití bez trestání normálních lidí
 
-Privacy-first firma neřeší přístupy jen proto, že to vypadá dobře v bezpečnostním dotazníku. Řeší je proto, že kontrola nad daty začíná kontrolou nad lidmi, účty, rolemi a klíči. Menší tým nepotřebuje korporátní IAM monstrum s osmi komisemi. Potřebuje jasný seznam systémů, vlastníka každého přístupu, pravidlo nejmenších oprávnění a offboarding, který proběhne v den změny, ne „až bude chvíle“.
+Rate limiting není jen technická brzda. Je to ochrana produktu, rozpočtu, zákaznických dat i uživatelské zkušenosti. Bez limitů může jediný skript zkoušet hesla, vytěžovat drahé AI endpointy, spamovat formuláře, vytvářet falešné účty nebo stahovat exporty tak dlouho, až se z malého SaaS stane drahý kouřostroj.
 
-> Codyho komentář: Sdílené heslo v tabulce je jako náhradní klíč pod rohožkou. Funguje skvěle hlavně pro lidi, kteří tam nemají co dělat.
+Špatný rate limit ale umí bolet taky. Když ho nastavíš tupě podle IP adresy, potrestáš celou kancelář, školu nebo mobilního operátora. Když ho schováš, uživatel neví, co se stalo. Když ho neměříš, nepoznáš rozdíl mezi útokem, chybou klienta a úspěšnou kampaní. Dobrá ochrana proto kombinuje limity podle rizika, jasné chybové odpovědi, provozní metriky a privacy-first logování.
 
-## Začni inventurou účtů, ne nákupem nástroje
+> Codyho komentář: Rate limit není způsob, jak uživatele vychovat. Je to airbag. Má se nafouknout při nárazu, ne při každém nastoupení do auta.
 
-Než začneš řešit single sign-on, role nebo nový password manager, sepiš systémy, které mají přístup k datům, penězům, publikaci obsahu nebo provozu služby. U každého si napiš vlastníka a nejvyšší riziko.
+## Nejdřív chraň drahé a citlivé akce
 
-Praktické skupiny:
+Nelimituješ všechno stejně. Domovská stránka, veřejný článek, registrace, login, export dat a AI generování mají úplně jiné riziko. Začni u akcí, které mohou poškodit účet, data, peníze nebo provozní náklady.
 
-- produkční infrastruktura, hosting, DNS a domény,
-- repozitáře, CI/CD, deployment a tajné proměnné,
-- databáze, zálohy, logy a analytika,
-- CRM, helpdesk, fakturace a e-mailing,
-- platební brána, účetnictví a bankovní nástroje,
-- design, obsah, CMS a sociální profily,
-- AI nástroje, automatizace a integrační platformy.
+Typické priority:
 
-U každého systému odpověz na pět otázek:
+- přihlášení, reset hesla, magic link a MFA ověření,
+- registrace, pozvánky a vytváření workspace,
+- kontaktní formuláře, komentáře a veřejné uploady,
+- exporty dat, hromadné importy a mazání,
+- API endpointy s drahou databázovou prací,
+- AI funkce účtované podle tokenů, minut nebo externích volání,
+- webhooky a integrační endpointy,
+- vyhledávání, které umí zatížit databázi nebo index.
 
-1. Kdo je vlastník systému?
-2. Kdo má administrátorský přístup?
-3. Kdo má běžný pracovní přístup?
-4. Jak se přístup přidává, mění a odebírá?
-5. Kde je uložený záznam o poslední kontrole?
+U každé akce si napiš, co se stane při zneužití: finanční náklad, únik dat, spam, výpadek, špatná reputace domény nebo podpůrný chaos. Limit pak navrhuj podle dopadu, ne podle toho, co se hezky vejde do middleware.
 
-Pokud odpověď zní „to ví asi Petr“, nemáš proces. Máš folklór.
+## Limituj podle identity, ne jen podle IP adresy
 
-## Pravidlo nejmenšího oprávnění bez divadla
+IP adresa je užitečný signál, ale špatná identita. Jeden člověk může měnit IP, jedna IP může patřit stovkám lidí a firemní síť může vypadat jako jediný uživatel. Proto kombinuj více klíčů.
 
-Nejmenší oprávnění znamená, že člověk nebo integrace má jen takový přístup, který potřebuje pro konkrétní práci. OWASP u autorizace doporučuje mimo jiné „deny by default“ a kontrolu přístupů na serverové straně. V praxi to pro malý SaaS znamená jednoduchou věc: výchozí stav není „dej mu admina, ať nás neotravuje“. Výchozí stav je „co přesně potřebuje udělat?“
+Praktické klíče:
 
-Příklady:
-
-| Situace | Slabé řešení | Lepší řešení |
+| Kontext | Vhodný limitovací klíč | Poznámka |
 | --- | --- | --- |
-| Copywriter upravuje blog | admin do celého CMS | role editor jen pro obsah |
-| Externí vývojář opravuje bug | plný přístup do produkční DB | staging data + časově omezený produkční přístup jen po schválení |
-| Agentura nastavuje kampaně | přístup do všech účtů natrvalo | oddělený účet agentury s omezenými právy a datem revize |
-| Support řeší ticket | export všech zákazníků | náhled jen na relevantní workspace a auditní záznam |
-| Automatizace posílá e-maily | univerzální API klíč | token jen pro konkrétní akci a prostředí |
+| Přihlášení | účet + IP + zařízení / session | chraň účet, ale nezamkni ho triviálně útočníkem |
+| Reset hesla | e-mail / účet + IP | odpověď nesmí prozradit, jestli účet existuje |
+| API | API klíč + organizace + endpoint | limituj i podle tarifu a typu operace |
+| AI funkce | workspace + uživatel + funkce | přidej denní rozpočet nebo kreditový strop |
+| Formulář | session + IP + fingerprint bez invazivního trackingu | preferuj jednoduché signály a honeypot |
+| Export | workspace + role + typ exportu | audituj a chraň před hromadným stahováním |
 
-Důležité: autorizace není jen UI. Tlačítko může být schované, ale server musí stále ověřit, jestli uživatel smí akci provést. Jinak máš kosmetiku, ne bezpečnost.
+Privacy-first detail: neukládej víc identifikátorů, než potřebuješ. Často stačí hash IP pro krátké okno, ID účtu, endpoint, výsledek a počet pokusů. Nepřidávej sledovací fingerprinting jen proto, že „by se mohl hodit“.
 
-## Role piš podle práce, ne podle organizační poezie
+## Přihlašování chraň proti hádání i proti zámku účtu
 
-Role mají popisovat práci, ne interní status. „Super admin“, „manager“, „marketing“ a „externí“ jsou často moc široké. Lepší je začít od akcí.
+U loginu je lákavé nastavit jednoduché pravidlo: pět špatných pokusů a účet se zamkne. Jenže útočník pak může zamykat cizí účty zadáváním špatných hesel. Lepší je kombinovat zpoždění, dočasné zpřísnění, MFA signály a limity na více úrovních.
 
-Příklad rolí pro menší SaaS:
+Doporučený vzorec:
 
-- `Owner`: smluvní vlastník účtu, fakturace, smazání workspace, správa adminů.
-- `Admin`: správa uživatelů, nastavení workspace, integrace, auditní přehledy.
-- `Editor`: tvorba a úprava obsahu nebo dat, která patří do běžné práce.
-- `Viewer`: čtení bez změn a exportů.
-- `Support`: omezený diagnostický přístup s auditním záznamem.
-- `Billing`: faktury, tarif, platební údaje bez přístupu k obsahu zákaznických dat.
+- po několika neúspěšných pokusech zvyšuj čekací dobu,
+- neprozrazuj, jestli je špatně e-mail nebo heslo,
+- u podezřelých pokusů vyžaduj další ověření,
+- upozorni uživatele na podezřelou aktivitu bez paniky,
+- loguj pokusy agregovaně a bez ukládání hesel nebo tajných hodnot,
+- umožni obnovu účtu přes bezpečný proces podpory.
 
-Privacy-first detail: export dat, mazání dat, změna vlastníka, změna fakturace a přístup k auditním logům mají být samostatně hlídané akce. Nepatří automaticky každému, kdo umí upravit název projektu.
+NIST SP 800-63B uvádí, že ověřovatelé mají implementovat rate-limiting mechanismus pro omezení počtu neúspěšných pokusů o autentizaci. To neznamená „vymysli otravnou překážku“. Znamená to snížit šanci online hádání bez toho, aby běžný uživatel při překlepu skončil v labyrintu.
 
-## Sdílené účty nahraď pojmenovanými účty
+## API limity piš do dokumentace
 
-Sdílený účet vypadá prakticky, dokud nepotřebuješ zjistit, kdo něco změnil. Pojmenované účty mají tři výhody: můžeš je odebrat konkrétnímu člověku, můžeš vynutit vícefaktorové ověření a auditní log dává smysl.
+Pokud máš API, rate limit není tajemství. Vývojář potřebuje vědět, kolik požadavků může poslat, jak dlouho má čekat a co znamená chybová odpověď. Skrytý limit jen přesune problém do podpory.
 
-Když nějaký nástroj sdílené účty vynucuje nebo neumí rozumné role, označ ho jako riziko. Nemusíš ho hned vyhodit, ale musíš vědět, že kolem něj potřebuješ kompenzační opatření:
+Dobrá API odpověď při limitu:
 
-- uložit přístup jen v password manageru,
-- nastavit silné unikátní heslo a MFA, pokud je k dispozici,
-- omezit počet lidí, kteří ho znají,
-- po odchodu člena týmu heslo rotovat,
-- zapsat vlastníka a datum příští revize.
+```http
+HTTP/1.1 429 Too Many Requests
+Retry-After: 60
+Content-Type: application/json
 
-U klíčových systémů ale sdílený účet neobhajuj pohodlím. DNS, hosting, repozitář, platební brána a databáze si zaslouží pojmenované účty. Ano, je to o trochu víc práce. Taky je o trochu méně infarktů.
+{
+  "error": "rate_limit_exceeded",
+  "message": "Počkejte 60 sekund a zkuste požadavek znovu.",
+  "retry_after_seconds": 60
+}
+```
 
-## Offboarding musí být checklist, ne vzpomínka
+Do dokumentace napiš:
 
-Odchod člověka, změna agentury nebo konec externí spolupráce je nejčastější moment, kdy se přístupy zapomenou uklidit. Offboarding proto nesmí být neformální „někdo mu asi zrušil e-mail“. Má mít vlastníka, datum a seznam systémů.
+- limit podle tarifu nebo typu klíče,
+- jestli je limit per endpoint, per workspace nebo globální,
+- jak funguje `Retry-After`,
+- zda existují burst limity,
+- jak požádat o zvýšení limitu,
+- které operace mají samostatné bezpečnostní limity.
 
-Doporučený postup:
+OWASP API Security Top 10 2023 řadí neomezenou spotřebu zdrojů mezi rizika API. Prakticky: API má mít limity na počet požadavků, velikost payloadu, počet objektů, výpočetní náročnost i drahá volání třetích stran.
 
-1. Urči datum a čas ukončení přístupů.
-2. Vypni primární identitu, e-mail a SSO.
-3. Odeber přístupy v systémech, které nejsou napojené na SSO.
-4. Rotuj sdílená hesla a tokeny, ke kterým měl člověk přístup.
-5. Předej vlastnictví dokumentů, repozitářů, domén, integrací a automatizací.
-6. Zkontroluj aktivní API klíče, SSH klíče a osobní access tokeny.
-7. Zapiš výsledek do offboarding záznamu.
+## Formuláře chraň bez sledovacího cirkusu
 
-Speciální pozor na automatizace. Bývá běžné, že důležitý workflow běží pod osobním účtem někoho, kdo už je na Bali a firemní Slack má archivovaný pod složkou „minulý život“. Produkční automatizace mají běžet pod služební identitou, ne pod osobním účtem.
+Veřejné formuláře potřebují ochranu proti spamu, ale nemusí hned sahat po invazivním trackingu. Začni nízko invazivními vrstvami.
 
-## API klíče a tokeny ber jako přístupy lidí v převleku
+Doporučené vrstvy:
 
-API klíč není technická drobnost. Je to přístup. Někdy silnější než uživatel, protože nemá únavu, dovolenou ani zdravý strach z tlačítka „Export all“.
+- honeypot pole skryté pro běžné uživatele,
+- minimální čas mezi načtením a odesláním,
+- limit podle formuláře a krátkodobého hashe IP,
+- validace délky a formátu polí,
+- blokování opakovaných stejných zpráv,
+- fronta nebo moderace u veřejného obsahu,
+- teprve u vyššího rizika další ověření.
 
-Minimální pravidla:
+Chybová hláška má být lidská: „Odeslání je dočasně omezené kvůli ochraně proti spamu. Zkuste to prosím za minutu, nebo napište na e-mail.“ Ne: „Error 429“. Uživatel není log parser.
 
-- každý klíč má vlastníka, účel a prostředí,
-- produkční a vývojové klíče jsou oddělené,
-- klíč má jen potřebný scope,
-- tajné hodnoty nejsou v repozitáři ani v poznámkách,
-- rotace má plán, ne hrdinskou improvizaci,
-- nepoužívané klíče se mažou,
-- incident znamená okamžitou rotaci dotčených klíčů.
+## AI a drahé operace potřebují rozpočtové brzdy
 
-U AI a automatizačních nástrojů přidej ještě jednu otázku: posílá klíč nebo integrace zákaznická data třetí straně? Pokud ano, musí to sedět s datovou mapou, smlouvami a slibem vůči uživateli. Jinak se z pohodlné automatizace stane datový tunel s hezkou ikonou.
+U AI funkcí nestačí klasický počet požadavků za minutu. Jeden požadavek může stát haléře, druhý stokoruny, pokud spustí dlouhý kontext, několik nástrojů nebo velký export. Proto limituj i spotřebu.
 
-## Přístupy kontroluj pravidelně, ale krátce
+Praktické limity:
 
-Access review nemusí být dvoudenní rituál s tabulkou, která vypadá jako trest za maturitu. Pro menší tým stačí měsíční nebo čtvrtletní kontrola nejdůležitějších systémů.
+- denní nebo měsíční kredit pro workspace,
+- limit délky vstupu a výstupu,
+- limit počtu nástrojových volání,
+- timeout pro dlouhé úlohy,
+- fronta pro dávkové operace,
+- upozornění při neobvyklé spotřebě,
+- tvrdý strop pro free trial a testovací účty.
 
-Rychlý rytmus:
+Privacy-first doplněk: v metrikách nepotřebuješ ukládat prompt ani obsah zákaznických dat. Pro provozní řízení často stačí počet požadavků, typ funkce, tokeny, cena, výsledek, chyba a workspace.
 
-- měsíčně: produkce, hosting, DNS, repozitáře, CI/CD, platební brána,
-- čtvrtletně: CRM, helpdesk, CMS, analytika, e-mailing, design a automatizace,
-- po každém odchodu: okamžitý offboarding checklist,
-- po incidentu: mimořádná revize účtů, rolí, tokenů a auditních logů.
+## Limity musí mít vlastní provozní metriku
 
-Výstupem kontroly nemá být krásný dokument. Výstupem má být seznam změn: komu odebrat přístup, komu snížit roli, který token zrušit, který systém napojit na SSO, který sdílený účet nahradit.
+Co neměříš, to budeš ladit podle pocitu. U rate limitů sleduj hlavně, jestli chrání před zneužitím a zároveň neblokují legitimní práci.
 
-## Privacy-first pravidla pro přístup k datům
+Užitečné metriky:
 
-Přístupy nejsou jen bezpečnostní téma. Jsou to také privacy téma. Čím méně lidí a integrací vidí osobní údaje, tím menší je riziko úniku, chybného exportu i zbytečného interního šmírování.
+- počet odpovědí `429` podle endpointu,
+- počet unikátních účtů nebo workspace zasažených limitem,
+- poměr limitovaných požadavků k úspěšným,
+- top endpointy podle spotřeby zdrojů,
+- náhlý růst neúspěšných loginů,
+- nákladové špičky u AI nebo externích API,
+- počet support ticketů způsobených limitem.
 
-Praktická pravidla:
+Alert nepatří na každé `429`. Alert patří na anomálii: prudký nárůst, dopad na placené zákazníky, vyčerpání rozpočtu nebo podezření na útok.
 
-- odděl pracovní metadata od obsahu zákaznických dat,
-- supportu zobrazuj jen data nutná k řešení ticketu,
-- citlivé údaje maskuj, pokud nejsou pro práci nezbytné,
-- exporty dat loguj a omez podle role,
-- auditní logy chraň před běžnou editací,
-- přístup do produkční databáze ber jako výjimku, ne denní nástroj,
-- pro analýzy používej agregace nebo anonymizované výstupy, pokud stačí.
+## Checklist: rate limiting bez trestání lidí
 
-Tohle je přesně místo, kde privacy-first není plakát na webu, ale architektura provozu. Uživatel nevidí tvůj access review, ale cítí výsledek: méně zbytečného sběru, méně lidí u dat a jasnější odpovědnost.
+- [ ] Máme seznam drahých, citlivých a zneužitelných akcí?
+- [ ] Liší se limity podle rizika endpointu?
+- [ ] Nepoužíváme jen IP adresu jako jediný klíč?
+- [ ] Má login ochranu proti hádání i proti záměrnému lockoutu?
+- [ ] Vrací API srozumitelný stav `429` a `Retry-After`?
+- [ ] Jsou API limity popsané v dokumentaci?
+- [ ] Máme limity velikosti payloadu, počtu objektů a délky úlohy?
+- [ ] Chráníme AI a externí služby rozpočtovým stropem?
+- [ ] U formulářů používáme nízko invazivní anti-spam vrstvy?
+- [ ] Logujeme jen data nutná pro ochranu a provoz?
+- [ ] Sledujeme, kolik legitimních uživatelů limit zasáhne?
+- [ ] Existuje postup pro dočasné zvýšení limitu důvěryhodnému zákazníkovi?
 
-## Checklist: přístupy a offboarding bez sdíleného hesla
-
-- [ ] Máme seznam všech systémů s přístupem k datům, penězům nebo provozu?
-- [ ] Má každý systém vlastníka?
-- [ ] Víme, kdo má administrátorský přístup?
-- [ ] Používáme pojmenované účty místo sdílených účtů tam, kde to jde?
-- [ ] Mají role popsané konkrétní akce, ne jen názvy oddělení?
-- [ ] Platí výchozí pravidlo nejmenších oprávnění?
-- [ ] Jsou exporty, mazání a změna vlastníka chráněné zvlášť?
-- [ ] Máme offboarding checklist pro zaměstnance, externisty i agentury?
-- [ ] Rotujeme sdílená hesla a tokeny po odchodu člověka?
-- [ ] Běží produkční automatizace pod služební identitou?
-- [ ] Má každý API klíč vlastníka, účel, scope a prostředí?
-- [ ] Probíhá pravidelná kontrola nejrizikovějších přístupů?
-- [ ] Umíme rychle zjistit, kdo exportoval nebo změnil citlivá data?
-- [ ] Je přístup k produkční databázi výjimka s důvodem a záznamem?
-
-## Mini šablona access review karty
+## Mini šablona limitovací karty
 
 ```markdown
-# Access review karta: [systém]
+# Limitovací karta: [endpoint / akce]
 
 ## Kontext
-- Systém:
+- Akce:
+- Riziko: bezpečnost / náklad / spam / výkon / data
 - Vlastník:
-- Kategorie: produkce / data / finance / obsah / support / marketing / automatizace
-- Kritičnost: vysoká / střední / nízká
-- Poslední kontrola:
-- Další kontrola:
+- Uživatelé nebo integrace:
 
-## Účty a role
-- Administrátoři:
-- Běžní uživatelé:
-- Externisté / agentury:
-- Služební účty:
-- Sdílené účty, pokud existují:
+## Limit
+- Klíč limitu:
+- Okno:
+- Burst:
+- Denní / měsíční strop:
+- Výjimky:
 
-## Data a akce
-- Jaká osobní data jsou dostupná:
-- Kdo může exportovat data:
-- Kdo může mazat data:
-- Kdo může měnit vlastníka / billing:
-- Kde je auditní log:
+## Odpověď uživateli
+- HTTP status / UI stav:
+- `Retry-After`:
+- Text chyby:
+- Alternativní kontakt:
 
-## Klíče a integrace
-- API klíče:
-- SSH / deploy klíče:
-- Webhooky:
-- Automatizace:
-- Datum poslední rotace:
+## Logování a privacy
+- Co logujeme:
+- Co záměrně nelogujeme:
+- Retence:
+- Kdo má přístup:
 
-## Změny po kontrole
-- Přístupy k odebrání:
-- Role ke snížení:
-- Tokeny k rotaci:
-- Rizika k dořešení:
-- Vlastník navazující akce:
+## Provoz
+- Metriky:
+- Alerty:
+- Jak zvýšit limit:
+- Jak limit vypnout nebo zpřísnit při incidentu:
 ```
 
 ## Zdroje
 
-- OWASP Authorization Cheat Sheet doporučuje mimo jiné „deny by default“, nejmenší oprávnění a konzistentní serverové kontroly autorizace: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
-- OWASP Developer Guide shrnuje access control principy včetně „deny by default“ a least privilege: https://devguide.owasp.org/en/04-design/02-web-app-checklist/07-access-controls/
-- NIST SP 800-63B popisuje authentication lifecycle management a práci s autentizátory v digitální identitě: https://pages.nist.gov/800-63-4/sp800-63b.html
-- ENISA Secure by Design and Default Playbook je praktický zdroj pro malé a střední firmy, které chtějí zavádět bezpečnostní principy provozně: https://www.enisa.europa.eu/publications/enisa-secure-by-design-and-default-playbook
+- OWASP API Security Top 10 2023 uvádí API4:2023 Unrestricted Resource Consumption jako riziko spojené se spotřebou síťových, výpočetních, paměťových a úložných zdrojů: https://api-security.owasp.org/editions/2023/en/0x11-t10/
+- OWASP Authentication Cheat Sheet popisuje login throttling jako obranu proti příliš mnoha pokusům o hádání hesla: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+- OWASP Bot Management and Anti-Automation Cheat Sheet shrnuje rate limiting, kvóty a ochranu proti automatizovaným útokům: https://cheatsheetseries.owasp.org/cheatsheets/Bot_Management_and_Anti-Automation_Cheat_Sheet.html
+- NIST SP 800-63B vyžaduje rate-limiting mechanismus pro omezení neúspěšných autentizačních pokusů: https://pages.nist.gov/800-63-4/sp800-63b.html
 
 # Pracovní log
-- 2026-09-30: Doplněna příloha „Přístupy a offboarding bez sdíleného hesla v šuplíku“ s inventurou systémů, pravidlem nejmenších oprávnění, návrhem rolí, offboarding checklistem, správou API klíčů, privacy-first pravidly pro přístup k datům, access review šablonou a ověřenými zdroji OWASP, NIST a ENISA.
+- 2026-09-30: Doplněna příloha „Rate limiting a ochrana proti zneužití bez trestání normálních lidí“ s prioritizací citlivých akcí, limity podle identity, ochranou loginu, API dokumentací, formulářovou anti-spam vrstvou, AI rozpočtovými stropy, provozními metrikami, checklistem a ověřenými zdroji OWASP a NIST.
 
 - 2026-09-30: Doplněna příloha „Lokalizace webu a SaaS bez jazykového guláše“ s rozlišením jazyka, locale, trhu a právního kontextu, doporučeními pro data, čas, měnu, překladové klíče, přístupnost, privacy texty, support, postupné zavedení, checklistem, lokalizační kartou a ověřenými zdroji Unicode CLDR, W3C WCAG a Evropské komise.
 - 2026-09-30: Doplněna příloha „Uploady a uživatelské soubory bez bezpečnostního průvanu“ s účelem uploadů, whitelistem typů, bezpečným ukládáním názvů, karanténou, kontrolou metadat, retenčními pravidly, UX chybami, checklistem, upload kartou a ověřenými zdroji OWASP, W3C a Evropské komise.
