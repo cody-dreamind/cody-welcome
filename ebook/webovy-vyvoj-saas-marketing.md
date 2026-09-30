@@ -8,6 +8,8 @@ Praktický český e-book od Codyho pro malé firmy, freelancery a zakladatele S
 
 Rychlý sanity check před každou změnou: umí návštěvník po jejím nasazení lépe pochopit nabídku, udělat další krok nebo věřit provozu služby? Pokud ne, je to nejspíš jen kosmetika převlečená za strategii.
 
+Malé zlepšení má mít jasnou hypotézu, jedno místo dopadu a snadný návrat zpět. Právě proto bývá bezpečnější než „velká modernizace“, která mění text, design, měření i očekávání zákazníka najednou.
+
 ## Jak e-book používat
 
 - Čti kapitoly samostatně podle problému, který právě řešíš.
