@@ -22854,7 +22854,229 @@ Alert nepatří na každé `429`. Alert patří na anomálii: prudký nárůst, 
 - OWASP Bot Management and Anti-Automation Cheat Sheet shrnuje rate limiting, kvóty a ochranu proti automatizovaným útokům: https://cheatsheetseries.owasp.org/cheatsheets/Bot_Management_and_Anti-Automation_Cheat_Sheet.html
 - NIST SP 800-63B vyžaduje rate-limiting mechanismus pro omezení neúspěšných autentizačních pokusů: https://pages.nist.gov/800-63-4/sp800-63b.html
 
+# Příloha: CSV exporty a reporty bez tabulkového průšvihu
+
+Export do CSV vypadá nevinně. Klikneš na tlačítko, stáhne se tabulka, někdo ji otevře v Excelu nebo LibreOffice a život jde dál. Jenže právě exporty bývají místa, kde se z aplikace tiše vynese víc dat, než bylo potřeba, kde skončí osobní údaje v e-mailových přílohách a kde se „rychlá tabulka pro obchod“ promění v neřízenou kopii databáze.
+
+Privacy-first export není zákaz exportů. Je to disciplína: export má mít jasný účel, omezený rozsah, bezpečný formát, rozumnou retenci a dohled nad tím, kdo ho vytvořil. Tabulka není méně citlivá jen proto, že má příponu `.csv`.
+
+> Codyho komentář: CSV je jako igelitka z večerky. Praktická, levná, všichni ji umí použít — a přesně proto v ní firmy nosí věci, které by měly být v trezoru.
+
+## Nejdřív urč účel exportu
+
+Každý export má odpovědět na jednu pracovní otázku. Ne „ať tam radši máme všechno“. To je začátek datového skladiště v lokálním `Downloads` folderu.
+
+Dobré účely:
+
+- obchod chce seznam otevřených poptávek za posledních 30 dní,
+- finance potřebují měsíční přehled faktur pro účetní systém,
+- support chce anonymizovaný seznam nejčastějších typů ticketů,
+- produkt potřebuje agregovaný report aktivace bez obsahu uživatelských dat,
+- zákazník chce export vlastních dat z účtu.
+
+Špatné účely:
+
+- „možná se to bude hodit“,
+- „pošleme si databázi bokem“,
+- „marketing chce všechny kontakty“,
+- „uděláme si zálohu v Excelu“,
+- „zatím nevíme, co s tím budeme dělat“.
+
+Praktická otázka před každým novým exportem: **jaké rozhodnutí bez něj nejde udělat?** Pokud odpověď neexistuje, export není produktová funkce. Je to pohodlný únik dat v hezkém kabátku.
+
+## Exportuj výchozí minimum, ne maximum
+
+Výchozí export má obsahovat jen sloupce potřebné pro běžné použití. Rozšířený export může existovat, ale má být vědomě zvolený, pojmenovaný a chráněný vyšší rolí.
+
+Příklad pro poptávky:
+
+| Sloupec | Výchozí export | Rozšířený export |
+| --- | --- | --- |
+| ID poptávky | ano | ano |
+| Datum vytvoření | ano | ano |
+| Stav | ano | ano |
+| Firma | ano | ano |
+| Kontaktní e-mail | jen pokud je účel follow-up | ano, pro oprávněné role |
+| Telefon | ne | jen pokud je nutný |
+| Text zprávy | ne | jen po vědomém zapnutí |
+| Interní poznámky | ne | obvykle nikdy |
+| IP adresa | ne | obvykle nikdy |
+| User agent | ne | obvykle nikdy |
+
+EDPB ve svém průvodci pro malé firmy připomíná princip data protection by design and by default: standardně se mají zpracovávat jen osobní údaje nutné pro konkrétní účel, včetně rozsahu, doby uložení a přístupnosti ([EDPB: Be compliant](https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en)). Export je přesně místo, kde se tento princip rychle rozbije, pokud výchozí stav znamená „všechno“.
+
+## Pozor na CSV injection
+
+CSV není jen text. Když buňka začíná znaky jako `=`, `+`, `-` nebo `@`, tabulkový procesor ji může interpretovat jako vzorec. OWASP popisuje CSV Injection, někdy nazývanou Formula Injection, jako situaci, kdy aplikace vloží nedůvěryhodný vstup do CSV a tabulkový program ho po otevření vyhodnotí jako vzorec ([OWASP: CSV Injection](https://owasp.org/www-community/attacks/CSV_Injection)).
+
+Riziková pole jsou hlavně ta, která vyplňuje uživatel:
+
+- jméno,
+- název firmy,
+- předmět zprávy,
+- poznámka,
+- adresa,
+- název projektu,
+- tag nebo štítek.
+
+Praktická obrana:
+
+- hodnoty z nedůvěryhodných vstupů escapuj podle pravidel formátu,
+- neexportuj HTML ani rich text jako „nějaký text“ bez sanitizace,
+- u polí otevřených uživatelům řeš znaky spouštějící vzorce,
+- nastav správný `Content-Type`, například `text/csv`,
+- testuj exporty s hodnotami začínajícími na `=`, `+`, `-`, `@`, tabulátor a nový řádek,
+- zvaž XLSX generování s explicitními typy buněk, pokud export používají netechnické týmy.
+
+Tady nejde o paranoidní akademickou hru. Export si často stáhne člověk s vyšším oprávněním, otevře ho v desktopové aplikaci a důvěřuje mu, protože pochází z vlastního systému. To je přesně kontext, který útoky milují.
+
+## CSV má mít metadata, ne hádanku
+
+Export bez popisu sloupců je časovaná bomba pro budoucí tým. Za tři měsíce nikdo neví, jestli `created_at` znamená vytvoření účtu, první platbu nebo import z CRM. W3C CSV on the Web doporučení řeší mimo jiné model tabulkových dat a metadata, která pomáhají popsat strukturu CSV souborů a jejich sloupce ([W3C: Model for Tabular Data and Metadata on the Web](https://www.w3.org/TR/tabular-data-model/)).
+
+Pro interní SaaS nemusíš zavádět plný standard hned. Stačí praktická dokumentace:
+
+- název exportu,
+- účel,
+- vlastník,
+- dostupné role,
+- seznam sloupců,
+- význam každého sloupce,
+- datový typ,
+- časová zóna,
+- filtry použité při exportu,
+- datum a autor exportu.
+
+Dobrá praxe je přidat do UI vedle exportu krátký popis: „Export obsahuje otevřené poptávky za zvolené období. Neobsahuje interní poznámky, IP adresy ani technické logy.“ Jedna věta může zabránit tomu, aby obchod čekal něco jiného a začal si vytvářet vlastní obchvat.
+
+## Role a schvalování podle citlivosti
+
+Ne každý export potřebuje schvalování. Ale každý export potřebuje přemýšlení podle citlivosti.
+
+Rozděl exporty do tří úrovní:
+
+1. **Nízké riziko** — agregované reporty bez osobních údajů.
+2. **Střední riziko** — pracovní seznamy s kontaktními údaji pro omezený tým.
+3. **Vysoké riziko** — exporty obsahující texty zpráv, platební údaje, interní poznámky, bezpečnostní data nebo velké objemy zákaznických záznamů.
+
+Pravidla podle úrovně:
+
+- nízké riziko: dostupné oprávněným rolím, loguj stažení,
+- střední riziko: časový filtr, omezení sloupců, auditní záznam,
+- vysoké riziko: vyšší role, potvrzení účelu, případně čtyřoký princip.
+
+Čtyřoký princip nemusí být korporátní divadlo. Stačí, že export všech zákazníků s e-maily a poznámkami nespustí jeden člověk omylem v pátek v 16:58, kdy už mozek běží na úsporný režim.
+
+## Retence exportů je stejně důležitá jako export samotný
+
+Export vytvořený v aplikaci často skončí mimo kontrolovaný systém. Přesto můžeš omezit škody:
+
+- generované soubory ukládej jen krátce,
+- odkazy ke stažení nech expirovat,
+- neukládej hotové exporty navždy „kvůli pohodlí“,
+- u citlivých exportů zobraz upozornění na bezpečné zacházení,
+- loguj vytvoření a stažení exportu,
+- umožni správcům vidět poslední citlivé exporty,
+- doporuč týmům bezpečný sdílecí kanál místo e-mailových příloh.
+
+Příklad rozumného nastavení:
+
+```text
+Agregovaný měsíční report: dostupný 30 dní
+Pracovní export poptávek: dostupný 7 dní
+Citlivý zákaznický export: dostupný 24 hodin
+Export osobních dat na žádost uživatele: dostupný přes zabezpečený odkaz s expirací
+```
+
+Není cílem udělat lidem práci protivnou. Cílem je zabránit tomu, aby se z každého exportu stal malý trvalý stín databáze.
+
+## UX exportu má brzdit omyly
+
+Dobré exportní UI není jen tlačítko „Export“. Má člověka navést k bezpečnému rozsahu.
+
+Praktické prvky:
+
+- povinný rozsah období,
+- viditelný počet řádků před stažením,
+- přepínač „základní / rozšířený export“,
+- popis citlivých sloupců,
+- potvrzení u velkých a citlivých exportů,
+- jasný název souboru s datem a rozsahem,
+- možnost exportovat agregace místo jednotlivých záznamů.
+
+Název souboru je drobnost, ale pomáhá:
+
+```text
+poptavky-otevrene-2026-09.csv
+faktury-mesicni-prehled-2026-09.csv
+support-typy-ticketu-agregace-2026-Q3.csv
+```
+
+Špatný název `export.csv` je pozvánka k tomu, aby lidé posílali přílohy se slovy „myslím, že je to ta správná verze“. To je věta, po které někde v serverovně zhasne světlo.
+
+## Checklist: CSV exporty bez průšvihu
+
+- [ ] Má každý export jasný účel a vlastníka?
+- [ ] Je výchozí export omezený na minimální potřebné sloupce?
+- [ ] Existuje samostatný režim pro rozšířený nebo citlivý export?
+- [ ] Jsou uživatelské vstupy chráněné proti CSV/formula injection?
+- [ ] Má export správný formát, kódování a `Content-Type`?
+- [ ] Dokumentujeme význam sloupců, časovou zónu a použité filtry?
+- [ ] Vidí uživatel počet řádků a rozsah před stažením?
+- [ ] Logujeme vytvoření a stažení citlivých exportů?
+- [ ] Mají odkazy ke stažení expiraci?
+- [ ] Neuchováváme hotové exporty déle, než je nutné?
+- [ ] Umíme rozlišit agregovaný report od exportu osobních údajů?
+- [ ] Má tým pravidlo, že citlivé exporty neposílá běžným e-mailem?
+
+## Mini šablona exportní karty
+
+```text
+# Exportní karta: [název exportu]
+
+## Účel
+- Jaké rozhodnutí export podporuje:
+- Vlastník:
+- Primární uživatelé:
+- Frekvence použití:
+
+## Rozsah dat
+- Výchozí sloupce:
+- Volitelné citlivé sloupce:
+- Filtry:
+- Maximální rozsah období:
+- Maximální počet řádků:
+
+## Bezpečnost
+- Role s přístupem:
+- Schvalování:
+- Ochrana proti CSV injection:
+- Auditní log:
+- Expirace odkazu:
+
+## Privacy
+- Osobní údaje:
+- Data, která záměrně neexportujeme:
+- Retence souboru:
+- Doporučený způsob sdílení:
+
+## Dokumentace
+- Popis sloupců:
+- Časová zóna:
+- Kódování:
+- Příklad názvu souboru:
+```
+
+## Zdroje
+
+- OWASP popisuje CSV Injection / Formula Injection jako riziko při vkládání nedůvěryhodného vstupu do CSV souborů otevíraných v tabulkových programech: https://owasp.org/www-community/attacks/CSV_Injection
+- EDPB shrnuje data protection by design and by default včetně minimalizace rozsahu dat, doby uložení a přístupnosti pro konkrétní účel: https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en
+- W3C Model for Tabular Data and Metadata on the Web popisuje tabulková data, CSV soubory a metadata pro strukturu a význam sloupců: https://www.w3.org/TR/tabular-data-model/
+- GOV.UK doporučuje používat CSV on the Web standard k metadatům popisujícím obsah a strukturu CSV dat: https://www.gov.uk/government/publications/recommended-open-standards-for-government/using-metadata-to-describe-csv-data
+
 # Pracovní log
+- 2026-09-30: Doplněna příloha „CSV exporty a reporty bez tabulkového průšvihu“ s praktickým nastavením účelu exportu, minimalizací sloupců, ochranou proti CSV/formula injection, metadaty sloupců, řízením rolí, retencí souborů, UX brzdami proti omylům, checklistem, exportní kartou a ověřenými zdroji OWASP, EDPB, W3C a GOV.UK.
+
 - 2026-09-30: Doplněna příloha „Rate limiting a ochrana proti zneužití bez trestání normálních lidí“ s prioritizací citlivých akcí, limity podle identity, ochranou loginu, API dokumentací, formulářovou anti-spam vrstvou, AI rozpočtovými stropy, provozními metrikami, checklistem a ověřenými zdroji OWASP a NIST.
 
 - 2026-09-30: Doplněna příloha „Lokalizace webu a SaaS bez jazykového guláše“ s rozlišením jazyka, locale, trhu a právního kontextu, doporučeními pro data, čas, měnu, překladové klíče, přístupnost, privacy texty, support, postupné zavedení, checklistem, lokalizační kartou a ověřenými zdroji Unicode CLDR, W3C WCAG a Evropské komise.
