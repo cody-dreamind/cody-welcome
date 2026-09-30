@@ -20863,7 +20863,193 @@ Malý tým tím získá konzistenci bez velkého design systému. Stačí jedna 
 - [W3C: Understanding SC 3.3.1 Error Identification](https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html)
 - [W3C: Understanding SC 4.1.3 Status Messages](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html)
 
+# Příloha: Newsletter bez sledovacích pixelů a marketingového cirkusu
+
+Newsletter je jeden z nejlepších vlastněných kanálů. Není to algoritmický pronájem pozornosti, ale přímý vztah s člověkem, který ti dobrovolně řekl: „Pošli mi další užitečnou věc.“ To je vzácné. Takže s tím nezacházej jako s levným místem pro retargeting v převleku.
+
+Privacy-first newsletter má jednoduchou filozofii: posílej méně, posílej lépe a měř jen to, co opravdu ovlivní rozhodnutí. Nepotřebuješ vědět, jestli někdo otevřel e-mail ve 22:13 na konkrétním telefonu v kuchyni mezi druhou a třetí sušenkou. Potřebuješ vědět, jestli obsah pomáhá správným lidem a jestli z něj vznikají smysluplné odpovědi, objednávky, registrace nebo důvěra.
+
+> Codyho komentář: Tracking pixel v newsletteru často měří hlavně pocit kontroly marketéra. Realita je méně romantická: blokované obrázky, proxy servery, nepřesná open rate a hromada dat, která málokdy zlepší další odstavec.
+
+## Začni slibem, ne formulářem
+
+Přihlašovací formulář není jen technický detail. Je to malá smlouva o očekáváních. Člověk má před zadáním e-mailu chápat, co dostane, jak často, od koho a jak se může odhlásit.
+
+Slabý slib:
+
+```text
+Přihlaste se k odběru novinek.
+```
+
+Lepší slib:
+
+```text
+Jednou za 14 dní posílám praktické tipy k webům, SaaS a privacy-first marketingu v Evropě. Bez sledovacích pixelů. Odhlášení jedním klikem.
+```
+
+Tahle věta udělá víc než tři animované ikonky důvěry. Nastaví rytmus, téma i datovou hranici. Pokud slibuješ „jednou za 14 dní“, neposílej třikrát týdně jen proto, že v kalendáři zrovna svítí kampaňové zatmění.
+
+## Právní základ řeš podle typu kontaktu
+
+U newsletterů se často potkávají dvě vrstvy: ochrana osobních údajů a pravidla pro obchodní sdělení. V Česku ÚOOÚ vysvětluje, že obchodní sdělení se týká i právnických osob a že u existujících zákazníků může za splnění podmínek fungovat opt-out režim, zatímco mimo tento vztah typicky potřebuješ předchozí souhlas. Evropský rámec zároveň připomíná, že souhlas podle GDPR má být svobodný, konkrétní, informovaný a jednoznačný.
+
+Prakticky:
+
+- Veřejný newsletter pro ne-zákazníky stav na jasném přihlášení.
+- U zákaznických kontaktů odděl provozní e-maily od marketingu.
+- Každé obchodní sdělení musí mít snadnou možnost odmítnutí.
+- Souhlas nebal do všeobecných podmínek jako ponožku do spacáku.
+- Ulož si informaci, kdy, kde a k čemu se člověk přihlásil.
+
+Nejde o právní gymnastiku. Jde o důkaz férovosti. Když ti někdo po dvou letech napíše „proč mi to chodí?“, máš být schopný odpovědět lidsky a konkrétně.
+
+## Nepotřebuješ open tracking jako výchozí režim
+
+Open rate je lákavá metrika, ale u moderních e-mailových klientů je čím dál méně spolehlivá. Některé klienty obrázky blokují, jiné je načítají přes proxy, další otevření zkreslí bezpečnostní kontrolou. Pokud podle open rate rozhoduješ o kvalitě obsahu, můžeš optimalizovat podle kouřového signálu v mlze. Gratuluju, marketingový šaman level dvě.
+
+Privacy-first alternativa:
+
+- Měř doručitelnost na úrovni bounce a stížností.
+- Sleduj dobrovolné akce: odpovědi, kliky na jasně označené odkazy, registrace, objednávky.
+- U odkazů používej střídmé UTM parametry bez osobních identifikátorů.
+- V reportu pracuj s agregovanými trendy, ne s individuálním čtenářským profilem.
+- Jednou měsíčně vyhodnoť, které téma přineslo reakce, ne kdo přesně kdy otevřel obrázek.
+
+Když kliky měříš, napiš to do informačního textu. A pokud kliky nepotřebuješ, neměř je. Nejčistší datová strategie je občas prostě nemít data, která bys musel chránit, vysvětlovat a mazat.
+
+## Segmentuj podle volby, ne podle stopování
+
+Segmentace nemusí znamenat šmírování. U malého B2B newsletteru často stačí dát lidem možnost vybrat téma nebo frekvenci.
+
+Příklady férových segmentů:
+
+- „Zakladatel SaaS“ vs. „freelancer“ vs. „marketingový tým“.
+- „Webový vývoj“ vs. „privacy-first analytika“ vs. „produkt a SaaS“.
+- „Měsíční souhrn“ vs. „praktické návody“.
+- „Zajímá mě audit webu“ vs. „zajímá mě dlouhodobý obsah“.
+
+Co je lepší než tajné skóre leadu? Jedna přímá otázka. Třeba: „Co teď řešíš?“ Odpověď je přesnější než deset behaviorálních pravidel a méně připomíná detektivní kancelář s Mailchimpu podobným knírkem.
+
+## Doručitelnost je provoz, ne magie
+
+Privacy-first neznamená amatérský. Newsletter musí technicky fungovat. Bez toho je i nejkrásnější text jen elektronická láhev hozená do spamu.
+
+Minimum:
+
+- Posílej z domény, kterou vlastníš a kontroluješ.
+- Nastav SPF, DKIM a DMARC.
+- Nepoužívej noreply adresu; odpovědi jsou signál důvěry.
+- Čisti nedoručitelné adresy.
+- Neposílej koupeným databázím. To není růst, to je sběr reputačních problémů.
+- Před větší kampaní pošli test na hlavní klienty a zkontroluj textovou i HTML verzi.
+
+Evropský provoz ber jako výhodu. Pokud máš evropské publikum a privacy-first positioning, dává smysl preferovat nástroje s EU hostingem, jasnými subprocesory, rozumnou DPA a exportem dat. Ne proto, že mapa Evropy automaticky posvětí každý software, ale proto, že kratší datová cesta se lépe vysvětluje zákazníkům i sobě ve tři ráno.
+
+## Obsahový rytmus: jeden e-mail, jedna práce
+
+Každý newsletter má mít jednu hlavní práci. Ne tři oznámení, sedm odkazů, dvě slevy a k tomu „jen rychlý update“ dlouhý jako technická dokumentace k tiskárně.
+
+Dobrá struktura:
+
+1. Krátký kontext: proč to číst právě teď.
+2. Jeden praktický tip, příklad nebo příběh.
+3. Jasný další krok: odpovědět, přečíst článek, stáhnout checklist, objednat konzultaci.
+4. Připomenutí, proč člověk e-mail dostává.
+5. Viditelné odhlášení.
+
+Příklad jednoduchého CTA:
+
+```text
+Pokud chceš zjistit, kde tvůj web zbytečně sbírá data, odpověz slovem AUDIT. Pošlu ti krátký checklist pro první kontrolu.
+```
+
+Tohle je měřitelné bez osobního profilování. Počet odpovědí a kvalita následných konverzací řeknou víc než přesnost pixelu.
+
+## Retence kontaktů a neaktivních odběrů
+
+Databáze kontaktů není trofejová vitrína. Staré, neaktivní nebo nejasně získané kontakty zvyšují riziko, zhoršují doručitelnost a nafukují ego metriky. To je špatný obchod i špatná hygiena.
+
+Praktická rutina:
+
+- Jednou za čtvrtletí odstraň tvrdé bouncy.
+- Jednou za půl roku zkontroluj kontakty bez jasného původu.
+- U dlouhodobě neaktivních kontaktů raději pošli férový re-permission e-mail než tichý návrat do kampaně.
+- Po odhlášení uchovej jen minimum potřebné pro evidenci odmítnutí.
+- Exporty databáze maž po dokončení práce.
+
+Re-permission text může být jednoduchý:
+
+```text
+Už dlouho jsem ti neposlal nic, co by vyžadovalo reakci. Pokud chceš dál dostávat praktické tipy k webům, SaaS a privacy-first marketingu, potvrď odběr tady. Pokud ne, nic nemusíš dělat a kontakt vyřadím.
+```
+
+Ano, databáze se zmenší. To je v pořádku. Menší seznam lidí, kteří opravdu chtějí číst, je lepší než velký seznam duchů, spam trapů a bývalých nadšení.
+
+## Checklist: newsletter bez pixelového cirkusu
+
+- Přihlašovací formulář jasně říká téma, frekvenci, odesílatele a odhlášení.
+- Máš uložený původ přihlášení a znění slibu v době odběru.
+- Marketingové e-maily mají viditelné a funkční odhlášení.
+- Nepoužíváš open tracking jako výchozí metriku úspěchu.
+- Kliky měříš jen tam, kde z nich plyne konkrétní rozhodnutí.
+- UTM parametry neobsahují osobní údaje ani unikátní identifikátory čtenáře.
+- SPF, DKIM a DMARC jsou nastavené a pravidelně kontrolované.
+- Segmentace vychází z dobrovolné volby nebo obchodního kontextu, ne z tajného profilování.
+- Staré exporty a nejasné kontakty mají retenční pravidlo.
+- Nástroj má jasnou DPA, seznam subprocesorů a použitelný export dat.
+
+## Mini šablona newsletter karty
+
+```markdown
+# Newsletter karta: [název newsletteru]
+
+## Slib
+- Téma:
+- Frekvence:
+- Pro koho je:
+- Co neposíláme:
+
+## Přihlášení
+- Zdroj formuláře:
+- Text souhlasu / slibu:
+- Ukládaný důkaz přihlášení:
+- Double opt-in: ano/ne + proč
+
+## Měření
+- Měříme:
+- Neměříme:
+- UTM pravidla:
+- Rozhodnutí, která metriky podporují:
+
+## Provoz
+- Odesílací doména:
+- SPF/DKIM/DMARC:
+- Odpovědní adresa:
+- Nástroj a hosting:
+- Subprocesoři:
+
+## Retence
+- Tvrdé bouncy:
+- Neaktivní kontakty:
+- Odhlášené kontakty:
+- Exporty:
+
+## Revize
+- Vlastník:
+- Poslední kontrola:
+- Další kontrola:
+```
+
+## Zdroje
+
+- ÚOOÚ: [Šíření obchodních sdělení](https://uoou.gov.cz/pravni-ramec/ochrana-osobnich-udaju/sireni-obchodnich-sdeleni)
+- ÚOOÚ: [Obchodní sdělení — otázky a odpovědi](https://uoou.gov.cz/index.php/profesional/qa-otazky-a-odpovedi/obchodni-sdeleni)
+- ÚOOÚ: [GDPR a přímý elektronický marketing](https://uoou.gov.cz/novinky/obchodni-sdeleni/gdpr-a-primy-elektronicky-marketing)
+- European Data Protection Board: [Process personal data lawfully — Data protection guide for small business](https://www.edpb.europa.eu/sme/be-compliant/process-personal-data-lawfully_en)
+- European Commission: [Legal grounds for processing data](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en)
+
 # Pracovní log
+- 2026-09-30: Doplněna příloha „Newsletter bez sledovacích pixelů a marketingového cirkusu“ s právním minimem, doporučením bez open trackingu, férovou segmentací, doručitelností, retenční rutinou, checklistem a vyplnitelnou šablonou.
 - 2026-09-30: Doplněna příloha „Mikrocopy pro chyby, prázdné stavy a potvrzení bez UX mlhy“ s praktickým rozdělením typů hlášek, privacy-first pravidly pro chyby, prázdné stavy, potvrzení, varování a permission copy, checklistem, mikrocopy kartou a ověřenými zdroji W3C.
 - 2026-09-30: Doplněna příloha „Roadmapa bez HIPPO efektu a produktového hazardu“ s praktickým postupem prioritizace podle problémů, kartou nápadu, oddělením discovery/delivery/provozního dluhu, datovou brzdou, roadmap review, vědomým „teď ne“, checklistem a šablonou roadmap karty.
 - 2026-09-30: Doplněna příloha „Cookie souhlas bez temných vzorů a falešné volby“ s praktickým rozdělením technologií podle účelu, férovou symetrií souhlasu, varováním před dark patterns, provozní rutinou, checklistem, consent kartou a ověřenými zdroji EDPB a Evropské komise.
