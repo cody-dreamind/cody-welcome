@@ -21654,7 +21654,204 @@ Poslední dvě položky jsou důležité. Incident není jen technická chyba. M
 - NCSC: [Small Business Guide — Response & Recovery](https://www.ncsc.gov.uk/collection/small-business-guidance--response-and-recovery)
 - ENISA: [Incident Reporting Mechanisms](https://www.enisa.europa.eu/topics/national-cyber-security-strategies/ncss-map/national-implementation/incident-reporting-mechanisms)
 
+
+# Příloha: Feature flagy a rollouty bez produkční rulety
+
+Feature flag není kouzelná páčka, která z rizikového releasu udělá bezpečný release. Je to provozní nástroj, který dovolí oddělit nasazení kódu od zpřístupnění funkce. Když je dobře navržený, pomůže s postupným rolloutem, rychlým vypnutím problému a menším stresem při nasazení. Když je špatně navržený, vznikne z něj druhý autorizační systém, skrytý konfigurační chaos a technický dluh, který jednou bouchne v pátek odpoledne. Samozřejmě v pátek. Software má smysl pro drama.
+
+Privacy-first pohled je jednoduchý: feature flag nesmí být výmluva pro sběr detailních profilů uživatelů. Pro většinu rolloutů stačí segment typu interní tým, testovací tenant, konkrétní plán, procento provozu nebo regionální skupina. Pokud pro zapnutí tlačítka potřebuješ znát historii prohlížení, náladu návštěvníka a velikost jeho kávového hrnku, pravděpodobně nestavíš rollout, ale malou špionážní agenturu s hezkým UI.
+
+## Nejdřív odděl deployment, release a experiment
+
+Tři slova, která se často hází do jednoho kýble:
+
+- Deployment znamená, že je nový kód nasazený v prostředí.
+- Release znamená, že je funkce dostupná konkrétní skupině uživatelů.
+- Experiment znamená, že ověřuješ hypotézu a měříš dopad.
+
+Feature flag dává smysl hlavně tam, kde chceš nasadit kód dřív, než ho pustíš všem. Neznamená to, že každá změna má mít flag. Oprava překlepu v patičce nepotřebuje launch plán jako vesmírná mise. Flag používej pro změny, které mají provozní, obchodní, bezpečnostní nebo UX riziko.
+
+Praktické pravidlo:
+
+- Bez flagu: malá textová oprava, neviditelný refaktor, bezpečná úprava stylu.
+- S krátkodobým flagem: nová funkce, větší změna flow, nový onboarding, nová integrace.
+- S dlouhodobým kill switchem: platební modul, externí API, náročná background úloha, AI funkce s náklady.
+- Bez experimentálního flagu: věci, které ovlivňují práva, fakturaci nebo bezpečnost bez další kontroly.
+
+> Codyho komentář: Feature flag není omluva pro „nasadíme to a uvidíme“. Je to způsob, jak si předem říct, co přesně budeme sledovat, kdy rollbackujeme a kdo má právo zmáčknout červené tlačítko.
+
+## Rozliš typy flagů podle životnosti
+
+Největší průšvih vzniká, když všechny flagy vypadají stejně. Release flag, experiment, permission flag a provozní kill switch mají jiné riziko, vlastníka i datum expirace.
+
+| Typ flagu | K čemu slouží | Životnost | Hlavní riziko |
+|---|---|---:|---|
+| Release flag | Skryje nedokončenou nebo postupně pouštěnou funkci | dny až týdny | zapomenutý kód a testovací kombinace |
+| Experiment flag | Ověří hypotézu na části provozu | dny až týdny | zbytečné profilování a špatná interpretace dat |
+| Ops flag / kill switch | Rychle vypne náročnou nebo poruchovou část | měsíce až trvale | neotestovaný nouzový režim |
+| Permission flag | Zpřístupní funkci podle tarifu, role nebo tenanta | dlouhodobě | záměna s autorizací |
+
+Každý flag má mít v názvu účel, ne interní vtip. `new_dashboard` je slabé. `release_dashboard_v2_until_2026_10_31` je otravně dlouhé, ale už říká, že to má zmizet. A otravně dlouhé názvy jsou někdy levnější než tři měsíce archeologie v kódu.
+
+## Flag nesmí nahrazovat autorizaci
+
+Nejtvrdší pravidlo celé přílohy: feature flag není bezpečnostní kontrola. Pokud uživatel nemá právo něco udělat, backend to musí odmítnout i ve chvíli, kdy se flag omylem zapne, konfigurační služba spadne nebo frontend ukáže špatné tlačítko.
+
+Bezpečný model:
+
+1. Frontend použije flag pro viditelnost a UX.
+2. Backend ověří autorizaci podle role, tenanta, tarifu a pravidel produktu.
+3. Auditní log zaznamená důležitou akci, ne jen zapnutí tlačítka.
+4. Výchozí stav při chybě konfigurace je bezpečný: raději vypnout rizikovou funkci než otevřít přístup.
+
+Příklad: máš nový export všech faktur. Flag může říct, že se tlačítko ukáže jen interním testerům. Ale endpoint pro export musí stejně ověřit, že uživatel patří do správného tenanta, má oprávnění k fakturám a export neobsahuje data jiného zákazníka. Jinak nemáš feature flag, máš zdvořile pojmenovaný průšvih.
+
+## Rollout plán piš před zapnutím
+
+Rollout bez plánu je jen pomalý výbuch. Před zapnutím si napiš krátkou kartu:
+
+- Co zapínáme?
+- Komu to zapínáme jako první?
+- Jak poznáme, že je to v pořádku?
+- Jak poznáme, že to vypnout?
+- Kdo rozhoduje?
+- Jak rychle umíme rollback?
+- Jaká data k tomu opravdu potřebujeme?
+
+Postupný rollout může vypadat takto:
+
+1. Lokální a testovací prostředí.
+2. Interní tým na produkci.
+3. Jeden dobrovolný zákazník nebo testovací tenant.
+4. Malé procento provozu bez rizikových segmentů.
+5. Všichni noví uživatelé.
+6. Všichni uživatelé.
+7. Odstranění flagu a staré větve kódu.
+
+U B2B SaaS často funguje lépe rollout podle tenantů než anonymní procento uživatelů. Důvod je prostý: když se něco rozbije, support ví, komu pomoct, a nehoní náhodné stopy v agregovaném provozu. Privacy-first bonus: nepotřebuješ sledovat jednotlivce napříč celým produktem.
+
+## Experimenty měř bez datového luxusu
+
+Experimentální flag svádí ke sběru všeho. Odolej. Měř jen to, co rozhodne hypotézu.
+
+Špatná hypotéza:
+
+```text
+Nový onboarding bude lepší.
+```
+
+Lepší hypotéza:
+
+```text
+Když novému uživateli ukážeme import dat jako první krok, zvýší se počet dokončených prvních projektů do 24 hodin, aniž by vzrostl počet ticketů na podporu.
+```
+
+K takové hypotéze nepotřebuješ detailní nahrávky sezení, fingerprinting ani sledování po webu. Stačí agregovaně vědět, kolik uživatelů prošlo variantou, kolik dokončilo první projekt a zda se nezvedl počet podpůrných dotazů nebo chyb. Pokud pracuješ s malým B2B vzorkem, často je lepší kombinovat jednoduchou metriku s rozhovorem než předstírat statistickou vědu z dvaceti účtů.
+
+## Kill switch musí být otestovaný
+
+Kill switch, který nikdo nikdy nezkusil, je placebo tlačítko. Vypadá uklidňujícím způsobem, dokud ho nepotřebuješ.
+
+Pro kritické funkce ověř:
+
+- vypnutí opravdu zastaví rizikovou část,
+- uživatel dostane srozumitelný stav nebo náhradní postup,
+- background joby doběhnou bezpečně nebo se zastaví idempotentně,
+- zapnutí zpět nepošle duplicitní e-maily, faktury nebo webhooky,
+- support ví, jak situaci vysvětlit,
+- observabilita ukáže, že nouzový režim běží.
+
+Příklad: AI funkce pro generování návrhů textu začne stát víc, než čekáš, nebo externí model vrací chyby. Kill switch má funkci vypnout, nabídnout ruční alternativu, neztratit rozepsanou práci a neposílat citlivý obsah do dalšího pokusu jen proto, že retry smyčka dostala záchvat optimismu.
+
+## Flag debt maž jako provozní rutinu
+
+Každý dočasný flag musí mít datum odstranění. Ne „až bude čas“. Čas nebude. Čas je mýtická bytost, kterou produktové týmy kreslí na roadmapu.
+
+Jednou týdně nebo po každém releasu projdi:
+
+- flagy bez vlastníka,
+- flagy po datu expirace,
+- flagy zapnuté pro všechny,
+- flagy vypnuté pro všechny,
+- staré větve kódu za flagy,
+- testy, které udržují mrtvé kombinace,
+- dokumentaci a support makra, která popisují staré chování.
+
+Když je flag zapnutý pro všechny a už se neplánuje vypnutí, odstraň flag i starou větev. Jinak zůstane v systému jako drobná mina. Sama nebouchne každý den, ale jednou ji někdo najde bosou nohou.
+
+## Privacy-first pravidla pro flag konfiguraci
+
+Flag konfigurace je také data. Někdy dokonce citlivá provozní data, protože prozrazuje zákazníky v beta programu, interní plán produktu nebo bezpečnostní nouzové režimy.
+
+Drž tato pravidla:
+
+- Neukládej do flagů osobní údaje, pokud stačí tenant ID, role, tarif nebo interní segment.
+- Nepoužívej e-mail jako běžný targeting identifikátor; preferuj interní ID nebo skupinu.
+- Omez přístup k produkční konfiguraci podle rolí a loguj změny.
+- U citlivých flagů vyžaduj čtyři oči nebo alespoň jasný schvalovací zápis.
+- Export konfigurace neposílej do chatu jako screenshot s celým seznamem zákazníků.
+- U externí flag služby ověř region provozu, DPA, subprocesory, auditní log a exit plán.
+
+Evropský provoz neznamená, že musíš všechno napsat sám. Znamená to, že víš, kde konfigurace a provozní metadata bydlí, kdo k nim má přístup a jak odejdeš, když nástroj přestane dávat smysl.
+
+## Checklist: feature flagy bez produkční rulety
+
+- Každý flag má typ: release, experiment, ops nebo permission.
+- Každý dočasný flag má vlastníka a datum odstranění.
+- Flag nikdy nenahrazuje backend autorizaci.
+- Výchozí stav při chybě konfigurace je bezpečný.
+- Rollout plán obsahuje cílový segment, metriky, stop signál a rollback.
+- Experiment měří jen data nutná k rozhodnutí hypotézy.
+- Kill switch je otestovaný v reálném provozním scénáři nebo stagingu.
+- Změny produkčních flagů mají auditní stopu.
+- Flagy zapnuté pro všechny se po releasu mažou z kódu.
+- Externí flag nástroj má ověřený region, DPA, subprocesory a export konfigurace.
+
+## Mini šablona flag karty
+
+```markdown
+# Flag karta: [název flagu]
+
+## Účel
+- Co zapíná:
+- Proč existuje:
+- Typ: release / experiment / ops / permission
+
+## Vlastnictví
+- Vlastník:
+- Schvaluje zapnutí:
+- Schvaluje vypnutí:
+- Datum odstranění nebo revize:
+
+## Rollout
+- První segment:
+- Další segmenty:
+- Stop signál:
+- Rollback postup:
+
+## Bezpečnost a data
+- Backend autorizace ověřena: ano/ne
+- Výchozí stav při chybě konfigurace:
+- Sbírané metriky:
+- Osobní údaje v konfiguraci: žádné / popis a důvod
+
+## Úklid
+- Kdy smažeme starou větev kódu:
+- Které testy upravit:
+- Kterou dokumentaci aktualizovat:
+```
+
+## Zdroje
+
+- Martin Fowler / Pete Hodgson: Feature Toggles (aka Feature Flags) — https://martinfowler.com/articles/feature-toggles.html
+- OWASP Web Security Testing Guide: Testing for Feature Flag Security Bypass — https://owasp.github.io/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/02-Configuration_and_Deployment_Management/15-Feature_Flag_Security_Bypass
+- OWASP Authorization Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP Developer Guide: Secure by Default — https://devguide.owasp.org/en/04-design/02-web-app-checklist/01-secure-by-default/
+- NIST SP 800-218 Secure Software Development Framework — https://csrc.nist.gov/pubs/sp/800/218/final
+
 # Pracovní log
+
+- 2026-09-30: Doplněna příloha „Feature flagy a rollouty bez produkční rulety“ s rozlišením deployment/release/experiment, typy flagů podle životnosti, pravidlem že flag nenahrazuje autorizaci, rollout plánem, privacy-first měřením experimentů, testováním kill switchů, úklidem flag debt, checklistem, vyplnitelnou flag kartou a ověřenými zdroji Martin Fowler, OWASP a NIST.
 - 2026-09-30: Doplněna příloha „Incidentová komunikace a status page bez paniky a mlžení“ s dopadovou škálou P1–P4, rolemi, rytmem status updatů, privacy-first pravidly pro komunikaci, support makry, postmortem šablonou, checklistem a ověřenými zdroji Google SRE, NCSC a ENISA.
 - 2026-09-30: Doplněna příloha „Logování a observabilita bez datového smetiště“ s praktickým modelem logů, metrik, auditních událostí, syntetických kontrol, datovou hranicí, retencí, přístupovými pravidly, alerty, runbookem, checklistem, logovací kartou a ověřenými zdroji OWASP a NIST.
 - 2026-09-30: Obnovena plná podoba e-booku po poškozeném posledním commitu a doplněna příloha „Doménová a DNS hygiena bez křehkého domečku z TXT záznamů“ s inventurou domén, e-mailovou ochranou, správou DNS záznamů, DNSSEC doporučeními, checklistem, šablonou doménové karty a ověřenými zdroji NCSC, GOV.UK a ICANN.
