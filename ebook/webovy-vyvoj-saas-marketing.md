@@ -19801,7 +19801,252 @@ Retence je místo, kde se privacy-first přístup mění z hezké věty na provo
 
 ---
 
+
+# Příloha: Přístupnost webu a SaaS bez alibi a overlay kouzel
+
+Přístupnost není samostatný „nice to have“ projekt pro pozdější verzi. Je to součást kvality produktu, stejně jako bezpečnost, výkon nebo srozumitelný onboarding. Pokud člověk nemůže přečíst text, projít formulář klávesnicí, pochopit chybu nebo dokončit platbu bez myši, web mu v praxi říká: „Nejsi náš zákazník.“ To je špatný marketing, špatný produkt a často i zbytečné právní riziko.
+
+Od 28. června 2025 se v EU používají pravidla European Accessibility Act pro vybrané výrobky a služby. V Česku je transponuje zákon č. 424/2023 Sb. a MPO uvádí, že od 29. června 2025 mají dotčené výrobky a služby splňovat zákonné požadavky na přístupnost. Neznamená to, že každý malý web má přes noc právní drama v bundě s logem paragrafu. Znamená to ale, že přístupnost už nejde odkládat jako „to někdy doděláme, až budeme velcí“.
+
+> Codyho komentář: Přístupnost je UX bez nafoukanosti. Není to režim pro „speciální uživatele“. Je to normální schopnost webu fungovat i ve chvíli, kdy člověk nemá ideální zrak, ideální zařízení, ideální ruce, ideální soustředění nebo ideální pondělí.
+
+## Začni tím, co brání dokončení práce
+
+Největší chyba je začít auditem všeho najednou a skončit s tabulkou o 143 řádcích, kterou nikdo neotevře. Lepší je projít hlavní cesty, kde přístupnost přímo ovlivňuje obchodní výsledek a důvěru.
+
+Pro web nebo SaaS typicky projdi:
+
+- hlavní landing page,
+- ceník,
+- kontaktní formulář,
+- registraci a přihlášení,
+- onboarding první hodnotné akce,
+- platbu nebo objednávku,
+- nastavení účtu,
+- export a smazání dat,
+- dokumentaci a help centrum,
+- incident/status stránku.
+
+U každé cesty si polož tři otázky:
+
+1. Dá se dokončit jen klávesnicí?
+2. Dá se pochopit bez barvy, animace a drobných vizuálních náznaků?
+3. Dostane uživatel jasnou informaci, co se stalo a co má udělat dál?
+
+Když odpověď zní „nevím“, je to signál k testu. Když odpověď zní „ne“, je to práce do backlogu. Když odpověď zní „to nevadí, většina lidí používá myš“, přichází Cody s virtuálním smetákem.
+
+## WCAG ber jako mapu, ne jako zaklínadlo
+
+WCAG 2.2 je W3C Recommendation a W3C doporučuje používat WCAG 2.2 kvůli budoucí použitelnosti. Prakticky si ho můžeš zjednodušit na čtyři principy: obsah má být vnímatelný, ovladatelný, srozumitelný a robustní.
+
+Pro malý tým je dobrý start úroveň AA jako pracovní standard. Ne proto, že by každá situace byla právně identická, ale proto, že AA pokrývá většinu problémů, které uživatelé reálně potkávají v běžném webu nebo SaaS.
+
+Překlad do produktového jazyka:
+
+- Vnímatelné: text má kontrast, obrázky mají smysluplné alternativy, video má titulky, layout se nerozbije při zvětšení.
+- Ovladatelné: vše důležité jde klávesnicí, fokus je vidět, modály se chovají předvídatelně, časové limity nejsou pasti.
+- Srozumitelné: tlačítka říkají, co udělají, chyby formuláře jsou konkrétní, jazyk není interní kódové jméno projektu.
+- Robustní: HTML je validní, komponenty používají správné role a stavy, asistivní technologie dostanou stejný význam jako vizuální uživatel.
+
+## Nejlevnější opravy bývají nudné
+
+WebAIM v reportu The WebAIM Million 2025 našel na milionu domovských stránek přes 50 milionů detekovatelných chyb, průměrně zhruba 51 chyb na stránku. To není proto, že by celý internet stavěl kosmické simulátory. Často jde o nudné věci: nízký kontrast, chybějící alternativní texty, prázdné odkazy, chybějící popisky formulářů, prázdná tlačítka nebo špatně nastavený jazyk stránky.
+
+Praktický postup pro první iteraci:
+
+1. Oprav kontrast textu a tlačítek.
+2. Doplň popisky formulářových polí.
+3. Zkontroluj viditelný focus state.
+4. Projdi hlavní flow klávesnicí.
+5. Doplň alternativní texty jen tam, kde obrázek nese informaci.
+6. Zjednoduš chybové hlášky.
+7. Oprav nadpisovou hierarchii.
+
+Tohle není sexy backlog. Ale funguje. A v malém týmu je „funguje“ často lepší než „máme velkolepý accessibility program, který zatím čeká na kickoff“.
+
+## Overlay widget není strategie
+
+Pozor na slib „přidáme accessibility widget a máme hotovo“. Automatické overlaye a plovoucí tlačítka mohou pomoct s několika povrchovými úpravami, ale neopraví špatnou informační architekturu, nečitelný formulář, nepoužitelný dialog, chybějící popisky ani rozbitou klávesnicovou navigaci. Přístupnost musí být ve zdrojovém kódu, komponentách, textech a QA procesu.
+
+Privacy-first důvod je navíc jednoduchý: další externí skript znamená další dodavatel, další požadavek na právní a bezpečnostní posouzení, další potenciální datový tok a další místo, které může zpomalit nebo rozbít stránku.
+
+Použij raději tento model:
+
+- Design systém obsahuje přístupné komponenty.
+- Vývojové PR má kontrolu klávesnice, focusu a popisků.
+- Obsahový proces hlídá nadpisy, odkazy a alternativní texty.
+- QA kontroluje hlavní flow s klávesnicí a čtečkou alespoň u kritických releasů.
+- Backlog má jasnou prioritu podle dopadu na dokončení práce uživatele.
+
+## Přístupnost začíná v design systému
+
+Pokud má každý formulář vlastní styl, každé tlačítko vlastní hover a každý modal vlastní pravidla focusu, přístupnost bude věčný požár. V malém SaaS je lepší mít méně komponent, ale pořádně.
+
+Minimální sada komponent, kterou stojí za to ohlídat:
+
+- Button: textový název, focus state, disabled stav s vysvětlením, dostatečná klikací plocha.
+- Link: vizuálně odlišitelný od textu i bez barvy, smysluplný text odkazu.
+- Input: viditelný label, nápověda, chybový stav, propojení chyby s polem.
+- Checkbox a radio: velká cílová plocha, jasná skupina, použitelnost klávesnicí.
+- Select/combobox: nepředstírat vlastní magii, pokud nativní prvek stačí.
+- Modal: správný focus trap, zavření klávesou Escape, návrat focusu na původní místo.
+- Toast/alert: důležitá sdělení musí být dostupná i bez sledování animace.
+- Table: správné hlavičky, řazení popsané textem, rozumné chování na mobilu.
+
+U každé komponenty si ulož jednu krátkou kartu: účel, stavy, klávesnicové ovládání, textové zásady, datová hranice a testovací scénář. Komponenta bez pravidel je jen hezký screenshot s ambicemi.
+
+## Formuláře jsou přístupnostní minové pole
+
+Formulář je místo, kde se láme konverze i důvěra. Přístupný formulář nemusí být složitý. Musí být předvídatelný.
+
+Dobré pravidlo: label vždy patří k poli, chyba vždy říká co opravit, povinné pole je jasné před odesláním a potvrzení po odeslání vysvětlí další krok.
+
+Špatně:
+
+```text
+Něco se pokazilo.
+```
+
+Lépe:
+
+```text
+E-mail nemá platný formát. Zkontroluj prosím znak @ a doménu, například jana@firma.cz.
+```
+
+Privacy-first formulář navíc nesbírá data „pro jistotu“. Pokud chceš telefon, vysvětli proč. Pokud stačí e-mail, telefon nechtěj. Pokud chceš rozpočet, nabídni rozsah místo přesné částky. Přístupnost a minimalizace dat se tu hezky potkávají: méně polí znamená méně překážek i méně osobních údajů.
+
+## Testuj rukama, očima i strojem
+
+Automatické nástroje jsou dobrý začátek, ale nejsou rozsudek. Umí najít část problémů, hlavně ty strukturální. Neřeknou ti spolehlivě, jestli text tlačítka dává smysl, jestli je flow pochopitelné nebo jestli alternativa obrázku opravdu pomáhá.
+
+Praktická testovací rutina na 30 minut:
+
+1. Otevři stránku a odpoj myš. Projdi hlavní akci jen pomocí Tab, Shift+Tab, Enter, mezerníku a Escape.
+2. Zvětši stránku v prohlížeči na 200 %. Zkontroluj, že obsah nepadá mimo obrazovku a nejde o puzzle pro sokola.
+3. Zapni systémový režim vysokého kontrastu nebo simuluj kontrast v devtools.
+4. Spusť automatický audit pro základní chyby.
+5. Otevři stránku se screen readerem alespoň na kritické cestě.
+6. Přečti si chybové stavy nahlas. Když zní jako hláška z bankomatu v roce 2004, přepiš je.
+
+U SaaS releasů přidej „accessibility smoke test“ do definice hotovo pro změny, které zasahují formuláře, navigaci, modály, tabulky, grafy, onboarding nebo platbu.
+
+## Grafy a dashboardy musí mít textovou cestu
+
+SaaS produkty milují grafy. Grafy jsou fajn, dokud nejsou jediný způsob, jak pochopit stav účtu, kampaně nebo incidentu.
+
+Každý důležitý graf má mít:
+
+- textové shrnutí hlavního zjištění,
+- jasnou jednotku a období,
+- tabulkovou nebo exportovatelnou alternativu,
+- barvy doplněné textem, ikonou nebo vzorem,
+- vysvětlení, co má uživatel udělat dál.
+
+Příklad:
+
+```text
+Konverze trial → placený účet klesla z 12,4 % na 9,8 % za posledních 30 dní. Největší pokles je u týmů bez dokončeného onboarding checklistu. Doporučený další krok: projít první e-mail a aktivační obrazovku.
+```
+
+Tohle pomůže nejen lidem se čtečkou. Pomůže i zakladateli, který kouká na dashboard v 22:47 a snaží se zjistit, jestli hoří produkt, nebo jen jeho nervová soustava.
+
+## Dokumentace a help centrum nejsou výjimka
+
+Přístupnost dokumentace je často lepší obchodní podpora než další chat widget. Pokud dokumentace nemá správné nadpisy, odkazy typu „klikněte zde“, obrázky bez vysvětlení a kódové příklady bez kontextu, zvyšuje zátěž podpory.
+
+Minimum pro dokumentaci:
+
+- jeden článek řeší jednu práci,
+- nadpisy tvoří logickou osnovu,
+- odkazy popisují cíl,
+- screenshoty mají textové vysvětlení,
+- klávesové zkratky nejsou jediný způsob ovládání,
+- kódové bloky mají jazyk a popis,
+- postupy mají očekávaný výsledek i způsob návratu zpět.
+
+Privacy-first bonus: dokumentace může snížit potřebu support chatu, nahrávání obrazovek a sběru diagnostických dat. Když uživatel zvládne problém vyřešit z veřejné dokumentace, nemusí nikomu posílat screenshot produkčních dat. Tiché vítězství, žádné konfety, přesně jak to máme rádi.
+
+## Přístupnost jako provozní rutina
+
+Jednorázový audit je fotka. Rutina je film. Potřebuješ oboje, ale film rozhoduje, jestli se stav zlepšuje.
+
+Měsíční rutina pro malý tým:
+
+1. Vyber jednu kritickou cestu.
+2. Projdi ji klávesnicí a automatickým auditem.
+3. Zkontroluj nové komponenty od posledního review.
+4. Ověř, že nové texty mají smysluplné odkazy a nadpisy.
+5. Vyber maximálně tři opravy do dalšího sprintu.
+6. Zapiš rozhodnutí do přístupnostní karty.
+
+Čtvrtletně přidej hlubší kontrolu: onboarding, platba, account settings, export dat, help centrum a status page. Pokud spadáš do regulované oblasti nebo máš službu v rozsahu zákona č. 424/2023 Sb., přidej právní a odborné posouzení. E-book je pracovní návod, ne advokát v kapuci.
+
+## Checklist: přístupnost bez alibi
+
+- Má každá hlavní stránka jeden jasný `h1` a logickou strukturu nadpisů?
+- Jde hlavní konverzní cesta projít klávesnicí bez pasti?
+- Je vidět focus u všech interaktivních prvků?
+- Mají formulářová pole trvalé labely, nápovědu a konkrétní chybové hlášky?
+- Mají tlačítka a odkazy smysluplný název mimo vizuální kontext?
+- Je kontrast textů a důležitých UI prvků dostatečný?
+- Nespoléhá důležitá informace jen na barvu, animaci nebo pozici?
+- Mají obrázky, grafy a ikony alternativu podle svého významu?
+- Jsou modály, menu a dropdowny použitelné klávesnicí?
+- Má dokumentace čitelné postupy a textové vysvětlení screenshotů?
+- Je přístupnost součástí review komponent, ne až ročního auditu?
+- Neřeší se přístupnost externím overlay skriptem místo opravy produktu?
+
+## Mini šablona přístupnostní karty
+
+```markdown
+# Přístupnostní karta: [stránka / flow / komponenta]
+
+## Účel
+Jakou práci zde uživatel dokončuje:
+
+## Kritická akce
+Co nesmí být blokované:
+
+## Test klávesnicí
+Tab order:
+Viditelný focus:
+Escape / návrat:
+
+## Obsah
+Nadpisy:
+Odkazy:
+Chybové hlášky:
+Alternativy k obrázkům/grafům:
+
+## Technická kontrola
+Automatický audit:
+Screen reader smoke test:
+Zvětšení 200 %:
+
+## Rizika
+Co zatím není vyřešené:
+Priorita:
+Vlastník:
+Termín:
+```
+
+Přístupnost není brzda rychlosti. Je to způsob, jak nestavět dluh, který později zaplatíš refaktorem, právním stresem, supportem a ztracenými zákazníky. Malý tým nemusí mít dokonalý accessibility program. Musí ale přestat dělat stejné chyby pořád dokola a dát lidem férovou šanci produkt použít.
+
+## Zdroje
+
+- [European Commission: European Accessibility Act](https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en)
+- [EUR-Lex: Accessibility of products and services](https://eur-lex.europa.eu/EN/legal-content/summary/accessibility-of-products-and-services.html)
+- [MPO: Zákon č. 424/2023 Sb. o požadavcích na přístupnost některých výrobků a služeb](https://mpo.gov.cz/cz/podnikani/standardizace/pristupnost-vyrobku-a-sluzeb/zakon-c--424-2023-sb---o-pozadavcich-na-pristupnost-nekterych-vyrobku-a-sluzeb--279601/)
+- [MPO: Přístupnost výrobků a služeb po účinnosti zákona](https://mpo.gov.cz/cz/podnikani/pristupnost-vyrobku-a-sluzeb/pristupnost-vyrobku-a-sluzeb-po-ucinnosti-zakona--286983/)
+- [W3C: Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/wcag/)
+- [W3C WAI: WCAG 2 Overview](https://www.w3.org/WAI/standards-guidelines/wcag/)
+- [WebAIM: The WebAIM Million 2025](https://webaim.org/projects/million/2025)
+
+---
+
 # Pracovní log
+- 2026-09-30: Doplněna příloha „Přístupnost webu a SaaS bez alibi a overlay kouzel“ s praktickým postupem pro kritické cesty, WCAG principy, komponenty, formuláře, testovací rutinu, dashboardy, dokumentaci, checklist, přístupnostní kartu a ověřené zdroje EU, MPO, W3C a WebAIM.
+
 - 2026-09-30: Doplněna příloha „Retence a mazání dat bez digitálního syslení“ s praktickým modelem retenčních vrstev, workflow mazání, pravidly pro zálohy a exporty, checklistem, retenční kartou a ověřenými zdroji Evropské komise, EUR-Lex, EDPB a CNIL.
 
 - 2026-09-29: Doplněna příloha „Dodavatelské přístupy a servisní účty bez klíčů pod rohožkou“ s rozdělením lidských, externích a servisních identit, pravidly pro least privilege, expirace, tajemství, auditní stopu, offboarding, checklistem, přístupovou kartou a ověřenými zdroji OWASP a CISA.
