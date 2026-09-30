@@ -20638,7 +20638,233 @@ Tohle je silnější než „není kapacita“. Kapacita není strategie. Kapaci
 - Rozhodnutí:
 ```
 
+
+---
+
+# Příloha: Mikrocopy pro chyby, prázdné stavy a potvrzení bez UX mlhy
+
+Mikrocopy je ta malá textová vrstva produktu, které si nikdo nevšímá, dokud nezačne překážet. Chybová hláška, prázdný stav, potvrzení po odeslání formuláře, popisek tlačítka, text u přepínače, varování před nevratnou akcí. Všechno krátké. Všechno zdánlivě banální. A přesně proto to umí rozhodnout, jestli člověk službě důvěřuje, nebo má pocit, že ho aplikace právě poslala do sklepa hledat jistič.
+
+Privacy-first produkt potřebuje mikrocopy obzvlášť pečlivě. Nejen kvůli srozumitelnosti, ale i kvůli hranicím dat. Dobrá hláška neprozrazuje interní detaily, nelže o tom, co se stalo, nesvádí chybu na uživatele a nenutí ho předat víc osobních údajů, než je potřeba. Je krátká, konkrétní a navazuje na další krok.
+
+> Codyho komentář: „Něco se pokazilo“ je technický ekvivalent pokrčení ramen. Občas je to lepší než vyzradit interní chybu, ale pořád to není zákaznická péče. Je to jen digitální povzdech.
+
+## Rozděl mikrocopy podle práce, kterou má udělat
+
+Nepsat všechno stejným tónem. Každý typ hlášky má jinou práci:
+
+- **Chybová hláška**: říká, co se nepovedlo, kde je problém a co lze udělat dál.
+- **Validační nápověda**: předchází chybě dřív, než člověk odešle formulář.
+- **Prázdný stav**: vysvětluje, proč tu zatím nic není, a nabízí první užitečný krok.
+- **Potvrzení úspěchu**: uzavírá akci a říká, co se stane dál.
+- **Varování**: upozorňuje na riziko před akcí, ne až po ní.
+- **Permission copy**: vysvětluje, proč produkt žádá o přístup nebo údaj.
+- **Limit a rate-limit hláška**: pomáhá pokračovat bez dojmu, že služba spadla.
+
+Když se tyto práce pletou, vznikají hlášky typu „Akce nebyla možná“. To je sice věta, ale ne pomoc. Lepší hláška má tři části: kontext, důvod v lidském jazyce a další krok.
+
+```text
+Nepodařilo se uložit fakturační adresu. PSČ musí mít 5 číslic. Upravte pole PSČ a zkuste uložení znovu.
+```
+
+Tohle je delší než „Chyba validace“, ale šetří support, frustraci i opakované klikání. WCAG u identifikace chyb požaduje, aby automaticky rozpoznaná chyba byla popsána textem a aby bylo jasné, které pole je problematické ([W3C: Understanding SC 3.3.1 Error Identification](https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html)). Prakticky: barva nestačí, ikonka nestačí, interní kód nestačí.
+
+## Chybové hlášky piš jako navigaci, ne rozsudek
+
+Špatná chybová hláška člověka obviní nebo nechá stát na místě. Dobrá ho vrátí do práce.
+
+Slabé příklady:
+
+```text
+Neplatný vstup.
+Formulář obsahuje chyby.
+Operace selhala.
+Uživatel neexistuje.
+```
+
+Lepší varianty:
+
+```text
+E-mail nemá správný formát. Použijte například jmeno@firma.cz.
+Vyplňte prosím pole Název firmy a Kontaktní e-mail.
+Změnu se nepodařilo uložit. Zkontrolujte připojení a zkuste to znovu.
+Pokud účet existuje, pošleme na zadaný e-mail odkaz pro přihlášení.
+```
+
+Poslední příklad je důležitý pro bezpečnost a soukromí. U přihlášení, resetu hesla nebo pozvánek často nechceš potvrzovat, jestli účet existuje. Mikrocopy má chránit i lidi, kteří zrovna nejsou přihlášení. Zároveň ale nemá být paranoidní hádanka. Řekni, co se stane dál, bez zbytečného úniku informací.
+
+Praktické pravidlo: pokud hláška obsahuje interní výraz jako `constraint`, `payload`, `token`, `null`, `500`, `permission denied`, přepiš ji pro člověka. Technický detail patří do logu pro tým, ne do očí zákazníka. Výjimka: vývojářské API a administrátorské rozhraní, kde je technický detail užitečný — i tam ale odděl veřejnou zprávu od diagnostického ID.
+
+## Prázdný stav není prázdná plocha
+
+Prázdné stavy jsou často první moment, kdy člověk vidí produkt po registraci. Pokud uvidí jen „Žádná data“, produkt působí mrtvě. Přitom právě tady můžeš vysvětlit hodnotu bez onboardingového cirkusu.
+
+Dobrá struktura prázdného stavu:
+
+- co tu bude, až produkt začne pracovat,
+- proč je prostor prázdný právě teď,
+- jaký je první malý krok,
+- jestli je potřeba import, pozvánka, konfigurace nebo čas,
+- odkaz na nápovědu jen pokud opravdu pomůže.
+
+Příklad pro SaaS reporting:
+
+```text
+Zatím tu nejsou žádné týdenní přehledy.
+První přehled vytvoříme, jakmile bude v pracovním prostoru alespoň jedna dokončená zakázka. Můžete zatím pozvat tým nebo přidat první zakázku ručně.
+
+[Přidat zakázku] [Pozvat tým]
+```
+
+Příklad pro privacy-first analytiku:
+
+```text
+Zatím nemáme dost agregovaných dat pro tento graf.
+Výsledky zobrazujeme až od 20 návštěv, aby jednotlivé návštěvy nebyly snadno rozpoznatelné.
+```
+
+Tady mikrocopy zároveň vysvětluje hodnotu soukromí. Neomlouvá omezení, ale ukazuje princip. To je rozdíl mezi „nejde to“ a „chráníme hranici, kterou jsme slíbili“.
+
+## Potvrzení musí zavřít smyčku
+
+Po odeslání formuláře, objednávce, změně nastavení nebo exportu chce člověk vědět tři věci: povedlo se to, co bude dál a jestli musí něco udělat. „Hotovo“ je někdy dost. Často ale nestačí.
+
+Lepší potvrzení:
+
+```text
+Poptávku jsme přijali. Do e-mailu jsme poslali potvrzení a ozveme se obvykle do 2 pracovních dnů.
+```
+
+```text
+Export jsme začali připravovat. Až bude hotový, pošleme odkaz správci pracovního prostoru. Odkaz bude platný 7 dní.
+```
+
+```text
+Nastavení analytiky bylo uloženo. Volbu můžete kdykoliv změnit v Nastavení soukromí.
+```
+
+Všimni si, že potvrzení nezní jako fanfára. Nemusí. Má být klidné a přesné. U akcí s datovým dopadem přidej retenci, příjemce nebo místo změny. U akcí s čekáním přidej očekávaný čas. U akcí s bezpečností přidej, kdo dostane oznámení.
+
+WCAG u stavových zpráv řeší, aby důležité změny stavu byly dostupné i pro asistivní technologie bez zbytečné změny fokusu ([W3C: Understanding SC 4.1.3 Status Messages](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html)). Prakticky: když po kliknutí jen vizuálně problikne toast, část lidí se nemusí dozvědět, co se stalo.
+
+## Varování piš před škodou, ne po škodě
+
+Varování má být konkrétní. Ne „Jste si jistí?“, ale „co přesně se stane“. U destruktivních akcí popiš dopad, možnost obnovy a čas.
+
+Slabé:
+
+```text
+Opravdu chcete pokračovat?
+```
+
+Lepší:
+
+```text
+Smažete 14 uložených exportů pro tento projekt. Akce je nevratná a neovlivní původní zakázky. Pokračovat?
+```
+
+Ještě lepší u citlivých dat:
+
+```text
+Zrušíte přístup dodavatele „Novák IT“ k pracovnímu prostoru. Aktivní API klíče budou zneplatněny hned, auditní záznam zůstane uložený podle retenční politiky.
+```
+
+Varování není místo pro manipulaci. Tlačítko „Ano, smažte“ a „Zpět“ je férovější než „Ano, jsem odvážný“ a „Ne, nechci být produktivní“. Vtipy v destruktivních akcích rychle zestárnou. Databáze se nesměje.
+
+## Permission copy: řekni proč, ne jen co chceš
+
+Když produkt žádá o údaj nebo přístup, mikrocopy musí vysvětlit účel. Ne všechno patří do právních zásad. Člověk se rozhoduje v kontextu rozhraní.
+
+Příklady:
+
+```text
+Telefon je volitelný. Použijeme ho jen pro domluvu konzultace, ne pro marketingové hovory.
+```
+
+```text
+Přístup k fakturačním údajům potřebuje pouze role Správce. Běžní členové týmu tyto údaje neuvidí.
+```
+
+```text
+Nahrávka rozhovoru je volitelná. Pokud ji povolíte, použijeme ji jen pro zápis poznámek a smažeme ji po dokončení výzkumné syntézy.
+```
+
+Tohle je privacy-first copy v praxi. Nehází všechno do dokumentu „Zásady zpracování osobních údajů“, který nikdo v kritickém okamžiku nečte. Přináší minimum důležité informace tam, kde člověk dělá rozhodnutí.
+
+## Mini systém pro mikrocopy
+
+Mikrocopy nesmí vznikat pokaždé od nuly. Vytvoř si malý slovník tónu a vzorů:
+
+- **Tón**: klidný, konkrétní, bez obviňování, bez falešného nadšení.
+- **Chyby**: co se stalo, kde, co dál.
+- **Úspěch**: co bylo dokončeno, co bude následovat.
+- **Čekání**: proč to trvá, jak dlouho přibližně, co může člověk dělat.
+- **Soukromí**: účel, volitelnost, přístup, retence.
+- **Bezpečnost**: dopad, notifikace, audit, možnost obnovy.
+
+K tomu přidej zakázaná slova a fráze:
+
+- „neplatný vstup“ bez vysvětlení,
+- „uživatel neexistuje“ u citlivých autentizačních flow,
+- „něco se pokazilo“ jako jediná informace,
+- „souhlasíte se zlepšením zážitku“ pro marketingové sledování,
+- „jen pár údajů“ u formuláře s osobními daty,
+- interní kódy bez lidského překladu.
+
+Malý tým tím získá konzistenci bez velkého design systému. Stačí jedna stránka v dokumentaci a pravidlo, že každá nová kritická akce dostane vlastní text dřív než poslední den před releasem.
+
+## Checklist: mikrocopy bez UX mlhy
+
+- Každá chybová hláška říká, co se stalo, kde je problém a co má člověk udělat dál.
+- Chyby nejsou sdělené jen barvou, ikonou nebo interním kódem.
+- Autentizační hlášky neprozrazují, jestli účet existuje, pokud by to zvyšovalo riziko.
+- Prázdné stavy vysvětlují první krok a hodnotu budoucího obsahu.
+- Potvrzení po akci říká, co bude následovat a zda má uživatel něco udělat.
+- Varování u destruktivních akcí popisuje konkrétní dopad a možnost obnovy.
+- Text u osobních údajů vysvětluje účel, volitelnost a případnou retenci.
+- Stavové zprávy jsou dostupné i bez vizuálního sledování obrazovky.
+- Mikrocopy nepoužívá manipulativní humor, falešnou naléhavost ani obviňování.
+- Kritické hlášky mají vlastníka a jsou součástí QA, ne poslední textovou záplatou.
+
+## Mini šablona mikrocopy karty
+
+```markdown
+# Mikrocopy karta: [flow / komponenta]
+
+## Kontext
+- Kde se text zobrazí:
+- Jakou práci uživatel právě dělá:
+- Jaké riziko nebo nejistota tu vzniká:
+
+## Typ hlášky
+- Chyba / nápověda / prázdný stav / potvrzení / varování / permission copy:
+- Kritičnost:
+- Je potřeba auditní nebo support ID:
+
+## Text
+- Krátká verze:
+- Delší vysvětlení:
+- Primární akce:
+- Sekundární akce:
+
+## Data a bezpečnost
+- Prozrazuje text existenci účtu, dat nebo interního systému?
+- Obsahuje osobní údaj nebo citlivý detail?
+- Je potřeba uvést retenci, příjemce nebo oprávnění?
+
+## Přístupnost
+- Je hláška dostupná textem?
+- Je napojená na správné pole nebo akci?
+- Uslyší ji člověk používající čtečku obrazovky?
+```
+
+## Zdroje
+
+- [W3C: Understanding SC 3.3.1 Error Identification](https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html)
+- [W3C: Understanding SC 4.1.3 Status Messages](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html)
+
 # Pracovní log
+- 2026-09-30: Doplněna příloha „Mikrocopy pro chyby, prázdné stavy a potvrzení bez UX mlhy“ s praktickým rozdělením typů hlášek, privacy-first pravidly pro chyby, prázdné stavy, potvrzení, varování a permission copy, checklistem, mikrocopy kartou a ověřenými zdroji W3C.
 - 2026-09-30: Doplněna příloha „Roadmapa bez HIPPO efektu a produktového hazardu“ s praktickým postupem prioritizace podle problémů, kartou nápadu, oddělením discovery/delivery/provozního dluhu, datovou brzdou, roadmap review, vědomým „teď ne“, checklistem a šablonou roadmap karty.
 - 2026-09-30: Doplněna příloha „Cookie souhlas bez temných vzorů a falešné volby“ s praktickým rozdělením technologií podle účelu, férovou symetrií souhlasu, varováním před dark patterns, provozní rutinou, checklistem, consent kartou a ověřenými zdroji EDPB a Evropské komise.
 - 2026-09-30: Doplněna příloha „Produktové metriky bez vanity dashboardu a datového vysavače“ s modelem rozhodnutí před eventy, severní hvězdou, podpůrnými signály, bezpečnostními brzdami, event katalogem, segmentací, měsíčním úklidem, checklistem, metrickou kartou a ověřenými zdroji Evropské komise a EDPB.
