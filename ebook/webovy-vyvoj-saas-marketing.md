@@ -23692,7 +23692,168 @@ Nepiš „zlepšíme monitoring“. Napiš „do 14 dnů přidáme alert na chyb
 - ENISA Threats and Incidents shrnuje evropský kontext incidentů, CSIRT a hlášení významných kybernetických incidentů včetně NIS2 rámce: https://www.enisa.europa.eu/topics/state-of-cybersecurity-in-the-eu/threats-and-incidents
 - OWASP Logging Cheat Sheet připomíná, že logy nemají obsahovat citlivé údaje, tokeny ani zbytečná osobní data; stejné pravidlo se hodí i pro incidentovou komunikaci: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 
+# Příloha: Obnova účtu a MFA bez bezpečnostního divadla
+
+Reset hesla, magic link a obnova vícefaktorového přihlášení vypadají jako drobný detail přihlašovací obrazovky. Ve skutečnosti jsou to boční dveře do účtu. Když je navrhneš špatně, útočník nemusí prolomit heslo. Stačí mu přesvědčit systém, že je uživatel, který „jen ztratil přístup“. Gratuluju, právě jsi postavil trezor s profesionální cedulkou a zadním oknem na ventilačku.
+
+Privacy-first přístup tady znamená dvě věci najednou: chránit účet před převzetím a zároveň nesbírat víc osobních údajů, než je nutné. Obnova účtu nemá být detektivní výslech s rodným číslem, kopií občanky a pěti „bezpečnostními otázkami“, jejichž odpovědi leží na LinkedInu, Facebooku nebo v rodinném chatu.
+
+> Codyho komentář: Nejlepší recovery flow je nudný, krátký, auditovatelný a trochu podezřívavý. Přesně jako dobrý účetní, jen s menší spotřebou kávy.
+
+## Nejdřív odděl reset hesla, magic link a MFA recovery
+
+Tyto tři věci se často hází do jednoho pytle, ale mají jiná rizika.
+
+**Reset hesla** řeší situaci, kdy uživatel zná svůj e-mail, ale ne heslo. Systém má ověřit kontrolu nad e-mailovou schránkou, umožnit nastavit nové heslo a zneplatnit staré přihlašovací relace podle rizika.
+
+**Magic link** je přihlašovací metoda. Neznamená automaticky „bezpečnější než heslo“. Pokud má uživatel kompromitovaný e-mail, magic link je vstupenka zdarma. Odkaz proto musí být krátkodobý, jednorázový a svázaný s jasným účelem.
+
+**MFA recovery** je nejcitlivější. Pokud někdo ztratí telefon, bezpečnostní klíč nebo autentizační aplikaci, systém musí pomoct skutečnému uživateli, ale zároveň nesmí otevřít účet sociálnímu inženýrství. U B2B SaaS je dobré odlišit samoobslužnou obnovu běžného uživatele od obnovy administrátora workspace.
+
+Praktické pravidlo: čím větší dopad účtu, tím pomalejší a více kontrolovaný recovery proces. U osobního demo účtu stačí e-mail a recovery kód. U administrátora firmy, který spravuje fakturaci, exporty a přístupy lidí, má dávat smysl čekací okno, notifikace ostatním adminům nebo ruční ověření přes support.
+
+## Reset token je klíč, ne marketingový odkaz
+
+Odkaz pro reset hesla nebo magic login má být považovaný za tajemství. Neukládej ho v čitelné podobě, neposílej ho do analytiky, nepřidávej k němu UTM parametry a nepropaguj ho přes přesměrovací služby třetích stran. Token v URL se může dostat do logů, historie prohlížeče nebo referer hlaviček, takže stránka po otevření token co nejdřív vymění za server-side ověřený stav a dál pracuje bez tokenu v adrese.
+
+Minimum pro reset token:
+
+- dlouhý náhodný token generovaný kryptograficky bezpečně,
+- uložení pouze jako hash nebo jiná nevratná reprezentace,
+- krátká expirace odpovídající riziku,
+- jednorázové použití,
+- vazba na konkrétní účel, například reset hesla, ne obecný login,
+- zneplatnění po změně hesla nebo po opakovaných neúspěšných pokusech,
+- žádné logování plného tokenu.
+
+Chybová hláška nemá prozrazovat, jestli účet existuje. Místo „Tento e-mail u nás nemá účet“ napiš: „Pokud e-mail odpovídá existujícímu účtu, poslali jsme instrukce.“ Ano, je to méně uspokojivé pro uživatele, který udělal překlep. Ale chráníš tím seznam zákazníků před vyzobáváním.
+
+## E-mail má být bezpečnostní zpráva, ne newsletter v převleku
+
+Recovery e-mail nepotřebuje trackovací pixel, marketingovou patičku s pěti kampaněmi ani cross-sell na vyšší tarif. Potřebuje jasně říct, co se stalo, kdo akci spustil, co má člověk udělat a co dělat, pokud o obnovu nežádal.
+
+Dobrá struktura:
+
+```text
+Předmět: Obnova přístupu k účtu [název služby]
+
+Dobrý den,
+požádali jste o obnovu přístupu k účtu [e-mail / workspace].
+
+Pokračujte zde: [jednorázový odkaz]
+Odkaz platí do: [čas]
+
+Pokud jste o obnovu nežádali, můžete tento e-mail ignorovat.
+Pokud se to opakuje nebo máte podezření na zneužití, kontaktujte podporu: [kontakt]
+
+Bezpečnostní poznámka:
+Nikdy po vás nechceme heslo e-mailem.
+```
+
+Do e-mailu nepiš zbytečné osobní údaje. U firemního účtu může stačit název workspace a adresa účtu. IP adresa a hrubá lokalita mohou být užitečné u citlivých akcí, ale pozor na přesnost: geolokace IP není důkaz. Piš ji jako orientační informaci, ne jako rozsudek.
+
+## Po resetu hesla ukliď relace a upozorni člověka
+
+Reset hesla není hotový kliknutím na „Uložit nové heslo“. Po změně se rozhodni, co uděláš s existujícími relacemi, API tokeny a aktivními zařízeními.
+
+Doporučený základ:
+
+- odhlásit ostatní webové relace, pokud reset proběhl přes zapomenuté heslo,
+- ponechat aktuální relaci jen po úspěšném ověření,
+- poslat bezpečnostní oznámení o změně hesla,
+- nabídnout přehled aktivních relací a možnost odhlásit všechna zařízení,
+- u administrátorů zvážit notifikaci ostatním správcům workspace,
+- u API tokenů jasně rozlišit, zda se resetem ruší automaticky, nebo vyžadují samostatnou rotaci.
+
+Pro SaaS je důležité neudělat tichý chaos. Pokud reset hesla zneplatní integraci, uživatel to musí vědět předem. Pokud ji nezneplatní, musí být jasné, kde se spravují API tokeny. „Někde v nastavení“ není bezpečnostní model. To je hon na poklad, jen bez radosti.
+
+## MFA recovery: recovery kódy jsou produktová funkce, ne poznámka pod čarou
+
+Když zapínáš MFA, ukaž recovery kódy jako plnohodnotnou část procesu. Uživatel má vědět, že si je má uložit mimo zařízení, které používá pro druhý faktor. Každý kód má být jednorázový, dostatečně náhodný a po použití označený jako spotřebovaný. Systém má umožnit vygenerovat nové kódy po opětovném ověření.
+
+U B2B SaaS přidej administrátorský postup:
+
+- běžný uživatel může požádat admina workspace o reset MFA,
+- admin nemůže resetovat vlastní MFA bez druhého admina nebo support procesu,
+- support reset má mít auditní stopu a jasná pravidla,
+- zákazník může exportovat seznam uživatelů s aktivní MFA bez vidění tajných údajů,
+- kritické role mohou vyžadovat silnější faktor, například bezpečnostní klíč.
+
+Nikdy nestav MFA recovery jen na bezpečnostních otázkách typu „jméno prvního psa“. Tyhle odpovědi jsou často veřejné, zapomenutelné nebo sdílené. Lepší je kombinace recovery kódů, druhého registrovaného faktoru, schválení přes existujícího admina nebo řízený support proces.
+
+## Omez zneužití bez trestání lidí
+
+Recovery endpointy lákají automatizované pokusy. Potřebují rate limiting, ale opatrně. Když blokuješ jen IP adresu, můžeš potrestat celou kancelář, VPN nebo mobilní síť. Kombinuj limity podle účtu, IP, zařízení a chování. Uživatel má dostat klidnou odpověď, ne výbuch typu „Podezřelá aktivita!“. Stačí: „Z bezpečnostních důvodů zkuste akci později nebo kontaktujte podporu.“
+
+Měř provozně:
+
+- počet žádostí o reset podle času,
+- poměr dokončených resetů,
+- opakované žádosti na stejný účet,
+- reset MFA podle role,
+- support zásahy do obnovy účtu,
+- zablokované pokusy bez ukládání citlivého obsahu.
+
+Tohle měření má bezpečnostní účel. Nepotřebuje reklamní identifikátory, heatmapy ani session replay. Pokud chceš vědět, kde se lidé zaseknou, měř krok procesu, ne obsah jejich schránky, hesla nebo podpůrné zprávy.
+
+## Checklist: obnova účtu bez bezpečnostního divadla
+
+- [ ] Reset hesla, magic link a MFA recovery mají oddělené účely a pravidla.
+- [ ] Reset tokeny jsou dlouhé, náhodné, jednorázové a krátkodobé.
+- [ ] Tokeny se neukládají ani nelogují v čitelné podobě.
+- [ ] Chybové hlášky neprozrazují existenci účtu.
+- [ ] Recovery e-maily neobsahují trackovací pixel ani marketingový balast.
+- [ ] Po resetu hesla se řeší aktivní relace a bezpečnostní oznámení.
+- [ ] MFA recovery má recovery kódy nebo druhý bezpečný postup.
+- [ ] Admin účty mají přísnější obnovu než běžní uživatelé.
+- [ ] Support zásah do obnovy má auditní stopu.
+- [ ] Recovery endpointy mají rate limiting a monitoring bez zbytečného sledování.
+
+## Mini šablona recovery karty
+
+```markdown
+# Recovery karta: [heslo / magic link / MFA / admin recovery]
+
+## Účel
+- Jaký problém řeší:
+- Kdo může akci spustit:
+- Kterých rolí se týká:
+
+## Ověření
+- Primární důkaz kontroly účtu:
+- Druhý signál nebo brzda:
+- Expirace tokenu / kódu:
+- Limity pokusů:
+
+## Dopad
+- Změna hesla:
+- Aktivní relace:
+- API tokeny a integrace:
+- Notifikace uživateli / adminům:
+
+## Privacy
+- Jaká data sbíráme:
+- Co nelogujeme:
+- Retence auditních záznamů:
+- Externí služby zapojené do e-mailu nebo podpory:
+
+## Support
+- Kdy může zasáhnout člověk:
+- Jaké důkazy nesmí support vyžadovat:
+- Kdo reset schvaluje:
+- Kde je auditní stopa:
+```
+
+## Zdroje
+
+- OWASP Forgot Password Cheat Sheet shrnuje bezpečné reset tokeny, neutrální odpovědi a ochranu proti enumeraci účtů: https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html
+- OWASP Multifactor Authentication Cheat Sheet popisuje recovery kódy, reset MFA a rizika slabých obnovovacích procesů: https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html
+- NIST SP 800-63B pokrývá autentizátory, obnovu a požadavky na digitální identitu: https://pages.nist.gov/800-63-4/sp800-63b.html
+- OWASP Logging Cheat Sheet připomíná, že bezpečnostní logy mají mít účel a nemají obsahovat tajné hodnoty, tokeny ani zbytečná citlivá data: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
 # Pracovní log
+- 2026-09-30: Doplněna příloha „Obnova účtu a MFA bez bezpečnostního divadla“ s rozlišením resetu hesla, magic linku a MFA recovery, pravidly pro reset tokeny, bezpečnostní e-maily, relace po resetu, recovery kódy, support postup, checklist, recovery kartu a ověřené zdroje OWASP a NIST.
+
 - 2026-09-30: Doplněna příloha „Incidentová komunikace a status page bez mlžení“ s rozlišením typů incidentů, pravidly pro status page, první zprávou, rolemi v malém týmu, bezpečnostní/datovou komunikací, rytmem updatů, postmortemem, checklistem, incidentovou kartou a ověřenými zdroji GDPR, EDPB, ENISA a OWASP.
 
 - 2026-09-30: Rozšířena příloha „Staging a testovací data bez úniku produkce“ o auditovatelný refresh testovacích dat, transformační skript, automatické kontroly proti úniku reálných e-mailů/tokenů/webhook URL, práci s volnými texty a ověřený zdroj EDPB k anonymizaci a pseudonymizaci.
