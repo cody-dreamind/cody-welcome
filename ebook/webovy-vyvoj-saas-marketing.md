@@ -21206,7 +21206,253 @@ U kritické domény je lepší naplánované zapnutí s kontrolou než kliknutí
 - GOV.UK: [Protect domains that do not send email](https://www.gov.uk/guidance/protect-domains-that-dont-send-email)
 - ICANN: [DNSSEC — What Is It and Why Is It Important?](https://www.icann.org/resources/pages/dnssec-what-is-it-why-important-2019-03-05-en)
 
+# Příloha: Logování a observabilita bez datového smetiště
+
+Logy, metriky a trace jsou jako palubní deska auta. Pomáhají poznat, že motor vaří, brzdy pískají nebo někdo nechal otevřený kufr. Jenže v mnoha malých SaaS projektech se z nich časem stane digitální půda: všechno se tam hodí, nic se nemaže a při incidentu se v tom hrabe půl týmu s baterkou v zubech.
+
+Privacy-first observabilita neznamená „nic neměřit“. Znamená měřit tak, aby tým dokázal rychle opravit problém, ale nevyráběl si vedlejší databázi osobních údajů, tokenů, dotazů zákazníků a obchodních tajemství. Cílem není mít méně informací za každou cenu. Cílem je mít správné informace ve správném detailu, se správnou retencí a s přístupem jen pro lidi, kteří je opravdu potřebují.
+
+> Codyho komentář: Log, který ti při incidentu neřekne, co se stalo, je drahý šum. Log, který obsahuje heslo, token nebo celý text zákaznické zprávy, je drahý průšvih. Gratuluju, našli jsme horší kombinaci než marketingový popup přes celý displej.
+
+## Začni otázkami, ne nástrojem
+
+Než nasadíš další monitoring službu, napiš si tři provozní otázky:
+
+1. Poznáme, že je služba rozbitá dřív než zákazník?
+2. Umíme zjistit, kde se problém stal, bez čtení obsahu zákaznických dat?
+3. Umíme po incidentu doložit, kdo co změnil, bez lovení v chatu?
+
+Teprve potom vybírej, co logovat. Nástroj je až druhý krok. První je rozhodnutí, jakou práci má observabilita udělat.
+
+U malého webu nebo SaaS typicky stačí čtyři vrstvy:
+
+- aplikační logy pro chyby, autorizaci a důležité stavové změny,
+- technické metriky pro dostupnost, latenci, fronty a kapacitu,
+- auditní události pro změny konfigurace, přístupů a citlivých operací,
+- syntetické kontroly pro kritické cesty typu přihlášení, objednávka, platba nebo export.
+
+Když chybí auditní vrstva, lidé při incidentu řeší „kdo to změnil“. Když chybí syntetické kontroly, zákazník se stane monitoringem. A to je nejdražší monitoring, protože obvykle píše e-maily v nejhorší možnou chvíli.
+
+## Co logovat a co nikdy nelogovat
+
+OWASP ve svém Logging Cheat Sheet doporučuje u bezpečnostního logování řešit jak typy událostí, tak data, která mají být z logů vyloučená nebo maskovaná. Praktický překlad pro SaaS: loguj rozhodnutí systému, ne celý obsah života uživatele.
+
+Loguj například:
+
+- vznik a konec session bez ukládání samotného session tokenu,
+- neúspěšné přihlášení s důvodem kategorie, ne s heslem v payloadu,
+- změny rolí, oprávnění, fakturačních údajů a integrací,
+- vytvoření, úpravu a smazání klíčových objektů v systému,
+- chyby externích API podle služby, endpointu, statusu a korelačního ID,
+- změny konfigurace, deploye, migrace a administrátorské zásahy,
+- bezpečnostní události typu rate limit, podezřelá aktivita nebo opakované odmítnutí přístupu.
+
+Neloguji přímo:
+
+- hesla, recovery kódy, API klíče, access tokeny ani refresh tokeny,
+- celé session identifikátory a autentizační cookies,
+- platební údaje, citlivé osobní údaje a zdravotní nebo úřední identifikátory,
+- celé zprávy zákazníků, interní poznámky a obsah dokumentů,
+- celé HTTP hlavičky bez filtru,
+- celé request/response body jako univerzální debug režim,
+- databázové connection stringy, privátní klíče a tajemství z prostředí.
+
+Když potřebuješ spojit události v čase, používej korelační ID, request ID nebo interní ID objektu. Pokud potřebuješ vyšetřovat chování jednoho účtu, často stačí interní uživatelské ID a role. E-mail, IP adresa a user-agent mají být výjimka s jasným účelem, retencí a přístupem, ne automatická výplň každého řádku.
+
+## Strukturované logy porážejí textovou polévku
+
+Textový log typu `něco se pokazilo lol` má sice punkovou estetiku, ale při incidentu moc nepomůže. Strukturovaný log je nudnější a užitečnější.
+
+Minimální struktura události:
+
+```json
+{
+  "timestamp": "2026-09-30T09:00:00Z",
+  "level": "warn",
+  "service": "billing-api",
+  "environment": "production",
+  "event": "invoice_export_failed",
+  "request_id": "req_123",
+  "account_id": "acc_456",
+  "actor_type": "user",
+  "result": "failed",
+  "reason_code": "provider_timeout"
+}
+```
+
+Všimni si, co tam není: celý e-mail zákazníka, obsah faktury, token do účetního API ani kompletní stack všeho, co aplikace potkala cestou. Stack trace může být užitečný, ale i ten musí projít sanitizací a nemá se míchat s produkčními tajemstvími.
+
+Dobré názvy eventů používej jako produktový slovník. `permission_denied`, `checkout_started`, `backup_restore_test_failed` nebo `api_key_rotated` jsou lepší než deset variant „error“. U každého eventu musí být jasné, kdo je vlastník, jak dlouho ho držíte a k jakému rozhodnutí slouží.
+
+## Tři úrovně detailu
+
+Privacy-first observabilita funguje dobře, když rozlišuje úrovně detailu podle situace.
+
+### 1. Normální provoz
+
+V běžném režimu sbírej jen to, co potřebuješ pro provozní zdraví, bezpečnost a podporu. Typicky agregované metriky, chybové kategorie, identifikátory požadavků a auditní události.
+
+Příklad:
+
+- počet chyb podle endpointu,
+- p95 latence podle služby,
+- počet odmítnutých přihlášení podle účtu,
+- počet neodeslaných e-mailů podle důvodu,
+- dostupnost kritické syntetické kontroly.
+
+### 2. Incident režim
+
+Při incidentu můžeš dočasně zvýšit detail logování, ale jen s časovým omezením a jasným vlastníkem. Debug režim bez vypnutí je provozní verze otevřeného kohoutku.
+
+Pravidlo:
+
+```text
+Zvýšené logování má důvod, vlastníka, rozsah, čas vypnutí a kontrolu po vypnutí.
+```
+
+Například: „Na 60 minut zapínáme detailnější logování timeoutů u exportu faktur pro účty v EU clusteru. Nelogujeme obsah faktur ani tokeny. Vypíná Petra po ověření fronty.“
+
+### 3. Forenzní a auditní režim
+
+Auditní záznamy mají být odolnější proti úpravám a přístupnější jen omezené skupině. Nejsou to běžné aplikační logy pro každodenní debug. Patří sem hlavně změny práv, konfigurace, fakturace, integrací, mazání a exportů.
+
+U auditních logů je důležitá integrita: kdo událost vyvolal, kdy, nad čím, s jakým výsledkem a z jakého administrativního kontextu. Obsah zákaznických dat do nich obvykle nepatří.
+
+## Retence: logy nejsou paměť firmy navždy
+
+Logy mají mít životnost podle účelu. Není jeden správný počet dní pro všechno. Správná otázka zní: „Jak dlouho je reálně potřebujeme pro provoz, bezpečnost, podporu nebo smluvní povinnost?“
+
+Praktický model:
+
+- debug logy: krátce, typicky dny,
+- aplikační chybové logy: týdny až nízké jednotky měsíců podle support cyklu,
+- bezpečnostní a auditní události: déle podle rizika a povinností,
+- agregované metriky: déle, pokud už neobsahují osobní detaily,
+- syrové requesty: pokud je vůbec potřebuješ, tak velmi omezeně a s maskováním.
+
+Retention pravidlo napiš přímo do logovací karty. Ne do hlavy jednoho vývojáře, který je zrovna na dovolené a má telefon v režimu „les“.
+
+## Přístupy k logům ber jako produkční data
+
+Kdo vidí logy, často vidí víc než v aplikaci. Proto logovací nástroj nesmí být klubovna pro celý tým.
+
+Minimální pravidla:
+
+- produkční logy čtou jen role, které řeší provoz, bezpečnost nebo support,
+- přístup je přes SSO a MFA,
+- externí dodavatelé mají časově omezený přístup,
+- export logů má vlastní pravidla a stopu,
+- citlivější auditní logy mají užší přístup než běžné technické metriky,
+- dashboardy pro obchod nebo produkt používají agregace, ne syrové události.
+
+Pokud support potřebuje řešit konkrétní ticket, dej mu raději bezpečný interní pohled v administraci než plný přístup do logovací platformy. Méně klikání, méně rizika, méně „omylem jsem si otevřel dump produkce“. To poslední je věta, kterou nechceš slyšet nikdy.
+
+## Alerty: méně sirén, víc rozhodnutí
+
+Špatné alerty naučí tým ignorovat i ty dobré. Alert má vzniknout jen tehdy, když někdo musí něco udělat.
+
+Dobré alerty:
+
+- mají jasného vlastníka,
+- obsahují dopad na uživatele nebo byznys,
+- odkazují na runbook,
+- rozlišují pracovní dobu a pohotovost,
+- mají prahové hodnoty podle zkušenosti, ne podle paniky,
+- dají se po incidentu vyhodnotit jako užitečné nebo zbytečné.
+
+Příklad špatného alertu:
+
+```text
+CPU high
+```
+
+Příklad lepšího alertu:
+
+```text
+Checkout API má 5 minut p95 latenci nad 2 s a syntetická platba selhala 3× za sebou. Dopad: zákazníci nemusí dokončit objednávku. Runbook: /runbooks/checkout-latency.md
+```
+
+Tohle není poezie. To je rozdíl mezi opravou a nočním věštěním z grafu.
+
+## Mini runbook pro incident
+
+Ke každému kritickému alertu patří krátký runbook. Ne román. Stačí postup, který unavený člověk pochopí ve 2 ráno.
+
+Runbook má obsahovat:
+
+1. Co alert znamená.
+2. Jak ověřit dopad na uživatele.
+3. Kde najít relevantní dashboard a logy.
+4. Jaké údaje se nesmí kopírovat mimo systém.
+5. První bezpečné kroky.
+6. Kdy eskalovat.
+7. Jak komunikovat status.
+8. Jak po incidentu zapsat postmortem.
+
+Privacy-first detail: do incidentového chatu nekopíruj celé requesty, e-maily, tokeny ani osobní údaje. Sdílej odkaz na omezený interní záznam, ID incidentu, časové okno a agregované informace. Chat není logovací systém. Je to chat. Překvapivě.
+
+## Checklist: observabilita bez datového smetiště
+
+- Máme definované provozní otázky, na které má observabilita odpovědět.
+- Kritické cesty mají syntetickou kontrolu nebo jasný signál selhání.
+- Logy jsou strukturované a obsahují `request_id` nebo jiné korelační ID.
+- Nelogujeme hesla, tokeny, session hodnoty, celé request body ani tajemství.
+- Citlivá pole se maskují už při vzniku logu, ne až v dashboardu.
+- Debug režim má časové omezení, vlastníka a vypnutí.
+- Auditní logy jsou oddělené od běžných aplikačních logů.
+- Retence logů je napsaná podle účelu a pravidelně se kontroluje.
+- Přístup k produkčním logům je omezený, auditovaný a chráněný MFA.
+- Alerty mají vlastníka, dopad, runbook a jasnou akci.
+- Incidentový chat neobsahuje osobní údaje ani tajemství z logů.
+- Po incidentu se vyhodnotí, které logy pomohly a které byly jen šum.
+
+## Mini šablona logovací karty
+
+```text
+# Logovací karta: [služba / oblast]
+
+## Účel
+- Jaké rozhodnutí nebo incident má log pomoct vyřešit:
+- Vlastník:
+
+## Události
+- Kritické eventy:
+- Auditní eventy:
+- Bezpečnostní eventy:
+- Metriky:
+
+## Datová hranice
+- Povolená pole:
+- Maskovaná pole:
+- Pole, která se nikdy nelogují:
+- Korelační ID:
+
+## Retence
+- Debug logy:
+- Chybové logy:
+- Auditní logy:
+- Agregované metriky:
+
+## Přístupy
+- Kdo čte produkční logy:
+- Kdo smí exportovat:
+- Externí dodavatelé:
+
+## Alerty a runbooky
+- Kritické alerty:
+- Runbook odkazy:
+- Poslední revize:
+```
+
+## Zdroje
+
+- OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- OWASP Developer Guide: [Implement Security Logging and Monitoring](https://devguide.owasp.org/en/04-design/02-web-app-checklist/09-logging-monitoring/)
+- NIST: [SP 800-92 — Guide to Computer Security Log Management](https://csrc.nist.gov/pubs/sp/800/92/final)
+- NIST: [Log Management project](https://csrc.nist.gov/Projects/log-management)
+
 # Pracovní log
+- 2026-09-30: Doplněna příloha „Logování a observabilita bez datového smetiště“ s praktickým modelem logů, metrik, auditních událostí, syntetických kontrol, datovou hranicí, retencí, přístupovými pravidly, alerty, runbookem, checklistem, logovací kartou a ověřenými zdroji OWASP a NIST.
 - 2026-09-30: Obnovena plná podoba e-booku po poškozeném posledním commitu a doplněna příloha „Doménová a DNS hygiena bez křehkého domečku z TXT záznamů“ s inventurou domén, e-mailovou ochranou, správou DNS záznamů, DNSSEC doporučeními, checklistem, šablonou doménové karty a ověřenými zdroji NCSC, GOV.UK a ICANN.
 - 2026-09-30: Doplněna příloha „Newsletter bez sledovacích pixelů a marketingového cirkusu“ s právním minimem, doporučením bez open trackingu, férovou segmentací, doručitelností, retenční rutinou, checklistem a vyplnitelnou šablonou.
 - 2026-09-30: Doplněna příloha „Mikrocopy pro chyby, prázdné stavy a potvrzení bez UX mlhy“ s praktickým rozdělením typů hlášek, privacy-first pravidly pro chyby, prázdné stavy, potvrzení, varování a permission copy, checklistem, mikrocopy kartou a ověřenými zdroji W3C.
