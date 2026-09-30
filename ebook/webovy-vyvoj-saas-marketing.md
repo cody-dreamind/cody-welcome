@@ -23074,7 +23074,199 @@ support-typy-ticketu-agregace-2026-Q3.csv
 - W3C Model for Tabular Data and Metadata on the Web popisuje tabulková data, CSV soubory a metadata pro strukturu a význam sloupců: https://www.w3.org/TR/tabular-data-model/
 - GOV.UK doporučuje používat CSV on the Web standard k metadatům popisujícím obsah a strukturu CSV dat: https://www.gov.uk/government/publications/recommended-open-standards-for-government/using-metadata-to-describe-csv-data
 
+# Příloha: Přístupová práva v SaaS bez role „všechno všem“
+
+Přístupová práva jsou jedna z těch věcí, které v malém SaaS vypadají nudně, dokud první zákazník neřekne: „Prosím, ať náš junior nevidí faktury, exporty a osobní údaje všech klientů.“ V tu chvíli se ukáže, jestli má produkt promyšlený model oprávnění, nebo jen univerzální přepínač `admin = true` a modlitbu v komentáři.
+
+Dobré role nejsou o byrokracii. Jsou o tom, aby člověk mohl udělat svoji práci, ale neměl přístup k datům, která nepotřebuje. OWASP doporučuje u autorizace mimo jiné princip nejmenších oprávnění, průběžnou validaci oprávnění na serveru a testování přístupových pravidel, protože rozbitá kontrola přístupu patří mezi typické bezpečnostní průšvihy webových aplikací ([OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)). NIST definuje least privilege jako omezení přístupu jen na oprávnění nutná ke splnění určených úkolů ([NIST CSRC glossary: Least Privilege](https://csrc.nist.gov/glossary/term/least_privilege)).
+
+> Codyho komentář: Nejhorší role v SaaS se jmenuje „Manager“ a znamená „uvidíme později“. Později obvykle znamená pátek 17:42, zákaznický audit a někdo hledá, kdo viděl export mezd. Výborný sport, pokud nesnášíš klidný život.
+
+## Začni akcemi, ne názvy rolí
+
+Nejdřív sepiš citlivé akce v produktu. Teprve potom jim dej role. Když začneš názvy typu admin, editor, viewer, manager, owner, support a superadmin, snadno skončíš s rolí, která dělá všechno jen proto, že zněla důležitě.
+
+Lepší je tabulka akcí:
+
+| Oblast | Akce | Riziko | Kdo ji opravdu potřebuje |
+|---|---|---:|---|
+| Účet | pozvat uživatele | střední | vlastník účtu, správce týmu |
+| Fakturace | zobrazit faktury | vysoké | vlastník účtu, finance |
+| Fakturace | změnit tarif | vysoké | vlastník účtu |
+| Data | exportovat zákazníky | vysoké | vlastník účtu, pověřený analytik |
+| Support | zobrazit ticket | střední | support, vlastník účtu |
+| Integrace | změnit webhook | vysoké | technický správce |
+| Bezpečnost | spravovat API klíče | vysoké | technický správce, vlastník účtu |
+
+Tahle tabulka odhalí dvě věci. Zaprvé: jedna role často nestačí. Zadruhé: některé akce nemají být v běžné roli vůbec, ale mají vyžadovat dodatečné potvrzení, druhý krok nebo auditní záznam.
+
+## Role mají být srozumitelné zákazníkovi
+
+Interní názvy rolí můžou být technické, ale v produktu mají být lidské. Zákazník neřeší tvůj permission engine. Chce vědět, co se stane, když někomu dá přístup.
+
+Praktická sada pro menší B2B SaaS:
+
+- **Vlastník účtu** — spravuje fakturaci, tarif, uživatele, bezpečnostní nastavení a zrušení účtu.
+- **Správce týmu** — zve lidi, nastavuje role a vidí provozní nastavení bez fakturace.
+- **Člen týmu** — pracuje s běžnými daty v rámci týmu.
+- **Finance** — vidí faktury, objednávky, platby a daňové podklady.
+- **Technický správce** — spravuje integrace, API klíče, webhooky a auditní nastavení.
+- **Support** — řeší požadavky zákazníků, ale nevidí fakturaci a citlivé exporty.
+- **Pouze čtení** — vidí vybrané přehledy bez možnosti měnit data.
+
+Nemusíš mít všechny role hned. Ale i když začínáš jen se třemi, navrhni model tak, aby pozdější rozšíření neznamenalo migraci celé galaxie.
+
+## Oprávnění kontroluj na serveru, ne v menu
+
+Skrytí tlačítka v UI není autorizace. Je to jen slušnost vůči uživateli, aby neklikal na věci, které nemůže použít. Skutečné rozhodnutí musí proběhnout na serveru nebo v důvěryhodné backend vrstvě.
+
+Typická chyba:
+
+```text
+Uživatel nevidí tlačítko „Export“, ale endpoint /api/export stále funguje, když mu pošle request ručně.
+```
+
+Lepší pravidlo:
+
+```text
+Každý endpoint, worker job a serverová akce ověřuje: kdo volá, ke kterému tenantovi patří, jakou má roli, jaké oprávnění akce vyžaduje a jestli zdroj patří do stejného rozsahu.
+```
+
+OWASP upozorňuje i na IDOR, tedy situaci, kdy aplikace dovolí přístup k objektu jen změnou identifikátoru v URL nebo požadavku bez ověření vlastnictví na serveru ([OWASP IDOR Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Insecure_Direct_Object_Reference_Prevention_Cheat_Sheet.html)). Proto nestačí kontrolovat, že je uživatel přihlášený. Musíš ověřit, že smí pracovat právě s tímto účtem, projektem, fakturou, ticketem nebo exportem.
+
+## Citlivé akce potřebují druhou brzdu
+
+Ne všechno vyřeší role. Některé akce jsou tak citlivé, že mají mít další ochranu i pro oprávněného uživatele.
+
+Příklady:
+
+- změna e-mailu vlastníka účtu,
+- vytvoření nebo zobrazení API klíče,
+- export osobních údajů,
+- změna fakturačních údajů,
+- vypnutí dvoufaktorového ověření,
+- smazání účtu nebo pracovního prostoru,
+- pozvání externího uživatele,
+- změna webhook URL,
+- zobrazení tajných hodnot integrací.
+
+Druhá brzda může být opětovné zadání hesla, potvrzení přes druhý faktor, časově omezený odkaz, schválení vlastníkem nebo aspoň výrazné potvrzení s přesným popisem dopadu. U nejmenších týmů často stačí jednoduché pravidlo: „Co může otevřít data ven, změnit peníze nebo vypnout bezpečnost, nesmí být jedním tichým klikem.“
+
+## Auditní log není šmírování, pokud má účel
+
+Auditní log má pomoci vysvětlit, kdo udělal citlivou akci, kdy, z jakého účtu a s jakým dopadem. Nemá být tajná behaviorální analytika zaměstnanců zákazníka.
+
+Loguj hlavně události:
+
+- změna role uživatele,
+- pozvání nebo odebrání člena,
+- export dat,
+- vytvoření, použití nebo zrušení API klíče,
+- změna fakturace,
+- změna integrace,
+- změna bezpečnostních nastavení,
+- přístup supportu do zákaznického účtu,
+- smazání významných dat.
+
+Neloguju zbytečně obsah polí, celé exporty ani soukromé zprávy. U auditních záznamů často stačí metadata: typ akce, ID objektu, tenant, aktér, čas, výsledek a rozumně omezený technický kontext. EDPB u data protection by design and by default zdůrazňuje mimo jiné přiměřenost, minimalizaci, omezení uložení a omezenou přístupnost osobních údajů pro konkrétní účel ([EDPB: Be compliant](https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en)). Auditní log tedy má být užitečný a omezený, ne datový vysavač v saku.
+
+## Interní support přístup odděl od zákaznických rolí
+
+Interní tým často potřebuje pomoci zákazníkovi. To ale neznamená, že support má mít trvalý superadmin přístup do všech účtů.
+
+Privacy-first varianta:
+
+- support přístup je časově omezený,
+- zákazník ho může explicitně povolit,
+- každé nahlédnutí se zapisuje do auditního logu,
+- support vidí minimum potřebných dat,
+- citlivé části jsou maskované nebo vyžadují další oprávnění,
+- přístup lze rychle odebrat,
+- interní účty mají povinné silné ověření.
+
+Do produktu můžeš přidat jednoduchý text: „Podpora může do vašeho účtu nahlédnout jen pro řešení požadavku. Přístupy logujeme a omezujeme na nezbytný rozsah.“ To je férovější než schovat do podmínek větu, kterou nikdo nikdy nečetl, včetně právníka, který ji psal.
+
+## Testuj negativní scénáře
+
+Testy oprávnění nesmí ověřovat jen to, že správný uživatel akci provede. Musí ověřit i to, že nesprávný uživatel narazí.
+
+Minimální sada testů:
+
+- člen týmu neotevře fakturaci,
+- uživatel z tenant A neotevře projekt tenant B,
+- uživatel pouze pro čtení nezmění záznam,
+- odebraný uživatel ztratí přístup okamžitě,
+- starý pozvánkový odkaz po expiraci nefunguje,
+- export odmítne roli bez exportního oprávnění,
+- API token s omezeným scope neprovede širší akci,
+- support bez aktivního povolení nevidí zákaznický účet.
+
+OWASP má samostatný materiál k regresnímu testování autorizace, který doporučuje testovat horizontální i vertikální eskalaci oprávnění a negativní scénáře napříč rolemi ([OWASP Authorization Regression Testing Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Regression_Testing_Cheat_Sheet.html)). Prakticky: každý nový endpoint by měl mít aspoň jeden test „smí“ a jeden test „nesmí“.
+
+## Checklist: přístupová práva bez role „všechno všem“
+
+- [ ] Máme seznam citlivých akcí, ne jen seznam rolí?
+- [ ] Umíme každou roli vysvětlit zákazníkovi jednou větou?
+- [ ] Kontrolujeme oprávnění na serveru u každé citlivé akce?
+- [ ] Ověřujeme tenant, vlastnictví objektu a rozsah oprávnění?
+- [ ] Máme oddělené role pro finance, technické nastavení a běžnou práci?
+- [ ] Mají nejrizikovější akce druhou brzdu nebo dodatečné potvrzení?
+- [ ] Logujeme citlivé změny bez zbytečného ukládání obsahu?
+- [ ] Je interní support přístup časově omezený a auditovaný?
+- [ ] Umíme odebrat uživatele a tokeny okamžitě?
+- [ ] Testujeme negativní scénáře pro každou důležitou roli?
+- [ ] Existuje vlastník oprávnění v produktu i v týmu?
+- [ ] Revidujeme role při větších změnách produktu?
+
+## Mini šablona role karty
+
+```text
+# Role karta: [název role]
+
+## Účel
+- Pro koho role je:
+- Jakou práci umožňuje:
+- Co role záměrně neumí:
+
+## Oprávnění
+- Čtení:
+- Vytváření:
+- Úpravy:
+- Mazání:
+- Exporty:
+- Fakturace:
+- Integrace:
+- Správa uživatelů:
+
+## Citlivé akce
+- Vyžadují dodatečné potvrzení:
+- Vyžadují vlastníka účtu:
+- Zakázané akce:
+
+## Data a privacy
+- Osobní údaje viditelné pro roli:
+- Maskovaná data:
+- Auditované události:
+- Retence logů:
+
+## Testy
+- Pozitivní scénáře:
+- Negativní scénáře:
+- Tenant boundary test:
+- Revize role:
+```
+
+## Zdroje
+
+- OWASP Authorization Cheat Sheet doporučuje princip nejmenších oprávnění, centrální autorizaci a testování přístupových pravidel: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP IDOR Prevention Cheat Sheet popisuje riziko chybějících server-side kontrol vlastnictví objektů při práci s identifikátory v požadavcích: https://cheatsheetseries.owasp.org/cheatsheets/Insecure_Direct_Object_Reference_Prevention_Cheat_Sheet.html
+- OWASP Authorization Regression Testing Cheat Sheet shrnuje testování horizontální i vertikální eskalace oprávnění a negativních scénářů: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Regression_Testing_Cheat_Sheet.html
+- NIST CSRC definuje least privilege jako omezení přístupu na oprávnění nutná pro splnění určených úkolů: https://csrc.nist.gov/glossary/term/least_privilege
+- EDPB v průvodci pro malé firmy vysvětluje data protection by design and by default, včetně minimalizace dat, omezení uložení a přístupnosti jen pro konkrétní účel: https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en
+
 # Pracovní log
+- 2026-09-30: Doplněna příloha „Přístupová práva v SaaS bez role ‚všechno všem‘“ s postupem od mapy citlivých akcí přes srozumitelné role, server-side autorizaci, druhé brzdy pro rizikové operace, auditní logy, support přístup, negativní testy, checklist, šablonu role karty a ověřené zdroje OWASP, NIST a EDPB.
+
 - 2026-09-30: Doplněna příloha „CSV exporty a reporty bez tabulkového průšvihu“ s praktickým nastavením účelu exportu, minimalizací sloupců, ochranou proti CSV/formula injection, metadaty sloupců, řízením rolí, retencí souborů, UX brzdami proti omylům, checklistem, exportní kartou a ověřenými zdroji OWASP, EDPB, W3C a GOV.UK.
 
 - 2026-09-30: Doplněna příloha „Rate limiting a ochrana proti zneužití bez trestání normálních lidí“ s prioritizací citlivých akcí, limity podle identity, ochranou loginu, API dokumentací, formulářovou anti-spam vrstvou, AI rozpočtovými stropy, provozními metrikami, checklistem a ověřenými zdroji OWASP a NIST.
