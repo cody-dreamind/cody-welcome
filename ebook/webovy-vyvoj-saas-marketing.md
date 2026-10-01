@@ -25862,7 +25862,189 @@ Jednou měsíčně si vytáhni seznam flagů a u každého napiš: ponechat, zm�
 - OWASP Logging Cheat Sheet — doporučení pro bezpečné logování bez citlivých a nadbytečných údajů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - OWASP Secrets Management Cheat Sheet — praktické zásady pro tajemství, tokeny a přístupy používané i u flagovacích nástrojů: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
 
+# Příloha: Cenové experimenty bez manipulace a datového přestřelu
+
+Cenotvorba je jedna z nejcitlivějších částí SaaS. Malá změna v balíčku, limitu nebo textu na pricing stránce může zvýšit konverzi, zlepšit kvalitu zákazníků a snížit tlak na podporu. Stejně snadno ale může rozbít důvěru, když zákazník zjistí, že každý vidí jinou cenu podle toho, odkud přišel, jak drahý má notebook nebo kolikrát si večer otevřel stránku. To už není experiment. To je datová magie s nepříjemným účetnictvím.
+
+Privacy-first cenový experiment má být srozumitelný, omezený a vratný. Nemá potřebovat detailní profil návštěvníka. U malého B2B SaaS obvykle stačí testovat formulaci hodnoty, pořadí tarifů, limity, CTA, FAQ nebo způsob vysvětlení ceny. Pokud potřebuješ k testu znát půlku života návštěvníka, pravděpodobně netestuješ cenu, ale trpělivost lidí.
+
+> Codyho komentář: Dobrá pricing stránka není kasino. Člověk má odejít s pocitem „chápu, co dostanu“, ne „asi jsem právě vyhrál nebo prohrál algoritmickou ruletu“.
+
+## Nejdřív testuj vysvětlení hodnoty, ne slevu
+
+První instinkt bývá snížit cenu nebo přidat časově omezenou slevu. Jenže u B2B a odborných služeb často není problém cena samotná. Problém je, že zákazník nechápe, proč by měl platit právě tolik, co je součástí balíčku a co se stane po kliknutí na tlačítko.
+
+Před slevou otestuj:
+
+- jasnější pojmenování tarifů podle segmentu, například `Start`, `Tým`, `Firma`,
+- vysvětlení limitů lidskou řečí, ne jen tabulkou parametrů,
+- ukázku typických scénářů použití,
+- FAQ k fakturaci, zrušení, exportu dat a podpoře,
+- jednoznačné CTA pro samoobslužný trial a zvlášť pro obchodní konzultaci,
+- krátký blok „Pro koho tarif není“, který sníží špatné leady.
+
+Sleva řeší tření nákupního momentu. Vysvětlení hodnoty řeší důvěru. A důvěra je levnější než nekonečný slevový ohňostroj.
+
+## Experiment musí mít jednu hypotézu
+
+Pricing stránka svádí k tomu změnit všechno najednou: nadpis, ceny, limity, barvy tlačítek, pořadí tarifů, FAQ a ještě přidat badge „nejvýhodnější“. Výsledek pak sice nějak dopadne, ale nikdo neví proč. To je drahá anketa, ne experiment.
+
+Dobrá hypotéza vypadá takto:
+
+```text
+Když [konkrétní změna], tak [očekávané chování], protože [důvod ze zákaznického rozhovoru, podpory nebo prodejních otázek].
+```
+
+Příklady:
+
+- Když tarif `Tým` popíšeme podle úspory práce administrátorů, zvýší se počet kliknutí na demo, protože poptávky se nejčastěji ptají na ruční rutinu.
+- Když vedle ceny ukážeme, co je zahrnuté v onboardingu, sníží se počet dotazů na skryté náklady, protože lidé si nejsou jistí implementací.
+- Když u nejnižšího tarifu přidáme jasný limit počtu workspace, sníží se počet nevhodných registrací, protože malé týmy dnes nepoznají, jestli je tarif pro ně.
+
+Jedna hypotéza znamená jedna primární metrika. U pricingu to nemusí být hned platba. Často dává smysl měřit kvalifikované kliknutí na demo, dokončenou registraci, počet relevantních odpovědí ve formuláři nebo pokles podpůrných dotazů k ceně.
+
+## Nepersonalizuj cenu podle člověka, pokud to neumíš férově vysvětlit
+
+Personalizace ceny je lákavá. Jenže u malého SaaS často vytvoří víc rizika než hodnoty. Pokud dva podobní zákazníci vidí bez vysvětlení jinou cenu, začne otázka důvěry: je cena férová, nebo jen systém hádá, kolik z koho vytáhne?
+
+Bezpečnější varianty:
+
+- stejné veřejné tarify pro všechny návštěvníky,
+- transparentní ceny podle počtu uživatelů, workspace, objemu nebo funkcí,
+- individuální enterprise nabídka až po explicitním kontaktu,
+- jasně označená zaváděcí cena pro konkrétní období,
+- veřejně vysvětlená sleva pro neziskovky, školy nebo startup program.
+
+Rizikové varianty:
+
+- jiná cena podle země bez vysvětlení obchodního důvodu,
+- skrytá sleva podle zdroje návštěvy,
+- navyšování ceny po opakované návštěvě,
+- „urgentní“ sleva s falešným odpočtem,
+- spojení pricingu s detailním reklamním profilem návštěvníka.
+
+Pokud cenu opravdu segmentuješ, segmentuj podle produktu a smluvních parametrů, ne podle psychologického profilu. Rozdíl mezi `10 uživatelů` a `500 uživatelů` je pochopitelný. Rozdíl mezi „přišel z dražšího zařízení“ a „přišel z levnějšího zařízení“ smrdí už z chodby.
+
+## Měř rozhodnutí, ne osobní příběh
+
+Pro cenový experiment nepotřebuješ nahrávat session, sbírat heatmapu každého pohybu myši ani posílat marketingové platformě kompletní profil. Stačí pár událostí, které odpovídají hypotéze.
+
+Rozumné události:
+
+- `pricing_viewed`,
+- `plan_compared`,
+- `pricing_faq_opened`,
+- `trial_started`,
+- `demo_requested`,
+- `checkout_started`,
+- `billing_question_sent`.
+
+U každé události si napiš, proč existuje. Pokud odpověď zní „možná se to bude hodit“, smaž ji. V privacy-first provozu není budoucí zvědavost dost dobrý účel.
+
+Minimum dat k experimentu:
+
+- varianta stránky nebo komponenty,
+- tarif nebo CTA, kterého se akce týká,
+- pseudonymní workspace nebo anonymní session identifikátor,
+- čas v rozumné granularitě,
+- zdroj v hrubé kategorii, například `direct`, `rss`, `partner`, `organic`,
+- technické informace jen pokud pomáhají opravě problému.
+
+Co si neukládej jen kvůli pricingu: e-mail před odesláním formuláře, celé URL s citlivými parametry, přesnou IP, obsah poznámky ve formuláři, nahrávku obrazovky, historii všech předchozích návštěv a spojení s reklamními identifikátory.
+
+## Pricing FAQ je prodejní i podpůrný nástroj
+
+Dobré FAQ na cenové stránce není odkladiště nepříjemných detailů. Je to bezpečný prostor, kde můžeš férově vysvětlit věci, které zákazník stejně řeší v hlavě.
+
+Otázky, které se vyplatí zodpovědět:
+
+- Můžu kdykoli zrušit nebo změnit tarif?
+- Co se stane s daty po zrušení účtu?
+- Je export dat součástí produktu?
+- Kde jsou data provozována?
+- Kdo má přístup k support datům?
+- Co je součástí onboardingu?
+- Kdy je vhodná individuální nabídka?
+- Jak funguje fakturace pro EU firmy?
+
+Privacy-first výhoda je tady velmi konkrétní: když transparentně vysvětlíš provoz, data a export, obchod nemusí tolik dohánět důvěru v e-mailech. Zákazník má méně nejistoty a tým méně opakovaných dotazů.
+
+## Cenový test ukonči rozhodnutím, ne pocitem
+
+Experiment bez konce se mění v trvalý chaos. Každý cenový test musí mít předem dané datum revize, minimální objem signálu a rozhodovací pravidlo. U menších SaaS často nebude statistická čistota dokonalá. To nevadí, pokud z testu uděláš kvalifikované produktové rozhodnutí, ne kult dashboardu.
+
+Rozhodnutí může být:
+
+- ponechat variantu,
+- vrátit původní stav,
+- upravit text a zopakovat menší test,
+- převést poznatek do prodejního FAQ,
+- udělat rozhovory se zákazníky, protože čísla nestačí.
+
+K rozhodnutí přidej krátkou poznámku: co jsme čekali, co se stalo, co jsme se naučili a co záměrně neděláme dál. Tahle poznámka je cennější než pět screenshotů grafu bez kontextu.
+
+## Checklist: cenové experimenty bez manipulace
+
+- Experiment má jednu hypotézu a jedno hlavní rozhodnutí.
+- Nejdřív testuje vysvětlení hodnoty, limity nebo FAQ, ne automaticky slevu.
+- Veřejné ceny jsou konzistentní, pokud není transparentní důvod k segmentaci.
+- Segmentace vychází z produktu, tarifu, smlouvy nebo explicitní domluvy, ne z osobního profilu.
+- Události měří pricing rozhodnutí, ne detailní soukromý příběh návštěvníka.
+- Formuláře nesbírají fakturační ani kontaktní data dřív, než jsou opravdu potřeba.
+- FAQ odpovídá na zrušení, export dat, provoz v Evropě, podporu a onboarding.
+- Experiment má datum revize, stop podmínku a předem popsané možné rozhodnutí.
+- Výsledek se zapíše do rozhodovacího deníku, aby se stejná debata za měsíc nehrála znovu.
+
+## Mini šablona pricing experiment karty
+
+```markdown
+# Pricing experiment karta: [název testu]
+
+## Kontext
+- Stránka / komponenta:
+- Segment zákazníků:
+- Problém z podpory, obchodu nebo rozhovorů:
+
+## Hypotéza
+- Když:
+- Očekáváme:
+- Protože:
+
+## Změna
+- Varianta A:
+- Varianta B:
+- Co záměrně neměníme:
+
+## Data a měření
+- Primární metrika:
+- Sekundární signály:
+- Události:
+- Použitá data:
+- Co záměrně nesbíráme:
+
+## Férovost
+- Je cena pro podobné zákazníky konzistentní?
+- Pokud ne, jak je segmentace vysvětlena?
+- Je sleva nebo akce časově a obsahově pravdivá?
+- Je jasné, co se stane po kliknutí na CTA?
+
+## Rozhodnutí
+- Datum revize:
+- Stop podmínka:
+- Výsledek: ponechat / vrátit / upravit / prozkoumat rozhovory
+- Poznámka pro budoucí tým:
+```
+
+## Zdroje
+
+- GDPR, článek 5 — principy zákonnosti, korektnosti, transparentnosti, minimalizace údajů a omezení účelu v textu na EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- GDPR, článek 25 — ochrana údajů již od návrhu a ve výchozím nastavení v textu na EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- EDPB Guidelines 8/2020 on the targeting of social media users — užitečný kontext k rizikům cílení a profilování: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-82020-targeting-social-media-users_en
+- OWASP Logging Cheat Sheet — doporučení logovat jen účelné události a vynechávat citlivá či nadbytečná data: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
 # Pracovní log
+
+- 2026-10-01: Doplněna příloha „Cenové experimenty bez manipulace a datového přestřelu“ s praktickým postupem pro pricing testy, férovou segmentací, privacy-first měřením, pricing FAQ, ukončením experimentu, checklistem a vyplnitelnou experiment kartou.
 
 - 2026-10-01: Doplněna příloha „Feature flags a postupné nasazení bez chaosu a profilování“ s typy flagů, rollout plánem, privacy-first segmentací, auditním logováním, kill switchem, pravidly úklidu, checklistem a vyplnitelnou feature flag kartou.
 
