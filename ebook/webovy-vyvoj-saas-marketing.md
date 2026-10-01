@@ -27819,7 +27819,213 @@ Jak se změna oznámí:
 - Cloud Security Alliance STAR — veřejný registry program pro cloudovou bezpečnostní transparentnost: https://cloudsecurityalliance.org/star
 - GDPR, článek 13 — informace poskytované při sběru osobních údajů: https://gdpr.eu/article-13-personal-data-collected/
 
+# Příloha: Interní AI agenti bez úniku kontextu a falešné autonomie
+
+AI agent v malém SaaS není kouzelný kolega, který „nějak“ vyřeší support, prodej, fakturaci a release management. Je to automatizační vrstva nad nástroji, daty a oprávněními. Když ji pustíš bez hranic, dostaneš rychlejší chaos. Když ji navrhneš dobře, dostaneš užitečného pomocníka, který šetří čas a nepřidává datové riziko.
+
+Praktický cíl této přílohy: nasadit interní AI agenty tak, aby pomáhali týmu, ale neměli zbytečný přístup k osobním údajům, produkčním tajemstvím ani zákaznickému obsahu.
+
+## Začni pracovním scénářem, ne výběrem modelu
+
+Neříkej: „Potřebujeme AI agenta.“ Řekni: „Potřebujeme zkrátit přípravu odpovědi na support ticket o 40 % bez odesílání citlivých dat mimo schválené prostředí.“
+
+Dobré první scénáře:
+
+- shrnutí interní dokumentace pro support,
+- návrh odpovědi na ticket po ručním výběru relevantních faktů,
+- kontrola checklistu před releasem,
+- příprava osnovy článku z veřejných zdrojů,
+- kategorizace feedbacku bez ukládání plného textu do analytiky.
+
+Špatné první scénáře:
+
+- autonomní mazání zákaznických účtů,
+- přímé změny fakturace bez schválení,
+- čtení celé produkční databáze „pro kontext“,
+- automatické odpovědi zákazníkům bez lidské kontroly,
+- agent s admin tokenem „protože je to jednodušší“.
+
+Codyho komentář: Jestli agent potřebuje práva, která bys nedal juniornímu kolegovi první den, pravděpodobně mu je nedávej ani jako API token. Romantika autonomie končí tam, kde začíná auditní log.
+
+## Rozděl agenty podle rizika
+
+Použij jednoduchou škálu:
+
+1. **Čtecí agent nad veřejnými daty** — čte web, dokumentaci, blog, changelog. Nízké riziko.
+2. **Čtecí agent nad interními daty** — čte interní znalostní bázi, runbooky, ticket metadata. Střední riziko.
+3. **Návrhový agent** — připravuje odpovědi, SQL dotazy, release notes nebo checklisty, ale nic neprovádí. Střední až vyšší riziko podle dat.
+4. **Akční agent s omezenými nástroji** — umí vytvořit draft, založit úkol, poslat interní notifikaci. Vyšší riziko.
+5. **Akční agent s dopadem na zákazníka nebo peníze** — mění nastavení účtu, fakturaci, přístupy, produkční data. V malém SaaS vyžaduje velmi přísné schvalování, nebo raději vůbec nezačínat.
+
+Pro první verzi drž agenty ve vrstvách 1–3. Akční schopnosti přidávej až poté, co máš logování, schvalovací krok, testovací prostředí a jasného ownera.
+
+## Kontext skládej podle principu nejmenšího množství dat
+
+Agent nepotřebuje „všechno“. Potřebuje nejmenší kontext, který stačí pro konkrétní úlohu.
+
+Praktický postup:
+
+- do promptu dávej jen relevantní výňatek, ne celý ticket thread,
+- osobní údaje nahrazuj interními identifikátory, pokud nejsou nutné,
+- dlouhodobou paměť vypni nebo omez na schválené souhrny,
+- citlivé přílohy nikdy neposílej automaticky,
+- systémové instrukce drž odděleně od uživatelského obsahu,
+- výstup označ jako návrh, pokud ho má zkontrolovat člověk.
+
+Příklad pro support:
+
+```text
+Úloha: připrav návrh odpovědi na otázku zákazníka.
+Kontext: pouze typ tarifu, agregovaný stav účtu a relevantní výňatek z dokumentace.
+Zakázáno: citovat interní poznámky, zmiňovat jiné zákazníky, slibovat právní závěry.
+Výstup: návrh e-mailu + seznam předpokladů, které má člověk ověřit.
+```
+
+Tohle je méně sexy než „agent vidí celý CRM“. Je to také méně pravděpodobný zdroj průšvihu. Náhoda? Bohužel ne.
+
+## Nástroje agenta povoluj jako API produkt
+
+Každý nástroj, který agent smí použít, popiš stejně přísně jako interní API endpoint.
+
+U každého nástroje eviduj:
+
+- účel,
+- vstupní parametry,
+- jaká data vrací,
+- jaké změny může provést,
+- limit volání,
+- potřebnou roli,
+- jestli vyžaduje lidské schválení,
+- jak se loguje výsledek.
+
+Bezpečnější vzor: agent navrhne akci, člověk ji potvrdí, systém ji provede přes běžné oprávnění uživatele. Nebezpečný vzor: agent dostane servisní token s právem dělat všechno a tým doufá, že prompt je bezpečnostní hranice. Prompt není firewall. Prompt je spíš lepící papírek na dveřích serverovny.
+
+## Human-in-the-loop dej tam, kde je dopad
+
+Lidské schválení není brzda všude. Je to pojistka tam, kde může vzniknout škoda.
+
+Schvaluj ručně:
+
+- odeslání zprávy zákazníkovi,
+- změny cen, fakturace a refundů,
+- mazání nebo export osobních údajů,
+- změny oprávnění,
+- produkční SQL nebo migrace,
+- publikaci právních, bezpečnostních nebo compliance tvrzení.
+
+Nemusíš ručně schvalovat:
+
+- návrh osnovy článku,
+- interní shrnutí veřejné dokumentace,
+- vytvoření draftu bez odeslání,
+- kontrolu checklistu,
+- kategorizaci anonymizovaných poznámek.
+
+Dobré pravidlo: pokud by chyba agenta vyžadovala omluvu zákazníkovi, obnovu dat, právní konzultaci nebo incident report, přidej schvalovací krok.
+
+## Auditní stopa musí vysvětlit rozhodnutí
+
+U každého běhu agenta loguj minimálně:
+
+- kdo agenta spustil,
+- jaký scénář běžel,
+- jaké zdroje kontextu byly použity,
+- jaké nástroje agent volal,
+- jaký výstup navrhl,
+- kdo výstup schválil nebo odmítl,
+- jaká akce byla skutečně provedena.
+
+Neloguji celé prompty s osobními údaji jen proto, že je to pohodlné. Pro audit často stačí metadata, hash vstupu, identifikátor ticketu a uložený finální výstup. Pokud musíš logovat víc, nastav krátkou retenci, přístup podle rolí a zákaz kopírování do analytiky.
+
+## AI Act a GDPR ber jako návrhové mantinely
+
+AI Act pracuje s rizikovým přístupem a transparentností. Evropská komise k 2. srpnu 2026 uvádí použitelnost některých transparentních povinností podle článku 50 a samostatně vydává vodítka k povinnostem pro poskytovatele general-purpose AI modelů. Pro malý SaaS je praktické minimum jednoduché: vědět, kde AI používáš, jaký má dopad, jaká data zpracovává, kdo ji kontroluje a kdy musí člověk vědět, že interaguje s AI.
+
+GDPR neodchází jen proto, že je v procesu model. EDPB ve stanovisku k AI modelům řeší mimo jiné anonymitu modelů, právní základ a dopady nezákonně zpracovaných osobních údajů. Prakticky: nepředpokládej automaticky, že model nebo embedding databáze jsou anonymní. Posuzuj konkrétní riziko extrakce, propojení a opětovné identifikace.
+
+Pro interní agenty si tedy veď AI inventory:
+
+- název agenta,
+- účel,
+- uživatelé,
+- model / dodavatel,
+- datové zdroje,
+- nástroje,
+- úroveň autonomie,
+- schvalovací body,
+- logování,
+- retenční pravidla,
+- owner a datum revize.
+
+## Checklist: interní AI agent bez úniku kontextu
+
+- [ ] Agent má konkrétní pracovní scénář, ne obecné „pomáhej všude“.
+- [ ] Je zařazen do rizikové vrstvy podle dat a dopadu.
+- [ ] Kontext je minimalizovaný a neobsahuje zbytečné osobní údaje.
+- [ ] Dlouhodobá paměť je vypnutá nebo řízená.
+- [ ] Každý nástroj má popsaný účel, oprávnění a logování.
+- [ ] Akce s dopadem na zákazníka, peníze, přístupy nebo produkční data vyžadují schválení.
+- [ ] Výstupy jsou označené jako návrh, pokud je kontroluje člověk.
+- [ ] Auditní stopa obsahuje metadata, nástroje a schválení, ne datovou skládku.
+- [ ] AI inventory má ownera a datum další revize.
+- [ ] Zákazníkům a uživatelům je férově vysvětleno, kde AI vstupuje do procesu, pokud je to relevantní.
+
+## Mini šablona agent karty
+
+```markdown
+# AI agent karta: [název]
+
+## Účel
+Jakou práci agent pomáhá dělat:
+Co výslovně nedělá:
+Owner:
+
+## Riziko
+Riziková vrstva: [1–5]
+Dopad chyby:
+Vyžaduje lidské schválení: ano/ne/kdy
+
+## Data
+Datové zdroje:
+Osobní údaje:
+Citlivé údaje:
+Minimalizace kontextu:
+Retence vstupů a výstupů:
+
+## Model a dodavatel
+Model / služba:
+Region zpracování:
+DPA / smluvní dokumentace:
+Trénování na zákaznických datech povoleno: ano/ne
+
+## Nástroje
+Povolené nástroje:
+Zakázané nástroje:
+Limity:
+Schvalovací body:
+
+## Audit
+Co logujeme:
+Kdo smí logy číst:
+Jak dlouho logy držíme:
+
+## Revize
+Datum poslední kontroly:
+Další kontrola:
+Otevřená rizika:
+```
+
+## Zdroje
+
+- European Commission — AI Act regulatory framework, přehled rizikového přístupu a kategorií AI systémů: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+- European Commission — Guidelines on transparency obligations for providers and deployers of AI systems, včetně transparentních povinností použitelných od 2. srpna 2026: https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems
+- European Commission — General-purpose AI obligations under the AI Act, praktické dokumenty pro GPAI povinnosti: https://digital-strategy.ec.europa.eu/en/factpages/general-purpose-ai-obligations-under-ai-act
+- EDPB — Opinion 28/2024 on data protection aspects in the context of AI models, anonymita modelů, právní základ a dopady nezákonného zpracování: https://www.edpb.europa.eu/documents/opinion-of-the-board-art-64/opinion-282024-on-certain-data-protection-aspects-related-to_en
+- OWASP — Top 10 for Large Language Model Applications, rizika prompt injection, nadměrných oprávnění a úniku citlivých informací: https://owasp.org/www-project-top-10-for-large-language-model-applications/
+
 # Pracovní log
+- 2026-10-01: Doplněna příloha „Interní AI agenti bez úniku kontextu a falešné autonomie“ s výběrem scénářů, rizikovými vrstvami agentů, minimalizací kontextu, pravidly pro nástroje, human-in-the-loop schvalováním, auditní stopou, AI inventory, checklistem, agent kartou a ověřenými zdroji Evropské komise, EDPB a OWASP.
+
 - 2026-10-01: Doplněna příloha „Trust center pro malý SaaS bez bezpečnostního divadla“ s rozdělením veřejných, zákaznických, řízených a interních informací, minimem pro první verzi, správou důkazů, privacy vysvětlením, subprocesory, zapojením sales/supportu, provozní rutinou, checklistem, Trust center kartou a ověřenými zdroji ISO, CSA a GDPR.
 
 - 2026-10-01: Doplněna příloha „Monitoring a alerting bez datového vysavače“ s provozními signály, bezpečným logováním, pravidly pro tracing, akčními alerty, status komunikací, retenčním modelem, checklistem, monitoring kartou a ověřenými zdroji OpenTelemetry, Google SRE, OWASP a GDPR.
