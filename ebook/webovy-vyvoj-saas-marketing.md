@@ -24109,7 +24109,168 @@ Privacy-first SaaS nemusí tvrdit, že nikdy nepoužije globální platební inf
 - Stripe průvodce PCI compliance vysvětluje, že Checkout a Elements používají hostovaná platební pole pro citlivá karetní data a mohou zjednodušit PCI zátěž: https://stripe.com/guides/pci-compliance
 - PCI Security Standards Council uvádí, že ověřovací kódy karet typu CVV/CVC nelze po autorizaci ukládat ani se souhlasem zákazníka: https://www.pcisecuritystandards.org/faqs/1280/
 
+# Příloha: Přihlášení, relace a zařízení bez digitálního stalkingu
+
+Přihlášení je zvláštní produktová funkce: když funguje dobře, nikdo si jí nevšimne. Když funguje špatně, lidé se nedostanou do práce, support začne hořet a bezpečnostní incident si dá nohy na stůl. V SaaS navíc nejde jen o samotný login. Jde o relace, cookie nastavení, seznam aktivních zařízení, odhlašování, reautentizaci před citlivými akcemi a o to, kolik technických stop o člověku si vlastně necháváš.
+
+Privacy-first přístup neznamená „neřeš bezpečnost, protože nechceš logovat“. Znamená: loguj přesně to, co potřebuješ pro ochranu účtu, provoz a audit — a nic navíc. Přihlášení nemá být marketingová kamera. Má být dveřník, který pozná oprávněného člověka, ne bulvární fotograf v obleku.
+
+> Codyho komentář: Když aplikace ukazuje „přihlášená zařízení“, má to uživateli pomoct získat kontrolu. Pokud z toho uděláš sbírku přesných lokací, fingerprintů a historických IP adres bez konce, nejsi bezpečnostní tým. Jsi digitální zoolog.
+
+## Session cookie je přístupový klíč
+
+Session cookie nebo refresh token ber jako klíč od účtu. Ne jako technickou drobnost, kterou můžeš nechat v `localStorage`, poslat do analytiky nebo vypsat do debug logu. Pokud útočník získá platný session identifikátor, často nepotřebuje heslo ani MFA. Už sedí uvnitř.
+
+Praktický základ pro webovou SaaS aplikaci:
+
+- session identifikátor generuj náhodně a s dostatečnou entropií,
+- po přihlášení vždy regeneruj session ID, aby nevznikla session fixation chyba,
+- cookie nastav jako `HttpOnly`, `Secure` a rozumně `SameSite`,
+- citlivé tokeny neukládej do `localStorage` ani `sessionStorage`,
+- tokeny ani celé cookie hodnoty nikdy neposílej do logů, analytiky, chybových reportů ani support nástrojů,
+- logout musí serverově zneplatnit relaci, ne jen smazat tlačítko z UI.
+
+U SPA aplikací je lákavé mít token všude v JavaScriptu, protože to zjednoduší volání API. Jenže zjednodušení pro vývojáře nesmí znamenat bonusový jackpot pro každou XSS chybu. Pokud frontend potřebuje volat API, zvaž Backend-for-Frontend nebo bezpečné server-side session cookies. Ano, je to méně sexy než diagram s pěti tokeny. Zato se u toho líp spí.
+
+## Délka relace má odpovídat riziku, ne náhodě
+
+„Zůstat přihlášen“ je pohodlné. Nekonečná relace bez kontroly je ale pozvánka pro zapomenuté notebooky, sdílené počítače a staré telefony v šuplíku. Nastav dvě časové hranice: neaktivitu a celkovou životnost relace.
+
+Příklad pro malý B2B SaaS:
+
+- běžná pracovní relace: neaktivita 8 až 12 hodin, celková životnost 14 až 30 dní podle rizika,
+- administrace workspace, billing a exporty: kratší neaktivita a reautentizace před akcí,
+- interní admin rozhraní: výrazně kratší relace, povinné MFA a žádné „pamatuj si mě na věky věků“,
+- veřejné demo nebo neplacený sandbox: klidně pohodlnější relace, ale bez přístupu k citlivým datům.
+
+Důležité je nemíchat bezpečnostní divadlo s reálným rizikem. Když budeš všechny uživatele odhlašovat každých 15 minut během psaní textu, naučíš je bezpečnost nenávidět. Když ale necháš billing admina přihlášeného půl roku bez kontroly, učíš incident psát faktury.
+
+## Reautentizace patří před citlivé akce
+
+Některé akce mají vyšší dopad než běžné klikání v aplikaci. U nich nestačí, že relace stále existuje. Dej uživateli krátký krok navíc: potvrzení heslem, MFA, passkey nebo jinou silnou metodou podle toho, co produkt podporuje.
+
+Reautentizaci zvaž před těmito akcemi:
+
+- změna e-mailu, hesla nebo MFA,
+- přidání nebo odebrání administrátora,
+- změna fakturačních údajů nebo tarifu,
+- vytvoření API tokenu,
+- export většího objemu dat,
+- smazání workspace nebo významné části dat,
+- změna SSO, domény nebo bezpečnostních pravidel organizace.
+
+UX pravidlo: vysvětli, proč kontrolu chceš. „Pro tuto změnu potřebujeme znovu potvrdit vaši identitu“ je lepší než tajemné „Session expired“. A pokud kontrola selže, nevyhazuj uživatele do prázdna. Vrať ho zpět k akci, kterou chtěl dokončit.
+
+## Přehled zařízení má dávat kontrolu, ne sbírat trofeje
+
+Stránka „Aktivní relace“ je skvělý privacy-first prvek. Uživatel vidí, kde je přihlášený, a může relace ukončit. Jen pozor: cílem není vytvořit nekonečný archiv pohybu člověka po internetu.
+
+Užitečné údaje:
+
+- přibližný typ zařízení nebo prohlížeče,
+- čas poslední aktivity,
+- orientační země nebo region, pokud to skutečně pomáhá rozpoznat podezřelou relaci,
+- označení aktuální relace,
+- tlačítko „Odhlásit tuto relaci“ a „Odhlásit ostatní relace“.
+
+Údaje, které často nepotřebuješ ukazovat ani držet dlouho:
+
+- přesná IP historie za měsíce,
+- přesná lokace z IP jako domnělý fakt,
+- kompletní user-agent string v UI,
+- fingerprint zařízení vytvořený z desítek parametrů,
+- detailní časová osa každého otevření aplikace.
+
+Pro provoz si můžeš krátkodobě držet bezpečnostní signály, ale nastav retenci. Například posledních 10 aktivních relací a bezpečnostní události za 90 dní u běžného účtu. U enterprise auditů může být potřeba víc, ale má to být součást smlouvy a datové mapy, ne náhoda v tabulce `login_events_final_v7`.
+
+## Přihlášení bez enumerace účtů
+
+Login a registrace často nechtěně prozrazují, kdo je zákazník. Stačí rozdílné hlášky: „E-mail neexistuje“, „Špatné heslo“, „Účet je zablokovaný“. Útočník pak nemusí nic lámat. Jen zkouší seznam e-mailů a skládá si databázi.
+
+Bezpečnější vzor:
+
+```text
+Pokud údaje odpovídají existujícímu účtu, pokračujte podle instrukcí.
+```
+
+U běžného loginu může být hláška lidská, ale nemá potvrzovat existenci účtu. U registrace je situace složitější: někdy musíš říct, že e-mail už je použitý. Pak nabídni bezpečný krok: „Pokud už účet máte, pošleme vám odkaz pro přihlášení.“ Nepiš detaily o organizaci, roli ani stavu účtu.
+
+Stejně opatrně zacházej s API odpověďmi. Frontend může ukazovat jednu obecnou chybu, ale backend nesmí bokem vracet `user_exists: true`, protože „to stejně nikdo neuvidí“. Někdo to uvidí. Říká se mu curl.
+
+## Bezpečnostní logy piš pro incident, ne pro zvědavost
+
+Přihlašovací a session události loguj tak, aby šly použít při podezření na převzetí účtu. To neznamená ukládat všechno navždy.
+
+Rozumné bezpečnostní události:
+
+- úspěšné přihlášení,
+- neúspěšné pokusy agregované podle účtu a technického signálu,
+- změna hesla, e-mailu nebo MFA,
+- vytvoření a použití recovery kódu,
+- vytvoření nebo smazání API tokenu,
+- odhlášení ostatních relací,
+- podezřelá změna země nebo zařízení, pokud ji opravdu vyhodnocuješ.
+
+Privacy-first log neobsahuje hesla, tokeny, celé cookie, celé payloady ani obsah uživatelských dat. Pokud potřebuješ IP adresu, zvaž retenci, maskování nebo oddělený bezpečnostní log s omezeným přístupem. Přístup k bezpečnostním logům má mít méně lidí než přístup k běžnému supportu.
+
+> Codyho komentář: Log, který nikdo nečte a nikdo neumí smazat, není bezpečnostní opatření. Je to budoucí incident s lepším archivem.
+
+## Checklist: přihlášení a relace bez stalkingu
+
+- Session ID se regeneruje po přihlášení a při zvýšení oprávnění.
+- Cookie má `HttpOnly`, `Secure` a promyšlený `SameSite` režim.
+- Citlivé tokeny nejsou v `localStorage`, URL, analytice ani debug logu.
+- Logout zneplatňuje relaci serverově.
+- Existuje timeout neaktivity i celková životnost relace podle rizika.
+- Citlivé akce vyžadují reautentizaci nebo silnější potvrzení.
+- Uživatel vidí aktivní relace a umí odhlásit ostatní zařízení.
+- Přehled zařízení neukazuje zbytečně přesnou historii polohy a IP adres.
+- Login a reset flow neprozrazují zbytečně existenci účtu.
+- Bezpečnostní logy mají účel, omezený přístup a retenční pravidlo.
+
+## Mini šablona session karty
+
+```markdown
+# Session karta: [produkt / role / riziková oblast]
+
+## Typ relace
+- Běžný uživatel:
+- Admin workspace:
+- Interní admin:
+- API / integrace:
+
+## Cookie a tokeny
+- Kde je uložen session identifikátor:
+- Cookie atributy:
+- Kde nesmí token nikdy skončit:
+- Rotace session ID po loginu: ano/ne
+
+## Timeouty
+- Neaktivita:
+- Celková životnost:
+- Reautentizace před akcemi:
+
+## Přehled zařízení
+- Co ukazujeme uživateli:
+- Co držíme jen pro bezpečnost:
+- Retence:
+
+## Logy a privacy
+- Bezpečnostní události:
+- Maskování / minimalizace:
+- Kdo má přístup:
+- Kdy se logy mažou:
+```
+
+## Zdroje
+
+- OWASP Session Management Cheat Sheet popisuje práci se session identifikátory, cookie atributy, regenerací relací a rizika ukládání tokenů do web storage: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- OWASP Authentication Cheat Sheet shrnuje doporučení pro autentizaci, ochranu citlivých účtů, obecné chybové hlášky a bezpečnou správu přihlášení: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+- OWASP Password Storage Cheat Sheet doporučuje hesla nikdy neukládat v čitelné podobě a používat pomalé, silné hashovací algoritmy jako Argon2id, bcrypt nebo PBKDF2: https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
+- NIST SP 800-63B popisuje reautentizaci, timeouty relací a rozdíl mezi neaktivitou a celkovou životností session: https://pages.nist.gov/800-63-4/sp800-63b.html
+
 # Pracovní log
+- 2026-10-01: Doplněna příloha „Přihlášení, relace a zařízení bez digitálního stalkingu“ se session cookies, timeouty, reautentizací před citlivými akcemi, přehledem zařízení, ochranou proti enumeraci účtů, bezpečnostními logy, checklistem, session kartou a ověřenými zdroji OWASP a NIST.
 - 2026-10-01: Rozšířena příloha „Admin rozhraní bez superuživatelského průšvihu“ o provozní test session, MFA a admin API, negativní autorizační scénáře, multitenant kontrolu objektů a ověřené zdroje OWASP a NIST.
 
 - 2026-09-30: Doplněna příloha „Dunning, refundy a billing support bez finančního harampádí“ s datovou hranicí platebního flow, doporučením pro hosted checkout, minimalizací fakturačních údajů, oddělením retenčních režimů, bezpečným webhook zpracováním, dunning komunikací, refund workflow, rolemi pro billing a ověřenými zdroji EDPB, Finanční správy, Stripe a PCI SSC.
