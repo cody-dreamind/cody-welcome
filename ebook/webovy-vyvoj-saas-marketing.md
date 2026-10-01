@@ -27620,215 +27620,207 @@ Status page používáme? ano/ne
 - OWASP Logging Cheat Sheet — co logovat, co nelogovat a jak logy chránit: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - GDPR, článek 5 — minimalizace, omezení účelu, omezení uložení a odpovědnost: https://gdpr.eu/article-5-how-to-process-personal-data/
 
-# Příloha: Rate limiting a abuse ochrana bez fingerprintingového kladiva
+# Příloha: Trust center pro malý SaaS bez bezpečnostního divadla
 
-Každý web a SaaS dřív nebo později potká automatizované chování: pokusy o hádání hesel, scraping, falešné registrace, spam přes formuláře, stahování exportů pořád dokola, drahé API volání nebo klikací roboty testující slevové kódy. Reakce nesmí být „nasadíme nejagresivnější fingerprinting a hotovo“. To je pohodlné, ale často privacy drahé. Lepší je vrstvit ochranu podle rizika, sbírat minimum signálů a dávat legitimním lidem cestu ven z falešného blokování.
+Trust center je místo, kde zákazník najde odpovědi na otázky o bezpečnosti, soukromí, provozu a odpovědnosti. Nemusí to být enterprise portál s přihlašováním, třiceti PDF a fotkou zamčeného serveru v modrém světle. Pro malý evropský SaaS často stačí dobře udržovaná stránka, pár jasných dokumentů a proces, který zabrání tomu, aby každý bezpečnostní dotazník začínal archeologií v hlavách týmu.
 
-OWASP v API Security Top 10 2023 popisuje neomezenou spotřebu zdrojů jako reálné riziko pro dostupnost i náklady a doporučuje limity pro velikost vstupů, počet operací, frekvenci volání a nákladové stropy u externích služeb (https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/). OWASP zároveň upozorňuje, že automatizované hrozby často zneužívají legitimní funkce aplikace, ne jen klasické zranitelnosti (https://owasp.org/projects/automated-threats-to-web-applications). Překlad do češtiny pro podnikatele: problém není jen hacker v kapuci. Problém je i bot, který používá tvoje tlačítka rychleji, než tvoje faktura za infrastrukturu stíhá dýchat.
+Smysl Trust centra není vypadat větší, než jsi. Smysl je snížit nejistotu zákazníka a zrychlit nákupní rozhodnutí bez toho, aby tým sdílel víc informací, než je bezpečné. ISO popisuje ISO/IEC 27001 jako standard pro systém řízení bezpečnosti informací založený na řízení rizik a zachování důvěrnosti, integrity a dostupnosti informací (https://www.iso.org/standard/27001). Cloud Security Alliance zase používá CAIQ jako způsob, jak cloudoví poskytovatelé dokumentují bezpečnostní kontroly pro zákazníky (https://cloudsecurityalliance.org/artifacts/ccm-and-caiq-faq). I když malý SaaS ještě nemá certifikaci ani vyplněný CAIQ, může převzít princip: odpovědi mají být strukturované, aktuální a dohledatelné.
 
-> Codyho komentář: Rate limit není trest pro uživatele. Je to bezpečnostní pás. Když ho nastavíš blbě, škrtí. Když ho nemáš, letíš čelem do zdi.
+> Codyho komentář: Trust center není vitrína s medailemi. Je to uklizená technická šatna. Když zákazník otevře dveře, nemá na něj vypadnout hromada nepojmenovaných PDF.
 
-## Začni mapou zneužitelných akcí
+## Začni otázkami zákazníka
 
-Nechráníš „web“. Chráníš konkrétní akce, které mohou být drahé, citlivé nebo obchodně zneužitelné. Udělej si jednoduchý seznam:
+Nezačínej tím, co chceš vystavit. Začni tím, na co se zákazník před nákupem opakovaně ptá:
 
-- přihlášení a reset hesla,
-- registrace a pozvánky do workspace,
-- odeslání kontaktního formuláře,
-- upload souborů,
-- export dat,
-- vyhledávání a stránkování velkých seznamů,
-- generování AI odpovědí, PDF, reportů nebo náhledů,
-- webhook příjem a odchozí notifikace,
-- checkout, slevové kódy a trial aktivace,
-- veřejné API endpointy.
+- Kde jsou data uložená?
+- Kdo k nim má přístup?
+- Jak chráníte přihlášení a administrátorské účty?
+- Jak řešíte zálohy a obnovu?
+- Jak dlouho držíte produktová, fakturační a support data?
+- Kdo jsou subprocesoři?
+- Jak rychle oznamujete incidenty?
+- Umíte export a smazání dat?
+- Používáte AI a co do ní posíláte?
+- Jak probíhá ukončení služby?
 
-Ke každé akci napiš tři věci:
+Trust center má odpovídat na tyhle otázky stručně. Pokud odpověď vyžaduje právní dokument, odkaž ho. Pokud vyžaduje neveřejný detail, napiš co lze sdílet veřejně a co až pod NDA nebo v zákaznickém řízení. Hranice sdílení je součást bezpečnosti, ne projev arogance.
 
-```text
-Co útočník získá?
-Co nás to stojí?
-Jak poznáme zneužití bez čtení obsahu zákaznických dat?
-```
+## Rozděl obsah na veřejný, zákaznický a citlivý
 
-Třetí otázka je privacy-first brzda. U kontaktního formuláře typicky nepotřebuješ ukládat text zprávy do anti-spam systému. Stačí počet odeslání za čas, IP prefix nebo hash IP s krátkou retencí, stav validace, délka zprávy v hrubé kategorii, země podle serverového geolookupu jen pokud ji opravdu používáš, a výsledek rozhodnutí. Obsah zprávy patří do ticketu nebo e-mailu, ne do abuse metriky.
+Ne všechno patří na veřejnou stránku. Dobré Trust centrum má vrstvy:
 
-## Limituj podle účtu, akce i nákladu
+| Vrstva | Co obsahuje | Příklad |
+| --- | --- | --- |
+| Veřejná | obecné principy a odkazy | region provozu, privacy přístup, kontaktní e-mail pro bezpečnost |
+| Zákaznická | detailnější dokumenty pro aktivní zákazníky | DPA, seznam subprocesorů, exportní postup, SLA |
+| Řízená | informace sdílené po schválení | penetrační test summary, detailní architektura, vyplněný dotazník |
+| Interní | provozní důkazy a runbooky | incident timeline, interní audit přístupů, detailní logy |
 
-Jeden globální limit typu „100 requestů za minutu“ je lepší než nic, ale často mine podstatu. Přihlášení, export dat a generování AI reportu mají úplně jiný dopad. Praktické vrstvy:
+Tím zabráníš dvěma extrémům. První extrém je „neřekneme nic“, což zvyšuje nedůvěru. Druhý extrém je „vystavíme všechno“, což zvyšuje bezpečnostní riziko. Privacy-first cesta je řízená transparentnost: zákazník dostane dost informací pro rozhodnutí, útočník nedostane mapu sklepa.
 
-- **IP / síťový limit:** dobrý první filtr pro veřejné endpointy, ale nefér jako jediné pravidlo kvůli sdíleným sítím, mobilním operátorům a kancelářím.
-- **Account/workspace limit:** chrání systém před jedním zákaznickým účtem, který omylem nebo úmyslně spustí lavinu.
-- **User limit:** brání konkrétnímu uživateli opakovat drahou nebo citlivou akci.
-- **Akční limit:** nastavuje zvláštní pravidla pro reset hesla, OTP, pozvánky, exporty, uploady a AI generování.
-- **Nákladový limit:** sleduje peníze nebo kvóty u služeb jako SMS, e-mail, AI API, OCR, mapy a storage.
-- **Objemový limit:** omezuje velikost payloadu, počet položek ve stránce, počet souborů, délku dotazu a počet operací v dávce.
+## Minimum pro první verzi Trust centra
 
-Příklad pro malý B2B SaaS:
+První verze nemusí být dokonalá. Má být pravdivá a udržovatelná. Začni těmito bloky:
 
 ```text
-login: limit podle účtu + uživatele + IP, postupné zpoždění po chybách
-password reset: limit podle e-mailu, účtu a IP; žádná informace, jestli účet existuje
-export dat: limit podle workspace a role; velké exporty přes frontu
-AI report: denní kredit podle workspace; tvrdý nákladový strop
-webhook receive: limit podle integrace, podpisu a zdrojového partnera
-contact form: limit podle IP prefixu a formuláře; honeypot bez sledovacího skriptu
+1. Přehled bezpečnosti
+2. Privacy a zpracování dat
+3. Evropský provoz a hosting
+4. Přístupy a role
+5. Zálohy, obnova a dostupnost
+6. Subprocesoři
+7. Incidenty a kontakt
+8. Export, výmaz a ukončení služby
+9. AI a automatizace
+10. Datum poslední aktualizace
 ```
 
-U autentizace je dobré sledovat doporučení NIST SP 800-63B pro throttling: chránit online pokusy o hádání a u selhání přidávat kontrolované zdržení nebo jiné mitigace, aniž by legitimní člověk spadl do nekonečné pasti (https://pages.nist.gov/800-63-4/sp800-63b.html#sec3-2-2). V praxi to znamená: neukazuj brutálně detailní chybové hlášky, ale zároveň lidem férově řekni, kdy mohou akci zkusit znovu.
-
-## CAPTCHA ber jako poslední, ne první obrannou linii
-
-CAPTCHA je často UX daň placená poctivými lidmi za to, že systém neuměl lépe rozlišit riziko. Navíc některé služby přidávají externí skripty, cross-site signály a dodavatelskou závislost, která se špatně obhajuje v privacy-first produktu.
-
-Než ji nasadíš, zkus:
-
-- server-side rate limiting,
-- honeypot pole ve formuláři,
-- čas vyplnění formuláře jako hrubý signál,
-- potvrzovací e-mail pro rizikové akce,
-- double opt-in tam, kde dává smysl,
-- frontu a manuální review pro hraniční případy,
-- proof-of-work jen pro extrémní veřejné endpointy, pokud nepoškodí přístupnost,
-- blokování známých datacenter jen u endpointů, kde to neublíží legitimním integracím.
-
-Když CAPTCHA opravdu potřebuješ, dej ji jen na rizikový krok, ne na celý web. A do dokumentace napiš, proč tam je, jaký dodavatel ji provozuje, jaká data zpracovává a jestli existuje alternativní cesta pro lidi, kterým nefunguje. Privacy-first neznamená, že necháš formulář sežrat roboty. Znamená to, že nezačneš plošným sledováním každého návštěvníka jen proto, že pár botů neumí slušně zaklepat.
-
-## Fingerprinting omez na prokazatelnou potřebu
-
-Fingerprinting zní jako kouzelná obrana: spojíš IP, user agent, časové vzory, jazyk, canvas, rozlišení a další signály a máš „zařízení“. Jenže tím velmi rychle vzniká vrstva sledování, která může být nepřiměřená běžnému riziku. U evropského provozu si polož minimálně tyhle otázky:
-
-- Jaký konkrétní abuse scénář bez toho nevyřešíme?
-- Lze stejný výsledek dosáhnout kratší retencí a méně invazivním signálem?
-- Umíme signál vysvětlit v privacy dokumentaci lidsky?
-- Kdo k němu má přístup?
-- Kdy se maže?
-- Je rozhodnutí automatické, nebo existuje lidská revize?
-
-Dobrá praxe je začít allowlistem signálů, ne hladovým SDK. Například pro abuse ochranu může stačit:
+U každého bloku napiš jednu větu „co slibujeme“ a jednu větu „kde je hranice“. Například:
 
 ```text
-časové okno
-endpoint / akce
-výsledek akce
-workspace ID
-pseudonymizovaný uživatel
-IP prefix nebo krátkodobý hash IP
-hrubý user-agent typ: browser / bot / script / unknown
-request ID
+Data zákazníků provozujeme v evropském režimu a preferujeme dodavatele s EU datovými centry. Některé podpůrné služby mohou zpracovávat omezená metadata; jejich seznam a účel držíme v registru subprocesorů.
 ```
 
-Do běžné abuse vrstvy naopak nepatří obsah dokumentů, zpráv, query parametry s osobními údaji, clipboard data, přesný behaviorální profil nebo nekonečně dlouhá historie zařízení. Když potřebuješ silnější signály kvůli reálnému útoku, zaveď je jako dočasné opatření s ownerem, datem revize a jasným vypnutím.
+To je lepší než velkolepá věta „bezpečnost je naše priorita“. Ta neříká nic. Prioritou je pro firmy i kávovar, dokud se nerozbije.
 
-## Odpověď uživateli musí být bezpečná i lidská
+## Udržuj důkazy, ne jen marketingové věty
 
-Rate limit nesmí prozradit víc, než musí. U resetu hesla neříkej „tento e-mail u nás není“. U přihlášení neříkej „heslo je špatně, ale účet existuje“. Zároveň nepiš robotickou větu, která legitimního člověka pošle do bažiny.
+Trust center bez provozních důkazů je landing page v bezpečnostním kabátě. Ke každému tvrzení si interně drž odkaz na důkaz:
 
-Lepší vzory:
+- bezpečnostní opatření → interní politika nebo runbook,
+- zálohy → poslední restore test,
+- role a přístupy → datum poslední revize,
+- subprocesoři → registr a DPA,
+- incident komunikace → incident runbook,
+- data retention → retenční karta,
+- AI použití → AI inventory,
+- dostupnost → status page nebo monitoring summary.
+
+Důkaz nemusí být veřejný. Musí existovat. Pokud napíšeš „pravidelně testujeme obnovu“, ale poslední restore test byl v době, kdy všichni ještě nadávali na jiné JavaScript bundlery, raději napiš plán a proveď test.
+
+## Privacy stránka má být lidská a konkrétní
+
+GDPR článek 13 řeší informace poskytované při sběru osobních údajů, včetně totožnosti správce, účelů zpracování, právního základu, příjemců, doby uložení a práv subjektu údajů (https://gdpr.eu/article-13-personal-data-collected/). To je právní minimum. Trust center z toho má udělat srozumitelný provozní přehled.
+
+Dobrá privacy část odpovídá:
+
+- Jaká data sbíráme při návštěvě webu?
+- Jaká data vznikají při používání produktu?
+- Co sbíráme kvůli fakturaci?
+- Co se dostává do podpory?
+- Co se měří agregovaně?
+- Co neposíláme do AI nástrojů?
+- Jak dlouho data držíme?
+- Jak zákazník požádá o export nebo výmaz?
+
+Nepřepisuj právní dokument do lidské řeči tak, že mu změníš význam. Udělej dvě vrstvy: krátké srozumitelné vysvětlení a odkaz na přesný právní text. Lidi ocení první, právníci potřebují druhé. Obě skupiny mají právo nebýt trestané za existenci.
+
+## Subprocesory ukaž bez tabulkového chaosu
+
+Seznam subprocesorů nemá být PDF zakopané v patičce. Má být dostupný, datovaný a použitelný. Minimum polí:
 
 ```text
-Reset hesla:
-Pokud u nás účet s tímto e-mailem existuje, poslali jsme instrukce. Z bezpečnostních důvodů může další pokus chvíli počkat.
-
-Příliš mnoho pokusů:
-Teď jsme akci dočasně pozastavili kvůli ochraně účtu. Zkus to znovu za 15 minut, nebo kontaktuj podporu.
-
-Export dat:
-Export jsme zařadili do fronty. Kvůli velikosti dat může chvíli trvat. Odkaz pošleme oprávněnému uživateli.
+Název dodavatele
+Účel
+Kategorie dat
+Země/region zpracování
+Role: processor / subprocessor / samostatný správce
+Odkaz na DPA nebo bezpečnostní dokumentaci
+Datum přidání
+Způsob oznámení změn
 ```
 
-Pro podporu měj interní vysvětlení: jak najít request ID, jak poznat falešný blok, kdo může limit dočasně upravit a jak dlouho taková výjimka platí. Nejhorší abuse systém je ten, který chrání aplikaci tak dobře, že zákazník nedokáže zaplatit.
+U privacy-first SaaS přidej i praktickou poznámku: proč je nástroj potřeba a jak je omezený přístup k datům. Zákazník nechce číst katalog log. Chce vědět, jestli jeho data neposíláš do náhodné černé díry jen proto, že měla hezké onboardingové konfety.
 
-## Provozní rytmus ochrany proti abuse
+## Trust center zapoj do obchodu a podpory
 
-Jednou týdně projdi:
+Trust center není jen statická stránka. Je to nástroj pro sales, support a produkt. Když obchod dostane bezpečnostní dotazník, nemá vymýšlet odpovědi od nuly. Má odkázat na schválené části a doplnit jen kontext konkrétního zákazníka. Když support dostane otázku o výmazu, má poslat odkaz na exportní a retenční část. Když produkt přidá novou AI funkci, musí aktualizovat AI část.
 
-- top blokované akce,
-- false positive hlášení od podpory,
-- endpointy s největším nákladovým dopadem,
-- nárůst neúspěšných loginů, resetů a formulářů,
-- nové drahé funkce bez limitu,
-- výjimky, které měly být dočasné.
-
-Jednou měsíčně udělej krátkou revizi:
-
-- Máme limity pro všechny veřejné a drahé endpointy?
-- Neukládáme zbytečně detailní signály?
-- Sedí retence abuse dat s účelem?
-- Funguje zákaznická cesta při falešném zablokování?
-- Jsou nákladové alerty napojené na člověka, který může jednat?
-
-U nových funkcí přidej do pull request šablony jednu otázku:
+Praktické pravidlo:
 
 ```text
-Může být tahle akce automatizovaně zneužita, finančně nákladná nebo bezpečnostně citlivá? Pokud ano, kde je limit a jak ho vysvětlíme uživateli?
+Každá opakovaná bezpečnostní nebo privacy otázka buď aktualizuje Trust center, nebo odpovědní banku. Pokud se ptají tři zákazníci, není to výjimka. Je to chybějící dokumentace.
 ```
 
-Tohle je levnější než incident, ve kterém někdo během víkendu vygeneruje tisíce AI reportů, rozešle hromadu e-mailů nebo naplní storage soubory pojmenovanými „test-final-final-robot-9999.zip“.
+Tím z Trust centra vznikne živý produktový artefakt. Ne náhrobek z launch týdne.
 
-## Checklist: abuse ochrana bez fingerprintingového kladiva
+## Provozní rutina Trust centra
 
-- [ ] Máme seznam zneužitelných akcí a jejich dopadů.
-- [ ] Každá drahá nebo citlivá akce má limit podle vhodného klíče: IP, účet, uživatel, workspace, integrace nebo náklad.
-- [ ] Limity zahrnují velikost payloadu, počet položek, počet operací a frekvenci.
-- [ ] Přihlášení, reset hesla a OTP mají samostatná pravidla throttlingu.
-- [ ] CAPTCHA nebo silnější bot detekce se spouští jen na rizikovém kroku, ne plošně.
-- [ ] Abuse signály mají allowlist, krátkou retenci a jasný účel.
-- [ ] Neuchováváme obsah zákaznické práce v anti-abuse logu.
-- [ ] Uživatel dostane bezpečnou, ale srozumitelnou hlášku a cestu k podpoře.
-- [ ] Nákladové stropy a alerty existují pro externí placené služby.
-- [ ] Dočasné výjimky a zostřená pravidla mají ownera a datum vypnutí.
+Měsíčně projdi:
 
-## Mini šablona abuse karty
+- nové a odebrané subprocesory,
+- změny hostingu, regionů a záloh,
+- nové produktové funkce pracující s daty,
+- nové AI funkce a automatizace,
+- opakované otázky ze salesu a podpory,
+- incidenty a postmortem úkoly,
+- odkazy na dokumenty a jejich platnost.
+
+Kvartálně přidej hlubší kontrolu:
+
+- sedí veřejná tvrzení s realitou?
+- existuje důkaz pro každé bezpečnostní tvrzení?
+- nejsou zveřejněné zbytečně citlivé detaily?
+- není privacy text zastaralý?
+- umí tým vysvětlit evropský provoz konkrétně, ne jen sloganem?
+
+## Checklist: Trust center bez divadla
+
+- [ ] Trust center odpovídá na opakované otázky zákazníků před nákupem.
+- [ ] Obsah je rozdělený na veřejný, zákaznický, řízený a interní.
+- [ ] Každé bezpečnostní tvrzení má interní důkaz nebo ownera.
+- [ ] Privacy část vysvětluje data lidsky a odkazuje na přesný právní text.
+- [ ] Seznam subprocesorů je dostupný, datovaný a obsahuje účel zpracování.
+- [ ] AI použití je popsané konkrétně, včetně datových hranic.
+- [ ] Nezveřejňujeme interní IP, architekturu, logy, zákaznické identifikátory ani detaily zranitelností.
+- [ ] Sales a support používají Trust center jako zdroj pravdy.
+- [ ] Každá opakovaná otázka vede k aktualizaci dokumentace nebo odpovědní banky.
+- [ ] Existuje měsíční nebo kvartální owner revize.
+
+## Mini šablona Trust center karty
 
 ```markdown
-# Abuse karta: [akce / endpoint]
+# Trust center karta: [oblast]
 
-## Účel akce
-Co uživatel dělá:
-Proč je akce důležitá:
-Kdo je owner:
+## Veřejná odpověď
+Co říkáme zákazníkům:
+Odkaz na stránku:
+Datum poslední aktualizace:
 
-## Riziko
-Možné zneužití:
-Finanční dopad:
-Bezpečnostní dopad:
-Zákaznický dopad falešného blokování:
+## Důkaz
+Interní zdroj pravdy:
+Owner:
+Datum posledního ověření:
+Další revize:
 
-## Limity
-Klíč limitu: IP / účet / uživatel / workspace / integrace / náklad
-Časové okno:
-Tvrdý limit:
-Měkký limit / zpoždění:
-Nákladový strop:
+## Hranice sdílení
+Veřejné informace:
+Informace pro zákazníky:
+Informace jen po schválení / NDA:
+Co nikdy nesdílíme:
 
-## Data a privacy
-Sbírané signály:
-Co se výslovně nesbírá:
-Retence:
-Přístup k datům:
+## Vazby
+DPA / privacy policy:
+Subprocesor registry:
+Incident runbook:
+AI inventory:
+Retenční karta:
 
-## UX a podpora
-Hláška pro uživatele:
-Jak požádat o odblokování:
-Jak support ověří legitimní případ:
-
-## Revize
-Datum poslední kontroly:
-False positives:
-Změny pravidel:
-Datum další revize:
+## Změny
+Co se změnilo:
+Kdo musí být informován:
+Jak se změna oznámí:
 ```
 
 ## Zdroje
 
-- OWASP API Security Top 10 2023 — API4:2023 Unrestricted Resource Consumption, limity zdrojů, payloadů, frekvence a nákladů: https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/
-- OWASP Automated Threats to Web Applications — automatizované zneužívání legitimních funkcí webových aplikací: https://owasp.org/projects/automated-threats-to-web-applications
-- NIST SP 800-63B — Rate Limiting / Throttling pro ochranu proti online hádání autentizačních údajů: https://pages.nist.gov/800-63-4/sp800-63b.html#sec3-2-2
-- GDPR, článek 5 — minimalizace dat, omezení účelu, omezení uložení a odpovědnost: https://gdpr.eu/article-5-how-to-process-personal-data/
+- ISO — ISO/IEC 27001:2022, systém řízení bezpečnosti informací založený na řízení rizik, důvěrnosti, integritě a dostupnosti: https://www.iso.org/standard/27001
+- Cloud Security Alliance — CCM and CAIQ FAQ, strukturované dokumentování bezpečnostních kontrol cloudových služeb: https://cloudsecurityalliance.org/artifacts/ccm-and-caiq-faq
+- Cloud Security Alliance STAR — veřejný registry program pro cloudovou bezpečnostní transparentnost: https://cloudsecurityalliance.org/star
+- GDPR, článek 13 — informace poskytované při sběru osobních údajů: https://gdpr.eu/article-13-personal-data-collected/
 
 # Pracovní log
-- 2026-10-01: Doplněna příloha „Rate limiting a abuse ochrana bez fingerprintingového kladiva“ s mapou zneužitelných akcí, vrstvenými limity podle účtu, akce a nákladu, pravidly pro CAPTCHA a fingerprinting, bezpečnými UX hláškami, provozní rutinou, checklistem, abuse kartou a ověřenými zdroji OWASP, NIST a GDPR.
+- 2026-10-01: Doplněna příloha „Trust center pro malý SaaS bez bezpečnostního divadla“ s rozdělením veřejných, zákaznických, řízených a interních informací, minimem pro první verzi, správou důkazů, privacy vysvětlením, subprocesory, zapojením sales/supportu, provozní rutinou, checklistem, Trust center kartou a ověřenými zdroji ISO, CSA a GDPR.
 
 - 2026-10-01: Doplněna příloha „Monitoring a alerting bez datového vysavače“ s provozními signály, bezpečným logováním, pravidly pro tracing, akčními alerty, status komunikací, retenčním modelem, checklistem, monitoring kartou a ověřenými zdroji OpenTelemetry, Google SRE, OWASP a GDPR.
 
