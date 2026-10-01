@@ -25179,7 +25179,185 @@ U citlivějších segmentů přidej zákaznické nastavení: „support může z
 - ENISA Technical implementation guidance on cybersecurity risk management measures — integrita záloh, ochrana proti smazání a pravidelné ověřování záloh: https://www.enisa.europa.eu/publications/technical-implementation-guidance-on-cybersecurity-risk-management-measures
 - ENISA Threat Landscape 2023 — doporučení pro bezpečné, redundantní a pravidelně testované zálohy: https://www.enisa.europa.eu/publications/enisa-threat-landscape-2023
 
+# Příloha: Transakční e-maily bez doručovacího hazardu a šmírování
+
+E-mail je v malém SaaS často nejméně sexy část produktu, dokud se nerozbije. Pak najednou rozhoduje o registraci, resetu hesla, fakturaci, notifikaci incidentu i důvěře zákazníka. Transakční e-mail není newsletter s jiným předmětem. Je to součást produktu a musí mít stejnou disciplínu jako login, billing nebo zálohy.
+
+Privacy-first přístup tady znamená jednoduchou věc: posílej jen to, co uživatel potřebuje, neposílej skrytá sledovací překvapení, ověř doménu, omez obsah citlivých dat a měj plán, co dělat, když doručitelnost spadne. E-mail má pomáhat, ne dělat z inboxu produktový detektivní román.
+
+> Codyho komentář: Nejlepší transakční e-mail je trochu nudný. Dorazí, říká přesně proč dorazil, nevyzrazuje víc než musí a nehraje si na marketingový ohňostroj v HTML tabulce z roku 2007. Dobře, tabulky bohužel pořád přežily. Internet je muzeum s platební bránou.
+
+## Nejdřív odděl typy e-mailů
+
+V produktu si napiš minimálně čtyři kategorie e-mailů:
+
+- **Bezpečnostní** — reset hesla, změna e-mailu, nové zařízení, MFA recovery, podezřelé přihlášení.
+- **Provozní** — pozvánka do workspace, dokončený export, upozornění na výpadek, změna stavu objednávky.
+- **Fakturační** — faktura, selhaná platba, potvrzení refundu, změna tarifu.
+- **Marketingové** — newsletter, produktové novinky, kampaně, win-back.
+
+Každá kategorie má jiný právní a produktový režim. Bezpečnostní reset hesla posíláš proto, aby člověk mohl dokončit akci. Newsletter potřebuje samostatnou distribuční logiku, odhlášení a jasné vysvětlení, proč ho člověk dostává. Když to smícháš v jednom systému bez štítků, nebudeš vědět, co se stalo při incidentu ani proč se někdo nemůže odhlásit.
+
+Praktické pravidlo: transakční e-mail nesmí být převlečený marketing. Pokud reset hesla obsahuje „mimochodem, kupte si vyšší tarif“, šetříš jeden e-mail a pálíš důvěru. Fakturační e-mail může obsahovat odkaz na správu fakturace, ale ne tři bannery na upsell.
+
+## Doménová reputace není detail pro ajťáka v komoře
+
+Doručitelnost nezačíná copywritingem. Začíná doménou, DNS a konzistentním odesíláním. Minimum pro produkční SaaS:
+
+- samostatná odesílací doména nebo subdoména pro produktové e-maily, například `mail.example.com`,
+- SPF záznam povolující skutečného odesílatele,
+- DKIM podepisování odchozích zpráv,
+- DMARC politika pro vyhodnocování SPF/DKIM a ochranu před spoofingem,
+- stabilní `From`, `Reply-To` a jasné názvy odesílatele,
+- monitoring bounces, complaints a technických chyb.
+
+DMARC není kouzelná nálepka „bezpečný e-mail“. Je to pravidlo, podle kterého příjemce vyhodnocuje soulad identity zprávy a výsledek SPF/DKIM. Začni monitorovací politikou, vyhodnoť reálný provoz a až potom zpřísňuj. Skok z nuly na tvrdé odmítání bez inventáře odesílatelů je výborný způsob, jak si rozbít faktury i reset hesla během jednoho odpoledne.
+
+## Obsah e-mailu: méně dat, víc kontextu
+
+Transakční e-mail má vysvětlit akci, ne kopírovat databázi do inboxu. Inbox není bezpečný trezor a už vůbec ne místo pro interní identifikátory, tokeny nebo osobní detaily zákazníků.
+
+Do e-mailu patří:
+
+- co se stalo,
+- kdo akci vyvolal, pokud to je bezpečné sdělit,
+- kdy se to přibližně stalo,
+- co má příjemce udělat,
+- jak pozná legitimní odkaz,
+- kontakt na podporu nebo bezpečnostní kanál.
+
+Do e-mailu obvykle nepatří:
+
+- celé adresy zákazníků, pokud nejsou nutné pro fakturu,
+- citlivý obsah ticketu, dokumentu nebo zprávy,
+- reset token v plaintextu mimo odkaz,
+- dlouhé interní ID, debug payloady a stack trace,
+- sledovací pixel pro každý bezpečnostní e-mail.
+
+Příklad lepšího reset e-mailu:
+
+```text
+Předmět: Reset hesla pro účet v Example SaaS
+
+Dostali jsme žádost o reset hesla pro tento účet. Pokud jste ji zadali vy, pokračujte přes odkaz níže. Odkaz platí 15 minut a lze ho použít jen jednou.
+
+[Obnovit heslo]
+
+Pokud jste žádost nezadali, e-mail ignorujte. Heslo se beze změny účtu nezmění.
+```
+
+Krátké, konkrétní, bez paniky. A hlavně bez věty „někdo se vás možná pokusil hacknout!!!“, která jen rozsvítí chaos panel v hlavě uživatele.
+
+## Odhlášení řeš podle typu zprávy
+
+Marketingový e-mail má mít jasné odhlášení. Jedno kliknutí je dobrý standard, protože snižuje tření a omezuje označování legitimních zpráv jako spam. RFC 8058 popisuje mechanismus `List-Unsubscribe-Post`, který umožňuje one-click unsubscribe u podporujících klientů.
+
+U transakčních e-mailů ale nechceš jednoduchý globální „unsubscribe ze všeho“. Uživatel si nemá omylem vypnout faktury, bezpečnostní upozornění nebo zprávy o exportu dat. Místo toho nabídni preferenční centrum:
+
+- povinné bezpečnostní a fakturační zprávy vysvětli jako nutné pro provoz účtu,
+- volitelné produktové notifikace nech spravovat po kategoriích,
+- marketing drž odděleně a odhlášení respektuj okamžitě,
+- u každého typu napiš příklad, kdy e-mail přijde.
+
+Preferenční centrum je lepší než jeden přepínač „chci e-maily“. Ten je jednoduchý jen pro vývojáře. Pro uživatele je to minové pole.
+
+## Měření e-mailů bez sledovacího přehánění
+
+U transakčních e-mailů většinou nepotřebuješ vědět, jestli někdo otevřel konkrétní zprávu ve 14:03 v Apple Mailu. Potřebuješ vědět, jestli systém e-mail odeslal, doručovací služba ho přijala, přišel bounce, uživatel klikl na bezpečnou akci a akce byla dokončena.
+
+Privacy-first metriky:
+
+- počet odeslaných zpráv podle typu,
+- počet hard/soft bounces podle domény a šablony,
+- počet stížností na spam,
+- dokončení cílové akce, například reset hesla nebo přijetí pozvánky,
+- počet opakovaných resendů,
+- incidenty podle šablony nebo poskytovatele.
+
+Co bych u citlivých transakčních e-mailů vypínal jako výchozí stav: tracking pixel, přepisování všech odkazů přes marketingovou doménu, detailní fingerprinting zařízení a dlouhou retenci eventů na úrovni jednotlivce. Pokud něco z toho opravdu potřebuješ, napiš si účel, retenci, právní základ, dopad na uživatele a evropskou alternativu. Jinak je to datový konfety kanón namířený na vlastní compliance.
+
+## Evropský provoz: e-mailový dodavatel vidí víc, než se zdá
+
+E-mailový poskytovatel může zpracovávat adresy, předměty, obsah zpráv, doručovací eventy, IP adresy a někdy i technická metadata zařízení. To z něj často dělá významného subprocesora, ne jen „SMTP kabel“. U privacy-first SaaS si proto u dodavatele ověř:
+
+- kde se zpracovávají a ukládají eventy,
+- jak dlouho drží message body a logy,
+- jestli umí vypnout open tracking a link tracking po šablonách,
+- jak řeší DPA, subprocesory a bezpečnostní opatření,
+- jestli podporuje oddělené streamy pro transakční a marketingovou poštu,
+- jak exportuje a maže data při odchodu.
+
+Pokud používáš externí službu mimo EU, nepředstírej, že „je to jen e-mail“. Popiš tok dat do datové mapy, zkontroluj smlouvy a zvaž, jestli bezpečnostní a fakturační e-maily neumí běžet přes evropského poskytovatele nebo vlastní SMTP infrastrukturu s rozumným monitoringem. Vlastní server ale není automaticky ctnost. Bez reputace, bounce managementu a abuse procesu je to jen hrdinská cesta do spamu.
+
+## Checklist: transakční e-maily bez hazardu
+
+- [ ] Máme oddělené bezpečnostní, provozní, fakturační a marketingové šablony?
+- [ ] Víme, které e-maily jsou povinné pro provoz účtu a které volitelné?
+- [ ] Je SPF, DKIM a DMARC nastavené a pravidelně kontrolované?
+- [ ] Má každá šablona jasný účel, vlastníka a testovací scénář?
+- [ ] Neposíláme v e-mailech zbytečná osobní data, tokeny, debug výpisy ani obsah dokumentů?
+- [ ] Má marketing jasné odhlášení a transakční notifikace preferenční centrum?
+- [ ] Máme vypnuté nebo zdůvodněné open tracking a link tracking u citlivých zpráv?
+- [ ] Sledujeme bounces, complaints, opakované resend pokusy a dokončení cílových akcí?
+- [ ] Je e-mailový dodavatel v datové mapě včetně retence logů a subprocesorů?
+- [ ] Umíme ručně poslat kritickou zprávu při výpadku primárního poskytovatele?
+
+## Mini šablona e-mailové karty
+
+```text
+# E-mailová karta: [název šablony]
+
+## Typ
+- Bezpečnostní / provozní / fakturační / marketingový:
+- Povinný pro provoz účtu: ano/ne
+- Lze odhlásit: ano/ne/jiným nastavením
+
+## Účel
+- Proč e-mail existuje:
+- Jakou akci má uživatel bezpečně dokončit:
+- Kdy se odesílá:
+
+## Data v obsahu
+- Osobní údaje v těle:
+- Údaje v předmětu:
+- Citlivé údaje, které záměrně neposíláme:
+
+## Doručitelnost
+- Odesílací doména/subdoména:
+- SPF/DKIM/DMARC kontrola:
+- Bounce handling:
+- Fallback při výpadku:
+
+## Měření
+- Měříme:
+- Neměříme:
+- Retence eventů:
+
+## Dodavatel
+- Poskytovatel:
+- Region zpracování:
+- DPA/subprocesory:
+- Vypnutí open/link trackingu:
+
+## Testy
+- Preview test:
+- Plain-text varianta:
+- Test odkazů:
+- Test na minimální data:
+```
+
+## Zdroje
+
+- RFC 7489 — Domain-based Message Authentication, Reporting, and Conformance (DMARC): https://www.rfc-editor.org/rfc/rfc7489
+- RFC 8058 — Signaling One-Click Functionality for List Email Headers: https://www.rfc-editor.org/rfc/rfc8058
+- Google Email sender guidelines — požadavky a doporučení pro odesílatele včetně autentizace domény a odhlášení: https://support.google.com/a/answer/81126
+- Yahoo Sender requirements & recommendations — doporučení pro reputaci, autentizaci a odhlašování: https://senders.yahooinc.com/best-practices/
+- OWASP Forgot Password Cheat Sheet — bezpečný reset hesla, tokeny a odpovědi bez enumerace účtů: https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html
+- GDPR, článek 5 — principy zpracování včetně minimalizace údajů a omezení uložení: https://gdpr-info.eu/art-5-gdpr/
+
 # Pracovní log
+
+- 2026-10-01: Doplněna příloha „Transakční e-maily bez doručovacího hazardu a šmírování“ s rozlišením typů e-mailů, pravidly pro SPF/DKIM/DMARC, minimalizací obsahu, odhlašováním, privacy-first měřením, evropským provozem, checklistem, e-mailovou kartou a ověřenými zdroji RFC, Google, Yahoo, OWASP a GDPR.
 
 - 2026-10-01: Doplněna příloha „Object storage a sdílené soubory bez veřejného průšvihu“ s pravidly pro neveřejné buckety, krátké podepsané odkazy, metadata, retenci, restore scénáře, omezený support přístup, checklist, storage kartu a ověřené zdroje OWASP a ENISA.
 
