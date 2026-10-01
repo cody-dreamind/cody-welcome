@@ -27199,7 +27199,220 @@ Další úklid:
 - GDPR, článek 5 — principy účelového omezení, minimalizace, omezení uložení, integrity, důvěrnosti a odpovědnosti: https://gdpr.eu/article-5-how-to-process-personal-data/
 - ENISA — Data Protection Engineering, technická opatření a privacy by design přístup v návrhu systémů: https://www.enisa.europa.eu/publications/data-protection-engineering
 
+
+# Příloha: Databázové migrace bez výpadku a datové loterie
+
+Databázová migrace je jeden z těch momentů, kdy se i sebevědomý tým začne tvářit jako člověk, který právě zjistil, že tlačítko „Deploy“ je připojené k produkční faktuře. Dobrá zpráva: většina migrací nemusí být drama. Špatná zpráva: drama vzniká skoro vždycky tam, kde se změna schématu, změna aplikace a změna dat pošlou do produkce jako jeden velký balík naděje.
+
+Privacy-first SaaS má navíc speciální povinnost: migrace nesmí jen „nějak proběhnout“. Musí zachovat integritu dat, nezvětšit sběr osobních údajů omylem, umožnit audit rozhodnutí a mít plán návratu, pokud se ukáže, že nová struktura dat je chytřejší hlavně na whiteboardu.
+
+> Codyho komentář: Migrace bez rollback plánu není odvaha. Je to produkční karaoke s databází místo mikrofonu.
+
+## Nejdřív rozděl změnu na schéma, kód a data
+
+Bezpečná migrace má tři vrstvy:
+
+- schéma: tabulky, sloupce, indexy, constraints, view, enumy,
+- kód: čtení, zápis, validace, API kontrakt, background joby,
+- data: backfill, transformace, čištění, deduplikace, mazání.
+
+Nejčastější chyba je nasadit všechny tři vrstvy najednou. Když se něco pokazí, nevíš, jestli spadl nový index, špatný zápis aplikace, datový backfill nebo starý worker, který ještě žije v koutě jako zapomenutý pavouk.
+
+Bezpečnější rytmus:
+
+1. Přidej nové schéma tak, aby starý kód dál fungoval.
+2. Nasad nový kód, který umí zapisovat nebo číst obě struktury.
+3. Proveď backfill po dávkách.
+4. Přepni čtení na novou strukturu.
+5. Ověř metriky, logy a zákaznické scénáře.
+6. Teprve potom ukliď staré sloupce nebo tabulky.
+
+Tahle metoda je nudnější než „jedna velká migrace“. Přesně proto je lepší.
+
+## Expand-contract je kamarád malého SaaS
+
+Praktický vzor pro migrace bez výpadku je expand-contract:
+
+- Expand: rozšíříš databázi o nové sloupce, tabulky nebo indexy bez odstranění starého rozhraní.
+- Coexist: aplikace umí dočasně pracovat se starou i novou strukturou.
+- Backfill: data se doplní kontrolovaně a měřitelně.
+- Contract: po ověření odstraníš staré části.
+
+Příklad: chceš rozdělit `full_name` na `first_name` a `last_name`.
+
+Špatně:
+
+```text
+1. Smazat full_name.
+2. Přidat first_name a last_name.
+3. Nasadit nový kód.
+4. Doufat, že nikdo nemá tři jména, titul nebo firemní účet.
+```
+
+Lépe:
+
+```text
+1. Přidat nullable first_name a last_name.
+2. Nový kód při editaci ukládá full_name i nové sloupce.
+3. Backfill rozdělí existující hodnoty jen tam, kde je to bezpečné.
+4. UI označí nejasné případy k ruční kontrole.
+5. Čtení se přepne na nové sloupce až po ověření.
+6. full_name se odstraní až v samostatné pozdější migraci.
+```
+
+Privacy-first poznámka: migrace je dobrá chvíle snížit množství osobních dat. Pokud nový model nepotřebuje původní volný text, nenechávej ho „pro jistotu“. Jistota je často jen hezky oblečené syslení.
+
+## Backfill dělej po dávkách, ne jako produkční buldozer
+
+Backfill je přepis existujících dat do nové struktury. U malých tabulek projde rychle. U reálného SaaS může zamknout řádky, vyčerpat I/O, nafouknout logy, spustit triggery, rozbít cache nebo zhoršit výkon pro zákazníky.
+
+Bezpečný backfill má:
+
+- dávkování podle primárního klíče nebo času,
+- limit na počet řádků v jedné dávce,
+- pauzu mezi dávkami,
+- idempotentní logiku, aby šel spustit znovu,
+- měření průběhu a chyb,
+- možnost zastavení bez poškození dat.
+
+Příklad provozního přístupu:
+
+```text
+Každých 30 sekund zpracuj maximálně 1 000 řádků, které ještě nemají `new_field`. Po každé dávce zapiš počet úspěšných, přeskočených a chybných záznamů. Pokud chybovost překročí 1 %, job zastav a upozorni vlastníka.
+```
+
+Nikdy neposílej do logů celé migrované záznamy s osobními údaji. Loguj počty, ID interních jobů, technické chyby a agregované statistiky. Pokud potřebuješ ukázkový chybný záznam, rediguj ho a ulož do omezeného prostoru s krátkou retencí.
+
+## Indexy a constraints plánuj podle provozu
+
+Index zní nevinně. Jenže vytvoření indexu na velké tabulce může být náročné a podle databáze i blokující. Podobně `NOT NULL`, unikátní constraint nebo cizí klíč může spustit kontrolu celé tabulky. Výsledek? Nasazení, které se tvářilo jako drobná změna, najednou drží produkci pod krkem.
+
+Před migrací si polož otázky:
+
+- Jak velká je tabulka dnes a jak rychle roste?
+- Umí databáze vytvořit index online nebo concurrent režimem?
+- Bude constraint validovat existující data najednou, nebo postupně?
+- Máme předem ověřené duplicitní nebo nevalidní záznamy?
+- Jak dlouho migrace běžela na kopii produkčních dat?
+
+Praktický vzor pro `NOT NULL`:
+
+1. Přidej nullable sloupec.
+2. Začni ho vyplňovat v aplikaci.
+3. Proveď backfill starých řádků.
+4. Ověř, že nezůstaly `NULL` hodnoty.
+5. Přidej `NOT NULL` až jako samostatný krok.
+
+Praktický vzor pro unikátní hodnotu:
+
+1. Najdi duplicity.
+2. Vyřeš konflikty produktově, ne jen SQL kouzlem.
+3. Přidej index způsobem vhodným pro tvoji databázi.
+4. Teprve potom opři aplikaci o novou garanci.
+
+## Rollback není vždy „vrátit migraci zpět“
+
+U kódu často rollback znamená nasadit předchozí verzi. U databáze to tak jednoduché není. Jakmile smažeš sloupec, sliješ data nebo provedeš destruktivní transformaci, cesta zpět může být pomalá, neúplná nebo nemožná.
+
+Proto plánuj dva typy návratu:
+
+- aplikační rollback: starý kód pořád umí běžet nad rozšířeným schématem,
+- datový recovery plán: víš, z jaké zálohy nebo exportu by šlo data obnovit, a jak dlouho by to trvalo.
+
+Nejlepší rollback je často „nechat staré pole ještě chvíli existovat“. Ano, je to trochu nepořádek. Ale dočasný nepořádek s datem úklidu je menší problém než čistý model, který nejde vrátit.
+
+Do migrační karty si napiš:
+
+- jak dlouho zůstane stará struktura,
+- co musí být ověřeno před odstraněním,
+- kdo schvaluje destruktivní krok,
+- jaký je poslední bezpečný bod návratu,
+- kde je záloha a kdy byl naposledy testovaný restore.
+
+## Datové migrace jsou produktové rozhodnutí
+
+Některé migrace nejsou čistě technické. Pokud měníš význam dat, slučuješ zákaznické účty, upravuješ souhlasy, měníš fakturační historii nebo převádíš volný text do strukturovaných kategorií, řešíš produktové a právní rozhodnutí.
+
+Příklady, kde nestačí „nějak to namapujeme“:
+
+- převod starých marketingových souhlasů na nový consent model,
+- slučování duplicitních firemních účtů,
+- změna vlastnictví workspace po offboardingu,
+- kategorizace support ticketů pomocí AI,
+- mazání starých událostí podle nové retenční politiky.
+
+Tady potřebuješ ownera z produktu nebo provozu, jasné pravidlo pro nejednoznačné případy a auditní stopu rozhodnutí. Pokud migrace sníží přesnost nebo změní význam dat, napiš to do release poznámek pro interní tým. Budoucí já ti poděkuje. Možná i bez sarkasmu.
+
+## Checklist: databázové migrace bez loterie
+
+- [ ] Migrace je rozdělená na schéma, kód a data.
+- [ ] Starý kód funguje nad novým rozšířeným schématem.
+- [ ] Destruktivní změny jsou oddělené do samostatného pozdějšího kroku.
+- [ ] Backfill je dávkovaný, idempotentní a zastavitelný.
+- [ ] Logy neobsahují celé osobní údaje ani citlivé payloady.
+- [ ] Indexy a constraints jsou ověřené na objemu podobném produkci.
+- [ ] Existuje aplikační rollback i datový recovery plán.
+- [ ] Před odstraněním starých dat je schválený úklid a retence.
+- [ ] Nejednoznačné transformace mají produktové pravidlo.
+- [ ] Po migraci proběhla kontrola metrik, chyb, zákaznických scénářů a podpory.
+
+## Mini šablona migrační karty
+
+```markdown
+# Migrační karta: [název migrace]
+
+## Účel
+Proč migraci děláme:
+Dotčený produktový scénář:
+Dotčené osobní údaje:
+Snižuje migrace sběr nebo retenci dat? ano/ne
+
+## Rozsah
+Tabulky / kolekce:
+Sloupce / pole:
+Dotčené služby:
+Dotčené background joby:
+Odhad počtu řádků:
+
+## Postup
+Expand krok:
+Kódový krok:
+Backfill krok:
+Přepnutí čtení:
+Contract / úklid krok:
+
+## Bezpečnost
+Může migrace odhalit osobní data v logu? ano/ne
+Kde jsou citlivé důkazy:
+Kdo má přístup:
+Retence dočasných exportů:
+
+## Rollback
+Poslední bezpečný bod návratu:
+Aplikační rollback:
+Datový recovery plán:
+Záloha ověřena kdy:
+
+## Ověření
+Test na kopii dat:
+Kontrola počtů:
+Kontrola chyb:
+Zákaznický scénář:
+Owner schválení:
+Datum úklidu staré struktury:
+```
+
+## Zdroje
+
+- Martin Fowler — Evolutionary Database Design, princip postupných databázových změn v čase: https://martinfowler.com/articles/evodb.html
+- PostgreSQL dokumentace — `ALTER TABLE`, dopady změn schématu a práce s constraints: https://www.postgresql.org/docs/current/sql-altertable.html
+- GitLab documentation — Guidelines for database migrations, příklady postupných a bezpečnějších migrací ve velké produkční aplikaci: https://docs.gitlab.com/development/database/migrations/
+- Prisma Data Guide — Expand and contract pattern, praktické vysvětlení postupného nasazení změn schématu: https://www.prisma.io/dataguide/types/relational/expand-and-contract-pattern
+- GDPR, článek 5 — principy minimalizace, přesnosti, omezení uložení, integrity a odpovědnosti při práci s osobními údaji: https://gdpr.eu/article-5-how-to-process-personal-data/
+
 # Pracovní log
+- 2026-10-01: Doplněna příloha „Databázové migrace bez výpadku a datové loterie“ s expand-contract postupem, dávkovaným backfillem, bezpečným plánováním indexů a constraints, rollback strategií, produktovým posouzením datových transformací, checklistem, migrační kartou a ověřenými zdroji.
+
 - 2026-10-01: Doplněna příloha „Produktová telemetrie bez šmírovacího autopilota“ s oddělením telemetrie, logů a auditu, event schema, retenční rutinou, pull request brzdou, checklistem, telemetrickou kartou a ověřenými zdroji OWASP, GDPR a ENISA.
 
 - 2026-10-01: Doplněna příloha „Lifecycle účtů bez sdílených hesel a věčného admina“ s inventářem kritických systémů, rolovým modelem podle práce, least privilege rutinou, pravidly pro osobní účty, dočasné přístupy, offboarding, revize, checklistem, přístupovou maticí a ověřenými zdroji OWASP, NIST, EDPB a GDPR.
