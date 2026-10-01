@@ -25519,7 +25519,192 @@ Každá akce má mít vlastní validační pravidla, text dopadu a návratovou z
 - OWASP ASVS V7 Session Management — dokumentování relací, timeoutů a koordinace session pravidel: https://github.com/OWASP/ASVS/blob/master/5.0/en/0x16-V7-Session-Management.md
 - EDPB: Data protection by design & by default — shrnutí praktického postupu pro článek 25 GDPR: https://www.edpb.europa.eu/system/files/2026-02/edpb-summary-gdpr-data-protection-design-default_en.pdf
 
+
+
+# Příloha: No-code automatizace bez datového chaosu
+
+No-code automatizace je skvělý sluha a velmi sebevědomý stážista. Umí rychle propojit formulář, e-mail, CRM, fakturaci, tabulku, helpdesk a interní notifikace. Jenže právě tahle rychlost svádí k tomu, že firma začne posílat data mezi službami bez mapy, vlastníka, retence a kontroly přístupů. Výsledek? Prodejní pipeline běží, ale nikdo netuší, kam se zapsal telefon, kdo má export zákazníků a proč má starý testovací workflow pořád přístup k produkci.
+
+Privacy-first no-code není zákaz automatizací. Je to způsob, jak si ponechat rychlost, ale neproměnit provoz v datový koberec, pod který se zametá všechno nepříjemné.
+
+> Codyho komentář: Automatizace má šetřit práci, ne vyrábět budoucí archeologickou expedici. Pokud workflow přežilo tři kampaně, dva lidi v týmu a jednu změnu CRM, zaslouží si kontrolu. Možná i důchod.
+
+## Nejdřív pojmenuj workflow jako proces
+
+Nezačínej názvem nástroje. Začni lidskou větou:
+
+```text
+Když se stane [spouštěč], chceme [akce], aby [výsledek], bez posílání [zbytečná nebo citlivá data].
+```
+
+Příklad:
+
+```text
+Když někdo odešle poptávkový formulář, chceme vytvořit lead v CRM a poslat stručnou notifikaci obchodníkovi, aby odpověděl do jednoho pracovního dne, bez ukládání celé zprávy do chatovací aplikace.
+```
+
+Tahle věta odhalí tři věci: účel, minimální data a hranici sdílení. Pokud ji neumíš napsat, workflow ještě není připravené na automatizaci. Je to jen nadšení s API tokenem.
+
+U každého workflow si napiš:
+
+- vlastníka procesu,
+- obchodní nebo provozní důvod,
+- zdroj dat,
+- cílové systémy,
+- seznam přenášených polí,
+- kritičnost výpadku,
+- datum poslední kontroly.
+
+Bez vlastníka automatizace stárne potichu. A potichu stárnoucí automatizace je přesně ten typ věci, která jednou v pátek odpoledne pošle špatný e-mail správným lidem. Nebo správný e-mail špatným lidem. Obě varianty jsou výživné.
+
+## Minimalizuj pole před prvním spuštěním
+
+No-code nástroje často nabízí pohodlné tlačítko typu „poslat všechna dostupná data“. Nepoužívej ho jako výchozí režim. U každého pole se zeptej:
+
+- potřebuje ho cílový systém k další akci,
+- potřebuje ho člověk v notifikaci,
+- jde nahradit interním ID nebo odkazem,
+- musí být v daném nástroji trvale uložené,
+- obsahuje osobní nebo citlivější obchodní údaje.
+
+Notifikace do interního chatu například nemusí obsahovat celé znění poptávky, telefon, IP adresu ani marketingové parametry. Často stačí: typ poptávky, priorita, firma, odkaz do CRM a bezpečné shrnutí. Detail ať zůstane v systému, který má přístupová práva, retenci a audit.
+
+Praktické pravidlo: čím víc lidí vidí cílový kanál, tím méně dat do něj patří. Veřejnější interní prostor není levnější CRM. Je to hlasitější riziko.
+
+## Odděl produkci, test a jednorázovou kampaň
+
+Automatizace se rády množí: „jen to zkusíme“, „jen pro kampaň“, „jen než doděláme integraci“. To není problém, pokud mají jasný konec.
+
+Rozděl workflow do tří tříd:
+
+- **Produkční workflow**: běží dlouhodobě, má vlastníka, monitoring a revizi.
+- **Testovací workflow**: používá syntetická nebo anonymizovaná data a nesmí zapisovat do produkčních systémů.
+- **Kampaňové workflow**: má datum vypnutí, omezený rozsah a po kampani se archivuje nebo smaže.
+
+Testovací automatizace s produkčními daty je oblíbená zkratka do průšvihu. Pokud potřebuješ ladit, vytvoř syntetický záznam, testovací workspace nebo malý bezpečný dataset bez reálných kontaktů. U formulářů si dej pozor hlavně na pole s volným textem: lidé do nich píšou všechno možné, včetně informací, které jsi nikdy nechtěl zpracovávat.
+
+## Přístupy a tokeny nejsou společný majetek týmu
+
+No-code nástroj často běží pod účtem člověka, který workflow vytvořil. Když člověk odejde, změní heslo nebo ztratí oprávnění, automatizace se rozsype. Horší varianta: účet zůstane aktivní jen proto, aby se automatizace nerozbila.
+
+Lepší postup:
+
+- používej servisní účet tam, kde to dává smysl,
+- odděl osobní účty od dlouhodobých integrací,
+- dej integraci jen minimální oprávnění,
+- tokeny ukládej ve správci tajemství nebo v bezpečné konfiguraci nástroje,
+- nastav pravidelnou revizi a rotaci,
+- při offboardingu kontroluj, která workflow člověk vlastnil.
+
+Pokud nástroj neumí rozumně omezit práva, je to obchodní riziko, ne jen technická nepříjemnost. U malého týmu se dá začít jednoduše: jednou měsíčně projít seznam aktivních workflow, vlastníků a připojených účtů.
+
+## Chyby řeš frontou, ne chaosem
+
+Automatizace selhávají. API vrátí chybu, služba má výpadek, pole změní název, duplicitní kontakt narazí na validaci. Dobrý proces má bezpečný chybový stav.
+
+Minimum:
+
+- chyba se zapíše do přehledu selhání,
+- vlastník dostane stručnou notifikaci,
+- workflow neztratí původní událost,
+- opakování má limit,
+- ruční oprava má návod,
+- duplicitní spuštění nezpůsobí dvojí akci.
+
+U kritických procesů používej frontu nebo mezikrok: nejdřív uložit událost, potom ji zpracovat. U jednoduchých no-code workflow stačí aspoň tabulka nebo interní přehled „čeká na opravu“. Hlavně nenechávej chyby mizet jen v e-mailu tvůrce workflow.
+
+## Notifikace bez úniku obsahu
+
+Interní notifikace bývají největší datová zrada, protože vypadají nevinně. „Nový lead!“ „Nový ticket!“ „Nová objednávka!“ A najednou je v chatu e-mail, telefon, text zprávy, hodnota objednávky, interní poznámka a někdy i odkaz bez přihlášení.
+
+Privacy-first notifikace obsahuje:
+
+- typ události,
+- prioritu,
+- bezpečný identifikátor,
+- odkaz do správného systému,
+- krátké shrnutí bez citlivých detailů,
+- jasné přiřazení odpovědnosti.
+
+Citlivý obsah nech v systému, který řeší přístupy. Notifikace má člověka navést, ne kopírovat databázi do dalšího místa. Pokud někdo potřebuje detail, ať klikne do CRM, helpdesku nebo administrace, kde se dá přístup řídit a auditovat.
+
+## Měsíční úklid automatizací
+
+Jednou měsíčně si dej 30 minut na audit. Není to sexy, ale ani vysvětlování starého workflow auditorovi není wellness pobyt.
+
+Projdi:
+
+- která workflow běží,
+- kdo je vlastní,
+- kdy naposledy doběhla,
+- která data přenáší,
+- které účty a tokeny používá,
+- zda má pořád platný účel,
+- zda má chybový stav nebo mrtvé běhy,
+- zda se má vypnout, upravit nebo zdokumentovat.
+
+U každého workflow použij jednoduché rozhodnutí: nechat, opravit, omezit, vypnout. Nejlepší automatizace je někdy ta, kterou smažeš, protože už nikomu neslouží.
+
+## Checklist: no-code automatizace bez chaosu
+
+- [ ] Každé workflow má vlastníka, účel a datum poslední revize.
+- [ ] U každého kroku je jasné, odkud data přichází a kam odchází.
+- [ ] Přenáší se jen pole nutná pro konkrétní akci.
+- [ ] Notifikace do chatu neobsahují celé zprávy, tokeny ani zbytečné kontaktní údaje.
+- [ ] Testovací workflow nepoužívá reálná produkční data.
+- [ ] Kampaňové workflow má datum vypnutí.
+- [ ] Dlouhodobé integrace neběží pod osobním účtem bez náhradníka.
+- [ ] Tokeny a přístupy mají omezená práva a plán rotace.
+- [ ] Chyby mají přehled, vlastníka a bezpečný retry postup.
+- [ ] Ruční opravy jsou zdokumentované a nezpůsobují duplicity.
+- [ ] Měsíční audit rozhoduje: nechat, opravit, omezit, vypnout.
+
+## Mini šablona automatizační karty
+
+```markdown
+# Automatizační karta: [název workflow]
+
+## Účel
+- Spouštěč:
+- Výsledek:
+- Vlastník:
+- Kritičnost:
+
+## Data
+- Zdrojový systém:
+- Cílové systémy:
+- Přenášená pole:
+- Zakázaná pole:
+- Osobní údaje: ano/ne + proč
+
+## Přístupy
+- Použitý účet / integrace:
+- Oprávnění:
+- Token uložen kde:
+- Rotace / revize:
+
+## Provoz
+- Chybový stav:
+- Retry pravidla:
+- Ruční oprava:
+- Datum vypnutí, pokud jde o kampaň:
+
+## Revize
+- Poslední kontrola:
+- Rozhodnutí: nechat / opravit / omezit / vypnout
+- Poznámky:
+```
+
+## Zdroje
+
+- GDPR, článek 5 — principy minimalizace údajů, omezení účelu a omezení uložení v textu na EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- OWASP Secrets Management Cheat Sheet — doporučení pro správu, rotaci a ochranu tajemství: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- OWASP Logging Cheat Sheet — doporučení, jak nelogovat citlivé údaje, tajemství a nadbytečná data: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- NIST SP 800-53 Rev. 5, AC-6 Least Privilege — princip minimálních oprávnění pro účty a procesy: https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final
+
 # Pracovní log
+
+- 2026-10-01: Doplněna příloha „No-code automatizace bez datového chaosu“ s mapováním workflow, minimalizací polí, oddělením produkce/testů/kampaní, správou tokenů, bezpečnými notifikacemi, měsíčním auditem, checklistem a vyplnitelnou automatizační kartou.
 
 - 2026-10-01: Doplněna příloha „Admin panel bez interního šmírování a chaosu“ s návrhem rolí, postupným odhalováním citlivých dat, bezpečnou impersonací, audit logy, omezeným vyhledáváním, checklistem a vyplnitelnou admin kartou.
 
