@@ -25702,7 +25702,169 @@ U každého workflow použij jednoduché rozhodnutí: nechat, opravit, omezit, v
 - OWASP Logging Cheat Sheet — doporučení, jak nelogovat citlivé údaje, tajemství a nadbytečná data: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - NIST SP 800-53 Rev. 5, AC-6 Least Privilege — princip minimálních oprávnění pro účty a procesy: https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final
 
+# Příloha: Feature flags a postupné nasazení bez chaosu a profilování
+
+Feature flag je vypínač chování v produktu. Umí oddělit nasazení kódu od veřejného spuštění funkce, pustit změnu jen internímu týmu, omezit rizikový rollout na malé procento provozu nebo rychle vypnout problém bez nouzového deploye. To zní jako kouzlo — a jako každé kouzlo se z toho při špatném zacházení stane technický dluh s kloboukem.
+
+Privacy-first pointa je jednoduchá: flag nemá být záminka pro další profilování lidí. Většina malých SaaS nepotřebuje rozhodovat podle detailního behaviorálního profilu. Stačí role, tarif, workspace, interní testovací skupina, explicitní beta opt-in nebo stabilní technický bucket bez ukládání osobního příběhu uživatele.
+
+> Codyho komentář: Feature flags jsou bezpečnostní pás, ne závodní motor. Když je používáš k tomu, abys rychleji boural v produkci, pás za to fakt nemůže.
+
+## Nejdřív pojmenuj typ flagu
+
+Ne každý flag má stejnou životnost ani stejné riziko. Pokud všechny skončí v jedné tabulce `flags` a nikdo neví proč existují, za půl roku bude produkt připomínat ovládací panel ponorky, kterou navrhovali tři různí stážisti.
+
+Praktické rozdělení:
+
+- Release flag: dočasně skrývá novou funkci před veřejným spuštěním.
+- Ops flag: umožní rychle vypnout drahou nebo rizikovou část systému.
+- Permission flag: zapíná schopnost podle tarifu, role nebo smlouvy.
+- Experiment flag: porovnává varianty, ideálně bez sběru osobních detailů.
+- Migration flag: přepíná staré a nové technické chování během migrace.
+
+U každého flagu napiš typ, vlastníka, očekávané datum odstranění a fallback. Bez toho je flag jen TODO s produkčním přístupem.
+
+## Rollout plán je součást funkce
+
+Funkce není hotová, dokud nevíš, jak ji zapneš, změříš, vypneš a uklidíš. Rollout plán nemusí být velký dokument; pro malý tým stačí krátká karta u pull requestu nebo ticketu.
+
+Minimální rollout sekvence:
+
+1. Lokální/testovací prostředí: ověř základní chování bez produkčních dat.
+2. Interní workspace: zapni funkci lidem, kteří vědí, že testují.
+3. Beta skupina: použij explicitní opt-in nebo konkrétní domluvené zákazníky.
+4. Malé procento provozu: sleduj technické metriky, ne soukromý obsah.
+5. Plné spuštění: flag buď změň na trvalé oprávnění, nebo ho smaž.
+
+Každý krok má mít stop podmínku. Příklad: chybovost endpointu nad dohodnutý práh, nárůst podpůrných ticketů, pomalá odezva, nejasné uživatelské hlášky nebo dopad na fakturaci.
+
+## Segmentuj podle potřeby, ne podle zvědavosti
+
+Feature flag často potřebuje vědět, komu se má funkce zobrazit. To ale neznamená, že máš do flagovací služby posílat e-mail, jméno, IP adresu, historii kliknutí a poslední tři existenční krize uživatele.
+
+Privacy-first segmenty:
+
+- `internal`: interní tým a testovací účty.
+- `beta_opt_in`: zákazník se výslovně přihlásil k betě.
+- `plan_pro`: tarif nebo smluvní oprávnění.
+- `workspace_region_eu`: technický region provozu, pokud je relevantní.
+- `stable_bucket_10`: deterministické procento podle pseudonymního identifikátoru workspace.
+
+Čemu se vyhnout:
+
+- segmentům podle citlivých nebo nepotřebných osobních údajů,
+- posílání celého uživatelského profilu do externího nástroje,
+- kombinování produktových flagů s marketingovým scoringem,
+- flagům, které se nikdy nemažou, protože „možná se budou hodit“.
+
+Pokud používáš externí flagovací nástroj, ptej se stejně jako u analytiky: kde běží, jaké identifikátory dostává, kdo má přístup, jaká je retence a jestli umíš odejít bez přepisu půlky produktu.
+
+## Loguj rozhodnutí, ne celý profil
+
+Při incidentu chceš vědět, proč systém ukázal variantu A místo varianty B. Nepotřebuješ kvůli tomu ukládat kompletní payload uživatele.
+
+Rozumný auditní záznam může obsahovat:
+
+- čas rozhodnutí,
+- název flagu a variantu,
+- anonymní nebo pseudonymní workspace ID,
+- důvod přiřazení, například `explicit_beta`, `plan_rule`, `stable_bucket`,
+- verzi pravidel,
+- request ID pro technickou korelaci.
+
+Co do logu nepatří: e-mail, jméno, obsah formulářů, texty dokumentů, celé session objekty, access tokeny, fakturační údaje a debug výpisy „pro jistotu“. Jistota je fajn, ale ne když vypadá jako sběrný dvůr osobních údajů.
+
+## Kill switch musí být rychlejší než incident call
+
+Nejdůležitější flag není ten nejchytřejší. Je to ten, který umí vypnout špatnou věc dřív, než tým začne na callu řešit, kdo má vlastně přístup do administrace.
+
+Kill switch navrhni pro funkce, které:
+
+- volají drahé nebo nestabilní externí API,
+- mění data zákazníka,
+- ovlivňují billing, exporty, importy nebo oprávnění,
+- zavádějí novou automatizaci,
+- mají dopad na doručování e-mailů nebo notifikací.
+
+U kill switche ověř tři věci: kdo ho smí použít, jak rychle se projeví a co se stane s rozpracovanými úlohami. Pokud vypnutí vytvoří další frontu chyb, není to kill switch, ale dramatická pauza.
+
+## Uklízej flagy jako součást definice hotovo
+
+Starý flag je tichý bug. Někdo přepíše část kódu, zapomene na starou větev, testy běží jen pro jednu variantu a za pár měsíců se tým bojí cokoli smazat. Takhle vzniká produktový archeologický park.
+
+Pravidlo pro úklid:
+
+- Release flag smaž po stabilním veřejném spuštění.
+- Experiment flag smaž po rozhodnutí a zaznamenání výsledku.
+- Migration flag smaž po dokončení migrace a ověření rollback plánu.
+- Ops flag nech jen tehdy, když má jasný provozní účel a vlastníka.
+- Permission flag dokumentuj jako součást obchodního modelu, ne jako náhodný hack.
+
+Jednou měsíčně si vytáhni seznam flagů a u každého napiš: ponechat, změnit na oprávnění, vypnout, odstranit. Ano, je to nudné. Přesně proto to šetří peníze.
+
+## Checklist: feature flags bez chaosu
+
+- Každý flag má typ, vlastníka, datum revize a fallback.
+- Rollout plán má kroky, stop podmínky a jasný návrat zpět.
+- Segmentace používá minimum dat a preferuje workspace nebo opt-in před osobním profilem.
+- Externí nástroj nedostává zbytečné osobní údaje ani celý produktový kontext.
+- Logy ukládají rozhodnutí flagu, ne obsah uživatelské aktivity.
+- Kill switch je otestovaný a dostupný lidem, kteří drží službu v provozu.
+- Po spuštění existuje konkrétní úkol na odstranění nebo převedení flagu.
+- Měsíční úklid odstraňuje mrtvé varianty, staré experimenty a zapomenuté migrace.
+
+## Mini šablona feature flag karty
+
+```markdown
+# Feature flag karta: [název flagu]
+
+## Účel
+- Typ flagu: release / ops / permission / experiment / migration
+- Co zapíná:
+- Proč existuje:
+- Vlastník:
+
+## Rollout
+- Krok 1:
+- Krok 2:
+- Krok 3:
+- Stop podmínka:
+- Rollback / fallback:
+
+## Segmentace
+- Pravidlo zapnutí:
+- Použitá data:
+- Co záměrně neposíláme do flag systému:
+- Beta opt-in / zákaznická domluva:
+
+## Provoz
+- Kill switch: ano / ne
+- Kdo může vypnout:
+- Jak rychle se změna projeví:
+- Co se stane s rozpracovanými úlohami:
+
+## Logy a měření
+- Co logujeme:
+- Co nikdy nelogujeme:
+- Metrika úspěchu:
+- Metrika rizika:
+
+## Úklid
+- Datum revize:
+- Podmínka odstranění:
+- Rozhodnutí: ponechat / převést / vypnout / smazat
+```
+
+## Zdroje
+
+- Martin Fowler — Feature Toggles a rozdělení toggle typů podle účelu a životnosti: https://martinfowler.com/articles/feature-toggles.html
+- GDPR, článek 25 — ochrana údajů již od návrhu a ve výchozím nastavení v textu na EUR-Lex: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- OWASP Logging Cheat Sheet — doporučení pro bezpečné logování bez citlivých a nadbytečných údajů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Secrets Management Cheat Sheet — praktické zásady pro tajemství, tokeny a přístupy používané i u flagovacích nástrojů: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+
 # Pracovní log
+
+- 2026-10-01: Doplněna příloha „Feature flags a postupné nasazení bez chaosu a profilování“ s typy flagů, rollout plánem, privacy-first segmentací, auditním logováním, kill switchem, pravidly úklidu, checklistem a vyplnitelnou feature flag kartou.
 
 - 2026-10-01: Doplněna příloha „No-code automatizace bez datového chaosu“ s mapováním workflow, minimalizací polí, oddělením produkce/testů/kampaní, správou tokenů, bezpečnými notifikacemi, měsíčním auditem, checklistem a vyplnitelnou automatizační kartou.
 
