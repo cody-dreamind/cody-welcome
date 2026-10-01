@@ -25015,7 +25015,173 @@ U každé trial metriky napiš vlastníka, účel a navazující rozhodnutí. Kd
 - OWASP Secure Product Design Cheat Sheet — praktický rámec pro bezpečný návrh produktu: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Product_Design_Cheat_Sheet.html
 - OWASP Business Logic Security Cheat Sheet — příklady business logic rizik včetně free trial resetů: https://cheatsheetseries.owasp.org/cheatsheets/Business_Logic_Security_Cheat_Sheet.html
 
+# Příloha: Object storage a sdílené soubory bez veřejného průšvihu
+
+Upload je jen začátek. Druhá, tišší část problému přichází ve chvíli, kdy soubor leží v object storage, má URL, někdo ho může stáhnout, někdo ho může sdílet a někdo ho má po čase smazat. U malého SaaS to často začne nevinně: „Dáme přílohy do bucketu a pošleme link.“ Za měsíc už máš veřejné náhledy faktur, nejasnou retenci, support účet s přístupem ke všemu a podepsané URL, které žijí déle než některé startupové strategie. Krása, ale radši ne.
+
+Privacy-first object storage stojí na jednoduchém pravidle: soubor není statická věc, ale datový objekt s účelem, vlastníkem, přístupem, retencí a auditní stopou. Pokud tyhle věci neřešíš při návrhu, budeš je řešit při incidentu. A incident je workshop, který nikdo nechtěl zaplatit.
+
+> Codyho komentář: Veřejný bucket je jako odemčená garáž s cedulí „asi tu nic citlivého není“. Možná pravda. Možná taky nejrychlejší cesta k trapnému pondělí.
+
+## Bucket není složka na ploše
+
+S object storage zacházej jako s produkční databází, ne jako se sdíleným diskem. I když se API tváří jednoduše, dopad chyby je velký: špatné ACL, příliš široký token, zapomenutý debug export, veřejný náhled nebo starý backup mohou zpřístupnit zákaznická data mimo aplikaci.
+
+Rozumné rozdělení bucketů:
+
+- `user-uploads-private` pro původní soubory zákazníků,
+- `processed-private` pro výsledky zpracování dostupné jen přes aplikaci,
+- `public-assets` pro opravdu veřejné obrázky a marketingové soubory,
+- `temporary-imports` pro krátkodobé importy a diagnostiku,
+- `backups-restricted` pro zálohy s odděleným přístupem a delší retencí.
+
+Nemíchej veřejné assety s privátními uploady jen proto, že je to pohodlné. Pohodlí v infrastruktuře má zvláštní talent stát se bezpečnostním dluhem.
+
+## Výchozí stav: soukromé, krátké, vysvětlitelné
+
+Každý nový bucket začínej jako neveřejný. Veřejný přístup má být výjimka pro konkrétní účel, ne výchozí nastavení. Pokud soubor potřebuje uživatel stáhnout, aplikace má ověřit oprávnění a teprve potom vydat krátkodobý odkaz nebo streamovat obsah přes kontrolovanou vrstvu.
+
+Praktická pravidla:
+
+- žádný veřejný listing objektů,
+- žádné trvalé veřejné URL pro zákaznické soubory,
+- podepsané odkazy s krátkou expirací,
+- oddělené klíče pro čtení, zápis a mazání,
+- oprávnění podle workspace, ne jen podle přihlášeného uživatele,
+- logování stažení bez ukládání názvů citlivých souborů do marketingové analytiky.
+
+Podepsaný odkaz není bezpečný jen proto, že vypadá náhodně. Je bezpečný tehdy, když má krátkou životnost, vzniká po kontrole oprávnění, nejde snadno předvídat, neobsahuje citlivý název a po změně práv se nedá dál používat příliš dlouho. Pro běžné stažení dokumentu často stačí minuty, ne dny.
+
+## Metadata ukládej odděleně od objektu
+
+Soubor v bucketu by neměl být jediným zdrojem pravdy. Aplikace potřebuje vlastní záznam: kdo soubor nahrál, do kterého workspace patří, jaký má účel, jaký typ byl ověřen, kdy expiruje, jestli prošel kontrolou, kdo ho smí číst a co se má stát při smazání účtu.
+
+Minimální metadata:
+
+- interní `file_id`, nikoli původní název jako klíč objektu,
+- `workspace_id` nebo jiný tenant boundary,
+- účel souboru a produktový flow,
+- ověřený typ a velikost,
+- stav zpracování: karanténa, zpracováno, odmítnuto, smazáno,
+- retenční datum,
+- vlastník a role, které smějí soubor číst,
+- vazba na auditní log.
+
+Objektový klíč nech nudný a technický. Třeba `workspace/2026/10/file_abc123.bin`, ne `Novakova_firma_smlouva_tajny_projekt.pdf`. Původní název můžeš zobrazit v UI, ale po sanitizaci a jen tam, kde opravdu pomáhá uživateli.
+
+## Mazání musí být produktová funkce, ne ruční rituál
+
+U souborů nestačí říct „někdy to promažeme“. Retence má být součástí produktu. Importní CSV, support screenshot a aktivní dokument v účtu mají odlišný účel i životnost. Mazací rutina proto musí rozumět typu souboru.
+
+Příklad retenční matice:
+
+| Typ souboru | Účel | Výchozí retence | Poznámka |
+|---|---|---:|---|
+| Importní CSV | Jednorázové zpracování | hodiny až dny | Po importu drž jen výsledek a audit chyby. |
+| Support screenshot | Diagnostika ticketu | krátké okno po vyřešení | Neexportovat do marketingu ani školících sad bez kontroly. |
+| Produktový dokument | Aktivní práce zákazníka | podle účtu / smlouvy | Mazat podle nastavení účtu a DSR workflow. |
+| Veřejný asset | Publikace | podle obsahu | Nemíchat s privátními uploady. |
+| Backup objektů | Obnova provozu | podle DR plánu | Šifrovat, testovat obnovu, oddělit přístupy. |
+
+Mazání má mít auditní stopu, ale auditní stopa nemá znovu obsahovat citlivý obsah. Loguj `file_id`, typ akce, čas, roli a důvod. Ne loguj celý název smlouvy, náhled dokumentu ani zákaznický komentář.
+
+## Zálohy nejsou odkladiště pro věčnost
+
+Zálohy objektů jsou nutné, ale privacy-first provoz se ptá: co přesně zálohujeme, jak dlouho, kdo obnovu umí spustit a jak poznáme, že obnova funguje? ENISA ve svých doporučeních k ransomware opakovaně zdůrazňuje bezpečné, redundantní a testované zálohy; technická guidance navíc zmiňuje ochranu integrity záloh proti úpravě nebo smazání. Přeloženo do malého SaaS: backup bez restore testu je jen drahé přání.
+
+Pro object storage si napiš tři scénáře obnovy:
+
+1. jeden soubor omylem smazal uživatel,
+2. chybné nasazení smazalo nebo přepsalo skupinu objektů,
+3. incident vyžaduje obnovu celého workspace nebo bucketu.
+
+U každého scénáře musí být jasné, kdo obnovu schvaluje, jak se ověří identita žadatele, co se vrátí, co se nevrátí a jak zabráníš obnovení dat, která už měla být smazaná z právního nebo smluvního důvodu. Tady se potkává disaster recovery s privacy. Ano, dva světy, které spolu musí mluvit, i když jeden nosí přilbu a druhý právní slovník.
+
+## Support přístup jen přes kontrolovaný průzor
+
+Support často potřebuje vidět, že soubor existuje, jaký má stav a proč se nezpracoval. To ale neznamená, že má mít univerzální možnost stáhnout všechny přílohy. Vytvoř raději několik úrovní přístupu.
+
+Model pro malý tým:
+
+- běžný support vidí metadata, stav zpracování a bezpečnou chybu,
+- senior support může po zdůvodnění otevřít náhled vybraného souboru,
+- technik může řešit karanténu nebo importní chybu bez přístupu k obsahu, pokud stačí struktura,
+- admin akce jako export nebo hromadné mazání vyžadují druhé potvrzení,
+- každý přístup k obsahu se zapíše do auditního logu.
+
+U citlivějších segmentů přidej zákaznické nastavení: „support může zobrazit přílohu jen po dočasném schválení správcem workspace“. Je to trochu méně pohodlné, ale výrazně férovější než tichý superpřístup.
+
+## Checklist: object storage bez veřejného průšvihu
+
+- Jsou privátní uploady oddělené od veřejných assetů?
+- Je výchozí přístup bucketů neveřejný?
+- Má každý soubor interní ID, účel, vlastníka a retenční datum?
+- Nevznikají trvalé veřejné URL pro zákaznické soubory?
+- Mají podepsané odkazy krátkou expiraci a vznikají až po kontrole oprávnění?
+- Jsou přístupové klíče rozdělené podle čtení, zápisu a mazání?
+- Umíme smazat původní importní soubor nezávisle na výsledku importu?
+- Má support omezený průzor místo univerzálního přístupu?
+- Logujeme přístupy bez citlivých názvů a obsahu?
+- Máme restore test pro soubory i celé workspace?
+- Víme, jak se zálohy chovají při DSR žádosti nebo zrušení účtu?
+- Jsou bucket pravidla, lifecycle policies a retenční okna dokumentované?
+
+## Mini šablona storage karty
+
+```markdown
+# Storage karta: [bucket / typ souboru]
+
+## Účel
+- Co bucket obsahuje:
+- Kdo je vlastník:
+- Produktový flow:
+- Veřejné / privátní:
+
+## Přístup
+- Aplikační role pro čtení:
+- Aplikační role pro zápis:
+- Kdo smí mazat:
+- Support průzor:
+- Admin výjimky:
+
+## URL a sdílení
+- Používáme podepsané odkazy: ano / ne
+- Expirace odkazu:
+- Listing objektů povolen: ne / výjimka
+- Co se stane po změně oprávnění:
+
+## Metadata
+- Interní ID:
+- Tenant boundary:
+- Ověřený typ:
+- Stav zpracování:
+- Retenční datum:
+
+## Retence a zálohy
+- Retence aktivního objektu:
+- Retence záloh:
+- Lifecycle policy:
+- Restore scénář:
+- Poslední restore test:
+
+## Audit
+- Co logujeme:
+- Co nikdy nelogujeme:
+- Kdo logy reviduje:
+- Incidentový kontakt:
+```
+
+## Zdroje
+
+- OWASP File Upload Cheat Sheet — validace, názvy souborů, ukládání mimo webroot a kontroly uploadů: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+- OWASP Logging Cheat Sheet — bezpečnostní logování, ochrana logů a riziko logování citlivých údajů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Transport Layer Security Cheat Sheet — doporučení pro šifrovaný přenos, HSTS a ochranu citlivých odpovědí: https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html
+- ENISA Technical implementation guidance on cybersecurity risk management measures — integrita záloh, ochrana proti smazání a pravidelné ověřování záloh: https://www.enisa.europa.eu/publications/technical-implementation-guidance-on-cybersecurity-risk-management-measures
+- ENISA Threat Landscape 2023 — doporučení pro bezpečné, redundantní a pravidelně testované zálohy: https://www.enisa.europa.eu/publications/enisa-threat-landscape-2023
+
 # Pracovní log
+
+- 2026-10-01: Doplněna příloha „Object storage a sdílené soubory bez veřejného průšvihu“ s pravidly pro neveřejné buckety, krátké podepsané odkazy, metadata, retenci, restore scénáře, omezený support přístup, checklist, storage kartu a ověřené zdroje OWASP a ENISA.
 
 - 2026-10-01: Doplněna příloha „Trialy a demo workspace bez sběru navíc“ s rozlišením trialu, sandboxu a demo režimu, pravidly pro syntetická demo data, bezpečný import, konec trialu, izolaci demo workspace, privacy-first měření, checklistem, trial kartou a ověřenými zdroji GDPR, Evropské komise a OWASP.
 
