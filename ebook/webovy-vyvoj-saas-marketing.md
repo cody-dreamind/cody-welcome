@@ -26838,7 +26838,195 @@ Privacy-first AI integrace často znamená méně dat, menší kontext a jasněj
 - ENISA — Supply Chain Cybersecurity Good Practices: https://www.enisa.europa.eu/publications/good-practices-for-supply-chain-cybersecurity
 - OWASP Third Party Javascript Management Cheat Sheet — práce s riziky skriptů třetích stran: https://cheatsheetseries.owasp.org/cheatsheets/Third_Party_Javascript_Management_Cheat_Sheet.html
 
+# Příloha: Přístupová práva bez sdílených účtů a věčného admina
+
+Přístupová práva jsou nudná jen do chvíle, než bývalý dodavatel pořád vidí produkční administraci, marketingový účet používá společné heslo v chatu a junior má možnost smazat zákaznická data, protože „to tak bylo rychlejší nastavit“. V malém týmu se podobné věci nestávají kvůli zlé vůli. Stávají se proto, že přístupy rostou organicky, zatímco odpovědnost zůstane někde mezi tabulkou, Slackem a pamětí jednoho člověka.
+
+Privacy-first provoz potřebuje jednoduchou přístupovou matici: kdo má kam přístup, proč ho má, na jak dlouho, s jakou úrovní oprávnění a kdo ho kontroluje. Není cílem mít korporátní IAM chrám. Cílem je, aby žádný účet nebyl silnější, než potřebuje, a žádný přístup nepřežil svůj účel.
+
+> Codyho komentář: Sdílený admin účet je jako klíč od kanceláře pod rohožkou. Funguje skvěle — hlavně pro lidi, které nechceš potkat ve své databázi.
+
+## Začni inventářem kritických míst
+
+Nejdřív sepiš systémy, kde špatný přístup může poškodit zákazníka, data, peníze nebo reputaci. Nezačínej barvou rolí v administraci. Začni dopadem.
+
+Typický seznam pro malý web nebo SaaS:
+
+| Oblast | Příklad systému | Proč je kritická |
+| --- | --- | --- |
+| Produkční infrastruktura | hosting, server, container platforma, DNS | výpadek, změna provozu, únik konfigurace |
+| Databáze | primární DB, read replica, zálohy | osobní data, zákaznický obsah, integrita dat |
+| Administrace SaaS | interní admin panel, billing, support | zásahy do účtů a zákaznických nastavení |
+| Identita | SSO, e-mailové účty, passkeys, správce hesel | převzetí účtů a reset přístupů |
+| Marketing a obsah | CMS, analytika, newsletter, doména | reputace, tracking, phishingové riziko |
+| Integrace | API klíče, webhooky, no-code workflow | neviditelné datové toky a automatické škody |
+| Finance | platební brána, fakturace, účetnictví | peníze, fakturační data, refundy |
+
+U každého systému napiš ownera. Owner není člověk, který „někdy něco nastavoval“. Owner je člověk, který umí říct, kdo má přístup, proč a co se stane při incidentu.
+
+## Role pojmenuj podle práce, ne podle statusu
+
+Špatné role jsou často politické: admin, superadmin, manager, owner, VIP. Dobré role popisují práci: support čtení, support zásah, billing čtení, billing refund, content editor, deployer, security reviewer.
+
+Praktický model:
+
+- **Čtení:** člověk vidí data, ale nemění je.
+- **Běžný zásah:** člověk může provádět opakovanou provozní práci.
+- **Rizikový zásah:** člověk může mazat, refundovat, měnit přístupy nebo spouštět export.
+- **Správa přístupů:** člověk může přidávat a odebírat jiné uživatele.
+- **Nouzový přístup:** dočasná role pro incident, ne běžný pracovní režim.
+
+Každá role má mít popis ve větě. Pokud ji neumíš vysvětlit, pravděpodobně je moc široká. „Admin“ není role, je to přiznání, že jsme ještě nerozsekali rizika.
+
+## Least privilege není slogan, ale denní rutina
+
+OWASP u autorizace doporučuje princip nejmenších oprávnění a výchozí zamítnutí: co není výslovně povolené, nemá projít. V malém týmu to přelož takhle: nový člověk nedostane balík práv „aby nemusel otravovat“. Dostane minimum pro první práci a práva se přidávají až podle skutečné potřeby.
+
+Příklad u supportu:
+
+- první úroveň vidí stav účtu, tarif a historii komunikace,
+- druhá úroveň může znovu poslat pozvánku nebo opravit fakturační kontakt,
+- refund, export dat a ruční změna vlastnictví účtu vyžadují vyšší roli,
+- impersonace zákazníka je vypnutá nebo přísně auditovaná,
+- volné poznámky nesmí obsahovat hesla, tokeny ani citlivý obsah.
+
+Takový model je o něco pomalejší než „dej všem admina“. Jenže je také výrazně levnější než vysvětlovat zákazníkovi, proč se někdo omylem podíval do jeho dat.
+
+## Sdílené účty nahraď osobní odpovědností
+
+Sdílený účet ničí auditní stopu. Když se něco stane, nevíš, kdo udělal změnu, kdo měl heslo a jestli ho pořád má bývalý kolega. U kritických systémů proto platí jednoduché pravidlo: jeden člověk, jeden účet, vlastní ověření, vlastní stopa.
+
+Minimum pro kritické účty:
+
+- osobní účet pro každého uživatele,
+- MFA nebo passkey všude, kde to služba podporuje,
+- žádné heslo poslané přes chat nebo e-mail,
+- role přiřazená podle práce,
+- auditní záznamy pro rizikové akce,
+- okamžité odebrání při odchodu člověka nebo dodavatele.
+
+Výjimka může existovat pro technické účty a service accounts, ale tam musí být jasný owner, omezený token, rotace a zákaz používání pro běžné lidské přihlášení.
+
+## Dočasný přístup musí mít konec už při schválení
+
+Největší zdroj přístupového bordelu je věta „dej mi to jen na chvilku“. Chvilka se v provozu mění na věčnost, pokud nemá datum konce.
+
+Pro dočasný přístup používej jednoduchý zápis:
+
+```text
+Kdo:
+Systém:
+Role:
+Důvod:
+Schválil:
+Začátek:
+Konec:
+Co se má po skončení ověřit:
+```
+
+Externí dodavatel, audit, migrace, incident nebo záskok nemá mít trvalý přístup jen proto, že se to nechce nastavovat znovu. Když nástroj neumí časově omezené role, vytvoř kalendářovou připomínku a ruční revoke checklist. Low-tech je pořád lepší než žádná brzda.
+
+## Offboarding je bezpečnostní funkce, ne HR formalita
+
+Odchod člověka z týmu není jen vrácení notebooku. Je to změna bezpečnostního stavu firmy. NIST v digitální identitě pracuje s lifecycle autentizátorů včetně jejich evidence a rušení vazeb; pro malou firmu z toho plyne praktická věc: účet a autentizátor mají životní cyklus, který musí někdo ukončit.
+
+Offboarding checklist:
+
+- zablokovat nebo odebrat pracovní e-mail,
+- odebrat SSO a správce hesel,
+- odebrat produkční, databázové a hostingové přístupy,
+- zkontrolovat GitHub/GitLab, CI/CD a deploy tokeny,
+- převést vlastnictví dokumentů, workflow a automatizací,
+- zrušit API klíče uložené u člověka,
+- projít marketingové, finanční a support nástroje,
+- zkontrolovat sdílené složky a externí pozvánky,
+- zaznamenat datum, ownera a případné výjimky.
+
+U dodavatelů přidej ještě kontrolu fakturace, smlouvy, úložišť, sandboxů a testovacích dat. Testovací prostředí často obsahuje víc reality, než by si tým rád připustil.
+
+## Přístupy reviduj podle rizika, ne podle kalendářové viny
+
+Jednou ročně je lepší než nikdy, ale pro kritické systémy je to málo. Revize má odpovídat riziku.
+
+Doporučený rytmus:
+
+- **měsíčně:** produkce, databáze, identity provider, správce hesel, billing, admin panel,
+- **čtvrtletně:** analytika, CMS, e-mailing, no-code automatizace, support nástroje,
+- **po každé změně týmu:** odchod, role change, nový dodavatel, incident,
+- **před větší změnou produktu:** nové datové kategorie, nový trh, nový typ zákazníka.
+
+Revize není jen klikání v seznamu uživatelů. U každého přístupu se zeptej: je pořád potřeba, odpovídá roli, má ownera, má MFA, je auditovatelný a nezůstal po starém projektu?
+
+## Checklist: přístupová práva bez věčného admina
+
+- [ ] Máme inventář kritických systémů a jejich ownerů?
+- [ ] Má každý člověk osobní účet místo sdíleného přihlášení?
+- [ ] Jsou role pojmenované podle práce, ne podle statusu?
+- [ ] Máme oddělené čtení, běžný zásah, rizikový zásah a správu přístupů?
+- [ ] Nové účty začínají minimálním oprávněním?
+- [ ] Dočasné přístupy mají datum konce už při schválení?
+- [ ] Service accounts mají ownera, omezený scope a rotaci?
+- [ ] Kritické účty používají MFA nebo passkeys?
+- [ ] Offboarding odebírá e-mail, SSO, hesla, produkci, Git, CI/CD, finance, support i automatizace?
+- [ ] Revize přístupů běží podle rizika, nejen podle nálady v lednu?
+- [ ] Rizikové akce mají auditní stopu bez zbytečného obsahu zákaznických dat?
+
+## Mini šablona přístupové matice
+
+```text
+# Přístupová matice: [systém]
+
+## Systém
+- Název:
+- Owner:
+- Kritičnost: nízká / střední / vysoká
+- Kategorie dat:
+
+## Role
+- Role:
+- Účel role:
+- Povolené akce:
+- Zakázané akce:
+- Vyžaduje MFA/passkey: ano / ne
+
+## Uživatelé
+- Jméno / účet:
+- Role:
+- Důvod přístupu:
+- Schválil:
+- Datum přidání:
+- Datum konce nebo revize:
+
+## Technické účty
+- Název účtu/token objektu:
+- Owner:
+- Scope/oprávnění:
+- Rotace:
+- Kde je uložen:
+
+## Offboarding
+- Co odebrat:
+- Kdo kontroluje:
+- Důkaz dokončení:
+
+## Revize
+- Frekvence:
+- Poslední revize:
+- Nálezy:
+- Další krok:
+```
+
+## Zdroje
+
+- OWASP Authorization Cheat Sheet — principy autorizace, least privilege a deny by default: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP Developer Guide — access control checklist a deny by default: https://devguide.owasp.org/en/04-design/02-web-app-checklist/07-access-controls/
+- NIST SP 800-63B — Authentication and Lifecycle Management: https://pages.nist.gov/800-63-4/sp800-63b.html
+- EDPB — Data controller or data processor, základní povinnosti a bezpečnost zpracování pro malé firmy: https://www.edpb.europa.eu/sme/learn-the-basics/data-controller-or-data-processor_en
+- GDPR, článek 32 — bezpečnost zpracování a vhodná technická a organizační opatření: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+
 # Pracovní log
+- 2026-10-01: Doplněna příloha „Přístupová práva bez sdílených účtů a věčného admina“ s inventářem kritických systémů, rolovým modelem podle práce, least privilege rutinou, pravidly pro osobní účty, dočasné přístupy, offboarding, revize, checklistem, přístupovou maticí a ověřenými zdroji OWASP, NIST, EDPB a GDPR.
+
 - 2026-10-01: Doplněna příloha „Vendor review bez slepé důvěry v hezké logo“ s inventářem dodavatelů, rozdělením podle dopadu, datovou minimalizací, DPA/subprocesory, technickými hranicemi, exit plánem, zvláštní kontrolou AI dodavatelů, checklistem, vendor kartou a ověřenými zdroji GDPR, EDPB, Evropské komise, ENISA a OWASP.
 
 - 2026-10-01: Doplněna příloha „Retenční plán bez nekonečného skladu dat“ s kategoriemi dat, účelovým nastavením lhůt, mazacím workflow, deletion replay po obnově záloh, pravidly pro logy/exporty, evidencí výjimek, zákaznickým vysvětlením, checklistem, retenční kartou a ověřenými zdroji GDPR, EDPB a OWASP.
