@@ -26229,7 +26229,200 @@ Jednou měsíčně stačí projít změny a označit, co vyžaduje hlubší poso
 - European Commission: Guidelines on obligations for General-Purpose AI providers: https://digital-strategy.ec.europa.eu/en/faqs/guidelines-obligations-general-purpose-ai-providers
 - European Commission: Transparency obligations under Article 50 of the AI Act — otázky a odpovědi: https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act
 
+# Příloha: Produktová dokumentace a changelog bez platformní závislosti
+
+Dokumentace není pohřebiště poznámek, které nikdo nestihl dát do produktu. Je to obchodní, podpůrný a provozní nástroj. Dobrá dokumentace zkracuje onboarding, snižuje počet ticketů, pomáhá prodeji a chrání tým před tím, aby stejnou odpověď psal po stopadesáté. Changelog zase ukazuje, že produkt žije — ale bez toho, aby zákazník musel sledovat sociální sítě, komunitní chat nebo náhodný newsletter.
+
+Privacy-first dokumentace má ještě jednu výhodu: nemusí vědět, kdo přesně ji čte, aby byla užitečná. Stačí měřit agregované signály, sbírat přímou zpětnou vazbu a psát tak, aby člověk našel odpověď bez stopování přes půl internetu.
+
+> Codyho komentář: Pokud zákazník potřebuje napsat na podporu, aby zjistil, co znamená tlačítko v aplikaci, není to „high-touch customer success“. Je to dokumentační dluh v obleku.
+
+## Začni mapou rozhodnutí, ne seznamem funkcí
+
+Dokumentace se často rozbije hned na začátku, protože kopíruje menu aplikace. To vypadá logicky pro tým, který produkt staví, ale ne pro člověka, který se snaží dokončit úkol. Lepší je začít mapou rozhodnutí: co se uživatel snaží pochopit, nastavit, ověřit nebo opravit.
+
+Praktické kategorie:
+
+- **Začínám** — první nastavení, doporučený postup, slovník pojmů, minimální konfigurace.
+- **Jak udělám X** — krátké návody podle úkolu, ne podle interní architektury.
+- **Rozhodování** — kdy zvolit variantu A, kdy B, jaké jsou limity a dopady.
+- **Troubleshooting** — co zkontrolovat, když něco nefunguje, a kdy kontaktovat podporu.
+- **Bezpečnost a data** — kde jsou data, kdo k nim má přístup, jak funguje export, mazání a retence.
+- **Release notes** — co se změnilo, koho se to týká a jestli je potřeba akce.
+
+Každý článek by měl mít jednu větu účelu:
+
+```text
+Tento článek pomáhá [typ uživatele] udělat [konkrétní úkol] bez [typický omyl / riziko / zdržení].
+```
+
+Příklad:
+
+```text
+Tento článek pomáhá administrátorovi nastavit týmové role bez zbytečného přidělení práv k fakturaci a exportům.
+```
+
+Tohle je mnohem lepší zadání než „napiš článek o rolích“. Role nejsou téma. Bezpečné nastavení přístupu je úkol.
+
+## Piš dokumentaci jako produktové rozhraní
+
+Dokumentace má vlastní UX. Když je nepřehledná, dlouhá a plná interních výrazů, jen přesouvá frustraci z aplikace do textu.
+
+Dobrá stránka dokumentace má:
+
+- jasný název podle úkolu, například „Jak pozvat účetní jen k fakturám“, ne „Správa uživatelů“;
+- krátký úvod, který řekne, pro koho článek je a kdy ho použít;
+- požadavky před začátkem, například role, tarif, zapnutá integrace nebo dostupný export;
+- postup v malých krocích, ideálně s výsledkem po každém kroku;
+- varování jen tam, kde opravdu chrání před ztrátou dat, peněz nebo přístupů;
+- sekci „Co dál“, která nabídne jeden až tři relevantní další kroky.
+
+Vyhýbej se dokumentačnímu folklóru: „jednoduše klikněte“, „stačí jen“, „intuitivně vyplňte“. Pro autora je to jednoduché, protože to viděl stokrát. Pro nového zákazníka je to bludiště s tlačítkem „Pokračovat“, které zní podezřele definitivně.
+
+Privacy-first detail: do screenshotů nedávej reálné osobní údaje, tokeny, faktury, názvy zákazníků ani interní e-maily. Používej syntetická data, konzistentní demo účty a před publikací udělej screenshot review. Obrázek s rozmazaným jménem a čitelným e-mailem v URL je klasika žánru „téměř jsme to měli“.
+
+## Changelog má být pro člověka, ne pro commit parser
+
+Changelog není výpis commitů. Uživatel nepotřebuje číst „refactor user settings service“. Potřebuje vědět, jestli se mu změnilo chování produktu, jestli musí něco udělat a jestli oprava řeší jeho problém.
+
+Použitelný zápis:
+
+```text
+Opraveno: Export faktur už znovu zahrnuje dobropisy vytvořené přes API.
+Dopad: Týká se týmů, které exportují faktury do účetního systému přes měsíční CSV.
+Akce: Pokud jste export za září stáhli před 10:30, stáhněte ho znovu.
+```
+
+Slabý zápis:
+
+```text
+Fixed invoice export edge case.
+```
+
+Struktura inspirovaná přístupem Keep a Changelog dobře funguje i pro malý SaaS: přidej skupiny jako Přidáno, Změněno, Opraveno, Bezpečnost a Odstraněno. Nemusíš z toho dělat rituál s gongem. Stačí, když každý release obsahuje významné změny čitelně a chronologicky.
+
+U větších produktů přidej tři značky dopadu:
+
+- **Pro všechny** — změna UI, výkonu, dostupnosti nebo obsahu dokumentace.
+- **Pro administrátory** — role, fakturace, bezpečnost, exporty, integrace.
+- **Pro vývojáře** — API, webhooky, SDK, breaking changes, rate limity.
+
+Pokud používáš verzování API nebo knihovny, drž odděleně produktový changelog a technické release notes. Produktový changelog mluví k uživateli. Technické release notes mluví k integrátorovi. Když je smícháš, vznikne text, který nepotěší nikoho — což je sice efektivní, ale špatným směrem.
+
+## Release notes nesmí prozradit víc než produkt
+
+U bezpečnostních oprav, incidentů a citlivých změn piš konkrétně, ale nerozepisuj návod k útoku. Uživatel potřebuje vědět dopad a akci, ne exploit kuchařku.
+
+Bezpečný vzor:
+
+```text
+Bezpečnost: Zpřísnili jsme kontrolu oprávnění u exportu týmových dat.
+Dopad: Změna se týká administrátorů a členů s exportním oprávněním.
+Akce: Pokud používáte vlastní role, zkontrolujte, že exportní oprávnění mají jen lidé, kteří ho opravdu potřebují.
+```
+
+Nebezpečný vzor:
+
+```text
+Opravili jsme endpoint /api/export, kde stačilo změnit team_id v URL.
+```
+
+Detaily pro zákazníky, kterých se problém týkal, pošli přímou a přiměřenou komunikací. Veřejný changelog má být transparentní, ne nechtěný návod pro zvědavé kolemjdoucí s terminálem a přebytkem kofeinu.
+
+## Distribuce: vlastněný kanál první, platforma druhá
+
+Changelog a dokumentace mají být dostupné přes přímou URL. Ideální minimum:
+
+- veřejná dokumentace na vlastní doméně;
+- RSS feed pro release notes nebo produktové novinky;
+- odkaz z aplikace u relevantních změn;
+- e-mail jen pro změny, které vyžadují akci nebo mají větší dopad;
+- krátký souhrn na sociální síti až jako kopie, ne jako primární zdroj.
+
+Tohle je privacy-first i praktické. Zákazník nemusí mít účet na platformě, nemusí se přihlásit do komunity a nemusí být sledovaný reklamními skripty, aby zjistil, co se v produktu změnilo. Přímý odkaz je nudná technologie. Přesně proto je skvělá.
+
+Měření drž skromné: počet zobrazení článku, kliknutí na „pomohlo/nepomohlo“, nejčastější vyhledávání bez osobního profilu, počet ticketů před a po zlepšení článku. Nepotřebuješ heatmapu každého pohybu myši, abys zjistil, že článek s názvem „Nastavení“ nikomu nepomáhá.
+
+## Dokumentace má mít vlastní provozní rutinu
+
+Dokumentace zastarává potichu. Proto ji nepovažuj za jednorázový projekt, ale za součást release procesu.
+
+Jednoduchá rutina:
+
+- Každý pull request s uživatelskou změnou má otázku: „Mění se dokumentace, onboarding nebo changelog?“
+- Každý release má jednu osobu, která kontroluje poznámky pro zákazníky.
+- Každý měsíc projdi top 10 článků podle návštěvnosti a top 10 support dotazů.
+- Každý kvartál zkontroluj bezpečnostní a datové články: exporty, mazání, role, subprocesory, retence.
+- Každý zastaralý článek označ stavem: aktualizovat, sloučit, archivovat nebo přesměrovat.
+
+Užitečný detail: ke každému článku přidej interní metadata, která nemusí být veřejná:
+
+```text
+Owner: produkt / support / security / marketing
+Poslední odborná revize: [datum]
+Riziko zastarání: nízké / střední / vysoké
+Navázané funkce: [feature / API / integrace]
+Zákaznické segmenty: [admin / vývojář / účetní / koncový uživatel]
+```
+
+Tím z dokumentace uděláš systém, ne hromadu stránek, které drží pohromadě víra a vyhledávací políčko.
+
+## Checklist: dokumentace a changelog bez platformní závislosti
+
+- [ ] Každý dokumentační článek má jasný úkol, cílového uživatele a další krok.
+- [ ] Screenshoty používají syntetická data a prošly kontrolou citlivých údajů.
+- [ ] Changelog popisuje dopad na zákazníka, ne jen interní technickou změnu.
+- [ ] Release notes oddělují běžné změny, administrátorské dopady, vývojářské dopady a bezpečnost.
+- [ ] Důležité změny jsou dostupné přes přímou URL a RSS nebo jiný vlastněný kanál.
+- [ ] Měření dokumentace funguje agregovaně bez profilování jednotlivých čtenářů.
+- [ ] Release proces obsahuje kontrolu dokumentace a zákaznické komunikace.
+- [ ] Bezpečnostní poznámky jsou transparentní, ale neprozrazují zneužitelné detaily.
+
+## Mini šablona dokumentační karty
+
+```text
+# Dokumentační karta: [název článku / sekce]
+
+## Účel
+- Komu článek pomáhá:
+- Jaký úkol řeší:
+- Kdy ho člověk typicky hledá:
+
+## Obsah
+- Hlavní kroky:
+- Nutné předpoklady:
+- Riziková místa:
+- Navazující odkazy:
+
+## Data a privacy
+- Obsahuje screenshoty: ano / ne
+- Screenshoty používají syntetická data: ano / ne
+- Zmiňuje osobní údaje, exporty, retenci nebo role: ano / ne
+- Potřebuje odbornou kontrolu: produkt / support / security / právní / ne
+
+## Changelog
+- Změna pro zákazníka:
+- Dopad:
+- Potřebná akce zákazníka:
+- Kanály oznámení: app / docs / RSS / e-mail / status page
+
+## Revize
+- Owner:
+- Poslední revize:
+- Další revize:
+- Stav: aktuální / aktualizovat / sloučit / archivovat
+```
+
+## Zdroje
+
+- Keep a Changelog — doporučená struktura lidsky čitelného changelogu a skupin změn: https://keepachangelog.com/en/2.0.0/
+- Semantic Versioning 2.0.0 — pravidla pro verzování veřejného API podle typů změn: https://semver.org/
+- W3C Web Content Accessibility Guidelines 2.2 — referenční standard přístupnosti webového obsahu: https://www.w3.org/TR/WCAG22/
+- W3C WAI — přehled dokumentů WCAG a souvisejících materiálů k přístupnosti: https://www.w3.org/WAI/standards-guidelines/wcag/docs/
+
 # Pracovní log
+- 2026-10-01: Doplněna příloha „Produktová dokumentace a changelog bez platformní závislosti“ s mapou rozhodnutí, UX pravidly pro dokumentaci, lidsky čitelným changelogem, bezpečnými release notes, vlastněnými distribučními kanály, provozní rutinou, checklistem, dokumentační kartou a ověřenými zdroji Keep a Changelog, SemVer a W3C WCAG.
+
 - 2026-10-01: Doplněna příloha „AI Act inventory bez paniky a papírového divadla“ s praktickým rozlišením rolí, účelů, autonomie, transparentnosti, GPAI dodavatelů, revizních spouštěčů, checklistem, vyplnitelnou AI inventory kartou a ověřenými zdroji Evropské komise a EUR-Lex.
 
 
