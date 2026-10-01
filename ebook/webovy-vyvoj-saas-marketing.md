@@ -17235,6 +17235,32 @@ Před nasazením interní admin funkce projdi tento checklist:
 
 Admin rozhraní má být interní pracovní stůl, ne tajná řídicí věž nad zákaznickými daty. Když ho navrhneš podle práce, minimálních oprávnění a auditní stopy, tým bude rychlejší i bezpečnější. Což je vzácná kombinace — skoro jako meeting, který opravdu skončil dřív.
 
+## Doplňkový provozní test: session, MFA a API bez kouzelného pláště
+
+Admin není jen obrazovka. Je to sada relací, API endpointů, interních rolí a zvyků lidí, kteří mají ve stresu opravit problém zákazníka. Proto ho testuj i mimo UI.
+
+Minimum pro interní admin přístup:
+
+- MFA pro všechny interní účty, které mají přístup k zákaznickým nebo provozním datům,
+- žádné sdílené účty typu `support@firma.cz`, protože pak audit ukazuje týmovou mlhu, ne člověka,
+- kratší timeout neaktivní admin session než u běžného uživatelského rozhraní,
+- opětovné ověření před nevratnou nebo finančně citlivou akcí,
+- okamžité odebrání přístupu při odchodu člověka z týmu,
+- pravidelná měsíční revize aktivních interních účtů a rolí.
+
+Negativní testy piš stejně poctivě jako pozitivní scénáře. Support viewer se má pokusit změnit tarif. Billing operator se má pokusit zobrazit obsah zákaznického projektu. Product admin se má pokusit resetovat MFA. Běžný uživatel se má pokusit zavolat admin endpoint ručně. A stará session se má pokusit provést kritickou akci po timeoutu.
+
+U multitenant SaaS přidej object-level testy: každá admin akce musí kontrolovat nejen roli, ale i konkrétní zákaznický kontext objektu. Nestačí, že člověk „je admin“. Musí být admin pro správnou práci nad správným zákazníkem. Jedno cizí ID v URL nemá být teleport do cizího účtu.
+
+> Codyho komentář: Když bezpečnost adminu stojí na tom, že „to tlačítko v UI není vidět“, není to bezpečnost. Je to závěs před otevřeným oknem.
+
+## Zdroje
+
+- OWASP Authorization Cheat Sheet doporučuje explicitní server-side autorizaci, princip nejmenších oprávnění a bezpečný výchozí deny přístup: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP Session Management Cheat Sheet popisuje zásady bezpečné správy relací a význam session tokenů po přihlášení: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- OWASP Transaction Authorization Cheat Sheet řeší dodatečné potvrzení citlivých operací a prevenci obejití autorizačního kroku: https://cheatsheetseries.owasp.org/cheatsheets/Transaction_Authorization_Cheat_Sheet.html
+- NIST SP 800-63B popisuje timeouty relací a reautentizaci podle rizika a typu relace: https://pages.nist.gov/800-63-4/sp800-63b.html
+
 # Příloha: Schvalování nástrojů bez shadow IT safari
 
 Shadow IT vzniká ve chvíli, kdy tým začne používat nástroje mimo domluvený provozní rámec. Ne nutně ze zlé vůle. Často proto, že oficiální proces je pomalý, nejasný nebo vypadá jako by ho navrhl někdo, kdo naposledy instaloval software z cédéčka. Výsledek je ale stejný: zákaznická data, interní dokumenty, přístupové tokeny nebo marketingové seznamy se rozutečou do služeb, o kterých firma neví, nemá k nim DPA, neumí z nich exportovat data a neumí je při incidentu vypnout.
@@ -24083,251 +24109,8 @@ Privacy-first SaaS nemusí tvrdit, že nikdy nepoužije globální platební inf
 - Stripe průvodce PCI compliance vysvětluje, že Checkout a Elements používají hostovaná platební pole pro citlivá karetní data a mohou zjednodušit PCI zátěž: https://stripe.com/guides/pci-compliance
 - PCI Security Standards Council uvádí, že ověřovací kódy karet typu CVV/CVC nelze po autorizaci ukládat ani se souhlasem zákazníka: https://www.pcisecuritystandards.org/faqs/1280/
 
-# Příloha: Admin rozhraní bez tajných zadních dveří
-
-Admin rozhraní je často nejmenší část produktu a zároveň místo, kde se dá napáchat největší škoda. Umí měnit zákaznická data, přepínat tarify, mazat účty, rušit faktury, resetovat MFA, číst support historii a někdy spouštět dávkové operace. Když ho tým bere jako „jen interní obrazovku“, vznikne malý kokpit bez bezpečnostních pásů. A pak stačí jeden unavený člověk, sdílený účet nebo zapomenutý endpoint.
-
-Privacy-first admin není o tom, že supportu svážeš ruce za zády. Je o tom, že interní lidé vidí jen to, co opravdu potřebují k vyřešení konkrétní práce, a každá citlivá akce má jasnou stopu, důvod a možnost kontroly. To není paranoia. To je provozní hygiena.
-
-> Codyho komentář: Jestli má administrace tlačítko „zobrazit všechno“, dřív nebo později ho někdo použije ve chvíli, kdy by stačilo „zobrazit poslední chybu objednávky“. Produkt tím nezíská superschopnost, jen větší plochu průšvihu.
-
-## Začni mapou interních schopností
-
-Nejdřív neřeš obrazovky. Sepiš schopnosti, které admin umí nebo má umět. Schopnost je konkrétní akce, ne role.
-
-Příklady schopností:
-
-- vyhledat zákazníka podle e-mailu,
-- zobrazit stav předplatného,
-- změnit tarif,
-- zrušit trial,
-- znovu odeslat pozvánku,
-- resetovat MFA,
-- exportovat faktury,
-- zobrazit technický log posledního neúspěšného webhooku,
-- smazat workspace,
-- přihlásit se do zákaznického účtu jako support.
-
-Ke každé schopnosti přidej tři věci: riziko, potřebná data a důvod použití. Tím rychle zjistíš, že „support potřebuje vidět zákazníka“ je moc široké zadání. Support možná potřebuje vidět stav účtu, poslední fakturační problém a technický stav integrace. Nemusí vidět obsah dokumentů, neveřejné poznámky zákazníka ani kompletní historii všech exportů.
-
-Praktická mini tabulka:
-
-| Schopnost | Riziko | Minimální data | Důvod použití |
-|---|---:|---|---|
-| Vyhledat zákazníka | střední | e-mail, název firmy, ID workspace | dohledání ticketu |
-| Změnit tarif | vysoké | tarif, fakturační stav, auditní důvod | oprava objednávky |
-| Resetovat MFA | vysoké | identita uživatele, metoda ověření | obnova přístupu |
-| Zobrazit obsah zákaznických dat | kritické | jen vybraná položka a důvod | bezpečnostní nebo support výjimka |
-
-Výsledkem má být seznam schopností, které se dají přiřadit rolím, testovat a auditovat. Ne vágní role typu „admin“, „superadmin“ a „Ondra, protože Ondra“. I když Ondra je určitě fajn. Systém ale nemá stát na optimismu.
-
-## Interní role drž menší než ego týmu
-
-Interní role nemají kopírovat organizační titulky. Mají kopírovat práci.
-
-Rozumné role pro malý SaaS:
-
-- `Support viewer`: dohledá zákazníka, vidí technický stav, neumí měnit billing ani citlivá data.
-- `Support operator`: umí provést běžné opravy typu resend pozvánky nebo unlock účtu, ale rizikové akce potřebují druhé potvrzení.
-- `Billing operator`: řeší fakturační stav, refundy a doklady, nevidí obsah produktových dat.
-- `Security operator`: řeší přístupy, MFA recovery a incidenty, ale neprovádí obchodní změny.
-- `Product admin`: spravuje feature flagy a konfiguraci produktu, nevidí zákaznický obsah bez výjimky.
-- `Owner`: má nouzové pravomoci, ale používá je výjimečně a s auditním důvodem.
-
-Každá role má mít výchozí deny pravidlo: co není výslovně povolené, nejde. OWASP u autorizace doporučuje jasné vynucení přístupových pravidel a návrh podle nejmenších oprávnění; v adminu to platí dvojnásob, protože jeden omyl se rychle změní na hromadnou změnu dat.
-
-Příklad špatného návrhu:
-
-```text
-Každý zaměstnanec po přihlášení vidí admin a podle UI se schová, co nepotřebuje.
-```
-
-Příklad lepšího návrhu:
-
-```text
-Každý interní účet má roli. Každý admin endpoint kontroluje schopnost na serveru. UI jen zlepšuje orientaci, ale nikdy není bezpečnostní hranice.
-```
-
-Tohle je nudné, ale přesně ten typ nudy, který šetří víkendy.
-
-## Citlivé akce potřebují důvod a druhé potvrzení
-
-Ne každá admin akce je stejně nebezpečná. Vyhledat zákazníka není totéž jako smazat workspace nebo vypnout MFA. Udělej tři úrovně.
-
-### Běžná akce
-
-Nízké riziko, snadný návrat zpět.
-
-Příklady:
-
-- resend pozvánky,
-- označení ticketu interním štítkem,
-- zobrazení technického stavu integrace,
-- oprava překlepu v interní poznámce.
-
-Stačí role, auditní log a srozumitelné UI.
-
-### Riziková akce
-
-Mění přístup, peníze, nastavení nebo stav zákazníka.
-
-Příklady:
-
-- změna tarifu,
-- refund,
-- ruční prodloužení trialu,
-- reset MFA,
-- deaktivace uživatele,
-- ruční přepnutí feature flagu pro zákazníka.
-
-Vyžaduj důvod, potvrzení konkrétní změny a jasný auditní záznam. U resetu MFA nebo změny vlastníka workspace přidej silnější ověření identity zákazníka a ideálně druhého interního schvalovatele.
-
-### Kritická akce
-
-Může způsobit ztrátu dat, bezpečnostní incident nebo zásah do soukromí.
-
-Příklady:
-
-- smazání workspace,
-- export většího množství osobních dat,
-- impersonace zákazníka,
-- změna vlastníka účtu,
-- zobrazení zákaznického obsahu mimo běžný support účel,
-- vypnutí bezpečnostní ochrany.
-
-Kritická akce má mít čtyři brzdy: omezenou roli, krátký důvod, druhé potvrzení a viditelnou stopu pro pozdější kontrolu. Pokud akce není vratná, ukaž přesný dopad ještě před potvrzením. Ne „opravdu pokračovat?“, ale „smaže se 18 projektů, 42 souborů a přístup pro 7 uživatelů“. Ano, dialog je delší. Ne, není to problém. Problém je tichý výbuch.
-
-## Impersonace zákazníka je poslední možnost, ne support zkratka
-
-Impersonace znamená, že interní člověk jedná v prostředí zákazníka nebo vidí jeho pohled. Je lákavá, protože rychle řeší support. Zároveň je to jedno z nejcitlivějších míst v produktu.
-
-Bezpečnější pořadí:
-
-1. Nejdřív ukaž supportu technický stav a metadata bez vstupu do účtu.
-2. Pokud je potřeba kontext, nech zákazníka poslat screenshot nebo sdílet konkrétní ID položky.
-3. Pokud je nutná impersonace, vyžaduj důvod, omezený čas a auditní stopu.
-4. Po skončení zobraz zákazníkovi nebo interně jasný záznam, že proběhl support přístup.
-
-Impersonace by neměla používat heslo zákazníka ani vytvářet běžnou uživatelskou relaci bez označení. Interní relace má být oddělená, časově omezená a v UI jasně označená. Ještě lepší je režim „view as“, který neumí měnit data, dokud člověk výslovně nepřejde do schválené akce.
-
-Privacy-first pravidlo: support nemá být detektiv v cizím bytě. Má být technik, který opravuje konkrétní závadu s co nejmenším vstupem do soukromého prostoru.
-
-## Auditní log piš pro kontrolu, ne pro voyeurismus
-
-Auditní log adminu má odpovědět na otázky:
-
-- kdo akci provedl,
-- kdy ji provedl,
-- jakou schopnost použil,
-- kterého zákazníka nebo objektu se týkala,
-- jaký byl důvod,
-- jaký byl výsledek,
-- zda šlo o impersonaci nebo kritickou akci.
-
-Nemá ukládat zbytečný obsah zákaznických dat. Když support změnil tarif, loguj starý a nový tarif, ne celý profil zákazníka. Když zobrazil technickou chybu webhooku, loguj ID webhooku a typ chyby, ne celý payload s osobními údaji. Když provedl export, loguj typ exportu, rozsah a důvod, ne kopii exportovaných dat.
-
-Auditní log má mít omezený přístup. Není to interní sociální síť „kdo co dělal“. Vidět ho mají lidé, kteří řeší bezpečnost, compliance, provoz nebo konkrétní incident. Retence má odpovídat riziku a povinnostem, ne náladě databáze. Prakticky: běžné admin logy drž třeba 6–12 měsíců, kritické bezpečnostní události déle podle rizika a smluvních závazků. Přesnou dobu si zdokumentuj.
-
-## Admin session není běžné přihlášení
-
-Interní admin účet má vyšší dopad než běžný zákaznický účet, takže potřebuje přísnější režim.
-
-Minimum:
-
-- MFA pro všechny interní admin účty,
-- zákaz sdílených účtů,
-- krátká neaktivní session pro admin část,
-- opětovné ověření před kritickou akcí,
-- zákaz trvalých admin tokenů v prohlížeči,
-- rychlé odebrání přístupu při odchodu člověka z týmu,
-- pravidelná kontrola aktivních interních účtů.
-
-NIST ve svých digitálních identitních doporučeních pracuje s timeouty relací a opětovným ověřením podle rizika. Pro malý SaaS z toho plyne jednoduchý závěr: admin relace nemá žít věčně jen proto, že prohlížeč zůstal otevřený na notebooku v kavárně. Pokud člověk dělá rizikovou změnu po delší pauze, nech ho znovu potvrdit identitu.
-
-## Admin API testuj stejně tvrdě jako veřejné API
-
-Interní endpoint není bezpečný jen proto, že v navigaci není odkaz. Testuj ho přímo.
-
-Negativní scénáře:
-
-- support viewer zkusí změnit tarif,
-- billing operator zkusí zobrazit produktová data,
-- product admin zkusí resetovat MFA,
-- běžný uživatel zkusí zavolat admin endpoint,
-- interní účet bez MFA zkusí vstoupit do adminu,
-- stará session zkusí provést kritickou akci,
-- člověk z jedné tenant skupiny zkusí upravit jiného zákazníka,
-- UI skryje tlačítko, ale API požadavek se pošle ručně.
-
-U multitenant SaaS přidej testy na object-level autorizaci: každá akce musí kontrolovat nejen roli, ale i to, jestli konkrétní objekt patří do správného zákaznického kontextu. Tohle je přesně ten detail, který vypadá jako „jasně, to je přece samozřejmé“, dokud jedno ID v URL neukáže cizí data.
-
-## Checklist: admin bez zadních dveří
-
-- Máme seznam interních schopností, ne jen seznam rolí.
-- Každá schopnost má přiřazené riziko, minimální data a důvod použití.
-- Admin endpointy kontrolují oprávnění na serveru.
-- UI skrývání tlačítek není bezpečnostní hranice.
-- Interní role jsou podle práce: support, billing, security, product, owner.
-- Kritické akce vyžadují důvod a druhé potvrzení.
-- Impersonace je časově omezená, označená a auditovaná.
-- Support vidí minimum dat nutných k řešení ticketu.
-- Auditní log neukládá zbytečný zákaznický obsah.
-- Admin účty mají MFA a nejsou sdílené.
-- Admin session má kratší timeout než běžný produkt.
-- Kritické akce vyžadují reautentizaci nebo silnější potvrzení.
-- Odchod člověka z týmu okamžitě ruší interní přístupy.
-- Negativní autorizační testy jsou součástí testovací sady.
-- Každý měsíc projdeme aktivní admin účty a role.
-
-## Mini šablona admin karty
-
-```markdown
-# Admin karta: [oblast / modul]
-
-## Účel
-- Jaký provozní problém admin řeší:
-- Kdo ho používá:
-- Co se má řešit mimo admin:
-
-## Schopnosti
-| Schopnost | Role | Riziko | Minimální data | Důvod povinný? |
-|---|---|---:|---|---|
-| | | | | |
-
-## Citlivé akce
-- Akce s druhým potvrzením:
-- Akce s reautentizací:
-- Akce s interním schválením:
-- Akce, které neumíme vrátit zpět:
-
-## Impersonace
-- Je povolená? ano/ne:
-- Kdo ji smí použít:
-- Maximální délka relace:
-- Co zákazník nebo interní audit uvidí:
-
-## Auditní log
-- Co logujeme:
-- Co nikdy nelogujeme:
-- Retence:
-- Kdo smí log číst:
-
-## Testy
-- Negativní role testy:
-- Multitenant testy:
-- Session timeout test:
-- Odchod zaměstnance / odebrání přístupů:
-```
-
-## Zdroje
-
-- OWASP Authorization Cheat Sheet doporučuje explicitní server-side autorizaci, princip nejmenších oprávnění a bezpečný výchozí deny přístup: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
-- OWASP Session Management Cheat Sheet popisuje zásady bezpečné správy relací a význam session tokenů po přihlášení: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
-- OWASP Transaction Authorization Cheat Sheet řeší dodatečné potvrzení citlivých operací a prevenci obejití autorizačního kroku: https://cheatsheetseries.owasp.org/cheatsheets/Transaction_Authorization_Cheat_Sheet.html
-- NIST SP 800-63B popisuje timeouty relací a reautentizaci podle rizika a typu relace: https://pages.nist.gov/800-63-4/sp800-63b.html
-
 # Pracovní log
-- 2026-10-01: Doplněna příloha „Admin rozhraní bez tajných zadních dveří“ s mapou interních schopností, rolemi podle práce, pravidly pro citlivé akce, impersonaci, auditní logy, admin session režim, negativní autorizační testy, checklistem, admin kartou a ověřenými zdroji OWASP a NIST.
+- 2026-10-01: Rozšířena příloha „Admin rozhraní bez superuživatelského průšvihu“ o provozní test session, MFA a admin API, negativní autorizační scénáře, multitenant kontrolu objektů a ověřené zdroje OWASP a NIST.
 
 - 2026-09-30: Doplněna příloha „Dunning, refundy a billing support bez finančního harampádí“ s datovou hranicí platebního flow, doporučením pro hosted checkout, minimalizací fakturačních údajů, oddělením retenčních režimů, bezpečným webhook zpracováním, dunning komunikací, refund workflow, rolemi pro billing a ověřenými zdroji EDPB, Finanční správy, Stripe a PCI SSC.
 
