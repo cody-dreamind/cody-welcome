@@ -26042,7 +26042,196 @@ K rozhodnutí přidej krátkou poznámku: co jsme čekali, co se stalo, co jsme 
 - EDPB Guidelines 8/2020 on the targeting of social media users — užitečný kontext k rizikům cílení a profilování: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-82020-targeting-social-media-users_en
 - OWASP Logging Cheat Sheet — doporučení logovat jen účelné události a vynechávat citlivá či nadbytečná data: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 
+
+# Příloha: AI Act inventory bez paniky a papírového divadla
+
+AI Act není důvod zastavit všechny AI nápady a schovat se pod stůl s právníkem. Je to důvod přestat říkat „používáme AI“ jako jednu neurčitou větu a začít evidovat konkrétní systémy, účely, data, dopady a odpovědnosti. Malý SaaS tým nepotřebuje hned stostránkový compliance román. Potřebuje AI inventory: praktický seznam toho, kde AI reálně pomáhá produktu, marketingu, podpoře nebo interní práci.
+
+Evropská komise popisuje AI Act jako rámec založený na riziku; některé povinnosti už běží, jiné se používají postupně podle typu systému a role aktéra. EUR-Lex u nařízení 2024/1689 uvádí účinnost od 1. srpna 2024 a postupná data použitelnosti včetně 2. února 2025, 2. srpna 2025, 2. srpna 2026 a 2. srpna 2027 ([EUR-Lex: Regulation 2024/1689](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=OJ%3AL_202401689)). Prakticky: nespoléhej na větu „to se nás ještě netýká“. Zapiš si, co používáš, a u každé věci ověř roli a riziko.
+
+> Codyho komentář: Nejhorší AI governance je tabulka, kterou někdo založil pro audit a pak už ji nikdo nikdy neotevřel. AI inventory má být pracovní nástroj. Když se ho bojíš aktualizovat, je moc složitý.
+
+## Nejdřív rozliš roli: poskytovatel, nasazující, integrátor
+
+U každého AI použití si napiš, v jaké roli tým stojí. Stejný model může být jednou interní pomůcka a jindy součást zákaznického produktu.
+
+Zjednodušeně:
+
+- **Interní uživatel nástroje** — tým používá AI pro osnovy, interní rešerše, návrhy textů, triáž nápadů nebo podporu práce.
+- **Nasazující AI systém** — firma používá AI pod vlastní kontrolou vůči zákazníkům nebo zaměstnancům, například chatbot na webu nebo interní scoring ticketů.
+- **Poskytovatel AI funkce** — produkt nabízí zákazníkům funkci, která sama používá AI a je součástí služby.
+- **Integrátor modelu** — tým bere obecný model a staví nad ním vlastní workflow, pravidla, UI, datové hranice a výstupy.
+- **Poskytovatel obecného modelu** — většiny malých SaaS týmů se to netýká, pokud netrénují a neuvádějí na trh vlastní obecný model.
+
+Pro malé firmy je nejčastější chyba, že všechno hodí do krabice „externí AI nástroj“. Jenže zákaznický chatbot, interní generátor článků a automatické doporučení v HR workflow nejsou stejné riziko. Jeden může být čistě produktivní pomůcka. Druhý mluví se zákazníkem. Třetí může ovlivnit člověka v citlivém kontextu.
+
+## Inventory má začínat účelem, ne názvem modelu
+
+Název modelu je důležitý, ale nestačí. Dnes používáš jednu verzi, za měsíc jinou. Účel a datová hranice jsou stabilnější.
+
+Příklad dobrého zápisu:
+
+```text
+AI použití: návrh odpovědi pro zákaznickou podporu
+Účel: zkrátit čas přípravy odpovědi agentovi
+Uživatel výstupu: interní support agent
+Dopad na zákazníka: odpověď vždy kontroluje člověk
+Vstupní data: text ticketu bez platebních údajů a bez tajemství
+Výstup: návrh odpovědi, ne automatické rozhodnutí
+Model / dodavatel: [název], EU region / smluvní režim ověřen dne [datum]
+Retence vstupů: [doba / režim]
+Zakázané použití: právní závěry, sliby kompenzace, bezpečnostní posouzení
+```
+
+Špatný zápis vypadá takhle:
+
+```text
+Používáme AI na support.
+```
+
+To je asi stejně užitečné jako „máme databázi“. Gratuluji, civilizace pokračuje, ale provozně nevíš skoro nic.
+
+## Rozliš AI pomocníka od automatického rozhodnutí
+
+Privacy-first produkt musí jasně říct, jestli AI jen pomáhá člověku, nebo sama provádí akci. Rozdíl je zásadní pro důvěru, testování i riziko.
+
+Bezpečnější vzory:
+
+- AI navrhne shrnutí ticketu, člověk ho upraví a odešle.
+- AI navrhne tag dokumentace, editor ho potvrdí.
+- AI najde možné duplicitní záznamy, administrátor rozhodne.
+- AI vysvětlí funkci na základě dokumentace, ale nepřistupuje k účtu zákazníka.
+- AI připraví návrh e-mailu, obchodník zkontroluje fakta i tón.
+
+Rizikovější vzory:
+
+- AI sama odmítne zákazníka, žádost, reklamaci nebo přístup.
+- AI určuje cenu, slevu nebo prioritu podle profilu člověka.
+- AI posílá zákazníkům odpovědi bez lidské kontroly v právním, finančním nebo bezpečnostním kontextu.
+- AI čte celé zákaznické dokumenty bez jasného účelu a retence.
+- AI se napojuje na produkční akce bez oprávnění, audit logu a možnosti zastavení.
+
+Codyho pravidlo: čím větší dopad na člověka, peníze, přístup nebo pověst, tím víc lidské kontroly a méně autonomie.
+
+## Transparentnost není jen věta „používáme AI“
+
+AI Act má zvláštní transparentnostní povinnosti pro některé systémy. Evropská komise u pokynů k článku 50 uvádí, že transparentnostní povinnosti pro poskytovatele a nasazující některých AI systémů se začínají používat od 2. srpna 2026 ([Commission: transparency obligations guidelines](https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems)). Pro malý web nebo SaaS je praktický závěr jednoduchý: pokud člověk komunikuje s chatbotem nebo vidí AI generovaný obsah v důležitém kontextu, nemá hádat, co se děje.
+
+Dobrá transparentnost říká:
+
+- že jde o AI nebo automatizovanou pomoc,
+- jaký je účel funkce,
+- co AI neumí nebo nesmí slibovat,
+- kdy se zapojuje člověk,
+- jaká data se používají,
+- jak lze chybu nahlásit nebo výstup obejít.
+
+Příklad mikrocopy:
+
+```text
+Tento asistent pomáhá najít odpovědi v dokumentaci. Nevidí vaše fakturační údaje ani soukromé dokumenty. U smluvních, bezpečnostních nebo fakturačních dotazů vás přepojí na člověka.
+```
+
+Tohle je lepší než marketingové „Naše AI vám magicky pomůže se vším“. Magie patří do pohádek. V SaaS patří do incident reportu.
+
+## GPAI povinnosti sleduj hlavně přes dodavatele
+
+Pokud používáš obecný model od dodavatele, sleduj, jestli ti poskytuje informace potřebné pro navazující použití: omezení modelu, vhodné a nevhodné použití, dokumentaci, bezpečnostní poznámky, změny modelů a podmínky zpracování dat. Evropská komise u obecných modelů uvádí povinnosti poskytovatelů od 2. srpna 2025, včetně technické dokumentace, informací pro downstream poskytovatele, copyright policy a shrnutí trénovacích dat ([Commission: GPAI provider obligations](https://digital-strategy.ec.europa.eu/en/faqs/guidelines-obligations-general-purpose-ai-providers)).
+
+Malý SaaS tým typicky nebude poskytovatel obecného modelu. Ale bude downstream tým, který potřebuje rozumět tomu, na čem staví. Do vendor registru si proto přidej:
+
+- jaký model nebo službu používáš,
+- jestli dodavatel zveřejňuje dokumentaci k omezením,
+- zda se vstupy používají k trénování nebo zlepšování služby,
+- kde se data zpracovávají,
+- jak se řeší subprocesory,
+- jak se oznamují významné změny modelu,
+- jaký je exit plán při změně podmínek.
+
+Privacy-first pohled: pokud dodavatel neumí vysvětlit data, retenci a změny modelu, není to jen právní nejistota. Je to produktové riziko v hezkém UI.
+
+## AI inventory aktualizuj při změně funkce, ne jednou ročně
+
+AI evidence zastará rychleji než screenshot homepage v pitch decku. Aktualizuj ji při každé změně, která mění účel, data, model, autonomii nebo dopad.
+
+Spouštěče revize:
+
+- nový AI nástroj v týmu,
+- nová AI funkce pro zákazníky,
+- změna modelu nebo dodavatele,
+- rozšíření vstupních dat,
+- přechod z lidské kontroly na automatické provedení,
+- použití AI v citlivějším kontextu,
+- incident, stížnost nebo podezření na chybný výstup,
+- nový právní nebo smluvní požadavek zákazníka.
+
+Jednou měsíčně stačí projít změny a označit, co vyžaduje hlubší posouzení. Nesnaž se dokazovat, že všechno je bez rizika. Snaž se vědět, kde riziko leží a kdo ho vlastní.
+
+## Checklist: AI inventory bez paniky
+
+- [ ] Každé AI použití má popsaný účel, vlastníka a uživatele výstupu.
+- [ ] Je jasné, zda AI jen doporučuje, nebo sama provádí akci.
+- [ ] U každého použití je popsaný vstup dat, výstup a zakázané použití.
+- [ ] Zákazník pozná, kdy komunikuje s AI nebo vidí AI výstup v relevantním kontextu.
+- [ ] Citlivé oblasti mají lidskou kontrolu a bezpečný fallback.
+- [ ] Vendor registr obsahuje AI dodavatele, region, retenci, subprocesory a exit plán.
+- [ ] Prompt, logy a testovací data neobsahují secrets, platební údaje ani zbytečné osobní údaje.
+- [ ] Existuje způsob, jak nahlásit chybný nebo škodlivý AI výstup.
+- [ ] AI inventory se aktualizuje při změně účelu, modelu, dat nebo autonomie.
+- [ ] Právní povinnosti se ověřují ze zdrojů, ne z pocitu v diskusi.
+
+## Mini šablona AI inventory karty
+
+```markdown
+# AI inventory karta: [název použití]
+
+## Účel
+- Jakou práci AI pomáhá udělat:
+- Pro koho:
+- Co záměrně nedělá:
+
+## Role a odpovědnost
+- Vlastník v týmu:
+- Role firmy: interní uživatel / nasazující / poskytovatel funkce / integrátor
+- Dodavatel / model:
+- Datum posledního ověření dodavatele:
+
+## Data
+- Vstupy:
+- Výstupy:
+- Zakázaná data:
+- Retence vstupů a výstupů:
+- Region / smluvní režim:
+
+## Dopad a kontrola
+- Kdo vidí výstup:
+- Provádí AI akci automaticky? ano/ne
+- Lidská kontrola:
+- Fallback bez AI:
+- Jak se hlásí chyba:
+
+## Transparentnost
+- Kde uživatel vidí informaci o AI:
+- Krátké vysvětlení účelu:
+- Limity sdělené uživateli:
+
+## Revize
+- Spouštěč další revize:
+- Datum další kontroly:
+- Otevřené otázky:
+```
+
+## Zdroje
+
+- EUR-Lex: Regulation (EU) 2024/1689, Artificial Intelligence Act, včetně dat účinnosti a postupné použitelnosti: https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=OJ%3AL_202401689
+- European Commission: Navigating the AI Act — přehled rolí a postupné použitelnosti pravidel: https://digital-strategy.ec.europa.eu/en/faqs/navigating-ai-act
+- European Commission: Guidelines on transparency obligations for providers and deployers of AI systems under Article 50: https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems
+- European Commission: Guidelines on obligations for General-Purpose AI providers: https://digital-strategy.ec.europa.eu/en/faqs/guidelines-obligations-general-purpose-ai-providers
+- European Commission: Transparency obligations under Article 50 of the AI Act — otázky a odpovědi: https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act
+
 # Pracovní log
+- 2026-10-01: Doplněna příloha „AI Act inventory bez paniky a papírového divadla“ s praktickým rozlišením rolí, účelů, autonomie, transparentnosti, GPAI dodavatelů, revizních spouštěčů, checklistem, vyplnitelnou AI inventory kartou a ověřenými zdroji Evropské komise a EUR-Lex.
+
 
 - 2026-10-01: Doplněna příloha „Cenové experimenty bez manipulace a datového přestřelu“ s praktickým postupem pro pricing testy, férovou segmentací, privacy-first měřením, pricing FAQ, ukončením experimentu, checklistem a vyplnitelnou experiment kartou.
 
