@@ -24437,9 +24437,9 @@ Když odpovědi nejsou jasné, drž klíče blíž u sebe. Pohodlný dashboard n
 - GitHub: [Secret Protection](https://github.com/security/advanced-security/secret-protection)
 - NIST CSRC: [Key Management Guidelines](https://csrc.nist.gov/projects/key-management/key-management-guidelines)
 
-# Příloha: Export a mazání účtu bez datového bludiště
+# Příloha: DSR workflow a mazání účtu bez datového bludiště
 
-Export dat a mazání účtu jsou funkce, které malé SaaS týmy často odkládají, protože „to přece zatím nikdo nechtěl“. Jenže přesně v tom je past. Když první žádost přijde ve chvíli, kdy je zákazník naštvaný, právník má otevřený kalendář a support hledá data ručně v databázi, z jednoduchého procesu je najednou archeologická expedice s přilbou a nervózním CFO v pozadí.
+DSR workflow, export dat a mazání účtu jsou funkce, které malé SaaS týmy často odkládají, protože „to přece zatím nikdo nechtěl“. Jenže přesně v tom je past. Když první žádost přijde ve chvíli, kdy je zákazník naštvaný, právník má otevřený kalendář a support hledá data ručně v databázi, z jednoduchého procesu je najednou archeologická expedice s přilbou a nervózním CFO v pozadí.
 
 Privacy-first produkt má umět dvě věci bez dramatu: dát člověku srozumitelnou kopii relevantních dat a bezpečně ukončit vztah tam, kde už data nejsou potřeba. Neznamená to smazat vše jedním tlačítkem bez přemýšlení. Znamená to vědět, která data patří do exportu, která se mají anonymizovat, která musí zůstat kvůli zákonné povinnosti a jak to vysvětlit lidsky.
 
@@ -24620,7 +24620,7 @@ Prakticky: udržuj tabulku nebo log s minimálními tombstone záznamy typu `del
 
 # Pracovní log
 
-- 2026-10-01: Doplněna příloha „Export a mazání účtu bez datového bludiště“ s rozlišením produktového exportu, DSR balíčku a přenositelnosti, bezpečným mazacím workflow, výjimkami pro zákonné povinnosti, propagací do subprocesorů, pravidly pro zálohy, checklistem, šablonou karty a ověřenými zdroji GDPR, Evropské komise, EDPB a OWASP.
+- 2026-10-01: Doplněna příloha „DSR workflow a mazání účtu bez datového bludiště“ jako hlubší navazující postup k uživatelským žádostem, DSR balíčku, přenositelnosti, bezpečnému mazacímu workflow, výjimkám pro zákonné povinnosti, subprocesorům, zálohám, checklistu a ověřeným zdrojům GDPR, Evropské komise, EDPB a OWASP.
 - 2026-10-01: Doplněna příloha „API klíče a tajemství bez úniku do repozitáře“ s inventářem secretů, principem nejmenších oprávnění, secret scanningem, rotací, bezpečným logováním, evropským provozem, checklistem a vyplnitelnou secret kartou.
 - 2026-10-01: Doplněna příloha „Přihlášení, relace a zařízení bez digitálního stalkingu“ se session cookies, timeouty, reautentizací před citlivými akcemi, přehledem zařízení, ochranou proti enumeraci účtů, bezpečnostními logy, checklistem, session kartou a ověřenými zdroji OWASP a NIST.
 - 2026-10-01: Rozšířena příloha „Admin rozhraní bez superuživatelského průšvihu“ o provozní test session, MFA a admin API, negativní autorizační scénáře, multitenant kontrolu objektů a ověřené zdroje OWASP a NIST.
