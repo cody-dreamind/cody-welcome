@@ -26838,7 +26838,7 @@ Privacy-first AI integrace často znamená méně dat, menší kontext a jasněj
 - ENISA — Supply Chain Cybersecurity Good Practices: https://www.enisa.europa.eu/publications/good-practices-for-supply-chain-cybersecurity
 - OWASP Third Party Javascript Management Cheat Sheet — práce s riziky skriptů třetích stran: https://cheatsheetseries.owasp.org/cheatsheets/Third_Party_Javascript_Management_Cheat_Sheet.html
 
-# Příloha: Přístupová práva bez sdílených účtů a věčného admina
+# Příloha: Lifecycle účtů bez sdílených hesel a věčného admina
 
 Přístupová práva jsou nudná jen do chvíle, než bývalý dodavatel pořád vidí produkční administraci, marketingový účet používá společné heslo v chatu a junior má možnost smazat zákaznická data, protože „to tak bylo rychlejší nastavit“. V malém týmu se podobné věci nestávají kvůli zlé vůli. Stávají se proto, že přístupy rostou organicky, zatímco odpovědnost zůstane někde mezi tabulkou, Slackem a pamětí jednoho člověka.
 
@@ -26957,7 +26957,7 @@ Doporučený rytmus:
 
 Revize není jen klikání v seznamu uživatelů. U každého přístupu se zeptej: je pořád potřeba, odpovídá roli, má ownera, má MFA, je auditovatelný a nezůstal po starém projektu?
 
-## Checklist: přístupová práva bez věčného admina
+## Checklist: lifecycle účtů bez věčného admina
 
 - [ ] Máme inventář kritických systémů a jejich ownerů?
 - [ ] Má každý člověk osobní účet místo sdíleného přihlášení?
@@ -27025,7 +27025,7 @@ Revize není jen klikání v seznamu uživatelů. U každého přístupu se zept
 - GDPR, článek 32 — bezpečnost zpracování a vhodná technická a organizační opatření: https://eur-lex.europa.eu/eli/reg/2016/679/oj
 
 # Pracovní log
-- 2026-10-01: Doplněna příloha „Přístupová práva bez sdílených účtů a věčného admina“ s inventářem kritických systémů, rolovým modelem podle práce, least privilege rutinou, pravidly pro osobní účty, dočasné přístupy, offboarding, revize, checklistem, přístupovou maticí a ověřenými zdroji OWASP, NIST, EDPB a GDPR.
+- 2026-10-01: Doplněna příloha „Lifecycle účtů bez sdílených hesel a věčného admina“ s inventářem kritických systémů, rolovým modelem podle práce, least privilege rutinou, pravidly pro osobní účty, dočasné přístupy, offboarding, revize, checklistem, přístupovou maticí a ověřenými zdroji OWASP, NIST, EDPB a GDPR.
 
 - 2026-10-01: Doplněna příloha „Vendor review bez slepé důvěry v hezké logo“ s inventářem dodavatelů, rozdělením podle dopadu, datovou minimalizací, DPA/subprocesory, technickými hranicemi, exit plánem, zvláštní kontrolou AI dodavatelů, checklistem, vendor kartou a ověřenými zdroji GDPR, EDPB, Evropské komise, ENISA a OWASP.
 
