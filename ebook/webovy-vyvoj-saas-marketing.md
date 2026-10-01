@@ -24618,7 +24618,208 @@ Prakticky: udržuj tabulku nebo log s minimálními tombstone záznamy typu `del
 - OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 
 
+# Příloha: Monitoring a observabilita bez datového vysavače
+
+Monitoring má odpovědět na jednoduchou otázku: funguje služba tak, jak má, a dokážeme rychle zjistit proč ne? Nemá se z něj stát vedlejší CRM, bezpečnostní šuplík plný osobních údajů ani nekonečný datový rybník, kam se hází všechno „pro jistotu“. To „pro jistotu“ je obvykle jen odložený incident s hezčím názvem.
+
+Privacy-first observabilita neznamená slepotu. Znamená měřit stav systému, kvalitu uživatelské cesty a bezpečnostní signály tak, aby šlo službu provozovat odpovědně, ale bez zbytečného kopírování obsahu požadavků, identifikátorů, formulářových polí, session tokenů nebo zákaznických dat do logů.
+
+> Codyho komentář: Nejhorší log není ten, který nic neřekne. Nejhorší log je ten, který vypadá užitečně, ale při prvním incidentu zjistíš, že obsahuje e-maily, tokeny, IP adresy, payloady a kus fakturační historie. Gratuluju, právě sis vyrobil druhou databázi bez governance.
+
+## Nejdřív odděl tři typy signálů
+
+Pro malý web nebo SaaS si monitoring rozděl na tři vrstvy. Každá má jiný účel, jinou retenci a jinou míru detailu.
+
+1. **Dostupnost a výkon** — uptime, latence, HTTP statusy, chybovost, velikost front, doba odpovědi databáze.
+2. **Aplikační události** — dokončená registrace, vytvořený projekt, odeslaný formulář, chyba validace, selhaná platba.
+3. **Bezpečnostní audit** — přihlášení, změna hesla, přidání člena týmu, změna oprávnění, export dat, mazání účtu, změna fakturace.
+
+Když tyto vrstvy smícháš, vznikne chaos. Uptime logy nepotřebují znát obsah formuláře. Produktová metrika nepotřebuje celé IP adresy. Bezpečnostní audit nesmí být stejný stream jako debug log z vývoje. Každá vrstva má mít vlastní pravidla: co zapisujeme, proč, kdo to vidí, jak dlouho to držíme a jak to mažeme.
+
+Praktické minimum pro začátek:
+
+- **Dostupnost:** endpoint `/health`, externí kontrola z evropského regionu, alert při opakovaném selhání.
+- **Výkon:** percentily latence pro hlavní routy, ne plný obsah requestů.
+- **Chyby:** typ chyby, služba, verze aplikace, request ID, anonymizovaný kontext.
+- **Audit:** kdo provedl citlivou akci, jaký objekt se změnil, kdy a s jakým výsledkem.
+- **Retence:** krátká pro technické debug logy, delší jen pro bezpečnostní audit a zákonné/provozní důvody.
+
+## Request ID je lepší než payload román
+
+Nejlepší kamarád malého týmu je korelační ID. Každý příchozí request dostane náhodné `request_id`, které se propíše do aplikačních logů, chyb, interních volání a odpovědi pro support. Když zákazník napíše „nejde mi vytvořit projekt“, support si neřekne o screenshot celé konzole a heslo ke štěstí. Požádá o čas chyby nebo zkopíruje chybové ID.
+
+Co typicky logovat:
+
+```text
+request_id=01K... route=/api/projects method=POST status=422 duration_ms=84 user_scope=authenticated tenant_id_hash=8d23 error_code=validation_failed app_version=2026.10.1
+```
+
+Co typicky nelogovat:
+
+```text
+email=jana@example.com token=eyJ... project_name="Akvizice klientů 2027" message="text z formuláře" cookies="..." authorization="Bearer ..."
+```
+
+Hashované nebo pseudonymizované identifikátory nejsou kouzelný plášť neviditelnosti. Často pořád půjde o osobní údaj, hlavně když je umíš spojit s účtem. Jejich hodnota je v omezení dopadu úniku a v běžné práci týmu, ne ve vymazání odpovědnosti.
+
+## Loguj rozhodnutí systému, ne soukromý obsah
+
+U SaaS aplikací často stačí vědět, že událost nastala, s jakým výsledkem a v jakém kontextu rizika. Nemusíš ukládat celý obsah toho, co uživatel napsal.
+
+Příklad pro formulář:
+
+- dobrý signál: `form_submit_failed`, `missing_required_field`, `invalid_email_format`, `spam_score_bucket=high`, `request_id`, `form_id`, `app_version`,
+- špatný signál: celé jméno, e-mail, telefon, zpráva, user agent, IP adresa a ještě payload do externího error trackingu.
+
+Příklad pro AI funkci:
+
+- dobrý signál: `ai_summary_created`, délka vstupu v bucketu, použitý interní režim, délka výstupu v bucketu, chybový kód,
+- špatný signál: celý prompt, zákaznický dokument, interní komentáře uživatele, přiložené soubory.
+
+OWASP Logging Cheat Sheet výslovně upozorňuje na potřebu vyloučit citlivá data z logů a počítat s tím, že logy mohou obsahovat osobní nebo jinak citlivé informace ([OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). To je přesně důvod, proč má mít logging návrh stejně jako databázové schéma. Ne až potom, co si někdo všimne, že error tracking obsahuje resetovací tokeny.
+
+## Alerty mají chránit spánek, ne vyrábět paniku
+
+Alert není notifikace. Alert je závazek, že někdo má vstát, rozhodnout a případně jednat. Když každá chyba posílá zprávu do chatu, tým se naučí ignorovat všechno. A v ten moment monitoring selhal, i když technicky posílá krásné červené bublinky.
+
+Rozděl upozornění na tři úrovně:
+
+1. **Page / okamžitá reakce:** služba je nedostupná, platby nefungují, přihlášení padá, mazací job se chová rizikově.
+2. **Pracovní fronta:** zvýšená chybovost, pomalejší odpovědi, opakované validační chyby, rozbitý webhook.
+3. **Týdenní review:** trend latence, top chybové kódy, pomalé routy, místa s ručním zásahem supportu.
+
+Pro každý alert napiš odpověď na tři otázky:
+
+- Co přesně je rozbité?
+- Jak poznám dopad na zákazníky?
+- Jaký je první krok nápravy?
+
+Pokud alert neumí odpovědět ani na jednu, není to alert. Je to dramatický ping. A dramatické pingy patří do divadla, ne do produkce.
+
+## CSP reporty a browser signály ber jako hluk s hodnotou
+
+Bezpečnostní hlavičky jako Content Security Policy mohou posílat reporty o porušení pravidel. MDN popisuje `report-to` jako direktivu, která říká prohlížeči, kam má posílat CSP reporty ([MDN: CSP report-to](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/report-to)). To je užitečné, ale pozor: reporty mohou obsahovat URL, části cesty, referrer nebo informace o rozšířeních a prostředí uživatele.
+
+Privacy-first postup:
+
+- přijímej CSP reporty na vlastní endpoint nebo důvěryhodnou službu s jasnou datovou hranicí,
+- normalizuj je na typ porušení, zdrojovou direktivu, doménu a verzi aplikace,
+- zahazuj query parametry a části URL, které mohou nést tokeny nebo osobní data,
+- drž krátkou retenci surových reportů, pokud je vůbec potřebuješ,
+- pro dlouhodobé trendy ukládej agregaci, ne jednotlivé prohlížečové stopy.
+
+CSP report je diagnostika, ne další analytický profil návštěvníka. Když z něj uděláš behaviorální sledování, privacy-first kabát právě dostal díru.
+
+## Retence: debug log není archiv
+
+Logy mají životní cyklus. Nejsou to archeologické artefakty, které musíme obdivovat za pět let. Provozní debug logy často stačí držet dny až týdny. Bezpečnostní audit může potřebovat delší retenci podle rizika, smluv a právních povinností. Fakturační a účetní data mají vlastní pravidla mimo běžnou observabilitu.
+
+Praktická retenční tabulka:
+
+| Typ signálu | Doporučená logika retence | Poznámka |
+|---|---:|---|
+| Debug logy | krátce | pouze pro řešení aktuálních chyb |
+| Error eventy | středně | bez payloadů a tokenů |
+| Dostupnost a metriky | delší agregace | trend stačí agregovaný |
+| Bezpečnostní audit | podle rizika | omezený přístup, jasný účel |
+| Billing audit | podle účetních potřeb | oddělit od produktového monitoringu |
+| CSP reporty | krátce / agregovat | zahazovat citlivé URL části |
+
+EDPB v pokynech k právu na přístup vysvětluje, že právo subjektu údajů se týká osobních údajů, které se o něm zpracovávají, včetně odvozených údajů podle kontextu ([EDPB Guidelines 01/2022 — Right of access](https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en)). Praktický závěr: když do logů ukládáš osobní údaje, musíš je umět najít, vysvětlit a řešit v rámci práv subjektů údajů. Minimalizace není byrokratická poezie. Je to levnější provoz.
+
+## Evropský provoz: logy nenechávej utéct bokem
+
+Mnoho týmů řeší EU hosting pro databázi, ale logy pošle do první pohodlné cloudové služby mimo kontrolu. Tím vznikne paradox: produkční data hlídáš, ale kopie chyb, URL, IP adres a payloadů proudí vedlejšími dveřmi pryč.
+
+Před výběrem observability nástroje se ptej:
+
+- Kde jsou data fyzicky uložená?
+- Lze zvolit evropský region a smluvně ho udržet?
+- Co přesně posílá SDK automaticky?
+- Jde vypnout sběr PII, breadcrumbs, request bodies a headers?
+- Jak funguje mazání projektu, export a retence?
+- Kdo z týmu a dodavatele má přístup k surovým logům?
+- Umíme provozovat minimální self-hosted variantu, kdyby nástroj přestal vyhovovat?
+
+NIST SP 800-92 popisuje log management jako disciplínu zahrnující generování, přenos, ukládání, analýzu i likvidaci logů ([NIST SP 800-92](https://csrc.nist.gov/pubs/sp/800/92/final)). Pro evropský privacy-first provoz k tomu přidej ještě otázku: kde logy končí a jestli se z nich nestává nejcitlivější systém ve firmě.
+
+## Checklist: observabilita bez datového vysavače
+
+- [ ] Má každá logovací vrstva jasný účel?
+- [ ] Používáme `request_id` místo ukládání celých payloadů?
+- [ ] Máme seznam polí, která se nikdy nesmí logovat?
+- [ ] Maskujeme nebo zahazujeme tokeny, cookies, autorizační hlavičky a resetovací odkazy?
+- [ ] Logujeme bezpečnostní audit odděleně od debug logů?
+- [ ] Má každý alert vlastní runbook nebo první krok nápravy?
+- [ ] Umíme vypnout hlučný alert bez ztráty kritického monitoringu?
+- [ ] Máme retenční pravidla pro debug, error, audit a billing logy?
+- [ ] Víme, kde observability data fyzicky leží?
+- [ ] Umíme odpovědět na DSR dotaz, pokud logy obsahují osobní údaje?
+- [ ] Neodesíláme request bodies do externích služeb bez výslovného důvodu?
+- [ ] Agregujeme dlouhodobé trendy místo skladování surových stop?
+
+## Mini šablona observability karty
+
+```markdown
+# Observability karta: [produkt / služba / komponenta]
+
+## Účel
+- Co potřebujeme zjistit:
+- Kdo signál používá:
+- Rozhodnutí, které podle něj děláme:
+
+## Signály
+- Dostupnost:
+- Výkon:
+- Chyby:
+- Bezpečnostní audit:
+- Produktové události:
+
+## Co nikdy nelogujeme
+- Tokeny:
+- Cookies:
+- Request bodies:
+- Osobní údaje:
+- Zákaznický obsah:
+
+## Korelace
+- Request ID:
+- Tenant / workspace identifikátor:
+- Verze aplikace:
+- Chybové kódy:
+
+## Retence
+- Debug:
+- Error eventy:
+- Audit:
+- Agregace:
+
+## Přístupy
+- Kdo vidí surové logy:
+- Kdo vidí agregace:
+- Kdo může exportovat:
+- Kdo může mazat:
+
+## Dodavatelé
+- Nástroj:
+- Region:
+- DPA / smlouva:
+- Vypnuté automatické sběry:
+- Exit plán:
+```
+
+## Zdroje
+
+- OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- OWASP Developer Guide: [Implement Security Logging and Monitoring](https://devguide.owasp.org/en/04-design/02-web-app-checklist/09-logging-monitoring/)
+- NIST CSRC: [SP 800-92 — Guide to Computer Security Log Management](https://csrc.nist.gov/pubs/sp/800/92/final)
+- MDN Web Docs: [Content-Security-Policy: report-to directive](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/report-to)
+- EDPB: [Guidelines 01/2022 on data subject rights — Right of access](https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en)
+
+
 # Pracovní log
+
+- 2026-10-01: Doplněna příloha „Monitoring a observabilita bez datového vysavače“ s rozdělením signálů, bezpečným request ID, pravidly pro nelogování payloadů a tokenů, alerty, CSP reporty, retencí, evropským provozem, checklistem a observability kartou podloženou zdroji OWASP, NIST, MDN a EDPB.
 
 - 2026-10-01: Doplněna příloha „DSR workflow a mazání účtu bez datového bludiště“ jako hlubší navazující postup k uživatelským žádostem, DSR balíčku, přenositelnosti, bezpečnému mazacímu workflow, výjimkám pro zákonné povinnosti, subprocesorům, zálohám, checklistu a ověřeným zdrojům GDPR, Evropské komise, EDPB a OWASP.
 - 2026-10-01: Doplněna příloha „API klíče a tajemství bez úniku do repozitáře“ s inventářem secretů, principem nejmenších oprávnění, secret scanningem, rotací, bezpečným logováním, evropským provozem, checklistem a vyplnitelnou secret kartou.
