@@ -24819,7 +24819,205 @@ NIST SP 800-92 popisuje log management jako disciplínu zahrnující generován�
 - EDPB: [Guidelines 01/2022 on data subject rights — Right of access](https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en)
 
 
+# Příloha: Trialy a demo workspace bez sběru navíc
+
+Trial nebo demo workspace má člověku ukázat hodnotu produktu dřív, než po něm chceš závazek, schůzku, kartu nebo firemní datový kufr. Když se trial změní na datovou past — „nahrajte celý CRM export, ať uvidíte, jestli to funguje“ — možná zvýšíš počet aktivací, ale zároveň zvyšuješ riziko, support chaos a nedůvěru. Privacy-first trial dělá opak: ukáže produkt na minimálním, bezpečném a dobře vysvětleném vzorku.
+
+Dobré demo není chudší verze produktu. Je to řízený průchod hodnotou. Má připravená data, jasné hranice, bezpečný reset a férové vysvětlení, co se stane po konci zkušební doby.
+
+> Codyho komentář: Pokud SaaS potřebuje k prvnímu „aha momentu“ kompletní zákaznickou databázi, často nemá onboarding. Má importní hladomor s hezkým spinnerem.
+
+## Nejdřív odděl trial, sandbox a demo režim
+
+Tyhle tři věci se v praxi často hází do jednoho pytle, ale mají jiné riziko.
+
+- **Trial** je časově omezený přístup ke skutečnému produktu. Uživatel může vytvářet vlastní data a rozhoduje se, jestli bude platit.
+- **Sandbox** je izolované prostředí pro testování integrací, API nebo procesů. Data nesmí ovlivnit produkci a ideálně se pravidelně mažou.
+- **Demo režim** je předpřipravený scénář s ukázkovými daty. Cílem je rychle ukázat hodnotu bez importu osobních údajů.
+
+Pro malý SaaS je nejlepší výchozí kombinace: veřejné nebo řízené demo pro pochopení hodnoty, trial pro vlastní práci a sandbox pro technické zákazníky. Nemusíš stavět všechno najednou. Stačí si pojmenovat, co přesně nabízíš, aby se z trialu nestal poloprodukční chaos.
+
+Praktické pravidlo: pokud uživatel může pozvat kolegy, propojit integraci nebo importovat data, už to není obyčejné demo. Je to provozní funkce s bezpečnostními a privacy dopady.
+
+## Demo data mají být syntetická, ne „anonymizovaná tak nějak“
+
+Nejbezpečnější demo data nejsou data bývalého zákazníka s přepsanými jmény. Jsou syntetická: vymyšlená od začátku tak, aby vypadala realisticky, ale neodkazovala na konkrétní lidi, firmy, e-maily, adresy nebo skutečné obchodní případy.
+
+Špatně:
+
+- export reálného zákazníka, kde se jen smaže sloupec `email`,
+- screenshoty produkčního účtu s rozmazanými jmény,
+- „demo“ workspace vytvořený z interních dat firmy,
+- vzorové faktury se skutečnými údaji dodavatele,
+- chatové konverzace převzaté ze supportu a lehce upravené.
+
+Lépe:
+
+- vymyšlené firmy s jasně fiktivními názvy,
+- ukázkové e-maily na doménách vyhrazených pro příklady,
+- realistické, ale smyšlené objednávky, tickety, projekty nebo metriky,
+- fixní dataset verzovaný v repozitáři nebo seed skriptu,
+- jasné označení „ukázková data“ přímo v UI.
+
+Demo dataset si napiš jako produktový obsah, ne jako technickou náhodu. Má ukazovat hlavní scénáře: nový zákazník, rizikový záznam, dokončený úkol, chybový stav, export, notifikaci, roli s omezeným přístupem. Když demo data neukazují hraniční případy, trial pak vypadá lépe než realita — a to je marketingový bumerang s ostrými hranami.
+
+## Import produkčních dat nech až po jasném „aha momentu“
+
+U trialu si napiš první hodnotnou akci, kterou člověk zvládne bez importu citlivých dat. Například:
+
+- vyzkoušet checklist na ukázkovém projektu,
+- vytvořit jednu testovací kampaň bez odeslání,
+- projít demo dashboard s vysvětlením metrik,
+- přidat ručně tři testovací položky,
+- napojit sandbox API klíč místo produkční integrace.
+
+Import vlastních dat nabídni až ve chvíli, kdy uživatel chápe přínos i riziko. U importu napiš:
+
+- jaká data potřebuješ a proč,
+- co není nutné importovat,
+- kde se data uloží,
+- kdo k nim má přístup,
+- jak dlouho zůstanou po konci trialu,
+- jak je uživatel smaže nebo exportuje.
+
+Tohle není jen právní hygiena. Je to konverzní výhoda. Rozhodovatel v B2B často nechce „rychle všechno propojit“. Chce vědět, že produkt nebude další datová černá díra, kterou pak někdo bude vysvětlovat bezpečnostnímu týmu.
+
+## Trial bez platební karty není vždy slabší
+
+Platební karta před trialem může filtrovat zvědavce, ale taky odradí lidi, kteří produkt teprve interně zkoumají. Privacy-first pohled není „nikdy nechtěj kartu“. Je to: nechtěj víc závazků, než odpovídá hodnotě a riziku trialu.
+
+Použij jednoduché rozhodovací pravidlo:
+
+- Pokud trial spouští drahé operace, placené AI požadavky nebo externí odesílání, potřebuje limity, schválení nebo kartu.
+- Pokud trial jen ukazuje workflow, demo data a ruční práci, karta často není nutná.
+- Pokud prodáváš enterprise produkt, lepší než karta může být řízené demo s jasným bezpečnostním briefem.
+
+Když kartu chceš, řekni to férově: kdy začne platba, jak přijde upozornění před koncem trialu a kde se dá zrušit. Tmavý vzor typu „zapomněl jsi zrušit, cha-ching“ možná vydělá jednou. Důvěru sežere napořád.
+
+## Trial musí mít bezpečný konec
+
+Konec trialu je produktový moment, ne účetní nehoda. Připrav ho předem.
+
+Po expiraci trialu rozhodni:
+
+- jestli účet zůstane read-only,
+- jak dlouho držíš data,
+- jestli uživatel dostane export,
+- kdy se data smažou,
+- jestli se mažou i pozvánky, dočasné tokeny a integrace,
+- jak informuješ vlastníka workspace.
+
+Dobrá praxe pro malý SaaS:
+
+1. Sedm dní před koncem připomeň hodnotu a další možnosti.
+2. V den konce přepni workspace do bezpečného režimu, ne do chaosu.
+3. Nabídni export nebo smazání dat.
+4. Po retenční lhůtě smaž trial data automaticky.
+5. Zapiš interní událost bez ukládání zbytečného obsahu.
+
+U B2B účtů počítej s tím, že trial mohl založit jeden člověk, ale rozhoduje někdo jiný. Komunikace má být jasná, přeposlatelná a bez manipulace.
+
+## Demo workspace izoluj od produkce
+
+Demo režim nesmí být speciální admin účet v produkci, kde „snad nikdo nic nerozbije“. Izolace chrání zákazníky i tebe.
+
+Minimální pravidla:
+
+- demo workspace nemá přístup k reálným zákaznickým datům,
+- demo e-maily se neposílají skutečným lidem,
+- demo webhooky míří na testovací endpoint,
+- demo API klíče mají jasné označení a omezený rozsah,
+- demo akce nejdou omylem promítnout do fakturace,
+- reset demo prostoru je automatický a auditovatelný.
+
+Pokud používáš sdílený demo účet pro obchod, nastav mu vlastní role a zákaz akcí, které mění citlivé nastavení. Obchodník má ukázat hodnotu, ne náhodou spustit integraci do produkčního účetnictví. Ano, i tohle se umí stát. Software je kreativní tvor, když ho necháš bez vodítka.
+
+## Měř aktivaci bez nahrávání osobních příběhů
+
+Trial potřebuje měření, jinak nevíš, kde lidé odpadávají. Ale měř události, ne obsah.
+
+Stačí například:
+
+- `trial_created`,
+- `demo_dataset_opened`,
+- `first_project_created`,
+- `integration_sandbox_connected`,
+- `export_requested`,
+- `trial_expired`,
+- `workspace_deleted`.
+
+Vyhni se metrikám typu „ulož celý název projektu, popis ticketu a text poznámky, protože se to může hodit“. Nehodí. Jen sis vyrobil citlivější analytiku, složitější mazání a větší incidentový dopad.
+
+U každé trial metriky napiš vlastníka, účel a navazující rozhodnutí. Když metrika nemá rozhodnutí, je to suvenýr, ne řízení produktu.
+
+## Checklist: trialy bez sběru navíc
+
+- Máme jasně oddělený trial, sandbox a demo režim.
+- Demo data jsou syntetická a označená jako ukázková.
+- První hodnotná akce nevyžaduje import citlivých produkčních dat.
+- Import vysvětluje účel, rozsah, uložení, přístup a retenci.
+- Trial má limity pro drahé, externí nebo rizikové akce.
+- Konec trialu má read-only režim, export/smazání a retenční pravidlo.
+- Demo workspace je izolovaný od produkčních zákaznických dat.
+- Demo e-maily, webhooky a API klíče nemíří na reálné příjemce bez výslovného kroku.
+- Aktivační analytika měří události, ne obsah uživatelských dat.
+- Support ví, co může v trial účtu vidět a co už potřebuje schválení.
+
+## Mini šablona trial karty
+
+```markdown
+# Trial karta: [produkt / tarif / segment]
+
+## Účel
+- Komu trial slouží:
+- Jaký „aha moment“ má ukázat:
+- Co trial záměrně neřeší:
+
+## Demo data
+- Typ datasetu:
+- Kdo dataset vlastní:
+- Jak se resetuje:
+- Jak je v UI označený:
+
+## Data zákazníka
+- Jaká data může uživatel vložit:
+- Co není potřeba:
+- Kde se data uloží:
+- Kdo k nim má přístup:
+
+## Limity
+- Délka trialu:
+- Limity pro AI / e-maily / API / exporty:
+- Akce vyžadující potvrzení:
+
+## Konec trialu
+- Read-only režim:
+- Export:
+- Mazání:
+- Retence:
+- Komunikace:
+
+## Měření
+- Aktivační události:
+- Metriky bez obsahu:
+- Kdo data reviduje:
+
+## Privacy poznámka pro UI
+- Krátké vysvětlení datových hranic:
+- Odkaz na podrobnosti:
+```
+
+## Zdroje
+
+- GDPR, čl. 5 — zásady zpracování včetně minimalizace dat: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679
+- GDPR, čl. 25 — ochrana údajů záměrně a standardně: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679
+- Evropská komise: povinnosti organizací podle GDPR a odkaz na Article 25 / EDPB guidance: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en
+- OWASP Secure Product Design Cheat Sheet — praktický rámec pro bezpečný návrh produktu: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Product_Design_Cheat_Sheet.html
+- OWASP Business Logic Security Cheat Sheet — příklady business logic rizik včetně free trial resetů: https://cheatsheetseries.owasp.org/cheatsheets/Business_Logic_Security_Cheat_Sheet.html
+
 # Pracovní log
+
+- 2026-10-01: Doplněna příloha „Trialy a demo workspace bez sběru navíc“ s rozlišením trialu, sandboxu a demo režimu, pravidly pro syntetická demo data, bezpečný import, konec trialu, izolaci demo workspace, privacy-first měření, checklistem, trial kartou a ověřenými zdroji GDPR, Evropské komise a OWASP.
 
 - 2026-10-01: Doplněn krátký sanity check ke stop stavu malé změny, aby e-book lépe hlídal rozsah úprav a bránil scope creepu.
 - 2026-10-01: Doplněna příloha „Monitoring a observabilita bez datového vysavače“ s rozdělením signálů, bezpečným request ID, pravidly pro nelogování payloadů a tokenů, alerty, CSP reporty, retencí, evropským provozem, checklistem a observability kartou podloženou zdroji OWASP, NIST, MDN a EDPB.
