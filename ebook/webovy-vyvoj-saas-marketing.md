@@ -26651,7 +26651,196 @@ To je věta typu „jídlo chutná jako potravina“. Technicky možná pravda, 
 - OWASP Logging Cheat Sheet — doporučení k logování, vyloučení citlivých dat a likvidaci logů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - OWASP Session Management Cheat Sheet — upozornění, že citlivá session data nepatří do logů: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
 
+# Příloha: Vendor review bez slepé důvěry v hezké logo
+
+Každý SaaS dřív nebo později začne používat cizí služby: hosting, e-mailing, platby, helpdesk, analytiku, AI API, monitoring, CDN, no-code automatizaci nebo nástroj na schůzky. To není selhání. Selhání je teprve chvíle, kdy tým neumí říct, komu data posílá, proč, na jak dlouho a co udělá, když dodavatel zdraží, změní podmínky nebo přestane být vhodný.
+
+Vendor review není korporátní rituál pro tabulkové mnichy. Je to jednoduchý provozní filtr: než pustíš dodavatele k datům, ověříš účel, riziko, smlouvy, technické hranice a exit plán. Privacy-first firma nepotřebuje mít sto stran papírů pro každý favicon generátor, ale musí mít pevná pravidla pro služby, které zpracovávají zákaznická, platební, podpůrná, analytická nebo bezpečnostní data.
+
+> Codyho komentář: „Používají to všichni“ není due diligence. To je startupová verze věty „skočím z mostu, protože tam stojí pěkná landing page“.
+
+## Začni inventářem dodavatelů, ne právním panikařením
+
+První krok je obyčejný seznam. Neřeš hned dokonalý vendor management systém. Otevři tabulku nebo Markdown a sepiš všechny služby, které mají přístup k datům, provozu nebo účtům.
+
+Minimální sloupce:
+
+| Sloupec | Proč existuje |
+| --- | --- |
+| Název dodavatele | Aby tým věděl, o čem mluví. |
+| Účel | Jakou konkrétní práci dodavatel dělá. |
+| Kategorie dat | Jaká data službou protékají. |
+| Role | Zpracovatel, správce, samostatný správce nebo technický dodavatel bez osobních dat. |
+| Země/provoz | Kde se služba provozuje a kde může dojít k přenosu. |
+| Smlouva/DPA | Kde je uložená smlouva o zpracování nebo jiné podmínky. |
+| Owner | Kdo ve firmě službu vlastní. |
+| Riziko | Nízké, střední, vysoké. |
+| Exit plán | Jak službu vypneš nebo nahradíš. |
+| Další revize | Kdy se na ni znovu podíváš. |
+
+U malého týmu je lepší mít hrubý, pravidelně aktualizovaný inventář než krásný compliance nástroj, do kterého nikdo neleze. Důležitá je odpovědnost: každá služba má ownera, důvod existence a revizní datum.
+
+## Rozděl dodavatele podle dopadu
+
+Ne každý dodavatel potřebuje stejnou kontrolu. Ikonková knihovna, která se stáhne při buildu, není stejné riziko jako helpdesk s obsahem tiketů nebo AI služba, do které uživatelé posílají interní dokumenty.
+
+Praktické vrstvy:
+
+- **Nízký dopad:** nástroj nevidí osobní data zákazníků ani produkční přístupy. Příklad: statický generátor ikon, interní diagramovací nástroj bez zákaznických dat.
+- **Střední dopad:** nástroj vidí omezená provozní nebo obchodní data. Příklad: agregovaná analytika, formulářový nástroj, e-mailing se segmenty.
+- **Vysoký dopad:** nástroj vidí zákaznický obsah, přihlašování, platby, podporu, logy, bezpečnostní události nebo produkční infrastrukturu. Příklad: hosting, databáze, helpdesk, platební brána, monitoring, identity provider, AI API pro uživatelský obsah.
+
+Pravidlo pro malé SaaS: vysoký dopad nesmí projít jen proto, že má dodavatel hezkou dokumentaci. Potřebuje technickou kontrolu, smluvní podklad, bezpečnostní minimum a reálný exit.
+
+## Zeptej se na data dřív než na funkce
+
+Nákup nástroje obvykle začíná funkcemi. Privacy-first review začíná daty.
+
+Před schválením si odpověz:
+
+- Jaká data do služby posíláme?
+- Posíláme data ručně, automaticky, přes API, webhook nebo skript v prohlížeči?
+- Vidí služba obsah zpráv, souborů, plateb, podpory nebo jen metadata?
+- Jsou data osobní, citlivá, důvěrná obchodně nebo bezpečnostně významná?
+- Lze rozsah dat zmenšit před odesláním?
+- Má služba vlastní subprocesory a kde jsou uvedení?
+- Umíme exportovat data zpět?
+- Umíme data smazat a ověřit výsledek?
+
+Konkrétní příklad: nástroj na produktovou analytiku nemusí dostávat e-mail, jméno, obsah formuláře ani kompletní URL s tokenem. Často stačí náhodné interní ID, typ účtu, plán, event a čas. Pokud chce produktový tým „pro jistotu“ poslat víc, napiš vedle každého pole rozhodnutí, které díky němu udělá. Pole bez rozhodnutí letí ven.
+
+## DPA a subprocesoři nejsou ozdoba v patičce
+
+Pokud dodavatel zpracovává osobní údaje jménem tvé firmy, potřebuješ mít vyřešenou roli, smluvní základ a podmínky zpracování. GDPR článek 28 popisuje požadavky na vztah správce a zpracovatele včetně toho, že zpracovatel má zpracovávat údaje jen podle doložených pokynů, pomáhat se zabezpečením a nezapojovat dalšího zpracovatele bez splnění podmínek.
+
+Prakticky pro malou firmu:
+
+- stáhni nebo ulož aktuální DPA,
+- poznamenej datum a verzi,
+- zkontroluj seznam subprocesorů,
+- zjisti, jak dodavatel oznamuje změny subprocesorů,
+- ulož odkaz na bezpečnostní dokumentaci,
+- napiš, kdo schválil použití služby a proč.
+
+U služeb mimo EU nebo u přenosů mimo EHP se nedělej, že „cloud je prostě cloud“. Zkontroluj, jak dodavatel řeší mezinárodní přenosy, standardní smluvní doložky a případná doplňková opatření. Když je to pro tvoje riziko příliš neprůhledné, hledej evropskou alternativu nebo změň architekturu tak, aby dodavatel viděl méně dat.
+
+## Technická hranice je stejně důležitá jako smlouva
+
+Smlouva neochrání data, která do služby posíláš zbytečně. Vendor review proto musí končit technickým omezením.
+
+Příklady dobrých hranic:
+
+- API klíč má jen oprávnění, která integrace opravdu potřebuje.
+- Webhook endpoint validuje podpis a odmítá staré nebo opakované požadavky.
+- Export do dodavatele neobsahuje volné poznámky, tokeny, interní komentáře ani celé payloady.
+- Přístup dodavatele do produkce je časově omezený a auditovaný.
+- Testovací integrace používá testovací data, ne kopii produkce.
+- Logování integrace ukládá request ID a stav, ne celé osobní údaje.
+- Skript třetí strany neběží na stránkách, kde se zadávají citlivé údaje, pokud to není nezbytné.
+
+Vendor review bez technického omezení je jen dražší pocit bezpečí. Hezké PDF s certifikací je fajn, ale špatně nastavený API token mu dokáže udělat díru větší než marketingová ambice v pitch decku.
+
+## Exit plán piš při nákupu, ne při požáru
+
+Dodavatel může zdražit, změnit podmínky, přestat vyhovovat privacy standardu, mít incident nebo prostě přestat dávat produktově smysl. Exit plán není pesimismus. Je to pojistka proti vendor lock-inu.
+
+Mini exit plán pro každý významný nástroj:
+
+- kde stáhneme export dat,
+- v jakém formátu export je,
+- co se exportem nepřenese,
+- jak ověříme smazání nebo deaktivaci,
+- jaké integrace přestanou fungovat,
+- kdo komunikuje zákazníkům změnu, pokud je viditelná,
+- jak dlouho můžeme běžet v read-only režimu,
+- jaký je náhradní nástroj nebo ruční fallback.
+
+U vysokého dopadu si exit jednou ročně prakticky vyzkoušej alespoň nanečisto: exportuj vzorek dat, ověř formát, zkontroluj dokumentaci a projdi, co by se muselo změnit v aplikaci. Když se ukáže, že odchod není realistický, je to informace pro produktové rozhodnutí, ne ostuda. Ostuda je zjistit to až v incidentu.
+
+## AI dodavatelé potřebují zvláštní brzdu
+
+AI služby jsou lákavé, protože rychle přidají funkci, která vypadá jako magie. Jenže často pracují s volným textem, dokumenty, interními znalostmi nebo zákaznickým obsahem. Tam nestačí otázka „funguje model dobře?“.
+
+Zeptej se navíc:
+
+- Používá dodavatel vstupy nebo výstupy k tréninku?
+- Lze trénink na zákaznických datech smluvně vypnout?
+- Jak dlouho se ukládají prompty, výstupy a logy?
+- Kdo může obsah kontrolovat kvůli bezpečnosti nebo abuse prevenci?
+- Lze data regionálně omezit?
+- Umíme před odesláním odstranit osobní nebo důvěrné údaje?
+- Má funkce lidskou kontrolu tam, kde výstup může poškodit zákazníka?
+
+Privacy-first AI integrace často znamená méně dat, menší kontext a jasnější hranici. Model nemusí vidět celou historii zákazníka, když stačí anonymizovaný výsek nebo ručně potvrzený souhrn.
+
+## Checklist: vendor review bez slepé důvěry
+
+- [ ] Máme inventář všech dodavatelů s ownerem a účelem?
+- [ ] Víme, které služby zpracovávají osobní, zákaznická, platební, podpůrná nebo bezpečnostní data?
+- [ ] Má každý významný dodavatel určenou rizikovou úroveň?
+- [ ] Máme uloženou DPA nebo jiné relevantní podmínky?
+- [ ] Známe seznam subprocesorů a mechanismus oznámení změn?
+- [ ] Ověřili jsme přenosy mimo EU/EHP a související smluvní opatření?
+- [ ] Posíláme do služby jen data potřebná pro konkrétní rozhodnutí nebo funkci?
+- [ ] Jsou API klíče, webhooky a přístupy omezené podle nejmenších oprávnění?
+- [ ] Máme pro vysoký dopad exportní a exit plán?
+- [ ] Má každý AI dodavatel zvlášť zkontrolované trénování, retenci a lidskou kontrolu?
+- [ ] Revizní datum není „někdy“, ale konkrétní den nebo interval?
+
+## Mini šablona vendor karty
+
+```text
+# Vendor karta: [název služby]
+
+## Účel
+- Proč službu používáme:
+- Interní owner:
+- Alternativa / fallback:
+
+## Data
+- Kategorie dat:
+- Osobní údaje: ano / ne / částečně
+- Zákaznický obsah: ano / ne
+- Bezpečnostní nebo provozní data: ano / ne
+- Minimalizace před odesláním:
+
+## Role a smlouvy
+- Role dodavatele:
+- DPA / podmínky uložené kde:
+- Subprocesoři zkontrolováni dne:
+- Přenos mimo EU/EHP: ano / ne / nejasné
+
+## Technická kontrola
+- API oprávnění:
+- Webhook podpisy / validace:
+- Logování:
+- Přístup do produkce:
+
+## Riziko a revize
+- Riziková úroveň:
+- Schválil:
+- Další revize:
+- Důvod pro vypnutí služby:
+
+## Exit
+- Exportní formát:
+- Co se nepřenese:
+- Postup mazání/deaktivace:
+- Ruční fallback:
+```
+
+## Zdroje
+
+- GDPR, článek 28 — požadavky na zpracovatele a zapojení dalších zpracovatelů: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- EDPB — Guidelines 07/2020 on the concepts of controller and processor in the GDPR: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en
+- Evropská komise — standardní smluvní doložky pro mezinárodní přenosy: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en
+- Evropská komise — pravidla pro mezinárodní přenosy osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection_en
+- ENISA — Supply Chain Cybersecurity Good Practices: https://www.enisa.europa.eu/publications/good-practices-for-supply-chain-cybersecurity
+- OWASP Third Party Javascript Management Cheat Sheet — práce s riziky skriptů třetích stran: https://cheatsheetseries.owasp.org/cheatsheets/Third_Party_Javascript_Management_Cheat_Sheet.html
+
 # Pracovní log
+- 2026-10-01: Doplněna příloha „Vendor review bez slepé důvěry v hezké logo“ s inventářem dodavatelů, rozdělením podle dopadu, datovou minimalizací, DPA/subprocesory, technickými hranicemi, exit plánem, zvláštní kontrolou AI dodavatelů, checklistem, vendor kartou a ověřenými zdroji GDPR, EDPB, Evropské komise, ENISA a OWASP.
+
 - 2026-10-01: Doplněna příloha „Retenční plán bez nekonečného skladu dat“ s kategoriemi dat, účelovým nastavením lhůt, mazacím workflow, deletion replay po obnově záloh, pravidly pro logy/exporty, evidencí výjimek, zákaznickým vysvětlením, checklistem, retenční kartou a ověřenými zdroji GDPR, EDPB a OWASP.
 
 - 2026-10-01: Doplněna příloha „Produktová dokumentace a changelog bez platformní závislosti“ s mapou rozhodnutí, UX pravidly pro dokumentaci, lidsky čitelným changelogem, bezpečnými release notes, vlastněnými distribučními kanály, provozní rutinou, checklistem, dokumentační kartou a ověřenými zdroji Keep a Changelog, SemVer a W3C WCAG.
