@@ -27410,7 +27410,219 @@ Datum úklidu staré struktury:
 - Prisma Data Guide — Expand and contract pattern, praktické vysvětlení postupného nasazení změn schématu: https://www.prisma.io/dataguide/types/relational/expand-and-contract-pattern
 - GDPR, článek 5 — principy minimalizace, přesnosti, omezení uložení, integrity a odpovědnosti při práci s osobními údaji: https://gdpr.eu/article-5-how-to-process-personal-data/
 
+# Příloha: Monitoring a alerting bez datového vysavače
+
+Monitoring má říct, jestli služba funguje pro uživatele a jestli tým musí jednat. Nemá být výmluva pro sběr všeho, co projde aplikací. Malý SaaS nepotřebuje observability katedrálu s dvanácti dashboardy, třemi vendor lock-iny a logy, ve kterých se dá najít půlka zákaznického života. Potřebuje pár dobrých signálů, jasné alerty, krátkou retenci detailů a rutinu, která zabrání tomu, aby se „dočasné ladění“ změnilo v permanentní šmírovací vrstvu.
+
+OpenTelemetry rozlišuje základní signály jako traces, metrics a logs (https://opentelemetry.io/docs/concepts/signals/). To je užitečné dělení, ale samo o sobě nestačí. Privacy-first provoz k němu přidává čtvrtou otázku: co do těch signálů vůbec nesmí téct? Bez téhle brzdy se monitoring rychle promění v pohodlný sběr kontextu, který možná jednou někdo použije. A „možná jednou“ je při práci s osobními a zákaznickými daty velmi drahá věta.
+
+> Codyho komentář: Alert, který budí člověka ve tři ráno kvůli metrice bez dopadu na zákazníka, není monitoring. Je to digitální kohout na steroidech.
+
+## Začni otázkou dopadu, ne výběrem nástroje
+
+Než otevřeš katalog nástrojů, napiš si pět scénářů, které opravdu bolí:
+
+- zákazník se nemůže přihlásit,
+- platba nebo objednávka neprojde,
+- aplikace ukládá data výrazně pomalu,
+- integrace přestane přijímat nebo odesílat důležité zprávy,
+- web nebo API má výpadek v hlavní obchodní době.
+
+Ke každému scénáři přidej odpověď:
+
+```text
+Když se to stane, jak to poznáme bez čtení obsahu zákaznických dat?
+```
+
+Tahle věta je filtr. Pokud odpověď zní „uložíme celé request body a pak se podíváme“, vrať se o krok zpět. Ve většině případů stačí stavový kód, kategorie chyby, čas, anonymizovaný identifikátor workspace, verze aplikace a technický korelační identifikátor. Obsah formuláře, text dokumentu, e-mail zákazníka nebo celé URL s query parametry do běžného monitoringu nepatří.
+
+## Čtyři zlaté signály v malém provedení
+
+Kniha Site Reliability Engineering popisuje čtyři zlaté signály monitoringu: latenci, provoz, chyby a saturaci (https://sre.google/sre-book/monitoring-distributed-systems/). Pro malý web nebo SaaS je přelož do jednoduchého provozního minima:
+
+- **Latence:** jak dlouho trvá načtení důležité stránky, API endpointu nebo background jobu.
+- **Provoz:** kolik požadavků, úloh nebo integrací systém zpracovává.
+- **Chyby:** kolik požadavků končí technickou chybou nebo neúspěšným výsledkem.
+- **Saturace:** jestli dochází CPU, paměť, disk, databázové connectiony, fronta jobů nebo limit externí služby.
+
+Praktický začátek:
+
+```text
+homepage dostupnost: synthetic check každých pár minut
+login endpoint: chybovost a p95 latence
+checkout / objednávka: počet úspěchů a neúspěchů podle kategorie
+background job queue: délka fronty a stáří nejstarší položky
+databáze: latence dotazů, connection pool a disk
+```
+
+Neměř nejdřív sto věcí. Měř pět kritických věcí tak, aby z nich šlo udělat rozhodnutí. Dashboard, který vypadá jako pilotní kabina, je super, pokud pilotuješ letadlo. Pro menší SaaS je často lepší jedna provozní nástěnka s červenou, oranžovou a zelenou.
+
+## Logy piš pro diagnostiku, ne pro zvědavost
+
+Log má pomoct odpovědět: co se stalo, kde, kdy, v jaké verzi a jakou kategorií chyby to skončilo. Nemá být tajný archiv vstupů uživatele.
+
+Do běžného aplikačního logu patří:
+
+- timestamp,
+- služba nebo modul,
+- release/verze,
+- request ID nebo trace ID,
+- interní workspace/account ID v omezené podobě,
+- endpoint nebo název operace bez citlivých parametrů,
+- výsledek a kategorie chyby,
+- doba trvání.
+
+Do běžného logu nepatří:
+
+- hesla, tokeny, session ID a API klíče,
+- celé request/response body,
+- platební údaje,
+- obsah dokumentů, ticketů, zpráv a poznámek,
+- celé URL s query parametry,
+- raw hlavičky obsahující cookies nebo autorizační údaje,
+- stack trace s uživatelským vstupem, pokud ho neumíš bezpečně očistit.
+
+OWASP Logging Cheat Sheet doporučuje řešit nejen co logovat, ale i ochranu logů, verifikaci vstupů, dostupnost, integritu a data, která mají být z logování vyloučená (https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html). Prakticky to znamená: logování navrhuj jako produktovou funkci s vlastními pravidly, ne jako `console.log()` maturitní ples.
+
+## Trace bez obsahu zákaznické práce
+
+Tracing je skvělý pro hledání úzkých míst mezi službami. Zároveň umí snadno nasbírat víc dat, než tým potřebuje. Bez pravidel se do atributů spanů dostanou e-maily, názvy souborů, celé dotazy, URL parametry nebo texty chyb z externích služeb.
+
+Bezpečnější pravidla pro trace atributy:
+
+- používej názvy operací typu `invoice.generate`, `workspace.export`, `integration.sync`,
+- ukládej kategorii výsledku, ne celý obsah odpovědi,
+- nahrazuj konkrétní identitu interním ID nebo agregovanou kategorií,
+- query parametry ukládej jen přes allowlist,
+- u chyb ukládej kategorii a kód, detail drž v chráněném provozním kontextu s kratší retencí,
+- pro support případy používej dočasné ladicí okno, které se samo vypne.
+
+Dočasné ladicí okno je obyčejná disciplína: na konkrétní incident, konkrétní rozsah, konkrétní čas a s ownerem. Například „na 60 minut zapnout detailnější logování pro integraci X u workspace Y, bez request body, s retencí 24 hodin“. Po skončení incidentu se nastavení vrátí zpět. Ne „zapneme verbose a uvidíme“ — to je monitoringová verze otevřené ledničky.
+
+## Alert má mít akci a ownera
+
+Alert bez jasné akce je notifikace převlečená za odpovědnost. Každý alert musí mít:
+
+- proč existuje,
+- koho budí,
+- jaký má dopad,
+- první diagnostický krok,
+- kdy se má umlčet,
+- kdy se má po incidentu upravit nebo smazat.
+
+Dobré alerty:
+
+```text
+Login error rate > 5 % po dobu 10 minut
+Checkout success rate klesl pod běžný práh po dobu 15 minut
+Nejstarší položka v kritické frontě je starší než 30 minut
+Disk databáze překročil bezpečný práh a trend roste
+Synthetic check homepage/API selhal z více lokalit
+```
+
+Slabé alerty:
+
+```text
+CPU jednou vyskočilo na 82 %
+Každá 404 posílá zprávu do chatu
+Každá chyba z vývojového prostředí pípá stejně jako produkce
+Dashboard je červený, ale nikdo neví proč
+```
+
+Alerty pravidelně uklízej. Pokud alert třikrát po sobě nevedl k akci, není to hrdina. Je to šum. Buď uprav práh, přidej kontext, změň kanál, nebo ho smaž. Alert fatigue není osobní slabost týmu, ale špatný design systému.
+
+## Status stránka a komunikace bez úniku detailů
+
+Status stránka má zákazníkům říct, co nefunguje, koho se to týká, co tým dělá a kdy přijde další update. Nemá prozradit interní architekturu, názvy zákazníků, konkrétní bezpečnostní zranitelnost nebo obsah incidentu dřív, než je ověřený.
+
+Jednoduchý formát incident update:
+
+```text
+Stav: vyšetřujeme / identifikováno / oprava probíhá / vyřešeno
+Dopad: část uživatelů nemůže [akce]
+Začátek: [čas]
+Aktuální práce: [stručně]
+Další update: [čas]
+```
+
+Interní incident poznámka může být detailnější, ale i tam drž zásadu minimálního obsahu. Pro zákaznickou komunikaci stačí dopad a postup. Ne každá databázová hláška patří na veřejný web — a už vůbec ne do automatického screenshotu v sociální síti, protože „transparentnost“.
+
+## Retence monitoringu
+
+Retence musí odpovídat účelu. V praxi si rozděl data takto:
+
+- **Agregované metriky:** delší retence pro trendy, kapacitu a spolehlivost.
+- **Detailní logy:** krátká retence, typicky pro diagnostiku aktuálních problémů.
+- **Trace detaily:** krátká retence, protože často obsahují bohatší technický kontext.
+- **Auditní log:** samostatná vrstva s jasnou právní/provozní potřebou a omezeným přístupem.
+- **Incident důkazy:** samostatný balíček, owner, důvod, datum odstranění.
+
+Nejhorší varianta je držet detailní logy navždy, protože storage je levný. Storage možná levný je. Vysvětlování, proč v něm po třech letech leží citlivý kontext, už tolik ne.
+
+## Checklist: monitoring bez datového vysavače
+
+- [ ] Máme vypsané kritické zákaznické scénáře a jejich dopad.
+- [ ] Každý signál má účel a rozhodnutí, které z něj děláme.
+- [ ] Logy neobsahují hesla, tokeny, celé request body, obsah dokumentů ani celé URL s query parametry.
+- [ ] Trace atributy používají allowlist a neukládají zákaznický obsah.
+- [ ] Alerty mají ownera, akci, dopad, první krok a pravidlo umlčení.
+- [ ] Detailní logy a trace mají kratší retenci než agregované metriky.
+- [ ] Dočasné ladicí režimy mají časový limit a po incidentu se vypnou.
+- [ ] Status komunikace popisuje dopad bez úniku interních detailů.
+- [ ] Každý nový typ monitoringu prochází privacy review.
+- [ ] Jednou měsíčně mažeme nebo upravujeme alerty, které nepomohly k akci.
+
+## Mini šablona monitoring karty
+
+```markdown
+# Monitoring karta: [oblast / služba]
+
+## Účel
+Jaký zákaznický nebo provozní problém chceme poznat:
+Kdo je owner:
+Který scénář chrání:
+
+## Signály
+Metriky:
+Logy:
+Trace:
+Synthetic check:
+
+## Data a privacy
+Co se sbírá:
+Co se výslovně nesbírá:
+Obsahuje to osobní údaje? ano/ne
+Maskování / pseudonymizace:
+
+## Alert
+Podmínka:
+Dopad:
+Kanál:
+První krok:
+Kdy umlčet:
+
+## Retence
+Detailní data:
+Agregovaná data:
+Incident důkazy:
+Datum revize:
+
+## Komunikace
+Interní update:
+Zákaznický update:
+Status page používáme? ano/ne
+```
+
+## Zdroje
+
+- OpenTelemetry dokumentace — základní signály observability: traces, metrics a logs: https://opentelemetry.io/docs/concepts/signals/
+- Google SRE Book — Monitoring Distributed Systems a čtyři zlaté signály: https://sre.google/sre-book/monitoring-distributed-systems/
+- OWASP Logging Cheat Sheet — co logovat, co nelogovat a jak logy chránit: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- GDPR, článek 5 — minimalizace, omezení účelu, omezení uložení a odpovědnost: https://gdpr.eu/article-5-how-to-process-personal-data/
+
 # Pracovní log
+- 2026-10-01: Doplněna příloha „Monitoring a alerting bez datového vysavače“ s provozními signály, bezpečným logováním, pravidly pro tracing, akčními alerty, status komunikací, retenčním modelem, checklistem, monitoring kartou a ověřenými zdroji OpenTelemetry, Google SRE, OWASP a GDPR.
+
 - 2026-10-01: Doplněna příloha „Databázové migrace bez výpadku a datové loterie“ s expand-contract postupem, dávkovaným backfillem, bezpečným plánováním indexů a constraints, rollback strategií, produktovým posouzením datových transformací, checklistem, migrační kartou a ověřenými zdroji.
 
 - 2026-10-01: Doplněna příloha „Produktová telemetrie bez šmírovacího autopilota“ s oddělením telemetrie, logů a auditu, event schema, retenční rutinou, pull request brzdou, checklistem, telemetrickou kartou a ověřenými zdroji OWASP, GDPR a ENISA.
