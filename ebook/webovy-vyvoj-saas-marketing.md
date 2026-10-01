@@ -28023,7 +28023,231 @@ Otevřená rizika:
 - EDPB — Opinion 28/2024 on data protection aspects in the context of AI models, anonymita modelů, právní základ a dopady nezákonného zpracování: https://www.edpb.europa.eu/documents/opinion-of-the-board-art-64/opinion-282024-on-certain-data-protection-aspects-related-to_en
 - OWASP — Top 10 for Large Language Model Applications, rizika prompt injection, nadměrných oprávnění a úniku citlivých informací: https://owasp.org/www-project-top-10-for-large-language-model-applications/
 
+# Příloha: Incident postmortem bez hledání viníka a úniku dat
+
+Incident není ostuda. Ostuda je, když se po něm tým nic nenaučí, nebo když se z něj stane firemní soudní drama s titulkem „kdo to rozbil“. Malý SaaS nepotřebuje proces jako korporátní krizové centrum, ale potřebuje jednoduchý způsob, jak po výpadku, bezpečnostním problému nebo datové chybě zjistit, co se stalo, proč to zákazníka bolelo a co se změní, aby se stejná rána neopakovala.
+
+Postmortem je pracovní dokument po incidentu. Není to tisková zpráva, právní obhajoba ani terapie pro Slack. Jeho cílem je zachytit časovou osu, dopad, rozhodnutí, technické příčiny, systémové slabiny a konkrétní nápravné kroky. Google SRE popisuje blameless postmortem kulturu jako způsob, jak se učit z poruch místo obviňování lidí; prakticky to znamená, že se ptáš „jaké podmínky umožnily chybu?“ spíš než „kdo klikl špatně?“.
+
+> Codyho komentář: Když po incidentu najdeš jednoho viníka a tři nové zákazy, možná máš klid na poradě. Ale produkt se obvykle zlepšil asi jako kafe po třetím ohřátí v mikrovlnce.
+
+Privacy-first postmortem má ještě jednu důležitou brzdu: nesmí při vysvětlování incidentu roznést víc dat, než uniklo nebo selhalo při samotném problému. Screenshoty databáze, plné e-maily zákazníků, tokeny v logu nebo exporty chatu do sdíleného dokumentu jsou přesně ten typ „důkazu“, který z incidentu udělá druhý incident.
+
+## Kdy postmortem psát
+
+Nepíše se na každé drobné zaváhání. Kdyby malý tým dokumentoval úplně všechno, brzy bude mít krásný archiv a žádný produkt. Postmortem piš tehdy, když incident splní alespoň jednu z těchto podmínek:
+
+- zákazník nemohl použít hlavní funkci produktu,
+- došlo k viditelné chybě v datech, fakturaci, oprávnění nebo komunikaci,
+- incident mohl ovlivnit osobní údaje nebo bezpečnost účtů,
+- tým musel použít ruční zásah, rollback, restore nebo nouzový workaround,
+- stejný typ problému se opakuje,
+- incident odhalil slabé místo v monitoringu, deploy procesu nebo odpovědnosti.
+
+Pro drobnosti stačí kratší forma: jeden odstavec, příčina, oprava, owner a datum kontroly. Pro větší incidenty použij plný postmortem. Rozdíl není v délce výpadku, ale v riziku a učení.
+
+Praktické pravidlo: pokud se po incidentu někdo zeptá „jak víme, že se to nestane znovu?“ a ty nemáš odpověď, postmortem je potřeba.
+
+## Odděl časovou osu od interpretace
+
+Nejdřív zachyť fakta. Interpretace přijde až potom. Časová osa má obsahovat konkrétní časy, signály a akce:
+
+- kdy problém začal podle monitoringu,
+- kdy si ho tým všiml,
+- kdo převzal incident owner roli,
+- jaká byla první hypotéza,
+- jaké kroky tým provedl,
+- kdy se služba vrátila do přijatelného stavu,
+- kdy zákazníci nebo interní tým dostali informaci.
+
+Piš věty typu: „10:14 — alert na zvýšenou chybovost registrace“, „10:18 — rollback verze 2026.10.01.3“, „10:27 — registrace znovu funkční“. Vyhni se větám typu: „Petr konečně opravil chybu“ nebo „deploy byl špatný“. To není časová osa. To je kancelářská detektivka s levným soundtrackem.
+
+Interpretace patří do samostatné části. Tam hledej příčiny v systému: chybějící test, nejasná rollout pravidla, slabý alert, neaktuální runbook, příliš široké oprávnění, ruční krok bez kontroly, nedostatečné oddělení testovacích a produkčních dat.
+
+## Dopad popiš jazykem zákazníka
+
+Interní popis „500 na endpointu /api/v2/session“ je užitečný pro vývojáře. Zákaznický dopad ale zní jinak: „Uživatelé se nemohli přihlásit“, „noví zákazníci nedokončili registraci“, „část e-mailů odešla se zpožděním“, „administrátorům se nezobrazil aktuální stav faktury“.
+
+V postmortemu drž obě vrstvy:
+
+| Vrstva | Co říká | Příklad |
+| --- | --- | --- |
+| Produktový dopad | Jak to zasáhlo uživatele | Noví uživatelé nemohli dokončit registraci. |
+| Technický projev | Jak se to projevilo v systému | Endpoint registrace vracel 500 kvůli chybějící hodnotě v nové DB constraint. |
+| Obchodní dopad | Co to znamenalo pro firmu | Ztracené trial registrace za 42 minut, nutný ruční follow-up. |
+| Datový dopad | Jestli se dotkla osobní nebo zákaznická data | Bez exfiltrace; část uživatelských záznamů měla dočasně špatný stav onboarding kroku. |
+
+Pokud si nejsi jistý datovým dopadem, napiš to jako otevřenou otázku a přiřaď ownera. Nehádej. V privacy-first provozu je věta „zatím nevíme, ověřuje [jméno/role] do [čas]“ lepší než uklidňující mlha.
+
+## Data v postmortemu minimalizuj
+
+Postmortem často putuje mezi vývoj, podporu, vedení, někdy i zákazníka. Proto do něj nedávej data, která nepotřebuje každý čtenář.
+
+Bezpečnější pravidla:
+
+- nahraď e-mail zákazníka interním ID nebo pseudonymem,
+- nelep do dokumentu celé request/response payloady,
+- tokeny, session ID, IP adresy a přesné identifikátory rediguj,
+- screenshoty používej jen tehdy, když nestačí textový popis,
+- surové logy drž v systému s omezeným přístupem, ne v dokumentu,
+- veřejnou verzi postmortemu piš zvlášť, ne jako kopii interního dokumentu.
+
+Když incident souvisí s osobními údaji, zapoj do posouzení člověka odpovědného za ochranu dat nebo alespoň předem určenou roli. GDPR u osobních datových incidentů pracuje s posouzením rizika pro práva a svobody lidí; pokud vzniká oznamovací povinnost, článek 33 počítá s oznámením dozorovému úřadu bez zbytečného odkladu a kde je to možné do 72 hodin od zjištění. To není dekorace do checklistu — je to důvod mít připravenou rozhodovací stopu.
+
+## Nápravné kroky nesmí být přání
+
+Nejslabší část postmortemů bývá seznam akcí. „Zlepšit monitoring“, „dát si pozor“, „víc testovat“, „komunikovat lépe“. To nejsou úkoly. To jsou dobré úmysly v reflexní vestě.
+
+Každá akce má mít:
+
+- jasný výsledek,
+- ownera,
+- termín,
+- prioritu podle rizika,
+- ověřitelný důkaz dokončení.
+
+Špatně:
+
+```text
+Zlepšit alerting pro registraci.
+```
+
+Lépe:
+
+```text
+Přidat alert na více než 2 % chybových registrací za 5 minut, poslat do kanálu #ops a ověřit testovacím incidentem. Owner: backend lead. Termín: 2026-10-08.
+```
+
+Akce rozděl do tří typů:
+
+1. **Okamžité záplaty** — věci, které snižují riziko hned.
+2. **Systémové opravy** — testy, monitoring, runbook, rollout, oprávnění.
+3. **Produktové nebo komunikační změny** — jasnější stavová hláška, lepší status stránka, follow-up zákazníkům.
+
+Pokud má incident deset akcí, pravděpodobně se většina nikdy nestane. Vyber tři až pět nejdůležitějších. Zbytek dej do backlogu jen tehdy, když má skutečnou hodnotu.
+
+## Komunikace: interní, zákaznická a veřejná verze
+
+Jeden incident může potřebovat tři různé texty:
+
+- interní postmortem pro tým,
+- zákaznické vysvětlení pro dotčené klienty,
+- veřejnou status aktualizaci nebo blogový post.
+
+Interní verze může být technická a otevřená. Zákaznická verze má být srozumitelná, konkrétní a bez zbytečných detailů, které by zvýšily bezpečnostní riziko. Veřejná verze má vysvětlit dopad, opatření a stav, ale nemá zveřejňovat interní architekturu, zranitelné endpointy, přesné postupy útoku nebo osobní údaje.
+
+Dobrá zákaznická věta:
+
+```text
+Dne 1. října mezi 10:14 a 10:56 UTC nefungovalo dokončení registrace pro část nových uživatelů. Problém jsme vyřešili rollbackem změny v databázovém schématu, dotčené registrace jsme zkontrolovali a přidáváme alert na stejný typ selhání.
+```
+
+Špatná zákaznická věta:
+
+```text
+Náš junior rozbil migraci, ale už je to dobrý.
+```
+
+Ano, ta druhá je lidská. Taky je zbytečně krutá a profesionálně asi tak stabilní jako židle se třemi nohami.
+
+## Retence postmortemů
+
+Postmortemy mají hodnotu jako historie učení. Nemusí ale navždy obsahovat všechny interní detaily. Nastav jednoduchou retenční politiku:
+
+- interní postmortemy drž tak dlouho, dokud pomáhají auditům, provoznímu učení a trendům,
+- surové logy a přílohy drž kratší dobu podle účelu a rizika,
+- veřejné status texty nech stabilně dostupné, pokud nejsou bezpečnostně citlivé,
+- po uzavření akčních bodů zkontroluj, jestli dokument neobsahuje zbytečné osobní údaje,
+- jednou za čtvrtletí projdi opakující se příčiny napříč postmortemy.
+
+Největší hodnota není jeden perfektní dokument. Největší hodnota je trend: pořád padá stejný typ deploye? Opakují se ruční opravy dat? Alerty přicházejí pozdě? Podpora se o incidentu dozví až od zákazníka? Tam je zlato. Bohužel trochu špinavé, ale zlato.
+
+## Checklist: postmortem bez hledání viníka
+
+- [ ] Má incident jasný název, datum, ownera a závažnost?
+- [ ] Je oddělená časová osa faktů od interpretace?
+- [ ] Je dopad popsán jazykem zákazníka i technicky?
+- [ ] Je posouzeno, jestli šlo o osobní data nebo bezpečnostní incident?
+- [ ] Neobsahuje dokument zbytečné osobní údaje, tokeny, surové payloady nebo citlivé screenshoty?
+- [ ] Jsou akční body konkrétní, přiřazené a ověřitelné?
+- [ ] Existuje zákaznická nebo veřejná verze, pokud ji incident vyžaduje?
+- [ ] Má tým termín kontroly, že nápravné kroky opravdu vznikly?
+- [ ] Je jasné, co se změní v monitoringu, deploy procesu, oprávněních nebo runbooku?
+- [ ] Bude incident použit pro učení, ne pro hledání obětního beránka?
+
+## Mini šablona postmortem karty
+
+```text
+# Postmortem: [název incidentu]
+
+## Shrnutí
+Co se stalo:
+Dopad na zákazníky:
+Aktuální stav:
+
+## Základní údaje
+Datum a čas začátku:
+Datum a čas obnovy:
+Incident owner:
+Závažnost:
+Dotčené služby:
+
+## Časová osa
+[čas] — [faktická událost]
+[čas] — [akce týmu]
+[čas] — [obnova / komunikace]
+
+## Dopad
+Produktový dopad:
+Technický projev:
+Obchodní dopad:
+Datový a bezpečnostní dopad:
+
+## Příčiny
+Bezprostřední příčina:
+Systémové faktory:
+Co monitoring zachytil:
+Co monitoring nezachytil:
+
+## Komunikace
+Interní komunikace:
+Zákaznická komunikace:
+Veřejná komunikace:
+
+## Akční body
+1. Úkol:
+   Owner:
+   Termín:
+   Důkaz dokončení:
+
+2. Úkol:
+   Owner:
+   Termín:
+   Důkaz dokončení:
+
+## Privacy kontrola
+Obsahuje dokument osobní údaje?
+Jsou citlivé údaje redigované?
+Je potřeba GDPR breach assessment?
+Kdo assessment schvaluje?
+
+## Revize
+Datum kontroly akčních bodů:
+Opakující se vzor:
+Co změníme v runbooku:
+```
+
+## Zdroje
+
+- Google SRE — Postmortem Culture: Learning from Failure, principy blameless postmortem kultury a sdílení poučení: https://sre.google/sre-book/postmortem-culture/
+- Google SRE Workbook — Postmortem Culture, praktiky incident postmortemů, vlastnictví a akčních bodů: https://sre.google/workbook/postmortem-culture/
+- EUR-Lex — GDPR, článek 33 o oznamování porušení zabezpečení osobních údajů dozorovému úřadu: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+- EDPB — Guidelines 9/2022 on personal data breach notification under GDPR, praktické vodítko k oznamování osobních datových incidentů: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-92022-personal-data-breach-notification-under_en
+- ENISA — Cyber Incident Awareness, doporučení k hlášení incidentů a hledání pomoci u národních autorit: https://www.enisa.europa.eu/topics/cyber-incident-awareness
+
 # Pracovní log
+- 2026-10-01: Doplněna příloha „Incident postmortem bez hledání viníka a úniku dat“ s blameless postupem, oddělením faktů od interpretace, popisem zákaznického dopadu, minimalizací dat v dokumentaci, konkrétními akčními body, komunikačními verzemi, retenční rutinou, checklistem, postmortem kartou a ověřenými zdroji Google SRE, GDPR, EDPB a ENISA.
+
 - 2026-10-01: Doplněna příloha „Interní AI agenti bez úniku kontextu a falešné autonomie“ s výběrem scénářů, rizikovými vrstvami agentů, minimalizací kontextu, pravidly pro nástroje, human-in-the-loop schvalováním, auditní stopou, AI inventory, checklistem, agent kartou a ověřenými zdroji Evropské komise, EDPB a OWASP.
 
 - 2026-10-01: Doplněna příloha „Trust center pro malý SaaS bez bezpečnostního divadla“ s rozdělením veřejných, zákaznických, řízených a interních informací, minimem pro první verzi, správou důkazů, privacy vysvětlením, subprocesory, zapojením sales/supportu, provozní rutinou, checklistem, Trust center kartou a ověřenými zdroji ISO, CSA a GDPR.
