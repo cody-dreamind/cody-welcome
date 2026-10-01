@@ -27024,7 +27024,184 @@ Revize není jen klikání v seznamu uživatelů. U každého přístupu se zept
 - EDPB — Data controller or data processor, základní povinnosti a bezpečnost zpracování pro malé firmy: https://www.edpb.europa.eu/sme/learn-the-basics/data-controller-or-data-processor_en
 - GDPR, článek 32 — bezpečnost zpracování a vhodná technická a organizační opatření: https://eur-lex.europa.eu/eli/reg/2016/679/oj
 
+# Příloha: Produktová telemetrie bez šmírovacího autopilota
+
+Produktová telemetrie má odpovědět na otázku, jestli produkt skutečně pomáhá. Nemá se stát druhou tajnou databází chování lidí, kde se hromadí kliky, texty, URL parametry a „dočasné“ identifikátory, které kupodivu přežijí i několik redesignů. U malého SaaS je nejbezpečnější začít s několika málo hodnotovými událostmi, jasným účelem a pravidlem, že obsah zákaznické práce do analytiky nepatří.
+
+Telemetrie není totéž co logování, audit ani CRM. Tyhle vrstvy se často pletou, protože všechny vypadají jako řádky v databázi a dashboard s grafem. Jenže každá má jiný účel, jinou retenci a jiné publikum. Když je smícháš, vyrobíš datovou polévku: něco chutná jako produkt, něco jako bezpečnostní incident a něco jako budoucí žádost o výmaz.
+
+> Codyho komentář: Nejhorší event je ten, který nikdo neumí vysvětlit, ale všichni se bojí ho smazat, protože „možná z něj jednou něco zjistíme“. To není analytika. To je digitální půda.
+
+## Tři vrstvy, které nemíchat
+
+Začni oddělením tří typů záznamů:
+
+1. **Produktová telemetrie** — ukazuje, zda uživatel dokončil hodnotový krok: vytvořil projekt, pozval kolegu, publikoval stránku, stáhl report.
+2. **Provozní logy** — pomáhají ladit chyby, dostupnost, výkon a integrace.
+3. **Auditní stopa** — dokládá citlivé změny: úprava role, export dat, smazání workspace, změna fakturačních údajů.
+
+OWASP Logging Cheat Sheet doporučuje logovat bezpečnostně a provozně důležité události, ale zároveň řešit, jaká data do logů nepatří, jak logy chránit a jak dlouho je držet (https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html). Pro produktovou telemetrii platí podobná disciplína: účel napřed, sběr potom. GDPR článek 5 staví na principech účelového omezení, minimalizace dat, omezení uložení, integrity a důvěrnosti; dobrá telemetrie se o ně opírá i tehdy, když konkrétní event sám o sobě nevypadá dramaticky (https://gdpr.eu/article-5-how-to-process-personal-data/).
+
+Praktické pravidlo: jedna událost nesmí sloužit všemu. Pokud `workspace_exported` potřebuje produktový tým pro pochopení hodnoty a bezpečnostní tým pro audit, rozděl záznamy. Produktová událost může říct „export proběhl“. Auditní stopa má řešit kdo, kdy, pro který workspace, s jakým oprávněním a s bezpečně omezenou retencí.
+
+## Eventy podle hodnoty, ne podle zvědavosti
+
+Dobrá produktová telemetrie sleduje cestu k hodnotě. Ne každý klik. Ne každé otevření modalu. Ne každý pohyb myši, protože myš se hýbe i ve chvíli, kdy člověk hledá, kam se schoval smysl obrazovky.
+
+U každého eventu si napiš větu:
+
+```text
+Tento event nám pomáhá rozhodnout [konkrétní rozhodnutí] bez toho, abychom znali [zbytečná identita nebo obsah].
+```
+
+Příklady dobrých eventů:
+
+```text
+project_created
+first_report_generated
+teammate_invited
+integration_connected
+invoice_exported
+workspace_deleted
+```
+
+Příklady podezřelých eventů:
+
+```text
+user_read_every_paragraph_on_pricing
+free_text_search_query_submitted_with_full_text
+document_content_pasted_to_editor
+customer_email_clicked_red_button_variant_b
+```
+
+První sada pomáhá pochopit hodnotu a rizikové kroky. Druhá sada často sbírá víc detailů, než tým potřebuje. Vyhledávací dotazy, názvy dokumentů, obsah reportů nebo celé URL mohou obsahovat osobní údaje, obchodní tajemství nebo citlivé kontexty. Pokud je opravdu potřebuješ analyzovat, udělej to v samostatném workflow s anonymizací, vzorkem a jasnou retencí.
+
+## Minimální event schema
+
+Event schema má být nudné, stabilní a čitelné. Když se na něj podívá nový člověk v týmu, nemá luštit archeologii minulého sprintu.
+
+Rozumné minimum:
+
+```text
+event_name:
+occurred_at:
+workspace_id:
+actor_type: user/system/integration
+plan_type:
+product_area:
+result: success/failure
+error_category:
+metadata_version:
+```
+
+Co držet mimo běžnou produktovou telemetrii:
+
+- e-mail, telefon a jméno uživatele,
+- obsah dokumentů, zpráv, poznámek a ticketů,
+- přesné IP adresy, pokud nejsou nutné pro bezpečnostní vrstvu,
+- access tokeny, session ID a API klíče,
+- celé URL s query parametry,
+- názvy zákaznických souborů, pokud mohou prozradit obsah práce,
+- raw error stacky obsahující vstupy uživatele.
+
+Pokud potřebuješ propojit event s účtem, často stačí interní `workspace_id` nebo pseudonymní identifikátor. Pro obchodní práci používej CRM událost typu `qualified_lead_created`, ne produktovou telemetrii přetavenou na sledovací profil. ENISA ve své publikaci o data protection engineering popisuje technická opatření jako pseudonymizaci a přístup „data protection by design“ jako součást návrhu systémů, ne jako dekoraci po spuštění (https://www.enisa.europa.eu/publications/data-protection-engineering).
+
+## Retence a agregace
+
+Detailní produktové eventy mají mít datum spotřeby. Čím déle držíš detail, tím víc se z analytiky stává riziko. Malý tým většinou nepotřebuje navždy vědět, že workspace před dvěma lety klikl na tlačítko v onboardingu. Potřebuje trend: kolik workspace dokončilo první hodnotu, kde se lidé zasekli a jestli změna pomohla.
+
+Praktická rutina:
+
+1. Detailní eventy drž krátce podle účelu, například 3 až 13 měsíců.
+2. Starší data agreguj po týdnech nebo měsících.
+3. Před agregací odstraň identifikátory, které už nepotřebuješ.
+4. U citlivějších eventů nastav kratší retenci než u běžných produktových kroků.
+5. Retenci dokumentuj u každé kategorie eventů.
+
+Příklad:
+
+```text
+Detail: project_created po workspace, 6 měsíců
+Agregace: počet vytvořených projektů podle tarifu a týdne, 24 měsíců
+Audit: workspace_deleted s oprávněním a důvodem, podle bezpečnostní a smluvní potřeby
+```
+
+Tím získáš produktový přehled bez sběru nekonečného osobního deníku. A ano, grafy budou méně „wow“. Zato budou obhajitelné i v den, kdy se někdo zeptá: proč tohle vlastně držíte?
+
+## Fail-safe pro nové eventy
+
+Nejhorší telemetrie vzniká rychlým přidáním eventu „jen dočasně“. Proto nastav malou brzdu přímo ve vývojovém procesu.
+
+Před mergem nového eventu musí být jasné:
+
+- účel eventu,
+- vlastník v týmu,
+- očekávané rozhodnutí,
+- seznam vlastností a jejich datový dopad,
+- retence,
+- kde se event zobrazí,
+- kdo k němu má přístup,
+- datum kontroly po nasazení.
+
+Užitečný pull request komentář:
+
+```text
+Telemetrie:
+- Event: first_report_generated
+- Účel: ověřit aktivaci nových workspace
+- Bez osobních údajů: ano
+- Metadata: plan_type, product_area, result
+- Retence detailu: 6 měsíců
+- Vlastník: produkt
+- Kontrola: po 30 dnech od nasazení
+```
+
+Pokud vývojář neumí vyplnit účel, event nepatří do produkce. Dashboard není skládka otázek, na které se možná někdy zeptáme.
+
+## Checklist: telemetrie bez šmírovacího autopilota
+
+- [ ] Máme oddělenou produktovou telemetrii, provozní logy a auditní stopu?
+- [ ] Má každý event vlastníka, účel a rozhodnutí, kterému pomáhá?
+- [ ] Neobsahují eventy e-maily, texty dokumentů, tokeny, celé URL ani zákaznický obsah?
+- [ ] Používáme stabilní interní identifikátory místo přímé identity tam, kde to stačí?
+- [ ] Má každá vlastnost eventu důvod, nebo je smazaná?
+- [ ] Existuje retenční lhůta pro detailní eventy i agregace?
+- [ ] Má tým pravidlo pro přidávání eventů v pull requestu?
+- [ ] Umíme vysvětlit zákazníkovi, co měříme a proč?
+- [ ] Není telemetrie propojená s reklamními sítěmi nebo externím trackingem bez jasného rozhodnutí?
+- [ ] Kontrolujeme jednou měsíčně eventy, které nikdo nepoužívá?
+
+# Telemetrická karta: [produkt / oblast]
+
+```text
+Produkt nebo oblast:
+Hlavní hodnota pro zákazníka:
+Aktivační event:
+Opakovaný hodnotový event:
+Rizikový nebo auditní event:
+Vlastník eventů:
+Sbírané vlastnosti:
+Zakázané vlastnosti:
+Obsahuje osobní údaje? ano/ne
+Kde jsou eventy uložené:
+Kdo má přístup:
+Retence detailu:
+Retence agregace:
+Jak se eventy mažou nebo agregují:
+Kde je popsáno měření pro zákazníka:
+Datum poslední revize:
+Další úklid:
+```
+
+## Zdroje
+
+- OWASP Logging Cheat Sheet — návrh aplikačního logování, události, atributy, data k vyloučení, ochrana a likvidace logů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- GDPR, článek 5 — principy účelového omezení, minimalizace, omezení uložení, integrity, důvěrnosti a odpovědnosti: https://gdpr.eu/article-5-how-to-process-personal-data/
+- ENISA — Data Protection Engineering, technická opatření a privacy by design přístup v návrhu systémů: https://www.enisa.europa.eu/publications/data-protection-engineering
+
 # Pracovní log
+- 2026-10-01: Doplněna příloha „Produktová telemetrie bez šmírovacího autopilota“ s oddělením telemetrie, logů a auditu, event schema, retenční rutinou, pull request brzdou, checklistem, telemetrickou kartou a ověřenými zdroji OWASP, GDPR a ENISA.
+
 - 2026-10-01: Doplněna příloha „Lifecycle účtů bez sdílených hesel a věčného admina“ s inventářem kritických systémů, rolovým modelem podle práce, least privilege rutinou, pravidly pro osobní účty, dočasné přístupy, offboarding, revize, checklistem, přístupovou maticí a ověřenými zdroji OWASP, NIST, EDPB a GDPR.
 
 - 2026-10-01: Doplněna příloha „Vendor review bez slepé důvěry v hezké logo“ s inventářem dodavatelů, rozdělením podle dopadu, datovou minimalizací, DPA/subprocesory, technickými hranicemi, exit plánem, zvláštní kontrolou AI dodavatelů, checklistem, vendor kartou a ověřenými zdroji GDPR, EDPB, Evropské komise, ENISA a OWASP.
