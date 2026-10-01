@@ -25355,7 +25355,173 @@ Pokud používáš externí službu mimo EU, nepředstírej, že „je to jen e-
 - OWASP Forgot Password Cheat Sheet — bezpečný reset hesla, tokeny a odpovědi bez enumerace účtů: https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html
 - GDPR, článek 5 — principy zpracování včetně minimalizace údajů a omezení uložení: https://gdpr-info.eu/art-5-gdpr/
 
+# Příloha: Admin panel bez interního šmírování a chaosu
+
+Admin panel je nejnebezpečnější část malého SaaS, protože vypadá jako interní nástroj, ale ve skutečnosti často umí všechno: vidět zákazníky, měnit tarify, resetovat účty, číst metadata, řešit refundy a opravovat produkční průšvihy v pátek v 16:58. Přesně proto nemá být „rychlá tabulka pro support“, ale produktová plocha se stejnými pravidly jako zákaznická aplikace.
+
+Privacy-first admin není pomalejší. Je jen upřímnější: ukáže pracovníkovi pouze to, co potřebuje k vyřešení konkrétního úkolu, zaznamená důležité zásahy a nepromění interní přístup v univerzální dalekohled na zákaznický život.
+
+> Codyho komentář: Nejhorší admin panel je ten, který se tváří jako dočasný hack. Dočasné hacky totiž mají jednu superschopnost: přežijí všechny redesigny, audity i tři změny týmu. Takový digitální šváb v hezčím CSS.
+
+## Začni rolí, ne obrazovkou
+
+Nejdřív si napiš, kdo admin používá a proč. Ne „admin“, ale konkrétní role:
+
+- support řeší přístup, fakturaci a základní diagnostiku,
+- finance řeší faktury, refundy a účetní identifikátory,
+- product sleduje stav workspace a aktivaci bez čtení obsahu,
+- technická podpora řeší incidenty, limity a integrace,
+- owner má nouzový přístup k citlivým akcím a auditním stopám.
+
+Každá role má mít vlastní výchozí pohled. Support například nepotřebuje export všech uživatelů. Finance nepotřebují vidět poznámky v aplikaci. Produktový tým nepotřebuje e-mail konkrétního člověka, pokud mu stačí agregovaný stav aktivace.
+
+Praktické pravidlo: když u pole neumíš dokončit větu „toto vidíme, abychom mohli…“, pole v adminu nejspíš nemá být.
+
+## Odděl přehled, diagnostiku a zásah
+
+Admin panel se rozpadá, když jedna obrazovka kombinuje vyhledávání zákazníka, detail účtu, citlivá data, změnu tarifu, impersonaci a mazání. Rozděl ho podle rizika:
+
+- *Přehled* ukazuje stav bez citlivých detailů: workspace, tarif, stav plateb, poslední technický signál, otevřené tikety.
+- *Diagnostika* ukazuje minimální technická metadata: request ID, stav integrace, čas poslední synchronizace, anonymizovanou chybu.
+- *Zásah* mění stav systému: reset MFA, refund, změna role, deaktivace účtu, ruční prodloužení trialu.
+
+Každý zásah má mít potvrzení, důvod a auditní záznam. Ne kvůli byrokracii. Kvůli tomu, aby tým za měsíc věděl, proč se něco stalo.
+
+## Citlivá data zobrazuj až po důvodu
+
+U citlivých polí použij postupné odhalení. Výchozí stav může ukázat maskovanou hodnotu a tlačítko „zobrazit pro řešení tiketu“. Po kliknutí vyžaduj důvod nebo odkaz na ticket.
+
+Příklady:
+
+- e-mail: viditelný jen pro role, které komunikují se zákazníkem,
+- telefon: maskovaný, pokud není potřeba pro ověření nebo fakturaci,
+- fakturační údaje: oddělené pro finance,
+- obsah uživatelských dat: v ideálním případě vůbec, případně přes speciální break-glass režim,
+- interní poznámky supportu: oddělené od produktových dat zákazníka.
+
+Break-glass režim znamená výjimečný přístup s jasným důvodem, krátkou platností a viditelným auditním záznamem. Pokud ho používáš každý týden, není to výjimka. Je to špatně navržený proces v kabátu hasiče.
+
+## Impersonace není teleport bez pravidel
+
+Možnost „přihlásit se jako zákazník“ bývá užitečná při podpoře, ale privacy-first varianta má tvrdé mantinely:
+
+- vyžaduje roli, důvod a ideálně vazbu na ticket,
+- zákazník by měl být informován, pokud to dává smysl pro typ služby a riziko,
+- akce provedené v impersonaci se logují jako akce pracovníka, ne zákazníka,
+- některé akce jsou zakázané: změna hesla, export dat, mazání, potvrzení právních souhlasů,
+- relace má krátkou platnost a zřetelné vizuální označení.
+
+Lepší alternativa je často diagnostický režim bez plné impersonace: support vidí stav onboardingových kroků, chyby integrací a poslední bezpečné události, ale neobsah zákaznických dat.
+
+## Audit log piš pro odpovědnost, ne pro román
+
+Audit log má odpovědět na otázky: kdo, kdy, proč, co změnil a jaký objekt tím ovlivnil. Nemá ukládat payloady, tokeny, texty zákazníků ani celé odpovědi API.
+
+Dobrá auditní událost:
+
+```text
+2026-10-01T08:12:34Z | actor=support_123 | action=trial_extended | target_workspace=ws_456 | reason=ticket_789 | before=2026-10-03 | after=2026-10-10
+```
+
+Špatná auditní událost:
+
+```text
+Support otevřel zákazníka, tady je celý JSON objekt včetně e-mailů, poznámek, tokenů a platebního kontextu. Hodně štěstí, budoucí incidente.
+```
+
+OWASP ASVS u bezpečnostního logování zdůrazňuje inventář logů, kontrolu přístupu a omezení citlivých dat v logách. Prakticky to znamená: loguj rozhodnutí a změny, ne soukromý obsah.
+
+## Admin vyhledávání nesmí být datový vysavač
+
+Vyhledávání v adminu bývá nenápadný průšvih. Když dovolíš fulltext přes všechno, interní nástroj se stane pohodlnou detektivní kanceláří.
+
+Bezpečnější vzor:
+
+- vyhledávej podle přesných identifikátorů: e-mail, workspace ID, faktura, ticket, doména,
+- výsledek zobrazuj jako krátký seznam bez citlivých polí,
+- u hromadných exportů vyžaduj vyšší roli a důvod,
+- ulož auditní záznam pro citlivé vyhledávání,
+- nastav rate limit i pro interní uživatele.
+
+Interní člověk není automaticky útočník, ale dobrý systém počítá s omylem, únavou, kompromitovaným účtem i zvědavostí. Zvědavost je skvělá vlastnost u dětí a výzkumníků. V admin panelu je to riziko s tlačítkem „Export CSV“.
+
+## Admin akce navrhuj jako malé transakce
+
+Nebezpečné jsou velké univerzální formuláře: „uprav zákazníka“, „změň workspace“, „přepiš billing“. Lepší je sada malých akcí s jasným dopadem:
+
+- prodloužit trial do konkrétního data,
+- deaktivovat člena workspace,
+- obnovit pozvánku,
+- vyžádat nové ověření MFA,
+- změnit fakturační e-mail,
+- spustit opakování webhooku,
+- označit refund jako vyřešený.
+
+Každá akce má mít vlastní validační pravidla, text dopadu a návratovou zprávu. U rizikových akcí přidej dvojí potvrzení nebo čtyřočko. U rutinních akcí naopak neotravuj falešnou bezpečností — pokud vše potvrzuješ dvakrát, tým začne klikat jako datel na energy drinku.
+
+## Checklist: admin panel bez interního šmírování
+
+- Má každá admin role jasně popsaný účel a rozsah dat?
+- Vidí support jen data potřebná k řešení běžných ticketů?
+- Jsou citlivá pole maskovaná a odhalují se až po důvodu?
+- Má impersonace omezené akce, krátkou platnost a auditní stopu?
+- Jsou auditní logy strukturované, ale bez payloadů a tajemství?
+- Má vyhledávání omezený rozsah a chrání hromadné exporty?
+- Jsou rizikové akce malé, pojmenované a vratné, pokud to jde?
+- Existuje break-glass režim pro výjimky místo trvalého superadmin přístupu?
+- Jsou přístupy pravidelně revidované při odchodu lidí a změně rolí?
+- Ví tým, co se nikdy nesmí otevírat bez důvodu?
+
+## Mini šablona admin karty
+
+```markdown
+# Admin karta: [oblast / obrazovka / akce]
+
+## Účel
+- Jaký problém tato admin funkce řeší:
+- Kdo ji používá:
+- Jak často:
+
+## Role a oprávnění
+- Role s přístupem:
+- Data viditelná ve výchozím stavu:
+- Data maskovaná nebo skrytá:
+- Akce vyžadující vyšší oprávnění:
+
+## Privacy hranice
+- Co se nikdy nezobrazuje:
+- Kdy je povolené citlivé odhalení:
+- Jak se eviduje důvod:
+
+## Audit
+- Události k logování:
+- Co se neloguje:
+- Retence auditních záznamů:
+- Kdo smí audit číst:
+
+## Rizikové scénáře
+- Omyl supportu:
+- Kompromitovaný interní účet:
+- Zvědavé procházení dat:
+- Hromadný export:
+
+## Test před nasazením
+- Ověřeno s reálným support scénářem:
+- Ověřeno bez přístupu k obsahu zákaznických dat:
+- Ověřen auditní záznam:
+- Ověřen rollback nebo nápravný postup:
+```
+
+## Zdroje
+
+- OWASP Application Security Verification Standard 5.0.0 — projektová stránka a aktuální stabilní verze: https://owasp.org/projects/asvs?tab=main
+- OWASP ASVS V16 Security Logging and Error Handling — požadavky na inventář logování, bezpečnostní události a ochranu citlivých dat v logách: https://github.com/OWASP/ASVS/blob/master/5.0/en/0x25-V16-Security-Logging-and-Error-Handling.md
+- OWASP ASVS V7 Session Management — dokumentování relací, timeoutů a koordinace session pravidel: https://github.com/OWASP/ASVS/blob/master/5.0/en/0x16-V7-Session-Management.md
+- EDPB: Data protection by design & by default — shrnutí praktického postupu pro článek 25 GDPR: https://www.edpb.europa.eu/system/files/2026-02/edpb-summary-gdpr-data-protection-design-default_en.pdf
+
 # Pracovní log
+
+- 2026-10-01: Doplněna příloha „Admin panel bez interního šmírování a chaosu“ s návrhem rolí, postupným odhalováním citlivých dat, bezpečnou impersonací, audit logy, omezeným vyhledáváním, checklistem a vyplnitelnou admin kartou.
 
 - 2026-10-01: Doplněna příloha „Transakční e-maily bez doručovacího hazardu a šmírování“ s rozlišením typů e-mailů, pravidly pro SPF/DKIM/DMARC, minimalizací obsahu, odhlašováním, privacy-first měřením, evropským provozem, checklistem, e-mailovou kartou a ověřenými zdroji RFC, Google, Yahoo, OWASP a GDPR.
 
