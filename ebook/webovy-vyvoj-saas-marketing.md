@@ -28245,7 +28245,261 @@ Co změníme v runbooku:
 - EDPB — Guidelines 9/2022 on personal data breach notification under GDPR, praktické vodítko k oznamování osobních datových incidentů: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-92022-personal-data-breach-notification-under_en
 - ENISA — Cyber Incident Awareness, doporučení k hlášení incidentů a hledání pomoci u národních autorit: https://www.enisa.europa.eu/topics/cyber-incident-awareness
 
+# Příloha: Fronty a backpressure bez ztráty důvěry
+
+Ne každá akce v SaaS má proběhnout hned. Export tisíců řádků, import zákaznických dat, generování PDF, odesílání webhooků, AI analýza dokumentů nebo přepočet reportu jsou typické operace, které mohou trvat déle, stát víc peněz a zatížit infrastrukturu. Když je necháš běžet přímo v HTTP requestu, uživatel čeká, prohlížeč nervózně kouká na spinner a server mezitím přemýšlí, jestli by nebylo příjemnější být toustovač.
+
+Fronta je férovější řešení: požadavek přijmeš, uložíš úlohu, dáš uživateli stav a zpracování pustíš mimo hlavní cestu. Backpressure je pak schopnost říct „teď už toho bereme moc, zpomal“ dřív, než služba spadne. Dohromady chrání dostupnost, náklady i důvěru zákazníků.
+
+> Codyho komentář: Spinner není projektový plán. Pokud operace trvá déle než pár sekund a může selhat, zaslouží si stav, historii a normální vysvětlení. Jinak jen prodáváš úzkost v kulatém animovaném kolečku.
+
+## Kdy použít frontu
+
+Fronta dává smysl vždy, když operace splňuje aspoň jednu z těchto podmínek:
+
+- trvá déle než běžný webový request,
+- volá externí službu s proměnlivou latencí,
+- může se bezpečně opakovat po dočasném selhání,
+- má vyšší náklady podle objemu dat,
+- pracuje s velkým souborem nebo exportem,
+- nepotřebuje okamžitý výsledek na obrazovce,
+- má zákaznický dopad, který je potřeba auditovat.
+
+Typické příklady:
+
+| Akce | Proč fronta | Co ukázat uživateli |
+|---|---|---|
+| CSV export | může být velký a zatížit databázi | stav exportu, čas vytvoření, expiraci odkazu |
+| Import dat | validace a ukládání mohou trvat | počet zpracovaných řádků a chyby ke stažení |
+| AI analýza | cena a délka kolísá podle vstupu | odhadovaný stav, možnost zrušení |
+| Webhook retry | cílová služba může být dole | historie pokusů a poslední chyba |
+| Hromadný e-mail | reputace domény a dávkování | fronta, plánovaný čas odeslání, stop tlačítko |
+| PDF report | renderování může selhat | stav, opakování, odkaz na hotový soubor |
+
+Dobré pravidlo: pokud by uživatel při refreshi stránky ztratil přehled, co se stalo, patří operace do fronty nebo aspoň do sledovatelného jobu.
+
+## Přijmout neznamená dokončit
+
+HTTP stav `202 Accepted` se používá pro situace, kdy server požadavek přijal ke zpracování, ale zpracování ještě není dokončené. MDN zdůrazňuje, že výsledek může později uspět nebo selhat a že odpověď často obsahuje odkaz na monitorování stavu ([MDN: 202 Accepted](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/202)).
+
+Praktická API odpověď může vypadat takhle:
+
+```http
+HTTP/1.1 202 Accepted
+Content-Type: application/json
+
+{
+  "job_id": "exp_7f31c9",
+  "status": "queued",
+  "status_url": "/api/exports/exp_7f31c9",
+  "message": "Export jsme zařadili do fronty. Stav můžete sledovat v detailu exportu."
+}
+```
+
+U webového UI to znamená:
+
+- po kliknutí nezobrazovat nekonečný spinner,
+- vytvořit záznam úlohy v historii,
+- ukázat stav „čeká“, „běží“, „hotovo“, „selhalo“ nebo „zrušeno“,
+- dát uživateli možnost odejít ze stránky,
+- poslat notifikaci jen tehdy, když je opravdu užitečná,
+- u citlivých exportů nastavit expiraci odkazu.
+
+Tím neříkáš „máme pomalý systém“. Říkáš „tahle operace je řízená a nezmizí v mlze“.
+
+## Backpressure: slušné zpomalení místo pádu
+
+Backpressure je schopnost systému bránit se přetížení. Google SRE kniha při řešení přetížení popisuje mimo jiné load shedding a graceful degradation — tedy řízené odmítnutí nebo omezení práce, aby zůstala dostupná nejdůležitější část služby ([Google SRE: Handling Overload](https://sre.google/sre-book/handling-overload/)).
+
+V malém SaaS to nemusí být věda s řízením rakety. Stačí několik pravidel:
+
+- limituj počet souběžných jobů na tenant,
+- nastav globální kapacitu workerů,
+- odděl rychlé a pomalé fronty,
+- chraň kritické úlohy před marketingovou kampaní,
+- zastav přijímání nových těžkých úloh dřív, než spadne databáze,
+- vracej jasnou odpověď s doporučením, kdy akci zkusit znovu.
+
+Když server ví, že fronta je plná, může odpovědět například:
+
+```http
+HTTP/1.1 429 Too Many Requests
+Retry-After: 300
+Content-Type: application/json
+
+{
+  "error": "queue_capacity_reached",
+  "message": "Fronta exportů je momentálně plná. Zkuste to prosím za 5 minut.",
+  "retry_after_seconds": 300
+}
+```
+
+Hlavička `Retry-After` klientovi říká, jak dlouho má čekat před dalším pokusem; MDN ji popisuje například u dočasné nedostupnosti nebo omezení požadavků ([MDN: Retry-After](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After)).
+
+## Idempotence: aby opakování nevyrábělo bordel
+
+Fronty a retry bez idempotence jsou továrna na duplicity. Když se import zopakuje, nesmí vytvořit stejného zákazníka dvakrát. Když se webhook odešle znovu, nemá příjemci strhnout platbu dvakrát. Když uživatel dvakrát klikne na export, nemá se spustit deset totožných úloh jen proto, že myš měla nervózní den.
+
+Praktické nástroje:
+
+- **Idempotency key** pro API operace, které mohou být opakovány.
+- **Unikátní business klíč** u importů, například e-mail + tenant nebo externí ID.
+- **Deduplication window** pro stejné požadavky v krátkém čase.
+- **Stavový automat** místo volného textu: `queued`, `running`, `succeeded`, `failed`, `cancelled`.
+- **Retry policy** podle typu chyby, ne nekonečné opakování všeho.
+- **Dead-letter fronta** pro úlohy, které opakovaně selhaly a potřebují lidskou kontrolu.
+
+Idempotence je obzvlášť důležitá u privacy-first provozu. Když minimalizuješ data, nechceš si vytvářet duplicity, které pak musíš mazat, vysvětlovat a dohledávat v pěti místech.
+
+## Priorita podle dopadu, ne podle hluku
+
+Ne všechny úlohy jsou stejně důležité. Reset hesla, bezpečnostní notifikace a platby mají jinou prioritu než hromadný export historických statistik. Pokud fronta jede stylem „kdo dřív přijde, ten dřív mele“, může velká dávka méně důležitých úloh zablokovat kritické operace.
+
+Rozděl úlohy minimálně do tří tříd:
+
+1. **Kritické provozní úlohy** — bezpečnost, platby, obnovy účtu, systémové notifikace.
+2. **Zákaznické pracovní úlohy** — importy, exporty, reporty, AI zpracování.
+3. **Interní a marketingové úlohy** — synchronizace, kampaně, agregace, úklid.
+
+Pro každou třídu napiš:
+
+- maximální souběh,
+- timeout,
+- retry pravidla,
+- maximální stáří ve frontě,
+- kdo dostane alert,
+- co se stane při přetížení.
+
+Důležité: priorita nemá být skrytá obchodní diskriminace. Pokud má tarif vyšší kapacitu, řekni to v produktu. Pokud jde o bezpečnostní prioritu, vysvětli ji v interní dokumentaci. Mlha je dobrá na gotický hrad, ne na provoz SaaS.
+
+## Privacy-first logování jobů
+
+Job potřebuje dohledatelnost, ale ne datový výlov. U exportu nepotřebuješ ukládat celý obsah exportovaných dat do job logu. U AI analýzy nepotřebuješ ukládat prompt ani dokument, pokud pro provoz stačí metadata. U webhooku nepotřebuješ navždy držet kompletní payload s osobními údaji.
+
+Bezpečný minimální záznam jobu:
+
+```text
+job_id:
+tenant_id:
+user_id nebo service_account_id:
+typ úlohy:
+stav:
+čas vytvoření:
+čas spuštění:
+čas dokončení:
+počet pokusů:
+poslední technická chyba:
+velikost vstupu v agregaci:
+výsledek: odkaz na objekt / počet položek / souhrn
+retence:
+```
+
+Co záměrně neukládat do job logu:
+
+- hesla, tokeny a tajné URL,
+- kompletní osobní údaje z exportu,
+- plný obsah importovaných řádků,
+- AI prompty se zákaznickým obsahem,
+- celé webhook payloady bez jasného účelu,
+- přílohy a dokumenty mimo bezpečné úložiště.
+
+Pro ladění používej krátkodobé diagnostické režimy se souhlasem vlastníka systému, jasnou expirací a omezeným přístupem. Debug log, který přežije věčnost, je budoucí incident převlečený za pohodlí.
+
+## UX fronty: uživatel má mít klid
+
+Technicky správná fronta může být produktově špatná, když uživatel neví, co se děje. Proto má každá dlouhá úloha potřebovat malé UX minimum.
+
+Dobré UI pro job:
+
+- ukáže stav a čas vytvoření,
+- vysvětlí, zda může uživatel odejít,
+- umožní zrušení tam, kde je to bezpečné,
+- ukáže poslední srozumitelnou chybu,
+- nabídne opakování bez duplicit,
+- u hotového výsledku ukáže expiraci odkazu,
+- u selhání nabídne další krok nebo kontakt.
+
+Příklad hlášky:
+
+```text
+Export běží na pozadí. Stránku můžete zavřít — hotový soubor najdete v historii exportů.
+Odkaz bude dostupný 7 dní. Pokud export selže, ukážeme důvod a možnost zkusit to znovu.
+```
+
+Příklad špatné hlášky:
+
+```text
+Processing...
+```
+
+To není stav. To je nálada.
+
+## Provozní rutina front
+
+Jednou týdně projdi:
+
+- počet čekajících jobů podle typu,
+- medián a p95 dobu čekání,
+- poměr úspěšných, selhaných a zrušených jobů,
+- počet retry pokusů,
+- nejčastější příčiny selhání,
+- dopad na placené zákazníky,
+- velikost dead-letter fronty.
+
+Jednou měsíčně projdi:
+
+- jestli některé úlohy nepatří do jiné priority,
+- zda jsou timeouty realistické,
+- zda se výsledky mažou podle retenčního plánu,
+- jestli chybové hlášky odpovídají realitě,
+- zda fronty nepotřebují oddělit podle typu práce,
+- jestli support rozumí stavům jobů.
+
+Alert nastavuj na dopad, ne na každý šum. Jeden selhaný export není budík ve tři ráno. Rostoucí fronta kritických notifikací, která ohrožuje obnovu účtů, už budík je.
+
+## Checklist: fronty a backpressure
+
+- [ ] Víme, které operace nepatří do synchronního requestu.
+- [ ] Dlouhé operace vrací stav nebo odkaz na sledování průběhu.
+- [ ] Fronty mají kapacitní limity a pravidla backpressure.
+- [ ] Kritické úlohy nejsou blokované marketingovými nebo reportovacími dávkami.
+- [ ] Joby mají stavový automat a jasnou retry politiku.
+- [ ] Opakované požadavky jsou idempotentní nebo deduplikované.
+- [ ] Uživatel ví, zda může stránku zavřít a kde najde výsledek.
+- [ ] Job logy neobsahují citlivý payload ani tajné hodnoty.
+- [ ] Výsledky exportů a reportů mají expiraci.
+- [ ] Dead-letter fronta má vlastníka a pravidelnou kontrolu.
+
+## Vyplnitelná job karta
+
+```text
+Název jobu:
+Typ úlohy:
+Spouštěč:
+Priorita:
+Maximální souběh:
+Timeout:
+Retry pravidla:
+Kdy se job deduplikuje:
+Jak se ruší:
+Co vidí uživatel:
+Co se loguje:
+Co se záměrně neloguje:
+Retence výsledku:
+Alert při dopadu:
+Vlastník:
+```
+
+## Zdroje
+
+- MDN Web Docs — 202 Accepted, význam přijetí požadavku k pozdějšímu zpracování a odkazu na monitorování stavu: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/202
+- MDN Web Docs — Retry-After, hlavička pro doporučenou dobu čekání před dalším pokusem: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After
+- Google SRE Book — Handling Overload, principy řízeného odmítání práce, graceful degradation a ochrany služby před přetížením: https://sre.google/sre-book/handling-overload/
+- OWASP API Security Top 10 — API4:2023 Unrestricted Resource Consumption, riziko neomezené spotřeby výpočetních, síťových a finančních zdrojů v API: https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/
+
 # Pracovní log
+- 2026-10-01: Doplněna příloha „Fronty a backpressure bez ztráty důvěry“ s pravidly pro dlouhé joby, odpovědí `202 Accepted`, backpressure při přetížení, idempotencí, prioritami, privacy-first logováním, UX stavů, provozní rutinou, checklistem, job kartou a ověřenými zdroji MDN, Google SRE a OWASP.
+
 - 2026-10-01: Doplněna příloha „Incident postmortem bez hledání viníka a úniku dat“ s blameless postupem, oddělením faktů od interpretace, popisem zákaznického dopadu, minimalizací dat v dokumentaci, konkrétními akčními body, komunikačními verzemi, retenční rutinou, checklistem, postmortem kartou a ověřenými zdroji Google SRE, GDPR, EDPB a ENISA.
 
 - 2026-10-01: Doplněna příloha „Interní AI agenti bez úniku kontextu a falešné autonomie“ s výběrem scénářů, rizikovými vrstvami agentů, minimalizací kontextu, pravidly pro nástroje, human-in-the-loop schvalováním, auditní stopou, AI inventory, checklistem, agent kartou a ověřenými zdroji Evropské komise, EDPB a OWASP.
