@@ -24269,7 +24269,177 @@ Privacy-first log neobsahuje hesla, tokeny, celé cookie, celé payloady ani obs
 - OWASP Password Storage Cheat Sheet doporučuje hesla nikdy neukládat v čitelné podobě a používat pomalé, silné hashovací algoritmy jako Argon2id, bcrypt nebo PBKDF2: https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
 - NIST SP 800-63B popisuje reautentizaci, timeouty relací a rozdíl mezi neaktivitou a celkovou životností session: https://pages.nist.gov/800-63-4/sp800-63b.html
 
+# Příloha: API klíče a tajemství bez úniku do repozitáře
+
+API klíč je malý textový řetězec s velkým egem. Vypadá nevinně, dokud s ním někdo nepošle drahý request, nepřečte zákaznická data nebo neprovede změnu jménem tvé aplikace. Proto s klíči, tokeny, webhook signing secrets, SMTP hesly, databázovými URL a privátními klíči zacházej jako s přístupem, ne jako s konfigurací.
+
+Základní pravidlo: tajemství nepatří do kódu, dokumentace, screenshotů, issue trackeru ani chatu. Patří do správce tajemství, produkčního prostředí nebo krátkodobé runtime identity. Když už musí existovat jako hodnota, musí mít vlastníka, účel, rozsah oprávnění, expiraci a postup rotace.
+
+> Codyho komentář: Nejhorší místo pro API klíč je „jen dočasně“ v repozitáři. Dočasně v IT často znamená „dokud se to nestane incidentem a někdo neobjeví archeologickou vrstvu v gitu“.
+
+## Nejdřív udělej inventář tajemství
+
+Bez inventáře nevíš, co máš chránit ani co musíš otočit při incidentu. Začni jednoduchou tabulkou: název tajemství, účel, systém, prostředí, vlastník, oprávnění, kde je uložené, kdo k němu má přístup, kdy se naposledy rotovalo a jak se pozná zneužití.
+
+Typické skupiny tajemství:
+
+- databázové přístupy,
+- API klíče plateb, e-mailů, analytiky a AI služeb,
+- webhook signing secrets,
+- privátní klíče pro SSH, S3 kompatibilní úložiště nebo JWT podpis,
+- OAuth client secrets,
+- interní servisní tokeny mezi komponentami,
+- break-glass přístupy pro nouzový provoz.
+
+Praktické minimum pro malý SaaS: produkční tajemství eviduj odděleně od vývojových, každé tajemství přiřaď konkrétnímu účelu a u všech externích služeb si napiš, kde se klíč ruší a kde se vytváří nový. Ne až v incidentu. V incidentu už má člověk tep jako frontend build po třetím redesignu.
+
+## Rozsah oprávnění má být co nejmenší
+
+Jeden univerzální klíč pro všechno je pohodlný jen do chvíle, než unikne. Pak je pohodlný hlavně pro útočníka. Pokud služba umožňuje omezení práv, vytvoř samostatné klíče podle účelu.
+
+Příklady:
+
+- Pro odesílání transakčních e-mailů používej klíč jen pro send endpoint, ne administrátorský klíč k celé e-mailové platformě.
+- Pro AI funkci nastav samostatný klíč s rozpočtem, limitem modelů a odděleným monitoringem.
+- Pro webhooky používej signing secret jen k ověření podpisu, ne jako obecné heslo k API.
+- Pro zálohy používej účet, který umí zapisovat do backup bucketu, ale neumí mazat starší zálohy bez další brzdy.
+
+U B2B SaaS si dej pozor na klíče v zákaznických integracích. Pokud zákazník vloží vlastní token do tvé aplikace, ukládáš cizí přístup. V UI jasně napiš, k čemu token používáš, jak je šifrovaný, kdo ho může zobrazit, jak ho zákazník smaže a co se stane při odchodu.
+
+## Tajemství nedávej do repozitáře ani do build artefaktů
+
+`.env` soubor je fajn pracovní pomůcka, ale není trezor. Do repozitáře patří maximálně `.env.example` bez reálných hodnot. Produkční hodnoty nastavuj přes prostředí hostingu, správce tajemství nebo deploy pipeline.
+
+Kontrola před commitem:
+
+- `.env`, privátní klíče a exporty z produkce jsou v `.gitignore`.
+- `.env.example` obsahuje jen názvy proměnných a bezpečné placeholdery.
+- Frontend build neobsahuje serverové tajemství omylem přes `PUBLIC_`, `VITE_`, `NEXT_PUBLIC_` nebo podobný prefix.
+- CI logy nevypisují celé hodnoty proměnných.
+- Screenshoty dokumentace nezobrazují živé tokeny.
+
+U frontend proměnných buď paranoidní. Cokoliv se dostane do prohlížeče, není tajemství. Veřejný identifikátor projektu může být v klientu v pořádku. Serverový token, webhook secret nebo administrátorský API klíč nikdy.
+
+## Secret scanning ber jako brzdu, ne jako jedinou ochranu
+
+Secret scanning pomáhá chytit únik před mergem nebo pushem, ale nenahrazuje návrh oprávnění a rotaci. Nastav ho v repozitáři, CI i lokálním workflow, pokud to tým zvládne bez zbytečného tření.
+
+Rozumný malý setup:
+
+- repozitář má zapnutou ochranu proti pushnutí známých typů tajemství,
+- CI spouští sken na pull requestech,
+- lokální pre-commit kontrola je doporučená pro lidi, kteří často pracují s konfigurací,
+- incident playbook říká, že nalezené tajemství se nepovažuje za „jen false positive“, dokud se neověří.
+
+Když scanner najde klíč, první reakce nemá být „smažeme commit a hotovo“. Správné pořadí: zneplatnit klíč, ověřit logy použití, vydat nový klíč, nasadit změnu, potom uklidit historii podle potřeby. Git historie je tvrdohlavá potvora; tajemství v ní nejde spolehlivě „odvidět“ jen tím, že ho přepíšeš v posledním commitu.
+
+## Rotace musí být nacvičená
+
+Rotace tajemství není jen bezpečnostní obřad. Je to provozní schopnost. Pokud neumíš vyměnit produkční klíč bez půldenního výpadku, máš technický dluh s knírkem.
+
+Praktický postup rotace:
+
+1. Vytvoř nový klíč se stejným nebo menším rozsahem oprávnění.
+2. Přidej ho do správce tajemství nebo produkčního prostředí.
+3. Nasaď aplikaci tak, aby používala nový klíč.
+4. Ověř základní flow a metriky chyb.
+5. Zneplatni starý klíč.
+6. Zapiš rotaci do provozního logu.
+
+Kde to služba dovolí, používej překryvné období: aplikace umí přijmout starý i nový podpis webhooku nebo ověřit dva aktivní veřejné klíče. To snižuje riziko výpadku, ale nesmí se z toho stát trvalý sklad starých klíčů.
+
+## Logy mají pomáhat při incidentu, ne opisovat tajemství
+
+Do logu nikdy nepiš celé tokeny, hlavičky `Authorization`, celé connection stringy ani podepsané URL s dlouhou platností. Loguj jen to, co pomáhá při provozu: identifikátor klíče, typ integrace, prostředí, výsledek akce, chybový kód a korelační ID.
+
+Bezpečný kompromis:
+
+- ukládej prefix nebo hash identifikátoru klíče, ne celý klíč,
+- maskuj hodnoty v CI a error reportingu,
+- pro webhooky loguj čas, typ události, výsledek ověření podpisu a ID události,
+- pro AI/API náklady loguj agregované použití podle funkce, ne obsah promptů nebo zákaznických dat,
+- přístup k logům dej jen lidem, kteří ho opravdu potřebují.
+
+Privacy-first pointa: i bezpečnostní log je osobní nebo zákaznické riziko, pokud do něj bez rozmyslu padá obsah požadavků. Log není datové muzeum. Log je nástroj pro provoz a audit.
+
+## Evropský provoz a dodavatelé: ptej se, kdo drží klíče
+
+U evropského provozu nestačí vědět, kde běží aplikace. Ptej se také, kde jsou uložená tajemství a kdo k nim má přístup. Pokud používáš externí správce tajemství, CI/CD platformu, hosting nebo podporu, ověř region, role, audit logy a exportní možnosti.
+
+Otázky pro dodavatele:
+
+- Kde jsou tajemství fyzicky a právně uložená?
+- Jsou hodnoty šifrované v klidu i při přenosu?
+- Kdo ze supportu je může zobrazit nebo měnit?
+- Existuje audit log čtení a změn?
+- Lze tajemství rotovat automaticky nebo přes API?
+- Jak se tajemství smažou při odchodu?
+
+Když odpovědi nejsou jasné, drž klíče blíž u sebe. Pohodlný dashboard není dobrý obchod, pokud kvůli němu ztratíš kontrolu nad produkčními přístupy.
+
+## Checklist: tajemství bez úniku
+
+- Každé produkční tajemství má vlastníka, účel a místo uložení.
+- Produkční a vývojové klíče jsou oddělené.
+- Klíče mají nejmenší možný rozsah oprávnění.
+- `.env` a privátní klíče nejsou v repozitáři.
+- Veřejné frontend proměnné neobsahují serverová tajemství.
+- Secret scanning běží před mergem nebo pushem.
+- Rotace je popsaná a alespoň u kritických klíčů vyzkoušená.
+- Logy maskují tokeny, connection stringy a citlivé hlavičky.
+- Incident playbook říká, kdo klíč ruší, kdo kontroluje logy a kdo komunikuje dopad.
+- Dodavatelé jsou ověření z pohledu regionu, přístupů, audit logů a exportu.
+
+## Mini šablona secret karty
+
+```markdown
+# Secret karta: [název tajemství]
+
+## Účel
+- K čemu tajemství slouží:
+- Systém / integrace:
+- Prostředí: vývoj / staging / produkce
+
+## Vlastnictví
+- Technický vlastník:
+- Business vlastník:
+- Kdo má přístup:
+
+## Oprávnění
+- Rozsah práv:
+- Omezení podle IP / domény / endpointu:
+- Rozpočet nebo rate limit:
+
+## Uložení
+- Kde je hodnota uložená:
+- Je dostupná v CI/CD:
+- Dostává se do klientského buildu: ne / ano a proč
+
+## Rotace
+- Kde se vytvoří nový klíč:
+- Jak se nasadí:
+- Jak se zneplatní starý klíč:
+- Poslední rotace:
+- Další plánovaná rotace:
+
+## Incident
+- Jak poznáme zneužití:
+- Kde jsou logy:
+- Koho informovat:
+- První krok při úniku:
+```
+
+## Zdroje
+
+- OWASP Cheat Sheet Series: [Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
+- OWASP API Security Top 10 2023: [API2:2023 Broken Authentication](https://api-security.owasp.org/editions/2023/en/0xa2-broken-authentication/)
+- GitHub Docs: [Secret scanning and push protection scope](https://docs.github.com/en/code-security/reference/secret-security/secret-scanning-scope)
+- GitHub: [Secret Protection](https://github.com/security/advanced-security/secret-protection)
+- NIST CSRC: [Key Management Guidelines](https://csrc.nist.gov/projects/key-management/key-management-guidelines)
+
 # Pracovní log
+
+- 2026-10-01: Doplněna příloha „API klíče a tajemství bez úniku do repozitáře“ s inventářem secretů, principem nejmenších oprávnění, secret scanningem, rotací, bezpečným logováním, evropským provozem, checklistem a vyplnitelnou secret kartou.
 - 2026-10-01: Doplněna příloha „Přihlášení, relace a zařízení bez digitálního stalkingu“ se session cookies, timeouty, reautentizací před citlivými akcemi, přehledem zařízení, ochranou proti enumeraci účtů, bezpečnostními logy, checklistem, session kartou a ověřenými zdroji OWASP a NIST.
 - 2026-10-01: Rozšířena příloha „Admin rozhraní bez superuživatelského průšvihu“ o provozní test session, MFA a admin API, negativní autorizační scénáře, multitenant kontrolu objektů a ověřené zdroje OWASP a NIST.
 
