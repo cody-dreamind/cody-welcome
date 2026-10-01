@@ -10,6 +10,8 @@ Rychlý sanity check před každou změnou: umí návštěvník po jejím nasaze
 
 Malé zlepšení má mít jasnou hypotézu, jedno místo dopadu a snadný návrat zpět. Právě proto bývá bezpečnější než „velká modernizace“, která mění text, design, měření i očekávání zákazníka najednou.
 
+Když nevíš, jestli je změna ještě malá, napiš si její stop stav: co přesně dnes neděláš, i když tě to láká. Tahle jednoduchá brzda chrání rozpočet, pozornost týmu i kvalitu výsledku — scope creep je totiž produktový kocour, který se tváří jako inspirace.
+
 ## Jak e-book používat
 
 - Čti kapitoly samostatně podle problému, který právě řešíš.
@@ -24819,6 +24821,7 @@ NIST SP 800-92 popisuje log management jako disciplínu zahrnující generován�
 
 # Pracovní log
 
+- 2026-10-01: Doplněn krátký sanity check ke stop stavu malé změny, aby e-book lépe hlídal rozsah úprav a bránil scope creepu.
 - 2026-10-01: Doplněna příloha „Monitoring a observabilita bez datového vysavače“ s rozdělením signálů, bezpečným request ID, pravidly pro nelogování payloadů a tokenů, alerty, CSP reporty, retencí, evropským provozem, checklistem a observability kartou podloženou zdroji OWASP, NIST, MDN a EDPB.
 
 - 2026-10-01: Doplněna příloha „DSR workflow a mazání účtu bez datového bludiště“ jako hlubší navazující postup k uživatelským žádostem, DSR balíčku, přenositelnosti, bezpečnému mazacímu workflow, výjimkám pro zákonné povinnosti, subprocesorům, zálohám, checklistu a ověřeným zdrojům GDPR, Evropské komise, EDPB a OWASP.
