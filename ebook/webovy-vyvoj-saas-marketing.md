@@ -27620,7 +27620,216 @@ Status page používáme? ano/ne
 - OWASP Logging Cheat Sheet — co logovat, co nelogovat a jak logy chránit: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - GDPR, článek 5 — minimalizace, omezení účelu, omezení uložení a odpovědnost: https://gdpr.eu/article-5-how-to-process-personal-data/
 
+# Příloha: Rate limiting a abuse ochrana bez fingerprintingového kladiva
+
+Každý web a SaaS dřív nebo později potká automatizované chování: pokusy o hádání hesel, scraping, falešné registrace, spam přes formuláře, stahování exportů pořád dokola, drahé API volání nebo klikací roboty testující slevové kódy. Reakce nesmí být „nasadíme nejagresivnější fingerprinting a hotovo“. To je pohodlné, ale často privacy drahé. Lepší je vrstvit ochranu podle rizika, sbírat minimum signálů a dávat legitimním lidem cestu ven z falešného blokování.
+
+OWASP v API Security Top 10 2023 popisuje neomezenou spotřebu zdrojů jako reálné riziko pro dostupnost i náklady a doporučuje limity pro velikost vstupů, počet operací, frekvenci volání a nákladové stropy u externích služeb (https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/). OWASP zároveň upozorňuje, že automatizované hrozby často zneužívají legitimní funkce aplikace, ne jen klasické zranitelnosti (https://owasp.org/projects/automated-threats-to-web-applications). Překlad do češtiny pro podnikatele: problém není jen hacker v kapuci. Problém je i bot, který používá tvoje tlačítka rychleji, než tvoje faktura za infrastrukturu stíhá dýchat.
+
+> Codyho komentář: Rate limit není trest pro uživatele. Je to bezpečnostní pás. Když ho nastavíš blbě, škrtí. Když ho nemáš, letíš čelem do zdi.
+
+## Začni mapou zneužitelných akcí
+
+Nechráníš „web“. Chráníš konkrétní akce, které mohou být drahé, citlivé nebo obchodně zneužitelné. Udělej si jednoduchý seznam:
+
+- přihlášení a reset hesla,
+- registrace a pozvánky do workspace,
+- odeslání kontaktního formuláře,
+- upload souborů,
+- export dat,
+- vyhledávání a stránkování velkých seznamů,
+- generování AI odpovědí, PDF, reportů nebo náhledů,
+- webhook příjem a odchozí notifikace,
+- checkout, slevové kódy a trial aktivace,
+- veřejné API endpointy.
+
+Ke každé akci napiš tři věci:
+
+```text
+Co útočník získá?
+Co nás to stojí?
+Jak poznáme zneužití bez čtení obsahu zákaznických dat?
+```
+
+Třetí otázka je privacy-first brzda. U kontaktního formuláře typicky nepotřebuješ ukládat text zprávy do anti-spam systému. Stačí počet odeslání za čas, IP prefix nebo hash IP s krátkou retencí, stav validace, délka zprávy v hrubé kategorii, země podle serverového geolookupu jen pokud ji opravdu používáš, a výsledek rozhodnutí. Obsah zprávy patří do ticketu nebo e-mailu, ne do abuse metriky.
+
+## Limituj podle účtu, akce i nákladu
+
+Jeden globální limit typu „100 requestů za minutu“ je lepší než nic, ale často mine podstatu. Přihlášení, export dat a generování AI reportu mají úplně jiný dopad. Praktické vrstvy:
+
+- **IP / síťový limit:** dobrý první filtr pro veřejné endpointy, ale nefér jako jediné pravidlo kvůli sdíleným sítím, mobilním operátorům a kancelářím.
+- **Account/workspace limit:** chrání systém před jedním zákaznickým účtem, který omylem nebo úmyslně spustí lavinu.
+- **User limit:** brání konkrétnímu uživateli opakovat drahou nebo citlivou akci.
+- **Akční limit:** nastavuje zvláštní pravidla pro reset hesla, OTP, pozvánky, exporty, uploady a AI generování.
+- **Nákladový limit:** sleduje peníze nebo kvóty u služeb jako SMS, e-mail, AI API, OCR, mapy a storage.
+- **Objemový limit:** omezuje velikost payloadu, počet položek ve stránce, počet souborů, délku dotazu a počet operací v dávce.
+
+Příklad pro malý B2B SaaS:
+
+```text
+login: limit podle účtu + uživatele + IP, postupné zpoždění po chybách
+password reset: limit podle e-mailu, účtu a IP; žádná informace, jestli účet existuje
+export dat: limit podle workspace a role; velké exporty přes frontu
+AI report: denní kredit podle workspace; tvrdý nákladový strop
+webhook receive: limit podle integrace, podpisu a zdrojového partnera
+contact form: limit podle IP prefixu a formuláře; honeypot bez sledovacího skriptu
+```
+
+U autentizace je dobré sledovat doporučení NIST SP 800-63B pro throttling: chránit online pokusy o hádání a u selhání přidávat kontrolované zdržení nebo jiné mitigace, aniž by legitimní člověk spadl do nekonečné pasti (https://pages.nist.gov/800-63-4/sp800-63b.html#sec3-2-2). V praxi to znamená: neukazuj brutálně detailní chybové hlášky, ale zároveň lidem férově řekni, kdy mohou akci zkusit znovu.
+
+## CAPTCHA ber jako poslední, ne první obrannou linii
+
+CAPTCHA je často UX daň placená poctivými lidmi za to, že systém neuměl lépe rozlišit riziko. Navíc některé služby přidávají externí skripty, cross-site signály a dodavatelskou závislost, která se špatně obhajuje v privacy-first produktu.
+
+Než ji nasadíš, zkus:
+
+- server-side rate limiting,
+- honeypot pole ve formuláři,
+- čas vyplnění formuláře jako hrubý signál,
+- potvrzovací e-mail pro rizikové akce,
+- double opt-in tam, kde dává smysl,
+- frontu a manuální review pro hraniční případy,
+- proof-of-work jen pro extrémní veřejné endpointy, pokud nepoškodí přístupnost,
+- blokování známých datacenter jen u endpointů, kde to neublíží legitimním integracím.
+
+Když CAPTCHA opravdu potřebuješ, dej ji jen na rizikový krok, ne na celý web. A do dokumentace napiš, proč tam je, jaký dodavatel ji provozuje, jaká data zpracovává a jestli existuje alternativní cesta pro lidi, kterým nefunguje. Privacy-first neznamená, že necháš formulář sežrat roboty. Znamená to, že nezačneš plošným sledováním každého návštěvníka jen proto, že pár botů neumí slušně zaklepat.
+
+## Fingerprinting omez na prokazatelnou potřebu
+
+Fingerprinting zní jako kouzelná obrana: spojíš IP, user agent, časové vzory, jazyk, canvas, rozlišení a další signály a máš „zařízení“. Jenže tím velmi rychle vzniká vrstva sledování, která může být nepřiměřená běžnému riziku. U evropského provozu si polož minimálně tyhle otázky:
+
+- Jaký konkrétní abuse scénář bez toho nevyřešíme?
+- Lze stejný výsledek dosáhnout kratší retencí a méně invazivním signálem?
+- Umíme signál vysvětlit v privacy dokumentaci lidsky?
+- Kdo k němu má přístup?
+- Kdy se maže?
+- Je rozhodnutí automatické, nebo existuje lidská revize?
+
+Dobrá praxe je začít allowlistem signálů, ne hladovým SDK. Například pro abuse ochranu může stačit:
+
+```text
+časové okno
+endpoint / akce
+výsledek akce
+workspace ID
+pseudonymizovaný uživatel
+IP prefix nebo krátkodobý hash IP
+hrubý user-agent typ: browser / bot / script / unknown
+request ID
+```
+
+Do běžné abuse vrstvy naopak nepatří obsah dokumentů, zpráv, query parametry s osobními údaji, clipboard data, přesný behaviorální profil nebo nekonečně dlouhá historie zařízení. Když potřebuješ silnější signály kvůli reálnému útoku, zaveď je jako dočasné opatření s ownerem, datem revize a jasným vypnutím.
+
+## Odpověď uživateli musí být bezpečná i lidská
+
+Rate limit nesmí prozradit víc, než musí. U resetu hesla neříkej „tento e-mail u nás není“. U přihlášení neříkej „heslo je špatně, ale účet existuje“. Zároveň nepiš robotickou větu, která legitimního člověka pošle do bažiny.
+
+Lepší vzory:
+
+```text
+Reset hesla:
+Pokud u nás účet s tímto e-mailem existuje, poslali jsme instrukce. Z bezpečnostních důvodů může další pokus chvíli počkat.
+
+Příliš mnoho pokusů:
+Teď jsme akci dočasně pozastavili kvůli ochraně účtu. Zkus to znovu za 15 minut, nebo kontaktuj podporu.
+
+Export dat:
+Export jsme zařadili do fronty. Kvůli velikosti dat může chvíli trvat. Odkaz pošleme oprávněnému uživateli.
+```
+
+Pro podporu měj interní vysvětlení: jak najít request ID, jak poznat falešný blok, kdo může limit dočasně upravit a jak dlouho taková výjimka platí. Nejhorší abuse systém je ten, který chrání aplikaci tak dobře, že zákazník nedokáže zaplatit.
+
+## Provozní rytmus ochrany proti abuse
+
+Jednou týdně projdi:
+
+- top blokované akce,
+- false positive hlášení od podpory,
+- endpointy s největším nákladovým dopadem,
+- nárůst neúspěšných loginů, resetů a formulářů,
+- nové drahé funkce bez limitu,
+- výjimky, které měly být dočasné.
+
+Jednou měsíčně udělej krátkou revizi:
+
+- Máme limity pro všechny veřejné a drahé endpointy?
+- Neukládáme zbytečně detailní signály?
+- Sedí retence abuse dat s účelem?
+- Funguje zákaznická cesta při falešném zablokování?
+- Jsou nákladové alerty napojené na člověka, který může jednat?
+
+U nových funkcí přidej do pull request šablony jednu otázku:
+
+```text
+Může být tahle akce automatizovaně zneužita, finančně nákladná nebo bezpečnostně citlivá? Pokud ano, kde je limit a jak ho vysvětlíme uživateli?
+```
+
+Tohle je levnější než incident, ve kterém někdo během víkendu vygeneruje tisíce AI reportů, rozešle hromadu e-mailů nebo naplní storage soubory pojmenovanými „test-final-final-robot-9999.zip“.
+
+## Checklist: abuse ochrana bez fingerprintingového kladiva
+
+- [ ] Máme seznam zneužitelných akcí a jejich dopadů.
+- [ ] Každá drahá nebo citlivá akce má limit podle vhodného klíče: IP, účet, uživatel, workspace, integrace nebo náklad.
+- [ ] Limity zahrnují velikost payloadu, počet položek, počet operací a frekvenci.
+- [ ] Přihlášení, reset hesla a OTP mají samostatná pravidla throttlingu.
+- [ ] CAPTCHA nebo silnější bot detekce se spouští jen na rizikovém kroku, ne plošně.
+- [ ] Abuse signály mají allowlist, krátkou retenci a jasný účel.
+- [ ] Neuchováváme obsah zákaznické práce v anti-abuse logu.
+- [ ] Uživatel dostane bezpečnou, ale srozumitelnou hlášku a cestu k podpoře.
+- [ ] Nákladové stropy a alerty existují pro externí placené služby.
+- [ ] Dočasné výjimky a zostřená pravidla mají ownera a datum vypnutí.
+
+## Mini šablona abuse karty
+
+```markdown
+# Abuse karta: [akce / endpoint]
+
+## Účel akce
+Co uživatel dělá:
+Proč je akce důležitá:
+Kdo je owner:
+
+## Riziko
+Možné zneužití:
+Finanční dopad:
+Bezpečnostní dopad:
+Zákaznický dopad falešného blokování:
+
+## Limity
+Klíč limitu: IP / účet / uživatel / workspace / integrace / náklad
+Časové okno:
+Tvrdý limit:
+Měkký limit / zpoždění:
+Nákladový strop:
+
+## Data a privacy
+Sbírané signály:
+Co se výslovně nesbírá:
+Retence:
+Přístup k datům:
+
+## UX a podpora
+Hláška pro uživatele:
+Jak požádat o odblokování:
+Jak support ověří legitimní případ:
+
+## Revize
+Datum poslední kontroly:
+False positives:
+Změny pravidel:
+Datum další revize:
+```
+
+## Zdroje
+
+- OWASP API Security Top 10 2023 — API4:2023 Unrestricted Resource Consumption, limity zdrojů, payloadů, frekvence a nákladů: https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/
+- OWASP Automated Threats to Web Applications — automatizované zneužívání legitimních funkcí webových aplikací: https://owasp.org/projects/automated-threats-to-web-applications
+- NIST SP 800-63B — Rate Limiting / Throttling pro ochranu proti online hádání autentizačních údajů: https://pages.nist.gov/800-63-4/sp800-63b.html#sec3-2-2
+- GDPR, článek 5 — minimalizace dat, omezení účelu, omezení uložení a odpovědnost: https://gdpr.eu/article-5-how-to-process-personal-data/
+
 # Pracovní log
+- 2026-10-01: Doplněna příloha „Rate limiting a abuse ochrana bez fingerprintingového kladiva“ s mapou zneužitelných akcí, vrstvenými limity podle účtu, akce a nákladu, pravidly pro CAPTCHA a fingerprinting, bezpečnými UX hláškami, provozní rutinou, checklistem, abuse kartou a ověřenými zdroji OWASP, NIST a GDPR.
+
 - 2026-10-01: Doplněna příloha „Monitoring a alerting bez datového vysavače“ s provozními signály, bezpečným logováním, pravidly pro tracing, akčními alerty, status komunikací, retenčním modelem, checklistem, monitoring kartou a ověřenými zdroji OpenTelemetry, Google SRE, OWASP a GDPR.
 
 - 2026-10-01: Doplněna příloha „Databázové migrace bez výpadku a datové loterie“ s expand-contract postupem, dávkovaným backfillem, bezpečným plánováním indexů a constraints, rollback strategií, produktovým posouzením datových transformací, checklistem, migrační kartou a ověřenými zdroji.
