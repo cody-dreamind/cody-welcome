@@ -26420,7 +26420,240 @@ Tím z dokumentace uděláš systém, ne hromadu stránek, které drží pohroma
 - W3C Web Content Accessibility Guidelines 2.2 — referenční standard přístupnosti webového obsahu: https://www.w3.org/TR/WCAG22/
 - W3C WAI — přehled dokumentů WCAG a souvisejících materiálů k přístupnosti: https://www.w3.org/WAI/standards-guidelines/wcag/docs/
 
+# Příloha: Retenční plán bez nekonečného skladu dat
+
+Malý SaaS často nezačne s problémem „máme málo dat“. Začne s problémem „všechno se hodí“. Pak máš pět let staré leady, historické exporty, debug logy, screenshoty z podpory, staré trial workspaces, fakturační poznámky a cache, kterou nikdo nechce smazat, protože „co kdyby“.
+
+To není strategie. To je digitální půda po babičce — občas tam najdeš poklad, častěji staré kabely, neoznačené krabice a pavouka jménem Audit.
+
+Retenční plán není právnická dekorace. Je to provozní pravidlo, které říká:
+
+- proč data držíme,
+- jak dlouho je držíme,
+- kdo smí prodloužit jejich život,
+- jak poznáme, že se skutečně smazala,
+- co zůstává v zálohách, logách a účetnictví.
+
+Privacy-first SaaS tím získá tři věci: menší riziko úniku, rychlejší odpovědi na zákaznické žádosti a čistší produktové rozhodování. Starý šum totiž často vypadá jako insight, ale je to jen zombie event v dashboardu.
+
+## Začni účelem, ne tabulkou lhůt
+
+Špatný začátek retenčního plánu je: „Kolik měsíců máme držet uživatele?“
+
+Lepší začátek je: „K čemu přesně tuhle kategorii dat potřebujeme?“
+
+Praktické kategorie:
+
+- **Účet a přístup** — e-mail, role, přihlášení, MFA, aktivní relace.
+- **Produktová data zákazníka** — projekty, dokumenty, nastavení, záznamy práce.
+- **Provozní logy** — chyby, bezpečnostní události, auditní stopy.
+- **Support data** — ticket, přílohy, screenshoty, interní poznámky.
+- **Marketing a sales** — leady, poptávky, souhlasy, komunikace.
+- **Billing a účetnictví** — faktury, platby, refundy, daňové doklady.
+- **Analytika** — agregované metriky, eventy, experimenty, feedback.
+- **Zálohy** — kopie produkčních dat, snapshoty, exporty pro obnovu.
+
+U každé kategorie napiš jednu větu účelu. Pokud účel nejde napsat lidsky, data pravděpodobně držíš ze zvyku.
+
+Příklad:
+
+```text
+Kategorie: Support přílohy
+Účel: Pomáhají vyřešit konkrétní ticket a ověřit reklamaci chyby.
+Retence: 90 dní po uzavření ticketu, pak automatické smazání příloh.
+Výjimka: Bezpečnostní incident — přesun do incidentového spisu s vlastním ownerem.
+```
+
+## Retence není jedna lhůta pro celý produkt
+
+Jedna globální věta „data mažeme po 24 měsících“ zní hezky, ale v praxi bývá nepravdivá. Faktura má jiný život než debug log. Auditní stopa rizikové administrátorské akce má jiný život než opuštěný lead magnet. A produktová data aktivního zákazníka mají jiný režim než workspace po skončení trialu.
+
+Použij matici:
+
+| Kategorie | Aktivní stav | Po ukončení vztahu | Důvod držení | Mazací mechanismus |
+| --- | --- | --- | --- | --- |
+| Produktová data | po dobu služby | krátké grace období, pak smazání/anonymizace | poskytování služby, export zákazníka | job + kontrolní report |
+| Audit log | po dobu rizikového období | omezená lhůta podle účelu | bezpečnost, spor, compliance | partition/drop + hash kontrola |
+| Support přílohy | během ticketu | krátká lhůta po uzavření | řešení konkrétního problému | mazání souborů + odkazů |
+| Marketing lead | do vyřešení zájmu | smazat nebo obnovit souhlas | obchodní komunikace | CRM segment + expirace |
+| Billing doklad | podle účetních povinností | podle zákonné povinnosti | účetnictví, daň | mimo produktovou databázi |
+
+Codyho komentář: Nejtěžší není vybrat číslo. Nejtěžší je přiznat, že různé části produktu mají různé důvody existence. Ale přesně tam se odděluje provoz od hromadění.
+
+## Mazání navrhni jako produktovou funkci
+
+Mazání není úklidový skript, který jednou napíše unavený vývojář v pátek večer. Mazání je produktová funkce s vlastními stavy.
+
+Minimální stavový model:
+
+1. **Aktivní** — data slouží svému účelu.
+2. **Kandidát na mazání** — účel skončil, běží ochranná lhůta.
+3. **Uzamčeno kvůli výjimce** — spor, incident, právní povinnost, bezpečnostní šetření.
+4. **Smazáno z produkce** — data už nejsou dostupná v běžném systému.
+5. **Čeká v záloze** — zůstávají jen v záložním cyklu, bez běžného obnovování jednotlivostí.
+6. **Mimo dosah obnovy** — prošla i záložní retence.
+
+Každý mazací job by měl vytvořit provozní důkaz:
+
+```text
+Mazací běh: 2026-10-01-retention-support-attachments
+Kategorie: support_attachments
+Rozsah: tickety uzavřené před 2026-07-01
+Počet kandidátů: 184
+Smazáno: 181
+Přeskočeno: 3
+Důvod přeskočení: legal_hold=2, security_incident=1
+Owner: support/security
+```
+
+Důkaz neznamená ukládat smazaná data ještě jednou do logu. Znamená uložit agregovaný provozní záznam: co se stalo, kdy, v jakém rozsahu a s jakými výjimkami.
+
+## Zálohy nejsou výmluva proti mazání
+
+Zálohy jsou na obnovu služby, ne na věčné muzeum osobních údajů. Pokud smažeš uživatele z produkce, nemusíš vždy okamžitě přepisovat všechny historické backupy, ale musíš mít jasné pravidlo:
+
+- jak dlouho zálohy žijí,
+- kdo je smí obnovit,
+- co se stane po obnově staré zálohy,
+- jak se znovu aplikuje seznam smazaných účtů nebo zákaznických workspace,
+- jak zákazníkovi vysvětlíš rozdíl mezi produkčním mazáním a záložním cyklem.
+
+Praktický postup po obnově:
+
+1. Obnov zálohu do izolovaného prostředí.
+2. Aplikuj migrační skripty a bezpečnostní záplaty.
+3. Aplikuj „deletion replay“ — seznam entit, které byly po čase zálohy smazané.
+4. Teprve potom otevři prostředí pro běžný provoz.
+5. Zapiš restore událost do provozního logu.
+
+Bez deletion replay se může stát, že incident obnoví i data, která už zákazník oprávněně považoval za pryč. To je přesně ten typ kouzla, které nechceš umět.
+
+## Logy a exporty drž kratší než hlavní data
+
+Logy, CSV exporty a dočasné reporty jsou častý únikový kanál, protože vypadají technicky a nudně. Jenže často obsahují e-mail, IP adresu, identifikátor účtu, text chyby, URL s tokenem nebo kus payloadu.
+
+Pravidla:
+
+- Produkční logy nemají obsahovat hesla, tokeny, session ID, celé payloady ani citlivé osobní údaje.
+- Debug log v produkci musí mít krátkou životnost a jasný důvod zapnutí.
+- CSV export má mít expiraci souboru, nejen „stáhni si kdykoliv“.
+- Sdílené odkazy na exporty mají být krátkodobé a vázané na oprávnění.
+- Support screenshoty patří do ticketu s retencí, ne do Slacku, osobního disku nebo náhodné složky „bugy“.
+- Analytické eventy agreguj co nejdřív; detail jednotlivého uživatele drž jen tam, kde je opravdu nutný.
+
+Privacy-first varianta: místo dlouhého uchování raw eventů dělej denní agregace podle neosobních dimenzí. Například počet dokončených onboardingů podle tarifu a země trhu, ne kompletní časovou osu konkrétního člověka.
+
+## Výjimky musí mít ownera a konec
+
+Každý retenční plán potřebuje výjimky. Spor, incident, účetní povinnost, podezření na zneužití nebo zákaznická reklamace mohou oprávněně prodloužit uchování části dat.
+
+Ale výjimka bez konce je jen retence v převleku.
+
+Každá výjimka má mít:
+
+- důvod,
+- rozsah dat,
+- ownera,
+- datum další revize,
+- očekávané ukončení,
+- zákaz dalšího použití pro marketing nebo produktovou zvědavost.
+
+Příklad:
+
+```text
+Výjimka: security_incident_2026_10_api_abuse
+Rozsah: audit logy pro tenanty A, B, C; relevantní API request metadata
+Owner: security
+Revize: 2026-11-01
+Konec: po uzavření incidentu + 90 dní
+Zakázané použití: marketing, produktová analýza, trénování modelů
+```
+
+To poslední je důležité. Data držená kvůli incidentu nejsou nový datový zdroj pro growth tým. Ano, i když dashboard pláče.
+
+## Retenční plán ukaž zákazníkovi jednoduše
+
+Zákazník nepotřebuje číst interní tabulku se všemi joby a partition keys. Potřebuje rozumět tomu, co se děje s jeho daty.
+
+Ve veřejné nápovědě nebo privacy centru vysvětli:
+
+- jaké hlavní kategorie dat zpracováváš,
+- co se stane po ukončení účtu nebo workspace,
+- jak dlouho jsou dostupné exporty,
+- jak fungují zálohy v rozumném jazyce,
+- jak požádat o výmaz nebo export,
+- kdy nemůžeš smazat data okamžitě kvůli zákonné povinnosti nebo bezpečnosti.
+
+Dobrá formulace:
+
+> Po zrušení workspace ponecháme produktová data po krátkou ochrannou dobu pro případ omylu nebo exportu. Poté je odstraníme z produkčních systémů. Zálohy se přirozeně přepisují podle našeho záložního cyklu a nejsou používány k běžnému přístupu k datům.
+
+Špatná formulace:
+
+> Data mažeme v souladu s platnými předpisy.
+
+To je věta typu „jídlo chutná jako potravina“. Technicky možná pravda, lidsky k ničemu.
+
+## Checklist: retenční plán bez nekonečného skladu
+
+- [ ] Každá datová kategorie má pojmenovaný účel a ownera.
+- [ ] Retence je rozdělená podle kategorií, ne jednou globální lhůtou.
+- [ ] Mazací workflow má stavy, ochrannou lhůtu a evidenci výjimek.
+- [ ] Mazací joby zapisují agregovaný důkaz bez kopírování smazaných dat.
+- [ ] Zálohy mají vlastní životnost a postup pro deletion replay po obnově.
+- [ ] Logy, exporty a support přílohy mají kratší a konkrétní retenci.
+- [ ] Výjimky mají ownera, rozsah, revizi a konec.
+- [ ] Veřejná dokumentace vysvětluje mazání srozumitelně zákazníkovi.
+- [ ] Retenční plán se kontroluje při nové funkci, novém dodavateli a změně právního účelu.
+
+## Mini šablona retenční karty
+
+```text
+# Retenční karta: [kategorie dat]
+
+## Účel
+- Proč data vznikají:
+- Kdo je používá:
+- Co se rozbije, když data smažeme dřív:
+
+## Právní/provozní důvod
+- Smlouva / oprávněný zájem / souhlas / zákonná povinnost / bezpečnost:
+- Veřejné vysvětlení pro zákazníka:
+
+## Lhůty
+- Aktivní účet:
+- Po ukončení služby:
+- Zálohy:
+- Exporty / dočasné kopie:
+
+## Mazání
+- Mazací mechanismus:
+- Frekvence:
+- Důkaz o provedení:
+- Co se anonymizuje místo mazání:
+
+## Výjimky
+- Možné důvody pozastavení:
+- Owner výjimky:
+- Maximální revizní interval:
+
+## Kontrola
+- Poslední revize:
+- Další revize:
+- Testováno restore/deletion replay: ano / ne
+```
+
+## Zdroje
+
+- GDPR, článek 5 — zásady zpracování včetně minimalizace údajů a omezení uložení: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- European Data Protection Board — přehled základních zásad GDPR včetně accountability: https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
+- EDPB — praktický průvodce pro malé firmy zmiňující časové omezení uchování osobních údajů: https://www.edpb.europa.eu/sme/find-practical-info/faq_ga?page=1
+- OWASP Logging Cheat Sheet — doporučení k logování, vyloučení citlivých dat a likvidaci logů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Session Management Cheat Sheet — upozornění, že citlivá session data nepatří do logů: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+
 # Pracovní log
+- 2026-10-01: Doplněna příloha „Retenční plán bez nekonečného skladu dat“ s kategoriemi dat, účelovým nastavením lhůt, mazacím workflow, deletion replay po obnově záloh, pravidly pro logy/exporty, evidencí výjimek, zákaznickým vysvětlením, checklistem, retenční kartou a ověřenými zdroji GDPR, EDPB a OWASP.
+
 - 2026-10-01: Doplněna příloha „Produktová dokumentace a changelog bez platformní závislosti“ s mapou rozhodnutí, UX pravidly pro dokumentaci, lidsky čitelným changelogem, bezpečnými release notes, vlastněnými distribučními kanály, provozní rutinou, checklistem, dokumentační kartou a ověřenými zdroji Keep a Changelog, SemVer a W3C WCAG.
 
 - 2026-10-01: Doplněna příloha „AI Act inventory bez paniky a papírového divadla“ s praktickým rozlišením rolí, účelů, autonomie, transparentnosti, GPAI dodavatelů, revizních spouštěčů, checklistem, vyplnitelnou AI inventory kartou a ověřenými zdroji Evropské komise a EUR-Lex.
