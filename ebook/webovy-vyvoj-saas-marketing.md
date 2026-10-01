@@ -24437,8 +24437,190 @@ Když odpovědi nejsou jasné, drž klíče blíž u sebe. Pohodlný dashboard n
 - GitHub: [Secret Protection](https://github.com/security/advanced-security/secret-protection)
 - NIST CSRC: [Key Management Guidelines](https://csrc.nist.gov/projects/key-management/key-management-guidelines)
 
+# Příloha: Export a mazání účtu bez datového bludiště
+
+Export dat a mazání účtu jsou funkce, které malé SaaS týmy často odkládají, protože „to přece zatím nikdo nechtěl“. Jenže přesně v tom je past. Když první žádost přijde ve chvíli, kdy je zákazník naštvaný, právník má otevřený kalendář a support hledá data ručně v databázi, z jednoduchého procesu je najednou archeologická expedice s přilbou a nervózním CFO v pozadí.
+
+Privacy-first produkt má umět dvě věci bez dramatu: dát člověku srozumitelnou kopii relevantních dat a bezpečně ukončit vztah tam, kde už data nejsou potřeba. Neznamená to smazat vše jedním tlačítkem bez přemýšlení. Znamená to vědět, která data patří do exportu, která se mají anonymizovat, která musí zůstat kvůli zákonné povinnosti a jak to vysvětlit lidsky.
+
+> Codyho komentář: „Smazat účet“ není jen červené tlačítko. Je to test, jestli produkt opravdu vlastní svá data, nebo jestli data vlastní produkt a tým kolem nich jen opatrně našlapuje.
+
+## Nejdřív rozliš export, přenositelnost a interní archiv
+
+Uživatel často řekne „chci svoje data“, ale tým musí vědět, o jaký typ výstupu jde.
+
+Prakticky rozlišuj tři režimy:
+
+- **Přístup k údajům** — člověk chce vědět, jaké osobní údaje o něm zpracováváš, proč, komu je předáváš a jak dlouho je držíš.
+- **Produktový export** — zákazník chce pracovní data ze služby: projekty, poznámky, fakturační přehledy, nastavení nebo historii aktivit.
+- **Přenositelnost dat** — člověk chce data, která poskytl, ve strukturovaném, běžně používaném a strojově čitelném formátu, pokud jsou splněné podmínky podle GDPR.
+
+Tyto režimy se překrývají, ale nejsou totéž. Interní auditní log může být důležitý pro bezpečnost, ale nemusí patřit do běžného produktového exportu celý. Naopak seznam projektů může být pro uživatele klíčový, i když právně nejde o složitý subjektový přístup. Pokud to zamícháš dohromady, výsledek bude buď neúplný, nebo přehnaně citlivý.
+
+Dobrá SaaS praxe je mít dva výstupy:
+
+- **Uživatelský export** v produktu, například ZIP s JSON/CSV soubory a krátkým README.
+- **DSR balíček** pro žádosti subjektu údajů, připravený přes support nebo admin proces s ověřením identity a kontrolou dopadu na práva ostatních lidí.
+
+## Export nesmí prozradit cizí lidi
+
+Nejčastější chyba exportu je jednoduchá: tým exportuje databázové řádky tak, jak leží, a tím omylem přidá data jiných uživatelů, interní identifikátory, poznámky supportu nebo bezpečnostní signály. Export má být produktová funkce, ne dump produkce v dárkovém balení.
+
+Před implementací si u každé tabulky napiš:
+
+- komu data patří,
+- kdo je vytvořil,
+- kdo je může vidět,
+- jestli obsahují osobní údaje jiných lidí,
+- jestli jde o zákaznický obsah, metadata nebo bezpečnostní log,
+- jestli mají být exportována, anonymizována, agregována nebo vynechána.
+
+Příklad: v nástroji pro týmové úkoly může export jednoho uživatele obsahovat jeho profil, vlastní úkoly, komentáře a nastavení notifikací. Ale nemusí automaticky obsahovat celé komentářové vlákno s e-maily kolegů, interní support poznámky ani IP adresy z bezpečnostního logu. Pokud jde o workspace export pro administrátora, pravidla budou jiná než pro osobní export člena týmu.
+
+Privacy-first export má mít README soubor. Ne kvůli kráse, ale kvůli použitelnosti:
+
+```text
+export-readme.txt
+
+Vytvořeno: 2026-10-01T09:00:00Z
+Účet / workspace: example-workspace
+Formát: JSON + CSV
+Časové pásmo: Europe/Prague
+Obsahuje: profil, projekty, úkoly, fakturační přehledy, nastavení
+Neobsahuje: bezpečnostní logy, interní support poznámky, data jiných uživatelů mimo váš workspace
+Kontakt pro dotazy: privacy@example.cz
+```
+
+## Mazání není jedna operace
+
+Mazání účtu má mít stavový model. Jinak budeš jednou mazat příliš málo, podruhé příliš hodně a potřetí se někdo zeptá, proč zmizely faktury, které musely zůstat kvůli účetnictví.
+
+Praktický model:
+
+1. **Žádost o smazání** — uživatel nebo admin ji spustí v produktu, případně přes support.
+2. **Ověření identity a oprávnění** — osobní účet může mazat vlastník účtu, workspace obvykle vlastník nebo admin.
+3. **Preview dopadu** — produkt ukáže, co bude smazáno, anonymizováno, ponecháno a proč.
+4. **Čekací lhůta** — například 7 až 30 dní podle rizika a typu služby, pokud to dává smysl a není v rozporu s konkrétní žádostí nebo právní povinností.
+5. **Deaktivace přístupů** — relace, API klíče, OAuth tokeny, webhooks a pozvánky se zneplatní hned.
+6. **Smazání nebo anonymizace** — obsah se smaže, vazby se odpojí, agregované statistiky zůstanou bez identifikace.
+7. **Potvrzení a auditní stopa** — zůstane minimální záznam o vyřízení, ne celý příběh účtu.
+
+Mazání má být idempotentní. Když job spadne uprostřed a běží znovu, nesmí obnovit půl účtu nebo poslat tři potvrzovací e-maily. U každého kroku drž stav: `pending`, `processing`, `completed`, `skipped_legal_hold`, `failed_retryable`, `failed_manual_review`.
+
+## Co obvykle nemažeš hned
+
+Privacy-first neznamená „spálit účetnictví, logy a smlouvy, protože někdo klikl na tlačítko“. Některá data můžeš potřebovat pro splnění právní povinnosti, obranu právních nároků, bezpečnostní incident nebo účetní evidenci. Důležité je držet je odděleně, minimalizovaně a vysvětleně.
+
+Typické výjimky:
+
+- faktury a daňové doklady,
+- záznam o souhlasu nebo odvolání souhlasu,
+- minimální auditní stopa bezpečnostních událostí,
+- záznam o vyřízení žádosti subjektu údajů,
+- anonymizované agregované metriky,
+- data pod právním nebo smluvním „holdem“.
+
+Rozdíl je v účelu. Aktivní produktový profil už nepotřebuješ, ale fakturu můžeš potřebovat kvůli účetním povinnostem. Bezpečnostní log nepotřebuješ jako marketingový profil, ale můžeš ho potřebovat k vyšetření zneužití. V dokumentaci to napiš bez mlžení.
+
+Ukázka textu do produktu:
+
+```text
+Po smazání účtu odstraníme váš profil, produktový obsah, aktivní relace, API klíče a nastavení. Některé údaje můžeme po omezenou dobu uchovat, pokud je potřebujeme pro zákonné povinnosti, bezpečnost, vyřízení žádostí nebo obranu právních nároků. Tyto údaje nepoužíváme pro marketing ani profilování.
+```
+
+## Subprocesory a integrace musí dostat signál
+
+Mazání nekončí v hlavní databázi. SaaS často posílá data do e-mailingu, podpory, fakturace, analytiky, CRM, storage, vyhledávání nebo logovací služby. Pokud nemáš mapu integrací, účet v aplikaci sice zmizí, ale jeho stín zůstane v pěti nástrojích a jednom zapomenutém indexu.
+
+U každé integrace si napiš:
+
+- jaké identifikátory používá,
+- jestli má vlastní mazací API,
+- jak dlouho drží data v zálohách,
+- kdo má přístup,
+- jak se mazání prokazuje,
+- co se stane při chybě.
+
+Pro menší tým stačí jednoduchá fronta `privacy_jobs`: `account_id`, `job_type`, `target_system`, `status`, `attempts`, `last_error`, `completed_at`. Důležité je, aby nešlo o ruční checklist v hlavě jednoho vývojáře. Hlava vývojáře je skvělý cache layer, ale mizerný systém evidence.
+
+## Zálohy: neobnovuj smazané lidi zpátky do života
+
+Zálohy jsou zvláštní případ. Obvykle nejde prakticky přepisovat každou starší zálohu po jednotlivé žádosti, ale musíš mít pravidlo, aby se smazaná data nevrátila do aktivního provozu při restore. To znamená dvě věci:
+
+- Zálohy mají jasnou retenční dobu a nejsou věčný archiv „pro jistotu“.
+- Restore postup obsahuje re-aplikaci mazacích/anonymizačních událostí po obnovení.
+
+Prakticky: udržuj tabulku nebo log s minimálními tombstone záznamy typu `deleted_account_id_hash`, `deleted_at`, `deletion_scope`. Po obnově ze zálohy systém znovu projde mazací události, které nastaly po čase zálohy. Tombstone nesmí být nový profil uživatele v převleku. Má obsahovat jen tolik, aby zabránil nechtěnému návratu dat.
+
+## Checklist: export a mazání bez bludiště
+
+- [ ] Máme oddělený produktový export a proces pro žádosti subjektu údajů.
+- [ ] Každá exportovaná datová sada má vlastníka, účel a pravidlo pro data jiných osob.
+- [ ] Export obsahuje README s formátem, časovým pásmem, rozsahem a kontaktem.
+- [ ] Mazání účtu má stavový model a je bezpečně opakovatelné.
+- [ ] Produkt ukazuje dopad mazání před potvrzením.
+- [ ] Relace, API klíče, OAuth tokeny a webhooky se ruší hned při deaktivaci.
+- [ ] Víme, která data zůstávají kvůli zákonným povinnostem nebo bezpečnosti.
+- [ ] Mazání se propaguje do subprocesorů, storage, indexů a podpůrných nástrojů.
+- [ ] Restore ze zálohy re-aplikuje mazací události.
+- [ ] Support má šablonu odpovědi a ví, kdy eskalovat právní nebo bezpečnostní výjimku.
+
+## Mini šablona exportně-mazací karty
+
+```markdown
+# Exportně-mazací karta: [účet / workspace / produktová oblast]
+
+## Rozsah
+- Typ dat:
+- Vlastník dat:
+- Role, která může exportovat:
+- Role, která může mazat:
+
+## Export
+- Formát:
+- Obsahuje:
+- Neobsahuje:
+- Riziko dat jiných osob:
+- README / vysvětlivky:
+
+## Mazání
+- Spouštěč:
+- Čekací lhůta:
+- Co se smaže:
+- Co se anonymizuje:
+- Co zůstává a proč:
+- Stavový model jobu:
+
+## Integrace
+- Subprocesory:
+- Storage:
+- Vyhledávací indexy:
+- Logy:
+- Fakturace:
+
+## Zálohy
+- Retence záloh:
+- Tombstone / deletion log:
+- Restore postup:
+
+## Komunikace
+- Text v produktu:
+- Support šablona:
+- Eskalace:
+```
+
+## Zdroje
+
+- EUR-Lex: [Regulation (EU) 2016/679 — GDPR, Article 12, 15, 17, 19 and 20](https://eur-lex.europa.eu/eli/reg/2016/679)
+- European Commission: [Information for individuals — data protection rights](https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en)
+- EDPB: [Guidelines 01/2022 on data subject rights — Right of access](https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en)
+- EDPB: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en)
+- OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+
+
 # Pracovní log
 
+- 2026-10-01: Doplněna příloha „Export a mazání účtu bez datového bludiště“ s rozlišením produktového exportu, DSR balíčku a přenositelnosti, bezpečným mazacím workflow, výjimkami pro zákonné povinnosti, propagací do subprocesorů, pravidly pro zálohy, checklistem, šablonou karty a ověřenými zdroji GDPR, Evropské komise, EDPB a OWASP.
 - 2026-10-01: Doplněna příloha „API klíče a tajemství bez úniku do repozitáře“ s inventářem secretů, principem nejmenších oprávnění, secret scanningem, rotací, bezpečným logováním, evropským provozem, checklistem a vyplnitelnou secret kartou.
 - 2026-10-01: Doplněna příloha „Přihlášení, relace a zařízení bez digitálního stalkingu“ se session cookies, timeouty, reautentizací před citlivými akcemi, přehledem zařízení, ochranou proti enumeraci účtů, bezpečnostními logy, checklistem, session kartou a ověřenými zdroji OWASP a NIST.
 - 2026-10-01: Rozšířena příloha „Admin rozhraní bez superuživatelského průšvihu“ o provozní test session, MFA a admin API, negativní autorizační scénáře, multitenant kontrolu objektů a ověřené zdroje OWASP a NIST.
