@@ -29188,199 +29188,177 @@ Měsíční checklist:
 - Finanční správa — obecné informace k účetnictví a úschově účetních záznamů: https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/ucetnictvi/obecne-informace
 - e-Sbírka — zákon č. 235/2004 Sb., o DPH, uchovávání daňových dokladů: https://e-sbirka.gov.cz/sb/2004/235
 
-# Příloha: Feature flagy bez permanentního chaosu v produktu
+# Příloha: Aktualizace závislostí bez supply-chain loterie
 
-Feature flag je jednoduchý nápad: kód je nasazený, ale konkrétní chování jde zapnout jen pro vybraný segment, tenant, interní tým nebo procento provozu. V malém SaaS to umí zachránit release, umožnit postupné spuštění a dát týmu nouzovou brzdu. Zároveň je to skvělý způsob, jak si v produktu vyrobit druhý, skrytý konfigurační systém, kterému po půl roce nikdo nerozumí.
+Každý web a SaaS stojí na cizím kódu: frameworky, knihovny, balíčky, build nástroje, Docker image, GitHub Actions, fonty, SDK, integrační klienti. To není špatně. Špatně je tvářit se, že vlastní produkt končí u vlastního repozitáře. Moderní software je dodavatelský řetězec, jen místo kamionů vozí verze balíčků a občas i malé překvapení v podobě kompromitovaného maintainer účtu.
 
-Dobře vedený feature flag není náhrada za testy, návrh ani komunikaci se zákazníkem. Je to dočasný nebo provozní nástroj pro řízené riziko. Když flag nemá vlastníka, důvod, plán odstranění a bezpečný audit, není to strategie. Je to digitální izolepa.
+Cílem není paranoidně přepsat všechno od nuly. Cílem je vědět, co používáš, odkud to pochází, kdo to udržuje, jak rychle umíš reagovat a jak zabráníš tomu, aby běžný update rozbil produkci nebo poslal zákaznická data na výlet.
 
-> Codyho komentář: Feature flagy jsou jako vypínače ve sklepě. Jeden je praktický. Padesát neoznačených vypínačů je escape room pro vývojáře, kteří chtěli jen opravit fakturaci.
+> Codyho komentář: „npm install a uvidíme“ je legitimní experiment na víkendový prototyp. V placeném SaaS je to trochu jako podepsat smlouvu s dodavatelem, kterého znáš jen podle avatara a počtu hvězdiček. Romantické, ale účetní z toho radost nemá.
 
-## Rozliš typ flagu dřív než napíšeš podmínku
+## Začni inventářem, ne scannerem
 
-Ne každý flag má stejný životní cyklus. Pokud je házíš do jedné tabulky bez typu, začneš míchat release řízení, experimenty, oprávnění zákazníků a krizové vypínače.
+Automatický scanner je užitečný, ale nejdřív potřebuješ rozumnou mapu. V malém týmu stačí rozdělit závislosti podle dopadu:
 
-Praktické rozdělení:
+| Kategorie | Příklady | Kontrola |
+| --- | --- | --- |
+| Runtime kód | framework, databázový klient, auth knihovna, platební SDK | nejpřísnější review |
+| Build a CI | bundler, GitHub Actions, Docker base image | pinování verzí a provenance |
+| Vývojářské nástroje | formatter, lokální testovací utilita | menší riziko, ale pořád audit |
+| Frontend třetích stran | fonty, mapy, embed, analytika | privacy a výkon |
+| Integrace | CRM, fakturace, e-mail, AI API klient | data a smluvní dopad |
 
-| Typ flagu | K čemu slouží | Typická životnost | Riziko |
-| --- | --- | --- | --- |
-| Release flag | Skryje novou funkci před plným spuštěním. | dny až týdny | zapomenutý starý kód |
-| Experiment flag | Porovnává varianty onboarding, copy nebo toku. | dny až týdny | zbytečný sběr dat |
-| Permission flag | Zapíná funkci podle tarifu, smlouvy nebo role. | dlouhodobě | obchodní logika schovaná v chaosu |
-| Ops flag | Slouží jako kill switch při incidentu nebo přetížení. | dlouhodobě, ale málo používaný | neotestovaná nouzová brzda |
-| Migration flag | Řídí přechod mezi starou a novou implementací. | do dokončení migrace | dvě pravdy v datech |
+U každé kritické závislosti eviduj název, účel, ekosystém, aktuální verzi, vlastníka v týmu, zdroj, licenci, typ dat, která může ovlivnit, a plán aktualizace. Nepotřebuješ akademickou encyklopedii. Potřebuješ odpovědět na otázku: „Když zítra vyjde kritická zranitelnost, víme, kde nás bolí?“
 
-První otázka u každého flagu tedy není „jak se bude jmenovat“, ale „jaký typ rizika řídí a kdy zmizí“.
+## Pinuj verze tam, kde se rozhoduje o produkci
 
-## Každý flag musí mít kartu, ne jen název v kódu
+Lockfile není byrokracie. Je to účetní kniha sestavení. Bez lockfile nevíš, jestli dnešní build opravdu odpovídá včerejšímu buildu. U Docker image a CI akcí jdi ještě dál: pro kritické části preferuj konkrétní tagy, digesty nebo ověřené release místo plovoucího `latest`.
 
-Minimální metadata drž klidně v repozitáři, administračním rozhraní nebo interním dokumentu. Důležité je, aby existovala jedna pravda.
+Praktická pravidla:
 
-U každého flagu eviduj:
+- commituj lockfile,
+- v CI používej čistou instalaci podle lockfile,
+- nepoužívej `latest` pro produkční base image,
+- pravidelně obnovuj lockfile v řízených PR,
+- odděl běžný update od bezpečnostní opravy,
+- u kritických GitHub Actions zvaž pin na commit SHA.
 
-- název a krátký popis,
-- typ flagu,
-- vlastníka,
-- defaultní stav,
-- segment nebo pravidlo zapnutí,
-- datum vytvoření,
-- plán odstranění nebo revize,
-- očekávaný dopad při zapnutí i vypnutí,
-- odkazy na ticket, dokumentaci a testy.
+Pinování není omluva pro věčné zamrznutí. Starý lockfile je bezpečný asi jako zamčené dveře, které vedou do domu bez střechy.
 
-Název piš podle rozhodnutí, ne podle implementačního detailu. `new_checkout` je lepší než `stripe_v2_temp`, ale ještě lepší je `checkout_split_payment_rollout`, protože říká, co řídí. Slovo `temp` je mimochodem takový malý pomníček optimismu.
+## Aktualizuj v malých dávkách
 
-## Default musí být bezpečný
+Nejhorší update je „po půl roce všechno najednou“. Když se rozbije test, nevíš, jestli za to může framework, transpilace, typy, runtime, nebo kosmické záření ve `node_modules`.
 
-Flag systém občas selže: konfigurace nejde načíst, cache je prázdná, administrační UI spadne nebo síť zrovna dělá divadlo. Proto musí mít každý flag definovaný bezpečný default.
+Rozumný rytmus:
 
-Praktické pravidlo:
+- patch verze: automatizovaný PR týdně,
+- minor verze: pravidelný review slot,
+- major verze: samostatná karta s migračním plánem,
+- bezpečnostní update: zvláštní priorita podle dopadu,
+- nepoužívané balíčky: odstranit, ne jen ignorovat.
 
-- release flag nové funkce: default vypnuto,
-- ops kill switch pro drahou nebo rizikovou funkci: default bezpečný režim,
-- permission flag: default podle serverově ověřeného tarifu, ne podle klienta,
-- experiment: default stabilní kontrolní varianta,
-- migrace: default cesta, která neztratí data.
+U každého update PR vyžaduj stručný changelog: co se mění, proč to děláme, jaké části produktu mohou být zasažené a jak se ověřilo, že se nerozbilo kritické workflow.
 
-U kritických funkcí netahej rozhodnutí jen z frontendu. Klient může zlepšit UX, ale autoritativní kontrola musí být na serveru. Pokud uživatel vidí tlačítko díky flagu, ale server akci stejně nepovolí, je to otravné. Pokud server akci povolí jen proto, že si někdo přepsal klientský stav, je to průšvih.
+## Zranitelnosti třiď podle reálného dopadu
 
-## Rollout dělej po segmentech, ne podle odvahy
+CVSS skóre je dobrý signál, ale nezná tvůj produkt. Kritická zranitelnost v balíčku používaném jen v lokálním storybooku má jiný dopad než střední zranitelnost v auth middleware na produkci.
 
-Postupné zapnutí má mít jasný rytmus. Nestačí „dáme to pěti procentům a uvidíme“. Uvidíme co? Kdy? Kdo se dívá? Co přesně nás zastaví?
+Triage otázky:
 
-Jednoduchý rollout plán pro B2B SaaS:
+- Je závislost přítomná v produkčním buildu?
+- Je zranitelná funkce skutečně používaná?
+- Dostane se k ní neautentizovaný uživatel?
+- Může zranitelnost ovlivnit osobní údaje, platby nebo dostupnost služby?
+- Existuje oprava, workaround nebo možnost dočasného vypnutí?
+- Potřebujeme informovat zákazníky nebo interní podporu?
 
-1. Interní tým a testovací tenant.
-2. Jeden dobrovolný zákazník s nízkým rizikem.
-3. Malý segment podle tarifu, regionu nebo scénáře použití.
-4. Větší segment po kontrole metrik a podpory.
-5. Plné zapnutí.
-6. Odstranění release flagu z kódu.
+Výsledek triage zapisuj. Ne proto, aby vznikl román, ale aby se za měsíc vědělo, proč se něco opravovalo hned a něco čekalo do plánovaného release.
 
-Ke každé fázi napiš vstupní a výstupní podmínky. Například: „Pokračujeme z 10 % na 25 %, pokud za 24 hodin nepřibude víc než pět chyb `checkout.payment_failed_unexpected`, podpora nemá otevřený kritický ticket a konverze neklesne o víc než dohodnutý práh.“
+## Novou závislost ber jako mini vendor review
 
-## Kill switch testuj před incidentem
+Přidání knihovny je rozhodnutí o dodavateli. Nemusí z toho být dvoudenní porada, ale kritické balíčky si zaslouží pár minut disciplíny.
 
-Ops flag, který nikdo nikdy nezkusil vypnout, není kill switch. Je to přání. Nouzová brzda musí být jednoduchá, rychlá a dostupná i člověku, který zrovna nezná detail implementace.
+Před přidáním se zeptej:
 
-Dobrá nouzová brzda má:
+- Řeší balíček dost velký problém, nebo si kupujeme pohodlí za dlouhodobý dluh?
+- Má aktivní údržbu, release historii a reakce na issue?
+- Má rozumnou licenci pro komerční použití?
+- Má zbytečně široké dependency tree?
+- Běží v prohlížeči a může posílat data mimo naši kontrolu?
+- Existuje menší nebo standardnější alternativa?
+- Umíme balíček odstranit, když se ukáže jako problém?
 
-- jasný název a popis dopadu,
-- ownera nebo službu odpovědnou za rozhodnutí,
-- log změny stavu,
-- možnost rychlého návratu,
-- krátkou instrukci pro podporu,
-- monitorovací signál, že se opravdu změnilo chování systému.
+Codyho praktické pravidlo: čím blíž je závislost k osobním údajům, přihlášení, platbám, buildu nebo deploymentu, tím méně stačí „vypadá populárně“.
 
-Příklad: pokud integrace s externí fakturační službou začne timeoutovat, ops flag může zastavit automatické odesílání požadavků, ukládat úlohy do fronty a uživateli ukázat férový stav „fakturu připravujeme, odešleme ji po obnovení služby“. To je lepší než pět opakovaných pokusů, nekonečný spinner a Slack plný vykřičníků.
+## Build provenance není jen pro korporáty
 
-## Experimenty nesmí být výmluva pro šmírování
+SLSA popisuje postupné úrovně ochrany integrity buildů a artefaktů. Malý SaaS nemusí hned stavět raketovou obranu, ale může převzít jednoduchý princip: produkční artefakt má být dohledatelný k repozitáři, commitu, workflow a prostředí, které ho sestavilo.
 
-Experiment flag často svádí k tomu měřit všechno: kliky, scroll, pohyby myši, čas na prvku, e-mail, firmu, IP adresu a náladu počasí. Privacy-first přístup říká: začni hypotézou a sbírej jen data nutná k jejímu ověření.
+Minimum pro malý tým:
 
-Lepší zadání experimentu:
+- release vzniká z konkrétního commitu,
+- CI logy a artefakty mají retenční pravidla,
+- deployment nejde ručně přepsat bez stopy,
+- tajemství nejsou v build logu,
+- release poznámky odkazují na změny,
+- rollback ví, ke kterému commitu se vrací.
 
-```text
-Hypotéza: Kratší onboarding zvýší dokončení prvního projektu.
-Segment: Nové trial účty v EU regionu.
-Varianty: Stávající onboarding / tříkrokový onboarding.
-Primární metrika: Dokončený první projekt do 7 dnů.
-Sekundární metrika: Počet ticketů k onboardingu.
-Data, která nesbíráme: Obsah projektu, texty uživatele, session replay.
-Retence: Agregace po 30 dnech, detailní eventy po 14 dnech smazat.
-Stop podmínka: Nárůst kritických ticketů nebo pokles aktivace nad práh.
-```
+Tohle není compliance divadlo. Je to schopnost po incidentu odpovědět: „Co přesně běží v produkci a kdo to tam dostal?“
 
-Tím se experiment stává produktovým rozhodnutím, ne lovem dat pro pozdější „něco z toho určitě vyčteme“.
+## Privacy-first kontrola frontend závislostí
 
-## Odstraňování flagů je součást Definition of Done
+Frontend balíček může být bezpečnostní i privacy problém. Nejde jen o zranitelnost v kódu. Jde i o externí requesty, fonty, mapy, videa, widgety, analytiku a SDK, která se načítají v prohlížeči uživatele.
 
-Nejčastější chyba není flag přidat. Nejčastější chyba je nikdy ho neodstranit. Starý release flag zvyšuje počet kombinací, které bys měl testovat, komplikuje refaktor a vytváří tichou nejistotu: „Může to ještě někdo mít vypnuté?“
+Před nasazením frontend závislosti ověř:
 
-Zaveď jednoduché pravidlo:
+- zda načítá cizí skripty za běhu,
+- zda kontaktuje externí domény,
+- zda ukládá cookies nebo lokální identifikátory,
+- zda posílá URL, IP, user agent nebo jiné signály třetí straně,
+- zda funguje bez reklamních pixelů a session replay,
+- zda má self-hosted nebo evropskou variantu.
 
-- release flag musí mít datum revize,
-- po plném rollout má vzniknout cleanup ticket,
-- cleanup je hotový až po smazání staré větve kódu, testů pro starou cestu a neplatné dokumentace,
-- dlouhodobé permission a ops flagy mají čtvrtletní revizi,
-- seznam aktivních flagů se kontroluje při každém větším releasu.
+Pokud knihovna potřebuje externí skript, napiš to do datové mapy. Pokud to neumíš vysvětlit zákazníkovi jednou větou, je to špatný signál.
 
-U malého týmu stačí měsíční „flag gardening“: patnáct minut, seznam flagů, otázka „který z nich už nemá důvod existovat“. Není to sexy, ale ani požár v checkoutu není zrovna lázeňský wellness.
+## Checklist: dependency update bez loterie
 
-## Loguj změny flagů, ne osobní detaily uživatelů
+- [ ] Máme inventář kritických runtime, build a frontend závislostí?
+- [ ] Commitujeme lockfile a CI instaluje podle něj?
+- [ ] Nepoužíváme `latest` pro produkční base image a kritické nástroje?
+- [ ] Aktualizujeme malé dávky pravidelně, ne všechno jednou za půl roku?
+- [ ] Bezpečnostní nálezy třídíme podle reálného dopadu na produkt?
+- [ ] Každá nová kritická závislost má mini review licence, údržby a dat?
+- [ ] Frontend balíčky kontrolujeme na externí requesty a tracking?
+- [ ] Víme, z jakého commitu vznikl produkční artefakt?
+- [ ] Umíme zranitelnou závislost rychle opravit, obejít nebo odstranit?
+- [ ] Máme rutinu pro mazání nepoužívaných balíčků?
 
-Audit změn je důležitý, protože flag může změnit produkční chování bez deploymentu. Log ale nemá být skládka osobních údajů.
-
-U změny flagu obvykle stačí:
-
-- kdo změnu provedl,
-- kdy,
-- jaký flag,
-- původní a nový stav,
-- důvod nebo odkaz na ticket,
-- zasažený segment v agregované podobě,
-- korelační ID pro incident nebo rollout.
-
-Vyhni se ukládání obsahu zákaznických dat, kompletních payloadů, e-mailů v segmentech a dlouhodobých exportů „pro jistotu“. Pokud potřebuješ dohledat problém konkrétního zákazníka, používej interní ID a přístup omez podle role.
-
-## Checklist: feature flagy bez chaosu
-
-- [ ] Má každý flag typ: release, experiment, permission, ops nebo migration?
-- [ ] Má každý flag vlastníka a plán revize nebo odstranění?
-- [ ] Je default bezpečný při výpadku konfigurace?
-- [ ] Je server autoritativní pro oprávnění a placené funkce?
-- [ ] Má rollout jasné fáze, metriky a stop podmínky?
-- [ ] Je kill switch otestovaný před incidentem?
-- [ ] Sbírá experiment jen data nutná k ověření hypotézy?
-- [ ] Log změn flagů neobsahuje zbytečné osobní údaje?
-- [ ] Existuje měsíční rutina odstranění starých flagů?
-- [ ] Jsou zákaznické dopady popsatelné podporou lidskou větou?
-
-## Mini šablona feature flag karty
+## Mini šablona dependency review
 
 ```text
-# Feature flag: [název]
-
-Typ:
-Vlastník:
-Datum vytvoření:
-Datum revize / odstranění:
+# Dependency review: [název balíčku]
 
 Účel:
-Co flag zapíná:
-Co flag nevypíná:
+Ekosystém:
+Verze:
+Typ použití: runtime / build / dev / frontend / integrace
+Vlastník v týmu:
 
-Default při chybě konfigurace:
-Autoritativní kontrola: server / klient / obojí
+Data a dopad:
+Má přístup k osobním údajům?
+Běží v prohlížeči uživatele?
+Volá externí domény?
+Ovlivňuje přihlášení, platby, billing nebo deployment?
 
-Segmenty rollout:
-1.
-2.
-3.
+Údržba:
+Zdroj:
+Licence:
+Release historie:
+Alternativy:
+Důvod výběru:
 
-Metriky pro pokračování:
-Stop podmínky:
-Podpora — vysvětlení zákazníkovi:
+Bezpečnost:
+Známé zranitelnosti:
+Pinování verze:
+Plán aktualizací:
+Rollback / odstranění:
 
-Data a privacy:
-Logované změny:
-Data, která záměrně nesbíráme:
-Retence detailních dat:
-
-Cleanup plán:
-Odkaz na ticket:
+Rozhodnutí:
+Schválil:
+Datum revize:
 ```
 
 ## Zdroje
 
-- Martin Fowler — Feature Toggles / Feature Flags: https://martinfowler.com/articles/feature-toggles.html
-- Martin Fowler — Feature Flag bliki: https://martinfowler.com/bliki/FeatureFlag.html
-- OWASP Logging Cheat Sheet — doporučení k aplikačnímu logování a datům, která do logů nepatří: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
-- Evropská komise — principy GDPR včetně minimalizace a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
-- EUR-Lex — GDPR, článek 5: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+- OWASP Software Component Verification Standard: https://owasp.org/projects/software-component-verification-standard
+- OWASP SCVS — Component Analysis: https://owasp-scvs.gitbook.io/scvs/v5-component-analysis
+- SLSA — Supply-chain Levels for Software Artifacts: https://slsa.dev/
+- SLSA — About SLSA: https://slsa.dev/spec/v1.2/about
+- OpenSSF Scorecard: https://openssf.org/scorecard/
+- OWASP Component Analysis: https://community.owasp.org/Component_Analysis
 
 # Pracovní log
-- 2026-10-02: Doplněna příloha „Feature flagy bez permanentního chaosu v produktu“ s rozlišením typů flagů, kartou metadat, bezpečnými defaulty, postupným rolloutem, kill switchem, privacy-first experimenty, rutinou odstraňování flagů, auditním logováním, checklistem, vyplnitelnou šablonou a ověřenými zdroji Martin Fowler, OWASP, Evropské komise a EUR-Lex.
+- 2026-10-02: Doplněna příloha „Aktualizace závislostí bez supply-chain loterie“ s inventářem kritických balíčků, pinováním verzí, pravidelnými updaty, triage zranitelností, mini vendor review, build provenance, privacy-first kontrolou frontend závislostí, checklistem, vyplnitelnou dependency review šablonou a ověřenými zdroji OWASP, SLSA a OpenSSF.
 - 2026-10-02: Doplněna příloha „Reconciliation plateb bez účetní detektivky“ s párovacími klíči mezi produktem, platebním poskytovatelem, fakturací a účetnictvím, denní kontrolou nesouladů, pravidly pro výjimky, bankovní převody, minimalizaci dat, měsíční závěrku, reconciliation report šablonu a ověřené zdroje GDPR, Finanční správy a e-Sbírky.
 - 2026-10-02: Doplněna navazující příloha „Kvóty a spending capy bez trestání dobrých zákazníků“ s návrhem limitů podle ceny operace, kombinací klíčů, odpovědí `429`/`Retry-After`, kvótami, grace režimem, spending capy, privacy-first logováním, checklistem, limit policy šablonou a ověřenými zdroji RFC, MDN a OWASP.
 
