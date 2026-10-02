@@ -31067,7 +31067,198 @@ Vyhledávání je skvělá produktová funkce, když zkracuje cestu k práci. Al
 - PostgreSQL Documentation: [Row Security Policies](https://www.postgresql.org/docs/current/ddl-rowsecurity.html)
 - OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 
+
+# Příloha: Customer health score bez zákaznického rentgenu
+
+Customer health score má pomoct týmu poznat, kde zákazník potřebuje pomoc, kde roste hodnota a kde hrozí odchod. Nemá z něj být tajný psychologický profil, který sleduje každé kliknutí, každou minutu v aplikaci a každý nádech u ceníku. To není customer success. To je detektivka s dashboardem.
+
+Privacy-first health score stojí na jednoduchém pravidle: měř jen signály, které mají jasnou návaznost na zákaznickou hodnotu nebo provozní riziko. Pokud neumíš vysvětlit, jak konkrétní signál pomůže zákazníkovi, týmu nebo bezpečnosti, pravděpodobně ho nepotřebuješ.
+
+> Codyho komentář: Dobré skóre zákazníka není křišťálová koule. Je to pracovní seznam pro tým: komu pomoct, co ověřit a kdy se raději zeptat člověka než věřit grafu, který vypadá sebevědoměji než skutečnost.
+
+## Začni otázkou, komu skóre pomáhá
+
+Než začneš počítat body, napiš si větu:
+
+```text
+Health score pomáhá [role v týmu] rozhodnout [konkrétní akci] pro [typ zákazníka] bez sběru zbytečných osobních dat.
+```
+
+Příklady:
+
+- Customer success chce najít nové B2B zákazníky, kteří nedokončili onboarding do 14 dnů.
+- Support chce poznat účty, kde opakované chyby blokují hlavní práci.
+- Produkt chce vidět, zda nové týmy používají klíčovou funkci alespoň jednou týdně.
+- Finance chce rozlišit zdravý účet od účtu s opakovaným platebním problémem.
+- Zakladatel chce před obnovou předplatného vědět, kde má zavolat člověk, ne poslat automatický nátlakový e-mail.
+
+Špatná věta zní: „Chceme vědět, co zákazníci dělají.“ To je hlad po datech, ne produktová potřeba. Dobrá věta obsahuje rozhodnutí: zavolat, pomoct, opravit onboarding, poslat návod, zjednodušit funkci, upravit plán péče.
+
+## Vyber signály hodnoty, ne signály zvědavosti
+
+Health score nemusí znát detailní osobní chování. U B2B SaaS často stačí agregace na úrovni účtu nebo workspace. Důležité je, jestli zákazník dostává hodnotu, ne jestli konkrétní Jana klikla v úterý ve 14:03 na třetí záložku.
+
+Použitelné signály:
+
+| Signál | Co říká | Privacy-first podoba |
+| --- | --- | --- |
+| Dokončení onboardingu | účet prošel základní cestou | `onboarding_completed_at` na úrovni workspace |
+| Aktivace klíčové funkce | zákazník udělal první hodnotnou akci | počet aktivovaných funkcí bez obsahu dat |
+| Opakované používání | produkt se stal rutinou | týdenní agregát aktivních dnů workspace |
+| Počet chyb | zákazník naráží na překážku | kategorie chyb a počet, ne celé payloady |
+| Support témata | zákazník potřebuje pomoc | štítky ticketů, ne celé konverzace ve skóre |
+| Blížící se obnova | obchodní riziko | datum obnovy a tarif, ne marketingový profil |
+| Nevyřešený incident | důvěra je ohrožená | vazba na incident nebo support case |
+
+Nepoužívej jako výchozí signály:
+
+- celý obsah dokumentů, projektů, ticketů nebo e-mailů,
+- přesné clickstream události jednotlivých lidí bez jasného účelu,
+- IP adresy, user agent řetězce a lokace jako běžnou produktovou metriku,
+- nahrávky session replay pro „lepší kontext“,
+- marketingové parametry jako důkaz spokojenosti,
+- interní poznámky obchodníka jako automatické skóre bez lidské kontroly.
+
+Evropská komise u principů GDPR shrnuje, že data mají mít jasný účel a mají být omezena na to, co je pro daný účel nezbytné. Přeloženo do SaaS provozu: health score není povolenka sbírat všechno pro případ, že se to někdy bude hodit.
+
+## Skóre rozděl na malé, vysvětlitelné části
+
+Jedno číslo od 0 do 100 vypadá hezky v dashboardu, ale často skrývá chaos. Lepší je mít několik dílčích kategorií, které tým umí vysvětlit.
+
+Praktický model:
+
+| Oblast | Otázka | Příklad pravidla |
+| --- | --- | --- |
+| Aktivace | Dostali se k první hodnotě? | +20, pokud workspace dokončil klíčový onboarding |
+| Použití | Vrací se k práci? | +20, pokud měl alespoň 2 aktivní pracovní dny za posledních 14 dní |
+| Blokace | Naráží na chyby? | -15, pokud má opakované chyby v kritické cestě |
+| Podpora | Je problém vyřešený? | -10 za otevřený vysoký support ticket starší než 3 pracovní dny |
+| Vztah | Je potřeba lidský kontakt? | -10, pokud se blíží obnova a chybí poslední kontakt |
+| Důvěra | Nebyl narušen provoz? | -20 při otevřeném incidentu s dopadem na účet |
+
+Důležité: každé pravidlo musí mít vlastníka a akci. Pokud skóre klesne, co se stane? Ticket pro customer success? E-mail s návodem? Oprava v produktu? Call? Nebo nic? Pokud nic, metrika je dekorace.
+
+## Nedělej ze skóre automatický soud
+
+Health score má být signál, ne rozsudek. Zákazník může mít nízkou aktivitu, protože je na dovolené, protože používá produkt sezónně nebo protože zrovna dokončil práci a je spokojený. Naopak vysoké použití může znamenat hodnotu, ale taky chaos: uživatelé se pořád vrací, protože něco neumí dokončit.
+
+Bezpečnější pravidla:
+
+- Skóre nikdy samo nevypíná účet, nezvyšuje cenu ani nemění smluvní podmínky.
+- Skóre spouští kontrolu člověkem u citlivých obchodních rozhodnutí.
+- Tým vidí, které signály skóre ovlivnily.
+- Zákaznická komunikace mluví o konkrétní pomoci, ne o tajném skóre.
+- Automatické kampaně používají jemné segmenty, ne nátlakové „víme, že jste poslední dobou neaktivní“.
+
+Špatná zpráva:
+
+```text
+Vidíme, že jste posledních 13 dní nepoužili funkci exportu. Chcete zavolat?
+```
+
+Lepší zpráva:
+
+```text
+Připravili jsme krátký návod k exportům a uzávěrce dat. Pokud teď řešíte reporting, může vám ušetřit pár kroků.
+```
+
+První věta zní jako kamera za ramenem. Druhá nabízí pomoc bez zbytečné exhibice toho, co všechno systém ví.
+
+## Loguj důvod výpočtu, ne osobní román
+
+Health score potřebuje auditovatelnost: tým musí vědět, proč se změnilo. To ale neznamená ukládat surové události navždy. OWASP u logování opakovaně doporučuje nepřenášet do logů citlivé informace a sanitizovat vstupy. U health score je to stejné: ukládej odůvodnění v bezpečné, minimální podobě.
+
+Dobrá auditní událost:
+
+```json
+{
+  "workspace_id": "ws_123",
+  "score_area": "activation",
+  "reason": "onboarding_not_completed_after_14_days",
+  "score_delta": -15,
+  "calculated_at": "2026-10-02T13:00:00Z"
+}
+```
+
+Špatná auditní událost:
+
+```json
+{
+  "email": "jana@example.com",
+  "last_pages": ["/billing", "/cancel", "/export?token=..."],
+  "ticket_text": "...celá zpráva zákazníka...",
+  "score_delta": -35
+}
+```
+
+První varianta pomůže vysvětlit rozhodnutí. Druhá vyrábí další databázi citlivých stop, kterou budeš jednou mazat, chránit, auditovat a litovat.
+
+## Udělej z health score provozní rutinu
+
+Skóre bez rutiny končí jako graf, na který se tým jednou za měsíc provinile podívá. Nastav jednoduchý rytmus:
+
+- **Denně:** projít jen červené účty s jasnou akcí.
+- **Týdně:** zkontrolovat, které signály nejčastěji snižují skóre.
+- **Měsíčně:** vyhodnotit, jestli skóre opravdu předpovídá užitečnou práci týmu.
+- **Čtvrtletně:** odstranit signály, které nikdo nepoužil pro rozhodnutí.
+- **Po incidentu:** ověřit, zda health score nezvýšilo zbytečný tlak na zákazníky zasažené technickým problémem.
+
+Privacy-first zlaté pravidlo: pokud signál tři měsíce nevedl k žádné smysluplné akci, smaž ho nebo agreguj. Data, která nikdo nepotřebuje, nejsou aktivum. Jsou budoucí úklid.
+
+## Checklist: health score bez zákaznického rentgenu
+
+- [ ] Má health score jednu jasnou pracovní větu a vlastníka?
+- [ ] Měříme hodnotu a blokace, ne zvědavost nad chováním jednotlivců?
+- [ ] Jsou signály agregované na úrovni účtu nebo workspace, kde to stačí?
+- [ ] Každé pravidlo má vysvětlitelný dopad na skóre?
+- [ ] Pokles skóre spouští konkrétní pomoc nebo kontrolu člověkem?
+- [ ] Skóre samo nemění cenu, smlouvu ani přístup bez lidského ověření?
+- [ ] Audit výpočtu neukládá celé texty, tokeny, URL s tajemstvím ani citlivé payloady?
+- [ ] Retence surových událostí je krátká a delší historie je agregovaná?
+- [ ] Zákaznická komunikace nabízí pomoc bez strašidelné věty „vidíme, že...“?
+- [ ] Jednou měsíčně mažeme nebo zjednodušujeme signály, které nikdo nepoužívá?
+
+## Mini šablona health score karty
+
+```markdown
+# Health score karta: [segment / produkt]
+
+## Účel
+- Komu skóre pomáhá:
+- Jaké rozhodnutí podporuje:
+- Kterým zákazníkům se týká:
+
+## Signály
+| Signál | Úroveň agregace | Váha | Retence | Navazující akce |
+| --- | --- | --- | --- | --- |
+| | workspace / účet / uživatel | | | |
+
+## Akce podle stavu
+- Zelená:
+- Žlutá:
+- Červená:
+- Kdy musí rozhodnout člověk:
+
+## Privacy kontrola
+- Zakázaná data:
+- Krátkodobé surové události:
+- Dlouhodobé agregace:
+- Kdo má přístup k detailu:
+
+## Revize
+- Vlastník:
+- Rytmus kontroly:
+- Poslední změna pravidel:
+- Signály ke smazání:
+```
+
+## Zdroje
+
+- Evropská komise — principy GDPR, zejména účelové omezení a minimalizace dat: https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-which-conditions_en
+- OWASP Logging Cheat Sheet — doporučení k bezpečnému logování, sanitizaci a vynechání citlivých dat: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
 # Pracovní log
+- 2026-10-02: Doplněna příloha „Customer health score bez zákaznického rentgenu“ s návrhem signálů hodnoty místo sledování jednotlivců, vysvětlitelným skórováním, pravidly lidské kontroly, bezpečným logováním, provozní rutinou, checklistem, health score kartou a ověřenými zdroji Evropské komise a OWASP.
 
 - 2026-10-02: Doplněna příloha „Vyhledávání v SaaS bez úniku cizích dat“ s pravidly pro tenant hranice, bezpečné indexování, autocomplete, logování dotazů, relevanci, export výsledků, negativní testy, checklistem, search policy šablonou a ověřenými zdroji OWASP a PostgreSQL.
 - 2026-10-02: Doplněna příloha „Feature flagy bez produkční rulety a datového vysavače“ s rozdělením typů flagů, pravidly pro oprávnění, bezpečný default, rollout vlny, privacy-first evaluation context, audit změn, mazání flag debt, checklistem, šablonou feature flag karty a ověřenými zdroji OpenFeature a MartinFowler.com.
