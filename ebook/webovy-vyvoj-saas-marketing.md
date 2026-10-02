@@ -29009,193 +29009,177 @@ U integrací přidej příklad klientského backoffu do dokumentace. Zákazníko
 - OWASP API Security Top 10 — API4:2023 Unrestricted Resource Consumption, rizika chybějících limitů nad CPU, pamětí, velikostí payloadu, dávkami, stránkováním a externími náklady: https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/
 - OWASP REST Assessment Cheat Sheet — Rate Limiting and Throttling Assessment, praktické otázky pro ověření limitů na API: https://cheatsheetseries.owasp.org/cheatsheets/REST_Assessment_Cheat_Sheet.html#rate-limiting-and-throttling-assessment
 
-# Příloha: Platby a fakturace bez datového chaosu
+# Příloha: Reconciliation plateb bez účetní detektivky
 
-Platba je pro SaaS citlivý okamžik. Zákazník už věří dost na to, aby vytáhl kartu nebo poslal fakturační údaje, a produkt má velké pokušení začít sbírat všechno „pro jistotu“. Jenže billing není datový sklad. Je to provozní systém, který má spolehlivě vybrat peníze, vystavit doklad, vysvětlit stav účtu a nezvětšit bezpečnostní riziko víc, než je nutné.
+Tahle příloha řeší nenápadnou, ale velmi praktickou věc: jak pravidelně srovnat realitu mezi produktem, platebním poskytovatelem, fakturačním systémem a účetnictvím. Billing může mít krásný checkout, ale pokud se ti časem rozjedou stavy „zaplaceno“, „aktivní tarif“, „vystavená faktura“ a „zaúčtováno“, vznikne účetní detektivka. A detektivky jsou fajn v neděli večer, ne ve chvíli, kdy zákazník neví, proč má zamčený účet.
 
-Privacy-first billing stojí na jednoduchém pravidle: citlivá platební data drž u specializovaného poskytovatele, fakturační data drž jen v rozsahu účetního a smluvního účelu, produktová oprávnění odvozuj ze stavů, které opravdu potřebuješ. Všechno ostatní je nejspíš pohodlnost převlečená za „budoucí analytiku“.
+Reconciliation není jen finanční kontrola. Je to provozní rutina, která chrání důvěru, data i support. Cílem není sbírat víc informací. Cílem je mít malé množství správných identifikátorů, jasné párovací pravidlo a pravidelný seznam výjimek, které někdo opravdu vyřeší.
 
-> Codyho komentář: Když malý SaaS ukládá čísla karet, protože „to jednou možná využije“, je to stejné jako mít v kanceláři trezor, ve kterém je místo peněz rozzlobený jezevec. Technicky zajímavé, provozně špatný nápad.
+> Codyho komentář: Když se billing neshodne s produktem, zákazník neřekne „aha, asynchronní integrace“. Řekne „platím vám a nefunguje to“. A má pravdu. Architektura bez reconciliation je jako účtenka napsaná na ubrousek v dešti.
 
-## Odděl platbu, fakturu a produktový přístup
+## Srovnávej čtyři pravdy, ne jednu tabulku
 
-První chyba je udělat z billingu jednu velkou kouli: payment provider, fakturační profil, tarif, oprávnění v aplikaci, účetní export, support poznámky a marketingové tagy v jedné tabulce. Na začátku to vypadá rychle. Později nikdo neví, co se smí smazat, co je účetní doklad, co je aktivní předplatné a proč má zákazník přístup k funkci, kterou už tři měsíce neplatí.
+V malém SaaS obvykle existují čtyři zdroje pravdy, které se překrývají, ale nejsou stejné:
 
-Rozděl si billing na tři vrstvy:
+- **Produkt** — kdo má přístup, jaký tarif běží, jaké limity platí.
+- **Platební poskytovatel** — autorizace, platby, refundy, chargebacky, subscription stavy.
+- **Fakturační systém** — vystavené faktury, dobropisy, čísla dokladů, daňové údaje.
+- **Účetnictví / finance** — zaúčtování, bankovní výpisy, otevřené pohledávky, ruční opravy.
 
-- **Platební vrstva** — platba kartou, bankovní převod, token platební metody, stav transakce, refund.
-- **Fakturační vrstva** — odběratel, položky, sazby, měna, číslo dokladu, účetní export, retenční lhůta.
-- **Produktová vrstva** — aktivní tarif, limity, doplňky, grace period, suspendovaný účet, historie změn tarifu.
+Chyba je snažit se z jedné vrstvy udělat všechno. Produkt nemá být účetnictví. Účetnictví nemá řídit feature flagy. Platební brána nemá být zákaznický CRM. Reconciliation je most mezi vrstvami, ne jeden obří sklad dat.
 
-Produkt většinou nepotřebuje vědět, jaká karta byla použita. Potřebuje vědět, jestli je subscription aktivní, do kdy je zaplaceno, jaký tarif platí a jaký je důvod případného omezení. Detail platby patří do platební vrstvy a zákazníkovi do self-service portálu, ne do každého logu aplikace.
+## Párovací klíče navrhni dřív než první incident
 
-## Karty neukládej, pokud nemusíš
-
-U plateb kartou je nejlepší architektura pro malý SaaS nudná: použij hostovanou platební stránku nebo tokenizované platební prvky od poskytovatele a vlastní aplikaci drž mimo přímé zpracování karetních údajů. PCI Security Standards Council opakuje malé obchodnické pravidlo: pokud platební data nepotřebuješ, neukládej je; používej šifrování a tokenizaci tam, kde dává smysl.
-
-Praktický model:
-
-- zákazník zadá kartu u platebního poskytovatele,
-- aplikace uloží jen interní ID zákazníka u poskytovatele a token platební metody,
-- webhook aktualizuje stav subscription nebo faktury,
-- support vidí poslední čtyři číslice karty jen pokud je to nutné pro orientaci zákazníka,
-- logy nikdy neobsahují PAN, CVC, plné adresy z payment formuláře ani raw payload platební brány.
-
-V Evropě počítej také se silným ověřením zákazníka u elektronických plateb. Evropská komise připomíná, že požadavek Strong Customer Authentication v rámci PSD2 platí od 14. září 2019 a míří na bezpečnější prostředí pro internetové a mobilní platby. Prakticky to znamená, že checkout musí umět přesměrování, challenge flow a asynchronní stav „platba čeká na ověření“. Neber úspěch platby jako jistý jen proto, že uživatel klikl na tlačítko.
-
-## Fakturační profil sbírej podle potřeby
-
-Fakturační údaje nejsou marketingový dotazník. Potřebuješ je pro smlouvu, daňový doklad, účetnictví a podporu. Nepřidávej pole jen proto, že „se to hodí do CRM“.
-
-Minimum pro B2B fakturaci obvykle vypadá takto:
-
-- název firmy nebo jméno odběratele,
-- fakturační adresa v rozsahu potřebném pro doklad,
-- IČO / DIČ, pokud je relevantní,
-- e-mail pro doklady,
-- země kvůli daňovému režimu,
-- interní ID zákaznického účtu.
-
-Co raději nedávat do povinných polí bez jasného důvodu:
-
-- telefon na účetní,
-- jméno konkrétního administrátora jako součást fakturační identity firmy,
-- oddělení, počet zaměstnanců nebo obrat,
-- marketingový zdroj nákupu,
-- poznámky obchodníka smíchané s fakturačním profilem.
-
-GDPR princip minimalizace říká, že osobní údaje mají být přiměřené, relevantní a omezené na to, co je nezbytné pro daný účel. V billing formuláři je to krásně praktické: každé pole musí mít důvod, ownera a místo, kde se používá.
-
-## Retence: účetnictví není výmluva pro všechno
-
-Billing má legitimní retenční důvody, ale ty neznamenají, že musíš navždy držet všechno v plné detailnosti. Česká Finanční správa uvádí standardní úschovu účetních dokladů, účetních knih a souvisejících záznamů po dobu 5 let od konce účetního období, kterého se týkají. U daňových dokladů podle zákona o DPH se počítá s uchováváním po dobu 10 let od konce zdaňovacího období, ve kterém se plnění uskutečnilo.
-
-Z toho neplyne „nechat navždy celý zákaznický účet“. Plyne z toho:
-
-- účetní a daňové doklady drž podle zákonné povinnosti,
-- provozní platební logy drž kratší dobu podle diagnostické potřeby,
-- raw webhook payloady maž nebo rediguj co nejdřív,
-- produktovou historii tarifu agreguj na stav a auditní události,
-- support poznámky maž podle retenční politiky podpory, ne podle účetnictví.
-
-Jestli máš zákazníka z více zemí nebo složitější daňový režim, nehádej právní lhůty z blogu. Udělej si retenční kartu s účetní nebo daňovým poradcem. E-book je mapa, ne kouzelná cedule „compliance hotovo“.
-
-## Webhooky z plateb ber jako cizí vstup
-
-Platební webhook je pohodlný, ale není kouzelná pravda z nebes. Je to HTTP požadavek z internetu, který má změnit peníze, přístup a zákaznický stav. Zaslouží si stejnou opatrnost jako administrátorská akce.
+Nejhorší chvíle pro vymýšlení párování je moment, kdy zákazník píše, že zaplatil dvakrát. Už při návrhu billingu si určete identifikátory, které projdou všemi vrstvami.
 
 Minimum:
 
-- ověř podpis webhooku podle dokumentace poskytovatele,
-- kontroluj idempotenci podle event ID nebo payment intent ID,
-- neprováděj drahé změny synchronně v requestu,
-- ukládej jen potřebné části eventu,
-- mapuj externí stavy na vlastní malý stavový model,
-- rozděl „platba přijata“ a „produktový přístup aktivován“ přes auditovatelnou událost.
+- interní `workspace_id` nebo `customer_id`,
+- ID zákazníka u platebního poskytovatele,
+- ID subscription nebo kontraktu,
+- ID invoice/faktury,
+- ID payment intent/charge/transakce,
+- číslo dokladu ve fakturačním systému,
+- variabilní symbol nebo jiný bankovní párovací údaj u převodů,
+- interní `request_id` pro supportní dohledání.
 
-Typický stavový model pro subscription:
+Do e-mailů a veřejných obrazovek nedávej zbytečně všechna ID. Pro zákazníka stačí číslo faktury a bezpečný odkaz do portálu. Pro support stačí interní ID a odkaz do systému s oprávněním. Pro automatizaci stačí stabilní klíč, který nejde snadno zaměnit.
+
+## Denní kontrola má být nudná
+
+Dobrá reconciliation rutina má být krátká, opakovatelná a nudná. Pokud každý den vyžaduje ruční detektivní práci, není to rutina, ale pomalý incident.
+
+Denní kontrola může hledat:
+
+- zaplacené subscription bez aktivního tarifu v produktu,
+- aktivní tarif bez platné subscription nebo grace výjimky,
+- zaplacenou transakci bez vystavené faktury,
+- vystavenou fakturu bez platby po očekávané době,
+- refund bez dobropisu nebo bez změny stavu subscription,
+- chargeback bez interního označení rizika,
+- duplicitu platby ke stejné faktuře,
+- ruční override, kterému vypršela expirace.
+
+Každá výjimka má mít vlastníka a stav. Nepiš „zkontrolovat“. Piš „finance ověří bankovní párování“, „support kontaktuje ownera účtu“, „produkt odstraní ruční grace override“. Sloveso bez ownera je jen přání v hezčí bundě.
+
+## Výjimky neřeš přes poznámky v chatu
+
+Největší chaos vzniká, když se výjimky řeší v soukromých zprávách: „Hele, nech jim to ještě týden zapnuté.“ Za měsíc nikdo neví proč, účetnictví vidí dluh, produkt vidí aktivní tarif a support odpovídá podle pocitu.
+
+Pro každou výjimku eviduj:
+
+- zákaznický účet,
+- typ výjimky,
+- důvod,
+- kdo schválil,
+- začátek a konec platnosti,
+- dopad na produkt,
+- dopad na fakturaci,
+- další krok,
+- auditní událost bez citlivých detailů.
+
+Ruční výjimka bez expirace je skrytý tarif. Ruční refund bez dokladu je účetní minové pole. Ruční prodloužení bez poznámky je budoucí support ticket, který si právě píšeš sám sobě.
+
+## Reportuj nesoulady agregovaně
+
+Reconciliation report nemusí být další datový vysavač. Nemá obsahovat kompletní platební payloady, osobní poznámky ani celé fakturační profily. Má ukázat, kde se systémy neshodují.
+
+Dobré sloupce pro interní report:
 
 ```text
-trialing -> active -> past_due -> grace -> suspended -> canceled
+customer_ref | issue_type | amount | currency | source_system | detected_at | owner | status | next_step
 ```
 
-Nevymýšlej sto stavů jen proto, že je má poskytovatel. Uvnitř produktu drž pár srozumitelných stavů a externí detaily nech v billing adaptéru. Support pak dokáže říct: „platba čeká na ověření“, „faktura je po splatnosti“, „účet je v grace režimu do pátku“. To je lepší než debugovat tajemný stav `incomplete_expired`, zatímco zákazník kouká na zamčenou aplikaci.
+`customer_ref` může být interní ID nebo obchodní název podle oprávnění týmu. Detailní osobní údaje drž v systému, který je pro ně určený. Report má být pracovní fronta, ne export všeho, co se kdy stalo.
 
-## Zákaznický self-service snižuje support i data chaos
+Privacy-first poznámka: čím víc reconciliation exportů posíláš e-mailem, tím víc kopií finančních údajů vzniká mimo kontrolu. Lepší je interní dashboard s přístupovými právy nebo soubor v řízeném úložišti s expirací.
 
-Dobré billing rozhraní nemusí být velké. Musí být jasné a bezpečné. Zákazník má vidět, co platí, kdy se bude účtovat další období, kde stáhne doklady a jak bezpečně změnit platební metodu.
+## Bankovní převody potřebují zvláštní disciplínu
 
-Minimum pro self-service:
+Karty a online platby mají hodně metadat. Bankovní převody jsou často ručnější: variabilní symbol, částka, datum připsání, odesílatel, poznámka. U B2B zákazníků navíc může platit jiná osoba než uživatel produktu.
 
-- aktuální tarif a cena,
-- další datum účtování nebo konec období,
-- stav poslední platby,
-- seznam faktur ke stažení,
-- bezpečná změna platební metody přes poskytovatele,
-- jasné zrušení nebo downgrade podle obchodních pravidel,
-- kontakt na podporu pro účetní výjimky.
+Pravidla pro převody:
 
-Privacy-first detail: do e-mailů neposílej plné fakturační profily ani zbytečné osobní údaje. E-mail může oznámit, že doklad je připravený, a odkázat na přihlášený portál. Pokud posíláš PDF přílohu, ověř si s účetní a zákazníky, zda je to opravdu potřeba. Pohodlí jedné přílohy může znamenat spoustu kopií dokladu v cizích schránkách.
+- generuj jednoznačný párovací symbol,
+- zobrazuj ho v portálu i na faktuře,
+- nepáruj jen podle názvu firmy,
+- počítej s částečnými platbami a přeplatky,
+- odděl datum splatnosti, datum připsání a datum aktivace,
+- ruční spárování vždy loguj,
+- u nejasné platby drž peníze v interním „needs review“ stavu, ne v produktové fantazii.
 
-## Revenue metriky bez sledování lidí
+Pokud máš evropské zákazníky, počítej také s tím, že účetní procesy bývají pomalejší než kartová platba. Produktový grace režim pro bankovní převod může být jiný než pro kartu, ale musí být popsaný a konzistentní.
 
-Billing svádí k tomu, aby se z něj stal perfektní analytický profil. Nedělej to. Pro řízení SaaS nepotřebuješ spojovat každý klik s fakturační identitou. Stačí čisté agregace a segmenty, které mají obchodní smysl.
+## Reconciliation není právo mazat víc dat
 
-Užitečné metriky:
+Častá výmluva zní: „Musíme to držet kvůli párování.“ Někdy ano, ale jen v rozumném rozsahu. GDPR minimalizace pořád platí: drž údaje přiměřené, relevantní a omezené na účel. Párování většinou nepotřebuje raw webhook, plnou adresu, text supportního e-mailu ani historické kliky uživatele.
 
-- MRR / ARR podle tarifu,
-- počet aktivních subscription,
-- churn podle tarifu nebo typu zákazníka,
-- failed payment rate,
-- průměrná doba v grace režimu,
-- počet refundů a důvodové kategorie,
-- expanze nebo downgrade podle firemního účtu.
+Rozděl data podle potřeby:
 
-Nevhodné zkratky:
+- **Párovací identifikátory** — drž podle účetní a provozní potřeby.
+- **Doklady** — drž podle zákonných retenčních pravidel.
+- **Debug payloady** — drž krátce, s omezeným přístupem a redakcí citlivých polí.
+- **Support poznámky** — drž podle support retence, ne podle účetnictví.
+- **Produktové eventy** — agreguj nebo maž podle produktové analytiky.
 
-- spojovat platební identitu s webovou návštěvností bez jasného účelu,
-- posílat fakturační údaje do reklamních platforem,
-- ukládat raw platební eventy do produktové analytiky,
-- používat e-mail účetní jako marketingový kontakt,
-- míchat MRR dashboard s individuálními poznámkami supportu.
+Tahle separace je nudná, ale zachrání tě při odchodu zákazníka, bezpečnostním incidentu i účetní kontrole.
 
-Revenue reporting má říct, jak zdravý je produkt. Nemá z něj vzniknout interní panoptikum zákazníků.
+## Měsíční závěrka pro malý SaaS
 
-## Checklist: platby a fakturace bez datového chaosu
+Jednou měsíčně udělej malou billing závěrku. Ne jako korporátní rituál s třiceti tabulkami, ale jako kontrolu, že produktová realita sedí s finanční realitou.
 
-- [ ] Neukládáme plná karetní data, pokud k tomu nemáme opravdu silný důvod a odpovídající compliance režim.
-- [ ] Používáme hostovaný checkout nebo tokenizované platební prvky od specializovaného poskytovatele.
-- [ ] Produktová oprávnění vychází z malého vlastního stavového modelu subscription.
-- [ ] Fakturační formulář obsahuje jen pole potřebná pro doklad, smlouvu, daňový režim a podporu.
-- [ ] Webhooky ověřujeme podpisem, zpracováváme idempotentně a nelogujeme raw citlivé payloady.
-- [ ] Účetní a daňové doklady mají retenční lhůtu podle zákona a účetních pravidel.
-- [ ] Provozní platební logy, support poznámky a raw eventy mají kratší vlastní retenci.
-- [ ] Self-service portál ukazuje tarif, stav platby, doklady a bezpečnou změnu platební metody.
-- [ ] Revenue metriky jsou agregované a neposílají fakturační údaje do reklamních nástrojů.
-- [ ] Existuje postup pro failed payment, grace režim, refund a ruční účetní výjimku.
+Měsíční checklist:
 
-## Mini šablona billing karty
+- [ ] Souhlasí počet aktivních placených účtů mezi produktem a billingem?
+- [ ] Existují aktivní účty bez platby, grace nebo smluvní výjimky?
+- [ ] Existují zaplacené účty bez aktivního tarifu?
+- [ ] Jsou všechny úspěšné platby napojené na fakturu nebo doklad?
+- [ ] Jsou refundy a dobropisy spárované?
+- [ ] Jsou chargebacky předané ownerovi?
+- [ ] Vypršely ruční override a grace výjimky?
+- [ ] Otevřené nesoulady mají ownera a další krok?
+- [ ] Export pro účetnictví neobsahuje zbytečná osobní data?
+- [ ] Reconciliation report byl uložen v řízeném místě a staré exporty se mažou?
+
+## Mini šablona reconciliation reportu
 
 ```text
-# Billing karta: [produkt / tarif]
+# Billing reconciliation: [měsíc]
 
-## Účel
-- Co billing řeší:
+## Souhrn
+- Období:
 - Owner:
+- Počet kontrolovaných účtů:
+- Počet nesouladů:
+- Kritické nesoulady:
 
-## Platební vrstva
-- Poskytovatel:
-- Uložené identifikátory u nás:
-- Co nikdy neukládáme:
-- SCA / asynchronní stavy:
+## Kontroly
+- Aktivní tarif bez platby:
+- Platba bez aktivace:
+- Platba bez faktury:
+- Refund bez dobropisu:
+- Ruční výjimky po expiraci:
+- Nejasné bankovní převody:
 
-## Fakturační vrstva
-- Povinná pole:
-- Daňový režim:
-- Export pro účetnictví:
-- Retence dokladů:
+## Výjimky
+- Customer ref:
+- Typ problému:
+- Částka / měna:
+- Zdrojový systém:
+- Owner:
+- Další krok:
+- Termín:
 
-## Produktová vrstva
-- Subscription stavy:
-- Grace režim:
-- Suspendace:
-- Downgrade / cancellation:
+## Privacy kontrola
+- Obsahuje report jen nutné identifikátory?
+- Kde je uložený?
+- Kdy se smaže pracovní export?
+- Kdo má přístup?
 
-## Webhooky a logy
-- Ověření podpisu:
-- Idempotency key:
-- Retence raw eventů:
-- Request ID / audit stopa:
-
-## Self-service
-- Co zákazník vidí:
-- Co může změnit sám:
-- Kdy jde na podporu:
-
-## Revize
-- Datum poslední kontroly:
-- Ověřil účetně/daňově:
-- Ověřil technicky:
+## Uzavření
+- Schválil:
+- Datum:
+- Otevřené body do dalšího měsíce:
 ```
 
 ## Zdroje
@@ -29203,11 +29187,9 @@ Revenue reporting má říct, jak zdravý je produkt. Nemá z něj vzniknout int
 - EUR-Lex — GDPR čl. 5(1)(c), zásada minimalizace osobních údajů: https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1463250435964&uri=CELEX%3A32016R0679
 - Finanční správa — obecné informace k účetnictví a úschově účetních záznamů: https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/ucetnictvi/obecne-informace
 - e-Sbírka — zákon č. 235/2004 Sb., o DPH, uchovávání daňových dokladů: https://e-sbirka.gov.cz/sb/2004/235
-- PCI Security Standards Council — Small Merchant Guide to Safe Payments, doporučení neukládat nepotřebná karetní data: https://www.pcisecuritystandards.org/pdfs/Small_Merchant_Guide_to_Safe_Payments.pdf
-- Evropská komise — Strong Customer Authentication podle PSD2: https://finance.ec.europa.eu/publications/strong-customer-authentication-requirement-psd2-comes-force_en
 
 # Pracovní log
-- 2026-10-02: Doplněna příloha „Platby a fakturace bez datového chaosu“ s oddělením platební, fakturační a produktové vrstvy, pravidly pro neukládání karetních dat, minimalizací fakturačního profilu, retencí dokladů, bezpečným zpracováním webhooků, self-service portálem, revenue metrikami, billing kartou a ověřenými zdroji GDPR, Finanční správy, e-Sbírky, PCI SSC a Evropské komise.
+- 2026-10-02: Doplněna příloha „Reconciliation plateb bez účetní detektivky“ s párovacími klíči mezi produktem, platebním poskytovatelem, fakturací a účetnictvím, denní kontrolou nesouladů, pravidly pro výjimky, bankovní převody, minimalizaci dat, měsíční závěrku, reconciliation report šablonu a ověřené zdroje GDPR, Finanční správy a e-Sbírky.
 - 2026-10-02: Doplněna navazující příloha „Kvóty a spending capy bez trestání dobrých zákazníků“ s návrhem limitů podle ceny operace, kombinací klíčů, odpovědí `429`/`Retry-After`, kvótami, grace režimem, spending capy, privacy-first logováním, checklistem, limit policy šablonou a ověřenými zdroji RFC, MDN a OWASP.
 
 - 2026-10-02: Doplněna příloha „API verze bez lámání zákazníků a nočních omluv“ s definicí veřejného kontraktu, tříděním změn podle dopadu, modelem verzování, deprecation plánem, stabilními chybami, contract testy, SDK pravidly, privacy-first diagnostikou, checklistem, API change kartou a ověřenými zdroji RFC, OpenAPI a SemVer.
