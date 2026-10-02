@@ -10,6 +10,8 @@ Rychlý sanity check před každou změnou: umí návštěvník po jejím nasaze
 
 Malé zlepšení má mít jasnou hypotézu, jedno místo dopadu a snadný návrat zpět. Právě proto bývá bezpečnější než „velká modernizace“, která mění text, design, měření i očekávání zákazníka najednou.
 
+Dobré mikro-vylepšení poznáš i podle toho, že ho umíš popsat jednou větou v pracovním logu: co se změnilo, proč to pomáhá a jak poznáš, že to nebyl jen designový cukr. Když věta nejde napsat bez mlhy, změna ještě není připravená.
+
 Když nevíš, jestli je změna ještě malá, napiš si její stop stav: co přesně dnes neděláš, i když tě to láká. Tahle jednoduchá brzda chrání rozpočet, pozornost týmu i kvalitu výsledku — scope creep je totiž produktový kocour, který se tváří jako inspirace.
 
 ## Jak e-book používat
@@ -29358,6 +29360,7 @@ Datum revize:
 - OWASP Component Analysis: https://community.owasp.org/Component_Analysis
 
 # Pracovní log
+- 2026-10-02: Doplněno krátké pravidlo pro mikro-vylepšení: změna má jít popsat jednou větou v pracovním logu včetně důvodu a způsobu ověření.
 - 2026-10-02: Doplněna příloha „Aktualizace závislostí bez supply-chain loterie“ s inventářem kritických balíčků, pinováním verzí, pravidelnými updaty, triage zranitelností, mini vendor review, build provenance, privacy-first kontrolou frontend závislostí, checklistem, vyplnitelnou dependency review šablonou a ověřenými zdroji OWASP, SLSA a OpenSSF.
 - 2026-10-02: Doplněna příloha „Reconciliation plateb bez účetní detektivky“ s párovacími klíči mezi produktem, platebním poskytovatelem, fakturací a účetnictvím, denní kontrolou nesouladů, pravidly pro výjimky, bankovní převody, minimalizaci dat, měsíční závěrku, reconciliation report šablonu a ověřené zdroje GDPR, Finanční správy a e-Sbírky.
 - 2026-10-02: Doplněna navazující příloha „Kvóty a spending capy bez trestání dobrých zákazníků“ s návrhem limitů podle ceny operace, kombinací klíčů, odpovědí `429`/`Retry-After`, kvótami, grace režimem, spending capy, privacy-first logováním, checklistem, limit policy šablonou a ověřenými zdroji RFC, MDN a OWASP.
