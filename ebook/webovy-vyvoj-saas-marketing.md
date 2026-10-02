@@ -31625,7 +31625,182 @@ Feature flags jsou skvělé, když pomáhají dodávat menší změny bezpečně
 
 ---
 
+
+# Příloha: Webhooky bez slepé důvěry a datového průvanu
+
+Webhook je pohodlný způsob, jak si služby mezi sebou řeknou „něco se stalo“. Platba byla dokončena, zákazník změnil tarif, faktura se nepovedla, nový lead přišel z formuláře, dokument byl podepsán. Pro SaaS je to nádhera — dokud z toho není produkční věštecká koule, které věříš každému příchozímu JSONu jen proto, že zaklepal na správnou URL.
+
+Bezpečný webhook má čtyři vlastnosti: ověří odesílatele, zpracuje událost právě jednou, zvládne opakované doručení a neukládá zbytečný obsah. Všechno ostatní je dekorace. Někdy hezká, často drahá, občas přímo požární.
+
+> Codyho komentář: Webhook endpoint bez ověření podpisu je jako firemní poštovní schránka, do které může kdokoliv hodit papír „zaplať fakturu“ a účetní to bere jako pravdu. Romantické. Taky účetně katastrofální.
+
+## Nejdřív si napiš smlouvu události
+
+Dřív než začneš řešit kód, pojmenuj událost jako produktovou smlouvu. U každého webhooku musí být jasné, kdo ho posílá, proč existuje, co přesně mění v systému a co se stane při chybě. Pokud to neumíš napsat lidsky, neimplementuj endpoint. Jen bys vyráběl distribuovaný chaos s pěkným názvem.
+
+Minimální karta webhooku:
+
+- **Odesílatel:** služba, tenant nebo interní modul, který událost posílá.
+- **Událost:** konkrétní typ, například `invoice.paid`, `subscription.cancelled` nebo `lead.created`.
+- **Dopad:** co se v produktu změní, například aktivace tarifu, vytvoření úkolu nebo odeslání e-mailu.
+- **Idempotency klíč:** stabilní identifikátor události, podle kterého poznáš opakované doručení.
+- **Citlivá data:** pole, která nesmí skončit v běžných logách.
+- **Fallback:** co udělá podpora nebo systém, když zpracování selže.
+
+Dobrá smlouva chrání tým před typickou větou „ono to občas přijde dvakrát“. Webhooky občas přijdou dvakrát. S tím se nehádej, to prostě zahrň do návrhu.
+
+## Ověř podpis před parsováním významu
+
+Webhook není důvěryhodný jen proto, že přišel přes HTTPS. HTTPS chrání cestu, ne říká, že odesílatel je opravdu ten, za koho se vydává. Proto má každý důležitý webhook používat podpis: typicky HMAC nad původním tělem požadavku a tajným klíčem, případně asymetrický podpis podle poskytovatele.
+
+Praktická pravidla:
+
+- Ověř podpis nad **raw body**, ne nad znovu serializovaným JSONem.
+- Použij konstantně časové porovnání podpisů, ne obyčejné `==`.
+- Tajemství webhooku drž jako secret, ne v repozitáři ani v klientském kódu.
+- Validuj také timestamp nebo nonce, pokud ho poskytovatel podporuje.
+- Nepokračuj do business logiky, dokud podpis, čas a základní struktura neprojdou.
+
+GitHub ve své dokumentaci doporučuje validovat `X-Hub-Signature-256`, počítat HMAC ze sdíleného tajemství a payloadu a nepoužívat obyčejné porovnání řetězců. To je dobrý obecný vzor i mimo GitHub: nejdřív důkaz původu, potom význam dat.
+
+## Idempotence není bonus, ale brzda proti průšvihu
+
+Většina poskytovatelů webhooků může událost doručit opakovaně. Někdy kvůli síti, někdy kvůli timeoutu, někdy proto, že sis při deployi na tři minuty odpojil endpoint a teď přichází fronta minulosti. Pokud každé doručení vytvoří novou fakturu, pošle další e-mail nebo přidá kredit znovu, máš produktový bankomat pro chaos.
+
+Bezpečný postup:
+
+1. Přečti stabilní `event_id` nebo jiný jednoznačný identifikátor.
+2. V transakci se pokus událost uložit jako „přijatou“.
+3. Pokud už existuje, vrať úspěch a nic neměň.
+4. Teprve potom proveď business akci.
+5. Výsledek akce ulož k události, aby šel auditovat.
+
+Tohle je nudné. Přesně proto to funguje. Idempotence má být mechanická, ne založená na naději, že „poskytovatel to snad nepošle dvakrát“.
+
+## Rychlá odpověď, práce ve frontě
+
+Webhook endpoint by měl odpovědět rychle. Když v requestu děláš pomalé volání na CRM, posíláš e-mail, generuješ PDF a ještě čekáš na externí API, koleduješ si o timeout a opakované doručení. GitHub v best practices zmiňuje odpověď do 10 sekund; obecně je lepší endpoint držet ještě jednodušší.
+
+Rozumný pattern:
+
+- přijmout požadavek,
+- ověřit podpis,
+- validovat základní tvar,
+- uložit událost do fronty nebo tabulky,
+- vrátit `2xx`,
+- zpracovat dopad asynchronně.
+
+Když zpracování selže, endpoint už nemusí znovu dělat všechno v HTTP requestu. Máš záznam, stav, retry politiku a možnost ručního zásahu. Pro malé SaaS to nemusí být hned Kafka v helm chartu s vlastní hymnou. Často stačí databázová tabulka `webhook_events` a worker, který bere nezpracované události.
+
+## Loguj pro opravu, ne pro sběr suvenýrů
+
+Webhook payloady často obsahují víc dat, než opravdu potřebuješ. Platby mohou nést e-mail, adresu, metadata objednávky. CRM může poslat poznámku obchodníka. Formulář může obsahovat volný text. Pokud všechno bez rozmyslu uložíš do logů, vyrábíš si datový sklad, který nikdo nechtěl a všichni budou muset chránit.
+
+Privacy-first logování:
+
+- Ukládej `event_id`, typ události, čas přijetí, výsledek a technickou chybu.
+- Maskuj e-maily, tokeny, adresy, telefonní čísla a volné texty.
+- Payload ukládej jen tam, kde je to nutné pro obnovu nebo audit, a s retenční lhůtou.
+- Pro support připrav bezpečný náhled: stav, čas, poskytovatel, dopad, ne kompletní osobní data.
+- U každého webhooku napiš, kdy se záznamy mažou.
+
+Evropský privacy-first provoz není o tom, že nikdy nic neloguješ. Je o tom, že loguješ to, co potřebuješ k provozu, a víš proč. „Pro jistotu všechno“ není provozní strategie. Je to datová skládka s lepším fontem.
+
+## Retry, dead-letter a ruční oprava
+
+Selhání webhooku má být normální provozní scénář, ne archeologická výprava do logů. Každá integrace potřebuje plán pro tři situace: dočasná chyba, trvalá chyba a ruční oprava.
+
+Praktické nastavení:
+
+- **Dočasná chyba:** síť, timeout, limit API; zkus opakování s rostoucí prodlevou.
+- **Trvalá chyba:** neznámý typ události, chybějící tenant, neplatný stav; zastav automatické retry a vytvoř interní úkol.
+- **Dead-letter fronta:** místo, kde skončí události po vyčerpání pokusů.
+- **Replay:** ruční spuštění stejné události z uloženého záznamu bez změny její identity.
+- **Audit:** kdo replay spustil, kdy a proč.
+
+Pozor na replay bezpečnost: pokud poskytovatel podepisuje timestampem, starý request nemusí jít znovu ověřit stejným způsobem. Interní replay proto neznamená „pošli starý HTTP request znovu do endpointu“. Znamená „zpracuj už přijatou a ověřenou událost z interního úložiště“, ideálně přes stejnou business funkci jako běžné zpracování.
+
+## Multitenant SaaS: tenant hranice jako první podmínka
+
+U SaaS produktu je nejnebezpečnější webhook ten, který správně projde podpisem, ale dopad aplikuje na špatný workspace. Ověření poskytovatele nestačí. Musíš také ověřit vazbu události na tenant, účet, zákazníka nebo integraci.
+
+Bezpečná pravidla:
+
+- Mapuj externí `account_id` na interní tenant přes vlastní integrační tabulku.
+- Nikdy nevěř tenant ID z volného metadata bez kontroly vlastnictví.
+- Každá integrace má mít vlastní secret nebo alespoň vlastní konfigurační záznam.
+- Pokud tenant neexistuje nebo je integrace odpojená, událost nezpracovávej automaticky.
+- Při odpojení integrace zneplatni tokeny, secret a budoucí dopady webhooků.
+
+Tohle je místo, kde se privacy potkává s bezpečností. Nejlepší anonymizace je zbytečná, když událost jedné firmy změní data jiné firmy. Au. A právník si mezitím vaří třetí kafe.
+
+## Checklist: webhook bez slepé důvěry
+
+- [ ] Má webhook kartu s účelem, dopadem a vlastníkem?
+- [ ] Ověřuje se podpis nad původním tělem requestu?
+- [ ] Používá se konstantně časové porovnání podpisů?
+- [ ] Existuje ochrana proti replay útoku přes timestamp, nonce nebo uložené ID?
+- [ ] Je zpracování idempotentní podle stabilního `event_id`?
+- [ ] Vrací endpoint rychlou odpověď a těžkou práci posílá do fronty?
+- [ ] Jsou payloady validované podle očekávaného typu události?
+- [ ] Neznámé typy událostí končí bezpečně, bez business dopadu?
+- [ ] Logy neobsahují zbytečné osobní údaje, tokeny ani volný text?
+- [ ] Existuje retry politika, dead-letter stav a auditovaný replay?
+- [ ] U multitenant SaaS se ověřuje vazba události na správný tenant?
+- [ ] Je popsaná retence webhook logů a payloadů?
+
+## Mini šablona webhook karty
+
+```text
+# Webhook: [název]
+
+## Účel
+Co událost znamená a proč ji přijímáme:
+
+## Odesílatel
+Služba / účet / integrace:
+Způsob ověření podpisu:
+Secret vlastník a rotace:
+
+## Události
+Povolené typy eventů:
+Ignorované typy eventů:
+Neznámé typy eventů:
+
+## Idempotence
+Stabilní event ID:
+Kam ukládáme stav zpracování:
+Co se stane při duplicitě:
+
+## Dopad v produktu
+Jaká data se mění:
+Jak ověřujeme tenant/workspace:
+Jaký je ruční fallback:
+
+## Logy a retence
+Co logujeme:
+Co maskujeme:
+Jak dlouho držíme payload:
+Kdo má přístup k detailu:
+
+## Retry a replay
+Počet pokusů:
+Dead-letter pravidlo:
+Kdo smí spustit replay:
+Auditní stopa:
+```
+
+## Zdroje
+
+- GitHub Docs: [Validating webhook deliveries](https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries)
+- GitHub Docs: [Best practices for using webhooks](https://docs.github.com/en/webhooks/using-webhooks/best-practices-for-using-webhooks)
+- Standard Webhooks: [specifikace podpisů webhooků](https://github.com/standard-webhooks/standard-webhooks/blob/main/spec/standard-webhooks.md)
+- Stripe Docs: [Idempotent requests](https://docs.stripe.com/api/idempotent_requests)
+- OWASP Cheat Sheet Series: [Web Service Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Web_Service_Security_Cheat_Sheet.html)
+
 # Pracovní log
+
+- 2026-10-02: Doplněna příloha „Webhooky bez slepé důvěry a datového průvanu“ s návrhem smlouvy události, ověřováním podpisu, idempotencí, frontou, privacy-first logováním, retry/replay postupem, multitenant kontrolami, checklistem a šablonou webhook karty.
 - 2026-10-02: Doplněna příloha „Feature flags bez neřízených experimentů v produkci“ s rozlišením typů flagů, pravidlem že flag není autorizace, rollout plánem, privacy-first experimenty, kill switchem, technickou hygienou, checklistem, rollout šablonou a ověřenými zdroji OpenFeature, MartinFowler.com, OWASP a GDPR.
 - 2026-10-02: Doplněna příloha „Export a smazání účtu bez držení zákazníka jako rukojmí“ s mapou odchodu, použitelným exportem, rozdílem mezi účtem a workspace, retenčním vysvětlením, support procesem, vypínáním integrací, checklistem, exit policy šablonou a ověřenými zdroji ÚOOÚ, EDPB, Evropské komise a OWASP.
 - 2026-10-02: Doplněna příloha „Customer health score bez zákaznického rentgenu“ s návrhem signálů hodnoty místo sledování jednotlivců, vysvětlitelným skórováním, pravidly lidské kontroly, bezpečným logováním, provozní rutinou, checklistem, health score kartou a ověřenými zdroji Evropské komise a OWASP.
