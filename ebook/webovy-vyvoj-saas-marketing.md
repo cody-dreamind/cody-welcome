@@ -31442,7 +31442,191 @@ Tohle pořadí je nudné. Výborně. U mazání dat je nuda designový cíl.
 - Evropská komise — pravidla GDPR pro firmy a organizace: https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations_en
 - OWASP Cheat Sheet Series — Authentication, Session Management a Logging doporučení pro bezpečné ukončení přístupů a audit: https://cheatsheetseries.owasp.org/
 
+## Příloha: Feature flags bez neřízených experimentů v produkci
+
+Feature flag je jednoduchá myšlenka s překvapivě velkým dopadem: kód může být nasazený, ale chování produktu se zapíná až rozhodnutím v konfiguraci. OpenFeature popisuje feature flag jako runtime mechanismus, který umožňuje měnit chování aplikace bez nasazení nového kódu ([OpenFeature: Introduction](https://openfeature.dev/docs/reference/intro/)). To je skvělé pro postupné rollouty, interní testování, kill switche nebo prémiové funkce. Je to ale také výborný způsob, jak si vyrobit chaos, pokud se z flagů stane tajný ovládací panel bez vlastníka.
+
+Pro malý SaaS není cílem mít „enterprise feature management platformu“, která vypadá jako řídicí věž NASA po třetím espressu. Cílem je oddělit nasazení od vydání, snížit riziko změn a zachovat jasnou odpovědnost. Feature flag má být bezpečnostní pás, ne volant v rukou každého kolemjdoucího.
+
+> Codyho komentář: Feature flag není omluva pro polovičatý release. Je to dočasná brzda a provozní pojistka. Když ji necháš v produktu navždy, časem z ní bude archeologická vrstva, které se bojí i senior vývojář s kávou.
+
+## Rozliš typ flagu dřív, než ho přidáš
+
+Ne každý flag má stejný účel ani stejnou životnost. Pete Hodgson v článku na MartinFowler.com rozlišuje mimo jiné release toggles, experiment toggles, ops toggles a permissioning toggles; každý typ má jiné riziko a jiný očekávaný životní cyklus ([Martin Fowler: Feature Toggles](https://martinfowler.com/articles/feature-toggles.html)).
+
+Praktické rozdělení pro menší tým:
+
+| Typ flagu | K čemu slouží | Typická životnost | Hlavní riziko |
+| --- | --- | --- | --- |
+| Release flag | schovat rozpracovanou funkci do dokončení | dny až týdny | zapomenutý flag a dvojí kódová cesta |
+| Rollout flag | postupně pustit změnu malé části zákazníků | dny až týdny | nejasná kritéria rozšíření nebo zastavení |
+| Ops flag | rychle vypnout rizikovou část systému | měsíce až roky | příliš široké oprávnění měnit produkci |
+| Permission flag | řídit dostupnost podle tarifu nebo role | dlouhodobě | záměna s autorizací a bezpečnostní díra |
+| Experiment flag | porovnat varianty produktu | krátce podle testu | profilování uživatelů a metriky bez účelu |
+
+Před přidáním flagu si napiš jeho typ přímo do ticketu nebo pull requestu. Když nevíš, co je zač, pravděpodobně nevíš ani to, kdo ho má odstranit.
+
+## Flag není autorizace
+
+Největší produktová past: tým použije flag jako oprávnění. V UI se tlačítko schová, takže se zdá, že funkce není dostupná. Jenže API endpoint, export, import nebo admin akce zůstane přístupná. To není feature management. To je dveřní kukátko místo zámku.
+
+Bezpečné pravidlo:
+
+- feature flag rozhoduje, zda se cesta produktu nabízí,
+- autorizace rozhoduje, zda ji konkrétní uživatel smí provést,
+- API musí kontrolovat oprávnění nezávisle na UI,
+- dlouhodobé tarifní a rolové rozdíly patří do permission modelu, ne do hromady ad hoc podmínek,
+- flag pro bezpečnostní nebo fraud kontrolu musí mít zvláštní review.
+
+OWASP Web Security Testing Guide má samostatnou část k testování bypassu feature flagů a upozorňuje na riziko, že flagy nebo kill switche mohou řídit bezpečnostně relevantní chování ([OWASP WSTG: Feature Flag Security Bypass](https://owasp.github.io/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/02-Configuration_and_Deployment_Management/15-Feature_Flag_Security_Bypass)). Proto musí testy zkoušet nejen „je funkce skrytá“, ale hlavně „nejde ji obejít přímým voláním“.
+
+## Každý flag potřebuje kartu
+
+Flag bez metadat je budoucí hádanka. Za tři měsíce už nikdo nebude vědět, jestli je bezpečné ho smazat, zapnout všem nebo vypnout během incidentu.
+
+Minimální karta flagu:
+
+```text
+Název flagu:
+Typ flagu: release / rollout / ops / permission / experiment
+Vlastník:
+Popis změny:
+Výchozí stav:
+Kdo smí změnit stav:
+Kritéria zapnutí:
+Kritéria vypnutí:
+Plán odstranění:
+Datum revize:
+Dotčená data:
+Metriky sledování:
+Rollback postup:
+```
+
+Název flagu piš tak, aby přežil screenshot i grep:
+
+```text
+checkout_new_invoice_flow_rollout
+ai_summary_ops_kill_switch
+team_export_permission_v2
+```
+
+Vyhni se názvům jako `newFeature`, `test123`, `beta`, `final_final` nebo `disableThingMaybe`. Produkce není lednička na magnetky.
+
+## Rollout dělej podle signálů, ne nálady
+
+Postupné zapnutí má smysl jen tehdy, když víš, co sleduješ. Jinak je to jen pomalé mačkání červeného tlačítka.
+
+Praktický rollout plán:
+
+- zapni interním účtům a ověř základní tok,
+- zapni jednomu testovacímu zákazníkovi se souhlasem nebo jasnou domluvou,
+- rozšiřuj po malých skupinách podle rizika změny,
+- před každým rozšířením zkontroluj chyby, podporu a klíčovou produktovou metriku,
+- měj připravený návrat na starou cestu,
+- po stabilizaci flag smaž nebo změň na trvalé permission pravidlo.
+
+Příklad pro B2B SaaS fakturaci:
+
+```text
+0 %: pouze lokální a staging testy
+Interně: tým finance + support
+Pilot: 2 zákazníci s ruční kontrolou prvních faktur
+25 %: jen účty bez vlastních integrací
+100 %: po 7 dnech bez kritických chyb a bez nárůstu ticketů
+Odstranění flagu: do 14 dnů po plném zapnutí
+```
+
+Tohle je nudné, což je u fakturace lichotka.
+
+## Privacy-first experimenty bez profilování
+
+Experiment flagy jsou lákavé, protože slibují rychlou odpověď na otázku „co funguje líp“. Jenže špatně navržený experiment snadno sklouzne do profilování, sběru zbytečných identifikátorů a metrik, které nikdo neumí interpretovat.
+
+Privacy-first pravidla:
+
+- experimentuj jen s jasnou otázkou a předem daným koncem,
+- nepotřebuješ-li identitu člověka, neměř ji,
+- cohort drž stabilní, ale minimalizuj osobní data použitá k zařazení,
+- nepředávej experimentální data reklamním nástrojům,
+- neexperimentuj s temnými vzory, souhlasem, cenovou manipulací nebo skrytým tlakem,
+- výsledky ukládej agregovaně a s rozumnou retencí.
+
+GDPR klade důraz na srozumitelné a snadno dostupné informace pro subjekt údajů; článek 12 požaduje stručnou, transparentní, srozumitelnou a snadno přístupnou formu komunikace ([EUR-Lex: GDPR, článek 12](https://eur-lex.europa.eu/eli/reg/2016/679/oj)). U experimentů to znamená jednoduchou otázku: dokážeš uživateli vysvětlit, co měříš a proč, bez slovního mlžení?
+
+## Kill switch musí být rychlý, ale hlídaný
+
+Ops flag a kill switch mají zachránit provoz, když se něco pokazí: vypnout AI shrnutí, dočasně zastavit export, obejít nestabilní integraci, přepnout z nového checkoutu na starý. Rychlost je důležitá, ale bez pravidel z toho bude tajné admin tlačítko s produkčním dopadem.
+
+Dobrá pravidla pro kill switch:
+
+- změnu smí provést jen omezená role,
+- každá změna má auditní záznam: kdo, kdy, proč, původní stav,
+- UI jasně ukazuje aktuální stav a dopad,
+- změna nevyžaduje zásah do databáze přes konzoli,
+- existuje playbook pro zapnutí i návrat,
+- po incidentu se zkontroluje, jestli kill switch nemá zůstat zapnutý navždy.
+
+U kritických částí produktu je lepší mít jednoduchý kill switch než „rychle něco zakomentovat a nasadit“. Ale kill switch není náhrada testů, observability ani jasné odpovědnosti.
+
+## Technická hygiena: méně větví v hlavě
+
+Feature flag přidává další možný stav systému. Čím víc flagů, tím víc kombinací a tím větší šance, že nikdo netestuje skutečný produkční stav.
+
+Udržuj jednoduchost:
+
+- vyhodnocování flagů koncentruj do malé vrstvy, ne do stovek komponent,
+- default hodnoty nastav bezpečně a explicitně,
+- u každého flagu testuj zapnutý i vypnutý stav tam, kde mění byznys logiku,
+- nepoužívej flag pro refaktor, který se dá dodat menšími kroky,
+- neukládej flag stav jako pravdu do zákaznických dat, pokud to není součást doménového modelu,
+- při odstranění flagu smaž i mrtvou kódovou cestu, testy a dokumentaci.
+
+OpenFeature se snaží standardizovat API pro vyhodnocování flagů a oddělit aplikaci od konkrétního flagovacího backendu ([OpenFeature: Specification](https://openfeature.dev/specification/category/sections/)). Pro malý tým je důležitý hlavně princip: aplikace nemá být pevně přilepená k jednomu dodavateli, pokud se tomu dá rozumně vyhnout.
+
+## Checklist: feature flags před nasazením
+
+- [ ] Má flag jasný typ a vlastníka?
+- [ ] Je výchozí hodnota bezpečná při výpadku konfigurace?
+- [ ] Nezaměňuje se flag za autorizaci?
+- [ ] Existuje plán odstranění nebo datum revize?
+- [ ] Je změna flagu auditovaná?
+- [ ] Jsou otestované zapnuté i vypnuté chování?
+- [ ] Je rollout vázaný na konkrétní signály, ne na pocit?
+- [ ] Neodesílá experiment osobní data do reklamních nebo zbytečných externích nástrojů?
+- [ ] Umí support poznat, který zákazník je ve které variantě, pokud to potřebuje pro pomoc?
+- [ ] Je připravený rollback nebo kill switch postup?
+
+## Mini šablona rollout rozhodnutí
+
+```text
+Feature:
+Flag:
+Typ flagu:
+Riziko změny:
+Pilotní skupina:
+Metrika úspěchu:
+Metrika zastavení:
+Maximální doba experimentu / rollout fáze:
+Kdo rozhoduje o rozšíření:
+Kdo může vypnout:
+Jak informujeme support:
+Kdy flag odstraníme:
+```
+
+Feature flags jsou skvělé, když pomáhají dodávat menší změny bezpečněji. Jakmile ale nahrazují produktové rozhodování, autorizaci nebo disciplínu v release procesu, začnou produkt pomalu rozkládat. Dobré pravidlo zní: každý flag musí mít důvod, vlastníka a konec. Bez konce je to jen podmínka, která čeká na budoucí incident.
+
+## Zdroje k feature flags a bezpečnému rollout režimu
+
+- OpenFeature: Introduction — https://openfeature.dev/docs/reference/intro/
+- OpenFeature: Specification sections — https://openfeature.dev/specification/category/sections/
+- Martin Fowler / Pete Hodgson: Feature Toggles — https://martinfowler.com/articles/feature-toggles.html
+- OWASP WSTG: Feature Flag Security Bypass — https://owasp.github.io/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/02-Configuration_and_Deployment_Management/15-Feature_Flag_Security_Bypass
+- EUR-Lex: GDPR, nařízení 2016/679 — https://eur-lex.europa.eu/eli/reg/2016/679/oj
+
+---
+
 # Pracovní log
+- 2026-10-02: Doplněna příloha „Feature flags bez neřízených experimentů v produkci“ s rozlišením typů flagů, pravidlem že flag není autorizace, rollout plánem, privacy-first experimenty, kill switchem, technickou hygienou, checklistem, rollout šablonou a ověřenými zdroji OpenFeature, MartinFowler.com, OWASP a GDPR.
 - 2026-10-02: Doplněna příloha „Export a smazání účtu bez držení zákazníka jako rukojmí“ s mapou odchodu, použitelným exportem, rozdílem mezi účtem a workspace, retenčním vysvětlením, support procesem, vypínáním integrací, checklistem, exit policy šablonou a ověřenými zdroji ÚOOÚ, EDPB, Evropské komise a OWASP.
 - 2026-10-02: Doplněna příloha „Customer health score bez zákaznického rentgenu“ s návrhem signálů hodnoty místo sledování jednotlivců, vysvětlitelným skórováním, pravidly lidské kontroly, bezpečným logováním, provozní rutinou, checklistem, health score kartou a ověřenými zdroji Evropské komise a OWASP.
 
