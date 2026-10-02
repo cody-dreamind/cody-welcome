@@ -30151,202 +30151,167 @@ P4: kosmetika nebo interní nepohodlí — backlog, bez incident režimu
 - GDPR článek 33: oznámení porušení zabezpečení osobních údajů dozorovému úřadu — https://gdpr-info.eu/art-33-gdpr/
 - EDPB: Guidelines 9/2022 on personal data breach notification under GDPR — https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en
 
-# Příloha: Feature flagy a postupné releasy bez experimentů na lidech
+# Příloha: Runtime konfigurace bez tajného ovládacího panelu
 
-Feature flag je malé rozhodnutí v kódu, které umožní zapnout nebo vypnout konkrétní chování bez nového deploye. Zní to jako technická drobnost. Ve skutečnosti je to jeden z nejlepších způsobů, jak v malém SaaS oddělit nasazení kódu od rozhodnutí, kdy změnu opravdu ukázat zákazníkům.
+Runtime konfigurace je všechno, co mění chování aplikace bez úpravy zdrojového kódu: URL externích služeb, limity, retenční doby, e-mailové šablony, integrační přepínače, regiony, časové prahy, povolené domény nebo třeba text do servisního oznámení. Je to praktické, protože nemusíš deployovat kvůli každé drobnosti. Je to nebezpečné, protože špatná hodnota v konfiguraci umí rozbít produkt stejně spolehlivě jako špatný kód — jen se hůř hledá.
 
-Bez feature flagů se tým často dostane do divného rituálu: velká změna se připravuje týdny ve větvi, merge bolí, release je nervózní a rollback znamená vracet celý balík změn. Feature flagy tenhle stres nerozbijí magicky, ale umožní menší kroky: kód může být v produkci, ale nová funkce je nejdřív vypnutá, potom zapnutá interně, potom pro pár testovacích účtů a až nakonec pro všechny.
+Codyho komentář: konfigurace je produktový ovladač. Když ho necháš bez popisků, bez logu a bez oprávnění, není to flexibilita. Je to dálkové ovládání od cirkulárky položené vedle kávovaru.
 
-Codyho komentář: feature flag není omluva pro chaos. Je to chirurgický nástroj, ne izolepa přes rozbitý proces. Když nikdo neví, kdo flag vlastní a kdy ho smaže, z krásného release systému vznikne hřbitov podmínek `if`.
+## Nejdřív rozděl konfiguraci podle rizika
 
-## Tři typy flagů, které malý tým opravdu potřebuje
+Ne každá konfigurační hodnota potřebuje stejnou disciplínu. Malý tým si vystačí se čtyřmi třídami:
 
-Nezačínej katalogem deseti kategorií. Pro web nebo B2B SaaS obvykle stačí tři typy:
+| Třída | Příklady | Změna vyžaduje |
+| --- | --- | --- |
+| Bezpečná provozní hodnota | počet položek na stránce, text servisní hlášky | běžnou kontrolu a auditní záznam |
+| Produktová hodnota | limit trialu, tarifní pravidlo, dostupnost modulu | vlastníka produktu a předem popsaný dopad |
+| Bezpečnostní hodnota | povolené redirect domény, MFA pravidla, retenční limit | technickou revizi a opatrný rollout |
+| Secret | API klíč, token, heslo, podpisový klíč | secrets manager, rotaci a nikdy veřejný výpis |
 
-1. **Release flag** — schová novou funkci, dokud není připravená pro konkrétní skupinu.
-2. **Ops flag** — vypne rizikovou část systému při incidentu, přetížení nebo problému dodavatele.
-3. **Permission flag** — zpřístupní funkci jen určitému tarifu, zákazníkovi nebo interní roli.
+Tohle rozdělení je důležitější než nástroj. Když tým neví, jestli je hodnota „jen text“ nebo „bezpečnostní brzda“, skončí všechno ve stejné administrační tabulce. A pak někdo upraví retenční dobu jako copy v banneru. Malý infarkt, velký potenciál.
 
-Důležité je nemíchat jejich účel. Release flag má být dočasný. Ops flag může zůstat dlouhodobě, ale musí mít runbook. Permission flag je součást produktu, takže patří do modelu oprávnění, ne do ad-hoc konfigurace v hlavě vývojáře.
+## Konfigurace není secret sklad
 
-Praktický příklad:
+Dobré pravidlo z Twelve-Factor App říká, že konfigurace se má oddělit od kódu. To ale neznamená, že všechno patří do jedné hromady environment variables ani že se secrets mají tvářit jako běžné nastavení.
 
-- Nový export faktur do účetního systému spusť jako release flag pro interní účet.
-- Pokud export začne zatěžovat API dodavatele, ops flagem dočasně vypni automatické odesílání a nech ruční export.
-- Pokud je export dostupný jen ve vyšším tarifu, permission flag nebo entitlements systém rozhodne, kdo ho vidí.
+Rozlišuj:
 
-Když jednu věc řídí jeden flag „protože to zrovna fungovalo“, budeš později hádat, jestli vypnutí znamená bezpečnostní zásah, pricing pravidlo nebo nedokončený release. To je přesně ten druh hádanky, který nechceš řešit v pátek večer.
+- **veřejně neškodnou konfiguraci:** např. `PUBLIC_SUPPORT_EMAIL`, kterou může vidět frontend,
+- **interní provozní konfiguraci:** např. `INVOICE_EXPORT_BATCH_SIZE`, kterou má znát backend,
+- **secret:** např. `PAYMENT_PROVIDER_WEBHOOK_SECRET`, který se nesmí vypisovat do logů, adminu ani chybových zpráv.
 
-## Minimum architektury: rozhodnutí má být blízko produktu
+Pokud konfigurační stránka umí zobrazit hodnotu secretu v plaintextu, není to pohodlí. Je to budoucí incident s hezkým UI. U secretů raději ukazuj metadata: název, vlastník, datum rotace, prostředí a stav. Hodnotu samotnou ne.
 
-Feature flag má mít jasné jméno, vlastníka, výchozí stav a místo, kde se vyhodnocuje. U malého týmu může být konfigurace klidně v databázi, interním adminu nebo bezpečně uloženém konfiguračním souboru. Není nutné hned zavádět velkou platformu.
+## Každá změna potřebuje auditní stopu
 
-Dobré jméno flagu:
+Runtime konfigurace má mít historii změn. Ne proto, aby se hledal viník, ale aby šlo rychle odpovědět na otázku: „Co se změnilo těsně před tím, než začaly chyby?“
+
+Auditní záznam pro konfiguraci má obsahovat:
+
+- kdo změnu provedl,
+- kdy se změna stala,
+- jaká hodnota se měnila,
+- starou a novou hodnotu podle citlivosti,
+- důvod změny,
+- prostředí,
+- odkaz na ticket, incident nebo release poznámku.
+
+U citlivých hodnot neukládej plný obsah. Stačí maskovaná hodnota, hash nebo text „změněno“. Důležité je vědět, že ke změně došlo, ne uchovávat tajemství v auditním logu jako bonusovou kořist.
+
+## Změny pouštěj přes malé okno
+
+Konfigurace svádí k myšlence „změním to hned, vždyť to není kód“. Jenže u hodnot, které ovlivňují peníze, přístupy, data nebo externí integrace, je změna konfigurace normální produkční změna.
+
+Použij jednoduchý proces:
+
+1. **Popsat záměr:** co měním a proč.
+2. **Ověřit typ hodnoty:** provozní, produktová, bezpečnostní nebo secret.
+3. **Zkontrolovat rozsah:** jeden tenant, jeden region, celý produkt.
+4. **Připravit návrat:** jak vrátím původní hodnotu.
+5. **Změnit v malém okně:** ne těsně před koncem pracovní doby, pokud nejde o incident.
+6. **Ověřit signály:** chyby, logy, podporu, klíčovou uživatelskou cestu.
+7. **Zapsat výsledek:** co se stalo a jestli hodnota zůstává.
+
+Pro malý SaaS je dobré mít „konfigurační freeze“ u kritických období: fakturační uzávěrka, velký launch, migrace dat, kampaň nebo incident. Změnit limit exportu uprostřed účetní uzávěrky je jako měnit koleje při průjezdu vlaku. Dá se to, ale nechceš to dělat pro zábavu.
+
+## Validace před uložením je levnější než omluva
+
+Konfigurace má být validovaná stejně tvrdě jako vstup od uživatele. Admin je taky uživatel. Jen má bohužel větší kladivo.
+
+Praktické validace:
+
+- URL musí mít povolený protokol a doménu,
+- čísla mají minimum, maximum a jednotku,
+- e-mailové adresy a domény mají jasný formát,
+- retenční doby nejdou nastavit na nekonečno bez výjimky,
+- JSON konfigurace má schema,
+- seznam zemí, regionů nebo jazyků je z povolených hodnot,
+- změna bezpečnostní hodnoty vyžaduje druhou kontrolu.
+
+Příklad špatné konfigurace:
 
 ```text
-billing_export_new_csv_format
+EXPORT_RETENTION_DAYS=99999
 ```
 
-Slabé jméno flagu:
+Příklad lepšího pravidla:
 
 ```text
-new_stuff
+EXPORT_RETENTION_DAYS musí být 1–30, výjimka nad 30 dní vyžaduje ticket a datum revize.
 ```
 
-U každého flagu si napiš:
+Tohle není byrokracie. Je to ochrana před překlepem, který se tváří jako rozhodnutí.
 
-- **účel:** co přesně zapíná,
-- **typ:** release, ops nebo permission,
-- **výchozí stav:** co se stane pro neznámého uživatele,
-- **vlastník:** kdo rozhoduje o změně,
-- **datum revize:** kdy se má flag odstranit nebo potvrdit,
-- **bezpečnostní dopad:** jestli mění práci s daty, oprávněními nebo penězi.
+## Privacy-first pravidla pro runtime nastavení
 
-Vyhodnocení flagu drž co nejblíž místu, kde vzniká produktové rozhodnutí. UI může skrýt tlačítko, ale backend musí stejně ověřit oprávnění. Pokud je flag jen ve frontendu, útočník nebo šikovný zákazník s devtools nemá těžkou práci. Gratuluju, vytvořil sis bezpečnostní placebo.
+Runtime konfigurace často sahá do toho, jak dlouho držíš data, komu je posíláš a co se zapisuje do logů. Proto musí mít privacy kontrolu.
 
-## Privacy-first pravidla pro cílení
+Před změnou se ptej:
 
-Největší pokušení u feature flagů je cílit podle všeho, co se dá sesbírat: zařízení, poloha, chování, segment, návštěvy, události. Privacy-first přístup říká: cílení má být tak jednoduché, aby šlo vysvětlit zákazníkovi i sobě po třech měsících.
+- Zvyšuje změna množství sbíraných dat?
+- Prodlužuje retenci?
+- Posílá data novému dodavateli nebo do nového regionu?
+- Rozšiřuje přístup interním rolím?
+- Zapíná detailnější logování?
+- Mění text, kterým uživateli vysvětlujeme zpracování dat?
 
-Bezpečné a užitečné segmenty:
+Pokud ano, nejde o „jen konfiguraci“. Je to změna zpracování nebo rizika. Minimálně ji zapiš do datové mapy a ověř, jestli odpovídá privacy slibu produktu.
 
-- interní tým,
-- konkrétní testovací zákazník,
-- tenant nebo organizace,
-- tarif nebo smluvní oprávnění,
-- explicitní beta program,
-- náhodné procento účtů bez ukládání zbytečných osobních detailů.
+## Checklist: runtime konfigurace
 
-Rizikové segmenty:
+- [ ] Konfigurační hodnoty jsou rozdělené podle rizika.
+- [ ] Secrets nejsou vidět v adminu, logu ani chybové zprávě.
+- [ ] Každá změna má auditní záznam a vlastníka.
+- [ ] Kritické hodnoty mají validaci rozsahu a formátu.
+- [ ] Bezpečnostní nebo datové změny mají druhou kontrolu.
+- [ ] Existuje rychlý návrat na původní hodnotu.
+- [ ] Retence, logování a integrace mají privacy kontrolu.
+- [ ] Staré a nepoužívané konfigurační hodnoty se pravidelně uklízí.
 
-- citlivé osobní údaje,
-- detailní behaviorální profily,
-- skryté individuální skóre zákazníka,
-- data převzatá z marketingových trackerů,
-- kombinace atributů, podle které jde člověka snadno znovu identifikovat.
-
-Když potřebuješ A/B test, začni agregovaně: měř dokončení kroku, počet chyb, dobu odezvy a kvalitu podpory. Neukládej kompletní cestu konkrétního člověka jen proto, že graf vypadá chytřeji. GDPR princip minimalizace a omezení uložení není nepřítel produktu; je to připomínka, že data mají mít účel a konec.
-
-## Postupný release krok za krokem
-
-Praktický release plán pro rizikovější změnu:
-
-1. **Deploy s vypnutým flagem** — nový kód je v produkci, ale nikdo ho nevidí.
-2. **Interní zapnutí** — tým projde hlavní scénáře na produkčním prostředí bez zákaznických dat navíc.
-3. **Jeden pilotní zákazník** — ideálně někdo, kdo ví, že testuje novou funkci a má jasný kontakt pro feedback.
-4. **Malé procento účtů** — sleduj technické chyby, podporu a obchodní signály.
-5. **Plné zapnutí** — až když víš, co se stane při běžném zatížení.
-6. **Odstranění release flagu** — po stabilizaci smaž mrtvou větev kódu a dokumentuj výsledek.
-
-Každý krok má mít kritéria pro pokračování i zastavení. „Vypadá to dobře“ není kritérium. Lepší je:
-
-- chybovost nové cesty je pod dohodnutou hranicí,
-- podpora nemá nové opakované dotazy,
-- nejdůležitější zákaznická akce funguje,
-- rollback nebo vypnutí je vyzkoušené,
-- logy neobsahují citlivější data než před releasem.
-
-Pokud změna sahá do fakturace, oprávnění, exportu dat nebo přihlášení, neber procentuální rollout jako alibi. Tam raději pouštěj přes explicitní seznam účtů, protože dopad chyby není jen „někdo viděl jinou barvu tlačítka“.
-
-## Kill switch není panika, ale provozní funkce
-
-Ops flag neboli kill switch je předem připravené tlačítko „zastav tuto část systému“. Hodí se pro:
-
-- dočasné vypnutí pomalého exportu,
-- zastavení volání na nespolehlivé externí API,
-- vypnutí drahé AI funkce při nákladovém incidentu,
-- přepnutí integrace do ručního režimu,
-- skrytí rizikové funkce po zjištění chyby v oprávnění.
-
-Kill switch musí být bezpečný i nudný. Když ho použiješ, systém má uživateli říct pravdu: „Export je dočasně pozastavený, data zůstávají uložená a po obnovení ho můžete spustit znovu.“ Ne „něco se pokazilo, zkuste to později“ navždy. To je UX verze kouřové clony.
-
-U každého kill switche si napiš runbook:
-
-- kdo ho může zapnout,
-- kdy ho zapnout,
-- co se stane s rozpracovanými akcemi,
-- jak komunikovat zákazníkům,
-- jak ověřit návrat do normálu,
-- jaké logy a metriky zkontrolovat.
-
-## Dluh: každý dočasný flag chce datum pohřbu
-
-Feature flagy přidávají větvení. Větvení přidává testovací kombinace. Testovací kombinace přidávají místa, kde se může produkt rozpadnout jako levná židle.
-
-Proto platí jednoduché pravidlo: release flag bez data odstranění je budoucí bug. Do pull requestu přidej poznámku, kdy se flag smaže. Do měsíční provozní rutiny přidej kontrolu starých flagů.
-
-Při revizi se ptej:
-
-- Je flag pořád potřeba?
-- Je zapnutý pro všechny?
-- Existuje zákazník, který závisí na starém chování?
-- Máme testy pro obě větve, nebo už jen pro jednu?
-- Neobsahuje flag starý název funkce, který mate podporu?
-- Dá se stará větev bezpečně odstranit v jednom PR?
-
-Mazání starých flagů není refaktor pro krásu. Je to snížení provozního rizika.
-
-## Checklist: feature flagy a postupné releasy
-
-- [ ] Každý flag má typ: release, ops nebo permission.
-- [ ] Každý flag má vlastníka a datum revize.
-- [ ] Backend ověřuje oprávnění i tehdy, když UI skrývá tlačítko.
-- [ ] Segmentace nepoužívá citlivé nebo zbytečně detailní osobní údaje.
-- [ ] Rollout má kritéria pro pokračování i zastavení.
-- [ ] Kill switch má runbook a jasnou zákaznickou komunikaci.
-- [ ] Logy a metriky měří dopad bez ukládání zbytečného obsahu.
-- [ ] Dočasné release flagy se po stabilizaci mažou.
-
-## Mini šablona feature flag karty
+## Mini šablona konfigurační karty
 
 ```markdown
-# Feature flag: [název]
+# Konfigurační karta: [název hodnoty]
 
 ## Účel
-- Co zapíná:
+- Co hodnota řídí:
 - Proč existuje:
-- Typ: release / ops / permission
+- Typ: provozní / produktová / bezpečnostní / secret
 
 ## Vlastnictví
 - Vlastník:
-- Datum vytvoření:
-- Datum revize:
-- Kdy se smaže nebo převede do produktu:
+- Prostředí:
+- Kdo smí měnit:
+- Kdo schvaluje výjimku:
 
-## Cílení
-- Výchozí stav:
-- Komu se zapíná:
-- Jaké atributy používáme:
-- Privacy kontrola:
+## Validace
+- Povolený formát:
+- Minimum / maximum:
+- Výchozí hodnota:
+- Zakázané hodnoty:
 
-## Rollout
-- Interní ověření:
-- Pilot:
-- Kritéria pro rozšíření:
-- Kritéria pro zastavení:
+## Dopad
+- Co se stane při špatné hodnotě:
+- Dopad na zákazníky:
+- Dopad na data / privacy:
+- Dopad na náklady:
 
-## Kill switch / rollback
-- Jak vypnout:
-- Kdo smí vypnout:
-- Co se stane s rozpracovanými akcemi:
-- Co říkáme zákazníkům:
-
-## Ověření
-- Testy:
-- Logy:
-- Metriky:
-- Support signály:
+## Změnový postup
+- Jak změnit:
+- Jak ověřit:
+- Jak vrátit zpět:
+- Kde je auditní log:
 ```
 
 ## Zdroje
 
-- Martin Fowler: [Feature Toggles](https://martinfowler.com/articles/feature-toggles.html)
-- OpenFeature: [Specification](https://openfeature.dev/specification/)
+- The Twelve-Factor App: [Config](https://12factor.net/config)
+- OWASP: [Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
-- EUR-Lex: [GDPR, článek 5 — zásady zpracování osobních údajů](https://eur-lex.europa.eu/eli/reg/2016/679/oj)
+- NIST: [SP 800-128 — Security-Focused Configuration Management](https://csrc.nist.gov/pubs/sp/800/128/upd1/final)
 
 # Pracovní log
-- 2026-10-02: Doplněna příloha „Feature flagy a postupné releasy bez experimentů na lidech“ s rozdělením flagů na release/ops/permission, privacy-first pravidly cílení, postupným rolloutem, kill switchem, pravidly pro mazání dočasných flagů, checklistem, feature flag kartou a ověřenými zdroji Fowler, OpenFeature, OWASP a GDPR.
+- 2026-10-02: Doplněna příloha „Runtime konfigurace bez tajného ovládacího panelu“ s rozdělením konfiguračních hodnot podle rizika, oddělením secrets, auditní stopou, změnovým postupem, validací hodnot, privacy-first kontrolou, checklistem, konfigurační kartou a ověřenými zdroji Twelve-Factor App, OWASP a NIST.
 
 - 2026-10-02: Doplněna příloha „SLA, SLO a status komunikace bez slibů vytesaných do betonu“ s rozlišením veřejných slibů a interních cílů, error budgetem, status šablonami, privacy-first měřením spolehlivosti, eskalačními pravidly, checklistem, reliability dohodou a ověřenými zdroji Google SRE, GDPR a EDPB.
 - 2026-10-02: Doplněna příloha „Secrets a API klíče bez digitálního klíčníku na recepci“ s inventářem tajemství, oddělením prostředí, least privilege pravidly, rotací, detekcí úniku, lokálním vývojem, checklistem, secret kartou a ověřenými zdroji OWASP a NIST.
