@@ -31257,7 +31257,193 @@ Privacy-first zlaté pravidlo: pokud signál tři měsíce nevedl k žádné smy
 - Evropská komise — principy GDPR, zejména účelové omezení a minimalizace dat: https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-which-conditions_en
 - OWASP Logging Cheat Sheet — doporučení k bezpečnému logování, sanitizaci a vynechání citlivých dat: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 
+# Příloha: Export a smazání účtu bez držení zákazníka jako rukojmí
+
+Dobrá SaaS služba pozná sebevědomí podle toho, jak se chová ve chvíli, kdy chce zákazník odejít. Když export dat schová za support ticket, smazání účtu za tři potvrzovací obrazovky a zálohy za neurčité „někdy“, není to retence. Je to digitální hotel California s fakturou navíc.
+
+Privacy-first přístup říká něco jednoduššího: zákazník má rozumět tomu, jaká data ve službě má, jak je dostane ven, co se smaže hned, co se smaže později kvůli provozním nebo zákonným důvodům a kdo celý proces kontroluje. Právě tady se potkává produkt, podpora, bezpečnost, compliance a obyčejná slušnost.
+
+> Codyho komentář: Nejlepší exit flow není ten, který zákazníka přemluví třemi slevami. Nejlepší exit flow je ten, po kterém si řekne: „Tohle bylo fér, klidně se někdy vrátím.“
+
+## Začni mapou odchodu
+
+Nejdřív si napiš všechny situace, kdy data opouštějí produkt nebo mizí z aktivního provozu. Bez mapy budeš řešit jen nejhlasitější tlačítko „Smazat účet“ a zapomeneš na exporty, faktury, logy, integrace, pozvánky, přílohy, analytiku, zálohy a data v podpůrných nástrojích.
+
+Praktické rozdělení:
+
+- Export pracovních dat: projekty, záznamy, dokumenty, nastavení, historie důležitých akcí.
+- Export administrativních dat: faktury, smluvní údaje, objednávky, tarif, kontakty.
+- Deaktivace účtu: uživatel se už nepřihlásí, ale workspace může dál existovat.
+- Smazání uživatele: osobní profil zmizí nebo se anonymizuje, ale týmová data zůstávají.
+- Smazání workspace: ruší se celý zákaznický prostor, včetně sdílených dat.
+- Odpojení integrací: revokace tokenů, zrušení webhooků, odstranění synchronizačních front.
+- Mazání z podpůrných systémů: helpdesk, CRM, e-mailing, billing, monitoring a logy.
+
+U každého bodu si poznamenej vlastníka. Export produktových dat typicky vlastní produkt nebo engineering. Faktury finance. Přístupové tokeny bezpečnost/provoz. Komunikaci support nebo customer success. Když je vlastníkem „někdo“, bude to při prvním incidentu „nikdo“ — klasika, ale bez popcornu.
+
+## Export má být použitelný, ne jen existující
+
+Export není splněný tím, že vygeneruješ jeden obří JSON, který pochopí jen senior backend vývojář na třetí kávě. Pokud má být export férový, musí být čitelný, dokumentovaný a předvídatelný.
+
+Dobrá praxe:
+
+- Nabídni strojově čitelný formát pro import jinam: CSV, JSON, případně ZIP se složkami.
+- Přidej jednoduchý `README.txt` nebo `manifest.json`, kde je popsáno, co export obsahuje.
+- Odděl osobní data, týmová data a systémová metadata.
+- U větších exportů ukaž stav zpracování a bezpečný časově omezený odkaz ke stažení.
+- Upozorni, co v exportu není a proč: například interní antispam signály, bezpečnostní detekce nebo agregované metriky.
+- Umožni export oprávněné osobě, ne každému členovi workspace automaticky.
+
+Příklad manifestu:
+
+```json
+{
+  "workspace": "acme-demo",
+  "generated_at": "2026-10-02T15:00:00Z",
+  "format_version": "1.0",
+  "files": [
+    { "path": "projects.csv", "description": "Seznam projektů" },
+    { "path": "users.csv", "description": "Členové workspace a role" },
+    { "path": "attachments/", "description": "Nahrané přílohy" }
+  ],
+  "excluded": [
+    "bezpečnostní detekční signály",
+    "agregovaná produktová analytika"
+  ]
+}
+```
+
+Privacy-first detail: exportní odkaz nepatří do dlouhého e-mailu bez kontextu. Pošli notifikaci, ale stažení nech za přihlášením, nebo použij krátce platný odkaz s jednorázovým tokenem. Export často obsahuje víc citlivých dat než běžná obrazovka aplikace.
+
+## Smazání účtu není totéž co smazání workspace
+
+V B2B SaaS je nejčastější chyba směšovat osobu a týmový prostor. Když odejde jeden uživatel, firma nechce přijít o dokumentaci, historii objednávek nebo projekty. Když končí celý zákazník, je potřeba řešit workspace, billing, integrace a zálohy.
+
+Nastav tři samostatné akce:
+
+- Deaktivovat uživatele: okamžitě zablokuje přihlášení a odpojí aktivní relace.
+- Odstranit osobní profil: smaže nebo anonymizuje jméno, e-mail a osobní nastavení tam, kde už nejsou potřeba.
+- Zrušit workspace: spustí řízené ukončení celé zákaznické instance podle retenčního plánu.
+
+U týmových dat nepředstírej absolutní jednoduchost. Napiš jasně, kdo může workspace zrušit, co se stane s pozvánkami, integracemi, API klíči, daty v queue, soubory, audit logy a fakturační historií. Tohle je přesně místo, kde dobrý produkt získá důvěru i při odchodu.
+
+## Retence po smazání musí být vysvětlená lidsky
+
+„Smazáno“ nesmí znamenat „už to nevidíš v UI, ale my to máme v sedmi systémech do konce věků“. Zároveň existují legitimní důvody, proč část dat nezmizí okamžitě: účetnictví, bezpečnostní audit, řešení sporů, ochrana před zneužitím, technická obnova ze záloh.
+
+V produktu proto rozliš:
+
+- Okamžité účinky: zablokování přístupu, revokace tokenů, vypnutí integrací, skrytí dat z aktivního UI.
+- Krátkodobé technické dožití: fronty, cache, indexy, dočasné exportní balíčky.
+- Zálohy: data mohou zůstat v šifrovaných zálohách do jejich přirozené expirace, ale nesmí se vrátit do aktivního provozu bez kontrolovaného postupu.
+- Povinně uchovávané záznamy: například účetní nebo smluvní dokumenty podle platných povinností.
+- Anonymizované agregace: metriky, které už nejdou rozumně přiřadit ke konkrétní osobě nebo zákazníkovi.
+
+Praktická věta do produktu:
+
+```text
+Po zrušení workspace okamžitě zablokujeme přístup, odpojíme integrace a odstraníme data z aktivního produktu. Některé záznamy můžeme po omezenou dobu držet kvůli účetnictví, bezpečnosti nebo obnově záloh; nebudeme je používat pro marketing ani profilování.
+```
+
+Tohle není právní stanovisko. Je to produktová srozumitelnost. Přesné lhůty si nastav podle právního posouzení, účetních požadavků a retenčního plánu.
+
+## Support proces bez ruční magie
+
+Ručně vyřízený export nebo výmaz může být v malé firmě na začátku v pořádku. Ale i ruční proces musí mít checklist, jinak vznikne „Pepa to obvykle nějak udělá“ architektura. A ta se škáluje asi jako fax v aquaparku.
+
+Minimální support postup:
+
+1. Ověř identitu a oprávnění žadatele.
+2. Urči typ žádosti: export, smazání uživatele, zrušení workspace, odpojení integrace, kombinace.
+3. Zkontroluj dopad na tým: vlastníci, aktivní fakturace, otevřené incidenty, probíhající exporty.
+4. Vygeneruj potvrzení s jasným popisem účinků a lhůt.
+5. Proveď akci přes interní nástroj nebo script, ne přes ad-hoc databázové kouzlení.
+6. Zapiš auditní stopu: kdo žádost ověřil, kdy byla provedena, jaký typ akce proběhl.
+7. Pošli stručné potvrzení bez zbytečných osobních detailů.
+
+Auditní stopa nemá obsahovat kompletní export ani citlivý obsah. Stačí metadata procesu. Cíl je prokázat, že žádost byla vyřízena správně, ne založit druhý tajný archiv.
+
+## Integrace a tokeny vypínej jako první
+
+Při rušení účtu často zůstávají největším rizikem integrace: API klíče, OAuth tokeny, webhooky, přístup do úložiště, platební brány, e-mailové služby nebo no-code automatizace. Jestli data smažeš v produktu, ale necháš běžet synchronizaci z cizího systému, máš mazací jojo.
+
+Bezpečné pořadí:
+
+- Zastav nové zápisy a synchronizace.
+- Revokuj API klíče a OAuth tokeny.
+- Vypni webhook endpointy nebo je přepni do bezpečného odmítání.
+- Zastav background joby pro daný workspace.
+- Až potom maž nebo anonymizuj data.
+- Nakonec ověř, že se data z integrace znovu neobjevila.
+
+Tohle pořadí je nudné. Výborně. U mazání dat je nuda designový cíl.
+
+## Checklist: export a smazání bez rukojmí
+
+- Máme oddělený export uživatele, export workspace a fakturační dokumenty.
+- Export má dokumentovaný formát, manifest a jasný seznam výjimek.
+- Stažení exportu je chráněné, časově omezené a auditované.
+- Smazání uživatele je oddělené od zrušení celého workspace.
+- Produkt jasně vysvětluje okamžité účinky, retenční lhůty a zálohy.
+- Integrace, tokeny, webhooky a background joby se zastaví před mazáním dat.
+- Support má ověřovací postup a nepoužívá ad-hoc databázové zásahy.
+- Auditní stopa ukládá procesní metadata, ne citlivý obsah žádosti.
+- Zálohy mají pravidlo, jak se po restore znovu neuvedou smazaná data do provozu.
+- Veřejná dokumentace říká lidsky, co se stane při odchodu zákazníka.
+
+## Mini šablona exit policy
+
+```markdown
+# Exit policy: [produkt / workspace]
+
+## Typy odchodu
+- Deaktivace uživatele:
+- Smazání osobního profilu:
+- Zrušení workspace:
+- Export dat:
+
+## Export
+- Dostupné formáty:
+- Kdo může export spustit:
+- Co export obsahuje:
+- Co export neobsahuje:
+- Platnost odkazu ke stažení:
+
+## Mazání
+- Okamžité účinky:
+- Technické dožití:
+- Zálohy:
+- Povinně uchovávané záznamy:
+- Anonymizované agregace:
+
+## Integrace
+- Tokeny k revokaci:
+- Webhooky k vypnutí:
+- Joby k zastavení:
+- Kontrola po smazání:
+
+## Support proces
+- Ověření žadatele:
+- Schvalovatel:
+- Auditní záznam:
+- Potvrzovací zpráva:
+
+## Privacy kontrola
+- Zakázaná data v audit logu:
+- Retenční lhůta exportního balíčku:
+- Kdo má přístup k exportům:
+- Test obnovy ze záloh:
+```
+
+## Zdroje
+
+- ÚOOÚ — práva subjektu údajů podle GDPR včetně výmazu a přenositelnosti: https://uoou.gov.cz/poradna/poradna-gdpr/prava-subjektu-udaju
+- EDPB — Guidelines on the right to data portability: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-right-data-portability-under-regulation-2016679_en
+- Evropská komise — pravidla GDPR pro firmy a organizace: https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations_en
+- OWASP Cheat Sheet Series — Authentication, Session Management a Logging doporučení pro bezpečné ukončení přístupů a audit: https://cheatsheetseries.owasp.org/
+
 # Pracovní log
+- 2026-10-02: Doplněna příloha „Export a smazání účtu bez držení zákazníka jako rukojmí“ s mapou odchodu, použitelným exportem, rozdílem mezi účtem a workspace, retenčním vysvětlením, support procesem, vypínáním integrací, checklistem, exit policy šablonou a ověřenými zdroji ÚOOÚ, EDPB, Evropské komise a OWASP.
 - 2026-10-02: Doplněna příloha „Customer health score bez zákaznického rentgenu“ s návrhem signálů hodnoty místo sledování jednotlivců, vysvětlitelným skórováním, pravidly lidské kontroly, bezpečným logováním, provozní rutinou, checklistem, health score kartou a ověřenými zdroji Evropské komise a OWASP.
 
 - 2026-10-02: Doplněna příloha „Vyhledávání v SaaS bez úniku cizích dat“ s pravidly pro tenant hranice, bezpečné indexování, autocomplete, logování dotazů, relevanci, export výsledků, negativní testy, checklistem, search policy šablonou a ověřenými zdroji OWASP a PostgreSQL.
