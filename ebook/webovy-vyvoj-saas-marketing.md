@@ -30858,8 +30858,218 @@ Mazání flagu je součást dokončení práce. Dokud je stará větev v kódu, 
 - OpenFeature: [Flag Evaluation API](https://openfeature.dev/specification/sections/flag-evaluation/)
 - MartinFowler.com: [Feature Toggles (aka Feature Flags)](https://martinfowler.com/articles/feature-toggles.html)
 
+# Příloha: Vyhledávání v SaaS bez úniku cizích dat
+
+Vyhledávání v SaaS vypadá nevinně. Jeden input, pár výsledků, možná našeptávač. Jenže ve víceuživatelském nebo multi-tenant produktu je search často boční dveře k datům: index obsahuje víc, než má uživatel vidět, autocomplete napoví cizí název klienta, logy uloží citlivou frázi a export výsledků obejde oprávnění. Gratuluju, jednoduchá funkce právě dostala právnický cosplay.
+
+Privacy-first vyhledávání znamená jednoduché pravidlo: uživatel nesmí najít nic, co by nemohl zobrazit i přímou cestou přes běžné rozhraní. Search není speciální režim s benevolentnějšími právy. Je to jen jiný vstup do stejných datových hranic.
+
+> Codyho komentář: Pokud má produkt silné oprávnění v detailu záznamu, ale vyhledávání ho obejde, nemáš vyhledávání. Máš datový únik s lupou.
+
+## Nejdřív urči hranici viditelnosti
+
+Před volbou technologie si napiš, podle čeho se rozhoduje, zda se záznam může objevit ve výsledcích. Nestačí „uživatel je přihlášený“. U B2B SaaS obvykle rozhoduje kombinace:
+
+- tenant nebo workspace,
+- role uživatele,
+- členství v projektu, týmu nebo složce,
+- stav záznamu, například koncept, archiv, smazáno,
+- explicitní sdílení s konkrétním uživatelem,
+- bezpečnostní výjimka, například právní hold nebo uzamčený účet.
+
+Dobrá věta pro návrh zní:
+
+```text
+Výsledek vyhledávání může obsahovat jen záznamy, pro které stejný uživatel ve stejném kontextu projde standardní autorizační kontrolou detailu.
+```
+
+Tohle je nudné, ale zásadní. OWASP API Security Top 10 řadí Broken Object Level Authorization mezi hlavní rizika API a doporučuje kontrolovat oprávnění u každého objektu, ne jen u endpointu ([OWASP API1:2023 Broken Object Level Authorization](https://api-security.owasp.org/editions/2023/en/0xa1-broken-object-level-authorization/)). Vyhledávání je přesně místo, kde se objektové oprávnění snadno rozteče.
+
+## Indexuj jen to, co opravdu potřebuješ najít
+
+Vyhledávací index není archiv. Nemusí obsahovat celý dokument, všechny sloupce a historické verze jen proto, že to technicky jde. Čím víc dat dáš do indexu, tím větší dopad má chyba v oprávnění, záloze, logování nebo administrátorském exportu.
+
+Praktické rozdělení polí:
+
+| Typ pole | Příklad | Doporučení |
+|---|---|---|
+| Bezpečné pro zobrazení ve výsledku | název projektu, veřejný slug | indexuj a zobrazuj podle oprávnění |
+| Užitečné pro hledání, ale citlivější | interní poznámka, jméno kontaktu | indexuj jen při jasném účelu a neukazuj ve snippet bez kontroly |
+| Citlivé nebo zbytečné | tokeny, celé zprávy podpory, platební poznámky | neindexuj, případně hledej jen přes speciální auditovaný režim |
+| Provozní metadata | ID, tenant ID, typ záznamu | indexuj pro filtrování, nezobrazuj uživateli bez potřeby |
+
+U dokumentů a ticketů často pomůže oddělit „vyhledávací text“ od „zobrazovaného detailu“. Search může najít záznam podle omezeného textového výtahu, ale detail se načte až po nové autorizační kontrole. Tím se vyhneš situaci, kdy snippet prozradí víc než samotná karta výsledku.
+
+## Tenant filtr nesmí být dobrovolná dekorace
+
+V multi-tenant SaaS musí být tenant hranice vynucená systémově, ne jen zvyklostí vývojáře. Pokud každý search dotaz ručně přidává `tenant_id`, časem někdo zapomene. A Murphyho zákon říká, že to bude zrovna endpoint s exportem do CSV.
+
+Bezpečnější možnosti:
+
+- tenant filtr vkládej v centrální search vrstvě, ne v každém handleru zvlášť,
+- search klient pro běžného uživatele nesmí umět hledat napříč tenanty,
+- administrátorský cross-tenant search drž odděleně, auditovaně a bez běžných snippetů,
+- indexy rozděl podle tenantů jen tehdy, když to provozně zvládneš udržet,
+- u databázového hledání zvaž row-level security tam, kde odpovídá architektuře.
+
+PostgreSQL dokumentace k Row Security Policies popisuje model, ve kterém lze omezovat viditelnost řádků podle politik a při absenci politik použít default-deny chování ([PostgreSQL: Row Security Policies](https://www.postgresql.org/docs/current/ddl-rowsecurity.html)). Není to kouzelná náplast na špatný návrh, ale je to dobrý příklad principu: datová hranice má být co nejblíž datům.
+
+## Autocomplete je taky únikový kanál
+
+Našeptávač často prozradí víc než samotné výsledky. Stačí napsat dvě písmena a produkt napoví jméno zákazníka, e-mail, interní projekt nebo název citlivé složky. Uživatel sice záznam neotevře, ale už ví, že existuje.
+
+Bezpečná pravidla pro autocomplete:
+
+- napovídej jen z objektů, které by uživatel mohl vidět ve výsledcích,
+- nepoužívej globální populární dotazy napříč tenanty,
+- u citlivých typů záznamů raději našeptávej typy a filtry, ne konkrétní názvy,
+- neukládej surové dotazy do marketingové analytiky,
+- omez frekvenci dotazů a délku vstupu,
+- testuj i negativní scénáře: uživatel z jiného týmu, odebraný člen, archivovaný projekt.
+
+Příklad lepšího našeptávání:
+
+```text
+Hledat v: Projekty, Faktury, Dokumentace
+Filtr: moje projekty, archiv, otevřené úkoly
+```
+
+Příklad rizikového našeptávání:
+
+```text
+„Nová akvizice Klient XY - NDA“ se objeví uživateli, který k projektu nemá přístup.
+```
+
+První varianta pomáhá orientaci. Druhá vyrábí incident, který se tváří jako UX zlepšení.
+
+## Loguj pro opravu, ne pro zvědavost
+
+Search dotazy jsou citlivé, protože lidé do nich píšou názvy zákazníků, e-maily, rodná čísla, části smluv, chyby z produkce i věci, které by nikdy neměli dávat do formuláře. Pokud ukládáš každý dotaz navždy, nestavíš analytiku. Stavíš sklad překvapení.
+
+Rozumný privacy-first model:
+
+- agreguj počet hledání, nulové výsledky a typy hledaných objektů,
+- surové dotazy ukládej jen krátce a jen pokud je potřebuješ pro ladění relevance,
+- citlivé vzory maskuj před uložením,
+- dotazy nepropojuj s reklamními profily ani externími pixely,
+- k ladění používej vzorky schválené vlastníkem produktu,
+- administrátorské a supportní search akce audituj zvlášť.
+
+OWASP Logging Cheat Sheet připomíná, že logy mají pomáhat bezpečnosti a provozu, ale nemají zbytečně ukládat citlivá data nebo vytvářet nové riziko ([OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). U vyhledávání to platí dvojnásob: dotaz je často víc osobní než kliknutí.
+
+## Relevance nesmí obejít oprávnění
+
+Někdy tým optimalizuje search tak dlouho, až začne míchat signály napříč zákazníky: populární dokumenty, časté dotazy, často otevírané záznamy. To může zlepšit relevanci, ale také prozradit, co řeší jiný tenant.
+
+Bezpečný model relevance:
+
+- globální signály používej jen pro veřejný nebo neutrální obsah,
+- tenantové signály drž uvnitř tenantu,
+- osobní historii hledej jen s jasným účelem a možností vypnutí,
+- nedávej vyšší skóre podle aktivity uživatelů, kteří nemají vztah k aktuálnímu tenantovi,
+- nedovol, aby ranking naznačil existenci neveřejného objektu.
+
+Příklad: u znalostní báze může být „nejčtenější článek“ globální signál, pokud jde o veřejnou dokumentaci. U interních projektů zákazníků ne. Tam je globální popularita spíš informační únik v obleku produktové metriky.
+
+## Export výsledků je samostatné riziko
+
+Vyhledávání často končí tlačítkem „exportovat“. Export ale není jen delší stránka výsledků. Je to datový výstup, který může obejít stránkování, zobrazit skrytá pole nebo skončit v e-mailu mimo produkt.
+
+Pro export výsledků nastav pravidla:
+
+- exportuj jen pole, která by uživatel mohl vidět v UI,
+- u každé položky proveď stejnou autorizační kontrolu jako u výsledků,
+- nastav limity počtu řádků a frekvence exportů,
+- velké exporty dělej jako job s auditní stopou,
+- u citlivějších exportů zobraz varování a účel,
+- soubor maž po krátké době a neposílej ho jako přílohu, pokud to není nutné.
+
+Mikrocopy před exportem může být jednoduché:
+
+```text
+Export obsahuje jen záznamy, ke kterým máte přístup. Soubor bude dostupný 24 hodin a poté ho smažeme.
+```
+
+Tohle není alibismus. Je to uživatelská instrukce a provozní závazek v jedné větě.
+
+## Testovací sada pro bezpečné hledání
+
+Search potřebuje testy stejně jako fakturace nebo přihlašování. Nestačí otestovat, že „faktura se najde“. Testuj, že se nenajde tam, kde nemá.
+
+Minimální scénáře:
+
+- uživatel A z tenantu 1 nenajde objekt tenantu 2,
+- odebraný člen týmu nenajde staré projekty ani přes autocomplete,
+- archivovaný nebo smazaný objekt se chová podle pravidel produktu,
+- snippet neobsahuje pole, která uživatel nesmí vidět,
+- export výsledků neobsahuje skrytá pole,
+- prázdný dotaz nevrací celý tenant bez limitu,
+- chybný search backend nevrátí širší výsledky jako fallback,
+- support role má auditované a omezené hledání.
+
+Dobré selhání je prázdný výsledek, jasná chyba nebo bezpečně omezený fallback. Špatné selhání je „když search filtr spadne, ukaž všechno, ať zákazník nečeká“. To není zákaznická péče. To je sprint do incident reportu.
+
+## Checklist: search bez úniku dat
+
+- [ ] Máme napsanou hranici viditelnosti pro každý typ hledaného objektu.
+- [ ] Tenant, role a stav záznamu se aplikují centrálně, ne ručně v každém endpointu.
+- [ ] Index obsahuje jen pole nutná pro hledání a zobrazení výsledků.
+- [ ] Autocomplete nenapovídá cizí nebo citlivé objekty.
+- [ ] Snippety a highlighty procházejí stejnou autorizační kontrolou jako detail.
+- [ ] Surové search dotazy se neukládají déle, než je potřeba pro provoz.
+- [ ] Relevance nepoužívá signály z jiných tenantů pro neveřejná data.
+- [ ] Export výsledků má limity, audit a stejná oprávnění jako UI.
+- [ ] Máme negativní testy pro cizí tenant, odebraného uživatele a skrytá pole.
+- [ ] Support a admin hledání je oddělené, auditované a vysvětlené v interních pravidlech.
+
+## Mini šablona search policy
+
+```text
+# Search policy: [část produktu]
+
+## Účel hledání
+Jaký problém uživatele řeší:
+Kdo ho používá:
+Které typy objektů hledá:
+
+## Viditelnost
+Tenant hranice:
+Role a oprávnění:
+Stavy záznamů:
+Výjimky:
+
+## Indexovaná data
+Pole v indexu:
+Pole záměrně mimo index:
+Snippet pravidla:
+Autocomplete pravidla:
+
+## Provoz
+Limity dotazů:
+Logování dotazů:
+Retence logů:
+Export výsledků:
+Fallback při výpadku:
+
+## Testy
+Negativní tenant test:
+Odebraný uživatel:
+Skrytá pole:
+Export:
+Autocomplete:
+```
+
+Vyhledávání je skvělá produktová funkce, když zkracuje cestu k práci. Ale nesmí se stát zkratkou kolem oprávnění. U privacy-first SaaS je dobrý search ten, který najde správnou věc správnému člověku — a všem ostatním elegantně řekne ticho.
+
+## Zdroje
+
+- OWASP API Security Top 10: [API1:2023 Broken Object Level Authorization](https://api-security.owasp.org/editions/2023/en/0xa1-broken-object-level-authorization/)
+- PostgreSQL Documentation: [Row Security Policies](https://www.postgresql.org/docs/current/ddl-rowsecurity.html)
+- OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+
 # Pracovní log
 
+- 2026-10-02: Doplněna příloha „Vyhledávání v SaaS bez úniku cizích dat“ s pravidly pro tenant hranice, bezpečné indexování, autocomplete, logování dotazů, relevanci, export výsledků, negativní testy, checklistem, search policy šablonou a ověřenými zdroji OWASP a PostgreSQL.
 - 2026-10-02: Doplněna příloha „Feature flagy bez produkční rulety a datového vysavače“ s rozdělením typů flagů, pravidly pro oprávnění, bezpečný default, rollout vlny, privacy-first evaluation context, audit změn, mazání flag debt, checklistem, šablonou feature flag karty a ověřenými zdroji OpenFeature a MartinFowler.com.
 - 2026-10-02: Doplněna příloha „E-mailová doručitelnost bez šmírovacích pixelů“ s rozdělením typů pošty, SPF/DKIM/DMARC postupem, požadavky Gmailu, one-click unsubscribe, privacy-first měřením, warm-up rutinou, DNS provozními pravidly, checklistem, šablonou e-mailové domény a ověřenými zdroji RFC a Google sender guidelines.
 - 2026-10-02: Doplněna příloha „Sdílené schránky a aliasy bez interního chaosu“ s mapou kontaktních adres, pravidly pro aliasy, přílohy a citlivá data, automatickými odpověďmi, security/privacy procesy, evropským provozem, checklistem, mailbox kartou a ověřenými zdroji GDPR, OWASP a ENISA.
