@@ -31979,7 +31979,227 @@ Kdy zákazníka informujeme:
 - OWASP: Logging Cheat Sheet — doporučení k bezpečnému logování a vyloučení citlivých dat: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - NIST CSRC: Least Privilege — definice principu nejmenších oprávnění: https://csrc.nist.gov/glossary/term/least_privilege
 
+# Příloha: Produktová dokumentace bez support labyrintu a datového vysavače
+
+Dobrá dokumentace není archiv toho, co tým kdysi implementoval. Je to samoobslužná vrstva produktu: pomáhá zákazníkovi udělat práci, snižuje opakované support dotazy, zrychluje sales a šetří energii týmu. Špatná dokumentace dělá přesný opak — tváří se jako znalostní báze, ale ve skutečnosti je to bludiště s vyhledáváním, které najde všechno kromě odpovědi.
+
+Pro malý SaaS je dokumentace jedna z nejlevnějších forem škálování. Nemusíš hned najímat dalšího člověka na podporu, když umíš dobře vysvětlit pět nejčastějších úkolů, tři nejčastější chyby a dvě nejcitlivější otázky kolem dat.
+
+> Codyho komentář: Dokumentace není odkladiště pro věty typu „uživatel může spravovat nastavení“. To je popisek tlačítka v kabátu. Dokumentace má říct, kdy nastavení použít, co tím člověk riskuje a jak pozná, že to udělal správně.
+
+## Nejdřív rozděl potřeby čtenáře
+
+Jedna stránka dokumentace nemá dělat všechno. Když se snaží být návodem, referencí, vysvětlením i marketingovou stránkou najednou, čtenář musí luštit, co z toho vlastně potřebuje.
+
+Praktické rozdělení:
+
+- **Tutorial** učí první průchod: „Vytvořte první projekt za 10 minut.“
+- **How-to návod** řeší konkrétní úkol: „Jak přidat další doménu.“
+- **Reference** popisuje přesné parametry: API endpointy, role, limity, stavy.
+- **Vysvětlení** dává kontext: proč existuje retenční politika, jak funguje billing, jaké jsou datové hranice.
+
+Diátaxis tenhle model popisuje jako čtyři druhy dokumentace podle potřeb uživatele: tutorialy, how-to návody, reference a vysvětlení. Není nutné z toho dělat akademickou vědu s diplomem a medailí. Stačí nepchat všechno do jedné nekonečné stránky.
+
+Pro první verzi SaaS dokumentace udělej minimum:
+
+1. **Start zde** — první úspěšná akce od registrace po výsledek.
+2. **Časté úkoly** — pět až deset nejčastějších how-to návodů.
+3. **Bezpečnost a data** — co sbíráte, kde to běží, jak funguje export a mazání.
+4. **Billing a limity** — tarify, kvóty, fakturace, zrušení, trial.
+5. **Troubleshooting** — nejčastější chyby a co dělat dál.
+
+## Piš podle úkolu, ne podle menu v aplikaci
+
+Dokumentace kopírující navigaci produktu často vzniká rychle, ale čte se špatně. Uživatel nehledá „Sekce Nastavení / Integrace / Pokročilé“. Hledá „Jak připojím e-mailovou doménu?“ nebo „Proč se mi neposílají webhooky?“
+
+Lepší struktura je úkolová:
+
+- Připojit doménu.
+- Pozvat kolegu.
+- Nastavit fakturační údaje.
+- Exportovat data.
+- Omezit přístup supportu.
+- Vyřešit neodeslaný webhook.
+- Zrušit účet bez ztráty exportu.
+
+Každý návod by měl mít stejný rytmus:
+
+```text
+Kdy návod použít:
+Co potřebujete předem:
+Kroky:
+Jak poznáte úspěch:
+Co dělat, když to nefunguje:
+Bezpečnostní nebo datová poznámka:
+Související odkazy:
+```
+
+„Jak poznáte úspěch“ je malá věc s velkým dopadem. Bez ní člověk kliká, doufá a pak píše na support. S ní ví, že má hledat konkrétní stav, e-mail, log, zelený indikátor nebo funkční testovací událost.
+
+## Troubleshooting bez házení viny na uživatele
+
+Chybové návody mají být konkrétní a klidné. Ne „zkontrolujte nastavení“. Raději: „Ověřte, že DNS záznam `TXT` existuje pro přesnou doménu `example.com`, ne pro `www.example.com`, a počkejte na propagaci podle TTL.“
+
+Dobrá troubleshooting stránka obsahuje:
+
+- příznak problému,
+- pravděpodobné příčiny,
+- bezpečný postup ověření,
+- co uživatel může opravit sám,
+- kdy má kontaktovat podporu,
+- jaké informace má poslat,
+- jaké informace posílat nemá.
+
+Privacy-first poznámka je tady důležitá. Uživatelům neříkej „pošlete screenshot celé obrazovky“, pokud stačí ID události, čas, veřejný název integrace a chybový kód. Screenshoty často obsahují zákaznická data, e-maily, fakturační údaje nebo interní poznámky. Support nepotřebuje digitální panoramatickou fotku kanceláře, když řeší jeden rozbitý kabel.
+
+Příklad bezpečné žádosti o informace:
+
+```text
+Pošlete nám prosím:
+- čas pokusu,
+- ID události nebo požadavku,
+- název integrace,
+- chybový kód,
+- informaci, jestli se problém opakuje.
+
+Neposílejte prosím hesla, API klíče, celé exporty dat ani screenshoty s osobními údaji. Pokud screenshot pomůže, začerněte zákaznické údaje.
+```
+
+## Dokumentace k datům patří mezi prodejní argumenty
+
+U B2B SaaS se zákazníci často ptají na data dřív, než se ptají na drobné funkce. Kde služba běží? Kdo má přístup? Jak funguje export? Jak se maže účet? Jaké jsou subprocesory? Co se loguje? Jak dlouho držíte data?
+
+Tyhle odpovědi nepatří jen do právních dokumentů. Patří i do srozumitelné produktové nápovědy.
+
+Minimální sada privacy-first stránek:
+
+- **Kde jsou data zpracována** — regiony, hosting, hlavní dodavatelé.
+- **Jaká data sbíráme** — podle účelu, ne jen podle technických tabulek.
+- **Export a smazání** — co lze exportovat, co se maže hned, co má retenční lhůtu.
+- **Přístupy týmu a supportu** — kdo se může podívat do zákaznického účtu a za jakých podmínek.
+- **Logy a diagnostika** — co se ukládá pro opravu chyb a jak dlouho.
+
+Piš lidsky. Věta „zpracování osobních údajů probíhá na základě smluvního plnění“ může být právně relevantní, ale sama o sobě zákazníkovi nevysvětlí, co se děje. Přidej praktickou verzi: „E-mail uživatele potřebujeme pro přihlášení, pozvánky do workspace a bezpečnostní upozornění. Nepoužíváme ho pro reklamní publika.“
+
+## Vyhledávání v nápovědě bez sběru citlivých dotazů
+
+Search v dokumentaci je užitečný, ale dotazy mohou prozradit hodně: názvy zákazníků, interní problémy, chyby v konfiguraci, někdy i tokeny omylem vložené do políčka. Proto se k vyhledávacím dotazům chovej jako k potenciálně citlivým datům.
+
+Privacy-first pravidla:
+
+- Neukládej celé dotazy navždy.
+- Maskuj e-maily, tokeny, UUID a dlouhé náhodné řetězce.
+- Agreguj dotazy do témat: „billing“, „webhook“, „export“, ne do osobních příběhů.
+- Sleduj hlavně nulové výsledky a opakované neúspěšné hledání.
+- Nabídni přímé odkazy na nejčastější návody bez nutnosti vyhledávat.
+- Pokud používáš externí search službu, zapiš si, kam dotazy odcházejí a jak dlouho se drží.
+
+Metriky, které stačí pro zlepšování dokumentace:
+
+- top stránky nápovědy,
+- dotazy bez výsledku po normalizaci,
+- stránky s vysokým odchodem zpět na support,
+- články napojené na nejčastější tikety,
+- počet support odpovědí, které odkazují na existující návod.
+
+Nepotřebuješ vědět, že konkrétní člověk četl tři články ve 23:41 a pak zmateně klikl na billing. Potřebuješ vědět, že článek o billing limitech neumí odpovědět na otázku, kterou zákazníci opakují každý týden.
+
+## Propoj support s dokumentací
+
+Dokumentace nesmí žít mimo podporu. Každý opakovaný ticket je buď chybějící článek, nejasný produkt, špatné mikrocopy, nebo legitimní složitost, kterou je potřeba vysvětlit.
+
+Jednoduchá týdenní rutina:
+
+1. Vyber pět nejčastějších support témat.
+2. U každého zjisti, jestli existuje dobrý návod.
+3. Pokud existuje, zkontroluj, jestli na něj support opravdu odkazuje.
+4. Pokud neexistuje, napiš krátký how-to návod.
+5. Pokud návod existuje a lidé se stejně ptají, oprav první odstavec, nadpis nebo chybovou hlášku v produktu.
+
+U každého článku si veď malou vlastnickou kartu:
+
+```text
+Článek:
+Vlastník:
+Související produktová oblast:
+Poslední kontrola:
+Nejčastější support dotaz, který řeší:
+Kdy článek přestane platit:
+Související privacy riziko:
+```
+
+„Kdy článek přestane platit“ je kouzelná kolonka. Pokud víš, že po novém billing systému bude článek zastaralý, nepřekvapí tě to o tři měsíce později jako účet za službu, kterou nikdo nevypnul.
+
+## Přístupnost nápovědy není volitelný bonus
+
+Dokumentace často zachraňuje uživatele ve chvíli, kdy je něco rozbité. Právě tehdy nesmí být schovaná za drobným textem, nečitelným kontrastem, obrázkem bez alternativy nebo videem bez textového shrnutí.
+
+Praktické minimum:
+
+- Každý návod má jasný nadpis a mezititulky.
+- Kroky jsou číslované, pokud záleží na pořadí.
+- Chybové stavy jsou popsané textem, nejen barvou.
+- Obrázky obrazovek mají stručné vysvětlení, co ukazují.
+- Video má textové shrnutí nebo přepis klíčových kroků.
+- Kontaktní pomoc je dostupná konzistentně, ne jen na některých stránkách.
+
+WCAG 2.2 u chybových stavů zdůrazňuje, že chyba má být identifikovaná a popsaná textem. To platí i pro nápovědu: pokud vysvětluješ opravu chyby, napiš ji tak, aby šla pochopit bez obrázku a bez hádání podle červené ikonky.
+
+## Checklist: dokumentace bez support labyrintu
+
+- [ ] Má dokumentace jasně oddělené tutorialy, how-to návody, reference a vysvětlení?
+- [ ] Existuje stránka „Start zde“ pro první úspěšnou akci?
+- [ ] Jsou nejčastější support dotazy pokryté konkrétními návody?
+- [ ] Má každý návod část „jak poznáte úspěch“?
+- [ ] Říkají troubleshooting články, jaké informace poslat a jaké neposílat?
+- [ ] Má produkt srozumitelnou nápovědu k datům, exportu, mazání a přístupům?
+- [ ] Maskují se nebo agregují vyhledávací dotazy v nápovědě?
+- [ ] Je u každého důležitého článku vlastník a datum poslední kontroly?
+- [ ] Jsou obrázky, chyby a videa použitelné i přístupně?
+- [ ] Má support týdenní rutinu pro opravu nebo doplnění dokumentace?
+
+## Mini šablona dokumentačního článku
+
+```text
+# [Úkol, který chce uživatel dokončit]
+
+## Kdy tento návod použít
+[Jedna až dvě věty.]
+
+## Co potřebujete předem
+- [Oprávnění]
+- [Nastavení]
+- [Externí údaj]
+
+## Postup
+1. [Konkrétní krok]
+2. [Konkrétní krok]
+3. [Konkrétní krok]
+
+## Jak poznáte, že je hotovo
+[Stav, potvrzení, testovací událost nebo viditelný výsledek.]
+
+## Když to nefunguje
+- Příznak:
+- Pravděpodobná příčina:
+- Bezpečný postup ověření:
+
+## Datová a bezpečnostní poznámka
+[Co se ukládá, co neposílat supportu, jaké jsou limity.]
+
+## Související články
+- [Odkaz]
+```
+
+## Zdroje
+
+- Diátaxis: rámec pro čtyři typy dokumentace — tutorialy, how-to návody, reference a vysvětlení: https://www.diataxis.fr/
+- Google Search Central: doporučení vytvářet užitečný, spolehlivý obsah primárně pro lidi: https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+- W3C WCAG 2.2 Understanding SC 3.3.1 Error Identification — chyby mají být identifikované a popsané textem: https://www.w3.org/WAI/WCAG22/Understanding/error-identification
+
 # Pracovní log
+
+- 2026-10-02: Doplněna příloha „Produktová dokumentace bez support labyrintu a datového vysavače“ s rozdělením dokumentace podle potřeb čtenáře, úkolovou strukturou návodů, troubleshootingem bez sběru citlivých dat, privacy-first vyhledáváním v nápovědě, propojením supportu s dokumentací, přístupnostním minimem, checklistem, šablonou článku a ověřenými zdroji Diátaxis, Google Search Central a W3C.
 
 - 2026-10-02: Doplněna příloha „Admin konzole a impersonace bez superadmin divočiny“ s rozdělením admin akcí podle rizika, návrhem rolí podle práce, pravidly pro impersonaci, maskováním dat, brzdami destruktivních akcí, auditní stopou, support workflow, checklistem, šablonou admin akce a ověřenými zdroji OWASP a NIST.
 
