@@ -28522,7 +28522,265 @@ Vlastník:
 - Google SRE Book — Handling Overload, principy řízeného odmítání práce, graceful degradation a ochrany služby před přetížením: https://sre.google/sre-book/handling-overload/
 - OWASP API Security Top 10 — API4:2023 Unrestricted Resource Consumption, riziko neomezené spotřeby výpočetních, síťových a finančních zdrojů v API: https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/
 
+# Příloha: API verze bez lámání zákazníků a nočních omluv
+
+API není jen technický detail mezi frontendem a backendem. Pro SaaS je to slib: „když postavíš svůj provoz na mém rozhraní, neshodím ti ho v úterý ráno jen proto, že jsem měl chuť uklidit JSON.“ Jakmile na API naváže interní automatizace, účetní export, partnerská integrace nebo mobilní aplikace, každá změna má zákaznický dopad.
+
+Dobré verzování API není posedlost čísly. Je to dohoda, jak zavádět změny, upozorňovat na konec podpory, chránit starší klienty a přitom se nezabetonovat v historických omylech. Privacy-first rozměr je jednoduchý: kompatibilitu neřeš tím, že budeš navždy logovat kompletní payloady a profilovat klienty. Řeš ji smlouvou rozhraní, testy, jasnou migrací a minimální diagnostikou.
+
+> Codyho komentář: Nejhorší API breaking change je ta, kterou tým nazve „malý refaktor“. Refaktor je interní věc. Když zákazníkovi změníš tvar odpovědi, je to produktové rozhodnutí v montérkách.
+
+## Nejdřív definuj veřejný kontrakt
+
+Ne každá endpointová změna je stejná. Než začneš řešit `/v1`, `/v2` nebo hlavičky, napiš si, co je veřejný kontrakt API.
+
+Do kontraktu patří:
+
+- URL a HTTP metoda,
+- povinné a volitelné parametry,
+- tvar requestu a response,
+- význam stavových kódů,
+- autentizace a oprávnění,
+- limity a chování při přetížení,
+- idempotence u rizikových operací,
+- chybový formát,
+- datové typy a časová pásma,
+- retenční a auditní informace, které klient uvidí.
+
+Do kontraktu naopak nepatří interní název třídy, konkrétní databázová tabulka nebo pořadí polí v JSONu, pokud ho výslovně neslibuješ. Čím přesněji oddělíš veřejnou dohodu od interní implementace, tím bezpečněji můžeš službu měnit.
+
+Praktický test: kdyby si zákazník podle dokumentace napsal klienta bez čtení zdrojového kódu, co by očekával, že zůstane stabilní? Právě to je tvůj kontrakt.
+
+## Změny rozděl podle dopadu, ne podle nálady vývojáře
+
+Každou změnu API označ jednou ze čtyř kategorií:
+
+| Typ změny | Příklad | Dopad na klienta | Co udělat |
+|---|---|---|---|
+| Kompatibilní rozšíření | nové volitelné pole v odpovědi | klient ho může ignorovat | přidat do dokumentace a testů |
+| Kompatibilní zpřesnění | lepší validace chybného vstupu | část špatných requestů začne padat dřív | oznámit v changelogu, zkontrolovat metriky chyb |
+| Riziková změna | změna limitu, nové oprávnění, jiná latence | klient může potřebovat úpravu | dát migrační poznámku a přechodné období |
+| Breaking change | přejmenované pole, jiný význam stavu, odstranění endpointu | klient se rozbije | nová verze, deprecation plán a komunikace |
+
+Kompatibilní změna není „cokoliv, co prošlo testy“. Pokud klient parsuje jen známá pole, nové pole je obvykle bezpečné. Pokud klient očekává přesný výčet hodnot a ty přidáš nový stav `paused_by_admin`, může to být breaking change i bez změny schématu.
+
+Dobré pravidlo: pokud by zákazník musel změnit svůj kód, automatizaci, dokumentaci nebo oprávnění, není to drobná interní úprava.
+
+## Vyber jednoduchý model verzování
+
+Pro malé SaaS bývá nejpraktičtější verzovat hlavní veřejné API v cestě, například `/api/v1/...`. Není to nejčistší akademická elegance, ale je to srozumitelné pro lidi, logy, podporu i zákaznické integrace.
+
+Použitelné modely:
+
+- **Verze v URL**: `/api/v1/invoices`. Nejjednodušší pro dokumentaci, debugging a podporu.
+- **Verze v hlavičce**: `Accept: application/vnd.example.v1+json`. Čistší pro některé API, ale hůř viditelná v běžné podpoře.
+- **Verze podle data**: `2026-10-01`. Užitečné, když chceš přesně řídit chování podle vydání, ale vyžaduje disciplinovanou dokumentaci.
+- **Bez globální verze, jen evoluce kontraktu**: funguje u menších interních API, pokud máš testy a přísná pravidla kompatibility.
+
+Nedělej z verzování festival možností. Vyber jeden výchozí model a drž ho. Kombinace `/v2`, hlaviček, query parametru `?version=latest` a „když nic nepošleš, uvidíš něco podle nálady serveru“ je integrační escape room bez cedulek.
+
+## Dokumentace je zdroj pravdy, ne dekorace po releasu
+
+API bez aktuální dokumentace je jako dveře bez kliky: možná vede dovnitř, ale všichni budou chvíli trapně šťouchat do rámu. Specifikaci piš dřív, než změnu pustíš ven.
+
+Minimum pro každou veřejnou změnu:
+
+- endpoint a metoda,
+- autentizace,
+- příklady requestu a response,
+- chybové odpovědi,
+- rate limit nebo kapacitní omezení,
+- idempotency pravidla,
+- oprávnění a tenant hranice,
+- dopad na osobní nebo zákaznická data,
+- migrační poznámka, pokud se chování mění.
+
+OpenAPI je praktický formát pro popis HTTP API, protože dokáže sloužit lidem i nástrojům. Nemusíš hned generovat všechno na světě. Stačí, když specifikace popisuje skutečný kontrakt a je součástí review.
+
+Review otázka: „Kdybych byl zákazník a viděl jen dokumentaci, dokážu změnu bezpečně nasadit?“ Pokud ne, není hotovo.
+
+## Deprecation plán napiš dřív než oznámení
+
+Zastaralý endpoint nemá zmizet potichu. Potřebuje plán.
+
+Deprecation plán má obsahovat:
+
+- co se mění,
+- koho se to týká,
+- proč se změna děje,
+- jak dlouho staré chování zůstane,
+- jak poznat vlastní dopad,
+- migrační kroky,
+- datum ukončení podpory,
+- kontakt nebo podporovaný kanál pro dotazy.
+
+HTTP má pro tyto situace i standardizované signály. `Deprecation` response header umožňuje dát klientovi strojově čitelnou informaci, že resource je zastaralý. `Sunset` header pak může sdělit čas, kdy se očekává ukončení dostupnosti daného resource. Pro člověka ale samotná hlavička nestačí — přidej odkaz na migrační dokumentaci a lidský changelog.
+
+Praktická odpověď může vypadat takhle:
+
+```http
+HTTP/1.1 200 OK
+Deprecation: @1798761600
+Sunset: Thu, 31 Dec 2026 23:59:59 GMT
+Link: <https://example.com/docs/migration/v2>; rel="deprecation"; type="text/html"
+Content-Type: application/json
+```
+
+V UI administraci zároveň ukaž varování tam, kde zákazník spravuje tokeny nebo integrace. Ne každý integrátor sleduje response headers. Někteří lidé mají i dovolenou, děti a občas absurdní touhu spát.
+
+## Chybové odpovědi drž stabilní
+
+Zákazník často nestaví jen na úspěšné odpovědi. Staví i na chybách. Pokud změníš `error_code`, zrušíš pole `details` nebo začneš vracet HTML místo JSONu, můžeš rozbít retry logiku, importy i podporu.
+
+Stabilní chybový formát:
+
+```json
+{
+  "error": {
+    "code": "invoice_not_found",
+    "message": "Faktura neexistuje nebo k ní nemáte přístup.",
+    "request_id": "req_9a21",
+    "docs_url": "https://example.com/docs/errors/invoice_not_found"
+  }
+}
+```
+
+Privacy-first pravidla pro chyby:
+
+- nevracej interní SQL chyby,
+- nevypisuj osobní údaje do `message`,
+- používej stabilní `request_id` pro podporu,
+- citlivé detaily nech v omezeném interním logu,
+- zákazníkovi vysvětli další krok,
+- tenant hranice nikdy neprozrazuj formulací typu „faktura existuje, ale není vaše“.
+
+HTTP status kódy mají jasný význam popsaný v HTTP specifikaci. Používej je konzistentně: `400` pro chybný request, `401` pro chybějící nebo neplatné ověření, `403` pro nedostatečné oprávnění, `404` pro nenalezený resource nebo bezpečné skrytí existence, `409` pro konflikt stavu, `429` pro omezení požadavků a `5xx` pro chyby na straně serveru.
+
+## Testuj kompatibilitu jako produktovou funkci
+
+API kompatibilita nemá stát na víře, že „frontend nám prošel“. Veřejný kontrakt potřebuje vlastní testy.
+
+Praktická sada:
+
+- **Contract testy** pro nejdůležitější endpointy.
+- **Snapshot příklady** z dokumentace, které se ověřují proti skutečné odpovědi.
+- **Test starého klienta** proti nové verzi backendu.
+- **Test nové chyby**: ověř, že chybový formát zůstává stabilní.
+- **Test oprávnění**: tenant A nikdy neuvidí resource tenanta B.
+- **Test datové minimalizace**: response neobsahuje pole, která nikdo nepotřebuje.
+
+U větší změny si udělej compatibility matrix:
+
+| Klient | Používaná verze | Riziko | Migrační akce | Owner |
+|---|---|---|---|
+| Web app | v1 | nízké | interní úprava SDK | produkt |
+| Mobilní app | v1 | střední | delší přechodné období | mobile owner |
+| Partner export | v1 | vysoké | ruční kontakt a testovací prostředí | sales/support |
+| Interní automatizace | v1 | nízké | update jobu | ops |
+
+Tahle tabulka je nudná. Což je přesně její kouzlo. Nudná tabulka před releasem je levnější než dramatický incident po releasu.
+
+## SDK a klientské knihovny nejsou omluva pro lámání API
+
+Pokud poskytuješ SDK, ulehčuješ zákazníkům práci. Zároveň tím přebíráš odpovědnost za jasnou kompatibilitu mezi SDK a API.
+
+Pravidla:
+
+- SDK má mít vlastní verzi a changelog,
+- dokumentace API musí fungovat i bez SDK,
+- starší SDK má dostat srozumitelnou chybu při nepodporované verzi,
+- bezpečnostní opravy komunikuj odděleně od funkčních změn,
+- ukázkové kódy aktualizuj společně s dokumentací,
+- nepřidávej do SDK telemetrii bez jasného důvodu a souhlasu.
+
+Pokud používáš sémantické verzování, drž jeho základní význam: major verze pro nekompatibilní změny, minor pro kompatibilní přidání funkcí a patch pro kompatibilní opravy. U SDK to lidem pomáhá odhadnout riziko aktualizace.
+
+## Privacy-first diagnostika při migraci
+
+Při migraci láká zapnout detailní logování všeho, aby šlo dohledat, kdo co používá. Nedělej z migrace výmluvu pro datový vysavač.
+
+Měř raději minimální signály:
+
+- verze API,
+- endpoint,
+- anonymizovaný nebo interní identifikátor tenanta,
+- status kód,
+- `request_id`,
+- čas zpracování,
+- počet deprecated volání za den,
+- zda klient poslal novou povinnou hodnotu.
+
+Neloggovat:
+
+- celé request payloady,
+- přístupové tokeny,
+- osobní údaje zákazníků,
+- obsah dokumentů,
+- kompletní odpovědi jen „pro jistotu“.
+
+Když potřebuješ konkrétní payload pro podporu, udělej řízený debug režim: omezený čas, omezený tenant, schválený owner, maskování citlivých polí a jasná retence. Tím chráníš zákazníka i vlastní tým.
+
+## Checklist: API verze bez lámání zákazníků
+
+- [ ] Máme popsaný veřejný kontrakt API.
+- [ ] Každá změna je označená jako kompatibilní, riziková nebo breaking.
+- [ ] Používáme jeden srozumitelný model verzování.
+- [ ] Dokumentace a příklady se mění ve stejném pull requestu jako API.
+- [ ] Chybový formát a status kódy zůstávají stabilní.
+- [ ] Breaking change má migrační plán, termín a ownera.
+- [ ] Deprecated endpoint vrací lidsky i strojově čitelný signál.
+- [ ] Máme contract testy pro hlavní endpointy.
+- [ ] Víme, kteří klienti používají starou verzi, bez logování zbytečných dat.
+- [ ] SDK, changelog a ukázky odpovídají aktuálnímu kontraktu.
+
+## Mini šablona API change karty
+
+```markdown
+# API change karta: [název změny]
+
+## Shrnutí
+- Endpoint / oblast:
+- Typ změny: kompatibilní / riziková / breaking
+- Owner:
+- Plánované vydání:
+
+## Kontrakt
+- Co se mění:
+- Co zůstává stabilní:
+- Dotčené status kódy:
+- Dotčená oprávnění:
+
+## Dopad
+- Dotčení klienti:
+- Rizika:
+- Privacy dopad:
+- Potřebná komunikace:
+
+## Migrace
+- Staré chování:
+- Nové chování:
+- Přechodné období:
+- Dokumentace:
+- Testovací scénář:
+
+## Ověření
+- Contract testy:
+- Monitoring deprecated volání:
+- Rollback / fallback:
+- Datum revize:
+```
+
+## Zdroje
+
+- RFC 9110 — HTTP Semantics, oficiální specifikace významu metod, status kódů a dalších HTTP sémantik: https://www.rfc-editor.org/rfc/rfc9110.html
+- RFC 9745 — The Deprecation HTTP Response Header Field, standardizovaný signál pro označení zastaralého resource: https://www.rfc-editor.org/rfc/rfc9745.html
+- RFC 8594 — The Sunset HTTP Header Field, hlavička pro komunikaci plánovaného ukončení dostupnosti resource: https://www.rfc-editor.org/info/rfc8594/
+- OpenAPI Initiative — OpenAPI Specification, standardní popis HTTP API pro dokumentaci a nástroje: https://spec.openapis.org/
+- Semantic Versioning 2.0.0 — pravidla pro major, minor a patch verze: https://semver.org/
+
 # Pracovní log
+- 2026-10-02: Doplněna příloha „API verze bez lámání zákazníků a nočních omluv“ s definicí veřejného kontraktu, tříděním změn podle dopadu, modelem verzování, deprecation plánem, stabilními chybami, contract testy, SDK pravidly, privacy-first diagnostikou, checklistem, API change kartou a ověřenými zdroji RFC, OpenAPI a SemVer.
+
 - 2026-10-02: Rozšířena existující příloha „Webhooky a integrace bez slepé důvěry v cizí požadavky“ o kill switch pro pozastavení rizikové integrace, oddělení příjmu událostí od byznys akce, spouštěče pro zastavení, privacy-first pravidla důkazních payloadů a doplněný checklist.
 
 - 2026-10-01: Doplněna příloha „Fronty a backpressure bez ztráty důvěry“ s pravidly pro dlouhé joby, odpovědí `202 Accepted`, backpressure při přetížení, idempotencí, prioritami, privacy-first logováním, UX stavů, provozní rutinou, checklistem, job kartou a ověřenými zdroji MDN, Google SRE a OWASP.
