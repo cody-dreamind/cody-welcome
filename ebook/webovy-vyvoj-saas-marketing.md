@@ -31798,7 +31798,190 @@ Auditní stopa:
 - Stripe Docs: [Idempotent requests](https://docs.stripe.com/api/idempotent_requests)
 - OWASP Cheat Sheet Series: [Web Service Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Web_Service_Security_Cheat_Sheet.html)
 
+# Příloha: Admin konzole a impersonace bez superadmin divočiny
+
+Admin konzole je zvláštní část SaaS produktu: většinou ji nevidí zákazník, ale její chyba umí napáchat větší škodu než rozbitá landing page. Právě tady se maže účet, mění fakturace, řeší support, vrací platba, ručně opravuje integrace a občas se někdo potřebuje „podívat jako zákazník“. Pokud tahle vrstva vzniká jen jako rychlý interní hack, časem se z ní stane pohodlný obchvat bezpečnosti. A obchvat bezpečnosti je krásné slovo pro budoucí incident.
+
+Dobrá admin konzole není o tom, že všichni důvěryhodní lidé dostanou roli `superadmin` a slíbí, že budou hodní. Dobrá konzole má malé role, jasné důvody akcí, auditní stopu, brzdy pro destruktivní operace a minimum přístupu k osobním datům. Support má řešit problém zákazníka, ne dostat rentgen celého workspace jen proto, že tlačítko bylo rychlejší napsat.
+
+> Codyho komentář: Interní nástroj je pořád produkční software. Jen má menší publikum a větší schopnost rozbít pátek odpoledne.
+
+## Nejdřív rozděl admin akce podle rizika
+
+Ne každá interní akce potřebuje stejný režim. Když dáš změně textu v profilu stejný proces jako smazání zákaznického workspace, tým začne proces obcházet. Rozděl akce do vrstev podle dopadu.
+
+Praktické vrstvy:
+
+- **Read-only diagnostika** — zobrazit stav účtu, tarif, poslední systémové události, doručitelnost e-mailu, stav integrace.
+- **Nízkoriziková oprava** — znovu poslat potvrzovací e-mail, obnovit neúspěšný webhook, přepočítat agregaci.
+- **Zákaznický dopad** — změnit tarif, upravit vlastnictví workspace, ručně odblokovat účet, přepnout feature flag.
+- **Destruktivní akce** — smazání dat, revokace integrací, zrušení workspace, masový export, změna fakturačních údajů.
+- **Bezpečnostní zásah** — reset přístupů, vynucení odhlášení, uzamčení účtu, pozastavení podezřelé integrace.
+
+Každá vrstva má mít vlastní pravidla: kdo ji smí spustit, zda potřebuje důvod, jestli vyžaduje druhé schválení, jak dlouho se drží auditní stopa a jak se informuje zákazník. OWASP v doporučeních k autorizaci zdůrazňuje mimo jiné `deny by default` a kontrolu přístupu na serverové straně, ne jen v uživatelském rozhraní ([OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)).
+
+## Role navrhuj podle práce, ne podle titulů
+
+Špatný model rolí vypadá takhle: `admin`, `superadmin`, `support`, `owner`, `god_mode`. Hezké? Možná. Bezpečné? Ani náhodou, Sherlocku.
+
+Lepší je pojmenovat oprávnění podle práce:
+
+- `support.read_account_status`
+- `support.resend_email`
+- `billing.view_subscription`
+- `billing.adjust_invoice_note`
+- `security.revoke_sessions`
+- `ops.replay_webhook`
+- `owner.delete_workspace`
+
+Role pak jen skládají sady oprávnění. Support první linie může vidět stav a spustit bezpečné opakování akce. Billing může vidět fakturační stav, ale nepotřebuje číst obsah zákaznických dokumentů. Security může vynutit odhlášení, ale nemá proč upravovat marketingové preference. Princip nejmenších oprávnění je základní bezpečnostní vzor; NIST ho shrnuje jako přístup jen k tomu, co je nutné pro splnění úkolu ([NIST CSRC: Least Privilege](https://csrc.nist.gov/glossary/term/least_privilege)).
+
+Praktické pravidlo: jestli role obsahuje víc než deset různých typů práce, není to role. Je to uklízecí kontejner.
+
+## Impersonace musí být výjimka, ne pohodlný prohlížeč
+
+„Přihlásit se jako zákazník“ je lákavá zkratka. Pomůže rychle pochopit problém, ale zároveň otevírá dveře k prohlížení dat, která support často nepotřebuje. Proto je lepší mít nejdřív diagnostické obrazovky: stav workspace, nastavení integrací, poslední chyby, povolené funkce, auditní události a technické metriky bez obsahu zákaznických dat.
+
+Impersonaci povoluj jen když:
+
+- zákazník o pomoc výslovně požádal nebo je zásah nutný pro řešení incidentu,
+- existuje ticket nebo incident ID,
+- pracovník zadá konkrétní důvod,
+- relace je časově omezená,
+- zákaznická data jsou podle možností maskovaná,
+- každá akce v impersonaci se loguje odděleně od akcí zákazníka,
+- destruktivní akce jsou během impersonace zakázané nebo vyžadují další potvrzení.
+
+Důležitý detail: audit nesmí říkat jen „uživatel Novák smazal integraci“, pokud to ve skutečnosti udělal support při impersonaci. Správný záznam má rozlišit interního aktéra, zákaznický kontext, důvod, ticket a konkrétní akci. Jinak si při incidentu vytvoříš detektivku, kde pachatel sedí v serverovně a všichni podezřelí vypadají jako zákazník.
+
+## Citlivá data maskuj už v návrhu obrazovek
+
+Admin konzole nemá být hezčí databázový dump. U každého pole se ptej: potřebuje ho pracovník opravdu vidět celé, nebo stačí stav, hash, poslední čtyři znaky, doména, počet, čas nebo agregace?
+
+Příklady:
+
+| Potřeba supportu | Lepší zobrazení | Čemu se vyhnout |
+|---|---|---|
+| Ověřit doručení e-mailu | typ e-mailu, čas, status, chyba SMTP | celý obsah zprávy |
+| Ověřit platbu | částka, měna, stav, poslední čtyři znaky ID transakce | kompletní platební údaje |
+| Diagnostikovat integraci | název integrace, scopes, poslední chyba, čas posledního běhu | access token nebo payload s osobními daty |
+| Řešit workspace | počet členů, role, stav pozvánek | export všech e-mailů bez důvodu |
+| Ověřit dokument | ID dokumentu, vlastník, stav zpracování | obsah dokumentu v náhledu |
+
+OWASP u logování doporučuje dávat pozor na data, která do logů nepatří, a podobná logika platí i pro interní obrazovky: co pracovník nepotřebuje pro opravu, nemá být běžně dostupné ([OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)).
+
+## Destruktivní akce potřebují brzdy
+
+Mazání, refundace, změna vlastníka, revokace všech tokenů nebo ruční změna tarifu nesmí být obyčejné tlačítko vedle „zobrazit detail“. Každá destruktivní akce má mít tření úměrné dopadu.
+
+Dobré brzdy:
+
+- jasný popis dopadu před potvrzením,
+- vyžadovaný důvod a odkaz na ticket,
+- potvrzení přes přesný název workspace nebo zákazníka,
+- časový odklad u nevratných operací,
+- druhé schválení u velkého dopadu,
+- automatické upozornění vlastníka workspace,
+- možnost zrušení, pokud operace ještě neběžela,
+- oddělený auditní event pro schválení i provedení.
+
+Nepleť si brzdu s alibismem. Checkbox „souhlasím, že jsem opatrný“ nikoho nezachrání, když vedle něj není jasný dopad a možnost opravy. Cílem není admina šikanovat, ale zabránit tomu, aby únava, spěch nebo špatně otevřený tab smazal špatného zákazníka.
+
+## Auditní stopa má pomáhat, ne sbírat suvenýry
+
+Audit admin akcí má odpovědět na čtyři otázky: kdo, co, proč a s jakým dopadem. Nemá ukládat celé zákaznické payloady, interní poznámky bez hranic ani tajné hodnoty. Dobrý auditní záznam je konkrétní, ale úsporný.
+
+Minimum auditní události:
+
+```text
+čas:
+interní aktér:
+role / oprávnění:
+zákaznický kontext:
+akce:
+důvod / ticket:
+výsledek:
+korelační ID:
+citlivá data uložena: ano/ne + proč
+retence:
+```
+
+Auditní log musí být chráněný před dodatečnou úpravou běžným adminem. Jinak je to jen deníček s gumou. Přístup k auditním záznamům nastav samostatně, protože audit často obsahuje metadata o zákaznících, interních zásazích a bezpečnostních událostech.
+
+## Support workflow bez datového hladovění
+
+Praktický support postup:
+
+1. Začni read-only diagnostikou.
+2. Pokud nestačí, požádej zákazníka o konkrétní potvrzení nebo odkaz na problém.
+3. Pokud potřebuješ zásah, vytvoř ticket s důvodem a očekávaným dopadem.
+4. Použij nejmenší oprávnění, které problém vyřeší.
+5. Po zásahu zapiš výsledek lidskou větou.
+6. Pokud ses dostal k citlivým datům, uveď proč a jak dlouho se důkaz drží.
+7. Pokud je problém systémový, vytvoř interní úkol místo opakované ruční opravy.
+
+Privacy-first support není pomalejší. Je jen méně zvědavý. A méně zvědavý support se lépe vysvětluje zákazníkům, auditorům i vlastnímu svědomí.
+
+## Checklist: admin konzole bez superadmin divočiny
+
+- [ ] Máme inventář admin akcí podle rizika?
+- [ ] Jsou oprávnění pojmenovaná podle práce, ne podle titulů?
+- [ ] Platí `deny by default` i na serveru?
+- [ ] Umí support řešit běžné problémy bez impersonace?
+- [ ] Vyžaduje impersonace důvod, ticket a časové omezení?
+- [ ] Jsou zákaznická data v adminu maskovaná tam, kde stačí agregace nebo metadata?
+- [ ] Mají destruktivní akce jasné potvrzení dopadu?
+- [ ] Vyžadují vybrané akce druhé schválení?
+- [ ] Rozlišuje audit interního aktéra od zákaznického účtu?
+- [ ] Má auditní log vlastní oprávnění a retenční pravidla?
+- [ ] Existuje pravidelná revize rolí a přístupů?
+- [ ] Umíme zákazníkovi vysvětlit, kdy a proč jsme se dívali do jeho účtu?
+
+## Mini šablona admin akce
+
+```text
+# Admin akce: [název]
+
+## Účel
+Jaký zákaznický nebo provozní problém řeší:
+
+## Riziková vrstva
+Read-only / nízkoriziková oprava / zákaznický dopad / destruktivní akce / bezpečnostní zásah:
+
+## Oprávnění
+Potřebné permission klíče:
+Role, které je dostávají:
+
+## Data na obrazovce
+Zobrazená pole:
+Maskovaná pole:
+Zakázaná pole:
+
+## Podmínky spuštění
+Vyžaduje ticket:
+Vyžaduje důvod:
+Vyžaduje druhé schválení:
+Časové omezení:
+
+## Audit
+Události k zapsání:
+Korelační ID:
+Retence:
+
+## Zákaznická komunikace
+Kdy zákazníka informujeme:
+Šablona krátké zprávy:
+```
+
+## Zdroje
+
+- OWASP: Authorization Cheat Sheet — `deny by default`, least privilege a server-side kontroly přístupu: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP: Logging Cheat Sheet — doporučení k bezpečnému logování a vyloučení citlivých dat: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- NIST CSRC: Least Privilege — definice principu nejmenších oprávnění: https://csrc.nist.gov/glossary/term/least_privilege
+
 # Pracovní log
+
+- 2026-10-02: Doplněna příloha „Admin konzole a impersonace bez superadmin divočiny“ s rozdělením admin akcí podle rizika, návrhem rolí podle práce, pravidly pro impersonaci, maskováním dat, brzdami destruktivních akcí, auditní stopou, support workflow, checklistem, šablonou admin akce a ověřenými zdroji OWASP a NIST.
 
 - 2026-10-02: Doplněna příloha „Webhooky bez slepé důvěry a datového průvanu“ s návrhem smlouvy události, ověřováním podpisu, idempotencí, frontou, privacy-first logováním, retry/replay postupem, multitenant kontrolami, checklistem a šablonou webhook karty.
 - 2026-10-02: Doplněna příloha „Feature flags bez neřízených experimentů v produkci“ s rozlišením typů flagů, pravidlem že flag není autorizace, rollout plánem, privacy-first experimenty, kill switchem, technickou hygienou, checklistem, rollout šablonou a ověřenými zdroji OpenFeature, MartinFowler.com, OWASP a GDPR.
