@@ -29933,8 +29933,227 @@ Retence auditních logů:
 - OWASP: CI/CD Security Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/CI_CD_Security_Cheat_Sheet.html
 - NIST: Key Management Guidelines a SP 800-57 — https://csrc.nist.gov/projects/key-management/key-management-guidelines
 
+# Příloha: SLA, SLO a status komunikace bez slibů vytesaných do betonu
+
+Spolehlivost není věta „máme to stabilní“. Spolehlivost je dohoda: co zákazník rozumně očekává, co systém skutečně měří, kdy tým zasahuje a jak férově komunikuje, když něco nefunguje. Malý SaaS nepotřebuje hned korporátní SLA dokument na šest stran, ale potřebuje vědět, kde končí přání a začíná závazek. Jinak se každý výpadek mění v improvizované divadlo s titulkem „snad si toho nikdo nevšimne“. Všimne.
+
+SLA, SLO a status komunikace mají tři různé role. SLA je slib zákazníkovi nebo smluvní závazek. SLO je interní cíl kvality služby. Status komunikace je způsob, jak vysvětlit realitu bez mlžení, paniky a nadbytečného zveřejňování detailů. Když tyhle vrstvy smícháš, vznikne buď přehnaný slib, který nejde splnit, nebo tak vágní komunikace, že zákazník neví, jestli chyba trvá, skončila, nebo jen čeká za rohem s hrnkem kafe.
+
+> Codyho komentář: Nejsilnější status page není ta, která nikdy neukáže incident. Je to ta, které zákazník věří i ve chvíli, kdy incident ukáže.
+
+## Nejdřív definuj uživatelsky viditelnou službu
+
+Nezačínej procenty dostupnosti. Začni tím, co je pro zákazníka skutečná služba. „Server běží“ není totéž jako „uživatel může dokončit hlavní práci“. U webu může být hlavní službou načtení landing page a odeslání formuláře. U SaaS to může být přihlášení, vytvoření projektu, zpracování platby, export dat nebo běh automatizace.
+
+Praktický postup:
+
+- Sepiš tři až pět kritických uživatelských cest.
+- U každé napiš, co znamená úspěch z pohledu uživatele.
+- Odděl úplný výpadek od degradace, třeba pomalý export nebo opožděné e-maily.
+- Ke každé cestě přiřaď jedno měření, které nevyžaduje číst osobní obsah zákazníků.
+
+Příklad pro B2B SaaS:
+
+```text
+Služba: vytvoření a sdílení klientského reportu
+Úspěch: přihlášený uživatel vytvoří report, uloží ho a dostane veřejný odkaz
+Degradace: report vznikne, ale export PDF se opozdí
+Výpadek: uživatel nemůže report uložit nebo otevřít
+Měření: syntetický test demo účtu + agregovaná míra chyb endpointů
+```
+
+Tímhle se vyhneš pasti, kdy dashboard hlásí zelenou, protože databáze běží, ale zákazník nemůže dokončit práci kvůli rozbitému callbacku z platební brány.
+
+## SLO je interní volant, SLA je veřejný slib
+
+SLO nastavuj přísnější než SLA. Interní cíl má tým varovat dřív, než poruší veřejný závazek. Pokud zákazníkům slíbíš 99,5 % měsíční dostupnosti, interně můžeš sledovat třeba 99,7 % pro kritickou cestu a při zhoršování začít brzdit releasy, řešit kapacitu nebo odkládat rizikové změny.
+
+Malý tým často udělá lepší službu s jednoduchými SLO než s ambiciózním SLA. Dobrý začátek:
+
+- dostupnost hlavní uživatelské cesty,
+- chybovost serverových odpovědí,
+- latence kritické akce,
+- zpoždění fronty nebo background jobů,
+- čas do první veřejné aktualizace incidentu.
+
+SLO má mít rozhodovací dopad. Když ho překročení nic nezmění, není to SLO, ale tapeta na dashboardu. Definuj předem, co se stane: zamrazení rizikových deployů, rychlá triáž, kapacitní práce v backlogu nebo revize poslední změny.
+
+Mini pravidlo:
+
+```text
+Pokud SLO porušíme dvakrát za 30 dní, další sprint musí obsahovat konkrétní reliability práci před novými „nice to have“ funkcemi.
+```
+
+## Error budget bez akademického kouře
+
+Error budget říká, kolik nespolehlivosti si můžeš dovolit, aniž bys porušil cíl. Nejde o omluvu pro výpadky. Je to brzda proti tomu, aby produktový tým tlačil změny tak rychle, že začne pálit důvěru zákazníků.
+
+Jednoduchý model pro malý SaaS:
+
+- Vyber jeden měsíční SLO cíl pro hlavní cestu.
+- Přepočítej ho na dovolený počet minut nebo vadných pokusů.
+- Sleduj čerpání týdně, ne až po měsíci.
+- Když budget rychle mizí, omez změny s nejvyšším provozním rizikem.
+
+Příklad:
+
+```text
+SLO: 99,5 % úspěšnost vytvoření reportu za měsíc
+Měření: počet úspěšných syntetických testů + agregovaná chybovost produkční cesty
+Akce při překročení 50 % budgetu v půlce měsíce: žádné velké migrace bez explicitního schválení
+Akce při vyčerpání budgetu: reliability práce má přednost před novými funkcemi
+```
+
+Nepočítej do error budgetu všechno stejně. Pokud se rozbije administrace interního štítku, je to nepříjemné. Pokud zákazník nemůže exportovat data před poradou, je to dopad na jeho práci. Priorita incidentu má vycházet z dopadu, ne z technické elegance poruchy.
+
+## Status page má uklidnit, ne lakovat realitu
+
+Status komunikace musí odpovědět na čtyři otázky: co je ovlivněno, koho se to týká, co se děje teď a kdy přijde další update. Nepiš „může docházet k problémům“, pokud víš, že exporty selhávají. Nepiš „vše je již v pořádku“, pokud běží backlog jobů a část zákazníků pořád čeká na dokončení.
+
+Dobrá první zpráva:
+
+```text
+Od 10:18 UTC evidujeme zvýšenou chybovost při exportu PDF reportů. Vytváření a prohlížení reportů funguje, zpožděné jsou pouze PDF exporty. Příčinu ověřujeme a další aktualizaci zveřejníme do 30 minut.
+```
+
+Dobrá průběžná zpráva:
+
+```text
+Identifikovali jsme přetíženou frontu pro PDF exporty po dnešním releasu. Nové exporty dočasně zpracováváme pomaleji, uložená data nejsou dotčena. Nasazujeme omezení souběhu jobů a další update dáme do 20 minut.
+```
+
+Dobré uzavření:
+
+```text
+PDF exporty jsou od 11:07 UTC znovu stabilní. Zpožděné exporty byly postupně dokončeny. Přidáváme ochranu proti opakování stejného přetížení a krátké shrnutí dopadu doplníme po interní kontrole.
+```
+
+Všimni si jedné věci: žádné osobní údaje, žádné názvy zákazníků, žádné screenshoty interních logů. Transparentnost neznamená zveřejnit všechno. Znamená říct správnou pravdu správným lidem.
+
+## Kdy mluvit veřejně a kdy přímo zákazníkům
+
+Ne každý incident patří na veřejnou status stránku. Veřejně komunikuj dopady na dostupnost, výkon a klíčové funkce, které může zaznamenat širší skupina uživatelů. Přímo zákazníkům piš ve chvíli, kdy dopad znáš konkrétněji: jejich účet, jejich integrace, jejich data, jejich fakturace nebo jejich export.
+
+Rozdělení kanálů:
+
+- Status page: obecný dopad na službu a průběžné technické uklidnění.
+- E-mail zákazníkovi: konkrétní dopad na účet, náhradní postup, další kroky.
+- In-app oznámení: krátké upozornění v místě práce, ideálně bez blokování.
+- Interní incident kanál: detailní technická koordinace, ale bez zbytečného kopírování osobních dat.
+- Postmortem: poučení, akční body a popis dopadu v agregované podobě.
+
+Pokud incident souvisí s osobními daty, přepni do režimu bezpečnostní a právní triáže. GDPR článek 33 říká, že správce má při porušení zabezpečení osobních údajů oznámit porušení dozorovému úřadu bez zbytečného odkladu a pokud možno do 72 hodin od okamžiku, kdy se o něm dozvěděl, pokud není nepravděpodobné riziko pro práva a svobody lidí. To neznamená, že máš hned psát dramatický veřejný blogpost. Znamená to, že máš rychle zjistit fakta, dokumentovat dopad, zapojit odpovědnou osobu a oddělit dostupnostní incident od možného data breach.
+
+## Privacy-first měření spolehlivosti
+
+Spolehlivost se dá měřit bez toho, abys z logů udělal šmírovací sklad. Cíl není vědět, co přesně Franta napsal do formuláře. Cíl je vědět, že formulář selhává, na kterém kroku, v jakém čase a po jaké změně.
+
+Bezpečnější metriky:
+
+- počty požadavků podle endpointu a status kódu,
+- latence podle typu operace,
+- počet selhání validace bez ukládání celého vstupu,
+- velikost fronty a stáří nejstaršího jobu,
+- syntetické testy s demo daty,
+- korelační ID bez osobního obsahu.
+
+Rizikové zlozvyky:
+
+- logovat celé request body „pro jistotu“,
+- posílat chyby do externí služby včetně e-mailů, tokenů a zpráv uživatele,
+- zveřejnit incident screenshot s interními URL nebo ID zákazníků,
+- držet debug logy déle než produkční potřeba,
+- používat session replay jako náhradu za dobré testy.
+
+Privacy-first provoz neznamená slepotu. Znamená to navrhnout pozorovatelnost tak, aby tým viděl stav služby, ne životopis uživatele.
+
+## Eskalační pravidla pro malý tým
+
+U malého týmu je největší riziko to, že všichni dělají všechno a nikdo nerozhoduje. Incident potřebuje role, i když jsou v jedné osobě.
+
+Minimum rolí:
+
+- Incident lead: rozhoduje prioritu, drží čas a další krok.
+- Technický řešitel: opravuje nebo obchází problém.
+- Komunikátor: píše status update a odpovídá podpoře.
+- Data/privacy kontrola: hlídá, jestli nejde o osobní data, přístupy nebo únik.
+
+V jednom člověku to může vypadat komicky, ale i sólista potřebuje přepínat klobouky vědomě. Když právě restartuješ službu, nemáš zároveň vymýšlet veřejné formulace. Napiš si předem šablony a rozhodovací pravidla.
+
+Praktická eskalace:
+
+```text
+P1: hlavní služba nefunguje nebo hrozí dopad na data — okamžitá práce, status do 15–30 minut
+P2: kritická funkce je degradovaná — triáž hned, status podle rozsahu dopadu
+P3: dílčí chyba s workaroundem — oprava plánovaně, komunikace cíleně dotčeným zákazníkům
+P4: kosmetika nebo interní nepohodlí — backlog, bez incident režimu
+```
+
+## Checklist: SLA, SLO a status komunikace
+
+- Máme pojmenované hlavní uživatelské cesty, ne jen servery a endpointy.
+- Každé SLO má jasné měření, vlastníka a dopad na rozhodování.
+- SLA zákazníkům neslibuje víc, než dokážeme měřit a provozně obhájit.
+- Víme, kdy incident komunikujeme veřejně a kdy přímo dotčeným zákazníkům.
+- Status update říká dopad, rozsah, aktuální krok a čas další aktualizace.
+- Incident šablony neobsahují osobní data, interní tokeny ani zbytečné technické detaily.
+- Máme zvláštní triáž pro možné porušení zabezpečení osobních údajů.
+- Po incidentu vznikne akční bod, ne jen pocit „příště si dáme pozor“.
+
+## Mini šablona reliability dohody
+
+```markdown
+# Reliability dohoda: [služba]
+
+## Kritické uživatelské cesty
+- Cesta:
+- Úspěch znamená:
+- Degradace znamená:
+- Výpadek znamená:
+
+## SLO
+- Metrika:
+- Cíl:
+- Okno měření:
+- Zdroj dat:
+- Vlastník:
+
+## Error budget
+- Jak se počítá:
+- Kdy varujeme:
+- Kdy brzdíme releasy:
+- Kdy informujeme zákazníky:
+
+## SLA / veřejný slib
+- Co slibujeme:
+- Co výslovně neslibujeme:
+- Jaké jsou výjimky:
+- Kde je dokumentace:
+
+## Status komunikace
+- Veřejný kanál:
+- Interní kanál:
+- První update do:
+- Další update každých:
+- Schvaluje:
+
+## Privacy kontrola
+- Jaká data používáme pro měření:
+- Co se nesmí logovat:
+- Retence incident dat:
+- Kdy spouštíme data breach triáž:
+```
+
+## Zdroje
+
+- Google SRE Book: Service Level Objectives — https://sre.google/sre-book/service-level-objectives/
+- Google SRE Book: Monitoring Distributed Systems — https://sre.google/sre-book/monitoring-distributed-systems/
+- GDPR článek 33: oznámení porušení zabezpečení osobních údajů dozorovému úřadu — https://gdpr-info.eu/art-33-gdpr/
+- EDPB: Guidelines 9/2022 on personal data breach notification under GDPR — https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en
+
 # Pracovní log
 
+- 2026-10-02: Doplněna příloha „SLA, SLO a status komunikace bez slibů vytesaných do betonu“ s rozlišením veřejných slibů a interních cílů, error budgetem, status šablonami, privacy-first měřením spolehlivosti, eskalačními pravidly, checklistem, reliability dohodou a ověřenými zdroji Google SRE, GDPR a EDPB.
 - 2026-10-02: Doplněna příloha „Secrets a API klíče bez digitálního klíčníku na recepci“ s inventářem tajemství, oddělením prostředí, least privilege pravidly, rotací, detekcí úniku, lokálním vývojem, checklistem, secret kartou a ověřenými zdroji OWASP a NIST.
 - 2026-10-02: Doplněna příloha „Cache a invalidace bez servírování cizích dat“ s rozdělením obsahu podle rizika, bezpečnými `Cache-Control` defaulty, pravidly pro `Vary`, invalidací, stale režimy, ochranou cache klíčů, testováním, checklistem, cache policy šablonou a ověřenými zdroji RFC 9111, MDN a OWASP.
 - 2026-10-02: Doplněna příloha „Redirecty a URL hygiena bez rozbitých odkazů“ s inventářem URL, volbou správných redirect statusů, mapováním na relevantní obsah, ochranou query parametrů, testováním redirectů, užitečnou 404 stránkou, provozní rutinou, checklistem, URL migrační mapou a ověřenými zdroji MDN a Google Search Central.
