@@ -30492,7 +30492,190 @@ Privacy-first doporučení:
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - ENISA: [Threat Landscape — phishing and social engineering](https://www.enisa.europa.eu/publications/enisa-threat-landscape-2024)
 
+# Příloha: E-mailová doručitelnost bez šmírovacích pixelů
+
+E-mail je pořád jeden z nejlepších vlastněných kanálů. Ne proto, že je sexy — e-mail má estetiku účetní skříně — ale protože funguje bez algoritmického výběhu, bez povinného profilu na sociální síti a bez toho, aby sis každý měsíc pronajímal pozornost od platformy. Jenže doručitelnost není magie. Je to kombinace technického nastavení, poctivého seznamu kontaktů, rozumného obsahu a respektu k tomu, že člověk má mít možnost odejít bez detektivní hry.
+
+Privacy-first doručitelnost neznamená posílat méně kvalitní e-maily. Znamená posílat e-maily, které jsou ověřitelné, očekávané a měřené tak, aby sis nemusel pomáhat sledovacím pixelovým cirkusem. Cílem není vědět, kdy si každý konkrétní člověk otevřel zprávu na mobilu v tramvaji. Cílem je vědět, jestli kanál jako celek pomáhá zákazníkům a firmě.
+
+> Codyho komentář: Tracking pixel je často manažerské placebo. Vypadá jako přesná metrika, ale mezi blokováním obrázků, proxy načítáním a privacy ochranami z něj snadno vznikne drahý teploměr položený vedle pacienta.
+
+## Nejdřív rozděl typy pošty
+
+Jedna doména nemá posílat všechno stejným způsobem. Rozděl e-maily podle účelu, rizika a očekávání příjemce.
+
+Praktický model:
+
+| Typ e-mailu | Příklad | Doporučený odesílatel | Co měřit | Co neměřit |
+|---|---|---|---|---|
+| Transakční | reset hesla, potvrzení účtu, faktura | `app.example.cz` nebo `billing.example.cz` | doručení, bounce, chyby šablony | marketingové otevření |
+| Provozní | plánovaná odstávka, změna podmínek, bezpečnostní upozornění | `notify.example.cz` | doručení, klik na detail, odpovědi | profilování zájmů |
+| Produktový | onboarding, tipy k používání | `product.example.cz` | agregované prokliky, odhlášení, odpovědi | čtení jednotlivce |
+| Marketingový | newsletter, pozvánka, nabídka | `news.example.cz` | doručení, bounce, spam complaint, odhlášení, agregované konverze | pixelové sledování otevření jako hlavní KPI |
+
+Oddělení typů pošty chrání reputaci i provoz. Když newsletter pokazí segmentaci, nechceš, aby tím utrpěly resetovací e-maily. Když někdo odpoví na fakturu, nechceš, aby zpráva skončila u marketingového nástroje, který z ní vyrobí lead scoring. A když se řeší incident, nechceš hledat, jestli důležitá zpráva odešla z domény, kterou příjemce blokuje kvůli minulému promo experimentu.
+
+## SPF, DKIM a DMARC jsou hygienické minimum
+
+Než budeš ladit předměty a CTA, ověř, že příjemci vůbec mohou věřit, že zpráva je od tebe. Základ tvoří tři vrstvy:
+
+- `SPF` říká, které servery smí posílat poštu za danou doménu.
+- `DKIM` podepisuje zprávu kryptografickým podpisem, aby příjemce mohl ověřit doménu a integritu zprávy.
+- `DMARC` říká, jak má příjemce zacházet se zprávou, která neprojde zarovnáním přes SPF nebo DKIM, a umí posílat agregované reporty.
+
+Nastavení dělej postupně:
+
+1. Sepiš všechny legitimní odesílatele: vlastní SMTP, helpdesk, billing nástroj, produktové notifikace, newsletter, CRM.
+2. Pro každý nástroj zjisti, jaké DNS záznamy potřebuje: SPF include, DKIM selector, případně CNAME.
+3. Zkontroluj, že `From:` doména dává smysl pro značku a že se zarovnává s SPF nebo DKIM doménou.
+4. Začni DMARC politikou `p=none`, sbírej agregované reporty a oprav legitimní zdroje.
+5. Teprve po stabilizaci zvaž `p=quarantine` a později `p=reject`.
+
+Pozor na častý malý průšvih: jeden SPF záznam na doménu. Když každý nástroj přidá vlastní TXT záznam `v=spf1 ...`, výsledek nebude „víc bezpečné“, ale rozbité. Slučuj autorizované zdroje do jednoho SPF záznamu a drž ho krátký. SPF má také limit DNS lookupů, takže nekonečné řetězení `include` je technický dluh, ne architektura.
+
+Příklad startovacího DMARC záznamu pro pozorování:
+
+```text
+_dmarc.example.cz. TXT "v=DMARC1; p=none; rua=mailto:dmarc-reports@example.cz; adkim=s; aspf=s"
+```
+
+Tohle není finální bezpečnostní štít. Je to fáze inventury. Smyslem je zjistit, kdo za doménu reálně posílá, a nepoložit si přitom legitimní poštu.
+
+## Gmail a velcí poskytovatelé chtějí důkaz, ne dobré úmysly
+
+Od roku 2024 Gmail zpřísnil požadavky na odesílatele do osobních Gmail účtů. Pro všechny odesílatele vyžaduje mimo jiné SPF nebo DKIM, platné DNS záznamy, TLS a formát podle internetového standardu. Pro objemnější odesílatele nad 5 000 zpráv denně do osobních Gmail účtů přidává požadavek SPF i DKIM, DMARC, zarovnání domény a u marketingových zpráv také jednoduché odhlášení. Aktuální pravidla si vždy ověř v oficiálních [Gmail sender guidelines](https://support.google.com/mail/answer/81126?hl=en), protože doručitelnost je disciplína, kde se pravidla mění rychleji než názvy startupových tarifů.
+
+Praktický závěr pro malou evropskou firmu je jednoduchý: nečekej, až budeš „bulk sender“. Nastav SPF, DKIM a DMARC hned. Je to levnější než později vysvětlovat, proč faktury padají do spamu nebo proč někdo zneužívá podobně vypadající doménu k phishingu.
+
+## Odhlášení není zrada, ale servis
+
+Každý marketingový a pravidelně posílaný obsah musí mít jasné odhlášení. Ne proto, že „to vyžaduje Gmail“. Hlavně proto, že člověk, který už e-mail nechce, ti dává férovou možnost snížit tření dřív, než klikne na spam.
+
+Dobré odhlášení:
+
+- je viditelné v těle zprávy,
+- nevyžaduje přihlášení,
+- nevyžaduje potvrzení přes další formulář,
+- funguje i pro člověka, který přeposlal e-mail z jiného klienta,
+- zapíše auditní stopu, ale neukládá víc osobních dat než je potřeba,
+- rozlišuje „odhlásit newsletter“ a „neposílat mi žádné produktové tipy“, pokud máš více typů komunikace.
+
+Pro technickou implementaci použij `List-Unsubscribe` a pro moderní klienty také `List-Unsubscribe-Post`. Standard [RFC 8058](https://www.rfc-editor.org/info/rfc8058/) popisuje one-click odhlášení tak, aby mailový klient mohl bezpečně poslat odhlašovací požadavek bez zbytečného tahání člověka přes několik obrazovek.
+
+Minimalistický příklad hlaviček:
+
+```text
+List-Unsubscribe: <mailto:unsubscribe@example.cz>, <https://example.cz/unsubscribe/t/abc123>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+```
+
+Token v URL dělej jednorázový nebo omezený podle účelu. Nezakóduj do něj e-mail adresu v čitelné podobě a neloguj celý odhlašovací odkaz do analytiky. U odhlašovacího endpointu nepotřebuješ vědět, jaký má člověk prohlížeč, rozlišení displeje a jestli zrovna stojí ve frontě na kávu. Potřebuješ vědět, že daný kontakt nechce daný typ komunikace.
+
+## Měř doručitelnost agregovaně
+
+Otevírací metrika je lákavá, protože se tváří jako okamžitá zpětná vazba. Jenže privacy ochrany e-mailových klientů a blokování obrázků z ní dělají hrubý signál. Nezakazuj si ji dogmaticky, pokud ji nástroj stejně technicky sbírá, ale nepoužívej ji jako hlavní pravdu pro rozhodování.
+
+Lepší sada signálů:
+
+- doručeno / nedoručeno podle SMTP a bounce důvodu,
+- spam complaint rate tam, kde ji poskytovatel vrací,
+- odhlášení podle typu komunikace,
+- odpovědi od lidí,
+- agregované prokliky na vlastní doméně,
+- konverze bez individuálního profilování,
+- počet ručních support dotazů po provozním oznámení.
+
+Když potřebuješ měřit proklik, používej vlastní doménu a krátkou retenci logů. U kampaní ukládej spíš agregaci podle kampaně, varianty a dne než dlouhodobý profil jednotlivce. Pokud potřebuješ spojit e-mail s konkrétním účtem, dělej to jen u produktových a transakčních scénářů, kde je to nutné pro službu, ne pro zvědavost.
+
+## Warm-up domény dělej nudně
+
+Nová doména nebo nový odesílací systém nemá začít tím, že pošle 20 000 e-mailů kontaktům z posledních pěti let. Doručitelnost má paměť a poskytovatelé sledují reputaci domén, IP adres i chování příjemců.
+
+Bezpečný postup:
+
+1. Začni transakčními a provozními e-maily pro aktivní uživatele.
+2. Marketing posílej nejdřív nejaktivnějším kontaktům, které kontakt očekávají.
+3. Nepřidávej staré kontakty bez ověření účelu, souhlasu nebo oprávněného zájmu.
+4. Sleduj bounce, spam complaint a odhlášení po každé dávce.
+5. Zvyšuj objem postupně a zastav, když se zhorší signály kvality.
+
+Privacy-first warm-up neznamená „najdi víc dat“. Znamená „posílej lidem, pro které má zpráva skutečný kontext“. Nejlepší reputační strategie je nebýt otravný.
+
+## DNS změny měň jako produkční konfiguraci
+
+E-mailové DNS záznamy jsou produkční konfigurace. Když někdo smaže DKIM selector nebo přepíše SPF, nemusí spadnout web, ale může potichu přestat fungovat fakturace, onboarding nebo bezpečnostní komunikace.
+
+Minimální provozní pravidla:
+
+- DNS změnu dělej přes pull request nebo aspoň změnový záznam.
+- U každé změny napiš důvod, vlastníka, očekávaný dopad a rollback.
+- Staré DKIM selectory nemaž hned po přepnutí; nech doběhnout zprávy ve frontách.
+- Před smazáním odesílacího nástroje ověř, že už neposílá žádný typ pošty.
+- Po změně pošli testovací e-mail na několik domén a zkontroluj autentizaci v hlavičkách.
+
+Praktický detail: odděl domény nebo subdomény podle účelu. Například produktové notifikace z `app.example.cz`, newsletter z `news.example.cz`, billing z `billing.example.cz`. Ne kvůli kosmetice, ale kvůli přehlednosti reputace, práv, reportů a incidentů.
+
+## Checklist: doručitelnost bez šmírovacích pixelů
+
+- [ ] Máme seznam všech nástrojů, které posílají e-mail za naše domény.
+- [ ] Každý typ pošty má jasný účel, odesílací doménu a vlastníka.
+- [ ] SPF je jeden validní záznam bez zbytečného řetězení.
+- [ ] DKIM je zapnutý pro všechny legitimní odesílatele.
+- [ ] DMARC běží aspoň v režimu `p=none` a někdo čte agregované reporty.
+- [ ] Marketingové e-maily mají viditelné odhlášení a hlavičky pro one-click unsubscribe.
+- [ ] U kampaní nepoužíváme otevření jako hlavní KPI.
+- [ ] Prokliky a konverze měříme agregovaně a s krátkou retencí.
+- [ ] DNS změny mají vlastníka, auditní stopu a rollback.
+- [ ] Staré kontakty se neposílají bez aktuálního účelu a kontroly kvality seznamu.
+
+## Mini šablona e-mailové domény
+
+```markdown
+# E-mailová doména: [subdoména]
+
+## Účel
+- Typ pošty:
+- Značka / produkt:
+- Vlastník:
+
+## Odesílací systémy
+- Nástroj:
+- Proč posílá:
+- SPF / DKIM záznamy:
+- Kdo má administrátorský přístup:
+
+## Autentizace
+- SPF stav:
+- DKIM selector:
+- DMARC politika:
+- DMARC report adresa:
+- Datum poslední kontroly:
+
+## Privacy pravidla
+- Jaká osobní data jsou v šablonách:
+- Jak se řeší odhlášení:
+- Jaká metrika se ukládá individuálně:
+- Jaká metrika se ukládá jen agregovaně:
+- Retence logů:
+
+## Provoz
+- Testovací adresy:
+- Alert při bounce/spam problému:
+- Rollback DNS změny:
+- Kdy doménu vyřadit:
+```
+
+## Zdroje
+
+- RFC Editor: [RFC 7208 — Sender Policy Framework](https://www.rfc-editor.org/info/rfc7208/)
+- RFC Editor: [RFC 6376 — DomainKeys Identified Mail](https://www.rfc-editor.org/info/rfc6376/)
+- RFC Editor: [RFC 7489 — DMARC](https://www.rfc-editor.org/info/rfc7489/)
+- RFC Editor: [RFC 8058 — One-Click Unsubscribe](https://www.rfc-editor.org/info/rfc8058/)
+- Google Help: [Email sender guidelines](https://support.google.com/mail/answer/81126?hl=en)
+
 # Pracovní log
+
+- 2026-10-02: Doplněna příloha „E-mailová doručitelnost bez šmírovacích pixelů“ s rozdělením typů pošty, SPF/DKIM/DMARC postupem, požadavky Gmailu, one-click unsubscribe, privacy-first měřením, warm-up rutinou, DNS provozními pravidly, checklistem, šablonou e-mailové domény a ověřenými zdroji RFC a Google sender guidelines.
 - 2026-10-02: Doplněna příloha „Sdílené schránky a aliasy bez interního chaosu“ s mapou kontaktních adres, pravidly pro aliasy, přílohy a citlivá data, automatickými odpověďmi, security/privacy procesy, evropským provozem, checklistem, mailbox kartou a ověřenými zdroji GDPR, OWASP a ENISA.
 - 2026-10-02: Doplněna příloha „Runtime konfigurace bez tajného ovládacího panelu“ s rozdělením konfiguračních hodnot podle rizika, oddělením secrets, auditní stopou, změnovým postupem, validací hodnot, privacy-first kontrolou, checklistem, konfigurační kartou a ověřenými zdroji Twelve-Factor App, OWASP a NIST.
 
