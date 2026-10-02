@@ -30673,8 +30673,194 @@ Praktický detail: odděl domény nebo subdomény podle účelu. Například pro
 - RFC Editor: [RFC 8058 — One-Click Unsubscribe](https://www.rfc-editor.org/info/rfc8058/)
 - Google Help: [Email sender guidelines](https://support.google.com/mail/answer/81126?hl=en)
 
+# Příloha: Feature flagy bez produkční rulety a datového vysavače
+
+Feature flag je jednoduchá myšlenka s nebezpečně velkým dopadem: kód je nasazený, ale chování zapínáš, vypínáš nebo měníš za běhu. OpenFeature ho popisuje jako mechanismus, který umožňuje volit alternativní cesty v nasazeném softwaru podle pravidel vyhodnocených při běhu aplikace. To je skvělé, když chceš bezpečně pustit novou funkci malé skupině zákazníků. Je to průšvih, když se z flagů stane neudržovaný druhý backend, o kterém nikdo neví, kdo ho smí přepnout.
+
+Pro malý SaaS je feature flag hlavně pojistka proti velkému třesku. Nemá nahrazovat produktové rozhodování, oprávnění, konfiguraci, billing ani experimentální platformu, pokud na to tým nemá proces. Každý flag zvyšuje počet stavů, které může produkt mít. Když je těch stavů moc, netestuješ produkt. Testuješ vesmír a doufáš, že dnes nevybuchne.
+
+> Codyho komentář: Feature flag je jako vypínač na zdi. Jeden je praktický. Padesát nepopiskovaných vypínačů ve sklepě je escape room pro provozní tým.
+
+## Nejdřív pojmenuj typ flagu
+
+Než flag vytvoříš, napiš, jaký problém řeší. Pete Hodgson na MartinFowler.com rozlišuje zejména release, experiment, ops a permissioning toggles. Pro malý tým je tohle rozdělení užitečnější než nekonečný katalog nástrojů.
+
+Praktické rozdělení:
+
+- **Release flag**: nová funkce je v produkci, ale ještě není veřejně zapnutá.
+- **Experiment flag**: porovnáváš varianty chování nebo textu a máš plán vyhodnocení.
+- **Ops flag**: rychle vypneš drahou nebo rizikovou část systému při incidentu.
+- **Permission flag**: funkce je dostupná jen určitému tarifu, zákazníkovi nebo internímu týmu.
+- **Migration flag**: postupně přepínáš z jedné implementace na druhou.
+
+Každý typ má jiné vlastnictví a životnost. Release flag má zmizet po dokončení rollout plánu. Experiment flag má zmizet po vyhodnocení. Ops flag může žít déle, ale musí mít jasný runbook. Permission flag je blízko oprávnění nebo entitlements, takže nesmí být jen náhodné `if` v UI.
+
+## Flag není permission model
+
+Největší chyba: použít frontend flag jako ochranu placené nebo citlivé funkce. Pokud tlačítko schováš ve webové aplikaci, ale API endpoint zůstane volně dostupný, nemáš oprávnění. Máš dekoraci.
+
+Pravidlo pro SaaS:
+
+- UI flag může skrýt, vysvětlit nebo postupně zpřístupnit funkci.
+- Backend musí vždy ověřit, jestli uživatel nebo účet smí akci provést.
+- Billing a tarifní nároky patří do samostatného zdroje pravdy.
+- Auditní událost má vzniknout u skutečné akce, ne jen u zobrazení tlačítka.
+- Chybová odpověď nesmí prozradit citlivé informace o cizích účtech.
+
+Příklad: zákazník v tarifu Basic nemá export audit logu. UI mu může ukázat informaci „Audit export je dostupný ve vyšším tarifu“. API ale musí při volání exportu znovu ověřit tarif, stav účtu, roli uživatele a případné admin omezení. Flag sám o sobě není bezpečnostní brána.
+
+## Minimum pro vytvoření flagu
+
+Každý nový flag potřebuje kartu. Nemusí to být byrokratický román, stačí šest řádků, které zabrání budoucí archeologii.
+
+Před vytvořením vyplň:
+
+- Název flagu a stabilní klíč.
+- Typ flagu: release, experiment, ops, permission nebo migration.
+- Vlastník: konkrétní člověk nebo tým.
+- Výchozí hodnota při chybě flag systému.
+- Rollout plán: kdo, kdy a v jakém pořadí.
+- Datum revize nebo odstranění.
+
+Dobrý klíč je nudný a čitelný: `billing_invoice_pdf_v2`, `search_backend_migration`, `signup_new_copy`. Špatný klíč je hádanka: `newThing`, `test2`, `super_beta`, `andy_flag_final_final`. Ano, všichni jsme tam byli. Ne, nemusíme tam bydlet.
+
+## Bezpečný default při výpadku
+
+Flag systém je další závislost. Když neodpovídá, aplikace se nesmí rozhodovat podle nálady vesmíru. OpenFeature specifikace počítá s fallbackem na dodanou výchozí hodnotu při abnormálním vyhodnocení. Produktově si ale musíš říct, co je bezpečná výchozí hodnota pro konkrétní flag.
+
+Typické defaulty:
+
+- Nová neověřená funkce: `false`.
+- Kritický ops kill switch: stav, který chrání dostupnost nebo data.
+- Permission flag: raději nezpřístupnit než omylem zpřístupnit.
+- Migrace na nový backend: pokud je nový backend nejistý, fallback na starý.
+- Experiment: konzistentní kontrolní varianta bez personalizace.
+
+Bezpečný default napiš do kódu i do flag karty. Když ho ví jen jeden vývojář a ten je zrovna na dovolené, není to default. Je to folklór.
+
+## Rollout po vlnách, ne přes červené tlačítko
+
+Postupné zapínání má být plán, ne magie. Pro B2B SaaS často stačí jednoduchá sekvence:
+
+1. Lokální a testovací prostředí.
+2. Interní účty.
+3. Jeden důvěryhodný pilotní zákazník.
+4. Malé procento nebo konkrétní segment nízkého rizika.
+5. Všichni noví zákazníci.
+6. Všichni zákazníci.
+7. Odstranění flagu a staré větve kódu.
+
+U každé vlny si předem napiš stop podmínky. Například: chybovost exportu nad domluvenou hranici, nárůst support ticketů, delší odezva kritického endpointu, zmatené chování v onboardingu nebo ruční zásah supportu. Když stop podmínky vymýšlíš až během incidentu, mozek dělá kreativní účetnictví.
+
+## Privacy-first vyhodnocování kontextu
+
+Flagy často potřebují kontext: prostředí, tarif, region, role, ID účtu, interní testovací skupinu. Tady začíná privacy riziko. Není potřeba posílat do flag systému e-mail, jméno, telefon, adresu, obsah objednávky nebo text dokumentu, když rozhoduje jen tarif a anonymní bucket.
+
+Bezpečnější signály:
+
+- interní account ID místo e-mailu,
+- tarif nebo entitlement kód místo fakturačních detailů,
+- region typu `EU` / `non-EU` místo přesné adresy,
+- role typu `owner` / `member` místo jména člověka,
+- stabilní hash pro experimentální bucket místo osobního identifikátoru,
+- prostředí `production` / `staging` / `development`.
+
+Privacy-first pravidlo: do evaluation contextu patří jen data nutná pro rozhodnutí flagu. Pokud bys tu hodnotu nechtěl vidět v debug logu během incidentu, neposílej ji do flag systému.
+
+## Audit bez sledovací posedlosti
+
+U flagů chceš vědět, kdo změnil pravidlo, kdy, proč a jaký byl dopad. To neznamená sbírat kompletní historii chování uživatelů. Audit změn konfigurace a produktová analytika jsou dvě různé věci.
+
+Audituj:
+
+- vytvoření, změnu a smazání flagu,
+- změnu cílení nebo procenta rollout vlny,
+- ruční override pro zákazníka,
+- použití ops kill switche,
+- schválení přepnutí u rizikové funkce.
+
+Neukládej zbytečně:
+
+- seznam všech uživatelů, kteří flag viděli,
+- osobní údaje v názvech segmentů,
+- payloady requestů jako „důkaz“ vyhodnocení,
+- citlivé obchodní informace v poznámkách konfigurace.
+
+Pro většinu malých týmů stačí audit změn a agregovaný provozní signál: počet vyhodnocení, chybovost, výkon kritické cesty, počet support kontaktů a ruční rollbacky.
+
+## Flag debt maž každý týden
+
+Feature flag, který přežil svůj účel, je dluh. Ne vždy bolí hned, ale zvyšuje složitost testů, čtení kódu a rozhodování. Nejhorší je starý release flag, který se stal „možná se ještě bude hodit“. Nebude. Bude se hodit hlavně k tomu, aby někdo za půl roku rozbil produkci.
+
+Týdenní rutina:
+
+- Projdi flagy s datem revize v příštích 14 dnech.
+- U dokončených release flagů smaž starou větev kódu.
+- U experimentů napiš výsledek a odstraň poraženou variantu.
+- U ops flagů ověř runbook a poslední použití.
+- U permission flagů ověř, zda patří do entitlement systému.
+- U flagů bez vlastníka nastav vlastníka nebo je označ k odstranění.
+
+Mazání flagu je součást dokončení práce. Dokud je stará větev v kódu, funkce není hotová. Je jen dočasně přepnutá.
+
+## Checklist: feature flag bez rulety
+
+- [ ] Má flag jasný typ a vlastníka?
+- [ ] Je bezpečný default napsaný v kódu i v kartě?
+- [ ] Je backend oprávnění oddělené od UI flagu?
+- [ ] Posílá evaluation context jen minimální nutná data?
+- [ ] Má rollout plán vlny a stop podmínky?
+- [ ] Existuje rychlý rollback nebo kill switch?
+- [ ] Logují se změny konfigurace bez citlivých payloadů?
+- [ ] Je nastavené datum revize nebo odstranění?
+- [ ] Jsou testované nejdůležitější kombinace, ne celý vesmír?
+- [ ] Je po dokončení naplánované smazání staré větve kódu?
+
+## Mini šablona feature flag karty
+
+```text
+# Feature flag: [klíč]
+
+## Účel
+- Problém:
+- Typ flagu: release / experiment / ops / permission / migration
+- Vlastník:
+
+## Rozhodování
+- Výchozí hodnota:
+- Bezpečný fallback při chybě:
+- Použitý kontext:
+- Data, která záměrně neposíláme:
+
+## Rollout
+- Vlna 1:
+- Vlna 2:
+- Vlna 3:
+- Stop podmínky:
+- Rollback postup:
+
+## Provoz
+- Auditované změny:
+- Monitoring:
+- Datum revize:
+- Datum odstranění:
+
+## Výsledek
+- Co se stalo:
+- Rozhodnutí:
+- Kód k odstranění:
+```
+
+## Zdroje
+
+- OpenFeature: [Introduction](https://openfeature.dev/docs/reference/intro/)
+- OpenFeature: [Specification](https://openfeature.dev/specification/)
+- OpenFeature: [Flag Evaluation API](https://openfeature.dev/specification/sections/flag-evaluation/)
+- MartinFowler.com: [Feature Toggles (aka Feature Flags)](https://martinfowler.com/articles/feature-toggles.html)
+
 # Pracovní log
 
+- 2026-10-02: Doplněna příloha „Feature flagy bez produkční rulety a datového vysavače“ s rozdělením typů flagů, pravidly pro oprávnění, bezpečný default, rollout vlny, privacy-first evaluation context, audit změn, mazání flag debt, checklistem, šablonou feature flag karty a ověřenými zdroji OpenFeature a MartinFowler.com.
 - 2026-10-02: Doplněna příloha „E-mailová doručitelnost bez šmírovacích pixelů“ s rozdělením typů pošty, SPF/DKIM/DMARC postupem, požadavky Gmailu, one-click unsubscribe, privacy-first měřením, warm-up rutinou, DNS provozními pravidly, checklistem, šablonou e-mailové domény a ověřenými zdroji RFC a Google sender guidelines.
 - 2026-10-02: Doplněna příloha „Sdílené schránky a aliasy bez interního chaosu“ s mapou kontaktních adres, pravidly pro aliasy, přílohy a citlivá data, automatickými odpověďmi, security/privacy procesy, evropským provozem, checklistem, mailbox kartou a ověřenými zdroji GDPR, OWASP a ENISA.
 - 2026-10-02: Doplněna příloha „Runtime konfigurace bez tajného ovládacího panelu“ s rozdělením konfiguračních hodnot podle rizika, oddělením secrets, auditní stopou, změnovým postupem, validací hodnot, privacy-first kontrolou, checklistem, konfigurační kartou a ověřenými zdroji Twelve-Factor App, OWASP a NIST.
