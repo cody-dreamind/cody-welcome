@@ -29739,7 +29739,203 @@ Rollback test:
 
 Cache má být nudná a předvídatelná. Když si nejsi jistý, jestli odpověď může být sdílená, ber ji jako nesdílenou. Rychlost se dá ladit postupně. Ztracená důvěra se cachuje překvapivě špatně.
 
+# Příloha: Secrets a API klíče bez digitálního klíčníku na recepci
+
+API klíč není jen technická drobnost v `.env`. Je to malý digitální klíč, který často umí číst data, posílat e-maily, účtovat peníze, mazat soubory nebo spouštět automatizace. Když s ním tým zachází jako s poznámkou v chatu, dřív nebo později se z toho stane bezpečnostní sudoku bez vítěze.
+
+Privacy-first SaaS má k tajemstvím jednoduchý postoj: tajemství mají mít jasný účel, úzký rozsah, krátkou životnost tam, kde to dává smysl, auditní stopu a plán rotace. Ne proto, že compliance tabulka chce zelené políčko. Protože únik jednoho klíče nemá shodit důvěru zákazníků, účet za infrastrukturu ani víkend člověka, který chtěl jen v klidu zalít kytku.
+
+> Codyho komentář: Nejhorší secret je ten, o kterém všichni vědí, že existuje, ale nikdo neví, kdo ho může otočit, kde je použitý a jestli po rotaci neumře produkce. To není tajemství. To je firemní talisman.
+
+## Co všechno je secret
+
+Secret není jen heslo administrátora. Do stejné provozní disciplíny patří:
+
+- API klíče k externím službám,
+- databázová hesla a connection stringy,
+- tokeny pro CI/CD,
+- webhook signing secrets,
+- privátní klíče pro SSH, TLS nebo podepisování,
+- přístupové tokeny k úložištím,
+- recovery kódy a bootstrap credentials,
+- servisní účty s automatickými oprávněními.
+
+První chyba malého týmu bývá, že řeší až „velká hesla“ a ignoruje drobné tokeny. Jenže drobný token často umí přesně tu jednu věc, která je pro byznys bolestivá: exportovat zákaznická data, spustit drahou AI úlohu nebo poslat tisíc e-mailů z důvěryhodné domény.
+
+## Inventář před vaultem
+
+Než vybereš nástroj, udělej inventář. Bez inventáře je i nejlepší secrets manager jen luxusní zásuvka na chaos.
+
+Minimální evidence:
+
+| Pole | Proč existuje |
+| --- | --- |
+| Název secretu | Aby šel najít bez archeologie v konfiguraci. |
+| Účel | Aby bylo jasné, proč existuje. |
+| Služba / prostředí | Produkce, staging, lokální vývoj, CI/CD. |
+| Owner | Člověk nebo tým odpovědný za rotaci. |
+| Rozsah oprávnění | Co secret smí a co výslovně nesmí. |
+| Místa použití | Aplikace, joby, workflow, integrace. |
+| Rotace | Jak často, jakým postupem a s jakým fallbackem. |
+| Dopad úniku | Co se stane, když unikne. |
+
+U malého SaaS nemusí být inventář složitý. Stačí Markdown tabulka nebo interní znalostní karta. Důležité je, aby tajemství nebyla jen v hlavě člověka, který „to kdysi nastavoval“.
+
+## Odděl prostředí bez falešné ekonomiky
+
+Produkce, staging a lokální vývoj nemají sdílet stejné klíče. Sdílený klíč je pohodlný přesně do chvíle, než debugging na stagingu začne měnit produkční data nebo lokální log omylem uloží produkční token.
+
+Praktické pravidlo:
+
+- **Produkce** má vlastní secrets, nejmenší oprávnění a přísnější přístup.
+- **Staging** má vlastní secrets a ideálně anonymizovaná nebo syntetická data.
+- **Lokální vývoj** používá dev klíče s omezeným rozsahem a bez přístupu k reálným zákaznickým datům.
+- **CI/CD** má jen ty secrets, které konkrétní workflow opravdu potřebuje.
+
+Když nástroj neumí oddělit prostředí, napiš si to jako riziko. Někdy to nevadí. Ale pokud přes jeden klíč ovládáš produkční data i testovací experimenty, je to zbytečně velký blast radius.
+
+## Least privilege pro tokeny
+
+Každý secret má mít nejmenší oprávnění, které stačí pro jeho práci. Ne „admin, protože pak to určitě projde“. Admin token v automatizaci je provozní kreditka nalepená izolepou na monitor.
+
+Příklady:
+
+- Webhook pro fakturační systém má ověřovat podpis, ne mít právo spravovat všechny zákazníky.
+- CI token pro deploy má nasazovat konkrétní projekt, ne spravovat celou organizaci.
+- Analytický export má číst agregované metriky, ne osobní profily návštěvníků.
+- Support nástroj má mít role podle práce, ne jeden sdílený účet pro celý tým.
+
+U každého nového klíče si polož tři otázky:
+
+1. Co přesně má dělat?
+2. Jak poznáme, že dělá něco jiného?
+3. Jak ho otočíme nebo zneplatníme bez paniky?
+
+## Ukládání: nikdy do repozitáře, opatrně do konfigurace
+
+Secrets nepatří do Gitu, issue trackeru, chatu, screenshotů ani dokumentace s příklady. I když je repozitář soukromý. I když je to „jen staging“. I když se všichni tváří, že `TEMP_API_KEY_FINAL_REAL` určitě za pět minut smažou.
+
+Bezpečnější vrstvy:
+
+- secrets manager nebo vault,
+- produkční environment variables spravované hostingem,
+- CI/CD secrets s omezenými scope,
+- lokální `.env` soubor, který je v `.gitignore`,
+- oddělený password manager pro lidské přístupy.
+
+Environment variables nejsou kouzelný trezor. Jsou praktické, ale pořád je musíš chránit před výpisem v logu, debug endpointem, crash reportem a neopatrným `console.log(process.env)`. Ano, i to se děje. Lidstvo zvládlo vesmírné sondy, ale občas neodolá logování celého prostředí.
+
+## Rotace bez produkčního infarktu
+
+Rotace secretu nemá být hrdinský noční rituál. Má být nacvičený postup.
+
+Bezpečný model rotace:
+
+1. Vytvoř nový secret s omezeným rozsahem.
+2. Přidej ho do cílového prostředí vedle starého, pokud integrace podporuje více aktivních klíčů.
+3. Nasaď konfiguraci, která používá nový secret.
+4. Ověř kritickou cestu a logy.
+5. Zneplatni starý secret.
+6. Zapiš změnu do inventáře.
+
+Když služba neumí paralelní klíče, připrav krátké údržbové okno nebo fallback. Důležité je vědět předem, jestli rotace znamená restart aplikace, redeploy, změnu webhooku, invalidaci cache nebo dočasný výpadek integrace.
+
+## Detekce úniku a reakce
+
+Secret management nekončí uložením. Potřebuješ vědět, jestli secret někdo vytáhl, použil zvláštně nebo omylem zveřejnil.
+
+Minimální kontroly:
+
+- secret scanning v repozitáři,
+- blokace commitu s klíčem v pre-commit nebo CI,
+- alert na neobvyklé použití tokenu,
+- auditní log přístupů k produkčním secrets,
+- pravidlo pro rychlé zneplatnění,
+- incident šablona pro únik klíče.
+
+Privacy-first reakce má být rychlá, ale ne dramatická. Nejdřív zastav dopad: zneplatni klíč, otoč navázané credentials, zkontroluj logy použití, ověř rozsah dat a až potom piš závěry. Když mohlo dojít k dopadu na osobní data, ber to jako bezpečnostní incident a postupuj podle interního incident procesu.
+
+## Lokální vývoj bez produkčních dat
+
+Lokální vývoj je rizikový ne proto, že vývojáři jsou nešikovní, ale protože notebooky cestují, screenshoty vznikají rychle a debug logy mají paměť slona. Proto:
+
+- lokální `.env` nikdy neobsahuje produkční databázové credentials,
+- ukázkové hodnoty v `.env.example` jsou falešné,
+- testovací účty nemají přístup k reálným zákaznickým datům,
+- lokální integrace používá sandbox režimy,
+- exporty pro debug se anonymizují nebo zkracují,
+- dokumentace vysvětluje, kde si vývojář bezpečně vyžádá dev klíč.
+
+Výborný signál zralosti: nový člověk v týmu dokáže rozběhnout projekt bez toho, aby mu někdo poslal produkční klíč přes chat. To je onboarding, ne iniciační obřad.
+
+## Checklist: secrets bez klíčníku na recepci
+
+- [ ] Má každý secret jasný název, účel a ownera?
+- [ ] Jsou produkční, staging a lokální klíče oddělené?
+- [ ] Má každý token nejmenší potřebné oprávnění?
+- [ ] Nejsou secrets v Gitu, dokumentaci, issue trackeru ani chatu?
+- [ ] Existuje `.env.example` bez skutečných hodnot?
+- [ ] Umíme každý kritický secret otočit podle napsaného postupu?
+- [ ] Víme, které služby podporují paralelní klíče při rotaci?
+- [ ] Má CI/CD jen secrets nutné pro konkrétní workflow?
+- [ ] Běží secret scanning pro repozitář a pull requesty?
+- [ ] Logy neobsahují tokeny, connection stringy ani celé prostředí?
+- [ ] Existuje incident postup pro únik API klíče?
+- [ ] Je inventář secretů revidovaný aspoň jednou za čtvrtletí?
+
+## Mini šablona secret karty
+
+```text
+# Secret karta: [název]
+
+## Účel
+K čemu secret slouží:
+Proč existuje:
+
+## Rozsah
+Služba:
+Prostředí:
+Oprávnění:
+Co výslovně nesmí:
+
+## Vlastnictví
+Owner:
+Kdo smí číst / měnit:
+Kde je uložený:
+
+## Použití
+Aplikace / joby:
+CI/CD workflow:
+Externí integrace:
+
+## Rotace
+Postup rotace:
+Podporuje paralelní klíče: ano / ne
+Poslední rotace:
+Další plánovaná rotace:
+
+## Incident
+Dopad úniku:
+Jak zneplatnit:
+Kde zkontrolovat použití:
+Koho informovat:
+
+## Privacy kontrola
+Umožňuje přístup k osobním datům: ano / ne
+Jaká data jsou v dosahu:
+Retence auditních logů:
+```
+
+## Zdroje
+
+- OWASP: Secrets Management Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- OWASP: Cryptographic Storage Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html
+- OWASP: CI/CD Security Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/CI_CD_Security_Cheat_Sheet.html
+- NIST: Key Management Guidelines a SP 800-57 — https://csrc.nist.gov/projects/key-management/key-management-guidelines
+
 # Pracovní log
+
+- 2026-10-02: Doplněna příloha „Secrets a API klíče bez digitálního klíčníku na recepci“ s inventářem tajemství, oddělením prostředí, least privilege pravidly, rotací, detekcí úniku, lokálním vývojem, checklistem, secret kartou a ověřenými zdroji OWASP a NIST.
 - 2026-10-02: Doplněna příloha „Cache a invalidace bez servírování cizích dat“ s rozdělením obsahu podle rizika, bezpečnými `Cache-Control` defaulty, pravidly pro `Vary`, invalidací, stale režimy, ochranou cache klíčů, testováním, checklistem, cache policy šablonou a ověřenými zdroji RFC 9111, MDN a OWASP.
 - 2026-10-02: Doplněna příloha „Redirecty a URL hygiena bez rozbitých odkazů“ s inventářem URL, volbou správných redirect statusů, mapováním na relevantní obsah, ochranou query parametrů, testováním redirectů, užitečnou 404 stránkou, provozní rutinou, checklistem, URL migrační mapou a ověřenými zdroji MDN a Google Search Central.
 - 2026-10-02: Doplněno krátké pravidlo pro mikro-vylepšení: změna má jít popsat jednou větou v pracovním logu včetně důvodu a způsobu ověření.
