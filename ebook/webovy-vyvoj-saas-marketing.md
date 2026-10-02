@@ -29538,7 +29538,209 @@ Datum revize:
 - MDN — 308 Permanent Redirect: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/308
 - Google Search Central — Redirects and Google Search: https://developers.google.com/search/docs/crawling-indexing/301-redirects
 
+# Příloha: Cache a invalidace bez servírování cizích dat
+
+Cache je krásná věc: web je rychlejší, server se méně potí a uživatel nemusí čekat, až se každé logo, CSS a článek vyrobí znovu jako ručně foukaná váza. Jenže cache je taky jeden z nejrychlejších způsobů, jak omylem ukázat starou cenu, neaktuální dokumentaci nebo — v horším případě — data jednoho uživatele druhému. Rychlost bez pravidel není optimalizace. Je to loterie s hezkým grafem.
+
+Privacy-first pravidlo zní jednoduše: cacheuj agresivně jen to, co je veřejné, neměnné nebo bezpečně oddělené od identity uživatele. Všechno ostatní musí mít jasnou politiku, test a plán invalidace.
+
+> Codyho komentář: Nejhorší cache bug není ten, kdy se stránka nenačte. Nejhorší je ten, kdy se načte perfektně rychle — jen někomu ukáže něco, co nikdy vidět neměl. Gratuluju, optimalizace právě dostala hororový spin-off.
+
+## Rozděl obsah podle rizika
+
+Než začneš nastavovat hlavičky, rozděl odpovědi na čtyři skupiny:
+
+| Typ obsahu | Příklad | Doporučený přístup |
+|---|---|---|
+| Neměnné veřejné assety | CSS/JS se zahashovaným názvem, fonty, obrázky v designu | Dlouhá cache, protože změna souboru změní i URL. |
+| Veřejné stránky | homepage, články, dokumentace, pricing bez personalizace | Kratší cache nebo revalidace podle publikačního rytmu. |
+| Poloveřejná data | veřejné API katalogu, dostupnost termínů, stav objednávky bez osobních údajů | Krátká cache, jasná invalidace a opatrné `Vary`. |
+| Uživatelská a citlivá data | dashboard, faktury, profil, admin, tokeny | Nekládat do sdílené cache; používat privátní/no-store pravidla. |
+
+Tenhle rozklad patří do technického zadání. Nestačí říct „zapneme CDN“. CDN, reverse proxy, framework cache i browser cache se chovají jinak a každá vrstva může vrátit jinou odpověď. RFC 9111 popisuje HTTP cache jako práci se „stored response“ a pravidly čerstvosti/revalidace; právě proto musíš vědět, která odpověď se vůbec smí uložit ([RFC 9111: HTTP Caching](https://www.rfc-editor.org/rfc/rfc9111.html)).
+
+## Bezpečný default pro malý web
+
+Pro běžný marketingový web nebo SaaS s dokumentací začni tímto modelem:
+
+- **Statické assety s hashem v názvu:** dlouhá cache, například rok, protože nová verze má novou URL.
+- **HTML stránky:** krátká cache nebo revalidace, aby se daly rychle opravit chyby v copy, ceně nebo právním textu.
+- **RSS a sitemap:** krátká až střední cache podle publikačního rytmu, typicky minuty až hodiny.
+- **API odpovědi bez identity:** krátká cache, jen pokud máš jasný klíč, invalidaci a testy.
+- **Přihlášené části:** žádná sdílená cache, opatrně i s browser cache u citlivých obrazovek.
+
+MDN u `Cache-Control` ukazuje direktivy jako `max-age`, `no-cache`, `no-store`, `private`, `public`, `must-revalidate` nebo `stale-while-revalidate`; důležité je neplést si názvy s intuicí. `no-cache` neznamená „neukládej nikdy“, ale „před použitím ověř“; pro odpovědi, které se nemají ukládat vůbec, slouží `no-store` ([MDN: Cache-Control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control)).
+
+Praktické příklady:
+
+```http
+# Zahashovaný CSS soubor
+Cache-Control: public, max-age=31536000, immutable
+
+# HTML stránka, kterou chceš revalidovat
+Cache-Control: no-cache
+
+# Citlivý uživatelský dashboard
+Cache-Control: no-store
+```
+
+U citlivých dat nepoužívej „snad to nikdo nebude cachovat“ jako strategii. To je stejná disciplína jako „snad účetní neotevře přílohu v pátek v 16:58“.
+
+## `Vary` je ostrý nástroj
+
+Hlavička `Vary` říká cache vrstvě, že odpověď závisí na určitém request headeru. Typicky jazyk (`Accept-Language`), komprese (`Accept-Encoding`) nebo někdy typ zařízení. RFC 9111 zdůrazňuje, že cache nesmí použít uloženou odpověď s `Vary`, pokud se nominované request headery neshodují s původním požadavkem ([RFC 9111: Vary](https://www.rfc-editor.org/rfc/rfc9111.html#name-vary)).
+
+To zní bezpečně, ale v praxi jsou tu dvě pasti:
+
+- Příliš široké `Vary` zničí hit-rate a cache skoro nepomůže.
+- Příliš úzké `Vary` může míchat obsah pro různé publikum.
+
+Privacy-first pravidlo: nikdy neschovávej personalizaci jen do cookies a zároveň neříkej sdílené cache, že je odpověď veřejná. Pokud se obsah mění podle přihlášení, role, zákazníka, regionu nebo tarifu, má být buď oddělený do klientského dotazu bez sdílené cache, nebo explicitně označený jako privátní.
+
+## Invalidation plán napiš před nasazením
+
+Invalidace je proces, jak dostat starou verzi z cache ven. Bez plánu se z toho stane rituál: někdo kliká v administraci, někdo restartuje službu, někdo čeká „až se to propíše“ a všichni předstírají, že je to architektura.
+
+Pro každou cachovanou vrstvu si napiš:
+
+- co je klíč cache záznamu,
+- jak dlouho smí být odpověď stará,
+- kdo může invalidaci spustit,
+- jak poznáš, že proběhla,
+- co se stane, když invalidace selže,
+- jak se chová rollback.
+
+U obsahu je dobrý model publikovat přes nové URL pro assety a revalidovat HTML. U API je lepší mít cílenou invalidaci podle entity než globální „vyčistit všechno“, protože globální purge často jen přesune problém na databázi. U cen, právních textů a bezpečnostních oznámení drž kratší TTL a možnost ručního ověření.
+
+## Stale obsah může být služba, ne chyba
+
+Direktivy jako `stale-while-revalidate` umí zlepšit rychlost: cache může krátce vrátit starší odpověď a na pozadí ji obnovit. MDN popisuje `stale-while-revalidate` jako možnost použít stale odpověď po omezenou dobu při současné revalidaci ([MDN: HTTP caching](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching)).
+
+Používej to tam, kde starší veřejná odpověď neškodí:
+
+- blogový článek,
+- dokumentační stránka,
+- veřejný seznam integrací,
+- obrázek v galerii,
+- obecný obsah homepage.
+
+Nepoužívej to bez velmi dobrého důvodu u:
+
+- cen a slev,
+- dostupnosti zásob nebo termínů,
+- právních dokumentů,
+- personalizovaných dashboardů,
+- faktur a plateb,
+- bezpečnostních nastavení.
+
+Krátký stale režim je dobrý sluha pro veřejný obsah. U citlivých odpovědí je to pozvánka na incident report s titulkem „Bylo to rychlé, bohužel špatně“.
+
+## Cache klíč nesmí obsahovat zbytečná osobní data
+
+Cache klíč často vzniká z URL, query parametrů, headerů a někdy i cookies. To je privacy problém, pokud do URL pouštíš e-mail, token, jméno zákazníka nebo jiné identifikátory. Pak se citlivá informace může objevit v cache metadatech, logách, analytice, monitoringu i screenshotu z debug nástroje.
+
+Pravidla:
+
+- Nikdy nedávej tokeny do URL, pokud existuje bezpečnější alternativa.
+- U marketingových parametrů ukládej jen to, co opravdu potřebuješ pro rozhodnutí.
+- Normalizuj query parametry: seřadit, zahodit nepovolené, citlivé odmítnout.
+- Nepoužívej e-mail jako cache klíč ani jako část veřejné URL.
+- V logách neukládej celé URL s citlivými parametry.
+
+OWASP Logging Cheat Sheet připomíná, že logy mohou obsahovat osobní a citlivé informace a doporučuje sanitizaci event dat včetně odstranění citlivých údajů ([OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). Cache debug výpisy a access logy ber stejně opatrně jako aplikační logy.
+
+## Testuj cache jako součást release
+
+Cache nejde testovat jen pohledem do prohlížeče. Udělej minimální sadu kontrol:
+
+```bash
+curl -I https://example.com/
+curl -I https://example.com/assets/app.HASH.css
+curl -I -H "Cookie: session=test" https://example.com/dashboard
+```
+
+Kontroluj:
+
+- odpověď má očekávaný `Cache-Control`,
+- citlivé stránky nemají veřejnou cache,
+- statické assety mají hash v URL,
+- `Vary` odpovídá reálné personalizaci,
+- změna obsahu se projeví v rozumném čase,
+- rollback nevrací mix starého HTML a nového JavaScriptu,
+- monitoring umí rozlišit origin chybu a cache chybu.
+
+U SaaS přidej test „uživatel A vs. uživatel B“: přihlas se do dvou účtů, otevři stejné URL a ověř, že se žádná odpověď nemíchá přes sdílenou vrstvu. Automatizace je tady lepší než naděje. Naděje je výborná lidská vlastnost, ale špatný integrační test.
+
+## Checklist: cache bez úniku dat
+
+- [ ] Máme seznam cache vrstev: prohlížeč, reverse proxy, hosting, CDN, framework, aplikace?
+- [ ] Jsou odpovědi rozdělené na veřejné, poloveřejné, privátní a citlivé?
+- [ ] Mají statické assety hash v názvu a dlouhou cache?
+- [ ] Mají HTML stránky pravidla revalidace?
+- [ ] Mají přihlášené a citlivé části `no-store` nebo jiné jasné omezení?
+- [ ] Nepoužíváme veřejnou cache pro personalizovaný obsah?
+- [ ] Je `Vary` nastavené jen tam, kde dává smysl?
+- [ ] Máme dokumentovaný invalidation plán?
+- [ ] Neobsahují URL, logy ani cache klíče tokeny, e-maily nebo citlivé identifikátory?
+- [ ] Testujeme uživatele A/B proti smíchání odpovědí?
+- [ ] Umíme bezpečně rollbacknout HTML, JS i API kontrakt?
+- [ ] Víme, kdo může spustit purge a jak se to audituje?
+
+## Mini šablona cache policy
+
+```text
+# Cache policy: [služba / typ odpovědi]
+
+## Účel
+Co cache zrychluje nebo chrání:
+
+## Typ dat
+Veřejné / poloveřejné / privátní / citlivé:
+
+## Cache vrstvy
+Prohlížeč:
+Reverse proxy / hosting:
+CDN / edge:
+Aplikační cache:
+
+## Hlavičky
+Cache-Control:
+ETag / Last-Modified:
+Vary:
+
+## TTL a stale režim
+Fresh TTL:
+Stale režim:
+Maximální přijatelné stáří odpovědi:
+
+## Invalidace
+Kdo ji spouští:
+Jaký je cache klíč:
+Jak se ověří výsledek:
+Rollback postup:
+
+## Privacy kontrola
+Citlivé parametry v URL:
+Cookies a personalizace:
+Logování cache klíčů:
+Retence debug logů:
+
+## Testy
+curl kontrola hlaviček:
+Uživatel A/B test:
+Rollback test:
+
+## Zdroje
+- RFC 9111: HTTP Caching — https://www.rfc-editor.org/rfc/rfc9111.html
+- MDN: Cache-Control — https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
+- MDN: HTTP caching — https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching
+- OWASP: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+```
+
+Cache má být nudná a předvídatelná. Když si nejsi jistý, jestli odpověď může být sdílená, ber ji jako nesdílenou. Rychlost se dá ladit postupně. Ztracená důvěra se cachuje překvapivě špatně.
+
 # Pracovní log
+- 2026-10-02: Doplněna příloha „Cache a invalidace bez servírování cizích dat“ s rozdělením obsahu podle rizika, bezpečnými `Cache-Control` defaulty, pravidly pro `Vary`, invalidací, stale režimy, ochranou cache klíčů, testováním, checklistem, cache policy šablonou a ověřenými zdroji RFC 9111, MDN a OWASP.
 - 2026-10-02: Doplněna příloha „Redirecty a URL hygiena bez rozbitých odkazů“ s inventářem URL, volbou správných redirect statusů, mapováním na relevantní obsah, ochranou query parametrů, testováním redirectů, užitečnou 404 stránkou, provozní rutinou, checklistem, URL migrační mapou a ověřenými zdroji MDN a Google Search Central.
 - 2026-10-02: Doplněno krátké pravidlo pro mikro-vylepšení: změna má jít popsat jednou větou v pracovním logu včetně důvodu a způsobu ověření.
 - 2026-10-02: Doplněna příloha „Aktualizace závislostí bez supply-chain loterie“ s inventářem kritických balíčků, pinováním verzí, pravidelnými updaty, triage zranitelností, mini vendor review, build provenance, privacy-first kontrolou frontend závislostí, checklistem, vyplnitelnou dependency review šablonou a ověřenými zdroji OWASP, SLSA a OpenSSF.
