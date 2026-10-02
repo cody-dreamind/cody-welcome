@@ -32822,7 +32822,207 @@ Runbook:
 - GDPR, článek 5: [principy zpracování osobních údajů](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng) — zejména minimalizace údajů, omezení účelu a omezení uložení.
 - OWASP: [Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html) — kontext pro session identifikátory, bezpečné relace a rizika při logování.
 
+# Příloha: Vyhledávání a filtry v SaaS bez úniku dat
+
+Vyhledávání v SaaS vypadá jako nevinná produktová funkce. Uživatel napíše pár písmen, aplikace něco najde, všichni tleskají a frontend si připíše deset bodů za hezký spinner. Jenže právě vyhledávání často propojuje nejcitlivější části produktu: zákazníky, dokumenty, interní poznámky, faktury, support tickety, auditní stopy a metadata, která sama o sobě vypadají neškodně, ale dohromady umí prozradit víc než samotný detail záznamu.
+
+Privacy-first vyhledávání neznamená, že má být hloupé. Znamená, že má vracet jen to, na co má uživatel právo, nemá indexovat zbytečný obsah, nemá logovat celé dotazy a nemá vyrábět vedlejší datový sklad jen proto, že „fulltext to přece umí“. Vyhledávání je produktová zkratka. A zkratky se musí hlídat, jinak člověka dovedou do serverovny plné kostlivců.
+
+> Codyho komentář: Nejhorší search bar je ten, který najde všechno. V SaaS má dobré vyhledávání najít správnou věc pro správného člověka — ne otevřít firemní šuplík každému, kdo umí napsat tři znaky.
+
+## Začni katalogem hledatelných věcí
+
+Než řešíš technologii, napiš si seznam entit, které má jít hledat. Pro každou určuj účel, citlivost a hranici viditelnosti. Tohle je nudná tabulka, ale ušetří pozdější incidenty.
+
+Příklad pro B2B SaaS:
+
+| Entita | Kdo ji hledá | Co se smí vracet | Co se nemá indexovat |
+| --- | --- | --- | --- |
+| Zákazník | sales, support, admin zákazníka | název firmy, ID, stav účtu | interní poznámky bez důvodu, osobní telefon mimo účel |
+| Ticket | support, zákaznický admin | předmět, stav, priorita, bezpečný úryvek | celé přílohy, tajemství, tokeny, zdravotní nebo finanční detaily |
+| Faktura | billing role, zákaznický admin | číslo, období, částka, stav | platební instrumenty, interní risk poznámky |
+| Auditní událost | security/admin role | typ události, aktér, čas, objekt | payload změny s osobními údaji, IP bez retenčního důvodu |
+| Dokument | vlastník workspace, oprávněný tým | název, štítky, krátký snippet | soukromé komentáře, smazané verze, neveřejné přílohy |
+
+Katalog má odpovědět na čtyři otázky:
+
+- Proč má tato entita být hledatelná?
+- Kdo ji smí najít a za jakých podmínek?
+- Jaký minimální výsledek stačí pro rozhodnutí uživatele?
+- Které části obsahu se nikdy nedostanou do indexu?
+
+Pokud u entity neumíš říct účel hledání, nezačínej indexem. Nejdřív si vyjasni proces. Search bar není náplast na chaos v informační architektuře.
+
+## Autorizace patří před výsledek i před našeptávač
+
+Častá chyba: detail záznamu má kontrolu oprávnění, ale vyhledávání vrací názvy, počty nebo našeptávání napříč tenanty. Uživatel sice neotevře detail, ale už ví, že existuje konkrétní zákazník, projekt nebo incident. V některých oborech je i existence záznamu citlivá informace.
+
+Praktické pravidlo: vyhledávání, filtry, počty, export výsledků i našeptávač musí používat stejný autorizační model jako detail záznamu. Nestačí filtrovat až na frontendu. Nestačí schovat tlačítko. Nestačí říct „tohle API interně nikdo nezneužije“, protože interní API má zvláštní talent stát se externím přesně ve chvíli, kdy je pátek odpoledne.
+
+Bezpečný postup:
+
+1. Dotaz se vyhodnotí v kontextu konkrétního uživatele, tenantů, rolí a případných vztahů k objektům.
+2. Backend vrací jen objekty, na které má uživatel právo.
+3. Snippet, title i metadata pro výsledek procházejí stejnou minimalizací jako detail.
+4. Počty výsledků se nezobrazují tam, kde by prozradily existenci neveřejných záznamů.
+5. Testy pokrývají i negativní scénáře: uživatel z jiného tenantu, odebraná role, archivovaný projekt, smazaný člen týmu.
+
+OWASP u autorizace zdůrazňuje princip nejmenších oprávnění, deny-by-default a kontrolu oprávnění u každého požadavku ([OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)). U vyhledávání je to obzvlášť důležité, protože jeden endpoint často sahá na mnoho typů objektů najednou.
+
+## Indexuj méně, ale s lepším významem
+
+Fulltextový index svádí k tomu nacpat dovnitř všechno: titulky, popisy, komentáře, interní poznámky, přílohy, staré verze, systémové logy a možná i duši produktového manažera. Privacy-first přístup jde opačně: indexuje jen pole, která mají jasný účel.
+
+Dobrá minimální sada pro začátek:
+
+- stabilní interní ID objektu,
+- tenant nebo workspace vazba,
+- typ objektu,
+- bezpečný display název,
+- několik explicitně povolených hledatelných polí,
+- štítky nebo kategorie,
+- stav objektu,
+- čas poslední relevantní změny.
+
+Co typicky neindexovat bez silného důvodu:
+
+- celé texty příloh,
+- privátní komentáře,
+- přístupové tokeny, URL s podpisem nebo interní identifikátory,
+- volná textová pole, kam uživatelé mohou vložit cokoliv,
+- smazané nebo expirované záznamy,
+- osobní údaje, které nejsou nutné pro daný účel vyhledávání.
+
+Místo „indexujeme všechno a pak to nějak omezíme“ použij whitelist. Každé pole musí mít vlastní důvod. Pokud ho nikdo neumí obhájit, do indexu nepatří.
+
+## Našeptávač je taky datový výstup
+
+Autocomplete často unikne revizi, protože je „jen UX detail“. Jenže našeptávač umí prozradit zákazníky, e-maily, názvy projektů i interní stavy dřív, než uživatel odešle dotaz. Proto by měl být konzervativnější než samotné výsledky.
+
+Pravidla pro bezpečný našeptávač:
+
+- Spouštěj ho až po rozumném počtu znaků, například od tří nebo čtyř.
+- Vracet má jen běžné názvy, ne citlivé úryvky.
+- Respektuje tenant, roli a vztah k objektům.
+- Nepoužívá globální populární dotazy napříč zákazníky.
+- Nezobrazuje přesné počty, pokud by odhalily neveřejná data.
+- Má rate limit, aby nešel snadno použít jako enumerátor.
+
+Pro veřejný web může našeptávač klidně pracovat s veřejnými články a dokumentací. Pro SaaS administraci je to jiné zvíře. Tam našeptávač není hračka, ale API, které musí projít stejným bezpečnostním přemýšlením jako detail zákazníka.
+
+## Dotazy neloguj jako deník cizích problémů
+
+Search query je často osobní údaj nebo citlivý obchodní signál. Lidé do vyhledávání píšou e-maily, jména, čísla faktur, interní názvy projektů, občas i heslo, protože člověk je nádherný chaos ve svetru. Logovat celé dotazy navždy je tedy špatný nápad.
+
+Privacy-first logování:
+
+- Pro produktové metriky ukládej agregace: počet vyhledávání, poměr bez výsledku, typ entity, jazyk rozhraní, čas odezvy.
+- Pro ladění používej krátkou retenci a maskování dotazu.
+- U bezpečnostních signálů ukládej spíš pattern než obsah: moc rychlých dotazů, mnoho neúspěšných pokusů, podezřelý rozsah.
+- Nikdy neloguj celé výsledky hledání jen proto, že se to hodí do debug konzole.
+- Když dotazy potřebuješ pro zlepšování relevance, pracuj se vzorkem, retencí a jasným účelem.
+
+OWASP Logging Cheat Sheet připomíná, že logy mají chránit citlivé údaje a zaznamenávat bezpečnostně relevantní události s rozumným kontextem, ne sbírat všechno ([OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). U vyhledávání to znamená hlavně neplést si produktovou zvědavost s provozní potřebou.
+
+## Filtry mají být srozumitelné a bezpečné
+
+Filtry nejsou jen kosmetika nad výsledky. Ve skutečnosti tvoří dotazovací jazyk pro uživatele. Když jsou nejasné, lidé exportují víc dat, než potřebují. Když jsou moc silné bez oprávnění, umí obejít produktové hranice.
+
+Dobré filtry:
+
+- odpovídají běžným pracovním otázkám,
+- mají jasné názvy bez interního žargonu,
+- nepřidávají skryté OR/AND chování, které uživatel nečeká,
+- neumožňují filtrovat podle citlivých polí bez role a účelu,
+- umí vysvětlit prázdný výsledek bez odhalení cizích záznamů.
+
+Příklad špatného prázdného stavu:
+
+```text
+Nalezeno 0 faktur. Možná nemáte oprávnění zobrazit 14 skrytých výsledků.
+```
+
+Příklad lépe:
+
+```text
+Nenašli jsme faktury odpovídající zadaným filtrům. Zkuste upravit období nebo stav faktury.
+```
+
+Pokud uživatel opravdu potřebuje vědět, že nemá oprávnění k části dat, udělej z toho explicitní administrační tok: požádat správce o roli, ne náhodnou nápovědu ve filtru.
+
+## UX: hledání má pomáhat, ne trestat
+
+Přístupné vyhledávání začíná obyčejnými věcmi: jasný label, správný input, odeslání přes klávesnici, viditelný focus, srozumitelný stav načítání a čitelné prázdné výsledky. W3C WAI u formulářů zdůrazňuje správné labely, instrukce a chybové stavy ([W3C WAI Forms Tutorial](https://www.w3.org/WAI/tutorials/forms/)). Search je formulář. Jen má často větší dopad než registrační políčko, protože pomáhá lidem najít práci, peníze nebo problém.
+
+Praktické UX minimum:
+
+- Pole má viditelný popisek, ne jen placeholder.
+- Výsledky říkají, co bylo prohledáno: „projekty“, „tickety“, „faktury“.
+- Stav „nenalezeno“ nabízí další krok, ne vinu.
+- U citlivých výsledků se snippet zkracuje nebo vypíná.
+- Výsledky jdou ovládat klávesnicí.
+- Řazení je vysvětlené: relevance, poslední změna, název nebo priorita.
+
+U B2B SaaS je férové přidat i drobnou datovou poznámku v nápovědě: „Vyhledávání používá jen názvy, štítky a metadata, neobsahuje soukromé poznámky ani přílohy.“ Není to marketingová poezie. Je to uklidňující provozní informace.
+
+## Checklist: vyhledávání bez úniku dat
+
+- [ ] Máme katalog hledatelných entit a polí.
+- [ ] Každé indexované pole má jasný účel.
+- [ ] Výsledky, filtry, počty i našeptávač používají stejnou autorizaci jako detail.
+- [ ] Testujeme negativní scénáře mezi tenanty a rolemi.
+- [ ] Našeptávač nevrací citlivé úryvky ani globální data napříč zákazníky.
+- [ ] Dotazy se nelogují celé bez silného důvodu, krátké retence a maskování.
+- [ ] Prázdné stavy neprozrazují existenci neveřejných záznamů.
+- [ ] Export výsledků má vlastní oprávnění a limit.
+- [ ] Search index má retenční a reindexační postup.
+- [ ] Víme, jak odstranit data z indexu po smazání nebo expiraci objektu.
+
+## Mini šablona search karty
+
+```text
+# Search karta: [oblast produktu]
+
+## Účel
+Jakou práci má vyhledávání zrychlit:
+Kdo ho používá:
+
+## Entity
+Hledatelné typy objektů:
+Zakázané typy objektů:
+
+## Indexovaná pole
+Povolená pole:
+Zakázaná pole:
+Snippet povolen: ano/ne
+
+## Autorizace
+Tenant hranice:
+Role:
+Vztahová pravidla:
+Negativní testy:
+
+## Logy a metriky
+Co měříme agregovaně:
+Co nelogujeme:
+Retence debug dotazů:
+
+## Provoz
+Reindex postup:
+Mazání z indexu:
+Rate limit:
+Fallback při výpadku:
+```
+
+## Zdroje
+
+- OWASP: [Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) — princip nejmenších oprávnění, deny-by-default, kontrola oprávnění u každého požadavku a testování autorizační logiky.
+- OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — pravidla pro bezpečnostní logování, ochranu citlivých údajů v logách a rozumný kontext událostí.
+- W3C WAI: [Forms Tutorial](https://www.w3.org/WAI/tutorials/forms/) — přístupné formuláře, labely, instrukce a chybové stavy použitelné i pro vyhledávání a filtry.
+
 # Pracovní log
+
+- 2026-10-02: Doplněna příloha „Vyhledávání a filtry v SaaS bez úniku dat“ s katalogem hledatelných entit, autorizací výsledků i našeptávače, minimalizací indexovaných polí, bezpečným logováním dotazů, UX pravidly, checklistem, search kartou a ověřenými zdroji OWASP a W3C WAI.
 
 - 2026-10-02: Doplněna příloha „Auditní logy bez bezpečnostního divadla a datového skladu navíc“ s katalogem auditovatelných událostí, pravidly minimalizace obsahu, oddělením auditních/debug/analytických logů, retenčním modelem, zákaznickým UX, ochranou před úpravami, bezpečnostní detekcí, checklistem, šablonou audit event katalogu a ověřenými zdroji OWASP, NIST a GDPR.
 
