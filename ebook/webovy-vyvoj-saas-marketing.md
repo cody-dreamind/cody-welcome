@@ -30310,7 +30310,190 @@ Pokud ano, nejde o „jen konfiguraci“. Je to změna zpracování nebo rizika.
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - NIST: [SP 800-128 — Security-Focused Configuration Management](https://csrc.nist.gov/pubs/sp/800/128/upd1/final)
 
+# Příloha: Sdílené schránky a aliasy bez interního chaosu
+
+Kontaktní e-mail vypadá jako drobnost. `info@`, `support@`, `billing@`, `security@`, `press@` — pár adres a hotovo, že? Jenže u malého webu nebo SaaS je schránka často první support systém, první obchodní pipeline, první incident kanál a první místo, kam dorazí citlivý dokument. Když je nastavená ledabyle, začne firma řešit zákaznická data přes přeposílání, osobní inboxy, zapomenuté kopie a „kdo na to vlastně odpověděl?“ archeologii.
+
+Dobrá sdílená schránka má tři vlastnosti: jasný účel, jasné vlastnictví a jasnou hranici dat. Nemá být skladiště všeho, co se nehodí jinam. Má být řízený vstupní bod, který pomáhá člověku vybrat správnou cestu a týmu zpracovat zprávu bez zbytečného množení osobních údajů.
+
+> Codyho komentář: Sdílený inbox bez pravidel je jako společná lednice ve firmě. Chvíli vypadá užitečně, pak v ní někdo najde jogurt z minulého kvartálu a všichni předstírají, že to neviděli.
+
+## Začni mapou adres, ne novou schránkou
+
+Nejdřív si napiš seznam adres, které firma používá nebo zmiňuje na webu, fakturách, v aplikaci, dokumentaci a automatických e-mailech. U každé adresy odpověz na pět otázek:
+
+- K čemu adresa slouží?
+- Kdo je vlastník a záloha?
+- Jak rychle má přijít první reakce?
+- Jaký typ dat tam smí přijít?
+- Kdy se zpráva přesouvá do specializovaného systému?
+
+Praktický minimální model pro malý SaaS:
+
+| Adresa | Účel | Vlastník | Kam eskalovat | Co tam nepatří |
+|---|---|---|---|---|
+| `hello@` | obecný kontakt a partnerství | obchod / founder | CRM nebo projektový nástroj | hesla, produkční exporty |
+| `support@` | produktová pomoc | support owner | ticket systém / issue tracker | platební karty, celé databázové exporty |
+| `billing@` | faktury, platby, refundy | finance owner | účetnictví / billing systém | technické logy, osobní poznámky mimo účetní účel |
+| `security@` | bezpečnostní hlášení | technický owner | incident workflow | marketingové nabídky, běžný support |
+| `privacy@` | žádosti k osobním údajům | privacy owner | DSR workflow | interní debaty bez právního důvodu |
+
+Nemusíš mít všechny adresy od prvního dne. Důležitější je, aby každá zveřejněná adresa měla reálného ownera. Mrtvá adresa je horší než žádná, protože slibuje odpověď a vyrábí tichý dluh důvěry.
+
+## Alias není permission model
+
+Alias pouze říká, kam doručit zprávu. Neříká, kdo smí číst historická data, kdo smí odpovědět jménem firmy, kdo vidí přílohy a kdo může zprávy mazat. Proto je špatný nápad posílat všechno na osobní inboxy všech členů týmu. Na začátku je to pohodlné, ale později se z toho stane neauditovatelná kopie zákaznické komunikace.
+
+Lepší pravidla:
+
+- Sdílené adresy doručuj do schránky nebo helpdesku s řízeným přístupem, ne jen do osobních inboxů.
+- Přístup dávej podle role a účelu, ne podle zvědavosti nebo seniority.
+- Odpovědi posílej ze sdílené identity jen tam, kde to dává smysl pro zákazníka.
+- Při odchodu člověka odeber přístup ke sdíleným schránkám stejně důsledně jako k produkci.
+- Historii zpráv nemaž ručně podle nálady; nastav retenční pravidla podle účelu a povinností.
+
+Pokud tým zatím nemá helpdesk, stačí jednoduchá disciplína: jeden shared mailbox, štítky podle stavu, vlastník konverzace a týdenní úklid. Ale už od začátku napiš, kdy e-mail přestává stačit. Typicky ve chvíli, kdy stejnou schránku řeší víc než dva lidé, zákazníci čekají na SLA, nebo zprávy obsahují bezpečnostní a privacy požadavky.
+
+## Přílohy a citlivá data drž krátce
+
+E-mail je pohodlný transport, ale mizerný archiv pro citlivá data. Uživatelé občas pošlou screenshot s osobním údajem, export faktur, log s tokenem nebo dokument, který měl skončit v zabezpečeném portálu. Tým má mít připravenou odpověď, která data nezvětšuje dalším přeposíláním.
+
+Praktický postup:
+
+1. Zprávu zařaď podle rizika: běžný dotaz, obchod, billing, bezpečnost, privacy žádost.
+2. Pokud příloha obsahuje citlivá data, nepřeposílej ji do chatu ani osobních e-mailů.
+3. Vytvoř interní úkol s minimem metadat: odkaz na zprávu, typ problému, owner, deadline.
+4. Pokud je potřeba soubor zpracovat, přesuň ho do schváleného úložiště s přístupem podle role.
+5. Po vyřízení vrať komunikaci do auditovatelného kanálu a smaž pracovní kopie.
+
+GDPR pracuje mimo jiné s principem minimalizace osobních údajů a omezení uložení. Prakticky to znamená: nesbírej přes e-mail víc, než potřebuješ, a nenechávej přílohy žít věčně jen proto, že se vejdou do schránky.
+
+## Automatické odpovědi mají snižovat nejistotu
+
+Auto-reply nemusí být robotická zeď. Dobrá automatická odpověď říká, že zpráva dorazila, jaký je další krok a co člověk nemá posílat e-mailem.
+
+Příklad pro `support@`:
+
+```text
+Díky, zpráva dorazila do podpory.
+
+Obvykle odpovídáme během 1 pracovního dne. Pokud jde o výpadek služby,
+napište prosím do předmětu „URGENT“ a přidejte URL nebo název workspace.
+
+Kvůli bezpečnosti neposílejte e-mailem hesla, celé exporty databází ani tokeny.
+Když budeme potřebovat citlivější soubor, pošleme bezpečný způsob předání.
+```
+
+Příklad pro `privacy@`:
+
+```text
+Díky, žádost jsme přijali.
+
+Kvůli ověření identity vás můžeme požádat o doplňující informaci, ale nebudeme
+po vás chtít heslo. Žádost zpracujeme podle jejího typu a ozveme se s dalším
+postupem.
+```
+
+Tohle je malý detail, ale snižuje paniku, opakované zprávy a riziko, že člověk pošle další zbytečná data „pro jistotu“.
+
+## Security a privacy adresy nejsou dekorace
+
+Pokud zveřejníš `security@` nebo `privacy@`, musí za nimi být proces. Bezpečnostní hlášení potřebuje rychlou triáž, potvrzení přijetí, interní ownera a rozhodnutí, jestli jde o incident. Privacy žádost potřebuje evidenci, ověření identity, termín, rozsah a vazbu na datovou mapu.
+
+Minimální pravidlo pro bezpečnostní adresu:
+
+- kontrola alespoň každý pracovní den,
+- jasný owner a záloha,
+- štítek nebo fronta `security-report`,
+- zákaz přeposílání payloadů do běžných chatů,
+- předpřipravená odpověď pro potvrzení přijetí,
+- vazba na incidentový postup a postmortem, pokud se hlášení potvrdí.
+
+Minimální pravidlo pro privacy adresu:
+
+- evidence žádostí mimo osobní poznámky,
+- ověření identity přiměřené riziku,
+- rozlišení přístupu, opravy, výmazu, omezení a přenositelnosti,
+- kontrola systémů a subprocesorů podle datové mapy,
+- odpověď uložená tak, aby šla později dohledat bez zbytečného zveřejnění obsahu.
+
+## Evropský provoz a dodavatelé
+
+U e-mailu často rozhoduje pohodlí. Jenže schránky obsahují obchodní tajemství, fakturační údaje, support historii a někdy i bezpečnostní incidenty. Proto se ptej stejně jako u analytiky nebo hostingu: kde jsou data, kdo je zpracovatel, jak vypadá export, retence, audit přístupů a ukončení služby.
+
+Privacy-first doporučení:
+
+- Preferuj poskytovatele s jasným evropským provozem nebo alespoň transparentním regionem zpracování.
+- Měj podepsanou nebo dostupnou zpracovatelskou smlouvu tam, kde služba zpracovává osobní údaje jménem firmy.
+- Nepřipojuj do schránky zbytečné AI doplňky a sales rozšíření, která čtou obsah zpráv bez jasného účelu.
+- Pokud používáš helpdesk, vypni sledovací pixely a agresivní „engagement“ měření, pokud ho nepotřebuješ.
+- Pravidelně exportuj nebo zálohuj kritickou komunikaci tak, aby firma nepřišla o historii při změně dodavatele.
+
+## Checklist: sdílené schránky bez chaosu
+
+- [ ] Máme seznam všech veřejně používaných adres a aliasů?
+- [ ] Má každá adresa jasný účel, ownera a zálohu?
+- [ ] Víme, které typy dat do dané schránky nepatří?
+- [ ] Sdílené adresy nekončí nekontrolovaně v osobních inboxech?
+- [ ] Máme pravidlo pro přílohy s citlivými daty?
+- [ ] Má `support@` nebo helpdesk stav, ownera a uzavření konverzace?
+- [ ] Má `security@` rychlou triáž a vazbu na incident workflow?
+- [ ] Má `privacy@` vazbu na DSR workflow a datovou mapu?
+- [ ] Máme retenční pravidla pro zprávy a přílohy?
+- [ ] Kontrolujeme přístupy při nástupu, změně role a odchodu lidí?
+- [ ] Víme, kde dodavatel e-mailu zpracovává data a jak službu opustit?
+
+## Mini šablona mailbox karty
+
+```text
+# Mailbox karta: [adresa / alias]
+
+## Účel
+- Pro koho adresa je:
+- Jaké zprávy přijímá:
+- Jaké zprávy tam nepatří:
+
+## Vlastnictví
+- Owner:
+- Záloha:
+- Kontrola frekvence:
+- Cílový čas první reakce:
+
+## Přístup
+- Kdo má číst:
+- Kdo má odpovídat:
+- Jak se řeší odchod člověka:
+- Kde je audit změn:
+
+## Data a přílohy
+- Povolené typy dat:
+- Zakázané typy dat:
+- Kam přesunout citlivé soubory:
+- Retence zpráv:
+
+## Eskalace
+- Support:
+- Billing:
+- Security:
+- Privacy / DSR:
+- Incident:
+
+## Dodavatel
+- Služba:
+- Region / provoz:
+- DPA / smlouva:
+- Export / exit plán:
+```
+
+## Zdroje
+
+- EUR-Lex: [GDPR, článek 5 — zásady zpracování osobních údajů](https://eur-lex.europa.eu/legal-content/CS/TXT/HTML/?uri=CELEX:32016R0679#d1e1795-1-1)
+- EUR-Lex: [GDPR, článek 25 — záměrná a standardní ochrana osobních údajů](https://eur-lex.europa.eu/legal-content/CS/TXT/HTML/?uri=CELEX:32016R0679#d1e3177-1-1)
+- OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- ENISA: [Threat Landscape — phishing and social engineering](https://www.enisa.europa.eu/publications/enisa-threat-landscape-2024)
+
 # Pracovní log
+- 2026-10-02: Doplněna příloha „Sdílené schránky a aliasy bez interního chaosu“ s mapou kontaktních adres, pravidly pro aliasy, přílohy a citlivá data, automatickými odpověďmi, security/privacy procesy, evropským provozem, checklistem, mailbox kartou a ověřenými zdroji GDPR, OWASP a ENISA.
 - 2026-10-02: Doplněna příloha „Runtime konfigurace bez tajného ovládacího panelu“ s rozdělením konfiguračních hodnot podle rizika, oddělením secrets, auditní stopou, změnovým postupem, validací hodnot, privacy-first kontrolou, checklistem, konfigurační kartou a ověřenými zdroji Twelve-Factor App, OWASP a NIST.
 
 - 2026-10-02: Doplněna příloha „SLA, SLO a status komunikace bez slibů vytesaných do betonu“ s rozlišením veřejných slibů a interních cílů, error budgetem, status šablonami, privacy-first měřením spolehlivosti, eskalačními pravidly, checklistem, reliability dohodou a ověřenými zdroji Google SRE, GDPR a EDPB.
