@@ -29359,7 +29359,207 @@ Datum revize:
 - OpenSSF Scorecard: https://openssf.org/scorecard/
 - OWASP Component Analysis: https://community.owasp.org/Component_Analysis
 
+
+# Příloha: Feature flagy a postupné releasy bez experimentů na zákaznících
+
+Feature flag je malý vypínač v produktu, ale velká provozní dohoda v týmu. Umožní zapnout novou funkci jen interně, pro část zákazníků, pro jeden segment nebo pro všechny až ve chvíli, kdy máš jistotu. Když se používá dobře, snižuje riziko release. Když se používá špatně, vznikne druhá tajná konfigurace produktu, o které nikdo neví, nikdo ji netestuje a všichni se jí bojí dotknout. Takový digitální sklep s krabicemi bez štítků.
+
+Privacy-first přístup tady znamená jednoduchou věc: flag má řídit chování produktu, ne sbírat co nejvíc údajů o člověku. Pro většinu malých SaaS stačí cílení podle prostředí, organizace, plánu, role, regionu provozu nebo anonymního technického klíče. E-mail, celé jméno, IP adresa nebo obsah zákaznických dat do vyhodnocování flagů nepatří, pokud pro to nemáš opravdu dobrý důvod a právní základ.
+
+> Codyho komentář: Feature flag není omluva pro polovičatý release. Je to bezpečnostní pás. Auto pořád musí mít brzdy, světla a někoho za volantem.
+
+## Kdy feature flag použít
+
+Flag použij tehdy, když zapnutí funkce potřebuje oddělit deploy od release. Deploy je technická akce: kód je v produkci. Release je produktové rozhodnutí: kdo funkci uvidí a za jakých podmínek. Tohle rozdělení je zvlášť užitečné u změn, které se dotýkají peněz, přístupů, integrací, onboardingových kroků, importu dat nebo nového rozhraní pro stávající zákazníky.
+
+Typické dobré použití:
+
+- interní zapnutí pro tým před veřejným releasem,
+- postupné rozšíření na 5 %, 25 %, 50 % a 100 % účtů,
+- zapnutí jen pro konkrétní organizace v pilotu,
+- rychlý kill switch pro rizikovou integraci,
+- dočasné přepnutí mezi starým a novým výpočtem,
+- oddělené zapnutí backendové schopnosti a UI prvku.
+
+Špatné použití:
+
+- schování nedodělaného kódu bez plánu dokončení,
+- permanentní výjimky pro jednotlivé zákazníky,
+- cílení podle osobních údajů jen proto, že to nástroj umí,
+- nahrazení oprávnění feature flagem,
+- vypnutí testů s tím, že „to ještě není zapnuté“.
+
+Praktická brzda: každý flag má mít vlastníka, důvod, výchozí hodnotu, plán zapnutí, plán rollbacku a datum odstranění. Pokud některá položka chybí, není to flag. Je to budoucí archeologický nález.
+
+## Rozděl flagy podle životnosti
+
+Ne všechny flagy jsou stejné. Největší chaos vzniká, když tým zachází stejně s krátkodobým rollout flagem a dlouhodobým konfiguračním nastavením tarifu.
+
+Použij jednoduché dělení:
+
+| Typ | Účel | Životnost | Příklad |
+|---|---|---:|---|
+| Release flag | Bezpečné uvedení nové funkce | dny až týdny | Nový editor faktur |
+| Experiment flag | Ověření varianty | dny až týdny | Nové pořadí onboarding kroků |
+| Ops flag | Provozní brzda | měsíce | Vypnutí náročného exportu při incidentu |
+| Permission / plan config | Produktový nárok | dlouhodobě | Funkce dostupná v tarifu Pro |
+
+Release a experiment flagy mají po vyhodnocení zmizet z kódu. Ops flagy mohou zůstat déle, ale musí být dokumentované a pravidelně testované. Konfigurace plánů a oprávnění nepatří do stejného neřízeného seznamu jako dočasné flagy; je to součást produktového modelu a má mít vlastní testy, audit a zákaznickou dokumentaci.
+
+## Evaluation context minimalizuj
+
+OpenFeature ve své specifikaci popisuje `evaluation context` jako kontejner pro data používaná při vyhodnocení flagu. To je užitečný koncept, ale zároveň místo, kde se snadno potichu začne posílat moc dat. Oficiální dokumentace OpenFeature výslovně připomíná, že při vkládání osobních údajů do evaluation contextu je potřeba přemýšlet, jak je provider zpracuje nebo uloží ([OpenFeature: Evaluation Context](https://openfeature.dev/docs/reference/concepts/evaluation-context/)).
+
+Privacy-first minimum:
+
+- používej stabilní technický identifikátor účtu, ne e-mail uživatele,
+- segmenty pojmenuj obchodně, ne osobně: `plan=pro`, `region=eu`, `role=admin`,
+- neposílej do flag systému obsah dokumentů, zpráv, objednávek ani poznámek,
+- pokud potřebuješ procentuální rollout, hashuj pseudonymní klíč,
+- loguj rozhodnutí flagu bez osobních údajů,
+- pravidelně kontroluj, které atributy se do vyhodnocení opravdu používají.
+
+Příklad rozumného kontextu:
+
+```json
+{
+  "accountKey": "acc_7f3c...",
+  "plan": "pro",
+  "region": "eu",
+  "environment": "production"
+}
+```
+
+Příklad kontextu, který si koleduje o malý privacy požár:
+
+```json
+{
+  "email": "anna@example.com",
+  "fullName": "Anna Nováková",
+  "ipAddress": "203.0.113.10",
+  "lastInvoiceText": "...",
+  "supportTicketSummary": "..."
+}
+```
+
+Ten druhý příklad má jedinou výhodu: rychle ukáže, kdo v týmu potřebuje kávu a krátký rozhovor o minimalizaci dat.
+
+## Rollout plán napiš před zapnutím
+
+Postupný release má být nuda v tabulce, ne improvizace v chatu. Před zapnutím napiš, jak poznáš, že pokračovat, zastavit nebo vrátit změnu. Bez toho tým v krizi začne diskutovat dojmy, zatímco uživatelé klikají do kouře.
+
+Jednoduchý rollout plán:
+
+1. Zapnout interně v produkci pro tým.
+2. Ověřit hlavní cestu a logy bez osobních dat.
+3. Zapnout pro 1–3 pilotní účty, které s testem souhlasí.
+4. Sledovat chybovost, dokončení klíčové akce a support signály.
+5. Rozšířit na další segment nebo procento účtů.
+6. Po stabilizaci odstranit starou větev kódu a flag uzavřít.
+
+Stop signály mají být konkrétní:
+
+- zvýšení chybovosti nad předem domluvený práh,
+- nárůst support ticketů ke stejné funkci,
+- zhoršení dokončení kritického flow,
+- výpadek externí integrace,
+- nejasnost v účtování, oprávněních nebo zpracování dat.
+
+Bez stop signálů se rollout mění v optimistický výlet: jedeme dál, protože zatím nikdo nekřičí dost nahlas.
+
+## Testuj obě strany flagu
+
+Každý důležitý flag znamená nejméně dvě reality produktu: zapnuto a vypnuto. Obě musí projít testem. Pokud testuješ jen novou cestu, fallback se může rozpadnout přesně ve chvíli, kdy ho potřebuješ.
+
+Minimum testů:
+
+- výchozí hodnota funguje bez dostupnosti flag providera,
+- stará cesta funguje, dokud má být použitelná,
+- nová cesta funguje pro pilotní segment,
+- rollback nevyžaduje nový deploy,
+- UI neukazuje nedostupnou funkci uživateli bez nároku,
+- analytika a logy neobsahují citlivá zákaznická data,
+- support umí podle názvu flagu poznat, co je zapnuté.
+
+NIST Secure Software Development Framework připomíná potřebu chránit software během vývoje i provozu a ověřovat bezpečnostní požadavky v celém životním cyklu ([NIST SP 800-218](https://csrc.nist.gov/publications/detail/sp/800-218/final)). U feature flagů to prakticky znamená: flag není mimo testovací a bezpečnostní proces jen proto, že „je to přece jen konfigurace“.
+
+## Flag debt uklízej pravidelně
+
+Feature flag má tendenci přežít svou užitečnost. Nejdřív je to chytrá pojistka, pak tichá výjimka, potom starý kód, kterému už nikdo nerozumí. Proto si zaveď měsíční úklid flagů.
+
+U každého flagu se ptej:
+
+- Je ještě potřeba?
+- Kdo je vlastník?
+- Kdy byl naposledy změněn?
+- Je jasné, co znamená hodnota `true` a `false`?
+- Existuje zákazník nebo tarif, který na něm dlouhodobě závisí?
+- Dá se flag odstranit v nejbližším release?
+- Je jeho evaluation context pořád datově minimální?
+
+Dobré pravidlo: release flag starší než 60 dní musí mít buď naplánované odstranění, nebo explicitní rozhodnutí, proč se mění na dlouhodobou konfiguraci. Jinak se produkt plní větvemi reality a každý deploy připomíná otevírání staré skříně. Něco vypadne. Možná kabel. Možná účetní logika.
+
+## Checklist: feature flag bez zákaznického hazardu
+
+- [ ] Flag má vlastníka, účel a datum revize.
+- [ ] Je jasné, jestli jde o release, experiment, ops nebo produktovou konfiguraci.
+- [ ] Výchozí hodnota je bezpečná při výpadku flag systému.
+- [ ] Rollout plán obsahuje pilot, kroky rozšíření a stop signály.
+- [ ] Rollback funguje bez nového deploye.
+- [ ] Testuje se zapnutá i vypnutá varianta.
+- [ ] Evaluation context nepřenáší zbytečné osobní údaje.
+- [ ] Logy obsahují název flagu a variantu, ne citlivý obsah.
+- [ ] Support ví, jak poznat stav funkce u účtu.
+- [ ] Po dokončení release existuje úkol na odstranění flagu.
+
+## Mini šablona flag karty
+
+```text
+# Feature flag: [název]
+
+Účel:
+Typ flagu: release / experiment / ops / konfigurace
+Vlastník:
+Datum vytvoření:
+Datum revize / odstranění:
+
+Výchozí hodnota:
+Co znamená true:
+Co znamená false:
+
+Rollout:
+Interní zapnutí:
+Pilotní účty / segment:
+Kroky rozšíření:
+Stop signály:
+Rollback postup:
+
+Data:
+Použité atributy v evaluation contextu:
+Osobní údaje: ano/ne + důvod
+Logování:
+Retence souvisejících logů:
+
+Testy:
+Zapnutá varianta:
+Vypnutá varianta:
+Výpadek flag providera:
+Oprávnění / tarif:
+
+Uzavření:
+Kdy odstranit starý kód:
+Kdo potvrdí dokončení:
+```
+
+## Zdroje
+
+- OpenFeature — Evaluation Context: https://openfeature.dev/docs/reference/concepts/evaluation-context/
+- OpenFeature Specification — Evaluation Context: https://openfeature.dev/specification/sections/evaluation-context/
+- OpenFeature Specification — Flag Evaluation API: https://openfeature.dev/specification/sections/flag-evaluation/
+- NIST SP 800-218 — Secure Software Development Framework: https://csrc.nist.gov/publications/detail/sp/800-218/final
+
 # Pracovní log
+- 2026-10-02: Doplněna příloha „Feature flagy a postupné releasy bez experimentů na zákaznících“ s rozdělením flagů podle životnosti, privacy-first pravidly pro evaluation context, rollout plánem, testováním obou variant, úklidem flag debtu, checklistem, flag kartou a ověřenými zdroji OpenFeature a NIST SSDF.
 - 2026-10-02: Doplněno krátké pravidlo pro mikro-vylepšení: změna má jít popsat jednou větou v pracovním logu včetně důvodu a způsobu ověření.
 - 2026-10-02: Doplněna příloha „Aktualizace závislostí bez supply-chain loterie“ s inventářem kritických balíčků, pinováním verzí, pravidelnými updaty, triage zranitelností, mini vendor review, build provenance, privacy-first kontrolou frontend závislostí, checklistem, vyplnitelnou dependency review šablonou a ověřenými zdroji OWASP, SLSA a OpenSSF.
 - 2026-10-02: Doplněna příloha „Reconciliation plateb bez účetní detektivky“ s párovacími klíči mezi produktem, platebním poskytovatelem, fakturací a účetnictvím, denní kontrolou nesouladů, pravidly pro výjimky, bankovní převody, minimalizaci dat, měsíční závěrku, reconciliation report šablonu a ověřené zdroje GDPR, Finanční správy a e-Sbírky.
