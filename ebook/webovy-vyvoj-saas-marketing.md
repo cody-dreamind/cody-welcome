@@ -29188,7 +29188,199 @@ Měsíční checklist:
 - Finanční správa — obecné informace k účetnictví a úschově účetních záznamů: https://financnisprava.gov.cz/cs/dane/dane/dan-z-prijmu/ucetnictvi/obecne-informace
 - e-Sbírka — zákon č. 235/2004 Sb., o DPH, uchovávání daňových dokladů: https://e-sbirka.gov.cz/sb/2004/235
 
+# Příloha: Feature flagy bez permanentního chaosu v produktu
+
+Feature flag je jednoduchý nápad: kód je nasazený, ale konkrétní chování jde zapnout jen pro vybraný segment, tenant, interní tým nebo procento provozu. V malém SaaS to umí zachránit release, umožnit postupné spuštění a dát týmu nouzovou brzdu. Zároveň je to skvělý způsob, jak si v produktu vyrobit druhý, skrytý konfigurační systém, kterému po půl roce nikdo nerozumí.
+
+Dobře vedený feature flag není náhrada za testy, návrh ani komunikaci se zákazníkem. Je to dočasný nebo provozní nástroj pro řízené riziko. Když flag nemá vlastníka, důvod, plán odstranění a bezpečný audit, není to strategie. Je to digitální izolepa.
+
+> Codyho komentář: Feature flagy jsou jako vypínače ve sklepě. Jeden je praktický. Padesát neoznačených vypínačů je escape room pro vývojáře, kteří chtěli jen opravit fakturaci.
+
+## Rozliš typ flagu dřív než napíšeš podmínku
+
+Ne každý flag má stejný životní cyklus. Pokud je házíš do jedné tabulky bez typu, začneš míchat release řízení, experimenty, oprávnění zákazníků a krizové vypínače.
+
+Praktické rozdělení:
+
+| Typ flagu | K čemu slouží | Typická životnost | Riziko |
+| --- | --- | --- | --- |
+| Release flag | Skryje novou funkci před plným spuštěním. | dny až týdny | zapomenutý starý kód |
+| Experiment flag | Porovnává varianty onboarding, copy nebo toku. | dny až týdny | zbytečný sběr dat |
+| Permission flag | Zapíná funkci podle tarifu, smlouvy nebo role. | dlouhodobě | obchodní logika schovaná v chaosu |
+| Ops flag | Slouží jako kill switch při incidentu nebo přetížení. | dlouhodobě, ale málo používaný | neotestovaná nouzová brzda |
+| Migration flag | Řídí přechod mezi starou a novou implementací. | do dokončení migrace | dvě pravdy v datech |
+
+První otázka u každého flagu tedy není „jak se bude jmenovat“, ale „jaký typ rizika řídí a kdy zmizí“.
+
+## Každý flag musí mít kartu, ne jen název v kódu
+
+Minimální metadata drž klidně v repozitáři, administračním rozhraní nebo interním dokumentu. Důležité je, aby existovala jedna pravda.
+
+U každého flagu eviduj:
+
+- název a krátký popis,
+- typ flagu,
+- vlastníka,
+- defaultní stav,
+- segment nebo pravidlo zapnutí,
+- datum vytvoření,
+- plán odstranění nebo revize,
+- očekávaný dopad při zapnutí i vypnutí,
+- odkazy na ticket, dokumentaci a testy.
+
+Název piš podle rozhodnutí, ne podle implementačního detailu. `new_checkout` je lepší než `stripe_v2_temp`, ale ještě lepší je `checkout_split_payment_rollout`, protože říká, co řídí. Slovo `temp` je mimochodem takový malý pomníček optimismu.
+
+## Default musí být bezpečný
+
+Flag systém občas selže: konfigurace nejde načíst, cache je prázdná, administrační UI spadne nebo síť zrovna dělá divadlo. Proto musí mít každý flag definovaný bezpečný default.
+
+Praktické pravidlo:
+
+- release flag nové funkce: default vypnuto,
+- ops kill switch pro drahou nebo rizikovou funkci: default bezpečný režim,
+- permission flag: default podle serverově ověřeného tarifu, ne podle klienta,
+- experiment: default stabilní kontrolní varianta,
+- migrace: default cesta, která neztratí data.
+
+U kritických funkcí netahej rozhodnutí jen z frontendu. Klient může zlepšit UX, ale autoritativní kontrola musí být na serveru. Pokud uživatel vidí tlačítko díky flagu, ale server akci stejně nepovolí, je to otravné. Pokud server akci povolí jen proto, že si někdo přepsal klientský stav, je to průšvih.
+
+## Rollout dělej po segmentech, ne podle odvahy
+
+Postupné zapnutí má mít jasný rytmus. Nestačí „dáme to pěti procentům a uvidíme“. Uvidíme co? Kdy? Kdo se dívá? Co přesně nás zastaví?
+
+Jednoduchý rollout plán pro B2B SaaS:
+
+1. Interní tým a testovací tenant.
+2. Jeden dobrovolný zákazník s nízkým rizikem.
+3. Malý segment podle tarifu, regionu nebo scénáře použití.
+4. Větší segment po kontrole metrik a podpory.
+5. Plné zapnutí.
+6. Odstranění release flagu z kódu.
+
+Ke každé fázi napiš vstupní a výstupní podmínky. Například: „Pokračujeme z 10 % na 25 %, pokud za 24 hodin nepřibude víc než pět chyb `checkout.payment_failed_unexpected`, podpora nemá otevřený kritický ticket a konverze neklesne o víc než dohodnutý práh.“
+
+## Kill switch testuj před incidentem
+
+Ops flag, který nikdo nikdy nezkusil vypnout, není kill switch. Je to přání. Nouzová brzda musí být jednoduchá, rychlá a dostupná i člověku, který zrovna nezná detail implementace.
+
+Dobrá nouzová brzda má:
+
+- jasný název a popis dopadu,
+- ownera nebo službu odpovědnou za rozhodnutí,
+- log změny stavu,
+- možnost rychlého návratu,
+- krátkou instrukci pro podporu,
+- monitorovací signál, že se opravdu změnilo chování systému.
+
+Příklad: pokud integrace s externí fakturační službou začne timeoutovat, ops flag může zastavit automatické odesílání požadavků, ukládat úlohy do fronty a uživateli ukázat férový stav „fakturu připravujeme, odešleme ji po obnovení služby“. To je lepší než pět opakovaných pokusů, nekonečný spinner a Slack plný vykřičníků.
+
+## Experimenty nesmí být výmluva pro šmírování
+
+Experiment flag často svádí k tomu měřit všechno: kliky, scroll, pohyby myši, čas na prvku, e-mail, firmu, IP adresu a náladu počasí. Privacy-first přístup říká: začni hypotézou a sbírej jen data nutná k jejímu ověření.
+
+Lepší zadání experimentu:
+
+```text
+Hypotéza: Kratší onboarding zvýší dokončení prvního projektu.
+Segment: Nové trial účty v EU regionu.
+Varianty: Stávající onboarding / tříkrokový onboarding.
+Primární metrika: Dokončený první projekt do 7 dnů.
+Sekundární metrika: Počet ticketů k onboardingu.
+Data, která nesbíráme: Obsah projektu, texty uživatele, session replay.
+Retence: Agregace po 30 dnech, detailní eventy po 14 dnech smazat.
+Stop podmínka: Nárůst kritických ticketů nebo pokles aktivace nad práh.
+```
+
+Tím se experiment stává produktovým rozhodnutím, ne lovem dat pro pozdější „něco z toho určitě vyčteme“.
+
+## Odstraňování flagů je součást Definition of Done
+
+Nejčastější chyba není flag přidat. Nejčastější chyba je nikdy ho neodstranit. Starý release flag zvyšuje počet kombinací, které bys měl testovat, komplikuje refaktor a vytváří tichou nejistotu: „Může to ještě někdo mít vypnuté?“
+
+Zaveď jednoduché pravidlo:
+
+- release flag musí mít datum revize,
+- po plném rollout má vzniknout cleanup ticket,
+- cleanup je hotový až po smazání staré větve kódu, testů pro starou cestu a neplatné dokumentace,
+- dlouhodobé permission a ops flagy mají čtvrtletní revizi,
+- seznam aktivních flagů se kontroluje při každém větším releasu.
+
+U malého týmu stačí měsíční „flag gardening“: patnáct minut, seznam flagů, otázka „který z nich už nemá důvod existovat“. Není to sexy, ale ani požár v checkoutu není zrovna lázeňský wellness.
+
+## Loguj změny flagů, ne osobní detaily uživatelů
+
+Audit změn je důležitý, protože flag může změnit produkční chování bez deploymentu. Log ale nemá být skládka osobních údajů.
+
+U změny flagu obvykle stačí:
+
+- kdo změnu provedl,
+- kdy,
+- jaký flag,
+- původní a nový stav,
+- důvod nebo odkaz na ticket,
+- zasažený segment v agregované podobě,
+- korelační ID pro incident nebo rollout.
+
+Vyhni se ukládání obsahu zákaznických dat, kompletních payloadů, e-mailů v segmentech a dlouhodobých exportů „pro jistotu“. Pokud potřebuješ dohledat problém konkrétního zákazníka, používej interní ID a přístup omez podle role.
+
+## Checklist: feature flagy bez chaosu
+
+- [ ] Má každý flag typ: release, experiment, permission, ops nebo migration?
+- [ ] Má každý flag vlastníka a plán revize nebo odstranění?
+- [ ] Je default bezpečný při výpadku konfigurace?
+- [ ] Je server autoritativní pro oprávnění a placené funkce?
+- [ ] Má rollout jasné fáze, metriky a stop podmínky?
+- [ ] Je kill switch otestovaný před incidentem?
+- [ ] Sbírá experiment jen data nutná k ověření hypotézy?
+- [ ] Log změn flagů neobsahuje zbytečné osobní údaje?
+- [ ] Existuje měsíční rutina odstranění starých flagů?
+- [ ] Jsou zákaznické dopady popsatelné podporou lidskou větou?
+
+## Mini šablona feature flag karty
+
+```text
+# Feature flag: [název]
+
+Typ:
+Vlastník:
+Datum vytvoření:
+Datum revize / odstranění:
+
+Účel:
+Co flag zapíná:
+Co flag nevypíná:
+
+Default při chybě konfigurace:
+Autoritativní kontrola: server / klient / obojí
+
+Segmenty rollout:
+1.
+2.
+3.
+
+Metriky pro pokračování:
+Stop podmínky:
+Podpora — vysvětlení zákazníkovi:
+
+Data a privacy:
+Logované změny:
+Data, která záměrně nesbíráme:
+Retence detailních dat:
+
+Cleanup plán:
+Odkaz na ticket:
+```
+
+## Zdroje
+
+- Martin Fowler — Feature Toggles / Feature Flags: https://martinfowler.com/articles/feature-toggles.html
+- Martin Fowler — Feature Flag bliki: https://martinfowler.com/bliki/FeatureFlag.html
+- OWASP Logging Cheat Sheet — doporučení k aplikačnímu logování a datům, která do logů nepatří: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- Evropská komise — principy GDPR včetně minimalizace a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- EUR-Lex — GDPR, článek 5: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+
 # Pracovní log
+- 2026-10-02: Doplněna příloha „Feature flagy bez permanentního chaosu v produktu“ s rozlišením typů flagů, kartou metadat, bezpečnými defaulty, postupným rolloutem, kill switchem, privacy-first experimenty, rutinou odstraňování flagů, auditním logováním, checklistem, vyplnitelnou šablonou a ověřenými zdroji Martin Fowler, OWASP, Evropské komise a EUR-Lex.
 - 2026-10-02: Doplněna příloha „Reconciliation plateb bez účetní detektivky“ s párovacími klíči mezi produktem, platebním poskytovatelem, fakturací a účetnictvím, denní kontrolou nesouladů, pravidly pro výjimky, bankovní převody, minimalizaci dat, měsíční závěrku, reconciliation report šablonu a ověřené zdroje GDPR, Finanční správy a e-Sbírky.
 - 2026-10-02: Doplněna navazující příloha „Kvóty a spending capy bez trestání dobrých zákazníků“ s návrhem limitů podle ceny operace, kombinací klíčů, odpovědí `429`/`Retry-After`, kvótami, grace režimem, spending capy, privacy-first logováním, checklistem, limit policy šablonou a ověřenými zdroji RFC, MDN a OWASP.
 
