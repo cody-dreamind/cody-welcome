@@ -23493,7 +23493,32 @@ Dobrý odchozí webhook:
 - [ ] Payload validujeme podle typu události, tenant hranice a očekávaného stavu.
 - [ ] Běžné logy neobsahují celé payloady, tokeny ani zbytečné osobní údaje.
 - [ ] Retry a ruční replay znovu respektují idempotenci a bezpečnostní pravidla.
+- [ ] Existuje kill switch pro pozastavení zpracování rizikové integrace.
 - [ ] Odchozí webhooky mají verzi, podpis, dokumentaci a minimalistický payload.
+
+## Kill switch: kdy integraci raději zastavit
+
+Webhook integrace má mít brzdu, která se dá použít bez deploye. Ne proto, že chceš panikařit, ale protože některé chyby se nesmí násobit automatizací. Když platební brána posílá nečekané stavy, CRM vrací chybná ID zákazníků nebo partner opakuje tisíce eventů za minutu, systém má umět přijímat zprávy bezpečně a zároveň pozastavit jejich byznys dopad.
+
+Rozliš dvě brzdy:
+
+- **příjem událostí** — endpoint dál ověřuje podpis a ukládá minimální obálku, aby se neztratila auditní stopa;
+- **provedení akce** — worker nespouští změnu předplatného, fakturace, oprávnění nebo notifikací, dokud owner integrace nerozhodne.
+
+Praktický kill switch může být obyčejný stav v konfiguraci integrace: `active`, `paused_receive_only`, `paused_reject`, `disabled`. Výchozí reakce u kritických obchodních integrací bývá `paused_receive_only`: zprávy se ověří, deduplikují a uloží, ale zákaznický stav se nemění. U podezření na útok nebo kompromitovaný secret dává větší smysl `paused_reject`, rotace secretu a samostatný incidentní postup.
+
+Do provozní dokumentace si napiš spouštěče:
+
+- prudký nárůst eventů mimo běžný rytmus,
+- více chyb podpisu nebo timestampu za krátké okno,
+- duplicitní obchodní události se stejným dopadem,
+- neznámý typ události s vysokou kritičností,
+- chyba mapování tenantů nebo zákaznických účtů,
+- podezření, že payload obsahuje víc osobních dat, než bylo domluveno.
+
+Privacy-first detail: kill switch nesmí být výmluva pro ukládání celých payloadů „pro pozdější analýzu“. I při pozastavení ukládej jen obálku, nezbytná pole a důvod stavu. Pokud potřebuješ celý payload jako důkaz incidentu, omez přístup, nastav krátkou retenci a zapiš účel do incidentové karty.
+
+Mini pravidlo pro malé týmy: každý kritický webhook má mít ownera, náhradníka a jednu větu, co se stane, když ho na hodinu pozastavíš. Když tu větu neumíš napsat, integrace je důležitější, než sis přiznal. Gratuluju, právě sis našel provozní riziko bez placeného auditu.
 
 ## Mini šablona webhook karty
 
@@ -28497,233 +28522,8 @@ Vlastník:
 - Google SRE Book — Handling Overload, principy řízeného odmítání práce, graceful degradation a ochrany služby před přetížením: https://sre.google/sre-book/handling-overload/
 - OWASP API Security Top 10 — API4:2023 Unrestricted Resource Consumption, riziko neomezené spotřeby výpočetních, síťových a finančních zdrojů v API: https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/
 
-# Příloha: Webhooky a integrace bez tajného tunelu pro data
-
-Webhook je dohoda mezi dvěma systémy: „když se u mě něco stane, pošlu ti o tom zprávu“. Zní to nevinně. V praxi je to ale veřejně dostupný vstup do tvé aplikace, který často spouští platby, fakturaci, onboarding, synchronizaci CRM, notifikace nebo změny oprávnění. Takže ano, webhook není jen endpoint. Je to malá produkční hranice, která si zaslouží víc než route pojmenovanou `/hook` a víru v dobro lidstva.
-
-Dobře navržený webhook má čtyři vlastnosti: přijímá jen to, co umí ověřit, dělá co nejméně práce v HTTP requestu, umí bezpečně opakovat stejnou událost a neloguje data jen proto, že JSON vypadal zajímavě.
-
-> Codyho komentář: Webhook bez podpisu je jako poštovní schránka, která po každém dopisu automaticky zaplatí fakturu. Technicky fascinující, obchodně lehce infarktové.
-
-## Nejprve rozhodni, co webhook smí změnit
-
-Než začneš řešit knihovnu, HMAC a frontu, napiš si dopad události. Jinak budeš zabezpečovat cosi neurčitého.
-
-Rozděl webhooky do tří tříd:
-
-| Třída | Příklad | Dopad | Základní pravidlo |
-| --- | --- | --- | --- |
-| Informační | nový komentář, změna stavu v CRM | nízký až střední | ověřit podpis, uložit event, zpracovat asynchronně |
-| Obchodní | zaplacená faktura, selhaná platba, nový subscription stav | vysoký | idempotence, audit, ruční fallback, test duplicit |
-| Přístupový | vytvoření účtu, změna role, deaktivace uživatele | velmi vysoký | minimální oprávnění, revize mapování, explicitní odmítnutí neznámých stavů |
-
-Tahle klasifikace rozhodne, jestli stačí jednoduchá fronta a log event ID, nebo potřebuješ samostatný auditní záznam, manuální kontrolu a upozornění člověka při podezřelém stavu.
-
-## Ověření: podpis před parsováním
-
-Základní pravidlo: nejdřív ověř, potom věř. U webhooků to doslova znamená ověřit podpis nad raw body požadavku dřív, než JSON přeparsuje framework, middleware ho upraví nebo logovací vrstva začne ukládat payload.
-
-Praktický postup:
-
-1. Přijmi pouze očekávanou metodu, typicky `POST`.
-2. Ulož raw body do proměnné, ne do logu.
-3. Načti podpisovou hlavičku podle poskytovatele.
-4. Ověř podpis oficiální knihovnou nebo přesně podle dokumentace.
-5. Porovnávej v constant-time režimu, ne obyčejným `==`.
-6. Při chybě vrať `401` nebo `403` bez detailního vysvětlení.
-7. Až potom parsuj payload a rozhoduj, co dál.
-
-GitHub například používá hlavičku `X-Hub-Signature-256` a upozorňuje na constant-time porovnání. Stripe zase vyžaduje raw body pro ověření `Stripe-Signature` a doporučuje rychle vrátit úspěšný `2xx` stav před složitou logikou. OWASP Webhook Security Cheat Sheet shrnuje stejný princip obecně: HMAC-SHA256, jeden secret na webhook, bezpečné uložení secretu a redakce podpisových hlaviček z logů.
-
-Co nikdy nedělat:
-
-- nepřijímat webhook jen podle IP adresy jako jediný důkaz identity,
-- neukládat podpisové secrety do repozitáře ani image,
-- nelogovat celé hlavičky a raw payload „pro jistotu“,
-- nepoužívat jeden sdílený secret pro všechny integrace,
-- neprozrazovat v chybové odpovědi, jestli chyběl podpis, secret nebo jen neseděl hash.
-
-IP allowlist může být doplňková brzda. Není to důkaz. Egress rozsahy se mění, některé služby používají sdílenou infrastrukturu a útočníkovi někdy stačí kompromitovaný partner, ne kouzelný server v kapuci.
-
-## Rychlá odpověď, práce do fronty
-
-Webhook endpoint nemá být místo, kde se dělá fakturace, posílají e-maily, aktualizuje CRM a ještě se přepočítá analytika. Endpoint má ověřit zprávu, uložit minimální záznam a předat práci dál.
-
-Bezpečný tok:
-
-```text
-provider -> webhook endpoint -> ověření podpisu -> uložit event envelope -> fronta -> worker -> doménová akce -> audit
-```
-
-Endpoint by měl ideálně vrátit úspěch, jakmile je událost ověřená a trvale uložená nebo zařazená. Když bude čekat na externí CRM, účetní API nebo e-mailovou službu, zbytečně vyrobí timeout, retry a dvojité zpracování.
-
-V event envelope ukládej hlavně:
-
-- poskytovatele a název integrace,
-- event ID nebo delivery ID,
-- typ události,
-- čas doručení,
-- výsledek ověření,
-- minimální referenci na objekt,
-- stav zpracování,
-- korelační ID pro interní logy.
-
-Payload ukládej celý jen tehdy, když pro to máš jasný účel, retenční dobu a bezpečnostní důvod. Často stačí uložit event ID a potřebná pole vytáhnout do doménové tabulky. Pokud později potřebuješ detail, můžeš si ho u některých poskytovatelů znovu načíst přes API podle ID. Datový vysavač tady fakt nepotřebuje brigádu.
-
-## Idempotence: stejná událost nesmí udělat dvojitou škodu
-
-Poskytovatelé webhooky opakují. Síť spadne, endpoint vrátí chybu, request se ztratí nebo se administrátor rozhodne událost znovu poslat ručně. To není výjimka. To je normální počasí.
-
-MDN popisuje idempotenci jako stav, kdy má jeden požadavek na server stejný zamýšlený efekt jako několik stejných požadavků. U webhooků to znamená: stejná událost nesmí dvakrát založit účet, dvakrát poslat přístup, dvakrát vytvořit fakturu nebo dvakrát spustit drahý job.
-
-Praktická pravidla:
-
-- po ověření podpisu ulož event ID do tabulky zpracovaných událostí,
-- na event ID nebo kombinaci `provider + event_id` dej unikátní constraint,
-- duplicitní ověřenou událost přeskoč a vrať úspěch,
-- side effecty navrhuj s vlastním idempotency key,
-- pro obchodní dopady ukládej vazbu „event -> akce -> výsledek“,
-- retenční dobu záznamu drž minimálně po dobu retry okna poskytovatele.
-
-Příklad pro platbu:
-
-```text
-payment.succeeded / evt_123 přijde poprvé:
-- podpis sedí
-- event uložen
-- subscription označena jako aktivní
-- audit zapsán
-- výsledek: processed
-
-payment.succeeded / evt_123 přijde znovu:
-- podpis sedí
-- event už existuje
-- worker neaktivuje nic podruhé
-- výsledek: duplicate_ignored
-```
-
-Tahle nuda je přesně to, co chceš. U peněz, účtů a práv je nuda prémiová funkce.
-
-## Replay útok a čerstvost zprávy
-
-Podpis říká, že zpráva odpovídá secretu. Neříká automaticky, že ji někdo neposílá znovu. Pokud protokol obsahuje podepsaný timestamp, kontroluj toleranci času. Stripe knihovny běžně pracují s tolerancí v řádu minut; OWASP doporučuje validovat podepsaný timestamp a po ověření cachovat event ID proti opakovanému zpracování.
-
-Praktická obrana:
-
-- synchronizuj čas serveru přes NTP,
-- odmítej zprávy mimo toleranční okno, pokud to poskytovatel podporuje,
-- deduplikuj event ID i mimo krátké replay okno,
-- u poskytovatelů bez podepsaného timestampu spoléhej hlavně na idempotenci a doménové kontroly,
-- neber delivery ID automaticky jako podepsané event ID, pokud to dokumentace netvrdí.
-
-Rozdíl je důležitý: delivery ID může označovat konkrétní doručení, zatímco event ID označuje obchodní událost. Když si je spleteš, můžeš po redelivery stejné události spustit akci znovu.
-
-## Privacy-first integrační hranice
-
-Webhooky jsou lákavé místo pro sběr dat, protože payload často obsahuje víc, než aplikace potřebuje. Privacy-first přístup říká: přijmi jen integraci, které rozumíš, a ukládej jen to, co opravdu používáš.
-
-Před zapnutím integrace si polož otázky:
-
-- Jaká data posílá poskytovatel v každém typu události?
-- Potřebujeme celý payload, nebo jen ID a stav?
-- Kdo má k payloadům přístup v administraci a logech?
-- Jak dlouho data držíme?
-- Jsou v payloadu údaje zákazníka, obsah zpráv, platební detaily nebo interní poznámky?
-- Je poskytovatel, fronta, logování a monitoring provozně i smluvně v EU, nebo aspoň vědomě zdůvodněná výjimka?
-
-Pokud integrace posílá osobní data do mimoevropské služby, neskrývej to v technické poznámce. Zapiš ji do datové mapy, zkontroluj smluvní roli dodavatele, subprocesory, retenční nastavení a důvod použití. Ne každý webhook je problém. Problém je webhook, o kterém nikdo za měsíc neví, co vlastně dělá.
-
-## Testovací scénáře, které mají bolet dřív než produkce
-
-Webhook otestuj proti šťastné cestě i proti bordelu. Hlavně proti bordelu.
-
-Minimální sada testů:
-
-- platná událost se zpracuje jednou,
-- stejná událost doručená dvakrát nespustí side effect podruhé,
-- chybějící podpis skončí odmítnutím,
-- špatný podpis skončí odmítnutím,
-- změněný payload po podpisu neprojde,
-- neznámý typ události se bezpečně uloží nebo ignoruje podle pravidel,
-- worker spadne uprostřed práce a job jde bezpečně zopakovat,
-- externí služba je nedostupná a systém nevrátí uživateli nesmyslný stav,
-- payload s osobními daty se neobjeví v běžných logech.
-
-Pro obchodní webhooky přidej ruční replay scénář: administrátor umí podle event ID zjistit stav, znovu zařadit zpracování nebo označit událost jako ručně vyřešenou. Bez přístupu k citlivému obsahu, pokud není nutný.
-
-## Checklist: webhooky bez datového tunelu
-
-- [ ] Každý webhook má vlastní secret a vlastní účel.
-- [ ] Podpis se ověřuje nad raw body před parsováním.
-- [ ] Porovnání podpisu běží constant-time metodou nebo oficiální knihovnou.
-- [ ] Endpoint rychle ukládá event a práci předává do fronty.
-- [ ] Event ID má unikátní constraint proti duplicitám.
-- [ ] Duplicitní ověřené události vrací úspěch bez opakování side effectů.
-- [ ] Replay ochrana kontroluje timestamp, pokud ho poskytovatel podepisuje.
-- [ ] Payloady se nelogují celé a mají jasnou retenci.
-- [ ] Integrace je zapsaná v datové mapě včetně dodavatele a účelu.
-- [ ] Existuje test pro špatný podpis, duplicitní event a pád workeru.
-- [ ] Secret rotace má plán bez dlouhého souběhu starého a nového secretu.
-- [ ] Administrace ukazuje stav události bez zbytečného odhalení dat.
-
-## Vyplnitelná integrační karta
-
-```text
-# Webhook karta: [název integrace]
-
-## Účel
-Jaké rozhodnutí nebo proces webhook spouští:
-
-## Poskytovatel
-Název služby:
-Smluvní role:
-Region / provoz:
-Kontakt na dokumentaci:
-
-## Události
-Povolené typy eventů:
-Neznámé eventy zpracujeme jak:
-
-## Bezpečnost
-Podpisová hlavička:
-Ověřovací knihovna / postup:
-Secret uložen kde:
-Rotace secretu:
-Replay ochrana:
-
-## Idempotence
-Event ID:
-Unikátní klíč:
-Retry okno poskytovatele:
-Chování při duplicitě:
-
-## Data
-Ukládaná pole:
-Celý payload ukládáme: ano/ne
-Retence:
-Kdo má přístup:
-Logovací pravidla:
-
-## Provoz
-Fronta / worker:
-Alert při selhání:
-Ruční replay postup:
-Owner:
-Datum poslední revize:
-```
-
-Webhooky jsou skvělé, když jsou nudné, ověřené a opakovatelné. Jsou nebezpečné, když se tváří jako rychlá integrace „jen na pár eventů“ a za půl roku přes ně teče fakturace, onboarding i zákaznická data. Když je navrhneš jako malou bezpečnou hranici, získáš automatizaci bez tajného tunelu pro data. Což je přesně ten druh nudné magie, kterou má malý evropský SaaS milovat.
-
-## Zdroje
-
-- OWASP Cheat Sheet Series — Webhook Security, doporučení pro HMAC-SHA256, replay ochranu, správu secretů, idempotenci a bezpečné zpracování duplicit: https://cheatsheetseries.owasp.org/cheatsheets/Webhook_Security_Cheat_Sheet.html
-- Stripe Docs — Receive Stripe events in your webhook endpoint, raw body pro ověření podpisu, `Stripe-Signature`, rychlá `2xx` odpověď a testování webhooků: https://docs.stripe.com/webhooks
-- GitHub Docs — Validating webhook deliveries, hlavička `X-Hub-Signature-256`, HMAC-SHA256 a constant-time porovnání podpisů: https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries
-- MDN Web Docs — Idempotent, vysvětlení idempotence a rozdíl mezi opakováním požadavku a jeho zamýšleným efektem na serveru: https://developer.mozilla.org/en-US/docs/Glossary/Idempotent
-
-
 # Pracovní log
-- 2026-10-02: Doplněna příloha „Webhooky a integrace bez tajného tunelu pro data“ s klasifikací dopadu, ověřováním podpisu nad raw body, rychlým zařazením do fronty, idempotencí, replay ochranou, privacy-first datovou hranicí, testovacími scénáři, checklistem, integrační kartou a ověřenými zdroji OWASP, Stripe, GitHub a MDN.
+- 2026-10-02: Rozšířena existující příloha „Webhooky a integrace bez slepé důvěry v cizí požadavky“ o kill switch pro pozastavení rizikové integrace, oddělení příjmu událostí od byznys akce, spouštěče pro zastavení, privacy-first pravidla důkazních payloadů a doplněný checklist.
 
 - 2026-10-01: Doplněna příloha „Fronty a backpressure bez ztráty důvěry“ s pravidly pro dlouhé joby, odpovědí `202 Accepted`, backpressure při přetížení, idempotencí, prioritami, privacy-first logováním, UX stavů, provozní rutinou, checklistem, job kartou a ověřenými zdroji MDN, Google SRE a OWASP.
 
