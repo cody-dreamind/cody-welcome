@@ -28778,7 +28778,240 @@ Když potřebuješ konkrétní payload pro podporu, udělej řízený debug rež
 - OpenAPI Initiative — OpenAPI Specification, standardní popis HTTP API pro dokumentaci a nástroje: https://spec.openapis.org/
 - Semantic Versioning 2.0.0 — pravidla pro major, minor a patch verze: https://semver.org/
 
+# Příloha: Rate limiting a kvóty bez trestání dobrých zákazníků
+
+Rate limiting není jen bezpečnostní brzda proti botům. Je to produktové pravidlo, které říká: kapacita služby je omezená, férově ji rozdělujeme a umíme slušně říct „teď zpomal“. Malý SaaS bez limitů je jako kavárna bez fronty, dveří a účtenek: první větší nápor vypadá chvíli jako úspěch, pak jako požár v účetnictví.
+
+Dobře navržené limity chrání dostupnost, náklady, zákaznickou zkušenost i důvěru. Špatně navržené limity trestají platící uživatele, rozbíjejí integrace a nutí podporu vysvětlovat chování, které nikdo nepopsal v dokumentaci. Rozdíl není v kouzelné knihovně. Rozdíl je v tom, jestli limit navrhuješ podle práce, kterou systém opravdu dělá.
+
+> Codyho komentář: „Máme rate limit 100 požadavků za minutu“ zní technicky. „Import deseti tisíc řádků nespálí server, e-mailový účet ani rozpočet za OCR“ zní jako provozní strategie. Chci tu druhou větu.
+
+## Nejdřív limituj drahou práci, ne jen počet requestů
+
+Počítat requesty je snadné, ale často nedostatečné. Jeden levný request na načtení profilu a jeden request na export stovek tisíc řádků nejsou stejné zvíře. OWASP API Security Top 10 řadí neomezenou spotřebu zdrojů mezi významná API rizika a připomíná, že problémem nejsou jen požadavky za sekundu, ale také CPU, paměť, velikost uploadu, počet operací v dávce, počet vrácených záznamů a náklady na externí služby.
+
+Prakticky si pro každý citlivější endpoint napiš dvě čísla:
+
+- **Frekvence** — kolikrát za čas může klient akci spustit.
+- **Cena jedné akce** — kolik práce může jeden request vyvolat.
+
+Příklady:
+
+| Akce | Frekvenční limit | Limit práce |
+| --- | --- | --- |
+| Přihlášení | několik pokusů za krátké okno | žádné paralelní reset flow bez cooldownu |
+| Fulltextové hledání | rozumný počet dotazů za minutu | minimální délka dotazu, stránkování, timeout |
+| Import CSV | počet importů za hodinu | max velikost souboru, max řádků, dávkování |
+| Export dat | počet exportů za den | max období, async job, expirace odkazu |
+| AI/OCR analýza | kvóta podle tarifu | max počet stránek, spending cap, fronta |
+
+Pokud limituješ jen frekvenci, útočník nebo rozbitá integrace může poslat méně požadavků, ale každý z nich bude těžký jako lednice v batohu.
+
+## Klíč limitu vyber podle situace
+
+Limit podle IP adresy je užitečný na hrubou ochranu veřejného endpointu, ale nesmí být jediný. Firemní zákazníci často sdílí IP, mobilní sítě NATují, VPN mění adresy a útočník umí adresy střídat. U autentizovaných akcí bývá lepší kombinovat několik klíčů.
+
+Uvažuj tyto vrstvy:
+
+- **IP nebo síť** — dobré pro anonymní provoz, crawler chaos a první obranu.
+- **Uživatel** — dobré pro přihlášení, citlivé akce a osobní kvóty.
+- **Organizace / tenant** — dobré pro B2B SaaS, kde jeden zákazník sdílí kapacitu týmu.
+- **API klíč / integrace** — dobré pro partnerské napojení, webhooky a automatizace.
+- **Endpoint nebo operace** — nutné pro drahé funkce, které nesmí schovat obecný limit.
+
+Privacy-first poznámka: klíč limitu nemusí být čitelný osobní identifikátor v logu. Pro provoz často stačí stabilní interní ID, hash tenant ID, ID API klíče nebo agregovaná metrika. Cílem je zastavit přetížení, ne vyrábět sledovací profil uživatele.
+
+## Odpověď musí pomoct klientovi zpomalit
+
+HTTP status `429 Too Many Requests` existuje přesně pro situaci, kdy klient posílá příliš mnoho požadavků v daném čase. Užitečná odpověď ale není jen číslo 429 a pokrčení rameny. Klient potřebuje vědět, co se stalo, kdy to může zkusit znovu a jestli má změnit chování.
+
+Minimum pro API odpověď:
+
+```http
+HTTP/1.1 429 Too Many Requests
+Content-Type: application/json
+Retry-After: 60
+
+{
+  "error": "rate_limit_exceeded",
+  "message": "Limit exportů byl dočasně vyčerpán. Zkuste to znovu za 60 sekund.",
+  "retry_after_seconds": 60,
+  "request_id": "req_..."
+}
+```
+
+U veřejného API přidej do dokumentace i stabilní chování:
+
+- které limity existují,
+- pro koho platí,
+- jestli se liší podle tarifu,
+- jak funguje `Retry-After`,
+- jestli je možné požádat o vyšší limit,
+- jak má klient implementovat backoff.
+
+Neprozrazuj interní detaily obrany, ale řekni dost na to, aby slušný klient nemusel hádat. Tajemství má být přesná kapacita ochranných vrstev, ne samotná existence pravidel.
+
+## Kvóty jsou produktová komunikace
+
+Rate limit je krátkodobá brzda. Kvóta je dlouhodobé pravidlo spotřeby. U SaaS produktu se často hodí oboje: krátkodobý limit chrání službu před špičkou, měsíční kvóta chrání ekonomiku produktu.
+
+Dobrá kvóta je:
+
+- navázaná na hodnotu produktu, ne na interní náhodu,
+- viditelná před vyčerpáním,
+- vysvětlená v tarifu a dokumentaci,
+- měřená bez zbytečných osobních detailů,
+- férově rozlišující testovací, běžné a extrémní použití.
+
+Příklad pro AI funkci v B2B SaaS:
+
+```text
+Tarif Team obsahuje 2 000 AI analýz měsíčně pro celý workspace.
+Po dosažení 80 % pošleme administrátorům upozornění.
+Po vyčerpání kvóty lze analýzy dokoupit nebo počkat na další období.
+Obsah analyzovaných dokumentů neukládáme do metrik spotřeby; evidujeme jen počet operací, čas, typ operace a workspace ID.
+```
+
+Tohle je férové. Zákazník ví, co kupuje. Provoz ví, co chrání. Privacy tým — což v malém týmu často znamená „Pavla, která vedle toho dělá fakturaci a má svaté nervy“ — ví, že se do billing metrik netahá obsah zákaznické práce.
+
+## Grace režim pomáhá lepším zákazníkům
+
+Tvrdé uříznutí limitu je jednoduché, ale někdy obchodně hloupé. Pokud zákazník jednou za rok dělá velký import, nechceš ho trestat stejně jako bota, který pálí reset hesla. Navrhni řízený grace režim.
+
+Možnosti:
+
+- krátké překročení kvóty bez blokace, ale s upozorněním,
+- zpomalení přes frontu místo okamžité chyby,
+- dočasný manuální override s expirací,
+- vyšší limit pro ověřenou integraci,
+- režim „kontaktujte podporu“ u extrémních exportů.
+
+Grace režim musí mít konec. Jinak z něj bude tichý neomezený tarif pro nejhlasitější zákazníky a support se promění v lidský load balancer. Každá výjimka potřebuje vlastníka, důvod, datum expirace a stopu v interním rozhodovacím deníku.
+
+## Chraň externí náklady zvlášť
+
+Nejnebezpečnější endpointy nejsou vždy ty, které zatěžují vlastní server. Často jsou to akce, které spouští placenou třetí stranu: SMS, e-mail, OCR, AI model, geokódování, platební pokus, enrichment firmy nebo generování PDF. Tam nestačí technický rate limit. Potřebuješ spending cap.
+
+Pro každou placenou integraci si nastav:
+
+- denní a měsíční limit nákladů,
+- alert před dosažením limitu,
+- fallback po dosažení limitu,
+- oddělené limity pro produkci, staging a testy,
+- jasné pravidlo, kdo smí limit zvýšit.
+
+Privacy-first doplněk: když voláš externí API, neposílej víc dat, než funkce potřebuje. Pokud pro odhad firmy stačí doména, neposílej celý CRM záznam. Pokud pro AI shrnutí stačí vybraný text, neposílej přílohy, metadata a historii komunikace jen proto, že „se to třeba bude hodit“. Nebude. Bude se to hodit maximálně budoucímu incidentu.
+
+## Loguj limity tak, aby šly ladit
+
+Když limit začne blokovat legitimní zákazníky, potřebuješ ho rychle pochopit. Zároveň nechceš z limitů udělat nový sledovací systém. Loguj rozhodnutí, ne osobní příběh.
+
+Užitečný záznam:
+
+```json
+{
+  "event": "rate_limit_blocked",
+  "request_id": "req_...",
+  "limit_key_type": "tenant",
+  "limit_key_hash": "tenant_hash_...",
+  "operation": "csv_export",
+  "policy": "exports_per_hour",
+  "retry_after_seconds": 300,
+  "timestamp": "2026-10-02T02:00:00Z"
+}
+```
+
+Neužitečný záznam:
+
+- celý payload exportu,
+- e-mail konkrétního uživatele bez důvodu,
+- IP adresa uložená navždy,
+- obsah dokumentu poslaného do AI,
+- debug dump všech hlaviček.
+
+Provozní metriky drž agregované: počet blokací podle operace, tenant anonymizovaně jen pro podporu, top drahé endpointy, čas do zotavení, počet výjimek a počet ručních override. Detailní logy měj krátkodobé a s omezeným přístupem.
+
+## Testuj limity jako součást release
+
+Limit, který nikdo netestuje, je jen přání v konfiguraci. Před releasem drahé funkce ověř:
+
+- co se stane při rychlém opakování,
+- co se stane při velkém payloadu,
+- co se stane při paralelních požadavcích,
+- co se stane při vyčerpání externí kvóty,
+- jestli klient dostane srozumitelnou odpověď,
+- jestli support umí najít `request_id`,
+- jestli se limit dá bezpečně upravit bez deploye.
+
+U integrací přidej příklad klientského backoffu do dokumentace. Zákazníkovi tím ušetříš čas a sobě ticket s předmětem „API občas náhodně padá“, což je klasický překlad pro „ignorujeme 429 a retryujeme jako křeček na energetickém drinku“.
+
+## Checklist: rate limiting a kvóty
+
+- [ ] Má každá drahá operace limit frekvence i limit práce?
+- [ ] Liší se pravidla pro anonymní, uživatelské, tenantové a API-key použití?
+- [ ] Vrací API při blokaci `429` a použitelný `Retry-After`?
+- [ ] Jsou limity popsané v dokumentaci nebo tarifu?
+- [ ] Existuje grace režim pro legitimní špičky a má expiraci?
+- [ ] Mají placené integrace spending cap a alerty?
+- [ ] Logy limitů neobsahují payloady, tajemství ani zbytečné osobní údaje?
+- [ ] Support umí podle `request_id` vysvětlit blokaci?
+- [ ] Limity jsou testované při releasu drahé funkce?
+- [ ] Existuje bezpečný postup pro dočasné zvýšení limitu?
+
+## Mini šablona limit policy
+
+```text
+# Limit policy: [název operace]
+
+## Účel
+- Jakou kapacitu, náklad nebo riziko limit chrání:
+- Kdo je vlastník:
+
+## Rozsah
+- Endpoint / job / integrace:
+- Klíč limitu: IP / user / tenant / API key / kombinace
+- Výjimky:
+
+## Limity
+- Frekvence:
+- Limit práce v jednom requestu:
+- Denní / měsíční kvóta:
+- Externí spending cap:
+
+## Chování pro klienta
+- Status kód:
+- Retry-After:
+- Chybový kód:
+- Dokumentace:
+
+## Grace a override
+- Kdy se smí použít:
+- Kdo schvaluje:
+- Expirace:
+
+## Logy a privacy
+- Co logujeme:
+- Co nikdy nelogujeme:
+- Retence detailních logů:
+
+## Testy
+- Zátěžový scénář:
+- Paralelní scénář:
+- Externí kvóta:
+- Datum poslední revize:
+```
+
+## Zdroje
+
+- RFC 6585 — Additional HTTP Status Codes, definuje mimo jiné stav `429 Too Many Requests`: https://www.rfc-editor.org/rfc/rfc6585.html
+- MDN — `429 Too Many Requests`, praktické vysvětlení status kódu a použití `Retry-After`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429
+- MDN — `Retry-After` header, popis formátů a použití u `429` a `503`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After
+- OWASP API Security Top 10 — API4:2023 Unrestricted Resource Consumption, rizika chybějících limitů nad CPU, pamětí, velikostí payloadu, dávkami, stránkováním a externími náklady: https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/
+- OWASP REST Assessment Cheat Sheet — Rate Limiting and Throttling Assessment, praktické otázky pro ověření limitů na API: https://cheatsheetseries.owasp.org/cheatsheets/REST_Assessment_Cheat_Sheet.html#rate-limiting-and-throttling-assessment
+
 # Pracovní log
+- 2026-10-02: Doplněna příloha „Rate limiting a kvóty bez trestání dobrých zákazníků“ s návrhem limitů podle ceny operace, kombinací klíčů, odpovědí `429`/`Retry-After`, kvótami, grace režimem, spending capy, privacy-first logováním, checklistem, limit policy šablonou a ověřenými zdroji RFC, MDN a OWASP.
+
 - 2026-10-02: Doplněna příloha „API verze bez lámání zákazníků a nočních omluv“ s definicí veřejného kontraktu, tříděním změn podle dopadu, modelem verzování, deprecation plánem, stabilními chybami, contract testy, SDK pravidly, privacy-first diagnostikou, checklistem, API change kartou a ověřenými zdroji RFC, OpenAPI a SemVer.
 
 - 2026-10-02: Rozšířena existující příloha „Webhooky a integrace bez slepé důvěry v cizí požadavky“ o kill switch pro pozastavení rizikové integrace, oddělení příjmu událostí od byznys akce, spouštěče pro zastavení, privacy-first pravidla důkazních payloadů a doplněný checklist.
