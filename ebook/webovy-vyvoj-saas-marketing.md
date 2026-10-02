@@ -32197,7 +32197,208 @@ WCAG 2.2 u chybových stavů zdůrazňuje, že chyba má být identifikovaná a 
 - Google Search Central: doporučení vytvářet užitečný, spolehlivý obsah primárně pro lidi: https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 - W3C WCAG 2.2 Understanding SC 3.3.1 Error Identification — chyby mají být identifikované a popsané textem: https://www.w3.org/WAI/WCAG22/Understanding/error-identification
 
+# Příloha: In-app notifikace a preference bez notifikačního pekla
+
+Notifikace jsou v SaaS jako koření. Trocha pomůže, moc zničí jídlo a zákazník začne nenápadně hledat tlačítko „vypnout všechno, prosím, jsem člověk“. Dobrá notifikace nepřerušuje práci jen proto, že aplikace umí poslat zprávu. Pomáhá uživateli všimnout si změny, kterou by jinak musel hlídat ručně.
+
+Privacy-first přístup tady neznamená jen méně e-mailů. Znamená jasně oddělit provozní upozornění, bezpečnostní zprávy, produktové tipy, obchodní komunikaci a interní signály. Každá kategorie má jiný účel, jinou naléhavost, jinou retenci a jiné očekávání uživatele. Když je smícháš do jednoho proudu, vznikne notifikační guláš s příchutí ztracené důvěry.
+
+> Codyho komentář: Nejlepší notifikační centrum není to, které má nejvíc přepínačů. Je to to, kde uživatel vůbec nemusí přemýšlet, proč mu něco přišlo.
+
+## Nejdřív rozděl typy zpráv
+
+Začni jednoduchou mapou zpráv. Ne podle kanálu, ale podle účelu. Stejná událost může mít jiný význam podle role uživatele: vlastník workspace potřebuje vědět o fakturaci, běžný člen týmu spíš o zmínce v komentáři.
+
+Praktické kategorie:
+
+- **Bezpečnostní** — nové přihlášení, změna hesla, přidání administrátora, export dat.
+- **Provozní** — dokončený import, selhaný export, zpožděná fronta, změna dostupnosti funkce.
+- **Kolaborační** — zmínka, přiřazení úkolu, komentář, žádost o schválení.
+- **Produktové** — tip k funkci, onboardingový krok, upozornění na změnu rozhraní.
+- **Obchodní** — novinky, nabídky, upsell, newsletter.
+
+Každou kategorii napiš jako pracovní větu:
+
+```text
+Tato notifikace pomáhá [role] udělat [akci] kvůli [dopadu], bez ukládání nebo posílání [zbytečná data].
+```
+
+Příklad:
+
+```text
+Notifikace o dokončeném exportu pomáhá vlastníkovi workspace stáhnout soubor, aniž bychom posílali export jako přílohu nebo zveřejňovali obsah dat v e-mailu.
+```
+
+Tahle věta tě donutí odlišit užitečnou zprávu od interního šumu převlečeného za péči o zákazníka.
+
+## Kanál vybírej podle naléhavosti a citlivosti
+
+Ne každá zpráva patří do e-mailu, push notifikace nebo modalu. Kanál je součást UX rozhodnutí i datového rizika.
+
+Jednoduché pravidlo:
+
+- **Inline stav** použij, když se změna týká právě otevřené obrazovky.
+- **In-app inbox** použij pro věci, které mají historii a dají se vyřídit později.
+- **E-mail** použij, když uživatel nemusí být právě v aplikaci nebo jde o účetní/provozní doklad.
+- **Push / systémovou notifikaci** použij jen pro opravdu časově důležité události a až po vědomém povolení.
+- **Modal** použij výjimečně, když bez potvrzení nejde bezpečně pokračovat.
+
+Technicky lákavé neznamená produktově správné. MDN u Notifications API upozorňuje, že webové notifikace vyžadují bezpečný kontext a uživatelské oprávnění; žádost o oprávnění má být navázaná na gesto uživatele, ne vystřelená hned po načtení stránky. To je dobré produktové pravidlo i mimo prohlížečové API: nejdřív vysvětli hodnotu, pak žádej o kanál.
+
+Špatně:
+
+```text
+Uživatel otevře aplikaci poprvé a dostane tři žádosti: cookies, newsletter, push notifikace.
+```
+
+Lépe:
+
+```text
+Uživatel dokončí první důležitou akci. Aplikace nabídne: „Chcete dostat upozornění, až bude export hotový? Můžete to kdykoli vypnout.“
+```
+
+## Preferenční centrum musí být srozumitelné
+
+Preference nemají být trest za to, že uživatel chce méně hluku. Když mu dáš dvacet technických přepínačů bez vysvětlení, stejně nakonec vypne všechno. Nebo horší varianta: nevypne nic a začne tě ignorovat.
+
+Dobré preferenční centrum má:
+
+- kategorie podle práce uživatele, ne podle interních eventů,
+- jasné vysvětlení, co vypnutí způsobí,
+- samostatné nastavení pro e-mail, in-app a push,
+- výchozí hodnoty podle role a rizika,
+- rychlé „ztlumit na týden“ pro méně kritické zprávy,
+- oddělené bezpečnostní zprávy, které nejde jednoduše vypnout, ale jdou vysvětlit.
+
+Příklad kategorií:
+
+```text
+Bezpečnost účtu: povinné e-maily při změně přístupu a přihlášení z nového zařízení.
+Moje práce: zmínky, přiřazení, žádosti o schválení.
+Provoz workspace: importy, exporty, limity, fakturace.
+Tipy k produktu: volitelné, maximálně jednou týdně.
+Novinky a marketing: samostatný souhlas / odhlášení.
+```
+
+Privacy-first detail: obchodní komunikaci nedávej do stejného přepínače jako provozní zprávy. Když člověk vypne newsletter, nesmí tím přijít o upozornění na fakturu. Když vypne zmínky v komentářích, neznamená to souhlas s tím, že mu budeš posílat „užitečné tipy“ každý pátek. Ano, i pátek má lidská práva.
+
+## Obsah notifikace minimalizuj
+
+Notifikace často unikají mimo bezpečný kontext aplikace: objeví se na zamčené obrazovce, v e-mailové schránce, v notifikačním centru operačního systému nebo v interním chatu. Proto do nich nepatří celý obsah zprávy, osobní data navíc ani citlivé detaily.
+
+Bezpečnější vzory:
+
+- „Máte novou zmínku v projektu Alfa“ místo celého komentáře.
+- „Export je připraven ke stažení“ místo přiloženého souboru.
+- „Byl přidán nový administrátor“ místo seznamu všech oprávnění v e-mailu.
+- „Platba vyžaduje pozornost“ místo celé fakturační historie.
+- „Import selhal, otevřete detail“ místo kompletního chybového payloadu.
+
+U citlivých akcí používej přihlášení jako bezpečnostní hranici. E-mail nebo push má být upozornění, ne přepravka dat. Pokud zpráva obsahuje odkaz, hlídej expiraci tokenu, jednorázovost a audit kliknutí podle rizika. U běžného upozornění stačí odkaz do aplikace za přihlášením.
+
+GDPR princip minimalizace údajů je jednoduchý produktový kompas: zpracovávej jen údaje přiměřené, relevantní a omezené na nezbytný rozsah vzhledem k účelu. U notifikací to znamená poslat tolik kontextu, aby člověk věděl, proč má kliknout — ne tolik, aby se z notifikace stal malý export databáze.
+
+## Přístupnost: status zprávy bez skákání po obrazovce
+
+In-app stavové zprávy musí být čitelné i pro lidi, kteří nepoužívají aplikaci vizuálně. WCAG 2.2 u kritéria 4.1.3 řeší status messages: když se obsah změní bez přesunu focusu, má být změna programově zjistitelná tak, aby ji mohla oznámit asistivní technologie. Prakticky: úspěch formuláře, chyba validace, průběh operace nebo dokončené vyhledávání nemají být jen zelený toast v rohu.
+
+Pravidla pro UI:
+
+- úspěšné a informační zprávy dávej do `role="status"` nebo odpovídající live region logiky,
+- chybové a naléhavé zprávy používej opatrně s `role="alert"`, ne na každé „uloženo“,
+- toast nech na obrazovce dost dlouho a nabídni historii důležitých zpráv,
+- nepřenášej focus bez důvodu,
+- u formulářů ukaž chybu u pole i v souhrnu,
+- nepoužívej jen barvu nebo ikonku bez textu.
+
+Příklad produktového pravidla:
+
+```text
+Toast „Uloženo“ může zmizet. Zpráva „Export selhal“ musí zůstat dostupná v historii úloh a mít další krok.
+```
+
+## Retence a audit bez sběru všeho
+
+Notifikační systém potřebuje provozní historii, ale nepotřebuje nekonečný archiv všeho, co kdy komu přišlo. Odděl tři vrstvy:
+
+1. **Doručovací log** — technický stav odeslání, chyba, čas, kanál.
+2. **Uživatelský inbox** — zprávy, které uživatel vidí v aplikaci.
+3. **Auditní stopa** — důkaz o bezpečnostně nebo právně významné události.
+
+Každá vrstva má jinou retenci. Doručovací log může být krátký, třeba 14–30 dní podle provozní potřeby. In-app inbox může mít uživatelské mazání nebo archivaci. Auditní stopa u bezpečnostních změn může zůstat déle, ale nemá ukládat zbytečný obsah zprávy.
+
+Co do logu nepatří:
+
+- celý text soukromé zprávy,
+- obsah exportu nebo přílohy,
+- reset tokeny a podepsané URL,
+- celé request body z webhooku,
+- interní poznámky podpory,
+- marketingové segmenty, které nejsou nutné pro doručení.
+
+Když ladíš doručování, stačí často `notification_id`, typ zprávy, kanál, stav, čas, chybový kód a korelační ID. To je nuda. Nuda je v logování super vlastnost.
+
+## Checklist: notifikace bez pekla
+
+- Máme mapu typů notifikací podle účelu, role a dopadu.
+- Každá kategorie má jasný výchozí kanál a důvod, proč existuje.
+- Push a systémové notifikace žádáme až po vysvětlení hodnoty a akci uživatele.
+- Preferenční centrum odděluje bezpečnostní, provozní, kolaborační, produktové a obchodní zprávy.
+- Obchodní komunikace není schovaná v provozních notifikacích.
+- Obsah zpráv je minimalizovaný a citlivé detaily zůstávají za přihlášením.
+- Stavové zprávy jsou přístupné pro asistivní technologie a nespoléhají jen na barvu.
+- Doručovací logy neukládají celé payloady, tokeny ani zbytečná osobní data.
+- Důležité notifikace mají historii nebo auditní stopu podle rizika.
+- Existuje měsíční kontrola nejhlučnějších zpráv a odhlášení.
+
+## Mini šablona notifikační karty
+
+```markdown
+# Notifikace: [název]
+
+## Účel
+Komu pomáhá:
+Jaké rozhodnutí nebo akci podporuje:
+Co se stane, když ji nepošleme:
+
+## Kategorie
+Bezpečnostní / provozní / kolaborační / produktová / obchodní:
+Povinná nebo volitelná:
+Výchozí stav:
+
+## Kanály
+In-app:
+E-mail:
+Push:
+Kdy nežádat o další kanál:
+
+## Obsah
+Minimální text:
+Zakázaná data ve zprávě:
+Odkaz vede za přihlášení: ano / ne
+Expirace odkazu nebo tokenu:
+
+## Preference
+Kde ji uživatel nastaví:
+Co přesně znamená vypnutí:
+Role, kterých se týká:
+
+## Provoz
+Doručovací log:
+Retence:
+Auditní stopa:
+Měsíční kontrola hlučnosti:
+```
+
+## Zdroje
+
+- MDN: Notifications API — webové notifikace, oprávnění uživatele, secure context a rozdíl mezi persistentními a non-persistentními notifikacemi: https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API
+- W3C WCAG 2.2 Understanding SC 4.1.3 Status Messages — přístupné stavové zprávy bez zbytečného přesunu focusu: https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html
+- GDPR, článek 5 — principy zpracování včetně minimalizace údajů: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+
 # Pracovní log
+
+- 2026-10-02: Doplněna příloha „In-app notifikace a preference bez notifikačního pekla“ s rozdělením zpráv podle účelu, výběrem kanálu podle naléhavosti a citlivosti, preferenčním centrem, minimalizací obsahu, přístupnými status zprávami, retenčním modelem, checklistem, notifikační kartou a ověřenými zdroji MDN, W3C a GDPR.
 
 - 2026-10-02: Doplněna příloha „Produktová dokumentace bez support labyrintu a datového vysavače“ s rozdělením dokumentace podle potřeb čtenáře, úkolovou strukturou návodů, troubleshootingem bez sběru citlivých dat, privacy-first vyhledáváním v nápovědě, propojením supportu s dokumentací, přístupnostním minimem, checklistem, šablonou článku a ověřenými zdroji Diátaxis, Google Search Central a W3C.
 
