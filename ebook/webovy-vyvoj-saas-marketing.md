@@ -28778,13 +28778,13 @@ Když potřebuješ konkrétní payload pro podporu, udělej řízený debug rež
 - OpenAPI Initiative — OpenAPI Specification, standardní popis HTTP API pro dokumentaci a nástroje: https://spec.openapis.org/
 - Semantic Versioning 2.0.0 — pravidla pro major, minor a patch verze: https://semver.org/
 
-# Příloha: Rate limiting a kvóty bez trestání dobrých zákazníků
+# Příloha: Kvóty a spending capy bez trestání dobrých zákazníků
 
-Rate limiting není jen bezpečnostní brzda proti botům. Je to produktové pravidlo, které říká: kapacita služby je omezená, férově ji rozdělujeme a umíme slušně říct „teď zpomal“. Malý SaaS bez limitů je jako kavárna bez fronty, dveří a účtenek: první větší nápor vypadá chvíli jako úspěch, pak jako požár v účetnictví.
+Tahle příloha navazuje na obecnou část o rate limitingu a jde o krok dál: k dlouhodobým kvótám, spending capům a férovému zacházení se zákazníky, kteří službu používají intenzivně, ale legitimně. Krátkodobý limit chrání špičku provozu. Kvóta a rozpočtová brzda chrání ekonomiku produktu, externí náklady a důvěru zákazníka.
 
-Dobře navržené limity chrání dostupnost, náklady, zákaznickou zkušenost i důvěru. Špatně navržené limity trestají platící uživatele, rozbíjejí integrace a nutí podporu vysvětlovat chování, které nikdo nepopsal v dokumentaci. Rozdíl není v kouzelné knihovně. Rozdíl je v tom, jestli limit navrhuješ podle práce, kterou systém opravdu dělá.
+Dobře navržené kvóty chrání dostupnost, náklady, zákaznickou zkušenost i důvěru. Špatně navržené kvóty trestají platící uživatele, rozbíjejí integrace a nutí podporu vysvětlovat chování, které nikdo nepopsal v dokumentaci. Rozdíl není v kouzelné knihovně. Rozdíl je v tom, jestli spotřebu navrhuješ podle práce, kterou systém opravdu dělá.
 
-> Codyho komentář: „Máme rate limit 100 požadavků za minutu“ zní technicky. „Import deseti tisíc řádků nespálí server, e-mailový účet ani rozpočet za OCR“ zní jako provozní strategie. Chci tu druhou větu.
+> Codyho komentář: „Máme měsíční kvótu“ zní účetně. „Import deseti tisíc řádků nespálí server, e-mailový účet ani rozpočet za OCR“ zní jako provozní strategie. Chci tu druhou větu.
 
 ## Nejdřív limituj drahou práci, ne jen počet requestů
 
@@ -29010,7 +29010,7 @@ U integrací přidej příklad klientského backoffu do dokumentace. Zákazníko
 - OWASP REST Assessment Cheat Sheet — Rate Limiting and Throttling Assessment, praktické otázky pro ověření limitů na API: https://cheatsheetseries.owasp.org/cheatsheets/REST_Assessment_Cheat_Sheet.html#rate-limiting-and-throttling-assessment
 
 # Pracovní log
-- 2026-10-02: Doplněna příloha „Rate limiting a kvóty bez trestání dobrých zákazníků“ s návrhem limitů podle ceny operace, kombinací klíčů, odpovědí `429`/`Retry-After`, kvótami, grace režimem, spending capy, privacy-first logováním, checklistem, limit policy šablonou a ověřenými zdroji RFC, MDN a OWASP.
+- 2026-10-02: Doplněna navazující příloha „Kvóty a spending capy bez trestání dobrých zákazníků“ s návrhem limitů podle ceny operace, kombinací klíčů, odpovědí `429`/`Retry-After`, kvótami, grace režimem, spending capy, privacy-first logováním, checklistem, limit policy šablonou a ověřenými zdroji RFC, MDN a OWASP.
 
 - 2026-10-02: Doplněna příloha „API verze bez lámání zákazníků a nočních omluv“ s definicí veřejného kontraktu, tříděním změn podle dopadu, modelem verzování, deprecation plánem, stabilními chybami, contract testy, SDK pravidly, privacy-first diagnostikou, checklistem, API change kartou a ověřenými zdroji RFC, OpenAPI a SemVer.
 
