@@ -32588,7 +32588,243 @@ Kdo má přístup k diagnostice:
 - OWASP: [Multifactor Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html)
 - OWASP: [Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
 
+# Příloha: Auditní logy bez bezpečnostního divadla a datového skladu navíc
+
+Auditní log je jedna z těch funkcí, které vypadají nudně, dokud se něco nerozbije. Pak najednou všichni chtějí vědět, kdo změnil roli, kdo exportoval data, kdo připojil integraci, proč zmizel projekt a jestli to byla chyba uživatele, bug, automatizace, nebo démon jménem „někdo z týmu“. Bez dobrého auditního logu se z incidentu stane detektivka s mizerným koncem: hodně dohadů, málo důkazů a pár screenshotů v chatu, které by u soudu působily asi jako účtenka od kebabu.
+
+Auditní log ale nesmí být jen nekonečný datový vysavač. Privacy-first produkt nepotřebuje zaznamenat každý pohyb myši, každou hodnotu formuláře a kompletní obsah zákaznických dat. Potřebuje zachytit bezpečnostně a provozně důležité události tak, aby šly vysvětlit, opravit a doložit — bez toho, aby se z logů stala druhá databáze plná citlivých údajů.
+
+> Codyho komentář: Auditní log není šmírovací kamera v kanceláři. Je to černá skříňka pro důležité změny. Když do ní nahráváš všechno, nikdo v ní nic nenajde. Když do ní nenahráváš nic, budeš při incidentu koukat do tmy a tvářit se strategicky.
+
+## Nejdřív definuj, co je auditovatelná událost
+
+Začni seznamem událostí, které mají bezpečnostní, právní, finanční nebo zákaznický dopad. Ne podle toho, co se snadno loguje, ale podle toho, co budeš potřebovat vysvětlit, když se zákazník nebo interní tým zeptá „co se stalo?“.
+
+První verze auditního logu pro B2B SaaS by měla pokrýt hlavně:
+
+- změny členství ve workspace,
+- změny rolí a oprávnění,
+- přihlášení a selhané pokusy u administrátorů,
+- zapnutí, vypnutí nebo změnu SSO,
+- vytvoření, rotaci a zneplatnění API klíčů,
+- připojení a odpojení integrací,
+- export dat,
+- mazání projektů, workspace nebo účtů,
+- změny fakturačních údajů a tarifů,
+- změny privacy a retenčních nastavení,
+- použití impersonace nebo supportního přístupu,
+- změny runtime konfigurace, které ovlivňují zákaznická data.
+
+Naopak do auditního logu typicky nepatří kompletní obsah běžné uživatelské práce: texty dokumentů, komentáře, soubory, osobní poznámky, vyhledávací dotazy nebo celé payloady integrací. Pokud potřebuješ provozní diagnostiku, vytvoř zvláštní aplikační log s krátkou retencí, maskováním a jasným účelem. Auditní log má být stabilní, čitelný a obhajitelný.
+
+## Loguj kontext, ne soukromý obsah
+
+Dobrá auditní událost odpovídá na pět otázek:
+
+| Otázka | Co uložit | Čemu se vyhnout |
+| --- | --- | --- |
+| Kdo? | interní user ID, role, typ aktéra, případně systémová služba | celé profily, zbytečné osobní atributy, IP jako jediný důkaz identity |
+| Co? | typ akce a cílový objekt | celý původní a nový obsah objektu |
+| Kde? | tenant/workspace ID, projekt ID, prostředí | názvy citlivých zákaznických dokumentů, pokud nejsou nutné |
+| Kdy? | čas v UTC, request ID, session ID | lokální čas bez timezone, volné textové poznámky bez struktury |
+| S jakým výsledkem? | úspěch, zamítnutí, chyba, důvod zamítnutí | stack trace s tajemstvím, tokeny, celé payloady |
+
+Příklad dobré události:
+
+```json
+{
+  "event_type": "workspace.member_role_changed",
+  "occurred_at": "2026-10-02T13:40:00Z",
+  "workspace_id": "ws_123",
+  "actor_type": "user",
+  "actor_id": "usr_456",
+  "target_type": "workspace_member",
+  "target_id": "mem_789",
+  "change": {
+    "role_from": "member",
+    "role_to": "admin"
+  },
+  "result": "success",
+  "request_id": "req_abc"
+}
+```
+
+Příklad špatné události:
+
+```json
+{
+  "event_type": "member_changed",
+  "everything": "celý objekt uživatele včetně e-mailu, telefonu, poznámek, posledních aktivit, session tokenu a ještě trochu karmy pro jistotu"
+}
+```
+
+To druhé se možná snadno implementuje, ale je to datový nepořádek. A nepořádek v auditních logách má dvě skvělé vlastnosti: je drahý na ukládání a ještě dražší při vysvětlování.
+
+## Odděl auditní log od analytiky a debug logů
+
+Auditní log, produktová analytika a debug logy mají jiné účely:
+
+- **Auditní log** vysvětluje důležité změny a přístupové události.
+- **Produktová analytika** měří používání funkcí a hodnotu produktu.
+- **Debug logy** pomáhají vývojářům opravit chybu.
+
+Když je smícháš, vznikne potvora. Support začne hledat bezpečnostní události mezi pageview záznamy, vývojáři uvidí víc zákaznických dat, než potřebují, a retention pravidla budou připomínat skříň s kabely: někdo ví, že tam něco je, ale nikdo se toho nechce dotknout.
+
+Praktické pravidlo:
+
+- auditní log drž strukturovaný a dlouhodobější,
+- debug log drž krátkodobý a silně maskovaný,
+- analytiku agreguj a neukládej obsah uživatelských dat,
+- request ID používej jako spojovací můstek, ne jako výmluvu pro kopírování všeho všude.
+
+Privacy-first provoz znamená, že i interní tým má vidět jen to, co potřebuje. Vývojář typicky nepotřebuje vidět e-mail zákazníkova zaměstnance v auditním logu, pokud řeší chybu v job queue. Support nepotřebuje surový stack trace. Obchodník nepotřebuje detailní bezpečnostní historii zákazníka. Ano, zní to samozřejmě. Přesně proto se to vyplatí napsat dřív, než to bude „dočasně“ otevřené všem.
+
+## Navrhni retenci podle rizika a potřeby
+
+Auditní logy se často ukládají buď moc krátce, nebo navždy. Obojí je líné rozhodnutí v obleku. Lepší je rozdělit události podle dopadu.
+
+| Kategorie | Příklady | Doporučený přístup |
+| --- | --- | --- |
+| Přístup a role | pozvánky, změny rolí, SSO policy | delší retence, dostupné zákaznickému adminovi |
+| Citlivé operace | export, mazání, impersonace | delší retence, vyšší ochrana, interní review |
+| Konfigurace | integrace, API klíče, runtime nastavení | delší retence podle provozního rizika |
+| Chybové pokusy | zamítnutá akce, neplatné oprávnění | kratší až střední retence, agregace pro detekci zneužití |
+| Debug detaily | stack trace, diagnostický payload | krátká retence, maskování, oddělené uložiště |
+
+Retenci vysvětli v dokumentaci nebo zákaznickém adminu. Jednoduchá věta typu „Auditní události s bezpečnostním dopadem uchováváme 12 měsíců; diagnostické logy mažeme dříve a maskujeme citlivé hodnoty“ je lepší než mlčení. Pokud máš enterprise zákazníky, připrav konfigurovatelný export auditních logů, ale nenech každého zákazníka diktovat nemožné retenční kombinace. Produkt není lednička na přání.
+
+## Udělej auditní log použitelný pro zákaznického admina
+
+Auditní log není jen interní tabulka pro vývojáře. U B2B SaaS je to součást důvěry. Zákaznický admin by měl zvládnout odpovědět na základní otázky bez ticketu na support:
+
+- kdo přidal nového člena,
+- kdo změnil roli,
+- kdo vytvořil API klíč,
+- kdo exportoval data,
+- kdo smazal projekt,
+- kdy byla zapnutá nebo změněná integrace,
+- kdy byl použit supportní přístup nebo impersonace.
+
+Uživatelské rozhraní drž jednoduché:
+
+- filtr podle času,
+- filtr podle typu události,
+- filtr podle aktéra,
+- filtr podle cílového objektu,
+- export pro bezpečnostní tým zákazníka,
+- detail události s lidským popisem a strukturovanými poli.
+
+Lidský popis může vypadat takto:
+
+> Jana Nováková změnila roli uživatele Petr Svoboda z „Member“ na „Admin“ ve workspace „Acme EU“.
+
+Strukturovaná pole pod tím obsahují ID, čas, výsledek a request ID. Lidský text pomůže adminovi, struktura pomůže integraci. Nepokoušej se vyřešit všechno jednou JSON koulí do obličeje.
+
+## Chraň auditní log před úpravami
+
+Auditní log, který může admin tiše přepsat, je jako trezor z perníku. Na oko hezký, při prvním incidentu k ničemu.
+
+Minimum:
+
+- běžní uživatelé nemohou auditní log upravovat ani mazat,
+- interní support nemůže měnit historické události,
+- opravy se dělají novou korekční událostí, ne přepsáním staré,
+- přístup k auditním logům je sám auditovaný,
+- export auditních logů je auditovaná událost,
+- mazání podle retence běží kontrolovaně a zanechá agregovanou provozní stopu.
+
+Nemusíš hned stavět drahý WORM archiv pro každou malou aplikaci. Ale musíš mít jasnou hranici: auditní log není běžná editovatelná tabulka. Pokud jej ukládáš v databázi, nastav oddělená oprávnění, append-only model na aplikační vrstvě a pravidelné kontroly, že nikdo neobchází zápis přímými SQL úpravami. Ano, přímý přístup do produkční databáze je pohodlný. Stejně jako jízda z kopce bez brzd.
+
+## Detekce bez paranoidního panoptika
+
+Auditní log může krmit bezpečnostní signály, ale opatrně. Cílem není sledovat každého zaměstnance zákazníka jako v horší epizodě korporátní sci-fi. Cílem je najít vzorce, které mají jasný bezpečnostní význam.
+
+Užitečné signály:
+
+- mnoho selhaných admin akcí v krátkém čase,
+- role změněná těsně před exportem dat,
+- nový API klíč následovaný neobvyklým objemem požadavků,
+- impersonace mimo schválený support ticket,
+- vypnutí SSO nebo MFA bez následného potvrzení ownerem,
+- mazání velkého množství objektů po změně role.
+
+Každý signál by měl mít:
+
+- jasný důvod existence,
+- nízký počet falešných poplachů,
+- postup ověření,
+- člověka nebo tým, který ho řeší,
+- retenční pravidlo pro detekční data.
+
+Neukládej dodatečné osobní údaje jen proto, že by „někdy mohly pomoct“. Většinou nepomůžou. Jen zvětší dopad, až se k logům dostane někdo, kdo nemá.
+
+## Checklist: auditní log bez datového skladu navíc
+
+- [ ] Máme seznam auditovatelných událostí podle bezpečnostního, finančního a zákaznického dopadu.
+- [ ] Každá událost má aktéra, cílový objekt, čas, tenant/workspace, výsledek a request ID.
+- [ ] Do auditního logu neukládáme celé payloady, tajemství, tokeny ani zbytečný obsah zákaznických dat.
+- [ ] Auditní log je oddělený od analytiky a debug logů.
+- [ ] Retence je rozdělena podle kategorie události a vysvětlená zákazníkům.
+- [ ] Přístup k auditním logům je omezený podle role a sám se audituje.
+- [ ] Zákaznický admin vidí důležité workspace události bez support ticketu.
+- [ ] Export auditních logů je dostupný, ale auditovaný.
+- [ ] Staré události se neopravují přepisem, ale korekční událostí.
+- [ ] Bezpečnostní detekce mají jasný účel, postup řešení a retenční pravidla.
+
+## Mini šablona audit event katalogu
+
+```md
+# Audit event: [název]
+
+## Účel
+Proč tuto událost logujeme:
+Jakou otázku má umět zodpovědět:
+
+## Kategorie
+Typ dopadu: přístup / data / fakturace / konfigurace / support / bezpečnost
+Rizikovost: nízká / střední / vysoká
+
+## Aktér
+Typ aktéra: uživatel / systém / integrace / support
+Ukládané identifikátory:
+Co se neukládá:
+
+## Cíl akce
+Typ objektu:
+Ukládané identifikátory:
+Tenant/workspace vazba:
+
+## Detaily změny
+Povolená pole:
+Zakázaná pole:
+Maskování:
+
+## Retence
+Doba uchování:
+Důvod:
+Kdo může prodloužení schválit:
+
+## Přístup
+Kdo událost vidí interně:
+Kdo ji vidí u zákazníka:
+Je exportovatelná:
+
+## Detekce
+Spouští bezpečnostní signál:
+Kdo signál řeší:
+Runbook:
+```
+
+## Zdroje
+
+- OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučení pro bezpečnostní logování, ochranu logů, citlivá data a události vhodné k zaznamenání.
+- NIST: [SP 800-53 Rev. 5, AU — Audit and Accountability](https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final) — kontrolní rodina pro audit, odpovědnost, ochranu auditních záznamů a jejich kontrolu.
+- GDPR, článek 5: [principy zpracování osobních údajů](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng) — zejména minimalizace údajů, omezení účelu a omezení uložení.
+- OWASP: [Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html) — kontext pro session identifikátory, bezpečné relace a rizika při logování.
+
 # Pracovní log
+
+- 2026-10-02: Doplněna příloha „Auditní logy bez bezpečnostního divadla a datového skladu navíc“ s katalogem auditovatelných událostí, pravidly minimalizace obsahu, oddělením auditních/debug/analytických logů, retenčním modelem, zákaznickým UX, ochranou před úpravami, bezpečnostní detekcí, checklistem, šablonou audit event katalogu a ověřenými zdroji OWASP, NIST a GDPR.
 
 - 2026-10-02: Doplněna příloha „SSO a provisioning bez přístupového chaosu“ s rozdělením autentizace, autorizace, provisioningu a auditu, volbou OIDC/SAML/SCIM, tenant hranicemi, minimalizací identity atributů, správou relací, UX pro zákaznického admina, checklistem, SSO kartou a ověřenými zdroji OpenID, OASIS, RFC a OWASP.
 
