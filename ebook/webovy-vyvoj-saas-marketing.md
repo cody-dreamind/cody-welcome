@@ -33807,7 +33807,188 @@ Praktická obrana:
 - OWASP: [Input Validation Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html) — validace vstupů podle očekávaného formátu, typu a rozsahu.
 - OWASP: [CSV Injection](https://community.owasp.org/attacks/CSV_Injection) — riziko vzorců ve spreadsheet souborech vytvořených z nedůvěryhodného vstupu.
 
+# Příloha: Export dat bez rukojmí, chaosu a úniku navíc
+
+Export dat je slib, že zákazník není uvězněný v produktu. V privacy-first SaaS to není jen tlačítko „stáhnout CSV“. Je to provozní schopnost: zákazník ví, co dostane, proč to dostane, kdo export může spustit, jak dlouho bude balíček dostupný a co se stane po stažení. Když export navrhneš až ve chvíli, kdy zákazník odchází nebo žádá o kopii údajů, budeš improvizovat v nejhorší možné chvíli. A improvizace s daty je krásný způsob, jak si vyrobit supportový thriller, který nikdo nechtěl číst.
+
+Dobře navržený export řeší tři situace:
+
+- běžný pracovní export pro report, účetnictví nebo interní analýzu,
+- administrátorský export pro migraci do jiného systému,
+- osobní export dat, pokud jde o údaje vztahující se ke konkrétnímu člověku.
+
+Tyhle situace nemíchej do jednoho univerzálního tlačítka. Mají jiné publikum, jiný rozsah, jiné riziko a často i jiný právní režim.
+
+## Začni katalogem exportovatelných dat
+
+Nejdřív si napiš, co vůbec umíš exportovat. Katalog nemusí být velký dokument, ale musí rozlišit minimálně typ entity, vlastníka, citlivost, formát a oprávnění.
+
+Praktický příklad pro B2B SaaS:
+
+| Oblast | Běžný export | Migrační export | Osobní export |
+| --- | --- | --- | --- |
+| Kontakty | vybrané sloupce v CSV | kompletní kontakty s ID vazbami | údaje konkrétní osoby |
+| Projekty | seznam a stav | projekty, úkoly, vazby, komentáře | jen položky vztahující se k osobě |
+| Fakturace | přehled dokladů | metadata dokladů a vazby | obvykle omezeně podle role |
+| Auditní log | agregovaný přehled | vybrané bezpečnostní události | opatrně, často s redakcí jiných osob |
+| Přílohy | jednotlivé soubory | balíček nebo manifest | jen soubory relevantní k žádosti |
+
+Katalog pomáhá i obchodně. Když se enterprise zákazník zeptá na exit plán, nemusíš zamrznout jako formulář bez validace. Ukážeš, že export je součást produktu, ne úplatek na rozloučenou.
+
+## Formát má být nudný a čitelný
+
+Export není místo pro kreativní formát, který pochopí jen autor backendu ve středu po druhé kávě. Výchozí volby mají být obyčejné: CSV pro tabulková data, JSON pro strukturovaná data, ZIP pro balíček více souborů, případně PDF jen tam, kde jde o lidsky čitelný dokument, ne o migraci.
+
+Dobrá exportní smlouva popisuje:
+
+- formát souboru,
+- kódování znaků,
+- časové pásmo,
+- názvy sloupců a jejich význam,
+- stabilní identifikátory,
+- vazby mezi soubory,
+- datum vytvoření exportu,
+- verzi schématu.
+
+Pokud export používá CSV, přidej krátký `README.txt` nebo `manifest.json`, kde vysvětlíš oddělovač, kódování a význam souborů. U migračních exportů přidej i stabilní `schema_version`. Zákazník pak nemusí hádat, jestli `created_at` znamená lokální čas, UTC nebo mystický čas serveru z roku 2017.
+
+## Oprávnění: kdo může export spustit a co uvidí
+
+Export je čtení ve velkém. Proto musí být přísnější než běžné zobrazení seznamu. Nestačí schovat tlačítko v UI. Backend musí kontrolovat tenant, roli, rozsah a účel.
+
+Pravidla:
+
+- běžný uživatel exportuje jen data, která smí číst v aplikaci,
+- administrátor může exportovat širší dataset, ale akce patří do auditního logu,
+- migrační export vyžaduje potvrzení nebo druhý krok u citlivých dat,
+- support nespouští zákaznické exporty bez výslovného zadání a dohledatelné stopy,
+- osobní export nesmí omylem přibalit údaje jiných lidí jen proto, že jsou ve stejné tabulce.
+
+> Codyho komentář: Exportní tlačítko je jako dveře ze skladu. Není problém, že existuje. Problém je, když k němu má klíč každý, dveře nevržou v auditu a nikdo neví, co se vlastně odneslo.
+
+## Balíček generuj na pozadí
+
+Malý CSV export může vzniknout okamžitě. Větší export ale patří do fronty. Uživatel dostane stav: připraveno, zpracovává se, selhalo, expirovalo. To chrání aplikaci před timeouty, opakovaným klikáním a polovičními soubory.
+
+Pro každý export ukládej metadata:
+
+- kdo ho spustil,
+- kdy byl vytvořen,
+- jaký rozsah dat obsahuje,
+- jaký filtr byl použit,
+- jak dlouho je odkaz platný,
+- hash nebo kontrolní součet balíčku,
+- zda byl stažen.
+
+Nemusíš ukládat kompletní export navždy. Naopak: u citlivých dat je krátká dostupnost výhoda. Typicky stačí hodiny až jednotky dnů podle účelu a velikosti zákazníka. Důležité je říct to předem.
+
+## Minimalizuj i při exportu
+
+Export často svádí k mentalitě „dejme tam všechno, ať se nikdo neptá“. To je špatně. Každý sloupec navíc je větší balíček, větší riziko a větší chaos při importu jinam.
+
+Privacy-first export má výchozí rozsah podle práce:
+
+- report obsahuje jen sloupce potřebné pro report,
+- migrace obsahuje vazby a ID, ale ne interní debug pole,
+- osobní export odděluje údaje subjektu od údajů jiných lidí,
+- citlivé hodnoty se vynechají, maskují nebo vyžadují zvláštní oprávnění,
+- technické tokeny, session údaje, interní poznámky supportu a secrets do exportu nepatří.
+
+Když zákazník potřebuje širší export, nabídni rozšířený režim s jasným popisem rizik. Ne stylem „kliknutím souhlasíte s vesmírem“, ale lidsky: tento export obsahuje osobní údaje, přílohy a auditní metadata; odkaz platí 24 hodin; po stažení ho ukládejte bezpečně.
+
+## Osobní export není stejný jako export účtu
+
+Právo na přenositelnost osobních údajů podle článku 20 GDPR se týká osobních údajů poskytnutých subjektem údajů v určitých podmínkách a má být ve strukturovaném, běžně používaném a strojově čitelném formátu. Zdroj: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+
+Prakticky to neznamená, že každému člověku pošleš kompletní dump tenant databáze. Musíš rozlišit:
+
+- údaje o dané osobě,
+- údaje vytvořené jinými osobami,
+- obchodní tajemství nebo interní poznámky,
+- bezpečnostní záznamy,
+- data, která by zasáhla práva jiných lidí.
+
+Tohle je místo, kde se hodí právní a procesní kontrola. Produkt ale může hodně pomoct: mít datovou mapu, označené osobní atributy, exportní šablony a auditní stopu žádosti.
+
+## Stahování chraň jako citlivý dokument
+
+Exportní odkaz nemá být veřejná URL bez ochrany. Bezpečnější model:
+
+- uživatel se musí přihlásit,
+- odkaz má krátkou expiraci,
+- URL neobsahuje osobní údaje ani hádatelné ID,
+- stažení kontroluje oprávnění znovu,
+- citlivé exporty mohou vyžadovat nové ověření identity,
+- po expiraci se soubor smaže nebo zneplatní,
+- stažení se zaznamená do auditu.
+
+U velkých B2B exportů zvaž šifrovaný balíček nebo aspoň oddělené předání hesla, pokud to odpovídá riziku. Pozor ale na falešnou bezpečnost: heslo poslané ve stejném e-mailu jako odkaz je spíš divadlo než ochrana.
+
+## Checklist: export dat bez rukojmí
+
+- [ ] Existuje katalog exportovatelných dat podle účelu, citlivosti a role.
+- [ ] Každý export má popsaný formát, kódování, časové pásmo a verzi schématu.
+- [ ] Backend kontroluje tenant, roli a rozsah exportu, ne jen viditelnost tlačítka.
+- [ ] Větší exporty běží na pozadí a mají stav, expiraci a chybové hlášení.
+- [ ] Exportní balíček obsahuje manifest nebo README.
+- [ ] Výchozí export neobsahuje interní debug pole, secrets, tokeny ani zbytečné osobní údaje.
+- [ ] Osobní export je oddělený od administrátorského exportu účtu.
+- [ ] Citlivé exporty mají auditní záznam a krátkou dostupnost.
+- [ ] Stahovací odkaz vyžaduje přihlášení nebo jinou přiměřenou kontrolu.
+- [ ] Support má jasný postup, kdy smí export pomoci připravit a kdy ne.
+
+## Mini šablona exportní karty
+
+```markdown
+# Export karta: [oblast / účel]
+
+## Účel
+- Proč export existuje:
+- Kdo ho používá:
+- Typ exportu: report / migrace / osobní žádost / audit
+
+## Rozsah
+- Zahrnuté entity:
+- Zahrnuté časové období:
+- Výchozí filtry:
+- Výslovně vyloučená data:
+
+## Formát
+- Typ souboru:
+- Kódování:
+- Časové pásmo:
+- Verze schématu:
+- Manifest / README:
+
+## Oprávnění
+- Role, které export spouští:
+- Tenant kontroly:
+- Potvrzení nebo druhý krok:
+- Support pravidla:
+
+## Bezpečnost a retence
+- Jak dlouho je balíček dostupný:
+- Jak je chráněn odkaz:
+- Auditní události:
+- Mazání po expiraci:
+
+## Test
+- Test malého exportu:
+- Test velkého exportu:
+- Test s diakritikou:
+- Test importu do cílového nástroje:
+```
+
+## Zdroje
+
+- EUR-Lex: [Nařízení (EU) 2016/679, GDPR](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — článek 20 popisuje právo na přenositelnost údajů ve strukturovaném, běžně používaném a strojově čitelném formátu.
+- EDPB: [Guidelines on the right to data portability](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-right-data-portability-under-regulation-2016679_en) — praktický výklad přenositelnosti osobních údajů.
+- OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučení pro auditování bezpečnostně významných událostí a nevkládání citlivých hodnot do logů.
+- IETF: [RFC 4180](https://datatracker.ietf.org/doc/html/rfc4180) — běžně citovaný formát CSV a MIME typ `text/csv`.
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „Export dat bez rukojmí, chaosu a úniku navíc“ s katalogem exportovatelných dat, formátovou smlouvou, oprávněními, frontovým generováním, minimalizací, osobními exporty, bezpečným stažením, checklistem a exportní kartou.
 
 - 2026-10-03: Doplněna příloha „Import dat bez rozbité tabulky a bezpečnostního překvapení“ s importní smlouvou, validací uploadů i obsahu, náhledem před zápisem, frontovým zpracováním, privacy-first minimalizací, ochranou proti CSV injection, checklistem a importní kartou.
 
