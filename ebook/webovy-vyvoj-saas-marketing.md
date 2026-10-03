@@ -33179,7 +33179,132 @@ Následná revize:
 - NIST: [SP 800-53 Rev. 5](https://www.nist.gov/publications/security-and-privacy-controls-information-systems-and-organizations-0) — kontrolní rodina Access Control, zejména oddělení povinností a least privilege jako inspirace pro schvalování citlivých akcí.
 - EUR-Lex: [GDPR, článek 5](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679) — zásady minimalizace údajů a odpovědnosti při zpracování osobních údajů.
 
+# Příloha: Rate limiting API bez trestání dobrých zákazníků
+
+Rate limiting není jen ochrana proti útočníkům. Je to férové řízení kapacity, nákladů a spolehlivosti. Malý SaaS často začne limity řešit až ve chvíli, kdy někdo omylem spustí import desetkrát za sebou, integrace partnera začne cyklit nebo jeden zákazník sebere výkon všem ostatním. To je pozdě. Rate limit má být součást návrhu API, ne hasicí přístroj přilepený na produkci izolepou.
+
+OWASP řadí neomezenou spotřebu zdrojů mezi rizika API bezpečnosti: problém není jen počet requestů, ale i CPU, paměť, velikost uploadu, počet položek v dávce, počet záznamů na stránku nebo náklady třetích služeb. Zdroj: https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/
+
+> Codyho komentář: Rate limit, který nikdo neumí vysvětlit zákazníkovi, není bezpečnostní politika. Je to produktová překážka s falešným knírkem.
+
+## Začni mapou nákladných akcí
+
+Nejdřív si rozděl endpointy podle toho, co stojí. Ne podle toho, jestli jsou „hezké RESTově“. Jiný limit potřebuje obyčejné čtení detailu faktury, jiný export všech dat, jiný reset hesla přes e-mail a úplně jiný dávkový import kontaktů.
+
+Praktické vrstvy:
+
+- **Lehké čtení:** detail objektu, seznam s rozumným stránkováním, veřejná metadata.
+- **Těžké čtení:** fulltext, složité filtry, exporty, reporty, agregace přes velký rozsah dat.
+- **Běžný zápis:** úprava profilu, vytvoření položky, změna nastavení.
+- **Drahý zápis:** import, generování souborů, posílání e-mailů/SMS, AI operace, volání externí integrace.
+- **Bezpečnostní akce:** login, reset hesla, MFA, pozvánky, změna e-mailu, vytvoření API tokenu.
+
+U každé vrstvy si napiš, co přesně chráníš: dostupnost aplikace, peníze za třetí službu, data ostatních tenantů, reputaci domény, nebo UX podpory. Limit bez účelu bude buď moc měkký, nebo zbytečně agresivní.
+
+## Limituj podle aktéra, ne jen podle IP adresy
+
+IP adresa je slabý signál. V B2B SaaS může za jednou firemní sítí sedět celý tým, zatímco útočník může IP adresy měnit. Lepší je skládat více úrovní limitů:
+
+- globální limit služby,
+- limit podle tenant účtu,
+- limit podle uživatele,
+- limit podle API tokenu nebo integrace,
+- limit podle konkrétní operace,
+- ochranný limit podle IP jako doplňková brzda.
+
+Privacy-first přístup znamená: nesbírej víc identifikátorů jen proto, že by se „mohly hodit“. Většinou stačí interní ID tenanta, uživatele nebo tokenu, krátká retenční doba počítadel a agregované provozní metriky. Do rate limiting logů nepatří celé payloady, vyhledávací dotazy ani osobní obsah zákaznických dat.
+
+## Vrať jasnou odpověď, ne tajemnou chybu
+
+Když klient narazí na limit, má dostat srozumitelný stav a návod. HTTP status `429 Too Many Requests` popisuje situaci, kdy uživatel poslal příliš mnoho požadavků v daném čase; odpověď může obsahovat `Retry-After`, aby klient věděl, kdy to zkusit znovu. Zdroj: https://www.rfc-editor.org/rfc/rfc6585#section-4
+
+Dobrá odpověď pro API:
+
+```http
+HTTP/1.1 429 Too Many Requests
+Content-Type: application/json
+Retry-After: 60
+
+{
+  "error": "rate_limit_exceeded",
+  "message": "Import kontaktů lze spustit jednou za 60 sekund.",
+  "retry_after_seconds": 60,
+  "request_id": "req_123"
+}
+```
+
+Pro zákaznické UI nepřepisuj technickou chybu na „něco se pokazilo“. Řekni lidsky: „Import už běží. Další můžeš spustit za minutu.“ Ušetříš supportu zbytečné tickety a zákazník nemá pocit, že aplikace omdlela do křoví.
+
+## Rozliš tvrdý limit, frontu a degradaci
+
+Ne každá situace má skončit zákazem. U některých operací je lepší požadavek zařadit do fronty, u jiných vrátit menší rozsah dat, u dalších striktně odmítnout opakování.
+
+Použij tři režimy:
+
+- **Tvrdý limit:** login pokusy, reset hesla, pozvánky, generování placených externích zpráv.
+- **Fronta:** importy, exporty, synchronizace s účetnictvím, delší reporty.
+- **Degradace:** menší stránka výsledků, kratší časový rozsah reportu, vypnutí drahého našeptávače.
+
+U fronty vždy ukaž stav: přijato, běží, hotovo, selhalo, lze opakovat. Jinak si zákazník myslí, že tlačítko nefungovalo, klikne znovu a právě sis vyrobil vlastní DoS v elegantním kabátku.
+
+## Multitenant pravidlo: jeden zákazník nesmí sebrat vzduch ostatním
+
+V multitenant SaaS nestačí limitovat jen aplikaci jako celek. Jeden zákazník s velkým importem nebo rozbitou integrací nesmí zpomalit ostatní. Nastav per-tenant kvóty pro těžké operace a odděl fronty nebo priority tak, aby běžný provoz zůstal použitelný.
+
+Příklad: export všech objednávek může běžet jako background job s limitem paralelních exportů na tenant. Detail objednávky v administraci má zůstat rychlý i ve chvíli, kdy někdo exportuje historii za tři roky. To není luxus. To je rozdíl mezi „SaaS“ a „sdílený výtah bez nosnosti“.
+
+## Checklist: rate limiting bez trestání zákazníků
+
+- Má každý drahý endpoint jasně popsaný chráněný zdroj?
+- Existuje limit pro tenant, uživatele, token a konkrétní operaci tam, kde dává smysl?
+- Jsou limity přísnější pro reset hesla, pozvánky, exporty, importy a externí placené služby?
+- Vrací API `429` s lidsky použitelnou chybou, `request_id` a informací, kdy opakovat?
+- Umí UI vysvětlit limit bez věty „neočekávaná chyba“?
+- Neobsahují logy rate limitingu payloady, osobní obsah ani zbytečně dlouho držené identifikátory?
+- Má support přehled, jestli zákazník narazil na limit oprávněně, nebo jde o špatně nastavenou integraci?
+- Existuje výjimkový proces pro enterprise zákazníka, ale ne tajný bypass bez auditní stopy?
+
+## Mini šablona rate limit karty
+
+```markdown
+# Rate limit karta: [endpoint / operace]
+
+## Účel
+- Co chráníme:
+- Proč by zneužití nebo chyba bolely:
+
+## Aktér
+- Tenant:
+- Uživatel:
+- API token / integrace:
+- Doplňkový IP limit:
+
+## Pravidlo
+- Limit:
+- Okno:
+- Režim: tvrdý limit / fronta / degradace
+- Odpověď klientovi:
+
+## Provoz
+- Metriky:
+- Alert:
+- Support pohled:
+- Retence počítadel a logů:
+
+## Výjimky
+- Kdo může schválit změnu:
+- Jak dlouho platí:
+- Auditní stopa:
+```
+
+## Zdroje
+
+- OWASP API Security Top 10 2023 — API4: Unrestricted Resource Consumption: https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/
+- RFC 6585 — `429 Too Many Requests` a `Retry-After`: https://www.rfc-editor.org/rfc/rfc6585#section-4
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „Rate limiting API bez trestání dobrých zákazníků“ s mapou nákladných akcí, víceúrovňovými limity, chováním `429`, režimy fronty/degradace, multitenant pravidly, checklistem a šablonou rate limit karty.
 
 - 2026-10-03: Doplněna příloha „Schvalovací workflow bez firemního razítkovacího pekla“ s rozdělením akcí podle rizika, oddělením rolí žadatel/schvalovatel/vykonavatel, konkrétní žádostí, automatickými brzdami, emergency režimem, auditní stopou, checklistem, approval kartou a ověřenými zdroji OWASP, NIST a GDPR.
 
