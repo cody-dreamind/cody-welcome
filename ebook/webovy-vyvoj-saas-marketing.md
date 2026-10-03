@@ -35710,7 +35710,191 @@ Prohlížečové úložiště je výborný sluha pro malé, neškodné a vysvět
 - MDN Web Docs: [Using HTTP cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies)
 - MDN Web Docs: [Set-Cookie header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie)
 
+# Příloha: E-mailová doručitelnost bez tracking pixelů a reputační loterie
+
+E-mail je pořád jeden z nejlepších přímých kanálů. Zároveň je to kanál, který umí potrestat lenost rychleji než špatně napsaný cron. Když doména posílá bez SPF, DKIM, DMARC, jasného odhlášení a zdravé hygieny seznamu, není to „growth hacking“. Je to reputační dluh, který jednou skončí ve spamu, odmítnutých zprávách nebo zákaznické podpoře plné vět „mně nic nepřišlo“.
+
+Privacy-first přístup k e-mailu neznamená přestat posílat. Znamená posílat méně hloupě: bez skrytých tracking pixelů jako výchozího reflexu, bez nákupu databází, bez míchání transakčních a marketingových zpráv, s jasným souhlasem tam, kde je potřeba, a s technickou konfigurací, kterou si umíš obhájit i za půl roku.
+
+> Codyho komentář: Nejlepší doručitelnost nezačíná u triku na inbox. Začíná u toho, že lidé tvoje e-maily chtějí dostat. Revoluční koncept, já vím.
+
+## Rozděl e-maily podle účelu
+
+Nejdřív si udělej mapu typů zpráv. Jedna doména a jeden nástroj často svádí k tomu, že všechno vypadá stejně: faktura, reset hesla, newsletter, onboarding i slevová kampaň. Pro doručitelnost i důvěru je lepší jasné rozdělení.
+
+Praktické kategorie:
+
+- Transakční e-maily: reset hesla, potvrzení účtu, faktura, bezpečnostní upozornění, potvrzení objednávky.
+- Produktové e-maily: onboarding, pozvánka do workspace, upozornění na změnu stavu, týdenní souhrn na žádost uživatele.
+- Marketingové e-maily: newsletter, akce, obsahová distribuce, nabídky, pozvánky na webinář.
+- Interní provozní e-maily: alerty, reporty, support routing, oznámení týmu.
+
+Každá kategorie má mít vlastníka, šablony, právní základ, odhlašovací pravidla, retenci logů a minimální data. Reset hesla se nesmí zdržet proto, že newsletterová reputace dostala facku. Marketingová kampaň zase nemá používat transakční kanál jen proto, že „tam to líp chodí“. To není strategie, to je švindl v obálce.
+
+## Základ DNS hygieny: SPF, DKIM a DMARC
+
+Google ve svých pravidlech pro odesílatele uvádí, že odesílající domény mají autentizovat poštu a že pro velké odesílatele platí přísnější požadavky včetně SPF nebo DKIM a DMARC. Yahoo ve svých sender best practices také zdůrazňuje DMARC a ověřování domény. To není kosmetika pro enterprise. Je to základní technická občanka e-mailu.
+
+Minimum pro doménu:
+
+- SPF: říká, které servery smějí posílat za doménu.
+- DKIM: podepisuje zprávu kryptograficky, aby příjemce poznal oprávněného odesílatele.
+- DMARC: říká, co dělat, když SPF/DKIM selže, a umožňuje reporty.
+- Alignment: viditelná From doména má odpovídat ověřenému odesílání, ne být jen hezká maska.
+
+Začni opatrně. DMARC může běžet nejdřív na `p=none`, abys sbíral reporty a ověřil legitimní zdroje. Až víš, kdo opravdu posílá, můžeš přitvrdit na `quarantine` nebo `reject`. Nedělej `reject` první den jen proto, že to vypadá statečně. Odvaha bez inventury je jen incident v kostýmu.
+
+## One-click unsubscribe není detail v patičce
+
+Pro marketingové a hromadné zprávy nestačí miniaturní odkaz ukrytý mezi adresou a právnickou poezií. Gmail pro velké odesílatele vyžaduje snadné odhlášení a u relevantního provozu one-click unsubscribe. Yahoo také uvádí podporu one-click unsubscribe podle RFC 8058. Samotné RFC 8058 popisuje použití hlaviček `List-Unsubscribe` a `List-Unsubscribe-Post` pro odhlášení jedním kliknutím.
+
+Praktický model:
+
+- Každý marketingový e-mail má viditelný odhlašovací odkaz v těle.
+- Hlavičky obsahují `List-Unsubscribe` a pro one-click také `List-Unsubscribe-Post`.
+- Odhlášení nepotřebuje přihlášení, captcha ani výslech.
+- Preference centrum je bonus, ne překážka před odhlášením.
+- Zpracování odhlášení je rychlé a synchronizované do všech marketingových nástrojů.
+
+Privacy-first poznámka: odhlášení je produktová funkce, ne ztráta. Když člověk nechce zprávy, nejlevnější a nejdůstojnější řešení je přestat mu je posílat. Spam complaint je mnohem dražší forma stejné informace.
+
+## Tracking pixel není povinná součást e-mailu
+
+Open rate vypadá lákavě, ale je čím dál méně spolehlivý a privacy-first firma by se měla ptát, jestli ho opravdu potřebuje. Tracking pixel často znamená načtení vzdáleného obrázku s identifikátorem příjemce, časem, IP kontextem a informací o klientovi. I když to nástroj prezentuje jako nevinnou metriku, pořád jde o sledování chování konkrétního příjemce.
+
+Lepší měření:
+
+- odpovědi na e-mail,
+- kliknutí na jasně označené odkazy, pokud je opravdu potřebuješ měřit,
+- přihlášení k RSS nebo odběru,
+- návštěva landing page měřená agregovanou analytikou,
+- počet odhlášení a spam complaint signálů,
+- reálné konverze: poptávka, objednávka, aktivace, rezervace.
+
+Když tracking pixel používáš, napiš proč, kde je popsán, jak dlouho data držíš a jestli ho lze vypnout. Pokud to neumíš vysvětlit zákazníkovi lidsky, nepomůže tomu ani hezčí graf v nástroji.
+
+## Segmentace bez zákaznického rentgenu
+
+Doručitelnost kazí nejen technika, ale i relevance. Segmentace pomáhá, pokud vychází z férových signálů: odběr tématu, typ zákazníka, jazyk, produktový plán, explicitní preference. Začne být problém, když se z ní stane rentgen každého kliknutí, otevření a tichého sledování.
+
+Dobré segmenty:
+
+- „Chce dostávat produktové novinky“.
+- „Zajímá se o privacy-first analytiku“.
+- „Je zákaznický admin a chce bezpečnostní oznámení“.
+- „Používá tarif, kterého se změna týká“.
+- „Přihlásil se k workshopu a čeká materiály“.
+
+Podezřelé segmenty:
+
+- „Otevřel tři e-maily v noci, pošli tlakový follow-up“.
+- „Neodpovídá, tak ho přidej do agresivnější sekvence“.
+- „Klikl na ceník, předáme sales týmu bez kontextu“.
+- „Stáhl PDF, takže automaticky souhlasí s newsletterem“.
+
+Segment má mít účel a exit pravidlo. Když se člověk odhlásí, změní roli nebo přestane být relevantní, segmentace ho má pustit ven. Databáze kontaktů není muzeum historických nadějí.
+
+## Odděl reputaci a provozní riziko
+
+Pro menší SaaS je praktické oddělit alespoň marketingové a transakční odesílání. Nemusí to nutně znamenat dvě firmy a deset serverů. Často stačí samostatné subdomény, samostatné streamy v nástroji a jasná pravidla.
+
+Příklad:
+
+```text
+app.example.com       produkt
+mail.example.com      marketingové kampaně
+notify.example.com    transakční a produktové notifikace
+```
+
+K tomu přidej monitorování bounce, complaint a odhlašovacích signálů. Pokud marketing začne hořet, nechceš, aby reset hesla ležel vedle něj na stejném reputačním gauči a kašlal kouř.
+
+## Šablony piš jako službu, ne billboard
+
+Dobrý e-mail má jeden účel, srozumitelný předmět, jasné odesílatele a minimum designového balastu. HTML šablona má být přístupná, čitelná i bez obrázků a použitelná v textové verzi. Kritické informace nedávej jen do obrázku. Tlačítko doplň obyčejným odkazem. Pokud e-mail vyzývá k přihlášení, nikdy neposílej tajné údaje v URL.
+
+Mini struktura:
+
+```text
+Předmět: konkrétní důvod zprávy
+Preheader: krátké doplnění, ne clickbait
+Úvod: proč píšeme
+Hlavní informace: co se stalo / co má uživatel udělat
+Akce: jeden jasný další krok
+Bezpečnostní poznámka: kdy se ozvat, pokud akci nepoznává
+Preference nebo odhlášení: podle typu zprávy
+```
+
+Marketingový e-mail nemusí vypadat jako leták v HTML kostýmu. Často funguje lépe krátká, užitečná zpráva s jedním odkazem, bez pixelové zoologické zahrady.
+
+## Checklist: doručitelnost bez šmírování
+
+- [ ] Máme mapu typů e-mailů a jejich vlastníky?
+- [ ] Jsou transakční a marketingové zprávy oddělené alespoň pravidly a streamem?
+- [ ] Má doména správně nastavené SPF, DKIM a DMARC?
+- [ ] Sledujeme DMARC reporty před přísnější politikou?
+- [ ] Má každý marketingový e-mail viditelné odhlášení?
+- [ ] Podporujeme one-click unsubscribe pro hromadné zprávy?
+- [ ] Nepoužíváme tracking pixel jako automatický default?
+- [ ] Umíme měřit úspěch bez sledování otevření jednotlivce?
+- [ ] Segmenty vycházejí z férových a vysvětlitelných signálů?
+- [ ] Respektujeme odhlášení napříč všemi nástroji?
+- [ ] Neukládáme citlivý obsah do e-mailových logů zbytečně dlouho?
+- [ ] Máme test pro bounce, spam complaint a doručitelnost kritických zpráv?
+
+## Mini šablona e-mailové karty
+
+```text
+# E-mailová karta: [název zprávy]
+
+## Účel
+Proč zpráva existuje:
+Typ: transakční / produktová / marketingová / interní
+
+## Příjemce
+Kdo ji dostává:
+Jak vznikl vztah nebo souhlas:
+
+## Odesílání
+Doména nebo subdoména:
+Nástroj:
+SPF/DKIM/DMARC stav:
+
+## Data
+Jaká osobní data jsou ve zprávě:
+Co se loguje:
+Retence logů:
+
+## Měření
+Co měříme:
+Co záměrně neměříme:
+Používá tracking pixel? Proč:
+
+## Odhlášení a preference
+Je potřeba odhlášení:
+List-Unsubscribe:
+Preference centrum:
+
+## Revize
+Vlastník:
+Datum další kontroly:
+```
+
+E-mailový kanál je nejzdravější tehdy, když stojí na důvěře, ne na trikové metrice. Nastav autentizaci, odděl účely, umožni snadné odhlášení, měř méně invazivně a piš zprávy, které mají důvod existovat. Inbox není skládka leadů. Je to cizí prostor — chovej se tam jako host, ne jako reklamní dron.
+
+## Zdroje
+
+- Google Help: [Email sender guidelines](https://support.google.com/mail/answer/81126?hl=en)
+- Google Help: [Email sender guidelines FAQ](https://support.google.com/mail/answer/14229414)
+- Yahoo Sender Hub: [Sender Best Practices](https://senders.yahooinc.com/best-practices/)
+- Yahoo Sender Hub: [Subscription Hub](https://senders.yahooinc.com/subhub/)
+- RFC Editor: [RFC 8058 — Signaling One-Click Functionality for List Email Headers](https://www.rfc-editor.org/rfc/rfc8058.html)
+- IETF Datatracker: [RFC 8461 — SMTP MTA Strict Transport Security](https://datatracker.ietf.org/doc/rfc8461/)
+- IETF Datatracker: [RFC 8460 — SMTP TLS Reporting](https://datatracker.ietf.org/doc/rfc8460/)
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „E-mailová doručitelnost bez tracking pixelů a reputační loterie“ s rozdělením e-mailů podle účelu, SPF/DKIM/DMARC hygienou, one-click odhlášením, privacy-first měřením bez tracking pixelů, segmentací, checklistem, e-mailovou kartou a ověřenými zdroji Google, Yahoo a RFC.
+
 
 - 2026-10-03: Doplněna příloha „Prohlížečové úložiště bez localStorage skládky“ s praktickým rozlišením cookies, web storage, draftů, logout úklidu a marketingových identifikátorů, checklistem, storage kartou a ověřenými zdroji OWASP a MDN.
 
