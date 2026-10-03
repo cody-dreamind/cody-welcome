@@ -34308,7 +34308,179 @@ Pro B2B zákazníky to může být i prodejní výhoda. Když se někdo zeptá n
 - GitHub Docs — Dependency Review pro kontrolu změn závislostí v pull requestech: https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review
 - OpenSSF Scorecard — automatizované bezpečnostní signály pro open-source projekty: https://openssf.org/scorecard/
 
+# Příloha: Evidence souhlasů a odvolání bez právního divadla
+
+Souhlas není kouzelné zaklínadlo, kterým se legalizuje všechno, co marketing nebo produkt zrovna chce měřit. Je to konkrétní, dobrovolné, informované a odvolatelné rozhodnutí člověka. GDPR v článku 7 říká mimo jiné to, že správce musí umět doložit udělení souhlasu a že odvolání má být stejně snadné jako jeho udělení ([GDPR, článek 7](https://gdpr-info.eu/art-7-gdpr/)). EDPB ve svých pokynech k souhlasu zdůrazňuje stejné principy: souhlas musí být svobodný, specifický, informovaný a jednoznačný ([EDPB Guidelines 05/2020 on consent](https://www.edpb.europa.eu/sites/default/files/files/file1/edpb_guidelines_202005_consent_en.pdf)).
+
+Pro malý web nebo SaaS z toho plyne praktická věc: nepotřebuješ obří „consent management platformu“ jen proto, aby se v patičce cítila právní oddělení velkých korporací tepleji u srdce. Potřebuješ vědět, k čemu člověk dal souhlas, kdy, jakou verzi textu viděl, jak ho může odvolat a co se v systému stane po odvolání. Víc dat často nepřináší víc compliance. Jen víc práce, větší riziko a hezčí tabulku s průšvihem.
+
+> Codyho komentář: Souhlas není sběratelská kartička. Když ho nepotřebuješ, nesbírej ho. Když ho sbíráš, chovej se k němu jako k závazku, ne jako k marketingové nálepce.
+
+## Nejdřív rozliš souhlas od jiných právních základů
+
+Ne každé zpracování stojí na souhlasu. U SaaS často používáš různé právní základy podle účelu: plnění smlouvy pro poskytování služby, oprávněný zájem pro některé bezpečnostní a provozní záznamy, zákonnou povinnost pro účetnictví a souhlas pro volitelné věci typu netechnické cookies, newsletter nebo některé marketingové preference. Evropská komise k právním základům připomíná, že souhlas má být jasný a odvolatelný, ale není jedinou cestou zpracování ([European Commission: Legal grounds for processing data](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en)).
+
+První pravidlo: nepoužívej souhlas tam, kde není reálná volba. Pokud uživatel nemůže službu rozumně používat bez „souhlasu“ s věcí, která není pro službu nutná, souhlas pravděpodobně není svobodný. A pokud zpracování potřebuješ kvůli smlouvě, bezpečnosti nebo zákonu, nebal ho do souhlasového dialogu. Míchání právních základů mate uživatele i tým.
+
+Praktické rozdělení:
+
+- **Nutné provozní zpracování** — účet, relace, bezpečnostní logy, fakturace; typicky ne souhlas.
+- **Volitelné marketingové zpracování** — newsletter, remarketing, netechnické cookies; často souhlas nebo jiný specifický režim podle kanálu.
+- **Produktové preference** — nastavení notifikací, jazyk, vzhled; často součást služby, ne marketingový souhlas.
+- **Výzkum a zpětná vazba** — podle obsahu a způsobu použití může jít o souhlas, smluvní vztah nebo oprávněný zájem; vždy odděl citlivý obsah.
+
+## Souhlasová evidence má být minimální, ale doložitelná
+
+Evidence souhlasu není šuplík na všechno, co se o člověku podařilo zjistit. Cílem je umět doložit, že souhlas vznikl, k čemu se vztahoval a jak byl spravován. To jde udělat s malým množstvím údajů.
+
+Minimální záznam může obsahovat:
+
+- interní ID uživatele nebo anonymní návštěvní identifikátor podle kontextu,
+- účel souhlasu, například `newsletter_product_updates` nebo `analytics_optional_cookies`,
+- stav: uděleno, odmítnuto, odvoláno,
+- čas udělení nebo změny,
+- verzi textu, který člověk viděl,
+- zdroj rozhraní, například registrace, cookie lišta, preference centrum,
+- technický důkaz přiměřený riziku, například serverový event ID.
+
+Co do evidence obvykle nepatří: celé IP adresy na věčnost, user agent jako osobní otisk, kompletní obsah formuláře, marketingové segmenty, interní poznámky obchodníka nebo screenshot obrazovky s osobními údaji. Pokud potřebuješ ukládat víc, napiš proč, na jak dlouho a kdo k tomu má přístup.
+
+## Verze textu je stejně důležitá jako kliknutí
+
+Samotný záznam „uživatel klikl na souhlas“ nestačí, pokud nevíš, s čím souhlasil. Proto verzuj texty souhlasů. Nemusí to být složité. Každý souhlasový účel má mít identifikátor a verzi textu.
+
+Příklad:
+
+```text
+consent_key: newsletter_product_updates
+version: 2026-10-03-cs-1
+summary: Posílání produktových novinek e-mailem, maximálně 2× měsíčně.
+full_text_url: /privacy/consents/newsletter-product-updates-2026-10-03
+```
+
+Když text zásadně změníš, nevydávej to za stejný souhlas. U cookies ÚOOÚ uvádí, že významná změna zpracování může vyžadovat nové nastavení lišty nebo účelů a že odmítnutí má být stejně jednoduché jako souhlas ([ÚOOÚ: Cookies — otázky a odpovědi](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies)). Prakticky: drobná úprava formulace nemusí znamenat nový souhlas, ale nový účel, nový dodavatel mimo původní očekávání nebo zásadně jiný rozsah dat už ano.
+
+## Odvolání navrhni jako první, ne jako schovaný únikový východ
+
+Pokud jde souhlas udělit jedním kliknutím, nemá být odvolání zakopané v labyrintu profilu, modalu, potvrzení, e-mailu a otázky „proč nás opouštíte“. GDPR výslovně říká, že odvolání má být stejně snadné jako udělení. To je jednoduché pravidlo a zároveň výborný UX test.
+
+Dobré odvolání:
+
+- je dostupné tam, kde uživatel danou preference očekává,
+- jasně říká, co se vypne a co zůstane nutné,
+- nevyžaduje vysvětlování důvodu,
+- funguje okamžitě nebo má jasně popsané technické zpoždění,
+- zapíše změnu do evidence,
+- spustí dočištění navazujících systémů.
+
+Špatné odvolání vypadá jako retenční past: velké zelené tlačítko pro souhlas, malé šedé „spravovat“, pak tři obrazovky a nakonec e-mail na podporu. To není preference centrum. To je úniková místnost s právním rizikem.
+
+## Preference centrum drž srozumitelné
+
+Preference centrum má odpovídat tomu, jak člověk přemýšlí o komunikaci a datech, ne tomu, jak se jmenují tabulky v databázi. Nepiš „Souhlas se zpracováním osobních údajů pro účely optimalizace komerční komunikace třetími stranami“. Napiš raději: „Chci dostávat produktové novinky e-mailem.“ Vedle toho krátce vysvětli frekvenci, obsah, možnost odhlášení a odkaz na detail.
+
+Pro malý SaaS často stačí tři skupiny:
+
+- **Produktové a bezpečnostní zprávy** — nutné zprávy související se službou, bez odhlášení tam, kde jsou opravdu nezbytné.
+- **Produktové novinky a vzdělávací obsah** — volitelné, jasná frekvence a snadné odhlášení.
+- **Volitelná analytika a zlepšování produktu** — jen pokud opravdu používáš netechnické měření nebo dobrovolný výzkum.
+
+U každé skupiny ukaž aktuální stav a poslední změnu. Support pak nemusí luštit, proč zákazník něco dostává. Uživatel vidí, že má kontrolu. A tým má menší šanci, že omylem spustí kampaň na starý export e-mailů z doby bronzové.
+
+## Synchronizace do navazujících nástrojů
+
+Souhlas obvykle nežije jen v jedné tabulce. Dotýká se e-mailingu, analytiky, CRM, helpdesku, billing systému nebo interních exportů. Proto nestačí změnit checkbox v UI. Musíš vědět, kam se změna propíše.
+
+Praktický postup:
+
+1. U každého souhlasu napiš systém pravdy: kde je hlavní stav.
+2. Sepiš navazující systémy: e-mailing, CRM, analytika, datový sklad, support.
+3. Rozhodni, jestli se změna synchronizuje okamžitě, dávkou nebo webhookem.
+4. U každého přenosu ulož jen nutné pole: identifikátor, účel, stav, čas.
+5. Nastav retry a chybový stav, aby odvolání nezmizelo v tichém selhání.
+6. Jednou měsíčně porovnej vzorek stavů mezi systémem pravdy a nástroji.
+
+Privacy-first varianta: pokud e-mailing nebo analytika neumí spolehlivě držet preference, neposílej tam zbytečně kompletní profil. Posílej jen kontakt a aktuální oprávnění ke konkrétnímu účelu. Je to méně sexy než „360° customer view“, ale taky méně připomíná datový vysavač s logem.
+
+## Retence souhlasů a odmítnutí
+
+Souhlasové záznamy mají mít vlastní retenční pravidlo. Nejsou to běžné analytické eventy ani marketingové segmenty. Potřebuješ je držet tak dlouho, aby šlo doložit historii relevantní pro daný účel, ale ne navždy jen proto, že disk je levný a budoucí já se s tím nějak popere.
+
+Rozumný model:
+
+- aktuální stav drž, dokud účet nebo vztah existuje,
+- historii změn drž po dobu přiměřenou právnímu riziku a interní politice,
+- technické detaily důkazu omez na minimum,
+- po smazání účtu řeš, co musí zůstat kvůli doložení a co se má anonymizovat nebo odstranit,
+- odmítnutí netechnických cookies ukládej jen tak, aby se lišta nevracela agresivně a aby nebyl vytvářen další profil.
+
+U cookies je dobré pamatovat na to, že i „odmítnutí“ může být uložená preference. Drž ji technicky úsporně, bez napojení na marketingový profil. Cílem je respektovat volbu, ne postavit databázi lidí, kteří ti řekli ne.
+
+## Checklist: souhlasy bez právního divadla
+
+- [ ] Každý souhlas má konkrétní účel a není smíchaný s jiným právním základem.
+- [ ] Uživatel vidí jasný text bez právnické mlhy a bez předzaškrtnutých voleb.
+- [ ] Evidence obsahuje účel, stav, čas, verzi textu a přiměřený technický důkaz.
+- [ ] Odvolání je stejně snadné jako udělení a nevyžaduje důvod.
+- [ ] Preference centrum ukazuje aktuální stav a srozumitelný dopad změny.
+- [ ] Změny se propisují do e-mailingu, analytiky, CRM a dalších nástrojů.
+- [ ] Selhání synchronizace má retry, alert nebo ruční frontu.
+- [ ] Retence souhlasových záznamů je popsaná v datové mapě.
+- [ ] Cookie souhlas neobsahuje dark patterns ani rozdílně obtížné odmítnutí.
+- [ ] Při změně účelu nebo dodavatele je jasné, zda je potřeba nový souhlas.
+
+## Mini šablona consent karty
+
+```markdown
+# Consent karta: [účel]
+
+## Účel
+Co přesně uživatel povoluje a proč.
+
+## Právní základ
+Souhlas / jiný základ. Pokud jiný základ, nevydávat za souhlas.
+
+## Text a verze
+Krátký text:
+Plný text URL:
+Verze:
+Jazyk:
+
+## Udělení
+Kde se souhlas uděluje:
+Výchozí stav:
+Povinný / volitelný:
+
+## Odvolání
+Kde se odvolává:
+Jak rychle se projeví:
+Co zůstává jako nutné zpracování:
+
+## Evidence
+Ukládaná pole:
+Systém pravdy:
+Retence:
+
+## Synchronizace
+Navazující systémy:
+Retry / alert při selhání:
+
+## Revize
+Vlastník:
+Datum poslední kontroly:
+Kdy je potřeba nový souhlas:
+```
+
+## Zdroje
+
+- [GDPR, článek 7 — Conditions for consent](https://gdpr-info.eu/art-7-gdpr/)
+- [EDPB Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/sites/default/files/files/file1/edpb_guidelines_202005_consent_en.pdf)
+- [European Commission: Legal grounds for processing data](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en)
+- [ÚOOÚ: Cookies — otázky a odpovědi](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies)
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „Evidence souhlasů a odvolání bez právního divadla“ s rozlišením právních základů, minimální evidencí, verzováním textů, snadným odvoláním, preference centrem, synchronizací do nástrojů, retencí, checklistem, consent kartou a ověřenými zdroji GDPR, EDPB, Evropské komise a ÚOOÚ.
 
 - 2026-10-03: Doplněna příloha „Open-source licence a závislosti bez právního mlžení“ s praktickým license gate, rozdělením rizik závislostí, privacy-first kontrolou frontend balíčků, notice evidencí, checklistem, vyplnitelnou dependency licence kartou a ověřenými zdroji OSI, SPDX, GitHub a OpenSSF.
 
