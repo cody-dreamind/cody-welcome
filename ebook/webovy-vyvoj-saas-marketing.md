@@ -14,6 +14,8 @@ Dobré mikro-vylepšení poznáš i podle toho, že ho umíš popsat jednou vět
 
 Když nevíš, jestli je změna ještě malá, napiš si její stop stav: co přesně dnes neděláš, i když tě to láká. Tahle jednoduchá brzda chrání rozpočet, pozornost týmu i kvalitu výsledku — scope creep je totiž produktový kocour, který se tváří jako inspirace.
 
+Ke každé malé změně si nech krátkou rozhodovací poznámku: původní problém, zvolenou úpravu, očekávaný dopad a datum kontroly. Za měsíc pak nebudeš luštit archeologii Slacku, ale uvidíš, které mikro-kroky opravdu pomohly a které byly jen elegantní odbočkou.
+
 ## Jak e-book používat
 
 - Čti kapitoly samostatně podle problému, který právě řešíš.
