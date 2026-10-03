@@ -35166,7 +35166,214 @@ Produkční secrets management není o tom mít nejdražší vault a nejdramati�
 - OWASP Developer Guide: [Handle all Errors and Exceptions](https://devguide.owasp.org/en/04-design/02-web-app-checklist/10-handle-errors-exceptions/)
 - European Commission: [What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
 
+
+# Příloha: Interní admin bez superhrdinských práv a datového bufetu
+
+Interní administrace bývá v malém SaaS nejrychlejší cesta k opravě problému — a zároveň nejrychlejší cesta k průšvihu. Jeden panel, pár tlačítek, „jen pro support“ a najednou má půlka týmu možnost číst zákaznická data, měnit fakturaci, přepínat plány a mazat workspace. To není efektivita. To je datový bufet s cedulkou „prosím, nedělejte katastrofu“.
+
+Admin rozhraní musí být navržené stejně pečlivě jako veřejný produkt. Ne proto, že interním lidem nevěříš, ale proto, že dobrý systém nevyžaduje hrdinství, dokonalou paměť ani nulovou únavu. OWASP Authorization Cheat Sheet doporučuje princip nejmenších oprávnění, průběžné ověřování autorizace a výchozí odmítnutí přístupu, pokud není akce výslovně povolená ([OWASP: Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)). To je přesně základ pro interní admin.
+
+> Codyho komentář: Nejhorší role v administraci se jmenuje „admin“. Je to jako klíč od celé budovy, serverovny, účetnictví i kávovaru v jedné plastové kartičce. Pohodlné? Ano. Rozumné? Ani omylem.
+
+## Začni mapou interních akcí
+
+Nejdřív nesepisuj role. Sepiš akce. Role bez mapy akcí rychle skončí jako šuplík „manager“, „support“, „admin“, „superadmin“ a „superadmin2“, což je bezpečnostní poezie velmi temného druhu.
+
+Praktická mapa akcí:
+
+- zobrazit základní profil účtu,
+- zobrazit fakturační stav bez platebních detailů,
+- změnit tarif,
+- pozastavit účet,
+- spustit reset pozvánky,
+- nahlédnout do technického stavu integrace,
+- exportovat data,
+- smazat workspace,
+- změnit vlastníka účtu,
+- zobrazit auditní log.
+
+Ke každé akci dopiš: kdo ji potřebuje, proč, jak často, jaký je dopad, jestli vyžaduje druhý pár očí a co má zůstat skryté. Teprve potom z toho vznikají role.
+
+## Role navrhuj podle práce, ne podle ega
+
+Role má odpovídat práci, kterou člověk skutečně dělá. Support nepotřebuje přístup ke všemu jen proto, že občas řeší složitý ticket. Obchod nepotřebuje číst obsah zákaznických projektů, aby ověřil tarif. Vývojář nepotřebuje trvalý produkční přístup, pokud mu stačí časově omezený break-glass režim.
+
+Užitečný startovací model:
+
+- **Support reader** — vidí stav účtu, plán, poslední technické chyby a bezpečné metadata.
+- **Support operator** — může spustit omezené provozní akce, například znovu poslat pozvánku.
+- **Billing operator** — řeší tarif, fakturační stav a administrativní poznámky.
+- **Security reviewer** — čte auditní logy a bezpečnostní nastavení, ale nemění produktová data.
+- **Workspace admin impersonation** — není role, ale řízený dočasný režim s důvodem, expirací a auditní stopou.
+- **Break-glass admin** — nouzový přístup pro incidenty, vždy časově omezený a zpětně revidovaný.
+
+Pokud někdo žádá širokou roli, ptej se na konkrétní akci. „Potřebuju admina“ není požadavek. „Potřebuju na 20 minut obnovit pozvánku zákazníkovi po migraci“ už požadavek je.
+
+## Výchozí stav je zamítnout
+
+Admin panel má fungovat na principu deny-by-default. Když systém neví, jestli může akci povolit, nepovolí ji. Když endpoint nemá autorizaci, je to chyba release, ne budoucí úkol. Když frontend schová tlačítko, backend musí stejně ověřit oprávnění.
+
+Kontroluj oprávnění na třech místech:
+
+- v UI kvůli srozumitelnosti,
+- na API vrstvě kvůli bezpečnosti,
+- v auditní vrstvě kvůli dohledatelnosti.
+
+Nepoužívej jen obecné `isAdmin`. Lepší je kontrolovat schopnosti: `billing.plan.change`, `workspace.owner.transfer`, `support.invite.resend`, `data.export.start`. Schopnosti se dají testovat, vysvětlit a omezit. Magické admin boolean pole se umí hlavně množit.
+
+## Citlivé akce potřebují brzdy
+
+Ne každá interní akce má stejný dopad. Zobrazení plánu není totéž jako převod vlastnictví workspace. Citlivé akce potřebují další vrstvu ochrany.
+
+Brzdy podle dopadu:
+
+- potvrzení důvodu před akcí,
+- opětovné ověření identity u rizikových změn,
+- druhé schválení u mazání, převodu vlastnictví nebo velkého exportu,
+- časové zpoždění pro destruktivní akce, pokud nejde o urgentní incident,
+- limit na počet akcí za časové okno,
+- automatické upozornění vlastníkovi účtu,
+- jasný rollback nebo kompenzační postup.
+
+OWASP Authentication Cheat Sheet doporučuje znovu ověřit uživatele po rizikových událostech a před citlivými funkcemi ([OWASP: Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)). U interní administrace to není otravná formalita. Je to pojistka proti unavenému kliknutí, ukradené session i špatně pochopenému ticketu.
+
+## Impersonace není neviditelný převlek
+
+Možnost „přihlásit se jako zákazník“ je extrémně citlivá. Často vznikne z dobrého důvodu: support chce reprodukovat problém. Jenže bez pravidel je to nejrychlejší cesta k narušení důvěry.
+
+Bezpečnější impersonace:
+
+- vyžaduje konkrétní ticket nebo důvod,
+- má krátkou expiraci,
+- zobrazuje výrazný banner „jednáte jménem zákazníka“,
+- blokuje citlivé akce, které support nepotřebuje,
+- neloguje se jako zákazník, ale jako interní uživatel jednající v kontextu zákazníka,
+- zapisuje začátek, konec, důvod a rozsah,
+- ideálně upozorní zákazníka nebo je popsána ve smluvních a podpůrných pravidlech.
+
+Ještě lepší je nejdřív nabídnout support view bez plné impersonace: bezpečný náhled stavu, konfigurace a chyb, ne otevřené dveře do zákaznického účtu.
+
+## Auditní log má chránit i interní tým
+
+Auditní log není nástroj na špehování zaměstnanců. Je to ochrana zákazníka, firmy i samotného týmu. Když se něco stane, nechceš hádat z paměti, kdo co kdy kliknul. Chceš stručnou a důvěryhodnou stopu.
+
+Minimální auditní event:
+
+```text
+actor_id=internal_user_123
+actor_role=support_operator
+action=support.invite.resend
+target_type=workspace
+target_id=workspace_456
+reason=ticket_789
+result=success
+timestamp=2026-10-03T13:00:00Z
+request_id=req_abc
+```
+
+Auditní log nemá obsahovat celé zákaznické dokumenty ani citlivý obsah. Má obsahovat rozhodovací stopu: kdo, co, kdy, v jakém kontextu a s jakým výsledkem. Přístup k auditnímu logu je sám o sobě citlivé oprávnění.
+
+## Session a zařízení neber jako detail
+
+Interní admin musí mít přísnější pravidla než běžné produktové přihlášení. Pokud se někdo dostane do interní administrace, dopad je větší než u jednoho uživatelského účtu.
+
+Praktické minimum:
+
+- povinné MFA pro interní účty,
+- kratší session než u běžného produktu,
+- odhlášení po neaktivitě,
+- zákaz session ID v URL,
+- bezpečné cookie atributy `Secure`, `HttpOnly` a rozumné `SameSite`,
+- samostatná admin doména nebo alespoň jasně oddělený povrch,
+- možnost rychle odvolat všechny session interního uživatele,
+- přehled aktivních session a posledních přihlášení.
+
+OWASP Session Management Cheat Sheet zdůrazňuje bezpečné zacházení se session identifikátory, včetně ochrany cookie atributy a vyhýbání se předávání session ID v URL ([OWASP: Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)). U adminu to ber jako základ, ne jako volitelnou ozdobu.
+
+## Admin nesmí být datový sklad
+
+Interní panel často láká k tomu zobrazit „všechno pro jistotu“. Jenže všechno znamená větší riziko, více přístupů a horší vysvětlování zákazníkovi. Privacy-first admin ukazuje jen data potřebná k dané práci.
+
+Místo plného obsahu ukaž raději:
+
+- stav zpracování,
+- počty položek,
+- čas poslední úspěšné akce,
+- typ chyby,
+- bezpečný identifikátor,
+- informaci, jestli problém vyžaduje akci zákazníka,
+- tlačítko pro vyžádání dočasného zvýšeného přístupu.
+
+Když support potřebuje víc, udělej z toho výjimku s důvodem a expirací. Výjimka je zdravá, pokud je viditelná. Skrytá výjimka je jen nové pravidlo bez dokumentace.
+
+## Checklist: interní admin bez datového bufetu
+
+- [ ] Máme mapu interních akcí místo jedné univerzální admin role?
+- [ ] Každá role odpovídá konkrétní práci a má vlastníka?
+- [ ] Backend ověřuje schopnosti pro každou citlivou akci?
+- [ ] Výchozí stav autorizace je zamítnout?
+- [ ] Citlivé akce vyžadují důvod, re-auth, schválení nebo jinou brzdu podle dopadu?
+- [ ] Impersonace je časově omezená, auditovaná a jasně označená?
+- [ ] Auditní log ukládá rozhodovací stopu, ne zákaznický obsah?
+- [ ] Interní účty používají MFA a kratší session?
+- [ ] Umíme rychle odebrat přístup při odchodu člověka nebo incidentu?
+- [ ] Admin zobrazuje metadata a stav, ne plný obsah „pro jistotu“?
+
+## Mini šablona admin akce
+
+```text
+Název akce:
+
+Schopnost / permission key:
+
+Účel:
+
+Kdo ji potřebuje:
+
+Kdy ji používá:
+
+Dopad při chybě:
+nízký / střední / vysoký / kritický
+
+Zobrazovaná data:
+
+Zakázaná data:
+
+Vyžaduje důvod:
+ano / ne
+
+Vyžaduje re-auth nebo MFA krok:
+ano / ne
+
+Vyžaduje druhé schválení:
+ano / ne
+
+Auditní event:
+
+Upozornění zákazníkovi:
+
+Rollback nebo kompenzace:
+
+Retence auditní stopy:
+
+Vlastník pravidla:
+
+Datum revize:
+```
+
+Interní administrace má být nudná, omezená a dohledatelná. Čím méně hrdinských práv potřebuje běžný den, tím lépe je produkt navržený. A když přijde incident, nechceš řešit, kdo měl přístup ke všemu. Chceš vědět, která konkrétní akce byla povolená, proč, komu a na jak dlouho. To je rozdíl mezi provozem a loterií.
+
+## Zdroje
+
+- OWASP: [Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)
+- OWASP: [Authorization Patterns Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Patterns_Cheat_Sheet.html)
+- OWASP: [Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
+- OWASP: [Multifactor Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html)
+- OWASP: [Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „Interní admin bez superhrdinských práv a datového bufetu“ s mapou interních akcí, rolí podle práce, deny-by-default autorizací, brzdami pro citlivé akce, bezpečnou impersonací, auditním logem, session pravidly, checklistem, admin action kartou a ověřenými zdroji OWASP.
 
 - 2026-10-03: Doplněna příloha „Rotace produkčních secrets bez incidentového chaosu“ s kategorizací secrets podle dopadu, zakázanými místy úniku, oddělením prostředí, rotačním postupem, přístupy podle role, secret scanningem, checklistem, secret kartou a ověřenými zdroji OWASP.
 
