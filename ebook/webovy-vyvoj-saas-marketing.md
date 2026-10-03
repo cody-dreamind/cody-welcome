@@ -36488,7 +36488,149 @@ Feature flagy dávají malému týmu velkou provozní sílu: nasadit dřív, pus
 - OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 
 
+# Příloha: Security.txt a hlášení zranitelností bez právního strašení
+
+Bezpečnostní kontakt je drobnost, dokud ho někdo nepotřebuje. Pak rozhoduje o tom, jestli ti výzkumník pošle konkrétní report, nebo zranitelnost skončí v neurčitém e-mailu, na sociální síti, případně nikde. Malý web nebo SaaS nemusí mít vlastní bug bounty program s tričky a žebříčkem lovců. Má ale mít jasnou cestu, jak nahlásit problém bezpečně, stručně a bez toho, aby se dobrá vůle změnila v právní minové pole.
+
+`security.txt` je jednoduchý textový soubor podle RFC 9116, typicky dostupný na `/.well-known/security.txt`, který zveřejní bezpečnostní kontakt a základní pravidla hlášení zranitelností. Není to kouzelný štít. Je to cedule na dveřích: „Když najdete problém, tudy prosím.“ A cedule je pořád lepší než recepce v plamenech.
+
+> Codyho komentář: Pokud firma tvrdí, že bere bezpečnost vážně, ale jediná cesta hlášení je obecný formulář „Napište nám“ s povinným telefonem, je to jako mít požární poplach schovaný za CAPTCHA testem a motivačním citátem.
+
+## Začni kontaktem, který někdo opravdu čte
+
+Nejdřív si vyber kanál, který zvládneš provozně udržet. Pro malou firmu obvykle stačí `security@domena.cz` nebo jednoduchý alias do ticket systému. Důležité je, aby zpráva neskončila v marketingovém inboxu mezi nabídkami linkbuildingu a fakturou za kávovar.
+
+Praktické minimum:
+
+- nastav alias `security@...` na konkrétní odpovědné lidi,
+- přidej záložního vlastníka pro dovolené,
+- vytvoř filtr nebo label pro bezpečnostní reporty,
+- ověř, že adresa přijímá e-maily zvenku,
+- jednou měsíčně pošli testovací zprávu a zkontroluj reakci.
+
+Pokud používáš ticket systém, nevynucuj účet pro nahlášení. Výzkumník, který ti chce poslat kritickou chybu, nemá zakládat profil, odsouhlasit newsletter a vyplnit firmu, IČO a oblíbený framework. Stačí kontakt, stručné instrukce a férová odpověď.
+
+## Security.txt drž krátký a strojově čitelný
+
+Soubor nemá být esej ani právní román. Má pomoci lidem i automatickým nástrojům najít správný kontakt. RFC 9116 definuje pole jako `Contact`, `Expires`, `Encryption`, `Acknowledgments`, `Preferred-Languages`, `Canonical` nebo `Policy`. Ne všechno musíš použít hned, ale `Contact` a rozumná expirace jsou základ.
+
+Příklad malé firmy:
+
+```text
+Contact: mailto:security@example.cz
+Expires: 2027-01-31T23:00:00.000Z
+Preferred-Languages: cs, en
+Canonical: https://example.cz/.well-known/security.txt
+Policy: https://example.cz/security-policy
+```
+
+Expirace není byrokracie. Nutí tě jednou za čas ověřit, že kontakt pořád funguje, doména existuje, policy dává smysl a odpovědnost nezůstala na člověku, který už před půl rokem odešel pěstovat chilli. U většího SaaS může dávat smysl doplnit i odkaz na veřejné poděkování nebo PGP klíč pro citlivé reporty.
+
+## Policy piš jako dohodu, ne jako výhrůžku
+
+Vedle `security.txt` se hodí krátká stránka s pravidly hlášení. Jejím cílem není zastrašit lidi, kteří ti pomáhají. Má nastavit hranice: co testovat, co netestovat, jaká data nesbírat, jak poslat report a co může výzkumník čekat od tebe.
+
+Dobrá policy obsahuje:
+
+- rozsah systémů, které je možné hlásit,
+- zakázané aktivity jako sociální inženýrství, DDoS nebo exfiltrace dat,
+- požadavek na minimalizaci přístupu k cizím datům,
+- instrukce pro bezpečné předání důkazů,
+- očekávanou dobu první odpovědi,
+- pravidla koordinovaného zveřejnění,
+- informaci, zda nabízíš odměny, poděkování nebo jen potvrzení přijetí.
+
+Privacy-first verze policy má navíc jasně říct: neposílej nám celé databázové dumpy, screenshoty cizích osobních údajů ani nahrávky uživatelů, pokud to není nezbytné. Když je důkaz potřeba, stačí nejmenší možný výřez, anonymizovaný vzorek nebo popis reprodukce. Důkaz má pomoci opravit chybu, ne rozšířit incident.
+
+## Triage nesmí stát na hrdinství jednoho člověka
+
+Hlášení zranitelnosti je provozní proces, ne adrenalinový sport. Jakmile report přijde, potřebuješ ho roztřídit podle dopadu, reprodukovatelnosti a naléhavosti. OWASP doporučuje mít jasný proces pro příjem, validaci, opravu i komunikaci s reportérem; ENISA u koordinovaného zveřejňování zdůrazňuje spolupráci mezi vlastníkem systému, výzkumníky a případnými koordinátory.
+
+Jednoduchá triage pro malý SaaS:
+
+- **P0:** aktivní zneužití, únik dat, převzetí účtu, zásah plateb nebo admin práv.
+- **P1:** zranitelnost s vysokým dopadem, ale bez známého zneužití.
+- **P2:** chyba vyžadující specifické podmínky nebo omezený dopad.
+- **P3:** tvrdnutí konfigurace, informační únik nízkého dopadu, doporučení.
+
+Ke každému reportu si zapiš: datum přijetí, kontakt reportéra, dotčený systém, stručný popis, reprodukční kroky, riziko pro data, vlastníka opravy, termín další odpovědi a rozhodnutí o zveřejnění. Nesbírej víc osobních údajů o reportérovi, než potřebuješ pro komunikaci. Bezpečnostní proces nemá být nový CRM modul, díkybohu.
+
+## Komunikuj rychle, i když ještě nemáš opravu
+
+První odpověď nemusí obsahovat hotové řešení. Má potvrdit, že report dorazil, kdo se jím zabývá a kdy se ozveš znovu. Mlčení je nejrychlejší cesta k frustraci a nekontrolovanému zveřejnění. U kritických chyb komunikuj častěji, i kdyby zpráva byla jen: „Reprodukovali jsme problém, nasazujeme mitigaci, další update do 24 hodin.“
+
+Krátká šablona první odpovědi:
+
+```text
+Dobrý den,
+
+děkujeme za nahlášení. Report jsme přijali pod ID [ID] a předali ho k bezpečnostní triage.
+Prosíme, neposílejte další osobní údaje ani větší datové vzorky, pokud si je výslovně nevyžádáme.
+Do [datum/čas] dáme vědět další stav.
+
+Díky,
+[team]
+```
+
+Tahle odpověď je obyčejná, ale uklidní obě strany. Reportér ví, že nespadl do černé díry, a tým má jasný závazek na další krok.
+
+## Zveřejnění koordinuj podle dopadu
+
+Ne každá zranitelnost potřebuje veřejný advisory. Ale pokud chyba mohla dopadnout na zákazníky, integrace, open-source balíček nebo širší ekosystém, připrav zveřejnění jako produktovou komunikaci: co se stalo, koho se to týká, co bylo opraveno, co má udělat zákazník a kde se dozví víc.
+
+U SaaS provozu si předem stanov:
+
+- kdo rozhoduje o zákaznické komunikaci,
+- kdy zapojit právní nebo DPO roli,
+- kdy informovat zpracovatele nebo subprocesory,
+- jak oddělit technické detaily od návodu ke zneužití,
+- jak dlouho uchovat důkazní materiály a interní poznámky.
+
+Privacy-first pravidlo: veřejné shrnutí má být užitečné, ale nemá zveřejnit osobní údaje, interní tokeny, přesné útokové payloady ani logy zákazníků. Transparentnost není datová nahota. Uf, tohle tričko radši netisknout.
+
+## Checklist: security.txt a hlášení zranitelností
+
+- [ ] Existuje funkční `/.well-known/security.txt` s kontaktem a expirací?
+- [ ] Bezpečnostní e-mail někdo pravidelně čte?
+- [ ] Máme záložního vlastníka pro dovolené a nemoc?
+- [ ] Policy popisuje povolený rozsah a zakázané testy?
+- [ ] Policy výslovně žádá minimalizaci cizích osobních dat?
+- [ ] Umíme report zařadit do P0–P3 priority?
+- [ ] Máme šablonu první odpovědi?
+- [ ] Víme, kdy komunikovat zákazníkům nebo veřejně?
+- [ ] Ukládáme jen nezbytné důkazy a máme retenční pravidlo?
+- [ ] Testujeme kontakt a expiraci alespoň čtvrtletně?
+
+## Mini šablona vulnerability disclosure karty
+
+```text
+Název / ID reportu:
+Datum přijetí:
+Kontakt reportéra:
+Dotčený systém:
+Priorita:
+Stručný popis:
+Reprodukční kroky:
+Dopad na data:
+Dočasná mitigace:
+Vlastník opravy:
+Termín další odpovědi:
+Rozhodnutí o zveřejnění:
+Retence důkazů:
+Poučení do backlogu:
+```
+
+## Zdroje
+
+- RFC Editor: [RFC 9116 — A File Format to Aid in Security Vulnerability Disclosure](https://www.rfc-editor.org/rfc/rfc9116.html)
+- OWASP Cheat Sheet Series: [Vulnerability Disclosure Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Vulnerability_Disclosure_Cheat_Sheet.html)
+- ENISA: [Good Practice Guide on Vulnerability Disclosure](https://www.enisa.europa.eu/publications/vulnerability-disclosure)
+- ENISA: [Coordinated Vulnerability Disclosure: Towards a Common EU Approach](https://www.enisa.europa.eu/news/coordinated-vulnerability-disclosure-towards-a-common-eu-approach)
+
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „Security.txt a hlášení zranitelností bez právního strašení“ s praktickým nastavením bezpečnostního kontaktu, krátkým `security.txt`, disclosure policy, triage prioritami, šablonou první odpovědi, pravidly koordinovaného zveřejnění, checklistem, vulnerability disclosure kartou a ověřenými zdroji RFC 9116, OWASP a ENISA.
 
 - 2026-10-03: Doplněna příloha „Feature flagy bez vlajkové skládky a náhodného šmírování“ s rozlišením release, ops, experiment a permission flagů, privacy-first pravidly pro evaluation context, provozním auditováním, testováním, checklistem, flag kartou a ověřenými zdroji Martin Fowler, OpenFeature a OWASP.
 
