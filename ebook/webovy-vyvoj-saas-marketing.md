@@ -35371,7 +35371,154 @@ Interní administrace má být nudná, omezená a dohledatelná. Čím méně hr
 - OWASP: [Multifactor Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html)
 - OWASP: [Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
 
+## Příloha: Screenshoty a nahrávky obrazovky bez úniku citlivostí
+
+Screenshot je nejrychlejší způsob, jak ukázat problém. Je to taky nejrychlejší způsob, jak omylem poslat zákaznická data, interní poznámku, token v URL, e-mail v autocomplete, produkční ID objednávky nebo otevřený chat s kontextem, který do ticketu vůbec nepatří. U supportu, vývoje a marketingu jsou screenshoty nenápadný datový kanál. Proto si zaslouží vlastní pravidla.
+
+Privacy-first přístup neříká „nikdy nesdílej obrazovku“. Říká: sdílej jen tolik obrazu, kolik je potřeba pro rozhodnutí nebo opravu. Pokud stačí výřez jednoho tlačítka, neposílej celou administraci. Pokud stačí popis kroku, nenahrávej pětiminutové video s inboxem na druhém monitoru. Ano, zní to banálně. Právě proto to tolik týmů nedělá.
+
+> Codyho komentář: Screenshot je jako kufr na letišti. Než ho pošleš dál, zkontroluj kapsy. Občas v nich bývá víc než jen ponožky a panika.
+
+### Rozliš účel snímku
+
+Ne každý screenshot má stejný účel. Když je všechny házíš do jednoho koše, skončíš buď s příliš malým kontextem pro opravu, nebo s příliš velkým únikem pro všechny ostatní.
+
+Praktické kategorie:
+
+- Bug report: ukazuje chybu, stav rozhraní a kroky k reprodukci.
+- Design feedback: ukazuje layout, spacing, copy nebo vizuální nesrovnalost.
+- Support vysvětlení: ukazuje zákazníkovi, kam kliknout nebo co změnit.
+- Incident dokumentace: ukazuje dopad, čas, chybový stav a rozhodovací stopu.
+- Marketingový materiál: ukazuje produkt, ale nesmí obsahovat reálná zákaznická data.
+- Interní školení: ukazuje postup, ideálně na demo datech.
+
+Ke každé kategorii si napiš výchozí pravidlo: co smí být vidět, co se má maskovat a jak dlouho se soubor drží. Jeden řádek stačí. Bez pravidla se z každého screenshotu stává malé improvizační kasino.
+
+### Výřez je lepší než plátno života
+
+Nejčastější chyba je poslat celou obrazovku, když stačí výřez. Celá obrazovka často obsahuje záložky, notifikace, URL, rozšíření prohlížeče, osobní účet, interní nástěnku nebo náhledy jiných zákazníků.
+
+Bezpečnější postup:
+
+1. Zavři nepotřebné panely, chaty a notifikace.
+2. Ověř, že jsi ve správném prostředí, ideálně staging nebo demo.
+3. Udělej výřez jen relevantní části.
+4. Zamaskuj údaje, které nejsou nutné pro pochopení problému.
+5. Přidej krátký text: co snímek ukazuje a jaký krok má následovat.
+
+Maskování má být nevratné. Rozmazání může být někdy čitelné nebo rekonstruovatelné, hlavně u krátkých textů. Bezpečnější je překrytí plnou barvou nebo nahrazení demo hodnotou. „Jana Nováková“ se může stát „Demo zákazník“. Číslo faktury se může stát „INV-XXXX“. Token se nemá stát ničím, token se má z obrázku zmizet úplně.
+
+### Nahrávky obrazovky drž krátké
+
+Video je užitečné, když problém vzniká sérií kroků. Zároveň sbírá víc kontextu než statický snímek: pohyb kurzoru, otevřené taby, notifikace, obsah polí, části URL, systémový čas, někdy i zvuk. Proto nahrávku používej jen tehdy, když screenshot nestačí.
+
+Dobrá nahrávka má:
+
+- jasný začátek a konec,
+- jen jeden scénář,
+- demo data nebo anonymizované hodnoty,
+- vypnuté notifikace,
+- zavřené nepotřebné záložky,
+- žádný osobní inbox, kalendář ani chat,
+- stručný popis očekávaného a skutečného výsledku.
+
+Ideální délka pro bug report je desítky sekund, ne režisérský sestřih v délce epizody seriálu. Pokud nahrávka potřebuje komentář, napiš ho raději textově pod video. Zvuk často přidává nové riziko: jména, kontext, pozadí, interní poznámky. Když audio není nutné, nenahrávej ho.
+
+### Screenshoty v ticketech nejsou archiv
+
+Ticketový systém není digitální půda. Pokud do něj ukládáš screenshoty s osobními údaji, měl bys vědět proč, kdo je vidí a kdy zmizí. U supportu je obzvlášť snadné nasbírat historické snímky obrazovek s daty, která už pro řešení dávno nejsou potřeba.
+
+Praktická pravidla:
+
+- do ticketu patří jen snímek nutný k vyřešení problému,
+- přílohy s citlivým obsahem označ podle rizika,
+- po vyřešení zvaž odstranění nebo nahrazení anonymizovanou verzí,
+- nepřenášej screenshoty mezi nástroji jen kvůli pohodlí,
+- nepoužívej support screenshoty v marketingu,
+- pro dokumentaci vytvoř nové demo snímky bez zákaznických dat.
+
+Když zákazník pošle snímek s citlivými údaji, nešiř ho dál bez úpravy. Poděkuj, vyřeš problém a pokud je to vhodné, napiš mu krátce, že příště stačí výřez bez osobních údajů. Ne jako kárání. Jako ochrana.
+
+### Demo data jsou investice do klidu
+
+Nejlepší prevence úniku ve screenshotech je mít kvalitní demo prostředí. Pokud tým nemá demo účty, demo firmy, demo objednávky a demo chyby, začne při každé dokumentaci sahat po produkci. A produkce je místo, kde žijí skuteční lidé, ne rekvizity.
+
+Dobré demo prostředí obsahuje:
+
+- realistické, ale fiktivní zákazníky,
+- ukázkové faktury, objednávky nebo projekty,
+- typické chybové a prázdné stavy,
+- různé role uživatelů,
+- data bez reálných e-mailů, telefonů a adres,
+- pravidelný reset do známého stavu.
+
+Marketing, support i vývoj pak můžou tvořit návody, bug reporty a ukázky bez lovu v produkčních datech. Demo data nejsou hračka. Jsou provozní ochranná pomůcka.
+
+### Interní pravidlo pro sdílení
+
+Než screenshot nebo video odešleš, projdi krátkou mentální bránu:
+
+```text
+Kdo to uvidí?
+Potřebuje vidět právě tato data?
+Stačil by výřez?
+Stačila by anonymizovaná hodnota?
+Je tam URL, token, e-mail, zákaznické jméno nebo interní poznámka?
+Kde se soubor uloží a kdy zmizí?
+```
+
+Pokud na některou otázku neumíš odpovědět, soubor ještě neposílej. Většinou stačí třicet sekund úklidu. To je levnější než vysvětlovat, proč se v dokumentaci objevil screenshot produkční administrace se jmény zákazníků.
+
+### Checklist screenshotů a nahrávek
+
+- [ ] Používáme výřez místo celé obrazovky, pokud to stačí?
+- [ ] Máme vypnuté notifikace před nahráváním?
+- [ ] Neposíláme URL s tokeny, query parametry nebo interními identifikátory bez důvodu?
+- [ ] Maskujeme osobní údaje nevratně, ne jen efektním rozmazáním?
+- [ ] Pro dokumentaci a marketing používáme demo data?
+- [ ] Ticketové přílohy držíme jen po dobu, kdy mají účel?
+- [ ] Ví support, jak zákazníkovi poradit s bezpečným screenshotem?
+- [ ] Nepřesouváme citlivé snímky mezi nástroji bez jasného důvodu?
+- [ ] Má každý citlivý screenshot vlastníka a kontext?
+- [ ] Umíme po incidentu dohledat, kde byl snímek sdílený?
+
+### Mini šablona pravidla pro screenshot
+
+```text
+Účel snímku:
+
+Typ:
+bug report / design feedback / support návod / incident / marketing / školení
+
+Kdo snímek uvidí:
+
+Použité prostředí:
+produkce / staging / demo / lokální
+
+Co musí být vidět:
+
+Co nesmí být vidět:
+
+Maskování provedeno:
+ano / ne / není potřeba
+
+Obsahuje osobní údaje:
+ano / ne / nejsem si jistý
+
+Kde bude uložen:
+
+Retence nebo datum smazání:
+
+Další krok:
+
+Poznámky:
+```
+
+Screenshoty a nahrávky obrazovky jsou skvělé pracovní zkratky. Jen nesmí být zkratkou kolem zdravého rozumu. Když tým používá výřezy, demo data, krátké nahrávky a jasnou retenci, zůstane rychlý bez toho, aby z každého bug reportu dělal malý datový únik v kostýmu produktivity.
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „Screenshoty a nahrávky obrazovky bez úniku citlivostí“ s pravidly pro výřezy, maskování, krátké nahrávky, ticketové přílohy, demo data, interní sdílení, checklistem a vyplnitelnou šablonou pravidla pro screenshot.
 
 - 2026-10-03: Doplněna příloha „Interní admin bez superhrdinských práv a datového bufetu“ s mapou interních akcí, rolí podle práce, deny-by-default autorizací, brzdami pro citlivé akce, bezpečnou impersonací, auditním logem, session pravidly, checklistem, admin action kartou a ověřenými zdroji OWASP.
 
