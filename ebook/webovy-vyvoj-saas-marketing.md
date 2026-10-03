@@ -36964,7 +36964,137 @@ Rizika:
 - IETF: [RFC 9309 — Robots Exclusion Protocol](https://www.rfc-editor.org/rfc/rfc9309)
 
 
+# Příloha: Postmortem incidentu bez honu na viníka a datového smogu
+
+Incident nekončí tím, že služba zase odpovídá, grafy zezelenají a někdo do chatu napíše „uff“. Pro web nebo SaaS je opravdový konec až ve chvíli, kdy tým ví, co se stalo, proč se to mohlo stát, co se změnilo a jak se podobná situace příště zachytí dřív. Postmortem není soudní síň. Je to provozní učení.
+
+Privacy-first postmortem má ještě jednu vrstvu navíc: nesbírá víc dat jen proto, že se tým lekl. Po incidentu je lákavé zapnout agresivní logování, nahrávání relací, detailní identifikátory a všude přidat „dočasný“ monitoring. Jenže dočasné věci v produkci často žijí déle než některé startupy. Cílem je pochopit incident bez toho, aby z opravy vznikl nový datový problém.
+
+> Codyho komentář: Nejhorší postmortem je ten, který hledá viníka rychleji než příčinu. Druhý nejhorší je ten, který končí větou „přidáme víc logů“ a nikdo neřekne jakých, na jak dlouho a kdo je smí číst.
+
+## Udělej časovou osu, ne detektivní román
+
+Začni prostou časovou osou. Nepiš drama, piš fakta: kdy se objevily první signály, kdo si jich všiml, kdy vznikl dopad na zákazníky, kdy byla nasazena první brzda, kdy se služba vrátila do normálu a kdy odešla poslední komunikace.
+
+Dobrá časová osa má konkrétní časy v jedné časové zóně, odkazy na releasy nebo změny konfigurace, stručné popisy rozhodnutí a jasné označení nejistot. Když nevíš, jestli chyba začala v 10:03 nebo 10:17, napiš interval a proč není přesnější. Mlžení zbytečně ničí důvěru uvnitř týmu.
+
+Nepřepisuj historii podle toho, co dnes vypadá jasně. V době incidentu tým často pracuje s neúplnými informacemi. Postmortem má zachytit i rozhodovací kontext: proč se nejdřív restartovala fronta, proč se vypnul import, proč se zákazníkům poslal krátký update místo detailního vysvětlení. Právě tyhle poznámky později zlepší playbook.
+
+## Odděl technickou chybu, procesní mezeru a zákaznický dopad
+
+Jedna incidentová věta obvykle nestačí. „Spadla databáze“ není kompletní příčina. Rozděl postmortem na tři pohledy:
+
+- Technika: co se porouchalo, jak se chyba šířila a proč ji systém neomezil dřív.
+- Proces: který krok chyběl, byl nejasný nebo závisel na jednom člověku.
+- Dopad: co viděl zákazník, jak dlouho to trvalo a která data nebo funkce byly zasažené.
+
+Tahle trojice brání oblíbené pasti: opravit jednu technickou závadu a nechat nedotčený proces, který umožní jiný typ výpadku. Pokud například importní job zahltil databázi, technická oprava může být limit a fronta. Procesní oprava může být review pro změny dávkování. Zákaznická oprava může být lepší stavová hláška a pozdější vysvětlení v účtu.
+
+## Data breach posuzuj zvlášť a brzy
+
+Ne každý incident je porušení zabezpečení osobních údajů, ale každý podezřelý incident si zaslouží rychlou datovou kontrolu. GDPR popisuje porušení zabezpečení jako situace vedoucí mimo jiné k náhodnému nebo protiprávnímu zničení, ztrátě, změně, neoprávněnému poskytnutí nebo zpřístupnění osobních údajů. Český ÚOOÚ uvádí, že správce má ohlásit porušení bez zbytečného odkladu a pokud možno do 72 hodin od okamžiku, kdy se o něm dozvěděl, pokud existuje riziko pro práva a svobody lidí.
+
+Prakticky to znamená: už během řešení incidentu založ krátkou datovou větev vyšetřování. Nečekej na hotový technický postmortem. Odpověz na otázky: byly dotčené osobní údaje, jaké kategorie, kolik subjektů, zda byla data čitelná, kdo mohl získat přístup, jestli šlo o produkci nebo test, zda existuje šifrování a jaké kroky už omezily dopad.
+
+Pokud si nejsi jistý, napiš to jako nejistotu, ne jako uklidňující pohádku. „Zatím nemáme důkaz o exfiltraci“ je fér. „Data určitě neutekla“ bez důkazů je hazard v hezkém kabátku.
+
+## Nezapomeň na zákaznickou komunikaci po opravě
+
+Zákazník nepotřebuje číst interní stack trace. Potřebuje vědět, co se stalo jemu, co má případně udělat a co se změnilo. Post-incident komunikace má být krátká, věcná a datově úsporná.
+
+Dobrá zpráva po incidentu obsahuje: časové okno dopadu, postižené funkce, aktuální stav, doporučenou akci zákazníka, kontakt pro dotazy a slib navazujícího vysvětlení, pokud ještě běží analýza. Pokud incident neměl dopad na osobní data, napiš, jak jste to ověřili na úrovni přiměřené sdělení. Pokud dopad na data měl nebo mohl mít, drž se právního a bezpečnostního postupu, ne marketingového optimismu.
+
+Privacy-first zásada: neposílej zákazníkům víc detailů, než potřebují k rozhodnutí, ale neskrývej podstatné informace. Transparentnost není datový dump. Transparentnost je přesná odpověď bez mlhy.
+
+## Akční kroky omez počtem a dej jim vlastníka
+
+Postmortem bez follow-up úkolů je jen drahá terapie. Zároveň deset „P1“ úkolů znamená, že tým nepochopil priority. Z každého incidentu vyber tři až pět opatření podle dopadu:
+
+- prevence: co sníží pravděpodobnost opakování,
+- detekce: co zkrátí čas od vzniku k odhalení,
+- omezení dopadu: co zabrání šíření problému,
+- komunikace: co zrychlí nebo zpřesní informování zákazníků,
+- úklid dat: co odstraní dočasné logy, exporty nebo nouzové přístupy.
+
+Každý úkol má mít vlastníka, termín, kritérium hotovo a odkaz na konkrétní část incidentu. „Zlepšit monitoring“ není úkol. „Přidat alert na růst chyb `payment_export_failed` nad 3 % za 10 minut, bez ukládání obsahu exportu, retence metrik 30 dní“ už úkol je.
+
+## Dočasné nouzové věci aktivně ukliď
+
+Během incidentu vznikají nouzové výjimky: zvýšená práva, debug logy, ruční exporty, lokální kopie, dočasné API tokeny, vypnuté limity, otevřené dashboardy. Postmortem musí mít samostatnou sekci „úklid“. Bez ní se z nouzového režimu stane nový normál.
+
+Zapiš, co bylo dočasně povoleno, kdo to povolil, kde to běží, jaká data to může obsahovat a kdy se to vypne. Pokud vznikly soubory s osobními údaji, dej jim retenční datum. Pokud někdo dostal vyšší oprávnění, vrať ho zpět a ověř auditním logem. Pokud se zapnulo detailnější logování, nastav datum vypnutí nebo automatickou expiraci.
+
+## Checklist: postmortem bez datového smogu
+
+- Máme časovou osu s časy, rozhodnutími a nejistotami.
+- Oddělili jsme technickou příčinu, procesní mezeru a zákaznický dopad.
+- Posoudili jsme, jestli šlo nebo mohlo jít o porušení zabezpečení osobních údajů.
+- Víme, zda existuje ohlašovací nebo komunikační povinnost a kdo ji vlastní.
+- Zákaznická komunikace říká dopad, stav, další krok a kontakt bez zbytečných interních detailů.
+- Follow-up úkoly mají vlastníka, termín a měřitelné kritérium hotovo.
+- Dočasné logy, exporty, tokeny a vyšší oprávnění mají plán úklidu.
+- Poučení se promítlo do playbooku, ne jen do zápisu v dokumentu.
+
+## Mini šablona postmortem karty
+
+```text
+# Postmortem karta: [název incidentu]
+
+## Shrnutí
+Co se stalo:
+Kdy byl dopad:
+Koho se to týkalo:
+Aktuální stav:
+
+## Časová osa
+První signál:
+Potvrzení incidentu:
+První omezení dopadu:
+Obnova služby:
+Zákaznický update:
+
+## Dopad
+Funkce:
+Zákazníci / tenancy:
+Data:
+Finanční nebo reputační dopad:
+
+## Data breach kontrola
+Osobní údaje dotčené:
+Riziko pro osoby:
+Ohlášení ÚOOÚ / jinému orgánu:
+Komunikace subjektům údajů:
+Právní / DPO vlastník:
+
+## Příčiny
+Technická příčina:
+Procesní mezera:
+Detekční mezera:
+
+## Opatření
+1. [úkol, vlastník, termín, kritérium hotovo]
+2. [úkol, vlastník, termín, kritérium hotovo]
+3. [úkol, vlastník, termín, kritérium hotovo]
+
+## Úklid
+Dočasné přístupy:
+Dočasné logy:
+Exporty / kopie dat:
+Datum kontroly:
+```
+
+## Zdroje
+
+- ÚOOÚ: [Porušení zabezpečení osobních údajů](https://uoou.gov.cz/profesional/poruseni-zabezpeceni-osobnich-udaju)
+- ÚOOÚ: [Online formulář Ohlášení porušení zabezpečení osobních údajů dle GDPR](https://uoou.gov.cz/ohlaseni-poruseni-zabezpeceni-osobnich-udaju-dle-gdpr)
+- EDPB: [Guidelines 9/2022 on personal data breach notification under GDPR](https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en)
+- ENISA: [Incident Management Plan](https://tools.enisa.europa.eu/topics/risk-management/current-risk/bcm-resilience/bc-plan/incident-management-plan)
+- ENISA: [Good Practice Guide for Incident Management](https://www.enisa.europa.eu/sites/default/files/publications/Incident_Management_guide.pdf)
+
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „Postmortem incidentu bez honu na viníka a datového smogu“ s praktickým postupem pro časovou osu, oddělení technických a procesních příčin, datovou breach kontrolu, zákaznickou komunikaci, follow-up úkoly, úklid dočasných logů/přístupů, checklist, postmortem kartu a ověřené zdroje ÚOOÚ, EDPB a ENISA.
 
 - 2026-10-03: Doplněna příloha „AI crawlery a robots.txt bez paniky a omylů“ s rozdělením obsahu podle účelu, rozlišením vyhledávání a trénování, pravidly pro `robots.txt` a `llms.txt`, privacy-first monitoringem crawler zátěže, ochranou preview/exportů, čtvrtletní rutinou, checklistem, crawler policy kartou a ověřenými zdroji OpenAI, Google, Common Crawl, Google Search Central a RFC 9309.
 
