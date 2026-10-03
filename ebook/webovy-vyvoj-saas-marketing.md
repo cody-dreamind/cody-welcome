@@ -34650,7 +34650,7 @@ Fallback pro support:
 - OWASP: [File Upload Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html)
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
 
-# Příloha: Feature flags a rollback bez produkčního adrenalinu
+# Příloha: Release brzdy a rollback bez produkčního adrenalinu
 
 Nasazení nové funkce do produkce nemá být skok z letadla s otázkou, jestli jsme přibalili padák. Pro malý SaaS je zdravější přístup: oddělit deploy kódu od vydání funkce zákazníkům, měřit dopad, mít připravený návrat zpět a nenechat v produktu hromadu zapomenutých přepínačů.
 
@@ -34830,7 +34830,7 @@ Feature flags jsou nejlepší, když po nich nezůstane nepořádek. Pomáhají 
 
 # Pracovní log
 
-- 2026-10-03: Doplněna příloha „Feature flags a rollback bez produkčního adrenalinu“ s typy flagů, pravidly vlastnictví a expirace, postupným rolloutem, privacy-first měřením, rollback plánem, datovou kompatibilitou, checklistem, feature flag kartou a ověřenými zdroji Martin Fowler, GitLab a OWASP.
+- 2026-10-03: Doplněna příloha „Release brzdy a rollback bez produkčního adrenalinu“ s typy flagů, pravidly vlastnictví a expirace, postupným rolloutem, privacy-first měřením, rollback plánem, datovou kompatibilitou, checklistem, feature flag kartou a ověřenými zdroji Martin Fowler, GitLab a OWASP.
 
 - 2026-10-03: Doplněna příloha „PDF výstupy a stahovatelné dokumenty bez metadatového průšvihu“ s rozhodováním o formátu, minimalizací obsahu a metadat, přístupností PDF, background generováním, oprávněními ke stažení, bezpečností uploadů, checklistem, dokumentovou kartou a ověřenými zdroji W3C, PDF Association, OWASP a Evropské komise.
 
