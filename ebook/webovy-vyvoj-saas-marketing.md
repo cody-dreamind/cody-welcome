@@ -36119,7 +36119,227 @@ Indexace není jednorázová SEO kolonka při launchi. Je to provozní disciplí
 - Google Search Central: [What is a sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview)
 - Google Search Central: [How to specify a canonical URL](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls)
 
+# Příloha: Bezpečnostní hlavičky bez falešného pocitu bezpečí
+
+Bezpečnostní hlavičky nejsou kouzelný štít. Jsou to dopravní značky pro prohlížeč: odkud smí načítat skripty, jestli má trvat na HTTPS, kolik informací posílat v `Referer`, zda může stránka používat kameru nebo geolokaci a jak se chovat k podezřelým MIME typům. Když jsou dobře nastavené, zmenšují prostor pro chyby. Když jsou opsané z náhodného blogu, umí rozbít checkout, analytiku, fonty i administraci — a pak je tým potichu vypne. Gratuluju, máme bezpečnostní konfety.
+
+Praktický cíl není „mít co nejvíc hlaviček“. Cíl je mít malou, zdokumentovanou politiku, která odpovídá tomu, co web skutečně dělá. Landing page s formulářem nepotřebuje stejné výjimky jako klientská zóna s exportem PDF, vloženým videem a platební bránou.
+
+> Codyho komentář: Bezpečnostní hlavička je dobrá jen tehdy, když víš, proč tam je, kdo ji vlastní a jak poznáš, že něco rozbila. Jinak je to talisman v Nginxu.
+
+## Začni inventářem zdrojů, ne generátorem hlaviček
+
+Než napíšeš první `Content-Security-Policy`, udělej inventář toho, co stránka načítá:
+
+- vlastní doména a subdomény,
+- JavaScript bundly,
+- CSS a fonty,
+- obrázky, videa a soubory ke stažení,
+- formulářové endpointy,
+- analytika,
+- platební brány,
+- support widgety,
+- administrace a interní nástroje.
+
+Ke každému zdroji si napiš účel, vlastníka a datový dopad. Privacy-first otázka zní: „Musí tato třetí strana dostat požadavek už při načtení stránky?“ Pokud ne, načti ji až po akci uživatele, nahraď ji vlastním řešením nebo ji vyhoď. Bezpečnostní hlavičky pak nebudou jen technické nastavení, ale důkaz, že web nemá zbytečné externí chapadlo.
+
+Příklad inventáře:
+
+| Zdroj | Účel | Kdy se načítá | Data | Rozhodnutí |
+| --- | --- | --- | --- | --- |
+| `self` | vlastní HTML, CSS, JS | vždy | serverové logy | povolit |
+| `analytics.example.eu` | agregovaná analytika | po načtení stránky | URL bez osobních query parametrů | povolit jen v `script-src` a `connect-src` |
+| `video-provider.example` | produktové video | po kliknutí | IP + stránka s videem | lazy-load, ne v hero |
+| starý chat widget | support | vždy | cookies + celá URL | odstranit, nahradit kontaktním formulářem |
+
+## CSP zaváděj postupně
+
+`Content-Security-Policy` říká prohlížeči, jaké zdroje smí stránka načítat. MDN popisuje CSP jako mechanismus, kterým správce webu omezuje povolené zdroje pro stránku a pomáhá tím mimo jiné proti XSS útokům ([MDN: Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy)). To je silné, ale i křehké.
+
+Začni v report-only režimu, pokud máš kam bezpečně sbírat porušení. U malého webu často stačí nejdřív lokálně a na stagingu projít hlavní stránky, formuláře, administraci a kritické flow. Cílem není zachytit každou exotickou kombinaci prohlížeče. Cílem je nenasadit politiku, která v pondělí ráno znefunkční poptávky.
+
+Rozumný start pro jednoduchý obsahový web může vypadat takto:
+
+```http
+Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'; connect-src 'self'
+```
+
+Tahle ukázka není univerzální recept. Pokud používáš externí fonty, platební bránu, mapu nebo analytiku, budeš potřebovat cílené výjimky. Každá výjimka má mít komentář v konfigurační dokumentaci: proč existuje, pro jakou část webu platí a kdy se má znovu zkontrolovat.
+
+Důležité pravidlo: `unsafe-inline` a `unsafe-eval` nejsou „dočasná drobnost“. Jsou to signály, že build, šablony nebo integrace potřebují lepší návrh. Někdy se jim krátkodobě nevyhneš, ale pak k nim napiš datum smrti. Bez data smrti se z dočasné výjimky stává trvalé dědictví po spěchu.
+
+## HSTS zapínej až po kontrole celé domény
+
+`Strict-Transport-Security` říká prohlížeči, aby k webu přistupoval přes HTTPS. MDN upozorňuje, že HSTS se posílá přes HTTPS odpověď a prohlížeč si pro daný host uloží, že má budoucí HTTP požadavky automaticky převádět na HTTPS ([MDN: Strict-Transport-Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security)).
+
+Praktický postup:
+
+1. Ověř, že všechny veřejné části webu fungují přes HTTPS.
+2. Ověř subdomény: `www`, root doménu, API, status page, admin, staré landing pages.
+3. Nejdřív použij kratší `max-age`, například několik dnů.
+4. Teprve po kontrole zvyšuj hodnotu.
+5. `includeSubDomains` zapínej jen pokud opravdu kontroluješ všechny subdomény.
+6. Preload řeš až jako samostatné rozhodnutí, ne jako checkbox v generátoru.
+
+Příklad opatrného startu:
+
+```http
+Strict-Transport-Security: max-age=604800
+```
+
+Příklad po ověření domény:
+
+```http
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+```
+
+Pro malý SaaS je největší riziko v zapomenutých subdoménách. Jedna stará demo aplikace bez správného certifikátu umí po `includeSubDomains` vytvořit zábavný provozní escape room. Bohužel bez zábavy.
+
+## Referrer-Policy nastav podle dat v URL
+
+`Referrer-Policy` řídí, kolik informací o původní stránce prohlížeč posílá při přechodu na další zdroj. MDN uvádí, že hlavička ovlivňuje informace posílané v `Referer` headeru a že výchozí hodnota v moderních prohlížečích je `strict-origin-when-cross-origin` ([MDN: Referrer-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy)).
+
+Privacy-first výchozí volba pro většinu marketingových webů:
+
+```http
+Referrer-Policy: strict-origin-when-cross-origin
+```
+
+Pokud máš v URL citlivější query parametry, interní identifikátory nebo jednorázové tokeny, udělej dvě věci:
+
+- oprav URL návrh, aby citlivé hodnoty v adrese vůbec nebyly,
+- zvaž přísnější politiku, například `no-referrer` pro konkrétní citlivé části.
+
+Nespoléhej ale na hlavičku jako na jedinou ochranu. Pokud do URL dáváš e-mail zákazníka, jméno firmy nebo token ke stažení, problém není primárně v `Referrer-Policy`. Problém je v návrhu toku.
+
+## Permissions-Policy drž funkce zavřené
+
+`Permissions-Policy` umožňuje řídit, které prohlížečové funkce může stránka nebo vložený obsah používat. MDN ji popisuje jako mechanismus pro povolování nebo blokování browser features ve vlastním dokumentu a případně ve vložených framech ([MDN: Permissions-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Permissions-Policy)).
+
+U běžného B2B webu většinou nepotřebuješ kameru, mikrofon, geolokaci ani senzory. Nastav výchozí zákaz a povoluj jen funkce, které produkt opravdu používá:
+
+```http
+Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=()
+```
+
+Pokud má SaaS funkci nahrávání hlasu nebo geolokační potvrzení, nevkládej ji do globální politiky pro celý web. Odděl ji na konkrétní část aplikace a vysvětli uživateli, proč se oprávnění žádá. Souhlas prohlížeče není UX text. Je to poslední technická brzda.
+
+## MIME sniffing a staré hlavičky řeš věcně
+
+`X-Content-Type-Options: nosniff` pomáhá prohlížeči držet se deklarovaného `Content-Type`. MDN uvádí, že hodnota `nosniff` blokuje requesty, pokud jejich MIME typ neodpovídá očekávanému typu pro styl nebo skript ([MDN: X-Content-Type-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options)).
+
+Doporučené minimum:
+
+```http
+X-Content-Type-Options: nosniff
+```
+
+K tomu přidej `X-Frame-Options` jen tam, kde nedokážeš nebo nechceš použít `frame-ancestors` v CSP. Modernější cesta je řídit vkládání přes CSP, ale starší obranné hlavičky mohou být pořád praktické pro kompatibilitu. OWASP Secure Headers Project udržuje přehled doporučených bezpečnostních response headers a jejich účelu ([OWASP Secure Headers Project](https://owasp.org/projects/secure-headers-project)).
+
+## Hlavičky testuj jako součást release
+
+Bezpečnostní hlavičky patří do release checklistu stejně jako formuláře a 404 stránka. Testuj minimálně:
+
+- homepage,
+- hlavní landing page,
+- článek nebo dokumentaci,
+- formulář,
+- login,
+- klientskou zónu,
+- export nebo download,
+- platbu,
+- administraci,
+- chybové stránky.
+
+Pro každou trasu zkontroluj dvě věci: jestli se posílají správné hlavičky a jestli se stránka nerozbila. Security scan bez ručního průchodu kritického flow je jako požární hlásič bez dveří ven: technicky působivé, prakticky nepohodlné.
+
+Příklad jednoduché kontroly:
+
+```bash
+curl -I https://example.com | grep -Ei 'content-security-policy|strict-transport-security|referrer-policy|permissions-policy|x-content-type-options'
+```
+
+## Privacy-first pravidla pro reportování porušení
+
+CSP reporting je užitečný, ale může sbírat URL, user agenty, zdroje a kontext porušení. Proto:
+
+- nesbírej reporty déle, než potřebuješ pro ladění,
+- neukládej celé URL s osobními query parametry,
+- odděl report endpoint od marketingových nástrojů,
+- agreguj opakované chyby,
+- nedělej z reportů nový tracking kanál,
+- dokumentuj, kdo k reportům smí.
+
+U malého webu často stačí CSP report-only režim během přípravy a krátce po nasazení. Trvalé sbírání reportů dává smysl až tehdy, když máš jasný proces triage. Jinak jen vytváříš další datový šuplík, který někdo jednou bude muset uklidit.
+
+## Checklist: bezpečnostní hlavičky bez divadla
+
+- [ ] Máme inventář všech externích zdrojů načítaných stránkou.
+- [ ] Každý externí zdroj má účel, vlastníka a privacy dopad.
+- [ ] CSP začíná restriktivním `default-src 'self'` nebo zdokumentovanou výjimkou.
+- [ ] `form-action`, `base-uri` a `frame-ancestors` jsou nastavené vědomě.
+- [ ] `unsafe-inline` a `unsafe-eval` mají důvod a datum odstranění.
+- [ ] HSTS je nasazené postupně a subdomény jsou zkontrolované před `includeSubDomains`.
+- [ ] `Referrer-Policy` odpovídá citlivosti URL.
+- [ ] `Permissions-Policy` blokuje nepoužívané funkce prohlížeče.
+- [ ] `X-Content-Type-Options: nosniff` je aktivní.
+- [ ] Hlavičky jsou testované na hlavních veřejných i aplikačních trasách.
+- [ ] Reportování porušení nesbírá zbytečná osobní data.
+- [ ] Existuje vlastník a datum další revize.
+
+## Mini šablona security headers karty
+
+```markdown
+# Security headers karta: [web / aplikace / sekce]
+
+## Rozsah
+- Doména / subdoména:
+- Typ provozu: marketing / SaaS / admin / dokumentace
+- Kritické flow:
+
+## Externí zdroje
+- Skripty:
+- Styly a fonty:
+- Obrázky a média:
+- Formuláře a API:
+- Iframe / embedded obsah:
+
+## Hlavičky
+- Content-Security-Policy:
+- Strict-Transport-Security:
+- Referrer-Policy:
+- Permissions-Policy:
+- X-Content-Type-Options:
+- Další:
+
+## Výjimky
+- Výjimka:
+- Důvod:
+- Vlastník:
+- Datum odstranění / revize:
+
+## Test
+- Testované URL:
+- Testované prohlížeče:
+- Známá rizika:
+- Rollback postup:
+```
+
+Bezpečnostní hlavičky jsou ideální místo, kde se potkává vývoj, provoz, marketing i privacy. Ukazují, že web není jen hezká stránka, ale kontrolované prostředí. A přesně to je evropská výhoda: méně magických skriptů, méně datových únikových cest, víc klidu pro zákazníka i tým.
+
+## Zdroje
+
+- MDN: [Content-Security-Policy header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy)
+- MDN: [Strict-Transport-Security header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security)
+- MDN: [Referrer-Policy header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy)
+- MDN: [Permissions-Policy header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Permissions-Policy)
+- MDN: [X-Content-Type-Options header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options)
+- OWASP: [Secure Headers Project](https://owasp.org/projects/secure-headers-project)
+
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „Bezpečnostní hlavičky bez falešného pocitu bezpečí“ s praktickým inventářem zdrojů, postupným zavedením CSP, HSTS, Referrer-Policy, Permissions-Policy, MIME ochranou, testováním, privacy-first pravidly pro reportování, checklistem, security headers kartou a ověřenými zdroji MDN a OWASP.
 
 - 2026-10-03: Doplněna příloha „Indexace webu bez SEO chaosu a zbytečného sledování“ s rozdělením veřejných a neveřejných URL, pravidly pro `robots.txt`, sitemapu, canonical URL, staging, filtry, redirecty, privacy-first monitoringem, checklistem, indexační kartou a ověřenými zdroji Google Search Central, RFC 9309 a sitemaps.org.
 
