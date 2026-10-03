@@ -33302,7 +33302,180 @@ Příklad: export všech objednávek může běžet jako background job s limite
 - OWASP API Security Top 10 2023 — API4: Unrestricted Resource Consumption: https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/
 - RFC 6585 — `429 Too Many Requests` a `Retry-After`: https://www.rfc-editor.org/rfc/rfc6585#section-4
 
+
+# Příloha: Staging a testovací data bez kopírování produkčního života
+
+Staging prostředí má pomáhat bezpečně ověřit změnu před produkcí. Nemá být tajná druhá produkce, kam se jednou za měsíc vysype databáze zákazníků, protože „jinak to nejde otestovat“. To je pohodlné jen do chvíle, než někdo pošle odkaz na staging do klientského e-mailu, zapomene otevřený admin účet nebo pustí debug log s reálnými objednávkami do cizího nástroje. Pak už to není staging. Je to produkční průšvih v mikině.
+
+Privacy-first přístup říká jednoduchou věc: testuj chování systému, ne životy konkrétních lidí. Čím méně reálných osobních údajů potřebuješ mimo produkci, tím menší je dopad chyby, úniku i lidské improvizace. Evropská komise u GDPR principů připomíná minimalizaci dat, omezení účelu, omezení uložení a integritu s důvěrností zpracování; staging není kouzelná výjimka z těchto principů ([European Commission: GDPR principles](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)).
+
+> Codyho komentář: Pokud je největší argument pro kopii produkce „ale vývojářům se s tím dobře pracuje“, je čas zpozornět. Komfort týmu je důležitý, ale zákaznická data nejsou vývojářská ergonomická pomůcka.
+
+## Nejdřív si pojmenuj typy prostředí
+
+Malý SaaS obvykle nepotřebuje deset prostředí s názvy jako `preprod-final-v2`. Potřebuje jasně oddělené účely.
+
+Praktické minimum:
+
+| Prostředí | Účel | Data | Přístup |
+| --- | --- | --- | --- |
+| Lokální vývoj | rychlá práce na kódu | syntetická data, seed skripty | vývojář |
+| Preview / review app | kontrola konkrétní změny | malý syntetický dataset | tým, případně klient přes dočasný odkaz |
+| Staging | integrační ověření před releasem | produkčně podobná struktura, ne produkční obsah | omezený tým |
+| Produkce | reálný provoz | skutečná zákaznická data | nejpřísnější režim |
+
+Každé prostředí má mít vlastní databázi, vlastní secrets, vlastní e-mailové nastavení, vlastní storage a viditelné označení v UI. Když se vývojář musí ptát „jsem teď na stagingu nebo produkci?“, design prostředí selhal dřív než bezpečnostní audit stihl udělat kávu.
+
+## Produkční data mimo produkci jsou výjimka, ne standard
+
+Základní pravidlo: do neprodukčních prostředí nedávej produkční osobní údaje, pokud pro to nemáš konkrétní důvod, právní základ, schválení, omezení přístupu, retenci a plán návratu zpět. Nestačí věta „potřebujeme realistická data“. Realistická má být struktura, objem, stavy a hraniční případy. Ne jména, e-maily, fakturační adresy a poznámky podpory.
+
+Místo kopie produkce používej:
+
+- syntetická data vytvořená seed skriptem,
+- anonymizované nebo silně pseudonymizované výřezy jen pro konkrétní test,
+- ručně připravené scénáře hraničních stavů,
+- generované soubory se stejným formátem, ale bez reálného obsahu,
+- replay provozních metrik bez osobních payloadů,
+- smluvně a technicky oddělené testovací účty zákazníků.
+
+EDPB rozlišuje anonymizaci a pseudonymizaci; opravdu anonymizovaná data už nejsou osobními údaji, ale pseudonymizovaná data osobními údaji zůstávají, protože mohou být při splnění podmínek znovu přiřazena ([EDPB: Anonymisation / pseudonymisation](https://www.edpb.europa.eu/topics/ai-and-technology/anonymisation-pseudonymisation_en)). V roce 2026 EDPB zároveň otevřel konzultaci k pokynům o anonymizaci; pro praktickou práci je užitečné sledovat hlavně kritéria izolace záznamu, propojitelnosti a odvozování identity, ale ber je jako konzultační materiál, dokud nejsou finální ([EDPB Guidelines 02/2026 on Anonymisation](https://www.edpb.europa.eu/public-consultations/guidelines-022026-on-anonymisation_et)).
+
+## Seed data mají být produktový asset
+
+Seed data nejsou odpadní skript někde ve složce `tmp`. Jsou produktový asset, protože určují, jak rychle tým najde regresi, vysvětlí funkcionalitu a připraví demo.
+
+Dobrý seed dataset obsahuje:
+
+- běžný aktivní účet,
+- účet po trialu,
+- účet s nezaplacenou fakturou,
+- účet s více rolemi,
+- účet s pozastaveným uživatelem,
+- účet s prázdným stavem,
+- účet s velkým množstvím záznamů,
+- účet s importovanými daty,
+- účet s chybovým stavem integrace,
+- účet se smazaným nebo anonymizovaným uživatelem.
+
+Důležité je, aby data měla smysl pro produktové scénáře, ale nepatřila reálným lidem. E-mail může být `anna.admin@example.test`, firma `Ukázková pekárna s.r.o.` a fakturační položka `Měsíční tarif Growth`. I syntetická data mají být lidsky čitelná. Když je všechno `Lorem Ipsum 123`, testy projdou, ale člověk přehlédne UX problém.
+
+## Maskování nestačí, když zůstane vzor
+
+Častá past: tým nahradí e-maily za náhodné hodnoty, ale nechá skutečné poznámky, adresy, názvy firem, soubory, ID objednávek nebo kombinace atributů. Samotné odstranění jména nemusí stačit, pokud člověka lze poznat kombinací údajů.
+
+Při anonymizaci nebo pseudonymizaci testovacích výřezů řeš celé riziko:
+
+- přímé identifikátory: jméno, e-mail, telefon, adresa,
+- nepřímé identifikátory: firma, město, role, čas události, unikátní konfigurace,
+- volný text: poznámky podpory, zprávy, názvy projektů, komentáře,
+- soubory: přílohy, exporty, loga, screenshoty,
+- integrace: externí ID, webhook payloady, fakturační reference,
+- časové vzory: přesné timestampy, které lze spojit s událostí u zákazníka.
+
+Pokud neumíš riziko rozumně posoudit, nekopíruj produkci. Vytvoř syntetický dataset. Je to méně sexy než anonymizační pipeline, ale výrazně méně výbušné.
+
+## Staging nesmí mluvit s reálnými lidmi
+
+Neprodukční prostředí musí mít bezpečnostní brzdy proti náhodnému kontaktu se zákazníky.
+
+Nastav minimálně:
+
+- e-maily přesměrované do testovací schránky nebo lokálního mail catcheru,
+- SMS a push notifikace vypnuté nebo přesměrované,
+- platební bránu v sandbox módu,
+- webhooky na testovací endpointy,
+- externí integrace přes testovací workspace,
+- vyhledávač zakázaný přes `robots.txt` a autentizaci,
+- viditelný banner `STAGING` v každé stránce,
+- oddělené domény a cookies od produkce.
+
+Tohle není jen bezpečnost. Je to ochrana důvěry. Jedna falešná faktura nebo testovací notifikace skutečnému zákazníkovi umí zničit víc kreditu než špatně zarovnané tlačítko.
+
+## Přístupy a secrets odděl tvrdě
+
+OWASP Developer Guide doporučuje chránit citlivá data a mimo jiné hlídat, aby secrets nekončily v kódu, konfiguraci nebo nevhodně sdílených prostředích ([OWASP Developer Guide: Protect Data Everywhere](https://devguide.owasp.org/en/04-design/02-web-app-checklist/08-protect-data/)). Pro staging to znamená: žádné produkční API klíče, žádné sdílené admin heslo, žádný univerzální token v týmovém chatu.
+
+Praktická pravidla:
+
+- staging má vlastní secrets s menšími oprávněními,
+- produkční secrets nejdou přečíst z preview buildu,
+- přístup do stagingu se odebírá při offboardingu stejně jako produkce,
+- CI/CD má oddělené proměnné pro každé prostředí,
+- preview prostředí po mergi nebo zavření PR automaticky zaniká,
+- dump databáze má krátkou životnost a auditní stopu,
+- lokální soubory s výřezem dat se mažou po dokončení úkolu.
+
+Codyho praktický test: kdyby dnes odešel externí dodavatel, umíš do hodiny říct, ke kterým neprodukčním prostředím měl přístup? Pokud ne, staging není bezpečný prostor. Je to klubovna s otevřeným oknem.
+
+## Testuj migrace na struktuře, ne na cizím obsahu
+
+Databázové migrace, importy a billing edge cases často svádí ke kopii produkce. Místo toho vytvoř sadu reprezentativních scénářů.
+
+Příklad pro SaaS billing migraci:
+
+- účet bez fakturačních údajů,
+- účet s měsíčním tarifem,
+- účet s ročním tarifem,
+- účet po refundu,
+- účet s DPH režimem,
+- účet s neúspěšnou platbou,
+- účet s historickou slevou,
+- účet s ručně upravenou fakturou.
+
+Každý scénář popiš v testovacím katalogu: proč existuje, jaký problém chrání a kdo ho vlastní. Když se objeví nový incident, nepřidávej produkční dump. Přidej nový syntetický scénář, který incident napodobí bez osobních údajů.
+
+## Checklist: staging bez produkčního života
+
+- [ ] Každé prostředí má jasný účel, vlastní databázi a vlastní secrets.
+- [ ] Staging a preview nepoužívají produkční e-maily, SMS, push notifikace ani platební režim.
+- [ ] Produkční osobní údaje se mimo produkci nekopírují jako výchozí postup.
+- [ ] Seed data pokrývají běžné i hraniční produktové scénáře.
+- [ ] Pokud je nutný produkční výřez, má schválení, omezený účel, přístup a retenci.
+- [ ] Volný text, soubory, externí ID a časové vzory se berou jako rizikové, ne jako detail.
+- [ ] Preview prostředí automaticky expirují.
+- [ ] Staging má viditelné označení v UI a zákaz přímého indexování.
+- [ ] Přístupy do neprodukčních prostředí se kontrolují při offboardingu.
+- [ ] Po incidentu se vytváří nový syntetický testovací scénář, ne trvalý produkční dump.
+
+## Mini šablona staging karty
+
+```text
+# Staging karta: [produkt / modul]
+
+## Účel prostředí
+K čemu staging slouží a co se na něm nesmí dělat.
+
+## Povolená data
+Jaké typy syntetických, anonymizovaných nebo testovacích dat se smí použít.
+
+## Zakázaná data
+Které produkční údaje, soubory a volné texty se nesmí kopírovat.
+
+## Integrace
+Jak jsou nastavené e-maily, platby, webhooky, SMS, AI služby a externí API.
+
+## Přístupy
+Kdo má přístup, jak se schvaluje a kdy se reviduje.
+
+## Retence
+Kdy se testovací data, dumpy, preview prostředí a soubory mažou.
+
+## Incidentní brzda
+Co se stane, když se ve stagingu objeví reálná zákaznická data.
+```
+
+## Zdroje
+
+- [European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
+- [EDPB: Anonymisation / pseudonymisation](https://www.edpb.europa.eu/topics/ai-and-technology/anonymisation-pseudonymisation_en)
+- [EDPB: Guidelines 02/2026 on Anonymisation — public consultation](https://www.edpb.europa.eu/public-consultations/guidelines-022026-on-anonymisation_et)
+- [OWASP Developer Guide: Protect Data Everywhere](https://devguide.owasp.org/en/04-design/02-web-app-checklist/08-protect-data/)
+
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „Staging a testovací data bez kopírování produkčního života“ s praktickým oddělením prostředí, pravidly pro syntetická data, anonymizaci/pseudonymizaci, bezpečné integrace, secrets, checklistem, staging kartou a ověřenými zdroji Evropské komise, EDPB a OWASP.
 
 - 2026-10-03: Doplněna příloha „Rate limiting API bez trestání dobrých zákazníků“ s mapou nákladných akcí, víceúrovňovými limity, chováním `429`, režimy fronty/degradace, multitenant pravidly, checklistem a šablonou rate limit karty.
 
