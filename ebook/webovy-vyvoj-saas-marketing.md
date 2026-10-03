@@ -33986,7 +33986,198 @@ U velkých B2B exportů zvaž šifrovaný balíček nebo aspoň oddělené před
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučení pro auditování bezpečnostně významných událostí a nevkládání citlivých hodnot do logů.
 - IETF: [RFC 4180](https://datatracker.ietf.org/doc/html/rfc4180) — běžně citovaný formát CSV a MIME typ `text/csv`.
 
+# Příloha: Mazání dat v SaaS bez ghost records a support hororu
+
+Mazání dat zní jednoduše jen do chvíle, než zjistíš, že stejný záznam žije v aplikaci, vyhledávacím indexu, exportu, cache, analytice, logu, frontě, záloze a ještě v jednom zapomenutém CSV na supportním disku. Tohle není technická drobnost. Je to produktový proces, který musí být srozumitelný pro zákazníka, bezpečný pro provoz a nudně opakovatelný pro tým.
+
+Privacy-first SaaS nemá mazání jako tajné admin kouzlo. Má jasný tok: kdo může mazání spustit, co přesně se smaže, co se jen anonymizuje, co zůstává kvůli provozní integritě a kdy se jednotlivé kopie přestanou objevovat v podpůrných systémech. Jinak vzniknou ghost records — data, která už podle UI neexistují, ale někde dál ovlivňují výsledky, metriky nebo support.
+
+> Codyho komentář: „Smazali jsme to z obrazovky“ není mazání. To je jen digitální uklizení pod koberec. Koberec se pak typicky jmenuje `legacy_events_2_final_really_final`.
+
+## Nejdřív rozliš typ mazání
+
+Ne každé mazání je stejné. Když tým používá jedno slovo pro pět různých věcí, vznikne chaos v UI, databázi i komunikaci se zákazníkem. Před implementací si pojmenuj alespoň tyto režimy:
+
+- Skrytí v UI: záznam se přestane zobrazovat, ale pořád existuje a může být obnoven.
+- Soft delete: záznam má příznak smazání, ale zůstává v databázi kvůli auditní stopě, vazbám nebo možnosti obnovy.
+- Hard delete: záznam se fyzicky odstraní z primárního úložiště.
+- Anonymizace: osobní nebo citlivý obsah se odstraní či zobecní, ale agregovaný nebo provozně nutný záznam zůstane.
+- Retenční dočištění: naplánovaný proces odstraňuje data z vedlejších systémů, cache, indexů a dočasných souborů.
+
+Produktově důležité je, aby uživatel neviděl slib, který systém neumí splnit. Pokud tlačítko říká „Smazat zákazníka“, ale ve skutečnosti jen deaktivuje profil a ponechá historii objednávek, napiš to lidsky. Třeba: „Zákazník se skryje z běžných seznamů, osobní kontaktní údaje se odstraní a fakturační historie zůstane v přehledech jako anonymizovaný záznam.“ Nudné? Ano. Užitečné? Taky ano. Drama necháme seriálům.
+
+## Napiš si mapu dopadu dřív než endpoint
+
+Mazací endpoint bez mapy dopadu je loterie. U každé entity si předem napiš, kde se její data mohou objevit. Stačí jednoduchá tabulka:
+
+- Primární tabulky a dokumenty.
+- Vazby na jiné entity.
+- Souborové přílohy a generované náhledy.
+- Vyhledávací indexy a našeptávače.
+- Cache a materializované pohledy.
+- Fronty, scheduled joby a retry payloady.
+- Exporty a reporty čekající na stažení.
+- Auditní logy, technické logy a supportní poznámky.
+- Integrace třetích stran.
+- Zálohy a disaster recovery kopie.
+
+Praktický příklad: když smažeš projekt v B2B SaaS, nestačí odstranit řádek `projects`. Musíš rozhodnout, co se stane s úkoly, komentáři, přílohami, webhook nastavením, API tokeny, členstvím uživatelů, uloženými exporty, veřejnými sdílenými odkazy a indexem vyhledávání. Když některou část vynecháš, zákazník uvidí „smazaný“ projekt v našeptávači, notifikaci nebo starém exportu. A support si pak zahraje oblíbenou hru „odkud se to sakra vzalo“.
+
+## Mazání musí být idempotentní
+
+Mazání je riziková operace, takže musí zvládnout opakování. Uživatel klikne dvakrát, síť spadne po potvrzení, job se restartuje, fronta doručí zprávu znovu. Správný výsledek není druhá chyba, ale stav „už je smazáno“.
+
+Dobrá praxe:
+
+- Používej stavový model, například `active`, `delete_requested`, `deleting`, `deleted`, `delete_failed`.
+- Každé žádosti přiděl `deletion_request_id`, aby šlo sledovat jeden konkrétní běh.
+- Destruktivní akce dělej v malých krocích, které se dají bezpečně opakovat.
+- U každého kroku ukládej výsledek a čas dokončení.
+- Když krok selže, nevracej systém do poloviční magie; označ, kde mazání stojí, a nabídni ruční opravu.
+
+V UI to může být jednoduché: „Mazání probíhá. Většina dat zmizí během několika minut, některé provozní kopie se dočistí podle retenční politiky.“ Důležité je neslibovat okamžité zmizení ze všech míst, pokud máš fronty, indexy nebo zálohy. Férová formulace snižuje počet dotazů i nedůvěru.
+
+## Soft delete není výmluva pro věčné držení dat
+
+Soft delete je užitečný technický nástroj, ale špatný produktový alibi. Pokud všechno jen označíš `deleted_at` a nikdy nedočistíš, nemáš retenční strategii. Máš hřbitov s indexem.
+
+Použij soft delete tam, kde potřebuješ krátkou ochrannou lhůtu, obnovu po omylu nebo zachování referenční integrity. Ale nastav i druhý krok: po určité době osobní obsah anonymizovat nebo fyzicky odstranit. U každého typu dat si napiš:
+
+- Proč se po smazání ještě drží.
+- Kdo k němu má přístup.
+- Jak dlouho se drží.
+- Co ho definitivně smaže nebo anonymizuje.
+- Jak se ověřuje, že proces doběhl.
+
+Příklad: uživatel smaže pracovní prostor. Prvních 14 dní může vlastník požádat o obnovu, běžní členové prostor nevidí a nové integrace jsou vypnuté. Po ochranné lhůtě se odstraní přílohy, zneplatní sdílené odkazy, anonymizují vybrané provozní události a exporty se smažou. Auditní záznam o tom, že mazání proběhlo, zůstane, ale bez obsahu původních dokumentů.
+
+## Integrace a tokeny vypínej hned
+
+U mazání účtu, workspace nebo projektu je největší praktické riziko často mimo hlavní databázi: API tokeny, webhooky, OAuth propojení, sdílené odkazy, pozvánky a plánované synchronizace. Ty musí skončit co nejdřív po zahájení mazání, ne až na konci dlouhého jobu.
+
+Rozumné pořadí:
+
+1. Přepnout entitu do stavu `delete_requested`.
+2. Zablokovat nové přístupy, veřejné odkazy a tokeny.
+3. Zastavit plánované synchronizace a webhooky.
+4. Označit čekající exporty jako neplatné.
+5. Spustit dočištění dat ve frontě.
+6. Zapsat auditní událost bez citlivého obsahu.
+
+Tohle pořadí chrání před situací, kdy uživatel sice „smazal účet“, ale starý token ještě hodinu stahuje data přes API. Privacy-first provoz neznamená jen mazat rychle. Znamená nejdřív zavřít dveře, kudy by data mohla dál odcházet.
+
+## Vedlejší systémy potřebují vlastní dočištění
+
+SaaS obvykle nemá jedno úložiště. Má primární databázi a kolem ní spoustu pomocných vrstev. Každá z nich potřebuje pravidlo dočištění.
+
+Vyhledávání: smaž nebo přegeneruj indexové dokumenty, aby se odstraněné věci neobjevovaly v našeptávači, výsledcích ani filtrech.
+
+Cache: invaliduj klíče podle tenantů a entit, ne jen podle konkrétní URL. Smazaný projekt se nesmí vrátit přes starý cache hit.
+
+Fronty: u jobů, které pracují s mazánou entitou, ověř stav před provedením. Pokud je entita ve stavu mazání, job má skončit bezpečně.
+
+Exporty: soubory připravené ke stažení ber jako citlivé dokumenty. Po mazání účtu nebo projektu je zneplatni a smaž podle krátké retence.
+
+Analytika: pokud měříš produktové události, odděl agregované metriky od identifikovatelného obsahu. Po smazání nepotřebuješ vědět, že konkrétní člověk klikl na konkrétní dokument. Stačí agregovaný signál, pokud je vůbec nutný.
+
+Logy: technické logy nemají být tajná kopie aplikace. Nezapisuj do nich text dokumentů, celé payloady ani citlivé hodnoty. Mazání se pak nepromění v nemožnou archeologii.
+
+## Zálohy vysvětli předem
+
+Zálohy jsou zvláštní kategorie. V dobře nastaveném provozu existují kvůli obnově po havárii, ne jako běžně prohledávatelný archiv. Proto se v produktové komunikaci vyplatí říct, že smazaná data mohou po omezenou dobu zůstat v izolovaných zálohách a zmizí podle retenčního cyklu záloh.
+
+Praktické pravidlo: zálohy nepoužívej pro běžnou práci se zákaznickými daty. Přístup k nim má být omezený, obnovy testované a retenční doba známá. Pokud musíš obnovit systém ze zálohy, měj postup, jak znovu aplikovat mazací požadavky, které proběhly po čase zálohy. Jinak se ti smazaná data vrátí jako nevyžádaný zombie bonus. A zombie bonusy patří do her, ne do SaaS.
+
+## Support musí vidět stav, ne obsah navíc
+
+Když mazání selže nebo trvá déle, support potřebuje pomoct zákazníkovi bez toho, aby viděl víc dat, než je nutné. Interní obrazovka pro mazací požadavky má ukazovat hlavně provozní stav:
+
+- ID požadavku.
+- Kdo mazání spustil a kdy.
+- Jaká entita se maže.
+- Aktuální krok.
+- Poslední chyba v technické, ale bezpečné podobě.
+- Možné další akce: zopakovat krok, eskalovat, kontaktovat vlastníka.
+
+Nemá ukazovat kompletní původní obsah mazaných dokumentů, celé payloady z integrací ani historické exporty. Support má řešit proces, ne prohlížet digitální půdu zákazníka.
+
+## Test mazání je součást release procesu
+
+Mazání se často rozbije při přidání nové funkce: nová tabulka, nový index, nová příloha, nový export. Proto má mít každá větší entita testovací scénář mazání. Ne jen unit test na endpoint, ale integrační kontrolu toku.
+
+Minimum scénářů:
+
+- Entita se smaže a zmizí z běžných seznamů.
+- Smazaná entita se neobjeví ve vyhledávání ani filtrech.
+- Související tokeny a veřejné odkazy jsou neplatné.
+- Opakované spuštění mazání nezpůsobí chybu ani duplicitní práci.
+- Rozběhnutý job pozná, že entita je ve stavu mazání.
+- Support vidí bezpečný stav požadavku.
+- Export připravený před mazáním už nejde stáhnout.
+
+Jednoduché pravidlo pro vývojáře: když přidáš nové místo, kde se ukládá zákaznický obsah, musíš doplnit i mazací mapu. Jinak nepřidáváš feature. Přidáváš budoucí incident s hezčím UI.
+
+## Checklist: mazání dat bez ghost records
+
+- Má každá mazatelná entita definovaný režim mazání: skrytí, soft delete, hard delete nebo anonymizace?
+- Ví uživatel před potvrzením, co se smaže, co zůstane a proč?
+- Existuje mapa dopadu pro databázi, soubory, indexy, cache, fronty, exporty, logy a integrace?
+- Je mazání idempotentní a má stavový model?
+- Vypínají se tokeny, webhooky, sdílené odkazy a synchronizace hned na začátku procesu?
+- Mají vedlejší systémy vlastní dočišťovací kroky?
+- Jsou zálohy popsané v retenční politice a oddělené od běžné práce?
+- Vidí support bezpečný provozní stav bez zbytečného obsahu?
+- Testuje se mazání při změnách datového modelu?
+- Existuje pracovní postup pro selhané nebo zaseknuté mazání?
+
+## Mini šablona deletion karty
+
+```markdown
+# Deletion karta: [entita / workspace / účet]
+
+## Účel
+- Proč lze entitu mazat:
+- Kdo mazání typicky spouští:
+
+## Typ mazání
+- Režim v UI:
+- Technický režim:
+- Ochranná lhůta:
+- Finální dočištění:
+
+## Mapa dopadu
+- Primární databáze:
+- Soubory a přílohy:
+- Vyhledávací index:
+- Cache:
+- Fronty a scheduled joby:
+- Exporty:
+- Integrace:
+- Logy:
+- Zálohy:
+
+## Bezpečnost
+- Tokeny a odkazy vypnout kdy:
+- Kdo může mazání spustit:
+- Potvrzení / schválení:
+- Auditní událost:
+
+## Komunikace
+- Text před potvrzením:
+- Text během mazání:
+- Text po dokončení:
+- Support postup při selhání:
+
+## Test
+- Scénář běžného mazání:
+- Scénář opakovaného spuštění:
+- Scénář selhání jednoho kroku:
+- Kontrola vedlejších systémů:
+```
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „Mazání dat v SaaS bez ghost records a support hororu“ s rozlišením režimů mazání, mapou dopadu, idempotencí, dočištěním vedlejších systémů, zálohami, support procesem, checklistem a vyplnitelnou deletion kartou.
 
 - 2026-10-03: Doplněna příloha „Export dat bez rukojmí, chaosu a úniku navíc“ s katalogem exportovatelných dat, formátovou smlouvou, oprávněními, frontovým generováním, minimalizací, osobními exporty, bezpečným stažením, checklistem a exportní kartou.
 
