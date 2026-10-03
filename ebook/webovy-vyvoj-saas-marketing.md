@@ -34478,7 +34478,211 @@ Kdy je potřeba nový souhlas:
 - [European Commission: Legal grounds for processing data](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en)
 - [ÚOOÚ: Cookies — otázky a odpovědi](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies)
 
+# Příloha: Přístupnost webu bez overlay magie a falešného klidu
+
+Přístupnost není plugin, který se večer přilepí do rohu webu jako digitální talisman. Je to způsob, jak navrhovat texty, formuláře, navigaci, komponenty a provoz tak, aby web zvládli používat lidé s různými zařízeními, schopnostmi, omezeními i kontextem. Někdo má čtečku obrazovky, někdo slabý zrak, někdo zlomenou ruku, někdo jede v tramvaji na mobilu a někdo jen nemá trpělivost luštit šedý text na světle šedém pozadí. Přístupnost není speciální režim pro „někoho jiného“. Je to kvalitní web bez zbytečných překážek.
+
+Pro evropský SaaS nebo firemní web má přístupnost ještě jednu výhodu: zlepšuje důvěru. Když návštěvník vidí jasné formuláře, čitelné chybové hlášky, ovladatelnost klávesnicí a normální strukturu nadpisů, nepřemýšlí nad tím, že plníš metodiku. Prostě má pocit, že web není past. A to je v privacy-first světě přesně ten typ dobré nudy, kterou chceme.
+
+> Codyho komentář: Overlay widget, který slibuje „vyřešit přístupnost jedním skriptem“, je jako nalepit na rozbité schody ceduli „chodit opatrně“. Možná to vypadá aktivně, ale problém zůstává v konstrukci.
+
+## Nezačínej nástrojem, začni překážkou
+
+První chyba je brát přístupnost jako auditní seznam bez kontextu. Správný začátek je otázka: „Co musí člověk na webu skutečně udělat?“ U běžného B2B webu to může být pochopit nabídku, porovnat služby, otevřít kontakt, vyplnit poptávku, stáhnout dokument nebo najít odpověď v nápovědě. U SaaS navíc registrace, reset hesla, pozvání kolegy, zaplacení tarifu, export dat nebo zrušení účtu.
+
+Ke každé takové práci si napiš překážky:
+
+- člověk nevidí barvu, kterou používáš jako jediný signál chyby,
+- člověk nemůže použít myš,
+- člověk používá čtečku obrazovky,
+- člověk zvětší text nebo má úzký viewport,
+- člověk nerozumí internímu žargonu,
+- člověk potřebuje víc času na dokončení formuláře,
+- člověk se bojí odeslat data, protože text neříká, co se s nimi stane.
+
+To poslední je důležité: přístupnost a privacy-first provoz se potkávají ve srozumitelnosti. Pokud formulář říká jen „odeslat“, ale neříká, co bude dál, je to problém důvěry. Pokud validace vyhodí „chyba 422“, je to problém použitelnosti. Pokud se bez JavaScriptu nezobrazí ani kontakt, je to problém odolnosti. Všechny tyto věci se tváří jako technické detaily, ale dopadnou na reálného člověka.
+
+## WCAG ber jako mapu, ne jako kouzelnou zkratku
+
+Web Content Accessibility Guidelines jsou mezinárodní standard pro přístupnost webového obsahu. W3C uvádí, že WCAG 2.2 bylo publikováno jako doporučení 5. října 2023 a doporučuje používat WCAG 2.2 pro co nejlepší budoucí použitelnost práce na přístupnosti. Prakticky se často míří na úroveň AA, protože je rozumným středem mezi základním minimem a extrémně náročnými kritérii.
+
+Pro malý tým není cílem naučit se každé číslo kritéria zpaměti. Cílem je převést standard do vývojové rutiny:
+
+- návrh komponent počítá s klávesnicí, fokusem a kontrastem,
+- texty tlačítek říkají akci konkrétně,
+- formuláře mají viditelné labely a užitečné chyby,
+- modály, menu a taby nejsou past na focus,
+- obrázky mají smysluplné alternativy nebo jsou označené jako dekorativní,
+- nadpisy tvoří logickou strukturu stránky,
+- obsah nebliká a nevyžaduje přesné gesto,
+- změny stavu jsou oznámené i mimo vizuální efekt.
+
+V Evropě se navíc potkáváš s požadavky kolem přístupnosti výrobků a služeb. Evropský akt o přístupnosti je směrnice (EU) 2019/882 a v Česku ji transponuje zákon č. 424/2023 Sb. Česká obchodní inspekce k tomu uvádí, že český zákon implementuje tuto směrnici a požadavky se týkají vybraných výrobků a služeb. Ne každý firemní web spadne do stejného režimu, ale ignorovat přístupnost s tím, že „my nejsme úřad“, je čím dál slabší strategie.
+
+Praktické pravidlo: i když si nejsi jistý právní povinností, dělej web tak, aby základní práce šly dokončit podle principů WCAG. Právní detail si u rizikových služeb ověř s právníkem, ale technickou kvalitu neodkládej. Čitelný label není právní luxus. Je to civilizace.
+
+## Přístupnost navrhni už v design systému
+
+Nejlevnější přístupnost vzniká v komponentách. Nejdražší vzniká po spuštění, když se zjistí, že každý formulář, dropdown a modal má vlastní malou sbírku pastí. Design systém nemusí být korporátní palác. Stačí knihovna opakovaných prvků se zásadami.
+
+U každé komponenty si napiš:
+
+- jak vypadá normální, hover, focus, disabled a error stav,
+- jak se ovládá klávesnicí,
+- jaký text slyší čtečka obrazovky,
+- co se stane při zvětšení textu,
+- jaký je minimální kontrast,
+- jak komponenta komunikuje chybu nebo úspěch,
+- jaké osobní údaje sbírá a proč.
+
+Příklad: pole pro e-mail v poptávkovém formuláři nemá mít jen červený rámeček. Má mít viditelný label „E-mail“, popis „Použijeme ho jen pro odpověď na poptávku“, chybu „Zadejte e-mail ve tvaru jmeno@example.cz“ a focus stav, který je jasný i pro člověka bez myši. Tohle není kosmetika. Je to rozdíl mezi webem, který pomáhá, a webem, který člověka nutí hádat.
+
+U SaaS komponent přidej ještě stavy prázdné obrazovky, loadingu a selhání. Přístupná aplikace není jen šťastná cesta v perfektním demu. Je to i chvíle, kdy export běží déle, platba se nepovede, pozvánka expirovala nebo uživatel nemá oprávnění. Tyto stavy musí být čitelné, ovladatelné a nesmí člověka tlačit do podpory jen proto, že produkt neuměl vysvětlit, co se stalo.
+
+## Formuláře: největší zdroj malých ran
+
+Formuláře jsou místo, kde se přístupnost, konverze a soukromí potkají v jedné frontě. Každé zbytečné pole je překážka. Každé nejasné chybové hlášení zvyšuje frustraci. Každé pole bez důvodu zhoršuje důvěru.
+
+Privacy-first formulář má čtyři pravidla:
+
+1. sbírá jen údaje potřebné pro další krok,
+2. u citlivějších polí vysvětluje důvod,
+3. chyby popisuje lidsky a konkrétně,
+4. po odeslání říká, co bude dál.
+
+Špatně:
+
+```text
+Chyba. Vyplňte všechna pole.
+```
+
+Lépe:
+
+```text
+Chybí telefon nebo e-mail. Stačí jeden kontakt, abychom vám mohli odpovědět.
+```
+
+Ještě lépe:
+
+```text
+Zadejte e-mail, nebo telefon. Použijeme ho jen pro odpověď na tuto poptávku.
+```
+
+U B2B poptávky často nepotřebuješ telefon, firmu, IČO, rozpočet, počet zaměstnanců a rodné jméno prvního firemního notebooku. Potřebuješ popis problému a kontakt. Všechno ostatní buď vysvětli, nebo odlož na později.
+
+## Klávesnice a focus: rychlý test bez výmluv
+
+Jednou za sprint projdi klíčové stránky jen klávesnicí. Tab, Shift+Tab, Enter, Space a Escape. Nic víc. Sleduj:
+
+- jestli je vždy vidět, kde focus je,
+- jestli pořadí focusu odpovídá vizuálnímu pořadí,
+- jestli jde otevřít a zavřít menu,
+- jestli modal neuvězní člověka bez možnosti návratu,
+- jestli se dá formulář odeslat,
+- jestli odkazy a tlačítka mají smysluplné názvy,
+- jestli po chybě focus pomůže najít problém.
+
+Tento test je směšně levný a často odhalí věci, které automatický nástroj neuvidí. Automatický skener může najít chybějící `alt`, ale nepozná vždy, že tlačítko „Více“ je na stránce desetkrát a nikdo neví více čeho. Test klávesnicí je malá dávka reality. Ano, realita občas kouše. Proto ji zveme dřív než zákazník.
+
+## Automatické testy pomáhají, ale neručí za použitelnost
+
+Do vývoje se vyplatí přidat automatické kontroly: kontrast, základní pravidla HTML, ARIA chyby, labely formulářů a regresní testy kritických toků. Jenže automatika zachytí jen část problémů. Přístupnost není pouze validní atribut. Je to i jazyk, pořadí, očekávání, srozumitelnost a schopnost dokončit úkol.
+
+Dobrá rutina pro malý tým:
+
+- při návrhu zkontroluj kontrast a stav focusu,
+- při kódu nepřepisuj nativní HTML komponenty vlastním divovým cirkusem, pokud nemusíš,
+- při review projdi komponentu klávesnicí,
+- při releasu otestuj hlavní tok na mobilu a desktopu,
+- jednou měsíčně projdi několik stránek čtečkou nebo aspoň systémovým screen readerem,
+- u větší změny objednej externí audit nebo uživatelské testování.
+
+Nativní HTML je často nejlepší privacy-first i accessibility-first nástroj. `<button>` ví, že je tlačítko. `<label>` ví, ke kterému poli patří. `<a>` ví, že vede na adresu. Když všechno nahradíš klikacím `<div>`, musíš ručně dodělávat vlastnosti, které prohlížeč uměl od začátku. To je jako vyhodit šroubovák a pak tři hodiny vyřezávat šroubovák ze dřeva. Kreativní, ale proč.
+
+## Přístupnost bez sledovacího odpadu
+
+Přístupnost se nemá kupovat za cenu soukromí. Některé externí widgety přidávají další skript, další dodavatelský vztah, další potenciální tok dat a falešný pocit vyřešeného problému. Privacy-first přístup je jiný: oprav zdrojový kód, komponenty a obsah. Nepřidávej vrstvu, která má problém schovat.
+
+Když zvažuješ nástroj pro monitoring přístupnosti, ptej se:
+
+- jaká data o návštěvnících sbírá,
+- zda běží z evropské infrastruktury nebo aspoň nabízí evropské zpracování,
+- zda se dá self-hostovat nebo spustit lokálně v CI,
+- jestli nepotřebuje sledovat reálné uživatele,
+- jak dlouho drží výsledky a screenshoty,
+- kdo má přístup k nálezům,
+- jestli nástroj opravuje příčinu, nebo jen generuje report.
+
+Ideální kombinace pro malý tým: lokální nebo CI kontrola, ruční klávesnicový test, pravidelná komponentová revize a jasná evidence výjimek. Není nutné posílat každé kliknutí třetí straně jen proto, aby sis ověřil, že tlačítko má focus.
+
+## Checklist: přístupnost bez overlay magie
+
+- [ ] Má každá stránka logickou strukturu nadpisů?
+- [ ] Jsou odkazy a tlačítka srozumitelné bez okolního kontextu?
+- [ ] Lze hlavní tok dokončit pouze klávesnicí?
+- [ ] Je focus vždy viditelný a v logickém pořadí?
+- [ ] Mají formuláře viditelné labely, popisy a konkrétní chyby?
+- [ ] Nepoužíváme barvu jako jediný nosič významu?
+- [ ] Mají obrázky smysluplný `alt`, nebo jsou správně dekorativní?
+- [ ] Funguje obsah při zvětšení textu a na úzkém viewportu?
+- [ ] Jsou modály, menu a dropdowny ovladatelné bez myši?
+- [ ] Máme v komponentách definované focus, error, loading a empty stavy?
+- [ ] Sbíráme ve formulářích jen údaje, které opravdu potřebujeme?
+- [ ] Nepoužíváme overlay widget jako náhradu za opravu zdrojového problému?
+- [ ] Máme evidenci nálezů, vlastníka a datum opravy?
+
+## Mini šablona accessibility karty
+
+```text
+# Accessibility karta: [stránka / tok / komponenta]
+
+## Účel
+Co zde člověk potřebuje dokončit:
+
+## Kritický uživatelský tok
+Kroky od vstupu po dokončení:
+
+## Klávesnice
+Tab order:
+Viditelný focus:
+Escape / zavření:
+
+## Obsah a struktura
+Hlavní nadpis:
+Smysluplné odkazy:
+Alternativní texty:
+
+## Formuláře
+Povinná pole:
+Důvod sběru dat:
+Chybové hlášky:
+Potvrzení po odeslání:
+
+## Privacy-first poznámka
+Externí skripty:
+Sbíraná data:
+Retence:
+
+## Test
+Automatická kontrola:
+Ruční klávesnicový test:
+Mobilní kontrola:
+Známé výjimky:
+Vlastník a datum další revize:
+```
+
+## Zdroje
+
+- W3C WAI: [What's New in WCAG 2.2](https://www.w3.org/WAI/standards-guidelines/wcag/new-in-22/)
+- W3C: [Web Content Accessibility Guidelines (WCAG) 2.2](https://www.w3.org/TR/WCAG22/)
+- EUR-Lex: [Directive (EU) 2019/882 on accessibility requirements for products and services](https://eur-lex.europa.eu/eli/dir/2019/882/oj)
+- e-Sbírka: [Zákon č. 424/2023 Sb. o požadavcích na přístupnost některých výrobků a služeb](https://e-sbirka.gov.cz/sb/2023/424)
+- Česká obchodní inspekce: [Přístupnost výrobků a služeb pro spotřebitele](https://coi.gov.cz/pro-spotrebitele/pristupnost-vyrobku-a-sluzeb-pro-spotrebitele/)
+- AccessibleEU: [EN 301 549: Accessibility requirements for ICT products and services](https://accessible-eu-centre.ec.europa.eu/content-corner/digital-library/en-3015492021-accessibility-requirements-ict-products-and-services_en)
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „Přístupnost webu bez overlay magie a falešného klidu“ s praktickým postupem od mapy překážek přes WCAG, design systém, formuláře, klávesnicové testování, privacy-first výběr nástrojů, checklist, accessibility kartu a ověřené zdroje W3C, EUR-Lex, e-Sbírky, ČOI a AccessibleEU.
 
 - 2026-10-03: Doplněna příloha „Evidence souhlasů a odvolání bez právního divadla“ s rozlišením právních základů, minimální evidencí, verzováním textů, snadným odvoláním, preference centrem, synchronizací do nástrojů, retencí, checklistem, consent kartou a ověřenými zdroji GDPR, EDPB, Evropské komise a ÚOOÚ.
 
