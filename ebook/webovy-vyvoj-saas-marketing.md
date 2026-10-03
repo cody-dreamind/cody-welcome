@@ -35891,7 +35891,238 @@ E-mailový kanál je nejzdravější tehdy, když stojí na důvěře, ne na tri
 - IETF Datatracker: [RFC 8461 — SMTP MTA Strict Transport Security](https://datatracker.ietf.org/doc/rfc8461/)
 - IETF Datatracker: [RFC 8460 — SMTP TLS Reporting](https://datatracker.ietf.org/doc/rfc8460/)
 
+# Příloha: Indexace webu bez SEO chaosu a zbytečného sledování
+
+Indexace je zvláštní disciplína: když funguje, nikdo ji neřeší. Když nefunguje, zakladatel má pocit, že ho internet osobně ignoruje. V malém webu nebo SaaS přitom většinou nejde o tajemnou SEO magii, ale o pár provozních pravidel: co má být veřejné, co má být skryté, jak se má chovat `robots.txt`, kde leží `sitemap.xml`, jak se řeší duplicitní URL a kdo kontroluje, že nový release omylem nevypnul celý organický kanál.
+
+Privacy-first přístup k indexaci znamená jednoduchou věc: vyhledávačům pomáhej najít veřejný obsah, ale nikdy nepoužívej SEO jako omluvu pro sběr osobních dat, agresivní trackery nebo veřejné vystavení interních stránek. Web má být čitelný pro lidi i crawlery, ne proměněný v reklamní vánoční stromek s pěti cizími skripty na každé stránce.
+
+> Codyho komentář: `robots.txt` není bezpečnostní trezor. Je to cedulka „prosím nechoď sem“. Slušný robot ji respektuje, zvědavý robot si ji přečte jako seznam míst, kam se má podívat. Elegance internetu, lehce děsivá.
+
+## Nejdřív rozděl veřejné, neveřejné a technické URL
+
+Než začneš ladit sitemapu, udělej si inventuru typů stránek. Bez toho vzniká typický chaos: blog chce být indexovaný, pricing stránka má tři varianty URL, appka se náhodou dostane do výsledků vyhledávání, staging má veřejný login a staré kampaně žijí v sitemapě ještě rok po skončení.
+
+Praktické rozdělení:
+
+- Veřejné obchodní stránky: homepage, služby, pricing, reference, landing pages, kontakt.
+- Veřejný obsah: blog, návody, dokumentace, changelog, případové studie.
+- Technické veřejné soubory: `robots.txt`, `sitemap.xml`, RSS feed, statické assety.
+- Přístupově omezené části: administrace, zákaznická aplikace, interní dashboard, faktury, exporty, účty.
+- Dočasné části: preview URL, staging, A/B varianty, staré kampaně, importní náhledy.
+
+Každý typ musí mít jasné pravidlo: indexovat, neindexovat, chránit přihlášením, přesměrovat, nebo odstranit. Ne „nějak to dopadne“. Vyhledávače jsou vytrvalé a internet má dlouhou paměť. Co jednou veřejně vystavíš, může skončit v cache, odkazech, screenshotech nebo archivech.
+
+Minimum rozhodnutí pro každou URL skupinu:
+
+- Má se stránka objevit ve vyhledávání?
+- Má ji crawler vůbec procházet?
+- Je obsah unikátní, nebo duplicitní varianta jiné URL?
+- Kdo je vlastník stránky a kdy se má revidovat?
+- Co se má stát při zrušení stránky: `301`, `410`, nebo náhrada?
+
+## `robots.txt` řídí crawlování, ne bezpečnost
+
+Google ve své dokumentaci upozorňuje, že `robots.txt` říká crawlerům, ke kterým URL mohou přistupovat, ale není mechanismus pro skrytí stránky z Googlu. Pro opravdové blokování citlivého obsahu je potřeba přístupové omezení, odstranění, nebo `noindex` tam, kde crawler stránku smí načíst. Standard Robots Exclusion Protocol je popsaný v RFC 9309 a sám říká, že pravidla nejsou formou autorizace.
+
+Praktický výchozí `robots.txt` pro běžný web může být nudný:
+
+```txt
+User-agent: *
+Allow: /
+
+Sitemap: https://example.com/sitemap.xml
+```
+
+To je v pořádku. Nudné konfigurační soubory jsou často známka duševního zdraví. Složitější pravidla přidávej až ve chvíli, kdy víš proč.
+
+Časté chyby:
+
+- Blokovat CSS nebo JavaScript, který crawler potřebuje pro pochopení stránky.
+- Dát do `robots.txt` interní cesty typu `/admin-super-secret/` a myslet si, že jsou tím chráněné.
+- Blokovat stránku v `robots.txt` a současně čekat, že se přečte její `noindex` meta tag.
+- Používat `Disallow` jako náhradu za autentizaci.
+- Zapomenout po migraci odstranit `Disallow: /` ze staging konfigurace.
+
+Privacy-first pravidlo: pokud URL obsahuje osobní, zákaznická nebo interní data, nespoléhej na `robots.txt`. Stránka má být za přihlášením, podepsaným krátkodobým odkazem, nebo nemá existovat veřejně vůbec.
+
+## Sitemap je mapa priorit, ne skládka všeho
+
+Sitemap pomáhá vyhledávačům najít URL, hlavně u větších webů, nových webů, rozsáhlých archivů nebo stránek, které nejsou dobře propojené interními odkazy. Google popisuje sitemapu jako způsob, jak poskytnout informace o stránkách, videích a dalších souborech na webu. Protokol na sitemaps.org pak definuje XML formát a základní pravidla.
+
+Do sitemapy patří jen URL, které opravdu chceš indexovat:
+
+- kanonické URL s `200 OK`,
+- stránky s užitečným obsahem,
+- veřejné články a dokumentace,
+- důležité obchodní stránky,
+- lokalizované verze, pokud je máš správně propojené.
+
+Do sitemapy nepatří:
+
+- přesměrované URL,
+- stránky s `noindex`,
+- interní vyhledávání a filtry,
+- preview a staging URL,
+- košíky, checkout session, login, admin,
+- každá možná kombinace parametrů.
+
+U malého webu je dobrý rytmus jednoduchý: generuj sitemapu automaticky při buildu, kontroluj ji v CI nebo před releasem a drž ji jako výstup z veřejného obsahu. Ruční úpravy sitemapy končí podobně jako ruční úpravy DNS v pátek večer: někdo jednou zapomene a pak se všichni tváří překvapeně.
+
+Praktická kontrola před vydáním:
+
+- `sitemap.xml` existuje a vrací `200 OK`.
+- Každá URL v sitemapě vrací `200 OK`.
+- URL jsou absolutní a používají správnou doménu.
+- URL neobsahují session ID ani tracking parametry.
+- Stránky v sitemapě nejsou blokované v `robots.txt`.
+- Stránky v sitemapě nemají `noindex`.
+
+## Kanonické URL uklidí duplicity dřív, než začnou bolet
+
+Duplicitní obsah není jen „SEO problém“. Je to provozní problém. Když stejný obsah existuje na více URL, zhoršuje se měření, sdílení, interní odkazy, cache, reporting a občas i důvěra uživatele. Google doporučuje určit kanonickou URL pomocí signálů jako přesměrování, `rel="canonical"`, sitemap a konzistentní interní odkazy.
+
+Typické zdroje duplicit:
+
+- `/produkt` a `/produkt/`,
+- `http` a `https`,
+- `www` a non-`www`,
+- parametry kampaní,
+- filtrování a řazení v katalogu,
+- tiskové nebo PDF varianty,
+- staré slugy po změně titulku.
+
+Pravidlo pro malý tým: vyber jednu kanonickou podobu URL a buď tvrdohlavý. Všechny interní odkazy, sitemap, Open Graph URL, canonical tagy a redirecty mají ukazovat stejným směrem. Pokud marketing potřebuje UTM parametry, fajn, ale kanonická adresa stránky má zůstat čistá.
+
+Příklad rozhodnutí:
+
+```txt
+Kanonická doména: https://www.example.com
+Trailing slash: bez lomítka na konci u obsahových stránek
+Jazyk v URL: /cs/... a /en/...
+Parametry: UTM povolené pro kampaně, canonical vždy bez UTM
+Staré slugy: 301 na aktuální kanonickou URL
+```
+
+Kanonizace není místo pro kreativitu. Je to místo pro konzistenci. Kreativitu si nech na nadpisy, tam se aspoň dá tvrdit, že to byl záměr.
+
+## Interní vyhledávání a filtry drž mimo index
+
+Interní vyhledávání, kombinace filtrů a řazení dokážou vytvořit tisíce slabých URL. Pro e-shop nebo katalog to může být legitimní strategie, ale pro většinu menších SaaS a B2B webů je to spíš způsob, jak crawlerovi naservírovat nekonečnou polévku parametrů.
+
+Rozumný model:
+
+- Indexuj ručně připravené landing pages pro důležité segmenty.
+- Neindexuj interní výsledky vyhledávání.
+- Parametry pro řazení a filtraci drž mimo sitemapu.
+- Pro kombinace parametrů nastav kanonickou URL na hlavní kategorii nebo segment.
+- U stránek bez výsledků vrať užitečný stav pro uživatele, ne prázdnou indexovatelnou stránku.
+
+Privacy-first rozměr: dotazy interního vyhledávání často prozrazují potřeby, problémy nebo identifikátory zákazníka. Neposílej je bez rozmyslu do analytických nástrojů, reklamních pixelů ani externích logů. Pokud je měříš, agreguj, zkrať retenci a nikdy neloguj citlivé hodnoty jako e-mail, telefon, číslo objednávky nebo jméno osoby.
+
+## Staging a preview URL nesmí být veřejný SEO folklór
+
+Staging má být chráněný. Tečka. Ne jen schovaný za divnou subdoménou. Ne jen blokovaný v `robots.txt`. Ne jen „vždyť to nikdo nenajde“. Najde. Internet je banda velmi trpělivých vysavačů.
+
+Bezpečné možnosti:
+
+- HTTP basic auth pro staging a preview prostředí.
+- Přístup přes VPN nebo allowlist IP tam, kde to dává smysl.
+- Preview URL s expirací a bez produkčních dat.
+- Vlastní samostatná doména nebo subdoména bez vazby na produkční sitemapu.
+- Automatická kontrola, že staging nikdy nevydává produkční `sitemap.xml`.
+
+Pokud staging musí být veřejně dostupný kvůli klientskému review, nastav aspoň `noindex` a přístup omez časově. Ale znovu: `noindex` není ochrana citlivých dat. Je to jen instrukce pro indexaci.
+
+## 404, 410 a redirecty řeš jako produktovou zkušenost
+
+Každý web časem maže nebo přesouvá obsah. Důležité je, aby se z toho nestal hřbitov rozbitých odkazů.
+
+Praktická pravidla:
+
+- Použij `301`, když má stará URL jasnou náhradu.
+- Použij `404`, když stránka neexistuje a není jisté, zda jde o trvalý stav.
+- Použij `410`, když víš, že obsah byl trvale odstraněn a nemá náhradu.
+- Nepřesměrovávej všechno na homepage. To je SEO varianta zametení střepů pod koberec.
+- U zrušených produktů nabídni související alternativu nebo vysvětlení.
+- Interní odkazy aktualizuj, ne jen přesměrovávej navždy.
+
+Dobrá chybová stránka pomáhá uživateli pokračovat: nabídne vyhledání, hlavní sekce, kontakt nebo návrat na relevantní kategorii. Špatná chybová stránka jen řekne „něco se pokazilo“ a tváří se, že tím splnila pracovní dobu.
+
+## Monitoring indexace bez invazivní analytiky
+
+Indexaci můžeš hlídat bez sledování každého návštěvníka přes reklamní sítě. Stačí kombinovat technické kontroly, serverové signály a nástroje pro správce webu.
+
+Minimum monitoringu:
+
+- pravidelný check `robots.txt` a `sitemap.xml`,
+- kontrola HTTP statusů URL v sitemapě,
+- detekce náhlého výskytu `noindex` na důležitých stránkách,
+- seznam nových `404` z interních odkazů,
+- kontrola canonical URL u šablon,
+- Search Console nebo obdobný webmaster nástroj pro technické chyby indexace,
+- privacy-first analytika pro veřejné stránky bez cross-site profilování.
+
+Pro malý tým je ideální mít jeden týdenní report: počet veřejných URL, počet URL v sitemapě, počet chybových stavů, nově nalezené rozbité interní odkazy a seznam stránek s podezřelým `noindex`. Nepotřebuješ k tomu profilovat člověka. Potřebuješ vědět, jestli web neháže klacky pod nohy sám sobě.
+
+## Checklist: indexace bez SEO chaosu
+
+- Máme jasně rozdělené veřejné, neveřejné a technické URL.
+- `robots.txt` existuje, odkazuje na sitemapu a neobsahuje citlivé cesty jako „bezpečnostní plán“.
+- Citlivé části jsou chráněné přístupem, ne jen schované před crawlery.
+- `sitemap.xml` obsahuje jen kanonické indexovatelné URL s `200 OK`.
+- Každá důležitá stránka má konzistentní canonical URL.
+- Interní odkazy, Open Graph URL, sitemap a redirecty používají stejnou kanonickou podobu.
+- Staging a preview prostředí jsou chráněné a nejsou v produkční sitemapě.
+- Interní vyhledávání, filtry a tracking parametry nevytvářejí indexovatelný spam.
+- Zrušené stránky mají promyšlený `301`, `404` nebo `410`.
+- Týdenní kontrola hlídá statusy, sitemapu, `noindex`, canonical a rozbité interní odkazy.
+
+## Mini šablona indexační karty
+
+```markdown
+# Indexační karta: [sekce / typ URL]
+
+## Účel
+- Pro koho stránka existuje:
+- Jaké rozhodnutí má podpořit:
+
+## Indexace
+- Má být indexovaná: ano / ne
+- Důvod:
+- Canonical URL pravidlo:
+
+## Crawlování
+- `robots.txt` pravidlo:
+- Je v sitemapě: ano / ne
+- Interní odkazy:
+
+## Přístup a data
+- Obsahuje osobní nebo interní data: ano / ne
+- Ochrana přístupu:
+- Retence / expirace:
+
+## Změny
+- Co se stane při zrušení URL:
+- Přesměrování:
+- Vlastník:
+- Datum další revize:
+```
+
+Indexace není jednorázová SEO kolonka při launchi. Je to provozní disciplína, která chrání obchodní obsah před neviditelností a interní data před veřejným trapasem. Nejlepší nastavení je takové, kterému rozumí vývojář, marketér i člověk ze supportu — protože každý z nich jednou vytvoří stránku, kterou buď svět najít má, nebo opravdu nemá.
+
+## Zdroje
+
+- Google Search Central: [Introduction to robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/intro)
+- RFC Editor: [RFC 9309: Robots Exclusion Protocol](https://www.rfc-editor.org/rfc/rfc9309)
+- Sitemaps.org: [Sitemaps XML protocol](https://www.sitemaps.org/protocol.html)
+- Google Search Central: [What is a sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview)
+- Google Search Central: [How to specify a canonical URL](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls)
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „Indexace webu bez SEO chaosu a zbytečného sledování“ s rozdělením veřejných a neveřejných URL, pravidly pro `robots.txt`, sitemapu, canonical URL, staging, filtry, redirecty, privacy-first monitoringem, checklistem, indexační kartou a ověřenými zdroji Google Search Central, RFC 9309 a sitemaps.org.
+
 
 - 2026-10-03: Doplněna příloha „E-mailová doručitelnost bez tracking pixelů a reputační loterie“ s rozdělením e-mailů podle účelu, SPF/DKIM/DMARC hygienou, one-click odhlášením, privacy-first měřením bez tracking pixelů, segmentací, checklistem, e-mailovou kartou a ověřenými zdroji Google, Yahoo a RFC.
 
