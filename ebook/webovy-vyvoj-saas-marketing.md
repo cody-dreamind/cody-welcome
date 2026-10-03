@@ -35000,14 +35000,175 @@ Datum poslední revize:
 
 Error monitoring je nejlepší, když je nudně spolehlivý: rychle ukáže problém, neprozradí zbytečnosti, pomůže supportu a po vyřešení incidentu po sobě uklidí. Privacy-first provoz tím neztrácí rychlost. Naopak: když víš, co neloguješ, opravuješ chyby s čistší hlavou a menším právním tikem v oku.
 
+## Příloha: Secrets a API klíče bez lepení do kódu
+
+Secrets jsou hesla, API klíče, přístupové tokeny, privátní klíče, connection stringy, webhook podpisy, certifikáty a další údaje, které otevírají dveře do systému. V malém týmu často začnou nevinně: jeden `.env` soubor, jeden testovací token, jeden „dočasný“ klíč v CI, jeden screenshot nastavení v chatu. Jenže secrets mají nepříjemnou vlastnost: jakmile utečou, nestačí je schovat. Musíš je odvolat, otočit, dohledat dopad a ujistit se, že stejná hodnota nežije ještě někde bokem.
+
+OWASP Secrets Management Cheat Sheet upozorňuje, že secrets se často objevují natvrdo ve zdrojovém kódu, konfiguračních souborech nebo nástrojích pro správu konfigurace, a doporučuje centralizovat jejich ukládání, poskytování, auditování, rotaci a správu ([OWASP: Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)). Pro privacy-first SaaS to není „enterprise paranoia“. Je to základní provozní hygiena. Klíč k produkční databázi je malý textový řetězec s velkou schopností pokazit víkend.
+
+> Codyho komentář: Secret v repozitáři je jako klíč od kanceláře zalepený zvenku na dveřích s cedulkou „prosím nezneužívat“. Optimismus je hezký charakterový rys, ale špatná bezpečnostní vrstva.
+
+### Rozděl secrets podle dopadu
+
+Ne každý secret má stejné riziko. Testovací token do lokální služby není totéž jako produkční connection string s možností mazat data. Pokud vše označíš jen jako „tajné“, tým neví, co má řešit první.
+
+Praktické kategorie:
+
+- **Produkční kritické secrets**: databáze, platby, DNS, hosting, deployment tokeny, zálohy.
+- **Produkční integrační secrets**: e-mailing, CRM, analytika, helpdesk, webhooky.
+- **Interní provozní secrets**: CI/CD, package registry, monitoring, incident nástroje.
+- **Vývojové secrets**: lokální `.env`, testovací API klíče, sandbox platební brány.
+- **Dočasné secrets**: jednorázové migrační tokeny, přístup pro dodavatele, exportní odkazy.
+
+U každé kategorie si napiš dopad úniku: co by šlo číst, měnit, mazat, posílat nebo fakturovat. Tohle rozhoduje o prioritě rotace, přístupech a alertingu.
+
+### Nelep secrets do míst, která se špatně čistí
+
+Zakázaná místa nejsou jen zdrojový kód. Secret se může dostat do logů, issue trackeru, chatu, screenshotu, build artefaktu, Docker image, analytické události nebo AI promptu. OWASP REST Security Cheat Sheet výslovně varuje, že hesla, bezpečnostní tokeny a API klíče nemají být v URL, protože je mohou zachytit serverové logy ([OWASP: REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html)).
+
+Pravidla pro malý tým:
+
+- secrets nikdy nepatří do URL parametrů,
+- secrets nikdy nepatří do klientského JavaScriptu, pokud mají něco opravdu chránit,
+- produkční secrets nepatří do README, issue, chatu ani screenshotu,
+- `.env` soubory nesmí být commitované a vzorový `.env.example` má obsahovat jen názvy proměnných,
+- CI logy mají maskovat hodnoty a nespouštět debug výpis celé konfigurace,
+- AI asistenti nemají dostávat skutečné tokeny, pokud nejsou chráněné nástrojem určeným pro bezpečné použití secrets.
+
+Pokud musíš ukázat konfiguraci v dokumentaci, použij zástupné hodnoty:
+
+```text
+DATABASE_URL=postgres://USER:PASSWORD@HOST:5432/DB
+PAYMENT_API_KEY=sk_test_REPLACE_ME
+WEBHOOK_SECRET=whsec_REPLACE_ME
+```
+
+Vypadá to banálně. Přesně tak má vypadat dobrá bezpečnost: banální před incidentem, ne geniální po něm.
+
+### Prostředí odděluj i hodnotami, ne jen názvem
+
+Produkce, staging a lokální vývoj nemají sdílet stejné secrets. Když staging používá produkční klíč, není to staging. Je to produkce v převleku s horšími návyky.
+
+Minimum:
+
+- samostatné API klíče pro každé prostředí,
+- samostatné webhook secrets pro každé prostředí,
+- oddělené databáze a storage buckety,
+- jasně pojmenované proměnné s prefixem prostředí jen tam, kde to pomáhá,
+- žádná produkční data v lokálním `.env`, pokud k tomu není schválený důvod.
+
+Když dodavatel neumí vytvořit více klíčů nebo omezit oprávnění, je to signál rizika. Možná to pořád použiješ, ale nemá to být tichá výjimka. Zapiš ji do registru nástrojů a rozhodni, jestli je přijatelná.
+
+### Rotace není panický rituál
+
+Rotace secrets má být plánovaná rutina i incidentový postup. OWASP rozlišuje rotaci, revokaci a expiraci: pravidelná rotace snižuje dopad ukradených credentials, revokace omezuje už nepoužívané nebo kompromitované secrets a expirace může spouštět proces obnovy ([OWASP: Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)).
+
+Praktický rotační model:
+
+1. Vytvoř nový secret vedle starého, pokud to služba umožňuje.
+2. Nasaď aplikaci s podporou nové hodnoty.
+3. Ověř provoz a integrace.
+4. Odvolej starý secret.
+5. Zkontroluj logy a alerty.
+6. Zapiš datum, vlastníka a důvod rotace.
+
+U kritických secrets měj dopředu napsaný postup. Nečekej na incident. V incidentu totiž mozek rád přepne do režimu „kliknu na všechno, co vypadá modře“.
+
+### Přístupy podle role a nejmenšího oprávnění
+
+Secret nemá být sdílená rodinná relikvie. Každý přístup má mít účel, vlastníka a rozsah. Pokud někdo potřebuje jen číst reporty, nemá mít token, který umí mazat zákaznická data. Pokud dodavatel potřebuje přístup na týden, nemá mít účet bez expirace.
+
+Dobrá praxe:
+
+- používej role a scoped tokeny místo univerzálních admin klíčů,
+- nastav expiraci u dočasných přístupů,
+- při offboardingu kontroluj i API tokeny a osobní access tokeny,
+- u produkčních secrets vyžaduj MFA pro správce,
+- ulož odpovědnost do registru, ne do paměti zakladatele.
+
+Privacy-first pohled: nejmenší oprávnění chrání nejen infrastrukturu, ale i zákaznická data. Když token unikne, dopad má být co nejmenší. Bezpečnost není binární. Je to série brzd, které snižují škodu, když se něco pokazí.
+
+### Secret scanning a úklid historie
+
+Každý repozitář by měl mít alespoň základní kontrolu secrets před commitem a v CI. Ne proto, že vývojáři jsou nezodpovědní, ale protože lidé jsou lidé a `.env` soubor je tichý ninja.
+
+Praktický postup:
+
+- přidej `.env`, exporty a lokální konfigurace do `.gitignore`,
+- udržuj `.env.example` bez skutečných hodnot,
+- zapni secret scanning v repozitáři nebo CI,
+- při nálezu secret okamžitě rotuj, nestačí ho smazat z posledního commitu,
+- zkontroluj build artefakty, image, logy a dokumentaci,
+- incident zapiš stručně: co uniklo, kdy, kam, co se otočilo a co se změnilo v procesu.
+
+Pokud byl secret veřejně commitnutý, chovej se k němu jako ke kompromitovanému. Historie gitu je vytrvalá potvora. „Už jsem to přepsal“ není totéž jako „už to nemůže nikdo použít“.
+
+### Checklist secrets managementu
+
+- [ ] Máme registr kritických secrets s vlastníkem, účelem a prostředím?
+- [ ] Jsou produkce, staging a lokální vývoj oddělené hodnotami?
+- [ ] Nejsou secrets v repozitáři, dokumentaci, issue trackeru, chatu ani URL?
+- [ ] Má `.env.example` jen zástupné hodnoty?
+- [ ] Jsou secrets načítané až za bezpečnou hranicí backendu nebo infrastruktury?
+- [ ] Mají tokeny nejmenší potřebná oprávnění?
+- [ ] Umíme kritické secrets otočit bez dlouhého výpadku?
+- [ ] Máme postup pro revokaci při incidentu nebo odchodu dodavatele?
+- [ ] Běží secret scanning před commitem nebo v CI?
+- [ ] Kontrolujeme, že secrets netečou do logů, error monitoringu a AI promptů?
+
+### Mini šablona secret karty
+
+```text
+Název secretu:
+
+Služba / systém:
+
+Prostředí:
+produkce / staging / vývoj / dočasné
+
+Účel:
+
+Vlastník:
+
+Kde je uložen:
+
+Kdo k němu má přístup:
+
+Rozsah oprávnění:
+
+Kde se používá:
+
+Kde se nesmí objevit:
+
+Rotace:
+frekvence / spouštěč / postup
+
+Revokace:
+postup při incidentu nebo odchodu dodavatele
+
+Monitoring zneužití:
+
+Datum poslední rotace:
+
+Datum další revize:
+
+Poznámky:
+```
+
+Secrets management není o tom mít nejdražší vault a nejdramatičtější bezpečnostní prezentaci. Je o tom, aby tým věděl, kde jsou klíče, kdo je používá, jak je otočit a jak zabránit tomu, aby se dostaly do míst, která nejdou rozumně uklidit. Dobré secrets jsou nudné, krátce žijící a dobře vlastněné. Přesně ten typ nudy, který chceš v produkci.
+
 ## Zdroje
 
+- OWASP: [Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
+- OWASP: [REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html)
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - OWASP: [Error Handling Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html)
 - OWASP Developer Guide: [Handle all Errors and Exceptions](https://devguide.owasp.org/en/04-design/02-web-app-checklist/10-handle-errors-exceptions/)
 - European Commission: [What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
 
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „Secrets a API klíče bez lepení do kódu“ s kategorizací secrets podle dopadu, pravidly pro zakázaná místa, oddělením prostředí, rotačním postupem, přístupy podle role, secret scanningem, checklistem, secret kartou a ověřenými zdroji OWASP.
 
 - 2026-10-03: Doplněna příloha „Error monitoring bez úniku dat a paniky v logách“ s rozdělením signálů, bezpečnými chybovými hláškami, maskováním před odesláním do nástroje, prioritami alertů, retenčním modelem, checklistem, monitoring kartou a ověřenými zdroji OWASP a Evropské komise.
 
