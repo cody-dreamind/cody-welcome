@@ -33020,7 +33020,168 @@ Fallback při výpadku:
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — pravidla pro bezpečnostní logování, ochranu citlivých údajů v logách a rozumný kontext událostí.
 - W3C WAI: [Forms Tutorial](https://www.w3.org/WAI/tutorials/forms/) — přístupné formuláře, labely, instrukce a chybové stavy použitelné i pro vyhledávání a filtry.
 
+# Příloha: Schvalovací workflow bez firemního razítkovacího pekla
+
+Schvalování citlivých změn má chránit zákazníka, data a provoz. Nemá být divadlo, kde se každý deploy promění v malý úřednický festival s pěti „prosím potvrď“ zprávami a nulovou odpovědností. Malý SaaS potřebuje jednoduchý model: jasně říct, které akce jsou běžné, které rizikové, kdo je může spustit, kdo je má schválit a co se stane při chybě.
+
+Největší past je schvalovat moc věcí. Když schvalovací krok vyžaduješ u každé drobnosti, tým ho začne obcházet, odklikávat naslepo nebo přesouvat do chatu mimo systém. Výsledek je horší než žádné workflow: vypadá to bezpečně, ale důkazní stopa je rozbitá a rozhodnutí nikdo doopravdy nevlastní.
+
+> Codyho komentář: Schvalování není svátost. Je to brzda. Dobrá brzda zachrání auto v zatáčce, špatná brzda píská i na parkovišti a všichni ji časem ignorují.
+
+## Rozděl akce podle rizika
+
+Začni katalogem akcí. U každé napiš, jaký je dopad na zákazníka, peníze, osobní údaje, dostupnost a možnost návratu zpět. Schvalování potřebují hlavně akce, které jsou drahé, nevratné, hromadné nebo sahají na citlivější data.
+
+Praktické kategorie:
+
+- **Nízké riziko** — změna textu v dokumentaci, oprava překlepu, interní poznámka, běžná odpověď v supportu.
+- **Střední riziko** — změna cenového copy, úprava onboardingového e-mailu, změna konfigurace integrace pro jednoho zákazníka.
+- **Vysoké riziko** — hromadné e-maily, změny tarifů, ruční úpravy fakturace, export většího množství dat, mazání účtu nebo workspace.
+- **Kritické riziko** — změny oprávnění adminů, přístup k produkční databázi, vypnutí bezpečnostního pravidla, migrace dat, změna retenčních pravidel.
+
+Nízké riziko nepotřebuje schvalování. Potřebuje dobré defaulty, auditní stopu a možnost opravy. Vysoké a kritické riziko potřebuje předem popsaný postup a jasné „kdo smí co“.
+
+## Odděl toho, kdo žádá, schvaluje a provádí
+
+U citlivých akcí se vyplatí oddělit tři role:
+
+1. **Žadatel** popíše důvod, rozsah a očekávaný dopad.
+2. **Schvalovatel** ověří, že akce dává smysl a odpovídá pravidlům.
+3. **Vykonavatel** akci provede nebo pustí automatizaci.
+
+V malém týmu může jedna osoba zastávat víc rolí u středního rizika, ale ne u kritických akcí. Pokud stejný člověk požádá o produkční export, schválí ho a rovnou stáhne, nemáš kontrolu. Máš jen sólo jízdu s razítkem.
+
+U kritických akcí nastav pravidlo „čtyř očí“: minimálně dva lidé vidí důvod a rozsah před provedením. Když tým nemá druhého technického člověka, schvalovatel nemusí rozumět SQL detailům, ale musí rozumět zákaznickému a datovému dopadu: komu se co stane, proč teď a jak poznáme, že se to povedlo.
+
+## Žádost musí být konkrétní
+
+Schvalovací žádost nesmí znít „prosím approve“. Musí obsahovat tolik informací, aby člověk nemusel lovit kontext v chatu, issue trackeru a vlastní paměti.
+
+Minimum žádosti:
+
+- co se má změnit,
+- koho se to týká,
+- proč je změna potřeba,
+- jaký je rozsah dat nebo zákazníků,
+- jaký je rollback nebo kompenzace,
+- kdy se akce provede,
+- kdo bude sledovat výsledek.
+
+Špatně:
+
+```text
+Prosím schválit export dat pro klienta.
+```
+
+Lépe:
+
+```text
+Prosím schválit jednorázový export fakturačních položek pro workspace ACME za období 2026-09.
+Účel: kontrola nesouladu mezi fakturací a účetnictvím.
+Rozsah: invoice_id, datum, částka, měna, tarif; bez kontaktních osob a bez event logů.
+Předání: šifrovaný soubor přes smluvený kanál, smazání pracovní kopie do 7 dnů.
+Ověření: porovnání počtu položek s billing reportem, zápis do auditního logu.
+```
+
+Privacy-first rozdíl je v rozsahu. Export „všechno, co máme“ je pohodlný jen do chvíle, než ho musíš vysvětlovat zákazníkovi, právníkovi nebo sám sobě ve tři ráno.
+
+## Automatizuj pravidla, ne úsudek
+
+Dobré workflow kombinuje automatické kontroly a lidské rozhodnutí. Automat může odmítnout žádost bez povinných polí, upozornit na citlivá data, vyžadovat druhého schvalovatele, omezit časové okno nebo přidat auditní záznam. Člověk má posoudit účel, přiměřenost a zákaznický dopad.
+
+Příklady automatických brzd:
+
+- export bez účelu nejde odeslat ke schválení,
+- akce s více než jedním tenantem vyžaduje druhého schvalovatele,
+- žádost o produkční přístup expiruje po několika hodinách,
+- schválení se váže na konkrétní akci, ne na obecné „admin právo navždy“,
+- systém po provedení uloží, kdo žádal, kdo schválil, co se provedlo a kdy.
+
+Nedělej ze schvalování náhradu autorizace. Pokud uživatel nesmí mazat workspace, schvalovací popup ho nemá magicky proměnit v oprávněnou osobu. Nejdřív musí fungovat role, oprávnění a serverová kontrola. Schválení je další ochranná vrstva, ne průkazka do zákulisí.
+
+## Emergency režim bez tajného zadního vchodu
+
+Každý systém občas potřebuje rychlou reakci: incident, špatná fakturace, rozbitá migrace, zákazník zablokovaný chybou. Emergency režim má existovat, ale nesmí být trvalá výmluva pro obcházení pravidel.
+
+Nastav ho takto:
+
+- aktivace vyžaduje důvod a časové omezení,
+- po aktivaci se pošle notifikace odpovědným lidem,
+- každá akce v režimu se auditně označí,
+- po incidentu proběhne krátká revize: proč byl režim použit, co se změnilo a jestli pravidla nepotřebují upravit,
+- emergency práva automaticky expirují.
+
+Tohle je důležité i pro důvěru týmu. Když lidé vědí, že existuje bezpečný nouzový postup, méně často si vytvářejí vlastní zkratky typu sdílený superadmin účet uložený „dočasně“ v poznámkách. Dočasně, samozřejmě. Tak jako vánoční světýlka v únoru.
+
+## Auditní stopa má být použitelná
+
+Auditní log schvalování nemá být skládka payloadů. Má odpovědět na otázky: kdo o co požádal, kdo to schválil, podle jakého důvodu, co se provedlo, s jakým výsledkem a kde je navazující ticket nebo incident.
+
+Do auditní stopy nepatří zbytečný obsah exportovaných dat, celé zprávy zákazníků ani citlivé tokeny. Patří tam identifikátory, typ akce, rozsah, čas, aktéři, výsledek a odkaz na interní záznam. Pokud potřebuješ uchovat důkaz, ulož minimum a nastav retenci.
+
+Zákaznický admin může u vybraných akcí vidět vlastní auditní přehled: změny rolí, pozvánky, zapnutí integrace, exporty, smazání. To je lepší než support odpověď „věříme, že se nic nestalo“. Důvěra bez záznamu je jen hezká fráze v mikině.
+
+## Checklist schvalovacího workflow
+
+- [ ] Máme katalog akcí rozdělený podle rizika?
+- [ ] Víme, které akce schvalování nepotřebují?
+- [ ] U vysokého a kritického rizika je oddělen žadatel, schvalovatel a vykonavatel?
+- [ ] Žádost obsahuje účel, rozsah, dopad, čas a rollback?
+- [ ] Schválení je vázané na konkrétní akci, ne na trvalé oprávnění?
+- [ ] Emergency režim má expiraci, důvod, notifikaci a následnou revizi?
+- [ ] Auditní log neukládá zbytečný obsah osobních dat?
+- [ ] Zákaznický admin vidí relevantní bezpečnostní události vlastního workspace?
+- [ ] Máme negativní testy, že neschválená nebo expirovaná akce opravdu nejde provést?
+- [ ] Jednou měsíčně projdeme nejrizikovější schválené akce a odstraníme opakující se tření?
+
+## Mini šablona approval karty
+
+```text
+# Approval karta: [název akce]
+
+## Riziko
+Kategorie rizika:
+Dopad na zákazníka:
+Dopad na osobní údaje:
+Vratnost změny:
+
+## Role
+Kdo může požádat:
+Kdo může schválit:
+Kdo může provést:
+Kdy jsou potřeba dvě osoby:
+
+## Povinný obsah žádosti
+Účel:
+Rozsah:
+Dotčený tenant / zákazník:
+Čas provedení:
+Rollback / kompenzace:
+Ověření výsledku:
+
+## Automatické kontroly
+Povinná pole:
+Expirace schválení:
+Limit rozsahu:
+Notifikace:
+Auditní události:
+
+## Emergency režim
+Kdo může aktivovat:
+Maximální doba:
+Následná revize:
+```
+
+## Zdroje
+
+- OWASP: [Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) — deny-by-default, princip nejmenších oprávnění a požadavek kontrolovat autorizaci u každého požadavku.
+- OWASP: [Transaction Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transaction_Authorization_Cheat_Sheet.html) — dodatečná autorizace významných transakcí, default deny a ochrana proti obcházení schvalovacího kroku.
+- NIST: [SP 800-53 Rev. 5](https://www.nist.gov/publications/security-and-privacy-controls-information-systems-and-organizations-0) — kontrolní rodina Access Control, zejména oddělení povinností a least privilege jako inspirace pro schvalování citlivých akcí.
+- EUR-Lex: [GDPR, článek 5](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679) — zásady minimalizace údajů a odpovědnosti při zpracování osobních údajů.
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „Schvalovací workflow bez firemního razítkovacího pekla“ s rozdělením akcí podle rizika, oddělením rolí žadatel/schvalovatel/vykonavatel, konkrétní žádostí, automatickými brzdami, emergency režimem, auditní stopou, checklistem, approval kartou a ověřenými zdroji OWASP, NIST a GDPR.
 
 - 2026-10-02: Doplněna příloha „Vyhledávání a filtry v SaaS bez úniku dat“ s katalogem hledatelných entit, autorizací výsledků i našeptávače, minimalizací indexovaných polí, bezpečným logováním dotazů, UX pravidly, checklistem, search kartou a ověřenými zdroji OWASP a W3C WAI.
 
