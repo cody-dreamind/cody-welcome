@@ -35516,7 +35516,203 @@ Poznámky:
 
 Screenshoty a nahrávky obrazovky jsou skvělé pracovní zkratky. Jen nesmí být zkratkou kolem zdravého rozumu. Když tým používá výřezy, demo data, krátké nahrávky a jasnou retenci, zůstane rychlý bez toho, aby z každého bug reportu dělal malý datový únik v kostýmu produktivity.
 
+# Příloha: Prohlížečové úložiště bez localStorage skládky
+
+Prohlížeč umí uložit spoustu věcí: cookies, `localStorage`, `sessionStorage`, IndexedDB, cache, service worker data a různé dočasné stavy rozhraní. To svádí k pohodlnému řešení: „strčíme to do browseru, ať to nemusíme řešit na serveru.“ Jenže klientské úložiště není trezor. Je to praktická přihrádka v zařízení uživatele, kde se špatné rozhodnutí násobí každým otevřeným tabem, každým rozšířením prohlížeče a každou XSS chybou.
+
+Privacy-first web nebo SaaS si proto musí ujasnit, co do prohlížeče patří, co tam patří jen krátce a co tam nepatří nikdy. Cíl není paranoidně zakázat každou lokální hodnotu. Cíl je zabránit tomu, aby se z `localStorage` stal malý datový sklad, o kterém nikdo neví, ale všichni na něm jednou závisí.
+
+> Codyho komentář: `localStorage` je jako šuplík u recepce. Na propisku dobrý. Na hlavní klíče od firmy už méně elegantní, že.
+
+## Nejdřív pojmenuj typ dat
+
+Než vybereš cookie nebo web storage, pojmenuj data podle rizika. Bez téhle mapy bude tým řešit technologii dřív než odpovědnost.
+
+Praktické kategorie:
+
+- Session a autentizace: identita uživatele, session ID, refresh tokeny, stav přihlášení.
+- Preference rozhraní: jazyk, téma, zavřené nápovědy, velikost tabulky, poslední otevřený panel.
+- Dočasná práce: rozepsaný formulář, filtr tabulky, návrh textu, průběh importu.
+- Produktová data: názvy projektů, zákazníci, faktury, dokumenty, reporty.
+- Diagnostika: client trace ID, verze aplikace, poslední neúspěšný krok.
+- Marketingové stavy: zdroj kampaně, affiliate identifikátor, experiment varianta.
+
+Každá kategorie má jinou odpověď. Preference rozhraní může v browseru žít klidně dlouho, pokud neprozrazuje nic citlivého. Rozepsaný formulář může být lokálně užitečný, ale má mít časový limit a jasné smazání. Session tokeny a citlivá produktová data si zaslouží mnohem přísnější zacházení.
+
+## Citlivé hodnoty do localStorage nepatří
+
+OWASP v HTML5 bezpečnostním checklistu výslovně varuje, že citlivé informace se do local storage ukládat nemají, protože úspěšné XSS může data z těchto objektů přečíst. To je dobré jednoduché pravidlo: pokud by únik hodnoty znamenal převzetí účtu, obchodní škodu, osobní údaj navíc nebo bezpečnostní incident, do `localStorage` ji nedávej.
+
+Typické položky, které tam nepatří:
+
+- access tokeny a refresh tokeny,
+- session ID,
+- API klíče,
+- e-maily a telefonní čísla zákazníků,
+- celé profily uživatelů,
+- položky košíku s citlivým kontextem,
+- obsah dokumentů, ticketů nebo faktur,
+- interní poznámky a support konverzace.
+
+Když frontend potřebuje vědět, že uživatel je přihlášený, nemusí držet tajný token v čitelném úložišti. Často stačí serverem řízená session cookie s rozumnými atributy a endpoint typu `/me`, který vrátí minimální stav pro UI. Ano, je to o kousek méně pohodlné než „ulož token a jedem“. Zároveň je to rozdíl mezi produktem a bezpečnostní sportkou.
+
+## Cookies používej vědomě, ne jako odpadkový koš
+
+Cookies nejsou automaticky špatné. Jsou jen často špatně používané. Pro session management dávají smysl, protože se posílají s HTTP požadavky a dají se nastavit tak, aby je JavaScript nemohl číst. OWASP Session Management Cheat Sheet i MDN popisují atributy jako `HttpOnly`, `Secure` a `SameSite`, které patří do základní hygieny session cookies.
+
+Bezpečnější default pro session cookie:
+
+```text
+HttpOnly
+Secure
+SameSite=Lax nebo Strict podle toku aplikace
+krátká a vysvětlitelná expirace
+rotace po přihlášení a citlivých změnách
+server-side revokace při odhlášení
+```
+
+Cookie není místo pro velký JSON profil. Do cookie patří identifikátor nebo stav nutný pro protokol, ne půlka CRM. Čím větší cookie, tím víc ji posíláš při každém požadavku a tím větší lákadlo vzniká pro budoucí „ještě tam přidáme jednu hodnotu“.
+
+Privacy-first pravidlo: cookie má mít vlastníka, účel, dobu života a důvod, proč nestačí serverový stav. Pokud tuto větu neumíš vyplnit, cookie ještě není připravená.
+
+## Web storage drž pro nízkorizikové preference
+
+`localStorage` a `sessionStorage` jsou užitečné pro malé klientské stavy. MDN je popisuje jako jednoduché key-value úložiště pro konkrétní origin. Prakticky: hodí se na preference, které nevadí ztratit, a na stavy, které nezvyšují oprávnění uživatele.
+
+Dobré použití:
+
+- tmavý nebo světlý režim,
+- jazyk rozhraní,
+- zavřený onboarding tip,
+- poslední ne-citlivý filtr tabulky,
+- lokální draft bez osobních údajů,
+- anonymní stav rozbalené navigace,
+- front-end cache veřejné konfigurace.
+
+Špatné použití:
+
+- „zapamatuj přihlášení“ přes uložený token,
+- seznam posledních zákazníků v administraci,
+- detail faktury pro offline pohodlí,
+- support odpověď obsahující osobní údaje,
+- obsah AI promptu se zákaznickým kontextem,
+- interní feature flagy, které obcházejí autorizaci.
+
+Rozdíl mezi `localStorage` a `sessionStorage` ber vážně. Když hodnota stačí jen po dobu otevřeného tabu, nepoužívej trvalejší úložiště. Když hodnota nemusí přežít refresh, možná nepotřebuje browser storage vůbec.
+
+## Drafty formulářů navrhuj jako funkci, ne náhodu
+
+Automatické ukládání rozepsaných formulářů je skvělé pro použitelnost. Zároveň může uložit přesně to, co uživatel nechtěl odeslat: popis problému, zdravotní údaj, osobní poznámku, obchodní informaci nebo interní text. Proto má být autosave vědomá funkce s hranicemi.
+
+Bezpečnější model:
+
+- u citlivých formulářů autosave vypni nebo udělej explicitní,
+- ukládej jen rozpracovaný text bez identifikátorů navíc,
+- dej uživateli viditelné „smazat rozepsané“,
+- nastav krátkou expiraci draftu,
+- po odeslání draft okamžitě smaž,
+- při sdíleném zařízení nenabízej trvalé zapamatování,
+- nepoužívej drafty jako skrytou analytiku.
+
+U B2B SaaS administrace je dobrý kompromis server-side draft svázaný s účtem, pokud je obsah důležitý a citlivý. Pak platí běžná pravidla autorizace, auditní stopy, retence a mazání. Lokální draft v prohlížeči je vhodný hlavně tam, kde data nejsou citlivá a ztráta draftu není tragédie.
+
+## Logout musí opravdu uklidit stopy
+
+Odhlášení není jen redirect na homepage. Je to úklid bezpečnostního a soukromého stavu. Pokud po logoutu zůstane v browseru poslední workspace, jméno zákazníka, cache API odpovědí nebo otevřený draft, uživatel může být odhlášený jen formálně.
+
+Při logoutu zvaž:
+
+- revokaci session na serveru,
+- expiraci session cookie,
+- vyčištění klientských cache s neveřejným obsahem,
+- smazání citlivých hodnot z web storage,
+- reset in-memory store aplikace,
+- odpojení realtime kanálů,
+- návrat na neutrální veřejnou stránku,
+- test v režimu sdíleného počítače.
+
+Pozor na service worker a offline cache. Pokud aplikace cachuje API odpovědi nebo HTML shell s citlivým kontextem, musíš mít pravidla pro invalidaci po odhlášení a při změně účtu. Offline schopnost je hezká, dokud po ní nezůstane cizí projekt v cizím zařízení.
+
+## Marketingové identifikátory drž krátce a férově
+
+UTM parametry, referral kódy a experiment varianty mohou pomoci vyhodnotit, odkud přišla poptávka. Nemusí se z nich ale stát dlouhodobý profil uživatele. Privacy-first přístup preferuje krátkou, účelovou a srozumitelnou evidenci.
+
+Praktická pravidla:
+
+- ukládej jen parametry, které opravdu použiješ,
+- nastav rozumnou expiraci,
+- nepřipojuj marketingový identifikátor k obsahu formuláře bez důvodu,
+- neposílej UTM hodnoty do nástrojů, které je nepotřebují,
+- po konverzi si nech jen agregaci nebo minimální atribuci,
+- nelep fingerprinting na „lepší analytiku“.
+
+U malého evropského SaaS často stačí vědět, že poptávka přišla z konkrétního článku, partnera nebo kampaně. Nepotřebuješ k tomu sledovat člověka napříč webem jako detektiv s příliš levným kloboukem.
+
+## Checklist: browser storage bez datové skládky
+
+- [ ] Máme inventář hodnot ukládaných do cookies, web storage, IndexedDB a cache?
+- [ ] Nejsou v `localStorage` tokeny, API klíče, session ID ani citlivá produktová data?
+- [ ] Mají session cookies atributy `HttpOnly`, `Secure` a vhodné `SameSite`?
+- [ ] Má každá cookie účel, vlastníka a dobu života?
+- [ ] Rozlišujeme preference UI od autentizačních a produktových dat?
+- [ ] Mají drafty formulářů expiraci a jasné smazání?
+- [ ] Čistí logout klientský stav, cache a realtime spojení?
+- [ ] Testujeme přepnutí účtů ve stejném prohlížeči?
+- [ ] Nepoužíváme browser storage jako skrytou analytiku?
+- [ ] Umíme uživateli vysvětlit, co si aplikace ukládá v jeho zařízení?
+
+## Mini šablona storage karty
+
+```text
+# Browser storage karta: [název hodnoty]
+
+## Účel
+Proč hodnotu ukládáme:
+Jaké rozhodnutí nebo funkci podporuje:
+
+## Typ úložiště
+Cookie / localStorage / sessionStorage / IndexedDB / Cache API:
+Důvod volby:
+
+## Riziko
+Obsahuje osobní údaj?
+Obsahuje tajemství nebo token?
+Co se stane při úniku?
+
+## Životnost
+Expirace:
+Kdy se maže:
+Co se děje při logoutu:
+
+## Přístup
+Čte ji JavaScript?
+Posílá se na server?
+Které části aplikace ji používají:
+
+## Test
+Test odhlášení:
+Test přepnutí účtu:
+Test sdíleného zařízení:
+
+## Revize
+Vlastník:
+Datum další kontroly:
+```
+
+Prohlížečové úložiště je výborný sluha pro malé, neškodné a vysvětlitelné stavy. Jakmile se z něj stane náhradní databáze, autentizační trezor nebo marketingová paměť bez konce, přestává být pohodlím a začíná být provozním dluhem. Dobrý produkt se pozná i podle toho, že umí uklidit po sobě — v databázi, v logách i v cizím prohlížeči.
+
+## Zdroje
+
+- OWASP: [HTML5 Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html)
+- OWASP: [Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
+- OWASP: [Cross-Site Request Forgery Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)
+- MDN Web Docs: [Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API)
+- MDN Web Docs: [Using HTTP cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies)
+- MDN Web Docs: [Set-Cookie header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie)
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „Prohlížečové úložiště bez localStorage skládky“ s praktickým rozlišením cookies, web storage, draftů, logout úklidu a marketingových identifikátorů, checklistem, storage kartou a ověřenými zdroji OWASP a MDN.
 
 - 2026-10-03: Doplněna příloha „Screenshoty a nahrávky obrazovky bez úniku citlivostí“ s pravidly pro výřezy, maskování, krátké nahrávky, ticketové přílohy, demo data, interní sdílení, checklistem a vyplnitelnou šablonou pravidla pro screenshot.
 
