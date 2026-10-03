@@ -36788,202 +36788,207 @@ Rozhodnutí:
 - European Data Protection Board: [Guidelines 8/2020 on the targeting of social media users](https://www.edpb.europa.eu/documents/guideline/guidelines-82020-on-the-targeting-of-social-media-users_en)
 
 
-# Příloha: Release notes a changelog bez produktového megafonu
+# Příloha: Produktová dokumentace bez knowledge base bludiště
 
-Release notes nejsou konfety k deployi. Jsou to provozní komunikace, která zákazníkovi říká: co se změnilo, jestli ho to ovlivní, co má udělat a kde najde detail. Dobré release notes šetří podporu, pomáhají sales týmu a snižují strach ze změn. Špatné release notes vypadají jako „vylepšili jsme výkon a opravili drobnosti“, což je užitečné asi jako deštník z ubrousku.
+Produktová dokumentace není skladiště odpovědí, kam se hází všechno, co tým nestihl vysvětlit v produktu. Je to navigace pro uživatele, administrátory, vývojáře integrací i interní podporu. Když je dobrá, zkracuje onboarding, snižuje počet ticketů a pomáhá zákazníkům udělat práci bez další schůzky. Když je špatná, stane se z ní digitální půda: všechno tam možná je, ale nikdo normální tam nechce lézt.
 
-Changelog je trochu jiný nástroj. Release notes jsou psané pro uživatele, zákazníky a interní obchodní tým. Changelog je spíš historický technicko-produktový záznam změn. Může být veřejný, interní nebo kombinovaný. Pro malý SaaS je ideální mít jeden zdroj pravdy a z něj tvořit dvě verze: stručnou zákaznickou poznámku a přesnější interní záznam.
+U privacy-first SaaS má dokumentace ještě jednu roli: vysvětluje, jak produkt pracuje s daty, kde jsou hranice odpovědnosti a jak zákazník zůstává pod kontrolou. To není právní přívěsek. To je součást důvěry.
 
-> Codyho komentář: Když neumíš změnu vysvětlit v release notes, je slušná šance, že ji neumíš vysvětlit ani zákazníkovi. A pokud ji neumíš vysvětlit zákazníkovi, možná to nebyla produktová strategie, ale deploy s diplomem.
+> Codyho komentář: Nejlepší dokumentace není nejdelší. Nejlepší dokumentace je ta, která zákazníkovi ve správnou chvíli ušetří trapné „asi jsem blbej“ a týmu ušetří desátý stejný ticket.
 
-## Rozliš publikum dřív než formát
+## Začni mapou otázek, ne stromem kategorií
 
-Nejdřív si napiš, komu konkrétní zpráva slouží. Stejný release má často čtyři publika a každé potřebuje jinou míru detailu.
+Nezačínej otázkou „jaké sekce má mít help centrum“. Začni otázkou, co lidé potřebují vyřešit. Kategorie často vznikají podle interní struktury firmy: fakturace, nastavení, integrace, bezpečnost, účet. Uživatel ale nepřichází s kategorií. Přichází s úkolem.
 
-- Uživatel chce vědět, co je pro něj nové a jestli se mění jeho běžná práce.
-- Administrátor chce vědět, jestli má zapnout nastavení, upravit oprávnění nebo informovat tým.
-- Vývojář integrace chce vědět, jestli se mění API, webhook, export nebo datový formát.
-- Interní tým chce vědět, co říkat zákazníkům, co sledovat a kdy eskalovat problém.
+Praktický postup:
 
-Praktický postup: každou změnu označ štítkem `user`, `admin`, `api`, `security`, `billing`, `internal` nebo `silent`. Tím si vynutíš přemýšlení o dopadu. Změna označená `silent` se nemusí dostat do veřejných release notes, ale pořád může patřit do interního changelogu.
+- projdi posledních 30 až 90 dní podpory,
+- vypiš opakující se otázky,
+- označ je podle fáze zákazníka: před nákupem, onboarding, běžný provoz, problém, administrace, integrace, odchod,
+- ke každé otázce napiš, jestli má být řešená v produktu, dokumentaci, e-mailu nebo obchodním materiálu,
+- vyber deset nejčastějších úkolů a napiš je jako první.
 
-## Piš podle dopadu, ne podle ticketů
+Příklad: místo kategorie „Uživatelé“ napiš stránku „Jak přidat nového člena týmu a nastavit mu oprávnění“. Místo „Exporty“ napiš „Jak stáhnout měsíční podklady pro účetní“. Dokumentace má mluvit jazykem práce, ne jazykem databázových tabulek.
 
-Uživatel nečte release notes proto, aby obdivoval počet uzavřených úkolů. Čte je proto, aby pochopil dopad. Proto nezačínej větou „Implementovali jsme nový endpoint“. Začni tím, co to umožňuje nebo mění.
+## Použij čtyři typy dokumentace
+
+Framework [Diátaxis](https://www.diataxis.fr/) rozlišuje čtyři základní typy dokumentace: tutoriály, návody, referenci a vysvětlení. Pro malý SaaS je to skvělé pravidlo, protože brání tomu, aby se z každé stránky stal guláš všeho.
+
+- Tutoriál učí začátečníka projít první úspěšnou cestou.
+- Návod řeší konkrétní úkol krok za krokem.
+- Reference přesně popisuje parametry, API, pole, limity nebo nastavení.
+- Vysvětlení dává kontext: proč věc funguje právě takhle a jaké má dopady.
+
+Jedna stránka by měla mít jeden hlavní typ. Když píšeš návod k API klíčům, nedělej z něj zároveň filosofii bezpečnosti, kompletní referenci endpointů a onboardingový tutoriál. Dej krátký kontext, ale detail odkaž. Uživatel při řešení problému nepotřebuje román. Potřebuje most přes konkrétní řeku.
+
+## Každá stránka má mít jasný slib
+
+Nadpis dokumentační stránky je mini smlouva. Slibuje, co člověk po přečtení dokáže. Proto piš nadpisy jako úkoly a výsledky.
 
 Slabé:
 
 ```text
-Přidali jsme podporu exportu faktur ve formátu CSV.
+Nastavení účtu
+Integrace
+Export
 ```
 
 Lepší:
 
 ```text
-Administrátoři si teď mohou exportovat faktury do CSV a rychleji je předat účetnímu systému bez ručního kopírování položek.
+Jak změnit fakturační údaje firmy
+Jak propojit aplikaci s účetním systémem přes webhook
+Jak exportovat data zákazníků ve formátu CSV
 ```
 
-U větších změn používej krátkou strukturu:
+První odstavec má odpovědět na tři věci: pro koho stránka je, kdy ji použít a co člověk získá. Pokud je potřeba oprávnění, tarif, technická role nebo riziko práce s daty, napiš to hned nahoře.
+
+Dobrá úvodní poznámka:
 
 ```text
-Co je nové:
-Pro koho je to důležité:
-Co se mění v praxi:
-Co má uživatel udělat:
-Kde je dokumentace:
+Tento návod je pro administrátory workspace. Pomůže vám pozvat nového člena týmu, nastavit mu roli a zkontrolovat, k jakým datům bude mít přístup. Pokud spravujete SSO, použijte místo toho návod pro firemní přihlášení.
 ```
 
-Tahle šablona je nudná jen do chvíle, než první zákazník přestane psát na podporu otázku, kterou release notes už vyřešily.
+## Dokumentace musí být součástí releasu
 
-## Kategorie drž konzistentní
+Dokumentace napsaná „až potom“ často nevznikne nikdy. Proto ji ber jako součást definition of done. Funkce není hotová, dokud není jasné, jestli potřebuje dokumentaci, aktualizaci screenshotu, změnu FAQ, interní poznámku pro podporu nebo varování v produktu.
 
-Projekt [Keep a Changelog](https://keepachangelog.com/) doporučuje srozumitelné kategorie typu `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed` a `Security`. Nemusíš je slepě kopírovat do českého marketingového textu, ale logika je výborná: čtenář hned pozná, jestli jde o novinku, změnu chování, opravu nebo bezpečnostní informaci.
+Release checklist pro dokumentaci:
 
-Pro český SaaS může fungovat tahle varianta:
+- změnila se cesta uživatele?
+- přibyla nová role, oprávnění nebo datové pole?
+- mění se import, export, API, webhook nebo integrace?
+- mění se zpracování osobních údajů, retence nebo subprocesor?
+- bude podpora dostávat nové otázky?
+- potřebuje sales krátké vysvětlení pro zákazníky?
 
-- `Nové`: funkce, nastavení, exporty, integrace.
-- `Změněno`: úpravy chování, textů, workflow nebo defaultů.
-- `Opraveno`: chyby, které měly viditelný dopad na uživatele.
-- `Bezpečnost a soukromí`: přístupy, logování, retence, exporty, oprávnění.
-- `Pro vývojáře`: API, webhooky, SDK, datové formáty.
-- `Ukončujeme`: deprecations, odstranění starého chování, migrační termíny.
+Když je odpověď ano, dokumentace patří do stejného releasu. Ne jako poznámka „doplníme“. Jako práce, která chrání zákazníka i tým.
 
-Důležité: kategorii `Bezpečnost a soukromí` nepoužívej jako PR dekoraci. Patří tam jen změny, které opravdu mění riziko, kontrolu nad daty nebo provozní jistotu. Jinak si z ní uděláš nástěnku ctnosti a nikdo jí nebude věřit.
+## Privacy-first dokumentace ukazuje hranice dat
 
-## Verze mají nést význam
+U každé funkce, která pracuje s daty, napiš prakticky a srozumitelně:
 
-Pokud vydáváš technický produkt, veřejné API nebo knihovnu, drž se principů [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH` má naznačovat, jestli jde o nekompatibilní změnu, zpětně kompatibilní funkcionalitu nebo opravu. U běžného webového SaaS nemusíš nutně ukazovat každému zákazníkovi `v2.14.3`, ale interně se význam verzí hodí pro podporu, rollback i incidenty.
+- jaká data funkce používá,
+- kdo k nim má přístup,
+- kde se zpracovávají,
+- jak dlouho se drží,
+- zda odcházejí třetí straně,
+- jak je lze exportovat nebo smazat,
+- co se loguje při chybě.
 
-Praktické pravidlo:
-
-- `PATCH`: oprava bez změny očekávaného chování.
-- `MINOR`: nová schopnost nebo rozšíření bez rozbití stávající práce.
-- `MAJOR`: změna, která vyžaduje migraci, školení, úpravu integrace nebo vědomé rozhodnutí zákazníka.
-
-Když verzi nepoužíváš veřejně, dej releasu aspoň datum, krátký název a odkaz na interní commit/tag. GitHub Releases jsou postavené nad tagy a umožňují k nim přidat release notes i binární soubory, takže se hodí jako jednoduchý provozní archiv pro týmy, které už pracují v GitHubu ([GitHub Docs: Releases](https://docs.github.com/en/repositories/releasing-projects-on-github)).
-
-## Privacy-first release notes neprozrazují víc, než musí
-
-Release notes mohou nechtěně prozradit citlivé informace: interní názvy zákazníků, bezpečnostní detaily před dokončenou mitigací, screenshoty s osobními údaji, přesné názvy interních systémů nebo informace o tom, jak obejít kontrolu. To není transparentnost. To je rozbitá vitrína.
-
-Privacy-first pravidla:
-
-- Neuváděj jména zákazníků bez výslovného souhlasu.
-- U bezpečnostních oprav popiš dopad a doporučenou akci, ale ne detailní návod ke zneužití.
-- Nesdílej screenshoty z produkce, pokud obsahují skutečná data.
-- Nezveřejňuj interní názvy tabulek, queue, bucketů, tenantů nebo administrátorských cest, pokud to zákazník nepotřebuje.
-- U změn v měření vysvětli, jaká data se sbírají, proč, na jak dlouho a kde běží zpracování.
-- Pokud release přidává integraci třetí strany, napiš, jaký typ dat do ní odchází a zda ji lze vypnout.
-
-Evropský provoz je v release notes konkurenční výhoda. Když zavedeš self-hosted analytiku, kratší retenci logů, lepší export dat nebo EU-only zpracování, řekni to srozumitelně. Ne jako legalese. Jako produktovou hodnotu.
-
-## Deprecation oznamuj s předstihem
-
-Nejhorší release notes jsou ty, které zákazník čte až po rozbití workflow. Pokud rušíš endpoint, starý export, tarif, pole ve formuláři nebo integraci, napiš to dopředu a opakovaně.
-
-Dobrý deprecation blok obsahuje:
-
-- co končí,
-- proč to končí,
-- koho se to týká,
-- datum vypnutí,
-- doporučenou náhradu,
-- migrační návod,
-- kontakt pro výjimky nebo kritické případy.
+Nemusíš z každé stránky dělat právní dokument. Stačí krátký blok „Data a soukromí“. Ten je často užitečnější než dlouhá privacy policy, kterou lidé otevřou až ve chvíli, kdy už nevěří ničemu.
 
 Příklad:
 
 ```text
-Ukončujeme starý CSV export objednávek. Od 2026-12-01 bude dostupný jen nový export s jednotným názvoslovím sloupců. Pokud export používáte v účetní automatizaci, přejděte na šablonu „Objednávky v2“. Starý export zatím zůstává dostupný v nastavení administrace. Migrační návod: [odkaz].
+Data a soukromí: Při exportu se vytvoří dočasný soubor dostupný pouze administrátorům workspace. Soubor se automaticky smaže po 24 hodinách. Obsah exportu neposíláme třetím stranám a neukládáme ho do analytiky.
 ```
 
-Když máš zákazníky s integracemi, pošli deprecation ještě přímým kanálem: e-mail administrátorům, upozornění v aplikaci a poznámka v dokumentaci. RSS nebo changelog stránka je skvělý archiv, ale kritickou migraci nesmí nést sama.
+Tohle je přesně typ věty, který z privacy-first postoje dělá produktovou hodnotu.
 
-## Interní poznámky odděl od veřejných
+## Screenshoty a příklady drž bezpečné a aktuální
 
-Veřejné release notes mají být srozumitelné a bezpečné. Interní release karta může být ostřejší: rizika, rollback, podezřelé metriky, jména ownerů, odkazy na incidenty, testovací scénáře a rozhodnutí, co se nemá říkat veřejně bez právní nebo bezpečnostní kontroly.
+Screenshot je rychlá pomoc, ale také rychlý způsob, jak zveřejnit cizí data, staré UI nebo interní prostředí. Používej demo workspace, anonymizovaná data a krátké popisky. U delších návodů bývá lepší menší počet screenshotů s jasným zvýrazněním než galerie všeho.
 
-Interní záznam drž v jednom místě, které tým opravdu používá. Není důležité, jestli je to Markdown v repozitáři, issue tracker nebo interní knowledge base. Důležité je, aby po dvou měsících šlo odpovědět na otázky: proč jsme to vydali, kdo to schválil, co jsme sledovali a jak se to dá vrátit.
+Pravidla:
 
-## Distribuce bez sociální závislosti
+- používej demo data, nikdy živé zákaznické údaje,
+- neukazuj tokeny, e-maily, interní URL ani ID tenantů,
+- screenshot aktualizuj při změně UI,
+- u kritických akcí doplň textový krok, aby návod fungoval i bez obrázku,
+- u videí přidej krátké textové shrnutí.
 
-Release notes by neměly žít jen jako příspěvek na sociální síti. Sociální síť je distribuční kopie, ne archiv. Minimum pro privacy-first SaaS:
+Přístupnost se týká i dokumentace. [WCAG](https://www.w3.org/TR/WCAG22/) stojí na principech vnímatelnosti, ovladatelnosti, srozumitelnosti a robustnosti. Prakticky: používej popisné odkazy, čitelné nadpisy, alternativní texty u důležitých obrázků a nepřenášej klíčovou informaci jen barvou.
 
-- veřejná stránka `/changelog` nebo `/novinky`,
-- RSS feed pro změny,
-- přímé odkazy na jednotlivé releasy,
-- e-mail jen pro změny, které vyžadují akci nebo výrazně pomáhají,
-- in-app upozornění bez behaviorálního profilu,
-- dokumentace aktualizovaná ve stejném releasu.
+## Dokumentace má být dohledatelná i mimo aplikaci
 
-Měření drž jednoduché: počet návštěv release stránky, kliky na dokumentaci, počet dotazů na podporu k dané změně a počet zákazníků, kteří dokončili doporučenou migraci. Nepotřebuješ vědět, kdo si release notes četl ve 23:17 z gauče. Potřebuješ vědět, jestli komunikace snížila zmatek.
+Dobrá dokumentace pomáhá jen tehdy, když ji jde najít. Veřejné části nech indexovat, interní a zákaznická data naopak chraň. [Google Search Central](https://developers.google.com/search/docs) doporučuje tvořit stránky tak, aby byly dobře procházené, srozumitelné a užitečné pro hledající uživatele. To neznamená nacpat do návodu marketingová klíčová slova. Znamená to používat jasné titulky, popisné URL, interní odkazy a odpovědi na skutečné otázky.
 
-## Checklist: release notes bez produktového megafonu
+Privacy-first varianta vyhledávání:
 
-- Má release jasné publikum: uživatel, admin, vývojář integrace, interní tým?
-- Je dopad popsaný lidsky, ne jen jako seznam ticketů?
-- Jsou změny rozdělené na nové, změněné, opravené, bezpečnostní a ukončované?
-- Je u každé významné změny napsané, co má zákazník udělat?
-- Jsou odstraněné interní názvy, citlivé detaily a produkční osobní údaje?
-- Má deprecation termín, náhradu a migrační návod?
-- Existuje interní release karta s ownerem, rollbackem a riziky?
-- Je dokumentace aktualizovaná před zveřejněním release notes?
-- Má release trvalý odkaz a RSS nebo jiný přímý kanál?
-- Měříš dopad bez profilování jednotlivců?
+- veřejnou dokumentaci nech indexovat, pokud neobsahuje citlivé postupy,
+- neveřejné návody dej za přihlášení nebo do interní knowledge base,
+- nepoužívej invazivní search analytiku s identitou uživatele,
+- sleduj agregovaně hledané dotazy bez ukládání osobních údajů,
+- otázky bez výsledků převáděj do backlogu dokumentace.
 
-## Mini šablona release karty
+Pokud lidé hledají „jak zrušit účet“ a dokumentace mlčí, problém není vyhledávání. Problém je důvěra.
+
+## Měř užitečnost bez sledování lidí
+
+Dokumentace se dá zlepšovat i bez profilování konkrétních uživatelů. Sleduj agregované signály:
+
+- nejčtenější stránky,
+- stránky s vysokým návratem na podporu,
+- interní hledané dotazy bez výsledku,
+- počet ticketů k tématu před a po publikaci návodu,
+- počet kliků z release notes do dokumentace,
+- zpětnou vazbu „pomohlo / nepomohlo“ bez volného osobního textu, pokud ho nepotřebuješ.
+
+Kvalitativní signál je pořád král. Jednou měsíčně si vezmi pět reálných ticketů a zeptej se: existuje stránka, která by tomu zabránila? Pokud ano, byla dohledatelná? Pokud ne, patří do backlogu. Tohle je nudná rutina. Proto funguje.
+
+## Checklist: dokumentace bez bludiště
+
+- Má dokumentace mapu nejčastějších otázek a úkolů?
+- Je každá stránka jasně zařazená jako tutoriál, návod, reference nebo vysvětlení?
+- Má stránka nadpis podle úkolu, ne podle interní kategorie?
+- Říká úvod, pro koho stránka je a co člověk získá?
+- Je dokumentace součástí release procesu?
+- Mají datové funkce blok „Data a soukromí“?
+- Jsou screenshoty z demo prostředí a bez citlivých údajů?
+- Je veřejná dokumentace dohledatelná přes přímé URL a vyhledávače?
+- Jsou neveřejné postupy chráněné před indexací?
+- Měříš užitečnost agregovaně, bez profilování jednotlivců?
+
+## Mini šablona dokumentační stránky
 
 ```markdown
-# Release karta: [název / verze / datum]
+# [Úkol, který uživatel dokončí]
 
-## Shrnutí pro zákazníka
-Co se mění:
-Pro koho je to důležité:
-Co má zákazník udělat:
-Odkaz na dokumentaci:
+## Pro koho to je
+Role:
+Potřebné oprávnění:
+Kdy návod použít:
 
-## Kategorie
-Nové:
-Změněno:
-Opraveno:
-Bezpečnost a soukromí:
-Pro vývojáře:
-Ukončujeme:
+## Výsledek
+Po dokončení budete umět:
 
-## Privacy-first kontrola
-Obsahuje screenshoty z produkce: ano/ne
-Obsahuje jména zákazníků: ano/ne/souhlas
-Mění se zpracování dat: ano/ne
-Data třetích stran / subprocesor: ano/ne
-Retence nebo export dat: ano/ne
+## Postup
+1.
+2.
+3.
 
-## Provoz
+## Data a soukromí
+Použitá data:
+Kdo má přístup:
+Zpracování / umístění:
+Retence:
+Třetí strany:
+Export / smazání:
+
+## Časté problémy
+Problém:
+Řešení:
+
+## Související odkazy
+-
+
+## Údržba
 Owner:
-Tag / commit:
-Datum vydání:
-Rollback:
-Co sledovat po vydání:
-Podpora ví o změně: ano/ne
-Dokumentace aktualizovaná: ano/ne
-
-## Deprecation, pokud existuje
-Co končí:
-Datum vypnutí:
-Náhrada:
-Migrační návod:
-Přímá komunikace zákazníkům:
+Poslední kontrola:
+Navázané funkce / releasy:
 ```
 
 ## Zdroje
 
-- Keep a Changelog: [Keep a Changelog](https://keepachangelog.com/)
-- Semantic Versioning: [Semantic Versioning 2.0.0](https://semver.org/)
-- GitHub Docs: [Releasing projects on GitHub](https://docs.github.com/en/repositories/releasing-projects-on-github)
+- Diátaxis: [Diátaxis documentation framework](https://www.diataxis.fr/)
+- Google Search Central: [Documentation to improve SEO](https://developers.google.com/search/docs)
+- W3C: [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)
 
 
 # Pracovní log
 
-- 2026-10-03: Doplněna příloha „Release notes a changelog bez produktového megafonu“ s rozlišením publika, psaním podle dopadu, kategoriemi změn, verzováním, privacy-first bezpečností komunikace, deprecation postupem, distribučním modelem bez sociální závislosti, checklistem, release kartou a ověřenými zdroji Keep a Changelog, SemVer a GitHub Docs.
+- 2026-10-03: Doplněna příloha „Produktová dokumentace bez knowledge base bludiště“ s mapou otázek, rozdělením podle Diátaxis, release checklistem, privacy-first blokem pro datové funkce, pravidly pro screenshoty, dohledatelností, agregovaným měřením užitečnosti, checklistem, šablonou dokumentační stránky a ověřenými zdroji Diátaxis, Google Search Central a WCAG.
 
 - 2026-10-03: Doplněna příloha „A/B testy bez profilovacího cirkusu“ s praktickým návrhem hypotézy, jedním hlavním měřítkem, randomizací bez dlouhodobého profilu, rozumnou segmentací, cookie a souhlasovou kontrolou, vyhodnocením, experimentální hygienou v kódu, checklistem, experiment kartou a ověřenými zdroji GDPR, Evropské komise, CNIL a EDPB.
 
