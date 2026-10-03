@@ -36628,7 +36628,169 @@ Poučení do backlogu:
 - ENISA: [Coordinated Vulnerability Disclosure: Towards a Common EU Approach](https://www.enisa.europa.eu/news/coordinated-vulnerability-disclosure-towards-a-common-eu-approach)
 
 
+# Příloha: A/B testy bez profilovacího cirkusu
+
+A/B test je užitečný nástroj, když chceš ověřit malou produktovou nebo marketingovou hypotézu. Je to mizerný nástroj, když z něj uděláš výmluvu pro sběr všeho, co se pohne. Malý web nebo SaaS nepotřebuje znát rodokmen návštěvníka, aby zjistil, jestli nadpis „Domluvte si konzultaci“ funguje lépe než „Proberme váš projekt“.
+
+Privacy-first experimentování stojí na jednoduché dohodě: testuj změnu, ne člověka. Měř výsledek, ne psychologický profil. A když už musíš někoho zařadit do varianty, udělej to co nejkratší dobu, na co nejmenším rozsahu a s jasným důvodem.
+
+> Codyho komentář: Spousta týmů říká „děláme experimenty“, ale ve skutečnosti jen přidala další script, další cookie a další dashboard, který nikdo neumí interpretovat. To není růstová kultura. To je datový bufet s neonem.
+
+## Nejdřív napiš hypotézu jako produktové rozhodnutí
+
+Test nezačíná tlačítkem v nástroji. Začíná větou, která jde vyvrátit. Pokud hypotéza nejde zapsat jednoduše, experiment bude pravděpodobně jen dekorace pro nerozhodnost.
+
+Dobrá hypotéza:
+
+```text
+Věříme, že když na cenové stránce přesuneme vysvětlení „co je v ceně“ nad formulář,
+zvýší se počet kvalifikovaných poptávek, protože návštěvník dřív pochopí hodnotu tarifu.
+Poznáme to podle počtu odeslaných poptávek a kvality vybraných odpovědí ve formuláři.
+```
+
+Špatná hypotéza:
+
+```text
+Zkusíme jiný design, jestli to nebude konvertovat líp.
+```
+
+Rozdíl je v rozhodnutí. První verze říká, co měníš, komu to má pomoci, jaký výsledek čekáš a podle čeho se rozhodneš. Druhá verze říká hlavně to, že tým potřebuje kávu a možná i product ownera.
+
+## Testuj malé změny s jedním hlavním měřítkem
+
+Každý experiment má mít jedno hlavní měřítko. Můžeš sledovat podpůrné signály, ale rozhodnutí se má opírat o předem určený primární výsledek. Jinak po skončení testu začneš lovit graf, který potvrzuje oblíbený názor nejhlasitější osoby v místnosti.
+
+Příklady vhodných hlavních měřítek:
+
+- odeslání kvalifikované poptávky,
+- dokončení onboardingového kroku,
+- klik na dokumentaci po přečtení vysvětlení,
+- spuštění první hodnotné akce v produktu,
+- snížení počtu podpůrných dotazů k jedné konkrétní věci.
+
+Nevhodné hlavní měřítko je „víc engagementu“, pokud nevíš, co engagement znamená. Více času na stránce může znamenat zájem, ale taky zmatek. Více kliků může znamenat chuť nakoupit, ale taky navigační bludiště. Metrika bez kontextu je jen číslo, které se tváří důležitě.
+
+## Randomizace bez osobního profilu
+
+Pro běžné webové testy často stačí zařazení do varianty bez ukládání dlouhodobého profilu. Můžeš použít serverové rozdělení podle krátkodobého session identifikátoru, anonymního bucketu nebo dočasné hodnoty omezené na konkrétní experiment. Cíl není poznat člověka napříč webem. Cíl je konzistentně zobrazit variantu během jedné návštěvy nebo krátkého rozhodovacího okna.
+
+Praktický privacy-first model:
+
+- vytvoř ID experimentu, například `pricing-copy-2026-10`,
+- návštěvníka zařaď do varianty A/B jen pro tento experiment,
+- neukládej e-mail, IP adresu ani fingerprint pro účely testu,
+- výsledek ukládej agregovaně podle varianty,
+- po skončení testu smaž mapování variant, pokud vůbec existovalo,
+- rozhodnutí zapiš do changelogu, aby se test neopakoval za dva měsíce pod jiným názvem.
+
+Pokud experiment potřebuje přihlášeného uživatele, zvaž, zda stačí interní ID účtu převedené na experimentový bucket na serveru. Do analytiky neposílej zákaznický obsah, názvy projektů, e-maily ani texty formulářů. Experiment nemá být zadní dveře do CRM.
+
+## Segmentace jen tam, kde mění rozhodnutí
+
+Segmentace je lákavá, protože vypadá chytře. „Podívej, u mobilních návštěvníků z organiku v úterý po obědě to rostlo!“ Gratuluju, právě jsi objevil statistickou halucinaci v kravatě.
+
+Segmentuj jen tehdy, když víš, co se segmentem uděláš. B2B SaaS může rozlišit návštěvníky z dokumentace a z cenové stránky, protože mají jiný záměr. Konzultační web může oddělit poptávku z případové studie a z obecné služby. Ale nepotřebuješ segment podle reklamního profilu, přesné lokace, historie návštěv z jiných webů nebo inferovaných zájmů.
+
+Privacy-first pravidlo:
+
+- segment vychází z kontextu aktuální návštěvy nebo produktu,
+- segment je srozumitelný obchodně i technicky,
+- segment neobsahuje citlivé nebo překvapivé odvozené informace,
+- segment má vlastní rozhodovací akci,
+- segment po vyhodnocení nezůstává jako věčný štítek u člověka.
+
+Evropský přístup k ochraně dat stojí mimo jiné na minimalizaci údajů. GDPR v článku 5 požaduje, aby osobní údaje byly přiměřené, relevantní a omezené na nezbytný rozsah pro daný účel. V praxi to znamená: když rozhodnutí jde udělat z agregované metriky, neukládej identifikovatelnou stopu jen proto, že dashboard umí hezčí filtr.
+
+## Cookie souhlas není náhrada za dobrý návrh
+
+Některé měřicí a experimentální scénáře mohou být v konkrétních režimech posuzované mírněji, pokud jsou omezené na měření návštěvnosti nebo A/B testování, uživatel je informovaný, existuje možnost odmítnutí a data se nekombinují s jinými účely. CNIL například u analytiky popisuje podmínky, za kterých mohou být audience measurement cookies včetně A/B testování vyňaty ze souhlasu. To ale není univerzální povolenka pro libovolné experimentování.
+
+Bezpečnější produktové pravidlo: navrhni experiment tak, aby i bez právního kouzlení obstál před otázkou „čekal by to normální návštěvník?“. Pokud odpověď zní „ne, ale schovali jsme to do třetí vrstvy cookie lišty“, není to privacy-first. Je to jen compliance cosplay.
+
+U každého experimentu si proto zapiš:
+
+- jaké technické úložiště používáš,
+- proč je nezbytné,
+- jak dlouho žije,
+- zda je nutný souhlas nebo možnost odmítnutí,
+- kdo data zpracovává,
+- zda se výsledek kombinuje s reklamou, CRM nebo externími profily.
+
+## Vyhodnocení bez „vyhrálo to, protože chci“
+
+Před spuštěním si napiš rozhodovací pravidlo. Ne až potom, kdy už víš, která varianta se líbí zakladateli. U malých webů často nebudeš mít dost dat na krásnou statistickou jistotu. To nevadí, pokud experiment bereš jako disciplinovaný signál, ne jako vědecký rozsudek.
+
+Praktická pravidla pro malé týmy:
+
+- test nech běžet přes celé obchodní cykly, ne jen přes jeden šťastný den,
+- nevyhodnocuj ho po prvních pěti konverzích,
+- sleduj i negativní signály, například více nekvalitních poptávek,
+- pokud je výsledek nejasný, vrať se k jednodušší změně nebo kvalitativnímu rozhovoru,
+- vítěznou variantu nasaď jako běžnou funkci a experimentální kód odstraň.
+
+Ne každý test musí mít vítěze. Někdy je nejlepší výsledek zjištění, že text není hlavní problém a brzdí tě nabídka, cena, důvěra nebo technická chyba. To je pořád užitečné. Jen to bolí méně než další redesign, takže se o tom hůř dělá prezentace.
+
+## Experimentální hygiena v kódu
+
+A/B testy rády hnijí v kódu. Začnou jako dočasná podmínka, přežijí tři refaktory a za rok nikdo neví, proč se půlce uživatelů zobrazuje starý onboarding. Každý experiment má mít vlastníka, datum ukončení a úklidový úkol.
+
+Minimum pro vývojáře:
+
+- název experimentu je čitelný a dohledatelný,
+- varianta se nepřenáší do nesouvisejících služeb,
+- experiment má defaultní bezpečnou variantu,
+- po vypnutí nezůstávají mrtvé komponenty,
+- logy neobsahují osobní data,
+- změna jde rychle vrátit.
+
+Pokud používáš feature flag systém, odděl experimentální flagy od permission flagů. Experiment rozhoduje o variantě zkušenosti. Permission flag rozhoduje o oprávnění. Míchat je dohromady je recept na bezpečnostní polévku, kterou nechce ochutnat ani incident manažer.
+
+## Checklist: A/B test bez profilovacího cirkusu
+
+- [ ] Má test jednu jasnou hypotézu?
+- [ ] Je předem určené hlavní měřítko úspěchu?
+- [ ] Mění test jednu významnou věc, ne celý svět najednou?
+- [ ] Nepoužíváme e-mail, IP adresu ani fingerprint jako experimentální identitu?
+- [ ] Je zařazení do varianty omezené na konkrétní experiment?
+- [ ] Ukládáme výsledky agregovaně, pokud to pro rozhodnutí stačí?
+- [ ] Nekombinujeme test s reklamními profily, CRM nebo daty z jiných webů?
+- [ ] Má experiment vlastníka a datum ukončení?
+- [ ] Je jasné, kdy test vyhodnotíme a podle čeho rozhodneme?
+- [ ] Po skončení smažeme zbytečná data i experimentální kód?
+
+## Mini šablona experiment karty
+
+```text
+Název experimentu:
+Vlastník:
+Datum spuštění:
+Datum vyhodnocení:
+Hypotéza:
+Varianta A:
+Varianta B:
+Hlavní měřítko:
+Podpůrné signály:
+Použitá data:
+Technické úložiště:
+Souhlas / opt-out:
+Segmenty:
+Rizika:
+Rollback:
+Rozhodnutí:
+Úklid po testu:
+```
+
+## Zdroje
+
+- EUR-Lex: [Regulation (EU) 2016/679 — General Data Protection Regulation](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679)
+- European Commission: [What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en)
+- CNIL: [Sheet n°16: Use analytics on your websites and applications](https://www.cnil.fr/fr/node/677)
+- European Data Protection Board: [Guidelines 8/2020 on the targeting of social media users](https://www.edpb.europa.eu/documents/guideline/guidelines-82020-on-the-targeting-of-social-media-users_en)
+
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „A/B testy bez profilovacího cirkusu“ s praktickým návrhem hypotézy, jedním hlavním měřítkem, randomizací bez dlouhodobého profilu, rozumnou segmentací, cookie a souhlasovou kontrolou, vyhodnocením, experimentální hygienou v kódu, checklistem, experiment kartou a ověřenými zdroji GDPR, Evropské komise, CNIL a EDPB.
 
 - 2026-10-03: Doplněna příloha „Security.txt a hlášení zranitelností bez právního strašení“ s praktickým nastavením bezpečnostního kontaktu, krátkým `security.txt`, disclosure policy, triage prioritami, šablonou první odpovědi, pravidly koordinovaného zveřejnění, checklistem, vulnerability disclosure kartou a ověřenými zdroji RFC 9116, OWASP a ENISA.
 
