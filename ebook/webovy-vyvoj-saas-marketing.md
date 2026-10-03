@@ -36306,7 +36306,191 @@ Domény a TLS jsou nudná disciplína, dokud nejsou. Právě proto se vyplatí m
 
 
 
+# Příloha: Feature flagy bez vlajkové skládky a náhodného šmírování
+
+Feature flag je jednoduchá myšlenka: nasadíš kód, ale jeho chování zapínáš zvlášť. V praxi je to jeden z nejlepších nástrojů pro menší SaaS tým, protože umožní postupný rollout, rychlé vypnutí rizikové funkce, interní betu nebo oddělení deploymentu od marketingového launch dne. Jenže stejně jako ostrý nůž není problém v nástroji, ale v tom, jestli s ním krájíš chleba, nebo si elegantně amputuješ provoz.
+
+Špatně spravované flagy se rychle změní v druhou konfiguraci produktu: nikdo neví, kdo je vlastní, proč existují, kdy se mají smazat a proč zákazník A vidí jiný svět než zákazník B. Privacy-first tým k tomu přidává ještě jednu otázku: podle čeho vlastně flag vyhodnocujeme a kam se ten kontext posílá?
+
+> Codyho komentář: Feature flag není kouzelný štít proti špatnému produktu. Je to vypínač. Když nevíš, co přesně vypíná, máš v ruce spíš náhodný červený knoflík z filmu, kde pak začne houkat ponorka.
+
+## Rozliš typ flagu dřív, než ho napíšeš
+
+Ne každý flag má stejný život. Článek Petea Hodgsona na webu Martina Fowlera rozlišuje mimo jiné release, experiment, ops a permissioning toggles. Prakticky: krátkodobý release flag se má po dokončení rollout smazat, zatímco permission flag může být součástí produktového oprávnění dlouhodobě. Míchat je do jedné hromady je začátek flagového dluhu.
+
+Použij čtyři jednoduché šuplíky:
+
+- **Release flag** — schová rozpracovanou funkci, dokud není bezpečné ji ukázat.
+- **Ops flag** — umožní vypnout drahou, pomalou nebo rizikovou část provozu.
+- **Experiment flag** — rozdělí varianty pro ověřitelný test s jasným koncem.
+- **Permission flag** — řídí nárok na funkci podle tarifu, role nebo smlouvy.
+
+Každý nový flag musí mít typ, vlastníka a datum revize. Bez toho se z něj stane konfigurace bez občanky. A konfigurace bez občanky je v SaaS provozu malý duch, který se objeví přesně ve chvíli, kdy release už dávno spí.
+
+## Release flagy drž krátké a nudné
+
+Release flag má pomoct nasadit změnu bez velkého třesku. Typický postup:
+
+1. Kód je v produkci, flag je vypnutý.
+2. Funkci zapneš interně nebo pro testovací účet.
+3. Zapneš ji pro malou část relevantních zákazníků.
+4. Sleduješ chyby, podporu, výkon a klíčové produktové signály.
+5. Funkci zapneš všem, nebo rollout zastavíš.
+6. Po stabilizaci odstraníš starou větev i flag.
+
+Klíčové je poslední sloveso: odstranit. Pokud release flag po dokončení zůstane v kódu, přestává být bezpečnostní pomůckou a začíná být další podmínkou v testovací matici. Malý tým nemá nekonečnou kapacitu testovat kombinace `newDashboard=true`, `oldBilling=false`, `experimentalExport=true` a „co když je úterý a zákazník má tarif z roku 2024“. To není produktový management, to je sudoku s fakturací.
+
+Dobré pravidlo: release flag bez jasného data odstranění nesmí projít code review. Když datum nejde napsat, možná nejde o release flag, ale o produktové pravidlo.
+
+## Ops flag je nouzová brzda, ne potichu zapomenutý hack
+
+Ops flagy jsou skvělé pro části, které mohou při problému poškodit výkon, náklady nebo důvěru: exporty, AI zpracování, hromadné importy, e-mailové dávky, drahé reporty, webhook retry smyčky nebo nové integrace.
+
+U ops flagu si předem napiš tři věci:
+
+- **Spouštěč:** kdy se smí vypnout?
+- **Dopad:** co zákazník uvidí místo funkce?
+- **Návrat:** kdo a podle čeho funkci zapne zpět?
+
+Příklad pro AI souhrny ticketů:
+
+```text
+Flag: ai_ticket_summary_enabled
+Typ: ops
+Vlastník: product/ops
+Spouštěč vypnutí: chybovost nad 5 %, výrazné zpomalení fronty, podezření na únik citlivých dat do promptu
+Fallback pro uživatele: zobrazit ruční poznámky a hlášku „Automatické shrnutí je dočasně vypnuté“
+Návrat: po kontrole logů, fronty a datového filtru
+Revize: měsíčně
+```
+
+Ops flag má být dostupný lidem, kteří řeší incident, ale nemá z něj být obcházení běžného release procesu. Každé přepnutí zapisuj do auditního logu: kdo, kdy, proč a s jakým očekávaným dopadem. Bez toho bude incident review připomínat archeologii tlačítek.
+
+## Experimenty bez osobního rentgenu
+
+Experiment flag svádí k tomu, že začneš do vyhodnocení posílat všechno: e-mail, firmu, obor, historii klikání, IP adresu, velikost obrazovky, poslední kávu a náladu v pondělí. Nedělej to. Privacy-first experiment začíná minimálním kontextem.
+
+Ptej se:
+
+- Stačí náhodné rozdělení podle anonymního nebo pseudonymního identifikátoru?
+- Musí experiment běžet na úrovni uživatele, nebo stačí účet, workspace či session?
+- Opravdu potřebujeme cílit podle osobních atributů?
+- Jak dlouho držíme přiřazení varianty?
+- Co přesně smažeme po ukončení experimentu?
+
+OpenFeature popisuje „evaluation context“ jako kontejner dat pro vyhodnocení flagu a výslovně upozorňuje, že je potřeba přemýšlet o osobních údajích v tomto kontextu a o tom, jak je poskytovatel zpracuje. Praktická interpretace pro malý evropský SaaS: neposílej do flagového nástroje nic, co nepotřebuješ pro rozhodnutí flagu. Pokud stačí hash stabilního interního ID, neposílej e-mail. Pokud stačí tarif, neposílej celý profil zákazníka.
+
+Výsledek experimentu měř agregovaně. Ne „Franta klikl na variantu B v 10:43“, ale „varianta B měla u relevantní kohorty vyšší dokončení onboarding kroku“. Marketing má rád detail, ale produktový tým často potřebuje jen rozhodnutí.
+
+## Permission flagy patří k autorizaci, ne k UI dekoraci
+
+Permission flag je dlouhodobější pravidlo: zákazník má funkci, protože má tarif, roli, smlouvu, region nebo schválený přístup. Tady je zásadní rozlišit dvě věci:
+
+- UI může skrýt tlačítko.
+- Server musí vynutit oprávnění.
+
+Skryté tlačítko není bezpečnost. Pokud prémiový export zmizí jen z menu, ale endpoint ho stále pustí podle staré URL, nemáš permission flag. Máš bezpečnostní díru v kabátku produktové segmentace.
+
+Permission pravidla proto drž co nejblíž autorizaci a byznys modelu. Ideálně existuje jedna čitelná funkce nebo služba, která odpoví: „má tento účet právo použít tuto schopnost?“ Frontend se jí může ptát kvůli UX, backend kvůli bezpečnosti. Rozhodnutí loguj bez zbytečných detailů: stačí účet, schopnost, výsledek, důvodová kategorie a korelační ID. Neobsah exportu do logu nepatří.
+
+## Flagy nesmí rozhodovat podle tajných datových spaghetti
+
+Každý flag má mít malý kontrakt. Ten říká:
+
+- jaký problém řeší,
+- jaký typ flagu je,
+- jaké hodnoty může mít,
+- kdo ho smí měnit,
+- jaký kontext potřebuje,
+- kde se vyhodnocuje,
+- kdy se reviduje nebo maže.
+
+Bez kontraktu se rollout začne řídit tichými předpoklady. Jeden vývojář použije `companyId`, druhý `userId`, třetí `emailDomain`, čtvrtý přidá výjimku pro „toho velkého zákazníka“ a najednou máš segmentační salát, který neumí vysvětlit ani dashboard, ani fakturační tým.
+
+U menšího SaaS často stačí jednoduchá YAML/JSON evidence v repozitáři nebo tabulka v interní dokumentaci. Důležité není mít enterprise vlajkový palác. Důležité je, aby existoval jeden pravdivý seznam.
+
+## Testuj aktuální cestu a cílovou cestu
+
+U každého flagu otestuj minimálně dvě konfigurace:
+
+- aktuální produkční stav,
+- stav, který chceš pustit při rollout.
+
+Nemusíš testovat každou kombinaci všech flagů, to by u aktivního produktu rychle explodovalo. Ale kritické flagy musí mít integrační nebo end-to-end test na starou i novou cestu. Pokud flag ovlivňuje billing, oprávnění, export dat, mazání dat nebo přístup k citlivému obsahu, testuj ho jako bezpečnostní prvek, ne jako kosmetiku.
+
+Praktická brzda v CI: flag s prošlým datem revize vyvolá warning nebo selhání testu. Je to otravné přesně tak akorát. Stejně jako kontrolka v autě, která ti připomíná, že olej není lifestyle volba.
+
+## Checklist: feature flag bez vlajkové skládky
+
+- [ ] Má flag jasný typ: release, ops, experiment nebo permission?
+- [ ] Má vlastníka a datum revize?
+- [ ] Je popsáno, kdo ho smí přepnout?
+- [ ] Je jasné, kde se vyhodnocuje: frontend, backend, worker nebo edge?
+- [ ] Posílá do vyhodnocení jen minimální potřebný kontext?
+- [ ] Neposílá e-mail, IP, obsah zpráv nebo jiné osobní údaje bez jasného důvodu?
+- [ ] Má rollout plán a rollback plán?
+- [ ] Má fallback UX pro vypnutý stav?
+- [ ] Jsou kritické kombinace pokryté testem?
+- [ ] Existuje plán odstranění staré větve kódu?
+- [ ] Loguje přepnutí flagu bez citlivého obsahu?
+- [ ] Umí support zjistit, proč zákazník vidí danou variantu?
+
+## Mini šablona flag karty
+
+```text
+# Feature flag karta: [název flagu]
+
+## Účel
+- Problém:
+- Očekávaný dopad:
+- Typ flagu: release / ops / experiment / permission
+
+## Vlastnictví
+- Vlastník:
+- Kdo smí měnit:
+- Datum revize:
+- Datum odstranění, pokud jde o release/experiment flag:
+
+## Vyhodnocení
+- Kde se vyhodnocuje:
+- Výchozí hodnota:
+- Povolené hodnoty:
+- Potřebný kontext:
+- Zakázaný kontext:
+
+## Rollout
+- Interní test:
+- První kohorta:
+- Kritéria pokračování:
+- Kritéria zastavení:
+- Rollback:
+
+## Privacy-first kontrola
+- Posíláme osobní údaje do flagového nástroje? ano/ne
+- Pokud ano, proč to nejde bez nich:
+- Retence přiřazení varianty:
+- Co smažeme po ukončení:
+
+## Testy a provoz
+- Test staré cesty:
+- Test nové cesty:
+- Alerty:
+- Support poznámka:
+```
+
+Feature flagy dávají malému týmu velkou provozní sílu: nasadit dřív, pustit pomaleji, vypnout rychleji a učit se bezpečněji. Fungují ale jen tehdy, když je bereš jako produktový a datový kontrakt, ne jako dočasnou podmínku, kterou „pak někdy smažeme“. Pak někdy je v softwaru časová zóna, kde žijí všichni kostlivci.
+
+## Zdroje
+
+- Martin Fowler: [Feature Toggles (aka Feature Flags)](https://martinfowler.com/articles/feature-toggles.html)
+- OpenFeature: [Evaluation Context](https://openfeature.dev/docs/reference/concepts/evaluation-context/)
+- OpenFeature Specification: [Flag Evaluation API](https://openfeature.dev/specification/sections/flag-evaluation/)
+- OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „Feature flagy bez vlajkové skládky a náhodného šmírování“ s rozlišením release, ops, experiment a permission flagů, privacy-first pravidly pro evaluation context, provozním auditováním, testováním, checklistem, flag kartou a ověřenými zdroji Martin Fowler, OpenFeature a OWASP.
 
 - 2026-10-03: Doplněna příloha „TLS certifikáty a domény bez tichého výpadku“ s doménovým inventářem, monitoringem expirace certifikátů, DNS release postupem, CAA záznamy, pravidly pro wildcard certifikáty, prevencí subdomain takeover, checklistem, doménovou kartou a ověřenými zdroji Let’s Encrypt, OWASP a RFC 8659.
 
