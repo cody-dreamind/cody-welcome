@@ -35000,9 +35000,9 @@ Datum poslední revize:
 
 Error monitoring je nejlepší, když je nudně spolehlivý: rychle ukáže problém, neprozradí zbytečnosti, pomůže supportu a po vyřešení incidentu po sobě uklidí. Privacy-first provoz tím neztrácí rychlost. Naopak: když víš, co neloguješ, opravuješ chyby s čistší hlavou a menším právním tikem v oku.
 
-## Příloha: Secrets a API klíče bez lepení do kódu
+## Příloha: Rotace produkčních secrets bez incidentového chaosu
 
-Secrets jsou hesla, API klíče, přístupové tokeny, privátní klíče, connection stringy, webhook podpisy, certifikáty a další údaje, které otevírají dveře do systému. V malém týmu často začnou nevinně: jeden `.env` soubor, jeden testovací token, jeden „dočasný“ klíč v CI, jeden screenshot nastavení v chatu. Jenže secrets mají nepříjemnou vlastnost: jakmile utečou, nestačí je schovat. Musíš je odvolat, otočit, dohledat dopad a ujistit se, že stejná hodnota nežije ještě někde bokem.
+Lokální vývoj už má mít vlastní pravidla pro `.env`, testovací tokeny a bezpečné sdílení konfigurace. Produkční secrets jsou jiná liga: hesla, API klíče, přístupové tokeny, privátní klíče, connection stringy, webhook podpisy, certifikáty a další údaje, které otevírají dveře do živého systému. Jakmile utečou, nestačí je schovat. Musíš je odvolat, otočit, dohledat dopad a ujistit se, že stejná hodnota nežije ještě někde bokem.
 
 OWASP Secrets Management Cheat Sheet upozorňuje, že secrets se často objevují natvrdo ve zdrojovém kódu, konfiguračních souborech nebo nástrojích pro správu konfigurace, a doporučuje centralizovat jejich ukládání, poskytování, auditování, rotaci a správu ([OWASP: Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)). Pro privacy-first SaaS to není „enterprise paranoia“. Je to základní provozní hygiena. Klíč k produkční databázi je malý textový řetězec s velkou schopností pokazit víkend.
 
@@ -35155,7 +35155,7 @@ Datum další revize:
 Poznámky:
 ```
 
-Secrets management není o tom mít nejdražší vault a nejdramatičtější bezpečnostní prezentaci. Je o tom, aby tým věděl, kde jsou klíče, kdo je používá, jak je otočit a jak zabránit tomu, aby se dostaly do míst, která nejdou rozumně uklidit. Dobré secrets jsou nudné, krátce žijící a dobře vlastněné. Přesně ten typ nudy, který chceš v produkci.
+Produkční secrets management není o tom mít nejdražší vault a nejdramatičtější bezpečnostní prezentaci. Je o tom, aby tým věděl, kde jsou klíče, kdo je používá, jak je otočit a jak zabránit tomu, aby se dostaly do míst, která nejdou rozumně uklidit. Dobré secrets jsou nudné, krátce žijící a dobře vlastněné. Přesně ten typ nudy, který chceš v produkci.
 
 ## Zdroje
 
@@ -35168,7 +35168,7 @@ Secrets management není o tom mít nejdražší vault a nejdramatičtější be
 
 # Pracovní log
 
-- 2026-10-03: Doplněna příloha „Secrets a API klíče bez lepení do kódu“ s kategorizací secrets podle dopadu, pravidly pro zakázaná místa, oddělením prostředí, rotačním postupem, přístupy podle role, secret scanningem, checklistem, secret kartou a ověřenými zdroji OWASP.
+- 2026-10-03: Doplněna příloha „Rotace produkčních secrets bez incidentového chaosu“ s kategorizací secrets podle dopadu, zakázanými místy úniku, oddělením prostředí, rotačním postupem, přístupy podle role, secret scanningem, checklistem, secret kartou a ověřenými zdroji OWASP.
 
 - 2026-10-03: Doplněna příloha „Error monitoring bez úniku dat a paniky v logách“ s rozdělením signálů, bezpečnými chybovými hláškami, maskováním před odesláním do nástroje, prioritami alertů, retenčním modelem, checklistem, monitoring kartou a ověřenými zdroji OWASP a Evropské komise.
 
