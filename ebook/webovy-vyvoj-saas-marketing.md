@@ -34650,7 +34650,187 @@ Fallback pro support:
 - OWASP: [File Upload Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html)
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
 
+# Příloha: Feature flags a rollback bez produkčního adrenalinu
+
+Nasazení nové funkce do produkce nemá být skok z letadla s otázkou, jestli jsme přibalili padák. Pro malý SaaS je zdravější přístup: oddělit deploy kódu od vydání funkce zákazníkům, měřit dopad, mít připravený návrat zpět a nenechat v produktu hromadu zapomenutých přepínačů.
+
+Feature flag je jednoduchá myšlenka: kód může být nasazený, ale chování se zapne jen pro vybrané prostředí, zákazníka, tým, procento provozu nebo interní testery. Martin Fowler v klasickém článku o feature toggles rozlišuje různé typy toggle podle účelu a životnosti — některé jsou krátkodobé pro release, jiné dlouhodobější pro experimenty nebo provozní kontrolu ([Martin Fowler: Feature Toggles](https://martinfowler.com/articles/feature-toggles.html)). GitLab ve své dokumentaci popisuje feature flags jako způsob, jak nasazovat nové funkce v menších dávkách, zapínat je pro subset uživatelů a oddělit dodání kódu od uvedení funkce ([GitLab Docs: Feature flags](https://docs.gitlab.com/operations/feature_flags/)).
+
+> Codyho komentář: Feature flag není magický štít proti špatnému návrhu. Je to brzda. A brzda je skvělá věc — zvlášť když jedeš z kopce směrem k pátečnímu odpoledni.
+
+## Nejdřív pojmenuj typ změny
+
+Ne každý release potřebuje feature flag. Pokud opravuješ překlep v textu nebo měníš statický obrázek, stačí běžný deploy a rychlá kontrola. Flag dává smysl tam, kde je riziko chování, dat, výkonu nebo zákaznické důvěry.
+
+Rozlišuj aspoň tyto typy:
+
+- **Release flag** — krátkodobý přepínač pro novou funkci, který po stabilizaci smažeš.
+- **Experiment flag** — přepínač pro ověření varianty textu, onboardingu nebo workflow.
+- **Permission flag** — funkce dostupná jen pro konkrétní tarif, roli nebo zákazníka.
+- **Ops flag** — provozní brzda pro vypnutí nákladné nebo rizikové části systému.
+- **Migration flag** — přepínač pro postupný přechod mezi starým a novým zpracováním dat.
+
+Nejnebezpečnější je, když se tyto typy smíchají. Experimentální flag nemá po roce rozhodovat o obchodním oprávnění zákazníka. Ops flag nemá být tajná cenová politika. Migration flag nemá zůstat v kódu navždy, protože „zatím to funguje“. Takhle vzniká produktový sklep plný kabelů, které nikdo nechce vytáhnout.
+
+## Flag potřebuje vlastníka a datum smrti
+
+Každý flag musí mít vlastníka, důvod a plán odstranění. Bez toho se z bezpečnostní brzdy stane dlouhodobý technický dluh.
+
+Minimální metadata:
+
+- název flagu v čitelném tvaru,
+- typ flagu,
+- vlastník v týmu,
+- datum vytvoření,
+- cílové datum vyhodnocení,
+- podmínka pro odstranění,
+- fallback chování při vypnutí,
+- seznam dotčených dat a zákaznických scénářů.
+
+Dobré pravidlo: pokud flag nejde vysvětlit v jedné větě zákaznickým dopadem, není připravený. „Zapíná nový checkout pro 10 % B2B účtů v tarifu Pro“ je srozumitelné. „Aktivuje refaktor modulu X podle nového flow“ je mlha.
+
+## Rollout po malých skupinách
+
+Postupné zapínání má být nudné a opakovatelné. GitLab u feature flags popisuje strategie jako zapnutí pro všechny, procentuální rollout, konkrétní uživatele nebo seznam uživatelů; u procentuálního rollout zdůrazňuje i konzistenci chování pro stejného uživatele podle zvoleného klíče ([GitLab Docs: Feature flag strategies](https://docs.gitlab.com/operations/feature_flags/#feature-flag-strategies)). Pro malý SaaS z toho plyne praktická zásada: nezapínej novinku náhodně pokaždé jinak, pokud by to uživatele zmátlo.
+
+Bezpečný rollout může vypadat takto:
+
+1. Lokální prostředí a automatické testy.
+2. Staging s testovacími daty.
+3. Interní tým nebo vlastní workspace.
+4. Jeden přátelský zákazník se souhlasem a jasným fallbackem.
+5. Malé procento relevantních účtů.
+6. Větší procento po kontrole chyb, výkonu a podpory.
+7. Zapnutí pro všechny.
+8. Odstranění flagu a staré větve kódu.
+
+U B2B SaaS často dává větší smysl rollout podle workspace než podle jednotlivého uživatele. Pokud jeden člověk ve firmě vidí nové schvalování faktur a druhý staré, vznikne chaos v procesech i supportu. Konzistence v rámci zákaznického účtu je někdy důležitější než krásná statistická čistota.
+
+## Co měřit při rollout
+
+Rollout není jen otázka „spadlo to?“. Sleduj dopad na hodnotu, chybovost, podporu a data.
+
+Praktické signály:
+
+- počet účtů s aktivním flagem,
+- úspěšné dokončení klíčové akce,
+- chybové stavy a výjimky v dotčeném flow,
+- změna latence u nákladných operací,
+- počet support ticketů k nové funkci,
+- ruční zásahy administrátora,
+- objem zpracovaných nebo migrovaných dat,
+- počet vypnutí flagu nebo návratů na staré chování.
+
+OWASP Logging Cheat Sheet připomíná, že aplikační logování má jasně vycházet z účelu a rizika a že se nemá logovat příliš mnoho ani příliš málo; zároveň uvádí, že citlivé údaje, tokeny nebo hesla do logů nepatří ([OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). U feature flagů to znamená: loguj rozhodnutí a výsledek, ne obsah zákaznických dat.
+
+Lepší event:
+
+```text
+invoice_approval_flow_completed flag=new_approval_flow workspace_plan=pro duration_bucket=10_30s result=success
+```
+
+Horší event:
+
+```text
+user_clicked_button payload=[celý obsah faktury, poznámka klienta, e-mail účetní]
+```
+
+Privacy-first rollout nepotřebuje vědět všechno. Potřebuje vědět, jestli funkce plní účel a nerozbíjí důvěru.
+
+## Rollback plán napiš před nasazením
+
+Rollback není selhání. Selhání je rollback, který nikdo neumí udělat, protože nebyl promyšlený. Před zapnutím flagu si napiš, jak přesně funkci vypneš a co se stane s daty vytvořenými v nové verzi.
+
+Otázky:
+
+- Stačí vypnout flag, nebo je nutný nový deploy?
+- Co se stane s rozpracovanými záznamy v novém flow?
+- Umí staré chování přečíst data vytvořená novou funkcí?
+- Potřebuje support zákazníkovi něco vysvětlit?
+- Máme interní poznámku pro incident nebo status update?
+- Kdo má oprávnění flag vypnout mimo pracovní dobu?
+- Jak poznáme, že rollback proběhl opravdu všude?
+
+Největší past je datová nekompatibilita. UI můžeš schovat během minuty, ale pokud nová funkce změnila strukturu dat, workflow nebo oprávnění, vypnutí tlačítka nemusí stačit. U datových migrací používej dvoufázový postup: nejdřív umět číst starý i nový formát, potom zapisovat nový formát, až nakonec odstranit starý. Ano, je to méně sexy než velký přepis. Také je to méně pravděpodobné, že ti exploduje pondělí.
+
+## Privacy-first pravidla pro flag systémy
+
+Feature flag systém sám o sobě může být datové riziko. Pokud používáš externí službu, zkontroluj, jaké identifikátory do ní posíláš, kde se zpracují a kdo k nim má přístup. Pro evropský provoz preferuj self-hosted nebo evropsky provozované řešení, případně minimalizuj identifikátory na pseudonymní klíče.
+
+Pravidla:
+
+- neposílej do flag systému e-mail, jméno ani obsah zákaznických dat, pokud to není nezbytné,
+- používej stabilní interní ID nebo hash tam, kde stačí konzistentní rollout,
+- odděl produktové flagy od marketingového trackingu,
+- omez přístup ke změně flagů podle rolí,
+- loguj změny konfigurace flagů jako auditní události,
+- pravidelně maž flagy po dokončeném rollout,
+- dokumentuj, jestli flag systém běží v EU nebo mimo EU.
+
+## Checklist: feature flags bez chaosu
+
+- [ ] Víme, proč flag potřebujeme a jaký typ flagu to je.
+- [ ] Flag má vlastníka, datum revize a podmínku pro odstranění.
+- [ ] Rollout je konzistentní pro zákaznický účet nebo uživatele podle povahy funkce.
+- [ ] Měříme dopad na klíčovou akci, chyby, výkon a support.
+- [ ] Do logů nejdou citlivá data, tokeny ani obsah zákaznických záznamů.
+- [ ] Rollback plán je napsaný před zapnutím v produkci.
+- [ ] Staré a nové datové chování je kompatibilní nebo má migrační plán.
+- [ ] Přístup ke změně produkčních flagů je omezený a auditovaný.
+- [ ] Flag systém neposílá zbytečné osobní údaje třetí straně.
+- [ ] Po stabilizaci je flag odstraněn z kódu, dokumentace i konfigurace.
+
+## Mini šablona feature flag karty
+
+```text
+# Feature flag karta: [název flagu]
+
+## Účel
+Jakou změnu chrání:
+Typ flagu: release / experiment / permission / ops / migration
+Vlastník:
+Datum vytvoření:
+Datum revize:
+
+## Rozsah
+Prostředí:
+Dotčené role / tarify / workspace:
+Dotčená data:
+Konzistence rollout podle: uživatel / workspace / skupina / procento
+
+## Měření
+Klíčová akce:
+Chybové signály:
+Výkonové signály:
+Support signály:
+Co záměrně nelogujeme:
+
+## Rollback
+Jak vypnout:
+Kdo může vypnout:
+Co se stane s rozpracovanými daty:
+Nutný deploy: ano/ne
+Komunikační poznámka pro support:
+
+## Odstranění
+Podmínka pro smazání flagu:
+Kód k odstranění:
+Konfigurace k odstranění:
+Dokumentace k aktualizaci:
+```
+
+Feature flags jsou nejlepší, když po nich nezůstane nepořádek. Pomáhají vydávat menší změny, reagovat rychle a chránit zákaznickou zkušenost. Ale jen tehdy, když mají disciplínu: vlastníka, data pod kontrolou, rollback plán a konec života. Bez toho je to jen další přepínač v temné místnosti.
+
+## Zdroje
+
+- Martin Fowler: [Feature Toggles](https://martinfowler.com/articles/feature-toggles.html)
+- GitLab Docs: [Feature flags](https://docs.gitlab.com/operations/feature_flags/)
+- GitLab Docs: [Incremental rollouts with GitLab CI/CD](https://docs.gitlab.com/ci/environments/incremental_rollouts/)
+- OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „Feature flags a rollback bez produkčního adrenalinu“ s typy flagů, pravidly vlastnictví a expirace, postupným rolloutem, privacy-first měřením, rollback plánem, datovou kompatibilitou, checklistem, feature flag kartou a ověřenými zdroji Martin Fowler, GitLab a OWASP.
 
 - 2026-10-03: Doplněna příloha „PDF výstupy a stahovatelné dokumenty bez metadatového průšvihu“ s rozhodováním o formátu, minimalizací obsahu a metadat, přístupností PDF, background generováním, oprávněními ke stažení, bezpečností uploadů, checklistem, dokumentovou kartou a ověřenými zdroji W3C, PDF Association, OWASP a Evropské komise.
 
