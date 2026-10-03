@@ -36788,207 +36788,185 @@ Rozhodnutí:
 - European Data Protection Board: [Guidelines 8/2020 on the targeting of social media users](https://www.edpb.europa.eu/documents/guideline/guidelines-82020-on-the-targeting-of-social-media-users_en)
 
 
-# Příloha: Produktová dokumentace bez knowledge base bludiště
+# Příloha: AI crawlery a robots.txt bez paniky a omylů
 
-Produktová dokumentace není skladiště odpovědí, kam se hází všechno, co tým nestihl vysvětlit v produktu. Je to navigace pro uživatele, administrátory, vývojáře integrací i interní podporu. Když je dobrá, zkracuje onboarding, snižuje počet ticketů a pomáhá zákazníkům udělat práci bez další schůzky. Když je špatná, stane se z ní digitální půda: všechno tam možná je, ale nikdo normální tam nechce lézt.
+AI crawlery nejsou jedna šedá masa robotů s vysavačem. Některé pomáhají tomu, aby se tvůj veřejný obsah objevil ve vyhledávání nebo odpovědích, jiné sbírají web pro trénování modelů, další jsou uživatelsky vyvolané nástroje, které stránku načtou až ve chvíli, kdy se na ni někdo ptá. Když je hodíš do jednoho pytle a všechno zakážeš, můžeš si odříznout viditelnost. Když necháš všechno otevřené bez rozmyslu, můžeš rozdávat obsah a zatěžovat web způsobem, který sis nikdy vědomě nevybral.
 
-U privacy-first SaaS má dokumentace ještě jednu roli: vysvětluje, jak produkt pracuje s daty, kde jsou hranice odpovědnosti a jak zákazník zůstává pod kontrolou. To není právní přívěsek. To je součást důvěry.
+Privacy-first přístup není „blokni celý internet“. Je to vědomé rozhodnutí: co chceme nabídnout lidem, co vyhledávačům, co AI odpovědím, co trénovacím datasetům a co nikomu mimo přihlášené uživatele. A hlavně: `robots.txt` není trezor. Je to pravidlo pro slušné crawlery. Citlivý obsah se chrání přístupem, ne prosbou v textovém souboru.
 
-> Codyho komentář: Nejlepší dokumentace není nejdelší. Nejlepší dokumentace je ta, která zákazníkovi ve správnou chvíli ušetří trapné „asi jsem blbej“ a týmu ušetří desátý stejný ticket.
+> Codyho komentář: `robots.txt` je jako cedule „nechoďte na dvorek“. Slušný soused ji respektuje. Zloděj si z ní maximálně přečte, že dvorek existuje. Proto tam nedávej seznam svých tajných dveří, Sherlocku.
 
-## Začni mapou otázek, ne stromem kategorií
+## Nejdřív rozděl obsah podle účelu
 
-Nezačínej otázkou „jaké sekce má mít help centrum“. Začni otázkou, co lidé potřebují vyřešit. Kategorie často vznikají podle interní struktury firmy: fakturace, nastavení, integrace, bezpečnost, účet. Uživatel ale nepřichází s kategorií. Přichází s úkolem.
+Než začneš psát pravidla pro boty, rozděl web na několik typů obsahu. Každý typ má jiný režim.
 
-Praktický postup:
+- Veřejný marketingový obsah: homepage, služby, články, případovky, ceník.
+- Veřejná technická dokumentace: návody, API reference, status, changelog.
+- Distribuční kanály: RSS, sitemap, statické stránky pro sdílení.
+- Zákaznický obsah: dashboardy, exporty, faktury, soubory, interní komentáře.
+- Staging a preview URL: rozpracované verze, testovací data, demo prostředí.
+- Interní provozní URL: admin, monitoring, debug výstupy, build artefakty.
 
-- projdi posledních 30 až 90 dní podpory,
-- vypiš opakující se otázky,
-- označ je podle fáze zákazníka: před nákupem, onboarding, běžný provoz, problém, administrace, integrace, odchod,
-- ke každé otázce napiš, jestli má být řešená v produktu, dokumentaci, e-mailu nebo obchodním materiálu,
-- vyber deset nejčastějších úkolů a napiš je jako první.
+První tři skupiny mohou být veřejné, pokud je to záměr. Poslední tři skupiny nemají být veřejné vůbec. Ne „zakázané crawlerům“. Ne „schované v robots.txt“. Opravdu chráněné autentizací, podepsaným krátkodobým odkazem, síťovým omezením nebo vůbec nevystavené.
 
-Příklad: místo kategorie „Uživatelé“ napiš stránku „Jak přidat nového člena týmu a nastavit mu oprávnění“. Místo „Exporty“ napiš „Jak stáhnout měsíční podklady pro účetní“. Dokumentace má mluvit jazykem práce, ne jazykem databázových tabulek.
+## Rozliš vyhledávání a trénování
 
-## Použij čtyři typy dokumentace
+OpenAI ve své dokumentaci popisuje různé crawlery s různými účely: například `OAI-SearchBot` pro zobrazování webů ve vyhledávacích funkcích ChatGPT a `GPTBot` jako crawler, u kterého může správce webu pravidly v `robots.txt` vyjádřit, že obsah nemá být použit pro trénování generativních modelů ([OpenAI: Overview of OpenAI Crawlers](https://developers.openai.com/api/docs/bots)). Tohle rozlišení je důležité: můžeš chtít být dohledatelný v AI vyhledávání, ale zároveň nechceš dávat obsah do trénovacího crawleru.
 
-Framework [Diátaxis](https://www.diataxis.fr/) rozlišuje čtyři základní typy dokumentace: tutoriály, návody, referenci a vysvětlení. Pro malý SaaS je to skvělé pravidlo, protože brání tomu, aby se z každé stránky stal guláš všeho.
+Google oznámil `Google-Extended` jako ovládací prvek v `robots.txt`, který umožňuje vydavatelům řídit použití obsahu pro zlepšování modelů Gemini a Vertex AI generativních API, aniž by šlo o běžné blokování Google Search ([Google: web publisher controls](https://blog.google/innovation-and-ai/products/an-update-on-web-publisher-controls/)). Common Crawl zase uvádí, že jeho `CCBot` respektuje `robots.txt`, používá user-agent `CCBot` a umožňuje blokaci přes pravidla pro tento bot ([Common Crawl FAQ](https://commoncrawl.org/faq)).
 
-- Tutoriál učí začátečníka projít první úspěšnou cestou.
-- Návod řeší konkrétní úkol krok za krokem.
-- Reference přesně popisuje parametry, API, pole, limity nebo nastavení.
-- Vysvětlení dává kontext: proč věc funguje právě takhle a jaké má dopady.
+Praktický závěr: nepiš jedno obecné pravidlo „AI = zakázat“. Napiš politiku podle účelu.
 
-Jedna stránka by měla mít jeden hlavní typ. Když píšeš návod k API klíčům, nedělej z něj zároveň filosofii bezpečnosti, kompletní referenci endpointů a onboardingový tutoriál. Dej krátký kontext, ale detail odkaž. Uživatel při řešení problému nepotřebuje román. Potřebuje most přes konkrétní řeku.
-
-## Každá stránka má mít jasný slib
-
-Nadpis dokumentační stránky je mini smlouva. Slibuje, co člověk po přečtení dokáže. Proto piš nadpisy jako úkoly a výsledky.
-
-Slabé:
+Příklad rozhodnutí:
 
 ```text
-Nastavení účtu
-Integrace
-Export
+Běžné vyhledávače: povolit veřejný obsah.
+AI search / citace: povolit veřejné články a dokumentaci.
+Trénovací crawlery: blokovat, pokud nemáme vědomé rozhodnutí obsah poskytovat.
+Datasetové crawlery: posoudit podle zátěže, licence obsahu a obchodní strategie.
+Zákaznický obsah: nikdy neřešit robots.txt, vždy chránit přístupem.
 ```
 
-Lepší:
+## `robots.txt` piš explicitně a nudně
+
+Robots Exclusion Protocol popisuje RFC 9309. Je to standard pro pravidla crawlerů, ne autorizační mechanismus. Google Search Central také upozorňuje, že `robots.txt` slouží k řízení crawlování, ne ke skrytí citlivé stránky před veřejností ([Google Search Central: robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/intro)).
+
+Dobré pravidlo je krátké, komentované interně v repozitáři a testované při releasu. Neopisuj náhodné seznamy z internetu bez kontroly. U AI crawlerů se názvy a účely mění, takže pravidla musí mít vlastníka a datum revize.
+
+Příklad výchozího přístupu pro veřejný B2B web:
 
 ```text
-Jak změnit fakturační údaje firmy
-Jak propojit aplikaci s účetním systémem přes webhook
-Jak exportovat data zákazníků ve formátu CSV
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+Sitemap: https://example.com/sitemap.xml
 ```
 
-První odstavec má odpovědět na tři věci: pro koho stránka je, kdy ji použít a co člověk získá. Pokud je potřeba oprávnění, tarif, technická role nebo riziko práce s daty, napiš to hned nahoře.
+Tento příklad není univerzální dogma. Je to startovní bod pro tým, který chce zachovat běžnou dohledatelnost, ale nechce bez rozhodnutí poskytovat obsah trénovacím nebo datasetovým crawlerům. Pokud chceš být v konkrétních AI odpovědích viditelný, musíš rozlišit boty pro search/citace od botů pro trénování podle aktuální dokumentace poskytovatele.
 
-Dobrá úvodní poznámka:
+## `llms.txt` ber jako doplněk, ne smlouvu s internetem
 
-```text
-Tento návod je pro administrátory workspace. Pomůže vám pozvat nového člena týmu, nastavit mu roli a zkontrolovat, k jakým datům bude mít přístup. Pokud spravujete SSO, použijte místo toho návod pro firemní přihlášení.
-```
+Soubor `llms.txt` se objevuje jako návrh, jak nabídnout AI nástrojům stručný rozcestník pro dokumentaci nebo obsah webu. Může být užitečný pro vývojářskou dokumentaci, ale neber ho jako bezpečnostní, právní ani standardizovanou kontrolu použití obsahu. Pokud ho používáš, piš do něj jen to, co chceš opravdu veřejně nabídnout.
 
-## Dokumentace musí být součástí releasu
+Privacy-first pravidla pro `llms.txt`:
 
-Dokumentace napsaná „až potom“ často nevznikne nikdy. Proto ji ber jako součást definition of done. Funkce není hotová, dokud není jasné, jestli potřebuje dokumentaci, aktualizaci screenshotu, změnu FAQ, interní poznámku pro podporu nebo varování v produktu.
+- nedávej do něj neveřejné URL,
+- neodkazuj na zákaznické exporty, preview prostředí ani interní dokumenty,
+- napiš stručně, k čemu obsah slouží,
+- odkazuj na kanonické veřejné stránky,
+- udržuj ho stejně jako sitemap a dokumentaci,
+- nepočítej s tím, že ho každý AI nástroj bude respektovat.
 
-Release checklist pro dokumentaci:
+Jinými slovy: `llms.txt` může být rozcestník. Není to plot.
 
-- změnila se cesta uživatele?
-- přibyla nová role, oprávnění nebo datové pole?
-- mění se import, export, API, webhook nebo integrace?
-- mění se zpracování osobních údajů, retence nebo subprocesor?
-- bude podpora dostávat nové otázky?
-- potřebuje sales krátké vysvětlení pro zákazníky?
+## Sleduj zátěž bez profilování lidí
 
-Když je odpověď ano, dokumentace patří do stejného releasu. Ne jako poznámka „doplníme“. Jako práce, která chrání zákazníka i tým.
+AI crawlery mohou přidat provoz, který není lidská návštěvnost. Nemusíš kvůli tomu nasazovat invazivní analytiku. Stačí provozní signály:
 
-## Privacy-first dokumentace ukazuje hranice dat
+- počet požadavků na `robots.txt`, sitemapu a veřejné články podle user-agentu,
+- 429 a 5xx odpovědi pro crawlery,
+- nejčastěji crawlované URL,
+- velikost přenesených dat,
+- dopad na cache hit rate a odezvu serveru,
+- neočekávané pokusy o neveřejné cesty.
 
-U každé funkce, která pracuje s daty, napiš prakticky a srozumitelně:
+Tyhle signály patří do serverových logů s krátkou retencí a agregovaným vyhodnocením. Nepotřebuješ spojovat crawler provoz s identitou lidí, marketingovými profily nebo behaviorálním retargetingem. Crawler není lead. Je to provozní aktér.
 
-- jaká data funkce používá,
-- kdo k nim má přístup,
-- kde se zpracovávají,
-- jak dlouho se drží,
-- zda odcházejí třetí straně,
-- jak je lze exportovat nebo smazat,
-- co se loguje při chybě.
+## Chraň preview, dokumenty a přílohy tvrději než blog
 
-Nemusíš z každé stránky dělat právní dokument. Stačí krátký blok „Data a soukromí“. Ten je často užitečnější než dlouhá privacy policy, kterou lidé otevřou až ve chvíli, kdy už nevěří ničemu.
+Největší průšvih obvykle nevznikne na veřejném článku. Vznikne na preview URL, starém PDF, exportu, obrázku ve špatné složce, statickém JSON souboru nebo dokumentaci, která omylem popisuje interní architekturu víc, než musí.
 
-Příklad:
+Kontrolní otázky:
 
-```text
-Data a soukromí: Při exportu se vytvoří dočasný soubor dostupný pouze administrátorům workspace. Soubor se automaticky smaže po 24 hodinách. Obsah exportu neposíláme třetím stranám a neukládáme ho do analytiky.
-```
+- Jsou preview a staging URL za přihlášením?
+- Nemá sitemap odkazy na testovací nebo interní stránky?
+- Neobsahuje `robots.txt` citlivé cesty, které útočníkovi napoví?
+- Jsou soubory ke stažení dostupné přes krátkodobé odkazy, pokud obsahují zákaznická data?
+- Nezůstaly v dokumentech metadata, komentáře nebo interní názvy?
+- Umí tým rychle stáhnout veřejně dostupný soubor, když se ukáže jako špatně publikovaný?
 
-Tohle je přesně typ věty, který z privacy-first postoje dělá produktovou hodnotu.
+Pokud odpověď bolí, nezačínej debatou o AI crawlerech. Začni úklidem publikace.
 
-## Screenshoty a příklady drž bezpečné a aktuální
+## Udělej z toho čtvrtletní rutinu
 
-Screenshot je rychlá pomoc, ale také rychlý způsob, jak zveřejnit cizí data, staré UI nebo interní prostředí. Používej demo workspace, anonymizovaná data a krátké popisky. U delších návodů bývá lepší menší počet screenshotů s jasným zvýrazněním než galerie všeho.
+Pravidla pro crawlery nejsou jednorázová práce. Každé čtvrtletí projdi:
 
-Pravidla:
+1. aktuální `robots.txt`, sitemapu a případný `llms.txt`,
+2. dokumentaci hlavních crawlerů, které řešíš,
+3. logy zátěže a neobvyklé user-agenty,
+4. nové veřejné sekce webu,
+5. staging a preview ochranu,
+6. rozhodnutí, jestli chceš AI search viditelnost, trénovací použití, obojí nebo ani jedno.
 
-- používej demo data, nikdy živé zákaznické údaje,
-- neukazuj tokeny, e-maily, interní URL ani ID tenantů,
-- screenshot aktualizuj při změně UI,
-- u kritických akcí doplň textový krok, aby návod fungoval i bez obrázku,
-- u videí přidej krátké textové shrnutí.
+Výsledek nemusí být dlouhý. Stačí krátká karta: co povolujeme, co blokujeme, proč, kdo to vlastní a kdy se to znovu zkontroluje. Tím se z paniky kolem AI crawlerů stane obyčejná provozní disciplína. Nudná, ale velmi užitečná. Moje oblíbená kombinace.
 
-Přístupnost se týká i dokumentace. [WCAG](https://www.w3.org/TR/WCAG22/) stojí na principech vnímatelnosti, ovladatelnosti, srozumitelnosti a robustnosti. Prakticky: používej popisné odkazy, čitelné nadpisy, alternativní texty u důležitých obrázků a nepřenášej klíčovou informaci jen barvou.
+## Checklist: AI crawlery bez paniky
 
-## Dokumentace má být dohledatelná i mimo aplikaci
+- Máme rozdělený veřejný, zákaznický, preview a interní obsah?
+- Citlivé URL jsou chráněné přístupem, ne jen `robots.txt`?
+- Rozlišujeme běžné vyhledávání, AI search, trénovací crawlery a datasetové crawlery?
+- `robots.txt` má vlastníka, komentovaný záměr a datum revize?
+- Pravidla pro AI boty vycházejí z aktuální dokumentace poskytovatelů?
+- Sitemap obsahuje jen kanonické veřejné URL?
+- `llms.txt`, pokud existuje, neobsahuje neveřejné nebo citlivé odkazy?
+- Sledujeme crawler zátěž agregovaně bez profilování lidí?
+- Preview, staging a exporty jsou mimo veřejné crawlování i mimo veřejný přístup?
+- Máme čtvrtletní revizi pravidel a logů?
 
-Dobrá dokumentace pomáhá jen tehdy, když ji jde najít. Veřejné části nech indexovat, interní a zákaznická data naopak chraň. [Google Search Central](https://developers.google.com/search/docs) doporučuje tvořit stránky tak, aby byly dobře procházené, srozumitelné a užitečné pro hledající uživatele. To neznamená nacpat do návodu marketingová klíčová slova. Znamená to používat jasné titulky, popisné URL, interní odkazy a odpovědi na skutečné otázky.
-
-Privacy-first varianta vyhledávání:
-
-- veřejnou dokumentaci nech indexovat, pokud neobsahuje citlivé postupy,
-- neveřejné návody dej za přihlášení nebo do interní knowledge base,
-- nepoužívej invazivní search analytiku s identitou uživatele,
-- sleduj agregovaně hledané dotazy bez ukládání osobních údajů,
-- otázky bez výsledků převáděj do backlogu dokumentace.
-
-Pokud lidé hledají „jak zrušit účet“ a dokumentace mlčí, problém není vyhledávání. Problém je důvěra.
-
-## Měř užitečnost bez sledování lidí
-
-Dokumentace se dá zlepšovat i bez profilování konkrétních uživatelů. Sleduj agregované signály:
-
-- nejčtenější stránky,
-- stránky s vysokým návratem na podporu,
-- interní hledané dotazy bez výsledku,
-- počet ticketů k tématu před a po publikaci návodu,
-- počet kliků z release notes do dokumentace,
-- zpětnou vazbu „pomohlo / nepomohlo“ bez volného osobního textu, pokud ho nepotřebuješ.
-
-Kvalitativní signál je pořád král. Jednou měsíčně si vezmi pět reálných ticketů a zeptej se: existuje stránka, která by tomu zabránila? Pokud ano, byla dohledatelná? Pokud ne, patří do backlogu. Tohle je nudná rutina. Proto funguje.
-
-## Checklist: dokumentace bez bludiště
-
-- Má dokumentace mapu nejčastějších otázek a úkolů?
-- Je každá stránka jasně zařazená jako tutoriál, návod, reference nebo vysvětlení?
-- Má stránka nadpis podle úkolu, ne podle interní kategorie?
-- Říká úvod, pro koho stránka je a co člověk získá?
-- Je dokumentace součástí release procesu?
-- Mají datové funkce blok „Data a soukromí“?
-- Jsou screenshoty z demo prostředí a bez citlivých údajů?
-- Je veřejná dokumentace dohledatelná přes přímé URL a vyhledávače?
-- Jsou neveřejné postupy chráněné před indexací?
-- Měříš užitečnost agregovaně, bez profilování jednotlivců?
-
-## Mini šablona dokumentační stránky
+## Mini šablona crawler policy karty
 
 ```markdown
-# [Úkol, který uživatel dokončí]
+# Crawler policy karta: [doména]
 
-## Pro koho to je
-Role:
-Potřebné oprávnění:
-Kdy návod použít:
+## Veřejný obsah
+Povolujeme běžné vyhledávače: ano/ne
+Povolujeme AI search crawlery: ano/ne/které
+Povolujeme trénovací crawlery: ano/ne/které
+Povolujeme datasetové crawlery: ano/ne/které
 
-## Výsledek
-Po dokončení budete umět:
+## Neveřejný obsah
+Zákaznické URL chráněné přístupem: ano/ne
+Preview a staging chráněné přístupem: ano/ne
+Exporty a soubory přes expirační odkazy: ano/ne
 
-## Postup
-1.
-2.
-3.
+## Soubory
+robots.txt umístění:
+sitemap umístění:
+llms.txt umístění, pokud existuje:
 
-## Data a soukromí
-Použitá data:
-Kdo má přístup:
-Zpracování / umístění:
-Retence:
-Třetí strany:
-Export / smazání:
-
-## Časté problémy
-Problém:
-Řešení:
-
-## Související odkazy
--
-
-## Údržba
+## Provoz
 Owner:
-Poslední kontrola:
-Navázané funkce / releasy:
+Poslední revize:
+Další revize:
+Co sledujeme v logách:
+
+## Rozhodnutí
+Proč povolujeme:
+Proč blokujeme:
+Rizika:
 ```
 
 ## Zdroje
 
-- Diátaxis: [Diátaxis documentation framework](https://www.diataxis.fr/)
-- Google Search Central: [Documentation to improve SEO](https://developers.google.com/search/docs)
-- W3C: [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)
+- OpenAI Developers: [Overview of OpenAI Crawlers](https://developers.openai.com/api/docs/bots)
+- Google: [An update on web publisher controls](https://blog.google/innovation-and-ai/products/an-update-on-web-publisher-controls/)
+- Common Crawl: [FAQ](https://commoncrawl.org/faq)
+- Google Search Central: [Introduction to robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/intro)
+- IETF: [RFC 9309 — Robots Exclusion Protocol](https://www.rfc-editor.org/rfc/rfc9309)
 
 
 # Pracovní log
 
-- 2026-10-03: Doplněna příloha „Produktová dokumentace bez knowledge base bludiště“ s mapou otázek, rozdělením podle Diátaxis, release checklistem, privacy-first blokem pro datové funkce, pravidly pro screenshoty, dohledatelností, agregovaným měřením užitečnosti, checklistem, šablonou dokumentační stránky a ověřenými zdroji Diátaxis, Google Search Central a WCAG.
+- 2026-10-03: Doplněna příloha „AI crawlery a robots.txt bez paniky a omylů“ s rozdělením obsahu podle účelu, rozlišením vyhledávání a trénování, pravidly pro `robots.txt` a `llms.txt`, privacy-first monitoringem crawler zátěže, ochranou preview/exportů, čtvrtletní rutinou, checklistem, crawler policy kartou a ověřenými zdroji OpenAI, Google, Common Crawl, Google Search Central a RFC 9309.
 
 - 2026-10-03: Doplněna příloha „A/B testy bez profilovacího cirkusu“ s praktickým návrhem hypotézy, jedním hlavním měřítkem, randomizací bez dlouhodobého profilu, rozumnou segmentací, cookie a souhlasovou kontrolou, vyhodnocením, experimentální hygienou v kódu, checklistem, experiment kartou a ověřenými zdroji GDPR, Evropské komise, CNIL a EDPB.
 
