@@ -36119,227 +36119,196 @@ Indexace není jednorázová SEO kolonka při launchi. Je to provozní disciplí
 - Google Search Central: [What is a sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview)
 - Google Search Central: [How to specify a canonical URL](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls)
 
-# Příloha: Bezpečnostní hlavičky bez falešného pocitu bezpečí
+# Příloha: TLS certifikáty a domény bez tichého výpadku
 
-Bezpečnostní hlavičky nejsou kouzelný štít. Jsou to dopravní značky pro prohlížeč: odkud smí načítat skripty, jestli má trvat na HTTPS, kolik informací posílat v `Referer`, zda může stránka používat kameru nebo geolokaci a jak se chovat k podezřelým MIME typům. Když jsou dobře nastavené, zmenšují prostor pro chyby. Když jsou opsané z náhodného blogu, umí rozbít checkout, analytiku, fonty i administraci — a pak je tým potichu vypne. Gratuluju, máme bezpečnostní konfety.
+Výpadek webu často nezačne velkým incidentem. Začne malou zapomenutou věcí: expirovaný certifikát, doména po splatnosti, starý DNS záznam, subdoména mířící na zrušenou službu nebo certifikát vystavený pro špatný hostname. Navenek to pak vypadá jako „web je rozbitý“. Uvnitř je to provozní hygiena, která neměla vlastníka.
 
-Praktický cíl není „mít co nejvíc hlaviček“. Cíl je mít malou, zdokumentovanou politiku, která odpovídá tomu, co web skutečně dělá. Landing page s formulářem nepotřebuje stejné výjimky jako klientská zóna s exportem PDF, vloženým videem a platební bránou.
+TLS a domény nejsou jen technický detail pro admina. Jsou součást důvěry. Pokud zákazník vidí varování prohlížeče, je jedno, jak hezky máš napsaný privacy-first slib. Prohlížeč právě řekl: „Tady něco smrdí.“ A prohlížeč má v očích uživatele větší autoritu než tvoje sekce O nás.
 
-> Codyho komentář: Bezpečnostní hlavička je dobrá jen tehdy, když víš, proč tam je, kdo ji vlastní a jak poznáš, že něco rozbila. Jinak je to talisman v Nginxu.
+> Codyho komentář: Certifikát je jako zubní kartáček infrastruktury. Není sexy, nikdo o něm nechce meeting, ale když ho ignoruješ, jednou se to velmi veřejně projeví.
 
-## Začni inventářem zdrojů, ne generátorem hlaviček
+## Udělej doménový inventář
 
-Než napíšeš první `Content-Security-Policy`, udělej inventář toho, co stránka načítá:
+Začni seznamem domén a subdomén. Nejen těch hlavních, ale i historických:
 
-- vlastní doména a subdomény,
-- JavaScript bundly,
-- CSS a fonty,
-- obrázky, videa a soubory ke stažení,
-- formulářové endpointy,
-- analytika,
-- platební brány,
-- support widgety,
-- administrace a interní nástroje.
+- produkční web,
+- `www` varianta,
+- API,
+- administrace,
+- dokumentace,
+- status page,
+- staré landing pages,
+- krátké odkazy,
+- mailové domény,
+- preview a staging prostředí,
+- zákaznické custom domény.
 
-Ke každému zdroji si napiš účel, vlastníka a datový dopad. Privacy-first otázka zní: „Musí tato třetí strana dostat požadavek už při načtení stránky?“ Pokud ne, načti ji až po akci uživatele, nahraď ji vlastním řešením nebo ji vyhoď. Bezpečnostní hlavičky pak nebudou jen technické nastavení, ale důkaz, že web nemá zbytečné externí chapadlo.
+Ke každému záznamu si napiš: vlastníka, registrátora, DNS správce, účel, kritičnost, datum expirace, způsob obnovy certifikátu a co se stane při výpadku. Pokud to neumíš vyplnit, není to detail. Je to slepé místo.
 
-Příklad inventáře:
+Příklad:
 
-| Zdroj | Účel | Kdy se načítá | Data | Rozhodnutí |
-| --- | --- | --- | --- | --- |
-| `self` | vlastní HTML, CSS, JS | vždy | serverové logy | povolit |
-| `analytics.example.eu` | agregovaná analytika | po načtení stránky | URL bez osobních query parametrů | povolit jen v `script-src` a `connect-src` |
-| `video-provider.example` | produktové video | po kliknutí | IP + stránka s videem | lazy-load, ne v hero |
-| starý chat widget | support | vždy | cookies + celá URL | odstranit, nahradit kontaktním formulářem |
+| Hostname | Účel | Kritičnost | DNS | Certifikát | Vlastník |
+| --- | --- | --- | --- | --- | --- |
+| `example.cz` | marketingový web | vysoká | EU DNS provider | automaticky přes ACME | web tým |
+| `api.example.cz` | SaaS API | kritická | stejný provider | automaticky přes reverse proxy | backend tým |
+| `old-campaign.example.cz` | historická kampaň | nízká | starý záznam | nejasné | odstranit / redirect |
+| `docs.example.cz` | dokumentace | střední | EU DNS provider | automaticky | product ops |
 
-## CSP zaváděj postupně
+Privacy-first poznámka: inventář domén nepatří do veřejného repozitáře, pokud obsahuje interní hostnames nebo bezpečnostní poznámky. Stačí provozní dokumentace s omezeným přístupem. Veřejné odkazy patří do sitemap a dokumentace, interní názvy ne.
 
-`Content-Security-Policy` říká prohlížeči, jaké zdroje smí stránka načítat. MDN popisuje CSP jako mechanismus, kterým správce webu omezuje povolené zdroje pro stránku a pomáhá tím mimo jiné proti XSS útokům ([MDN: Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy)). To je silné, ale i křehké.
+## Automatická obnova není monitoring
 
-Začni v report-only režimu, pokud máš kam bezpečně sbírat porušení. U malého webu často stačí nejdřív lokálně a na stagingu projít hlavní stránky, formuláře, administraci a kritické flow. Cílem není zachytit každou exotickou kombinaci prohlížeče. Cílem je nenasadit politiku, která v pondělí ráno znefunkční poptávky.
+Automatizace certifikátů je skvělá, ale není omluvenka pro nulovou kontrolu. Let’s Encrypt v dokumentaci uvádí, že jeho e-mailová služba pro upozornění na expiraci certifikátů byla ukončena, takže provozovatelé se nemají spoléhat na starý „přijde e-mail“ model ([Let’s Encrypt: Expiration Emails](https://letsencrypt.org/docs/expiration-emails/)).
 
-Rozumný start pro jednoduchý obsahový web může vypadat takto:
+Prakticky to znamená:
 
-```http
-Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'; connect-src 'self'
+- monitoruj expiraci certifikátů nezávisle na ACME klientovi,
+- sleduj hlavní domény i kritické subdomény,
+- testuj obnovu po změně DNS, proxy nebo load balanceru,
+- měj upozornění dřív než poslední týden,
+- měj druhý kontakt nebo týmový kanál pro alerty,
+- po incidentu s certifikátem zkontroluj i runbook, ne jen certifikát.
+
+Dobré minimum pro malý SaaS: denní kontrola expirace pro produkční hostnames a samostatný alert při hodnotě pod 21 dní. Pro zákaznické custom domény přidej jasnou diagnostiku: jestli chybí CNAME, špatně míří A záznam, neprošla validace nebo se certifikát ještě nevystavil.
+
+## DNS změny plánuj jako release
+
+DNS vypadá jako tabulka, ale chová se jako distribuovaný systém s pamětí. TTL, cache resolverů a staré konfigurace znamenají, že změna nemusí být vidět všude najednou. Proto k DNS změnám přistupuj jako k release:
+
+1. napiš, co se mění a proč,
+2. zkontroluj současné záznamy,
+3. sniž TTL před plánovanou migrací,
+4. ověř novou cílovou službu,
+5. proveď změnu,
+6. testuj z více sítí nebo resolverů,
+7. nech starou trasu dočasně připravenou,
+8. po stabilizaci vrať rozumné TTL.
+
+Pro web a SaaS je nejdůležitější nevyrábět změnu, kterou neumíš vrátit. Pokud migruješ web na nový hosting, drž starý endpoint dostupný aspoň po dobu propagace a připrav redirecty. Pokud migruješ API, nejdřív ověř klienty a monitoring. DNS není místo pro heroismus.
+
+## CAA záznamy omezí nechtěné autority
+
+CAA záznamy umožňují doméně říct, které certifikační autority smějí vystavovat certifikáty pro danou doménu. RFC 8659 definuje DNS CAA resource record jako mechanismus pro publikování autorizačních pravidel pro certifikační autority ([RFC 8659](https://www.rfc-editor.org/rfc/rfc8659)). OWASP TLS Cheat Sheet také doporučuje CAA záznamy jako způsob, jak omezit, které autority mohou vydávat certifikáty ([OWASP: Transport Layer Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html)).
+
+Příklad pro doménu, která používá Let’s Encrypt:
+
+```dns
+example.cz.  CAA 0 issue "letsencrypt.org"
+example.cz.  CAA 0 iodef "mailto:security@example.cz"
 ```
 
-Tahle ukázka není univerzální recept. Pokud používáš externí fonty, platební bránu, mapu nebo analytiku, budeš potřebovat cílené výjimky. Každá výjimka má mít komentář v konfigurační dokumentaci: proč existuje, pro jakou část webu platí a kdy se má znovu zkontrolovat.
+CAA není náhrada monitoringu, ale je to dobrá brzda. Před zavedením si ověř, kdo dnes certifikáty opravdu vystavuje: produkce, staging, CDN, e-mailové služby, customer portal, staré systémy. Příliš úzký CAA záznam může rozbít legitimní obnovu certifikátu stejně elegantně, jako příliš široký záznam nic nechrání.
 
-Důležité pravidlo: `unsafe-inline` a `unsafe-eval` nejsou „dočasná drobnost“. Jsou to signály, že build, šablony nebo integrace potřebují lepší návrh. Někdy se jim krátkodobě nevyhneš, ale pak k nim napiš datum smrti. Bez data smrti se z dočasné výjimky stává trvalé dědictví po spěchu.
+## Wildcard certifikáty používej střídmě
 
-## HSTS zapínej až po kontrole celé domény
+Wildcard certifikát je pohodlný, ale zvyšuje dopad kompromitace. Pokud jeden klíč pokrývá mnoho subdomén, problém na méně důležité části může ohrozit důvěru ve větší kus systému.
 
-`Strict-Transport-Security` říká prohlížeči, aby k webu přistupoval přes HTTPS. MDN upozorňuje, že HSTS se posílá přes HTTPS odpověď a prohlížeč si pro daný host uloží, že má budoucí HTTP požadavky automaticky převádět na HTTPS ([MDN: Strict-Transport-Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security)).
+Praktické pravidlo:
 
-Praktický postup:
+- pro marketingový web a dokumentaci většinou stačí konkrétní hostnames,
+- wildcard používej tam, kde skutečně generuješ subdomény dynamicky,
+- privátní klíče drž mimo repozitář a běžné logy,
+- přístupy k DNS challenge omez na minimum,
+- odděl certifikáty pro produkci, staging a zákaznické domény,
+- eviduj, kdo může certifikát vystavit nebo obnovit.
 
-1. Ověř, že všechny veřejné části webu fungují přes HTTPS.
-2. Ověř subdomény: `www`, root doménu, API, status page, admin, staré landing pages.
-3. Nejdřív použij kratší `max-age`, například několik dnů.
-4. Teprve po kontrole zvyšuj hodnotu.
-5. `includeSubDomains` zapínej jen pokud opravdu kontroluješ všechny subdomény.
-6. Preload řeš až jako samostatné rozhodnutí, ne jako checkbox v generátoru.
+U zákaznických custom domén je lepší mít jasný onboarding než ruční kouzlení: zákazník nastaví CNAME, systém ověří záznam, vystaví certifikát, zobrazí stav a nabídne konkrétní chybu. „Nefunguje doména“ není chyba. „CNAME míří na `old.example.net`, očekáváme `customers.example.eu`“ je řešitelná informace.
 
-Příklad opatrného startu:
+## Nezapomeň na subdomain takeover
 
-```http
-Strict-Transport-Security: max-age=604800
-```
+Staré DNS záznamy, které míří na zrušené služby, jsou tiché riziko. Útočník někdy může převzít cílový projekt u poskytovatele a začít obsluhovat obsah pod tvojí subdoménou. To je přesně ten typ problému, který nevznikne v kódu, ale přesto poškodí důvěru ve značku.
 
-Příklad po ověření domény:
+Rutina:
 
-```http
-Strict-Transport-Security: max-age=31536000; includeSubDomains
-```
+- jednou měsíčně projdi CNAME záznamy,
+- ověř, že cílové služby stále existují,
+- ruš nepoužívané subdomény,
+- staré kampaně přesměruj nebo vrať `410 Gone`,
+- preview URL chraň přístupem nebo krátkou životností,
+- u externích služeb dokumentuj, kdo vlastní účet.
 
-Pro malý SaaS je největší riziko v zapomenutých subdoménách. Jedna stará demo aplikace bez správného certifikátu umí po `includeSubDomains` vytvořit zábavný provozní escape room. Bohužel bez zábavy.
+Privacy-first úhel je jednoduchý: zapomenutá subdoména může sbírat požadavky, cookies nebo důvěru uživatelů mimo kontrolovaný provoz. Takže nejde jen o bezpečnost. Jde o kontrolu nad datovou cestou.
 
-## Referrer-Policy nastav podle dat v URL
+## Testuj TLS a certifikáty zvenku
 
-`Referrer-Policy` řídí, kolik informací o původní stránce prohlížeč posílá při přechodu na další zdroj. MDN uvádí, že hlavička ovlivňuje informace posílané v `Referer` headeru a že výchozí hodnota v moderních prohlížečích je `strict-origin-when-cross-origin` ([MDN: Referrer-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy)).
-
-Privacy-first výchozí volba pro většinu marketingových webů:
-
-```http
-Referrer-Policy: strict-origin-when-cross-origin
-```
-
-Pokud máš v URL citlivější query parametry, interní identifikátory nebo jednorázové tokeny, udělej dvě věci:
-
-- oprav URL návrh, aby citlivé hodnoty v adrese vůbec nebyly,
-- zvaž přísnější politiku, například `no-referrer` pro konkrétní citlivé části.
-
-Nespoléhej ale na hlavičku jako na jedinou ochranu. Pokud do URL dáváš e-mail zákazníka, jméno firmy nebo token ke stažení, problém není primárně v `Referrer-Policy`. Problém je v návrhu toku.
-
-## Permissions-Policy drž funkce zavřené
-
-`Permissions-Policy` umožňuje řídit, které prohlížečové funkce může stránka nebo vložený obsah používat. MDN ji popisuje jako mechanismus pro povolování nebo blokování browser features ve vlastním dokumentu a případně ve vložených framech ([MDN: Permissions-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Permissions-Policy)).
-
-U běžného B2B webu většinou nepotřebuješ kameru, mikrofon, geolokaci ani senzory. Nastav výchozí zákaz a povoluj jen funkce, které produkt opravdu používá:
-
-```http
-Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=()
-```
-
-Pokud má SaaS funkci nahrávání hlasu nebo geolokační potvrzení, nevkládej ji do globální politiky pro celý web. Odděl ji na konkrétní část aplikace a vysvětli uživateli, proč se oprávnění žádá. Souhlas prohlížeče není UX text. Je to poslední technická brzda.
-
-## MIME sniffing a staré hlavičky řeš věcně
-
-`X-Content-Type-Options: nosniff` pomáhá prohlížeči držet se deklarovaného `Content-Type`. MDN uvádí, že hodnota `nosniff` blokuje requesty, pokud jejich MIME typ neodpovídá očekávanému typu pro styl nebo skript ([MDN: X-Content-Type-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options)).
-
-Doporučené minimum:
-
-```http
-X-Content-Type-Options: nosniff
-```
-
-K tomu přidej `X-Frame-Options` jen tam, kde nedokážeš nebo nechceš použít `frame-ancestors` v CSP. Modernější cesta je řídit vkládání přes CSP, ale starší obranné hlavičky mohou být pořád praktické pro kompatibilitu. OWASP Secure Headers Project udržuje přehled doporučených bezpečnostních response headers a jejich účelu ([OWASP Secure Headers Project](https://owasp.org/projects/secure-headers-project)).
-
-## Hlavičky testuj jako součást release
-
-Bezpečnostní hlavičky patří do release checklistu stejně jako formuláře a 404 stránka. Testuj minimálně:
-
-- homepage,
-- hlavní landing page,
-- článek nebo dokumentaci,
-- formulář,
-- login,
-- klientskou zónu,
-- export nebo download,
-- platbu,
-- administraci,
-- chybové stránky.
-
-Pro každou trasu zkontroluj dvě věci: jestli se posílají správné hlavičky a jestli se stránka nerozbila. Security scan bez ručního průchodu kritického flow je jako požární hlásič bez dveří ven: technicky působivé, prakticky nepohodlné.
-
-Příklad jednoduché kontroly:
+Lokální kontrola serveru nestačí. Testuj jako návštěvník:
 
 ```bash
-curl -I https://example.com | grep -Ei 'content-security-policy|strict-transport-security|referrer-policy|permissions-policy|x-content-type-options'
+curl -Iv https://example.cz
+openssl s_client -connect example.cz:443 -servername example.cz </dev/null 2>/dev/null | openssl x509 -noout -dates -issuer -subject
 ```
 
-## Privacy-first pravidla pro reportování porušení
+Kontroluj:
 
-CSP reporting je užitečný, ale může sbírat URL, user agenty, zdroje a kontext porušení. Proto:
+- certifikát platí pro správný hostname,
+- certifikát není těsně před expirací,
+- řetěz certifikátů je kompletní,
+- HTTP se přesměruje na HTTPS,
+- nejsou smíšené HTTP zdroje,
+- cookies pro citlivé části mají `Secure`,
+- HSTS odpovídá stavu subdomén,
+- monitoring běží zvenku, ne jen ze stejného serveru.
 
-- nesbírej reporty déle, než potřebuješ pro ladění,
-- neukládej celé URL s osobními query parametry,
-- odděl report endpoint od marketingových nástrojů,
-- agreguj opakované chyby,
-- nedělej z reportů nový tracking kanál,
-- dokumentuj, kdo k reportům smí.
+OWASP TLS Cheat Sheet zdůrazňuje mimo jiné silné protokoly, správnou konfiguraci serveru, testování konfigurace a použití TLS pro všechny stránky ([OWASP: TLS Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html)). Pro podnikatele je překlad jednoduchý: TLS není jednorázové „zapnuto“. Je to provozní kontrola.
 
-U malého webu často stačí CSP report-only režim během přípravy a krátce po nasazení. Trvalé sbírání reportů dává smysl až tehdy, když máš jasný proces triage. Jinak jen vytváříš další datový šuplík, který někdo jednou bude muset uklidit.
+## Checklist: domény a TLS bez tichého výpadku
 
-## Checklist: bezpečnostní hlavičky bez divadla
+- [ ] Máme inventář všech domén a subdomén.
+- [ ] Každý hostname má vlastníka, účel a kritičnost.
+- [ ] Sledujeme expiraci domén u registrátora.
+- [ ] Sledujeme expiraci certifikátů nezávisle na ACME automatizaci.
+- [ ] Alert na certifikát chodí dřív než poslední týden.
+- [ ] DNS změny mají plán, test a rollback.
+- [ ] Před větší migrací snižujeme TTL.
+- [ ] CAA záznamy odpovídají reálně používaným certifikačním autoritám.
+- [ ] Wildcard certifikáty mají zdokumentovaný důvod.
+- [ ] Nepoužívané CNAME a subdomény pravidelně mažeme.
+- [ ] Custom domény mají jasnou diagnostiku pro zákazníka.
+- [ ] Interní hostnames nejsou zbytečně veřejně dokumentované.
 
-- [ ] Máme inventář všech externích zdrojů načítaných stránkou.
-- [ ] Každý externí zdroj má účel, vlastníka a privacy dopad.
-- [ ] CSP začíná restriktivním `default-src 'self'` nebo zdokumentovanou výjimkou.
-- [ ] `form-action`, `base-uri` a `frame-ancestors` jsou nastavené vědomě.
-- [ ] `unsafe-inline` a `unsafe-eval` mají důvod a datum odstranění.
-- [ ] HSTS je nasazené postupně a subdomény jsou zkontrolované před `includeSubDomains`.
-- [ ] `Referrer-Policy` odpovídá citlivosti URL.
-- [ ] `Permissions-Policy` blokuje nepoužívané funkce prohlížeče.
-- [ ] `X-Content-Type-Options: nosniff` je aktivní.
-- [ ] Hlavičky jsou testované na hlavních veřejných i aplikačních trasách.
-- [ ] Reportování porušení nesbírá zbytečná osobní data.
-- [ ] Existuje vlastník a datum další revize.
-
-## Mini šablona security headers karty
+## Mini šablona doménové karty
 
 ```markdown
-# Security headers karta: [web / aplikace / sekce]
+# Doménová karta: [hostname]
 
-## Rozsah
-- Doména / subdoména:
-- Typ provozu: marketing / SaaS / admin / dokumentace
-- Kritické flow:
-
-## Externí zdroje
-- Skripty:
-- Styly a fonty:
-- Obrázky a média:
-- Formuláře a API:
-- Iframe / embedded obsah:
-
-## Hlavičky
-- Content-Security-Policy:
-- Strict-Transport-Security:
-- Referrer-Policy:
-- Permissions-Policy:
-- X-Content-Type-Options:
-- Další:
-
-## Výjimky
-- Výjimka:
-- Důvod:
+## Účel
+- Typ: marketing / SaaS / API / admin / dokumentace / customer domain
+- Kritičnost: nízká / střední / vysoká / kritická
 - Vlastník:
-- Datum odstranění / revize:
 
-## Test
-- Testované URL:
-- Testované prohlížeče:
-- Známá rizika:
-- Rollback postup:
+## DNS
+- Registrátor:
+- DNS provider:
+- Hlavní záznamy:
+- TTL:
+- CAA:
+
+## TLS
+- Certifikační autorita:
+- Obnova: automatická / ruční
+- Monitoring expirace:
+- Alert kanál:
+
+## Provoz
+- Dopad výpadku:
+- Rollback:
+- Poslední test:
+- Datum další revize:
 ```
 
-Bezpečnostní hlavičky jsou ideální místo, kde se potkává vývoj, provoz, marketing i privacy. Ukazují, že web není jen hezká stránka, ale kontrolované prostředí. A přesně to je evropská výhoda: méně magických skriptů, méně datových únikových cest, víc klidu pro zákazníka i tým.
+Domény a TLS jsou nudná disciplína, dokud nejsou. Právě proto se vyplatí mít jednoduchý inventář, automatickou obnovu, nezávislý monitoring a pravidelný úklid. Je to levnější než vysvětlovat zákazníkům, proč jejich prohlížeč přes noc začal tvůj web označovat jako podezřelé dobrodružství.
 
 ## Zdroje
 
-- MDN: [Content-Security-Policy header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy)
-- MDN: [Strict-Transport-Security header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security)
-- MDN: [Referrer-Policy header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy)
-- MDN: [Permissions-Policy header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Permissions-Policy)
-- MDN: [X-Content-Type-Options header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options)
-- OWASP: [Secure Headers Project](https://owasp.org/projects/secure-headers-project)
+- Let’s Encrypt: [Expiration Emails](https://letsencrypt.org/docs/expiration-emails/)
+- OWASP: [Transport Layer Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html)
+- RFC Editor: [RFC 8659: DNS Certification Authority Authorization Resource Record](https://www.rfc-editor.org/rfc/rfc8659)
+
 
 
 # Pracovní log
 
-- 2026-10-03: Doplněna příloha „Bezpečnostní hlavičky bez falešného pocitu bezpečí“ s praktickým inventářem zdrojů, postupným zavedením CSP, HSTS, Referrer-Policy, Permissions-Policy, MIME ochranou, testováním, privacy-first pravidly pro reportování, checklistem, security headers kartou a ověřenými zdroji MDN a OWASP.
+- 2026-10-03: Doplněna příloha „TLS certifikáty a domény bez tichého výpadku“ s doménovým inventářem, monitoringem expirace certifikátů, DNS release postupem, CAA záznamy, pravidly pro wildcard certifikáty, prevencí subdomain takeover, checklistem, doménovou kartou a ověřenými zdroji Let’s Encrypt, OWASP a RFC 8659.
 
 - 2026-10-03: Doplněna příloha „Indexace webu bez SEO chaosu a zbytečného sledování“ s rozdělením veřejných a neveřejných URL, pravidly pro `robots.txt`, sitemapu, canonical URL, staging, filtry, redirecty, privacy-first monitoringem, checklistem, indexační kartou a ověřenými zdroji Google Search Central, RFC 9309 a sitemaps.org.
 
