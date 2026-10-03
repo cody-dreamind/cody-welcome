@@ -36788,7 +36788,202 @@ Rozhodnutí:
 - European Data Protection Board: [Guidelines 8/2020 on the targeting of social media users](https://www.edpb.europa.eu/documents/guideline/guidelines-82020-on-the-targeting-of-social-media-users_en)
 
 
+# Příloha: Release notes a changelog bez produktového megafonu
+
+Release notes nejsou konfety k deployi. Jsou to provozní komunikace, která zákazníkovi říká: co se změnilo, jestli ho to ovlivní, co má udělat a kde najde detail. Dobré release notes šetří podporu, pomáhají sales týmu a snižují strach ze změn. Špatné release notes vypadají jako „vylepšili jsme výkon a opravili drobnosti“, což je užitečné asi jako deštník z ubrousku.
+
+Changelog je trochu jiný nástroj. Release notes jsou psané pro uživatele, zákazníky a interní obchodní tým. Changelog je spíš historický technicko-produktový záznam změn. Může být veřejný, interní nebo kombinovaný. Pro malý SaaS je ideální mít jeden zdroj pravdy a z něj tvořit dvě verze: stručnou zákaznickou poznámku a přesnější interní záznam.
+
+> Codyho komentář: Když neumíš změnu vysvětlit v release notes, je slušná šance, že ji neumíš vysvětlit ani zákazníkovi. A pokud ji neumíš vysvětlit zákazníkovi, možná to nebyla produktová strategie, ale deploy s diplomem.
+
+## Rozliš publikum dřív než formát
+
+Nejdřív si napiš, komu konkrétní zpráva slouží. Stejný release má často čtyři publika a každé potřebuje jinou míru detailu.
+
+- Uživatel chce vědět, co je pro něj nové a jestli se mění jeho běžná práce.
+- Administrátor chce vědět, jestli má zapnout nastavení, upravit oprávnění nebo informovat tým.
+- Vývojář integrace chce vědět, jestli se mění API, webhook, export nebo datový formát.
+- Interní tým chce vědět, co říkat zákazníkům, co sledovat a kdy eskalovat problém.
+
+Praktický postup: každou změnu označ štítkem `user`, `admin`, `api`, `security`, `billing`, `internal` nebo `silent`. Tím si vynutíš přemýšlení o dopadu. Změna označená `silent` se nemusí dostat do veřejných release notes, ale pořád může patřit do interního changelogu.
+
+## Piš podle dopadu, ne podle ticketů
+
+Uživatel nečte release notes proto, aby obdivoval počet uzavřených úkolů. Čte je proto, aby pochopil dopad. Proto nezačínej větou „Implementovali jsme nový endpoint“. Začni tím, co to umožňuje nebo mění.
+
+Slabé:
+
+```text
+Přidali jsme podporu exportu faktur ve formátu CSV.
+```
+
+Lepší:
+
+```text
+Administrátoři si teď mohou exportovat faktury do CSV a rychleji je předat účetnímu systému bez ručního kopírování položek.
+```
+
+U větších změn používej krátkou strukturu:
+
+```text
+Co je nové:
+Pro koho je to důležité:
+Co se mění v praxi:
+Co má uživatel udělat:
+Kde je dokumentace:
+```
+
+Tahle šablona je nudná jen do chvíle, než první zákazník přestane psát na podporu otázku, kterou release notes už vyřešily.
+
+## Kategorie drž konzistentní
+
+Projekt [Keep a Changelog](https://keepachangelog.com/) doporučuje srozumitelné kategorie typu `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed` a `Security`. Nemusíš je slepě kopírovat do českého marketingového textu, ale logika je výborná: čtenář hned pozná, jestli jde o novinku, změnu chování, opravu nebo bezpečnostní informaci.
+
+Pro český SaaS může fungovat tahle varianta:
+
+- `Nové`: funkce, nastavení, exporty, integrace.
+- `Změněno`: úpravy chování, textů, workflow nebo defaultů.
+- `Opraveno`: chyby, které měly viditelný dopad na uživatele.
+- `Bezpečnost a soukromí`: přístupy, logování, retence, exporty, oprávnění.
+- `Pro vývojáře`: API, webhooky, SDK, datové formáty.
+- `Ukončujeme`: deprecations, odstranění starého chování, migrační termíny.
+
+Důležité: kategorii `Bezpečnost a soukromí` nepoužívej jako PR dekoraci. Patří tam jen změny, které opravdu mění riziko, kontrolu nad daty nebo provozní jistotu. Jinak si z ní uděláš nástěnku ctnosti a nikdo jí nebude věřit.
+
+## Verze mají nést význam
+
+Pokud vydáváš technický produkt, veřejné API nebo knihovnu, drž se principů [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH` má naznačovat, jestli jde o nekompatibilní změnu, zpětně kompatibilní funkcionalitu nebo opravu. U běžného webového SaaS nemusíš nutně ukazovat každému zákazníkovi `v2.14.3`, ale interně se význam verzí hodí pro podporu, rollback i incidenty.
+
+Praktické pravidlo:
+
+- `PATCH`: oprava bez změny očekávaného chování.
+- `MINOR`: nová schopnost nebo rozšíření bez rozbití stávající práce.
+- `MAJOR`: změna, která vyžaduje migraci, školení, úpravu integrace nebo vědomé rozhodnutí zákazníka.
+
+Když verzi nepoužíváš veřejně, dej releasu aspoň datum, krátký název a odkaz na interní commit/tag. GitHub Releases jsou postavené nad tagy a umožňují k nim přidat release notes i binární soubory, takže se hodí jako jednoduchý provozní archiv pro týmy, které už pracují v GitHubu ([GitHub Docs: Releases](https://docs.github.com/en/repositories/releasing-projects-on-github)).
+
+## Privacy-first release notes neprozrazují víc, než musí
+
+Release notes mohou nechtěně prozradit citlivé informace: interní názvy zákazníků, bezpečnostní detaily před dokončenou mitigací, screenshoty s osobními údaji, přesné názvy interních systémů nebo informace o tom, jak obejít kontrolu. To není transparentnost. To je rozbitá vitrína.
+
+Privacy-first pravidla:
+
+- Neuváděj jména zákazníků bez výslovného souhlasu.
+- U bezpečnostních oprav popiš dopad a doporučenou akci, ale ne detailní návod ke zneužití.
+- Nesdílej screenshoty z produkce, pokud obsahují skutečná data.
+- Nezveřejňuj interní názvy tabulek, queue, bucketů, tenantů nebo administrátorských cest, pokud to zákazník nepotřebuje.
+- U změn v měření vysvětli, jaká data se sbírají, proč, na jak dlouho a kde běží zpracování.
+- Pokud release přidává integraci třetí strany, napiš, jaký typ dat do ní odchází a zda ji lze vypnout.
+
+Evropský provoz je v release notes konkurenční výhoda. Když zavedeš self-hosted analytiku, kratší retenci logů, lepší export dat nebo EU-only zpracování, řekni to srozumitelně. Ne jako legalese. Jako produktovou hodnotu.
+
+## Deprecation oznamuj s předstihem
+
+Nejhorší release notes jsou ty, které zákazník čte až po rozbití workflow. Pokud rušíš endpoint, starý export, tarif, pole ve formuláři nebo integraci, napiš to dopředu a opakovaně.
+
+Dobrý deprecation blok obsahuje:
+
+- co končí,
+- proč to končí,
+- koho se to týká,
+- datum vypnutí,
+- doporučenou náhradu,
+- migrační návod,
+- kontakt pro výjimky nebo kritické případy.
+
+Příklad:
+
+```text
+Ukončujeme starý CSV export objednávek. Od 2026-12-01 bude dostupný jen nový export s jednotným názvoslovím sloupců. Pokud export používáte v účetní automatizaci, přejděte na šablonu „Objednávky v2“. Starý export zatím zůstává dostupný v nastavení administrace. Migrační návod: [odkaz].
+```
+
+Když máš zákazníky s integracemi, pošli deprecation ještě přímým kanálem: e-mail administrátorům, upozornění v aplikaci a poznámka v dokumentaci. RSS nebo changelog stránka je skvělý archiv, ale kritickou migraci nesmí nést sama.
+
+## Interní poznámky odděl od veřejných
+
+Veřejné release notes mají být srozumitelné a bezpečné. Interní release karta může být ostřejší: rizika, rollback, podezřelé metriky, jména ownerů, odkazy na incidenty, testovací scénáře a rozhodnutí, co se nemá říkat veřejně bez právní nebo bezpečnostní kontroly.
+
+Interní záznam drž v jednom místě, které tým opravdu používá. Není důležité, jestli je to Markdown v repozitáři, issue tracker nebo interní knowledge base. Důležité je, aby po dvou měsících šlo odpovědět na otázky: proč jsme to vydali, kdo to schválil, co jsme sledovali a jak se to dá vrátit.
+
+## Distribuce bez sociální závislosti
+
+Release notes by neměly žít jen jako příspěvek na sociální síti. Sociální síť je distribuční kopie, ne archiv. Minimum pro privacy-first SaaS:
+
+- veřejná stránka `/changelog` nebo `/novinky`,
+- RSS feed pro změny,
+- přímé odkazy na jednotlivé releasy,
+- e-mail jen pro změny, které vyžadují akci nebo výrazně pomáhají,
+- in-app upozornění bez behaviorálního profilu,
+- dokumentace aktualizovaná ve stejném releasu.
+
+Měření drž jednoduché: počet návštěv release stránky, kliky na dokumentaci, počet dotazů na podporu k dané změně a počet zákazníků, kteří dokončili doporučenou migraci. Nepotřebuješ vědět, kdo si release notes četl ve 23:17 z gauče. Potřebuješ vědět, jestli komunikace snížila zmatek.
+
+## Checklist: release notes bez produktového megafonu
+
+- Má release jasné publikum: uživatel, admin, vývojář integrace, interní tým?
+- Je dopad popsaný lidsky, ne jen jako seznam ticketů?
+- Jsou změny rozdělené na nové, změněné, opravené, bezpečnostní a ukončované?
+- Je u každé významné změny napsané, co má zákazník udělat?
+- Jsou odstraněné interní názvy, citlivé detaily a produkční osobní údaje?
+- Má deprecation termín, náhradu a migrační návod?
+- Existuje interní release karta s ownerem, rollbackem a riziky?
+- Je dokumentace aktualizovaná před zveřejněním release notes?
+- Má release trvalý odkaz a RSS nebo jiný přímý kanál?
+- Měříš dopad bez profilování jednotlivců?
+
+## Mini šablona release karty
+
+```markdown
+# Release karta: [název / verze / datum]
+
+## Shrnutí pro zákazníka
+Co se mění:
+Pro koho je to důležité:
+Co má zákazník udělat:
+Odkaz na dokumentaci:
+
+## Kategorie
+Nové:
+Změněno:
+Opraveno:
+Bezpečnost a soukromí:
+Pro vývojáře:
+Ukončujeme:
+
+## Privacy-first kontrola
+Obsahuje screenshoty z produkce: ano/ne
+Obsahuje jména zákazníků: ano/ne/souhlas
+Mění se zpracování dat: ano/ne
+Data třetích stran / subprocesor: ano/ne
+Retence nebo export dat: ano/ne
+
+## Provoz
+Owner:
+Tag / commit:
+Datum vydání:
+Rollback:
+Co sledovat po vydání:
+Podpora ví o změně: ano/ne
+Dokumentace aktualizovaná: ano/ne
+
+## Deprecation, pokud existuje
+Co končí:
+Datum vypnutí:
+Náhrada:
+Migrační návod:
+Přímá komunikace zákazníkům:
+```
+
+## Zdroje
+
+- Keep a Changelog: [Keep a Changelog](https://keepachangelog.com/)
+- Semantic Versioning: [Semantic Versioning 2.0.0](https://semver.org/)
+- GitHub Docs: [Releasing projects on GitHub](https://docs.github.com/en/repositories/releasing-projects-on-github)
+
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „Release notes a changelog bez produktového megafonu“ s rozlišením publika, psaním podle dopadu, kategoriemi změn, verzováním, privacy-first bezpečností komunikace, deprecation postupem, distribučním modelem bez sociální závislosti, checklistem, release kartou a ověřenými zdroji Keep a Changelog, SemVer a GitHub Docs.
 
 - 2026-10-03: Doplněna příloha „A/B testy bez profilovacího cirkusu“ s praktickým návrhem hypotézy, jedním hlavním měřítkem, randomizací bez dlouhodobého profilu, rozumnou segmentací, cookie a souhlasovou kontrolou, vyhodnocením, experimentální hygienou v kódu, checklistem, experiment kartou a ověřenými zdroji GDPR, Evropské komise, CNIL a EDPB.
 
