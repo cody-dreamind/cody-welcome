@@ -34828,7 +34828,188 @@ Feature flags jsou nejlepší, když po nich nezůstane nepořádek. Pomáhají 
 - GitLab Docs: [Incremental rollouts with GitLab CI/CD](https://docs.gitlab.com/ci/environments/incremental_rollouts/)
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 
+# Příloha: Error monitoring bez úniku dat a paniky v logách
+
+Chyby v aplikaci nejsou ostuda. Ostuda je, když o nich nevíš, nebo když kvůli jejich ladění začneš do logů sypat celé formuláře, tokeny, e-maily, faktury a kusy interního života zákazníka. Error monitoring má pomoct rychle zjistit, co se pokazilo, koho to bolí a jak to opravit — ne vytvořit paralelní datový sklad citlivých informací.
+
+OWASP v Logging Cheat Sheet připomíná, že aplikační logy jsou důležité pro bezpečnostní i provozní účely, ale zároveň výslovně varuje před logováním citlivých dat, session hodnot, access tokenů, hesel, connection stringů, šifrovacích klíčů a dalších tajemství ([OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). OWASP Error Handling Cheat Sheet zase ukazuje, že špatné chybové hlášky mohou útočníkovi prozradit framework, verze, vnitřní strukturu nebo injection body ([OWASP: Error Handling Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html)).
+
+> Codyho komentář: Log je jako černá skříňka v letadle. Má pomoct pochopit nehodu, ne nahrávat rozhovory všech pasažérů o hypotéce, dětech a hesle k Wi-Fi.
+
+## Rozděl tři různé vrstvy signálů
+
+Nejdřív si ujasni, co vlastně sbíráš. V malém SaaS se často smíchá error monitoring, produktová analytika, auditní log a debug výpisy do jednoho kýblu. Ten kýbl pak nikdo nechce otevřít, protože smrdí rizikem.
+
+Praktické rozdělení:
+
+- **Error monitoring** — neočekávané chyby, stack trace, dopad na endpoint nebo job, stav release.
+- **Auditní log** — kdo změnil oprávnění, fakturaci, nastavení workspace nebo bezpečnostní konfiguraci.
+- **Produktový signál** — jestli uživatel dokončil klíčový krok, bez obsahu jeho dat.
+- **Debug log** — dočasná technická stopa pro vývojáře, ideálně vypnutá nebo výrazně omezená v produkci.
+- **Infrastrukturní log** — dostupnost, latence, status kódy, využití zdrojů.
+
+Každá vrstva má jiného čtenáře a jinou retenci. Error monitoring čte vývojář při incidentu. Auditní log může potřebovat admin zákazníka nebo bezpečnostní revize. Produktový signál čte produktový tým. Debug log nemá žít věčně jen proto, že se na něj někdo možná jednou podívá.
+
+## Loguj rozhodovací kontext, ne zákaznický obsah
+
+Dobrý error event odpovídá na otázky: kde se chyba stala, jak často, od kdy, v jaké verzi, jaký typ účtu zasáhla a jaký fallback proběhl. Nepotřebuje znát celý obsah zprávy, faktury, poptávky ani interní poznámku zákazníka.
+
+Lepší event:
+
+```text
+event=invoice_pdf_generation_failed
+release=2026-10-03.1
+workspace_plan=pro
+job_type=pdf_export
+error_class=template_timeout
+duration_bucket=30_60s
+retry_count=2
+fallback=queued_for_manual_retry
+```
+
+Horší event:
+
+```text
+event=invoice_pdf_generation_failed
+customer_email=ucetni@example.com
+invoice_note="Prosím poslat na soukromý účet..."
+html_payload=[celý dokument]
+access_token=...
+```
+
+Privacy-first pravidlo je jednoduché: pokud údaj nepotřebuješ k opravě chyby nebo bezpečnostnímu vyšetření, do logu nepatří. A pokud ho potřebuješ jen výjimečně, navrhni řízený dočasný režim se souhlasem, expirací a maskováním.
+
+## Veřejná chyba má být klidná a užitečná
+
+Uživatel nepotřebuje vidět stack trace. Potřebuje vědět, že se něco nepovedlo, jestli má akci zopakovat, jestli se data uložila a jak kontaktovat podporu.
+
+Dobrá veřejná chybová hláška:
+
+- neprozradí technologii, verze balíčků ani interní cesty,
+- řekne, co se stalo lidsky a stručně,
+- nabídne bezpečný další krok,
+- obsahuje referenční ID chyby,
+- nerozsvítí paniku slovem „fatal“ tam, kde jde o běžný timeout,
+- nepřenáší odpovědnost na uživatele, pokud je chyba na serveru.
+
+Příklad:
+
+```text
+Export se teď nepodařilo dokončit. Data jsme nezměnili.
+Zkuste to prosím za chvíli znovu. Pokud se chyba opakuje, napište podpoře kód: ERR-20261003-7F2A.
+```
+
+Interně si k tomuto kódu najdeš korelační ID, release, endpoint, typ účtu, chybovou třídu a poslední bezpečný stav. Uživatel nedostane žádné technické drobky pro útok, ale má dost informací pro smysluplný support.
+
+## Maskování řeš před odesláním do nástroje
+
+Nečekej, že error monitoring služba všechno zachrání za tebe. Maskování dělej co nejblíž aplikaci, ještě před odesláním eventu mimo vlastní prostředí. To je obzvlášť důležité, pokud error nástroj provozuje externí dodavatel nebo běží mimo EU.
+
+Minimální redakční pravidla:
+
+- tokeny, API klíče, cookies a session ID vždy odstranit nebo nahradit hashovaným identifikátorem,
+- e-maily nahradit interním ID nebo doménovou kategorií, pokud doména není citlivá,
+- query stringy u URL zkracovat nebo odstraňovat,
+- request body nelogovat plošně,
+- hlavičky jako `Authorization`, `Cookie` a `Set-Cookie` nikdy neukládat v čitelné podobě,
+- přílohy a generované dokumenty do error nástroje neposílat,
+- stack trace ponechat, ale bez lokálních tajemství a cest obsahujících zákaznická data.
+
+Evropská komise u principů GDPR připomíná minimalizaci dat: organizace má shromažďovat a zpracovávat jen osobní data nezbytná pro daný účel ([European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)). Pro error monitoring je účel jasný: opravit chybu a chránit provoz. Ne vytvářet tajný archiv zákaznického obsahu.
+
+## Alerty musí mít prahy, jinak jen křičí
+
+Monitoring bez priorit je generátor úzkosti. Ne každá chyba má vzbudit člověka. Nastav si úrovně dopadu.
+
+Praktické rozdělení:
+
+- **P0** — výpadek služby, ztráta dat, bezpečnostní incident, nefunkční platby nebo přihlášení.
+- **P1** — významná funkce nefunguje části zákazníků, existuje workaround, ale dopad je obchodní.
+- **P2** — chyba v okrajovém workflow, support ji zvládne obejít.
+- **P3** — kosmetika, jednorázová chyba, známý flaky externí endpoint.
+
+Alert nastavuj podle kombinace frekvence, dopadu a novosti. Jedna chyba v adminu testovacího účtu v noci nepotřebuje sirénu. Sto chyb v checkoutu po release ano. U každého alertu napiš runbook: co zkontrolovat, kde je dashboard, jak vypnout problematickou funkci, koho informovat a jak poznat návrat do normálu.
+
+## Retence logů není „navždy pro jistotu“
+
+Logy mají životní cyklus. Čerstvé chyby potřebuješ detailně. Starší data často stačí agregovaně: počet chyb podle typu, release a dopadu. Čím déle data držíš, tím víc musíš obhájit účel, přístup a zabezpečení.
+
+Jednoduchý model:
+
+- detailní error eventy: krátká retence podle provozní potřeby,
+- agregované metriky chyb: delší retence pro trend a kvalitu release,
+- auditní logy bezpečnostních změn: samostatná retence podle smluv a právních potřeb,
+- debug logy: hodiny až dny, ne měsíce,
+- incidentové exporty: uložit jen do incident složky s vlastníkem a datem revize.
+
+Retence má být vidět v dokumentaci i v nastavení nástroje. Pokud nejde nastavit, je to signál pro výběr jiného řešení nebo pro vlastní mezivrstvu, která data pročistí dřív, než odejdou.
+
+## Checklist: error monitoring bez úniku dat
+
+- [ ] Máme oddělený error monitoring, auditní log, produktové signály a debug logy.
+- [ ] Veřejné chybové hlášky neukazují stack trace, verze, interní cesty ani SQL dotazy.
+- [ ] Každá viditelná chyba má referenční ID pro support.
+- [ ] Do error eventů neposíláme hesla, tokeny, cookies, session ID ani connection stringy.
+- [ ] Request body a přílohy nelogujeme plošně.
+- [ ] Maskování probíhá před odesláním do externího nástroje.
+- [ ] Alerty mají priority, prahy a runbook.
+- [ ] Debug režim v produkci má vlastníka, důvod a expiraci.
+- [ ] Retence logů je nastavená podle účelu a vrstvy signálu.
+- [ ] Přístupy k logům jsou omezené, auditované a pravidelně revidované.
+
+## Mini šablona monitoring karty
+
+```text
+# Monitoring karta: [oblast / služba]
+
+## Účel
+Co potřebujeme zjistit:
+Kdo je hlavní čtenář:
+Jaké rozhodnutí monitoring podporuje:
+
+## Eventy
+Chybové třídy:
+Korelační ID:
+Release / prostředí:
+Co záměrně nelogujeme:
+
+## Maskování
+Tokeny a secrets:
+Osobní údaje:
+URL a query stringy:
+Request / response body:
+
+## Alerty
+P0:
+P1:
+P2:
+P3:
+Runbook URL:
+
+## Retence
+Detailní eventy:
+Agregace:
+Debug logy:
+Incident exporty:
+
+## Přístup
+Kdo smí číst:
+Kdo smí měnit alerty:
+Datum poslední revize:
+```
+
+Error monitoring je nejlepší, když je nudně spolehlivý: rychle ukáže problém, neprozradí zbytečnosti, pomůže supportu a po vyřešení incidentu po sobě uklidí. Privacy-first provoz tím neztrácí rychlost. Naopak: když víš, co neloguješ, opravuješ chyby s čistší hlavou a menším právním tikem v oku.
+
+## Zdroje
+
+- OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- OWASP: [Error Handling Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html)
+- OWASP Developer Guide: [Handle all Errors and Exceptions](https://devguide.owasp.org/en/04-design/02-web-app-checklist/10-handle-errors-exceptions/)
+- European Commission: [What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „Error monitoring bez úniku dat a paniky v logách“ s rozdělením signálů, bezpečnými chybovými hláškami, maskováním před odesláním do nástroje, prioritami alertů, retenčním modelem, checklistem, monitoring kartou a ověřenými zdroji OWASP a Evropské komise.
 
 - 2026-10-03: Doplněna příloha „Release brzdy a rollback bez produkčního adrenalinu“ s typy flagů, pravidly vlastnictví a expirace, postupným rolloutem, privacy-first měřením, rollback plánem, datovou kompatibilitou, checklistem, feature flag kartou a ověřenými zdroji Martin Fowler, GitLab a OWASP.
 
