@@ -34175,7 +34175,142 @@ Jednoduché pravidlo pro vývojáře: když přidáš nové místo, kde se uklá
 - Kontrola vedlejších systémů:
 ```
 
+# Příloha: Open-source licence a závislosti bez právního mlžení
+
+Moderní web a SaaS nestojí jen na vlastním kódu. Stojí na balíčcích, komponentách, ikonách, fontech, Docker image, CI akcích, SDK a ukázkových snippetech z dokumentace. Open source je skvělý akcelerátor, ale není to kouzelná krabice „zdarma a bez povinností“. Každá závislost má licenci, údržbu, bezpečnostní profil a někdy i překvapivý dopad na produkt.
+
+Cílem malé firmy není vytvořit právní oddělení v mikině. Cílem je mít jednoduchý proces: víme, co používáme, proč to používáme, jaká licence k tomu patří, jestli to smíme dát do komerčního produktu a co uděláme, když balíček zestárne, zmizí nebo začne být rizikový.
+
+> Codyho komentář: „Našel jsem to na GitHubu“ není licenční strategie. Je to začátek otázky, ne konec odpovědi.
+
+## Licence je produktová informace
+
+Open-source licence říká, jak smíš software používat, upravovat, šířit a kombinovat s vlastním produktem. OSI udržuje seznam licencí schválených podle Open Source Definition a připomíná, že open-source licence obecně umožňují software svobodně používat, upravovat a sdílet: https://opensource.org/licenses. SPDX License List zase poskytuje standardizované identifikátory licencí, plné názvy, texty a trvalé URL pro licence a výjimky: https://spdx.org/licenses/.
+
+Pro malý SaaS si licence rozděl prakticky:
+
+- **Permisivní licence** jako MIT, BSD nebo Apache-2.0 bývají pro komerční použití jednodušší, ale pořád vyžadují splnění podmínek, například zachování notice textů.
+- **Copyleft licence** jako GPL nebo AGPL mohou vyžadovat sdílení zdrojového kódu při distribuci nebo při síťovém používání podle konkrétních podmínek licence.
+- **Nejasná nebo chybějící licence** znamená stopku. Veřejný repozitář bez licence není automaticky volně použitelný stavební materiál.
+- **„Free for personal use“** není open source a do firemního produktu bez jasného svolení nepatří.
+
+Praktické pravidlo: u každé nové produkční závislosti eviduj SPDX identifikátor licence. Pokud ho neumíš najít, není to drobnost k pozdějšímu dořešení. Je to riziko v backlogu.
+
+## Udělej si malý license gate
+
+Malý tým nepotřebuje korporátní schvalovací portál. Potřebuje jednoduchou bránu před tím, než nová závislost přistane v produkci. Ideálně v pull requestu.
+
+License gate se ptá:
+
+- Je balíček opravdu potřeba, nebo jde nahradit pár řádky vlastního kódu?
+- Má jasnou licenci a SPDX identifikátor?
+- Je licence povolená pro náš typ produktu?
+- Přidává balíček runtime kód, build nástroj, nebo jen vývojovou pomůcku?
+- Dostává se balíček do klientského JavaScriptu, tedy k uživateli?
+- Má balíček aktivní údržbu a rozumnou historii releaseů?
+- Má známé zranitelnosti nebo podezřelé maintainer signály?
+
+GitHub Dependency Review popisuje kontrolu změn závislostí v pull requestu a možnost vynucovat pravidla pomocí Dependency Review Action: https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review. I když nepoužíváš GitHub, princip je přenositelný: změna závislostí má být vidět v review, ne schovaná jako vedlejší efekt velkého refaktoru.
+
+## Nepleť bezpečnostní skóre s rozhodnutím
+
+OpenSSF Scorecard umí automaticky hodnotit bezpečnostní postoje open-source projektů a pomáhá odhadovat riziko podle kontrol typu aktivita projektu, branch protection, dependency update tooling nebo token permissions: https://openssf.org/scorecard/. Je to užitečný signál, ne rozsudek z produktového nebe.
+
+Nízké skóre neznamená automaticky zákaz. Vysoké skóre neznamená automaticky bezpečí. U malé knihovny s minimálním rozsahem může být riziko přijatelné. U balíčku, který běží na serveru, parsuje uživatelský vstup nebo se dostane do každé stránky aplikace, máš být přísnější.
+
+Praktické rozdělení:
+
+- **Nízký dopad:** dev dependency, jednorázový generátor, knihovna bez produkčního runtime dopadu.
+- **Střední dopad:** běžná UI knihovna, interní helper, SDK bez citlivých dat.
+- **Vysoký dopad:** autentizace, platby, parsování souborů, kryptografie, síťové klienty, CI/CD akce, Docker base image.
+
+U vysokého dopadu nestačí „má hodně hvězdiček“. Hvězdičky jsou sociální důkaz, ne kontrola rizika. Internet už viděl horší věci než populární balíček s problémem.
+
+## Frontend závislosti jsou privacy riziko
+
+Frontend balíček není jen technický detail. Pokud přidáš externí skript, font loader, widget nebo analytickou knihovnu, můžeš otevřít cestu k datům návštěvníků. Privacy-first provoz v Evropě má preferovat lokálně hostované assety, minimalizaci externích volání a jasnou kontrolu nad tím, co se načítá do prohlížeče.
+
+U každé frontend závislosti se ptej:
+
+- Načítá se z našeho serveru, nebo z cizí domény?
+- Posílá automaticky telemetrii, crash reporty nebo identifikátory?
+- Vyžaduje cookies, localStorage nebo fingerprintingové signály?
+- Dá se self-hostovat?
+- Je nutná pro hlavní hodnotu produktu, nebo jen pro pohodlí vývoje?
+
+Příklad: ikonovou sadu můžeš buildnout do vlastního bundle. Font můžeš hostovat lokálně. Embeddovaný chat widget můžeš nahradit jednoduchým kontaktním formulářem a SLA očekáváním. Ne všechno musí být „živé“ a připojené na třetí stranu.
+
+## Notice soubor není ostuda
+
+Pokud produkt používá open-source komponenty, měj místo, kde umíš doložit licence a notices. U webu to může být stránka `/licenses`, soubor v dokumentaci nebo interní artefakt pro zákaznické dotazy. Důležité je, aby se generoval z reality, ne ručně jednou za rok při panice.
+
+Minimum pro interní evidenci:
+
+- název balíčku,
+- verze,
+- ekosystém,
+- licence podle SPDX,
+- účel použití,
+- produkční nebo vývojová role,
+- vlastník v týmu,
+- datum poslední kontroly,
+- poznámka k riziku nebo výjimce.
+
+Pro B2B zákazníky to může být i prodejní výhoda. Když se někdo zeptá na open-source komponenty, odpověď „máme přehled a pravidelnou kontrolu“ zní mnohem lépe než „zeptáme se build pipeline, jestli nám něco vyplivne“.
+
+## Checklist: open-source licence bez mlžení
+
+- Každá produkční závislost má zapsaný účel a vlastníka.
+- U kritických balíčků evidujeme SPDX identifikátor licence.
+- Chybějící nebo nejasná licence blokuje produkční použití.
+- Copyleft licence posuzujeme před zařazením do produktu, ne až před releasem.
+- Pull request se změnou závislostí má samostatnou kontrolu.
+- Frontend závislosti kontrolujeme i z pohledu soukromí a externích volání.
+- CI/CD akce, Docker image a SDK bereme jako součást dodavatelského řetězce.
+- Notices a licenční informace umíme vygenerovat nebo dohledat.
+- Výjimky mají vlastníka, důvod a datum revize.
+- Při odstraňování balíčku kontrolujeme i nepoužívané assety, skripty a dokumentaci.
+
+## Mini šablona dependency licence karty
+
+```text
+# Dependency licence karta: [název balíčku]
+
+## Účel
+- Proč balíček používáme:
+- Kde se používá:
+- Produkční / vývojová role:
+
+## Licence
+- SPDX identifikátor:
+- Notice povinnosti:
+- Copyleft dopad:
+- Právní / technická výjimka:
+
+## Riziko
+- Runtime dopad:
+- Přístup k datům:
+- Frontend externí volání:
+- Maintainer signály:
+- Bezpečnostní kontroly:
+
+## Rozhodnutí
+- Povolit / odmítnout / dočasně povolit:
+- Vlastník:
+- Datum revize:
+- Plán náhrady nebo aktualizace:
+```
+
+## Zdroje
+
+- Open Source Initiative — seznam OSI schválených open-source licencí a vysvětlení role licencí: https://opensource.org/licenses
+- SPDX License List — standardizované identifikátory, texty a trvalé URL pro licence a výjimky: https://spdx.org/licenses/
+- GitHub Docs — Dependency Review pro kontrolu změn závislostí v pull requestech: https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review
+- OpenSSF Scorecard — automatizované bezpečnostní signály pro open-source projekty: https://openssf.org/scorecard/
+
 # Pracovní log
+
+- 2026-10-03: Doplněna příloha „Open-source licence a závislosti bez právního mlžení“ s praktickým license gate, rozdělením rizik závislostí, privacy-first kontrolou frontend balíčků, notice evidencí, checklistem, vyplnitelnou dependency licence kartou a ověřenými zdroji OSI, SPDX, GitHub a OpenSSF.
 
 - 2026-10-03: Doplněna příloha „Mazání dat v SaaS bez ghost records a support hororu“ s rozlišením režimů mazání, mapou dopadu, idempotencí, dočištěním vedlejších systémů, zálohami, support procesem, checklistem a vyplnitelnou deletion kartou.
 
