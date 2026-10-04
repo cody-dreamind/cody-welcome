@@ -38179,7 +38179,226 @@ Poučení do procesu:
 - [NIST: Technical Guide to Information Security Testing and Assessment, SP 800-115](https://csrc.nist.gov/pubs/sp/800/115/final)
 - [EUR-Lex: Nařízení GDPR 2016/679, článek 33](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX:32016R0679)
 
+
+# Příloha: Rate limiting a ochrana proti zneužití bez stalkování uživatelů
+
+Rate limiting není jen technická brzda pro boty. Je to produktové pravidlo, které říká: služba má zůstat dostupná pro férové uživatele, rozpočet nemá shořet kvůli jedné chybné integraci a obrana nemá vyrobit větší privacy problém než původní útok. Špatně navržený limit totiž často skončí buď jako měkká dekorace, kterou útočník obejde, nebo jako tvrdý kladivo, které vyhodí ven dobré zákazníky.
+
+Privacy-first přístup znamená: omezuj chování, ne špehuj identitu. Když nepotřebuješ dlouhodobý profil člověka, nevyráběj ho jen proto, že se to hodí do dashboardu. Ve většině malých SaaS scénářů stačí kombinace účtu, workspace, API klíče, endpointu, akce a krátkého časového okna. IP adresa může být podpůrný signál, ale nemá být univerzální identita uživatele vytesaná do kamene.
+
+> Codyho komentář: Rate limit je jako dveřník v klubu. Má zastavit chaos, ne si zakládat tajnou složku na každého, kdo si šel pro vodu.
+
+## Začni tím, co opravdu chráníš
+
+Nejhorší limit je „100 requestů za minutu všude“, protože vypadá rozhodně a přitom skoro nic neříká. Jiný dopad má načtení veřejného článku, jiný odeslání formuláře, jiný export dat, jiný reset hesla a úplně jiný volání drahé AI nebo SMS služby.
+
+Rozděl akce podle chráněného zdroje:
+
+- **Dostupnost**: veřejné endpointy, vyhledávání, přihlášení, API listování.
+- **Peníze**: SMS, e-mailové odeslání, AI inference, fakturační operace, externí API.
+- **Bezpečnost**: login, reset hesla, pozvánky, změna e-mailu, změna práv.
+- **Data**: exporty, hromadné stahování, scraping, reporty s větším rozsahem.
+- **Důvěra**: komentáře, formuláře, uploady, veřejně viditelný obsah.
+
+OWASP API Security Top 10 řadí neomezenou spotřebu zdrojů mezi významná API rizika a zmiňuje limity na čas běhu, paměť, velikost uploadu, počet operací v jednom požadavku, stránkování i rozpočty třetích stran ([OWASP API4:2023 Unrestricted Resource Consumption](https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/)). To je dobrá připomínka: rate limiting není jen počet requestů. Je to ochrana kapacity, peněz a vedlejších efektů.
+
+## Identifikátor vol podle rizika a minimalizace
+
+Rate limit potřebuje klíč, podle kterého počítá. Ten klíč ale nemusí být osobní profil. Vybírej nejméně invazivní identifikátor, který ještě chrání konkrétní scénář.
+
+Praktická hierarchie:
+
+| Scénář | Preferovaný klíč | Poznámka |
+|---|---|---|
+| Přihlášené API | `workspace_id + api_key_id + endpoint` | Férové pro týmy a snadno vysvětlitelné. |
+| Export dat | `workspace_id + user_id + action` | Chrání data i rozpočet, bez sledování napříč webem. |
+| Reset hesla | `account/email hash + action + krátké okno` | Nevracej rozdílné chyby pro existující a neexistující účet. |
+| Veřejný formulář | `form_id + IP prefix/hash + časové okno` | Krátká retence, spam signál, žádné reklamní publikum. |
+| Drahá externí služba | `workspace_id + provider + cost bucket` | Limituj i náklady, nejen requesty. |
+| Veřejné čtení obsahu | `endpoint + anonymní krátké okno` | Často stačí cache, CDN pravidla nebo serverová ochrana. |
+
+IP adresu ber jako provozní signál s krátkou retenční dobou, ne jako marketingové ID. U menších webů často stačí hashovaný nebo zkrácený tvar uložený jen po dobu okna, například pro spam ochranu formuláře. U přihlášených SaaS akcí je obvykle férovější limitovat účet, workspace nebo API klíč.
+
+## Limituj náklady, nejen requesty
+
+Útok nemusí vypadat jako milion requestů. Někdy stačí málo požadavků, které spustí drahou práci: export velkého reportu, opakované generování AI výstupu, masové pozvánky, webhook s retry bouří nebo endpoint, který dovolí stránkování na absurdní velikost.
+
+Minimum pro malý SaaS:
+
+- **Timeout** pro každou dražší operaci.
+- **Maximální velikost uploadu** podle reálného použití.
+- **Maximální počet položek na stránku**, ne „dej mi všechno“.
+- **Denní nebo měsíční rozpočet** pro SMS, AI, e-mail a externí API.
+- **Fronta s limitem souběhu** pro exporty a dávkové úlohy.
+- **Idempotency key** pro platby, objednávky a webhooky, aby retry nevyráběl duplicity.
+
+Dobrý limit má dvě vrstvy: okamžitou brzdu proti špičce a dlouhodobější rozpočtovou brzdu proti pomalému vyžírání. První chrání dostupnost, druhá účet za infrastrukturu. Bez druhé vrstvy může služba technicky přežít a finančně krvácet, což je nepříjemný žánr komedie.
+
+## Odpověď uživateli má být jasná a neukecaná
+
+HTTP status `429 Too Many Requests` je určený pro situaci, kdy klient poslal příliš mnoho požadavků v daném čase; odpověď může přidat `Retry-After`, aby klient věděl, kdy to zkusit znovu ([RFC 6585, sekce 4](https://www.rfc-editor.org/rfc/rfc6585.html#section-4)). Nepotřebuješ v ní vysvětlovat interní detekci ani prozrazovat detaily obrany.
+
+Příklad rozumné API odpovědi:
+
+```http
+HTTP/1.1 429 Too Many Requests
+Content-Type: application/json
+Retry-After: 60
+Cache-Control: no-store
+
+{
+  "error": "rate_limited",
+  "message": "Zkuste požadavek zopakovat za chvíli.",
+  "retry_after_seconds": 60
+}
+```
+
+Pro člověka ve webovém rozhraní piš normálně:
+
+```text
+Tuhle akci teď nejde zopakovat tak rychle za sebou. Zkuste to prosím za minutu. Pokud spěcháte, napište nám na podporu.
+```
+
+Co nedělat:
+
+- Nevypisuj „překročili jste limit pro IP 203.0.113.42 a endpoint /admin/export“.
+- Nepiš rozdílnou odpověď pro existující a neexistující účet u resetu hesla.
+- Nevracej stack trace, interní pravidlo, skóre rizika nebo konfiguraci limitu.
+- Nepoužívej agresivní copy typu „byli jste zablokováni jako podezřelý uživatel“, pokud si nejsi jistý.
+- Nenech `429` cachovat sdílenou cache; u citlivých akcí použij `Cache-Control: no-store`.
+
+## Loguj obranu, ne člověka
+
+Bez logů nepoznáš, jestli limit chrání službu, nebo jen otravuje zákazníky. Ale logy nemají být skládka osobních údajů. OWASP Logging Cheat Sheet doporučuje logovat bezpečnostně relevantní události a současně výslovně upozorňuje, že se do logů obvykle nemají ukládat session identifikátory, access tokeny, hesla, citlivá osobní data, connection stringy, šifrovací klíče a další tajemství ([OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)).
+
+U rate limitu většinou stačí:
+
+```json
+{
+  "event": "rate_limit_hit",
+  "time": "2026-10-04T06:00:00Z",
+  "workspace_id": "ws_123",
+  "actor_type": "authenticated_user",
+  "action": "export_report",
+  "rule_id": "export_hourly_workspace",
+  "window_seconds": 3600,
+  "limit": 3,
+  "decision": "blocked",
+  "request_id": "req_abc"
+}
+```
+
+Co držet mimo běžný log:
+
+- celé request body;
+- obsah formulářů a vyhledávacích dotazů;
+- access tokeny, session cookies a API klíče;
+- plné IP adresy uložené dlouhodobě bez důvodu;
+- e-mailové adresy tam, kde stačí interní ID nebo hash;
+- obsah exportovaných dat;
+- text promptů a AI výstupů, pokud nejsou nutné pro podporu a uživatel o tom neví.
+
+Privacy-first varianta je mít krátký bezpečnostní log pro detekci a oddělený produktový přehled bez osobního obsahu. Bezpečnostní tým potřebuje vědět, že endpoint hoří. Marketing nepotřebuje vědět, kdo přesně ho zapálil.
+
+## Nastav fallback pro falešné pozitivy
+
+Každý limit občas trefí dobrého uživatele. Důležité je, aby měl cestu ven bez ponížení a bez toho, že podpora musí ručně editovat databázi v pátek večer.
+
+Praktické fallbacky:
+
+- U přihlášeného SaaS ukaž „zkuste za X minut“ a nabídni kontakt na podporu.
+- U API vrať stabilní chybový kód, aby integrace mohla retry řídit automaticky.
+- U vyšších tarifů umožni domluvené limity podle smlouvy, ne tajné výjimky.
+- U exportů nabídni frontu, e-mailové upozornění nebo menší rozsah dat.
+- U podezřelých formulářů použij progresivní friction: nejdřív zpomalení, až potom blok.
+- U kritických účtů měj ruční override s expirací a auditním záznamem.
+
+Cílem není, aby limit nikdy nikdo nepocítil. Cílem je, aby férový uživatel pochopil, co se děje, a měl důstojnou cestu dál.
+
+## Testuj limity jako produktovou funkci
+
+Rate limiting patří do testů stejně jako formulář nebo platba. Nestačí věřit konfiguraci v reverse proxy. Ověř, že pravidlo platí pro reálný endpoint, reálný auth režim a reálnou chybovou odpověď.
+
+Testovací scénáře:
+
+- Běžný uživatel se do limitu nevejde omylem při normální práci.
+- Útočník nemůže obejít limit změnou jednoho headeru.
+- Přihlášené a anonymní požadavky mají odlišnou logiku.
+- `429` vrací jasný strojově čitelný kód.
+- `Retry-After` odpovídá skutečnému oknu.
+- Limit se počítá sdíleně napříč instancemi, pokud běží více serverů.
+- Reset hesla neprozradí existenci účtu.
+- Drahá externí služba má vlastní rozpočtovou pojistku.
+- Log neobsahuje tokeny, hesla, celé request body ani citlivý obsah.
+- Podpora ví, jak poznat falešný pozitivní zásah a co s ním dělat.
+
+## Checklist: rate limiting bez stalkování
+
+- [ ] Máme seznam akcí, které chráníme kvůli dostupnosti, penězům, bezpečnosti nebo datům?
+- [ ] Používáme pro každou akci nejméně invazivní identifikátor?
+- [ ] Nebereme IP adresu jako dlouhodobou univerzální identitu?
+- [ ] Má každá drahá operace timeout, limit velikosti a rozpočtovou pojistku?
+- [ ] Vrací API srozumitelný `429` a případně `Retry-After`?
+- [ ] Neprozrazují chybové odpovědi existenci účtu ani interní pravidla obrany?
+- [ ] Logy obsahují rozhodnutí a pravidlo, ale ne tokeny, hesla a citlivý obsah?
+- [ ] Má podpora postup pro falešné pozitivy?
+- [ ] Má ruční výjimka vlastníka, expiraci a auditní záznam?
+- [ ] Testujeme limity v CI, stagingu nebo pravidelném provozním testu?
+
+## Mini šablona rate limit policy karty
+
+```text
+# Rate limit policy karta: [produkt / endpoint / akce]
+
+## Chráněná akce
+Název akce:
+Proč ji limitujeme:
+Dopad zneužití:
+
+## Klíč limitu
+Primární identifikátor:
+Pomocné signály:
+Co záměrně nepoužíváme:
+Retence signálů:
+
+## Limity
+Krátké okno:
+Dlouhé okno:
+Rozpočtový limit:
+Timeout:
+Maximální velikost / počet položek:
+
+## Odpověď
+HTTP status / UI hláška:
+Retry pravidlo:
+Co nesmíme prozradit:
+
+## Logování
+Událost:
+Povolená pole:
+Zakázaná pole:
+Retence logu:
+
+## Fallback
+Kdo řeší falešný pozitiv:
+Jak se uděluje výjimka:
+Kdy výjimka expiruje:
+
+## Testy
+Jak ověříme běžné použití:
+Jak ověříme překročení limitu:
+Jak ověříme privacy-first log:
+```
+
+## Zdroje
+
+- [OWASP API Security Top 10 2023: API4 Unrestricted Resource Consumption](https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/)
+- [RFC 6585: 429 Too Many Requests](https://www.rfc-editor.org/rfc/rfc6585.html#section-4)
+- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+
+
 # Pracovní log
+- 2026-10-04: Doplněna příloha „Rate limiting a ochrana proti zneužití bez stalkování uživatelů“ s návrhem limitů podle chráněného zdroje, minimalizací identifikátorů, rozpočtovými pojistkami, bezpečnou odpovědí `429`, privacy-first logováním, fallbackem pro falešné pozitivy, checklistem, policy šablonou a ověřenými zdroji OWASP a RFC 6585.
 
 - 2026-10-04: Doplněna příloha „Pentest bez checkbox divadla a panického backlogu“ s praktickým scope podle rolí/dat/tenantů, přípravou stagingu, požadavky na testovací plán a report, pravidly pro kritické nálezy, prioritizací, retestem, preventivní smyčkou, checklistem, pentest kartou a ověřenými zdroji OWASP, NIST a GDPR.
 
