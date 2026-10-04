@@ -37770,7 +37770,227 @@ Když řešíš privacy-first provoz v Evropě, nepřidávej CDN jen proto, že 
 - OWASP Web Cache Security Cheat Sheet — bezpečnostní rizika web cache, cache poisoning a pravidla pro citlivý obsah: https://cheatsheetseries.owasp.org/cheatsheets/Web_Cache_Security_Cheat_Sheet.html
 - OWASP Testing Guide: Browser Cache Weaknesses — testování, zda prohlížeč neukládá citlivá data po logoutu: https://wstg.owasp.org/latest/4-Web_Application_Security_Testing/04-Authentication/06-Browser_Cache_Weaknesses/
 
+# Příloha: Vyhledávání na webu a v SaaS bez úniku dotazů
+
+Vyhledávání vypadá jako malá funkce: políčko, lupa, seznam výsledků. Ve skutečnosti je to citlivý komunikační kanál. Lidé do něj píšou názvy klientů, interní kódy, zdravotní potíže, čísla faktur, e-mailové adresy, konkurenční srovnání i věty typu „jak smazat účet“. Pokud vyhledávání bez rozmyslu posíláš do analytiky, logů, externího našeptávače nebo reklamního systému, nevytváříš produktový vhled. Vytváříš datový kompost s právním aroma.
+
+Privacy-first vyhledávání neznamená, že nesmíš měřit nic. Znamená to, že oddělíš tři různé věci: samotné doručení výsledků, zlepšování relevance a produktovou analytiku. Každá má jiný účel, jinou datovou potřebu a jinou retenci. Když je smícháš do jednoho „search eventu“, který obsahuje celý dotaz, URL, uživatele, workspace a IP adresu, máš sice krásně plný dashboard, ale horší provozní hygienu.
+
+> Codyho komentář: Vyhledávací dotaz je často upřímnější než formulář. Člověk do něj napíše, co opravdu hledá, ne co by chtěl vypadat, že hledá. Chovej se k tomu podle toho.
+
+## Začni klasifikací dotazů
+
+Nejdřív si napiš, jaké typy vyhledávání produkt má. Nestačí říct „site search“. Jinak se chová veřejný blog, jinak interní help centrum a úplně jinak SaaS vyhledávání v zákaznických datech.
+
+Praktické rozdělení:
+
+- **Veřejné obsahové vyhledávání** — blog, dokumentace, marketingové stránky, changelog.
+- **Produktové vyhledávání** — projekty, úkoly, faktury, kontakty, soubory nebo záznamy zákazníka.
+- **Admin vyhledávání** — hledání uživatelů, tenantů, plateb, ticketů a provozních incidentů.
+- **Support vyhledávání** — hledání v help centru, makrech, ticketech a interních poznámkách.
+- **Bezpečnostní vyhledávání** — auditní stopy, podezřelé události, přístupy, exporty.
+
+U každého typu si napiš, jestli dotaz může obsahovat osobní údaje, obchodní tajemství nebo bezpečnostní informaci. U veřejného blogu je riziko menší, ale ne nulové. Člověk může do vyhledávání napsat své jméno, e-mail nebo konkrétní problém. U SaaS produktu předpokládej citlivost automaticky.
+
+## Dotaz není automaticky analytický event
+
+Častá chyba: každý search submit se pošle do analytiky jako `search_query` s plným textem dotazu. Marketing má radost, dokud někdo nezjistí, že v dashboardu leží osobní údaje, názvy klientů a interní čísla objednávek.
+
+Lepší model:
+
+- Do produktové analytiky posílej hlavně agregované signály: počet vyhledávání, počet nulových výsledků, kliknutí na výsledek, čas do další akce.
+- Plný dotaz ukládej jen tam, kde je k tomu jasný účel, krátká retence a omezený přístup.
+- Pro zlepšování relevance používej vzorky, anonymizované kategorie nebo ruční review nulových výsledků.
+- Citlivé produktové vyhledávání vůbec neposílej do běžné marketingové analytiky.
+- Interní admin vyhledávání drž odděleně od produktových eventů.
+
+Příklad bezpečnějšího eventu:
+
+```json
+{
+  "event": "search_performed",
+  "scope": "public_docs",
+  "result_count_bucket": "1-10",
+  "query_length_bucket": "11-30",
+  "had_result_click": true
+}
+```
+
+Tohle neřekne, že uživatel hledal „smazání účtu firmy Novak Medical“. Řekne to, že veřejná dokumentace vrací použitelné výsledky. Pro produktové rozhodnutí to často stačí.
+
+## URL parametry nejsou trezor
+
+Vyhledávání přes `?q=dotaz` je pohodlné, sdílení výsledků je jednoduché a pro veřejný obsah to často dává smysl. Ale URL se snadno dostane do historie prohlížeče, serverových logů, refererů, screenshotů, support ticketů i nástrojů třetích stran. MDN ukazuje, že `URLSearchParams` je běžný způsob práce s query parametry v prohlížeči, ale technická pohodlnost neznamená, že každá hodnota do URL patří ([MDN: URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)).
+
+Praktické pravidlo:
+
+- Veřejný blog nebo dokumentace může používat `?q=`, pokud dotazy zbytečně neposíláš dál.
+- SaaS vyhledávání v zákaznických datech raději drž ve stavu aplikace nebo v POST requestu, pokud by dotaz mohl být citlivý.
+- Pokud URL se search parametrem sdílíš, nedávej do ní interní ID, tokeny, e-maily ani filtry s osobními údaji.
+- Při odchodu na externí web nastav rozumnou `Referrer-Policy`, aby se citlivé query parametry neposílaly dál.
+- V logování URL query parametrů měj allowlist, ne „uložíme všechno a pak to nějak promažeme“.
+
+Codyho doporučení: pro veřejné vyhledávání je sdílitelná URL užitečná. Pro interní SaaS data je často lepší nesdílitelný stav, explicitní export výsledků nebo uložený filtr s názvem, který neobsahuje citlivý dotaz.
+
+## Našeptávání a externí search služby ber jako dodavatele dat
+
+Fulltextová služba, vektorové vyhledávání, našeptávač nebo AI odpovídač může výrazně zlepšit použitelnost. Jenže zároveň vidí dotazy a často i indexovaný obsah. To z něj dělá dodavatele, ne jen knihovnu.
+
+Před nasazením si napiš:
+
+- Jaký obsah indexujeme?
+- Jaké dotazy služba uvidí?
+- Posíláme do služby tenant ID, uživatelské ID, e-mail nebo IP adresu?
+- Kde se data zpracují a uloží?
+- Jak dlouho služba drží query logy?
+- Jde query logování vypnout nebo zkrátit?
+- Umíme smazat index pro konkrétního zákazníka?
+- Máme fallback, když search služba vypadne?
+
+Privacy-first varianta pro malý tým: veřejný web a dokumentaci můžeš často zvládnout statickým indexem nebo evropsky provozovanou search službou. Produktové vyhledávání nad zákaznickými daty drž co nejblíž aplikaci a databázi, dokud nemáš silný důvod ho vyvést ven. Komfort našeptávače není omluvenka pro datový výlet přes půl internetu.
+
+## Nulové výsledky jsou produktový signál, ne šmírovací licence
+
+Dotazy bez výsledků jsou cenné. Ukazují chybějící dokumentaci, špatné názvosloví, nepochopený produkt nebo skrytou poptávku. Ale i tady platí: nepotřebuješ automaticky držet kompletní dotaz navždy.
+
+Bezpečnější workflow:
+
+1. Sbírej počet nulových výsledků podle veřejné části webu nebo produktového modulu.
+2. U veřejného obsahu ukládej krátkodobý vzorek dotazů pro redakční review.
+3. U produktových dat dotazy nejdřív normalizuj: malé/velké znaky, odstranění e-mailů, telefonů, čísel faktur a interních ID.
+4. Review dělej ručně v omezeném týmu, ne jako otevřený dashboard pro všechny.
+5. Po zlepšení obsahu nebo synonym vzorek smaž.
+
+Příklad redakčního použití:
+
+```text
+Signál: lidé ve veřejné dokumentaci často hledají „export faktur“ a nenajdou výsledek.
+Akce: vytvořit článek „Jak exportovat faktury do účetnictví“ a přidat synonyma „účetnictví“, „CSV“, „Pohoda“.
+Data: nepotřebujeme vědět, kdo hledal; stačí četnost a veřejný kontext.
+```
+
+Tohle je dobrý kompromis: produkt se učí, ale nedělá z lidí exponáty ve vitríně.
+
+## Loguj chyby, ne obsah člověka
+
+Search endpoint potřebuje provozní logy: chyby, timeouty, pomalé dotazy, selhání indexu, prázdné výsledky, podezřelé vzory. Nepotřebuje automaticky ukládat plný text každého dotazu. OWASP u logování doporučuje promýšlet účel logů, nelogovat zbytečně moc a vylučovat citlivá data jako session ID, access tokeny, hesla, některé osobní údaje nebo platební data ([OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)).
+
+Pro search logy je praktické držet tyto položky:
+
+- čas,
+- typ vyhledávání,
+- výsledek operace,
+- počet výsledků v rozsahu,
+- délku dotazu v rozsahu,
+- dobu odezvy,
+- anonymizovaný nebo interní technický request ID,
+- kód chyby,
+- informaci, jestli šlo o veřejný, přihlášený nebo admin kontext.
+
+Naopak neloguj:
+
+- hesla, tokeny a recovery kódy omylem napsané do vyhledávání,
+- celé e-mailové adresy a telefonní čísla,
+- osobní identifikátory zákazníků,
+- obsah dokumentů a poznámek,
+- celé URL s citlivými query parametry,
+- výsledky vyhledávání, pokud obsahují zákaznická data.
+
+Pokud potřebuješ debugovat konkrétní problém, použij dočasný zvýšený log level s vlastníkem, časovým limitem a maskováním. Debug režim bez data ukončení je jen budoucí incident, který si zatím bere kafe.
+
+## Relevance se dá zlepšovat i bez profilování
+
+Není nutné budovat osobní profil každého uživatele, aby vyhledávání fungovalo. Často pomůže nudnější sada vylepšení:
+
+- synonyma podle slovníku zákazníků,
+- ručně zvýrazněné výsledky pro důležité dotazy,
+- lepší titulky a popisy dokumentačních stránek,
+- oprava interní terminologie,
+- filtrování podle kontextu workspace bez posílání dat mimo systém,
+- audit nulových výsledků jednou měsíčně,
+- jasné prázdné stavy s návrhem dalšího kroku.
+
+Příklad dobrého prázdného stavu:
+
+```text
+Nenašli jsme žádný výsledek. Zkus kratší dotaz nebo otevři přehled exportů. Pokud hledáš konkrétní fakturu, použij číslo faktury v sekci Fakturace, ne v globálním hledání.
+```
+
+Tohle pomáhá uživateli a zároveň ho jemně vede pryč od psaní citlivých detailů do univerzálního pole.
+
+## GDPR principy přelož do produktového návrhu
+
+GDPR v článku 5 pracuje mimo jiné s principem minimalizace údajů a omezení uložení: osobní údaje mají být omezené na nezbytný rozsah pro účel zpracování a uložené jen po nezbytnou dobu ([EUR-Lex: GDPR, článek 5](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX:32016R0679)). U vyhledávání se to dá přeložit velmi prakticky:
+
+- Než uložíš dotaz, napiš účel.
+- Než pošleš dotaz dodavateli, napiš datovou hranici.
+- Než zobrazíš dotazy v dashboardu, napiš role, které je opravdu potřebují.
+- Než nastavíš retenci, napiš datum smazání.
+- Než přidáš AI shrnutí výsledků, napiš, co se posílá do modelu.
+
+Takhle se právo nestane brzdou produktu. Stane se návrhovou kontrolkou. Trochu otravnou, ale levnější než datový úklid po roce provozu.
+
+## Checklist: vyhledávání bez úniku dotazů
+
+- [ ] Máme rozdělené veřejné, produktové, admin a support vyhledávání?
+- [ ] Víme, které typy dotazů mohou obsahovat osobní nebo obchodně citlivá data?
+- [ ] Neposíláme plné dotazy do marketingové analytiky?
+- [ ] Ukládáme nulové výsledky jen tam, kde mají jasný účel a krátkou retenci?
+- [ ] Máme maskování e-mailů, telefonů, tokenů a interních ID v search logách?
+- [ ] Víme, jestli externí search služba ukládá query logy a kde?
+- [ ] Umíme odstranit index nebo search data konkrétního zákazníka?
+- [ ] Neposíláme citlivé search parametry v referreru na externí weby?
+- [ ] Má prázdný stav bezpečné a užitečné doporučení?
+- [ ] Má search funkce vlastníka, monitoring a pravidelnou revizi?
+
+## Mini šablona search policy karty
+
+```text
+# Search policy karta: [web / produkt / modul]
+
+## Rozsah
+Typ vyhledávání:
+Veřejné / přihlášené / admin:
+Prohledávaný obsah:
+Citlivost obsahu:
+
+## Dotazy
+Může dotaz obsahovat osobní údaje:
+Může dotaz obsahovat obchodní tajemství:
+Ukládáme plný dotaz: ano/ne
+Pokud ano, proč:
+Retence dotazů:
+Maskování:
+
+## Analytika
+Měřené eventy:
+Co záměrně neměříme:
+Kdo vidí dashboard:
+Jak řešíme nulové výsledky:
+
+## Dodavatelé
+Search služba:
+Region zpracování:
+Query logy u dodavatele:
+DPA / smluvní dokumenty:
+Exit plán:
+
+## Provoz
+Monitoring:
+Fallback při výpadku:
+Datum poslední revize:
+Vlastník:
+```
+
+## Zdroje
+
+- [MDN: URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)
+- [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- [EUR-Lex: Nařízení GDPR 2016/679, článek 5](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX:32016R0679)
+
 # Pracovní log
+
+- 2026-10-04: Doplněna příloha „Vyhledávání na webu a v SaaS bez úniku dotazů“ s klasifikací search scénářů, pravidly pro analytiku, URL parametry, externí search služby, nulové výsledky, logování, relevance bez profilování, checklistem, search policy kartou a ověřenými zdroji MDN, OWASP a EUR-Lex.
 
 - 2026-10-04: Doplněna příloha „Cache strategie bez starých dat a úniku citlivostí“ s klasifikací odpovědí, pravidly pro verzované assety, HTML, API, personalizovaný obsah a service worker, privacy-first checklistem, cache policy kartou a ověřenými zdroji MDN, RFC 9111 a OWASP.
 
