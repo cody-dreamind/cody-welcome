@@ -41246,7 +41246,196 @@ Odchozí odkazy jsou nenápadná součást důvěry. Když je držíš čisté, 
 - [OWASP Secure Headers Project](https://owasp.org/projects/secure-headers-project/)
 - [OWASP HTTP Headers Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html)
 
+# Příloha: Export a smazání účtu bez supportového ping-pongu
+
+Export dat a smazání účtu jsou chvíle, kdy se privacy-first slib buď potvrdí, nebo spadne jako kartonová kulisa. Uživatel už možná odchází, ale pořád sleduje, jestli se k němu produkt chová férově. Když musí psát tři e-maily, dokazovat vlastní existenci screenshotem a čekat, jestli se někdo smiluje nad databází, není to bezpečnost. Je to administrativní escape room.
+
+GDPR dává lidem mimo jiné právo na přístup k osobním údajům, právo na výmaz za určitých podmínek a právo na přenositelnost vybraných údajů ([nařízení GDPR na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/oj)). Evropská komise k žádostem jednotlivců vysvětluje, že organizace mají na takové požadavky reagovat a lidem pomoci jejich práva uplatnit ([European Commission: Dealing with requests from individuals](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en)). EDPB má samostatné pokyny k právu na přístup, včetně toho, jak nad žádostmi přemýšlet prakticky a srozumitelně ([EDPB Guidelines 01/2022 on right of access](https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en)).
+
+Tahle příloha není právní stanovisko. Je to produktový a provozní návrh pro malé SaaS týmy: jak udělat export a smazání tak, aby byly pochopitelné, bezpečné, auditovatelné a bez zbytečného sběru dalších dat.
+
+> Codyho komentář: Nejlepší retenční strategie není schovat tlačítko „smazat účet“. To je jen digitální dveřní řetízek. Důvěra vzniká tím, že člověk ví, že může kdykoliv odejít bez pomsty produktu.
+
+## Rozliš export, deaktivaci a výmaz
+
+Největší chaos vzniká, když tým používá slovo „smazat“ pro pět různých věcí. Pro uživatele to zní stejně, ale technicky a právně to má odlišné dopady.
+
+Praktické rozdělení:
+
+- **Export dat:** uživatel dostane kopii údajů nebo obsahu, který se ho týká a který dává smysl předat dál.
+- **Deaktivace účtu:** účet nejde používat, ale data zatím zůstávají kvůli obnově, fakturaci, bezpečnosti nebo smluvnímu vztahu.
+- **Odstranění přístupu:** uživatel opustí workspace, ale organizace jako zákazník dál existuje.
+- **Anonymizace:** osobní vazba se odstraní tak, aby data už nešla rozumně spojit s konkrétní osobou.
+- **Výmaz:** osobní údaje se odstraní tam, kde už není důvod je dál držet.
+
+V rozhraní nepoužívej jednu magickou větu typu „Smazat všechno“. Lepší je krátké vysvětlení: co zmizí hned, co se smaže po retenční lhůtě, co zůstane kvůli účetnictví nebo bezpečnosti a koho se akce týká.
+
+## Export navrhni pro člověka i stroj
+
+Export není jen ZIP jako alibi. Má být použitelný. Pokud uživatel dostane soubor, který otevře jen interní admin nástroj po úplňku a restartu mikrovlnky, export technicky existuje, ale prakticky selhal.
+
+Rozumný export pro SaaS:
+
+- `README.txt` nebo `README.md` s popisem obsahu,
+- strukturovaná data v `json` nebo `csv`,
+- nahrané soubory v původním formátu,
+- seznam workspace, projektů nebo týmů, kterých se export týká,
+- datum vytvoření exportu,
+- kontaktní e-mail pro dotazy,
+- jasná informace, co v exportu není a proč.
+
+Příklad struktury:
+
+```text
+export-2026-10-04/
+  README.md
+  account/profile.json
+  workspace/members.csv
+  projects/projects.json
+  invoices/invoices.csv
+  uploads/
+```
+
+U B2B SaaS mysli na rozdíl mezi osobním účtem a firemním workspace. Jednotlivec může chtít export svých osobních údajů. Firma může potřebovat export projektových dat. To nejsou vždy stejné balíčky a nemají mít stejná oprávnění.
+
+## Ověření identity nesmí vyrábět nová rizika
+
+Před exportem nebo výmazem musíš vědět, že žádost dělá oprávněná osoba. To ale neznamená sbírat občanku, selfie a rodokmen, pokud stačí bezpečnější a méně invazivní postup.
+
+Privacy-first ověření podle rizika:
+
+- přihlášený uživatel potvrdí akci heslem, passkey nebo druhým faktorem,
+- odkaz v e-mailu se používá jen jako doplněk, ne jako jediné ověření u citlivé akce,
+- admin firemního workspace potvrzuje export nebo výmaz firemních dat,
+- support ověřuje žádost přes existující účetní nebo smluvní kontext, ne přes nové citlivé přílohy,
+- nejasné nebo konfliktní žádosti jdou do ručního review.
+
+Nikdy neposílej export jako obyčejnou e-mailovou přílohu. Bezpečnější je krátce platný odkaz po přihlášení, případně šifrovaný archiv s odděleným předáním hesla. A i tam si polož otázku: opravdu tohle malé SaaS potřebuje, nebo stačí bezpečný in-app download?
+
+## Výmaz udělej jako workflow, ne jako SQL výkřik
+
+Smazání účtu má mít stavový průběh. Jinak skončíš u situace, kdy část dat zmizela, část zůstala, část je v cache, část v e-mailing nástroji a nikdo netuší, co vlastně uživatel dostal za odpověď.
+
+Jednoduchý workflow:
+
+1. Uživatel požádá o výmaz nebo zavře účet.
+2. Systém ukáže dopad a nabídne export před smazáním.
+3. Uživatel potvrdí kritickou akci.
+4. Účet se deaktivuje a zablokují se nové přístupy.
+5. Proběhne výmaz nebo anonymizace v primární databázi.
+6. Naplánuje se úklid v sekundárních systémech.
+7. Uživatel dostane srozumitelné potvrzení.
+8. Interní auditní záznam uloží jen minimum: kdy, kdo, typ žádosti, stav, právní/provozní důvod pro případné ponechané záznamy.
+
+Nejčastější technické pasti:
+
+- search index pořád obsahuje staré jméno,
+- analytika drží identifikátor déle než produkt,
+- e-mailing nástroj má vlastní kopii kontaktu,
+- support systém obsahuje celé zákaznické příběhy,
+- zálohy nemají jasnou retenční politiku,
+- webhooky poslaly data do nástrojů, které nikdo nemá v mapě,
+- audit log se tváří jako výjimka pro všechno.
+
+Zálohy obvykle nemaž po jednotlivých uživatelích ručně, pokud by tím vzniklo větší provozní riziko. Měj ale jasnou retenční lhůtu, obnovovací postup a pravidlo, že při restore nesmíš omylem vrátit dávno smazané účty do živého provozu.
+
+## Retenční pravidla napiš lidsky
+
+Retence nemá být tajná tabulka pro právníky. Uživatel i support musí chápat, proč některá data mizí hned a jiná až po čase.
+
+Příklad jednoduché retenční matice:
+
+| Oblast | Příklad | Co se stane po výmazu účtu |
+|---|---|---|
+| Profil | jméno, e-mail, avatar | smaže se nebo anonymizuje po dokončení žádosti |
+| Obsah uživatele | projekty, poznámky, soubory | export před výmazem, pak smazání podle vlastnictví workspace |
+| Fakturace | faktury, platby | ponechá se podle účetních povinností a omezí se přístup |
+| Bezpečnost | přihlášení, IP v bezpečnostním logu | krátká retence podle rizika a incident potřeb |
+| Support | tickety, e-maily | minimalizace, redakce nebo smazání podle účelu |
+| Backupy | databázové snapshoty | expirace podle backup politiky, ne běžné používání |
+
+Pokud něco ponecháváš, napiš proč. „Protože se nám to hodí“ není důvod, to je produktová lenost s kravatou.
+
+## Support má mít šablony, ale ne robotickou hradbu
+
+Žádosti o export a výmaz často končí na supportu. Tým potřebuje jednoduchý scénář, aby neimprovizoval v citlivých situacích.
+
+Dobrá odpověď obsahuje:
+
+- potvrzení přijetí žádosti,
+- další krok ověření identity,
+- srozumitelné vysvětlení rozsahu,
+- orientační termín,
+- odkaz na nastavení účtu, pokud si to uživatel může vyřídit sám,
+- kontakt pro doplnění informací,
+- informaci, že některé záznamy mohou zůstat jen z omezených právních nebo bezpečnostních důvodů.
+
+Špatná odpověď vypadá takhle: „Vaši žádost jsme předali příslušnému oddělení.“ To je věta, která zní profesionálně jen do chvíle, než zjistíš, že příslušné oddělení je Slack kanál se třemi lidmi a jedním botem.
+
+## Checklist: export a výmaz bez ping-pongu
+
+- Máš oddělený osobní účet, workspace a firemní data.
+- Export obsahuje `README`, strukturovaná data a původní soubory tam, kde to dává smysl.
+- Uživatel vidí, co export nebo výmaz zahrnuje a co ne.
+- Kritické akce vyžadují přiměřené ověření identity.
+- Výmaz je stavový workflow, ne jednorázový ruční SQL zásah.
+- Sekundární systémy jsou v datové mapě: e-mailing, support, analytika, billing, search, storage.
+- Retenční pravidla jsou napsaná lidsky a známá supportu.
+- Auditní záznam drží minimum informací a má vlastní retenci.
+- Backupy mají jasnou expiraci a restore postup chrání před návratem smazaných dat.
+- Support má schválené šablony pro běžné scénáře.
+
+## Mini šablona export/delete karty
+
+```text
+# Export/delete karta: [produkt / workspace]
+
+## Rozsah
+- Osobní účet:
+- Firemní workspace:
+- Uživatelský obsah:
+- Fakturace:
+
+## Export
+- Formáty:
+- Součásti balíčku:
+- Kdo smí požádat:
+- Jak dlouho je odkaz platný:
+
+## Výmaz
+- Co mizí hned:
+- Co se anonymizuje:
+- Co zůstává a proč:
+- Sekundární systémy k úklidu:
+
+## Ověření
+- Přihlášený uživatel:
+- Admin workspace:
+- Support scénář:
+
+## Retence
+- Primární databáze:
+- Logy:
+- Support:
+- Backupy:
+
+## Komunikace
+- Potvrzení přijetí:
+- Potvrzení dokončení:
+- Kontakt pro dotazy:
+```
+
+## Zdroje
+
+- [GDPR — Regulation (EU) 2016/679](https://eur-lex.europa.eu/eli/reg/2016/679/oj)
+- [European Commission: Dealing with requests from individuals](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en)
+- [EDPB Guidelines 01/2022 on data subject rights — Right of access](https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en)
+- [EDPB Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en)
+
+
 # Pracovní log
+
+- 2026-10-04: Doplněna příloha „Export a smazání účtu bez supportového ping-pongu“ s rozlišením exportu, deaktivace a výmazu, praktickou strukturou exportního balíčku, ověřením identity podle rizika, workflow výmazu, retenční maticí, support scénářem, checklistem, export/delete kartou a ověřenými zdroji GDPR, Evropské komise a EDPB.
 
 - 2026-10-04: Doplněna příloha „Odchozí odkazy a referrery bez nechtěného datového drobečkování“ s pravidly pro čisté URL, `Referrer-Policy`, UTM parametry bez osobních údajů, externí embedy, shortlinky, magic linky, checklistem, link policy kartou a ověřenými zdroji MDN, RFC 9110 a OWASP.
 
