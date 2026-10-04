@@ -40502,8 +40502,198 @@ Datum další revize:
 - Yahoo Sender Hub: Sender Best Practices — https://senders.yahooinc.com/best-practices/
 
 
+
+# Příloha: Beta program a early access bez datového chaosu
+
+Beta program je most mezi interním vývojem a plným spuštěním. Pomáhá ověřit, jestli nová funkce řeší skutečnou práci zákazníka, jestli jí lidé rozumí a kde se produkt rozbije mimo sterilní testovací prostředí. Dobře vedená beta šetří čas, reputaci i rozpočet. Špatně vedená beta je jen veřejné QA s marketingovým nátěrem.
+
+Největší chyba je splést si early access s volnou vstupenkou ke sledování lidí. Ano, potřebuješ zpětnou vazbu. Ano, potřebuješ provozní signály. Ale nepotřebuješ automaticky nahrávat relace, ukládat obsah práce zákazníků nebo lepit do produktu další tři analytické knihovny jen proto, že „teď testujeme“. Privacy-first beta má jasný účel, omezený rozsah, férové pozvání, bezpečný fallback a předem domluvený konec.
+
+> Codyho komentář: Beta není kouzelná formulka, která z rozpracované funkce udělá strategii. Když nevíš, co chceš ověřit, beta ti nedá odpověď. Jen vyrobí víc názorů v dražším prostředí.
+
+## Nejdřív napiš hypotézu
+
+Beta program nezačínej seznamem lidí, kterým „to pošleme“. Začni jednou pracovní hypotézou.
+
+Dobré hypotézy:
+
+- Účetní tým zvládne nový export faktur bez ruční úpravy v Excelu.
+- Agentura dokáže pozvat klienta do projektu bez vysvětlovacího callu.
+- Administrátor pochopí nové nastavení oprávnění z textu v rozhraní.
+- Nový onboarding zkrátí čas k první hodnotné akci u B2B účtu.
+
+Slabé hypotézy:
+
+- Uvidíme, jestli se jim to líbí.
+- Získáme feedback.
+- Otestujeme novou UI verzi.
+- Zvýšíme engagement.
+
+Praktické pravidlo: hypotéza musí jít ověřit pozorovatelným výsledkem. Ne pocitem týmu, že „to vypadá moderněji“. Pokud výsledek neumíš popsat, neumíš ani rozhodnout, jestli beta uspěla.
+
+## Vyber účastníky podle práce, ne podle hlasitosti
+
+Do bety často skončí nejhlasitější zákazníci nebo lidé, kteří mají nejbližší vztah se sales týmem. To není špatně, ale je to zkreslené. Hlasitý zákazník umí dodat cenný insight, jen nemusí reprezentovat běžný provoz.
+
+Lepší výběr kombinuje několik vrstev:
+
+| Vrstva | Proč ji chceš | Na co si dát pozor |
+| --- | --- | --- |
+| Interní tým | rychlé chyby a základní UX | interní lidé znají kontext až moc dobře |
+| Přátelský zákazník | otevřená zpětná vazba | může odpouštět víc než běžný trh |
+| Reálný segment | ověření práce cílové skupiny | potřebuje jasné očekávání a podporu |
+| Rizikový okraj | kontrola limitů a neobvyklých dat | nepouštět bez fallbacku |
+
+U B2B SaaS vybírej spíš celé workspace nebo týmy než náhodné jednotlivce. Pokud nová funkce mění společné workflow, izolovaný uživatel v betě často způsobí zmatek: jeden člověk vidí novou realitu, zbytek týmu starou mapu.
+
+## Pozvání musí být férové a konkrétní
+
+Beta pozvánka není marketingová mlha. Člověk má vědět, do čeho jde, co získá, co může být nedokonalé a jak z bety odejde.
+
+Dobrá pozvánka obsahuje:
+
+- co přesně se testuje,
+- pro koho je beta vhodná,
+- co se může změnit nebo rozbít,
+- jaký typ zpětné vazby chceš,
+- jaká data budeš při betě sledovat,
+- jak dlouho beta poběží,
+- jak se dá beta vypnout,
+- kdo je kontaktní osoba.
+
+Příklad krátkého textu:
+
+```text
+Spouštíme early access k novému exportu faktur. Hodí se pro týmy, které měsíčně připravují podklady pro účetní a dnes je ručně upravují v tabulce. Během bety budeme sledovat agregovaně počet dokončených exportů, technické chyby a dobrovolnou zpětnou vazbu. Nebudeme ukládat obsah faktur mimo běžné produktové zpracování. Beta poběží čtyři týdny a můžete ji kdykoli vypnout v nastavení účtu nebo nám napsat.
+```
+
+Tohle zní méně magicky než „exkluzivní přístup k revoluční novince“. A právě proto je to důvěryhodnější.
+
+## Zpětnou vazbu sbírej ve třech kanálech
+
+Jeden formulář po skončení bety nestačí. Lidé zapomenou detaily, přepíšou emoce do obecné známky a tým z toho vyrobí roadmapovou astrologii.
+
+Použij tři vrstvy:
+
+1. **Krátký signál v produktu** — „Povedlo se?“ / „Co chybělo?“ u konkrétní akce.
+2. **Strukturovaný rozhovor** — 20 minut s uživatelem nebo administrátorem po reálném použití.
+3. **Provozní metriky** — dokončení workflow, chybovost, latence, počet opakovaných pokusů, support tickety.
+
+Privacy-first pravidlo: zpětná vazba má popisovat problém a situaci, ne zbytečně kopírovat zákaznická data. Když zákazník nahlásí chybu v exportu, často stačí typ exportu, čas, ID běhu a ručně anonymizovaný popis. Není nutné přikládat kompletní fakturační data do ticketu, protože „se to možná bude hodit“. Nebude. Bude to strašit.
+
+## Měření drž blízko rozhodnutí
+
+Před spuštěním bety napiš rozhodovací tabulku. Každá metrika má odpovídat na otázku, ne existovat jen proto, že ji nástroj umí poslat.
+
+Příklad:
+
+| Rozhodnutí | Signál | Bezpečná forma měření |
+| --- | --- | --- |
+| Máme pokračovat v rolloutu? | dokončení klíčové akce | agregovaný počet úspěch/chyba podle týdne |
+| Je UX srozumitelné? | opakované pokusy a dotazy | počet support ticketů k tématu + rozhovory |
+| Je funkce provozně bezpečná? | chybovost a latence | technické logy bez obsahu zákaznické práce |
+| Má funkce obchodní smysl? | dobrovolný zájem o plné zapnutí | počet týmů žádajících pokračování |
+
+Vyhni se metrikám, které vypadají přesně, ale nevedou k rozhodnutí: čas strávený v obrazovce, počet pohybů myší, detailní heatmapa každého pole, sledování jednotlivce napříč produktem. Pro mnoho B2B funkcí je důležitější, jestli práce proběhla správně a bezpečně, než jestli uživatel klikl „dostatečně zaujatě“.
+
+## Beta musí mít fallback
+
+Když beta selže, zákazník má mít cestu zpět. Ne slib „podíváme se na to“, ale konkrétní fallback.
+
+Možnosti fallbacku:
+
+- vypnutí funkce pro workspace,
+- návrat na staré workflow,
+- ruční zpracování týmem podpory,
+- export dat ve starém formátu,
+- dočasné omezení jen na interní použití,
+- prodloužení souběhu staré a nové varianty.
+
+U citlivých částí produktu si napiš rollback ještě před pozvánkou. Fakturace, oprávnění, exporty, importy, mazání dat a automatizace nejsou místa pro improvizaci. Když něco zasahuje do peněz, přístupů nebo zákaznických dat, beta musí mít silnější brzdy než změna barvy tlačítka.
+
+## Uzavření bety je produktové rozhodnutí
+
+Beta nemá končit tím, že všichni zapomenou vypnout štítek „early access“. Na konci musí vzniknout rozhodnutí:
+
+- spustit pro všechny,
+- spustit pro vybraný segment,
+- prodloužit betu s jasným důvodem,
+- vrátit funkci do vývoje,
+- ukončit a vysvětlit proč.
+
+K rozhodnutí přidej krátké shrnutí pro účastníky. Nemusí to být román. Stačí: co jsme zjistili, co se změní, co zůstává, co se smaže a kde je další krok. Pokud lidé věnovali čas zpětné vazbě, zaslouží si vidět, že neskončila v produktové černé díře.
+
+Privacy-first úklid po betě:
+
+- smaž nebo anonymizuj dočasné feedback exporty,
+- zkontroluj retenci technických logů,
+- vypni dočasné eventy,
+- odstraň interní allowlisty, pokud už nejsou potřeba,
+- aktualizuj dokumentaci a help centrum,
+- zapiš rozhodnutí do changelogu nebo pracovního logu.
+
+## Checklist: beta program bez datového chaosu
+
+- [ ] Má beta jednu jasnou hypotézu?
+- [ ] Víme, podle čeho rozhodneme o pokračování?
+- [ ] Jsou účastníci vybraní podle reálné práce, ne jen podle hlasitosti?
+- [ ] Obsahuje pozvánka rozsah, rizika, data, délku a možnost odchodu?
+- [ ] Sbíráme zpětnou vazbu bez kopírování zákaznických dat?
+- [ ] Máme agregované metriky navázané na konkrétní rozhodnutí?
+- [ ] Existuje fallback pro rizikové workflow?
+- [ ] Ví support a sales, kdo je v betě a co mu slíbit?
+- [ ] Má beta datum ukončení nebo revize?
+- [ ] Proběhne po betě úklid dočasných dat, eventů a allowlistů?
+
+## Mini šablona beta karty
+
+```text
+# Beta karta: [funkce / workflow]
+
+## Hypotéza
+Co ověřujeme:
+Pro koho:
+Jak poznáme úspěch:
+Jak poznáme stop stav:
+
+## Účastníci
+Segment:
+Počet týmů / účtů:
+Kritéria zařazení:
+Kritéria vyřazení:
+Kontaktní osoba:
+
+## Data a feedback
+Jakou zpětnou vazbu sbíráme:
+Jaké provozní metriky sledujeme:
+Jaké osobní údaje záměrně nesbíráme:
+Retence dočasných dat:
+
+## Provoz
+Datum spuštění:
+Datum revize:
+Fallback:
+Support postup:
+Komunikační text:
+
+## Rozhodnutí po betě
+Výsledek:
+Další krok:
+Co se smaže / vypne:
+Co se doplní do dokumentace:
+```
+
+## Zdroje
+
+- GDPR, článek 5: zásady zpracování osobních údajů — https://gdpr-info.eu/art-5-gdpr/
+- EDPB: Guidelines 05/2020 on consent under Regulation 2016/679 — https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
+- OWASP Cheat Sheet Series: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OpenFeature: Specification — https://openfeature.dev/specification/
+
+
 # Pracovní log
 
+- 2026-10-04: Doplněna příloha „Beta program a early access bez datového chaosu“ s praktickým nastavením hypotézy, výběrem účastníků, férovou pozvánkou, bezpečným sběrem zpětné vazby, měřením navázaným na rozhodnutí, fallbackem, uzavřením bety, checklistem, beta kartou a ověřenými zdroji GDPR, EDPB, OWASP a OpenFeature.
 - 2026-10-04: Doplněna příloha „Doménová a e-mailová hygiena bez doručovací loterie“ s rozdělením pošty podle účelu, SPF/DKIM/DMARC postupem, bezpečným zaváděním DMARC, subdoménami, férovým odhlašováním, minimalizací e-mailové telemetrie, DNS deployment rutinou, checklistem, doménovou kartou a ověřenými zdroji RFC Editoru, Google a Yahoo.
 - 2026-10-04: Doplněna příloha „Tajemství, API klíče a přístupy bez sdíleného šuplíku“ s praktickým rozdělením tajemství podle rizika, pravidly pro repozitář a prostředí, scope/expiraci, bezpečné předávání, redakci logů, rotaci bez výpadku, checklistem, secret kartou a ověřenými zdroji OWASP a Twelve-Factor App.
 - 2026-10-04: Doplněna příloha „Nákladové limity pro SaaS bez datového smogu“ s mapou nákladově významných workflow, agregovanými metrikami bez profilování osob, limity pro trial/free tarify, alerty, produktovými optimalizacemi, férovou zákaznickou komunikací, checklistem, cost guardrail kartou a ověřenými zdroji FinOps Foundation a OpenTelemetry.
