@@ -37092,160 +37092,151 @@ Datum kontroly:
 - ENISA: [Good Practice Guide for Incident Management](https://www.enisa.europa.eu/sites/default/files/publications/Incident_Management_guide.pdf)
 
 
-# Příloha: Export a smazání účtu bez podpůrného pekla
+# Příloha: Supportní runbook pro žádosti o data bez chaosu
 
-U každého SaaS jednou přijde zákazník, který chce odejít, exportovat data, převést účet jinam nebo smazat zbytek stop. Není to selhání produktu. Je to test důvěry. Pokud se z odchodu stane temná ulička s e-mailem na podporu, ručním ověřováním, třídenním tichem a neurčitým „předáme na technické oddělení“, zákazník si zapamatuje hlavně to, že se k datům dostal hůř než k předplatnému.
+Starší příloha o exportu a smazání účtu řeší produktový návrh exit flow. Tahle část jde o krok níž: co má dělat podpora, když přijde konkrétní žádost člověka o přístup, opravu, export, omezení zpracování nebo výmaz osobních údajů. Právě tady se často ukáže, jestli je privacy-first jen hezká věta na webu, nebo normální provozní disciplína.
 
-Privacy-first SaaS má mít odchod navržený stejně pečlivě jako onboarding. Ne proto, že bys chtěl lidi vyhazovat, ale protože férový exit snižuje právní riziko, podporu, chaos v databázi i reputační škody. Evropský provoz není jen o tom, kde běží server. Je i o tom, jestli uživatel rozumí, co se s jeho daty děje, když už službu nechce používat.
+Cíl není udělat z podpory právní oddělení. Cíl je mít klidný, opakovatelný postup, který rychle rozliší typ žádosti, ověří oprávnění, zapojí správného vlastníka a nevyrobí další únik dat tím, že někdo pošle export špatné osobě. Evropská komise popisuje práva jednotlivců podle GDPR včetně práva na přístup, opravu, výmaz, omezení zpracování, přenositelnost a námitku. EDPB k právu na přístup i přenositelnosti vydává samostatné pokyny. Praktický závěr pro malý SaaS: support musí vědět, co eskalovat, co může potvrdit sám a co nikdy nemá řešit improvizovaným SQL dotazem.
 
-Evropská komise popisuje práva jednotlivců mimo jiné jako právo na přístup, opravu, výmaz, omezení zpracování, přenositelnost, námitku a informace o automatizovaném rozhodování. EDPB má samostatné pokyny k právu na přístup a k přenositelnosti dat. Pro SaaS z toho plyne jednoduchý produktový závěr: export a smazání účtu nejsou „nice to have“ tlačítka někde v backlogu. Jsou součást důvěryhodného provozu.
+> Codyho komentář: Nejhorší odpověď na žádost o data není „ne“. Nejhorší je „asi jo, pošlete nám ještě jednou e-mail z jiné adresy a my to někam přepošleme“. To je privacy-first ve stylu kancelářského ping-pongu.
 
-> Codyho komentář: Firma, která umí zákazníka důstojně pustit pryč, obvykle působí důvěryhodněji než firma, která ho drží ve sklepě retencí a doufá, že si nevšimne dveří.
+## Triage začni typem žádosti
 
-## Rozděl čtyři různé požadavky
+První odpověď podpory nemá slibovat výsledek. Má potvrdit přijetí a zařadit požadavek. V ticketu proto nepoužívej volné štítky typu „GDPR něco“. Použij omezený seznam typů, aby bylo jasné, kdo rozhoduje a jaké systémy se kontrolují.
 
-Největší bordel vzniká, když produkt míchá dohromady export, deaktivaci, zrušení placení a výmaz osobních údajů. Každý krok má jiný dopad a jiné riziko.
+Praktické typy:
 
-- **Export dat:** uživatel chce kopii dat v rozumném formátu.
-- **Zrušení předplatného:** uživatel nechce další fakturaci, ale účet může dál existovat.
-- **Deaktivace účtu:** účet se už nepoužívá, ale data mohou zůstat kvůli smlouvě, účetnictví nebo bezpečnosti.
-- **Výmaz osobních údajů:** uživatel žádá odstranění dat, která už není potřeba držet.
+- **Přístup k údajům:** člověk chce vědět, jaké osobní údaje o něm držíš.
+- **Oprava údajů:** člověk chce změnit nepřesný e-mail, jméno, fakturační kontakt nebo profil.
+- **Přenositelnost/export:** člověk chce data v použitelném strojově čitelném formátu.
+- **Výmaz:** člověk chce odstranit osobní údaje, které už není nutné držet.
+- **Omezení zpracování:** člověk nechce, aby se s částí údajů dál aktivně pracovalo, dokud se věc vyjasní.
+- **Námitka:** člověk nesouhlasí s konkrétním zpracováním, typicky marketingem nebo profilací.
+- **Odhlášení z komunikace:** často nejde o plnou GDPR žádost, ale musí fungovat rychle a bez debat.
 
-V UI to nepiš jako jednu velkou červenou akci „Smazat vše“. Dej tomu jasný průvodce: nejdřív vysvětli dopad, nabídni export, ukaž co se smaže hned, co zůstane kvůli zákonné povinnosti nebo oprávněnému zájmu, a kdy se data odstraní ze záloh nebo přestanou být běžně obnovitelná.
+Každý typ má mít vlastní interní checklist. Jinak podpora začne každou žádost řešit jako unikátní sněhovou vločku, což je roztomilé jen do prvního incidentu.
 
-Praktický příklad pro B2B SaaS:
+## Ověření nesmí být divadlo ani slabina
 
-```text
-1. Zrušit obnovu předplatného od dalšího období.
-2. Stáhnout export projektu ve formátu JSON/CSV.
-3. Deaktivovat přístup uživatelů.
-4. Požádat o výmaz osobních údajů, které už nemusíme držet.
-```
+Ověření identity má chránit žadatele, ne ho trestat. Pokud člověk píše z e-mailu, který je přihlášený k účtu, můžeš některé kroky zjednodušit. Pokud píše z jiné adresy, žádá za firemní workspace nebo chce export citlivých dat, potřebuješ silnější ověření.
 
-Tohle je nudnější než dramatické retenční okno s plačícím maskotem. Taky je to dospělejší.
+Doporučený postup:
 
-## Export navrhni pro budoucí migraci
+- Pokud je uživatel přihlášený, směruj ho na bezpečnou akci v aplikaci.
+- Pokud píše e-mailem, porovnej adresu s účtem a rolí ve workspace.
+- U B2B workspace ověř, jestli žádá za sebe, za firmu nebo za konkrétního uživatele.
+- U destruktivních akcí vyžaduj potvrzení přes existující přihlášený účet nebo admina workspace.
+- Nevyžaduj zbytečné dokumenty totožnosti, pokud existuje méně invazivní ověření.
+- Neukládej kopie dokladů, screenshotů občanky nebo podobné výbušniny, pokud k tomu nemáš opravdu dobrý důvod a proces.
 
-Export není screenshot databáze. Dobrý export má být použitelný i za rok, kdy si ho zákazník otevře mimo tvůj produkt. Nemusí pokrýt každé interní technické pole, ale musí být srozumitelný, čitelný a stabilní.
+Privacy-first ověření je úměrné riziku. Změna překlepu ve jméně není stejné riziko jako export celého workspace. Podpora potřebuje tabulku rozhodnutí, ne hrdinský instinkt.
 
-Doporučené minimum:
+## Odpověď má mít termín, vlastníka a hranice
 
-- **CSV** pro tabulková data, kontakty, seznamy, objednávky a logicky ploché přehledy.
-- **JSON** pro strukturovaná produktová data, projekty, nastavení a vazby mezi entitami.
-- **ZIP balík** pro kombinaci dat, příloh a souboru `README.md`.
-- **Datový slovník** s vysvětlením sloupců, časových pásem, ID a stavů.
-- **Exportní protokol** s datem, rozsahem, účtem, kdo export spustil a jak dlouho bude odkaz platný.
+Po přijetí žádosti pošli krátké potvrzení. Nemusí znít jako právní dopis ze suterénu banky. Stačí jasně říct, co se bude dít dál.
 
-Nepřidávej do exportu tajné technické věci jen proto, že jsou v databázi po ruce. API tokeny, interní poznámky podpory, bezpečnostní logy jiných uživatelů nebo údaje třetích stran patří do zvláštního posouzení. Export má pomoci zákazníkovi, ne vyrobit nový únik dat v pěkném zipu.
-
-Bezpečnostní detail, který se často podcení: exportní soubor je citlivý artefakt. Odkaz musí být časově omezený, ideálně chráněný opětovným přihlášením nebo potvrzením e-mailem, a po stažení by měl jít ručně zneplatnit. Posílat celý export jako přílohu e-mailu je digitální varianta „nechal jsem šanon na lavičce“.
-
-## Smazání účtu není `DELETE FROM users`
-
-Výmaz účtu potřebuje datovou mapu. Pokud nevíš, kde všude osobní údaje žijí, tlačítko „smazat účet“ je jen dekorace s adrenalinovým pozadím.
-
-Pro každou kategorii dat si napiš:
-
-- proč ji zpracováváš,
-- na jakém právním důvodu stojí,
-- kdo je vlastníkem rozhodnutí,
-- kdy se maže,
-- jestli je v zálohách,
-- jestli se propisuje do externích nástrojů,
-- jak se ověřuje dokončení výmazu.
-
-Typický SaaS bude mít minimálně profil účtu, fakturační údaje, produktová data, soubory, auditní logy, e-mailovou komunikaci, support tickety, transakční e-maily, analytické agregace a zálohy. Ne všechno se maže stejně rychle a ne všechno se má mazat okamžitě. Faktury nebo některé bezpečnostní logy mohou mít jiný režim než marketingové preference nebo obsah zkušebního projektu.
-
-Uživateli to ale nevysvětluj právničtinou. Použij jednoduchou tabulku:
-
-| Typ dat | Co uděláme | Kdy | Proč může něco zůstat |
-|---|---|---:|---|
-| Profil účtu | smažeme nebo anonymizujeme | ihned po potvrzení | bez výjimky, pokud není spor |
-| Produktová data | smažeme pracovní kopie | do 30 dnů | zálohy doběhnou podle retenčního cyklu |
-| Faktury | ponecháme po zákonnou dobu | podle účetních pravidel | právní povinnost |
-| Bezpečnostní logy | omezíme vazbu na osobu | podle retenční politiky | ochrana služby a vyšetření incidentů |
-
-Čísla v tabulce ber jako pracovní příklad, ne univerzální právní radu. Reálné lhůty musí odpovídat tvému provozu, smlouvám, účetnictví a právnímu posouzení.
-
-## Zálohy vysvětli předem
-
-Zálohy jsou místo, kde se dobrý privacy-first slib často rozbije o realitu. Uživatel požádá o výmaz, aplikace smaže řádky, ale zálohy drží starý stav ještě týdny. To nemusí být automaticky problém, pokud je to promyšlené, omezené a popsané. Problém je, když o tom nikdo neví.
-
-Napiš si pravidlo:
+Příklad první odpovědi:
 
 ```text
-Po výmazu odstraníme data z aktivních systémů podle potvrzeného procesu. Šifrované zálohy se nepoužívají pro běžný provoz a data z nich zmizí po doběhnutí retenčního cyklu, pokud není potřeba obnova kvůli incidentu nebo právní povinnosti.
+Dobrý den,
+
+žádost jsme přijali a vedeme ji jako požadavek na [typ žádosti]. Nejdřív ověříme oprávnění k účtu/workspace a rozsah dat, kterých se žádost týká. Pokud budeme potřebovat doplnění, ozveme se z této adresy. Po dokončení pošleme stručné potvrzení a popíšeme, co bylo provedeno.
 ```
 
-Tohle pravidlo musí odpovídat realitě. Pokud zálohy umíš mazat selektivně, popiš to. Pokud neumíš, nastav krátkou rozumnou retenci a pravidelný restore test. Privacy-first provoz není o tom, že nikdy nemáš zálohu. Je o tom, že záloha není nekonečný sklad osobních dat bez vlastníka.
+Do interního ticketu přidej:
 
-## Admin flow pro podporu
+- typ žádosti,
+- identifikátor účtu nebo workspace,
+- ověřovací metodu,
+- vlastníka řešení,
+- systémy ke kontrole,
+- termín další odpovědi,
+- rozhodnutí o datech, která nejde odstranit nebo exportovat,
+- datum dokončení.
 
-Ne každý požadavek přijde přes krásné tlačítko v aplikaci. Někdo napíše na podporu, někdo odpoví na fakturu, někdo přijde přes bývalého admina firmy. Podpora proto potřebuje jednoduchý interní flow.
+Nepiš do ticketu zbytečný obsah osobních údajů. Ticket má řídit proces, ne stát se druhou databází s horší retencí.
 
-Minimum pro ticket:
+## Systémy kontroluj podle datové mapy
 
-- ověř identitu a oprávnění žadatele,
-- rozliš osobní účet, firemní workspace a roli administrátora,
-- nabídni export před destruktivním krokem,
-- zaznamenej rozsah požadavku,
-- nastav termín odpovědi,
-- označ systémy, kterých se požadavek týká,
-- po dokončení pošli stručné potvrzení.
+Bez datové mapy bude support ručně hádat, kde všude údaje jsou. Minimum pro malý SaaS je seznam systémů a typů dat, které mohou být součástí žádosti.
 
-U B2B workspace pozor na konflikt mezi jednotlivcem a firmou. Uživatel může chtít smazat svůj profil, ale produktová data mohou patřit organizaci. Tohle musí řešit podmínky služby, role v produktu a interní postup, ne improvizace jednoho support hrdiny ve čtvrtek večer.
+Typický kontrolní seznam:
 
-## Checklist: export a smazání bez podpůrného pekla
+| Oblast | Co hledat | Kdo vlastní rozhodnutí |
+|---|---|---|
+| Aplikace | profil, role, nastavení, projektová data | produkt / engineering |
+| Billing | faktury, tarif, platební identifikátory | finance |
+| Support | tickety, přílohy, interní poznámky | support lead |
+| E-mailing | odběry, odhlášení, transakční šablony | marketing / product ops |
+| Logy | bezpečnostní a auditní záznamy | security / provoz |
+| Integrace | tokeny, webhooky, synchronizační fronty | engineering |
+| Zálohy | retenční cyklus, restore pravidla | provoz |
 
-- Máme oddělený export, zrušení předplatného, deaktivaci a výmaz.
-- Export obsahuje srozumitelný formát, datový slovník a informaci o rozsahu.
-- Exportní odkazy jsou časově omezené a nejdou hádat.
-- Před výmazem nabízíme export dat.
-- Víme, která data se smažou hned, která později a která zůstávají kvůli povinnosti.
-- Máme popsanou retenci záloh a odpovídá skutečnému provozu.
-- Podpora má postup pro ověření identity a oprávnění.
-- B2B workspaces rozlišují osobní profil, roli uživatele a data organizace.
-- Externí nástroje mají vlastní úkol ve výmazovém procesu.
-- Dokončení požadavku se loguje bez ukládání zbytečných detailů.
+Každá oblast má mít jasné „ano/ne/částečně“ a poznámku proč. Když něco nejde smazat hned, nepiš „nejde“. Napiš: co zůstává, proč, kdo to schválil a kdy se to znovu kontroluje.
 
-## Mini šablona exit karty
+## Komunikace po dokončení
+
+Závěrečná odpověď má být stručná a užitečná. Uživatel nepotřebuje interní román o databázových migracích, ale potřebuje vědět, že požadavek neskončil v mlze.
+
+Příklad:
+
+```text
+Dobrý den,
+
+požadavek jsme dokončili. Provedli jsme [stručný popis akce]. Některé záznamy, například účetní doklady nebo bezpečnostní logy, mohou zůstat po omezenou dobu podle našich zákonných a provozních povinností. Tyto záznamy nejsou používány pro marketing ani běžné produktové zpracování.
+```
+
+Pokud posíláš export, neposílej ho jako přílohu. Pošli informaci, že je připravený, a stáhnutí drž za bezpečným odkazem s omezenou platností. Po expiraci export znič. Exportní ZIP není suvenýr, je to citlivý balík dat.
+
+## Checklist: supportní runbook pro žádosti o data
+
+- Máme omezený seznam typů žádostí a nepoužíváme štítek „GDPR něco“.
+- Podpora umí rozlišit osobní účet, B2B workspace a admin roli.
+- Ověření identity je úměrné riziku požadavku.
+- První odpověď potvrzuje přijetí, typ žádosti a další krok.
+- Ticket obsahuje procesní metadata, ne zbytečné kopie osobních údajů.
+- Datová mapa říká, které systémy se mají zkontrolovat.
+- Každá výjimka z výmazu nebo exportu má důvod, vlastníka a datum kontroly.
+- Export se poskytuje bezpečným časově omezeným odkazem.
+- Po dokončení odchází stručné potvrzení bez právnické mlhy.
+- Runbook se testuje aspoň jednou za čtvrtletí na cvičném ticketu.
+
+## Mini šablona ticketu
 
 ```markdown
-# Exit karta: [produkt / workspace]
+# Žádost o data: [ID]
 
-## Typ požadavku
-- Export dat:
-- Zrušení předplatného:
-- Deaktivace účtu:
-- Výmaz osobních údajů:
+## Zařazení
+- Typ žádosti:
+- Datum přijetí:
+- Kanál:
+- Vlastník:
 
-## Ověření
-- Kdo žádá:
-- Jaká má oprávnění:
-- Jak jsme ověřili identitu:
+## Žadatel
+- Účet / e-mail:
+- Workspace:
+- Role:
+- Ověření:
 
-## Data
-- Aktivní systémy:
-- Externí nástroje:
+## Rozsah
+- Aktivní aplikace:
+- Billing:
+- Support:
+- E-mailing:
+- Logy:
+- Integrace:
 - Zálohy:
-- Fakturace:
 
-## Export
-- Formát:
-- Rozsah:
-- Platnost odkazu:
-- Datový slovník:
-
-## Výmaz
-- Co mažeme hned:
-- Co anonymizujeme:
-- Co ponecháváme a proč:
-- Kdy doběhnou zálohy:
+## Rozhodnutí
+- Provedené kroky:
+- Co zůstává a proč:
+- Kdo schválil výjimku:
+- Datum další kontroly:
 
 ## Komunikace
-- Potvrzení přijetí:
-- Potvrzení dokončení:
-- Interní vlastník:
+- Potvrzení přijetí odesláno:
+- Doplnění vyžádáno:
+- Dokončení potvrzeno:
 ```
 
 ## Zdroje
@@ -37258,7 +37249,7 @@ U B2B workspace pozor na konflikt mezi jednotlivcem a firmou. Uživatel může c
 
 # Pracovní log
 
-- 2026-10-04: Doplněna příloha „Export a smazání účtu bez podpůrného pekla“ s praktickým rozdělením exportu, deaktivace, zrušení předplatného a výmazu, doporučenými formáty, postupem pro zálohy, support flow, checklistem, šablonou exit karty a ověřenými zdroji Evropské komise, EDPB a EUR-Lex.
+- 2026-10-04: Doplněna příloha „Supportní runbook pro žádosti o data bez chaosu“ s triáží GDPR/data požadavků, ověřením identity, supportním ticket flow, datovou mapou systémů, závěrečnou komunikací, checklistem, šablonou ticketu a ověřenými zdroji Evropské komise, EDPB a EUR-Lex.
 
 - 2026-10-03: Doplněna příloha „Postmortem incidentu bez honu na viníka a datového smogu“ s praktickým postupem pro časovou osu, oddělení technických a procesních příčin, datovou breach kontrolu, zákaznickou komunikaci, follow-up úkoly, úklid dočasných logů/přístupů, checklist, postmortem kartu a ověřené zdroje ÚOOÚ, EDPB a ENISA.
 
