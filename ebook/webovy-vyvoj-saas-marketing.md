@@ -40329,7 +40329,182 @@ U podpisových klíčů, session tajemství a webhooků se vyplatí mít explici
 - [The Twelve-Factor App: Config](https://12factor.net/config)
 - [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 
+# Příloha: Doménová a e-mailová hygiena bez doručovací loterie
+
+E-mail je pro web, SaaS i marketing pořád jeden z nejdůležitějších kanálů. Jenže vlastní doména bez základní e-mailové hygieny je jako obchod s krásnou výlohou a cedulí „možná vám odpovíme, možná spadneme do spamu“. Není to sexy část marketingu, ale rozhoduje o tom, jestli zákazník dostane potvrzení registrace, fakturu, reset hesla, onboardingový e-mail nebo odpověď na poptávku.
+
+Cílem není honit magické skóre v nástroji na deliverability. Cílem je mít jasně oddělené typy pošty, ověřenou identitu domény, minimum zbytečných dat, funkční odhlašování a provozní rutinu, která odhalí problém dřív než naštvaný zákazník.
+
+> Codyho komentář: Nejhorší e-mailová strategie je „vždyť to nějak chodí“. To je stejná kategorie optimismu jako zálohy, které se nikdy nezkusily obnovit. Hezké, dokud nejde o peníze.
+
+## Rozděl poštu podle účelu
+
+Nejdřív si napiš, jaké e-maily produkt nebo web posílá. Nemíchej všechno do jedné hromady, protože každý typ má jiné riziko, jinou metriku a jiný důvod existence.
+
+Praktické rozdělení:
+
+- **Transakční e-maily** — registrace, reset hesla, potvrzení objednávky, faktura, bezpečnostní upozornění.
+- **Produktové e-maily** — onboarding, pozvánka do týmu, upozornění na důležitou změnu v účtu.
+- **Obchodní a marketingové e-maily** — newsletter, nabídka, kampaň, reaktivace.
+- **Lidská komunikace** — odpovědi ze supportu, sales follow-up, individuální zprávy.
+- **Systémová hlášení** — interní alerty, reporty, exporty, notifikace administrátorům.
+
+Pro malý SaaS je bezpečný default jednoduchý: transakční poštu drž odděleně od marketingu. Když kampaň pokazí reputaci odesílání, nesmí kvůli tomu přestat chodit resety hesel a faktury. To není marketingový detail, to je provozní bezpečnost.
+
+## SPF, DKIM a DMARC nejsou volitelná dekorace
+
+Každá doména, ze které posíláš e-mail, má mít nastavené ověření odesílatele. SPF říká, které servery smějí za doménu posílat. DKIM podepisuje zprávu kryptografickým podpisem. DMARC staví nad SPF a DKIM pravidlo pro doménu v hlavičce `From` a dává přijímajícím serverům signál, co dělat, když ověření nesedí.
+
+Minimum pro produktovou doménu:
+
+- SPF záznam s co nejmenším počtem oprávněných odesílatelů.
+- DKIM podpis pro každý nástroj, který posílá poštu za tvoji doménu.
+- DMARC záznam nejdřív v režimu sledování, potom postupné zpřísnění.
+- Samostatná evidence toho, kdo smí posílat za doménu a proč.
+- Kontrola, že doména v `From` odpovídá tomu, co zákazník opravdu zná.
+
+V roce 2026 je dobré počítat s tím, že DMARC už není jen starý „best practice“ dokument. RFC Editor v květnu 2026 publikoval DMARC jako RFC 9989 a oddělil agregované a failure reporty do RFC 9990 a RFC 9991. Praktický dopad pro podnikatele je prostý: ověřování domény ber jako standardní provozní vrstvu, ne jako pokročilou specialitu pro e-mailové čaroděje.
+
+## DMARC zaváděj postupně, ne kladivem
+
+Největší chyba je nastavit `p=reject` bez znalosti všech legitimních odesílatelů. Chvíli to vypadá bezpečně, pak zjistíš, že fakturační systém, helpdesk nebo starý formulář posílá jinudy. Výsledkem je ticho v inboxu a velmi hlasitý Slack.
+
+Bezpečný postup:
+
+1. Zmapuj všechny služby, které posílají za doménu.
+2. Zapni SPF a DKIM u každé z nich.
+3. Nastav DMARC v režimu monitoringu, typicky `p=none`.
+4. Sleduj agregované reporty a oprav neznámé nebo rozbité zdroje.
+5. Přesuň se na přísnější politiku až po ověření reálného provozu.
+6. Dokumentuj výjimky a nastav datum jejich další kontroly.
+
+Pro menší firmy často stačí jednoduchý přístup: samostatná schránka nebo služba pro DMARC reporty, měsíční kontrola neznámých zdrojů a jasné pravidlo, že nový e-mailový nástroj nesmí do produkce bez záznamu v inventáři.
+
+## Subdomény používej jako pojistky
+
+Jedna doména pro všechno je pohodlná, ale křehká. U většího objemu nebo více nástrojů použij subdomény podle účelu.
+
+Příklad:
+
+| Účel | Příklad domény | Poznámka |
+| --- | --- | --- |
+| Lidská komunikace | `dreamind.cz` | schránky týmu, běžné odpovědi |
+| Transakční pošta | `mail.dreamind.cz` | účty, faktury, reset hesla |
+| Produktové notifikace | `notify.dreamind.cz` | upozornění z aplikace |
+| Newsletter | `news.dreamind.cz` | kampaně a odběry |
+| Interní alerty | `ops.dreamind.cz` | provozní zprávy pro tým |
+
+Subdomény nejsou omluva pro spam. Jsou pojistka, aby problém v jednom proudu pošty nestrhl všechno ostatní. Každá subdoména má mít vlastní DNS nastavení, jasný účel a vlastní kontaktní osobu nebo runbook.
+
+## Odhlašování navrhni jako respekt, ne únikové dveře
+
+U marketingových a hromadných zpráv musí být odhlášení jednoduché a funkční. Gmail i Yahoo ve svých pravidlech pro odesílatele zdůrazňují autentizaci, nízkou míru stížností a snadné odhlášení u relevantního hromadného provozu. I když neposíláš miliony e-mailů, vyplatí se chovat tak, jako by tvoje reputace něco znamenala. Protože znamená.
+
+Praktická pravidla:
+
+- Odkaz pro odhlášení dej viditelně do patičky, ne šedě velikostí pro mravence.
+- Nechtěj po člověku přihlášení jen proto, aby se mohl odhlásit.
+- Respektuj odhlášení napříč marketingovými kampaněmi.
+- Transakční zprávy neposílej jako převlečený newsletter.
+- Preference centrum používej pro volbu témat a frekvence, ne jako labyrint.
+
+Privacy-first pohled: odhlášení je signál důvěry. Člověk, který se může snadno odhlásit, ti častěji věří, když u odběru zůstane.
+
+## Sbírej jen data, která pomáhají doručit zprávu
+
+E-mailové nástroje často lákají na otevření, kliknutí, zařízení, geolokaci, skóre kontaktu a další telemetrii. Ne každé měření je nutné. Pro malý evropský SaaS bývá lepší měřit méně, ale smysluplně.
+
+Doporučené minimum:
+
+- doručeno / nedoručeno,
+- bounce důvod v technické kategorii,
+- spam complaint, pokud ho poskytovatel vrací,
+- odhlášení,
+- kliknutí na klíčovou akci jen tam, kde je to opravdu potřeba,
+- agregované výsledky kampaně bez detailního profilování jednotlivce.
+
+Co raději nepoužívat jako default:
+
+- sledovací pixely pro individuální otevírání,
+- automatické profilování podle každého kliknutí,
+- dlouhodobou historii interakcí bez jasného účelu,
+- předávání kontaktů do reklamních publik,
+- session replay navázaný na e-mailovou identitu.
+
+> Codyho komentář: Open rate vypadá manažersky uklidňujícím dojmem, ale často je to rozbitý kompas v lesklé krabičce. Radši vědět, že lidé dokončili užitečný krok, než že jejich e-mailový klient stáhl obrázek.
+
+## DNS změny dělej jako produkční deployment
+
+DNS není „někam něco vlož do administrace a uvidíme“. Je to produkční konfigurace. Chybný MX, SPF nebo DKIM záznam může rozbít příjem, odesílání nebo důvěryhodnost domény.
+
+Bezpečný postup pro změny:
+
+- Před změnou ulož aktuální DNS záznamy do interní poznámky.
+- Zapiš důvod změny, očekávaný dopad a čas kontroly.
+- U větších změn sniž TTL s předstihem, pokud to dává smysl.
+- Po změně ověř DNS z více resolverů.
+- Pošli testovací e-mail do několika běžných schránek a zkontroluj hlavičky.
+- Sleduj bounce a DMARC reporty minimálně několik dní.
+
+Pokud doménu spravuje více lidí, používej jednoduché pravidlo: žádná změna DNS bez ticketu nebo rozhodovací poznámky. Ne kvůli byrokracii. Kvůli tomu, že za půl roku budeš chtít vědět, proč tam ten podivný záznam vlastně je.
+
+## Checklist: e-mailová hygiena bez loterie
+
+- [ ] Máme inventář všech služeb, které posílají e-mail za naši doménu?
+- [ ] Jsou transakční, marketingové a interní e-maily oddělené podle rizika?
+- [ ] Má každá odesílací doména nebo subdoména SPF?
+- [ ] Má každý odesílací nástroj zapnutý DKIM podpis?
+- [ ] Má doména DMARC politiku a někdo čte agregované reporty?
+- [ ] Víme, kdy a jak můžeme DMARC zpřísnit?
+- [ ] Má marketingová pošta funkční a jednoduché odhlášení?
+- [ ] Nepoužíváme open tracking nebo detailní profilování bez jasného důvodu?
+- [ ] Máme proces pro DNS změny včetně ověření po nasazení?
+- [ ] Umíme obnovit nebo přesměrovat kritickou e-mailovou komunikaci při výpadku dodavatele?
+
+## Mini šablona e-mailové doménové karty
+
+```text
+# E-mailová doménová karta: [doména / subdoména]
+
+## Účel
+Typ pošty:
+Primární nástroj:
+Vlastník v týmu:
+
+## DNS a autentizace
+SPF záznam:
+DKIM selector(y):
+DMARC politika:
+Adresa pro DMARC reporty:
+MX záznamy:
+
+## Data a měření
+Jaké údaje se posílají v e-mailu:
+Jaké události měříme:
+Co záměrně neměříme:
+Retence logů:
+
+## Provoz
+Test po změně:
+Bounce monitoring:
+Odhlašování / preference:
+Fallback při výpadku:
+Datum další revize:
+```
+
+## Zdroje
+
+- RFC Editor: DMARC core protocol, RFC 9989, květen 2026 — https://www.rfc-editor.org/info/rfc9989/
+- RFC Editor: DMARC aggregate reporting, RFC 9990, květen 2026 — https://www.rfc-editor.org/rfc/rfc9990.html
+- RFC Editor: DMARC failure reporting, RFC 9991, květen 2026 — https://www.rfc-editor.org/info/rfc9991/
+- Google: Email sender guidelines pro Gmail — https://support.google.com/mail/answer/81126
+- Google Workspace Admin Help: sender requirements FAQ — https://support.google.com/a/answer/14229414
+- Yahoo Sender Hub: Sender Best Practices — https://senders.yahooinc.com/best-practices/
+
+
 # Pracovní log
+
+- 2026-10-04: Doplněna příloha „Doménová a e-mailová hygiena bez doručovací loterie“ s rozdělením pošty podle účelu, SPF/DKIM/DMARC postupem, bezpečným zaváděním DMARC, subdoménami, férovým odhlašováním, minimalizací e-mailové telemetrie, DNS deployment rutinou, checklistem, doménovou kartou a ověřenými zdroji RFC Editoru, Google a Yahoo.
 - 2026-10-04: Doplněna příloha „Tajemství, API klíče a přístupy bez sdíleného šuplíku“ s praktickým rozdělením tajemství podle rizika, pravidly pro repozitář a prostředí, scope/expiraci, bezpečné předávání, redakci logů, rotaci bez výpadku, checklistem, secret kartou a ověřenými zdroji OWASP a Twelve-Factor App.
 - 2026-10-04: Doplněna příloha „Nákladové limity pro SaaS bez datového smogu“ s mapou nákladově významných workflow, agregovanými metrikami bez profilování osob, limity pro trial/free tarify, alerty, produktovými optimalizacemi, férovou zákaznickou komunikací, checklistem, cost guardrail kartou a ověřenými zdroji FinOps Foundation a OpenTelemetry.
 - 2026-10-04: Doplněna příloha „Znalostní báze a samoobsluha bez úniku zákaznických příběhů“ s postupem tvorby článků podle reálných dotazů, strukturou článku, pravidly pro demo data, bezpečným propojením se supportem, agregovaným měřením, revizemi podle rizika, checklistem, knowledge base kartou a ověřenými zdroji W3C, GDPR a OWASP.
