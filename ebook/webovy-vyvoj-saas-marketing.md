@@ -41065,7 +41065,191 @@ Přístupová recenze není o nedůvěře k lidem. Je o tom, že dobrý provoz n
 - [OWASP Authorization Testing Automation Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Testing_Automation_Cheat_Sheet.html)
 - [NIST SP 800-63-4 Digital Identity Guidelines](https://www.nist.gov/publications/nist-sp-800-63-4-digital-identity-guidelines)
 
+
+# Příloha: Odchozí odkazy a referrery bez nechtěného datového drobečkování
+
+Odchozí odkaz vypadá nevinně. Klikneš na partnera, dokumentaci, platební bránu, kalendář nebo článek a hotovo. Jenže prohlížeč při navigaci a načítání externích zdrojů může cílové straně poslat informaci, odkud člověk přišel. MDN popisuje, že hlavička `Referrer-Policy` určuje, kolik informací se má posílat v historicky překlepnuté hlavičce `Referer` ([MDN: Referrer-Policy header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy)). RFC 9110 upozorňuje, že `Referer` může prozrazovat kontext požadavku nebo historii prohlížení, zvlášť pokud URL obsahuje osobní nebo neveřejné informace ([RFC 9110: HTTP Semantics](https://www.rfc-editor.org/rfc/rfc9110.html#name-referer)).
+
+Pro marketingový web to znamená jednu věc: URL nejsou jen technická adresa. Jsou to data. Pokud do nich bez rozmyslu dáváš e-mail, název firmy, interní ID, token pozvánky, název účtu nebo citlivý dotaz, můžeš je omylem poslat dál přes odchozí odkazy, obrázky, fonty, embed, analytiku nebo logy. A pak se všichni tváří překvapeně, jako kdyby URL nebyla vidět už od narození webu. Roztomilé, ale drahé.
+
+> Codyho komentář: Nejlepší referrer leak je ten, který nikdy nevznikl. Hlavička pomůže, ale čisté URL jsou základ. Bez nich jen lepíš náplast na hadici.
+
+## Začni tím, co se nesmí objevit v URL
+
+Než začneš řešit hlavičky, napiš si krátký zákazový seznam. Ten patří do vývojářských pravidel, produktového zadání i review checklistu.
+
+Do URL běžně nepatří:
+
+- e-mailová adresa zákazníka,
+- celé jméno uživatele,
+- telefon nebo adresa,
+- interní poznámka supportu,
+- název neveřejného workspace, pokud může být citlivý,
+- jednorázový token s dlouhou platností,
+- přístupový klíč, session ID nebo API key,
+- citlivý vyhledávací dotaz,
+- výsledek segmentace typu `high-value-customer`,
+- důvod zamítnutí platby nebo zdravotní, finanční či právní kontext.
+
+Bezpečnější vzor je jednoduchý: veřejné stránky mají čisté, lidsky čitelné URL; privátní aplikace používá neprůhledné identifikátory; citlivé jednorázové akce mají krátce platné tokeny a po použití přesměrují na čistou adresu.
+
+Příklad:
+
+```text
+Špatně:
+/app/acme-s-r-o/users/jana.novakova@example.com/invoices?plan=late-payment-risk
+
+Lépe:
+/app/workspaces/w_8F3K/invoices
+```
+
+Ani lepší varianta automaticky neřeší autorizaci. Jen snižuje škodu, když se URL objeví v historii prohlížeče, screenshotu, logu, ticketu nebo referreru.
+
+## Nastav `Referrer-Policy` jako výchozí brzdu
+
+MDN v praktickém průvodci vysvětluje, že referrer policy dává jemnou kontrolu nad tím, kdy browser posílá informaci o zdrojové stránce, a že i zdánlivě malá informace o původu požadavku může být soukromostní riziko ([MDN: Referrer policy configuration](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Referrer_policy)). OWASP Secure Headers Project řadí `Referrer-Policy` mezi bezpečnostní HTTP hlavičky, které pomáhají omezit snadno preventabilní problémy v prohlížeči ([OWASP Secure Headers Project](https://owasp.org/projects/secure-headers-project/)).
+
+Rozumný výchozí stav pro většinu marketingových webů a SaaS aplikací:
+
+```http
+Referrer-Policy: strict-origin-when-cross-origin
+```
+
+Co tím prakticky říkáš:
+
+- při přechodu na stejný web může browser poslat plnější kontext,
+- při přechodu na jinou HTTPS doménu pošle jen původ, ne celou cestu,
+- při přechodu z HTTPS na HTTP referrer neposílá,
+- cílový web nevidí konkrétní interní stránku nebo parametr kampaně.
+
+Ještě přísnější varianta:
+
+```http
+Referrer-Policy: no-referrer
+```
+
+Tu zvaž u admin rozhraní, klientské zóny, zdravotních/finančních/legal produktů, interní dokumentace, preview odkazů a všech stránek, kde by už samotná URL mohla prozradit něco citlivého. Nevýhoda je, že partneři neuvidí ani agregovaný zdroj návštěvy. Pokud je pro tebe privacy-first důvěra důležitější než atribuce, je to fér obchod.
+
+Codyho doporučení pro malý tým: veřejný obsah začni s `strict-origin-when-cross-origin`, privátní aplikaci a jednorázové akce nastav na `no-referrer`. Ne proto, že je to nejvíc „security hardcore“, ale protože to dobře odpovídá riziku.
+
+## Odchozí odkazy nelep trackovací omáčkou
+
+Marketing často miluje UTM parametry, protože dávají pocit kontroly. Problém není samotné označení kampaně. Problém je, když se z URL stane malý spis o člověku.
+
+Dobře:
+
+```text
+https://example.com/pruvodce?utm_source=rss&utm_medium=owned&utm_campaign=webinar-2026-10
+```
+
+Špatně:
+
+```text
+https://example.com/demo?email=jara@example.com&utm_segment=hot_lead&utm_company=acme
+```
+
+Pravidla pro privacy-first kampaně:
+
+- UTM používej pro kanál, médium a kampaň, ne pro identitu člověka.
+- Nepřenášej CRM segmenty do URL.
+- Nepřidávej osobní identifikátory do odkazů v newsletteru, pokud pro to nemáš velmi dobrý důvod a jasné právní krytí.
+- Po zpracování kampaně zvaž přesměrování na kanonickou čistou URL.
+- U interních odkazů v aplikaci používej stav na serveru, ne citlivé parametry v query stringu.
+- U partnerských odkazů napiš, co se předává, a drž to v registru externích služeb.
+
+Privacy-first marketing nepotřebuje vědět, že konkrétní Jana klikla v 9:42 z e-mailu na třetí odstavec. Často stačí vědět, že RSS přivedlo kvalitní čtenáře na článek a že po něm lidé otevřeli kontaktní stránku. Méně magie, méně rizika, méně omluv právníkovi.
+
+## Externí embed je odchozí odkaz v přestrojení
+
+Referrer se netýká jen kliknutí. Externí obrázek, font, video embed, mapa, iframe nebo widget může při načtení také dostat informaci o stránce, kde je vložený. Pokud je na stránce poptávkový formulář, neveřejné preview, pricing pro konkrétního zákazníka nebo support dokument s citlivým kontextem, externí embed je datový otvor, ne designová dekorace.
+
+Před každým embedem se zeptej:
+
+- Musí se načíst hned, nebo až po kliknutí?
+- Jde obsah hostovat lokálně nebo v evropském provozu?
+- Vidí dodavatel celou URL stránky?
+- Máme pro něj právní a provozní důvod?
+- Co se stane, když služba vypadne nebo změní skript?
+- Umíme embed nahradit obyčejným odkazem?
+
+Praktický kompromis: místo automaticky načtené mapy dej statický náhled nebo adresu s odkazem „Otevřít mapu“. Místo videa z cizí platformy dej obrázek, krátký popis a tlačítko. Uživatel má kontrolu, web je rychlejší a ty neposíláš data třetí straně ještě před tím, než člověk vůbec něco chtěl.
+
+## Přesměrování a shortlinky drž pod kontrolou
+
+Shortlinky, tracking redirecty a affiliate mezivrstvy jsou pohodlné, ale pro privacy-first provoz nebezpečně snadno zamlží, kam data tečou. Pokud používáš vlastní krátké odkazy, nastav jasná pravidla:
+
+- Shortlink nesmí nést osobní identifikátor.
+- Cílová URL má být dohledatelná v interní evidenci.
+- Přesměrování nemá logovat celé query stringy, pokud nejsou nutné.
+- Staré kampaně mají mít datum expirace nebo revize.
+- Externí redirect služba je dodavatel, ne „jen utilitka“.
+- Ve veřejném obsahu preferuj přímé odkazy, když není dobrý důvod pro mezivrstvu.
+
+U SaaS produktů buď extra opatrný u magic linků, invite linků a resetů hesla. Po úspěšném použití tokenu přesměruj uživatele na čistou interní URL a token neukládej do analytiky, referreru ani běžných aplikačních logů. Když potřebuješ ladit problém, loguj stav tokenu a request ID, ne token samotný.
+
+## Checklist: odkazy a referrery bez úniku
+
+- [ ] Žádná veřejná ani privátní URL neobsahuje e-mail, telefon, token, session ID nebo citlivý text.
+- [ ] Web má nastavenou výchozí hlavičku `Referrer-Policy`.
+- [ ] Privátní aplikace a jednorázové akce používají přísnější politiku, typicky `no-referrer`.
+- [ ] UTM parametry popisují kampaň, ne člověka.
+- [ ] Newsletterové odkazy nepřenášejí CRM segmenty ani osobní identifikátory.
+- [ ] Externí embedy se načítají až po interakci, nebo mají zdokumentovaný důvod.
+- [ ] Shortlinky a redirecty mají vlastníka, expiraci a auditovatelný cíl.
+- [ ] Logy a analytika neschraňují celé query stringy bez důvodu.
+- [ ] Magic linky a invite tokeny po použití mizí z adresy přes redirect.
+- [ ] Tým umí jednou větou vysvětlit, co se při kliknutí předává třetí straně.
+
+## Mini šablona link policy karty
+
+```markdown
+# Link policy karta: [web / produkt / kampaň]
+
+## Rozsah
+- Typ odkazu:
+- Vlastník:
+- Veřejná / privátní část:
+- Cílová doména:
+
+## Data v URL
+- Povolené parametry:
+- Zakázané parametry:
+- Obsahuje osobní údaje: ano/ne
+- Obsahuje token: ano/ne
+- Expirace tokenu / odkazu:
+
+## Referrer a třetí strany
+- Referrer-Policy:
+- Externí embed / skript:
+- Co cílová strana uvidí:
+- Právní/provozní důvod:
+
+## Měření
+- Měřený účel:
+- Agregovaná metrika:
+- Retence logů:
+- Kdo má přístup k výsledkům:
+
+## Kontrola
+- Datum poslední revize:
+- Co se má smazat / zjednodušit:
+- Fallback, když cílová služba vypadne:
+```
+
+Odchozí odkazy jsou nenápadná součást důvěry. Když je držíš čisté, nepřenášíš zbytečná data, máš rozumnou referrer policy a externí služby načítáš vědomě, ukazuješ zákazníkovi totéž co u hostingu nebo analytiky: soukromí není plakát na webu. Je to provozní návyk.
+
+## Zdroje
+
+- [MDN: Referrer-Policy header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy)
+- [MDN: Referrer policy configuration](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Referrer_policy)
+- [RFC 9110: HTTP Semantics — Referer](https://www.rfc-editor.org/rfc/rfc9110.html#name-referer)
+- [OWASP Secure Headers Project](https://owasp.org/projects/secure-headers-project/)
+- [OWASP HTTP Headers Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html)
+
 # Pracovní log
+
+- 2026-10-04: Doplněna příloha „Odchozí odkazy a referrery bez nechtěného datového drobečkování“ s pravidly pro čisté URL, `Referrer-Policy`, UTM parametry bez osobních údajů, externí embedy, shortlinky, magic linky, checklistem, link policy kartou a ověřenými zdroji MDN, RFC 9110 a OWASP.
+
 
 - 2026-10-04: Doplněna příloha „Přístupová recenze a offboarding bez osiřelých účtů“ s inventářem systémů, rolemi podle práce, offboarding postupem, pravidly pro servisní účty, rizikovým rytmem kontrol, dočasnými výjimkami, privacy-first auditní stopou, checklistem, access review kartou a ověřenými zdroji OWASP a NIST.
 
