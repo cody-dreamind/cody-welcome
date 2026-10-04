@@ -39678,7 +39678,176 @@ Kdy event smažeme:
 - [MDN: Beacon API](https://developer.mozilla.org/en-US/docs/Web/API/Beacon_API)
 - [MDN: Navigation timing](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/Navigation_timing)
 
+
+# Příloha: Dodavatelský audit a subprocesory bez tabulkového pekla
+
+Dodavatelé jsou nenápadná vrstva každého webu a SaaS. Hosting, e-mailing, helpdesk, analytika, formuláře, platební brána, CDN, logování, AI nástroj, monitoring, CRM, kalendář na schůzky — každý umí ušetřit práci, ale taky rozšířit stopu dat do míst, která už zákazník ani tým nevidí. Privacy-first provoz proto neznamená „nepoužívej žádné nástroje“. Znamená: víš, kdo co zpracovává, proč, jak dlouho, kde, na základě jaké smlouvy a jak rychle z toho umíš odejít.
+
+> Codyho komentář: Nejhorší dodavatel není ten drahý. Nejhorší je ten, o kterém si po roce nikdo nepamatuje, kdo ho zapnul, jaká data mu tečou a jestli ho ještě vůbec potřebujeme. To není SaaS stack, to je archeologické naleziště s měsíční fakturou.
+
+Cílem auditu není vyrobit tabulku o sto sloupcích, kterou nikdo neotevře. Cílem je mít dost informací pro rozumné rozhodnutí: můžeme nástroj používat, za jakých podmínek, s jakými omezeními a co musíme hlídat.
+
+## Začni mapou dat, ne seznamem log
+
+První chyba je auditovat dodavatele podle faktur. Faktura řekne, co platíš. Neřekne, co zpracováváš. Začni proto u toků dat.
+
+Pro každý nástroj si napiš:
+
+- jaká data do něj posíláš,
+- kdo k nim má přístup,
+- jestli jde o osobní údaje, citlivější obchodní data nebo veřejný obsah,
+- jestli data odchází mimo EU/EHP,
+- jestli nástroj používá další subprocesory,
+- jestli je nástroj kritický pro provoz nebo jen pohodlí týmu.
+
+Praktický příklad: formulářový nástroj na leady není jen „form builder“. Zpracovává jméno, e-mail, zprávu, čas odeslání, IP adresu v logu, případně UTM parametry. Pokud se lead automaticky posílá do CRM a e-mailingu, audit se netýká jednoho nástroje, ale celého řetězce.
+
+## Rozliš typ dodavatele podle rizika
+
+Ne každý dodavatel potřebuje stejnou kontrolu. Rozděl je do čtyř vrstev.
+
+| Vrstva | Příklad | Co hlídat |
+|---|---|---|
+| Kritická infrastruktura | hosting, databáze, e-mail pro transakční zprávy | dostupnost, zálohy, region, DPA, incident proces, export dat |
+| Datově citlivý nástroj | CRM, helpdesk, analytika, AI asistenti | minimalizace dat, přístupy, retence, subprocesory, trénování modelů |
+| Marketingový nástroj | newsletter, formuláře, plánovač schůzek | souhlasy, tracking, odhlášení, segmentace, propojení s dalšími systémy |
+| Nízkoriziková pomůcka | veřejné ikony, statické knihovny, interní poznámky bez osobních dat | licence, bezpečnost dodávky, zbytečné skripty |
+
+Tohle rozdělení pomáhá nebýt paranoidní tam, kde to není potřeba, a nebýt lehkomyslný tam, kde by to bolelo. Ikonový font a zákaznický helpdesk nejsou stejný problém, i když oba mají hezký web a cenovou stránku s modrým tlačítkem.
+
+## DPA není papírový talisman
+
+GDPR v článku 28 řeší zpracovatele: pokud dodavatel zpracovává osobní údaje za tebe, máš mít smluvně ošetřené mimo jiné předmět a dobu zpracování, typ údajů, kategorie subjektů údajů, povinnosti zpracovatele, důvěrnost, bezpečnost, subprocesory, pomoc při právech subjektů a návrat nebo výmaz dat po skončení spolupráce ([EUR-Lex: GDPR, článek 28](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)).
+
+V praxi to neznamená jen stáhnout PDF a uložit ho do složky „legal“. U každého důležitého nástroje si ověř:
+
+- je DPA dostupné a vztahuje se na konkrétní službu,
+- kdo je správce, zpracovatel nebo samostatný správce,
+- jak se schvalují noví subprocesoři,
+- kde jsou data uložena a odkud k nim může přistupovat podpora,
+- jak se hlásí bezpečnostní incident,
+- jak probíhá export a výmaz dat po ukončení.
+
+EDPB ve vodítkách ke konceptům správce a zpracovatele připomíná, že role nezávisí jen na štítku ve smlouvě, ale na reálném rozhodování o účelech a prostředcích zpracování ([EDPB: Guidelines 07/2020 on controller and processor concepts](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en)). Pokud nástroj sám rozhoduje, jak data využije pro vlastní účely, není to obyčejná „krabička na data“.
+
+## Subprocesory sleduj jako změny v produkci
+
+Seznam subprocesorů není právní dekorace. Je to mapa toho, kdo další se může dostat k datům. U kritických a datově citlivých nástrojů si nastav jednoduchou rutinu:
+
+- při zavedení nástroje uložit odkaz na aktuální seznam subprocesorů,
+- zapnout oznámení o změnách, pokud je dodavatel nabízí,
+- při nové zemi nebo novém typu služby zkontrolovat dopad,
+- u rizikových změn rozhodnout, jestli pokračovat, omezit data nebo nástroj nahradit,
+- jednou za čtvrtletí projít změny u top dodavatelů.
+
+Není potřeba svolávat právní koncil pokaždé, když dodavatel přidá interní monitoring. Ale když analytický nástroj přidá nového poskytovatele infrastruktury mimo EU nebo začne zapojovat AI zpracování, je to produktové a důvěrové rozhodnutí, ne drobná poznámka pod čarou.
+
+## Transfer mimo EU/EHP ber jako návrhové omezení
+
+Pokud osobní údaje odchází mimo EU/EHP, potřebuješ rozumět právnímu mechanismu a praktickému riziku. Evropská komise poskytuje standardní smluvní doložky pro mezinárodní předávání osobních údajů ([European Commission: Standard Contractual Clauses](https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en)). To ale není kouzelný teleport, který z každého nástroje udělá privacy-first volbu.
+
+Prakticky:
+
+- nejdřív hledej EU region nebo evropskou alternativu,
+- ověř, jestli se mimo EU nepřistupuje přes support, logy nebo subprocesory,
+- pro zbytečně citlivá data zvaž pseudonymizaci nebo agregaci,
+- nepošli do externího nástroje obsah, který nepotřebuje,
+- u AI a analytiky měj zvlášť jasno, jestli se data používají pro trénování nebo zlepšování služby.
+
+Privacy-first komentář na webu může znít třeba: „Pro provoz používáme omezený počet dodavatelů, preferujeme evropské regiony a data předáváme jen tam, kde to má jasný účel.“ Důležité je, aby to nebyla fráze. Musí za ní existovat evidence.
+
+## Exit plán piš při nákupu, ne při požáru
+
+Nástroj se nejhůř opouští ve chvíli, kdy už v něm máš roky dat, automatizací a procesních zvyků. Proto si u důležitých dodavatelů napiš exit plán hned při zavedení.
+
+Minimum:
+
+- jak exportujeme data,
+- v jakém formátu export přijde,
+- kdo umí export ověřit,
+- co se musí přenastavit v produktu nebo webu,
+- jak dlouho poběží přechodné období,
+- jak potvrdíme výmaz dat po ukončení,
+- kde je záložní postup, pokud dodavatel vypadne.
+
+Příklad: pokud používáš externí e-mailing, export kontaktů nestačí. Potřebuješ vědět, kde jsou souhlasy, odhlášení, segmenty, šablony, historie rozesílek a napojení formulářů. Bez toho je migrace jen optimistické slovo pro ruční víkend.
+
+## Praktický postup pro měsíční dodavatelský review
+
+Jednou měsíčně stačí 30–45 minut. Cíl není auditovat celý svět, ale udržet pořádek.
+
+1. Otevři evidenci dodavatelů a seřaď ji podle rizika.
+2. U top 5 nástrojů zkontroluj změny subprocesorů, smluvních podmínek nebo regionu.
+3. Najdi nástroje bez vlastníka v týmu.
+4. Zkontroluj, jestli některý nástroj nesbírá data, která už nepotřebujete.
+5. Zruš nebo omez nástroje, které nemají jasný účel.
+6. U nových nástrojů doplň DPA, datové toky a exit poznámku.
+7. Do pracovního logu napiš rozhodnutí, ne román.
+
+Dobrá poznámka vypadá takhle: „CRM: potvrzen EU region, přidán nový subprocesor pro e-mail delivery, bez změny kategorií dat, další kontrola za 3 měsíce.“ Špatná poznámka: „CRM OK.“ To je informační homeopatie.
+
+## Checklist: dodavatelé bez tabulkového pekla
+
+- [ ] Má každý důležitý nástroj vlastníka v týmu?
+- [ ] Víme, jaká data do nástroje posíláme?
+- [ ] Máme u zpracovatelů DPA nebo jiné odpovídající smluvní ujednání?
+- [ ] Je jasné, zda dodavatel vystupuje jako zpracovatel, správce nebo samostatný správce?
+- [ ] Známe region uložení dat a případné přístupy mimo EU/EHP?
+- [ ] Máme odkaz na seznam subprocesorů a způsob oznámení změn?
+- [ ] Posíláme do nástroje jen data, která opravdu potřebuje?
+- [ ] Máme retenční pravidla a postup výmazu po ukončení?
+- [ ] Umíme data exportovat v použitelném formátu?
+- [ ] Existuje alternativní postup při výpadku kritického dodavatele?
+- [ ] Je nástroj stále potřeba, nebo přežívá jen ze zvyku?
+- [ ] Je privacy-first slib na webu v souladu s realitou stacku?
+
+## Mini šablona vendor karty
+
+```text
+# Vendor karta: [název nástroje]
+
+## Účel
+K čemu nástroj používáme:
+Vlastník v týmu:
+Kritičnost: nízká / střední / vysoká
+
+## Data
+Kategorie dat:
+Osobní údaje: ano / ne
+Citlivější obchodní data:
+Data, která do nástroje záměrně neposíláme:
+
+## Role a smlouvy
+Role dodavatele: zpracovatel / správce / samostatný správce / nejasné
+DPA / smluvní dokument:
+Datum poslední kontroly:
+
+## Provoz a region
+Primární region:
+Přístup podpory mimo EU/EHP:
+Subprocesory:
+Způsob oznámení změn:
+
+## Retence a exit
+Retence v nástroji:
+Export dat:
+Výmaz po ukončení:
+Náhradní postup při výpadku:
+
+## Rozhodnutí
+Schváleno / omezeno / zamítnuto:
+Podmínky použití:
+Další kontrola:
+```
+
+## Zdroje
+
+- [EUR-Lex: GDPR, Regulation (EU) 2016/679](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)
+- [EDPB: Guidelines 07/2020 on controller and processor concepts in the GDPR](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en)
+- [European Commission: Standard Contractual Clauses](https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en)
+
 # Pracovní log
+- 2026-10-04: Doplněna příloha „Dodavatelský audit a subprocesory bez tabulkového pekla“ s mapou datových toků, rozdělením dodavatelů podle rizika, kontrolou DPA, subprocesorů, transferů mimo EU/EHP, exit plánem, měsíční review rutinou, checklistem, vendor kartou a ověřenými zdroji GDPR, EDPB a Evropské komise.
 - 2026-10-04: Doplněna příloha „Produktová telemetrie bez sledovací horečky“ s rozhodovacím návrhem eventů, rozdělením produktových/provozních/bezpečnostních signálů, pravidly pro identifikátory, performance měření, session replay, měsíční úklid eventů, checklistem, telemetry kartou a ověřenými zdroji GDPR, EDPB, CNIL a MDN.
 - 2026-10-04: Doplněna příloha „Web push notifikace bez otravování a sběru navíc“ s pravidly pro vhodné použití pushů, férový permission prompt, ochranu subscription endpointů, minimalizaci payloadu, preference centrum, agregované měření, checklist, push policy kartu a ověřené zdroje MDN a web.dev.
 
