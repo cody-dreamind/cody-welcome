@@ -37581,7 +37581,198 @@ První pomáhá. Druhá je bezpečnostní incident v zárodku, jen čeká na exp
 - NIST SP 800-63B Digital Identity Guidelines — session management, reauthentication a authenticator binding: https://pages.nist.gov/800-63-4/sp800-63b.html
 - GDPR čl. 5 — zásady minimalizace údajů, omezení uložení, integrita a důvěrnost: https://eur-lex.europa.eu/eli/reg/2016/679/oj
 
+# Příloha: Cache strategie bez starých dat a úniku citlivostí
+
+Cache je jeden z nejlevnějších výkonových triků webu. Správně nastavená cache zrychlí načítání, sníží náklady na infrastrukturu a uleví serveru při špičce. Špatně nastavená cache ale umí udělat přesný opak privacy-first provozu: ukázat starý ceník, rozbít release, vrátit cizí osobní data nebo držet citlivý export v prohlížeči déle, než by kdokoliv chtěl přiznat nahlas.
+
+Neřeš cache jako jednu globální volbu. Rozděl odpovědi podle rizika: veřejné statické soubory, veřejný HTML obsah, veřejné API odpovědi, personalizované stránky, citlivé dokumenty a administrace. Každá skupina má jinou životnost, jiný dopad chyby a jiné pravidlo invalidace.
+
+> Codyho komentář: Cache není kouzelné „zrychlit web“. Je to slib, jak dlouho smí svět věřit staré odpovědi. Když ten slib neumíš vysvětlit, nastavuješ produktovou půjčku, kterou jednou někdo splatí incidentem.
+
+## Začni klasifikací odpovědí
+
+Před hlavičkami si napiš jednoduchou mapu typů odpovědí. U každého typu rozhodni, zda obsahuje osobní údaje, zda se liší podle přihlášeného uživatele, jak často se mění a co se stane, když se zobrazí stará verze.
+
+Praktické rozdělení:
+
+| Typ odpovědi | Příklad | Výchozí cache pravidlo |
+| --- | --- | --- |
+| Verzované statické assety | `/assets/app.a1b2c3.js`, CSS, font | dlouhá cache, `immutable` |
+| Veřejné HTML | homepage, článek, dokumentace | krátká cache nebo revalidace |
+| Veřejná API data | veřejný katalog, status endpoint | krátké `max-age`, případně `stale-while-revalidate` |
+| Personalizované stránky | dashboard, faktury, profil | `private`, často `no-store` podle citlivosti |
+| Citlivé exporty | CSV zákazníků, účetní PDF, zálohy | `no-store`, expirovaný odkaz, audit |
+| Admin a support | interní přehledy, impersonace | `no-store`, re-auth pro citlivé akce |
+
+Největší chyba je nastavit „rychlé“ cache pravidlo na celý web a pak doufat, že výjimky někdo uhlídá. Otoč to: bezpečný default, jasné výjimky pro assety a veřejný obsah.
+
+## Verzované assety cacheuj agresivně
+
+Soubory, jejichž URL obsahuje hash obsahu, jsou ideální kandidát na dlouhou cache. Pokud se soubor změní, změní se i URL. Starý soubor může v cache zůstat dlouho, protože nová verze webu odkazuje na nový soubor.
+
+Typické pravidlo:
+
+```http
+Cache-Control: public, max-age=31536000, immutable
+```
+
+Použij ho pro buildované JS/CSS balíky, obrázky s verzovanou cestou, fonty a ikonové sady, které se nemění pod stejnou URL. Nepoužívej ho pro `index.html`, RSS feed, sitemapu, konfigurační JSON ani pro soubory, které někdo ručně přepisuje na stejné adrese.
+
+Výhoda je jednoduchá: návštěvník stahuje méně dat, server má méně práce a release se neháže sám sobě pod nohy. Podmínka je disciplína v buildu: hash v názvu souboru, žádné ruční přepisování stejné URL a možnost rychle nasadit opravu s novými názvy assetů.
+
+## HTML drž čerstvé, ale ne hystericky
+
+Veřejné HTML stránky obvykle nepotřebují roční cache. Potřebují rychlé načtení a rozumnou jistotu, že se po změně textu, ceny nebo CTA zobrazí nová verze.
+
+Pro běžný obsahový web stačí krátká cache nebo revalidace:
+
+```http
+Cache-Control: public, max-age=300, stale-while-revalidate=60
+```
+
+Nebo konzervativněji:
+
+```http
+Cache-Control: no-cache
+```
+
+Pozor na význam slov. `no-cache` neznamená „nikdy neukládat“. Znamená, že uložená odpověď se před znovupoužitím revaliduje. Pokud nechceš ukládat vůbec, potřebuješ `no-store`. Tohle je drobný rozdíl v textu a velký rozdíl v incidentu.
+
+U marketingových stránek si napiš, co se má stát při úpravě zásadní informace: cena, právní text, dostupnost služby, kontakt, bezpečnostní oznámení. Pokud změna nesmí čekat na TTL, měj možnost ruční invalidace cache a kontrolu přes `curl -I` zvenku.
+
+## Personalizovaný obsah nepatří do sdílené cache
+
+Jakmile odpověď závisí na přihlášeném uživateli, pracovním prostoru, roli nebo oprávnění, přepni mozek z výkonu na bezpečnost. Sdílená cache nesmí dostat šanci uložit odpověď pro jednoho člověka a vrátit ji jinému.
+
+Bezpečný základ pro personalizované stránky:
+
+```http
+Cache-Control: private, no-cache
+```
+
+Pro citlivé odpovědi, administraci, exporty, billing, zdravotní/finanční data, tokeny, pozvánky a interní support přehledy použij tvrdší pravidlo:
+
+```http
+Cache-Control: no-store
+```
+
+K tomu přidej zákaz citlivých hodnot v URL. Pokud je v query stringu token, e-mail, dočasný kód nebo filtr s osobními údaji, může skončit v historii, referreru, logu nebo cache vrstvě. Privacy-first řešení je nudné: krátkodobé serverové ID, POST pro citlivou akci, expirovaný odkaz a minimální logování.
+
+## API cacheuj podle smlouvy s klientem
+
+API odpovědi často svádí ke globálnímu `max-age`, protože to krásně sníží zátěž. Jenže API je smlouva. Klient potřebuje vědět, jak dlouho smí odpověď považovat za pravdu.
+
+Dobré otázky před cache API endpointu:
+
+- Je odpověď veřejná, nebo se liší podle uživatele?
+- Může stará odpověď způsobit špatné rozhodnutí, například nákup za starou cenu?
+- Umí klient pracovat s `ETag` nebo `Last-Modified`?
+- Má endpoint oddělené cache klíče podle jazyka, měny, role nebo tenant ID?
+- Existuje ruční invalidace při změně dat?
+
+Veřejný katalog může mít krátké `max-age`. Status endpoint může mít velmi krátkou cache nebo žádnou, podle účelu. Billing, oprávnění, feature flagy a bezpečnostní nastavení raději revaliduj nebo vůbec neukládej. Výkon ušetřený na autorizaci nestojí za podporu, která pak vysvětluje „proč zákazník viděl něco divného“.
+
+## Service worker je malý proxy server v kapse
+
+Service worker umí offline režim, rychlé opakované návštěvy a příjemný PWA zážitek. Zároveň umí dlouho držet starou logiku a obsluhovat požadavky způsobem, který už produkční server dávno nedělá. Proto potřebuje vlastní provozní pravidla.
+
+Privacy-first pravidla pro service worker:
+
+- cacheuj shell aplikace a veřejné assety, ne citlivá API data,
+- nastav verzi cache a staré cache při aktivaci uklízej,
+- měj kill-switch pro rychlé odregistrování problematického workeru,
+- testuj logout, změnu role a vypršení session i v offline/poor network režimu,
+- neukládej obsah ticketů, dokumentů, faktur nebo zákaznických dat do Cache API bez opravdu dobrého důvodu.
+
+Pokud offline režim není produktová hodnota, nezačínej service workerem jen proto, že to zní moderně. Moderní je i stránka, která se načte rychle, má dobré HTTP hlavičky a po releasu neukazuje duchy staré verze.
+
+## Testuj cache zvenku, ne pocitem v prohlížeči
+
+Cache chyby se špatně hledají v jednom otevřeném Chrome okně. Testuj je stejně jako release: zvenku, opakovatelně a s konkrétními očekáváními.
+
+Užitečné kontroly:
+
+```bash
+curl -I https://example.com/
+curl -I https://example.com/assets/app.hash.js
+curl -I -H 'Authorization: Bearer test' https://example.com/api/me
+```
+
+Hledej hlavně `Cache-Control`, `ETag`, `Last-Modified`, `Vary`, `Age`, `CF-Cache-Status` nebo podobné hlavičky podle použité infrastruktury. Pokud používáš evropský hosting nebo vlastní reverse proxy, dokumentuj konkrétní vrstvy: aplikace, proxy, CDN, objektové úložiště a prohlížeč.
+
+Když řešíš privacy-first provoz v Evropě, nepřidávej CDN jen proto, že „se to tak dělá“. U malého B2B SaaS může být jednodušší evropský server, dobrá komprese, statické assety a rozumné hlavičky lepší než globální cache síť, u které nikdo v týmu neumí vysvětlit datové toky.
+
+## Checklist: cache bez starých dat a úniku citlivostí
+
+- Máš mapu typů odpovědí a cache pravidlo pro každý typ.
+- Verzované statické assety mají dlouhou cache a `immutable`.
+- HTML, RSS, sitemap a konfigurační soubory nemají roční cache.
+- Personalizované stránky nejsou ukládané ve sdílené cache.
+- Citlivé exporty, billing, admin a support odpovědi používají `no-store`.
+- API endpointy mají popsanou čerstvost, revalidaci a invalidaci.
+- `Vary` odpovídá jazykům, autorizaci a dalším rozlišovacím vstupům.
+- Service worker neukládá citlivá data a má plán aktualizace i kill-switch.
+- Release postup obsahuje kontrolu cache hlaviček přes `curl -I`.
+- Tým ví, jak ručně invalidovat cache při chybě ceny, právního textu nebo bezpečnostní opravy.
+
+## Mini šablona cache policy karty
+
+```markdown
+# Cache policy karta: [web / aplikace]
+
+## Vrstvy
+- Aplikace:
+- Reverse proxy:
+- CDN / edge:
+- Objektové úložiště:
+- Service worker:
+
+## Typy odpovědí
+- Verzované assety:
+- Veřejné HTML:
+- Veřejné API:
+- Personalizované stránky:
+- Citlivé exporty:
+- Admin/support:
+
+## Hlavičky
+- Default `Cache-Control`:
+- Výjimky:
+- `ETag` / `Last-Modified`:
+- `Vary`:
+
+## Invalidace
+- Automatická při releasu:
+- Ruční postup:
+- Kdo smí invalidovat:
+- Jak ověřit výsledek:
+
+## Privacy-first kontrola
+- Odpovědi s osobními údaji:
+- Zakázané URL parametry:
+- Retence exportů:
+- Logované cache události:
+
+## Testy
+- `curl -I` pro homepage:
+- `curl -I` pro asset:
+- Test přihlášeného obsahu:
+- Test logoutu a back buttonu:
+- Test service worker aktualizace:
+```
+
+## Zdroje
+
+- MDN HTTP caching — přehled HTTP cache, rozdíl mezi `no-cache`, `no-store`, `private`, cache bustingem a `immutable`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching
+- MDN Cache-Control header — referenční přehled standardních direktiv včetně `max-age`, `s-maxage`, `private`, `immutable`, `stale-while-revalidate` a `stale-if-error`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
+- RFC 9111 HTTP Caching — aktuální specifikace HTTP cache, revalidace, `Vary` a pravidla pro stale odpovědi: https://www.rfc-editor.org/rfc/rfc9111.html
+- OWASP HTTP Headers Cheat Sheet — doporučení k bezpečnostním hlavičkám a použití `no-store` pro citlivé odpovědi: https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
+- OWASP Web Cache Security Cheat Sheet — bezpečnostní rizika web cache, cache poisoning a pravidla pro citlivý obsah: https://cheatsheetseries.owasp.org/cheatsheets/Web_Cache_Security_Cheat_Sheet.html
+- OWASP Testing Guide: Browser Cache Weaknesses — testování, zda prohlížeč neukládá citlivá data po logoutu: https://wstg.owasp.org/latest/4-Web_Application_Security_Testing/04-Authentication/06-Browser_Cache_Weaknesses/
+
 # Pracovní log
+
+- 2026-10-04: Doplněna příloha „Cache strategie bez starých dat a úniku citlivostí“ s klasifikací odpovědí, pravidly pro verzované assety, HTML, API, personalizovaný obsah a service worker, privacy-first checklistem, cache policy kartou a ověřenými zdroji MDN, RFC 9111 a OWASP.
 
 - 2026-10-04: Doplněna příloha „Relace a timeouty bez vyhazování lidí i bez otevřených dveří“ s rozdělením typů relací, idle/absolute timeouty, re-auth pro citlivé akce, správou tokenů, logout pravidly, privacy-first auditním logováním, checklistem, session policy kartou a ověřenými zdroji OWASP, NIST a GDPR.
 
