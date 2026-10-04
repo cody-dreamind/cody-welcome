@@ -39473,7 +39473,213 @@ Postup při chybném rozeslání:
 - [MDN: Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API)
 - [web.dev: Web permissions best practices](https://web.dev/articles/permissions-best-practices)
 
+# Příloha: Produktová telemetrie bez sledovací horečky
+
+Telemetrie má pomoct produktu lépe fungovat. Nemá z malého SaaS udělat domácí verzi reklamní burzy, kde se každé kliknutí tváří jako strategická surovina. U privacy-first produktu je cílem sbírat jen takové signály, které umíš obhájit před zákazníkem, vývojářem i sám před sebou v pátek v 17:42, kdy už mozek běží na záložní baterii.
+
+Dobrá produktová telemetrie odpovídá na otázky typu: „Funguje onboarding?“, „Kde se lidé zaseknou?“, „Padá export?“, „Zpomaluje se kritická akce?“ Špatná telemetrie odpovídá na otázku: „Co všechno ještě dokážeme nasbírat, když už máme SDK v prohlížeči?“ To druhé je levná cesta k drahé nedůvěře.
+
+> Codyho komentář: Když nevíš, proč event existuje, smaž ho z návrhu. Pokud ho za měsíc nikdo nepostrádá, nebyla to analytika, ale digitální lupení v koutě.
+
+## Začni rozhodnutím, ne eventem
+
+Před přidáním nové události napiš rozhodnutí, které má podpořit. Ne „měřit kliknutí na tlačítko“, ale „zjistit, jestli nový importní průvodce snižuje počet nedokončených importů“. Event je až druhý krok. První krok je produktová otázka.
+
+Praktický formát:
+
+```text
+Potřebujeme rozhodnout: [co]
+Signál, který k tomu stačí: [minimální měření]
+Co nesbíráme: [obsah, osobní údaje, dlouhodobý profil]
+Kdy měření smažeme nebo přehodnotíme: [datum / milník]
+```
+
+Příklad pro onboarding:
+
+```text
+Potřebujeme rozhodnout: zda má smysl zkrátit první nastavení projektu.
+Signál, který k tomu stačí: počet dokončených kroků onboardingového checklistu po dnech od registrace.
+Co nesbíráme: názvy projektů, textové vstupy, seznam členů týmu ani obsah práce.
+Kdy měření smažeme nebo přehodnotíme: po vyhodnocení onboardingové úpravy za 30 dní.
+```
+
+Tahle věta zabrání tomu, aby se z jedné užitečné metriky stalo deset „pro jistotu“ eventů. A „pro jistotu“ je v telemetrii skoro vždycky jiný název pro „nechceme se rozhodnout“.
+
+## Rozliš produktové, provozní a bezpečnostní signály
+
+Míchat všechno do jedné analytiky je pohodlné, ale nebezpečné. Produktový event, provozní log a bezpečnostní audit mají jiný účel, jinou retenci i jiný okruh lidí, kteří k nim smějí. Když to smícháš, vznikne datový guláš: nikdo přesně neví, co se sbírá, proč se to drží a kdo za to odpovídá.
+
+Rozdělení v praxi:
+
+- Produktová telemetrie: dokončení onboardingového kroku, použití funkce, opuštění průvodce, úspěšný import.
+- Provozní signály: doba odpovědi, chybovost endpointu, timeout exportu, fronta jobů.
+- Bezpečnostní události: změna role, neúspěšné přihlášení, reset klíče, podezřelý nárůst požadavků.
+- Obsah uživatelské práce: dokumenty, zprávy, názvy klientů, dotazy, soubory — tohle do běžné telemetrie nepatří.
+
+Každá vrstva má mít vlastní pravidla. Produktový tým nepotřebuje číst bezpečnostní logy. Marketing nepotřebuje obsah chybových payloadů. A externí nástroj na session replay nepotřebuje vidět vůbec nic, pokud se bez něj obejdeš. Spoiler: často se obejdeš.
+
+## Event navrhuj jako veřejnou smlouvu
+
+Event schema piš tak, aby se dalo ukázat zákazníkovi bez trapného ticha. Název má popisovat práci uživatele, ne šmírovací detail. Vlastnosti mají být malé, kategorizované a bez volného textu.
+
+Lepší event:
+
+```json
+{
+  "event": "invoice_export_finished",
+  "properties": {
+    "format": "pdf",
+    "result": "success",
+    "duration_bucket": "2-5s",
+    "account_plan": "team"
+  }
+}
+```
+
+Horší event:
+
+```json
+{
+  "event": "clicked_button_348",
+  "properties": {
+    "invoice_name": "ACME - urgent - Q4 legal issue",
+    "customer_email": "...",
+    "raw_error": "...",
+    "full_url": "..."
+  }
+}
+```
+
+Všimni si rozdílu: první event říká, jestli export funguje. Druhý event potichu tahá obchodní kontext, osobní údaje a možná i interní poznámky zákazníka. To není „lepší analytika“. To je bezpečnostní dluh s dashboardem.
+
+## Identifikátor drž krátce a účelově
+
+Ne každá telemetrie potřebuje stabilní user ID. Často stačí anonymní session ID, workspace ID zahashované pro konkrétní účel, denní agregace nebo čistě serverové metriky bez vazby na člověka. Když potřebuješ spojit signály v rámci onboardingu, nemusíš z toho automaticky vyrábět dlouhodobý profil napříč celým produktem.
+
+Pravidlo pro výběr identifikátoru:
+
+- Bez identifikátoru: výkon stránky, chybovost endpointu, dostupnost služby.
+- Krátká session: průchod jedním wizardem, dokončení formuláře, technická diagnostika.
+- Workspace nebo účet: adopce placené funkce, kapacitní plánování, B2B health score.
+- Osobní uživatel: jen pokud je rozhodnutí opravdu o individuální práci člověka a umíš vysvětlit účel.
+
+Pokud se přistihneš u věty „jednou by se to mohlo hodit“, vrať se o krok zpět. GDPR principy jako účelové omezení, minimalizace a omezení uložení nejsou byrokratická poezie; jsou dobrá produktová hygiena. Data, která nepotřebuješ, nemusíš zabezpečovat, vysvětlovat ani mazat po incidentu.
+
+## Měř konverzi bez obsahu práce
+
+U SaaS produktů často potřebuješ vědět, jestli lidé dokončili klíčovou akci: vytvořili projekt, pozvali kolegu, dokončili import, odeslali nabídku, nastavili integraci. To jde měřit bez ukládání názvů projektů, e-mailů pozvaných kolegů, textů nabídek nebo obsahu importu.
+
+Příklad minimalistické měřicí matice:
+
+| Otázka | Stačí měřit | Nesbírat |
+|---|---|---|
+| Dokončí lidé onboarding? | krok, výsledek, den od registrace | názvy projektů, textové odpovědi |
+| Funguje import? | typ importu, velikostní bucket, výsledek | obsah souboru, názvy zákazníků |
+| Pomáhá nová šablona? | použití šablony, dokončení workflow | text dokumentu, interní poznámky |
+| Má funkce hodnotu pro tým? | počet workspace použití týdně | individuální klikačka každého člověka |
+
+Když potřebuješ kvalitativní vhled, udělej rozhovor nebo dobrovolný feedback formulář. Nesnaž se rozhovor nahradit tajnou detektivkou v eventech. Člověk ti často za patnáct minut řekne víc než tisíc řádků klikací polévky.
+
+## Web performance měř jako provoz, ne jako stalking
+
+Výkon webu a aplikace můžeš měřit privacy-first způsobem. Webové Performance API umí dodat technické časování navigace a zdrojů, aniž bys musel posílat obsah stránky nebo osobní údaje. `navigator.sendBeacon()` se hodí pro malé asynchronní odeslání diagnostiky při odchodu ze stránky, ale pořád platí: neposílej víc, než potřebuješ.
+
+Dobrá performance telemetrie:
+
+- měří technické metriky v bucketech, ne detailní stopu uživatele;
+- neukládá celé URL s citlivými parametry;
+- odděluje veřejné stránky, přihlášenou aplikaci a admin rozhraní;
+- má krátkou retenci surových záznamů a delší retenci jen pro agregace;
+- běží primárně na vlastním nebo důvěryhodném evropském provozu.
+
+Pro veřejný web často stačí kombinace agregované analytiky, serverových logů bez zbytečných údajů a syntetického monitoringu. Real-user monitoring přidávej až ve chvíli, kdy máš konkrétní výkonový problém, který jinak neumíš dobře vyřešit.
+
+## Session replay ber jako červenou zónu
+
+Session replay, heatmapy a nahrávky obrazovky vypadají lákavě: „konečně uvidíme, co lidé dělají“. Jenže přesně proto jsou rizikové. I při maskování polí můžeš zachytit citlivý kontext, interní názvy, URL, obsah komponent nebo chování konkrétního člověka.
+
+Privacy-first alternativa:
+
+- nejdřív použij agregované funnel metriky;
+- pak se podívej na anonymizované chyby a technické logy;
+- potom udělej 5–7 dobrovolných uživatelských rozhovorů;
+- session replay zapni jen pro přesně omezený problém, krátké období a bezpečné prostředí;
+- nikdy nenahrávej citlivé obrazovky, admin akce, obsah dokumentů, platební údaje nebo zdravotní/finanční kontext.
+
+Pokud dodavatel neumí jasně vysvětlit, kde jsou data, kdo k nim má přístup, jak se maskují, jaká je retence a jak se data mažou, není to nástroj pro privacy-first SaaS. Je to lesklá past s pěknou heatmapou.
+
+## Udělej měsíční úklid eventů
+
+Telemetrie se kazí plíživě. Přidáš event pro experiment, zapomeneš ho po vyhodnocení. Přidáš property pro debugging, zůstane v produkci. Přejmenuješ funkci, ale event dál nese starý název. Za půl roku nikdo neví, co znamená `modal_continue_v2_clicked_final_really`.
+
+Měsíční rutina:
+
+1. Vypiš všechny eventy přidané za posledních 30 dní.
+2. U každého ověř vlastníka, účel, retenci a dashboard, kde se používá.
+3. Smaž eventy experimentů, které už skončily.
+4. Zkontroluj, že property neobsahují volný text, e-mail, celé URL nebo obsah práce.
+5. Porovnej event katalog s privacy dokumentací.
+6. Uprav dashboardy tak, aby zobrazovaly rozhodnutí, ne sběratelskou vitrínu metrik.
+
+Tohle není administrativní šikana. Je to způsob, jak zabránit tomu, aby se z analytiky stala skládka, na kterou se bojí sáhnout i člověk s rukavicemi.
+
+## Checklist: telemetrie bez sledovací horečky
+
+- Má každý event napsané rozhodnutí, které podporuje?
+- Je jasně oddělená produktová telemetrie, provozní monitoring a bezpečnostní audit?
+- Neobsahují eventy volný text, osobní údaje, celé URL, obsah práce nebo citlivé názvy?
+- Používáš nejkratší rozumný identifikátor pro daný účel?
+- Má surová telemetrie krátkou retenci a agregace samostatné pravidlo?
+- Umíš zákazníkovi lidsky vysvětlit, co měříš a proč?
+- Existuje měsíční úklid eventů, experimentálních měření a nepoužívaných dashboardů?
+- Je dodavatel telemetrie prověřený z hlediska evropského provozu, DPA, subprocesorů a mazání dat?
+
+## Mini šablona telemetry karty
+
+```markdown
+# Telemetry karta: [produkt / modul / workflow]
+
+## Rozhodnutí
+Jaké produktové nebo provozní rozhodnutí měření podporuje:
+Kdo je vlastník měření:
+Kdy se měření vyhodnotí:
+
+## Eventy
+Názvy eventů:
+Povolené properties:
+Zakázaná data:
+
+## Identifikace
+Použitý identifikátor:
+Důvod:
+Alternativa s menším dopadem:
+
+## Retence
+Surová data:
+Agregace:
+Datum revize:
+
+## Přístup
+Kdo smí číst surová data:
+Kdo smí číst dashboardy:
+Jak se loguje přístup:
+
+## Privacy-first kontrola
+Jak by měření vysvětlil zákazníkovi člověk ze supportu:
+Co záměrně nesbíráme:
+Kdy event smažeme:
+```
+
+## Zdroje
+
+- [EUR-Lex: GDPR, Regulation (EU) 2016/679](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679)
+- [EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en)
+- [CNIL: Use analytics on your websites and applications](https://www.cnil.fr/fr/node/677)
+- [MDN: Beacon API](https://developer.mozilla.org/en-US/docs/Web/API/Beacon_API)
+- [MDN: Navigation timing](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/Navigation_timing)
+
 # Pracovní log
+- 2026-10-04: Doplněna příloha „Produktová telemetrie bez sledovací horečky“ s rozhodovacím návrhem eventů, rozdělením produktových/provozních/bezpečnostních signálů, pravidly pro identifikátory, performance měření, session replay, měsíční úklid eventů, checklistem, telemetry kartou a ověřenými zdroji GDPR, EDPB, CNIL a MDN.
 - 2026-10-04: Doplněna příloha „Web push notifikace bez otravování a sběru navíc“ s pravidly pro vhodné použití pushů, férový permission prompt, ochranu subscription endpointů, minimalizaci payloadu, preference centrum, agregované měření, checklist, push policy kartu a ověřené zdroje MDN a web.dev.
 
 - 2026-10-04: Doplněna příloha „Deprekační politika a ukončování funkcí bez zákaznického překvapení“ s rozlišením typů ukončení, deprekačními okny, náhradami, minimalizovaným měřením používání, komunikačním plánem, bezpečnými mezistavy, úklidem dat/kódu, checklistem, deprekační kartou a ověřenými zdroji Microsoft, Azure, OWASP a GDPR.
