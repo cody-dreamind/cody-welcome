@@ -16,6 +16,8 @@ Když nevíš, jestli je změna ještě malá, napiš si její stop stav: co př
 
 Ke každé malé změně si nech krátkou rozhodovací poznámku: původní problém, zvolenou úpravu, očekávaný dopad a datum kontroly. Za měsíc pak nebudeš luštit archeologii Slacku, ale uvidíš, které mikro-kroky opravdu pomohly a které byly jen elegantní odbočkou.
 
+Před publikací si ještě udělej třicetisekundový „privacy-first čuchací test“: kdyby stejnou změnu viděl zákazník, působila by jako pomoc, nebo jako další způsob, jak z něj vytěžit data? Pokud odpověď není jasná, změna patří zpátky na pracovní stůl, ne do produkce.
+
 ## Jak e-book používat
 
 - Čti kapitoly samostatně podle problému, který právě řešíš.
@@ -37989,6 +37991,8 @@ Vlastník:
 - [EUR-Lex: Nařízení GDPR 2016/679, článek 5](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX:32016R0679)
 
 # Pracovní log
+
+- 2026-10-04: Doplněn úvod e-booku o krátký „privacy-first čuchací test“ pro kontrolu malých změn před publikací.
 
 - 2026-10-04: Doplněna příloha „Vyhledávání na webu a v SaaS bez úniku dotazů“ s klasifikací search scénářů, pravidly pro analytiku, URL parametry, externí search služby, nulové výsledky, logování, relevance bez profilování, checklistem, search policy kartou a ověřenými zdroji MDN, OWASP a EUR-Lex.
 
