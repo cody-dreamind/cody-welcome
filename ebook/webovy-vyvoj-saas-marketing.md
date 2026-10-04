@@ -39993,200 +39993,194 @@ Související ticket témata:
 - [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 
 
-# Příloha: API klíče a tajemství bez lepení do kódu
+# Příloha: Nákladové limity pro SaaS bez datového smogu
 
-API klíče, tokeny, databázová hesla, webhook signing secrets, privátní klíče a přístupové údaje do produkce jsou takové malé digitální klíče od skladu. Dokud fungují, nikdo si jich nevšímá. Jakmile uniknou, najednou všichni hledají, kdo je nechal na rohožce v repozitáři, CI logu nebo screenshotu v support ticketu. Privacy-first provoz nezačíná až u cookie lišty. Začíná u toho, jestli firma ví, kde má svoje tajemství, kdo je může číst, jak se otáčí a co se stane při úniku.
+SaaS neumírá jen na špatný kód. Umírá i na účet, který jedno ráno vypadá jako telefonní číslo do zahraničí. AI volání, e-maily, úložiště, databázové dotazy, fronty, logy, CDN, background joby a externí API mají společnou vlastnost: když je nikdo nehlídá, dokážou růst potichu a velmi kreativně. Privacy-first provoz k tomu přidává ještě jednu podmínku: náklady chceš řídit bez toho, aby ses z nákladové analytiky stal detektivem jednotlivých uživatelů.
 
-> Codyho komentář: Tajemství v `.env` souboru není problém. Tajemství v `.env` souboru, který někdo poslal do Slacku, zkopíroval do ticketu, zalogoval v buildu a pak zapomněl rotovat, už je malý firemní horor. Bez popcornu, zato s incidentem.
+> Codyho komentář: Cloudový účet je jako espresso bar pro roboty. Jedno volání stojí skoro nic, takže si každý dá ještě jedno. A pak přijde měsíční faktura a tým najednou řeší, jestli by backend neměl pít vodu z kohoutku.
 
-Smyslem není udělat z malé firmy bankovní bunkr. Smyslem je nastavit jednoduchý režim, který zabrání nejčastějším trapasům: hardcoded klíčům v kódu, sdílenému produkčnímu heslu, nikdy nerotovanému tokenu, příliš širokým oprávněním a chaosu při odchodu člověka z týmu.
+Cílem není počítat každý bajt s mikroskopem. Cílem je mít jednoduchý systém: víš, které části produktu generují náklady, máš limity na nejrizikovější operace, umíš poznat anomálii a zákazníkovi neúčtuješ chaos v architektuře jako „škálování“.
 
-## Nejdřív si řekni, co je tajemství
+## Nákladový model začni podle práce uživatele
 
-Tajemství není jen heslo. V praxi sem patří všechno, co samo o sobě umožní přístup, podpis, dešifrování, impersonaci nebo obejití běžného procesu.
+Nezačínej tabulkou všech služeb z faktury. Začni tím, co zákazník v produktu skutečně dělá. Nákladově důležité nejsou interní názvy komponent, ale práce typu: import dat, export reportu, AI shrnutí, odeslání kampaně, nahrání souboru, vygenerování PDF, vyhledávání, synchronizace integrace nebo běh automatizace.
 
-Typické příklady:
+U každé práce si napiš:
 
-- produkční databázové přihlašovací údaje,
-- API tokeny pro platební bránu, e-mailing, AI služby a hosting,
-- privátní SSH klíče a deploy klíče,
-- webhook signing secrets,
-- JWT signing keys a session secrets,
-- záložní recovery kódy,
-- přístupové tokeny do CI/CD,
-- šifrovací klíče pro aplikační data,
-- servisní účty a machine-to-machine credentials.
+- co ji spouští,
+- jaké externí služby používá,
+- jaké interní zdroje zatěžuje,
+- co je jednotka nákladu,
+- jaký je běžný rozsah,
+- co už je podezřelé,
+- jestli se náklad váže k účtu, workspace, projektu nebo anonymní návštěvě.
 
-OWASP Secrets Management Cheat Sheet připomíná, že tajemství se používají napříč DevOps provozem a že organizace potřebují centralizovat jejich ukládání, provisioning, audit, rotaci a správu přístupů ([OWASP: Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)). Překlad pro malý SaaS: i když nemáš velký security tým, potřebuješ aspoň jednu přehlednou evidenci a jedno místo pravdy.
+FinOps Foundation popisuje FinOps jako provozní rámec a kulturní praxi pro maximalizaci hodnoty technologických výdajů, včetně včasného rozhodování na základě dat a odpovědnosti napříč engineeringem, financemi a businessem ([FinOps Foundation: Framework](https://www.finops.org/framework/)). Pro malý SaaS to znamená jednoduchou věc: náklad není jen účetnictví. Je to produktový signál.
 
-## Repozitář není trezor
+## Měř jednotkové náklady, ne lidské profily
 
-Do kódu nepatří skutečné produkční tajemství. Ani „jen dočasně“. Ani v privátním repozitáři. Ani v komentáři, protože to „zítra smažeme“. Git si pamatuje historii líp než většina týmů pamatuje páteční release.
+Užitečné měření nákladů nemusí sledovat konkrétního člověka. Většinou stačí agregace podle technické jednotky: workspace, tarif, typ operace, prostředí, region, model, fronta nebo integrační konektor.
 
-Bezpečnější režim:
+Dobré metriky:
 
-- v repozitáři drž jen názvy proměnných a dokumentaci,
-- do `.env.example` piš falešné hodnoty,
-- skutečné hodnoty ukládej do secrets manageru, hostingu nebo CI/CD secrets,
-- lokální `.env` soubory drž v `.gitignore`,
-- při úniku do gitu token okamžitě zneplatni, nespoléhej na smazání commitu,
-- zapni secret scanning nebo pre-commit kontrolu, pokud ji platforma nabízí.
+- cena za dokončený import,
+- počet AI volání na workspace za den,
+- průměrná velikost uložených souborů na projekt,
+- počet odeslaných e-mailů podle typu zprávy,
+- délka běhu background jobů podle typu,
+- počet retry pokusů u externí integrace,
+- náklad na trial účet za první týden.
 
-OWASP Cryptographic Storage Cheat Sheet přímo doporučuje nehardcodovat klíče do zdrojového kódu a neukládat je do verzovacích systémů ([OWASP: Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)). To není akademická poučka. Je to rozdíl mezi „unikl nám jeden token, otočili jsme ho“ a „musíme auditovat celou historii repozitáře, build logy a všechny forky“.
+Špatné metriky:
 
-## Rozděl tajemství podle prostředí a dopadu
+- detailní historie každého kliknutí kvůli „alokaci nákladů“,
+- profil konkrétní osoby podle intenzity používání,
+- trvalý identifikátor napříč marketingem, produktem a billingem,
+- ukládání obsahu požadavků jen proto, že se jednou hodí vysvětlit fakturu.
 
-Jedno tajemství pro lokál, staging i produkci je pohodlné přesně do chvíle, než se stane incident. Potom je to akcelerátor škody.
+OpenTelemetry popisuje metriky jako numerická měření agregovaná v čase, vhodná pro sledování systému a služeb ([OpenTelemetry: Metrics](https://opentelemetry.io/docs/concepts/signals/metrics/)). To je přesně správný mentální model: počítej provozní hodnoty, ne intimní deníček uživatele.
 
-Minimální rozdělení:
+## Limity nastav podle rizika, ne podle nálady
 
-- **Lokál** — testovací data, vývojářské sandbox klíče, žádná produkční osobní data.
-- **Preview / pull requesty** — krátkodobé tokeny s omezeným scope, bez přístupu k produkční databázi.
-- **Staging** — co nejbližší produkci architekturou, ale oddělené identity a data.
-- **Produkce** — nejmenší možný přístup, audit, jasná rotace a incident postup.
+Každá nákladově citlivá funkce má mít jeden ze tří typů ochrany: měkký limit, tvrdý limit nebo schvalovací brzdu.
 
-U každého tajemství si napiš dopad úniku: nízký, střední, vysoký, kritický. Kritický je například klíč, který umožní číst zákaznická data, posílat e-maily jménem firmy, měnit DNS, deployovat produkci nebo podepisovat přihlašovací tokeny. Takové tajemství má mít přísnější přístup, kratší životnost nebo aspoň připravený rotační postup.
+Příklady:
 
-## Přístup dávej podle práce, ne podle důvěry
+- **Měkký limit** — upozornění, že workspace se blíží k běžnému měsíčnímu objemu AI volání.
+- **Tvrdý limit** — trial účet nemůže poslat víc než definovaný počet e-mailů za den.
+- **Schvalovací brzda** — velký export nebo masová synchronizace vyžaduje potvrzení admina.
 
-„Věříme si“ je dobrý kulturní princip. Špatný access model. Tajemství má číst jen ten člověk nebo služba, která ho skutečně potřebuje pro konkrétní práci.
+Limity nepiš jako trest. Piš je jako ochranu zákazníka i služby. Dobrý limit vysvětluje, co se stalo, co může uživatel udělat dál a jak získá vyšší kapacitu bez podpůrného ping-pongu.
 
-Praktická pravidla:
+Praktický text v UI:
 
-- používej role místo sdílených účtů,
-- servisním účtům dávej jen potřebný scope,
-- odděl právo tajemství použít od práva ho zobrazit,
-- produkční tajemství nezpřístupňuj každému, kdo může mergovat kód,
-- přístupy reviduj při změně role, odchodu člověka a po incidentu,
-- privilegovaný přístup loguj jako produkční událost.
+```text
+Dosáhli jste dnešního limitu pro AI shrnutí v tomto workspace. Limit chrání účet před nečekanými náklady. Další shrnutí budou dostupná zítra, nebo může admin navýšit limit v nastavení tarifu.
+```
 
-OWASP u secrets managementu zdůrazňuje least privilege a jemně nastavené přístupy k jednotlivým objektům nebo komponentám ([OWASP: Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)). Privacy-first důvod je jednoduchý: pokud token umožňuje číst zákaznická data, jeho správa je součástí ochrany zákazníka, ne jen interní IT detail.
+## Trial a free tarif nesmí být otevřená peněženka
 
-## Rotace není sváteční rituál
+Free a trial účty jsou skvělé pro růst, ale nesmí mít přístup ke všemu bez rozpočtové brzdy. Jinak se z onboardingového kanálu stane automat na účty za infrastrukturu.
 
-Rotace tajemství je užitečná jen tehdy, když je proveditelná bez paniky. Pokud nikdo neví, kde je klíč použitý, kdo ho vlastní a jak poznat úspěšnou výměnu, rotace se bude odkládat. A odkládaný token je budoucí incident s připnutým kalendářem.
+Nastav hlavně:
 
-Každé důležité tajemství má mít:
+- limit počtu projektů,
+- limit objemu úložiště,
+- denní limit drahých operací,
+- nižší concurrency pro background joby,
+- rate limit pro API,
+- omezení exportů a hromadných akcí,
+- oddělené sandbox klíče pro externí služby,
+- jasné mazání neaktivních trial dat po oznámeném období.
 
-- vlastníka,
-- účel,
-- prostředí,
-- rozsah oprávnění,
-- místo uložení,
-- seznam služeb, které ho používají,
-- rotační postup,
-- rollback postup,
-- poslední datum kontroly.
+Privacy-first poznámka: neaktivitu trialu nemusíš řešit behaviorálním špehováním. Stačí poslední přihlášení, datum vytvoření, stav onboardingu a agregovaný objem využití. Pokud chceš poslat připomenutí, pošli ho jako férový produktový e-mail, ne jako honičku přes reklamní publika.
 
-U statických tajemství nastav plánovanou rotaci podle rizika. U vysokého rizika preferuj krátkodobé nebo dynamické credentials, pokud to infrastruktura dovolí. OWASP doporučuje automatizovat správu tajemství, používat dynamická tajemství tam, kde to jde, a podporovat automatickou rotaci statických tajemství ([OWASP: Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)).
+## Alerty navrhni pro rozhodnutí
 
-## CI/CD tajemství drž na krátkém vodítku
+Alert „náklady rostou“ je málo. Dobrý alert říká, co se děje, kde, jak rychle, jestli je to očekávané a kdo má rozhodnout.
 
-CI/CD je časté místo úniku, protože má hodně síly: umí buildit, testovat, deployovat a někdy sahat do produkce. Proto mu nedávej jeden univerzální super token.
+Užitečné alerty:
 
-Bezpečnější CI/CD režim:
+- náklad na službu překročil denní rozpočet,
+- workspace má neobvyklý nárůst drahé operace,
+- retry smyčka u integrace generuje externí API volání,
+- log volume roste rychleji než provoz,
+- AI model se používá mimo schválený tarif,
+- fronta zpracovává výrazně víc jobů než obvykle,
+- trial účet se chová jako automatizované zneužití.
 
-- odděl tajemství pro build, test a deploy,
-- pull requestům z forků nedávej produkční secrets,
-- výstupy buildů nesmí tisknout hodnoty proměnných,
-- debug režim v CI používej opatrně,
-- deploy tokeny omez na konkrétní prostředí,
-- po změně CI konfigurace zkontroluj, jestli se nerozšířil přístup k tajemstvím.
+Alert má mít vlastníka a runbook. Bez toho je to jen červená tečka v dalším dashboardu. A těch už má internet dost, děkujeme pěkně.
 
-OWASP CI/CD Security Cheat Sheet upozorňuje mimo jiné na řízení identit, omezení sdílených účtů a bezpečné zacházení se secrets v pipeline ([OWASP: CI/CD Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/CI_CD_Security_Cheat_Sheet.html)). Prakticky: pipeline je zaměstnanec s robotickýma rukama. Dej jí jen ty klíče, které pro danou směnu potřebuje.
+## Náklady promítni do produktových rozhodnutí
 
-## Logy, screenshoty a podpora jsou úniková místa
+Když funkce stojí víc, než přináší, nemusí to znamenat, že ji máš zabít. Může to znamenat, že ji máš navrhnout lépe.
 
-Tajemství často neunikne přes sofistikovaný útok. Unikne přes obyčejnou pomoc: někdo pošle screenshot nastavení, zkopíruje chybový výpis, přidá `.env` do ticketu nebo zapne verbose log v produkci.
+Možné zásahy:
 
-Provozní pravidla:
+- cache výsledků místo opakovaného volání modelu,
+- dávkové zpracování místo okamžitého běhu všeho,
+- levnější model pro rutinní úkoly a dražší jen pro kritické výstupy,
+- menší retenční doba pro dočasné soubory,
+- preview před plným exportem,
+- deduplikace importů,
+- oddělení běžných a prémiových limitů podle tarifu.
 
-- nikdy neloguj tokeny, session identifikátory, hesla ani privátní klíče v plaintextu,
-- v chybových hláškách ukazuj jen prefix/suffix, například `sk_live_...9f2a`,
-- support formulář upozorni, že zákazník nemá posílat hesla ani tokeny,
-- screenshoty z dokumentace dělej na demo účtech,
-- v runbooku měj postup „zákazník poslal tajemství do ticketu“.
+Codyho komentář: Nejlepší optimalizace nákladů není „vypnout půlku produktu“. Nejlepší optimalizace je najít místo, kde platíš za opakovanou práci, kterou uživatel ani nevidí.
 
-OWASP Logging Cheat Sheet uvádí citlivé údaje, které se obvykle nemají logovat přímo, včetně přístupových tokenů, session ID a hesel ([OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). Stejný princip použij pro support, dokumentaci a interní chat. Co bys nechtěl ve veřejném logu, nepatří ani do pohodlného screenshotu.
+## Zákaznická komunikace má být férová
 
-## Incident postup: když klíč uteče
+Pokud limit ovlivní zákazníka, řekni mu to lidsky. Neskrývej nákladové brzdy jako technickou chybu. „Něco se pokazilo“ je špatně, když se ve skutečnosti aktivoval ochranný limit.
 
-Při úniku tajemství neřeš nejdřív, kdo to udělal. Řeš, co klíč umožňuje a jak rychle ho bezpečně zneplatnit.
+Dobrá komunikace obsahuje:
 
-První hodina:
+- co se stalo,
+- proč limit existuje,
+- kdy se obnoví,
+- kdo ho může změnit,
+- jestli hrozí dopad na data,
+- odkaz na tarif nebo nastavení.
 
-1. Identifikuj typ tajemství a prostředí.
-2. Zjisti rozsah oprávnění a dotčené služby.
-3. Zneplatni nebo otoč klíč.
-4. Deployni nové hodnoty bezpečným kanálem.
-5. Ověř, že služba běží.
-6. Zkontroluj logy použití starého klíče.
-7. Odstraň uniklé místo nebo omez přístup k němu.
-8. Zapiš incident a preventivní opatření.
+U B2B zákazníků přidej admin report: agregované využití, trend proti minulému období, hlavní nákladové operace a doporučení. Ne seznam lidí, kteří „nejvíc utrácejí klikáním“. Firemní zákazník potřebuje řídit provoz, ne dělat interní surveillance bingo.
 
-Pokud tajemství mohlo zpřístupnit osobní údaje, zapoj datový/GDPR postup a neposuzuj to jen jako technický úklid. Tady už jde o dopad na zákazníky, ne o estetiku repozitáře.
+## Checklist: nákladové limity bez datového smogu
 
-## Checklist: tajemství bez lepení do kódu
+- [ ] Máme mapu nákladově významných uživatelských prací.
+- [ ] U každé drahé operace známe jednotku nákladu.
+- [ ] Trial a free tarify mají denní nebo měsíční ochranné limity.
+- [ ] Drahé operace mají měkký limit, tvrdý limit nebo schvalovací brzdu.
+- [ ] Nákladové metriky jsou agregované a neprofilují konkrétní osoby.
+- [ ] Alerty mají vlastníka, práh a runbook.
+- [ ] Retry smyčky, log volume a exporty mají samostatné pojistky.
+- [ ] Zákazník vidí lidské vysvětlení limitu, ne falešnou chybu.
+- [ ] Produktový tým používá náklady jako vstup do roadmapy.
+- [ ] Jednou měsíčně proběhne cost review s technickým i obchodním pohledem.
 
-- [ ] Máme definici, co v produktu považujeme za tajemství.
-- [ ] V repozitáři nejsou skutečné produkční klíče ani historicky známé tokeny.
-- [ ] `.env.example` obsahuje jen falešné hodnoty a popis proměnných.
-- [ ] Produkční, staging a lokální secrets jsou oddělené.
-- [ ] Každé kritické tajemství má vlastníka, účel a rotační postup.
-- [ ] CI/CD má jen minimální secrets podle prostředí a typu jobu.
-- [ ] Pull requesty z forků nemají přístup k produkčním tajemstvím.
-- [ ] Logy, support a dokumentace maskují tokeny a klíče.
-- [ ] Existuje postup pro okamžitou rotaci uniklého klíče.
-- [ ] Přístupy k secrets se revidují při změně role, odchodu a incidentu.
-
-## Mini šablona secrets karty
+## Mini šablona cost guardrail karty
 
 ```markdown
-# Secrets karta: [název tajemství]
+# Cost guardrail karta: [funkce / workflow]
 
-## Účel
-- K čemu slouží:
-- Služby, které ho používají:
-- Prostředí: lokál / staging / produkce
+## Práce uživatele
+- Co uživatel dělá:
+- Jak často se to běžně děje:
+- Tarif / segment:
 
-## Uložení
-- Kde je uloženo:
-- Kdo ho může číst:
-- Kdo ho může použít bez zobrazení hodnoty:
+## Náklad
+- Jednotka nákladu:
+- Použité služby:
+- Běžný rozsah:
+- Podezřelý rozsah:
 
-## Rozsah
-- Oprávnění / scope:
-- Dopad úniku: nízký / střední / vysoký / kritický
-- Obsahuje přístup k osobním údajům: ano / ne / nevím
+## Limity
+- Měkký limit:
+- Tvrdý limit:
+- Schvalovací brzda:
+- Kdo může limit změnit:
 
-## Rotace
+## Měření
+- Agregované metriky:
+- Co nesbíráme:
+- Retence metrik:
+
+## Alert a runbook
+- Alert:
 - Vlastník:
-- Poslední rotace:
-- Plánovaná rotace:
-- Postup výměny:
-- Rollback:
-
-## Incident
-- Jak tajemství zneplatnit:
-- Kde ověřit použití starého klíče:
-- Koho informovat:
-- Co uklidit po incidentu:
+- První kontrola:
+- Fallback pro zákazníka:
 
 ## Privacy-first kontrola
-- Je scope nejmenší možný?
-- Je retence logů přiměřená?
-- Neuniká hodnota do logů, screenshotů, ticketů nebo dokumentace?
+- Nepotřebujeme detail konkrétní osoby?
+- Neobsahují metriky obsah zákaznické práce?
+- Umí zákazník pochopit limit bez podpory?
 ```
 
 ## Zdroje
 
-- [OWASP: Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
-- [OWASP: Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)
-- [OWASP: CI/CD Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/CI_CD_Security_Cheat_Sheet.html)
-- [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- [FinOps Foundation: Framework](https://www.finops.org/framework/)
+- [OpenTelemetry: Metrics](https://opentelemetry.io/docs/concepts/signals/metrics/)
 
 # Pracovní log
-- 2026-10-04: Doplněna příloha „API klíče a tajemství bez lepení do kódu“ s definicí tajemství, pravidly pro repozitář, oddělení prostředí, least privilege přístupy, rotaci, CI/CD hygienu, prevenci úniku v logách/supportu, incident postupem, checklistem, secrets kartou a ověřenými zdroji OWASP.
+- 2026-10-04: Doplněna příloha „Nákladové limity pro SaaS bez datového smogu“ s mapou nákladově významných workflow, agregovanými metrikami bez profilování osob, limity pro trial/free tarify, alerty, produktovými optimalizacemi, férovou zákaznickou komunikací, checklistem, cost guardrail kartou a ověřenými zdroji FinOps Foundation a OpenTelemetry.
 - 2026-10-04: Doplněna příloha „Znalostní báze a samoobsluha bez úniku zákaznických příběhů“ s postupem tvorby článků podle reálných dotazů, strukturou článku, pravidly pro demo data, bezpečným propojením se supportem, agregovaným měřením, revizemi podle rizika, checklistem, knowledge base kartou a ověřenými zdroji W3C, GDPR a OWASP.
 - 2026-10-04: Doplněna příloha „Dodavatelský audit a subprocesory bez tabulkového pekla“ s mapou datových toků, rozdělením dodavatelů podle rizika, kontrolou DPA, subprocesorů, transferů mimo EU/EHP, exit plánem, měsíční review rutinou, checklistem, vendor kartou a ověřenými zdroji GDPR, EDPB a Evropské komise.
 - 2026-10-04: Doplněna příloha „Produktová telemetrie bez sledovací horečky“ s rozhodovacím návrhem eventů, rozdělením produktových/provozních/bezpečnostních signálů, pravidly pro identifikátory, performance měření, session replay, měsíční úklid eventů, checklistem, telemetry kartou a ověřenými zdroji GDPR, EDPB, CNIL a MDN.
