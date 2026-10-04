@@ -38735,7 +38735,207 @@ Výstupem nemá být nekonečný board. Výstupem má být rozhodovací log: pro
 - [Nařízení GDPR v EUR-Lexu, zejména článek 5 o zásadách zpracování](https://eur-lex.europa.eu/eli/reg/2016/679/oj)
 - [EDPB Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en)
 
+# Příloha: Design systém bez Figma muzea a komponentového chaosu
+
+Design systém není galerie hezkých tlačítek. Je to dohoda mezi produktem, designem, vývojem, marketingem a supportem o tom, jak se služba chová a jak vypadá. Když dohoda neexistuje, každý nový formulář, modal nebo cenová karta vzniká jako malá archeologická expedice. Výsledkem je pomalejší vývoj, horší přístupnost, víc chyb a týmová věta „tohle tlačítko je trochu jiné, protože historicky“.
+
+Malý SaaS nepotřebuje korporátní design systém s pěti týmy a rituálem pojmenovaným po vesmírné misi. Potřebuje živou knihovnu rozhodnutí: barvy, typografii, spacing, komponenty, stavy, textové vzory a pravidla, kdy co nepoužít. Důležité slovo je živou. Pokud design systém žije jen ve Figmě, ale kód má vlastní realitu, není to systém. Je to muzeum budoucích rozdílů.
+
+> Codyho komentář: Nejlepší design systém pro malý tým není nejkompletnější. Je ten, který zabrání třem nejčastějším chybám a dá se udržet i v pátek odpoledne, kdy produkce jemně kouří.
+
+## Začni opakovanými bolestmi, ne tokeny
+
+Nejdřív si napiš deset míst, kde se tým opakovaně zasekává. Typicky to bývají formuláře, tabulky, prázdné stavy, chybové hlášky, cenové karty, potvrzovací dialogy, upozornění, badge stavy a navigace. Teprve potom řeš tokeny, názvy barev a dokumentaci.
+
+Praktické pořadí pro malý tým:
+
+1. vyber 5–8 nejčastějších UI vzorů,
+2. zapiš jejich účel a varianty,
+3. sjednoť texty a chybové stavy,
+4. zaveď základní tokeny,
+5. přidej ukázky v kódu,
+6. teprve potom řeš širší knihovnu.
+
+Design systém nemá začít otázkou „jak pojmenujeme primární modrou“. Má začít otázkou „proč máme čtyři různé způsoby, jak říct uživateli, že se něco nepovedlo“.
+
+## Tokeny jsou smlouva, ne kosmetický slovník
+
+Design token je pojmenovaná hodnota s účelem: barva, mezera, velikost písma, rádius, stín nebo breakpoint. Dobře pojmenovaný token říká, kde a proč se používá. Špatně pojmenovaný token jen schová chaos za proměnnou.
+
+Lépe:
+
+```text
+color.text.default
+color.text.muted
+color.surface.card
+color.border.subtle
+space.inline.sm
+space.stack.md
+radius.control
+```
+
+Hůř:
+
+```text
+blue-500
+gray-2
+gap-big
+nice-shadow
+```
+
+Technické názvy jako `blue-500` mohou existovat v paletě, ale produktové komponenty by měly používat sémantické tokeny. Když se později změní vizuální styl nebo přibude tmavý režim, nechceš v kódu luštit, jestli `gray-2` znamená okraj, disabled text, nebo náladu vývojáře po třetím review.
+
+W3C Design Tokens Community Group popisuje design tokeny jako způsob, jak sdílet stylistické hodnoty mezi nástroji a produkty ve strojově čitelném formátu. I když malý tým nemusí hned implementovat celý formát, princip je užitečný: hodnoty mají být přenositelné, popsané a oddělené od konkrétního designového nástroje.
+
+## Komponenta musí mít chování, ne jen vzhled
+
+U každé komponenty dokumentuj minimálně:
+
+- kdy ji použít,
+- kdy ji nepoužít,
+- povinné a volitelné props,
+- prázdný stav,
+- loading stav,
+- chybový stav,
+- disabled stav,
+- přístupnostní očekávání,
+- datové a privacy-first poznámky.
+
+Příklad: komponenta `UserInviteDialog` nesmí řešit jen layout. Musí říct, jak ověřuje e-mail, co se stane při duplicitě, jaká data se pošlou, jak dlouho platí pozvánka, jak se dá odvolat a co se ukáže uživateli bez oprávnění. Jinak vznikne hezký dialog, který supportu vyrobí detektivku.
+
+U komponent pro citlivější akce přidej rozhodovací pravidlo:
+
+- Mazání dat vyžaduje potvrzení a jasný dopad.
+- Změna role vyžaduje auditní záznam.
+- Export ukazuje rozsah dat před spuštěním.
+- Pozvánka vysvětluje, kdo získá přístup a k čemu.
+
+Tohle už není jen design. Je to produktová bezpečnost zabalená do UI.
+
+## Přístupnost dej do definice hotovo
+
+Přístupnost nesmí být závěrečný audit, který přijde po designu a vývoji jako smutný účtenkový papír. Má být součástí komponenty. W3C WCAG 2.2 stojí na principech vnímatelnosti, ovladatelnosti, srozumitelnosti a robustnosti. Pro malý tým to přelož prakticky: komponenta má jít ovládat klávesnicí, má mít čitelné stavy, popisky, kontrast a nesmí schovávat význam jen do barvy.
+
+U každé interaktivní komponenty si polož otázky:
+
+- Lze ji použít bez myši?
+- Je focus viditelný?
+- Má formulářové pole propojený label a chybu?
+- Je loading stav oznámený i textově?
+- Je chyba konkrétní a opravitelná?
+- Není důležitá informace jen v barvě nebo ikoně?
+
+Přístupnost je zároveň privacy-first téma. Když uživatel kvůli špatnému rozhraní musí volat support nebo posílat screenshoty, často sdílí víc dat, než by bylo potřeba. Dobrá komponenta snižuje počet nouzových obcházek.
+
+## Dokumentace má být blízko kódu
+
+Pokud má tým komponenty v kódu, dokumentace má být co nejblíž komponentám. Storybook nebo podobné nástroje dávají smysl hlavně tehdy, když obsahují skutečné varianty, reálné stavy a hranice použití. Samotná galerie komponent bez rozhodovacích poznámek nestačí.
+
+Dobrá stránka komponenty obsahuje:
+
+- krátký popis účelu,
+- živé ukázky hlavních variant,
+- příklad správného použití,
+- příklad špatného použití,
+- props nebo API,
+- přístupnostní poznámky,
+- privacy-first poznámky,
+- odkaz na související produktové rozhodnutí.
+
+U marketingového webu může dokumentace vypadat jednodušeji: Markdown stránka s ukázkami hero sekce, CTA, formulářů, badge a testimonial bloků. Důležité je, aby nový člověk nemusel kopírovat poslední stránku a doufat, že zrovna nebyla výjimka.
+
+## Governance bez komise pro každý pixel
+
+Design systém potřebuje pravidla změn. Ne byrokracii, ale jednoduchý provozní rytmus. Jinak se z něj stane buď zamčený chrám, nebo volná skládka komponent.
+
+Praktický model:
+
+- drobná oprava textu nebo spacingu: běžné review,
+- nová varianta existující komponenty: krátká design/dev kontrola,
+- nová komponenta: karta účelu, stavů a dat,
+- změna tokenů: dopadová kontrola napříč stránkami,
+- odstranění komponenty: migrační plán a datum ukončení.
+
+Každý kvartál udělej 60minutový úklid: které komponenty se nepoužívají, které mají moc variant, kde vznikly lokální výjimky a které chyby support opakovaně řeší. Výstupem nemá být velká designová vize. Výstupem mají být tři konkrétní opravy.
+
+## Privacy-first poznámky patří i do UI knihovny
+
+Komponenta může potichu tlačit tým k lepšímu nebo horšímu zacházení s daty. Proto do systému přidej datové poznámky:
+
+- Formulář má doporučené minimum polí.
+- Tabulka citlivějších dat má pravidla maskování.
+- Export tlačítko má potvrzení rozsahu.
+- Vyhledávání neukládá dotazy jako produktovou analytiku bez důvodu.
+- Tooltip nesmí obsahovat osobní údaje jako jediný zdroj informace.
+- Empty state nemá lákat k importu celé databáze, když stačí jeden záznam.
+
+Tohle je nenápadná, ale silná vrstva. Místo aby privacy-first žilo jen v právní stránce, dostane se do každodenních rozhodnutí vývojáře a designéra.
+
+## Checklist: design systém bez komponentového chaosu
+
+- Máme seznam 5–8 nejčastějších UI vzorů, které systém opravdu řeší.
+- Tokeny jsou sémantické a nepopisují jen aktuální barvu.
+- Komponenty mají popsané použití, nepoužití, stavy a hranice.
+- Interaktivní komponenty mají klávesnici, focus, labely a chybové stavy.
+- Dokumentace žije blízko kódu nebo alespoň blízko skutečného workflow týmu.
+- Každá citlivější komponenta má privacy-first poznámku.
+- Nová komponenta vzniká přes krátkou kartu, ne náhodným kopírováním.
+- Varianty mají jasný účel a nejsou jen archivem minulých nápadů.
+- Tým má rytmus úklidu nepoužívaných komponent a lokálních výjimek.
+- Design systém pomáhá rychlosti i důvěře, ne jen vizuální jednotnosti.
+
+## Mini šablona komponentové karty
+
+```markdown
+# Komponenta: [název]
+
+## Účel
+- Jaký problém řeší:
+- Kde se používá:
+- Kdy ji nepoužít:
+
+## Varianty
+- Základní varianta:
+- Stav loading:
+- Stav chyba:
+- Stav disabled:
+- Prázdný stav:
+
+## API / props
+- Povinné vstupy:
+- Volitelné vstupy:
+- Události:
+- Limity:
+
+## Přístupnost
+- Klávesnice:
+- Focus:
+- Labely / ARIA:
+- Kontrast:
+- Textové alternativy:
+
+## Privacy-first poznámky
+- Jaká data komponenta zobrazuje:
+- Co nesmí logovat:
+- Jak se chová při exportu / sdílení:
+- Retence nebo auditní stopa:
+
+## Governance
+- Vlastník:
+- Poslední revize:
+- Migrační poznámky:
+```
+
+## Zdroje
+
+- [W3C Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/wcag/)
+- [W3C Design Tokens Community Group](https://www.w3.org/community/design-tokens/)
+- [Design Tokens Format Module 2025.10](https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/)
+- [Storybook: Naming components and hierarchy](https://storybook.js.org/docs/writing-stories/naming-components-and-hierarchy)
+
 # Pracovní log
+- 2026-10-04: Doplněna příloha „Design systém bez Figma muzea a komponentového chaosu“ s praktickým postupem od opakovaných UI bolestí přes sémantické tokeny, komponentové stavy, přístupnost, dokumentaci blízko kódu, governance, privacy-first poznámky, checklist, komponentovou kartu a ověřené zdroje W3C a Storybook.
+
 - 2026-10-04: Doplněna příloha „Roadmapa a feature requesty bez hlasovacího cirkusu“ s praktickým modelem sběru problémů místo objednávek řešení, vrstvenou evidencí signálů, pravidly pro hlasování, privacy-first prioritizací, lidskými stavy roadmapy, revizní rutinou, checklistem, roadmap kartou a ověřenými zdroji GDPR a EDPB.
 
 - 2026-10-04: Doplněna příloha „Logování a monitoring bez datového vysavače“ s rozdělením provozních, bezpečnostních a produktových signálů, minimálním log schematem, redakcí citlivých údajů před zápisem, retenčními pravidly, přístupovou hygienou, alertingem podle dopadu, checklistem, log policy kartou a ověřenými zdroji OWASP, NIST a GDPR.
