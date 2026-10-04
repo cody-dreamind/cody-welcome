@@ -39108,169 +39108,194 @@ Jak dlouho držíme incident metadata:
 - [MDN: HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status)
 
 
-# Příloha: Release notes a changelog bez marketingového mlžení
+# Příloha: Deprekační politika a ukončování funkcí bez zákaznického překvapení
 
-Release notes nejsou odpadkový koš na věty typu „provedli jsme drobná vylepšení a opravy chyb“. Jsou to malé veřejné účty důvěry: zákazníkům říkají, co se změnilo, proč to má smysl, jestli musí něco udělat a jaký dopad má změna na jejich data, práci nebo integrace. Když je píšeš dobře, šetříš support, pomáháš prodeji a buduješ pocit, že produkt má řízení. Když je píšeš špatně, vznikne jen firemní karaoke: hodně slov, žádná melodie.
+Ukončit funkci je produktově normální. Horší je ukončit ji tak, že se zákazník v pondělí ráno přihlásí a zjistí, že jeho workflow zmizel jako ponožka v pračce. Deprekace není omluva pro chaos. Je to řízený proces: vysvětlit důvod, dát náhradu, poskytnout čas, omezit datová rizika a uklidit starý provoz bez toho, aby se z produktu stalo muzeum kompromisů.
 
-Privacy-first přístup k release komunikaci stojí na jednoduchém pravidle: informuj podle dopadu, ne podle toho, kolik interních ticketů se podařilo zavřít. Zákazníka nezajímá, že tým přepsal komponentu `InvoiceTableV2`. Zajímá ho, že export faktur je rychlejší, filtr si pamatuje nastavení jen v rámci účtu a nově jde bezpečně stáhnout auditní přehled bez osobních poznámek.
+Privacy-first SaaS má ještě jednu povinnost navíc: při vypínání starých funkcí nesmí vzniknout datové sirotky, zapomenuté exporty, staré API tokeny, opuštěné webhooky ani dlouhodobé logy jen proto, že „možná se budou hodit“. Deprekace má zmenšovat produkt i datovou stopu, ne jen přemalovat tlačítko na šedivo.
 
-> Codyho komentář: Changelog je jako hygienická karta produktu. Nikdo ho nečte každý den pro zábavu, ale když se něco rozbije, změnil se workflow nebo chce zákazník přesvědčit šéfa, najednou je k nezaplacení.
+> Codyho komentář: Nejhorší funkce není ta, kterou smažeš. Nejhorší je ta, kterou se bojíš smazat, nikdo jí nerozumí, tři zákazníci ji používají omylem a všichni ji pořád musí testovat.
 
-## Odděl interní změny od zákaznického významu
+## Nejprve rozliš, co vlastně končí
 
-Interní release může obsahovat desítky commitů, refaktorů, úprav pipeline a drobných fixů. Veřejný changelog z toho má udělat srozumitelný přehled. Neznamená to všechno zamlčet. Znamená to přeložit technickou změnu do zákaznického dopadu.
+Ne každá změna potřebuje stejný režim. Malá úprava textu v nastavení není totéž jako vypnutí API verze, exportu nebo starého billing toku. Než napíšeš oznámení, pojmenuj typ konce.
 
-Příklad překladu:
+Praktické kategorie:
 
-| Interní formulace | Lepší release note |
-|---|---|
-| Refaktor auth middleware | Přihlášení má stabilnější kontrolu relace a lépe rozlišuje vypršenou session od neplatného odkazu. |
-| Fix race condition in invoice sync | Nově vytvořené faktury se už ve vzácných případech nezobrazují dvakrát v přehledu. |
-| Add pagination to audit logs | Auditní logy se načítají po stránkách, takže větší účty mohou rychleji dohledat starší události. |
-| Remove legacy analytics event | Zrušili jsme starý analytický event, který už nepomáhal produktovým rozhodnutím. |
+- **Skrytí z UI**: funkce zůstává dostupná přes staré odkazy nebo API, ale noví uživatelé ji neuvidí.
+- **Deprekace**: funkce je stále dostupná, ale nedoporučená a má oznámené datum konce.
+- **Read-only režim**: stará data zůstávají dostupná, ale nejde vytvářet nové záznamy.
+- **Tvrdé vypnutí**: funkce po datu konce přestane fungovat.
+- **Datové odstranění**: související data se po retenci smažou nebo anonymizují.
+- **API breaking change**: klient musí změnit integraci, endpoint, pole, verzi nebo oprávnění.
 
-Dobrá release note odpovídá na tři otázky: co se změnilo, koho se to týká a jestli je potřeba akce. Pokud žádná akce není potřeba, řekni to. Ticho nutí zákazníka hádat.
+Microsoft REST API Guidelines zdůrazňují stabilitu verzovaných API pro klienty a u nových major verzí doporučují jasnou migrační cestu i plán deprekace navázaný na interní politiku služby ([Microsoft REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/graph/Guidelines-deprecated.md)). Pro malý SaaS z toho plyne jednoduchá věc: zákazník nemá být beta tester tvého úklidu.
 
-## Verze používej jako navigaci, ne jako rituál
+## Deprekační okno nastav podle závislosti zákazníka
 
-Semantic Versioning definuje formát `MAJOR.MINOR.PATCH`, kde major značí nekompatibilní změny, minor nové kompatibilní funkce a patch kompatibilní opravy ([Semantic Versioning 2.0.0](https://semver.org/)). Pro knihovny a API je to velmi užitečné. Pro běžný SaaS s kontinuálním deployem ale nemusíš z každého drobného nasazení dělat verzi s ohňostrojem.
+Čím víc zákazník na funkci navázal vlastní procesy, tím delší a konkrétnější má být přechod. UI drobnost může mít krátké okno. API, exporty, webhooky, role, fakturace nebo přihlášení potřebují čas na testování, schválení a někdy i změnu interní dokumentace zákazníka.
 
-Praktický model pro malý SaaS:
+Orientační model:
 
-- **Veřejný changelog** piš podle významných změn pro zákazníka, ne podle každého deploye.
-- **API a integrace** verzuj přísněji, protože zákazník na nich může mít vlastní automatizace.
-- **Breaking changes** označ jasně, s migračním postupem a datem účinnosti.
-- **Bezpečnostní opravy** popiš tak, aby zákazník věděl dopad, ale nedal jsi útočníkům návod.
-- **Interní refaktory** zmiň jen tehdy, když mění výkon, stabilitu, dostupnost nebo očekávané chování.
+| Typ změny | Typické okno | Co dodat |
+|---|---:|---|
+| Kosmetická UI změna | 0–14 dní | stručná poznámka v changelogu |
+| Přesun nastavení | 14–30 dní | in-app nápověda a odkaz na nový postup |
+| Export nebo report | 30–90 dní | srovnání starého a nového výstupu |
+| Webhook nebo API pole | 90+ dní | migrační návod, testovací režim, příklady |
+| API verze nebo auth změna | 6–12 měsíců podle dopadu | paralelní provoz, metriky používání, přímý kontakt |
+| Bezpečnostně riziková funkce | podle rizika i kratší | vysvětlení dopadu a bezpečná náhrada |
 
-Keep a Changelog doporučuje strukturovat záznamy tak, aby byly čitelné pro lidi, ne jen pro stroje, a rozlišovat typy změn jako přidané, změněné, opravené nebo odstraněné ([Keep a Changelog](https://keepachangelog.com/en/1.1.0/)). To je dobrý základ i pro SaaS: zákazník nemá luštit historii commitů jako detektiv s nadbytkem kávy.
+Krátké okno může být správné, pokud stará funkce vytváří bezpečnostní riziko nebo datový únik. Ale i tehdy napiš důvod lidsky. „Z bezpečnostních důvodů“ bez detailu někdy stačí, ale „starý veřejný odkaz nešel revokovat, nahrazujeme ho časově omezeným sdílením“ je pro důvěru lepší.
 
-## Privacy-first položka patří k dopadu
+## Náhrada musí řešit původní práci, ne jen interní čistotu
 
-Každá větší změna by měla mít krátkou datovou kontrolu. Ne dlouhý právní román, ale jasnou odpověď: mění se sběr dat, retence, exporty, role, subprocesor, cookies, logování nebo přístup supportu? Pokud ano, release note to má říct srozumitelně.
+Tým často ukončuje funkci kvůli údržbě: starý kód, stará knihovna, roztříštěné UI, dvojí datový model. To je legitimní. Zákazníka ale zajímá jeho práce. Neříkej jen „sjednocujeme technologický stack“. Řekni, jak nová cesta řeší původní úkol.
 
-Příklady dobrých privacy-first poznámek:
-
-- „Nový export obsahuje pouze vybrané sloupce; interní poznámky a technická metadata nejsou součástí souboru.“
-- „Přidali jsme auditní událost pro změnu billing kontaktu. Nezapisujeme původní ani nové celé hodnoty, jen typ změny, čas a účet.“
-- „Zkrátili jsme uchování diagnostických logů u formulářů z 30 na 14 dní.“
-- „Nový integrační webhook posílá interní ID objektu, ne e-mail koncového uživatele.“
-
-GDPR mezi základními principy uvádí minimalizaci údajů, omezení účelu a omezení uložení ([GDPR, článek 5](https://eur-lex.europa.eu/eli/reg/2016/679/oj)). Release komunikace je skvělé místo, kde ukázat, že tyhle principy nejsou jen PDF v šuplíku, ale každodenní produktové rozhodování.
-
-## Breaking change komunikuj dřív než v den nasazení
-
-Změna, která rozbije API, export, webhook, oprávnění, URL nebo navyklý workflow, není jen technická událost. Je to změna smlouvy očekávání. Když zákazník zjistí breaking change až ze support ticketu, prohrál jsi komunikaci.
-
-Minimum pro breaking change:
-
-1. Oznam změnu předem s konkrétním datem.
-2. Popiš, koho se týká a koho ne.
-3. Dej krátký důvod změny.
-4. Přidej migrační postup a příklad.
-5. Nabídni testovací období nebo paralelní režim, pokud to jde.
-6. Den před účinností pošli připomínku jen dotčeným zákazníkům.
-7. Po nasazení ověř metriky dopadu a připrav support odpověď.
-
-Ukázka:
+Příklad:
 
 ```text
-Od 2026-11-15 přestaneme v API odpovědi `/v1/invoices` vracet pole `customer_email` u anonymizovaných zákazníků. Pokud pole používáte pro párování, přejděte na `customer_id`. Důvod: sjednocujeme exporty a API tak, aby běžně nepředávaly e-mail tam, kde stačí stabilní interní identifikátor.
+Končí starý CSV export objednávek. Nahrazuje ho nový export v sekci Reporty, kde si můžete vybrat období, sloupce a anonymizovat poznámky před stažením. Starý export zůstane dostupný do 2026-12-31. Pokud ho používáte v automatizaci, přejděte na endpoint `/v2/reports/orders`.
 ```
 
-Tahle věta je delší než „deprecated field“, ale zákazník díky ní chápe obchodní i datový smysl změny.
+Dobrá náhrada má:
 
-## Kanály drž vlastněné a klidné
+- mapu staré funkce na novou,
+- seznam rozdílů,
+- ukázku pro častý scénář,
+- známá omezení,
+- kontakt pro zákazníky, kteří mají komplikovanější workflow,
+- jasné datum, kdy starý režim skončí.
 
-Release komunikace nemá být závislá na sociální síti, algoritmu nebo reklamním publiku. Základ má být na vlastním webu nebo v dokumentaci, ideálně s RSS. E-mail použij pro důležité dopady, bezpečnostní změny, billing, API migrace a změny, které vyžadují akci. Sociální sítě mohou být doplněk, ne zdroj pravdy.
+Pokud náhrada neexistuje, buď férový. Někdy je správné funkci ukončit bez náhrady, protože byla riziková, málo používaná nebo strategicky mimo produkt. Ale i „bez náhrady“ má mít vysvětlení a datový úklid.
 
-Praktická hierarchie:
+## Měř používání, ale bez zákaznického rentgenu
 
-- **Changelog stránka** jako kanonické místo historie změn.
-- **RSS feed** pro lidi a týmy, které chtějí přímý odběr bez platformy.
-- **Dokumentace** pro API, integrace a migrační návody.
-- **Aplikační oznámení** jen pro změny, které se týkají aktuální práce uživatele.
-- **E-mail** pro dopadové změny, ne pro každou kosmetiku.
+Před vypnutím potřebuješ vědět, kdo je dotčený. To neznamená nasadit invazivní sledování každého kliknutí. Stačí účelové a časově omezené signály.
 
-Vyhni se release modalům, které blokují práci jen proto, že marketing chce ukázat nové tlačítko. Pokud změna není naléhavá, dej ji do klidného proudu: changelog, notifikační centrum, dokumentace, RSS. Uživatelé nejsou captive audience pro interní radost z deploye.
+Rozumné signály:
 
-## Release note piš podle rozhodnutí čtenáře
+- počet účtů, které funkci použily za posledních 30/90 dní,
+- poslední použití podle účtu nebo workspace, ne podle jednotlivce, pokud to stačí,
+- typ integrace nebo API verze,
+- počet aktivních webhooků na staré události,
+- objem exportů bez obsahu exportovaných dat,
+- počet chyb po migraci.
 
-Každá položka má mít typický čtenářský úkol:
+Neloguj celé payloady jen proto, že se bojíš vypnutí. OWASP API Security Top 10 upozorňuje na rizika kolem objektové a vlastnostní autorizace v API, tedy i na situace, kdy endpointy vrací nebo zpřístupňují víc dat, než mají ([OWASP API Security Top 10 2023](https://api-security.owasp.org/editions/2023/en/0x00-header/)). Deprekační měření proto drž úzké: kdo je dotčený, jak moc, jak ho bezpečně kontaktovat, ne kompletní kopie jeho práce.
 
-- Zakladatel chce vědět, jestli produkt postupuje a co může slíbit týmu.
-- Admin chce vědět, jestli musí změnit nastavení nebo role.
-- Vývojář chce vědět, jestli se mění API, webhook nebo export.
-- Support chce vědět, jak odpovědět na otázky zákazníků.
-- Bezpečnostní člověk chce vědět, jestli se mění data, oprávnění nebo audit.
+## Komunikační plán má mít víc než jeden výkřik
 
-Struktura jedné dobré položky:
+Jedno oznámení v changelogu nestačí, pokud jde o dopadovou změnu. Lidé mají dovolené, sprinty, interní procesy, dodavatele a občas i život mimo administraci tvého SaaS. Ano, drzost.
+
+Praktický rytmus:
+
+1. **Oznámení deprekace**: důvod, dopad, náhrada, datum konce.
+2. **Dokumentace migrace**: postup krok za krokem, příklady, FAQ.
+3. **Cílený kontakt**: jen účty, které funkci opravdu používají.
+4. **In-app upozornění**: v kontextu staré funkce, ne plošný modal všem.
+5. **Připomínka před koncem**: podle dopadu 30/14/7 dní před vypnutím.
+6. **Den vypnutí**: potvrzení, očekávané chování, support cesta.
+7. **Po vypnutí**: monitoring chyb, support štítky, úklid dat a kódu.
+
+Privacy-first detail: cílené e-maily neposílej přes marketingovou automatizaci s tracking pixely, pokud jde o provozní nebo bezpečnostní informaci. Doručitelnost a jasnost jsou důležitější než vědět, kdo otevřel e-mail v 08:43.
+
+## U staré funkce nastav bezpečné mezistavy
+
+Deprekace nemusí být jen zapnuto/vypnuto. Bezpečné mezistavy snižují paniku a pomáhají najít poslední závislosti.
+
+Užitečné mezistavy:
+
+- banner v konkrétní části produktu,
+- varování v API odpovědi nebo hlavičce,
+- read-only režim,
+- zákaz vytváření nových konfigurací, ale zachování starých,
+- fallback export starých dat,
+- sandbox pro novou verzi,
+- dočasný allowlist pro zákazníky s plánovanou migrací.
+
+U API může pomoci explicitní verze v URL nebo parametru. Azure Architecture Center doporučuje u API jasně definovat sémantiku a schéma verzování, aby aktualizace nerozbíjely klienty různých týmů ([Azure Architecture Center: API design](https://learn.microsoft.com/en-us/azure/architecture/microservices/design/api-design)). Pro malý SaaS to přelož takto: nečekej, že zákazník pozná změnu podle intuice. Dejte mu stabilní kontrakt.
+
+## Po vypnutí ukliď i data, přístupy a dokumentaci
+
+Největší chyba po vypnutí funkce je radostně si oddechnout a nechat všechen provozní bordel ležet. Ukončení je hotové až ve chvíli, kdy je pryč starý kód, staré joby, staré feature flagy, staré oprávnění, stará dokumentace a data, která už nemají účel.
+
+Úklidová kontrola:
+
+- staré endpointy vrací jasnou odpověď nebo jsou odstraněné podle plánu,
+- cron joby, fronty a webhook eventy jsou vypnuté,
+- staré role a oprávnění zmizely z adminu,
+- feature flag má datum odstranění a vlastníka,
+- dokumentace nevede na mrtvé postupy,
+- support šablony jsou aktualizované,
+- data mají retenci nebo anonymizační plán,
+- zálohy a auditní logy mají popsanou výjimku, pokud je nelze okamžitě mazat.
+
+GDPR principy omezení účelu a uložení jsou tady velmi praktické: když stará funkce skončila a data už nejsou potřeba pro původní účel, musí existovat jasný důvod, proč je dál držíš ([GDPR, článek 5](https://eur-lex.europa.eu/eli/reg/2016/679/oj)). „Protože se bojíme smazat starou tabulku“ není strategie. Je to archeologie s právním rizikem.
+
+## Checklist: deprekace bez překvapení
+
+- [ ] Víme, jestli jde o skrytí, deprekaci, read-only režim, tvrdé vypnutí nebo datové odstranění.
+- [ ] Máme seznam dotčených účtů podle minimálních provozních signálů.
+- [ ] Zákazník dostane důvod změny, náhradu a datum účinnosti.
+- [ ] Breaking API změny mají migrační návod, příklady a dostatečné okno.
+- [ ] In-app upozornění se zobrazí v kontextu funkce, ne plošně všem.
+- [ ] Provozní e-maily nejsou měřené marketingovým trackingem.
+- [ ] Staré funkce mají mezistavy: read-only, varování, zákaz nových konfigurací nebo sandbox.
+- [ ] Support má šablonu odpovědi a štítek pro migrace.
+- [ ] Po vypnutí uklízíme kód, flagy, joby, dokumentaci, role a data.
+- [ ] Retence nebo mazání souvisejících dat je zdokumentované.
+
+## Mini šablona deprekační karty
 
 ```text
-### Lepší audit změn billing kontaktu
+# Deprekační karta: [funkce / API / workflow]
 
-Co se změnilo: V auditním logu je nově samostatná událost pro změnu billing kontaktu.
-Koho se týká: Adminů a ownerů workspace.
-Co je potřeba udělat: Nic, změna je aktivní automaticky.
-Privacy-first poznámka: Logujeme typ změny, účet, čas a aktéra; nelogujeme plné staré ani nové kontaktní údaje.
-```
-
-Tohle je krátké, ale použitelné. Dá se přeposlat zákazníkovi, supportu i obchodníkovi. A hlavně nevyžaduje psychickou archeologii v Jire.
-
-## Checklist: changelog bez mlžení
-
-- [ ] Každá položka popisuje zákaznický dopad, ne jen interní ticket.
-- [ ] Breaking changes mají datum, migrační postup a jasný rozsah dopadu.
-- [ ] API a integrace používají konzistentní verzování a deprekační pravidla.
-- [ ] Privacy-first poznámka řeší data, retenci, role, exporty, logování a subprocesory tam, kde se něco mění.
-- [ ] Bezpečnostní opravy jsou srozumitelné, ale neprozrazují zneužitelný detail.
-- [ ] Changelog má kanonickou URL a ideálně RSS.
-- [ ] E-maily chodí jen pro dopadové změny nebo nutnou akci.
-- [ ] Aplikační oznámení neblokují běžnou práci, pokud nejde o kritickou změnu.
-- [ ] Support má před releasem stručnou odpověď na očekávané otázky.
-- [ ] Staré deprekované funkce mají datum odstranění a vlastníka.
-
-## Mini šablona release note karty
-
-```text
-# Release note karta: [název změny]
-
-## Typ změny
-Přidáno / změněno / opraveno / odstraněno / bezpečnost / breaking change:
+## Co končí
+Typ: skrytí / deprekace / read-only / vypnutí / datové odstranění
+Starý stav:
+Nový stav nebo náhrada:
 
 ## Dopad
-Koho se změna týká:
-Co se mění v práci zákazníka:
-Je potřeba akce: ano / ne
+Koho se to týká:
+Jak poznáme aktivní používání:
+Co se stane, když zákazník nic neudělá:
 
-## Komunikace
-Kanonická URL changelogu:
-Kanály: changelog / RSS / e-mail / in-app / dokumentace
-Datum oznámení:
-Datum účinnosti:
+## Časový plán
+Oznámení:
+Začátek read-only nebo varování:
+Datum vypnutí:
+Datum úklidu dat/kódu:
+
+## Migrace
+Postup:
+Příklad:
+Známá omezení:
+Support kontakt:
 
 ## Privacy-first kontrola
-Mění se sběr nebo zpracování dat:
-Mění se export, logování, role nebo retence:
-Mění se subprocesor nebo region provozu:
-Jak to vysvětlíme jednou větou:
+Jaká data funkce drží:
+Co smažeme nebo anonymizujeme:
+Co zůstává kvůli zákonné nebo bezpečnostní povinnosti:
+Jak dlouho:
 
-## Support
-Očekávané otázky:
-Krátká odpověď:
-Vlastník follow-upu:
+## Interní úklid
+Kód / flagy / joby / dokumentace / role / monitoring:
+Vlastník:
+Kontrola po vypnutí:
 ```
 
 ## Zdroje
 
-- [Semantic Versioning 2.0.0](https://semver.org/)
-- [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/)
+- [Microsoft REST API Guidelines: Versioning and deprecation guidance](https://github.com/microsoft/api-guidelines/blob/vNext/graph/Guidelines-deprecated.md)
+- [Azure Architecture Center: API design](https://learn.microsoft.com/en-us/azure/architecture/microservices/design/api-design)
+- [OWASP API Security Top 10 2023](https://api-security.owasp.org/editions/2023/en/0x00-header/)
 - [GDPR, článek 5: zásady zpracování osobních údajů](https://eur-lex.europa.eu/eli/reg/2016/679/oj)
 
 
 # Pracovní log
 
-- 2026-10-04: Doplněna příloha „Release notes a changelog bez marketingového mlžení“ s postupem převodu interních změn na zákaznický dopad, verzováním, privacy-first poznámkami, breaking change komunikací, vlastněnými kanály, checklistem, release note kartou a ověřenými zdroji SemVer, Keep a Changelog a GDPR.
+- 2026-10-04: Doplněna příloha „Deprekační politika a ukončování funkcí bez zákaznického překvapení“ s rozlišením typů ukončení, deprekačními okny, náhradami, minimalizovaným měřením používání, komunikačním plánem, bezpečnými mezistavy, úklidem dat/kódu, checklistem, deprekační kartou a ověřenými zdroji Microsoft, Azure, OWASP a GDPR.
 - 2026-10-04: Doplněna příloha „SLO, SLA a status stránka bez falešných slibů“ s rozlišením SLI/SLO/SLA, pravidly realistických slibů, návrhem nezávislé status stránky, incident komunikací podle dopadu, plánovanou údržbou, error budget brzdou, SLA pravidly, checklistem, SLO/status kartou a ověřenými zdroji Google SRE, Atlassian a MDN.
 - 2026-10-04: Doplněna příloha „Komponentová governance bez Figma muzea a driftu v kódu“ s praktickým postupem od opakovaných UI bolestí přes sémantické tokeny, komponentové stavy, přístupnost, dokumentaci blízko kódu, governance, privacy-first poznámky, checklist, komponentovou kartu a ověřené zdroje W3C a Storybook.
 
