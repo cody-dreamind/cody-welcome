@@ -38572,7 +38572,172 @@ Každý alert by měl mít odkaz na runbook: co zkontrolovat, kde najít dashboa
 - [NIST SP 800-92: Guide to Computer Security Log Management](https://csrc.nist.gov/pubs/sp/800/92/final)
 - [GDPR, článek 5: zásady zpracování osobních údajů](https://gdpr-info.eu/art-5-gdpr/)
 
+# Příloha: Roadmapa a feature requesty bez hlasovacího cirkusu
+
+Roadmapa není veřejný seznam slibů, interní hřbitov nápadů ani anketa, kde vyhrává zákazník s největší trpělivostí. Je to pracovní nástroj pro rozhodování: co postavíme, proč, pro koho, s jakým rizikem a co kvůli tomu vědomě neuděláme. Malý SaaS tým se tady umí spálit rychle. Nejdřív si založí tabulku feature requestů, pak veřejné hlasování, potom pět štítků priority a nakonec půl roku jen vysvětluje, proč nejvíc hlasovaná věc pořád není hotová.
+
+Privacy-first přístup k roadmapě začíná jednoduchou větou: feedback je cenný, ale není to volná licence sbírat všechno o každém zákazníkovi navždy. Potřebuješ rozhodovací kontext, ne šuplík plný citací, jmen, e-mailů, nahrávek a interních emocí. Produktové rozhodnutí má stát na problému, dopadu a strategii, ne na tom, kdo nejhlasitěji kliknul na tlačítko „+1“.
+
+> Codyho komentář: Hlasování o funkcích je jako anketa „co si dáme k večeři“ v místnosti plné hladových lidí. Vypadá demokraticky, ale velmi rychle vyhraje pizza, i když firma zrovna potřebuje účetnictví.
+
+## Sbírej problém, ne objednávku řešení
+
+Když zákazník napíše „přidejte export do Excelu“, není to ještě roadmap item. Je to signál. Skutečná otázka zní: jaký problém se snaží vyřešit? Potřebuje report pro šéfa? Import do účetnictví? Offline zálohu? Kontrolu dat před fakturací? Každý z těchto důvodů může vést k jiné funkci — export, API, sdílený report, auditní log nebo lepší filtr.
+
+Do evidence feature requestů proto ukládej problémovou kartu:
+
+- Situace: kdy a kde problém vzniká.
+- Role: kdo problém řeší, ideálně segment nebo typ uživatele, ne konkrétní jméno.
+- Dopad: co se stane, když problém zůstane nevyřešený.
+- Současná náhrada: jak to zákazník obchází dnes.
+- Požadované řešení: co zákazník navrhl, ale jen jako vstup, ne závazek.
+- Privacy riziko: jaká data by nová funkce sbírala, zobrazovala, exportovala nebo posílala dál.
+
+Praktický rozdíl:
+
+- Špatně: „ACME chce Excel export, 7 hlasů, priorita high.“
+- Lépe: „Finance týmy potřebují měsíčně předat agregovaný přehled faktur mimo aplikaci; dnes kopírují data ručně, hrozí chyba a únik. Řešení může být CSV export jen pro vybraná pole, API nebo sdílený read-only report.“
+
+Tím se z hlasitého požadavku stane produktové zadání. A hlavně: tým nepostaví přesně to, co zákazník řekl ve stresu, ale to, co mu skutečně sníží práci nebo riziko.
+
+## Jedna evidence, ale vrstvený detail
+
+Feature request systém nemusí být robustní platforma. Stačí dobře vedená tabulka, issue board nebo interní databáze. Důležité je, aby nemíchala tři různé věci: surový vstup, syntézu problému a rozhodnutí.
+
+Použij tři vrstvy:
+
+1. Vstup: krátký záznam ze supportu, sales hovoru, rozhovoru nebo analytiky.
+2. Syntéza: problémová karta sloučená z více vstupů.
+3. Rozhodnutí: roadmap item, experiment, odmítnutí nebo odložení.
+
+Surové vstupy drž krátce a minimálně. Nepotřebuješ navždy uchovávat celé e-maily, transcript hovoru ani screenshot zákaznického účtu. Většinou stačí zdroj signálu, segment, anonymizovaná citace a odkaz do původního ticketu, pokud je oprávněný důvod ho ještě držet.
+
+GDPR zásady minimalizace údajů, omezení účelu a omezení uložení jsou pro roadmapu velmi praktické mantinely. I když zrovna neřešíš právní audit, ptej se: potřebujeme pro rozhodnutí osobní údaj, nebo stačí agregovaný signál? Potřebujeme plné znění požadavku, nebo shrnutí problému? Potřebujeme to držet rok, nebo stačí kvartální syntéza?
+
+## Hlasování ber jako signál, ne jako závazek
+
+Veřejné nebo zákaznické hlasování může být užitečné, ale jen když je správně vysvětlené. Počet hlasů neznamená prioritu. Znamená jen to, že dané publikum v daném kanálu mělo motivaci kliknout. Aktivní power users tím snadno přehluší tiché zákazníky, kteří platí hodně, ale nemají čas komentovat roadmapu. Noví uživatelé zase často nehlasují vůbec, protože ještě nevědí, co potřebují.
+
+Pokud hlasování používáš, nastav pravidla:
+
+- Text u hlasování říká, že jde o signál, ne slib termínu.
+- Uživatel nemusí veřejně ukazovat jméno firmy ani kontakt.
+- U hlasu lze přidat dobrovolný kontext, ale bez citlivých dat.
+- Tým pravidelně slučuje duplicity do problémových karet.
+- Roadmap rozhodnutí se opírá o dopad, strategii, riziko a kapacitu, ne jen o počet hlasů.
+- Staré položky se archivují nebo znovu validují.
+
+Dobrá odpověď zákazníkovi nezní „máte 43 hlasů, takže to bude v Q2“. Lepší je: „Vidíme opakovaný problém u reporting workflow. Teď ověřujeme, jestli ho vyřeší bezpečný CSV export, sdílený report nebo API. Až budeme mít jasné řešení, doplníme stav.“
+
+## Prioritizuj dopad, důvěru a provozní náklady
+
+Klasická matice „impact vs effort“ je dobrý začátek, ale pro privacy-first SaaS nestačí. Přidej důvěru a provozní riziko. Funkce, která zvýší konverzi o pár procent, ale přidá invazivní sledování, komplikovaného dodavatele a citlivé exporty, není automaticky výhra. Jen přesunula náklady z roadmapy do budoucího incidentu.
+
+Jednoduché skóre pro menší tým:
+
+- Zákaznický dopad: kolika lidem a jak moc to pomůže.
+- Strategický fit: podporuje to směr produktu, nebo jen zaplňuje díru pro jednoho zákazníka.
+- Důvěra: zlepší to kontrolu nad daty, transparentnost nebo bezpečnost.
+- Datové riziko: jaká nová osobní, obchodní nebo technická data vzniknou.
+- Provozní náročnost: support, monitoring, migrace, dokumentace, incidenty.
+- Reverzibilita: dá se funkce vypnout, upravit nebo odstranit bez chaosu.
+
+Příklad: zákazníci chtějí „sdílet dashboard veřejným odkazem“. Produktově to může být skvělé, ale privacy-first skóre okamžitě zvedne otázky: expirace odkazu, heslo, revokace, audit přístupů, rozsah dat, indexace vyhledávači, preview v chatech, rate limiting a logování. Možná řešení není veřejný odkaz, ale časově omezený report pro konkrétní e-mail nebo export bez osobních polí.
+
+## Stav roadmapy piš lidsky, ne korporátně
+
+Zákazník nepotřebuje vidět interní sprint board. Potřebuje vědět, že jeho problém nezmizel v černé díře. Použij pár stavů, které něco znamenají:
+
+- Přijato jako signál: máme vstup, ale ještě nevíme, jestli problém řešíme.
+- Ověřujeme problém: sbíráme kontext a hledáme dopad.
+- Navrhujeme řešení: existuje směr, ale není slíbený termín.
+- Ve vývoji: tým na tom aktivně pracuje.
+- Vydáno: funkce je dostupná a má dokumentaci.
+- Neplánujeme: vysvětleno stručně a slušně.
+
+Stav „neplánujeme“ je důležitý. Je fér říct ne, když požadavek nesedí do strategie, zvyšuje datové riziko nebo by z produktu udělal švýcarský nůž s účetnictvím, CRM, kávovarem a mírným existenčním zoufalstvím. Dobré odmítnutí šetří čas oběma stranám.
+
+Šablona odpovědi:
+
+```text
+Díky za návrh. Chápu problém jako: [shrnutí problému].
+Teď ho neplánujeme řešit samostatnou funkcí, protože [stručný důvod].
+Do evidence si ukládáme anonymizovaný signál a budeme ho znovu vyhodnocovat při práci na [oblast].
+Praktická alternativa dnes: [workaround / doporučení].
+```
+
+## Roadmap review dělej v rytmu, ne podle paniky
+
+Bez rytmu se roadmapa řídí posledním hovorem. Nastav pravidelnou revizi, klidně jednou za dva týdny nebo měsíčně podle velikosti týmu. Cílem není všechno přeházet. Cílem je vyčistit vstupy, sloučit duplicity, rozhodnout pár položek a odstranit staré sliby.
+
+Agenda na 45 minut:
+
+1. Nové signály: co se opakovalo a odkud to přišlo.
+2. Změny dopadu: co nově blokuje prodej, onboarding, retenci nebo podporu.
+3. Privacy rizika: které nápady přidávají nové datové toky nebo dodavatele.
+4. Kapacita: co se opravdu vejde do dalšího období.
+5. Komunikace: komu dát update, co dát do release notes a co uzavřít.
+
+Výstupem nemá být nekonečný board. Výstupem má být rozhodovací log: proč jsme něco posunuli, odmítli, rozdělili nebo stáhli. Za tři měsíce si za to poděkuješ. Nebo aspoň méně zanadáváš, což je v SaaS taky forma pokroku.
+
+## Checklist: roadmapa bez hlasovacího cirkusu
+
+- Evidujeme problém, dopad a kontext, ne jen zákazníkem navržené řešení.
+- Surové vstupy, syntéza a roadmap rozhodnutí jsou oddělené vrstvy.
+- Feature requesty neukládají zbytečné osobní údaje, citlivé screenshoty ani celé transcripty.
+- Hlasování používáme jako signál, ne jako automatický prioritizační mechanismus.
+- Každý větší nápad má privacy-first kontrolu dat, dodavatelů, exportů a retence.
+- Roadmap položky mají jasný stav s lidským vysvětlením.
+- Umíme férově říct „neplánujeme“ a nabídnout alternativu.
+- Roadmapu revidujeme pravidelně, ne jen po nejhlasitějším hovoru.
+- Rozhodnutí zapisujeme stručně, aby šla zpětně vysvětlit.
+- Release notes propojují vydanou funkci s problémem, který řeší, ne jen s interním ticketem.
+
+## Mini šablona roadmap karty
+
+```markdown
+# Roadmap karta: [oblast / problém]
+
+## Problém
+- Shrnutí problému:
+- Kdo ho řeší:
+- Kdy vzniká:
+- Současná náhrada:
+
+## Signály
+- Zdroj signálů:
+- Počet nezávislých výskytů:
+- Segmenty:
+- Anonymizovaná citace:
+
+## Dopad
+- Zákaznický dopad:
+- Dopad na onboarding / retenci / support / prodej:
+- Strategický fit:
+
+## Privacy-first kontrola
+- Nová data:
+- Exporty / sdílení:
+- Dodavatelé:
+- Retence:
+- Rizika a mitigace:
+
+## Rozhodnutí
+- Stav:
+- Další krok:
+- Vlastník:
+- Datum revize:
+- Co vědomě neděláme:
+```
+
+## Zdroje
+
+- [Nařízení GDPR v EUR-Lexu, zejména článek 5 o zásadách zpracování](https://eur-lex.europa.eu/eli/reg/2016/679/oj)
+- [EDPB Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en)
+
 # Pracovní log
+- 2026-10-04: Doplněna příloha „Roadmapa a feature requesty bez hlasovacího cirkusu“ s praktickým modelem sběru problémů místo objednávek řešení, vrstvenou evidencí signálů, pravidly pro hlasování, privacy-first prioritizací, lidskými stavy roadmapy, revizní rutinou, checklistem, roadmap kartou a ověřenými zdroji GDPR a EDPB.
+
 - 2026-10-04: Doplněna příloha „Logování a monitoring bez datového vysavače“ s rozdělením provozních, bezpečnostních a produktových signálů, minimálním log schematem, redakcí citlivých údajů před zápisem, retenčními pravidly, přístupovou hygienou, alertingem podle dopadu, checklistem, log policy kartou a ověřenými zdroji OWASP, NIST a GDPR.
 
 - 2026-10-04: Doplněna příloha „Rate limiting a ochrana proti zneužití bez stalkování uživatelů“ s návrhem limitů podle chráněného zdroje, minimalizací identifikátorů, rozpočtovými pojistkami, bezpečnou odpovědí `429`, privacy-first logováním, fallbackem pro falešné pozitivy, checklistem, policy šablonou a ověřenými zdroji OWASP a RFC 6585.
