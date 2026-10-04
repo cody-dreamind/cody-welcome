@@ -40881,7 +40881,193 @@ Pozvánky jsou malý detail jen do chvíle, než otevřou cizímu člověku spr�
 - [OWASP Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
 - [OWASP ASVS V7 Session Management](https://github.com/OWASP/ASVS/blob/master/5.0/en/0x16-V7-Session-Management.md)
 
+# Příloha: Přístupová recenze a offboarding bez osiřelých účtů
+
+Přístupy se v malém SaaS málokdy rozbijí velkým hackerským filmem se zeleným terminálem. Častěji se roztečou postupně: bývalý kolega má pořád účet v analytice, externista zůstane adminem ve fakturaci, starý integrační token přežije tři redesigny a role „owner“ se používá jako univerzální izolepa. Pohodlné? Ano. Bezpečné? Asi jako nechat klíče od skladu pod rohožkou s cedulkou „prosím nezneužívat“.
+
+Access review není byrokratický obřad. Je to pravidelná kontrola, jestli lidé, služby a dodavatelé mají pořád jen takový přístup, který odpovídá jejich aktuální práci. OWASP doporučuje držet se principu nejmenších oprávnění a přístupy pravidelně kontrolovat proti „privilege creep“, tedy tichému nabalování pravomocí. Pro malý tým to neznamená kupovat obří IAM platformu. Znamená to mít jednoduchý seznam systémů, vlastníků, rolí, poslední kontroly a jasný postup při nástupu, změně role i odchodu člověka.
+
+> Codyho komentář: Nejhorší přístup není ten, který někdo zneužije hned. Nejhorší je ten, o kterém po šesti měsících nikdo neví, komu patří, proč existuje a proč má právo exportovat zákaznická data.
+
+## Začni inventářem míst, kde se dá něco pokazit
+
+Nejdřív sepiš systémy, kde má někdo přístup k datům, penězům, produkci nebo komunikaci se zákazníky. Nezačínej lidmi. Začni místy dopadu.
+
+Praktické skupiny:
+
+- Produkce: hosting, databáze, deployment, CI/CD, domény, DNS, monitoring.
+- Zákaznická data: CRM, support, analytika, e-mailing, datové exporty.
+- Finance: fakturace, platební brána, účetnictví, bankovní exporty.
+- Interní provoz: dokumentace, heslový trezor, projektový nástroj, repozitáře.
+- Externí přístupy: agentury, freelanceři, dodavatelé, testovací účty a servisní účty.
+
+U každého systému stačí první verze tabulky:
+
+- Název systému.
+- Vlastník přístupu.
+- Typ dat nebo rizika.
+- Kdo má admin přístup.
+- Kdo má běžný přístup.
+- Jak se přístup přidává a odebírá.
+- Poslední datum kontroly.
+
+Když to nedáš dohromady za jednu hodinu, nevadí. Horší je tvářit se, že evidence není potřeba, protože „jsme malý tým“. Malý tým má méně lidí, ale často víc sdílených klíčů, ručních výjimek a historických zkratek. Přesně proto inventář pomáhá.
+
+## Role piš podle práce, ne podle organizační poezie
+
+Role má popisovat, co člověk smí udělat, ne jak hezky zní jeho titul. „Marketing“, „admin“ nebo „externista“ jsou příliš široké role. Lepší je rozlišit konkrétní práci.
+
+Příklady:
+
+- `support_read`: vidí ticket a kontaktní údaje, ale nemůže měnit fakturaci.
+- `support_refund_request`: může připravit refundaci, ale ne ji schválit.
+- `billing_admin`: spravuje tarify a faktury, ale ne produkční databázi.
+- `content_editor`: upravuje webový obsah, ale ne DNS ani deployment.
+- `developer_prod_read`: vidí provozní logy po redakci, ale nemá trvalý zápis do databáze.
+- `incident_commander_temp`: dočasná vyšší role pro incident, s expirací a záznamem.
+
+Čím citlivější akce, tím konkrétnější role. Mazání dat, export zákazníků, změna fakturace, změna DNS, vypnutí 2FA nebo přidání nového admina nejsou „běžná administrace“. Jsou to citlivé akce a mají mít vlastní pravidla.
+
+## Offboarding má začít dřív než poslední den
+
+Odchod člověka není jen HR událost. Je to bezpečnostní workflow. Pokud začíná v pátek v 16:58 větou „neměl ještě někde přístup?“, už jsi v improvizačním divadle.
+
+Minimální offboarding postup:
+
+1. Urči datum a čas ukončení přístupů.
+2. Vypiš systémy podle inventáře, ne podle paměti.
+3. Odeber nebo převeď vlastnictví účtů, API klíčů, automatizací a dokumentů.
+4. Zruš aktivní relace tam, kde to nástroj dovoluje.
+5. Zkontroluj sdílené mailboxy, kalendáře, repozitáře a domény.
+6. Přepni kontaktní e-maily u vendorů, fakturace a incidentních adres.
+7. Zaznamenej, kdo kontrolu provedl a co zůstalo jako výjimka.
+
+Pozor na „neviditelné vlastnictví“: člověk nemusí mít admin roli, ale může být vlastníkem OAuth aplikace, webhooku, platebního účtu, domény, kalendáře, automatizace nebo sdíleného dokumentu. Když odejde bez předání, přístup sice zmizí, ale provozní závislost zůstane viset ve vzduchu jako hodně drahá pavučina.
+
+## Servisní účty nejsou lidé s divným jménem
+
+Servisní účet má sloužit konkrétní integraci nebo automatizaci. Nemá být „Petrův druhý účet“, který přežije všechny organizační změny. U každého servisního účtu musí být jasné:
+
+- k čemu slouží,
+- kdo je vlastník,
+- jaké má oprávnění,
+- kde je uložené tajemství,
+- kdy se naposledy rotovalo,
+- jak se vypne bez rozbití produkce.
+
+Servisní účet nemá mít interaktivní přihlášení, pokud to není nezbytné. Nemá mít vyšší práva než integrace potřebuje. A už vůbec nemá používat osobní e-mail bývalého kolegy. To není automatizace, to je archeologie s produkčním dopadem.
+
+## Přístupovou recenzi dělej po riziku
+
+Ne všechny přístupy potřebují stejný rytmus kontroly. Kritické systémy kontroluj častěji, nízkorizikové méně často. Důležité je, aby kontrola měla vlastníka a výsledek.
+
+Praktický rytmus:
+
+- Měsíčně: produkce, databáze, DNS, platební brána, heslový trezor, admini v SaaS nástrojích.
+- Čtvrtletně: support, CRM, e-mailing, analytika, repozitáře, dokumentace.
+- Po změně role: okamžitá kontrola toho, co člověk nově potřebuje a co už nepotřebuje.
+- Po incidentu: kontrola všech účtů, tokenů a výjimek, které se incidentu dotkly.
+- Před obnovou smlouvy s dodavatelem: kontrola externích účtů, subdodavatelů a exit plánu.
+
+Recenze nemá být „všichni potvrdili, že všechno vypadá asi dobře“. Každý vlastník systému má odpovědět na tři otázky: kdo má přístup, proč ho pořád potřebuje a jestli je úroveň oprávnění přiměřená.
+
+## Dočasné výjimky musí umět zemřít
+
+Dočasný admin přístup bez expirace je trvalý admin přístup s lepším PR. Každá výjimka potřebuje důvod, vlastníka, datum konce a záznam o zrušení.
+
+Dobrá výjimka vypadá takto:
+
+- „Jana má dočasný `billing_admin` do 2026-10-11 kvůli migraci fakturace.“
+- „Přístup schválil Ondřej.“
+- „Po migraci se role vrací na `billing_read`.“
+- „Kontrola proběhne v pondělí ráno.“
+
+Špatná výjimka vypadá takto:
+
+- „Dejte jí radši admina, ať to neblokujeme.“
+
+Blokovat práci je špatně. Vyrábět neviditelné trvalé výjimky je horší. Řešení je dočasný přístup, jasná expirace a kontrola po dokončení práce.
+
+## Auditní stopa má pomáhat, ne šmírovat
+
+U přístupů loguj změny, které jsou důležité pro bezpečnost a odpovědnost: přidání role, odebrání role, změnu vlastníka, vytvoření API klíče, export dat, změnu 2FA, změnu fakturačního oprávnění nebo přístup do produkce. Neloguj obsah práce, pokud ho nepotřebuješ pro bezpečnostní účel.
+
+Privacy-first minimum:
+
+- Loguj akci, čas, systém, roli a technický identifikátor účtu.
+- Neloguj obsah ticketů, dokumentů, zpráv nebo exportovaných dat.
+- Citlivé hodnoty rediguj před zápisem.
+- Přístup k auditním logům dej jen lidem, kteří ho opravdu potřebují.
+- Nastav retenci podle rizika a povinností, ne podle „disk je levný“.
+
+Auditní log má odpovědět na otázku „co se stalo a kdo změnu provedl“. Nemá být tajný deníček každého kliknutí zaměstnance.
+
+## Checklist: access review bez osiřelých účtů
+
+- Máme seznam systémů s produkčním, zákaznickým, finančním nebo bezpečnostním dopadem.
+- Každý systém má vlastníka přístupů.
+- Admin role jsou vypsané samostatně a kontrolují se nejméně měsíčně.
+- Role jsou navázané na konkrétní práci, ne jen na pracovní titul.
+- Offboarding používá inventář systémů, ne paměť týmu.
+- Servisní účty mají vlastníka, účel, scope, rotaci a vypínací postup.
+- Dočasné výjimky mají důvod, schvalovatele a datum konce.
+- Externí dodavatelé mají jasně omezené role a datum revize.
+- Auditní logy zachycují bezpečnostní změny, ale neobsahují obsah práce.
+- Výsledek každé recenze je zapsaný: ponechat, snížit, odebrat, převést nebo prověřit.
+
+## Mini šablona access review karty
+
+```markdown
+# Access review karta: [systém / oblast]
+
+## Vlastník
+- Vlastník systému:
+- Náhradník:
+- Poslední kontrola:
+- Další kontrola:
+
+## Riziko
+- Typ dat / dopadu:
+- Kritické akce:
+- Externí přístupy:
+
+## Role
+- Admini:
+- Běžné role:
+- Dočasné výjimky:
+- Servisní účty:
+
+## Změny po kontrole
+- Odebrat:
+- Snížit oprávnění:
+- Převést vlastnictví:
+- Ponechat s důvodem:
+
+## Offboarding kontrola
+- Účty:
+- Relace:
+- API klíče / tokeny:
+- Vlastnictví dokumentů a automatizací:
+- Vendor kontakty:
+
+## Privacy-first kontrola
+- Logujeme pouze bezpečnostně nutné změny:
+- Nelogujeme obsah práce:
+- Retence auditních záznamů:
+- Přístup k auditním logům:
+```
+
+Přístupová recenze není o nedůvěře k lidem. Je o tom, že dobrý provoz nespoléhá na paměť, dobré úmysly a historické admin účty. Když má tým jasné role, rychlý offboarding a pravidelný review, může růst bez toho, aby se z každého nového nástroje stala další zamčená skříňka bez majitele.
+
+## Zdroje
+
+- [OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)
+- [OWASP Authorization Testing Automation Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Testing_Automation_Cheat_Sheet.html)
+- [NIST SP 800-63-4 Digital Identity Guidelines](https://www.nist.gov/publications/nist-sp-800-63-4-digital-identity-guidelines)
+
 # Pracovní log
+
+- 2026-10-04: Doplněna příloha „Přístupová recenze a offboarding bez osiřelých účtů“ s inventářem systémů, rolemi podle práce, offboarding postupem, pravidly pro servisní účty, rizikovým rytmem kontrol, dočasnými výjimkami, privacy-first auditní stopou, checklistem, access review kartou a ověřenými zdroji OWASP a NIST.
 
 - 2026-10-04: Doplněna příloha „Pozvánky do týmu a jednorázové odkazy bez otevřených zadních dveří“ s oddělením pozvánky, účtu a členství, pravidly pro expirované jednorázové tokeny, role, SSO, resend, revokaci, support scénář, checklist, invite policy kartu a ověřené zdroje OWASP.
 
