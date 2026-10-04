@@ -39992,7 +39992,201 @@ Související ticket témata:
 - [EUR-Lex: GDPR, Regulation (EU) 2016/679](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)
 - [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 
+
+# Příloha: API klíče a tajemství bez lepení do kódu
+
+API klíče, tokeny, databázová hesla, webhook signing secrets, privátní klíče a přístupové údaje do produkce jsou takové malé digitální klíče od skladu. Dokud fungují, nikdo si jich nevšímá. Jakmile uniknou, najednou všichni hledají, kdo je nechal na rohožce v repozitáři, CI logu nebo screenshotu v support ticketu. Privacy-first provoz nezačíná až u cookie lišty. Začíná u toho, jestli firma ví, kde má svoje tajemství, kdo je může číst, jak se otáčí a co se stane při úniku.
+
+> Codyho komentář: Tajemství v `.env` souboru není problém. Tajemství v `.env` souboru, který někdo poslal do Slacku, zkopíroval do ticketu, zalogoval v buildu a pak zapomněl rotovat, už je malý firemní horor. Bez popcornu, zato s incidentem.
+
+Smyslem není udělat z malé firmy bankovní bunkr. Smyslem je nastavit jednoduchý režim, který zabrání nejčastějším trapasům: hardcoded klíčům v kódu, sdílenému produkčnímu heslu, nikdy nerotovanému tokenu, příliš širokým oprávněním a chaosu při odchodu člověka z týmu.
+
+## Nejdřív si řekni, co je tajemství
+
+Tajemství není jen heslo. V praxi sem patří všechno, co samo o sobě umožní přístup, podpis, dešifrování, impersonaci nebo obejití běžného procesu.
+
+Typické příklady:
+
+- produkční databázové přihlašovací údaje,
+- API tokeny pro platební bránu, e-mailing, AI služby a hosting,
+- privátní SSH klíče a deploy klíče,
+- webhook signing secrets,
+- JWT signing keys a session secrets,
+- záložní recovery kódy,
+- přístupové tokeny do CI/CD,
+- šifrovací klíče pro aplikační data,
+- servisní účty a machine-to-machine credentials.
+
+OWASP Secrets Management Cheat Sheet připomíná, že tajemství se používají napříč DevOps provozem a že organizace potřebují centralizovat jejich ukládání, provisioning, audit, rotaci a správu přístupů ([OWASP: Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)). Překlad pro malý SaaS: i když nemáš velký security tým, potřebuješ aspoň jednu přehlednou evidenci a jedno místo pravdy.
+
+## Repozitář není trezor
+
+Do kódu nepatří skutečné produkční tajemství. Ani „jen dočasně“. Ani v privátním repozitáři. Ani v komentáři, protože to „zítra smažeme“. Git si pamatuje historii líp než většina týmů pamatuje páteční release.
+
+Bezpečnější režim:
+
+- v repozitáři drž jen názvy proměnných a dokumentaci,
+- do `.env.example` piš falešné hodnoty,
+- skutečné hodnoty ukládej do secrets manageru, hostingu nebo CI/CD secrets,
+- lokální `.env` soubory drž v `.gitignore`,
+- při úniku do gitu token okamžitě zneplatni, nespoléhej na smazání commitu,
+- zapni secret scanning nebo pre-commit kontrolu, pokud ji platforma nabízí.
+
+OWASP Cryptographic Storage Cheat Sheet přímo doporučuje nehardcodovat klíče do zdrojového kódu a neukládat je do verzovacích systémů ([OWASP: Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)). To není akademická poučka. Je to rozdíl mezi „unikl nám jeden token, otočili jsme ho“ a „musíme auditovat celou historii repozitáře, build logy a všechny forky“.
+
+## Rozděl tajemství podle prostředí a dopadu
+
+Jedno tajemství pro lokál, staging i produkci je pohodlné přesně do chvíle, než se stane incident. Potom je to akcelerátor škody.
+
+Minimální rozdělení:
+
+- **Lokál** — testovací data, vývojářské sandbox klíče, žádná produkční osobní data.
+- **Preview / pull requesty** — krátkodobé tokeny s omezeným scope, bez přístupu k produkční databázi.
+- **Staging** — co nejbližší produkci architekturou, ale oddělené identity a data.
+- **Produkce** — nejmenší možný přístup, audit, jasná rotace a incident postup.
+
+U každého tajemství si napiš dopad úniku: nízký, střední, vysoký, kritický. Kritický je například klíč, který umožní číst zákaznická data, posílat e-maily jménem firmy, měnit DNS, deployovat produkci nebo podepisovat přihlašovací tokeny. Takové tajemství má mít přísnější přístup, kratší životnost nebo aspoň připravený rotační postup.
+
+## Přístup dávej podle práce, ne podle důvěry
+
+„Věříme si“ je dobrý kulturní princip. Špatný access model. Tajemství má číst jen ten člověk nebo služba, která ho skutečně potřebuje pro konkrétní práci.
+
+Praktická pravidla:
+
+- používej role místo sdílených účtů,
+- servisním účtům dávej jen potřebný scope,
+- odděl právo tajemství použít od práva ho zobrazit,
+- produkční tajemství nezpřístupňuj každému, kdo může mergovat kód,
+- přístupy reviduj při změně role, odchodu člověka a po incidentu,
+- privilegovaný přístup loguj jako produkční událost.
+
+OWASP u secrets managementu zdůrazňuje least privilege a jemně nastavené přístupy k jednotlivým objektům nebo komponentám ([OWASP: Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)). Privacy-first důvod je jednoduchý: pokud token umožňuje číst zákaznická data, jeho správa je součástí ochrany zákazníka, ne jen interní IT detail.
+
+## Rotace není sváteční rituál
+
+Rotace tajemství je užitečná jen tehdy, když je proveditelná bez paniky. Pokud nikdo neví, kde je klíč použitý, kdo ho vlastní a jak poznat úspěšnou výměnu, rotace se bude odkládat. A odkládaný token je budoucí incident s připnutým kalendářem.
+
+Každé důležité tajemství má mít:
+
+- vlastníka,
+- účel,
+- prostředí,
+- rozsah oprávnění,
+- místo uložení,
+- seznam služeb, které ho používají,
+- rotační postup,
+- rollback postup,
+- poslední datum kontroly.
+
+U statických tajemství nastav plánovanou rotaci podle rizika. U vysokého rizika preferuj krátkodobé nebo dynamické credentials, pokud to infrastruktura dovolí. OWASP doporučuje automatizovat správu tajemství, používat dynamická tajemství tam, kde to jde, a podporovat automatickou rotaci statických tajemství ([OWASP: Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)).
+
+## CI/CD tajemství drž na krátkém vodítku
+
+CI/CD je časté místo úniku, protože má hodně síly: umí buildit, testovat, deployovat a někdy sahat do produkce. Proto mu nedávej jeden univerzální super token.
+
+Bezpečnější CI/CD režim:
+
+- odděl tajemství pro build, test a deploy,
+- pull requestům z forků nedávej produkční secrets,
+- výstupy buildů nesmí tisknout hodnoty proměnných,
+- debug režim v CI používej opatrně,
+- deploy tokeny omez na konkrétní prostředí,
+- po změně CI konfigurace zkontroluj, jestli se nerozšířil přístup k tajemstvím.
+
+OWASP CI/CD Security Cheat Sheet upozorňuje mimo jiné na řízení identit, omezení sdílených účtů a bezpečné zacházení se secrets v pipeline ([OWASP: CI/CD Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/CI_CD_Security_Cheat_Sheet.html)). Prakticky: pipeline je zaměstnanec s robotickýma rukama. Dej jí jen ty klíče, které pro danou směnu potřebuje.
+
+## Logy, screenshoty a podpora jsou úniková místa
+
+Tajemství často neunikne přes sofistikovaný útok. Unikne přes obyčejnou pomoc: někdo pošle screenshot nastavení, zkopíruje chybový výpis, přidá `.env` do ticketu nebo zapne verbose log v produkci.
+
+Provozní pravidla:
+
+- nikdy neloguj tokeny, session identifikátory, hesla ani privátní klíče v plaintextu,
+- v chybových hláškách ukazuj jen prefix/suffix, například `sk_live_...9f2a`,
+- support formulář upozorni, že zákazník nemá posílat hesla ani tokeny,
+- screenshoty z dokumentace dělej na demo účtech,
+- v runbooku měj postup „zákazník poslal tajemství do ticketu“.
+
+OWASP Logging Cheat Sheet uvádí citlivé údaje, které se obvykle nemají logovat přímo, včetně přístupových tokenů, session ID a hesel ([OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). Stejný princip použij pro support, dokumentaci a interní chat. Co bys nechtěl ve veřejném logu, nepatří ani do pohodlného screenshotu.
+
+## Incident postup: když klíč uteče
+
+Při úniku tajemství neřeš nejdřív, kdo to udělal. Řeš, co klíč umožňuje a jak rychle ho bezpečně zneplatnit.
+
+První hodina:
+
+1. Identifikuj typ tajemství a prostředí.
+2. Zjisti rozsah oprávnění a dotčené služby.
+3. Zneplatni nebo otoč klíč.
+4. Deployni nové hodnoty bezpečným kanálem.
+5. Ověř, že služba běží.
+6. Zkontroluj logy použití starého klíče.
+7. Odstraň uniklé místo nebo omez přístup k němu.
+8. Zapiš incident a preventivní opatření.
+
+Pokud tajemství mohlo zpřístupnit osobní údaje, zapoj datový/GDPR postup a neposuzuj to jen jako technický úklid. Tady už jde o dopad na zákazníky, ne o estetiku repozitáře.
+
+## Checklist: tajemství bez lepení do kódu
+
+- [ ] Máme definici, co v produktu považujeme za tajemství.
+- [ ] V repozitáři nejsou skutečné produkční klíče ani historicky známé tokeny.
+- [ ] `.env.example` obsahuje jen falešné hodnoty a popis proměnných.
+- [ ] Produkční, staging a lokální secrets jsou oddělené.
+- [ ] Každé kritické tajemství má vlastníka, účel a rotační postup.
+- [ ] CI/CD má jen minimální secrets podle prostředí a typu jobu.
+- [ ] Pull requesty z forků nemají přístup k produkčním tajemstvím.
+- [ ] Logy, support a dokumentace maskují tokeny a klíče.
+- [ ] Existuje postup pro okamžitou rotaci uniklého klíče.
+- [ ] Přístupy k secrets se revidují při změně role, odchodu a incidentu.
+
+## Mini šablona secrets karty
+
+```markdown
+# Secrets karta: [název tajemství]
+
+## Účel
+- K čemu slouží:
+- Služby, které ho používají:
+- Prostředí: lokál / staging / produkce
+
+## Uložení
+- Kde je uloženo:
+- Kdo ho může číst:
+- Kdo ho může použít bez zobrazení hodnoty:
+
+## Rozsah
+- Oprávnění / scope:
+- Dopad úniku: nízký / střední / vysoký / kritický
+- Obsahuje přístup k osobním údajům: ano / ne / nevím
+
+## Rotace
+- Vlastník:
+- Poslední rotace:
+- Plánovaná rotace:
+- Postup výměny:
+- Rollback:
+
+## Incident
+- Jak tajemství zneplatnit:
+- Kde ověřit použití starého klíče:
+- Koho informovat:
+- Co uklidit po incidentu:
+
+## Privacy-first kontrola
+- Je scope nejmenší možný?
+- Je retence logů přiměřená?
+- Neuniká hodnota do logů, screenshotů, ticketů nebo dokumentace?
+```
+
+## Zdroje
+
+- [OWASP: Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
+- [OWASP: Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)
+- [OWASP: CI/CD Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/CI_CD_Security_Cheat_Sheet.html)
+- [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+
 # Pracovní log
+- 2026-10-04: Doplněna příloha „API klíče a tajemství bez lepení do kódu“ s definicí tajemství, pravidly pro repozitář, oddělení prostředí, least privilege přístupy, rotaci, CI/CD hygienu, prevenci úniku v logách/supportu, incident postupem, checklistem, secrets kartou a ověřenými zdroji OWASP.
 - 2026-10-04: Doplněna příloha „Znalostní báze a samoobsluha bez úniku zákaznických příběhů“ s postupem tvorby článků podle reálných dotazů, strukturou článku, pravidly pro demo data, bezpečným propojením se supportem, agregovaným měřením, revizemi podle rizika, checklistem, knowledge base kartou a ověřenými zdroji W3C, GDPR a OWASP.
 - 2026-10-04: Doplněna příloha „Dodavatelský audit a subprocesory bez tabulkového pekla“ s mapou datových toků, rozdělením dodavatelů podle rizika, kontrolou DPA, subprocesorů, transferů mimo EU/EHP, exit plánem, měsíční review rutinou, checklistem, vendor kartou a ověřenými zdroji GDPR, EDPB a Evropské komise.
 - 2026-10-04: Doplněna příloha „Produktová telemetrie bez sledovací horečky“ s rozhodovacím návrhem eventů, rozdělením produktových/provozních/bezpečnostních signálů, pravidly pro identifikátory, performance měření, session replay, měsíční úklid eventů, checklistem, telemetry kartou a ověřenými zdroji GDPR, EDPB, CNIL a MDN.
