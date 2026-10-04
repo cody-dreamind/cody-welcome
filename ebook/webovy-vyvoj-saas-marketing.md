@@ -40179,7 +40179,158 @@ U B2B zákazníků přidej admin report: agregované využití, trend proti minu
 - [FinOps Foundation: Framework](https://www.finops.org/framework/)
 - [OpenTelemetry: Metrics](https://opentelemetry.io/docs/concepts/signals/metrics/)
 
+# Příloha: Tajemství, API klíče a přístupy bez sdíleného šuplíku
+
+Tajemství v SaaS nejsou jen hesla. Patří sem API klíče, tokeny pro webhooky, přístupové údaje k databázi, privátní klíče, recovery kódy, seed hodnoty, SMTP hesla, podpisové klíče pro session cookies i jednorázové exportní odkazy. Když se s nimi zachází jako s poznámkou v chatu, dřív nebo později se z provozního detailu stane incident.
+
+Dobrá správa tajemství není o tom, že malý tým nasadí nejdražší enterprise trezor a tři procesní komise. Je o tom, že tajemství mají jasné místo, omezený přístup, rotaci, auditní stopu a bezpečný způsob předání do aplikace. OWASP ve své příručce k secrets managementu zdůrazňuje mimo jiné centralizované uložení, řízení přístupu, rotaci a vyhýbání se ukládání tajemství do zdrojového kódu ([OWASP: Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)).
+
+> Codyho komentář: Pokud se klíč dá najít v historii Slacku podle slova „prod“, není to tajemství. Je to budoucí víkendový program.
+
+## Tajemství nepatří do repozitáře
+
+První pravidlo je nudné a pořád se porušuje: tajemství nepatří do Gitu. Ani „jen na chvíli“, ani „do privátního repozitáře“, ani „do staré větve, kterou pak smažeme“. Git historie je tvrdohlavý archiv. Jakmile se klíč dostane do commitu, správná reakce není jen smazat řádek, ale klíč zneplatnit a vydat nový.
+
+Praktický postup pro malý tým:
+
+- `.env` soubory drž lokálně a v `.gitignore`, do repozitáře dej jen `.env.example` bez hodnot,
+- produkční tajemství nastavuj přes prostředí hostingu nebo secrets manager,
+- nepoužívej stejné klíče pro vývoj, staging a produkci,
+- u každého klíče eviduj vlastníka, účel, prostředí a datum poslední rotace,
+- nastav secret scanning v repozitáři, pokud ho platforma nabízí,
+- při úniku klíč okamžitě rotuj a až potom uklízej historii.
+
+Twelve-Factor App doporučuje ukládat konfiguraci, která se liší mezi prostředími, do proměnných prostředí, ne do kódu ([The Twelve-Factor App: Config](https://12factor.net/config)). To neznamená, že každá proměnná prostředí je automaticky bezpečná. Znamená to, že aplikace nemá mít produkční heslo zapečené v repozitáři, image nebo frontendu.
+
+## Rozděl tajemství podle rizika
+
+Ne všechna tajemství mají stejný dopad. Když dáš všechno do jedné hromady, tým neví, co má chránit nejvíc, a skončí u generického „buďte opatrní“. Lepší je rozdělit tajemství podle škody při úniku.
+
+Praktické úrovně:
+
+| Úroveň | Příklad | Dopad úniku | Minimální režim |
+| --- | --- | --- | --- |
+| Nízká | testovací webhook pro lokální vývoj | šum, spam, drobný abuse | oddělené od produkce, snadná rotace |
+| Střední | SMTP klíč, interní API token | zneužití služby, náklady, reputace | omezené scope, audit, rotace |
+| Vysoká | produkční DB přístup, podpisový klíč session | únik dat, převzetí účtů | nejmenší přístup, krátká cesta k rotaci, incident plán |
+| Kritická | master klíč, záložní recovery přístup | plná kompromitace provozu | vícečlenná kontrola, offline recovery, pravidelný test obnovy |
+
+Tahle tabulka není byrokracie. Je to brzda proti tomu, aby měl každý vývojář navždy uložený univerzální produkční klíč „protože se to jednou hodilo“.
+
+## Scope a expirace jsou lepší než hrdinství
+
+Každý klíč má mít nejmenší možný rozsah. Token pro čtení faktur nemá umět mazat uživatele. Webhook podpisový klíč nemá zároveň otevírat administraci. Klíč pro staging nemá fungovat v produkci.
+
+Když nástroj umožňuje nastavit oprávnění, použij je. Když umožňuje expiraci, nastav ji tam, kde dává smysl. Když expiraci neumí, vytvoř si aspoň kalendář rotace a vlastníka. Malý tým nepotřebuje dokonalou kryptografickou ceremonii pro každý token, ale potřebuje vědět, kdy starý klíč přestane být „dočasný“.
+
+Rozumné výchozí pravidlo:
+
+- produkční klíče mají konkrétního vlastníka,
+- servisní tokeny mají popsaný účel a scope,
+- osobní tokeny se nepoužívají pro dlouhodobý provoz,
+- dočasné přístupy mají datum konce,
+- kritické klíče mají popsaný postup rotace,
+- rotace se testuje dřív než při incidentu.
+
+## Předávání tajemství bez chatového archeologického naleziště
+
+Tajemství neposílej přes běžný chat, e-mail nebo dokument, který pak žije navždy. Pokud musíš něco předat člověku, použij bezpečný jednorázový kanál, správce hesel s týmovým sdílením nebo přímé nastavení přístupu v cílovém nástroji. Ideální předání je takové, po kterém příjemce tajemství ani nemusí vidět v čistém textu.
+
+U onboardingů a offboardingů používej checklist:
+
+- Nový člověk dostane jen role a nástroje, které potřebuje pro aktuální práci.
+- Přístup do produkce se nedává automaticky s přístupem do repozitáře.
+- Sdílené účty se nahrazují osobními účty s rolemi.
+- Při odchodu člověka se odeberou účty, tokeny, SSH klíče a týmové vault přístupy.
+- Pokud člověk znal sdílené tajemství, tajemství se rotuje.
+
+To poslední je důležité. Offboarding bez rotace sdílených klíčů je jen optimistická literatura.
+
+## Logy, chyby a screenshoty nesmí být trezor naruby
+
+Tajemství často neuniknou z databáze, ale z logu, error reportu, screenshotu nebo debug výpisu. Aplikace spadne, framework vypíše celé prostředí, někdo pošle screenshot konfigurace do ticketu a najednou máš klíč tam, kde nemá být.
+
+OWASP v doporučeních pro logování upozorňuje, že se do logů nemají ukládat citlivá data jako hesla, přístupové tokeny nebo session identifikátory ([OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). Prakticky to znamená:
+
+- rediguj hodnoty proměnných podle názvů jako `TOKEN`, `SECRET`, `PASSWORD`, `KEY`,
+- nevypisuj celé request headery bez filtru,
+- neukládej plné URL, pokud mohou obsahovat token v query parametru,
+- v chybových hláškách pro uživatele neukazuj interní konfiguraci,
+- u screenshotů a support příloh nastav pravidlo pro začernění citlivých údajů,
+- v logovací knihovně měj test, který ověřuje redakci známých polí.
+
+Privacy-first provoz není jen o návštěvnících webu. Je i o tom, že interní nástroje nevyrábějí vedlejší databázi tajemství, která se tváří jako „observabilita“.
+
+## Rotace bez výpadku
+
+Rotace klíče nemá být adrenalinový sport. U důležitých integrací navrhni aplikaci tak, aby krátce podporovala starý i nový klíč. Nejdřív přidej nový, ověř provoz, přepni producenty/konzumenty a teprve potom zneplatni starý.
+
+Bezpečný postup:
+
+1. Najdi všechny závislosti na starém klíči.
+2. Vytvoř nový klíč s minimálním potřebným scope.
+3. Nasaď konfiguraci, která umí přijmout nový stav.
+4. Přepni volající službu nebo webhook.
+5. Ověř metriky, logy a reálnou akci uživatele.
+6. Zneplatni starý klíč.
+7. Zapiš datum rotace a ponaučení.
+
+U podpisových klíčů, session tajemství a webhooků se vyplatí mít explicitní období překryvu. Bez něj se rotace často odkládá, protože „by to mohlo shodit přihlášení“. A odložená rotace je jen incident, který ještě nemá datum.
+
+## Checklist: tajemství bez sdíleného šuplíku
+
+- [ ] Repozitář obsahuje jen `.env.example`, ne skutečné hodnoty.
+- [ ] Produkční tajemství jsou mimo kód, image a frontend bundle.
+- [ ] Každý klíč má vlastníka, účel, prostředí a scope.
+- [ ] Vývoj, staging a produkce mají oddělené klíče.
+- [ ] Kritické klíče mají popsaný postup rotace bez výpadku.
+- [ ] Logy a error reporty redigují tokeny, hesla a session identifikátory.
+- [ ] Offboarding zahrnuje odebrání přístupů a rotaci sdílených tajemství.
+- [ ] Dočasné přístupy mají datum konce.
+- [ ] Klíče třetích stran mají ověřené oprávnění a možnost zneplatnění.
+- [ ] Incident postup říká, koho informovat a co rotovat jako první.
+
+## Mini šablona secret karty
+
+```text
+# Secret karta: [název / integrace]
+
+## Účel
+- K čemu tajemství slouží:
+- Která služba ho používá:
+- Prostředí: vývoj / staging / produkce
+
+## Riziko
+- Úroveň dopadu: nízká / střední / vysoká / kritická
+- Jaká data nebo akce umožňuje:
+- Co se stane při úniku:
+
+## Přístup
+- Vlastník:
+- Kdo má přístup:
+- Kde je uložené:
+- Jak se předává aplikaci:
+
+## Rotace
+- Poslední rotace:
+- Doporučený interval:
+- Postup rotace bez výpadku:
+- Jak ověřit, že nový klíč funguje:
+
+## Logy a incident
+- Kde by se mohl omylem objevit v logu:
+- Jak je redigovaný:
+- První krok při podezření na únik:
+```
+
+## Zdroje
+
+- [OWASP: Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
+- [The Twelve-Factor App: Config](https://12factor.net/config)
+- [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+
 # Pracovní log
+- 2026-10-04: Doplněna příloha „Tajemství, API klíče a přístupy bez sdíleného šuplíku“ s praktickým rozdělením tajemství podle rizika, pravidly pro repozitář a prostředí, scope/expiraci, bezpečné předávání, redakci logů, rotaci bez výpadku, checklistem, secret kartou a ověřenými zdroji OWASP a Twelve-Factor App.
 - 2026-10-04: Doplněna příloha „Nákladové limity pro SaaS bez datového smogu“ s mapou nákladově významných workflow, agregovanými metrikami bez profilování osob, limity pro trial/free tarify, alerty, produktovými optimalizacemi, férovou zákaznickou komunikací, checklistem, cost guardrail kartou a ověřenými zdroji FinOps Foundation a OpenTelemetry.
 - 2026-10-04: Doplněna příloha „Znalostní báze a samoobsluha bez úniku zákaznických příběhů“ s postupem tvorby článků podle reálných dotazů, strukturou článku, pravidly pro demo data, bezpečným propojením se supportem, agregovaným měřením, revizemi podle rizika, checklistem, knowledge base kartou a ověřenými zdroji W3C, GDPR a OWASP.
 - 2026-10-04: Doplněna příloha „Dodavatelský audit a subprocesory bez tabulkového pekla“ s mapou datových toků, rozdělením dodavatelů podle rizika, kontrolou DPA, subprocesorů, transferů mimo EU/EHP, exit plánem, měsíční review rutinou, checklistem, vendor kartou a ověřenými zdroji GDPR, EDPB a Evropské komise.
