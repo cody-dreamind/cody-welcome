@@ -37247,7 +37247,154 @@ Pokud posíláš export, neposílej ho jako přílohu. Pošli informaci, že je 
 - EDPB: Right to data portability — pokyny k přenositelnosti dat podle GDPR: https://www.edpb.europa.eu/documents/guideline/right-to-data-portability_en
 - EUR-Lex: Regulation (EU) 2016/679 — text GDPR, zejména práva subjektů údajů a principy zpracování: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679
 
+# Příloha: AI nástroje v týmu bez úniku dat a chaosu
+
+AI asistenti jsou skvělí sluhové a velmi drahá náhoda, když je pustíš do firmy bez pravidel. Malý tým často začne nevinně: někdo vloží do chatu zápis z porady, někdo druhý zákaznický ticket, třetí kus neveřejného kódu a čtvrtý fakturační export, protože „jen potřeboval shrnutí“. Za měsíc nikdo neví, které nástroje se používají, kdo má přístup, jestli se vstupy ukládají pro trénování a jestli se do promptů neposílají osobní údaje, obchodní tajemství nebo interní hesla. To není produktivita. To je datový ohňostroj v kanceláři bez hasicího přístroje.
+
+Privacy-first přístup neznamená AI zakázat. Znamená rozdělit použití podle rizika, vybrat nástroje s rozumným zpracováním dat, nastavit hranice pro vstupy a výstupy a zavést jednoduchý audit. CNIL ve svém doporučení k nasazení generativní AI radí začít konkrétní potřebou, vymezit povolené a zakázané použití, zohlednit limity systémů, zvolit bezpečný režim nasazení a ověřit, do jaké míry poskytovatel může zadaná data znovu používat. To je přesně ten typ nudné disciplíny, která šetří nervy i právní rozpočet.
+
+> Codyho komentář: AI policy nemusí být třicetistránkový dokument s vůní korporátního laminátu. Pro malou firmu často stačí jedna stránka pravidel, jedna tabulka nástrojů a odvaha říct: „tohle do chatu nepatří, kámo“.
+
+## Začni mapou použití, ne nákupem nástroje
+
+Nejdřív napiš, k čemu má tým AI reálně používat. Ne „zvýšení produktivity“, ale konkrétní situace: návrh osnovy článku, kontrola tónu e-mailu, shrnutí veřejné dokumentace, návrh testovacích scénářů, překlad marketingového textu, interní brainstorming nebo pomoc s refaktoringem. Každý účel má jiné riziko.
+
+Rozděl použití do tří tříd:
+
+- **Nízké riziko:** veřejné informace, obecné nápady, stylistická úprava textu bez zákaznických dat.
+- **Střední riziko:** interní know-how, neveřejné roadmapy, anonymizované supportní vzory, technické návrhy.
+- **Vysoké riziko:** osobní údaje, smlouvy, bezpečnostní incidenty, produkční logy, neveřejný kód s tajemstvím, finanční data a zdravotní nebo jiné citlivé informace.
+
+Pravidlo pro běžný tým: nízké riziko může jít do schváleného cloudového nástroje, střední riziko potřebuje jasné nastavení účtu a kontrolu výstupu, vysoké riziko vyžaduje explicitní schválení, lokální nebo smluvně ošetřené zpracování a často raději ruční postup. Když si nejsi jistý, zařaď použití výš. AI nepotřebuje vědět všechno, aby pomohla.
+
+## Schválený nástroj musí mít kartu
+
+Každý AI nástroj v týmu má mít krátkou kartu. Ne proto, aby někdo sbíral dokumentační Pokémony, ale aby bylo jasné, proč nástroj používáte a co do něj nesmí.
+
+Do karty napiš:
+
+- název nástroje a vlastníka ve firmě,
+- účel použití,
+- typ účtu a způsob přihlášení,
+- kde se zpracovávají a ukládají data,
+- zda poskytovatel používá vstupy nebo výstupy pro trénování nebo zlepšování služby,
+- jak dlouho se historie ukládá,
+- jaké typy dat jsou povolené, omezené a zakázané,
+- jak se řeší export, smazání účtu a odchod dodavatele,
+- datum příští revize.
+
+U nástroje bez jasných odpovědí nepoužívej firemní data. Pokud dodavatel neumí rozumně vysvětlit zpracování dat, subprocesory, retenci a administrátorské ovládání, není to „startupová flexibilita“. Je to mlha s logem.
+
+## Prompt není odpadkový koš pro data
+
+Největší praktické riziko není magie modelu, ale lenost člověka u klávesnice. Prompt často skončí jako směs zákaznického jména, celé e-mailové historie, interních poznámek a dotazu „napiš mi odpověď“. Takhle se z asistenta stává kopírka citlivých dat.
+
+Zaveď jednoduchá pravidla pro vstupy:
+
+- Před vložením textu odstraň jména, e-maily, telefony, interní identifikátory a unikátní detaily, pokud nejsou nutné.
+- Neposílej produkční logy celé; vyber jen anonymizovaný výřez a popiš kontext vlastními slovy.
+- Neposílej tajné klíče, tokeny, credentials, neveřejné URL s přístupem ani obsah souborů `.env`.
+- U zákaznických ticketů používej vzor: problém, kontext, očekávaný tón odpovědi — ne kompletní historii osoby.
+- U kódu nejdřív zkontroluj, zda neobsahuje klíče, neveřejné endpointy, licenční omezení nebo zákaznická data.
+- U smluv a právních textů používej AI jen jako pomoc pro shrnutí nebo otázky, ne jako finální stanovisko.
+
+Dobrá anonymizace není „Jana Nováková“ přepsaná na „Zákazník A“, když v textu zůstane název firmy, konkrétní faktura a unikátní incident. Cílem je odstranit identifikovatelnost i z kontextu. EDPB ve stanovisku k AI modelům řeší mimo jiné anonymitu modelů a dopady osobních dat v AI kontextu; prakticky z toho plyne, že „model to nějak rozmělní“ není spolehlivá privacy strategie.
+
+## Výstup musí projít lidskou kontrolou
+
+AI výstup není rozhodnutí. Je to návrh. U marketingového textu kontroluj fakta, tón a sliby. U kódu kontroluj bezpečnost, licence, testy a edge cases. U zákaznické komunikace kontroluj empatii, přesnost a to, jestli odpověď neslibuje něco, co produkt neumí. U právních a compliance témat kontroluj zdroje a zapoj člověka, který za výsledek opravdu odpovídá.
+
+Užitečný kontrolní rytmus:
+
+1. **Co je vstup?** Neobsahoval zbytečně citlivá data?
+2. **Co model tvrdí?** Jsou faktické části ověřené?
+3. **Co se z toho použije?** Je výstup upravený pro kontext firmy?
+4. **Kdo odpovídá?** Je jasné, který člověk schválil publikaci, odeslání nebo nasazení?
+
+Nikdy nenechávej AI automaticky posílat odpovědi zákazníkům, měnit produkční konfiguraci nebo rozhodovat o právech uživatelů bez kontrolního mechanismu. Autopilot je fajn v letadle s procedurami. V SaaS bez auditní stopy je to jen rychlejší cesta k ostudě.
+
+## Firemní pravidlo napiš na jednu stránku
+
+Pravidla pro AI mají být použitelná ve středu odpoledne, ne jen obhajitelná na auditu. Napiš je krátce a dej je do onboardingu.
+
+Minimální firemní pravidlo:
+
+- Používáme jen schválené AI nástroje uvedené v interní kartě nástrojů.
+- Do běžných AI chatů nevkládáme osobní údaje zákazníků, produkční logy, tajné klíče, smlouvy ani neveřejné finanční informace.
+- Pokud potřebujeme pracovat s citlivými daty, používáme schválený režim a ptáme se vlastníka nástroje nebo DPO/security vlastníka.
+- AI výstup nikdy neposíláme ani nenasazujeme bez lidské kontroly.
+- U veřejných textů ověřujeme fakta a u aktuálních tvrzení přidáváme zdroje.
+- Podezření na únik dat přes AI nástroj řešíme jako bezpečnostní incident, ne jako trapné nedorozumění.
+
+Tuhle stránku doplň o tři příklady dobrého a špatného promptu. Lidé se učí rychleji z konkrétních ukázek než z abstraktní věty „dodržujte zásady ochrany osobních údajů“.
+
+## Revize jednou měsíčně stačí, pokud je poctivá
+
+AI nástroje se mění rychle. Podmínky, modely, datové režimy i integrace mohou být jiné než při nákupu. Jednou měsíčně projdi seznam nástrojů a polož si pět otázek:
+
+- Používá tým stále jen schválené nástroje?
+- Neobjevil se nový neoficiální nástroj v prohlížeči, IDE nebo rozšíření?
+- Nezměnily se podmínky zpracování dat, retence nebo trénování?
+- Máme stále správné přístupy a odchody lidí?
+- Neřešili jsme incident nebo near-miss, který má změnit pravidla?
+
+Výsledek revize zapiš do pracovního logu. Stačí jedna věta: co bylo zkontrolováno, co se změnilo a kdo je vlastník dalšího kroku. Bez zápisu se z pravidla stane pocit. A pocit není kontrolní mechanismus, i když má hezký dashboard.
+
+## Checklist: AI nástroje bez úniku dat
+
+- Máme seznam schválených AI nástrojů a vlastníka každého z nich.
+- Každý nástroj má kartu s účelem, datovým režimem, retencí a zakázanými vstupy.
+- Použití AI je rozdělené podle rizika na nízké, střední a vysoké.
+- Tým ví, že osobní údaje, produkční logy, tajné klíče a smlouvy do běžného chatu nepatří.
+- Promptovací pravidla obsahují konkrétní příklady anonymizace.
+- AI výstupy pro zákazníky, kód, marketing a compliance vždy kontroluje člověk.
+- Firemní AI pravidlo je součástí onboardingu.
+- Neoficiální rozšíření, pluginy a IDE asistenti se kontrolují stejně jako samostatné SaaS nástroje.
+- Podezření na únik přes AI nástroj má incidentový postup.
+- Jednou měsíčně probíhá krátká revize nástrojů, přístupů a změn podmínek.
+
+## Mini šablona AI tool karty
+
+```markdown
+# AI tool karta: [název nástroje]
+
+## Účel
+- Povolené použití:
+- Zakázané použití:
+- Vlastník ve firmě:
+
+## Data
+- Povolené typy vstupů:
+- Zakázané typy vstupů:
+- Osobní údaje:
+- Interní know-how:
+- Kód a konfigurace:
+
+## Dodavatel
+- Typ účtu / smlouvy:
+- Region zpracování:
+- Retence historie:
+- Trénování / zlepšování služby z našich dat:
+- Subprocesory / integrace:
+
+## Kontrola
+- Kdo schvaluje výstupy:
+- Incidentový kontakt:
+- Datum poslední revize:
+- Datum další revize:
+```
+
+## Zdroje
+
+- CNIL: How to Deploy Generative AI — doporučení k nasazení generativní AI, včetně konkrétní potřeby, vymezení povolených/zakázaných použití a kontroly opětovného použití dat poskytovatelem: https://www.cnil.fr/en/how-deploy-generative-ai-cnil-provides-initial-clarifications
+- CNIL: AI system development — recommendations to comply with the GDPR, včetně účelu, role správce/zpracovatele, minimalizace, DPIA a bezpečnostních opatření: https://cnil.fr/en/ai-system-development-cnils-recommendations-to-comply-gdpr
+- CNIL: Determining the legal qualification of AI system providers — kvalifikace poskytovatelů jako controller, joint controller nebo processor podle GDPR: https://www.cnil.fr/en/determining-legal-qualification-ai-system-providers
+- EDPB: Opinion 28/2024 on certain data protection aspects related to AI models — anonymita AI modelů, legitimní zájem a důsledky nezákonně zpracovaných osobních dat: https://www.edpb.europa.eu/documents/opinion-of-the-board-art-64/opinion-282024-on-certain-data-protection-aspects-related-to_en
+- European Commission: Guidelines for providers and deployers of AI high-risk systems — praktické vyjasnění klasifikace high-risk AI systémů podle AI Actu: https://digital-strategy.ec.europa.eu/en/policies/guidelines-ai-high-risk-systems
+
 # Pracovní log
+
+- 2026-10-04: Doplněna příloha „AI nástroje v týmu bez úniku dat a chaosu“ s praktickou mapou rizik použití AI, kartou schváleného nástroje, pravidly pro vstupy a lidskou kontrolu výstupů, firemní jednostránkovou AI policy, měsíční revizí, checklistem, šablonou AI tool karty a ověřenými zdroji CNIL, EDPB a Evropské komise.
 
 - 2026-10-04: Doplněna příloha „Supportní runbook pro žádosti o data bez chaosu“ s triáží GDPR/data požadavků, ověřením identity, supportním ticket flow, datovou mapou systémů, závěrečnou komunikací, checklistem, šablonou ticketu a ověřenými zdroji Evropské komise, EDPB a EUR-Lex.
 
