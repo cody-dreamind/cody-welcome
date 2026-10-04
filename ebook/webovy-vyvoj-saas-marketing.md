@@ -39293,7 +39293,188 @@ Kontrola po vypnutí:
 - [GDPR, článek 5: zásady zpracování osobních údajů](https://eur-lex.europa.eu/eli/reg/2016/679/oj)
 
 
+# Příloha: Web push notifikace bez otravování a sběru navíc
+
+Web push notifikace vypadají jako skvělá zkratka k pozornosti. Prohlížeč umí doručit zprávu i ve chvíli, kdy člověk zrovna nemá web otevřený, a produkt tak může připomenout důležitou událost. Jenže pozornost není zdarma. Když ji začneš brát jako samozřejmost, uživatel tě velmi rychle zařadí do mentální složky „otravné věci, které jsem omylem povolil“.
+
+Privacy-first otázka nezní „jak dostaneme víc opt-inů?“. Zní: „které upozornění je pro člověka tak užitečné, že si o něj řekne dobrovolně a nebude litovat?“
+
+> Codyho komentář: Push notifikace nejsou marketingový megafon. Jsou klepnutí na rameno. Když klepeš každých deset minut kvůli každé drobnosti, nejsi užitečný asistent. Jsi digitální datel.
+
+## Push používej jen pro časově citlivou hodnotu
+
+Ne každá zpráva si zaslouží systémovou notifikaci. Některé informace patří do e-mailu, RSS, changelogu, in-app inboxu nebo prostě nikam, protože nejsou důležité.
+
+Dobré scénáře:
+
+- zákazník čeká na dokončení exportu, importu nebo dlouhého reportu,
+- administrátor potřebuje vědět o incidentu, bezpečnostní události nebo schválení,
+- uživatel si výslovně nastaví připomínku termínu,
+- tým čeká na změnu stavu objednávky, zakázky nebo workflow,
+- SaaS upozorňuje na selhání integrace, které brání práci.
+
+Slabé scénáře:
+
+- „Máme nový článek, všichni povinně koukejte,“
+- „Dlouho jste se nepřihlásili, tak vás popíchneme,“
+- „Sleva končí za 38 minut a 12 sekund,“
+- každé kliknutí kolegy v týmovém účtu,
+- obecná marketingová kampaň bez vztahu k rozdělané práci.
+
+Push je vhodný, když informace rychle ztrácí hodnotu nebo chrání uživatele před škodou. Pokud zpráva počká do týdenního souhrnu, neposílej ji jako systémové vyrušení.
+
+## Permission prompt až po kontextu
+
+MDN u Notifications API připomíná, že aplikace musí získat oprávnění uživatele, než může zobrazovat notifikace ([MDN: Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API)). To technicky svádí k jednoduchému řešení: otevřít web a okamžitě požádat o povolení. Produktově je to chyba. Člověk ještě neví, co získá, proč by měl souhlasit a jak často ho budeš rušit.
+
+Web.dev doporučuje žádat o oprávnění až ve chvíli, kdy uživatel chápe přínos, a nabídnout alternativu místo nátlaku ([web.dev: Web permissions best practices](https://web.dev/articles/permissions-best-practices)). Prakticky to znamená použít nejdřív vlastní vysvětlující UI a teprve po aktivní volbě spustit systémový prompt.
+
+Lepší tok:
+
+1. Uživatel dokončí akci, u které dává upozornění smysl.
+2. Web vysvětlí konkrétní přínos: „Dáme vědět, až bude export hotový.“
+3. Nabídne alternativu: „Poslat e-mail místo push notifikace.“
+4. Teprve po kliknutí na „Zapnout push“ zavolá prohlížečový prompt.
+5. Po zamítnutí respektuje rozhodnutí a nezkouší to znovu na každé stránce.
+
+Text před promptem:
+
+```text
+Chcete dostat upozornění, až bude export připravený? Pošleme jen stav tohoto exportu a důležité chyby. Marketingové zprávy přes push neposíláme.
+```
+
+Tohle je férové, konkrétní a omezené. Žádné „povolte oznámení pro nejlepší zážitek“, což je produktová verze kouřové clony.
+
+## Subscription endpoint je citlivý provozní údaj
+
+Push API podle MDN vytváří `PushSubscription`, která obsahuje endpoint a klíče potřebné k doručování zpráv ([MDN: Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API)). Nejde sice o klasické heslo, ale je to údaj, který umožňuje cílit notifikace na konkrétní prohlížečovou instalaci. Zacházej s ním jako s citlivým provozním identifikátorem.
+
+Pravidla:
+
+- ukládej subscription jen k účelu, se kterým uživatel souhlasil,
+- nepropojuj ji s reklamními profily,
+- neposílej endpoint do analytických nástrojů,
+- při odhlášení, smazání účtu nebo zrušení preference subscription odstraň,
+- loguj jen stav doručení a technickou chybu, ne celý payload a endpoint,
+- nepoužívej push jako skrytý kanál pro profilování aktivity.
+
+Pokud produkt používá více workspace nebo rolí, preference ukládej na správné úrovni. Uživatel může chtít bezpečnostní alerty pro administrátorský workspace, ale ne marketingové novinky pro všechno, co kdy otevřel.
+
+## Payload minimalizuj jako pohlednici
+
+Notifikace se často zobrazuje mimo kontext webu: na zamčené obrazovce, v systémovém centru, na sdíleném zařízení nebo vedle kolegy při prezentaci. Proto do ní nepatří citlivé detaily.
+
+Lepší:
+
+```text
+Export je připravený. Otevřít v aplikaci.
+```
+
+Horší:
+
+```text
+Export mezd pro klienta Novák & syn obsahující 48 zaměstnanců je připravený ke stažení.
+```
+
+U bezpečnostních a provozních upozornění piš dost konkrétně, aby člověk věděl, zda má jednat, ale ne tolik, aby notifikace sama unikla jako malý incident.
+
+Použitelné vzory:
+
+- „Import se nezdařil. Otevři detail a zkontroluj chybu.“
+- „Nová žádost čeká na schválení.“
+- „Integrace vyžaduje znovu připojit účet.“
+- „Report je hotový a připravený v aplikaci.“
+
+## Preference centrum je povinná brzda
+
+Když už push nabídneš, dej člověku kontrolu. Ne jediné globální „všechno nebo nic“, ale jednoduché preference podle typu zpráv.
+
+Minimální preference:
+
+- provozní a bezpečnostní upozornění,
+- dokončení dlouhých úloh,
+- schvalování a zmínky v týmu,
+- produktové novinky,
+- frekvence souhrnů,
+- tichý režim nebo pracovní hodiny.
+
+Marketingové a produktové novinky drž odděleně od transakčních upozornění. Když člověk vypne novinky, nesmí tím omylem vypnout bezpečnostní upozornění. A když vypne všechno nepovinné, respektuj to bez emočního vydírání typu „opravdu chcete přijít o skvělý zážitek?“
+
+## Doručení měř agregovaně, ne jako sledovací síť
+
+Provoz push notifikací potřebuje základní měření: kolik subscriptions je aktivních, kolik zpráv selhalo, které typy notifikací lidé vypínají a zda notifikace vedou k dokončení rozdělané práce. Nepotřebuješ z toho dělat reklamní atribuční aparát.
+
+Rozumné metriky:
+
+- počet aktivních subscriptions podle typu preference,
+- míra selhání doručení podle technického důvodu,
+- počet odhlášení po typu notifikace,
+- agregovaný podíl dokončených akcí po relevantní notifikaci,
+- počet notifikací na uživatele nebo workspace za týden.
+
+Varovný signál: pokud tým začne optimalizovat na „víc pushů poslaných“ místo „méně zbytečných vyrušení“, produkt se vydal špatnou uličkou. Cílem je důvěra, ne objem zvuků v kapse.
+
+## Checklist: web push bez otravování
+
+- [ ] Push používáme jen pro časově citlivou nebo uživatelem vyžádanou hodnotu.
+- [ ] Browser permission prompt spouštíme až po vysvětlení a aktivní volbě.
+- [ ] Uživatel má alternativu, například e-mail, RSS, in-app inbox nebo souhrn.
+- [ ] Subscription endpoint a klíče neposíláme do analytiky ani marketingových nástrojů.
+- [ ] Payload notifikace neobsahuje citlivé údaje ani zbytečné detaily.
+- [ ] Preference centrum rozlišuje transakční, bezpečnostní, týmové a marketingové zprávy.
+- [ ] Odhlášení nebo smazání účtu odstraní nepotřebné subscriptions.
+- [ ] Měříme doručení a odhlášení agregovaně, ne jako behaviorální profil.
+- [ ] Máme limit frekvence, aby jedna chyba neposlala sto upozornění.
+- [ ] Texty notifikací jsou srozumitelné i mimo kontext aplikace.
+
+## Mini šablona push policy karty
+
+```text
+# Push policy karta: [produkt / modul]
+
+## Účel
+Jakou práci notifikace chrání nebo zrychluje:
+Pro koho je určena:
+Proč nestačí e-mail / RSS / in-app inbox:
+
+## Souhlas
+Kdy žádáme o oprávnění:
+Text před systémovým promptem:
+Alternativa bez push:
+Jak se uživatel odhlásí:
+
+## Data
+Kde ukládáme subscription:
+Jaká data jsou v payloadu:
+Co do payloadu nikdy nedáváme:
+Retence subscription po odhlášení / smazání účtu:
+
+## Preference
+Typy notifikací:
+Výchozí nastavení:
+Frekvenční limit:
+Tichý režim / pracovní hodiny:
+
+## Měření
+Agregované metriky:
+Chybové stavy:
+Data, která záměrně nesbíráme:
+
+## Provoz
+Kdo vlastní šablony zpráv:
+Kdo kontroluje objem notifikací:
+Postup při chybném rozeslání:
+```
+
+## Zdroje
+
+- [MDN: Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API)
+- [MDN: Using the Notifications API](https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API)
+- [MDN: Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API)
+- [web.dev: Web permissions best practices](https://web.dev/articles/permissions-best-practices)
+
 # Pracovní log
+- 2026-10-04: Doplněna příloha „Web push notifikace bez otravování a sběru navíc“ s pravidly pro vhodné použití pushů, férový permission prompt, ochranu subscription endpointů, minimalizaci payloadu, preference centrum, agregované měření, checklist, push policy kartu a ověřené zdroje MDN a web.dev.
 
 - 2026-10-04: Doplněna příloha „Deprekační politika a ukončování funkcí bez zákaznického překvapení“ s rozlišením typů ukončení, deprekačními okny, náhradami, minimalizovaným měřením používání, komunikačním plánem, bezpečnými mezistavy, úklidem dat/kódu, checklistem, deprekační kartou a ověřenými zdroji Microsoft, Azure, OWASP a GDPR.
 - 2026-10-04: Doplněna příloha „SLO, SLA a status stránka bez falešných slibů“ s rozlišením SLI/SLO/SLA, pravidly realistických slibů, návrhem nezávislé status stránky, incident komunikací podle dopadu, plánovanou údržbou, error budget brzdou, SLA pravidly, checklistem, SLO/status kartou a ověřenými zdroji Google SRE, Atlassian a MDN.
