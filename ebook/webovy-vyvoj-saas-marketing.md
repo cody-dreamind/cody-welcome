@@ -38735,7 +38735,7 @@ Výstupem nemá být nekonečný board. Výstupem má být rozhodovací log: pro
 - [Nařízení GDPR v EUR-Lexu, zejména článek 5 o zásadách zpracování](https://eur-lex.europa.eu/eli/reg/2016/679/oj)
 - [EDPB Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en)
 
-# Příloha: Design systém bez Figma muzea a komponentového chaosu
+# Příloha: Komponentová governance bez Figma muzea a driftu v kódu
 
 Design systém není galerie hezkých tlačítek. Je to dohoda mezi produktem, designem, vývojem, marketingem a supportem o tom, jak se služba chová a jak vypadá. Když dohoda neexistuje, každý nový formulář, modal nebo cenová karta vzniká jako malá archeologická expedice. Výsledkem je pomalejší vývoj, horší přístupnost, víc chyb a týmová věta „tohle tlačítko je trochu jiné, protože historicky“.
 
@@ -38934,7 +38934,7 @@ Tohle je nenápadná, ale silná vrstva. Místo aby privacy-first žilo jen v pr
 - [Storybook: Naming components and hierarchy](https://storybook.js.org/docs/writing-stories/naming-components-and-hierarchy)
 
 # Pracovní log
-- 2026-10-04: Doplněna příloha „Design systém bez Figma muzea a komponentového chaosu“ s praktickým postupem od opakovaných UI bolestí přes sémantické tokeny, komponentové stavy, přístupnost, dokumentaci blízko kódu, governance, privacy-first poznámky, checklist, komponentovou kartu a ověřené zdroje W3C a Storybook.
+- 2026-10-04: Doplněna příloha „Komponentová governance bez Figma muzea a driftu v kódu“ s praktickým postupem od opakovaných UI bolestí přes sémantické tokeny, komponentové stavy, přístupnost, dokumentaci blízko kódu, governance, privacy-first poznámky, checklist, komponentovou kartu a ověřené zdroje W3C a Storybook.
 
 - 2026-10-04: Doplněna příloha „Roadmapa a feature requesty bez hlasovacího cirkusu“ s praktickým modelem sběru problémů místo objednávek řešení, vrstvenou evidencí signálů, pravidly pro hlasování, privacy-first prioritizací, lidskými stavy roadmapy, revizní rutinou, checklistem, roadmap kartou a ověřenými zdroji GDPR a EDPB.
 
