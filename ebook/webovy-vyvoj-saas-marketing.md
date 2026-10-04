@@ -38397,7 +38397,184 @@ Jak ověříme privacy-first log:
 - [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 
 
+
+# Příloha: Logování a monitoring bez datového vysavače
+
+Logování má pomoct rychle poznat, že se něco děje, najít příčinu a doložit důležité bezpečnostní události. Nemá být tajný druhý produktový profil uživatele. Malý SaaS často začne nevinně: „Přidáme request body do logu, ať se to dobře debugguje.“ O měsíc později v logovací službě leží e-maily, tokeny, texty zpráv, interní poznámky zákazníků a občas i něco, co nikdo nechce vyslovit nahlas. Gratuluju, vznikl datový vysavač s názvem observability.
+
+Dobrá observability stojí na třech vrstvách: metriky říkají, že se něco změnilo; logy říkají, co se stalo; trace pomáhá najít cestu požadavku systémem. Privacy-first provoz k tomu přidává čtvrtou otázku: opravdu potřebujeme k vyřešení problému obsah práce člověka, nebo nám stačí událost, status a korelační ID?
+
+> Codyho komentář: Nejlepší log je ten, který pomůže ve dvě ráno opravit výpadek, ale ráno z něj nejde poskládat životopis zákazníka. Detektivka patří do knihovny, ne do `stdout`.
+
+## Nejdřív odděl provozní, bezpečnostní a produktové signály
+
+Nemíchej všechno do jedné řeky. Provozní monitoring, bezpečnostní audit a produktová analytika mají jiné účely, jinou citlivost a často i jinou dobu uchování. OWASP Logging Cheat Sheet doporučuje přemýšlet o účelu logování a nepřistupovat k němu jako k univerzálnímu checklistu, protože příliš mnoho šumu může zakrýt skutečné problémy.
+
+Praktické rozdělení:
+
+- Provozní log: chyby aplikace, latence, stav integrací, joby, fronty, deploye.
+- Bezpečnostní audit: přihlášení, změny oprávnění, exporty dat, neúspěšné autorizace, admin akce.
+- Produktový signál: počty dokončených kroků, opuštěné formuláře, aktivace funkce, bez obsahu uživatelských dat.
+- Debug dočasný log: krátkodobý, cílený, s jasným vypnutím a vlastníkem.
+
+Každá vrstva má mít vlastní pravidla. Produktový signál nepotřebuje IP adresu. Provozní chyba většinou nepotřebuje e-mail zákazníka. Bezpečnostní audit může potřebovat interní user ID, ale ne text zprávy, kterou uživatel zrovna psal.
+
+## Log schema navrhni jako API, ne jako odpadkový koš
+
+Napiš si malý slovník událostí. Nečekej, až logy vyrostou organicky jako plíseň na starém backlogu. Každá důležitá událost má mít stabilní název, čas, službu, prostředí, výsledek, závažnost a korelační ID. Identitu člověka drž minimalizovaně: interní ID nebo hash pro konkrétní účel je často lepší než e-mail v každém řádku.
+
+Dobrý záznam:
+
+```json
+{
+  "event": "invoice_exported",
+  "occurred_at": "2026-10-04T08:15:00Z",
+  "service": "billing",
+  "environment": "production",
+  "actor_id": "usr_12345",
+  "workspace_id": "wrk_67890",
+  "request_id": "req_abc",
+  "result": "success",
+  "security_relevant": true
+}
+```
+
+Špatný záznam:
+
+```text
+User jan.novak@example.com exported invoice for ACME, body={...celá faktura...}, token=Bearer eyJ...
+```
+
+Ten druhý se sice tváří užitečně, ale ve skutečnosti kombinuje osobní údaj, obchodní informaci a tajemství. To není observability. To je budoucí incident se zpožděním.
+
+## Citlivá data rediguj před zápisem, ne až v dashboardu
+
+Redakce v UI logovací služby je kosmetika. Bezpečnější je citlivá data vůbec neposlat. Filtruj už v aplikaci, middleware nebo log transportu. Zvlášť hlídej request/response body, hlavičky, query parametry, cookie, autorizační tokeny, session ID, reset tokeny, platební údaje, přílohy, volné textové poznámky a chybové hlášky od externích služeb.
+
+Pravidlo pro malý tým:
+
+- `password`, `token`, `secret`, `authorization`, `cookie` vždy zahodit nebo maskovat.
+- E-mail zapisovat jen tam, kde je pro účel logu opravdu nutný; jinak interní ID.
+- Query parametry ukládat allowlistem, ne „všechno kromě pár zakázaných“.
+- Stack trace držet odděleně od zákaznického obsahu.
+- Dočasný debug log musí mít datum vypnutí.
+
+GDPR principy minimalizace, omezení účelu, přesnosti a omezení uložení nejsou jen právní dekorace pro privacy stránku. Jsou to dobré produktové mantinely pro logy: sbírej jen to, co potřebuješ, pro jasný účel a po omezenou dobu.
+
+## Retence má být kratší než firemní paměť
+
+Logy se nesmí hromadit jen proto, že disk byl levný a nikdo se nezeptal. Nastav retenci podle typu dat a rizika. Provozní debug logy často stačí držet dny. Agregované metriky můžeš držet déle, protože neobsahují detailní stopu člověka. Bezpečnostní audit může potřebovat delší dobu, ale o to víc musí mít přísnější přístup a jasný účel.
+
+Příklad jednoduché retence:
+
+- Debug logy: 3 až 7 dní.
+- Aplikační error logy bez obsahu požadavku: 14 až 30 dní.
+- Bezpečnostní audit klíčových akcí: 90 až 180 dní podle rizika a smluvních požadavků.
+- Agregované provozní metriky bez osobních údajů: 12 měsíců.
+- Incidentní export: vlastní ticket, vlastník, datum smazání.
+
+NIST SP 800-92 řeší log management jako samostatný proces: generování, přenos, ukládání, analýzu, ochranu a likvidaci logů. Přeloženo do malé firmy: logy nejsou vedlejší efekt aplikace, ale provozní systém s vlastní hygienou.
+
+## Přístup k logům je produkční oprávnění
+
+Kdo vidí produkční logy, často vidí víc než běžný support. Proto přístup nedávej plošně „všem vývojářům navždy“. Rozliš role: provozní troubleshooting, bezpečnostní audit, supportní ověření, externí dodavatel. Každý přístup má mít důvod, minimální rozsah a auditovatelnou stopu.
+
+Konkrétní pravidla:
+
+- Přístup přes SSO a MFA, ne sdílený účet.
+- Oddělené role pro čtení, export a změnu retenčních pravidel.
+- Export logů jen do incident ticketu nebo bezpečného úložiště s expirací.
+- Externí dodavatel dostane časově omezený přístup nebo redigovaný výřez.
+- Logovací nástroj sám patří do datové mapy a seznamu subprocesorů.
+
+Privacy-first evropský provoz tady znamená i otázku umístění dat. Pokud posíláš logy do externí služby, zjisti region zpracování, subprocesory, DPA, retenční nastavení a možnost mazání. „Je to jen technický log“ není odpověď. V logu bývá často víc života než v CRM, jen hůř pojmenovaného.
+
+## Alerty stavěj na dopadu, ne na počtu blikátek
+
+Monitoring bez alertové hygieny skončí tím, že všichni ignorují všechno. Alert má budit člověka jen tehdy, když existuje jasný dopad nebo rychle rostoucí riziko. Ostatní patří do denního nebo týdenního přehledu.
+
+Užitečné alerty:
+
+- Chybovost klíčového endpointu překročí práh po několik minut.
+- Fronta se plní rychleji, než ji worker zpracovává.
+- Selže platba, login, export nebo jiná kritická cesta.
+- Přibývá neúspěšných autorizací nad běžný baseline.
+- Externí integrace vrací chyby ovlivňující zákaznický výstup.
+
+Špatné alerty:
+
+- Každá jednotlivá chyba v izolaci.
+- Každý pomalý request bez dopadu.
+- Každá produktová událost, která jen potvrzuje normální provoz.
+- Alert bez runbooku a bez jasného vlastníka.
+
+Každý alert by měl mít odkaz na runbook: co zkontrolovat, kde najít dashboard, kdy eskalovat, co komunikovat zákazníkům a kdy alert vypnout nebo upravit.
+
+## Checklist: logování bez datového vysavače
+
+- Máme oddělené provozní logy, bezpečnostní audit a produktové signály.
+- Každá důležitá událost má stabilní název, účel a minimální schema.
+- Citlivé údaje redigujeme před zápisem do logu.
+- Request/response body logujeme jen výjimečně, cíleně a dočasně.
+- Query parametry ukládáme allowlistem.
+- Retence je nastavená podle typu logu a rizika.
+- Přístup k produkčním logům má role, MFA a auditní stopu.
+- Export logů má vlastní ticket, vlastníka a datum smazání.
+- Alerty mají dopadový práh, runbook a vlastníka.
+- Logovací nástroj je v datové mapě včetně regionu, DPA a subprocesorů.
+
+## Mini šablona log policy karty
+
+```markdown
+# Log policy karta: [produkt / služba]
+
+## Účel logování
+- Provozní účel:
+- Bezpečnostní účel:
+- Produktový účel:
+
+## Události
+- Kritické provozní události:
+- Bezpečnostní audit události:
+- Události, které záměrně nelogujeme:
+
+## Data
+- Povolené identifikátory:
+- Zakázaná pole:
+- Redakce/masking:
+- Query parametry allowlist:
+
+## Retence
+- Debug:
+- Error logy:
+- Bezpečnostní audit:
+- Agregované metriky:
+
+## Přístup
+- Role s přístupem:
+- Export pravidla:
+- Externí dodavatelé:
+
+## Alerty
+- Kritické alerty:
+- Denní přehledy:
+- Runbook odkazy:
+
+## Privacy-first kontrola
+- Region zpracování:
+- DPA/subprocesory:
+- Datum poslední revize:
+```
+
+## Zdroje
+
+- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- [NIST SP 800-92: Guide to Computer Security Log Management](https://csrc.nist.gov/pubs/sp/800/92/final)
+- [GDPR, článek 5: zásady zpracování osobních údajů](https://gdpr-info.eu/art-5-gdpr/)
+
 # Pracovní log
+- 2026-10-04: Doplněna příloha „Logování a monitoring bez datového vysavače“ s rozdělením provozních, bezpečnostních a produktových signálů, minimálním log schematem, redakcí citlivých údajů před zápisem, retenčními pravidly, přístupovou hygienou, alertingem podle dopadu, checklistem, log policy kartou a ověřenými zdroji OWASP, NIST a GDPR.
+
 - 2026-10-04: Doplněna příloha „Rate limiting a ochrana proti zneužití bez stalkování uživatelů“ s návrhem limitů podle chráněného zdroje, minimalizací identifikátorů, rozpočtovými pojistkami, bezpečnou odpovědí `429`, privacy-first logováním, fallbackem pro falešné pozitivy, checklistem, policy šablonou a ověřenými zdroji OWASP a RFC 6585.
 
 - 2026-10-04: Doplněna příloha „Pentest bez checkbox divadla a panického backlogu“ s praktickým scope podle rolí/dat/tenantů, přípravou stagingu, požadavky na testovací plán a report, pravidly pro kritické nálezy, prioritizací, retestem, preventivní smyčkou, checklistem, pentest kartou a ověřenými zdroji OWASP, NIST a GDPR.
