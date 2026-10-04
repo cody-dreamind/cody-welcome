@@ -38933,7 +38933,184 @@ Tohle je nenápadná, ale silná vrstva. Místo aby privacy-first žilo jen v pr
 - [Design Tokens Format Module 2025.10](https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/)
 - [Storybook: Naming components and hierarchy](https://storybook.js.org/docs/writing-stories/naming-components-and-hierarchy)
 
+# Příloha: SLO, SLA a status stránka bez falešných slibů
+
+Dostupnost se snadno prodává a těžko doručuje. „99,9 % uptime“ vypadá na pricing stránce hezky, dokud někdo nespočítá, že i tahle hodnota pořád znamená desítky minut výpadku měsíčně. Ještě horší je slibovat enterprise dostupnost ve chvíli, kdy má produkt jeden server, ruční deploye, žádný restore test a monitoring postavený na tom, že si zakladatel ráno otevře homepage. To není dostupnost. To je optimismus s faviconou.
+
+Privacy-first SaaS má dostupnost komunikovat poctivě: co sledujeme, co zákazník může očekávat, jak rychle reagujeme, kde najde stav služby a co neslibujeme. SLO a SLA nejsou jen právní zkratky do smlouvy. Jsou to nástroje, které drží tým při zemi a zákazníkovi šetří nervy.
+
+> Codyho komentář: Nejlepší status stránka není ta, která nikdy neukáže incident. Nejlepší je ta, která incident vysvětlí rychle, lidsky a bez kouřové clony slov jako „degradace některých systémů“ ve chvíli, kdy prostě nejde login.
+
+## Rozliš SLI, SLO a SLA
+
+Začni slovníkem, protože tady vzniká spousta drahého chaosu.
+
+- **SLI** je měřený indikátor. Například úspěšnost přihlášení, dostupnost API, doba odpovědi formuláře nebo počet úspěšně odeslaných webhooků.
+- **SLO** je interní nebo zákaznicky viditelný cíl pro daný indikátor. Například „99,5 % API požadavků do 500 ms za kalendářní měsíc“.
+- **SLA** je smluvní závazek s následkem, často kreditem, slevou nebo jiným kompenzačním pravidlem.
+
+Google SRE kniha popisuje SLI/SLO jako základní způsob, jak řídit spolehlivost podle měřených uživatelských očekávání, ne podle pocitu týmu ([Google SRE Book: Service Level Objectives](https://sre.google/sre-book/service-level-objectives/)). Pro malý SaaS je pointa jednoduchá: neměř všechno. Vyber pár signálů, které opravdu reprezentují uživatelskou hodnotu.
+
+Příklady dobrých SLI:
+
+| Část produktu | Slabý signál | Lepší SLI |
+|---|---|---|
+| Homepage | Server odpovídá `200` | Hlavní stránka se načte a obsahuje klíčový CTA blok. |
+| Přihlášení | Auth služba běží | Uživatel se může přihlásit a dostat do dashboardu. |
+| API | CPU je pod limitem | Podíl úspěšných API odpovědí bez `5xx` za okno. |
+| Formuláře | Frontend se načetl | Odeslání formuláře skončilo potvrzením a uloženou zprávou. |
+| Webhooky | Worker běží | Událost byla doručena nebo bezpečně připravena na retry. |
+
+Dostupnost není „server žije“. Dostupnost je „uživatel může udělat práci, kvůli které platí“.
+
+## Neslibuj víc, než umíš provozně obhájit
+
+SLA bývá marketingově lákavé, ale provozně nebezpečné. Pokud slíbíš 99,9 % dostupnost a nemáš redundantní infrastrukturu, automatické alerty, jasnou incident roli, obnovu ze záloh a testovaný rollback, prodáváš dluh. Zákazník to možná při podpisu nepozná. Pozná to ve chvíli, kdy služba spadne a ty začneš ručně hledat, kdo má přístup k DNS.
+
+První verze pro malý SaaS může být poctivější:
+
+```text
+Službu provozujeme s průběžným monitoringem dostupnosti a chybových stavů. Incidenty komunikujeme na status stránce a u dopadových výpadků kontaktujeme zákazníky e-mailem. Formální SLA poskytujeme až u tarifů, kde máme individuálně sjednaný provozní režim.
+```
+
+To není slabost. To je férové nastavení očekávání. Pokud zákazník potřebuje smluvní SLA, je to obchodní signál: chce vyšší jistotu, možná podporu, možná enterprise tarif, možná architekturu s vyšší cenou.
+
+## Status stránka má být jednoduchá a nezávislá
+
+Status stránka nesmí stát na stejném systému, který právě spadl. Pokud běží ve stejné aplikaci, na stejné doméně, za stejnou databází a stejným deploy pipeline, vypadá to elegantně jen do prvního incidentu. Status stránka má být co nejvíc oddělená: statická stránka, externí jednoduchý hosting, samostatná doména nebo alespoň infrastruktura mimo hlavní kritickou cestu.
+
+Minimum pro malý SaaS:
+
+- Aktuální stav hlavních částí služby: web, aplikace, API, přihlášení, e-maily, integrace.
+- Přehled probíhajících incidentů a plánovaných údržeb.
+- Historie incidentů s krátkým postmortem nebo odkazem na detail.
+- Možnost odběru aktualizací přes RSS nebo e-mail bez marketingového opt-inu.
+- Jasná časová zóna a časy v konzistentním formátu.
+
+Privacy-first detail: status stránka nemá být důvod přidat marketingový tracker. Lidé ji často navštěvují ve stresu, někdy z firemních sítí a někdy kvůli bezpečnostnímu incidentu. Měř agregovaně a střídmě, pokud vůbec. RSS je tady krásně nudná technologie — přesně proto se hodí.
+
+## Incident komunikuj podle dopadu, ne podle interní komponenty
+
+Zákazník nepotřebuje vědět, že „worker queue `billing-sync-eu-2` vykazuje zvýšenou latenci“, pokud výsledkem je, že se nezobrazují faktury. Interní komponenty patří do runbooku. Status komunikace má popsat dopad.
+
+Lepší šablona incidentu:
+
+```text
+Název: Některým zákazníkům se nezobrazují nové faktury
+Dopad: Nově vytvořené faktury se mohou zobrazit se zpožděním. Vystavení faktur funguje, ale přehled nemusí být aktuální.
+Začátek: 2026-10-04 09:20 UTC
+Stav: Problém vyšetřujeme.
+Další aktualizace: Nejpozději do 30 minut.
+Co mohou zákazníci dělat: Pokud potřebujete konkrétní fakturu urgentně, kontaktujte podporu s ID účtu, neposílejte citlivé údaje.
+```
+
+Důležité jsou dvě věci: pravidelnost a pravdivost. Když slíbíš další update do 30 minut, napiš ho, i kdyby měl znít „stále vyšetřujeme, zatím bez změny dopadu“. Ticho během incidentu je zesilovač úzkosti.
+
+## Plánovaná údržba není překvapení s kalendářem
+
+Plánovaná údržba má mít vlastní pravidla. Pokud dopad znáš dopředu, zákazník si zaslouží vědět, kdy přijde, jak dlouho potrvá, co bude omezené a jestli má něco udělat předem.
+
+Praktická pravidla:
+
+- Údržbu oznam předem podle dopadu: drobnou krátce, větší s několika dny rezervy.
+- Piš konkrétní dopad: „nebude možné odesílat formuláře“, ne „může dojít k omezení služeb“.
+- Uveď plánované okno i očekávanou délku, ne jen začátek.
+- Po dokončení napiš potvrzení, případně odkaz na změny.
+- Když se údržba prodlouží, aktualizuj status dřív, než původní okno skončí.
+
+U evropského provozu mysli i na zákazníky v různých zemích a směnách. „V noci“ není univerzální pojem, obzvlášť pokud má zákazník podporu, logistiku nebo fakturaci v jiném rytmu než vývojový tým.
+
+## Error budget je brzda proti hrdinství
+
+Error budget je jednoduchá myšlenka: když máš cíl spolehlivosti, máš i tolerované množství selhání. Pokud ho vyčerpáš, přestaneš riskovat a místo nových funkcí řešíš stabilitu. Není to trest. Je to brzda, která chrání zákazníka i tým.
+
+Pro malý tým stačí neformální pravidlo:
+
+- Pokud opakovaně padá přihlášení, zastav experimenty v auth části.
+- Pokud deployment třikrát za měsíc vyvolal rollback, zpomal release rytmus a oprav pipeline.
+- Pokud support řeší stejný výpadek s více zákazníky, přidej monitoring nebo runbook.
+- Pokud status stránka mlčí během incidentu, uprav komunikační proces dřív než další feature.
+
+Codyho komentář: Error budget je produktový airbag. Nikdo si ho nekupuje kvůli radosti z airbagu, ale když přijde náraz, najednou je to nejdůležitější součást auta.
+
+## SLA kredit není náhrada za důvěru
+
+SLA kredit může být férový obchodní mechanismus, ale neřeší hlavní problém zákazníka: jeho práce stála. Kredit na faktuře nepomůže, když mu neodešly objednávky, nepřišly poptávky nebo nemohl vyfakturovat práci. Proto SLA neber jako štít před komunikací.
+
+Pokud SLA zavádíš, definuj:
+
+- co přesně se počítá do dostupnosti,
+- co je vyloučeno, například plánovaná údržba oznámená předem,
+- jak se měří začátek a konec incidentu,
+- jak zákazník požádá o kredit,
+- jaké jsou limity kompenzace,
+- jak se řeší závislosti třetích stran,
+- jaké tarify nebo smlouvy mají SLA nárok.
+
+A hlavně: SLA text slaď s realitou monitoringu. Nesmíš slibovat měření, které technicky nemáš. To je jako prodávat teploměr a měřit počasí podle nálady.
+
+## Checklist: dostupnost bez falešných slibů
+
+- [ ] Máme vybrané SLI podle uživatelské hodnoty, ne podle interních metrik.
+- [ ] SLO odpovídá tomu, co umíme provozně doručit a měřit.
+- [ ] SLA slibujeme jen tam, kde máme smluvní, technickou a support kapacitu.
+- [ ] Status stránka je mimo hlavní kritickou cestu produktu.
+- [ ] Status aktualizace popisují dopad na zákazníka, ne interní názvy komponent.
+- [ ] Incident má slíbený čas další aktualizace a někdo ho opravdu hlídá.
+- [ ] Plánovaná údržba má oznámení předem, konkrétní dopad a potvrzení po dokončení.
+- [ ] Error budget nebo podobná brzda umí zastavit rizikové změny po sérii incidentů.
+- [ ] Status stránka nemá marketingové trackery ani zbytečný sběr osobních dat.
+- [ ] Po incidentu vzniká krátké ponaučení, které zlepšuje monitoring, runbook nebo produkt.
+
+## Mini šablona SLO/status karty
+
+```text
+# SLO/status karta: [služba / modul]
+
+## Uživatelská práce
+Co musí zákazník zvládnout:
+Kdy je funkce považovaná za nedostupnou:
+
+## SLI
+Měřený indikátor:
+Zdroj měření:
+Měřicí okno:
+Výjimky:
+
+## SLO
+Cíl:
+Proč je realistický:
+Co uděláme při porušení:
+
+## SLA
+Je součástí smlouvy: ano / ne
+Kompenzace:
+Výluky:
+Proces žádosti:
+
+## Status komunikace
+Veřejný název komponenty:
+Kdo píše aktualizace:
+Maximální interval aktualizací:
+Kanály: status stránka / RSS / e-mail / přímý kontakt
+
+## Privacy-first kontrola
+Co status stránka měří:
+Jaké trackery nepoužíváme:
+Jak dlouho držíme incident metadata:
+```
+
+## Zdroje
+
+- [Google SRE Book: Service Level Objectives](https://sre.google/sre-book/service-level-objectives/)
+- [Google SRE Workbook: Implementing SLOs](https://sre.google/workbook/implementing-slos/)
+- [Atlassian: What is a status page?](https://www.atlassian.com/incident-management/kpis/status-page)
+- [MDN: HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status)
+
+
 # Pracovní log
+
+- 2026-10-04: Doplněna příloha „SLO, SLA a status stránka bez falešných slibů“ s rozlišením SLI/SLO/SLA, pravidly realistických slibů, návrhem nezávislé status stránky, incident komunikací podle dopadu, plánovanou údržbou, error budget brzdou, SLA pravidly, checklistem, SLO/status kartou a ověřenými zdroji Google SRE, Atlassian a MDN.
 - 2026-10-04: Doplněna příloha „Komponentová governance bez Figma muzea a driftu v kódu“ s praktickým postupem od opakovaných UI bolestí přes sémantické tokeny, komponentové stavy, přístupnost, dokumentaci blízko kódu, governance, privacy-first poznámky, checklist, komponentovou kartu a ověřené zdroje W3C a Storybook.
 
 - 2026-10-04: Doplněna příloha „Roadmapa a feature requesty bez hlasovacího cirkusu“ s praktickým modelem sběru problémů místo objednávek řešení, vrstvenou evidencí signálů, pravidly pro hlasování, privacy-first prioritizací, lidskými stavy roadmapy, revizní rutinou, checklistem, roadmap kartou a ověřenými zdroji GDPR a EDPB.
