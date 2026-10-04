@@ -37392,7 +37392,198 @@ Výsledek revize zapiš do pracovního logu. Stačí jedna věta: co bylo zkontr
 - EDPB: Opinion 28/2024 on certain data protection aspects related to AI models — anonymita AI modelů, legitimní zájem a důsledky nezákonně zpracovaných osobních dat: https://www.edpb.europa.eu/documents/opinion-of-the-board-art-64/opinion-282024-on-certain-data-protection-aspects-related-to_en
 - European Commission: Guidelines for providers and deployers of AI high-risk systems — praktické vyjasnění klasifikace high-risk AI systémů podle AI Actu: https://digital-strategy.ec.europa.eu/en/policies/guidelines-ai-high-risk-systems
 
+# Příloha: Relace a timeouty bez vyhazování lidí i bez otevřených dveří
+
+Přihlášení je pro SaaS zvláštní místo: bezpečnostní tým chce krátké relace, produkt chce plynulou práci a zákazník chce hlavně nebýt každých deset minut vyhozený jako podezřelý návštěvník recepce. Dobré řešení není extrém. Je to jasné rozdělení rizika, předvídatelné chování a minimum dat, která musíš kvůli relacím držet.
+
+Relace není jen cookie s náhodným ID. Je to dohoda mezi produktem a uživatelem: „poznám tě po omezenou dobu, pro konkrétní účel, na konkrétním zařízení a umím to bezpečně ukončit.“ Jakmile ji bereš jako vedlejší technický detail, začnou vznikat nekonečné tokeny, zapomenuté refresh tokeny, admin relace bez brzdy a support věty typu „zkuste se odhlásit a přihlásit“. To je věta, která ve firmě voní po dluhu.
+
+> Codyho komentář: Timeout má být jako dobrý hlídač v muzeu. Všímá si rizika, ale nekřičí na každého návštěvníka, který se na obraz dívá déle než třicet sekund.
+
+## Rozliš běžnou práci, citlivou akci a admin režim
+
+Jedna délka relace pro všechno je pohodlná jen na tabuli. V reálném SaaS má jinou váhu čtení dokumentace, úprava fakturačních údajů, export zákaznických dat a impersonace uživatele. Proto si nejdřív rozděl akce podle rizika.
+
+Praktický model:
+
+- Běžná práce: čtení vlastních dat, běžná editace, přehledy a dashboardy.
+- Citlivá akce: změna e-mailu, hesla, fakturace, API tokenů, role uživatele, export nebo smazání dat.
+- Admin/support režim: impersonace, zásah do tenantů, ruční opravy, změna limitů nebo bezpečnostních nastavení.
+- Veřejná nebo poloveřejná část: dokumentace, status stránka, marketingový web, veřejné sdílené odkazy.
+
+Timeouty a re-auth pak navrhuj podle typu akce, ne podle toho, co umí první knihovna v tutoriálu. Běžná práce může mít pohodlnější obnovu relace. Citlivá akce si zaslouží čerstvé ověření identity. Admin režim má mít kratší životnost, auditní stopu a viditelný indikátor, že člověk pracuje v rizikovém módu.
+
+## Idle timeout a absolute timeout nejsou totéž
+
+Idle timeout ukončuje relaci po neaktivitě. Absolute timeout ukončí relaci po maximální době od přihlášení bez ohledu na aktivitu. Potřebuješ oboje, protože řeší jiné riziko.
+
+Idle timeout pomáhá, když někdo odejde od notebooku, nechá otevřenou sdílenou pracovní stanici nebo zapomene zamknout obrazovku. Absolute timeout omezuje životnost kompromitované relace a brání tomu, aby se „zapamatovat mě“ proměnilo v permanentní přístupovou kartu.
+
+Pro malé B2B SaaS je rozumné začít konfigurací podle rizika:
+
+- Běžná uživatelská relace: delší idle timeout, ale jasná absolutní životnost.
+- Citlivé nastavení: vyžádat re-auth, pokud poslední silné ověření není čerstvé.
+- Admin nebo support režim: kratší idle timeout a krátká absolutní životnost.
+- Veřejné sdílené odkazy: samostatná expirace odkazu, ne spoléhání na uživatelskou relaci.
+
+Konkrétní čísla si zvol podle segmentu, regulace a očekávání zákazníků. Důležité je, aby byla napsaná v session policy, testovaná a vysvětlitelná. Náhodné „asi po hodině to spadne“ není bezpečnostní politika, ale folklór.
+
+## Re-auth používej pro akce s dopadem
+
+Re-auth znamená, že před citlivou akcí znovu ověříš, že u klávesnice sedí správný člověk. Nemusí to vždy znamenat kompletní odhlášení. Často stačí zadat heslo, použít MFA, potvrdit passkey nebo projít identity providerem.
+
+Re-auth dávej tam, kde chyba nebo únos relace může způsobit škodu:
+
+- změna hesla, e-mailu nebo MFA,
+- vytvoření, zobrazení nebo rotace API klíče,
+- změna rolí a oprávnění,
+- export většího objemu dat,
+- smazání účtu nebo workspace,
+- změna fakturace nebo platebních údajů,
+- zapnutí impersonace nebo administrátorského zásahu.
+
+UX pravidlo je jednoduché: vysvětli proč. Krátká věta „Kvůli ochraně účtu ověříme identitu před změnou oprávnění“ je lepší než studený modál s políčkem „Password“. Bez vysvětlení vypadá bezpečnost jako chyba produktu.
+
+## Tokeny drž krátce, rotovatelně a odvolatelně
+
+Access token má být krátkodobý pracovní lístek. Refresh token má být opatrně hlídaný mechanismus pro obnovu. API token má být samostatná entita s názvem, účelem, rozsahem oprávnění, datem vytvoření, posledním použitím a možností odvolání.
+
+Privacy-first pravidla pro tokeny:
+
+- Neukládej tokeny do logů, analytiky ani support screenshotů.
+- API token ukaž celý jen jednou při vytvoření.
+- Hashuj dlouhodobé tokeny podobně opatrně jako hesla, pokud je potřebuješ ověřovat na serveru.
+- U refresh tokenů používej rotaci a detekuj opakované použití starého tokenu.
+- Umožni uživateli i adminovi ukončit konkrétní relaci nebo zařízení.
+- U služebních účtů odděl osobní uživatele od strojových přístupů.
+
+Dobrý detail v UI: stránka „Aktivní relace a přístupy“ s názvem zařízení, přibližnou lokalitou podle IP jen pokud ji opravdu potřebuješ, časem poslední aktivity a tlačítkem „Odhlásit“. Nepotřebuješ z toho dělat detektivní mapu pohybu. Stačí dát člověku kontrolu.
+
+## „Zapamatovat mě“ nesmí být bezpečnostní černá díra
+
+Checkbox „Zapamatovat mě“ je častý zdroj mlhy. Někde znamená delší cookie, jinde obnovitelný refresh token, jinde prakticky trvalé přihlášení. Uživatel ale slyší: „nebudeš se muset pořád přihlašovat“. Firma by měla slyšet: „zvyšujeme životnost přístupu, musíme to umět řídit“.
+
+Použij jasná pravidla:
+
+- Popiš, co volba dělá: například „Zůstat přihlášený na tomto zařízení“.
+- Nezapínej ji automaticky na sdílených nebo rizikových scénářích.
+- Nedovol jí obejít re-auth u citlivých akcí.
+- Dej adminovi možnost nastavit maximální dobu relace pro celý workspace.
+- Při změně hesla nebo MFA invaliduj staré relace podle rizika.
+
+V B2B SaaS je fér nabídnout organizacím vlastní session policy: kratší relace pro citlivé týmy, SSO pravidla pro enterprise zákazníky a jednoduchou výchozí hodnotu pro menší firmy. Ne každý zákazník chce stejné bezpečnostní boty.
+
+## Logout musí ukončit přístup, ne jen schovat obrazovku
+
+Odhlášení musí serverově zneplatnit relaci nebo token, smazat klientský stav a zabránit návratu přes historii prohlížeče k citlivým datům. Pokud logout jen odstraní položku z localStorage a token dál funguje, není to logout. Je to divadlo s oponou.
+
+Zkontroluj hlavně:
+
+- serverovou invalidaci session ID nebo refresh tokenu,
+- vyčištění klientského cache stavu,
+- chování více záložek a více zařízení,
+- odhlášení po změně hesla nebo MFA,
+- odhlášení při deaktivaci uživatele,
+- ukončení impersonace a návrat do původního admin kontextu.
+
+U SSO nezapomeň rozlišit logout z aplikace a logout z identity provideru. Někdy chceš ukončit jen aplikaci, jindy celou federovanou relaci. Hlavně to nesmí být překvapení.
+
+## Loguj bezpečnostní události, ne obsah práce
+
+Relace potřebují audit, ale audit není skládka osobních dat. Zapisuj události, které pomohou s bezpečností a podporou: přihlášení, neúspěšné pokusy, re-auth, vytvoření tokenu, odvolání tokenu, změnu session policy, logout, detekci podezřelé obnovy tokenu.
+
+Do logu nepatří hesla, tokeny, celé cookies, obsah dokumentů, query parametry s citlivými hodnotami ani zbytečně přesná data o poloze. Pokud chceš ukládat IP adresu nebo user agent, napiš proč, jak dlouho a kdo k tomu má přístup. Minimalizace není jen právní slovo, je to provozní disciplína.
+
+Příklad dobré auditní události:
+
+```text
+event: session.reauth_required
+actor_id: usr_123
+workspace_id: ws_456
+action: api_token.create
+result: success
+risk_level: high
+created_at: 2026-10-04T02:00:00Z
+```
+
+Příklad špatné auditní události:
+
+```text
+user changed token secret sk_live_... from IP ... with full request body ...
+```
+
+První pomáhá. Druhá je bezpečnostní incident v zárodku, jen čeká na export logů.
+
+## Checklist: relace bez otevřených dveří
+
+- Máš sepsané typy relací: běžná, citlivá, admin, strojová a veřejný sdílený přístup.
+- Každý typ má idle timeout, absolute timeout a pravidlo pro obnovu.
+- Citlivé akce vyžadují čerstvé ověření identity.
+- API tokeny mají název, rozsah, poslední použití, rotaci a možnost odvolání.
+- Logout zneplatní přístup serverově, ne jen vizuálně.
+- Změna hesla, MFA nebo role řeší staré relace podle rizika.
+- Uživatel nebo admin vidí aktivní relace bez zbytečného šmírování.
+- Auditní log zapisuje bezpečnostní události, ne tajné hodnoty.
+- Session policy je testovaná v běžném, citlivém i admin scénáři.
+- Support umí vysvětlit, proč byl člověk odhlášen nebo proč se vyžaduje re-auth.
+
+## Mini šablona session policy karty
+
+```markdown
+# Session policy karta: [produkt / workspace]
+
+## Typ relace
+- Běžná uživatelská:
+- Admin/support:
+- Strojový/API přístup:
+- Veřejné sdílené odkazy:
+
+## Timeouty
+- Idle timeout:
+- Absolute timeout:
+- Obnova relace:
+- „Zůstat přihlášený“:
+
+## Re-auth
+- Akce vyžadující čerstvé ověření:
+- Povolené metody:
+- Maximální stáří posledního ověření:
+
+## Tokeny
+- Access token životnost:
+- Refresh token pravidla:
+- API token rozsahy:
+- Rotace a odvolání:
+
+## Logout a invalidace
+- Ruční logout:
+- Změna hesla/MFA:
+- Deaktivace uživatele:
+- Ukončení impersonace:
+
+## Audit a data
+- Logované události:
+- Zakázané hodnoty v logu:
+- Retence:
+- Přístup k logům:
+
+## Testy
+- Scénář běžné práce:
+- Scénář citlivé akce:
+- Scénář admin režimu:
+- Scénář ukradeného/rotovaného tokenu:
+```
+
+## Zdroje
+
+- OWASP Session Management Cheat Sheet — doporučení k session ID, timeoutům, ukládání tokenů a ukončování relací: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- OWASP Authentication Cheat Sheet — re-authentication po rizikových událostech a před citlivými akcemi: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+- NIST SP 800-63B Digital Identity Guidelines — session management, reauthentication a authenticator binding: https://pages.nist.gov/800-63-4/sp800-63b.html
+- GDPR čl. 5 — zásady minimalizace údajů, omezení uložení, integrita a důvěrnost: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+
 # Pracovní log
+
+- 2026-10-04: Doplněna příloha „Relace a timeouty bez vyhazování lidí i bez otevřených dveří“ s rozdělením typů relací, idle/absolute timeouty, re-auth pro citlivé akce, správou tokenů, logout pravidly, privacy-first auditním logováním, checklistem, session policy kartou a ověřenými zdroji OWASP, NIST a GDPR.
 
 - 2026-10-04: Doplněna příloha „AI nástroje v týmu bez úniku dat a chaosu“ s praktickou mapou rizik použití AI, kartou schváleného nástroje, pravidly pro vstupy a lidskou kontrolu výstupů, firemní jednostránkovou AI policy, měsíční revizí, checklistem, šablonou AI tool karty a ověřenými zdroji CNIL, EDPB a Evropské komise.
 
