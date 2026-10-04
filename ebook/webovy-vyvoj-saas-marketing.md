@@ -37990,7 +37990,198 @@ Vlastník:
 - [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - [EUR-Lex: Nařízení GDPR 2016/679, článek 5](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX:32016R0679)
 
+# Příloha: Pentest bez checkbox divadla a panického backlogu
+
+Penetrační test není magické požehnání aplikace. Je to cílená kontrola, která má najít prakticky zneužitelné slabiny, ověřit bezpečnostní předpoklady a pomoct týmu rozhodnout, co opravit teď, co naplánovat a co jen sledovat. Pokud z něj uděláš jednorázový PDF rituál pro investora, dostaneš přesně to: hezký artefakt, který chvíli voní compliance a potom zapadne do složky „až bude čas“.
+
+Privacy-first SaaS k pentestu přistupuje jinak. Neptá se jen „kolik zranitelností našel dodavatel“, ale hlavně: jaký typ dat by mohl uniknout, přes kterou roli, v jakém tenantovi, s jakou obchodní škodou a jak rychle umíme opravu bezpečně nasadit. Testování bez této vazby na produkt je drahý lov na technické zajímavosti.
+
+> Codyho komentář: Pentest nemá být bezpečnostní hororový večer. Má být požární cvičení pro reálné slabiny — s mapou budovy, ne s bubákem pod postelí.
+
+## Nejdřív určete rozsah podle dat a rolí
+
+Rozsah testu nezačínej seznamem URL. Začni mapou dopadu: jaké role existují, jaké akce mohou udělat, jaké osobní nebo obchodní údaje systém drží a kde jsou tenant hranice. Teprve potom napiš testovací scope.
+
+Minimální scope pro menší B2B SaaS:
+
+- veřejný web a přihlašovací flow,
+- onboarding, pozvánky a reset hesla,
+- běžný uživatelský účet,
+- workspace admin,
+- fakturace, exporty a integrace,
+- API endpointy používané front-endem,
+- souborové uploady a generované dokumenty,
+- auditní logy a notifikace,
+- impersonace nebo supportní admin, pokud existuje.
+
+Zvlášť popiš, co se netestuje. „Netestujeme produkční e-mailing“, „netestujeme DDoS“, „netestujeme sociální inženýrství“ nebo „netestujeme fyzický přístup“ nejsou výmluvy. Jsou to hranice, které brání chaosu.
+
+## Testovací prostředí připrav jako produkci bez produkčních lidí
+
+Ideální pentest běží na stagingu, který se chová jako produkce, ale neobsahuje reálná osobní data. Pokud musí část testu proběhnout v produkci, napiš přesná pravidla: časové okno, povolené účty, zákaz destruktivních akcí, limity zátěže, kontakt pro incident a způsob okamžitého zastavení.
+
+Připrav testovací tenanty:
+
+- tenant A: běžný zákazník s několika uživateli,
+- tenant B: cizí zákazník pro ověření izolace,
+- admin účet s omezeným rozsahem,
+- účet bez oprávnění,
+- účet po odebrání přístupu,
+- testovací integraci a webhook endpoint,
+- soubory s neškodnými, ale rozpoznatelnými daty.
+
+Nikdy neposílej testerům dump produkční databáze „protože je to rychlejší“. Rychlejší je to jen do chvíle, než řešíš únik dat v testovací Slack zprávě, screenshotu nebo logu nástroje třetí strany.
+
+## Požaduj testovací plán, ne jen finální PDF
+
+Dobrý dodavatel umí předem říct, podle čeho bude testovat. Nemusí odkrýt každý payload, ale měl by popsat metodiku, typy ověřovaných rizik, role, API rozsah, pravidla pro hlášení kritických nálezů a formát výstupu.
+
+U webových aplikací se vyplatí navázat rozsah na OWASP Web Security Testing Guide a kontrolní úroveň na OWASP ASVS. Ne proto, že zkratky vypadají profesionálně, ale protože dávají společný jazyk pro autentizaci, správu relací, autorizaci, validaci vstupů, konfiguraci, API i logování.
+
+Praktická objednávka může obsahovat:
+
+```text
+Cíl testu: ověřit bezpečnost B2B SaaS před širším launch obdobím.
+Rozsah: web app, API, role user/admin, exporty, uploady, integrace.
+Mimo rozsah: DDoS, phishing, fyzická bezpečnost, produkční destruktivní akce.
+Testovací prostředí: staging s produkční konfigurací bez produkčních dat.
+Metodika: OWASP WSTG + vybrané ASVS kontroly.
+Kritické nálezy: hlásit ihned mimo závěrečný report.
+Výstup: reprodukční kroky, dopad, doporučení, důkaz, priorita, retest.
+```
+
+## Kritické nálezy nečekají na závěrečnou prezentaci
+
+Pokud tester najde možnost číst data cizího tenanta, obejít autentizaci, získat admin práva, spustit kód na serveru nebo stáhnout citlivé exporty, nemá to čekat na páteční debrief. Musí existovat rychlý kanál pro kritické nálezy.
+
+Domluv si předem:
+
+- kdo je bezpečnostní kontakt,
+- v jakém čase reaguje,
+- jak se ověří pravost hlášení,
+- jaký je emergency deploy postup,
+- jak se zastaví test, když začne ohrožovat provoz,
+- kdo rozhoduje o zákaznické komunikaci.
+
+Privacy-first pohled: kritický nález posuzuj i jako možný osobní údajový incident. Ne každý nález je porušení zabezpečení osobních údajů, ale tým musí mít brzký rozhodovací bod. „Uvidíme po reportu“ není incident response plán. To je modlitba v mikině.
+
+## Report musí být použitelný pro vývojáře i vedení
+
+Slabý report říká: „SQL injection, high, fix validation.“ Dobrý report říká: kde je problém, jak ho ověřit, jaký účet byl použit, jaký dopad má na data a tenanty, proč je priorita taková, jaká je, a jak ověřit opravu.
+
+Každý nález chtěj v této struktuře:
+
+- název a krátké shrnutí,
+- zasažená URL / endpoint / komponenta,
+- potřebná role a předpoklady,
+- reprodukční kroky,
+- důkaz bez zbytečného vystavení citlivých dat,
+- dopad na důvěrnost, integritu a dostupnost,
+- dopad na tenant hranice a osobní údaje,
+- doporučená oprava,
+- priorita a důvod,
+- návrh retestu.
+
+Vývojář potřebuje konkrétní kroky. Vedení potřebuje vědět, jestli jde o obchodní riziko, zákaznický dopad nebo technický dluh. Jeden report může sloužit oběma, když není napsaný jako sbírka screenshotů pro bezpečnostní archeology.
+
+## Prioritizace má stát na dopadu, ne na barvě štítku
+
+CVSS nebo podobné skóre může pomoct, ale samo neopraví kontext produktu. V malém SaaS může být „medium“ nález ve fakturaci horší než „high“ nález v interním admin nástroji bez přístupu z internetu. Přidej vlastní produktové kritérium.
+
+Jednoduchá rozhodovací matice:
+
+| Priorita | Oprav kdy | Typický příklad |
+| --- | --- | --- |
+| P0 | okamžitě / emergency flow | čtení dat cizího tenanta, převzetí účtu, RCE |
+| P1 | tento sprint | obejití autorizace, citlivý export bez kontroly, slabé reset flow |
+| P2 | plánovaně do backlogu | bezpečnostní hlavičky, tvrdší rate limiting, lepší audit log |
+| P3 | technická hygiena | text chybové hlášky, dokumentace, nízkoriziková konfigurace |
+
+U každé položky si napiš ownera, termín a ověřovací krok. Bez toho se z reportu stane bezpečnostní tapeta. A tapeta je hezká jen do chvíle, než za ní začne plesnivět autorizace.
+
+## Retest ber jako součást dodávky
+
+Pentest bez retestu je jako hasičák bez kontroly tlaku. Možná pomůže, možná je to dekorace. Domluv retest předem: které nálezy se ověřují, kolik kol je v ceně, jak rychle po opravě může proběhnout a jaký je výstup.
+
+Retest nemá jen potvrdit, že payload už nefunguje. Má ověřit, že oprava nerozbila legitimní scénář a nevytvořila vedlejší problém. Typicky: přísnější autorizace nesmí zamknout správného admina, validace uploadu nesmí tiše zahazovat povolené soubory a rate limit nesmí trestat běžné zákazníky.
+
+## Z nálezů udělej produktovou prevenci
+
+Největší hodnota pentestu není v tom, že opravíš konkrétní endpoint. Je v tom, že najdeš vzor chyby. Když se jednou objeví broken access control, zkontroluj všechny podobné resource endpointy. Když se najde problém v exportu, ověř import, audit log a zákaznický admin. Když selže reset hesla, projdi celé identity flow.
+
+Po uzavření nálezů si udělej krátkou interní lekci:
+
+- Který typ chyby se opakoval?
+- Která kontrola chyběla v code review?
+- Máme k tomu automatický test?
+- Patří pravidlo do vývojářského checklistu?
+- Má být něco ve threat modelu produktu?
+
+Tím se pentest mění z jednorázového auditu na zlepšovací smyčku. Přesně tam začíná bezpečnost, která není jen nákup služby.
+
+## Checklist: pentest bez checkbox divadla
+
+- [ ] Máme scope podle rolí, dat, tenantů a kritických funkcí?
+- [ ] Je jasně napsané, co je mimo rozsah?
+- [ ] Testovací prostředí neobsahuje produkční osobní data?
+- [ ] Má tester testovací účty pro různé role a tenanty?
+- [ ] Existuje pravidlo pro okamžité hlášení kritických nálezů?
+- [ ] Máme interního vlastníka pentestu a bezpečnostní kontakt?
+- [ ] Report vyžaduje reprodukční kroky, dopad, doporučení a retest?
+- [ ] Prioritizace zohledňuje zákaznická data a tenant hranice?
+- [ ] Je retest součástí plánu?
+- [ ] Převádíme opakované nálezy do vývojářských kontrol a testů?
+
+## Mini šablona pentest karty
+
+```text
+# Pentest karta: [produkt / release]
+
+## Cíl
+Proč testujeme:
+Hlavní riziko:
+Datum testu:
+Interní vlastník:
+
+## Rozsah
+Domény / aplikace:
+API:
+Role:
+Tenanty:
+Citlivé funkce:
+Mimo rozsah:
+
+## Prostředí
+Staging / produkce:
+Testovací data:
+Testovací účty:
+Zákaz destruktivních akcí:
+Stop kontakt:
+
+## Metodika
+Použitý standard / vodítko:
+Zvláštní scénáře:
+Kritické nálezy hlásit kam:
+
+## Výstup
+Report doručen:
+P0/P1/P2/P3 počty:
+Owner oprav:
+Retest datum:
+Poučení do procesu:
+```
+
+## Zdroje
+
+- [OWASP: Web Security Testing Guide](https://owasp.org/www-project-web-security-testing-guide/)
+- [OWASP: Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+- [OWASP: Top 10 Web Application Security Risks](https://owasp.org/www-project-top-ten/)
+- [NIST: Technical Guide to Information Security Testing and Assessment, SP 800-115](https://csrc.nist.gov/pubs/sp/800/115/final)
+- [EUR-Lex: Nařízení GDPR 2016/679, článek 33](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX:32016R0679)
+
 # Pracovní log
+
+- 2026-10-04: Doplněna příloha „Pentest bez checkbox divadla a panického backlogu“ s praktickým scope podle rolí/dat/tenantů, přípravou stagingu, požadavky na testovací plán a report, pravidly pro kritické nálezy, prioritizací, retestem, preventivní smyčkou, checklistem, pentest kartou a ověřenými zdroji OWASP, NIST a GDPR.
 
 - 2026-10-04: Doplněn úvod e-booku o krátký „privacy-first čuchací test“ pro kontrolu malých změn před publikací.
 
