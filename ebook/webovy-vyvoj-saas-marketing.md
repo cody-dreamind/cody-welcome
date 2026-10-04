@@ -40691,7 +40691,199 @@ Co se doplní do dokumentace:
 - OpenFeature: Specification — https://openfeature.dev/specification/
 
 
+# Příloha: Pozvánky do týmu a jednorázové odkazy bez otevřených zadních dveří
+
+Pozvánka do workspace vypadá jako drobnost. Jeden e-mail, jedno tlačítko, jeden nový kolega. Jenže v B2B SaaS je pozvánka zároveň přístupový mechanismus, bezpečnostní událost, zákaznická komunikace a často první kontakt nového uživatele s produktem. Když ji navrhneš ledabyle, vytvoříš zadní dveře: staré odkazy, pozvánky poslané na špatný e-mail, nejasné role, přístup po odchodu z firmy nebo support tikety typu „někdo se dostal do špatného workspace“.
+
+Privacy-first přístup k pozvánkám je jednoduchý: pozvánka má dát přístup správnému člověku, do správného prostoru, se správnou rolí, na omezenou dobu a s jasnou auditní stopou. Nemá být marketingový pixel, skrytý onboardingový dotazník ani nekonečně platný klíč pod rohožkou.
+
+> Codyho komentář: Invite link je jako klíč od kanceláře. Když ho pošleš e-mailem, necháš platit navždy a ještě do něj napíšeš roli admina, neděláš onboarding. Děláš escape room pro budoucí incident.
+
+## Pozvánka není účet
+
+Nejdřív odděl tři věci, které se v malých produktech často slepí dohromady:
+
+- **Pozvánka** říká, že někdo smí přijmout členství do konkrétního workspace.
+- **Uživatelský účet** říká, kdo se autentizoval.
+- **Členství** říká, jakou roli má daný účet v daném workspace.
+
+Když tyhle vrstvy smícháš, začne chaos. Uživatel může mít účet ještě před přijetím pozvánky. Může být pozván do více workspace. Může změnit e-mail. Může přijít přes SSO. A hlavně: pozvánka sama o sobě nesmí znamenat, že backend obejde autorizaci.
+
+Praktický datový model nemusí být složitý:
+
+- `invitation_id`: interní identifikátor pozvánky,
+- `workspace_id`: kam pozvánka vede,
+- `email`: pozvaná adresa nebo doménové omezení,
+- `role`: role po přijetí,
+- `invited_by`: kdo pozvánku poslal,
+- `expires_at`: konec platnosti,
+- `accepted_at`: čas přijetí,
+- `revoked_at`: čas zrušení,
+- `token_hash`: hash tokenu, nikdy token v čitelné podobě.
+
+Token ukládej jako hash podobně jako jiné citlivé jednorázové hodnoty. Pokud unikne databáze, nechceš, aby se z pozvánek stala okamžitě použitelná sada vstupenek.
+
+## Token má být krátký, jednorázový a omezený
+
+Pozvánkový odkaz má mít omezenou platnost a po použití se musí zneplatnit. OWASP u resetu hesla doporučuje používat bezpečné náhodné tokeny, které jsou jednorázové a po vhodné době expirují; stejný princip se hodí i pro pozvánky, protože jde také o citlivý e-mailový tok ([OWASP Forgot Password Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html)).
+
+Rozumný výchozí režim pro malý B2B SaaS:
+
+- běžná pozvánka platí 48 až 72 hodin,
+- admin pozvánka platí kratší dobu než běžná role,
+- po přijetí je token neplatný,
+- po změně role se stará pozvánka ruší a posílá nová,
+- pozvánku lze ručně zrušit,
+- nové odeslání vytvoří nový token, ne recyklaci starého,
+- token se nikdy neloguje celý v analytice, error reportingu ani support náhledu.
+
+Pokud zákazník potřebuje delší platnost kvůli nákupu nebo internímu procesu, nedělej z toho výchozí stav. Přidej ruční prodloužení s auditní stopou a důvodem. Výjimka má být vidět, ne schovaná v databázi jako „temporary=true“ z roku 2024.
+
+## Role musí být jasná už před kliknutím
+
+Pozvaný člověk má vědět, kam vstupuje a s jakou rolí. Pozvánka by měla obsahovat:
+
+- název produktu,
+- název workspace nebo organizace,
+- kdo pozvánku poslal,
+- roli nebo rozsah přístupu,
+- platnost odkazu,
+- co dělat, když pozvánku nečekal,
+- kontakt na podporu nebo bezpečnostní e-mail.
+
+Příklad textu:
+
+```text
+Ondřej vás pozval do workspace „Acme“ v produktu [Název].
+Po přijetí získáte roli Editor, která umožňuje upravovat projekty, ale ne spravovat fakturaci ani členy týmu.
+
+Pozvánka platí do 2026-10-07 14:00 Europe/Prague.
+Pokud jste pozvánku nečekali, neklikejte na ni a napište nám na security@example.com.
+```
+
+Tohle je lepší než „You have been invited!“ a velké modré tlačítko bez kontextu. Uživatel není NPC v onboardingové hře. Má vědět, kam leze.
+
+## Přijetí pozvánky musí respektovat identitu
+
+Nejrizikovější část není odeslání, ale přijetí. Produkt musí ověřit, že přihlášený uživatel odpovídá pozvánce nebo že pozvánka dovoluje vytvoření účtu pro danou adresu. U B2B domén a SSO dávej pozor hlavně na tyhle situace:
+
+- uživatel je přihlášený jiným e-mailem, než kam přišla pozvánka,
+- pozvánka byla poslaná na alias nebo distribuční skupinu,
+- workspace vyžaduje SSO a uživatel se snaží přijít přes heslo,
+- e-mailová doména sama o sobě nestačí k přiřazení do správné firmy,
+- stará pozvánka míří do workspace, kde se mezitím změnila bezpečnostní politika.
+
+Bezpečný postup: po kliknutí na pozvánku ukaž kontext, nech člověka přihlásit nebo vytvořit účet a teprve potom potvrď členství. Pokud e-mail nesedí, nabídni přepnutí účtu nebo kontakt na admina. Nepřidávej automaticky aktuálně přihlášený účet jen proto, že má v ruce odkaz.
+
+OWASP ASVS u session managementu zdůrazňuje mimo jiné znovuvytvoření session tokenu po autentizaci a možnost ukončit aktivní relace při citlivých změnách autentizace ([OWASP ASVS V7 Session Management](https://github.com/OWASP/ASVS/blob/master/5.0/en/0x16-V7-Session-Management.md)). Praktický překlad pro pozvánky: po přijetí role nebo přidání do workspace nespoléhej na starý stav session donekonečna. Backend má při každém požadavku ověřovat aktuální členství a roli.
+
+## Opětovné odeslání není spamovací tlačítko
+
+Admin často potřebuje pozvánku poslat znovu. To je v pořádku, ale musí existovat limity:
+
+- omezení počtu resendů za čas,
+- audit, kdo resend spustil,
+- zneplatnění starého tokenu při vytvoření nového,
+- stejná role a workspace jako původní pozvánka, pokud admin výslovně nezmění nastavení,
+- žádné měření otevření e-mailu přes sledovací pixel.
+
+Privacy-first měření stačí jednoduché: `invitation_created`, `invitation_sent`, `invitation_accepted`, `invitation_expired`, `invitation_revoked`. Nepotřebuješ heatmapu e-mailu, IP historii ani profil „kdo si pozvánku četl třikrát v tramvaji“. Pokud pozvánka nefunguje, řeš doručitelnost, spam složku, expirovaný token a nejasný text.
+
+## Zrušení pozvánky je stejně důležité jako odeslání
+
+Pozvánky musí jít zrušit. Ideálně přímo v administraci workspace, s přehledem nevyřízených pozvánek:
+
+| Stav | Co znamená | Akce |
+| --- | --- | --- |
+| Čeká | Token platí, uživatel nepřijal | znovu poslat, zrušit |
+| Expirovala | Token už nelze použít | vytvořit novou pozvánku |
+| Přijata | Členství vzniklo | spravovat roli člena |
+| Zrušena | Admin pozvánku odvolal | bez akce, jen audit |
+
+Když admin odebere člena, zruš i jeho nevyřízené pozvánky se stejnou adresou. Když se workspace smaže nebo přechází do offboardingu, zneplatni všechny čekající pozvánky. Když se změní vynucené SSO, staré pozvánky musí respektovat nová pravidla.
+
+## Support nesmí ručně vyrábět průchody zdí
+
+Podpora bude dřív nebo později řešit věty jako „kolega pozvánku nevidí“, „kliknul jsem a nic“, „potřebujeme změnit e-mail“ nebo „admin odešel z firmy“. Připrav pro ni bezpečný scénář.
+
+Support smí:
+
+- ověřit stav pozvánky,
+- znovu poslat pozvánku podle pravidel,
+- poradit s přepnutím účtu,
+- eskalovat změnu vlastníka workspace,
+- zrušit zjevně chybně poslanou pozvánku podle interního postupu.
+
+Support nesmí:
+
+- přijmout pozvánku za uživatele,
+- ručně přepsat e-mail bez ověření,
+- poslat token v chatu,
+- přidat člověka jako admina jen podle prosby v e-mailu,
+- obejít SSO nebo MFA, protože „zákazník spěchá“.
+
+Rychlost podpory je super. Rychlost do incidentu je méně super.
+
+## Checklist: pozvánky bez zadních dveří
+
+- Pozvánka, účet a členství jsou oddělené vrstvy.
+- Token je náhodný, jednorázový, expirovaný a uložený jen jako hash.
+- Pozvánka obsahuje workspace, odesílatele, roli, platnost a bezpečnostní kontakt.
+- Přijetí ověřuje identitu uživatele a nespáruje automaticky špatný účet.
+- Workspace s vynuceným SSO nepustí uživatele přes starou pozvánku mimo pravidla.
+- Resend vytváří nový token a má rate limit.
+- Admin vidí čekající, přijaté, expirované a zrušené pozvánky.
+- Support má scénář a nesmí posílat tokeny ručně.
+- Auditní log zachycuje vytvoření, resend, přijetí, expiraci a zrušení.
+- Analytika měří jen nutné provozní stavy, ne chování příjemce v e-mailu.
+
+## Mini šablona invite policy karty
+
+```markdown
+# Invite policy karta: [produkt / workspace]
+
+## Účel
+- Kdo smí zvát:
+- Do jakých rolí:
+- Které workspace typy:
+
+## Token
+- Platnost běžné pozvánky:
+- Platnost admin pozvánky:
+- Uložení tokenu:
+- Jednorázové použití:
+- Rate limit resendů:
+
+## Identita
+- Povolené e-mailové adresy / domény:
+- Chování při přihlášení jiným účtem:
+- SSO pravidla:
+- MFA / re-auth požadavky:
+
+## Audit a support
+- Logované události:
+- Kdo může zrušit pozvánku:
+- Support scénář:
+- Eskalace na security / ownera:
+
+## Privacy-first kontrola
+- Nepoužíváme open tracking:
+- Nelogujeme celý token:
+- Retence nevyřízených pozvánek:
+- Retence auditních záznamů:
+```
+
+Pozvánky jsou malý detail jen do chvíle, než otevřou cizímu člověku správu fakturace nebo zákaznická data. Dobře navržený invite flow není překážka růstu. Je to způsob, jak růst bez toho, aby tým každé pondělí hrál ruletu s přístupy.
+
+## Zdroje
+
+- [OWASP Forgot Password Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html)
+- [OWASP Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
+- [OWASP ASVS V7 Session Management](https://github.com/OWASP/ASVS/blob/master/5.0/en/0x16-V7-Session-Management.md)
+
 # Pracovní log
+
+- 2026-10-04: Doplněna příloha „Pozvánky do týmu a jednorázové odkazy bez otevřených zadních dveří“ s oddělením pozvánky, účtu a členství, pravidly pro expirované jednorázové tokeny, role, SSO, resend, revokaci, support scénář, checklist, invite policy kartu a ověřené zdroje OWASP.
 
 - 2026-10-04: Doplněna příloha „Beta program a early access bez datového chaosu“ s praktickým nastavením hypotézy, výběrem účastníků, férovou pozvánkou, bezpečným sběrem zpětné vazby, měřením navázaným na rozhodnutí, fallbackem, uzavřením bety, checklistem, beta kartou a ověřenými zdroji GDPR, EDPB, OWASP a OpenFeature.
 - 2026-10-04: Doplněna příloha „Doménová a e-mailová hygiena bez doručovací loterie“ s rozdělením pošty podle účelu, SPF/DKIM/DMARC postupem, bezpečným zaváděním DMARC, subdoménami, férovým odhlašováním, minimalizací e-mailové telemetrie, DNS deployment rutinou, checklistem, doménovou kartou a ověřenými zdroji RFC Editoru, Google a Yahoo.
