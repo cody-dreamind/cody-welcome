@@ -39846,7 +39846,154 @@ Další kontrola:
 - [EDPB: Guidelines 07/2020 on controller and processor concepts in the GDPR](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en)
 - [European Commission: Standard Contractual Clauses](https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en)
 
+# Příloha: Znalostní báze a samoobsluha bez úniku zákaznických příběhů
+
+Dobrá znalostní báze není hromádka článků, které vznikly z frustrace supportu v pátek odpoledne. Je to produktová vrstva: pomáhá zákazníkovi vyřešit problém bez čekání, zkracuje onboarding, snižuje počet opakovaných ticketů a dává týmu lepší signály o tom, kde je produkt nejasný. Privacy-first verze k tomu přidává ještě jednu brzdu: nepublikuje zákaznické detaily, interní workaroundy ani diagnostická data jen proto, že „to přece pomůže dalším“.
+
+> Codyho komentář: Knowledge base má být mapa, ne skládka. Když v ní zákazník najde pět podobných článků, tři zastaralé screenshoty a jeden interní vtípek z roku 2022, nezažil samoobsluhu. Zažil archeologii podpory.
+
+Samoobsluha funguje, když každý článek odpovídá na konkrétní práci uživatele: nastavit doménu, pozvat kolegu, obnovit fakturu, opravit chybu importu, pochopit limity tarifu nebo bezpečně exportovat data. Článek, který neumí říct, pro koho je a kdy ho použít, je často jen převedený Slack thread v kabátu dokumentace.
+
+## Začni top dotazy, ne kategoriemi od stolu
+
+Strukturu znalostní báze nenavrhuj podle interní organizační mapy. Zákazník nehledá „modul operační excellence“. Hledá „nejde mi přihlášení“, „jak změním fakturační e-mail“ nebo „proč import hlásí chybu“.
+
+První inventuru udělej ze tří zdrojů:
+
+- posledních 30 až 90 dnů ticketů,
+- onboardingových otázek od nových zákazníků,
+- míst v produktu, kde lidé opakovaně váhají nebo chybují.
+
+U každého kandidáta si napiš, jestli jde o článek, krátkou odpověď v UI, checklist, rozhodovací tabulku nebo odkaz na technickou dokumentaci. Ne každá otázka si zaslouží dlouhý text. Někdy je nejlepší článek ten, který vůbec nevznikne, protože produkt dostane jasnější label.
+
+## Článek piš podle situace uživatele
+
+Každý článek by měl mít čtyři části: kdy ho použít, co potřebuješ předem, postup a co dělat, když to nevyjde. Tím snížíš počet „zkusil jsem to a nevím co dál“ ticketů.
+
+Praktická struktura:
+
+1. **Pro koho je článek** — role, tarif, typ účtu nebo technická situace.
+2. **Předpoklady** — oprávnění, přístup, data, doména, API klíč, fakturační role.
+3. **Postup** — krátké kroky s jednou akcí na krok.
+4. **Kontrola výsledku** — jak uživatel pozná, že je hotovo.
+5. **Bezpečnostní poznámka** — co nesdílet, co nemačkat, kdy zavolat podporu.
+6. **Fallback** — co poslat supportu, pokud postup selže.
+
+W3C ve WCAG 2.2 mimo jiné uvádí, že nadpisy a popisky mají popisovat téma nebo účel a že u vstupů mají být dostupné popisky či instrukce ([W3C: WCAG 2.2](https://www.w3.org/TR/WCAG22/)). Pro znalostní bázi je to praktické pravidlo: nadpis „Nastavení“ je slabý, „Jak nastavit vlastní doménu pro zákaznický portál“ je užitečný.
+
+## Nelep do článků zákaznická data
+
+Support často řeší reálné případy. To je skvělé pro učení, ale nebezpečné pro publikaci. Do článku nepatří jména klientů, e-maily, konkrétní objednávky, screenshoty s osobními údaji, API klíče, interní URL, chybové výpisy s tokeny ani přesné konfigurace zákazníka.
+
+GDPR v článku 5 pracuje mimo jiné s principem minimalizace údajů: osobní údaje mají být přiměřené, relevantní a omezené na nezbytný rozsah vzhledem k účelu ([EUR-Lex: GDPR, článek 5](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)). V překladu do dokumentace: pokud článek vysvětluje import CSV, nepotřebuje screenshot reálného seznamu zákazníků. Potřebuje syntetický příklad.
+
+Bezpečnější pravidla:
+
+- screenshoty pořizuj na demo účtu se smyšlenými daty,
+- chybové kódy publikuj bez stack trace a bez interních cest,
+- příklady e-mailů používej jako `jana@example.test`, ne jako reálný kontakt,
+- u API ukázek používej falešné tokeny a krátké payloady,
+- u citlivějších postupů přidej větu, co uživatel nemá posílat supportu.
+
+OWASP Logging Cheat Sheet připomíná, že do logů se obvykle nemají přímo zapisovat přístupové tokeny, hesla, session identifikátory, klíče, bankovní údaje a další citlivá data ([OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). Stejný hygienický reflex patří i do znalostní báze: co by nemělo být v logu, nemá být ani v nápovědě.
+
+## Samoobsluha má mít měření, ale ne šmírování
+
+Znalostní bázi potřebuješ zlepšovat podle signálů. To neznamená nahrávat session replay, propojovat každý článek s kontaktem v CRM a profilovat, kdo co četl ve tři ráno. Stačí méně invazivní metriky.
+
+Měř například:
+
+- počet zobrazení článku,
+- hledané fráze bez identifikace konkrétní osoby,
+- poměr „článek pomohl / nepomohl“ bez volného pole jako povinnosti,
+- počet ticketů, které odkazují na dané téma,
+- stáří článku a datum poslední odborné kontroly.
+
+Užitečný detail: pokud přidáš volné pole „co chybělo“, napiš k němu jasné upozornění, aby uživatel neposílal hesla, tokeny, osobní údaje ani celý export. Volné textové pole je datový vysavač v převleku za feedback.
+
+## Propojení se supportem navrhni jako řízený přechod
+
+Samoobsluha nemá zákazníka uvěznit v bludišti článků. Když postup nepomůže, má být jasné, jak eskalovat na člověka a co bezpečně přiložit.
+
+Dobrá eskalační sekce obsahuje:
+
+- ID článku nebo odkaz na něj,
+- verzi produktu nebo prostředí,
+- obecný popis kroku, kde se problém zastavil,
+- bezpečný identifikátor záznamu, pokud ho produkt používá,
+- screenshot bez osobních údajů,
+- seznam věcí, které se nemají posílat.
+
+Příklad věty: „Pokud postup nepomohl, napište nám název kroku, kde jste skončili, a bezpečný identifikátor importu. Neposílejte hesla, API klíče ani soubory se zákaznickými daty; pokud je budeme potřebovat, domluvíme bezpečný způsob předání.“
+
+## Revize článků dělej podle rizika
+
+Ne všechny články stárnou stejně. Text „jak změnit avatar“ může čekat. Text „jak nastavit DNS, fakturaci, export dat nebo SSO“ potřebuje pravidelnou kontrolu, protože chyba může stát peníze, dostupnost nebo důvěru.
+
+Rozděl články podle rizika:
+
+| Riziko | Příklady | Kontrola |
+|---|---|---|
+| Nízké | navigace, profil, běžné nastavení vzhledu | při větší změně UI |
+| Střední | importy, fakturace, oprávnění, integrace | kvartálně nebo při releasu |
+| Vysoké | SSO, export/mazání dat, bezpečnost, DNS, incidenty | při každé změně procesu a aspoň měsíčně |
+
+Každý článek by měl mít vlastníka. Ne jako slavnostní titul, ale jako člověka, který ví, kdy je text zastaralý. Bez vlastníka dokumentace hnije potichu a velmi profesionálně.
+
+## Checklist: znalostní báze bez úniku dat
+
+- [ ] Vychází nové články z reálných top dotazů, ne z interního hádání?
+- [ ] Má každý článek jasné publikum, předpoklady, postup, kontrolu výsledku a fallback?
+- [ ] Používáme demo data místo reálných zákaznických screenshotů?
+- [ ] Neobsahují články tokeny, hesla, interní URL, osobní údaje nebo celé stack trace?
+- [ ] Má feedback formulář varování proti posílání citlivých dat?
+- [ ] Měříme úspěšnost článků agregovaně a bez zbytečného profilování?
+- [ ] Má každý rizikovější článek vlastníka a datum poslední kontroly?
+- [ ] Existuje bezpečný přechod ze samoobsluhy na support?
+- [ ] Ví support, kdy článek opravit místo psaní stejné odpovědi podesáté?
+- [ ] Umíme stáhnout nebo archivovat zastaralý článek bez rozbitých odkazů?
+
+## Mini šablona knowledge base karty
+
+```text
+# Knowledge base karta: [název článku]
+
+## Účel
+Jakou práci uživatele článek řeší:
+Pro koho je určený:
+Kdy článek nepoužít:
+
+## Předpoklady
+Potřebná role / oprávnění:
+Potřebné vstupy:
+Riziko: nízké / střední / vysoké
+
+## Obsah
+Kroky:
+Kontrola výsledku:
+Fallback na support:
+
+## Privacy-first kontrola
+Použitá demo data:
+Zakázaná data v ukázkách:
+Varování u formuláře / feedbacku:
+
+## Provoz
+Vlastník článku:
+Datum poslední kontroly:
+Spouštěč další revize:
+Související ticket témata:
+```
+
+## Zdroje
+
+- [W3C: Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)
+- [W3C WAI: Headings](https://www.w3.org/WAI/tutorials/page-structure/headings/)
+- [EUR-Lex: GDPR, Regulation (EU) 2016/679](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)
+- [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+
 # Pracovní log
+- 2026-10-04: Doplněna příloha „Znalostní báze a samoobsluha bez úniku zákaznických příběhů“ s postupem tvorby článků podle reálných dotazů, strukturou článku, pravidly pro demo data, bezpečným propojením se supportem, agregovaným měřením, revizemi podle rizika, checklistem, knowledge base kartou a ověřenými zdroji W3C, GDPR a OWASP.
 - 2026-10-04: Doplněna příloha „Dodavatelský audit a subprocesory bez tabulkového pekla“ s mapou datových toků, rozdělením dodavatelů podle rizika, kontrolou DPA, subprocesorů, transferů mimo EU/EHP, exit plánem, měsíční review rutinou, checklistem, vendor kartou a ověřenými zdroji GDPR, EDPB a Evropské komise.
 - 2026-10-04: Doplněna příloha „Produktová telemetrie bez sledovací horečky“ s rozhodovacím návrhem eventů, rozdělením produktových/provozních/bezpečnostních signálů, pravidly pro identifikátory, performance měření, session replay, měsíční úklid eventů, checklistem, telemetry kartou a ověřenými zdroji GDPR, EDPB, CNIL a MDN.
 - 2026-10-04: Doplněna příloha „Web push notifikace bez otravování a sběru navíc“ s pravidly pro vhodné použití pushů, férový permission prompt, ochranu subscription endpointů, minimalizaci payloadu, preference centrum, agregované měření, checklist, push policy kartu a ověřené zdroje MDN a web.dev.
