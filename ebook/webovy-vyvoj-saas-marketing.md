@@ -39108,8 +39108,169 @@ Jak dlouho držíme incident metadata:
 - [MDN: HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status)
 
 
+# Příloha: Release notes a changelog bez marketingového mlžení
+
+Release notes nejsou odpadkový koš na věty typu „provedli jsme drobná vylepšení a opravy chyb“. Jsou to malé veřejné účty důvěry: zákazníkům říkají, co se změnilo, proč to má smysl, jestli musí něco udělat a jaký dopad má změna na jejich data, práci nebo integrace. Když je píšeš dobře, šetříš support, pomáháš prodeji a buduješ pocit, že produkt má řízení. Když je píšeš špatně, vznikne jen firemní karaoke: hodně slov, žádná melodie.
+
+Privacy-first přístup k release komunikaci stojí na jednoduchém pravidle: informuj podle dopadu, ne podle toho, kolik interních ticketů se podařilo zavřít. Zákazníka nezajímá, že tým přepsal komponentu `InvoiceTableV2`. Zajímá ho, že export faktur je rychlejší, filtr si pamatuje nastavení jen v rámci účtu a nově jde bezpečně stáhnout auditní přehled bez osobních poznámek.
+
+> Codyho komentář: Changelog je jako hygienická karta produktu. Nikdo ho nečte každý den pro zábavu, ale když se něco rozbije, změnil se workflow nebo chce zákazník přesvědčit šéfa, najednou je k nezaplacení.
+
+## Odděl interní změny od zákaznického významu
+
+Interní release může obsahovat desítky commitů, refaktorů, úprav pipeline a drobných fixů. Veřejný changelog z toho má udělat srozumitelný přehled. Neznamená to všechno zamlčet. Znamená to přeložit technickou změnu do zákaznického dopadu.
+
+Příklad překladu:
+
+| Interní formulace | Lepší release note |
+|---|---|
+| Refaktor auth middleware | Přihlášení má stabilnější kontrolu relace a lépe rozlišuje vypršenou session od neplatného odkazu. |
+| Fix race condition in invoice sync | Nově vytvořené faktury se už ve vzácných případech nezobrazují dvakrát v přehledu. |
+| Add pagination to audit logs | Auditní logy se načítají po stránkách, takže větší účty mohou rychleji dohledat starší události. |
+| Remove legacy analytics event | Zrušili jsme starý analytický event, který už nepomáhal produktovým rozhodnutím. |
+
+Dobrá release note odpovídá na tři otázky: co se změnilo, koho se to týká a jestli je potřeba akce. Pokud žádná akce není potřeba, řekni to. Ticho nutí zákazníka hádat.
+
+## Verze používej jako navigaci, ne jako rituál
+
+Semantic Versioning definuje formát `MAJOR.MINOR.PATCH`, kde major značí nekompatibilní změny, minor nové kompatibilní funkce a patch kompatibilní opravy ([Semantic Versioning 2.0.0](https://semver.org/)). Pro knihovny a API je to velmi užitečné. Pro běžný SaaS s kontinuálním deployem ale nemusíš z každého drobného nasazení dělat verzi s ohňostrojem.
+
+Praktický model pro malý SaaS:
+
+- **Veřejný changelog** piš podle významných změn pro zákazníka, ne podle každého deploye.
+- **API a integrace** verzuj přísněji, protože zákazník na nich může mít vlastní automatizace.
+- **Breaking changes** označ jasně, s migračním postupem a datem účinnosti.
+- **Bezpečnostní opravy** popiš tak, aby zákazník věděl dopad, ale nedal jsi útočníkům návod.
+- **Interní refaktory** zmiň jen tehdy, když mění výkon, stabilitu, dostupnost nebo očekávané chování.
+
+Keep a Changelog doporučuje strukturovat záznamy tak, aby byly čitelné pro lidi, ne jen pro stroje, a rozlišovat typy změn jako přidané, změněné, opravené nebo odstraněné ([Keep a Changelog](https://keepachangelog.com/en/1.1.0/)). To je dobrý základ i pro SaaS: zákazník nemá luštit historii commitů jako detektiv s nadbytkem kávy.
+
+## Privacy-first položka patří k dopadu
+
+Každá větší změna by měla mít krátkou datovou kontrolu. Ne dlouhý právní román, ale jasnou odpověď: mění se sběr dat, retence, exporty, role, subprocesor, cookies, logování nebo přístup supportu? Pokud ano, release note to má říct srozumitelně.
+
+Příklady dobrých privacy-first poznámek:
+
+- „Nový export obsahuje pouze vybrané sloupce; interní poznámky a technická metadata nejsou součástí souboru.“
+- „Přidali jsme auditní událost pro změnu billing kontaktu. Nezapisujeme původní ani nové celé hodnoty, jen typ změny, čas a účet.“
+- „Zkrátili jsme uchování diagnostických logů u formulářů z 30 na 14 dní.“
+- „Nový integrační webhook posílá interní ID objektu, ne e-mail koncového uživatele.“
+
+GDPR mezi základními principy uvádí minimalizaci údajů, omezení účelu a omezení uložení ([GDPR, článek 5](https://eur-lex.europa.eu/eli/reg/2016/679/oj)). Release komunikace je skvělé místo, kde ukázat, že tyhle principy nejsou jen PDF v šuplíku, ale každodenní produktové rozhodování.
+
+## Breaking change komunikuj dřív než v den nasazení
+
+Změna, která rozbije API, export, webhook, oprávnění, URL nebo navyklý workflow, není jen technická událost. Je to změna smlouvy očekávání. Když zákazník zjistí breaking change až ze support ticketu, prohrál jsi komunikaci.
+
+Minimum pro breaking change:
+
+1. Oznam změnu předem s konkrétním datem.
+2. Popiš, koho se týká a koho ne.
+3. Dej krátký důvod změny.
+4. Přidej migrační postup a příklad.
+5. Nabídni testovací období nebo paralelní režim, pokud to jde.
+6. Den před účinností pošli připomínku jen dotčeným zákazníkům.
+7. Po nasazení ověř metriky dopadu a připrav support odpověď.
+
+Ukázka:
+
+```text
+Od 2026-11-15 přestaneme v API odpovědi `/v1/invoices` vracet pole `customer_email` u anonymizovaných zákazníků. Pokud pole používáte pro párování, přejděte na `customer_id`. Důvod: sjednocujeme exporty a API tak, aby běžně nepředávaly e-mail tam, kde stačí stabilní interní identifikátor.
+```
+
+Tahle věta je delší než „deprecated field“, ale zákazník díky ní chápe obchodní i datový smysl změny.
+
+## Kanály drž vlastněné a klidné
+
+Release komunikace nemá být závislá na sociální síti, algoritmu nebo reklamním publiku. Základ má být na vlastním webu nebo v dokumentaci, ideálně s RSS. E-mail použij pro důležité dopady, bezpečnostní změny, billing, API migrace a změny, které vyžadují akci. Sociální sítě mohou být doplněk, ne zdroj pravdy.
+
+Praktická hierarchie:
+
+- **Changelog stránka** jako kanonické místo historie změn.
+- **RSS feed** pro lidi a týmy, které chtějí přímý odběr bez platformy.
+- **Dokumentace** pro API, integrace a migrační návody.
+- **Aplikační oznámení** jen pro změny, které se týkají aktuální práce uživatele.
+- **E-mail** pro dopadové změny, ne pro každou kosmetiku.
+
+Vyhni se release modalům, které blokují práci jen proto, že marketing chce ukázat nové tlačítko. Pokud změna není naléhavá, dej ji do klidného proudu: changelog, notifikační centrum, dokumentace, RSS. Uživatelé nejsou captive audience pro interní radost z deploye.
+
+## Release note piš podle rozhodnutí čtenáře
+
+Každá položka má mít typický čtenářský úkol:
+
+- Zakladatel chce vědět, jestli produkt postupuje a co může slíbit týmu.
+- Admin chce vědět, jestli musí změnit nastavení nebo role.
+- Vývojář chce vědět, jestli se mění API, webhook nebo export.
+- Support chce vědět, jak odpovědět na otázky zákazníků.
+- Bezpečnostní člověk chce vědět, jestli se mění data, oprávnění nebo audit.
+
+Struktura jedné dobré položky:
+
+```text
+### Lepší audit změn billing kontaktu
+
+Co se změnilo: V auditním logu je nově samostatná událost pro změnu billing kontaktu.
+Koho se týká: Adminů a ownerů workspace.
+Co je potřeba udělat: Nic, změna je aktivní automaticky.
+Privacy-first poznámka: Logujeme typ změny, účet, čas a aktéra; nelogujeme plné staré ani nové kontaktní údaje.
+```
+
+Tohle je krátké, ale použitelné. Dá se přeposlat zákazníkovi, supportu i obchodníkovi. A hlavně nevyžaduje psychickou archeologii v Jire.
+
+## Checklist: changelog bez mlžení
+
+- [ ] Každá položka popisuje zákaznický dopad, ne jen interní ticket.
+- [ ] Breaking changes mají datum, migrační postup a jasný rozsah dopadu.
+- [ ] API a integrace používají konzistentní verzování a deprekační pravidla.
+- [ ] Privacy-first poznámka řeší data, retenci, role, exporty, logování a subprocesory tam, kde se něco mění.
+- [ ] Bezpečnostní opravy jsou srozumitelné, ale neprozrazují zneužitelný detail.
+- [ ] Changelog má kanonickou URL a ideálně RSS.
+- [ ] E-maily chodí jen pro dopadové změny nebo nutnou akci.
+- [ ] Aplikační oznámení neblokují běžnou práci, pokud nejde o kritickou změnu.
+- [ ] Support má před releasem stručnou odpověď na očekávané otázky.
+- [ ] Staré deprekované funkce mají datum odstranění a vlastníka.
+
+## Mini šablona release note karty
+
+```text
+# Release note karta: [název změny]
+
+## Typ změny
+Přidáno / změněno / opraveno / odstraněno / bezpečnost / breaking change:
+
+## Dopad
+Koho se změna týká:
+Co se mění v práci zákazníka:
+Je potřeba akce: ano / ne
+
+## Komunikace
+Kanonická URL changelogu:
+Kanály: changelog / RSS / e-mail / in-app / dokumentace
+Datum oznámení:
+Datum účinnosti:
+
+## Privacy-first kontrola
+Mění se sběr nebo zpracování dat:
+Mění se export, logování, role nebo retence:
+Mění se subprocesor nebo region provozu:
+Jak to vysvětlíme jednou větou:
+
+## Support
+Očekávané otázky:
+Krátká odpověď:
+Vlastník follow-upu:
+```
+
+## Zdroje
+
+- [Semantic Versioning 2.0.0](https://semver.org/)
+- [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/)
+- [GDPR, článek 5: zásady zpracování osobních údajů](https://eur-lex.europa.eu/eli/reg/2016/679/oj)
+
+
 # Pracovní log
 
+- 2026-10-04: Doplněna příloha „Release notes a changelog bez marketingového mlžení“ s postupem převodu interních změn na zákaznický dopad, verzováním, privacy-first poznámkami, breaking change komunikací, vlastněnými kanály, checklistem, release note kartou a ověřenými zdroji SemVer, Keep a Changelog a GDPR.
 - 2026-10-04: Doplněna příloha „SLO, SLA a status stránka bez falešných slibů“ s rozlišením SLI/SLO/SLA, pravidly realistických slibů, návrhem nezávislé status stránky, incident komunikací podle dopadu, plánovanou údržbou, error budget brzdou, SLA pravidly, checklistem, SLO/status kartou a ověřenými zdroji Google SRE, Atlassian a MDN.
 - 2026-10-04: Doplněna příloha „Komponentová governance bez Figma muzea a driftu v kódu“ s praktickým postupem od opakovaných UI bolestí přes sémantické tokeny, komponentové stavy, přístupnost, dokumentaci blízko kódu, governance, privacy-first poznámky, checklist, komponentovou kartu a ověřené zdroje W3C a Storybook.
 
