@@ -41432,8 +41432,192 @@ Dobrá odpověď obsahuje:
 - [EDPB Guidelines 01/2022 on data subject rights — Right of access](https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en)
 - [EDPB Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en)
 
+# Příloha: Due diligence balíček pro SaaS nákup bez korporátního divadla
+
+Malá firma často nakupuje SaaS tak, že někdo najde hezký nástroj, někdo jiný řekne „to vypadá levně“ a za deset minut už je ve firmě nový systém s přístupem k zákazníkům, fakturám nebo interním poznámkám. To není agilita. To je produktový fast food s právním překvapením v hranolkách.
+
+Due diligence nemusí být padesátistránkový dotazník, který zabije každého dodavatele i chuť žít. Má být krátký balíček důkazů a rozhodnutí: proč nástroj potřebujeme, jaká data mu dáme, kde se zpracují, kdo za co odpovídá, jak se dostaneme ven a co se stane při incidentu.
+
+> Codyho komentář: Nejlepší vendor check není ten nejdelší. Nejlepší je ten, který zastaví špatný nákup dřív, než se z něj stane „dočasné řešení“ na dalších šest let.
+
+## Začni rizikovou třídou, ne univerzálním formulářem
+
+Ne každý nástroj si zaslouží stejnou kontrolu. Kalendář pro interní plánování, produkční databáze, zákaznický support a AI nástroj pro nahrávání obchodních hovorů nemají stejný dopad. Když je všechny hodnotíš stejně, buď šikanuješ nízkorizikové věci, nebo pouštíš vysokorizikové věci moc snadno.
+
+Rozděl SaaS nákupy do tří tříd:
+
+- **Nízké riziko:** žádná osobní data zákazníků, žádné citlivé interní informace, snadná náhrada. Stačí vlastník, účel, retenční poznámka a odkaz na podmínky.
+- **Střední riziko:** běžná osobní data, týmová spolupráce, marketingové kontakty, zákaznické dotazy bez vysoce citlivého obsahu. Potřebuješ DPA, subprocesory, data location, přístupy, export a základní incident pravidla.
+- **Vysoké riziko:** produkční data, platební údaje, zdravotní/finanční/HR data, admin přístupy, nahrávky, AI zpracování obsahu zákazníků, bezpečnostní logy nebo nástroj kritický pro provoz. Potřebuješ hlubší kontrolu, právní review, bezpečnostní review, test exportu a jasný exit plán.
+
+Praktické pravidlo: pokud by únik nebo výpadek nástroje vyžadoval zákaznickou komunikaci, právní konzultaci nebo ruční záchranný provoz, není to nízké riziko.
+
+## Napiš obchodní důvod nákupu jednou větou
+
+Bez obchodního důvodu se vendor review mění v otázku „líbí se nám to?“. To je málo. Každý nástroj má mít pracovní větu:
+
+```text
+Kupujeme [nástroj], aby [tým / role] dokázal/a [konkrétní práce] bez [současná bolest], přičemž nástroj bude zpracovávat [typ dat] a úspěch poznáme podle [měřitelný signál].
+```
+
+Příklad:
+
+```text
+Kupujeme helpdesk, aby support dokázal vyřizovat zákaznické dotazy bez ztrácení kontextu v e-mailu, přičemž nástroj bude zpracovávat kontaktní údaje a obsah ticketů a úspěch poznáme podle kratší první odpovědi a menšího počtu ztracených požadavků.
+```
+
+Tahle věta chrání rozpočet i privacy-first hodnoty. Když nevíš, jaká data nástroj potřebuje a jak poznáš úspěch, ještě nekupuješ řešení. Jen adoptuješ další SaaS štěně.
+
+## Rozliš vlastníka, správce a zpracovatele
+
+U osobních údajů nestačí říct „dodavatel to nějak řeší“. GDPR pracuje s rolemi správce a zpracovatele a EDPB k nim vydává výkladové pokyny. V praxi si u SaaS nákupu polož čtyři otázky:
+
+- Kdo určuje účel a prostředky zpracování?
+- Je dodavatel jen zpracovatel podle našich pokynů, nebo samostatně používá data pro vlastní účely?
+- Jaké údaje přesně do nástroje potečou?
+- Máme smlouvu a dokumentaci odpovídající tomu, co nástroj opravdu dělá?
+
+Když dodavatel tvrdí, že je zpracovatel, hledej zpracovatelskou smlouvu podle článku 28 GDPR. Když data odcházejí mimo EU/EHP, řeš transfer mechanismus, typicky SCC nebo rozhodnutí o odpovídající ochraně. Evropská komise publikuje SCC a otázky/odpovědi k jejich použití; to je lepší zdroj než náhodné PDF z blogu právní kanceláře.
+
+Privacy-first provoz v Evropě neznamená, že nikdy nepoužiješ nic mimo EU. Znamená to, že to není default bez přemýšlení. Default je: evropský provoz, minimum dat, jasná smluvní role, auditovatelný seznam subprocesorů a možnost odejít.
+
+## Vyžádej si jen důkazy, které použiješ
+
+Špatný vendor dotazník se ptá na všechno. Dobrý due diligence balíček se ptá na věci, které ovlivní rozhodnutí.
+
+Minimální sada důkazů pro střední a vyšší riziko:
+
+- aktuální obchodní podmínky a DPA,
+- seznam subprocesorů a země zpracování,
+- popis bezpečnostních opatření v lidské řeči,
+- informace o incident notification procesu,
+- možnosti exportu a smazání dat,
+- přístupový model, SSO/MFA možnosti a audit logy,
+- retenční pravidla pro zákaznická data, logy a zálohy,
+- kontakt pro bezpečnostní nebo privacy dotazy.
+
+U vysokého rizika přidej:
+
+- poslední bezpečnostní audit nebo relevantní certifikace, pokud existují,
+- penetrační test nebo shrnutí nálezů bez citlivých detailů,
+- business continuity a backup informace,
+- test exportu na vzorku dat,
+- explicitní schválení vlastníkem dat a provozu.
+
+Než pošleš dodavateli dotazník, vyškrtej otázky, na jejichž odpověď nemáš rozhodovací pravidlo. „Zajímalo by mě“ není důvod sbírat dokumentaci.
+
+## Subprocesory posuzuj podle dopadu, ne podle délky seznamu
+
+Každý moderní SaaS stojí na dalších službách: hosting, e-mail, platby, monitoring, support, analytika. Dlouhý seznam subprocesorů není automaticky špatně. Špatně je, když nevíš, kdo dělá co, kde jsou data a jak se dozvíš o změně.
+
+Praktická kontrola:
+
+- Označ subprocesory, kteří dostávají osobní data zákazníků.
+- Odděl provozní infrastrukturu od marketingových a analytických nástrojů.
+- Zkontroluj, jestli existuje mechanismus oznámení změn subprocesorů.
+- U transferů mimo EU/EHP ověř, jaký právní mechanismus dodavatel používá.
+- U vysokého rizika si poznamenej alternativu, pokud dodavatel přidá nepřijatelného subprocesora.
+
+Příklad: pokud evropský helpdesk používá EU hosting a e-mailový subprocesor v EU, riziko může být přijatelné. Pokud stejný helpdesk posílá obsah ticketů do deseti marketingových a AI služeb bez jasného účelu, je to jiná liga. Tam už nejde o „moderní stack“, ale o datový průvan.
+
+## Exit plán napiš před nákupem
+
+Vendor lock-in je nejlevnější v den podpisu a nejdražší v den, kdy chceš odejít. Proto exit plán nepatří do krizového šuplíku, ale do nákupního rozhodnutí.
+
+Minimum exit plánu:
+
+- Jak exportujeme data a v jakém formátu?
+- Umíme export otestovat bez ukončení účtu?
+- Co se stane s daty po výpovědi?
+- Jak dlouho zůstávají data v zálohách?
+- Kdo ve firmě vlastní migraci?
+- Jaký je fallback, když dodavatel zdraží, změní podmínky nebo skončí?
+
+U SaaS produktů, které obsluhují zákazníky, přidej i komunikační scénář. Když vyměníš helpdesk, analytiku nebo platební službu, zákazník nemusí znát všechny detaily, ale nesmí nést chaos tvého procurementu.
+
+## Rozhodnutí archivuj jako auditní kartu
+
+Due diligence není jen proces před nákupem. Je to paměť firmy. Za půl roku bude někdo řešit, proč se nástroj koupil, jaká data dostal a kdo schválil výjimku. Pokud odpověď zní „bylo to někde v chatu“, právě sis vyrobil compliance escape room.
+
+Ke každému schválenému nástroji ulož vendor kartu:
+
+- název, URL a vlastník nástroje,
+- riziková třída,
+- účel a typy dat,
+- právní role a odkaz na DPA,
+- země zpracování a subprocesory,
+- přístupový model,
+- retenční pravidla,
+- export/delete postup,
+- datum příští kontroly,
+- rozhodnutí: schváleno, schváleno s podmínkou, zamítnuto.
+
+Rozhodnutí „schváleno s podmínkou“ musí mít datum smrti. Například: „Schváleno na 60 dní pro pilot, bez zákaznických dat, do 2026-12-05 dodat DPA a export test.“ Výjimka bez expirace není výjimka. Je to trvalý dluh v převleku.
+
+## Checklist: SaaS due diligence bez divadla
+
+- [ ] Má nástroj jednovětý obchodní důvod a jasného vlastníka?
+- [ ] Je přiřazená riziková třída podle dat, přístupů a provozního dopadu?
+- [ ] Je jasné, jaké osobní a interní údaje do nástroje potečou?
+- [ ] Je určená role správce/zpracovatele a existuje vhodná smluvní dokumentace?
+- [ ] Máme DPA, subprocesory, země zpracování a mechanismus oznámení změn?
+- [ ] Jsou nastavené minimální přístupy, MFA/SSO podle rizika a vlastník účtu?
+- [ ] Víme, jak funguje export, výmaz, retence a zálohy?
+- [ ] Existuje incident kontakt a pravidla oznámení incidentu?
+- [ ] Je rozhodnutí uložené ve vendor kartě s datem příští kontroly?
+- [ ] Máme exit plán ještě před tím, než nástroj zaplatíme?
+
+## Mini šablona vendor due diligence karty
+
+```markdown
+# Vendor due diligence karta: [nástroj]
+
+## Obchodní důvod
+- Problém:
+- Tým / vlastník:
+- Očekávaný přínos:
+- Měřitelný signál úspěchu:
+
+## Riziko
+- Riziková třída: nízké / střední / vysoké
+- Typy dat:
+- Kritičnost pro provoz:
+- Dopad výpadku nebo úniku:
+
+## Privacy a smlouvy
+- Role: správce / zpracovatel / společný správce / nejasné
+- DPA odkaz:
+- Subprocesory:
+- Země zpracování:
+- Transfer mimo EU/EHP:
+
+## Bezpečnost a provoz
+- Přístupy a MFA/SSO:
+- Audit logy:
+- Incident kontakt:
+- Retence a zálohy:
+- Export a výmaz:
+
+## Rozhodnutí
+- Stav: schváleno / schváleno s podmínkou / zamítnuto
+- Podmínky:
+- Platnost výjimky do:
+- Příští kontrola:
+- Schválil/a:
+```
+
+## Zdroje
+
+- [GDPR — Regulation (EU) 2016/679](https://eur-lex.europa.eu/eli/reg/2016/679/oj)
+- [EDPB Guidelines 07/2020 on the concepts of controller and processor in the GDPR](https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en)
+- [European Commission: Standard Contractual Clauses (SCC)](https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en)
+- [European Commission: Questions and Answers for the two sets of Standard Contractual Clauses](https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/new-standard-contractual-clauses-questions-and-answers-overview_en)
+- [ENISA: Cloud Security Guide for SMEs](https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes)
+
 
 # Pracovní log
+
+- 2026-10-05: Doplněna příloha „Due diligence balíček pro SaaS nákup bez korporátního divadla“ s rizikovým tříděním dodavatelů, obchodním důvodem nákupu, kontrolou rolí správce/zpracovatele, subprocesorů, exit plánu, auditní vendor kartou, checklistem, vyplnitelnou šablonou a ověřenými zdroji GDPR, EDPB, Evropské komise a ENISA.
 
 - 2026-10-04: Doplněna příloha „Export a smazání účtu bez supportového ping-pongu“ s rozlišením exportu, deaktivace a výmazu, praktickou strukturou exportního balíčku, ověřením identity podle rizika, workflow výmazu, retenční maticí, support scénářem, checklistem, export/delete kartou a ověřenými zdroji GDPR, Evropské komise a EDPB.
 
