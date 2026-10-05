@@ -42024,7 +42024,146 @@ Otevřené otázky:
 - [CNIL: Privacy Impact Assessment (PIA)](https://www.cnil.fr/en/privacy-impact-assessment-pia)
 - [CNIL: PIA software and guides](https://www.cnil.fr/fr/outil-pia-telechargez-et-installez-le-logiciel-de-la-cnil)
 
+# Příloha: Session cookies a přihlášení bez tokenového cirkusu
+
+Přihlášení je jedna z těch částí SaaS, která má být pro uživatele nudná a pro útočníka otravná. Když funguje dobře, nikdo ji nechválí. Když funguje špatně, zákazník řeší odhlašování uprostřed práce, support loví screenshoty, vývojář hledá rozdíl mezi doménou a subdoménou a někde v rohu tiše pláče bezpečnostní audit. Krása webového vývoje, že ano.
+
+Privacy-first přístup tady neznamená jen „neukládej zbytečná data“. Znamená i to, že session mechanismus je srozumitelný, omezený rozsahem, dobře expirovaný, nepřenáší se tam, kde nemá, a support nepotřebuje vidět obsah účtu, aby vyřešil běžný problém s přihlášením.
+
+> Codyho komentář: Nejhorší autentizace je taková, která kombinuje cookies, localStorage, refresh tokeny, magic linky, sociální login a ruční zásah supportu jen proto, že „to tak jednou zůstalo po MVP“. Přihlášení má být architektura, ne archeologická vrstva.
+
+## Začni jednoduchým modelem session
+
+Pro většinu klasických B2B SaaS aplikací je dobrý výchozí model server-side session: prohlížeč drží jen náhodný session identifikátor v cookie, zatímco stav session, uživatelské ID, role, expirace a případné bezpečnostní příznaky žijí na serveru. Tím se snižuje množství citlivých dat na klientovi a usnadňuje se okamžité zneplatnění session při odhlášení, změně hesla, odebrání role nebo incidentu.
+
+To neznamená, že JWT je špatně vždy. Znamená to, že pro běžný webový SaaS není automaticky jednodušší. Pokud token obsahuje claimy, dlouho žije a nejde ho snadno zneplatnit, přesouváš část provozního rizika do prohlížeče a do všech míst, kde se token může objevit v logu, debug výpisu nebo chybové hlášce.
+
+Praktické pravidlo:
+
+- Session cookie používej pro běžnou webovou aplikaci v prohlížeči.
+- Krátkodobý bearer token používej tam, kde opravdu stavíš API klienta nebo strojovou integraci.
+- Refresh tokeny drž mimo frontend, pokud k tomu nemáš dobrý architektonický důvod a bezpečný storage model.
+- Do tokenu nedávej osobní data jen proto, že se „hodí mít je po ruce“.
+
+## Cookie atributy nejsou kosmetika
+
+Session cookie musí mít bezpečné atributy jako součást výchozí konfigurace, ne jako věc, kterou někdo jednou ručně nastaví v produkci a pak se na ni spoléhá jako na kouzelný talisman.
+
+Základní bezpečný default pro běžnou aplikaci:
+
+```http
+Set-Cookie: __Host-session=...; Path=/; Secure; HttpOnly; SameSite=Lax; Max-Age=28800
+```
+
+Co tím získáš:
+
+- `Secure` omezuje odesílání cookie na HTTPS.
+- `HttpOnly` brání čtení cookie běžným JavaScriptem v prohlížeči.
+- `SameSite=Lax` je rozumný výchozí kompromis pro mnoho běžných webových aplikací.
+- `Path=/` jasně vymezuje rozsah v rámci hostu.
+- `__Host-` prefix pomáhá vynutit přísnější pravidla pro host-only cookie.
+- `Max-Age` dává session předvídatelnou životnost.
+
+Pozor na `Domain`. Pokud ho nepotřebuješ, nenastavuj ho. Cookie bez `Domain` je vázaná na konkrétní host. Jakmile začneš session sdílet přes širší doménu, zvětšuješ dopad kompromitované subdomény a komplikuješ přemýšlení o tom, kdo vlastně může cookie ovlivnit.
+
+`SameSite=None` používej jen tehdy, když opravdu potřebuješ cross-site kontext, například u specifických embed scénářů nebo některých federovaných toků. A i tam patří k rozhodnutí krátká poznámka: proč to nejde jinak, jaké útoky řeší CSRF ochrana a jak to testuješ v reálných prohlížečích.
+
+## Přihlášení není věčné parkovací místo
+
+Session má mít životní cyklus. Nestačí „vydáme cookie a někdy ji smažeme“. Napiš si politiku pro aktivní session, neaktivní timeout, absolutní expiraci a bezpečnostní události.
+
+Jednoduchý B2B model:
+
+- Neaktivní session vyprší například po několika hodinách bez práce.
+- Absolutní expirace donutí nové ověření i u aktivního uživatele po rozumné době.
+- Citlivé akce vyžadují čerstvější ověření než běžné čtení dashboardu.
+- Odhlášení zneplatní session na serveru, nejen smaže cookie v prohlížeči.
+- Změna hesla, změna MFA, odebrání role a podezřelý login zneplatní relevantní existující session.
+
+U citlivějších účtů přidej přehled aktivních session pro uživatele nebo administrátora workspace: zařízení, přibližný čas poslední aktivity, hrubá lokalita podle IP, možnost odhlásit ostatní session. Nezobrazuj zbytečně přesné technické detaily, které nepomáhají rozhodnutí. Privacy-first není forenzní reality show.
+
+## CSRF řeš jako samostatnou vrstvu
+
+Pokud používáš cookies pro autentizaci, počítej s CSRF rizikem. `SameSite` je užitečná brzda, ale nemá být jedinou ochranou pro všechny scénáře. Pro stav měnící akce používej ověřený CSRF token nebo ekvivalentní frameworkovou ochranu, kontroluj metody požadavků a nedělej destruktivní akce přes `GET`.
+
+Praktický design:
+
+- `GET` jen čte a nic nemění.
+- `POST`, `PUT`, `PATCH` a `DELETE` vyžadují CSRF ochranu tam, kde se spoléháš na cookies.
+- API pro strojové klienty odděl od prohlížečové session autentizace.
+- U webhooků nikdy nepoužívej uživatelskou session; ověřuj podpis požadavku.
+- Chybová hláška má říct „akci se nepodařilo ověřit“, ne vypsat token, hlavičky a interní důvod.
+
+## Debuguj bez úniku účtu
+
+Přihlašování často končí v logu, protože „potřebujeme zjistit, proč to nejde“. Jenže session ID, tokeny, auth hlavičky, magic linky a resetovací odkazy jsou tajemství. Pokud se dostanou do aplikačních logů, analytiky, error trackingu nebo screenshotů v ticketu, máš z provozního problému bezpečnostní problém.
+
+Bezpečný debug standard:
+
+- Nikdy neloguj celé session ID, access token, refresh token ani magic link.
+- Pokud potřebuješ korelaci, používej jednosměrný hash nebo interní session záznam bez možnosti přihlášení.
+- V error trackingu filtruj `Cookie`, `Authorization`, query parametry typu `token`, `code`, `state` a resetovací odkazy.
+- Support má pracovat s diagnostickým ID, časem události a stavem účtu, ne s přeposlaným tokenem.
+- Screenshoty od zákazníků ber jako citlivý materiál a maž je podle retenčního pravidla.
+
+## Checklist: session cookies bez tokenového cirkusu
+
+- [ ] Víme, jestli aplikace používá server-side session, JWT, nebo kombinaci — a proč.
+- [ ] Session cookie má `Secure`, `HttpOnly`, vhodné `SameSite`, omezený `Path` a rozumnou expiraci.
+- [ ] Nepoužíváme široký `Domain`, pokud session opravdu nemusí běžet přes subdomény.
+- [ ] Odhlášení zneplatní session na serveru.
+- [ ] Změna hesla, MFA nebo role řeší existující session.
+- [ ] Stav měnící akce chráníme proti CSRF.
+- [ ] API tokeny pro integrace jsou oddělené od webové session.
+- [ ] Tokeny, cookies a magic linky se neukládají do logů ani ticketů.
+- [ ] Support má bezpečný diagnostický postup bez přebírání identity uživatele.
+- [ ] Retenční pravidlo říká, jak dlouho držíme session metadata a proč.
+
+## Mini šablona session policy karty
+
+```text
+# Session policy karta: [produkt / workspace]
+
+## Model
+Typ autentizace:
+Kde žije stav session:
+Kde se zneplatňuje session:
+
+## Cookie
+Název cookie:
+Atributy:
+Domain/Path:
+SameSite odůvodnění:
+Expirace:
+
+## Životní cyklus
+Neaktivní timeout:
+Absolutní expirace:
+Události rušící session:
+Citlivé akce vyžadující re-auth:
+
+## CSRF a API
+CSRF ochrana:
+Oddělení API tokenů:
+Webhook ověření:
+
+## Debug a privacy
+Zakázaná data v logu:
+Diagnostické ID:
+Retence session metadat:
+Support postup:
+```
+
+## Zdroje
+
+- MDN Web Docs: `Set-Cookie` a atributy cookies — https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie
+- MDN Web Docs: Secure cookie configuration — https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Cookies
+- OWASP Cheat Sheet Series: Session Management Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- RFC 6265: HTTP State Management Mechanism — https://www.rfc-editor.org/rfc/rfc6265
+
 # Pracovní log
+
+- 2026-10-05: Doplněna příloha „Session cookies a přihlášení bez tokenového cirkusu“ se server-side session modelem, bezpečnými cookie atributy, životním cyklem session, CSRF ochranou, privacy-first debugováním, checklistem, session policy šablonou a ověřenými zdroji MDN, OWASP a RFC 6265.
 
 - 2026-10-05: Doplněna příloha „Mini DPIA pro novou funkci bez právnické mlhy“ s praktickým privacy screeningem, datovou mapou, vyhodnocením rizik pro člověka, alternativami k invazivnímu zpracování, pravidly pro verzování rozhodnutí, hranicí pro plnou DPIA, checklistem, šablonou privacy screening karty a ověřenými zdroji GDPR, EDPB, Evropské komise a CNIL.
 
