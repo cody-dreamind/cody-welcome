@@ -42161,7 +42161,156 @@ Support postup:
 - OWASP Cheat Sheet Series: Session Management Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
 - RFC 6265: HTTP State Management Mechanism — https://www.rfc-editor.org/rfc/rfc6265
 
+# Příloha: Externí skripty a CDN bez frontendového dodavatelského blešího trhu
+
+Externí JavaScript je malá věta v HTML a velké rozhodnutí v provozu. Jeden vložený skript může číst stránku, reagovat na kliky, posílat requesty, brzdit načítání, rozbíjet CSP a v horším případě přinést supply-chain útok přímo do prohlížeče zákazníka. CDN není kouzelná trubka s fonty a knihovnami. Je to další dodavatel v cestě mezi tebou a uživatelem.
+
+Privacy-first web proto nezačíná otázkou „jakou CDN použijeme?“, ale „proč ten externí asset vůbec potřebujeme?“. Pokud jde o logo, font, ikonku, analytiku, chat widget, mapu, video embed nebo A/B nástroj, každá položka musí mít vlastní důvod, vlastníka a plán odstranění. Bez toho frontend tiše bobtná do malého datového tržiště, jen s hezčím designem a horším svědomím.
+
+> Codyho komentář: Nejrychlejší CDN je ta, kterou nepotřebuješ. Druhá nejlepší je ta, kterou umíš vypnout bez incident callu a bez toho, aby se homepage proměnila v rozbitý vánoční stromek.
+
+## Začni inventářem externích zdrojů
+
+Jednou za čas otevři produkční stránku, DevTools, záložku Network a sepiš všechny domény mimo vlastní hlavní doménu. Nejen skripty. Zahrň CSS, fonty, obrázky, video přehrávače, mapy, tag managery, chaty, formulářové embed kódy, captchy, payment widgety a „neškodné“ pixelové obrázky. U každé položky napiš:
+
+- kdo ji vlastní interně,
+- proč je potřeba,
+- jaká data vidí nebo může vidět,
+- zda běží před souhlasem uživatele,
+- zda má evropskou alternativu nebo self-host variantu,
+- jak ji vypneš, když začne zlobit.
+
+Neřeš to jako bezpečnostní audit jednou za rok. Externí zdroje se mění při redesignu, marketingové kampani, přidání formuláře i při „jen dočasném“ vložení skriptu. Dočasné skripty jsou jako dočasné kabely v serverovně: po půl roce mají jméno, historii a někdo se bojí je vytáhnout.
+
+Praktické pravidlo: pokud zdroj neumíš zařadit do kategorie „nutné pro funkci“, „nutné pro bezpečnou platbu“, „nutné pro obsah“ nebo „měření s jasným účelem“, patří na čekací seznam, ne do produkce.
+
+## Self-hostuj to, co je stabilní
+
+Fonty, ikonové balíčky, malé knihovny, vlastní CSS a statické obrázky typicky nepotřebují cizí runtime doménu. Pokud licence dovoluje lokální distribuci, ulož je do vlastního buildu, verzuj je spolu s aplikací a servíruj z vlastní infrastruktury. Získáš tři věci najednou: méně třetích stran, předvídatelnější výkon a jednodušší vysvětlení zákazníkovi, kam jeho prohlížeč sahá.
+
+Self-hosting ale není jen „stáhni soubor a zapomeň“. Potřebuješ:
+
+- evidovat verzi knihovny nebo fontu,
+- sledovat bezpečnostní aktualizace u balíčků,
+- mít reprodukovatelný build,
+- kontrolovat licenci,
+- odstranit staré nepoužívané assety.
+
+U SaaS produktu je dobrý kompromis jednoduchý: statické assety a frontendové knihovny drž u sebe; externí widgety povol jen tam, kde přinášejí jasnou produktovou hodnotu a kde máš smluvní i technickou kontrolu. Mapu na kontaktní stránce často nahradí obyčejný odkaz. Video embed často nahradí náhledový obrázek a kliknutí na přímý odkaz. Ano, je to méně efektní. Také je to méně slizké. Win-win.
+
+## Když externí zdroj musí zůstat, omez jeho škody
+
+Někdy externí skript nebo stylesheet opravdu potřebuješ: platební brána, consent management, zákaznický chat v placené podpoře, bezpečnostní výzva nebo knihovna z důvěryhodného CDN v prototypu. V takovém případě nepoužívej filozofii „všechno povolíme a uvidíme“. Použij brzdy:
+
+- `Content-Security-Policy` nastav tak, aby skripty, styly, obrázky, frame a connect cíle měly konkrétní allowlist, ne hvězdičkový mejdan.
+- `Subresource Integrity` použij u statických externích skriptů a stylesheetů, kde se obsah nemá měnit bez tvého vědomí.
+- `crossorigin="anonymous"` přidej tam, kde je potřeba pro cross-origin SRI kontrolu.
+- `Referrer-Policy` drž nastavenou tak, aby externí domény nedostávaly zbytečně detailní URL.
+- `preconnect` používej střídmě jen pro zdroje, které jsou opravdu kritické pro výkon, protože i optimalizační hint je signál k cizí doméně.
+- `sandbox` u iframe zvaž pokaždé, když vkládáš cizí obsah.
+
+SRI není kouzelný štít pro dynamické skripty, které se mění každý den. Tam je důležitější rozhodnutí, jestli takový skript na stránce vůbec chceš. CSP zase není dekorace do security reportu. Je to provozní politika, kterou testuješ v `Report-Only` režimu, ladíš podle reálného provozu a teprve pak zpřísňuješ. Jinak si z ní vyrobíš buď papírového tygra, nebo produkční výpadek s pěkným názvem.
+
+## Tag manager není datový úklid
+
+Tag manager může být praktický pro správu měření, ale není náhradou governance. Naopak: když do něj může kdokoliv přidat nový pixel bez code review, vytvořil sis produkční deploy obcházející vývojový proces. To není agilita, to je zadní vchod v elegantním UI.
+
+Pokud tag manager používáš, nastav minimálně:
+
+- vlastníka kontejneru,
+- schvalovací workflow,
+- seznam povolených typů tagů,
+- zákaz vkládání osobních údajů do eventů,
+- prostředí pro testování,
+- pravidelný export konfigurace,
+- měsíční review aktivních tagů.
+
+U malého privacy-first webu je často lepší tag manager vůbec nemít. Jednoduchá analytika s několika ručně pojmenovanými událostmi bývá čitelnější než kontejner plný historických experimentů. Když už potřebuješ měřit marketing, drž se agregovaných událostí: návštěva stránky, klik na CTA, odeslání formuláře, stažení materiálu. Neposílej e-mail, telefon, název firmy ani obsah zprávy. Marketing nepotřebuje být forenzní oddělení.
+
+## Externí fonty a ikony jsou produktové rozhodnutí
+
+Font z cizí domény se tváří jako estetika, ale technicky je to další request mimo tvůj provoz. Ikonový kit z externího CDN se tváří jako pohodlí, ale může znamenat zbytečný JavaScript a sledovatelný provoz. Nejčistší varianta je lokálně hostovaný font v několika nutných řezech a SVG ikony přímo v projektu.
+
+Praktický postup:
+
+1. Vyber maximálně dvě rodiny písem a minimum řezů.
+2. Ulož fonty lokálně, pokud to licence dovoluje.
+3. Použij `font-display: swap` nebo podobné nastavení podle designové tolerance.
+4. Ikony drž jako lokální SVG komponenty nebo sprite.
+5. Nepřidávej celý ikonový balík kvůli třem symbolům.
+
+Tohle není purismus. Je to provozní hygiena. Čím méně runtime dodavatelů, tím méně míst, která musíš vysvětlovat v datové mapě, supportu, bezpečnostním dotazníku a vlastní hlavě v pátek večer.
+
+## Rozhodovací matice pro externí asset
+
+Před přidáním nového externího assetu si projdi pět otázek:
+
+1. **Je nutný pro základní hodnotu stránky nebo produktu?** Pokud ne, nezačínej integrací.
+2. **Umíme ho hostovat sami?** Pokud ano, preferuj vlastní provoz.
+3. **Jaká data uvidí dodavatel?** Zahrň IP adresu, URL, referrer, user-agent, eventy a identifikátory.
+4. **Co se stane při výpadku nebo kompromitaci?** Stránka musí degradovat bezpečně, ne panikařit.
+5. **Kdo bude zdroj kontrolovat za měsíc?** Bez vlastníka je to budoucí archeologie.
+
+Pokud odpověď na třetí nebo čtvrtou otázku zní „nevíme“, integrace ještě není připravená. Nevědomost není risk acceptance. Je to jen risk acceptance s horším papírováním.
+
+## Checklist: externí skripty a CDN bez blešího trhu
+
+- Máme seznam všech externích domén na produkčních stránkách.
+- Každý externí zdroj má vlastníka, účel a kategorii dat.
+- Stabilní fonty, ikony a knihovny hostujeme lokálně, pokud to licence dovoluje.
+- CSP používá konkrétní allowlist a není postavená na univerzálním `*`.
+- SRI je nastavené u statických externích skriptů a stylesheetů, kde dává smysl.
+- Tag manager, pokud existuje, má schvalování a pravidelný review rytmus.
+- Referrery, URL parametry a event payloady neobsahují osobní údaje.
+- Externí embedy mají fallback: odkaz, náhled, textovou alternativu nebo bezpečné vypnutí.
+- Kritické stránky fungují i při výpadku nepovinných externích zdrojů.
+- Datová mapa a privacy text odpovídají tomu, co frontend opravdu načítá.
+
+## Mini šablona frontend supply-chain karty
+
+```md
+# Frontend supply-chain karta: [web / aplikace / landing page]
+
+## Externí zdroj
+Doména:
+Typ: [script / stylesheet / font / image / iframe / API / tag manager]
+Interní vlastník:
+Dodavatel:
+
+## Účel
+Proč je zdroj nutný:
+Co se rozbije bez něj:
+Fallback:
+
+## Data a privacy
+Jaká data může dodavatel vidět:
+Běží před souhlasem: [ano/ne/proč]
+Posíláme vlastní eventy nebo identifikátory:
+Retence nebo smluvní poznámka:
+
+## Technická ochrana
+CSP pravidlo:
+SRI: [ano/ne/proč]
+Referrer-Policy dopad:
+Sandbox / iframe omezení:
+Monitoring výpadku:
+
+## Review
+Datum poslední kontroly:
+Rozhodnutí: [ponechat / self-hostovat / odstranit / nahradit]
+Další krok:
+```
+
+## Zdroje
+
+- MDN Web Docs: Subresource Integrity — https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity
+- MDN Web Docs: Content Security Policy — https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP
+- MDN Web Docs: `rel="preconnect"` — https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/preconnect
+- OWASP Cheat Sheet Series: Content Security Policy Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html
+
 # Pracovní log
+
+- 2026-10-05: Doplněna příloha „Externí skripty a CDN bez frontendového dodavatelského blešího trhu“ s inventářem externích zdrojů, pravidly pro self-hosting fontů/knihoven, omezením škod přes CSP/SRI/Referrer-Policy, governance tag manageru, rozhodovací maticí, checklistem, frontend supply-chain šablonou a ověřenými zdroji MDN a OWASP.
 
 - 2026-10-05: Doplněna příloha „Session cookies a přihlášení bez tokenového cirkusu“ se server-side session modelem, bezpečnými cookie atributy, životním cyklem session, CSRF ochranou, privacy-first debugováním, checklistem, session policy šablonou a ověřenými zdroji MDN, OWASP a RFC 6265.
 
