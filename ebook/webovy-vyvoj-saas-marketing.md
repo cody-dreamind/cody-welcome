@@ -42951,7 +42951,160 @@ Formulářové e-maily jsou drobná infrastruktura důvěry. Když fungují, nik
 
 ---
 
+# Příloha: Preference centrum a odhlašování bez e-mailové pasti
+
+E-mail je pořád výborný kanál, pokud se k němu nechováš jako k nekonečné licenci na otravování. Pro SaaS a B2B weby je největší rozdíl mezi důvěryhodnou komunikací a spamovým bahýnkem často v maličkosti: umí se člověk snadno odhlásit, změnit typ zpráv, nebo říct „tohle už nechci“ bez supportového ping-pongu?
+
+Preference centrum není jen marketingová hračka. Je to provozní dohoda se zákazníkem: jaké typy zpráv posíláme, proč je posíláme, jak často, na jaký právní základ spoléháme a kde může příjemce změnit názor. Privacy-first varianta má být jednoduchá, srozumitelná a použitelná i bez přihlášení do plného účtu, pokud jde jen o odhlášení z marketingu.
+
+> Codyho komentář: Pokud je jednodušší najít tlačítko „koupit“ než „nechci další e-maily“, není to růstová strategie. Je to digitální pastička na důvěru.
+
+## Rozliš typy e-mailů podle účelu
+
+Nejdřív si rozděl odchozí e-maily na kategorie. Bez toho bude preference centrum jen elegantní seznam chaosu.
+
+Praktické minimum:
+
+- **Transakční e-maily** — potvrzení účtu, reset hesla, faktura, bezpečnostní upozornění, změna tarifu.
+- **Provozní e-maily** — plánovaná odstávka, změna podmínek, důležitá migrace, incident s dopadem na službu.
+- **Produktové e-maily** — nová funkce, onboarding tip, měsíční souhrn používání, vzdělávací série.
+- **Marketingové e-maily** — newsletter, pozvánka na webinář, případovka, obchodní nabídka.
+- **Individuální obchodní komunikace** — follow-up po poptávce, odpověď na schůzku, nabídka navázaná na konkrétní konverzaci.
+
+Každá kategorie potřebuje jiná pravidla. Reset hesla nejde „odhlásit“, protože bez něj účet nefunguje. Newsletter odhlásit jít musí. Produktový digest může být volitelný. Bezpečnostní upozornění má být jasné a vzácné, ne převlečený marketingový banner s panikou v předmětu.
+
+## Odhlášení má být kratší než registrace
+
+Dobré odhlášení splní tři věci: funguje hned, nevyžaduje přihlášení a nevyčítá člověku, že odchází. U marketingových a obdobných dobrovolných sdělení dej do patičky jasný odkaz typu „Odhlásit newsletter“ nebo „Upravit preference“. Ne „správa komunikačních nastavení“ schovaná za třemi obrazovkami, captcha hádankou a lehkým citovým vydíráním.
+
+Flow může vypadat takhle:
+
+1. příjemce klikne na podepsaný jednorázový odkaz,
+2. stránka ukáže konkrétní e-mail a aktuální typ odběru,
+3. člověk zvolí „odhlásit vše marketingové“ nebo upraví jednotlivé kategorie,
+4. systém změnu uloží a zobrazí potvrzení,
+5. v auditním záznamu zůstane minimum: hash kontaktu, typ změny, čas, zdroj.
+
+Neptej se znovu „opravdu?“ jen proto, že marketingový grafik má smutný den. Pokud chceš zjistit důvod odhlášení, nabídni volitelnou otázku po potvrzení změny. Nikdy z ní nedělej povinnou překážku.
+
+## Preference nejsou souhlasový sklad bez dna
+
+Preference centrum nesmí být výmluva pro sběr dalších dat. Nepotřebuješ znát narozeniny, obrat firmy, oblíbený framework a velikost týmu jen proto, aby si člověk vybral měsíční souhrn místo týdenního newsletteru.
+
+U každé položky si napiš:
+
+- jaký typ zprávy řídí,
+- komu se posílá,
+- jak často nejvýš,
+- jaký je účel,
+- jaký je právní základ nebo očekávaný vztah,
+- jak dlouho držíš záznam o preferenci,
+- kdo k preferencím může přistupovat.
+
+Privacy-first default: méně kategorií, jasné názvy, žádné předzaškrtnuté překvapení a žádné „odhlásil newsletter, tak ho přesuneme do jiné kampaně“. To není chytrost. To je reputační kompost.
+
+## Produktové a marketingové zprávy drž odděleně
+
+SaaS často míchá produktové tipy, onboarding a marketing. To je pochopitelné, ale musí to být čitelné. Pokud e-mail pomáhá uživateli dokončit nastavení účtu, je to jiná situace než pozvánka na webinář pro nové leady.
+
+Praktické pravidlo:
+
+- onboarding posílej jen lidem, kterým reálně pomáhá používat aktivovaný účet,
+- newsletter nech dobrovolný a snadno odhlasitelný,
+- obchodní kampaně neposílej zákazníkům, kteří se odhlásili z marketingu,
+- důležitá provozní oznámení neposílej s reklamním obsahem,
+- při změně účelu si znovu ověř, jestli preference pořád dávají smysl.
+
+Příklad špatného mixu: e-mail „Důležité změny zabezpečení“ má nahoře dvě věty o bezpečnosti a zbytek je sleva na nový tarif. Příklad lepšího mixu: samostatné bezpečnostní oznámení bez prodejního tlaku a zvlášť volitelný produktový e-mail pro lidi, kteří o takové tipy stojí.
+
+## Technicky: seznam potlačení je kritická infrastruktura
+
+Suppression list, tedy seznam kontaktů, kterým nesmíš posílat určité typy zpráv, ber jako kritickou část systému. Není to odpadní tabulka „marketing si nějak vyřeší“. Když se ztratí nebo přepíše, začneš psát lidem, kteří jasně řekli ne.
+
+Bezpečný model:
+
+- ukládej normalizovaný kontakt nebo jeho hash podle potřeby doručování,
+- odděl marketingové odhlášení od blokace všech nebezpečných pokusů o kontakt,
+- při importu kontaktů vždy kontroluj suppression list před přidáním do kampaně,
+- loguj změny preferencí bez obsahu kampaní,
+- omez přístup jen na lidi a systémy, které preference opravdu potřebují,
+- zálohuj preference tak, aby šly obnovit dřív než se odešle další kampaň.
+
+Pokud používáš externí e-mailingový nástroj, export odhlášených kontaktů a synchronizace preferencí patří do vendor review. Nestačí věřit hezkému přepínači v UI. Zeptej se: co se stane při migraci, kdo drží master stav, jak funguje API, jak rychle se odhlášení projeví a jestli se suppression list dostane do všech segmentů.
+
+## Právní minimum bez právnického karaoke
+
+V EU je důležité rozlišovat souhlas, oprávněný zájem, existující zákaznický vztah a právo vznést námitku. GDPR výslovně řeší právo vznést námitku proti zpracování pro přímý marketing v článku 21. EPrivacy pravidla zase upravují nevyžádaná obchodní sdělení a opt-in/soft opt-in logiku pro elektronickou poštu. V Česku se obchodní sdělení řeší mimo jiné v zákoně č. 480/2004 Sb. o některých službách informační společnosti.
+
+Prakticky:
+
+- u newsletteru měj jasný přihlašovací zdroj a záznam,
+- u zákaznického soft opt-inu posílej jen relevantní podobné nabídky a vždy nabídni snadné odmítnutí,
+- u B2B kontaktů nepředpokládej, že „firma“ znamená „můžeme všechno“,
+- odhlášení respektuj napříč nástroji,
+- udržuj texty bez triků a předzaškrtnutých voleb,
+- sporné scénáře řeš s právníkem, ne s nejodvážnějším growth hackem v místnosti.
+
+## Checklist: preference centrum bez pasti
+
+- [ ] Máme rozdělené transakční, provozní, produktové a marketingové e-maily?
+- [ ] Je u každé kategorie jasný účel, frekvence a vlastník?
+- [ ] Marketingové odhlášení nevyžaduje přihlášení do účtu?
+- [ ] Umí člověk odhlásit vše marketingové jedním srozumitelným krokem?
+- [ ] Nepoužíváme povinný dotazník jako překážku odhlášení?
+- [ ] Kontroluje import kontaktů suppression list před odesláním?
+- [ ] Neobsahují provozní a bezpečnostní e-maily reklamní nátlak?
+- [ ] Máme auditní záznam změn preferencí bez zbytečných osobních dat?
+- [ ] Víme, kdo je master systém pro preference?
+- [ ] Ověřili jsme právní základ a lokální pravidla pro obchodní sdělení?
+
+## Mini šablona preference policy karty
+
+```markdown
+# Preference policy karta: [produkt / web]
+
+## Kategorie e-mailů
+- Transakční:
+- Provozní:
+- Produktové:
+- Marketingové:
+
+## Preference centrum
+- URL / umístění:
+- Funguje bez přihlášení pro marketingové odhlášení:
+- Možnost odhlásit vše marketingové:
+- Vlastník textů a UI:
+
+## Data
+- Ukládané preference:
+- Suppression list master systém:
+- Retence záznamů:
+- Přístupy:
+
+## Právní a provozní pravidla
+- Přihlašovací zdroje:
+- Soft opt-in scénáře:
+- Námitky / odhlášení:
+- Import kontaktů:
+
+## Kontrola
+- Měsíční test odhlášení:
+- Test synchronizace do e-mailingového nástroje:
+- Poslední review:
+```
+
+## Zdroje
+
+- GDPR, článek 21 — právo vznést námitku včetně přímého marketingu: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679
+- Směrnice 2002/58/ES, článek 13 — nevyžádaná sdělení: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32002L0058
+- Zákon č. 480/2004 Sb., o některých službách informační společnosti: https://www.zakonyprolidi.cz/cs/2004-480
+- ÚOOÚ: Obchodní sdělení: https://uoou.gov.cz/profesional/obchodni-sdeleni
+
+---
+
 # Pracovní log
+
+- 2026-10-05: Doplněna příloha „Preference centrum a odhlašování bez e-mailové pasti“ s rozdělením typů e-mailů, pravidly snadného odhlášení, suppression listem, oddělením produktových a marketingových zpráv, právním minimem, checklistem, preference policy šablonou a ověřenými zdroji GDPR, ePrivacy, českého zákona č. 480/2004 Sb. a ÚOOÚ.
 
 - 2026-10-05: Rozšířena příloha „Formulářové e-maily bez ztracených poptávek a datového karnevalu“ o provozní sledování bounce/rate-limit chyb bez čtení obsahu zpráv, bezpečnější logovací příklad, doplněný checklist a ověřené zdroje MDN, OWASP a EDPB.
 
