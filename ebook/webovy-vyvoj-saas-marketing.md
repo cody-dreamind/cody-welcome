@@ -43322,7 +43322,160 @@ Uživatelský výzkum má zmenšovat nejistotu, ne zvětšovat datový sklad. Kd
 
 ---
 
+# Příloha: Konkurenční analýza bez kopírování a šmírování
+
+Konkurenční analýza má pomoct lépe se rozhodnout, ne vyrobit úzkostlivý seznam všeho, co mají ostatní. Když ji děláš špatně, skončíš jako produktový papoušek: konkurence přidá kalkulačku, ty přidáš kalkulačku; konkurence dá do hero sekce „AI-powered“, ty dáš „AI-driven“; konkurence má sedm položek v ceníku, ty jich uděláš osm, protože přece musí být vidět ambice. Výsledek není strategie. Je to karaoke trhu.
+
+Dobrá konkurenční analýza hledá rozdíly v zákazníkovi, nabídce, distribuci, důvěře a provozním modelu. Nejde o to konkurenci okopírovat, ale pochopit, které sliby na trhu fungují, které jsou prázdné a kde můžeš být užitečnější, jednodušší nebo důvěryhodnější.
+
+> Codyho komentář: Konkurence je zdroj signálů, ne produktový šéf. Když slepě kopíruješ, dostaneš horší verzi cizí strategie a ještě za ni zaplatíš vlastním roadmapovým chaosem. Elegantní sebe-sabotáž, ale pořád sabotáž.
+
+## Začni rozhodnutím, ne tabulkou funkcí
+
+Než otevřeš weby konkurentů, napiš si, jaké rozhodnutí má analýza podpořit. Bez toho budeš sbírat screenshoty, claimy, ceny, integrace a LinkedIn posty, dokud se z analýzy nestane muzeum cizích priorit.
+
+Dobré rozhodovací otázky:
+
+- Jak máme vysvětlit rozdíl proti levnějším alternativám?
+- Které námitky zákazníci řeší před nákupem a jak je trh zodpovídá?
+- Co má být na landing page, aby zákazník pochopil hodnotu bez demo callu?
+- Kde můžeme být privacy-first alternativou bez moralizování?
+- Které funkce jsou opravdu tržní standard a které jsou jen hlasitý šum?
+- Jaké důkazy důvěry chybí v našem webu nebo onboardingové cestě?
+
+Špatná otázka zní: „Co všechno má konkurence?“ To je nekonečné. Lepší otázka zní: „Co potřebujeme pochopit, abychom udělali další konkrétní produktové nebo marketingové rozhodnutí?“
+
+## Sleduj pět vrstev, ne jen feature list
+
+Feature list je lákavý, protože se snadno kreslí do tabulky. Jenže zákazník se často nerozhoduje podle samotného počtu funkcí. Rozhoduje se podle jasnosti, rizika, důvěry, ceny, provozního pohodlí a toho, jestli produkt odpovídá jeho situaci.
+
+Sleduj pět vrstev:
+
+1. **Positioning** — pro koho produkt je, jak pojmenovává problém a jaký slib dává.
+2. **Nabídka** — tarify, balíčky, trial, demo, onboarding, garance a omezení.
+3. **Důkazy** — reference, případovky, bezpečnostní stránka, dokumentace, status page, changelog.
+4. **Produktová cesta** — jak rychle člověk pochopí hodnotu, založí účet, dostane první výsledek a pozve tým.
+5. **Provozní důvěra** — privacy, data region, export, mazání, SLA, support, subprocesory a kontrola nad daty.
+
+Právě poslední vrstva je pro Dreamind důležitá. Privacy-first není jen odstavec v patičce. Je to konkurenční signál: „Nebudeme stavět růst na tom, že o vašich lidech posbíráme všechno, co se dá.“ Pro evropské B2B zákazníky může být srozumitelná datová architektura stejně silný argument jako nová funkce.
+
+## Sbírej jen veřejné a férové signály
+
+Konkurenční analýza nesmí sklouznout k šedé zóně. Nepotřebuješ fake účty s vymyšlenými firmami, scraping za hranou podmínek, obcházení paywallů, stahování neveřejných materiálů ani lovení interních informací od bývalých zaměstnanců. Nejen že je to rizikové; hlavně to učí tým špatný reflex: když chceme vědět víc, obejdeme hranici.
+
+Bezpečné zdroje signálů:
+
+- veřejný web a landing pages,
+- dokumentace a help centrum,
+- veřejný changelog,
+- ceník a obchodní balíčky,
+- veřejné status stránky,
+- veřejné případovky a reference,
+- podcasty, webináře, blogy a tiskové zprávy,
+- recenze na platformách, pokud je bereš jako signál, ne absolutní pravdu.
+
+Privacy-first pravidlo: neukládej osobní profily lidí z konkurence, nepřepisuj jména recenzentů do interních tabulek, nesbírej individuální komentáře jako databázi lidí. Většinou ti stačí agregovaný insight: „recenze často zmiňují slabý onboarding“ nebo „zákazníci oceňují rychlou migraci“. Analýza trhu nemá být CRM lidí, kteří si nikdy neřekli, že chtějí být ve tvém CRM. Šokující, já vím.
+
+## Překládej zjištění do hypotéz
+
+Zjištění samo o sobě nic nemění. „Konkurent má kalkulačku úspor“ je pozorování. Užitečné začne být až ve chvíli, kdy z něj uděláš hypotézu.
+
+Příklad převodu:
+
+```text
+Pozorování: Tři konkurenti mají na pricing stránce jednoduchou kalkulačku objemu.
+Interpretace: Zákazníci možná potřebují odhadnout dopad ceny podle velikosti týmu ještě před kontaktováním obchodu.
+Hypotéza: Pokud na pricing stránku přidáme jednoduchý odhad nákladů bez sběru e-mailu, více návštěvníků pochopí vhodný tarif a méně lidí odejde kvůli nejistotě.
+Test: Přidat kalkulačku jen s lokálním výpočtem v prohlížeči a měřit agregovaně kliknutí na CTA podle zvoleného rozsahu.
+```
+
+Tohle je rozdíl mezi kopírováním a učením. Kopírování říká „mají kalkulačku, udělejme kalkulačku“. Učení říká „možná řeší nejistotu v ceně; najděme nejmenší privacy-first způsob, jak ji snížit“.
+
+## Hledej mezery v důvěře
+
+Malé firmy a SaaS produkty často soutěží s většími hráči, kteří mají víc funkcí, rozpočet i značku. Nemusíš je porazit počtem položek v menu. Můžeš je porazit jasností.
+
+Důvěrové mezery, které se vyplatí hledat:
+
+- Konkurence neříká, kde běží data.
+- Ceník je plný výjimek a nutí člověka na demo kvůli základní informaci.
+- Dokumentace neukazuje export a výmaz dat.
+- Bezpečnostní stránka je jen obecný text bez konkrétních postupů.
+- Changelog neodlišuje datové a bezpečnostní změny.
+- Trial sbírá moc údajů před první hodnotou.
+- Support slibuje rychlost, ale neříká kanály a priority.
+
+Každá taková mezera je šance napsat lepší text, doplnit konkrétní stránku, zjednodušit onboarding nebo vytvořit férovější nabídku. Ne proto, abys vypadal „svatě“. Protože zákazník, který chápe riziko, se rozhoduje rychleji.
+
+## Nedělej z analýzy roadmapový diktát
+
+Když konkurent přidá funkci, neznamená to, že ji musíš přidat taky. Možná obsluhuje jiný segment. Možná řeší enterprise deal. Možná má technický dluh převlečený za novinku. Možná jen produktový tým potřeboval něco vydat do kvartální prezentace. Ano, i velké firmy občas běží na divadle. Mají jen hezčí oponu.
+
+Před převzetím nápadu si polož pět otázek:
+
+- Slouží stejnému zákazníkovi a stejné situaci jako náš produkt?
+- Podporuje naši hlavní pracovní větu webu nebo produktu?
+- Umíme ji vysvětlit bez kopírování cizího jazyka?
+- Zvyšuje datové riziko, počet dodavatelů nebo složitost supportu?
+- Existuje menší experiment, který ověří potřebu bez plné implementace?
+
+Pokud odpovědi nejsou jasné, dej nápad do parkoviště. Parkoviště není hřbitov. Je to místo, kde nápady čekají na důkaz.
+
+## Checklist: konkurenční analýza bez kopírování
+
+- [ ] Má analýza jasnou rozhodovací otázku?
+- [ ] Sledujeme positioning, nabídku, důkazy, produktovou cestu i provozní důvěru?
+- [ ] Používáme jen veřejné a férově dostupné zdroje?
+- [ ] Neukládáme zbytečné osobní údaje recenzentů, zaměstnanců nebo zákazníků konkurence?
+- [ ] Každé důležité pozorování převádíme na hypotézu?
+- [ ] Oddělujeme tržní standard od cizí roadmapové módy?
+- [ ] Hledáme mezery v důvěře, privacy a kontrole nad daty?
+- [ ] Má každý převzatý nápad vlastníka, důvod a nejmenší test?
+- [ ] Analýza končí konkrétním rozhodnutím, ne jen složkou screenshotů?
+
+## Mini šablona konkurenční karty
+
+```markdown
+# Konkurenční karta: [název produktu / segment]
+
+## Rozhodovací otázka
+- Co se snažíme rozhodnout:
+- Pro jaký segment zákazníků:
+- Datum kontroly:
+
+## Veřejné signály
+- Positioning:
+- Nabídka a tarify:
+- Onboarding / první hodnota:
+- Důkazy důvěry:
+- Dokumentace / changelog / status:
+- Privacy a provozní informace:
+
+## Pozorování
+- Co konkurent dělá dobře:
+- Co je nejasné nebo slabé:
+- Jaké námitky zákazníka řeší:
+- Jaké námitky nechává bez odpovědi:
+
+## Hypotézy pro nás
+- Hypotéza 1:
+- Nejmenší test:
+- Metrika / signál:
+- Privacy dopad:
+
+## Rozhodnutí
+- Co uděláme:
+- Co neuděláme:
+- Vlastník:
+- Datum další revize:
+```
+
+Konkurenční analýza má být kompas, ne dálkové ovládání. Pomáhá vidět trh, ale řídit musíš vlastní produktovou logikou, zákaznickou realitou a hodnotami. Pokud je jednou z hodnot kontrola nad daty, piš ji do analýzy stejně vážně jako cenu, funkce a konverze. Právě tam často vzniká rozdíl, který nejde snadno okopírovat.
+
 # Pracovní log
+
+- 2026-10-05: Doplněna příloha „Konkurenční analýza bez kopírování a šmírování“ s rozhodovací otázkou před sběrem dat, pěti vrstvami sledování trhu, pravidly pro férové veřejné signály, převodem zjištění na hypotézy, hledáním mezer v důvěře, checklistem a vyplnitelnou konkurenční kartou.
+
 
 - 2026-10-05: Doplněna příloha „Uživatelské rozhovory bez výzkumného vysavače“ s rozhodovací větou, privacy-first náborem respondentů, pravidly pro nahrávání a retenci, anonymizací poznámek, použitím AI nad očištěnými daty, checklistem, výzkumnou kartou a ověřenými zdroji GDPR, EDPB a Evropské komise.
 
