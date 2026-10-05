@@ -42310,7 +42310,192 @@ Další krok:
 - MDN Web Docs: `rel="preconnect"` — https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel/preconnect
 - OWASP Cheat Sheet Series: Content Security Policy Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html
 
+
+# Příloha: Admin rozhraní a interní nástroje bez datového průvanu
+
+Admin rozhraní bývá nejméně sexy část produktu. Nikdo ho nechce kreslit do pitch decku, málokdo ho ukazuje v marketingu a skoro každý doufá, že „to přece používají jen naši lidé“. Právě proto je nebezpečné: často má přístup k zákazníkům, fakturám, support tiketům, auditním stopám, konfiguraci workspace a tlačítkům, která umí rozbít den více lidem najednou.
+
+Privacy-first admin není o tom, že internímu týmu zakážeš pracovat. Je o tom, že mu dáš přesně tolik přístupu, kolik potřebuje k vyřešení konkrétní práce — a zbytek necháš zamčený, zamaskovaný nebo vůbec nenačtený. Interní pohodlí nesmí být výmluva pro permanentní výhled do cizích dat.
+
+> Codyho komentář: Admin panel bez pravidel je jako univerzální klíč od domu položený pod rohožkou s nápisem „jen pro kolegy“. Technicky kreativní, bezpečnostně poezie bolesti.
+
+## Začni mapou interních prací
+
+Nezačínej otázkou „co všechno může admin vidět“. Začni otázkou „jakou práci musí interní člověk udělat“. Support potřebuje ověřit stav předplatného, vrátit platbu, dohledat poslední chybu nebo změnit e-mail po ověření identity. Obchod může potřebovat vidět stav trialu, ale nepotřebuje číst obsah zákaznických dokumentů. Vývojář může potřebovat technické ID a chybový kontext, ale ne celé jméno uživatele a historii faktur.
+
+Praktický postup:
+
+1. Sepiš hlavní interní scénáře: support, billing, bezpečnost, provoz, obchod, technický debug.
+2. U každého scénáře napiš rozhodnutí, které interní člověk dělá.
+3. Ke každému rozhodnutí přiřaď minimální data, která k němu opravdu potřebuje.
+4. Všechno ostatní označ jako skryté, maskované, dostupné jen přes break-glass režim nebo úplně mimo admin.
+
+Příklad: Support řeší „uživatel nedostal potvrzovací e-mail“. Potřebuje e-mailovou adresu, stav ověření, čas posledního pokusu, technický výsledek doručení a možnost poslat nový ověřovací e-mail. Nepotřebuje vidět obsah účtu, interní poznámky jiných zákazníků ani seznam všech přihlášených zařízení.
+
+## Role navrhni podle práce, ne podle seniority
+
+Role „admin“, „superadmin“ a „owner“ nestačí. Jsou pohodlné při vývoji, ale v provozu rychle vytvoří privilegovanou mlhu. Lepší je začít pracovními rolemi: `support_read`, `support_action`, `billing_read`, `billing_refund`, `security_review`, `ops_config`, `developer_debug`. Některé role mohou být kombinované, ale musí být pojmenované podle činnosti, ne podle organizačního žebříčku.
+
+OWASP v doporučeních k autorizaci zdůrazňuje princip nejmenších oprávnění a samostatné ověřování přístupu pro chráněné akce. V praxi to znamená: nestačí schovat tlačítko v UI. Backend musí znovu zkontrolovat, jestli konkrétní člověk smí provést konkrétní akci nad konkrétním zákazníkem nebo workspace.
+
+Mini matice rolí:
+
+| Interní práce | Vidí | Může měnit | Nesmí |
+|---|---|---|---|
+| Support první linie | stav účtu, plán, poslední systémové události | poslat ověřovací e-mail, otevřít ticket | číst obsah zákaznických dat, měnit billing |
+| Billing | tarif, fakturační stav, platby | vystavit kredit, pozastavit obnovu podle pravidel | resetovat hesla, číst produktový obsah |
+| Security review | auditní události, role, přístupy | revokovat session, označit incident | upravovat fakturaci bez procesu |
+| Developer debug | technické ID, agregované chyby, verze releasu | přidat debug flag s expirací | exportovat osobní data bez schválení |
+
+## Citlivá data maskuj jako výchozí stav
+
+Interní panel má používat privacy by default stejně jako veřejný produkt. Výchozí zobrazení nemá ukazovat celé e-mailové adresy, telefonní čísla, tokeny, adresy, poznámky, obsah zpráv nebo osobní dokumenty, pokud je člověk nepotřebuje hned pro danou práci.
+
+Vhodné vzory:
+
+- E-mail zobraz jako `ja***@firma.cz`, celé znění jen po kliknutí s důvodem.
+- Tokeny a klíče nikdy nezobrazuj celé; po vytvoření ukaž jednorázově, potom jen prefix a datum rotace.
+- Support poznámky piš strukturovaně a bez zbytečných osobních detailů.
+- Obsah zákaznických dat otevírej jen přes separátní oprávnění, ideálně s dočasnou expirací.
+- Export interních dat omez rolí, důvodem, logem a jasným schválením.
+
+Tohle není jen bezpečnostní kosmetika. Je to i produktová hygiena: když citlivá data nejsou na obrazovce, méně často skončí ve screenshotech, chybových hlášeních, Slacku, nahrávkách hovorů nebo „rychlé“ dokumentaci.
+
+## Break-glass režim musí být krátký a hlučný
+
+Někdy interní člověk opravdu potřebuje mimořádný přístup. Třeba bezpečnostní incident, ruční oprava po chybné migraci nebo kritický support u enterprise zákazníka. Řešením není trvale přidat širší roli. Řešením je break-glass režim: dočasný, zdůvodněný, logovaný a viditelný.
+
+Minimum pro break-glass:
+
+- důvod výjimky vybraný ze seznamu a doplněný krátkým textem,
+- časová expirace bez možnosti „navždy“,
+- automatická auditní událost,
+- oznámení vlastníkovi systému nebo bezpečnostnímu kanálu,
+- následná kontrola, jestli se výjimka nezměnila v nový normál.
+
+Příklad: Developer potřebuje na 30 minut vidět detail workspace kvůli chybě migrace. Aktivuje break-glass s incident ID, dostane dočasnou roli jen pro daný workspace, všechny dotazy nad citlivými tabulkami se zalogují a po expiraci se přístup sám ukončí. Žádné „necháme mu to do zítřka, kdyby něco“. Tohle „kdyby něco“ je hřbitov bezpečnostních slibů.
+
+## Interní akce loguj, ale nešmíruj
+
+Auditní stopa má odpovědět na otázky: kdo něco udělal, kdy, nad jakým účtem, z jakého důvodu a s jakým výsledkem. Nemá být druhým úložištěm citlivých dat. Pokud loguješ interní akci „support zobrazil e-mail“, loguj typ akce, ID zákazníka/workspace, interního uživatele, čas, důvod a výsledek. Neloguj celé znění e-mailu, poznámku zákazníka nebo payload formuláře.
+
+Dobré auditní události:
+
+- `admin.user_email_revealed` s důvodem, rolí a workspace ID,
+- `admin.billing_refund_created` s částkou, měnou, ticket ID a schvalovacím pravidlem,
+- `admin.session_revoked` s cílovým uživatelem a důvodem,
+- `admin.break_glass_started` a `admin.break_glass_expired`,
+- `admin.export_requested` s typem exportu, rozsahem a schválením.
+
+Špatné auditní události:
+
+- `note: zákazník říkal, že...` s osobním příběhem,
+- celý request body formuláře,
+- kopie faktury, dokumentu nebo zprávy v logu,
+- tajné tokeny „pro jistotu“.
+
+## Session a zařízení ber přísněji než veřejný web
+
+Admin rozhraní má vyšší riziko než běžná uživatelská část. Proto si zaslouží přísnější pravidla: samostatnou doménu nebo cestu, povinné MFA pro citlivé role, kratší idle timeout, absolutní timeout session, re-auth pro destruktivní akce a jasné ukončení session při změně role nebo odchodu člověka z týmu. OWASP u session managementu připomíná, že expirace má být vynucená server-side, ne jen JavaScriptem v prohlížeči.
+
+Praktické minimum:
+
+- Admin session odděl od běžné zákaznické session.
+- Po změně role nebo deaktivaci účtu revokuj aktivní session.
+- Citlivé akce potvrzuj re-auth krokem nebo silnějším faktorem.
+- Nepoužívej sdílené účty typu `support@firma`.
+- Ulož poslední přihlášení, zařízení a významné změny role do auditní stopy.
+
+## Support impersonation navrhni opatrně
+
+„Přihlásit se jako zákazník“ je lákavé tlačítko. Umí rychle vyřešit problém, ale taky obchází hranice mezi interním týmem a zákaznickým prostorem. Pokud impersonation opravdu potřebuješ, navrhni ho jako mimořádný režim, ne jako běžnou navigační zkratku.
+
+Bezpečnější pravidla:
+
+- Impersonation vyžaduje ticket ID nebo explicitní důvod.
+- Zákazník nebo vlastník workspace má možnost vidět, že impersonation proběhl, pokud to neohrozí bezpečnostní šetření.
+- Během impersonation nejdou měnit hesla, MFA, billing údaje ani exportovat data bez dalšího schválení.
+- UI jasně ukazuje, že interní člověk jedná v cizím účtu.
+- Každá akce se loguje jako interní akce, ne jako zákaznická aktivita.
+
+Ještě lepší alternativa je „view as“ režim bez možnosti měnit data: support vidí rozhraní podobné zákazníkovi, ale destruktivní akce zůstávají zamčené. Produktový tým má sice o jedno kouzelné tlačítko méně, ale právník a bezpečák budou dýchat normálněji. To je dobrá výměna.
+
+## Interní nástroje mají mít vlastní release rutinu
+
+Admin panel není sandbox pro rychlé hacky. Když umí měnit data zákazníků, zaslouží si stejné zacházení jako produkční produkt: code review, testy oprávnění, audit změn, feature flagy, rollback a dokumentaci. Nejčastější interní průšvihy nejsou hollywoodské útoky, ale „jen jsme přidali rychlé tlačítko pro support“ bez validace rozsahu.
+
+Před každou novou interní funkcí si polož otázky:
+
+- Jakou práci zrychluje?
+- Jaká osobní nebo zákaznická data ukazuje?
+- Která role ji smí použít?
+- Co se stane při chybě nebo omylu?
+- Jak akci vrátíme zpět?
+- Jak poznáme zneužití nebo podezřelé použití?
+
+Pokud na tyhle otázky neumíš odpovědět, funkce není „malá interní změna“. Je to produkční riziko s horším PR oddělením.
+
+## Checklist: admin bez datového průvanu
+
+- [ ] Máme sepsané interní práce a minimální data pro každou z nich.
+- [ ] Role jsou pojmenované podle činností, ne podle seniority nebo pohodlí.
+- [ ] Backend ověřuje oprávnění pro každou citlivou akci a konkrétní objekt.
+- [ ] Citlivá data jsou ve výchozím stavu maskovaná nebo nenačtená.
+- [ ] Break-glass přístup má důvod, expiraci, auditní stopu a následnou kontrolu.
+- [ ] Auditní log neobsahuje celé osobní údaje, tokeny ani zákaznický obsah.
+- [ ] Admin session má přísnější timeouty, MFA a revokaci při změně role.
+- [ ] Impersonation je omezený, viditelný a logovaný jako interní akce.
+- [ ] Exporty, refundy, změny rolí a destruktivní akce mají schválení nebo re-auth.
+- [ ] Interní nástroje procházejí code review a testem oprávnění před nasazením.
+
+## Mini šablona admin access karty
+
+```markdown
+# Admin access karta: [produkt / interní nástroj]
+
+## Interní práce
+Scénář:
+Kdo práci dělá:
+Jaké rozhodnutí dělá:
+
+## Data
+Minimální data nutná pro práci:
+Data maskovaná ve výchozím stavu:
+Data, která nesmí být dostupná:
+
+## Oprávnění
+Role:
+Povolené akce:
+Zakázané akce:
+Re-auth / MFA požadavek:
+
+## Break-glass
+Kdy je povolený:
+Maximální délka:
+Kdo dostane oznámení:
+Jak proběhne následná kontrola:
+
+## Audit
+Logované události:
+Retence auditní stopy:
+Co se do logu nikdy nesmí zapsat:
+
+## Review
+Datum poslední kontroly:
+Nalezené přebytečné přístupy:
+Další krok:
+```
+
+## Zdroje
+
+- OWASP Cheat Sheet Series: Authorization Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP Cheat Sheet Series: Session Management Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- OWASP Cheat Sheet Series: Business Logic Security Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Business_Logic_Security_Cheat_Sheet.html
+- EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default — https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+
 # Pracovní log
+
+- 2026-10-05: Doplněna příloha „Admin rozhraní a interní nástroje bez datového průvanu“ s mapou interních prací, rolemi podle činností, maskováním citlivých dat, break-glass režimem, auditními událostmi, pravidly pro admin session a impersonation, checklistem, admin access šablonou a ověřenými zdroji OWASP a EDPB.
 
 - 2026-10-05: Doplněna příloha „Externí skripty a CDN bez frontendového dodavatelského blešího trhu“ s inventářem externích zdrojů, pravidly pro self-hosting fontů/knihoven, omezením škod přes CSP/SRI/Referrer-Policy, governance tag manageru, rozhodovací maticí, checklistem, frontend supply-chain šablonou a ověřenými zdroji MDN a OWASP.
 
