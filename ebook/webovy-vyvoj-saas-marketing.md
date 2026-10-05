@@ -24412,6 +24412,58 @@ Otázky pro dodavatele:
 
 Když odpovědi nejsou jasné, drž klíče blíž u sebe. Pohodlný dashboard není dobrý obchod, pokud kvůli němu ztratíš kontrolu nad produkčními přístupy.
 
+
+## CI/CD tokeny a webhooky jako samostatné riziko
+
+Token v CI často umí nasadit aplikaci, publikovat image, stáhnout privátní balíčky nebo změnit infrastrukturu. Proto ho neposuzuj jako „proměnnou pro build“, ale jako produkční přístup s vlastním rizikem. Pojmenuj ho podle účelu, omez scope na konkrétní repozitář nebo projekt, odděl build token od deploy tokenu a nastav pravidlo, kdy se musí rotovat: odchod dodavatele, podezřelý log, změna oprávnění, incident nebo přesun pipeline.
+
+Webhook secret je podobný případ. Není to dekorace vedle URL endpointu, ale důkaz, že událost opravdu poslala daná služba. U plateb, fakturace, uploadů, automatizací a zákaznických integrací ověřuj podpis, kontroluj timestamp, chraň se proti replay útokům a zpracování dělej idempotentní. Do logu patří ID události, výsledek ověření a korelační ID, ne celý payload se zákaznickými daty.
+
+Malý provozní standard:
+
+- CI tokeny mají vlastníka, účel, scope a nouzový rotační postup.
+- Produkční deploy nejde spustit z libovolné větve bez auditní stopy.
+- Build logy maskují hodnoty a nikdy nevypisují celé connection stringy.
+- Webhook endpoint ověřuje podpis před zpracováním dat.
+- Opakovaná webhook událost nezpůsobí duplicitní platbu, e-mail nebo změnu tarifu.
+- Debug režim pro integrace má krátkou expiraci a nesbírá obsah, který support nepotřebuje.
+
+Codyho komentář: CI token a webhook secret jsou malé klíčky k velkým dveřím. Když je spravuješ jako poznámku pod čarou, jednou zjistíš, že poznámka pod čarou právě deploynula problém do produkce.
+
+## Mini šablona secrets policy karty
+
+```text
+# Secrets policy karta: [produkt / služba / integrace]
+
+## Rozsah
+Jaká tajemství karta pokrývá:
+Prostředí: lokál / staging / produkce / CI:
+Vlastník:
+
+## Uložení
+Kde jsou tajemství uložená:
+Kdo má přístup:
+Jak se přístup schvaluje:
+
+## Použití
+Které služby tajemství používají:
+Kde se tajemství nikdy nesmí objevit:
+Jak se chrání logy:
+
+## Rotace
+Běžný interval kontroly:
+Nouzový důvod rotace:
+Postup rotace:
+Fallback při problému:
+
+## Offboarding
+Kdy se rotuje po odchodu člověka nebo dodavatele:
+Kdo ověřuje dokončení:
+
+## Privacy-first poznámka
+Jak minimalizujeme osobní data v konfiguraci, logu a debug výstupech:
+```
+
 ## Checklist: tajemství bez úniku
 
 - Každé produkční tajemství má vlastníka, účel a místo uložení.
@@ -42482,177 +42534,8 @@ Retenční pravidlo musí být spustitelné. Pokud neumíš data najít a smazat
 +- NIST: Privacy Framework — https://www.nist.gov/privacy-framework/privacy-framework
 
 
-# Příloha: API klíče a tajemství bez `.env` archeologie
-
-Tajemství v malém SaaS nebývá jeden dramatický trezor s laserem jako ve filmu. Častěji je to směs API klíčů, databázových hesel, SMTP přístupů, webhook secretů, OAuth client secretů, tokenů pro CI, SSH klíčů a záložních admin účtů, které postupně přibývaly „jen na chvíli“. A protože „jen na chvíli“ je v IT časová jednotka s poločasem rozpadu jako plastová láhev, vyplatí se udělat pořádek dřív, než ho udělá incident.
-
-OWASP v Secrets Management Cheat Sheet popisuje potřebu centralizovat ukládání, provisioning, audit, rotaci a správu tajemství, protože tvrdě zapsané klíče v kódu a konfiguračních souborech jsou běžný zdroj průšvihů ([OWASP: Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)). Pro malý evropský tým to neznamená hned koupit nejdražší enterprise vault. Znamená to mít jeden srozumitelný model: kde tajemství vzniká, kdo ho vidí, kde se používá, jak se mění a jak rychle ho umíš zneplatnit.
-
-> Codyho komentář: `.env` soubor není hřích. Hřích je, když nikdo neví, kolik jeho kopií existuje, kdo je má v notebooku a jestli v něm pořád žije klíč k produkční databázi z doby, kdy logo ještě mělo gradient.
-
-## Rozliš konfiguraci a tajemství
-
-Ne každá proměnná prostředí je tajemství. `APP_ENV=production`, `PUBLIC_SITE_URL` nebo `FEATURE_FLAG_NEW_PRICING=false` jsou konfigurace. Databázové heslo, SMTP password, privátní klíč, webhook signing secret nebo token k platební bráně jsou tajemství. Míchat tyto dvě věci dohromady je praktické první týden a nebezpečné každý další měsíc.
-
-Jednoduché dělení:
-
-| Typ | Příklad | Jak s tím zacházet |
-| --- | --- | --- |
-| Veřejná konfigurace | veřejná URL, název prostředí | může být v repozitáři, pokud neprozrazuje interní riziko |
-| Interní konfigurace | název bucketu, hostname interní služby | mimo veřejný frontend, dokumentovat účel |
-| Tajemství | heslo, token, privátní klíč | nikdy necommitovat, ukládat v secrets manageru nebo bezpečném prostředí |
-| Vysoce citlivé tajemství | produkční DB root, podpisový klíč, master token | omezený přístup, samostatná rotace, audit použití |
-
-Důležité pravidlo: klientský frontend tajemství neudrží. Cokoliv pošleš do prohlížeče, ber jako veřejné. Pokud widget potřebuje skutečný secret, patří za backend, ne do JavaScript bundlu s cedulkou „prosím nekoukat“.
-
-## Udělej inventář podle prostředí
-
-Začni tabulkou, ne nákupem nástroje. Každé tajemství musí mít vlastníka, účel a prostředí. Bez toho nevíš, co rotovat, když odejde dodavatel, unikne notebook nebo někdo omylem pošle konfiguraci do issue.
-
-Minimální inventář:
-
-- název tajemství bez hodnoty,
-- prostředí: lokál, staging, produkce, CI,
-- služba, která ho používá,
-- vlastník v týmu,
-- kde je uložené,
-- kdo k němu má přístup,
-- kdy bylo naposledy otočené,
-- co se rozbije při zneplatnění,
-- postup nouzové rotace.
-
-Privacy-first poznámka: do inventáře nepiš samotné hodnoty. Inventář má být mapa, ne druhá trezorová místnost s horším zámkem.
-
-## Lokální vývoj drž pohodlný, ale oddělený
-
-Vývojář potřebuje lokálně pracovat bez tance s padesáti ručními kroky. Zároveň ale lokální pohodlí nesmí znamenat, že produkční klíče kolují po noteboocích. Praktický kompromis:
-
-- `.env.example` commituj s názvy proměnných a bezpečnými ukázkovými hodnotami,
-- skutečný `.env` přidej do `.gitignore`,
-- pro lokální vývoj používej oddělené testovací klíče a databáze,
-- produkční tajemství nedávej do lokálních setup návodů,
-- onboarding nového člověka řeš přes přidělení přístupu, ne posláním ZIPu s konfigurací,
-- offboarding musí zahrnovat rotaci sdílených tajemství, pokud taková ještě existují.
-
-Ukázka dobrého `.env.example`:
-
-```dotenv
-DATABASE_URL=postgres://app:app@localhost:5432/app_dev
-SMTP_HOST=localhost
-SMTP_PORT=1025
-PAYMENT_PROVIDER_API_KEY=replace-with-test-key
-WEBHOOK_SIGNING_SECRET=replace-with-local-secret
-```
-
-Ukázka špatně:
-
-```dotenv
-DATABASE_URL=postgres://prod_user:skutecne-heslo@prod-db.example/app
-STRIPE_SECRET_KEY=sk_live_...
-```
-
-Ano, vypadá to banálně. Přesně proto se to musí napsat. Největší provozní rizika často nevypadají jako hackerský film, ale jako pohodlná zkratka v onboarding dokumentu.
-
-## CI/CD tokeny ber jako produkční přístup
-
-Token v CI často umí víc, než si tým připouští: nasadit aplikaci, stáhnout artefakty, číst privátní balíčky, publikovat image nebo měnit infrastrukturu. Proto pro něj platí podobná pravidla jako pro administrátorský účet.
-
-Praktický postup:
-
-1. Každý CI secret pojmenuj podle účelu, ne podle člověka.
-2. Tokeny omez na konkrétní repozitář, projekt nebo registry scope.
-3. Používej samostatné tokeny pro build, deploy a publikaci balíčků.
-4. Zakaž vypisování tajemství v logu a testuj maskování výstupu.
-5. Rotuj token po změně dodavatele, incidentu nebo podezřelém logu.
-6. U produkčního deploye vyžaduj minimálně chráněnou větev a auditovatelný proces.
-
-OWASP Logging Cheat Sheet připomíná, že do logů nepatří přístupové tokeny, hesla, databázové connection stringy, šifrovací klíče ani data vyšší klasifikace, než jakou logovací systém smí držet ([OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). To je u CI extrémně důležité: build log se často čte mnohem volněji než produkční databáze, ale uniklý token z něj může mít produkční dopad.
-
-## Rotace musí být nacvičená, ne hrdinská
-
-Rotace tajemství není jen „vygeneruj nový klíč“. Je to malý release proces. Potřebuješ vědět, kde je starý klíč použitý, jak nasadit nový, jak ověřit provoz a kdy starý zneplatnit.
-
-Bezpečný rotační vzor:
-
-1. Vytvoř nový klíč vedle starého, pokud služba podporuje paralelní klíče.
-2. Nasaď aplikaci s novým klíčem.
-3. Ověř hlavní tok: login, platba, e-mail, webhook nebo integrace.
-4. Zneplatni starý klíč.
-5. Zkontroluj logy na chyby autentizace.
-6. Zapiš rotaci do inventáře.
-
-Když služba paralelní klíče neumí, napiš krátký plán výpadku nebo fallback. U malého B2B SaaS je férové přiznat „tahle integrace bude mít pět minut údržby“ lepší než potichu doufat, že deploy projde napoprvé.
-
-## Webhook secrety nejsou volitelná dekorace
-
-Webhook bez ověřování podpisu je pozvánka pro falešné události. Pokud ti externí služba říká „zákazník zaplatil“, „uživatel zrušil tarif“ nebo „soubor byl nahrán“, musíš ověřit, že zpráva opravdu přišla od ní a nebyla cestou změněna.
-
-Minimum pro webhooky:
-
-- používej podpisový secret nebo obdobný ověřovací mechanismus,
-- kontroluj timestamp a chraň se proti replay útokům,
-- loguj ID události a výsledek zpracování, ne celé payloady s osobními daty,
-- zpracování udělej idempotentní,
-- při chybě vrať jasný status a měj frontu nebo opakování,
-- secret rotuj stejně jako ostatní produkční tajemství.
-
-Privacy-first bonus: pokud nepotřebuješ ukládat celý webhook payload, neukládej ho. Vytáhni jen stav, ID a minimum dat potřebných pro audit a zákaznickou podporu.
-
-## Checklist: API klíče a tajemství bez archeologie
-
-- [ ] Máme inventář tajemství bez skutečných hodnot?
-- [ ] Rozlišujeme veřejnou konfiguraci, interní konfiguraci a tajemství?
-- [ ] Produkční tajemství nejsou v lokálních návodech ani `.env.example`?
-- [ ] `.env` je ignorovaný Gitem a repozitář je zkontrolovaný na historické úniky?
-- [ ] CI/CD tokeny mají minimální potřebný scope?
-- [ ] Build a deploy logy nevypisují tokeny, connection stringy ani payloady s osobními daty?
-- [ ] Každé produkční tajemství má vlastníka a rotační postup?
-- [ ] Umíme nouzově zneplatnit klíč bez lovení po Slacku?
-- [ ] Webhooky ověřují podpis a chrání se proti replay útokům?
-- [ ] Po offboardingu dodavatele víme, která sdílená tajemství otočit?
-
-## Mini šablona secrets policy karty
-
-```text
-# Secrets policy karta: [produkt / služba / integrace]
-
-## Rozsah
-Jaká tajemství karta pokrývá:
-Prostředí: lokál / staging / produkce / CI:
-Vlastník:
-
-## Uložení
-Kde jsou tajemství uložená:
-Kdo má přístup:
-Jak se přístup schvaluje:
-
-## Použití
-Které služby tajemství používají:
-Kde se tajemství nikdy nesmí objevit:
-Jak se chrání logy:
-
-## Rotace
-Běžný interval kontroly:
-Nouzový důvod rotace:
-Postup rotace:
-Fallback při problému:
-
-## Offboarding
-Kdy se rotuje po odchodu člověka nebo dodavatele:
-Kdo ověřuje dokončení:
-
-## Privacy-first poznámka
-Jak minimalizujeme osobní data v konfiguraci, logu a debug výstupech:
-```
-
-## Zdroje
-
-- [OWASP: Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
-- [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
-
-
 # Pracovní log
-- 2026-10-05: Doplněna příloha „API klíče a tajemství bez `.env` archeologie“ s inventářem secrets, pravidly pro lokální vývoj, CI/CD tokeny, rotaci, webhooky, checklistem a šablonou secrets policy karty.
+- 2026-10-05: Rozšířena příloha „API klíče a tajemství bez úniku do repozitáře“ o CI/CD tokeny, webhook secrety, provozní standard a šablonu secrets policy karty.
 
 - 2026-10-05: Doplněna příloha „Klasifikace dat bez korporátního štítkovacího divadla“ s jednoduchým modelem tříd dat, pravidly pro logování, admin, support, exporty, externí nástroje, retenci, checklistem, datovou klasifikační kartou a ověřenými zdroji Evropské komise, EDPB, ENISA a NIST.
 
