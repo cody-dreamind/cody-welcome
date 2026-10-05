@@ -42868,6 +42868,29 @@ Příklad:
 
 Retence nemusí být dokonale automatizovaná od prvního dne. Musí ale existovat pravidlo a vlastník. Jinak se z e-mailu stane historické muzeum osobních údajů, jen bez kurátora.
 
+## Bounce a chyby sleduj bez čtení obsahu
+
+Formulářový tok není hotový tím, že `send()` jednou vrátí úspěch. Potřebuješ vědět, jestli interní notifikace opravdu odešla, jestli ji poskytovatel odmítl, jestli se nepotkala s rate limitem a jestli se potvrzení zákazníkovi nevrací jako nedoručitelné. Zároveň ale nechceš z monitoringu udělat čítárnu soukromých zpráv.
+
+Praktický kompromis: loguj stav doručení a technický důvod, ne celý obsah formuláře. Ulož čas, typ formuláře, cílový interní alias, stav, kategorii chyby, korelační ID a odkaz na interní záznam s řízeným přístupem. Neukládej do logů zprávu zákazníka, telefon, tokeny, celé hlavičky ani přílohy. OWASP u logování doporučuje citlivé hodnoty z logů odstraňovat, maskovat nebo jinak chránit; u formulářů to není teorie, ale každodenní prevence datové skládky.
+
+Příklad bezpečnějšího provozního logu:
+
+```text
+event=form_email_delivery_failed
+form=contact_b2b
+direction=internal_notification
+status=bounced
+reason=recipient_rejected
+correlation_id=form_01J9C8K7...
+time=2026-10-05T10:15:00Z
+contains_message_body=false
+```
+
+Když chyba nastane, tým má mít runbook: zkontrolovat poskytovatele, ověřit DNS a autentizaci odesílatele, podívat se na poslední úspěšnou zprávu, ručně odbavit nevyřízené záznamy a po opravě poslat testovací formulář. Nečekej, až si zákazník všimne, že jste mu tři dny neodpověděli. Zákazník není monitoring. I když občas bohužel funguje líp než interní alerty.
+
+U potvrzení zákazníkovi je dobré rozlišit tvrdý bounce a dočasné selhání. Tvrdý bounce může znamenat překlep v e-mailu, dočasné selhání zase problém na trase. V obou případech interní tým nepotřebuje číst obsah zprávy v provozním logu. Potřebuje vědět, že odpověď nemusí dorazit a že má použít alternativní kontakt, pokud ho zákazník férově poskytl.
+
 ## Checklist: formulářové e-maily bez ztracených poptávek
 
 - [ ] Víme, kam putují data z každého formuláře?
@@ -42877,6 +42900,7 @@ Retence nemusí být dokonale automatizovaná od prvního dne. Musí ale existov
 - [ ] Každý formulář má vlastníka a náhradníka?
 - [ ] Existuje alternativní kontakt mimo formulář?
 - [ ] Chyby odesílání jdou do monitoringu nebo provozního alertu?
+- [ ] Bounce a rate-limit chyby logujeme bez obsahu zpráv a příloh?
 - [ ] Po nasazení testujeme formulář jako reálný uživatel?
 - [ ] Máme retenční pravidlo pro poptávky, support i obecné dotazy?
 - [ ] Umíme dohledat přijaté zprávy i při výpadku e-mailové notifikace?
@@ -42918,9 +42942,18 @@ Datum poslední kontroly:
 
 Formulářové e-maily jsou drobná infrastruktura důvěry. Když fungují, nikdo jim netleská. Když selžou, bolí to obchod, support i reputaci. Udělej je nudné, dohledatelné a datově střídmé — přesně ten typ nudy, která vydělává peníze a nenechává po sobě privacy paseku.
 
+## Zdroje
+
+- MDN Web Docs: Forms and buttons in HTML — https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/HTML_forms
+- MDN Web Docs: Using HTML form validation and the Constraint Validation API — https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Constraint_validation
+- OWASP Cheat Sheet Series: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default — https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+
 ---
 
 # Pracovní log
+
+- 2026-10-05: Rozšířena příloha „Formulářové e-maily bez ztracených poptávek a datového karnevalu“ o provozní sledování bounce/rate-limit chyb bez čtení obsahu zpráv, bezpečnější logovací příklad, doplněný checklist a ověřené zdroje MDN, OWASP a EDPB.
 
 - 2026-10-05: Doplněna příloha „Formulářové e-maily bez ztracených poptávek a datového karnevalu“ s datovou cestou formuláře, interními notifikacemi, potvrzením zákazníkovi, vlastnictvím odpovědi, plánem B, retencí, checklistem a vyplnitelným runbookem.
 
