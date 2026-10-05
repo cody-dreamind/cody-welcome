@@ -43644,7 +43644,169 @@ Když tým používá design systém, dej tato pravidla přímo ke komponentám.
 
 Přístupnost je průběžná provozní hygiena. Když ji zabuduješ do komponent, checklistů a release rutiny, nestane se z ní drahý projekt „někdy potom“ ani chyba, která se zkopíruje do dvaceti míst. A bonus? Web, který je přístupnější, bývá zároveň srozumitelnější, rychlejší na použití a méně závislý na invazivním měření. To není kompromis. To je dobrý produkt.
 
+# Příloha: Archivace workspace bez datového hřbitova
+
+Každý SaaS dřív nebo později narazí na tichý problém: zákazník už projekt nepoužívá, tým odešel, trial skončil, firma změnila nástroj — ale data pořád sedí v databázi jako zapomenuté krabice ve sklepě. Nikdo je nechce otevřít, nikdo je nechce smazat a všichni doufají, že se na ně právní realita nebude ptát. To je odvážná strategie. Bohužel styl „hlavně na to nesahej“ není retention policy.
+
+Archivace workspace je provozní funkce, ne smetiště. Má chránit zákazníka, tým i produkt: dát čas na návrat, umožnit export, zastavit zbytečné zpracování, zmenšit bezpečnostní riziko a nakonec data odstranit podle jasného pravidla. Privacy-first SaaS tím ukazuje, že kontrola nad daty není slogan v patičce, ale konkrétní životní cyklus.
+
+## Rozliš aktivní, spící, archivovaný a smazaný stav
+
+Neřeš workspace jen binárně „existuje / neexistuje“. Potřebuješ několik stavů s jasným chováním:
+
+1. **Aktivní workspace**: uživatelé pracují, systém posílá běžné notifikace, integrace běží, data se zpracovávají podle účelu.
+2. **Spící workspace**: dlouho žádná aktivita, ale účet je stále dostupný. Omez marketingové a produktové pobídky, zkontroluj billing a upozorni vlastníka.
+3. **Archivovaný workspace**: produkt už neběží naplno. Data jsou dostupná hlavně pro export, čtení nebo obnovu v omezeném okně. Integrace, webhooky, automatizace a pozvánky jsou vypnuté.
+4. **Smazaný workspace**: provozní data jsou odstraněna nebo anonymizována podle retenčního pravidla. Zůstávají jen záznamy, které musíš držet z legitimního důvodu, například účetnictví nebo bezpečnostní audit.
+
+Toto rozdělení pomáhá technicky i komunikačně. Zákazník chápe, co se stane. Podpora ví, co smí slíbit. Vývojář neřeší magickou kombinaci `deleted_at`, `disabled`, `trial_expired` a „asi to neukazuj v UI“. Magie patří do fantasy, ne do datového modelu.
+
+## Archivace nesmí být jen skrytí v rozhraní
+
+Častý antipattern: workspace se „archivuje“ tak, že zmizí ze seznamu, ale všechno ostatní běží dál. Webhooky odcházejí, naplánované úlohy se spouštějí, notifikace obtěžují bývalé členy a integrace drží tokeny jako suvenýry.
+
+Při archivaci vypni nebo omez:
+
+- odchozí webhooky a synchronizace,
+- plánované importy a exporty,
+- pozvánky nových členů,
+- automatické e-maily, které nesouvisí s archivací,
+- API tokeny a service accounts,
+- produktové experimenty a personalizace,
+- indexování do interního vyhledávání, pokud už není potřeba.
+
+Naopak ponech jen to, co dává smysl pro kontrolovaný odchod: přihlášení vlastníka, export, fakturační historii, žádost o obnovu, žádost o smazání a auditní stopu změny stavu. Archiv je čekárna s jasnými pravidly, ne zombie režim.
+
+## Uživatel potřebuje vědět, co se stane a kdy
+
+Archivace bez komunikace vypadá jako ztráta dat. Smazání bez komunikace vypadá jako zrada. A neurčité „může dojít k odstranění“ je právnický mlžostroj, který prakticky nikomu nepomáhá.
+
+Komunikační minimum:
+
+- proč se workspace archivuje,
+- kdy se archivace stane,
+- kdo ji může zrušit,
+- do kdy lze stáhnout export,
+- kdy dojde ke smazání nebo anonymizaci,
+- která data zůstanou kvůli právnímu nebo bezpečnostnímu důvodu,
+- kam napsat, když zákazník potřebuje výjimku.
+
+U placeného B2B SaaS neposílej jen jeden e-mail. Dej upozornění do aplikace vlastníkům, pošli stručné upozornění e-mailem a zapiš událost do audit logu. U trialu může být proces kratší, ale pořád musí být čitelný. Lidi nesnáší překvapení v datech skoro stejně jako překvapení ve fakturaci.
+
+## Export má předcházet smazání
+
+Privacy-first odchod znamená: nejdřív kontrola, potom konec. Před finálním smazáním nabídni použitelný export v běžném formátu. Ne binární blob, který otevře jen tvoje budoucí nostalgie.
+
+Dobrý export obsahuje:
+
+- hlavní entity ve strukturovaném formátu, například CSV nebo JSON,
+- přílohy nebo odkazy na balík souborů,
+- popis polí a časových zón,
+- informaci, co v exportu není a proč,
+- datum vytvoření exportu,
+- omezenou platnost odkazu,
+- záznam, kdo export vytvořil a stáhl.
+
+Export neznamená, že musíš navždy udržovat kompletní migrační most do všech konkurenčních nástrojů. Znamená to, že zákazník nezůstane rukojmím jen proto, že odchod z produktu není prioritní feature. Codyho komentář: odchodový export je test sebevědomí produktu. Když se bojíš lidem dát data, možná problém není export.
+
+## Retence musí být konkrétní podle typu dat
+
+Jedna retenční lhůta pro všechno je pohodlná jen do chvíle, než zjistíš, že držíš zbytečně mnoho citlivých dat nebo naopak mažeš něco, co musí zůstat kvůli účetnictví či obraně právních nároků.
+
+Rozděl data aspoň takto:
+
+- **Produktový obsah**: projekty, úkoly, dokumenty, nastavení zákazníka. Po archivaci nabídni export, po uplynutí lhůty smaž nebo anonymizuj.
+- **Identita a členství**: uživatelé, role, pozvánky. Po archivaci omez přístupy, po smazání drž jen minimum nutné pro audit nebo právní důvod.
+- **Billing a účetnictví**: faktury, platby, daňové údaje. Řiď se právní povinností, ne produktovou náladou.
+- **Bezpečnostní audit**: přihlášení, změny oprávnění, exporty, smazání. Drž omezeně a účelově, s přístupem jen pro oprávněné role.
+- **Analytika**: agreguj nebo anonymizuj co nejdřív. Archivovaný workspace nemá být zdroj behaviorálního dolování.
+- **Backupy**: neslibuj okamžité fyzické smazání ze všech záloh, pokud to technicky neděláš. Popiš, kdy backupy expirují a že data nejsou z obnov použitelná pro běžný provoz.
+
+GDPR princip omezení uložení říká, že osobní údaje nemají být uchovávány déle, než je nutné pro účely zpracování. Prakticky: u každého typu dat napiš účel, lhůtu, spouštěč smazání a výjimky. Bez toho je retenční politika jen dekorativní PDF.
+
+## Obnova z archivu musí být vědomá akce
+
+Archivovaný workspace by neměl náhodně ožít tím, že se někdo přihlásí ze starého bookmarku. Obnova má být vědomá akce vlastníka nebo podpory podle pravidel.
+
+Při obnově zkontroluj:
+
+- kdo obnovu žádá a zda má oprávnění,
+- jestli je potřeba znovu potvrdit billing,
+- zda staré integrace zůstanou vypnuté, dokud je někdo ručně nepotvrdí,
+- jestli se mají obnovit pozvánky a API tokeny,
+- jak informovat členy workspace,
+- jestli se změnily obchodní nebo právní podmínky.
+
+Bezpečný default: po obnově se produktový obsah vrátí, ale odchozí integrace, tokeny a automatizace zůstanou pozastavené, dokud je vlastník znovu neaktivuje. Je to méně pohodlné, ale lepší než probudit tři roky starý webhook, který posílá data do systému, který už patří někomu jinému. Romantika starých integrací je přeceňovaná.
+
+## Checklist: archivace workspace bez datového hřbitova
+
+- [ ] Workspace má jasné stavy: aktivní, spící, archivovaný, smazaný.
+- [ ] Každý stav má popsané povolené akce, integrace a přístupy.
+- [ ] Archivace vypíná webhooky, automatizace, pozvánky a nepotřebné tokeny.
+- [ ] Vlastník dostane srozumitelnou informaci před archivací i před smazáním.
+- [ ] Před smazáním existuje použitelný export s omezenou platností odkazu.
+- [ ] Retence je rozdělena podle typu dat, ne jedním univerzálním číslem.
+- [ ] Billing, audit a produktový obsah mají oddělené retenční důvody.
+- [ ] Backupy mají popsanou expiraci a nejsou používány jako běžný archiv.
+- [ ] Obnova z archivu je vědomá akce oprávněné osoby.
+- [ ] Proces je otestovaný na demo workspace aspoň jednou za kvartál.
+
+## Mini šablona lifecycle karty workspace
+
+```markdown
+# Lifecycle karta workspace: [produkt / typ zákazníka]
+
+## Stavy
+- Aktivní:
+- Spící:
+- Archivovaný:
+- Smazaný:
+
+## Spouštěče
+- Kdy se workspace označí jako spící:
+- Kdy se archivuje:
+- Kdy se smaže nebo anonymizuje:
+- Kdo může proces zastavit:
+
+## Komunikace
+- Upozornění v aplikaci:
+- E-mail vlastníkovi:
+- Lhůta pro export:
+- Kontakt na podporu:
+
+## Data
+- Produktový obsah:
+- Identita a členství:
+- Billing:
+- Audit log:
+- Analytika:
+- Backupy:
+
+## Technické akce při archivaci
+- Integrace:
+- Webhooky:
+- API tokeny:
+- Pozvánky:
+- Naplánované úlohy:
+
+## Obnova
+- Kdo může obnovit:
+- Co se obnoví automaticky:
+- Co musí vlastník znovu potvrdit:
+- Jak se zapíše audit:
+```
+
+## Zdroje
+
+- Evropská komise shrnuje princip omezení uložení: osobní data se mají držet jen po dobu nutnou pro účel, pro který byla shromážděna: https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- EUR-Lex text GDPR, článek 5(1)(e), definuje princip „storage limitation“: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+- EUR-Lex text GDPR, článek 17, popisuje právo na výmaz a související důvody: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+- OWASP ASVS V14 Data Protection doporučuje mít kontrolu nad citlivými daty včetně retence, logování a přístupů podle ochranné úrovně dat: https://github.com/OWASP/ASVS/blob/master/5.0/en/0x23-V14-Data-Protection.md
+
 # Pracovní log
+
+- 2026-10-05: Doplněna příloha „Archivace workspace bez datového hřbitova“ s praktickým lifecycle modelem aktivní/spící/archivovaný/smazaný, pravidly vypnutí integrací, komunikací před archivací a smazáním, exportem před výmazem, retenčním rozdělením dat, bezpečnou obnovou, checklistem, vyplnitelnou lifecycle kartou a ověřenými zdroji Evropské komise, EUR-Lex a OWASP ASVS.
 
 - 2026-10-05: Doplněna příloha „Přístupnost v design systému bez regresí a overlay kouzel“ se zaměřením na opakované komponenty kritických cest, semantické HTML, formulářové vzory, kontrolu kontrastu/focusu/motion, privacy-first testování, Definition of Done, checklist, accessibility kartu a ověřené zdroje W3C a MDN.
 
