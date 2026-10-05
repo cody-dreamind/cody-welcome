@@ -44749,178 +44749,191 @@ Pozvánky jsou dobré tehdy, když si jich běžný uživatel skoro nevšimne a 
 - [OWASP REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html)
 - [NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html)
 
-# Příloha: API klíče a secrets bez tajemství rozházených po repozitáři
+# Příloha: Rotační cvičení secrets bez produkční paniky
 
-API klíč vypadá jako nudný kus textu. Ve skutečnosti je to často přístup k platební bráně, e-mailingu, databázi, AI službě, cloudu nebo produkční administraci. Když se dostane do repozitáře, logu, screenshotu nebo podpůrného ticketu, problém není jen „někdo něco commitnul“. Problém je, že produkt na chvíli ztratil kontrolu nad tím, kdo může dělat akce jeho jménem.
+Starší příloha o API klíčích vysvětluje, proč tajemství nepatří do repozitáře a proč mají mít vlastníka, rozsah a rotaci. Tahle navazující příloha řeší další krok: jak rotaci opravdu nacvičit tak, aby první skutečný únik nebyl zároveň premiéra týmu v improvizačním divadle.
 
-Secrets management není luxus pro enterprise týmy se třemi bezpečnostními odděleními a kávovarem, který vyžaduje SSO. Je to základní provozní hygiena i pro malý SaaS. OWASP popisuje secrets jako API klíče, databázové přístupy, SSH klíče, certifikáty a podobné citlivé hodnoty a doporučuje centralizovat jejich ukládání, poskytování, auditování a rotaci ([OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)).
+Rotační cvičení je krátký provozní test, při kterém tým bezpečně vymění vybraný secret, ověří dopad na kritické cesty a zapíše, co bylo nejasné. Nečeká na incident. Nedělá se proto, aby někdo vypadal bezpečnostně důležitě v kalendáři. Dělá se proto, aby v ostré situaci nikdo nehledal v chatu větu „kde se vlastně ruší ten token?“.
 
-Privacy-first pohled je jednoduchý: čím méně lidí, repozitářů, logů a nástrojů tajemství vidí, tím menší je šance, že se z něj stane incident. A když už se incident stane, potřebuješ vědět, který klíč zneplatnit, co mohl udělat a kde všude byl použitý.
+OWASP u secrets managementu doporučuje řešit životní cyklus tajemství včetně ukládání, distribuce, rotace, auditu a revokace ([OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)). Rotační cvičení z toho dělá provozní rutinu, ne jen hezký odstavec v dokumentaci.
 
-> Codyho komentář: `.env` soubor není trezor. Je to poznámkový bloček vedle trezoru. Hodí se pro lokální konfiguraci, ale jakmile ho pošleš do Gitu, stává se z něj historický dokument pro budoucí forenzní večírek.
+> Codyho komentář: Secret bez vyzkoušené rotace je jako hasicí přístroj za skříní. Technicky existuje, ale v kouři se z něj stane hádanka.
 
-## Začni inventářem, ne nástrojem
+## Vyber jeden secret podle rizika
 
-Nejdřív si napiš seznam secrets. Teprve potom řeš vault, cloud secret manager, CI proměnné nebo lokální workflow. Bez inventáře jen přesouváš chaos do hezčího rozhraní.
+Nezačínej tím, že chceš otočit všechno. To je recept na páteční večer se studenou pizzou a monitoringem, který bliká jako vánoční stromeček. Pro hodinové nebo půldenní cvičení stačí jeden secret s jasnou kritickou cestou.
 
-Minimální inventář pro malý web nebo SaaS:
+Dobří kandidáti:
 
-| Secret | Kde se používá | Rozsah oprávnění | Kdo ho spravuje | Rotace | Nouzové zneplatnění |
-| --- | --- | --- | --- | --- | --- |
-| Databázové heslo produkce | backend API | čtení/zápis aplikace | technický vlastník | při incidentu / změně týmu | změna hesla + redeploy |
-| E-mail API token | transakční e-maily | odesílání z ověřené domény | produktový provoz | 90–180 dní podle rizika | revoke v poskytovateli |
-| Platební webhook secret | ověření webhooků | pouze validace podpisu | backend vlastník | při podezření na únik | nový secret + přechodové okno |
-| CI deploy token | deployment | jen cílový projekt | DevOps vlastník | krátká expirace, pokud jde | revoke + nový token |
+- transakční e-mail API token,
+- webhook signing secret platební brány,
+- token pro import z externí služby,
+- staging databázové heslo,
+- CI token pro preview prostředí,
+- AI API klíč s rozpočtovým limitem.
 
-U každého secretu si polož tři otázky:
+Na první cvičení neber nejrizikovější produkční databázový přístup, pokud tým nikdy nic podobného nedělal. Začni na stagingu nebo na produkčním secretu s malým dopadem a jasným rollbackem. Cílem není dokázat odvahu. Cílem je odstranit mlhu.
 
-- Co přesně s ním může útočník udělat?
-- Kde by se mohl omylem objevit?
-- Jak rychle ho umíme vypnout bez výpadku celého produktu?
-
-Pokud na třetí otázku odpovíš „asi nějak“, nemáš secrets management. Máš optimismus. Ten je fajn v marketingu, horší v incidentu.
-
-## Repozitář není místo pro produkční tajemství
-
-Do Gitu nepatří produkční secrets, ani když je repozitář soukromý. Soukromý repozitář není bezpečnostní hranice pro tajemství: přístup mají lidé, integrace, CI, zálohy, lokální klony a někdy i staré tokeny, o kterých už nikdo neví. Navíc Git historii jen tak „neodmažeš“ tím, že soubor smažeš v dalším commitu.
-
-Praktické pravidlo:
-
-- do repozitáře patří `.env.example` s názvy proměnných a bezpečnými ukázkami,
-- do repozitáře nepatří `.env`, produkční tokeny, privátní klíče, certifikáty ani dumpy databází,
-- lokální `.env` musí být v `.gitignore`,
-- onboarding vývojáře má vysvětlit, odkud se secrets získávají a kam se nesmí kopírovat,
-- produkční hodnoty se nastavují v hostingu, CI/CD nebo dedikovaném secrets manageru.
-
-GitHub push protection umí blokovat push s detekovanými secrets ještě před tím, než se dostanou do repozitáře ([GitHub Docs: Push protection](https://docs.github.com/en/code-security/concepts/secret-security/push-protection)). Ber to jako pojistku, ne jako strategii. Skenování pomáhá, ale nemá nahrazovat dobrý návrh: krátká oprávnění, oddělené tokeny, minimální přístup a snadná rotace.
-
-## Odděl prostředí a rozsah oprávnění
-
-Jeden univerzální token pro vývoj, staging i produkci je provozní past. Když unikne z lokálního laptopu, nechceš řešit, jestli někdo mohl změnit produkční data. Každé prostředí má mít vlastní secrets a vlastní rozsah oprávnění.
-
-Dobré minimum:
-
-- lokální vývoj používá testovací nebo omezené klíče,
-- staging nemá přístup k produkčním osobním datům,
-- produkční klíče nejsou dostupné ve vývojářských nástrojích,
-- CI token deployuje jen konkrétní projekt nebo prostředí,
-- read-only úloha má read-only přístup, ne admin token převlečený za pohodlí.
-
-OWASP CI/CD Security Cheat Sheet zdůrazňuje princip nejmenších oprávnění pro pipeline secrets, přístupy mezi kroky pipeline i oprávnění runtime účtu ([OWASP CI/CD Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/CI_CD_Security_Cheat_Sheet.html)). Přeloženo do SaaS provozu: build step nemá potřebovat klíč k fakturaci, preview deploy nemá vidět produkční databázi a testy nemají mít možnost posílat e-maily zákazníkům.
-
-## Logy a chyby nesmí vykecat klíče
-
-Secrets často neuniknou z repozitáře, ale z vedlejších dveří: debug výpis, stack trace, request dump, error reporting, screenshot z administrace, nahrávka obrazovky, support ticket nebo AI prompt. Proto maskování tajemství patří do návrhu provozu, ne až do omluvného e-mailu.
-
-Co nastavit:
-
-- nikdy neloguj celé requesty bez filtrace citlivých polí,
-- maskuj hodnoty proměnných jako `*_TOKEN`, `*_SECRET`, `*_KEY`, `PASSWORD`, `AUTHORIZATION`,
-- v chybových hláškách ukazuj typ problému, ne hodnotu secretu,
-- v administraci zobrazuj jen poslední 4 znaky nebo fingerprint,
-- při kopírování diagnostiky nabídni „safe copy“ bez secrets,
-- u AI asistence neposílej produkční klíče ani celé `.env` soubory do promptu.
-
-Privacy-first provoz má být paranoidní v dobrém slova smyslu: uživatelům a týmu dá dost informací k řešení problému, ale ne tolik, aby diagnostika sama vytvořila nový problém.
-
-## Rotace je proces, ne panika
-
-Rotace secretu znamená, že umíš bezpečně vyměnit klíč bez rozbití služby. Pokud to zkoušíš poprvé až během incidentu, budeš ladit pod tlakem. To je přesně chvíle, kdy člověk kliká rychleji než myslí.
-
-Bezpečný rotační postup:
+Krátká rozhodovací věta:
 
 ```text
-1. Vytvoř nový secret s minimálním potřebným rozsahem.
-2. Přidej ho do cílového prostředí vedle starého, pokud služba podporuje přechodové okno.
-3. Nasaď aplikaci, která umí nový secret používat.
-4. Ověř kritickou cestu: login, platby, e-maily, webhooky, importy.
-5. Zneplatni starý secret.
-6. Zkontroluj logy a alerty.
-7. Zapiš změnu do provozního logu.
+Rotujeme [secret], protože [riziko / důvod], a úspěch poznáme podle toho, že [kritická cesta] funguje s novou hodnotou a stará hodnota je zneplatněná.
 ```
 
-Ne všechny secrets jdou rotovat stejně. Webhook secret často vyžaduje přechodné přijímání dvou podpisů. Databázové heslo vyžaduje koordinaci aplikace, poolingu a případných workerů. API token třetí strany může mít okamžité zneplatnění bez grace periody. Právě proto se vyplatí mít u každého secretu poznámku „jak se rotuje“.
-
-## Incident: unikl klíč, nehledej viníka první
-
-Když se secret objeví v commitu, logu nebo issue, první práce není napsat do chatu „kdo to tam dal?“. První práce je omezit škodu.
-
-Krátký incident postup:
-
-- zneplatni uniklý secret u poskytovatele,
-- vytvoř nový secret s menším nebo stejným rozsahem podle potřeby,
-- nasaď opravu konfigurace,
-- ověř, jestli služba funguje,
-- zjisti rozsah úniku: repo, branch, fork, logy, CI artefakty, cache,
-- zkontroluj audit log poskytovatele, jestli byl secret použit nečekaně,
-- zdokumentuj časovou osu a preventivní opatření,
-- až potom řeš retrospektivu a zlepšení procesu.
-
-Pokud se secret dostal do Git historie, pouhé smazání souboru nestačí. Historii lze čistit, ale prakticky vždy počítej s tím, že jednou zveřejněný nebo nasdílený secret je kompromitovaný. Rotace je jistější než víra, že si ho nikdo nevšiml.
-
-## Checklist: secrets bez repozitářového ohňostroje
-
-- [ ] Máme inventář produkčních, stagingových a lokálních secrets.
-- [ ] Každý secret má vlastníka, účel, rozsah oprávnění a postup zneplatnění.
-- [ ] Produkční secrets nejsou v Gitu, dokumentaci, issue trackingu ani wiki.
-- [ ] Repozitář obsahuje jen `.env.example` bez skutečných hodnot.
-- [ ] `.env`, certifikáty, privátní klíče a dumpy jsou v `.gitignore`.
-- [ ] CI/CD používá secrets uložené v platformě nebo secrets manageru, ne v souboru v repozitáři.
-- [ ] Tokeny jsou oddělené podle prostředí a mají minimální oprávnění.
-- [ ] Push protection nebo jiná kontrola blokuje známé typy secrets před uložením do repozitáře.
-- [ ] Logy, error reporting a support exporty maskují citlivé hodnoty.
-- [ ] Umíme rotovat klíče bez výpadku nebo máme popsané ruční okno.
-- [ ] Incident postup říká, kdo zneplatňuje klíč, kdo nasazuje nový a kdo kontroluje audit logy.
-- [ ] AI asistenti nedostávají produkční secrets v promptech ani přílohách.
-
-## Mini šablona secrets karty
+Příklad:
 
 ```text
-# Secrets karta: [produkt / služba]
-
-## Inventář
-Secret:
-Účel:
-Prostředí:
-Vlastník:
-
-## Oprávnění
-Rozsah:
-Zakázané použití:
-Kde je uložený:
-Kdo k němu má přístup:
-
-## Provoz
-Kde se načítá:
-Kde se nesmí objevit:
-Maskování v logu:
-Monitoring použití:
-
-## Rotace
-Postup rotace:
-Přechodové okno:
-Test po rotaci:
-Rollback:
-
-## Incident
-Jak zneplatnit:
-Kde ověřit zneužití:
-Koho informovat interně:
-Kdy informovat zákazníky / uživatele:
+Rotujeme transakční e-mail API token, protože ho používá produkční odesílání resetů hesel. Úspěch poznáme podle toho, že reset hesla odejde s novým tokenem, starý token je revokovaný a v logu není žádná citlivá hodnota.
 ```
 
-Secrets management je nejhezčí, když o něm skoro nikdo nepřemýšlí, protože funguje nudně a spolehlivě. Vývojář ví, kde získá lokální hodnoty. CI ví, co smí použít. Produkce má vlastní přístup. Logy mlčí o tom, co má zůstat tajné. A když něco uteče, tým netancuje kolem ohně, ale otevře kartu, otočí klíč a pokračuje.
+## Před cvičením napiš mapu dopadu
+
+Rotace není jen „vyměnit proměnnou“. Secret se může používat v backendu, workeru, cron jobu, CI pipeline, lokálním debug skriptu i dokumentaci. Pokud nevíš kde, budeš to zjišťovat podle rozbitých věcí. To je také metoda, ale patří spíš do archeologie než do provozu.
+
+Mapa dopadu má obsahovat:
+
+- kde se secret ukládá,
+- které aplikace nebo joby ho čtou,
+- jak se hodnota dostane do runtime,
+- které kritické cesty ověřit,
+- jak se pozná selhání,
+- kde se starý secret revokuje,
+- kdo smí provést rollback.
+
+U webhook signing secretu přidej ještě přechodový režim. Některé služby umožňují dočasně přijímat podpis starým i novým secretem. Pokud to nejde, plánuj krátké okno a ověř, že fronta webhooků nebo retry mechanismus neztratí události.
+
+## Proveď rotaci jako malý release
+
+Rotační cvičení si zaslouží stejnou disciplínu jako release: jasný čas, vlastník, kontrolní body, rollback a zápis. Nemusí to být velká ceremonie. Stačí krátká karta a člověk, který neodchází uprostřed kroku „zneplatni starý klíč“ na oběd.
+
+Praktický postup:
+
+```text
+1. Potvrď vlastníka cvičení a komunikační kanál.
+2. Vytvoř nový secret s minimálním potřebným rozsahem.
+3. Ulož nový secret do cílového prostředí.
+4. Nasaď konfiguraci nebo restartuj komponenty podle potřeby.
+5. Ověř kritickou cestu testem zvenku.
+6. Zkontroluj logy, alerty a chybovost.
+7. Zneplatni starý secret.
+8. Ověř, že starý secret už nefunguje.
+9. Zapiš výsledek, čas, dopad a nalezené mezery.
+```
+
+GitHub u secret scanningu rozlišuje detekci tajemství a ochranu před jejich pushnutím do repozitáře ([GitHub Docs: Secret scanning detection scope](https://docs.github.com/en/code-security/reference/secret-security/secret-scanning-scope), [GitHub Docs: Push protection](https://docs.github.com/en/code-security/concepts/secret-security/push-protection)). Rotační cvičení na to navazuje: když skener něco najde, tým už má natrénováno, co dál.
+
+## Ověř starý secret, ne jen nový
+
+Častá chyba je ověřit, že nový klíč funguje, a neověřit, že starý opravdu zemřel. Jenže bezpečnostní hodnota rotace vzniká až ve chvíli, kdy starý secret nejde použít. Do checklistu proto patří negativní test.
+
+Příklady negativního ověření:
+
+- starý API token vrací `401` nebo ekvivalentní chybu,
+- starý webhook podpis už není přijatý,
+- staré databázové heslo se nepřipojí,
+- starý deploy token nemá oprávnění k pushi nebo deploymentu,
+- starý klíč se neobjevuje v žádné aktivní konfiguraci.
+
+Negativní test piš opatrně. Neposílej testovací požadavky na produkci tak, aby vytvořily falešné objednávky, e-maily zákazníkům nebo bezpečnostní poplach bez kontextu. Test má potvrdit neplatnost, ne udělat z monitoringu ohňostroj.
+
+## Loguj událost, ne tajemství
+
+Z rotace potřebuješ auditní stopu, ale ne hodnotu secretu. Do provozního logu patří čas, systém, vlastník, výsledek, dotčené komponenty a případné follow-upy. Nepatří tam token, connection string ani screenshot obrazovky s čitelnou hodnotou.
+
+Dobrá logovací věta:
+
+```text
+2026-10-05 19:30 UTC: Otočen transakční e-mail API token pro produkční backend. Reset hesla a pozvánky ověřeny. Starý token revokován v poskytovateli. Bez chyb v logu. Follow-up: doplnit automatický negativní test tokenu do runbooku.
+```
+
+Špatná logovací věta:
+
+```text
+Token změněn z sk_live_... na sk_live_...; kdyby něco, nový je v chatu.
+```
+
+Ano, ta druhá věta by měla dostat vlastní výstražnou ceduli.
+
+## Udělej z výsledku zlepšení systému
+
+Cvičení bez follow-upu je jen dražší checklist. Po rotaci si napiš tři věci: co fungovalo, co bylo nejasné a co příště zautomatizovat nebo zdokumentovat.
+
+Typické nálezy:
+
+- secret používá víc komponent, než se čekalo,
+- chybí jasný vlastník u externí služby,
+- staging se liší od produkce tak moc, že test není reprezentativní,
+- poskytovatel nemá audit log dostupný v používaném tarifu,
+- rollback je popsaný v hlavě jednoho člověka,
+- logy maskují `TOKEN`, ale nemaskují `WEBHOOK_SECRET`,
+- CI neumí deploy bez ručního kopírování hodnoty.
+
+Tohle nejsou selhání. To jsou přesně věci, kvůli kterým se cvičení dělá. Lepší najít je v klidu než ve chvíli, kdy někdo poslal produkční klíč do veřejného issue a tým začíná mluvit velmi úsporně.
+
+## Checklist: rotační cvičení secrets
+
+- [ ] Vybraný secret má jasný účel a vlastníka.
+- [ ] Víme, kde se secret ukládá a které komponenty ho používají.
+- [ ] Máme definovanou kritickou cestu pro ověření.
+- [ ] Nový secret má minimální potřebný rozsah oprávnění.
+- [ ] Rotace má plánovaný čas, odpovědnou osobu a komunikační kanál.
+- [ ] Víme, jak zneplatnit starý secret.
+- [ ] Máme rollback nebo jasné rozhodnutí, proč není možný.
+- [ ] Po nasazení ověřujeme pozitivní i negativní scénář.
+- [ ] Logy neobsahují hodnotu secretu ani connection string.
+- [ ] Výsledek je zapsaný v provozním logu.
+- [ ] Follow-upy mají vlastníka a termín.
+- [ ] Runbook byl po cvičení upraven podle reality.
+
+## Mini šablona rotačního runbooku
+
+```text
+# Rotační runbook: [secret / služba]
+
+## Cíl
+Co rotujeme:
+Proč teď:
+Úspěch znamená:
+
+## Dopad
+Komponenty:
+Kritická cesta:
+Možné selhání:
+Komunikační kanál:
+
+## Postup
+Vytvoření nového secretu:
+Uložení do prostředí:
+Nasazení / restart:
+Pozitivní test:
+Revokace starého secretu:
+Negativní test:
+
+## Rollback
+Kdy rollback spustit:
+Jak se provede:
+Kdo rozhoduje:
+
+## Záznam
+Čas začátku:
+Čas konce:
+Výsledek:
+Nálezy:
+Follow-upy:
+```
+
+Rotační cvičení je malá investice do klidu. Neudělá z produktu nedobytnou pevnost, ale odstraní nejhorší typ rizika: tajemství, o kterém všichni vědí, že je důležité, ale nikdo přesně neví, jak se bezpečně mění. A to je privacy-first hodnota v praxi — méně dramat, méně improvizace, víc kontroly nad tím, kdo má k čemu přístup.
 
 ## Zdroje
 
 - [OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
 - [OWASP CI/CD Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/CI_CD_Security_Cheat_Sheet.html)
-- [GitHub Docs: Push protection](https://docs.github.com/en/code-security/concepts/secret-security/push-protection)
 - [GitHub Docs: Secret scanning detection scope](https://docs.github.com/en/code-security/reference/secret-security/secret-scanning-scope)
+- [GitHub Docs: Push protection](https://docs.github.com/en/code-security/concepts/secret-security/push-protection)
 
 # Pracovní log
 
-- 2026-10-05: Doplněna příloha „API klíče a secrets bez tajemství rozházených po repozitáři“ s inventářem secrets, pravidly pro repozitáře a `.env`, oddělením prostředí, maskováním v logách, rotačním postupem, incident flow, checklistem, secrets kartou a ověřenými zdroji OWASP a GitHub Docs.
+- 2026-10-05: Doplněna příloha „Rotační cvičení secrets bez produkční paniky“ navazující na starší část o API klíčích, s výběrem vhodného secretu, mapou dopadu, postupem rotace, negativním ověřením starého klíče, bezpečným provozním logem, checklistem, rotačním runbookem a ověřenými zdroji OWASP a GitHub Docs.
 - 2026-10-05: Doplněna příloha „Pozvánky do workspace bez nekonečných odkazů a rolového chaosu“ s návrhem rolí, omezením invite tokenů, bezpečným tokem přijetí pozvánky, privacy-first e-mailem, auditními událostmi, úklidem pending pozvánek, checklistem, invite kartou a ověřenými zdroji OWASP a NIST.
 - 2026-10-05: Doplněna příloha „Reset hesla bez enumerace účtů a e-mailového chaosu“ s konzistentními odpověďmi proti enumeraci, pravidly pro jednorázové hashované tokeny, ochranou tokenu před únikem přes referrer/logy, session invalidací, rate limitingem, bezpečnostní šablonou e-mailu, checklistem, password reset kartou a ověřenými zdroji OWASP, NIST a MDN.
 - 2026-10-05: Doplněna příloha „Přihlašovací formulář bez boje se správcem hesel“ s pravidly pro standardní formuláře, autocomplete tokeny, vkládání hesel a MFA kódů, dlouhá hesla, bezpečné chybové stavy, privacy-first měření, checklistem, login UX kartou a ověřenými zdroji OWASP, MDN a NIST.
