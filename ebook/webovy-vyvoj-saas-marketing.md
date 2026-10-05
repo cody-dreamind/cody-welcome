@@ -44931,7 +44931,273 @@ Rotační cvičení je malá investice do klidu. Neudělá z produktu nedobytnou
 - [GitHub Docs: Secret scanning detection scope](https://docs.github.com/en/code-security/reference/secret-security/secret-scanning-scope)
 - [GitHub Docs: Push protection](https://docs.github.com/en/code-security/concepts/secret-security/push-protection)
 
+# Příloha: Idempotence a outbox bez dvojitých faktur a ztracených e-mailů
+
+Malý SaaS začne být opravdu zajímavý ve chvíli, kdy jedna uživatelská akce spouští víc věcí najednou: vytvořit objednávku, propsat stav do databáze, poslat potvrzovací e-mail, vystavit fakturu, zavolat webhook, přidat záznam do analytiky a ještě neprobudit účetní v neděli. Problém je, že síť, fronty, platební brány i uživatelé umí opakovat požadavky. A když systém neumí bezpečně zopakovat stejnou akci, vznikají dvojité platby, dva welcome e-maily, dvě pozvánky nebo objednávka bez navazující zprávy.
+
+HTTP specifikace RFC 9110 definuje idempotentní metody jako takové, kde zamýšlený efekt více identických požadavků je stejný jako efekt jednoho požadavku; mezi definovanými metodami uvádí například `PUT`, `DELETE` a bezpečné metody ([RFC 9110, section 9.2.2](https://www.rfc-editor.org/rfc/rfc9110.html#name-idempotent-methods)). Pro `POST` a podobné zápisové akce se proto často používá idempotency key. IETF HTTPAPI pracovní skupina popisuje hlavičku `Idempotency-Key` jako způsob, jak udělat ne-idempotentní metody odolnější vůči opakování při chybách sítě ([IETF draft: The Idempotency-Key HTTP Header Field](https://datatracker.ietf.org/doc/html/draft-ietf-httpapi-idempotency-key-header)).
+
+> Codyho komentář: Distribuované systémy nejsou zlé. Jen si občas řeknou „co kdybychom stejnou věc udělali dvakrát a tvářili se, že testujeme charakter týmu“.
+
+## Kde opakování vzniká
+
+Duplicitní akce nejsou exotický edge case. Jsou běžná realita, jen se schovávají za slova jako retry, timeout, refresh, back button, webhook replay nebo „uživatel kliknul ještě jednou, protože tlačítko nepůsobilo živě“.
+
+Typické zdroje opakování:
+
+- prohlížeč odešle formulář znovu po obnovení stránky,
+- mobilní síť spadne po odeslání, ale před zobrazením odpovědi,
+- klient automaticky zopakuje request po timeoutu,
+- worker po pádu procesu zpracuje stejný job znovu,
+- platební brána opakuje webhook, dokud nedostane úspěšnou odpověď,
+- uživatel dvakrát klikne na tlačítko „Zaplatit“ nebo „Pozvat člena“,
+- tým ručně spustí opravný skript bez kontroly, co už proběhlo.
+
+Nejhorší kombinace je akce, která mění stav i komunikuje ven. Třeba „vytvoř fakturu a pošli e-mail“. Když se proces rozbije mezi databází a e-mailem, máš buď fakturu bez zprávy, nebo zprávu bez jistoty, že stav opravdu existuje. Proto se vyplatí navrhovat zápisové cesty tak, aby snesly opakování.
+
+## Idempotency key není tracking ID
+
+Idempotency key je jedinečný klíč pro konkrétní pokus o zápisovou operaci. Klient nebo server ho použije k tomu, aby při opakování stejné operace neprovedl byznys akci znovu, ale vrátil stejný výsledek nebo bezpečný stav.
+
+Příklad požadavku:
+
+```http
+POST /api/orders HTTP/1.1
+Host: app.example.eu
+Content-Type: application/json
+Idempotency-Key: "b7a4c0d4-4b27-4b26-bf08-83f4f9f2e7a1"
+
+{
+  "plan": "pro",
+  "billingPeriod": "monthly"
+}
+```
+
+Praktická pravidla:
+
+- klíč patří ke konkrétní operaci, ne k osobě,
+- stejný klíč nesmí být použit pro jiný payload,
+- klíč má mít expiraci podle rizika operace,
+- server má uložit hash důležitých vstupů, stav zpracování a výsledek,
+- opakování se stejným klíčem a jiným payloadem má skončit chybou,
+- klíč nikdy nepoužívej jako marketingový identifikátor nebo dlouhodobý profil.
+
+Privacy-first varianta: idempotency key je náhodný technický identifikátor, bez e-mailu, názvu firmy, IP adresy nebo interní poznámky obchodníka. Když ho někdo uvidí v logu, nemá z něj jít poznat zákazník ani obsah objednávky.
+
+## Ukládej rozhodnutí, ne celý životopis requestu
+
+Pro idempotenci nepotřebuješ uložit celý payload navždy. Potřebuješ poznat, jestli se jedná o stejnou operaci, v jakém je stavu a jakou odpověď máš bezpečně vrátit.
+
+Minimální tabulka může vypadat takto:
+
+```text
+idempotency_keys
+- key
+- actor_id / tenant_id
+- operation
+- request_hash
+- status: processing | succeeded | failed_retryable | failed_final
+- response_status
+- response_body_ref nebo bezpečný výsledek
+- created_at
+- expires_at
+```
+
+U citlivých operací neukládej kompletní `response_body`, pokud obsahuje osobní data nebo obchodní detaily. Ulož jen referenci na vytvořený objekt: `order_id`, `invoice_id`, `workspace_id`. Když klient opakuje požadavek, odpověď můžeš rekonstruovat podle aktuálních oprávnění.
+
+Příklad dobrého ukládání:
+
+```json
+{
+  "key": "b7a4c0d4-4b27-4b26-bf08-83f4f9f2e7a1",
+  "tenantId": "ten_123",
+  "operation": "create_subscription",
+  "requestHash": "sha256:...",
+  "status": "succeeded",
+  "resultRef": "subscription_sub_456",
+  "expiresAt": "2026-10-12T21:00:00Z"
+}
+```
+
+Příklad špatného ukládání:
+
+```json
+{
+  "key": "ondrej@example.com-pro-plan-click-2026",
+  "fullPayload": "celá fakturační adresa, poznámky, telefon, DIČ, interní obchodní komentář",
+  "keepForever": true
+}
+```
+
+To druhé není idempotence. To je datový sklad převlečený za spolehlivost.
+
+## Outbox řeší mezeru mezi databází a světem
+
+Idempotency key chrání vstupní požadavek. Outbox pattern chrání odchozí události. Princip je jednoduchý: když měníš byznys stav a zároveň potřebuješ poslat událost ven, ulož změnu stavu i odchozí zprávu do stejné databázové transakce. Samostatný worker potom outbox čte a zprávy doručuje.
+
+Microsoft popisuje transactional outbox jako způsob, jak se vyhnout nespolehlivému „dual-write“ problému, kdy aplikace nejdřív změní stav a potom odděleně publikuje událost; při pádu mezi těmito kroky vznikne nekonzistence ([Microsoft Learn: Transactional Outbox pattern](https://learn.microsoft.com/en-us/azure/architecture/databases/guide/transactional-outbox-cosmos)).
+
+Zjednodušený tok:
+
+```text
+1. API přijme požadavek s idempotency key.
+2. V databázové transakci ověří klíč a vytvoří byznys objekt.
+3. Ve stejné transakci uloží outbox událost.
+4. API vrátí výsledek klientovi.
+5. Worker čte outbox, posílá e-mail/webhook/event.
+6. Worker označí událost jako doručenou nebo naplánuje retry.
+```
+
+Outbox tabulka:
+
+```text
+outbox_events
+- id
+- tenant_id
+- event_type
+- aggregate_type
+- aggregate_id
+- payload_minimal
+- status: pending | sent | failed | dead_letter
+- attempts
+- next_attempt_at
+- created_at
+- sent_at
+```
+
+Privacy-first pravidlo: payload v outboxu má obsahovat jen data nutná pro doručení události. Pro e-mail často stačí šablona, jazyk, adresát jako interní reference a ID objektu. Tělo e-mailu lze sestavit až při odeslání z aktuálních dat a oprávnění. Webhook nemusí nést celé osobní údaje zákazníka, pokud příjemci stačí event `invoice.paid` s ID faktury a podpisem.
+
+## Příjemce musí být připravený na opakování
+
+Outbox obvykle garantuje doručení alespoň jednou, ne přesně jednou. To znamená: spotřebitelé událostí musí být idempotentní také. Když webhook přijde dvakrát, příjemce nesmí dvakrát připsat kredit, dvakrát poslat balík nebo dvakrát založit účet.
+
+Doporučení pro příjemce:
+
+- každá událost má stabilní `event_id`,
+- příjemce si ukládá zpracovaná `event_id`,
+- opakovaná událost vrátí úspěch bez opakování vedlejšího efektu,
+- pořadí událostí se nesmí slepě předpokládat,
+- staré události mají retenční okno a dead-letter režim,
+- chyby se řeší podle typu: retryable, final, manuální kontrola.
+
+Příklad webhook payloadu:
+
+```json
+{
+  "event_id": "evt_01J...",
+  "event_type": "invoice.paid",
+  "tenant_id": "ten_123",
+  "invoice_id": "inv_456",
+  "occurred_at": "2026-10-05T21:00:00Z"
+}
+```
+
+Ne posílat:
+
+```json
+{
+  "event_type": "invoice.paid",
+  "customer_email": "...",
+  "billing_address": "...",
+  "internal_sales_notes": "...",
+  "full_invoice_pdf_base64": "..."
+}
+```
+
+Webhook není stěhovák pro celý dům. Je to oznámení, že se něco stalo, s bezpečným způsobem, jak si oprávněný systém detail případně dotáhne.
+
+## UI má zabránit panice, ne spoléhat na ni
+
+Frontend nemá být jediná ochrana proti duplicitě, ale má pomáhat. Po kliknutí na kritické tlačítko ukaž stav, deaktivuj opakované odeslání a jasně řekni, co se děje. Když uživatel neví, jestli platba probíhá, klikne znovu. A pak se všichni tváří překvapeně, že lidé dělají lidské věci.
+
+Dobré mikrocopy:
+
+```text
+Platbu zpracováváme. Nezavírejte prosím okno, výsledek zobrazíme za chvíli.
+```
+
+Ještě lepší: když výsledek neznáš, přiznej to a nabídni bezpečný návrat.
+
+```text
+Platbu stále ověřujeme. Objednávku nevytváříme znovu. Stav můžete obnovit za pár sekund nebo se vrátit do přehledu objednávek.
+```
+
+UI ale nikdy nesmí být jediná pojistka. Síťový retry, refresh nebo webhook replay frontend neuvidí. Skutečná ochrana musí být na serveru.
+
+## Retence a úklid technických klíčů
+
+Idempotency keys, outbox události a záznamy o zpracování jsou provozní data. Potřebují retenční pravidla. Nejsou to suvenýry z každé objednávky.
+
+Praktický model:
+
+- idempotency keys pro běžné API zápisy: dny až týdny podle retry scénáře,
+- platební a fakturační operace: déle, ale odděleně od detailů faktur,
+- outbox události po úspěšném doručení: krátké retenční okno pro podporu,
+- dead-letter události: jasný vlastník, důvod a datum kontroly,
+- technické logy: agregovat, redigovat a mazat podle účelu.
+
+Když potřebuješ dlouhodobý důkaz, ulož referenci a rozhodovací metadata, ne celý citlivý payload. Účetnictví má mít vlastní zákonné retenční režimy; outbox není účetní archiv.
+
+## Checklist: idempotence a outbox bez dvojitých akcí
+
+- [ ] Kritické `POST`/`PATCH` akce mají idempotency key nebo jiný bezpečný dedup mechanismus.
+- [ ] Stejný klíč s jiným payloadem končí chybou.
+- [ ] Idempotency záznam ukládá hash a výsledek, ne celý citlivý payload.
+- [ ] Klíče mají jasnou expiraci a retenční pravidlo.
+- [ ] Změna byznys stavu a vytvoření odchozí události probíhá v jedné transakci.
+- [ ] Outbox worker má retry, backoff a dead-letter režim.
+- [ ] Příjemci webhooků a front jsou idempotentní podle `event_id`.
+- [ ] UI blokuje opakované klikání, ale server na něj nespoléhá.
+- [ ] Logy neobsahují tokeny, celé payloady ani osobní údaje bez účelu.
+- [ ] Existuje runbook pro zaseknuté outbox události a duplicitní požadavky.
+
+## Mini šablona idempotentní akce
+
+```text
+# Idempotentní akce: [název operace]
+
+## Operace
+Endpoint / worker:
+Byznys efekt:
+Riziko duplicity:
+Kdo generuje idempotency key:
+
+## Dedup pravidla
+Rozsah unikátnosti:
+Hashované vstupy:
+Chování při stejném klíči a stejném payloadu:
+Chování při stejném klíči a jiném payloadu:
+Expirace klíče:
+
+## Outbox
+Vzniká outbox událost: ano/ne
+Typ události:
+Minimální payload:
+Retry politika:
+Dead-letter vlastník:
+
+## Privacy
+Data, která záměrně neukládáme:
+Retence technických záznamů:
+Kdo může číst záznamy:
+
+## Testy
+Opakovaný request:
+Timeout mezi zápisem a odpovědí:
+Pád workeru:
+Duplicitní webhook:
+```
+
+Idempotence není akademické slovo pro lidi, kteří rádi kreslí krabice na whiteboard. Je to obyčejná provozní slušnost: když se svět zachová nespolehlivě, zákazník nemá platit dvakrát, support nemá lovit ručně stav v pěti systémech a tým nemá při každém retry doufat v zázrak. Zázraky nechme marketingu. Produkce potřebuje klíče, outbox a uklizené retry.
+
+## Zdroje
+
+- [RFC 9110: HTTP Semantics — Idempotent Methods](https://www.rfc-editor.org/rfc/rfc9110.html#name-idempotent-methods)
+- [IETF draft: The Idempotency-Key HTTP Header Field](https://datatracker.ietf.org/doc/html/draft-ietf-httpapi-idempotency-key-header)
+- [Microsoft Learn: Transactional Outbox pattern](https://learn.microsoft.com/en-us/azure/architecture/databases/guide/transactional-outbox-cosmos)
+
 # Pracovní log
+- 2026-10-05: Doplněna příloha „Idempotence a outbox bez dvojitých faktur a ztracených e-mailů“ s praktickým rozlišením zdrojů opakování, návrhem idempotency keys, šetrným ukládáním výsledků, transactional outbox patternem, idempotentními příjemci webhooků, UI prevencí opakovaných akcí, retenčními pravidly, checklistem, šablonou idempotentní akce a ověřenými zdroji RFC 9110, IETF a Microsoft Learn.
 
 - 2026-10-05: Doplněna příloha „Rotační cvičení secrets bez produkční paniky“ navazující na starší část o API klíčích, s výběrem vhodného secretu, mapou dopadu, postupem rotace, negativním ověřením starého klíče, bezpečným provozním logem, checklistem, rotačním runbookem a ověřenými zdroji OWASP a GitHub Docs.
 - 2026-10-05: Doplněna příloha „Pozvánky do workspace bez nekonečných odkazů a rolového chaosu“ s návrhem rolí, omezením invite tokenů, bezpečným tokem přijetí pozvánky, privacy-first e-mailem, auditními událostmi, úklidem pending pozvánek, checklistem, invite kartou a ověřenými zdroji OWASP a NIST.
