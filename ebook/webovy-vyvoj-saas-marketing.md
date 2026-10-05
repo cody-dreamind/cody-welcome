@@ -45196,7 +45196,164 @@ Idempotence není akademické slovo pro lidi, kteří rádi kreslí krabice na w
 - [IETF draft: The Idempotency-Key HTTP Header Field](https://datatracker.ietf.org/doc/html/draft-ietf-httpapi-idempotency-key-header)
 - [Microsoft Learn: Transactional Outbox pattern](https://learn.microsoft.com/en-us/azure/architecture/databases/guide/transactional-outbox-cosmos)
 
+# Příloha: Právní a provozní stránky bez copy-paste mlhy
+
+Právní stránky na webu často vznikají jako poslední položka před spuštěním: někdo otevře starý dokument, přepíše název firmy, přidá patičku „všechna práva vyhrazena“ a doufá, že internet bude hodný. Jenže zásady ochrany soukromí, obchodní podmínky, DPA, stránka se subprocesory nebo bezpečnostní kontakt nejsou dekorace pro právní oddělení. Jsou to provozní rozhraní důvěry. Zákazník podle nich pozná, jestli firma ví, co sbírá, proč to sbírá, komu to posílá a co se stane, když chce odejít.
+
+GDPR v článku 12 vyžaduje, aby informace pro lidi byly stručné, transparentní, srozumitelné, snadno dostupné a napsané jasným jazykem; články 13 a 14 řeší informace poskytované při získání osobních údajů přímo od člověka nebo z jiného zdroje ([EUR-Lex: GDPR](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX:32016R0679)). Evropská komise prakticky shrnuje, že lidé mají být informováni mimo jiné o účelu zpracování, typu dat, příjemcích, právech a právním základu zpracování ([European Commission: Obligations](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en)). EDPB v příručce pro malé firmy připomíná principy jako účelové omezení, minimalizaci, zabezpečení a odpovědnost za doložení souladu ([EDPB: Data protection basics](https://www.edpb.europa.eu/sme/learn-the-basics/data-protection-basics_en)).
+
+> Codyho komentář: Privacy policy nemá být kouřová clona z právnických slov. Má být návod pro normálního člověka, co se s jeho daty děje. Když tomu nerozumí ani obchodník, zákazník magicky neprozře.
+
+## Udělej inventář veřejných právních stránek
+
+Nejdřív si sepiš, jaké stránky a dokumenty opravdu potřebuješ. Malý B2B SaaS většinou nepotřebuje dvacet PDF, ale potřebuje několik stabilních, dohledatelných a pravidelně kontrolovaných míst.
+
+Typické minimum:
+
+- **Zásady ochrany soukromí** — co zpracováváš, proč, na jakém právním základě, komu data předáváš, jak dlouho je držíš a jak člověk uplatní práva.
+- **Cookie / tracking informace** — co se ukládá v prohlížeči, co je technické, co vyžaduje souhlas a jak se preference mění.
+- **Obchodní podmínky nebo podmínky služby** — co služba dělá, kdo ji může používat, platby, dostupnost, ukončení, omezení odpovědnosti a pravidla férového použití.
+- **DPA / zpracovatelská smlouva** — pokud zpracováváš osobní údaje za zákazníka jako zpracovatel.
+- **Subprocesory** — seznam důležitých dodavatelů, účel, země nebo region provozu a typ zpracování.
+- **Bezpečnostní a provozní kontakt** — kam hlásit incident, zranitelnost nebo dotaz k datům.
+- **Status / incident archiv** — pokud služba slibuje provozní spolehlivost a zákazníci potřebují auditní stopu.
+
+Nejde o to mít všechno v patičce jako sbírku zaklínadel. Jde o to, aby každý dokument odpovídal skutečnému provozu. Pokud privacy policy tvrdí „nepředáváme data třetím stranám“ a web načítá pět externích skriptů, dokument není odvážný. Je špatně.
+
+## Piš podle rozhodnutí zákazníka, ne podle paragrafu
+
+Právní text má pokrýt povinnosti, ale čtenář ho otevírá kvůli konkrétním otázkám. Proto strukturu stav podle rozhodnutí zákazníka:
+
+- „Co o mně sbíráte?“
+- „Proč to potřebujete?“
+- „Kdo to uvidí?“
+- „Jde to mimo EU/EHP?“
+- „Jak dlouho to držíte?“
+- „Jak požádám o výmaz, export nebo opravu?“
+- „Co se stane po ukončení služby?“
+- „Kde najdu změny dokumentu?“
+
+Praktický vzor odstavce:
+
+```text
+Když odešlete kontaktní formulář, zpracujeme jméno, e-mail, zprávu a technické údaje nutné pro doručení a ochranu proti spamu. Účelem je odpovědět na vaši poptávku a chránit formulář před zneužitím. Data nepoužíváme pro reklamní profilování a nepředáváme je reklamním sítím.
+```
+
+Tohle je čitelné. Neříká „můžeme zpracovávat osobní údaje za účelem zajištění oprávněných zájmů správce v rozsahu nezbytném dle applicable law“, což je věta, po které i klávesnice prosí o přestávku.
+
+## Dokumenty musí mapovat realitu systému
+
+Právní stránka není izolovaný text. Je to veřejný výstup datové mapy. Když přidáš nový nástroj, formulář, analytiku, AI funkci, platební bránu nebo support systém, zeptej se, jestli se má změnit i dokumentace.
+
+Mini tabulka vazeb:
+
+| Změna v produktu | Co zkontrolovat v dokumentech |
+| --- | --- |
+| Nový formulář | účel, kategorie dat, retence, příjemci |
+| Nová analytika | cookie/tracking informace, právní základ, opt-out |
+| Nová AI funkce | vstupní data, dodavatel, ukládání promptů, role správce/zpracovatele |
+| Nová platební brána | příjemci dat, fakturační údaje, subprocesor |
+| Nový e-mailing | typ komunikace, odhlášení, suppression list |
+| Nový hosting nebo region | předávání, subprocesor, bezpečnostní popis |
+| Změna tarifu | obchodní podmínky, ceník, archiv starých verzí |
+
+Dobrá rutina: každý pull request, který přidává nový externí nástroj nebo sběr dat, má checkbox „dopad na právní/provozní stránky“. Není to byrokracie. Je to prevence toho, aby privacy policy zůstala v roce 2024, zatímco produkt už dávno žije v jiné realitě.
+
+## Subprocesory nejsou seznam log v PDF skladišti
+
+U B2B SaaS se zákazníci často ptají: kdo se dostane k našim datům? Odpověď „máme dodavatele“ nestačí. Udržuj veřejný nebo zákaznicky dostupný seznam subprocesorů s praktickými informacemi.
+
+U každého důležitého dodavatele eviduj:
+
+- název a odkaz na dodavatele,
+- účel použití,
+- typ dat nebo kategorie dat,
+- region zpracování,
+- jestli jde o kritickou službu,
+- odkaz na DPA nebo bezpečnostní dokumentaci,
+- datum přidání a vlastníka ve firmě.
+
+Privacy-first varianta: nedělej ze seznamu marketingový katalog všech nástrojů. Ukaž relevantní zpracovatele, vysvětli účel a udržuj historii změn. Zákazník nepotřebuje vědět, jakou aplikací plánuješ interní úkoly, pokud se v ní neobjevují jeho data. Potřebuje vědět, kdo zpracovává jeho osobní nebo obchodní data a proč.
+
+## Změny dokumentů verzuj jako produkt
+
+Právní texty se mění. Problém není změna. Problém je tichá změna bez data, bez archivu a bez vysvětlení dopadu.
+
+Jednoduchý model:
+
+- nahoře uveď datum účinnosti a datum poslední aktualizace,
+- zásadní změny shrň lidsky v krátkém changelogu,
+- staré verze archivuj alespoň interně,
+- u významných změn informuj zákazníky přiměřeným kanálem,
+- změny v subprocesorech oznamuj podle smluvního závazku,
+- nedělej z každé kosmetické úpravy právní drama.
+
+Příklad changelogu:
+
+```text
+2026-10-05: Doplnili jsme nový support nástroj pro zpracování ticketů. Nezavádíme reklamní profilování ani nové marketingové příjemce dat. Aktualizovali jsme seznam subprocesorů a retenční informaci pro support zprávy.
+```
+
+To je lepší než „aktualizovali jsme dokument za účelem zlepšení služeb“, což je informační hodnota na úrovni sušenky štěstí.
+
+## Checklist: právní stránky bez copy-paste mlhy
+
+- [ ] Zásady ochrany soukromí odpovídají skutečným formulářům, analytice, supportu a dodavatelům.
+- [ ] Text používá jasný jazyk a odpovídá na praktické otázky zákazníka.
+- [ ] Každý účel zpracování má právní základ, kategorii dat, retenci a příjemce.
+- [ ] Cookie/tracking informace odpovídají reálně načítaným skriptům a úložištím.
+- [ ] Subprocesoři mají uvedený účel, typ dat, region a datum přidání.
+- [ ] Obchodní podmínky popisují platby, ukončení, dostupnost a omezení férově, ne jako past.
+- [ ] DPA odpovídá tomu, jestli vystupuješ jako správce, zpracovatel nebo obojí podle kontextu.
+- [ ] Dokumenty mají datum účinnosti, datum aktualizace a interní archiv starých verzí.
+- [ ] Produktové změny mají checkbox dopadu na právní/provozní stránky.
+- [ ] Existuje vlastník, který dokumenty kontroluje alespoň kvartálně nebo při změně nástrojů.
+
+## Mini šablona stránky právní transparentnosti
+
+```text
+# Právní a datová transparentnost: [produkt / web]
+
+## Dokumenty
+Zásady ochrany soukromí:
+Cookie/tracking informace:
+Obchodní podmínky:
+DPA:
+Subprocesoři:
+Bezpečnostní kontakt:
+
+## Provozní realita
+Hlavní formuláře a sbíraná data:
+Analytika a měření:
+Support a komunikace:
+Platby a fakturace:
+Hosting a regiony:
+
+## Kontrola
+Vlastník dokumentů:
+Datum poslední revize:
+Další plánovaná revize:
+Změny od poslední revize:
+
+## Changelog
+Datum:
+Co se změnilo:
+Koho se změna týká:
+Je potřeba informovat zákazníky: ano/ne
+```
+
+Právní stránky nejsou kouzelný štít. Nezachrání produkt, který sbírá zbytečná data, používá nejasné dodavatele a slibuje víc, než umí splnit. Ale když jsou napsané poctivě a napojené na reálný provoz, umí zkrátit obchodní cyklus, uklidnit bezpečnostní review a hlavně ukázat, že privacy-first není slogan. Je to disciplína. Lehce otravná, ale mnohem méně otravná než vysvětlovat zákazníkovi, proč dokument tvrdí opak produkce.
+
+## Zdroje
+
+- [EUR-Lex: Nařízení GDPR 2016/679](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX:32016R0679)
+- [European Commission: Obligations for businesses and organisations](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en)
+- [European Commission: Information for individuals](https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en)
+- [EDPB: Data protection basics for small business](https://www.edpb.europa.eu/sme/learn-the-basics/data-protection-basics_en)
+- [EDPB: Be compliant — SME guide](https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en)
+
 # Pracovní log
+- 2026-10-05: Doplněna příloha „Právní a provozní stránky bez copy-paste mlhy“ s inventářem zásad ochrany soukromí, podmínek, DPA, subprocesorů a bezpečnostních kontaktů, napojením dokumentů na datovou mapu, pravidly verzování změn, checklistem, šablonou transparentnosti a ověřenými zdroji GDPR, Evropské komise a EDPB.
 - 2026-10-05: Doplněna příloha „Idempotence a outbox bez dvojitých faktur a ztracených e-mailů“ s praktickým rozlišením zdrojů opakování, návrhem idempotency keys, šetrným ukládáním výsledků, transactional outbox patternem, idempotentními příjemci webhooků, UI prevencí opakovaných akcí, retenčními pravidly, checklistem, šablonou idempotentní akce a ověřenými zdroji RFC 9110, IETF a Microsoft Learn.
 
 - 2026-10-05: Doplněna příloha „Rotační cvičení secrets bez produkční paniky“ navazující na starší část o API klíčích, s výběrem vhodného secretu, mapou dopadu, postupem rotace, negativním ověřením starého klíče, bezpečným provozním logem, checklistem, rotačním runbookem a ověřenými zdroji OWASP a GitHub Docs.
