@@ -42739,7 +42739,190 @@ Vyhodnocuj hlavně opakující se důvody. Číslo použij jako teploměr, ne ja
 - EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default — https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
 - W3C WAI: Forms Tutorial — přístupné popisky, instrukce, validace a notifikace ve formulářích — https://www.w3.org/WAI/tutorials/forms/
 
+# Příloha: Formulářové e-maily bez ztracených poptávek a datového karnevalu
+
+Kontaktní formulář je často nejkratší most mezi webem a obchodem. A zároveň jedno z míst, kde malé firmy potichu ztrácí peníze: e-mail spadne do spamu, odpověď nikdo nevlastní, notifikace obsahuje moc osobních dat, kopie jde na špatnou adresu, nebo se po redesignu rozbije odesílání a všichni to zjistí až z ticha. Ticho je mimochodem nejdražší alert, jen nemá hezkou ikonku.
+
+Cíl není postavit gigantický CRM kombajn. Cíl je, aby každá poptávka měla bezpečnou cestu, jasného vlastníka, dohledatelné minimum a plán B. Privacy-first přístup tady znamená: poslat správným lidem jen tolik informací, kolik potřebují pro reakci, a nenechat citlivý obsah ležet v poštovních schránkách navždy.
+
+> Codyho komentář: Formulář není „hotový“, když se po kliknutí objeví zelená hláška. Hotový je až ve chvíli, kdy víš, kdo poptávku dostane, jak rychle odpoví, co se uloží, co se smaže a jak poznáš, že se něco rozbilo.
+
+## Začni tokem, ne šablonou e-mailu
+
+Nejdřív si nakresli cestu jedné poptávky od odeslání po odpověď. Stačí jednoduchý seznam:
+
+1. návštěvník vyplní formulář,
+2. server ověří povinná pole a spam signály,
+3. systém uloží minimální záznam nebo bezpečný auditní otisk,
+4. odešle interní notifikaci,
+5. volitelně odešle potvrzení návštěvníkovi,
+6. člověk převezme odpovědnost,
+7. poptávka se uzavře, přesune nebo smaže podle retenčního pravidla.
+
+U každého kroku napiš, kde se data objeví. Webový server, logy, e-mailová služba, týmová schránka, helpdesk, CRM, záloha. Pokud některé místo neumíš pojmenovat, není to detail. Je to malá datová černá díra s ambicemi.
+
+## Interní notifikace má být stručná
+
+Interní e-mail nemá být kompletní kopie databáze v elegantním HTML kabátku. Má říct týmu, co se stalo a kde to bezpečně vyřídit. Čím citlivější formulář, tím méně obsahu patří přímo do e-mailu.
+
+Dobrá interní notifikace obsahuje:
+
+- typ formuláře a stránku, ze které přišel,
+- čas přijetí,
+- jméno nebo firmu, pokud je to nutné pro triáž,
+- odpovědnou frontu nebo tým,
+- odkaz do interního systému,
+- krátký privacy štítek typu „nepřeposílat mimo tým“.
+
+Naopak si rozmysli posílání kompletní zprávy, telefonů, příloh, technických identifikátorů, IP adres nebo marketingových parametrů. E-mailové schránky jsou pohodlné, ale špatně se v nich vynucuje retence, přístupová práva a hromadné mazání. Když už musíš poslat obsah zprávy, neposílej víc, než člověk potřebuje pro první reakci.
+
+Příklad interní notifikace:
+
+```text
+Předmět: Nová B2B poptávka z webu
+
+Přišla nová poptávka z formuláře „AI automatizace“.
+
+Čas: 2026-10-05 08:42 UTC
+Firma: Ukázková firma s.r.o.
+Kontakt: odpovědět v interním systému
+Priorita: běžná
+Odpovědný tým: sales
+
+Detail: [interní odkaz]
+Privacy: nepřeposílat mimo tým, smazat/uzavřít podle retenčního pravidla.
+```
+
+## Potvrzení zákazníkovi nesmí slibovat magii
+
+Automatické potvrzení návštěvníkovi má tři práce: uklidnit, nastavit očekávání a dát alternativní cestu. Nemá obsahovat tracking pixel, agresivní cross-sell ani deset odkazů na sociální sítě.
+
+Dobré potvrzení říká:
+
+- že zpráva dorazila,
+- kdy přibližně odpovíte,
+- z jaké adresy odpověď přijde,
+- co dělat, když je věc urgentní,
+- jak se pracuje s údaji z formuláře.
+
+Příklad potvrzení:
+
+```text
+Předmět: Díky, zprávu máme
+
+Dobrý den,
+
+díky za zprávu. Dorazila k týmu Dreamind a ozveme se obvykle do 1–2 pracovních dnů.
+
+Pokud je věc urgentní, napište prosím přímo na hello@example.cz a do předmětu dejte „urgentní“.
+
+Údaje z formuláře používáme pro vyřízení dotazu. Nepřidáváme vás automaticky do newsletteru a nepoužíváme reklamní pixely v tomto e-mailu.
+
+— Cody za Dreamind
+```
+
+Tohle není právní román. Je to jasná provozní dohoda. Návštěvník ví, co čekat, a tým nemá výmluvu, že „se to někde ztratilo“.
+
+## Vlastnictví odpovědi je důležitější než hezký alias
+
+Schránka `info@` může fungovat, pokud má vlastníka. Bez vlastníka je to čekárna pro digitální duchy. Každý formulář potřebuje pravidlo:
+
+- kdo je primární vlastník,
+- kdo je náhradník,
+- do kdy se má reagovat,
+- jak se eskaluje urgentní zpráva,
+- kde se poznamená stav.
+
+U malého týmu stačí jednoduchý rytmus: ráno kontrola nových poptávek, během dne odpovědi, jednou týdně krátký pohled na neuzavřené věci. Pokud poptávka vyžaduje víc lidí, nepřeposílej řetězec dál a dál. Raději ji přepiš do jednoho interního záznamu se stavem, vlastníkem a dalším krokem.
+
+Privacy-first pravidlo: osobní data patří do systému, kde umíš řídit přístupy a retenci. Ne do nekonečného e-mailového ping-pongu s přílohami `final_final_opravdu.docx`.
+
+## Plán B: když e-mail nedorazí
+
+Formulářové e-maily se mohou rozbít i bez dramatického incidentu. Změna DNS, expirované heslo, špatná konfigurace odesílatele, přísnější spam filtr, chyba po redesignu nebo rate limit u poskytovatele. Proto potřebuje každý důležitý formulář alespoň jeden nezávislý signál.
+
+Praktické minimum:
+
+- uložit serverový záznam o přijetí formuláře bez zbytečného obsahu,
+- mít administrátorský přehled nebo export posledních zpráv,
+- posílat chyby odeslání do monitoringu,
+- testovat formulář synteticky po nasazení,
+- mít na stránce alternativní kontakt mimo formulář,
+- jednou týdně zkontrolovat, že počet přijatých formulářů není podezřele nulový.
+
+Pokud web generuje obchodní poptávky, nulový počet zpráv není vždy skvělý výkon kampaní. Někdy je to jen rozbitý formulář v obleku optimisty.
+
+## Retence: e-mail není archiv na věčnost
+
+U každého typu formuláře si napiš retenční pravidlo. Ne kvůli tabulkové poezii, ale proto, aby tým věděl, kdy už data nepotřebuje.
+
+Příklad:
+
+| Typ zprávy | Kde žije pracovní kopie | Doporučená rutina |
+| --- | --- | --- |
+| Obecný dotaz | týmová schránka / helpdesk | uzavřít po odpovědi, mazat staré bez obchodního důvodu |
+| Obchodní poptávka | CRM nebo sales evidence | držet podle obchodního cyklu, pak anonymizovat nebo smazat |
+| Support požadavek | helpdesk | držet podle podpůrného kontextu a smlouvy |
+| Bezpečnostní hlášení | interní incident evidence | oddělit od běžné pošty, omezit přístupy |
+| Newsletter žádost | mailing systém | potvrdit účel, nepřidávat bez jasného právního základu |
+
+Retence nemusí být dokonale automatizovaná od prvního dne. Musí ale existovat pravidlo a vlastník. Jinak se z e-mailu stane historické muzeum osobních údajů, jen bez kurátora.
+
+## Checklist: formulářové e-maily bez ztracených poptávek
+
+- [ ] Víme, kam putují data z každého formuláře?
+- [ ] Interní notifikace obsahuje jen minimum nutné pro triáž?
+- [ ] Citlivější obsah neposíláme zbytečně přímo v e-mailu?
+- [ ] Potvrzení návštěvníkovi nastavuje realistické očekávání?
+- [ ] Každý formulář má vlastníka a náhradníka?
+- [ ] Existuje alternativní kontakt mimo formulář?
+- [ ] Chyby odesílání jdou do monitoringu nebo provozního alertu?
+- [ ] Po nasazení testujeme formulář jako reálný uživatel?
+- [ ] Máme retenční pravidlo pro poptávky, support i obecné dotazy?
+- [ ] Umíme dohledat přijaté zprávy i při výpadku e-mailové notifikace?
+
+## Mini šablona formulářového e-mail runbooku
+
+```text
+# Formulářový e-mail runbook: [název formuláře]
+
+## Účel formuláře
+Komu pomáhá:
+Jaké rozhodnutí nebo workflow spouští:
+
+## Datová cesta
+Pole formuláře:
+Kam se data ukládají:
+Kam se posílá interní notifikace:
+Posílá se potvrzení návštěvníkovi:
+Externí služby v toku:
+
+## Vlastnictví
+Primární vlastník:
+Náhradník:
+Reakční očekávání:
+Eskalace:
+
+## Privacy pravidla
+Co neposíláme e-mailem:
+Kdo má přístup:
+Retence:
+Mazání/anonymizace:
+
+## Provozní kontrola
+Jak testujeme po nasazení:
+Jak poznáme chybu odeslání:
+Kde je alternativní kontakt:
+Datum poslední kontroly:
+```
+
+Formulářové e-maily jsou drobná infrastruktura důvěry. Když fungují, nikdo jim netleská. Když selžou, bolí to obchod, support i reputaci. Udělej je nudné, dohledatelné a datově střídmé — přesně ten typ nudy, která vydělává peníze a nenechává po sobě privacy paseku.
+
+---
+
 # Pracovní log
+
+- 2026-10-05: Doplněna příloha „Formulářové e-maily bez ztracených poptávek a datového karnevalu“ s datovou cestou formuláře, interními notifikacemi, potvrzením zákazníkovi, vlastnictvím odpovědi, plánem B, retencí, checklistem a vyplnitelným runbookem.
 
 - 2026-10-05: Doplněna příloha „Produktové dotazníky bez zákaznického rentgenu“ s rozhodovací větou před otázkami, pravidly minimalizace dat, oddělením kontaktu od odpovědi, správným timingem, vyhodnocováním vzorů, retencí, mini NPS, checklistem, šablonou a ověřenými zdroji Evropské komise, EDPB a W3C.
 - 2026-10-05: Rozšířena příloha „API klíče a tajemství bez úniku do repozitáře“ o CI/CD tokeny, webhook secrety, provozní standard a šablonu secrets policy karty.
