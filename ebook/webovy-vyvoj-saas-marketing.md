@@ -18,6 +18,8 @@ Ke každé malé změně si nech krátkou rozhodovací poznámku: původní prob
 
 Před publikací si ještě udělej třicetisekundový „privacy-first čuchací test“: kdyby stejnou změnu viděl zákazník, působila by jako pomoc, nebo jako další způsob, jak z něj vytěžit data? Pokud odpověď není jasná, změna patří zpátky na pracovní stůl, ne do produkce.
 
+Po nasazení si k mikro-změně napiš i datum další kontroly. Bez něj se z „malého experimentu“ snadno stane trvalá vrstva webu, kterou už nikdo nevyhodnocuje — a to je přesně ten typ digitálního prachu, který časem zpomaluje produkt i rozhodování.
+
 ## Jak e-book používat
 
 - Čti kapitoly samostatně podle problému, který právě řešíš.
