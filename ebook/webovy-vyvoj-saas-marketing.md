@@ -42311,191 +42311,179 @@ Další krok:
 - OWASP Cheat Sheet Series: Content Security Policy Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html
 
 
-# Příloha: Admin rozhraní a interní nástroje bez datového průvanu
 
-Admin rozhraní bývá nejméně sexy část produktu. Nikdo ho nechce kreslit do pitch decku, málokdo ho ukazuje v marketingu a skoro každý doufá, že „to přece používají jen naši lidé“. Právě proto je nebezpečné: často má přístup k zákazníkům, fakturám, support tiketům, auditním stopám, konfiguraci workspace a tlačítkům, která umí rozbít den více lidem najednou.
+# Příloha: Klasifikace dat bez korporátního štítkovacího divadla
 
-Privacy-first admin není o tom, že internímu týmu zakážeš pracovat. Je o tom, že mu dáš přesně tolik přístupu, kolik potřebuje k vyřešení konkrétní práce — a zbytek necháš zamčený, zamaskovaný nebo vůbec nenačtený. Interní pohodlí nesmí být výmluva pro permanentní výhled do cizích dat.
+Klasifikace dat nezní jako téma, kvůli kterému si člověk uvaří kávu radostí. V malém SaaS je ale překvapivě praktická: pomáhá rozhodnout, co smí do logu, co může vidět support, co se smí poslat externímu nástroji, co má krátkou retenci a co se musí při incidentu řešit jako první. Bez klasifikace se každé rozhodnutí tváří jako výjimka. A výjimky, jak víme, mají v softwaru schopnost množit se potmě.
 
-> Codyho komentář: Admin panel bez pravidel je jako univerzální klíč od domu položený pod rohožkou s nápisem „jen pro kolegy“. Technicky kreativní, bezpečnostně poezie bolesti.
+Privacy-first klasifikace nemá být složitý katalog pro auditní svatyni. Má být jednoduchý pracovní jazyk pro tým. Když někdo řekne „tohle je zákaznický obsah“ nebo „tohle je bezpečnostní signál“, všichni mají vědět, jak se s tím zachází.
 
-## Začni mapou interních prací
+> Codyho komentář: Pokud štítek dat nepomůže vývojáři, supportu nebo founderovi udělat lepší rozhodnutí během deseti sekund, není to klasifikace. Je to nálepka pro klid v tabulce.
 
-Nezačínej otázkou „co všechno může admin vidět“. Začni otázkou „jakou práci musí interní člověk udělat“. Support potřebuje ověřit stav předplatného, vrátit platbu, dohledat poslední chybu nebo změnit e-mail po ověření identity. Obchod může potřebovat vidět stav trialu, ale nepotřebuje číst obsah zákaznických dokumentů. Vývojář může potřebovat technické ID a chybový kontext, ale ne celé jméno uživatele a historii faktur.
+## Začni čtyřmi třídami, ne dvaceti
 
-Praktický postup:
+Malý tým nepotřebuje vojenský klasifikační systém. Potřebuje pár tříd, které se dají vysvětlit na jedné stránce a používat v běžném provozu.
 
-1. Sepiš hlavní interní scénáře: support, billing, bezpečnost, provoz, obchod, technický debug.
-2. U každého scénáře napiš rozhodnutí, které interní člověk dělá.
-3. Ke každému rozhodnutí přiřaď minimální data, která k němu opravdu potřebuje.
-4. Všechno ostatní označ jako skryté, maskované, dostupné jen přes break-glass režim nebo úplně mimo admin.
+Doporučený začátek:
 
-Příklad: Support řeší „uživatel nedostal potvrzovací e-mail“. Potřebuje e-mailovou adresu, stav ověření, čas posledního pokusu, technický výsledek doručení a možnost poslat nový ověřovací e-mail. Nepotřebuje vidět obsah účtu, interní poznámky jiných zákazníků ani seznam všech přihlášených zařízení.
+| Třída | Co sem patří | Výchozí pravidlo |
+|---|---|---|
+| Veřejné | landing page texty, veřejná dokumentace, veřejné ceníky | může být publikováno, verzováno a cachováno |
+| Interní provozní | roadmapa, interní poznámky, agregované metriky, konfigurace bez tajemství | jen tým, žádné zbytečné sdílení ven |
+| Osobní údaje | e-mail, jméno, fakturační údaje, IP adresa, support identifikátory | účel, minimalizace, retence a kontrolovaný přístup |
+| Citlivé provozní | API klíče, session tokeny, bezpečnostní logy, incidentní důkazy, zákaznický obsah | silné omezení přístupu, šifrování, krátká retence nebo zvláštní proces |
 
-## Role navrhni podle práce, ne podle seniority
+U některých produktů budeš potřebovat samostatně odlišit zákaznický obsah od běžných osobních údajů. Například dokumenty nahrané do aplikace, zprávy, interní znalostní báze zákazníka nebo obsah generovaný AI funkcí. Taková data často nejsou „jen text“. Jsou to obchodní tajemství zákazníka převlečená za běžný payload.
 
-Role „admin“, „superadmin“ a „owner“ nestačí. Jsou pohodlné při vývoji, ale v provozu rychle vytvoří privilegovanou mlhu. Lepší je začít pracovními rolemi: `support_read`, `support_action`, `billing_read`, `billing_refund`, `security_review`, `ops_config`, `developer_debug`. Některé role mohou být kombinované, ale musí být pojmenované podle činnosti, ne podle organizačního žebříčku.
+## Štítek musí říkat, co se má stát
 
-OWASP v doporučeních k autorizaci zdůrazňuje princip nejmenších oprávnění a samostatné ověřování přístupu pro chráněné akce. V praxi to znamená: nestačí schovat tlačítko v UI. Backend musí znovu zkontrolovat, jestli konkrétní člověk smí provést konkrétní akci nad konkrétním zákazníkem nebo workspace.
+Špatný štítek: `highly_confidential_special`. Zní dramaticky, ale vývojáři neřekne, jestli se hodnota smí logovat, exportovat nebo ukázat supportu.
 
-Mini matice rolí:
+Dobrý štítek spojuje třídu dat s pravidlem:
 
-| Interní práce | Vidí | Může měnit | Nesmí |
-|---|---|---|---|
-| Support první linie | stav účtu, plán, poslední systémové události | poslat ověřovací e-mail, otevřít ticket | číst obsah zákaznických dat, měnit billing |
-| Billing | tarif, fakturační stav, platby | vystavit kredit, pozastavit obnovu podle pravidel | resetovat hesla, číst produktový obsah |
-| Security review | auditní události, role, přístupy | revokovat session, označit incident | upravovat fakturaci bez procesu |
-| Developer debug | technické ID, agregované chyby, verze releasu | přidat debug flag s expirací | exportovat osobní data bez schválení |
+- `public_cacheable` — může být veřejně cachováno.
+- `internal_team_only` — interní, bez externího sdílení mimo schválené nástroje.
+- `personal_minimal` — osobní údaj, používat jen pro konkrétní účel.
+- `customer_content_restricted` — zákaznický obsah, výchozí zákaz interního čtení.
+- `secret_never_log` — tajemství, nikdy do logu, exportu ani ticketu.
+- `security_short_retention` — bezpečnostní signál s krátkou retencí a omezeným přístupem.
 
-## Citlivá data maskuj jako výchozí stav
+Tahle jména nejsou posvátná. Posvátné je, aby tým přesně věděl, co znamenají. Když štítek potřebuje třístránkový výklad, je moc abstraktní.
 
-Interní panel má používat privacy by default stejně jako veřejný produkt. Výchozí zobrazení nemá ukazovat celé e-mailové adresy, telefonní čísla, tokeny, adresy, poznámky, obsah zpráv nebo osobní dokumenty, pokud je člověk nepotřebuje hned pro danou práci.
+## Klasifikuj místa, ne jen databázové sloupce
 
-Vhodné vzory:
+Data nežijí jen v databázi. Putují přes formuláře, logy, analytiku, support, e-maily, webhooky, exporty, clipboardy, screenshoty a AI prompty. Když klasifikuješ jen tabulky, unikne ti polovina reality.
 
-- E-mail zobraz jako `ja***@firma.cz`, celé znění jen po kliknutí s důvodem.
-- Tokeny a klíče nikdy nezobrazuj celé; po vytvoření ukaž jednorázově, potom jen prefix a datum rotace.
-- Support poznámky piš strukturovaně a bez zbytečných osobních detailů.
-- Obsah zákaznických dat otevírej jen přes separátní oprávnění, ideálně s dočasnou expirací.
-- Export interních dat omez rolí, důvodem, logem a jasným schválením.
+Pro každý důležitý datový tok si napiš:
 
-Tohle není jen bezpečnostní kosmetika. Je to i produktová hygiena: když citlivá data nejsou na obrazovce, méně často skončí ve screenshotech, chybových hlášeních, Slacku, nahrávkách hovorů nebo „rychlé“ dokumentaci.
+1. kde data vznikají,
+2. kam se ukládají,
+3. kdo je může vidět,
+4. jestli odcházejí dodavateli,
+5. jak dlouho se drží,
+6. co se stane při exportu nebo výmazu účtu.
 
-## Break-glass režim musí být krátký a hlučný
+Příklad: E-mail zákazníka vznikne v registračním formuláři, uloží se v uživatelském účtu, zobrazí se supportu v maskované podobě, odešle se e-mailové službě pro transakční zprávu, drží se po dobu účtu a pak podle retenční matice. Do produktové analytiky nemá jít celé znění e-mailu nikdy. Ano, ani „jen pro debug“. Debug má být dospělý, ne kleptoman.
 
-Někdy interní člověk opravdu potřebuje mimořádný přístup. Třeba bezpečnostní incident, ruční oprava po chybné migraci nebo kritický support u enterprise zákazníka. Řešením není trvale přidat širší roli. Řešením je break-glass režim: dočasný, zdůvodněný, logovaný a viditelný.
+## Pravidla napoj na rozhodnutí v kódu
 
-Minimum pro break-glass:
+Klasifikace je užitečná až ve chvíli, kdy ovlivňuje systém. Jinak je to plakát na zdi vedle motivačního citátu o inovacích.
 
-- důvod výjimky vybraný ze seznamu a doplněný krátkým textem,
-- časová expirace bez možnosti „navždy“,
-- automatická auditní událost,
-- oznámení vlastníkovi systému nebo bezpečnostnímu kanálu,
-- následná kontrola, jestli se výjimka nezměnila v nový normál.
+Praktické napojení:
 
-Příklad: Developer potřebuje na 30 minut vidět detail workspace kvůli chybě migrace. Aktivuje break-glass s incident ID, dostane dočasnou roli jen pro daný workspace, všechny dotazy nad citlivými tabulkami se zalogují a po expiraci se přístup sám ukončí. Žádné „necháme mu to do zítřka, kdyby něco“. Tohle „kdyby něco“ je hřbitov bezpečnostních slibů.
+- Logovací helper odmítne zapsat hodnoty označené jako `secret_never_log` nebo `customer_content_restricted`.
+- Exportní funkce vyžaduje, aby každé pole mělo třídu a důvod exportu.
+- Admin UI maskuje `personal_minimal` ve výchozím stavu.
+- Support formulář nedovolí vložit API klíč bez varování a redakce.
+- Datová mapa obsahuje vlastníka, účel, retenci a dodavatele pro každou třídu.
+- CI kontrola hledá podezřelé názvy polí v logovacích voláních: `token`, `password`, `secret`, `content`, `message_body`.
 
-## Interní akce loguj, ale nešmíruj
+Nemusíš mít hned dokonalý systém. Stačí začít u nejrizikovějších míst: logy, exporty, admin, support a externí integrace. Právě tam se z „malého detailu“ stává incident s kalendářem plným nepříjemných hovorů.
 
-Auditní stopa má odpovědět na otázky: kdo něco udělal, kdy, nad jakým účtem, z jakého důvodu a s jakým výsledkem. Nemá být druhým úložištěm citlivých dat. Pokud loguješ interní akci „support zobrazil e-mail“, loguj typ akce, ID zákazníka/workspace, interního uživatele, čas, důvod a výsledek. Neloguj celé znění e-mailu, poznámku zákazníka nebo payload formuláře.
+## Osobní údaje nejsou jedna hromada
 
-Dobré auditní události:
+GDPR principy minimalizace a omezení uložení říkají prakticky jednoduchou věc: sbírej jen data potřebná pro daný účel a nedrž je déle, než je nutné. Evropská komise i EDPB tyto principy popisují jako základní kameny zpracování osobních údajů. V produktu to znamená, že „osobní údaj“ není jedna kouzelná kategorie se stejným zacházením.
 
-- `admin.user_email_revealed` s důvodem, rolí a workspace ID,
-- `admin.billing_refund_created` s částkou, měnou, ticket ID a schvalovacím pravidlem,
-- `admin.session_revoked` s cílovým uživatelem a důvodem,
-- `admin.break_glass_started` a `admin.break_glass_expired`,
-- `admin.export_requested` s typem exportu, rozsahem a schválením.
+Rozliš například:
 
-Špatné auditní události:
+- **Kontaktní údaj** — e-mail pro přihlášení a transakční komunikaci.
+- **Fakturační údaj** — zákonná a účetní retence, jiný režim než marketing.
+- **Bezpečnostní signál** — IP adresa, user-agent, failed login, krátká bezpečnostní retence.
+- **Support kontext** — údaje dodané zákazníkem v ticketu, často největší riziko volného textu.
+- **Produktový obsah** — dokumenty, zprávy, nahrávky, prompty nebo výstupy uvnitř zákaznického workspace.
 
-- `note: zákazník říkal, že...` s osobním příběhem,
-- celý request body formuláře,
-- kopie faktury, dokumentu nebo zprávy v logu,
-- tajné tokeny „pro jistotu“.
+Každá z těchto skupin může mít jiný účel, jiného vlastníka, jinou retenci a jiná pravidla přístupu. Když je hodíš do jedné kolonky „PII“, tým se nic nedozví. Jen získá zkratku, kterou začne používat místo přemýšlení.
 
-## Session a zařízení ber přísněji než veřejný web
+## Externí nástroje posuzuj podle nejvyšší třídy dat
 
-Admin rozhraní má vyšší riziko než běžná uživatelská část. Proto si zaslouží přísnější pravidla: samostatnou doménu nebo cestu, povinné MFA pro citlivé role, kratší idle timeout, absolutní timeout session, re-auth pro destruktivní akce a jasné ukončení session při změně role nebo odchodu člověka z týmu. OWASP u session managementu připomíná, že expirace má být vynucená server-side, ne jen JavaScriptem v prohlížeči.
+Dodavatel není rizikový podle loga, ale podle dat, která do něj posíláš. Nástroj pro uptime monitoring bez osobních dat je jiné riziko než session replay, support widget nebo AI služba, kam někdo vloží zákaznický obsah.
 
-Praktické minimum:
+Jednoduché pravidlo: externí nástroj smí dostat jen takovou třídu dat, kterou máš předem povolenou v datové mapě. Pokud nástroj potřebuje vyšší třídu, musí projít znovu přes rozhodnutí: účel, region provozu, DPA, subprocesory, přístupová práva, retence, export a exit plán.
 
-- Admin session odděl od běžné zákaznické session.
-- Po změně role nebo deaktivaci účtu revokuj aktivní session.
-- Citlivé akce potvrzuj re-auth krokem nebo silnějším faktorem.
-- Nepoužívej sdílené účty typu `support@firma`.
-- Ulož poslední přihlášení, zařízení a významné změny role do auditní stopy.
+Příklad:
 
-## Support impersonation navrhni opatrně
+- Uptime služba: URL, status kód, čas odezvy — většinou interní provozní data.
+- E-mailová služba: e-mail, jméno, obsah transakční zprávy — osobní údaje a komunikační obsah.
+- AI sumarizace ticketů: volný text od zákazníka — potenciálně zákaznický obsah a osobní údaje.
+- Error monitoring: stack trace, URL, user ID, někdy payload — riziko podle toho, co filtruješ před odesláním.
 
-„Přihlásit se jako zákazník“ je lákavé tlačítko. Umí rychle vyřešit problém, ale taky obchází hranice mezi interním týmem a zákaznickým prostorem. Pokud impersonation opravdu potřebuješ, navrhni ho jako mimořádný režim, ne jako běžnou navigační zkratku.
+Privacy-first provoz v Evropě neznamená nikdy nepoužít dodavatele. Znamená vědět, co přesně mu posíláš, proč, kde se to zpracovává a jak se z toho dostaneš ven bez digitálního stěhováku s rozbitým kolem.
 
-Bezpečnější pravidla:
+## Retence se řídí třídou dat a účelem
 
-- Impersonation vyžaduje ticket ID nebo explicitní důvod.
-- Zákazník nebo vlastník workspace má možnost vidět, že impersonation proběhl, pokud to neohrozí bezpečnostní šetření.
-- Během impersonation nejdou měnit hesla, MFA, billing údaje ani exportovat data bez dalšího schválení.
-- UI jasně ukazuje, že interní člověk jedná v cizím účtu.
-- Každá akce se loguje jako interní akce, ne jako zákaznická aktivita.
+Retence nemá být „všechno držíme navždy, protože disk je levný“. Disk je levný. Vysvětlování starého úniku dat levné není.
 
-Ještě lepší alternativa je „view as“ režim bez možnosti měnit data: support vidí rozhraní podobné zákazníkovi, ale destruktivní akce zůstávají zamčené. Produktový tým má sice o jedno kouzelné tlačítko méně, ale právník a bezpečák budou dýchat normálněji. To je dobrá výměna.
+Praktický model:
 
-## Interní nástroje mají mít vlastní release rutinu
+| Třída | Typická retence | Poznámka |
+|---|---:|---|
+| Veřejné | podle potřeby publikace | verzovat a archivovat bez osobních údajů |
+| Interní provozní | 3–24 měsíců | podle potřeby trendů a rozhodnutí |
+| Kontaktní osobní údaje | po dobu účtu + retenční pravidlo | oddělit od marketingového souhlasu |
+| Bezpečnostní signály | dny až měsíce | podle rizika, ne podle zvědavosti |
+| Support obsah | kratší než účet, pokud jde | čistit přílohy a volný text |
+| Tajemství | do rotace / okamžitě po zneplatnění | nikdy nearchivovat v čitelné podobě |
 
-Admin panel není sandbox pro rychlé hacky. Když umí měnit data zákazníků, zaslouží si stejné zacházení jako produkční produkt: code review, testy oprávnění, audit změn, feature flagy, rollback a dokumentaci. Nejčastější interní průšvihy nejsou hollywoodské útoky, ale „jen jsme přidali rychlé tlačítko pro support“ bez validace rozsahu.
+Retenční pravidlo musí být spustitelné. Pokud neumíš data najít a smazat, nemáš retenční pravidlo. Máš přání ve formátu Markdown.
 
-Před každou novou interní funkcí si polož otázky:
+## Checklist: klasifikace dat bez divadla
 
-- Jakou práci zrychluje?
-- Jaká osobní nebo zákaznická data ukazuje?
-- Která role ji smí použít?
-- Co se stane při chybě nebo omylu?
-- Jak akci vrátíme zpět?
-- Jak poznáme zneužití nebo podezřelé použití?
+- [ ] Máme 3–5 srozumitelných tříd dat, které tým opravdu používá.
+- [ ] Každá třída říká, co se smí logovat, exportovat, sdílet a zobrazit v adminu.
+- [ ] Zákaznický obsah je oddělený od běžných účtových údajů.
+- [ ] Logy, support, admin, exporty a externí integrace mají napojená pravidla klasifikace.
+- [ ] Externí nástroje posuzujeme podle nejvyšší třídy dat, kterou dostávají.
+- [ ] Retence je definovaná podle účelu a je technicky proveditelná.
+- [ ] Tajemství a tokeny mají pravidlo „nikdy nelogovat“ a plán rotace.
+- [ ] Datová mapa obsahuje vlastníka, účel, dodavatele, přístupy a retenci.
+- [ ] Volný text v supportu a AI promptech bereme jako rizikovou zónu.
+- [ ] Jednou měsíčně kontrolujeme nové datové toky, ne jen nové funkce.
 
-Pokud na tyhle otázky neumíš odpovědět, funkce není „malá interní změna“. Je to produkční riziko s horším PR oddělením.
-
-## Checklist: admin bez datového průvanu
-
-- [ ] Máme sepsané interní práce a minimální data pro každou z nich.
-- [ ] Role jsou pojmenované podle činností, ne podle seniority nebo pohodlí.
-- [ ] Backend ověřuje oprávnění pro každou citlivou akci a konkrétní objekt.
-- [ ] Citlivá data jsou ve výchozím stavu maskovaná nebo nenačtená.
-- [ ] Break-glass přístup má důvod, expiraci, auditní stopu a následnou kontrolu.
-- [ ] Auditní log neobsahuje celé osobní údaje, tokeny ani zákaznický obsah.
-- [ ] Admin session má přísnější timeouty, MFA a revokaci při změně role.
-- [ ] Impersonation je omezený, viditelný a logovaný jako interní akce.
-- [ ] Exporty, refundy, změny rolí a destruktivní akce mají schválení nebo re-auth.
-- [ ] Interní nástroje procházejí code review a testem oprávnění před nasazením.
-
-## Mini šablona admin access karty
+## Mini šablona datové klasifikační karty
 
 ```markdown
-# Admin access karta: [produkt / interní nástroj]
+# Datová klasifikační karta: [datový tok / pole / dataset]
 
-## Interní práce
-Scénář:
-Kdo práci dělá:
-Jaké rozhodnutí dělá:
-
-## Data
-Minimální data nutná pro práci:
-Data maskovaná ve výchozím stavu:
-Data, která nesmí být dostupná:
-
-## Oprávnění
-Role:
-Povolené akce:
-Zakázané akce:
-Re-auth / MFA požadavek:
-
-## Break-glass
-Kdy je povolený:
-Maximální délka:
-Kdo dostane oznámení:
-Jak proběhne následná kontrola:
-
-## Audit
-Logované události:
-Retence auditní stopy:
-Co se do logu nikdy nesmí zapsat:
-
-## Review
-Datum poslední kontroly:
-Nalezené přebytečné přístupy:
-Další krok:
-```
-
-## Zdroje
-
-- OWASP Cheat Sheet Series: Authorization Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
-- OWASP Cheat Sheet Series: Session Management Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
-- OWASP Cheat Sheet Series: Business Logic Security Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Business_Logic_Security_Cheat_Sheet.html
-- EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default — https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+## Účel
++Proč data vznikají:
++Které rozhodnutí nebo funkci podporují:
++Co by se stalo, kdybychom je nesbírali:
++
++## Třída dat
++Třída: [veřejné / interní provozní / osobní údaj / zákaznický obsah / citlivé provozní]
++Obsahuje osobní údaje: [ano/ne]
++Obsahuje tajemství nebo tokeny: [ano/ne]
++
++## Místa zpracování
++Vzniká v:
++Ukládá se v:
++Zobrazuje se v:
++Odchází dodavatelům:
++
++## Pravidla
++Logování:
++Admin zobrazení:
++Export:
++Retence:
++Výmaz / anonymizace:
++
++## Kontrola
++Vlastník:
++Datum poslední kontroly:
++Nalezené riziko:
++Další krok:
++```
++
++## Zdroje
++
++- European Commission: What data can we process and under which conditions? — https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
++- EDPB: Basic principles — https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
++- ENISA: Data Protection Engineering — https://www.enisa.europa.eu/publications/data-protection-engineering
++- NIST: Privacy Framework — https://www.nist.gov/privacy-framework/privacy-framework
 
 # Pracovní log
 
-- 2026-10-05: Doplněna příloha „Admin rozhraní a interní nástroje bez datového průvanu“ s mapou interních prací, rolemi podle činností, maskováním citlivých dat, break-glass režimem, auditními událostmi, pravidly pro admin session a impersonation, checklistem, admin access šablonou a ověřenými zdroji OWASP a EDPB.
+- 2026-10-05: Doplněna příloha „Klasifikace dat bez korporátního štítkovacího divadla“ s jednoduchým modelem tříd dat, pravidly pro logování, admin, support, exporty, externí nástroje, retenci, checklistem, datovou klasifikační kartou a ověřenými zdroji Evropské komise, EDPB, ENISA a NIST.
 
 - 2026-10-05: Doplněna příloha „Externí skripty a CDN bez frontendového dodavatelského blešího trhu“ s inventářem externích zdrojů, pravidly pro self-hosting fontů/knihoven, omezením škod přes CSP/SRI/Referrer-Policy, governance tag manageru, rozhodovací maticí, checklistem, frontend supply-chain šablonou a ověřenými zdroji MDN a OWASP.
 
