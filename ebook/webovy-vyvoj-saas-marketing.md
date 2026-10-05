@@ -43474,28 +43474,28 @@ Konkurenční analýza má být kompas, ne dálkové ovládání. Pomáhá vidě
 
 ---
 
-# Příloha: Přístupnost webu bez checkbox divadla a drahých překvapení
+# Příloha: Přístupnost v design systému bez regresí a overlay kouzel
 
-Přístupnost není speciální režim pro „někoho jiného“. Je to kvalita produktu: jasný text, ovladatelnost klávesnicí, čitelný kontrast, smysluplné chyby ve formulářích, použitelnost na mobilu, respekt k omezenému pohybu a dobrá struktura stránky. Když ji zanedbáš, netrestáš jen lidi se zdravotním postižením. Trestáš i zákazníka s rozbitou myší, unavenýma očima, pomalým připojením, malým displejem, dočasným zraněním nebo prostě s nulovou trpělivostí na digitální schovávanou.
+Tahle příloha navazuje na obecné audity přístupnosti a řeší praktičtější otázku: jak zařídit, aby se stejná chyba nevracela v každém formuláři, modalu, dropdownu a checkoutu. Přístupnost není speciální režim pro „někoho jiného“. Je to kvalita produktu: jasný text, ovladatelnost klávesnicí, čitelný kontrast, smysluplné chyby ve formulářích, použitelnost na mobilu, respekt k omezenému pohybu a dobrá struktura stránky. Když ji zanedbáš, netrestáš jen lidi se zdravotním postižením. Trestáš i zákazníka s rozbitou myší, unavenýma očima, pomalým připojením, malým displejem, dočasným zraněním nebo prostě s nulovou trpělivostí na digitální schovávanou.
 
 Privacy-first pohled k tomu přidává ještě jednu brzdu: přístupnost se nemá měřit šmírováním. Nepotřebuješ nahrávat obrazovky uživatelů, sledovat každý pohyb myši a lepit do webu další externí skript jen proto, abys zjistil, že tlačítko nejde tabulátorem trefit. Většinu základních problémů najdeš ruční kontrolou, automatizovaným auditem, testem klávesnice a pár rozhovory s lidmi, kteří web opravdu používají.
 
 > Codyho komentář: Přístupnost je jako úklid v kuchyni. Když ji děláš průběžně, skoro o ní nemluvíš. Když ji ignoruješ rok, najednou řešíš katastrofu, audit, redesign a někdo u toho velmi vážně vysloví slovo „quick win“. Nebude quick. Nebude win.
 
-## Začni pěti kritickými cestami
+## Začni komponentami, které nesou kritické cesty
 
-Nezačínej ambicí „opravit celý web“. To zní hezky, ale často skončí jako nekonečný audit bez dopadu. Začni pěti cestami, které rozhodují o penězích, důvěře nebo podpoře.
+Nezačínej ambicí „opravit celý web“. To zní hezky, ale často skončí jako nekonečný audit bez dopadu. Začni komponentami a vzory, které se opakují v cestách rozhodujících o penězích, důvěře nebo podpoře.
 
-Typické kritické cesty:
+Typické kritické cesty a jejich komponenty:
 
-- návštěvník pochopí nabídku a přejde na kontakt,
-- zákazník vyplní poptávkový formulář,
-- uživatel založí účet a dokončí první hodnotnou akci,
-- platící zákazník najde fakturu, export nebo nastavení týmu,
-- člověk se dostane k supportu nebo dokumentaci,
-- administrátor pozve kolegu a nastaví role.
+- nabídka a kontakt: navigace, CTA, formulář, chybové stavy,
+- poptávka: inputy, checkboxy, validace, potvrzení,
+- onboarding: kroky průvodce, modal, tooltip, stavový text,
+- fakturace a export: tabulka, menu akcí, potvrzovací dialog,
+- support a dokumentace: vyhledávání, odkazy, alerty, prázdné stavy,
+- týmové role: pozvánka, select role, stav odeslání, auditní text.
 
-Ke každé cestě si napiš jednoduchý test: „Dá se dokončit bez myši, na mobilu, se zvětšeným textem a bez toho, aby člověk musel hádat význam ikon?“ Pokud ne, máš konkrétní prioritní práci. Ne abstraktní „musíme řešit accessibility“, ale „poptávkový formulář nejde projít klávesnicí, protože focus mizí v custom selectu“.
+Ke každému opakovanému vzoru si napiš jednoduchý test: „Dá se dokončit bez myši, na mobilu, se zvětšeným textem a bez toho, aby člověk musel hádat význam ikon?“ Pokud ne, máš konkrétní prioritní práci. Ne abstraktní „musíme řešit accessibility“, ale „poptávkový formulář nejde projít klávesnicí, protože focus mizí v custom selectu“.
 
 ## Semantika je levnější než opravování divů
 
@@ -43590,9 +43590,9 @@ Praktická Definition of Done pro UI změnu:
 
 Když tým používá design systém, dej tato pravidla přímo ke komponentám. Button bez focus stavu není hotová komponenta. Input bez chybového stavu není hotová komponenta. Dialog bez návratu focusu po zavření není hotová komponenta. Je to jen pěkný prototyp v kabátu produkce.
 
-## Checklist: přístupnost bez checkbox divadla
+## Checklist: přístupnost v design systému bez regresí
 
-- [ ] Máme vybraných 5 kritických cest webem nebo SaaS produktem.
+- [ ] Máme vybrané komponenty a vzory, které nesou 5 kritických cest webem nebo SaaS produktem.
 - [ ] Každou kritickou cestu lze projít klávesnicí bez pasti a bez ztraceného focusu.
 - [ ] Nadpisy, odkazy, tlačítka a formulářová pole používají správnou semantiku.
 - [ ] Formuláře mají viditelné labely, konkrétní chyby a zachování bezpečných hodnot po chybě.
@@ -43606,7 +43606,7 @@ Když tým používá design systém, dej tato pravidla přímo ke komponentám.
 ## Mini šablona accessibility karty
 
 ```markdown
-# Accessibility karta: [stránka / komponenta / cesta]
+# Accessibility karta: [komponenta / vzor / kritická cesta]
 
 ## Kritická cesta
 - Co chce člověk dokončit:
@@ -43642,11 +43642,11 @@ Když tým používá design systém, dej tato pravidla přímo ke komponentám.
 - W3C WAI: Forms Tutorial: https://www.w3.org/WAI/tutorials/forms/
 - MDN: `prefers-reduced-motion`: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion
 
-Přístupnost je průběžná provozní hygiena. Když ji zabuduješ do komponent, checklistů a release rutiny, nestane se z ní drahý projekt „někdy potom“. A bonus? Web, který je přístupnější, bývá zároveň srozumitelnější, rychlejší na použití a méně závislý na invazivním měření. To není kompromis. To je dobrý produkt.
+Přístupnost je průběžná provozní hygiena. Když ji zabuduješ do komponent, checklistů a release rutiny, nestane se z ní drahý projekt „někdy potom“ ani chyba, která se zkopíruje do dvaceti míst. A bonus? Web, který je přístupnější, bývá zároveň srozumitelnější, rychlejší na použití a méně závislý na invazivním měření. To není kompromis. To je dobrý produkt.
 
 # Pracovní log
 
-- 2026-10-05: Doplněna příloha „Přístupnost webu bez checkbox divadla a drahých překvapení“ s prioritizací kritických cest, semantickým HTML, formulářovými pravidly, kontrolou kontrastu/focusu/motion, privacy-first testováním, Definition of Done, checklistem, accessibility kartou a ověřenými zdroji W3C a MDN.
+- 2026-10-05: Doplněna příloha „Přístupnost v design systému bez regresí a overlay kouzel“ se zaměřením na opakované komponenty kritických cest, semantické HTML, formulářové vzory, kontrolu kontrastu/focusu/motion, privacy-first testování, Definition of Done, checklist, accessibility kartu a ověřené zdroje W3C a MDN.
 
 - 2026-10-05: Doplněna příloha „Konkurenční analýza bez kopírování a šmírování“ s rozhodovací otázkou před sběrem dat, pěti vrstvami sledování trhu, pravidly pro férové veřejné signály, převodem zjištění na hypotézy, hledáním mezer v důvěře, checklistem a vyplnitelnou konkurenční kartou.
 
