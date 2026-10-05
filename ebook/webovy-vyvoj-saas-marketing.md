@@ -42534,7 +42534,214 @@ Retenční pravidlo musí být spustitelné. Pokud neumíš data najít a smazat
 +- NIST: Privacy Framework — https://www.nist.gov/privacy-framework/privacy-framework
 
 
+# Příloha: Produktové dotazníky bez zákaznického rentgenu
+
+Produktový dotazník je užitečný jen tehdy, když pomáhá udělat konkrétní rozhodnutí. Jakmile se z něj stane „raději se zeptáme na všechno, třeba se to někdy hodí“, nevyrábíš poznání. Vyrábíš datový sklad s hezčími tlačítky.
+
+Privacy-first přístup neznamená, že se zákazníků nesmíš ptát. Znamená, že se ptáš férově, stručně, ve správný moment a jen na věci, které opravdu použiješ. Většina malých SaaS týmů nepotřebuje dvacetipoložkový průzkum, spojení odpovědí s kompletní historií používání produktu a nekonečné ukládání syrových komentářů. Potřebuje pochopit, kde se zákazník zasekl, co mu chybí k rozhodnutí a jestli produkt dodal slibovanou hodnotu.
+
+> Codyho komentář: Špatný dotazník je jako obchodník, který místo jedné chytré otázky vytáhne baterku a začne prohledávat sklep zákazníkovy duše. Funguje to? Možná. Je to dobrý nápad? Ne.
+
+## Začni rozhodnutím, ne otázkami
+
+Než napíšeš první otázku, napiš rozhodnutí, které chceš po odpovědích udělat. Bez toho se dotazník nafoukne, protože každá otázka bude znít „zajímavě“. Zajímavé ale není totéž co použitelné.
+
+Dobrá rozhodovací věta:
+
+```text
+Po vyhodnocení dotazníku rozhodneme, jestli [změna / priorita / problém] má být [další krok] do [datum / release / kvartál].
+```
+
+Příklady:
+
+- „Rozhodneme, jestli má onboarding dostat kratší první krok, nebo lepší nápovědu u importu.“
+- „Rozhodneme, které tři otázky doplnit do cenové stránky před dalším sales cyklem.“
+- „Rozhodneme, jestli zákazníci chápou rozdíl mezi tarify bez demo hovoru.“
+- „Rozhodneme, jestli má nová funkce jasný název, nebo jen interní přezdívku, kterou chápe pět lidí a jeden kávovar.“
+
+Když neumíš rozhodnutí napsat, dotazník zatím neposílej. Nejdřív si promluv s podporou, obchodem nebo vývojářem, který vidí reálné záseky v produktu.
+
+## Ptej se na problém, ne na celou osobnost zákazníka
+
+Krátký dotazník má být ostřejší než dlouhý. Jedna dobrá otevřená otázka často přinese víc než deset škál, které pak stejně nikdo neumí interpretovat.
+
+Praktická sada pro produktové učení:
+
+1. **Co jste se snažil/a udělat?**
+2. **Co vám v tom pomohlo nebo překáželo?**
+3. **Co by muselo být jasnější, abyste pokračoval/a bez podpory?**
+4. **Chcete, abychom vás kvůli odpovědi kontaktovali? Pokud ano, nechte e-mail dobrovolně.**
+
+Tohle je obyčejné, ale silné. Získáš kontext, překážku, návrh zlepšení a samostatný souhlas s kontaktem. Nepotřebuješ povinně sbírat jméno, firmu, telefon, velikost týmu, obrat, oblíbenou barvu brand manuálu a náladu v úterý dopoledne.
+
+U škál se vyhni falešné přesnosti. Hodnocení 7/10 samo o sobě neříká skoro nic. Přidej doplňující otázku:
+
+```text
+Co je hlavní důvod vašeho hodnocení?
+```
+
+Pak má číslo smysl. Bez komentáře je to často jen digitální horoskop.
+
+## Odděl anonymní odpověď od kontaktu
+
+Nejčistší návrh je oddělit odpověď od kontaktních údajů. Uživatel nejdřív odpoví na produktovou otázku. Teprve potom volitelně vybere, jestli chce navázat kontakt.
+
+Prakticky:
+
+- odpověď ulož bez e-mailu, pokud e-mail není nutný pro daný účel,
+- kontakt dej do samostatného pole s jasným textem, proč ho chceš,
+- nepropojuj odpověď automaticky s celou produktovou historií, pokud k tomu nemáš konkrétní důvod,
+- internímu týmu ukaž agregovaný výstup dřív než syrové komentáře,
+- u citlivých odpovědí nastav kratší retenci než u anonymizovaných trendů.
+
+Příklad férového textu:
+
+```text
+Odpověď používáme ke zlepšení onboardingového kroku. E-mail je dobrovolný a použijeme ho jen tehdy, když chcete navazující odpověď od týmu. Bez e-mailu vyhodnocujeme odpovědi agregovaně.
+```
+
+Tohle není právnická poezie. Je to produktová slušnost v češtině.
+
+## Mikro-dotazník dej do správného okamžiku
+
+Nejlepší dotazník se ptá tam, kde má člověk čerstvý kontext. Ne pět dní po akci v e-mailu s předmětem „Váš názor je pro nás důležitý“, což je obvykle firemní překlad věty „potřebujeme naplnit kvartální tabulku“.
+
+Dobré momenty:
+
+- po dokončení první hodnotné akce,
+- po zrušení importu nebo nedokončeném nastavení,
+- po použití nové funkce poprvé,
+- po vyřešení support ticketu,
+- před odchodem z placeného tarifu, pokud se ptáš stručně a bez nátlaku.
+
+Špatné momenty:
+
+- hned po registraci, kdy uživatel ještě nic nezažil,
+- uprostřed kritické úlohy,
+- pokaždé při přihlášení,
+- po každém kliknutí, protože „engagement“ zní moderně,
+- na mobilu v podobě modalu, který zakryje práci.
+
+U privacy-first SaaS je dobré pravidlo: dotazník má být méně rušivý než problém, který se snaží pochopit.
+
+## Vyhodnocuj vzory, ne jednotlivé lidi
+
+Cílem není najít „uživatele, který dal nízké hodnocení“ a pronásledovat ho follow-upem. Cílem je najít vzor: nejasný text, chybějící možnost, špatný timing, zbytečné pole, drahý support proces.
+
+Jednoduché štítky stačí:
+
+- onboarding,
+- cena,
+- import/export,
+- výkon,
+- integrace,
+- fakturace,
+- oprávnění,
+- dokumentace,
+- důvěra a bezpečnost.
+
+Ke každému štítku si veď počet výskytů a dva až tři anonymizované příklady. Syrové odpovědi nepatří do veřejného backlogu, dlouhodobého marketingového CRM ani do screenshotu na poradě. Pokud je chceš ukázat týmu, odstraň osobní údaje a interní identifikátory.
+
+Rozhodovací výstup má vypadat třeba takto:
+
+```text
+Za posledních 30 dní přišlo 18 odpovědí k onboardingu. 9 lidí nerozumělo rozdílu mezi importem kontaktů a importem firem. Upravíme název kroku, přidáme krátký příklad a po 14 dnech zkontrolujeme počet zrušených importů.
+```
+
+Tohle je použitelnější než graf „spokojenost 7,4“, který vypadá vědecky, ale rozhodnutí z něj leze jako ježek z ponožky.
+
+## Retence: syrové odpovědi nejsou rodinné stříbro
+
+Dotazníkové odpovědi stárnou. Komentář k onboardingové chybě z verze před rokem může být po redesignu zavádějící. Nastav proto rozdíl mezi syrovými odpověďmi, anonymizovanými příklady a agregovanými trendy.
+
+Praktický model:
+
+- **Syrové odpovědi s kontaktem:** krátká retence podle účelu follow-upu, například do uzavření problému nebo kampaně.
+- **Syrové odpovědi bez kontaktu:** retence podle produktového cyklu, typicky kratší než věčné „pro jistotu“.
+- **Anonymizované citace:** ukládej jen pokud opravdu pomáhají rozhodování nebo dokumentaci problému.
+- **Agregované trendy:** mohou zůstat déle, pokud neobsahují osobní údaje a nejdou rozumně spojit zpět s člověkem.
+
+U každého dotazníku napiš, kdo odpovědi vidí, kde leží, kdy se mažou a jak se exportují nebo dohledají při žádosti člověka. Není to sexy práce. Ale víš, co je ještě méně sexy? Hledat po dvou letech staré odpovědi v pěti nástrojích, protože někdo chtěl „rychlý feedback widget“.
+
+## Mini NPS bez kultu jednoho čísla
+
+NPS může být orientační signál, ne náboženství. Pokud ho používáš, drž ho jako lehký ukazatel a vždy ho spoj s otevřenou odpovědí. Samotná otázka „Doporučili byste nás?“ je pro malý B2B SaaS často méně užitečná než otázka „Co vám brání doporučit nás kolegovi?“
+
+Privacy-first mini varianta:
+
+```text
+Jak pravděpodobné je, že byste produkt doporučili kolegovi?
+0–10
+
+Co je hlavní důvod vašeho hodnocení?
+
+Můžeme se ozvat kvůli doplnění? E-mail je dobrovolný.
+```
+
+Vyhodnocuj hlavně opakující se důvody. Číslo použij jako teploměr, ne jako kormidlo. Když teploměr ukáže horečku, pořád musíš zjistit, jestli jde o chřipku, špatné topení nebo sprint review v zasedačce bez oken.
+
+## Checklist: produktový dotazník bez zákaznického rentgenu
+
+- [ ] Má dotazník napsané rozhodnutí, které po něm uděláme?
+- [ ] Ptáme se jen na informace potřebné pro konkrétní účel?
+- [ ] Je kontakt dobrovolný a oddělený od produktové odpovědi?
+- [ ] Umí uživatel odpovědět bez přihlášení citlivých údajů do textového pole?
+- [ ] Má dotazník přístupné popisky, instrukce a chybové stavy?
+- [ ] Nezobrazujeme dotazník v okamžiku, kdy blokuje důležitou práci?
+- [ ] Vyhodnocujeme vzory a agregace, ne sledování jednotlivců?
+- [ ] Máme retenci pro syrové odpovědi, kontakty a anonymizované trendy?
+- [ ] Víme, kdo má k odpovědím přístup a proč?
+- [ ] Umíme dotazník vypnout, když přestane sloužit rozhodnutí?
+
+## Mini šablona produktového dotazníku
+
+```markdown
+# Produktový dotazník: [název / situace]
+
+## Rozhodnutí
+- Po vyhodnocení rozhodneme:
+- Termín rozhodnutí:
+- Vlastník:
+
+## Kontext zobrazení
+- Kde se dotazník zobrazí:
+- Kdy se zobrazí:
+- Kdy se nezobrazí:
+
+## Otázky
+1.
+2.
+3.
+
+## Data a privacy
+- Povinná pole:
+- Dobrovolná pole:
+- Kontakt oddělený od odpovědi: ano / ne
+- Propojení s účtem nebo workspace: žádné / omezené / nutné, proč:
+
+## Vyhodnocení
+- Štítky:
+- Agregované metriky:
+- Anonymizované příklady:
+- Datum kontroly:
+
+## Retence a přístupy
+- Syrové odpovědi mažeme po:
+- Kontaktní údaje mažeme po:
+- Přístup mají:
+- Export / výmaz řeší:
+```
+
+## Zdroje
+
+- Evropská komise: princip minimalizace dat a další principy GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- Evropská komise: povinnosti organizací a data protection by design/by default — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en
+- EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default — https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- W3C WAI: Forms Tutorial — přístupné popisky, instrukce, validace a notifikace ve formulářích — https://www.w3.org/WAI/tutorials/forms/
+
 # Pracovní log
+
+- 2026-10-05: Doplněna příloha „Produktové dotazníky bez zákaznického rentgenu“ s rozhodovací větou před otázkami, pravidly minimalizace dat, oddělením kontaktu od odpovědi, správným timingem, vyhodnocováním vzorů, retencí, mini NPS, checklistem, šablonou a ověřenými zdroji Evropské komise, EDPB a W3C.
 - 2026-10-05: Rozšířena příloha „API klíče a tajemství bez úniku do repozitáře“ o CI/CD tokeny, webhook secrety, provozní standard a šablonu secrets policy karty.
 
 - 2026-10-05: Doplněna příloha „Klasifikace dat bez korporátního štítkovacího divadla“ s jednoduchým modelem tříd dat, pravidly pro logování, admin, support, exporty, externí nástroje, retenci, checklistem, datovou klasifikační kartou a ověřenými zdroji Evropské komise, EDPB, ENISA a NIST.
