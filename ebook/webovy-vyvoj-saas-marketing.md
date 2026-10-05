@@ -44560,8 +44560,198 @@ Reset hesla není místo pro kreativní překvapení. Uživatel chce zpátky do 
 - [NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html)
 - [MDN: Referrer-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)
 
+# Příloha: Pozvánky do workspace bez nekonečných odkazů a rolového chaosu
+
+Pozvánka do workspace v SaaS aplikaci je nenápadná funkce, která rozhoduje o tom, jestli se tým rozroste bezpečně, nebo jestli si do produktu omylem pustí bývalého dodavatele, osobní e-mail kolegy a tři role, kterým nikdo nerozumí. Vypadá to jako „pošli invite“. Ve skutečnosti je to autorizace, identita, onboarding, auditní stopa a trochu diplomacie v jednom tlačítku.
+
+Dobrá pozvánka má být krátkodobá, konkrétní a vratná. Musí říct, koho zveš, kam ho zveš, s jakou rolí, kdo to schválil a kdy pozvánka přestane platit. Privacy-first varianta navíc nesbírá data „pro jistotu“ a neposílá pozvánkové odkazy přes marketingové nástroje, které z bezpečnostního toku dělají reklamní piknik.
+
+> Codyho komentář: Pokud invite link funguje půl roku, nemá omezený rozsah a nikdo neví, kdo ho vytvořil, není to pozvánka. Je to klíč od kanceláře nalepený zespodu na lavičce před budovou.
+
+## Začni rolemi, ne e-mailem
+
+Nejdřív navrhni role a až potom formulář pro pozvánky. Když máš jen „admin“ a „user“, produkt se časem promění ve skladiště výjimek: někdo potřebuje fakturaci, někdo jen číst reporty, někdo nastavovat integrace, někdo spravovat lidi. Výsledek? Každý druhý člověk je admin, protože jinak „to nejde“. To je bezpečnostní kapitulace s pěkným UI.
+
+Praktické minimum pro menší B2B SaaS:
+
+- `Owner`: vlastnictví workspace, fakturace, mazání, převod a kritické bezpečnostní akce.
+- `Admin`: správa nastavení, členů a běžného provozu bez vlastnických operací.
+- `Member`: práce s produktem v rámci běžných dat a procesů.
+- `Viewer`: čtení reportů, dokumentace nebo výstupů bez možnosti měnit obsah.
+- `Billing`: fakturace a platby bez přístupu k pracovním datům, pokud to produkt dovoluje.
+
+OWASP u autorizace zdůrazňuje, že kontroly přístupu mají být vynucené serverem, výchozí stav má být odmítnutí a práva mají odpovídat obchodnímu kontextu aplikace ([OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)). Přeloženo do Codyho češtiny: role není text na badge. Role je pravidlo, které server opravdu hlídá při každé citlivé akci.
+
+## Pozvánka má mít rozsah a expiraci
+
+Invite token není magická vstupenka do celého produktu. Je to jednorázový prostředek pro konkrétní účel: přijmout členství v konkrétním workspace s konkrétní rolí. Ulož ho jako hash, nastav expiraci a po použití ho zneplatni. Stejná logika jako u resetu hesla: kdo najde token v logu, e-mailu nebo přeposlané zprávě, nemá získat trvalý přístup.
+
+Rozumné výchozí nastavení:
+
+- platnost 3–7 dní podle typu zákazníků a rizika produktu,
+- jednorázové použití po přijetí pozvánky,
+- možnost pozvánku ručně zrušit,
+- viditelný stav: odesláno, přijato, expirováno, zrušeno,
+- auditní záznam bez plného tokenu a bez obsahu pozvánkového e-mailu.
+
+U vyššího rizika přidej omezení na konkrétní e-mailovou adresu nebo doménu. Pokud pozvánka míří na `jana@example.com`, nemá ji přijmout `dodavatel@nekdo-jiny.example`, i kdyby měl odkaz. Pokud podporuješ firemní domény, dávej pozor na osobní adresy: `gmail.com` může být v pořádku pro malý tým, ale u firemního SaaS by měl být minimálně viditelný varovný signál.
+
+## Přijetí pozvánky není automatické ověření důvěry
+
+Kliknutí na odkaz jen říká, že člověk má přístup k pozvánce. Neříká, že je to správná osoba, že používá bezpečný účet nebo že rozumí rozsahu role. Proto přijetí pozvánky rozděl na dvě části: ověření identity a potvrzení role.
+
+Bezpečný tok:
+
+```text
+1. Admin zadá e-mail a vybere roli.
+2. Server vytvoří hashovaný jednorázový invite token s expirací.
+3. E-mail odejde bez trackovacích pixelů a bez marketingových bloků.
+4. Příjemce otevře odkaz.
+5. Pokud nemá účet, vytvoří ho bezpečným registračním tokem.
+6. Server ověří, že účet odpovídá pozvanému e-mailu.
+7. Uživatel vidí workspace, roli a základní pravidla přístupu.
+8. Po potvrzení se token zneplatní a členství se zapíše do auditní stopy.
+```
+
+NIST SP 800-63B řeší správu autentizátorů a životní cyklus přístupu z pohledu digitální identity ([NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html)). Pro malý SaaS z toho plyne jednoduché pravidlo: pozvánka nemá obcházet normální účet, heslo, MFA ani bezpečnostní politiku. Má pouze propojit ověřený účet s konkrétním workspace.
+
+## UI musí ukázat dopad role lidsky
+
+Role typu `Admin` nebo `Billing` nestačí. Před odesláním pozvánky ukaž krátké vysvětlení, co role dovolí. Ne právnickou novelu, ale tři až pět dopadů. Admin pak nerozhoduje podle názvu, ale podle následků.
+
+Příklad:
+
+```text
+Role Admin může:
+- zvát a odebírat členy,
+- měnit nastavení workspace,
+- spravovat integrace,
+- vidět provozní logy.
+
+Role Admin nemůže:
+- převést vlastnictví workspace,
+- smazat celý workspace,
+- měnit fakturační údaje, pokud nemá také Billing.
+```
+
+Tohle je drobnost, která šetří support. Když lidé role chápou, méně často rozdávají vyšší oprávnění „pro jistotu“. A „pro jistotu“ je v přístupových právech většinou jiný název pro budoucí incident.
+
+## Odesílej pozvánky jako provozní zprávu
+
+Pozvánkový e-mail je provozní bezpečnostní zpráva, ne newsletter. Nepatří do něj tracking pixel, reklamní patička, cross-sell ani dlouhá barevná šablona z marketingové automatizace. Stačí jasně říct, kdo zve, do jakého workspace, s jakou rolí a do kdy odkaz platí.
+
+Krátká šablona:
+
+```text
+[Jméno / organizace] vás zve do workspace [název workspace] v produktu [produkt].
+
+Navržená role: [role]
+Odkaz je platný do: [datum a čas]
+
+Přijmout pozvánku:
+[odkaz]
+
+Pokud pozvánku nečekáte, ignorujte ji nebo nám napište na security@example.com.
+```
+
+Privacy-first detail: v e-mailu neuváděj zbytečné interní informace o workspace. Není potřeba vypisovat seznam projektů, členů, fakturační data ani citlivý popis zákazníka. Pozvánka má člověka bezpečně dovést k ověřenému rozhraní, ne nést půlku CRM v těle zprávy.
+
+## Audituj změny členství bez šmírování
+
+U pozvánek potřebuješ auditní stopu, ale ne datový román. Zaznamenej bezpečnostně relevantní metadata: kdo pozvánku vytvořil, koho zval, do jakého workspace, jakou roli navrhl, kdy pozvánka expirovala, zda byla přijata nebo zrušena a kdo změnil roli. Nepotřebuješ sledovat, kolikrát si člověk e-mail otevřel nebo z jakého zařízení četl pozvánku.
+
+Užitečné auditní události:
+
+- `invite_created`,
+- `invite_revoked`,
+- `invite_expired`,
+- `invite_accepted`,
+- `member_role_changed`,
+- `member_removed`,
+- `owner_transferred`.
+
+OWASP doporučuje při autorizaci myslet na důsledné vynucení pravidel a testování přístupových cest; u regresního testování autorizace se vyplatí definovat model aktér–zdroj–akce ([OWASP Authorization Regression Testing Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Regression_Testing_Cheat_Sheet.html)). Pro invite systém to znamená jednoduchou tabulku: kdo smí zvát, koho, do čeho, s jakou rolí a za jakých podmínek.
+
+## Pravidelně uklízej pending pozvánky
+
+Neaktivní pozvánky jsou malý provozní nepořádek, který časem přeroste do bezpečnostního nepořádku. Jednou týdně nebo měsíčně automaticky projdi čekající pozvánky, expiruj staré a ukaž adminům přehled. U velkých B2B zákazníků přidej export nebo jednoduchý report do bezpečnostní kontroly.
+
+Mini rutina:
+
+- každý den označ expirované pozvánky jako neplatné,
+- jednou týdně pošli adminům souhrn čekajících pozvánek, pokud to dává smysl,
+- jednou měsíčně zkontroluj role členů s vyššími právy,
+- při odchodu člověka z firmy zruš pending pozvánky na jeho e-mail,
+- při změně domény zákazníka ověř, jestli staré pozvánky nemíří mimo nový režim.
+
+Pozor na jednu UX past: neobnovuj expirovanou pozvánku automaticky stejným odkazem. Vytvoř novou pozvánku, nový token a nový auditní záznam. Historie pak zůstává čitelná a tokeny nemají nekonečný život v e-mailových archivech.
+
+## Checklist: pozvánky do workspace bez rolového chaosu
+
+- [ ] Každá role má krátký lidský popis dopadu.
+- [ ] Server vynucuje oprávnění, UI je jen pomocná vrstva.
+- [ ] Pozvánka je navázaná na konkrétní workspace, roli a e-mail.
+- [ ] Invite token je náhodný, jednorázový, expirovaný a uložený jako hash.
+- [ ] Pozvánku lze zrušit před přijetím.
+- [ ] Přijetí pozvánky ověřuje účet pozvaného e-mailu.
+- [ ] Pozvánkový e-mail neobsahuje tracking pixel ani marketingové bloky.
+- [ ] Auditní stopa ukládá události členství bez plných tokenů a zbytečných osobních dat.
+- [ ] Pending pozvánky se automaticky expirují a pravidelně uklízí.
+- [ ] Vyšší role mají pravidelný review proces.
+- [ ] Owner převod je oddělený od běžné pozvánky a vyžaduje silnější potvrzení.
+- [ ] Testy pokrývají, kdo smí zvát a měnit role v různých stavech workspace.
+
+## Mini šablona invite karty
+
+```text
+# Invite karta: [produkt / workspace]
+
+## Role
+Role dostupné při pozvání:
+Role zakázané pro běžné adminy:
+Role vyžadující owner potvrzení:
+
+## Token
+Platnost:
+Jednorázovost:
+Ukládání tokenu:
+Zneplatnění:
+
+## E-mail
+Odesílatel:
+Povinné informace:
+Zakázané bloky / tracking:
+Bezpečnostní kontakt:
+
+## Přijetí
+Ověření pozvaného e-mailu:
+Registrační tok:
+MFA pravidla:
+Potvrzení role před vstupem:
+
+## Audit
+Události:
+Retence auditních záznamů:
+Kdo vidí historii pozvánek:
+
+## Kontrola
+Poslední role review:
+Poslední test autorizace:
+Vlastník procesu:
+```
+
+Pozvánky jsou dobré tehdy, když si jich běžný uživatel skoro nevšimne a bezpečnostní člověk u nich nenervózně neťuká prstem do stolu. Jasný rozsah, krátká platnost, srozumitelné role a uklizená auditní stopa udělají víc než velká tabulka oprávnění, kterou nikdo nečte. A hlavně: invite link není shortcut kolem bezpečnosti. Je to bezpečnostní proces s hezčím tlačítkem.
+
+## Zdroje
+
+- [OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)
+- [OWASP Authorization Regression Testing Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Regression_Testing_Cheat_Sheet.html)
+- [OWASP REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html)
+- [NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html)
+
 # Pracovní log
 
+- 2026-10-05: Doplněna příloha „Pozvánky do workspace bez nekonečných odkazů a rolového chaosu“ s návrhem rolí, omezením invite tokenů, bezpečným tokem přijetí pozvánky, privacy-first e-mailem, auditními událostmi, úklidem pending pozvánek, checklistem, invite kartou a ověřenými zdroji OWASP a NIST.
 - 2026-10-05: Doplněna příloha „Reset hesla bez enumerace účtů a e-mailového chaosu“ s konzistentními odpověďmi proti enumeraci, pravidly pro jednorázové hashované tokeny, ochranou tokenu před únikem přes referrer/logy, session invalidací, rate limitingem, bezpečnostní šablonou e-mailu, checklistem, password reset kartou a ověřenými zdroji OWASP, NIST a MDN.
 - 2026-10-05: Doplněna příloha „Přihlašovací formulář bez boje se správcem hesel“ s pravidly pro standardní formuláře, autocomplete tokeny, vkládání hesel a MFA kódů, dlouhá hesla, bezpečné chybové stavy, privacy-first měření, checklistem, login UX kartou a ověřenými zdroji OWASP, MDN a NIST.
 - 2026-10-05: Doplněna příloha „Client-side storage bez datového skladiště v prohlížeči“ s pravidly pro localStorage, sessionStorage, IndexedDB a Cache API, zákazem tokenů v localStorage, expirací a verzováním záznamů, bezpečnějším offline režimem, service worker cache strategií, auditní tabulkou, checklistem, storage kartou a ověřenými zdroji MDN, OWASP a Evropské komise.
