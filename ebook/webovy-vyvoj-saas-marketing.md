@@ -43102,7 +43102,229 @@ Prakticky:
 
 ---
 
+# Příloha: Uživatelské rozhovory bez výzkumného vysavače
+
+Uživatelský výzkum je skvělý sluha a příšerný sběrač „ještě se to může hodit“ dat. Malý web nebo SaaS nepotřebuje nahrávat každou obrazovku, archivovat celé videohovory navždy a vytvářet CRM složku plnou osobních detailů, aby zjistil, proč lidé nerozumí nabídce, kde se ztrácí onboarding nebo co jim brání v nákupu.
+
+Privacy-first rozhovor má jednoduché pravidlo: sbírej jen to, co pomůže zlepšit konkrétní rozhodnutí. Ne identitu pro identitu. Ne biografii pro pocit hloubky. Ne hodinovou nahrávku, když stačí anonymizované poznámky a tři citace bez jména.
+
+> Codyho komentář: Nejlepší insight není „uživatelka z firmy X řekla Y v 13:42 na záznamu“. Nejlepší insight je „tři lidé nepochopili stejný krok, protože náš text slibuje výsledek a UI ukazuje formulářovou hádanku“. To druhé opravíš. To první jen straší v disku.
+
+## Začni rozhodnutím, ne scénářem otázek
+
+Před rozhovorem napiš jednu větu:
+
+> „Po rozhovorech chceme rozhodnout, jestli ___ změnit / ponechat / zahodit.“
+
+Příklady:
+
+- „Chceme rozhodnout, jestli má landing page vysvětlovat produkt přes úsporu času, nebo přes snížení rizika.“
+- „Chceme rozhodnout, jestli onboarding potřebuje průvodce, nebo stačí lepší prázdný stav.“
+- „Chceme rozhodnout, jestli B2B zákazníci rozumí rozdílu mezi tarify.“
+
+Bez rozhodovací věty rozhovor snadno sklouzne do turistického výletu po názorech. Příjemné, dlouhé, drahé a po týdnu nikdo neví, co z toho změnit. Trochu jako porada, akorát s lepším mikrofonem.
+
+## Nábor respondentů bez lovu profilů
+
+Pro malý tým obvykle stačí 5–8 rozhovorů na jednu konkrétní otázku. Ne proto, že by existovalo magické univerzální číslo pro celý produkt, ale protože cílem první iterace je najít opakující se vzory, ne statisticky reprezentativní referendum.
+
+Privacy-first nábor:
+
+- oslov jen segment, který souvisí s rozhodnutím,
+- neposílej hromadné e-maily lidem, kteří k tomu nedali rozumný kontext,
+- neobohacuj respondenty daty z LinkedInu, reklamních publik nebo nákupních databází,
+- neslibuj „15 minut“, pokud víš, že budeš chtít 45,
+- rovnou řekni, jestli bude rozhovor nahrávaný a jak dlouho záznam držíš.
+
+Dobrá pozvánka má čtyři věty:
+
+```text
+Ahoj, zlepšujeme [konkrétní část produktu/webu] pro [typ lidí/týmů].
+Hledáme 30 minut zpětné vazby k tomu, jak dnes řešíte [situace].
+Nebudeme po vás chtít citlivá data ani přístup do účtu; stačí zkušenost a konkrétní příklady.
+Poznámky anonymizujeme a případný záznam smažeme do [doba].
+```
+
+## Souhlas s nahráváním není dekorace
+
+Nahrávka rozhovoru je pohodlná pro tým, ale citlivější pro respondenta. Obsahuje hlas, kontext, obrazovku, pracovní zvyky a občas i údaje, které člověk vůbec nechtěl sdílet. Pokud nahrávku nepotřebuješ, nedělej ji.
+
+Praktické pravidlo:
+
+- **Bez nahrávky jako výchozí stav:** dělej živé poznámky a po hovoru je do 24 hodin očisti.
+- **Audio místo videa:** když potřebuješ přesnost citace, často stačí zvuk bez obrazovky.
+- **Video jen pro UX test:** pokud sleduješ klikání, kurzor nebo reakci na prototyp.
+- **Zvlášť potvrď sdílení obrazovky:** respondent má vědět, že nemá ukazovat interní systémy, osobní údaje ani zákaznická data.
+- **Retence předem:** nastav konkrétní datum smazání, ne „až to jednou uklidíme“. Všichni víme, jak dopadá „jednou“. Nikdy.
+
+Pokud používáš externí nástroj pro hovory, transkripci nebo zápis poznámek, ber ho jako dodavatele v datové mapě: kdo k datům má přístup, kde se ukládají, jak dlouho, jestli se používají pro trénink modelů a jak se smažou.
+
+## Scénář rozhovoru: méně výslechu, víc reality
+
+Rozhovor nemá dokazovat, že máš pravdu. Má odhalit, kde realita zákazníka naráží na tvůj předpoklad.
+
+Použij tento rámec:
+
+1. **Kontext:** „Kdy jste naposledy řešili ___?“
+2. **Proces:** „Jak jste postupovali od začátku do konce?“
+3. **Tření:** „Co bylo nejotravnější, nejpomalejší nebo nejrizikovější?“
+4. **Dnešní náhrada:** „Čím to řešíte teď?“
+5. **Důsledek:** „Co se stane, když se to nepovede?“
+6. **Reakce na návrh:** „Co je tady jasné, co je podezřelé a co chybí?“
+
+Naopak se vyhni otázkám typu:
+
+- „Používali byste naši funkci?“ — lidé chtějí být milí a budoucnost neumí předpovědět.
+- „Kolik byste zaplatili?“ — bez kontextu rozpočtu, naléhavosti a alternativ je to divadlo.
+- „Líbí se vám to?“ — líbí není totéž jako chápe, potřebuje a koupí.
+
+Lepší je ptát se na nedávné chování, konkrétní rozhodnutí, existující alternativy a reálné překážky.
+
+## Poznámky anonymizuj hned, ne až po požáru
+
+Po rozhovoru udělej dvě vrstvy poznámek:
+
+1. **Surové poznámky:** dočasný pracovní materiál, přístup jen pro výzkumníka nebo malý tým, krátká retence.
+2. **Sdílené insighty:** anonymizovaný souhrn pro produkt, marketing nebo vedení.
+
+Sdílený insight vypadá takhle:
+
+```text
+Vzorec: 4 z 6 respondentů nepochopili rozdíl mezi tarifem Team a Business.
+Důkaz: lidé hledali limity uživatelů, export dat a podporu v tabulce, ale popisy mluví hlavně o „pokročilých funkcích“.
+Dopad: pricing stránka může zvyšovat počet dotazů na sales a snižovat self-service konverzi.
+Návrh: přepsat názvy benefitů podle rozhodovacích kritérií a přidat krátké FAQ pod tabulku.
+Citace bez identity: „Nevím, jestli Business znamená víc funkcí, nebo jen větší firmu.“
+```
+
+Co z poznámek vyhazovat:
+
+- jména lidí, pokud nejsou nutná,
+- názvy jejich zákazníků,
+- interní projekty a čísla,
+- osobní historky bez vazby na rozhodnutí,
+- screenshoty a záznamy obrazovky po vytažení insightu,
+- detailní pracovní postupy, které by mohly poškodit respondenta nebo jeho firmu.
+
+## Výzkumný repozitář bez datového močálu
+
+Místo složky „Research / různé / final_final_v3“ si založ jednoduchou strukturu:
+
+```text
+research/
+  2026-10-pricing-page/
+    plan.md
+    consent-log.md
+    notes-private/        # krátká retence, omezený přístup
+    insights.md           # anonymizovaný výstup
+    decisions.md          # co jsme změnili a proč
+```
+
+Do `plan.md` napiš:
+
+- rozhodovací větu,
+- segment respondentů,
+- otázky,
+- co nebudeš sbírat,
+- jestli se nahrává,
+- datum smazání surových poznámek a záznamů,
+- vlastníka smazání.
+
+Do `decisions.md` napiš, co tým opravdu udělal. Výzkum bez rozhodnutí je jen kulturní akce pro lidi, kteří mají rádi poznámkové aplikace.
+
+## Jak používat AI u rozhovorů
+
+AI může pomoct se scénářem, tříděním anonymizovaných poznámek a návrhem variant textů. Nemá ale automaticky dostat plné nahrávky zákaznických rozhovorů.
+
+Bezpečný postup:
+
+- nejdřív ručně odstraň identity a citlivé detaily,
+- neposílej jména zákazníků, interní systémy ani konkrétní obchodní čísla,
+- u nástroje ověř, zda vstupy nepoužívá pro trénink mimo tvůj účet nebo smluvní režim,
+- výstup AI ber jako návrh vzorů, ne jako pravdu,
+- u důležitých rozhodnutí se vrať k původním anonymizovaným poznámkám.
+
+Praktický prompt:
+
+```text
+Níže jsou anonymizované poznámky z 6 uživatelských rozhovorů o pricing stránce.
+Nehledej jednotlivé identity. Najdi opakující se překážky, rozhodovací kritéria a otázky,
+které lidem chyběly před kliknutím na CTA. Výstup rozděl na: vzory, důkazy, nejistoty,
+návrhy změn a otázky pro další iteraci.
+```
+
+## Checklist: privacy-first rozhovor
+
+- [ ] Máme jednu rozhodovací větu.
+- [ ] Víme, koho oslovujeme a proč právě tento segment.
+- [ ] Pozvánka říká účel, délku, nahrávání a retenci.
+- [ ] Nesbíráme data, která nepotřebujeme k rozhodnutí.
+- [ ] Respondent ví, že nemá sdílet citlivé údaje ani interní obrazovky.
+- [ ] Nahrávka je vypnutá jako výchozí stav, nebo má jasný důvod.
+- [ ] Surové poznámky mají omezený přístup a datum smazání.
+- [ ] Sdílené insighty jsou anonymizované.
+- [ ] AI dostává jen očištěné poznámky, ne plné citlivé záznamy.
+- [ ] Po výzkumu vzniklo konkrétní rozhodnutí nebo další test.
+
+## Mini šablona výzkumné karty
+
+```text
+# Výzkumná karta
+
+## Rozhodnutí
+Po výzkumu chceme rozhodnout:
+
+## Kontext
+Část produktu/webu:
+Segment respondentů:
+Počet rozhovorů:
+Termín:
+Vlastník:
+
+## Data a souhlas
+Budeme nahrávat: ano/ne
+Proč je nahrávka nutná:
+Retence nahrávky:
+Retence surových poznámek:
+Kdo má přístup:
+Co výslovně nesbíráme:
+
+## Scénář
+1.
+2.
+3.
+4.
+5.
+
+## Insighty
+Vzorec:
+Důkaz:
+Dopad:
+Návrh:
+Anonymizovaná citace:
+
+## Rozhodnutí po výzkumu
+Co měníme:
+Co neměníme:
+Co ověříme příště:
+Datum smazání surových dat:
+```
+
+Uživatelský výzkum má zmenšovat nejistotu, ne zvětšovat datový sklad. Když si předem určíš rozhodnutí, minimalizuješ sběr a rychle anonymizuješ výstupy, získáš víc důvěry i lepší produktové signály. A jako bonus nebudeš za půl roku přemýšlet, proč máš v cloudu 40 hodin starých nahrávek lidí, kteří ti jen chtěli říct, že tlačítko má divný text.
+
+## Zdroje
+
+- GDPR, článek 5 — zásady zpracování osobních údajů včetně minimalizace údajů a omezení uložení: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679
+- GDPR, článek 25 — záměrná a standardní ochrana osobních údajů: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679
+- EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- EDPB: Guidelines 05/2020 on consent under Regulation 2016/679: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
+- European Commission: Data protection rules for businesses and organisations: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations_en
+
+---
+
 # Pracovní log
+
+- 2026-10-05: Doplněna příloha „Uživatelské rozhovory bez výzkumného vysavače“ s rozhodovací větou, privacy-first náborem respondentů, pravidly pro nahrávání a retenci, anonymizací poznámek, použitím AI nad očištěnými daty, checklistem, výzkumnou kartou a ověřenými zdroji GDPR, EDPB a Evropské komise.
 
 - 2026-10-05: Doplněna příloha „Preference centrum a odhlašování bez e-mailové pasti“ s rozdělením typů e-mailů, pravidly snadného odhlášení, suppression listem, oddělením produktových a marketingových zpráv, právním minimem, checklistem, preference policy šablonou a ověřenými zdroji GDPR, ePrivacy, českého zákona č. 480/2004 Sb. a ÚOOÚ.
 
