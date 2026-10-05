@@ -43472,7 +43472,181 @@ Pokud odpovědi nejsou jasné, dej nápad do parkoviště. Parkoviště není h�
 
 Konkurenční analýza má být kompas, ne dálkové ovládání. Pomáhá vidět trh, ale řídit musíš vlastní produktovou logikou, zákaznickou realitou a hodnotami. Pokud je jednou z hodnot kontrola nad daty, piš ji do analýzy stejně vážně jako cenu, funkce a konverze. Právě tam často vzniká rozdíl, který nejde snadno okopírovat.
 
+---
+
+# Příloha: Přístupnost webu bez checkbox divadla a drahých překvapení
+
+Přístupnost není speciální režim pro „někoho jiného“. Je to kvalita produktu: jasný text, ovladatelnost klávesnicí, čitelný kontrast, smysluplné chyby ve formulářích, použitelnost na mobilu, respekt k omezenému pohybu a dobrá struktura stránky. Když ji zanedbáš, netrestáš jen lidi se zdravotním postižením. Trestáš i zákazníka s rozbitou myší, unavenýma očima, pomalým připojením, malým displejem, dočasným zraněním nebo prostě s nulovou trpělivostí na digitální schovávanou.
+
+Privacy-first pohled k tomu přidává ještě jednu brzdu: přístupnost se nemá měřit šmírováním. Nepotřebuješ nahrávat obrazovky uživatelů, sledovat každý pohyb myši a lepit do webu další externí skript jen proto, abys zjistil, že tlačítko nejde tabulátorem trefit. Většinu základních problémů najdeš ruční kontrolou, automatizovaným auditem, testem klávesnice a pár rozhovory s lidmi, kteří web opravdu používají.
+
+> Codyho komentář: Přístupnost je jako úklid v kuchyni. Když ji děláš průběžně, skoro o ní nemluvíš. Když ji ignoruješ rok, najednou řešíš katastrofu, audit, redesign a někdo u toho velmi vážně vysloví slovo „quick win“. Nebude quick. Nebude win.
+
+## Začni pěti kritickými cestami
+
+Nezačínej ambicí „opravit celý web“. To zní hezky, ale často skončí jako nekonečný audit bez dopadu. Začni pěti cestami, které rozhodují o penězích, důvěře nebo podpoře.
+
+Typické kritické cesty:
+
+- návštěvník pochopí nabídku a přejde na kontakt,
+- zákazník vyplní poptávkový formulář,
+- uživatel založí účet a dokončí první hodnotnou akci,
+- platící zákazník najde fakturu, export nebo nastavení týmu,
+- člověk se dostane k supportu nebo dokumentaci,
+- administrátor pozve kolegu a nastaví role.
+
+Ke každé cestě si napiš jednoduchý test: „Dá se dokončit bez myši, na mobilu, se zvětšeným textem a bez toho, aby člověk musel hádat význam ikon?“ Pokud ne, máš konkrétní prioritní práci. Ne abstraktní „musíme řešit accessibility“, ale „poptávkový formulář nejde projít klávesnicí, protože focus mizí v custom selectu“.
+
+## Semantika je levnější než opravování divů
+
+Nejlevnější přístupnost vzniká ještě před designovým kouzlením: správným HTML. Tlačítko má být `button`, odkaz má být `a`, nadpisy mají tvořit smysluplnou strukturu a formulářové pole má mít skutečný `label`. Když z obyčejných prvků uděláš dekorativní `div` zoo, musíš potom znovu ručně dodělávat roli, stav, klávesnici, focus a chování pro asistivní technologie.
+
+Praktické pravidlo: když existuje nativní HTML prvek, použij ho jako výchozí. Vlastní komponentu dělej až ve chvíli, kdy víš, jak přesně zachováš její přístupné chování. Design systém by neměl jen ukládat barvy a radiusy; měl by ukládat i pravidla pro focus, disabled stav, chybové hlášky, popisy polí, velikost dotykových cílů a klávesnicové ovládání.
+
+Příklad špatného reflexu:
+
+```html
+<div class="primary-button" onclick="submitForm()">Odeslat</div>
+```
+
+Lepší základ:
+
+```html
+<button type="submit" class="primary-button">Odeslat</button>
+```
+
+To druhé není méně moderní. Je to méně rozbité.
+
+## Formuláře opravuj jako obchodní infrastrukturu
+
+Formulář je místo, kde přístupnost přímo ovlivňuje konverzi. Každé pole má mít viditelný popisek, srozumitelnou nápovědu, správný typ vstupu, konkrétní chybovou zprávu a bezpečný stav po neúspěšném odeslání. Chyba typu „invalid input“ je UX ekvivalent pokrčení ramen.
+
+Dobrá formulářová pravidla:
+
+- povinná pole označuj textem, ne jen barvou nebo hvězdičkou bez vysvětlení,
+- chybu ukaž u pole i v souhrnu nahoře, pokud je formulář delší,
+- po chybě neposílej člověka na začátek stránky bez kontextu,
+- zachovej už vyplněné hodnoty, pokud to není bezpečnostně nevhodné,
+- `autocomplete` používej tam, kde pomáhá a neohrožuje soukromí,
+- u citlivých polí vysvětli, proč je potřebuješ.
+
+Privacy-first formulář navíc nesbírá víc údajů jen proto, že se vešly do layoutu. Přístupnost a minimalizace dat se tu potkávají krásně: kratší formulář je snazší projít, snazší vysvětlit a snazší zabezpečit. Zázrak? Ne, jen méně datového hamounění.
+
+## Kontrast, focus a motion kontroluj před nasazením
+
+Vizuální polish bez přístupnosti je jen lak na pasti. Před nasazením kontroluj tři věci: kontrast, viditelný focus a pohyb.
+
+Kontrast neřeš pocitem. Měř ho. Text, sekundární text, placeholdery, chybové hlášky, ikony a hranice inputů musí být čitelné v reálném kontextu, ne jen na designovém plátně s ideálním monitorem. Placeholder není náhrada labelu; když zmizí při psaní, mizí i instrukce.
+
+Focus nesmí být odstraněný kvůli estetice. Pokud `outline: none`, tak jen ve chvíli, kdy přidáš vlastní dobře viditelný focus styl. Tlačítko, odkaz, select, dialog, menu, taby a skip link musí být klávesnicí najitelné a ovladatelné v logickém pořadí.
+
+Motion používej jako pomoc, ne jako trest. Animace mohou vysvětlit změnu stavu, ale nesmí blokovat práci, vyvolávat nevolnost nebo ignorovat systémovou preferenci omezeného pohybu. Pro výraznější animace nastav variantu přes `prefers-reduced-motion`.
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+Tenhle reset není univerzální designová strategie, ale dobrá pojistka, když produkt obsahuje hodně efektů. Ještě lepší je navrhovat animace tak, aby měly jasný účel a nehrály si na cirkusový ohňostroj.
+
+## Automatické audity ber jako kouřový alarm
+
+Automatický audit je užitečný, ale nevidí všechno. Najde chybějící `alt`, některé kontrastní problémy, špatné ARIA použití nebo základní strukturální chyby. Neřekne ti ale spolehlivě, jestli text dává smysl, jestli je pořadí focusu pro člověka logické, jestli je chybová zpráva užitečná nebo jestli je onboarding mentálně snesitelný.
+
+Používej ho jako kouřový alarm: když pípá, něco řeš. Když nepípá, ještě to neznamená, že můžeš grilovat uprostřed obýváku.
+
+Minimální privacy-first testovací sada:
+
+1. Projdi kritickou cestu jen klávesnicí.
+2. Zvětši text nebo stránku na 200 % a ověř, že se nic neztratí.
+3. Ověř kontrast u textu, tlačítek, inputů a chyb.
+4. Vypni obrázky nebo zkontroluj alternativní texty u informačních obrázků.
+5. Vyzkoušej formulář s chybou i úspěchem.
+6. Zapni omezení pohybu v systému a projdi animované části.
+7. Spusť automatický audit v lokálním vývojovém prostředí nebo CI.
+
+Do analytiky neposílej detailní záznamy jednotlivých pokusů, nahrávky obrazovky ani obsah polí. Stačí agregované signály: počet dokončených formulářů, počet serverových validačních chyb podle typu, počet otevření nápovědy nebo počet kontaktů na support k dané cestě. A i ty drž bez osobních údajů.
+
+## Přístupnost piš do Definition of Done
+
+Přístupnost nesmí být finální razítko po vývoji. To je nejdražší možný okamžik, kdy zjistit, že modal neumí focus trap, custom dropdown se nedá ovládat klávesnicí a validace formuláře je vizuální hádanka.
+
+Praktická Definition of Done pro UI změnu:
+
+- změna používá nativní prvky nebo má zdokumentované přístupné chování,
+- jde ovládat klávesnicí v logickém pořadí,
+- focus je viditelný a neztrácí se,
+- texty tlačítek a odkazů dávají smysl mimo vizuální kontext,
+- formulářové chyby jsou konkrétní a čitelné,
+- změna funguje se zvětšeným textem a na menším viewportu,
+- animace respektují omezení pohybu,
+- nejsou přidané externí skripty jen kvůli měření přístupnosti.
+
+Když tým používá design systém, dej tato pravidla přímo ke komponentám. Button bez focus stavu není hotová komponenta. Input bez chybového stavu není hotová komponenta. Dialog bez návratu focusu po zavření není hotová komponenta. Je to jen pěkný prototyp v kabátu produkce.
+
+## Checklist: přístupnost bez checkbox divadla
+
+- [ ] Máme vybraných 5 kritických cest webem nebo SaaS produktem.
+- [ ] Každou kritickou cestu lze projít klávesnicí bez pasti a bez ztraceného focusu.
+- [ ] Nadpisy, odkazy, tlačítka a formulářová pole používají správnou semantiku.
+- [ ] Formuláře mají viditelné labely, konkrétní chyby a zachování bezpečných hodnot po chybě.
+- [ ] Kontrast je ověřený u textu, tlačítek, ikon, hranic inputů a chybových stavů.
+- [ ] Pohyb a animace respektují `prefers-reduced-motion`.
+- [ ] Automatický audit je součást kontroly, ale nenahrazuje ruční průchod.
+- [ ] Analytika přístupnosti používá agregované signály bez nahrávek obrazovky a obsahu polí.
+- [ ] Přístupnost je v Definition of Done pro komponenty i produktové změny.
+- [ ] Zjištěné problémy mají vlastníka, prioritu podle dopadu a datum kontroly.
+
+## Mini šablona accessibility karty
+
+```markdown
+# Accessibility karta: [stránka / komponenta / cesta]
+
+## Kritická cesta
+- Co chce člověk dokončit:
+- Proč je to důležité pro produkt nebo zákazníka:
+- Hlavní riziko selhání:
+
+## Kontrola
+- Klávesnice:
+- Focus:
+- Nadpisy a struktura:
+- Formuláře a chyby:
+- Kontrast:
+- Motion:
+- Mobil / zoom:
+
+## Privacy-first měření
+- Jaké agregované signály sledujeme:
+- Co nesbíráme:
+- Kdo má k výsledkům přístup:
+
+## Nálezy
+- Problém:
+- Dopad:
+- Priorita:
+- Vlastník:
+- Datum opravy:
+- Datum retestu:
+```
+
+## Zdroje
+
+- W3C: Web Content Accessibility Guidelines (WCAG) 2.2: https://www.w3.org/TR/WCAG22/
+- W3C WAI: Forms Tutorial: https://www.w3.org/WAI/tutorials/forms/
+- MDN: `prefers-reduced-motion`: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion
+
+Přístupnost je průběžná provozní hygiena. Když ji zabuduješ do komponent, checklistů a release rutiny, nestane se z ní drahý projekt „někdy potom“. A bonus? Web, který je přístupnější, bývá zároveň srozumitelnější, rychlejší na použití a méně závislý na invazivním měření. To není kompromis. To je dobrý produkt.
+
 # Pracovní log
+
+- 2026-10-05: Doplněna příloha „Přístupnost webu bez checkbox divadla a drahých překvapení“ s prioritizací kritických cest, semantickým HTML, formulářovými pravidly, kontrolou kontrastu/focusu/motion, privacy-first testováním, Definition of Done, checklistem, accessibility kartou a ověřenými zdroji W3C a MDN.
 
 - 2026-10-05: Doplněna příloha „Konkurenční analýza bez kopírování a šmírování“ s rozhodovací otázkou před sběrem dat, pěti vrstvami sledování trhu, pravidly pro férové veřejné signály, převodem zjištění na hypotézy, hledáním mezer v důvěře, checklistem a vyplnitelnou konkurenční kartou.
 
