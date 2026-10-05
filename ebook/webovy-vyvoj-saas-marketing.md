@@ -44176,169 +44176,205 @@ Client-side storage je skvělý sluha a mizerný archivář. Používej ho pro r
 
 
 
-# Příloha: Obnova účtu bez supportového detektiva a slabé zadní branky
 
-Obnova účtu je bezpečnostní nouzový východ. Má pomoct legitimnímu uživateli vrátit se do produktu, když ztratí heslo, zařízení, passkey, telefon nebo přístup k e-mailu. Zároveň ale nesmí být jednodušší než hlavní přihlášení. Pokud máš MFA, passkeys a přísné session cookies, ale support umí účet „ověřit“ podle poslední faktury poslané ve screenshotu, nepostavil jsi bezpečný systém. Postavil jsi bezpečnostní divadlo s recepcí v zadním vchodu.
+# Příloha: Přihlašovací formulář bez boje se správcem hesel
 
-Privacy-first obnova účtu znamená tři věci: sbíráš minimum záložních údajů, proces je auditovatelný bez čtení obsahu účtu a zákazník předem ví, jaké možnosti obnovy existují. Nechceš situaci, kdy uživatel ve stresu zjišťuje, že jediná cesta zpět je poslat supportu kopii občanky do e-mailu. To není obnova. To je compliance horor s přílohou.
+Přihlašovací formulář je malý kousek UI, který umí pokazit celý vztah s produktem. Když blokuje vložení hesla, mate správce hesel, používá divná jména polí, resetuje formulář po chybě nebo schovává MFA kód za JavaScriptovou gymnastiku, uživatel nezažije „vyšší bezpečnost“. Zažije překážkovou dráhu. A překážková dráha u přihlášení často vede k horším heslům, obcházení MFA, sdílení účtů nebo support ticketu s předmětem „nejde se přihlásit“.
 
-> Codyho komentář: Bezpečný recovery flow má být jako dobrý hasicí přístroj: viditelný, pravidelně kontrolovaný a použitelný v krizi. Ne tajná Excel tabulka, kterou zná jen člověk, co je zrovna na dovolené.
+Privacy-first přístup tady znamená pomáhat bezpečným návykům: dlouhá unikátní hesla, správce hesel, passkeys, čitelné autocomplete tokeny, možnost vložit kód, jasné chyby a minimum sledování. Formulář nemá uživatele vychovávat tím, že mu zakáže nástroje, které mu pomáhají být bezpečnější. To je jako přilepit volant, aby řidič jel rovněji. Kreativní, ale blbé.
 
-## Obnovu navrhni podle hodnoty účtu
+> Codyho komentář: Když web zakáže paste do hesla, netrestá útočníka. Trestá člověka, který používá správce hesel a snaží se nedělat digitální ostudu.
 
-Ne každý účet potřebuje stejný recovery proces. Blogový komentář, malý trial a administrátor B2B workspace nejsou stejné riziko. Rozděl si účty podle dopadu zneužití a podle toho nastav obnovu.
+## Správce hesel je spojenec, ne protivník
 
-Praktické vrstvy:
+OWASP v autentizačním checklistu doporučuje podporovat standardní HTML password pole, umožnit vkládání do přihlašovacích, heslových i MFA polí a obecně nekomplikovat práci správcům hesel ([OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)). NIST SP 800-63B také doporučuje povolit vkládání při zadávání memorovaných tajemství, aby lidé mohli používat správce hesel ([NIST SP 800-63B](https://pages.nist.gov/800-63-3/sp800-63b.html)).
 
-| Typ účtu | Riziko | Vhodná obnova |
-|---|---|---|
-| Běžný čtenářský účet | Nízké | Reset hesla přes e-mail, krátkodobý jednorázový token. |
-| Běžný SaaS uživatel | Střední | Reset hesla, potvrzení e-mailu, ukončení starých relací. |
-| Workspace admin | Vyšší | Reset + MFA/recovery code, upozornění ostatním adminům nebo vlastníkovi. |
-| Fakturace, exporty, API klíče | Vysoké | Step-up ověření, cooldown před citlivou změnou, auditní záznam. |
-| Interní support/admin | Kritické | Přísný interní runbook, schvalování, žádné přebírání identity bez logu. |
+Dobré pravidlo: pokud se uživatel snaží vložit heslo, TOTP kód nebo recovery kód, nech ho. Vkládání neznamená automaticky útok. Často znamená, že heslo je dlouhé, náhodné a uložené ve správci hesel místo v hlavě, poznámkovém bloku nebo sdíleném chatu. Přesně to chceš.
 
-Cílem není uživatele trestat. Cílem je zabránit tomu, aby nejcitlivější účty šly převzít přes nejslabší kanál. Čím větší dopad má účet na data, peníze nebo přístupy ostatních, tím víc musí obnova kombinovat nezávislé důkazy a časovou brzdu.
+Co nedělat:
 
-## Reset hesla je jednorázový tok, ne druhé heslo
+- zakazovat `paste` v poli pro heslo nebo MFA kód;
+- rozdělovat jednorázový kód do šesti polí, která nejdou normálně vložit;
+- používat nestandardní `div` místo formulářových prvků;
+- měnit typ pole nebo jeho `name` podle nálady frameworku;
+- skrývat login v iframe z jiné domény bez dobrého důvodu;
+- resetovat vyplněný e-mail po každé chybě.
 
-OWASP u zapomenutého hesla doporučuje mimo jiné jednotné odpovědi bez prozrazení existence účtu, dostatečně náhodné jednorázové tokeny, omezenou platnost, rate limiting a bezpečné doručení přes existující kanál ([OWASP Forgot Password Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html)).
+Co dělat:
 
-Dobré pravidlo pro reset hesla:
+- používej skutečné `<form>`, `<label>` a `<input>`;
+- nech pole dostupná klávesnicí i čtečkám;
+- povol vkládání a autofill;
+- používej stabilní názvy polí;
+- u MFA podporuj vložení celého kódu najednou;
+- po chybě zachovej bezpečně to, co dává smysl, typicky e-mail.
 
-- odpověď formuláře neprozrazuje, jestli e-mail existuje;
-- token je náhodný, dlouhý, jednorázový a krátkodobý;
-- v databázi je uložený hash tokenu, ne token v čitelné podobě;
-- token se nikdy neloguje a neposílá do analytiky;
-- reset stránka nastavuje ochranu proti úniku referreru;
-- po úspěšné změně hesla se staré session zneplatní;
-- uživatel dostane upozornění, že heslo bylo změněno;
-- podezřelé množství pokusů spustí rate limit a interní signál.
+## `autocomplete` tokeny nastav přesně
 
-Největší provozní chyba je nechat reset token žít moc dlouho „kvůli pohodlí“. Reset link v e-mailové schránce je citlivý přístupový prostředek. Platnost v minutách až nižších hodinách je obvykle rozumnější než několik dní. Pokud uživatel link nestihne, požádá o nový. Ano, je to o jeden klik navíc. Pořád lepší než starý reset link ve schránce, která už dávno není pod kontrolou správného člověka.
+MDN popisuje atribut `autocomplete` jako způsob, jak prohlížeči a správcům hesel říct význam pole; pro hesla rozlišuje mimo jiné `current-password`, `new-password` a pro jednorázové kódy `one-time-code` ([MDN: autocomplete attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete)).
 
-## Recovery kódy ber jako autentizátor
+Praktické příklady:
 
-Recovery kód není poznámka bokem. Je to záložní prostředek, kterým se uživatel může dostat zpět do účtu. NIST SP 800-63B definuje recovery code jako tajemství vydané uživateli pro obnovu účtu, když už se nemůže běžně autentizovat ([NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html)). OWASP u MFA popisuje recovery mechanismy jako část životního cyklu vícefaktorového ověřování ([OWASP Multifactor Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html)).
+```html
+<label for="email">E-mail</label>
+<input id="email" name="email" type="email" autocomplete="username" required>
 
-Praktické nastavení:
-
-- vygeneruj sadu jednorázových recovery kódů při zapnutí MFA;
-- zobraz je jednou a uživateli jasně řekni, že si je má uložit bezpečně;
-- ukládej jen hash kódů;
-- po použití kód zneplatni;
-- po použití pošli upozornění na primární e-mail;
-- umožni regeneraci celé sady až po čerstvém ověření;
-- neukazuj supportu celé kódy ani jejich počet detailněji, než je nutné.
-
-UX text může být jednoduchý: „Recovery kódy použijete, když ztratíte přístup k ověřovací aplikaci nebo zařízení. Každý kód funguje jen jednou. Uložte je do správce hesel nebo na bezpečné offline místo.“ To je lepší než temná hláška „Backup secrets generated successfully“. Lidé nejsou kompilátor.
-
-## Support nesmí být univerzální klíč
-
-Support má pomáhat, ale nemá být boční kanál pro převzetí účtu. Pokud zákazník napíše „ztratil jsem telefon, vypněte mi MFA“, support potřebuje postup, který chrání zákazníka i firmu.
-
-Runbook pro podporu:
-
-- ověř, zda existuje druhý admin workspace;
-- preferuj akci druhého admina před ručním zásahem supportu;
-- u vysokého rizika použij čekací dobu nebo dvojí schválení;
-- nikdy nežádej celé heslo, recovery kód ani obsah účtu;
-- nepřijímej screenshoty citlivých dat jako běžný důkaz identity;
-- všechny ruční zásahy loguj s důvodem, schvalovatelem a časem;
-- po zásahu informuj vlastníka účtu nebo workspace;
-- pravidelně kontroluj, kolikrát support recovery použil.
-
-Dobrý support flow má i větu pro odmítnutí: „Nemůžeme vypnout MFA jen na základě této zprávy. Chráníme tím váš účet i data ve workspace. Nabídneme vám bezpečný postup obnovy.“ To může znít méně pohodlně, ale je to férové a vysvětlitelné.
-
-## E-mail není jediný důkaz identity
-
-E-mail je praktický recovery kanál, ale není neprůstřelný. U vyššího rizika přidej další signály: recovery kód, existující přihlášené zařízení, druhého admina, dříve nastavený záložní kontakt nebo ověření přes firemní doménu. U B2B zákazníků často pomůže organizační model: vlastník workspace, fakturační kontakt, technický admin a bezpečnostní kontakt nemají být jedna anonymní schránka `info@firma.cz`.
-
-Pozor na bezpečnostní otázky typu „jméno prvního psa“. Často jsou uhodnutelné, dohledatelné nebo se po letech mění v loterii paměti. Pokud je používáš, ber je jako slabý doplněk, ne samostatný klíč k účtu. U produktů s vyšším dopadem je lepší investovat do recovery kódů, druhých adminů a jasného procesu.
-
-## Po obnově účet uklidni
-
-Úspěšná obnova není konec. Je to bezpečnostní událost. Po ní má následovat krátký úklid:
-
-- ukonči staré session podle rizika;
-- zneplatni staré reset tokeny a použité recovery kódy;
-- vyžádej nové nastavení MFA, pokud bylo obnovou vypnuté;
-- upozorni uživatele na změnu;
-- nabídni kontrolu aktivních zařízení a API klíčů;
-- u adminů workspace upozorni ostatní relevantní správce;
-- zapiš auditní událost bez citlivých hodnot.
-
-Tahle část je často opomíjená, protože uživatel už „je zpátky“. Jenže právě po návratu chceš snížit riziko, že v účtu zůstal starý přístup, zapomenutý token nebo podezřelá session.
-
-## Checklist: obnova účtu bez zadní branky
-
-- [ ] Reset hesla neprozrazuje existenci účtu.
-- [ ] Reset tokeny jsou náhodné, krátkodobé, jednorázové a uložené jako hash.
-- [ ] Reset tokeny, magic linky a recovery kódy se nikdy nelogují.
-- [ ] Po změně hesla se zneplatní relevantní staré session.
-- [ ] MFA recovery má recovery kódy nebo jiný předem nastavený mechanismus.
-- [ ] Recovery kódy jsou jednorázové a uložené jen hashované.
-- [ ] Workspace admin účty mají přísnější obnovu než běžní uživatelé.
-- [ ] Support má runbook a nemůže sám tiše vypnout MFA bez auditní stopy.
-- [ ] U citlivých zásahů existuje upozornění vlastníkovi nebo druhému adminovi.
-- [ ] Po obnově se nabídne kontrola zařízení, session a API klíčů.
-- [ ] Retence recovery audit logů je jasně nastavená.
-- [ ] Uživatelé vědí předem, jak účet bezpečně obnovit.
-
-## Mini šablona recovery policy karty
-
-```text
-# Recovery policy karta: [produkt / workspace]
-
-## Typy účtů
-Běžný uživatel:
-Admin workspace:
-Fakturace/exporty:
-Interní support:
-
-## Reset hesla
-Platnost tokenu:
-Uložení tokenu:
-Rate limit:
-Upozornění po změně:
-Session po resetu:
-
-## MFA recovery
-Typ recovery mechanismu:
-Počet recovery kódů:
-Regenerace kódů:
-Notifikace po použití:
-Postup při ztrátě všech faktorů:
-
-## Support runbook
-Kdo smí spustit obnovu:
-Kdy je potřeba druhé schválení:
-Jaké důkazy se nesmí požadovat:
-Jak se informuje vlastník:
-
-## Audit a privacy
-Co se loguje:
-Co se nikdy neloguje:
-Retence auditních událostí:
-Kdo má přístup:
-
-## Review
-Vlastník procesu:
-Datum posledního testu:
-Další test:
+<label for="password">Heslo</label>
+<input id="password" name="password" type="password" autocomplete="current-password" required>
 ```
 
-Obnova účtu je místo, kde se ukáže, jestli bezpečnost produktu myslíš vážně. Ne podle toho, kolik máš ikon zámků na landing page, ale podle toho, jestli se umíš postarat o člověka v problému bez toho, aby ses stal nejjednodušší cestou pro útočníka.
+Změna hesla:
+
+```html
+<label for="current-password">Současné heslo</label>
+<input id="current-password" name="current_password" type="password" autocomplete="current-password">
+
+<label for="new-password">Nové heslo</label>
+<input id="new-password" name="new_password" type="password" autocomplete="new-password">
+```
+
+Jednorázový kód:
+
+```html
+<label for="otp">Ověřovací kód</label>
+<input id="otp" name="otp" inputmode="numeric" autocomplete="one-time-code">
+```
+
+`autocomplete="off"` není bezpečnostní strategie. U loginu často zhorší UX a nemusí zastavit správce hesel tak, jak si vývojář myslí. Pokud máš citlivý interní nástroj, řeš přístup přes role, MFA, session politiku a zařízení. Ne tím, že rozbiješ autofill.
+
+## Dlouhá hesla nejsou chyba validace
+
+NIST uvádí, že verifikátoři by měli umožnit dostatečnou maximální délku hesla; aktuální text SP 800-63B mluví o délce alespoň 64 znaků pro memorovaná tajemství ([NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html)). V praxi to znamená: neusekávej heslo na 20 znaků, nedělej tichou truncaci a nenastavuj pravidla, která trestají správce hesel.
+
+Špatné hlášky:
+
+- „Heslo je příliš dlouhé.“
+- „Heslo nesmí obsahovat speciální znaky.“
+- „Vložení není povoleno.“
+- „Heslo musí obsahovat přesně jedno velké písmeno, číslo, symbol a špetku skořice.“
+
+Lepší přístup:
+
+- dovol dlouhá hesla;
+- blokuj známě kompromitovaná nebo extrémně slabá hesla;
+- nabídni passkey nebo MFA;
+- ukaž jasnou radu bez prozrazování interní logiky;
+- při změně hesla nevyžaduj periodickou rotaci bez důvodu.
+
+Privacy-first poznámka: kontrola kompromitovaných hesel se dá dělat bezpečně, například přes k-anonymity model nebo lokální seznam. Neposílej celé nové heslo do externí služby jen proto, že knihovna má hezký badge.
+
+## MFA kód nesmí být UX pastička
+
+Jednorázové kódy jsou krátké, ale lidé je často kopírují ze správce hesel, autentizační aplikace, SMS nebo systémového návrhu. Formulář má zvládnout vložení celého kódu najednou. Pokud vizuálně chceš šest okének, technicky je pořád lepší držet jeden skutečný input a jen stylovat zobrazení, nebo alespoň správně rozdělit vložený kód.
+
+Praktická pravidla:
+
+- povol vložení celého kódu;
+- ignoruj mezery a pomlčky, pokud tím neztrácíš bezpečnost;
+- neukládej kód do logů ani analytiky;
+- chybová hláška neříká, která část kódu byla špatně;
+- po příliš mnoha pokusech použij rate limit;
+- nabídni recovery cestu bez toho, aby šla zneužít jako jednodušší přihlášení.
+
+MFA UX má být rychlé pro legitimního člověka a nudně odolné proti hádání. Nemá dokazovat, že frontend tým umí animovat šest políček.
+
+## Chybové stavy piš lidsky a bezpečně
+
+U přihlášení se často řeší, jestli chybová zpráva prozrazuje existenci účtu. U veřejného loginu je bezpečnější obecná formulace: „E-mail nebo heslo nesedí.“ U interního B2B produktu můžeš někdy použít jemnější navigaci po prvním kroku, ale jen pokud máš jasný důvod a ochranu proti enumeraci.
+
+Dobré chybové zprávy:
+
+- „E-mail nebo heslo nesedí. Zkontrolujte údaje nebo použijte obnovu přístupu.“
+- „Kód se nepodařilo ověřit. Zkuste nový kód nebo recovery postup.“
+- „Z bezpečnostních důvodů zkuste akci za chvíli znovu.“
+- „Přihlášení se nezdařilo. Pokud problém trvá, kontaktujte podporu.“
+
+Špatné chybové zprávy:
+
+- „Uživatel neexistuje.“
+- „Heslo je špatně, ale e-mail je správně.“
+- „TOTP drift 42 sekund, secret ID 123.“
+- „Auth provider returned invalid_grant with raw payload...“
+
+Chybová zpráva má pomoct člověku pokračovat. Nemá být debug konzole v převleku.
+
+## Měř login bez session replay reality show
+
+Přihlášení je kritický funnel, ale nepotřebuješ nahrávat obrazovku, obsah polí ani přesné pohyby myši. Měř stavové události: zobrazení loginu, pokus, úspěch, typ chyby v bezpečné kategorii, použití MFA, rate limit, reset flow. Bez hesel, tokenů, kódů, e-mailů v plném tvaru a bez session replaye na login stránce.
+
+Užitečné agregace:
+
+- úspěšnost přihlášení podle dne;
+- podíl resetů hesla po neúspěšném loginu;
+- počet MFA chyb podle typu faktoru;
+- počet zamítnutých pokusů kvůli rate limitu;
+- počet support ticketů spojených s přihlášením;
+- prohlížeče, kde login technicky selhává, bez ukládání citlivých polí.
+
+Tohle stačí k opravě UX i provozu. Pokud ti někdo tvrdí, že k ladění loginu potřebuje nahrávky obrazovky s vyplňováním hesel, neposílej mu data. Pošli mu čaj a dokumentaci k formulářům.
+
+## Checklist: login bez boje se správcem hesel
+
+- [ ] Login používá skutečný `<form>`, `<label>` a standardní `<input>` prvky.
+- [ ] Pole mají správné `autocomplete` tokeny: `username`, `current-password`, `new-password`, `one-time-code`.
+- [ ] Vkládání do hesla, MFA kódu a recovery kódu není blokované.
+- [ ] Hesla mohou být dlouhá alespoň 64 znaků a nejsou tiše zkracovaná.
+- [ ] MFA input umí přijmout celý vložený kód najednou.
+- [ ] Chybové zprávy pomáhají pokračovat a neprozrazují zbytečné detaily.
+- [ ] Login stránka nepoužívá session replay ani sběr obsahu polí.
+- [ ] Reset a MFA recovery jsou dostupné, ale ne jednodušší než hlavní přihlášení.
+- [ ] Formulář funguje klávesnicí a s asistivními technologiemi.
+- [ ] Support má bezpečný postup pro „nemůžu se přihlásit“ bez žádání hesla.
+
+## Mini šablona login UX karty
+
+```text
+# Login UX karta: [produkt / aplikace]
+
+## Pole
+Identifikátor uživatele:
+Autocomplete pro identifikátor:
+Heslo / passkey:
+Autocomplete pro heslo:
+MFA input:
+
+## Správci hesel
+Paste povolen:
+Autofill otestován v:
+Maximální délka hesla:
+Známé limity:
+
+## Chybové stavy
+Neplatné údaje:
+Rate limit:
+MFA chyba:
+Recovery odkaz:
+Support kontakt:
+
+## Privacy měření
+Události, které měříme:
+Data, která nikdy neměříme:
+Retence login eventů:
+Kdo má přístup k diagnostice:
+
+## Kontrola
+Poslední test s password managerem:
+Poslední test klávesnicí:
+Vlastník formuláře:
+```
+
+Přihlašovací formulář je dobrý tehdy, když je nudný, rychlý a neplete se do cesty nástrojům, které lidé používají pro bezpečnější práci. Bezpečnost nevzniká tím, že zakážeš paste. Vzniká tím, že dobré chování uděláš nejjednodušší cestou.
 
 ## Zdroje
 
-- [OWASP Forgot Password Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html)
-- [OWASP Multifactor Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html)
-- [NIST SP 800-63B: Authentication and Authenticator Management](https://pages.nist.gov/800-63-4/sp800-63b.html)
+- [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
+- [MDN: HTML autocomplete attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/autocomplete)
+- [MDN: input type=password](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/password)
+- [NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html)
 
 # Pracovní log
 
-- 2026-10-05: Doplněna příloha „Obnova účtu bez supportového detektiva a slabé zadní branky“ s pravidly pro reset hesla, recovery kódy, MFA obnovu, support runbook, úklid po obnově, checklistem, recovery policy šablonou a ověřenými zdroji OWASP a NIST.
+- 2026-10-05: Doplněna příloha „Přihlašovací formulář bez boje se správcem hesel“ s pravidly pro standardní formuláře, autocomplete tokeny, vkládání hesel a MFA kódů, dlouhá hesla, bezpečné chybové stavy, privacy-first měření, checklistem, login UX kartou a ověřenými zdroji OWASP, MDN a NIST.
 - 2026-10-05: Doplněna příloha „Client-side storage bez datového skladiště v prohlížeči“ s pravidly pro localStorage, sessionStorage, IndexedDB a Cache API, zákazem tokenů v localStorage, expirací a verzováním záznamů, bezpečnějším offline režimem, service worker cache strategií, auditní tabulkou, checklistem, storage kartou a ověřenými zdroji MDN, OWASP a Evropské komise.
 
 - 2026-10-05: Doplněna příloha „Prohlížečová oprávnění bez permission pop-up cirkusu“ s pravidly pro žádání o polohu, notifikace, kameru, schránku a další browser API, doporučeními pro Permissions-Policy, checklistem, permission kartou a ověřenými zdroji MDN.
