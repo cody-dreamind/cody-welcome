@@ -44372,8 +44372,197 @@ Přihlašovací formulář je dobrý tehdy, když je nudný, rychlý a neplete s
 - [MDN: input type=password](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/password)
 - [NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html)
 
+# Příloha: Reset hesla bez enumerace účtů a e-mailového chaosu
+
+Reset hesla vypadá jako malá funkce. Ve skutečnosti je to nouzový vchod do účtu. Když ho uděláš ledabyle, útočník zjistí, které e-maily u tebe existují, zahltí lidem schránku resetovacími zprávami, ukradne token z referreru nebo si nechá otevřenou starou session po změně hesla. To není „zapomněl jsem heslo“. To je recepce bez recepční.
+
+Dobře navržený reset hesla má tři cíle: neprozrazovat existenci účtu, doručit bezpečný a časově omezený způsob obnovy a po změně hesla uklidit staré přístupy. Privacy-first varianta k tomu přidává čtvrtý cíl: neměřit reset jako marketingový funnel plný osobních stop.
+
+> Codyho komentář: Reset hesla má být jako záchranný východ. Jasně označený, rychlý, kontrolovaný — a rozhodně ne propojený s reklamním pixelovým lunaparkem.
+
+## První obrazovka nesmí prozradit účet
+
+Formulář „Zapomněli jste heslo?“ často svádí k odpovědi „e-mail neexistuje“. Nedělej to. OWASP u resetu hesla doporučuje vracet konzistentní zprávu pro existující i neexistující účty a hlídat i podobný čas odpovědi, aby nešlo snadno enumerovat uživatele ([OWASP Forgot Password Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html)).
+
+Lidská zpráva může znít:
+
+```text
+Pokud u nás účet s tímto e-mailem existuje, poslali jsme instrukce k obnovení přístupu.
+Zkontrolujte prosím doručenou poštu i spam.
+```
+
+Co tím řešíš:
+
+- útočník nezíská seznam registrovaných e-mailů,
+- legitimní uživatel pořád ví, co má udělat,
+- support nemusí vysvětlovat technické detaily,
+- produkt nevytváří zbytečný rozdíl mezi „známým“ a „neznámým“ člověkem.
+
+Stejné pravidlo platí pro API odpověď. Neposílej jednou `404 user_not_found` a podruhé `200 email_sent`. Klient může dostat stejný stav a stejný text, server si interně zaloguje jen agregovaný bezpečnostní signál.
+
+## Token je jednorázový klíč, ne druhé heslo
+
+Resetovací odkaz má mít kryptograficky náhodný, dostatečně dlouhý token, který je jednorázový, časově omezený a uložený bezpečně. Prakticky: do databáze ukládej hash tokenu, ne token samotný. Pokud databáze uteče, resetovací odkazy nemají být připravené k okamžitému použití.
+
+Rozumné výchozí nastavení pro malý SaaS:
+
+- platnost tokenu 15–60 minut podle rizika produktu,
+- jeden aktivní reset token na účet, nový požadavek zneplatní předchozí,
+- token svázaný s účtem a účelem `password_reset`,
+- rate limit podle účtu, IP a případně e-mailové domény,
+- auditní záznam bez plného tokenu a bez obsahu e-mailu.
+
+NIST SP 800-63B řeší životní cyklus autentizátorů včetně událostí, kdy se autentizátor mění, ztrácí nebo kompromituje ([NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html)). Pro běžný SaaS z toho plyne jednoduchá provozní poučka: reset hesla není jen o novém hesle, ale o obnovení kontroly nad účtem.
+
+## Reset stránka nesmí vyzradit token přes okolí
+
+Resetovací token v URL je praktický, ale má rizika. Může se objevit v historii prohlížeče, logu reverzní proxy, analytice, referreru při načtení externího zdroje nebo screenshotu v support ticketu. Proto má reset stránka běžet v režimu „minimum okolních služeb“.
+
+Technické minimum:
+
+- žádné marketingové pixely, session replay ani externí chat widgety,
+- `Referrer-Policy: no-referrer` nebo velmi opatrně nastavená alternativa,
+- žádné externí obrázky a skripty, které nepotřebuješ,
+- logování URL bez query stringu,
+- po otevření odkazu vytvořit krátkou reset session a odstranit token z adresy pomocí redirectu.
+
+MDN popisuje `Referrer-Policy` jako hlavičku, která určuje, kolik informací z referreru se posílá s požadavky ([MDN: Referrer-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)). U resetu hesla je bezpečné výchozí pravidlo jednoduché: token nemá cestovat nikam dál.
+
+Příklad toku:
+
+```text
+1. Uživatel klikne na /reset-password?token=...
+2. Server ověří hash tokenu, účel a expiraci.
+3. Server založí krátkou reset session jen pro změnu hesla.
+4. Server přesměruje na /reset-password/new bez tokenu v URL.
+5. Uživatel zadá nové heslo.
+6. Server zneplatní token, reset session a podle pravidel i staré aktivní session.
+```
+
+## Po změně hesla ukliď staré přístupy
+
+Po úspěšném resetu neprováděj automatické přihlášení jen proto, že to působí pohodlně. OWASP doporučuje po nastavení nového hesla uživatele nechat přihlásit běžným mechanismem a řešit invalidaci existujících sessions ([OWASP Forgot Password Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html)).
+
+Privacy-first a bezpečný kompromis:
+
+- u nízkorizikových účtů nabídni „odhlásit ostatní zařízení“, ale vysvětli dopad,
+- u administrátorů, účtů s fakturací nebo po podezřelé aktivitě odhlaš všechny staré session automaticky,
+- zneplatni všechny aktivní reset tokeny a recovery kódy použité v procesu,
+- pošli informační e-mail o změně hesla, ale neposílej heslo ani citlivé detaily,
+- pokud má účet MFA, nabídni kontrolu metod obnovení a aktivních zařízení.
+
+Text potvrzení může být klidný:
+
+```text
+Heslo bylo změněno. Z bezpečnostních důvodů se prosím přihlaste znovu.
+Pokud jste změnu neprovedli vy, kontaktujte podporu na security@example.com.
+```
+
+## Rate limiting bez trestání zapomnětlivých lidí
+
+Reset hesla musí odolat automatizovanému zneužití, ale nemá trestat člověka, který si omylem spletl e-mail nebo čeká na zpožděnou poštu. Místo tvrdého zamknutí účtu používej vrstvené limity.
+
+Praktická pravidla:
+
+- limituj počet požadavků na konkrétní e-mail za krátké okno,
+- limituj IP nebo síťový rozsah, ale neber IP jako identitu člověka,
+- po opakovaných požadavcích stále vrať stejnou obecnou zprávu,
+- e-mail neposílej při každém kliknutí, pokud je aktivní čerstvý token,
+- pro rizikové vzory přidej zpoždění nebo další ochranu, ne veřejné odhalení stavu účtu.
+
+Do logů ukládej bezpečnostní signál, ne celý příběh uživatele. Stačí například hash e-mailu se solí pro bezpečnostní účely, časové okno, typ události, výsledek doručení a hrubý důvod blokace. Obsah zprávy, reset token ani celé URL tam nepatří.
+
+## E-mail s resetem piš jako bezpečnostní zprávu
+
+Resetovací e-mail má být nudný a ověřitelný. Žádné trackovací pixely, žádné marketingové bloky, žádné „mimochodem sleva na roční tarif“. Člověk je ve stresu, protože se nemůže dostat do účtu. Pomoz mu, neprodávej mu přívěsek ke klíčům.
+
+Struktura:
+
+- kdo e-mail posílá a pro jakou službu,
+- proč přišel,
+- jedno hlavní tlačítko nebo odkaz,
+- časová platnost odkazu,
+- co dělat, pokud žádost neprovedl příjemce,
+- kontakt na podporu nebo bezpečnostní adresu.
+
+Krátká šablona:
+
+```text
+Požádali jste o obnovení hesla pro [produkt].
+
+Odkaz je platný 30 minut a lze ho použít jen jednou:
+[Obnovit heslo]
+
+Pokud jste o změnu nežádali, e-mail ignorujte. Heslo se nezmění, dokud neotevřete odkaz a nenastavíte nové.
+Pokud máte podezření na zneužití účtu, napište na security@example.com.
+```
+
+## Checklist: reset hesla bez chaosu
+
+- [ ] Formulář vrací stejnou zprávu pro existující i neexistující účet.
+- [ ] Odpověď nemá výrazně odlišný čas podle existence účtu.
+- [ ] Reset token je náhodný, jednorázový, expirovaný a uložený jako hash.
+- [ ] Nový reset zneplatní předchozí aktivní token pro stejný účet.
+- [ ] Reset stránka nemá marketingové pixely, chat widgety ani session replay.
+- [ ] URL s tokenem se neloguje v plné podobě.
+- [ ] Reset stránka posílá bezpečnou `Referrer-Policy`.
+- [ ] Po otevření odkazu se token přesune do krátké reset session a zmizí z URL.
+- [ ] Po změně hesla se zneplatní tokeny a podle rizika i staré session.
+- [ ] Uživatel dostane informační e-mail o změně hesla bez citlivých detailů.
+- [ ] Existuje rate limit proti zahlcení e-mailu a brute-force pokusům.
+- [ ] Support má postup pro podezření na převzetí účtu.
+
+## Mini šablona password reset karty
+
+```text
+# Password reset karta: [produkt / tenant]
+
+## Identifikace účtu
+Vstupní pole:
+Veřejná odpověď:
+Interní bezpečnostní signál:
+
+## Token
+Délka platnosti:
+Ukládání tokenu:
+Jednorázovost:
+Zneplatnění starších tokenů:
+
+## Reset stránka
+URL bez tokenu po ověření:
+Referrer-Policy:
+Zakázané externí skripty:
+Logování URL:
+
+## Po změně hesla
+Session invalidace:
+MFA / recovery kontrola:
+Notifikační e-mail:
+Support postup:
+
+## Rate limiting
+Limit podle účtu:
+Limit podle IP / sítě:
+Fallback pro legitimního uživatele:
+
+## Kontrola
+Poslední test enumerace:
+Poslední test token leakage:
+Vlastník procesu:
+```
+
+Reset hesla není místo pro kreativní překvapení. Uživatel chce zpátky do účtu, bezpečnostní tým chce neztratit kontrolu a produkt chce nezanechat datovou stopu delší než samotný incident. Když reset navrhneš jako bezpečný, nudný a srozumitelný proces, vyhneš se spoustě nočních zpráv typu „hele, proč nám jde token do analytics?“ — a to je věta, kterou nechceš číst ani před kávou, ani po ní.
+
+## Zdroje
+
+- [OWASP Forgot Password Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html)
+- [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
+- [NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html)
+- [MDN: Referrer-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)
+
 # Pracovní log
 
+- 2026-10-05: Doplněna příloha „Reset hesla bez enumerace účtů a e-mailového chaosu“ s konzistentními odpověďmi proti enumeraci, pravidly pro jednorázové hashované tokeny, ochranou tokenu před únikem přes referrer/logy, session invalidací, rate limitingem, bezpečnostní šablonou e-mailu, checklistem, password reset kartou a ověřenými zdroji OWASP, NIST a MDN.
 - 2026-10-05: Doplněna příloha „Přihlašovací formulář bez boje se správcem hesel“ s pravidly pro standardní formuláře, autocomplete tokeny, vkládání hesel a MFA kódů, dlouhá hesla, bezpečné chybové stavy, privacy-first měření, checklistem, login UX kartou a ověřenými zdroji OWASP, MDN a NIST.
 - 2026-10-05: Doplněna příloha „Client-side storage bez datového skladiště v prohlížeči“ s pravidly pro localStorage, sessionStorage, IndexedDB a Cache API, zákazem tokenů v localStorage, expirací a verzováním záznamů, bezpečnějším offline režimem, service worker cache strategií, auditní tabulkou, checklistem, storage kartou a ověřenými zdroji MDN, OWASP a Evropské komise.
 
