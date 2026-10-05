@@ -45352,7 +45352,182 @@ Právní stránky nejsou kouzelný štít. Nezachrání produkt, který sbírá 
 - [EDPB: Data protection basics for small business](https://www.edpb.europa.eu/sme/learn-the-basics/data-protection-basics_en)
 - [EDPB: Be compliant — SME guide](https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en)
 
+
+# Příloha: Datový slovník a klasifikace polí bez štítkovacího divadla
+
+Datový slovník zní jako věc, kterou někdo vytvoří v enterprise tabulce, uloží do SharePointu a už nikdy neotevře. V malém webu nebo SaaS ale může být mnohem praktičtější: jednoduchý seznam důležitých polí, jejich účelu, rizika, retence a pravidel pro logování, export, AI zpracování a support. Nejde o dokumentační rituál. Jde o mapu, která týmu řekne: „Tohle je bezpečné použít v nápovědě, tohle patří jen do produktu, tohle nikdy neposílej do analytiky a tohle nepatří ani do screenshotu.“
+
+GDPR mezi základní principy řadí mimo jiné účelové omezení, minimalizaci údajů, omezení uložení a integritu s důvěrností. V praxi to znamená, že nestačí říct „data máme v databázi“. Potřebuješ vědět, proč tam jsou, kdo s nimi pracuje, jak dlouho je držíš a ve kterých vedlejších systémech se mohou objevit.
+
+> Codyho komentář: Datový slovník není album samolepek. Když každé pole dostane štítek „citlivé“ nebo „důležité“, tým se nenaučí rozhodovat. Dobrá klasifikace musí měnit chování: co se loguje, maskuje, exportuje, retencuje a ukazuje supportu.
+
+## Začni dvaceti poli, ne celou databází
+
+Největší chyba je chtít zmapovat všechno najednou. To skončí únavou, ne ochranou. Začni poli, která se často kopírují mezi systémy nebo mají největší dopad při úniku.
+
+První kandidáti:
+
+- e-mail, telefon, jméno a fakturační údaje,
+- obsah zpráv ve formulářích a support ticketech,
+- názvy projektů, workspace a zákaznických účtů,
+- role, oprávnění a auditní události,
+- platební stav, tarif a interní poznámky,
+- API klíče, tokeny, invite tokeny a reset tokeny,
+- IP adresa, user agent a technické request ID,
+- soubory, přílohy, screenshoty a exporty.
+
+U každého pole napiš jen minimum: účel, riziko, kde se smí objevit, kde se objevit nesmí, kdo je vlastník pravidla a kdy se pravidlo znovu zkontroluje. Pokud slovník není použitelný za deset minut, je moc složitý.
+
+## Tři úrovně stačí většině týmů
+
+Malý tým nepotřebuje osmistupňový klasifikační palác. Často stačí tři praktické úrovně.
+
+```text
+Veřejné / nízké riziko:
+Data určená ke zveřejnění nebo bez dopadu při běžném použití.
+Příklad: veřejný název článku, obecná kategorie, veřejná URL.
+
+Interní / pracovní:
+Data potřebná pro provoz, podporu nebo rozhodování, ale ne pro veřejné šíření.
+Příklad: interní stav leadu, ID ticketu, poznámka k prioritě.
+
+Citlivé / chráněné:
+Data, která mohou poškodit zákazníka, uživatele nebo produkt při úniku či zneužití.
+Příklad: osobní údaje, obsah zpráv, tokeny, fakturační údaje, bezpečnostní události.
+```
+
+Důležité je přidat pravidla chování. „Citlivé“ samo o sobě nic neznamená. U citlivého pole má být jasné: nelogovat obsah, neukazovat v support přehledu bez důvodu, neměřit v analytice, neposílat do AI nástroje bez očištění, maskovat ve screenshotech a zahrnout do retenčního plánu.
+
+## Rozhodni pravidla pro logy a analytiku
+
+Logy jsou místo, kde datový slovník často zachrání budoucí incident. OWASP Logging Cheat Sheet doporučuje vylučovat nebo maskovat například access tokeny, session identifikátory, hesla, connection stringy, šifrovací klíče a citlivé osobní údaje. Přeloženo do praxe: log má pomoct opravit problém, ne vytvořit druhou databázi zákaznického života.
+
+U každého pole si napiš jednu z možností:
+
+- **nikdy nelogovat** — token, heslo, obsah soukromé zprávy,
+- **logovat jen derivát** — hashovaný identifikátor, délka hodnoty, typ chyby,
+- **logovat maskovaně** — poslední čtyři znaky objednávky, doména e-mailu bez lokální části,
+- **logovat plně jen v auditu** — vybrané provozní události s omezeným přístupem,
+- **povolit v analytice jen agregovaně** — počty, stavy, konverzní kroky bez obsahu.
+
+Příklad:
+
+| Pole | Klasifikace | Logy | Analytika | Support UI |
+|---|---|---|---|---|
+| `email` | citlivé | maskovat jako `j***@firma.cz` | jen doména, pokud je důvod | zobrazit oprávněné roli |
+| `message_body` | citlivé | nelogovat | nikdy | zobrazit jen v ticketu |
+| `plan` | interní | povolit | agregovaně | zobrazit |
+| `reset_token` | tajemství | nikdy | nikdy | nikdy |
+| `request_id` | pracovní | povolit | nepoužívat jako profil | zobrazit pro troubleshooting |
+
+## Pseudonymizace není kouzelná neviditelnost
+
+ENISA ve svých materiálech k pseudonymizaci popisuje, že pseudonymizace může podporovat ochranu dat, ale její účinnost závisí na technice, kontextu a modelu útočníka. Prakticky: když e-mail jen zahashuješ a stejný hash používáš všude, pořád může fungovat jako stabilní identifikátor člověka. To není anonymita. To je člověk v levném převleku.
+
+Používej pseudonymizaci tam, kde opravdu snižuje riziko:
+
+- odděl identitu od produktových událostí,
+- používej různé salt/pepper strategie podle účelu,
+- drž mapovací tabulku odděleně a s přísnějšími právy,
+- nepoužívej jeden univerzální pseudonym napříč analytikou, supportem a exportem,
+- nastav retenci i pro pseudonymizovaná data,
+- ověř, zda kombinace polí nejde snadno znovu spojit s konkrétní osobou.
+
+Když tým potřebuje jen agregovaný trend, nepseudonymizuj jednotlivce. Agreguj. Nejlepší osobní údaj je ten, který vůbec nevznikl.
+
+## Napoj slovník na vývojový workflow
+
+Datový slovník má být součást práce, ne posmrtný dokument. Každá nová funkce, formulář, event, export nebo integrace má položit pár otázek:
+
+- Přidáváme nové pole?
+- Měníme účel existujícího pole?
+- Posíláme pole do nového nástroje?
+- Ukazujeme pole nové roli?
+- Logujeme nebo exportujeme pole jinak než dřív?
+- Potřebuje pole novou retenci nebo mazací pravidlo?
+
+Praktické pravidlo pro pull request: pokud změna přidává osobní, citlivé nebo provozně důležité pole, musí aktualizovat datovou kartu. Ne jako byrokracie. Jako Definition of Done. Když karta chybí, změna není hotová.
+
+## Checklist datového slovníku
+
+- [ ] Máme zmapovaných prvních 20 nejrizikovějších polí?
+- [ ] Má každé pole účel, vlastníka a klasifikaci?
+- [ ] Víme, která pole se nikdy nesmí objevit v logu?
+- [ ] Rozlišujeme debug logy, auditní logy, analytiku a support UI?
+- [ ] Máme pravidla pro export, screenshoty a AI zpracování?
+- [ ] Nepoužíváme pseudonymizaci jako falešný slib anonymity?
+- [ ] Má každé citlivé pole retenci nebo kontrolní datum?
+- [ ] Aktualizuje se slovník při změně formuláře, eventu nebo integrace?
+- [ ] Umí support poznat, co smí poslat zákazníkovi a co ne?
+- [ ] Existuje jednoduchý vlastník, který slovník měsíčně uklidí?
+
+## Mini šablona datové karty pole
+
+```text
+# Datová karta pole: [název pole]
+
+## Základ
+Systém / tabulka / event:
+Popis:
+Vlastník:
+
+## Účel
+Proč pole existuje:
+Jaké rozhodnutí nebo funkci podporuje:
+Co se stane, když pole nesbíráme:
+
+## Klasifikace
+Veřejné / interní / citlivé / tajemství:
+Obsahuje osobní údaje:
+ano / ne / nejsem si jistý
+
+## Zobrazení a přístup
+Kdo pole vidí v produktu:
+Kdo pole vidí v supportu:
+Kdo pole vidí v administraci:
+
+## Logy a analytika
+Debug log:
+povoleno / maskovat / zakázáno
+Audit log:
+povoleno / maskovat / zakázáno
+Analytika:
+povoleno / agregovaně / zakázáno
+
+## Sdílení
+Export:
+povoleno / omezeně / zakázáno
+AI zpracování:
+povoleno / po očištění / zakázáno
+Externí dodavatelé:
+
+## Retence
+Doba uložení:
+Mazání při zrušení účtu:
+Mazání při uzavření ticketu:
+
+## Testy
+Test logů:
+Test exportu:
+Test support UI:
+Test mazání:
+
+## Revize
+Datum poslední kontroly:
+Datum další kontroly:
+Poznámky:
+```
+
+Datový slovník je hotový tehdy, když podle něj tým mění produktové chování. Pokud jen sedí v dokumentaci, je to další wiki náhrobek. Pokud rozhoduje o logování, exportech, supportu, AI vstupech a retenci, je to malý operační systém pro privacy-first provoz. A přesně takové nudné věci dělají produkt důvěryhodným.
+
+## Zdroje
+
+- [EUR-Lex: Nařízení GDPR 2016/679](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX:32016R0679)
+- [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- [ENISA: Pseudonymisation techniques and best practices](https://www.enisa.europa.eu/publications/pseudonymisation-techniques-and-best-practices)
+
 # Pracovní log
+- 2026-10-05: Doplněna příloha „Datový slovník a klasifikace polí bez štítkovacího divadla“ s praktickým modelem klasifikace polí, pravidly pro logy, analytiku, support UI, exporty, AI zpracování, pseudonymizaci, checklistem, datovou kartou pole a ověřenými zdroji GDPR, OWASP a ENISA.
 - 2026-10-05: Doplněna příloha „Právní a provozní stránky bez copy-paste mlhy“ s inventářem zásad ochrany soukromí, podmínek, DPA, subprocesorů a bezpečnostních kontaktů, napojením dokumentů na datovou mapu, pravidly verzování změn, checklistem, šablonou transparentnosti a ověřenými zdroji GDPR, Evropské komise a EDPB.
 - 2026-10-05: Doplněna příloha „Idempotence a outbox bez dvojitých faktur a ztracených e-mailů“ s praktickým rozlišením zdrojů opakování, návrhem idempotency keys, šetrným ukládáním výsledků, transactional outbox patternem, idempotentními příjemci webhooků, UI prevencí opakovaných akcí, retenčními pravidly, checklistem, šablonou idempotentní akce a ověřenými zdroji RFC 9110, IETF a Microsoft Learn.
 
