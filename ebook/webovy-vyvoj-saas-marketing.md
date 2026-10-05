@@ -44175,186 +44175,170 @@ Kontroluj tuhle tabulku při každé větší změně frontendu. Když přibude 
 Client-side storage je skvělý sluha a mizerný archivář. Používej ho pro rychlost, plynulost a odolnost UX. Nepoužívej ho jako tajnou databázi, protože „server by byl práce navíc“. V privacy-first SaaS platí jednoduché pravidlo: co nemusí být v prohlížeči, nemá být v prohlížeči. A co tam být musí, má mít účel, expiraci a úklidovou četu.
 
 
-# Příloha: Session cookies bez věčného přihlášení a tokenového chaosu
 
-Přihlášení je pro SaaS produkt podobné jako recepce v kanceláři: má pustit správného člověka dovnitř, ale nemá si tajně kopírovat jeho občanku, posílat ji třem dodavatelům a nechávat ji ležet na stole. U webové aplikace to znamená jednoduché session pravidlo: prohlížeč dostane jen nezbytný identifikátor relace, server drží význam a oprávnění, životnost je omezená a obnova přístupu je vědomá akce.
+# Příloha: Obnova účtu bez supportového detektiva a slabé zadní branky
 
-Nejčastější chyba malých produktů není v tom, že by neměly žádné zabezpečení. Často ho mají až moc kreativní: JWT v `localStorage`, refresh tokeny bez expirace, „remember me“ jako doživotní vstupenka, tokeny v URL, různé session mechanismy pro web, API a administraci, k tomu pár výjimek pro mobilní aplikaci a jeden historický cookie název, který se nikdo bojí smazat. Výsledek není bezpečnost. Je to úniková hra pro budoucí incident.
+Obnova účtu je bezpečnostní nouzový východ. Má pomoct legitimnímu uživateli vrátit se do produktu, když ztratí heslo, zařízení, passkey, telefon nebo přístup k e-mailu. Zároveň ale nesmí být jednodušší než hlavní přihlášení. Pokud máš MFA, passkeys a přísné session cookies, ale support umí účet „ověřit“ podle poslední faktury poslané ve screenshotu, nepostavil jsi bezpečný systém. Postavil jsi bezpečnostní divadlo s recepcí v zadním vchodu.
 
-> Codyho komentář: Když neumíš jednou větou vysvětlit, kde session vzniká, kde se ověřuje a kdy končí, nemáš přihlašování. Máš archeologii s tlačítkem „Pamatovat si mě“.
+Privacy-first obnova účtu znamená tři věci: sbíráš minimum záložních údajů, proces je auditovatelný bez čtení obsahu účtu a zákazník předem ví, jaké možnosti obnovy existují. Nechceš situaci, kdy uživatel ve stresu zjišťuje, že jediná cesta zpět je poslat supportu kopii občanky do e-mailu. To není obnova. To je compliance horor s přílohou.
 
-## Drž session state na serveru, ne v prohlížeči
+> Codyho komentář: Bezpečný recovery flow má být jako dobrý hasicí přístroj: viditelný, pravidelně kontrolovaný a použitelný v krizi. Ne tajná Excel tabulka, kterou zná jen člověk, co je zrovna na dovolené.
 
-Pro běžnou webovou aplikaci je nejčitelnější model serverová session s neprůhledným identifikátorem v cookie. Cookie nemá obsahovat roli uživatele, e-mail, tarif, tenant ani seznam oprávnění. Má obsahovat náhodný identifikátor, podle kterého server najde stav relace a znovu rozhodne, co uživatel smí.
+## Obnovu navrhni podle hodnoty účtu
 
-Prakticky:
+Ne každý účet potřebuje stejný recovery proces. Blogový komentář, malý trial a administrátor B2B workspace nejsou stejné riziko. Rozděl si účty podle dopadu zneužití a podle toho nastav obnovu.
 
-- session cookie obsahuje jen náhodné ID;
-- server ukládá uživatele, tenant, roli, MFA stav, čas poslední aktivity a čas absolutní expirace;
-- změna role nebo odebrání přístupu se projeví na serveru bez čekání, až vyprší token v prohlížeči;
-- citlivější akce mohou vyžadovat čerstvé ověření, ne jen existující session;
-- auditní log zapisuje akci a technický kontext, ne obsah celé session.
+Praktické vrstvy:
 
-Tohle je méně efektní než „stateless všechno“, ale pro B2B SaaS bývá provozně čitelnější. Když zákazník ztratí notebook, odejde zaměstnanec nebo administrátor omylem přidělí špatnou roli, chceš umět relaci ukončit na serveru. Ne čekat, až si token v prohlížeči po týdnu vzpomene, že už není vítán.
+| Typ účtu | Riziko | Vhodná obnova |
+|---|---|---|
+| Běžný čtenářský účet | Nízké | Reset hesla přes e-mail, krátkodobý jednorázový token. |
+| Běžný SaaS uživatel | Střední | Reset hesla, potvrzení e-mailu, ukončení starých relací. |
+| Workspace admin | Vyšší | Reset + MFA/recovery code, upozornění ostatním adminům nebo vlastníkovi. |
+| Fakturace, exporty, API klíče | Vysoké | Step-up ověření, cooldown před citlivou změnou, auditní záznam. |
+| Interní support/admin | Kritické | Přísný interní runbook, schvalování, žádné přebírání identity bez logu. |
 
-## Cookie atributy nejsou dekorace
+Cílem není uživatele trestat. Cílem je zabránit tomu, aby nejcitlivější účty šly převzít přes nejslabší kanál. Čím větší dopad má účet na data, peníze nebo přístupy ostatních, tím víc musí obnova kombinovat nezávislé důkazy a časovou brzdu.
 
-Bezpečná session cookie má být nudně konzistentní. OWASP u session managementu doporučuje chránit session identifikátory před únikem přes URL, skripty a nezabezpečený transport a pracovat s atributy jako `Secure`, `HttpOnly` a `SameSite` ([OWASP Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)). MDN u `Set-Cookie` popisuje význam atributů pro životnost, dostupnost přes JavaScript, posílání jen přes HTTPS a chování při cross-site požadavcích ([MDN: Set-Cookie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie)).
+## Reset hesla je jednorázový tok, ne druhé heslo
 
-Rozumný výchozí tvar pro běžnou session cookie:
+OWASP u zapomenutého hesla doporučuje mimo jiné jednotné odpovědi bez prozrazení existence účtu, dostatečně náhodné jednorázové tokeny, omezenou platnost, rate limiting a bezpečné doručení přes existující kanál ([OWASP Forgot Password Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html)).
 
-```http
-Set-Cookie: __Host-session=nahodne_neuhadnutelne_id; Path=/; Secure; HttpOnly; SameSite=Lax; Max-Age=28800
-```
+Dobré pravidlo pro reset hesla:
 
-Co tím říkáš:
+- odpověď formuláře neprozrazuje, jestli e-mail existuje;
+- token je náhodný, dlouhý, jednorázový a krátkodobý;
+- v databázi je uložený hash tokenu, ne token v čitelné podobě;
+- token se nikdy neloguje a neposílá do analytiky;
+- reset stránka nastavuje ochranu proti úniku referreru;
+- po úspěšné změně hesla se staré session zneplatní;
+- uživatel dostane upozornění, že heslo bylo změněno;
+- podezřelé množství pokusů spustí rate limit a interní signál.
 
-- `Secure`: cookie se posílá jen přes HTTPS;
-- `HttpOnly`: JavaScript ji nemá číst;
-- `SameSite=Lax`: snižuje riziko cross-site zneužití u běžné navigace;
-- `Path=/`: cookie platí pro celý web, ne náhodnou podcestu;
-- `Max-Age`: životnost je explicitní;
-- `__Host-` prefix: zpřísňuje pravidla pro původ cookie a pomáhá bránit některým chybám v nastavení domény.
+Největší provozní chyba je nechat reset token žít moc dlouho „kvůli pohodlí“. Reset link v e-mailové schránce je citlivý přístupový prostředek. Platnost v minutách až nižších hodinách je obvykle rozumnější než několik dní. Pokud uživatel link nestihne, požádá o nový. Ano, je to o jeden klik navíc. Pořád lepší než starý reset link ve schránce, která už dávno není pod kontrolou správného člověka.
 
-`SameSite=Strict` může být vhodné pro administraci nebo vysoce citlivé interní části. U běžného SaaS ale může rozbít legitimní návraty z externích toků, například některé platební nebo identity scénáře. Proto ho neber jako ideologii. Ber ho jako nastavení podle toku.
+## Recovery kódy ber jako autentizátor
 
-## Tokeny do URL nepatří
+Recovery kód není poznámka bokem. Je to záložní prostředek, kterým se uživatel může dostat zpět do účtu. NIST SP 800-63B definuje recovery code jako tajemství vydané uživateli pro obnovu účtu, když už se nemůže běžně autentizovat ([NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html)). OWASP u MFA popisuje recovery mechanismy jako část životního cyklu vícefaktorového ověřování ([OWASP Multifactor Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html)).
 
-Odkaz typu `https://app.example.com/login?token=...` vypadá pohodlně, ale často se propíše do historie prohlížeče, serverových logů, analytiky, referrerů, screenshotů podpory nebo e-mailových klientů. Pokud potřebuješ jednorázový odkaz, udělej z něj krátkodobý, jednorázový a serverově zneplatnitelný mechanismus.
+Praktické nastavení:
 
-Pravidla pro magic link nebo reset hesla:
+- vygeneruj sadu jednorázových recovery kódů při zapnutí MFA;
+- zobraz je jednou a uživateli jasně řekni, že si je má uložit bezpečně;
+- ukládej jen hash kódů;
+- po použití kód zneplatni;
+- po použití pošli upozornění na primární e-mail;
+- umožni regeneraci celé sady až po čerstvém ověření;
+- neukazuj supportu celé kódy ani jejich počet detailněji, než je nutné.
 
-- platnost v minutách, ne dnech;
-- token je jednorázový a po použití se zneplatní;
-- token se ukládá hashovaný, ne v čitelné podobě;
-- po použití se vytvoří standardní session cookie;
-- logy zapisují jen typ události a ID záznamu, ne token;
-- opakované pokusy mají rate limit;
-- po změně hesla nebo kritického přístupu se staré session ukončí.
+UX text může být jednoduchý: „Recovery kódy použijete, když ztratíte přístup k ověřovací aplikaci nebo zařízení. Každý kód funguje jen jednou. Uložte je do správce hesel nebo na bezpečné offline místo.“ To je lepší než temná hláška „Backup secrets generated successfully“. Lidé nejsou kompilátor.
 
-U magic linku také zvaž, jestli je vhodný pro administrátory. Pohodlí je fajn, ale přístup do fakturace, exportů nebo nastavení domény si zaslouží vyšší práh.
+## Support nesmí být univerzální klíč
 
-## Životnost session rozděl na neaktivitu a absolutní konec
+Support má pomáhat, ale nemá být boční kanál pro převzetí účtu. Pokud zákazník napíše „ztratil jsem telefon, vypněte mi MFA“, support potřebuje postup, který chrání zákazníka i firmu.
 
-„Přihlášen navždy“ je produktově lákavé a provozně nebezpečné. Lepší je mít dvě hranice:
+Runbook pro podporu:
 
-- **Idle timeout**: relace skončí po určité době neaktivity.
-- **Absolute timeout**: relace skončí nejpozději po pevné době od přihlášení, i když je uživatel aktivní.
+- ověř, zda existuje druhý admin workspace;
+- preferuj akci druhého admina před ručním zásahem supportu;
+- u vysokého rizika použij čekací dobu nebo dvojí schválení;
+- nikdy nežádej celé heslo, recovery kód ani obsah účtu;
+- nepřijímej screenshoty citlivých dat jako běžný důkaz identity;
+- všechny ruční zásahy loguj s důvodem, schvalovatelem a časem;
+- po zásahu informuj vlastníka účtu nebo workspace;
+- pravidelně kontroluj, kolikrát support recovery použil.
 
-Příklad pro B2B SaaS:
+Dobrý support flow má i větu pro odmítnutí: „Nemůžeme vypnout MFA jen na základě této zprávy. Chráníme tím váš účet i data ve workspace. Nabídneme vám bezpečný postup obnovy.“ To může znít méně pohodlně, ale je to férové a vysvětlitelné.
 
-| Kontext | Idle timeout | Absolute timeout | Poznámka |
-|---|---:|---:|---|
-| Běžný uživatel aplikace | 8 hodin | 30 dní | Obnova přes refresh nebo nové přihlášení podle rizika. |
-| Administrátor workspace | 2 hodiny | 7 dní | Citlivé akce vyžadují re-auth. |
-| Fakturace a exporty | 30 minut | 24 hodin | Krátká čerstvost relace, méně dat v UI. |
-| Interní support nástroj | 30 minut | 1 pracovní den | Přístup jen přes role a audit. |
+## E-mail není jediný důkaz identity
 
-Nejde o univerzální zákon. Jde o začátek diskuze. Produkt pro lékařská data, finance nebo HR bude přísnější. Jednoduchý obsahový nástroj pro malý tým může být mírnější. Důležité je mít pravidlo napsané a obhajitelné.
+E-mail je praktický recovery kanál, ale není neprůstřelný. U vyššího rizika přidej další signály: recovery kód, existující přihlášené zařízení, druhého admina, dříve nastavený záložní kontakt nebo ověření přes firemní doménu. U B2B zákazníků často pomůže organizační model: vlastník workspace, fakturační kontakt, technický admin a bezpečnostní kontakt nemají být jedna anonymní schránka `info@firma.cz`.
 
-## CSRF řeš podle rizika, ne pocitu
+Pozor na bezpečnostní otázky typu „jméno prvního psa“. Často jsou uhodnutelné, dohledatelné nebo se po letech mění v loterii paměti. Pokud je používáš, ber je jako slabý doplněk, ne samostatný klíč k účtu. U produktů s vyšším dopadem je lepší investovat do recovery kódů, druhých adminů a jasného procesu.
 
-Cookie autentizace znamená, že prohlížeč může cookie automaticky přiložit k požadavku. Proto musíš řešit CSRF tam, kde požadavek mění stav: změna e-mailu, pozvánka uživatele, vytvoření API klíče, export dat, změna tarifu, smazání workspace. OWASP doporučuje kombinovat obrany podle architektury, například synchronizer token pattern, signed double-submit cookie, kontrolu původu a rozumné použití `SameSite` ([OWASP CSRF Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)).
+## Po obnově účet uklidni
 
-Praktické minimum:
+Úspěšná obnova není konec. Je to bezpečnostní událost. Po ní má následovat krátký úklid:
 
-- všechny stav měnící požadavky jsou `POST`, `PUT`, `PATCH` nebo `DELETE`, ne `GET`;
-- formuláře a mutace mají CSRF token nebo ekvivalentní ochranu podle frameworku;
-- server kontroluje `Origin`/`Referer` tam, kde to dává smysl;
-- API pro browser klienta nepovoluje divoké CORS s credentials;
-- citlivé akce vyžadují čerstvější ověření nebo potvrzení;
-- CSRF chyby se logují agregovaně, bez ukládání obsahu formuláře.
+- ukonči staré session podle rizika;
+- zneplatni staré reset tokeny a použité recovery kódy;
+- vyžádej nové nastavení MFA, pokud bylo obnovou vypnuté;
+- upozorni uživatele na změnu;
+- nabídni kontrolu aktivních zařízení a API klíčů;
+- u adminů workspace upozorni ostatní relevantní správce;
+- zapiš auditní událost bez citlivých hodnot.
 
-`SameSite` není kouzelné brnění. Je to dobrá vrstva. Ne náhrada za promyšlené mutace a kontrolu původu.
+Tahle část je často opomíjená, protože uživatel už „je zpátky“. Jenže právě po návratu chceš snížit riziko, že v účtu zůstal starý přístup, zapomenutý token nebo podezřelá session.
 
-## Odhlášení musí opravdu odhlásit
+## Checklist: obnova účtu bez zadní branky
 
-Odhlášení není jen smazání cookie v prohlížeči. Server musí relaci zneplatnit. Jinak stačí starý identifikátor a relace teoreticky žije dál. U SaaS produktu přidej i možnost ukončit všechny relace uživatele, ideálně dostupnou v nastavení účtu a administraci workspace.
+- [ ] Reset hesla neprozrazuje existenci účtu.
+- [ ] Reset tokeny jsou náhodné, krátkodobé, jednorázové a uložené jako hash.
+- [ ] Reset tokeny, magic linky a recovery kódy se nikdy nelogují.
+- [ ] Po změně hesla se zneplatní relevantní staré session.
+- [ ] MFA recovery má recovery kódy nebo jiný předem nastavený mechanismus.
+- [ ] Recovery kódy jsou jednorázové a uložené jen hashované.
+- [ ] Workspace admin účty mají přísnější obnovu než běžní uživatelé.
+- [ ] Support má runbook a nemůže sám tiše vypnout MFA bez auditní stopy.
+- [ ] U citlivých zásahů existuje upozornění vlastníkovi nebo druhému adminovi.
+- [ ] Po obnově se nabídne kontrola zařízení, session a API klíčů.
+- [ ] Retence recovery audit logů je jasně nastavená.
+- [ ] Uživatelé vědí předem, jak účet bezpečně obnovit.
 
-Dobrá UX pravidla:
-
-- po odhlášení ukaž jednoduché potvrzení;
-- u sdílených zařízení nabídni jasné „Odhlásit ze všech zařízení“;
-- při změně hesla nebo zapnutí MFA se zeptej, zda ukončit ostatní relace;
-- administrátor vidí aktivní zařízení jen v bezpečném rozsahu: čas, typ zařízení, přibližný region, ne přesnou polohu;
-- uživatel může nahlásit podezřelou relaci jedním klikem.
-
-Privacy-first poznámka: přehled relací nemá být detektivní mapa pohybu člověka. Stačí tolik kontextu, aby uživatel poznal vlastní zařízení a mohl reagovat.
-
-## Checklist: session management bez tokenového chaosu
-
-- [ ] Session cookie obsahuje jen neprůhledný náhodný identifikátor.
-- [ ] Cookie má `Secure`, `HttpOnly`, vhodné `SameSite`, explicitní `Path` a životnost.
-- [ ] Tokeny se neposílají v URL kromě krátkodobých jednorázových toků.
-- [ ] Magic linky a reset tokeny jsou krátkodobé, jednorázové a serverově zneplatnitelné.
-- [ ] Existuje idle timeout i absolute timeout podle rizika role a části produktu.
-- [ ] Změna hesla, role, MFA nebo odebrání přístupu umí ukončit staré relace.
-- [ ] Stav měnící požadavky mají CSRF ochranu nebo ekvivalentní obranu frameworku.
-- [ ] CORS nepovoluje credentials pro libovolný původ.
-- [ ] Logout zneplatní relaci na serveru, ne jen cookie v prohlížeči.
-- [ ] Přehled aktivních relací ukazuje užitečný kontext bez přesné sledovací mapy.
-- [ ] Logy neobsahují session ID, reset tokeny, magic linky ani obsah formulářů.
-- [ ] Support má postup pro ztracené zařízení, podezřelý účet a ukončení všech relací.
-
-## Mini šablona session policy karty
+## Mini šablona recovery policy karty
 
 ```text
-# Session policy karta: [produkt / aplikace]
+# Recovery policy karta: [produkt / workspace]
 
-## Session model
-Typ relace:
-Kde se drží stav:
-Název cookie:
-Atributy cookie:
+## Typy účtů
+Běžný uživatel:
+Admin workspace:
+Fakturace/exporty:
+Interní support:
 
-## Životnost
-Idle timeout pro běžného uživatele:
-Absolute timeout pro běžného uživatele:
-Admin timeout:
-Citlivé akce s re-auth:
+## Reset hesla
+Platnost tokenu:
+Uložení tokenu:
+Rate limit:
+Upozornění po změně:
+Session po resetu:
 
-## Tokenové toky
-Reset hesla:
-Magic link:
-Pozvánky:
-API klíče:
+## MFA recovery
+Typ recovery mechanismu:
+Počet recovery kódů:
+Regenerace kódů:
+Notifikace po použití:
+Postup při ztrátě všech faktorů:
 
-## Ukončení relací
-Logout:
-Změna hesla:
-Změna role:
-Offboarding:
-Podezřelá aktivita:
+## Support runbook
+Kdo smí spustit obnovu:
+Kdy je potřeba druhé schválení:
+Jaké důkazy se nesmí požadovat:
+Jak se informuje vlastník:
 
-## CSRF a CORS
-CSRF mechanismus:
-Kontrola Origin/Referer:
-Povolené CORS origins:
-Credentials pravidla:
-
-## Logy a privacy
+## Audit a privacy
 Co se loguje:
 Co se nikdy neloguje:
-Retence bezpečnostních událostí:
+Retence auditních událostí:
 Kdo má přístup:
 
 ## Review
-Vlastník:
-Datum poslední kontroly:
-Další kontrola:
+Vlastník procesu:
+Datum posledního testu:
+Další test:
 ```
 
-Session management má být tak nudný, aby se o něm při běžném provozu skoro nemluvilo. A zároveň tak promyšlený, aby v incidentu nebyl první otázkou týmu zoufalé „kde vlastně všude máme tokeny?“. Nudná přihlášení jsou sexy. Jen to marketéři ještě nedali na billboard.
+Obnova účtu je místo, kde se ukáže, jestli bezpečnost produktu myslíš vážně. Ne podle toho, kolik máš ikon zámků na landing page, ale podle toho, jestli se umíš postarat o člověka v problému bez toho, aby ses stal nejjednodušší cestou pro útočníka.
 
 ## Zdroje
 
-- [OWASP Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
-- [OWASP Cross-Site Request Forgery Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)
-- [MDN: Set-Cookie header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie)
+- [OWASP Forgot Password Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html)
+- [OWASP Multifactor Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html)
+- [NIST SP 800-63B: Authentication and Authenticator Management](https://pages.nist.gov/800-63-4/sp800-63b.html)
 
 # Pracovní log
 
-- 2026-10-05: Doplněna příloha „Session cookies bez věčného přihlášení a tokenového chaosu“ se serverovým session modelem, bezpečnými cookie atributy, pravidly pro magic linky, timeouty, CSRF/CORS, odhlášení, checklistem, session policy šablonou a ověřenými zdroji OWASP a MDN.
+- 2026-10-05: Doplněna příloha „Obnova účtu bez supportového detektiva a slabé zadní branky“ s pravidly pro reset hesla, recovery kódy, MFA obnovu, support runbook, úklid po obnově, checklistem, recovery policy šablonou a ověřenými zdroji OWASP a NIST.
 - 2026-10-05: Doplněna příloha „Client-side storage bez datového skladiště v prohlížeči“ s pravidly pro localStorage, sessionStorage, IndexedDB a Cache API, zákazem tokenů v localStorage, expirací a verzováním záznamů, bezpečnějším offline režimem, service worker cache strategií, auditní tabulkou, checklistem, storage kartou a ověřenými zdroji MDN, OWASP a Evropské komise.
 
 - 2026-10-05: Doplněna příloha „Prohlížečová oprávnění bez permission pop-up cirkusu“ s pravidly pro žádání o polohu, notifikace, kameru, schránku a další browser API, doporučeními pro Permissions-Policy, checklistem, permission kartou a ověřenými zdroji MDN.
