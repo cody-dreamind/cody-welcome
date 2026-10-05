@@ -43986,7 +43986,197 @@ Příklad bezpečnější notifikace: „Export je připravený. Otevři aplikac
 
 Prohlížečová oprávnění jsou malá produktová smlouva: „povol mi tohle a já ti za to dám konkrétní hodnotu“. Když ji dodržíš, funkce působí důvěryhodně. Když ji rozbiješ, uživatel si odnese jednoduché poučení: tahle stránka chce moc věcí moc brzo. A to je přesně dojem, kterému se privacy-first produkt vyhýbá.
 
+# Příloha: Client-side storage bez datového skladiště v prohlížeči
+
+Prohlížeč není trezor. Je to batoh, který si uživatel nosí mezi zařízeními, rozšířeními, zálohami, profilem v práci, profilem doma a občas i sdíleným počítačem v recepci. `localStorage`, `sessionStorage`, IndexedDB a cache jsou skvělé nástroje pro rychlý UX. Ale když do nich začneš ukládat tokeny, osobní poznámky, celé API odpovědi nebo obchodní data, právě sis postavil mini databázi bez pořádné správy, retence a auditu. Gratuluju, GDPR karaoke může začít.
+
+Privacy-first pravidlo je jednoduché: do prohlížeče patří jen data, která mají jasný účel pro uživatele, krátkou životnost a malý dopad při úniku. Všechno ostatní drž na serveru, kde umíš řídit přístupy, logy, šifrování, zálohy a výmaz.
+
+## Rozliš čtyři typy úložiště podle rizika
+
+Neřeš „kam to jde nejrychleji uložit“. Řeš „co se stane, když to někdo uvidí, zkopíruje nebo když to zůstane v prohlížeči déle, než mělo“.
+
+Praktické rozdělení:
+
+- `sessionStorage`: krátkodobý stav jedné záložky — rozpracovaný krok formuláře, dočasný UI stav, návrat po reloadu.
+- `localStorage`: jednoduché ne-citlivé preference — zvolený jazyk, zavřený banner, lokální filtr tabulky bez osobních dat.
+- IndexedDB: větší offline data — koncepty, fronta akcí, lokální cache, ale jen s explicitním účelem a jasným mazáním.
+- Cache API / service worker cache: statické assety a odpovědi pro offline režim — nikdy slepě necachuj personalizované nebo citlivé odpovědi.
+
+Špatný signál: vývojář řekne „uložíme to zatím do localStorage, je to jednodušší“. To „zatím“ má v softwaru poločas rozpadu jako plutonium. Za rok to bývá produkční architektura.
+
+## Tokeny do localStorage nepatří
+
+Access token v `localStorage` je pohodlný. Přesně proto je nebezpečný. JavaScript na stránce k němu má přístup, takže při XSS problému se z něj stává dárkový balíček pro útočníka. OWASP u HTML5 úložišť výslovně varuje před ukládáním citlivých informací do local storage a doporučuje považovat tato data za dostupná pro skripty v originu.
+
+Bezpečnější výchozí model pro běžný SaaS:
+
+- Server-side session nebo krátká session reference v cookie.
+- Cookie s `HttpOnly`, `Secure` a rozumným `SameSite` nastavením.
+- Krátká životnost session a možnost serverového odhlášení.
+- CSRF ochrana, pokud cookie automaticky cestuje s požadavky.
+- Žádné refresh tokeny v `localStorage`.
+
+Když opravdu potřebuješ token v prohlížeči, napiš k tomu threat model: kdo ho může číst, jak dlouho žije, jak se rotuje, co se stane při XSS a jak ho zneplatníš. Pokud to neumíš odpovědět jednou stránkou, token tam nemá co dělat.
+
+## Cacheuj hodnotu, ne identitu člověka
+
+Rychlost webu je důležitá, ale rychlost není omluvenka pro datový chaos. Client-side cache má pomáhat uživateli pokračovat v práci, ne vytvářet stínový profil.
+
+Dobré kandidáty na lokální uložení:
+
+- UI preference: téma, jazyk, hustota tabulky, poslední otevřený panel.
+- Neosobní katalogová data: veřejné číselníky, seznam měn, statický obsah nápovědy.
+- Rozpracovaný formulář, pokud by jeho ztráta uživatele bolela — ideálně se zřetelným upozorněním.
+- Offline fronta akcí s minimem polí a krátkou expirací.
+
+Špatné kandidáty:
+
+- Přístupové tokeny a refresh tokeny.
+- Kompletní profily uživatelů.
+- Faktury, smlouvy, zdravotní, finanční nebo jiné citlivé údaje.
+- Admin odpovědi API „protože se to pak rychleji filtruje“.
+- Event logy chování uživatele bez jasného účelu.
+
+Codyho komentář: Pokud potřebuješ cachovat celé API odpovědi, protože backend je pomalý, často neřešíš frontend cache. Řešíš backend, datový model nebo produktový rozsah. Schovávat výkonový problém do prohlížeče je jako zamést drobky pod koberec a pak tvrdit, že byt je uklizený.
+
+## Dej každému záznamu expiraci a verzi
+
+Prohlížečové úložiště má tendenci žít déle než původní produktový záměr. Proto neukládej jen hodnotu. Ulož i metadata.
+
+Minimální obálka pro lokální záznam:
+
+```json
+{
+  "value": "compact",
+  "purpose": "ui_preference",
+  "createdAt": "2026-10-05T10:00:00Z",
+  "expiresAt": "2027-01-05T10:00:00Z",
+  "schemaVersion": 2
+}
+```
+
+Praktická pravidla:
+
+- Při čtení kontroluj `expiresAt`; prošlá data smaž hned.
+- Při změně struktury dat používej `schemaVersion`; starou verzi migruj nebo smaž.
+- Při odhlášení smaž vše, co souvisí s konkrétním účtem.
+- Při změně workspace nebo organizace nemaž jen UI, ale i lokální cache dat.
+- Při mazání účtu nezapomeň na lokální data při příštím přihlášení nebo návštěvě.
+
+U privacy-first produktu je výmaz funkce, ne úklidová poznámka v backlogu. Pokud něco ukládáš, musíš vědět, kdy a jak to zmizí.
+
+## Offline režim navrhni jako omezený režim důvěry
+
+Offline-first zní skvěle, dokud nezjistíš, že jsi lidem lokálně uložil půl firmy. Proto offline režim rozděl podle citlivosti.
+
+Rozumný model:
+
+- Veřejné nebo neosobní věci: můžeš cachovat agresivněji.
+- Běžná pracovní data: ukládej jen nezbytný výřez, šifrování zvaž podle dopadu, vždy měj expiraci.
+- Citlivá data: offline režim raději omez, nebo vyžaduj vědomou aktivaci.
+- Admin a auditní pohledy: defaultně necachovat.
+
+Příklad pro B2B SaaS:
+
+> Uživatel může offline upravit koncept popisu produktu, ale nevidí kompletní fakturační historii zákazníka. Fronta změn ukládá jen ID záznamu, typ akce, timestamp a lokální diff bez citlivých polí. Po 24 hodinách se neodeslané položky označí jako vyžadující kontrolu.
+
+Tohle je méně sexy než „všechno funguje offline“. Ale je to provozně zdravější. Produkt nemusí umět všechno bez internetu; má umět bezpečně pokračovat tam, kde to dává smysl.
+
+## Service worker není černá díra na odpovědi
+
+Service worker umí skvělé věci: rychlejší načítání, offline shell aplikace, spolehlivější UX. Ale cache strategie musí rozlišovat statická a personalizovaná data.
+
+Bezpečný základ:
+
+- Cache-first pro statické assety s verzovanými názvy.
+- Network-first pro personalizovaná data, pokud vůbec cache používáš.
+- Žádné ukládání odpovědí s citlivým obsahem bez výslovného návrhu a expirace.
+- Při logoutu smaž relevantní cache storage.
+- Při změně uživatele nebo workspace nepoužívej staré cache klíče.
+
+U API odpovědí nastavuj serverové hlavičky promyšleně. `Cache-Control: no-store` pro citlivé odpovědi není paranoia, ale normální hygienický návyk. Pro veřejné statické zdroje naopak používej dlouhé cache a hashované názvy souborů. Privacy-first není anti-performance. Je to performance bez úniku dat v kufru.
+
+## Udělej z client-side storage auditovatelnou součást produktu
+
+Client-side storage se často ztratí mezi frontend úkoly. Proto mu dej stejný režim jako API endpointům nebo databázovým tabulkám.
+
+Do technické dokumentace přidej tabulku:
+
+| Klíč / store | Typ úložiště | Účel | Obsahuje osobní data? | Expirace | Maže se při logoutu? | Owner |
+|---|---|---|---|---|---|---|
+| `ui.sidebarState` | localStorage | UI preference | Ne | 180 dní | Ne | Frontend |
+| `draft.contactForm` | IndexedDB | Rozpracovaný formulář | Ano, běžná data | 24 hodin | Ano | Product |
+| `offline.queue` | IndexedDB | Odeslání akcí po obnově spojení | Minimalizovaný diff | 24 hodin | Ano | Platform |
+
+Kontroluj tuhle tabulku při každé větší změně frontendu. Když přibude nový store bez řádku v tabulce, build nemusí padat, ale tým by měl zpozornět. Dnešní „jen cache“ je zítřejší bezpečnostní incident v obleku.
+
+## Checklist: client-side storage bez skladiště
+
+- Má každý lokální záznam jasný účel pro uživatele?
+- Nejsou v `localStorage` ani IndexedDB přístupové nebo refresh tokeny?
+- Má každá cache expiraci, verzi a pravidlo mazání?
+- Maže logout data spojená s účtem, workspace a offline frontou?
+- Jsou citlivé API odpovědi chráněné přes `Cache-Control: no-store`?
+- Rozlišuje service worker statické assety, veřejná data a personalizované odpovědi?
+- Existuje tabulka všech client-side stores v technické dokumentaci?
+- Umí tým vysvětlit, co se stane při XSS, sdíleném počítači a změně účtu?
+- Je offline režim omezený podle citlivosti dat, ne podle pohodlí implementace?
+- Kontroluje se client-side storage při privacy review nové funkce?
+
+## Mini šablona storage karty
+
+```md
+# Storage karta: [funkce / modul]
+
+## Účel
+- Proč data ukládáme lokálně:
+- Jakou hodnotu to dává uživateli:
+- Co se stane, když ukládání vypneme:
+
+## Úložiště
+- Typ: sessionStorage / localStorage / IndexedDB / Cache API
+- Klíč nebo store:
+- Přibližný objem dat:
+- Schema version:
+
+## Data
+- Kategorie dat:
+- Obsahuje osobní data: ano/ne
+- Obsahuje citlivá nebo obchodně kritická data: ano/ne
+- Minimalizace: co jsme záměrně neuložili:
+
+## Životní cyklus
+- Expirace:
+- Mazání při logoutu:
+- Mazání při změně workspace/účtu:
+- Migrační pravidlo při změně schema version:
+
+## Bezpečnost
+- Dopad při XSS:
+- Dopad při sdíleném zařízení:
+- Potřebné serverové cache hlavičky:
+- Testovací scénář výmazu:
+
+## Review
+- Owner:
+- Datum poslední kontroly:
+- Rozhodnutí: ponechat / omezit / smazat
+```
+
+## Zdroje
+
+- MDN dokumentace k Web Storage API popisuje `localStorage` a `sessionStorage` jako úložiště dostupné v rámci originu: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API
+- MDN dokumentace k IndexedDB popisuje nízkoúrovňové klientské úložiště pro větší objemy strukturovaných dat: https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API
+- MDN dokumentace k Cache API a Service Workers ukazuje, jak aplikace ukládají request/response objekty pro offline a výkonové scénáře: https://developer.mozilla.org/en-US/docs/Web/API/Cache a https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API
+- OWASP HTML5 Security Cheat Sheet varuje před ukládáním citlivých informací do local storage a připomíná, že data jsou dostupná skriptům v rámci originu: https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html
+- Evropská komise shrnuje principy GDPR včetně minimalizace dat a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+
+Client-side storage je skvělý sluha a mizerný archivář. Používej ho pro rychlost, plynulost a odolnost UX. Nepoužívej ho jako tajnou databázi, protože „server by byl práce navíc“. V privacy-first SaaS platí jednoduché pravidlo: co nemusí být v prohlížeči, nemá být v prohlížeči. A co tam být musí, má mít účel, expiraci a úklidovou četu.
+
 # Pracovní log
+- 2026-10-05: Doplněna příloha „Client-side storage bez datového skladiště v prohlížeči“ s pravidly pro localStorage, sessionStorage, IndexedDB a Cache API, zákazem tokenů v localStorage, expirací a verzováním záznamů, bezpečnějším offline režimem, service worker cache strategií, auditní tabulkou, checklistem, storage kartou a ověřenými zdroji MDN, OWASP a Evropské komise.
+
 - 2026-10-05: Doplněna příloha „Prohlížečová oprávnění bez permission pop-up cirkusu“ s pravidly pro žádání o polohu, notifikace, kameru, schránku a další browser API, doporučeními pro Permissions-Policy, checklistem, permission kartou a ověřenými zdroji MDN.
 
 - 2026-10-05: Doplněna příloha „Archivace workspace bez datového hřbitova“ s praktickým lifecycle modelem aktivní/spící/archivovaný/smazaný, pravidly vypnutí integrací, komunikací před archivací a smazáním, exportem před výmazem, retenčním rozdělením dat, bezpečnou obnovou, checklistem, vyplnitelnou lifecycle kartou a ověřenými zdroji Evropské komise, EUR-Lex a OWASP ASVS.
