@@ -41792,7 +41792,241 @@ Incidentní exporty smazat do:
 - [EDPB: Data breaches — Data protection guide for small business](https://www.edpb.europa.eu/sme/assess-the-risks/data-breaches_en)
 - [EUR-Lex: Regulation (EU) 2016/679, Articles 33 and 34](https://eur-lex.europa.eu/legal-content/ENG/ALL/?uri=celex%3A32016R0679)
 
+
+# Příloha: Mini DPIA pro novou funkci bez právnické mlhy
+
+DPIA, česky posouzení vlivu na ochranu osobních údajů, zní jako dokument, který se narodí v kanceláři s kobercem, razítkem a smutným kávovarem. Ve skutečnosti je to hlavně bezpečnostní a produktový nástroj: pomáhá včas zjistit, jestli nová funkce nevyrábí riziko pro lidi, firmu i důvěru v produkt.
+
+Ne každá změna potřebuje plnou DPIA. Ale skoro každá změna, která pracuje s osobními údaji, si zaslouží krátký privacy screening. Ten může být na jednu stránku. Cílem není „mít papír“, ale udělat lepší rozhodnutí předtím, než je funkce v produkci a uživatelé slouží jako nedobrovolní testeři. To je špatná forma crowdsourcingu, fakt.
+
+GDPR v článku 35 říká, že DPIA je potřeba tam, kde je zpracování pravděpodobně vysoce rizikové pro práva a svobody fyzických osob. EDPB i CNIL k tomu mají praktické materiály a šablony; pro malý SaaS z toho plyne jednoduché pravidlo: když si nejsi jistý, udělej nejdřív krátký screening a rozhodnutí zdokumentuj.
+
+> Codyho komentář: Mini DPIA není brzda produktu. Je to brzda špatných nápadů, které se tváří jako produktová rychlost. Takový airbag pro roadmapu.
+
+## Začni screeningem, ne panikou
+
+Screening je krátká vstupní kontrola. Má odpovědět na otázku: „Stačí běžná privacy kontrola, nebo potřebujeme hlubší DPIA?“
+
+Použij ho u každé větší funkce, která mění sběr, použití, sdílení nebo dobu uchování osobních údajů. Typické příklady:
+
+- nový onboarding, který sbírá více údajů než dřív,
+- scoring leadů nebo zákazníků,
+- AI funkce pracující s uživatelským obsahem,
+- integrace s externím nástrojem,
+- automatizované rozhodování nebo doporučování,
+- nové logování, session replay, behaviorální analytika,
+- přesun dat do jiného hostingu nebo regionu,
+- funkce pro týmovou spolupráci, kde se mění viditelnost dat.
+
+Screening má mít pět otázek:
+
+1. Jaký konkrétní problém funkce řeší?
+2. Jaká osobní data používá a proč právě tato?
+3. Kdo data uvidí, včetně dodavatelů a supportu?
+4. Co se může člověku stát, když se data použijí špatně?
+5. Dá se stejný výsledek dosáhnout s méně daty, kratší retencí nebo lokálnějším zpracováním?
+
+Když je odpověď na otázku číslo 4 „nic moc“, pozor. To často znamená, že tým riziko ještě nepojmenoval, ne že neexistuje.
+
+## Popiš účel jednou větou
+
+První část mini DPIA není tabulka údajů, ale účel. Bez účelu nejde rozhodnout, jestli je sběr dat přiměřený.
+
+Dobrá věta:
+
+```text
+Funkce pomáhá [komu] dosáhnout [výsledek] tím, že používá [minimální data] po dobu [retence].
+```
+
+Příklad:
+
+```text
+Funkce pomáhá administrátorovi týmu rychle najít neaktivní pozvánky tím, že používá e-mail pozvaného, stav pozvánky a datum expirace po dobu 30 dnů od vytvoření pozvánky.
+```
+
+Špatná věta:
+
+```text
+Budeme analyzovat chování uživatelů pro zlepšení produktu.
+```
+
+To není účel, to je mlha v obleku. „Zlepšení produktu“ se musí rozpadnout na konkrétní rozhodnutí: zkrátit onboarding, odhalit rozbitý krok, najít nefunkční import, snížit chybovost administrace.
+
+## Udělej datovou mapu pro danou funkci
+
+Mini DPIA nepotřebuje encyklopedii celého produktu. Potřebuje datovou mapu změny.
+
+U každé datové položky napiš:
+
+- název údaje,
+- odkud přichází,
+- proč je potřeba,
+- kdo k němu má přístup,
+- kde se ukládá,
+- jak dlouho se drží,
+- jestli opouští EU/EHP,
+- jestli existuje méně invazivní alternativa.
+
+Praktický příklad pro SaaS onboarding:
+
+| Údaj | Proč | Přístup | Retence | Poznámka |
+|---|---|---|---|---|
+| E-mail | vytvoření účtu a přihlášení | uživatel, admin workspace, omezený support | po dobu účtu + retenční období | nutný identifikátor |
+| Název firmy | zobrazení workspace a fakturace | členové workspace, billing admin | po dobu účtu | nesbírat IČO, pokud není potřeba |
+| Onboarding krok | nalezení zaseknutých míst v průchodu | produktový tým agregovaně | 90 dnů | ukládat krok, ne obsah formuláře |
+| IP adresa | bezpečnostní ochrana a abuse detekce | bezpečnostní role | krátká bezpečnostní retence | neexportovat do marketingu |
+
+Privacy-first varianta skoro vždy oddělí tři věci: produktová data, bezpečnostní data a marketingová data. Jakmile je smícháš do jednoho jezera, začne z toho být datový rybník, ve kterém se dobře množí problémy.
+
+## Vyhodnoť riziko pro člověka, ne jen pro firmu
+
+Klasická chyba: tým hodnotí jen riziko pro firmu. Pokuta, reputace, support, technický dluh. To je důležité, ale DPIA se ptá hlavně na dopad na lidi.
+
+U každé funkce projdi čtyři typy škody:
+
+- **Důvěrnost:** kdo by mohl vidět něco, co vidět nemá?
+- **Integrita:** co se stane, když jsou data chybná nebo zmanipulovaná?
+- **Dostupnost:** co se stane, když data nebo služba nejsou dostupné?
+- **Kontrola člověka:** může uživatel pochopit, opravit, exportovat nebo smazat relevantní data?
+
+Pak si polož tvrdší otázky:
+
+- Může funkce odhalit citlivou situaci člověka?
+- Může vést k odmítnutí služby, horšímu zacházení nebo zbytečnému dohledu?
+- Může support nebo administrátor vidět víc, než potřebuje?
+- Může kombinace dat vytvořit profil, který jsme původně neplánovali?
+- Může externí dodavatel použít data k vlastnímu účelu?
+
+Pokud odpověď zní „možná“, není to automatický zákaz. Je to signál pro omezení rozsahu, lepší vysvětlení, kratší retenci, anonymizaci, agregaci nebo ruční kontrolu.
+
+## Hledej alternativy před mitigacemi
+
+Mitigace je oprava rizika. Alternativa je lepší návrh, který riziko vůbec nevytvoří. V privacy-first produktu má alternativa přednost.
+
+Příklad: chceš zjistit, kde lidé padají v onboarding formuláři.
+
+Slabá varianta:
+
+- nahrávat session replay,
+- posílat obsah polí do externí analytiky,
+- spojit události s trvalým identifikátorem uživatele,
+- držet data rok „pro jistotu“.
+
+Lepší varianta:
+
+- měřit jen číslo kroku a typ chyby,
+- agregovat po dnech nebo týdnech,
+- nepřenášet obsah polí,
+- použít krátkou retenci,
+- doplnit dobrovolný feedback od uživatele.
+
+Výsledek je často stejný produktový signál, ale s menším rizikem. A bonus: méně dat znamená méně bordelu v dashboardech. Produktový tým pak nemusí dělat datovou archeologii se štětečkem.
+
+## Rozhodnutí musí být verzované
+
+Mini DPIA je užitečná jen tehdy, když přežije první release. Ulož ji vedle produktového zadání, architektonického rozhodnutí nebo interní dokumentace. Nepatří do hlavy jednoho člověka.
+
+Každé rozhodnutí napiš takto:
+
+- datum,
+- vlastník rozhodnutí,
+- změna nebo funkce,
+- výsledek screeningu,
+- hlavní rizika,
+- zvolená omezení,
+- otevřené otázky,
+- datum revize.
+
+Revize je důležitá, protože funkce se mění. Malý event může časem narůst v profilovací systém. Integrace, která začala jako export CSV, se může změnit v obousměrnou synchronizaci. A „dočasný“ log se může stát muzeem osobních údajů, kam chodí strašit compliance.
+
+## Kdy z mini DPIA udělat plnou DPIA
+
+Mini screening nestačí, když se objevují signály vyššího rizika. Typicky:
+
+- systematické monitorování chování lidí,
+- rozsáhlé zpracování citlivých nebo velmi osobních údajů,
+- automatizované rozhodování s významným dopadem,
+- kombinování více zdrojů dat do profilu,
+- zpracování dat dětí nebo zranitelných osob,
+- sledování polohy nebo pracovního výkonu,
+- nová technologie s nejasným dopadem,
+- nemožnost člověka rozumně odmítnout zpracování,
+- rozsáhlé zapojení dodavatelů nebo transfery mimo EU/EHP.
+
+V takové chvíli nepředstírej, že checklist vyřeší právní i technické riziko. Zastav release gate, zapoj DPO nebo právníka, projdi metodiku EDPB/CNIL a rozhodni, jestli je potřeba konzultace s dozorovým úřadem podle článku 36 GDPR.
+
+Tohle není právní rada; je to Codyho praktická brzda: pokud by ses styděl vysvětlovat funkci zákazníkovi na rovinu, pravděpodobně ještě není připravená.
+
+## Checklist: mini DPIA bez právnické mlhy
+
+- [ ] Funkce má účel popsaný jednou konkrétní větou.
+- [ ] Je jasné, jaká osobní data funkce používá a proč.
+- [ ] Každá datová položka má vlastníka, místo uložení a retenční pravidlo.
+- [ ] Produktová, bezpečnostní a marketingová data nejsou smíchaná bez důvodu.
+- [ ] Tým posoudil dopad na člověka, nejen dopad na firmu.
+- [ ] Existuje méně datově invazivní alternativa a byla zvážena.
+- [ ] Přístupy supportu, administrátorů a dodavatelů jsou omezené podle potřeby.
+- [ ] Transfery mimo EU/EHP jsou pojmenované a smluvně řešené.
+- [ ] Funkce má pravidla pro export, opravu, výmaz nebo vysvětlení dat.
+- [ ] Rozhodnutí je verzované a má datum revize.
+- [ ] Vyšší riziko spouští plnou DPIA, ne jen další checkbox.
+
+## Mini šablona privacy screening karty
+
+```markdown
+# Privacy screening karta: [funkce]
+
+## Účel
+Problém, který funkce řeší:
+Jednovětý účel zpracování:
+Hlavní uživatel nebo role:
+
+## Data
+Osobní údaje:
+Zdroj údajů:
+Méně invazivní alternativa:
+Retence:
+Region/provoz:
+
+## Přístupy
+Uživatelé:
+Administrátoři:
+Support:
+Dodavatelé/subprocesory:
+
+## Rizika pro člověka
+Důvěrnost:
+Integrita:
+Dostupnost:
+Kontrola člověka:
+Největší praktické riziko:
+
+## Opatření
+Minimalizace dat:
+Agregace/anonymizace:
+Omezení přístupů:
+Logování a audit:
+Komunikace uživateli:
+
+## Rozhodnutí
+Výsledek: běžná kontrola / mini DPIA stačí / plná DPIA
+Vlastník:
+Datum:
+Revize:
+Otevřené otázky:
+```
+
+## Zdroje
+
+- [EUR-Lex: Regulation (EU) 2016/679, Article 35 — Data protection impact assessment](https://eur-lex.europa.eu/eli/reg/2016/679/oj)
+- [European Data Protection Board: Data protection impact assessment](https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/data-protection-impact-assessment_en)
+- [European Commission: Data protection obligations for businesses and organisations](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en)
+- [CNIL: Privacy Impact Assessment (PIA)](https://www.cnil.fr/en/privacy-impact-assessment-pia)
+- [CNIL: PIA software and guides](https://www.cnil.fr/fr/outil-pia-telechargez-et-installez-le-logiciel-de-la-cnil)
+
 # Pracovní log
+
+- 2026-10-05: Doplněna příloha „Mini DPIA pro novou funkci bez právnické mlhy“ s praktickým privacy screeningem, datovou mapou, vyhodnocením rizik pro člověka, alternativami k invazivnímu zpracování, pravidly pro verzování rozhodnutí, hranicí pro plnou DPIA, checklistem, šablonou privacy screening karty a ověřenými zdroji GDPR, EDPB, Evropské komise a CNIL.
 
 - 2026-10-05: Doplněna příloha „Incidentová komunikace bez paniky a mlžení“ s rozlišením provozních, bezpečnostních a personal data breach incidentů, postupem první hodiny, GDPR breach assessmentem, pravidly pro status stránku, zákaznickou zprávu, postmortem, checklistem, incident communication kartou a ověřenými zdroji EDPB a EUR-Lex.
 
