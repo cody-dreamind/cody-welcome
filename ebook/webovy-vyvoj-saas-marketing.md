@@ -41615,7 +41615,186 @@ Rozhodnutí „schváleno s podmínkou“ musí mít datum smrti. Například: �
 - [ENISA: Cloud Security Guide for SMEs](https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes)
 
 
+# Příloha: Incidentová komunikace bez paniky a mlžení
+
+Incident není jen technický problém. Je to okamžik, kdy zákazník zjišťuje, jestli ti může věřit i ve chvíli, kdy se něco pokazilo. Malá firma často řeší incident tak, že technik opravuje, obchodník mlčí, support neví, co říkat, a zakladatel mezitím v hlavě skládá dramatický status post. To je pochopitelné. Ale není to provozní plán.
+
+Dobrá incidentová komunikace má tři cíle: rychle snížit škodu, říct pravdu bez zbytečných spekulací a vytvořit auditní stopu pro pozdější zlepšení. Privacy-first přístup k tomu přidává čtvrtý cíl: komunikovat jen tolik osobních údajů, kolik je nutné, a nezhoršit incident tím, že v panice rozházíš interní detaily do e-mailů, chatů a screenshotů.
+
+> Codyho komentář: Incident bez komunikace nevypadá menší. Vypadá jako incident plus podezření, že někdo doufá, že si toho nikdo nevšimne. To je strategicky podobné jako schovat kouřící toaster pod deku.
+
+## Rozliš provozní incident, bezpečnostní incident a osobní data breach
+
+Nejdřív pojmenuj typ události. Ne kvůli škatulkám, ale kvůli tomu, kdo musí být u stolu a jak rychle.
+
+- **Provozní incident:** služba nejede, je pomalá, rozbitý formulář neposílá poptávky, platební proces končí chybou.
+- **Bezpečnostní incident:** podezření na neoprávněný přístup, kompromitovaný účet, uniklý token, malware, zneužití API nebo změna konfigurace bez vysvětlení.
+- **Porušení zabezpečení osobních údajů:** událost vede k náhodnému nebo protiprávnímu zničení, ztrátě, změně, neoprávněnému zpřístupnění nebo přístupu k osobním údajům. EDPB popisuje personal data breach právě jako bezpečnostní incident s dopadem na osobní data a upozorňuje, že organizace je musí dokumentovat a řešit odpovídajícím způsobem ([EDPB: Personal data breaches](https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en)).
+
+Jedna událost může spadat do více kategorií. Výpadek databáze může být jen provozní problém. Ransomware, který databázi zašifruje a zpřístupní útočníkovi, je provozní incident, bezpečnostní incident i potenciální data breach. Proto se na začátku neptej „je to velké?“, ale „co víme, co nevíme a jaký nejhorší rozumný dopad musíme prověřit?“
+
+## První hodina rozhoduje o důvěře
+
+První hodina incidentu nemá být chaotický Slack festival. Má mít jednoduchý rytmus:
+
+1. **Zastav krvácení:** izoluj kompromitovanou část, vypni vadnou integraci, zablokuj token, přepni fallback.
+2. **Urči vlastníka incidentu:** jeden člověk koordinuje, ostatní mu dodávají fakta.
+3. **Otevři incident kartu:** čas, dopad, systémy, podezření, aktuální stav, další krok.
+4. **Rozděl kanály:** technický war room, zákaznická komunikace, právní/privacy posouzení.
+5. **Napiš první interní shrnutí:** co se stalo, koho se to týká, co ještě nevíme, kdy bude další update.
+
+Největší chyba je slibovat výsledek dřív, než znáš rozsah. Druhá největší chyba je čekat na dokonalé informace a mezitím neříct nic. Praktický kompromis: komunikuj stav, ne definitivní závěr.
+
+Příklad první veřejné věty na status stránku:
+
+```text
+Zaznamenali jsme problém s odesíláním formulářů na webu. Nové odeslání může selhat nebo přijít se zpožděním. Problém vyšetřujeme, příští aktualizaci přidáme do 30 minut.
+```
+
+Tahle věta je užitečná, protože nepanikaří, nepředstírá jistotu a říká, kdy bude další informace.
+
+## U breach scénářů hlídej hodiny, ne náladu
+
+Pokud incident může zahrnovat osobní údaje, zapni právní a privacy stopky. Článek 33 GDPR říká, že správce má porušení zabezpečení osobních údajů oznámit dozorovému úřadu bez zbytečného odkladu a pokud možno do 72 hodin od okamžiku, kdy se o něm dozvěděl, ledaže je nepravděpodobné, že by vedlo k riziku pro práva a svobody fyzických osob ([EUR-Lex: Regulation (EU) 2016/679](https://eur-lex.europa.eu/legal-content/ENG/ALL/?uri=celex%3A32016R0679)). EDPB k tomu má praktické pokyny v Guidelines 9/2022 a vysvětluje, kdy se oznamuje dozorovému úřadu a kdy i dotčeným lidem ([EDPB: Guidelines 9/2022](https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en)).
+
+Pro malý tým to znamená jednoduché pravidlo: už při podezření založ breach assessment, i když se později ukáže, že oznamování nebylo nutné. Dokumentace rozhodnutí je součást provozní hygieny. EDPB v průvodci pro malé firmy připomíná i to, že zpracovatel musí správce informovat bez zbytečného odkladu, pokud zpracovává osobní data jeho jménem ([EDPB: Data breaches for small business](https://www.edpb.europa.eu/sme/assess-the-risks/data-breaches_en)).
+
+Minimální breach assessment otázky:
+
+- Jaké osobní údaje mohly být dotčeny?
+- Kolik lidí nebo účtů se událost týká?
+- Šlo o ztrátu důvěrnosti, dostupnosti, integrity, nebo kombinaci?
+- Byla data šifrovaná nebo jinak nečitelná pro neautorizovanou osobu?
+- Jaká je pravděpodobná škoda pro dotčené lidi?
+- Jsme správce, zpracovatel, nebo obojí v různých částech toku?
+- Kdo rozhodl o oznámení nebo neoznámení a podle jakých faktů?
+
+Nejde o právní stanovisko na koleni. Jde o to, aby tým neztratil čas a aby později bylo jasné, proč postupoval právě takhle.
+
+## Status stránka má být nudně konkrétní
+
+Status stránka není marketing. Je to provozní semafor. Nemá uklidňovat mlhou, ale šetřit čas zákazníkům i supportu.
+
+Dobrá incidentová zpráva obsahuje:
+
+- **stav:** vyšetřujeme, identifikováno, oprava probíhá, monitorujeme, vyřešeno,
+- **dopad:** koho a jak se problém týká,
+- **čas:** kdy problém začal nebo kdy byl zjištěn,
+- **další krok:** co tým dělá teď,
+- **další update:** kdy přijde další informace,
+- **fallback:** co má zákazník dělat, pokud potřebuje pokračovat.
+
+Špatná zpráva zní: „Někteří uživatelé mohou pozorovat potíže.“ To je věta, která vypadá bezpečně, ale zákazníkovi nic neřekne. Lepší: „U zákazníků v administraci může selhávat export CSV. Importy a veřejný web fungují. Data se neztratila; exporty znovu spustíme po opravě.“
+
+Privacy-first detail: do status stránky nedávej identifikátory zákazníků, e-mailové adresy, názvy interních účtů, screenshoty s URL tokeny ani přesné bezpečnostní detaily, které by pomohly útočníkovi. Status má být konkrétní v dopadu, ne v tajemstvích.
+
+## Zákazníkovi napiš podle dopadu, ne podle strachu
+
+Ne každý incident vyžaduje hromadný e-mail. Pokud je dopad veřejný a provozní, status stránka a krátká poznámka v aplikaci může stačit. Pokud se incident týká konkrétní skupiny zákazníků nebo osobních údajů, komunikuj cíleně.
+
+Zákaznická zpráva má mít lidskou strukturu:
+
+```text
+Předmět: Informace k incidentu [stručný dopad]
+
+Dobrý den,
+
+dne [datum/čas] jsme zjistili [co se stalo v běžné řeči].
+
+Týká se to: [koho]
+Netýká se to: [důležitá uklidňující hranice, pokud ji víme]
+Co jsme udělali: [opatření]
+Co doporučujeme vám: [konkrétní kroky, pokud jsou potřeba]
+Další update: [čas/kanál]
+Kontakt: [kam psát]
+
+Omlouváme se za komplikace. Po uzavření incidentu doplníme stručné shrnutí příčiny a preventivních opatření.
+```
+
+Nepoužívej fráze „bereme bezpečnost velmi vážně“ jako náhradu za fakta. Bez faktů to zní jako výchozí text z generátoru krizové komunikace. A ten má v incidentu asi stejnou důvěryhodnost jako cedulka „neklouže“ u mokrých schodů.
+
+## Postmortem piš pro učení, ne pro hledání viníka
+
+Po opravě incident nekončí. Končí až ve chvíli, kdy máš postmortem, rozhodnutí o preventivních opatřeních a uklizené dočasné výjimky.
+
+Lehký postmortem pro malou firmu:
+
+- Časová osa: kdy problém začal, kdy byl zjištěn, kdy byl mitigován, kdy byl vyřešen.
+- Dopad: služby, zákazníci, data, finanční nebo reputační dopad.
+- Příčina: technická a organizační, ne jen „lidská chyba“.
+- Co fungovalo: monitoring, fallback, komunikace, týmová reakce.
+- Co selhalo: chybějící alert, nejasný vlastník, slabá dokumentace, moc široký přístup.
+- Preventivní opatření: maximálně několik konkrétních úkolů s vlastníkem a datem.
+- Privacy poznámka: jaká data byla použita při vyšetřování a kdy budou incidentní exporty smazány.
+
+Postmortem bez vlastníka úkolů je hezký dokument do šuplíku. Úkoly bez kontroly po měsíci jsou zase jen optimismus v Markdownu. Nastav si review: co bylo dokončeno, co se ukázalo jako zbytečné a co se má promítnout do runbooku.
+
+## Checklist: incidentová komunikace bez mlžení
+
+- [ ] Máme definované typy incidentů a minimální eskalační pravidla?
+- [ ] Víme, kdo je incident commander, technický vlastník, support kontakt a privacy/legal kontakt?
+- [ ] Existuje šablona první interní zprávy a status update?
+- [ ] Umíme oddělit provozní incident od možného personal data breach?
+- [ ] U osobních údajů zakládáme breach assessment hned při podezření?
+- [ ] Sledujeme 72hodinové GDPR okno u relevantních breach scénářů?
+- [ ] Status stránka říká dopad, další krok a čas další aktualizace?
+- [ ] Zákaznická zpráva obsahuje konkrétní doporučení, pokud má zákazník něco udělat?
+- [ ] Neposíláme v incidentních kanálech zbytečné osobní údaje, tokeny ani screenshoty s tajemstvím?
+- [ ] Po incidentu uklízíme dočasné přístupy, exporty, debug logy a výjimky?
+- [ ] Postmortem má vlastníky úkolů a datum kontroly?
+
+## Mini šablona incident communication karty
+
+```text
+# Incident communication karta: [incident]
+
+## Základ
+Detekováno:
+Incident commander:
+Technický vlastník:
+Support kontakt:
+Privacy/legal kontakt:
+
+## Dopad
+Dotčené služby:
+Dotčení zákazníci / segmenty:
+Dotčená data:
+Aktuální stav:
+Fallback pro zákazníky:
+
+## Komunikace
+Interní kanál:
+Status stránka:
+Zákaznická zpráva:
+Další update v:
+Co zatím nevíme:
+
+## Breach assessment
+Může jít o osobní údaje?
+Správce / zpracovatel:
+Riziko pro osoby:
+Oznámení DPA:
+Oznámení dotčeným osobám:
+Rozhodnutí a důvod:
+
+## Uzavření
+Vyřešeno kdy:
+Postmortem odkaz:
+Preventivní úkoly:
+Dočasné výjimky uklizeny:
+Incidentní exporty smazat do:
+```
+
+## Zdroje
+
+- [EDPB: Personal data breaches](https://www.edpb.europa.eu/topics/security-data-breaches/personal-data-breaches_en)
+- [EDPB: Guidelines 9/2022 on personal data breach notification under GDPR](https://www.edpb.europa.eu/documents/guideline/guidelines-92022-on-personal-data-breach-notification-under-gdpr_en)
+- [EDPB: Data breaches — Data protection guide for small business](https://www.edpb.europa.eu/sme/assess-the-risks/data-breaches_en)
+- [EUR-Lex: Regulation (EU) 2016/679, Articles 33 and 34](https://eur-lex.europa.eu/legal-content/ENG/ALL/?uri=celex%3A32016R0679)
+
 # Pracovní log
+
+- 2026-10-05: Doplněna příloha „Incidentová komunikace bez paniky a mlžení“ s rozlišením provozních, bezpečnostních a personal data breach incidentů, postupem první hodiny, GDPR breach assessmentem, pravidly pro status stránku, zákaznickou zprávu, postmortem, checklistem, incident communication kartou a ověřenými zdroji EDPB a EUR-Lex.
 
 - 2026-10-05: Doplněna příloha „Due diligence balíček pro SaaS nákup bez korporátního divadla“ s rizikovým tříděním dodavatelů, obchodním důvodem nákupu, kontrolou rolí správce/zpracovatele, subprocesorů, exit plánu, auditní vendor kartou, checklistem, vyplnitelnou šablonou a ověřenými zdroji GDPR, EDPB, Evropské komise a ENISA.
 
