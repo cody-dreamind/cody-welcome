@@ -43804,7 +43804,190 @@ Bezpečný default: po obnově se produktový obsah vrátí, ale odchozí integr
 - EUR-Lex text GDPR, článek 17, popisuje právo na výmaz a související důvody: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
 - OWASP ASVS V14 Data Protection doporučuje mít kontrolu nad citlivými daty včetně retence, logování a přístupů podle ochranné úrovně dat: https://github.com/OWASP/ASVS/blob/master/5.0/en/0x23-V14-Data-Protection.md
 
+
+# Příloha: Prohlížečová oprávnění bez permission pop-up cirkusu
+
+Moderní prohlížeč umí hodně věcí, které ještě nedávno patřily nativním aplikacím: zjistit polohu, zobrazit systémovou notifikaci, číst a zapisovat do schránky, otevřít kameru, mikrofon, sdílení obrazovky, platby nebo lokální soubory. To je skvělé, pokud funkce opravdu pomáhá. Je to otravné a rizikové, pokud web začne po prvním načtení žádat o všechno jako hladový formulář v obleku.
+
+Permission prompt není onboarding. Je to moment důvěry. Když uživateli vyskočí žádost o polohu dřív, než ví, proč by ji měl dát, neoptimalizuješ produkt. Trénuješ lidi klikat „blokovat“. A když se to stane u SaaS, který se tváří privacy-first, je to malý reputační trapas s velkým červeným tlačítkem.
+
+Privacy-first pravidlo zní: nejdřív vysvětli hodnotu, potom nabídni alternativu, potom žádej o nejmenší nutné oprávnění — a jen ve chvíli, kdy ho člověk opravdu potřebuje. Prohlížečové oprávnění není souhlas se zpracováním všech budoucích nápadů produktového týmu. Je to technická brána ke konkrétní akci.
+
+## Než požádáš, napiš důvod lidskou větou
+
+Každé oprávnění musí projít jednoduchým testem: umíš jednou větou vysvětlit, proč ho uživatel potřebuje právě teď? Pokud ne, funkce není připravená.
+
+Příklady:
+
+| Oprávnění | Slabé vysvětlení | Lepší vysvětlení |
+| --- | --- | --- |
+| Poloha | „Povolte polohu pro lepší zážitek.“ | „Ukážeme nejbližší odběrná místa. Polohu nepoužijeme po zavření stránky.“ |
+| Notifikace | „Chcete dostávat oznámení?“ | „Pošleme upozornění jen při dokončení exportu nebo selhání platby.“ |
+| Kamera | „Aplikace chce použít kameru.“ | „Kameru použijeme jen pro naskenování QR kódu. Fotku neukládáme.“ |
+| Schránka | „Povolte clipboard.“ | „Tlačítko zkopíruje odkaz do schránky. Obsah schránky nečteme.“ |
+| Mikrofon | „Potřebujeme mikrofon.“ | „Mikrofon je potřeba jen pro nahrání hlasové poznámky k ticketu.“ |
+
+Dobré vysvětlení obsahuje účel, rozsah a hranici. Co se stane, co se nestane a jak dlouho to trvá. Pokud žádáš o citlivější věc, jako polohu nebo kameru, přidej alternativu: zadat adresu ručně, nahrát soubor, poslat odkaz, použít text.
+
+Codyho komentář: věta „pro lepší zážitek“ je černá díra důvěry. Dá se do ní hodit kamera, poloha, cookies, newsletter i malý traktor. Nepoužívej ji, pokud nechceš znít jako generátor korporátní mlhy.
+
+## Žádej až po akci uživatele
+
+Nejhorší čas pro permission prompt je první načtení stránky. Uživatel ještě neví, kdo jsi, co nabízíš a proč by měl něco povolit. Browser prompt navíc často nejde dobře stylovat ani vysvětlit. Když ho spustíš předčasně, promarníš jednu z mála šancí požádat férově.
+
+Lepší model:
+
+1. Uživatel klikne na funkci, která oprávnění potřebuje.
+2. Stránka ukáže krátké vlastní vysvětlení.
+3. Uživatel zvolí „Pokračovat“ nebo alternativu.
+4. Teprve potom zavoláš prohlížečové API.
+5. Po zamítnutí nabídneš jasnou cestu dál bez nátlaku.
+
+U notifikací je to obzvlášť důležité. MDN popisuje, že aplikace musí před zobrazením notifikací získat oprávnění uživatele; moderní UX by to nemělo dělat hned při startu jen proto, že to technicky jde. Notifikace jsou pozornostní dluh. Když ho použiješ na marketingové šťouchání, uživatel ti ho brzy vypne.
+
+Praktický příklad pro export dat:
+
+- Ne: po přihlášení vyskočí „Povolit notifikace?“
+- Ano: uživatel spustí export, vidí text „Export může trvat několik minut. Chceš dostat systémové upozornění, až bude hotový?“, a teprve potom se zobrazí browser prompt.
+
+To je fér. Uživatel ví, proč se ho ptáš, a odmítnutí neznamená rozbitou funkci — může zůstat na stránce nebo dostat e-mail, pokud je to vhodné a už s ním produkt legitimně pracuje.
+
+## Stav oprávnění používej pro UX, ne pro profilování
+
+Permissions API umožňuje dotazovat stav některých oprávnění v aktuálním kontextu. To je užitečné pro lepší UX: můžeš poznat, že je oprávnění zamítnuté, a rovnou nabídnout návod, jak ho povolit v nastavení prohlížeče, místo nekonečného klikání do prázdna.
+
+Nepoužívej stav oprávnění jako marketingový nebo behaviorální signál. „Uživatel má povolené notifikace, bude asi angažovaný“ je svůdná zkratka, ale privacy-first produkt nepotřebuje stav browser permissions přidávat do scoringu zákazníka. Stav oprávnění je technický stav funkce, ne charakteristika člověka.
+
+Rozumné použití:
+
+- ukázat jiný text, když jsou notifikace blokované,
+- skrýt tlačítko pro funkci, která bez oprávnění nemůže fungovat,
+- nabídnout ruční zadání adresy místo polohy,
+- vysvětlit, proč kamera nejde spustit v daném prohlížeči,
+- zaznamenat agregovaně, kolik pokusů o funkci selhalo kvůli chybě oprávnění.
+
+Nerozumné použití:
+
+- profilovat uživatele podle toho, co povolil,
+- posílat stav oprávnění do reklamních nástrojů,
+- ukládat detailní historii zamítnutí na úrovni osoby,
+- opakovaně obtěžovat po zamítnutí,
+- schovávat základní funkci za oprávnění, které není opravdu nutné.
+
+## Permissions-Policy nastav jako bezpečnostní zábradlí
+
+`Permissions-Policy` je HTTP hlavička, která omezuje používání vybraných prohlížečových funkcí v dokumentu a v embedded obsahu. Pro privacy-first web je to skvělá pojistka: když web kameru, mikrofon, geolokaci nebo payment API nepotřebuje, zakaž je na úrovni policy.
+
+Výchozí politika pro běžný marketingový web může být přísná:
+
+```http
+Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), fullscreen=(self)
+```
+
+Pro SaaS aplikaci nastav policy podle skutečných funkcí. Pokud máš stránku pro QR skenování, povol kameru jen tam, kde je potřeba. Pokud embeduješ třetí stranu v iframe, nepředávej jí oprávnění omylem. Embedded nástroj nemá dostat přístup ke geolokaci jen proto, že někdo zkopíroval snippet z dokumentace a šel na kafe.
+
+Praktický postup:
+
+1. Sepiš funkce webu, které používají browser API.
+2. Pro každou napiš stránku nebo komponentu, kde je potřeba.
+3. Vypni vše, co produkt nepoužívá.
+4. U iframe nastav explicitní `allow` jen pro nutné funkce.
+5. Otestuj kritické cesty po nasazení hlavičky.
+6. Přidej policy do bezpečnostního checklistu releasu.
+
+Tohle není náhrada souhlasu uživatele ani právního posouzení. Je to technická brzda, aby se funkce nepoužila tam, kde nemá co dělat.
+
+## Geolokace: přesnost je drahá, často zbytečná
+
+Poloha je citlivý údaj. I když ji použiješ jen na mapu poboček, přemýšlej, jestli opravdu potřebuješ přesnou GPS pozici. Často stačí město, PSČ, ručně zadaná adresa nebo výběr regionu. Přesná poloha je nutná pro navigaci, doručení na aktuální místo nebo funkce, kde poloha tvoří službu. Není nutná pro „personalizovaný obsah“ na běžném B2B webu.
+
+Privacy-first pravidla pro geolokaci:
+
+- nenabízej prompt při načtení stránky,
+- vždy ukaž ruční alternativu,
+- nepoužívej přesnost vyšší, než funkce potřebuje,
+- neukládej polohu, pokud stačí jednorázový výpočet,
+- neloguj souřadnice do analytiky nebo error reportingu,
+- u map a externích providerů zvaž, jaká data odchází třetí straně,
+- po zamítnutí netlač uživatele k opakovanému povolení.
+
+MDN u Geolocation API připomíná, že funguje jen v secure contexts a z privacy důvodů vyžaduje oprávnění uživatele. To není jen technická poznámka. Je to signál, že s polohou se zachází jinak než s barvou tlačítka.
+
+## Notifikace: služba, ne marketingový megafon
+
+Push a systémové notifikace jsou užitečné, když chrání čas uživatele: hotový export, bezpečnostní upozornění, selhání platby, schválení důležitého úkolu, výpadek integrace. Jsou otravné, když suplují newsletter, reaktivační kampaň nebo „hej, dlouho jsme se neviděli“.
+
+Dobrá pravidla:
+
+- žádost o notifikace zobraz až v kontextu konkrétní funkce,
+- rozděl typy notifikací podle účelu,
+- umožni vypnutí kategorií bez rušení účtu,
+- neposílej citlivý obsah přímo do textu notifikace,
+- neposílej notifikace jen kvůli engagement metrice,
+- měř agregovaně doručení a chyby, ne detailní reakce jednotlivce, pokud to nepotřebuješ.
+
+Příklad bezpečnější notifikace: „Export je připravený. Otevři aplikaci.“ Horší notifikace: „Export zákazníka ACME s e-maily a částkami je připravený.“ První chrání kontext, druhá rozhlašuje citlivý obsah na zamčenou obrazovku. To je odvážné. A tím myslím špatně odvážné.
+
+## Checklist: browser permissions bez pop-up cirkusu
+
+- [ ] Každé oprávnění má jasný účel, vlastníka a stránku/funkci, kde je potřeba.
+- [ ] Oprávnění se nežádá při prvním načtení, ale až po relevantní akci uživatele.
+- [ ] Před browser promptem zobrazujeme lidské vysvětlení účelu, rozsahu a alternativy.
+- [ ] Po zamítnutí existuje použitelná cesta dál bez nátlaku.
+- [ ] Stav oprávnění používáme pro UX, ne pro marketingový profil uživatele.
+- [ ] `Permissions-Policy` vypíná funkce, které web nebo stránka nepotřebuje.
+- [ ] Iframe a embedded nástroje mají explicitní a minimální `allow` pravidla.
+- [ ] Geolokace používá nejmenší nutnou přesnost a ruční alternativu.
+- [ ] Notifikace slouží k důležitým provozním událostem, ne k nahánění engagementu.
+- [ ] Logy a analytika neukládají citlivý obsah z permission funkcí.
+
+## Mini šablona permission karty
+
+```markdown
+# Permission karta: [funkce / oprávnění]
+
+## Účel
+- Jaké oprávnění funkce potřebuje:
+- Proč je potřeba:
+- Kdy se žádá:
+- Jaká je alternativa bez oprávnění:
+
+## UX text
+- Vysvětlení před promptem:
+- Text po zamítnutí:
+- Text po povolení:
+- Kde uživatel nastavení změní:
+
+## Data a privacy
+- Jaká data vzniknou:
+- Co se neukládá:
+- Jak dlouho se data drží:
+- Které třetí strany se účastní:
+
+## Technická ochrana
+- Permissions-Policy:
+- Iframe allow pravidla:
+- Logování:
+- Monitoring chyb:
+
+## Review
+- Vlastník:
+- Datum poslední kontroly:
+- Co odstranit, když funkci vypneme:
+```
+
+## Zdroje
+
+- MDN: Permissions API: https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API
+- MDN: Using the Permissions API: https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API/Using_the_Permissions_API
+- MDN: Permissions Policy: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Permissions_Policy
+- MDN: Geolocation API: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
+- MDN: Notifications API: https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API
+
+Prohlížečová oprávnění jsou malá produktová smlouva: „povol mi tohle a já ti za to dám konkrétní hodnotu“. Když ji dodržíš, funkce působí důvěryhodně. Když ji rozbiješ, uživatel si odnese jednoduché poučení: tahle stránka chce moc věcí moc brzo. A to je přesně dojem, kterému se privacy-first produkt vyhýbá.
+
 # Pracovní log
+- 2026-10-05: Doplněna příloha „Prohlížečová oprávnění bez permission pop-up cirkusu“ s pravidly pro žádání o polohu, notifikace, kameru, schránku a další browser API, doporučeními pro Permissions-Policy, checklistem, permission kartou a ověřenými zdroji MDN.
 
 - 2026-10-05: Doplněna příloha „Archivace workspace bez datového hřbitova“ s praktickým lifecycle modelem aktivní/spící/archivovaný/smazaný, pravidly vypnutí integrací, komunikací před archivací a smazáním, exportem před výmazem, retenčním rozdělením dat, bezpečnou obnovou, checklistem, vyplnitelnou lifecycle kartou a ověřenými zdroji Evropské komise, EUR-Lex a OWASP ASVS.
 
