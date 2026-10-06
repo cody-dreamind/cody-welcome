@@ -46712,7 +46712,173 @@ Pro tým je důležité mít jednoduchý provozní pohled: kolik webhooků ček�
 - OWASP: Secrets Management Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
 
 
+# Příloha: API klíče a tokeny bez úniku do logů, promptů a screenshotů
+
+API klíč je malý řetězec s velkou mocí. Umí otevřít platební bránu, e-mailing, analytiku, AI model, fakturační systém nebo administraci zákaznických dat. A právě proto nesmí žít jako obyčejný text v repozitáři, poznámce, chatu, screenshotu, ticketu nebo promptu. Klíč není konfigurace. Je to přístup.
+
+Pro malý SaaS je největší riziko často banální: klíč se vloží do `.env`, pak do CI proměnné, pak do logu při debugování, pak do screenshotu pro support a nakonec do dokumentace „dočasně“. Dočasné tajemství je zvláštní tvor. Když ho nikdo nepojmenuje, přežije i tři redesigny.
+
+> Codyho komentář: Tajemství, které musí člověk ručně kopírovat mezi pěti nástroji, není tajemství. Je to nehoda, která ještě nedostala kalendářovou pozvánku.
+
+## Rozlišuj typy tajemství
+
+Ne každý token má stejný dopad. Když vše označíš jako „secret“, tým ztratí cit. Když naopak všechno bereš jako běžnou konfiguraci, pozveš si problém na kafe.
+
+Praktické rozdělení:
+
+- **Veřejná konfigurace**: URL veřejného API, název prostředí, feature flag bez bezpečnostního dopadu.
+- **Nízké tajemství**: token s omezeným rozsahem pro čtení neosobních dat.
+- **Vysoké tajemství**: klíč k platební bráně, e-mailingu, produkční databázi, AI účtu nebo administraci zákazníků.
+- **Kritické tajemství**: master klíče, signing secrets, encryption keys, break-glass účty a produkční deploy tokeny.
+
+OWASP Secrets Management Cheat Sheet zdůrazňuje princip nejmenších oprávnění, oddělení přístupů a rotaci tajemství, ideálně automatizovanou a opakovatelnou ([OWASP: Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)). Pro malý tým z toho plyne jednoduché pravidlo: každý klíč má mít vlastníka, účel, prostředí, rozsah oprávnění, expiraci nebo rotační plán a místo, kde se bezpečně spravuje.
+
+## Klíč nesmí být identita celého produktu
+
+Nejhorší API klíč je jeden univerzální produkční token, který umí všechno a používá ho aplikace, CI, lokální vývoj, support skript i ad hoc migrace. Když unikne, nevíš, co se stalo. A když ho chceš zrušit, zjistíš, že drží půl firmy pohromadě. To není infrastruktura. To je magická špejle.
+
+Lepší model:
+
+- samostatný klíč pro produkci, staging a lokální vývoj,
+- samostatný klíč pro aplikaci, CI/CD, monitoring a interní skripty,
+- omezení podle scope, projektu, tenantů, IP nebo prostředí, pokud to dodavatel podporuje,
+- read-only klíče tam, kde není potřeba zápis,
+- krátkodobé tokeny pro jednorázové operace,
+- jasná vazba klíče na službu, ne na osobní účet zaměstnance.
+
+OWASP REST Security Cheat Sheet u API klíčů připomíná i praktickou věc: pokud klient porušuje pravidla použití, klíč má jít odvolat ([OWASP: REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html)). To zní samozřejmě, dokud nemáš jeden sdílený klíč pro deset různých účelů a jeho odvolání znamená provozní ohňostroj.
+
+## Kam tajemství patří
+
+Tajemství patří do správce tajemství nebo bezpečného runtime nastavení, ne do repozitáře. Lokální `.env` může být praktický, ale musí být ignorovaný Gitem, nesmí se sdílet jako příloha a nemá být jediným zdrojem pravdy.
+
+Minimální provozní pravidla:
+
+- `.env.example` obsahuje jen názvy proměnných a bezpečné placeholdery,
+- skutečné hodnoty jsou v secrets manageru, CI secret store nebo produkčním nastavení hostingu,
+- produkční klíče nejsou potřeba pro běžný lokální vývoj,
+- přístup k tajemstvím má jen role, která ho opravdu potřebuje,
+- čtení a změny tajemství se auditují,
+- klíč nikdy nejde do issue, chatu, promptu, screenshotu ani běžného logu.
+
+OWASP Cryptographic Storage Cheat Sheet varuje, že klíče a citlivé hodnoty se mohou nechtěně odhalit i přes prostředí nebo diagnostiku, a odkazuje na samostatnou správu tajemství pro bezpečnější praxi ([OWASP: Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)). Praktický překlad: environment variables jsou lepší než hardcode, ale nejsou kouzelný trezor. Pořád potřebují přístupová pravidla, audit a disciplínu v logování.
+
+## AI asistenti: klíče nepatří do promptu
+
+U AI workflow přidej ještě jednu hranici: model nemá vidět skutečné tajemství. Když potřebuješ, aby agent zavolal nástroj, dej mu identifikátor konektoru nebo název akce, ale autentizaci má doplnit důvěryhodná vrstva mimo model. Klíč vložený do promptu se může dostat do historie konverzace, logů, ladicích výstupů nebo vygenerovaného kódu.
+
+Bezpečnější vzor:
+
+- model ví, že má použít „fakturační API“, ne jaký má token,
+- nástroj nebo backend přidá autentizaci až na hranici volání,
+- model nikdy nevypisuje hodnoty secrets do odpovědi,
+- testovací data pro AI jsou anonymizovaná nebo syntetická,
+- při chybě se vrací korelační ID, ne celý request s hlavičkami.
+
+Tohle není nedůvěra k AI. Je to normální oddělení rolí. Asistent má rozhodovat o práci, ne nosit master klíče v kapse jako digitální správce školní tělocvičny.
+
+## Rotace bez paniky
+
+Rotace klíče nemá být krizový rituál ve 23:40. Má to být nacvičený postup. Pokud klíč neumíš bezpečně vyměnit bez dlouhého výpadku, není to jen bezpečnostní problém, ale i provozní dluh.
+
+Praktický rotační postup:
+
+1. Vytvoř nový klíč se stejným nebo menším rozsahem oprávnění.
+2. Přidej ho do secrets manageru vedle starého klíče.
+3. Nasaď aplikaci tak, aby používala nový klíč.
+4. Ověř důležité akce v produkci nebo řízeném smoke testu.
+5. Starý klíč odvolej až po ověření.
+6. Zapiš datum, důvod a vlastníka rotace.
+
+U kritických klíčů si dopředu napiš i emergency postup: kdo může rotovat, kde najde návod, jak ověří dopad, koho informuje a co se dělá, když klíč unikl veřejně. NIST ve svých digitálních identity guidelines řeší životní cyklus autentizátorů a obnovení přístupu; pro produktový provoz je užitečný princip, že přístupové prostředky mají mít řízený životní cyklus, ne nekonečný život „dokud to funguje“ ([NIST SP 800-63B](https://pages.nist.gov/800-63-3/sp800-63b.html)).
+
+## Logy, chyby a support výstupy
+
+Tajemství často neuniknou ze zdrojového kódu, ale z pomocných míst: error tracking, HTTP debug logy, support exporty, nahrávky obrazovky, observability dashboardy, CI výstupy. Proto musíš tajemství maskovat u zdroje, ne až když se někdo vyděsí.
+
+Co maskovat vždy:
+
+- `Authorization` hlavičky,
+- API klíče v query parametrech,
+- webhook signing secrets,
+- session tokeny,
+- refresh tokeny,
+- celé cookies,
+- connection stringy,
+- privátní části JWT,
+- e-mailové magic link tokeny.
+
+Praktické pravidlo pro logy: ukládej rozhodnutí a korelační ID, ne tajemství. Místo „volání selhalo s tokenem X“ napiš „volání poskytovatele Y selhalo, request_id Z, scope billing:read“. Pokud potřebuješ rozlišit klíč, ulož bezpečný fingerprint, například krátký hash nebo poslední čtyři znaky interního identifikátoru klíče — nikdy celou hodnotu.
+
+## Checklist: API klíče a tokeny bez průvanu
+
+- [ ] Má každý klíč jasný účel, vlastníka a prostředí?
+- [ ] Existuje rozdíl mezi produkčním, stagingovým a lokálním klíčem?
+- [ ] Má klíč nejmenší nutný rozsah oprávnění?
+- [ ] Je skutečná hodnota mimo repozitář, dokumentaci, chat a prompty?
+- [ ] Obsahuje `.env.example` jen bezpečné placeholdery?
+- [ ] Umíme klíč odvolat bez rozbití nesouvisejících částí produktu?
+- [ ] Má kritický klíč rotační a emergency postup?
+- [ ] Maskujeme tokeny v logu, error trackingu, CI a support výstupech?
+- [ ] AI workflow používá konektory nebo vault boundary, ne klíče vložené do promptu?
+- [ ] Auditujeme, kdo tajemství čte nebo mění?
+- [ ] Testujeme, že chyba nevrací tajemství v odpovědi ani logu?
+- [ ] Má každý starý nebo nepoužitý klíč datum zrušení?
+
+## Mini šablona secret karty
+
+```markdown
+# Secret karta: [název klíče]
+
+## Účel
+- Služba / dodavatel:
+- Prostředí:
+- Business účel:
+- Kritičnost:
+
+## Rozsah
+- Oprávnění / scope:
+- Read / write:
+- Omezení podle IP, projektu nebo tenantů:
+- Kdo klíč používá:
+
+## Uložení
+- Kde je uložen:
+- Kdo má přístup:
+- Audit přístupů:
+- Je v `.env.example` bezpečný placeholder:
+
+## Provoz
+- Rotační interval nebo spouštěč:
+- Poslední rotace:
+- Další plánovaná kontrola:
+- Emergency vlastník:
+- Postup odvolání:
+
+## Logování a AI
+- Co se maskuje:
+- Kde se kontroluje únik do logů:
+- Smí být použito v AI workflow:
+- Jaký konektor nebo proxy vrstva se používá místo sdílení klíče:
+
+## Testy
+- Klíč není v repozitáři:
+- Chyba nevrací tajemství:
+- CI nevypisuje hodnotu:
+- Rotace ověřena:
+- Starý klíč zrušen:
+```
+
+## Zdroje
+
+- OWASP: Secrets Management Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- OWASP: REST Security Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html
+- OWASP: Cryptographic Storage Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html
+- NIST SP 800-63B: Digital Identity Guidelines — https://pages.nist.gov/800-63-3/sp800-63b.html
+
+
 # Pracovní log
+- 2026-10-06: Doplněna příloha „API klíče a tokeny bez úniku do logů, promptů a screenshotů“ s klasifikací tajemství, least-privilege scopingem, bezpečným uložením, AI hranicí bez klíčů v promptech, rotací, maskováním logů, checklistem, secret kartou a ověřenými zdroji OWASP a NIST.
 - 2026-10-06: Doplněna příloha „Webhooky bez falešných objednávek a datového průvanu“ s ověřováním podpisu nad raw body, replay ochranou, idempotencí, tenant mappingem, bezpečným logováním, retry/dead-letter provozem, checklistem, webhook kartou a ověřenými zdroji Stripe, GitHub a OWASP.
 - 2026-10-06: Doplněn úvod e-booku o krátkou poznámku k rollbacku mikro-změn, aby malé experimenty měly jasnou návratovou cestu.
 
