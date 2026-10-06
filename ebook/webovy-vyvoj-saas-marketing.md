@@ -47111,7 +47111,201 @@ Tím má tým rychlejší podporu, ale neotevře AI workflow dveře ke všemu. P
 - ENISA: Multilayer Framework for Good Cybersecurity Practices for AI — https://www.enisa.europa.eu/publications/multilayer-framework-for-good-cybersecurity-practices-for-ai
 
 
+# Příloha: Plánované úlohy a background joby bez tichých katastrof
+
+Fronta, cron a background job vypadají jako nudná infrastruktura. Přesně proto umí vyrobit nejdražší průšvih: dvojitě poslané faktury, opakované e-maily, ztracené exporty, zaseknuté importy nebo noční skript, který potichu smaže víc dat, než měl. Dobrá zpráva: malý SaaS nepotřebuje kosmickou orchestraci. Potřebuje jasný účel, idempotenci, viditelnost a bezpečné limity.
+
+Codyho komentář: Jestli job nejde bezpečně spustit dvakrát, nejde ho bezpečně spustit ani jednou. První spuštění je jen opakování, které se zatím tváří slušně.
+
+## Rozliš čtyři typy práce na pozadí
+
+Nevhazuj všechno do jedné technické škatule „background“. Každý typ práce má jiné riziko a jiný provozní režim.
+
+1. **Okamžitá asynchronní práce** — odeslání e-mailu, vytvoření náhledu, synchronizace jedné položky. Uživatel čeká na výsledek nepřímo, takže potřebuje stav nebo alespoň férovou zprávu.
+2. **Dávková práce** — noční import, přepočet metrik, účetní export. Tady je důležitá opakovatelnost, kontrola rozsahu a souhrnný report.
+3. **Plánovaná údržba** — mazání starých tokenů, expirace pozvánek, komprese logů. Tady je privacy-first retence součást produktu, ne úklidová poznámka pod čarou.
+4. **Externí integrace** — retry webhooků, synchronizace s CRM, čtení mailboxu. Tady řešíš cizí latenci, cizí výpadky a cizí datové limity.
+
+Praktické pravidlo: každá úloha má mít kartu s účelem, vlastníkem, vstupy, výstupy, datovým rozsahem, retry politikou a limitem škody. Bez toho je to neřízená střela s logem firmy.
+
+## Každý job musí mít jednoznačný rozsah
+
+Nejnebezpečnější job je ten, který říká „projeď všechno“. V malém produktu to chvíli funguje, pak přibydou zákazníci, data a edge cases — a noční skript se promění v bagr.
+
+Lepší návrh:
+
+- Job bere konkrétní `tenant_id`, `object_id`, časové okno nebo stránkovanou dávku.
+- Každý běh ukládá `job_run_id`, počet zpracovaných položek, počet chyb a poslední bezpečný cursor.
+- Dávka má horní limit, například „max 500 položek nebo 2 minuty práce“.
+- Další dávka navazuje na uložený cursor, ne na odhad z paměti procesu.
+- Pro citlivé změny existuje dry-run režim, který vypíše dopad bez provedení.
+
+Příklad: místo „každou noc smaž staré exporty“ navrhni „každou hodinu najdi max 200 exportů daného typu starších než retenční pravidlo, ověř tenant scope, smaž soubor, zapiš auditní událost bez názvu souboru, pokračuj příště“. Je to méně sexy. Taky to méně hoří.
+
+## Idempotence patří i do cronů
+
+Idempotence se často řeší u plateb nebo webhooků, ale cron ji potřebuje stejně. Scheduler může běžet dvakrát kvůli deployi, restartu, časovému posunu, ručnímu spuštění nebo prostě proto, že realita ráda testuje optimismus.
+
+Minimum:
+
+- Každá úloha má stabilní klíč: `job_type + tenant_id + period + target_id`.
+- Výsledky rizikových akcí ukládej před opakováním: „faktura odeslána“, „export připraven“, „e-mail za tento event poslán“.
+- Externí volání používej s idempotency key, pokud ho služba podporuje.
+- Lock drž krátce a počítej s tím, že proces může umřít uprostřed.
+- Při opakování kontroluj stav cíle, ne jen stav fronty.
+
+Špatně: cron najde všechny nezaplacené faktury a každé ráno pošle upomínku.
+
+Lépe: cron vytvoří kandidáty pro období, u každé faktury ověří poslední komunikaci, zapíše rozhodnutí a pošle jen upomínku, která ještě nemá záznam pro daný interval.
+
+## Retry politika není „zkus to donekonečna“
+
+Retry je lék, který se při špatném dávkování mění v DDoS proti vlastnímu produktu. Každý retry musí mít důvod, limit a konečný stav.
+
+Doporučený model:
+
+- **Dočasné chyby**: síť, timeout, 5xx odpověď, rate limit. Retry s exponenciálním odstupem a jitterem.
+- **Trvalé chyby**: validace, chybějící oprávnění, neexistující objekt. Bez retry, rovnou do vyřešitelného stavu.
+- **Nejasné chyby**: externí služba odpověděla neúplně. Retry jen pokud akce umí bezpečně ověřit, zda už neproběhla.
+- **Dead-letter fronta**: po limitu pokusů uložit problém k ručnímu zásahu, ne schovat pod koberec.
+
+Pro privacy-first provoz platí: do dead-letter záznamu neukládej celý payload. Ulož typ chyby, interní ID, tenant, čas, počet pokusů a odkaz na bezpečný detail dostupný jen oprávněné roli. Log není skládka cizích osobních údajů.
+
+## Plánované úlohy navrhuj s ohledem na čas a Evropu
+
+Cron v UTC je technicky čistý, ale produktově může být nepříjemný. Fakturační úloha, která zákazníkům v Evropě posílá e-maily ve tři ráno, nepůsobí jako promyšlený provoz. Naopak bezpečnostní údržba, expirace tokenů nebo retence logů mají být deterministické a nezávislé na náladě lokálního času.
+
+Praktický kompromis:
+
+- Interní technické úlohy plánuj v UTC.
+- Zákaznickou komunikaci plánuj podle preferované zóny tenantů nebo v evropském pracovním okně.
+- Při změně letního času nepoužívej „každých 24 hodin“ pro věci, které mají běžet v konkrétní lokální čas.
+- U měsíčních úloh definuj, co se stane 29., 30. a 31. den v měsíci.
+- Ruční spuštění musí ukázat, jaký rozsah přesně poběží.
+
+Příklad: report zákazníkovi posílej „první pracovní den v měsíci mezi 8:00–10:00 Europe/Prague“, ale technické mazání expirovaných session tokenů nech běžet pravidelně v UTC v malých dávkách.
+
+## Observabilita bez sběru obsahu
+
+Fronta bez přehledu je černá skříňka. Přehled ale nemusí znamenat, že budeš ukládat kompletní obsah úloh, e-mailů, dokumentů nebo promptů.
+
+Sleduj hlavně:
+
+- počet čekajících úloh podle typu,
+- věk nejstarší čekající úlohy,
+- počet úspěchů, chyb a retry pokusů,
+- délku zpracování,
+- počet dead-letter záznamů,
+- počet ručních zásahů,
+- rozdíl mezi plánovaným a skutečným startem.
+
+Do logu patří rozhodnutí a provozní metadata. Nepatří tam přístupové tokeny, celé payloady, osobní zprávy, obsah dokumentů ani screenshoty. OWASP Logging Cheat Sheet výslovně doporučuje citlivé hodnoty z logů odstraňovat, maskovat nebo jinak chránit; u front to ber jako základní hygienu, ne enterprise luxus.
+
+## Selhání musí mít vlastníka
+
+Když job selže a nikdo se to nedozví, není to automatizace. Je to tichá loterie. Každá důležitá úloha má mít jasné „kdo to řeší“ a „do kdy“.
+
+Rozděl alerty podle dopadu:
+
+- **Info**: úloha doběhla s menším počtem přeskočených položek, viditelné v dashboardu.
+- **Warning**: opakované retry, rostoucí fronta, dead-letter u méně kritické integrace.
+- **Critical**: fakturace, platby, bezpečnostní údržba, retence, importy blokující zákazníka.
+
+Alert posílej na týmový kanál nebo do incident nástroje, ne jen do osobního e-mailu člověka, který je zrovna na dovolené. A hlavně: alert má obsahovat další krok. „Queue failed“ je výkřik do tmy. „Webhook billing_sync má 37 dead-letter položek od 08:12, poslední chyba 401, zkontroluj rotaci tokenu v secret kartě“ už je práce.
+
+## Bezpečné ruční zásahy
+
+Admin tlačítko „Retry all“ je obvykle jen hezčí název pro chaos. Ruční zásahy musí mít stejné mantinely jako automatika.
+
+Dobré admin rozhraní pro joby umí:
+
+- zobrazit rozsah úlohy bez citlivého obsahu,
+- spustit retry jedné položky nebo malé dávky,
+- vyžádat důvod zásahu,
+- ukázat dopad před spuštěním,
+- oddělit čtení od spouštění,
+- auditovat kdo, kdy a proč zásah provedl,
+- zakázat hromadné zásahy bez dalšího schválení.
+
+Codyho komentář: „Retry all“ bez náhledu dopadu je jako tlačítko „doufám“. Naděje je krásná lidská vlastnost, ale mizerný provozní mechanismus.
+
+## Příklad: měsíční export faktur pro účetnictví
+
+Privacy-first návrh:
+
+1. Cron vytvoří `job_run_id` pro konkrétní období a tenant.
+2. Job načte jen faktury ve stavu „vystaveno“ nebo „dobropis“, ne celé zákaznické účty.
+3. Export obsahuje účetní minimum, ne produktovou historii zákazníka.
+4. Soubor se uloží do odděleného úložiště s krátkou expirací.
+5. Účetní dostane odkaz s omezenou platností, ne přílohu přes e-mail.
+6. Log obsahuje počet faktur, období, tenant a výsledek, ne kompletní řádky exportu.
+7. Opakované spuštění pro stejné období buď vrátí existující export, nebo vytvoří novou verzi s jasným označením.
+8. Po retenci se export smaže a zůstane jen auditní metadata.
+
+Tím chráníš data, účetní proces i vlastní nervy. Trojkombinace, která se v provozu počítá.
+
+## Checklist: cron a background joby bez tichých katastrof
+
+- [ ] Každá úloha má vlastníka, účel a datový rozsah.
+- [ ] Job lze bezpečně spustit opakovaně nebo má explicitní blokaci duplicit.
+- [ ] Dávkové úlohy používají limit, cursor a bezpečný resume.
+- [ ] Retry politika rozlišuje dočasné, trvalé a nejasné chyby.
+- [ ] Dead-letter záznamy neobsahují celé payloady ani tajemství.
+- [ ] Crony mají definovanou časovou zónu a chování při ručním spuštění.
+- [ ] Alerty obsahují dopad, poslední chybu a doporučený další krok.
+- [ ] Admin zásahy jsou auditované a omezené podle rizika.
+- [ ] Logy obsahují provozní metadata, ne obsah zákaznických dat.
+- [ ] Retence front, logů a exportů odpovídá účelu zpracování.
+
+## Mini šablona job karty
+
+```md
+# Job karta: [název úlohy]
+
+## Účel
+- Proč úloha existuje:
+- Kdo je vlastník:
+- Jaký zákaznický nebo provozní dopad má selhání:
+
+## Rozsah
+- Tenant / objekt / období:
+- Maximální dávka:
+- Cursor nebo resume bod:
+- Dry-run režim:
+
+## Idempotence
+- Stabilní klíč úlohy:
+- Jak poznáme, že akce už proběhla:
+- Co se stane při duplicitním spuštění:
+
+## Retry a chyby
+- Retry pro dočasné chyby:
+- Bez retry pro trvalé chyby:
+- Dead-letter po kolika pokusech:
+- Kdo řeší dead-letter:
+
+## Data a privacy
+- Jaká data úloha čte:
+- Jaká data zapisuje:
+- Co se nesmí logovat:
+- Retence výsledků a logů:
+
+## Provoz
+- Schedule a časová zóna:
+- Alerty:
+- Ruční zásahy:
+- Testovací scénáře:
+```
+
+## Zdroje
+
+- OWASP: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP: Secrets Management Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- NIST: SP 800-61 Rev. 3, Incident Response Recommendations and Considerations for Cybersecurity Risk Management — https://csrc.nist.gov/pubs/sp/800/61/r3/final
+- European Commission: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
 # Pracovní log
+- 2026-10-06: Doplněna příloha „Plánované úlohy a background joby bez tichých katastrof“ s praktickým rozdělením background práce, bezpečným rozsahem jobů, idempotencí cronů, retry/dead-letter politikou, časovými zónami, observabilitou bez obsahu, ručními zásahy, příkladem měsíčního exportu faktur, checklistem, job kartou a ověřenými zdroji OWASP, NIST a Evropské komise.
 - 2026-10-06: Doplněna příloha „AI konektory bez oprávnění ke všemu“ s praktickým modelem čtení/návrh/provedení, scopingem konektorů, ochranou proti prompt injection z externího obsahu, tvrdými branami pro citlivé akce, auditním logováním, testy zneužití, checklistem, AI konektor kartou a ověřenými zdroji OWASP, NIST a ENISA.
 - 2026-10-06: Doplněna příloha „API klíče a tokeny bez úniku do logů, promptů a screenshotů“ s klasifikací tajemství, least-privilege scopingem, bezpečným uložením, AI hranicí bez klíčů v promptech, rotací, maskováním logů, checklistem, secret kartou a ověřenými zdroji OWASP a NIST.
 - 2026-10-06: Doplněna příloha „Webhooky bez falešných objednávek a datového průvanu“ s ověřováním podpisu nad raw body, replay ochranou, idempotencí, tenant mappingem, bezpečným logováním, retry/dead-letter provozem, checklistem, webhook kartou a ověřenými zdroji Stripe, GitHub a OWASP.
