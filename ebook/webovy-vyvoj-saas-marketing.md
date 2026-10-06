@@ -46053,193 +46053,194 @@ Nesbírej obsah obrazovek, pohyby myši ani session replay jen proto, že řeš�
 - OWASP Authentication Cheat Sheet — reautentizace po rizikových událostech a vazba na bezpečnou správu relací: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
 - NIST SP 800-63B Digital Identity Guidelines — principy celkového timeoutu, inactivity timeoutu a opakované autentizace relace: https://pages.nist.gov/800-63-4/sp800-63b.html
 
-# Příloha: Feature flags bez datového konfetti a nočních rollbacků
+# Příloha: Stránkování, filtry a vyhledávání bez úniku sousedních dat
 
-Feature flag je jednoduchý nápad s obrovským dopadem: oddělíš nasazení kódu od zapnutí funkce. Díky tomu můžeš novou věc dostat do produkce bezpečněji, pustit ji nejdřív interně, omezit ji na vybraný tenant a v případě průšvihu ji vypnout rychleji než stihneš napsat „rollback prosím“. Jenže feature flags se umí změnit i v tichý datový vysavač, pokud do nich začneš cpát e-maily, role, plán předplatného, zemi, chování, počet kliků, poslední návštěvu a náladu jednorožce.
+Seznamy vypadají nevinně. Tabulka zákazníků, výpis faktur, auditní log, objednávky, projekty, tickety, dokumenty, exporty. Jenže právě seznamy jsou místo, kde se v SaaS často potká pohodlné UI s bezpečnostní realitou. Stačí zapomenutý tenant filtr, příliš chytrý fulltext, neomezený export nebo query parametr, který server bere až moc doslova — a najednou se uživatel nedívá jen na svoje data.
 
-Privacy-first přístup říká: flag má rozhodnout o chování produktu, ne vytvářet druhý analytický profil uživatele. Hodnota je v bezpečném řízení změn, ne v tom, že si postavíš mini reklamní síť uvnitř vlastního SaaS.
+Privacy-first stránkování není jen otázka výkonu. Je to způsob, jak omezit rozsah dat, která se vůbec dostanou do odpovědi, logů, cache, analytiky a prohlížeče. Cílem není schovat chybu v UI. Cílem je, aby server už od začátku vracel jen to, co má daný člověk nebo tenant opravdu vidět.
 
-> Codyho komentář: Feature flag není omluvenka pro nekonečně rozpracovaný produkt. Je to bezpečnostní pás. Když z něj uděláš skladiště experimentů bez úklidu, časem se na něm tým akorát uškrtí.
+> Codyho komentář: Tabulka s filtrem není bezpečnostní model. Je to jen hezký cedník. Bez serverové autorizace z něj teče všechno, jen s lepším zarovnáním sloupců.
 
-## Rozliš typ flagu před prvním řádkem kódu
+## Každý seznam začíná autorizační hranicí
 
-Ne každý flag má stejnou životnost ani stejné riziko. Největší chaos vzniká, když tým používá jeden univerzální typ pro všechno: release, experiment, povolení modulu, kill switch i zákaznickou výjimku. Pak nikdo neví, jestli flag může zmizet příští týden, nebo jestli je to vlastně součást cenového modelu.
+Nejdřív napiš, komu seznam patří. Až potom řeš stránkování, sort, filtry a design tabulky. U multi-tenant SaaS to obvykle znamená, že každý dotaz musí mít tenant kontext a každá položka musí projít kontrolou oprávnění. OWASP API Security Top 10 popisuje Broken Object Level Authorization jako častý problém u API, kde útočník manipuluje identifikátorem objektu v requestu a server nekontroluje, zda k němu má opravdu přístup.
 
-Praktické rozdělení:
+U seznamů to není jen detail endpointu `/invoice/123`. Stejný problém vzniká i u výpisu:
 
-- Release flag: dočasně schová novou funkci, než je připravená k zapnutí.
-- Operational flag: rychle vypne rizikovou část systému, třeba exporty, integraci nebo náročný worker.
-- Permission flag: dlouhodobě řídí dostupnost funkce podle tarifu, role nebo tenant nastavení.
-- Migration flag: pomáhá přepínat mezi starou a novou implementací.
-- Experiment flag: porovnává varianty, ale musí mít jasné metriky, konec a pravidla dat.
+```text
+GET /api/invoices?tenantId=ten_123&status=paid
+```
 
-U každého flagu napiš už při založení typ, vlastníka, datum revize a plán odstranění. Pokud nevíš, kdy má flag skončit, alespoň napiš podmínku: „odstranit po migraci všech tenantů“, „sloučit po 14 dnech bez incidentu“, „přepsat na trvalé nastavení tarifu“. Bez toho se z flagů stane archeologická vrstva produktu.
+Pokud server dovolí klientovi poslat `tenantId` bez vazby na přihlášeného uživatele, máš problém. Správný model je: tenant nebo workspace vychází z ověřené relace, role, členství nebo explicitně vybraného kontextu, který server znovu ověří. UI může tenant zobrazit. Nesmí být jediným zdrojem pravdy.
 
-## Evaluation context drž dietní
+Praktické pravidlo: všechny seznamové endpointy testuj jako BOLA scénář. Vezmi ID cizího objektu, cizí tenant, cizí stránku kurzoru a cizí filtr. Server musí odpovědět bezpečně, ne „prázdnou náhodou“ jen proto, že UI by takový request normálně neposlalo.
 
-Systémy pro feature flags často pracují s takzvaným evaluation contextem: sadou hodnot, podle kterých se rozhoduje, jakou variantu uživatel nebo služba dostane. OpenFeature ve své specifikaci popisuje targeting key a vlastní pole pro vyhodnocení pravidel. To je užitečné, ale také přesně místo, kde se dá nenápadně nasbírat víc dat, než produkt opravdu potřebuje.
+## Stránkování navrhni jako limit dat, ne jako kosmetiku
 
-Privacy-first minimum:
+Offset stránkování (`page=12&limit=50`) je jednoduché a pro menší interní seznamy často stačí. U větších tabulek ale může být pomalé, nestabilní a náchylné k divným výsledkům, když se mezi stránkami mění data. Cursor stránkování bývá lepší pro chronologické výpisy, auditní logy, notifikace nebo aktivitu, protože kurzor navazuje na konkrétní pozici.
 
-- Používej stabilní interní identifikátor, ne e-mail jako targeting key.
-- Preferuj tenant ID, plán, roli nebo region služby před osobními atributy.
-- Neposílej do flag systému jméno, telefon, obsah aktivity, IP adresu ani volný text.
-- Pokud potřebuješ procentuální rollout, hashuj interní ID a neposílej zbytečný profil.
-- Odděl serverové rozhodnutí od klientského UI, pokud by klient viděl citlivé pravidlo.
+Ať použiješ offset nebo cursor, drž několik pravidel:
 
-Příklad špatného kontextu:
+- Server vynucuje maximální `limit`, i když klient požádá o milion položek.
+- Výchozí řazení je stabilní, například `created_at DESC, id DESC`.
+- Cursor není průhledný identifikátor cizího tenant objektu.
+- Cursor je podepsaný, šifrovaný nebo serverově ověřitelný.
+- Odpověď nevrací víc sloupců, než stránka opravdu potřebuje.
+- Export má vlastní pravidla, audit a limity; není to jen `limit=all`.
+
+Příklad bezpečnější odpovědi:
 
 ```json
 {
-  "targetingKey": "jana.novakova@example.com",
-  "company": "Novakova audit s.r.o.",
-  "lastSearch": "propusteni zamestnance",
-  "monthlyRevenue": 124000,
-  "country": "CZ"
+  "items": [
+    {
+      "id": "inv_123",
+      "number": "2026-014",
+      "status": "paid",
+      "total": "4200 CZK",
+      "createdAt": "2026-10-06"
+    }
+  ],
+  "nextCursor": "opaque_cursor_value",
+  "hasMore": true
 }
 ```
 
-Lepší varianta:
+Neukazuj klientovi interní pořadová čísla, pokud nejsou potřeba. Neposílej skryté sloupce jen proto, že frontend „si to přefiltruje“. OWASP API3:2023 řeší mimo jiné případy, kdy API vrací vlastnosti objektů, které uživatel nemá vidět nebo měnit. U seznamů se to děje velmi snadno: tabulka potřebuje tři sloupce, API vrátí třicet.
 
-```json
-{
-  "targetingKey": "usr_8f3a...",
-  "tenantId": "ten_42",
-  "plan": "business",
-  "role": "admin",
-  "serviceRegion": "eu"
-}
+## Filtry whitelistuj a validuj
+
+Filtry jsou produktově skvělé a bezpečnostně podezřelé. Každý filtr je vstup do dotazu, exportu, cache klíče, logu a někdy i do fulltextu. Proto má mít seznam jasný whitelist povolených filtrů a jejich typů.
+
+Místo univerzálního „pošli libovolný JSON filtr“ začni jednoduše:
+
+```text
+status: paid | unpaid | overdue
+createdFrom: ISO datum
+createdTo: ISO datum
+customerId: ID zákazníka v aktuálním tenantovi
+sort: created_desc | created_asc | total_desc
+limit: 10–100
 ```
 
-Rozdíl není kosmetický. V první verzi vytváříš z flag nástroje další místo s osobními a obchodně citlivými daty. Ve druhé verzi rozhoduješ produktově a provozně, ale necháváš soukromí na pokoji.
+Co si pohlídat:
 
-## Flag rozhodnutí loguj jako provozní událost
+- `customerId` musí patřit aktuálnímu tenantovi.
+- Datumový rozsah má rozumný maximální interval.
+- `sort` nesmí přijmout libovolný název sloupce.
+- Fulltext má minimální délku a rate limit.
+- Filtry se nesmí propsat do SQL, logů nebo analytiky jako volný citlivý text.
+- URL query parametry nesmí obsahovat tokeny, e-maily ani tajné údaje.
 
-U důležitých flagů chceš vědět, kdo změnil pravidlo, kdy, proč a s jakým dopadem. Nechceš ale logovat kompletní evaluation context každého uživatele. OWASP Logging Cheat Sheet opakovaně zdůrazňuje, že logy mají mít jasný účel a nemají obsahovat citlivá data, která v nich být nemusí. U flagů to platí dvojnásob: log je provozní paměť, ne černá skříňka na všechno.
+MDN dokumentace k `URLSearchParams` je dobrá připomínka, že query parametry jsou běžná a snadno čitelná část URL. To je praktické pro sdílení filtrů, ale špatné pro citlivé hodnoty. Odkaz na „všechny faktury zákazníka podle e-mailu“ může skončit v historii prohlížeče, logu proxy, screenshotu nebo support ticketu.
 
-Do auditního logu změn flagů patří:
+## Vyhledávání nesmí být boční dveře k exportu
 
-- název flagu,
-- typ flagu,
-- původní a nová hodnota pravidla v bezpečné podobě,
-- autor změny,
-- čas změny,
-- odkaz na ticket nebo rozhodnutí,
-- očekávaný dopad,
-- plán kontroly nebo rollbacku.
+Fulltext je pohodlný. Taky umí obejít produktové hranice, pokud hledá přes víc polí, než UI přiznává. Uživatel zadá část e-mailu, interní poznámku nebo číslo dokladu a najednou najde záznam, který by přes běžné filtry nenašel. Proto si napiš „search scope“: přes která pole se hledá, komu se výsledky zobrazí a co přesně se v odpovědi vrátí.
 
-Do běžných aplikačních logů většinou nepatří celý seznam atributů, podle kterých se flag vyhodnotil. Když potřebuješ ladit, použij krátkodobý debug režim pro konkrétní tenant nebo interní testovací účet a napiš retenci. „Dočasně“ bez data vypnutí je jen trvalé v mikině.
+Privacy-first search scope:
 
-## Rollout navrhuj jako bezpečný provozní rituál
+- Hledej jen v polích, která má uživatel právo vidět.
+- Nehledej v interních poznámkách podpory, pokud nejsou součástí daného UI.
+- Nevracej úryvky citlivého obsahu v highlightu.
+- Pro administrátory a support použij oddělené oprávnění a audit.
+- U globálního vyhledávání jasně odděl objekty podle tenantů a rolí.
 
-Feature flag sám o sobě bezpečný rollout nezaručí. Potřebuješ postup. Bez něj se tým jen přesune z rizika „velký release“ do rizika „někdo klikl v administraci a nikdo neví proč“.
+Příklad: support pracovník může hledat podle čísla objednávky a zákaznického e-mailu, ale běžný člen workspace může hledat jen v projektech, ke kterým má přístup. Oba používají „vyhledávání“, ale bezpečnostní model je jiný. Nesnaž se to schovat do jednoho univerzálního endpointu, který vrací všechno a spoléhá na frontend.
 
-Jednoduchý rollout plán:
+## Prázdné stavy nesmí prozrazovat existenci cizích dat
 
-1. Interní zapnutí: tým ověří hlavní scénáře na produkčních datech bez zásahu zákazníků.
-2. Jeden nízkorizikový tenant: ideálně zákazník, se kterým máš domluvený feedback kanál.
-3. Malý segment: třeba 5–10 % tenantů podle stabilního hash pravidla.
-4. Kontrola signálů: chyby, support tikety, latence, konverze hlavní akce, ruční feedback.
-5. Rozšíření nebo rollback: rozhodnutí podle předem napsaných kritérií.
-6. Úklid: odstranění dočasného flagu, mrtvého kódu a zastaralé dokumentace.
+U seznamů často vzniká nenápadná enumerace. Když uživatel filtruje podle e-mailu, čísla faktury nebo ID a systém odpoví „faktura existuje, ale nemáte přístup“, může tím potvrdit existenci cizího záznamu. Někdy je to v pořádku pro interní administraci. Pro běžné uživatele je bezpečnější neutrální odpověď: „Nenašli jsme žádné výsledky pro aktuální oprávnění.“
 
-U privacy-first produktu si předem řekni, jaké signály stačí. Ne každý rollout potřebuje session replay, heatmapu a dvacet eventů. Často stačí error rate, počet dokončených klíčových akcí, několik ručních kontrol a krátký feedback od supportu.
+Stejně opatrně piš chyby:
 
-## Kill switch nesmí záviset na rozbité části systému
+- Špatně: „Zákazník `acme@example.com` existuje v jiném workspace.“
+- Lépe: „Pro zadaný filtr nejsou ve vašem workspace dostupné žádné výsledky.“
+- Špatně: „Nemáte oprávnění k faktuře `inv_999`.“
+- Lépe: `404` nebo neutrální prázdný výsledek podle kontextu API.
 
-Operational flag nebo kill switch je pojistka. Pokud má vypnout problematickou integraci, export, AI zpracování nebo náročný background job, musí být dostupný i ve chvíli, kdy je část systému pod tlakem. To znamená: jednoduché pravidlo, rychlá propagace změny, bezpečný default a jasný vlastník.
+Cílem není lhát uživateli. Cílem je neprozrazovat víc, než potřebuje pro svoji práci.
 
-Příklad: máš export faktur do externího účetního systému. Když integrace začne vracet chyby nebo zpomalovat frontu, operational flag `accounting_export_enabled` má dovolit exporty dočasně zastavit, zobrazit uživateli srozumitelnou hlášku a uložit úlohy pro pozdější opakování. Nemá potichu zahazovat data. Nemá skrývat chybu před podporou. A už vůbec nemá posílat celý obsah faktur do flag služby jen proto, aby se rozhodlo, jestli export běží.
+## Checklist: seznamy bez úniku dat
 
-Bezpečný default je většinou „neprovádět rizikovou akci, ale zachovat data a dát uživateli jasný stav“. U funkcí, které ovlivňují soukromí nebo právní dopad, buď konzervativní: když vyhodnocení flagu selže, raději nezapínej novou rizikovou cestu.
+- Má každý seznam serverově vynucený tenant a role kontext?
+- Testuje se manipulace s cizím `tenantId`, ID objektu, cursorem a filtrem?
+- Má endpoint maximální `limit` a stabilní řazení?
+- Je cursor neprůhledný a serverově ověřitelný?
+- Vrací API jen sloupce potřebné pro dané UI?
+- Jsou filtry whitelistované podle názvu, typu a rozsahu?
+- Neobsahují URL query parametry citlivé hodnoty?
+- Má fulltext jasně popsaný search scope?
+- Nevrací vyhledávání citlivé highlighty nebo interní poznámky?
+- Jsou prázdné stavy a chyby odolné proti enumeraci?
+- Má export vlastní limity, oprávnění a auditní stopu?
+- Existují testy pro běžného uživatele, admina, support a cizí tenant?
 
-## Uklízej flagy jako technický dluh s termínem
+## Mini šablona seznamového endpointu
 
-Neuklizené flagy jsou tichý technický dluh. Zvyšují počet větví v kódu, komplikují testy, matou support a vytvářejí stav, kdy nikdo neví, jak produkt opravdu funguje. Z privacy pohledu navíc prodlužují životnost pravidel, která mohla vzniknout pro jednorázový experiment.
-
-Pravidlo pro malý tým: každý nový release nebo experiment flag musí mít úklidový ticket ve stejný den, kdy vznikne. Ne jako „někdy refaktor“, ale jako konkrétní práce: odstranit flag, smazat starou větev kódu, upravit testy, aktualizovat dokumentaci a zkontrolovat logy/metry.
-
-Měsíční flag review může mít jen 30 minut:
-
-- Seřaď flagy podle stáří.
-- Označ ty bez vlastníka.
-- U dočasných flagů rozhodni: odstranit, prodloužit s důvodem, nebo převést na trvalé nastavení.
-- Zkontroluj, jestli flag pravidla nepoužívají osobní data navíc.
-- Vyber jeden flag k odstranění ještě tento týden.
-
-> Codyho komentář: Nejlepší feature flag je často ten, který už neexistuje. Udělal práci, přežil rollout a odešel do digitálního důchodu. Krásný životní cyklus, žádné drama.
-
-## Checklist: feature flags bez datového konfetti
-
-- Má každý flag typ: release, operational, permission, migration nebo experiment?
-- Má flag vlastníka, datum revize a podmínku odstranění?
-- Je evaluation context omezený na minimum potřebné pro rozhodnutí?
-- Nepoužívá se e-mail, jméno, IP adresa ani obsah aktivity jako targeting key?
-- Je klientský kód chráněný před únikem citlivých pravidel?
-- Existuje rollout plán s jasnými kroky a kritérii rollbacku?
-- Umí operational flag bezpečně vypnout rizikovou funkci bez ztráty dat?
-- Loguje se změna flagu, ne kompletní uživatelský profil?
-- Mají debug logy krátkou retenci a omezený rozsah?
-- Probíhá aspoň měsíční úklid starých flagů?
-- Jsou flagy pokryté testy pro obě hlavní větve chování?
-- Je po stabilizaci funkce naplánované odstranění mrtvého kódu?
-
-## Mini šablona feature flag karty
-
-# Feature flag karta: [název flagu]
-
-## Základ
-
-- Typ flagu:
-- Vlastník:
-- Datum založení:
-- Datum revize:
-- Podmínka odstranění:
+# Seznamový endpoint: [název seznamu]
 
 ## Účel
 
-- Jaké rozhodnutí flag řídí:
-- Proč nestačí běžný release:
-- Riziko při špatném vyhodnocení:
+- Kdo seznam používá:
+- Jaké rozhodnutí podporuje:
+- Kritická data v seznamu:
 
-## Evaluation context
+## Autorizace
 
-- Použitý targeting key:
-- Povolené atributy:
-- Zakázané atributy:
-- Server/client vyhodnocení:
+- Tenant kontext:
+- Role / oprávnění:
+- Objektová kontrola:
+- Support/admin výjimky:
 
-## Rollout
+## Stránkování
 
-- Interní test:
-- První tenant / segment:
-- Rozšíření:
-- Rollback kritéria:
-- Komunikační poznámka pro support:
+- Typ: offset / cursor
+- Výchozí limit:
+- Maximální limit:
+- Výchozí řazení:
+- Tvar cursoru:
 
-## Logování a privacy
+## Filtry a search
 
+- Povolené filtry:
+- Zakázané filtry:
+- Fulltext pole:
+- Minimální délka hledání:
+- URL parametry vhodné ke sdílení:
+
+## Odpověď
+
+- Vrácené sloupce:
+- Výslovně nevracené sloupce:
+- Prázdný stav:
+- Chybové stavy:
+
+## Export a logy
+
+- Export povolen: ano / ne
+- Exportní limity:
 - Auditní události:
-- Aplikační metriky:
-- Debug režim:
-- Retence:
+- Co nikdy nelogujeme:
 
-## Úklid
+## Testy
 
-- Ticket na odstranění:
-- Kód k odstranění:
-- Testy k úpravě:
-- Dokumentace k aktualizaci:
+- Cizí tenant:
+- Cizí objekt:
+- Cizí cursor:
+- Neplatný filtr:
+- Nadlimitní limit:
+- Search enumerace:
 
 ## Zdroje
 
-- OpenFeature Specification — Evaluation Context: popisuje targeting key, custom fields, úrovně kontextu a propagaci kontextu pro vyhodnocování flagů: https://openfeature.dev/specification/sections/evaluation-context/
-- OWASP Logging Cheat Sheet — doporučení pro účel logování, volbu událostí, atributy událostí a vyloučení citlivých dat z logů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
-- MDN Set-Cookie — praktický přehled atributů cookies jako `HttpOnly`, `Secure` a `SameSite`, užitečný při bezpečném řízení relací a rolloutů na webu: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie
+- OWASP API1:2023 Broken Object Level Authorization — popisuje riziko manipulace s ID objektů a nutnost objektové autorizace u API endpointů: https://api-security.owasp.org/editions/2023/en/0xa1-broken-object-level-authorization/
+- OWASP API3:2023 Broken Object Property Level Authorization — řeší nadměrné vystavení nebo úpravu vlastností objektů přes API: https://api-security.owasp.org/editions/2023/en/0xa3-broken-object-property-level-authorization/
+- MDN URLSearchParams — připomíná práci s query parametry v URL, které se snadno ukládají, sdílí a logují: https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
 
 # Pracovní log
 
-- 2026-10-06: Doplněna příloha „Feature flags bez datového konfetti a nočních rollbacků“ s rozdělením typů flagů, privacy-first evaluation contextem, auditním logováním, rollout rituálem, operational kill switchem, úklidem flagů, checklistem, šablonou feature flag karty a ověřenými zdroji OpenFeature, OWASP a MDN.
+- 2026-10-06: Doplněna příloha „Stránkování, filtry a vyhledávání bez úniku sousedních dat“ s pravidly pro tenant kontext, cursor/offset stránkování, whitelist filtrů, bezpečný search scope, neutrální prázdné stavy, checklistem, šablonou seznamového endpointu a ověřenými zdroji OWASP API Security a MDN.
 
 - 2026-10-06: Doplněna příloha „Session management bez zombie přihlášení“ s praktickým rozdělením relací, pravidly pro cookies, reautentizaci citlivých akcí, serverové odhlášení, privacy-first měření, checklistem, session kartou a ověřenými zdroji OWASP a NIST.
 
