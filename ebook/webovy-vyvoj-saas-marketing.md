@@ -45526,7 +45526,190 @@ Datový slovník je hotový tehdy, když podle něj tým mění produktové chov
 - [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - [ENISA: Pseudonymisation techniques and best practices](https://www.enisa.europa.eu/publications/pseudonymisation-techniques-and-best-practices)
 
+# Příloha: Release notes a changelog bez marketingové mlhy
+
+Malý web nebo SaaS často dělá změny rychleji, než je stíhá vysvětlovat. Tým nasadí nový formulář, upraví tarif, přidá export, opraví login, vylepší e-mailové šablony — a zákazník se o tom dozví jen tím, že „něco vypadá jinak“. To je škoda. Dobré release notes nejsou kosmetický blogpost. Jsou provozní most mezi vývojem, podporou, obchodem a důvěrou zákazníků.
+
+Privacy-first produkt má navíc jednu výhodu: nemusí release notes psát jako nafouknutou přehlídku „engagementu“. Stačí říct, co se změnilo, koho se to týká, proč je to užitečné, jestli se mění práce s daty a co má uživatel udělat dál. Nudné? Možná. Užitečné? Přesně.
+
+> Codyho komentář: Release notes jsou jako účtenka za důvěru. Když zákazník vidí, co měníš a proč, nemusí hádat, jestli jsi produkt zlepšil, nebo mu jen přesunul tlačítko do temného lesa.
+
+## Odděl interní changelog od zákaznických release notes
+
+Nejdřív si přiznej, že existují dva různé dokumenty. Interní changelog pomáhá týmu dohledat technické změny: migrace, refaktoringy, bezpečnostní opravy, úpravy API, změny závislostí. Zákaznické release notes pomáhají člověku pochopit dopad: nová možnost, opravený problém, změna chování, omezení, akce, kterou musí udělat.
+
+Když tyto dva světy smícháš, vznikne text typu „refactor auth middleware and update dependency“. Vývojář ví, že to bylo důležité. Zákazník ví akorát to, že na něj někdo mluví šroubovákem.
+
+Praktické rozdělení:
+
+- Interní changelog: technický záznam změn, ideálně navázaný na commity, issue nebo pull requesty.
+- Zákaznické release notes: stručné vysvětlení přínosu a dopadu pro uživatele.
+- Bezpečnostní advisory: samostatný režim pro zranitelnosti, incidenty a citlivé opravy.
+- Migrační poznámka: konkrétní kroky pro zákazníka, když změna vyžaduje akci.
+
+U malého týmu stačí jeden soubor nebo stránka, ale sekce musí být jasně označené. Pokud vše hodíš do jedné chronologické zdi textu, po třech měsících z toho bude sklep s krabicemi „různé“.
+
+## Piš podle dopadu, ne podle interní námahy
+
+Tým má přirozenou tendenci psát víc o věcech, které bolely. Jenže zákazník nehodnotí release podle počtu propocených hodin v backendu. Hodnotí, jestli mu změna pomůže, ušetří čas, sníží riziko nebo odstraní tření.
+
+Před každou veřejnou poznámkou si polož tři otázky:
+
+1. Koho se změna týká?
+2. Co je po změně lepší, jasnější nebo bezpečnější?
+3. Musí zákazník něco udělat?
+
+Příklad špatně:
+
+```text
+Upravili jsme zpracování exportů a optimalizovali frontu.
+```
+
+Příklad lépe:
+
+```text
+Export větších projektů teď běží spolehlivěji na pozadí. Uživatel může stránku zavřít a po dokončení dostane provozní e-mail s odkazem na stažení. Není potřeba nic nastavovat.
+```
+
+Druhá verze není delší proto, že by byla upovídaná. Je delší proto, že odpovídá na skutečné otázky zákazníka.
+
+## Kategorie udrž jednoduché
+
+Inspiruj se přístupem „Keep a Changelog“: změny se dobře čtou, když mají stabilní kategorie jako přidáno, změněno, opraveno, odstraněno, bezpečnost. Nemusíš kopírovat formát do poslední čárky, ale princip je skvělý: člověk rychle pozná typ dopadu.
+
+Pro malý SaaS doporučuji tyto zákaznické kategorie:
+
+- Přidáno: nová užitečná možnost.
+- Změněno: existující chování se mění, i když k lepšímu.
+- Opraveno: chyba, která uživatele reálně mohla potkat.
+- Bezpečnost a soukromí: změny ochrany účtu, dat, logování, oprávnění nebo retence.
+- Vyžaduje akci: migrace, nové nastavení, změna API, konec podpory starého postupu.
+
+Kategorie „vylepšeno“ používej opatrně. Je pohodlná, ale často mlží. Lepší je říct, jestli je něco rychlejší, srozumitelnější, stabilnější, bezpečnější nebo méně datově hladové.
+
+## Změny soukromí označ zvlášť
+
+Privacy-first provoz znamená, že zákazník nemusí lovit změny zpracování dat mezi běžnými produktovými novinkami. Pokud se mění sběr dat, retence, subprocesor, oprávnění, export, smazání, analytika, logování nebo bezpečnostní události, dej tomu vlastní odstavec.
+
+Dobrá poznámka obsahuje:
+
+- Jaká data se mění: typ dat, ne osobní příklady.
+- Proč se změna děje: bezpečnost, provoz, zákonný důvod, zákaznická funkce.
+- Kde data zůstávají: ideálně potvrzení evropského provozu, pokud je relevantní.
+- Jak dlouho se drží: pokud se mění retence.
+- Co může zákazník udělat: nastavení, opt-out, export, kontrola rolí.
+
+Příklad:
+
+```text
+Soukromí: Do auditního logu workspace nově ukládáme změny rolí členů. Log obsahuje typ akce, čas, ID workspace a technické ID administrátora; neukládá obsah zpráv ani souborů. Záznamy držíme 180 dní kvůli bezpečnostní kontrole a zůstávají v evropském provozu.
+```
+
+Taková poznámka je výrazně lepší než „vylepšili jsme audit log“. Ukazuje hranice, účel i míru zásahu.
+
+## Verze, datum a odkaz musí být dohledatelné
+
+Release notes bez data jsou jako jogurt bez expirace. Možná je ještě dobrý, ale nikdo nechce riskovat. Každý záznam by měl mít datum, verzi nebo alespoň stabilní odkaz na vydání. U SaaS, kde se nasazuje průběžně, nemusíš předstírat velké číslované releasy. Stačí týdenní nebo dvoutýdenní záznam.
+
+Dobrá hlavička:
+
+```text
+## 2026-10-06 — Exporty, auditní log a oprava přihlášení
+```
+
+Ještě lepší, pokud interně víš:
+
+- produkční deployment nebo commit,
+- odpovědnou osobu,
+- navázané issue,
+- zda změna vyžadovala migraci,
+- zda se měnil datový tok.
+
+Tohle nemusí být celé veřejné. Ale tým musí umět z veřejné poznámky dohledat technickou stopu. Až se zákazník za měsíc zeptá „kdy jste změnili export?“, nechceš dělat archeologii v chatu.
+
+## Neprodávej opravu chyby jako funkci
+
+Jedna z nejrychlejších cest ke ztrátě důvěry je tvářit se, že oprava rozbité věci je velkolepá inovace. Když něco nefungovalo, napiš to lidsky. Nemusíš se bičovat, ale nemlž.
+
+Místo:
+
+```text
+Představujeme vylepšené ukládání formulářů.
+```
+
+Napiš:
+
+```text
+Opravili jsme chybu, kvůli které se ve vzácných případech nemusela uložit poznámka ve formuláři po ztrátě připojení. Pokud se vás problém mohl týkat, podpora vás kontaktuje přímo.
+```
+
+Rozdíl je v respektu. První text chrání ego týmu. Druhý chrání zákazníka.
+
+## Release notes napoj na podporu a obchod
+
+Release notes nejsou jen pro stávající uživatele. Jsou i materiál pro podporu, sales a onboarding. Když podpora ví, co se změnilo, odpovídá přesněji. Když obchod vidí konkrétní zlepšení, nemusí slibovat mlhu. Když nový zákazník čte historii vydání, vidí, že produkt žije.
+
+Jednoduchá provozní rutina:
+
+- Před vydáním označ změny, které mají zákaznický dopad.
+- Po vydání napiš stručnou poznámku do interního kanálu pro podporu a obchod.
+- U větších změn připrav jednu odpověď pro zákazníky.
+- U privacy změn aktualizuj relevantní dokumenty, datovou mapu nebo DPA přílohu.
+- Jednou měsíčně z release notes vyber 2–3 věci do veřejného shrnutí nebo blogu.
+
+To poslední je důležité: dobrý marketing nemusí vymýšlet dramatické příběhy. Může jen poctivě ukázat, co produkt zlepšil.
+
+## Checklist: release notes bez mlhy
+
+- Má každý záznam datum a stabilní odkaz nebo verzi?
+- Je jasné, koho se změna týká?
+- Je dopad popsaný zákaznickým jazykem, ne interním ticketem?
+- Jsou změny bezpečnosti, soukromí, oprávnění, logování a retence viditelně označené?
+- Je uvedeno, jestli zákazník musí něco udělat?
+- Neprodává text opravu chyby jako novou funkci?
+- Umí tým z veřejného záznamu dohledat interní issue, commit nebo deployment?
+- Zkontrolovala podporu nebo obchod větší změny před publikací?
+- Neobsahují release notes osobní údaje, názvy zákazníků bez souhlasu nebo interní bezpečnostní detaily?
+- Existuje rytmus: průběžně, týdně nebo měsíčně, ale ne „až si někdo vzpomene“?
+
+## Mini šablona release poznámky
+
+```markdown
+# Release poznámka: [datum / verze]
+
+## Shrnutí
+- [Jedna věta: co se změnilo a proč na tom záleží]
+
+## Přidáno
+- [Nová možnost + pro koho je užitečná]
+
+## Změněno
+- [Změna chování + dopad + jestli je potřeba akce]
+
+## Opraveno
+- [Opravený problém + koho se mohl týkat]
+
+## Bezpečnost a soukromí
+- [Data / oprávnění / logy / retence / evropský provoz]
+
+## Vyžaduje akci
+- [Krok, termín, odkaz na návod]
+
+## Interní vazba
+- Issue:
+- Deployment / commit:
+- DPA / dokumenty aktualizovány: ano/ne
+- Kontrola podpory: ano/ne
+```
+
+## Zdroje
+
+- [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
+- [Semantic Versioning 2.0.0](https://semver.org/)
+- [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+
 # Pracovní log
+- 2026-10-06: Doplněna příloha „Release notes a changelog bez marketingové mlhy“ s rozlišením interního changelogu a zákaznických release notes, kategoriemi změn, zvláštním značením privacy dopadů, verzováním, napojením na podporu a obchod, checklistem, šablonou release poznámky a ověřenými zdroji Keep a Changelog, SemVer a OWASP.
 - 2026-10-05: Doplněna příloha „Datový slovník a klasifikace polí bez štítkovacího divadla“ s praktickým modelem klasifikace polí, pravidly pro logy, analytiku, support UI, exporty, AI zpracování, pseudonymizaci, checklistem, datovou kartou pole a ověřenými zdroji GDPR, OWASP a ENISA.
 - 2026-10-05: Doplněna příloha „Právní a provozní stránky bez copy-paste mlhy“ s inventářem zásad ochrany soukromí, podmínek, DPA, subprocesorů a bezpečnostních kontaktů, napojením dokumentů na datovou mapu, pravidly verzování změn, checklistem, šablonou transparentnosti a ověřenými zdroji GDPR, Evropské komise a EDPB.
 - 2026-10-05: Doplněna příloha „Idempotence a outbox bez dvojitých faktur a ztracených e-mailů“ s praktickým rozlišením zdrojů opakování, návrhem idempotency keys, šetrným ukládáním výsledků, transactional outbox patternem, idempotentními příjemci webhooků, UI prevencí opakovaných akcí, retenčními pravidly, checklistem, šablonou idempotentní akce a ověřenými zdroji RFC 9110, IETF a Microsoft Learn.
