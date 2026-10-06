@@ -47524,207 +47524,219 @@ Tím se z magického AI tlačítka stane provozovatelná funkce. Méně kouzel, 
 
 
 
-# Příloha: Bezpečnostní hlavičky bez falešného pocitu neprůstřelnosti
 
-Bezpečnostní hlavičky jsou jako dobré zábradlí na schodech: samy o sobě z domu pevnost neudělají, ale když chybí, dřív nebo později někdo zakopne přesně tam, kde to nejvíc bolí. Pro malý web nebo SaaS jsou navíc příjemně praktické — často je nastavíš na úrovni reverse proxy, frameworku nebo CDN, aniž bys přepisoval půl aplikace.
+# Příloha: Kontrola bezpečnostních hlaviček po deployi bez ručního klikání
 
-Největší chyba je brát hlavičky jako „security hardening checklist“, který se jednou zkopíruje z blogu a tím končí. Dobrá hlavička vyjadřuje konkrétní rozhodnutí: odkud smí běžet skripty, jestli se smí stránka vkládat do cizího rámu, kolik informací posíláš v referreru, zda prohlížeč vynucuje HTTPS a které funkce prohlížeče aplikace vůbec potřebuje.
+Předchozí část o bezpečnostních hlavičkách řeší, jak politiku navrhnout. Tahle navazující příloha řeší nudnější, ale provozně důležitější otázku: jak poznáš, že hlavičky po deployi opravdu dorazily do prohlížeče a že je cestou nesežrala proxy, hosting, framework, CDN nebo „dočasná“ konfigurace, která se samozřejmě stala trvalou. Klasika. Software miluje ironii.
 
-> Codyho komentář: Bezpečnostní hlavičky nejsou svatá voda. Když máš děravou autorizaci, `X-Content-Type-Options` tě nespasí. Ale když je nemáš vůbec, zbytečně necháváš prohlížeč hádat za tebe — a prohlížeč není tvůj bezpečnostní architekt, i když má hezké devtools.
+Bezpečnostní hlavičky se totiž často neztratí při psaní kódu. Ztratí se při přesunu mezi prostředími: lokál je má, staging je má jinak, produkce je přepíše, API je neposílá vůbec a statické assety mají vlastní svět. Pokud je kontroluješ jen pohledem do konfiguračního souboru, nekontroluješ realitu. Kontroluješ přání.
 
-## Začni inventářem povoleného chování
+> Codyho komentář: Hlavička, která existuje jen v repozitáři, je jako záloha, kterou nikdo nikdy neobnovil. Technicky uklidňuje. Prakticky může být k ničemu.
 
-Než napíšeš první `Content-Security-Policy`, sepiš si, co web opravdu potřebuje načítat:
+## Kontroluj odpověď, ne jen konfiguraci
 
-- vlastní JavaScript a CSS,
-- obrázky a fonty,
-- analytiku,
-- platební widget,
-- chat nebo support nástroj,
-- iframe s mapou, videem nebo dokumentací,
-- API endpointy, kam frontend volá.
+Základní pravidlo: testuj finální HTTP odpověď z veřejné nebo produkčně podobné URL. Ne middleware. Ne nginx šablonu. Ne dokumentaci hostingu. Skutečnou odpověď.
 
-U každé položky si napiš vlastníka a důvod. „Je to tam historicky“ není důvod, to je archeologický nález. Pokud externí skript nemá jasný účel, vlastníka a privacy dopad, nemá v nové politice co dělat.
+Minimální ruční kontrola:
 
-Privacy-first princip je jednoduchý: bezpečnostní hlavičky nemají jen bránit útokům, ale také omezovat nechtěné datové toky. Čím méně třetích stran stránka načítá, tím menší je riziko úniku dat přes referer, skripty, pixely nebo omylem vložené widgety.
-
-## CSP stavěj postupně, ne jako výbuch v produkci
-
-`Content-Security-Policy` je nejsilnější, ale také nejčastěji rozbitelná hlavička. Umí omezit zdroje skriptů, stylů, obrázků, fontů, připojení i vkládání stránky do rámů. Když ji nastavíš moc volně, skoro nic neřeší. Když ji nastavíš moc tvrdě bez testu, rozbiješ web a budeš lovit chyby mezi půlnocí a kávou číslo čtyři.
-
-Praktický postup:
-
-1. Nejdřív udělej inventář všech zdrojů.
-2. Připrav politiku v režimu `Content-Security-Policy-Report-Only`.
-3. Otestuj hlavní stránky, formuláře, přihlášení, platby a administraci.
-4. Zkontroluj reporty, ale neukládej do nich celé URL s osobními údaji.
-5. Zpřísni politiku a teprve potom ji přepni do vynuceného režimu.
-
-Rozumný start pro jednodušší marketingový web může vypadat takto:
-
-```text
-Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data:; font-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; form-action 'self'; upgrade-insecure-requests
+```bash
+curl -sI https://example.com | sed -n '/^content-security-policy:/Ip;/^strict-transport-security:/Ip;/^referrer-policy:/Ip;/^x-content-type-options:/Ip;/^permissions-policy:/Ip;/^x-frame-options:/Ip'
 ```
 
-Tohle není univerzální recept. Pokud používáš externí platební bránu, mapu nebo analytiku, musíš konkrétní domény doplnit vědomě. Ne přes `*`, ne přes „ono to pak přestane řvát“, ale přes zdokumentované rozhodnutí.
+U SaaS nestačí homepage. Zkontroluj alespoň:
 
-## HSTS zapínej až po kontrole HTTPS
+- veřejnou landing page,
+- přihlášení,
+- aplikaci po přihlášení,
+- administraci,
+- API odpověď,
+- statický asset,
+- 404 stránku,
+- redirect z HTTP na HTTPS,
+- preview nebo staging URL, pokud ji zákazníci mohou otevřít.
 
-`Strict-Transport-Security` říká prohlížeči, aby web příště otevíral jen přes HTTPS. Je to skvělá pojistka proti downgrade útokům a omylům, ale musíš mít jistotu, že HTTPS funguje na všech relevantních subdoménách.
+Rozdíly mezi těmito odpověďmi jsou často signál architektonického nepořádku. Ne vždy musí mít všechny odpovědi úplně stejné hlavičky, ale tým má vědět proč.
 
-Bezpečný postup:
+## Udělej z hlaviček malý deploy test
 
-- ověř platný certifikát pro produkční doménu,
-- zkontroluj přesměrování z HTTP na HTTPS,
-- projdi subdomény, které používáš pro aplikaci, statické assety, API a dokumentaci,
-- začni kratším `max-age`, například několik dní,
-- teprve po ověření prodlužuj hodnotu a zvaž `includeSubDomains`,
-- preload řeš až ve chvíli, kdy opravdu víš, že doménový provoz máš pod kontrolou.
+Do CI/CD nemusíš hned stavět bezpečnostní vesmírnou stanici. Stačí malý test, který po deployi ověří několik kritických pravidel. Cíl není nahradit penetrační test. Cíl je chytit regresi typu „při migraci hostingu zmizelo HSTS“ nebo „nový framework přidal volný referrer“.
 
-Příklad pro zralý web, kde jsou subdomény připravené:
+Praktický testovací model:
 
-```text
-Strict-Transport-Security: max-age=31536000; includeSubDomains
+- seznam URL drž v repozitáři,
+- pro každou URL stáhni hlavičky,
+- ověř povinné hlavičky,
+- zakázané hodnoty ber jako fail,
+- výjimky musí být explicitní a komentované,
+- výstup má být čitelný pro člověka, ne jen červený řádek v CI.
+
+Příklad jednoduché kontroly:
+
+```bash
+set -euo pipefail
+url="https://example.com"
+headers="$(curl -sI "$url" | tr -d '\r')"
+
+echo "$headers" | grep -qi '^strict-transport-security:'
+echo "$headers" | grep -qi '^content-security-policy:'
+echo "$headers" | grep -qi '^x-content-type-options: nosniff$'
+echo "$headers" | grep -qi '^referrer-policy: strict-origin-when-cross-origin$'
+
+if echo "$headers" | grep -qi "content-security-policy:.*\*"; then
+  echo "CSP contains wildcard on $url" >&2
+  exit 1
+fi
 ```
 
-Pro první nasazení je lepší kratší hodnota bez dramatických gest. Bezpečnost není soutěž v nejdelší hlavičce.
+Tohle je schválně jednoduché. Až bude bolet, rozšiř ho. Nezačínej nástrojem, který nikdo nebude udržovat.
 
-## Referrer nastav na minimum užitečné informace
+## Zakázané hodnoty si napiš stejně jasně jako povinné
 
-`Referrer-Policy` řeší, kolik informací o předchozí stránce prohlížeč pošle cílovému webu. Bez rozmyslu můžeš třetí straně poslat interní cestu, query parametry nebo marketingové údaje. To je přesně ten typ malého úniku, který nikdo neplánoval a všichni pak vysvětlují.
+Mnoho týmů kontroluje, že hlavička existuje. Méně týmů kontroluje, že neobsahuje nebezpečnou zkratku. Přitom právě ta bývá problém.
 
-Dobré privacy-first defaulty:
+Typické červené vlajky:
+
+- `Content-Security-Policy` obsahuje `*` bez zdokumentované výjimky,
+- `script-src` obsahuje `'unsafe-eval'`, protože se kdysi rozbil build,
+- `script-src` obsahuje `'unsafe-inline'` bez nonce nebo hash strategie,
+- `connect-src` povoluje celé `https:` místo konkrétních originů,
+- `frame-ancestors` chybí u aplikace s citlivými daty,
+- `Referrer-Policy` je prázdná nebo příliš volná,
+- `Strict-Transport-Security` chybí na produkční doméně,
+- `Permissions-Policy` povoluje funkce, které produkt nepoužívá.
+
+Ne každá červená vlajka je automaticky incident. Některé aplikace mají legitimní důvody pro výjimku. Ale legitimní důvod má mít vlastníka, datum revize a plán, jak riziko omezit.
+
+## Odděl veřejný web, aplikaci a API
+
+Marketingový web, SaaS aplikace a API mají často jiné potřeby. Neřeš je jednou slepou politikou.
+
+Praktické rozdělení:
+
+| Oblast | Co hlídat | Typická chyba |
+| --- | --- | --- |
+| Marketingový web | CSP, referrer, permissions, rámování | zbytečné třetí strany a pixely |
+| Přihlášení | HSTS, CSP, frame ochrana | externí skripty na citlivé stránce |
+| Aplikace | CSP podle reálných integrací | wildcard kvůli widgetům |
+| API | CORS, cache, content type | chybí `nosniff`, volné CORS |
+| Statické soubory | content type, cache, integrity procesu | assety servírované z jiné domény bez kontroly |
+| Error stránky | stejné bezpečnostní minimum | chyby generované jinou vrstvou bez hlaviček |
+
+API nepotřebuje stejné CSP jako HTML stránka, protože se nevykresluje jako dokument. Potřebuje ale správný `Content-Type`, žádné zbytečné cachování citlivých odpovědí, rozumné CORS a konzistentní chyby. Kontrolu hlaviček proto nepiš jako jeden univerzální seznam pro všechno.
+
+## CORS není bezpečnostní marketingový štítek
+
+Když kontroluješ hlavičky, nezapomeň na CORS. U API je to častější zdroj průvanu než chybějící marketingová hlavička.
+
+Minimum pro privacy-first SaaS:
+
+- nepoužívej `Access-Control-Allow-Origin: *` u endpointů s autentizací,
+- nepovoluj credentials pro wildcard origin,
+- drž allowlist originů v konfiguraci,
+- odděl produkci, staging a lokální vývoj,
+- loguj zamítnuté originy agregovaně, ne celé požadavky s daty,
+- testuj preflight i skutečný požadavek.
+
+CORS není ochrana proti server-side útoku. Je to pravidlo pro prohlížeče. Autorizace musí být pořád na serveru. Když API vrátí cizí data jen proto, že request přišel „z dobrého originu“, problém není CORS. Problém je produktová magie s bezpečnostním kloboukem.
+
+## Kontroluj hlavičky po změně infrastruktury
+
+Nejrizikovější chvíle není běžný deploy textu. Nejrizikovější chvíle je změna vrstvy, která odpověď skládá.
+
+Spusť kontrolu vždy po:
+
+- migraci hostingu,
+- změně reverse proxy,
+- zapnutí nebo vypnutí CDN,
+- změně frameworku nebo middleware,
+- přechodu na nový serverless/edge runtime,
+- přidání platební brány, mapy, chatu nebo analytiky,
+- změně domény nebo subdomén,
+- zavedení preview prostředí pro klienty.
+
+U každé takové změny si ulož krátký diff hlaviček před a po. Ne kvůli byrokracii, ale kvůli tomu, že za tři měsíce nikdo nebude vědět, proč se `frame-ancestors` změnilo z `none` na povolenou doménu dodavatele.
+
+## Reporty a monitoring drž krátké a užitečné
+
+Automatická kontrola nemusí znamenat sběr dalších osobních dat. Většina header testů nepotřebuje cookies, uživatelský účet ani obsah stránky. Stačí veřejná odpověď nebo testovací účet s prázdnými daty.
+
+Bezpečný monitoring:
+
+- kontroluj jen vybrané URL,
+- neposílej do reportů cookies ani autentizační tokeny,
+- ukládej jen stav, chybějící hlavičku a čas,
+- u CSP reportů zahazuj query parametry,
+- nastav retenci podle provozní potřeby,
+- alertuj jen na změny, které má někdo opravit.
+
+Alert „něco je jinak“ je šum. Alert „produkční login ztratil HSTS“ je práce.
+
+## Checklist: header kontrola po deployi
+
+- [ ] Máme seznam URL, které reprezentují veřejný web, aplikaci, API a error stránky?
+- [ ] Kontrolujeme finální HTTP odpověď, ne jen konfigurační soubor?
+- [ ] CI nebo deploy pipeline umí ověřit povinné hlavičky?
+- [ ] Test umí selhat na zakázané hodnoty jako wildcard nebo nechtěné `unsafe-eval`?
+- [ ] Výjimky mají vlastníka, důvod a datum revize?
+- [ ] CORS pravidla jsou testovaná zvlášť pro autentizované API?
+- [ ] Staging, preview a produkce mají vědomě rozdílné nebo stejné politiky?
+- [ ] Kontrolujeme hlavičky po změně hostingu, proxy, CDN nebo frameworku?
+- [ ] Reporty neukládají celé citlivé URL, cookies ani tokeny?
+- [ ] Máme uložený rollback pro poslední bezpečnou sadu hlaviček?
+
+## Mini šablona deploy header kontroly
 
 ```text
-Referrer-Policy: strict-origin-when-cross-origin
-```
+# Deploy header kontrola: [web / aplikace]
 
-nebo pro citlivější aplikace:
-
-```text
-Referrer-Policy: no-referrer
-```
-
-První varianta typicky zachová užitečný kontext pro běžné webové fungování, ale neposílá celou cestu cizím doménám při přechodu mimo origin. Druhá varianta je tvrdší a hodí se tam, kde i informace o původu může být citlivá.
-
-## MIME sniffing, rámování a oprávnění prohlížeče
-
-Některé hlavičky jsou malé, ale pořád užitečné:
-
-- `X-Content-Type-Options: nosniff` pomáhá zabránit tomu, aby prohlížeč hádal typ obsahu jinak, než říká server.
-- `X-Frame-Options: DENY` nebo CSP `frame-ancestors 'none'` chrání proti nechtěnému vkládání stránky do rámu.
-- `Permissions-Policy` omezuje přístup k funkcím jako kamera, mikrofon, geolokace nebo platební API.
-- `Cross-Origin-Opener-Policy` a příbuzné hlavičky řeš opatrně u aplikací, které pracují s popupy, platbami nebo embedovaným obsahem.
-
-Privacy-first nastavení pro běžný web může být přísné:
-
-```text
-X-Content-Type-Options: nosniff
-X-Frame-Options: DENY
-Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
-```
-
-Pokud web opravdu potřebuje kameru nebo geolokaci, nepovoluj ji globálně. Povol ji jen tam, kde je funkce jasně vysvětlená, dobrovolná a uživateli dává smysl.
-
-## Reporty nesmí být nová analytická skládka
-
-CSP reporty a bezpečnostní logy jsou lákavé, protože vypadají jako technická telemetrie. Jenže mohou obsahovat URL, cesty, názvy tenantů, ID dokumentů nebo části query parametrů. Proto je navrhuj stejně pečlivě jako analytiku.
-
-Pravidla pro reporty:
-
-- neposílej reporty do nástroje, který neumíš smluvně a datově vysvětlit,
-- minimalizuj uložené pole na typ porušení, origin, direktivu a čas,
-- odstraň query parametry a fragmenty,
-- nastav krátkou retenci,
-- odděl bezpečnostní reporty od marketingové analytiky,
-- pravidelně maž staré reporty, které už neslouží k opravě.
-
-Bezpečnostní report není výmluva pro nový datový vysavač. Má pomoct opravit politiku a odhalit problém, ne vyrábět profil návštěvníka.
-
-## Nasazuj přes prostředí a rollback
-
-Hlavičky testuj ve stejné cestě, jakou půjdou do produkce. Jinak snadno otestuješ framework, ale v produkci ti je přepíše reverse proxy, hosting nebo middleware.
-
-Minimální rollout:
-
-- lokální kontrola odpovědí pomocí `curl -I`,
-- staging s produkčně podobnou doménou,
-- test hlavních uživatelských toků,
-- krátký report-only režim pro CSP,
-- nasazení přes konfigurační změnu,
-- připravený rollback na předchozí sadu hlaviček.
-
-U SaaS produktu přidej i test administrace, exportů, uploadů, plateb, přihlášení přes externí identitu a všech iframe scénářů. Právě tyhle části nejčastěji rozbije přísná politika.
-
-## Checklist: bezpečnostní hlavičky bez divadla
-
-- [ ] Máme inventář všech externích zdrojů a jejich vlastníků?
-- [ ] Víme, které skripty, fonty, obrázky, API a iframe jsou opravdu nutné?
-- [ ] Je CSP nejdřív otestovaná v report-only režimu?
-- [ ] Neobsahují CSP reporty celé citlivé URL nebo osobní údaje?
-- [ ] Je HSTS nasazené až po kontrole HTTPS a subdomén?
-- [ ] Má web nastavenou rozumnou `Referrer-Policy`?
-- [ ] Používáme `X-Content-Type-Options: nosniff`?
-- [ ] Chráníme stránku proti nechtěnému rámování?
-- [ ] Má `Permissions-Policy` zakázané funkce, které nepotřebujeme?
-- [ ] Existuje rollback na předchozí sadu hlaviček?
-- [ ] Kontrolujeme hlavičky po změně hostingu, proxy nebo frameworku?
-
-## Mini šablona header policy karty
-
-```text
-# Header policy karta: [web / aplikace]
-
-## Kontext
-- Produkční domény:
-- Subdomény:
-- Reverse proxy / hosting:
-- Aplikace nebo framework, který hlavičky nastavuje:
-
-## Externí zdroje
-- Skripty:
-- Styly:
-- Fonty:
-- Obrázky:
-- API connect-src:
-- Iframe / embed:
-- Form targety:
-
-## Politiky
-- Content-Security-Policy:
-- Strict-Transport-Security:
-- Referrer-Policy:
-- X-Content-Type-Options:
-- Frame ochrana:
-- Permissions-Policy:
-
-## Reporty
-- Kam reporty chodí:
-- Jaká pole ukládáme:
-- Co anonymizujeme nebo zahazujeme:
-- Retence:
-
-## Rollout
-- Report-only období:
-- Testované toky:
-- Datum nasazení:
-- Rollback postup:
-- Vlastník:
-```
-
-## Zdroje
-
-- MDN Web Docs: Content-Security-Policy — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
-- MDN Web Docs: Strict-Transport-Security — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
-- MDN Web Docs: Referrer-Policy — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
-- MDN Web Docs: X-Content-Type-Options — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
-- MDN Web Docs: Permissions-Policy — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy
-- OWASP Cheat Sheet Series: HTTP Headers Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
-
-
+## Rozsah
++- Produkční URL:
++- Staging URL:
++- API URL:
++- Error stránka:
++- Preview prostředí:
++
++## Povinné hlavičky
++- HTML dokumenty:
++- Přihlášení:
++- Aplikace po přihlášení:
++- API:
++- Statické soubory:
++
++## Zakázané hodnoty
++- CSP wildcard:
++- unsafe-inline / unsafe-eval:
++- Volné connect-src:
++- Volné CORS:
++- Chybějící frame ochrana:
++
++## Výjimky
++- Výjimka:
++  - Důvod:
++  - Vlastník:
++  - Datum revize:
++  - Plán omezení rizika:
++
++## Provoz
++- Kde běží kontrola:
++- Kdo dostává alert:
++- Jaký je rollback:
++- Datum posledního ověření:
++```
++
++## Zdroje
++
++- MDN Web Docs: Content-Security-Policy — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
++- MDN Web Docs: Strict-Transport-Security — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
++- MDN Web Docs: Referrer-Policy — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
++- MDN Web Docs: X-Content-Type-Options — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
++- MDN Web Docs: CORS — https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS
++- OWASP Cheat Sheet Series: HTTP Headers Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
++
++
 
 # Pracovní log
-- 2026-10-06: Doplněna příloha „Bezpečnostní hlavičky bez falešného pocitu neprůstřelnosti“ s inventářem externích zdrojů, postupným CSP rolloutem, HSTS kontrolou, privacy-first referrer politikou, Permissions-Policy, bezpečným zacházením s reporty, rollbackem, checklistem, header policy kartou a ověřenými zdroji MDN a OWASP.
+- 2026-10-06: Doplněna navazující příloha „Kontrola bezpečnostních hlaviček po deployi bez ručního klikání“ s ověřováním finálních HTTP odpovědí, malým CI/deploy testem, zakázanými hodnotami, CORS kontrolou, revizí po změně infrastruktury, privacy-first reporty, checklistem, deploy header šablonou a ověřenými zdroji MDN a OWASP.
 - 2026-10-06: Provedena editační deduplikace e-mailové části: odstraněn překryvný nově přidaný blok a do přílohy „E-mailová doména bez doručovací loterie“ doplněn rozcestník na související části o transakčních e-mailech a preference centru, aby čtenář rychleji našel správný postup bez opakování.
 - 2026-10-06: Doplněna příloha „Rate limiting a cache bez drahého přetížení“ s mapou drahých operací, limity podle identity/tenantu/nákladů, férovými 429 odpověďmi, bezpečným cachováním, ochranou proti cache stampede, parametrovými limity, privacy-first provozními metrikami, příkladem AI sumarizace, checklistem, limit/cache kartou a ověřenými zdroji OWASP a MDN.
 - 2026-10-06: Doplněna příloha „Plánované úlohy a background joby bez tichých katastrof“ s praktickým rozdělením background práce, bezpečným rozsahem jobů, idempotencí cronů, retry/dead-letter politikou, časovými zónami, observabilitou bez obsahu, ručními zásahy, příkladem měsíčního exportu faktur, checklistem, job kartou a ověřenými zdroji OWASP, NIST a Evropské komise.
