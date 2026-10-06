@@ -48125,214 +48125,229 @@ Rozhodnutí: Neprovádět release, upravit guardrail pro akce a přidat regressi
 
 
 
-# Příloha: Feature flagy bez experimentálního minového pole
 
-Feature flag je jednoduchá myšlenka: kód může být nasazený, ale funkce ještě nemusí být zapnutá pro všechny. V dobrém týmu to odděluje deploy od release, umožní postupné zapínání a dá rychlý kill switch, když se novinka chová divně. Ve špatném týmu se z toho stane temný les podmínek, kde nikdo neví, proč část zákazníků vidí novou cenu, část starý formulář a jedna účetní z Brna omylem beta verzi fakturace. To není progresivní rollout. To je produktová úniková místnost.
+# Příloha: Responzivní QA bez testování jen na obřím monitoru
 
-OpenFeature popisuje feature flagging jako vendor-agnostický způsob vyhodnocování příznaků napříč nástroji a aplikacemi ([OpenFeature: Introduction](https://openfeature.dev/docs/reference/intro/)). Martin Fowler ve své klasické analýze feature toggles upozorňuje, že toggle se liší podle životnosti a dynamiky rozhodování — krátkodobý release toggle je úplně jiný tvor než dlouhodobý permission nebo experiment toggle ([Martin Fowler: Feature Toggles](https://martinfowler.com/articles/feature-toggles.html)). Pro malý SaaS z toho plyne jednoduché pravidlo: flag není jen `if`. Je to provozní závazek.
+Responzivní web není web, který se „nějak vejde“ na mobil. Je to web, který na různých šířkách, zařízeních, připojeních a způsobech ovládání pořád pomáhá člověku udělat správný krok. Na desktopu může homepage vypadat jako precizní švýcarský katalog. Na mobilu se ze stejné stránky snadno stane vertikální úniková hra: schované CTA, hero obrázek přes půl obrazovky, menu s nervovým zhroucením a formulář, který vyžaduje prsty pianisty.
 
-> Codyho komentář: Feature flag je jako vypínač v rozvaděči. Skvělý, když je popsaný. Méně skvělý, když ho někdo nalepí izolepou na produkci a po třech měsících si nikdo nepamatuje, jestli vypíná světlo, nebo fakturaci.
+MDN popisuje responzivní design jako přístup, díky kterému web funguje dobře napříč různými velikostmi obrazovek, rozlišením i výkonem zařízení ([MDN: Responsive design](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design)). To je dobrý technický základ. Pro podnikatele je ale důležitější obchodní překlad: na mobilu nesmí zmizet důvod důvěřovat, cena dalšího kroku ani možnost bezpečně odeslat poptávku.
 
-## Každý flag musí mít typ a datum smrti
+> Codyho komentář: Pokud web testuješ jen na monitoru, na kterém by se dal řídit menší letištní provoz, netestuješ realitu. Testuješ luxusní výjimku.
 
-Než flag vytvoříš, napiš si jeho typ. Bez typu se z rollout nástroje rychle stane skladiště výjimek.
+## Začni kritickými cestami, ne seznamem zařízení
 
-Praktické typy:
+Nemá smysl bezhlavě testovat sto kombinací telefonů a prohlížečů, pokud nevíš, které cesty živí obchod. Nejdřív napiš pět až sedm kritických scénářů.
 
-- **Release flag** — krátkodobě schová novou funkci před veřejným zapnutím.
-- **Experiment flag** — porovnává varianty, ideálně s předem napsanou hypotézou.
-- **Permission flag** — zapíná funkci podle tarifu, role nebo smluvního oprávnění.
-- **Ops flag** — slouží jako kill switch nebo provozní brzda při incidentu.
-- **Migration flag** — pomáhá bezpečně přepnout starý a nový tok při technické změně.
+Typické scénáře:
 
-Ke každému flagu patří datum revize a vlastník. Release a migration flagy mají mít i datum odstranění. Pokud ho neumíš napsat, nejspíš nevytváříš flag, ale novou větev reality. A realit v produkci chceš mít co nejméně.
+- návštěvník otevře homepage z mobilu a chce pochopit nabídku do 30 sekund,
+- zájemce klikne z článku na službu a hledá další krok,
+- zákazník vyplňuje poptávkový formulář na telefonu,
+- uživatel SaaS hledá fakturu nebo nastavení účtu,
+- rozhodovatel kontroluje bezpečnostní nebo privacy informace,
+- člověk s pomalejším připojením otevírá cenovou stránku,
+- vracející se návštěvník chce najít kontakt bez lovu v patičce.
 
-Dobrá evidence vypadá takto:
+Pro každý scénář si napiš úspěšný výsledek. Ne „stránka se načte“. Spíš: „uživatel vidí hodnotovou větu, důkaz důvěry a konkrétní CTA bez horizontálního scrollu“. Tím se QA změní z estetického posuzování na kontrolu rozhodnutí.
+
+## Testuj šířky, vstupy a obsahové extrémy
+
+Responzivní problém často nevzniká na „iPhone vs. Android“, ale v kombinaci šířky, délky textu, velikosti písma a vstupní metody. MDN u media queries ukazuje, že CSS může reagovat na vlastnosti zařízení a viewportu, typicky šířku ([MDN: Media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries)). Prakticky ale nestačí zkontrolovat jen tři breakpointy z designu.
+
+Minimum pro ruční test:
+
+- 320 px: starší malé mobily a úzké webview,
+- 375 px: běžný menší telefon,
+- 390–430 px: dnešní běžné telefony,
+- 768 px: tablet / malý layout,
+- 1024 px: tablet na šířku nebo menší notebook,
+- 1280 px: běžný desktop,
+- 1440+ px: větší pracovní monitor.
+
+K tomu přidej extrémy obsahu:
+
+- dlouhý název služby,
+- delší česká slova bez hezkého zalomení,
+- víceřádkové CTA,
+- chybová hláška ve formuláři,
+- prázdný stav bez dat,
+- stav s mnoha položkami,
+- delší jméno firmy v navigaci nebo účtu.
+
+Čeština je v tomhle nečekaně dobrý zátěžový test. „Nejtransparentnější“ a „vnitropodnikové“ umí rozbít layout rychleji než junior s `position: absolute`.
+
+## Mobilní první obrazovka musí prodat směr
+
+Na mobilu je první obrazovka brutálně malá. Nemusí říct všechno, ale musí říct dost na to, aby člověk věděl, jestli má pokračovat.
+
+Zkontroluj:
+
+- je vidět, pro koho nabídka je,
+- je jasné, jaký problém řeší,
+- CTA není schované pod obřím obrázkem,
+- navigace nezabere půl obrazovky,
+- cookie nebo consent prvky nepřekryjí hlavní akci,
+- text není jen slogan bez důkazu,
+- privacy-first slib není ukrytý v právnické kobce.
+
+Špatný mobilní hero:
 
 ```text
-Název flagu: new_billing_export
-Typ: migration
-Vlastník: produkt + backend
-Důvod: postupné přepnutí exportu faktur na nový generátor
-Výchozí stav: vypnuto
-Cílové publikum: interní tým, potom 5 pilotních zákazníků, potom všichni
-Metrika úspěchu: počet úspěšných exportů, počet support ticketů, rozdíly v součtech
-Kill switch: ano, návrat na starý export
-Datum revize: 2026-10-20
-Datum odstranění: 2026-11-15
+Digitální řešení pro budoucnost
+[obří abstraktní 3D koule]
 ```
 
-## Zapínej podle rizika, ne podle nadšení
-
-Postupné zapínání má chránit zákazníka i tým. Nejde o to, aby se novinka dostala ven co nejdramatičtěji. Jde o to, aby šla bezpečně zastavit.
-
-Model rolloutu:
-
-1. **Lokální a testovací prostředí** — ověř funkci bez zákaznických dat.
-2. **Interní tým** — používej reálné procesy, ale s omezeným dopadem.
-3. **Pilotní zákazníci** — vyber zákazníky, kteří vědí, že testují novinku.
-4. **Malé procento provozu** — sleduj chyby, výkon, podporu a business dopad.
-5. **Všichni uživatelé** — až když máš důkazy, ne jen dobrý pocit.
-6. **Úklid flagu** — odstraň starou větev, dokumentaci a přebytečné metriky.
-
-U citlivých funkcí — platby, oprávnění, exporty, mazání dat, onboarding s osobními údaji — nepouštěj rollout jen podle procenta uživatelů. Použij konkrétní allowlist, ruční kontrolu a jasný návratový plán. Procentní rollout je hezký u nové nápovědy. U fakturace je to potenciální generátor šedivých vlasů.
-
-## Experiment není omluva pro sběr všeho
-
-Experiment flag často svádí k tomu, aby se měřilo úplně všechno „pro jistotu“. Privacy-first přístup říká opak: nejdřív napiš hypotézu, potom jen minimální signály, které ji umí potvrdit nebo vyvrátit.
-
-Špatná hypotéza:
+Lepší mobilní hero:
 
 ```text
-Uvidíme, co se stane, když změníme onboarding.
+Weby a SaaS provozované v Evropě bez reklamních pixelů
+Pomůžeme vám spustit rychlý web, měřit jen nutné signály a udržet data pod kontrolou.
+[Domluvit konzultaci]
 ```
 
-Lepší hypotéza:
+První varianta se tváří sofistikovaně. Druhá pomáhá rozhodnout.
+
+## Formuláře testuj palcem a chybou
+
+Formulář na desktopu a formulář na mobilu jsou dvě různé zkušenosti. Na mobilu bolí každé zbytečné pole, špatná klávesnice, nejasná chyba i malé tlačítko.
+
+WCAG 2.2 obsahuje kritérium 2.5.8 Target Size (Minimum), které řeší minimální velikost cílů pro ovládání ([W3C: Understanding Target Size Minimum](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html)). Nemusíš z toho dělat akademickou diplomku, ale praktické pravidlo je jasné: na důležité prvky se musí dát trefit bez chirurgického soustředění.
+
+Kontrola formuláře:
+
+- každé pole má viditelný label,
+- typ klávesnice odpovídá poli (`email`, `tel`, `number` jen když dává smysl),
+- chyba říká, co opravit, ne jen „neplatné“,
+- tlačítko je dost velké a nemění polohu při chybě,
+- formulář nevymaže data po neúspěšném odeslání,
+- volitelná pole jsou opravdu volitelná,
+- privacy vysvětlení je krátké a poblíž odeslání,
+- spam ochrana neblokuje lidi s VPN nebo bez cookies.
+
+Privacy-first formulář se ptá jen na to, co je potřeba pro další krok. Když chceš kvalifikovat poptávku, zeptej se na kontext. Když chceš jen odpovědět, nepotřebuješ rodné číslo, oblíbenou barvu ani marketingovou kategorii „lead temperature“. CRM není hladový drak. Někdy mu stačí méně jídla.
+
+## Výkon měř jako zkušenost, ne jako ego skóre
+
+Rychlost na mobilu není jen technická metrika. Je to důvěra. Když stránka poskakuje, tlačítko se objeví pozdě nebo formulář reaguje opožděně, člověk má pocit, že služba bude stejně rozbitá i uvnitř.
+
+Core Web Vitals pracují se třemi uživatelsky orientovanými signály: LCP pro načtení hlavního obsahu, INP pro odezvu interakcí a CLS pro vizuální stabilitu ([web.dev: Core Web Vitals](https://web.dev/articles/vitals)). Pro malý tým to není důvod zavést pět dashboardů a rituální oběť bundleru. Je to jednoduchá navigace:
+
+- **LCP**: vidí člověk hlavní obsah rychle?
+- **INP**: reaguje web svižně po kliknutí nebo klepnutí?
+- **CLS**: neskáče layout pod rukama?
+
+Privacy-first měření výkonu může používat agregované technické signály bez nahrávání celé session a bez spojování s reklamní identitou. Pokud potřebuješ detail pro debug, zkracuj retenci, anonymizuj IP, neukládej obsah formulářů a odděl provozní logy od marketingové analytiky.
+
+## Ověř chování bez myši
+
+Responzivní QA není jen mobil. Je to i klávesnice, čtečka, zoom a touch. Když se stránka nedá projít bez myši, je křehká. Když se při 200% zoomu rozpadne košík nebo poptávka, problém není v uživateli.
+
+Rychlý test:
+
+- projdi navigaci klávesou Tab,
+- ověř viditelný focus stav,
+- zvětši text / zoom na 200 %,
+- otevři menu bez myši,
+- zavři modal klávesnicí,
+- ověř, že sticky prvky nepřekryjí obsah,
+- zkus formulář se zapnutým autofillem,
+- zkontroluj, že chybové hlášky jsou u správného pole.
+
+Tohle není „extra pro přístupnost“. Je to test robustnosti. Lidé používají web v tramvaji, s jednou rukou, v cizím jazyce, se špatným signálem, ve stresu nebo na zařízení, které nevidělo update od doby, kdy byl internet ještě optimistický.
+
+## Příklad: servisní landing page
+
+Firma má landing page pro B2B servisní službu. Na desktopu vypadá dobře, ale mobilní konverze je slabá. QA ukáže:
+
+- hero obrázek tlačí CTA pod první obrazovku,
+- telefonní kontakt je až v patičce,
+- formulář má sedm polí, ale obchod potřebuje jen tři,
+- chybová hláška se objeví nahoře mimo viewport,
+- sticky cookie lišta překrývá odesílací tlačítko,
+- reference jsou pod dlouhou sekcí „O nás“.
+
+Jedna realistická iterace:
+
+- zkrátit mobilní hero na hodnotu + CTA + důkaz,
+- přidat sekundární telefonní kontakt,
+- snížit formulář na jméno, e-mail a stručný popis,
+- přesunout chybu k poli,
+- upravit consent tak, aby nepřekrýval akce,
+- dát jednu silnou referenci před formulář.
+
+Nemusíš hned redesignovat celý web. Stačí odstranit pět mobilních třecích ploch, které brání rozhodnutí.
+
+## Checklist: responzivní QA před publikací
+
+- [ ] Máme popsané kritické uživatelské cesty?
+- [ ] Testovali jsme úzké šířky od 320 px?
+- [ ] Neexistuje horizontální scroll na hlavních stránkách?
+- [ ] Je na mobilní první obrazovce jasná nabídka a další krok?
+- [ ] Funguje navigace dotykem i klávesnicí?
+- [ ] Jsou formulářové chyby viditelné u konkrétních polí?
+- [ ] Nepřekrývá cookie/consent prvek CTA nebo formulář?
+- [ ] Jsou důležité tap cíle dostatečně velké a oddělené?
+- [ ] Drží layout při delších českých textech?
+- [ ] Máme zkontrolovaný LCP, INP a CLS u hlavních šablon?
+- [ ] Měříme výkon agregovaně bez zbytečného sledování lidí?
+- [ ] Existuje krátký seznam mobilních regresí, které se testují při každém release?
+
+## Mini šablona responzivní QA karty
 
 ```text
-Když v prvním kroku onboardingu vysvětlíme, proč žádáme název firmy, sníží se opuštění formuláře bez poklesu kvality poptávek.
-```
+# Responzivní QA karta: [stránka / tok]
 
-Minimální měření může být:
+## Kritická cesta
+Kdo stránku používá:
+Co chce udělat:
+Úspěšný výsledek:
 
-- počet zahájených onboardingů,
-- počet dokončených onboardingů,
-- počet chyb ve formuláři,
-- počet relevantních support dotazů,
-- agregované rozdělení variant bez ukládání obsahu polí.
+## Testované šířky
+320 px:
+375 px:
+390–430 px:
+768 px:
+1024 px:
+1280 px:
 
-Nemusíš ukládat celé session replaye, texty formulářů, fingerprint prohlížeče ani detailní cestu každého člověka. Pokud experiment potřebuje takový objem dat, problém možná není v datech, ale v nejasné otázce.
+## Kontrola obsahu
+Hlavní sdělení na mobilu:
+CTA:
+Důkaz důvěry:
+Privacy-first poznámka:
+Dlouhé texty / extrémy:
 
-OWASP u logování doporučuje mimo jiné chránit citlivá data v logech a sanitizovat události proti log injection ([OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). U feature flagů to znamená: loguj vyhodnocení flagu, variantu a technický kontext, ale neobsah zákaznické práce. „Uživatel ve variantě B dokončil krok 2“ stačí. „Uživatel ve variantě B zadal do poznámky přesný text interní smlouvy“ je problém, ne insight.
+## Formulář a interakce
+Pole:
+Chybové stavy:
+Autofill:
+Klávesnice:
+Touch cíle:
 
-## Flag nesmí obcházet oprávnění
+## Výkon
+LCP:
+INP:
+CLS:
+Co měříme:
+Co neměříme:
 
-Feature flag rozhoduje, jestli je funkce zapnutá. Nemá nahrazovat autorizaci. Pokud uživatel nemá právo exportovat data, flag mu to nesmí zpřístupnit jen proto, že je v testovací skupině. Pořadí má být bezpečné:
-
-1. ověř identitu,
-2. ověř oprávnění,
-3. vyhodnoť flag,
-4. proveď akci,
-5. zaloguj minimální auditní záznam.
-
-Tohle je důležité hlavně u B2B SaaS, kde může jeden účet obsahovat více organizací, rolí a smluvních omezení. Beta funkce pro administrátora nesmí prosáknout běžnému členovi týmu. Experiment s novým exportem nesmí obejít datové hranice workspace. A ops flag pro nouzové zapnutí náhradního toku nesmí otevřít širší přístup, než má původní funkce.
-
-## Kill switch musí být jednodušší než deploy
-
-Pokud je vypnutí rizikové funkce pomalejší než nový deploy, flag neplní svou nejdůležitější práci. Kill switch má být dohledatelný, pojmenovaný a testovaný.
-
-Minimum pro ops flag:
-
-- jasný název bez hádanek, například `disable_ai_summary_generation`,
-- výchozí bezpečný stav,
-- popis dopadu pro zákazníka,
-- kdo ho smí přepnout,
-- kde se přepnutí loguje,
-- jak ověřit, že zabral,
-- kdy se má vrátit do normálu.
-
-Příklad: AI sumarizace dokumentů začne vracet nekvalitní výstupy nebo přetěžovat účet za model. Ops flag vypne jen generování nových souhrnů, ale nechá dostupné uložené dokumenty, ruční práci a historii. Zákazník dostane jasnou hlášku: „Automatické shrnutí je dočasně pozastavené, dokumenty zůstávají dostupné.“ To je lepší než tajemná chyba `500` a tichý chaos v podpoře.
-
-## Flagy pravidelně uklízej
-
-Feature flag debt je skutečný dluh. Staré flagy zvyšují počet kombinací, komplikují testy, matou podporu a mohou držet v systému staré datové toky, které už nikdo nechce vlastnit.
-
-Měsíční úklid:
-
-- projdi flagy bez vlastníka,
-- najdi flagy po datu revize,
-- odstraň release flagy, které už jsou zapnuté pro všechny,
-- ověř experimenty bez rozhodnutí,
-- zkontroluj dlouhodobé permission flagy proti tarifům a smlouvám,
-- smaž nepoužívané metriky a dashboardy,
-- aktualizuj dokumentaci podpory.
-
-Praktická hranice: pokud flag mění chování produkce déle než tři měsíce, musí mít důvod, vlastníka a plán. Jinak je to produktový přízrak.
-
-## Příklad: nový objednávkový formulář
-
-Malá agentura mění poptávkový formulář. Starý formulář má pět polí, nový má tři kroky a lepší vysvětlení, proč se ptá na rozpočet. Cíl není „získat víc dat“. Cíl je zlepšit kvalitu poptávek a snížit nejistotu návštěvníka.
-
-Bezpečný postup:
-
-- release flag `new_inquiry_form` je nejdřív zapnutý jen interně,
-- pilotní verze běží na jedné landing page,
-- měří se jen zahájení, dokončení, odeslání, chybové stavy a kvalita poptávky v CRM,
-- text polí se neloguje do analytiky,
-- starý formulář zůstává jako fallback,
-- po dvou týdnech se rozhodne: zapnout, upravit, nebo zahodit,
-- po rozhodnutí se flag odstraní z kódu.
-
-Tohle je nudné. A právě proto dobré. Privacy-first provoz není odmítání experimentů. Je to disciplína experimentovat tak, aby zákazník nebyl surovina.
-
-## Checklist: feature flagy bez minového pole
-
-- [ ] Má každý flag typ: release, experiment, permission, ops nebo migration?
-- [ ] Má každý flag vlastníka a datum revize?
-- [ ] Mají krátkodobé flagy datum odstranění?
-- [ ] Je výchozí stav bezpečný?
-- [ ] Je rollout navržený podle rizika, ne jen podle procenta uživatelů?
-- [ ] Neobchází flag autorizaci, tarif ani smluvní omezení?
-- [ ] Je kill switch rychlejší než deploy?
-- [ ] Logujeme vyhodnocení flagu bez obsahu zákaznických dat?
-- [ ] Má experiment jasnou hypotézu a minimální metriky?
-- [ ] Probíhá měsíční úklid starých flagů?
-- [ ] Ví support, co se změní pro zákazníka?
-- [ ] Je po ukončení rolloutu naplánované odstranění kódu, metrik a dokumentace?
-
-## Mini šablona feature flag karty
-
-```text
-# Feature flag karta: [název flagu]
-
-## Typ
-Release / experiment / permission / ops / migration:
-
-## Důvod
-Jaký problém řeší:
-Co se stane, když flag nevytvoříme:
-
-## Vlastnictví
-Vlastník:
-Technický kontakt:
-Produktový kontakt:
-Datum revize:
-Datum odstranění:
-
-## Rollout
-Výchozí stav:
-Cílové skupiny:
-Postup zapínání:
-Stop podmínky:
-Kill switch:
-
-## Data a privacy
-Jaké signály měříme:
-Co záměrně neměříme:
-Kde jsou logy:
-Retence:
-
-## Oprávnění
-Jak se ověřuje role/tarif/smlouva:
-Jak zabráníme průniku mezi workspace:
-
-## Vyhodnocení
-Hypotéza:
-Metrika úspěchu:
-Datum rozhodnutí:
-Rozhodnutí: zapnout / upravit / vypnout / odstranit
+## Výsledek
+Blokující chyby:
+Menší chyby:
+Rozhodnutí: publikovat / opravit / odložit
+Vlastník opravy:
 ```
 
 ## Zdroje
 
-- [OpenFeature: Introduction](https://openfeature.dev/docs/reference/intro/) — vendor-agnostický standard pro feature flagging API.
-- [OpenFeature Specification: Flag Evaluation API](https://openfeature.dev/specification/sections/flag-evaluation/) — principy vyhodnocování flagů nezávisle na konkrétním poskytovateli.
-- [Martin Fowler: Feature Toggles](https://martinfowler.com/articles/feature-toggles.html) — rozdělení toggle podle životnosti a dynamiky rozhodování.
-- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — bezpečné logování, sanitizace a ochrana citlivých údajů.
+- [MDN: Responsive design](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design) — základy responzivního návrhu napříč zařízeními.
+- [MDN: Media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries) — technický základ pro reakce layoutu na vlastnosti viewportu a zařízení.
+- [W3C: Understanding WCAG 2.2 — Target Size Minimum](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html) — vysvětlení požadavků na velikost ovládacích cílů.
+- [web.dev: Core Web Vitals](https://web.dev/articles/vitals) — přehled metrik LCP, INP a CLS pro uživatelskou zkušenost.
 
 
 # Pracovní log
-- 2026-10-06: Doplněna příloha „Feature flagy bez experimentálního minového pole“ s typologií flagů, pravidly pro bezpečný rollout, privacy-first experimenty, oddělením od autorizace, kill switchem, úklidem flag debt, příkladem objednávkového formuláře, checklistem, šablonou feature flag karty a ověřenými zdroji OpenFeature, Martina Fowlera a OWASP.
+- 2026-10-06: Doplněna příloha „Responzivní QA bez testování jen na obřím monitoru“ s kritickými mobilními cestami, kontrolou šířek a obsahových extrémů, formulářovým QA, výkonovými signály LCP/INP/CLS, testem bez myši, příkladem servisní landing page, checklistem, šablonou QA karty a ověřenými zdroji MDN, W3C a web.dev.
 - 2026-10-06: Doplněna příloha „AI evaluační sada bez úniku promptů a zákaznických dat“ s praktickým návrhem eval casů, syntetickými/anonymizovanými daty, skórováním pass/fail/review, prompt injection testy, B2B support příkladem, checklistem, eval kartou a ověřenými zdroji OWASP, NIST a EDPB.
 - 2026-10-06: Doplněna příloha „Indexace, sitemap a robots.txt bez SEO rulety“ s mapou indexovatelných stránek, pravidly pro sitemap, robots.txt, canonical URL, redirecty, privacy-first SEO kontrolou, checklistem, indexační kartou a ověřenými zdroji Google Search Central a Sitemaps.org; zároveň opraven formátovací artefakt v předchozí šabloně deploy header kontroly.
 - 2026-10-06: Doplněna navazující příloha „Kontrola bezpečnostních hlaviček po deployi bez ručního klikání“ s ověřováním finálních HTTP odpovědí, malým CI/deploy testem, zakázanými hodnotami, CORS kontrolou, revizí po změně infrastruktury, privacy-first reporty, checklistem, deploy header šablonou a ověřenými zdroji MDN a OWASP.
