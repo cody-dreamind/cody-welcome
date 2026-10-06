@@ -45708,171 +45708,198 @@ To poslední je důležité: dobrý marketing nemusí vymýšlet dramatické př
 - [Semantic Versioning 2.0.0](https://semver.org/)
 - [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 
-# Příloha: Prohlížečová oprávnění bez permission pop-up cirkusu
+# Příloha: Tenant isolation bez sousedských průhledů v SaaS
 
-Moderní prohlížeč umí webu zpřístupnit silné schopnosti: kameru, mikrofon, geolokaci, schránku, notifikace, sdílení obrazovky nebo lokální zařízení. To je skvělé, když stavíš videohovor, mapovou službu nebo nástroj pro nahrání dokladu. Je to horší, když homepage hned po načtení vystřelí tři žádosti o oprávnění a uživatel má pocit, že přišel na web a web přišel k němu domů s formulářem na klíče.
+Multi-tenant SaaS je krásná úspora: více zákazníků běží na sdílené infrastruktuře, tým spravuje méně prostředí a produkt se dá rozvíjet rychleji. Jenže sdílená infrastruktura má jednu zásadní podmínku: zákazník A nikdy nesmí vidět, ovlivnit ani odhadnout data zákazníka B. Ani přes API, ani přes export, ani přes cache, ani přes „tohle je jen interní admin“.
 
-Privacy-first pravidlo je jednoduché: o citlivé oprávnění žádej až ve chvíli, kdy člověk chápe hodnotu, právě dělá relevantní akci a existuje rozumná alternativa. Oprávnění není onboardingový confetti efekt. Je to smlouva důvěry mezi uživatelem, prohlížečem a produktem.
+Tenant isolation není jen databázový trik. Je to sada pravidel, která musí projít od identity přes autorizaci, dotazy, cache, soubory, joby, webhooky, logy, support UI a analytiku. Jakmile se tenant kontext někde ztratí, produkt se tváří jako hotel, ale klíče od pokojů začnou fungovat podezřele univerzálně. To nechceš. Ani právně, ani lidsky, ani ve dvě ráno při incidentu.
 
-> Codyho komentář: Když web žádá o kameru dřív, než vysvětlí proč, nepůsobí moderně. Působí jako soused, který si půjčuje vrtačku skrz zavřené dveře.
+> Codyho komentář: Multi-tenant SaaS bez izolace tenantů je coworking, kde každé dveře otevírá stejná karta. Možná pohodlné pro provozovatele. Trochu horší pro všechny, kdo si uvnitř nechali notebook.
 
-## Začni inventářem silných schopností
+## Tenant není jen firma v tabulce
 
-Než začneš ladit prompt texty, napiš si, která oprávnění produkt opravdu potřebuje. Ne podle toho, co framework umí. Podle konkrétní práce uživatele.
+Začni tím, že si přesně pojmenuješ, co je tenant. U B2B SaaS to může být workspace, organizace, účet zákazníka, projekt nebo kombinace více úrovní. Špatně definovaný tenant vede k tomu, že jednou filtruješ podle `company_id`, jindy podle `workspace_id`, potřetí podle e-mailové domény a počtvrté podle „nějak to vyšlo v query“.
 
-Praktická mapa:
+Minimální model:
 
-| Schopnost | Kdy dává smysl | Privacy riziko | Alternativa |
-| --- | --- | --- | --- |
-| Kamera | videohovor, sken dokladu, QR kód | obraz okolí, dokumenty, tváře | upload souboru |
-| Mikrofon | nahrávka, diktování, hovor | hlas, okolní zvuky | textové pole |
-| Geolokace | lokální dostupnost, mapa, doručení | přesná poloha a vzorce pohybu | ruční zadání města/PSČ |
-| Clipboard read | import jednorázového kódu nebo dat | nečekané čtení schránky | ruční vložení |
-| Notifikace | stav jobu, incident, důležitá změna | rušení, citlivý obsah na zařízení | e-mail, in-app inbox |
-| Sdílení obrazovky | support, demo, spolupráce | únik jiných aplikací a dat | screenshot výřezu |
+- **Tenant ID:** stabilní interní identifikátor zákaznického prostoru.
+- **Actor:** uživatel, servisní účet nebo systémový proces, který akci provádí.
+- **Resource:** objekt, ke kterému se přistupuje: projekt, faktura, soubor, export, webhook.
+- **Action:** čtení, zápis, export, smazání, pozvání, změna role.
+- **Scope:** hranice, ve které je akce povolená.
 
-Pokud neumíš napsat konkrétní uživatelskou větu „potřebujeme [oprávnění], aby uživatel mohl [akce]“, oprávnění zatím nepotřebuješ. A pokud věta zní „abychom měli víc dat“, zavři editor a jdi se projít. Vážně.
-
-## Nežádej při načtení stránky
-
-Žádost o oprávnění má přijít po uživatelské akci. Člověk klikne na „Nahrát hlasovou poznámku“, „Zapnout kameru“, „Najít nejbližší pobočku“ nebo „Dostávat upozornění na dokončený export“. Teprve potom dává smysl vysvětlit, co se stane, a spustit nativní prompt prohlížeče.
-
-Špatný tok:
+Praktická věta pro každý endpoint:
 
 ```text
-Uživatel otevře web → cookie lišta → push notifikace → geolokace → newsletter → uživatel mizí v dálce.
+Actor [kdo] může udělat [akce] s resource [co] pouze v tenantovi [hranice], pokud splní [podmínky].
 ```
 
-Lepší tok:
+Když tuhle větu neumíš napsat, autorizace je pravděpodobně schovaná v mlze. A mlha je skvělá pro poezii, horší pro API.
+
+## Tenant kontext musí protékat celým požadavkem
+
+Tenant isolation začíná po přihlášení, ale nekončí v controlleru. Tenant kontext musí být součást každého kroku, který pracuje s daty. Nestačí ověřit, že uživatel je přihlášený. Musíš ověřit, že přihlášený uživatel patří do správného tenant prostoru a má právo na konkrétní objekt.
+
+Kritická místa:
+
+- API endpointy a GraphQL resolvery.
+- Databázové dotazy a ORM scope.
+- Background joby a fronty.
+- Cache klíče.
+- Fulltextové indexy.
+- Objektové úložiště a cesty k souborům.
+- Webhooky a odchozí integrace.
+- Admin a support rozhraní.
+- Exporty a reporty.
+
+OWASP v API Security Top 10 řadí broken object level authorization mezi hlavní API rizika: útok často spočívá v tom, že útočník manipuluje identifikátorem objektu a získá přístup k něčemu, co mu nepatří. V multi-tenant SaaS je to přesně ten průšvih, který tenant isolation musí chytit dřív, než se z něj stane zákaznický incident.
+
+## Filtr v UI není ochrana
+
+Častá chyba: aplikace v seznamu ukáže jen objekty aktuálního zákazníka, ale detail endpoint přijme libovolné ID. Uživatel objekt v UI nevidí, ale když zná nebo uhádne URL, API mu ho vrátí. Tomu se dřív říkalo IDOR, dnes to v API světě řešíš jako objektovou autorizaci. Název se může měnit, problém zůstává stejně trapný.
+
+Bezpečnější pravidlo:
+
+- Každé čtení objektu ověřuje vlastnictví nebo členství v tenantovi.
+- Každý zápis ověřuje tenant i konkrétní oprávnění k akci.
+- Exporty používají stejná pravidla jako UI, ne „rychlejší interní query“.
+- Admin bypass vyžaduje zvláštní roli, důvod a auditní stopu.
+- Testy zkouší přístup k objektu jiného tenanta, nejen happy path.
+
+Příklad mentální kontroly:
 
 ```text
-Uživatel otevře mapu dostupnosti → zadá město ručně nebo klikne „Použít aktuální polohu“ → krátké vysvětlení → nativní prompt.
+GET /api/projects/prj_123/invoices/inv_456
 ```
 
-MDN u Permissions API popisuje stav `granted`, `denied` a `prompt`; pro produkt je důležité, že `prompt` není pozvánka k okamžitému obtěžování. Je to stav, kdy máš navrhnout slušný okamžik, ne přepadovku.
+Nestačí ověřit, že `inv_456` existuje. Nestačí ověřit, že uživatel má roli `member`. Musíš ověřit, že faktura patří k projektu, projekt patří do tenant prostoru uživatele a uživatel má právo faktury číst.
 
-## Vysvětli účel lidsky a krátce
+## Cache a fronty jsou časté díry
 
-Před systémovým dialogem ukaž vlastní krátké vysvětlení. Ne právní odstavec. Ne manipulaci. Jednu větu s účelem a alternativou.
+Tenant isolation se často rozbije mimo hlavní databázový dotaz. Typický viník je cache. Pokud cache klíč neobsahuje tenant kontext, může jeden zákazník dostat výsledek druhého.
 
-Příklady:
-
-- Kamera: „Kameru použijeme jen pro naskenování QR kódu. Můžete také zadat kód ručně.“
-- Mikrofon: „Mikrofon je potřeba pro hlasovou poznámku. Nahrávku uložíme k tomuto ticketu.“
-- Poloha: „Polohu použijeme jednorázově pro zobrazení nejbližších míst. Můžete zadat město ručně.“
-- Notifikace: „Upozorníme vás jen na dokončení dlouhého exportu. Nastavení můžete kdykoli vypnout.“
-- Schránka: „Schránku přečteme jen po kliknutí na import. Data před uložením uvidíte v náhledu.“
-
-Dobré vysvětlení říká: co, proč, kdy a jaká je alternativa. Nepotřebuje strašit. Nepotřebuje tlačit. Když funkce stojí za to, přežije i férovou volbu.
-
-## Denied není chyba uživatele
-
-Když člověk oprávnění odmítne, produkt se nemá tvářit uraženě. Odmítnutí je legitimní volba. UI má nabídnout alternativní cestu, jasný stav a případně návod, jak oprávnění zapnout později.
-
-Co nedělat:
-
-- blokovat celou aplikaci, pokud oprávnění není opravdu nutné,
-- opakovaně spouštět prompt po každém odmítnutí,
-- schovávat alternativu za malý šedý odkaz,
-- psát „něco se pokazilo“, když uživatel jen řekl ne,
-- ukládat odmítnutí jako marketingový signál k dalšímu nátlaku.
-
-Lepší chybová zpráva:
+Špatně:
 
 ```text
-Kameru jste nepovolili. QR kód můžete zadat ručně, nebo oprávnění později zapnout v nastavení prohlížeče.
+cache_key = "dashboard:monthly-summary"
 ```
 
-To je všechno. Žádné drama, žádné „bez kamery nemůžeme pokračovat“ tam, kde ruční zadání funguje.
-
-## Omez schopnosti přes Permissions-Policy
-
-Prohlížečová oprávnění nejsou jen UX. Patří i do bezpečnostní konfigurace. `Permissions-Policy` umožňuje webu říct, které silné schopnosti jsou pro stránku a vložený obsah povolené. MDN popisuje, že hlavička umí omezit například kameru, mikrofon, geolokaci nebo použití funkcí uvnitř iframe.
-
-Privacy-first výchozí nastavení pro běžný marketingový web může vypadat přísně:
-
-```http
-Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
-```
-
-U aplikace postupuj podle skutečných potřeb. Pokud kamera patří jen do jedné stránky pro sken QR kódu, nepovoluj ji plošně všude. Pokud embeduješ třetí stranu v iframe, zkontroluj i atribut `allow`. Jinak můžeš mít hezky napsanou privacy stránku a vedle ní vložený cizí widget s oprávněními, která nikdo nechtěl auditovat. Klasika: zadní dveře s designovým rámečkem.
-
-## Citlivý obsah nedávej do notifikací a náhledů
-
-Oprávnění často otevře cestu mimo bezpečný kontext aplikace. Notifikace se objeví na zamčené obrazovce. Sdílení obrazovky ukáže vedlejší okna. Kamera zachytí okolí. Mikrofon slyší místnost. Clipboard může obsahovat heslo, token nebo kus interní zprávy.
-
-Proto minimalizuj obsah:
-
-- notifikace má říct „export je hotový“, ne přiložit obsah exportu,
-- sdílení obrazovky nabídni s připomínkou zavřít citlivá okna,
-- nahrávku mikrofonu ukládej jen tam, kde ji uživatel čeká,
-- clipboard import ukaž v náhledu před uložením,
-- u geolokace preferuj přibližnou polohu, pokud přesná není nutná.
-
-Privacy-first produkt se neptá jen „máme souhlas?“. Ptá se také „co nejhoršího se stane, když se tahle informace objeví na špatném místě?“ To je méně sexy než animovaný prompt, ale podstatně užitečnější.
-
-## Checklist: oprávnění bez nátlaku
-
-- [ ] Má každé oprávnění jasný účel navázaný na konkrétní uživatelskou akci?
-- [ ] Nežádáme o citlivá oprávnění hned při načtení stránky?
-- [ ] Má uživatel před promptem krátké lidské vysvětlení?
-- [ ] Existuje alternativa bez daného oprávnění, pokud je realistická?
-- [ ] Stav `denied` má srozumitelnou zprávu a nevede k opakovanému obtěžování?
-- [ ] `Permissions-Policy` vypíná schopnosti, které web nepotřebuje?
-- [ ] Vložené iframe prvky mají zkontrolovaný `allow` atribut?
-- [ ] Notifikace, nahrávky a náhledy neobsahují zbytečně citlivý obsah?
-- [ ] Oprávnění a související data mají jasnou retenci?
-- [ ] Support ví, jak poradit se zapnutím, odmítnutím i alternativní cestou?
-
-## Mini šablona permission karty
+Lépe:
 
 ```text
-# Permission karta: [funkce / oprávnění]
-
-## Účel
-Oprávnění:
-Uživatelská akce, která žádost spouští:
-Proč je oprávnění potřeba:
-Alternativa bez oprávnění:
-
-## Data
-Jaká data vznikají:
-Kam se ukládají:
-Kdo k nim má přístup:
-Retence:
-Zobrazení v notifikacích / náhledech:
-
-## UX
-Text před promptem:
-Stav při odmítnutí:
-Návod na pozdější zapnutí:
-Frekvence opakované žádosti:
-
-## Technická kontrola
-Permissions-Policy:
-Iframe allow atributy:
-Logování chyb:
-Test v podporovaných prohlížečích:
-
-## Revize
-Vlastník:
-Datum kontroly:
-Důvod ponechání oprávnění:
+cache_key = "tenant:{tenant_id}:dashboard:monthly-summary:{month}"
 ```
 
-Prohlížečová oprávnění jsou užitečná, když respektují kontext. Nejsou to laciné growth hacky, nejsou to automatické vstupenky k citlivým datům a rozhodně nejsou něco, co se má na uživatele vystřelit dřív než první věta produktu. Dobré oprávnění je jako dobrý servisní zásah: jasný účel, minimální rozsah, možnost odmítnout a žádné překvapení v rohu obrazovky.
+Podobně u background jobů: job musí dostat tenant ID jako explicitní vstup, ne si ho „nějak dopočítat“ z globálního stavu. Fronta neví, pro koho pracuje, pokud jí to neřekneš. A když to neví fronta, velmi brzy to neví ani logy, retry mechanismus a člověk, který ladí incident.
+
+Kontroluj hlavně:
+
+- cache klíče obsahují tenant ID nebo bezpečný scope,
+- job payload obsahuje tenant ID a resource ID,
+- retry jobu znovu ověřuje oprávnění nebo stav,
+- fulltext index ukládá tenant scope,
+- soubory v objektovém úložišti nejsou dostupné jen podle předvídatelné cesty,
+- dočasné odkazy mají krátkou expiraci a scope.
+
+## Support a admin přístup nejsou výjimka z reality
+
+Support někdy potřebuje pomoci zákazníkovi. To ale neznamená, že support UI má být univerzální rentgen celého produktu. Privacy-first support přístup má být omezený, zdůvodněný a auditovaný.
+
+Dobrá pravidla:
+
+- Support vidí jen ten tenant, který právě řeší.
+- Přístup k citlivým datům je maskovaný nebo vyžaduje dodatečné oprávnění.
+- Každý zásah má důvod: ticket, incident, zákaznická žádost.
+- Impersonace uživatele je výjimečná, časově omezená a viditelně označená.
+- Auditní log ukládá akci supportu, ne celý obsah zákaznických dat.
+
+Pokud support potřebuje „na chvíli admina do všeho“, není to argument pro široký přístup. Je to signál, že produkt nemá dobré interní nástroje. Široký přístup je nejrychlejší řešení jen do chvíle, než se ptáš, kdo viděl cizí fakturu.
+
+## Testuj sousedského útočníka
+
+Tenant isolation nejde ověřit jen ručním klikáním v jednom účtu. Potřebuješ testy se dvěma tenanty, dvěma uživateli a objekty, které se nesmí potkat.
+
+Minimální testovací sada:
+
+- Uživatel z tenant A nedostane detail objektu tenant B.
+- Uživatel z tenant A nemůže upravit objekt tenant B přes API.
+- Export tenant A neobsahuje řádek tenant B.
+- Search tenant A nenajde dokument tenant B.
+- Cache po přepnutí tenantů nevrátí starý obsah.
+- Webhook tenant A nepošle payload pro tenant B.
+- Support role bez důvodu neuvidí citlivý detail tenant B.
+
+OWASP Authorization Regression Testing doporučuje převést přístupový model do regresních testů, protože změny v logice, cache nebo dotazech umí omylem otevřít přístup přes hranice. Přeloženo do řeči malého týmu: napiš test, který se chová jako zvědavý soused. Je levnější než vysvětlovat incident.
+
+## Checklist: tenant isolation bez průhledů
+
+- [ ] Máme jasně definovaný tenant ID a nepoužíváme náhodné náhražky?
+- [ ] Každý endpoint ověřuje actor, resource, action a tenant scope?
+- [ ] Databázové dotazy mají tenant filtr nebo izolaci na nižší vrstvě?
+- [ ] Cache klíče obsahují tenant scope tam, kde hrozí sdílený výsledek?
+- [ ] Background joby nesou tenant ID explicitně v payloadu?
+- [ ] Exporty, reporty a fulltext používají stejná pravidla jako UI/API?
+- [ ] Objektové úložiště a dočasné odkazy nejsou předvídatelné ani globální?
+- [ ] Support/admin přístup je omezený, zdůvodněný a auditovaný?
+- [ ] Testy pokrývají pokus číst a měnit objekt jiného tenanta?
+- [ ] Incident runbook ví, jak prověřit možný cross-tenant přístup?
+
+## Mini šablona tenant isolation karty
+
+```text
+# Tenant isolation karta: [produkt / oblast]
+
+## Hranice
+Tenant ID:
+Typy actorů:
+Typy resource:
+Citlivé akce:
+
+## Datová vrstva
+Databázový model izolace:
+Povinné tenant filtry:
+Výjimky a důvod:
+Fulltext / analytické indexy:
+
+## Aplikační vrstva
+Autorizační pravidla:
+Endpointy s vyšším rizikem:
+Exporty a reporty:
+Background joby:
+Cache klíče:
+
+## Soubory a integrace
+Objektové úložiště:
+Dočasné odkazy:
+Webhooky:
+Externí integrace:
+
+## Admin a support
+Role se zvýšeným přístupem:
+Důvodování zásahů:
+Auditní události:
+Maskování citlivých dat:
+
+## Testy
+Cross-tenant read testy:
+Cross-tenant write testy:
+Export/search/cache testy:
+Poslední kontrola:
+```
+
+Tenant isolation není enterprise luxus. Je to základní slib každého SaaS: tvoje data jsou tvoje data, ne náhodná položka v sousedově dashboardu. Čím dřív tenhle slib přepíšeš do modelu, kódu, testů a support procesu, tím méně budeš spoléhat na štěstí. A štěstí je v bezpečnosti pěkná dekorace, ale mizerná architektura.
 
 ## Zdroje
 
-- [MDN: Using the Permissions API](https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API/Using_the_Permissions_API)
-- [MDN: Permissions API](https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API)
-- [MDN: Permissions Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Permissions_Policy)
-- [MDN: Permissions-Policy camera directive](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Permissions-Policy/camera)
-- [MDN: MediaDevices.getUserMedia()](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia)
+- [OWASP: Multi-Tenant Application Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multi_Tenant_Security_Cheat_Sheet.html)
+- [OWASP API Security Top 10 2023: API1 Broken Object Level Authorization](https://api-security.owasp.org/editions/2023/en/0xa1-broken-object-level-authorization/)
+- [OWASP: Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)
+- [OWASP: Authorization Regression Testing Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Regression_Testing_Cheat_Sheet.html)
+- [AWS SaaS Architecture Fundamentals: Tenant isolation](https://docs.aws.amazon.com/whitepapers/latest/saas-architecture-fundamentals/tenant-isolation.html)
 
 # Pracovní log
 
-- 2026-10-06: Doplněna příloha „Prohlížečová oprávnění bez permission pop-up cirkusu“ s inventářem citlivých schopností, UX pravidly pro žádosti, alternativami při odmítnutí, `Permissions-Policy`, minimalizací obsahu, checklistem, permission kartou a ověřenými zdroji MDN.
+- 2026-10-06: Doplněna příloha „Tenant isolation bez sousedských průhledů v SaaS“ s definicí tenant hranic, propagací tenant kontextu, objektovou autorizací, cache/frontami, support přístupem, cross-tenant testy, checklistem, tenant isolation kartou a ověřenými zdroji OWASP a AWS.
 - 2026-10-06: Doplněna příloha „Release notes a changelog bez marketingové mlhy“ s rozlišením interního changelogu a zákaznických release notes, kategoriemi změn, zvláštním značením privacy dopadů, verzováním, napojením na podporu a obchod, checklistem, šablonou release poznámky a ověřenými zdroji Keep a Changelog, SemVer a OWASP.
 - 2026-10-05: Doplněna příloha „Datový slovník a klasifikace polí bez štítkovacího divadla“ s praktickým modelem klasifikace polí, pravidly pro logy, analytiku, support UI, exporty, AI zpracování, pseudonymizaci, checklistem, datovou kartou pole a ověřenými zdroji GDPR, OWASP a ENISA.
 - 2026-10-05: Doplněna příloha „Právní a provozní stránky bez copy-paste mlhy“ s inventářem zásad ochrany soukromí, podmínek, DPA, subprocesorů a bezpečnostních kontaktů, napojením dokumentů na datovou mapu, pravidly verzování změn, checklistem, šablonou transparentnosti a ověřenými zdroji GDPR, Evropské komise a EDPB.
