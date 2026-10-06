@@ -47304,7 +47304,224 @@ Tím chráníš data, účetní proces i vlastní nervy. Trojkombinace, která s
 - NIST: SP 800-61 Rev. 3, Incident Response Recommendations and Considerations for Cybersecurity Risk Management — https://csrc.nist.gov/pubs/sp/800/61/r3/final
 - European Commission: Principles of the GDPR — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 
+
+# Příloha: Rate limiting a cache bez drahého přetížení
+
+Rate limiting a cache se často berou jako technické detaily, které „někdo nastaví na proxy“. Jenže v malém SaaS jsou to hlavně produktové a provozní brzdy: chrání dostupnost, rozpočet, důvěru zákazníků a někdy i soukromí. Když API dovolí nekonečné dotazy, exporty, uploady nebo SMS reset hesla, problém není jen výkon. Problém je, že produkt neumí říct „dost“ ve správný moment.
+
+Codyho komentář: Limit není nepřátelský. Nepřátelský je účet za cloud, který v pondělí ráno vypadá jako výkupné napsané tabulkou.
+
+## Nejdřív pojmenuj drahé akce
+
+Neomezuj všechno stejně. Nejprve si napiš seznam akcí, které spotřebovávají výrazné zdroje nebo spouštějí cizí náklady.
+
+Typicky:
+
+- přihlášení, reset hesla, MFA a posílání kódů,
+- vyhledávání přes velké tabulky nebo externí index,
+- exporty PDF, CSV, ZIP a účetních balíčků,
+- uploady a převody obrázků nebo dokumentů,
+- AI sumarizace, embeddings a volání modelů,
+- webhook retry, synchronizace s CRM a importy,
+- veřejné endpointy bez přihlášení,
+- GraphQL dotazy, batch operace a endpointy s parametrem `limit`.
+
+Ke každé akci doplň tři otázky: kdo ji smí spustit, kolik stojí jeden běh a jaká škoda vznikne při tisíci bězích za minutu. Pokud neumíš odpovědět, nemáš rate limit. Máš jen naději v helmě.
+
+## Limituj podle identity, účelu a ceny
+
+Jeden globální limit typu „100 requestů za minutu“ je lepší než nic, ale rychle narazí. Běžný uživatel, administrátor, veřejný formulář a interní worker nemají stejné riziko. Limit má odpovídat tomu, co se chrání.
+
+Praktický model:
+
+- **IP limit** pro veřejné formuláře a neautentizované endpointy. Pomáhá proti základnímu šumu, ale není identita.
+- **Uživatelský limit** pro akce navázané na účet: reset hesla, změna e-mailu, export, AI akce.
+- **Tenant limit** pro B2B SaaS, aby jeden zákazník nespálil kapacitu celé služby.
+- **Operation limit** pro konkrétní drahé operace, například `generate_invoice_pdf` nebo `send_mfa_code`.
+- **Cost limit** pro volání s přímým dopadem na peníze: SMS, e-mailové dávky, AI tokeny, externí API.
+
+Příklad: export kontaktů může mít limit „3 exporty na uživatele za hodinu“, „20 exportů na tenant za den“, „max 50 000 řádků na export“ a „jeden aktivní export současně“. To není byrokracie. To je rozdíl mezi samoobsluhou a tlačítkem „vytěž databázi do mdlob“.
+
+## Vrať férovou odpověď, ne tajemnou chybu
+
+Když limit zasáhne, uživatel má vědět, co se stalo a co může udělat dál. Stav `429 Too Many Requests` je technicky správný, ale sám o sobě nestačí. Produktová odpověď má vysvětlit limit bez zbytečného prozrazování interních pravidel.
+
+Dobrá odpověď:
+
+```http
+HTTP/1.1 429 Too Many Requests
+Retry-After: 120
+Content-Type: application/json
+```
+
+```json
+{
+  "error": "rate_limited",
+  "message": "Export už běží nebo byl spuštěn příliš často. Zkuste to prosím za dvě minuty.",
+  "retry_after_seconds": 120
+}
+```
+
+U bezpečnostních toků buď opatrnější. Reset hesla nesmí prozradit, zda účet existuje. Tam může být odpověď obecná: „Pokud e-mail existuje, poslali jsme instrukce. Další pokus bude možný později.“ Interní log si uloží důvod limitu, ale uživateli neukazuje mapu obrany.
+
+## Cache není skládka odpovědí
+
+Cache zrychluje web a šetří server, ale špatně nastavená cache umí naservírovat personalizovanou odpověď cizímu člověku. Proto vždy rozlišuj veřejný obsah, privátní obsah a citlivý obsah.
+
+Základní pravidla:
+
+- Veřejné statické assety verzuj v názvu a nastav dlouhou cache, například `Cache-Control: public, max-age=31536000, immutable`.
+- Veřejné HTML stránky cachuj krátce nebo s revalidací, pokud se často mění.
+- Personalizované odpovědi označ `Cache-Control: private` nebo je vůbec nesdílej přes shared cache.
+- Citlivé odpovědi jako session detail, faktury, exporty a administrace používej s `Cache-Control: no-store`.
+- Pokud odpověď závisí na hlavičce, jazyku nebo autentizaci, nastav správné `Vary` a otestuj chování přes proxy/CDN.
+
+Privacy-first poznámka: cache je datové zpracování. Když do ní ukládáš odpověď s osobními údaji, musíš vědět, kde leží, jak dlouho tam zůstane, kdo k ní má přístup a jak ji smažeš. „Je to jen cache“ není právní ani technická omluva. Je to věta, která se říká těsně před incidentem.
+
+## Chraň cache před razítkem davu
+
+Při expiraci populární cache položky může najednou sto požadavků spadnout na origin server. Tomu se říká cache stampede a malé týmy to často poznají jako „divný výpadek po deployi“.
+
+Ochranné vzory:
+
+- **Stale-while-revalidate**: uživatel dostane krátce zastaralou odpověď, zatímco jeden proces obnoví cache.
+- **Request coalescing**: více stejných požadavků čeká na jeden výpočet místo paralelního útoku na databázi.
+- **Jitter u expirace**: položky neexpirují všechny přesně ve stejnou sekundu.
+- **Lock s krátkým timeoutem**: jen jeden worker obnovuje drahou položku.
+- **Fallback na poslední bezpečnou hodnotu**: u veřejných agregovaných statistik je lepší starší údaj než pád celé stránky.
+
+Nepoužívej ale stale data tam, kde by změnila práva nebo peníze: role uživatele, stav zaplacené faktury, dostupnost citlivého dokumentu nebo výsledek bezpečnostní kontroly musí být ověřené čerstvě.
+
+## Limity nastav i na parametry, nejen na počet requestů
+
+Útočník nebo nešťastný integrátor nemusí poslat milion requestů. Někdy stačí jeden požadavek s `limit=1000000`, obřím JSON polem, hlubokým GraphQL dotazem nebo exportem „všechno od roku 2012“.
+
+Bezpečné minimum:
+
+- maximální velikost request body,
+- maximální počet položek v poli,
+- maximální délka textových polí,
+- maximální stránka nebo cursor okno,
+- maximální hloubka a komplexita GraphQL dotazu,
+- maximální počet paralelních běžících exportů,
+- timeout pro databázový dotaz a externí volání,
+- rozumný limit velikosti odpovědi.
+
+Příklad pro seznam objednávek: `limit` může přijmout jen hodnoty 25, 50 nebo 100. Export nad 10 000 řádků neběží synchronně, ale jako background job s notifikací a retenční lhůtou. Vyhledávání má minimální délku dotazu a tenant scope vždy před filtrem.
+
+## Sleduj spotřebu bez sledování lidí
+
+Rate limiting nepotřebuje detailní profil člověka. Potřebuje agregované signály: počet pokusů, typ operace, tenant, časové okno, výsledek a odhad nákladu.
+
+Loguj například:
+
+```text
+rate_limit_hit operation=export_csv tenant_hash=7f3a window=1h retry_after=600 actor_role=admin
+```
+
+Neloguji:
+
+- celý vyhledávací dotaz, pokud může obsahovat osobní údaje,
+- obsah exportu,
+- telefonní číslo pro SMS reset,
+- e-mail v čitelné podobě, pokud stačí hash nebo interní ID,
+- kompletní odpověď externí služby.
+
+Pro provozní dashboard stačí trendy: top limitované operace, počet zásahů podle tenantů, p95 latence drahých endpointů, počet odmítnutých exportů a odhad ušetřených nákladů. Pokud někdo potřebuje detail, ať má oprávnění a důvod.
+
+## Příklad: AI sumarizace dokumentů v B2B SaaS
+
+Funkce: uživatel nahraje dokument a AI vytvoří shrnutí pro interní tým.
+
+Bez limitů: uživatel nahraje stovky souborů, fronta se naplní, náklady na AI vyletí a support hledá, kdo „rozbil produkci“.
+
+Lepší návrh:
+
+- Max velikost souboru: 10 MB.
+- Max počet stran: 80.
+- Max 5 aktivních sumarizací na tenant.
+- Denní budget tenantů podle tarifu.
+- Jeden dokument má stabilní `summary_job_key`, aby opakovaný klik nespustil další placený běh.
+- Výstup se ukládá odděleně od původního dokumentu a má vlastní retenci.
+- Log obsahuje počet stran, velikost, model kategorii a cenu v interních jednotkách, ne obsah dokumentu.
+- Při dosažení limitu UI nabídne frontu, upgrade nebo kontakt na podporu podle obchodního modelu.
+
+Tím se z magického AI tlačítka stane provozovatelná funkce. Méně kouzel, více spánku.
+
+## Checklist: rate limiting a cache bez drahého přetížení
+
+- [ ] Máme seznam drahých operací a jejich vlastníků.
+- [ ] Každá drahá operace má limit podle uživatele, tenantu nebo účelu.
+- [ ] Veřejné endpointy mají IP a abuse ochranu, ale nespoléhají na IP jako identitu.
+- [ ] Citlivé bezpečnostní toky neprozrazují existenci účtu.
+- [ ] Endpointy mají limity na velikost payloadu, stránkování, batch a timeouty.
+- [ ] Exporty, AI akce a převody souborů běží přes frontu s idempotencí.
+- [ ] `429` odpovědi jsou srozumitelné a obsahují rozumný `Retry-After`, kde to dává smysl.
+- [ ] Veřejná cache, privátní cache a `no-store` odpovědi jsou jasně rozdělené.
+- [ ] Personalizovaná data se nedostávají do sdílené cache.
+- [ ] Cache chráníme proti stampede a po deployi máme bezpečný fallback.
+- [ ] Logujeme zásahy limitů bez obsahu požadavků a bez zbytečných osobních údajů.
+- [ ] Nákladové alerty existují pro externí API, SMS, e-mail a AI služby.
+
+## Mini šablona limit a cache karty
+
+```markdown
+# Limit a cache karta: [operace / endpoint]
+
+## Účel
+- Co operace dělá:
+- Pro koho je určená:
+- Proč je nákladná nebo riziková:
+
+## Limity
+- Limit podle IP:
+- Limit podle uživatele:
+- Limit podle tenantu:
+- Limit podle operace:
+- Denní/tarifní budget:
+
+## Parametry
+- Max request body:
+- Max počet položek:
+- Max stránkování:
+- Timeout:
+- Paralelní běhy:
+
+## Cache
+- Typ odpovědi: veřejná / privátní / citlivá
+- `Cache-Control`:
+- `Vary`:
+- Expirace a jitter:
+- Co se nikdy necachuje:
+
+## Chování při limitu
+- HTTP status:
+- Uživatel vidí:
+- Interní log obsahuje:
+- Kdo řeší opakované zásahy:
+
+## Privacy
+- Jaké osobní údaje operace čte:
+- Co se nesmí logovat:
+- Retence cache a metrik:
+- Jak se data smažou při výmazu účtu:
+
+## Testy
+- Opakovaný klik:
+- Paralelní requesty:
+- Obří payload:
+- Cizí tenant:
+- Cache po změně oprávnění:
+```
+
+## Zdroje
+
+- OWASP API Security Top 10: API4:2023 Unrestricted Resource Consumption — https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/
+- MDN Web Docs: HTTP caching — https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching
+- OWASP Cheat Sheet Series: Denial of Service Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Denial_of_Service_Cheat_Sheet.html
+
 # Pracovní log
+- 2026-10-06: Doplněna příloha „Rate limiting a cache bez drahého přetížení“ s mapou drahých operací, limity podle identity/tenantu/nákladů, férovými 429 odpověďmi, bezpečným cachováním, ochranou proti cache stampede, parametrovými limity, privacy-first provozními metrikami, příkladem AI sumarizace, checklistem, limit/cache kartou a ověřenými zdroji OWASP a MDN.
 - 2026-10-06: Doplněna příloha „Plánované úlohy a background joby bez tichých katastrof“ s praktickým rozdělením background práce, bezpečným rozsahem jobů, idempotencí cronů, retry/dead-letter politikou, časovými zónami, observabilitou bez obsahu, ručními zásahy, příkladem měsíčního exportu faktur, checklistem, job kartou a ověřenými zdroji OWASP, NIST a Evropské komise.
 - 2026-10-06: Doplněna příloha „AI konektory bez oprávnění ke všemu“ s praktickým modelem čtení/návrh/provedení, scopingem konektorů, ochranou proti prompt injection z externího obsahu, tvrdými branami pro citlivé akce, auditním logováním, testy zneužití, checklistem, AI konektor kartou a ověřenými zdroji OWASP, NIST a ENISA.
 - 2026-10-06: Doplněna příloha „API klíče a tokeny bez úniku do logů, promptů a screenshotů“ s klasifikací tajemství, least-privilege scopingem, bezpečným uložením, AI hranicí bez klíčů v promptech, rotací, maskováním logů, checklistem, secret kartou a ověřenými zdroji OWASP a NIST.
