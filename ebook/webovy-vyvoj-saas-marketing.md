@@ -48518,7 +48518,196 @@ Když vyjde kritická zranitelnost v PDF knihovně, tým musí umět během minu
 - [OWASP: Software Component Verification Standard](https://owasp.org/www-project-software-component-verification-standard/) — doporučení pro ověřování softwarových komponent a jejich rizik.
 
 
+# Příloha: DPIA-lite pro malé produktové změny bez právního mlžení
+
+DPIA, tedy posouzení vlivu na ochranu osobních údajů, zní jako dokument, který se vynoří až ve chvíli, kdy má firma právní oddělení, compliance tým a kávovar s vlastní roadmapou. Jenže privacy-first produkt potřebuje menší verzi téhle disciplíny mnohem dřív: při novém formuláři, importu dat, AI funkci, integraci CRM, rozšíření analytiky nebo změně retenčních pravidel.
+
+GDPR v článku 35 vyžaduje DPIA před zpracováním, které pravděpodobně povede k vysokému riziku pro práva a svobody lidí, zejména s ohledem na povahu, rozsah, kontext a účely zpracování ([EUR-Lex: Regulation 2016/679, Article 35](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679)). EDPB k DPIA vysvětluje, že pomáhá organizacím identifikovat a řídit rizika pro osobní údaje lidí, a že pokud vysoké riziko nejde vhodně zmírnit, je potřeba předem konzultovat dozorový úřad ([EDPB: Data protection impact assessment](https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/data-protection-impact-assessment_en)).
+
+Pro malý web nebo SaaS z toho neplyne, že každá úprava potřebuje plnohodnotný právní román. Plyne z toho, že tým má umět včas poznat změny, které už nejsou jen „přidali jsme políčko“. DPIA-lite je krátká pracovní karta pro produktový a technický tým. Ne nahrazení právního posouzení, ale praktická brzda před tím, než se z dobrého nápadu stane datový bagr.
+
+> Codyho komentář: DPIA-lite není papír pro šuplík. Je to moment, kdy se tým zeptá: „Kdybych byl člověk, jehož data tady zpracujeme, přišlo by mi to fér, nutné a vysvětlitelné?“ Překvapivě levná otázka. Škoda, že se tak často pokládá až po deployi.
+
+## Kdy stačí DPIA-lite a kdy zvednout ruku
+
+DPIA-lite použij u změn, které pracují s osobními údaji, ale zatím nevypadají jako zjevně vysoké riziko. Cílem je rychle vyjasnit účel, data, rizika a ochranná opatření. Pokud karta ukáže vysoké riziko, citlivé údaje, rozsáhlé profilování nebo nejasný právní základ, není to signál „napiš hezčí text“. Je to signál přizvat DPO, právníka nebo odpovědnou osobu pro ochranu dat.
+
+Typické situace pro DPIA-lite:
+
+- přidáváš nové pole do formuláře nebo onboardingu,
+- propojuješ produkt s CRM, helpdeskem, fakturací nebo AI konektorem,
+- zavádíš nové produktové eventy nebo diagnostické logy,
+- měníš retenční dobu dat,
+- posíláš data novému dodavateli,
+- spouštíš automatické skórování leadů, rizik nebo priorit,
+- umožňuješ export, sdílení nebo import zákaznických dat,
+- rozšiřuješ oprávnění interních rolí.
+
+Naopak plnohodnotné posouzení řeš hned, pokud změna zahrnuje systematické a rozsáhlé hodnocení osob, citlivé kategorie údajů, biometriku, monitoring lidí ve velkém rozsahu, významné automatizované rozhodování nebo kombinaci datových zdrojů, která může člověka reálně poškodit. Tady už nejsme u produktové poznámky. Tady se hraje o důvěru, práva lidí a někdy i povinnost konzultace.
+
+## Začni účelem, ne seznamem dat
+
+Nejčastější chyba je začít větou: „Budeme sbírat X, Y a Z.“ Správnější začátek je: „Potřebujeme vyřešit tento konkrétní problém.“ Účel rozhoduje, která data jsou přiměřená. Bez účelu se minimalizace mění v dekoraci.
+
+Příklad:
+
+```text
+Slabě: Přidáme datum narození do registrace.
+Lépe: Potřebujeme ověřit, zda uživatel splňuje věkový limit pro konkrétní službu.
+Ještě lépe: Potřebujeme ověřit splnění věkového limitu bez ukládání celého data narození, pokud nám stačí odpověď ano/ne.
+```
+
+U každého údaje si napiš:
+
+- Proč ho potřebujeme právě teď?
+- Dá se účel splnit méně přesným údajem?
+- Dá se údaj zpracovat lokálně, agregovaně nebo dočasně?
+- Kdo ho opravdu musí vidět?
+- Kdy ho smažeme?
+- Co se stane, když ho nebudeme sbírat vůbec?
+
+Privacy-first produkt se neptá „co všechno by se mohlo hodit“. Ptá se „co je nejmenší férové množství dat pro slíbený výsledek“. To je rozdíl mezi službou a datovým syslením.
+
+## Riziko popiš lidsky
+
+Riziko není jen „porušení GDPR“. To je důsledek pro firmu. DPIA-lite má popsat dopad na člověka.
+
+Příklady rizik:
+
+- zákazník odešle citlivé informace do běžného kontaktního formuláře,
+- interní uživatel uvidí data klienta, kterého nemá řešit,
+- AI sumarizace vloží zákaznický obsah do nástroje mimo domluvený režim,
+- diagnostický log zachytí osobní údaje nebo token,
+- export zůstane dostupný déle, než uživatel čeká,
+- kombinace produktových eventů umožní nepřiměřené profilování,
+- zákazník nedokáže zjistit, kde data skončila a jak je smazat.
+
+Riziko piš jako větu:
+
+```text
+Pokud se stane X, člověku může vzniknout Y dopad, protože Z.
+```
+
+Například:
+
+```text
+Pokud uložíme celý obsah support ticketu do analytického eventu, může se citlivá informace dostat k lidem a dodavatelům mimo support proces, protože analytika má širší přístup a delší retenci než helpdesk.
+```
+
+Taková věta bolí trochu víc než „riziko: střední“. A přesně proto je užitečná.
+
+## Opatření mají měnit systém, ne jen uklidnit svědomí
+
+Dobré opatření není „budeme opatrní“. Dobré opatření změní návrh, přístup, retenci nebo technickou ochranu.
+
+Praktická opatření:
+
+- odstranit pole, které není nutné,
+- nahradit přesný údaj hrubší kategorií,
+- pseudonymizovat identifikátor v analytice,
+- oddělit provozní logy od produktových eventů,
+- zkrátit retenci exportů a přidat automatické mazání,
+- omezit přístup podle role a tenantu,
+- nastavit maskování osobních údajů v logu,
+- přidat lidské schválení před citlivou automatizovanou akcí,
+- doplnit vysvětlení pro uživatele v místě sběru dat,
+- přidat test, který zabrání odesílání zakázaných polí do třetí strany.
+
+EDPB u privacy by design and by default zdůrazňuje, že ochrana dat má být zabudovaná do systémů od začátku a výchozí nastavení má chránit osobní údaje lidí; nejde o jednorázovou akci, ale o průběžný proces s kontrolami ([EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)). To je přesně důvod, proč má DPIA-lite patřit do návrhu změny, ne do omluvného dokumentu po incidentu.
+
+## Příklad: AI třídění support ticketů
+
+Produktový nápad: automaticky navrhnout prioritu support ticketu a doporučit tým, který ho má řešit.
+
+Rychlé DPIA-lite shrnutí:
+
+- **Účel:** zkrátit první triáž supportu a rychleji dostat urgentní případy ke správnému člověku.
+- **Data:** předmět ticketu, text zprávy, typ zákazníka, produktová oblast, bez příloh v první verzi.
+- **Nepotřebujeme:** fakturační historii, kompletní profil uživatele, marketingové eventy ani obsah jiných ticketů.
+- **Riziko:** zákazník může do ticketu vložit citlivé údaje a AI konektor by je mohl zpracovat mimo očekávaný support režim.
+- **Opatření:** před odesláním odstranit přílohy, maskovat e-maily a tokeny, neposílat data do tréninku modelu, ukládat jen návrh priority a důvod v krátké podobě, ne automatické rozhodnutí.
+- **Lidská kontrola:** agent supportu prioritu potvrzuje nebo upravuje.
+- **Retence:** návrhy priority držet jen po dobu životnosti ticketu nebo kratší interní lhůtu.
+- **Stop stav:** pokud model navrhuje akci s dopadem na SLA nebo účet zákazníka bez člověka, změna se zastaví a řeší se plné posouzení.
+
+Tohle je přesně typ změny, kde DPIA-lite pomůže. Nezabije užitečnou automatizaci, ale nastaví mantinely dřív, než se z „AI pomůže supportu“ stane „AI čte všechno a nikdo neví proč“.
+
+## Zapoj produkt, techniku i provoz
+
+DPIA-lite nesmí psát jen právník, protože ten často nevidí technické detaily. Nesmí ho psát jen vývojář, protože ten zase nemusí vidět očekávání zákazníka a právní rizika. Nejlepší je krátká společná karta.
+
+Minimální role:
+
+- produkt řekne účel a očekávaný přínos,
+- vývoj popíše tok dat a technická opatření,
+- provoz nebo bezpečnost doplní logy, přístupy, retenci a monitoring,
+- odpovědná osoba pro data určí, zda stačí DPIA-lite, nebo je potřeba hlubší posouzení.
+
+V malém týmu může být více rolí v jedné osobě. To je v pořádku. Nesmí ale zmizet otázky. Jedna osoba může nosit dvě čepice, ale neměla by kvůli tomu přestat vidět rizika. Ano, čepice jsou v compliance překvapivě důležité.
+
+## Checklist: DPIA-lite před změnou
+
+- [ ] Umíme jednou větou popsat účel změny.
+- [ ] Víme, které osobní údaje změna sbírá, čte, ukládá nebo posílá dál.
+- [ ] U každého údaje máme důvod a ověřili jsme méně datovou alternativu.
+- [ ] Víme, kdo k datům získá přístup interně i u dodavatelů.
+- [ ] Popsali jsme rizika jako dopad na člověka, ne jen jako firemní problém.
+- [ ] Máme konkrétní technická nebo organizační opatření.
+- [ ] Retence a mazání jsou jasné už v návrhu.
+- [ ] Logy, analytika a AI konektory nedostávají víc dat, než potřebují.
+- [ ] Uživatel dostane srozumitelné vysvětlení v místě, kde to dává smysl.
+- [ ] Víme, kdy změnu zastavit a předat k plnému posouzení.
+
+## Mini šablona DPIA-lite karty
+
+```markdown
+# DPIA-lite karta: [název změny]
+
+## Účel
+- Jaký problém řešíme:
+- Pro koho:
+- Co se stane, když změnu neuděláme:
+
+## Data
+- Jaké osobní údaje používáme:
+- Kde vznikají:
+- Kam se posílají:
+- Kdo k nim má přístup:
+- Jak dlouho je držíme:
+
+## Minimalizace
+- Které údaje jsme odstranili:
+- Které údaje jsme nahradili méně přesnou variantou:
+- Co záměrně neměříme nebo nelogujeme:
+
+## Rizika pro lidi
+- Riziko 1:
+- Riziko 2:
+- Riziko 3:
+
+## Opatření
+- Technická opatření:
+- Organizační opatření:
+- Uživatelské vysvětlení:
+- Test nebo kontrola před deployem:
+
+## Rozhodnutí
+- Stačí DPIA-lite: ano / ne
+- Kdo schválil:
+- Kdy znovu zkontrolovat:
+- Stop stav pro plné posouzení:
+```
+
+## Zdroje
+
+- [EUR-Lex: Regulation (EU) 2016/679 — Article 35](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679) — právní základ pro posouzení vlivu na ochranu osobních údajů.
+- [EDPB: Data protection impact assessment](https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/data-protection-impact-assessment_en) — přehled a guidance k DPIA včetně situací s vysokým rizikem.
+- [EDPB: Template for Data Protection Impact Assessment](https://www.edpb.europa.eu/our-work-tools/documents/public-consultations/2026/edpb-dpia-template_en) — konzultovaná šablona DPIA a explainer pro strukturovanou dokumentaci.
+- [EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en) — praktický rámec pro zabudování ochrany dat do návrhu a výchozích nastavení.
+
+
 # Pracovní log
+- 2026-10-06: Doplněna příloha „DPIA-lite pro malé produktové změny bez právního mlžení“ s praktickým rozlišením menší pracovní karty a plného posouzení, účelovou minimalizací dat, popisem rizik jako dopadu na člověka, konkrétními opatřeními, příkladem AI triáže supportu, checklistem, vyplnitelnou DPIA-lite kartou a ověřenými zdroji EUR-Lex a EDPB.
 - 2026-10-06: Doplněna příloha „Závislosti a SBOM bez knihovního minového pole“ s inventářem aplikačních, kontejnerových, CI a CDN závislostí, praktickým použitím SBOM, rizikovým tříděním aktualizací, schvalováním nových balíčků, licenční hygienou, B2B SaaS příkladem, checklistem, dependency kartou a ověřenými zdroji CISA, CycloneDX, OpenSSF a OWASP.
 - 2026-10-06: Doplněna příloha „Responzivní QA bez testování jen na obřím monitoru“ s kritickými mobilními cestami, kontrolou šířek a obsahových extrémů, formulářovým QA, výkonovými signály LCP/INP/CLS, testem bez myši, příkladem servisní landing page, checklistem, šablonou QA karty a ověřenými zdroji MDN, W3C a web.dev.
 - 2026-10-06: Doplněna příloha „AI evaluační sada bez úniku promptů a zákaznických dat“ s praktickým návrhem eval casů, syntetickými/anonymizovanými daty, skórováním pass/fail/review, prompt injection testy, B2B support příkladem, checklistem, eval kartou a ověřenými zdroji OWASP, NIST a EDPB.
