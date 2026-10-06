@@ -49147,196 +49147,174 @@ Když obsah potřebuje ke kliknutí trik, pravděpodobně nepotřebuje lepší m
 - [Sitemaps.org protocol](https://www.sitemaps.org/protocol.html) — standard pro sitemap XML a kanonické předávání veřejných URL vyhledávačům.
 - [EDPB: Guidelines on data protection by design and by default](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en) — rámec pro minimalizaci a ochranu dat už ve výchozím návrhu služby.
 
-# Příloha: Feature flagy a kill switche bez konfiguračního chaosu
+# Příloha: Kill switche a degradovaný režim bez panického vypínání
 
-Feature flag je malý vypínač s velkou odpovědností. Umí pustit novou funkci jen části uživatelů, schovat rozpracovanou změnu, omezit drahý experiment nebo rychle vypnout problém bez kompletního deploye. Jenže když se flagy nechají růst bez pravidel, z produktu se stane adventní kalendář: za každým okénkem jiná kombinace chování a nikdo už neví, proč tam vlastně je.
+Kill switch není totéž co běžný feature flag. Feature flag pomáhá řídit dostupnost funkce. Kill switch je nouzová brzda pro chvíli, kdy funkce ohrožuje dostupnost, rozpočet, data nebo důvěru zákazníků. Dobře navržený kill switch nevypíná celý produkt, ale konkrétní rizikovou akci a nabídne bezpečný degradovaný režim.
 
-Privacy-first přístup k feature flagům není jen o technické čistotě. Je o tom, aby konfigurace neodhalovala citlivé segmenty, aby experimenty nesbíraly zbytečná data a aby nouzové vypínače nepřepisovaly sliby dané zákazníkům. Flag má být kontrolovaný provozní nástroj, ne tajný druhý produktový plán.
+Privacy-first provoz potřebuje kill switche právě proto, že nechce řešit incidenty hromadným sběrem dat, chaotickým vypínáním služeb nebo ručními zásahy bez auditní stopy. Když víš předem, co se při problému vypne, co uživatel uvidí a jak se systém vrátí zpět, chráníš zákazníka i tým. A taky snižuješ počet pátečních večerů, kdy někdo hledá „ten config někde v adminu“.
 
-> Codyho komentář: Feature flag je jako jistič. Skvělý, když víš, co vypíná. Děsivý, když je popsaný „nová věc 2 final fakt už poslední“.
+> Codyho komentář: Nouzová brzda je skvělá věc. Ale jen pokud je popsaná, dostupná a nezastaví ti zároveň vlak, nádraží i kávovar strojvedoucího.
 
-## Rozliš typ flagu dřív, než ho přidáš
+## Nejdřív urči, co se smí rozbít méně
 
-Ne každý flag má stejný účel. Když je všechny pojmenuješ stejně a uložíš do jedné hromady, začneš míchat release řízení, produktové varianty, provozní brzdy a nouzové zásahy. To je recept na incident, který se tváří jako flexibilita.
+Degradovaný režim znamená, že systém při problému záměrně nabídne méně funkcí, ale zachová nejdůležitější hodnotu. Cílem není předstírat, že se nic neděje. Cílem je zabránit kaskádovému selhání a říct uživateli pravdu bez zbytečného dramatu.
 
-Praktické dělení:
+Rozděl funkce podle priority:
 
-- release flag: dočasně skrývá novou funkci během vývoje nebo postupného nasazení,
-- experiment flag: porovnává varianty produktu nebo textu,
-- permission flag: zapíná funkci podle tarifu, role nebo smluvního rozsahu,
-- ops flag: omezuje drahou nebo rizikovou část systému při zátěži,
-- kill switch: rychle vypíná funkci při incidentu.
+- kritické: přihlášení, bezpečnost, platby, přístup k vlastním datům,
+- důležité: hlavní pracovní flow, exporty, notifikace, vyhledávání,
+- pohodlné: doporučení, preview, AI asistence, automatické enrichmenty,
+- odložitelné: reporty, dávkové synchronizace, marketingové automatizace.
 
-Každý typ potřebuje jinou životnost. Release flag má zmizet brzy po stabilním nasazení. Experiment flag má skončit rozhodnutím. Permission flag je součást obchodního kontraktu a musí být testovaný jako autorizace. Kill switch musí být jednoduchý, zdokumentovaný a dostupný i ve stresu.
+Kill switch se často hodí pro pohodlné a odložitelné části. U kritických funkcí je lepší mít připravený fallback než prosté vypnutí. Například: když spadne generování PDF faktur, zákazník má pořád vidět fakturační údaje a dostat informaci, že PDF dorazí později.
 
-## Název flagu má nést účel, ne interní vtip
+## Nouzovou brzdu navrhuj podle spouštěče
 
-Dobré pojmenování šetří čas při incidentu. Název má říct, čeho se flag týká, jaký má směr a jestli je dočasný.
+Kill switch nemá být tlačítko „něco je špatně“. Musí mít jasný spouštěč, aby se lidé nehádali uprostřed incidentu.
 
-Lepší názvy:
+Typické spouštěče:
 
-- `billing_invoice_pdf_v2_enabled`,
-- `ai_summary_generation_kill_switch`,
-- `support_ticket_import_rollout_percent`,
-- `checkout_new_copy_experiment`,
-- `tenant_export_feature_enabled`.
+- chyba externí služby ohrožuje hlavní tok,
+- fronta roste rychleji, než se zpracovává,
+- AI nebo API náklady překročí denní limit,
+- roste počet chybových odpovědí pro konkrétní endpoint,
+- detekuješ možnost úniku nebo záměny dat,
+- integrace posílá neplatné nebo duplicitní události,
+- uživatelé opakovaně naráží na stejnou destruktivní chybu.
 
-Horší názvy:
+Ke spouštěči napiš i práh. Ne „když je to pomalé“, ale „když p95 latence exportu překročí 20 sekund po dobu 10 minut“ nebo „když AI sumarizace vrátí chybu u více než 15 % požadavků za posledních 5 minut“.
 
-- `new_flow`,
-- `test_flag`,
-- `ondrej_fix`,
-- `temp_2026`,
-- `use_new_thing`.
+## Vypínej akci, ne celý produkt
 
-Ke každému flagu si ulož vlastníka, důvod, datum vytvoření, očekávané datum odstranění a bezpečný default. Bez těchto údajů se flag změní z nástroje na archeologický nález.
+Panické vypnutí celé aplikace je poslední možnost. Dobrý kill switch umí vypnout úzkou část systému: nové spouštění exportů, synchronizaci s externím CRM, generování AI návrhů, odesílání marketingových e-mailů nebo import dat z rizikové integrace.
 
-## Default musí být bezpečný při výpadku konfigurace
+Praktické vzory:
 
-Feature flag systém je další závislost. Pokud je externí, síťová nebo aspoň vzdáleně dynamická, musíš vědět, co se stane při chybě. Produkt nesmí omylem otevřít placenou funkci, spustit drahý AI workflow nebo obejít kontrolu oprávnění jen proto, že konfigurační služba neodpověděla.
+- **Stop new work:** nepřijímej nové požadavky, ale dokonči bezpečně běžící joby.
+- **Pause queue:** pozastav zpracování fronty a ukaž uživateli stav čekání.
+- **Read-only mode:** povol čtení, zakaž zápis nebo destruktivní akce.
+- **Fallback provider:** přepni na jednodušší nebo pomalejší, ale bezpečný způsob.
+- **Manual review:** citlivé akce přesměruj na ruční schválení.
 
-Bezpečné pravidlo:
+U každého vzoru popiš zákaznický text. „Něco se pokazilo“ je málo. Lepší je: „Exporty teď zpracováváme pomaleji kvůli ochraně stability. Data jsou v bezpečí, požadavek nemusíte zadávat znovu.“
 
-- release a experiment flag při chybě vypni,
-- permission flag při chybě vyhodnoť konzervativně,
-- kill switch navrhni tak, aby šel aktivovat i při částečné degradaci,
-- ops flag měj schopný uložit lokální fallback,
-- kritické rozhodnutí vždy chraň server-side kontrolou.
+## Audituj přepnutí bez sběru citlivého obsahu
 
-Client-side flag je vhodný pro zobrazení varianty UI, ne pro bezpečnostní rozhodnutí. Uživatel může klientský kód číst, měnit a opakovat požadavky. Pokud flag rozhoduje o oprávnění, ceně, exportu dat nebo přístupu k tenantovi, patří rozhodnutí na server.
+Každé použití kill switche patří do auditní stopy. Ne proto, aby se našel viník, ale aby šlo obnovit časovou osu, pochopit dopad a ověřit návrat do normálu.
 
-## Segmentace bez osobního profilování
+Loguj:
 
-Postupné nasazení často potřebuje segmenty: interní tým, beta zákazníci, konkrétní tenant, procento provozu, tarif nebo region. To neznamená, že musíš posílat do flagovacího nástroje e-mail, jméno, telefon, CRM poznámku a krevní skupinu marketingového manažera.
+- kdo switch změnil,
+- kdy se změna stala,
+- jaký byl důvod,
+- jaký rozsah byl zasažen,
+- jaký byl předchozí a nový stav,
+- odkaz na incident nebo rozhodovací kartu.
 
-Privacy-first segmentace:
+Nelogguluj obsah zákaznických dokumentů, celé payloady, API klíče, prompty, exportované soubory ani citlivé query parametry. Pro incident většinou stačí identifikátor tenantů, typ akce, technický stav a korelační ID. Když potřebuješ důkazní payload, ulož ho odděleně, s omezeným přístupem a krátkou retencí.
 
-- preferuj tenant ID nebo interní anonymní ID před osobními údaji,
-- neposílej obsah dokumentů, ticketů, promptů ani zpráv,
-- segmenty pojmenuj neutrálně a bez citlivých charakteristik,
-- udržuj seznam beta zákazníků jako interní provozní evidenci s vlastníkem,
-- do experimentů neposílej víc dat, než je potřeba pro vyhodnocení.
+## Testuj kill switch mimo incident
 
-Pokud potřebuješ rozlišit evropský provoz, tarif nebo smluvní režim, udělej to z interního kontextu aplikace. Flagovací nástroj nemusí znát celý profil zákazníka. Stačí mu minimální technický atribut.
+Nouzová brzda, kterou nikdo nikdy nezkusil, je jen optimistická dekorace. Jednou za měsíc nebo kvartál vyber jeden kritický switch a udělej krátký nácvik.
 
-## Experiment není výmluva pro horší UX
+Nácvik má ověřit:
 
-A/B test může zlepšit text, onboarding nebo cenovou stránku. Stejně snadno ale může zavést matoucí variantu, která krátkodobě zvýší kliknutí a dlouhodobě sníží důvěru. Privacy-first experimenty proto neměří jen konverzi, ale i kvalitu rozhodnutí.
+- kdo má právo switch přepnout,
+- jestli změna opravdu zastaví správnou akci,
+- jestli UI ukáže správný degradovaný stav,
+- jestli alerty neutichnou nebo naopak nespustí ohňostroj,
+- jestli support ví, co říct zákazníkům,
+- jestli návrat zpět nevyžaduje další skrytý deploy.
 
-Před experimentem si napiš:
+Nácvik nemusí být velké cvičení s kouřem a sirénou. Stačí 30 minut, staging nebo nízkoriziková funkce a jasný zápis výsledku.
 
-- hypotézu jednou větou,
-- primární metriku,
-- ochrannou metriku,
-- jaká data se sbírají,
-- kdy experiment skončí,
-- kdo rozhodne o výsledku.
+## Návrat zpět je součást návrhu
 
-Příklad: „Zkrácený text v hero sekci zvýší počet relevantních poptávek, aniž by zvýšil počet nekvalifikovaných formulářů.“ Primární metrika je dokončený kontakt. Ochranná metrika je kvalita poptávky podle ručního označení, ne počet kliknutí na velké zelené tlačítko, které se chová jako digitální siréna.
+Zapnout kill switch je první polovina práce. Druhá polovina je bezpečný návrat. Bez ní se nouzový režim může stát novým normálem a po týdnu už nikdo neví, proč je vlastně export stále vypnutý.
 
-## Kill switch musí mít nácvik, ne jen naději
+Návratový plán má obsahovat:
 
-Kill switch má být nejrychlejší bezpečná cesta, jak zastavit problém. Pokud ho nikdo nikdy nepoužil, není to kill switch. Je to dekorace pro audit.
+- podmínku pro obnovení funkce,
+- kontrolu datové konzistence,
+- rozhodnutí, jestli zpracovat backlog nebo ho zrušit,
+- zákaznickou komunikaci,
+- kontrolu metrik po obnovení,
+- ticket na trvalou opravu.
 
-Dobře navržený kill switch:
+Pokud kill switch zastavil frontu, nesmí návrat znamenat nekontrolované vypuštění všech jobů najednou. Použij dávkování, priority, limity a možnost návrat znovu zastavit.
 
-- vypíná konkrétní rizikovou akci, ne celý produkt,
-- má jasný popis zákaznického dopadu,
-- zapisuje změnu do auditního logu,
-- má určeného vlastníka a zastupitele,
-- má návratový postup,
-- je otestovaný mimo incident.
+## Příklad: AI sumarizace support ticketů
 
-U SaaS funkcí se hodí oddělit „vypnout nové spouštění“ a „zastavit běžící práci“. Například u AI sumarizace může první přepínač zablokovat nové požadavky, zatímco druhý zastaví frontu. To je bezpečnější než panické vypnutí celé aplikace.
+SaaS přidá AI sumarizaci dlouhých support ticketů. Funkce není kritická, ale může zvyšovat náklady a pracuje s obsahem zpráv. Kill switch proto chrání dostupnost, rozpočet i data.
 
-## Flagy uklízej jako technický dluh s datovým dopadem
+Návrh:
 
-Starý flag není jen nehezký kód. Je to neviditelná větev produktu, která komplikuje testování, dokumentaci, podporu i vyhodnocení metrik. Čím déle žije, tím víc lidí se bojí ho odstranit.
+- při zvýšené chybovosti se vypne nové generování sumarizací,
+- existující ruční čtení ticketů zůstane dostupné,
+- uživatel vidí text: „AI souhrny jsou dočasně pozastavené, ticket je dostupný v plném znění“,
+- fronta se neplní donekonečna, nové požadavky se odmítají s jasným stavem,
+- auditní log uloží tenant, čas, důvod a korelační ID, ne obsah ticketu,
+- návrat proběhne po kontrole nákladů, chybovosti a testu na vzorku syntetických ticketů.
 
-U každého dočasného flagu nastav:
+Takhle systém nepanikaří. Jen přestane dělat pohodlnou věc, dokud není bezpečné ji znovu pustit.
 
-- datum revize,
-- podmínku odstranění,
-- odkaz na ticket nebo rozhodnutí,
-- očekávaný cílový stav,
-- test, který potvrdí odstranění staré větve.
+## Checklist: kill switche bez paniky
 
-Měsíční úklid flagů je malá rutina s velkým dopadem. Projdi všechny flagy bez změny za posledních 30–60 dní, označ vlastníky a odstraň ty, které už splnily účel. Když vlastník neexistuje, je to signál, že flag pravděpodobně nemá existovat také.
+- Každý switch má konkrétní rizikovou akci, ne vágní oblast.
+- Každý switch má spouštěč, práh a vlastníka.
+- Degradovaný režim zachová kritickou hodnotu pro zákazníka.
+- UI a support mají připravený lidský text dopadu.
+- Přepnutí se audituje bez obsahu zákaznických dat.
+- Switch je pravidelně testovaný mimo incident.
+- Návrat zpět má podmínky, kontrolu konzistence a dávkování backlogu.
+- Staré nouzové režimy se po incidentu mažou nebo dokumentují jako trvalé pravidlo.
 
-## Příklad: nový export dat pro B2B zákazníky
-
-Představ si SaaS, který přidává nový export dat pro firemní administrátory. Funkce je citlivá, protože pracuje s daty tenantů a může zatížit databázi.
-
-Rozumné flagy:
-
-- `tenant_export_v2_enabled` pro postupné zapnutí u vybraných tenantů,
-- `tenant_export_v2_rollout_percent` pro širší rollout,
-- `tenant_export_v2_kill_switch` pro rychlé vypnutí spouštění exportu,
-- `tenant_export_v2_max_rows` jako provozní limit,
-- server-side permission kontrola podle role a tarifu mimo flagovací systém.
-
-Do flagovacího nástroje neposílej názvy exportovaných souborů, e-maily uživatelů ani obsah exportu. Pro vyhodnocení stačí tenant, stav jobu, velikost v bezpečných kategoriích a technický výsledek. Auditní log má říct, kdo export spustil a kdy, ale nemá ukládat samotná exportovaná data.
-
-## Checklist: feature flagy bez chaosu
-
-- Každý flag má typ: release, experiment, permission, ops nebo kill switch.
-- Každý flag má vlastníka, účel, bezpečný default a datum revize.
-- Permission rozhodnutí se vynucuje server-side, ne jen v UI.
-- Segmentace používá minimální technické atributy, ne osobní profilování.
-- Experiment má hypotézu, ochrannou metriku a konečné datum.
-- Kill switch má nácvik, auditní log a návratový postup.
-- Dočasné flagy se mažou po dokončení rolloutů a experimentů.
-- Dokumentace podpory ví, které flagy mění zákaznické chování.
-
-## Mini šablona feature flag karty
+## Mini šablona kill switch karty
 
 ```text
-# Feature flag karta: [název flagu]
+# Kill switch karta: [název]
 
-## Typ
-- Release / experiment / permission / ops / kill switch:
-
-## Účel
-- Jaký problém řeší:
+## Riziková akce
+- Co přesně vypínáme:
+- Co zůstává dostupné:
 - Pro koho platí:
-- Co se stane při zapnutí:
-- Co se stane při vypnutí:
 
-## Bezpečný default
-- Default při chybě konfigurace:
-- Server-side kontrola:
-- Dopad na zákazníka:
+## Spouštěč
+- Metrika / signál:
+- Práh:
+- Kdo smí přepnout:
+- Kdo schvaluje návrat:
 
-## Data a segmentace
-- Použité atributy:
-- Osobní údaje posílané do flag systému:
-- Retence provozních logů:
+## Degradovaný režim
+- Zákaznický text:
+- Support poznámka:
+- Dopad na data:
+- Dopad na fronty / backlog:
 
-## Provoz
-- Vlastník:
-- Zastupitel:
-- Datum revize:
-- Podmínka odstranění:
-- Rollback / návrat:
+## Audit a privacy
+- Logované údaje:
+- Údaje, které se nesmí logovat:
+- Retence:
+- Odkaz na incident / ticket:
 
-## Ověření
-- Test zapnutí:
-- Test vypnutí:
-- Kill switch nácvik:
-- Poznámky pro support:
+## Návrat
+- Podmínka obnovení:
+- Kontrola konzistence:
+- Dávkování backlogu:
+- Post-review úkol:
 ```
 
 ## Zdroje
 
-- [Martin Fowler: Feature Toggles](https://martinfowler.com/articles/feature-toggles.html) — praktické rozdělení typů toggle mechanismů, jejich životnosti a rizik dlouhodobých větví v produktu.
-- [OpenFeature specification](https://openfeature.dev/specification/) — otevřená specifikace pro vyhodnocování feature flagů, poskytovatele, hooky a kontext vyhodnocení.
-- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučení pro bezpečné logování událostí bez úniku citlivých dat.
-- [OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) — připomíná, že přístupová pravidla mají být vynucovaná server-side a podle principu least privilege.
+- [Google Cloud Architecture Framework: Design for graceful degradation](https://docs.cloud.google.com/architecture/framework/reliability/graceful-degradation) — doporučení pro návrh systémů, které při selhání zachovají dostupnost omezené, ale užitečné části služby.
+- [NIST SP 800-34 Rev. 1](https://csrc.nist.gov/pubs/sp/800/34/r1/upd1/final) — průvodce contingency planningem, prioritizací systémů, obnovou a testováním plánů.
+- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — praktická doporučení pro auditní a bezpečnostní logování bez zbytečného úniku citlivých dat.
+- [OWASP Business Logic Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Business_Logic_Security_Cheat_Sheet.html) — připomíná nutnost monitoringu, reakce na zneužití a posilování kontrol podle zjištěných incidentů.
 
 
 # Pracovní log
 
-- 2026-10-06: Doplněna příloha „Feature flagy a kill switche bez konfiguračního chaosu“ s rozdělením typů flagů, bezpečnými defaulty, privacy-first segmentací, experimentálními pravidly, kill switch nácvikem, úklidem starých flagů, B2B export příkladem, checklistem, feature flag kartou a ověřenými zdroji Martin Fowler, OpenFeature a OWASP.
+- 2026-10-06: Doplněna příloha „Kill switche a degradovaný režim bez panického vypínání“ s prioritizací funkcí, spouštěči a prahy nouzového vypnutí, vzory degradace, privacy-first auditováním, nácvikem mimo incident, návratem zpět, příkladem AI sumarizace, checklistem, kill switch kartou a ověřenými zdroji Google Cloud, NIST a OWASP.
 - 2026-10-06: Doplněna příloha „Open Graph a sdílené náhledy bez metadatového průvanu“ s praktickým modelem veřejných metadat, bezpečnými náhledovými obrázky, čistými URL, testem před publikací, pravidly pro dynamické SaaS stránky, RSS/přímé odkazy, checklistem, metadatovou kartou a ověřenými zdroji Open Graph, MDN, Google Search Central, Sitemaps.org a EDPB.
 - 2026-10-06: Doplněna příloha „Admin přístupy a break-glass bez superadmin folklóru“ s rozdělením běžných admin rolí a nouzového přístupu, least-privilege pravidly, návrhem break-glass toku, bezpečnějším admin UI, auditními logy bez obsahu zákaznických dat, měsíční kontrolou oprávnění, support příkladem, checklistem, admin access kartou a ověřenými zdroji OWASP, NIST a EDPB.
 - 2026-10-06: Doplněn úvodní rozcestník „Kde začít podle situace“ s mapou kapitol pro web, SaaS, AI, provoz, data, marketing a support, hodinovým pracovním postupem, pravidly pro čtení checklistů a vyplnitelnou privacy-first pracovní kartou.
