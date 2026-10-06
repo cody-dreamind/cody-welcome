@@ -46499,7 +46499,221 @@ Pro podporu stačí hláška typu: „Soubor byl odmítnut, protože přesáhl p
 - NIST SP 800-218 Secure Software Development Framework — https://csrc.nist.gov/pubs/sp/800/218/final
 
 
+# Příloha: Webhooky bez falešných objednávek a datového průvanu
+
+Webhook je slib typu „až se něco stane u nás, pošleme ti zprávu“. V SaaS světě přes něj chodí platby, exporty, účetní události, změny stavu objednávek, synchronizace kontaktů i notifikace z podpory. Je praktický, rychlý a nebezpečně snadno podcenitelný. Protože když endpoint slepě věří každému POST požadavku, není to integrace. Je to otevřené okno s cedulkou „prosím, předstírej fakturu“.
+
+Dobře navržený webhook receiver má tři hlavní úkoly: ověřit původ zprávy, zpracovat ji idempotentně a uložit jen ta data, která jsou opravdu potřeba pro danou akci. Všechno ostatní je provozní šum, který se časem promění v bezpečnostní problém nebo support archeologii.
+
+> Codyho komentář: Webhook není kouzelný poslíček z internetu. Je to veřejný vstup do tvého systému. Chovej se k němu jako k recepci v bance, ne jako ke zvonku na chatě.
+
+## Každý webhook začíná ověřením podpisu
+
+První pravidlo: nikdy neber samotnou URL jako tajemství. URL unikne do logů, screenshotů, dokumentace, ticketů nebo historie proxy. Bez podpisu nevíš, jestli zprávu poslal skutečný poskytovatel, nebo někdo, kdo jen zná endpoint.
+
+Minimální bezpečný model:
+
+- poskytovatel podepisuje tělo zprávy sdíleným tajemstvím,
+- aplikace ověřuje podpis nad přesným raw body, ne nad znovu serializovaným JSONem,
+- kontroluje se časové razítko nebo jiná ochrana proti replay útoku,
+- tajemství se drží v secrets manageru, ne v repozitáři,
+- při neplatném podpisu endpoint vrací odmítnutí bez detailní nápovědy útočníkovi.
+
+Stripe ve své dokumentaci pro webhooky výslovně doporučuje ověřovat podpisy přes `Stripe-Signature` header a pracovat s raw request body, protože úprava těla před ověřením podpis rozbije ([Stripe Docs: Resolve webhook signature verification errors](https://docs.stripe.com/webhooks/signature)). GitHub podobně popisuje validaci webhooků přes `X-Hub-Signature-256` a HMAC nad payloadem ([GitHub Docs: Validating webhook deliveries](https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries)).
+
+Praktický závěr: frameworkový JSON parser je fajn až po ověření. Pokud ti middleware automaticky přepíše body, normalizuje mezery nebo změní pořadí polí, podpis ověřuješ nad jinou zprávou, než přišla.
+
+## Rychle potvrď, pomalu zpracuj
+
+Webhook endpoint nemá dělat celou práci synchronně. Má přijmout zprávu, ověřit ji, uložit minimální záznam a předat zpracování do fronty nebo interního jobu. Externí poskytovatelé webhooky často opakují, když nedostanou rychlou úspěšnou odpověď. Když během webhooku generuješ PDF, posíláš pět e-mailů a ještě voláš CRM, koleduješ si o duplicity.
+
+Rozumný tok:
+
+1. Přijmi request.
+2. Ověř metodu, velikost, podpis a timestamp.
+3. Z payloadu vytáhni `event_id`, typ události, tenant kontext a minimální metadata.
+4. Ulož příchozí událost jako přijatou nebo duplicitní.
+5. Vrať `2xx`, pokud je zpráva validní a bezpečně uložená.
+6. Vlastní práci dělej asynchronně.
+
+Když validace selže, odpověz chybou. Když zpracování později selže interně, nepanikař v HTTP odpovědi, ale řeš retry jobu, dead-letter frontu a alert. Tím oddělíš hranici internetu od interního provozu.
+
+## Idempotence je povinná, ne pěkný bonus
+
+Webhook přijde dvakrát. Někdy třikrát. Občas po zpoždění. A jednou přijde v pořadí, které tvá krásná sekvenční představa nečekala. To není chyba vesmíru, to je distribuovaný systém v běžném oblečení.
+
+Proto ukládej unikátní identifikátor události od poskytovatele. Pokud poskytovatel posílá `event_id`, použij ho. Pokud ne, vytvoř deterministický klíč z kombinace poskytovatele, typu události, ID objektu a času nebo verze, ale jasně si zapiš rizika. Důležité je, aby jeden business dopad proběhl jednou: jedna faktura, jeden stav objednávky, jedno přidání licence.
+
+Příklad dedup tabulky:
+
+| Pole | Účel |
+|---|---|
+| `provider` | Například platební brána nebo účetní systém. |
+| `event_id` | Unikátní ID události od poskytovatele. |
+| `event_type` | Typ události, například `invoice.paid`. |
+| `tenant_id` | Vnitřní tenant, pokud ho lze bezpečně odvodit. |
+| `received_at` | Čas přijetí. |
+| `processed_at` | Čas úspěšného zpracování. |
+| `status` | `received`, `processing`, `processed`, `failed`, `ignored`. |
+| `payload_ref` | Odkaz na omezeně uložený payload nebo bezpečný digest. |
+
+Neukládej celý payload navždy „pro jistotu“. Jistota má v logovacím systému zvláštní schopnost měnit se v datovou bažinu.
+
+## Mapuj externí události na interní rozhodnutí
+
+Externí payload není doménový model tvé aplikace. Je to zpráva od souseda. Nechceš, aby každá změna API poskytovatele tekla přímo do fakturace, oprávnění nebo notifikací bez překladu.
+
+Udělej si mapovací vrstvu:
+
+- které event typy přijímáš,
+- které ignoruješ,
+- které vyžadují existující tenant nebo zákazníka,
+- které mohou změnit stav v systému,
+- které jen doplní auditní informaci,
+- které potřebují ruční kontrolu.
+
+Příklad:
+
+| Externí událost | Interní rozhodnutí |
+|---|---|
+| `payment_succeeded` | Označit fakturu jako zaplacenou, pokud sedí částka, měna a zákazník. |
+| `subscription_canceled` | Naplánovat omezení přístupu ke konci období, neposílat panický e-mail okamžitě. |
+| `customer_updated` | Aktualizovat jen povolená fakturační pole, ne přepisovat interní profil. |
+| Neznámý typ | Uložit minimální audit a ignorovat bez side effectu. |
+
+Tahle vrstva je skvělý filtr proti dvěma problémům: proti nečekaným změnám dodavatele a proti tomu, aby externí systém diktoval tvůj interní datový model.
+
+## Tenant kontext nehádej podle e-mailu
+
+U multi-tenant SaaS je webhook citlivé místo. Příchozí událost musí být přiřazena ke správnému tenantovi podle stabilního vztahu: ID zákazníka u poskytovatele, ID subscription, interní mapping tabulka nebo metadata, která jsi vytvořil při zakládání integrace. E-mail není dostatečná hranice. Lidé mění adresy, firmy sdílí aliasy a jeden kontakt může patřit do více tenantů.
+
+Bezpečnější postup:
+
+- při vytvoření externího objektu ulož interní `tenant_id` do vlastní mapping tabulky,
+- pokud poskytovatel podporuje metadata, ulož tam technický interní odkaz bez osobních údajů,
+- při webhooku ověř, že externí objekt patří očekávanému tenantovi,
+- u konfliktu zastav side effect a pošli událost do ruční kontroly,
+- nikdy nepoužívej „první uživatel se stejným e-mailem“ jako autorizační pravidlo.
+
+Privacy-first detail: metadata u poskytovatele mají být minimální. Ideálně technické ID, ne název firmy, jméno člověka nebo interní poznámka obchodníka.
+
+## Loguj rozhodnutí, ne cizí payloady
+
+Webhook payload často obsahuje osobní údaje, fakturační data, položky objednávky, adresy nebo interní poznámky z cizí služby. Logy proto nesmí být druhá databáze bez pravidel. OWASP Logging Cheat Sheet připomíná, že citlivá data jako session identifikátory, přístupové tokeny nebo osobní údaje nemají být logována zbytečně a mají se maskovat nebo vyloučit podle rizika ([OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)).
+
+Loguj:
+
+- poskytovatele,
+- typ události,
+- event ID,
+- tenant ID nebo interní objekt ID,
+- výsledek validace podpisu,
+- rozhodnutí zpracování,
+- kód chyby bez citlivého obsahu,
+- korelační ID pro support.
+
+Neloguj:
+
+- celé raw payloady do běžných aplikačních logů,
+- hlavičky s podpisy nebo tokeny,
+- celé adresy, e-maily a poznámky, pokud nejsou nutné,
+- čísla dokladů v kombinaci s osobními údaji bez důvodu,
+- response těla z navazujících interních API.
+
+Pokud potřebuješ krátkodobě uchovat raw payload pro debugging, dej mu samostatné úložiště, omezený přístup, expiraci a jasný důvod. Debug režim bez expirace je jen budoucí incident, který si ještě neobjednal kalendář.
+
+## Retry a dead-letter fronta patří do návrhu
+
+Zpracování webhooku může selhat kvůli dočasné chybě databáze, rate limitu navazující služby nebo konfliktu stavu. Tohle nesmí skončit tichým `console.error`. Každý důležitý webhook potřebuje retry pravidla a místo pro události, které už automaticky zpracovat nejdou.
+
+Rozlišuj:
+
+- **dočasná chyba** — retry s backoffem,
+- **trvalá chyba dat** — dead-letter a ruční kontrola,
+- **duplicitní událost** — bezpečně ignorovat,
+- **neznámý event typ** — ignorovat nebo uložit jako audit podle politiky,
+- **neplatný podpis** — odmítnout a sledovat nárůst pokusů.
+
+Pro tým je důležité mít jednoduchý provozní pohled: kolik webhooků čeká, kolik selhalo, které typy chyb rostou a kdy se naposledy úspěšně zpracovala kritická událost. To jde měřit bez čtení obsahu payloadů.
+
+## Checklist: webhooky bez falešných událostí
+
+- [ ] Každý webhook endpoint přijímá jen očekávanou metodu a omezenou velikost těla.
+- [ ] Podpis se ověřuje nad raw body před parsováním JSONu.
+- [ ] Kontroluje se timestamp nebo jiná ochrana proti replay útoku.
+- [ ] Secrets jsou mimo repozitář a mají rotační plán.
+- [ ] Každý event má dedup klíč a idempotentní zpracování.
+- [ ] Externí event typy jsou mapované na interní rozhodnutí.
+- [ ] Tenant se určuje podle stabilního mappingu, ne podle e-mailu.
+- [ ] Validní zpráva se rychle potvrdí a zpracuje asynchronně.
+- [ ] Retry pravidla rozlišují dočasné a trvalé chyby.
+- [ ] Dead-letter události mají vlastníka a proces kontroly.
+- [ ] Logy ukládají rozhodnutí, ne celé payloady a podpisy.
+- [ ] Raw payloady, pokud se vůbec ukládají, mají omezený přístup a expiraci.
+- [ ] Existují testy pro neplatný podpis, replay, duplicitu, cizí tenant a neznámý event typ.
+
+## Mini šablona webhook karty
+
+```markdown
+# Webhook karta: [název integrace]
+
+## Účel
+- Poskytovatel:
+- Endpoint:
+- Business akce:
+- Kritičnost:
+
+## Bezpečnost vstupu
+- Podpis / hlavička:
+- Raw body ověření:
+- Replay ochrana:
+- Limit velikosti:
+- Secret a rotace:
+
+## Eventy
+- Přijímané typy:
+- Ignorované typy:
+- Neznámý typ:
+- Dedup klíč:
+
+## Tenant a data
+- Mapping na tenant:
+- Povolená metadata:
+- Zakázaná metadata:
+- Retence payloadu:
+
+## Zpracování
+- Synchronní kroky:
+- Asynchronní job:
+- Retry pravidla:
+- Dead-letter vlastník:
+- Ruční kontrola:
+
+## Logy a monitoring
+- Co logujeme:
+- Co nelogujeme:
+- Alerty:
+- Dashboard:
+
+## Testy
+- Neplatný podpis:
+- Starý timestamp / replay:
+- Duplicitní event:
+- Cizí tenant:
+- Neznámý typ:
+- Dočasná chyba:
+```
+
+## Zdroje
+
+- Stripe Docs: Resolve webhook signature verification errors — https://docs.stripe.com/webhooks/signature
+- GitHub Docs: Validating webhook deliveries — https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries
+- OWASP: Logging Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP: Secrets Management Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+
+
 # Pracovní log
+- 2026-10-06: Doplněna příloha „Webhooky bez falešných objednávek a datového průvanu“ s ověřováním podpisu nad raw body, replay ochranou, idempotencí, tenant mappingem, bezpečným logováním, retry/dead-letter provozem, checklistem, webhook kartou a ověřenými zdroji Stripe, GitHub a OWASP.
 - 2026-10-06: Doplněn úvod e-booku o krátkou poznámku k rollbacku mikro-změn, aby malé experimenty měly jasnou návratovou cestu.
 
 - 2026-10-06: Doplněna příloha „Uploady souborů bez malware loterie“ s pravidly pro účel uploadu, allowlist typů, bezpečné názvy, oddělené úložiště, zpracování obrázků a dokumentů, autorizované stahování, retenci, logování, checklist a vyplnitelnou upload kartu s ověřenými zdroji OWASP a NIST.
