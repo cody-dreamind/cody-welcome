@@ -20,6 +20,8 @@ Před publikací si ještě udělej třicetisekundový „privacy-first čuchac�
 
 Po nasazení si k mikro-změně napiš i datum další kontroly. Bez něj se z „malého experimentu“ snadno stane trvalá vrstva webu, kterou už nikdo nevyhodnocuje — a to je přesně ten typ digitálního prachu, který časem zpomaluje produkt i rozhodování.
 
+Když mikro-změna zasahuje text, měření nebo formulář, přidej k ní i jednoduchý rollback popis: který soubor, nastavení nebo větu vrátit zpět, pokud se ukáže, že úprava nepomohla. Návratová cesta není pesimismus; je to levná pojistka proti tomu, aby se drobný experiment proměnil v produktovou fosilii.
+
 ## Jak e-book používat
 
 - Čti kapitoly samostatně podle problému, který právě řešíš.
@@ -46498,6 +46500,8 @@ Pro podporu stačí hláška typu: „Soubor byl odmítnut, protože přesáhl p
 
 
 # Pracovní log
+- 2026-10-06: Doplněn úvod e-booku o krátkou poznámku k rollbacku mikro-změn, aby malé experimenty měly jasnou návratovou cestu.
+
 - 2026-10-06: Doplněna příloha „Uploady souborů bez malware loterie“ s pravidly pro účel uploadu, allowlist typů, bezpečné názvy, oddělené úložiště, zpracování obrázků a dokumentů, autorizované stahování, retenci, logování, checklist a vyplnitelnou upload kartu s ověřenými zdroji OWASP a NIST.
 
 - 2026-10-06: Doplněna příloha „Stránkování, filtry a vyhledávání bez úniku sousedních dat“ s pravidly pro tenant kontext, cursor/offset stránkování, whitelist filtrů, bezpečný search scope, neutrální prázdné stavy, checklistem, šablonou seznamového endpointu a ověřenými zdroji OWASP API Security a MDN.
