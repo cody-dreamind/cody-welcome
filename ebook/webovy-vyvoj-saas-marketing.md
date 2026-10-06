@@ -45708,7 +45708,198 @@ To poslední je důležité: dobrý marketing nemusí vymýšlet dramatické př
 - [Semantic Versioning 2.0.0](https://semver.org/)
 - [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 
+# Příloha: Feature flagy a postupné spouštění bez tajné laboratoře v produkci
+
+Feature flag je jednoduchá myšlenka: kód může být nasazený, ale funkce ještě nemusí být zapnutá pro všechny. V malém SaaS je to skvělé, protože nemusíš každou změnu pouštět stylem „držte mi kafe, teď se uvidí“. Můžeš začít interně, pokračovat na pár zákazníků, sledovat provozní signály a teprve potom otevřít změnu širšímu publiku.
+
+Jenže feature flagy mají i temnou stránku. Když nemají vlastníka, datum úklidu a jasné pravidlo dat, stanou se z nich malé tajné chodby v produktu. Po roce nikdo neví, proč existují, kdo je používá a jestli jejich vypnutí nerozbije fakturaci, onboarding nebo demo pro obchod. To není řízené spouštění. To je archeologie s produkčními právy.
+
+> Codyho komentář: Feature flag je jako vypínač v rozvaděči. Skvělý, když je popsaný. Trochu horor, když je na něm jen izolepa s nápisem „NEVYPÍNAT!!!“.
+
+## Odděl deployment od release
+
+První princip je mentální: deployment není release. Deployment znamená, že se nový kód dostal do prostředí. Release znamená, že nová schopnost ovlivňuje uživatele. Feature flagy dávají týmu prostor tyto dvě věci oddělit.
+
+Prakticky to pomáhá hlavně ve čtyřech situacích:
+
+- Nasadíš backend změnu dopředu, ale UI otevřeš až po kontrole dat.
+- Pustíš novou funkci jen interním uživatelům nebo jednomu tenantovi.
+- Umíš rychle vypnout rizikové chování bez rollbacku celého deploye.
+- Testuješ provozní dopad postupně, ne přes celou zákaznickou základnu najednou.
+
+To ale neznamená, že máš každou změnu schovat za flag. Pokud je změna malá, vratná a bez rizikového dopadu na data, může být obyčejný release jednodušší. Flag přidává rozhodovací vrstvu, testovací kombinace a budoucí úklid. Používej ho tam, kde tahle cena dává smysl.
+
+## Pojmenuj flag podle rozhodnutí, ne podle tlačítka
+
+Špatný název flagu popisuje implementaci. Dobrý název popisuje rozhodnutí, které tým řídí.
+
+Slabé názvy:
+
+- `new_ui`
+- `test2`
+- `enable_v2`
+- `marketing_experiment`
+
+Lepší názvy:
+
+- `billing_export_background_processing`
+- `workspace_invite_role_preview`
+- `signup_email_verification_required`
+- `pricing_page_annual_plan_copy_test`
+
+K názvu přidej minimální kartu flagu. Bez ní bude flag za tři měsíce jen záhadná proměnná s produkčním dopadem.
+
+Minimální metadata:
+
+- Vlastník: člověk nebo tým, který rozhoduje o zapnutí a úklidu.
+- Typ: release, experiment, ops kill switch, permission nebo migration.
+- Výchozí hodnota: co se stane, když systém flag nevyhodnotí.
+- Cílová skupina: interní, konkrétní tenant, procento provozu, tarif, role.
+- Datum kontroly: kdy se rozhodne o rozšíření, úpravě nebo odstranění.
+- Datový dopad: zda mění sběr, zobrazení, export, logování nebo retenci dat.
+
+## Začni typem flagu
+
+Ne každý flag slouží ke stejnému účelu. Když typ nepojmenuješ, tým začne míchat experiment, oprávnění a krizový vypínač do jedné hromádky.
+
+Praktické rozdělení:
+
+- **Release flag:** krátkodobě odděluje nasazení kódu od otevření funkce.
+- **Experiment flag:** porovnává varianty pro rozhodnutí, ideálně na agregovaných metrikách.
+- **Ops flag:** umožní rychle vypnout drahou nebo rizikovou část systému.
+- **Permission flag:** zpřístupňuje funkci podle tarifu, role nebo smlouvy.
+- **Migration flag:** řídí přechod ze starého toku na nový.
+
+Release a migration flagy mají mít jasný konec. Experiment flag má mít hypotézu a datum vyhodnocení. Ops flag může žít déle, ale musí být dokumentovaný a testovaný. Permission flag často patří spíš do autorizačního nebo billing modelu než do ad hoc flag systému.
+
+## Výchozí hodnota musí být bezpečná
+
+Každé vyhodnocení flagu může selhat: nedostupná služba, špatná konfigurace, timeout, chybějící kontext, chyba SDK. Proto musí mít každý flag bezpečnou výchozí hodnotu.
+
+Bezpečná hodnota neznamená vždy `false`. Znamená hodnotu, která nejméně překvapí uživatele a nejméně ohrozí data.
+
+Příklady:
+
+- Nový export citlivějších dat: výchozí hodnota vypnuto.
+- Nová validace formuláře: výchozí hodnota staré ověřené chování.
+- Bezpečnostní omezení po incidentu: výchozí hodnota přísnější režim.
+- Dočasné vypnutí drahé AI funkce: výchozí hodnota levnější fallback.
+
+Do kódu nikdy nedávej default jen proto, aby prošly testy. Default je provozní rozhodnutí. Když se flag služba rozbije v pátek večer, přesně tahle hodnota rozhodne, jestli produkt degraduje elegantně, nebo si udělá malý ohňostroj.
+
+## Kontext vyhodnocení drž minimální
+
+Feature flag systém svádí k tomu posílat do vyhodnocení spoustu informací: e-mail, jméno firmy, zemi, tarif, obrat, počet uživatelů, chování v aplikaci. Privacy-first přístup říká: neposílej nic, co nepotřebuješ k rozhodnutí.
+
+Typicky stačí:
+
+- stabilní technické ID uživatele nebo workspace,
+- role nebo tarif, pokud je nutný,
+- prostředí aplikace,
+- interní testovací značka,
+- země nebo region jen tehdy, když má právní nebo provozní význam.
+
+Vyhni se e-mailům, jménům, volným textům, IP adresám a obsahu zákaznických dat. Pokud potřebuješ procentuální rollout, použij stabilní pseudonymní identifikátor, ne osobní údaj, který se bude objevovat v logách a dashboardech.
+
+## Rollout měř podle dopadu, ne podle zvědavosti
+
+Postupné spuštění potřebuje signály. Ale signály nejsou pozvánka k session replay reality show. Měř jen to, co rozhoduje o bezpečném rozšíření nebo zastavení.
+
+Užitečné signály pro rollout:
+
+- chybovost konkrétního toku,
+- latence a timeouty,
+- počet dokončených klíčových akcí,
+- počet support ticketů k nové funkci,
+- agregovaná konverze nebo dokončení workflow,
+- auditní události pro změny oprávnění nebo exporty.
+
+Předem si napiš stop podmínky. Například: „Pokud chybovost exportu překročí 2 % za poslední hodinu, rollout se zastaví a flag se vrátí na předchozí skupinu.“ Bez stop podmínky bude tým často jen koukat na dashboard a tvářit se strategicky. Dashboard sám rozhodnutí neudělá, protože má bohužel horší leadership než tabulka v Excelu.
+
+## Flagy uklízej jako technický dluh s datem splatnosti
+
+Největší problém feature flagů není zapnutí. Je to nezapomenout je odstranit. Každý dlouhodobě mrtvý flag zvyšuje počet kombinací, které musí tým chápat a testovat.
+
+Úklidové pravidlo:
+
+- Release flag smaž po plném spuštění a stabilizační kontrole.
+- Experiment flag smaž po vyhodnocení a rozhodnutí o vítězné variantě.
+- Migration flag smaž po dokončení migrace a ověření starého toku.
+- Ops flag nech jen pokud má runbook, test a vlastníka.
+- Permission pravidla přesuň do modelu oprávnění, pokud řídí trvalé obchodní chování.
+
+Do backlogu nedávej „někdy uklidit flagy“. Vytvoř konkrétní úkol: odstranit podmínku v kódu, smazat konfiguraci, upravit testy, doplnit release notes a ověřit, že auditní nebo analytické eventy pořád dávají smysl.
+
+## Checklist: feature flag bez tajné laboratoře
+
+- [ ] Má flag jasný typ: release, experiment, ops, permission nebo migration?
+- [ ] Má vlastníka, datum kontroly a podmínku odstranění?
+- [ ] Je výchozí hodnota bezpečná při výpadku flag služby?
+- [ ] Posílá vyhodnocovací kontext jen minimální potřebná data?
+- [ ] Je rollout plánovaný po skupinách nebo procentech s jasným cílem?
+- [ ] Jsou definované stop podmínky a rollback postup?
+- [ ] Ví support, kdo funkci uvidí a co má odpovědět?
+- [ ] Jsou změny soukromí popsané v release notes nebo dokumentaci?
+- [ ] Existují testy pro zapnutý i vypnutý stav u rizikových toků?
+- [ ] Je vytvořený úkol na odstranění flagu po dokončení?
+
+## Mini šablona feature flag karty
+
+```text
+# Feature flag karta: [název flagu]
+
+## Základ
+Typ flagu:
+Vlastník:
+Datum vytvoření:
+Datum kontroly:
+Podmínka odstranění:
+
+## Rozhodnutí
+Jaké rozhodnutí flag řídí:
+Komu se funkce zapíná:
+Bezpečná výchozí hodnota:
+Fallback při výpadku:
+
+## Data a soukromí
+Vyhodnocovací kontext:
+Nově sbíraná data:
+Změna logování / auditních událostí:
+Retence souvisejících dat:
+Subprocesor nebo externí služba:
+
+## Rollout
+Interní test:
+Pilotní skupina:
+Postupné rozšíření:
+Stop podmínky:
+Rollback postup:
+
+## Komunikace
+Support poznámka:
+Release notes:
+Dokumentace:
+
+## Úklid
+Kód k odstranění:
+Konfigurace k odstranění:
+Testy k upravení:
+Datum uzavření:
+```
+
+Feature flagy jsou výborný nástroj pro klidnější releasy, ale jen tehdy, když se k nim chováš jako k provoznímu rozhodnutí, ne jako k magickému `if`. U privacy-first SaaS je jejich hodnota ještě větší: můžeš spouštět změny postupně, měřit jen nutné signály, chránit data a komunikovat dopad bez marketingové mlhy. Vlajky patří na mapu, ne do zaprášeného sklepa.
+
+## Zdroje
+
+- [OpenFeature: Introduction](https://openfeature.dev/docs/reference/intro/)
+- [OpenFeature Specification: Providers](https://openfeature.dev/specification/sections/providers/)
+- [Martin Fowler: Feature Toggles](https://martinfowler.com/articles/feature-toggles.html)
+- [Martin Fowler: Feature Flag](https://martinfowler.com/bliki/FeatureFlag.html)
+- [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+
 # Pracovní log
+
+- 2026-10-06: Doplněna příloha „Feature flagy a postupné spouštění bez tajné laboratoře v produkci“ s oddělením deploymentu od releasu, typy flagů, bezpečnými defaulty, minimalizací kontextu, rollout metrikami, úklidem, checklistem, feature flag kartou a ověřenými zdroji OpenFeature, Martina Fowlera a OWASP.
 - 2026-10-06: Doplněna příloha „Release notes a changelog bez marketingové mlhy“ s rozlišením interního changelogu a zákaznických release notes, kategoriemi změn, zvláštním značením privacy dopadů, verzováním, napojením na podporu a obchod, checklistem, šablonou release poznámky a ověřenými zdroji Keep a Changelog, SemVer a OWASP.
 - 2026-10-05: Doplněna příloha „Datový slovník a klasifikace polí bez štítkovacího divadla“ s praktickým modelem klasifikace polí, pravidly pro logy, analytiku, support UI, exporty, AI zpracování, pseudonymizaci, checklistem, datovou kartou pole a ověřenými zdroji GDPR, OWASP a ENISA.
 - 2026-10-05: Doplněna příloha „Právní a provozní stránky bez copy-paste mlhy“ s inventářem zásad ochrany soukromí, podmínek, DPA, subprocesorů a bezpečnostních kontaktů, napojením dokumentů na datovou mapu, pravidly verzování změn, checklistem, šablonou transparentnosti a ověřenými zdroji GDPR, Evropské komise a EDPB.
