@@ -48979,200 +48979,176 @@ Rozdíl není v tom, že druhý postup je pomalejší. Rozdíl je v tom, že dru
 
 
 
-# Příloha: Feature flagy a rollouty bez experimentálního chaosu
 
-Feature flag je užitečný sluha a dost otravný pán. Umí oddělit deploy od release, pustit změnu jen části zákazníků, rychle vypnout rizikovou funkci a otestovat novou cestu bez velké ceremonie. Zároveň umí v kódu vytvořit druhý vesmír, kde nikdo přesně neví, která kombinace příznaků je vlastně produkce.
+# Příloha: Open Graph a sdílené náhledy bez metadatového průvanu
 
-Privacy-first SaaS má k feature flagům přistupovat jako k provoznímu nástroji, ne jako k marketingové hračce na nekonečné profilování uživatelů. Cíl není „změřit všechno o každém“. Cíl je bezpečně doručit změnu, ověřit dopad a včas uklidit dočasné větve.
+Sdílený náhled stránky vypadá jako drobnost: obrázek, titulek, krátký popis. Jenže právě tahle drobnost často rozhoduje, jestli někdo klikne na článek, nabídku, případovku nebo produktovou novinku. Zároveň umí nenápadně prozradit víc, než chceš: interní staging URL, jméno zákazníka v neveřejné stránce, starý obrázek z kampaně, tracking parametr nebo text, který marketing dávno přepsal, ale sociální platforma si ho ještě pamatuje v cache.
 
-> Codyho komentář: Feature flag bez data úklidu je jako kabel pod stolem. První týden nevadí. Za půl roku vypadá jako infrastruktura kritická pro chod firmy, i když už nikdo neví proč.
+Privacy-first přístup k Open Graph a dalším metadatům není o tom, že web nesmí mít hezké náhledy. Je o tom, že sdílený náhled má být veřejný, přesný, bez zbytečných identifikátorů a bez závislosti na sledovacích skriptech. Náhled má pomáhat člověku rozhodnout se, ne posílat jeho prohlížeč na výlet po reklamním ekosystému.
 
-## Rozliš deploy, release a experiment
+> Codyho komentář: Metadata jsou jako cedulka na dveřích. Když je dobrá, lidé vědí, kam vstupují. Když je špatná, pozveš je do skladu, který už tři měsíce neexistuje.
 
-Nejdřív si s týmem ujasni slovník. Deploy znamená, že je kód nasazený. Release znamená, že funkci vidí zákazník. Experiment znamená, že porovnáváš varianty s předem napsanou hypotézou. Tyhle tři věci se často slévají dohromady, a pak vzniká provozní guláš s logikou typu „ono se to nějak zapíná v adminu“.
+## Metadata nejsou jen SEO dekorace
 
-Praktické rozdělení:
+Open Graph tagy, základní HTML meta tagy a strukturované titulky ber jako součást publikačního procesu. Nejsou to zbytky pro vyhledávače. Jsou to veřejné věty, které se objeví v chatu, e-mailu, RSS čtečce, interním Slacku, projektové dokumentaci nebo CRM poznámce.
 
-| Typ flagu | Účel | Životnost | Kdo rozhoduje |
-| --- | --- | --- | --- |
-| Release flag | Schovat novou funkci do chvíle, než je připravená | dny až týdny | produkt + vývoj |
-| Ops kill switch | Rychle vypnout drahou nebo poruchovou část systému | dlouhodobější, ale auditovaný | provoz / incident owner |
-| Permission flag | Zapnout funkci konkrétnímu tarifu, tenantovi nebo beta skupině | podle obchodního modelu | produkt + support |
-| Experiment flag | Porovnat varianty s jasnou hypotézou | krátce, s datem vyhodnocení | produkt + marketing |
+Minimum pro veřejnou stránku:
 
-Každý typ potřebuje jiná pravidla. Release flag má po dokončení zmizet z kódu. Kill switch může zůstat, ale musí mít vlastníka, dokumentaci a test. Experiment flag bez hypotézy je jen ruleta v hezkém kabátu.
+- kanonický titul stránky,
+- krátký popis bez interního žargonu,
+- stabilní kanonická URL,
+- sdílený obrázek bez osobních nebo neveřejných detailů,
+- typ obsahu, pokud ho web rozlišuje,
+- jazyk a základní struktura nadpisů.
 
-## Flag karta před prvním řádkem kódu
+Dobré pravidlo: co bys nechtěl vidět ve veřejném screenshotu, nepatří ani do sdíleného náhledu. Platí to pro názvy zákazníků, interní ID, neveřejné ceny, tokeny v URL, testovací segmenty, e-mailové adresy a screenshoty administrace.
 
-U každého netriviálního flagu napiš krátkou kartu. Nemá to být byrokracie pro radost tabulkářů. Je to obrana proti situaci, kdy se za tři měsíce někdo bojí smazat `new_checkout_v2`, protože „možná to něco dělá“.
+## Náhledový obrázek navrhuj jako veřejný asset
 
-Minimální karta:
+`og:image` není jen designová ozdoba. Je to veřejný soubor, který si mohou stáhnout roboti, chatovací aplikace i sociální platformy. Proto do něj nedávej nic, co je závislé na přihlášení nebo co by mohlo být citlivé.
 
-- Název flagu: stabilní technický název bez humoru a interních vtípků.
-- Účel: co přesně chrání nebo ověřuje.
-- Typ: release, ops, permission nebo experiment.
-- Default: bezpečná hodnota při výpadku flag služby.
-- Scope: globálně, podle tenantu, podle role, podle tarifu, podle regionu.
-- Vlastník: člověk nebo tým, který flag vyhodnotí a uklidí.
-- Datum kontroly: konkrétní den, kdy se rozhodne zapnout, vypnout, prodloužit nebo smazat.
-- Datový dopad: jaká data se používají pro rozhodnutí a co se loguje.
+Bezpečný obrázek:
 
-Důležité pravidlo: flag nesmí vyžadovat víc identifikátorů, než potřebuje. Pokud stačí tenant ID, nepřidávej e-mail. Pokud stačí plán tarifu, nepřidávej historii chování. Pokud stačí interní role, nepřidávej IP adresu „pro jistotu“.
+- obsahuje název článku, sekce nebo produktu,
+- používá obecnou ilustraci, abstraktní screenshot nebo brandový motiv,
+- neobsahuje skutečná zákaznická data,
+- neobsahuje interní URL, tokeny, e-maily ani jména lidí bez důvodu,
+- má stabilní URL a rozumnou cache politiku,
+- má alternativu, když se obrázek nevygeneruje.
 
-## Bezpečný default není detail
+Rizikový obrázek:
 
-Při výpadku flag systému musí aplikace vědět, co dělat. Bezpečný default není vždy `false`. Někdy je bezpečnější zachovat staré chování, někdy vypnout drahou AI akci a někdy ponechat uživateli existující oprávnění, aby ho krátký výpadek neodřízl od práce.
+- screenshotuje administraci s daty zákazníka,
+- používá náhled faktury, ticketu nebo CRM záznamu,
+- generuje se z neveřejné stránky,
+- obsahuje staging doménu,
+- používá externí generátor bez jasného vztahu k datům,
+- mění se podle přihlášeného uživatele.
 
-Příklady:
+Pokud generuješ náhledy automaticky, používej šablonu, která bere jen bezpečná pole: veřejný titul, kategorii, datum a brand. Neber celý obsah stránky a už vůbec ne uživatelský vstup bez validace.
 
-- Nový checkout: default na starý checkout.
-- Drahá AI sumarizace: default vypnout a nabídnout pozdější retry.
-- Nové admin UI: default na staré admin UI.
-- Bezpečnostní omezení exportu: default na přísnější režim.
-- Beta funkce pro vybrané tenanty: default vypnout, pokud nejde spolehlivě ověřit scope.
+## URL pro sdílení drž čisté
 
-Do kódu patří explicitní fallback, ne tiché spoléhání na to, že flag služba bude vždy dostupná. A do testů patří varianta „flag provider neodpovídá“, protože produkce má výborný smysl pro dramatickou timingovou komedii.
+Sdílená URL má být kanonická. UTM parametry mohou být užitečné pro kampaně, ale nemají se stát výchozí adresou článku, ceníku nebo dokumentace. Pokud se do náhledu dostane dlouhá URL s osobním tokenem, session parametrem nebo interním filtrem, problém není v náhledu. Problém je v tom, že taková URL vůbec vznikla.
 
-## Rollout dělej po segmentech, ne podle nálady
+Praktický model:
 
-Postupné spouštění má mít předem dané kroky. Ne „dáme to na 10 %, uvidíme a pak nějak“. Lepší je jednoduchá rollout tabulka:
+- veřejný obsah má jednu kanonickou URL bez osobních parametrů,
+- preview a staging URL mají `noindex` a nesmí být v sitemap,
+- osobní nebo časově omezené odkazy se nesmí sdílet jako obecné marketingové URL,
+- aplikace neukládá referrer s celými query parametry, pokud to není nutné,
+- server umí z citlivých URL odstraňovat nebo ignorovat nepotřebné parametry.
 
-| Fáze | Komu se zapne | Co sleduješ | Stop podmínka |
-| --- | --- | --- | --- |
-| Interní | tým a testovací tenant | chyby, UX slepé uličky, výkon | kritická chyba nebo nejasný tok |
-| Beta | 1–3 domluvení zákazníci | dokončení klíčové akce, support dotazy | opakovaný ruční zásah supportu |
-| Malý rollout | 5–10 % vhodného segmentu | technické chyby, konverze, náklady | nárůst chyb nebo nákladů mimo limit |
-| Plný rollout | celý vybraný segment | stabilita, support, obchodní dopad | incident nebo jasný negativní signál |
-| Úklid | všichni nebo nikdo | odstranění flagu a mrtvého kódu | nezavřené follow-up úkoly |
+U privacy-first webu je lepší mít méně kampaní a čistší data než dvacet variant URL, které nikdo neumí vysvětlit. Analytics má pomáhat rozhodování, ne vyrábět archeologii parametrů.
 
-Segment vybírej podle smyslu funkce, ne podle toho, kdo je nejblíž ruce. U B2B SaaS často dává větší smysl rollout podle tenantů než podle jednotlivých uživatelů, protože jeden zákaznický tým pracuje nad stejnými daty a potřebuje konzistentní chování.
+## Testuj náhledy před publikací
 
-## Experiment bez invazivního měření
+Před publikací článku, landing page nebo případovky si udělej krátký náhledový test. Nečekej, až ti zákazník pošle screenshot s rozbitým obrázkem a titulkem „Untitled page“. To je sice nostalgické, ale ne profesionální.
 
-A/B test nepotřebuje znát celý život návštěvníka. U privacy-first marketingu si předem napiš jednu hypotézu, jednu primární metriku a minimální datový rozsah.
+Kontrola před publikací:
 
-Slabý experiment:
+1. Otevři zdroj stránky a ověř základní meta tagy.
+2. Zkontroluj, že `og:title`, `og:description`, `og:url` a `og:image` odpovídají veřejné verzi stránky.
+3. Ověř, že obrázek vrací správný status, content type a není za přihlášením.
+4. Zkontroluj, že náhled neobsahuje staging, interní ID ani tracking token.
+5. Ověř, že canonical URL odpovídá sitemap a interním odkazům.
+6. Po změně titulku nebo obrázku počítej s cache u externích služeb a nepanikař po prvních třiceti sekundách.
+
+Pro malý tým stačí jednoduchý skript nebo checklist v pull requestu. Cílem není dokonalý nástroj. Cílem je zabránit opakované trapnosti, kdy krásný článek v chatu vypadá jako rozbitá krabice od routeru.
+
+## Dynamické stránky potřebují hranici
+
+U SaaS aplikací je lákavé generovat náhled pro každou sdílenou entitu: report, dashboard, dokument, veřejný odkaz, zákaznický portál. Tady se riziko zvedá rychle.
+
+Bezpečné pravidlo:
+
+- Veřejné marketingové stránky mají bohaté náhledy.
+- Veřejně sdílené dokumenty mají neutrální náhled bez obsahu dokumentu.
+- Přihlášené aplikace mají obecný náhled služby, ne obsah uživatelských dat.
+- Dočasné odkazy nemají indexovatelná metadata s citlivým názvem.
+- Soukromé stránky vrací `noindex` a neutrální popis.
+
+Příklad neutrálního náhledu pro sdílený report:
 
 ```text
-Vyzkoušíme nový hero a budeme sledovat, co to udělá.
+Název: Sdílený report v [název produktu]
+Popis: Otevřete zabezpečený odkaz a zobrazte report, pokud k němu máte oprávnění.
+Obrázek: brandový obrázek produktu bez obsahu reportu
 ```
 
-Lepší experiment:
+Není to tak sexy jako screenshot grafu. Je to ale mnohem lepší než veřejně vystavit název klienta, interní KPI nebo osobní údaje v metadatech, která si uloží kdokoliv po cestě.
 
-```text
-Hypotéza: konkrétnější hero nadpis pro B2B zakladatele zvýší kliknutí na „Domluvit konzultaci“.
-Metrika: agregovaný poměr kliknutí na CTA vůči návštěvám landing page.
-Doba: 14 dní nebo do minimálního vzorku podle návštěvnosti.
-Data: anonymní pageview, varianta A/B, kliknutí na CTA, bez reklamních identifikátorů.
-Rozhodnutí: ponechat vítěze, pokud zlepšení odpovídá obchodnímu cíli a nezhorší kvalitu poptávek.
-```
+## RSS a přímé odkazy jsou pořád součást distribuce
 
-Když je návštěvnost malá, nesnaž se z ní vyždímat statistickou vědu za každou cenu. Malý B2B web často získá víc z kvalitativní kontroly poptávek, rozhovorů a jasnějšího copy než z nekonečného testování odstínu tlačítka. Tlačítko samo o sobě ještě nikdy nezachránilo špatnou nabídku, i když designéři občas dělají, že ano.
+Privacy-first distribuce nestojí jen na náhledech v sociálních sítích. Každá veřejná publikace by měla fungovat i přes přímý odkaz, RSS a obyčejné sdílení e-mailem. To znamená, že titulek, popis a perex musí dávat smysl i bez algoritmického kontextu.
 
-## Flagy nesmí obcházet autorizaci
+Praktický postup:
 
-Feature flag není bezpečnostní kontrola. Může rozhodovat, zda se tlačítko zobrazí, ale server musí pořád ověřit oprávnění. Jinak vznikne krásná fasáda: UI funkci schová, ale API endpoint ji pořád provede každému, kdo zná URL.
+- titulek článku piš tak, aby fungoval samostatně,
+- perex nepoužívej jako clickbait, ale jako stručný slib obsahu,
+- RSS feed drž bez sledovacích pixelů a skrytých redirectů,
+- odkazy v newsletteru nebo chatu mohou vést přímo na web,
+- úspěch měř agregovaně: návštěvy, čtenost, kliknutí na další krok, ne osobní sledování čtenáře.
 
-Bezpečnější model:
+Když obsah potřebuje ke kliknutí trik, pravděpodobně nepotřebuje lepší metadata, ale lepší obsah.
 
-- UI flag rozhoduje o viditelnosti a navigaci.
-- Serverová autorizace rozhoduje, zda se akce smí provést.
-- Tarif nebo role jsou zdrojem oprávnění, ne jen podmínka ve frontendu.
-- API vrací srozumitelnou chybu, pokud funkce není pro tenant povolená.
-- Audit log zaznamená pokus o citlivou akci bez ukládání obsahu zákaznických dat.
+## Checklist: sdílené náhledy bez metadatového průvanu
 
-Tohle platí hlavně pro admin funkce, exporty, AI akce, billing změny a integrace do cizích systémů. Flag může být vypínač, ale zámek musí zůstat zámkem.
+- [ ] Má každá veřejná stránka unikátní titulek a popis?
+- [ ] Odpovídá `og:url` kanonické URL bez osobních parametrů?
+- [ ] Je `og:image` veřejný, stabilní a bez zákaznických dat?
+- [ ] Neobsahuje náhled staging URL, interní ID, e-mail nebo token?
+- [ ] Mají neveřejné stránky neutrální metadata a `noindex`, kde dává smysl?
+- [ ] Funguje stránka při sdílení bez reklamních nebo sociálních skriptů?
+- [ ] Je RSS feed čitelný, přímý a bez tracking pixelů?
+- [ ] Existuje kontrola náhledu před publikací důležitých stránek?
+- [ ] Ví tým, jak řešit cache starých náhledů u externích služeb?
+- [ ] Jsou metadata součástí publikačního checklistu, ne poslední ruční oprava?
 
-## Uklízej flagy jako součást Definition of Done
-
-Dočasné flagy mají mít cleanup ticket hned při vytvoření. Ne až „někdy po release“. Ideální Definition of Done pro release flag:
-
-- funkce je zapnutá pro cílový segment,
-- stará větev už není potřeba,
-- monitoring nehlásí problém,
-- dokumentace nebo release notes jsou aktualizované,
-- flag je odstraněný z kódu, konfigurace a testů,
-- zůstaly jen trvalé permission nebo ops flagy s vlastníkem.
-
-Když flag zůstává déle než jeden kvartál, musí projít revizí. Buď je to opravdu trvalé pravidlo produktu, nebo technický dluh s hezkým názvem. Obojí se dá řídit, ale nesmí se to tvářit stejně.
-
-## Příklad: nový import CSV v B2B SaaS
-
-Tým přidává nový import zákaznických kontaktů z CSV. Funkce je riziková: může vytvořit duplicitní záznamy, dotýká se osobních údajů a při chybě zatíží support.
-
-Privacy-first rollout:
-
-1. Release flag `csv_import_v2` je defaultně vypnutý.
-2. Interní test používá syntetické CSV se stejnými hraničními případy jako reální zákazníci.
-3. Beta se zapne jen třem tenantům, kteří s testem souhlasili a vědí, jak nahlásit chybu.
-4. Loguje se tenant ID, velikost souboru, počet validních/nevalidních řádků, typ chyby a délka zpracování — ne celý obsah CSV.
-5. Kill switch umí zastavit zpracování nových importů, ale nechá doběhnout bezpečné rollback kroky.
-6. Po plném rollout se odstraní stará větev parseru a zůstane jen provozní limit velikosti souboru.
-
-Výsledek: tým nasazuje opatrně, ale nezavádí sledování, které by bylo horší než původní riziko.
-
-## Checklist: feature flagy bez experimentálního chaosu
-
-- [ ] Má každý nový flag kartu s účelem, typem, vlastníkem a datem kontroly?
-- [ ] Je bezpečný default výslovně napsaný a otestovaný?
-- [ ] Rozlišujeme release, ops, permission a experiment flagy?
-- [ ] Používáme pro targeting nejmenší možný datový rozsah?
-- [ ] Neobchází žádný flag serverovou autorizaci?
-- [ ] Existuje rollout plán se stop podmínkami?
-- [ ] Má experiment jednu hypotézu a jednu primární metriku?
-- [ ] Neobsahují logy hodnoty flag kontextu, které nejsou nutné pro provoz?
-- [ ] Má dočasný flag cleanup ticket?
-- [ ] Kontrolujeme staré flagy aspoň měsíčně nebo kvartálně podle rizika?
-
-## Mini šablona feature flag karty
+## Mini šablona metadatové karty
 
 ```markdown
-# Feature flag karta: [název flagu]
+# Metadatová karta: [stránka / typ obsahu]
 
-## Účel
-- Proč flag existuje:
-- Jaké riziko snižuje:
-- Co není cílem:
+## Veřejný účel
+- Pro koho stránka je:
+- Jaký další krok podporuje:
+- Kde se bude sdílet:
 
-## Typ
-- Release / ops / permission / experiment:
-- Dočasný nebo trvalý:
-- Vlastník:
-- Datum kontroly:
+## Texty
+- Title:
+- Meta description:
+- OG title:
+- OG description:
 
-## Default a fallback
-- Default hodnota:
-- Chování při výpadku flag provideru:
-- Stop podmínka:
+## URL
+- Canonical URL:
+- Parametry povolené ve sdílení:
+- Parametry zakázané ve sdílení:
 
-## Targeting
-- Scope: globální / tenant / role / tarif / region:
-- Použitá data:
-- Data, která se nesmí použít:
+## Obrázek
+- OG image URL:
+- Zdroj obrázku:
+- Kontrola citlivých dat:
+- Fallback obrázek:
 
-## Rollout
-- Interní fáze:
-- Beta fáze:
-- Plný rollout:
-- Úklid:
-
-## Měření a logy
-- Primární signál:
-- Technický signál:
-- Retence logů:
-- Privacy poznámka:
+## Privacy kontrola
+- Neveřejná data v metadatech:
+- Externí služby, které náhled stahují:
+- Cache / invalidace:
+- Poznámka pro RSS nebo přímé odkazy:
 ```
 
 ## Zdroje
 
-- [OpenFeature Specification](https://openfeature.dev/specification/) — vendor-neutral specifikace pro práci s feature flagy, providery, evaluation API a stabilitou částí specifikace.
-- [OpenFeature: Evaluation Context](https://openfeature.dev/specification/sections/evaluation-context/) — popis kontextu používaného pro rozhodování flagů; užitečné hlavně pro kontrolu, jaká data do targetingu opravdu posíláš.
-- [Martin Fowler: Feature Toggles](https://martinfowler.com/articles/feature-toggles.html) — praktický rozbor kategorií feature toggles, jejich životnosti, dynamiky a nákladů na údržbu.
-- [GDPR, článek 5 na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng) — zásady zpracování osobních údajů včetně účelového omezení, minimalizace údajů a omezení uložení.
-- [EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en) — doporučení, jak promítnout ochranu dat do návrhu systémů a výchozích nastavení.
+- [The Open Graph protocol](https://ogp.me/) — základní popis Open Graph metadat pro titul, typ, URL a obrázek sdíleného objektu.
+- [MDN: Standard metadata names](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name) — přehled běžných HTML meta jmen včetně `description` a dalších hodnot používaných pro metadata dokumentu.
+- [Google Search Central: Control your snippets](https://developers.google.com/search/docs/appearance/snippet) — doporučení k popisům, náhledům a řízení snippetů ve vyhledávání.
+- [Sitemaps.org protocol](https://www.sitemaps.org/protocol.html) — standard pro sitemap XML a kanonické předávání veřejných URL vyhledávačům.
+- [EDPB: Guidelines on data protection by design and by default](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en) — rámec pro minimalizaci a ochranu dat už ve výchozím návrhu služby.
 
 # Pracovní log
-- 2026-10-06: Doplněna příloha „Feature flagy a rollouty bez experimentálního chaosu“ s rozlišením deploy/release/experiment, typy flagů, flag kartou, bezpečnými defaulty, rollout plánem, privacy-first experimenty, upozorněním na autorizaci, cleanup rutinou, CSV import příkladem, checklistem, šablonou a ověřenými zdroji OpenFeature, Martin Fowler, GDPR a EDPB.
+- 2026-10-06: Doplněna příloha „Open Graph a sdílené náhledy bez metadatového průvanu“ s praktickým modelem veřejných metadat, bezpečnými náhledovými obrázky, čistými URL, testem před publikací, pravidly pro dynamické SaaS stránky, RSS/přímé odkazy, checklistem, metadatovou kartou a ověřenými zdroji Open Graph, MDN, Google Search Central, Sitemaps.org a EDPB.
 - 2026-10-06: Doplněna příloha „Admin přístupy a break-glass bez superadmin folklóru“ s rozdělením běžných admin rolí a nouzového přístupu, least-privilege pravidly, návrhem break-glass toku, bezpečnějším admin UI, auditními logy bez obsahu zákaznických dat, měsíční kontrolou oprávnění, support příkladem, checklistem, admin access kartou a ověřenými zdroji OWASP, NIST a EDPB.
 - 2026-10-06: Doplněn úvodní rozcestník „Kde začít podle situace“ s mapou kapitol pro web, SaaS, AI, provoz, data, marketing a support, hodinovým pracovním postupem, pravidly pro čtení checklistů a vyplnitelnou privacy-first pracovní kartou.
 - 2026-10-06: Doplněna příloha „DPIA-lite pro malé produktové změny bez právního mlžení“ s praktickým rozlišením menší pracovní karty a plného posouzení, účelovou minimalizací dat, popisem rizik jako dopadu na člověka, konkrétními opatřeními, příkladem AI triáže supportu, checklistem, vyplnitelnou DPIA-lite kartou a ověřenými zdroji EUR-Lex a EDPB.
