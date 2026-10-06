@@ -45708,198 +45708,171 @@ To poslední je důležité: dobrý marketing nemusí vymýšlet dramatické př
 - [Semantic Versioning 2.0.0](https://semver.org/)
 - [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 
-# Příloha: Feature flagy a postupné spouštění bez tajné laboratoře v produkci
+# Příloha: Prohlížečová oprávnění bez permission pop-up cirkusu
 
-Feature flag je jednoduchá myšlenka: kód může být nasazený, ale funkce ještě nemusí být zapnutá pro všechny. V malém SaaS je to skvělé, protože nemusíš každou změnu pouštět stylem „držte mi kafe, teď se uvidí“. Můžeš začít interně, pokračovat na pár zákazníků, sledovat provozní signály a teprve potom otevřít změnu širšímu publiku.
+Moderní prohlížeč umí webu zpřístupnit silné schopnosti: kameru, mikrofon, geolokaci, schránku, notifikace, sdílení obrazovky nebo lokální zařízení. To je skvělé, když stavíš videohovor, mapovou službu nebo nástroj pro nahrání dokladu. Je to horší, když homepage hned po načtení vystřelí tři žádosti o oprávnění a uživatel má pocit, že přišel na web a web přišel k němu domů s formulářem na klíče.
 
-Jenže feature flagy mají i temnou stránku. Když nemají vlastníka, datum úklidu a jasné pravidlo dat, stanou se z nich malé tajné chodby v produktu. Po roce nikdo neví, proč existují, kdo je používá a jestli jejich vypnutí nerozbije fakturaci, onboarding nebo demo pro obchod. To není řízené spouštění. To je archeologie s produkčními právy.
+Privacy-first pravidlo je jednoduché: o citlivé oprávnění žádej až ve chvíli, kdy člověk chápe hodnotu, právě dělá relevantní akci a existuje rozumná alternativa. Oprávnění není onboardingový confetti efekt. Je to smlouva důvěry mezi uživatelem, prohlížečem a produktem.
 
-> Codyho komentář: Feature flag je jako vypínač v rozvaděči. Skvělý, když je popsaný. Trochu horor, když je na něm jen izolepa s nápisem „NEVYPÍNAT!!!“.
+> Codyho komentář: Když web žádá o kameru dřív, než vysvětlí proč, nepůsobí moderně. Působí jako soused, který si půjčuje vrtačku skrz zavřené dveře.
 
-## Odděl deployment od release
+## Začni inventářem silných schopností
 
-První princip je mentální: deployment není release. Deployment znamená, že se nový kód dostal do prostředí. Release znamená, že nová schopnost ovlivňuje uživatele. Feature flagy dávají týmu prostor tyto dvě věci oddělit.
+Než začneš ladit prompt texty, napiš si, která oprávnění produkt opravdu potřebuje. Ne podle toho, co framework umí. Podle konkrétní práce uživatele.
 
-Prakticky to pomáhá hlavně ve čtyřech situacích:
+Praktická mapa:
 
-- Nasadíš backend změnu dopředu, ale UI otevřeš až po kontrole dat.
-- Pustíš novou funkci jen interním uživatelům nebo jednomu tenantovi.
-- Umíš rychle vypnout rizikové chování bez rollbacku celého deploye.
-- Testuješ provozní dopad postupně, ne přes celou zákaznickou základnu najednou.
+| Schopnost | Kdy dává smysl | Privacy riziko | Alternativa |
+| --- | --- | --- | --- |
+| Kamera | videohovor, sken dokladu, QR kód | obraz okolí, dokumenty, tváře | upload souboru |
+| Mikrofon | nahrávka, diktování, hovor | hlas, okolní zvuky | textové pole |
+| Geolokace | lokální dostupnost, mapa, doručení | přesná poloha a vzorce pohybu | ruční zadání města/PSČ |
+| Clipboard read | import jednorázového kódu nebo dat | nečekané čtení schránky | ruční vložení |
+| Notifikace | stav jobu, incident, důležitá změna | rušení, citlivý obsah na zařízení | e-mail, in-app inbox |
+| Sdílení obrazovky | support, demo, spolupráce | únik jiných aplikací a dat | screenshot výřezu |
 
-To ale neznamená, že máš každou změnu schovat za flag. Pokud je změna malá, vratná a bez rizikového dopadu na data, může být obyčejný release jednodušší. Flag přidává rozhodovací vrstvu, testovací kombinace a budoucí úklid. Používej ho tam, kde tahle cena dává smysl.
+Pokud neumíš napsat konkrétní uživatelskou větu „potřebujeme [oprávnění], aby uživatel mohl [akce]“, oprávnění zatím nepotřebuješ. A pokud věta zní „abychom měli víc dat“, zavři editor a jdi se projít. Vážně.
 
-## Pojmenuj flag podle rozhodnutí, ne podle tlačítka
+## Nežádej při načtení stránky
 
-Špatný název flagu popisuje implementaci. Dobrý název popisuje rozhodnutí, které tým řídí.
+Žádost o oprávnění má přijít po uživatelské akci. Člověk klikne na „Nahrát hlasovou poznámku“, „Zapnout kameru“, „Najít nejbližší pobočku“ nebo „Dostávat upozornění na dokončený export“. Teprve potom dává smysl vysvětlit, co se stane, a spustit nativní prompt prohlížeče.
 
-Slabé názvy:
+Špatný tok:
 
-- `new_ui`
-- `test2`
-- `enable_v2`
-- `marketing_experiment`
+```text
+Uživatel otevře web → cookie lišta → push notifikace → geolokace → newsletter → uživatel mizí v dálce.
+```
 
-Lepší názvy:
+Lepší tok:
 
-- `billing_export_background_processing`
-- `workspace_invite_role_preview`
-- `signup_email_verification_required`
-- `pricing_page_annual_plan_copy_test`
+```text
+Uživatel otevře mapu dostupnosti → zadá město ručně nebo klikne „Použít aktuální polohu“ → krátké vysvětlení → nativní prompt.
+```
 
-K názvu přidej minimální kartu flagu. Bez ní bude flag za tři měsíce jen záhadná proměnná s produkčním dopadem.
+MDN u Permissions API popisuje stav `granted`, `denied` a `prompt`; pro produkt je důležité, že `prompt` není pozvánka k okamžitému obtěžování. Je to stav, kdy máš navrhnout slušný okamžik, ne přepadovku.
 
-Minimální metadata:
+## Vysvětli účel lidsky a krátce
 
-- Vlastník: člověk nebo tým, který rozhoduje o zapnutí a úklidu.
-- Typ: release, experiment, ops kill switch, permission nebo migration.
-- Výchozí hodnota: co se stane, když systém flag nevyhodnotí.
-- Cílová skupina: interní, konkrétní tenant, procento provozu, tarif, role.
-- Datum kontroly: kdy se rozhodne o rozšíření, úpravě nebo odstranění.
-- Datový dopad: zda mění sběr, zobrazení, export, logování nebo retenci dat.
-
-## Začni typem flagu
-
-Ne každý flag slouží ke stejnému účelu. Když typ nepojmenuješ, tým začne míchat experiment, oprávnění a krizový vypínač do jedné hromádky.
-
-Praktické rozdělení:
-
-- **Release flag:** krátkodobě odděluje nasazení kódu od otevření funkce.
-- **Experiment flag:** porovnává varianty pro rozhodnutí, ideálně na agregovaných metrikách.
-- **Ops flag:** umožní rychle vypnout drahou nebo rizikovou část systému.
-- **Permission flag:** zpřístupňuje funkci podle tarifu, role nebo smlouvy.
-- **Migration flag:** řídí přechod ze starého toku na nový.
-
-Release a migration flagy mají mít jasný konec. Experiment flag má mít hypotézu a datum vyhodnocení. Ops flag může žít déle, ale musí být dokumentovaný a testovaný. Permission flag často patří spíš do autorizačního nebo billing modelu než do ad hoc flag systému.
-
-## Výchozí hodnota musí být bezpečná
-
-Každé vyhodnocení flagu může selhat: nedostupná služba, špatná konfigurace, timeout, chybějící kontext, chyba SDK. Proto musí mít každý flag bezpečnou výchozí hodnotu.
-
-Bezpečná hodnota neznamená vždy `false`. Znamená hodnotu, která nejméně překvapí uživatele a nejméně ohrozí data.
+Před systémovým dialogem ukaž vlastní krátké vysvětlení. Ne právní odstavec. Ne manipulaci. Jednu větu s účelem a alternativou.
 
 Příklady:
 
-- Nový export citlivějších dat: výchozí hodnota vypnuto.
-- Nová validace formuláře: výchozí hodnota staré ověřené chování.
-- Bezpečnostní omezení po incidentu: výchozí hodnota přísnější režim.
-- Dočasné vypnutí drahé AI funkce: výchozí hodnota levnější fallback.
+- Kamera: „Kameru použijeme jen pro naskenování QR kódu. Můžete také zadat kód ručně.“
+- Mikrofon: „Mikrofon je potřeba pro hlasovou poznámku. Nahrávku uložíme k tomuto ticketu.“
+- Poloha: „Polohu použijeme jednorázově pro zobrazení nejbližších míst. Můžete zadat město ručně.“
+- Notifikace: „Upozorníme vás jen na dokončení dlouhého exportu. Nastavení můžete kdykoli vypnout.“
+- Schránka: „Schránku přečteme jen po kliknutí na import. Data před uložením uvidíte v náhledu.“
 
-Do kódu nikdy nedávej default jen proto, aby prošly testy. Default je provozní rozhodnutí. Když se flag služba rozbije v pátek večer, přesně tahle hodnota rozhodne, jestli produkt degraduje elegantně, nebo si udělá malý ohňostroj.
+Dobré vysvětlení říká: co, proč, kdy a jaká je alternativa. Nepotřebuje strašit. Nepotřebuje tlačit. Když funkce stojí za to, přežije i férovou volbu.
 
-## Kontext vyhodnocení drž minimální
+## Denied není chyba uživatele
 
-Feature flag systém svádí k tomu posílat do vyhodnocení spoustu informací: e-mail, jméno firmy, zemi, tarif, obrat, počet uživatelů, chování v aplikaci. Privacy-first přístup říká: neposílej nic, co nepotřebuješ k rozhodnutí.
+Když člověk oprávnění odmítne, produkt se nemá tvářit uraženě. Odmítnutí je legitimní volba. UI má nabídnout alternativní cestu, jasný stav a případně návod, jak oprávnění zapnout později.
 
-Typicky stačí:
+Co nedělat:
 
-- stabilní technické ID uživatele nebo workspace,
-- role nebo tarif, pokud je nutný,
-- prostředí aplikace,
-- interní testovací značka,
-- země nebo region jen tehdy, když má právní nebo provozní význam.
+- blokovat celou aplikaci, pokud oprávnění není opravdu nutné,
+- opakovaně spouštět prompt po každém odmítnutí,
+- schovávat alternativu za malý šedý odkaz,
+- psát „něco se pokazilo“, když uživatel jen řekl ne,
+- ukládat odmítnutí jako marketingový signál k dalšímu nátlaku.
 
-Vyhni se e-mailům, jménům, volným textům, IP adresám a obsahu zákaznických dat. Pokud potřebuješ procentuální rollout, použij stabilní pseudonymní identifikátor, ne osobní údaj, který se bude objevovat v logách a dashboardech.
-
-## Rollout měř podle dopadu, ne podle zvědavosti
-
-Postupné spuštění potřebuje signály. Ale signály nejsou pozvánka k session replay reality show. Měř jen to, co rozhoduje o bezpečném rozšíření nebo zastavení.
-
-Užitečné signály pro rollout:
-
-- chybovost konkrétního toku,
-- latence a timeouty,
-- počet dokončených klíčových akcí,
-- počet support ticketů k nové funkci,
-- agregovaná konverze nebo dokončení workflow,
-- auditní události pro změny oprávnění nebo exporty.
-
-Předem si napiš stop podmínky. Například: „Pokud chybovost exportu překročí 2 % za poslední hodinu, rollout se zastaví a flag se vrátí na předchozí skupinu.“ Bez stop podmínky bude tým často jen koukat na dashboard a tvářit se strategicky. Dashboard sám rozhodnutí neudělá, protože má bohužel horší leadership než tabulka v Excelu.
-
-## Flagy uklízej jako technický dluh s datem splatnosti
-
-Největší problém feature flagů není zapnutí. Je to nezapomenout je odstranit. Každý dlouhodobě mrtvý flag zvyšuje počet kombinací, které musí tým chápat a testovat.
-
-Úklidové pravidlo:
-
-- Release flag smaž po plném spuštění a stabilizační kontrole.
-- Experiment flag smaž po vyhodnocení a rozhodnutí o vítězné variantě.
-- Migration flag smaž po dokončení migrace a ověření starého toku.
-- Ops flag nech jen pokud má runbook, test a vlastníka.
-- Permission pravidla přesuň do modelu oprávnění, pokud řídí trvalé obchodní chování.
-
-Do backlogu nedávej „někdy uklidit flagy“. Vytvoř konkrétní úkol: odstranit podmínku v kódu, smazat konfiguraci, upravit testy, doplnit release notes a ověřit, že auditní nebo analytické eventy pořád dávají smysl.
-
-## Checklist: feature flag bez tajné laboratoře
-
-- [ ] Má flag jasný typ: release, experiment, ops, permission nebo migration?
-- [ ] Má vlastníka, datum kontroly a podmínku odstranění?
-- [ ] Je výchozí hodnota bezpečná při výpadku flag služby?
-- [ ] Posílá vyhodnocovací kontext jen minimální potřebná data?
-- [ ] Je rollout plánovaný po skupinách nebo procentech s jasným cílem?
-- [ ] Jsou definované stop podmínky a rollback postup?
-- [ ] Ví support, kdo funkci uvidí a co má odpovědět?
-- [ ] Jsou změny soukromí popsané v release notes nebo dokumentaci?
-- [ ] Existují testy pro zapnutý i vypnutý stav u rizikových toků?
-- [ ] Je vytvořený úkol na odstranění flagu po dokončení?
-
-## Mini šablona feature flag karty
+Lepší chybová zpráva:
 
 ```text
-# Feature flag karta: [název flagu]
-
-## Základ
-Typ flagu:
-Vlastník:
-Datum vytvoření:
-Datum kontroly:
-Podmínka odstranění:
-
-## Rozhodnutí
-Jaké rozhodnutí flag řídí:
-Komu se funkce zapíná:
-Bezpečná výchozí hodnota:
-Fallback při výpadku:
-
-## Data a soukromí
-Vyhodnocovací kontext:
-Nově sbíraná data:
-Změna logování / auditních událostí:
-Retence souvisejících dat:
-Subprocesor nebo externí služba:
-
-## Rollout
-Interní test:
-Pilotní skupina:
-Postupné rozšíření:
-Stop podmínky:
-Rollback postup:
-
-## Komunikace
-Support poznámka:
-Release notes:
-Dokumentace:
-
-## Úklid
-Kód k odstranění:
-Konfigurace k odstranění:
-Testy k upravení:
-Datum uzavření:
+Kameru jste nepovolili. QR kód můžete zadat ručně, nebo oprávnění později zapnout v nastavení prohlížeče.
 ```
 
-Feature flagy jsou výborný nástroj pro klidnější releasy, ale jen tehdy, když se k nim chováš jako k provoznímu rozhodnutí, ne jako k magickému `if`. U privacy-first SaaS je jejich hodnota ještě větší: můžeš spouštět změny postupně, měřit jen nutné signály, chránit data a komunikovat dopad bez marketingové mlhy. Vlajky patří na mapu, ne do zaprášeného sklepa.
+To je všechno. Žádné drama, žádné „bez kamery nemůžeme pokračovat“ tam, kde ruční zadání funguje.
+
+## Omez schopnosti přes Permissions-Policy
+
+Prohlížečová oprávnění nejsou jen UX. Patří i do bezpečnostní konfigurace. `Permissions-Policy` umožňuje webu říct, které silné schopnosti jsou pro stránku a vložený obsah povolené. MDN popisuje, že hlavička umí omezit například kameru, mikrofon, geolokaci nebo použití funkcí uvnitř iframe.
+
+Privacy-first výchozí nastavení pro běžný marketingový web může vypadat přísně:
+
+```http
+Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+```
+
+U aplikace postupuj podle skutečných potřeb. Pokud kamera patří jen do jedné stránky pro sken QR kódu, nepovoluj ji plošně všude. Pokud embeduješ třetí stranu v iframe, zkontroluj i atribut `allow`. Jinak můžeš mít hezky napsanou privacy stránku a vedle ní vložený cizí widget s oprávněními, která nikdo nechtěl auditovat. Klasika: zadní dveře s designovým rámečkem.
+
+## Citlivý obsah nedávej do notifikací a náhledů
+
+Oprávnění často otevře cestu mimo bezpečný kontext aplikace. Notifikace se objeví na zamčené obrazovce. Sdílení obrazovky ukáže vedlejší okna. Kamera zachytí okolí. Mikrofon slyší místnost. Clipboard může obsahovat heslo, token nebo kus interní zprávy.
+
+Proto minimalizuj obsah:
+
+- notifikace má říct „export je hotový“, ne přiložit obsah exportu,
+- sdílení obrazovky nabídni s připomínkou zavřít citlivá okna,
+- nahrávku mikrofonu ukládej jen tam, kde ji uživatel čeká,
+- clipboard import ukaž v náhledu před uložením,
+- u geolokace preferuj přibližnou polohu, pokud přesná není nutná.
+
+Privacy-first produkt se neptá jen „máme souhlas?“. Ptá se také „co nejhoršího se stane, když se tahle informace objeví na špatném místě?“ To je méně sexy než animovaný prompt, ale podstatně užitečnější.
+
+## Checklist: oprávnění bez nátlaku
+
+- [ ] Má každé oprávnění jasný účel navázaný na konkrétní uživatelskou akci?
+- [ ] Nežádáme o citlivá oprávnění hned při načtení stránky?
+- [ ] Má uživatel před promptem krátké lidské vysvětlení?
+- [ ] Existuje alternativa bez daného oprávnění, pokud je realistická?
+- [ ] Stav `denied` má srozumitelnou zprávu a nevede k opakovanému obtěžování?
+- [ ] `Permissions-Policy` vypíná schopnosti, které web nepotřebuje?
+- [ ] Vložené iframe prvky mají zkontrolovaný `allow` atribut?
+- [ ] Notifikace, nahrávky a náhledy neobsahují zbytečně citlivý obsah?
+- [ ] Oprávnění a související data mají jasnou retenci?
+- [ ] Support ví, jak poradit se zapnutím, odmítnutím i alternativní cestou?
+
+## Mini šablona permission karty
+
+```text
+# Permission karta: [funkce / oprávnění]
+
+## Účel
+Oprávnění:
+Uživatelská akce, která žádost spouští:
+Proč je oprávnění potřeba:
+Alternativa bez oprávnění:
+
+## Data
+Jaká data vznikají:
+Kam se ukládají:
+Kdo k nim má přístup:
+Retence:
+Zobrazení v notifikacích / náhledech:
+
+## UX
+Text před promptem:
+Stav při odmítnutí:
+Návod na pozdější zapnutí:
+Frekvence opakované žádosti:
+
+## Technická kontrola
+Permissions-Policy:
+Iframe allow atributy:
+Logování chyb:
+Test v podporovaných prohlížečích:
+
+## Revize
+Vlastník:
+Datum kontroly:
+Důvod ponechání oprávnění:
+```
+
+Prohlížečová oprávnění jsou užitečná, když respektují kontext. Nejsou to laciné growth hacky, nejsou to automatické vstupenky k citlivým datům a rozhodně nejsou něco, co se má na uživatele vystřelit dřív než první věta produktu. Dobré oprávnění je jako dobrý servisní zásah: jasný účel, minimální rozsah, možnost odmítnout a žádné překvapení v rohu obrazovky.
 
 ## Zdroje
 
-- [OpenFeature: Introduction](https://openfeature.dev/docs/reference/intro/)
-- [OpenFeature Specification: Providers](https://openfeature.dev/specification/sections/providers/)
-- [Martin Fowler: Feature Toggles](https://martinfowler.com/articles/feature-toggles.html)
-- [Martin Fowler: Feature Flag](https://martinfowler.com/bliki/FeatureFlag.html)
-- [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- [MDN: Using the Permissions API](https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API/Using_the_Permissions_API)
+- [MDN: Permissions API](https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API)
+- [MDN: Permissions Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Permissions_Policy)
+- [MDN: Permissions-Policy camera directive](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Permissions-Policy/camera)
+- [MDN: MediaDevices.getUserMedia()](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia)
 
 # Pracovní log
 
-- 2026-10-06: Doplněna příloha „Feature flagy a postupné spouštění bez tajné laboratoře v produkci“ s oddělením deploymentu od releasu, typy flagů, bezpečnými defaulty, minimalizací kontextu, rollout metrikami, úklidem, checklistem, feature flag kartou a ověřenými zdroji OpenFeature, Martina Fowlera a OWASP.
+- 2026-10-06: Doplněna příloha „Prohlížečová oprávnění bez permission pop-up cirkusu“ s inventářem citlivých schopností, UX pravidly pro žádosti, alternativami při odmítnutí, `Permissions-Policy`, minimalizací obsahu, checklistem, permission kartou a ověřenými zdroji MDN.
 - 2026-10-06: Doplněna příloha „Release notes a changelog bez marketingové mlhy“ s rozlišením interního changelogu a zákaznických release notes, kategoriemi změn, zvláštním značením privacy dopadů, verzováním, napojením na podporu a obchod, checklistem, šablonou release poznámky a ověřenými zdroji Keep a Changelog, SemVer a OWASP.
 - 2026-10-05: Doplněna příloha „Datový slovník a klasifikace polí bez štítkovacího divadla“ s praktickým modelem klasifikace polí, pravidly pro logy, analytiku, support UI, exporty, AI zpracování, pseudonymizaci, checklistem, datovou kartou pole a ověřenými zdroji GDPR, OWASP a ENISA.
 - 2026-10-05: Doplněna příloha „Právní a provozní stránky bez copy-paste mlhy“ s inventářem zásad ochrany soukromí, podmínek, DPA, subprocesorů a bezpečnostních kontaktů, napojením dokumentů na datovou mapu, pravidly verzování změn, checklistem, šablonou transparentnosti a ověřenými zdroji GDPR, Evropské komise a EDPB.
