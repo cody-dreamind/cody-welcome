@@ -49445,8 +49445,176 @@ Veřejná komunikace nemusí popisovat každý interní job, ale má být srozum
 - [EDPB: Guidelines 01/2022 on data subject rights — Right of access](https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en)
 - [ICO: Principle (e) — Storage limitation](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/storage-limitation/)
 
+# Příloha: Feature flags a rollout bez datového dluhu
+
+Feature flag není kouzelné tlačítko „pusťme to a uvidíme“. Je to provozní pojistka, která umožní oddělit deploy od zveřejnění funkce, spustit změnu pro malou skupinu lidí, rychle ji vypnout a přitom nezavést do produktu nový datový chaos. U privacy-first SaaS je to obzvlášť důležité: postupný rollout nemá znamenat, že začneš sbírat detailní profily uživatelů jen proto, aby šla funkce lépe cílit.
+
+OpenFeature popisuje feature flagging jako způsob, jak dynamicky měnit chování softwaru bez nového deploye ([OpenFeature: Specification](https://openfeature.dev/specification/)). To je technicky lákavé, ale organizačně nebezpečné, pokud flagy nemají vlastníka, datum expirace a audit. Bez toho se z nich stane druhá konfigurace produktu, kterou nikdo nechce uklízet. A jak víme, „dočasné“ v softwaru často znamená „najde to junior v roce 2031 a bude se ptát, kdo byl tak kreativní“.
+
+> Codyho komentář: Feature flag je jako pojistka v rozvaděči. Skvělé, když víš, co vypíná. Horší, když po třech letech nikdo netuší, proč je popsaná fix-final-final-2.
+
+## Rozliš typ flagu podle rizika
+
+Ne všechny flagy mají stejný účel. Když je házíš do jednoho pytle, skončíš s nastavením, které neumí rozlišit experiment, kill switch a zákaznickou konfiguraci.
+
+Praktické kategorie:
+
+- **Release flag** — schová novou funkci po deployi, než ji zapneš vybraným zákazníkům.
+- **Experiment flag** — porovnává dvě varianty chování, textu nebo toku.
+- **Permission flag** — zapíná placenou nebo smluvně omezenou funkci pro konkrétní tenanty.
+- **Operational flag** — slouží jako kill switch, degradovaný režim nebo omezení drahé operace.
+- **Migration flag** — přepíná část provozu na novou implementaci během technické migrace.
+
+Každá kategorie má jinou životnost. Release flag má obvykle zmizet krátce po stabilním rollout. Experiment flag má skončit po vyhodnocení. Permission flag může zůstat dlouhodobě, ale měl by být modelovaný jako produktové oprávnění, ne jako zapomenutý boolean v konfigurační tabulce. Operational flag může žít dlouho, ale musí být testovaný a jasně popsaný.
+
+## Cílení bez šmírovací segmentace
+
+Největší privacy past u rolloutů je pohodlné cílení: „zapneme to lidem, kteří mají vysokou aktivitu, používají Chrome, jsou z konkrétní země, klikli na poslední kampaň a mají podobné chování jako nejlepší zákazníci“. Technicky to jde. Hodnotově je to bahno.
+
+Privacy-first cílení drž jednoduché:
+
+- podle tenantu nebo zákaznické skupiny,
+- podle explicitního beta programu,
+- podle tarifu nebo smluvního oprávnění,
+- podle prostředí, například staging, interní provoz, produkce,
+- podle náhodného stabilního bucketu, který neukládá zbytečný profil.
+
+Vyhýbej se cílení podle detailního chování jednotlivce, pokud k tomu nemáš velmi silný důvod. Pro většinu B2B SaaS stačí řízený seznam tenantů, procentuální rollout a ruční beta skupina. Když už potřebuješ experimentální segment, popiš účel, datové vstupy a retenci stejně poctivě jako u analytiky.
+
+## Flag potřebuje kartu, ne jen název
+
+Název flagu nestačí. `new_dashboard_v2` je možná pochopitelné dnes, ale za půl roku budeš řešit, jestli je novější `new_dashboard_v3`, `dashboard_redesign`, nebo tajemný `dashboard_fix_old_customers`. Každý netriviální flag proto potřebuje krátkou kartu.
+
+Minimální pole:
+
+- název flagu a kategorie,
+- vlastník rozhodnutí,
+- důvod zavedení,
+- koho se týká,
+- výchozí hodnota,
+- plán rollout kroků,
+- bezpečný rollback,
+- datum kontroly nebo expirace,
+- datový dopad.
+
+Datový dopad neznamená román. Stačí jasně napsat, jestli flag mění sběr, ukládání, zobrazení, export nebo sdílení dat. Pokud ano, patří k němu i kontrola datové mapy, logování a support scénářů.
+
+## Rollout dělej po malých hranicích
+
+Dobrý rollout má zastávky. Ne „zapnout všem v pátek odpoledne“, protože páteční deploy je sport pro lidi, kteří nemají rádi víkend.
+
+Jednoduchý B2B rollout:
+
+1. Interní účet nebo testovací tenant.
+2. Jeden dobrovolný zákazník s domluvenou zpětnou vazbou.
+3. 5–10 % vhodných tenantů nebo vybraná beta skupina.
+4. 25–50 % tenantů po kontrole metrik a supportu.
+5. 100 % a následné odstranění release flagu.
+
+Na každém kroku kontroluj jen signály, které opravdu potřebuješ: chybovost, latenci, počet dokončených klíčových akcí, počet support dotazů a případné bezpečnostní události. OWASP u logování připomíná, že logy nemají obsahovat data, která nejsou potřebná pro účel logování, a varuje před ukládáním citlivých údajů do logů ([OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). Jinými slovy: rollout nepotřebuje celý obsah zákaznického dokumentu, aby poznal, že se nová funkce rozbila.
+
+## Rollback musí být nacvičený
+
+Feature flag, který nejde bezpečně vypnout, není feature flag. Je to jen dekorativní přepínač s falešným sebevědomím.
+
+Před zapnutím si ověř:
+
+- vypnutí flagu vrátí uživatele do funkčního toku,
+- nová data nezničí starý model,
+- nedojde k nekonzistentnímu stavu mezi UI, API a background joby,
+- cache a fronty umí respektovat změnu flagu,
+- support ví, jak poznat dopad na konkrétního zákazníka bez nahlížení do zbytečných dat.
+
+Pokud funkce zapisuje nový typ dat, rollback neznamená jen vypnout UI. Musíš vědět, co se stane s rozpracovanými záznamy, exporty, webhooky a notifikacemi. U změn s dopadem na HTTP chování mysli i na férové chybové odpovědi: `503 Service Unavailable` a `Retry-After` mají jasný význam pro dočasnou nedostupnost a opakování požadavku ([MDN: 503 Service Unavailable](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/503), [MDN: Retry-After](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After)).
+
+## Flag debt uklízej pravidelně
+
+Flag debt je nenápadný. Nezpomaluje produkt jedním velkým výbuchem, ale tisícem malých otázek: „platí tahle větev ještě?“, „máme testovat obě varianty?“, „proč zákazník A vidí jiný formulář než zákazník B?“.
+
+Měsíční úklid:
+
+- najdi flagy po expiraci,
+- ověř, které jsou zapnuté pro všechny,
+- smaž mrtvé větve kódu,
+- přepiš dlouhodobé permission flagy do běžného oprávnění,
+- zkontroluj testy pro vypnutý i zapnutý stav jen tam, kde flag ještě žije,
+- aktualizuj dokumentaci a support poznámky.
+
+Dobré pravidlo: release flag bez konkrétního důvodu by neměl přežít déle než jeden nebo dva release cykly po plném zapnutí. Pokud přežívá, buď je to permission model, nebo technický dluh převlečený za opatrnost.
+
+## Příklad: nový AI návrh odpovědi v supportu
+
+Chceš přidat AI funkci, která supportu navrhne odpověď na ticket. Bez flagů by to byl velký skok. S dobrým rolloutem to rozdělíš bezpečně:
+
+- Release flag zapne UI jen internímu support týmu.
+- Permission flag povolí funkci jen tenantům, kteří mají AI zpracování smluvně povolené.
+- Operational flag umožní okamžitě vypnout generování návrhů, když se zvýší chybovost nebo náklady.
+- Datová karta říká, že do modelu nejde platební historie ani interní poznámky mimo ticket.
+- Audit log ukládá, kdo návrh použil, ale neukládá celý prompt s citlivým obsahem.
+
+Vyhodnocení nedělej podle „kolik lidí kliklo na magické tlačítko“. Lepší otázky: zkrátila funkce čas první odpovědi, snížila počet oprav, nezvýšila rizikové odpovědi a respektuje zákaznická datová nastavení?
+
+## Checklist: feature flags bez datového dluhu
+
+- [ ] Každý flag má kategorii: release, experiment, permission, operational nebo migration.
+- [ ] Každý netriviální flag má vlastníka a datum kontroly.
+- [ ] Cílení používá tenant, beta skupinu, tarif nebo stabilní bucket, ne zbytečné behaviorální profily.
+- [ ] Rollout má postupné kroky a stop podmínky.
+- [ ] Rollback je otestovaný včetně cache, front, background jobů a datových migrací.
+- [ ] Logy obsahují provozní signály, ne zákaznický obsah.
+- [ ] Experimentální data mají účel, rozsah a retenci.
+- [ ] Flag zapnutý pro všechny má plán odstranění z kódu.
+- [ ] Support ví, jak poznat stav flagu pro tenant bez ručního lovu v databázi.
+- [ ] Permission flagy se nepoužívají jako náhrada za dlouhodobý oprávňovací model.
+
+## Mini šablona flag karty
+
+```text
+## Název flagu
+
+## Kategorie
+- Release / experiment / permission / operational / migration:
+
+## Účel
+- Proč existuje:
+- Jaké rozhodnutí umožňuje:
+
+## Rozsah
+- Tenanty / beta skupina / tarif:
+- Výchozí hodnota:
+
+## Rollout
+- Krok 1:
+- Krok 2:
+- Krok 3:
+- Stop podmínky:
+
+## Data a privacy
+- Mění sběr nebo ukládání dat?
+- Jaké logy vznikají?
+- Retence experimentálních dat:
+
+## Rollback
+- Jak vypnout:
+- Co zkontrolovat po vypnutí:
+- Kdo rozhoduje:
+
+## Expirace
+- Datum kontroly:
+- Podmínka odstranění z kódu:
+```
+
+## Zdroje
+
+- [OpenFeature: Specification](https://openfeature.dev/specification/) — standardizovaný model feature flaggingu a dynamické konfigurace.
+- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučení pro bezpečné logování bez zbytečného ukládání citlivých dat.
+- [MDN: 503 Service Unavailable](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/503) — význam dočasné nedostupnosti služby.
+- [MDN: Retry-After](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After) — hlavička pro řízení opakování požadavku po dočasném omezení nebo nedostupnosti.
+
+
 # Pracovní log
 
+- 2026-10-06: Doplněna příloha „Feature flags a rollout bez datového dluhu“ s rozdělením flagů podle účelu, privacy-first cílením, flag kartou, postupným rolloutem, rollback pravidly, úklidem flag debt, B2B AI support příkladem, checklistem a ověřenými zdroji OpenFeature, OWASP a MDN.
 - 2026-10-06: Doplněna příloha „Retenční plán bez datového sklepa“ s praktickým rozdělením dat podle životního cyklu, návrhem mazacích jobů, samostatným přístupem k zálohám, příkladem B2B SaaS po zrušení účtu, checklistem, retenční kartou a ověřenými zdroji EUR-Lex, EDPB a ICO.
 
 - 2026-10-06: Doplněna příloha „Kill switche a degradovaný režim bez panického vypínání“ s prioritizací funkcí, spouštěči a prahy nouzového vypnutí, vzory degradace, privacy-first auditováním, nácvikem mimo incident, návratem zpět, příkladem AI sumarizace, checklistem, kill switch kartou a ověřenými zdroji Google Cloud, NIST a OWASP.
