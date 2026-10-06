@@ -49312,7 +49312,142 @@ Takhle systém nepanikaří. Jen přestane dělat pohodlnou věc, dokud není be
 - [OWASP Business Logic Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Business_Logic_Security_Cheat_Sheet.html) — připomíná nutnost monitoringu, reakce na zneužití a posilování kontrol podle zjištěných incidentů.
 
 
+# Příloha: Retenční plán bez datového sklepa
+
+Retence dat je nudné slovo pro velmi praktickou otázku: jak dlouho opravdu potřebuješ držet konkrétní data a co se s nimi stane potom. Malé SaaS a webové týmy ji často řeší pozdě, protože mazání nepůsobí jako růstová funkce. Jenže právě stará data bývají nejlevnější způsob, jak si vyrobit drahý problém: větší únik, složitější žádost zákazníka, pomalejší databázi, horší exporty, nejisté zálohy a privacy policy, která slibuje něco, co systém neumí splnit.
+
+GDPR v článku 5 pracuje mimo jiné s principem omezení uložení: osobní údaje mají být uchovávané ve formě umožňující identifikaci jen po dobu nezbytnou pro účely zpracování ([EUR-Lex: Regulation 2016/679, Article 5](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679)). EDPB ve své SME příručce k právům lidí připomíná, že lidé mají dostat informaci o době uchování nebo kritériích, podle kterých se určuje ([EDPB: Respect individuals’ rights](https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_en)). Prakticky řečeno: „necháme si to, kdyby se to někdy hodilo“ není strategie. To je digitální půda s krabicemi bez popisků.
+
+> Codyho komentář: Retenční plán není o tom, že budeš mazat všechno hned a tvářit se jako datový mnich. Je o tom, že každé datum smazání má mít důvod — a každé prodloužení taky.
+
+## Retence začíná účelem
+
+Nezačínej otázkou „kolik dní to držet“. Začni otázkou „k čemu přesně to ještě potřebujeme“. Stejný typ dat může mít různé retenční důvody podle kontextu. E-mail ve formuláři může být potřeba pro odpověď na poptávku, později pro obchodní komunikaci a jinde už jen jako součást účetního nebo smluvního záznamu. Každý účel má jiný vlastník, riziko a konec životního cyklu.
+
+U každé datové kategorie si napiš:
+
+- účel sběru,
+- právní nebo obchodní důvod uchování,
+- minimální potřebný rozsah,
+- systém, kde data fyzicky leží,
+- kdo je vlastníkem rozhodnutí,
+- retenční lhůtu nebo kritérium,
+- co se stane po konci lhůty.
+
+Dobré kritérium může být konkrétní datum, počet dní od události nebo stav procesu. Například „30 dní od vyřešení support ticketu“, „po dobu aktivního účtu plus 90 dní pro obnovu“, „do ukončení obchodního jednání, nejdéle 12 měsíců od poslední relevantní komunikace“. Důležité je, aby kritérium uměl systém i člověk použít bez věštecké koule.
+
+## Rozděl data podle životního cyklu
+
+Jeden retenční řádek pro celou aplikaci je skoro vždycky málo. Praktický privacy-first SaaS rozlišuje alespoň několik vrstev:
+
+- **Účet a identita** — uživatel, přihlášení, role, fakturační kontakt.
+- **Produktová data** — projekty, dokumenty, úkoly, konfigurace, importy.
+- **Provozní data** — logy, metriky, auditní záznamy, chybové reporty.
+- **Support a komunikace** — tickety, e-maily, chat, poznámky supportu.
+- **Marketingová data** — formuláře, preference, události kampaní, RSS signály.
+- **Zálohy a exporty** — databázové backupy, zákaznické exporty, dočasné archivy.
+
+Každá vrstva má jiný kompromis. Produktová data mají být dostupná zákazníkovi a mazatelná podle jeho životního cyklu. Auditní logy mají chránit bezpečnost a odpovědnost, ale nemají obsahovat zbytečný obsah dokumentů. Marketingová data mají být nejhubenější: méně polí, kratší doba, jasný důvod. Zálohy mají chránit obnovu, ne sloužit jako nesmrtelný paralelní archiv.
+
+## Mazání musí být funkce, ne ruční rituál
+
+Retenční plán bez technického provedení je jen hezká tabulka. Každá kategorie dat potřebuje skutečnou mazací nebo anonymizační cestu. Ideálně automatickou, monitorovanou a vratnou jen tam, kde to dává smysl.
+
+Praktický postup:
+
+1. Označ záznamy datem vzniku a datem poslední relevantní aktivity.
+2. Přidej stav: aktivní, čeká na smazání, smazáno, anonymizováno, blokováno kvůli povinnosti.
+3. Spouštěj pravidelný job, který vybírá jen záznamy po lhůtě.
+4. U citlivých mazání použij nejdřív měkký přechod, například krátkou karanténu.
+5. Loguj výsledek mazacího jobu agregovaně: kolik záznamů, z jaké kategorie, bez obsahu.
+6. Testuj mazání na stagingu se syntetickými daty.
+
+Největší past je částečné mazání. Uživatel zmizí z hlavní tabulky, ale zůstane v exportu, chybovém logu, support poznámce, dočasném souboru nebo analytickém nástroji. Proto retenční plán musí pokrývat i odvozená data. Když něco neumíš bezpečně smazat, napiš proč, kdo je vlastník a jaké je kompenzační opatření.
+
+## Zálohy řeš jako samostatnou kapitolu
+
+Zálohy mají vlastní pravidla. Není praktické upravovat každý starý backup po jednotlivé žádosti, ale není ani v pořádku tvářit se, že záloha je mimo realitu. Potřebuješ vědět, jak dlouho zálohy držíš, kde jsou, kdo k nim má přístup, kdy expirují a co se stane při obnově.
+
+Minimum pro malé SaaS:
+
+- krátká provozní retence záloh podle RPO/RTO, ne „navždy pro jistotu“,
+- šifrování a oddělené přístupy,
+- pravidelný restore test,
+- dokumentovaný postup, jak se po obnově znovu aplikuje seznam smazaných nebo blokovaných subjektů,
+- zákaz ukládání exportů do osobních disků a chatů,
+- jasné mazání dočasných archivů po migraci nebo incidentu.
+
+Pokud obnovíš starší zálohu, nesmíš tím potichu oživit data, která už měla být pryč. Prakticky si drž malý „deletion ledger“: bezpečný seznam technických identifikátorů nebo hashů záznamů, které mají po obnově znovu projít mazacím jobem. Pozor na to, aby tenhle seznam sám neobsahoval zbytečná osobní data.
+
+## Příklad: B2B SaaS po zrušení účtu
+
+Představ si SaaS pro správu klientských projektů. Zákazník zruší účet. Co se stane?
+
+- Den 0: účet se deaktivuje, přístup se zastaví, administrátor dostane možnost exportu.
+- Den 0–30: produktová data jsou v retenční karanténě pro případ omylu nebo obnovy.
+- Den 30: projekty, úkoly a přílohy se mažou nebo anonymizují podle smluvního nastavení.
+- Den 30–90: zůstává minimum provozních záznamů potřebných pro bezpečnost a řešení sporů.
+- Podle zákonných nebo smluvních důvodů zůstávají fakturační a účetní záznamy odděleně.
+- Po expiraci záloh se stará data přirozeně odstraní i z backup vrstvy.
+
+Veřejná komunikace nemusí popisovat každý interní job, ale má být srozumitelná: co se maže hned, co po ochranné lhůtě, co zůstává kvůli povinnostem a jak může zákazník požádat o export nebo výmaz. Transparentnost není román. Je to schopnost odpovědět bez improvizace.
+
+## Checklist: retenční plán bez datového sklepa
+
+- [ ] Má každá datová kategorie jasný účel a vlastníka?
+- [ ] Je u každé kategorie retenční lhůta nebo srozumitelné kritérium?
+- [ ] Umíme rozlišit aktivní data, karanténu, smazání a anonymizaci?
+- [ ] Existuje automatický nebo pravidelný mazací proces?
+- [ ] Logujeme mazání bez ukládání obsahu nebo zbytečných identifikátorů?
+- [ ] Pokrývá plán support, logy, exporty, přílohy a dočasné soubory?
+- [ ] Mají zálohy vlastní retenční politiku a restore test?
+- [ ] Umíme po obnově z backupu znovu aplikovat dřívější mazání?
+- [ ] Odpovídá privacy policy skutečnému chování systému?
+- [ ] Kontrolujeme retenční plán při přidání nové funkce nebo integrace?
+
+## Mini šablona retenční karty
+
+```text
+# Retenční karta: [datová kategorie]
+
+## Účel
+- Proč data sbíráme:
+- Kdo je vlastník rozhodnutí:
+- Která funkce nebo proces data používá:
+
+## Rozsah
+- Pole / typy údajů:
+- Systémy, kde data leží:
+- Odvozená data, logy a exporty:
+
+## Retence
+- Aktivní uchování:
+- Karanténa / ochranná lhůta:
+- Mazání nebo anonymizace:
+- Výjimky a důvod:
+
+## Provoz
+- Automatický job nebo ruční proces:
+- Jak se ověřuje výsledek:
+- Jak se řeší zálohy:
+- Kdy proběhla poslední kontrola:
+
+## Komunikace
+- Text pro privacy policy:
+- Text pro zákaznickou odpověď:
+- Interní kontakt:
+```
+
+## Zdroje
+
+- [EUR-Lex: Regulation (EU) 2016/679, Article 5](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679)
+- [EDPB: Respect individuals’ rights](https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_en)
+- [EDPB: Guidelines 01/2022 on data subject rights — Right of access](https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en)
+- [ICO: Principle (e) — Storage limitation](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/storage-limitation/)
+
 # Pracovní log
+
+- 2026-10-06: Doplněna příloha „Retenční plán bez datového sklepa“ s praktickým rozdělením dat podle životního cyklu, návrhem mazacích jobů, samostatným přístupem k zálohám, příkladem B2B SaaS po zrušení účtu, checklistem, retenční kartou a ověřenými zdroji EUR-Lex, EDPB a ICO.
 
 - 2026-10-06: Doplněna příloha „Kill switche a degradovaný režim bez panického vypínání“ s prioritizací funkcí, spouštěči a prahy nouzového vypnutí, vzory degradace, privacy-first auditováním, nácvikem mimo incident, návratem zpět, příkladem AI sumarizace, checklistem, kill switch kartou a ověřenými zdroji Google Cloud, NIST a OWASP.
 - 2026-10-06: Doplněna příloha „Open Graph a sdílené náhledy bez metadatového průvanu“ s praktickým modelem veřejných metadat, bezpečnými náhledovými obrázky, čistými URL, testem před publikací, pravidly pro dynamické SaaS stránky, RSS/přímé odkazy, checklistem, metadatovou kartou a ověřenými zdroji Open Graph, MDN, Google Search Central, Sitemaps.org a EDPB.
