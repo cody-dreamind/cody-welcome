@@ -48346,7 +48346,180 @@ Vlastník opravy:
 - [web.dev: Core Web Vitals](https://web.dev/articles/vitals) — přehled metrik LCP, INP a CLS pro uživatelskou zkušenost.
 
 
+# Příloha: Závislosti a SBOM bez knihovního minového pole
+
+Moderní web a SaaS nestojí jen na vlastním kódu. Stojí na frameworku, balíčcích, kontejnerech, CI akcích, SDK, ikonách, date pickeru, markdown parseru, e-mailové knihovně a dalších drobných věcech, které se do produktu dostaly často rychleji než dobrý oběd. To samo o sobě není problém. Problém je, když tým neví, co používá, proč to používá, kdo to aktualizuje a co se stane, když některá závislost začne hořet.
+
+SBOM, tedy Software Bill of Materials, je strojově čitelný seznam softwarových komponent a jejich vztahů. CISA ho popisuje jako klíčový podklad pro transparentnost softwarového dodavatelského řetězce a uvádí minimální prvky jako dodavatel, název komponenty, verze, unikátní identifikátor, vztahy mezi komponentami a autor záznamu ([CISA: SBOM Minimum Elements](https://www.cisa.gov/resources-tools/resources/software-bill-materials-sbom)). Pro malý tým to neznamená korporátní rituál s razítkem. Znamená to jednoduchou schopnost rychle odpovědět: „Používáme tuhle zranitelnou věc někde v produkci?“
+
+> Codyho komentář: Závislosti jsou jako hosté na firemní párty. Většina je v pohodě, ale když nevíš, kdo přišel, kdo přivedl kamarády a kdo má klíče od skladu, je zaděláno na komedii s bezpečnostním rozpočtem.
+
+## Inventář dřív než panika
+
+První krok není koupit drahý scanner. První krok je vědět, kde závislosti vznikají.
+
+Typická místa:
+
+- `package.json`, `pnpm-lock.yaml`, `package-lock.json` nebo `yarn.lock`,
+- `composer.json`, `requirements.txt`, `pyproject.toml`, `Gemfile`, `go.mod`,
+- `Dockerfile` a base image,
+- GitHub Actions, GitLab CI nebo jiné CI workflow kroky,
+- CDN skripty vložené do HTML,
+- externí SDK pro analytiku, platby, chat, mapy nebo AI,
+- Figma/plugin exporty, ikony, fonty a design assety,
+- systémové balíčky v serverovém obrazu.
+
+U každého místa si napiš tři otázky:
+
+- Je to runtime závislost, build nástroj, nebo jen vývojová pomůcka?
+- Má přístup k osobním údajům, tokenům, souborům, síti nebo produkční databázi?
+- Kdo u nás rozhoduje o aktualizaci a odstranění?
+
+Tahle jednoduchá inventura sníží chaos víc než deset bezpečnostních dashboardů, které nikdo nečte. Pokud závislost neumíš zařadit, nemáš ji pod kontrolou. A pokud ji nemáš pod kontrolou, nepatří automaticky do produkce jen proto, že má hezké logo a hvězdičky na GitHubu.
+
+## SBOM jako provozní mapa, ne sběratelský certifikát
+
+SBOM má dávat odpovědi, ne ozdobit auditní složku. CycloneDX je otevřený standard pro SBOM a další typy „bill of materials“ dokumentů, používaný mimo jiné pro komponenty, služby, zranitelnosti a licence ([CycloneDX: Introduction](https://cyclonedx.org/docs/1.6/json/)).
+
+Pro menší web nebo SaaS stačí začít prakticky:
+
+- generuj SBOM při release nebo při buildu produkčního artefaktu,
+- ukládej ho jako artefakt k verzi, ne jako ručně upravovaný dokument,
+- zachovej vazbu na commit SHA, tag nebo číslo release,
+- zahrň aplikační závislosti i kontejnerový obraz, pokud ho používáš,
+- neukládej do SBOM tajné hodnoty, `.env` obsah ani interní zákaznická data,
+- domluv, kdo SBOM čte při incidentu a kdo rozhoduje o opravě.
+
+Praktický výstup může být soubor `sbom.json` u každého release. Není nutné ho dávat veřejně, pokud to nedává obchodně nebo smluvně smysl. Důležité je, aby byl dostupný interně, když se objeví zranitelnost typu „kritická chyba v knihovně X“.
+
+Privacy-first pravidlo: SBOM popisuje software, ne uživatele. Pokud se ti do něj dostávají názvy zákazníků, tokeny, cesty s osobními údaji nebo interní tajemství, negeneruješ inventář. Generuješ únik v hezkém formátu.
+
+## Aktualizace rozděl podle rizika
+
+Ne každá aktualizace je stejná. Některá opraví překlep v dokumentaci. Jiná mění autentizaci, SQL builder nebo parser souborů od zákazníka. Pokud všechny aktualizace házíš do jednoho pytle, buď všechno blokuješ, nebo všechno pouštíš moc snadno.
+
+Rozděl závislosti do tří tříd:
+
+1. **Nízké riziko:** vývojové nástroje, formátování, testovací utility bez produkčního přístupu.
+2. **Střední riziko:** UI knihovny, routing, build pipeline, běžné serverové utility.
+3. **Vysoké riziko:** autentizace, autorizace, šifrování, ORM/SQL, uploady, parsování dokumentů, platby, e-mail, cloud SDK, AI konektory a cokoliv s produkčními tokeny.
+
+Nízké riziko může mít automatický pull request a rychlou kontrolu testů. Střední riziko potřebuje changelog, test kritických cest a rollback poznámku. Vysoké riziko potřebuje jasného vlastníka, bezpečnostní checklist a ideálně staging test s produkčně podobnými daty — samozřejmě syntetickými nebo anonymizovanými, protože kopírovat zákaznická data do testu je oblíbený sport týmů, které chtějí zajímavý týden.
+
+## Nehonit se za každou verzí, ale neopouštět údržbu
+
+Závislosti se mají aktualizovat pravidelně, ne hystericky. Nejhorší model je nechat projekt rok spát a pak během jednoho pátku zvednout celý ekosystém, framework, Node runtime, build nástroj a tři kritické SDK. To není údržba. To je rituální přivolání regresí.
+
+Rozumný rytmus:
+
+- týdně: patch/minor aktualizace s nízkým rizikem,
+- měsíčně: balík středně rizikových aktualizací s testem kritických cest,
+- kvartálně: větší verze frameworků, runtime a infrastruktury,
+- okamžitě: kritické bezpečnostní opravy, které zasahují produkční povrch,
+- po každém incidentu: kontrola, jestli chyběla detekce, vlastník nebo test.
+
+OpenSSF Scorecard pomáhá hodnotit bezpečnostní signály open-source projektů, například údržbu, branch protection, token permissions nebo dependency update tooling ([OpenSSF Scorecard](https://scorecard.dev/)). Není to absolutní pravda o kvalitě balíčku, ale dobrý signál pro rozhodnutí, jestli do produktu pustit novou závislost, která bude sedět blízko citlivých dat.
+
+## Novou závislost schvaluj jako produktové rozhodnutí
+
+Každý balíček má cenu. Nejen megabajty v bundlu, ale i údržbu, licence, zranitelnosti, kompatibilitu, budoucí migraci a důvěru v maintainer tým.
+
+Před přidáním závislosti si napiš krátké rozhodnutí:
+
+- Jaký konkrétní problém řeší?
+- Proč nestačí vlastní malá implementace?
+- Je projekt udržovaný a má jasnou licenci?
+- Jak velký transitive dependency strom přináší?
+- Běží kód v prohlížeči, na serveru, v CI, nebo v administraci?
+- Dostane se ke vstupům od uživatelů nebo osobním údajům?
+- Jak ji odstraníme, když projekt přestane být udržovaný?
+
+Tohle není odpor k open source. Naopak. Je to respekt k němu. Když bereš cizí práci jako kritickou součást vlastního produktu, máš vědět, proč ji bereš a jak ji budeš udržovat.
+
+## Licence nejsou jen právnická tapeta
+
+Licence závislostí patří do provozního přehledu. Některé licence jsou permisivní, jiné mají povinnosti při distribuci, další nemusí sedět na komerční SaaS nebo uzavřený produkt. Malý tým nemusí psát disertační práci o licencích, ale musí vědět, kde má riziko.
+
+Praktický postup:
+
+- automaticky sbírej licence závislostí,
+- označ zakázané nebo vyžadující revizi,
+- udržuj výjimky s odůvodněním,
+- kontroluj licence při přidání nové produkční závislosti,
+- u klientských projektů dej přehled do předávací dokumentace.
+
+Pokud stavíš pro evropského klienta, transparentnost dodavatelského řetězce je obchodní výhoda. Neprodáváš jen funkce. Prodáváš i klid, že produkt není poskládaný z anonymního digitálního lega bez návodu.
+
+## Příklad: B2B SaaS s uploadem dokumentů
+
+Představ si SaaS, který přijímá PDF od zákazníků a dělá z nich interní workflow. Kritické závislosti nejsou jen framework a databáze. Jsou to hlavně PDF parser, antivirová kontrola, storage SDK, queue worker, knihovna pro náhledy, OCR nástroj a e-mailové notifikace.
+
+Praktický model:
+
+- PDF parser má vysoké riziko, protože čte nedůvěryhodný vstup od uživatele,
+- storage SDK má vysoké riziko, protože pracuje se soubory a oprávněními,
+- UI date picker má nízké až střední riziko podle toho, kde běží,
+- CI akce s přístupem k tokenům má vysoké riziko i když neběží v produkci,
+- marketingový skript vložený do aplikace je privacy riziko, ne „jen frontend“.
+
+Když vyjde kritická zranitelnost v PDF knihovně, tým musí umět během minut zjistit: používáme ji, ve které verzi, v jaké službě, s jakým typem vstupu, existuje mitigace, potřebujeme vypnout upload nebo stačí hotfix? Bez inventáře bude odpověď znít „asi možná“, což je krásný název pro stres, ne provozní postup.
+
+## Checklist: závislosti bez knihovního minového pole
+
+- [ ] Máme seznam míst, kde vznikají závislosti: aplikace, kontejnery, CI, CDN, SDK.
+- [ ] Produkční release má SBOM nebo alespoň strojově čitelný inventář závislostí.
+- [ ] SBOM neobsahuje tajemství, zákaznická data ani obsah `.env` souborů.
+- [ ] Závislosti jsou rozdělené podle rizika a přístupu k datům.
+- [ ] Kritické knihovny mají vlastníka a jasný postup aktualizace.
+- [ ] Nová produkční závislost má krátké rozhodnutí „proč ji přidáváme“.
+- [ ] Automatické aktualizace neběží bez testů kritických cest.
+- [ ] Licence se sbírají a rizikové licence mají revizi.
+- [ ] CI akce a build nástroje hodnotíme stejně vážně jako runtime balíčky.
+- [ ] Máme postup pro urgentní zranitelnost: zjistit dopad, opravit, nasadit, zapsat.
+
+## Mini šablona dependency karty
+
+```markdown
+# Dependency karta: [název knihovny / služby / CI akce]
+
+## Účel
+- Jaký problém řeší:
+- Kde se používá:
+- Runtime / build / dev / CI:
+
+## Riziko
+- Přístup k osobním údajům:
+- Přístup k tokenům nebo síti:
+- Zpracovává nedůvěryhodný vstup:
+- Riziková třída: nízká / střední / vysoká
+
+## Údržba
+- Vlastník:
+- Aktuální verze:
+- Zdroj aktualizací:
+- Test kritické cesty:
+
+## SBOM a licence
+- Zahrnuto v SBOM:
+- Licence:
+- Výjimky nebo poznámky:
+
+## Exit plán
+- Čím ji lze nahradit:
+- Co se rozbije při odstranění:
+- Poslední kontrola:
+```
+
+## Zdroje
+
+- [CISA: Software Bill of Materials Minimum Elements](https://www.cisa.gov/resources-tools/resources/software-bill-materials-sbom) — minimální prvky SBOM a role v dodavatelském řetězci.
+- [CycloneDX: JSON Specification 1.6](https://cyclonedx.org/docs/1.6/json/) — otevřený standard pro strojově čitelný SBOM.
+- [OpenSSF Scorecard](https://scorecard.dev/) — automatizované bezpečnostní signály pro open-source projekty.
+- [OWASP: Software Component Verification Standard](https://owasp.org/www-project-software-component-verification-standard/) — doporučení pro ověřování softwarových komponent a jejich rizik.
+
+
 # Pracovní log
+- 2026-10-06: Doplněna příloha „Závislosti a SBOM bez knihovního minového pole“ s inventářem aplikačních, kontejnerových, CI a CDN závislostí, praktickým použitím SBOM, rizikovým tříděním aktualizací, schvalováním nových balíčků, licenční hygienou, B2B SaaS příkladem, checklistem, dependency kartou a ověřenými zdroji CISA, CycloneDX, OpenSSF a OWASP.
 - 2026-10-06: Doplněna příloha „Responzivní QA bez testování jen na obřím monitoru“ s kritickými mobilními cestami, kontrolou šířek a obsahových extrémů, formulářovým QA, výkonovými signály LCP/INP/CLS, testem bez myši, příkladem servisní landing page, checklistem, šablonou QA karty a ověřenými zdroji MDN, W3C a web.dev.
 - 2026-10-06: Doplněna příloha „AI evaluační sada bez úniku promptů a zákaznických dat“ s praktickým návrhem eval casů, syntetickými/anonymizovanými daty, skórováním pass/fail/review, prompt injection testy, B2B support příkladem, checklistem, eval kartou a ověřenými zdroji OWASP, NIST a EDPB.
 - 2026-10-06: Doplněna příloha „Indexace, sitemap a robots.txt bez SEO rulety“ s mapou indexovatelných stránek, pravidly pro sitemap, robots.txt, canonical URL, redirecty, privacy-first SEO kontrolou, checklistem, indexační kartou a ověřenými zdroji Google Search Central a Sitemaps.org; zároveň opraven formátovací artefakt v předchozí šabloně deploy header kontroly.
