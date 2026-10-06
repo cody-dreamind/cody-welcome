@@ -42501,41 +42501,41 @@ Retenční pravidlo musí být spustitelné. Pokud neumíš data najít a smazat
 # Datová klasifikační karta: [datový tok / pole / dataset]
 
 ## Účel
-+Proč data vznikají:
-+Které rozhodnutí nebo funkci podporují:
-+Co by se stalo, kdybychom je nesbírali:
-+
-+## Třída dat
-+Třída: [veřejné / interní provozní / osobní údaj / zákaznický obsah / citlivé provozní]
-+Obsahuje osobní údaje: [ano/ne]
-+Obsahuje tajemství nebo tokeny: [ano/ne]
-+
-+## Místa zpracování
-+Vzniká v:
-+Ukládá se v:
-+Zobrazuje se v:
-+Odchází dodavatelům:
-+
-+## Pravidla
-+Logování:
-+Admin zobrazení:
-+Export:
-+Retence:
-+Výmaz / anonymizace:
-+
-+## Kontrola
-+Vlastník:
-+Datum poslední kontroly:
-+Nalezené riziko:
-+Další krok:
-+```
-+
-+## Zdroje
-+
-+- European Commission: What data can we process and under which conditions? — https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
-+- EDPB: Basic principles — https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
-+- ENISA: Data Protection Engineering — https://www.enisa.europa.eu/publications/data-protection-engineering
-+- NIST: Privacy Framework — https://www.nist.gov/privacy-framework/privacy-framework
+Proč data vznikají:
+Které rozhodnutí nebo funkci podporují:
+Co by se stalo, kdybychom je nesbírali:
+
+## Třída dat
+Třída: [veřejné / interní provozní / osobní údaj / zákaznický obsah / citlivé provozní]
+Obsahuje osobní údaje: [ano/ne]
+Obsahuje tajemství nebo tokeny: [ano/ne]
+
+## Místa zpracování
+Vzniká v:
+Ukládá se v:
+Zobrazuje se v:
+Odchází dodavatelům:
+
+## Pravidla
+Logování:
+Admin zobrazení:
+Export:
+Retence:
+Výmaz / anonymizace:
+
+## Kontrola
+Vlastník:
+Datum poslední kontroly:
+Nalezené riziko:
+Další krok:
+```
+
+## Zdroje
+
+- European Commission: What data can we process and under which conditions? — https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- EDPB: Basic principles — https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
+- ENISA: Data Protection Engineering — https://www.enisa.europa.eu/publications/data-protection-engineering
+- NIST: Privacy Framework — https://www.nist.gov/privacy-framework/privacy-framework
 
 
 # Příloha: Produktové dotazníky bez zákaznického rentgenu
@@ -47690,52 +47690,253 @@ Alert „něco je jinak“ je šum. Alert „produkční login ztratil HSTS“ j
 # Deploy header kontrola: [web / aplikace]
 
 ## Rozsah
-+- Produkční URL:
-+- Staging URL:
-+- API URL:
-+- Error stránka:
-+- Preview prostředí:
-+
-+## Povinné hlavičky
-+- HTML dokumenty:
-+- Přihlášení:
-+- Aplikace po přihlášení:
-+- API:
-+- Statické soubory:
-+
-+## Zakázané hodnoty
-+- CSP wildcard:
-+- unsafe-inline / unsafe-eval:
-+- Volné connect-src:
-+- Volné CORS:
-+- Chybějící frame ochrana:
-+
-+## Výjimky
-+- Výjimka:
-+  - Důvod:
-+  - Vlastník:
-+  - Datum revize:
-+  - Plán omezení rizika:
-+
-+## Provoz
-+- Kde běží kontrola:
-+- Kdo dostává alert:
-+- Jaký je rollback:
-+- Datum posledního ověření:
-+```
-+
-+## Zdroje
-+
-+- MDN Web Docs: Content-Security-Policy — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
-+- MDN Web Docs: Strict-Transport-Security — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
-+- MDN Web Docs: Referrer-Policy — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
-+- MDN Web Docs: X-Content-Type-Options — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
-+- MDN Web Docs: CORS — https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS
-+- OWASP Cheat Sheet Series: HTTP Headers Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
-+
-+
+- Produkční URL:
+- Staging URL:
+- API URL:
+- Error stránka:
+- Preview prostředí:
+
+## Povinné hlavičky
+- HTML dokumenty:
+- Přihlášení:
+- Aplikace po přihlášení:
+- API:
+- Statické soubory:
+
+## Zakázané hodnoty
+- CSP wildcard:
+- unsafe-inline / unsafe-eval:
+- Volné connect-src:
+- Volné CORS:
+- Chybějící frame ochrana:
+
+## Výjimky
+- Výjimka:
+  - Důvod:
+  - Vlastník:
+  - Datum revize:
+  - Plán omezení rizika:
+
+## Provoz
+- Kde běží kontrola:
+- Kdo dostává alert:
+- Jaký je rollback:
+- Datum posledního ověření:
+```
+
+## Zdroje
+
+- MDN Web Docs: Content-Security-Policy — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
+- MDN Web Docs: Strict-Transport-Security — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
+- MDN Web Docs: Referrer-Policy — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
+- MDN Web Docs: X-Content-Type-Options — https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
+- MDN Web Docs: CORS — https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS
+- OWASP Cheat Sheet Series: HTTP Headers Cheat Sheet — https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
+
+
+# Příloha: Indexace, sitemap a robots.txt bez SEO rulety
+
+Web může být rychlý, hezký a technicky správný, a přesto se v organickém vyhledávání chovat jako duch na firemním večírku: všichni o něm mluví, ale nikdo ho nevidí. Často za to nemůže „algoritmus“, ale obyčejný provozní nepořádek kolem indexace: chybějící sitemap, rozbité kanonické URL, zapomenutý `noindex`, přepsané redirecty nebo `robots.txt`, který v dobré víře zamkl půlku webu.
+
+Tahle příloha není SEO magie. Je to malý provozní rámec, který po deployi ověří, že vyhledávače dostávají stejné signály jako produktový tým zamýšlel. A protože Dreamind styl není o trackingovém cirkusu, měříme jen to, co potřebujeme pro rozhodnutí: dostupnost, indexační signály, interní odkazy, sitemap a čistý obsah.
+
+> Codyho komentář: SEO audit bez kontroly `noindex` je jako kontrola požární bezpečnosti bez zjištění, jestli má budova dveře. Efektní tabulka, nulová útěcha.
+
+## Začni mapou indexovatelných stránek
+
+Nejdřív si rozděl URL podle záměru. Každá adresa nemá být v indexu. Některé stránky mají prodávat, jiné pomáhat zákazníkovi, další patří jen do aplikace a vyhledávačům nemají co říct.
+
+Praktické rozdělení:
+
+| Typ URL | Indexovat? | Poznámka |
+| --- | --- | --- |
+| Homepage | ano | hlavní pracovní věta, značka, služby |
+| Služby / řešení | ano | konkrétní scénáře a interní odkazy |
+| Blog / příručky | ano | stabilní slug, autor, datum aktualizace |
+| Případové studie | ano, pokud máš souhlas | pozor na zákaznická data a screenshoty |
+| Ceník | ano | pokud je veřejný a strategicky dává smysl |
+| Login / reset hesla | ne | technická stránka, ne obsah pro vyhledávání |
+| Admin / app | ne | citlivý nebo neveřejný kontext |
+| Interní preview | ne | raději chránit přístupem než spoléhat na `robots.txt` |
+
+Výstupem má být jednoduchý seznam: URL, účel, indexovat ano/ne, kanonická URL, odpovědný vlastník. Když tým neví, jestli má být stránka v indexu, nevyřeší to plugin. Vyřeší to rozhodnutí.
+
+## Sitemap je inventář, ne skládka
+
+Sitemap má vyhledávačům pomáhat najít důležité URL. Nemá být odpadkový koš všeho, co aplikace kdy vygenerovala. Oficiální sitemap protokol popisuje XML formát pro předání URL a doprovodných metadat, ale kvalita výběru je pořád na tobě.
+
+Do sitemap dávej jen URL, které:
+
+- mají vracet stabilní `200 OK`,
+- jsou kanonickou verzí stránky,
+- nejsou blokované přes `robots.txt`,
+- nemají `noindex`,
+- mají obsah užitečný i bez přihlášení,
+- chceš dlouhodobě udržovat.
+
+Do sitemap nedávej:
+
+- filtry a parametry bez samostatné hodnoty,
+- výsledky interního vyhledávání,
+- preview URL,
+- stránkování bez jasné obsahové strategie,
+- přesměrované URL,
+- prázdné tagy a kategorie.
+
+Malý deploy test může stáhnout `sitemap.xml`, zkontrolovat HTTP status, validitu XML a několik náhodných URL. Není potřeba stahovat celý web při každém deployi. Stačí chytit rozbité vzory dřív, než je chytí zákazník nebo vyhledávač.
+
+## Robots.txt není bezpečnostní zámek
+
+`robots.txt` je instrukce pro crawlery, ne autentizace. Nepoužívej ho jako ochranu citlivého obsahu. Pokud stránka obsahuje neveřejná data, patří za přístupovou kontrolu. Tečka. Malá, krásná, bezpečná tečka.
+
+Dobré použití `robots.txt`:
+
+- odkázat na sitemap,
+- omezit crawling technických nebo duplicitních sekcí,
+- odradit od procházení interních parametrů,
+- sjednotit pravidla pro známé crawlery.
+
+Špatné použití:
+
+- schovat staging bez hesla,
+- schovat dokumenty s citlivými daty,
+- blokovat veřejné stránky omylem přes široké `Disallow`,
+- řešit indexaci stránky, která už má být odstraněná.
+
+Při deployi kontroluj hlavně tohle:
+
+```text
+Sitemap: https://example.com/sitemap.xml
+User-agent: *
+Disallow: /admin/
+Disallow: /app/
+Disallow: /api/
+```
+
+Tohle je jen ilustrační kostra. Skutečné cesty uprav podle produktu. U SaaS často nechceš blokovat celé `/api/` kvůli bezpečnosti, ale kvůli tomu, že API odpovědi nejsou obsah pro vyhledávání.
+
+## Kanonické URL drž nudné a konzistentní
+
+Kanonická URL říká, která verze stránky je preferovaná. Pokud web umí stejný obsah na více adresách, bez jasného signálu si koleduješ o duplicitní obsah, rozpad interních signálů a zbytečný chaos v reportingu.
+
+Kontroluj:
+
+- `https` místo `http`,
+- jednu preferovanou doménu,
+- konzistentní lomítko na konci URL,
+- odstranění zbytečných UTM a tracking parametrů z canonical,
+- shodu mezi canonical, sitemap a interními odkazy,
+- samostatné canonical pro lokalizace a jazykové varianty.
+
+Privacy-first detail: nespoléhej na UTM jako hlavní pravdu o obsahu. UTM parametry jsou užitečné pro kampaně, ale nemají se propsat do kanonické URL ani do interního navigačního systému. Obsah má mít vlastní stabilní adresu, ne identitu postavenou na kampani.
+
+## Redirecty testuj jako uživatelskou cestu
+
+Redirect není jen technická odpověď. Je to zachování důvěry, odkazů a paměti internetu. Po redesignu, migraci domény nebo změně slugů si udělej redirect mapu.
+
+Minimum:
+
+- stará URL,
+- nová URL,
+- typ přesměrování,
+- důvod změny,
+- priorita podle návštěvnosti nebo obchodní hodnoty,
+- datum kontroly.
+
+Vyhýbej se řetězům typu `A -> B -> C`. Uživatel i crawler mají dost vlastních problémů, nepotřebují ještě orientační běh přes historii tvého CMS. Test má ověřit, že důležité staré URL vedou přímo na nejbližší odpovídající novou stránku.
+
+## Privacy-first SEO kontrola bez invazivní analytiky
+
+SEO provoz nemusí znamenat další sledovací vrstvu. Pro základní rozhodnutí často stačí kombinace serverových odpovědí, Search Console nebo jiné webmaster konzole, agregované návštěvnosti a ručního seznamu důležitých URL.
+
+Co měřit:
+
+- dostupnost sitemap a robots.txt,
+- počet indexovatelných URL podle vlastního seznamu,
+- chybové stavy u důležitých stránek,
+- výskyt `noindex` na veřejných stránkách,
+- změny title a meta description u hlavních stránek,
+- interní odkazy na důležité stránky,
+- organické návštěvy agregovaně, ne individuální špehování.
+
+Co neměřit jen ze zvyku:
+
+- scroll každého návštěvníka,
+- session replay veřejných stránek,
+- fingerprinting pro „lepší atribuci“,
+- reklamní pixely na obsahových článcích,
+- osobní profily čtenářů kvůli remarketingu.
+
+SEO má pomáhat lidem najít odpověď. Ne z nich dělat katalog behaviorálních stop.
+
+## Checklist: indexace bez SEO rulety
+
+- [ ] Máme seznam URL, které mají být indexované?
+- [ ] Každá indexovatelná URL vrací `200 OK`?
+- [ ] Sitemap obsahuje jen kanonické a veřejně užitečné stránky?
+- [ ] `robots.txt` odkazuje na sitemap a neblokuje důležité sekce?
+- [ ] Citlivé části jsou chráněné přístupem, ne jen `robots.txt`?
+- [ ] Veřejné stránky nemají omylem `noindex`?
+- [ ] Canonical odpovídá interním odkazům a sitemap?
+- [ ] Staré důležité URL mají přímý redirect na relevantní novou stránku?
+- [ ] Preview a staging prostředí nejsou veřejně procházená?
+- [ ] SEO report nevyžaduje reklamní pixely ani invazivní tracking?
+
+## Mini šablona indexační karty
+
+```text
+# Indexační karta: [web / sekce]
+
+## Rozsah
+- Produkční doména:
+- Jazykové varianty:
+- Sitemap URL:
+- Robots.txt URL:
+
+## Indexovat
+- Homepage:
+- Služby:
+- Blog / příručky:
+- Reference:
+- Ceník:
+
+## Neindexovat
+- Login:
+- Aplikace:
+- Admin:
+- Preview:
+- Interní vyhledávání:
+
+## Canonical pravidla
+- Preferovaná doména:
+- HTTPS:
+- Lomítko na konci:
+- Parametry:
+- Lokalizace:
+
+## Redirecty
+- Redirect mapa:
+- Prioritní staré URL:
+- Datum posledního testu:
+- Vlastník:
+
+## Privacy-first měření
+- Agregované metriky:
+- Zakázané trackery:
+- Retence reportů:
+```
+
+## Zdroje
+
+- Google Search Central: Introduction to robots.txt — https://developers.google.com/search/docs/crawling-indexing/robots/intro
+- Google Search Central: Build and submit a sitemap — https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
+- Google Search Central: How to specify a canonical URL — https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
+- Google Search Central: Redirects and Google Search — https://developers.google.com/search/docs/crawling-indexing/301-redirects
+- Sitemaps.org: XML Sitemap protocol — https://www.sitemaps.org/protocol.html
+
 
 # Pracovní log
+- 2026-10-06: Doplněna příloha „Indexace, sitemap a robots.txt bez SEO rulety“ s mapou indexovatelných stránek, pravidly pro sitemap, robots.txt, canonical URL, redirecty, privacy-first SEO kontrolou, checklistem, indexační kartou a ověřenými zdroji Google Search Central a Sitemaps.org; zároveň opraven formátovací artefakt v předchozí šabloně deploy header kontroly.
 - 2026-10-06: Doplněna navazující příloha „Kontrola bezpečnostních hlaviček po deployi bez ručního klikání“ s ověřováním finálních HTTP odpovědí, malým CI/deploy testem, zakázanými hodnotami, CORS kontrolou, revizí po změně infrastruktury, privacy-first reporty, checklistem, deploy header šablonou a ověřenými zdroji MDN a OWASP.
 - 2026-10-06: Provedena editační deduplikace e-mailové části: odstraněn překryvný nově přidaný blok a do přílohy „E-mailová doména bez doručovací loterie“ doplněn rozcestník na související části o transakčních e-mailech a preference centru, aby čtenář rychleji našel správný postup bez opakování.
 - 2026-10-06: Doplněna příloha „Rate limiting a cache bez drahého přetížení“ s mapou drahých operací, limity podle identity/tenantu/nákladů, férovými 429 odpověďmi, bezpečným cachováním, ochranou proti cache stampede, parametrovými limity, privacy-first provozními metrikami, příkladem AI sumarizace, checklistem, limit/cache kartou a ověřenými zdroji OWASP a MDN.
