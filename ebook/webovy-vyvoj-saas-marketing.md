@@ -48978,7 +48978,201 @@ Rozdíl není v tom, že druhý postup je pomalejší. Rozdíl je v tom, že dru
 - [EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en) — rámec pro zabudování ochrany dat do návrhu a výchozího chování systémů.
 
 
+
+# Příloha: Feature flagy a rollouty bez experimentálního chaosu
+
+Feature flag je užitečný sluha a dost otravný pán. Umí oddělit deploy od release, pustit změnu jen části zákazníků, rychle vypnout rizikovou funkci a otestovat novou cestu bez velké ceremonie. Zároveň umí v kódu vytvořit druhý vesmír, kde nikdo přesně neví, která kombinace příznaků je vlastně produkce.
+
+Privacy-first SaaS má k feature flagům přistupovat jako k provoznímu nástroji, ne jako k marketingové hračce na nekonečné profilování uživatelů. Cíl není „změřit všechno o každém“. Cíl je bezpečně doručit změnu, ověřit dopad a včas uklidit dočasné větve.
+
+> Codyho komentář: Feature flag bez data úklidu je jako kabel pod stolem. První týden nevadí. Za půl roku vypadá jako infrastruktura kritická pro chod firmy, i když už nikdo neví proč.
+
+## Rozliš deploy, release a experiment
+
+Nejdřív si s týmem ujasni slovník. Deploy znamená, že je kód nasazený. Release znamená, že funkci vidí zákazník. Experiment znamená, že porovnáváš varianty s předem napsanou hypotézou. Tyhle tři věci se často slévají dohromady, a pak vzniká provozní guláš s logikou typu „ono se to nějak zapíná v adminu“.
+
+Praktické rozdělení:
+
+| Typ flagu | Účel | Životnost | Kdo rozhoduje |
+| --- | --- | --- | --- |
+| Release flag | Schovat novou funkci do chvíle, než je připravená | dny až týdny | produkt + vývoj |
+| Ops kill switch | Rychle vypnout drahou nebo poruchovou část systému | dlouhodobější, ale auditovaný | provoz / incident owner |
+| Permission flag | Zapnout funkci konkrétnímu tarifu, tenantovi nebo beta skupině | podle obchodního modelu | produkt + support |
+| Experiment flag | Porovnat varianty s jasnou hypotézou | krátce, s datem vyhodnocení | produkt + marketing |
+
+Každý typ potřebuje jiná pravidla. Release flag má po dokončení zmizet z kódu. Kill switch může zůstat, ale musí mít vlastníka, dokumentaci a test. Experiment flag bez hypotézy je jen ruleta v hezkém kabátu.
+
+## Flag karta před prvním řádkem kódu
+
+U každého netriviálního flagu napiš krátkou kartu. Nemá to být byrokracie pro radost tabulkářů. Je to obrana proti situaci, kdy se za tři měsíce někdo bojí smazat `new_checkout_v2`, protože „možná to něco dělá“.
+
+Minimální karta:
+
+- Název flagu: stabilní technický název bez humoru a interních vtípků.
+- Účel: co přesně chrání nebo ověřuje.
+- Typ: release, ops, permission nebo experiment.
+- Default: bezpečná hodnota při výpadku flag služby.
+- Scope: globálně, podle tenantu, podle role, podle tarifu, podle regionu.
+- Vlastník: člověk nebo tým, který flag vyhodnotí a uklidí.
+- Datum kontroly: konkrétní den, kdy se rozhodne zapnout, vypnout, prodloužit nebo smazat.
+- Datový dopad: jaká data se používají pro rozhodnutí a co se loguje.
+
+Důležité pravidlo: flag nesmí vyžadovat víc identifikátorů, než potřebuje. Pokud stačí tenant ID, nepřidávej e-mail. Pokud stačí plán tarifu, nepřidávej historii chování. Pokud stačí interní role, nepřidávej IP adresu „pro jistotu“.
+
+## Bezpečný default není detail
+
+Při výpadku flag systému musí aplikace vědět, co dělat. Bezpečný default není vždy `false`. Někdy je bezpečnější zachovat staré chování, někdy vypnout drahou AI akci a někdy ponechat uživateli existující oprávnění, aby ho krátký výpadek neodřízl od práce.
+
+Příklady:
+
+- Nový checkout: default na starý checkout.
+- Drahá AI sumarizace: default vypnout a nabídnout pozdější retry.
+- Nové admin UI: default na staré admin UI.
+- Bezpečnostní omezení exportu: default na přísnější režim.
+- Beta funkce pro vybrané tenanty: default vypnout, pokud nejde spolehlivě ověřit scope.
+
+Do kódu patří explicitní fallback, ne tiché spoléhání na to, že flag služba bude vždy dostupná. A do testů patří varianta „flag provider neodpovídá“, protože produkce má výborný smysl pro dramatickou timingovou komedii.
+
+## Rollout dělej po segmentech, ne podle nálady
+
+Postupné spouštění má mít předem dané kroky. Ne „dáme to na 10 %, uvidíme a pak nějak“. Lepší je jednoduchá rollout tabulka:
+
+| Fáze | Komu se zapne | Co sleduješ | Stop podmínka |
+| --- | --- | --- | --- |
+| Interní | tým a testovací tenant | chyby, UX slepé uličky, výkon | kritická chyba nebo nejasný tok |
+| Beta | 1–3 domluvení zákazníci | dokončení klíčové akce, support dotazy | opakovaný ruční zásah supportu |
+| Malý rollout | 5–10 % vhodného segmentu | technické chyby, konverze, náklady | nárůst chyb nebo nákladů mimo limit |
+| Plný rollout | celý vybraný segment | stabilita, support, obchodní dopad | incident nebo jasný negativní signál |
+| Úklid | všichni nebo nikdo | odstranění flagu a mrtvého kódu | nezavřené follow-up úkoly |
+
+Segment vybírej podle smyslu funkce, ne podle toho, kdo je nejblíž ruce. U B2B SaaS často dává větší smysl rollout podle tenantů než podle jednotlivých uživatelů, protože jeden zákaznický tým pracuje nad stejnými daty a potřebuje konzistentní chování.
+
+## Experiment bez invazivního měření
+
+A/B test nepotřebuje znát celý život návštěvníka. U privacy-first marketingu si předem napiš jednu hypotézu, jednu primární metriku a minimální datový rozsah.
+
+Slabý experiment:
+
+```text
+Vyzkoušíme nový hero a budeme sledovat, co to udělá.
+```
+
+Lepší experiment:
+
+```text
+Hypotéza: konkrétnější hero nadpis pro B2B zakladatele zvýší kliknutí na „Domluvit konzultaci“.
+Metrika: agregovaný poměr kliknutí na CTA vůči návštěvám landing page.
+Doba: 14 dní nebo do minimálního vzorku podle návštěvnosti.
+Data: anonymní pageview, varianta A/B, kliknutí na CTA, bez reklamních identifikátorů.
+Rozhodnutí: ponechat vítěze, pokud zlepšení odpovídá obchodnímu cíli a nezhorší kvalitu poptávek.
+```
+
+Když je návštěvnost malá, nesnaž se z ní vyždímat statistickou vědu za každou cenu. Malý B2B web často získá víc z kvalitativní kontroly poptávek, rozhovorů a jasnějšího copy než z nekonečného testování odstínu tlačítka. Tlačítko samo o sobě ještě nikdy nezachránilo špatnou nabídku, i když designéři občas dělají, že ano.
+
+## Flagy nesmí obcházet autorizaci
+
+Feature flag není bezpečnostní kontrola. Může rozhodovat, zda se tlačítko zobrazí, ale server musí pořád ověřit oprávnění. Jinak vznikne krásná fasáda: UI funkci schová, ale API endpoint ji pořád provede každému, kdo zná URL.
+
+Bezpečnější model:
+
+- UI flag rozhoduje o viditelnosti a navigaci.
+- Serverová autorizace rozhoduje, zda se akce smí provést.
+- Tarif nebo role jsou zdrojem oprávnění, ne jen podmínka ve frontendu.
+- API vrací srozumitelnou chybu, pokud funkce není pro tenant povolená.
+- Audit log zaznamená pokus o citlivou akci bez ukládání obsahu zákaznických dat.
+
+Tohle platí hlavně pro admin funkce, exporty, AI akce, billing změny a integrace do cizích systémů. Flag může být vypínač, ale zámek musí zůstat zámkem.
+
+## Uklízej flagy jako součást Definition of Done
+
+Dočasné flagy mají mít cleanup ticket hned při vytvoření. Ne až „někdy po release“. Ideální Definition of Done pro release flag:
+
+- funkce je zapnutá pro cílový segment,
+- stará větev už není potřeba,
+- monitoring nehlásí problém,
+- dokumentace nebo release notes jsou aktualizované,
+- flag je odstraněný z kódu, konfigurace a testů,
+- zůstaly jen trvalé permission nebo ops flagy s vlastníkem.
+
+Když flag zůstává déle než jeden kvartál, musí projít revizí. Buď je to opravdu trvalé pravidlo produktu, nebo technický dluh s hezkým názvem. Obojí se dá řídit, ale nesmí se to tvářit stejně.
+
+## Příklad: nový import CSV v B2B SaaS
+
+Tým přidává nový import zákaznických kontaktů z CSV. Funkce je riziková: může vytvořit duplicitní záznamy, dotýká se osobních údajů a při chybě zatíží support.
+
+Privacy-first rollout:
+
+1. Release flag `csv_import_v2` je defaultně vypnutý.
+2. Interní test používá syntetické CSV se stejnými hraničními případy jako reální zákazníci.
+3. Beta se zapne jen třem tenantům, kteří s testem souhlasili a vědí, jak nahlásit chybu.
+4. Loguje se tenant ID, velikost souboru, počet validních/nevalidních řádků, typ chyby a délka zpracování — ne celý obsah CSV.
+5. Kill switch umí zastavit zpracování nových importů, ale nechá doběhnout bezpečné rollback kroky.
+6. Po plném rollout se odstraní stará větev parseru a zůstane jen provozní limit velikosti souboru.
+
+Výsledek: tým nasazuje opatrně, ale nezavádí sledování, které by bylo horší než původní riziko.
+
+## Checklist: feature flagy bez experimentálního chaosu
+
+- [ ] Má každý nový flag kartu s účelem, typem, vlastníkem a datem kontroly?
+- [ ] Je bezpečný default výslovně napsaný a otestovaný?
+- [ ] Rozlišujeme release, ops, permission a experiment flagy?
+- [ ] Používáme pro targeting nejmenší možný datový rozsah?
+- [ ] Neobchází žádný flag serverovou autorizaci?
+- [ ] Existuje rollout plán se stop podmínkami?
+- [ ] Má experiment jednu hypotézu a jednu primární metriku?
+- [ ] Neobsahují logy hodnoty flag kontextu, které nejsou nutné pro provoz?
+- [ ] Má dočasný flag cleanup ticket?
+- [ ] Kontrolujeme staré flagy aspoň měsíčně nebo kvartálně podle rizika?
+
+## Mini šablona feature flag karty
+
+```markdown
+# Feature flag karta: [název flagu]
+
+## Účel
+- Proč flag existuje:
+- Jaké riziko snižuje:
+- Co není cílem:
+
+## Typ
+- Release / ops / permission / experiment:
+- Dočasný nebo trvalý:
+- Vlastník:
+- Datum kontroly:
+
+## Default a fallback
+- Default hodnota:
+- Chování při výpadku flag provideru:
+- Stop podmínka:
+
+## Targeting
+- Scope: globální / tenant / role / tarif / region:
+- Použitá data:
+- Data, která se nesmí použít:
+
+## Rollout
+- Interní fáze:
+- Beta fáze:
+- Plný rollout:
+- Úklid:
+
+## Měření a logy
+- Primární signál:
+- Technický signál:
+- Retence logů:
+- Privacy poznámka:
+```
+
+## Zdroje
+
+- [OpenFeature Specification](https://openfeature.dev/specification/) — vendor-neutral specifikace pro práci s feature flagy, providery, evaluation API a stabilitou částí specifikace.
+- [OpenFeature: Evaluation Context](https://openfeature.dev/specification/sections/evaluation-context/) — popis kontextu používaného pro rozhodování flagů; užitečné hlavně pro kontrolu, jaká data do targetingu opravdu posíláš.
+- [Martin Fowler: Feature Toggles](https://martinfowler.com/articles/feature-toggles.html) — praktický rozbor kategorií feature toggles, jejich životnosti, dynamiky a nákladů na údržbu.
+- [GDPR, článek 5 na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng) — zásady zpracování osobních údajů včetně účelového omezení, minimalizace údajů a omezení uložení.
+- [EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en) — doporučení, jak promítnout ochranu dat do návrhu systémů a výchozích nastavení.
+
 # Pracovní log
+- 2026-10-06: Doplněna příloha „Feature flagy a rollouty bez experimentálního chaosu“ s rozlišením deploy/release/experiment, typy flagů, flag kartou, bezpečnými defaulty, rollout plánem, privacy-first experimenty, upozorněním na autorizaci, cleanup rutinou, CSV import příkladem, checklistem, šablonou a ověřenými zdroji OpenFeature, Martin Fowler, GDPR a EDPB.
 - 2026-10-06: Doplněna příloha „Admin přístupy a break-glass bez superadmin folklóru“ s rozdělením běžných admin rolí a nouzového přístupu, least-privilege pravidly, návrhem break-glass toku, bezpečnějším admin UI, auditními logy bez obsahu zákaznických dat, měsíční kontrolou oprávnění, support příkladem, checklistem, admin access kartou a ověřenými zdroji OWASP, NIST a EDPB.
 - 2026-10-06: Doplněn úvodní rozcestník „Kde začít podle situace“ s mapou kapitol pro web, SaaS, AI, provoz, data, marketing a support, hodinovým pracovním postupem, pravidly pro čtení checklistů a vyplnitelnou privacy-first pracovní kartou.
 - 2026-10-06: Doplněna příloha „DPIA-lite pro malé produktové změny bez právního mlžení“ s praktickým rozlišením menší pracovní karty a plného posouzení, účelovou minimalizací dat, popisem rizik jako dopadu na člověka, konkrétními opatřeními, příkladem AI triáže supportu, checklistem, vyplnitelnou DPIA-lite kartou a ověřenými zdroji EUR-Lex a EDPB.
