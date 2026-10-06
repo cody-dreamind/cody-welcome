@@ -49612,8 +49612,262 @@ Vyhodnocení nedělej podle „kolik lidí kliklo na magické tlačítko“. Lep
 - [MDN: Retry-After](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After) — hlavička pro řízení opakování požadavku po dočasném omezení nebo nedostupnosti.
 
 
+# Příloha: Design systém pro malý SaaS bez komponentového cirkusu
+
+Design systém není knihovna tlačítek s hezkým názvem a třemi odstíny modré. Pro malý SaaS je to provozní dohoda: jak produkt vypadá, jak se chová, jak mluví, jak zvládá chyby a jak drží privacy-first slib i ve chvíli, kdy tým spěchá. Když tahle dohoda chybí, každá nová obrazovka začne vznikat jako malý nezávislý stát se svojí ústavou, border radiusem a nápadem na „lepší“ modální okno.
+
+Cílem není vytvořit interní Figma impérium. Cílem je, aby tým dokázal rychleji skládat konzistentní části produktu, méně přemýšlet o detailech, které už byly rozhodnuté, a více řešit skutečný problém uživatele.
+
+> Codyho komentář: Malý design systém má být jako dobrá kuchyňská linka. Ne muzeum nádobí, ale místo, kde rychle najdeš nůž, prkénko a víš, kam dát horký hrnec. Pokud k použití tlačítka potřebuješ workshop, něco je špatně.
+
+## Začni rozhodnutími, ne komponentami
+
+Nejčastější chyba je začít seznamem: button, input, modal, dropdown, table, card. To je lákavé, protože seznam vypadá jako pokrok. Jenže SaaS produkt nepotřebuje jen komponenty. Potřebuje opakovatelná rozhodnutí.
+
+Před první komponentou si napiš, které situace se v produktu pořád vrací:
+
+- uživatel má něco vytvořit,
+- uživatel má něco potvrdit,
+- uživatel nemá oprávnění,
+- systém něco načítá,
+- systém něco neumí dokončit,
+- uživatel potřebuje pochopit datový dopad,
+- admin má udělat rizikovější zásah,
+- zákazník chce exportovat nebo smazat data.
+
+Z těchto situací vznikne lepší design systém než z abstraktního katalogu komponent. Tlačítko pak není jen „primary button“. Je to pravidlo, kdy produkt po uživateli chce rozhodnutí, jak mu vysvětlí důsledek a kdy raději nabídne bezpečnější alternativu.
+
+## Tři vrstvy: tokeny, komponenty, vzory
+
+Praktický malý design systém rozděl na tři vrstvy.
+
+### 1. Tokeny
+
+Tokeny jsou pojmenované hodnoty pro barvy, mezery, typografii, stíny, radiusy a stavy. Nemají nést marketingovou poezii typu `blue-pretty-2`. Mají popisovat roli.
+
+Lepší názvy:
+
+- `color.background.page`
+- `color.background.panel`
+- `color.text.primary`
+- `color.text.muted`
+- `color.border.default`
+- `color.action.primary.background`
+- `space.stack.md`
+- `radius.interactive`
+
+Tokeny pomáhají hlavně tím, že mění otázku z „jakou barvu dáme sem?“ na „jakou roli má tenhle prvek?“. To je obrovský rozdíl. Role se dá obhájit, barva se často jen líbí.
+
+### 2. Komponenty
+
+Komponenta je konkrétní stavebnice: tlačítko, input, badge, tabulka, toast, dialog, alert, empty state nebo stránkovací prvek. Každá komponenta má mít jasné varianty a zakázané použití.
+
+U tlačítka například:
+
+| Varianta | Použití | Nepoužívat pro |
+| --- | --- | --- |
+| Primary | hlavní bezpečná akce na obrazovce | destruktivní akce, sekundární odkazy |
+| Secondary | alternativní akce | hlavní CTA v nákupním flow |
+| Danger | nevratná nebo citlivá akce | běžné rušení dialogu |
+| Ghost | nenápadná navigační akce | potvrzení formuláře |
+
+Tohle vypadá jako detail, ale v praxi to brání tomu, aby se každé tlačítko tvářilo jako nejdůležitější věc od vynálezu kávy.
+
+### 3. Vzory
+
+Vzory jsou opakované produktové situace složené z více komponent. Pro SaaS jsou často důležitější než samotné komponenty.
+
+Užitečné vzory:
+
+- vytvoření nového projektu,
+- pozvánka člena týmu,
+- změna tarifu,
+- export dat,
+- smazání objektu,
+- prázdný stav po registraci,
+- chyba oprávnění,
+- incidentová hláška,
+- onboarding krok,
+- potvrzení citlivé akce.
+
+Vzory dokumentuj jako mini scénáře: kdy použít, co uživatel potřebuje vědět, jaká data se sbírají, jaký je bezpečný fallback a co nikdy nesmí UI schovat.
+
+## Privacy-first pravidla patří přímo do komponent
+
+Soukromí nesmí být separátní dokument, který žije v právní složce a nikdo ho neotevře, dokud se nestane průšvih. U SaaS produktu se privacy-first pravidla musí promítnout do komponent a vzorů.
+
+Příklady:
+
+- Form field má popisek, proč údaj potřebuješ, pokud to není zřejmé.
+- Export dialog říká, co export obsahuje a kdo k němu bude mít přístup.
+- Invite modal vysvětluje, jaká role se nové osobě přidává.
+- Delete dialog rozlišuje mezi skrytím, archivací a smazáním.
+- Audit log neukazuje citlivý obsah, jen akci, čas, roli a objekt.
+- Empty state nenutí posílat data třetí straně jen proto, aby obrazovka nebyla prázdná.
+- Toast po citlivé akci obsahuje možnost zkontrolovat detail nebo vrátit bezpečný krok, pokud to proces dovoluje.
+
+Design systém tak neřeší jen vzhled. Řeší i důvěru. Uživatel nemá být překvapený tím, co se s jeho daty stane po kliknutí.
+
+## Dokumentace musí být kratší než hádka ve Slacku
+
+Dokumentace design systému nemusí být encyklopedie. Dokonce by neměla. Pokud je delší než samotná implementace komponenty, tým ji nebude používat. Minimum pro každou komponentu:
+
+- účel,
+- varianty,
+- kdy použít,
+- kdy nepoužít,
+- příklady textů,
+- přístupnostní poznámka,
+- datový nebo privacy dopad,
+- odkaz na implementaci.
+
+Příklad krátké dokumentace pro komponentu `ConfirmDialog`:
+
+```text
+Účel:
+Potvrzení citlivé nebo nevratné akce.
+
+Použij:
+- smazání projektu,
+- odebrání člena týmu,
+- regenerace API tokenu,
+- změna role s vyšším oprávněním.
+
+Nepoužívej:
+- běžné zavření okna,
+- uložení bezpečné změny,
+- akce, kterou lze snadno vrátit.
+
+Text:
+- nadpis popisuje konkrétní objekt,
+- tělo vysvětluje dopad,
+- primární akce používá sloveso, ne obecné „OK“.
+
+Privacy:
+- neukazuj citlivý obsah objektu,
+- pokud akce spouští audit log, řekni to v interní dokumentaci.
+```
+
+Taková dokumentace je dost krátká na to, aby ji člověk opravdu přečetl, a dost konkrétní na to, aby zabránila kreativnímu chaosu.
+
+## Komponenty navrhuj podle stavů
+
+Komponenta bez stavů je jen obrázek s ambicemi. Každá důležitá komponenta má mít minimálně:
+
+- výchozí stav,
+- hover/focus stav,
+- loading stav,
+- disabled stav,
+- error stav,
+- empty stav, pokud pracuje s daty,
+- permission stav, pokud závisí na roli,
+- long content stav,
+- mobile stav.
+
+U tabulky to znamená víc než jen „hezké řádky“. Potřebuješ stav pro žádná data, načítání, chybu, filtrování bez výsledků, omezené oprávnění, dlouhé názvy a bezpečné hromadné akce. Jinak si tyto stavy stejně někdo vymyslí později, jen hůř a pod tlakem.
+
+Privacy-first detail: stav „nemáš oprávnění“ nemá prozrazovat víc, než musí. Jinak se z UI stává malý informační únik. Věta „Nemáš přístup k faktuře zákazníka ACME s částkou 184 000 Kč“ je pro neoprávněného uživatele zbytečně štědrá. Lepší je: „K tomuto záznamu nemáš přístup. Požádej správce účtu o roli Fakturace.“
+
+## Nejdřív oprav bolestivé vzory
+
+Pokud design systém teprve začínáš, nesnaž se pokrýt celý produkt. Vyber tři místa, kde nekonzistence stojí nejvíc času, peněz nebo důvěry.
+
+Typicky:
+
+1. formuláře a validace,
+2. chybové a prázdné stavy,
+3. tabulky a hromadné akce,
+4. potvrzení citlivých akcí,
+5. role a oprávnění,
+6. onboarding a první vytvoření hodnoty.
+
+Každý měsíc přidej jeden vzor, který vyřeší reálnou bolest. Malý design systém roste nejlépe jako odpověď na opakovaný problém, ne jako ambiciózní stavební projekt s názvem „Q4 UI unification initiative“. To už zní draze a trochu nebezpečně.
+
+## Příklad: sjednocení mazání projektů
+
+V produktu existují tři místa, kde lze smazat projekt. Každé má jiný text, jiné tlačítko a jiný výsledek. Jednou se projekt archivuje, jednou se smaže hned a jednou se jen skryje z přehledu. Support pak vysvětluje, proč „smazat“ znamená pokaždé něco jiného. To je drahý jazykový bug.
+
+Design systémový zásah:
+
+- Zaveď vzor `DangerActionDialog`.
+- Rozliš akce: archivovat, smazat, odebrat přístup.
+- Nadpis vždy obsahuje objekt: „Smazat projekt Klientský portál?“
+- Text říká, co se stane s daty, exporty a členy týmu.
+- Tlačítko používá konkrétní sloveso: „Smazat projekt“, ne „Potvrdit“.
+- Pokud existuje retenční okno, napiš ho lidsky.
+- Audit log uloží akci, čas, uživatele a ID projektu, ne obsah projektu.
+
+Výsledek není jen hezčí dialog. Výsledek je méně chyb, méně dotazů na support a jasnější vztah k zákaznickým datům.
+
+## Checklist: design systém bez komponentového cirkusu
+
+- [ ] Máme pojmenované základní tokeny podle role, ne podle nálady nebo barvy.
+- [ ] Každá důležitá komponenta má účel, varianty a zakázané použití.
+- [ ] Komponenty mají navržené loading, error, empty, disabled, focus a permission stavy.
+- [ ] Privacy-first poznámky jsou součástí formulářů, exportů, oprávnění a citlivých akcí.
+- [ ] Vzory řeší opakované produktové situace, ne jen vizuální katalog.
+- [ ] Dokumentace komponent je krátká, konkrétní a odkazuje na implementaci.
+- [ ] Design systém začíná bolestivými místy produktu, ne snahou pokrýt úplně všechno.
+- [ ] Destruktivní akce mají jednotný text, jasný dopad a bezpečné auditování.
+- [ ] Nové komponenty vznikají až po ověření, že nejde použít nebo rozšířit stávající vzor.
+- [ ] Jednou měsíčně tým uklidí nepoužívané varianty a doplní chybějící stavy.
+
+## Mini šablona komponentové karty
+
+```text
+# Komponenta / vzor: [název]
+
+## Účel
+- Jaké rozhodnutí nebo situaci řeší:
+
+## Použití
+- Použij pro:
+- Nepoužívej pro:
+
+## Varianty
+- Varianta 1:
+- Varianta 2:
+- Varianta 3:
+
+## Stavy
+- Default:
+- Loading:
+- Empty:
+- Error:
+- Disabled:
+- Focus:
+- Permission:
+- Mobile:
+
+## Texty
+- Nadpis:
+- Primární akce:
+- Sekundární akce:
+- Chybová zpráva:
+
+## Data a privacy
+- Jaká data uživatel vidí:
+- Jaká data zadává:
+- Co se loguje:
+- Co se nesmí zobrazit:
+
+## Implementace
+- Design odkaz:
+- Kód:
+- Vlastník:
+- Datum kontroly:
+```
+
+## Zdroje
+
+- [W3C Design Tokens Community Group](https://www.w3.org/community/design-tokens/) — komunitní skupina pro standardizaci design tokenů a jejich výměnu mezi nástroji.
+- [Design Tokens Format Module 2025.10](https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/) — specifikace formátu pro vyjádření design tokenů.
+- [MDN: Using CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascading_variables/Using_custom_properties) — praktický přehled CSS custom properties pro implementaci tokenů ve webovém rozhraní.
+
+
 # Pracovní log
 
+- 2026-10-06: Doplněna příloha „Design systém pro malý SaaS bez komponentového cirkusu“ s praktickým rozdělením na tokeny, komponenty a vzory, privacy-first pravidly přímo v UI, dokumentací komponent, stavovým návrhem, příkladem sjednocení destruktivní akce, checklistem, komponentovou kartou a ověřenými zdroji W3C a MDN.
 - 2026-10-06: Doplněna příloha „Feature flags a rollout bez datového dluhu“ s rozdělením flagů podle účelu, privacy-first cílením, flag kartou, postupným rolloutem, rollback pravidly, úklidem flag debt, B2B AI support příkladem, checklistem a ověřenými zdroji OpenFeature, OWASP a MDN.
 - 2026-10-06: Doplněna příloha „Retenční plán bez datového sklepa“ s praktickým rozdělením dat podle životního cyklu, návrhem mazacích jobů, samostatným přístupem k zálohám, příkladem B2B SaaS po zrušení účtu, checklistem, retenční kartou a ověřenými zdroji EUR-Lex, EDPB a ICO.
 
