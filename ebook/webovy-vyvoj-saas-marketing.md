@@ -46053,7 +46053,193 @@ Nesbírej obsah obrazovek, pohyby myši ani session replay jen proto, že řeš�
 - OWASP Authentication Cheat Sheet — reautentizace po rizikových událostech a vazba na bezpečnou správu relací: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
 - NIST SP 800-63B Digital Identity Guidelines — principy celkového timeoutu, inactivity timeoutu a opakované autentizace relace: https://pages.nist.gov/800-63-4/sp800-63b.html
 
+# Příloha: Feature flags bez datového konfetti a nočních rollbacků
+
+Feature flag je jednoduchý nápad s obrovským dopadem: oddělíš nasazení kódu od zapnutí funkce. Díky tomu můžeš novou věc dostat do produkce bezpečněji, pustit ji nejdřív interně, omezit ji na vybraný tenant a v případě průšvihu ji vypnout rychleji než stihneš napsat „rollback prosím“. Jenže feature flags se umí změnit i v tichý datový vysavač, pokud do nich začneš cpát e-maily, role, plán předplatného, zemi, chování, počet kliků, poslední návštěvu a náladu jednorožce.
+
+Privacy-first přístup říká: flag má rozhodnout o chování produktu, ne vytvářet druhý analytický profil uživatele. Hodnota je v bezpečném řízení změn, ne v tom, že si postavíš mini reklamní síť uvnitř vlastního SaaS.
+
+> Codyho komentář: Feature flag není omluvenka pro nekonečně rozpracovaný produkt. Je to bezpečnostní pás. Když z něj uděláš skladiště experimentů bez úklidu, časem se na něm tým akorát uškrtí.
+
+## Rozliš typ flagu před prvním řádkem kódu
+
+Ne každý flag má stejnou životnost ani stejné riziko. Největší chaos vzniká, když tým používá jeden univerzální typ pro všechno: release, experiment, povolení modulu, kill switch i zákaznickou výjimku. Pak nikdo neví, jestli flag může zmizet příští týden, nebo jestli je to vlastně součást cenového modelu.
+
+Praktické rozdělení:
+
+- Release flag: dočasně schová novou funkci, než je připravená k zapnutí.
+- Operational flag: rychle vypne rizikovou část systému, třeba exporty, integraci nebo náročný worker.
+- Permission flag: dlouhodobě řídí dostupnost funkce podle tarifu, role nebo tenant nastavení.
+- Migration flag: pomáhá přepínat mezi starou a novou implementací.
+- Experiment flag: porovnává varianty, ale musí mít jasné metriky, konec a pravidla dat.
+
+U každého flagu napiš už při založení typ, vlastníka, datum revize a plán odstranění. Pokud nevíš, kdy má flag skončit, alespoň napiš podmínku: „odstranit po migraci všech tenantů“, „sloučit po 14 dnech bez incidentu“, „přepsat na trvalé nastavení tarifu“. Bez toho se z flagů stane archeologická vrstva produktu.
+
+## Evaluation context drž dietní
+
+Systémy pro feature flags často pracují s takzvaným evaluation contextem: sadou hodnot, podle kterých se rozhoduje, jakou variantu uživatel nebo služba dostane. OpenFeature ve své specifikaci popisuje targeting key a vlastní pole pro vyhodnocení pravidel. To je užitečné, ale také přesně místo, kde se dá nenápadně nasbírat víc dat, než produkt opravdu potřebuje.
+
+Privacy-first minimum:
+
+- Používej stabilní interní identifikátor, ne e-mail jako targeting key.
+- Preferuj tenant ID, plán, roli nebo region služby před osobními atributy.
+- Neposílej do flag systému jméno, telefon, obsah aktivity, IP adresu ani volný text.
+- Pokud potřebuješ procentuální rollout, hashuj interní ID a neposílej zbytečný profil.
+- Odděl serverové rozhodnutí od klientského UI, pokud by klient viděl citlivé pravidlo.
+
+Příklad špatného kontextu:
+
+```json
+{
+  "targetingKey": "jana.novakova@example.com",
+  "company": "Novakova audit s.r.o.",
+  "lastSearch": "propusteni zamestnance",
+  "monthlyRevenue": 124000,
+  "country": "CZ"
+}
+```
+
+Lepší varianta:
+
+```json
+{
+  "targetingKey": "usr_8f3a...",
+  "tenantId": "ten_42",
+  "plan": "business",
+  "role": "admin",
+  "serviceRegion": "eu"
+}
+```
+
+Rozdíl není kosmetický. V první verzi vytváříš z flag nástroje další místo s osobními a obchodně citlivými daty. Ve druhé verzi rozhoduješ produktově a provozně, ale necháváš soukromí na pokoji.
+
+## Flag rozhodnutí loguj jako provozní událost
+
+U důležitých flagů chceš vědět, kdo změnil pravidlo, kdy, proč a s jakým dopadem. Nechceš ale logovat kompletní evaluation context každého uživatele. OWASP Logging Cheat Sheet opakovaně zdůrazňuje, že logy mají mít jasný účel a nemají obsahovat citlivá data, která v nich být nemusí. U flagů to platí dvojnásob: log je provozní paměť, ne černá skříňka na všechno.
+
+Do auditního logu změn flagů patří:
+
+- název flagu,
+- typ flagu,
+- původní a nová hodnota pravidla v bezpečné podobě,
+- autor změny,
+- čas změny,
+- odkaz na ticket nebo rozhodnutí,
+- očekávaný dopad,
+- plán kontroly nebo rollbacku.
+
+Do běžných aplikačních logů většinou nepatří celý seznam atributů, podle kterých se flag vyhodnotil. Když potřebuješ ladit, použij krátkodobý debug režim pro konkrétní tenant nebo interní testovací účet a napiš retenci. „Dočasně“ bez data vypnutí je jen trvalé v mikině.
+
+## Rollout navrhuj jako bezpečný provozní rituál
+
+Feature flag sám o sobě bezpečný rollout nezaručí. Potřebuješ postup. Bez něj se tým jen přesune z rizika „velký release“ do rizika „někdo klikl v administraci a nikdo neví proč“.
+
+Jednoduchý rollout plán:
+
+1. Interní zapnutí: tým ověří hlavní scénáře na produkčních datech bez zásahu zákazníků.
+2. Jeden nízkorizikový tenant: ideálně zákazník, se kterým máš domluvený feedback kanál.
+3. Malý segment: třeba 5–10 % tenantů podle stabilního hash pravidla.
+4. Kontrola signálů: chyby, support tikety, latence, konverze hlavní akce, ruční feedback.
+5. Rozšíření nebo rollback: rozhodnutí podle předem napsaných kritérií.
+6. Úklid: odstranění dočasného flagu, mrtvého kódu a zastaralé dokumentace.
+
+U privacy-first produktu si předem řekni, jaké signály stačí. Ne každý rollout potřebuje session replay, heatmapu a dvacet eventů. Často stačí error rate, počet dokončených klíčových akcí, několik ručních kontrol a krátký feedback od supportu.
+
+## Kill switch nesmí záviset na rozbité části systému
+
+Operational flag nebo kill switch je pojistka. Pokud má vypnout problematickou integraci, export, AI zpracování nebo náročný background job, musí být dostupný i ve chvíli, kdy je část systému pod tlakem. To znamená: jednoduché pravidlo, rychlá propagace změny, bezpečný default a jasný vlastník.
+
+Příklad: máš export faktur do externího účetního systému. Když integrace začne vracet chyby nebo zpomalovat frontu, operational flag `accounting_export_enabled` má dovolit exporty dočasně zastavit, zobrazit uživateli srozumitelnou hlášku a uložit úlohy pro pozdější opakování. Nemá potichu zahazovat data. Nemá skrývat chybu před podporou. A už vůbec nemá posílat celý obsah faktur do flag služby jen proto, aby se rozhodlo, jestli export běží.
+
+Bezpečný default je většinou „neprovádět rizikovou akci, ale zachovat data a dát uživateli jasný stav“. U funkcí, které ovlivňují soukromí nebo právní dopad, buď konzervativní: když vyhodnocení flagu selže, raději nezapínej novou rizikovou cestu.
+
+## Uklízej flagy jako technický dluh s termínem
+
+Neuklizené flagy jsou tichý technický dluh. Zvyšují počet větví v kódu, komplikují testy, matou support a vytvářejí stav, kdy nikdo neví, jak produkt opravdu funguje. Z privacy pohledu navíc prodlužují životnost pravidel, která mohla vzniknout pro jednorázový experiment.
+
+Pravidlo pro malý tým: každý nový release nebo experiment flag musí mít úklidový ticket ve stejný den, kdy vznikne. Ne jako „někdy refaktor“, ale jako konkrétní práce: odstranit flag, smazat starou větev kódu, upravit testy, aktualizovat dokumentaci a zkontrolovat logy/metry.
+
+Měsíční flag review může mít jen 30 minut:
+
+- Seřaď flagy podle stáří.
+- Označ ty bez vlastníka.
+- U dočasných flagů rozhodni: odstranit, prodloužit s důvodem, nebo převést na trvalé nastavení.
+- Zkontroluj, jestli flag pravidla nepoužívají osobní data navíc.
+- Vyber jeden flag k odstranění ještě tento týden.
+
+> Codyho komentář: Nejlepší feature flag je často ten, který už neexistuje. Udělal práci, přežil rollout a odešel do digitálního důchodu. Krásný životní cyklus, žádné drama.
+
+## Checklist: feature flags bez datového konfetti
+
+- Má každý flag typ: release, operational, permission, migration nebo experiment?
+- Má flag vlastníka, datum revize a podmínku odstranění?
+- Je evaluation context omezený na minimum potřebné pro rozhodnutí?
+- Nepoužívá se e-mail, jméno, IP adresa ani obsah aktivity jako targeting key?
+- Je klientský kód chráněný před únikem citlivých pravidel?
+- Existuje rollout plán s jasnými kroky a kritérii rollbacku?
+- Umí operational flag bezpečně vypnout rizikovou funkci bez ztráty dat?
+- Loguje se změna flagu, ne kompletní uživatelský profil?
+- Mají debug logy krátkou retenci a omezený rozsah?
+- Probíhá aspoň měsíční úklid starých flagů?
+- Jsou flagy pokryté testy pro obě hlavní větve chování?
+- Je po stabilizaci funkce naplánované odstranění mrtvého kódu?
+
+## Mini šablona feature flag karty
+
+# Feature flag karta: [název flagu]
+
+## Základ
+
+- Typ flagu:
+- Vlastník:
+- Datum založení:
+- Datum revize:
+- Podmínka odstranění:
+
+## Účel
+
+- Jaké rozhodnutí flag řídí:
+- Proč nestačí běžný release:
+- Riziko při špatném vyhodnocení:
+
+## Evaluation context
+
+- Použitý targeting key:
+- Povolené atributy:
+- Zakázané atributy:
+- Server/client vyhodnocení:
+
+## Rollout
+
+- Interní test:
+- První tenant / segment:
+- Rozšíření:
+- Rollback kritéria:
+- Komunikační poznámka pro support:
+
+## Logování a privacy
+
+- Auditní události:
+- Aplikační metriky:
+- Debug režim:
+- Retence:
+
+## Úklid
+
+- Ticket na odstranění:
+- Kód k odstranění:
+- Testy k úpravě:
+- Dokumentace k aktualizaci:
+
+## Zdroje
+
+- OpenFeature Specification — Evaluation Context: popisuje targeting key, custom fields, úrovně kontextu a propagaci kontextu pro vyhodnocování flagů: https://openfeature.dev/specification/sections/evaluation-context/
+- OWASP Logging Cheat Sheet — doporučení pro účel logování, volbu událostí, atributy událostí a vyloučení citlivých dat z logů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- MDN Set-Cookie — praktický přehled atributů cookies jako `HttpOnly`, `Secure` a `SameSite`, užitečný při bezpečném řízení relací a rolloutů na webu: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie
+
 # Pracovní log
+
+- 2026-10-06: Doplněna příloha „Feature flags bez datového konfetti a nočních rollbacků“ s rozdělením typů flagů, privacy-first evaluation contextem, auditním logováním, rollout rituálem, operational kill switchem, úklidem flagů, checklistem, šablonou feature flag karty a ověřenými zdroji OpenFeature, OWASP a MDN.
 
 - 2026-10-06: Doplněna příloha „Session management bez zombie přihlášení“ s praktickým rozdělením relací, pravidly pro cookies, reautentizaci citlivých akcí, serverové odhlášení, privacy-first měření, checklistem, session kartou a ověřenými zdroji OWASP a NIST.
 
