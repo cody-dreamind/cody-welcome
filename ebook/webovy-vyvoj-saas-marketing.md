@@ -48777,7 +48777,209 @@ V malém týmu může být více rolí v jedné osobě. To je v pořádku. Nesm�
 - [EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en) — praktický rámec pro zabudování ochrany dat do návrhu a výchozích nastavení.
 
 
+# Příloha: Admin přístupy a break-glass bez superadmin folklóru
+
+Admin rozhraní je místo, kde se z dobrého SaaS může stát velmi drahá historka na incident review. Ne proto, že by admini byli zlí. Spíš proto, že „dočasně dáme plný přístup“ je jedna z nejrychlejších cest, jak vyrobit trvalé riziko s hezkým názvem role.
+
+> Codyho komentář: Superadmin účet je jako motorová pila v kanceláři. Někdy ji fakt potřebuješ, ale nechceš, aby ležela odemčená vedle kávovaru jen proto, že „Franta s ní umí“.
+
+## Rozděl běžný provoz od výjimečné záchrany
+
+Nejdřív si napiš, jaké admin akce se dějí běžně a které jsou opravdu nouzové. Pokud všechno řeší jedna role `admin`, nemáš řízení přístupu. Máš firemní amulet.
+
+Praktické rozdělení:
+
+- **Support role:** vidí zákaznický profil, stav objednávky, historii ticketů a základní diagnostiku, ale ne obsah citlivých dat mimo řešený případ.
+- **Billing role:** řeší fakturaci, platby, daňové údaje a stav předplatného, ale nepotřebuje číst produktový obsah zákazníka.
+- **Operations role:** spravuje konfiguraci služby, fronty, joby, integrace a provozní stav, ale nemá automaticky přístup k zákaznickému obsahu.
+- **Security role:** vidí auditní záznamy, přístupové události a bezpečnostní nastavení, ale běžně nemění produktová data.
+- **Break-glass role:** existuje pro incident, obnovu dostupnosti nebo právně/provozně výjimečnou situaci; používá se krátce, schváleně a hlučně.
+
+Každá role má mít pracovní popis, ne legendu. Věta „může všechno, protože je zodpovědný“ je přesně ten typ elegance, který po incidentu zestárne asi o čtyři roky za jednu minutu.
+
+## Least privilege napiš jako produktové pravidlo
+
+OWASP u autorizace i ASVS opakovaně staví na principu nejmenších potřebných oprávnění: uživatel má mít přístup jen k funkcím, datům a zdrojům, pro které má konkrétní autorizaci ([OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html), [OWASP ASVS Access Control](https://github.com/OWASP/ASVS/blob/master/4.0/en/0x12-V4-Access-Control.md)). Přeloženo do produktového jazyka: role nemá odpovídat pracovní senioritě, ale konkrétním úkolům.
+
+Příklad slabého návrhu:
+
+```text
+Role: Admin
+Může: spravovat uživatele, fakturaci, obsah, integrace, exporty, support, mazání a auditní logy.
+```
+
+Lepší návrh:
+
+```text
+Role: Support specialist
+Může: vyhledat zákazníka podle e-mailu, zobrazit stav účtu, vidět poslední technické události bez obsahu zpráv, vytvořit interní poznámku k ticketu.
+Nemůže: exportovat všechna data, měnit billing, zobrazit skryté tokeny, mazat workspace, měnit role.
+```
+
+Ještě lepší je přidat důvod:
+
+```text
+Důvod: role řeší běžnou podporu a nepotřebuje přístup k datům mimo konkrétní případ.
+```
+
+Tohle není byrokracie. Je to dokumentace hranic, které chrání zákazníka i tým, až někdo udělá chybu ve špatný pátek.
+
+## Break-glass účet nesmí být tichý
+
+Nouzový přístup má být vzácný, časově omezený a viditelný. Pokud se dá použít bez vysvětlení a nikdo se o tom nedozví, není to break-glass. Je to zadní dveře s hezkou cedulkou.
+
+Minimální pravidla:
+
+- aktivace vyžaduje důvod, ticket nebo incident ID,
+- přístup má krátkou expiraci, například desítky minut až jednotky hodin podle rizika,
+- po aktivaci vznikne auditní událost s uživatelem, časem, rozsahem a důvodem,
+- citlivé akce vyžadují reautentizaci nebo druhý faktor,
+- po použití proběhne krátká kontrola: co se dělalo, proč a zda zůstalo něco otevřené,
+- běžná práce se přes break-glass nedělá nikdy.
+
+NIST ve svých digitálních identity guidelines řeší session management a reautentizaci jako součást řízení rizika u relací ([NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html)). Pro SaaS praxi z toho plyne jednoduché pravidlo: čím citlivější akce, tím méně se spoléhej na dávno otevřenou session z rána.
+
+## Admin UI navrhni tak, aby pomáhalo brzdit chyby
+
+Bezpečnost adminu není jen backend kontrola. UI má admina vést k nejmenšímu bezpečnému zásahu.
+
+Dobré vzory:
+
+- u citlivých dat nejdřív zobraz maskovanou hodnotu a odhalení loguj,
+- u destruktivních akcí vyžaduj konkrétní potvrzení, ne jen univerzální „OK“,
+- u změny role ukaž, co přesně role přidá a odebere,
+- u exportu ukaž rozsah, účel, expiraci odkazu a příjemce,
+- u impersonace jasně označ, že admin jedná v režimu podpory,
+- u cross-tenant akcí zobraz tenant kontext výrazněji než jméno zákazníka.
+
+Špatný admin panel láká k rychlosti. Dobrý admin panel dává tření přesně tam, kde chyba bolí. Ne všude. Jen u akcí, které mění data, odhalují citlivý obsah, rozšiřují oprávnění nebo překračují hranici zákazníka.
+
+## Auditní log nesmí být další datový problém
+
+Loguj admin akce tak, aby šlo rekonstruovat rozhodnutí, ale neukládej do logu celý obsah zákaznických dat. Auditní záznam má odpovědět na otázky kdo, kdy, co, kde, proč a s jakým rozsahem. Nemá se stát kopií databáze pro lidi, kteří „jen potřebují něco dohledat“.
+
+Praktické pole auditní události:
+
+```text
+timestamp:
+actor_id:
+actor_role:
+tenant_id:
+target_type:
+target_id:
+action:
+reason_code:
+ticket_or_incident_id:
+result:
+risk_level:
+metadata_minimal:
+```
+
+Do `metadata_minimal` patří například počet zasažených záznamů, typ exportu nebo předchozí/nová role. Nepatří tam obsah zprávy, hodnota secretu, kompletní adresa, celé číslo dokladu ani osobní poznámka supportu.
+
+Privacy by design podle EDPB znamená, že ochrana dat má být zabudovaná do návrhu systému a výchozích nastavení, ne dodaná později jako omluvná tapeta ([EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)). U admin logů to znamená: loguj dost pro odpovědnost, ale ne tolik, aby auditní systém vytvářel nové riziko.
+
+## Kontroluj privilege creep každý měsíc
+
+Oprávnění se sama nerozumně nezmenšují. Spíš bobtnají. Někdo zaskočil za kolegu, někdo dostal přístup kvůli migraci, někdo řešil incident, někdo „to potřeboval na chvilku“. A za půl roku má polovina firmy možnost exportovat zákaznická data, protože historie je líný správce identit.
+
+Měsíční kontrola nemusí být velká:
+
+- seznam lidí s admin rolemi,
+- seznam servisních účtů a tokenů,
+- poslední použití citlivých oprávnění,
+- otevřené break-glass aktivace,
+- role bez vlastníka,
+- účty lidí, kteří změnili tým nebo odešli,
+- dočasná oprávnění po expiraci.
+
+Výstup má být rozhodnutí: ponechat, zúžit, odebrat, převést na jinou roli nebo prošetřit. Ne barevný report, který vypadá jako wellness plán pro IAM.
+
+## Příklad: support potřebuje pomoct zákazníkovi s importem
+
+Situace: zákazník hlásí, že import kontaktů skončil chybou.
+
+Špatný postup:
+
+- support dostane superadmina,
+- otevře celý workspace,
+- stáhne importovaný soubor,
+- pošle ukázku vývojáři přes chat,
+- nikdo neví, kdy přístup skončil.
+
+Lepší postup:
+
+- support otevře konkrétní ticket a workspace v support režimu,
+- vidí technický stav importu, počet řádků, typ chyby a anonymizovaný vzorek struktury,
+- pokud potřebuje obsah souboru, požádá zákazníka o souhlas nebo použije bezpečný upload do ticketu,
+- vývojář dostane syntetický nebo očištěný příklad chyby,
+- každé odhalení citlivějšího detailu má auditní událost a důvod,
+- po vyřešení se dočasný přístup automaticky zavře.
+
+Rozdíl není v tom, že druhý postup je pomalejší. Rozdíl je v tom, že druhý postup má brzdy přesně tam, kde může vzniknout škoda.
+
+## Checklist: admin přístupy bez superadmin folklóru
+
+- [ ] Má každá admin role pracovní účel a jasné zákazy?
+- [ ] Jsou support, billing, operations, security a break-glass oddělené?
+- [ ] Umí systém omezit admin akci na konkrétní tenant, ticket nebo incident?
+- [ ] Vyžadují citlivé akce reautentizaci nebo silnější ověření?
+- [ ] Má break-glass krátkou expiraci, důvod a auditní stopu?
+- [ ] Logují se admin akce bez obsahu zákaznických dat a secretů?
+- [ ] Existuje měsíční kontrola oprávnění a dočasných výjimek?
+- [ ] Umí tým rychle odebrat přístup při odchodu člověka nebo incidentu?
+- [ ] Jsou servisní účty a API tokeny v inventáři stejně jako lidé?
+- [ ] Ví support, co nikdy neposílat do chatu, AI nástroje ani screenshotu?
+
+## Mini šablona admin access karty
+
+```text
+## Role
+- Název role:
+- Vlastník role:
+- Pracovní účel:
+- Typičtí uživatelé:
+
+## Povolené akce
+- Může číst:
+- Může měnit:
+- Může exportovat:
+- Může spouštět:
+
+## Zakázané akce
+- Nikdy nesmí:
+- Vyžaduje vyšší schválení:
+- Vyžaduje break-glass:
+
+## Scope
+- Tenant scope:
+- Ticket/incident scope:
+- Časové omezení:
+- Reautentizace:
+
+## Audit
+- Povinný důvod:
+- Logovaná pole:
+- Zakázaná logovaná data:
+- Měsíční kontrola:
+
+## Nouzový režim
+- Kdy použít break-glass:
+- Kdo schvaluje:
+- Maximální délka:
+- Post-review:
+```
+
+## Zdroje
+
+- [OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) — praktická doporučení pro server-side autorizaci, least privilege a pravidelnou kontrolu oprávnění.
+- [OWASP ASVS: V4 Access Control](https://github.com/OWASP/ASVS/blob/master/4.0/en/0x12-V4-Access-Control.md) — ověřovací požadavky pro role, přístupová pravidla a ochranu zdrojů.
+- [NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html) — guidelines pro autentizaci, session management a reautentizaci podle rizika.
+- [EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en) — rámec pro zabudování ochrany dat do návrhu a výchozího chování systémů.
+
+
 # Pracovní log
+- 2026-10-06: Doplněna příloha „Admin přístupy a break-glass bez superadmin folklóru“ s rozdělením běžných admin rolí a nouzového přístupu, least-privilege pravidly, návrhem break-glass toku, bezpečnějším admin UI, auditními logy bez obsahu zákaznických dat, měsíční kontrolou oprávnění, support příkladem, checklistem, admin access kartou a ověřenými zdroji OWASP, NIST a EDPB.
 - 2026-10-06: Doplněn úvodní rozcestník „Kde začít podle situace“ s mapou kapitol pro web, SaaS, AI, provoz, data, marketing a support, hodinovým pracovním postupem, pravidly pro čtení checklistů a vyplnitelnou privacy-first pracovní kartou.
 - 2026-10-06: Doplněna příloha „DPIA-lite pro malé produktové změny bez právního mlžení“ s praktickým rozlišením menší pracovní karty a plného posouzení, účelovou minimalizací dat, popisem rizik jako dopadu na člověka, konkrétními opatřeními, příkladem AI triáže supportu, checklistem, vyplnitelnou DPIA-lite kartou a ověřenými zdroji EUR-Lex a EDPB.
 - 2026-10-06: Doplněna příloha „Závislosti a SBOM bez knihovního minového pole“ s inventářem aplikačních, kontejnerových, CI a CDN závislostí, praktickým použitím SBOM, rizikovým tříděním aktualizací, schvalováním nových balíčků, licenční hygienou, B2B SaaS příkladem, checklistem, dependency kartou a ověřenými zdroji CISA, CycloneDX, OpenSSF a OWASP.
