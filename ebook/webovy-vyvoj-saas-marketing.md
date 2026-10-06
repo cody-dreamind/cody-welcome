@@ -43,6 +43,77 @@ Když mikro-změna zasahuje text, měření nebo formulář, přidej k ní i jed
 10. Závěr: 30denní plán zavedení privacy-first webu nebo SaaS
 11. Bonusy a přílohy: workshop a scorecard pro výběr nástrojů
 
+## Rychlý rozcestník: kde začít podle situace
+
+E-book můžeš číst lineárně, ale v praxi ho budeš často otevírat ve chvíli, kdy něco hoří, stojí, prodražuje se nebo mlží. Tady je rychlá mapa, aby ses nemusel tvářit, že máš čas na literární večer s provozní dokumentací.
+
+| Situace | Začni tady | Výsledek po 30–60 minutách |
+| --- | --- | --- |
+| Spouštíš nový web | Strategie webu, privacy-first landing page, launch checklist | Jasná pracovní věta webu, CTA, datový slib a kontrola před publikací. |
+| Web má návštěvnost, ale málo poptávek | Mikrocopy, formuláře, měsíční audit webu | Kratší cesta k akci, lepší chybové stavy a méně trackingového plevele. |
+| Stavíš první SaaS verzi | SaaS produkt, onboarding, pricing, tenant isolation | Menší MVP rozsah, první hodnotná akce a bezpečné hranice zákaznických dat. |
+| Přidáváš AI funkci | AI workflow, AI konektory, evaluační sada, DPIA-lite | Jasné hranice dat, testy zneužití a schvalování citlivých akcí. |
+| Řešíš provozní riziko | Backups, incident response, status page, SLA/SLO | Priorita služeb, komunikační rytmus, restore test a měřitelné provozní sliby. |
+| Chceš snížit právní a datový chaos | Datová mapa, DPA, retence, žádosti subjektů údajů | Přehled kdo zpracovává co, proč, jak dlouho a co se dá smazat. |
+| Přibývá nástrojů a integrací | Schvalování nástrojů, shadow IT, API integrace, webhooky | Katalog povolených nástrojů, vlastníci, datové dopady a exit plán. |
+| Marketing stojí na platformách | Distribuční plán, SEO/RSS, e-mailing, reference | Vlastněné kanály, přímé odkazy, měření bez pixelové závislosti. |
+| Support se opakuje | Help centrum, zákaznická podpora, release notes | Lepší články, šablony odpovědí a kratší cesta od dotazu k opravě produktu. |
+| Tým roste a ztrácí přehled | Přístupová práva, auditní stopy, interní znalostní báze | Role, vlastnictví, rozhodovací záznamy a méně „kdo to vlastně spravuje?“ momentů. |
+
+Praktické pravidlo: když nevíš, kde začít, nezačínej u nástroje. Začni u rozhodnutí, které má být po přečtení jasnější. Pokud řešíš web, napiš pracovní větu webu. Pokud řešíš SaaS, napiš první hodnotnou akci uživatele. Pokud řešíš data, napiš účel zpracování a datum smazání. Pokud řešíš marketing, napiš vlastní kanál, který nezmizí při změně algoritmu.
+
+> Codyho komentář: Nejlepší kapitola je ta, po které smažeš jeden zbytečný skript, zkrátíš jeden formulář nebo konečně pojmenuješ vlastníka procesu. Pokud po přečtení jen přidáš další nástroj, e-book ti možná spadl na nohu, ale ne do workflow.
+
+### Tříkrokový postup pro hodinovou práci
+
+Když máš jen hodinu, nedělej „kompletní audit“. Kompletní audit je často elegantní název pro to, že nikdo nechce rozhodnout, co je první.
+
+1. **Vyber jednu kritickou cestu.** Například poptávka, registrace, platba, export dat, reset hesla, publikace článku nebo incidentová komunikace.
+2. **Najdi jedno slabé místo.** Může to být nejasný text, zbytečné pole, chybějící vlastník, externí skript bez důvodu, log plný dat nebo absence rollbacku.
+3. **Udělej jednu dokončenou změnu.** Dopiš mikrocopy, smaž nepotřebný vendor, přidej checklist, uprav formulář, zapiš retenční pravidlo nebo založ provozní kartu.
+
+Hotová hodinová iterace má mít tři výstupy:
+
+- co se změnilo,
+- proč to pomáhá zákazníkovi nebo provozu,
+- jak poznáš, že změna nezhoršila soukromí, výkon nebo podporu.
+
+Pokud neumíš odpovědět na třetí bod, změna ještě není hotová. Je jen nadšená.
+
+### Jak číst checklisty bez checklistového divadla
+
+Checklist není rituál, který se odškrtá těsně před deadlinem, aby měl projekt vůni kontroly. Používej ho jako rozhodovací nástroj:
+
+- položky s vysokým rizikem řeš před deployem,
+- položky s nejasným vlastníkem přepiš na konkrétní jméno nebo roli,
+- položky „nevíme“ jsou práce, ne ostuda,
+- položky „netýká se“ doplň krátkým důvodem,
+- opakované selhání stejné položky znamená systémový problém, ne smůlu.
+
+U privacy-first provozu je nejdůležitější otázka: „Můžeme to vysvětlit zákazníkovi bez červenání a bez právnické mlhy?“ Pokud ano, pokračuj. Pokud ne, vrať se k účelu, datům, dodavatelům a textu pro uživatele.
+
+### Malá navigační karta pro tým
+
+Tuhle kartu si můžeš zkopírovat do interní wiki, projektového ticketu nebo kickoff dokumentu:
+
+```text
+# Privacy-first pracovní karta
+
+Téma:
+Kritická cesta:
+Kterou kapitolu / přílohu používáme:
+Jedna věc, kterou dnes zlepšíme:
+Proč to pomáhá zákazníkovi:
+Jaká data se mění:
+Jaké externí služby se mění:
+Jak ověříme výsledek:
+Rollback / návrat zpět:
+Vlastník:
+Datum kontroly:
+```
+
+Cílem není mít dokonalou dokumentaci. Cílem je, aby příští člověk nemusel hádat, proč změna vznikla, co měla zlepšit a jestli po sobě nenechala datovou stopu velikosti menšího dinosaura.
+
 ---
 
 # 1. Strategie webu: co má web vydělat, vysvětlit nebo zjednodušit
@@ -48707,6 +48778,7 @@ V malém týmu může být více rolí v jedné osobě. To je v pořádku. Nesm�
 
 
 # Pracovní log
+- 2026-10-06: Doplněn úvodní rozcestník „Kde začít podle situace“ s mapou kapitol pro web, SaaS, AI, provoz, data, marketing a support, hodinovým pracovním postupem, pravidly pro čtení checklistů a vyplnitelnou privacy-first pracovní kartou.
 - 2026-10-06: Doplněna příloha „DPIA-lite pro malé produktové změny bez právního mlžení“ s praktickým rozlišením menší pracovní karty a plného posouzení, účelovou minimalizací dat, popisem rizik jako dopadu na člověka, konkrétními opatřeními, příkladem AI triáže supportu, checklistem, vyplnitelnou DPIA-lite kartou a ověřenými zdroji EUR-Lex a EDPB.
 - 2026-10-06: Doplněna příloha „Závislosti a SBOM bez knihovního minového pole“ s inventářem aplikačních, kontejnerových, CI a CDN závislostí, praktickým použitím SBOM, rizikovým tříděním aktualizací, schvalováním nových balíčků, licenční hygienou, B2B SaaS příkladem, checklistem, dependency kartou a ověřenými zdroji CISA, CycloneDX, OpenSSF a OWASP.
 - 2026-10-06: Doplněna příloha „Responzivní QA bez testování jen na obřím monitoru“ s kritickými mobilními cestami, kontrolou šířek a obsahových extrémů, formulářovým QA, výkonovými signály LCP/INP/CLS, testem bez myši, příkladem servisní landing page, checklistem, šablonou QA karty a ověřenými zdroji MDN, W3C a web.dev.
