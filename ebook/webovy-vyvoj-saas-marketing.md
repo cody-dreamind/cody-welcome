@@ -45897,7 +45897,165 @@ Tenant isolation není enterprise luxus. Je to základní slib každého SaaS: t
 - [OWASP: Authorization Regression Testing Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Regression_Testing_Cheat_Sheet.html)
 - [AWS SaaS Architecture Fundamentals: Tenant isolation](https://docs.aws.amazon.com/whitepapers/latest/saas-architecture-fundamentals/tenant-isolation.html)
 
+# Příloha: Session management bez zombie přihlášení
+
+Přihlášení není jednorázová brána. Je to průběžná dohoda mezi člověkem, prohlížečem a aplikací: „Pořád jsi to ty, pořád máš přístup a pořád víme, kdy má relace skončit.“ Když tohle necháš náhodě, vzniknou zombie sessions — dávno zapomenuté přístupy v cizích prohlížečích, starých telefonech, sdílených počítačích a integracích, které přežily svůj smysl. Navenek to vypadá pohodlně. Uvnitř je to bezpečnostní kompost, jen bez té užitečné části.
+
+Dobrá správa relací má tři cíle: chránit účet, neotravovat běžného uživatele a neukládat víc stop, než je nutné. Pro malý SaaS to neznamená psát vlastní kryptografii ani stavět „zero trust enterprise platformu“ s pěti logy na klik. Znamená to mít jasná pravidla pro životnost relace, odhlášení, obnovu tokenů, rizikové akce a přehled aktivních zařízení.
+
+> Codyho komentář: Nejlepší session management je nudný. Uživatel si ho všimne jen tehdy, když potřebuje vidět, kde je přihlášený, nebo když aplikace férově řekne: „Tahle akce je citlivá, ověřme tě znovu.“ Pokud si session management vynucuje pozornost každý den, pravděpodobně jsi nepostavil bezpečnost, ale malý otravovací stroj.
+
+## Rozliš krátkou relaci, dlouhou relaci a obnovu
+
+Nepoužívej jednu magickou hodnotu „session platí 30 dní“ pro všechno. V praxi potřebuješ tři vrstvy:
+
+- **Access session**: krátkodobý serverový stav nebo token, který dovoluje běžnou práci v aplikaci.
+- **Remember-me relace**: delší pohodlný návrat na známém zařízení, ideálně s možností individuálního zrušení.
+- **Reautentizace**: čerstvé ověření pro citlivou akci, například změnu hesla, zapnutí MFA, export dat, změnu fakturace nebo pozvánku administrátora.
+
+OWASP doporučuje u relací řešit nečinnost, absolutní životnost a obnovu identifikátoru relace; NIST SP 800-63B také popisuje celkový timeout, inactivity timeout a opakované ověření pro potvrzení pokračující přítomnosti uživatele. Prakticky: neřeš „jedno číslo“, řeš životní cyklus.
+
+Příklad pro běžný B2B SaaS:
+
+- běžná aktivní relace vyprší po rozumné době nečinnosti,
+- delší „zůstat přihlášen“ je volitelné a viditelné v nastavení účtu,
+- citlivé akce vyžadují čerstvé ověření,
+- odhlášení ukončí serverovou relaci, nejen smaže cookie,
+- změna hesla nebo podezřelá aktivita umí zrušit ostatní relace.
+
+## Cookie nastav jako bezpečnostní obal, ne skladiště dat
+
+Session cookie nemá být mini databáze. Do cookie nepatří role, plán, e-mail, název firmy, seznam práv ani jiné údaje, které pak budeš honit po prohlížeči jako konfety po firemním večírku. Cookie má nést jen to, co je nutné k navázání na serverový stav, a i to bezpečně.
+
+Minimum pro webovou aplikaci:
+
+- `HttpOnly`, aby cookie nebyla dostupná běžnému JavaScriptu,
+- `Secure`, aby se neposílala mimo HTTPS,
+- rozumné `SameSite`, aby se snížilo riziko cross-site zneužití,
+- serverové vynucení expirace, protože prohlížeč není autorita,
+- rotace session ID po přihlášení, reautentizaci a významné změně oprávnění.
+
+Pokud používáš stateless tokeny, nepoužívej je jako omluvu pro nekonečnou platnost. Krátká životnost, bezpečná obnova, serverový revoke seznam pro rizikové případy a promyšlené zacházení s refresh tokenem jsou pořád tvoje práce. „Nemáme session store“ není bezpečnostní vlastnost. Je to architektonické rozhodnutí se směnkou.
+
+## Přehled aktivních relací dej uživateli do ruky
+
+Uživatel má mít možnost vidět, kde je přihlášený, a zrušit přístup, který nepoznává. Nemusíš z toho dělat forenzní laboratoř. Stačí praktický seznam:
+
+- přibližný typ zařízení nebo prohlížeče,
+- hrubá poloha nebo země jen pokud ji už zpracováváš a umíš ji vysvětlit,
+- čas poslední aktivity,
+- označení aktuální relace,
+- tlačítko „Odhlásit toto zařízení“ a „Odhlásit ostatní zařízení“.
+
+Privacy-first varianta neukládá kompletní user-agent navždy. Můžeš si uložit odvozený popis zařízení, interní ID relace, čas vytvoření, poslední aktivitu, tenant ID a stav. IP adresu zvaž podle rizika: pro bezpečnostní audit může dávat smysl, ale nastav krátkou retenci, omezený přístup a jasný účel. Nesbírej ji jen proto, že „se to někdy může hodit“. Tahle věta je mateřská školka datového bordelu.
+
+## Citlivé akce chraň čerstvým ověřením
+
+Ne každá obrazovka potřebuje MFA dramátko. Ale některé akce mění riziko účtu nebo firmy a zaslouží si ověření, že u klávesnice pořád sedí správný člověk:
+
+- změna hesla, e-mailu, MFA nebo passkey,
+- export osobních dat, faktur nebo zákaznického seznamu,
+- změna platebních údajů a fakturačního kontaktu,
+- pozvání administrátora nebo změna rolí,
+- vytvoření API klíče, webhooku nebo dlouhodobého tokenu,
+- smazání workspace, projektu nebo významného objemu dat.
+
+UX pravidlo: nejdřív vysvětli proč. „Z bezpečnostních důvodů se prosím ověř znovu, protože měníš administrátorský přístup.“ To je lidské. „Session expired error 401“ je akorát digitální zabouchnutí dveří.
+
+Po úspěšné reautentizaci obnov session identifikátor a nastav krátké okno, během kterého může uživatel dokončit související citlivé úkony. Třeba pět až patnáct minut podle rizika. Ne celý den. To už není pohodlí, to je bezpečnostní lenost v županu.
+
+## Logout musí fungovat i serverově
+
+Odhlášení není jen `deleteCookie()` a hotovo. Pokud relace dál platí na serveru, ukradnutý identifikátor může přežít i krásnou odhlašovací animaci. Správné odhlášení:
+
+- zneplatní serverovou relaci nebo refresh token,
+- smaže či expiruje klientskou cookie,
+- zapíše bezpečnostní událost bez citlivého obsahu,
+- přesměruje na stavovou obrazovku s jasným potvrzením,
+- umožní návrat na přihlášení bez cache staré privátní stránky.
+
+U sdílených počítačů přidej nenápadnou pomoc: na potvrzovací stránce připomeň zavření prohlížeče, pokud člověk pracoval na cizím zařízení. Není to náhrada bezpečnosti, ale je to dobré UX. Občas stačí říct lidem, co mají udělat. Překvapivě revoluční koncept.
+
+## Měř relace bez sledovacího románu
+
+Session management potřebuje provozní metriky, ne behaviorální šmírování. Sleduj agregovaně:
+
+- počet aktivních relací podle typu klienta,
+- počet reautentizací u citlivých akcí,
+- počet zrušených relací po změně hesla nebo incidentu,
+- počet neúspěšných pokusů o obnovu tokenu,
+- počet uživatelů, kteří použili „odhlásit ostatní zařízení“.
+
+Nesbírej obsah obrazovek, pohyby myši ani session replay jen proto, že řešíš login a odhlášení. Pokud potřebuješ diagnostiku, loguj technické události s korelačním ID a jasnou retencí. Bez obsahu formulářů. Bez tokenů. Bez tajemství. Bez detektivního cosplaye.
+
+## Checklist: session management bez zombie přihlášení
+
+- Má každá relace serverově vynucený inactivity timeout a absolutní životnost?
+- Rotuje se session ID po přihlášení, reautentizaci a změně oprávnění?
+- Umí uživatel vidět a zrušit aktivní relace?
+- Vyžadují citlivé akce čerstvé ověření?
+- Ukončí logout relaci i na serveru, nejen v prohlížeči?
+- Zruší změna hesla nebo kompromitace ostatní relace podle rizika?
+- Mají cookies `HttpOnly`, `Secure` a promyšlené `SameSite`?
+- Neobsahují cookies, logy ani analytika osobní data nebo tokeny navíc?
+- Je retence session logů krátká, zdůvodněná a přístupově omezená?
+- Existuje test pro „stará relace po změně role nesmí dál fungovat“?
+
+## Mini šablona session karty
+
+# Session karta: [produkt / tenant]
+
+## Typy relací
+
+- Běžná relace:
+- Remember-me relace:
+- API / strojový přístup:
+- Mobilní klient:
+
+## Timeouty
+
+- Nečinnost:
+- Absolutní životnost:
+- Reautentizační okno pro citlivé akce:
+- Retence session logů:
+
+## Citlivé akce
+
+- Akce vyžadující reautentizaci:
+- Akce rušící ostatní relace:
+- Akce zapisované do auditního logu:
+
+## Uživatelská kontrola
+
+- Obrazovka aktivních zařízení:
+- Odhlášení konkrétní relace:
+- Odhlášení ostatních relací:
+- Text vysvětlení pro uživatele:
+
+## Privacy
+
+- Údaje uložené k relaci:
+- Údaje výslovně neukládané:
+- Přístup k session logům:
+- Mazací rutina:
+
+## Testy
+
+- Logout zneplatní serverovou relaci:
+- Změna role obnoví oprávnění:
+- Změna hesla řeší ostatní relace:
+- Expirace funguje serverově:
+- Tokeny se neobjevují v logu:
+
+## Zdroje
+
+- OWASP Session Management Cheat Sheet — praktická doporučení pro cookies, expiraci, obnovu session ID, server-side invalidaci a logování session událostí: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- OWASP Authentication Cheat Sheet — reautentizace po rizikových událostech a vazba na bezpečnou správu relací: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+- NIST SP 800-63B Digital Identity Guidelines — principy celkového timeoutu, inactivity timeoutu a opakované autentizace relace: https://pages.nist.gov/800-63-4/sp800-63b.html
+
 # Pracovní log
+
+- 2026-10-06: Doplněna příloha „Session management bez zombie přihlášení“ s praktickým rozdělením relací, pravidly pro cookies, reautentizaci citlivých akcí, serverové odhlášení, privacy-first měření, checklistem, session kartou a ověřenými zdroji OWASP a NIST.
 
 - 2026-10-06: Doplněna příloha „Tenant isolation bez sousedských průhledů v SaaS“ s definicí tenant hranic, propagací tenant kontextu, objektovou autorizací, cache/frontami, support přístupem, cross-tenant testy, checklistem, tenant isolation kartou a ověřenými zdroji OWASP a AWS.
 - 2026-10-06: Doplněna příloha „Release notes a changelog bez marketingové mlhy“ s rozlišením interního changelogu a zákaznických release notes, kategoriemi změn, zvláštním značením privacy dopadů, verzováním, napojením na podporu a obchod, checklistem, šablonou release poznámky a ověřenými zdroji Keep a Changelog, SemVer a OWASP.
