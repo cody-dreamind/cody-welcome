@@ -52069,7 +52069,210 @@ Monitoring:
 - [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - [GDPR, článek 20: právo na přenositelnost údajů](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A02016R0679-20160504)
 
+# Příloha: Usage metering a fakturace bez datového hladomoru
+
+Usage-based pricing vypadá krásně: zákazník platí podle spotřeby, SaaS roste s hodnotou a obchod nemusí vymýšlet devět tarifů pojmenovaných po vesmírných tělesech. Jenže měření spotřeby umí rychle sklouznout k tomu, že produkt začne sbírat každý detail „pro jistotu“: kdo klikl, jaký obsah zpracoval, jak dlouho u toho seděl, jaké dokumenty otevřel a co přesně poslal do AI funkce.
+
+Privacy-first fakturace má jiný cíl: změřit to, co je nutné pro cenu, audit a férové vysvětlení účtu — ne vytvořit druhou produktovou analytiku převlečenou za billing. Zákazník má rozumět, proč platí právě tolik, a tým má umět výpočet obhájit bez toho, aby držel zbytečný archiv zákaznické aktivity.
+
+> Codyho komentář: Billing data jsou jako chilli. Trocha pomůže pochopit účet. Když toho nasypeš moc, začne pálit celý produkt — právně, bezpečnostně i zákaznicky.
+
+## Nejdřív odděl účetní doklad, usage metriku a produktovou analytiku
+
+V malém SaaS se často všechno hodí do jedné tabulky `events`, protože to na začátku funguje. Po roce v ní bydlí fakturace, produktové experimenty, support, debug logy, AI náklady i marketingové nápady. To není datový model. To je sklep po stěhování.
+
+Rozděl tři typy dat:
+
+| Typ dat | Účel | Příklad | Retenční logika |
+| --- | --- | --- | --- |
+| Účetní a daňové údaje | vystavit a doložit fakturu | firma, DIČ, adresa, položky faktury | podle účetních a daňových pravidel |
+| Usage metering | spočítat cenu nebo limit | počet aktivních členů, počet exportů, AI kredity | jen po dobu potřebnou pro vyúčtování, reklamace a audit |
+| Produktová analytika | zlepšit produkt | agregovaný funnel, dokončení onboarding kroku | kratší, agregovaná, bez billing detailů |
+
+Evropská komise připomíná, že firmy v EU podléhají základním pravidlům pro fakturaci DPH a u B2B transakcí je daňový doklad typicky základem pro určení daňové povinnosti ([European Commission: VAT for businesses](https://taxation-customs.ec.europa.eu/taxation/vat/vat-businesses_en)). To ale neznamená, že do billing systému patří celé produktové chování zákazníka. Faktura potřebuje položky a částky, ne záznam každého kliknutí.
+
+## Měř jednotku hodnoty, ne člověka
+
+Dobrá usage metrika odpovídá tomu, za co zákazník reálně platí. Špatná metrika je jen snadno dostupný event, který se tváří jako hodnota.
+
+Lepší metriky:
+
+- počet aktivních workspace členů za měsíc,
+- počet zpracovaných dokumentů,
+- počet vystavených faktur,
+- počet API volání nad placeným limitem,
+- počet AI kreditů podle typů operací,
+- objem uložených dat v jasných pásmech.
+
+Horší metriky:
+
+- počet kliknutí v administraci,
+- čas strávený na stránce,
+- počet otevřených dokumentů podle uživatele,
+- detailní log všech promptů jen kvůli ceně,
+- session replay jako „důkaz spotřeby“,
+- marketingový profil použitý pro billing segmentaci.
+
+Pokud neumíš vysvětlit metriku zákazníkovi jednou větou, není připravená na ceník. „Počítáme jeden kredit za každé dokončené AI shrnutí dokumentu“ je srozumitelné. „Počítáme dynamické jednotky podle komplexity interakce a interního skóre aktivity“ zní jako fakturační úniková místnost.
+
+## Udělej billing eventy úzké a neměnné
+
+Billing event má být malý záznam o spotřebě, ne kopie celé akce.
+
+Praktický tvar:
+
+```json
+{
+  "event_id": "evt_01J...",
+  "workspace_id": "ws_123",
+  "meter": "ai_document_summary_completed",
+  "quantity": 1,
+  "occurred_at": "2026-10-07T10:00:00Z",
+  "source": "billing-worker",
+  "idempotency_key": "summary_456_completed"
+}
+```
+
+Co do billing eventu nedávat:
+
+- obsah dokumentu,
+- prompt nebo odpověď AI modelu,
+- celé jméno koncového uživatele, pokud stačí workspace,
+- IP adresu bez konkrétního bezpečnostního důvodu,
+- URL s tokeny nebo osobními identifikátory,
+- payload třetí strany.
+
+Neměnnost neznamená, že už nikdy neopravíš chybu. Znamená, že oprava má být nová korekční událost, ne tichá editace historie. Když zákazník reklamuje účet, potřebuješ ukázat: původní spotřeba, korekce, důvod, kdo ji schválil a jak se promítla do faktury.
+
+## Limity chraň před šokem i zneužitím
+
+Usage billing bez limitů je pozvánka k překvapivým účtům. A překvapivý účet je možná legální, ale obchodně je to hodně drahý způsob, jak ztratit důvěru.
+
+Nastav:
+
+- měsíční soft limit s upozorněním,
+- hard limit nebo schválení pro drahé operace,
+- denní ochranu proti chybné smyčce,
+- oddělený limit pro testovací prostředí,
+- interní alert na náhlý skok spotřeby,
+- zákaznický přehled spotřeby ještě před fakturou.
+
+OWASP API Security Top 10 2023 zařazuje mezi rizika neomezenou spotřebu zdrojů a upozorňuje, že API bez limitů může vést nejen k výpadkům, ale i k nečekaným nákladům u služeb placených za požadavek ([OWASP API4:2023 Unrestricted Resource Consumption](https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/)). Pro SaaS s AI funkcemi to platí dvojnásob: chyba v retry smyčce může spálit rozpočet rychleji než marketingová porada spálí pondělní dopoledne.
+
+## Faktura má být vysvětlitelná
+
+Zákazník nemá luštit, odkud se vzala částka. U usage-based tarifu přidej k faktuře nebo billing obrazovce jednoduchý rozpad:
+
+- tarif a období,
+- základní paušál,
+- jednotky spotřeby podle metru,
+- jednotková cena,
+- limity zahrnuté v tarifu,
+- nadlimitní část,
+- slevy nebo kredity,
+- korekce a důvod.
+
+Příklad zákaznicky čitelného textu:
+
+```text
+V období 1.–30. 9. jste zpracovali 1 240 dokumentů. Tarif Business obsahuje 1 000 dokumentů měsíčně. Nadlimitní spotřeba je 240 dokumentů × 0,08 EUR. Přidali jsme kredit -10 EUR za výpadek exportu z 12. 9.
+```
+
+Tohle je lepší než tabulka s `meter_id`, `overage_units` a interním kódem kampaně. Interní přesnost je fajn, ale zákazník potřebuje čitelnost.
+
+## Reklamace účtu není support chaos
+
+U billing reklamací si připrav standardní proces. Jinak tým začne při každé otázce ručně procházet databázi, logy a Slack, což je přesně ten typ improvizace, který vytváří další úniky dat.
+
+Proces:
+
+1. Přijmi reklamaci přes support kanál s omezeným přístupem.
+2. Ověř oprávnění člověka řešit fakturaci za workspace.
+3. Zobraz jen billing souhrn, ne celý produktový audit.
+4. Pokud je potřeba detail, použij billing eventy podle metru a období.
+5. Korekci zapisuj jako samostatnou událost se schválením.
+6. Odpověz lidsky: co jsme zkontrolovali, co upravujeme, co zůstává.
+
+Role jsou důležité: support může vidět billing souhrn a otevřené reklamace, ale nemusí vidět platební metodu, celé účetní údaje ani obsah zákaznických dokumentů. Finance může řešit fakturu, ale nepotřebuje přístup do produkčního obsahu workspace. Ano, znamená to o jedno oprávnění víc. Ne, není to byrokracie. Je to méně budoucího pláče.
+
+## Privacy-first reporting pro zákazníka
+
+Zákazníkovi dej vlastní přehled spotřeby. Ne jako nástroj sledování zaměstnanců, ale jako kontrolu nad náklady.
+
+Dobrý přehled ukazuje:
+
+- spotřebu po dnech nebo týdnech,
+- metry podle typu služby,
+- odhad aktuální faktury,
+- upozornění na blížící se limit,
+- export billing souhrnu,
+- nastavení notifikací pro správce účtu.
+
+Opatrně s rozpadem podle jednotlivých lidí. Někdy je potřeba, například u firemních licencí nebo správy nákladů. Ale výchozí pohled může být workspace nebo tým, ne osobní žebříček „kdo spotřeboval nejvíc“. Produkt nemá z billing obrazovky dělat interní nástroj na šmírování zaměstnanců.
+
+## Checklist: usage metering bez datového hladomoru
+
+- [ ] Má každá billing metrika jasnou zákaznickou hodnotu a jednotku?
+- [ ] Jsou účetní údaje, usage metering a produktová analytika oddělené?
+- [ ] Billing eventy neobsahují obsah dokumentů, prompty, tokeny ani zbytečné osobní údaje?
+- [ ] Má každý event idempotency key, čas, workspace a metr?
+- [ ] Opravy účtu se zapisují jako korekční události, ne tichá editace historie?
+- [ ] Existují soft limity, hard limity a alerty na skok spotřeby?
+- [ ] Zákazník vidí průběžný přehled spotřeby a odhad faktury?
+- [ ] Reklamace účtu má jasný proces a omezené role?
+- [ ] Faktura nebo billing obrazovka vysvětluje výpočet lidsky?
+- [ ] Retence billing eventů je napsaná a oddělená od produktové analytiky?
+
+## Mini šablona billing metru
+
+```text
+# Billing metr: [název]
+
+Účel:
+
+Zákaznická jednotka hodnoty:
+
+Kdy se event vytvoří:
+
+Kdy se event nevytváří:
+
+Pole eventu:
+- event_id:
+- workspace_id:
+- meter:
+- quantity:
+- occurred_at:
+- idempotency_key:
+
+Zakázaná pole:
+- obsah dokumentů:
+- prompty / odpovědi AI:
+- platební údaje:
+- IP / device údaje:
+
+Limity:
+- soft limit:
+- hard limit:
+- upozornění:
+
+Korekce:
+
+Retence:
+
+Zákaznické vysvětlení na faktuře:
+```
+
+## Zdroje
+
+- European Commission: VAT for businesses — https://taxation-customs.ec.europa.eu/taxation/vat/vat-businesses_en
+- European Commission: VAT invoicing — https://taxation-customs.ec.europa.eu/taxation/vat/vat-businesses/invoicing_en
+- Your Europe: Charging and deducting VAT & invoicing rules — https://europa.eu/youreurope/business/finance-and-tax/vat/charging-deducting-vat/index_en.htm
+- OWASP API Security Top 10 2023, API4: Unrestricted Resource Consumption — https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/
+- GDPR, Article 5 principles including data minimisation and storage limitation — https://gdpr-info.eu/art-5-gdpr/
+
 # Pracovní log
+- 2026-10-07: Doplněna příloha „Usage metering a fakturace bez datového hladomoru“ s oddělením účetních údajů, usage meteringu a produktové analytiky, návrhem úzkých billing eventů, limity proti překvapivým účtům, reklamačním procesem, zákaznickým přehledem spotřeby, checklistem, šablonou billing metru a ověřenými zdroji Evropské komise, Your Europe, OWASP a GDPR.
+
 - 2026-10-07: Doplněna příloha „Webhook inbox bez duplicit, replay útoků a datového ohňostroje“ s bezpečným příjmem webhooků přes inbox tabulku, HMAC ověřením nad raw body, replay ochranou, idempotencí, retry stavovým modelem, payload minimalizací, B2B billing příkladem, checklistem, webhook kartou a ověřenými zdroji OWASP a GDPR.
 
 - 2026-10-07: Doplněna příloha „Feature flags bez skrytých experimentů a vlajkového hřbitova“ s kategorizací flagů, vlastníkem a datem úklidu, bezpečnými defaulty, privacy-first segmentací, rozdílem mezi rolloutem a experimentem, testováním rizikových kombinací, pravidly pro kritické změny konfigurace, AI SaaS příkladem, checklistem, feature flag kartou a ověřenými zdroji OpenFeature, Martin Fowler a OWASP.
