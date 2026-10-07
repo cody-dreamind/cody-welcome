@@ -49877,8 +49877,234 @@ Pokud používáš HTTP odpověď `429 Too Many Requests`, přidej technickým k
 - [W3C: WCAG 2.2](https://www.w3.org/TR/WCAG22/) — přístupnostní požadavky užitečné i pro stavové hlášky, focus a srozumitelné ovládání.
 
 
+
+# Příloha: Exporty dat bez CSV injekce a support nočních můr
+
+Export dat vypadá jako nudné tlačítko. Ve skutečnosti je to jedna z nejcitlivějších hranic SaaS produktu: uživatel přes něj dostává data ven z aplikace, často v podobě, která pak putuje e-mailem, do účetnictví, do CRM, do tabulek a občas i do rukou člověka, který netuší, proč je sloupec `customer_internal_note` špatný nápad.
+
+Privacy-first export má tři jednoduché cíle:
+
+- dát zákazníkovi kontrolu nad vlastními daty,
+- nevynést víc dat, než je potřeba pro daný účel,
+- nevyrobit bezpečnostní problém ve spreadsheetu, prohlížeči nebo support procesu.
+
+Codyho komentář: Export není „jen soubor“. Je to malý datový kufr. Když ho špatně sbalíš, zákazník s ním odnese i ponožky, které nikdy vidět neměl.
+
+## Začni účelem exportu, ne tlačítkem „stáhnout vše“
+
+Nejhorší export je univerzální dump databáze s hezkým názvem. Vypadá pohodlně, ale míchá provozní data, osobní údaje, interní poznámky, auditní techniku a historický bordel do jednoho souboru.
+
+Pro každý export napiš jednu větu:
+
+```text
+Tento export pomáhá [komu] udělat [konkrétní práci] bez ručního opisování [konkrétních polí].
+```
+
+Příklady:
+
+- `Účetní export faktur pomáhá finančnímu týmu spárovat vystavené doklady za měsíc.`
+- `Export kontaktů pomáhá správci workspace přesunout aktivní obchodní kontakty do schváleného CRM.`
+- `Export aktivit pomáhá zákazníkovi dohledat provozní události za omezené období.`
+
+Jakmile věta neobsahuje konkrétní práci, export je pravděpodobně moc široký. A moc široký export je datová skluzavka bez zábradlí.
+
+## Rozděl exporty podle rizika
+
+Ne každý export potřebuje stejné brzdy. Rozděl je minimálně do čtyř tříd:
+
+| Typ exportu | Příklad | Výchozí pravidlo |
+| --- | --- | --- |
+| Veřejný nebo nízké riziko | seznam veřejných produktů, katalog položek | Lze stáhnout běžnou rolí, bez citlivých polí. |
+| Provozní | objednávky, faktury, seznam uživatelů workspace | Jen oprávněné role, časový rozsah, audit události. |
+| Citlivý | aktivita uživatelů, support historie, bezpečnostní log | Schválení, krátké období, minimum polí, silná auditní stopa. |
+| Přenositelnost dat | export účtu nebo workspace při odchodu | Jasný rozsah, bezpečný odkaz, expirace, dokumentace formátu. |
+
+Praktické pravidlo: čím blíž je export ke konkrétní osobě, interní poznámce, bezpečnostní události nebo obchodnímu tajemství, tím méně má být samoobslužný a tím víc má mít kontext.
+
+## Pole vybírej podle allowlistu
+
+Export nikdy nestav na principu „vezmi všechny sloupce kromě těch zakázaných“. Den, kdy někdo přidá `internal_risk_score`, `deleted_reason` nebo `support_private_note`, se pak stane malým festivalem trapna.
+
+Bezpečnější je allowlist:
+
+```text
+Export: faktury měsíční přehled
+Povolená pole:
+- invoice_number
+- issue_date
+- due_date
+- customer_name
+- customer_vat_id
+- total_without_vat
+- total_vat
+- total_with_vat
+- currency
+- payment_status
+Zakázaná pole:
+- interní poznámky
+- IP adresy
+- auditní detaily
+- obsah komunikace
+- technické identifikátory bez účetního účelu
+```
+
+Allowlist drž u exportního kódu, ale zároveň ho popiš lidsky v produktu nebo interní dokumentaci. Zákazník má vědět, co export obsahuje, dřív než soubor otevře.
+
+## CSV není nevinné, když ho otevře tabulkový procesor
+
+CSV je praktický formát, ale aplikace ho často otevírají jako tabulku se vzorci. OWASP popisuje CSV Injection, někdy také Formula Injection, jako situaci, kdy nedůvěryhodný vstup vložený do CSV může spreadsheet vyhodnotit jako vzorec ([OWASP: CSV Injection](https://community.owasp.org/attacks/CSV_Injection), [OWASP WSTG: Testing for CSV Injection](https://wstg.owasp.org/latest/4-Web_Application_Security_Testing/07-Injection/21-CSV_Injection/)).
+
+Rizikové jsou hlavně hodnoty začínající znaky jako:
+
+```text
+= + - @ tabulátor návrat_vozíku
+```
+
+Praktická obrana:
+
+- Každé pole escapuj podle zvoleného CSV formátu.
+- Pole začínající rizikovým znakem neutralizuj podle vlastní exportní policy.
+- Testuj exporty na hodnotách typu `=cmd|...`, `+SUM(1,1)` nebo `@HYPERLINK(...)`.
+- Do exportu nepouštěj HTML ani Markdown jako „bohatý text“.
+- U citlivých dat nabídni raději formát JSON se schématem, pokud je příjemcem technický systém.
+
+RFC 4180 popisuje běžný CSV formát a registraci MIME typu `text/csv`, ale neřeší bezpečnostní chování spreadsheetů ([RFC 4180](https://www.rfc-editor.org/info/rfc4180/)). Proto nestačí říct „je to validní CSV“. Musí to být i bezpečné CSV pro reálný způsob použití.
+
+## Stahování souboru nastav jako produktový kontrakt
+
+Když export posíláš přes HTTP, nastav hlavičky tak, aby prohlížeč soubor nestřílel do stránky jako překvapení v krabici. MDN popisuje `Content-Disposition` jako hlavičku, která určuje, zda se obsah zobrazí inline, nebo se nabídne jako příloha ke stažení ([MDN: Content-Disposition](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Disposition)).
+
+Dobrý základ:
+
+```http
+Content-Type: text/csv; charset=utf-8
+Content-Disposition: attachment; filename="invoices-2026-10.csv"
+Cache-Control: no-store
+```
+
+U exportů z privátní aplikace se vyhni veřejným, dlouho žijícím URL. Pokud generuješ odkaz asynchronně, dej mu expiraci, vazbu na uživatele a možnost ručního zneplatnění.
+
+## Velké exporty dělej asynchronně
+
+Malý export může být okamžitý. Velký export má být job:
+
+1. Uživatel vybere typ, rozsah a formát.
+2. Systém ukáže odhad dopadu: počet záznamů, citlivost, expiraci odkazu.
+3. Job běží na pozadí a nepřetěžuje hlavní aplikaci.
+4. Výsledek je dostupný jen oprávněnému uživateli.
+5. Odkaz expiruje a exportní soubor se smaže.
+6. Audit zůstane, ale bez obsahu exportovaných dat.
+
+UX text může být jednoduchý:
+
+```text
+Export připravujeme.
+Soubor bude dostupný 24 hodin jen pro tvůj účet. Obsahuje faktury za říjen 2026 a neobsahuje interní poznámky ani auditní logy.
+```
+
+Tohle je lepší než spinner bez kontextu, protože uživatel rozumí rozsahu i bezpečnostnímu režimu.
+
+## Support nemá exporty posílat ručně „bokem“
+
+Jakmile export nejde stáhnout, support často dostane pokušení: „Pošleme vám to ručně.“ To je lidské. A přesně proto potřebuje proces.
+
+Support pravidla:
+
+- Support nesmí generovat širší export než zákazníkova role.
+- Soubor se neposílá jako volná příloha, pokud obsahuje osobní nebo citlivá data.
+- Do ticketu se nevkládá celý export ani jeho náhled s osobními údaji.
+- Výjimka musí mít důvod, schválení a expiraci.
+- Po incidentu se ruční export zkontroluje v auditní rutině.
+
+Codyho komentář: „Pošlu vám to mailem“ je věta, která zní jako zákaznická péče, dokud se z ní nestane neřízený datový kanál s historií v pěti inboxech.
+
+## Příklad: export objednávek pro B2B klienta
+
+Zákazník chce měsíční export objednávek pro interní reporting.
+
+Špatná verze:
+
+- tlačítko `Export vše`,
+- všechna pole z databáze,
+- soubor se jmenuje `export.csv`,
+- bez auditní události,
+- včetně interních poznámek a IP adres,
+- hodnoty nejsou ošetřené proti CSV injection.
+
+Lepší verze:
+
+- export `Objednávky za období`,
+- volba období maximálně 12 měsíců,
+- allowlist polí schválený produktově i provozně,
+- CSV hodnoty escapované a neutralizované proti vzorcům,
+- `Content-Disposition: attachment`, `Cache-Control: no-store`,
+- auditní záznam: kdo, kdy, typ exportu, období, počet řádků,
+- žádný obsah exportu v logu,
+- odkaz u velkých exportů expiruje po 24 hodinách.
+
+## Checklist: exporty bez datového průvanu
+
+- [ ] Každý export má jednu větu účelu a vlastníka.
+- [ ] Export používá allowlist polí, ne dump tabulky.
+- [ ] Citlivé exporty mají časový rozsah, oprávnění a auditní událost.
+- [ ] CSV hodnoty jsou escapované a ošetřené proti formula injection.
+- [ ] Soubor má správný `Content-Type`, `Content-Disposition` a bezpečný název.
+- [ ] Privátní exporty se neukládají na veřejná nebo dlouho žijící URL.
+- [ ] Velké exporty běží jako job s expirací výsledku.
+- [ ] Logy obsahují metadata exportu, ne exportovaná data.
+- [ ] Support má pravidla pro ruční pomoc bez posílání citlivých příloh.
+- [ ] Exporty se testují na dlouhých textech, diakritice, prázdných hodnotách a rizikových znacích.
+
+## Mini šablona exportní karty
+
+```text
+# Exportní karta: [název exportu]
+
+## Účel
+- Komu pomáhá:
+- Jakou práci řeší:
+- Kdy se používá:
+
+## Rozsah
+- Povolená pole:
+- Zakázaná pole:
+- Časový rozsah:
+- Formát:
+
+## Přístup
+- Role, které smějí export spustit:
+- Vyžaduje schválení:
+- Expirace odkazu nebo souboru:
+
+## Bezpečnost
+- CSV/formátová ochrana:
+- Hlavičky stažení:
+- Cache pravidlo:
+- Auditní událost:
+
+## Privacy
+- Osobní údaje:
+- Citlivá pole:
+- Co se nesmí logovat:
+- Retence exportního souboru:
+
+## Provoz
+- Vlastník:
+- Testovací hodnoty:
+- Datum další revize:
+```
+
+## Zdroje
+
+- [OWASP: CSV Injection](https://community.owasp.org/attacks/CSV_Injection) — riziko formula injection při otevírání CSV ve spreadsheetu.
+- [OWASP WSTG: Testing for CSV Injection](https://wstg.owasp.org/latest/4-Web_Application_Security_Testing/07-Injection/21-CSV_Injection/) — testovací přístup pro CSV/formula injection.
+- [RFC 4180](https://www.rfc-editor.org/info/rfc4180/) — běžný formát CSV a MIME typ `text/csv`.
+- [MDN: Content-Disposition](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Disposition) — HTTP hlavička pro stažení souboru jako přílohy.
+
+
 # Pracovní log
 
+- 2026-10-07: Doplněna příloha „Exporty dat bez CSV injekce a support nočních můr“ s účelovým návrhem exportů, allowlistem polí, ochranou proti CSV/formula injection, bezpečnými hlavičkami stahování, asynchronním exportním jobem, support pravidly, checklistem, exportní kartou a ověřenými zdroji OWASP, RFC 4180 a MDN.
 - 2026-10-06: Doplněna příloha „Stavový katalog SaaS UI bez slepých míst“ s praktickým rozlišením loading, empty, no-results, error, permission, degraded, sensitive action a rate limit stavů, privacy-first pravidly pro bezpečné texty, checklistem, stavovou kartou a ověřenými zdroji MDN a W3C.
 - 2026-10-06: Doplněna příloha „Feature flags a rollout bez datového dluhu“ s rozdělením flagů podle účelu, privacy-first cílením, flag kartou, postupným rolloutem, rollback pravidly, úklidem flag debt, B2B AI support příkladem, checklistem a ověřenými zdroji OpenFeature, OWASP a MDN.
 - 2026-10-06: Doplněna příloha „Retenční plán bez datového sklepa“ s praktickým rozdělením dat podle životního cyklu, návrhem mazacích jobů, samostatným přístupem k zálohám, příkladem B2B SaaS po zrušení účtu, checklistem, retenční kartou a ověřenými zdroji EUR-Lex, EDPB a ICO.
