@@ -52892,7 +52892,456 @@ Datum další revize:
 - PDF Association: [PDF 2.0 Application Note 003 — Use of object metadata streams](https://pdfa.org/resource/pdf-2-0-application-note-003-use-of-object-metadata-streams/)
 
 
+# Příloha: Admin podpora a impersonace bez skrytého vstupu do cizího účtu
+
+V každém SaaS dřív nebo později přijde věta: „Potřebujeme se podívat, co zákazník vidí.“ Technicky to svádí k jednoduchému tlačítku „přihlásit se jako uživatel“. Produktově je to pohodlné. Bezpečnostně a privacy-first je to ale funkce s ostrými hranami, protože interní člověk najednou vidí zákaznický kontext, může nechtěně změnit data a support se z diagnostiky promění v neviditelného spoluuživatele.
+
+Impersonace není zlo. Špatně navržená impersonace je zlo v tričku s nápisem „rychlejší support“. Dobře navržená admin podpora má jasný účel, krátké trvání, viditelnou stopu, omezená oprávnění a zákazníkovi vysvětlitelná pravidla. Pokud to neumíš vysvětlit jednou lidskou větou, funkce ještě nepatří do produkce.
+
+> Codyho komentář: Nejlepší admin nástroj je ten, který pomůže vyřešit problém, ale nedá supportu pocit, že je malý bůh nad cizím účtem. Malí bohové mají v SaaS mizerný audit trail.
+
+## Nejdřív rozhodni, jestli impersonaci opravdu potřebuješ
+
+Mnoho problémů se dá vyřešit bez vstupu do účtu. Než postavíš impersonaci, sepiš si typické support scénáře a ke každému napiš nejméně invazivní diagnostiku.
+
+Praktická hierarchie:
+
+1. veřejná nebo neosobní dokumentace problému,
+2. technické metriky bez obsahu zákaznických dat,
+3. support snapshot vytvořený zákazníkem,
+4. read-only admin pohled s minimem polí,
+5. časově omezená impersonace se souhlasem nebo jasným oprávněným důvodem,
+6. nouzový zásah jen pro incidenty a s dodatečnou kontrolou.
+
+Příklad: zákazník píše, že „nevidí fakturu“. Support často nepotřebuje vstoupit do jeho účtu. Stačí interní pohled: ID zákazníka, stav faktury, stav e-mailového doručení, poslední auditní událost a chybový kód. Obsah faktury, poznámky uživatele a osobní údaje kontaktů mají zůstat schované, dokud pro ně není konkrétní důvod.
+
+## Rozděl admin akce podle rizika
+
+Jedna role `admin` je bezpečnostní zkratka, která časem bolí. Admin podpora má mít jemnější model oprávnění, protože jinou míru rizika má čtení stavu účtu a jinou změna tarifu nebo export dat.
+
+Základní vrstvy:
+
+- `support_view`: vidí stav účtu, systémové chyby a bezpečně redigované metadata,
+- `support_assist`: může spustit předem schválené akce typu znovu poslat pozvánku,
+- `billing_support`: řeší fakturační stavy, refundy a platební poznámky,
+- `security_admin`: spravuje blokace, reset MFA a bezpečnostní incidenty,
+- `break_glass`: nouzový přístup s krátkou platností, důvodem a následnou revizí.
+
+OWASP u autorizace doporučuje princip „deny by default“, least privilege a kontrolu oprávnění na každém požadavku. V praxi to znamená: nová admin obrazovka nemá být automaticky dostupná všem interním lidem, protože „už jsou přece admini“. Každá nová funkce začíná zamčená a přístup se přidává podle práce.
+
+## Impersonace má být režim, ne převlek
+
+Největší chyba je udělat impersonaci jako běžnou session uživatele. Support pak vypadá jako zákazník, logy se míchají a po měsíci nikdo neví, jestli akci provedl člověk z firmy, nebo skutečný uživatel. To je auditní guláš, a auditní guláš se nedá dobře ohřát.
+
+Bezpečný impersonation režim:
+
+- má vlastní session typ, například `impersonation_session`,
+- zachovává identitu interního pracovníka i cílového účtu,
+- má jasný banner v UI: „Jste v režimu podpory pro účet X“,
+- zakazuje citlivé akce ve výchozím stavu,
+- zapisuje každou významnou akci s `actor_admin_id` a `target_user_id`,
+- automaticky expiruje po krátké době,
+- nejde spustit bez důvodu nebo čísla ticketu.
+
+Technicky si hlídej hlavně to, aby aplikační vrstva nikdy neztratila rozdíl mezi „kdo kliká“ a „čí kontext se zobrazuje“. V auditním logu musí být obě informace. V produktové analytice impersonaci buď úplně vyluč, nebo ji označ tak, aby nezkreslovala chování zákazníků.
+
+## Citlivé akce vyžadují step-up a často zákazníka
+
+V support režimu by nemělo jít dělat všechno. Některé akce mají zůstat zakázané, některé vyžadují step-up ověření interního pracovníka a některé má potvrdit zákazník.
+
+Akce, které typicky nepatří do impersonace:
+
+- změna hesla zákazníka bez bezpečnostního procesu,
+- vypnutí MFA bez schváleného důvodu,
+- export všech dat účtu,
+- změna e-mailu vlastníka,
+- vytvoření API klíče nebo tokenu,
+- změna bankovních, daňových nebo fakturačních údajů,
+- mazání dat mimo formální retenční nebo DSAR workflow.
+
+Akce, které mohou být povolené, ale s brzdou:
+
+- opětovné odeslání pozvánky,
+- zrušení zaseknutého importu,
+- přepočet reportu,
+- znovu spuštěná synchronizace integrace,
+- přepnutí viditelného nastavení, které nemění vlastnictví dat.
+
+NIST v digitálních identitách pracuje s reautentizací session, zejména když je potřeba potvrdit pokračující přítomnost uživatele. Pro admin podporu je dobrý praktický překlad: pokud interní člověk sahá na citlivou akci, nenechávej ho jet jen na staré session z rána. Vyžádej znovu ověření, ideálně silnější než běžné kliknutí v otevřeném notebooku.
+
+## Souhlas zákazníka není vždy nutný, ale transparentnost ano
+
+Někdy zákazník aktivně požádá o pomoc a poskytne souhlas k dočasnému nahlédnutí. Jindy jde o bezpečnostní incident nebo provozní chybu, kde je právní a smluvní logika jiná. E-book není právní stanovisko, takže konkrétní právní základ řeš s právníkem nebo DPO. Produktově ale platí jednoduché pravidlo: zákazník nemá být překvapený, že interní podpora může v omezeném režimu pracovat s jeho účtem.
+
+Do smluv, privacy notice nebo support pravidel patří lidské vysvětlení:
+
+- kdy může podpora nahlížet do účtu,
+- kdo k tomu má oprávnění,
+- jak dlouho přístup trvá,
+- které akce jsou zakázané,
+- jak se přístup loguje,
+- jak může zákazník získat přehled support zásahů.
+
+Privacy-first verze je ještě lepší: v zákaznickém administrátorském rozhraní ukaž poslední support přístupy. Ne nutně všechna interní technická metadata, ale aspoň datum, typ zásahu, důvod/ticket a kontakt pro dotaz. Důvěra roste, když se systém nemusí tvářit tajemně.
+
+## Support snapshot je často lepší než živý vstup
+
+Místo impersonace nabídni zákazníkovi tlačítko „Vytvořit support snapshot“. Snapshot může obsahovat redigovaný stav obrazovky, verzi aplikace, chybový kód, ID posledních relevantních jobů, stav integrace a časovou osu bez citlivého obsahu.
+
+Dobrá pravidla snapshotu:
+
+- vytváří ho zákazník nebo oprávněný správce účtu,
+- před odesláním vidí, co se pošle,
+- neobsahuje hesla, tokeny, obsah dokumentů ani soukromé poznámky,
+- má expiraci,
+- je navázaný na ticket,
+- je uložený odděleně od běžné produktové analytiky,
+- po vyřešení se smaže podle retenčního plánu.
+
+Tahle varianta je výborná hlavně pro malé týmy. Support dostane kontext, ale nemusí otevírat cizí účet. Zákazník má kontrolu a vývojář nemusí lovit chybu z věty „ono to nějak nejde“.
+
+## Audituj admin podporu jako produkční funkci
+
+Admin podpora není interní detail. Je to bezpečnostní a důvěrová funkce. Loguj ji proto stejně disciplinovaně jako platby, API klíče nebo změny rolí.
+
+Minimální auditní událost:
+
+```json
+{
+  "event": "support.impersonation.started",
+  "actor_admin_id": "adm_123",
+  "target_account_id": "acc_456",
+  "target_user_id": "usr_789",
+  "reason_code": "support_ticket",
+  "ticket_id": "SUP-1042",
+  "session_id_hash": "sha256:...",
+  "started_at": "2026-10-07T15:30:00Z",
+  "expires_at": "2026-10-07T15:45:00Z"
+}
+```
+
+Neloggované tajemství je špatně, ale přelogované osobní údaje taky. OWASP Logging Cheat Sheet výslovně řeší, že logy mají obsahovat bezpečnostně užitečné informace a zároveň vylučovat citlivá data. Prakticky: neloguj celé URL s tokeny, obsah formulářů, dokumenty, session ID, přístupové klíče ani screenshoty obrazovek, pokud pro to nemáš velmi konkrétní důvod a ochranný režim.
+
+## Příklad: zákazník nevidí nastavení integrace
+
+Situace: zákazník píše, že po připojení účetního systému nevidí synchronizované faktury.
+
+Špatný postup:
+
+1. Support klikne „login as user“.
+2. Prochází účet jako zákazník.
+3. Omylem otevře detail faktury s osobními údaji.
+4. Zkusí ručně přepnout nastavení.
+5. V logu je vidět jen akce uživatele.
+
+Lepší postup:
+
+1. Support otevře interní read-only diagnostiku integrace.
+2. Vidí stav poslední synchronizace, chybový kód a redigované ID jobu.
+3. Pokud potřebuje více kontextu, požádá zákazníka o support snapshot.
+4. Jestli je nutný zásah, spustí předem povolenou akci „retry sync“.
+5. Pokud je nutná impersonace, zadá ticket, důvod, časový limit a systém zakáže citlivé akce.
+6. Zákaznický admin později vidí, že proběhl support přístup k integraci.
+
+Výsledek: problém se řeší rychle, ale podpora neprochází zákaznická data jako turista v muzeu cizích faktur.
+
+## Checklist: admin podpora bez skrytého vstupu
+
+- [ ] Máme sepsané support scénáře a nejméně invazivní diagnostiku.
+- [ ] Admin role jsou rozdělené podle práce, ne podle interní důležitosti člověka.
+- [ ] Nové admin funkce jsou ve výchozím stavu zamčené.
+- [ ] Impersonace má vlastní session typ, banner a krátkou expiraci.
+- [ ] Audit log rozlišuje interního aktéra a cílový účet/uživatele.
+- [ ] Citlivé akce jsou během impersonace zakázané nebo vyžadují step-up.
+- [ ] Každý vstup vyžaduje důvod, ticket nebo incident ID.
+- [ ] Produktová analytika nepočítá impersonaci jako chování zákazníka.
+- [ ] Zákazník má v dokumentaci vysvětleno, kdy a jak support přistupuje k účtu.
+- [ ] Support snapshot má náhled, expiraci a retenční pravidla.
+- [ ] Nouzový `break_glass` přístup má následnou revizi.
+- [ ] Logy neobsahují tokeny, hesla, plné payloady ani zbytečný obsah zákaznických dat.
+
+## Mini šablona admin support policy
+
+```text
+# Admin support policy: [produkt]
+
+Typy support scénářů:
+- [ ] technický stav účtu
+- [ ] billing problém
+- [ ] integrace
+- [ ] bezpečnostní incident
+- [ ] žádost o data
+
+Nejméně invazivní diagnostika:
+
+Role s přístupem:
+
+Zakázané akce v impersonaci:
+
+Akce vyžadující step-up:
+
+Maximální délka impersonace:
+
+Povinný důvod / ticket:
+
+Co vidí zákazník:
+
+Co se loguje:
+
+Co se nikdy neloguje:
+
+Retence auditních záznamů:
+
+Break-glass postup:
+
+Datum poslední revize:
+Vlastník:
+```
+
+## Zdroje
+
+- OWASP Cheat Sheet Series: [Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)
+- OWASP Cheat Sheet Series: [Authorization Patterns Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Patterns_Cheat_Sheet.html)
+- OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- NIST: [SP 800-63B Digital Identity Guidelines — Authentication and Authenticator Management](https://pages.nist.gov/800-63-4/sp800-63b.html)
+- European Data Protection Board: [Guidelines 4/2019 on Article 25 — Data Protection by Design and by Default](https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en)
+- EUR-Lex: [Regulation (EU) 2016/679 — General Data Protection Regulation](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=celex%3A32016R0679)
+
+
+# Příloha: Bezpečnostní e-maily bez paniky a trackingového ocásku
+
+Bezpečnostní e-mail je malá věc s velkým dopadem. Přijde ve chvíli, kdy někdo resetuje heslo, přidá nové zařízení, změní e-mail, vypne MFA, vytvoří API token, exportuje data nebo provede akci, která může změnit kontrolu nad účtem. Když je napsaný špatně, buď lidi vyděsí, nebo ho ignorují. Když je navržený dobře, funguje jako tichý bezpečnostní pás: nepřekáží, ale v pravý moment zachytí problém.
+
+> Codyho komentář: Bezpečnostní e-mail nemá znít jako poplach v jaderné elektrárně ani jako newsletter s ikonou zámku. Má říct, co se stalo, proč to člověk dostal a co má udělat, pokud to nebyl on. Nudné? Ano. Přesně proto to funguje.
+
+## Nejdřív rozděl události podle rizika
+
+Ne každá bezpečnostní událost potřebuje stejný tón, rychlost a akci. Když budeš posílat dramatické varování po každém běžném přihlášení, uživatel si vytvoří dokonalý bezpečnostní filtr: mozek to celé vypne. Když naopak nepošleš nic po změně e-mailu vlastníka workspace, stavíš účet na víru v ticho.
+
+Praktické rozdělení:
+
+| Událost | Riziko | E-mail poslat? | Primární akce |
+| --- | --- | --- | --- |
+| Přihlášení z nového zařízení | střední | ano u účtů s vyšším rizikem nebo novou lokalitou | „To jsem byl já“ / zabezpečit účet |
+| Reset hesla | vysoké | vždy | upozornit na změnu, nabídnout kontrolu relací |
+| Změna primárního e-mailu | vysoké | vždy na starý i nový kontakt | vrátit změnu nebo kontaktovat podporu |
+| Vypnutí MFA | vysoké | vždy | znovu zapnout MFA, odhlásit zařízení |
+| Vytvoření API tokenu | vysoké u B2B SaaS | vždy pro adminy | zkontrolovat token a scopes |
+| Export většího množství dat | střední až vysoké | ano podle rozsahu | otevřít auditní detail, nahlásit problém |
+| Běžné přihlášení ze stejného zařízení | nízké | většinou ne | žádná |
+
+OWASP u resetu hesla doporučuje poslat uživateli informaci po změně hesla, nepřihlašovat ho automaticky a řešit invalidaci existujících sessions ([OWASP Forgot Password Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html)). NIST SP 800-63B řeší životní cyklus autentizátorů, jejich ztrátu, kompromitaci a invalidaci, takže bezpečnostní e-mail ber jako součást širšího procesu obnovy kontroly nad účtem, ne jako izolovanou notifikaci ([NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html)).
+
+## Předmět má informovat, ne strašit
+
+Předmět rozhoduje, jestli člověk zprávu otevře včas, ale nesmí z něj být clickbait. Bezpečnostní e-mail není místo pro marketingovou kreativitu. Žádné „Máme pro vás důležitou novinku!“ ani „Pozor, možná jste v nebezpečí!“.
+
+Dobré předměty:
+
+- `Bylo změněno heslo k vašemu účtu`
+- `Nové zařízení přihlášené k účtu`
+- `Byl vytvořen nový API token`
+- `Změna e-mailu vlastníka workspace`
+- `Export dat byl připraven ke stažení`
+
+Horší předměty:
+
+- `Důležitá aktualizace účtu`
+- `Bezpečnostní upozornění!!!`
+- `Někdo se možná dostal do účtu`
+- `Vaše ochrana je naše priorita`
+
+Dobré pravidlo: předmět má popsat ověřenou událost, ne domněnku. Pokud víš jen to, že proběhl reset hesla, napiš to. Pokud máš podezření na převzetí účtu, napiš, že služba zaznamenala rizikovou aktivitu a jaký je další bezpečný krok. Nepřidávej psychologický ohňostroj.
+
+## Tělo e-mailu piš jako mini runbook pro uživatele
+
+Bezpečnostní e-mail má odpovědět na čtyři otázky:
+
+1. Co se stalo?
+2. Kdy se to stalo?
+3. Z jakého účtu nebo workspace to přišlo?
+4. Co má člověk udělat, pokud akci neprovedl?
+
+Šablona:
+
+```text
+Dobrý den,
+
+u vašeho účtu [e-mail nebo workspace název] proběhla tato bezpečnostní akce:
+
+Akce: [změna hesla / nové zařízení / vytvoření API tokenu]
+Čas: [2026-10-07 16:30 UTC]
+Přibližný kontext: [prohlížeč / zařízení / země, pokud je to spolehlivé a přiměřené]
+
+Pokud jste akci provedli vy, nemusíte dělat nic.
+
+Pokud jste akci neprovedli, otevřete bezpečnostní nastavení:
+[bezpečný odkaz do aplikace]
+
+Doporučený postup:
+1. Změňte heslo.
+2. Odhlaste všechna zařízení.
+3. Zkontrolujte MFA, e-mail účtu a API tokeny.
+4. Pokud něco nesedí, napište nám na [bezpečnostní kontakt].
+
+Tento e-mail je provozní bezpečnostní zpráva. Neobsahuje marketingové sledování.
+```
+
+Když přidáváš kontext, drž se přiměřenosti. „Přihlášení z Chrome na Windows, přibližně Praha“ může být užitečné. Celá IP adresa, přesná geolokace, user-agent román a seznam cookies do e-mailu nepatří. GDPR v článku 5 staví zpracování osobních údajů na principech minimalizace, omezení účelu a integrity/důvěrnosti; bezpečnostní zpráva není výjimka jen proto, že vypadá technicky ([GDPR na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng)).
+
+## Odkazy dělej bezpečné a krátké
+
+Nejhorší bezpečnostní e-mail je ten, který sám vytvoří nové riziko. Odkaz na „zabezpečit účet“ má vést na známou doménu aplikace, používat HTTPS a po přihlášení otevřít konkrétní bezpečnostní obrazovku. Nemá obsahovat dlouhodobý token, který drží právo měnit účet.
+
+Pravidla pro odkazy:
+
+- používej vlastní doménu aplikace, ne obecný click-tracking redirect,
+- nepřidávej marketingové UTM parametry,
+- citlivé akce vždy vyžadují přihlášení a často step-up ověření,
+- pokud používáš jednorázový token, má být krátce platný, jednorázový a uložený bezpečně,
+- stránka po otevření token co nejdřív vymění za serverově ověřený stav,
+- nastav rozumnou `Referrer-Policy`, aby tokeny a citlivé URL neutíkaly přes referer.
+
+MDN popisuje `Referrer-Policy` jako hlavičku, která řídí, kolik informací se pošle v hlavičce `Referer` při navigaci ([MDN: Referrer-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy)). U bezpečnostních odkazů je praktický výchozí režim minimálně `strict-origin-when-cross-origin`, u citlivých tokenových stránek často `no-referrer`.
+
+## Nepoužívej bezpečnostní e-mail jako marketingový kanál
+
+Bezpečnostní upozornění má vysokou důvěru. Nezneužij ji. Do zprávy nepřidávej slevy, onboardingové tipy, produktové novinky, reklamní pixely, remarketingové skripty ani „související obsah“. Pokud člověk řeší, jestli mu někdo nevzal účet, nepotřebuje vidět banner „vyzkoušejte nový tarif“. To je obchodní etiketa po pádu ze schodů.
+
+Privacy-first pravidla:
+
+- žádný tracking pixel v bezpečnostních e-mailech,
+- žádné profilování podle otevření bezpečnostní zprávy,
+- kliky měř jen agregovaně a provozně, pokud to opravdu potřebuješ,
+- odkaz na bezpečnostní nastavení nemá jít přes marketingový redirector,
+- text jasně říká, že jde o provozní bezpečnostní zprávu,
+- preference centrum vysvětluje, proč nejdou bezpečnostní zprávy vypnout stejně jako newsletter.
+
+To neznamená, že nesmíš měřit doručitelnost. Znamená to, že bezpečnostní zpráva není součást reklamního funnelu. Měř doručení, bounce, technickou chybu a případně agregovaný počet kliků na bezpečnostní nastavení. Nezapisuj z toho profil „uživatel se bojí o účet, pošleme mu upsell“.
+
+## Připrav odpověď podpory předem
+
+Bezpečnostní e-mail často spustí odpověď typu „tohle jsem nebyl já“. Pokud support nemá postup, začne improvizace. A improvizace u účtů je roztomilá asi jako ruční editace produkční databáze v pátek večer.
+
+Support postup:
+
+1. Ověř identitu uživatele bezpečně, ne přes nové údaje poslané do chatu.
+2. Zkontroluj auditní události: změna hesla, relace, MFA, e-mail, API tokeny, exporty.
+3. Odpoj rizikové relace a tokeny podle runbooku.
+4. Pomoz uživateli obnovit MFA nebo heslo přes standardní tok.
+5. Zapiš incidentní poznámku bez zbytečných osobních detailů.
+6. Pokud existuje podezření na porušení zabezpečení osobních údajů, předej věc bezpečnostnímu/právnímu procesu.
+
+Evropský provoz tady znamená hlavně klidnou disciplínu: jasný postup, přiměřené záznamy, žádné posílání dokladů do volného e-mailu, žádné „pošlete nám heslo pro kontrolu“. Když už musí support ověřovat citlivou situaci ručně, ať má checklist a auditní stopu.
+
+## Příklad: nové zařízení u účetního SaaS
+
+Účetní SaaS detekuje přihlášení administrátora z nového zařízení. Systém nechce sbírat detailní fingerprint, ale má bezpečnostní signál: nový session klíč, nový typ prohlížeče, jiná země než obvykle a účet s právem exportovat faktury.
+
+Praktický tok:
+
+1. Uživatel se přihlásí a projde MFA.
+2. Systém uloží auditní událost `new_device_session_created` bez celého user-agentu.
+3. Pošle e-mail administrátorovi a případně vlastníkovi workspace.
+4. E-mail obsahuje čas, přibližný kontext a odkaz do bezpečnostního přehledu.
+5. V přehledu lze relaci odhlásit, zkontrolovat API tokeny a otevřít auditní log.
+6. Pokud uživatel označí akci jako neznámou, systém spustí doporučený recovery tok.
+
+Text e-mailu:
+
+```text
+Předmět: Nové zařízení přihlášené k vašemu účtu
+
+Dobrý den,
+
+k workspace „Firma Novák“ se přihlásilo nové zařízení.
+
+Čas: 2026-10-07 16:30 UTC
+Kontext: Firefox na Linuxu, přibližně Česko
+
+Pokud jste to byli vy, není potřeba nic dělat.
+
+Pokud to nejste vy, otevřete bezpečnostní přehled, odhlaste neznámé relace a změňte heslo:
+https://app.example.cz/settings/security
+
+Zpráva je bezpečnostní upozornění. Nepoužíváme v ní reklamní tracking.
+```
+
+Všimni si, co tam není: přesná IP adresa, mapka, reklamní patička, sociální tlačítka, UTM parametry, dlouhý token v URL a dramatický jazyk. Uživatel dostane jasnou informaci a bezpečnou cestu dál.
+
+## Checklist: bezpečnostní e-maily bez chaosu
+
+- [ ] Máme seznam bezpečnostních událostí, které e-mail vždy spouští.
+- [ ] Předměty popisují konkrétní událost bez clickbaitu a paniky.
+- [ ] Tělo zprávy říká co, kdy, kde přibližně a co dělat, pokud to nebyl uživatel.
+- [ ] E-maily neobsahují reklamní pixely, marketingové bloky ani UTM tracking.
+- [ ] Bezpečnostní odkazy vedou na vlastní doménu a citlivé akce vyžadují přihlášení.
+- [ ] Tokeny v odkazech jsou krátce platné, jednorázové a bezpečně uložené.
+- [ ] Citlivé URL mají nastavenou vhodnou `Referrer-Policy`.
+- [ ] Support má runbook pro odpověď „tohle jsem nebyl já“.
+- [ ] Auditní log ukládá bezpečnostní událost bez zbytečného obsahu a osobních detailů.
+- [ ] Preference centrum vysvětluje, proč jsou bezpečnostní zprávy nezbytné.
+
+## Mini šablona bezpečnostního e-mailu
+
+```text
+Název události:
+Riziko: nízké / střední / vysoké
+Spouštěč:
+Příjemci:
+
+Předmět:
+
+Co uživateli řekneme:
+- Akce:
+- Čas:
+- Kontext:
+- Pokud to byl uživatel:
+- Pokud to nebyl uživatel:
+
+Odkaz:
+- Cíl:
+- Vyžaduje přihlášení: ano / ne
+- Vyžaduje step-up ověření: ano / ne
+- Token v URL: ne / krátce platný jednorázový
+- Referrer-Policy:
+
+Data v e-mailu:
+- Osobní údaje:
+- Technické údaje:
+- Co záměrně neposíláme:
+
+Měření:
+- Doručení:
+- Bounce:
+- Agregované kliky:
+- Zakázané měření:
+
+Support postup:
+- První odpověď:
+- Ověření identity:
+- Kdy eskalovat:
+- Kde je auditní stopa:
+
+Vlastník:
+Datum poslední kontroly:
+Datum další kontroly:
+```
+
+## Zdroje
+
+- OWASP Cheat Sheet Series: [Forgot Password Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html)
+- NIST: [SP 800-63B — Digital Identity Guidelines: Authentication and Authenticator Management](https://pages.nist.gov/800-63-4/sp800-63b.html)
+- MDN Web Docs: [Referrer-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy)
+- EUR-Lex: [Regulation (EU) 2016/679 — General Data Protection Regulation](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng)
+
+
 # Pracovní log
+
+- 2026-10-07: Doplněna příloha „Bezpečnostní e-maily bez paniky a trackingového ocásku“ s rozdělením bezpečnostních událostí podle rizika, pravidly pro předměty a tělo zpráv, bezpečné odkazy bez marketingového trackingu, support runbook, příklad nového zařízení, checklist, šablonu bezpečnostního e-mailu a ověřené zdroje OWASP, NIST, MDN a GDPR.
+
+
+- 2026-10-07: Doplněna příloha „Admin podpora a impersonace bez skrytého vstupu do cizího účtu“ s praktickým rozhodováním, kdy impersonaci vůbec nepoužít, rolemi podle rizika, vlastním impersonation režimem, step-up pravidly, support snapshotem, auditními událostmi, příkladem integrace, checklistem, admin support policy šablonou a ověřenými zdroji OWASP, NIST, EDPB a GDPR.
 
 - 2026-10-07: Doplněna příloha „Tiskové a PDF výstupy bez metadatového průvanu“ s praktickým rozlišením účelů dokumentů, print CSS pravidly, bezpečnými odkazy, kontrolou PDF metadat, názvy souborů, serverovým generováním citlivých dokumentů, rozdílem mezi PDF a strojovým exportem, QA checklistem, PDF/tiskovou kartou a ověřenými zdroji MDN a PDF Association.
 
