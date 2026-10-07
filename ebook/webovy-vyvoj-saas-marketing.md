@@ -20417,7 +20417,7 @@ Produktové metriky mají být menší, ostřejší a užitečnější. Když t�
 
 Cookie lišta není dekorace, právní talisman ani UX test trpělivosti. Je to rozhraní pro rozhodnutí člověka: dovolím webu nebo aplikaci něco uložit, měřit nebo propojit s dalším účelem? Když je odpověď schovaná za šedým tlačítkem, pěti obrazovkami a slovní mlhou, nejde o souhlas. Jde o nátlak v kabátě produktového designu.
 
-Privacy-first web má začít od jiné otázky: potřebujeme vůbec souhlas? Pokud měříš jen nezbytné technické fungování služby, může být odpověď často „ne“. Pokud chceš analytiku, remarketing, personalizaci nebo externí widgety, musíš oddělit účely, vysvětlit je lidsky a dát stejně snadnou cestu k odmítnutí jako k přijetí. EDPB v pokynech k souhlasu zdůrazňuje, že souhlas má být svobodný, konkrétní, informovaný a jednoznačný, a že odvolání má být stejně snadné jako udělení ([EDPB Guidelines 05/2020 on consent](https://www.edpb.europa.eu/sites/default/files/files/file1/edpb_guidelines_202005_consent_en.pdf)).
+Privacy-first web má začít od jiné otázky: potřebujeme vůbec souhlas? Pokud měříš jen nezbytné technické fungování služby, může být odpověď často „ne“. Pokud chceš analytiku, remarketing, personalizaci nebo externí widgety, musíš oddělit účely, vysvětlit je lidsky a dát stejně snadnou cestu k odmítnutí jako k přijetí. EDPB v pokynech k souhlasu zdůrazňuje, že souhlas má být svobodný, konkrétní, informovaný a jednoznačný, a že odvolání má být stejně snadné jako udělení ([EDPB Guidelines 05/2020 on consent](https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en)).
 
 > Codyho komentář: Když cookie banner potřebuje víc copywritingu než homepage, něco je špatně. Souhlas nemá být escape room pro lidi, kteří jen chtěli přečíst článek.
 
@@ -20585,7 +20585,7 @@ Vlastník a datum poslední kontroly:
 
 ## Zdroje
 
-- EDPB: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/sites/default/files/files/file1/edpb_guidelines_202005_consent_en.pdf)
+- EDPB: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en)
 - EDPB: [Guidelines 03/2022 on dark patterns in social media platform interfaces](https://www.edpb.europa.eu/system/files/2022-03/edpb_03-2022_guidelines_on_dark_patterns_in_social_media_platform_interfaces_en.pdf)
 - Evropská komise: [The Digital Services Act](https://digital-strategy.ec.europa.eu/en/policies/digital-services-act)
 - Evropská komise: [Legal grounds for processing data](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en)
@@ -34443,7 +34443,7 @@ Pro B2B zákazníky to může být i prodejní výhoda. Když se někdo zeptá n
 
 # Příloha: Evidence souhlasů a odvolání bez právního divadla
 
-Souhlas není kouzelné zaklínadlo, kterým se legalizuje všechno, co marketing nebo produkt zrovna chce měřit. Je to konkrétní, dobrovolné, informované a odvolatelné rozhodnutí člověka. GDPR v článku 7 říká mimo jiné to, že správce musí umět doložit udělení souhlasu a že odvolání má být stejně snadné jako jeho udělení ([GDPR, článek 7](https://gdpr-info.eu/art-7-gdpr/)). EDPB ve svých pokynech k souhlasu zdůrazňuje stejné principy: souhlas musí být svobodný, specifický, informovaný a jednoznačný ([EDPB Guidelines 05/2020 on consent](https://www.edpb.europa.eu/sites/default/files/files/file1/edpb_guidelines_202005_consent_en.pdf)).
+Souhlas není kouzelné zaklínadlo, kterým se legalizuje všechno, co marketing nebo produkt zrovna chce měřit. Je to konkrétní, dobrovolné, informované a odvolatelné rozhodnutí člověka. GDPR v článku 7 říká mimo jiné to, že správce musí umět doložit udělení souhlasu a že odvolání má být stejně snadné jako jeho udělení ([GDPR, článek 7](https://gdpr-info.eu/art-7-gdpr/)). EDPB ve svých pokynech k souhlasu zdůrazňuje stejné principy: souhlas musí být svobodný, specifický, informovaný a jednoznačný ([EDPB Guidelines 05/2020 on consent](https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en)).
 
 Pro malý web nebo SaaS z toho plyne praktická věc: nepotřebuješ obří „consent management platformu“ jen proto, aby se v patičce cítila právní oddělení velkých korporací tepleji u srdce. Potřebuješ vědět, k čemu člověk dal souhlas, kdy, jakou verzi textu viděl, jak ho může odvolat a co se v systému stane po odvolání. Víc dat často nepřináší víc compliance. Jen víc práce, větší riziko a hezčí tabulku s průšvihem.
 
@@ -34607,7 +34607,7 @@ Kdy je potřeba nový souhlas:
 ## Zdroje
 
 - [GDPR, článek 7 — Conditions for consent](https://gdpr-info.eu/art-7-gdpr/)
-- [EDPB Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/sites/default/files/files/file1/edpb_guidelines_202005_consent_en.pdf)
+- [EDPB Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en)
 - [European Commission: Legal grounds for processing data](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en)
 - [ÚOOÚ: Cookies — otázky a odpovědi](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies)
 
@@ -52270,7 +52270,208 @@ Zákaznické vysvětlení na faktuře:
 - OWASP API Security Top 10 2023, API4: Unrestricted Resource Consumption — https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/
 - GDPR, Article 5 principles including data minimisation and storage limitation — https://gdpr-info.eu/art-5-gdpr/
 
+# Příloha: Preference centrum bez consentového labyrintu
+
+Preference centrum je místo, kde uživatel spravuje, s čím souhlasí, co chce dostávat a jaké produktové volby mají zůstat zapamatované. Není to skládka checkboxů, kam se odloží právní nervozita. Dobré preference centrum chrání tři věci najednou: svobodu člověka změnit názor, schopnost firmy doložit nastavení a produktovou důvěru, že „odhlásit“ opravdu znamená odhlásit.
+
+V privacy-first SaaS je preference centrum praktická infrastruktura. Pomáhá u newsletterů, produktových e-mailů, marketingových souhlasů, cookie voleb, analytických preferencí, jazykových nastavení, notifikací i integrací. Když ho navrhneš dobře, support nebude ručně lovit „prosím už mi to neposílejte“ ve vláknech a uživatel nebude mít pocit, že z produktu uniká přes nouzový východ.
+
+> Codyho komentář: Když je tlačítko „Souhlasím“ jedno kliknutí a odvolání souhlasu třípatrová úniková hra, není to growth design. Je to důvěrový dluh s úroky.
+
+## Rozděl preference podle účelu
+
+Nezačínej otázkou „kolik checkboxů potřebujeme“. Začni mapou účelů. Každá preference má mít jasný důvod, vlastníka a technické místo, kde se projeví.
+
+Praktické skupiny:
+
+- účetní a bezpečnostní zprávy,
+- produktové notifikace,
+- marketingové e-maily,
+- vzdělávací obsah a newsletter,
+- analytické nebo experimentální měření,
+- cookies a externí skripty,
+- integrace a sdílení dat s konkrétními službami,
+- jazyk, časové pásmo a formát komunikace.
+
+Nedávej do stejného přepínače věci s jiným rizikem. „Chci dostávat produktové novinky“ není totéž jako „souhlasím s personalizací reklamy“. „Chci upozornění na fakturu“ není totéž jako „chci marketingový newsletter“. Když to smícháš, uživatel nerozhoduje; jen se snaží přežít formulář.
+
+## Povinné zprávy neprodávej jako souhlas
+
+Některé zprávy musí služba posílat i bez marketingového souhlasu: reset hesla, bezpečnostní upozornění, faktura, informace o změně podmínek nebo provozní incident. V preference centru je označ jako „nezbytné pro provoz účtu“ a vysvětli proč nejdou vypnout.
+
+Ukázkový text:
+
+```text
+Bezpečnostní a účetní zprávy posíláme, protože jsou nutné pro provoz účtu: reset hesla, faktury, změny přístupů a důležité incidenty. Neobsahují marketing a nejdou vypnout bez zrušení účtu.
+```
+
+Tím se vyhneš dvěma špatným extrémům: buď posílat všechno pod záminkou „provozního sdělení“, nebo naopak dovolit vypnout i zprávy, bez kterých uživatel neuvidí bezpečnostní průšvih. Privacy-first neznamená mlčet, když hoří server. Znamená neposílat reklamu v hasičské helmě.
+
+## Souhlas musí jít odvolat stejně snadno
+
+Evropská komise popisuje souhlas jako svobodný, konkrétní, informovaný a jednoznačný projev vůle; zároveň má být možné souhlas odvolat. EDPB ve svých pokynech ke souhlasu zdůrazňuje, že odvolání má být stejně snadné jako udělení. V produktu to znamená jednoduché pravidlo: jestli šel souhlas udělit jedním kliknutím, nesmí jeho odvolání vyžadovat e-mail na podporu, přihlášení do jiného systému a malý rituál při novu.
+
+Prakticky:
+
+- v každém marketingovém e-mailu dej přímý odhlašovací odkaz,
+- v účtu udržuj stránku „Komunikace a soukromí“,
+- po změně ukaž jasné potvrzení,
+- neptej se opakovaně „opravdu?“ u nízkorizikového odhlášení,
+- nevyžaduj důvod odchodu jako povinné pole,
+- nezaměňuj odhlášení newsletteru se zrušením účtu.
+
+Dobré potvrzení:
+
+```text
+Hotovo. Marketingové e-maily jsme vypnuli. Provozní zprávy k účtu, fakturám a bezpečnosti budeme dál posílat, protože jsou nutné pro používání služby.
+```
+
+Špatné potvrzení:
+
+```text
+Mrzí nás, že nechcete růst s námi. Než odejdete, vyberte povinně jeden z 12 důvodů a potvrďte změnu v dalším e-mailu.
+```
+
+## Ukládej důkaz, ne sledovací kroniku
+
+Firma potřebuje doložit, jaké nastavení v danou chvíli platilo. To ale neznamená ukládat každý pohyb myši, kompletní user-agent, IP adresu navždy a psychologický profil nerozhodného klikání.
+
+Minimální záznam preference:
+
+- uživatel nebo kontakt,
+- účel preference,
+- stav: povoleno / zakázáno / nezbytné,
+- zdroj změny: účet, odkaz v e-mailu, support, import,
+- čas změny,
+- verze textu nebo zásady, se kterou preference souvisí,
+- technický identifikátor kampaně nebo formuláře, pokud je potřeba.
+
+Co typicky neukládat:
+
+- obsah celé stránky, na které člověk klikl,
+- dlouhodobou historii IP adres pro marketingové preference,
+- session replay odhlašovacího procesu,
+- citlivé poznámky supportu typu „zákazník je protivný“,
+- univerzální identifikátor napříč všemi nástroji.
+
+Pokud změnu preference provede support, ulož i důvod kategorie, ne román. Například „žádost zákazníka“, „oprava importu“, „incidentní zásah“. Detaily patří do ticketu s retencí, ne do věčné preference tabulky.
+
+## Preference synchronizuj jako provozní událost
+
+Preference centrum není jen UI. Je to zdroj pravdy pro e-mailing, CRM, produktové notifikace, cookie banner, analytiku a někdy i billing. Když se změna nepropíše všude, důvěra mizí rychleji než budget po zapnutí placené reklamy bez limitu.
+
+Navrhni změnu preference jako událost:
+
+```text
+preference.updated
+- subject_id: usr_123
+- preference_key: marketing_newsletter
+- value: false
+- source: email_unsubscribe
+- occurred_at: 2026-10-07T10:15:00Z
+- policy_version: privacy_2026_09
+```
+
+Zásady synchronizace:
+
+- změna se uloží nejdřív do vlastního systému,
+- externí nástroje dostanou jen potřebný stav, ne celou datovou kartu člověka,
+- selhání synchronizace skončí ve frontě, ne v tichém zapomnění,
+- marketingový systém nesmí přepsat odhlášení starším importem,
+- auditní log zaznamená změnu stavu, ne obsah komunikace.
+
+Při importu kontaktů používej pravidlo „negativní preference vyhrává“. Pokud je člověk odhlášený v hlavním systému a starý CSV export tvrdí opak, neobnovuj marketingový souhlas. Starý soubor není autorita; je to historický artefakt s potenciálem způsobit trapas.
+
+## Cookie volby drž odděleně od e-mailových preferencí
+
+Cookie lišta a preference centrum se často potkávají, ale nejsou totéž. Cookie volba řeší ukládání nebo čtení informací v zařízení a spouštění trackerů. E-mailová preference řeší komunikaci a zpracování kontaktu. Uživatel může odmítnout analytické cookies a zároveň chtít newsletter. Nebo naopak.
+
+Privacy-first model:
+
+- nezbytné cookies vysvětli samostatně,
+- analytiku bez souhlasu používej jen tam, kde splňuje podmínky výjimky a je opravdu omezená,
+- marketingové a reklamní trackery nech vypnuté, dokud není platný souhlas,
+- odkaz „Nastavení soukromí“ dej do patičky i účtu,
+- změna cookie voleb se projeví bez nutnosti zakládat účet.
+
+CNIL ve svých praktických materiálech ke cookies připomíná, že uživatel má být informován a dát souhlas před uložením nebo čtením trackerů, pokud nejde o výjimku pro nezbytné účely. Pro malý evropský SaaS je nejčistší cesta jednoduchá: měřit základní agregovanou analytiku s minimem dat a všechny marketingové trackery považovat za drahé riziko, ne za defaultní dekoraci.
+
+## Příklad: B2B SaaS s newsletterem, produktem a cookies
+
+Malý B2B SaaS má tři typy komunikace: provozní e-maily k účtu, měsíční produktový newsletter a marketingové pozvánky na webináře. Zároveň používá privacy-first analytiku bez reklamních pixelů a má několik volitelných produktových notifikací.
+
+Preference centrum může vypadat takto:
+
+| Sekce | Volba | Výchozí stav | Poznámka |
+| --- | --- | --- | --- |
+| Účet a bezpečnost | Bezpečnostní upozornění | Zapnuto, nezbytné | Reset hesla, nové zařízení, změna role. |
+| Fakturace | Faktury a platební upozornění | Zapnuto, nezbytné | Posílat fakturačnímu kontaktu. |
+| Produkt | Týdenní souhrn aktivity | Vypnuto nebo zapnuto podle onboarding volby | Bez obsahu citlivých dat. |
+| Produkt | Upozornění na limity | Zapnuto | Užitečné pro prevenci překvapení. |
+| Obsah | Měsíční newsletter | Jen po přihlášení | Přímý odhlašovací odkaz. |
+| Marketing | Pozvánky na webináře | Jen po přihlášení | Oddělené od newsletteru. |
+| Soukromí | Analytické cookies | Podle cookie volby | Oddělené od e-mailů. |
+
+Support má v administraci tlačítko „upravit preference na žádost zákazníka“, ale každá změna vyžaduje kategorii důvodu a uloží auditní záznam. Marketingový nástroj dostává jen e-mail, stav konkrétního seznamu a čas změny. Žádné poznámky ze supportu, žádná produktová aktivita, žádné „obohacení profilu“ jen proto, že export to technicky umí.
+
+## Checklist: preference centrum bez nátlaku
+
+- Má každá preference jasný účel a vlastníka?
+- Jsou nezbytné provozní zprávy oddělené od marketingu?
+- Jde souhlas odvolat stejně snadno, jako byl udělen?
+- Má každý marketingový e-mail funkční přímý odhlašovací odkaz?
+- Ukládáš důkaz změny bez zbytečné sledovací historie?
+- Vyhrává odhlášení nad starým importem nebo duplicitním seznamem?
+- Umí systém propagovat změnu preference do e-mailingu, CRM a produktu?
+- Jsou cookie volby oddělené od e-mailových preferencí?
+- Ví support, jak změnu provést bez ručního chaosu?
+- Existuje test, že odhlášení opravdu zastaví další kampaň?
+
+## Mini šablona preference karty
+
+```text
+# Preference karta: [název preference]
+
+## Účel
+- Co tato preference ovládá:
+- Pro koho platí:
+- Proč existuje:
+
+## Právní a produktová logika
+- Nezbytné / volitelné:
+- Pokud souhlas: kde se uděluje:
+- Jak se odvolává:
+- Text nebo verze zásady:
+
+## Technické chování
+- Zdroj pravdy:
+- Systémy, kam se synchronizuje:
+- Co se stane při selhání synchronizace:
+- Jak se řeší import starších kontaktů:
+
+## Data
+- Ukládaná pole:
+- Retence důkazu:
+- Co se výslovně neukládá:
+
+## Kontrola
+- Test odhlášení:
+- Vlastník:
+- Datum další revize:
+```
+
+## Zdroje
+
+- Evropská komise: [Legal grounds for processing data](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en)
+- Evropská komise: [Information for individuals — consent and data protection rights](https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en)
+- EDPB: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en)
+- CNIL: [Cookies et traceurs — comment mettre mon site web en conformité](https://cnil.fr/fr/cookies-et-autres-traceurs/regles/cookies/comment-mettre-mon-site-web-en-conformite)
+- CNIL: [Sheet n°16: Use analytics on your websites and applications](https://www.cnil.fr/fr/node/677)
+
 # Pracovní log
+
+- 2026-10-07: Doplněna příloha „Preference centrum bez consentového labyrintu“ s praktickým rozdělením preferencí podle účelu, odvoláním souhlasu, minimálním důkazem změny, synchronizací do nástrojů, oddělením cookie voleb, checklistem, vyplnitelnou preference kartou a ověřenými evropskými zdroji.
+
 - 2026-10-07: Doplněna příloha „Usage metering a fakturace bez datového hladomoru“ s oddělením účetních údajů, usage meteringu a produktové analytiky, návrhem úzkých billing eventů, limity proti překvapivým účtům, reklamačním procesem, zákaznickým přehledem spotřeby, checklistem, šablonou billing metru a ověřenými zdroji Evropské komise, Your Europe, OWASP a GDPR.
 
 - 2026-10-07: Doplněna příloha „Webhook inbox bez duplicit, replay útoků a datového ohňostroje“ s bezpečným příjmem webhooků přes inbox tabulku, HMAC ověřením nad raw body, replay ochranou, idempotencí, retry stavovým modelem, payload minimalizací, B2B billing příkladem, checklistem, webhook kartou a ověřenými zdroji OWASP a GDPR.
