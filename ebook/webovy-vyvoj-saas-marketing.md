@@ -52642,7 +52642,261 @@ Poznámka pro zákazníka:
 - EDPB Guidelines 01/2022 on data subject rights — Right of access — https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf
 - GDPR, Article 5 principles including data minimisation and storage limitation — https://gdpr-info.eu/art-5-gdpr/
 
+# Příloha: Tiskové a PDF výstupy bez metadatového průvanu
+
+Tisková verze webu a export do PDF zní jako detail z minulého století, dokud zákazník nepotřebuje poslat nabídku šéfovi, uložit fakturu, vytisknout checklist do provozu nebo přiložit report do interního schvalování. V tu chvíli se ukáže, jestli produkt umí předat informaci čistě, nebo jen vytvoří PDF, ve kterém je useknutá tabulka, chybí URL, tlačítka se tváří jako obsah a v metadatech svítí jméno vývojáře z lokálního počítače. Ano, i tohle je marketing. Jen v obleku provozní hygieny.
+
+Privacy-first přístup k PDF a tisku má jednoduchý cíl: dokument má obsahovat to, co zákazník potřebuje, a nic navíc. Žádné skryté poznámky, interní identifikátory, tracking parametry, session URL, osobní metadata nebo obrázky se zbytky citlivých informací. Pokud jde dokument mimo aplikaci, opouští tvůj kontrolovaný prostor. Chovej se k němu jako k malému exportu dat, ne jako k „uložit stránku jako PDF a modlit se“.
+
+MDN popisuje, že pro tisk a PDF lze použít `@media print` nebo samostatný stylesheet s `media="print"`. MDN také dokumentuje `Content-Disposition`, který pomáhá prohlížeči rozhodnout, zda soubor zobrazit inline nebo stáhnout jako přílohu a jaký název mu nabídnout. PDF Association zase připomíná, že PDF může nést metadata v XMP a že metadata nejsou jen kosmetika. Přeloženo do praxe: výstupní dokument je samostatný artefakt se strukturou, názvem, obsahem, metadaty a riziky.
+
+> Codyho komentář: PDF je jako screenshot v kravatě. Vypadá oficiálněji, takže mu lidé víc věří — i když uvnitř může být stejný chaos, jen hezky zalomený.
+
+## Nejdřív pojmenuj účel výstupu
+
+Ne každý tisk nebo PDF má stejný účel. Nabídka pro klienta, faktura, interní report, auditní přehled, checklist a export nastavení potřebují jinou strukturu, jinou citlivost a jinou retenci. Pokud máš jeden univerzální „Export PDF“ knoflík pro všechno, pravděpodobně mícháš prezentaci, účetnictví a produktová data do jednoho balíku.
+
+Typické výstupy:
+
+- **Obchodní nabídka** — má být čitelná, sdílitelná a bez interních poznámek.
+- **Faktura nebo doklad** — musí být stabilní, archivovatelný a jasně pojmenovaný.
+- **Report pro zákazníka** — má vysvětlit výsledek, období, metodiku a omezení.
+- **Checklist** — má fungovat vytištěný, často bez navigace a interaktivních prvků.
+- **Auditní přehled** — má ukázat relevantní události, ne celý bezpečnostní deník.
+- **Produktový export** — má být strojově čitelný; PDF může být jen doprovodné vysvětlení.
+
+Ke každému výstupu napiš jednu větu: „Tento dokument pomáhá komu udělat jaké rozhodnutí?“ Pokud odpověď zní „aby si to mohli stáhnout“, ještě nemáš účel. Máš tlačítko.
+
+## Tisková CSS není dekorace
+
+Tisková verze má odstranit věci, které na papíře nebo v PDF nedávají smysl, a zvýraznit věci, které se mimo aplikaci ztratí. Na obrazovce může být tlačítko „Zobrazit detail“. V PDF musí být detail buď přímo viditelný, nebo tam nemá být falešný odkaz na interakci, která už neexistuje.
+
+Základní pravidla pro `@media print`:
+
+```css
+@media print {
+  nav,
+  .sidebar,
+  .cookie-banner,
+  .chat-widget,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    color: #111;
+    background: #fff;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+  }
+
+  table,
+  pre,
+  blockquote {
+    break-inside: avoid;
+  }
+}
+```
+
+Nejde o to, aby tisk vypadal stejně jako web. Jde o to, aby fungoval bez webu. Proto schovej navigaci, bannery, modály, plovoucí tlačítka, marketingové boxy a interaktivní prvky. Naopak zobraz datum vytvoření, období reportu, identifikaci zákazníka v rozumném rozsahu, zdroj dat a kontaktní cestu.
+
+## Odkazy a QR kódy používej střídmě
+
+Tisknutý dokument neumí hover. Pokud je odkaz důležitý, ukaž jeho URL. Pokud je URL dlouhá, použij čistý krátký odkaz pod vlastní doménou, ne trackingovou nudli z kampaně. QR kód může pomoct, ale nemá nahrazovat čitelný odkaz ani vysvětlení.
+
+Dobrý příklad:
+
+```text
+Aktuální verze metodiky: https://example.com/metodika/privacy-checklist
+```
+
+Horší příklad:
+
+```text
+Klikněte zde
+```
+
+Nejhorší příklad:
+
+```text
+https://trk.vendor.example/click?id=839292&utm_source=pdf&utm_campaign=retargeting&user=...
+```
+
+Privacy-first pravidlo: dokument, který bude sdílený mimo aplikaci, nemá nést osobní tracking parametry. Pokud chceš měřit použití PDF, měř stažení na serveru agregovaně nebo nabídni dobrovolnou zpětnou vazbu. Nelep každému příjemci do dokumentu tajný digitální ocásek.
+
+## Metadata kontroluj před exportem
+
+PDF může obsahovat metadata o názvu, autorovi, aplikaci, datu vytvoření, úpravách, vložených objektech nebo generátoru. U marketingového checklistu to možná není drama. U nabídky, bezpečnostního reportu nebo exportu pro zákazníka už ano.
+
+Kontroluj hlavně:
+
+- autor a creator tool,
+- název dokumentu a subject,
+- interní cesty k souborům,
+- komentáře a anotace,
+- skryté vrstvy,
+- metadata vložených obrázků,
+- náhledové obrázky a přílohy uvnitř PDF,
+- osobní údaje v názvu souboru.
+
+Automatický PDF generátor nastav tak, aby metadata vyplňoval vědomě. „Untitled“, „localhost“, „Chrome print“, „admin-final-final-v3“ nebo jméno zaměstnance v poli Author nevypadá profesionálně a někdy prozrazuje víc, než chceš.
+
+## Název souboru je součást UX i bezpečnosti
+
+Soubor `download.pdf` je malá provozní ostuda. Uživatel ho za týden nenajde, účetní ho přejmenuje ručně a support pak řeší, který dokument je který. Název souboru má být čitelný, stabilní a bez zbytečných osobních údajů.
+
+Praktické vzory:
+
+```text
+nabidka-dreamind-webovy-audit-2026-10-07.pdf
+faktura-2026-00123.pdf
+report-dostupnost-2026-09.pdf
+checklist-privacy-first-launch.pdf
+```
+
+Nepoužívej:
+
+- celé jméno člověka, pokud stačí číslo účtu nebo firmy,
+- e-mail v názvu souboru,
+- interní ID bez významu,
+- mezery a diakritiku, pokud dokument často cestuje mezi systémy,
+- slova `final`, `new`, `copy`, `latest`.
+
+U serverově generovaných PDF nastav správné hlavičky. `Content-Type` má odpovídat obsahu a `Content-Disposition` může nabídnout stažení s filename. Nezapomeň escapovat a normalizovat názvy — název souboru je vstup, ne básnická volnost.
+
+## Citlivé dokumenty generuj na serveru vědomě
+
+Tisk přes prohlížeč je výborný pro checklisty, články a jednoduché reporty. U faktur, smluv, auditních přehledů nebo bezpečnostních dokumentů je často lepší serverový generátor. Ne proto, že server je magický, ale protože umíš lépe kontrolovat šablonu, metadata, název souboru, přístup, logování a retenci.
+
+U citlivého PDF rozhodni:
+
+- kdo ho smí vytvořit,
+- jak dlouho je dostupné,
+- zda se ukládá, nebo generuje na vyžádání,
+- zda se link podepisuje a kdy expiruje,
+- zda se dokument posílá e-mailem, nebo jen bezpečným odkazem,
+- jak se auditují stažení,
+- co se stane po zrušení účtu.
+
+Pozor na e-mailové přílohy. Poslat PDF s citlivým reportem na špatnou adresu je pořád únik, i když šablona byla krásná. U zákaznických portálů je bezpečnější poslat oznámení a nechat přihlášeného uživatele dokument stáhnout z aplikace.
+
+## PDF není náhrada za strojový export
+
+PDF je dobré pro čtení, schvalování a archivaci. Není ideální pro migraci dat. Pokud zákazník potřebuje převést data do jiného systému, dej mu CSV, JSON nebo jiný strojově čitelný formát. PDF může vysvětlit obsah exportu, ale nemá být jediný způsob, jak dostat data ven.
+
+Dobrý balíček:
+
+```text
+README.pdf          lidské vysvětlení exportu
+projects.csv        tabulková data
+settings.json       konfigurace
+attachments/        soubory vložené zákazníkem
+checksums.txt       kontrolní součty
+```
+
+Špatný balíček:
+
+```text
+export.pdf          80 stran tabulek, které někdo bude ručně kopírovat
+```
+
+Codyho komentář: Pokud zákazníka nutíš vytahovat data z PDF ručně, neprodáváš vendor lock-in. Prodáváš bolest s patičkou.
+
+## Testuj tisk jako samostatný scénář
+
+Tisk a PDF se často rozbijí potichu. Nikdo je netestuje, dokud je nepotřebuje důležitý zákazník. Přidej malý QA scénář pro stránky, kde tisk nebo PDF slibuješ.
+
+Testovací sada:
+
+- stránka má tiskovou verzi bez navigace a cookie lišty,
+- tabulky se nelámou přes hlavičky nesmyslně,
+- odkazy jsou čitelné i mimo web,
+- dokument má datum, verzi nebo období,
+- tmavé pozadí se netiskne jako inkoustová tragédie,
+- důležité informace nejsou jen v barvě,
+- metadata neobsahují lokální cesty ani osobní jména,
+- název souboru je stabilní a srozumitelný,
+- PDF otevře běžný prohlížeč i čtečka,
+- citlivý dokument nejde stáhnout po expiraci odkazu.
+
+Pro malé týmy stačí ruční kontrola u kritických výstupů před releasem a automatický screenshot nebo PDF smoke test u nejdůležitějších šablon. Nemusíš stavět „PDF observability platformu“. Stačí si přiznat, že zákazník občas klikne na tisk.
+
+## Příklad: privacy-first report pro klienta
+
+Agentura chce klientovi každý měsíc poslat report výkonu webu. Nechce do PDF přidávat osobní data návštěvníků ani trackingové odkazy.
+
+Dobrý postup:
+
+1. Report obsahuje období, metodiku a agregované metriky.
+2. Odkazy vedou na veřejné nebo klientské stránky bez osobních tracking parametrů.
+3. PDF metadata mají autora „Dreamind“, název reportu a datum vytvoření.
+4. Soubor se jmenuje `report-web-vykon-klient-2026-09.pdf` nebo podle domluveného klientského identifikátoru.
+5. Detailní data jsou dostupná jako CSV v klientském portálu, ne jako 40stránková PDF tabulka.
+6. E-mail obsahuje stručné shrnutí, samotný dokument je za přihlášením nebo v dohodnutém bezpečném kanálu.
+7. Staré reporty mají retenční pravidlo a nejsou věčně ve veřejném bucketu.
+
+Výsledek: klient dostane dokument, který může poslat dál, tým nešíří citlivá data a report není skrytý trackingový kanál v kabátu „manažerského PDF“.
+
+## Checklist: PDF a tisk bez průvanu
+
+- [ ] Každý tiskový/PDF výstup má jasný účel a vlastníka.
+- [ ] Tisková CSS odstraňuje navigaci, bannery, modály a interaktivní prvky.
+- [ ] Důležité odkazy jsou čitelné i mimo web.
+- [ ] Dokument neobsahuje osobní tracking parametry.
+- [ ] Metadata PDF jsou vyplněná vědomě a neprozrazují interní detaily.
+- [ ] Název souboru je stabilní, čitelný a bez zbytečných osobních údajů.
+- [ ] Citlivé PDF má kontrolu přístupu, expiraci nebo jasnou retenci.
+- [ ] PDF nenahrazuje strojově čitelný export tam, kde zákazník potřebuje data převést.
+- [ ] E-mailové přílohy se používají jen tam, kde dávají bezpečnostně smysl.
+- [ ] Kritické výstupy mají ruční nebo automatickou kontrolu před releasem.
+
+## Mini šablona PDF/tiskové karty
+
+```text
+Název výstupu:
+Účel:
+Příjemce:
+Typ dat:
+- [ ] veřejná
+- [ ] interní
+- [ ] zákaznická
+- [ ] citlivá
+
+Generování:
+- [ ] prohlížeč / print CSS
+- [ ] serverové PDF
+- [ ] kombinace
+
+Název souboru:
+Metadata autor/title:
+Obsahuje odkazy:
+Obsahuje osobní údaje:
+Přístup a expirace:
+Retence:
+Strojový export k dispozici:
+Kontrola před releasem:
+Vlastník:
+Datum další revize:
+```
+
+## Zdroje
+
+- MDN Web Docs: [Printing](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries/Printing)
+- MDN Web Docs: [`@media` CSS at-rule](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/%40media)
+- MDN Web Docs: [CSS paged media](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Paged_media)
+- MDN Web Docs: [`Content-Disposition` header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Disposition)
+- PDF Association: [Technical Note 0003 — Metadata in PDF/A-1](https://pdfa.org/resource/technical-note-tn0003-metadata-in-pdfa-1/)
+- PDF Association: [PDF 2.0 Application Note 003 — Use of object metadata streams](https://pdfa.org/resource/pdf-2-0-application-note-003-use-of-object-metadata-streams/)
+
+
 # Pracovní log
+
+- 2026-10-07: Doplněna příloha „Tiskové a PDF výstupy bez metadatového průvanu“ s praktickým rozlišením účelů dokumentů, print CSS pravidly, bezpečnými odkazy, kontrolou PDF metadat, názvy souborů, serverovým generováním citlivých dokumentů, rozdílem mezi PDF a strojovým exportem, QA checklistem, PDF/tiskovou kartou a ověřenými zdroji MDN a PDF Association.
+
+
 - 2026-10-07: Doplněna příloha „Žádosti o data bez supportového ping-pongu“ s praktickým DSAR workflow, ověřením identity, inventářem systémů, bezpečným exportem, výmazem, pravidly pro zálohy, příkladem B2B SaaS, checklistem, DSAR kartou a ověřenými zdroji Evropské komise, EDPB a GDPR.
 
 - 2026-10-07: Doplněna příloha „Preference centrum bez consentového labyrintu“ s praktickým rozdělením preferencí podle účelu, odvoláním souhlasu, minimálním důkazem změny, synchronizací do nástrojů, oddělením cookie voleb, checklistem, vyplnitelnou preference kartou a ověřenými evropskými zdroji.
