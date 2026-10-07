@@ -53550,7 +53550,218 @@ Situace: zákazníci mohou pracovat v aplikaci, ale export fakturačních report
 - Atlassian Statuspage: Launch your status page: https://support.atlassian.com/statuspage/docs/launch-your-status-page/
 
 
+# Klientský error reporting bez screenshotového šmírování
+
+Error reporting je jedna z těch funkcí, které tým obvykle zapne ve spěchu, protože „něco padá v prohlížeči“. Pak se za tři měsíce zjistí, že se spolu s výjimkami ukládaly celé URL s tokeny, části formulářů, e-maily zákazníků a občas i screenshot obrazovky. Gratuluju, bug se sice hledá líp, ale produkt si mezitím pořídil malý datový vysavač s logem observability.
+
+Privacy-first přístup není o tom, že chyby nesleduješ. Naopak: dobrý SaaS má chyby vidět rychle, protože tiché selhání je dražší než upřímná chyba. Rozdíl je v tom, že sbíráš jen data potřebná k opravě, ne digitální otisk člověka, který měl tu smůlu, že klikl ve špatnou chvíli.
+
+## Nejdřív rozděl chyby podle dopadu
+
+Ne každá frontend chyba si zaslouží stejnou pozornost. Začni jednoduchou klasifikací:
+
+- **Blokující chyba:** uživatel nemůže dokončit platbu, export, přihlášení, odeslání formuláře nebo jinou klíčovou akci.
+- **Částečná chyba:** jedna část obrazovky selže, ale existuje rozumná náhradní cesta.
+- **Kosmetická chyba:** rozbije se vizuální drobnost, překlad, ikona nebo sekundární prvek.
+- **Vývojářský šum:** chyba z rozšíření prohlížeče, blokování reklam, staré cache nebo testovacího prostředí.
+
+Do error reportingu patří hlavně první dvě kategorie. Kosmetiku často vyřeší vizuální QA a vývojářský šum patří do filtru, ne do nočního alertu.
+
+Praktické pravidlo: alert se posílá podle dopadu na práci zákazníka, ne podle počtu stack traců. Sto chyb z jednoho rozšíření prohlížeče není horší než jedna chyba, která zablokuje všem zákazníkům export faktur.
+
+## Sbírej kontext, ne obsah zákaznických dat
+
+Minimální užitečný error report může obsahovat:
+
+- název aplikace a prostředí,
+- verzi frontend buildu,
+- anonymní ID relace nebo hash uživatele,
+- trasu bez citlivých parametrů,
+- typ prohlížeče a operačního systému,
+- název komponenty nebo akce,
+- chybovou zprávu a stack trace,
+- čas události,
+- předchozí technickou událost, například `export_started` nebo `settings_saved`.
+
+Naopak do běžného klientského reportu nedávej:
+
+- obsah polí formuláře,
+- celé URL s tokeny, e-maily nebo vyhledávacími dotazy,
+- screenshoty bez výslovného důvodu,
+- lokální storage a cookies,
+- HTML celé stránky,
+- obsah dokumentů, ticketů, faktur nebo interních poznámek,
+- IP adresu, pokud ji nepotřebuješ pro bezpečnostní analýzu.
+
+Codyho komentář: Stack trace má říct, kde se aplikace rozbila. Nemá se stát cestovní pasem uživatele po tvém produktu. Debugging není archeologická licence na všechno.
+
+## URL očisti před odesláním
+
+URL je častý zdroj průšvihů. Vypadá technicky, ale často obsahuje citlivé údaje: reset token, pozvánku, e-mail v query parametru, interní ID zákazníka nebo název projektu. Proto si udělej allowlist, ne blacklist.
+
+Místo ukládání celé adresy:
+
+```text
+/app/projects/123456/export?email=eva@example.com&token=abc123
+```
+
+ulož jen bezpečný tvar:
+
+```text
+/app/projects/:projectId/export
+```
+
+Pokud potřebuješ vědět, že chyba vznikla při konkrétním typu exportu, pošli samostatné pole:
+
+```json
+{
+  "route": "/app/projects/:projectId/export",
+  "action": "export_pdf",
+  "build": "2026.10.07.18",
+  "severity": "blocking"
+}
+```
+
+Tím týmu zůstane technický kontext a zákazníkovi zůstane důstojnost. To je fér obchod.
+
+## Screenshoty a session replay ber jako rizikový režim
+
+Screenshot nebo replay může být užitečný při těžko reprodukovatelné chybě. Zároveň je to jeden z nejrychlejších způsobů, jak do nástroje třetí strany poslat citlivý obsah obrazovky. Výchozí stav proto má být vypnuto.
+
+Pokud screenshoty opravdu potřebuješ, nastav minimálně:
+
+- výslovné zapnutí jen pro konkrétní prostředí nebo zákaznickou skupinu,
+- maskování všech polí formulářů a obsahových oblastí,
+- krátkou retenci,
+- interní schválení před zapnutím pro produkci,
+- jasné vysvětlení v dokumentaci nebo privacy informaci,
+- zákaz odesílání obrazovek z administrace, plateb, zdravotních, účetních a HR částí.
+
+Ještě lepší alternativa: místo screenshotu posílej technický „support snapshot“ složený z bezpečných stavů komponent. Například `billing_tab_loaded: true`, `invoice_count_bucket: 10-50`, `export_button_enabled: false`. Vývojář dostane stopu a zákazník nepřijde o obsah obrazovky.
+
+## Chyby v prohlížeči filtruj u zdroje
+
+Do error reportingu se rády lepí chyby, které nejsou tvoje: rozšíření prohlížeče, blokátory skriptů, staré verze WebView, síťové výpadky nebo robotické návštěvy. Když je nefiltruješ, tým začne opravovat duchy.
+
+Užitečné filtry:
+
+- ignoruj známé patterny rozšíření prohlížečů,
+- odděl chyby z `localhost`, preview prostředí a produkce,
+- vzorkuj opakující se stejnou chybu po první stovce výskytů,
+- slučuj chyby podle fingerprintu komponenty a stack trace,
+- označ síťové chyby zvlášť od aplikačních výjimek,
+- drž allowlist domén, ze kterých přijímáš reporty.
+
+Filtrace není zametání problémů pod koberec. Je to ochrana pozornosti týmu. A pozornost týmu je ve firmě vzácnější než další dashboard v tmavém režimu.
+
+## Retenci nastav podle opravitelnosti
+
+Error reporty mají životnost. Chyba stará rok ve starém buildu je většinou jen muzeální exponát. Nastav retenci podle toho, jak dlouho report reálně pomáhá:
+
+- kritické produkční chyby: 30–90 dní podle incident procesu,
+- běžné frontend výjimky: 14–30 dní,
+- preview a testovací prostředí: 7–14 dní,
+- agregované trendy bez osobního kontextu: déle, pokud dávají smysl pro kvalitu produktu.
+
+Když se chyba promění v incident, ulož samostatnou incident kartu s rozhodnutími, časovou osou a opatřeními. Nepotřebuješ donekonečna držet původní surové eventy, pokud už z nich vznikl použitelný provozní záznam.
+
+## Error reporting zapoj do release rutiny
+
+Bez rutiny se error reporting změní v hřbitov červených ikon. Po každém releasu sleduj:
+
+- nové typy chyb proti předchozí verzi,
+- nárůst blokujících chyb,
+- nejčastější chyby podle zákaznické akce,
+- chyby v onboardingové cestě,
+- chyby v platbě, exportech a integracích,
+- chyby vzniklé jen v konkrétním prohlížeči.
+
+Měj jednoduché pravidlo pro návrat změny: pokud nová verze zvýší blokující chyby v klíčové cestě a tým nemá rychlou opravu, rollback není ostuda. Ostuda je dívat se na graf a čekat, že se zákazník omluví aplikaci za to, že ji používá.
+
+## Příklad: pád exportu v účetním SaaS
+
+Účetní SaaS nasadí novou PDF knihovnu. Část zákazníků začne hlásit, že export daňového přehledu nefunguje. Privacy-first error report neodesílá PDF, názvy firem ani částky. Pošle:
+
+- `route: /reports/tax-summary/export`,
+- `action: pdf_export`,
+- `build: 2026.10.07.18`,
+- `browser_family: Firefox`,
+- `locale: cs-CZ`,
+- `invoice_count_bucket: 100-500`,
+- `template_variant: standard`,
+- `error_code: PDF_RENDER_TIMEOUT`,
+- `severity: blocking`.
+
+Tým zjistí, že nová knihovna padá u větších reportů ve Firefoxu. Oprava je konkrétní, zákaznická data zůstala doma a podpora nemusí prosit lidi o screenshot daňového přehledu. Malý zázrak, žádná magie.
+
+## Checklist: error reporting bez šmírování
+
+- Má každá chyba přiřazený dopad na zákaznickou akci?
+- Odesíláš jen bezpečný tvar URL bez citlivých parametrů?
+- Jsou formuláře, dokumenty a obsahové oblasti vyloučené z reportů?
+- Jsou screenshoty a replaye výchozím stavem vypnuté?
+- Máš filtr na chyby z rozšíření, botů a neprodukčních prostředí?
+- Má každý report verzi buildu a prostředí?
+- Máš nastavenou retenci pro surové error eventy?
+- Ví podpora, kdy chyba znamená incident a kdy běžný bug?
+- Umíš z reportu vytvořit ticket bez kopírování osobních dat?
+- Kontroluješ nové chyby po každém releasu?
+
+## Mini šablona error reporting policy
+
+```text
+## Účel
+- Jaké chyby sledujeme:
+- Jaké zákaznické akce chráníme:
+- Kdo reporty kontroluje:
+
+## Povolená data
+- Build/verze:
+- Prostředí:
+- Bezpečná route:
+- Komponenta/akce:
+- Stack trace:
+- Anonymní korelační ID:
+
+## Zakázaná data
+- Formulářová pole:
+- Obsah dokumentů:
+- Celé URL:
+- Screenshoty/replaye:
+- Cookies/local storage:
+- Osobní poznámky a interní texty:
+
+## Filtry
+- Známé chyby rozšíření:
+- Sampling pravidla:
+- Ignorované prostředí:
+- Allowlist domén:
+
+## Retence
+- Produkční kritické chyby:
+- Běžné chyby:
+- Testovací prostředí:
+- Agregované metriky:
+
+## Release rutina
+- Kdy kontrolujeme nové chyby:
+- Kdy děláme rollback:
+- Jak vzniká bug ticket:
+- Jak vzniká incident:
+```
+
+## Zdroje
+
+- OWASP: Logging Cheat Sheet — doporučení k logování, ochraně citlivých dat a událostem vhodným pro záznam: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP: Error Handling Cheat Sheet — principy bezpečného zacházení s chybami bez zbytečného úniku detailů: https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html
+- MDN Web Docs: Reporting API — přehled klientských reportů pro prohlížečové události: https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API
+- MDN Web Docs: Content-Security-Policy `report-uri` — reportování porušení CSP: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/report-uri
+- EUR-Lex: GDPR, článek 5 o zásadách zpracování včetně minimalizace údajů: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679
+
+
 # Pracovní log
+
+- 2026-10-07: Doplněna příloha „Klientský error reporting bez screenshotového šmírování“ s praktickým rozdělením chyb podle dopadu, bezpečným obsahem reportů, čištěním URL, pravidly pro screenshoty a replaye, filtrováním šumu, retenčním modelem, release rutinou, příkladem účetního SaaS, checklistem, šablonou policy a ověřenými zdroji OWASP, MDN a GDPR.
 
 - 2026-10-07: Doplněna příloha „Bezpečnostní e-maily bez paniky a trackingového ocásku“ s rozdělením bezpečnostních událostí podle rizika, pravidly pro předměty a tělo zpráv, bezpečné odkazy bez marketingového trackingu, support runbook, příklad nového zařízení, checklist, šablonu bezpečnostního e-mailu a ověřené zdroje OWASP, NIST, MDN a GDPR.
 
