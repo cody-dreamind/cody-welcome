@@ -50898,7 +50898,183 @@ Privacy:
 - [MDN: 401 Unauthorized](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/401)
 - [NIST SP 800-63B Digital Identity Guidelines: Authentication and Authenticator Management](https://pages.nist.gov/800-63-4/sp800-63b.html)
 
+# Příloha: CSP reporty a security reporting bez telemetrického vysavače
+
+Content Security Policy často začíná jako bezpečnostní hlavička a končí jako tabulka plná záhadných JSON reportů, kterým nikdo nerozumí. Přitom je to skvělý nástroj: pomáhá zachytit rozbité externí zdroje, nečekané skripty, špatně nastavené embed prvky a občas i skutečný útok. Jenže reporting se dá navrhnout dvěma způsoby. Buď jako užitečný bezpečnostní signál, nebo jako další nenápadný sběr všeho, co prohlížeč pošle.
+
+Privacy-first verze je jednoduchá: sbírej jen tolik, kolik potřebuješ k opravě bezpečnostní politiky a odhalení rizika. Nesbírej obsah stránky, session data, celé URL s query parametry, osobní údaje ani náhodné debug výlevy. CSP report není produktová analytika. Je to kouřový alarm. A kouřový alarm taky nepotřebuje znát oblíbenou barvu každého návštěvníka, aby začal pískat.
+
+## Začni v report-only režimu
+
+CSP se dá nasadit ostrou hlavičkou `Content-Security-Policy`, nebo nejdřív pozorovacím režimem `Content-Security-Policy-Report-Only`. MDN popisuje report-only variantu jako způsob, jak politiku testovat bez blokování zdrojů: [MDN: Content-Security-Policy-Report-Only](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy-Report-Only).
+
+Praktický postup pro malý web nebo SaaS:
+
+- nejdřív si sepiš očekávané zdroje skriptů, stylů, obrázků, fontů, API a frame prvků,
+- nastav report-only politiku na produkci nebo omezený segment provozu,
+- sbírej reporty krátce, typicky několik dní až dva týdny podle návštěvnosti,
+- oprav legitimní porušení, která by po ostrém nasazení rozbila stránku,
+- až potom přepni nejrizikovější direktivy do blokovací politiky.
+
+Report-only režim není výmluva pro věčné ladění. Je to přechodová fáze. Pokud reporty leží měsíc bez vlastníka, nemáš bezpečnostní proces, ale digitální kompost.
+
+## Report endpoint není odpadkový koš
+
+Modernější Reporting API používá hlavičku `Reporting-Endpoints`, která pojmenuje cíle pro reporty; MDN popisuje, že endpointy se pak dají použít například pro CSP hlášení: [MDN: Reporting-Endpoints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Reporting-Endpoints). Starší CSP mechanismy pracovaly s direktivami jako `report-uri`, zatímco novější přístup se opírá o `report-to` a reporting infrastrukturu; detaily se v prohlížečích historicky lišily, takže při nasazení vždy testuj reálné prohlížeče, ne jen hezkou teorii v dokumentaci.
+
+Endpoint navrhni jako bezpečnostní intake, ne jako univerzální logovací otvor:
+
+- přijímej jen `POST` s očekávaným `Content-Type`,
+- limituj velikost payloadu,
+- nepovoluj veřejné čtení reportů,
+- nastav rate limit podle IP a podle site/app identifikátoru,
+- ukládej strukturovaně jen povolená pole,
+- na nevalidní payload odpovídej klidně `204` nebo krátkým `400`, ale nic citlivého nevracej.
+
+Report endpoint musí přežít i vlnu šumu. Pokud ti jeden rozbitý browser plugin nebo agresivní crawler umí shodit databázi reportů, bezpečnostní monitoring právě vytvořil vlastní incident. Gratuluju, vyrobil sis hasičák z benzínu.
+
+## Minimalizuj ukládaná pole
+
+CSP reporty mohou obsahovat užitečné informace typu porušená direktiva, blokované URI, zdrojový soubor nebo číslo řádku. Některá pole ale mohou nést plné URL nebo kontext, který nechceš skladovat věčně. Privacy-first přístup proto znamená allowlist polí a normalizaci hodnot.
+
+Ukládej typicky:
+
+| Pole | Proč ho chceš | Privacy-first úprava |
+| --- | --- | --- |
+| `effective-directive` | poznáš, která část politiky selhává | ulož jako kategorii |
+| `blocked-uri` | zjistíš problematický zdroj | ulož origin/doménu, ne celé URL s query |
+| `document-uri` | víš, na které stránce problém vznikl | ulož cestu bez query a fragmentu |
+| `source-file` | pomůže při debugování skriptu | ořež query, případně hashuj, pokud obsahuje zákaznické cesty |
+| `line-number` / `column-number` | pomůže vývojářům najít chybu | ponech jen pokud neukazuje na generovaný obsah s osobními daty |
+| `disposition` | rozliší report-only a enforce režim | ulož beze změny |
+
+Neukládej automaticky:
+
+- celé query stringy,
+- fragmenty URL,
+- cookies,
+- request hlavičky,
+- IP adresu v plném tvaru, pokud ji nepotřebuješ pro krátkodobý abuse limit,
+- user agent navždy a bez účelu,
+- obsah stránky nebo formuláře.
+
+Pokud chceš agregovat trendy, agreguj na úrovni direktivy, domény a cesty. Většinou nepotřebuješ vědět, že konkrétní člověk v konkrétním účtu měl konkrétní chybu ve 13:04. Potřebuješ vědět, že se na `/pricing` začal objevovat nečekaný skript z domény, kterou nikdo neschválil.
+
+## Odděl bezpečnostní signál od marketingu
+
+CSP reporty nepatří do Google Analytics, reklamního pixelu, session replay nástroje ani produktové heatmapy. Bezpečnostní report má mít vlastní cestu, vlastní retenci a jasného vlastníka. Pokud ho smícháš s marketingovou analytikou, začneš řešit dvě špatné věci najednou: privacy riziko a neschopnost udělat bezpečnostní rozhodnutí z čistých dat.
+
+Dobrá minimální architektura:
+
+- endpoint ve vlastní aplikaci nebo EU provozované bezpečnostní službě,
+- krátká surová retence, například 7 až 30 dní podle provozní potřeby,
+- delší agregovaná retence bez identifikátorů,
+- pravidelný report pro vývoj: nové domény, nejčastější direktivy, stránky s největším šumem,
+- alert jen na změny, které jsou opravdu podezřelé.
+
+> Codyho komentář: Bezpečnostní data mají být nudná, úzká a použitelná. Jakmile z nich někdo chce dělat „behaviorální profil návštěvníka“, vytáhni červenou kartu a ideálně i kafe, protože bude dlouhá schůzka.
+
+## Alertuj změnu, ne každý šum
+
+CSP reporting umí být hlučný. Browser rozšíření, staré cache, firemní proxy, překladače stránek nebo vložené nástroje mohou generovat reporty, které nejsou útok. Když na každý report pošleš Slack alert, tým si bezpečnostní kanál ztlumí rychleji než newsletter s předmětem „jen malý update obchodních podmínek“.
+
+Lepší pravidla:
+
+- alertuj novou neschválenou doménu pro `script-src`,
+- alertuj náhlý nárůst reportů na kritických stránkách: login, checkout, billing, admin,
+- alertuj přechod z report-only porušení do ostrého blokování, pokud roste počet chyb,
+- nealertuj jednotlivé rozšíření prohlížeče, pokud se opakuje jen u jednoho user agentu,
+- jednou týdně posílej souhrn šumu a backlog oprav.
+
+Každý alert má mít akci: zkontrolovat release, vrátit externí skript, aktualizovat CSP, otevřít security ticket, nebo incident uzavřít jako benigní šum. Alert bez akce je jen digitální komár.
+
+## Propoj CSP s inventářem externích zdrojů
+
+CSP reporting je nejsilnější, když ho porovnáš s inventářem schválených zdrojů. Pokud máš v e-booku nebo interním runbooku frontend supply-chain kartu, použij ji jako allowlist. Každá nová doména v reportech spadne do jedné ze tří kategorií:
+
+- schválený zdroj, který jen potřebuje opravit direktivu,
+- legitimní nový zdroj, který musí projít privacy/security review,
+- nečekaný zdroj, který může být chyba, rozšíření, injekce nebo supply-chain problém.
+
+Tím se CSP reporting stane kontrolou změn, ne sbírkou náhodných JSONů. A přesně to chceš: méně dat, lepší rozhodnutí.
+
+## Příklad: nová platební knihovna na checkoutu
+
+Tým přidá novou platební knihovnu na `/checkout`. Místo okamžitého povolení širokého `script-src *` udělá tohle:
+
+1. Do inventáře přidá domény platební knihovny, účel, vlastníka a retenční poznámku.
+2. Na týden zapne report-only CSP pro checkout.
+3. Endpoint ukládá jen direktivu, origin blokované domény, cestu bez query, disposition a čas.
+4. Reporty ukážou jednu schválenou platební doménu a dvě nečekané domény z testovací konfigurace.
+5. Testovací domény se odstraní, produkční doména se povolí v přesné direktivě.
+6. Po releasu běží ostrá CSP a týdenní souhrn kontroluje, jestli nepřibyly další zdroje.
+
+Výsledek: checkout se nerozbije, bezpečnostní hlavička není gumová, a zákazníkovo chování nekončí v dalším sledovacím potrubí.
+
+## Checklist: CSP reporting bez vysavače
+
+- Máme report-only fázi s datem konce.
+- Víme, které direktivy testujeme a proč.
+- Report endpoint přijímá jen očekávaný formát a velikost.
+- Ukládáme jen allowlist polí.
+- Query stringy, fragmenty a citlivé identifikátory se zahazují nebo normalizují.
+- Surové reporty mají krátkou retenci.
+- Agregované reporty neobsahují osobní ani zákaznický obsah.
+- Alerty jsou navázané na konkrétní akci.
+- Nové domény se porovnávají s inventářem externích zdrojů.
+- CSP reporting není napojený na marketingovou analytiku ani session replay.
+
+## Mini šablona CSP reporting karty
+
+```markdown
+# CSP reporting karta: [web/aplikace]
+
+Rozsah:
+- Stránky:
+- Direktivy:
+- Report-only od/do:
+- Enforce datum:
+
+Endpoint:
+- URL:
+- Vlastník:
+- Rate limit:
+- Maximální payload:
+
+Ukládaná pole:
+- Povolená pole:
+- Normalizace URL:
+- Co se nikdy neukládá:
+
+Retence:
+- Surové reporty:
+- Agregace:
+- Mazací job:
+
+Alerty:
+- Nová doména:
+- Kritická stránka:
+- Nárůst blokování:
+- Týdenní souhrn:
+
+Kontrola:
+- Poslední review:
+- Otevřené opravy:
+- Schválené nové zdroje:
+```
+
+## Zdroje
+
+- [MDN: Content-Security-Policy header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy)
+- [MDN: Content-Security-Policy-Report-Only header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy-Report-Only)
+- [MDN: Reporting-Endpoints header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Reporting-Endpoints)
+- [W3C: Content Security Policy Level 3](https://www.w3.org/TR/CSP3/)
+- [OWASP Cheat Sheet Series: Content Security Policy](https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html)
+- [EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en)
+
 # Pracovní log
+- 2026-10-07: Doplněna příloha „CSP reporty a security reporting bez telemetrického vysavače“ s report-only postupem, návrhem bezpečného endpointu, minimalizací ukládaných polí, oddělením od marketingové analytiky, alerty podle změn, propojením s inventářem externích zdrojů, checkout příkladem, checklistem, CSP reporting kartou a ověřenými zdroji MDN, W3C, OWASP a EDPB.
+
 - 2026-10-07: Doplněna příloha „API klíče a tokeny bez tajných suvenýrů v logu“ s rozlišením typů tokenů, bezpečným předáváním v hlavičkách, jednorázovým zobrazením secretu, scope modelem, rotací, privacy-first logováním, rate limity, checklistem, šablonou API klíč karty a ověřenými zdroji OWASP, RFC, MDN a NIST.
 
 - 2026-10-07: Doplněna příloha „Auditní logy bez tajného deníku o zákaznících“ s rozdělením provozních, bezpečnostních a auditních logů, výběrem auditovatelných událostí podle dopadu, strukturovaným schematem bez obsahu zákaznických dat, pravidly pro append-only zápis, přístupy, retenci, testování, příkladem změny role, checklistem, auditní kartou a ověřenými zdroji OWASP, NIST a EDPB.
