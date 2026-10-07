@@ -54007,7 +54007,174 @@ Do překladového nástroje nejdou reálné support tickety ani screenshoty prod
 - MDN Web Docs: `Intl.DateTimeFormat`, jazykově citlivé formátování data a času: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
 
 
+# Subprocesoři a vendor exit bez zamčených dat
+
+Každý SaaS časem začne používat další služby: hosting, e-mailing, platební bránu, error reporting, překlady, helpdesk, úložiště, AI API, monitoring. To není hřích. Hřích je tvářit se, že dodavatelé jsou jen položka ve faktuře a ne součást datového a provozního rizika.
+
+Privacy-first provoz neznamená „všechno si postavíme sami v garáži a budeme tomu říkat cloud“. Znamená, že víš, kdo se k datům může dostat, proč, za jakých podmínek, kde data běží, jak se dozvíš o změně subprocesora a jak odejdeš, když se podmínky přestanou potkávat s tím, co slibuješ zákazníkům.
+
+> Codyho komentář: Vendor lock-in není jen technický problém. Je to situace, kdy máš sice právo odejít, ale export trvá tři týdny, účty se ruší ručně přes support a půlka důkazů o souhlasech žije v dashboardu, kam už se po ukončení smlouvy nedostaneš. Romantika, ale jen pokud miluješ provozní bolest.
+
+## Nejdřív rozděl dodavatele podle role
+
+Ne každý nástroj je stejný. Malý tým potřebuje jednoduchou mapu, ne právní fresku přes celou zeď. Začni čtyřmi kategoriemi:
+
+- **Zpracovatel osobních údajů:** služba zpracovává osobní údaje podle tvých pokynů — typicky hosting, e-mailing, analytika, helpdesk nebo monitoring.
+- **Subprocesor tvého zpracovatele:** další dodavatel, kterého používá tvůj hlavní zpracovatel — třeba datacentrum, CDN, e-mail relay nebo support platforma.
+- **Samostatný správce:** služba rozhoduje o vlastních účelech zpracování — typicky některé platební, identitní nebo reklamní platformy.
+- **Čistě technický dodavatel bez zákaznických dat:** nástroj, který nemá přístup k osobním nebo obchodně citlivým datům — například interní diagramovací nástroj bez importu reálných dat.
+
+Tohle rozdělení není akademické. Určuje, jestli potřebuješ DPA, jaké informace dáš do datové mapy, kdo je v privacy dokumentaci, jak řešíš incident a jestli můžeš nástroj vyměnit bez informování zákazníků.
+
+## DPA není PDF do šuplíku
+
+Smlouva o zpracování osobních údajů má být provozní dokument. Když ji nikdo neumí najít při incidentu, změně nástroje nebo zákaznickém auditu, je to jen compliance talisman.
+
+U každého důležitého dodavatele si ulož minimálně:
+
+- odkaz na DPA a datum, kdy byla přijata,
+- účel zpracování a kategorie dat,
+- roli dodavatele: zpracovatel, subprocesor, správce,
+- region provozu a dostupné informace o předávání mimo EHP,
+- seznam nebo URL subprocesorů,
+- způsob oznámení změn subprocesorů,
+- kontaktní místo pro bezpečnost a privacy,
+- exit postup a retenční pravidla po ukončení.
+
+GDPR v článku 28 řeší povinnosti zpracovatele včetně zapojení dalších zpracovatelů. Prakticky to znamená: nechceš zjišťovat při zákaznické otázce, jestli tvůj dodavatel může přesunout data do další služby bez toho, abys měl šanci reagovat.
+
+## Změna subprocesora má mít interní workflow
+
+Mnoho služeb oznamuje změny subprocesorů e-mailem nebo přes stránku s odběrem aktualizací. To je fajn — pokud ty e-maily někdo čte. Pokud chodí bývalému founderovi na adresu z roku 2021, privacy-first provoz právě dostal klaunský nos.
+
+Nastav jednoduchý postup:
+
+1. Všechny vendor privacy notifikace posílej do sdílené schránky nebo ticket fronty.
+2. Každá změna dostane krátkou kartu: dodavatel, nový subprocesor, účel, region, dopad, deadline pro námitku.
+3. Technický vlastník posoudí, jestli se mění datový tok nebo provozní riziko.
+4. Privacy vlastník posoudí, jestli je potřeba aktualizovat datovou mapu, DPA evidenci nebo zákaznickou dokumentaci.
+5. Pokud změna odporuje slibu zákazníkům, připrav námitku, alternativu nebo exit plán.
+
+Nemusí to být velký proces. Stačí, aby změna neskončila jako „někdo to asi viděl v inboxu“.
+
+## Vendor exit plán napiš dřív, než ho potřebuješ
+
+Exit plán je nejlevnější ve chvíli, kdy dodavatele vybíráš. Jakmile na něm běží produkce, fakturace, notifikace nebo dokumenty zákazníků, už vyjednáváš se závažím na kotníku.
+
+U každého kritického dodavatele si předem ověř:
+
+- jak exportuješ data a v jakém formátu,
+- jestli export obsahuje i metadata, konfiguraci, souhlasy a auditní stopy,
+- jak dlouho po ukončení účtu zůstane přístup k datům,
+- jak probíhá smazání dat a jestli dostaneš potvrzení,
+- co se stane s logy, zálohami a přílohami,
+- jestli jde službu provozně nahradit bez změny zákaznické zkušenosti,
+- jak rychle umíš přepnout DNS, SMTP, webhooky, API klíče nebo storage endpointy.
+
+Nejhorší exit je ten, který začne větou: „Oni určitě nějaký export mají.“ Mají. Možná. Někde. V enterprise tarifu. Po schválení ticketu. A teď si dej kafe, budeš ho potřebovat.
+
+## Data portability není totéž co použitelný export
+
+Export dat může být právně možný a prakticky mizerný. ZIP s tisíci soubory bez dokumentace, CSV bez časových zón nebo JSON s interními ID, která nejdou napojit na zákaznický účet, je spíš surovina než exit plán.
+
+Použitelný export má mít:
+
+- dokumentovaný formát,
+- stabilní identifikátory,
+- časové údaje včetně časové zóny,
+- popis sloupců a významů,
+- oddělení osobních, fakturačních a provozních dat,
+- kontrolní součty nebo alespoň počty záznamů,
+- bezpečný způsob předání a omezenou retenci exportního balíčku.
+
+U interních nástrojů platí totéž. Pokud držíš zákaznické poznámky v helpdesku, obchodní historii v CRM a consent log v e-mailingové službě, potřebuješ vědět, jak se tyhle části potkají při auditu, výmazu nebo migraci.
+
+## Evropský provoz neznamená slepou důvěru
+
+Evropský dodavatel je dobrý začátek, ne automatická výhra. Ptej se stejně přísně: kde běží infrastruktura, kdo jsou subprocesoři, jak funguje support přístup, jaké logy se sbírají, jak dlouho se drží a co se stane při bezpečnostním incidentu.
+
+Privacy-first výběr nástroje může mít jednoduché pravidlo: pokud dodavatel neumí jasně odpovědět na otázku „kde jsou data a kdo k nim má přístup“, nástroj nejde do produkčního provozu s reálnými zákaznickými daty. Ne jako trest. Jako sebeobrana.
+
+## Příklad: měníš error reporting službu
+
+Malý SaaS používá klientský error reporting. Původní nástroj začal posílat data přes nový subprocesor mimo EU a tým zároveň zjistil, že export historických chyb je vázaný na enterprise plán.
+
+Dobrá reakce nevypadá tak, že někdo v pátek večer přepíše SDK a doufá. Vypadá takhle:
+
+1. Zastaví se posílání citlivých kontextů a zkrátí se retence nových eventů.
+2. Vytáhne se seznam aktivních projektů, API klíčů, sampling pravidel a ignorovaných chyb.
+3. Exportují se jen potřebné agregace a otevřené kritické bugy, ne celý historický šum.
+4. Nový nástroj se ověří na testovacím buildu s kontrolou URL, stack trace a anonymního korelačního ID.
+5. Po přepnutí se starý nástroj drží krátce jen pro dočtení otevřených incidentů a pak se účet uzavře se záznamem o smazání.
+
+Výsledek: migrace není drama, zákaznická data necestují zbytečně a tým neztratil historii důležitých chyb. Překvapivě příjemné, skoro podezřelé.
+
+## Checklist: subprocesoři a vendor exit bez zamčených dat
+
+- Má každý produkční dodavatel vlastní kartu v datové mapě?
+- Víš, jestli je dodavatel zpracovatel, subprocesor nebo samostatný správce?
+- Máš uloženou DPA, datum přijetí a kontaktní místo?
+- Máš odkaz na aktuální seznam subprocesorů?
+- Chodí oznámení změn do aktivní sdílené schránky nebo ticket fronty?
+- Má každá změna subprocesora vlastní krátké posouzení dopadu?
+- Víš, kde data fyzicky nebo smluvně běží?
+- Umíš exportovat data v použitelném a dokumentovaném formátu?
+- Víš, co se po ukončení účtu stane se zálohami, logy a přílohami?
+- Má kritický dodavatel technický exit plán včetně DNS, API klíčů a webhooků?
+- Umíš zákazníkovi jednoduše vysvětlit, proč daný nástroj používáš?
+- Máš datum příští kontroly vendor mapy?
+
+## Mini šablona vendor karty
+
+```text
+## Dodavatel
+- Název:
+- Vlastník v týmu:
+- Kritičnost: nízká / střední / vysoká
+- Používané části služby:
+
+## Role a data
+- Role podle GDPR:
+- Účel zpracování:
+- Kategorie dat:
+- Kategorie subjektů údajů:
+- Region provozu:
+- Přenos mimo EHP:
+
+## Smlouvy a subprocesoři
+- DPA URL / uložený soubor:
+- Datum přijetí:
+- Subprocesor list URL:
+- Jak chodí oznámení změn:
+- Poslední kontrola:
+
+## Provozní vazby
+- API klíče / integrace:
+- Webhooky:
+- DNS / SMTP / storage endpointy:
+- Monitoring / alerty:
+- Support přístup:
+
+## Exit plán
+- Exportní formát:
+- Co export neobsahuje:
+- Postup přepnutí:
+- Retence po ukončení:
+- Potvrzení smazání:
+- Náhradní řešení:
+```
+
+## Zdroje
+
+- EUR-Lex: GDPR, článek 28 k povinnostem zpracovatele a zapojení dalšího zpracovatele: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679
+- EDPB: Guidelines 07/2020 on the concepts of controller and processor in the GDPR, vodítka k rolím správce a zpracovatele: https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en
+- ENISA: Cloud Security Guide for SMEs, praktický rámec pro malé a střední firmy při práci s cloudovými službami: https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes
+- OWASP: Third Party Javascript Management Cheat Sheet, rizika a kontrola externích skriptů a třetích stran na webu: https://cheatsheetseries.owasp.org/cheatsheets/Third_Party_Javascript_Management_Cheat_Sheet.html
+
+
 # Pracovní log
+
+- 2026-10-07: Doplněna příloha „Subprocesoři a vendor exit bez zamčených dat“ s praktickým rozdělením dodavatelů podle role, DPA evidencí, workflow pro změny subprocesorů, exit plánem, použitelným exportem, evropským provozním filtrem, příkladem migrace error reportingu, checklistem, vendor kartou a ověřenými zdroji GDPR, EDPB, ENISA a OWASP.
 
 - 2026-10-07: Doplněna příloha „Lokalizace webu a SaaS bez překladu do chaosu“ s postupem výběru rozsahu, technickým nastavením jazyka, formátováním dat a měn, privacy-first překladovým procesem, terminologickým glosářem, pravidly pro chybové stavy, příkladem vstupu českého SaaS do Německa, checklistem, lokalizační kartou a ověřenými zdroji W3C, WCAG a MDN.
 
