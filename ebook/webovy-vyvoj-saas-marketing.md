@@ -51451,7 +51451,219 @@ Provoz:
 - [MDN: Retry-After header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After)
 - [IETF draft: RateLimit header fields for HTTP](https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/)
 
+# Příloha: HTTP cache bez úniku osobních dat
+
+Cache je krásná věc: zrychlí web, sníží náklady, potěší uživatele a občas udělá dojem, že backend dostal vitamíny. Jenže u SaaS a přihlášených částí produktu je cache taky místo, kde se velmi snadno poplete výkon s průvanem v datech. Nejhorší incident není pomalá stránka. Nejhorší incident je rychlá stránka, která někomu ukáže cizí faktury.
+
+Privacy-first přístup neříká „všechno zakaž a plať za to výkonem“. Říká: cacheuj agresivně to, co je veřejné a neměnné; opatrně ověřuj to, co je personalizované; a nikdy neskladuj odpovědi, které obsahují citlivá nebo zákaznická data.
+
+> Codyho komentář: Cache není šuplík na všechno, co server právě vyplivl. Je to smlouva mezi produktem, prohlížečem a mezilehlou infrastrukturou. Když je smlouva nejasná, začne ji vykládat někdo jiný. A „někdo jiný“ bývá ve webovém provozu obvykle přesně ta postava, kterou nechceš mít jako právníka.
+
+## Nejdřív rozděl odpovědi podle citlivosti
+
+Nezačínej tím, že si opíšeš univerzální hlavičku z internetu. Začni jednoduchou mapou typů odpovědí. Každý typ stránky nebo API endpointu musí mít vlastní cache politiku podle toho, jestli je veřejný, personalizovaný, citlivý nebo drahý na výpočet.
+
+Praktické rozdělení:
+
+- **Veřejné statické assety:** CSS, JS, fonty, obrázky s verzovaným názvem souboru. Tady chceš dlouhou cache, protože obsah se mění přes hash v URL.
+- **Veřejné HTML stránky:** landing page, blog, dokumentace, veřejný ceník. Tady obvykle chceš krátkou cache nebo revalidaci, protože obsah se může změnit bez změny URL.
+- **Personalizované HTML/API:** dashboard, nastavení účtu, seznam faktur, profil uživatele. Tady sdílená cache nesmí odpověď znovu použít pro jiného člověka.
+- **Citlivé odpovědi:** exporty, tokeny, session-related odpovědi, jednorázové odkazy, potvrzení citlivých akcí. Tady je výchozí politika `no-store`.
+- **Veřejné, ale drahé odpovědi:** agregované statistiky bez osobních dat, veřejné katalogy, ceníkové konfigurace. Tady může dávat smysl krátký `s-maxage`, ale jen pokud je jisté, že odpověď není personalizovaná.
+
+Minimální pravidlo pro malý tým: každá route má mít v dokumentaci jeden řádek „cache policy“. Pokud ho nemá, bere se jako citlivá a nesmí do sdílené cache. Ano, je to trochu přísné. Ale pořád lepší než debugovat, proč uživatel z Brna vidí košík uživatele z Plzně.
+
+## `no-store` používej cíleně, ne jako kýbl cementu
+
+`Cache-Control: no-store` říká compliant cache, že nemá ukládat žádnou část requestu ani response. Podle MDN je to direktiva pro případy, kdy odpověď nechceš ukládat vůbec; OWASP ji doporučuje pro odpovědi se session identifikátory nebo citlivými daty. To je přesně správné pro přihlášené citlivé stránky, exporty a odpovědi, kde by uložená kopie mohla prozradit zákaznická data.
+
+Nepoužívej ale `no-store` úplně všude jen proto, že zní bezpečně. MDN upozorňuje, že příliš široké nasazení `no-store` bere prohlížeči i webové platformě užitečné výhody cache a historie. Pro veřejný web by to znamenalo zbytečně pomalejší načítání, větší provoz a vyšší náklady. Privacy-first není „všechno spálit“. Privacy-first je přesně vědět, co smí zůstat uložené a proč.
+
+Dobré výchozí vzory:
+
+```http
+# Citlivá nebo session odpověď
+Cache-Control: no-store
+
+# Personalizovaná, ale ne vysoce citlivá odpověď, která se může revalidovat
+Cache-Control: private, no-cache
+
+# Veřejné HTML, kde chceš vždy ověřit čerstvost
+Cache-Control: no-cache
+
+# Verzovaný statický asset
+Cache-Control: public, max-age=31536000, immutable
+```
+
+Pozor na jazyk: `no-cache` neznamená „neukládej“. Znamená „můžeš uložit, ale před použitím ověř čerstvost“. Když nechceš ukládání vůbec, použij `no-store`. Tahle drobnost v názvu je webová klasika: technicky přesná, lidsky škodolibá.
+
+## `private` chrání před sdílenou cache, ne před prohlížečem
+
+Direktiva `private` říká, že odpověď může uložit jen privátní cache, typicky prohlížeč konkrétního uživatele, ne sdílená cache mezi uživateli. MDN výslovně doporučuje `private` pro personalizovaný obsah, zvlášť po přihlášení nebo u sessions spravovaných cookies.
+
+To ale neznamená, že `private` je totéž co bezpečné smazání. Prohlížeč může odpověď stále uložit. Pokud odpověď obsahuje citlivé údaje, tajné tokeny nebo obsah, který nemá zůstat na zařízení, použij `no-store`.
+
+Praktické rozlišení:
+
+- Dashboard s obecnými kartami: často `private, no-cache`.
+- Stránka s API klíčem zobrazeným jen jednou: `no-store`.
+- Export faktur ke stažení: `no-store` a krátká platnost odkazu.
+- Veřejný blog: žádné `private`, protože není personalizovaný.
+- Veřejný asset s hashem: `public, max-age=31536000, immutable`.
+
+U SaaS produktů si dej pozor na „trochu personalizované“ odpovědi. Například veřejná dokumentace s malým přihlášeným bannerem „Ahoj, Ondřeji“ už není stejná pro všechny. Buď banner odděl do klientského dotazu s vlastní cache politikou, nebo celou odpověď označ tak, aby ji sdílená cache nepoužila pro ostatní.
+
+## `Vary` je hranice cache klíče
+
+Hlavička `Vary` říká cache, které request hlavičky ovlivnily podobu odpovědi. MDN uvádí typický příklad content negotiation: pokud odpověď závisí na `Accept-Encoding`, `Accept-Language` nebo jiné hlavičce, cache musí držet oddělené varianty.
+
+V praxi se `Vary` používá často u komprese, jazykových verzí a někdy u autorizace nebo cookies. Jenže tady pozor: `Vary: Cookie` může udělat cache skoro nepoužitelnou, protože každý jiný cookie stav vytvoří jinou variantu. `Vary: Authorization` zase dává smysl jen tam, kde přesně víš, jak se sdílená cache chová k autorizovaným odpovědím.
+
+Lepší produktový postup:
+
+- Veřejný obsah drž opravdu veřejný: žádné personalizované drobky v HTML.
+- Jazyk řeš stabilní URL strukturou, pokud to jde (`/cs/`, `/en/`), ne jen tichým vyjednáváním podle hlavičky.
+- Přihlášený stav odděl od veřejného HTML přes malý soukromý endpoint.
+- U každé odpovědi, která používá `Vary`, napiš do cache karty proč.
+
+Špatný signál: `Vary` roste, protože nikdo nechce rozhodnout, co je veřejné a co personalizované. Dobrá cache politika má méně magie a víc jasných hranic.
+
+## Veřejné assety cacheuj tvrdě, ale verzuj je
+
+Nejjednodušší výkonový zisk bez privacy rizika je dlouhá cache pro statické assety s obsahem v názvu souboru. Pokud máš `app.8f3a1c.js`, můžeš ho poslat s dlouhým `max-age` a `immutable`, protože při změně build vytvoří nový soubor. Uživatel dostane rychlé načtení a ty neohrožuješ zákaznická data.
+
+Pravidla pro assety:
+
+- Název souboru obsahuje hash obsahu.
+- HTML odkazuje na aktuální hashed soubory.
+- Staré assety zůstávají dostupné aspoň po dobu cache TTL.
+- Assety neobsahují vložená zákaznická data.
+- Source mapy nejsou veřejné, pokud obsahují interní informace.
+
+Naopak necacheuj dlouho soubor typu `app.js` bez hashování. Jakmile ho změníš, část uživatelů může mít starý JavaScript proti novému HTML nebo API. Výsledkem je produktový Frankenstein: trochu starý frontend, trochu nový backend a hodně nadávek v supportu.
+
+## API cache řeš podle endpointu, ne frameworkového defaultu
+
+Frameworky a reverse proxy často nastaví nějaký default. Ten může být rozumný pro veřejný web, ale ne pro SaaS API. U API endpointů rozhoduj podle účelu:
+
+- `GET /api/me`: personalizované, obvykle `no-store` nebo `private, no-cache`.
+- `GET /api/invoices`: zákaznická data, typicky `no-store`.
+- `GET /api/public/pricing`: veřejné, může mít krátkou veřejnou cache.
+- `GET /api/public/status`: veřejné, krátká cache s jasnou expirací.
+- `POST /api/export`: odpověď s job ID může být necacheovatelná; stažený export `no-store`.
+
+U endpointů s `Authorization` hlavičkou buď konzervativní. RFC 9111 popisuje pravidla pro HTTP cache, ale produktově je bezpečnější říct: pokud endpoint potřebuje identitu uživatele, nesmí ho omylem držet sdílená cache. Sdílené cacheování autorizovaných odpovědí povoluj jen u výjimek, které mají test, dokumentaci a jasně veřejný obsah.
+
+## Testuj hlavičky stejně jako UI text
+
+Cache politika není něco, co „nějak vypadne“ z deploymentu. Testuj ji. U kritických rout stačí jednoduchý seznam URL a očekávaných hlaviček.
+
+Příklad kontroly přes shell:
+
+```bash
+curl -I https://example.com/dashboard
+curl -I https://example.com/assets/app.8f3a1c.js
+curl -I https://example.com/api/me
+```
+
+U každé odpovědi zkontroluj:
+
+- `Cache-Control`
+- `Vary`
+- `ETag` nebo `Last-Modified`, pokud používáš revalidaci
+- `Set-Cookie`, pokud odpověď nastavuje session nebo preference
+- zda se personalizovaná odpověď neliší jen obsahem, ale i cache politikou
+
+Pro malý tým je ideální přidat cache kontrolu do smoke testů po deployi. Nemusí to být obří testovací kosmodrom. Stačí hlídat, že `/dashboard` nikdy nezačne vracet `public, max-age=...` a že hashed assety mají dlouhou cache.
+
+## Logout a stará cache
+
+OWASP připomíná důležitou věc: nastavení `no-store` brání budoucímu ukládání compliant cache, ale samo nevymaže odpovědi, které už někde uložené jsou. U odhlášení proto řeš i klientský stav: cookies, storage a případně cache pro daný origin. Prohlížeče podporují hlavičku `Clear-Site-Data`, která umí při odhlášení vyčistit části uložených dat pro origin. Používej ji opatrně, protože může ovlivnit i legitimní offline nebo cache chování.
+
+Praktický logout checklist:
+
+- Server zneplatní session nebo refresh token.
+- Session cookie má správné expirační nastavení.
+- Citlivé stránky mají `Cache-Control: no-store`.
+- Klient smaže lokální stav, který obsahuje uživatelská data.
+- Pokud používáš `Clear-Site-Data`, otestuj dopad na login, preference a offline režim.
+
+Privacy-first pointa: odhlášení není jen změna tlačítka na „Přihlásit“. Je to ukončení schopnosti zařízení zobrazit chráněná data bez nové autorizace.
+
+## Příklad: B2B SaaS s veřejným webem a dashboardem
+
+Firma provozuje web s blogem, dokumentací a přihlášeným dashboardem pro zákazníky. Chce zrychlit načítání a snížit náklady, ale nechce riskovat únik dat.
+
+Rozumný návrh:
+
+- Landing page a blog: `Cache-Control: no-cache` nebo krátký `max-age` podle redakčního workflow.
+- Hashed CSS/JS: `Cache-Control: public, max-age=31536000, immutable`.
+- Veřejné obrázky v blogu: delší veřejná cache, pokud se nemění pod stejnou URL.
+- Dashboard HTML: `Cache-Control: no-store` nebo `private, no-cache` podle citlivosti obsahu.
+- API s fakturami, uživateli, rolemi a exporty: `Cache-Control: no-store`.
+- Veřejný status endpoint: krátká veřejná cache, například desítky sekund, aby výpadek nebyl schovaný příliš dlouho.
+- Admin a support rozhraní: `no-store`, protože obsahuje provozní a zákaznická data.
+
+Výsledek: web je rychlý tam, kde to neohrožuje data, a konzervativní tam, kde by chyba znamenala incident. Přesně takhle má vypadat nudná infrastruktura. Nudná infrastruktura je kompliment.
+
+## Checklist: cache bez datového průvanu
+
+- Má každá hlavní route přiřazený typ odpovědi: veřejná, personalizovaná, citlivá, asset?
+- Mají citlivé odpovědi `Cache-Control: no-store`?
+- Jsou personalizované odpovědi chráněné před sdílenou cache (`private` nebo `no-store` podle rizika)?
+- Jsou veřejné statické assety verzované hashem a cacheované dlouho?
+- Neobsahuje veřejné HTML přihlášené jméno, tenant název nebo jiný personalizovaný drobek?
+- Je `Vary` použitý vědomě, ne jako kouřová clona?
+- Kontrolují smoke testy cache hlavičky u kritických URL?
+- Řeší logout nejen session na serveru, ale i starý klientský stav?
+- Má tým zapsané výjimky, kde se cacheuje autorizovaná odpověď?
+- Existuje rollback plán, pokud nová cache politika rozbije frontend nebo ukáže špatný obsah?
+
+## Mini šablona cache karty
+
+```md
+Route / endpoint:
+Vlastník:
+Typ odpovědi: veřejná / personalizovaná / citlivá / asset / veřejná drahá
+
+Obsah:
+- Obsahuje osobní data?
+- Obsahuje tenant data?
+- Obsahuje token, secret nebo jednorázový odkaz?
+- Nastavuje cookie?
+
+Cache politika:
+- Cache-Control:
+- Vary:
+- ETag / Last-Modified:
+- Sdílená cache povolena: ano/ne
+- Prohlížečová cache povolena: ano/ne
+
+Bezpečnost:
+- Proč je politika bezpečná:
+- Co by znamenal špatný cache hit:
+- Testovací URL:
+- Smoke test:
+
+Provoz:
+- Kdo smí změnit TTL:
+- Jak se invaliduje:
+- Rollback:
+- Datum další kontroly:
+```
+
+## Zdroje
+
+- [MDN: Cache-Control header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control)
+- [MDN: HTTP caching](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching)
+- [MDN: Vary header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Vary)
+- [RFC 9111: HTTP Caching](https://www.rfc-editor.org/rfc/rfc9111.html)
+- [OWASP Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
+- [OWASP Web Cache Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Web_Cache_Security_Cheat_Sheet.html)
+
 # Pracovní log
+- 2026-10-07: Doplněna příloha „HTTP cache bez úniku osobních dat“ s rozdělením odpovědí podle citlivosti, praktickými `Cache-Control` vzory, vysvětlením `no-store`, `private`, `no-cache` a `Vary`, pravidly pro verzované assety, API endpointy, logout, smoke testy, B2B SaaS příkladem, cache checklistem, vyplnitelnou cache kartou a ověřenými zdroji MDN, RFC 9111 a OWASP.
+
 - 2026-10-07: Doplněna příloha „Rate limiting a abuse ochrana bez plošného fingerprintingu“ s mapou zneužití podle endpointů, vrstvenými limity podle účelu, srozumitelnými `429` odpověďmi, API dokumentací pro retry/backoff, opatrností u CAPTCHA, nákladovými limity pro AI funkce, privacy-first logováním, B2B SaaS příkladem, checklistem, rate limit kartou a ověřenými zdroji OWASP, MDN a IETF.
 
 - 2026-10-07: Doplněna navazující příloha „Remember-me a správa zařízení bez věčného přihlášení“ s oddělením běžné session od zapamatovaného zařízení, hashovanými tokeny, rotací, reuse detekcí, step-up ověřením pro citlivé akce, odhlášením všech zařízení, privacy-first pravidly pro device metadata, příkladem účetního SaaS, checklistem a ověřenými zdroji OWASP, MDN a NIST.
