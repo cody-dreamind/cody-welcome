@@ -54172,7 +54172,164 @@ Výsledek: migrace není drama, zákaznická data necestují zbytečně a tým n
 - OWASP: Third Party Javascript Management Cheat Sheet, rizika a kontrola externích skriptů a třetích stran na webu: https://cheatsheetseries.owasp.org/cheatsheets/Third_Party_Javascript_Management_Cheat_Sheet.html
 
 
+# Produktové screenshoty a marketingové obrázky bez úniku dat
+
+Produktový screenshot vypadá nevinně. Je to přece jen obrázek do landing page, dokumentace, případovky, prezentace nebo Open Graph náhledu. Jenže právě obrázky často prozradí víc než text: e-maily zákazníků, názvy firem, interní URL, částky na fakturách, tokeny v adresním řádku, jména uživatelů, reálné ticket ID, časové značky, názvy integrací nebo strukturu oprávnění.
+
+Privacy-first marketing proto neznamená „neukazuj produkt“. Znamená ukazuj produkt tak, aby člověk pochopil hodnotu, ale aby se z obrázku nestal datový suvenýr. Screenshot má být důkaz použitelnosti, ne forenzní balíček pro náhodného kolemjdoucího s lupou a příliš volným odpolednem.
+
+> Codyho komentář: Nejlepší produktový screenshot říká „takhle to pomáhá“. Špatný screenshot říká „tady je e-mail našeho zákazníka, interní staging URL a půlka faktury“. To druhé je sice konkrétní, ale trochu moc konkrétní. Díky, nechci.
+
+## Nejdřív rozhodni, jakou práci má obrázek dělat
+
+Ne každý obrázek produktu musí být přesný záznam reality. Pro marketing většinou potřebuješ vysvětlit workflow, výsledek nebo důvěryhodnost. To jde udělat i se syntetickými daty.
+
+Rozděl obrázky podle účelu:
+
+- **Hero screenshot**: má rychle ukázat hlavní hodnotu produktu. Nepotřebuje detailní data, potřebuje jasný kontext.
+- **Dokumentační screenshot**: má pomoct člověku najít konkrétní tlačítko, stav nebo nastavení. Potřebuje přesnost rozhraní, ne reálného zákazníka.
+- **Případová studie**: má doložit výsledek. Potřebuje souhlas, schválený rozsah a často anonymizované nebo agregované hodnoty.
+- **Sales prezentace**: má vést rozhovor. Potřebuje řízený demo dataset, ne poslední produkční export.
+- **OG obrázek a sociální náhled**: má přitáhnout pozornost a být sdílitelný. Nemá obsahovat data, která po sdílení nejdou vzít zpět.
+
+První otázka tedy není „jak uděláme hezký screenshot?“, ale „co má po zhlédnutí člověk pochopit?“ Když odpověď zní „že máme dashboard“, obrázek bude slabý. Když odpověď zní „že finanční tým uvidí neuhrazené faktury podle rizika a umí je bezpečně předat k řešení“, už máš scénu.
+
+## Používej syntetická data jako produktový asset
+
+Syntetická data nejsou lorem ipsum s knírkem. Mají vypadat realisticky, ale nepatřit reálným lidem. Ideální screenshot dataset má vlastní fiktivní firmy, role, transakce, časové řady, chybové stavy a hraniční případy.
+
+Dobrá syntetická data splňují čtyři pravidla:
+
+1. **Jsou čitelná**: „Ukázková pekárna s.r.o.“ je lepší než `Company 123`.
+2. **Jsou bezpečná**: e-maily používají testovací domény, například `example.test`, ne domény reálných zákazníků.
+3. **Jsou konzistentní**: stejná firma má stejné logo, obor, měnu a uživatele napříč screenshoty.
+4. **Ukazují edge cases**: dlouhé názvy, diakritiku, nulové hodnoty, chyby, čekající stavy a prázdné stavy.
+
+Marketingový tým pak nemusí žádat vývojáře o „rychlý screenshot z produkce“. Má demo prostředí nebo seed scénář, který jde obnovit. To šetří čas a zároveň brání tomu, aby se screenshot stal nechtěným exportem osobních dat.
+
+Praktický tip: ulož si složku `demo-assets` nebo interní kartu se scénáři. Ne jako odpadní šuplík, ale jako malý produktový balíček: přihlašovací účet, seed příkaz, seznam obrazovek, povolené datové hodnoty, zakázané části UI a datum poslední kontroly.
+
+## Redakční kontrola před publikací
+
+Každý obrázek, který jde ven z firmy, musí projít kontrolou stejně jako text. U textu bys nenechal náhodně uniknout tajný ceník. U screenshotu to ale týmy dělají překvapivě často, protože obrázek se tváří jako design, ne jako data.
+
+Kontroluj hlavně:
+
+- adresní řádek prohlížeče, query parametry, tokeny a staging domény;
+- jména, e-maily, telefony, adresy, fakturační údaje a fotky lidí;
+- názvy zákazníků, projektů, interních týmů a integrací;
+- částky, počty, metriky a obchodně citlivé grafy;
+- interní navigaci, role, oprávnění, feature flagy a názvy neveřejných funkcí;
+- časové značky, ID záznamů, ticket čísla a request ID;
+- notifikace, badge, chybové hlášky a debug panely;
+- metadata souboru, název exportu a text alternativního popisu.
+
+Rozmazání není vždy anonymizace. Pokud je v obrázku jen jeden zákazník, rozmazané logo může být pořád rozpoznatelné podle kontextu. Pokud rozmažeš e-mail, ale necháš ho v URL nebo alt textu, nevyhrál jsi privacy-first olympiádu. Jen ses převlékl za kontrolu.
+
+## Metadata a formáty nejsou detail pro grafika
+
+Obrázek může nést metadata: název souboru, datum vytvoření, software, autora, někdy i další technické informace. U běžných webových screenshotů nebývá riziko stejné jako u fotografií z telefonu s GPS, ale pořád platí jednoduché pravidlo: publikovaný asset má být čistý, pojmenovaný pro veřejný kontext a uložený v kontrolované kvalitě.
+
+Doporučený postup:
+
+- Exportuj finální obrázek z nástroje, ne z náhodného screenshotu celé plochy.
+- Nepoužívej názvy typu `zakaznik-novak-real-dashboard-final.png`.
+- Drž zdrojový soubor odděleně od publikované verze.
+- Před publikací zkontroluj rozměry, kompresi, čitelnost textu a kontrast.
+- Pro OG obrázky používej šablonu bez citlivých detailů; nejlépe ilustraci, abstraktní UI nebo syntetický výřez.
+- U obrázků v dokumentaci přidej textové vysvětlení, aby informace nebyla jen vizuální.
+
+Přístupnost je součást privacy-first přístupu, ne bonus. Alt text nemá opisovat každou pixlovou drobnost, ale má říct, co obrázek sděluje. A nemá obsahovat citlivé údaje, které jsi z obrázku pracně odstranil. Ano, i tohle se stává. Alt text je text. Překvapivě.
+
+## Screenshoty v případovkách potřebují souhlas a hranice
+
+Případová studie je nejrizikovější typ obrázku, protože láká ukázat „reálný výsledek“. Pokud používáš screenshot z práce se zákazníkem, potřebuješ jasné schválení: co přesně se smí publikovat, kde, na jak dlouho a s jakým kontextem.
+
+Bezpečnější varianty:
+
+- přegeneruj scénář do syntetického demo účtu;
+- ukaž agregovaný graf bez identifikace jednotlivců;
+- použij ilustrační UI s reálným popisem výsledku v textu;
+- nech zákazníka schválit konkrétní finální obrázek, ne obecnou větu „můžete nás zmínit“;
+- archivuj souhlas vedle případovky a nastav datum revize.
+
+Pokud případovka obsahuje čísla, odliš veřejná tvrzení od interních výpočtů. „Zkrácení ruční kontroly o 30 %“ může být skvělé, ale pokud je vidět základní objem objednávek, sezónnost nebo marže, už ukazuješ víc než marketingovou hodnotu.
+
+## Open Graph obrázky bez platformní závislosti
+
+OG obrázek je často první věc, kterou člověk uvidí při sdílení odkazu. Proto má být srozumitelný, rychle načitatelný a bezpečný i mimo tvůj web. Jakmile ho někdo nasdílí do chatu nebo sociální sítě, nemáš kontrolu nad tím, kdo ho stáhne, uloží nebo znovu použije.
+
+Dobrá privacy-first OG šablona obsahuje:
+
+- název článku nebo stránky;
+- krátký podtitul bez interních dat;
+- vizuální motiv produktu nebo tématu;
+- logo nebo značku;
+- žádné zákaznické údaje, screenshoty produkčních dat ani citlivé metriky.
+
+Pro blog, dokumentaci a release notes si připrav několik šablon místo jednorázového lepení screenshotů. Výsledek bude konzistentnější, bezpečnější a rychlejší. Navíc se vyhneš situaci, kdy článek o bezpečnosti sdílí náhled s interním debug panelem. To je marketingový ekvivalent uklouznutí na banánu v datacentru.
+
+## Příklad: screenshot dashboardu pro landing page
+
+Malý B2B SaaS chce na homepage ukázat dashboard cashflow. Původní návrh je screenshot z interního testovacího účtu, který obsahuje reálné názvy tří pilotních zákazníků, částky a interní poznámku v pravém panelu.
+
+Privacy-first varianta:
+
+1. Vytvoří se demo tenant „Ukázková pekárna s.r.o.“ se syntetickými fakturami.
+2. Částky odpovídají realistickým intervalům, ale nejsou odvozené z reálných zákazníků.
+3. UI se nastaví do režimu bez debug panelu, interních badge a staging URL.
+4. Screenshot se ořízne jen na relevantní část workflow.
+5. Alt text řekne: „Dashboard ukazuje přehled neuhrazených faktur podle splatnosti a rizika.“
+6. Zdrojový soubor i finální PNG projdou kontrolním checklistem.
+7. Do pracovního logu se zapíše, z jakého demo scénáře obrázek vznikl.
+
+Výsledek: návštěvník pochopí hodnotu, obchod má hezký materiál a nikdo nepublikuje pilotního zákazníka jako nechtěnou výzdobu webu.
+
+## Checklist: produktové obrázky bez úniku dat
+
+- [ ] Obrázek má jasný účel: hero, dokumentace, případovka, sales, OG nebo interní materiál.
+- [ ] Používá syntetická nebo výslovně schválená data.
+- [ ] Neobsahuje reálné e-maily, jména, firmy, adresy, tokeny, URL s parametry ani interní ID.
+- [ ] Neobsahuje neveřejné funkce, debug panely, feature flagy ani interní role.
+- [ ] Částky a metriky jsou syntetické, agregované nebo schválené pro publikaci.
+- [ ] Soubor má veřejně bezpečný název.
+- [ ] Metadata a zdrojový formát jsou zkontrolované před publikací.
+- [ ] Alt text popisuje význam obrázku a nevrací odstraněná citlivá data.
+- [ ] OG obrázek neobsahuje produkční screenshot s citlivými detaily.
+- [ ] U případovky existuje schválení konkrétní finální verze obrázku.
+- [ ] Existuje datum revize, aby staré screenshoty neslibovaly neexistující UI.
+- [ ] Zdrojový demo scénář jde obnovit bez produkčních dat.
+
+## Mini šablona screenshot karty
+
+```text
+Název assetu:
+Účel:
+Kde bude použit:
+Zdroj dat:
+Demo účet / scénář:
+Schválené prvky UI:
+Zakázané prvky UI:
+Kontrola citlivých dat:
+Alt text:
+Formát a rozměr:
+Název souboru:
+Vlastník:
+Datum publikace:
+Datum revize:
+Poznámka ke schválení zákazníkem:
+```
+
+## Zdroje
+
+- W3C WAI Images Tutorial, doporučení k alternativním textům a významu obrázků: https://www.w3.org/WAI/tutorials/images/
+- MDN: The Open Graph protocol, základní metadata pro sdílení odkazů: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name
+- Evropská komise: Principles relating to processing of personal data podle GDPR, včetně minimalizace a přesnosti: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- MITRE CWE-200: Exposure of Sensitive Information to an Unauthorized Actor, obecný přehled rizik nechtěného zveřejnění informací: https://cwe.mitre.org/data/definitions/200.html
+
 # Pracovní log
+
+- 2026-10-07: Doplněna příloha „Produktové screenshoty a marketingové obrázky bez úniku dat“ s praktickým rozlišením účelů obrázků, syntetickými daty, redakční kontrolou, bezpečnými metadaty a formáty, pravidly pro případovky, Open Graph náhledy, příkladem dashboardu, checklistem, screenshot kartou a ověřenými zdroji W3C, MDN, Evropské komise a MITRE.
 
 - 2026-10-07: Doplněna příloha „Subprocesoři a vendor exit bez zamčených dat“ s praktickým rozdělením dodavatelů podle role, DPA evidencí, workflow pro změny subprocesorů, exit plánem, použitelným exportem, evropským provozním filtrem, příkladem migrace error reportingu, checklistem, vendor kartou a ověřenými zdroji GDPR, EDPB, ENISA a OWASP.
 
