@@ -50503,7 +50503,214 @@ Výsledek: support neřeší ruční opravy, zákazník ví, co se stalo, a prod
 - [RFC 4180: Common Format and MIME Type for CSV Files](https://datatracker.ietf.org/doc/html/rfc4180)
 - [MDN: Content-Disposition header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Disposition)
 
+# Auditní logy bez tajného deníku o zákaznících
+
+Auditní log není skládka všeho, co aplikace viděla. Je to důkazní stopa pro konkrétní rozhodnutí: kdo provedl citlivou akci, kdy se to stalo, v jakém rozsahu, s jakým výsledkem a podle čeho to později bezpečně ověříš. Jakmile do auditního logu začneš ukládat celé request body, texty support ticketů, exportované řádky nebo „pro jistotu“ obsah formulářů, už nemáš audit. Máš druhou databázi osobních dat, akorát hůř navrženou, hůř zabezpečenou a obvykle s delší retencí. Gratuluju, postavil jsi si compliance strašidelný sklep.
+
+Privacy-first auditní log má opačnou filozofii: zaznamenat dost informací pro bezpečnost, odpovědnost a provozní diagnostiku, ale co nejméně obsahu zákaznických dat. Cílem není vědět o uživateli všechno. Cílem je umět po incidentu, reklamaci nebo interní kontrole říct: „Tahle akce proběhla, provedl ji tento oprávněný subjekt, dotkla se tohoto typu objektu, dopad byl takový a tady je korelační stopa.“
+
+> Codyho komentář: Auditní log má být jako dobrý svědek — pamatuje si podstatné okolnosti, ale nenosí domů fotokopie cizích dokladů.
+
+## Nejdřív odděl auditní log od běžných logů
+
+Běžný aplikační log pomáhá vývojářům ladit provoz: výjimky, latence, stav fronty, odpovědi externích služeb. Auditní log pomáhá doložit citlivé akce: změnu oprávnění, export dat, přihlášení do adminu, změnu fakturačních údajů, spuštění hromadné operace nebo ruční zásah supportu. Když tyhle dva světy smícháš, vznikne chaos: vývojáři potřebují přístup k debug logům, ale nemají automaticky číst auditní historii administrátorských zásahů.
+
+Prakticky si zaveď tři vrstvy:
+
+- **Provozní logy:** technický stav systému, chyby, fronty, latence, request ID.
+- **Bezpečnostní logy:** přihlášení, změny relací, podezřelé pokusy, rate limit, blokované akce.
+- **Auditní logy:** významné byznys a admin akce, které mění stav, přístup nebo rozsah dat.
+
+Každá vrstva má mít vlastní účel, vlastní přístupy a vlastní retenci. Tím zabráníš tomu, aby se „jen potřebuju najít bug“ změnilo v neomezený přístup ke stopám zákaznických operací.
+
+## Definuj auditovatelné události podle dopadu
+
+Neaudituj každé kliknutí. Audituj akce, které mají bezpečnostní, finanční, datový nebo smluvní dopad. Pokud je událost užitečná jen pro produktovou analytiku, nepatří do auditního logu. Pokud se bez ní nedá dohledat citlivý zásah, patří tam skoro jistě.
+
+Typická minimální sada pro malý B2B SaaS:
+
+- přihlášení do administrace a změny MFA,
+- vytvoření, změna nebo odebrání role,
+- pozvání, deaktivace nebo smazání uživatele,
+- export dat nebo spuštění hromadné akce,
+- změna fakturačních údajů, tarifu nebo platebního nastavení,
+- změna integračního klíče, webhooku nebo callback URL,
+- ruční zásah supportu do zákaznického účtu,
+- spuštění break-glass přístupu,
+- změna retenčního nebo bezpečnostního nastavení.
+
+Dobrý test: kdyby se zákazník zeptal „kdo to změnil a proč?“, umíš odpovědět bez hrabání v raw databázi a bez čtení obsahu, který s otázkou nesouvisí?
+
+## Loguj kontext, ne obsah
+
+Auditní záznam má být stručný a strukturovaný. Vyhni se volnému textu, do kterého se může omylem propsat heslo, token, zpráva zákazníka nebo interní poznámka. Každá událost by měla mít stabilní schema a povolené hodnoty.
+
+Užitečná pole:
+
+- `event_type`: například `user.role_changed`, `data.export_requested`, `admin.break_glass_started`.
+- `actor_type`: uživatel, administrátor, systém, integrace.
+- `actor_id`: interní identifikátor, ne e-mail jako hlavní klíč.
+- `tenant_id`: zákaznický prostor, kterého se akce týká.
+- `target_type` a `target_id`: typ a ID objektu, ne jeho obsah.
+- `action_result`: úspěch, odmítnuto, částečně dokončeno, selhalo.
+- `reason_code`: volitelný kód důvodu, pokud ho workflow vyžaduje.
+- `request_id` nebo `correlation_id`: vazba na provozní logy.
+- `created_at`: čas ze serveru, ne z klientského prohlížeče.
+- `ip_prefix` nebo rizikový signál: pouze pokud je to odůvodněné a máš jasnou retenci.
+
+Co do auditního logu typicky nepatří: hesla, tokeny, session ID, celé hlavičky požadavku, celé request/response body, texty zpráv, obsah dokumentů, celé exportované řádky, platební údaje a cokoliv, co by při úniku logů bolelo víc než samotný původní incident.
+
+## Navrhni log jako append-only, ale ne jako věčné úložiště
+
+Auditní log má být odolný proti dodatečné manipulaci. To neznamená, že má být nekonečný. Znamená to, že běžný administrátor nemá mít možnost záznam přepsat nebo potichu smazat tak, aby stopa zmizela. Pro malé týmy často stačí kombinace: zápis pouze přes backend, omezené čtení, oddělená role pro administraci logů, pravidelný export hashů nebo záloh a alert na pokus o mazání mimo retenční job.
+
+Retenci nastav podle účelu. Bezpečnostní a auditní logy často potřebují delší lhůtu než debug logy, ale pořád musíš umět vysvětlit proč. Provozní chyby můžeš držet týdny, audit citlivých admin akcí měsíce až roky podle smluvního a bezpečnostního kontextu. Neopisuj cizí tabulku. Napiš si vlastní retenční kartu: účel, typ událostí, kdo čte, jak dlouho, kde se ukládá, jak se maže a co se děje se zálohami.
+
+## Přístup k auditům je také auditovatelná akce
+
+Kdo čte auditní logy, vidí mapu citlivých událostí. Proto i čtení auditů musí mít pravidla. Support nemá procházet všechny auditní záznamy zákazníka jen proto, že řeší drobný dotaz. Vývojář nepotřebuje vidět historii fakturačních změn, když ladí frontu. Zakladatel nepotřebuje export všech auditů do CSV na notebook „pro jistotu“. Ano, i zakladatelé umí dělat nepořádek, jen tomu říkají rychlé rozhodování.
+
+Praktický model:
+
+- běžný support vidí jen omezený audit konkrétního ticketu nebo zákazníka,
+- administrátor bezpečnosti vidí širší auditní pohled,
+- vývojář dostává korelační ID a technické logy bez obsahu auditní historie,
+- export auditů vyžaduje důvod, schválení a vlastní auditní záznam,
+- break-glass čtení má časové omezení a povinné zdůvodnění.
+
+## Události pojmenuj stabilně a lidsky
+
+Auditní log není jen pro stroje. Po incidentu ho bude číst člověk, který potřebuje rychle pochopit pořadí událostí. Nepiš tedy `update_success` bez kontextu. Piš `billing.vat_id_changed`, `team.member_removed`, `integration.webhook_secret_rotated`. Stabilní názvy událostí pomáhají testům, alertům, dokumentaci i zákaznickému vysvětlení.
+
+U každé události si napiš krátkou definici:
+
+- kdy vzniká,
+- kdo ji může vyvolat,
+- jaký objekt mění,
+- která pole jsou povinná,
+- co se nikdy nesmí logovat,
+- jak dlouho se drží,
+- kdo ji smí číst.
+
+Tahle definice se hodí do pull requestu stejně jako databázová migrace. Když někdo přidává novou citlivou akci a auditní event není popsaný, změna není hotová.
+
+## Příklad: support změnil zákazníkovi roli
+
+Špatně:
+
+```json
+{
+  "message": "Ondrej changed user cfo@example.com from admin to viewer because customer asked in ticket: 'Prosím odeberte Martinovi přístup, odchází z firmy...'"
+}
+```
+
+Problém: e-mail jako primární identifikátor, citace ticketu, osobní důvod, volný text a žádná jasná struktura.
+
+Lépe:
+
+```json
+{
+  "event_type": "team.member_role_changed",
+  "actor_type": "support_admin",
+  "actor_id": "adm_123",
+  "tenant_id": "ten_456",
+  "target_type": "team_member",
+  "target_id": "mem_789",
+  "from_role": "admin",
+  "to_role": "viewer",
+  "reason_code": "customer_request",
+  "approval_id": "apr_234",
+  "ticket_id": "tic_567",
+  "request_id": "req_abc",
+  "action_result": "success",
+  "created_at": "2026-10-07T03:00:00Z"
+}
+```
+
+Tady audit zachytí, co je potřeba: kdo, v jakém tenantovi, jaký typ objektu, jaká změna, podle jakého důvodu a přes jaké schválení. Obsah ticketu zůstává v ticket systému s vlastní retencí a přístupovými pravidly.
+
+## Testuj auditní logy jako produktovou funkci
+
+Audit není hotový tím, že se něco někam zapisuje. Otestuj, že log vznikne při úspěchu i odmítnutí, že neobsahuje zakázaná pole, že má korelační ID, že ho správné role vidí a špatné role nevidí, že export auditů nejde spustit bez oprávnění a že retenční job maže podle pravidel. Přidej test i na log injection: uživatelský vstup nesmí rozbít strukturu logu ani přidat falešný řádek.
+
+U citlivých akcí dělej review auditního eventu stejně jako review změny oprávnění. Otázky do pull requestu:
+
+- Jaká auditní událost vzniká?
+- Které pole je korelační ID?
+- Co se výslovně neloguje?
+- Kdo uvidí záznam v admin UI?
+- Jaká je retence?
+- Jak se pozná neúspěšný pokus?
+
+## Checklist: auditní logy bez datového deníčku
+
+- [ ] Máme oddělené provozní, bezpečnostní a auditní logy.
+- [ ] Auditujeme jen akce se skutečným dopadem na data, přístup, finance nebo smlouvy.
+- [ ] Každý auditní event má stabilní název, schema a povinná pole.
+- [ ] Do auditů neukládáme hesla, tokeny, session ID, celé requesty, obsah dokumentů ani texty ticketů.
+- [ ] Záznam obsahuje identifikátory a korelační ID místo kopírování obsahu.
+- [ ] Přístup ke čtení auditů je omezený podle role a sám se audituje.
+- [ ] Export auditů vyžaduje oprávnění, důvod a vlastní auditní záznam.
+- [ ] Retence je popsaná podle účelu, ne podle „disk je levný“.
+- [ ] Retenční job je testovaný a počítá se zálohami.
+- [ ] Testy ověřují, že zakázaná citlivá pole se do logu nepropíšou.
+
+## Mini šablona auditní karty
+
+## Událost
+
+- Název eventu:
+- Účel:
+- Typ akce:
+- Riziko při chybějícím auditu:
+
+## Trigger
+
+- Kdy vzniká:
+- Kdo ji může vyvolat:
+- Vzniká i při odmítnutí:
+- Vazba na workflow nebo schválení:
+
+## Pole
+
+- Povinná pole:
+- Volitelná pole:
+- Korelační ID:
+- Zakázaná pole:
+- Maskování nebo pseudonymizace:
+
+## Přístup
+
+- Kdo smí číst:
+- Kdo smí exportovat:
+- Jak se audituje čtení:
+- Break-glass pravidlo:
+
+## Retence
+
+- Doba uchování:
+- Důvod uchování:
+- Mazací proces:
+- Chování v zálohách:
+
+## Kontrola
+
+- Test na vznik eventu:
+- Test na citlivá pole:
+- Test oprávnění:
+- Alert nebo report:
+
+## Zdroje
+
+- [OWASP Cheat Sheet Series: Logging](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- [OWASP Cheat Sheet Series: Logging Vocabulary](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Vocabulary_Cheat_Sheet.html)
+- [OWASP DevSecOps Guideline: Logging and Monitoring](https://owasp.github.io/DevSecOpsGuideline/2-Process/2-7-Operate/2-7-2-Logging-and-Monitoring/)
+- [NIST SP 800-92: Guide to Computer Security Log Management](https://csrc.nist.gov/pubs/sp/800/92/final)
+- [EDPB: Accountability and compliance tools](https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/accountability_en)
+
 # Pracovní log
+
+- 2026-10-07: Doplněna příloha „Auditní logy bez tajného deníku o zákaznících“ s rozdělením provozních, bezpečnostních a auditních logů, výběrem auditovatelných událostí podle dopadu, strukturovaným schematem bez obsahu zákaznických dat, pravidly pro append-only zápis, přístupy, retenci, testování, příkladem změny role, checklistem, auditní kartou a ověřenými zdroji OWASP, NIST a EDPB.
 
 - 2026-10-07: Doplněna příloha „Importy dat bez uploadového hororu a duplicit“ s účelovým návrhem importu, bezpečným uploadem, explicitním mapováním sloupců, řádkovou validací, CSV/formula injection pravidly, preview před zápisem, idempotentním stavovým modelem, deduplikací, privacy-first logováním, checklistem, importní kartou a ověřenými zdroji OWASP, RFC 4180 a MDN.
 
