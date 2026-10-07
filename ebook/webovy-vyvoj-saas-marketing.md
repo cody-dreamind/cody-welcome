@@ -51072,7 +51072,186 @@ Kontrola:
 - [OWASP Cheat Sheet Series: Content Security Policy](https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html)
 - [EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en)
 
+# Příloha: Session cookies bez věčného přihlášení a sledovacího ocásku
+
+Přihlášení je pro SaaS trochu jako klíče od kanceláře. Když jsou moc přísné, lidi se vztekají, protože musí každých deset minut stát před dveřmi. Když jsou moc volné, kdokoli s kopií klíče může chodit po budově a tvářit se, že „to tak bylo vždycky“. Session management proto není jen technické nastavení cookie. Je to produktové rozhodnutí o důvěře, pohodlí, riziku a datové minimalizaci.
+
+Privacy-first varianta má jednoduchý cíl: udržet uživatele přihlášeného jen tak dlouho, jak dává smysl pro jeho práci a riziko účtu, aniž by se ze session stal nenápadný sledovací identifikátor napříč webem, nástroji a marketingem. Session cookie je bezpečnostní artefakt. Není to analytická identita, reklamní publikum ani pohodlná zkratka pro „pojďme si uživatele spojit se vším, co kdy udělal“.
+
+## Rozliš krátkou session a dlouhé zapamatování zařízení
+
+První návrhová chyba je házet všechno do jedné cookie. Běžná aplikační session, refresh token, „remember me“ a zařízení pro vyšší důvěru nejsou totéž. Mají jiný účel, jinou životnost a jiný dopad při úniku.
+
+Praktické rozdělení:
+
+| Prvek | Účel | Doporučené pravidlo |
+| --- | --- | --- |
+| Session cookie | aktuální přihlášení v prohlížeči | krátká životnost, rotace po přihlášení a změně oprávnění |
+| Remember-me token | pohodlný návrat po zavření prohlížeče | samostatný náhodný token, možnost odvolání, delší ale omezená expirace |
+| CSRF token | ochrana změnových akcí | nespojovat s analytikou, pravidelně obnovovat podle formuláře nebo session |
+| Device trust | snížení tření u známého zařízení | jasně zobrazit v účtu a umožnit odebrání |
+| Admin elevation | dočasné potvrzení pro citlivé akce | krátké okno, znovu ověřit heslem nebo MFA |
+
+Když někdo zaškrtne „zůstat přihlášen“, neznamená to „měř mě navždy“. Znamená to „nechci opakovat login tak často“. Ten rozdíl je malý jen na papíře; v důvěře zákazníků je obrovský.
+
+## Cookie nastav jako bezpečnostní hranici
+
+MDN dokumentuje atributy `Secure`, `HttpOnly` a `SameSite` pro `Set-Cookie`: [MDN: Set-Cookie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie). Pro aplikační session je privacy-first základ tento:
+
+- `Secure`, aby cookie šla jen přes HTTPS,
+- `HttpOnly`, aby ji nečetl JavaScript,
+- rozumný `SameSite`, typicky `Lax` pro běžnou aplikaci a `Strict` tam, kde to nerozbije legitimní tok,
+- přesný `Path` a doména jen tam, kde cookie opravdu potřebuje platit,
+- žádné sdílení session cookie s marketingovou subdoménou,
+- náhodné, dlouhé a neodhadnutelné ID bez interního významu.
+
+OWASP v Session Management Cheat Sheet zdůrazňuje, že session ID má být generované serverem, dostatečně náhodné a nemá v sobě nést citlivá data: [OWASP Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html). Prakticky: session hodnota není místo pro e-mail, ID firmy, tarif, roli ani „dočasně zakódovaný“ JSON. Pokud token někdo uvidí, nemá z něj vyčíst nic užitečného.
+
+## Rotuj session při změně rizika
+
+Session fixation je nudný název pro velmi praktický problém: útočník se snaží přimět uživatele používat session ID, které zná. Proto po přihlášení nevylepšuj anonymní session na přihlášenou bez výměny identifikátoru. Vygeneruj nové session ID a staré zneplatni.
+
+Rotaci dělej hlavně při těchto událostech:
+
+- úspěšné přihlášení,
+- změna hesla,
+- zapnutí nebo vypnutí MFA,
+- změna role nebo oprávnění,
+- převzetí účtu administrátorem pro support režim,
+- přepnutí organizace nebo tenant kontextu,
+- návrat z externího identity provideru,
+- podezřelá změna rizika, například neobvyklá země nebo masivní počet chyb.
+
+Rotace má být pro uživatele neviditelná, dokud nejde o bezpečnostní akci. Když se role změní z běžného uživatele na admina, je fér chtít nové ověření. Když jen klikne na dashboard, nepotřebuješ z něj dělat rukojmí login formuláře.
+
+## Timeout navrhni podle práce, ne podle nálady frameworku
+
+NIST Digital Identity Guidelines rozlišují mimo jiné reauthentication pravidla podle úrovně záruky a citlivosti: [NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html). Nemusíš z malého B2B SaaS dělat bankovní bunkr, ale měl bys vědět, proč session končí právě tehdy, kdy končí.
+
+Rozumný model pro malé SaaS:
+
+- běžné čtení dashboardu: delší idle timeout, například několik hodin podle rizika,
+- změnové akce: kratší ochranné okno nebo potvrzení u citlivých akcí,
+- admin a billing: step-up ověření před změnou plateb, rolí a API klíčů,
+- veřejné nebo sdílené počítače: jasná volba „nepamatovat si zařízení“,
+- support impersonation: velmi krátká session, auditní stopa a automatické ukončení.
+
+Timeout má mít i lidský UX. U dlouhého formuláře uživatele varuj před vypršením a nabídni bezpečné obnovení, ne tiché zahození práce. Bezpečnost, která lidem maže rozpracovanou fakturaci, skončí obcházením pravidel. A obcházená bezpečnost je jen drahá dekorace.
+
+## CSRF řeš i tehdy, když máš SameSite
+
+`SameSite` pomáhá, ale není univerzální kouzelná deka. OWASP CSRF Prevention Cheat Sheet doporučuje používat ověřené obranné vzory jako synchronizer token pattern nebo signed double-submit cookie a správně rozlišovat bezpečné a změnové HTTP metody: [OWASP CSRF Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html).
+
+Praktická pravidla:
+
+- změnové akce nedělej přes `GET`,
+- u formulářů a citlivých API požadavků ověřuj CSRF token,
+- token nepřidávej do URL,
+- po odhlášení token zneplatni spolu se session,
+- u API pro externí klienty odděl cookie session od bearer token autentizace,
+- citlivé akce potvrzuj znovu i při platné session.
+
+Pro privacy-first provoz je důležité, aby CSRF token nebyl dalším univerzálním identifikátorem pro analytiku. Token má chránit akci, ne krmit produktový dashboard.
+
+## Odhlášení musí opravdu odhlásit
+
+Mnoho systémů má logout jako divadelní tlačítko: smaže cookie v prohlížeči, ale serverová session dál existuje, refresh token pořád platí a „zapamatované zařízení“ se tváří, že o ničem neví. Správné odhlášení ukončí celou autentizační cestu, kterou uživatel právě používá.
+
+Minimum pro malý SaaS:
+
+- zneplatnit serverovou session,
+- smazat session cookie s odpovídající doménou a cestou,
+- zneplatnit nebo rotovat refresh token, pokud existuje,
+- nabídnout „odhlásit všechna zařízení“,
+- ukázat seznam aktivních zařízení nebo alespoň posledních session,
+- zapsat bezpečnostní audit bez ukládání zbytečného obsahu.
+
+V účtu by měl být jednoduchý přehled: aktuální zařízení, přibližný čas poslední aktivity, možnost odebrat. IP adresy zobrazuj opatrně a neukládej je navždy jen proto, že vypadají technicky. Pro uživatele je důležitější „Chrome na notebooku, dnes 09:42“ než přesný surový identifikátor, který stejně nepozná.
+
+## Nepoužívej session jako marketingový most
+
+Session cookie nemá opouštět bezpečnostní hranici aplikace. Neposílej ji do analytiky, error trackingu, chat widgetu, heatmapy ani reklamy. Pokud potřebuješ měřit aktivitu produktu, vytvoř samostatné eventy s minimalizovaným identifikátorem, krátkou retencí a jasným účelem. Ideálně agreguj na úrovni organizace nebo anonymizované kohorty, ne podle věčné osoby.
+
+Codyho komentář: Nejhorší věta u session managementu je „ono se to bude hodit“. Hodit se může i šroubovák v kuchyni, ale to neznamená, že ho máš nechávat v každém hrnci.
+
+Privacy-first pravidlo: bezpečnostní identifikátor je jen pro bezpečnost a přihlášení. Jakmile ho začneš používat pro růstové reporty, rozmazáváš hranice účelu. A v Evropě nejsou hranice účelu jen slušnost; jsou to i praktická očekávání podle principů ochrany osobních údajů.
+
+## Příklad: B2B SaaS s billing adminem
+
+Malý SaaS má běžné uživatele, adminy organizace a billing admina. Bezpečný návrh může vypadat takto:
+
+1. Běžná session používá `Secure`, `HttpOnly`, `SameSite=Lax`, rotuje po loginu a změně role.
+2. Remember-me token je samostatný, hashovaný na serveru a uživatel ho vidí jako „zapamatované zařízení“.
+3. Dashboard má delší idle timeout, ale billing změny vyžadují step-up ověření.
+4. Změna tarifu, platebních údajů, API klíčů a rolí zapisuje auditní událost.
+5. Support impersonation má vlastní krátkou session, viditelný banner a zákaznickou stopu bez obsahu dat.
+6. Produktová analytika nikdy nedostává session ID; používá agregované eventy s krátkou retencí.
+7. Logout ukončí serverovou session a nabídne odhlášení všech zařízení.
+
+Výsledek: uživatel se nemusí přihlašovat pětkrát denně, ale citlivé akce mají přísnější režim. Pohodlí a bezpečnost se nehádají jako dva kohouti na produkčním dvorku.
+
+## Checklist: session bez sledovacího ocásku
+
+- Session cookie má `Secure`, `HttpOnly` a promyšlené `SameSite`.
+- Session ID je náhodné, bez osobních dat a bez obchodního významu.
+- Session se rotuje po loginu, změně role a citlivých autentizačních změnách.
+- Remember-me token je oddělený od běžné session.
+- Uživatel může zobrazit a odebrat aktivní nebo zapamatovaná zařízení.
+- Logout zneplatní serverovou session, ne jen smaže cookie.
+- Citlivé akce používají step-up ověření nebo krátké ochranné okno.
+- CSRF ochrana není nahrazená jen nadějí v `SameSite`.
+- Session ID se neposílá do analytiky, marketingu ani externích widgetů.
+- Audit log ukládá bezpečnostní událost, ne obsah uživatelovy práce.
+- Retence session a bezpečnostních logů má vlastníka a datum kontroly.
+
+## Mini šablona session policy
+
+```markdown
+# Session policy: [aplikace]
+
+Cookie:
+- Název:
+- Domain / Path:
+- Secure:
+- HttpOnly:
+- SameSite:
+
+Životnost:
+- Idle timeout:
+- Absolute timeout:
+- Remember-me expirace:
+- Step-up okno:
+
+Rotace:
+- Po loginu:
+- Po změně role:
+- Po změně hesla/MFA:
+- Po přepnutí organizace:
+
+Odhlášení:
+- Serverová session:
+- Refresh token:
+- Všechna zařízení:
+- Uživatelský přehled zařízení:
+
+Privacy:
+- Co se nikdy neposílá do analytiky:
+- Co se loguje pro bezpečnost:
+- Retence logů:
+- Datum další kontroly:
+```
+
+## Zdroje
+
+- [OWASP Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
+- [OWASP Cross-Site Request Forgery Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)
+- [MDN: Set-Cookie header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie)
+- [MDN: SameSite cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies#controlling_third-party_cookies_with_samesite)
+- [NIST SP 800-63B: Digital Identity Guidelines](https://pages.nist.gov/800-63-4/sp800-63b.html)
+
 # Pracovní log
+- 2026-10-07: Doplněna příloha „Session cookies bez věčného přihlášení a sledovacího ocásku“ s rozdělením session, remember-me tokenu, CSRF tokenu a device trust, bezpečným nastavením cookie atributů, rotací session, timeouty podle rizika, logout pravidly, oddělením od marketingové analytiky, B2B SaaS příkladem, checklistem, session policy šablonou a ověřenými zdroji OWASP, MDN a NIST.
+
 - 2026-10-07: Doplněna příloha „CSP reporty a security reporting bez telemetrického vysavače“ s report-only postupem, návrhem bezpečného endpointu, minimalizací ukládaných polí, oddělením od marketingové analytiky, alerty podle změn, propojením s inventářem externích zdrojů, checkout příkladem, checklistem, CSP reporting kartou a ověřenými zdroji MDN, W3C, OWASP a EDPB.
 
 - 2026-10-07: Doplněna příloha „API klíče a tokeny bez tajných suvenýrů v logu“ s rozlišením typů tokenů, bezpečným předáváním v hlavičkách, jednorázovým zobrazením secretu, scope modelem, rotací, privacy-first logováním, rate limity, checklistem, šablonou API klíč karty a ověřenými zdroji OWASP, RFC, MDN a NIST.
