@@ -50708,7 +50708,196 @@ U citlivých akcí dělej review auditního eventu stejně jako review změny op
 - [NIST SP 800-92: Guide to Computer Security Log Management](https://csrc.nist.gov/pubs/sp/800/92/final)
 - [EDPB: Accountability and compliance tools](https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/accountability_en)
 
+# Příloha: API klíče a tokeny bez tajných suvenýrů v logu
+
+API klíč vypadá jako drobnost: jeden řetězec znaků, který pošleš v hlavičce a služba pustí požadavek dál. V malém SaaS je to ale často hranice mezi „zákazník automatizuje práci“ a „někdo právě získal tichý přístup k datům“. Proto se k API klíčům nechovej jako k nastavení v administraci, ale jako k produktové bezpečnostní funkci.
+
+Dobrá zpráva: nepotřebuješ enterprise palác s deseti týmy. Potřebuješ jasný model vydávání, zobrazování, rotace, omezení oprávnění, logování a rušení. Nudné? Ano. Přesně proto to funguje. Bezpečnost má být trochu nudná; drama patří do trailerů, ne do přístupových tokenů.
+
+## Rozliš API klíč, uživatelský token a servisní účet
+
+Nejdřív si ujasni, co vlastně vydáváš. API klíč není univerzální náhrada přihlášení. OWASP u API bezpečnosti připomíná, že API klíče se hodí spíš pro identifikaci klientské aplikace nebo projektu, ne jako plnohodnotná náhrada uživatelské autentizace: [OWASP REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html).
+
+Praktické rozdělení:
+
+- Uživatelský access token zastupuje konkrétního uživatele a jeho oprávnění.
+- API klíč identifikuje integraci, projekt, zákaznický účet nebo technického klienta.
+- Servisní účet je samostatná identita pro automatizaci, která má vlastní role a vlastní auditní stopu.
+- Jednorázový nebo krátkodobý token slouží pro úzkou akci: reset, pozvánka, export, upload, potvrzení.
+
+Když to smícháš, vznikne problém při prvním incidentu. Nevíš, komu přístup patřil, jaký měl účel, proč měl tak široká práva a jestli ho můžeš vypnout bez rozbití celé firmy. To není autentizace, to je technická loterie s velmi nudným koncem.
+
+## Token patří do hlavičky, ne do URL
+
+Bearer token se běžně posílá přes HTTP hlavičku `Authorization: Bearer ...`; RFC 6750 popisuje použití bearer tokenů v OAuth 2.0 a uvádí přenos v `Authorization` hlavičce jako standardní způsob: [RFC 6750](https://datatracker.ietf.org/doc/html/rfc6750). MDN zároveň shrnuje, že hlavička `Authorization` slouží k odeslání přihlašovacích údajů pro chráněný zdroj: [MDN Authorization header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Authorization).
+
+Co z toho plyne pro malý SaaS:
+
+- neposílej API klíče v query parametrech typu `?api_key=...`,
+- nepřidávej tokeny do callback URL, které končí v historii prohlížeče, logu proxy nebo analytice,
+- nerecykluj token jako veřejný identifikátor zákazníka,
+- nevracej token v chybové odpovědi,
+- nenechávej SDK logovat celé HTTP požadavky včetně hlaviček.
+
+Když klient pošle neplatný nebo chybějící token, vrať srozumitelnou `401 Unauthorized` odpověď a u API ideálně i `WWW-Authenticate` hlavičku. MDN u `401` připomíná vazbu na `WWW-Authenticate`, aby klient věděl, jaký autentizační mechanismus se očekává: [MDN 401 Unauthorized](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/401).
+
+## Ukaž secret jen jednou
+
+API klíč zobraz uživateli pouze při vytvoření. Potom už v administraci ukazuj jen bezpečný identifikátor, název, prefix, datum vytvoření, poslední použití, rozsah oprávnění a tlačítka pro rotaci nebo zrušení.
+
+V databázi neukládej secret v čitelné podobě. Ulož hash nebo jiný ověřovací derivát podle architektury. NIST u autentizačních tajemství zdůrazňuje práci s chráněným ukládáním a kryptograficky vhodnými postupy; pro webový produkt je dobrý výchozí princip jednoduchý: pokud secret nepotřebuješ znovu zobrazit, nemá být uložen tak, aby šel z databáze rovnou přečíst: [NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html).
+
+Praktické UX:
+
+- Po vytvoření zobraz celý klíč s jasným varováním „zkopíruj teď, znovu ho neuvidíš“.
+- Přidej tlačítko „Zkopírovat“, ale neukládej kopii do podpory ani do ticketu.
+- V seznamu klíčů ukazuj například `cody_live_7K4P...9Q2A`, ne celý secret.
+- V auditním logu zaznamenej vytvoření, rotaci, změnu oprávnění a zrušení, ne hodnotu klíče.
+- Při podezření na únik nabídni rychlé zneplatnění a návod na rotaci.
+
+> Codyho komentář: Pokud support dokáže zákazníkovi poslat jeho API klíč, systém není „uživatelsky přívětivý“. Je to trezor s okénkem do ulice.
+
+## Scope je produktové rozhodnutí
+
+Nejhorší API klíč je ten, který umí všechno „pro jednoduchost“. Jednoduché je to jen do první integrace, která začne mazat data omylem. Každý klíč má mít účel a scope.
+
+Příklady scope pro B2B SaaS:
+
+| Scope | Co dovolí | Co výslovně nedovolí |
+| --- | --- | --- |
+| `read:orders` | číst objednávky a jejich stav | měnit objednávky, číst fakturační údaje mimo nutný rozsah |
+| `write:orders` | vytvářet nebo aktualizovat objednávky | mazat zákazníky, měnit role uživatelů |
+| `read:invoices` | číst faktury pro účetní export | upravovat platby, měnit billing nastavení |
+| `webhook:manage` | spravovat webhook endpointy | číst zákaznický obsah |
+| `admin:users` | správa uživatelů v účtu | používat produkt za uživatele bez auditní stopy |
+
+Scope pojmenuj podle práce, ne podle databázové tabulky. Zákazník rozumí „číst objednávky“, ne „select na tabulku orders_v2“. Interní názvy tabulek jsou krásné jen pro lidi, kteří už dlouho neviděli slunce.
+
+## Rotace nesmí být incidentový adrenalin
+
+Rotace API klíčů musí jít udělat bez výpadku. Ideální model dovolí mít krátce aktivní dva klíče: starý a nový. Zákazník nový nasadí, ověří poslední použití a starý vypne.
+
+Minimální rotace:
+
+1. Vytvoř nový klíč se stejným nebo užším scope.
+2. Ukaž doporučený plán výměny v integraci.
+3. V seznamu zobraz `last_used_at`, poslední IP nebo síťový rozsah jen pokud je to přiměřené a nezavádí další citlivou telemetrii.
+4. Po ověření provozu starý klíč zneplatni.
+5. Do auditního logu zapiš kdo, kdy a proč rotaci provedl.
+
+Pro interní servisní účty si nastav pravidelný review rytmus. Ne každá organizace potřebuje nucenou měsíční rotaci všech tajemství; často je lepší silné uložení, rychlé zneplatnění, monitoring anomálií a rotace při změně rizika. Povinná rotace bez automatizace totiž často vede k horšímu chování: klíče se kopírují do poznámek, posílají přes chat a lepí do repozitářů. Gratuluji, právě jsme bezpečnost vylepšili až do horšího stavu.
+
+## Loguj použití, ne tajemství
+
+Bez logů neumíš vyšetřit problém, ale logy se nesmí stát skladem citlivých údajů. OWASP výslovně varuje, že hesla, bezpečnostní tokeny a API klíče nemají být v URL, protože se snadno dostanou do serverových logů: [OWASP REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html).
+
+Bezpečný log API požadavku může obsahovat:
+
+- ID klíče nebo jeho nevratný identifikátor,
+- zákaznický účet nebo tenant,
+- endpoint a metodu,
+- výsledek autorizace,
+- počet požadavků a latenci,
+- korelační ID,
+- důvod odmítnutí typu `missing_scope`, `invalid_token`, `expired_token`, `revoked_token`.
+
+Nemá obsahovat:
+
+- celý token,
+- payload s osobními údaji,
+- celé hlavičky bez redakce,
+- query string s citlivými hodnotami,
+- exportovaný soubor, který zákazník právě stahoval.
+
+Privacy-first provoz neznamená žádné logy. Znamená logy s jasným účelem, krátkou retencí, omezeným přístupem a redakcí citlivých polí.
+
+## Rate limituj podle rizika, ne jen podle IP
+
+API klíč potřebuje limity. Ne proto, abys trestal dobré zákazníky, ale aby chyba v integraci nesežrala systém a aby útočník neměl nekonečný prostor pro zkoušení.
+
+Dobré limity kombinují:
+
+- klíč nebo servisní účet,
+- tenant,
+- endpoint,
+- typ operace,
+- cenu operace,
+- bezpečnostní riziko.
+
+Čtení veřejnějších metadat může mít vyšší limit než hromadný export osobních dat. Změna role uživatele má být omezenější než načtení seznamu štítků. Pokud limit narazí, odpověď `429 Too Many Requests` má vysvětlit, co se stalo, kdy to zkusit znovu a kde najít dokumentaci. U dobrého B2B produktu je rate limit součást kontraktu, ne překvapení uprostřed migrace.
+
+## Příklad: účetní integrace pro faktury
+
+Malý B2B SaaS přidává API klíč pro účetní integraci. Špatná verze: jeden klíč `admin` s přístupem ke všemu, poslaný e-mailem účetní firmě. Funkční verze:
+
+- Zákazník vytvoří klíč „Účetnictví 2026“.
+- Vybere scope `read:invoices` a `read:customers:billing_minimal`.
+- Systém ukáže secret pouze jednou.
+- Integrace používá `Authorization: Bearer ...`.
+- Logy obsahují ID klíče, endpoint, tenant a výsledek, ne fakturační payload.
+- Rate limit je nastavený podle očekávaného exportu.
+- Klíč má vlastní datum review za 6 měsíců.
+- Při změně účetní firmy jde klíč jedním kliknutím zrušit bez zásahu do běžných uživatelů.
+
+Výsledek: účetnictví funguje, zákazník má kontrolu a support nemusí hrát detektiva, kdo vlastně drží jaký přístup.
+
+## Checklist: API klíče bez tajných suvenýrů
+
+- Má každý klíč vlastní název, účel, scope a vlastníka?
+- Je secret zobrazen pouze jednou a uložen nečitelně?
+- Posílají klienti token v `Authorization` hlavičce, ne v URL?
+- Umí zákazník vytvořit nový klíč a starý zrušit bez výpadku?
+- Jsou logy redigované a bez tokenů, payloadů a citlivých hlaviček?
+- Existuje `last_used_at` nebo jiný bezpečný signál pro rotaci?
+- Mají citlivé endpointy přísnější limity než běžné čtení?
+- Umí support poradit s rotací, aniž by viděl secret?
+- Je zrušení klíče auditované a rychlé?
+- Má dokumentace příklad bezpečného použití i příklad chybové odpovědi?
+
+## Mini šablona API klíč karty
+
+```text
+# API klíč: [název]
+
+Účel:
+- Proč klíč existuje:
+- Kdo je vlastník:
+- Která integrace ho používá:
+
+Scope:
+- Povolené akce:
+- Zakázané akce:
+- Citlivá data mimo rozsah:
+
+Technické použití:
+- Hlavička:
+- Rate limit:
+- Chybové kódy:
+- Dokumentace:
+
+Provoz:
+- Vytvořeno:
+- Poslední použití:
+- Datum review:
+- Rotace:
+- Zrušení:
+
+Privacy:
+- Co se loguje:
+- Co se nikdy neloguje:
+- Retence logů:
+```
+
+## Zdroje
+
+- [OWASP REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html)
+- [RFC 6750: The OAuth 2.0 Authorization Framework — Bearer Token Usage](https://datatracker.ietf.org/doc/html/rfc6750)
+- [MDN: Authorization header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Authorization)
+- [MDN: 401 Unauthorized](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/401)
+- [NIST SP 800-63B Digital Identity Guidelines: Authentication and Authenticator Management](https://pages.nist.gov/800-63-4/sp800-63b.html)
+
 # Pracovní log
+- 2026-10-07: Doplněna příloha „API klíče a tokeny bez tajných suvenýrů v logu“ s rozlišením typů tokenů, bezpečným předáváním v hlavičkách, jednorázovým zobrazením secretu, scope modelem, rotací, privacy-first logováním, rate limity, checklistem, šablonou API klíč karty a ověřenými zdroji OWASP, RFC, MDN a NIST.
 
 - 2026-10-07: Doplněna příloha „Auditní logy bez tajného deníku o zákaznících“ s rozdělením provozních, bezpečnostních a auditních logů, výběrem auditovatelných událostí podle dopadu, strukturovaným schematem bez obsahu zákaznických dat, pravidly pro append-only zápis, přístupy, retenci, testování, příkladem změny role, checklistem, auditní kartou a ověřenými zdroji OWASP, NIST a EDPB.
 
