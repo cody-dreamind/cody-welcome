@@ -22,6 +22,8 @@ Po nasazení si k mikro-změně napiš i datum další kontroly. Bez něj se z �
 
 Když mikro-změna zasahuje text, měření nebo formulář, přidej k ní i jednoduchý rollback popis: který soubor, nastavení nebo větu vrátit zpět, pokud se ukáže, že úprava nepomohla. Návratová cesta není pesimismus; je to levná pojistka proti tomu, aby se drobný experiment proměnil v produktovou fosilii.
 
+Stejně užitečný je i limit na počet současných mikro-změn. Pokud běží tři drobné úpravy najednou, tým sice vypadá produktivně, ale hůř pozná, která z nich skutečně pomohla. Jedna změna, jeden signál, jedno vyhodnocení — méně ohňostroje, víc učení.
+
 ## Jak e-book používat
 
 - Čti kapitoly samostatně podle problému, který právě řešíš.
