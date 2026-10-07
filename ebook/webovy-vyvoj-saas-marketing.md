@@ -53759,7 +53759,257 @@ Tým zjistí, že nová knihovna padá u větších reportů ve Firefoxu. Oprava
 - EUR-Lex: GDPR, článek 5 o zásadách zpracování včetně minimalizace údajů: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679
 
 
+# Lokalizace webu a SaaS bez překladu do chaosu
+
+Lokalizace není jen výměna českých vět za anglické, německé nebo slovenské. Je to rozhodnutí, jak produkt pracuje s jazykem, měnou, daty, časovými zónami, právními texty, podporou, SEO a očekáváním zákazníků. Když ji uděláš pozdě a narychlo, skončíš s tlačítkem „Save faktura“, cenou `1,000 Kč`, e-mailem v jiném tónu než aplikace a supportem, který netuší, co vlastně zákazník viděl.
+
+Privacy-first lokalizace má ještě jednu vrstvu: nepouští texty, screenshoty, zákaznické exporty a interní poznámky do náhodných překladových nástrojů jen proto, že „to je rychlejší“. Překlad je práce s obsahem a obsah může být osobní, obchodně citlivý nebo bezpečnostně relevantní. Překladač není kouzelná černá díra, kam data přestanou existovat.
+
+> Codyho komentář: Špatná lokalizace není roztomilý detail. Je to produkt, který se zákazníkovi představí s kravatou nakřivo a pak mu pošle fakturu ve špatném formátu. Dá se to přežít, ale důvěra dostane malé kopnutí do holeně.
+
+## Nejdřív rozhodni, co opravdu lokalizuješ
+
+Malý tým nemusí lokalizovat všechno najednou. Naopak: nejlepší první krok bývá vybrat jednu cílovou kombinaci trhu, jazyka a obchodního scénáře.
+
+Rozděl obsah do čtyř vrstev:
+
+- **Veřejný web** — landing page, ceník, případovky, FAQ, právní odkazy, blogové pilíře.
+- **Produktové rozhraní** — navigace, formuláře, chybové stavy, onboarding, nastavení, prázdné stavy.
+- **Komunikace** — transakční e-maily, bezpečnostní zprávy, fakturační upozornění, support šablony.
+- **Právní a provozní texty** — obchodní podmínky, privacy informace, DPA, subprocesory, status komunikace.
+
+Začni vrstvou, která přímo ovlivňuje rozhodnutí zákazníka nebo bezpečné používání produktu. Přeložený blog je fajn. Přeložený chybový stav u platby, resetu hesla nebo exportu dat je často důležitější.
+
+Praktické pořadí pro B2B SaaS:
+
+1. Ceník, hlavní nabídka a FAQ.
+2. Registrace, onboarding a první hodnotná akce.
+3. Transakční e-maily a bezpečnostní zprávy.
+4. Nastavení účtu, fakturace a role.
+5. Help centrum pro kritické scénáře.
+6. Teprve potom širší obsah a long-tail SEO.
+
+## Jazyk stránky nastav technicky, ne jen vizuálně
+
+Pokud stránka vypadá česky, ale HTML neříká, že je česky, děláš práci napůl. W3C doporučuje deklarovat výchozí jazyk dokumentu pomocí atributu `lang` na elementu `html`, protože jazyk pomáhá prohlížečům, vyhledávačům i asistivním technologiím správně interpretovat obsah.
+
+Minimum:
+
+```html
+<html lang="cs">
+```
+
+Pokud máš v českém textu delší anglickou větu, název dokumentu nebo citaci, označ jazyk konkrétní části:
+
+```html
+<p>V dokumentaci najdeš sekci <span lang="en">Billing settings</span>.</p>
+```
+
+U vícejazyčného webu si pohlídej také:
+
+- každá jazyková verze má vlastní stabilní URL,
+- přepínač jazyka odkazuje na stejný obsah v jiném jazyce, ne vždy na homepage,
+- `hreflang` používáš jen tam, kde opravdu existují alternativní jazykové nebo regionální verze,
+- sitemap a kanonické URL nejsou v konfliktu s jazykovými variantami,
+- fallback jazyk je srozumitelný a nemíchá se náhodně uvnitř jedné obrazovky.
+
+Špatný vzor: uživatel je na české stránce fakturace, klikne na „English“ a skončí na anglické homepage. To není lokalizace, to je teleportace do marketingového sklepa.
+
+## Formáty dat, čísel a měn nepiš ručně
+
+Ruční skládání datumů, měn a čísel je spolehlivá cesta k malým, ale drahým chybám. Český zákazník čeká jiné oddělovače, pořadí data i zápis měny než zákazník z USA. Německý zákazník zase může mít jiný formát desetinných čísel a očekávání fakturační komunikace.
+
+V JavaScriptu používej `Intl` API, ne vlastní řetězce poskládané z naděje:
+
+```js
+const amount = new Intl.NumberFormat('cs-CZ', {
+  style: 'currency',
+  currency: 'CZK',
+}).format(1290);
+
+const issuedAt = new Intl.DateTimeFormat('cs-CZ', {
+  dateStyle: 'medium',
+  timeZone: 'Europe/Prague',
+}).format(new Date('2026-10-07T12:00:00Z'));
+```
+
+Praktická pravidla:
+
+- Interně ukládej čas v jednoznačném formátu, typicky UTC.
+- V UI vždy zobraz časovou zónu tam, kde záleží na termínu, schůzce, faktuře, SLA nebo údržbě.
+- Měnu ukládej jako samostatné pole, ne jako text přilepený k částce.
+- U faktur a právně relevantních výstupů testuj formát podle země zákazníka.
+- U importů nikdy nehádej datum podle lokální nálady serveru.
+
+Příklad problému: `03/04/2026` může znamenat 3. dubna nebo 4. března. Pokud ten údaj rozhoduje o splatnosti faktury, není to drobný detail. Je to support ticket v inkubátoru.
+
+## Překladový proces musí chránit data
+
+Ne každý text smí do externího překladového nástroje. Rozděl materiály podle citlivosti:
+
+| Materiál | Riziko | Bezpečný postup |
+| --- | --- | --- |
+| Veřejná landing page | nízké | Překlad přes běžný workflow, lidská revize tónu. |
+| Help článek bez zákaznických dat | nízké až střední | Překlad, kontrola terminologie, test odkazů. |
+| Transakční e-mail | střední | Překlad šablony bez reálných údajů, test proměnných. |
+| Support ticket | vysoké | Nejprve anonymizace, případně interní překlad nebo schválený nástroj. |
+| Screenshot aplikace | vysoké | Použij demo účet nebo maskovaná data. |
+| Smlouva / DPA / právní text | vysoké | Odborný překlad a právní revize. |
+
+Privacy-first pravidlo: do překladového nástroje neposílej produkční obsah zákazníků, neveřejné obchodní informace, tokeny, interní poznámky, incidentové detaily ani celé support konverzace. Pokud překlad potřebuje kontext, vytvoř bezpečný výtah.
+
+Dobré zadání pro překlad bez úniku dat:
+
+```text
+Přelož následující produktový text do němčiny pro B2B SaaS.
+Zachovej věcný, klidný tón.
+Nepřidávej nové sliby.
+Proměnné ve složených závorkách neměň.
+Text neobsahuje reálná zákaznická data.
+```
+
+## Terminologii drž jako produktový systém
+
+Když jednou řekneš „pracovní prostor“, podruhé „workspace“ a potřetí „týmový účet“, uživatel začne pochybovat, jestli jde o stejnou věc. Terminologie není literární pestrost. Je to navigace.
+
+Vytvoř mini glosář:
+
+| Koncept | Čeština | Angličtina | Nepoužívat | Poznámka |
+| --- | --- | --- | --- | --- |
+| Workspace | pracovní prostor | workspace | tým, účet firmy | Entita pro členy a projekty. |
+| Role ownera | vlastník | owner | admin všeho | Má fakturační a bezpečnostní odpovědnost. |
+| Export dat | export dat | data export | záloha | Export není záloha. |
+| Audit log | auditní log | audit log | historie kliků | Jen rizikové akce. |
+
+Glosář používej pro UI, help centrum, e-maily, obchodní materiály i support. Pokud překladatel nebo AI nezná produktovou terminologii, vymyslí ji za tebe. A kreativita v názvech bezpečnostních funkcí je přesně ta párty, na kterou nechceš pozvánku.
+
+## Chybové stavy lokalizuj pečlivěji než hero text
+
+Hero nadpis může být poetický. Chybová zpráva musí být přesná. WCAG u identifikace chyb zdůrazňuje, že pokud systém chybu automaticky rozpozná, má ji uživateli popsat textově a srozumitelně. V lokalizovaném produktu to znamená: nejen přeložit, ale vysvětlit další krok jazykem člověka.
+
+Špatně:
+
+```text
+Invalid input.
+```
+
+Lépe:
+
+```text
+DIČ nemá správný formát. Zkontrolujte prosím předponu země a číslo bez mezer.
+```
+
+U každého kritického formuláře testuj:
+
+- povinná pole,
+- špatný formát e-mailu, telefonu, DIČ nebo PSČ,
+- příliš dlouhý text,
+- duplicitu údajů,
+- chybu platby,
+- chybu oprávnění,
+- nedostupnost integrace,
+- bezpečnostní krok, například re-auth nebo MFA.
+
+Přeložený produkt bez přeložených chybových stavů je jako auto s krásným lakem a palubkou v Klingonštině. Možná dojede, ale nervy nechá u krajnice.
+
+## SEO a obsah: nepřekládej všechno mechanicky
+
+Mezinárodní SEO není kopie českého obsahu přes překladač. Každý trh má jiné fráze, jiné obavy, jiné právní zkratky a jiný nákupní jazyk. Pro privacy-first SaaS v Evropě může český text zdůrazňovat „provoz v Evropě“, německý text bude často potřebovat konkrétnější bezpečnostní a smluvní jistoty a anglický text může víc vysvětlovat regionální výhodu oproti globálním nástrojům.
+
+Praktický postup:
+
+1. Vyber 5–10 klíčových stránek, které mají obchodní dopad.
+2. Pro každou napiš lokální záměr: co člověk řeší a jakými slovy.
+3. Přelož strukturu, ne jen věty.
+4. Uprav příklady na lokální realitu.
+5. Zkontroluj interní odkazy, CTA, měnu, právní odkazy a formuláře.
+6. Nech rodilého nebo velmi dobrého mluvčího udělat věcnou revizi.
+
+Nepotřebuješ hned lokalizovat celý blog. Lepší je mít pět kvalitních stránek, které opravdu pomáhají prodeji a podpoře, než padesát strojově přeložených článků, které zní jako produktový vysavač na duši.
+
+## Příklad: český SaaS vstupuje do Německa
+
+Malý český B2B SaaS chce první německé zákazníky. Tým neprekládá všechno. Udělá první lokalizační balíček:
+
+- německá landing page pro jeden segment,
+- ceník v EUR a s jasným vysvětlením DPH,
+- registrační flow, onboarding a pozvánky do workspace,
+- reset hesla, bezpečnostní e-maily a fakturační zprávy,
+- help článek „Jak začít za 15 minut“,
+- privacy informace, subprocesory a DPA s odbornou revizí,
+- support šablony pro první tři typické dotazy.
+
+Do překladového nástroje nejdou reálné support tickety ani screenshoty produkčních účtů. Použije se demo workspace s falešnými daty a glosářem. Produkt si zachová kontrolu nad daty, zákazník dostane srozumitelný první dojem a tým netráví měsíc překladem starých blogpostů, které nikdo v novém trhu nehledá.
+
+## Checklist: lokalizace bez chaosu
+
+- [ ] Víme, který trh, jazyk a scénář lokalizujeme jako první?
+- [ ] Má každá jazyková verze správný `lang` a stabilní URL?
+- [ ] Jsou kritické formuláře, chybové stavy a e-maily přeložené před marketingovým obsahem?
+- [ ] Používáme systémové formátování datumů, čísel, měn a časových zón?
+- [ ] Máme glosář produktových termínů a zakázaných variant?
+- [ ] Neposíláme zákaznická data do neschválených překladových nástrojů?
+- [ ] Jsou právní a smluvní texty odborně revidované?
+- [ ] Testujeme lokalizaci na mobilu, v e-mailu a v hlavních prohlížečích?
+- [ ] Přepínač jazyka vede na odpovídající stránku, ne vždy na homepage?
+- [ ] Má support připravené lokální odpovědi pro první typické dotazy?
+
+## Mini šablona lokalizační karty
+
+```text
+# Lokalizační karta: [jazyk / trh]
+
+## Cíl
+- Cílový trh:
+- Segment zákazníků:
+- První obchodní scénář:
+- Co nelokalizujeme v této iteraci:
+
+## Rozsah
+- Veřejné stránky:
+- Produktové obrazovky:
+- E-maily:
+- Help články:
+- Právní/provozní texty:
+
+## Technika
+- URL struktura:
+- lang/hreflang:
+- Měna:
+- Časová zóna:
+- Datum/čísla:
+
+## Terminologie
+- Glosář uložen kde:
+- Zakázané termíny:
+- Proměnné, které se nesmí překládat:
+
+## Privacy a data
+- Schválený překladový nástroj:
+- Zakázaná vstupní data:
+- Demo data / anonymizace:
+- Kdo kontroluje právní texty:
+
+## QA
+- Kritické scénáře:
+- Chybové stavy:
+- E-mailové klienty:
+- Mobilní kontrola:
+- Support připraven:
+```
+
+## Zdroje
+
+- W3C Internationalization: Authoring HTML — Language declarations, doporučení k deklaraci jazyka v HTML: https://www.w3.org/TR/i18n-html-tech-lang/
+- W3C WAI: Understanding Success Criterion 3.1.1 — Language of Page, proč jazyk stránky pomáhá asistivním technologiím a prohlížečům: https://www.w3.org/WAI/WCAG21/Understanding/language-of-page
+- W3C WAI: Understanding Success Criterion 3.3.1 — Error Identification, pravidla pro srozumitelné popisy chyb: https://www.w3.org/WAI/WCAG22/Understanding/error-identification
+- MDN Web Docs: JavaScript Internationalization, přehled `Intl` API pro formátování datumů, čísel a dalších lokálních hodnot: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Internationalization
+- MDN Web Docs: `Intl.DateTimeFormat`, jazykově citlivé formátování data a času: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+
+
 # Pracovní log
+
+- 2026-10-07: Doplněna příloha „Lokalizace webu a SaaS bez překladu do chaosu“ s postupem výběru rozsahu, technickým nastavením jazyka, formátováním dat a měn, privacy-first překladovým procesem, terminologickým glosářem, pravidly pro chybové stavy, příkladem vstupu českého SaaS do Německa, checklistem, lokalizační kartou a ověřenými zdroji W3C, WCAG a MDN.
 
 - 2026-10-07: Doplněna příloha „Klientský error reporting bez screenshotového šmírování“ s praktickým rozdělením chyb podle dopadu, bezpečným obsahem reportů, čištěním URL, pravidly pro screenshoty a replaye, filtrováním šumu, retenčním modelem, release rutinou, příkladem účetního SaaS, checklistem, šablonou policy a ověřenými zdroji OWASP, MDN a GDPR.
 
