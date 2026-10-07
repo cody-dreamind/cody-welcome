@@ -50102,7 +50102,192 @@ Lepší verze:
 - [MDN: Content-Disposition](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Disposition) — HTTP hlavička pro stažení souboru jako přílohy.
 
 
+# Příloha: Webhooky a integrační endpointy bez chaosu a duplicit
+
+Webhook je malý technický detail, který se v SaaS často tváří jako „jen endpoint“. Ve skutečnosti je to hranice mezi dvěma systémy, dvěma provozními rytmy a často i dvěma právními odpovědnostmi. Když ji navrhneš ledabyle, začneš řešit záhady typu: proč se zákazníkovi objednávka propsala dvakrát, proč nám faktura visí ve stavu „čeká se“ a proč support ručně přeposílá JSON do Slacku jako digitální poštovní holub.
+
+Privacy-first přístup tady neznamená webhooky nepoužívat. Znamená navrhnout je tak, aby přenášely jen nutné údaje, šly auditovat bez čtení citlivého obsahu, bezpečně zvládly opakované doručení a daly se vypnout nebo přesměrovat bez půlnočního rituálu nad produkční databází.
+
+## Nejprve si řekni, co webhook nesmí dělat
+
+Začni negativním vymezením. Webhook nemá být univerzální tajná chodba do aplikace. Nemá přijímat libovolný JSON, nemá sám rozhodovat složité obchodní výjimky a nemá ukládat celé payloady „pro jistotu“ navždy. Dobrý webhook je úzký, nudný a předvídatelný. Ano, nudný software je podceňovaná konkurenční výhoda.
+
+U každého integračního endpointu si napiš tři věty:
+
+- Jakou jednu událost přijímá.
+- Jakou jednu změnu smí spustit.
+- Jaká data záměrně nepřijímá ani neukládá.
+
+Příklad: „Endpoint přijímá potvrzení zaplacení faktury od platební brány. Smí změnit interní stav faktury z `pending` na `paid` a založit provozní auditní záznam. Nesmí ukládat celé platební údaje, číslo karty ani obsah zákaznické objednávky, pokud už ho máme ve vlastním systému.“
+
+Tohle není byrokracie. Je to budoucí záchranné lano, až se někdo zeptá, proč webhook vůbec existuje a co se stane, když dorazí dvakrát.
+
+## Ověření podpisu ber jako vstupenku, ne dekoraci
+
+Webhook endpoint nesmí věřit tomu, že požadavek přišel od správné služby jen proto, že URL vypadá tajně. Tajné URL je slabý plot. Provider by měl posílat podpis a tvoje aplikace ho musí ověřit nad původním tělem požadavku, ne nad už přemapovaným objektem po JSON parseru.
+
+Praktický základ:
+
+- Ulož sdílený secret mimo repozitář, ideálně jako secret v produkčním prostředí.
+- Ověř podpis nad raw body požadavku před zpracováním události.
+- Porovnávej podpis bezpečným porovnáním, ne obyčejným `==`.
+- Loguj výsledek ověření, ale nikdy neloguj samotný secret.
+- Při rotaci secretu krátce podporuj starý i nový klíč a dej tomu konečné datum.
+
+GitHub ve své dokumentaci doporučuje webhook secret a ověření podpisu v hlavičce `X-Hub-Signature-256`; zároveň upozorňuje na bezpečné uložení tokenu a konstantní čas porovnání podpisu ([GitHub Docs: Validating webhook deliveries](https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries)). To není specialita GitHubu, ale dobrý obecný vzor: podpis je první brána, ne volitelný kosmetický doplněk.
+
+Codyho komentář: Když webhook nemá ověření podpisu, není to „interní endpoint“. Je to veřejné tlačítko s nápisem „zkus štěstí“.
+
+## Idempotence: doručení může přijít znovu
+
+Webhooky se v reálném světě opakují. Provider nemusí vědět, jestli tvoje aplikace událost opravdu zpracovala, nebo jen nestihla odpovědět. Proto se smiř s tím, že stejná událost může dorazit dvakrát, třikrát nebo po incidentu znovu ručně.
+
+Zpracování navrhni tak, aby opakování nezpůsobilo dvojí akci. To znamená uložit identifikátor události, provider delivery ID nebo vlastní deduplikační klíč a před změnou stavu ověřit, jestli už se událost nezpracovala. Pokud ano, endpoint má odpovědět úspěšně a nedělat nic dalšího.
+
+U interních API se hodí stejný princip i pro vlastní požadavky. Hlavička `Idempotency-Key` se používá k tomu, aby klient mohl zopakovat nejistý `POST` nebo `PATCH`, aniž by se akce provedla dvakrát; MDN zároveň upozorňuje, že jde o nestandardní/experimentální hlavičku a server má jasně dokumentovat, kde ji vyžaduje a jak dlouho klíče platí ([MDN: Idempotency-Key header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Idempotency-Key)). Přeloženo do praxe: nespoléhej na magii frameworku, napiš vlastní pravidla.
+
+Jednoduchý deduplikační model:
+
+- `provider`: odkud událost přišla.
+- `event_id`: stabilní ID události od providera.
+- `received_at`: kdy dorazila.
+- `processed_at`: kdy byla bezpečně zpracovaná.
+- `status`: `received`, `processed`, `ignored`, `failed`.
+- `effect_id`: ID interní změny, kterou událost vyvolala.
+
+Neloguj celé payloady jako výchozí chování. Ulož raději hash payloadu, typ události, ID objektu a krátký stav zpracování. Celý payload nech jen pro omezené ladicí okno, pokud ho opravdu potřebuješ, a nastav retenci.
+
+## Rychlá odpověď, pomalá práce
+
+Webhook endpoint by měl co nejrychleji ověřit požadavek, uložit obálku události a vrátit odpověď. Těžkou práci dělej až v pozadí: aktualizace faktur, posílání e-mailů, synchronizace CRM nebo generování dokumentů nepatří do request-response kritické cesty.
+
+GitHub v best practices uvádí, že server má odpovědět stavem `2XX` do 10 sekund a delší zpracování přesunout mimo přímé doručení ([GitHub Docs: Best practices for using webhooks](https://docs.github.com/en/webhooks/using-webhooks/best-practices-for-using-webhooks)). I když jiný provider může mít jiný limit, princip je stejný: přijmi, ověř, zařaď, odpověz. Teprve potom pracuj.
+
+Pro malý SaaS stačí často jednoduchá tabulka fronty a worker:
+
+- Endpoint ověří podpis a uloží událost.
+- Worker pravidelně bere nezpracované události.
+- Každý typ události má vlastní handler.
+- Handler je idempotentní.
+- Selhání se opakuje podle limitu a pak skončí v ruční kontrole.
+
+Tohle je méně sexy než „event-driven architecture“ diagram se šipkami všude. Ale funguje, dá se pochopit a support nebude muset lovit ztracené události z logů jako archeolog po kávě.
+
+## Chyby rozděl podle toho, kdo je má opravit
+
+Ne každá chyba webhooku je stejná. Když podpis nesedí, je to bezpečnostní odmítnutí a nemá smysl zkoušet zpracování znovu. Když chybí povinné pole, jde o validační problém a potřebuješ vědět, jestli se změnilo API providera. Když spadla databáze, je to dočasný provozní problém a událost má počkat.
+
+Používej minimálně tyto kategorie:
+
+- `rejected_signature`: podpis chybí nebo nesedí.
+- `rejected_schema`: payload neodpovídá očekávané struktuře.
+- `ignored_event`: typ události znáš, ale nechceš ho zpracovat.
+- `temporary_failure`: problém v tvém systému nebo závislosti.
+- `manual_review`: událost je bezpečně uložená, ale potřebuje lidské rozhodnutí.
+
+Tahle taxonomie zkracuje incidenty. Místo „webhook nefunguje“ vidíš „provider posílá nový typ eventu“ nebo „worker třikrát narazil na lock v databázi“. To je rozdíl mezi opravou a věštěním z logů.
+
+## Privacy-first datová pravidla pro webhooky
+
+Webhooky bývají lákavé místo pro tiché kopírování dat mezi nástroji. Odolej. Každý další payload v další službě je nový datový stín, který budeš jednou vysvětlovat, mazat nebo migrovat.
+
+Pravidla:
+
+- Přijímej jen události, které opravdu mění produktové nebo provozní rozhodnutí.
+- Ukládej interní ID a stav, ne zbytečný obsah objektů.
+- Celé payloady drž krátce, šifrovaně a jen pro ladění.
+- Maskuj osobní údaje v logu před uložením.
+- U každého providera měj odkaz na DPA, seznam subprocesorů a exit plán.
+- Preferuj EU provoz a přímé server-side integrace před sledovacími skripty v prohlížeči.
+
+Pokud webhook spouští marketingovou akci, buď dvojnásob opatrný. Událost „uživatel dokončil onboarding“ může být legitimní signál pro produktový e-mail. Není to ale pozvánka k tomu, aby se payload poslal do pěti reklamních systémů, kde bude uživatel do konce týdne pronásledován bannerem „vidíme tě“. To není marketing, to je digitální křoví s dalekohledem.
+
+## Příklad: platební webhook pro B2B SaaS
+
+Malý B2B SaaS přijímá webhook `invoice.paid` od platební služby. Cíl je odemknout placený tarif a vystavit interní auditní záznam.
+
+Rozumný průběh:
+
+1. Endpoint přijme `POST /webhooks/billing`.
+2. Před parsováním ověří podpis nad raw body.
+3. Z payloadu vytáhne jen `event_id`, `event_type`, `invoice_id`, `customer_id` a čas události.
+4. Zkontroluje, jestli `event_id` už není zpracované.
+5. Uloží obálku události se stavem `received`.
+6. Vrátí providerovi úspěch.
+7. Worker najde fakturu podle vlastního mapování, změní stav na `paid` a uloží `processed_at`.
+8. Pokud faktura neexistuje, událost skončí v `manual_review`, ne v tichém selhání.
+
+Co se záměrně nedělá:
+
+- Neukládá se celé platební tělo navždy.
+- Neposílá se payload do analytiky.
+- Nevytváří se duplicitní faktura jen proto, že provider poslal retry.
+- Support nedostává citlivý JSON do chatu; vidí jen interní stav a ID události.
+
+## Checklist: webhook bez chaosu
+
+- [ ] Endpoint má popsaný účel, povolené události a zakázaná data.
+- [ ] Podpis se ověřuje nad raw body před zpracováním.
+- [ ] Secret je uložený mimo repozitář a má plán rotace.
+- [ ] Každá událost má deduplikační klíč nebo stabilní event ID.
+- [ ] Handler je idempotentní a opakované doručení nevyvolá dvojí akci.
+- [ ] Endpoint rychle uloží událost a těžkou práci předá workeru.
+- [ ] Chyby mají kategorie: podpis, schema, ignorováno, dočasné selhání, ruční kontrola.
+- [ ] Logy neobsahují secrety ani zbytečné osobní údaje.
+- [ ] Celé payloady mají krátkou retenci nebo se neukládají vůbec.
+- [ ] Existuje ruční replay postup pro bezpečně uložené události.
+
+## Mini šablona webhook karty
+
+# Webhook karta: [název integrace]
+
+## Účel
+
+- Provider:
+- Přijímané události:
+- Interní změna, kterou smí spustit:
+- Co nikdy nesmí dělat:
+
+## Bezpečnost
+
+- Ověření podpisu:
+- Secret uložen kde:
+- Rotace secretu:
+- Povolené metody a cesty:
+
+## Idempotence
+
+- Deduplikační klíč:
+- Co se stane při duplicitě:
+- Jak dlouho držíme záznam o zpracování:
+
+## Data a privacy
+
+- Přijatá pole:
+- Ukládaná pole:
+- Maskovaná pole:
+- Retence payloadu:
+- DPA/subprocesor odkaz:
+
+## Provoz
+
+- Fronta/worker:
+- Retry pravidla:
+- Ruční replay:
+- Alert při selhání:
+- Vlastník integrace:
+
+## Zdroje
+
+- [GitHub Docs: Validating webhook deliveries](https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries)
+- [GitHub Docs: Best practices for using webhooks](https://docs.github.com/en/webhooks/using-webhooks/best-practices-for-using-webhooks)
+- [MDN: Idempotency-Key header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Idempotency-Key)
+- [OWASP Cheat Sheet Series: REST Security](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html)
+- [OWASP Cheat Sheet Series: Web Service Security](https://cheatsheetseries.owasp.org/cheatsheets/Web_Service_Security_Cheat_Sheet.html)
+
 # Pracovní log
+
+- 2026-10-07: Doplněna příloha „Webhooky a integrační endpointy bez chaosu a duplicit“ s návrhem účelu endpointu, ověřením podpisu, idempotencí, rychlým zařazením do fronty, privacy-first logováním, checklistem a vyplnitelnou webhook kartou.
 
 - 2026-10-07: Doplněna příloha „Exporty dat bez CSV injekce a support nočních můr“ s účelovým návrhem exportů, allowlistem polí, ochranou proti CSV/formula injection, bezpečnými hlavičkami stahování, asynchronním exportním jobem, support pravidly, checklistem, exportní kartou a ověřenými zdroji OWASP, RFC 4180 a MDN.
 - 2026-10-06: Doplněna příloha „Stavový katalog SaaS UI bez slepých míst“ s praktickým rozlišením loading, empty, no-results, error, permission, degraded, sensitive action a rate limit stavů, privacy-first pravidly pro bezpečné texty, checklistem, stavovou kartou a ověřenými zdroji MDN a W3C.
