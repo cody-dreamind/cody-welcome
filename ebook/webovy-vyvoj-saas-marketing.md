@@ -51240,7 +51240,220 @@ Privacy:
 - [NIST SP 800-63B: Digital Identity Guidelines](https://pages.nist.gov/800-63-4/sp800-63b.html)
 - [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
 
+
+# Příloha: Rate limiting a abuse ochrana bez plošného fingerprintingu
+
+Rate limiting se často bere jako technický detail: nastavíme limit na IP adresu, vrátíme `429` a jdeme domů. Jenže u SaaS produktu je to produktové, bezpečnostní i privacy rozhodnutí zároveň. Příliš měkký limit pustí credential stuffing, scraping, spam, falešné registrace nebo drahé AI volání. Příliš tvrdý limit zase zablokuje legitimní zákazníky za firemní NAT bránou, v coworkingu nebo při dávkovém importu. Gratuluju, právě jsi vynalezl bezpečnostní kontrolu, která umí naštvat úplně všechny.
+
+Privacy-first přístup není „sbírej všechno, ať máš signály“. Je to přesnější otázka: jak zvednout cenu zneužití, aniž bys ze všech návštěvníků dělal podezřelé objekty sledování? Rate limit má chránit službu, účty a rozpočet. Nemá se stát tajným identifikátorem napříč webem, marketingem a podporou.
+
+## Začni mapou zneužití, ne číslem v middleware
+
+První chyba je hledat univerzální limit typu „100 requestů za minutu“. Takové číslo vypadá rozhodně, ale bez kontextu neříká skoro nic. Limit pro veřejnou homepage, login, reset hesla, API endpoint, upload souboru a AI generování odpovědi nemá být stejný.
+
+Nejdřív si napiš mapu abuse scénářů:
+
+| Endpoint nebo akce | Co se dá zneužít | Dopad | Typ limitu |
+| --- | --- | --- | --- |
+| Login | hádání hesel, credential stuffing | převzetí účtu, support zátěž | podle účtu, IP rozsahu, zařízení jen minimálně |
+| Registrace | falešné účty, spam workspace | náklady, reputace, bordel v datech | podle e-mail domény, IP rozsahu, tenant pozvánek |
+| Reset hesla | spam e-mailů, enumerace účtů | obtěžování, únik existence účtu | podle účtu, e-mailu, IP a času |
+| Veřejné vyhledávání | scraping katalogu | únik hodnoty obsahu, náklady | podle IP, session, API klíče a stránky výsledků |
+| AI odpověď | vyčerpání tokenů | přímé náklady, zpomalení služby | podle uživatele, tenant tarifu, denního rozpočtu |
+| Export dat | hromadný odliv dat | bezpečnostní incident | podle uživatele, role, tenant limitu a step-up ověření |
+
+OWASP u automatizovaného zneužití připomíná, že cílem není blokovat všechny boty, ale zdražit škodlivou automatizaci a nepoškodit legitimní uživatele: [OWASP Bot Management and Anti-Automation Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Bot_Management_and_Anti-Automation_Cheat_Sheet.html). Přesně to je dobrý produktový rámec. Nejsi ve válce s curlíkem jako takovým. Jsi ve válce s chováním, které bere hodnotu, účty, peníze nebo dostupnost.
+
+## Limituj podle účelu, ne jen podle IP
+
+IP adresa je lákavá, protože je po ruce. Jenže sama o sobě je špatný pán. Mobilní sítě, firemní proxy, VPN, NAT a sdílené Wi-Fi umí nacpat hodně legitimních lidí za jeden viditelný identifikátor. Naopak útočník může IP adresy střídat. Pokud postavíš celý abuse model jen na IP, bude zároveň děravý i nespravedlivý. Krásná kombinace, kdybychom sbírali špatné nápady do vitríny.
+
+Praktičtější je vrstvit limity:
+
+- **Per IP nebo IP rozsah:** dobré pro anonymní veřejné endpointy, ale s tolerancí pro sdílené sítě.
+- **Per účet:** nutné pro přihlášené akce, API volání, exporty a AI funkce.
+- **Per tenant:** chrání víceuživatelské B2B účty před tím, aby jeden uživatel spálil rozpočet všem.
+- **Per API klíč:** důležité pro integrace, partnerství a veřejné API.
+- **Per e-mail nebo telefon:** použitelné u resetů a registrací, ale ukládej jen to, co opravdu potřebuješ.
+- **Per nákladová jednotka:** AI tokeny, počet exportovaných řádků, velikost uploadu, počet webhooků.
+- **Per citlivá akce:** role, billing, API klíče, hromadné pozvánky, exporty.
+
+OWASP upozorňuje i na častou chybu u loginu: jeden bucket pro kombinaci IP + uživatel může dovolit mnoho pokusů napříč neomezeným množstvím účtů. Bezpečnější je kontrolovat samostatně víc pohledů — například limit na účet a zároveň limit na zdroj. Tím snížíš šanci, že útočník jen změní jednu proměnnou a projde okolo kontroly jako turista okolo rozbité závory.
+
+## Stavové limity dělej srozumitelně
+
+Rate limit není jen „ano/ne“. U dobrého SaaS produktu má mít stav, vysvětlení a obnovu. Uživatel má vědět, co se stalo, kdy to může zkusit znovu a co dělat, pokud limit narazil legitimně.
+
+HTTP status `429 Too Many Requests` je standardní signál pro příliš mnoho požadavků. MDN uvádí, že odpověď může obsahovat hlavičku `Retry-After`, která klientovi říká, jak dlouho má počkat: [MDN: 429 Too Many Requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429) a [MDN: Retry-After](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After).
+
+Praktická odpověď pro API:
+
+```http
+HTTP/1.1 429 Too Many Requests
+Content-Type: application/problem+json
+Retry-After: 120
+
+{
+  "type": "https://example.com/problems/rate-limit",
+  "title": "Limit požadavků byl dočasně překročen",
+  "detail": "Zkuste požadavek znovu za 120 sekund.",
+  "limit_scope": "tenant_ai_daily_budget"
+}
+```
+
+Do odpovědi nedávej interní heuristiky, přesné abuse skóre, detaily detekce ani identifikátory jiných uživatelů. Klient potřebuje bezpečně zpomalit, ne dostat návod, jak limit obcházet.
+
+## Klientům pomoz, útočníkům nedávej mapu trezoru
+
+U veřejného API je fér dokumentovat limity. Vývojář integrace potřebuje vědět, kolik může posílat, jak retryovat a jak rozlišit dočasné omezení od chyby oprávnění. Zároveň ale nemusíš vyzradit všechny interní vrstvy ochrany.
+
+Pro API dokumentaci stačí:
+
+- základní kvóty podle tarifu nebo typu klíče,
+- co znamená `429`,
+- zda má klient respektovat `Retry-After`,
+- doporučený exponential backoff,
+- pravidla pro idempotentní opakování požadavků,
+- kontakt nebo proces pro navýšení limitu,
+- upozornění, že bezpečnostní limity se mohou aktivovat i mimo běžné kvóty.
+
+IETF HTTPAPI pracovní skupina pracuje na standardizaci `RateLimit` a `RateLimit-Policy` hlaviček pro sdílení kvót mezi serverem a klientem: [IETF draft: RateLimit header fields for HTTP](https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/). Je to užitečný směr, ale při implementaci si vždy ověř aktuální stav specifikace a podpory knihoven. Codyho komentář: hlavičky jsou skvělá věc, ale draft není magický štít proti špatnému produktu. Pořád musíš vědět, co vlastně limituješ a proč.
+
+## CAPTCHA není univerzální odpustek
+
+CAPTCHA a challenge prvky mohou pomoct jako obrana ve vrstvách, ale nemají být první reakce na každý problém. Často zhoršují přístupnost, použitelnost, soukromí a konverzi. Navíc část provozu, který chceš povolit, je také automatizovaný: monitoring, search boty, RSS čtečky, interní integrace, webhook retry, zákaznické skripty.
+
+Než přidáš challenge, zkus levnější a férovější kroky:
+
+- zpomalit konkrétní akci místo blokace celého účtu,
+- vyžádat potvrzení e-mailu až při rizikovém vzoru,
+- omezit hromadné operace podle role,
+- zavést denní rozpočet pro nákladné funkce,
+- přidat queue místo okamžitého odmítnutí,
+- vyžadovat step-up ověření u citlivé akce,
+- kontaktovat zákazníka, pokud jde o B2B tenant s legitimní dávkovou prací.
+
+Privacy-first princip: čím invazivnější kontrola, tím konkrétnější musí být důvod. Neposílej uživatele přes externí challenge službu jen proto, že se ti nechce navrhnout lepší limit.
+
+## AI a drahé funkce limituj podle rozpočtu
+
+U AI funkcí už nejde jen o počet requestů. Jeden požadavek může být levný dotaz, nebo malý požár v tokenovém skladu. Proto limituj i nákladové jednotky: vstupní tokeny, výstupní tokeny, počet nástrojových volání, velikost kontextu, počet souborů, délku běhu a denní rozpočet tenantu.
+
+Praktický model:
+
+| Funkce | Levný limit | Nákladový limit | Bezpečnostní brzda |
+| --- | --- | --- | --- |
+| Chat v aplikaci | zprávy za minutu | tokeny za den | max délka kontextu |
+| Shrnutí dokumentu | soubory za hodinu | MB a tokeny | zákaz citlivých typů souborů |
+| AI agent | běhy za den | tool calls a runtime | schvalování destruktivních akcí |
+| Hromadné generování | položky v dávce | tenant budget | queue a ruční navýšení |
+
+Uživatelům ukaž spotřebu srozumitelně: „Dnes jste využili 62 % denního AI rozpočtu.“ Ne: „LLM quota unit depleted in bucket `tenant:prd:eu-central-1:ai:v3`.“ Ten druhý text je možná přesný, ale člověk po něm slyší jen datacentrovou poezii.
+
+## Loguj signál, ne sledovací román
+
+Abuse ochrana potřebuje logy. Jenže právě tady se snadno narodí tajná behaviorální databáze. Logy pro rate limiting mají odpovědět na otázky: co bylo omezeno, proč přibližně, jaký byl dopad a co se má upravit. Nemají být zrcadlem celé aktivity uživatele.
+
+Do rate limit logu typicky stačí:
+
+- čas,
+- endpoint nebo akce,
+- tenant nebo účet v interním ID,
+- typ limitu,
+- rozhodnutí: allow, slow down, block, challenge,
+- hrubý zdrojový kontext, pokud je potřeba,
+- korelační ID požadavku,
+- krátká retence podle účelu.
+
+Naopak se vyhni ukládání:
+
+- plných payloadů,
+- hesel, tokenů, API klíčů a session ID,
+- přesných dotazů z vyhledávání, pokud mohou obsahovat osobní data,
+- obsahu AI promptů bez jasného důvodu,
+- dlouhodobého device fingerprintu,
+- marketingových identifikátorů spojených s bezpečnostním rozhodnutím.
+
+Bezpečnostní log a marketingová analytika se nemají objímat. Když je propojíš, možná získáš hezký dashboard, ale zároveň vytvoříš datový kompromis, který budeš později vysvětlovat právníkům, zákazníkům a sám sobě ve tři ráno.
+
+## Příklad: B2B SaaS s AI funkcí a veřejným API
+
+Malý B2B SaaS má login, veřejné API, import zákazníků a AI asistenta pro shrnutí ticketů.
+
+Návrh ochrany:
+
+1. Login má samostatné limity podle účtu, IP rozsahu a globálního signálu credential stuffingu.
+2. Reset hesla vrací vždy obecnou zprávu a omezuje počet e-mailů na účet i zdroj.
+3. API klíče mají tarifní kvótu, `429` s `Retry-After` a dokumentované backoff doporučení.
+4. Importy běží přes queue, mají limit velikosti souboru, počet řádků a idempotentní import ID.
+5. AI shrnutí má denní tenant budget, per-user burst limit a maximální délku vstupu.
+6. Role admin může navýšit limit jen přes auditovatelnou akci, ne kliknutím v panice.
+7. Bezpečnostní logy drží agregovaný signál a korelační ID, ne celé prompty a payloady.
+8. Support má šablonu odpovědi pro legitimní navýšení limitu a incidentový postup pro podezřelé zneužití.
+
+Výsledek: služba chrání účty, rozpočet i dostupnost, ale nedělá z každého návštěvníka trvale sledované zařízení.
+
+## Checklist: rate limiting bez plošného fingerprintingu
+
+- Každý citlivý endpoint má popsaný abuse scénář.
+- Limity nejsou univerzální, ale navázané na účel akce.
+- Login kontroluje víc bucketů než jen kombinaci IP + uživatel.
+- Přihlášené akce mají limity podle účtu, tenantu nebo API klíče.
+- Drahé AI funkce mají nákladový rozpočet, ne jen počet requestů.
+- `429` odpověď je srozumitelná a podle potřeby obsahuje `Retry-After`.
+- API dokumentace vysvětluje retry, backoff a žádost o navýšení limitu.
+- CAPTCHA nebo challenge je až jedna z vrstev, ne výchozí berlička.
+- Rate limit logy neukládají tajemství, payloady ani marketingové identifikátory.
+- Existuje proces pro legitimní navýšení limitu i pro bezpečnostní incident.
+
+## Mini šablona rate limit karty
+
+```markdown
+# Rate limit karta: [endpoint / akce]
+
+Účel:
+- Co chráníme:
+- Co se může zneužít:
+- Dopad zneužití:
+
+Limity:
+- Per IP / rozsah:
+- Per účet:
+- Per tenant:
+- Per API klíč:
+- Nákladová jednotka:
+
+Odpověď klientovi:
+- HTTP status:
+- Retry-After:
+- Text pro UI:
+- Text pro API dokumentaci:
+
+Privacy:
+- Co logujeme:
+- Co nikdy nelogujeme:
+- Retence:
+- Kdo má přístup:
+
+Provoz:
+- Alert při:
+- Ruční navýšení schvaluje:
+- Incident playbook:
+- Datum další kontroly:
+```
+
+## Zdroje
+
+- [OWASP Bot Management and Anti-Automation Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Bot_Management_and_Anti-Automation_Cheat_Sheet.html)
+- [OWASP Denial of Service Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Denial_of_Service_Cheat_Sheet.html)
+- [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
+- [MDN: 429 Too Many Requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429)
+- [MDN: Retry-After header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After)
+- [IETF draft: RateLimit header fields for HTTP](https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/)
+
 # Pracovní log
+- 2026-10-07: Doplněna příloha „Rate limiting a abuse ochrana bez plošného fingerprintingu“ s mapou zneužití podle endpointů, vrstvenými limity podle účelu, srozumitelnými `429` odpověďmi, API dokumentací pro retry/backoff, opatrností u CAPTCHA, nákladovými limity pro AI funkce, privacy-first logováním, B2B SaaS příkladem, checklistem, rate limit kartou a ověřenými zdroji OWASP, MDN a IETF.
+
 - 2026-10-07: Doplněna navazující příloha „Remember-me a správa zařízení bez věčného přihlášení“ s oddělením běžné session od zapamatovaného zařízení, hashovanými tokeny, rotací, reuse detekcí, step-up ověřením pro citlivé akce, odhlášením všech zařízení, privacy-first pravidly pro device metadata, příkladem účetního SaaS, checklistem a ověřenými zdroji OWASP, MDN a NIST.
 
 - 2026-10-07: Doplněna příloha „CSP reporty a security reporting bez telemetrického vysavače“ s report-only postupem, návrhem bezpečného endpointu, minimalizací ukládaných polí, oddělením od marketingové analytiky, alerty podle změn, propojením s inventářem externích zdrojů, checkout příkladem, checklistem, CSP reporting kartou a ověřenými zdroji MDN, W3C, OWASP a EDPB.
