@@ -51890,7 +51890,188 @@ Testování:
 - [Martin Fowler: Feature Toggles](https://martinfowler.com/articles/feature-toggles.html)
 - [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 
+
+# Webhook inbox bez duplicit, replay útoků a datového ohňostroje
+
+Webhook je krásně jednoduchý nápad: jiný systém ti pošle HTTP požadavek, když se něco stane. Platba proběhla, faktura se změnila, zákazník odpověděl, kalendář má novou událost. Jenže právě proto, že webhook vypadá jako obyčejný `POST`, svádí k nebezpečně obyčejnému zpracování: přijmout JSON, hned změnit databázi a doufat, že internet bude dneska hodný. Spoiler: internet nebývá hodný, jen občas odpočívá.
+
+Privacy-first přístup k webhookům má tři cíle: ověřit původ zprávy, zpracovat ji opakovatelně a uložit jen tolik dat, kolik je potřeba pro obchodní účel, audit a podporu. Webhook inbox není skládka cizích payloadů. Je to kontrolovaný vstup do produktu.
+
+## Nejdřív vytvoř inbox, až potom měň doménová data
+
+Nejhorší webhook handler je ten, který v jedné request-response cestě ověří podpis, naparsuje payload, zavolá tři interní služby, pošle e-mail, přepočítá tarif a ještě u toho zapíše poznámku do CRM. Funguje to přesně do chvíle, než poskytovatel webhook zopakuje, síť spadne po zápisu do databáze nebo přijde deset událostí najednou.
+
+Bezpečnější model:
+
+1. přijmout požadavek,
+2. ověřit podpis a časové okno,
+3. uložit minimální obálku události do inbox tabulky,
+4. rychle odpovědět `2xx`, pokud je zpráva validní,
+5. zpracovat událost asynchronně ve workeru,
+6. výsledek zpracování zapsat jako stav inbox položky.
+
+Inbox položka typicky obsahuje `provider`, `event_id`, `event_type`, `received_at`, `signature_version`, `tenant_id` po odvození, `processing_status`, počet pokusů a bezpečně zkrácený technický kontext. Plný payload ukládej jen tehdy, když má jasný účel a retenční pravidlo. Pokud ho ukládáš, šifruj ho, omez přístupy a maž ho dřív než doménová data.
+
+Codyho komentář: Webhook inbox je jako recepce v kanceláři. Nechceš, aby každý kurýr rovnou běžel do účetnictví a měnil faktury. Nejdřív recepce, ověření, lístek, až potom práce.
+
+## Podpis ověřuj nad raw body
+
+HMAC podpis dává smysl jen tehdy, když ho ověřuješ nad přesně stejnými bajty, které podepsal odesílatel. Pokud framework nejdřív JSON přeparsuje, přeuspořádá mezery nebo normalizuje znaky, podpis může selhávat — nebo si tým zvykne validaci obcházet, což je horší než původní bug.
+
+Praktická pravidla:
+
+- Uchovej raw body pro ověření podpisu ještě před JSON parserem.
+- Neposílej secret v URL query parametru; patří do podpisového schématu nebo hlavičky.
+- Porovnávej podpis konstantním časem, ne obyčejným `==`.
+- Podporuj verze podpisu, aby šla rotovat metoda i secret.
+- Při selhání podpisu vrať obecnou chybu a neloguj celý payload.
+
+Pro každý provider si do dokumentace napiš přesný postup: která hlavička obsahuje podpis, která timestamp, z čeho se skládá podepisovaný řetězec a jak dlouhé je tolerované časové okno. Bez toho se debug mění v rituální tanec kolem produkčních logů.
+
+## Replay útok není teorie
+
+Platný podpis neznamená, že zpráva je nová. Útočník nebo špatně nakonfigurovaná proxy může zopakovat starý požadavek. Provider také může legitimně opakovat doručení, když nedostal odpověď. Proto potřebuješ dvě vrstvy ochrany: časové okno a deduplikaci podle události.
+
+Dobrá praxe:
+
+- Odmítnout webhook s timestampem mimo rozumné okno, například několik minut podle dokumentace provideru.
+- Uložit `event_id` s unikátním indexem pro kombinaci `provider + event_id`.
+- Pokud provider nemá stabilní ID, vytvořit fingerprint z typu události, externího objektu, času a raw body hashe.
+- Opakovanou událost vrátit jako bezpečný úspěch, pokud už byla přijata.
+- Nikdy nespouštět doménovou změnu dvakrát jen proto, že doručení proběhlo dvakrát.
+
+Idempotence není akademické slovo pro lidi, kteří rádi kazí meetingy. Je to rozdíl mezi jednou fakturou a třemi fakturami za totéž. A zákazníci mají zvláštní talent všimnout si zrovna té druhé varianty.
+
+## Zpracování dělej podle stavu, ne podle naděje
+
+Worker by neměl předpokládat, že události přijdou v ideálním pořadí. U platebního provideru může dorazit `invoice.paid` dřív než lokální synchronizace vytvoří zákazníka. U CRM může přijít update kontaktu, který mezitím někdo sloučil. U kalendáře může přijít smazání události, kterou už systém ručně archivoval.
+
+Místo slepého „udělej akci“ zpracovávej webhook jako signál ke kontrole aktuálního stavu:
+
+- Událost říká, co se možná změnilo.
+- Interní systém si načte aktuální stav externího objektu, pokud je to možné a bezpečné.
+- Doménová změna se provede jen tehdy, když dává smysl vůči aktuálnímu stavu.
+- Pokud chybí závislost, inbox položka jde do opakovatelného retry režimu.
+- Pokud je payload neplatný nebo objekt neexistuje, položka se uzavře s lidsky čitelným důvodem.
+
+Tohle je obzvlášť důležité u SaaS funkcí, které mění přístup, tarif, fakturaci, limity nebo stav účtu. Webhook není pán databáze. Je to svědek události.
+
+## Retry fronta potřebuje brzdy
+
+Retry bez limitu je DDoS, který si firma objednala sama. Každá chyba musí mít kategorii: dočasná, trvalá, bezpečnostní nebo datová. Dočasné chyby se opakují s exponenciálním backoffem. Trvalé chyby se uzavírají a posílají do přehledu pro člověka. Bezpečnostní chyby jdou do alertu. Datové rozpory jdou do ručního řešení s jasným vlastníkem.
+
+Minimální stavový model:
+
+| Stav | Význam | Další krok |
+| --- | --- | --- |
+| `received` | podpis a základní validace prošly | zařadit do fronty |
+| `processing` | worker událost právě řeší | hlídat timeout |
+| `processed` | doménová změna proběhla nebo nebyla potřeba | ponechat metadatový záznam |
+| `retrying` | dočasná chyba | další pokus s backoffem |
+| `blocked` | čeká na člověka nebo chybí data | přiřadit vlastníka |
+| `rejected` | neplatný podpis, schema nebo provider | nelogovat citlivý payload |
+
+Do metrik stačí počítat objemy podle provideru, typu události, stavu a věku fronty. Nepotřebuješ z webhooků stavět paralelní analytický profil zákazníka.
+
+## Payload minimalizuj a rediguj
+
+Mnoho webhooků obsahuje víc dat, než produkt reálně potřebuje. Fakturační webhook může nést e-mail, adresu, položky objednávky, poznámky, daňové údaje a interní metadata provideru. Pokud všechno uložíš „pro debug“, právě sis vytvořil citlivý datový sklad bez dobrého důvodu.
+
+Privacy-first pravidla:
+
+- Pro doménovou změnu používej externí ID a načtený stav, ne celý payload jako zdroj pravdy.
+- Do běžných logů zapisuj ID události, typ, provider, tenant a výsledek, ne osobní údaje.
+- Plný payload drž jen krátce, pokud ho opravdu potřebuješ pro podporu nebo audit.
+- Citlivá pole rediguj před zápisem do chybového systému.
+- V dokumentaci uveď retenční dobu inbox metadat a případného payload archivu.
+- Přístup k payloadům dej jen rolím, které řeší incidenty nebo podporu.
+
+Když zákazník požádá o export nebo smazání dat, webhook inbox nemá být zapomenutý ostrov. Minimálně musíš vědět, zda obsahuje osobní údaje, jak dlouho je držíš a jak se vztahuje k retenční politice.
+
+## Příklad: platební webhook v malém B2B SaaS
+
+SaaS přijímá webhooky od platebního systému pro `subscription.updated`, `invoice.paid` a `invoice.payment_failed`.
+
+Praktický návrh:
+
+1. Endpoint `/webhooks/billing` přijme raw body a podpisové hlavičky.
+2. Middleware ověří HMAC podpis, timestamp a velikost payloadu.
+3. Inbox uloží `provider`, `event_id`, `event_type`, `received_at`, hash raw body, status `received` a šifrovaný payload s retencí 14 dní.
+4. Worker podle externího ID načte aktuální subscription stav z platebního systému.
+5. Změna tarifu se provede idempotentně podle lokálního stavu účtu.
+6. Pokud už byl `event_id` zpracovaný, systém vrátí úspěch bez druhé změny.
+7. Support vidí stav události a stručný důvod chyby, ne celé fakturační osobní údaje.
+8. Dashboard sleduje počet přijatých, odmítnutých, retry a blokovaných událostí.
+
+Výsledek: zákazník nepřijde o přístup kvůli jedné síťové chybě, tým umí dohledat problém a produkt nevyrábí tajnou kopii platebních dat.
+
+## Checklist: webhook inbox bez chaosu
+
+- [ ] Každý webhook endpoint má raw body validaci před parserem.
+- [ ] Podpis se ověřuje podle dokumentace provideru a konstantním časem.
+- [ ] Timestamp nebo nonce brání replay útokům.
+- [ ] `provider + event_id` má unikátní index.
+- [ ] Opakovaná událost je bezpečně idempotentní.
+- [ ] Doménová změna běží asynchronně mimo request handler.
+- [ ] Retry má limit, backoff a jasné konečné stavy.
+- [ ] Logy neobsahují celý payload ani secrety.
+- [ ] Plný payload má účel, šifrování, omezený přístup a retenci.
+- [ ] Support vidí technický stav bez zbytečných osobních údajů.
+- [ ] Existuje ruční postup pro `blocked` události.
+- [ ] Smoke test ověřuje podpis, duplicitu, replay a retry scénář.
+
+## Mini šablona webhook karty
+
+```text
+Provider:
+Endpoint:
+Vlastník:
+
+Události:
+- event_type:
+- obchodní význam:
+- mění doménová data: ano/ne
+
+Ověření:
+- podpisová hlavička:
+- timestamp hlavička:
+- tolerované časové okno:
+- rotace secretu:
+
+Idempotence:
+- stabilní event_id:
+- unikátní klíč:
+- chování při duplicitě:
+
+Zpracování:
+- worker/fronta:
+- retry pravidla:
+- konečné stavy:
+- ruční vlastník blocked událostí:
+
+Data:
+- ukládaná metadata:
+- ukládaný payload: ano/ne
+- citlivá pole:
+- retence:
+- kdo má přístup:
+
+Monitoring:
+- metriky:
+- alerty:
+- testovací scénáře:
+```
+
+## Zdroje
+
+- [OWASP Webhook Security Guidelines Cheat Sheet](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets_draft/Webhook_Security_Guidelines_Cheat_Sheet.md)
+- [OWASP REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html)
+- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- [GDPR, článek 20: právo na přenositelnost údajů](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A02016R0679-20160504)
+
 # Pracovní log
+- 2026-10-07: Doplněna příloha „Webhook inbox bez duplicit, replay útoků a datového ohňostroje“ s bezpečným příjmem webhooků přes inbox tabulku, HMAC ověřením nad raw body, replay ochranou, idempotencí, retry stavovým modelem, payload minimalizací, B2B billing příkladem, checklistem, webhook kartou a ověřenými zdroji OWASP a GDPR.
+
 - 2026-10-07: Doplněna příloha „Feature flags bez skrytých experimentů a vlajkového hřbitova“ s kategorizací flagů, vlastníkem a datem úklidu, bezpečnými defaulty, privacy-first segmentací, rozdílem mezi rolloutem a experimentem, testováním rizikových kombinací, pravidly pro kritické změny konfigurace, AI SaaS příkladem, checklistem, feature flag kartou a ověřenými zdroji OpenFeature, Martin Fowler a OWASP.
 
 - 2026-10-07: Doplněna příloha „HTTP cache bez úniku osobních dat“ s rozdělením odpovědí podle citlivosti, praktickými `Cache-Control` vzory, vysvětlením `no-store`, `private`, `no-cache` a `Vary`, pravidly pro verzované assety, API endpointy, logout, smoke testy, B2B SaaS příkladem, cache checklistem, vyplnitelnou cache kartou a ověřenými zdroji MDN, RFC 9111 a OWASP.
