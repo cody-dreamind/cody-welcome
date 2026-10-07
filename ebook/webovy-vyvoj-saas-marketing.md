@@ -50285,7 +50285,227 @@ Co se záměrně nedělá:
 - [OWASP Cheat Sheet Series: REST Security](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html)
 - [OWASP Cheat Sheet Series: Web Service Security](https://cheatsheetseries.owasp.org/cheatsheets/Web_Service_Security_Cheat_Sheet.html)
 
+# Příloha: Importy dat bez uploadového hororu a duplicit
+
+Import dat vypadá jako obyčejné tlačítko „Nahrát CSV“. Ve skutečnosti je to malá migrační brána do produktu: uživatel ti pošle soubor, který může být rozbitý, moc velký, špatně zakódovaný, duplicitní, citlivý nebo rovnou škodlivý. Když import navrhneš jen jako parser, skončíš s ručními zásahy supportu. Když ho navrhneš jako bezpečný provozní proces, získáš silný onboardingový nástroj.
+
+Privacy-first import má jednoduchý princip: přijmi jen data, která opravdu potřebuješ pro konkrétní účel, ukaž uživateli náhled dopadu ještě před zápisem a po dokončení ukliď dočasné soubory. Žádné tajné „nahrajte nám všechno, my si to nějak přechroupeme“.
+
+## Import začíná účelem, ne formátem
+
+Nejdřív napiš, proč import existuje. Jiný import je „nahraj seznam kontaktů pro fakturaci“, jiný „přenes historické objednávky“ a úplně jiný „importuj uživatele do workspace“. Formát souboru je až druhá otázka.
+
+Dobré zadání importu odpoví na pět věcí:
+
+- Jaké rozhodnutí nebo práci má import zrychlit.
+- Které entity vzniknou nebo se upraví.
+- Která pole jsou povinná, volitelná a zakázaná.
+- Kdo smí import spustit a kdo smí výsledek schválit.
+- Jak dlouho se drží původní soubor, náhled, chybové řádky a auditní záznam.
+
+Špatný import začíná větou „vezmeme CSV a uvidíme“. To není produktový návrh, to je digitální věštění z čárky.
+
+## Soubor ber jako nedůvěryhodný vstup
+
+Uploadovaný soubor nikdy neber jako bezpečný jen proto, že uživatel klikl na `contacts.csv`. OWASP u uploadů doporučuje vrstvenou obranu: kontrolu přípony, MIME typu, signatury souboru, velikosti, názvu, obsahu i bezpečného uložení. MIME typ poslaný klientem je užitečná nápověda, ne důkaz.
+
+Praktické minimum pro malý SaaS:
+
+- Povol jen konkrétní typy: typicky `text/csv`, případně `.xlsx`, pokud opravdu umíš bezpečně zpracovat tabulkový formát.
+- Nastav limit velikosti a počet řádků podle plánu zákazníka nebo provozní kapacity.
+- Přejmenuj soubor na interní ID; původní filename nech jen jako očištěné metadata.
+- Ulož soubor do neveřejného úložiště, ne do veřejné složky webu.
+- Neparsuj soubor v hlavním requestu, ale přes job/frontu s timeoutem.
+- Po zpracování smaž původní soubor podle retenčního pravidla.
+
+Pokud importuješ citlivější data, přidej antivirovou nebo sandbox kontrolu podle rizika. U běžného B2B CSV importu často stačí přísný allowlist, velikostní limity, bezpečný parser, oddělený worker a krátká retence. U dokumentů od neznámých uživatelů už je to jiná liga.
+
+## Mapování sloupců dělej explicitně
+
+Automatické mapování podle názvů sloupců je pohodlné, ale nesmí být tiché. Uživatel má vidět, že `company_name` se zapíše do „Název firmy“, `email` do „Kontaktní e-mail“ a neznámý sloupec se ignoruje.
+
+Bezpečný import má tři vrstvy mapování:
+
+- **Allowlist polí:** import umí jen povolená cílová pole, nic navíc.
+- **Náhled transformace:** uživatel vidí několik řádků před zápisem.
+- **Souhrn dopadu:** systém ukáže, kolik položek vznikne, kolik se upraví, kolik se přeskočí a proč.
+
+Největší chyba je „chytrý“ import, který podle podobnosti názvu uloží data někam, kam nemají patřit. Pokud si nejsi jistý, raději požádej o ruční potvrzení mapování. U importu je jedna otázka navíc levnější než týdenní datová archeologie.
+
+## Validuj po řádcích a vysvětluj lidsky
+
+Import nemá skončit jen hláškou „chyba na řádku 418“. Uživatel potřebuje opravit data, ne hádat náladu parseru. Validace má být po řádcích, s jasnou kategorií chyby a bez úniku cizích dat.
+
+Dobré chybové kategorie:
+
+- **Formát:** neplatný e-mail, datum, číslo, prázdná povinná hodnota.
+- **Pravidlo produktu:** plán nedovoluje více uživatelů, zákazník už existuje, role není povolená.
+- **Bezpečnost:** nepovolený typ souboru, příliš velký řádek, podezřelé vzorce v CSV.
+- **Oprávnění:** uživatel nemá právo vytvořit daný typ záznamu.
+- **Konflikt:** import by přepsal hodnotu, kterou musí někdo schválit.
+
+U chybových exportů buď opatrný. Pokud vracíš soubor „řádky k opravě“, zahrň jen původní problematická pole a vysvětlení chyby. Nepřidávej interní ID, systémové poznámky ani data z jiných záznamů. Debug výpis patří do interního logu, ne do souboru pro zákazníka.
+
+## CSV má vlastní pastičky
+
+RFC 4180 popisuje běžný formát CSV a MIME typ `text/csv`, ale v praxi se potkáš s oddělovači `,`, `;`, různými kódováními, BOM, uvozovkami i řádky přes více linek. Import proto potřebuje jasnou variantu, ne tiché hádání všeho najednou.
+
+Praktické pravidlo: podporuj jednu doporučenou šablonu a maximálně pár rozumných odchylek. Ke stažení dej ukázkový CSV soubor s hlavičkou, příklady hodnot a poznámkou k UTF-8. Pokud podporuješ `;` kvůli evropským tabulkovým zvyklostem, napiš to do dokumentace a otestuj obě varianty.
+
+Pozor i na CSV/formula injection. OWASP popisuje riziko, kdy se hodnota začínající například `=`, `+`, `-`, `@`, tabulátorem nebo návratem vozíku může v tabulkovém procesoru interpretovat jako vzorec. U importu to řeš dvěma směry:
+
+- Při importu detekuj podezřelé hodnoty tam, kde čekáš obyčejný text, a požádej o potvrzení nebo odmítnutí.
+- Při pozdějším exportu tyto hodnoty bezpečně escapuj podle exportní politiky, protože import a export spolu tvoří jeden datový cyklus.
+
+## Preview je bezpečnostní prvek
+
+Preview obrazovka není kosmetika. Je to poslední brzda před zápisem do databáze. Ukaž na ní:
+
+- Název souboru, velikost, počet řádků a detekovaný formát.
+- Mapování sloupců na cílová pole.
+- Počet nových, aktualizovaných, přeskočených a chybných záznamů.
+- Ukázku několika řádků po transformaci.
+- Varování před citlivými nebo nečekanými poli.
+- Tlačítko „Spustit import“ až po explicitním potvrzení.
+
+U citlivějších importů přidej dvojí kontrolu: jeden člověk nahraje a připraví, druhý schválí. Ne proto, že lidem nevěříš, ale protože každému někdy ujede sloupec. Ano, i lidem, kteří říkají „já CSV miluju“. Těm hlavně.
+
+## Zápis dělej transakčně a opakovatelně
+
+Import se může přerušit. Worker spadne, databáze odmítne záznam, uživatel nahraje stejný soubor dvakrát. Proto import potřebuje vlastní stavový model.
+
+Minimální stavy:
+
+- `uploaded`: soubor je přijatý, ještě se neparsuje.
+- `validated`: validace doběhla, čeká se na potvrzení.
+- `queued`: zápis je zařazený do fronty.
+- `processing`: import zapisuje data.
+- `completed`: import doběhl a má souhrn.
+- `completed_with_errors`: část řádků se zapsala, část ne.
+- `failed`: nic zásadního se nezapsalo nebo se zápis vrátil zpět.
+- `cancelled`: uživatel nebo admin import zastavil před zápisem.
+
+Tam, kde jde o peníze, oprávnění nebo zákaznické účty, preferuj transakci nebo jasný rollback plán. U velkých importů může být lepší dávkovaný zápis, ale každá dávka musí mít auditní stopu, idempotentní klíč a možnost pokračovat bez duplicit.
+
+## Duplicitám předcházej před zápisem
+
+Duplicita není jen technická nepříjemnost. V CRM z ní vznikne trapný obchodní follow-up, ve fakturaci špatný doklad a v adminu pocit, že produkt neumí počítat do dvou. Import má před zápisem říct, podle čeho slučuje nebo odmítá duplicity.
+
+Příklady klíčů:
+
+- U kontaktu normalizovaný e-mail v rámci workspace.
+- U firmy kombinace IČO a země, případně interní customer ID.
+- U objednávky externí order ID a zdrojový systém.
+- U uživatele e-mail a tenant ID, nikdy jen e-mail globálně v multitenant SaaS.
+
+Pokud chceš umožnit update existujících záznamů, odděl režimy „pouze vytvořit“, „vytvořit nebo aktualizovat“ a „jen validovat“. Default má být bezpečný: bez potvrzení nepřepisuj existující hodnoty.
+
+## Loguj proces, ne obsah souboru
+
+U importů láká uložit všechno, protože „se to může hodit“. Privacy-first odpověď: ne, většinou se hodí jen souhrn a pár technických metadat.
+
+Auditní záznam importu může obsahovat:
+
+- kdo import spustil,
+- workspace/tenant,
+- typ importu,
+- hash souboru nebo interní ID,
+- počet řádků,
+- počet vytvořených, upravených, přeskočených a chybných záznamů,
+- čas začátku a konce,
+- verzi importní šablony,
+- stav a ID jobu.
+
+Do logu nepatří celé řádky, obsahy polí, e-maily z importu ani původní soubor. Pokud potřebuješ ukázku pro ladění, použij syntetická data nebo krátkou dočasnou diagnostiku s omezeným přístupem a automatickým smazáním.
+
+## Příklad: import zákazníků z původního CRM
+
+Malý B2B SaaS spouští onboarding pro firmu, která přechází z původního CRM. Zákazník chce nahrát 4 000 kontaktů. Produkt povolí CSV do 10 MB, stáhne šablonu a jasně popíše povinná pole: název firmy, kontaktní e-mail, země a interní customer ID.
+
+Po uploadu systém soubor uloží neveřejně, spočítá hash, zařadí validaci do fronty a ukáže preview. Najde 180 řádků bez e-mailu, 46 duplicit podle e-mailu v tenantovi a 12 neznámých sloupců. Uživatel si stáhne opravný soubor jen s chybovými řádky, opraví ho a nahraje znovu.
+
+Před zápisem preview ukáže: 3 820 nových kontaktů, 0 aktualizací, 0 přepsání. Uživatel potvrdí import. Worker zapisuje dávkovaně po 500 řádcích s idempotentním import ID. Po dokončení zůstane auditní souhrn, původní soubor se smaže po sedmi dnech a zákazník dostane report bez citlivých detailů navíc.
+
+Výsledek: support neřeší ruční opravy, zákazník ví, co se stalo, a produkt si nepřidal tajnou skládku cizích dat.
+
+## Checklist: import dat bez uploadového hororu
+
+- [ ] Import má jasný účel, vlastníka a povolené entity.
+- [ ] Existuje šablona souboru s příklady a dokumentací formátu.
+- [ ] Upload má allowlist typů, velikostní limit a bezpečné neveřejné uložení.
+- [ ] Původní filename se nepoužívá jako storage path.
+- [ ] Parser běží ve workeru/frontě, ne v hlavním requestu bez timeoutu.
+- [ ] Mapování sloupců je explicitní a potvrzené uživatelem.
+- [ ] Neznámá pole se ignorují nebo blokují podle importní politiky.
+- [ ] Validace vrací lidské chyby po řádcích.
+- [ ] Preview ukazuje dopad před zápisem.
+- [ ] Duplicity mají jasná pravidla podle tenant-aware klíčů.
+- [ ] Přepis existujících hodnot vyžaduje samostatné potvrzení.
+- [ ] Import má stavový model, auditní souhrn a idempotentní zpracování.
+- [ ] Chybové exporty neobsahují interní ani cizí data navíc.
+- [ ] Původní soubory, preview a dočasné chyby mají retenční lhůtu.
+- [ ] Logy obsahují procesní metadata, ne celý obsah importu.
+
+## Mini šablona importní karty
+
+## Účel
+
+- Název importu:
+- Pro koho je určený:
+- Jakou práci zrychluje:
+- Zakázané použití:
+
+## Formát
+
+- Povolené typy souborů:
+- Maximální velikost:
+- Maximální počet řádků:
+- Kódování a oddělovač:
+- Odkaz na šablonu:
+
+## Data
+
+- Povinná pole:
+- Volitelná pole:
+- Zakázaná pole:
+- Identifikátor duplicity:
+- Pravidlo pro update existujících záznamů:
+
+## Bezpečnost
+
+- Kontroly uploadu:
+- Kontroly obsahu:
+- CSV/formula injection pravidlo:
+- Kdo smí import spustit:
+- Kdo musí import schválit:
+
+## Provoz
+
+- Stavový model:
+- Worker/fronta:
+- Retry pravidla:
+- Rollback nebo oprava:
+- Alert při selhání:
+
+## Privacy
+
+- Retence původního souboru:
+- Retence chybových řádků:
+- Auditní metadata:
+- Zakázané logování:
+- Informace pro zákazníka:
+
+## Zdroje
+
+- [OWASP Cheat Sheet Series: File Upload](https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html)
+- [OWASP Cheat Sheet Series: Input Validation](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html)
+- [OWASP Community: CSV Injection](https://owasp.org/www-community/attacks/CSV_Injection)
+- [RFC 4180: Common Format and MIME Type for CSV Files](https://datatracker.ietf.org/doc/html/rfc4180)
+- [MDN: Content-Disposition header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Disposition)
+
 # Pracovní log
+
+- 2026-10-07: Doplněna příloha „Importy dat bez uploadového hororu a duplicit“ s účelovým návrhem importu, bezpečným uploadem, explicitním mapováním sloupců, řádkovou validací, CSV/formula injection pravidly, preview před zápisem, idempotentním stavovým modelem, deduplikací, privacy-first logováním, checklistem, importní kartou a ověřenými zdroji OWASP, RFC 4180 a MDN.
 
 - 2026-10-07: Doplněna příloha „Webhooky a integrační endpointy bez chaosu a duplicit“ s návrhem účelu endpointu, ověřením podpisu, idempotencí, rychlým zařazením do fronty, privacy-first logováním, checklistem a vyplnitelnou webhook kartou.
 
