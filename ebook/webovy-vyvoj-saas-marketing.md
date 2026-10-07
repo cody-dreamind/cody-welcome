@@ -52468,7 +52468,182 @@ Support má v administraci tlačítko „upravit preference na žádost zákazn�
 - CNIL: [Cookies et traceurs — comment mettre mon site web en conformité](https://cnil.fr/fr/cookies-et-autres-traceurs/regles/cookies/comment-mettre-mon-site-web-en-conformite)
 - CNIL: [Sheet n°16: Use analytics on your websites and applications](https://www.cnil.fr/fr/node/677)
 
+
+# Příloha: Žádosti o data bez supportového ping-pongu
+
+Žádost o přístup, opravu, export nebo smazání osobních dat není exotická právní událost. Je to normální provozní proces, který jednou přijde ve chvíli, kdy tým zrovna řeší release, fakturaci a rozbitý import. Pokud ho nemáš připravený, začneš improvizovat: někdo hledá data v databázi, někdo ve fakturačním nástroji, někdo ve supportu, někdo v e-mailu a všichni doufají, že odpověď bude úplná. To není privacy-first. To je detektivka s termínem.
+
+Evropská komise i EDPB popisují práva lidí nad jejich osobními údaji: přístup, opravu, výmaz, omezení zpracování, námitku, přenositelnost a ochranu před čistě automatizovaným rozhodováním. Pro malý SaaS z toho plyne jednoduchá provozní pravda: jestli sbíráš osobní data, musíš vědět, kde jsou, kdo je umí najít a jak bezpečně odpovědět bez toho, aby ses při tom dopustil dalšího úniku.
+
+> Codyho komentář: Nejhorší odpověď na žádost o data není „ne“. Nejhorší odpověď je „asi jsme to našli všechno“. Slovo „asi“ do datové hygieny patří stejně jako mokrý koberec do serverovny.
+
+## Rozliš typ žádosti hned na vstupu
+
+První chyba je házet všechny žádosti do jednoho koše „GDPR“. Produktově i technicky jde o různé situace. Každá má jiný výsledek, jiný rozsah a jiné riziko.
+
+Základní typy:
+
+- **Přístup** — člověk chce vědět, jaká osobní data o něm zpracováváš.
+- **Oprava** — chce opravit nepřesný údaj.
+- **Výmaz** — chce smazat data, která už nemají důvod zůstat.
+- **Omezení** — chce dočasně omezit zpracování sporných dat.
+- **Přenositelnost** — chce data v použitelném strojově čitelném formátu.
+- **Námitka** — nechce určité zpracování, typicky tam, kde spoléháš na oprávněný zájem.
+- **Automatizované rozhodování** — chce vysvětlení nebo lidský zásah u rozhodnutí s významným dopadem.
+
+Do support formuláře nebo interního postupu dej jednoduché třídění. Ne proto, aby zákazník vyplňoval právnický test, ale aby tým neodpověděl exportem tam, kde jde o opravu, nebo smazáním tam, kde má být jen omezení.
+
+## Ověř identitu bez sběru nových dat
+
+Před vydáním nebo změnou osobních dat musíš vědět, že mluvíš se správným člověkem. To ale neznamená automaticky sbírat kopii občanky, fotku obličeje nebo nové citlivé údaje. Privacy-first ověření používá existující vztah a nejmenší dostačující důkaz.
+
+Praktické pořadí ověření:
+
+1. Pokud je uživatel přihlášený, nech ho potvrdit akci v účtu.
+2. Pokud píše z ověřeného e-mailu účtu, pošli potvrzovací odkaz nebo jednorázový kód.
+3. Pokud žádost posílá administrátor firmy, ověř jeho roli v tenantovi.
+4. Pokud žádá bývalý uživatel, porovnej jen údaje, které už bezpečně eviduješ.
+5. Pokud je žádost podezřelá, eskaluj ručně a zaznamenej proč.
+
+Neposílej osobní data jako přílohu na libovolný e-mail jen proto, že žádost zněla přesvědčivě. Útočník často nechce prolomit aplikaci. Stačí mu přemluvit support, aby mu poslal „export pro kolegu“.
+
+## Vytvoř interní inventář míst, kde data žijí
+
+Bez datové mapy bude každá žádost ruční archeologie. Pro malý SaaS stačí praktický seznam systémů, ne korporátní freska přes celou zeď.
+
+Typická místa:
+
+- hlavní produkční databáze,
+- analytika a produktové eventy,
+- e-mailing a transakční e-maily,
+- support a chat,
+- fakturace a účetnictví,
+- logy, auditní logy a monitoring,
+- souborové úložiště,
+- zálohy,
+- CRM nebo sales pipeline,
+- AI nástroje a konektory, pokud zpracovávají zákaznický kontext.
+
+U každého místa si napiš: vlastník, typ dat, účel, retenční pravidlo, exportovat ano/ne, mazat ano/ne, důvod výjimky a odkaz na postup. Tohle je rozdíl mezi „umíme odpovědět“ a „někdo možná ví“.
+
+## Export dělej užitečný, ne nebezpečně velký
+
+Právo na přístup a přenositelnost neznamená poslat kompletní dump databáze. Export má být srozumitelný, relevantní a bezpečný. V praxi je lepší několik pojmenovaných souborů než jeden obří balík, kde se míchá profil, fakturace, nastavení, eventy a interní poznámky.
+
+Rozumný export pro SaaS:
+
+```text
+account.json        základní účet a preference
+profile.json        profilové údaje uživatele
+billing.csv         fakturační přehled bez platebních tajemství
+projects.json       zákaznická data, která uživatel do služby vložil
+audit-summary.csv   vybrané auditní události relevantní pro účet
+readme.txt          vysvětlení polí, retence a kontakt pro dotazy
+```
+
+Do exportu nedávej:
+
+- hesla, tokeny, recovery kódy a celé API klíče,
+- interní support poznámky o jiných lidech,
+- data jiného tenantu,
+- surové logy s IP adresami bez důvodu,
+- bezpečnostní signály, které by pomohly útočníkovi,
+- obsah, který patří jinému uživateli nebo firmě.
+
+Pokud zákazník žádá data firemního tenantu, rozliš osobní práva jednotlivce a smluvní export zákaznických dat. U B2B SaaS to často není totéž. Jednotlivec má práva ke svým osobním údajům; firma může mít smluvní nárok na export pracovních dat celého účtu podle podmínek služby.
+
+## Mazání nesmí rozbít účetnictví ani důkazy
+
+Výmaz je silné právo, ale ne každé datum lze smazat okamžitě a ze všech míst. Některá data můžeš potřebovat kvůli účetnictví, smluvním nárokům, bezpečnosti, incidentům nebo splnění jiné právní povinnosti. Důležité je umět vysvětlit, co smažeš, co anonymizuješ, co ponecháš a proč.
+
+Praktický model odpovědi:
+
+```text
+Smažeme: marketingové kontakty, produktové preference, nepovinný profil, obsah testovacího workspace.
+Anonymizujeme: produktové eventy, které už nepotřebují přímou identitu.
+Ponecháme po omezenou dobu: faktury a účetní záznamy, auditní záznamy bezpečnostních změn, záznam o vyřízení žádosti.
+Nesmažeme: data, která patří jinému zákazníkovi nebo jsou nutná pro obhajobu právních nároků.
+```
+
+Cílem není říct „smazat nejde“. Cílem je říct pravdu přesně. Když něco ponecháváš, napiš účel, kategorii a retenční dobu. Když něco anonymizuješ, ověř, že anonymizace opravdu brání zpětné identifikaci v rozumném kontextu, ne že jen přejmenuješ `ondrej@example.com` na `user_123` a tváříš se jako kouzelník.
+
+## Zálohy řeš předem
+
+Zálohy jsou častý zdroj paniky. Nemusíš nutně přepisovat historickou zálohu při každé žádosti, ale musíš mít pravidlo, co se stane při obnově. Jinak se smazaná data vrátí jako zombie v nejhorším možném čase.
+
+Minimum:
+
+- zálohy mají retenční dobu,
+- obnovení zálohy má checklist pro opětovné provedení mazacích požadavků,
+- žádosti o výmaz mají identifikátor, který jde po obnově znovu aplikovat,
+- test obnovy ověřuje i privacy důsledky,
+- tým ví, že restore není jen technická operace, ale i datová událost.
+
+Privacy-first detail: do pracovního logu obnovy nepiš plné osobní údaje. Stačí identifikátor žádosti, účet, kategorie dopadu a potvrzení, že re-delete replay proběhl.
+
+## Příklad: bývalý uživatel žádá smazání
+
+Situace: Uživatel odešel z B2B SaaS, kde byl členem firemního workspace. Píše na podporu: „Smažte prosím všechna moje data.“
+
+Postup:
+
+1. Support ověří identitu přes e-mail nebo potvrzovací odkaz.
+2. Tým rozliší osobní účet uživatele od dat firmy v tenantovi.
+3. Produkt smaže nebo anonymizuje osobní profil, preference, marketingové kontakty a nepovinné údaje.
+4. Role ve workspace se deaktivuje, ale firemní záznamy vytvořené v rámci práce zůstanou podle smluvních pravidel zákazníka.
+5. Fakturační a bezpečnostní záznamy se ponechají podle retenční karty.
+6. Do evidence žádostí se uloží výsledek: co bylo smazáno, co ponecháno, proč a kdo kontroloval výsledek.
+7. Uživatel dostane srozumitelnou odpověď bez interních detailů a bez výpisu dat jiných lidí.
+
+Ukázková odpověď:
+
+```text
+Dobrý den,
+vaši žádost jsme vyřídili. Osobní profil, marketingové preference a nepovinné údaje spojené s vaším uživatelským účtem jsme smazali nebo anonymizovali. Některé provozní a účetní záznamy ponecháváme po omezenou dobu, protože jsou nutné pro účetnictví, bezpečnost a doložení změn ve firemním workspace. Data patřící firemnímu účtu zůstávají spravována administrátorem daného workspace.
+```
+
+## Checklist: žádosti o data bez chaosu
+
+- [ ] Máme jednu veřejnou cestu, kam lze žádosti posílat.
+- [ ] Umíme rozlišit přístup, opravu, výmaz, omezení, námitku a přenositelnost.
+- [ ] Máme bezpečný postup ověření identity bez sběru zbytečných dokladů.
+- [ ] Existuje inventář systémů, kde osobní data žijí.
+- [ ] Víme, co exportujeme, co nikdy neposíláme a proč.
+- [ ] Umíme oddělit osobní žádost uživatele od smluvního exportu firemního tenantu.
+- [ ] Máme pravidlo pro data v zálohách a restore scénáře.
+- [ ] Evidence žádostí neobsahuje zbytečné osobní údaje.
+- [ ] Support má šablony odpovědí a ví, kdy eskalovat.
+- [ ] Každý typ žádosti má vlastníka a termín kontroly.
+
+## Mini šablona DSAR karty
+
+```text
+Typ žádosti:
+Žadatel:
+Ověření identity:
+Dotčený účet / tenant:
+Systémy ke kontrole:
+Data k exportu:
+Data ke smazání / anonymizaci:
+Data ponechaná a důvod:
+Zálohy a restore pravidlo:
+Vlastník vyřízení:
+Datum přijetí:
+Datum odpovědi:
+Kontrola druhou osobou:
+Poznámka pro zákazníka:
+```
+
+## Zdroje
+
+- European Commission: Information for individuals — https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- European Commission: Dealing with requests from individuals — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+- European Data Protection Board: Data subject rights — https://www.edpb.europa.eu/topics/key-gdpr-concepts/data-subject-rights_en
+- EDPB Guidelines 01/2022 on data subject rights — Right of access — https://www.edpb.europa.eu/system/files/2023-04/edpb_guidelines_202201_data_subject_rights_access_v2_en.pdf
+- GDPR, Article 5 principles including data minimisation and storage limitation — https://gdpr-info.eu/art-5-gdpr/
+
 # Pracovní log
+- 2026-10-07: Doplněna příloha „Žádosti o data bez supportového ping-pongu“ s praktickým DSAR workflow, ověřením identity, inventářem systémů, bezpečným exportem, výmazem, pravidly pro zálohy, příkladem B2B SaaS, checklistem, DSAR kartou a ověřenými zdroji Evropské komise, EDPB a GDPR.
 
 - 2026-10-07: Doplněna příloha „Preference centrum bez consentového labyrintu“ s praktickým rozdělením preferencí podle účelu, odvoláním souhlasu, minimálním důkazem změny, synchronizací do nástrojů, oddělením cookie voleb, checklistem, vyplnitelnou preference kartou a ověřenými evropskými zdroji.
 
