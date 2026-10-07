@@ -54327,7 +54327,165 @@ Poznámka ke schválení zákazníkem:
 - Evropská komise: Principles relating to processing of personal data podle GDPR, včetně minimalizace a přesnosti: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
 - MITRE CWE-200: Exposure of Sensitive Information to an Unauthorized Actor, obecný přehled rizik nechtěného zveřejnění informací: https://cwe.mitre.org/data/definitions/200.html
 
+# Transakční e-maily bez spamové mlhy a datového ocásku
+
+Transakční e-mail je produktové rozhraní, ne marketingový billboard. Potvrzení registrace, reset hesla, faktura, bezpečnostní upozornění, pozvánka do workspace nebo informace o výpadku často rozhodují o důvěře víc než celá hero sekce. Když dorazí pozdě, spadne do spamu nebo obsahuje zbytečný tracking, uživatel nevidí „deliverability problém“. Vidí službu, které nejde věřit.
+
+Privacy-first přístup neznamená posílat e-maily technicky naivně. Znamená posílat jen to, co má jasný účel, z domény s poctivou autentizací, bez reklamního měření a s minimem osobních údajů. E-mail je starý internetový dinosaurus, ale pořád kouše.
+
+> Codyho komentář: Nejhorší transakční e-mail je ten, který se tváří jako servisní zpráva, ale chová se jako marketingový špion v trenčkotu. Uživatel chtěl reset hesla, ne exkurzi do pixelového safari.
+
+## Nejdřív rozděl typy zpráv
+
+Nepoužívej jeden e-mailový kanál pro všechno. Smíchané produktové, bezpečnostní a marketingové zprávy zhoršují doručitelnost, souhlasy i interní odpovědnost.
+
+Praktické rozdělení:
+
+| Typ zprávy | Příklad | Primární cíl | Měření |
+| --- | --- | --- | --- |
+| Autentizační | reset hesla, magic link, MFA kód | bezpečný přístup | doručeno / použito bez obsahu tokenu |
+| Produktová provozní | pozvánka, změna role, export hotov | dokončit uživatelskou akci | stav akce v produktu |
+| Bezpečnostní | nové zařízení, změna e-mailu, vytvořený token | upozornit na riziko | auditní událost a případné potvrzení |
+| Fakturační | faktura, selhaná platba, změna tarifu | vysvětlit peníze | stav platby / otevření dokladu v aplikaci |
+| Marketingová | newsletter, nabídka, event | vztah a poptávka | souhlas, odhlášení, agregovaný výkon |
+
+Každý typ má mít vlastní pravidla obsahu, právní základ, retenci a vlastníka. Pokud stejná šablona slouží pro reset hesla i upsell, máš problém. A možná i kreativní oddělení, které potřebuje kafe a hranice.
+
+## Nastav doménu jako produktovou infrastrukturu
+
+Doručitelnost nezačíná textem e-mailu. Začíná DNS, reputací domény a tím, jestli příjemce pozná, že zpráva opravdu přichází od tebe.
+
+Minimum pro SaaS a seriózní web:
+
+- SPF pro povolené odesílací servery,
+- DKIM pro kryptografický podpis zpráv,
+- DMARC pro politiku zacházení se zprávami, které neprojdou SPF/DKIM,
+- reverzní DNS a konzistentní hostname u vlastního SMTP,
+- oddělené subdomény podle rizika, například `mail.example.cz`, `billing.example.cz`, `news.example.cz`,
+- monitoring DMARC reportů, aby ses o problému nedozvěděl až od zákazníka.
+
+NIST ve své publikaci k důvěryhodnému e-mailu doporučuje právě kombinaci SPF, DKIM a DMARC jako základ pro autentizaci odesílající domény. Gmail ve svých pravidlech pro odesílatele také požaduje autentizaci, zarovnání domén a u hromadných odesílatelů snadné odhlášení. To není „Google řekl, tak skáčeme“. Je to praktický signál, že e-mailový svět už neodpouští domény nastavené stylem „nějak to projde“.
+
+## Marketing drž odděleně od servisních zpráv
+
+Servisní e-mail má pomoci dokončit nebo zabezpečit akci. Nepřidávej do něj promo bloky, remarketingové parametry, sociální sledování ani pixel pro měření otevření. Uživatel nemá možnost si z resetu hesla prakticky odhlásit marketingový ocásek, aniž by ztratil bezpečnostní funkci.
+
+Dobré pravidlo:
+
+- transakční zprávy: bez reklamních pixelů, bez cross-sellu, bez UTM chaosu,
+- marketingové zprávy: jen po platném právním důvodu, s jasným odhlášením,
+- bezpečnostní zprávy: maximálně stručné, s přímou cestou do aplikace,
+- fakturační zprávy: bez nátlaku, ale s jasným vysvětlením stavu.
+
+Pokud chceš měřit, měř stav v produktu: token použit, faktura otevřena po přihlášení, export stažen, pozvánka přijata. Není nutné sledovat, jestli někdo otevřel e-mail ve 22:17 v klientovi s divným user-agentem. To je zajímavé hlavně pro lidi, kteří mají rádi grafy a špatné nápady.
+
+## One-click unsubscribe patří k hromadným zprávám
+
+U newsletterů a podobných listových e-mailů připrav odhlášení tak, aby bylo opravdu snadné. RFC 8058 popisuje mechanismus `List-Unsubscribe-Post` pro jedním klikem potvrzené odhlášení u listových zpráv. Gmail od února 2024 zpřísnil pravidla pro odesílatele větších objemů na osobní Gmail účty mimo jiné v oblasti autentizace, nízkého spamu a snadného odhlášení.
+
+Privacy-first implementace:
+
+- odhlášení funguje bez přihlášení, ale přes krátce platný, omezený token,
+- odhlášení mění jen konkrétní marketingovou preferenci, ne celý účet,
+- potvrzovací stránka neobsahuje reklamní skripty,
+- v aplikaci existuje preference centrum pro pozdější změnu,
+- servisní zprávy nejsou schované pod marketingovým souhlasem.
+
+Pozor na bezpečnostní detail: GET požadavky mohou dělat bezpečnostní skenery. Proto nedělej destruktivní odhlášení jen obyčejným otevřením URL, pokud používáš jiný mechanismus než standardní one-click tok. Jinak ti newsletter „odhlásí“ robot, který chtěl jen zjistit, jestli odkaz nekouše.
+
+## Citlivý obsah drž mimo e-mail
+
+E-mail není bezpečný trezor. I když použiješ TLS, DKIM a krásné SPF, zpráva může skončit v přeposlané schránce, firemním archivu, mobilní notifikaci, screenshotu nebo support ticketu. Proto do e-mailu nedávej víc, než je nutné.
+
+Do transakčního e-mailu typicky nepatří:
+
+- celý obsah dokumentu, reportu nebo exportu,
+- celé API klíče, recovery kódy nebo dlouhodobé tokeny,
+- osobní údaje třetích osob,
+- citlivé obchodní metriky,
+- interní ID, debug informace a názvy neveřejných feature flagů,
+- detailní důvod bezpečnostního zásahu, který by pomohl útočníkovi.
+
+Lepší vzor: e-mail řekne, že je akce připravená, a pošle uživatele do přihlášené aplikace. Pokud musí obsahovat odkaz, token má být krátce platný, jednorázový, omezený na konkrétní akci a nesmí se logovat v plné podobě.
+
+## TLS pro příjem pošty ber jako součást reputace
+
+Pokud provozuješ vlastní doménu, neřeš jen odesílání. Řeš i to, jak bezpečně přijímáš poštu. RFC 8461 definuje MTA-STS, tedy mechanismus, kterým doména oznamuje politiku pro doručování přes TLS. Prakticky to pomáhá snížit riziko downgrade útoků při doručování mezi mail servery, pokud je správně nastavený MX, HTTPS policy soubor a DNS TXT záznam.
+
+Pro malý tým není nutné hned provozovat vlastní poštovní infrastrukturu v garáži mezi kávovarem a routerem. Ale je dobré vědět, že i u dodavatele e-mailu řešíš:
+
+- kde jsou data fyzicky a smluvně zpracovávaná,
+- jestli máš DPA a seznam subprocesorů,
+- jak funguje export a archivace,
+- jak se nastavuje SPF/DKIM/DMARC/MTA-STS,
+- kdo má admin přístup,
+- jak rychle umíš přejít jinam.
+
+Evropský provoz neznamená „e-mail je v EU, hotovo“. Znamená vědět, kdo drží schránky, logy, zálohy, antispamové kontroly a metadata.
+
+## Příklad: český B2B SaaS posílá provozní e-maily
+
+Malý B2B SaaS má registrace, pozvánky do workspace, faktury, exporty a newsletter.
+
+Rozumné nastavení:
+
+1. `app.example.cz` posílá pouze transakční zprávy přes ověřenou doménu s DKIM.
+2. `news.example.cz` posílá newsletter s odděleným souhlasem a one-click unsubscribe.
+3. Bezpečnostní e-maily neobsahují tracking pixel ani marketingový blok.
+4. Export dat se neposílá přílohou, ale jako krátce platný odkaz do přihlášené aplikace.
+5. Fakturační e-mail obsahuje číslo dokladu a částku, ale detailní historii plateb ukazuje až aplikace.
+6. DMARC reporty kontroluje vlastník infrastruktury jednou týdně a po změně dodavatele vždy.
+7. Šablony mají vlastníka, datum revize a testovací seed data bez reálných zákazníků.
+
+Výsledek: méně spamu, méně úniků dat, jasnější odpovědnost. Nudné? Ano. A přesně proto to funguje.
+
+## Checklist: transakční e-maily bez datového ocásku
+
+- [ ] Každý typ e-mailu má účel, vlastníka a právní/provozní logiku.
+- [ ] Transakční, bezpečnostní, fakturační a marketingové zprávy jsou oddělené.
+- [ ] Odesílací doména má SPF, DKIM a DMARC.
+- [ ] U větších objemů sleduješ požadavky hlavních mailbox providerů.
+- [ ] Marketingové e-maily mají snadné odhlášení a preference centrum.
+- [ ] Servisní e-maily neobsahují marketingový tracking ani promo bloky.
+- [ ] Citlivý obsah zůstává v přihlášené aplikaci, ne v těle e-mailu.
+- [ ] Tokeny v odkazech jsou krátce platné, jednorázové a omezené.
+- [ ] URL s tokeny se nelogují v plné podobě.
+- [ ] Šablony neobsahují reálná zákaznická data v testech ani náhledech.
+- [ ] Dodavatel e-mailu má zkontrolované zpracování dat, subprocesory a exit plán.
+- [ ] DMARC a doručitelnost se kontrolují po změně DNS, provideru nebo domény.
+
+## Mini šablona e-mailové karty
+
+```text
+Název zprávy:
+Typ: autentizační / produktová / bezpečnostní / fakturační / marketingová
+Účel:
+Spouštěcí událost:
+Příjemce:
+Odesílací doména/subdoména:
+Povolený obsah:
+Zakázaný obsah:
+Odkazy a tokeny:
+Měření:
+Právní/provozní poznámka:
+Dodavatel:
+Retence logů:
+Vlastník:
+Datum poslední kontroly:
+```
+
+## Zdroje
+
+- NIST SP 800-177 Rev. 1: Trustworthy Email, doporučení pro SPF, DKIM, DMARC, TLS a bezpečnější e-mailovou infrastrukturu: https://csrc.nist.gov/pubs/sp/800/177/r1/final
+- RFC 8461: SMTP MTA Strict Transport Security (MTA-STS), standard pro publikování TLS politiky přijímající domény: https://www.rfc-editor.org/info/rfc8461
+- RFC 8058: Signaling One-Click Functionality for List Email Headers, standard pro one-click unsubscribe u listových e-mailů: https://www.rfc-editor.org/rfc/rfc8058.html
+- Gmail Help: Email sender guidelines, aktuální požadavky na autentizaci, zarovnání domén a odhlášení pro odesílatele: https://support.google.com/mail/answer/81126
+- Evropská komise: Legal grounds for processing data, včetně poznámky k možnosti odvolat souhlas u newsletteru: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data_en
+- EUR-Lex: GDPR, článek 32 k přiměřeným technickým a organizačním opatřením podle rizika: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+
 # Pracovní log
+
+- 2026-10-07: Doplněna příloha „Transakční e-maily bez spamové mlhy a datového ocásku“ s rozdělením typů zpráv, doménovou autentizací SPF/DKIM/DMARC, oddělením marketingu od servisních e-mailů, one-click unsubscribe, pravidly pro citlivý obsah, MTA-STS poznámkou, B2B SaaS příkladem, checklistem, e-mailovou kartou a ověřenými zdroji NIST, RFC, Gmail, Evropské komise a GDPR.
 
 - 2026-10-07: Doplněna příloha „Produktové screenshoty a marketingové obrázky bez úniku dat“ s praktickým rozlišením účelů obrázků, syntetickými daty, redakční kontrolou, bezpečnými metadaty a formáty, pravidly pro případovky, Open Graph náhledy, příkladem dashboardu, checklistem, screenshot kartou a ověřenými zdroji W3C, MDN, Evropské komise a MITRE.
 
