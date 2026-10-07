@@ -53336,6 +53336,220 @@ Datum další kontroly:
 - EUR-Lex: [Regulation (EU) 2016/679 — General Data Protection Regulation](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng)
 
 
+
+# Příloha: Status page a incident komunikace bez paniky a datového divadla
+
+Status page není dekorace pro velké firmy. Je to jednoduchý slib: když služba nefunguje, zákazník se nemusí ptát supportu, LinkedInu ani vlastního krevního tlaku. Pro malý SaaS je dobrá status page levná pojistka důvěry, ale jen pokud je pravdivá, srozumitelná a provozně oddělená od systému, který právě může hořet.
+
+Codyho komentář: status page, která během výpadku ukazuje zelenou, je horší než žádná. To už není monitoring, to je firemní horoskop.
+
+## Nejdřív rozhodni, komu status page slouží
+
+Status page má tři publika:
+
+1. **Zákazník**, který chce vědět, jestli problém řešíte a jestli má dělat workaround.
+2. **Support a sales**, kteří potřebují jednotnou odpověď místo třiceti improvizovaných vět.
+3. **Interní tým**, který potřebuje snížit hluk a soustředit se na obnovu služby.
+
+Proto ji nepiš jako interní incident log. Zákazníka nezajímá, že `worker-3` spadl na `OOMKilled`, pokud z toho neumí odvodit dopad. Piš dopadově:
+
+- špatně: „Máme problém s Redis clusterem.“
+- lépe: „Část uživatelů nemůže dokončit přihlášení. Data nejsou ztracená. Pracujeme na obnově.“
+
+## Komponenty pojmenuj podle uživatelské zkušenosti
+
+Nejčastější chyba je status page poskládaná z interní infrastruktury: `api-gateway`, `postgres-primary`, `queue-worker`, `cdn-edge`. Pro tým užitečné, pro zákazníka často šifra.
+
+Praktičtější komponenty:
+
+- **Webová aplikace** — načtení rozhraní, dashboard, základní navigace.
+- **Přihlášení a účty** — login, SSO, obnova hesla, správa profilu.
+- **API a integrace** — veřejné API, webhooky, importy, exporty.
+- **E-maily a notifikace** — transakční e-maily, bezpečnostní upozornění, provozní zprávy.
+- **Fakturace** — platby, faktury, usage metering, změny tarifu.
+- **Help centrum / dokumentace** — znalostní báze, návody, status historie.
+
+U menšího produktu stačí pět až osm komponent. Padesát komponent vypadá odborně, dokud zákazník nepozná, že netuší, která z nich vysvětluje jeho problém.
+
+## Odděl veřejný status od interního monitoringu
+
+Interní monitoring má být hlučný, detailní a technický. Veřejný status má být stručný, ověřený a bezpečný. Neposílej ven:
+
+- přesné názvy serverů, privátních endpointů a interních tenantů,
+- osobní údaje zákazníků nebo ukázky payloadů,
+- odhady příčiny, které ještě nejsou potvrzené,
+- bezpečnostní detaily, které by pomohly útočníkovi,
+- sliby času obnovy, pokud je neumíš obhájit.
+
+Dobrý model je dvouvrstvý:
+
+- **Interní incident kanál** obsahuje timeline, hypotézy, technické detaily, vlastníky, rollback příkazy a odkazy do observability.
+- **Veřejná status page** obsahuje dopad, stav řešení, známý workaround a čas další aktualizace.
+
+## Nastav rytmus aktualizací předem
+
+Během incidentu je nejhorší vymýšlet, kdy znovu napsat. Nastav jednoduchý rytmus podle závažnosti:
+
+| Závažnost | Příklad | První zpráva | Další aktualizace |
+|---|---|---:|---:|
+| Kritická | výpadek aplikace, ztráta přihlášení, podezření na data breach | do 15 minut | každých 30 minut nebo při změně |
+| Vysoká | část funkcí nefunguje, API má vysokou chybovost | do 30 minut | každých 60 minut |
+| Střední | pomalost, částečné zpoždění e-mailů | do 60 minut | po potvrzení příčiny a opravě |
+| Nízká | drobná degradace bez přímého dopadu | podle kontextu | při vyřešení |
+
+Není nutné psát román. Aktualizace může být krátká:
+
+> „Problém stále řešíme. Dopad se nezvětšil: část uživatelů nemůže dokončit export dat. Další aktualizaci přidáme do 14:30 UTC.“
+
+Klíčové je, že zákazník ví, že tam někdo je. I kdyby ten někdo právě koukal na grafy s výrazem člověka, který omylem otevřel produkční konzoli v pátek večer.
+
+## Incident šablony si připrav předem
+
+Připrav si alespoň čtyři šablony. V incidentu pak měníš fakta, ne tón firmy.
+
+### První potvrzení problému
+
+```text
+Zaznamenali jsme problém s [oblast služby]. Dopad: [kdo/co je ovlivněno].
+Právě ověřujeme rozsah a příčinu. Data zatím [jsou/nejsou] podle dostupných informací ohrožena.
+Další aktualizaci přidáme do [čas].
+```
+
+### Aktualizace během řešení
+
+```text
+Problém stále řešíme. Potvrzený dopad: [konkrétně].
+Děláme [bezpečný popis kroku, např. rollback poslední změny / navýšení kapacity / přesměrování fronty].
+Doporučený workaround: [pokud existuje].
+Další aktualizace: [čas].
+```
+
+### Vyřešeno
+
+```text
+Incident je vyřešen od [čas]. Funkce [oblast] je znovu dostupná.
+Dopad: [stručně]. Pokud stále vidíte problém, zkuste [bezpečný krok] nebo napište na [kontakt].
+Doplníme krátké shrnutí příčiny a prevence do [čas/datum], pokud je relevantní.
+```
+
+### Plánovaná údržba
+
+```text
+Dne [datum] od [čas] do [čas] proběhne plánovaná údržba [část služby].
+Očekávaný dopad: [žádný / krátké odpojení / zpožděné notifikace].
+Důvod: [srozumitelně]. Není potřeba žádná akce z vaší strany.
+```
+
+## Privacy-first pravidla pro status page
+
+Status page je veřejný komunikační kanál, takže ji navrhuj s minimem dat:
+
+- Nepoužívej reklamní pixely, remarketing ani heatmapy. Člověk, který řeší výpadek, nepotřebuje být zařazen do publika „panikařící uživatelé“.
+- Pokud měříš návštěvnost status page, stačí agregovaná privacy-first analytika bez identifikace návštěvníka.
+- E-mailové odběry incidentů drž odděleně od marketingového newsletteru.
+- Umožni RSS nebo Atom feed, pokud to nástroj dovoluje. Přímý feed je nudný, což je u provozní komunikace kompliment.
+- Retenci incident historie nastav podle účelu: veřejné shrnutí může zůstat déle, interní technické detaily drž s kratší a řízenou retencí.
+- U bezpečnostních incidentů publikuj jen tolik, kolik pomůže zákazníkovi jednat a neohrozí vyšetřování.
+
+## Data breach není obyčejný výpadek
+
+Pokud incident může zahrnovat osobní údaje, přepni z běžné provozní komunikace na bezpečnostní režim. GDPR článek 33 vyžaduje oznámení dozorovému úřadu bez zbytečného odkladu a pokud možno do 72 hodin od zjištění porušení, pokud pravděpodobně hrozí riziko pro práva a svobody osob. Článek 34 řeší komunikaci subjektům údajů, pokud je pravděpodobné vysoké riziko.
+
+Prakticky:
+
+1. Označ incident jako **potenciální data breach**, nečekej na stoprocentní jistotu.
+2. Vytvoř samostatnou právně-bezpečnostní timeline: kdy jste se o incidentu dozvěděli, co víte, co nevíte, kdo rozhoduje.
+3. Do veřejné status page nedávej osobní údaje, seznam zákazníků ani spekulace.
+4. Připrav oddělené zákaznické oznámení, pokud je potřeba.
+5. Po incidentu aktualizuj datovou mapu, logování, přístupy a retenční pravidla.
+
+Codyho komentář: „zatím to vypadá jen jako bug“ není incident strategie. Je to věta, která stárne rychleji než mléko na monitoru.
+
+## Příklad: výpadek exportů v B2B SaaS
+
+Situace: zákazníci mohou pracovat v aplikaci, ale export fakturačních reportů končí chybou. Problém se týká části tenantů po posledním release.
+
+**Interní postup:**
+
+- incident commander vytvoří interní timeline,
+- technik ověří rozsah podle tenantů a posledního release,
+- support dostane jednu odpověď pro zákazníky,
+- veřejná status page dostane komponentu „Exporty a reporty“ ve stavu degradace,
+- pokud exporty obsahují osobní údaje, tým ověří, zda chyba znamená jen nedostupnost, nebo i riziko úniku.
+
+**Veřejná zpráva:**
+
+```text
+Část zákazníků aktuálně nemůže dokončit export fakturačních reportů. Samotná aplikace a přihlášení fungují. Problém řešíme rollbackem poslední změny exportního modulu. Data podle aktuálních informací nejsou ztracená ani zpřístupněná jiným zákazníkům. Další aktualizaci přidáme do 15:00 UTC.
+```
+
+**Po vyřešení:**
+
+- doplnit krátké shrnutí dopadu,
+- uvést čas začátku a konce,
+- popsat preventivní opatření bez interních detailů,
+- přidat test exportů do release checklistu,
+- zkontrolovat, jestli support nemusí kontaktovat konkrétní zákazníky.
+
+## Checklist: status page bez paniky
+
+- [ ] Máme status page mimo hlavní aplikaci nebo aspoň mimo stejný nejrizikovější provozní řetězec.
+- [ ] Komponenty jsou pojmenované podle zákaznického dopadu, ne podle interní infrastruktury.
+- [ ] Víme, kdo smí publikovat incident a kdo schvaluje bezpečnostní formulace.
+- [ ] Máme šablony pro první zprávu, průběžnou aktualizaci, vyřešení a plánovanou údržbu.
+- [ ] Máme rytmus aktualizací podle závažnosti.
+- [ ] Support má během incidentu jednu pravdivou odpověď.
+- [ ] Status page nemá reklamní trackery ani marketingové odběry schované za incident notifikace.
+- [ ] Bezpečnostní incidenty mají oddělený postup pro data breach posouzení.
+- [ ] Po incidentu vznikne krátký postmortem s jedním až třemi konkrétními opatřeními.
+
+## Mini šablona status page karty
+
+```markdown
+# Status page karta: [produkt/služba]
+
+## Komponenty
+- [komponenta]: [co znamená pro zákazníka]
+- [komponenta]: [co znamená pro zákazníka]
+
+## Role
+- Incident commander:
+- Technický vlastník:
+- Komunikační vlastník:
+- Právní / privacy kontakt:
+
+## Rytmus komunikace
+- Kritický incident:
+- Vysoký incident:
+- Střední incident:
+
+## Kanály
+- Veřejná status page:
+- RSS/feed:
+- Support odpověď:
+- Přímý kontakt pro enterprise zákazníky:
+
+## Privacy pravidla
+- Analytika:
+- Odběry:
+- Retence incident historie:
+- Data breach eskalace:
+
+## Po incidentu
+- Postmortem vlastník:
+- Termín shrnutí:
+- Jak se opatření dostanou do backlogu:
+```
+
+## Zdroje
+
+- NIST: SP 800-61 Rev. 3 — Incident Response Recommendations and Considerations for Cybersecurity Risk Management: https://csrc.nist.gov/pubs/sp/800/61/r3/final
+- NIST: Incident Response project page: https://csrc.nist.gov/Projects/incident-response
+- EUR-Lex: GDPR, článek 33 a 34 o ohlašování porušení zabezpečení osobních údajů: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679
+- Atlassian Statuspage: Incident communication tips: https://support.atlassian.com/statuspage/docs/incident-communication-tips/
+- Atlassian Statuspage: Launch your status page: https://support.atlassian.com/statuspage/docs/launch-your-status-page/
+
+
 # Pracovní log
 
 - 2026-10-07: Doplněna příloha „Bezpečnostní e-maily bez paniky a trackingového ocásku“ s rozdělením bezpečnostních událostí podle rizika, pravidly pro předměty a tělo zpráv, bezpečné odkazy bez marketingového trackingu, support runbook, příklad nového zařízení, checklist, šablonu bezpečnostního e-mailu a ověřené zdroje OWASP, NIST, MDN a GDPR.
@@ -53782,3 +53996,4 @@ Datum další kontroly:
 - 2026-09-22: Dopsána kapitola „Základy moderního webového vývoje pro podnikatele“ se zaměřením na architekturu podle rizika, semantické HTML, výkon, formuláře, externí skripty, přístupnost a technický checklist.
 - 2026-09-22: Dopsána kapitola „Strategie webu“ s praktickým modelem rozhodnutí návštěvníka, privacy-first pravidly, checklistem a šablonou strategického zadání.
 - 2026-09-22: Založena plnohodnotná struktura e-booku po zjištění, že soubor obsahoval jen placeholder; dopsána kapitola „Privacy-first analytika a experimenty“ včetně checklistu, šablony datové mapy a ověřených zdrojů.
+- 2026-10-07: Doplněna příloha „Status page a incident komunikace bez paniky a datového divadla“ s návrhem komponent podle zákaznického dopadu, rytmem aktualizací, šablonami incident zpráv, privacy-first pravidly, data breach eskalací, příkladem B2B SaaS, checklistem, vyplnitelnou status page kartou a ověřenými zdroji NIST, EUR-Lex a Atlassian Statuspage.
