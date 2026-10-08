@@ -57646,7 +57646,148 @@ Datum další revize:
 - EUR-Lex — GDPR, čl. 5 k zásadám zákonnosti, účelového omezení, minimalizace, omezení uložení a odpovědnosti: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - European Commission — GDPR principles pro organizace, praktický přehled zásad zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 
+# Příloha: Webhooky a integrace bez tichého úniku dat
+
+Webhook je krásně jednoduchý nápad: jedna služba pošle jiné službě zprávu, že se něco stalo. Zaplacená faktura, nový lead, změna stavu objednávky, vytvořený účet, dokončený export, neúspěšná platba. Jenže právě proto bývá webhook podceňovaný. Vypadá jako technický detail, ale ve skutečnosti je to malý most mezi firmami, systémy a daty zákazníků. A most bez zábradlí je pořád most, jen s lepším potenciálem pro koupání v řece.
+
+Privacy-first integrace nezačíná otázkou „kam to pošleme?“, ale „co přesně musí příjemce vědět, aby udělal svou práci?“. Webhook nemá být kopie interní databázové tabulky. Má být cílená událost s minimem dat, jasným účelem, ověřením původu a bezpečným opakováním při chybě.
+
+> Codyho komentář: Nejhorší webhook payload je ten, který vznikl metodou „pošli celý objekt, třeba se to bude hodit“. To není flexibilita. To je datový konfety kanón namířený do integrace, kterou za půl roku nikdo neumí vysvětlit.
+
+## Událost není export databáze
+
+Dobrá webhook událost říká, co se stalo, ne všechno, co systém ví. Příklad: `invoice.paid` nemusí obsahovat celou fakturu, adresu, poznámky, interní historii změn a všechny kontakty účtu. Často stačí stabilní ID události, typ události, čas, ID zákaznického účtu, ID faktury, měna, částka a odkaz na API, kde si oprávněný systém může detail bezpečně vyžádat.
+
+Praktické pravidlo:
+
+- do webhooku dej data potřebná k rozhodnutí příjemce,
+- citlivý detail nech za autorizovaným API voláním,
+- neposílej payloady „pro jistotu“,
+- u každého pole napiš účel,
+- u každé integrace urči vlastníka na obou stranách.
+
+Pokud pole neumíš vysvětlit v jedné větě, nejspíš do webhooku nepatří. Tohle je obyčejná datová minimalizace z GDPR převedená do vývojářské praxe: méně polí, méně rizik, méně překvapení při auditu.
+
+## Podpis, čas a opakování
+
+Webhook bez ověření původu je pozvánka pro falešné události. Minimum je HTTPS, podpis zprávy pomocí sdíleného tajemství a kontrola časového razítka. OWASP Webhook Security Cheat Sheet doporučuje mimo jiné podepisování přes HMAC, ochranu proti replay útokům a bezpečné chování při chybách. Přeloženo do provozní češtiny: nestačí věřit tomu, že request přišel na správnou URL.
+
+Základní bezpečnostní model:
+
+- každý odběratel má vlastní signing secret,
+- podpis se počítá z přesné podoby těla requestu a časového razítka,
+- příjemce ověří podpis konstantním porovnáním,
+- staré časové razítko se odmítne,
+- `event_id` se ukládá kvůli deduplikaci,
+- endpoint vrací obecné chyby bez interních detailů,
+- tajemství jde rotovat bez výpadku.
+
+Retry politika musí být součást návrhu, ne pozdější záplata. Když příjemce vrátí chybu, systém má vědět, kolikrát opakovat, s jakým backoffem a kdy událost přesunout do dead-letter fronty. Zákazník pak vidí stav doručení, ne jen magickou větu „integrace občas zlobí“.
+
+## Stabilní schéma a verze
+
+Integrace se časem mění. Proto potřebuješ verzi schématu, changelog a pravidla kompatibility. Inspirací může být CloudEvents specifikace, která popisuje společný formát událostí napříč systémy. Nemusíš ji použít doslova, ale její princip je zdravý: událost má mít jasný typ, zdroj, ID, čas, obsahový typ a oddělená data.
+
+Praktický payload pro malý SaaS může vypadat takto:
+
+```json
+{
+  "id": "evt_01HZY...",
+  "type": "invoice.paid",
+  "version": "2026-10-08",
+  "created_at": "2026-10-08T19:00:00Z",
+  "tenant_id": "ten_123",
+  "data": {
+    "invoice_id": "inv_456",
+    "amount_cents": 290000,
+    "currency": "CZK"
+  }
+}
+```
+
+Schéma je nudné, ale nuda je tady funkce. Když integrace rozbije fakturaci, onboarding nebo provisioning, nikdo nebude nadšeně obdivovat kreativitu payloadu. Bude chtít vědět, co se změnilo, kdy a jak to vrátit.
+
+## Privacy-first pravidla pro integrace
+
+Integrace rozšiřuje hranici produktu. Pokud pošleš data do externího nástroje, už nejsou jen v tvém systému. Proto u každé integrace udržuj malou kartu: účel, příjemce, typ dat, právní role, retence, bezpečnostní kontakt, region provozu a postup vypnutí.
+
+Privacy-first kontrola před spuštěním:
+
+- běží příjemce v EU nebo má jasně popsané přeshraniční zpracování,
+- smlouva a DPA odpovídají reálnému toku dat,
+- payload neobsahuje obsah zpráv, poznámky ani soubory bez nutnosti,
+- logy neukládají celé request body,
+- testovací prostředí nepoužívá produkční osobní data,
+- zákazník ví, jak integraci vypnout a co se stane s daty,
+- existuje postup pro incident v integraci.
+
+Nejčistší integrace je často ta, která pošle jen signál a nechá druhou stranu stáhnout detail přes scoped API token. Ano, je to o krok složitější. Ale zato nešíříš osobní data do světa při každé drobné události.
+
+## Praktický příklad: CRM webhook pro nový lead
+
+Firma chce posílat nové poptávky z webu do CRM. Špatná varianta pošle celé tělo formuláře, UTM historii, IP adresu, user agent, interní skóre, souhlasové detaily a poznámku z debug logu. Dobrá varianta pošle jen `lead.created`, ID leadu, segment, zdrojovou stránku, čas a pole, která obchod skutečně potřebuje pro první odpověď.
+
+Bezpečný postup:
+
+1. Formulář uloží lead v primárním systému v EU provozu.
+2. Webhook pošle CRM minimální payload s podepsanou událostí.
+3. CRM si detail stáhne přes API token omezený jen na nové leady.
+4. Souhlasové záznamy zůstávají v primárním systému jako zdroj pravdy.
+5. Log obsahuje `event_id`, stav doručení, HTTP status a dobu odezvy, ne celý obsah poptávky.
+6. Při chybě běží retry s backoffem a po limitu vznikne úkol pro člověka.
+7. Při vypnutí integrace se zastaví nové doručování a karta integrace řekne, co se má stát s historickými daty v CRM.
+
+Takhle integrace pomáhá obchodu, ale nedělá z formuláře datový výtah do každého nástroje, který si zrovna řekl o webhook.
+
+## Checklist: webhook před produkcí
+
+- Má událost vlastníka, účel a pojmenovaný typ?
+- Obsahuje payload jen data nutná pro danou integraci?
+- Má každý odběratel vlastní tajemství a možnost rotace?
+- Ověřuje příjemce podpis, čas a deduplikuje `event_id`?
+- Je retry politika omezená, pozorovatelná a bezpečná?
+- Jsou chyby obecné a bez stack trace nebo citlivých detailů?
+- Existuje verze schématu a changelog změn?
+- Logy neukládají osobní obsah requestu?
+- Je jasné, kde běží příjemce a jaká je jeho role podle GDPR?
+- Umí zákazník integraci vypnout bez podpůrného divadla?
+
+## Mini šablona integrační karty
+
+```markdown
+# Integrační karta: [název]
+
+Účel integrace:
+Vlastník u nás:
+Vlastník u příjemce:
+Typy událostí:
+Verze schématu:
+Příjemce / endpoint:
+Region provozu příjemce:
+Právní role:
+DPA / smlouva:
+Data v payloadu:
+Data výslovně zakázaná v payloadu:
+Signing secret a rotace:
+Retry pravidla:
+Deduplication key:
+Co se loguje:
+Co se nesmí logovat:
+Postup vypnutí:
+Incident kontakt:
+Datum další revize:
+```
+
+## Zdroje
+
+- OWASP Cheat Sheet Series — Webhook Security Cheat Sheet k HMAC podpisům, HTTPS, replay ochraně, chybám a doručování: https://cheatsheetseries.owasp.org/cheatsheets/Webhook_Security_Cheat_Sheet.html
+- OWASP API Security Top 10 2023 — přehled API rizik včetně resource consumption a security misconfiguration: https://api-security.owasp.org/
+- CloudEvents specification — společný model popisu událostí napříč službami a platformami: https://github.com/cloudevents/spec/blob/main/README.md
+- European Commission — GDPR principles pro datovou minimalizaci, omezení účelu, omezení uložení a odpovědnost: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
 # Pracovní log
+
+- 2026-10-08: Doplněna příloha „Webhooky a integrace bez tichého úniku dat“ s návrhem minimálního payloadu, HMAC podpisy, replay ochranou, retry politikou, verzováním schématu, privacy-first integrační kartou, CRM příkladem, checklistem a ověřenými zdroji OWASP, CloudEvents a Evropské komise.
 
 - 2026-10-08: Doplněna příloha „Scheduled tasky bez nočních duchů a datového vysavače“ se smlouvou jobu, cadence podle rizika, idempotencí, tenant hranicemi, bezpečným logováním, retenčními důkazy, alerty podle dopadu, měsíčním report příkladem, checklistem, scheduled task kartou a ověřenými zdroji Kubernetes, OWASP a GDPR.
 
