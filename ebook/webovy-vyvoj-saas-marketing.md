@@ -57309,7 +57309,195 @@ Datum uzavření:
 - EUR-Lex — Regulation (EU) 2016/679, zejména odůvodnění k ověření identity, přístupu, přenositelnosti a právům jiných osob: https://eur-lex.europa.eu/legal-content/EN/TXT/?toc=OJ%3AL%3A2016%3A119%3A&uri=uriserv%3AOJ.L_.2016.119.01.0001.01.ENG
 
 
+# Příloha: Privacy tvrzení bez trust-washingu a prázdných odznaků
+
+Privacy-first značka je silná jen tehdy, když se dá doložit. Věta „respektujeme soukromí“ sama o sobě moc neznamená. Stejně jako „ekologické“, „bezpečné“, „evropské“ nebo „AI-ready“ může být pravdivá, polopravdivá, zastaralá nebo jen hezká mlha v patičce webu. U malého SaaS je problém ještě praktičtější: obchod chce krátkou větu, marketing chce důvěru, právník chce přesnost, vývoj ví o třech výjimkách a zákazník chce pochopit, co se s jeho daty opravdu děje.
+
+Privacy tvrzení proto piš jako produktový kontrakt: konkrétně, ověřitelně a s jasnou hranicí. Ne jako morální fanfáru. Pokud Dreamind říká „navrženo, postaveno a provozováno v Evropě“, má být jasné, co přesně to znamená: kde běží infrastruktura, kdo jsou klíčoví dodavatelé, jak se řeší analytika, jaké externí skripty web nepoužívá a kde jsou popsané výjimky. Důvěra nevzniká tím, že všechno zní dokonale. Vzniká tím, že nic důležitého nemusí zákazník luštit lupou.
+
+> Codyho komentář: Trust badge bez důkazu je samolepka na kufru. Může vypadat světově, ale na hranicích se pořád ptají na pas.
+
+## Rozděl slogan, fakt a závazek
+
+Na webu se často míchají tři typy vět. Každá má jinou práci a jinou míru důkazů.
+
+| Typ věty | Příklad | Jak ji držet poctivě |
+| --- | --- | --- |
+| Slogan | „Marketing bez šmírování.“ | Smí být stručný, ale nesmí slibovat víc než produkt dělá. Pod ním dej konkrétní vysvětlení. |
+| Fakt | „Analytiku měříme bez reklamních pixelů.“ | Udržuj inventář skriptů a nástrojů, aby věta zůstala pravdivá po každém deployi. |
+| Závazek | „Data z formuláře používáme jen pro odpověď na poptávku.“ | Musí sedět s procesem v CRM, e-mailu, retencí i přístupy týmu. |
+
+Špatný privacy text:
+
+```text
+Vaše soukromí je pro nás důležité. Používáme nejmodernější technologie a chráníme vaše data podle nejvyšších standardů.
+```
+
+Lepší verze:
+
+```text
+Web měříme agregovanou analytikou bez reklamních pixelů. Formulářová data používáme pro odpověď na poptávku a nepředáváme je reklamním platformám. Seznam hlavních dodavatelů a účelů najdete v zásadách ochrany soukromí.
+```
+
+Ta druhá věta není tak naleštěná, ale dá se ověřit. A to je u důvěry docela užitečná vlastnost, takový drobný detail velikosti požárních dveří.
+
+## Udělej si claim inventory
+
+Claim inventory je malá tabulka všech veřejných tvrzení o soukromí, bezpečnosti, datech, hostingu a etice. Není to právní román. Je to provozní pojistka proti tomu, aby web sliboval něco, co už po změně nástroje nebo dodavatele neplatí.
+
+Do tabulky si dej:
+
+- přesné znění tvrzení,
+- místo použití: homepage, pricing, trust center, obchodní prezentace, e-mail, nabídka,
+- typ tvrzení: slogan, fakt, závazek, právní informace, bezpečnostní tvrzení,
+- vlastníka tvrzení,
+- důkaz nebo zdroj pravdy,
+- datum poslední kontroly,
+- co tvrzení neslibuje,
+- trigger pro revizi.
+
+Příklad:
+
+| Tvrzení | Zdroj pravdy | Revize při změně |
+| --- | --- | --- |
+| „Nepoužíváme reklamní pixely při načtení webu.“ | seznam skriptů, kontrola síťových requestů, consent nastavení | nový marketingový nástroj, změna webu, agentura přidává skript |
+| „Preferujeme evropský hosting.“ | inventář infrastruktury a subprocesorů | nový region, nový cloud, nový CDN/proxy prvek |
+| „RSS je dostupné bez registrace.“ | produkční URL feedu a test čitelnosti | změna CMS, migrace webu, úprava robots pravidel |
+| „Formulářová data nepoužíváme pro reklamní cílení.“ | CRM workflow, marketing integrace, retenční pravidlo | nový CRM, lead scoring, remarketing kampaň |
+
+Tahle tabulka se hodí i obchodníkům. Když zákazník pošle bezpečnostní dotazník, tým nemusí lovit odpovědi po Slacku a starých prezentacích. Má jednu pravdu. Nudnou, klikací a krásnou.
+
+## Privacy claim má mít technický test
+
+Každé praktické tvrzení by mělo mít jednoduchý test. Ne proto, že by marketing měl psát testy v Playwrightu místo vět. Protože tvrzení bez testu se časem promění v dekoraci.
+
+Příklady testů:
+
+- tvrzení „bez reklamních pixelů“: otevři stránku v čistém profilu, odmítni volitelné cookies a zkontroluj síťové požadavky,
+- tvrzení „RSS bez registrace“: otevři feed v anonymním okně a zkus ho načíst bez cookies,
+- tvrzení „data z formuláře jdou jen do podpory“: odešli testovací formulář a ověř, že nevznikl záznam v reklamní platformě,
+- tvrzení „evropský provoz“: zkontroluj hostingové regiony, subprocesory, zálohy a případné externí skripty,
+- tvrzení „smazání účtu je dostupné“: projdi testovací účet a ověř, že existuje cesta k exportu, zrušení a vysvětlení retence.
+
+Test nemusí být vždy automatický. U malého týmu často stačí čtvrtletní manuální kontrola s checklistem. Důležité je, aby existoval vlastník a aby výsledek nebyl „asi to tak je“. Slovo „asi“ je v privacy claimu podobně uklidňující jako kouř z racku.
+
+## Neříkej absolutní věci, pokud nejsou absolutní
+
+Absolutní tvrzení zní dobře v hero sekci, ale bývají nebezpečná.
+
+Pozor na věty:
+
+- „Nikdy nesbíráme osobní údaje.“
+- „Všechna data zůstávají v EU.“
+- „Nepoužíváme žádné třetí strany.“
+- „Plně anonymní analytika.“
+- „100% bezpečné.“
+
+Možná chceš říct něco rozumného, ale věta je moc široká. Třeba e-mail v kontaktním formuláři je osobní údaj. E-mailing, hosting nebo platební brána jsou třetí strany. Agregovaná analytika nemusí být totéž co anonymita. A „100% bezpečné“ je věta, která by měla dostat vlastní detektor kouře.
+
+Bezpečnější verze:
+
+- „Sbíráme jen údaje potřebné pro odpověď na poptávku a provoz služby.“
+- „Primární infrastrukturu provozujeme v evropských regionech; seznam hlavních dodavatelů uvádíme v zásadách.“
+- „Externí služby používáme jen pro konkrétní účely a pravidelně je revidujeme.“
+- „Analytiku držíme agregovaně a bez reklamních identifikátorů.“
+- „Bezpečnost řídíme podle rizika, s auditní stopou a pravidelnou revizí.“
+
+Tohle není slabší marketing. Je to marketing, který přežije kontakt s realitou.
+
+## Pozor na trust-washing
+
+Trust-washing je situace, kdy produkt vypadá důvěryhodněji, než jaký je skutečný provoz. Nemusí jít o zlý úmysl. Často stačí, že marketing přidá odznak, vývoj mezitím změní nástroj a nikdo neaktualizuje texty. Výsledek je pořád problém.
+
+Typické příznaky:
+
+- web ukazuje bezpečnostní odznaky bez vysvětlení, co znamenají,
+- trust center obsahuje staré screenshoty a neaktuální subprocesory,
+- privacy policy tvrdí něco jiného než produktová realita,
+- obchodní prezentace slibuje evropský provoz, ale některé podpůrné služby běží mimo uvedený rámec,
+- marketing tvrdí „bez sledování“, ale web načítá reklamní skripty před volbou uživatele,
+- tým používá AI doplňky nad zákaznickými daty, které nejsou v datové mapě.
+
+Privacy-first značka nepotřebuje velké sliby. Potřebuje konzistenci. Když něco neumíš doložit, napiš to užší větou nebo to zatím nepiš vůbec.
+
+## Propoj claimy s release procesem
+
+Každá změna produktu může změnit pravdivost veřejného tvrzení. Nový formulář, chat widget, analytika, AI funkce, platební integrace, hostingový region, CDN, e-mailing nebo support nástroj — všechno může zasáhnout privacy claimy.
+
+Do release checklistu přidej jednoduchou otázku:
+
+```text
+Mění tahle úprava některé veřejné tvrzení o datech, soukromí, bezpečnosti, hostingu, analytice nebo dodavatelích?
+```
+
+Pokud ano, musí proběhnout jedna ze tří akcí:
+
+1. tvrzení zůstává pravdivé a doplní se důkaz,
+2. tvrzení se upraví před releasem,
+3. release se zastaví, protože marketingový slib a produktová realita se rozcházejí.
+
+Praktický příklad: tým chce přidat nový chat widget na pricing stránku. Claim inventory říká, že web „nepoužívá externí sledovací widgety při prvním načtení“. Možnosti jsou: widget nenasadit, načítat ho až po kliknutí, najít méně invazivní variantu, nebo upravit veřejné tvrzení. Co nejde: potichu ho přidat a doufat, že si toho všimne jen prohlížečová konzole.
+
+## Jak psát evropský provoz bez mlhy
+
+Věta „provozováno v Evropě“ může znamenat mnoho věcí. Aby nebyla prázdná, rozděl ji na vrstvy:
+
+- **Aplikační hosting:** kde běží aplikace a databáze.
+- **Zálohy:** kde jsou zálohy a kdo k nim má přístup.
+- **Analytika:** jaké údaje se měří a kde se ukládají.
+- **E-mail a support:** kudy tečou kontakty a zákaznická komunikace.
+- **Platby:** kdo zpracovává platební a fakturační údaje.
+- **AI a automatizace:** zda se zákaznická data posílají do modelů nebo externích služeb.
+- **Subprocesor seznam:** kde zákazník najde aktuální přehled.
+
+Krátký text může znít:
+
+```text
+Produkt navrhujeme a provozně řídíme z Evropy. Primární aplikační data držíme v evropských regionech a externí služby používáme jen pro konkrétní účely, které popisujeme v seznamu dodavatelů. Pokud některá podpůrná služba pracuje s daty mimo tento rámec, uvádíme ji jako výjimku a vysvětlujeme proč.
+```
+
+Tohle je méně efektní než „100% EU privacy cloud“, ale mnohem užitečnější. Zákazník ví, kde se ptát, a tým ví, co musí udržovat pravdivé.
+
+## Checklist: privacy claimy bez trust-washingu
+
+- Máme inventář všech veřejných tvrzení o soukromí, datech, bezpečnosti a evropském provozu.
+- Každé tvrzení má vlastníka, zdroj pravdy a datum poslední kontroly.
+- Slogany mají pod sebou konkrétní vysvětlení, ne jen další mlhu.
+- Absolutní věty používáme jen tam, kde jsou opravdu pravdivé a ověřitelné.
+- Release checklist obsahuje otázku na dopad změny na veřejné claimy.
+- Nové marketingové, analytické, supportní a AI nástroje se kontrolují proti datové mapě.
+- Trust center, privacy policy, pricing stránka a obchodní prezentace říkají stejný příběh.
+- Pokud existuje výjimka, je popsaná férově a srozumitelně.
+
+## Mini šablona claim karty
+
+```text
+Tvrzení:
+Kde se používá:
+Typ: slogan / fakt / závazek / právní informace / bezpečnostní tvrzení
+Vlastník:
+Zdroj pravdy:
+Důkaz / odkaz:
+Co přesně tvrzení znamená:
+Co tvrzení neslibuje:
+Dotčené systémy / dodavatelé:
+Trigger pro revizi:
+Datum poslední kontroly:
+Další kontrola:
+Stav: platné / upravit / odstranit
+```
+
+## Zdroje
+
+- European Commission — Principles of the GDPR, zejména transparentnost, minimalizace, omezení účelu, omezení uložení a odpovědnost: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- EUR-Lex — GDPR, čl. 5 k zásadám zpracování osobních údajů a požadavku odpovědnosti správce: https://eur-lex.europa.eu/legal-content/EN/TXT/?toc=OJ%3AL%3A2016%3A119%3A&uri=uriserv%3AOJ.L_.2016.119.01.0001.01.ENG
+- European Commission — Unfair Commercial Practices Directive, rámec proti klamavým obchodním praktikám v EU: https://commission.europa.eu/law/law-topic/consumer-protection-law/unfair-commercial-practices-and-price-indication/unfair-commercial-practices-directive_en
+- European Commission — Green Claims, příklad evropského důrazu na doložitelnost a ověřitelnost veřejných tvrzení: https://environment.ec.europa.eu/topics/circular-economy-topics/green-claims_en
+- European Commission — Environmental claims for non-food products, doporučení, aby tvrzení byla jasná, přesná a spolehlivá: https://commission.europa.eu/publications/environmental-claims-non-food-products_en
+
 # Pracovní log
+
+- 2026-10-08: Doplněna příloha „Privacy tvrzení bez trust-washingu a prázdných odznaků“ s rozlišením sloganu, faktu a závazku, claim inventory, technickými testy tvrzení, pravidly proti absolutním slibům, release kontrolou, evropským provozním vysvětlením, checklistem, claim kartou a ověřenými zdroji Evropské komise a EUR-Lex.
 
 - 2026-10-08: Doplněna příloha „Žádosti o osobní data bez support chaosu a právního ping-pongu“ s rozlišením typů žádostí, příjmovým procesem, přiměřeným ověřením identity, prací s datovou mapou, bezpečnou strukturou odpovědi, koordinací výmazu se zálohami, B2B příkladem bývalého zaměstnance zákazníka, checklistem, DSAR kartou a ověřenými zdroji Evropské komise, EDPB a EUR-Lex.
 
