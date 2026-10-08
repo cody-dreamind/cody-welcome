@@ -55178,203 +55178,180 @@ Datum další revize:
 - EUR-Lex: GDPR, článek 5 se zásadami minimalizace údajů, omezení účelu a omezení uložení: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679
 
 
-# Příloha: Retenční kalendář bez digitální půdy plné krabic
+# Příloha: Nezaplacené faktury a grace period bez výhrůžek
 
-Malý web nebo SaaS často nezačne selhávat kvůli tomu, že má málo dat. Začne selhávat kvůli tomu, že má moc starých dat, nikdo neví proč, nikdo je nechce mazat a všichni doufají, že „se to někdy bude hodit“. To není strategie. To je sklep po babičce, jen s API klíči.
+Platba selže z banálních důvodů: expirovaná karta, změněný limit, nová účetní, dovolená schvalovatele, špatný fakturační e-mail nebo obyčejný chaos v inboxu. Produkt, který po prvním neúspěchu začne křičet „zaplať, nebo zmizíš“, nepůsobí profesionálně. Působí jako automat s náladou vrátného po třetí kávě.
 
-Retenční kalendář je jednoduchý provozní dokument, který říká:
+Dobrý dunning proces chrání cashflow, ale zároveň chrání vztah. U B2B SaaS je to hlavně provozní disciplína: jasná pravidla, klidná komunikace, omezení podle rizika a minimum dat v e-mailech.
+
+> Codyho komentář: Nezaplacená faktura není vždycky morální selhání zákazníka. Často je to jen platební metoda, která si řekla, že dnes bude dramatická.
+
+## Nejdřív rozděl typ zákazníka a dopad vypnutí
+
+Ne každé nezaplacení má stejný dopad. Jinak řešíš sólového uživatele v trialu, jinak agenturu s deseti lidmi a jinak účetní firmu, která přes produkt každý den posílá podklady klientům.
+
+Rozumný model:
+
+| Segment | Typický dopad vypnutí | Doporučený přístup |
+| --- | --- | --- |
+| Trial bez dat | nízký | krátké upozornění, omezení po konci trialu |
+| Solo účet | střední | několik připomínek, read-only okno |
+| Týmový B2B účet | vyšší | grace period, upozornění adminům, jasný export |
+| Kritický provoz zákazníka | vysoký | ruční kontrola před blokací, obchodní kontakt |
+
+Cílem není dělat výjimku pro každého. Cílem je nevypnout zákazníkovi kritickou práci jen proto, že automat neumí rozlišit „nechce platit“ od „účetní změnila kartu a zrovna řeší DPH“. Produkt má být pevný, ne hysterický.
+
+## Grace period napiš jako produktové pravidlo
+
+Grace period je krátké období po neúspěšné platbě, kdy zákazník ještě může produkt používat nebo alespoň bezpečně dokončit práci. Nesmí být tajná. Nesmí být náhodná. A nemá se měnit podle toho, kdo zrovna píše supportu nejhlasitěji.
+
+Praktický návrh pro malý B2B SaaS:
 
 ```text
-Jaká data držíme?
-Proč je držíme?
-Jak dlouho je držíme?
-Kdo rozhoduje o výjimce?
-Jak ověříme, že mazání opravdu proběhlo?
+Den 0: platba selže, zákazník dostane klidné upozornění.
+Den 3: druhé upozornění, viditelný banner pro adminy.
+Den 7: účet přejde do omezeného režimu pro nové akce.
+Den 14: účet je read-only, export zůstává dostupný.
+Den 30: účet jde do pozastavení podle retenčního a offboardingového pravidla.
 ```
 
-> Codyho komentář: Retence není právnická dekorace do privacy policy. Je to úklidový plán pro produkt. Když ho nemáš, uklízíš až ve chvíli, kdy zákazník, auditor nebo incident stojí ve dveřích. To je sport pro lidi, kteří mají rádi adrenalin a šediny.
+Tohle není univerzální šablona. Pokud produkt zpracovává kritické procesy, potřebuješ opatrnější režim. Pokud jde o jednoduchý nástroj bez zákaznických dat, může být režim kratší. Důležité je, aby pravidlo bylo předvídatelné.
 
-## Začni mapou datových tříd
+## Omezuj nové riziko, ne přístup k vlastním datům
 
-Nezačínej tabulkou všech sloupců v databázi. Začni třídami dat podle účelu. Prakticky to znamená pojmenovat skupiny, kterým rozumí produkt, podpora i vedení.
+Při neplacení má smysl postupně omezit akce, které zvyšují náklady nebo riziko:
 
-Typické třídy pro web a SaaS:
+- vytváření nových projektů,
+- spouštění velkých exportů,
+- generování drahých AI výstupů,
+- odesílání hromadných e-mailů,
+- přidávání dalších členů týmu,
+- volání placených integrací,
+- dlouhé běhy na pozadí.
 
-- účet a identita uživatele,
-- fakturační a smluvní údaje,
-- zákaznický obsah,
-- provozní logy,
-- bezpečnostní auditní události,
-- produktové metriky,
-- marketingové kontakty,
-- support komunikace,
-- zálohy,
-- exporty připravené ke stažení,
-- diagnostické soubory a přílohy.
+Naopak velmi opatrně sahaj na přístup k vlastním datům. Zákazník má mít možnost vidět stav účtu, stáhnout faktury, opravit platební metodu, kontaktovat podporu a v rozumném okně vyexportovat svá data. Produkt, který kvůli jedné neúspěšné platbě zamkne i fakturu a exit, nevymáhá platbu. Bere data jako rukojmí.
 
-Ke každé třídě napiš účel jednou větou. Ne „pro provoz aplikace“, to je univerzální mlha. Lepší je:
+Privacy-first pravidlo: připomínky plateb nepatří do marketingové automatizace s trackingovým cirkusem. Jsou to servisní zprávy. Posílej minimum informací a nebal je do reklamního konfeti.
+
+## Komunikace má být věcná a bez studu
+
+Dunning e-mail nemá znít jako výhružka ani jako omluvný román. Má říct:
+
+- co se stalo,
+- kterého účtu se to týká,
+- co má zákazník udělat,
+- do kdy je potřeba akce,
+- co se stane, pokud se platba nevyřeší,
+- kde získá pomoc.
+
+Špatně:
 
 ```text
-Bezpečnostní auditní události držíme, abychom dokázali vyšetřit podezřelý přístup, změny oprávnění a incidenty v účtu.
+Vaše platba selhala. Pokud okamžitě nezaplatíte, váš účet bude zablokován.
 ```
 
-Jakmile neumíš účel napsat, data pravděpodobně držíš ze zvyku. A zvyk není právní základ, produktová strategie ani dobrý architekt.
-
-## Retenci určuj podle účelu, ne podle kapacity disku
-
-Levné úložiště svádí k lenosti. Jenže problém starých dat není cena disku. Problém je riziko, složitost a ztráta kontroly. Čím déle data držíš, tím víc míst musíš zabezpečit, vysvětlit a zahrnout do procesů výmazu.
-
-Praktický model pro každou datovou třídu:
+Lépe:
 
 ```text
-Aktivní období: data používáme běžně v produktu.
-Omezené období: data držíme kvůli podpoře, bezpečnosti, účetnictví nebo reklamacím.
-Archiv / právní povinnost: data držíme jen tam, kde k tomu máme jasný důvod.
-Mazání nebo anonymizace: data už nemají identifikovat člověka ani zákazníka.
+Nepodařilo se nám zpracovat platbu za workspace ACME. Služba zatím běží dál v grace period do 15. 11. 2026. Platební metodu můžete aktualizovat v Nastavení → Fakturace. Pokud platbu řeší účetní tým, přepošlete mu prosím tento e-mail nebo přidejte fakturační kontakt.
 ```
 
-Příklad pro produktové metriky:
+Do e-mailu nedávej kompletní fakturační údaje, interní poznámky, obsah používání produktu ani seznam uživatelů. Stačí název workspace, poslední čtyři znaky identifikátoru faktury nebo bezpečný odkaz do fakturace. Odkaz má vést na přihlášenou stránku, ne na veřejný token s věčnou platností.
 
-- surové události drž 30–90 dní podle potřeby ladění,
-- agregace drž déle, pokud už neobsahují identifikátory osob ani workspace,
-- osobní identifikátory nahraď technickým pseudonymem jen tam, kde to má jasný účel,
-- staré cohort reporty ukládej jako agregovaný výstup, ne jako nekonečné raw eventy.
+## Fakturační role je levnější než support chaos
 
-Privacy-first pravidlo: pokud chceš data držet „pro budoucí analýzu“, nejdřív definuj otázku. Pokud otázka neexistuje, budoucí analýza je jen převlečené hromadění.
+Mnoho platebních problémů vzniká tím, že správce produktu není člověk, který řeší faktury. Proto se vyplatí mít samostatný fakturační kontakt nebo roli.
 
-## Mazání musí být technický proces, ne ruční přání
+Fakturační kontakt může:
 
-Retenční kalendář bez automatizace je hezký plakát. Potřebuješ joby, testy a provozní kontrolu.
+- dostávat faktury a platební připomínky,
+- aktualizovat fakturační údaje,
+- spravovat platební metodu,
+- vidět historii plateb,
+- stáhnout účetní export.
 
-Minimální technické požadavky:
+Fakturační kontakt nemusí:
 
-- každý retenční job má vlastníka,
-- job má dry-run režim nebo report dopadu,
-- mazání běží pravidelně a idempotentně,
-- výjimky jsou explicitně označené a časově omezené,
-- chyba mazání vytvoří alert nebo ticket,
-- provozní log ukládá počet zpracovaných záznamů, ne obsah mazaných dat,
-- po změně schématu se aktualizuje i retenční pravidlo.
+- vidět zákaznický obsah,
+- spravovat členy týmu,
+- měnit produktová data,
+- nastavovat integrace,
+- číst support tickety.
 
-Důležité je oddělit tři akce:
+Tohle je privacy-first i produktivní. Účetní dostane přesně to, co potřebuje, a support nemusí ručně přeposílat faktury člověku, který nemá být adminem celého workspace. Malé oprávnění, velký klid.
 
-```text
-Smazat: záznam už nepotřebujeme a nemá existovat.
-Anonymizovat: potřebujeme statistiku nebo historii, ale ne identitu.
-Archivovat: potřebujeme dočasné omezené uchování kvůli jasnému důvodu.
-```
+## Automatické retry dělej čitelně
 
-Anonymizace není přejmenování `ondrej@example.com` na `user123`. Pokud jde data reálně spojit zpět s člověkem nebo firmou přes jiné tabulky, je to spíš pseudonymizace. Ta může být užitečná, ale pořád je to práce s osobními údaji.
+Platební brány často umí opakovat pokus o platbu. To je užitečné, ale zákazník má rozumět tomu, co se děje. Pokud systém pětkrát za sebou zkusí kartu a uživatel dostane pět chaotických e-mailů, proces nepůsobí jako automatizace. Působí jako klikačka v panice.
 
-## Zálohy řeš zvlášť a bez pohádek
+Praktický postup:
 
-Zálohy jsou oblíbená výmluva: „Smazali jsme to z produkce, ale v zálohách to ještě někde bude.“ Ano, bude. Proto musí mít vlastní pravidla.
+- retry pokusy plánuj s rozestupy,
+- neposílej e-mail po každém technickém pokusu,
+- zákazníkovi ukaž jasný stav: „platba čeká / selhala / bude zkusena znovu“,
+- po úspěšné platbě pošli potvrzení a zruš varování v aplikaci,
+- po změně platební metody spusť okamžité ověření nebo další pokus,
+- chyby ukládej jako bezpečný stav, ne jako raw odpověď brány s citlivými detaily.
 
-U záloh napiš:
+Interně loguj jen to, co potřebuješ pro podporu: čas, typ chyby, platební provider, bezpečný identifikátor invoice/subscription a výsledek. Ne celé payloady, ne plná čísla karet, ne osobní poznámky z fakturačního e-mailu.
 
-- jak dlouho žijí denní, týdenní a měsíční zálohy,
-- kdo k nim má přístup,
-- jestli jsou šifrované,
-- jak se řeší výmaz při obnově ze staré zálohy,
-- jak často se testuje restore,
-- kdy se záloha fyzicky odstraní z úložiště.
+## Příklad: týmový SaaS s měsíční fakturací
 
-Praktický kompromis pro malé SaaS: neslibuj okamžitý výmaz ze všech historických záloh, pokud to technicky neděláš. Slibuj jasný proces: data se smažou z produkce, do běžného provozu se nevrací a zálohy expirují podle popsaného okna. Pokud bys obnovil starší zálohu, musí existovat post-restore job, který znovu aplikuje výmazy a anonymizace.
+SaaS pro projektové řízení má týmový tarif. Platba se nepovede první den měsíce.
 
-Tohle je nudné. Výborně. Retence má být nudná. Dramatická retence obvykle znamená incident.
+Rozumný scénář:
 
-## Výjimky eviduj jako dluh s datem splatnosti
+1. Systém pošle fakturačnímu kontaktu klidné upozornění a adminům zobrazí banner.
+2. Workspace dál funguje, ale banner vysvětluje datum konce grace period.
+3. Po týdnu se omezí přidávání nových členů a drahé AI akce, ale běžná práce pokračuje.
+4. Po čtrnácti dnech se účet přepne do read-only režimu, export a fakturace zůstávají dostupné.
+5. Po třiceti dnech se účet pozastaví podle offboardingového pravidla.
+6. Po úhradě se přístup obnoví a zákazník dostane krátké potvrzení bez marketingového balastu.
 
-Občas data držet musíš déle: právní spor, bezpečnostní incident, účetní povinnost, reklamace, audit, migrace zákazníka. Výjimka ale nesmí být černá díra.
+Tým neztratil data, produkt nefinancuje nekonečné využívání zdarma a support má jasný postup. Tomu se říká dospělý kompromis. Nudný, funkční, bez dramatické hudby.
 
-Každá výjimka má mít:
+## Checklist: dunning bez výhrůžek a datového ocásku
 
-```text
-Důvod:
-Rozsah dat:
-Vlastník:
-Schválil:
-Začátek:
-Konec nebo datum revize:
-Co se stane po konci:
-```
+- Máš popsanou grace period podle segmentu zákazníka?
+- Ví zákazník předem, kdy se účet omezí?
+- Umí fakturační kontakt řešit platby bez admin přístupu k obsahu?
+- Zůstává dostupná fakturace, support a export v rozumném okně?
+- Omezují se nejdřív nové nákladné akce, ne vlastnictví dat?
+- Jsou platební e-maily servisní, bez trackerů a marketingových bloků?
+- Je v aplikaci jasný stav platby a další krok?
+- Logy neukládají citlivé platební payloady?
+- Support má runbook pro ruční výjimky a obnovu přístupu?
+- Po zaplacení se varování a omezení automaticky uklidí?
 
-Zakázaná věta: „Necháme to zatím být.“
-
-Lepší věta:
-
-```text
-Auditní události workspace ACME ponecháváme o 60 dní déle kvůli vyšetření incidentu INC-2026-014. Výjimka končí 2026-12-15, poté se pravidlo vrací na standardní retenci 180 dní.
-```
-
-Výjimky pravidelně projdi. Pokud jich přibývá, nemáš výjimky. Máš nový proces, který se bojíš pojmenovat.
-
-## Příklad: retenční kalendář pro malý B2B SaaS
-
-Představ si český SaaS pro správu objednávek. Má zákaznické účty, objednávky, fakturaci, support a produktové metriky.
-
-Praktický retenční návrh:
-
-| Datová třída | Účel | Retence | Poznámka |
-| --- | --- | --- | --- |
-| Účet uživatele | Přihlášení a oprávnění | po dobu aktivního účtu + 30 dní | po zrušení anonymizovat nebo smazat podle role |
-| Fakturační údaje | účetnictví a smlouvy | podle účetních a daňových povinností | oddělit od produktového profilu |
-| Zákaznický obsah | poskytování služby | po dobu smlouvy + krátké exportní okno | po ukončení nabídnout export a pak smazat |
-| Auditní události | bezpečnost a vyšetření změn | 180 dní | delší pouze přes výjimku |
-| Produktové raw eventy | ladění onboardingu a aktivace | 60 dní | potom agregace bez identifikátorů |
-| Support tickety | řešení požadavků a historie podpory | 24 měsíců od uzavření | citlivé přílohy mazat dřív |
-| Připravené exporty | stažení uživatelem | 7 dní | krátká expirace odkazu |
-| Denní zálohy | obnova provozu | 14–30 dní | šifrované, omezený přístup |
-
-Tohle není univerzální právní rada. Je to produktový startovací bod. Reálné lhůty musí sedět na smlouvy, právní povinnosti, riziko služby a technickou architekturu.
-
-## Checklist: retenční kalendář bez datového skladiště
-
-- Má každá datová třída jasný účel?
-- Je u každé třídy napsaná retence a akce po jejím konci?
-- Rozlišuješ produkční data, logy, exporty, přílohy a zálohy?
-- Má každý retenční job vlastníka a monitoring?
-- Umíš vysvětlit, proč držíš raw eventy právě tak dlouho?
-- Jsou výjimky časově omezené a dohledatelné?
-- Po restore ze zálohy znovu aplikuješ výmazy?
-- Neobsahují dlouhodobé agregace zbytečné identifikátory?
-- Kontroluje někdo retenci při přidání nové funkce?
-- Je privacy policy v souladu s tím, co systém opravdu dělá?
-
-## Mini šablona retenční karty
+## Mini šablona dunning karty
 
 ```text
-# Retenční karta: [datová třída]
+# Dunning karta: [tarif / segment]
 
-Účel:
-Typické záznamy:
-Obsahuje osobní údaje: ano / ne / někdy
-Citlivost: nízká / střední / vysoká
-Primární úložiště:
-Sekundární úložiště:
-Zálohy:
-Aktivní období:
-Omezené období:
-Archiv nebo právní povinnost:
-Akce po konci retence: smazat / anonymizovat / archivovat
-Automatizace:
-Vlastník:
-Monitoring:
-Výjimky:
+Segment zákazníka:
+Dopad vypnutí:
+Platební metoda:
+Fakturační kontakt:
+Grace period:
+Den 0 zpráva:
+Den 3 zpráva:
+Den 7 omezení:
+Den 14 omezení:
+Den 30 stav:
+Co zůstává dostupné:
+Co se omezuje:
+Ruční výjimky schvaluje:
+Support postup:
+Logované údaje:
+Zakázaná data v e-mailu:
 Datum poslední revize:
 Datum další revize:
 ```
 
-## Zdroje
-
-- EUR-Lex: GDPR, článek 5 se zásadami omezení účelu, minimalizace údajů a omezení uložení: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679
-- EDPB: základní principy GDPR včetně purpose limitation, data minimisation a storage limitation: https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
-- EDPB: FAQ pro malé podniky připomíná, že organizace mají mít retenční pravidla a nedržet osobní údaje déle, než je nutné: https://www.edpb.europa.eu/sme/find-practical-info/faq_en
-
 
 # Pracovní log
 
-- 2026-10-08: Doplněna příloha „Retenční kalendář bez digitální půdy plné krabic“ s mapou datových tříd, pravidly retence podle účelu, automatizací mazání, samostatným režimem záloh, evidencí výjimek, příkladem pro B2B SaaS, checklistem, retenční kartou a ověřenými zdroji GDPR a EDPB.
+- 2026-10-08: Doplněna příloha „Nezaplacené faktury a grace period bez výhrůžek“ s praktickým dunning procesem, segmentací podle dopadu, pravidly grace period, omezením nových rizik místo držení dat jako rukojmí, fakturační rolí, retry postupem, B2B SaaS příkladem, checklistem a dunning kartou.
 
 - 2026-10-08: Doplněna příloha „CSV exporty bez tabulkového průšvihu a datového výprodeje“ s účelovým návrhem exportů, stabilními sloupci, minimalizací rozsahu, ochranou proti formula injection, verzováním formátu, auditními metadaty, příkladem měsíčního exportu faktur, checklistem, exportní kartou a ověřenými zdroji OWASP, RFC 4180 a GDPR.
 
