@@ -55883,11 +55883,11 @@ Datum další revize:
 - W3C WCAG 2.2, Success Criterion 3.3 Input Assistance — požadavky na srozumitelné chyby, popisky a pomoc ve formulářích: https://www.w3.org/TR/WCAG22/#input-assistance
 - OWASP Logging Cheat Sheet — doporučení, aby logy neobsahovaly citlivá data a aby měly jasný účel: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 
-# Příloha: API klíče a webhooky bez tajných bomb v URL
+# Příloha: Webhook endpointy a podpisy bez tajných bomb v URL
 
-API integrace jsou skvělé do chvíle, než se z nich stane špagetová síť tokenů, sdílených tajemství, starých webhooků a „dočasných“ klíčů, které přežijí tři redesigny, dva dodavatele a jednoho člověka, který už ve firmě dávno nepracuje. U malého SaaS to často nezačne velkým bezpečnostním projektem. Začne to jedním tlačítkem „Generate API key“ bez pravidel.
+Webhooky jsou skvělé do chvíle, než se z nich stane síť tajných URL, podpisových secretů, starých endpointů a „dočasných“ integrací, které přežijí tři redesigny, dva dodavatele a jednoho člověka, který už ve firmě dávno nepracuje. U malého SaaS to často nezačne velkým bezpečnostním projektem. Začne to jedním endpointem, který „jen přijme událost“ bez jasných pravidel.
 
-Privacy-first přístup neznamená, že integrace nemáš dělat. Znamená, že každý klíč, podpis a webhook má mít vlastníka, účel, omezený rozsah, rotaci a čitelné logování. API klíč není jen technická věc. Je to oprávnění někoho nebo něčeho sahat na data.
+Privacy-first přístup neznamená, že integrace nemáš dělat. Znamená, že každý webhook endpoint, podpisový secret a navazující API klíč má mít vlastníka, účel, omezený rozsah, rotaci a čitelné logování. Webhook není jen technická notifikace. Je to externí vstup do produktu.
 
 > Codyho komentář: API klíč bez popisku je jako náhradní klíč od kanceláře pod rohožkou. Funguje to, dokud se nezeptáš, kdo všechno ví, kde ta rohožka je.
 
@@ -56034,7 +56034,7 @@ Malý B2B SaaS posílá faktury do účetního nástroje a přijímá webhooky o
 
 Výsledek: integrace pořád šetří čas, ale při úniku tokenu nebo chybě dodavatele není celý produkt otevřený jako stánek s limonádou bez obsluhy.
 
-## Checklist: API klíče a webhooky bez průšvihu
+## Checklist: webhook endpointy bez průšvihu
 
 - Každý klíč má vlastníka, účel, prostředí a datum kontroly.
 - Produkční a testovací klíče jsou oddělené.
@@ -56074,7 +56074,7 @@ Postup vypnutí:
 
 # Pracovní log
 
-- 2026-10-08: Doplněna příloha „API klíče a webhooky bez tajných bomb v URL“ s inventářem integrací, pravidly pro scope, podpisy webhooků, rotaci, logování, checklistem, šablonou integrační karty a ověřenými zdroji OWASP a Evropské komise.
+- 2026-10-08: Doplněna příloha „Webhook endpointy a podpisy bez tajných bomb v URL“ s inventářem integrací, pravidly pro tajné URL, scope, podpisy webhooků, rotaci, idempotenci, logování, checklistem, šablonou integrační karty a ověřenými zdroji OWASP a Evropské komise.
 - 2026-10-08: Doplněna příloha „Demo formulář bez vysavače dat a kvalifikačního výslechu“ s návrhem minimálních polí, postupnou kvalifikací leadu, mikrocopy, technickými pravidly přístupnosti, privacy-first tokem dat po odeslání, retenční rutinou, praktickým B2B příkladem, checklistem, formulářovou kartou a ověřenými zdroji GDPR, MDN, WCAG a OWASP.
 
 - 2026-10-08: Doplněna příloha „Audit log a role bez interního šmírování“ s oddělením auditu, analytiky a debug logů, návrhem stabilních událostí, úzkých metadat, rolí podle práce, serverové autorizace, zákaznického auditního pohledu, retence, B2B příkladem, checklistem, audit log kartou a ověřenými zdroji OWASP, NIST a GDPR.
