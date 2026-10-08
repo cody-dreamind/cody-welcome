@@ -54991,7 +54991,196 @@ Datum další revize:
 
 
 
+# Příloha: CSV exporty bez tabulkového průšvihu a datového výprodeje
+
+CSV export vypadá jako neškodné tlačítko. Klikneš, stáhneš tabulku, účetní je šťastná, support má podklad a obchod si udělá filtr. Jenže export je zároveň malá zadní brána z produktu ven: umí odnést osobní údaje, interní poznámky, zákaznický obsah, auditní stopy i hodnoty, které po otevření v tabulkovém editoru začnou fungovat jako vzorce.
+
+Privacy-first export neznamená „CSV zakažme“. Znamená: každý export má účel, omezený rozsah, bezpečný formát, auditní stopu a jasnou retenci. Tlačítko „Exportovat vše“ je pohodlné hlavně do chvíle, než někdo zjistí, že „vše“ zahrnuje víc dat, než měl kdy kdo potřebovat.
+
+> Codyho komentář: CSV je jako kartonová krabice na stěhování dat. Skvělá věc, pokud víš, co do ní dáváš. Horší, když do ní naházíš celý sklep, firemní tajemství a ještě tam necháš ležet otevřený šroubovák jménem `=IMPORTXML(...)`.
+
+## Nejdřív pojmenuj příjemce a účel
+
+Každý export začni dvěma otázkami:
+
+```text
+Kdo export používá?
+Jaké rozhodnutí nebo povinnost mu export pomáhá splnit?
+```
+
+Rozdíl je obrovský. Účetní export faktur potřebuje číslo dokladu, datum, částku, měnu, stav úhrady a identifikaci zákazníka pro účetnictví. Produktový export pro analýzu aktivace nepotřebuje jména, e-maily ani obsah dokumentů. Support export pro řešení incidentu může potřebovat časové řady stavů, ale často nepotřebuje celé poznámky, přílohy ani interní komentáře.
+
+Dobrá exportní karta má jednu větu účelu:
+
+```text
+Tento export pomáhá [role] udělat [úkol] nad [rozsahem dat] za [období].
+```
+
+Příklad:
+
+```text
+Tento export pomáhá účetnímu týmu spárovat vystavené faktury a platby za vybraný měsíc.
+```
+
+Když věta zní „aby si zákazník mohl stáhnout data“, je moc široká. Zákazník možná potřebuje účetní export, auditní export, seznam členů týmu nebo strojový export vlastního obsahu. To jsou různé exporty, ne jedno tlačítko s cedulkou „hodně štěstí“.
+
+## Sloupce vybírej jako veřejný kontrakt
+
+CSV export je API pro lidi i skripty. Jakmile ho zákazník začne používat v účetnictví, BI nástroji nebo interním procesu, změna sloupce je produktová změna. Proto export neschovávej jako náhodný výpis databázové tabulky.
+
+Praktický postup:
+
+- začni názvy sloupců, které dávají smysl člověku, ne ORM modelu,
+- drž stabilní pořadí sloupců,
+- nové sloupce přidávej na konec, pokud to jde,
+- význam sloupce dokumentuj u exportu nebo v helpu,
+- pro stavy používej stabilní hodnoty, ne překládaný UI text,
+- do exportu nedávej interní ID, pokud zákazníkovi nepomáhá.
+
+Špatný export:
+
+```text
+id,user_id,meta,status_raw,created_at,updated_at,json_blob
+```
+
+Lepší export:
+
+```text
+invoice_number,customer_name,issued_on,due_on,currency,total_without_vat,total_with_vat,payment_status,paid_on
+```
+
+Interní ID někdy patří do exportu, například `workspace_id`, `invoice_id` nebo `external_reference`, pokud pomáhá párování a podpoře. Ale `user_uuid`, interní poznámka obchodníka nebo raw JSON z integrace není „pro jistotu“. Je to datový batoh s nejasným účelem.
+
+## Minimalizuj řádky, období i citlivost
+
+Export musí mít rozsah. Minimálně časové období, filtr na stav, typ záznamu a roli uživatele. Výchozí stav nemá být „všechna data od založení účtu“. Bezpečnější výchozí volba je poslední měsíc, aktuální fakturační období nebo aktuální výběr ve filtru.
+
+U větších SaaS účtů přidej asynchronní export:
+
+- uživatel zadá rozsah,
+- systém spočítá velikost a riziko,
+- export se připraví jako job,
+- odkaz má krátkou expiraci,
+- stažení je auditované,
+- po expiraci se soubor smaže.
+
+U citlivých exportů přidej step-up ověření nebo schválení druhou rolí. Typicky jde o export členů týmu, auditních událostí, osobních údajů, zákaznického obsahu, platebních dat nebo bezpečnostních logů.
+
+Privacy-first pravidlo: pokud export existuje hlavně kvůli debugování, nejdřív zvaž menší diagnostický report. Support často nepotřebuje celý dataset. Potřebuje odpověď na konkrétní otázku.
+
+## Chraň tabulky před formula injection
+
+CSV není jen textový soubor, pokud ho někdo otevře v Excelu, LibreOffice Calc nebo podobném nástroji. Buňky začínající znaky jako `=`, `+`, `-`, `@`, tabulátorem nebo carriage return mohou být interpretované jako vzorce. OWASP to popisuje jako CSV Injection neboli Formula Injection.
+
+Praktická obrana:
+
+- všechna textová pole escapuj podle CSV pravidel,
+- hodnoty z uživatelského vstupu, které mohou začínat rizikovým znakem, neutralizuj před exportem,
+- u textových polí zvaž prefix apostrofem nebo jinou konzistentní ochranu podle cílových nástrojů,
+- nedovol uživatelskému vstupu rozbít buňku vložením oddělovače nebo nového řádku bez správného uzavření,
+- testuj export v nástrojích, které zákazníci opravdu používají,
+- u citlivých exportů nabídni bezpečnější formáty jako XLSX generované knihovnou, JSONL nebo API endpoint.
+
+Nejhorší varianta je ručně skládat CSV string konkatenací:
+
+```text
+row.join(',')
+```
+
+Tohle vypadá minimalisticky, ale ignoruje uvozovky, oddělovače, nové řádky, kódování i bezpečnostní prefixy. Použij ověřenou knihovnu, nastav oddělovač, kódování a testuj hraniční hodnoty. RFC 4180 popisuje běžné chování CSV, ale realita tabulkových editorů je pestřejší než marketingová prezentace na konferenci.
+
+## Exporty verzuj a popisuj
+
+Export má mít verzi nebo alespoň changelog. Ne nutně velký dokument, ale zákazník musí poznat, že od určitého data přibyl sloupec, změnil se význam stavu nebo se zpřesnil filtr.
+
+Jednoduchý model:
+
+- `v1` drž pro existující integrace,
+- `v2` přidej při změně významu sloupců nebo rozsahu,
+- malé rozšíření přidávej kompatibilně,
+- breaking změny oznam dopředu,
+- staré verze odstraň až po přechodové době.
+
+U ručně stahovaných exportů stačí často viditelná poznámka:
+
+```text
+Formát exportu: Faktury CSV v1.3, aktualizováno 2026-10-08.
+```
+
+U exportů používaných automatizací přidej dokumentaci a ukázkový soubor. Ukázkový soubor musí používat syntetická data, ne „anonymizovanou“ kopii zákaznického účtu, protože anonymizace v tabulce bývá často spíš přání než technické opatření.
+
+## Stažení je provozní událost
+
+Citlivý export není jen soubor. Je to provozní událost, která má mít stopu:
+
+- kdo export vytvořil,
+- jaký typ exportu šlo,
+- jaký rozsah dat obsahoval,
+- kdy byl soubor připraven,
+- kdy a odkud byl stažen,
+- kdy expiruje nebo byl smazán.
+
+Neloggoval bych obsah exportu. To by byl krásný příklad, jak si kvůli auditu vyrobit druhou kopii problému. Loguj metadata, ne data samotná. Pokud potřebuješ důkaz, že export obsahoval konkrétní sadu záznamů, ulož hash manifestu nebo seznam interních identifikátorů podle účelu a retence.
+
+U zákaznických účtů s více rolemi přidej exportní oprávnění odděleně od běžného čtení. Uživatel, který smí zobrazit jednu fakturu v UI, nemusí automaticky smět stáhnout všechny faktury za dva roky.
+
+## Příklad: měsíční export faktur pro účetní tým
+
+Malý B2B SaaS umožňuje zákazníkovi stáhnout měsíční export faktur. Původní návrh měl jedno tlačítko „Export CSV“ na stránce faktur a exportoval všechny sloupce z databáze včetně interních UUID, poznámek podpory a raw odpovědi platební brány.
+
+Privacy-first verze rozdělí export na účetní účel. Uživatel vybere měsíc, měnu a stav faktur. Export obsahuje číslo faktury, datum vystavení, datum splatnosti, název zákazníka, DIČ, částky, měnu, stav úhrady, datum úhrady a variabilní symbol. Neobsahuje interní poznámky, e-mail každého člena týmu, metadata platební brány ani support historii.
+
+Soubor se připraví jako job, odkaz platí 24 hodin a stažení je zapsané do auditního logu jako metadata. Textové hodnoty jsou ošetřené proti formula injection. V helpu je ukázkový CSV soubor se syntetickou firmou a poznámka, že formát je `invoice_export_csv_v1`.
+
+Výsledek? Účetní má přesně to, co potřebuje. Support nemá další datový požár. A produktový tým může export rozvíjet jako kontrakt, ne jako náhodný výplod databázové nálady.
+
+## Checklist: CSV export bez datového výprodeje
+
+- Má export jasně popsaného příjemce, účel a rozsah?
+- Jsou sloupce vybrané podle pracovního úkolu, ne podle databázové tabulky?
+- Má export výchozí časové omezení nebo filtr?
+- Jsou citlivé exporty chráněné samostatným oprávněním, step-up ověřením nebo schválením?
+- Jsou textová pole ošetřená proti CSV/formula injection?
+- Používá export ověřenou CSV knihovnu místo ručního skládání stringů?
+- Je formát verzovaný nebo alespoň popsaný changelogem?
+- Má soubor krátkou expiraci a jasnou retenci?
+- Loguje systém metadata stažení bez ukládání obsahu exportu?
+- Existuje ukázkový soubor se syntetickými daty?
+
+## Mini šablona exportní karty
+
+```text
+Název exportu:
+Verze formátu:
+Příjemce / role:
+Účel:
+Výchozí rozsah:
+Povolené filtry:
+Sloupce:
+Zakázaná data:
+Citlivost: nízká / střední / vysoká
+Oprávnění:
+Step-up nebo schválení:
+Formula injection ochrana:
+Kódování a oddělovač:
+Retence připraveného souboru:
+Auditní metadata:
+Ukázkový soubor:
+Datum poslední revize:
+Datum další revize:
+```
+
+## Zdroje
+
+- OWASP: CSV Injection / Formula Injection a rizika při otevírání exportů v tabulkových editorech: https://community.owasp.org/attacks/CSV_Injection
+- OWASP Web Security Testing Guide: testování CSV Injection ve webových aplikacích: https://owasp.github.io/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Injection/21-CSV_Injection
+- RFC Editor: RFC 4180, Common Format and MIME Type for Comma-Separated Values Files: https://www.rfc-editor.org/info/rfc4180/
+- EUR-Lex: GDPR, článek 5 se zásadami minimalizace údajů, omezení účelu a omezení uložení: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679
+
+
 # Pracovní log
+
+- 2026-10-08: Doplněna příloha „CSV exporty bez tabulkového průšvihu a datového výprodeje“ s účelovým návrhem exportů, stabilními sloupci, minimalizací rozsahu, ochranou proti formula injection, verzováním formátu, auditními metadaty, příkladem měsíčního exportu faktur, checklistem, exportní kartou a ověřenými zdroji OWASP, RFC 4180 a GDPR.
 
 - 2026-10-08: Doplněna příloha „Interní vyhledávání bez indexace cizího soukromí“ s účelem indexů, minimalizací indexovaných polí, dvouvrstvou autorizací, validací dotazů, bezpečnými náhledy výsledků, auditováním bez ukládání citlivých dotazů, retenčními pravidly, B2B SaaS příkladem, checklistem, search index kartou a ověřenými zdroji OWASP a Meilisearch.
 
