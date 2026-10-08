@@ -56824,7 +56824,163 @@ Datum revize:
 - European Commission — GDPR principles, zejména data minimisation, storage limitation a integrity and confidentiality: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 
 
+
+# Archivace a retenční pravidla bez datového sklepa
+
+Retence není jen právní tabulka v dokumentaci. Je to produktové rozhodnutí, které říká, jak dlouho služba potřebuje data pro zákazníkovu práci, bezpečnost, účetnictví, podporu a obranu před zneužitím. Když to nepojmenuješ, databáze se časem promění v digitální půdu po předchozích nájemnících: nikdo přesně neví, co tam je, ale všichni se bojí na to sáhnout.
+
+Privacy-first SaaS má mít retenční pravidla čitelná pro tým i zákazníka. Ne „někdy smažeme neaktivní data“, ale konkrétně: jaký typ dat, jaký účel, jaká doba, kdo může udělit výjimku, co se anonymizuje a co se skutečně maže.
+
+## Začni katalogem dat podle účelu
+
+Nezačínej otázkou „jak dlouho všechno držet“. Začni otázkou „proč tato data ještě potřebujeme“. Stejný zákaznický účet může obsahovat provozní data, fakturační údaje, auditní logy, support přílohy, analytické agregace, exporty a debug stopy. Každá skupina má jiný účel i jinou rozumnou životnost.
+
+Praktické rozdělení pro malý B2B SaaS:
+
+- **Účet a workspace:** identita, role, nastavení týmu, fakturační stav.
+- **Pracovní obsah zákazníka:** projekty, dokumenty, záznamy, importované soubory.
+- **Bezpečnostní stopa:** přihlášení, změny rolí, exporty, API klíče, podezřelé pokusy.
+- **Support data:** ticket, diagnostický kontext, přílohy, interní poznámky.
+- **Produktová analytika:** agregované signály používání, nikoli obsah práce.
+- **Dočasná technická data:** preview exporty, importní staging, cache, fronty, debug logy.
+
+Ke každé skupině napiš jednu větu účelu. Pokud věta zní „mohlo by se hodit“, není to účel. To je digitální křečkování v saku.
+
+## Retenční pravidlo napiš jako kontrakt
+
+Dobré retenční pravidlo má být tak konkrétní, aby podle něj šel napsat test, cron job nebo runbook pro support. Nestačí mít hodnotu v hlavě zakladatele. Zakladatel má hlavu plnou roadmappy, plateb, bugů a kofeinu — to není spolehlivé úložiště compliance.
+
+Minimální kontrakt:
+
+```text
+Typ dat:
+Účel zpracování:
+Primární vlastník:
+Výchozí retenční doba:
+Spouštěč začátku lhůty:
+Akce po konci lhůty: smazat / anonymizovat / agregovat / archivovat
+Výjimky:
+Kdo schvaluje výjimku:
+Kde je pravidlo implementované:
+Jak se ověřuje:
+Text pro zákazníka:
+Datum další revize:
+```
+
+Příklad: support přílohy držet 90 dní po uzavření ticketu, pokud zákazník výslovně nepožádá o dřívější smazání nebo pokud nejde o otevřený incident. Po lhůtě smazat soubory, ponechat neosobní metadata ticketu pro statistiku podpory. To je pravidlo. „Support přílohy časem uklidíme“ je přání.
+
+## Archiv není odkladiště pro nejistotu
+
+Archivuj jen data, pro která existuje jasný důvod: právní povinnost, smluvní odpovědnost, bezpečnostní vyšetřování, účetnictví, audit nebo zákaznický export. Archiv nemá být místo, kam přesuneš všechno, co se bojíš smazat.
+
+Při archivaci si hlídej čtyři brzdy:
+
+- **Přístup:** archiv není produkční databáze s hezčím názvem; přístup má být vzácný a logovaný.
+- **Vyhledatelnost:** umíš najít konkrétní záznam kvůli žádosti zákazníka nebo auditu, ale neděláš z archivu analytický nástroj.
+- **Oddělení:** archiv má být oddělený od běžného provozu, aby stará data nelezla zpět do produktu.
+- **Konec:** i archiv má datum smrti; jinak je to jen datový hřbitov s lepším marketingem.
+
+Codyho komentář: Nejlepší archiv je nudný. Nikdo v něm nebrowsuje „pro inspiraci“, nikdo z něj netahá marketingové segmenty a nikdo ho nepoužívá jako zkratku místo správně navrženého produktu.
+
+## Mazání navrhni jako provozní proces
+
+Mazání není jedno tlačítko. U SaaS typicky existuje několik vrstev: aktivní databáze, search index, cache, objektové úložiště, fronty, logy, zálohy, analytické agregace a externí nástroje. Když smažeš jen hlavní řádek v databázi, můžeš mít pocit hotové práce, ale data si mezitím dávají afterparty v dalších systémech.
+
+Praktický postup:
+
+1. V datové mapě označ všechna místa, kde se typ dat objevuje.
+2. Rozliš okamžité smazání, plánované smazání a smazání ze záloh podle obnovovacího cyklu.
+3. Po mazání vytvoř technický záznam typu `deleted_at`, ale bez ukládání původního obsahu.
+4. Pokud používáš anonymizaci, pravidelně ověřuj riziko znovuidentifikace.
+5. U externích dodavatelů zkontroluj, jestli mají vlastní retenční nastavení a DPA.
+6. Jednou za čtvrtletí spusť test „najdi data po smazání“ na bezpečném testovacím účtu.
+
+U záloh buď férový: často nejde vymazat jednotlivý záznam okamžitě ze všech snapshotů bez rozbití integrity obnovy. To ale neznamená „neřešíme“. Znamená to mít jasnou dobu rotace záloh, omezený přístup, šifrování a postup, že se obnovená záloha po incidentu znovu podrobí mazacím pravidlům.
+
+## Produktové UX: zákazník má vědět, co se stane
+
+Privacy-first přístup neznamená zahlcovat zákazníka právničinou. Znamená dát mu klidnou a konkrétní informaci ve chvíli, kdy rozhoduje.
+
+Dobré texty v produktu:
+
+- „Export bude dostupný 7 dní, potom ho automaticky smažeme.“
+- „Po uzavření ticketu mažeme přílohy po 90 dnech. Text konverzace držíme kvůli historii podpory.“
+- „Po zrušení workspace zůstane účet 30 dní v ochranné lhůtě pro obnovu, potom pracovní obsah smažeme.“
+- „Bezpečnostní auditní záznamy držíme 12 měsíců, protože pomáhají chránit účet před zneužitím.“
+
+Špatné texty:
+
+- „Data můžeme uchovávat dle potřeby.“
+- „Některé informace mohou zůstat v našich systémech.“
+- „Smazání může trvat přiměřenou dobu.“
+
+Tyhle věty jsou možná pohodlné pro právní únik, ale pro důvěru jsou asi jako zamčené dveře s cedulkou „někde máme klíč“.
+
+## Praktický příklad: archivace po zrušení workspace
+
+Malý B2B SaaS pro agentury řeší zrušení workspace po konci projektu. Privacy-first pravidlo může vypadat takto:
+
+- Den 0: zákazník potvrdí zrušení a dostane nabídku exportu dat.
+- Dny 0–30: workspace je deaktivovaný, nejde vytvářet nový obsah, vlastník může stáhnout export nebo obnovit účet.
+- Den 31: pracovní obsah se smaže z aktivní databáze a indexů; exporty se zneplatní.
+- Do 90 dnů: dočasné soubory, importní staging a cache jsou pryč podle provozních jobů.
+- Do konce zálohovací rotace: data zmizí ze standardních obnovovacích snapshotů.
+- 12 měsíců: bezpečnostní auditní záznamy drží minimální informaci o zrušení, exportu a rolích.
+- Účetní doklady: drží se podle účetních a daňových pravidel mimo pracovní obsah zákazníka.
+
+Důležité je oddělit pracovní obsah od fakturačních a bezpečnostních záznamů. Když zákazník ruší projekt, neznamená to, že musíš smazat účetní doklad. A když potřebuješ držet účetní doklad, neznamená to, že smíš držet celý jeho projektový archiv.
+
+## Checklist: retence a archivace bez datového sklepa
+
+- Má každý typ dat pojmenovaný účel?
+- Je retenční doba napsaná konkrétně, ne „dle potřeby“?
+- Ví tým, kdy lhůta začíná běžet?
+- Je jasné, jestli se po lhůtě maže, anonymizuje, agreguje nebo archivuje?
+- Jsou zákaznické exporty časově omezené?
+- Mažou se dočasné importy, preview soubory, cache a fronty?
+- Jsou search indexy a analytické agregace zahrnuté v mazacím procesu?
+- Má archiv omezený a auditovaný přístup?
+- Mají zálohy jasnou rotaci a obnovovací pravidla?
+- Umí support vysvětlit zákazníkovi, co se stane po zrušení účtu?
+- Existuje pravidelný test, že se data po retenci opravdu ztratí z aktivních systémů?
+- Kontroluje se alespoň čtvrtletně, jestli někde nevznikl nový datový sklad bokem?
+
+## Mini šablona retenční karty
+
+```text
+# Retenční karta: [typ dat]
+
+Účel:
+Kategorie dat:
+Subjekt dat:
+Systémy, kde se data nachází:
+Vlastník pravidla:
+Výchozí retenční doba:
+Spouštěč lhůty:
+Akce po lhůtě:
+Výjimky:
+Schvalovatel výjimky:
+Zákaznický text:
+Implementace:
+Kontrola / test:
+Zálohy:
+Externí dodavatelé:
+Datum revize:
+```
+
+## Zdroje
+
+- European Commission — GDPR principles, zejména data minimisation, storage limitation, integrity and confidentiality a accountability: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- EDPB — Guidelines 4/2019 on Article 25 Data Protection by Design and by Default, zejména část o omezení doby uložení, mazání nebo anonymizaci ve výchozím nastavení: https://www.edpb.europa.eu/sites/default/files/files/file1/edpb_guidelines_201904_dataprotection_by_design_and_by_default_v2.0_en.pdf
+- EDPB — SME guidance „Be compliant“, připomínka že privacy by default zahrnuje množství dat, rozsah zpracování, dobu uložení i dostupnost: https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en
+- OWASP Logging Cheat Sheet — doporučení, že logy, dočasné debug logy, kopie a extrakty nemají být drženy déle než určenou retenční dobu: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Secure Product Design Cheat Sheet — bezpečné produktové návrhy mají počítat se zálohami a správně nastavenou retencí dat: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Product_Design_Cheat_Sheet.html
+
+
 # Pracovní log
+
+- 2026-10-08: Doplněna příloha „Archivace a retenční pravidla bez datového sklepa“ s datovým katalogem podle účelu, retenčním kontraktem, pravidly pro archiv, provozním mazáním, zákaznickým UX, příkladem zrušení workspace, checklistem, retenční kartou a ověřenými zdroji Evropské komise, EDPB a OWASP.
+
 
 - 2026-10-08: Doplněna příloha „Rate limiting bez trestání dobrých zákazníků a sběru digitálních stop“ s rozdělením limitů podle účelu, privacy-first identifikátory, chybovými odpověďmi, tenant fairness, logováním bez payloadů, AI export příkladem, checklistem, rate limit kartou a ověřenými zdroji OWASP, NIST a Evropské komise.
 
