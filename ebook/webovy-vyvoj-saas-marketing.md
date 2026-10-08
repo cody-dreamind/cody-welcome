@@ -57786,7 +57786,138 @@ Datum další revize:
 - European Commission — GDPR principles pro datovou minimalizaci, omezení účelu, omezení uložení a odpovědnost: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 - ENISA — Good practices for supply chain cybersecurity, doporučení k řízení dodavatelských a integračních rizik: https://www.enisa.europa.eu/publications/good-practices-for-supply-chain-cybersecurity
 
+# Příloha: Restore drill bez falešného klidu a zálohovací magie
+
+Záloha, kterou nikdo nikdy neobnovil, není jistota. Je to optimistický soubor někde v cloudu, který se tváří jako plán. U webu nebo SaaS nestačí vědět, že „něco se zálohuje“. Tým musí vědět, co přesně se dá obnovit, za jak dlouho, v jaké kvalitě, kdo to umí udělat a co se po obnově nesmí omylem přepsat.
+
+Restore drill je pravidelný nácvik obnovy. Nečeká na požár, ransomware, lidskou chybu nebo špatnou migraci databáze. V klidném čase vezme jednu konkrétní část systému a ověří, že ji umíš vrátit do použitelného stavu. Nudné? Ano. A přesně proto to funguje.
+
+> Codyho komentář: „Máme zálohy“ je věta ze stejné rodiny jako „to se určitě nerozbije“. Obě zní krásně do chvíle, než se někdo zeptá: „Super, ukaž restore.“
+
+## Nejdřív definuj, co obnovuješ
+
+Obnova není jedna akce. Jinak se obnovuje statický web, jinak databáze, jinak nahrané soubory, jinak konfigurace DNS, jinak secrets a jinak e-mailová doručitelnost. Pokud má tým jen obecné pravidlo „backup denně“, neví, jestli pokrývá skutečný provozní dopad.
+
+Rozděl obnovu na vrstvy:
+
+| Vrstva | Co ověřit | Typická past |
+| --- | --- | --- |
+| Zdrojový kód | repozitář, tagy, build postup | chybí přesná verze nasazená v produkci |
+| Databáze | dump, point-in-time recovery, migrace | záloha nejde obnovit kvůli změně schématu |
+| Uživatelské soubory | uploady, faktury, přílohy, obrázky | soubory jsou jinde než databázové odkazy |
+| Konfigurace | env proměnné, DNS, cron joby, fronty | dokumentace neodpovídá produkci |
+| Přístupy | účty, klíče, break-glass postup | obnovu umí jen jeden člověk na dovolené |
+| Monitoring | logy, alerty, status page | po obnově nevíš, jestli systém opravdu běží |
+
+Pro každou vrstvu napiš obnovovací scénář jednou větou: „Umíme obnovit produkční databázi do testovacího prostředí ze včerejší zálohy a ověřit integritu tří klíčových tabulek.“ To je lepší než deset odrážek, které nikdo nezkusil.
+
+## RTO a RPO přelož do lidské řeči
+
+RTO říká, za jak dlouho chceš službu obnovit. RPO říká, kolik dat si můžeš dovolit ztratit. NIST ve svých materiálech ke kontingenčnímu plánování pracuje právě s obnovou systémů, prioritami a testováním postupů; pro malý SaaS to přelož do praktických hranic, ne do korporátní poezie.
+
+Příklad pro malý B2B SaaS:
+
+- marketingový web: RTO 4 hodiny, RPO 24 hodin,
+- aplikace pro přihlášené zákazníky: RTO 2 hodiny, RPO 1 hodina,
+- fakturační data: RTO 8 hodin, RPO 15 minut,
+- analytické agregace: RTO 2 dny, RPO 24 hodin,
+- blog a dokumentace: RTO 24 hodin, RPO 24 hodin.
+
+Tahle čísla nejsou univerzální. Jsou rozhodnutí. Pokud slibuješ zákazníkům vyšší dostupnost, musí tomu odpovídat architektura, monitoring, zálohy, lidé i rozpočet. Pokud naopak provozuješ menší obsahový web, nepotřebuješ drahý disaster recovery cirkus. Potřebuješ vědět, že web umíš vrátit bez paniky.
+
+## Privacy-first obnova: neobnovuj víc, než musíš
+
+Restore drill není výmluva pro kopírování produkčních dat všude možně. Pokud obnovuješ do testovacího nebo vývojového prostředí, použij anonymizaci, pseudonymizaci nebo syntetická data. Produkční osobní data patří mimo vývojářské notebooky a dočasné testovací databáze, pokud pro ně nemáš opravdu jasný účel a ochranu.
+
+Pravidla pro evropský, datově střídmý restore:
+
+- testovací restore dělej do izolovaného prostředí bez veřejného přístupu,
+- secrets nikdy nekopíruj slepě z produkce do testu,
+- zákaznický obsah anonymizuj nebo nahraď syntetickými daty,
+- logy z obnovy nesmí obsahovat celé payloady, tokeny ani citlivý obsah,
+- dočasné restore prostředí po testu smaž nebo jasně označ retenční lhůtou,
+- u obnovy z incidentu si poznamenej, která data mohla být ztracena nebo změněna.
+
+GDPR principy minimalizace, omezení účelu a omezení uložení platí i při obnově. Záloha není právní paralelní vesmír, kde se pravidla vypnou, protože „to je technické“.
+
+## Jak vypadá malý restore drill
+
+Začni malým scénářem, který zvládneš za hodinu. Nevybírej hned nejhorší katastrofu. Vyber část, která je důležitá a ověřitelná.
+
+Postup:
+
+1. Vyber scénář: například obnova databáze z poslední noční zálohy do izolovaného prostředí.
+2. Zapiš očekávaný výsledek: aplikace startuje, migrace sedí, klíčové počty odpovídají.
+3. Připrav kontrolní dotazy nebo ruční kroky: počet workspace, poslední faktura, počet uživatelů.
+4. Spusť obnovu podle dokumentace, ne podle paměti nejzkušenějšího člověka.
+5. Změř čas od začátku do ověřeného výsledku.
+6. Zapiš překážky: chybějící oprávnění, neaktuální příkaz, pomalý download, špatný region, chybějící klíč.
+7. Uprav runbook a nastav datum dalšího testu.
+
+Největší hodnota drillů není v tom, že všechno projde. Největší hodnota je v tom, že chyba vyjde ven v úterý dopoledne, ne v sobotu ve tři ráno, když zákazník posílá screenshoty a káva už vzdala život.
+
+## Praktický příklad: chybná migrace v účetním SaaS
+
+Malý účetní SaaS nasadí migraci, která špatně přepočítá stav u části návrhů faktur. Produkční databáze běží, ale data v jedné tabulce jsou podezřelá. Tým nepotřebuje hned obnovit celý systém. Potřebuje bezpečně porovnat stav před migrací, zjistit rozsah a připravit opravu.
+
+Dobře připravený restore postup:
+
+- obnoví poslední zálohu před migrací do izolovaného prostředí,
+- neodesílá žádné e-maily ani webhooky z obnovného prostředí,
+- porovná jen dotčené tabulky a tenanty,
+- zapíše počet ovlivněných záznamů a časové okno,
+- připraví opravný skript s dry-run režimem,
+- po opravě zkontroluje auditní záznam a zákaznický dopad,
+- pokud byl dopad viditelný pro zákazníky, připraví stručnou incident komunikaci.
+
+Tady restore drill šetří reputaci. Tým nepanikaří, protože už ví, jak dostat bezpečnou kopii dat, jak zabránit vedlejším efektům a jak ověřit výsledek bez procházení produkce ručně.
+
+## Checklist: restore drill bez kouřové clony
+
+- [ ] Má každá kritická vrstva popsaný obnovovací scénář?
+- [ ] Víme RTO a RPO pro web, aplikaci, databázi, soubory a konfiguraci?
+- [ ] Proběhl aspoň jeden restore test v posledních 90 dnech?
+- [ ] Umíme obnovit data do izolovaného prostředí bez veřejného přístupu?
+- [ ] Neobsahuje testovací restore produkční secrets nebo zbytečná osobní data?
+- [ ] Má runbook konkrétní příkazy, vlastníka a kontrolní kroky?
+- [ ] Měříme reálný čas obnovy, ne jen teoretický slib dodavatele?
+- [ ] Máme popsané, kdy obnovovat celý systém a kdy jen porovnat data?
+- [ ] Po testu mažeme dočasné kopie nebo jim nastavujeme retenci?
+- [ ] Aktualizujeme zákaznickou nebo interní komunikaci podle dopadu obnovy?
+
+## Mini šablona restore drill karty
+
+```text
+# Restore drill karta: [systém / vrstva]
+
+Scénář:
+Vlastník:
+Kritičnost:
+RTO:
+RPO:
+Zdroj zálohy:
+Cílové prostředí:
+Izolace prostředí:
+Pravidla pro osobní data:
+Co se nesmí spustit po obnově:
+Kontrolní kroky:
+Naměřený čas obnovy:
+Nalezené problémy:
+Úpravy runbooku:
+Datum testu:
+Datum dalšího testu:
+```
+
+## Zdroje
+
+- NIST SP 800-34 Rev. 1 — Contingency Planning Guide for Federal Information Systems, rámec pro plánování obnovy, testování a prioritizaci systémů: https://csrc.nist.gov/publications/detail/sp/800-34/rev-1/final
+- ENISA — Cybersecurity for SMEs, doporučení k off-site zálohám a pravidelnému testování obnovy dat ze záloh: https://www.enisa.europa.eu/publications/cybersecurity-for-smes
+- OWASP Cheat Sheet Series — Logging Cheat Sheet, doporučení k tomu, co logovat, co nelogovat a jak chránit logy při provozních událostech: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- European Commission — GDPR principles pro minimalizaci dat, omezení účelu, omezení uložení a odpovědnost: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
 # Pracovní log
+
+- 2026-10-08: Doplněna příloha „Restore drill bez falešného klidu a zálohovací magie“ s rozdělením obnovy podle vrstev, RTO/RPO v lidské řeči, privacy-first pravidly pro testovací obnovy, postupem malého restore drillu, příkladem chybné migrace v účetním SaaS, checklistem, restore drill kartou a ověřenými zdroji NIST, ENISA, OWASP a Evropské komise.
 
 - 2026-10-08: Doplněna příloha „Integrační katalog bez zapomenutých datových potrubí“ s inventurou API, webhooků, exportů, importů a ručních toků, rizikovým skóre, revizí klíčů, marketingovým audit příkladem, checklistem, šablonou katalogu a ověřenými zdroji OWASP, Evropské komise a ENISA.
 
