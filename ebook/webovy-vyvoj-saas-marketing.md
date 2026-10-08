@@ -56072,8 +56072,159 @@ Postup vypnutí:
 - OWASP Webhook Security Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Webhook_Security_Cheat_Sheet.html
 - European Commission — GDPR principles, data minimisation and storage limitation: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 
+
+## Skripty třetích stran bez tag manageru jako dálkového ovladače webu
+
+Externí skript na webu není „jen drobná integrace“. Je to cizí kód, který běží v prohlížeči návštěvníka, často vidí URL, kontext stránky a někdy i interakce kolem formulářů. Když ho přidáš bez pravidel, dáváš dodavateli malý dálkový ovladač na část důvěry, kterou si web budoval roky. A to je docela drahý ovladač, i když byl v SaaS trialu zdarma.
+
+Privacy-first web proto nezačíná otázkou „jaký tag manager použijeme“, ale „které skripty si vůbec zaslouží běžet v prohlížeči“. Čím méně třetích stran na stránce je, tím menší je bezpečnostní plocha, právní nejasnost, výkonnostní daň i provozní závislost.
+
+### Začni inventářem skriptů
+
+Nejdřív si napiš všechny skripty, které se na webu načítají mimo vlastní doménu. Nejen analytiku. Patří sem chat widgety, heatmapy, A/B testovací nástroje, fonty, mapy, formuláře, CDN knihovny, affiliate měření, embeds, platební prvky i „dočasný“ kód od marketingu, který už je na webu třetím rokem a pomalu získává občanku.
+
+U každého skriptu si napiš:
+
+- odkud se načítá;
+- kdo ho v týmu vlastní;
+- jaký obchodní nebo provozní účel plní;
+- na kterých stránkách běží;
+- jaká data může vidět;
+- jestli je nutný před souhlasem, po souhlasu, nebo vůbec;
+- jak ho vypneš bez rozbití webu.
+
+Pokud u skriptu neumíš vyplnit účel a vlastníka, má být vypnutý kandidát. „Nevíme, možná marketing“ není účel. To je kouřová clona v mikině.
+
+### Tag manager není bezpečnostní model
+
+Tag manager se často tváří jako pořádek, ale může se stát přesným opakem: jedním místem, odkud jde měnit chování webu bez code review, bez testů a někdy bez povědomí vývojářů. To je pohodlné, ale privacy-first provoz není závod v tom, kdo nejrychleji nasadí další pixel.
+
+Bezpečnější pravidla:
+
+- tag manager nesmí být jediná evidence skriptů;
+- každá změna v tag manageru má mít ticket, vlastníka a datum kontroly;
+- produkční publikování má být omezené na pár lidí;
+- custom HTML/JavaScript tagy používej výjimečně a s revizí;
+- marketingové tagy nespouštěj na stránkách s citlivým obsahem, interním rozhraním nebo zákaznickými daty;
+- jednou měsíčně porovnej reálné načtené skripty proti inventáři.
+
+Codyho komentář: Tag manager je dobrý sluha pro organizaci měření. Špatný pán pro architekturu webu. Pokud přes něj může kdokoliv přidat libovolný JavaScript do produkce, nemáš marketingovou agilitu. Máš produkční zadní dveře s hezkým UI.
+
+### Načítej jen tam, kde je skript potřeba
+
+Častý zlozvyk: skript se přidá globálně „pro jistotu“. Chat widget běží na blogu, heatmapa na ceníku, marketingový pixel na přihlášení a testovací knihovna na každé stránce. Výsledek je pomalejší web a širší datový průvan.
+
+Lepší model:
+
+- analytiku drž agregovanou a bez reklamních identifikátorů;
+- chat widget načítej jen na stránkách, kde má reálnou podporovou roli;
+- mapu nahraď statickým odkazem nebo obrázkem, pokud interaktivita není nutná;
+- embed videa načítej až po kliknutí;
+- formulář od třetí strany používej jen tam, kde nemáš bezpečnější vlastní variantu;
+- interní SaaS části odděl od marketingového měření technicky, ne jen dobrým úmyslem.
+
+Když skript běží jen na jedné stránce, má být přidán jen tam. Globální include je pohodlný pro vývojáře, ale nepohodlný pro návštěvníka, výkon i kontrolu dat.
+
+### CSP a SRI ber jako zábradlí, ne neprůstřelnou vestu
+
+Content Security Policy pomáhá omezit, odkud se mohou načítat skripty a jak se mohou spouštět. Subresource Integrity zase umožňuje ověřit, že načtený soubor odpovídá očekávanému hashi. Obojí je užitečné, ale neřeší špatné rozhodnutí načítat zbytečný cizí kód.
+
+Praktický postup:
+
+1. Nejprve odstraň nepotřebné skripty.
+2. Pak nastav CSP v report-only režimu a sleduj, co by se blokovalo.
+3. Poté přejdi na vynucenou politiku pro produkci.
+4. Externí knihovny z CDN buď self-hostuj, nebo používej SRI tam, kde dává smysl.
+5. Inline skripty omezuj pomocí nonce nebo hashů místo `unsafe-inline`.
+6. CSP reporty loguj bez zbytečných osobních údajů.
+
+Ukázka jednoduchého směru u marketingového webu:
+
+```text
+Content-Security-Policy:
+  default-src 'self';
+  script-src 'self' https://analytics.example.eu;
+  connect-src 'self' https://analytics.example.eu;
+  img-src 'self' data:;
+  style-src 'self';
+  base-uri 'self';
+  frame-ancestors 'none'
+```
+
+Není to univerzální konfigurace k opsání. Je to připomínka principu: povoluj konkrétní zdroje podle účelu, ne celý internet podle nálady.
+
+### Souhlas není omluva pro datový chaos
+
+Cookie lišta ani consent management platforma neospravedlňuje zbytečné skripty. Souhlas má být konkrétní a srozumitelný, ale privacy-first přístup jde ještě o krok dřív: mnoho věcí se vůbec nemusí načítat, protože pro službu nejsou potřeba.
+
+Praktický filtr před přidáním skriptu:
+
+- Pomáhá návštěvníkovi nebo jen interní zvědavosti?
+- Umíme stejný výsledek získat agregovaně nebo server-side?
+- Potřebuje běžet před interakcí uživatele?
+- Bude jasně popsán v zásadách ochrany soukromí?
+- Má evropský provoz nebo jasnou smluvní a technickou kontrolu dat?
+- Umíme ho vypnout bez ztráty kritické funkce?
+
+Pokud odpovědi bolí, problém není v cookie banneru. Problém je v návrhu.
+
+### Příklad: B2B landing page s poptávkovým formulářem
+
+Malá firma má landing page pro konzultace. Původní návrh obsahuje analytiku, reklamní pixel, heatmapu, chat widget, externí formulář a video embed. Privacy-first revize vypadá takto:
+
+- analytika zůstane agregovaná a evropská;
+- reklamní pixel se odstraní, protože hlavním kanálem jsou přímé odkazy, SEO a referral partnerství;
+- heatmapa se nenasadí plošně, maximálně krátce v testovacím okně a jen na neformulářové stránce;
+- chat widget se nahradí jasným kontaktem a rychlou odpovědí e-mailem;
+- formulář běží na vlastní doméně a sbírá jen údaje nutné pro odpověď;
+- video se načte až po kliknutí přes privacy-friendly placeholder;
+- CSP povolí jen vlastní doménu a analytický endpoint.
+
+Výsledek není méně marketingu. Je to méně hluku. Web pořád umí měřit zájem, sbírat poptávky a vysvětlit nabídku, ale nedělá z každé návštěvy malý datový karneval.
+
+### Checklist: třetí skripty bez datového průvanu
+
+- Máš aktuální inventář všech externích skriptů.
+- Každý skript má vlastníka, účel a datum další kontroly.
+- Skripty se načítají jen na stránkách, kde jsou skutečně potřeba.
+- Tag manager nemůže obcházet code review u rizikového kódu.
+- Marketingové skripty neběží v zákaznickém rozhraní ani u citlivých dat.
+- CSP je testovaná v report-only režimu a následně vynucená.
+- CDN knihovny jsou self-hostované nebo chráněné SRI, pokud to dává smysl.
+- Cookie/consent vrstva není používána jako výmluva pro zbytečný sběr dat.
+- Zásady ochrany soukromí odpovídají reálnému chování webu.
+- Jednou měsíčně kontroluješ, co se na stránce skutečně načítá.
+
+### Mini šablona skriptové karty
+
+```text
+Název skriptu:
+Dodavatel / doména:
+Vlastník v týmu:
+Účel:
+Stránky, kde běží:
+Spouštění: vždy | po souhlasu | po kliknutí | jen interně
+Data, která může vidět:
+Alternativa bez třetí strany:
+Je nutný pro kritickou funkci? ano/ne
+CSP pravidlo:
+SRI / self-hosting:
+Jak se vypíná:
+Datum poslední kontroly:
+Datum další kontroly:
+Poznámky k DPA / subprocesorům:
+```
+
+### Zdroje
+
+- OWASP Third Party JavaScript Management Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Third_Party_Javascript_Management_Cheat_Sheet.html
+- MDN — Content-Security-Policy `script-src`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/script-src
+- MDN — Subresource Integrity: https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity
+- European Commission — GDPR principles, data minimisation and storage limitation: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
 # Pracovní log
 
+- 2026-10-08: Doplněna příloha „Skripty třetích stran bez tag manageru jako dálkového ovladače webu“ s inventářem externích skriptů, pravidly pro tag manager, selektivním načítáním, CSP/SRI, souhlasovým filtrem, B2B příkladem, checklistem, skriptovou kartou a ověřenými zdroji OWASP, MDN a Evropské komise.
 - 2026-10-08: Doplněna příloha „Webhook endpointy a podpisy bez tajných bomb v URL“ s inventářem integrací, pravidly pro tajné URL, scope, podpisy webhooků, rotaci, idempotenci, logování, checklistem, šablonou integrační karty a ověřenými zdroji OWASP a Evropské komise.
 - 2026-10-08: Doplněna příloha „Demo formulář bez vysavače dat a kvalifikačního výslechu“ s návrhem minimálních polí, postupnou kvalifikací leadu, mikrocopy, technickými pravidly přístupnosti, privacy-first tokem dat po odeslání, retenční rutinou, praktickým B2B příkladem, checklistem, formulářovou kartou a ověřenými zdroji GDPR, MDN, WCAG a OWASP.
 
