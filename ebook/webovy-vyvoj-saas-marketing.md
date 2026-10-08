@@ -56222,7 +56222,177 @@ Poznámky k DPA / subprocesorům:
 - MDN — Subresource Integrity: https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity
 - European Commission — GDPR principles, data minimisation and storage limitation: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 
+
+# Příloha: Prázdné stavy a chybové obrazovky bez podpůrného pekla
+
+Prázdný stav není dekorace s veselou ikonou. Je to místo, kde uživatel čeká odpověď na otázku: „Co teď?“ Chybová obrazovka zase není technický povzdech serveru, ale poslední šance udržet důvěru, když se něco nepovedlo. Když tyhle momenty odbydeš, support dostane zbytečné dotazy, obchod ztratí jistotu a produkt začne působit jako automat, který spolkl minci a tváří se meditativně.
+
+Privacy-first produkt má v těchto stavech ještě jednu povinnost: pomoct bez toho, aby začal sbírat zbytečné detaily „pro jistotu“. Dobrá chyba neprozradí interní infrastrukturu, dobrý prázdný stav nevynucuje import celého adresáře a dobrý fallback nenutí uživatele předat citlivá data jen proto, že aplikace nemá lepší nápad.
+
+> Codyho komentář: Nejlepší prázdný stav je malý navigátor, ne marketingový plakát. Má uživatele posunout o jeden rozumný krok, ne mu udělat přednášku o vizi produktu.
+
+## Rozděl stavy podle rozhodnutí uživatele
+
+Nejdřív si nepiš texty. Rozděl si situace podle toho, jaké rozhodnutí má člověk udělat.
+
+| Stav | Typická otázka uživatele | Dobrá odpověď produktu |
+| --- | --- | --- |
+| První prázdný stav | „Jak začnu?“ | Jeden doporučený krok, krátké vysvětlení hodnoty, možnost přeskočit. |
+| Prázdný výsledek hledání | „Neexistuje to, nebo jsem hledal špatně?“ | Úprava dotazu, filtry, odkaz na vytvoření položky nebo kontakt. |
+| Dočasná chyba | „Mám čekat, nebo to zkusit znovu?“ | Stav, co se stalo, bezpečné opakování, případně status stránka. |
+| Oprávnění chybí | „Kdo mi to může povolit?“ | Název role, vlastník workspace, žádost o přístup bez úniku detailů. |
+| Limit dosažen | „Co přesně mě blokuje?“ | Limit, období, další bezpečný krok a férové vysvětlení ceny nebo kvóty. |
+| Data se načítají dlouho | „Je to rozbité?“ | Průběžná zpětná vazba, odhad nebo možnost odejít a dostat notifikaci. |
+
+Tahle tabulka chrání před univerzálním textem „Něco se pokazilo“. Ten je sice krátký, ale uživatelsky má výživovou hodnotu kartonu.
+
+## Prázdný stav má učit prací, ne prezentací
+
+První prázdná obrazovka má ukázat nejkratší cestu k první hodnotě. Ne všechny funkce. Ne kompletní onboarding. Ne tři videa, dvě modální okna a dotazník, který se tváří jako přátelský rozhovor.
+
+Praktický model:
+
+1. Pojmenuj, co tady bude, až produkt začne žít.
+2. Vysvětli, proč to pomáhá uživateli.
+3. Nabídni jednu hlavní akci.
+4. Přidej jednu bezpečnou alternativu.
+5. Ukaž, jaká data budou potřeba a proč.
+
+Příklad pro SaaS správu projektů:
+
+```text
+Zatím tu nejsou žádné projekty.
+Vytvoř první projekt a pozvi tým až ve chvíli, kdy budeš mít základní strukturu hotovou.
+
+[ Vytvořit projekt ]
+Nebo začni ze šablony bez importu osobních dat.
+```
+
+Tahle verze je lepší než „Pozvěte celý tým a synchronizujte kalendář“, protože respektuje tempo uživatele i datovou minimalizaci.
+
+## Chyba má být akční, ale ne ukecaná
+
+Chybová zpráva musí říct tři věci:
+
+- co se stalo z pohledu uživatele,
+- co může udělat teď,
+- co produkt udělá na pozadí, pokud něco dělá.
+
+Špatně:
+
+```text
+Error 500: Internal server error.
+```
+
+Lépe:
+
+```text
+Nepodařilo se uložit změny.
+Zkus to prosím znovu. Pokud problém trvá, změny zkopíruj a napiš podpoře s kódem události: EVT-2026-10-08-1432.
+```
+
+Kód události je užitečný, protože supportu pomůže najít log bez toho, aby uživatel posílal screenshot plný osobních dat. Interní stack trace, název databázové tabulky nebo celý request payload do UI nepatří. To není transparentnost, to je digitální vyklápěčka.
+
+## Oprávnění vysvětluj bez prozrazení cizích dat
+
+Stav „nemáš přístup“ je zrádný. Produkt chce pomoct, ale nesmí potvrdit existenci citlivého objektu lidem, kteří ho nemají vidět.
+
+Bezpečný vzor:
+
+```text
+Tuhle položku nemůžeš otevřít se svou aktuální rolí.
+Požádej administrátora workspace o přístup, nebo se vrať na seznam položek, ke kterým přístup máš.
+```
+
+Rizikový vzor:
+
+```text
+Nemáš přístup k faktuře klienta ACME za 248 000 Kč. Požádej Janu Novákovou.
+```
+
+Druhá varianta možná vypadá užitečně, ale potvrzuje existenci klienta, částku i člověka. Pokud uživatel nemá oprávnění, UI má být opatrné. Detail patří až za úspěšnou autorizaci.
+
+## Limity a kvóty piš férově
+
+Když uživatel narazí na limit, produkt nesmí znít jako výběrčí mýta v mikině startupu. Řekni, co se stalo, kdy se limit obnoví a jaký je nejlevnější rozumný další krok.
+
+Příklad:
+
+```text
+Dnes už jsi vyčerpal 100 AI shrnutí v tarifu Team.
+Limit se obnoví zítra v 00:00 podle časové zóny workspace. Můžeš počkat, zkrátit rozsah shrnutí, nebo požádat vlastníka účtu o navýšení limitu.
+```
+
+Privacy-first detail: neukazuj ostatním členům týmu přesný obsah akcí, které limit spotřebovaly, pokud to nepotřebují ke své práci. Agregovaný počet obvykle stačí. Audit detail patří rolemi omezeným správcům.
+
+## Offline a pomalé stavy připrav před incidentem
+
+Pokud aplikace závisí na externí službě, AI modelu, platební bráně nebo integračním API, napiš fallback dřív, než služba spadne. V krizi se píše špatně, protože mozek je zaměstnaný produkčním požárem a support už brousí klávesnici.
+
+Minimální fallback karta:
+
+```text
+Když [část systému] nefunguje:
+- Co uživatel uvidí:
+- Co může bezpečně udělat:
+- Co se nesmí ztratit:
+- Jaký text dostane support:
+- Jaký interní kód události se uloží:
+- Kdy ukážeme odkaz na status page:
+```
+
+U dlouhých operací přidej možnost pokračovat mimo obrazovku: „Pošleme upozornění, až bude export hotový.“ Jen pozor na e-mailové notifikace: posílej stav, ne citlivý obsah exportu.
+
+## Praktický příklad: onboarding bez importu celého života
+
+B2B SaaS pro správu klientských projektů má po registraci prázdný dashboard. Tým chce, aby uživatel hned importoval kontakty z e-mailu, kalendáře a účetnictví. Vypadá to pohodlně, ale datově je to těžká váha hned v prvních třech minutách vztahu.
+
+Privacy-first varianta:
+
+1. První krok: vytvořit ručně jeden projekt.
+2. Druhý krok: přidat jen název klienta bez kontaktních osob.
+3. Třetí krok: pozvat tým až po nastavení práv.
+4. Import nabídnout později, s jasným náhledem sloupců a možností mapování.
+5. U importu ukázat, co se uloží, co se přeskočí a jak import smazat.
+
+Výsledek: uživatel pochopí hodnotu produktu bez toho, aby musel hned předat celý adresář. Produkt se tím možná tváří méně agresivně v growth metrice „import started“, ale líp buduje důvěru. A důvěra je metrika, která se v dashboardu špatně blyští, ale v retenci bývá zatraceně slyšet.
+
+## Checklist: prázdné a chybové stavy
+
+- Má každý důležitý prázdný stav jednu hlavní akci?
+- Vysvětluje text hodnotu bez interního žargonu?
+- Existuje alternativa bez masového importu dat?
+- Říká chyba, co má uživatel udělat teď?
+- Má support bezpečný kód události místo žádosti o citlivý screenshot?
+- Neprozrazuje stav oprávnění cizí data, názvy klientů nebo částky?
+- Ukazuje limit obnovu, důvod a férový další krok?
+- Mají dlouhé operace bezpečný fallback a notifikaci bez citlivého obsahu?
+- Jsou texty připravené i pro mobilní obrazovku a čtečku?
+- Má každý stav vlastníka, který ho pravidelně reviduje podle support dotazů?
+
+## Mini šablona stavové karty
+
+```text
+# Stavová karta: [název obrazovky / situace]
+
+Typ stavu: prázdný / chyba / oprávnění / limit / pomalá operace
+Kdo stav vidí:
+Co uživatel potřebuje rozhodnout:
+Hlavní doporučená akce:
+Bezpečná alternativa:
+Jaká data se zobrazují:
+Jaká data se nesmí zobrazit:
+Kód události pro support:
+Fallback při opakovaném selhání:
+Odkaz na status page nebo podporu:
+Vlastník textu:
+Datum další revize:
+```
+
+
 # Pracovní log
+
+- 2026-10-08: Doplněna příloha „Prázdné stavy a chybové obrazovky bez podpůrného pekla“ s rozhodovací mapou stavů, privacy-first pravidly pro chyby, oprávnění, limity, fallbacky, praktickým onboarding příkladem, checklistem a vyplnitelnou stavovou kartou.
 
 - 2026-10-08: Doplněna příloha „Skripty třetích stran bez tag manageru jako dálkového ovladače webu“ s inventářem externích skriptů, pravidly pro tag manager, selektivním načítáním, CSP/SRI, souhlasovým filtrem, B2B příkladem, checklistem, skriptovou kartou a ověřenými zdroji OWASP, MDN a Evropské komise.
 - 2026-10-08: Doplněna příloha „Webhook endpointy a podpisy bez tajných bomb v URL“ s inventářem integrací, pravidly pro tajné URL, scope, podpisy webhooků, rotaci, idempotenci, logování, checklistem, šablonou integrační karty a ověřenými zdroji OWASP a Evropské komise.
