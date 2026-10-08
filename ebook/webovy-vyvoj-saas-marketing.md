@@ -56593,7 +56593,208 @@ Vlastník procesu:
 - NIST SP 800-53 Rev. 5 — bezpečnostní a privacy kontroly včetně least privilege a auditu: https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final
 
 
+# Příloha: Přihlášení, MFA a session management bez bezpečnostního divadla
+
+Přihlášení je jedna z nejcitlivějších částí SaaS produktu, protože stojí na hraně mezi pohodlím, bezpečností a důvěrou. Když ho uděláš moc volné, zveš si do produktu útoky. Když ho uděláš moc hysterické, zákazník začne obcházet pravidla, sdílet účty nebo psát hesla do poznámek. Gratuluju, bezpečnostní divadlo právě vyhrálo nad bezpečností.
+
+Privacy-first přihlášení nemá sbírat co nejvíc signálů o člověku „pro jistotu“. Má chránit účet, minimalizovat data, rozumně vysvětlit rizikové situace a dát administrátorům kontrolu bez toho, aby se z přihlašování stal sledovací systém v převleku.
+
+> Codyho komentář: Dobré přihlášení se nechlubí tím, kolik má bezpečnostních vrstev. Chlubí se tím, že běžný uživatel projde hladce a útočník narazí na nudnou, konzistentní zeď.
+
+## Nejdřív rozděl typy účtů
+
+Ne každý účet má stejné riziko. Osobní blogovací nástroj, interní účetní SaaS a admin přístup do produkce nemají mít stejnou přihlašovací politiku jen proto, že je to jednodušší v nastavení.
+
+Praktické rozdělení:
+
+| Typ účtu | Riziko | Doporučený přístup |
+| --- | --- | --- |
+| Běžný koncový uživatel | ztráta přístupu, únik osobních nastavení | dobrá hesla nebo magic link, volitelná MFA, bezpečná obnova |
+| Workspace admin | správa členů, fakturace, exporty | povinná MFA, upozornění na citlivé změny, kratší session pro admin akce |
+| Interní support | vidí metadata zákazníků | SSO nebo silná MFA, audit log, omezené role |
+| Produkční admin | může poškodit službu nebo data | hardwarový faktor / phishing-resistant MFA, break-glass režim, samostatné schvalování |
+
+Tahle tabulka není byrokracie. Je to pojistka proti dvěma extrémům: nedostatečné ochraně citlivých rolí a zbytečnému trestání běžných uživatelů.
+
+## Hesla neřeš estetikou formuláře
+
+Heslové pravidlo „aspoň jedno velké písmeno, číslo, znak, krev jednorožce“ často vede k předvídatelným heslům typu `Firma2026!`. Lepší je podporovat dlouhá hesla nebo passphrase, kontrolovat známá uniklá hesla a nevnucovat pravidelné změny bez důvodu.
+
+Praktická pravidla:
+
+- dovol dlouhá hesla, ideálně výrazně víc než 64 znaků,
+- neomezuj speciální znaky způsobem, který rozbíjí správce hesel,
+- nepoužívej tajné „bezpečnostní otázky“ jako náhradu hesla,
+- při registraci a změně hesla kontroluj běžné nebo známě kompromitované hodnoty,
+- rate limituj pokusy a reset hesla,
+- chybové hlášky piš tak, aby nepomáhaly enumerovat účty.
+
+Dobrá chybová hláška při přihlášení:
+
+```text
+E-mail nebo heslo nesedí. Pokud máš účet, můžeš si poslat odkaz pro obnovu přístupu.
+```
+
+Špatná hláška:
+
+```text
+E-mail existuje, heslo je špatně.
+```
+
+Druhá věta je sice užitečná pro člověka, ale ještě užitečnější pro útočníka. A útočníkovi UX zlepšovat nemusíme, ten si poradí i bez našeho design systému.
+
+## MFA navrhni podle rizika, ne podle módní vlny
+
+Vícefaktorové ověření je výborné, pokud chrání správné akce a jde rozumně používat. Není výborné, pokud ho nalepíš všude, lidé ho hromadně odkládají a recovery proces pak stojí na ručním e-mailu supportu.
+
+Pro B2B SaaS dává smysl:
+
+- povinná MFA pro vlastníky workspace a interní tým,
+- volitelná MFA pro běžné členy, pokud zákazník nemá vlastní politiku,
+- step-up ověření pro export dat, změnu fakturace, změnu e-mailu, pozvání admina nebo vypnutí MFA,
+- bezpečné recovery kódy, které se zobrazí jednou a uživatel si je uloží,
+- jasný administrátorský proces pro ztracený faktor u firemních účtů.
+
+Pokud můžeš, preferuj odolnější faktory jako passkeys nebo bezpečnostní klíče pro administrátory a interní přístupy. SMS ber jako nouzový kompromis, ne jako zlatý standard. Telefonní číslo je osobní údaj a zároveň slabší bezpečnostní kotva než moderní autentizátory nebo hardwarové klíče.
+
+Privacy-first detail: když zavádíš MFA, nevyžaduj telefonní číslo jen proto, že je to nejjednodušší pole ve formuláři. Pokud produkt nepotřebuje telefon pro službu samotnou, nedělej z něj povinný bezpečnostní suvenýr.
+
+## Session cookie je bezpečnostní kontrakt
+
+Session management není jen „někam uložíme token“. Je to dohoda mezi prohlížečem, serverem a produktem: kdo smí relaci použít, jak dlouho platí, kdy se obnovuje a co ji zneplatní.
+
+Základ pro webovou aplikaci:
+
+- session token ukládej do cookie s `HttpOnly`, aby k němu neměl přístup JavaScript,
+- používej `Secure`, aby cookie nešla přes nešifrované HTTP,
+- nastav `SameSite=Lax` nebo přísnější hodnotu podle typu aplikace,
+- po přihlášení regeneruj session ID,
+- po změně hesla, e-mailu nebo MFA zneplatni staré relace,
+- u citlivých akcí ověř nedávnou autentizaci nebo step-up faktor.
+
+U SPA aplikací je lákavé uložit token do `localStorage`, protože se s tím dobře pracuje. Jenže pohodlí není bezpečnostní architektura. Pokud útočník dostane XSS, token v `localStorage` je jako klíč od kanceláře položený na recepci s cedulkou „prosím nebrat“. Pro běžný SaaS je bezpečnější držet relaci serverově nebo v dobře nastavené HTTP-only cookie a investovat do CSRF ochrany, CSP a vstupní hygieny.
+
+## Délka relace má odpovídat práci
+
+Jedno univerzální pravidlo typu „všichni ven po 15 minutách“ vypadá přísně, ale často jen vyrobí frustraci. Naopak věčné přihlášení bez kontroly je pozvánka k průšvihu. Rozumný model rozlišuje běžnou práci, citlivé akce a neaktivitu.
+
+Příklad:
+
+| Situace | Doporučené chování |
+| --- | --- |
+| Běžná práce v aplikaci | delší obnovitelná session s rozumnou expirací |
+| Neaktivita | automatické odhlášení po definované době podle rizika produktu |
+| Export dat | step-up ověření, krátké okno pro dokončení akce |
+| Změna role nebo MFA | znovu ověřit uživatele a poslat notifikaci |
+| Přihlášení z nového zařízení | upozornění bez zbytečného strašení |
+| Podezřelé pokusy | rate limit, dočasné zdržení, případně dodatečné ověření |
+
+U administrátorů může být relace kratší. U běžného uživatele, který jen píše obsah nebo vyplňuje formulář, nemusíš být bezpečnostní sekuriťák, který každých deset minut kontroluje občanku.
+
+## Obnova přístupu je hlavní útoková plocha
+
+Mnoho produktů má slušné přihlášení a mizerný reset hesla. To je jako mít pancéřové dveře a vedle nich okno s cedulkou „náhradní klíč pod květináčem“.
+
+Bezpečný reset:
+
+- odpovídá stejně, ať účet existuje nebo ne,
+- používá jednorázový token s krátkou platností,
+- token neukládá v čitelné podobě,
+- po změně hesla zneplatní aktivní relace podle rizika,
+- odešle upozornění na původní e-mail,
+- umožní zákazníkovi poznat, že změna proběhla, ale neprozradí útočníkovi zbytečné detaily.
+
+U firemních účtů napiš recovery proces pro ztraceného vlastníka workspace. Kdo může převzít účet? Jaké doklady nebo interní schválení potřebuješ? Jak se zabrání tomu, aby se útočník vydával za „nového CFO“ z pátečního e-mailu? Pokud tohle řeší support až při incidentu, bude improvizovat. A improvizace je super v jazzu, horší v obnově administrátorského přístupu.
+
+## Přihlašovací logy minimalizuj, ale nezahoď
+
+Přihlášení potřebuje auditní stopu. Neznamená to ukládat všechno navždy. Ukládej data, která pomáhají odhalit zneužití a vyřešit incident, ne data, která jen budují profil člověka.
+
+Užitečná pole:
+
+- uživatel nebo interní identifikátor účtu,
+- čas události,
+- typ události: login success, login failure, reset requested, MFA changed,
+- přibližný technický kontext: IP nebo její zkrácená/pseudonymizovaná forma podle potřeby,
+- user agent zkrácený na diagnosticky užitečnou úroveň,
+- výsledek a důvod blokace bez ukládání hesel, tokenů nebo odpovědí.
+
+Zakázaná pole:
+
+- hesla, reset tokeny, recovery kódy,
+- celé session tokeny,
+- obsah formulářů,
+- zbytečně přesná geolokace,
+- poznámky supportu s osobními údaji.
+
+Retenci nastav podle reálného účelu. Bezpečnostní logy mají vydržet dost dlouho na vyšetření incidentu, ale ne tak dlouho, aby se z nich stal paralelní uživatelský profil.
+
+## Praktický příklad: B2B SaaS pro projektové týmy
+
+Malý SaaS pro řízení klientských projektů má tři role: člen, workspace admin a interní support. Původní stav: všichni mají heslo, reset chodí e-mailem, session trvá měsíc, administrátor může měnit fakturaci bez dalšího ověření a support umí ručně resetovat MFA po e-mailové žádosti.
+
+Lepší iterace bez velkého přepisu:
+
+1. Zapnout `HttpOnly`, `Secure` a `SameSite=Lax` pro session cookie a regenerovat session po přihlášení.
+2. Zavést povinnou MFA pro workspace adminy a interní tým.
+3. Přidat step-up ověření pro export, změnu fakturace a pozvání nového admina.
+4. Upravit reset hesla tak, aby odpovědi neprozrazovaly existenci účtu.
+5. Zneplatnit ostatní relace po změně hesla nebo MFA.
+6. Přidat auditní události pro změny přihlášení bez ukládání tokenů.
+7. Napsat recovery runbook pro ztracený admin přístup.
+
+Výsledek: produkt nešpehuje uživatele víc než dřív, ale citlivé akce mají lepší brzdy. To je přesně ten typ bezpečnosti, který nepůsobí jako cirkus, ale drží střechu, když začne foukat.
+
+## Checklist: přihlášení a relace bez divadla
+
+- Máš rozdělené typy účtů podle rizika?
+- Podporuješ dlouhá hesla a správce hesel bez zbytečných omezení?
+- Nekontroluje reset hesla existenci účtu veřejně viditelným způsobem?
+- Mají admin role povinnou MFA nebo silnější faktor?
+- Používáš step-up ověření pro citlivé akce?
+- Jsou session cookies `HttpOnly`, `Secure` a s promyšleným `SameSite`?
+- Regeneruješ session ID po přihlášení?
+- Zneplatní změna hesla nebo MFA staré relace?
+- Máš rate limiting pro login, reset a MFA pokusy?
+- Ukládáš bezpečnostní logy bez hesel, tokenů a zbytečného profilování?
+- Existuje recovery runbook pro ztracený admin účet?
+- Má tým pravidelnou kontrolu výjimek a break-glass účtů?
+
+## Mini šablona auth karty
+
+```text
+# Auth karta: [produkt / typ účtu]
+
+Typ účtu:
+Rizikové akce:
+Povinný faktor: heslo / passkey / TOTP / bezpečnostní klíč / SSO
+MFA povinná pro role:
+Step-up akce:
+Session cookie atributy:
+Neaktivní expirace:
+Maximální délka relace:
+Kdy se zneplatní ostatní relace:
+Rate limit pravidla:
+Reset hesla postup:
+Recovery pro ztracenou MFA:
+Auditní události:
+Zakázaná logovaná data:
+Retence auth logů:
+Vlastník procesu:
+Datum další revize:
+```
+
+## Zdroje
+
+- OWASP Authentication Cheat Sheet — doporučení pro autentizaci, reset hesla, chybové hlášky, MFA a ochranu proti automatizovaným útokům: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+- OWASP Session Management Cheat Sheet — pravidla pro session ID, cookies, expiraci, obnovu relace a bezpečné zneplatnění: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- MDN Web Docs — `Set-Cookie`, atributy `HttpOnly`, `Secure` a `SameSite`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
+- NIST SP 800-63B — Digital Identity Guidelines pro autentizaci, autentizační faktory, session management a reauthentication: https://pages.nist.gov/800-63-4/sp800-63b.html
+
+
 # Pracovní log
+
+- 2026-10-08: Doplněna příloha „Přihlášení, MFA a session management bez bezpečnostního divadla“ s rozdělením účtů podle rizika, pravidly pro hesla, MFA, session cookies, délku relací, obnovu přístupu, privacy-first auth logy, praktickým B2B SaaS příkladem, checklistem, auth kartou a ověřenými zdroji OWASP, MDN a NIST.
 
 - 2026-10-08: Doplněna příloha „Support impersonace bez interního šmírování“ s oddělením diagnostického náhledu, reprodukčního režimu, dočasné impersonace a break-glass přístupu, pravidly pro souhlas, role, UI varování, auditní logy, zákaznickou transparentnost, praktickým příkladem, checklistem, support access kartou a ověřenými zdroji OWASP, Evropské komise a NIST.
 
