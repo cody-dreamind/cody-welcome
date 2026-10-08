@@ -57646,148 +57646,149 @@ Datum další revize:
 - EUR-Lex — GDPR, čl. 5 k zásadám zákonnosti, účelového omezení, minimalizace, omezení uložení a odpovědnosti: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
 - European Commission — GDPR principles pro organizace, praktický přehled zásad zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 
-# Příloha: Webhooky a integrace bez tichého úniku dat
+# Příloha: Integrační katalog bez zapomenutých datových potrubí
 
-Webhook je krásně jednoduchý nápad: jedna služba pošle jiné službě zprávu, že se něco stalo. Zaplacená faktura, nový lead, změna stavu objednávky, vytvořený účet, dokončený export, neúspěšná platba. Jenže právě proto bývá webhook podceňovaný. Vypadá jako technický detail, ale ve skutečnosti je to malý most mezi firmami, systémy a daty zákazníků. A most bez zábradlí je pořád most, jen s lepším potenciálem pro koupání v řece.
+Každý SaaS časem začne připomínat malé letiště: formuláře posílají leady do CRM, fakturace mluví s účetnictvím, produkt posílá notifikace, support tahá kontext zákazníka, analytika počítá události, AI nástroj dostává výstřižky dat a někde vzadu běží tři staré webhooky, které „určitě ještě někdo používá“. Problém není v integracích. Problém je v tom, že bez katalogu se z nich stane neviditelná infrastruktura, která má přístup k datům, ale už nemá vlastníka.
 
-Privacy-first integrace nezačíná otázkou „kam to pošleme?“, ale „co přesně musí příjemce vědět, aby udělal svou práci?“. Webhook nemá být kopie interní databázové tabulky. Má být cílená událost s minimem dat, jasným účelem, ověřením původu a bezpečným opakováním při chybě.
+Integrační katalog je jednoduchý seznam všech datových potrubí mezi systémy. Nemusí to být enterprise monstrum s osmi schvalovacími komisemi. Pro malý tým stačí jedna udržovaná tabulka nebo Markdown soubor, který odpoví na tři otázky: jaká data tečou, proč tečou a kdo za to ručí. Když odpověď chybí, integrace není „legacy“. Je to provozní dluh s API klíčem.
 
-> Codyho komentář: Nejhorší webhook payload je ten, který vznikl metodou „pošli celý objekt, třeba se to bude hodit“. To není flexibilita. To je datový konfety kanón namířený do integrace, kterou za půl roku nikdo neumí vysvětlit.
+> Codyho komentář: Největší riziko integrace často není hacker v mikině, ale zapomenutý testovací konektor z roku „tohle je jen dočasně“. Dočasnost je nejtrvanlivější materiál v softwaru, hned po CSV exportech.
 
-## Událost není export databáze
+## Co patří do integračního katalogu
 
-Dobrá webhook událost říká, co se stalo, ne všechno, co systém ví. Příklad: `invoice.paid` nemusí obsahovat celou fakturu, adresu, poznámky, interní historii změn a všechny kontakty účtu. Často stačí stabilní ID události, typ události, čas, ID zákaznického účtu, ID faktury, měna, částka a odkaz na API, kde si oprávněný systém může detail bezpečně vyžádat.
+Katalog nemá opisovat dokumentaci každého nástroje. Má dát týmu provozní přehled, aby šlo rychle rozhodnout při incidentu, auditu, změně dodavatele nebo žádosti zákazníka. U každé integrace si poznamenej minimum, které bude dávat smysl i za půl roku.
 
-Praktické pravidlo:
+Základní položky:
 
-- do webhooku dej data potřebná k rozhodnutí příjemce,
-- citlivý detail nech za autorizovaným API voláním,
-- neposílej payloady „pro jistotu“,
-- u každého pole napiš účel,
-- u každé integrace urči vlastníka na obou stranách.
+- název integrace a stručný účel,
+- vlastník na straně produktu nebo týmu,
+- systém odesílatele a příjemce,
+- typ toku: API, webhook, export, import, e-mail, SFTP, ruční CSV,
+- kategorie dat, ne jen technické endpointy,
+- právní role příjemce a odkaz na DPA nebo smlouvu,
+- region zpracování a případné přeshraniční předávání,
+- frekvence toku a retenční pravidla,
+- autentizace, rotace klíčů a poslední revize,
+- postup vypnutí a dopad na zákazníka.
 
-Pokud pole neumíš vysvětlit v jedné větě, nejspíš do webhooku nepatří. Tohle je obyčejná datová minimalizace z GDPR převedená do vývojářské praxe: méně polí, méně rizik, méně překvapení při auditu.
+Důležitá je i kolonka „proč to existuje“. Když u ní zůstane mlha typu „marketing“, integrace potřebuje lepší popis. „Posílá nové B2B leady z kontaktního formuláře do CRM kvůli odpovědi obchodníka do dvou pracovních dnů“ je už něco, podle čeho se dá rozhodovat.
 
-## Podpis, čas a opakování
+## Inventura toků: nejen API
 
-Webhook bez ověření původu je pozvánka pro falešné události. Minimum je HTTPS, podpis zprávy pomocí sdíleného tajemství a kontrola časového razítka. OWASP Webhook Security Cheat Sheet doporučuje mimo jiné podepisování přes HMAC, ochranu proti replay útokům a bezpečné chování při chybách. Přeloženo do provozní češtiny: nestačí věřit tomu, že request přišel na správnou URL.
+Týmy často katalogizují jen hezké oficiální integrace. Jenže data unikají i méně elegantickými cestami: ruční export do tabulky, CSV posílané e-mailem, kopírování ticketů do AI nástroje, sdílený disk, jednorázový import pro agenturu, debug log stažený do notebooku nebo historický Zapier scénář, na který si už nikdo nevzpomíná.
 
-Základní bezpečnostní model:
+Při inventuře projdi tyto kategorie:
 
-- každý odběratel má vlastní signing secret,
-- podpis se počítá z přesné podoby těla requestu a časového razítka,
-- příjemce ověří podpis konstantním porovnáním,
-- staré časové razítko se odmítne,
-- `event_id` se ukládá kvůli deduplikaci,
-- endpoint vrací obecné chyby bez interních detailů,
-- tajemství jde rotovat bez výpadku.
+| Kategorie | Otázka | Typické riziko |
+| --- | --- | --- |
+| Produkční API | Kdo má token a jaký scope? | příliš široké oprávnění |
+| Webhooky | Co je v payloadu a jak se ověřuje původ? | osobní data v logu příjemce |
+| Exporty | Kam se soubor ukládá a kdy mizí? | kopie mimo retenční pravidla |
+| Importy | Jak se validuje původ dat? | cizí nebo stará data v systému |
+| Support nástroje | Jaký zákaznický kontext vidí agent? | zbytečně široký náhled |
+| AI nástroje | Co se posílá do promptu? | obsah zákazníka mimo kontrolu |
+| Marketing nástroje | Jaké identifikátory se sdílí? | profilování bez jasného účelu |
 
-Retry politika musí být součást návrhu, ne pozdější záplata. Když příjemce vrátí chybu, systém má vědět, kolikrát opakovat, s jakým backoffem a kdy událost přesunout do dead-letter fronty. Zákazník pak vidí stav doručení, ne jen magickou větu „integrace občas zlobí“.
+Ruční tok není méně důležitý jen proto, že nemá endpoint. Naopak: ruční exporty bývají nejméně viditelné a nejhůř se mažou. Pokud se opakují, patří do katalogu stejně jako API integrace.
 
-## Stabilní schéma a verze
+## Skóre rizika pro rychlou prioritizaci
 
-Integrace se časem mění. Proto potřebuješ verzi schématu, changelog a pravidla kompatibility. Inspirací může být CloudEvents specifikace, která popisuje společný formát událostí napříč systémy. Nemusíš ji použít doslova, ale její princip je zdravý: událost má mít jasný typ, zdroj, ID, čas, obsahový typ a oddělená data.
+Ne každá integrace potřebuje stejnou hloubku kontroly. Malý tým si může pomoct jednoduchým skóre od 1 do 5 podle čtyř oblastí: citlivost dat, rozsah oprávnění, externí závislost a dopad výpadku. Čím vyšší součet, tím dřív integraci reviduj.
 
-Praktický payload pro malý SaaS může vypadat takto:
+Praktické hodnocení:
 
-```json
-{
-  "id": "evt_01HZY...",
-  "type": "invoice.paid",
-  "version": "2026-10-08",
-  "created_at": "2026-10-08T19:00:00Z",
-  "tenant_id": "ten_123",
-  "data": {
-    "invoice_id": "inv_456",
-    "amount_cents": 290000,
-    "currency": "CZK"
-  }
-}
-```
+- 1 bod: veřejná nebo minimální data, nízký dopad, snadné vypnutí,
+- 2 body: běžné kontaktní údaje nebo provozní metadata,
+- 3 body: zákaznický obsah, billing, support historie nebo širší API scope,
+- 4 body: citlivější interní kontext, automatická akce v produktu nebo velký objem dat,
+- 5 bodů: bezpečnostní události, přístupy, identita, data mnoha tenantů nebo kritický provozní dopad.
 
-Schéma je nudné, ale nuda je tady funkce. Když integrace rozbije fakturaci, onboarding nebo provisioning, nikdo nebude nadšeně obdivovat kreativitu payloadu. Bude chtít vědět, co se změnilo, kdy a jak to vrátit.
+Integrace se skóre 12+ si zaslouží vlastní revizi, jasného vlastníka, test vypnutí a kontrolu smluv. Integrace se skóre 16+ už není „jen konektor“. Je to součást provozní bezpečnosti produktu.
 
-## Privacy-first pravidla pro integrace
+## Revize klíčů a přístupů
 
-Integrace rozšiřuje hranici produktu. Pokud pošleš data do externího nástroje, už nejsou jen v tvém systému. Proto u každé integrace udržuj malou kartu: účel, příjemce, typ dat, právní role, retence, bezpečnostní kontakt, region provozu a postup vypnutí.
+API klíče a tokeny stárnou potichu. Někdo odejde z týmu, agentura skončí projekt, testovací prostředí se zkopíruje do produkce a starý token pořád funguje. Proto má katalog obsahovat datum poslední rotace a důvod přístupu.
 
-Privacy-first kontrola před spuštěním:
+Dobrá rutina:
 
-- běží příjemce v EU nebo má jasně popsané přeshraniční zpracování,
-- smlouva a DPA odpovídají reálnému toku dat,
-- payload neobsahuje obsah zpráv, poznámky ani soubory bez nutnosti,
-- logy neukládají celé request body,
-- testovací prostředí nepoužívá produkční osobní data,
-- zákazník ví, jak integraci vypnout a co se stane s daty,
-- existuje postup pro incident v integraci.
+1. jednou měsíčně zkontroluj nové integrace a ruční exporty,
+2. jednou za kvartál projdi vysokorizikové tokeny,
+3. při odchodu člověka nebo dodavatele ověř všechny jím spravované integrace,
+4. při změně účelu produktu zkontroluj, zda staré datové toky pořád dávají smysl,
+5. při incidentu použij katalog jako mapu dopadu, ne jako dokument do šuplíku.
 
-Nejčistší integrace je často ta, která pošle jen signál a nechá druhou stranu stáhnout detail přes scoped API token. Ano, je to o krok složitější. Ale zato nešíříš osobní data do světa při každé drobné události.
+OWASP API Security Top 10 připomíná rizika špatné konfigurace, nadměrné spotřeby zdrojů i přístupu k citlivým byznys tokům přes API. V praxi to znamená, že integrační katalog není jen privacy dokument. Je to i bezpečnostní nástroj.
 
-## Praktický příklad: CRM webhook pro nový lead
+## Praktický příklad: audit marketing integrací
 
-Firma chce posílat nové poptávky z webu do CRM. Špatná varianta pošle celé tělo formuláře, UTM historii, IP adresu, user agent, interní skóre, souhlasové detaily a poznámku z debug logu. Dobrá varianta pošle jen `lead.created`, ID leadu, segment, zdrojovou stránku, čas a pole, která obchod skutečně potřebuje pro první odpověď.
+Malý B2B SaaS má kontaktní formulář, CRM, e-mailing, produktovou analytiku, support chat a nástroj na plánování schůzek. Všechno vznikalo postupně a každý nástroj „jen pomáhá“. Při auditu tým zjistí, že lead z formuláře končí ve třech systémech, jeden starý scénář posílá i IP adresu, e-mailing drží neaktivní kontakty bez retence a support chat načítá externí skript na všech stránkách včetně dokumentace.
 
-Bezpečný postup:
+Privacy-first oprava:
 
-1. Formulář uloží lead v primárním systému v EU provozu.
-2. Webhook pošle CRM minimální payload s podepsanou událostí.
-3. CRM si detail stáhne přes API token omezený jen na nové leady.
-4. Souhlasové záznamy zůstávají v primárním systému jako zdroj pravdy.
-5. Log obsahuje `event_id`, stav doručení, HTTP status a dobu odezvy, ne celý obsah poptávky.
-6. Při chybě běží retry s backoffem a po limitu vznikne úkol pro člověka.
-7. Při vypnutí integrace se zastaví nové doručování a karta integrace řekne, co se má stát s historickými daty v CRM.
+- formulář zůstane primárním zdrojem pravdy,
+- CRM dostane jen údaje potřebné pro obchodní odpověď,
+- e-mailing dostane kontakt až po jasném přihlášení k obsahu,
+- IP adresa se z integračního payloadu odstraní,
+- starý scénář se vypne a zapíše do logu změn,
+- support chat se nenačítá všude automaticky,
+- katalog dostane vlastníka a kvartální revizi.
 
-Takhle integrace pomáhá obchodu, ale nedělá z formuláře datový výtah do každého nástroje, který si zrovna řekl o webhook.
+Výsledek není jen „lepší compliance“. Obchod přesně ví, kde lead je. Marketing ví, co smí měřit. Support ví, kdy se načítá jeho nástroj. A zákazník nemusí platit daty za každý klik na stránce.
 
-## Checklist: webhook před produkcí
+## Checklist: integrační katalog
 
-- Má událost vlastníka, účel a pojmenovaný typ?
-- Obsahuje payload jen data nutná pro danou integraci?
-- Má každý odběratel vlastní tajemství a možnost rotace?
-- Ověřuje příjemce podpis, čas a deduplikuje `event_id`?
-- Je retry politika omezená, pozorovatelná a bezpečná?
-- Jsou chyby obecné a bez stack trace nebo citlivých detailů?
-- Existuje verze schématu a changelog změn?
-- Logy neukládají osobní obsah requestu?
-- Je jasné, kde běží příjemce a jaká je jeho role podle GDPR?
-- Umí zákazník integraci vypnout bez podpůrného divadla?
+- Máme seznam všech API, webhooků, exportů, importů a ručních datových toků?
+- Má každá integrace vlastníka a stručný účel?
+- Víme, které kategorie dat tečou do kterého nástroje?
+- Je u externích příjemců uveden region, právní role a smluvní podklad?
+- Jsou API tokeny omezené scopem a mají datum poslední rotace?
+- Jsou ruční CSV exporty vedené stejně vážně jako technické integrace?
+- Má každá vysokoriziková integrace postup vypnutí?
+- Neobsahují logy celé payloady, osobní obsah nebo citlivé identifikátory?
+- Kontrolujeme katalog při změně dodavatele, incidentu a žádosti zákazníka?
+- Má katalog datum další revize, ne jen naději, že si někdo vzpomene?
 
-## Mini šablona integrační karty
+## Mini šablona integračního katalogu
 
 ```markdown
-# Integrační karta: [název]
+# Integrační katalog
 
-Účel integrace:
-Vlastník u nás:
-Vlastník u příjemce:
-Typy událostí:
-Verze schématu:
-Příjemce / endpoint:
-Region provozu příjemce:
-Právní role:
+## [Název integrace]
+
+Účel:
+Vlastník:
+Odesílající systém:
+Přijímající systém:
+Typ toku:
+Kategorie dat:
+Osobní údaje:
+Citlivost dat:
+Právní role příjemce:
 DPA / smlouva:
-Data v payloadu:
-Data výslovně zakázaná v payloadu:
-Signing secret a rotace:
-Retry pravidla:
-Deduplication key:
+Region zpracování:
+Frekvence toku:
+Autentizace a scope:
+Datum poslední rotace klíče:
+Retence u příjemce:
 Co se loguje:
 Co se nesmí logovat:
+Rizikové skóre:
 Postup vypnutí:
-Incident kontakt:
+Dopad vypnutí na zákazníka:
+Datum poslední revize:
 Datum další revize:
 ```
 
 ## Zdroje
 
+- OWASP API Security Top 10 2023 — přehled API rizik včetně resource consumption, security misconfiguration a přístupu k citlivým byznys tokům: https://api-security.owasp.org/
 - OWASP Cheat Sheet Series — Webhook Security Cheat Sheet k HMAC podpisům, HTTPS, replay ochraně, chybám a doručování: https://cheatsheetseries.owasp.org/cheatsheets/Webhook_Security_Cheat_Sheet.html
-- OWASP API Security Top 10 2023 — přehled API rizik včetně resource consumption a security misconfiguration: https://api-security.owasp.org/
-- CloudEvents specification — společný model popisu událostí napříč službami a platformami: https://github.com/cloudevents/spec/blob/main/README.md
 - European Commission — GDPR principles pro datovou minimalizaci, omezení účelu, omezení uložení a odpovědnost: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- ENISA — Good practices for supply chain cybersecurity, doporučení k řízení dodavatelských a integračních rizik: https://www.enisa.europa.eu/publications/good-practices-for-supply-chain-cybersecurity
 
 # Pracovní log
 
-- 2026-10-08: Doplněna příloha „Webhooky a integrace bez tichého úniku dat“ s návrhem minimálního payloadu, HMAC podpisy, replay ochranou, retry politikou, verzováním schématu, privacy-first integrační kartou, CRM příkladem, checklistem a ověřenými zdroji OWASP, CloudEvents a Evropské komise.
+- 2026-10-08: Doplněna příloha „Integrační katalog bez zapomenutých datových potrubí“ s inventurou API, webhooků, exportů, importů a ručních toků, rizikovým skóre, revizí klíčů, marketingovým audit příkladem, checklistem, šablonou katalogu a ověřenými zdroji OWASP, Evropské komise a ENISA.
 
 - 2026-10-08: Doplněna příloha „Scheduled tasky bez nočních duchů a datového vysavače“ se smlouvou jobu, cadence podle rizika, idempotencí, tenant hranicemi, bezpečným logováním, retenčními důkazy, alerty podle dopadu, měsíčním report příkladem, checklistem, scheduled task kartou a ověřenými zdroji Kubernetes, OWASP a GDPR.
 
