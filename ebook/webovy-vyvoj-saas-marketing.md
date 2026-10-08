@@ -20352,6 +20352,22 @@ Postup:
 
 Pokud metrika za tři měsíce nezměnila žádné rozhodnutí, je kandidát na archivaci. Ne definitivně vždy, ale minimálně na otázku: proč ji pořád živíme?
 
+## Příklad: onboarding účetního SaaS bez digitálního kukátka
+
+Účetní SaaS chce zlepšit onboarding. Tým má pokušení zapnout session replay a sledovat, kde lidé bloudí. Privacy-first varianta začne menší sadou signálů, které ukážou problém bez čtení zákaznických dat.
+
+Postup:
+
+1. Definuj první hodnotnou akci: firma nahraje testovací doklad a uvidí návrh zaúčtování.
+2. Rozděl onboarding na kroky: vytvoření workspace, nastavení firmy, nahrání dokladu, kontrola návrhu, potvrzení výsledku.
+3. Měř stav kroku, technický kód chyby, tarif a stáří workspace.
+4. Nesbírej název firmy, obsah dokladu, jména dodavatelů ani text z účetních polí.
+5. Dashboard ukaž po kohortách: kolik workspace dokončilo každý krok do 24 hodin.
+6. Support dostane samostatný režim pro konkrétní ticket, ne obecný přístup k analytickému sledování všech.
+7. Po úpravě onboardingu porovnej dokončení kroků před a po změně, ne tajné záznamy obrazovek.
+
+Výsledek: tým zjistí, že největší propad je mezi nahráním dokladu a kontrolou návrhu. Může zlepšit chybovou hlášku, ukázkový doklad a vysvětlení formátu. Nepotřeboval k tomu číst zákaznická data ani pořizovat digitální kukátko.
+
 ## Checklist: produktové metriky bez datového vysavače
 
 - [ ] Má každá hlavní metrika rozhodnutí, které podporuje?
@@ -54655,160 +54671,10 @@ Poznámka pro podporu:
 - OWASP Cheat Sheet Series: Logging Cheat Sheet, doporučení k logování a seznam dat, která se nemají ukládat do logů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 
 
-# Příloha: Produktové metriky bez sledování jednotlivců
-
-Produktové metriky mají odpovídat na provozní otázky, ne vytvářet tajný životopis každého uživatele. Malý SaaS nepotřebuje vědět, že Jana v úterý ve 14:03 třikrát přešla z nastavení do fakturace a pak se nadechla u exportu. Potřebuje vědět, jestli lidé nacházejí hodnotu, kde se proces láme a jestli změny zlepšují produkt bez sběru zbytečných osobních dat.
-
-> Codyho komentář: Produktová analytika není reality show. Když metrika neumí změnit rozhodnutí týmu, ale umí identifikovat člověka, je to spíš riziko než insight.
-
-## Začni otázkami, ne eventy
-
-Nejdřív napiš rozhodnutí, která chceš díky metrikám dělat. Teprve potom navrhuj eventy. Opačný postup končí datovým bufetem: všichni něco sbírají, nikdo neví proč a po půl roce se bojíš smazat tabulku, protože „co kdyby se hodila“.
-
-Dobré produktové otázky:
-
-- Kolik nových workspace dokončí první hodnotnou akci?
-- Kde se lidé zaseknou v onboardingu?
-- Používají zákazníci funkci, za kterou reálně platí?
-- Roste počet úspěšných exportů po úpravě rozhraní?
-- Klesá počet ticketů k jedné konkrétní části produktu?
-
-Slabé otázky:
-
-- Co všechno uživatel dělal?
-- Kolik máme eventů na session?
-- Můžeme si jednou zpětně rozkliknout konkrétní cestu konkrétního člověka?
-- Co kdybychom měřili úplně všechno, protože storage je levný?
-
-Storage je levný. Důvěra drahá. Hezky si to napiš na monitor, ideálně vedle lístečku „nepushuj v pátek večer“.
-
-## Navrhni úzké produktové eventy
-
-Event má být popis stavu produktu, ne sáček s osobními detaily. Začni s malou sadou událostí, které pokrývají aktivaci, opakovanou hodnotu, selhání a obchodní dopad.
-
-Příklad minimální sady pro B2B SaaS:
-
-| Otázka | Event | Vhodné vlastnosti | Nevhodné vlastnosti |
-| --- | --- | --- | --- |
-| Dokončil zákazník aktivaci? | `workspace_activated` | plán, země účtu, typ šablony | e-mail uživatele, název firmy v plaintextu |
-| Používá klíčovou funkci? | `export_completed` | formát exportu, velikostní pásmo, délka běhu | obsah exportu, jméno souboru s klientem |
-| Kde selhává onboarding? | `onboarding_step_failed` | krok, kód chyby, typ účtu | text z formuláře, interní poznámky |
-| Funguje nový pricing? | `plan_changed` | původní plán, nový plán, směr změny | fakturační adresa, kontaktní osoba |
-| Pomáhá nová nápověda? | `help_article_opened` | slug článku, produktová oblast | plná URL s query tokeny |
-
-Dobré pravidlo: vlastnost eventu má být kategorizovaná nebo technická. Pokud obsahuje volný text od uživatele, identifikátor člověka, obsah dokumentu nebo citlivý obchodní údaj, patří do zvláštního posouzení, ne do běžné analytiky.
-
-## Pracuj se segmenty místo osob
-
-Místo „uživatel 123 se chová takhle“ často stačí „workspace na tarifu Pro v prvním týdnu po aktivaci“. Segment ti dá odpověď pro produktové rozhodnutí a přitom snižuje potřebu sledovat jednotlivce.
-
-Praktické segmenty:
-
-- fáze zákazníka: trial, aktivní, ohrožený, bývalý,
-- tarif: free, starter, pro, enterprise,
-- stáří workspace: 0–7 dní, 8–30 dní, 31+ dní,
-- velikost účtu: 1 uživatel, 2–10, 11–50, 50+,
-- produktová oblast: onboarding, fakturace, exporty, integrace, administrace.
-
-Vyhni se segmentům, které jsou jen maskované osobní profily. „Ředitelé z konkrétní firmy, kteří třikrát otevřeli pricing a nepřihlásili se“ není produktový segment. To je obchodní špionáž v saku.
-
-## Agregace je výchozí stav
-
-Dashboard pro tým má zobrazovat trendy, poměry a objemy. Detail jednotlivce otevírej jen pro jasný provozní účel: řešení ticketu, bezpečnostní vyšetřování, fakturační reklamace nebo auditovanou podporu. I tehdy platí omezení role, důvodu a času.
-
-Privacy-first produktový dashboard může mít:
-
-- aktivované workspace za týden,
-- medián času k první hodnotné akci,
-- dokončené exporty podle formátu,
-- chybovost klíčových workflow podle verze aplikace,
-- počet support ticketů podle produktové oblasti,
-- retenci workspace kohort po týdnech,
-- počet odinstalovaných integrací podle typu důvodu.
-
-Nemusí mít:
-
-- kompletní clickstream konkrétních lidí,
-- session replay jako výchozí nástroj,
-- screenshoty obrazovek bez výslovného a dobře vysvětleného režimu,
-- seznam „nejaktivnějších uživatelů“ podle jména,
-- exporty analytických dat do reklamních platforem.
-
-## Retenci nastav podle rozhodnutí
-
-Metriky nepotřebují žít navždy. Krátkodobé eventy pro debugging můžeš držet dny až týdny. Agregované produktové trendy mohou dávat smysl měsíce nebo roky, pokud už neobsahují přímé identifikátory. Auditní logy mají vlastní pravidla podle bezpečnosti, smluv a práva — nemíchej je s produktovou analytikou.
-
-Jednoduchý retenční model:
-
-| Typ dat | Příklad | Retence | Poznámka |
-| --- | --- | --- | --- |
-| Surové produktové eventy | `onboarding_step_failed` | 30–90 dní | bez obsahu formulářů a bez citlivých payloadů |
-| Agregované trendy | aktivace po týdnech | 12–24 měsíců | ideálně bez identifikace jednotlivců |
-| Debug eventy | chyba exportu s technickým kódem | 7–30 dní | kratší, pokud obsahují širší technický kontext |
-| Auditní záznamy | změna role, reset MFA | podle policy | odděleně od analytiky a s přísnějším přístupem |
-| Billing metering | počet jednotek spotřeby | podle účetní potřeby | oddělit od behaviorální analytiky |
-
-Retence musí být praktická. Když neumíš vysvětlit, kdo data používá a proč ještě existují, nastav kratší dobu nebo je agreguj.
-
-## Příklad: onboarding metriky pro účetní SaaS
-
-Účetní SaaS chce zlepšit onboarding. Tým má pokušení nasadit session replay a dívat se, kde lidé bloudí. Privacy-first varianta začne menší sadou bezpečnějších signálů.
-
-Postup:
-
-1. Definuj první hodnotnou akci: firma nahraje první testovací doklad a uvidí návrh zaúčtování.
-2. Rozděl onboarding na pět kroků: vytvoření workspace, nastavení firmy, nahrání dokladu, kontrola návrhu, potvrzení výsledku.
-3. Měř jen stav kroku, technický kód chyby, tarif a stáří workspace.
-4. Nesbírej název firmy, obsah dokladu, jména dodavatelů ani text z účetních polí.
-5. Dashboard ukaž po kohortách: kolik workspace dokončilo každý krok do 24 hodin.
-6. Support dostane samostatný režim pro konkrétní ticket, ne obecný přístup k analytickému sledování všech.
-7. Po úpravě onboardingu porovnej dokončení kroků před a po změně, ne tajné záznamy obrazovek.
-
-Výsledek: tým vidí, že největší propad je mezi nahráním dokladu a kontrolou návrhu. Může zlepšit chybovou hlášku, ukázkový doklad a vysvětlení formátu. Nepotřeboval k tomu číst zákaznická data ani pořizovat digitální kukátko.
-
-## Checklist: produktové metriky bez šmírování
-
-- [ ] Každá metrika odpovídá na konkrétní produktové nebo provozní rozhodnutí.
-- [ ] Eventy neobsahují volný text, obsah dokumentů, tokeny, e-maily ani jména zákazníků.
-- [ ] Vlastnosti eventů jsou kategorizované, technické nebo hrubě segmentované.
-- [ ] Dashboardy ukazují agregace jako výchozí stav.
-- [ ] Detail jednotlivce je dostupný jen pro jasný účel, roli a časově omezený režim.
-- [ ] Produktová analytika je oddělená od auditních logů, billing meteringu a podpory.
-- [ ] URL před uložením čistí query parametry, tokeny a interní identifikátory.
-- [ ] Retence je popsaná pro surové eventy, agregace, debug data a auditní záznamy.
-- [ ] Nový event prochází krátkou kontrolou: účel, data, retence, vlastník, riziko.
-- [ ] Externí analytické nástroje mají jasnou roli, DPA, region provozu a exit plán.
-- [ ] Tým má zakázaný export produktových eventů do reklamních systémů bez nového posouzení.
-- [ ] Zákazníkům umíš lidsky vysvětlit, co měříš a proč.
-
-## Mini šablona metrické karty
-
-```text
-Název metriky:
-Rozhodnutí, které podporuje:
-Primární eventy:
-Povolené vlastnosti:
-Zakázané vlastnosti:
-Segmentace:
-Agregace v dashboardu:
-Kdo smí vidět detail:
-Retence surových dat:
-Retence agregací:
-Vlastník:
-Datum revize:
-Poznámka pro zákazníky / privacy policy:
-```
-
-## Zdroje
-
-- GDPR, článek 5 k zásadám zpracování včetně minimalizace údajů, omezení účelu a omezení uložení: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
-- EDPB Guidelines 4/2019 on Article 25 Data Protection by Design and by Default, finální verze z 20. října 2020: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-design-and-by-default_en
-- CNIL: Cookies — solutions exempt from consent for audience measurement, praktický pohled na omezené měření návštěvnosti bez souhlasu za přísných podmínek: https://www.cnil.fr/en/cookies-solutions-exempt-consent-audience-measurement
 
 # Pracovní log
 
-- 2026-10-08: Doplněna příloha „Produktové metriky bez sledování jednotlivců“ s návrhem úzkých eventů, segmentací místo osobních profilů, agregovanými dashboardy, retenčním modelem, onboardingovým příkladem, checklistem, metrickou kartou a ověřenými zdroji GDPR, EDPB a CNIL.
-
+- 2026-10-08: Rozšířena příloha „Produktové metriky bez vanity dashboardu a datového vysavače“ o praktický onboardingový příklad pro účetní SaaS, který ukazuje měření aktivace bez session replaye, zákaznického obsahu a osobních profilů.
 
 - 2026-10-07: Doplněna příloha „Feature flagy a postupné rollouty bez produktové rulety“ s členěním flagů podle životnosti, oddělením flagů od autorizace, privacy-first targetingem, rollout plánem, bezpečným logováním, vlastnictvím a datem odstranění, příkladem AI funkce, checklistem, vyplnitelnou kartou a ověřenými zdroji OpenFeature, Martin Fowler a OWASP.
 
