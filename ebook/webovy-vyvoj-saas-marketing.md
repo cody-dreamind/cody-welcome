@@ -55675,7 +55675,217 @@ Datum další revize:
 - NIST SP 800-63B, Digital Identity Guidelines — Authentication and lifecycle guidance: https://pages.nist.gov/800-63-4/sp800-63b.html
 - GDPR, článek 5 — zásady zpracování osobních údajů včetně minimalizace a omezení uložení: https://eur-lex.europa.eu/eli/reg/2016/679/oj
 
+# Příloha: Demo formulář bez vysavače dat a kvalifikačního výslechu
+
+Demo formulář je často první místo, kde se marketing potká s důvěrou. Návštěvník už projevil zájem, ale ještě ti nedal bianko šek na svůj kalendář, firmu, rozpočet, telefon, roční obrat, velikost týmu a oblíbený druh kafe. Čím víc polí přidáš „pro obchod“, tím víc riskuješ, že z dobrého zájmu uděláš administrativní překážku.
+
+Privacy-first formulář má jednoduchý úkol: získat dost informací pro smysluplnou odpověď, ne vyrobit osobní složku na člověka, který se teprve rozhlíží. Kvalifikace leadu se dá dělat postupně. První formulář nemá suplovat discovery call, CRM profil ani dotazník pro due diligence.
+
+> Codyho komentář: Když formulář působí jako výslech na hranicích, není divu, že návštěvník otočí auto a jede ke konkurenci. I B2B člověk má nervový systém, překvapivě.
+
+## Začni rozhodnutím, ne polem
+
+Než přidáš další input, napiš si, jaké rozhodnutí díky němu uděláš. Pokud odpověď zní „možná se to bude hodit“, pole smaž. To není strategie, to je digitální hromadění.
+
+Praktické dělení polí:
+
+| Pole | Proč ho chceš | Kdy patří do prvního formuláře |
+| --- | --- | --- |
+| Jméno | lidské oslovení | ano, ale stačí celé jméno nebo křestní podle kontextu |
+| E-mail | odpověď na poptávku | ano |
+| Firma / web | rychlé pochopení kontextu | ano u B2B, volitelné u obecné konzultace |
+| Typ problému | směrování odpovědi | ano, ideálně jako krátká volba + volný text |
+| Telefon | rychlý kontakt | jen pokud telefonický follow-up opravdu používáš |
+| Rozpočet | kvalifikace | spíš volitelné nebo formou rozsahu, ne jako povinná bariéra |
+| Počet zaměstnanců | segmentace | jen pokud mění nabídku nebo proces |
+| Přesné interní údaje | „lepší kontext“ | ne, patří až do další fáze po vysvětlení účelu |
+
+Dobrá otázka pro každé pole zní: „Dokážeme bez něj odpovědět férově do jednoho pracovního dne?“ Pokud ano, pole pravděpodobně není nutné pro první krok.
+
+## Minimální verze pro B2B web
+
+První verze demo formuláře pro menší B2B SaaS nebo konzultační službu může být překvapivě krátká:
+
+```text
+Jméno:
+Pracovní e-mail:
+Firma nebo web:
+Co chcete zlepšit?
+Preferovaný další krok: krátký e-mail | 20min call | pošlete mi odkaz na demo
+Souhlasím se zpracováním údajů pro odpověď na poptávku: ano
+```
+
+Tohle pokryje základní provozní potřebu: víš, komu odpovědět, v jakém kontextu a jaký další krok člověk preferuje. Nevíš ještě všechno — a to je dobře. Když je poptávka relevantní, doplňující otázky můžeš položit v odpovědi nebo na callu.
+
+Pokud máš více služeb, nepřidávej deset polí. Přidej jednu rozumnou volbu:
+
+```text
+Téma: nový web | SaaS produkt | AI automatizace | audit | nejsem si jistý
+```
+
+Volba „nejsem si jistý“ je důležitá. Lidé často znají bolest, ale ne interní názvy tvých služeb. Nenuť je hádat tvůj katalog.
+
+## Kvalifikuj postupně
+
+Kvalifikace leadu nemusí být jednorázová. Rozděl ji do tří vrstev:
+
+1. **Před odesláním**: jen minimum pro odpověď a směrování.
+2. **Po odeslání**: potvrzovací stránka s volitelným doplněním kontextu.
+3. **Po prvním kontaktu**: detailnější otázky, až když už člověk ví, proč je potřebuješ.
+
+Příklad po odeslání:
+
+```text
+Díky, ozveme se do jednoho pracovního dne.
+Pokud chcete, můžete ještě doplnit kontext: aktuální web, cílové publikum, termín, orientační rozpočet.
+Je to dobrovolné a pomůže nám připravit konkrétnější odpověď.
+```
+
+Tím získáš lepší data od motivovaných lidí, ale nepřekážíš těm, kteří chtějí jen rychle otevřít dveře. Krása postupného sběru je v tom, že respektuje různé úrovně připravenosti.
+
+## Mikrocopy, které snižuje nejistotu
+
+Formulář není jen sada polí. Je to miniaturní smlouva očekávání. Dobré mikrocopy odpovídá na otázky, které si návštěvník klade těsně před kliknutím.
+
+Použitelné věty:
+
+- „Ozveme se do jednoho pracovního dne.“
+- „Údaje použijeme jen pro odpověď na tuto poptávku.“
+- „Telefon je volitelný. Pokud ho vyplníte, použijeme ho jen k domluvě dalšího kroku.“
+- „Neposíláme reklamní newsletter bez samostatného přihlášení.“
+- „Nechcete formulář? Napište přímo na e-mail: ahoj@example.cz.“
+
+Slabé věty:
+
+- „Vyplněním souhlasíte s marketingovou komunikací.“
+- „Náš tým vás bude brzy kontaktovat.“
+- „Pole označená hvězdičkou jsou povinná.“ bez vysvětlení, proč.
+- „Odeslat“ jako jediné CTA u komplexní poptávky.
+
+CTA může být konkrétnější: „Chci nezávazně probrat web“, „Poslat poptávku“, „Domluvit krátké demo“. Když tlačítko popisuje výsledek, člověk se rozhoduje snadněji.
+
+## Technické detaily, které šetří nervy
+
+Formulář má být nudně spolehlivý. To je kompliment.
+
+Základní technická pravidla:
+
+- používej správné `label` prvky, ne jen placeholdery;
+- nastav relevantní `autocomplete` hodnoty pro jméno, e-mail, organizaci a telefon;
+- validuj na klientu kvůli pohodlí, ale rozhodující validaci dělej na serveru;
+- neukládej částečně vyplněný formulář bez jasného důvodu;
+- po odeslání zobraz potvrzení a pošli kopii nebo stručné shrnutí na e-mail, pokud to dává smysl;
+- zachovej vyplněná pole při validační chybě;
+- chybové hlášky piš u konkrétních polí, ne jako jeden červený koberec nahoře;
+- měř dokončení formuláře jako agregovanou událost, ne jako session replay.
+
+Pro přístupnost si zkus formulář projít jen klávesnicí, se zvětšeným textem a s prázdnými povinnými poli. Pokud nepoznáš, kde je chyba a jak ji opravit, uživatel taky ne. A ne, červený rámeček bez textu není komunikace. To je pasivně agresivní design.
+
+## Kam data tečou po odeslání
+
+Největší riziko formuláře často není samotná stránka, ale cesta po odeslání. Poptávka skončí v CRM, e-mailu, Slacku, notifikačním nástroji, spreadsheetu a možná ještě v automatizaci, kterou někdo přidal v roce, kdy všichni věřili, že „growth stack“ vyřeší všechno.
+
+Privacy-first tok:
+
+```text
+Formulář -> serverová validace -> CRM lead s minimem polí -> interní notifikace bez celého obsahu zprávy -> odpověď zákazníkovi -> retenční pravidlo
+```
+
+Do interní notifikace většinou stačí:
+
+```text
+Nová poptávka: firma, téma, priorita, odkaz do CRM.
+```
+
+Neposílej do chatu celý text zprávy, telefon, rozpočet a osobní údaje, pokud to není nutné. Chatovací aplikace není archiv citlivých obchodních kontaktů. Je to rychlý kanál, který má umět upozornit, ne kopírovat databázi.
+
+## Retence a mazání
+
+Každý demo formulář potřebuje retenční pravidlo. Bez něj se z leadů stane historická sbírka lidí, kteří se možná jednou zeptali na cenu a teď by byli překvapení, že o nich pořád vedeš digitální kroniku.
+
+Jednoduchý model:
+
+- nerelevantní poptávky smaž nebo anonymizuj po krátké době;
+- aktivní obchodní příležitosti drž podle obchodního procesu;
+- zákaznická data přesuň do zákaznického účtu nebo smluvní dokumentace;
+- technické logy formuláře drž kratší dobu než CRM záznam;
+- exporty a kopie v e-mailu zahrň do mazací rutiny.
+
+U každého pole si napiš účel a retenci. Když účel neumíš vysvětlit česky jednou větou, pole do formuláře nepatří.
+
+## Praktický příklad
+
+Malá firma nabízí AI automatizace pro účetní týmy. Původní formulář měl třináct povinných polí: jméno, příjmení, telefon, e-mail, firma, IČO, počet zaměstnanců, obrat, používaný účetní software, počet faktur měsíčně, rozpočet, termín, dlouhý popis.
+
+Nová verze má pět polí:
+
+```text
+Jméno:
+E-mail:
+Firma nebo web:
+Co dnes ručně opakujete nejčastěji?
+Jak chcete navázat: e-mail | krátký call | pošlete příklad řešení
+```
+
+Na děkovací stránce je dobrovolný doplněk:
+
+```text
+Chcete nám ušetřit první výměnu e-mailů? Doplňte účetní software, přibližný počet dokladů měsíčně a ideální termín. Dobrovolné.
+```
+
+Výsledek: první krok je lehčí, obchod má pořád dost kontextu a citlivější provozní údaje se sbírají až ve chvíli, kdy zákazník ví, proč je sdílí.
+
+## Checklist: demo formulář
+
+- [ ] Každé povinné pole má jasný účel pro první odpověď.
+- [ ] Telefon, rozpočet a detailní provozní údaje nejsou povinné bez dobrého důvodu.
+- [ ] Text u formuláře vysvětluje, kdy a jak tým odpoví.
+- [ ] Privacy věta říká konkrétně, k čemu budou údaje použité.
+- [ ] Newsletter nebo marketingová komunikace nejsou schované v poptávce.
+- [ ] Existuje přímý e-mail jako alternativa k formuláři.
+- [ ] Formulář funguje s klávesnicí, správnými labely a čitelnými chybami.
+- [ ] Interní notifikace neposílá zbytečné osobní údaje do chatu.
+- [ ] CRM ukládá jen pole, která mají vlastníka a retenční pravidlo.
+- [ ] Agregované měření sleduje dokončení a téma, ne obsah zpráv.
+
+## Šablona formulářové karty
+
+```text
+Název formuláře:
+Stránka / URL:
+Primární účel:
+Kdo odpovídá:
+SLA odpovědi:
+
+Povinná pole a účel:
+Volitelná pole a účel:
+Pole, která výslovně nesbíráme:
+
+Kam data tečou:
+Interní notifikace:
+CRM / evidence:
+Retenční lhůta:
+Mazací rutina:
+
+Měřené agregované události:
+Zakázané sledování:
+
+Text privacy vysvětlení:
+Alternativní kontakt:
+Datum poslední revize:
+Datum další revize:
+```
+
+## Zdroje
+
+- GDPR, článek 5 — zásady zpracování včetně minimalizace údajů a omezení uložení: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- MDN Web Docs: atribut `autocomplete` pro HTML formuláře a lepší vyplňování běžných kontaktních polí: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
+- W3C WCAG 2.2, Success Criterion 3.3 Input Assistance — požadavky na srozumitelné chyby, popisky a pomoc ve formulářích: https://www.w3.org/TR/WCAG22/#input-assistance
+- OWASP Logging Cheat Sheet — doporučení, aby logy neobsahovaly citlivá data a aby měly jasný účel: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
 # Pracovní log
+
+- 2026-10-08: Doplněna příloha „Demo formulář bez vysavače dat a kvalifikačního výslechu“ s návrhem minimálních polí, postupnou kvalifikací leadu, mikrocopy, technickými pravidly přístupnosti, privacy-first tokem dat po odeslání, retenční rutinou, praktickým B2B příkladem, checklistem, formulářovou kartou a ověřenými zdroji GDPR, MDN, WCAG a OWASP.
 
 - 2026-10-08: Doplněna příloha „Audit log a role bez interního šmírování“ s oddělením auditu, analytiky a debug logů, návrhem stabilních událostí, úzkých metadat, rolí podle práce, serverové autorizace, zákaznického auditního pohledu, retence, B2B příkladem, checklistem, audit log kartou a ověřenými zdroji OWASP, NIST a GDPR.
 
