@@ -25497,6 +25497,28 @@ Privacy-first metriky:
 
 Co bych u citlivých transakčních e-mailů vypínal jako výchozí stav: tracking pixel, přepisování všech odkazů přes marketingovou doménu, detailní fingerprinting zařízení a dlouhou retenci eventů na úrovni jednotlivce. Pokud něco z toho opravdu potřebuješ, napiš si účel, retenci, právní základ, dopad na uživatele a evropskou alternativu. Jinak je to datový konfety kanón namířený na vlastní compliance.
 
+## Odkazy, tokeny a logy bez osobních suvenýrů
+
+Každý transakční e-mail s odkazem ber jako malý bezpečnostní workflow. Odkaz se může dostat do screenshotu, support ticketu, firemního mail gateway logu nebo přeposlané zprávy. Proto do URL nepatří e-mail uživatele, název firmy, tarif, interní ID ani marketingový UTM ocásek. Odkaz má nést neprůhledný náhodný token a server si podle něj bezpečně dohledá kontext.
+
+Špatně:
+
+```text
+https://app.example.com/reset?email=jana@firma.cz&company=Firma&token=abc123&utm_source=email
+```
+
+Lépe:
+
+```text
+https://app.example.com/reset/4e82b6f0d4f2480d9f0c...
+```
+
+Reset hesla, pozvánka do workspace, export dat nebo změna fakturačního e-mailu mají mít token s jasným účelem, expirací a jednorázovým použitím. Po změně role, deaktivaci účtu nebo zrušení pozvánky token přestává platit. U citlivých akcí odkaz nemá rovnou přihlašovat do celé aplikace; má uživatele dovést k potvrzení konkrétní akce.
+
+Loguj stav workflow, ne obsah zprávy. Prakticky stačí typ šablony, verze šablony, tenant/workspace ID, interní ID příjemce nebo hash e-mailu podle potřeby, čas vytvoření, status předání providerovi, normalizovaný důvod selhání a ID související auditní události. Neloguj celé HTML tělo, reset token, jednorázový odkaz, přílohy ani kompletní payloady e-mailového providera.
+
+Příklad pro pozvánku do B2B workspace: admin vytvoří pozvánku, systém odešle e-mail z produktové adresy, token expiruje za 7 dní nebo při zrušení pozvánky, admin vidí stav „čeká / přijata / expirovala / zrušena“ a log obsahuje `invite_created`, `email_sent`, `invite_accepted`, `invite_expired` — ne celé tělo pozvánky. To pomáhá supportu i bezpečnosti, ale nedělá z e-mailového systému druhý CRM vysavač.
+
 ## Evropský provoz: e-mailový dodavatel vidí víc, než se zdá
 
 E-mailový poskytovatel může zpracovávat adresy, předměty, obsah zpráv, doručovací eventy, IP adresy a někdy i technická metadata zařízení. To z něj často dělá významného subprocesora, ne jen „SMTP kabel“. U privacy-first SaaS si proto u dodavatele ověř:
@@ -57915,169 +57937,9 @@ Datum dalšího testu:
 - OWASP Cheat Sheet Series — Logging Cheat Sheet, doporučení k tomu, co logovat, co nelogovat a jak chránit logy při provozních událostech: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - European Commission — GDPR principles pro minimalizaci dat, omezení účelu, omezení uložení a odpovědnost: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 
-# Příloha: Transakční e-maily bez trackingových pixelů a doručovací mlhy
-
-E-mail je pořád nejodolnější produktový kanál. Reset hesla, potvrzení objednávky, pozvánka do workspace, bezpečnostní upozornění nebo faktura často rozhodují, jestli SaaS působí důvěryhodně, nebo jako garážový automat s náladou. Jenže právě e-maily se snadno zvrhnou: marketing začne chtít open rate za každou cenu, produkt do nich přidá moc detailů, support je používá jako náhradu dokumentace a bezpečnostní tým pak loví tokeny v logu. Krása. Skoro poetická, kdyby to nebyl incident čekající na kalendář.
-
-Privacy-first přístup je jednodušší: e-mail má doručit konkrétní zprávu, ne sledovat člověka. Transakční e-mail nepotřebuje pixel, fingerprint, marketingový redirect ani třístránkový HTML karneval. Potřebuje jasný účel, minimum dat, bezpečné odkazy, dobrou doručitelnost a logy, které pomohou řešit problém bez toho, aby se z nich stal druhý CRM systém.
-
-> Codyho komentář: Když potřebuješ vědět, jestli zákazník otevřel reset hesla, problém často není v analytice. Problém je v tom, že nemáš lepší provozní signál: doručeno, kliknuto na platný token, token použit, token expiroval. Pixel je berlička, která se tváří jako strategie.
-
-## Rozděl transakční, bezpečnostní a marketingové e-maily
-
-První pravidlo: nemíchej účely. Transakční e-mail vzniká kvůli akci nebo stavu služby: registrace, faktura, reset hesla, změna e-mailu, pozvánka, export dat, incidentové upozornění. Marketingový e-mail vzniká kvůli propagaci, edukaci, newsletteru nebo reaktivaci. Bezpečnostní e-mail je zvláštní podmnožina transakčních zpráv, protože může chránit účet i firmu: nové přihlášení, změna MFA, rotace API klíče, neobvyklá aktivita.
-
-Proč na tom záleží? Každý typ má jiné očekávání, jinou toleranci k chybě a jiná pravidla odhlášení. Google ve svých sender guidelines rozlišuje subscription zprávy od transakčních zpráv jako reset hesla nebo účtenky a u marketingových/subscription zpráv požaduje jednoduché odhlášení včetně one-click unsubscribe pro velké odesílatele. Prakticky: neposílej newsletter ze stejné identity jako reset hesla a nedávej do bezpečnostních e-mailů marketingový patičkový cirkus.
-
-Minimální rozdělení pro malý SaaS:
-
-- `security@` nebo `no-reply-security@` pro bezpečnostní události.
-- `billing@` pro fakturaci, platby a daňové doklady.
-- `notifications@` pro produktové transakční zprávy.
-- `newsletter@` nebo jiná jasná adresa pro marketingové odběry.
-
-Nemusíš mít čtyři mailboxy a čtyři týmy. Stačí mít oddělené odesílací identity, šablony, logiku odhlášení a retenční pravidla. Doručitelnost tím získá pořádek a zákazník nebude přemýšlet, proč mu z adresy pro reset hesla dorazila „speciální nabídka do pátku“.
-
-## Open tracking nech doma
-
-Tracking pixel v e-mailu je malý obrázek, který při načtení prozradí, že klient zobrazil zprávu. Jenže moderní e-mailové klienty obrázky blokují, proxyují nebo přednačítají. Výsledek je provozně nejistý a soukromí to zbytečně zatěžuje. U transakčních e-mailů je to navíc většinou špatná otázka: nechceš vědět, jestli uživatel otevřel e-mail; chceš vědět, jestli provedl bezpečný další krok.
-
-Nahraď open tracking provozními signály:
-
-- Reset hesla: token vytvořen, e-mail předán providerovi, token otevřen, token použit, token expiroval.
-- Pozvánka do workspace: pozvánka vytvořena, doručovací status, pozvánka přijata, pozvánka zrušena.
-- Export dat: export připraven, notifikace odeslána, soubor stažen oprávněným uživatelem, odkaz expiroval.
-- Faktura: doklad vystaven, e-mail odeslán, platba spárována, upozornění eskalováno podle grace period.
-
-Tyhle signály měří práci systému, ne intimní chování člověka v e-mailovém klientu. A když něco selže, pomohou ti opravit proces místo toho, abys koukal na podezřele kulaté open rate.
-
-## Odkazy mají být krátké, jednorázové a bez osobních suvenýrů
-
-Transakční e-mail často obsahuje odkaz. To je v pořádku. Není v pořádku nacpat do URL e-mail uživatele, název firmy, tarif, interní ID, dlouhý marketingový UTM ocásek a token, který platí do příštích Vánoc. Odkaz z e-mailu se může dostat do screenshotu, logu proxy, ticketu, přeposlané zprávy nebo firemního bezpečnostního nástroje.
-
-Dobré pravidlo: odkaz má nést neprůhledný náhodný token a server si podle něj bezpečně dohledá kontext. Token má být jednorázový, časově omezený a uložený tak, aby jeho únik v databázi nebyl hotový průšvih. U resetu hesla OWASP doporučuje generovat token kryptograficky bezpečně, držet ho dostatečně dlouhý, jednorázový, expirovat ho a nedělat změnu účtu před ověřením tokenu.
-
-Špatně:
-
-```text
-https://app.example.com/reset?email=jana@firma.cz&company=Firma&token=abc123&utm_source=email
-```
-
-Lépe:
-
-```text
-https://app.example.com/reset/4e82b6f0d4f2480d9f0c...
-```
-
-Ještě lépe: po kliknutí zobraz pouze akci, která odpovídá účelu odkazu. Reset token nemá přihlašovat uživatele do celé aplikace. Pozvánka nemá automaticky přijmout členství bez potvrzení. Exportní odkaz nemá fungovat po změně role nebo po deaktivaci účtu.
-
-## Odhlašování patří k odběrům, ne k bezpečnostním zprávám
-
-Marketingové a odběrové e-maily musí mít jasné odhlášení. RFC 2369 definuje hlavičky jako `List-Unsubscribe`; RFC 8058 přidává one-click unsubscribe pomocí `List-Unsubscribe-Post: List-Unsubscribe=One-Click` a HTTPS POST. Gmail aktuálně doporučuje a pro velké objemy marketingových/subscription zpráv vyžaduje správně implementované one-click unsubscribe hlavičky. To je dobrý standard i pro menší odesílatele, protože respekt k odhlášení je levnější než spam reputace v suterénu.
-
-Transakční a bezpečnostní zprávy ale nejsou newsletter. Reset hesla, účtenka nebo bezpečnostní upozornění se nemají odhlašovat stejným tlačítkem jako marketing. Místo toho nabídni preference tam, kde dávají smysl: produktové notifikace, týdenní souhrny, edukativní onboarding. Bezpečnostní minimum nech zapnuté, ale piš ho střídmě a věcně.
-
-Praktické rozdělení preferencí:
-
-- Povinné bezpečnostní zprávy: změna hesla, MFA, nový API klíč, podezřelé přihlášení.
-- Povinné provozní zprávy: faktura, výpadek služby s dopadem, právně/provozně nutná změna.
-- Volitelné produktové zprávy: komentáře, zmínky, týdenní souhrny, import/export dokončen.
-- Marketingové zprávy: newsletter, nabídky, webináře, reaktivační kampaně.
-
-U každé skupiny napiš uživateli lidsky, proč ji dostává a co se stane po vypnutí. „Nebudeme vám posílat bezpečnostní upozornění“ není drobný detail; je to produktové riziko.
-
-## Loguj doručení bez obsahu zprávy
-
-E-mailové logy mají pomoci odpovědět na otázku: „Odeslali jsme správnou zprávu správnému příjemci ve správný čas a co se s ní stalo?“ Nemají být archivem kompletních HTML těl, tokenů, faktur a zákaznických poznámek. Pokud loguješ celý obsah e-mailu, děláš si z logovacího systému další databázi osobních a obchodních dat. Gratuluju, právě sis vytvořil nové místo pro incident.
-
-Ukládej raději metadata:
-
-- typ šablony a verzi šablony,
-- interní ID příjemce nebo hash e-mailu podle potřeby,
-- tenant/workspace ID,
-- čas vytvoření, předání providerovi a výsledný status,
-- provider message ID,
-- důvod selhání v normalizované podobě,
-- ID související události v audit logu.
-
-Neloguju: celé tělo e-mailu, reset token, jednorázový odkaz, přílohy, celé payloady webhooks od e-mailového providera, tracking identifikátory pro jednotlivce. Když potřebuješ debugovat šablonu, používej testovací prostředí a syntetická data, ne produkční poštu zákazníků.
-
-## Doručitelnost není omluva pro datový hlad
-
-Doručitelnost řeš technicky a reputačně, ne sledováním každého pohybu uživatele. Základ je ověřená doména, správné DNS záznamy, konzistentní odesílací identity, rozumné objemy a rychlé řešení bounce/complaint událostí. U marketingu přidej double opt-in, preference centrum a rychlé odhlášení. U transakčních zpráv drž nízký objem, jasné předměty a žádné reklamní přílepky.
-
-Předmět transakčního e-mailu má být nudně přesný:
-
-- „Reset hesla pro účet Cody CRM“
-- „Pozvánka do workspace Dreamind“
-- „Faktura 2026-1042 je připravena“
-- „Bezpečnostní upozornění: nový API klíč“
-
-Nepiš „Důležité!!!“, „Máme pro vás zprávu“ nebo „Ještě jedna věc…“. Tohle není detektivka. Uživatel má poznat účel bez otevření a případný útočník nemá dostat zbytečně detailní obsah v předmětu.
-
-## Příklad: pozvánka do B2B workspace
-
-Představ si SaaS pro agentury. Admin pozve nového člena do workspace klienta. Privacy-first návrh:
-
-- E-mail jde z `notifications@produkt.eu`, ne z marketingové adresy.
-- Předmět: „Pozvánka do workspace Agentura Novák“.
-- Tělo obsahuje kdo pozval, název workspace, stručný důvod a tlačítko „Přijmout pozvánku“.
-- Odkaz obsahuje jednorázový token bez e-mailu a bez UTM parametrů.
-- Token expiruje například za 7 dní nebo při zrušení pozvánky.
-- Pokud uživatel nemá účet, nejdřív ověří e-mail a nastaví přístup; pozvánka sama o sobě ho nepřihlásí do cizích dat.
-- V logu je `invite_created`, `email_sent`, `invite_accepted` a `invite_expired`, ne celé tělo pozvánky.
-- Admin vidí stav pozvánky: čeká, přijata, expirovala, zrušena.
-
-Takový e-mail pomáhá práci, ale nevytváří datový drobečkovací trail přes půl internetu.
-
-## Checklist: transakční e-maily bez sledovacího ocásku
-
-- [ ] Máme oddělené transakční, bezpečnostní, fakturační a marketingové identity?
-- [ ] Neposíláme marketing z adres, které slouží pro reset hesla nebo bezpečnostní upozornění?
-- [ ] Transakční šablony neobsahují tracking pixel ani marketingové redirecty?
-- [ ] Odkazy používají neprůhledné jednorázové tokeny bez osobních údajů v URL?
-- [ ] Reset a citlivé akce mají tokeny s expirací a jednorázovým použitím?
-- [ ] Marketingové odběry mají jasné odhlášení a hlavičky podle `List-Unsubscribe` / one-click unsubscribe?
-- [ ] Povinné bezpečnostní zprávy jsou oddělené od volitelných produktových notifikací?
-- [ ] Logujeme metadata o doručení, ne celé tělo e-mailu a tokeny?
-- [ ] Bounce/complaint události zpracováváme bez ukládání zbytečného payloadu?
-- [ ] Máme testovací šablony se syntetickými daty pro debug doručitelnosti?
-
-## Mini šablona e-mailové karty
-
-```text
-# E-mailová karta: [název zprávy]
-
-Typ: bezpečnostní / transakční / fakturační / produktová / marketingová
-Účel:
-Odesílací adresa:
-Příjemce:
-Spouštěcí událost:
-Povinná nebo volitelná zpráva:
-Možnost odhlášení / preference:
-Obsahuje odkaz: ano/ne
-Typ tokenu:
-Expirace tokenu:
-Data v URL:
-Co se loguje:
-Co se nesmí logovat:
-Retence e-mailového logu:
-Fallback při nedoručení:
-Vlastník šablony:
-Datum poslední kontroly:
-```
-
-## Zdroje
-
-- RFC 2369 — The Use of URLs as Meta-Syntax for Core Mail List Commands and their Transport through Message Header Fields, definuje mimo jiné `List-Unsubscribe`: https://www.rfc-editor.org/rfc/rfc2369.html
-- RFC 8058 — Signaling One-Click Functionality for List Email Headers, popisuje `List-Unsubscribe-Post` a one-click unsubscribe přes HTTPS POST: https://www.rfc-editor.org/rfc/rfc8058.html
-- Google — Email sender guidelines, aktuální požadavky a doporučení pro odesílatele včetně one-click unsubscribe u marketingových/subscription zpráv: https://support.google.com/mail/answer/81126
-- Google — Email subscription guidelines for senders, rozlišuje subscription zprávy a transakční zprávy a doporučuje oddělené odesílací identity: https://support.google.com/mail/answer/15263077
-- OWASP Cheat Sheet Series — Forgot Password Cheat Sheet, doporučení pro bezpečný reset hesla, jednotné odpovědi a jednorázové expirované tokeny: https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html
-
 # Pracovní log
 
-- 2026-10-08: Doplněna příloha „Transakční e-maily bez trackingových pixelů a doručovací mlhy“ s rozdělením transakčních, bezpečnostních a marketingových zpráv, pravidly pro odkazy a tokeny, odhlašováním, privacy-first logováním doručení, B2B pozvánkovým příkladem, checklistem, e-mailovou kartou a ověřenými zdroji RFC, Google a OWASP.
+- 2026-10-08: Rozšířena příloha „Transakční e-maily bez doručovacího hazardu a šmírování“ o bezpečné odkazy, neprůhledné jednorázové tokeny, logování e-mailového workflow bez obsahu zpráv a B2B pozvánkový příklad.
 
 - 2026-10-08: Doplněna příloha „Restore drill bez falešného klidu a zálohovací magie“ s rozdělením obnovy podle vrstev, RTO/RPO v lidské řeči, privacy-first pravidly pro testovací obnovy, postupem malého restore drillu, příkladem chybné migrace v účetním SaaS, checklistem, restore drill kartou a ověřenými zdroji NIST, ENISA, OWASP a Evropské komise.
 
