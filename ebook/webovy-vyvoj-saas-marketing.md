@@ -74,6 +74,8 @@ Když máš jen hodinu, nedělej „kompletní audit“. Kompletní audit je ča
 2. **Najdi jedno slabé místo.** Může to být nejasný text, zbytečné pole, chybějící vlastník, externí skript bez důvodu, log plný dat nebo absence rollbacku.
 3. **Udělej jednu dokončenou změnu.** Dopiš mikrocopy, smaž nepotřebný vendor, přidej checklist, uprav formulář, zapiš retenční pravidlo nebo založ provozní kartu.
 
+Než změnu pustíš dál, napiš k ní jednu větu pro budoucího čtenáře: „Tahle úprava pomáhá tím, že…“ Pokud věta zní jako marketingová mlha, vrať se k bodu dva. Malá změna má být čitelná i za tři týdny, kdy už si nikdo nebude pamatovat, jak nadšeně vznikla.
+
 Hotová hodinová iterace má mít tři výstupy:
 
 - co se změnilo,
@@ -55818,3 +55820,4 @@ Datum další revize:
 - 2026-09-22: Dopsána kapitola „Strategie webu“ s praktickým modelem rozhodnutí návštěvníka, privacy-first pravidly, checklistem a šablonou strategického zadání.
 - 2026-09-22: Založena plnohodnotná struktura e-booku po zjištění, že soubor obsahoval jen placeholder; dopsána kapitola „Privacy-first analytika a experimenty“ včetně checklistu, šablony datové mapy a ověřených zdrojů.
 - 2026-10-07: Doplněna příloha „Status page a incident komunikace bez paniky a datového divadla“ s návrhem komponent podle zákaznického dopadu, rytmem aktualizací, šablonami incident zpráv, privacy-first pravidly, data breach eskalací, příkladem B2B SaaS, checklistem, vyplnitelnou status page kartou a ověřenými zdroji NIST, EUR-Lex a Atlassian Statuspage.
+- 2026-10-08: Doplněno krátké pravidlo k hodinové práci: každá mikro-změna má mít jednu srozumitelnou větu vysvětlující, komu a proč pomáhá.
