@@ -55496,7 +55496,188 @@ Datum další revize:
 - OWASP Logging Vocabulary Cheat Sheet: slovník událostí včetně změn účtu, exportů a mazání dat: https://cheatsheetseries.owasp.org/cheatsheets/Application_Logging_Vocabulary_Cheat_Sheet.html
 
 
+
+# Příloha: Audit log a role bez interního šmírování
+
+Audit log je paměť SaaS produktu. Má pomoct vysvětlit, kdo udělal důležitou změnu, kdy se to stalo a jaký to mělo dopad. Není to druhá analytika, tajná kamera na zaměstnance ani skládka všeho, co se v aplikaci mihne rychlostí nervózního produktového manažera.
+
+Dobře navržený audit log chrání zákazníka, support, bezpečnostní tým i obchod. Když se rozbije integrace, změní fakturační nastavení nebo někdo omylem smaže projekt, tým nemusí hádat z kávové sedliny. Podívá se na srozumitelnou stopu a ví, co se stalo.
+
+Privacy-first princip je jednoduchý: loguj rozhodující události, ne soukromý obsah. Audit má odpovídat na otázku „co se změnilo a kdo měl oprávnění“, ne přehrávat celý život uživatele v interním kině.
+
+> Codyho komentář: Pokud audit log vypadá jako levný reality show záznam každého kliknutí, není to bezpečnost. Je to jen šmírování s tabulkou.
+
+## Nejdřív odděl audit, analytiku a debug logy
+
+Tři typy záznamů mají tři různé účely:
+
+- **Audit log**: důležité bezpečnostní, administrační, fakturační a datové změny.
+- **Produktová analytika**: agregované signály, jestli produkt plní hodnotu.
+- **Debug logy**: technické informace pro řešení chyb a výkonu.
+
+Když je smícháš, vznikne datový guláš. Vývojář hledá chybu, support vidí zbytečně moc údajů a zákazník se při dotazu na export logů právem ptá, proč tam leží věci, které tam nikdy neměly být.
+
+Praktické pravidlo: audit log má být čitelný i bez znalosti interní implementace. Událost `workspace.billing_address.updated` je lepší než `PATCH /api/v2/customer/784/form-submit`. První říká, co se stalo. Druhé říká, kudy to proběhlo.
+
+## Loguj události podle dopadu
+
+Začni seznamem událostí, které mění důvěru, peníze, přístup nebo data. Nepiš ho podle endpointů, ale podle dopadu na zákazníka.
+
+Typické auditní události:
+
+- přihlášení do administrace a změna bezpečnostních nastavení,
+- pozvání, odebrání nebo změna role člena týmu,
+- vytvoření, export, smazání nebo obnovení důležitých dat,
+- změna tarifu, fakturačních údajů, platební metody nebo limitů,
+- vytvoření, rotace nebo zrušení API klíče,
+- změna integrace, webhooku nebo oprávnění aplikace,
+- použití supportního režimu, impersonace nebo citlivého admin nástroje,
+- neúspěšné pokusy o citlivou akci.
+
+Naopak do audit logu většinou nepatří každé otevření stránky, každý pohyb myši, celý obsah formuláře nebo kompletní payload integrace. To je debug nebo analytika — a často ani to ne.
+
+## Pole drž úzká a stabilní
+
+Auditní záznam má být malý, ale použitelný. Doporučené minimum:
+
+```text
+čas:
+actor_id:
+actor_type: user | system | support | integration
+workspace_id / tenant_id:
+action:
+target_type:
+target_id:
+result: success | denied | failed
+reason_code:
+ip_region / coarse_source:
+request_id / correlation_id:
+metadata_minimal:
+```
+
+`metadata_minimal` je nejnebezpečnější kolonka, protože svádí k ukládání všeho. Nastav pravidlo: metadata smí obsahovat jen hodnoty potřebné k vysvětlení události. U změny role stačí `from_role` a `to_role`. U změny e-mailu často stačí hash původní a nové hodnoty, ne celé adresy. U exportu stačí typ exportu, období a počet řádků, ne samotný obsah.
+
+Pokud potřebuješ korelaci s technickými logy, používej `request_id`. Nesnaž se do audit logu nacpat celý request. Audit log není kontejner na výčitky svědomí.
+
+## Role navrhni podle práce, ne podle seniority
+
+Role v SaaS produktu mají odpovídat tomu, co člověk reálně dělá. „Admin“ pro všechny je pohodlné jen do první chyby. Pak je to levný horor.
+
+Praktický základ pro B2B SaaS:
+
+| Role | Co smí | Co typicky nesmí |
+| --- | --- | --- |
+| Owner | správa účtu, fakturace, rušení workspace | obejít audit nebo mazat stopu |
+| Admin | členové týmu, nastavení produktu, integrace | měnit vlastnictví bez potvrzení |
+| Billing | faktury, tarif, platební údaje | číst produktový obsah zákazníka |
+| Member | běžná práce v produktu | správa rolí a bezpečnostních nastavení |
+| Viewer | čtení vybraných dat | exporty, mazání, změny nastavení |
+| Support | omezený supportní pohled | tiché vstupy bez důvodu a auditní stopy |
+
+Role pravidelně testuj na konkrétních scénářích: „Účetní potřebuje stáhnout faktury“, „agentura přidává nového člověka“, „externista má vidět jen jeden projekt“, „support řeší nefunkční integraci“. Pokud role nejdou vysvětlit na scénářích, nejsou role; jsou to dekorativní štítky.
+
+## Autorizace patří k akci, ne jen k obrazovce
+
+Skrytí tlačítka nestačí. Každá citlivá akce musí mít kontrolu oprávnění na serveru. U vícetenantového SaaS kontroluj minimálně:
+
+- identitu aktéra,
+- jeho roli v konkrétním workspace,
+- vztah cílového objektu ke stejnému tenantovi,
+- aktuální stav objektu,
+- dopad akce,
+- případnou potřebu step-up ověření.
+
+Audit log má zaznamenat i zamítnuté citlivé akce. Ne proto, aby se z uživatelů dělali podezřelí, ale aby šlo odhalit chybnou konfiguraci, pokus o obejití oprávnění nebo rozbitý onboarding.
+
+Důležité: nedělej z audit logu bezpečnostní model. Audit popisuje, co se stalo. Autorizace rozhoduje, co se stát smí. Když si tyhle vrstvy prohodíš, aplikace začne připomínat zámek, který sice zapisuje vloupání, ale dveře nechává otevřené.
+
+## Zákaznický audit log ukaž bez zbytečného voyeurismu
+
+B2B zákazník často potřebuje vlastní auditní pohled: kdo změnil nastavení, kdo exportoval data, kdo pozval nového člena. To je legitimní a užitečné. Ale i zákaznický audit log má mít hranice.
+
+Doporučení:
+
+- ukaž jen události relevantní pro daný workspace,
+- filtruj podle typu události, času, aktéra a cíle,
+- u citlivých hodnot ukazuj „změněno“, ne celou původní hodnotu,
+- export audit logu omez rolí a rozsahem,
+- vysvětli retenční dobu,
+- u supportních zásahů ukaž důvod, čas a pracovní identifikátor, ne interní poznámky.
+
+Pokud zákazník potřebuje detail pro bezpečnostní šetření, vytvoř řízený proces. Není nutné každému adminovi ukázat vše navždy. Transparentnost neznamená datový bufet bez víka.
+
+## Retence: audit má přežít incident, ne účel
+
+Audit log potřebuje delší život než běžné debug logy, ale ne nekonečný. Retenci nastav podle účelu, rizika a smluvního kontextu. Pro malý SaaS často dává smysl kombinace:
+
+- krátké technické logy na dny až týdny,
+- auditní události pro zákaznickou správu na měsíce až roky podle tarifu a smlouvy,
+- bezpečnostní události s jasně omezeným přístupem,
+- agregované provozní metriky bez osobních detailů.
+
+Při výmazu účtu si napiš, co se stane s auditní stopou. Některé záznamy můžeš anonymizovat, některé musí zůstat kvůli obraně právních nároků, některé nemají důvod přežívat vůbec. Hlavní je nemlžit. Zákazník má vědět, že výmaz produktových dat není totéž co okamžité smazání všech provozních stop.
+
+## Příklad: agenturní SaaS pro klientské projekty
+
+Představ si SaaS, ve kterém agentura spravuje klientské projekty, úkoly a fakturační přehledy.
+
+Špatná verze audit logu ukládá každý otevřený úkol, celý text komentářů, kompletní exporty a IP adresy bez omezení. Support má přístup ke všemu, protože „se to někdy hodí“. Ano, hodí — hlavně při budoucím průšvihu.
+
+Lepší verze:
+
+- audit log ukládá změny rolí, exporty, smazání projektů, změny integrací a supportní zásahy,
+- komentáře a přílohy se do audit logu neukládají,
+- supportní pohled vyžaduje důvod a časově omezené oprávnění,
+- zákaznický admin vidí události svého workspace,
+- export audit logu je dostupný jen ownerovi a adminovi,
+- bezpečnostní události mají vlastní retenční pravidlo,
+- `request_id` propojuje audit s technickými logy bez kopírování citlivého obsahu.
+
+Výsledek: když externista smaže projekt nebo integrace odešle chybný webhook, tým ví, co se stalo. Zároveň ale nevzniká interní panoptikum, ve kterém je každý uživatel chodící datová stopa.
+
+## Checklist: audit log a role bez interního šmírování
+
+- [ ] Máme oddělený audit log, produktovou analytiku a debug logy.
+- [ ] Auditní události jsou vybrané podle dopadu na důvěru, peníze, přístup nebo data.
+- [ ] Každá událost má stabilní název, aktéra, cíl, výsledek a korelační ID.
+- [ ] Metadata neobsahují zákaznický obsah ani payloady „pro jistotu“.
+- [ ] Citlivé akce kontrolují oprávnění na serveru, nejen v UI.
+- [ ] Role odpovídají pracovním scénářům a dají se vysvětlit zákazníkovi.
+- [ ] Zamítnuté citlivé akce se logují bez ukládání zbytečného obsahu.
+- [ ] Zákazník má čitelný auditní pohled tam, kde to pomáhá důvěře.
+- [ ] Supportní zásahy mají důvod, čas, rozsah a auditní stopu.
+- [ ] Retence auditních záznamů je popsaná a pravidelně kontrolovaná.
+
+## Mini šablona audit log karty
+
+```text
+# Audit log karta: [produkt / workspace]
+
+Účel audit logu:
+Hlavní uživatelé logu:
+Události s vysokým dopadem:
+Události, které záměrně nelogujeme:
+Povinná pole události:
+Zakázaná pole / citlivý obsah:
+Role s přístupem k audit logu:
+Zákaznický auditní pohled:
+Supportní zásahy:
+Retenční doba:
+Export audit logu:
+Vlastník:
+Datum další revize:
+```
+
+## Zdroje
+
+- OWASP Authorization Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP Logging Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- NIST SP 800-63B, Digital Identity Guidelines — Authentication and lifecycle guidance: https://pages.nist.gov/800-63-4/sp800-63b.html
+- GDPR, článek 5 — zásady zpracování osobních údajů včetně minimalizace a omezení uložení: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+
 # Pracovní log
+
+- 2026-10-08: Doplněna příloha „Audit log a role bez interního šmírování“ s oddělením auditu, analytiky a debug logů, návrhem stabilních událostí, úzkých metadat, rolí podle práce, serverové autorizace, zákaznického auditního pohledu, retence, B2B příkladem, checklistem, audit log kartou a ověřenými zdroji OWASP, NIST a GDPR.
 
 - 2026-10-08: Doplněna příloha „Mazání účtů a export dat bez rukojmí a support paniky“ s rozlišením exportu, deaktivace a výmazu, návrhem exportního kontraktu, retenčními pravidly, self-service brzdami, support runbookem, B2B offboarding příkladem, checklistem, export/delete kartou a ověřenými zdroji GDPR, Evropské komise, EDPB a OWASP.
 
