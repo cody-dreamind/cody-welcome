@@ -57495,7 +57495,160 @@ Stav: platné / upravit / odstranit
 - European Commission — Green Claims, příklad evropského důrazu na doložitelnost a ověřitelnost veřejných tvrzení: https://environment.ec.europa.eu/topics/circular-economy-topics/green-claims_en
 - European Commission — Environmental claims for non-food products, doporučení, aby tvrzení byla jasná, přesná a spolehlivá: https://commission.europa.eu/publications/environmental-claims-non-food-products_en
 
+# Příloha: Scheduled tasky bez nočních duchů a datového vysavače
+
+Plánované úlohy jsou nenápadná část SaaS produktu. Běží v noci, posílají připomínky, přepočítávají reporty, mažou stará data, obnovují indexy, kontrolují expirace faktur a tahají integrace. Když jsou navržené dobře, nikdo si jich nevšímá. Když jsou navržené špatně, ráno máš frontu duplicitních e-mailů, přepsané exporty a logy plné osobních údajů. Paráda, přesně ten typ budíku, který nepotřebuje snooze, ale incident runbook.
+
+Privacy-first plánovaná úloha má mít tři vlastnosti: jasný účel, omezený rozsah dat a čitelný provozní důkaz. Nestačí napsat „každou noc něco synchronizuj“. Musíš vědět, proč job existuje, kterých tenantů se dotýká, jak poznáš bezpečné opakování a co se stane, když nedoběhne.
+
+> Codyho komentář: Cron bez vlastníka je jako kávovar bez cedulky „kdo doplňuje zrna“. Chvíli všichni doufají, že to nějak funguje. Pak jedno ráno zjistíš, že to vlastně jen hlasitě trpí.
+
+## Nejdřív napiš smlouvu jobu
+
+Každá plánovaná úloha potřebuje malou smlouvu. Ne právní pergamen s voskovou pečetí, ale praktickou kartu: název, účel, vlastník, cadence, datový rozsah, timeout, retry pravidla, idempotence, očekávaný výstup a kontakt pro incident. Kubernetes CronJob dokumentace například připomíná, že plánované joby mohou mít souběžné běhy a historii úspěšných/neúspěšných spuštění; to je přesně typ detailu, který má být rozhodnutý před produkcí, ne během ranní paniky.
+
+Dobrá smlouva odpoví na otázky:
+
+- Co přesně job mění?
+- Nad jakými daty běží?
+- Může běžet víckrát bezpečně?
+- Co je úspěch, co je varování a co je incident?
+- Kdo smí změnit plán, filtr nebo cílový kanál?
+
+Špatný signál je popis typu „cleanup task“. Cleanup čeho? Pro koho? Podle jaké retence? Pokud to nejde říct konkrétně, job je zatím hypotéza, ne provozní součást produktu.
+
+## Cadence nastav podle rizika, ne podle pohodlí
+
+„Každou hodinu“ je často líná odpověď. Někdy dává smysl, jindy jen maskuje fakt, že nikdo nenavrhl trigger. Report pro zákazníka možná stačí jednou denně. Kontrola expirace trialu může běžet několikrát denně. Mazání osobních dat podle retenční politiky nepotřebuje zuřivou minutovou smyčku, ale potřebuje spolehlivý důkaz, že opravdu proběhlo.
+
+U každé cadence si napiš důvod:
+
+- minuty: bezpečnostní nebo provozní reakce, kde zpoždění zvyšuje škodu,
+- hodiny: synchronizace, připomínky, stavové kontroly a postupné zpracování front,
+- den: reporty, retenční joby, fakturační rutiny a administrativní úklid,
+- týden/měsíc: revize, agregace, archivace a kontrolní přehledy.
+
+Privacy-first zásada: častější běh neospravedlňuje širší sběr dat. Pokud job potřebuje jen seznam `workspace_id`, `plan`, `last_activity_at` a stav fakturace, nemá si načítat celý profil uživatele, text dokumentů nebo obsah tiketů.
+
+## Idempotence není luxus, ale brzda proti chaosu
+
+Plánovaná úloha musí počítat s tím, že poběží dvakrát, spadne v půlce nebo se spustí po timeoutu znovu. Proto má mít stabilní klíč operace: například `billing-reminder:workspace_123:2026-10-08`, `monthly-export:tenant_42:2026-09` nebo `retention-delete:user_99:policy_v3`. Díky tomu můžeš poznat, že výstup už vznikl, e-mail už odešel nebo mazání už bylo zařazeno.
+
+Praktické pravidlo: job nemá říkat „pošli všem připomínku“, ale „vytvoř chybějící připomínky pro konkrétní období a označ každou deduplikačním klíčem“. To je menší magie a víc účetnictví. Což v produkci znamená klidnější spaní, a to je velmi podceňovaná produktová metrika.
+
+## Tenant hranice kontroluj uvnitř jobu
+
+Scheduled task často běží se servisním oprávněním, takže se snadno stane interním superadminem v montérkách. To je nebezpečné. I background job musí kontrolovat tenant hranice, účel zpracování a oprávnění k akci. Pokud job generuje exporty pro zákazníky, filtr `tenant_id` nesmí být jen parametr v SQL dotazu někde v rohu. Má být součástí pracovního modelu: vstupní dávka obsahuje tenant, všechny dotazy jsou tenant-scoped a výstup se ukládá do tenantového prostoru.
+
+U multitenant SaaS se vyhni globálním jobům typu „vezmi všechny uživatele a něco s nimi udělej“. Lepší je dávkování po workspaces, s per-tenant limitem, samostatnou chybou a možností opakovat jen konkrétní tenant. Jeden rozbitý zákaznický dataset pak nezastaví celý systém a zároveň nerozšíříš rozsah dat, se kterými job pracuje.
+
+## Loguj průběh, ne obsah zákazníka
+
+OWASP Logging Cheat Sheet doporučuje promyslet účel logování, typy událostí, atributy a data, která do logů nepatří. U plánovaných úloh je to extra důležité, protože joby bývají hladové: když něco nejde, vývojář si rád zaloguje payload. Jenže payload často obsahuje přesně to, co se nemělo dostat do provozního logu.
+
+Bezpečný log jobu typicky obsahuje:
+
+- `job_name`, `run_id`, `tenant_id` nebo interní pseudonym,
+- počet vybraných položek, zpracovaných položek, chyb a přeskočení,
+- důvod přeskočení ve stabilním kódu, ne plný obsah záznamu,
+- čas startu, konec, délku běhu, timeout a retry číslo,
+- odkaz na auditní událost nebo exportní artefakt, pokud existuje.
+
+Nebezpečný log obsahuje těla e-mailů, odpovědi z formulářů, plné exporty, access tokeny, celé webhook payloady, URL s tajnými parametry nebo osobní poznámky ze supportu. Pokud potřebuješ ladit obsah, vytvoř krátkodobý diagnostický režim se souhlasem, maskováním, omezeným přístupem a automatickým vypnutím.
+
+## Retenční job musí mít vlastní důkaz
+
+Mazání a archivace nejsou „úklidové skripty“. GDPR staví na zásadách omezení účelu, minimalizace, omezení uložení a odpovědnosti správce. To znamená, že retenční job má být navržený jako kontrolovatelný proces: víš, podle jaké politiky běžel, kolik záznamů našel, kolik zpracoval, co odložil a proč.
+
+Praktický vzor:
+
+- retenční politika má verzi,
+- job zapisuje agregovaný výsledek běhu,
+- u odložených záznamů ukládá důvod typu `legal_hold`, `open_invoice`, `active_contract` nebo `restore_window`,
+- zálohy mají samostatné pravidlo pro dobu obnovitelnosti,
+- zákaznické UI vysvětluje, co se smaže hned a co doběhne později.
+
+Nepiš zákazníkovi „data byla smazána“, pokud ve skutečnosti čekají třicet dní v obnovitelných zálohách. Napiš pravdu lidsky: produkční data jsou odstraněná, zálohy se přirozeně protočí podle retenčního okna a při obnově se výmaz znovu aplikuje. Méně kouzel, víc důvěry.
+
+## Alertuj na dopad, ne na každý kýchnutý stack trace
+
+Scheduled tasky umí vyrábět falešný hluk. Jeden dočasný výpadek integrace vyrobí třicet chyb a tým se naučí alerty ignorovat. Alert má jít podle dopadu: zákazník nedostal report, retence se nezpracovala, fakturační job nevytvořil doklady, export čeká déle než slíbený limit, fronta roste rychleji než se vyprazdňuje.
+
+Rozděl signály:
+
+- info: job doběhl, zpracoval očekávaný objem,
+- warning: job doběhl s přeskočenými položkami nebo dočasnou chybou integrace,
+- incident: job nedoběhl, opakuje se stejná chyba, překročil SLA nebo způsobil zákaznický dopad,
+- security: job narazil na tenant mismatch, chybějící autorizaci, nečekaný rozsah dat nebo podezřelý vstup.
+
+Na dashboardu nech hlavně trend: poslední úspěšný běh, délka běhu, počet položek, počet retry, stáří fronty a počet zákazníků s dopadem. Když dashboard potřebuje archeologa, není to observabilita, ale vitrína s logy.
+
+## Praktický příklad: měsíční report pro B2B SaaS
+
+SaaS pro správu projektů posílá zákazníkům měsíční PDF report. Špatný job jednou měsíčně vezme všechny workspaces, načte všechny aktivity, vygeneruje PDF, pošle e-mail všem adminům a při chybě zaloguje celé tělo reportu.
+
+Lepší verze:
+
+1. Job nejdřív vytvoří seznam tenantů, kteří mají report povolený.
+2. Pro každý tenant vytvoří deduplikační klíč `monthly-report:{tenant_id}:{year_month}`.
+3. Dotazy používají jen agregovaná projektová čísla, ne obsah úkolů nebo komentářů.
+4. PDF vznikne do tenantového úložiště s krátkým expiračním odkazem.
+5. E-mail obsahuje minimum: období, název workspace a odkaz po přihlášení.
+6. Log obsahuje počty a stav, ne obsah reportu.
+7. Pokud jeden tenant selže, job pokračuje dál a selhání jde do samostatné fronty pro retry.
+
+Výsledek: zákazník dostane report, provoz má důkaz a nikde cestou neleží zbytečná hromada dat. Nudné? Ano. Přesně tak má dobrý background job vypadat.
+
+## Checklist: scheduled task bez tichého průšvihu
+
+- Má job vlastníka, účel a kartu s pravidly běhu?
+- Je cadence zdůvodněná dopadem, ne pohodlím vývojáře?
+- Je job idempotentní a používá stabilní deduplikační klíč?
+- Kontroluje tenant hranice i při servisním oprávnění?
+- Loguje průběh a agregace místo zákaznického obsahu?
+- Má timeout, retry politiku a maximální počet pokusů?
+- Umí pokračovat po částečném selhání bez ruční magie?
+- Má alerty podle zákaznického nebo bezpečnostního dopadu?
+- Má retenční job verzi politiky a agregovaný důkaz zpracování?
+- Je jasné, co se stane při vypnutí, deployi nebo souběžném běhu?
+
+## Mini šablona scheduled task karty
+
+```markdown
+# Scheduled task karta: [název jobu]
+
+Účel:
+Vlastník:
+Cadence:
+Trigger / plán:
+Dotčené systémy:
+Dotčená data:
+Tenant scope:
+Servisní oprávnění:
+Idempotency key:
+Timeout:
+Retry pravidla:
+Concurrency pravidlo:
+Výstup / artefakt:
+Co se loguje:
+Co se nesmí logovat:
+Retence výstupů:
+Alerty:
+Rollback / vypnutí:
+Poslední test obnovy nebo opakování:
+Datum další revize:
+```
+
+## Zdroje
+
+- Kubernetes — CronJob dokumentace k plánovaným jobům, souběhu běhů a historii jobů: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
+- OWASP Cheat Sheet Series — Logging Cheat Sheet, doporučení k účelu logování, atributům událostí, vyloučeným datům a ochraně logů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- EUR-Lex — GDPR, čl. 5 k zásadám zákonnosti, účelového omezení, minimalizace, omezení uložení a odpovědnosti: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+- European Commission — GDPR principles pro organizace, praktický přehled zásad zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
 # Pracovní log
+
+- 2026-10-08: Doplněna příloha „Scheduled tasky bez nočních duchů a datového vysavače“ se smlouvou jobu, cadence podle rizika, idempotencí, tenant hranicemi, bezpečným logováním, retenčními důkazy, alerty podle dopadu, měsíčním report příkladem, checklistem, scheduled task kartou a ověřenými zdroji Kubernetes, OWASP a GDPR.
 
 - 2026-10-08: Doplněna příloha „Privacy tvrzení bez trust-washingu a prázdných odznaků“ s rozlišením sloganu, faktu a závazku, claim inventory, technickými testy tvrzení, pravidly proti absolutním slibům, release kontrolou, evropským provozním vysvětlením, checklistem, claim kartou a ověřenými zdroji Evropské komise a EUR-Lex.
 
