@@ -56977,7 +56977,175 @@ Datum revize:
 - OWASP Secure Product Design Cheat Sheet — bezpečné produktové návrhy mají počítat se zálohami a správně nastavenou retencí dat: https://cheatsheetseries.owasp.org/cheatsheets/Secure_Product_Design_Cheat_Sheet.html
 
 
+# Preference centrum bez newsletterového nátlaku a falešných souhlasů
+
+Preference centrum je malé místo s velkým dopadem: uživatel v něm rozhoduje, co od tebe chce dostávat, na jakou adresu, jak často a proč. Když ho navrhneš dobře, snižuje počet odhlášení, stížností i support dotazů. Když ho navrhneš špatně, je to jen cookie lišta pro e-mail: právní kabát, pod kterým se schovává marketingová nervozita.
+
+Privacy-first preference centrum není trik, jak člověka udržet v databázi za každou cenu. Je to důkaz, že respektuješ jeho pozornost. A pozor, pozornost je dnes skoro prémiovější komodita než GPU v pátek odpoledne.
+
+## Nejdřív rozděl typy komunikace
+
+Ne všechno, co pošleš e-mailem, je newsletter. Malý SaaS nebo poradenský web typicky posílá několik druhů zpráv a každý má jiný účel i jinou právní logiku.
+
+Praktické rozdělení:
+
+- **Servisní zprávy:** reset hesla, potvrzení registrace, faktura, změna bezpečnostního nastavení, incident, důležitá změna služby.
+- **Produktové novinky:** release notes, nové funkce, změny v dokumentaci, plánované odstávky.
+- **Vzdělávací obsah:** články, návody, webináře, e-booky, checklisty.
+- **Obchodní komunikace:** nabídky, kampaně, slevy, reaktivace trialu, pozvánka na demo.
+- **Výzkum a feedback:** krátké dotazníky, rozhovory, žádosti o hodnocení.
+
+Do jednoho přepínače „souhlasím s komunikací“ to nepatří. Takový přepínač je pohodlný pro databázi, ale mizerný pro člověka. Lepší je nabídnout několik srozumitelných kategorií a u každé napsat příklad, co se bude posílat.
+
+## Souhlas piš konkrétně a odděleně
+
+Pokud stojíš na souhlasu, musí člověk vědět, s čím souhlasí, kdo mu bude psát, za jakým účelem a jak může souhlas odvolat. Evropská komise u souhlasu připomíná, že má být svobodný, informovaný, specifický a daný jasnou aktivní akcí; EDPB k tomu má samostatné vodítko pro souhlas podle GDPR. Přeloženo z právničiny do produktu: nezaškrtávej nic předem, neschovávej marketing do obchodních podmínek a nesvazuj uživatele tím, že bez newsletteru nemůže používat nesouvisející službu.
+
+Dobrá mikrocopy:
+
+- „Chci dostávat měsíční praktické tipy k webu, SaaS a privacy-first provozu.“
+- „Chci produktové novinky k funkcím, které používám.“
+- „Chci pozvánky na webináře a workshopové materiály.“
+- „Nechci marketingové e-maily, ale servisní zprávy k účtu mi posílejte dál.“
+
+Slabá mikrocopy:
+
+- „Souhlasím se zpracováním pro marketingové účely.“
+- „Chci dostávat informace od partnerů.“
+- „Souhlasím s personalizovanou komunikací.“
+
+Ty slabé věty možná vypadají profesionálně, ale uživateli říkají asi tolik jako cedule „technické věci probíhají“. Konkrétnost je levnější než právní mlha.
+
+## Odhlášení musí být jednodušší než útěk z bludiště
+
+Každý hromadný marketingový e-mail má mít jasné odhlášení. U newsletterů a podobných listů přidej i technickou podporu `List-Unsubscribe` a pro one-click odhlášení `List-Unsubscribe-Post` podle RFC 8058, pokud to tvůj e-mailový systém umí. Nejde jen o deliverability. Je to i férové UX: člověk nemá lovit drobný šedý odkaz v patičce jako poklad v adventuře z devadesátek.
+
+Odhlášení má dělat jednu věc: bezpečně změnit preference. Nemá nutit k přihlášení, nemá vyžadovat heslo a nemá lámat uživatele přes tři potvrzovací obrazovky. Pokud chceš nabídnout alternativu, udělej ji jako volbu, ne jako překážku.
+
+Dobrá stránka po kliknutí:
+
+```text
+Hotovo, odhlásili jsme vás z měsíčního newsletteru.
+
+Můžete si místo toho nechat jen produktové novinky nebo servisní zprávy k účtu.
+[Upravit preference]
+```
+
+Špatná stránka:
+
+```text
+Je nám líto, že odcházíte. Řekněte nám proč. Bez odpovědi nelze pokračovat.
+```
+
+Feedback je užitečný, ale dobrovolný. Nenuť člověka vysvětlovat, proč nechce další e-mail. Někdy je důvod prostě „mám inbox jak skládku po konferenci“.
+
+## Preference ukládej jako auditovatelný stav
+
+Preference nejsou jen políčko v tabulce `users`. Jsou to rozhodnutí člověka, podle kterých se má řídit produkt, marketing i support.
+
+Minimální datový model:
+
+- e-mailová adresa nebo interní kontakt ID,
+- kategorie komunikace,
+- stav: přihlášeno / odhlášeno / nikdy nepřihlášeno,
+- zdroj změny: formulář, import, support, odhlašovací odkaz, administrátor,
+- čas změny,
+- verze textu souhlasu nebo preference,
+- technický důkaz bez zbytečných detailů,
+- kdo změnu provedl, pokud šlo o interní zásah.
+
+Neloguj celé URL s tokenem, user agent „pro jistotu“ ani otevření každého e-mailu jako osobnostní profil. Pro audit typicky stačí vědět, že ke změně došlo, kdy, z jakého kanálu a k jaké kategorii. Privacy-first marketing nemá být behaviorální archeologie.
+
+## Import kontaktů potřebuje brzdu
+
+Největší riziko preference centra často není samotné centrum, ale import starých kontaktů z CRM, veletrhu, soutěže nebo excelu „kontakty_final_v7_opravdu_final.xlsx“. Před importem si dej kontrolu:
+
+- Odkud kontakt pochází?
+- Proč mu smíme psát?
+- Jaký typ komunikace očekával?
+- Kdy a jak dostal informaci o zpracování?
+- Máme oddělený souhlas, oprávněný zájem nebo jiný právní základ?
+- Lze kontakt bezpečně vyřadit, když si nejsme jistí?
+
+Když odpověď zní „nějak to máme z minula“, neimportuj do newsletteru. Dej si re-permission kampaň s jasným vysvětlením, nebo kontakt ponech mimo marketing. Krátkodobě to zmenší databázi. Dlouhodobě to zvětší důvěru a sníží riziko stížností.
+
+## Frekvence je preference, ne detail
+
+Preference centrum nemusí řídit jen témata. Užitečná je i frekvence. Někdo chce krátký týdenní digest, někdo měsíční souhrn, někdo jen zásadní produktové změny. Zvlášť u B2B služeb je frekvence často důležitější než kreativní předmět e-mailu.
+
+Praktické volby:
+
+- „Týdenní tipy“ pro aktivní čtenáře.
+- „Měsíční souhrn“ pro manažery a zákazníky s málo času.
+- „Jen důležité produktové změny“ pro uživatele, kteří nechtějí obsahový tok.
+- „Pouze servisní zprávy“ jako bezpečná dolní hranice.
+
+Neposílej méně relevantní obsah jen proto, že máš volné místo v kalendáři. E-mailový plán není lednice před dovolenou — nemusíš do něj nacpat všechno, co zbylo.
+
+## Praktický příklad: preference centrum pro malý B2B SaaS
+
+Účetní SaaS má tři publika: administrátory workspace, běžné uživatele a kontakty, které si stáhly e-book. Preference centrum nastaví takto:
+
+- Administrátor vždy dostává bezpečnostní a fakturační servisní zprávy.
+- Produktové novinky jsou volitelné podle workspace role.
+- Edukační newsletter je samostatný souhlas s měsíční frekvencí.
+- Pozvánky na webináře jsou oddělená kategorie, ne automatický bonus k e-booku.
+- Odhlášení z newsletteru nesmaže účet ani servisní oznámení.
+- Support může ručně upravit preference jen na žádost člověka a změna se zapíše do auditu.
+- Importy z CRM jdou nejdřív přes kontrolu původu a staré nejisté kontakty dostanou jen jednorázovou re-permission výzvu.
+
+Výsledek: menší databáze, čistší segmenty, méně otrávených lidí a marketing, který nemusí předstírat, že každý otevřený pixel je láska ke značce.
+
+## Checklist: preference centrum bez nátlaku
+
+- Jsou servisní, produktové, vzdělávací a obchodní zprávy oddělené?
+- Je u každé kategorie jasný příklad obsahu?
+- Nejsou marketingové souhlasy předem zaškrtnuté?
+- Je odvolání souhlasu stejně jednoduché jako jeho udělení?
+- Obsahuje hromadný e-mail jasný odhlašovací odkaz?
+- Podporuje systém `List-Unsubscribe` a ideálně one-click odhlášení?
+- Nevyžaduje odhlášení přihlášení do účtu?
+- Ukládá se čas, zdroj a verze preference bez zbytečných osobních detailů?
+- Má support runbook pro žádosti typu „odhlašte mě“?
+- Prochází import kontaktů kontrolou původu a právního základu?
+- Umí zákazník zvolit frekvenci komunikace?
+- Existuje pravidelná kontrola neaktivních, vracejících se nebo odrážených adres?
+
+## Mini šablona preference karty
+
+```text
+# Preference karta: [kategorie komunikace]
+
+Název pro uživatele:
+Interní název:
+Účel:
+Typ obsahu:
+Typické příklady zpráv:
+Právní základ:
+Text souhlasu / preference:
+Výchozí stav:
+Frekvence:
+Kdo může změnit:
+Odhlašovací cesta:
+Auditní pole:
+Retence preference:
+Napojené systémy:
+Support postup:
+Datum revize:
+```
+
+## Zdroje
+
+- European Commission — Legal grounds for processing data, část k platnosti souhlasu a možnosti souhlas odvolat stejně snadno, jako byl udělen: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data_en
+- European Commission — Principles of the GDPR, zejména účelové omezení, transparentnost, minimalizace a informace v jasném jazyce: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- EDPB — Guidelines 05/2020 on consent under Regulation 2016/679: https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en
+- RFC 8058 — Signaling One-Click Functionality for List Email Headers: https://www.rfc-editor.org/rfc/rfc8058
+
+
+
 # Pracovní log
+
+- 2026-10-08: Doplněna příloha „Preference centrum bez newsletterového nátlaku a falešných souhlasů“ s rozdělením typů komunikace, konkrétní mikrocopy souhlasu, jednoduchým odhlášením, auditovatelným stavem preferencí, kontrolou importů, frekvenčními volbami, B2B SaaS příkladem, checklistem, preference kartou a ověřenými zdroji Evropské komise, EDPB a RFC 8058.
 
 - 2026-10-08: Doplněna příloha „Archivace a retenční pravidla bez datového sklepa“ s datovým katalogem podle účelu, retenčním kontraktem, pravidly pro archiv, provozním mazáním, zákaznickým UX, příkladem zrušení workspace, checklistem, retenční kartou a ověřenými zdroji Evropské komise, EDPB a OWASP.
 
