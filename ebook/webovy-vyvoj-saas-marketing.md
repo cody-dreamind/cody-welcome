@@ -54670,9 +54670,151 @@ Poznámka pro podporu:
 - Martin Fowler: Feature Toggles, praktické rozdělení toggle kategorií a jejich životnosti: https://martinfowler.com/articles/feature-toggles.html
 - OWASP Cheat Sheet Series: Logging Cheat Sheet, doporučení k logování a seznam dat, která se nemají ukládat do logů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 
+# Příloha: Demo prostředí a sandbox bez úniku zákaznických dat
+
+Demo je zvláštní druh produktu. Na papíře je to jen ukázka, ale v praxi často rozhoduje o prodeji, onboardingu, školení i důvěře. A právě proto se v něm tak snadno dělají nebezpečné zkratky: vezme se kopie produkce, trochu se „anonymizuje“, někdo smaže pár jmen z obrazovky a všichni doufají, že v ukázce nezůstala faktura, e-mail nebo interní poznámka zákazníka. Naděje je hezká emoce, ale mizerný bezpečnostní mechanismus.
+
+Privacy-first demo má jiný cíl: ukázat hodnotu produktu bez toho, aby se reální zákazníci stali rekvizitou v obchodním divadle. Demo data mají být věrohodná, konzistentní a použitelná pro prodej i podporu, ale nemají být otiskem skutečných lidí, firem ani dokumentů.
+
+## Nejdřív rozděl typy demo prostředí
+
+Jedno „demo“ obvykle nestačí. Každý scénář má jinou míru rizika, jinou životnost a jiné publikum.
+
+Praktické členění:
+
+- **Veřejné demo:** dostupné bez obchodníka, typicky pro rychlé osahání produktu. Používej jen syntetická data a žádné interní poznámky.
+- **Prodejní demo:** připravené pro konkrétní segment nebo use case. Data mohou připomínat obor zákazníka, ale nesmí vycházet z jeho skutečných dat bez jasného právního a smluvního základu.
+- **Sandbox trial:** prostředí, kde si zákazník testuje produkt s vlastními daty. Musí mít oddělenou retenci, export a mazání.
+- **Školicí prostředí:** používá se opakovaně pro support, onboarding nebo workshopy. Potřebuje resetovatelný stav a stabilní scénáře.
+- **Interní reprodukční prostředí:** slouží k ladění chyb. Nemá být zaměněné s demem a nesmí být přístupné obchodnímu týmu jen proto, že „tam je zajímavý případ“.
+
+Tohle rozdělení je důležité, protože demo pro obchodní call a sandbox s importem zákaznických dat mají úplně jiné bezpečnostní hranice. Když je držíš ve stejném prostředí, časem vznikne datová polévka. A datová polévka je přesně to jídlo, které nechceš servírovat při auditu.
+
+## Produkční kopii nepoužívej jako startovací dataset
+
+Kopie produkční databáze je lákavá, protože obsahuje „reálné případy“. Jenže obsahuje i reálná rizika: osobní údaje, smluvní informace, interní poznámky, citlivé dokumenty, historické chyby a vazby mezi tabulkami, kterým už nikdo nerozumí.
+
+Bezpečnější vzor je demo seed:
+
+1. Ručně navrhni několik realistických zákaznických scénářů.
+2. Vytvoř syntetické firmy, osoby, faktury, projekty a události.
+3. Udržuj konzistentní vztahy mezi daty, aby demo působilo věrohodně.
+4. Seed verzuj jako kód nebo jako kontrolovaný fixture balíček.
+5. Před každým veřejným použitím prostředí resetuj do známého stavu.
+
+Pokud opravdu potřebuješ pracovat s daty podobnými produkci, dělej z toho samostatný bezpečnostní projekt, ne rychlou přípravu dema. GDPR v článku 5 staví na zásadách omezení účelu, minimalizace údajů a omezení uložení; demo, které používá víc dat, než potřebuje, jde proti těmto principům. Codyho komentář: když produkt neumí zaujmout bez živých zákaznických dat, problém není v datech, ale v příběhu dema.
+
+## Ukázková data piš jako produktový obsah
+
+Syntetická data nejsou náhodné „Lorem ipsum“ v tabulce. Dobré demo vypráví malý příběh: uživatel otevře dashboard, najde problém, provede akci a vidí výsledek. Proto mají ukázková data vznikat podobně jako obsah landing page — s jasným účelem.
+
+Dobrá demo data mají:
+
+- čitelná jména firem bez podobnosti se skutečnými zákazníky,
+- realistické částky, termíny a stavy,
+- několik chybových nebo varovných situací,
+- jasně pojmenované role uživatelů,
+- oborový kontext bez kopírování reálných dokumentů,
+- dostatek prázdných stavů, aby produkt nepůsobil jako kouzelná tabulka plná náhody.
+
+Špatný signál je dataset, kde všechno vypadá perfektně. Skutečný zákazník chce vidět, co se stane, když něco chybí, selže, čeká na schválení nebo potřebuje opravu. Demo bez problémů je jako účetnictví bez dokladů: vypadá klidně, dokud se někdo nezačne ptát.
+
+## Sandbox s vlastními daty odděl od marketingového dema
+
+Jakmile zákazník nahraje vlastní data do trialu nebo sandboxu, přestává to být hračka pro obchod. Je to provozní prostředí s datovou odpovědností. Potřebuje jasné hranice:
+
+- kdo má do sandboxu přístup,
+- jak dlouho data zůstávají uložená,
+- jak zákazník požádá o export nebo smazání,
+- zda se data používají pro podporu, ladění nebo trénink,
+- jestli se sandbox převádí do placeného účtu,
+- co se stane po konci trialu.
+
+Nejčistší pravidlo: prodejní demo používá jen syntetická data, zákaznický sandbox používá zákaznická data a tyhle světy se nemíchají. Když obchodník potřebuje ukázat konkrétní scénář, připrav syntetickou variantu. Nekopíruj zákazníkův import do „hezčího dema“ jen proto, že to bude přesvědčivější. Přesvědčivost není výjimka z důvěry.
+
+## Přístupy nastav podle rolí, ne podle zvědavosti
+
+Demo prostředí často dostane víc lidí než produkce, protože „tam přece nejsou ostrá data“. Jenže i syntetické demo může obsahovat interní roadmapu, chystané funkce, obchodní scénáře nebo citlivé konfigurace. A sandbox s daty zákazníka už je úplně jiná liga.
+
+Minimální model přístupů:
+
+- obchod vidí jen prodejní demo a resetovací tlačítko,
+- podpora vidí školicí prostředí a zákaznický sandbox jen podle ticketu,
+- vývoj má přístup k internímu reprodukčnímu prostředí,
+- admin akce se logují jako změny konfigurace,
+- sdílené účty jsou zakázané,
+- dočasné přístupy mají datum konce.
+
+OWASP ASVS pracuje s ověřením přístupu, autentizací a řízením oprávnění jako se základními bezpečnostními oblastmi aplikace. Demo není magická výjimka. Pokud v něm existuje přihlášení, role, data nebo administrace, potřebuje stejnou disciplínu jako zbytek produktu.
+
+## Reset a retence napiš dřív než první obchodní call
+
+Demo prostředí se bez resetu rychle rozpadne. Jeden obchodník vytvoří testovací firmu, druhý změní nastavení, třetí nahraje soubor, čtvrtý smaže ukázkový projekt a pátý se diví, proč onboarding vypadá jako archeologické naleziště.
+
+Praktický režim:
+
+- veřejné demo resetuj automaticky po krátkém intervalu,
+- prodejní demo resetuj před každým důležitým callem,
+- školicí demo resetuj podle scénáře workshopu,
+- sandbox zákazníka maž podle trial pravidel a smlouvy,
+- reprodukční prostředí maž po vyřešení incidentu nebo bug ticketu,
+- reset testuj stejně jako migraci, protože rozbitý reset je tichý výrobce chaosu.
+
+Do UI můžeš přidat viditelný štítek „demo data“ nebo „sandbox zákazníka“. Lidé pak méně často udělají hloupou chybu. A ano, UX štítek není bezpečnostní model, ale dobrý bezpečnostní model bez UX signálů je jako zámek bez kliky: teoreticky fajn, prakticky otravný.
+
+## Příklad: B2B SaaS pro fakturaci ukazuje demo agentuře
+
+Představ si český SaaS pro fakturaci a schvalování nákladů. Obchodní tým chce ukázat agentuře workflow od přijetí dodavatelské faktury po schválení a export do účetnictví.
+
+Privacy-first demo nepoužije anonymizovanou kopii produkce. Připraví syntetickou firmu „Severní Studio s.r.o.“, tři role — jednatel, účetní, projektový manažer — a několik ukázkových dokladů. Jeden doklad čeká na schválení, jeden má chybějící středisko, jeden je po splatnosti a jeden je připravený k exportu. Obchodník ukáže hodnotu produktu na reálném procesu, ale žádný skutečný zákazník se nestane kulisou.
+
+Pokud si agentura otevře trial a nahraje vlastní faktury, vznikne oddělený sandbox. Ten má vlastní retenci, export, mazání a podporu. Obchodník může požádat zákazníka o svolení podívat se na konkrétní problém, ale nemá automatické právo procházet dokumenty jen proto, že „pomáhá s prodejem“.
+
+## Checklist: demo a sandbox bez úniku dat
+
+- Má každé demo prostředí jasný účel a vlastníka?
+- Nepoužívá veřejné nebo prodejní demo kopii produkčních dat?
+- Jsou ukázková data syntetická, konzistentní a verzovaná?
+- Je zákaznický sandbox oddělený od marketingového dema?
+- Má sandbox popsanou retenci, export a smazání po trialu?
+- Jsou přístupy rozdělené podle rolí a bez sdílených účtů?
+- Existuje reset scénář a někdo ho pravidelně testuje?
+- Jsou demo screenshoty, videa a obchodní materiály kontrolované proti úniku dat?
+- Ví podpora, kdy smí vstoupit do sandboxu a jak to zaznamenat?
+- Má demo prostředí viditelný štítek, aby si ho tým nepletl s produkcí?
+
+## Mini šablona demo karty
+
+```text
+Název prostředí:
+Typ: veřejné demo / prodejní demo / sandbox trial / školení / reprodukce chyby
+Vlastník:
+Účel:
+Publikum:
+Zdroj dat:
+Zakázaná data:
+Seed nebo reset postup:
+Retence:
+Přístupy:
+Logované admin akce:
+Export a mazání:
+Viditelný štítek v UI:
+Datum posledního reset testu:
+Datum další revize:
+Poznámka pro obchod a podporu:
+```
+
+## Zdroje
+
+- EUR-Lex: GDPR, článek 5 se zásadami zpracování osobních údajů včetně minimalizace údajů, omezení účelu a omezení uložení: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679
+- OWASP Application Security Verification Standard, požadavky a kontrolní oblasti pro autentizaci, řízení přístupu a bezpečný návrh aplikací: https://owasp.org/www-project-application-security-verification-standard/
+- ENISA: Data Protection Engineering, doporučení k technickým a organizačním opatřením pro ochranu dat v návrhu systémů: https://www.enisa.europa.eu/publications/data-protection-engineering
+
 
 
 # Pracovní log
+
+- 2026-10-08: Doplněna příloha „Demo prostředí a sandbox bez úniku zákaznických dat“ s rozdělením typů demo prostředí, syntetickými seed daty, oddělením zákaznického sandboxu od marketingového dema, přístupovým modelem, resetem a retencí, příkladem B2B fakturačního SaaS, checklistem, demo kartou a ověřenými zdroji GDPR, OWASP ASVS a ENISA.
 
 - 2026-10-08: Rozšířena příloha „Produktové metriky bez vanity dashboardu a datového vysavače“ o praktický onboardingový příklad pro účetní SaaS, který ukazuje měření aktivace bez session replaye, zákaznického obsahu a osobních profilů.
 
