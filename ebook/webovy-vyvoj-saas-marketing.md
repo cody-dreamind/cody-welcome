@@ -55351,7 +55351,154 @@ Datum další revize:
 ```
 
 
+# Příloha: Mazání účtů a export dat bez rukojmí a support paniky
+
+Zákazník, který chce odejít, není nepřítel. Je to člověk nebo firma, která právě testuje, jestli tvoje privacy-first sliby platí i ve chvíli, kdy už z něj nekouká další faktura. A přesně tehdy se pozná dospělý SaaS: dovolí bezpečný export, vysvětlí mazání, neschová tlačítko do labyrintu a nezmění odchod v supportový escape room.
+
+Mazání účtu a export dat nejsou jen právní okénko. Jsou součást produktu, důvěry a provozní hygieny. Pokud je nemáš navržené, tým začne řešit každý odchod ručně: někdo smaže účet, někdo zapomene na přílohy, někdo pošle CSV na špatný e-mail a někdo pak píše do incident logu větu „tohle jsme nečekali“. Jasně, nikdo nečeká španělskou inkvizici ani účetní export v pátek v 16:55, ale produkt by měl.
+
+> Codyho komentář: Nejlepší retenční taktika není zamknout export. Nejlepší retenční taktika je postavit produkt tak dobrý, že zákazník odchází férově — a možná se vrátí, protože jsi se k němu nechoval jako únosce dat.
+
+## Nejdřív rozděl export, deaktivaci a výmaz
+
+V produktu nepoužívej jedno kouzelné tlačítko „smazat účet“ pro všechno. V praxi potřebuješ aspoň tři odlišné akce:
+
+| Akce | Co znamená | Typický účel |
+| --- | --- | --- |
+| Export dat | zákazník získá kopii svých dat ve strojově použitelném formátu | odchod, audit, účetnictví, záloha zákazníka |
+| Deaktivace účtu | účet přestane být aktivní, ale data zůstávají po omezenou dobu | pauza, konec předplatného, bezpečný návrat |
+| Výmaz dat | data se odstraní podle retenčních, právních a technických pravidel | žádost subjektu údajů, ukončení služby, úklid po retenci |
+
+Když tyhle pojmy mícháš dohromady, uživatel neví, co se stane. A support taky ne. Výsledkem je produktová mlha: „účet je smazaný, ale faktury jsou někde, logy možná zůstaly a export už nejde“. To není privacy-first. To je datový sklep s cedulkou „nějak to dopadne“.
+
+## Export navrhni jako veřejný kontrakt
+
+Export dat má být předvídatelný. Zákazník má vědět, co dostane, v jakém formátu, jak dlouho bude odkaz platit a co v exportu z bezpečnostních nebo právních důvodů není.
+
+Praktický základ pro malý SaaS:
+
+- formát `CSV` pro tabulková data a `JSON` pro strukturované vazby,
+- samostatná složka pro přílohy nebo soubory,
+- `README.txt` s popisem polí, časové zóny a verze exportu,
+- manifest se seznamem souborů a časem vytvoření,
+- omezená platnost odkazu ke stažení,
+- auditní záznam o vytvoření a stažení exportu bez ukládání obsahu exportu do logů.
+
+Export není místo pro kreativitu. Pokud jednou zákazníkům řekneš, že pole `customer_id` je stabilní identifikátor, neměň ho v tichosti na `client_uuid`, protože někdo v týmu četl blog o „čistším názvosloví“. Export je kontrakt. Měň ho verzovaně a s poznámkou v changelogu.
+
+## Výmaz není okamžité vypaření vesmíru
+
+Uživatel může chtít výmaz, ale produkt musí umět vysvětlit, co se maže hned, co se maže později a co musí zůstat kvůli jiné povinnosti. GDPR pracuje s právem na výmaz, ale zároveň existují situace, kdy správce data potřebuje pro splnění právní povinnosti, určení nebo obhajobu právních nároků nebo jiné oprávněné důvody. Tohle není výmluva pro nekonečné skladování. Je to důvod mít retenční pravidla, ne improvizaci.
+
+Prakticky si data rozděl:
+
+| Kategorie | Příklad | Doporučené chování |
+| --- | --- | --- |
+| Produktový obsah | projekty, poznámky, importované soubory | smazat nebo anonymizovat podle žádosti a retence |
+| Účetní doklady | faktury, daňové údaje | ponechat podle zákonných povinností, oddělit od produktu |
+| Bezpečnostní logy | přihlášení, změny oprávnění | ponechat jen nezbytné minimum po krátkou definovanou dobu |
+| Support komunikace | tickety, e-maily | promazat citlivé přílohy, držet jen nutný kontext |
+| Zálohy | snapshoty databází | nemazat ručně kusy zálohy, ale zajistit expiry a deletion replay po obnově |
+
+Největší chyba je slib „smažeme vše okamžitě“. To většinou není pravda. Lepší je férová věta: „Produktová data mažeme do X dnů, účetní doklady držíme podle zákonných povinností a zálohy expirují podle zálohovacího cyklu; pokud bychom obnovili zálohu, výmaz znovu přehrajeme.“ Nudné? Ano. Důvěryhodné? Taky ano. Nudná důvěryhodnost je v B2B nádherná disciplína.
+
+## Self-service je dobrý, ale citlivé akce chtějí brzdy
+
+Export i výmaz by měly být dostupné bez proseb na support, ale ne bez kontroly. U týmových účtů je rozdíl mezi osobním profilem a workspace daty. Běžný člen týmu nemá mít možnost smazat celý workspace jen proto, že měl špatný den a v kávovaru došla zrnka.
+
+Bezpečný model:
+
+- osobní export profilu může spustit uživatel pro svá data,
+- workspace export může spustit owner nebo role s výslovným oprávněním,
+- výmaz workspace vyžaduje potvrzení, zobrazení dopadu a krátké ochranné okno,
+- u větších B2B účtů může být povinné potvrzení druhým adminem,
+- po spuštění citlivé akce pošli notifikaci relevantním adminům,
+- exportní odkaz chraň přihlášením nebo krátkodobým tokenem a nikdy ho neposílej jako věčný veřejný link.
+
+Do potvrzovací obrazovky napiš konkrétní dopad. Ne „Tato akce je nevratná“. To uživatelé čtou stejně poctivě jako podmínky soutěže o firemní propisku. Napiš: „Smaže se 18 projektů, 243 úkolů a 12 příloh. Faktury zůstanou ve fakturaci. Export lze stáhnout ještě 7 dní.“
+
+## Support runbook: co dělat, když přijde žádost e-mailem
+
+Ne každý použije self-service. Někdo napíše „prosím smažte mě“ na podporu, někdo odpoví na fakturu a někdo pošle dramatický e-mail bez identifikace účtu. Support potřebuje postup, ne detektivní seriál.
+
+Runbook pro žádost o export nebo výmaz:
+
+1. Ověř identitu žadatele bez sběru zbytečných údajů.
+2. Urči, jestli jde o osobní účet, workspace nebo zákaznická data v roli správce.
+3. Zkontroluj oprávnění žadatele k požadované akci.
+4. Nabídni self-service cestu, pokud je bezpečná a dostupná.
+5. Pokud akci dělá support, vytvoř interní ticket s minimem dat.
+6. Po dokončení pošli stručné potvrzení bez detailního výpisu citlivých dat.
+7. Zaznamenej auditní událost: kdo požádal, kdo provedl, kdy a jaký rozsah.
+
+Zakázané zkratky: posílat export na jiný e-mail bez ověření, mazat data podle volného textu bez kontroly role, ukládat kopii exportu do ticketu, řešit výmaz přes sdílený admin účet nebo držet „pro jistotu“ ruční kopii na disku.
+
+## Příklad: agentura ruší workspace po konci projektu
+
+Agentura používala SaaS pro správu klientských podkladů. Projekt skončil a owner chce účet zavřít.
+
+Rozumný scénář:
+
+1. Owner otevře Nastavení → Export a výmaz.
+2. Produkt ukáže rozdíl mezi exportem workspace, deaktivací a výmazem.
+3. Owner spustí export; systém vytvoří archiv s `README`, manifestem, `CSV` tabulkami a přílohami.
+4. Odkaz je dostupný 7 dní pouze přihlášeným ownerům.
+5. Po stažení může owner naplánovat výmaz s ochranným oknem 14 dní.
+6. Tým dostane informaci, že workspace bude smazán, a běžní členové už nemohou přidávat nová data.
+7. Po výmazu zůstávají pouze faktury, minimální auditní záznam a dočasné zálohy do konce retenčního cyklu.
+8. Pokud by se obnovila záloha, systém znovu přehraje seznam dokončených výmazů.
+
+Tohle není jen právní opatrnost. Je to dobrý offboarding. Zákazník odchází s pocitem, že data patřila jemu, ne tvému retenčnímu sklepu.
+
+## Checklist: export a výmaz bez rukojmí
+
+- Má produkt oddělený export, deaktivaci a výmaz?
+- Ví zákazník, co přesně export obsahuje a v jakém formátu?
+- Má export verzi, manifest a popis polí?
+- Je exportní odkaz časově omezený a chráněný?
+- Umí produkt rozlišit osobní data, workspace data, faktury, logy a zálohy?
+- Je výmaz popsaný včetně výjimek a retenčních lhůt?
+- Existuje deletion replay pro případ obnovy ze zálohy?
+- Citlivé akce vyžadují odpovídající roli a potvrzení dopadu?
+- Support má runbook pro e-mailové žádosti?
+- Loguje se provedení akce bez ukládání obsahu exportu nebo citlivých payloadů?
+
+## Mini šablona export/delete karty
+
+```text
+# Export/delete karta: [produkt / workspace typ]
+
+Vlastník procesu:
+Typy exportu:
+Formáty:
+Co export obsahuje:
+Co export neobsahuje:
+Platnost odkazu:
+Oprávněné role:
+Potvrzení před výmazem:
+Ochranné okno:
+Data mazaná hned:
+Data s retenční lhůtou:
+Zálohy a deletion replay:
+Auditní události:
+Support postup:
+Zakázané postupy:
+Datum poslední revize:
+Datum další revize:
+```
+
+## Zdroje
+
+- EUR-Lex: GDPR, článek 17 k právu na výmaz a článek 20 k právu na přenositelnost údajů: https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679
+- Evropská komise: přehled práv jednotlivců a pravidel ochrany osobních údajů v EU: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- EDPB: Guidelines 05/2020 on consent under Regulation 2016/679, mimo jiné k tomu, že odvolání souhlasu má být stejně snadné jako jeho udělení: https://www.edpb.europa.eu/sites/default/files/files/file1/edpb_guidelines_202005_consent_en.pdf
+- OWASP Logging Cheat Sheet: doporučení k auditním záznamům, vyloučení citlivých údajů a retenci logů: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Logging Vocabulary Cheat Sheet: slovník událostí včetně změn účtu, exportů a mazání dat: https://cheatsheetseries.owasp.org/cheatsheets/Application_Logging_Vocabulary_Cheat_Sheet.html
+
+
 # Pracovní log
+
+- 2026-10-08: Doplněna příloha „Mazání účtů a export dat bez rukojmí a support paniky“ s rozlišením exportu, deaktivace a výmazu, návrhem exportního kontraktu, retenčními pravidly, self-service brzdami, support runbookem, B2B offboarding příkladem, checklistem, export/delete kartou a ověřenými zdroji GDPR, Evropské komise, EDPB a OWASP.
 
 - 2026-10-08: Doplněna příloha „Nezaplacené faktury a grace period bez výhrůžek“ s praktickým dunning procesem, segmentací podle dopadu, pravidly grace period, omezením nových rizik místo držení dat jako rukojmí, fakturační rolí, retry postupem, B2B SaaS příkladem, checklistem a dunning kartou.
 
