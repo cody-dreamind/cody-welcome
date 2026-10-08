@@ -58128,7 +58128,204 @@ Poznámka k datům a logům:
 - [European Commission — What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en) — shrnutí principů minimalizace dat, omezení uložení a bezpečnosti zpracování.
 - [EUR-Lex — GDPR Article 25](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679) — data protection by design and by default jako návrhový princip pro systémy zpracovávající osobní data.
 
+# Příloha: Release runbook bez pátečního hazardu a privacy překvapení
+
+Release není jen okamžik, kdy CI zezelená a někdo klikne na deploy. Release je dohoda, že konkrétní změna má známý účel, známé riziko, známý rollback a nikoho nepřekvapí tím, že začne sbírat nová data nebo měnit obchodní pravidla mimo dohodnutý kontext.
+
+Malý tým si často říká, že runbook je „enterprise papír“. Jenže právě malý tým si nemůže dovolit půlden chaosu, protože nikdo neví, kdo rozhoduje, co se vypíná, kde je stav migrace a jestli zákazníkům napsat teď, nebo až po třetím nervózním refreshi dashboardu.
+
+Codyho komentář: Nejhorší release není ten, který spadne. Nejhorší je ten, který spadne kreativně, bez poznámek, bez vlastníka a s větou „tohle se přece nemohlo stát“ v hlavní roli.
+
+## Nejdřív rozděl změny podle dopadu
+
+Ne každá změna potřebuje stejný rituál. Oprava překlepu v dokumentaci nemá procházet stejnou bránou jako migrace billing tabulky nebo nový export osobních dat. Když máš jeden proces pro všechno, lidé ho začnou obcházet. Když máš vrstvy podle rizika, proces pomáhá místo toho, aby dělal hlídače s razítkem.
+
+Praktické rozdělení:
+
+| Typ změny | Příklad | Minimální kontrola |
+| --- | --- | --- |
+| Nízký dopad | text, statická stránka, drobný CSS fix | diff, náhled, rychlá kontrola odkazů |
+| Produktový dopad | nový onboarding krok, změna formuláře, pricing text | cíl změny, UX kontrola, měření bez nových osobních dat |
+| Datový dopad | nový event, export, import, změna retence | datová mapa, právní/provozní vlastník, retenční pravidlo |
+| Provozní dopad | migrace DB, fronty, cache, autentizace | rollback, monitoring, stop signály, restore plán |
+| Zákaznický dopad | změna tarifu, dostupnosti funkce, komunikace | zákaznické oznámení, support poznámka, FAQ |
+
+Každý release si před deployem označ jedním primárním dopadem. Když jich má víc, řiď se nejvyšším rizikem. To zní nudně, ale přesně tak se z release procesu nestane loterie s logem firmy.
+
+## Go/no-go rozhodnutí musí mít vlastníka
+
+„Nasadíme to?“ není otázka do davu. Dav umí dodat kontext, ale rozhodnutí má mít jasného vlastníka. U malého SaaS to může být technický lead, zakladatel, produktový vlastník nebo člověk na službě. Důležité je, aby se vědělo, kdo může říct ano, kdo může říct stop a kdo po deployi sleduje výsledek.
+
+Go/no-go karta má odpovědět na pět věcí:
+
+- Co přesně nasazujeme?
+- Proč to nasazujeme právě teď?
+- Jak poznáme, že release funguje?
+- Jak poznáme, že se má zastavit nebo vrátit?
+- Kdo má právo rozhodnout o rollbacku?
+
+Google SRE v incident managementu zdůrazňuje předem připravené role, jasné předání odpovědnosti a prioritu „stop the bleeding“. Stejná logika patří i k releasům: když už máš předem dané role, menší problém se nemusí proměnit v improvizované divadlo.
+
+## Před deployem zkontroluj datové změny
+
+Privacy-first release checklist začíná jednoduchou otázkou: mění tato změna, jaká data sbíráme, ukládáme, posíláme dodavateli nebo zobrazujeme lidem?
+
+Pokud ano, release nesmí projít jen technickým pohledem. Potřebuje datový mini review:
+
+- Jaký je účel nového nebo změněného údaje?
+- Je údaj nutný, nebo jen pohodlný?
+- Kde se ukládá a jak dlouho?
+- Vidí ho dodavatel nebo externí služba?
+- Je potřeba aktualizovat text pro uživatele, DPA, datovou mapu nebo interní evidenci?
+- Dá se změna vypnout bez ztráty kontroly nad existujícími daty?
+
+Příklad: nový onboarding event `workspace_invite_completed` může být užitečný. Ale nepotřebuje ukládat e-mail pozvaného člověka, IP adresu, user agent a celý obsah pozvánky. Stačí tenant, typ akce, čas, výsledek a pseudonymní identifikátor, pokud je opravdu potřeba navázat na funnel.
+
+Codyho komentář: „Jen pro analytiku“ není účel. To je šuplík, kam se hází datové ponožky bez páru.
+
+## Deploy okno není jen čas v kalendáři
+
+Deploy okno má být dohodnutý prostor, kdy tým ví, že může změnu sledovat a případně vrátit. Neznamená to, že se má deployovat jen v úterý v 10:00, protože to někdo vytesal do interního Notionu. Znamená to, že riziková změna nemá odcházet v momentě, kdy nikdo nebude u monitoringu, supportu ani zákaznické komunikace.
+
+U malého týmu stačí tato pravidla:
+
+- změny s nízkým dopadem mohou jít průběžně,
+- změny s provozním nebo datovým dopadem nejdou těsně před koncem pracovní doby,
+- billing, auth a migrace mají vlastní pozornost a jasný rollback,
+- release do více tenantů se pouští postupně,
+- po deployi existuje krátké sledovací okno, ne jen radostný útěk na oběd.
+
+Když služba běží pro zákazníky v různých zemích Evropy, zkontroluj i jejich pracovní rytmus. „U nás je večer“ neznamená „nikdo nepoužívá produkt“. B2B SaaS pro účetní, logistiku nebo e-commerce může mít kritické časy úplně jinde než vývojový tým.
+
+## Rollback napiš jako postup, ne jako přání
+
+Rollback není věta „kdyžtak to vrátíme“. Rollback je konkrétní postup, který někdo umí provést pod stresem.
+
+Dobrý rollback popisuje:
+
+- jakou verzi kódu vrátit,
+- které feature flagy vypnout,
+- co se stane s databázovou změnou,
+- zda je potřeba zastavit frontu nebo scheduled job,
+- jak poznat, že se systém stabilizoval,
+- co říct supportu a zákazníkům,
+- která data se nesmí mazat bez samostatného rozhodnutí.
+
+Nejnebezpečnější jsou změny, které nejdou čistě vrátit: migrace dat, změny kontraktu API, změny oprávnění, nové billing chování. U nich nepředstírej jednoduchý rollback. Napiš místo něj mitigaci: vypnout vstupní bod, zastavit job, skrýt UI, vrátit starý endpoint, dočasně zablokovat export, spustit opravný skript až po kontrole vzorku.
+
+## Monitoring po releasu má mít stop signály
+
+Po deployi nestačí koukat na obecný graf, jestli „to nějak žije“. Každý významnější release má mít několik stop signálů, které říkají: pokračujeme, zpomalíme, zastavíme, nebo vracíme.
+
+Praktické stop signály:
+
+- nárůst chyb na konkrétním endpointu,
+- zvýšení latence v kritické cestě,
+- nárůst odmítnutých autorizací tam, kde neměly být,
+- fronta jobů roste rychleji, než se zpracovává,
+- support hlásí opakovaný stejný problém,
+- zákaznická metrika ukazuje zablokovaný krok,
+- logy obsahují neočekávaný typ dat nebo příliš detailní payload.
+
+OWASP Logging Cheat Sheet doporučuje plánovat logování podle účelu a rizika a zároveň chránit logy před přílišným nebo citlivým obsahem. Pro release to znamená: měř rozhodnutí systému a dopad, ne soukromý život uživatele.
+
+## Komunikace: interně dřív než panika externě
+
+Release komunikace má tři vrstvy: interní tým, support/prodej a zákazník. Ne každá změna potřebuje veřejný changelog, ale každá změna se zákaznickým dopadem potřebuje, aby lidé uvnitř firmy věděli, co se stalo.
+
+Minimum pro interní poznámku:
+
+```text
+Nasazeno: [co]
+Dopad: [koho se to týká]
+Co se změnilo pro zákazníka:
+Co sledovat:
+Co říct, když se někdo zeptá:
+Rollback / mitigace:
+Vlastník:
+```
+
+Externí zpráva má být krátká, konkrétní a bez technické kouřové clony. Pokud release opravuje chybu, řekni, co bylo ovlivněno, co je opravené a jestli má zákazník něco udělat. Pokud release přidává funkci, řekni, pro koho je, kde ji najde a jaká data zpracovává.
+
+Privacy-first značka se pozná i v changelogu: žádné falešné „vylepšili jsme zkušenost“, když ve skutečnosti přibyl nový tracking event. Napiš to lidsky a fér.
+
+## Praktický příklad: nový CSV export objednávek
+
+B2B SaaS přidává CSV export objednávek pro administrátory zákaznického workspace. Funkce vypadá jednoduše, ale sahá na osobní a obchodní data.
+
+Bezpečný release postup:
+
+1. Označ změnu jako datový i zákaznický dopad.
+2. Ověř, že export smí spustit jen role s konkrétním oprávněním.
+3. Do CSV zahrň jen pole, která zákazník opravdu potřebuje.
+4. Přidej limit velikosti exportu a frontu pro velké soubory.
+5. Loguj vytvoření exportu, tenant, výsledek a velikost, ne obsah CSV.
+6. Pusť funkci nejdřív přes release flag pro jeden interní tenant.
+7. Připrav support poznámku: kdo export vidí, jak dlouho je soubor dostupný, jak ho smazat.
+8. Po deployi sleduj chyby jobu, délku fronty, počet exportů a neoprávněné pokusy.
+9. Po týdnu odstraň release flag, pokud je rollout hotový, a nech jen případný kill switch pro exportní job.
+
+Tady release runbook chrání tým i zákazníka. Nezpomaluje produkt. Jen brání tomu, aby se nová užitečná funkce stala datovým konfeti kanónem.
+
+## Checklist: release runbook bez hazardu
+
+- Je změna označená podle dopadu: nízký, produktový, datový, provozní nebo zákaznický?
+- Má release jasného vlastníka go/no-go rozhodnutí?
+- Je popsáno, co se mění pro zákazníka a pro provoz?
+- Proběhla kontrola nových nebo změněných dat?
+- Existuje konkrétní rollback nebo mitigace pro nevratné změny?
+- Jsou připravené stop signály a sledovací okno po deployi?
+- Ví support nebo obchod, co říct zákazníkovi?
+- Neobsahují logy, exporty ani alerty zbytečné osobní údaje?
+- Je naplánovaný úklid release flagu, dočasného skriptu nebo migrační větve?
+
+## Mini šablona release runbooku
+
+```text
+# Release runbook: [název změny]
+
+Datum / okno:
+Vlastník go/no-go:
+Typ dopadu:
+Odkaz na issue / PR:
+
+Co se mění:
+Proč teď:
+Koho se změna týká:
+
+Datová změna:
+- nové údaje:
+- změněné účely:
+- dodavatelé / externí služby:
+- retence:
+
+Před deployem ověřit:
+-
+
+Stop signály:
+-
+
+Rollback / mitigace:
+-
+
+Komunikace pro support:
+Poznámka pro changelog:
+
+Sledovací okno po deployi:
+Datum úklidu dočasných prvků:
+```
+
+## Zdroje
+
+- [Google SRE Book — Managing Incidents](https://sre.google/sre-book/managing-incidents/) — důraz na připravený incident proces, jasné role, handoff a prioritu obnovy služby.
+- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučení k účelovému aplikačnímu logování, bezpečnostním událostem, ochraně logů a omezení citlivého obsahu.
+- [MDN — Retry-After header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Retry-After) — praktický HTTP mechanismus pro řízení opakování požadavků při dočasném omezení nebo nedostupnosti.
+- [European Commission — GDPR principles](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en) — principy minimalizace dat, omezení účelu, omezení uložení a odpovědnosti správce.
+
+
 # Pracovní log
+- 2026-10-08: Doplněna příloha „Release runbook bez pátečního hazardu a privacy překvapení“ s tříděním změn podle dopadu, go/no-go vlastníkem, datovým mini review, deploy oknem, rollback postupem, stop signály, komunikační poznámkou, CSV export příkladem, checklistem, šablonou a ověřenými zdroji Google SRE, OWASP, MDN a Evropské komise.
+
 - 2026-10-08: Doplněna příloha „Feature flagy bez tajných spínačů a segmentačního šmírování“ s rozdělením typů flagů, minimalizací targeting kontextu, oddělením autorizace od UX, rollout kartou, úklidem starých flagů, checklistem, šablonou a ověřenými zdroji OpenFeature, OWASP a Evropské komise.
 
 - 2026-10-08: Rozšířena příloha „Transakční e-maily bez doručovacího hazardu a šmírování“ o bezpečné odkazy, neprůhledné jednorázové tokeny, logování e-mailového workflow bez obsahu zpráv a B2B pozvánkový příklad.
