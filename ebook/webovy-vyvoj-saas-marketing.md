@@ -55883,8 +55883,198 @@ Datum další revize:
 - W3C WCAG 2.2, Success Criterion 3.3 Input Assistance — požadavky na srozumitelné chyby, popisky a pomoc ve formulářích: https://www.w3.org/TR/WCAG22/#input-assistance
 - OWASP Logging Cheat Sheet — doporučení, aby logy neobsahovaly citlivá data a aby měly jasný účel: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 
+# Příloha: API klíče a webhooky bez tajných bomb v URL
+
+API integrace jsou skvělé do chvíle, než se z nich stane špagetová síť tokenů, sdílených tajemství, starých webhooků a „dočasných“ klíčů, které přežijí tři redesigny, dva dodavatele a jednoho člověka, který už ve firmě dávno nepracuje. U malého SaaS to často nezačne velkým bezpečnostním projektem. Začne to jedním tlačítkem „Generate API key“ bez pravidel.
+
+Privacy-first přístup neznamená, že integrace nemáš dělat. Znamená, že každý klíč, podpis a webhook má mít vlastníka, účel, omezený rozsah, rotaci a čitelné logování. API klíč není jen technická věc. Je to oprávnění někoho nebo něčeho sahat na data.
+
+> Codyho komentář: API klíč bez popisku je jako náhradní klíč od kanceláře pod rohožkou. Funguje to, dokud se nezeptáš, kdo všechno ví, kde ta rohožka je.
+
+## Začni inventářem integrací
+
+Nejdřív si napiš seznam všech míst, kde systém komunikuje ven nebo přijímá volání zvenku. Nepiš jen „CRM“ nebo „fakturace“. Piš konkrétní směr toku dat.
+
+Praktické dělení:
+
+| Integrace | Směr | Typ tajemství | Data | Vlastník |
+| --- | --- | --- | --- | --- |
+| Export faktur do účetnictví | náš systém → účetní nástroj | API token | faktury, zákazník, částky | finance |
+| Webhook o platbě | platební brána → náš systém | podpisový secret | stav platby, ID objednávky | produkt |
+| CRM lead sync | web → CRM | serverový token | kontakt, firma, poznámka | obchod |
+| Interní automatizace | náš systém → náš systém | service token | technické ID, stav úlohy | engineering |
+
+Když u integrace neumíš vyplnit vlastníka, účel a data, nemá být považovaná za hotovou. Možná běží, ale provozně je to anonymní kabel ve zdi. A anonymní kabely mají zvyk zlobit přesně ve chvíli, kdy má tým málo času.
+
+## Klíč pojmenuj podle účelu, ne podle člověka
+
+API klíč „Ondra test“ je vtipný jen první týden. Za půl roku nikdo neví, jestli je produkční, dočasný, nebo historická dekorace. Lepší název popisuje systém, účel a prostředí.
+
+Použitelný formát:
+
+```text
+prod-accounting-invoices-readwrite
+prod-crm-leads-create
+staging-payment-webhook-verify
+internal-support-export-readonly
+```
+
+Ke každému klíči si veď minimální metadata:
+
+- účel a systém, který ho používá;
+- vlastník v týmu;
+- prostředí: produkce, staging, demo;
+- rozsah oprávnění;
+- datum vytvoření a plánovaná kontrola;
+- postup rotace a dopad vypnutí.
+
+Tahle evidence nemusí být složitý portál. Pro malý tým stačí tabulka nebo dokument, pokud je aktualizovaný při každé změně. Horší než žádná evidence je jen evidence, které všichni věří, ale nikdo ji neudržuje.
+
+## Tokeny nedávej do URL
+
+Citlivé hodnoty nepatří do query parametrů. URL se snadno dostane do logů, historie prohlížeče, refererů, screenshotů podpory, monitoringu a analytiky. Pokud potřebuješ autentizovat API volání, používej hlavičky nebo standardní mechanismus dané integrace.
+
+Špatně:
+
+```text
+https://api.example.com/export?token=secret123&workspace=acme
+```
+
+Lépe:
+
+```text
+Authorization: Bearer <token>
+```
+
+Ještě důležitější je oddělit autentizaci od autorizace. To, že požadavek přišel s platným klíčem, neznamená, že smí číst libovolný workspace, fakturu nebo uživatele. OWASP API Security Top 10 dlouhodobě zdůrazňuje rizika rozbité autentizace a objektové autorizace; v praxi to znamená kontrolovat oprávnění na konkrétní akci a objekt, ne jen na vstupu do API.
+
+## Oprávnění dělej úzká a čitelná
+
+Každý API klíč by měl mít nejmenší rozsah, který stačí pro práci. Ne proto, že auditní checklist miluje latinské názvy principů, ale proto, že kompromitovaný klíč s úzkým rozsahem napáchá menší škodu.
+
+Příklad rozsahů:
+
+| Scope | Co dovoluje | Co nedovoluje |
+| --- | --- | --- |
+| `leads:create` | vytvořit poptávku | číst všechny leady |
+| `invoices:read` | číst faktury | měnit bankovní údaje |
+| `exports:create` | spustit export | stahovat historické exporty jiných týmů |
+| `webhooks:receive` | přijmout podepsanou událost | volat interní administraci |
+
+Pokud nástroj neumí jemné scope, kompenzuj to architekturou: samostatný integrační účet, oddělené prostředí, proxy vrstva nebo menší datový payload. „Nástroj to neumí“ není omluvenka pro předání administrátorského klíče do každého skriptu.
+
+## Webhook musí být podepsaný a idempotentní
+
+Webhook není důvěryhodný jen proto, že dorazil na tajnou URL. Tajné URL časem unikají do logů, ticketů, dokumentace nebo screenshotů. Každý produkční webhook by měl ověřovat podpis, čas doručení a opakované zpracování.
+
+Minimální pravidla:
+
+- používej HTTPS;
+- ověř HMAC podpis nebo ekvivalent podle dokumentace poskytovatele;
+- kontroluj timestamp, aby starý požadavek nešel snadno přehrát;
+- ukládej ID události a zpracuj stejnou událost jen jednou;
+- odpovídej rychle a delší práci předej do fronty;
+- loguj technický výsledek, ne celý citlivý payload.
+
+Idempotence je nudné slovo pro velmi praktickou věc: když platební brána pošle událost dvakrát, zákazník nemá dostat dvě faktury, dva e-maily ani dva interní úkoly. Webhooky se opakují běžně — kvůli retry logice, timeoutům a síťovým výpadkům.
+
+## Rotace nesmí být heroický rituál
+
+Rotace tajemství má být rutina, ne krizový obřad s potem na čele. Pokud klíč nejde bezpečně vyměnit bez výpadku, není to jen provozní nepohodlí. Je to signál, že integrace nemá dostatečný lifecycle.
+
+Bezpečný postup rotace:
+
+1. Vytvoř nový klíč nebo signing secret.
+2. Nasaď aplikaci tak, aby dočasně přijímala starý i nový podpis, pokud to integrace vyžaduje.
+3. Přepni odesílající systém na nový klíč.
+4. Ověř reálné požadavky a logy.
+5. Zneplatni starý klíč.
+6. Aktualizuj evidenci a datum další kontroly.
+
+U webhooků je dobré mít krátké přechodové okno, ale ne nekonečnou toleranci. „Dočasně přijímáme dva secrety“ se bez data konce promění na „máme dvě místa, kudy může přijít problém“.
+
+## Loguj použití, ne tajemství
+
+Provozní log má pomoct odpovědět na otázky: kdo co volal, kdy, s jakým výsledkem a nad jakým typem objektu. Nemá ukládat bearer tokeny, podpisové secrety, celé JSON payloady s osobními údaji ani odpovědi externích služeb jen proto, že se to hodí při debugování.
+
+Dobrá logovací událost:
+
+```json
+{
+  "event": "api_key_used",
+  "integration": "accounting_export",
+  "workspace_id": "ws_123",
+  "scope": "invoices:read",
+  "result": "success",
+  "request_id": "req_456"
+}
+```
+
+Špatná logovací událost:
+
+```json
+{
+  "authorization": "Bearer secret123",
+  "payload": "celý obsah faktury, kontaktu a interní poznámky"
+}
+```
+
+Logy jsou taky data. Nastav jim retenci, přístupy a maskování stejně vážně jako databázi. Debug pohodlí nesmí vyhrát nad ochranou zákazníka.
+
+## Příklad: fakturační integrace pro malý SaaS
+
+Malý B2B SaaS posílá faktury do účetního nástroje a přijímá webhooky o zaplacení. Privacy-first verze nemusí být složitá:
+
+- integrační účet má jen práva k fakturám, ne administraci celé firmy;
+- API klíč je uložený v secret manageru nebo produkčních environment variables, ne v repozitáři;
+- webhook ověřuje podpis a odmítá události starší než nastavené okno;
+- každá událost má uložené externí ID, aby se nezpracovala dvakrát;
+- log obsahuje stav zpracování, request ID a interní ID faktury, ale ne celý payload;
+- jednou měsíčně se kontroluje seznam aktivních klíčů a nepoužívané integrace se vypnou.
+
+Výsledek: integrace pořád šetří čas, ale při úniku tokenu nebo chybě dodavatele není celý produkt otevřený jako stánek s limonádou bez obsluhy.
+
+## Checklist: API klíče a webhooky bez průšvihu
+
+- Každý klíč má vlastníka, účel, prostředí a datum kontroly.
+- Produkční a testovací klíče jsou oddělené.
+- Tokeny nejsou v URL, repozitáři, screenshotu ani běžných logách.
+- Scope je omezený na konkrétní práci integrace.
+- Webhooky ověřují podpis, timestamp a ID události.
+- Opakované doručení webhooku nezpůsobí duplicitní akci.
+- Rotace je popsaná a otestovaná dřív, než je potřeba v incidentu.
+- Nepoužívané klíče a webhook endpointy se pravidelně ruší.
+
+## Mini šablona integrační karty
+
+```text
+Název integrace:
+Směr toku dat:
+Vlastník v týmu:
+Produkční prostředí / staging:
+Typ tajemství: API key | OAuth client | webhook signing secret | jiné
+Kde je tajemství uložené:
+Povolené scope:
+Jaká data odcházejí:
+Jaká data přicházejí:
+Logujeme:
+Nelogujeme:
+Rotace krok za krokem:
+Datum poslední kontroly:
+Datum další kontroly:
+Postup vypnutí:
+```
+
+## Zdroje
+
+- OWASP API Security Top 10 2023 — Broken Object Level Authorization a Broken Authentication: https://api-security.owasp.org/editions/2023/en/0x11-t10/
+- OWASP Secrets Management Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- OWASP Webhook Security Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Webhook_Security_Cheat_Sheet.html
+- European Commission — GDPR principles, data minimisation and storage limitation: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
 # Pracovní log
 
+- 2026-10-08: Doplněna příloha „API klíče a webhooky bez tajných bomb v URL“ s inventářem integrací, pravidly pro scope, podpisy webhooků, rotaci, logování, checklistem, šablonou integrační karty a ověřenými zdroji OWASP a Evropské komise.
 - 2026-10-08: Doplněna příloha „Demo formulář bez vysavače dat a kvalifikačního výslechu“ s návrhem minimálních polí, postupnou kvalifikací leadu, mikrocopy, technickými pravidly přístupnosti, privacy-first tokem dat po odeslání, retenční rutinou, praktickým B2B příkladem, checklistem, formulářovou kartou a ověřenými zdroji GDPR, MDN, WCAG a OWASP.
 
 - 2026-10-08: Doplněna příloha „Audit log a role bez interního šmírování“ s oddělením auditu, analytiky a debug logů, návrhem stabilních událostí, úzkých metadat, rolí podle práce, serverové autorizace, zákaznického auditního pohledu, retence, B2B příkladem, checklistem, audit log kartou a ověřenými zdroji OWASP, NIST a GDPR.
