@@ -56635,7 +56635,198 @@ Vlastník procesu:
 
 
 
+# Příloha: Rate limiting bez trestání dobrých zákazníků a sběru digitálních stop
+
+Rate limiting není jen technická brzda proti útoku. V dobře navrženém SaaS je to produktové pravidlo: chrání dostupnost služby, snižuje náklady na provoz a brání tomu, aby jeden rozbitý skript nebo agresivní integrace sežraly kapacitu všem ostatním. Špatně navržený limit ale umí udělat přesný opak — potrestá platící zákazníky, rozbije onboarding a vytvoří hromadu zbytečných logů, které vypadají jako bezpečnost, ale voní jako datový sklad po půlnoci.
+
+Privacy-first přístup říká: omezuj chování podle účelu, rizika a dopadu, ne podle touhy vytvořit co nejdetailnější profil uživatele. Cílem není vědět o člověku všechno. Cílem je poznat, že konkrétní akce ohrožuje službu, účet nebo ostatní zákazníky.
+
+> Codyho komentář: Dobrý rate limit je jako dveřník v klubu. Neptá se na rodokmen, oblíbený prohlížeč a barvu ponožek. Jen hlídá, aby se dovnitř necpalo padesát robotů najednou.
+
+## Nejdřív rozděl typy limitů
+
+Nezačínej číslem „100 požadavků za minutu“. Začni tím, co vlastně chráníš.
+
+Praktické vrstvy:
+
+- **Dostupnost služby:** ochrana API, vyhledávání, exportů, importů, webhooků a drahých výpočtů.
+- **Bezpečnost účtu:** omezení přihlášení, resetu hesla, MFA pokusů, pozvánek a změn e-mailu.
+- **Náklady:** ochrana AI volání, renderů, PDF exportů, e-mailů, SMS a externích API.
+- **Férovost mezi tenanty:** aby jeden workspace nesežral frontu, databázi nebo rate limit dodavatele.
+- **Abuse prevence:** spam, scraping, credential stuffing, enumerace účtů a hromadné pokusy.
+
+Každá vrstva potřebuje jiné pravidlo, jinou chybovou hlášku a jiný způsob eskalace. Limit pro import 50 000 řádků se nemá chovat stejně jako limit pro chybné přihlášení.
+
+## Limituj podle práce, ne podle špionáže
+
+Nejčistší identifikátor pro SaaS bývá kombinace účelu a interního kontextu:
+
+- `tenant_id` pro férové rozdělení kapacity,
+- `user_id` pro citlivé akce v účtu,
+- `api_key_id` pro integrace,
+- `job_type` pro fronty a drahé úlohy,
+- `route_group` pro technické endpointy,
+- hashovaný nebo zkrácený síťový identifikátor jen tam, kde jiný kontext ještě nemáš.
+
+Vyhni se tomu, aby se z rate limitingu stal nenápadný fingerprinting. Nepotřebuješ kombinovat IP adresu, user agent, rozlišení obrazovky, jazyk, timezone a náladu procesoru jen proto, abys poznal přetížený endpoint. Čím víc identifikátorů sbíráš, tím víc musíš vysvětlovat, chránit, mazat a obhajovat.
+
+Praktické pravidlo: pokud jde o přihlášeného uživatele nebo API klíč, limituj primárně podle interního účtu, workspace a klíče. Pokud jde o anonymní provoz, drž síťový signál úzký, krátkodobý a používej ho jen pro ochranu dostupnosti.
+
+## Chybová odpověď má pomoci, ne prozradit obranu
+
+Když limit spadne, uživatel potřebuje vědět, co má dělat dál. Útočník ale nemá dostat přesnou mapu ochrany.
+
+Dobrý vzor pro API:
+
+```http
+HTTP/1.1 429 Too Many Requests
+Retry-After: 60
+Content-Type: application/json
+
+{
+  "error": "rate_limited",
+  "message": "Požadavek je dočasně omezený. Zkuste to prosím za chvíli znovu.",
+  "retry_after_seconds": 60,
+  "request_id": "req_..."
+}
+```
+
+Co do odpovědi nedávat:
+
+- přesný interní název pravidla,
+- seznam dalších detekčních signálů,
+- informaci, jestli účet existuje,
+- citlivé identifikátory zákazníka,
+- doporučení typu „změň IP adresu a zkus znovu“ — ano, i takové perly svět viděl.
+
+Pro webové UI přidej lidskou větu: „Dnes už jsme zpracovali hodně požadavků pro tento workspace. Další import půjde spustit za 12 minut.“ U bezpečnostních toků buď opatrnější: „Z bezpečnostních důvodů to teď nejde zkusit znovu. Počkejte chvíli nebo použijte obnovu přístupu.“
+
+## Citlivé akce chtějí stupňování
+
+Ne každý limit musí být tvrdá zeď. U produktových akcí často stačí fronta, zpomalení nebo férové řazení. U bezpečnostních akcí je naopak lepší stupňovat ochranu.
+
+Model:
+
+1. **Měkké varování:** UI vysvětlí, že se blíží limit.
+2. **Dočasné zpomalení:** další požadavek počká ve frontě.
+3. **Krátký cooldown:** uživatel dostane jasný čas dalšího pokusu.
+4. **Step-up ověření:** u citlivé akce systém vyžádá dodatečné ověření.
+5. **Support nebo admin eskalace:** pro legitimní zákazníky existuje cesta ven.
+
+U přihlášení, resetu hesla a MFA se drž principu „bránit hádání, ne zamknout člověka navždy“. NIST u digitální identity popisuje throttling jako ochranu proti opakovaným neúspěšným pokusům; v praxi to znamená limitovat pokusy a mít bezpečný recovery proces, ne poslat zákazníka do supportového labyrintu bez Ariadniny nitě.
+
+## Tenant fairness je produktová funkce
+
+V B2B SaaS nestačí globální limit. Potřebuješ chránit sdílenou infrastrukturu i férovost mezi zákazníky.
+
+Příklad:
+
+- malý workspace má nižší souběžnost importů,
+- enterprise workspace má vyšší kapacitu, ale pořád izolovanou frontu,
+- drahé exporty běží jako job, ne synchronně v requestu,
+- API klíče mají samostatné limity podle integrace,
+- webhook retry má exponential backoff a dead-letter frontu,
+- interní admin akce neobchází limity bez auditního důvodu.
+
+Tohle není trestání menších zákazníků. Je to férové řízení kapacity. Pokud někdo potřebuje víc, má existovat transparentní cesta: vyšší tarif, dočasné navýšení, plánovaný import nebo dedikovaný limit pro konkrétní integraci.
+
+## Loguj rozhodnutí, ne celý digitální život
+
+Rate limiting bez logů je slepý. Rate limiting s moc detailními logy je datový vysavač v bezpečnostní helmě.
+
+Užitečná auditní pole:
+
+- čas,
+- `request_id`,
+- `tenant_id` nebo interní workspace ID,
+- `user_id` nebo `api_key_id`, pokud existuje,
+- skupina endpointu,
+- typ limitu,
+- výsledek: povoleno, zpomaleno, odmítnuto,
+- doporučený cooldown,
+- agregovaný počet v okně.
+
+Co nelogovat:
+
+- celé payloady,
+- hesla, tokeny, session hodnoty,
+- obsah zpráv, dokumentů nebo faktur,
+- celé IP adresy déle, než je nutné pro ochranu,
+- user agent jako trvalý profilovací identifikátor,
+- detailní pravidla detekce do zákaznicky viditelných logů.
+
+Pro provozní dashboard stačí agregace: kolik 429 odpovědí vzniklo, na kterých skupinách endpointů, u kterých tenantů a jestli to koreluje s incidentem, release nebo legitimní kampaní zákazníka.
+
+## Praktický příklad: AI export v účetním SaaS
+
+SaaS přidá AI funkci, která ze zákaznických dat generuje měsíční přehled pro účetní tým. Jeden zákazník spustí omylem export pro všechny historické projekty a fronta začne růst.
+
+Špatný návrh:
+
+- každé kliknutí rovnou spouští drahé AI volání,
+- limit je jen globální podle IP,
+- chyba říká „Too many requests“ bez dalšího vysvětlení,
+- support vidí celé vstupní dokumenty v logu,
+- legitimní zákazník nemá jak požádat o navýšení.
+
+Lepší návrh:
+
+- export je job s frontou podle `tenant_id`,
+- každý workspace má denní a souběžný limit podle tarifu,
+- UI ukáže zbývající kapacitu a další možný čas spuštění,
+- velký jednorázový export lze naplánovat přes admina,
+- log obsahuje typ jobu, objem položek a výsledek, ne obsah dokumentů,
+- support vidí diagnostiku fronty, ne citlivá účetní data.
+
+Výsledek: zákazník chápe pravidla, služba neshoří a tým nepotřebuje budovat sledovací aparát jen proto, aby ubrzdil jeden rozjetý export.
+
+## Checklist: rate limiting bez šmírovacího aparátu
+
+- Má každý limit jasně pojmenovaný chráněný účel?
+- Rozlišujeme dostupnost, bezpečnost účtu, náklady, tenant fairness a abuse?
+- Limitujeme přihlášené akce primárně podle interních ID, ne podle fingerprintingu?
+- U anonymního provozu držíme síťové signály krátkodobé a minimalizované?
+- Mají API odpovědi `429`, `Retry-After` a čitelný `request_id`?
+- Neprozrazují chybové hlášky interní detekční pravidla ani existenci účtu?
+- Existuje eskalace pro legitimní zákazníky s vyšší kapacitou?
+- Drahé operace běží přes frontu, souběžnost a plánování?
+- Webhooky a integrace mají vlastní limity podle klíče nebo integrace?
+- Logy obsahují rozhodnutí limitu, ne payloady a tajemství?
+- Retence technických signálů odpovídá účelu ochrany?
+- Kontrolujeme pravidelně, jestli limity netrestají dobré zákazníky víc než útočníky?
+
+## Mini šablona rate limit karty
+
+```text
+# Rate limit karta: [endpoint / job / akce]
+
+Chráněný účel:
+Typ rizika: dostupnost / účet / náklady / fairness / abuse
+Identifikátor limitu:
+Okno a limit:
+Souběžnost:
+Fallback nebo fronta:
+Chybová odpověď pro API:
+Text pro UI:
+Eskalace pro zákazníka:
+Auditní pole:
+Zakázaná logovaná data:
+Retence signálů:
+Vlastník:
+Datum revize:
+```
+
+## Zdroje
+
+- OWASP API Security Top 10 2023 — API4: Unrestricted Resource Consumption, riziko neomezené spotřeby CPU, paměti, storage, e-mailů, SMS nebo externích služeb: https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/
+- OWASP Authentication Cheat Sheet — doporučení k ochraně přihlašování, chybovým zprávám, throttlingu a prevenci enumerace účtů: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+- NIST SP 800-63B — Digital Identity Guidelines, část k autentizátorům a omezení opakovaných neúspěšných pokusů: https://pages.nist.gov/800-63-4/sp800-63b.html
+- European Commission — GDPR principles, zejména data minimisation, storage limitation a integrity and confidentiality: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+
+
 # Pracovní log
+
+- 2026-10-08: Doplněna příloha „Rate limiting bez trestání dobrých zákazníků a sběru digitálních stop“ s rozdělením limitů podle účelu, privacy-first identifikátory, chybovými odpověďmi, tenant fairness, logováním bez payloadů, AI export příkladem, checklistem, rate limit kartou a ověřenými zdroji OWASP, NIST a Evropské komise.
 
 - 2026-10-08: Rozšířena příloha „Přihlášení, relace a zařízení bez digitálního stalkingu“ o MFA podle rizika, obnovu přístupu, recovery runbook, doplněné checklisty, session kartu a ověřený zdroj OWASP Authentication Cheat Sheet.
 
