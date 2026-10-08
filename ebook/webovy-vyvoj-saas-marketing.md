@@ -56390,7 +56390,212 @@ Datum další revize:
 ```
 
 
+# Příloha: Support impersonace bez interního šmírování
+
+Support občas potřebuje vidět problém očima zákazníka. To je legitimní. Průšvih začíná ve chvíli, kdy se z „pomoz mi reprodukovat chybu“ stane univerzální tlačítko „přepni se na kohokoli a projdi si jeho účet“. To není podpora, to je interní reality show s databází v hlavní roli.
+
+Impersonace je silná provozní schopnost: člověk z týmu může dočasně jednat v kontextu zákazníka nebo alespoň zobrazit jeho prostředí. Proto ji navrhuj jako citlivý administrátorský nástroj, ne jako pohodlnou zkratku pro každého, kdo má ve Slacku roli „řeším věci“.
+
+> Codyho komentář: Dobrá support impersonace má zákazníkovi pomoct rychleji, ale zaměstnanci nedat pocit, že cizí workspace je interní testovací hřiště. Důvěra není permission flag, důvěra je produktová vlastnost.
+
+## Nejdřív rozliš režimy přístupu
+
+Nepotřebuješ jeden magický režim. Potřebuješ vrstvy podle rizika.
+
+| Režim | Kdy stačí | Co nesmí umět |
+| --- | --- | --- |
+| Diagnostický náhled | Support ověřuje nastavení, stav integrace nebo chybný krok. | Měnit data, spouštět akce, zobrazovat citlivý obsah bez důvodu. |
+| Reprodukční režim | Tým potřebuje projít stejnou UI cestu jako zákazník. | Obcházet autorizaci, exportovat data, potvrzovat citlivé operace. |
+| Dočasná impersonace | Kritická chyba blokuje zákazníka a zákazník nebo správce dává souhlas. | Být trvalá, anonymní nebo bez auditní stopy. |
+| Break-glass přístup | Incident nebo bezpečnostní zásah, kde čekání zvyšuje škodu. | Sloužit k běžné podpoře nebo zvědavosti. |
+
+Začni nejméně silným režimem. Většina podpory nepotřebuje „být zákazníkem“. Potřebuje vidět stav systému, konfigurační chybu, poslední synchronizaci, verzi tarifu, ID události nebo výsledek oprávnění. To jde často udělat bez otevření obsahu zákaznických dat.
+
+## Souhlas a důvod patří do workflow
+
+Impersonace má mít vždy důvod, časový rámec a vlastníka. Pokud ji jde zapnout jedním klikem bez vysvětlení, dřív nebo později ji někdo použije pohodlněji, než je zdrávo.
+
+Praktický postup:
+
+1. Support vybere zákazníka nebo workspace.
+2. Systém vyžádá konkrétní důvod z předem daných kategorií.
+3. U citlivějších režimů se vyžádá potvrzení druhým člověkem nebo zákaznickým adminem.
+4. Přístup je časově omezený, například na 15 až 60 minut podle rizika.
+5. Po skončení vznikne auditní záznam a ideálně i zákaznická notifikace.
+
+Důvod nemá být volné textové pole plné interních poznámek. Použij kategorii a krátký popis bez citlivých dat:
+
+```text
+Kategorie: Reprodukce nahlášené chyby
+Ticket: SUP-1842
+Rozsah: workspace nastavení fakturační integrace
+Doba: 30 minut
+Schválil: zákaznický admin / interní senior support
+```
+
+Do důvodu nepiš obsah e-mailů, zdravotní údaje, finanční detaily ani části zákaznických dokumentů. Audit má vysvětlit, proč se přístup stal, ne archivovat soukromí ještě jednou.
+
+## Ne každý člen týmu potřebuje stejné oči
+
+Support role se často nastaví jako jedna velká role, protože je to rychlé. Pak ale junior support vidí totéž co bezpečnostní administrátor a účetní integrace se tváří jako veřejná nástěnka. Ne, díky, tohle nechme hororům o interních portálech.
+
+Rozděl oprávnění podle práce:
+
+- Support L1 vidí stav účtu, tarif, poslední chyby, bezpečné metadata a může požádat o vyšší režim.
+- Support L2 může spustit reprodukční režim pro omezenou část produktu.
+- Technický support může vidět diagnostiku integrací, ale ne obsah zákaznických dokumentů.
+- Billing support vidí fakturační stav, ne produktový obsah workspace.
+- Security/admin role schvaluje break-glass a pravidelně kontroluje audit.
+
+Důležité pravidlo: impersonace nesmí být způsob, jak obejít běžný autorizační model. Když zákazníkova role něco nesmí, support v jeho kontextu to také nemá dělat automaticky. Pokud interní tým potřebuje administrátorský zásah, má to být samostatná akce s vlastním oprávněním, důvodem a logem.
+
+## UI musí jasně křičet, že nejsi doma
+
+Když se člověk přepne do cizího kontextu, UI nesmí vypadat stejně jako běžné používání produktu. Jinak stačí únava, dvě záložky a někdo udělá změnu ve workspace zákazníka místo interního testu.
+
+Bezpečné prvky:
+
+- výrazný banner „Jsi v režimu podpory pro workspace X“,
+- odpočet platnosti přístupu,
+- tlačítko pro okamžité ukončení režimu,
+- blokace nevratných akcí nebo jejich dodatečné potvrzení,
+- jasné označení, zda akce proběhne jako uživatel, nebo jako interní support,
+- zákaz exportů a hromadných operací, pokud nejsou výslovně povolené.
+
+Dobrá mikrocopy:
+
+```text
+Jsi v režimu podpory. Vidíš omezený pohled pro reprodukci ticketu SUP-1842. Neprováděj změny, které nejsou nutné k vyřešení tohoto ticketu.
+```
+
+Špatná mikrocopy:
+
+```text
+Logged in as customer.
+```
+
+Druhá varianta je krátká, ale neříká riziko, účel ani hranice. Krátké není vždycky lepší. Někdy je krátké jen levnější cesta k incidentu.
+
+## Audit log má být použitelný, ne šmírovací
+
+Každé použití impersonace loguj jako bezpečnostně významnou událost. Ne proto, aby sis mohl číst, co support viděl, ale aby šlo ověřit oprávněnost přístupu, dopad a případné zneužití.
+
+Minimální auditní pole:
+
+- kdo režim spustil,
+- pro jaký workspace nebo účet,
+- jaký režim použil,
+- kdy přístup začal a skončil,
+- jaký ticket, incident nebo schválení ho odůvodňuje,
+- jaké typy akcí provedl,
+- zda došlo ke změně dat,
+- kdo přístup schválil, pokud bylo schválení potřeba.
+
+Neloguji:
+
+- celé zákaznické dokumenty,
+- obsah zpráv,
+- tajné tokeny,
+- platební údaje,
+- osobní údaje, které nejsou nutné pro audit.
+
+Audit log má mít vlastní retenci, omezený přístup a pravidelnou kontrolu. Pokud ho může číst celý tým, jen jsi přesunul problém z impersonace do druhého okna.
+
+## Zákazník má vědět, co se může stát
+
+Do veřejné dokumentace nebo bezpečnostní stránky napiš lidsky, kdy a jak může podpora přistupovat k zákaznickému prostředí. Nemusí to být právnická báseň v latině. Stačí jasně říct:
+
+- kdy support přístup používáte,
+- kdo ho smí schválit,
+- jestli je zákazník notifikován,
+- jak dlouho se drží auditní záznamy,
+- jak zákazník může požádat o přísnější režim.
+
+Pro větší B2B zákazníky nabídni nastavení:
+
+- úplně vypnutá impersonace,
+- impersonace pouze se souhlasem workspace admina,
+- povinná notifikace bezpečnostnímu kontaktu,
+- vlastní retenční požadavky pro auditní log,
+- seznam povolených support rolí.
+
+Tohle je přesně typ detailu, který zvedá důvěru při nákupním procesu. Ne proto, že zákazník miluje administrativu. Protože vidí, že interní přístup neřešíš stylem „věř nám, jsme hodní“.
+
+## Break-glass není běžná klikačka
+
+Break-glass režim je nouzový přístup pro situace, kdy hrozí výrazná škoda: incident, ztráta dostupnosti, bezpečnostní zásah nebo urgentní obnova služby. Má existovat, ale má bolet dost na to, aby se nepoužíval z pohodlnosti.
+
+Pravidla:
+
+- vyžaduje silnější ověření uživatele,
+- automaticky informuje vybraný interní kanál,
+- má nejkratší rozumnou dobu platnosti,
+- po použití vyžaduje krátké review,
+- je součástí pravidelného bezpečnostního auditu.
+
+Pokud break-glass používáš každý týden, není to break-glass. Je to rozbitý proces s dramatickým názvem.
+
+## Praktický příklad: support řeší nefunkční integraci
+
+Zákazník píše, že se faktury nepřenášejí do účetního systému. Špatný postup: support se přepne do účtu, otevře faktury, prokliká zákaznická data a pošle screenshot do interního chatu.
+
+Lepší postup:
+
+1. Support otevře diagnostický náhled integrace.
+2. Vidí poslední stav synchronizace, anonymizovaný kód chyby a čas posledního pokusu.
+3. Systém ukáže, že chybí oprávnění k účetnímu API.
+4. Support pošle zákazníkovi přesný návod na obnovu propojení.
+5. Pokud je potřeba reprodukce, požádá workspace admina o 30minutový reprodukční režim jen pro nastavení integrace.
+6. Audit log uloží důvod, ticket, čas a typ provedených akcí, ne obsah faktur.
+
+Výsledek: problém se řeší rychle, ale zákaznická data se nestávají support materiálem.
+
+## Checklist: support impersonace bez interního šmírování
+
+- Máme oddělený diagnostický náhled, reprodukční režim, impersonaci a break-glass?
+- Je výchozí režim read-only a datově minimalizovaný?
+- Vyžaduje citlivější přístup důvod, ticket a časový limit?
+- Existuje schvalování pro vyšší riziko nebo zákaznický souhlas?
+- Ukazuje UI výrazný banner, účel a zbývající čas režimu?
+- Jsou blokované exporty, hromadné akce a nevratné změny bez zvláštního oprávnění?
+- Logujeme kdo, kdy, proč, na jak dlouho a s jakým dopadem?
+- Nelogujeme zákaznický obsah, tokeny ani citlivá data navíc?
+- Vidí zákazník v dokumentaci, jak support přístup funguje?
+- Kontrolujeme pravidelně použití impersonace a privilege creep?
+- Má break-glass režim samostatné review po použití?
+
+## Mini šablona support access karty
+
+```text
+# Support access karta: [produkt / workspace typ]
+
+Účel přístupu:
+Povolené režimy: diagnostický náhled / reprodukce / impersonace / break-glass
+Kdo může žádat:
+Kdo schvaluje:
+Maximální délka přístupu:
+Výchozí rozsah dat:
+Zakázané akce:
+Vyžaduje zákaznický souhlas: ano / ne / podle tarifu
+Notifikace zákazníkovi:
+Auditní pole:
+Retence auditních záznamů:
+Break-glass postup:
+Datum poslední revize:
+Vlastník procesu:
+```
+
+## Zdroje
+
+- OWASP Authorization Cheat Sheet — least privilege, deny by default, kontrola oprávnění u každého požadavku a logování autorizačních událostí: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP Logging Cheat Sheet — návrh bezpečnostně užitečného logování bez ukládání citlivých dat navíc: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- European Commission — GDPR principles, zejména data minimisation, storage limitation, integrity and confidentiality: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- NIST SP 800-53 Rev. 5 — bezpečnostní a privacy kontroly včetně least privilege a auditu: https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final
+
+
 # Pracovní log
+
+- 2026-10-08: Doplněna příloha „Support impersonace bez interního šmírování“ s oddělením diagnostického náhledu, reprodukčního režimu, dočasné impersonace a break-glass přístupu, pravidly pro souhlas, role, UI varování, auditní logy, zákaznickou transparentnost, praktickým příkladem, checklistem, support access kartou a ověřenými zdroji OWASP, Evropské komise a NIST.
 
 - 2026-10-08: Doplněna příloha „Prázdné stavy a chybové obrazovky bez podpůrného pekla“ s rozhodovací mapou stavů, privacy-first pravidly pro chyby, oprávnění, limity, fallbacky, praktickým onboarding příkladem, checklistem a vyplnitelnou stavovou kartou.
 
