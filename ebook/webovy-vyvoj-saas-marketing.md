@@ -36997,7 +36997,7 @@ Rozhodnutí:
 ## Zdroje
 
 - EUR-Lex: [Regulation (EU) 2016/679 — General Data Protection Regulation](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679)
-- European Commission: [What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en)
+- European Commission: [What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
 - CNIL: [Sheet n°16: Use analytics on your websites and applications](https://www.cnil.fr/fr/node/677)
 - European Data Protection Board: [Guidelines 8/2020 on the targeting of social media users](https://www.edpb.europa.eu/documents/guideline/guidelines-82020-on-the-targeting-of-social-media-users_en)
 
@@ -42686,7 +42686,7 @@ Další krok:
 
 ## Zdroje
 
-- European Commission: What data can we process and under which conditions? — https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- European Commission: What data can we process and under which conditions? — https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 - EDPB: Basic principles — https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en
 - ENISA: Data Protection Engineering — https://www.enisa.europa.eu/publications/data-protection-engineering
 - NIST: Privacy Framework — https://www.nist.gov/privacy-framework/privacy-framework
@@ -43957,7 +43957,7 @@ Bezpečný default: po obnově se produktový obsah vrátí, ale odchozí integr
 
 ## Zdroje
 
-- Evropská komise shrnuje princip omezení uložení: osobní data se mají držet jen po dobu nutnou pro účel, pro který byla shromážděna: https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- Evropská komise shrnuje princip omezení uložení: osobní data se mají držet jen po dobu nutnou pro účel, pro který byla shromážděna: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 - EUR-Lex text GDPR, článek 5(1)(e), definuje princip „storage limitation“: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
 - EUR-Lex text GDPR, článek 17, popisuje právo na výmaz a související důvody: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
 - OWASP ASVS V14 Data Protection doporučuje mít kontrolu nad citlivými daty včetně retence, logování a přístupů podle ochranné úrovně dat: https://github.com/OWASP/ASVS/blob/master/5.0/en/0x23-V14-Data-Protection.md
@@ -44328,7 +44328,7 @@ Kontroluj tuhle tabulku při každé větší změně frontendu. Když přibude 
 - MDN dokumentace k IndexedDB popisuje nízkoúrovňové klientské úložiště pro větší objemy strukturovaných dat: https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API
 - MDN dokumentace k Cache API a Service Workers ukazuje, jak aplikace ukládají request/response objekty pro offline a výkonové scénáře: https://developer.mozilla.org/en-US/docs/Web/API/Cache a https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API
 - OWASP HTML5 Security Cheat Sheet varuje před ukládáním citlivých informací do local storage a připomíná, že data jsou dostupná skriptům v rámci originu: https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html
-- Evropská komise shrnuje principy GDPR včetně minimalizace dat a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/reform/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en
+- Evropská komise shrnuje principy GDPR včetně minimalizace dat a omezení uložení: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 
 Client-side storage je skvělý sluha a mizerný archivář. Používej ho pro rychlost, plynulost a odolnost UX. Nepoužívej ho jako tajnou databázi, protože „server by byl práce navíc“. V privacy-first SaaS platí jednoduché pravidlo: co nemusí být v prohlížeči, nemá být v prohlížeči. A co tam být musí, má mít účel, expiraci a úklidovou četu.
 
@@ -57937,7 +57937,199 @@ Datum dalšího testu:
 - OWASP Cheat Sheet Series — Logging Cheat Sheet, doporučení k tomu, co logovat, co nelogovat a jak chránit logy při provozních událostech: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - European Commission — GDPR principles pro minimalizaci dat, omezení účelu, omezení uložení a odpovědnost: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
 
+
+# Příloha: Feature flagy bez tajných spínačů a segmentačního šmírování
+
+Feature flag je skvělý sluha a trochu děsivý pán. Umí pustit novou funkci jen části zákazníků, rychle vypnout rizikovou změnu a oddělit nasazení kódu od obchodního rozhodnutí. Umí ale taky vytvořit temný sklep plný starých podmínek, výjimek pro konkrétní účty a segmentace podle dat, která produkt vůbec nepotřebuje.
+
+Privacy-first přístup neříká „nepoužívej feature flagy“. Říká: používej je jako provozní nástroj, ne jako tichou analytickou databázi o lidech.
+
+## Nejdřív rozděl typy flagů
+
+Ne každý flag má stejný účel. Když je házíš do jednoho seznamu, začne se míchat release management, experimenty, bezpečnostní pojistky a obchodní výjimky. Výsledek? Nikdo neví, co se může smazat a co drží produkci pohromadě izolepou.
+
+Praktické rozdělení:
+
+| Typ flagu | K čemu slouží | Typická životnost | Riziko |
+| --- | --- | --- | --- |
+| Release flag | postupné zapnutí nové funkce | dny až týdny | zapomenutý starý kód |
+| Kill switch | rychlé vypnutí rizikové části | dlouhodobě, ale testovaný | falešný pocit bezpečí |
+| Permission flag | zapnutí schopnosti pro roli nebo plán | dlouhodobě | obcházení autorizačního modelu |
+| Experiment flag | porovnání variant UX nebo textu | krátce, s vyhodnocením | sběr dat navíc |
+| Ops flag | nouzový provozní režim | krátce při incidentu | tiché degradace služby |
+
+Codyho komentář: Pokud má flag název `newDashboard2FinalMaybe`, není to release management. Je to archeologie v přímém přenosu.
+
+## Targeting dělej z minimálního kontextu
+
+Moderní flag systémy pracují s vyhodnocovacím kontextem: identita uživatele, tenant, tarif, země, role, vlastnosti zařízení nebo jiné atributy. OpenFeature například popisuje evaluation context jako data používaná při vyhodnocování flagu a podporuje vendor-neutrální API pro flagy. To je užitečné, ale také svádí k tomu přidat „ještě jeden atribut, kdyby se hodil“.
+
+Privacy-first pravidlo zní: flag smí znát jen atributy, které jsou nutné pro dané rozhodnutí.
+
+Příklady dobrého kontextu:
+
+- `tenant_id` pro konzistentní rollout na úrovni zákazníka,
+- `plan` pro funkci dostupnou jen v určitém tarifu,
+- `role` pro interní administrátorské rozhraní,
+- `region` jen pokud opravdu mění právní nebo provozní chování,
+- stabilní pseudonymní klíč pro procentuální rollout.
+
+Příklady špatného kontextu:
+
+- celé e-mailové adresy, pokud stačí interní ID,
+- IP adresa pro běžné produktové rozlišení,
+- seznam navštívených stránek pro zapnutí funkce,
+- marketingový zdroj poptávky pro změnu chování aplikace,
+- libovolná pole z CRM „protože už je máme“.
+
+Když si nejsi jistý, napiš si k flagu větu: „Tento atribut potřebujeme, protože…“ Pokud věta končí slovem „možná“, atribut ven.
+
+## Flag nesmí nahrazovat autorizaci
+
+Feature flag může skrýt tlačítko. Nesmí být jediným důvodem, proč server dovolí akci. To je rozdíl mezi UX a bezpečností.
+
+Špatný model:
+
+```text
+Když má uživatel zapnutý flag export_v2, frontend ukáže tlačítko a API export vytvoří.
+```
+
+Lepší model:
+
+```text
+Frontend zobrazí tlačítko podle flagu, ale API samostatně ověří roli, tarif, tenant, stav účtu a limit exportů.
+```
+
+Feature flag říká „máme tuto schopnost pustit do světa“. Autorizační vrstva říká „tento konkrétní člověk smí udělat tuto konkrétní akci nad těmito daty“. Tyhle dvě věci se mají potkat, ne sloučit do jednoho magického ifu.
+
+## Rollout plán napiš před kliknutím na „zapnout“
+
+Každý významnější flag má mít malou rollout kartu. Ne kvůli byrokracii, ale proto, že v momentě problému nikdo nechce lovit kontext v chatu mezi memy a screenshotem grafu.
+
+Rollout karta má obsahovat:
+
+- účel flagu a odkaz na issue nebo rozhodnutí,
+- vlastníka, který smí měnit procenta a segmenty,
+- první segment nebo tenanty,
+- metriky úspěchu a signály pro stop,
+- datum kontroly a plán odstranění flagu,
+- rollback postup včetně dopadu na uživatele,
+- datové atributy používané pro targeting.
+
+Procentuální rollout dělej raději po tenantech nebo stabilním pseudonymním klíči než po náhodném requestu. Uživatel nemá při každém načtení zjišťovat, jestli dnes žije v nové realitě.
+
+## Experimenty drž krátké a férové
+
+A/B test může být užitečný, když testuje jasnou hypotézu: kratší formulář, srozumitelnější CTA, nový onboarding krok. Není v pořádku použít experiment jako omluvu pro nekonečné profilování.
+
+Dobrá experimentální karta odpovídá na otázky:
+
+- Jaká je hypotéza?
+- Jaké varianty přesně měníme?
+- Jaká data měříme a proč jsou nutná?
+- Jak dlouho experiment poběží?
+- Kdo rozhodne o výsledku?
+- Co se smaže nebo anonymizuje po vyhodnocení?
+
+Pokud experiment vyžaduje osobní data, která běžná produktová analytika nepotřebuje, je to červená kontrolka. GDPR principy minimalizace a omezení uložení nejsou ozdoba do patičky; mají se propsat i do toho, jak navrhuješ testy.
+
+## Loguj změny, ne soukromý život
+
+U flagů potřebuješ audit. Kdo co změnil, kdy, proč a s jakým dopadem. Nepotřebuješ ale logovat celý evaluation context každého uživatele.
+
+Loguj:
+
+- změnu konfigurace flagu,
+- uživatele nebo službu, která změnu provedla,
+- důvod změny nebo odkaz na tiket,
+- původní a novou hodnotu pravidla,
+- prostředí, kterého se změna týká,
+- počet nebo segment zasažených tenantů na agregované úrovni.
+
+Neloguj:
+
+- access tokeny, session ID a tajné klíče,
+- celé payloady requestů,
+- osobní údaje nepotřebné pro audit,
+- e-mailové adresy v exportech flag evaluací,
+- query stringy s citlivými parametry.
+
+OWASP u logování opakovaně zdůrazňuje, že citlivé údaje, tokeny a hesla do logů nepatří a že logy mají být navržené konzistentně a bezpečně. U feature flagů to platí dvojnásob: audit má vysvětlit změnu, ne vytvořit další databázi osobních stop.
+
+## Uklízej flagy jako součást releasu
+
+Největší problém feature flagů není zapnutí. Je to zapomenutí. Starý flag dělá kód hůř čitelný, testy složitější a incidenty záludnější, protože nikdo neví, která větev je vlastně realita.
+
+Pro každý release flag nastav:
+
+- datum expirace,
+- podmínku pro odstranění,
+- vlastníka úklidu,
+- test, který po odstranění ověří hlavní cestu,
+- poznámku, jestli se má smazat i konfigurace v administračním nástroji.
+
+Jednou týdně si projdi flagy starší než 30 dní. Ne každý musí zmizet, ale každý musí obhájit existenci. Kill switch může zůstat, release flag ne. Ten má po dokončení rollout procesu zmizet jako lešení po opravě fasády.
+
+## Praktický příklad: nový export faktur
+
+Malý B2B SaaS přidává nový export faktur do účetního systému. Funkce sahá na finanční data, běží jako background job a může vygenerovat soubor se jmény zákazníků.
+
+Bezpečný postup:
+
+1. Vytvoř release flag `invoice_export_v2` na úrovni tenantů.
+2. Do targeting kontextu dej jen `tenant_id`, `plan`, `region` a stabilní rollout klíč.
+3. API exportu stále kontroluje roli `billing_admin`, stav tarifu a limit exportů.
+4. První rollout spusť pro jeden interní testovací tenant se syntetickými daty.
+5. Potom přidej dva dobrovolné zákazníky s jasnou informací, co se mění.
+6. Loguj změny flagu a agregované výsledky jobů, ne obsah exportovaných faktur.
+7. Po dvou týdnech bez kritických chyb flag odstraň a ponech jen případný kill switch pro exportní frontu.
+
+Tady feature flag nepůsobí jako špionážní aparát. Je to bezpečnostní ventil pro změnu, která má finanční a datový dopad.
+
+## Checklist: feature flagy bez tajných spínačů
+
+- Má každý flag typ: release, kill switch, permission, experiment nebo ops?
+- Je u flagu vlastník, důvod, datum kontroly a plán odstranění?
+- Používá targeting jen minimální nutné atributy?
+- Je server-side autorizace nezávislá na tom, co ukáže frontend?
+- Má rollout jasné stop signály a rollback postup?
+- Loguje audit změny konfigurace, ne kompletní osobní kontext uživatele?
+- Má experiment jasnou hypotézu, délku a datové minimum?
+- Existuje týdenní rutina na úklid starých release flagů?
+
+## Mini šablona feature flag karty
+
+```text
+# Feature flag karta: [název flagu]
+
+Typ flagu:
+Vlastník:
+Účel:
+Odkaz na issue / rozhodnutí:
+
+Targeting atributy:
+-
+
+První segment / tenant:
+Metriky úspěchu:
+Stop signály:
+Rollback postup:
+
+Datum kontroly:
+Datum plánovaného odstranění:
+Poznámka k datům a logům:
+```
+
+## Zdroje
+
+- [OpenFeature — Evaluation Context](https://openfeature.dev/specification/sections/evaluation-context/) — kontext používaný při vyhodnocování feature flagů a jeho skládání.
+- [OpenFeature — Introduction](https://openfeature.dev/docs/reference/intro/) — vendor-neutrální specifikace pro feature flagging a důraz na systémové potřeby jako audit trail a prostředí.
+- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučení pro bezpečné aplikační logování a data, která do logů nepatří.
+- [European Commission — What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en) — shrnutí principů minimalizace dat, omezení uložení a bezpečnosti zpracování.
+- [EUR-Lex — GDPR Article 25](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679) — data protection by design and by default jako návrhový princip pro systémy zpracovávající osobní data.
+
 # Pracovní log
+- 2026-10-08: Doplněna příloha „Feature flagy bez tajných spínačů a segmentačního šmírování“ s rozdělením typů flagů, minimalizací targeting kontextu, oddělením autorizace od UX, rollout kartou, úklidem starých flagů, checklistem, šablonou a ověřenými zdroji OpenFeature, OWASP a Evropské komise.
 
 - 2026-10-08: Rozšířena příloha „Transakční e-maily bez doručovacího hazardu a šmírování“ o bezpečné odkazy, neprůhledné jednorázové tokeny, logování e-mailového workflow bez obsahu zpráv a B2B pozvánkový příklad.
 
