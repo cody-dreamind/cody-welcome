@@ -54812,7 +54812,188 @@ Poznámka pro obchod a podporu:
 
 
 
+# Příloha: Interní vyhledávání bez indexace cizího soukromí
+
+Interní vyhledávání v SaaS je nenápadná superfunkce. Support najde zákazníka, účetní najde fakturu, administrátor najde auditní událost a obchodník najde workspace, u kterého se řeší rozšíření tarifu. Jenže přesně proto je vyhledávání také nenápadný datový vysavač. Když do indexu bez rozmyslu nasypeš všechno, vytvoříš jedno pohodlné místo, kde se dá najít skoro cokoli — včetně věcí, které tam nikdy neměly být.
+
+Privacy-first přístup neříká „vyhledávání je nebezpečné, zakažme ho“. Říká: vyhledávání má mít účel, hranice, oprávnění, audit a rozumnou retenci. Jinak se z pomocníka stane interní dalekohled do zákaznických dat.
+
+> Codyho komentář: Fulltext je jako baterka ve sklepě. Skvělá věc, dokud ji nedáš každému a neřekneš: „posviť si kam chceš, určitě tam nejsou žádné citlivé krabice.“
+
+## Nejdřív napiš účel hledání
+
+Každý vyhledávací index má začít krátkou větou:
+
+```text
+Tento index pomáhá [role] najít [typ záznamu] kvůli [pracovnímu účelu].
+```
+
+Příklady dobrých účelů:
+
+- support najde zákaznický účet podle e-mailu, názvu firmy nebo čísla workspace,
+- fakturace najde fakturu podle čísla dokladu, firmy nebo variabilního symbolu,
+- administrátor najde auditní událost podle typu akce, času a aktéra,
+- produktový tým najde veřejně publikovaný obsah podle názvu a stavu publikace.
+
+Příklady špatných účelů:
+
+- „ať jde najít všechno“,
+- „bude se to někdy hodit“,
+- „support chce rychlejší debug“,
+- „fulltext v databázi už máme skoro zadarmo“.
+
+Když účel neumíš popsat, index ještě nevytvářej. Ne proto, že by byl fulltext magický právní démon, ale protože bez účelu nepoznáš, která pole do něj patří a která jsou jen datový šrot s budoucím průšvihem.
+
+## Indexuj pracovní identifikátory, ne celý život zákazníka
+
+Začni minimálním seznamem polí. U interního hledání většinou stačí kombinace názvu firmy, e-mailu vlastníka, čísla účtu, ID workspace, čísla faktury, stavu a několika bezpečných metadat. Volné texty, poznámky supportu, obsah dokumentů, chaty, přílohy a interní komentáře do indexu nepatří automaticky.
+
+Praktické rozdělení:
+
+| Typ dat | Do indexu? | Poznámka |
+| --- | --- | --- |
+| ID workspace, číslo faktury, slug projektu | ano | pracovní identifikátor s jasným účelem |
+| název firmy a kontaktní e-mail | často ano | podle role a účelu, s přístupovým omezením |
+| telefon, adresa, DIČ | jen když je nutné | spíš přes přesný filtr než obecný fulltext |
+| obsah ticketu, přílohy, dokumenty | výjimečně | pouze s jasným režimem, maskováním a oprávněním |
+| tokeny, API klíče, hesla, session ID | nikdy | ani hash v univerzálním indexu není dobrý nápad |
+| interní poznámky supportu | opatrně | často obsahují citlivý kontext, který má mít vlastní hranice |
+
+OWASP u logování připomíná, že citlivé údaje, přístupové tokeny, hesla, klíče a podobné hodnoty se nemají ukládat přímo do logů, ale odstraňovat, maskovat nebo jinak chránit. Stejnou disciplínu použij i pro vyhledávací index: index je také sekundární kopie dat, jen s příjemnějším UI ([OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)).
+
+## Autorizace musí sedět před i po vyhledání
+
+Nejhorší interní vyhledávání je takové, které sice v detailu zákazníka práva kontroluje, ale ve výsledcích hledání ukáže víc, než by role měla vidět. Únik se nemusí stát přes detail stránky. Stačí seznam výsledků: jména zákazníků, názvy projektů, stav faktur, počet uživatelů, interní štítky.
+
+Použij dvojitou brzdu:
+
+1. **Filtr před dotazem** — dotaz musí být omezený podle tenantů, rolí a oprávněných rozsahů.
+2. **Kontrola po výsledku** — každý výsledek před zobrazením ještě projde autorizační vrstvou aplikace.
+
+Pokud používáš vyhledávací engine mimo hlavní databázi, neber ho jako důvěryhodnou autorizační autoritu. Je to index, ne produktová pravda. Multi-tenant hledání vyžaduje pravidla na úrovni dotazu nebo tokenu; například Meilisearch popisuje tenant tokens jako JWT s pravidly, která omezují, které dokumenty může koncový uživatel vyhledat ([Meilisearch tenant tokens specification](https://github.com/meilisearch/specifications/blob/main/text/0089-tenant-tokens.md)). I tak ale drž finální kontrolu v aplikaci.
+
+## Dotazy validuj jako vstup, ne jako nevinný text
+
+Search box působí neškodně, protože „jen hledá“. Ve skutečnosti je to uživatelský vstup, který se často skládá do databázového dotazu, filtru, URL, logu nebo analytické události. Proto potřebuje stejnou disciplínu jako formulář.
+
+Minimální pravidla:
+
+- omez délku dotazu a počet slov,
+- normalizuj mezery a neviditelné znaky,
+- povol jen očekávané typy filtrů,
+- nepouštěj uživatele skládat libovolné interní query DSL,
+- pro databázové dotazy používej parametrizované dotazy,
+- chybové zprávy piš obecně, bez výpisu interní syntaxe.
+
+OWASP u input validation rozlišuje syntaktickou a sémantickou validaci: nestačí, že hodnota „vypadá jako text“, musí také dávat smysl pro konkrétní operaci ([OWASP Input Validation Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html)). A pokud se hledání opírá o databázi, nelep SQL řetězce z uživatelského vstupu. Parametrizované dotazy oddělují kód od dat a jsou základní obranou proti injection ([OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)).
+
+## Výsledky ukazuj postupně a bez zbytečných detailů
+
+Vyhledávání nemusí v prvním kroku ukázat celý profil. Často stačí bezpečný náhled: název firmy, poslední čtyři znaky ID, stav účtu a tlačítko „otevřít detail“. Citlivější údaje zobraz až po kliknutí a jen rolím, které je opravdu potřebují.
+
+Dobré UX vzory:
+
+- u zákazníků zobrazuj pracovní název a ID, ne kompletní osobní profil,
+- u faktur ukazuj číslo dokladu a stav, ne celý billing detail,
+- u auditních událostí ukazuj typ akce, čas a roli, ne celý payload,
+- u ticketů zobraz předmět a stav, ne celý obsah zprávy,
+- u více shod preferuj přesné identifikátory před „nejzajímavějšími“ osobními daty.
+
+Tohle není jen bezpečnost. Je to i lepší práce supportu. Když výsledek ukazuje jen rozhodovací minimum, člověk rychleji najde správný záznam a méně omylem čte něco, co ke své práci nepotřebuje.
+
+## Loguj použití vyhledávání, ne obsah soukromí
+
+Interní hledání má mít auditní stopu, protože jde o přístupový bod k zákaznickým datům. Ale audit neznamená „uložíme každý dotaz navždy a budeme tomu říkat bezpečnost“. Ulož hlavně to, co pomůže vyšetřit zneužití nebo ladit oprávnění bez kopírování citlivého obsahu.
+
+Rozumný audit:
+
+- kdo hledal,
+- kdy hledal,
+- v jakém indexu nebo modulu,
+- jaký typ filtru použil,
+- kolik výsledků dostal,
+- který záznam otevřel,
+- zda došlo k zamítnutí kvůli právům.
+
+Samotný text dotazu ukládej jen pokud k tomu máš jasný důvod a filtr. Pokud lidé do hledání lepí e-maily, telefonní čísla, tokeny nebo části zpráv, log dotazu se rychle stane citlivou databází. Lepší je ukládat normalizovanou kategorii dotazu: `email_like`, `invoice_id`, `workspace_id`, `free_text_short`, `blocked_sensitive_pattern`.
+
+## Retence indexu nesmí přežít účel dat
+
+Vyhledávací index často unikne retenčním pravidlům, protože „je to jen technická kopie“. Jenže pro člověka, jehož údaje jsou v indexu, je technická kopie pořád kopie. Pokud smažeš zákazníka z hlavní databáze, ale necháš ho šest měsíců ve fulltextu, máš problém technický, důvěrový i procesní.
+
+Zaveď proto tři jednoduchá pravidla:
+
+1. **Reindex po mazání** — mazací workflow musí odstranit nebo anonymizovat i indexované dokumenty.
+2. **Krátká obnova indexu** — index má jít postavit z primárních dat, ne být archivem navždy.
+3. **Kontrolní test** — jednou za měsíc vyber smazaný/anonymizovaný záznam a ověř, že není dohledatelný přes interní search.
+
+Index není záloha. Pokud se k němu tým chová jako k záloze, začne v něm nechávat data, která už nemají pracovní účel.
+
+## Příklad: support hledá workspace v B2B SaaS
+
+Účetní SaaS má interní search pro support. Původní návrh indexoval název firmy, všechny e-maily uživatelů, text ticketů, fakturační adresy, poznámky obchodníka a poslední chyby z error reportingu. Fungovalo to skvěle — až moc skvěle. Support našel prakticky cokoliv, i když řešil jen reset pozvánky.
+
+Privacy-first verze má tři indexy:
+
+- `workspaces_support` — název firmy, workspace ID, e-mail vlastníka, stav účtu, tarif, bezpečný štítek „billing issue yes/no“,
+- `invoices_billing` — číslo faktury, firma, stav platby, měsíc, bez položkového detailu v náhledu,
+- `audit_admin` — typ události, čas, aktér, cílový workspace, bez payloadů.
+
+Support role vidí jen první index a po otevření detailu pouze moduly, které patří ke konkrétnímu ticketu. Billing role vidí faktury. Admin role vidí auditní stopu, ale payload se zobrazí jen po step-up ověření a u citlivých akcí s důvodem přístupu. Dotazy se nelogují jako plný text; ukládá se typ dotazu, počet výsledků a otevřený záznam.
+
+Výsledek: hledání je pořád rychlé, ale přestalo být univerzálním kukátkem do produktu.
+
+## Checklist: interní vyhledávání bez datového vysavače
+
+- Má každý index jasně napsaný účel a vlastníka?
+- Víš, které role mohou index používat a proč?
+- Indexuješ jen pole nutná pro pracovní rozhodnutí?
+- Jsou volné texty, přílohy, tokeny a citlivé poznámky mimo výchozí index?
+- Omezuje dotaz výsledky podle tenantu, role a oprávnění?
+- Probíhá autorizační kontrola i po vrácení výsledků?
+- Validuješ délku, formát a povolené filtry dotazu?
+- Nepoužíváš string concatenation pro databázové hledání?
+- Ukazuje první náhled jen minimum informací?
+- Loguješ použití hledání bez zbytečného ukládání plného dotazu?
+- Umí mazání účtu odstranit data i z indexů?
+- Testuješ pravidelně, že smazaný nebo anonymizovaný záznam nejde najít?
+
+## Mini šablona search index karty
+
+```text
+# Search index karta: [název indexu]
+
+Účel:
+Vlastník:
+Uživatelé / role:
+Primární datový zdroj:
+Indexovaná pole:
+Zakázaná pole:
+Tenant filtr:
+Autorizační pravidlo před dotazem:
+Autorizační pravidlo po výsledku:
+Náhled výsledku:
+Citlivé akce po otevření detailu:
+Logované auditní údaje:
+Plný dotaz ukládáme? ano/ne + proč:
+Retence indexu:
+Mazací/anonymizační workflow:
+Datum posledního testu mazání z indexu:
+Datum další revize:
+```
+
+## Zdroje
+
+- OWASP Logging Cheat Sheet, doporučení k bezpečnostnímu logování a datům, která se mají vylučovat, maskovat nebo chránit: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- OWASP Input Validation Cheat Sheet, rozlišení syntaktické a sémantické validace vstupů v aplikaci: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
+- OWASP SQL Injection Prevention Cheat Sheet, doporučení k parametrizovaným dotazům a oddělení kódu od dat: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
+- Meilisearch tenant tokens specification, příklad omezení multi-tenant vyhledávání pomocí pravidel v tokenu: https://github.com/meilisearch/specifications/blob/main/text/0089-tenant-tokens.md
+
+
+
 # Pracovní log
+
+- 2026-10-08: Doplněna příloha „Interní vyhledávání bez indexace cizího soukromí“ s účelem indexů, minimalizací indexovaných polí, dvouvrstvou autorizací, validací dotazů, bezpečnými náhledy výsledků, auditováním bez ukládání citlivých dotazů, retenčními pravidly, B2B SaaS příkladem, checklistem, search index kartou a ověřenými zdroji OWASP a Meilisearch.
 
 - 2026-10-08: Doplněna příloha „Demo prostředí a sandbox bez úniku zákaznických dat“ s rozdělením typů demo prostředí, syntetickými seed daty, oddělením zákaznického sandboxu od marketingového dema, přístupovým modelem, resetem a retencí, příkladem B2B fakturačního SaaS, checklistem, demo kartou a ověřenými zdroji GDPR, OWASP ASVS a ENISA.
 
