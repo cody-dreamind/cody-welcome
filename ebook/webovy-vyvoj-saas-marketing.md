@@ -57143,7 +57143,175 @@ Datum revize:
 
 
 
+# Žádosti o osobní data bez support chaosu a právního ping-pongu
+
+Žádost člověka o přístup, opravu, přenositelnost nebo výmaz dat není support ticket jako „nejde mi export“. Je to okamžik, kdy se ukáže, jestli firma opravdu ví, jaká data má, proč je má a kdo s nimi umí bezpečně pracovat. Když tenhle proces nemáš připravený, začne improvizace: někdo hledá v databázi, někdo v e-mailu, někdo v CRM, někdo se ptá právníka a zákazník mezitím vidí jen ticho. To je přesně ten druh ticha, který nevypadá jako privacy-first, ale jako digitální kůlna po bouřce.
+
+Praktický cíl není „vyřešit GDPR jedním formulářem“. Praktický cíl je mít opakovatelný interní postup, který žádost zachytí, ověří, zařadí, vyřídí a zdokumentuje bez toho, aby se při tom zbytečně kopírovala další osobní data. Privacy-first provoz se nepozná podle počtu právních PDF, ale podle toho, že tým umí rychle a klidně odpovědět na jednoduchou otázku: kdo žádá, o jaké právo jde, kde jsou relevantní data a co smíme udělat dál.
+
+> Codyho komentář: Nejhorší proces pro žádosti o data je „pošli to na support, oni si nějak poradí“. Support je skvělý na lidskou komunikaci, ale nemá být detektivní kancelář, exportní skript a právní oddělení v jednom kabátu.
+
+## Nejdřív rozliš typ žádosti
+
+Jedna e-mailová věta může ve skutečnosti znamenat několik různých věcí. „Pošlete mi moje data“ může být žádost o přístup, přenositelnost, kopii faktur, technický export projektu nebo jen snaha zjistit, co se v účtu děje. Proto nepřeskakuj rovnou k exportu. Nejdřív žádost zařaď podle pracovního typu.
+
+Minimální rozdělení pro malý SaaS:
+
+- Přístup k osobním údajům: člověk chce vědět, jaké osobní údaje o něm zpracováváš.
+- Oprava: člověk říká, že některé údaje jsou špatně nebo neúplné.
+- Výmaz: člověk chce smazat osobní údaje nebo účet.
+- Přenositelnost: člověk chce data ve strojově čitelném formátu pro sebe nebo jiného správce.
+- Omezení nebo námitka: člověk nechce, aby se určitá data dál používala konkrétním způsobem.
+- Běžný support export: člověk potřebuje produktový výstup, například faktury, seznam projektů nebo historii objednávek.
+
+Tohle rozdělení nepiš jen do dokumentace pro právníky. Dej ho přímo do support runbooku, aby první člověk u ticketu věděl, kdy odpovědět běžně a kdy zapnout privacy workflow. Ušetříš tím čas i riziko, že zákazník dostane špatnou odpověď jen proto, že použil neformální jazyk.
+
+## Příjem žádosti drž v jednom kanálu, ale ne v jedné osobě
+
+Nejjednodušší funkční model je jeden viditelný kontaktní bod a malý interní tým odpovědných lidí. Veřejně můžeš uvést například privacy kontakt nebo jasný support postup. Interně ale nesmí být proces závislý na tom, že „Jana ví, kam se kliká“. Jana může být na dovolené, nemocná nebo prostě pryč — data subjektu by neměla čekat na kalendář jednoho člověka.
+
+Každá žádost má dostat pracovní záznam s těmito poli:
+
+- datum přijetí,
+- kanál přijetí,
+- identifikovaný žadatel,
+- typ žádosti,
+- dotčený účet, workspace nebo smlouva,
+- interní vlastník,
+- termín dalšího kroku,
+- stav ověření identity,
+- rozhodnutí a stručné odůvodnění,
+- datum odpovědi,
+- odkaz na bezpečně uložený výstup, pokud vznikl.
+
+Pozor na detail: samotný záznam žádosti je také datový artefakt. Nepiš do něj zbytečné životní příběhy, kompletní payloady, citlivé přílohy ani kopie dokladů, pokud je nepotřebuješ. Eviduj stav a rozhodnutí, ne sbírku soukromých screenshotů. Kdyby se auditovalo, chceš ukázat, že proces fungoval — ne vytáhnout další album osobních údajů.
+
+## Ověření identity má být přiměřené riziku
+
+Ověřit žadatele neznamená automaticky chtít občanku přes e-mail. To je častá chyba: firma se bojí neoprávněného výdeje dat, a tak vytvoří nový, větší problém. Přiměřené ověření znamená vybrat metodu podle citlivosti žádosti a vztahu k účtu.
+
+Praktický model:
+
+- Přihlášený uživatel v aplikaci může potvrdit žádost přes aktivní session a případně step-up ověření.
+- Správce workspace může žádat o data workspace, ale ne nutně o osobní údaje všech členů bez dalšího posouzení.
+- E-mail mimo účet porovnej s existujícím kontaktem a pošli potvrzovací odkaz do registrované adresy.
+- Citlivý export neposílej jako přílohu do běžného e-mailu; raději vytvoř dočasný odkaz po přihlášení.
+- Pokud žádost přichází od bývalého zaměstnance zákazníka, neřeš ji automaticky přes současného admina bez rozlišení osobních údajů a firemních dat.
+
+Cílem je zabránit výdeji dat nesprávné osobě, ale zároveň nesbírat víc údajů, než situace vyžaduje. Když si nejsi jistý, zeptej se na minimální doplňující kontext: například o který účet, období nebo e-mail jde. Neptej se na rodné číslo jen proto, že „to zní oficiálně“. V B2B SaaS je často lepší ověřovat vlastnictví účtu a oprávnění v produktu než sbírat nové identifikační dokumenty.
+
+## Data hledej podle datové mapy, ne podle intuice
+
+Žádost o přístup nebo výmaz je ostrý test datové mapy. Pokud nevíš, kde všude se data nacházejí, budeš hledat podle nálady: databáze, billing, helpdesk, CRM, newsletter, logy, zálohy, analytika, e-mailové archivy. To je pomalé a děravé.
+
+U každé kategorie dat si předem napiš:
+
+- systém nebo tabulka,
+- účel zpracování,
+- vlastník systému,
+- typické identifikátory pro hledání,
+- zda se data vrací v přístupové odpovědi,
+- zda se mažou, anonymizují nebo blokují,
+- retenční pravidlo,
+- omezení kvůli účetnictví, bezpečnosti nebo smlouvě.
+
+Tady se vrací hodnota předchozích příloh: exportní kontrakt, retenční karta, audit log, role, billing eventy a vendor karta nejsou oddělené šuplíky. Dohromady tvoří mapu, díky které se žádost neřeší jako archeologický výkop. Když některý systém neumíš zařadit, není to drobný detail — je to signál, že tvoje datová mapa má díru.
+
+## Výstup připrav jako vysvětlení, ne datovou skládku
+
+Přístupová odpověď nemá být chaos v ZIP souboru. Člověk má pochopit, jaké kategorie údajů zpracováváš, za jakým účelem a co s nimi může dál dělat. Pokud posíláš export, přidej krátký průvodní text a popis souborů. Pokud část údajů nevydáváš, protože by to zasáhlo práva jiných lidí nebo bezpečnost, napiš to věcně a srozumitelně.
+
+Dobrá struktura odpovědi:
+
+- potvrzení, jakou žádost vyřizuješ,
+- období a účet, kterého se odpověď týká,
+- přehled kategorií dat,
+- vysvětlení účelů zpracování,
+- seznam přiložených nebo dostupných exportů,
+- informace o datech, která nelze vydat nebo smazat hned,
+- další možnosti člověka,
+- kontakt pro doplnění.
+
+Nepřidávej zbytečné interní identifikátory, debug logy, IP historii nebo auditní detaily, pokud nejsou potřebné pro konkrétní žádost a bezpečné pro vydání. Transparentnost není totéž co vysypání celé technické kuchyně na stůl. U privacy-first produktu chceš být čitelný, ne neopatrný.
+
+## Mazání koordinuj s retencí a zálohami
+
+Výmaz neznamená, že všechny bity zmizí z vesmíru v okamžiku kliknutí. Některá data můžeš potřebovat kvůli účetnictví, bezpečnosti, smlouvě nebo obraně právních nároků. Jiná se mají smazat nebo anonymizovat hned, protože už nemají účel. Klíčové je umět to vysvětlit dopředu a mít proces, který to opravdu provede.
+
+Praktický postup:
+
+- odděl aktivní produktová data, účetní data, bezpečnostní logy, analytiku, support historii a zálohy,
+- u každé kategorie napiš akci: smazat, anonymizovat, ponechat do data, omezit zpracování,
+- vytvoř interní mazací job nebo runbook, ne ruční „klikni tady a doufej“,
+- po výmazu ulož jen minimální důkaz o vyřízení žádosti,
+- u záloh vysvětli, že se data neobnovují do aktivního provozu, pokud k tomu není oprávněný důvod,
+- otestuj obnovu ze zálohy tak, aby se smazaná data nevracela bez následného mazacího kroku.
+
+Tohle je místo, kde se ukáže, jestli privacy-first provoz myslí i na nudnou infrastrukturu. Krásné nastavení v aplikaci nepomůže, pokud data pořád leží v exportech, starém CRM nebo ručně stažených CSV souborech na notebooku obchodníka. Datové žádosti nejsou jen právní proces; jsou úklidový test celé firmy.
+
+## Praktický příklad: bývalý zaměstnanec zákazníka chce svá data
+
+Představ si B2B SaaS pro projektové řízení. Ozve se bývalý zaměstnanec agentury a píše: „Pošlete mi všechno, co o mně máte, a smažte můj účet.“ Jeho firemní e-mail už nefunguje, ale v systému je historicky uvedený jako člen několika projektů. Aktuální admin zákazníka nechce, aby se mu posílala projektová historie.
+
+Privacy-first postup:
+
+1. Založíš žádost jako kombinaci přístupu a výmazu osobních údajů.
+2. Ověříš identitu přiměřeně: pokud firemní e-mail neexistuje, použiješ jiný bezpečný postup bez automatického posílání dat na neověřenou adresu.
+3. Oddělíš osobní údaje člověka od firemních projektových dat zákazníka.
+4. Připravíš přehled kategorií: profil, role, aktivita účtu, support komunikace, billing jen pokud se ho týká.
+5. Projektový obsah, který patří zákazníkovi nebo obsahuje data jiných lidí, neposíláš jako osobní export bez posouzení.
+6. Účet deaktivuješ nebo anonymizuješ podle retenčního pravidla a smluvního vztahu.
+7. Do odpovědi napíšeš, co bylo vyřízeno, co zůstává kvůli oprávněnému účelu a kam se může obrátit pro doplnění.
+
+Tím chráníš práva člověka i data zákazníka. Kdybys jen poslal celý export workspace, uděláš průšvih. Kdybys žádost odmítl kvůli tomu, že už nemá firemní e-mail, taky to nemusí být fér. Správná odpověď je proces, ne reflex.
+
+## Checklist: žádosti o osobní data bez paniky
+
+- Máme jeden veřejný kontakt nebo jasný postup pro žádosti o osobní data.
+- Support umí rozlišit běžný produktový export od žádosti podle práv subjektu údajů.
+- Každá žádost má vlastníka, stav, termín dalšího kroku a stručné rozhodnutí.
+- Ověření identity odpovídá riziku a nesbírá zbytečné nové údaje.
+- Datová mapa říká, ve kterých systémech se hledá a co se s kategoriemi dat děje.
+- Export nebo odpověď má průvodní vysvětlení, ne jen technickou skládku souborů.
+- Výmaz je propojený s retenčními pravidly, zálohami, supportem a vendory.
+- Po vyřízení zůstává jen minimální auditní stopa o procesu, ne další datový sklad.
+
+## Mini šablona DSAR karty
+
+```text
+Interní ID žádosti:
+Datum přijetí:
+Kanál:
+Žadatel:
+Ověřovací metoda:
+Dotčený účet / workspace:
+Typ žádosti:
+Rozsah období:
+Interní vlastník:
+Zapojené systémy:
+Data k vydání:
+Data k opravě:
+Data k výmazu / anonymizaci:
+Data ponechaná kvůli oprávněnému účelu:
+Riziko pro data jiných osob:
+Způsob předání výstupu:
+Datum odpovědi:
+Další krok:
+Datum uzavření:
+```
+
+## Zdroje
+
+- European Commission — Dealing with requests from individuals, přehled práv jako přístup, oprava, výmaz a přenositelnost: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+- European Commission — Information for individuals, srozumitelný přehled práv subjektu údajů v EU: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- European Commission — Principles of the GDPR, zejména minimalizace, omezení účelu, omezení uložení a odpovědnost: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- EDPB — Guidelines 01/2022 on data subject rights — Right of access: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
+- EUR-Lex — Regulation (EU) 2016/679, zejména odůvodnění k ověření identity, přístupu, přenositelnosti a právům jiných osob: https://eur-lex.europa.eu/legal-content/EN/TXT/?toc=OJ%3AL%3A2016%3A119%3A&uri=uriserv%3AOJ.L_.2016.119.01.0001.01.ENG
+
+
 # Pracovní log
+
+- 2026-10-08: Doplněna příloha „Žádosti o osobní data bez support chaosu a právního ping-pongu“ s rozlišením typů žádostí, příjmovým procesem, přiměřeným ověřením identity, prací s datovou mapou, bezpečnou strukturou odpovědi, koordinací výmazu se zálohami, B2B příkladem bývalého zaměstnance zákazníka, checklistem, DSAR kartou a ověřenými zdroji Evropské komise, EDPB a EUR-Lex.
 
 - 2026-10-08: Doplněna příloha „Preference centrum bez newsletterového nátlaku a falešných souhlasů“ s rozdělením typů komunikace, konkrétní mikrocopy souhlasu, jednoduchým odhlášením, auditovatelným stavem preferencí, kontrolou importů, frekvenčními volbami, B2B SaaS příkladem, checklistem, preference kartou a ověřenými zdroji Evropské komise, EDPB a RFC 8058.
 
