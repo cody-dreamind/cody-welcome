@@ -58342,7 +58342,198 @@ Datum úklidu dočasných prvků:
 - [European Commission — GDPR principles](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en) — principy minimalizace dat, omezení účelu, omezení uložení a odpovědnosti správce.
 
 
+# Příloha: Serverová observabilita bez APM vysavače a logovacího smogu
+
+Observabilita má pomoct týmu pochopit, co se v produkci děje. Nemá být tichý datový vysavač, který pro jistotu sbírá celé requesty, query parametry, payloady, e-maily, tokeny, IP adresy na věčnost a pak se tváří jako „technická nutnost“. To není observabilita. To je digitální skladiště s hezkým dashboardem.
+
+Privacy-first observabilita začíná jednoduchou větou:
+
+```text
+Potřebujeme vědět [co se rozbilo / zpomalilo / změnilo], abychom mohli [konkrétní provozní reakce], bez ukládání [citlivý obsah / zbytečné identifikátory].
+```
+
+Příklad:
+
+```text
+Potřebujeme vědět, že export faktur selhává pro konkrétní tenant a release, abychom mohli zastavit rollout a opravit job, bez ukládání obsahu faktur, e-mailů odběratelů nebo kompletního CSV.
+```
+
+> Codyho komentář: Pokud log potřebuješ jen proto, že „se možná někdy bude hodit“, je to stejné jako nechat si všechny účtenky, krabice a kabely z posledních deseti let. Technicky to jde. Mentálně a právně je to sklepní horor.
+
+## Rozděl signály podle účelu
+
+Nemíchej všechno do jednoho logovacího kotle. Serverový provoz obvykle potřebuje čtyři různé typy signálů:
+
+| Signál | K čemu slouží | Co typicky stačí | Co do něj nepatří |
+| --- | --- | --- | --- |
+| Metriky | trend, kapacita, dostupnost | počet chyb, latence, fronta, CPU, paměť | payloady, osobní data, celé URL s tokeny |
+| Logy | konkrétní události a rozhodnutí | event name, status, tenant/workspace ID, release, request ID | hesla, access tokeny, obsah zpráv, celé formuláře |
+| Traces | cesta requestu službami | trace ID, span name, timing, služba, endpoint pattern | zákaznický obsah, raw SQL s hodnotami, citlivé parametry |
+| Alerty | výzva k reakci | dopad, priorita, runbook, vlastník | osobní údaje zákazníků, stacktrace jako celé tělo notifikace |
+
+OpenTelemetry pracuje s koncepty traces, metrics a logs a umožňuje korelovat signály přes společný kontext. To je užitečné, ale zároveň nebezpečné, pokud do kontextu přidáš příliš mnoho atributů. Korelace není omluva pro to, aby každý span nesl zákaznický e-mail, název dokumentu nebo obsah vyhledávání.
+
+Praktické pravidlo: do společných atributů patří stabilní technický kontext, ne osobní příběh uživatele.
+
+Dobré atributy:
+
+- `service.name`,
+- `deployment.environment`,
+- `release.version`,
+- `tenant_id` nebo interní workspace ID,
+- `request_id`,
+- normalizovaný endpoint typu `/api/invoices/:id/export`,
+- kategorie chyby.
+
+Rizikové atributy:
+
+- celé URL včetně query stringu,
+- e-mail uživatele,
+- jméno zákazníka,
+- název souboru nahraný uživatelem,
+- text dotazu ve vyhledávání,
+- obsah objednávky, faktury, zprávy nebo komentáře.
+
+## Loguj rozhodnutí, ne obsah života
+
+OWASP doporučuje logovat bezpečnostně významné události a zároveň výslovně upozorňuje, že citlivé údaje, přístupové tokeny, session identifikátory, hesla, klíče a další tajemství do logů přímo nepatří. Přeloženo do produktové praxe: loguj, že systém něco udělal, ne všechno, co při tom viděl.
+
+Místo:
+
+```text
+payment_failed user=jana@example.com card=4242... amount=1290 invoice=Faktura za poradenství pro Acme s.r.o.
+```
+
+raději:
+
+```text
+event=payment_failed tenant_id=t_123 user_ref=u_456 amount_bucket=1000_2000 currency=CZK reason=provider_declined request_id=req_789
+```
+
+Rozdíl je zásadní. Druhý log pořád pomůže najít problém, spojit ho s requestem, vyhodnotit dopad a předat informaci supportu. Neobsahuje ale zákaznický obsah ani kontaktní údaj, který by se při exportu logů stal dalším datovým problémem.
+
+U chyb dělej totéž: ukládej typ výjimky, fingerprint, release, endpoint pattern, tenant a request ID. Stacktrace je užitečná, ale musí projít filtrem na tajemství a osobní údaje. Pokud aplikace pracuje s citlivými vstupy, nikdy neloguj celé objekty metodou „dump everything and pray“. Modlitba není bezpečnostní kontrola, i když má v incidentu překvapivě časté zastoupení.
+
+## Request ID je lepší než datový batoh
+
+Mnoho týmů sbírá zbytečně moc dat, protože nemá dobrý korelační identifikátor. Pak se snaží každý log udělat „samovysvětlující“ a přidá do něj všechno: uživatele, payload, URL, hlavičky, odpověď, stacktrace i náladu serveru. Lepší je zavést krátký request ID / trace ID model.
+
+Minimální provozní model:
+
+- každý příchozí požadavek dostane `request_id`,
+- interní volání si předává trace kontext,
+- uživateli v chybové obrazovce ukážeš jen bezpečný referenční kód,
+- support podle kódu najde související události,
+- logy zůstávají úzké a strukturované.
+
+Příklad hlášky pro uživatele:
+
+```text
+Export se nepodařilo dokončit. Zkuste to prosím znovu za pár minut.
+Kód události: REQ-8F3K2
+```
+
+Interně pak stačí hledat `request_id=REQ-8F3K2`. Není potřeba zobrazovat stacktrace, název interní fronty ani obsah exportu. Uživatel dostane použitelný referenční bod a tým dostane stopu k řešení.
+
+## Retence observability dat má být kratší než paměť slona
+
+GDPR principy zdůrazňují minimalizaci dat, omezení účelu a omezení uložení. U observability to znamená, že logy, traces a metriky nemají mít stejnou retenci jen proto, že nástroj nabízí jeden globální posuvník.
+
+Praktický retenční model pro malý SaaS:
+
+| Typ dat | Doporučený začátek | Proč |
+| --- | --- | --- |
+| Debug logy | 3–7 dní | krátké řešení chyb po releasu |
+| Aplikační warning/error logy | 14–30 dní | provozní diagnostika a trend chyb |
+| Bezpečnostní auditní události | podle rizika a právního účelu | dokazatelnost přístupů a změn |
+| Agregované metriky | 90–180 dní | kapacita, SLA trend, sezónnost |
+| Incident evidence pack | podle incident policy | zpětné poučení a odpovědnost |
+
+Tohle není právní rada, ale provozní start. Pokud máš regulovaný obor, smluvní SLA nebo bezpečnostní certifikaci, retenci uprav podle konkrétních povinností. Důležité je mít důvod, ne jen default.
+
+## Alerty nastav podle dopadu, ne podle hluku
+
+Špatný alerting zničí týmu pozornost. Když systém pípá kvůli každému dočasnému výkyvu, lidé se naučí ignorovat i skutečný průšvih. Alert má být smlouva: „Když přijde tato zpráva, někdo má udělat konkrétní akci.“
+
+Dobré alerty:
+
+- mají jasný dopad na zákazníka nebo bezpečnost,
+- obsahují službu, prostředí, release a odkaz na runbook,
+- mají prioritu a vlastníka,
+- říkají, kdy alert skončil,
+- neposílají citlivý obsah do chatu.
+
+Slabé alerty:
+
+- „něco je divné“,
+- posílají raw stacktrace do veřejného kanálu,
+- nemají prahovou hodnotu ani časové okno,
+- nemají runbook,
+- budí lidi kvůli metrice bez uživatelského dopadu.
+
+Privacy-first detail: interní chat, notifikační nástroj nebo incident služba je také zpracování dat. Pokud do alertu vložíš zákaznický e-mail, název dokumentu nebo kus payloadu, právě jsi rozšířil datovou stopu mimo primární systém.
+
+## Praktický příklad: pomalý export faktur
+
+Účetní SaaS má problém: export faktur je po releasu pomalý a občas padá. Špatná reakce by byla zapnout debug logování všeho a nechat si posílat celé exportované řádky do APM.
+
+Lepší privacy-first postup:
+
+1. Přidat metriku `invoice_export_duration_seconds` s tagy `tenant_plan`, `export_format`, `release.version`.
+2. Logovat události `export_started`, `export_failed`, `export_completed` bez obsahu faktur.
+3. Do logu dát `tenant_id`, `job_id`, počet řádků jako bucket, formát exportu a typ chyby.
+4. Přidat trace pro kroky `load_invoice_ids`, `render_rows`, `write_file`, `store_artifact`, `notify_user`.
+5. Alert nastavit až na kombinaci: chybovost nad limit plus dopad na více tenantů nebo konkrétní placený plán.
+6. Po opravě snížit debug úroveň a zkontrolovat, že nevznikly nové citlivé atributy.
+
+Výsledek: tým ví, kde export brzdí, který release problém přinesl a koho se dotýká. Nemusí kvůli tomu ukládat obsah faktur ani osobní údaje odběratelů.
+
+## Checklist: observabilita bez datového vysavače
+
+- Má každý log, trace a metrika jasný účel?
+- Jsou endpointy normalizované bez citlivých query parametrů?
+- Neobsahují logy hesla, tokeny, session ID, klíče, celé payloady ani citlivé osobní údaje?
+- Existuje `request_id` nebo trace ID pro korelaci bez kopírování obsahu?
+- Prochází stacktrace a error kontext redakčním filtrem?
+- Má každý typ observability dat vlastní retenci?
+- Jsou alerty navázané na dopad, vlastníka a runbook?
+- Neodchází citlivý obsah do chatu, e-mailu nebo externího incident nástroje?
+- Umíš zákazníkovi vysvětlit, proč daný provozní signál sbíráš?
+- Kontroluješ nové atributy při release review?
+
+## Mini šablona observability karty
+
+```text
+# Observability karta: [služba / workflow]
+
+Účel měření:
+Kritický uživatelský dopad:
+Metriky:
+Logované události:
+Trace spany:
+Zakázané atributy / data:
+Korelační ID:
+Retence logů:
+Retence metrik:
+Alerty:
+Runbook:
+Vlastník:
+Datum poslední revize:
+```
+
+## Zdroje
+
+- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — praktická doporučení k aplikačnímu logování, bezpečnostním událostem, ochraně logů a vyloučení citlivých dat.
+- [OWASP Developer Guide — Logging and Monitoring](https://devguide.owasp.org/en/04-design/02-web-app-checklist/09-logging-monitoring/) — stručný checklist pro bezpečnostní logování a monitoring v aplikacích.
+- [OpenTelemetry — Concepts](https://opentelemetry.io/docs/concepts/) — oficiální vysvětlení signálů, komponent a základních pojmů pro traces, metrics a logs.
+- [OpenTelemetry — Observability primer](https://opentelemetry.io/docs/concepts/observability-primer/) — úvod do observability, vztahu metrik, logů a traces a použití spanů.
+- [NIST SP 800-92 — Guide to Computer Security Log Management](https://csrc.nist.gov/pubs/sp/800/92/final) — rámec pro správu bezpečnostních logů, jejich infrastrukturu, ochranu a provozní proces.
+- [European Commission — GDPR principles](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en) — principy minimalizace dat, omezení účelu, omezení uložení, integrity a důvěrnosti.
+
+
 # Pracovní log
+
+- 2026-10-09: Doplněna příloha „Serverová observabilita bez APM vysavače a logovacího smogu“ s rozdělením signálů na metriky, logy, traces a alerty, pravidly minimalizace atributů, request ID modelem, retencí, alertingem podle dopadu, příkladem pomalého exportu faktur, checklistem, observability kartou a ověřenými zdroji OWASP, OpenTelemetry, NIST a Evropské komise.
 
 - 2026-10-09: Rozšířena příloha „Release runbook bez pátečního hazardu a privacy překvapení“ o release evidence pack: krátký balíček důkazů před deployem, včetně dotčených částí, testů, datového dopadu, rollbacku, stop signálů, vlastníka a Codyho komentáře.
 
