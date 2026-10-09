@@ -58693,6 +58693,29 @@ Praktické rozhodování:
 
 Nejlepší revize končí konkrétní změnou, ne pocitem. „Zkontrolováno“ nestačí. Napiš „odebrán admin v CRM“, „deaktivován účet agentury“, „servisní token přesunut do vaultu“, „ponecháno na 30 dní kvůli migraci, vlastník Jana“.
 
+## Joiner–mover–leaver rutina bez přístupového bordelu
+
+Přístupová revize je důležitá, ale nemá být jediný moment, kdy se řeší oprávnění. Pokud čekáš na čtvrtletní audit, starý přístup může žít celé měsíce. Lepší je mít jednoduchou rutinu pro tři okamžiky: člověk přichází, mění roli nebo odchází.
+
+**Joiner** znamená nástup. Nový člověk nemá dostat kopii práv někoho podobného jen proto, že je to rychlé. Začni rolí, účelem a minimem systémů pro první týden. Zbytek přidávej až ve chvíli, kdy je potřeba. Onboarding s menším přístupem je pomalejší o deset minut, ale rychlejší než vysvětlovat incident způsobený účtem, který měl víc práv než pracovní úkol.
+
+**Mover** je nejčastěji přehlížený. Člověk přejde ze supportu do productu, z vývoje do sales engineeringu nebo z agentury na interní spolupráci. Většina týmů mu přidá nová práva, ale stará nechá „kdyby něco“. Právě tady vzniká privilege creep: oprávnění se nesčítají podle důvěry, ale podle historie práce. Při změně role proto nejdřív odeber starý balík a teprve potom přidej nový.
+
+**Leaver** je odchod. Tady nestačí vypnout hlavní účet v aplikaci. Zkontroluj i SSO, e-mail, správce hesel, Git, hosting, CI/CD, fakturaci, analytiku, sdílené dokumenty, support, CRM, externí no-code automatizace a servisní účty, které člověk vlastnil. Pokud odcházející člověk spravoval webhook secret nebo deploy token, naplánuj rotaci. Ne proto, že mu nevěříš. Protože tajemství po odchodu nemá mít lidskou biografii.
+
+Praktická tabulka pro malý tým:
+
+| Situace | Udělej hned | Udělej do 7 dní |
+| --- | --- | --- |
+| Nástup | vytvořit účty podle role, zapnout MFA, předat pravidla pro data | zkontrolovat, že nevznikly ruční výjimky a sdílené účty |
+| Změna role | odebrat staré kritické role, přidat jen nový pracovní rozsah | projít historické exporty, integrační tokeny a skupiny |
+| Odchod | deaktivovat účty, zrušit relace, odebrat sdílené přístupy | rotovat vlastněné secrets, převést ownership a uklidit externí odkazy |
+| Konec agentury | odebrat přístupy do nástrojů, zrušit sdílené odkazy | ověřit exporty, kampaně, automatizace a vendor evidenci |
+
+Privacy-first pointa: offboarding není jen bezpečnostní hygiena. Je to i ochrana dat zákazníků před tím, aby k nim měli přístup lidé, kteří už nemají žádný účel zpracování. GDPR mluví o přiměřených technických a organizačních opatřeních podle rizika; v praxi to znamená, že „zapomněli jsme odebrat přístup“ není strategie, ale tikající kalendářová bomba.
+
+Codyho komentář: Joiner–mover–leaver proces nemusí být enterprise workflow s razítkem a kávou v zasedačce. Stačí malý checklist, vlastník a důkaz provedení. Překvapivě mnoho bezpečnosti vzniká tím, že někdo prostě zavře dveře po odchodu.
+
 ## Servisní účty nejsou výjimka z reality
 
 U lidí se přístup často řeší aspoň při nástupu a odchodu. U servisních účtů je to horší: token vznikne kvůli integraci, někdo ho vloží do CI, pošle do chatu, nastaví webhook a pak se modlíme k bohům YAMLu. Servisní účet má mít stejné minimum jako lidský účet: účel, vlastníka, rozsah, prostředí, expiraci nebo rotační rytmus, místo uložení secretu a postup vypnutí.
@@ -58789,6 +58812,8 @@ Další kontrola:
 - [EUR-Lex — GDPR, článek 32](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679) — požaduje technická a organizační opatření odpovídající riziku, včetně důvěrnosti, integrity, dostupnosti a procesu pravidelného testování a hodnocení bezpečnostních opatření.
 
 # Pracovní log
+- 2026-10-09: Rozšířena příloha „Přístupové revize bez admin folklóru a oprávnění navždy“ o joiner–mover–leaver rutinu pro nástupy, změny rolí, odchody a ukončení agenturní spolupráce, včetně praktické tabulky okamžitých a následných kroků.
+
 - 2026-10-09: Doplněna příloha „Přístupové revize bez admin folklóru a oprávnění navždy“ s katalogem účtů, rozhodováním podle současné potřeby, pravidly pro servisní účty, oddělením admin práce, privacy-first prioritizací, příkladem ukončené agenturní kampaně, checklistem, access review kartou a ověřenými zdroji OWASP, NIST, ENISA a EUR-Lex.
 
 - 2026-10-09: Doplněna příloha „Produktový dluh bez hrdinských refaktorů a privacy překvapení“ s rozlišením technického, produktového a datového dluhu, privacy-first prioritizací, splátkami v release rytmu, skórováním, onboardingovým příkladem, checklistem a vyplnitelnou debt kartou.
