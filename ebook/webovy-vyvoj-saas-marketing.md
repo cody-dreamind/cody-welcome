@@ -59784,7 +59784,207 @@ Jak se vypíná:
 - Evropská komise k principům GDPR pro zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
 
 
+## Příloha: Kontaktní formuláře bez leadového vysavače a CRM bahna
+
+Kontaktní formulář je často první místo, kde firma začne sbírat víc dat, než opravdu potřebuje. Ne ze zlé vůle. Spíš proto, že někdo kdysi přidal pole „telefon“, „velikost firmy“, „rozpočet“, „jak jste se o nás dozvěděli“ a „poznámka“, protože „se to může hodit“. Gratuluju, formulář právě získal kariéru vedlejšího datového skladu.
+
+Privacy-first formulář má jednodušší cíl: pomoci člověku bezpečně udělat další krok. Ne kvalifikovat ho jako položku v detektivním románu, ne vynutit marketingový souhlas a ne poslat jeho zprávu do pěti nástrojů, o kterých se pak nikomu nechce vést evidence.
+
+### 1. Začni rozhodnutím, ne poli
+
+Nejprve si napiš, jaké rozhodnutí má formulář umožnit. Jiný formulář potřebuješ pro obecnou poptávku, jiný pro demo SaaS, jiný pro support a jiný pro žádost o partnerství.
+
+Pracovní otázky:
+
+- co má návštěvník po odeslání očekávat,
+- kdo zprávu čte jako první,
+- podle čeho tým rozhodne další krok,
+- jak rychle má přijít odpověď,
+- co z formuláře opravdu musí být v CRM,
+- co stačí vyřešit v e-mailu a po čase smazat.
+
+Dokud neumíš odpovědět, nepřidávej pole. Pole bez rozhodnutí je jen malý administrativní upír.
+
+### 2. Povinná pole drž na dietě
+
+Výchozí formulář pro B2B web často vystačí s těmito poli:
+
+- jméno nebo oslovení,
+- pracovní e-mail,
+- krátká zpráva,
+- volitelně firma,
+- volitelně web firmy,
+- souhlas s odesláním zprávy a odkaz na informace o zpracování.
+
+Telefon, rozpočet, počet zaměstnanců nebo přesný termín projektu mohou být užitečné, ale nemají být automaticky povinné. Pokud je opravdu potřebuješ, vysvětli proč. „Abychom vám mohli zavolat zpět“ zní férověji než tiché povinné políčko, které vypadá jako mýtná brána do obchodu.
+
+Codyho komentář: Čím víc povinných polí, tím víc návštěvník přemýšlí, jestli vlastně chce mluvit s tebou, nebo radši jít uvařit kafe a zapomenout, že existuje B2B software.
+
+### 3. Rozliš poptávku, marketing a support
+
+Jedna z nejčastějších chyb je házet všechny formuláře do stejného CRM procesu. Poptávka, newsletter, support a incident hlášení mají jiný účel, jiné riziko a jinou retenci.
+
+Praktické rozdělení:
+
+| Typ formuláře | Primární účel | Co ukládat | Co nedělat |
+| --- | --- | --- | --- |
+| Poptávka | Navázat obchodní rozhovor | kontakt, zprávu, zdroj stránky, stav vyřízení | automaticky přidat do newsletteru |
+| Demo SaaS | Domluvit produktovou ukázku | kontakt, firmu, preferovaný termín, produktový zájem | vyžadovat detailní interní data firmy |
+| Support | Vyřešit problém zákazníka | identifikaci účtu, popis problému, technický kontext | míchat support historii do marketingových segmentů |
+| Bezpečnostní hlášení | Rychle eskalovat riziko | kontakt, popis zranitelnosti, dopad, přílohy | posílat do běžné obchodní fronty |
+| Newsletter | Posílat obsah | e-mail, potvrzení přihlášení, zdroj přihlášení | schovat souhlas do poptávkového formuláře |
+
+Marketingový souhlas má být samostatný a dobrovolný. Poptávkový formulář není kouzelná licence k tomu, aby člověk začal dostávat kampaně, protože jednou napsal „máte volný termín na konzultaci?“.
+
+### 4. Napiš datovou poznámku lidsky
+
+Krátká poznámka pod formulářem umí snížit nejistotu lépe než odkaz na právní text o délce menší novely. Nemá nahrazovat zásady zpracování osobních údajů, ale má člověku říct, co se stane teď.
+
+Příklad:
+
+```text
+Údaje z formuláře použijeme jen k odpovědi na vaši zprávu a navazující domluvě.
+Nepřidáme vás automaticky do newsletteru. Data neposíláme do reklamních pixelů.
+Podrobnosti o zpracování najdete v zásadách ochrany soukromí.
+```
+
+Pro SaaS demo může být poznámka konkrétnější:
+
+```text
+Po odeslání se ozveme kvůli domluvě ukázky produktu. Kontaktní údaje uložíme
+do obchodní evidence, aby šlo navázat na domluvu. Marketingové e-maily posíláme
+jen po samostatném přihlášení.
+```
+
+Dobrá poznámka splní tři věci: řekne účel, uklidní ohledně marketingu a odkáže na podrobnosti. Špatná poznámka zní jako „kliknutím souhlasíte se vším, co nás kdy napadne“ — a to není formulář, to je právní horor v šedém textu.
+
+### 5. Ukládej méně a předávej chytřeji
+
+Privacy-first formulář nemusí znamenat ruční chaos. Znamená, že integrace má hranice.
+
+Rozumný tok:
+
+1. Formulář validuje data na serveru.
+2. Systém uloží minimální záznam o odeslání.
+3. Odpovědnému týmu přijde notifikace bez citlivého přetlaku.
+4. Do CRM jde jen to, co je potřeba pro obchodní navázání.
+5. Přílohy a dlouhé poznámky mají omezený přístup a retenci.
+6. Stav vyřízení se aktualizuje bez kopírování celé zprávy do dalších nástrojů.
+
+Co do CRM často nepatří:
+
+- celé technické logy z formuláře,
+- IP adresa jako obchodní atribut,
+- user-agent jako profilovací zajímavost,
+- interní poznámky návštěvníka, které nesouvisí s obchodem,
+- přílohy s osobními nebo zákaznickými daty,
+- automaticky odhadované segmenty z reklamních nástrojů.
+
+Pokud používáš evropské nebo self-hosted nástroje, pořád platí stejná otázka: kdo data čte, proč je potřebuje a kdy zmizí. Evropský provoz není omluvenka pro datový nepořádek, jen lepší výchozí pozice.
+
+### 6. Chybové stavy piš jako člověk
+
+Formulář, který po chybě jen napíše „invalid input“, si zaslouží malý UX trest. Lidé potřebují vědět, co opravit a proč.
+
+Lepší chybové texty:
+
+- „Zadejte prosím pracovní e-mail, ať se vám můžeme ozvat.“
+- „Zpráva je moc krátká. Napište aspoň jednu větu, s čím můžeme pomoct.“
+- „Soubor je příliš velký. Pošlete prosím odkaz nebo soubor do 10 MB.“
+- „Formulář se nepodařilo odeslat. Zkuste to znovu nebo napište přímo na e-mail.“
+
+Bezpečnostní detail: chybová hláška nemá prozrazovat víc, než musí. U přihlášení například neříkej, jestli neexistuje účet nebo nesedí heslo. U kontaktního formuláře ale klidně napiš, že e-mail nemá správný formát. Kontext je král, ne generátor paranoie.
+
+### 7. Spam řeš bez zbytečného sledování
+
+Ochrana proti spamu nemusí automaticky znamenat invazivní třetí stranu na každé stránce. Zvaž nejdřív méně datově hladové možnosti:
+
+- server-side rate limiting,
+- honeypot pole skryté pro lidi,
+- čas od načtení formuláře po odeslání,
+- jednoduché pravidlo pro opakované identické zprávy,
+- potvrzovací e-mail u citlivějších žádostí,
+- ruční moderaci u nízkého objemu.
+
+Pokud nasazuješ externí anti-spam službu, přidej ji do datové mapy, vysvětli ji v zásadách soukromí a ověř, jestli opravdu potřebuje běžet na každé stránce. „Dali jsme tam skript, protože to dělají všichni“ není strategie; je to crowdsourcing vlastního rizika.
+
+### 8. Retence: lead není historická památka
+
+Každý formulář má mít jednoduché pravidlo, kdy se data mažou, anonymizují nebo převádějí do jiné evidence.
+
+Příklad retenčního modelu:
+
+- nevyřízená poptávka: do vyřízení a krátké následné kontroly,
+- neúspěšný lead bez další komunikace: smazat nebo minimalizovat po stanovené době,
+- aktivní obchodní jednání: držet v CRM podle obchodního procesu,
+- zákazník: přesunout jen relevantní údaje do zákaznické evidence,
+- spam a testovací odeslání: mazat rychle,
+- bezpečnostní hlášení: držet podle incidentového procesu.
+
+Retence má být napsaná v provozní rutině, ne uložená v hlavě jednoho člověka, který zrovna odjel na dovolenou a vzal si s sebou i kolektivní paměť firmy.
+
+### 9. Praktický příklad: konzultační web pro SaaS implementace
+
+Firma nabízí implementace evropských SaaS nástrojů. Původní formulář měl deset povinných polí: jméno, e-mail, telefon, firma, role, počet zaměstnanců, rozpočet, termín, zdroj kontaktu a dlouhou zprávu. Odeslání šlo do CRM, mailingového nástroje, Slacku a tabulky.
+
+Nový návrh:
+
+- povinně jen jméno, e-mail a zpráva,
+- firma a web jsou volitelné,
+- rozpočet se řeší až v navazujícím e-mailu nebo callu,
+- newsletter má samostatné přihlášení,
+- Slack notifikace obsahuje jen jméno, firmu a odkaz do interní evidence,
+- CRM dostane jen kvalifikované poptávky po ručním označení,
+- spam se řeší honeypotem a rate limitem,
+- nevyřízené testovací a spam záznamy se mažou v týdenní rutině.
+
+Výsledek: méně tření pro návštěvníka, méně duplicit v nástrojích a lepší kontrola nad tím, kde se osobní údaje opravdu nachází. Bonus: obchodník přestal předstírat, že „počet zaměstnanců“ z formuláře byl zásadní pro první odpověď.
+
+### Checklist: formulář bez datového přetlaku
+
+- [ ] Každý formulář má jasný účel a vlastníka.
+- [ ] Povinná pole jsou omezená na skutečné minimum pro první odpověď.
+- [ ] Marketingový souhlas není schovaný v poptávkovém formuláři.
+- [ ] Pod formulářem je krátká lidská datová poznámka.
+- [ ] Zásady soukromí popisují účel, nástroje, příjemce a retenci.
+- [ ] CRM dostává jen data potřebná pro obchodní proces.
+- [ ] Interní notifikace neposílají celé citlivé zprávy do zbytečných kanálů.
+- [ ] Anti-spam ochrana je zvolená podle rizika a zapsaná v datové mapě.
+- [ ] Chybové stavy jsou srozumitelné a neprozrazují zbytečné informace.
+- [ ] Existuje rutina pro mazání testů, spamu a starých neúspěšných leadů.
+- [ ] Formulář má fallback kontakt, když odeslání selže.
+
+### Mini šablona formulářové karty
+
+```text
+Název formuláře:
+URL:
+Účel:
+Vlastník:
+Kdo čte odpovědi:
+Povinná pole:
+Volitelná pole:
+Zakázaná pole:
+Kam se data ukládají:
+Kam se posílají notifikace:
+Co jde do CRM:
+Marketingový souhlas:
+Anti-spam ochrana:
+Retence:
+Fallback kontakt:
+Datum poslední kontroly:
+```
+
+### Zdroje
+
+- GDPR, čl. 5 — principy zpracování včetně minimalizace údajů: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+- Evropská komise k principům GDPR pro zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- EDPB Guidelines 05/2020 on consent under Regulation 2016/679: https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en
+- OWASP Automated Threats to Web Applications: https://owasp.org/www-project-automated-threats-to-web-applications/
+
+
 # Pracovní log
+- 2026-10-09: Doplněna příloha „Kontaktní formuláře bez leadového vysavače a CRM bahna“ s návrhem minimálních polí, rozlišením poptávky, marketingu a supportu, lidskou datovou poznámkou, bezpečným tokem do CRM, chybovými stavy, anti-spam pravidly, retencí, praktickým příkladem, checklistem, formulářovou kartou a ověřenými zdroji GDPR, Evropské komise, EDPB a OWASP. Pomáhá webům sbírat poptávky bez automatického přifukování datového dluhu.
 - 2026-10-09: Doplněna příloha „Webhooky bez datového ohňostroje a integračního chaosu“ s návrhem doménových eventů, minimalistickým payloadem, podpisem a rotací tajemství, idempotencí, retry pravidly, verzováním schématu, zákaznickým webhook panelem, bezpečným delivery logem, praktickým příkladem, checklistem, šablonou webhook karty a ověřenými zdroji OWASP, CloudEvents a Evropské komise. Pomáhá SaaS týmům posílat integrační signály bez zbytečného úniku dat a supportového chaosu.
 - 2026-10-09: Doplněna příloha „Zákaznické exporty dat bez privacy průšvihu a CSV divočiny“ s rozdělením typů exportů, kontrolou oprávnění podle obsahu, volbou formátů, minimalizací polí, retencí připravených souborů, B2B příkladem, checklistem, export kartou a ověřenými zdroji GDPR, EDPB a Evropské komise.
 
