@@ -62243,171 +62243,204 @@ Tady je rozdíl mezi „něco jsme změnili“ a „zákazník ví, co má uděl
 - W3C Feed Validation Service — praktická kontrola RSS/Atom feedů pro přímý odběr změn: https://validator.w3.org/feed/
 
 
-# Příloha: Rate limiting bez fingerprintingového cirkusu
+# Příloha: ROI kalkulačky bez leadového vydírání
 
-Rate limiting je jeden z těch nenápadných ochranných prvků, které nikdo nepochválí, dokud nechybí. Když chybí, formulář ti pošle tisíc spamů, exporty sežerou CPU, login se promění v hádací automat a účet za infrastrukturu začne dělat jógu směrem nahoru. Špatná reakce je koupit velkou „anti-bot“ krabici, která sleduje každého návštěvníka jako podezřelého. Lepší reakce je navrhnout limity podle účelu, nákladů a rizika.
+ROI kalkulačka může být skvělý pomocník. Zákazník si v klidu spočítá, jestli mu produkt nebo služba dává ekonomický smysl, obchod dostane konkrétnější rozhovor a marketing nemusí slibovat zázraky v mlze. Jenže kalkulačka se dá pokazit dvěma způsoby: buď je to falešná věštecká koule s přehnanými sliby, nebo leadový vysavač, který výsledek zamkne za e-mail, telefon a souhlas se vším kromě transplantace ledviny.
 
-> Codyho komentář: Rate limit není trest. Je to slušné dopravní značení pro produkt. Když ho navrhneš dobře, normální uživatel si ničeho nevšimne a roboti si jdou hrát jinam. Což je ideální společenské uspořádání.
+Privacy-first ROI kalkulačka má být užitečná i bez odeslání formuláře. Kontakt může nabídnout, ale nemá ho vynucovat jako výkupné za výsledek.
 
-## Začni katalogem akcí, ne IP adresou
+> Codyho komentář: Když kalkulačka ukáže „ušetříte 87 432 Kč měsíčně“ po zadání dvou čísel, není to analytika. Je to horoskop s tabulkou. Hezké, ale ne pro B2B rozhodování.
 
-Nejdřív si napiš, co vlastně chráníš. IP adresa je jen jeden slabý signál; u mobilních sítí, kancelářských sítí nebo VPN může reprezentovat hodně lidí najednou. Pokud začneš „limit na IP“ kopírovat všude, rychle skončíš s falešnými blokacemi a supportem plným vět typu „mně to nejde“. Začni katalogem akcí:
+## Nejdřív napiš rozhodnutí, kterému kalkulačka pomáhá
 
-- veřejný formulář: chráníš inbox, reputaci domény a čas lidí,
-- login a reset hesla: chráníš účty, důvěru a bezpečnostní signály,
-- export dat: chráníš databázi, fronty a náklady,
-- API endpoint: chráníš stabilitu, zákaznické limity a férové používání,
-- AI nebo placená integrace: chráníš peníze, kvóty a vendor lock-in bolesti.
+Kalkulačka nemá existovat proto, že ji má konkurence. Má pomáhat s jedním rozhodnutím. Příklady:
 
-U každé akce si napiš tři věci: kdo je oprávněný uživatel, jak vypadá běžný provoz a co se stane při zneužití. Teprve potom řeš technický klíč limitu.
+- „Vyplatí se nám automatizovat ruční zpracování poptávek?“
+- „Kolik času ztrácíme podporou opakovaných dotazů?“
+- „Je pro nás lepší fixní balíček, nebo individuální implementace?“
+- „Kolik nás stojí provoz starého webu, který nejde měřit ani upravovat?“
+- „Má smysl přejít z ručního exportu dat na SaaS integraci?“
 
-## Používej více úrovní limitů
+Jedna kalkulačka, jedno rozhodnutí. Jakmile začneš do jedné stránky lepit úsporu času, cenu licence, bezpečnostní riziko, uhlíkovou stopu, morálku týmu a astrologii akvizice, už to není kalkulačka. Je to firemní deskovka.
 
-Jeden globální limit je lákavý, ale málo užitečný. Praktický SaaS obvykle potřebuje kombinaci:
+## Vstupy drž krátké a vysvětlené
 
-- per účet nebo workspace: „kolik akcí může udělat tento zákazník“,
-- per uživatel: „kolik citlivých akcí může dělat jedna osoba“,
-- per endpoint: „kolik požadavků snese tahle část produktu“,
-- per IP / síťový rozsah: hrubá ochrana veřejných částí,
-- per nákladová operace: export, import, AI shrnutí, hromadné e-maily,
-- globální pojistka: nouzová brzda pro celý systém.
+Dobrý vstup je takový, který zákazník zná bez interní detektivky. Pokud musí před použitím kalkulačky lovit přesná účetní data, pravděpodobně ji zavře. Pro první verzi stačí rozsahy:
 
-Příklad: u exportu faktur nedává smysl jen limit `100 požadavků za minutu na IP`. Lepší je `3 exporty za 10 minut na uživatele`, `20 exportů za hodinu na workspace`, fronta s deduplikací stejného exportu a globální limit pro export worker. Normální účetní exportuje jednou. Robot, bug nebo netrpělivé klikání nevyrobí dvacet stejných CSV.
+- počet lidí v týmu,
+- počet opakování úkolu za týden,
+- průměrný čas jedné ruční akce,
+- hrubá hodinová sazba nebo interní náklad,
+- aktuální měsíční náklad nástroje,
+- očekávaný objem poptávek, ticketů, faktur nebo exportů.
 
-## Citlivé akce limituj podle dopadu
+U každého pole napiš, proč ho chceš a jak ho používáš. W3C u formulářů doporučuje jasné popisky, instrukce a zpětnou vazbu; platí to i pro kalkulačky, protože kalkulačka je pořád formulář, jen s hezčím kloboukem. Když člověk neví, co znamená „měsíční objem“, nepomůže mu gradient na tlačítku.
 
-Ne všechny endpointy jsou stejné. Čtení veřejného článku, odeslání kontaktního formuláře a změna e-mailu vlastníka workspace nemají stejný dopad. Nastav si tři třídy:
+## Výpočet ukaž, neschovávej
 
-1. **Nízké riziko:** veřejný obsah, běžné čtení, neplacené statické zdroje.
-2. **Střední riziko:** formuláře, vyhledávání, běžné API čtení, exporty menších objemů.
-3. **Vysoké riziko:** login, reset hesla, pozvánky uživatelů, změny oprávnění, mazání dat, placené integrace, AI volání.
+ROI výsledek bez vzorce je marketingové kouzlo. Ukaž základní logiku:
 
-Vysoké riziko má mít limit i auditní událost. Ne proto, aby sis hrál na detektiva, ale aby šlo rychle odpovědět na otázku: „Stalo se něco divného a koho se to týká?“ Ulož důvod blokace, typ akce, čas, anonymizovaný nebo zkrácený síťový signál, účet/workspace a korelační ID. Neukládej obsah formuláře, heslo, token, celé payloady ani zbytečné otisky prohlížeče.
+```text
+měsíční úspora času = počet úkonů × čas na úkon × počet týdnů
+hrubá hodnota úspory = měsíční úspora času × hodinový náklad
+čistý odhad = hrubá hodnota úspory - měsíční cena řešení
+```
 
-## Chovej se slušně k uživateli
+Nemusíš ukazovat interní model na úrovni spreadsheetového románu. Ale uživatel má pochopit, co výsledek zvyšuje, co ho snižuje a kde je odhad nejistý. Přidej přepínač „konzervativní / realistický / optimistický“, ale vysvětli rozdíl. Konzervativní může počítat jen 30 % zachycené úspory, realistický 50 %, optimistický 70 %. Ne proto, že ta čísla jsou univerzální pravda, ale proto, že otevřeně ukazuješ předpoklad.
 
-Dobrá ochrana nemá vypadat jako výslech. Když limit zasáhne, uživatel má vědět:
+> Codyho komentář: Odhad je v pořádku. Tajný odhad převlečený za přesné číslo je problém. Hlavně když má dvě desetinná místa a sebevědomí investičního bankéře.
 
-- co se stalo,
-- kdy to může zkusit znovu,
-- jestli existuje bezpečná alternativa,
-- jak kontaktovat support, pokud jde o omyl.
+## Výsledek dej hned, kontakt nabídni potom
 
-Špatná hláška: „Error 429“. Lepší hláška: „Export už připravujeme. Další export spustíte za 8 minut, aby systém zůstal rychlý i pro ostatní.“ U loginu buď opatrnější: neprozrazuj, jestli existuje účet. Můžeš napsat: „Příliš mnoho pokusů. Zkuste to za 10 minut nebo použijte reset hesla.“
+Nejhorší varianta: člověk vyplní pět polí, klikne na „Spočítat“ a dostane hlášku „Zadejte e-mail pro zobrazení výsledku“. Gratuluji, právě jsi z užitečného nástroje udělal malou zradu.
 
-Pro API vracej standardní status `429 Too Many Requests`, přidej `Retry-After` a dokumentuj limity. U veřejného webu stačí lidská stránka bez marketingových skriptů. Není nutné přilepit návštěvníkovi tři další trackery jen proto, že moc rychle kliknul. To je jako hasit svíčku plamenometem.
+Lepší postup:
 
-## Anti-bot ochranu stav po schodech
+1. Výsledek ukaž okamžitě v prohlížeči.
+2. Přidej vysvětlení předpokladů a citlivosti výsledku.
+3. Nabídni volitelný export PDF nebo poslání výsledku e-mailem.
+4. Kontakt chtěj jen tehdy, když uživatel chce navazující akci.
+5. Ulož jen to, k čemu máš jasný účel.
 
-Privacy-first postup není „nikdy neblokuj“. Je to „blokuj přiměřeně a s minimem dat“. Schody můžou vypadat takhle:
+CTA může znít:
 
-1. **Pasivní limity:** per akce, účet, endpoint a náklad.
-2. **Deduplikace:** stejný formulář, stejný export nebo stejné API volání nesmí běžet desetkrát paralelně.
-3. **Zpomalení:** dočasné čekání místo tvrdého zákazu, hlavně u loginu.
-4. **Jednorázová výzva:** jednoduchá kontrola u veřejného formuláře, ale jen při podezřelém vzoru.
-5. **Dočasná blokace:** krátká, vysvětlitelná a auditovaná.
-6. **Ruční review:** jen u dopadu na zákazníka, ne u každého šumu.
+- „Chci projít výsledek s člověkem“
+- „Poslat výsledek na e-mail“
+- „Stáhnout anonymní checklist implementace“
+- „Otevřít pricing podle zadaného rozsahu“
 
-Fingerprinting prohlížeče ber jako poslední a velmi podezřelou možnost, ne jako default. Sbírá hodně signálů, těžko se vysvětluje a často se rozlézá mimo původní účel. Pro malé evropské SaaS je lepší kombinovat jednoduché limity, serverové fronty, přihlášený kontext a dobrou observabilitu.
+Nepotřebuješ schovávat výsledek. Pokud je kalkulačka dobrá, sama vytvoří důvěru. Pokud je špatná, e-mail ji nezachrání.
 
-## Nákladové limity patří do produktu
+## Data počítej lokálně, pokud to jde
 
-Některé limity nejsou bezpečnostní, ale ekonomické. AI shrnutí ticketů, OCR faktur, hromadné e-maily, geokódování nebo PDF generování stojí peníze. Pokud je schováš jen do infrastruktury, produktový tým neuvidí skutečný dopad.
+Jednoduchá kalkulačka může běžet celá v prohlížeči. To je privacy-first ideál: uživatel zadá čísla, dostane výsledek a server se nemusí dozvědět nic. Pokud chceš měřit použití, stačí agregovaná událost typu `roi_calculator_used` a volitelně rozsah výsledku v širokých pásmech, ne přesná vstupní čísla.
 
-Praktický model:
+Příklad rozumných eventů:
 
-- ukaž zákazníkovi férový měsíční limit u nákladové funkce,
-- při blížícím se limitu nabídni vysvětlení, ne paniku,
-- interně sleduj náklad na workspace, ne obsah zákaznických dat,
-- pro support měj bezpečný přehled „kolik se spotřebovalo a proč“,
-- pro překročení měj ruční schválení nebo placený balíček.
+```text
+roi_calculator_started
+roi_calculator_completed
+roi_result_band_selected: low / medium / high
+roi_followup_clicked: consultation / pricing / export
+```
 
-Tohle není jen ochrana před útokem. Je to ochrana marže. A marže, jak známo, je kyslík pro SaaS, ne sprosté slovo.
+Co raději neposílat do analytiky:
 
-## Praktický příklad: kontaktní formulář a AI shrnutí
+- přesnou hodinovou sazbu,
+- počet zaměstnanců, pokud jde o citlivý segment,
+- interní náklady,
+- volné poznámky,
+- e-mail bez samostatného účelu,
+- kombinaci vstupů, podle které lze zákazníka snadno identifikovat.
 
-Malý B2B SaaS má veřejný formulář „Chci demo“ a funkci AI shrnutí support ticketu. Obě věci potřebují limit, ale úplně jiný.
+GDPR princip minimalizace říká, že se mají zpracovávat jen osobní údaje nutné pro daný účel. EDPB u privacy by design připomíná, že minimalizace a ochrana dat se mají řešit už v návrhu. U kalkulačky to znamená: jestli výsledek umíš spočítat bez serveru a bez identity, začni tam.
 
-Formulář:
+## Nepřeháněj jistotu
 
-- max 3 odeslání za 10 minut na kombinaci formulář + zkrácený IP prefix,
-- max 10 odeslání za hodinu pro stejný e-mailový hash,
-- honeypot pole bez externího skriptu,
-- duplicitní zprávu během 5 minut jen potvrdit, neposílat znovu,
-- logovat pouze typ formuláře, čas, výsledek a korelační ID.
+ROI kalkulačka není smlouva o výsledku. Je to orientační pomůcka. Proto napiš:
 
-AI shrnutí:
+- jaké předpoklady používáš,
+- co výsledek nezahrnuje,
+- kdy je potřeba individuální posouzení,
+- že nejde o garantovanou úsporu,
+- jak si zákazník může výsledek ověřit na svých datech.
 
-- max 20 shrnutí denně na workspace v běžném tarifu,
-- max 3 paralelní úlohy na workspace,
-- deduplikace stejného ticketu a stejné verze obsahu,
-- interní metrika spotřeby tokenů bez ukládání promptu do analytiky,
-- admin audit pro změnu limitu.
+Praktický text:
 
-Výsledek: spam neucpe inbox, AI účet neuteče do lesa a zákazník pořád vidí srozumitelné chování produktu.
+> Výsledek je orientační odhad podle zadaných hodnot. Nezahrnuje náklady na interní změnu procesu, školení týmu ani výjimky v provozu. Pro přesnější posouzení doporučujeme projít jeden reálný týden práce a porovnat ho s navrženým postupem.
 
-## Checklist: rate limiting bez šmírování
+Tohle nepůsobí slabě. Působí to dospěle. A dospělost je v B2B nákupu podezřele účinná.
 
-- [ ] Máme katalog citlivých, nákladových a veřejných akcí.
-- [ ] Každý limit má jasný účel a vlastníka.
-- [ ] Nepoužíváme IP adresu jako jediný rozhodovací signál.
-- [ ] Login, reset hesla a pozvánky mají samostatné limity.
-- [ ] Nákladové operace mají workspace nebo tarifní limity.
-- [ ] Uživatel vidí slušnou hlášku a čas dalšího pokusu, kde je to bezpečné.
-- [ ] API vrací `429` a `Retry-After`.
-- [ ] Logy neobsahují tajemství, payloady ani zbytečný fingerprint.
-- [ ] Blokace jsou krátké, auditované a zrušitelné supportem.
-- [ ] Jednou měsíčně kontrolujeme falešné pozitivy a nejdražší endpointy.
+## Praktický příklad: kalkulačka úspory supportu
 
-## Mini šablona limit karty
+SaaS tým chce ukázat, kolik času může ušetřit lepší self-service dokumentace a automatické návrhy odpovědí. Kalkulačka má pět vstupů:
+
+- počet support dotazů týdně,
+- podíl opakovaných dotazů,
+- průměrný čas odpovědi,
+- interní hodinový náklad supportu,
+- očekávaný podíl dotazů, které půjde odklonit.
+
+Výstup:
+
+- odhad hodin měsíčně,
+- hrubá finanční hodnota času,
+- konzervativní rozsah úspory,
+- seznam předpokladů,
+- doporučený další krok podle velikosti problému.
+
+Privacy-first nastavení:
+
+- výpočet běží v prohlížeči,
+- analytika měří jen dokončení kalkulačky a klik na navazující CTA,
+- e-mail je volitelný jen pro zaslání výsledku,
+- žádné přesné vstupy nejdou do CRM bez výslovné akce uživatele,
+- výsledek lze zkopírovat bez účtu.
+
+## Checklist: ROI kalkulačka bez leadového vydírání
+
+- [ ] Kalkulačka pomáhá jednomu konkrétnímu rozhodnutí.
+- [ ] Každé pole má jasný popisek a důvod.
+- [ ] Výsledek se ukáže bez povinného e-mailu.
+- [ ] Uživatel vidí předpoklady a zjednodušení výpočtu.
+- [ ] Přesná vstupní data se neposílají do analytiky bez nutnosti.
+- [ ] Výpočet běží lokálně, pokud to produktově stačí.
+- [ ] CTA po výsledku nabízí užitečný další krok, ne nátlak.
+- [ ] Text jasně říká, že jde o orientační odhad.
+- [ ] Export nebo zaslání výsledku má samostatný souhlas a účel.
+- [ ] Kalkulačka funguje na mobilu, klávesnici a s čtečkou obrazovky.
+
+## Mini šablona ROI kalkulačky
 
 ```markdown
-# Limit karta: [akce / endpoint]
+# ROI kalkulačka: [název]
 
-## Účel
-- Co chráníme:
-- Před jakým zneužitím:
-- Dopad na zákazníka při blokaci:
+## Rozhodnutí
+- Komu pomáhá:
+- Jaké rozhodnutí má usnadnit:
+- Kdy kalkulačka nestačí:
 
-## Rozsah
-- Endpoint / funkce:
-- Riziková třída:
-- Nákladová operace: ano/ne
+## Vstupy
+- Pole 1:
+- Pole 2:
+- Pole 3:
+- Nepovinné pole:
+- Co výslovně nechceme:
 
-## Pravidla
-- Per uživatel:
-- Per workspace:
-- Per IP / síťový signál:
-- Globální pojistka:
-- Retry po:
+## Výpočet
+- Základní vzorec:
+- Konzervativní předpoklad:
+- Realistický předpoklad:
+- Optimistický předpoklad:
 
-## Data
-- Co logujeme:
-- Co výslovně nelogujeme:
-- Retence logu:
+## Výstup
+- Hlavní číslo:
+- Rozsah nejistoty:
+- Vysvětlení předpokladů:
+- Doporučený další krok:
 
-## UX a support
-- Text pro uživatele:
-- Support postup:
-- Kdy eskalovat:
+## Data a soukromí
+- Počítá se lokálně: ano/ne
+- Co měří analytika:
+- Co se ukládá do CRM:
+- Retence uloženého výsledku:
 
-## Revize
-- Vlastník:
-- Datum poslední kontroly:
-- Poznámky k falešným pozitivům:
+## UX kontrola
+- Výsledek bez e-mailu: ano/ne
+- Přístupné popisky a chyby:
+- Mobilní kontrola:
 ```
 
 ## Zdroje k ověření
 
-- OWASP API Security Top 10 — API4:2023 Unrestricted Resource Consumption, doporučení o limitech spotřeby zdrojů a nákladových dopadech API: https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/
-- OWASP ASVS — bezpečnostní požadavky pro webové aplikace, vhodné jako checklist při návrhu autentizace, session managementu a ochranných kontrol: https://owasp.org/projects/asvs
-- NIST SP 800-63B — sekce k rate limitingu/throttlingu u autentizace a snížení rizika online hádání hesel: https://pages.nist.gov/800-63-4/sp800-63b.html
-- EDPB Guidelines 4/2019 k článku 25 GDPR — data protection by design and by default jako rámec pro minimalizaci signálů a ochranu uživatele už v návrhu: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- European Commission — principy GDPR včetně minimalizace dat: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+- EDPB Guidelines 4/2019 — data protection by design and by default jako rámec pro návrh s menším objemem dat: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+- W3C WAI Forms Tutorial — přístupné formuláře, popisky, instrukce a validace: https://www.w3.org/WAI/tutorials/forms/
 
 
 # Pracovní log
 
-- 2026-10-09: Doplněna příloha „Rate limiting bez fingerprintingového cirkusu“ s katalogem chráněných akcí, víceúrovňovými limity, pravidly pro citlivé a nákladové operace, slušným UX při blokaci, privacy-first anti-bot schody, příkladem pro kontaktní formulář a AI shrnutí, checklistem, vyplnitelnou limit kartou a ověřenými zdroji OWASP, NIST a EDPB. Pomáhá malým SaaS týmům chránit formuláře, login, API a drahé integrace bez plošného fingerprintingu návštěvníků.
+- 2026-10-09: Doplněna příloha „ROI kalkulačky bez leadového vydírání“ s návrhem kalkulaček podle jednoho rozhodnutí, krátkými vysvětlenými vstupy, otevřeným výpočtem, okamžitým výsledkem bez povinného e-mailu, lokálním zpracováním dat, opatrnou analytikou, příkladem kalkulačky úspory supportu, checklistem, vyplnitelnou šablonou a ověřenými zdroji Evropské komise, EDPB a W3C. Pomáhá marketingovým webům a SaaS týmům používat interaktivní kalkulačky jako férovou pomůcku, ne jako leadový vysavač.
 
 - 2026-10-09: Doplněna navazující příloha „Migrační release oznámení bez marketingové mlhy“ s rozlišením interního release logu, veřejného changelogu a zákaznického oznámení, dopadovým psaním změn, kategoriemi podle Keep a Changelog, verzováním podle SemVer, postupem pro breaking changes, opatrnou bezpečnostní komunikací, privacy-first distribucí přes přímé odkazy a RSS, praktickým příkladem změny CSV exportu, checklistem, vyplnitelnou šablonou a ověřenými zdroji. Pomáhá malým SaaS týmům vysvětlovat změny vyžadující zákaznickou akci tak, aby lidé věděli, co se jich týká a co mají udělat, bez trackerů a marketingové mlhy.
 
