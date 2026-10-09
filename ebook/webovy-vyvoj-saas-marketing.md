@@ -59530,7 +59530,262 @@ Vazba na incident response:
 - Evropská komise k oznamování porušení zabezpečení osobních údajů podle GDPR: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en
 
 
+
+# Příloha: Webhooky bez datového ohňostroje a integračního chaosu
+
+Komu to pomáhá a proč: tahle příloha pomáhá SaaS týmu navrhnout webhooky tak, aby zákazníkům spolehlivě doručovaly důležité události, ale nepouštěly ven víc dat, než je nutné, a nevyráběly supportový ping-pong při každém výpadku odběratele.
+
+Webhook je jednoduchý nápad: něco se stane u tebe a ty o tom pošleš HTTP zprávu někomu jinému. Jenže v produkci to není „pošleme JSON a hotovo“. Je to hranice mezi systémy, kde se potkává bezpečnost, spolehlivost, datová minimalizace, retry logika, auditní stopa a zákaznické očekávání. Malý webhook bez pravidel umí udělat větší škodu než velká funkce, protože data tečou pryč automaticky a často dlouho bez lidské pozornosti.
+
+*Codyho komentář:* Webhooky jsou integrační ekvivalent pošťáka na skútru. Skvělé, když ví, kam jede, co veze a komu to smí předat. Horší, když má batoh plný osobních údajů, žádnou brzdu a mapu z roku 2017.
+
+## Začni událostmi, ne payloadem
+
+První chyba je začít otázkou „jaký JSON pošleme?“. Lepší otázka zní: „jaké rozhodnutí má příjemce díky webhooku udělat?“
+
+Dobré webhook eventy jsou pojmenované podle události v doméně:
+
+- `invoice.created`,
+- `subscription.cancelled`,
+- `user.invited`,
+- `export.ready`,
+- `payment.failed`,
+- `ticket.status_changed`.
+
+Slabé eventy jsou interní šum:
+
+- `database.updated`,
+- `row.changed`,
+- `object.saved`,
+- `sync.happened`,
+- `admin.clicked_button`.
+
+Interní názvy tabulek a frameworkové události patří do technických logů, ne do veřejné integrační smlouvy. Webhook je produktové API. Jakmile ho zákazník použije, změna názvu nebo významu bolí stejně jako rozbitý endpoint.
+
+Praktická otázka pro návrh eventu:
+
+```text
+Kdyby zákazník dostal jen název eventu a ID objektu, věděl by, proč má reagovat?
+```
+
+Pokud ne, event je buď moc obecný, nebo patří do jiné integrační vrstvy.
+
+## Payload drž jako pozvánku, ne jako stěhovací vůz
+
+Webhook nemusí nést celý objekt. Často stačí poslat typ události, čas, stabilní ID, tenant kontext, verzi schématu a odkaz na API, kde si oprávněný systém načte detail.
+
+Minimalistický payload:
+
+```json
+{
+  "id": "evt_01HZX...",
+  "type": "invoice.created",
+  "created_at": "2026-10-09T10:00:00Z",
+  "tenant_id": "org_123",
+  "api_version": "2026-10-01",
+  "data": {
+    "object_type": "invoice",
+    "object_id": "inv_456"
+  }
+}
+```
+
+Tohle má tři výhody:
+
+- webhook nešíří zbytečné osobní údaje,
+- příjemce používá stejná oprávnění jako u API,
+- změna detailu objektu nerozbije všechny integrace najednou.
+
+Kdy dává bohatší payload smysl:
+
+- když jde o nekritická provozní metadata,
+- když příjemce potřebuje reagovat i při dočasné nedostupnosti tvého API,
+- když má zákazník jasně zapnutý rozsah polí,
+- když je payload dokumentovaný a verzovaný.
+
+Kdy bohatý payload raději neposílat:
+
+- obsahuje osobní údaje, které příjemce nepotřebuje,
+- obsahuje texty zákazníků, poznámky, soubory nebo interní komentáře,
+- příjemce je marketingový nebo analytický nástroj s nejasným dalším použitím dat,
+- tým nedokáže vysvětlit retenci doručených webhooků.
+
+Privacy-first pravidlo: webhook má přenést signál, ne celý životopis objektu.
+
+## Autentizace není volitelný doplněk
+
+Webhook endpoint je veřejná adresa. To znamená, že příjemce musí umět ověřit, že zpráva opravdu přišla od tebe a že nebyla cestou upravená. Nestačí tajná URL. Ta se časem objeví v logu, ticketu, screenshotu nebo u někoho v poznámkách.
+
+Praktický základ:
+
+- každý webhook endpoint má vlastní tajemství,
+- payload se podepisuje HMAC podpisem,
+- podpis pokrývá čas i tělo zprávy,
+- příjemce ověřuje časové okno kvůli replay útokům,
+- tajemství jde bezpečně rotovat,
+- staré tajemství má krátké překryvné období.
+
+Hlavičky mohou vypadat například takto:
+
+```text
+X-Cody-Event-Id: evt_01HZX...
+X-Cody-Timestamp: 2026-10-09T10:00:00Z
+X-Cody-Signature: v1=...
+```
+
+Neukládej tajemství do dokumentace, screenshotů ani ticketů. V administraci zobraz celé tajemství jen při vytvoření nebo rotaci. Později ukazuj jen krátký fingerprint a datum poslední rotace.
+
+## Idempotence je rozdíl mezi integrací a fakturačním ohňostrojem
+
+Webhooky se budou opakovat. Síť spadne, příjemce vrátí chybu, timeout se potká s úspěšným zpracováním a někdo klikne na „resend“. Pokud příjemce neumí idempotenci, stejná událost může vytvořit dvě objednávky, dvě faktury nebo dva support tickety.
+
+Každý event proto potřebuje stabilní `event_id`. Příjemce si má ukládat, které eventy už zpracoval, a opakované doručení stejného `event_id` bezpečně ignorovat nebo vrátit jako už zpracované.
+
+Na straně poskytovatele si napiš pravidla:
+
+| Situace | Co dělat |
+| --- | --- |
+| Endpoint vrátí `2xx` | považuj za doručené |
+| Endpoint vrátí `4xx` | nerecykluj donekonečna; ukaž chybu zákazníkovi |
+| Endpoint vrátí `5xx` | retry s exponenciálním odstupem |
+| Timeout | retry, ale se stejným `event_id` |
+| Ruční resend | pošli stejný event, ne novou událost |
+
+Retry plán nemusí být heroický. Praktický rytmus pro malé B2B SaaS:
+
+- první retry po 1 minutě,
+- další po 5 minutách,
+- další po 30 minutách,
+- pak několik pokusů v řádu hodin,
+- po vyčerpání označit endpoint jako problémový a upozornit správce.
+
+Nedělej nekonečné retry peklo. Pokud endpoint tři dny neodpovídá, další pokusy pravděpodobně nezachrání zákazníka, jen zamoří logy a queue.
+
+## Verze schématu napiš dřív, než tě doběhnou
+
+Webhook payload je smlouva. Jakmile existuje v produkci, někdo na něj napojí účetnictví, CRM, sklad nebo interní automatizaci v nástroji, který už nikdo nechce otevřít, protože se bojí, co tam najde.
+
+Bezpečná pravidla změn:
+
+- přidání nového nepovinného pole je běžně kompatibilní,
+- přejmenování pole je breaking change,
+- změna typu pole je breaking change,
+- odstranění pole je breaking change,
+- změna významu eventu je breaking change i bez změny JSONu.
+
+Do payloadu dávej `api_version` nebo `schema_version`. V dokumentaci piš příklady pro každou podporovanou verzi. Zákazník má vědět, kdy stará verze končí, jak přejít a co přesně se mění.
+
+Praktická release poznámka:
+
+```text
+Od 2026-12-01 bude event invoice.created obsahovat nové nepovinné pole data.object_total_minor. Stávající pole se nemění. Starší integrace nemusí dělat žádnou úpravu.
+```
+
+Tohle je lepší než „vylepšili jsme webhooky“. Ano, super, ale čím přesně mám zkazit pátek?
+
+## Zákaznické nastavení nesmí být tajná laboratoř
+
+Administrace webhooků má zákazníkovi ukázat, co se děje. Nejen pole pro URL a tlačítko „uložit“.
+
+Minimum pro použitelný webhook panel:
+
+- seznam aktivních endpointů,
+- zapnuté typy eventů,
+- datum posledního úspěchu a poslední chyby,
+- poslední HTTP status,
+- možnost poslat testovací event,
+- možnost ručního resend konkrétní události,
+- bezpečná rotace tajemství,
+- auditní log změn konfigurace.
+
+Testovací event má být jasně označený a nemá spouštět reálné obchodní akce. Pokud posíláš `invoice.created` jako test, dej do payloadu `livemode: false` nebo testovací typ objektu. Jinak někdo jednou zaúčtuje testovací fakturu a pak budeme všichni dělat, že nás to překvapilo.
+
+## Loguj doručení, ne citlivý payload
+
+Pro podporu potřebuješ vědět, co se stalo. Nepotřebuješ si navždy ukládat celé tělo každého webhooku.
+
+Bezpečný delivery log:
+
+- `event_id`,
+- typ eventu,
+- tenant,
+- endpoint fingerprint nebo název,
+- čas pokusu,
+- HTTP status,
+- délka odpovědi,
+- chybová kategorie,
+- request ID,
+- počet pokusů.
+
+Co do logu raději nedávat:
+
+- celé payloady s osobními údaji,
+- celé odpovědi zákaznického endpointu,
+- tajemství a podpisy,
+- kompletní URL s tokeny v query stringu,
+- osobní poznámky a obsah souborů.
+
+Pokud pro ladění dočasně potřebuješ ukázat payload, udělej to jako krátkodobý režim se souhlasem správce, omezenou retencí a auditní stopou. Debug režim není nový datový sklad v převleku.
+
+## Praktický příklad: účetní SaaS a notifikace faktur
+
+Malý účetní SaaS chce posílat zákazníkům webhook, když je faktura vytvořená nebo zaplacená. První návrh posílá celé jméno klienta, adresu, položky faktury, e-mail a interní poznámku účetní.
+
+Lepší návrh:
+
+- event `invoice.created` posílá jen ID faktury, čas, tenant a verzi schématu,
+- detail faktury si příjemce načte přes API podle svých oprávnění,
+- webhook je podepsaný endpointovým tajemstvím,
+- každý event má stabilní ID pro idempotenci,
+- delivery log ukládá status doručení bez celého payloadu,
+- admin panel ukazuje poslední chyby a dovolí resend,
+- změna endpoint URL a rotace tajemství se zapisují do audit logu.
+
+Výsledek: zákazník dostane použitelnou integraci, vývojový tým má méně support dotazů a osobní údaje nelétají přes internet jen proto, že „se to může hodit“.
+
+## Checklist: webhooky bez integračního chaosu
+
+- [ ] Eventy jsou pojmenované podle doménových událostí, ne podle interních tabulek.
+- [ ] Payload obsahuje jen data nutná pro reakci příjemce.
+- [ ] Každý event má stabilní `event_id` a čas vytvoření.
+- [ ] Endpointy používají podpis, timestamp a ochranu proti replay útokům.
+- [ ] Tajemství jde rotovat bez výpadku integrace.
+- [ ] Retry pravidla jsou dokumentovaná a konečná.
+- [ ] Příjemce má jasné doporučení pro idempotenci.
+- [ ] Schéma payloadu je verzované a breaking changes mají migrační plán.
+- [ ] Admin panel ukazuje stav doručení, poslední chyby a testovací event.
+- [ ] Delivery log neukládá citlivé payloady ani tajemství.
+- [ ] Změny konfigurace webhooků jsou auditované.
+
+## Mini šablona webhook karty
+
+```text
+Název webhook eventu:
+Doménová událost:
+Kdo ho používá:
+Proč příjemce potřebuje signál:
+Minimální payload:
+Zakázaná data v payloadu:
+Verze schématu:
+Autentizace a podpis:
+Retry pravidla:
+Idempotence:
+Retence delivery logů:
+Kdo smí měnit endpoint:
+Jak se testuje:
+Jak se vypíná:
+```
+
+## Zdroje
+
+- OWASP API Security Top 10 2023: https://owasp.org/API-Security/editions/2023/en/0x11-t10/
+- OWASP REST Security Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html
+- CloudEvents specification: https://github.com/cloudevents/spec
+- Evropská komise k principům GDPR pro zpracování osobních údajů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+
+
 # Pracovní log
+- 2026-10-09: Doplněna příloha „Webhooky bez datového ohňostroje a integračního chaosu“ s návrhem doménových eventů, minimalistickým payloadem, podpisem a rotací tajemství, idempotencí, retry pravidly, verzováním schématu, zákaznickým webhook panelem, bezpečným delivery logem, praktickým příkladem, checklistem, šablonou webhook karty a ověřenými zdroji OWASP, CloudEvents a Evropské komise. Pomáhá SaaS týmům posílat integrační signály bez zbytečného úniku dat a supportového chaosu.
 - 2026-10-09: Doplněna příloha „Zákaznické exporty dat bez privacy průšvihu a CSV divočiny“ s rozdělením typů exportů, kontrolou oprávnění podle obsahu, volbou formátů, minimalizací polí, retencí připravených souborů, B2B příkladem, checklistem, export kartou a ověřenými zdroji GDPR, EDPB a Evropské komise.
 
 - 2026-10-09: Doplněna příloha „Admin dashboard bez interní reality show a datového přetlaku“ s návrhem scénářů, rolí, postupného detailu, serverového maskování, bezpečných admin akcí, auditních událostí, B2B příkladem, checklistem, dashboard kartou a ověřenými zdroji OWASP, Evropské komise a NIST.
