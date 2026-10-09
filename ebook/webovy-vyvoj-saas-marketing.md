@@ -60383,7 +60383,216 @@ Poznámka Codyho:
 - [Evropská komise: Standard contractual clauses for controllers and processors in the EU/EEA](https://commission.europa.eu/publications/standard-contractual-clauses-controllers-and-processors-eueea_en) — standardní doložky pro vztah správce a zpracovatele podle článku 28 GDPR.
 - [ENISA: Good Practices for Supply Chain Cybersecurity](https://www.enisa.europa.eu/publications/good-practices-for-supply-chain-cybersecurity) — evropský kontext pro řízení kybernetických rizik v dodavatelském řetězci.
 
+## Příloha: Passkeys a MFA bez loginového pekla
+
+Přihlašování je zvláštní místo produktu: když funguje dobře, nikdo ho nechválí. Když funguje špatně, zákazník začne pochybovat ještě dřív, než se dostane k hodnotě služby. U SaaS navíc login není jen UX detail. Je to hranice mezi firemními daty, fakturací, administrací a supportem.
+
+Passkeys a vícefaktorové ověření dávají malým týmům šanci snížit riziko kradených hesel, phishingu a credential stuffingu bez toho, aby z každého přihlášení udělaly bezpečnostní únikovku. Jenže dobrá implementace není „přidáme WebAuthn tlačítko a hotovo“. Potřebuje produktová pravidla, recovery proces, auditní stopu a citlivé rozlišení rolí.
+
+Codyho komentář: Bezpečný login nemá uživateli dokazovat, že bezpečnostní tým existuje. Má mu tiše a spolehlivě pomoct dostat se dovnitř — a útočníkovi udělat ze života menší administrativní peklo. Takový obrácený onboarding pro zloděje.
+
+### 1. Nejdřív urči rizikové úrovně účtů
+
+Ne každý uživatel potřebuje stejný režim. Zakladatel s přístupem k billing nastavení, support člověk s možností vidět zákaznické požadavky a běžný člen týmu, který jen čte projektový dashboard, nemají stejný dopad při kompromitaci účtu.
+
+Jednoduché třídění:
+
+| Úroveň | Příklad účtu | Dopad kompromitace | Doporučené ověření |
+| --- | --- | --- | --- |
+| Běžný uživatel | člen workspace bez administrace | únik pracovních dat v rámci role | heslo + volitelný passkey nebo TOTP |
+| Správce workspace | owner, admin, billing manager | změny členů, fakturace, exporty | povinné MFA, preferovaně passkey |
+| Interní support | zaměstnanec nebo agentura se support přístupem | náhled do zákaznických účtů | povinný phishing-resistant faktor + audit |
+| Technický admin | produkční přístupy, secrets, deploy | systémový incident, výpadek, únik dat | hardwarový klíč nebo spravovaný passkey, step-up |
+| Recovery role | člověk schopný obnovit účet nebo změnit ownera | převzetí identity | oddělené schválení, audit, časové zpoždění |
+
+Tohle třídění napiš do produktu i interní dokumentace. Jinak se stane klasika: „MFA je volitelné pro všechny“, admin si ho odloží na později a později přijde ve formě incidentu, který má na sobě kabát a říká „ahoj, jsem poučení“.
+
+### 2. Passkey není jen hezčí heslo
+
+Passkey je kryptografický přihlašovací údaj založený na standardech FIDO/WebAuthn. Uživatel typicky potvrzuje přihlášení stejným způsobem jako odemčení zařízení: biometrikou, PINem nebo systémovým dialogem. Důležité je, že služba neukládá sdílené tajemství ve stylu hesla a přihlášení je svázané s konkrétní doménou.
+
+Praktický dopad:
+
+- méně zapomenutých hesel a resetů,
+- menší plocha pro credential stuffing,
+- lepší ochrana proti phishingovým stránkám,
+- rychlejší přihlášení na podporovaných zařízeních,
+- možnost používat hardwarové bezpečnostní klíče u citlivých rolí.
+
+FIDO Alliance popisuje passkeys jako FIDO kryptografické údaje navázané na účet ve webu nebo aplikaci a zdůrazňuje phishing-resistant charakter. MDN dokumentace k Web Authentication API zase připomíná, že WebAuthn umožňuje vytvářet a používat veřejnoklíčové credentials přes prohlížeč. Pro SaaS zakladatele z toho plyne jednoduchý závěr: passkeys nejsou marketingová nálepka, ale architektonická změna přihlašování.
+
+### 3. Začni přidáním, ne násilným přepnutím
+
+U existujícího SaaS bývá nejlepší postup postupný:
+
+1. nabídnout passkey jako další způsob přihlášení,
+2. umožnit přidat více passkeys k jednomu účtu,
+3. zobrazit seznam registrovaných zařízení nebo klíčů,
+4. vyžadovat passkey nebo jiné silné MFA pro administrátory,
+5. teprve po adopci omezovat slabší metody pro rizikové role.
+
+Nedělej z migrace překvapení. Ukaž uživateli jasné vysvětlení: co passkey je, proč ho doporučuješ, kde ho uvidí, jak ho smaže a co se stane při ztrátě zařízení. Login je špatné místo na tajemnou poezii.
+
+Dobrá věta do nastavení účtu:
+
+> „Passkey umožní rychlé přihlášení bez zadávání hesla. Přístup potvrzujete na svém zařízení a služba neukládá vaše biometrická data.“
+
+To poslední je důležité. Spousta lidí si myslí, že web dostává otisk prstu nebo sken obličeje. Vysvětli lidsky, že biometrie zůstává v zařízení nebo v jeho systémovém zabezpečení podle platformy; tvoje služba pracuje s kryptografickým ověřením, ne s obličejovým albem zákazníků.
+
+### 4. Recovery je bezpečnostní produkt, ne support výjimka
+
+Nejslabší část silného přihlašování často není samotný passkey. Je to obnova účtu. Pokud zákazník ztratí zařízení a support mu během dvou minut ručně vypne MFA po e-mailu „prosím rychle“, útočník právě našel zadní dveře s kobercem a nápisem vítejte.
+
+Recovery pravidla:
+
+- uživatel má mít alespoň dva registrované faktory nebo recovery codes,
+- recovery codes ukazuj jen při vytvoření a umožni jejich rotaci,
+- změna primárního e-mailu má vyžadovat step-up ověření,
+- reset MFA pro admina nikdy neschvaluj jen jedním e-mailem,
+- u workspace ownera přidej čekací dobu nebo druhé schválení,
+- po resetu pošli bezpečnostní notifikaci bez marketingového trackingu,
+- všechny recovery kroky zapisuj do auditního logu.
+
+U B2B SaaS se hodí oddělit dva scénáře: obnova běžného uživatele a obnova vlastnictví workspace. Běžný uživatel může jít přes interního ownera firmy. Owner workspace potřebuje přísnější proces, protože jeho účet často rozhoduje o fakturaci, exportech a přístupech dalších lidí.
+
+### 5. MFA metody seřaď podle odolnosti, ne podle popularity
+
+Ne každá druhá vrstva ověření je stejně dobrá. SMS je lepší než žádné MFA, ale není to místo, kde by privacy-first SaaS měl skončit, pokud má alternativu. TOTP aplikace je běžná a relativně dostupná, ale pořád může být zneužitelná při phishingu, pokud uživatel kód opíše do falešné stránky. Passkeys a bezpečnostní klíče jsou pro citlivé role lepší cíl, protože jsou navržené pro odolnost vůči phishingu.
+
+Praktické pořadí pro malý SaaS:
+
+1. passkey nebo hardwarový bezpečnostní klíč pro administrátory,
+2. TOTP jako dostupný fallback,
+3. recovery codes pro nouzové situace,
+4. e-mailové potvrzení jen pro nízkorizikové změny,
+5. SMS pouze jako dočasný kompromis, ne strategický základ.
+
+OWASP v MFA doporučeních řeší mimo jiné výběr faktorů, recovery a riziko slabších metod. NIST SP 800-63B-4 u AAL2 zdůrazňuje nabídku phishing-resistant možnosti a u AAL3 vyžaduje phishing-resistant kryptografický authenticator s neexportovatelným privátním klíčem. Pro běžný evropský SaaS to neznamená, že musíš hned stavět bankovní IAM. Znamená to, že máš vědomě rozlišit, kde stačí dostupný faktor a kde potřebuješ odolnější variantu.
+
+### 6. UX pravidla pro přihlášení bez frustrace
+
+Bezpečnostní UX má být konkrétní, klidné a vratné.
+
+Použij tato pravidla:
+
+- Primární CTA pojmenuj podle akce: „Přihlásit se passkey“ místo „Pokračovat“.
+- V chybě neprozrazuj, jestli existuje účet pro konkrétní e-mail.
+- Vysvětli, že biometrická data neopouštějí zařízení.
+- Ukaž fallback bez panického tónu: „Nemáte zařízení po ruce?“.
+- Při přidání nového faktoru pošli bezpečnostní notifikaci.
+- Při odebrání posledního silného faktoru vyžaduj další potvrzení.
+- Po změně kritického ověření zruš starší sessions podle rizika.
+
+Texty drž krátké. Login modal není bezpečnostní školení. Když potřebuješ delší vysvětlení, dej odkaz na nápovědu nebo security centrum.
+
+### 7. Privacy-first technická pravidla
+
+Passkeys pomáhají bezpečnosti, ale špatně navržené měření a logování umí z loginu udělat datový vysavač. Z identity toku ukládej jen to, co opravdu potřebuješ pro bezpečnost, audit a podporu.
+
+Do bezpečnostního logu typicky patří:
+
+- ID uživatele a workspace,
+- typ události: `passkey_added`, `passkey_removed`, `mfa_reset_requested`, `mfa_reset_completed`,
+- čas události,
+- výsledek: úspěch, selhání, zablokováno,
+- hrubý kontext rizika: nová země, nové zařízení, step-up vyžádán,
+- ID administrátora nebo support agenta, pokud šlo o zásah,
+- korelační ID incidentu nebo support ticketu.
+
+Do logu nepatří:
+
+- biometrická data,
+- recovery codes,
+- raw WebAuthn assertion payload bez jasného důvodu,
+- celé user agenty na věčnost,
+- přesné IP adresy s nekonečnou retencí,
+- texty support zpráv přilepené k auth eventům.
+
+Pokud potřebuješ IP adresu kvůli bezpečnosti, nastav krátkou retenci, maskování nebo oddělený bezpečnostní store s jasným vlastníkem. GDPR princip minimalizace platí i pro logy, které vznikly s dobrým úmyslem. Dobrý úmysl není právní režim, i když by to bylo hezké.
+
+### 8. Příklad: B2B fakturační SaaS
+
+Malý SaaS pro fakturaci má tři role: účetní, owner firmy a interní support. Produkt zavede passkeys takto:
+
+- Běžní uživatelé vidí doporučení přidat passkey při dalším přihlášení.
+- Owner musí do 30 dnů zapnout MFA, jinak nemůže měnit billing a členy týmu.
+- Interní support používá spravovaný passkey nebo hardwarový klíč.
+- Změna firemního bankovního účtu vyžaduje step-up ověření.
+- Reset MFA pro ownera vyžaduje support ticket, ověření firemního e-mailu a čekací dobu.
+- V customer-facing audit logu se ukáže „Owner přidal nový passkey“, ne technický payload.
+- Do analytiky jde jen agregovaná metrika adopce: procento adminů s aktivním silným faktorem.
+
+Výsledek: bezpečnost se zlepší, zákazník má kontrolu a tým nemusí sbírat nadbytečná data jen proto, aby se cítil „enterprise“. Enterprise pocit bez procesu je jen drahá tapeta.
+
+### Checklist: passkeys a MFA
+
+- [ ] Máme rozdělené role podle dopadu kompromitace účtu.
+- [ ] Administrátorské a interní účty mají povinné MFA.
+- [ ] Passkey lze přidat, pojmenovat, zobrazit a odebrat.
+- [ ] Uživatel má doporučené alespoň dva způsoby obnovy.
+- [ ] Recovery proces není slabší než běžné přihlášení.
+- [ ] Změna e-mailu, billing údajů a owner role vyžaduje step-up.
+- [ ] Bezpečnostní e-maily neobsahují marketingové trackery.
+- [ ] Auditní log ukazuje citlivé změny bez tajných payloadů.
+- [ ] Retence auth logů je popsána a omezená.
+- [ ] Support má runbook pro ztracené zařízení a reset MFA.
+
+### Mini šablona auth policy karty
+
+```text
+# Auth policy karta
+
+Produkt / workspace:
+Vlastník auth workflow:
+Datum poslední revize:
+
+Rizikové role:
+- Běžný uživatel:
+- Workspace admin:
+- Billing role:
+- Interní support:
+- Technický admin:
+
+Povinné faktory podle role:
+Passkey dostupný pro:
+Hardwarový klíč vyžadovaný pro:
+TOTP fallback povolen pro:
+SMS fallback povolen jen do:
+
+Step-up akce:
+- Změna e-mailu:
+- Změna hesla:
+- Přidání/odebrání MFA:
+- Změna billing údajů:
+- Export dat:
+- Přidání admina:
+
+Recovery proces:
+Kdo může schválit reset MFA:
+Jak se ověřuje identita:
+Čekací doba u owner účtu:
+Bezpečnostní notifikace:
+Auditní události:
+
+Data ukládaná v auth logu:
+Data zakázaná v auth logu:
+Retence auth logu:
+Datum testu recovery:
+```
+
+### Zdroje
+
+- [FIDO Alliance: Passkeys](https://fidoalliance.org/passkeys/) — vysvětlení passkeys, FIDO2 základů, phishing-resistant přínosů a adopčních materiálů.
+- [MDN: Web Authentication API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Authentication_API) — praktický přehled WebAuthn API pro vytváření a používání veřejnoklíčových credentials ve webu.
+- [OWASP Multifactor Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html) — doporučení pro MFA faktory, recovery a bezpečné změny autentizačních metod.
+- [NIST SP 800-63B-4: Authentication Assurance Levels](https://pages.nist.gov/800-63-4/sp800-63b/aal/) — požadavky a doporučení pro úrovně ověření, včetně phishing-resistant možností.
+- [NIST SP 800-63B-4: Syncable Authenticators](https://pages.nist.gov/800-63-4/sp800-63b/syncable/) — doplňující pravidla pro synchronizované authenticator klíče a passkeys.
+- [GDPR na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/) — zásady minimalizace, integrity, důvěrnosti a omezení uložení osobních údajů.
+
+
 # Pracovní log
+
+- 2026-10-09: Doplněna příloha „Passkeys a MFA bez loginového pekla“ s rizikovým tříděním účtů, postupnou adopcí passkeys, recovery pravidly, UX texty, privacy-first logováním, příkladem B2B fakturačního SaaS, checklistem, auth policy kartou a ověřenými zdroji FIDO, MDN, OWASP, NIST a GDPR. Pomáhá SaaS týmům zvednout bezpečnost přihlašování bez toho, aby z loginu udělaly frustrující nebo datově hladový proces.
 
 - 2026-10-09: Doplněna příloha „Dodavatelský dotazník bez procurement divadla a datových překvapení“ s tříděním dodavatelů podle dopadu, mapou datových toků, kontrolou rolí správce/zpracovatele, smluv, subdodavatelů, SCC, bezpečnostních otázek, AI a analytiky, exit plánem, support příkladem, checklistem, dodavatelskou kartou a ověřenými zdroji Evropské komise, EDPB a ENISA. Pomáhá malým týmům vybrat nástroje bez nečekaného datového dluhu a bez nákupního divadla.
 
