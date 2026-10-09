@@ -58183,6 +58183,25 @@ Příklad: nový onboarding event `workspace_invite_completed` může být užit
 
 Codyho komentář: „Jen pro analytiku“ není účel. To je šuplík, kam se hází datové ponožky bez páru.
 
+## Release evidence pack: důkazy před kliknutím, ne po požáru
+
+U rizikovější změny si před deployem připrav malý balíček důkazů. Ne kvůli byrokracii, ale proto, aby tým v pět minut po problému nehledal, co se vlastně nasadilo, jaký byl očekávaný výsledek a který test měl něco zachytit. Evidence pack má být krátký, odkazovatelný a srozumitelný i člověku, který release nepsal.
+
+Minimální balíček pro malý SaaS:
+
+- odkaz na pull request nebo diff,
+- stručná release věta: co se mění a komu to pomáhá,
+- seznam dotčených částí: UI, API, databáze, e-maily, billing, importy, exporty,
+- výsledek testů nebo ruční kontroly kritické cesty,
+- datový dopad: nové údaje, změny retence, exporty, externí dodavatelé,
+- rollback postup v jedné až pěti konkrétních větách,
+- stop signály: chybovost, fronta, ticket, metrika nebo zákaznický dopad,
+- vlastník po deployi a čas další kontroly.
+
+Evidence pack nemusí být samostatný dokument. Může být částí pull requestu, release issue nebo deploy poznámky. Důležité je, aby se dal najít podle data a názvu releasu. Screenshot dashboardu bez kontextu nestačí. Stejně tak nestačí věta „otestováno“, protože to je provozní verze zaklínadla.
+
+Codyho komentář: Když release neumíš popsat před nasazením, po incidentu ho budeš popisovat kreativněji, hlasitěji a s mnohem horší náladou.
+
 ## Deploy okno není jen čas v kalendáři
 
 Deploy okno má být dohodnutý prostor, kdy tým ví, že může změnu sledovat a případně vrátit. Neznamená to, že se má deployovat jen v úterý v 10:00, protože to někdo vytesal do interního Notionu. Znamená to, že riziková změna nemá odcházet v momentě, kdy nikdo nebude u monitoringu, supportu ani zákaznické komunikace.
@@ -58324,6 +58343,9 @@ Datum úklidu dočasných prvků:
 
 
 # Pracovní log
+
+- 2026-10-09: Rozšířena příloha „Release runbook bez pátečního hazardu a privacy překvapení“ o release evidence pack: krátký balíček důkazů před deployem, včetně dotčených částí, testů, datového dopadu, rollbacku, stop signálů, vlastníka a Codyho komentáře.
+
 - 2026-10-08: Doplněna příloha „Release runbook bez pátečního hazardu a privacy překvapení“ s tříděním změn podle dopadu, go/no-go vlastníkem, datovým mini review, deploy oknem, rollback postupem, stop signály, komunikační poznámkou, CSV export příkladem, checklistem, šablonou a ověřenými zdroji Google SRE, OWASP, MDN a Evropské komise.
 
 - 2026-10-08: Doplněna příloha „Feature flagy bez tajných spínačů a segmentačního šmírování“ s rozdělením typů flagů, minimalizací targeting kontextu, oddělením autorizace od UX, rollout kartou, úklidem starých flagů, checklistem, šablonou a ověřenými zdroji OpenFeature, OWASP a Evropské komise.
