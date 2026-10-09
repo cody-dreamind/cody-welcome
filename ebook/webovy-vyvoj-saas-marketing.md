@@ -60194,7 +60194,198 @@ Datum posledního testu:
 - [NIST SP 800-63B Digital Identity Guidelines](https://pages.nist.gov/800-63-3/sp800-63b.html) — doporučení pro „memorized secrets“ a odolnost hesel.
 - [GDPR, článek 5 na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/) — zásady minimalizace, omezení uložení a integrity/důvěrnosti osobních údajů.
 
+
+## Příloha: Dodavatelský dotazník bez procurement divadla a datových překvapení
+
+Dodavatelský dotazník nemusí být třicetistránkový rituál, který všichni nenávidí a nikdo nečte. U malého webu nebo SaaS má sloužit hlavně k jedné věci: rychle zjistit, jestli nový nástroj, agentura nebo infrastruktura dostane k datům, účtům nebo zákazníkům větší přístup, než je rozumné.
+
+Privacy-first výběr dodavatele není o tom, že odmítneš každý nástroj mimo vlastní server a budeš faktury posílat poštovním holubem s PGP batohem. Je o tom, že před podpisem smlouvy víš, jaká data kam potečou, kdo je správce nebo zpracovatel, kde jsou subdodavatelé, jak se služba vypíná a co se stane při incidentu.
+
+Codyho komentář: Nejhorší dodavatel není ten, který má špatnou odpověď. Nejhorší je ten, u kterého se nikdo nezeptal — a pak se tým diví, že „malý widget“ má přístup ke kontaktům, analytice, produkční databázi a možná i k firemnímu kávovaru.
+
+### 1. Nejprve rozděl dodavatele podle dopadu
+
+Ne každý dodavatel potřebuje stejnou kontrolu. Když koupíš nástroj na kreslení ikon bez zákaznických dat, nepotřebuješ audit ve stylu bankovní regulace. Když připojuješ CRM, platební bránu, AI asistenta, hosting nebo externí vývojáře s produkčním přístupem, už se bavíme o jiné lize.
+
+Jednoduché třídění:
+
+| Třída | Typický příklad | Dopad | Kontrola před spuštěním |
+| --- | --- | --- | --- |
+| Nízký dopad | grafický nástroj bez zákaznických dat | žádný nebo minimální přístup k osobním datům | základní evidence, fakturace, vlastník |
+| Střední dopad | newsletter, support, formulářový nástroj | kontakty, zprávy, komunikace | účel, DPA, retence, export, subdodavatelé |
+| Vysoký dopad | hosting, CRM, analytika, AI konektor, vývojářská agentura | zákaznická data, systémové přístupy, integrace | bezpečnostní a právní review, přístupy, incident proces, exit plán |
+| Kritický dopad | identita, platby, produkční databáze, zálohy | dostupnost služby, citlivá data, provozní kontinuita | schválení vlastníkem, test obnovy/odpojení, pravidelná revize |
+
+Třída dopadu rozhoduje o hloubce dotazníku. Jinak budeš buď podceňovat riziko, nebo vyrábět papírový cirkus i pro věci, které žádné osobní údaje nevidí.
+
+### 2. Zeptej se na účel a datový tok
+
+První sada otázek má být nudná, konkrétní a nepřeskočitelná:
+
+- proč nástroj nebo dodavatel existuje v našem stacku,
+- jaká data do něj půjdou,
+- kdo data zadává nebo posílá,
+- kdo k nim bude mít přístup,
+- odkud a kam data odcházejí,
+- jestli nástroj vytváří nová odvozená data,
+- jak dlouho se data drží,
+- jak se data smažou nebo exportují.
+
+Když odpověď zní „asi tam půjdou jen kontakty“, zastav se. „Asi“ je v datové mapě zvuk budoucího průšvihu. Napiš konkrétní kategorie: pracovní e-mail, jméno, firma, text zprávy, stav obchodu, identifikátor tenantu, fakturační údaje, technické logy. Čím konkrétnější seznam, tím snáz nastavíš minimální rozsah.
+
+### 3. Role správce a zpracovatele nehádej
+
+U každého nástroje si ujasni, jestli dodavatel jen zpracovává data podle tvých pokynů, nebo sám určuje účely a prostředky zpracování. Evropská komise vysvětluje, že správce rozhoduje o „proč“ a „jak“, zatímco zpracovatel zpracovává osobní údaje jménem správce. EDPB k tomu má samostatné pokyny pro role správce a zpracovatele.
+
+Prakticky:
+
+- hosting pro tvůj SaaS bude typicky zpracovatel,
+- účetní systém může být zpracovatel i samostatný správce podle konkrétního použití,
+- reklamní síť nebo marketplace analytika často není jen pasivní zpracovatel,
+- agentura může být zpracovatel, ale její vlastní evidence zakázek může mít jiný režim,
+- AI nástroj je potřeba posoudit podle toho, co ukládá, zda trénuje modely a kdo rozhoduje o použití dat.
+
+Do evidence nepiš jen „GDPR OK“. Piš roli, účel, smluvní dokument a datum kontroly. „GDPR OK“ je razítko bez obsahu; při auditu má informační hodnotu mokré účtenky.
+
+### 4. Smlouvy řeš jako provozní nástroj
+
+Smlouva s dodavatelem není PDF pro právní archiv. Má říct, co smí dodavatel dělat s daty a co se stane, když spolupráce skončí.
+
+U středního a vyššího dopadu zkontroluj hlavně:
+
+- zda existuje DPA nebo jiný zpracovatelský dodatek,
+- jak jsou popsané účely a kategorie dat,
+- zda dodavatel může zapojit subzpracovatele a jak tě informuje,
+- kde se data zpracovávají a ukládají,
+- zda jsou potřeba standardní smluvní doložky pro přenos mimo EU/EHP,
+- jak dodavatel hlásí bezpečnostní incident,
+- co se stane s daty po ukončení služby,
+- jak získáš export nebo potvrzení o smazání.
+
+Pokud dodavatel neumí říct, kdo jsou subdodavatelé, kde data leží a jak službu vypneš, není to „rychlé SaaS řešení“. Je to zamčená skříňka s měsíční fakturou.
+
+### 5. Bezpečnostní otázky drž krátké, ale tvrdé
+
+Malý tým nepotřebuje posílat každému dodavateli enterprise dotazník s otázkami, které sám neumí vyhodnotit. Potřebuje pár otázek, které mají jasný dopad na riziko.
+
+Minimum pro významného dodavatele:
+
+- podporuje SSO nebo aspoň MFA pro administrátory,
+- umí oddělit role a přístupy,
+- vede auditní log významných změn,
+- šifruje data při přenosu a v klidu,
+- má popsaný incident response proces,
+- nabízí export dat bez support rituálu,
+- má dokumentovanou retenci dat a záloh,
+- umožňuje omezit přístup jen na potřebné uživatele,
+- publikuje bezpečnostní dokumentaci nebo odpovídá konkrétně.
+
+Nejde o to vyhrát bezpečnostní bingo. Jde o to včas poznat, jestli nástroj zapadne do tvého provozu, nebo z něj udělá vedlejší administrátorskou džungli.
+
+### 6. AI a analytiku posuzuj přísněji
+
+AI nástroje, behaviorální analytika a marketingové integrace umí být užitečné, ale často sahají na data nenápadně. Pokud nástroj analyzuje texty zákazníků, support zprávy, formuláře, nahrávky, session replay nebo interní dokumenty, ptej se navíc:
+
+- ukládá vstupy a výstupy,
+- používá data pro trénink nebo zlepšování služby,
+- umožňuje opt-out z tréninku,
+- kde probíhá inference nebo zpracování,
+- kdo může data číst v administraci dodavatele,
+- zda lze maskovat nebo filtrovat osobní údaje před odesláním,
+- jak se řeší mazání a export,
+- jestli jde službu používat bez reklamních trackerů.
+
+Privacy-first pravidlo: do AI a analytiky neposílej obsah, který bys nebyl ochotný ukázat v interním incident reportu. Ne proto, že AI je kouzelně zlá. Protože integrace, logy a support přístupy jsou obyčejně nudné — a právě proto nebezpečné.
+
+### 7. Exit plán napiš před prvním importem
+
+U každého středního a vyššího dopadu si před nasazením napiš malý exit plán. Stačí půl stránky:
+
+- jak službu vypneme,
+- kdo má admin přístup,
+- jak exportujeme data,
+- kam data přesuneme,
+- co se musí smazat,
+- které API klíče se rotují,
+- které DNS, webhooky nebo formuláře se mění,
+- jak poznáme, že starý dodavatel už nic nepřijímá.
+
+Exit plán před importem zní přehnaně jen do chvíle, než potřebuješ odejít během incidentu, cenové změny nebo konce agentury. Pak je to rozdíl mezi řízeným přechodem a digitálním stěhováním v bouřce.
+
+### 8. Praktický příklad: nový support nástroj pro SaaS
+
+Malý B2B SaaS chce nasadit support systém. Na první pohled jde „jen“ o helpdesk. Ve skutečnosti do něj potečou jména, pracovní e-maily, dotazy zákazníků, přílohy, interní poznámky a možná i technické identifikátory tenantu.
+
+Rozumný postup:
+
+1. Produktový vlastník popíše účel: rychlejší odpovědi a evidence ticketů.
+2. Tým sepíše datové kategorie: kontakt, firma, tenant ID, text ticketu, přílohy, stav řešení.
+3. Support rozhodne, že do ticketu nepatří hesla, celé exporty databáze ani platební údaje.
+4. Právní/provozní kontrola ověří DPA, subzpracovatele, region zpracování a incident proces.
+5. Technický vlastník nastaví SSO/MFA, role, audit log a omezení příloh.
+6. Marketing nedostane automatický přístup k support datům.
+7. Retence ticketů se nastaví podle podpory a smluv, ne „navždy pro jistotu“.
+8. Exit karta popíše export ticketů, vypnutí mailbox forwardingu, rotaci API klíčů a smazání dat.
+
+Výsledek: support nástroj pomáhá zákazníkům, ale nestává se nekontrolovanou kopií celého produktu.
+
+## Checklist: dodavatel bez datového překvapení
+
+- [ ] Dodavatel má přiřazeného interního vlastníka.
+- [ ] Víme, jaký problém řeší a proč nestačí jednodušší varianta.
+- [ ] Máme zapsanou třídu dopadu: nízký, střední, vysoký nebo kritický.
+- [ ] Datový tok popisuje konkrétní kategorie dat, ne obecné „uživatelská data“.
+- [ ] Je jasná role správce, zpracovatele nebo samostatného správce.
+- [ ] U osobních údajů máme DPA nebo jiný relevantní smluvní základ.
+- [ ] Subdodavatelé a regiony zpracování jsou známé a evidované.
+- [ ] Přenos mimo EU/EHP má ověřený mechanismus, pokud je potřeba.
+- [ ] Admin přístupy mají MFA, role a vlastníka.
+- [ ] Dodavatel má rozumný incident proces a kontaktní kanál.
+- [ ] Retence, export a smazání dat jsou popsané před spuštěním.
+- [ ] AI, analytika a marketingové integrace neposílají data nad rámec účelu.
+- [ ] Existuje exit plán včetně rotace klíčů a vypnutí integrací.
+- [ ] Revize dodavatele má datum další kontroly.
+
+## Mini šablona dodavatelské karty
+
+```text
+# Dodavatelská karta: [název nástroje / dodavatele]
+
+Interní vlastník:
+Účel použití:
+Třída dopadu:
+Kategorie dat:
+Zdroje dat:
+Příjemci / týmy s přístupem:
+Role podle GDPR:
+Smluvní dokumenty:
+Subdodavatelé:
+Region zpracování / ukládání:
+Přenos mimo EU/EHP a mechanismus:
+Admin přístupy a MFA:
+Auditní logy:
+Incident kontaktní kanál:
+Retence dat:
+Export dat:
+Smazání po ukončení:
+API klíče / integrace k rotaci:
+Exit plán:
+Datum poslední revize:
+Datum další revize:
+Poznámka Codyho:
+```
+
+## Zdroje
+
+- [Evropská komise: Application of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/application-gdpr_en) — role správce a zpracovatele, odpovědnosti a základní pravidla pro organizace.
+- [EDPB Guidelines 07/2020 on the concepts of controller and processor in the GDPR](https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en) — podrobnější výklad rolí správce, zpracovatele a společných správců.
+- [Evropská komise: Standard Contractual Clauses](https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en) — oficiální informace ke standardním smluvním doložkám pro přenos osobních údajů do třetích zemí.
+- [Evropská komise: Standard contractual clauses for controllers and processors in the EU/EEA](https://commission.europa.eu/publications/standard-contractual-clauses-controllers-and-processors-eueea_en) — standardní doložky pro vztah správce a zpracovatele podle článku 28 GDPR.
+- [ENISA: Good Practices for Supply Chain Cybersecurity](https://www.enisa.europa.eu/publications/good-practices-for-supply-chain-cybersecurity) — evropský kontext pro řízení kybernetických rizik v dodavatelském řetězci.
+
 # Pracovní log
+
+- 2026-10-09: Doplněna příloha „Dodavatelský dotazník bez procurement divadla a datových překvapení“ s tříděním dodavatelů podle dopadu, mapou datových toků, kontrolou rolí správce/zpracovatele, smluv, subdodavatelů, SCC, bezpečnostních otázek, AI a analytiky, exit plánem, support příkladem, checklistem, dodavatelskou kartou a ověřenými zdroji Evropské komise, EDPB a ENISA. Pomáhá malým týmům vybrat nástroje bez nečekaného datového dluhu a bez nákupního divadla.
 
 - 2026-10-09: Doplněna příloha „Přihlášení a reset hesla bez bezpečnostního divadla“ s mapou identity workflow, obecnými hláškami proti user enumeration, pravidly pro jednorázové reset tokeny, doporučeními pro hesla, sessions, MFA, bezpečnostní logy, checklistem, vyplnitelnou auth kartou a ověřenými zdroji OWASP, NIST a GDPR. Pomáhá malým SaaS týmům zlepšit přístup k účtům bez sběru zbytečných dat a bez nepřátelského UX.
 - 2026-10-09: Doplněna příloha „Kontaktní formuláře bez leadového vysavače a CRM bahna“ s návrhem minimálních polí, rozlišením poptávky, marketingu a supportu, lidskou datovou poznámkou, bezpečným tokem do CRM, chybovými stavy, anti-spam pravidly, retencí, praktickým příkladem, checklistem, formulářovou kartou a ověřenými zdroji GDPR, Evropské komise, EDPB a OWASP. Pomáhá webům sbírat poptávky bez automatického přifukování datového dluhu.
