@@ -58813,7 +58813,212 @@ Další kontrola:
 - [ENISA Technical implementation guidance on cybersecurity risk-management measures, verze 1.0](https://www.enisa.europa.eu/publications/technical-implementation-guidance-on-cybersecurity-risk-management-measures) — uvádí pravidelné revize identit, deaktivaci nepotřebných účtů, omezení sdílených identit, RBAC, MFA, just-in-time přístup a důkazy k IAM procesům.
 - [EUR-Lex — GDPR, článek 32](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679) — požaduje technická a organizační opatření odpovídající riziku, včetně důvěrnosti, integrity, dostupnosti a procesu pravidelného testování a hodnocení bezpečnostních opatření.
 
+# Příloha: Admin dashboard bez interní reality show a datového přetlaku
+
+Admin dashboard je nebezpečně lákavé místo. Každý chce „vidět, co se děje“, ale bez jasného účelu se z něj rychle stane interní reality show: seznam zákazníků, poslední akce, e-maily, IP adresy, chyby, fakturace, support poznámky a k tomu graf, který vypadá důležitě hlavně proto, že má tmavý režim. Hezké? Možná. Bezpečné? Často vůbec.
+
+Dobře navržený admin dashboard není výkladní skříň všech dat, která firma má. Je to pracovní nástroj pro konkrétní rozhodnutí: vyřešit incident, odbavit zákaznický požadavek, zkontrolovat platbu, schválit změnu, najít zablokovaný účet nebo ověřit stav integrace. Každý blok v dashboardu má mít vlastníka, účel a hranici detailu.
+
+> Codyho komentář: Interní přístup není magické zaklínadlo, které z osobních dat dělá firemní dekoraci. Když admin něco nepotřebuje pro práci, nemá to v dashboardu co dělat. Ani když je to „jen pro jistotu“. Jistota je oblíbená maska datového syslení.
+
+## Začni scénáři, ne tabulkou zákazníků
+
+První návrh adminu často vzniká tak, že tým vezme databázové tabulky a udělá k nim hezčí UI. To je rychlé, ale špatný směr. Databáze odráží implementaci. Admin má odrážet práci.
+
+Napiš si pět až deset skutečných scénářů:
+
+- support potřebuje zjistit, proč zákazník nevidí fakturu,
+- obchod potřebuje ověřit, jestli trial skončil kvůli platební chybě,
+- provoz potřebuje vidět, jestli export uvízl ve frontě,
+- bezpečnost potřebuje prověřit podezřelou změnu oprávnění,
+- administrátor potřebuje deaktivovat přístup bývalému členovi workspace,
+- účetnictví potřebuje zkontrolovat stav platby bez čtení obsahu zákaznických dat.
+
+Každý scénář přepiš do věty:
+
+```text
+Jako [role] potřebuji zjistit/udělat [konkrétní věc], abych mohl [výsledek], bez přístupu k [data, která nepotřebuji].
+```
+
+Příklad:
+
+```text
+Jako support potřebuji vidět stav posledního exportu faktur, abych mohl zákazníkovi říct, zda běží, selhal nebo je hotový, bez čtení obsahu exportovaného souboru.
+```
+
+Taková věta je malá brzda proti dashboardu typu „dejme tam všechno, někdy se to bude hodit“. Nebude. Bude se to hodit hlavně incidentům.
+
+## Rozděl pohledy podle práce
+
+Jeden univerzální admin pohled je pohodlný pro vývojáře, ale nebezpečný pro firmu. Lepší je rozdělit dashboard podle pracovních rolí a dopadu na data.
+
+| Pohled | Účel | Typický rozsah dat |
+| --- | --- | --- |
+| Support | Pomoci zákazníkovi s běžným problémem | stav účtu, plán, poslední systémové události bez payloadu, otevřené tickety |
+| Billing | Řešit platby a faktury | fakturační stav, částky, platební pokusy, daňové údaje podle potřeby |
+| Provoz | Řešit dostupnost a joby | stav front, chybové kódy, request ID, tenant ID, agregované metriky |
+| Bezpečnost | Prověřit rizikové události | přístupy, změny rolí, auditní stopa, break-glass akce |
+| Product | Hledat vzory používání | agregované a anonymizované signály, ne obsah zákaznické práce |
+
+Role v adminu nemají kopírovat pracovní pozice z organizačního diagramu. Mají kopírovat oprávněné pracovní potřeby. Jeden člověk může mít víc rolí, ale každá role má mít vlastní hranice a důvod.
+
+## Detail ukazuj postupně
+
+Největší bezpečnostní zlepšení admin dashboardu bývá překvapivě nudné: nepouštěj detail hned. Výchozí obrazovka má ukazovat minimum, které stačí k triáži. Detail otevři až po záměrném kliknutí a u citlivých údajů přidej důvod.
+
+Praktický model vrstev:
+
+1. Přehled: název workspace, plán, stav služby, poslední systémový stav.
+2. Diagnostika: konkrétní joby, integrace, chybové kódy, request ID.
+3. Citlivý detail: osobní údaje, platební detaily, auditní události s identitou.
+4. Akce s dopadem: změna role, deaktivace účtu, refundace, re-run exportu, smazání dat.
+
+Každý přechod do citlivější vrstvy má mít jasný signál: proč to otevíráš, na jak dlouho a zda se to zapisuje do audit logu. U velmi citlivých akcí je lepší krátký „reason prompt“ než tiché kliknutí.
+
+Špatné mikrocopy:
+
+```text
+Zobrazit vše
+```
+
+Lepší mikrocopy:
+
+```text
+Zobrazit kontaktní e-mail pro řešení ticketu #SUP-1842
+```
+
+Je to drobnost, ale mění chování. Člověk si uvědomí, že neotevírá zajímavost, ale pracovní údaj.
+
+## Maskování není výmluva pro sběr
+
+Maskování pomáhá, ale není omluvenka pro zbytečné zobrazování. Pokud role potřebuje poznat zákazníka, často stačí kombinace názvu organizace, interního ID a posledních čtyř znaků e-mailu. Celý e-mail, telefon nebo adresa patří do detailu jen tehdy, když je k tomu konkrétní práce.
+
+Použitelné vzory:
+
+- e-mail v seznamu: `ja***@firma.cz`, plný e-mail až po otevření detailu s důvodem,
+- telefon: poslední tři číslice pro ověření, celý telefon jen pro billing/support scénář,
+- IP adresa: zkrácená nebo hashovaná pro běžný přehled, plná hodnota jen pro bezpečnostní šetření,
+- obsah dokumentu: nikdy v admin seznamu, místo toho stav, velikost, typ a čas posledního zpracování,
+- export: název šablony a stav, ne přímý odkaz na soubor pro každého admina.
+
+Maskování musí být serverové, ne jen CSS trik. Pokud frontend stáhne celé citlivé pole a jen ho vizuálně skryje, data už utekla do prohlížeče, devtools a potenciálně i do logů.
+
+## Akce musí být bezpečnější než čtení
+
+Admin dashboard není jen okno. Je to ovládací panel. Každá akce s dopadem má mít víc ochrany než běžné čtení.
+
+Pro rizikové akce používej kombinaci:
+
+- potvrzení konkrétního dopadu, ne obecné „Are you sure?“,
+- serverové ověření oprávnění přímo v endpointu,
+- idempotentní operace, aby dvojklik nezpůsobil dvojí škodu,
+- auditní událost s aktérem, cílem, časem, důvodem a request ID,
+- možnost návratu zpět, pokud je bezpečná a smysluplná,
+- oddělené oprávnění pro hromadné akce.
+
+Příklad potvrzení:
+
+```text
+Deaktivovat uživatele jana@firma.cz ve workspace Firma Alfa. Uživatel ztratí přístup k aplikaci, ale jeho historické auditní události zůstanou zachované. Důvod:
+```
+
+Tohle je otravnější než jedno tlačítko. Přesně o to jde. Nebezpečné akce nemají být ergonomická skluzavka.
+
+## Loguj admin práci bez druhého úniku
+
+Admin dashboard má být dobře auditovatelný, ale audit nesmí vytvářet další kopii citlivých dat. Loguj rozhodnutí a identifikátory, ne obsah zákaznického života.
+
+Dobrá auditní událost:
+
+```json
+{
+  "event": "admin.customer_export_retried",
+  "actor_id": "user_123",
+  "actor_role": "support_admin",
+  "tenant_id": "tenant_456",
+  "target_type": "invoice_export",
+  "target_id": "export_789",
+  "reason_ticket": "SUP-1842",
+  "result": "queued",
+  "request_id": "req_abc"
+}
+```
+
+Špatná auditní událost:
+
+```json
+{
+  "event": "admin.viewed_customer_data",
+  "customer_email": "jana@firma.cz",
+  "export_content_preview": "...",
+  "full_request_body": "..."
+}
+```
+
+V první verzi víš, kdo co udělal a proč. Ve druhé sis právě vyrobil druhý datový sklad s horší kontrolou. Gratuluji, dashboard dostal vlastní sklep.
+
+## Praktický příklad: B2B SaaS pro fakturaci
+
+Malý SaaS má support tým, který řeší dotazy typu „nepřišel mi export“, „nevidím fakturu“ a „kolega se nedostane do účtu“. Původní admin ukazoval celý seznam uživatelů, e-maily, poslední IP adresu, název posledního exportovaného souboru a tlačítko „stáhnout export“.
+
+Privacy-first úprava:
+
+- seznam zákazníků ukazuje jen organizaci, plán, stav účtu a interní ID,
+- support vidí stav exportu, čas spuštění, chybový kód a request ID, ale ne obsah souboru,
+- plný e-mail se zobrazí jen v detailu ticketu a zapíše se důvod,
+- re-run exportu je samostatná akce s idempotentním klíčem,
+- stažení exportu je dostupné jen zákazníkovi nebo bezpečnostní roli v break-glass režimu,
+- product tým dostává pouze agregované statistiky exportů podle typu plánu, ne seznam zákaznických souborů.
+
+Výsledek: support pořád vyřeší většinu dotazů rychle, ale interní lidé běžně nevidí obsah zákaznických dat. Menší plocha pro chybu, menší pokušení, menší průšvih.
+
+## Checklist: admin dashboard bez datového přetlaku
+
+- Má každý blok dashboardu napsaný pracovní scénář a vlastníka?
+- Je výchozí pohled omezený na triáž, ne na maximální detail?
+- Jsou role rozdělené podle práce, ne podle seniority nebo pohodlí?
+- Maskují se citlivé údaje serverově, ne jen vizuálně ve frontendu?
+- Vyžadují citlivé detaily důvod nebo vazbu na ticket?
+- Mají rizikové akce serverové oprávnění, potvrzení dopadu a auditní log?
+- Neobsahují auditní logy payloady, tajemství, exporty nebo zbytečné osobní údaje?
+- Existuje pravidelná revize admin obrazovek a polí, která už nikdo nepotřebuje?
+- Umí tým vysvětlit zákazníkovi, kdo interně viděl jeho data a proč?
+- Jsou product metriky oddělené od support a security diagnostiky?
+
+## Mini šablona admin dashboard karty
+
+```markdown
+# Admin dashboard karta: [oblast / obrazovka]
+
+Pracovní scénář:
+Role, které pohled potřebují:
+Rozhodnutí nebo akce, kterou pohled podporuje:
+
+Zobrazená data:
+Maskovaná data:
+Data schovaná za detail:
+Data, která se nesmí zobrazit:
+
+Rizikové akce:
+Potvrzení dopadu:
+Auditní události:
+Retence auditních událostí:
+
+Vlastník obrazovky:
+Datum poslední revize:
+Co odstranit při příští revizi:
+```
+
+## Zdroje
+
+- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučuje konzistentní aplikační logování bezpečnostních událostí, ochranu logů před zneužitím a vyloučení citlivých údajů, tokenů, hesel, secrets a zbytečných osobních dat z logů.
+- [OWASP Application Logging Vocabulary Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Application_Logging_Vocabulary_Cheat_Sheet.html) — nabízí slovník bezpečnostních událostí pro změny oprávnění, citlivá data a systémové akce, což pomáhá navrhovat auditní události podle účelu místo ukládání volného textu.
+- [European Commission — Data protection by design and by default](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en) — shrnuje princip ochrany osobních údajů už při návrhu a ve výchozím nastavení, včetně zpracování jen nezbytných dat, krátké retence a omezeného přístupu podle potřeby.
+- [NIST Privacy Framework](https://www.nist.gov/privacy-framework/privacy-framework) — rámec pro řízení privacy rizik napříč organizací; hodí se jako základ pro rozhodování, které interní pohledy a procesy opravdu potřebují osobní data.
+
 # Pracovní log
+- 2026-10-09: Doplněna příloha „Admin dashboard bez interní reality show a datového přetlaku“ s návrhem scénářů, rolí, postupného detailu, serverového maskování, bezpečných admin akcí, auditních událostí, B2B příkladem, checklistem, dashboard kartou a ověřenými zdroji OWASP, Evropské komise a NIST.
+
 - 2026-10-09: Rozšířena příloha „Přístupové revize bez admin folklóru a oprávnění navždy“ o joiner–mover–leaver rutinu pro nástupy, změny rolí, odchody a ukončení agenturní spolupráce, včetně praktické tabulky okamžitých a následných kroků.
 
 - 2026-10-09: Doplněna příloha „Přístupové revize bez admin folklóru a oprávnění navždy“ s katalogem účtů, rozhodováním podle současné potřeby, pravidly pro servisní účty, oddělením admin práce, privacy-first prioritizací, příkladem ukončené agenturní kampaně, checklistem, access review kartou a ověřenými zdroji OWASP, NIST, ENISA a EUR-Lex.
