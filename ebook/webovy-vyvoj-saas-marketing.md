@@ -58531,7 +58531,131 @@ Datum poslední revize:
 - [European Commission — GDPR principles](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en) — principy minimalizace dat, omezení účelu, omezení uložení, integrity a důvěrnosti.
 
 
+
+# Příloha: Produktový dluh bez hrdinských refaktorů a privacy překvapení
+
+Produktový dluh nevzniká jen ve zdrojáku. Vzniká i v textech, cenících, onboardingových obrazovkách, interních pravidlech, starých integracích, polovičních experimentech a v těch drobných „zatím to necháme“, která se po půl roce tváří jako architektura. Malý tým ho nevyřeší jedním velkým úklidem. Vyřeší ho tím, že ho začne vidět, pojmenovávat a pravidelně splácet v malých dávkách.
+
+> Codyho komentář: Produktový dluh je jako kabely za monitorem. Dokud všechno svítí, nikdo se neptá. Pak potřebuješ odpojit jednu věc a najednou držíš v ruce klubko historie, kompromisů a jednoho HDMI z roku dinosaurů.
+
+Cílem není mít produkt bez dluhu. To je pohádka pro konferenční slidedecky. Cílem je vědět, který dluh je levný, který už brzdí rozhodování a který může v tichosti poškodit důvěru zákazníka nebo soukromí dat.
+
+## Rozliš technický, produktový a datový dluh
+
+Když všechno nazveš technickým dluhem, skončí to ve frontě pro vývojáře a zbytek týmu si umyje ruce. To je pohodlné, ale špatně. Dluh rozděl aspoň do tří kategorií:
+
+- technický dluh: kód, infrastruktura, závislosti, testy, výkon, deployment,
+- produktový dluh: nejasné flow, staré texty, matoucí tarify, neudržované onboardingové kroky,
+- datový dluh: zbytečně sbíraná pole, nejasná retence, zapomenuté exporty, staré integrace, logy bez vlastníka.
+
+Tohle rozdělení pomáhá hlavně v rozhodování. Refaktor komponenty může být důležitý, ale pokud zákazník zároveň nechápe, co se stane po zrušení účtu, produktový a datový dluh má možná vyšší prioritu. Ne proto, že by byl dramatičtější, ale protože přímo ovlivňuje důvěru.
+
+## Dluh zapisuj jako dopad, ne jako povzdech
+
+Špatná položka v backlogu zní: „uklidit onboarding“. Dobrá položka zní: „nový uživatel po registraci neví, který import je povinný, a 3 z 10 kontaktují podporu“. Ještě lepší položka přidá datový dopad: „formulář navíc žádá telefon, ale support ho nepoužívá“.
+
+Každý záznam produktového dluhu by měl odpovědět na čtyři otázky:
+
+1. Koho to brzdí nebo mate?
+2. Jak se to projevuje v produktu, supportu nebo provozu?
+3. Jaká data, oprávnění nebo externí nástroje to ovlivňuje?
+4. Jak poznáme, že je dluh splacený dostatečně?
+
+„Dostatečně“ je důležité slovo. Ne každý dluh musí skončit dokonalým řešením. Někdy stačí odstranit zbytečné pole, přepsat tři věty v onboardingovém kroku a doplnit jasný fallback. Perfektní přestavba může počkat.
+
+## Privacy-first priorita: co sbírá data, jde nahoru
+
+Pokud máš deset položek dluhu a nevíš, kde začít, zeptej se: která z nich sbírá, posílá, ukládá nebo zobrazuje data? Tyto položky mají automaticky vyšší prioritu, protože jejich riziko často roste potichu.
+
+Příklady dluhu s datovým dopadem:
+
+- starý formulář chce telefon, i když se odpovídá e-mailem,
+- export obsahuje sloupce, které zákazník v daném scénáři nepotřebuje,
+- integrační token má širší oprávnění než aktuální workflow,
+- support obrazovka ukazuje celý profil místo omezeného kontextu,
+- analytická událost nese volný text nebo identifikátor zákazníka,
+- starý onboarding posílá data do nástroje, který už tým aktivně nepoužívá.
+
+Takový dluh neřeš jako kosmetiku. U každé položky si napiš, jestli jde data odstranit, zmenšit, agregovat, zkrátit retenci nebo přesunout do bezpečnějšího flow. Privacy-first úklid není jen právní hygiena. Je to produktová disciplína: čím méně zbytečných dat držíš, tím méně věcí musíš vysvětlovat, chránit a později mazat.
+
+## Splátky plánuj do release rytmu
+
+Velký „debt sprint“ zní lákavě, ale často skončí jako jarní úklid sklepa: první den nadšení, druhý den bolest zad, třetí den všechno zpátky v krabicích. U malého týmu funguje lépe pravidelná splátka.
+
+Praktický rytmus:
+
+- každý týden vyber jednu malou položku dluhu s jasným dopadem,
+- každý měsíc vyber jednu položku s datovým nebo provozním rizikem,
+- každý kvartál projdi staré experimenty, flagy, integrace a formuláře,
+- u každé větší funkce přidej „dluhový úklid“ do definition of done.
+
+Nejde o to, aby každý release nesl velký refaktor. Stačí, když produkt při každém vydání nezanechá další drobný nepořádek. Když přidáš nový formulář, rovnou napiš, proč chceš každé pole. Když přidáš integraci, zapiš vlastníka a exit plán. Když spustíš experiment, napiš datum rozhodnutí.
+
+## Skóruj podle bolesti, rizika a velikosti
+
+Jednoduché skóre stačí. Každé položce dej 1–5 bodů ve třech oblastech:
+
+| Oblast | Otázka | Vysoké skóre znamená |
+| --- | --- | --- |
+| Bolest | Kolik zákazníků nebo lidí v týmu to brzdí? | Časté dotazy, ruční práce, ztracené poptávky. |
+| Riziko | Může to poškodit důvěru, data nebo provoz? | Zbytečná data, nejisté oprávnění, špatný fallback. |
+| Velikost | Jak náročné je to opravit? | Hodně závislostí, migrace, komunikace, testování. |
+
+Prioritu nedělej jako prostý součet. Hledej hlavně položky s vysokou bolestí a rizikem, ale nízkou nebo střední velikostí. To jsou nejlepší splátky: viditelné zlepšení bez heroického výletu do podzemí architektury.
+
+Když je položka velká a riziková, nerozsekej ji jen technicky. Rozsekej ji podle dopadu: nejdřív zastav zbytečný sběr dat, potom zjednoduš UX, potom teprve refaktoruj hlubší vrstvu. Zákazníkovi je jedno, že jsi zlepšil interní abstrakci, pokud ho formulář pořád nutí vyplnit nesmysl.
+
+## Praktický příklad: starý onboarding po dvou letech
+
+B2B SaaS má onboarding, který vznikl v první verzi produktu. Po registraci chce název firmy, telefon, velikost týmu, obor, URL webu, volitelný import kontaktů a souhlas s produktovými tipy. Tým časem zjistí, že k aktivaci stačí jen název workspace a první projekt. Telefon nikdo nepoužívá, velikost týmu se dá doplnit později, import kontaktů děsí malé zákazníky a produktové tipy patří do preference centra, ne do registrační pasti.
+
+Místo velkého redesignu stačí jedna splátka:
+
+1. zkrátit registraci na e-mail, heslo nebo SSO, název workspace a první projekt,
+2. telefon odstranit úplně,
+3. import kontaktů přesunout do pozdějšího dobrovolného kroku,
+4. produktové tipy řešit oddělenou preferencí po první hodnotné akci,
+5. do logu zapsat jen dokončení kroku, ne obsah názvů projektů.
+
+Výsledek není revoluce. Je to menší tření, méně zbytečných dat a čistší příběh pro zákazníka: nejdřív hodnota, potom volitelné rozšíření.
+
+## Checklist: produktový dluh bez hrdinství
+
+- Má každá položka dluhu popsaný dopad na zákazníka, tým nebo provoz?
+- Rozlišujeme technický, produktový a datový dluh?
+- Má dluh s osobními nebo zákaznickými daty vyšší prioritu než kosmetika?
+- Umíme u každé položky říct, co je dostatečné splacení?
+- Máme týdenní nebo měsíční rytmus malých splátek?
+- Kontrolujeme staré experimenty, flagy, formuláře a integrace?
+- Umíme dluh rozsekat podle dopadu, ne jen podle technických vrstev?
+- Zapisujeme po opravě, co se změnilo a jaké riziko zmizelo?
+
+## Mini šablona debt karty
+
+```markdown
+# Debt karta: [název problému]
+
+Typ dluhu: technický / produktový / datový / kombinovaný
+Kde se projevuje:
+Koho brzdí:
+Dopad na zákazníka:
+Dopad na tým:
+Dopad na data nebo privacy:
+
+Bolest (1–5):
+Riziko (1–5):
+Velikost (1–5):
+
+Nejmenší užitečná splátka:
+Co teď výslovně neděláme:
+Jak poznáme, že je splaceno dostatečně:
+Vlastník:
+Datum kontroly:
+```
+
+
 # Pracovní log
+- 2026-10-09: Doplněna příloha „Produktový dluh bez hrdinských refaktorů a privacy překvapení“ s rozlišením technického, produktového a datového dluhu, privacy-first prioritizací, splátkami v release rytmu, skórováním, onboardingovým příkladem, checklistem a vyplnitelnou debt kartou.
 
 - 2026-10-09: Doplněna příloha „Serverová observabilita bez APM vysavače a logovacího smogu“ s rozdělením signálů na metriky, logy, traces a alerty, pravidly minimalizace atributů, request ID modelem, retencí, alertingem podle dopadu, příkladem pomalého exportu faktur, checklistem, observability kartou a ověřenými zdroji OWASP, OpenTelemetry, NIST a Evropské komise.
 
