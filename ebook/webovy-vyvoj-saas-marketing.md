@@ -61992,9 +61992,11 @@ Výsledek není jen opravený odkaz. Tým získá proces, který příště zach
 - OWASP Logging Cheat Sheet — doporučení, aby logy neobsahovaly citlivé hodnoty a bezpečnostní tajemství: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 
 
-# Příloha: Changelog a release poznámky bez marketingové mlhy
+# Příloha: Migrační release oznámení bez marketingové mlhy
 
-Release poznámky jsou malý důkaz, že produkt žije organizovaně. Nejsou to jen „novinky“. Jsou to provozní záznamy pro zákazníky, support, obchod, vývojáře, partnery i budoucí já, které bude za tři měsíce hledat, kdy se změnilo exportní API a proč se najednou půlka zákazníků ptá na stejnou věc.
+Tahleta příloha navazuje na obecnou část o changelogu a release notes dřív v e-booku. Tady řešíme užší problém: jak komunikovat změny, které mohou po zákazníkovi vyžadovat akci — migraci exportu, přechod na novou verzi API, změnu oprávnění, bezpečnostní nastavení, deprecaci starého workflow nebo úpravu integrace.
+
+Migrační release oznámení jsou malý důkaz, že produkt žije organizovaně. Nejsou to jen „novinky“. Jsou to provozní záznamy pro zákazníky, support, obchod, vývojáře, partnery i budoucí já, které bude za tři měsíce hledat, kdy se změnilo exportní API a proč se najednou půlka zákazníků ptá na stejnou věc.
 
 Špatný changelog říká: „Vylepšili jsme výkon a opravili drobné chyby.“ To je textová mlha. Dobrý changelog říká: „Export faktur do CSV teď zachovává diakritiku v názvech zákazníků. Pokud máte vlastní importní skript, zkontrolujte, že očekává UTF-8.“ Jedna věta, ale support právě dostal o deset ticketů méně. Kouzlo? Ne. Jen méně firemního kouře.
 
@@ -62200,10 +62202,10 @@ Tady je rozdíl mezi „něco jsme změnili“ a „zákazník ví, co má uděl
 - [ ] Má support připravené makro pro změny, které pravděpodobně vyvolají dotazy?
 - [ ] Uklízí tým staré deprecations, aby changelog nebyl hřbitov slibů?
 
-## Mini šablona release poznámky
+## Mini šablona migrační release poznámky
 
 ```markdown
-# Release poznámka: [název změny]
+# Migrační release poznámka: [název změny]
 
 ## Shrnutí
 - Co se změnilo:
@@ -62243,7 +62245,7 @@ Tady je rozdíl mezi „něco jsme změnili“ a „zákazník ví, co má uděl
 
 # Pracovní log
 
-- 2026-10-09: Doplněna příloha „Changelog a release poznámky bez marketingové mlhy“ s rozlišením interního release logu, veřejného changelogu a zákaznického oznámení, dopadovým psaním změn, kategoriemi podle Keep a Changelog, verzováním podle SemVer, postupem pro breaking changes, opatrnou bezpečnostní komunikací, privacy-first distribucí přes přímé odkazy a RSS, praktickým příkladem změny CSV exportu, checklistem, vyplnitelnou šablonou a ověřenými zdroji. Pomáhá malým SaaS týmům vysvětlovat změny tak, aby zákazníci věděli, co se jich týká a co mají udělat, bez trackerů a marketingové mlhy.
+- 2026-10-09: Doplněna navazující příloha „Migrační release oznámení bez marketingové mlhy“ s rozlišením interního release logu, veřejného changelogu a zákaznického oznámení, dopadovým psaním změn, kategoriemi podle Keep a Changelog, verzováním podle SemVer, postupem pro breaking changes, opatrnou bezpečnostní komunikací, privacy-first distribucí přes přímé odkazy a RSS, praktickým příkladem změny CSV exportu, checklistem, vyplnitelnou šablonou a ověřenými zdroji. Pomáhá malým SaaS týmům vysvětlovat změny vyžadující zákaznickou akci tak, aby lidé věděli, co se jich týká a co mají udělat, bez trackerů a marketingové mlhy.
 
 - 2026-10-09: Doplněna příloha „Konfigurační drift bez ‚u mě to funguje‘ rituálů“ s rozdělením konfigurace na hodnotu, schéma a politiku, konfiguračním kontraktem, testovaným `.env.example`, pravidly pro staging bez produkčních dat, procesem změn, měsíční drift kontrolou, checklistem, vyplnitelnou kartou a ověřenými zdroji Twelve-Factor, NIST a OWASP. Pomáhá malým SaaS týmům nasazovat bez skrytých rozdílů mezi lokálem, stagingem, CI a produkcí.
 
