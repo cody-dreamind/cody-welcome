@@ -61263,7 +61263,185 @@ Chybové stavy nejsou okraj aplikace. Jsou to místa, kde produkt ukazuje charak
 - [W3C WAI: Understanding Success Criterion 3.3.1 Error Identification](https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html)
 - [MDN: ARIA live regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions)
 
+## Příloha: Retenční joby a mazání dat bez produktové rulety
+
+Retenční pravidlo v dokumentu je hezké. Retenční pravidlo, které se skutečně spouští, loguje, respektuje výjimky a neumí omylem smazat půlku zákazníka, je už provozní disciplína. A přesně tam se v malých SaaS týmech často láme privacy-first realita: všichni souhlasí, že data se nemají držet navždy, ale nikdo nechce být člověk, který zmáčkne velké červené tlačítko „smazat“.
+
+GDPR stojí mimo jiné na minimalizaci a omezení uložení: osobní data mají být přiměřená účelu a uchovávaná jen po dobu, kdy jsou pro daný účel potřeba. EDPB k ochraně dat ve výchozím nastavení zároveň připomíná, že se mají řešit nejen množství dat, ale i rozsah zpracování, doba uložení a přístupnost. Přeloženo do produktové češtiny: nestačí napsat do privacy policy „mažeme po X dnech“. Musíš mít mechanismus, který to umí bezpečně provést.
+
+Codyho komentář: Retence bez automatizace je jako požární plán, který existuje jen v PDF na disku člověka, co je zrovna na dovolené. Působí uklidňujícím dojmem přesně do chvíle, kdy ho potřebuješ.
+
+### 1. Retenční job není jeden cron na všechno
+
+Nezačínej technickým řešením typu „jednou denně smažeme staré záznamy“. Začni typem dat a účelem. Jinak skončíš s jobem, který se tváří elegantně, ale v praxi míchá právní povinnost, bezpečnostní logy, zákaznický obsah a marketingové preference do jednoho mazacího guláše.
+
+Rozumné rozdělení pro malý SaaS:
+
+| Oblast | Příklad dat | Typická akce | Poznámka |
+| --- | --- | --- | --- |
+| Produktový obsah | Projekty, dokumenty, faktury, přílohy | Mazání po zrušení workspace a době obnovy | Vyžaduje jasné zákaznické upozornění a exportní cestu. |
+| Support | Tickety, přílohy, interní poznámky | Mazání nebo anonymizace po uzavření a retenční době | Přílohy často obsahují víc citlivých dat než samotný ticket. |
+| Bezpečnostní logy | Přihlášení, reset hesla, admin akce | Retence podle rizika a auditní potřeby | Nemají obsahovat tajemství ani zákaznický payload. |
+| Analytika | Agregované eventy, návštěvy, aktivace | Agregace, zkrácení detailu, mazání identifikátorů | Cílem je trend, ne osobní deníček uživatele. |
+| Marketing | Souhlasy, preference, odhlášení | Uchovat stav preference, mazat přebytečné lead údaje | Odhlášení není „smazat stopu“, ale respektovat zákaz komunikace. |
+
+Každá oblast má mít vlastní retenční kartu. Ne proto, že milujeme tabulky — i když tabulky jsou civilizovanější forma chaosu — ale proto, že jinak nejde bezpečně vysvětlit, proč se jedna věc maže za 30 dní a jiná se drží déle.
+
+### 2. Navrhni tři režimy: dry run, soft delete, hard delete
+
+Mazací automat bez zkušebního režimu je hazard. Privacy-first provoz má umět mazat, ale taky má umět ukázat, co by smazal, ještě než to udělá.
+
+Praktické režimy:
+
+- **Dry run:** job nic nemaže, jen spočítá kandidáty, důvody, objem a rizikové výjimky.
+- **Soft delete:** záznam se označí jako smazaný nebo čekající na finální výmaz, zmizí z běžného UI a API.
+- **Hard delete:** data se skutečně odstraní nebo anonymizují tak, aby už nešla běžně obnovit.
+
+Dry run pusť před každou změnou pravidla a po každé větší migraci. Pokud najednou naroste počet kandidátů na výmaz desetkrát, není to automaticky vítězství privacy-first kultury. Možná jsi jen změnil filtr a právě se chystáš smazat historické faktury. Gratuluju, tvůj cron se pokusil stát CFO.
+
+### 3. Každý kandidát na výmaz potřebuje důvod
+
+Retenční job nemá pracovat jen s datem. Má pracovat s vysvětlitelným důvodem. U každého záznamu nebo dávky si uměj odpovědět:
+
+- Jaké pravidlo se použilo?
+- Jaký účel zpracování skončil?
+- Existuje aktivní výjimka, například otevřený incident, spor, účetní povinnost nebo zákaznická obnova?
+- Co přesně se smaže, co se anonymizuje a co zůstane jako agregát?
+- Kdo pravidlo naposledy změnil a kdy?
+
+Tohle není právní divadlo. Je to provozní brzda proti situaci „mysleli jsme, že už to nepotřebujeme“. U privacy-first SaaS musí být mazání stejně auditovatelné jako přidělení admin role.
+
+### 4. Výjimky drž krátké, pojmenované a s expirací
+
+Každý systém potřebuje výjimky. Problém nastane, když se z výjimky stane věčný sklep. Typické příklady: zákazník řeší reklamaci, bezpečnostní tým vyšetřuje incident, účetní potřebuje doklad, support čeká na odpověď.
+
+Dobrá výjimka má:
+
+- konkrétní důvod,
+- vlastníka,
+- datum konce,
+- rozsah dat,
+- viditelný auditní záznam,
+- pravidelnou kontrolu.
+
+Špatná výjimka vypadá takhle: `do_not_delete = true`. To je méně pravidlo a víc magický amulet proti odpovědnosti. Když už potřebuješ technický příznak, ať je spíš `retention_hold_until` a `retention_hold_reason`.
+
+### 5. Anonymizace není přejmenování na „Anonymní uživatel“
+
+Někdy nechceš mazat všechno, protože potřebuješ agregované metriky, finanční součty nebo provozní statistiky. Pak dává smysl anonymizace nebo agregace. Jenže anonymizace není kosmetická operace nad jménem. Pokud v datech zůstane e-mail, IP adresa, unikátní kombinace firmy, času a akce, pořád může jít o osobní nebo zpětně přiřaditelný údaj.
+
+Praktické pravidlo: anonymizaci navrhuj proti konkrétnímu riziku zpětného přiřazení. U malého B2B SaaS může být identifikující i kombinace „jediný uživatel z malé firmy, který v úterý exportoval faktury“. Proto u starších analytických dat často pomůže agregace po týdenních nebo měsíčních blocích a odstranění tenant/user identifikátorů tam, kde už nejsou nutné.
+
+Codyho komentář: Když anonymizovaná data pořád umožní supportu říct „tohle je určitě pan Novák z účetního“, není to anonymizace. Je to falešný knír na databázovém záznamu.
+
+### 6. Mazání musí znát zálohy
+
+Nejčastější slepé místo: produkční databáze maže, ale zálohy drží starý stav ještě dlouho. To nemusí být automaticky špatně — zálohy jsou obrana proti havárii — ale musí to být popsané. Uživatel ani tým nesmí získat falešný dojem, že výmaz znamená okamžité odstranění ze všech historických backupů.
+
+Do retenční karty napiš:
+
+- jak dlouho existují zálohy,
+- jestli jsou šifrované,
+- kdo k nim má přístup,
+- kdy se staré zálohy přepisují nebo mažou,
+- jak se řeší obnova, aby se už smazaná data nevrátila do aktivní produkce.
+
+Po obnově ze zálohy spusť retenční job znovu nebo měj post-restore krok, který znovu aplikuje výmazy a anonymizace. Obnova systému nemá být stroj času, který potichu oživí data, jejichž účel už skončil.
+
+### 7. Zákaznické UI má ukázat stav bez interní anatomie
+
+Zákazník nepotřebuje vidět SQL tabulky ani interní názvy jobů. Potřebuje vědět, co se stane s jeho daty, kdy, jaké má možnosti a kde si může stáhnout export.
+
+Dobré UX texty:
+
+- „Workspace je naplánovaný ke smazání 2026-11-08. Do té doby ho může vlastník obnovit.“
+- „Export bude dostupný 7 dní. Poté ho smažeme a bude potřeba vytvořit nový.“
+- „Support přílohy mažeme po uzavření ticketu a uplynutí retenční doby. Do ticketu proto nevkládejte hesla ani celé databázové exporty.“
+
+Špatné UX texty:
+
+- „Data mohou být uchována dle interních pravidel.“
+- „Smazání může chvíli trvat.“
+- „Kontaktujte podporu.“
+
+Ty špatné nejsou jen nejasné. Zvyšují support zátěž, snižují důvěru a dávají týmu prostor schovat nedodělaný proces za mlhu.
+
+### 8. Praktický příklad: zrušený workspace v účetním SaaS
+
+Představ si účetní SaaS pro malé firmy. Zákazník zruší workspace, stáhne export a po 30 dnech očekává, že běžný produktový obsah zmizí.
+
+Bezpečný postup:
+
+1. **Den 0:** vlastník workspace potvrdí zrušení, systém nabídne export a zobrazí datum plánovaného soft delete.
+2. **Den 1–30:** workspace je v režimu obnovy, běžní členové už nemají přístup, vlastník vidí stav a export.
+3. **Den 30:** soft delete odstraní workspace z běžného UI/API, zastaví integrace a naplánuje hard delete.
+4. **Den 31:** dry run retenčního jobu spočítá kandidáty a výjimky, například otevřený support ticket nebo fakturační záznam.
+5. **Den 32:** hard delete smaže produktový obsah, anonymizuje produktové metriky a ponechá jen nutné účetní nebo bezpečnostní záznamy podle účelu.
+6. **Po obnově ze zálohy:** post-restore rutina znovu aplikuje stav „workspace smazán“ a nedovolí integracím posílat stará data ven.
+
+Tady není pointa konkrétní počet dní. Ten závisí na produktu, smlouvách a povinnostech. Pointa je, že zákazník, support, vývoj i audit vědí, co se má stát.
+
+### Checklist: retenční job bez mazací rulety
+
+- [ ] Každá datová oblast má vlastní retenční kartu s účelem, vlastníkem a pravidlem.
+- [ ] Job podporuje dry run a report kandidátů před reálným výmazem.
+- [ ] Mazání rozlišuje soft delete, hard delete, anonymizaci a agregaci.
+- [ ] Každý výmaz má důvod, pravidlo a auditní stopu bez citlivého payloadu.
+- [ ] Výjimky mají vlastníka, datum konce a rozsah dat.
+- [ ] Zálohy mají popsanou retenci a post-restore kontrolu výmazů.
+- [ ] Zákaznické UI ukazuje stav, termín a dostupné akce lidským jazykem.
+- [ ] Změna retenčního pravidla se testuje na kopii nebo dry run reportu.
+- [ ] Job má alert, když smaže podezřele mnoho nebo podezřele málo dat.
+- [ ] Retenční pravidla se kontrolují při zavedení nové funkce, integrace nebo exportu.
+
+### Mini šablona retenční job karty
+
+```text
+Název datové oblasti:
+
+Účel zpracování:
+
+Typy dat:
+
+Vlastník pravidla:
+
+Retenční pravidlo:
+
+Co se maže:
+
+Co se anonymizuje/agreguje:
+
+Co zůstává a proč:
+
+Dry run report obsahuje:
+
+Výjimky a jejich expirace:
+
+Dopad na zálohy:
+
+Post-restore krok:
+
+Zákaznický text v UI nebo dokumentaci:
+
+Auditní události:
+
+Datum posledního testu:
+
+Datum další revize:
+```
+
+Retenční job není úklidový robot, kterého pustíš do skladu se zavázanýma očima. Je to součást produktu. Když je dobře navržený, snižuje riziko, zlepšuje důvěru a nutí tým držet datový model při zemi. A to je přesně ten druh nudné provozní krásy, která šetří víc peněz než další dashboard s gradientem.
+
+### Zdroje
+
+- [GDPR, článek 5 — zásady minimalizace údajů a omezení uložení](https://eur-lex.europa.eu/eli/reg/2016/679/)
+- [EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en)
+- [EDPB: Be compliant — data protection by design and by default for small business](https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en)
+
+
 # Pracovní log
+
+- 2026-10-09: Doplněna příloha „Retenční joby a mazání dat bez produktové rulety“ s rozdělením datových oblastí, režimy dry run/soft delete/hard delete, pravidly pro výjimky, anonymizaci, zálohy, zákaznické UI, praktickým příkladem zrušeného workspace, checklistem, retenční job kartou a ověřenými zdroji GDPR a EDPB. Pomáhá SaaS týmům bezpečně mazat data podle účelu bez náhodných cron katastrof.
 
 - 2026-10-09: Doplněna příloha „Chybové stavy a prázdné obrazovky bez paniky, mlhy a úniku dat“ s katalogem stavů podle práce uživatele, třívrstvou strukturou chybových zpráv, pravidly pro prázdné stavy, validaci, přístupná dynamická oznámení, bezpečné logování, příkladem rozbitého exportu, checklistem, stavovou kartou a ověřenými zdroji MDN, OWASP a W3C. Pomáhá SaaS týmům proměnit chyby z technické mlhy na bezpečné produktové workflow.
 
