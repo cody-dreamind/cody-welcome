@@ -59166,7 +59166,169 @@ Kontrola po 30 dnech:
 
 Tahle příloha nepřidává nová aktuální právní ani cenová tvrzení. Navazuje na předchozí části e-booku o datové mapě, integračním katalogu, retenčních pravidlech, release runbooku a administrátorských přístupech.
 
+# Příloha: Zákaznické exporty dat bez privacy průšvihu a CSV divočiny
+
+Komu to pomáhá a proč: tahle příloha pomáhá SaaS týmu připravit exporty zákaznických dat tak, aby byly užitečné pro zákazníka, bezpečné pro provoz a neproměnily se v nehlídaný datový výtah pro každého, kdo našel tlačítko „Stáhnout vše“.
+
+Export dat zní jako jednoduchá funkce. Klik, soubor, hotovo. Jenže v praxi se v něm potkává produkt, podpora, bezpečnost, právo, UX a provozní realita. Špatně navržený export může obsahovat víc dat, než zákazník čekal, odhalit údaje jiných členů týmu, obejít běžná oprávnění, zatížit databázi nebo vytvořit soubor, který pak měsíce leží v inboxu. To není transparentnost. To je datový ohňostroj v papírové krabici.
+
+Privacy-first export má mít jasný účel, vlastníka, rozsah, formát, expiraci a auditní stopu. Zákazník má dostat data, která opravdu potřebuje, v podobě, kterou umí použít, bez toho, aby služba vyrobila nový bezpečnostní problém.
+
+## Nejdřív odděl typy exportů
+
+Ne každý export slouží stejnému účelu. Rozděl je minimálně na čtyři typy:
+
+- **provozní export**: faktury, objednávky, seznam položek, report práce,
+- **produktový export**: obsah, který zákazník v aplikaci vytvořil,
+- **administrativní export**: data pro audit, compliance, předání nebo migraci,
+- **subjektový export**: data vztahující se ke konkrétnímu člověku nebo žádosti o přístup.
+
+Každý typ má jiné oprávnění, jiný formát a jinou retenci. Provozní export pro účetní tým nemusí obsahovat interní poznámky podpory. Produktový export pro migraci nemusí obsahovat auditní logy. Subjektový export nesmí být jen „všechno, co našel SQL dotaz s e-mailem“.
+
+Praktické pravidlo: u každého exportu napiš jednu větu účelu. Pokud nejde napsat bez slov „pro jistotu“, export je moc široký.
+
+## Oprávnění kontroluj podle obsahu, ne podle tlačítka
+
+Největší chyba je dát export do administrace a spoléhat, že kdo vidí stránku, může stáhnout všechno. Oprávnění musí odpovídat datům uvnitř souboru.
+
+Zkontroluj hlavně:
+
+- jestli uživatel smí exportovat celý tenant, nebo jen vlastní část,
+- jestli export zahrnuje osobní údaje členů týmu, zákazníků nebo kontaktů,
+- jestli obsahuje interní poznámky, auditní události nebo bezpečnostní metadata,
+- jestli do exportu neprosakují soft-deleted záznamy,
+- jestli se respektují role, projekty, organizace a datové hranice,
+- jestli podporový admin nemůže jedním klikem stáhnout zákaznický obsah bez důvodu.
+
+Codyho komentář: export je často silnější akce než běžné čtení detailu. Když někdo vidí jeden záznam v UI, neznamená to, že má mít ZIP se všemi záznamy od založení účtu. To není pohodlí. To je datový bagr.
+
+## Formát navrhni pro použití, ne pro lenost vývojáře
+
+CSV je praktické, ale ne univerzální. JSON je přesný, ale pro běžného člověka často nečitelný. PDF vypadá úředně, ale špatně se zpracovává. Dobrá služba proto odděluje formát podle práce:
+
+| Účel | Vhodný formát | Poznámka |
+| --- | --- | --- |
+| účetnictví a tabulková práce | CSV / XLSX | stabilní sloupce, kódování UTF-8, popis polí |
+| migrace do jiné aplikace | JSON / NDJSON | verze schématu, dokumentace, interní ID bez tajemství |
+| lidské potvrzení nebo přehled | PDF / HTML | čitelné shrnutí, ne jediný strojový výstup |
+| auditní předání | ZIP s manifestem | seznam souborů, čas generování, rozsah, hash volitelně |
+
+Každý export má mít malý manifest: kdo ho vytvořil, kdy, pro jaký tenant, jaký rozsah obsahuje, jaké filtry byly použité a kdy odkaz expiruje. Manifest šetří podporu, protože po třech týdnech nikdo nechce hádat, co znamená soubor `export-final-2-opravdu.csv`.
+
+## Minimalizuj obsah a chraň soubor po vytvoření
+
+Export není jen dotaz do databáze. Je to nový datový objekt, který má vlastní riziko.
+
+Bezpečný export by měl mít:
+
+- explicitně vybraná pole místo `SELECT *`,
+- jasné vyloučení hesel, tokenů, session ID, recovery kódů a interních secrets,
+- maskování nebo vynechání polí, která nejsou pro účel potřeba,
+- krátkou expiraci odkazu ke stažení,
+- možnost zrušit export nebo smazat připravený soubor,
+- auditní událost bez ukládání obsahu exportu,
+- limit velikosti a asynchronní zpracování pro velká data,
+- upozornění uživateli, že stažený soubor už musí chránit on.
+
+Pokud export obsahuje citlivější data, zvaž dodatečné potvrzení, zpožděné připravení, upozornění vlastníkovi účtu nebo omezení na vyšší role. U B2B SaaS často dává smysl, aby běžný člen týmu mohl exportovat vlastní report, ale kompletní tenant export jen owner nebo security role.
+
+## Exporty nemaž podle nálady, ale podle retence
+
+Připravené exporty mají mít krátký život. Typický provozní export může expirovat za hodiny až jednotky dní; trvalý archiv exportů v aplikaci je riziko navíc. Pokud zákazník potřebuje historii exportů, ulož metadata a možnost export zopakovat, ne nutně původní soubor.
+
+Retenční pravidlo si napiš přímo k exportu:
+
+- jak dlouho existuje soubor ke stažení,
+- kdo ho může znovu stáhnout,
+- jestli se export automaticky smaže,
+- co zůstává v auditní stopě,
+- jestli lze export po žádosti zákazníka odstranit dřív,
+- jak se export chová po vypnutí účtu nebo offboardingu dodavatele.
+
+Privacy-first varianta je jednoduchá: drž co nejkratší dobu obsah souboru, ale ponech minimální důkaz, že export vznikl a kdo ho spustil.
+
+## Praktický příklad: tenant export pro B2B SaaS
+
+Účetní SaaS chce dát zákazníkům export všech fakturačních dat za vybraný rok. Špatná varianta je jedno tlačítko „Export vše“, které pošle ZIP na e-mail ownera a obsahuje faktury, zákaznické kontakty, interní poznámky podpory, auditní logy a technická ID.
+
+Lepší varianta:
+
+- owner vybere rok, typ dat a formát,
+- systém předem zobrazí rozsah: počet faktur, kontaktů, příloh a odhad velikosti,
+- export běží jako asynchronní job s `request_id`,
+- soubor obsahuje jen fakturační data a přílohy, ne interní support poznámky,
+- ZIP má manifest s verzí schématu a časem generování,
+- odkaz ke stažení expiruje například po 48 hodinách,
+- auditní stopa uloží metadata exportu, ne obsah souboru,
+- po dokončení přijde notifikace do aplikace, ne soubor do e-mailové přílohy,
+- kompletní tenant export je dostupný jen rolím owner/admin s potvrzením dopadu.
+
+Výsledek: zákazník dostane použitelný balík dat, ale služba nevytvoří trvalou kopii citlivého obsahu v e-mailu, supportu ani logách.
+
+## Checklist: export dat bez datového výtahu
+
+- Má každý export napsaný účel, vlastníka a typ dat?
+- Je oprávnění odvozené od obsahu souboru, ne jen od viditelnosti tlačítka?
+- Používáš allowlist polí místo exportu celé tabulky?
+- Jsou vyloučené secrets, tokeny, hesla, session údaje a interní poznámky bez účelu?
+- Má export manifest s rozsahem, filtry, časem a verzí schématu?
+- Exspiruje odkaz ke stažení a maže se připravený soubor automaticky?
+- Loguješ metadata exportu bez obsahu souboru?
+- Existuje limit velikosti, fronta a bezpečný stav pro velké exporty?
+- Je uživateli jasné, co soubor obsahuje a jak ho má chránit po stažení?
+- Umíš export zopakovat ze zdrojových dat místo držení starých souborů navždy?
+
+## Mini šablona export karty
+
+```markdown
+# Export karta: [název exportu]
+
+Účel:
+Typ exportu:
+- provozní / produktový / administrativní / subjektový
+
+Interní vlastník:
+Role, které mohou export spustit:
+Tenant / projekt hranice:
+
+Rozsah dat:
+- zahrnutá pole:
+- vyloučená pole:
+- citlivá pole a zacházení:
+
+Formát:
+Schéma / verze:
+Manifest obsahuje:
+
+Zpracování:
+- synchronní / asynchronní:
+- limit velikosti:
+- fronta / job:
+- chybový stav:
+
+Stažení:
+- expirace odkazu:
+- kdo může stáhnout:
+- možnost zrušit:
+
+Audit:
+- auditní událost:
+- metadata bez obsahu:
+- retence auditní stopy:
+
+Datum poslední revize:
+Co odstranit nebo zúžit při příští revizi:
+```
+
+## Zdroje
+
+- [EUR-Lex — GDPR, článek 15 a 20](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=celex%3A32016R0679) — oficiální znění GDPR k právu na přístup a přenositelnost údajů; pro produktový návrh exportů je důležité rozlišovat mezi uživatelskou funkcí exportu a formální žádostí subjektu údajů.
+- [EDPB — Guidelines 01/2022 on data subject rights: Right of access](https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en) — praktické vodítko k právu na přístup, formě poskytnutí kopie a ochraně práv a svobod dalších osob.
+- [European Commission — Dealing with requests from individuals](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en) — přehled pro organizace, jak pracovat s žádostmi jednotlivců podle GDPR včetně přístupu, opravy, výmazu a přenositelnosti.
+
 # Pracovní log
+- 2026-10-09: Doplněna příloha „Zákaznické exporty dat bez privacy průšvihu a CSV divočiny“ s rozdělením typů exportů, kontrolou oprávnění podle obsahu, volbou formátů, minimalizací polí, retencí připravených souborů, B2B příkladem, checklistem, export kartou a ověřenými zdroji GDPR, EDPB a Evropské komise.
+
 - 2026-10-09: Doplněna příloha „Admin dashboard bez interní reality show a datového přetlaku“ s návrhem scénářů, rolí, postupného detailu, serverového maskování, bezpečných admin akcí, auditních událostí, B2B příkladem, checklistem, dashboard kartou a ověřenými zdroji OWASP, Evropské komise a NIST.
 
 - 2026-10-09: Rozšířena příloha „Přístupové revize bez admin folklóru a oprávnění navždy“ o joiner–mover–leaver rutinu pro nástupy, změny rolí, odchody a ukončení agenturní spolupráce, včetně praktické tabulky okamžitých a následných kroků.
