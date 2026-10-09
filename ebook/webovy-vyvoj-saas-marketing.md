@@ -58654,7 +58654,143 @@ Datum kontroly:
 ```
 
 
+
+# Příloha: Přístupové revize bez admin folklóru a oprávnění navždy
+
+Přístupy v malém SaaS často rostou jako pokojovka, kterou nikdo nestříhá: nejdřív má někdo admin práva kvůli migraci, pak další člověk kvůli supportu, agentura kvůli kampani, externista kvůli fakturaci a servisní účet kvůli integraci, která měla být „jen na týden“. Po půl roce už nikdo přesně neví, kdo se kam dostane, proč to potřebuje a jestli se to po odchodu člověka nebo změně role opravdu odebralo.
+
+Přístupová revize není compliance divadlo. Je to pravidelný provozní úklid, který chrání zákaznická data, interní nervy i důvěru. Když se dělá dobře, není to tabulka bolesti. Je to krátký rytmus: seznam účtů, účel, vlastník, poslední použití, rozhodnutí ponechat / omezit / odebrat a důkaz, že se změna provedla.
+
+> Codyho komentář: Nejhorší oprávnění není to velké. Nejhorší je to, o kterém si všichni myslí, že ho určitě vlastní někdo jiný. To je přesně ten typ firemního ducha, který má login, ale nemá svědomí.
+
+## Začni katalogem účtů, ne schůzkou o bezpečnosti
+
+Nejdřív si napiš, kde se přístupy vůbec drží. U malého webu nebo SaaS to typicky znamená:
+
+- produkční aplikace a interní admin,
+- databáze, storage a hosting,
+- Git repozitáře, CI/CD a deploy klíče,
+- analytika, error monitoring, observabilita a status page,
+- e-mailing, CRM, support, fakturace a účetnictví,
+- správci domén, DNS, registrátoři a certifikáty,
+- AI nástroje, automatizace, webhooky a servisní účty.
+
+U každého systému potřebuješ minimálně: vlastníka, typ účtů, role, citlivost dat, způsob přihlášení, MFA stav, počet adminů, servisní účty a datum poslední revize. Pokud tenhle seznam nemáš, první revize nebude rozhodování. Bude to detektivka. To je normální; jen se netvař, že tabulka s pěti nástroji pokrývá celý provoz.
+
+## Revizní otázka zní: potřebuje to dnes?
+
+Špatná revize se ptá: „Je ten člověk důvěryhodný?“ Dobrá revize se ptá: „Potřebuje tento konkrétní přístup pro současnou práci?“ Důvěra není oprávnění. Kamarádský tým může mít pořád přístupová pravidla, protože pravidla neříkají „nevěříme ti“. Říkají „nebudeme zbytečně zvětšovat průšvih, když se něco pokazí“.
+
+Praktické rozhodování:
+
+| Signál | Co udělat |
+| --- | --- |
+| Člověk změnil roli | Omezit na novou roli, ne přenést všechno automaticky. |
+| Účet nebyl použit 60–90 dní | Ověřit účel, pak deaktivovat nebo přepnout na request-based přístup. |
+| Admin právo je jen pro občasný zásah | Nahradit dočasným nebo just-in-time přístupem. |
+| Sdílený účet nejde hned zrušit | Zapsat výjimku, MFA, vault, audit použití a datum odstranění. |
+| Servisní účet nemá vlastníka | Zastavit nové použití, dohledat integraci, rotovat secret a určit vlastníka. |
+
+Nejlepší revize končí konkrétní změnou, ne pocitem. „Zkontrolováno“ nestačí. Napiš „odebrán admin v CRM“, „deaktivován účet agentury“, „servisní token přesunut do vaultu“, „ponecháno na 30 dní kvůli migraci, vlastník Jana“.
+
+## Servisní účty nejsou výjimka z reality
+
+U lidí se přístup často řeší aspoň při nástupu a odchodu. U servisních účtů je to horší: token vznikne kvůli integraci, někdo ho vloží do CI, pošle do chatu, nastaví webhook a pak se modlíme k bohům YAMLu. Servisní účet má mít stejné minimum jako lidský účet: účel, vlastníka, rozsah, prostředí, expiraci nebo rotační rytmus, místo uložení secretu a postup vypnutí.
+
+Privacy-first pravidlo: servisní účet nesmí mít širší přístup „pro jistotu“. Exportní worker nepotřebuje číst billing nastavení, notifikační služba nepotřebuje admin API a marketingová integrace nepotřebuje produkční databázi. Pokud integrace vyžaduje zbytečně široký scope, je to obchodní riziko, ne technická drobnost.
+
+## Admin práva odděl od běžné práce
+
+Admin účet by neměl být každodenní pracovní identita. Když člověk běžně píše obsah, odpovídá na support nebo testuje produkt, nepotřebuje mít pořád otevřený přístup k destruktivním akcím. Lepší model:
+
+1. běžný účet pro normální práci,
+2. zvýšené oprávnění jen pro konkrétní úkol,
+3. časové omezení,
+4. auditní záznam změny,
+5. návrat na běžnou roli.
+
+U malého týmu to může být jednoduché: admin změny se dělají jen z jednoho správcovského účtu s MFA, každé použití se zapisuje do rozhodovacího deníku a jednou měsíčně se projde seznam akcí. Není to dokonalý enterprise PAM. Je to pořád lepší než deset trvalých adminů „protože startup“.
+
+## Privacy-first revize sleduje dopad na data
+
+Ne všechna oprávnění jsou stejně riziková. Přístup k veřejnému blogu není totéž jako přístup k fakturaci, supportním ticketům, produkční databázi nebo exportům zákaznických dat. Proto u revize označ citlivé oblasti:
+
+- osobní údaje zákazníků,
+- platební a fakturační informace,
+- obsah support komunikace,
+- produkční databáze a zálohy,
+- API klíče, secrets a CI/CD,
+- nastavení domén, DNS a e-mailové doručitelnosti,
+- AI nástroje s možností vkládat zákaznický obsah.
+
+Čím citlivější oblast, tím kratší revizní interval. Admini, produkční data, billing a secrets patří do měsíční nebo čtvrtletní kontroly. Nízkorizikové nástroje můžou stačit půlročně. Důležité je, že interval není nálada, ale rozhodnutí podle dopadu.
+
+## Praktický příklad: agentura po kampani
+
+SaaS tým si najal marketingovou agenturu na tříměsíční kampaň. Agentura dostala přístup do webového CMS, analytiky, reklamního účtu, nástroje pro e-mailing a sdílené složky s podklady. Kampaň skončila, ale přístupy zůstaly. O čtyři měsíce později se v e-mailingu objeví starý segment kontaktů a nikdo neví, jestli ho agentura ještě používá.
+
+Rozumná revize:
+
+1. vypsat všechny účty a sdílené odkazy agentury,
+2. odebrat přístup do e-mailingu a analytiky,
+3. ponechat jen read-only přístup k vybraným kreativám na 14 dní,
+4. zrušit veřejné sdílené odkazy se zákaznickými daty,
+5. zkontrolovat exporty a stažené CSV soubory,
+6. zapsat ukončení spolupráce do vendor evidence,
+7. doplnit do budoucích smluv datum automatické revize přístupů.
+
+Výsledek: méně tichých oprávnění, čistší datová stopa a jasný proces pro příště. Žádná velká bezpečnostní show. Jen konečně zavřené dveře, které už neměly být otevřené.
+
+## Checklist: přístupová revize bez folklóru
+
+- Máme seznam systémů, kde existují lidské i servisní účty?
+- Má každý systém vlastníka, který umí přístupy potvrdit?
+- Kontrolujeme adminy častěji než běžné role?
+- Má každý servisní účet účel, vlastníka, scope a rotační pravidlo?
+- Odstraňujeme nebo omezujeme neaktivní účty?
+- Evidujeme sdílené účty jako výjimky s datem konce?
+- Máme MFA pro citlivé systémy a admin role?
+- Oddělujeme běžnou práci od zvýšených oprávnění?
+- Zapisujeme konkrétní rozhodnutí a provedené změny?
+- Kontrolujeme přístupy externistů, agentur a dočasných spolupracovníků po skončení práce?
+
+## Mini šablona access review karty
+
+```markdown
+# Access review karta: [systém / oblast]
+
+Systém:
+Vlastník systému:
+Citlivost dat: nízká / střední / vysoká
+Revizní interval:
+Datum revize:
+
+Lidské účty k potvrzení:
+Admin účty:
+Servisní účty:
+Sdílené účty / výjimky:
+Externí uživatelé:
+
+Odebrat:
+Omezit:
+Ponechat a proč:
+Dočasné výjimky a datum konce:
+Secrets k rotaci:
+Důkaz provedení:
+Další kontrola:
+```
+
+## Zdroje
+
+- [OWASP Authorization Cheat Sheet](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Authorization_Cheat_Sheet.md) — doporučuje mapovat uživatele, zdroje a operace už ve fázi návrhu, testovat vynucení oprávnění a po nasazení pravidelně kontrolovat privilege creep.
+- [OWASP Authorization Regression Testing Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Regression_Testing_Cheat_Sheet.html) — praktický rámec pro testování horizontálního a vertikálního zneužití oprávnění, včetně multitenant rizik.
+- [NIST SP 800-53 Rev. 5.1](https://doi.org/10.6028/NIST.SP.800-53r5) — rodina Access Control pokrývá správu účtů, vynucení přístupů, role-based access control, revokaci oprávnění a omezení přístupu ke konkrétním typům informací.
+- [ENISA Technical implementation guidance on cybersecurity risk-management measures, verze 1.0](https://www.enisa.europa.eu/publications/technical-implementation-guidance-on-cybersecurity-risk-management-measures) — uvádí pravidelné revize identit, deaktivaci nepotřebných účtů, omezení sdílených identit, RBAC, MFA, just-in-time přístup a důkazy k IAM procesům.
+- [EUR-Lex — GDPR, článek 32](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679) — požaduje technická a organizační opatření odpovídající riziku, včetně důvěrnosti, integrity, dostupnosti a procesu pravidelného testování a hodnocení bezpečnostních opatření.
+
 # Pracovní log
+- 2026-10-09: Doplněna příloha „Přístupové revize bez admin folklóru a oprávnění navždy“ s katalogem účtů, rozhodováním podle současné potřeby, pravidly pro servisní účty, oddělením admin práce, privacy-first prioritizací, příkladem ukončené agenturní kampaně, checklistem, access review kartou a ověřenými zdroji OWASP, NIST, ENISA a EUR-Lex.
+
 - 2026-10-09: Doplněna příloha „Produktový dluh bez hrdinských refaktorů a privacy překvapení“ s rozlišením technického, produktového a datového dluhu, privacy-first prioritizací, splátkami v release rytmu, skórováním, onboardingovým příkladem, checklistem a vyplnitelnou debt kartou.
 
 - 2026-10-09: Doplněna příloha „Serverová observabilita bez APM vysavače a logovacího smogu“ s rozdělením signálů na metriky, logy, traces a alerty, pravidly minimalizace atributů, request ID modelem, retencí, alertingem podle dopadu, příkladem pomalého exportu faktur, checklistem, observability kartou a ověřenými zdroji OWASP, OpenTelemetry, NIST a Evropské komise.
