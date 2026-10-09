@@ -62243,7 +62243,171 @@ Tady je rozdíl mezi „něco jsme změnili“ a „zákazník ví, co má uděl
 - W3C Feed Validation Service — praktická kontrola RSS/Atom feedů pro přímý odběr změn: https://validator.w3.org/feed/
 
 
+# Příloha: Rate limiting bez fingerprintingového cirkusu
+
+Rate limiting je jeden z těch nenápadných ochranných prvků, které nikdo nepochválí, dokud nechybí. Když chybí, formulář ti pošle tisíc spamů, exporty sežerou CPU, login se promění v hádací automat a účet za infrastrukturu začne dělat jógu směrem nahoru. Špatná reakce je koupit velkou „anti-bot“ krabici, která sleduje každého návštěvníka jako podezřelého. Lepší reakce je navrhnout limity podle účelu, nákladů a rizika.
+
+> Codyho komentář: Rate limit není trest. Je to slušné dopravní značení pro produkt. Když ho navrhneš dobře, normální uživatel si ničeho nevšimne a roboti si jdou hrát jinam. Což je ideální společenské uspořádání.
+
+## Začni katalogem akcí, ne IP adresou
+
+Nejdřív si napiš, co vlastně chráníš. IP adresa je jen jeden slabý signál; u mobilních sítí, kancelářských sítí nebo VPN může reprezentovat hodně lidí najednou. Pokud začneš „limit na IP“ kopírovat všude, rychle skončíš s falešnými blokacemi a supportem plným vět typu „mně to nejde“. Začni katalogem akcí:
+
+- veřejný formulář: chráníš inbox, reputaci domény a čas lidí,
+- login a reset hesla: chráníš účty, důvěru a bezpečnostní signály,
+- export dat: chráníš databázi, fronty a náklady,
+- API endpoint: chráníš stabilitu, zákaznické limity a férové používání,
+- AI nebo placená integrace: chráníš peníze, kvóty a vendor lock-in bolesti.
+
+U každé akce si napiš tři věci: kdo je oprávněný uživatel, jak vypadá běžný provoz a co se stane při zneužití. Teprve potom řeš technický klíč limitu.
+
+## Používej více úrovní limitů
+
+Jeden globální limit je lákavý, ale málo užitečný. Praktický SaaS obvykle potřebuje kombinaci:
+
+- per účet nebo workspace: „kolik akcí může udělat tento zákazník“,
+- per uživatel: „kolik citlivých akcí může dělat jedna osoba“,
+- per endpoint: „kolik požadavků snese tahle část produktu“,
+- per IP / síťový rozsah: hrubá ochrana veřejných částí,
+- per nákladová operace: export, import, AI shrnutí, hromadné e-maily,
+- globální pojistka: nouzová brzda pro celý systém.
+
+Příklad: u exportu faktur nedává smysl jen limit `100 požadavků za minutu na IP`. Lepší je `3 exporty za 10 minut na uživatele`, `20 exportů za hodinu na workspace`, fronta s deduplikací stejného exportu a globální limit pro export worker. Normální účetní exportuje jednou. Robot, bug nebo netrpělivé klikání nevyrobí dvacet stejných CSV.
+
+## Citlivé akce limituj podle dopadu
+
+Ne všechny endpointy jsou stejné. Čtení veřejného článku, odeslání kontaktního formuláře a změna e-mailu vlastníka workspace nemají stejný dopad. Nastav si tři třídy:
+
+1. **Nízké riziko:** veřejný obsah, běžné čtení, neplacené statické zdroje.
+2. **Střední riziko:** formuláře, vyhledávání, běžné API čtení, exporty menších objemů.
+3. **Vysoké riziko:** login, reset hesla, pozvánky uživatelů, změny oprávnění, mazání dat, placené integrace, AI volání.
+
+Vysoké riziko má mít limit i auditní událost. Ne proto, aby sis hrál na detektiva, ale aby šlo rychle odpovědět na otázku: „Stalo se něco divného a koho se to týká?“ Ulož důvod blokace, typ akce, čas, anonymizovaný nebo zkrácený síťový signál, účet/workspace a korelační ID. Neukládej obsah formuláře, heslo, token, celé payloady ani zbytečné otisky prohlížeče.
+
+## Chovej se slušně k uživateli
+
+Dobrá ochrana nemá vypadat jako výslech. Když limit zasáhne, uživatel má vědět:
+
+- co se stalo,
+- kdy to může zkusit znovu,
+- jestli existuje bezpečná alternativa,
+- jak kontaktovat support, pokud jde o omyl.
+
+Špatná hláška: „Error 429“. Lepší hláška: „Export už připravujeme. Další export spustíte za 8 minut, aby systém zůstal rychlý i pro ostatní.“ U loginu buď opatrnější: neprozrazuj, jestli existuje účet. Můžeš napsat: „Příliš mnoho pokusů. Zkuste to za 10 minut nebo použijte reset hesla.“
+
+Pro API vracej standardní status `429 Too Many Requests`, přidej `Retry-After` a dokumentuj limity. U veřejného webu stačí lidská stránka bez marketingových skriptů. Není nutné přilepit návštěvníkovi tři další trackery jen proto, že moc rychle kliknul. To je jako hasit svíčku plamenometem.
+
+## Anti-bot ochranu stav po schodech
+
+Privacy-first postup není „nikdy neblokuj“. Je to „blokuj přiměřeně a s minimem dat“. Schody můžou vypadat takhle:
+
+1. **Pasivní limity:** per akce, účet, endpoint a náklad.
+2. **Deduplikace:** stejný formulář, stejný export nebo stejné API volání nesmí běžet desetkrát paralelně.
+3. **Zpomalení:** dočasné čekání místo tvrdého zákazu, hlavně u loginu.
+4. **Jednorázová výzva:** jednoduchá kontrola u veřejného formuláře, ale jen při podezřelém vzoru.
+5. **Dočasná blokace:** krátká, vysvětlitelná a auditovaná.
+6. **Ruční review:** jen u dopadu na zákazníka, ne u každého šumu.
+
+Fingerprinting prohlížeče ber jako poslední a velmi podezřelou možnost, ne jako default. Sbírá hodně signálů, těžko se vysvětluje a často se rozlézá mimo původní účel. Pro malé evropské SaaS je lepší kombinovat jednoduché limity, serverové fronty, přihlášený kontext a dobrou observabilitu.
+
+## Nákladové limity patří do produktu
+
+Některé limity nejsou bezpečnostní, ale ekonomické. AI shrnutí ticketů, OCR faktur, hromadné e-maily, geokódování nebo PDF generování stojí peníze. Pokud je schováš jen do infrastruktury, produktový tým neuvidí skutečný dopad.
+
+Praktický model:
+
+- ukaž zákazníkovi férový měsíční limit u nákladové funkce,
+- při blížícím se limitu nabídni vysvětlení, ne paniku,
+- interně sleduj náklad na workspace, ne obsah zákaznických dat,
+- pro support měj bezpečný přehled „kolik se spotřebovalo a proč“,
+- pro překročení měj ruční schválení nebo placený balíček.
+
+Tohle není jen ochrana před útokem. Je to ochrana marže. A marže, jak známo, je kyslík pro SaaS, ne sprosté slovo.
+
+## Praktický příklad: kontaktní formulář a AI shrnutí
+
+Malý B2B SaaS má veřejný formulář „Chci demo“ a funkci AI shrnutí support ticketu. Obě věci potřebují limit, ale úplně jiný.
+
+Formulář:
+
+- max 3 odeslání za 10 minut na kombinaci formulář + zkrácený IP prefix,
+- max 10 odeslání za hodinu pro stejný e-mailový hash,
+- honeypot pole bez externího skriptu,
+- duplicitní zprávu během 5 minut jen potvrdit, neposílat znovu,
+- logovat pouze typ formuláře, čas, výsledek a korelační ID.
+
+AI shrnutí:
+
+- max 20 shrnutí denně na workspace v běžném tarifu,
+- max 3 paralelní úlohy na workspace,
+- deduplikace stejného ticketu a stejné verze obsahu,
+- interní metrika spotřeby tokenů bez ukládání promptu do analytiky,
+- admin audit pro změnu limitu.
+
+Výsledek: spam neucpe inbox, AI účet neuteče do lesa a zákazník pořád vidí srozumitelné chování produktu.
+
+## Checklist: rate limiting bez šmírování
+
+- [ ] Máme katalog citlivých, nákladových a veřejných akcí.
+- [ ] Každý limit má jasný účel a vlastníka.
+- [ ] Nepoužíváme IP adresu jako jediný rozhodovací signál.
+- [ ] Login, reset hesla a pozvánky mají samostatné limity.
+- [ ] Nákladové operace mají workspace nebo tarifní limity.
+- [ ] Uživatel vidí slušnou hlášku a čas dalšího pokusu, kde je to bezpečné.
+- [ ] API vrací `429` a `Retry-After`.
+- [ ] Logy neobsahují tajemství, payloady ani zbytečný fingerprint.
+- [ ] Blokace jsou krátké, auditované a zrušitelné supportem.
+- [ ] Jednou měsíčně kontrolujeme falešné pozitivy a nejdražší endpointy.
+
+## Mini šablona limit karty
+
+```markdown
+# Limit karta: [akce / endpoint]
+
+## Účel
+- Co chráníme:
+- Před jakým zneužitím:
+- Dopad na zákazníka při blokaci:
+
+## Rozsah
+- Endpoint / funkce:
+- Riziková třída:
+- Nákladová operace: ano/ne
+
+## Pravidla
+- Per uživatel:
+- Per workspace:
+- Per IP / síťový signál:
+- Globální pojistka:
+- Retry po:
+
+## Data
+- Co logujeme:
+- Co výslovně nelogujeme:
+- Retence logu:
+
+## UX a support
+- Text pro uživatele:
+- Support postup:
+- Kdy eskalovat:
+
+## Revize
+- Vlastník:
+- Datum poslední kontroly:
+- Poznámky k falešným pozitivům:
+```
+
+## Zdroje k ověření
+
+- OWASP API Security Top 10 — API4:2023 Unrestricted Resource Consumption, doporučení o limitech spotřeby zdrojů a nákladových dopadech API: https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/
+- OWASP ASVS — bezpečnostní požadavky pro webové aplikace, vhodné jako checklist při návrhu autentizace, session managementu a ochranných kontrol: https://owasp.org/projects/asvs
+- NIST SP 800-63B — sekce k rate limitingu/throttlingu u autentizace a snížení rizika online hádání hesel: https://pages.nist.gov/800-63-4/sp800-63b.html
+- EDPB Guidelines 4/2019 k článku 25 GDPR — data protection by design and by default jako rámec pro minimalizaci signálů a ochranu uživatele už v návrhu: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+
+
 # Pracovní log
+
+- 2026-10-09: Doplněna příloha „Rate limiting bez fingerprintingového cirkusu“ s katalogem chráněných akcí, víceúrovňovými limity, pravidly pro citlivé a nákladové operace, slušným UX při blokaci, privacy-first anti-bot schody, příkladem pro kontaktní formulář a AI shrnutí, checklistem, vyplnitelnou limit kartou a ověřenými zdroji OWASP, NIST a EDPB. Pomáhá malým SaaS týmům chránit formuláře, login, API a drahé integrace bez plošného fingerprintingu návštěvníků.
 
 - 2026-10-09: Doplněna navazující příloha „Migrační release oznámení bez marketingové mlhy“ s rozlišením interního release logu, veřejného changelogu a zákaznického oznámení, dopadovým psaním změn, kategoriemi podle Keep a Changelog, verzováním podle SemVer, postupem pro breaking changes, opatrnou bezpečnostní komunikací, privacy-first distribucí přes přímé odkazy a RSS, praktickým příkladem změny CSV exportu, checklistem, vyplnitelnou šablonou a ověřenými zdroji. Pomáhá malým SaaS týmům vysvětlovat změny vyžadující zákaznickou akci tak, aby lidé věděli, co se jich týká a co mají udělat, bez trackerů a marketingové mlhy.
 
