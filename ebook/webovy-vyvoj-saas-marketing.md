@@ -60830,7 +60830,205 @@ Podmínka odstranění z kódu:
 - Martin Fowler / Pete Hodgson: [Feature Toggles](https://martinfowler.com/articles/feature-toggles.html)
 - OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 
+## Příloha: Support tickety bez zákaznického deníčku a datového skladiště
+
+Support je místo, kde se realita produktu potkává s realitou lidí. Zákazník často píše ve stresu, posílá screenshot, kopíruje chybovou hlášku, přidá fakturační údaj, jméno kolegy, část interního procesu a občas i heslo, protože internet je nekonečný kurz improvizace. Právě proto support nesmí být jen „schránka, kam padá všechno“. Je to datový tok s vlastními pravidly, přístupy, retencí a odpovědností.
+
+Privacy-first support neznamená, že týmu zakážeš pomáhat. Znamená, že pomoc navrhneš tak, aby lidé nemuseli zbytečně posílat citlivé údaje, aby agent viděl jen to, co potřebuje, a aby ticket po vyřešení nezůstal navždy jako zákaznický deníček. GDPR mezi základními principy uvádí minimalizaci údajů a omezení uložení; v praxi to znamená sbírat přiměřené údaje pro konkrétní účel a nedržet je déle, než je potřeba ([EUR-Lex: GDPR čl. 5](https://eur-lex.europa.eu/eli/reg/2016/679/oj)). OWASP u logování připomíná, že logy mají mít jasný účel a nemají obsahovat citlivá data, která do nich nepatří ([OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). Ticket není log, ale riziko je podobné: když do něj bez pravidel nateče všechno, jednou to někdo bude muset vysvětlovat.
+
+> Codyho komentář: Support ticket má být pracovní stůl, ne digitální půda po prababičce. Když tam necháš všechno navždy, jednou najdeš věci, které nikdo nechtěl ukládat, nikdo neumí smazat a všichni doufali, že „to nějak nevadí“.
+
+### Rozděl support podle účelu
+
+Ne každý kontakt se zákazníkem je stejný. Poptávka, bug report, fakturační dotaz, bezpečnostní hlášení a žádost o výmaz dat mají jiné riziko i jiný proces. Když všechny zprávy padají do jednoho koše, tým začne rozhodovat podle nálady, ne podle pravidel.
+
+Praktické rozdělení:
+
+| Typ kontaktu | Příklad | Minimální pravidlo |
+| --- | --- | --- |
+| Obecný dotaz | „Jak funguje import?“ | bez přístupu k účtu, odpověď z dokumentace, krátká retence |
+| Technický problém | „Export faktur spadl“ | request ID, tenant ID, čas, žádné kopie celé databáze |
+| Fakturace | „Potřebujeme upravit adresu“ | omezený přístup k fakturačním údajům, audit změn |
+| Bezpečnost | „Našel jsem chybu v oprávnění“ | zvláštní fronta, rychlá eskalace, omezený okruh lidí |
+| Práva subjektu údajů | „Chci export nebo výmaz“ | ověření identity, DSAR proces, právní a provozní stopa |
+| Obchodní požadavek | „Chceme enterprise funkci“ | oddělit od supportu, nepřenášet interní data do CRM bez důvodu |
+
+Cílem není byrokracie. Cílem je, aby agent nemusel při každém ticketu vymýšlet, co smí otevřít, komu to přeposlat a kdy to smazat. Dobrá kategorizace šetří čas i nervy.
+
+### Co zákazníka nežádat
+
+Nejlepší ochrana support dat je nevytvářet je. Formulář a nápověda mají zákazníka vést k tomu, aby neposílal tajemství, screenshoty plné osobních údajů nebo exporty celé tabulky.
+
+Do support formuláře dej krátkou větu:
+
+```text
+Neposílejte hesla, celé exporty databáze ani citlivé osobní údaje. Pro technický problém stačí popis kroku, čas výskytu a případně ID požadavku z aplikace.
+```
+
+Tohle není právní alibi. Je to uživatelská instrukce. Lidé často neposílají citlivá data proto, že chtějí. Posílají je proto, že nevědí, co je pro řešení potřeba.
+
+Místo „pošlete screenshot“ napiš přesněji:
+
+- „Pošlete screenshot chybové hlášky bez seznamu zákazníků.“
+- „Zkopírujte request ID, ne celý obsah objednávky.“
+- „Uveďte přibližný čas a časové pásmo.“
+- „Pokud jde o účet jiného člověka, napište jeho roli, ne osobní detaily.“
+- „U fakturace přiložte číslo faktury, ne výpis z účtu.“
+
+Support formulář může mít i jednoduché upozornění u přílohy: „Před nahráním zkontrolujte, že soubor neobsahuje hesla, rodná čísla, platební karty ani data jiných zákazníků.“ Ano, někdo to stejně ignoruje. Ale spousta lidí ne — a to je levnější než pozdější ruční mazání.
+
+### Interní poznámky nejsou soukromý chat
+
+Interní poznámka v ticketu svádí k tomu, aby si tým psal všechno: domněnky o zákazníkovi, frustraci, osobní komentáře, kopie dat z administrace, celé stack trace i odkazy na interní dokumenty. Jenže interní poznámka je pořád firemní záznam. Může být předmětem auditu, exportu, incidentového vyšetřování nebo právního sporu.
+
+Pravidla pro interní poznámky:
+
+- piš fakta, ne nálepky na zákazníka,
+- nevkládej hesla, tokeny, celé payloady ani plné exporty,
+- uveď odkaz na interní incident nebo bug, ne kopii všeho,
+- odděl technickou diagnózu od zákaznické komunikace,
+- citlivé části maskuj už při vložení,
+- po vyřešení smaž dočasné přílohy, pokud nejsou nutné pro audit.
+
+Špatně:
+
+```text
+Zákazník zase neumí nastavit import, poslal celé CSV, vypadá to na jejich chaos.
+```
+
+Lépe:
+
+```text
+Import selhal na validaci sloupce `email`. Zákazník poslal CSV s osobními údaji; soubor odstraněn z ticketu, ponecháno jen schéma sloupců a chybový řádek bez hodnot.
+```
+
+Druhá poznámka pomáhá řešit problém a zároveň snižuje datový odpad. První jen přidává toxický folklór.
+
+### Přístupy: support agent není vševědoucí bůh
+
+Support často potřebuje vidět kontext účtu, ale nemusí vidět všechno. Rozděl přístupy podle práce:
+
+| Role | Vidí | Nevidí bez eskalace |
+| --- | --- | --- |
+| První linie | stav účtu, plán, poslední systémové události, veřejné nastavení | obsah soukromých dat, billing detaily, admin akce |
+| Technická podpora | request ID, chybové stavy, anonymizované logy, konfiguraci integrace | plné payloady, tajemství, data jiných tenantů |
+| Fakturace | faktury, platby, fakturační kontakt | produktový obsah, interní poznámky technické podpory |
+| Security/incident tým | relevantní auditní stopu a omezený důkaz | plošný přístup bez ticketu a důvodu |
+
+Každé dočasné zvýšení oprávnění má mít důvod, vlastníka a expiraci. Pokud agent potřebuje nahlédnout do zákaznického účtu, preferuj režim „view as support“ s auditní stopou místo sdílení hesla nebo tichého impersonation režimu. Zákazník má ideálně vědět, co support udělal: „Zkontrolovali jsme nastavení integrace a opravili mapování pole.“ Ne „někdo se tam nějak podíval“.
+
+### Retence a mazání ticketů
+
+Support data mají životní cyklus. Většina ticketů nepotřebuje zůstat detailně uložená navždy. Potřebuješ krátkodobě řešit problém, střednědobě poznat opakované chyby a dlouhodobě držet jen nezbytné důkazy nebo agregované poznatky.
+
+Praktický model:
+
+| Stav | Co držet | Co mazat nebo anonymizovat |
+| --- | --- | --- |
+| Otevřený ticket | komunikaci, přílohy nutné k řešení, kategorii, vlastníka | náhodně poslaná hesla, nepotřebné exporty |
+| Vyřešený ticket | shrnutí problému, výsledek, vazbu na bug/incident | dočasné soubory, duplicitní screenshoty |
+| Po retenční době | agregovanou kategorii, anonymizované poznatky, metriky podpory | osobní komunikaci a přílohy bez zákonného důvodu |
+| Bezpečnostní incident | důkazní stopu podle incident procesu | citlivé údaje mimo schválený incidentní úložiště |
+
+Retenční dobu si nastav podle typu podpory. Technické tickety mohou mít jinou dobu než fakturační komunikace nebo bezpečnostní hlášení. Důležité je, aby pravidlo nebylo jen v hlavě jednoho člověka. Má být v provozním registru a v nastavení helpdesku.
+
+### Měření supportu bez tlaku na špatné chování
+
+Když měříš jen rychlost odpovědi, tým bude rychle odpovídat. To nezaručuje, že dobře pomůže. Když měříš jen počet uzavřených ticketů, složitější problémy začnou vypadat jako obtěžování. Support metriky mají podporovat kvalitu, ne vyrábět callcentrum s dashboardem úzkosti.
+
+Privacy-first metriky:
+
+- počet ticketů podle kategorie,
+- čas do první lidské odpovědi,
+- čas do vyřešení podle závažnosti,
+- opakované problémy za poslední měsíc,
+- počet ticketů vyřešených odkazem na dokumentaci,
+- počet ticketů, které vedly k opravě produktu,
+- počet odstraněných citlivých příloh,
+- počet eskalací kvůli datům nebo bezpečnosti.
+
+Nemusíš sledovat každý pohyb agenta po obrazovce. Nepotřebuješ heatmapu toho, jak support píše odpověď. Potřebuješ vědět, kde produkt mate lidi, kde chybí dokumentace a kde support pracuje s daty, která by raději vůbec neměl dostat.
+
+### Příklad: bug report u fakturačního SaaS
+
+Zákazník píše: „Nejde mi export faktur za září, posílám celé CSV.“ V příloze je seznam odběratelů, e-maily a část interních poznámek. Špatný proces nechá CSV v ticketu, přepošle ho vývojáři a někdo ho stáhne na notebook. Dobrý proces udělá tohle:
+
+1. Agent poděkuje a vysvětlí, že celý export není potřeba.
+2. Přílohu odstraní nebo přesune do schváleného omezeného úložiště, pokud je opravdu nutná.
+3. Do ticketu ponechá jen anonymizovaný příklad hlavičky a chybový řádek bez osobních údajů.
+4. Zákazníka požádá o čas chyby, ID exportu a verzi nastavení filtru.
+5. Technická podpora řeší problém přes request ID a aplikační log bez obsahu faktur.
+6. Po opravě se do produktu přidá srozumitelnější chybová hláška nebo validace.
+7. Do měsíční revize jde agregovaný poznatek: „Export faktur padá při prázdném poli DIČ u 3 zákazníků.“
+
+Výsledek: problém se vyřeší, produkt se zlepší a support zbytečně neskladuje zákaznická data. Není to heroická bezpečnost. Je to normální provozní úklid.
+
+### Checklist support dat
+
+- [ ] Má support rozdělené typy ticketů podle účelu a rizika?
+- [ ] Říká formulář lidem, co neposílat?
+- [ ] Existuje bezpečný postup pro náhodně poslaná hesla, tokeny a citlivé přílohy?
+- [ ] Mají agenti přístup jen k údajům potřebným pro svou práci?
+- [ ] Je každé dočasné zvýšení oprávnění auditované a časově omezené?
+- [ ] Jsou interní poznámky psané fakticky a bez zbytečných osobních komentářů?
+- [ ] Umí helpdesk mazat nebo anonymizovat přílohy podle pravidel?
+- [ ] Má každý typ ticketu retenční dobu?
+- [ ] Existuje eskalace pro bezpečnostní hlášení a žádosti subjektů údajů?
+- [ ] Měří tým opakované produktové problémy, ne jen rychlost zavírání ticketů?
+- [ ] Jsou support data oddělená od marketingového CRM, pokud k tomu není jasný důvod?
+- [ ] Umí tým vysvětlit zákazníkovi, co support v jeho účtu viděl nebo změnil?
+
+### Mini šablona support data karty
+
+```text
+Název fronty / kanálu:
+
+Účel:
+
+Typické typy ticketů:
+
+Vlastník procesu:
+
+Kdo má přístup:
+
+Jaká data zákazník zadává:
+
+Jaká data zákazník nemá posílat:
+
+Povolené přílohy:
+
+Zakázané přílohy:
+
+Postup při citlivé příloze:
+
+Interní poznámky — pravidla:
+
+Eskalace bezpečnostního hlášení:
+
+Eskalace žádosti o osobní data:
+
+Retence otevřených ticketů:
+
+Retence vyřešených ticketů:
+
+Mazání / anonymizace příloh:
+
+Metriky kvality:
+
+Metriky, které vědomě nesledujeme:
+
+Napojení na produktový backlog:
+
+Datum poslední revize:
+
+Datum další revize:
+```
+
+Support je jeden z nejlepších zdrojů produktové pravdy. Jen ho nesmíš zaměnit za nekonečný archiv osobních příběhů zákazníků. Když sbíráš méně, ale lépe strukturovaně, tým rychleji pomáhá, lépe prioritizuje a při incidentu nemusí vysvětlovat, proč má v helpdesku pět let staré přílohy s daty, která nikdy nepotřeboval.
+
 # Pracovní log
+
+- 2026-10-09: Doplněna příloha „Support tickety bez zákaznického deníčku a datového skladiště“ s rozdělením support front podle účelu, instrukcemi co zákazníky nežádat, pravidly pro interní poznámky, přístupovým modelem, retencí, privacy-first metrikami, příkladem bug reportu u fakturačního SaaS, checklistem, support data kartou a ověřenými zdroji GDPR a OWASP. Pomáhá týmům řešit zákaznické problémy bez zbytečného skladování citlivých údajů.
 
 - 2026-10-09: Doplněna příloha „Passkeys a MFA bez loginového pekla“ s rizikovým tříděním účtů, postupnou adopcí passkeys, recovery pravidly, UX texty, privacy-first logováním, příkladem B2B fakturačního SaaS, checklistem, auth policy kartou a ověřenými zdroji FIDO, MDN, OWASP, NIST a GDPR. Pomáhá SaaS týmům zvednout bezpečnost přihlašování bez toho, aby z loginu udělaly frustrující nebo datově hladový proces.
 
