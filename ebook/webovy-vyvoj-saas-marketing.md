@@ -59016,6 +59016,156 @@ Co odstranit při příští revizi:
 - [European Commission — Data protection by design and by default](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/obligations_en) — shrnuje princip ochrany osobních údajů už při návrhu a ve výchozím nastavení, včetně zpracování jen nezbytných dat, krátké retence a omezeného přístupu podle potřeby.
 - [NIST Privacy Framework](https://www.nist.gov/privacy-framework/privacy-framework) — rámec pro řízení privacy rizik napříč organizací; hodí se jako základ pro rozhodování, které interní pohledy a procesy opravdu potřebují osobní data.
 
+# Příloha: Offboarding dodavatelů bez zapomenutých účtů a datových ocásků
+
+Komu to pomáhá a proč: tahle příloha pomáhá malému týmu bezpečně ukončit spolupráci s externistou, agenturou nebo SaaS dodavatelem tak, aby po sobě nezůstaly aktivní přístupy, exporty a „jen pro jistotu“ kopie dat.
+
+Dodavatelský offboarding je nudná disciplína. Přesně proto bývá nebezpečná. Když se spolupráce rozjíždí, všichni řeší termíny, předávku a rychlý přístup. Když končí, tým už často běží jinam a v systémech zůstanou účty, API klíče, sdílené složky, analytické exporty, testovací databáze a Slack kanály. Takový digitální bordel není dramatický jako ransomware ve filmu, ale umí být stejně drahý. Jen nemá trailer.
+
+Privacy-first offboarding není o nedůvěře. Je to normální hygiena. Dobře nastavený konec spolupráce chrání zákazníky, interní tým i samotného dodavatele, protože jasně říká, co se má stát s přístupy, daty, znalostmi a odpovědností.
+
+## Nejdřív odděl osobu, firmu a systém
+
+Dodavatel není jeden řádek v tabulce. Typicky má tři vrstvy:
+
+- **osoba**: konkrétní člověk, který pracoval na úkolu,
+- **organizace**: agentura, studio, účetní firma, integrační partner,
+- **systém**: nástroj nebo API, přes který dodavatel přistupoval k datům.
+
+Offboarding musí pokrýt všechny tři. Nestačí odebrat e-mail konkrétnímu člověku, pokud agentura pořád vlastní sdílený účet. Nestačí zrušit účet agentury, pokud v produkci běží její API klíč. Nestačí vypovědět nástroj, pokud někde leží export zákazníků ve sdílené složce.
+
+Praktické pravidlo: každý dodavatel má mít jednu offboarding kartu. V ní není poezie, ale seznam systémů, typů dat, vlastníků a data poslední kontroly.
+
+## Přístupy ruš podle dopadu, ne podle abecedy
+
+Ne všechny přístupy jsou stejně rizikové. Začni tam, kde může vzniknout škoda rychle:
+
+1. produkční administrace,
+2. billing, domény a DNS,
+3. databáze, exporty a zákaznické soubory,
+4. repozitáře a CI/CD,
+5. analytika, CRM a support nástroje,
+6. interní komunikace a dokumentace,
+7. testovací prostředí a sandboxy.
+
+U každé položky si napiš, jestli jde o osobní účet, sdílený účet, roli v organizaci, API klíč, OAuth aplikaci, webhook, SSH klíč nebo přístup přes třetí stranu. To poslední je zrádné: člověk může zmizet z tvého GitHubu, ale pořád má přístup přes externí CI, support widget nebo starý integrační token.
+
+Codyho komentář: sdílené účty jsou offboardingová past. Pokud musí existovat, měly by být dočasné, pojmenované podle účelu a chráněné samostatnou evidencí. „marketing@firma“ s heslem v chatu je bezpečnostní archeologie, ne provoz.
+
+## Data vrať, smaž nebo převeď pod nový účel
+
+Konec spolupráce neznamená automaticky „všechno smaž hned“. Znamená: rozhodni podle účelu a smluvené retence.
+
+Rozděl data do čtyř košů:
+
+- **předat internímu vlastníkovi**: dokumentace, zdrojové soubory, kreativní výstupy, runbooky,
+- **ponechat po dobu oprávněné retence**: fakturační doklady, schválené výstupy, auditní stopy,
+- **smazat po potvrzení předání**: pracovní exporty, dočasné kopie, testovací dataset,
+- **nechat u dodavatele jen s novým právním a provozním důvodem**: například dlouhodobý hosting nebo účetnictví.
+
+Důležité je nepoužívat „možná se bude hodit“ jako účel zpracování. Pokud tým neví, proč má dodavatel kopii zákaznických dat držet, pravděpodobně ji držet nemá.
+
+## Předání znalostí je bezpečnostní kontrola
+
+Offboarding není jen vypnutí účtů. Pokud externista držel klíčovou znalost v hlavě, tým je zranitelný. Předání má mít konkrétní výstupy:
+
+- kde běží produkce a kdo má vlastnický účet,
+- jak se nasazuje a rollbackuje,
+- kde jsou secrets a kdo je rotuje,
+- jaké integrace mohou spadnout po odebrání přístupu,
+- jaké rutiny dodavatel dělal ručně,
+- jaké incidenty nebo dluhy nejsou uzavřené,
+- co by nový člověk měl vědět první den.
+
+Předání znalostí neřeš jako hodinový videohovor bez zápisu. Výsledek musí být dokument, checklist nebo runbook. Jinak máš jen nahrávku s názvem „final-final-call.mp4“, kterou nikdo nikdy neotevře. Internetové muzeum smutku.
+
+## Rotace tajemství je součást odchodu
+
+Když dodavatel odchází, nestačí odebrat uživatele. U citlivých systémů rotuj i tajemství, která mohl vidět nebo používat:
+
+- API klíče,
+- webhook secrets,
+- deploy tokeny,
+- SSH klíče,
+- OAuth klientské secret hodnoty,
+- databázová hesla v prostředích, kam měl přístup,
+- sdílené recovery kódy,
+- přístupy do password manageru.
+
+Rotace má být plánovaná, ne hysterická. U každého tajemství si napiš, kdo ho mění, v jakém pořadí, jak se ověří funkčnost a jaký je rollback. Nejhorší offboarding je ten, který shodí produkci, protože někdo „pro jistotu“ smazal všechno, co mělo ikonku klíče.
+
+## Praktický příklad: konec spolupráce s marketingovou agenturou
+
+Malý B2B SaaS ukončuje spolupráci s agenturou, která spravovala web, kampaně, případovky a analytické reporty. Agentura měla přístup do CMS, repozitáře landing pages, matomo/umami dashboardu, CRM exportů, sdílené složky s referencemi a e-mailového nástroje.
+
+Dobrý offboarding:
+
+- interní marketing owner převezme zdrojové soubory kampaní a seznam aktivních landing pages,
+- CMS účet agentury se zruší, ale publikované stránky zůstanou pod interním vlastníkem,
+- CRM exporty se smažou ze sdílené složky po potvrzení, že nejsou potřeba pro účetnictví ani rozpracované kampaně,
+- analytické dashboardy se převedou na interní účet a staré pozvánky se odeberou,
+- e-mailové šablony se exportují do interní dokumentace bez seznamů kontaktů,
+- API klíče pro formuláře a webhooky se zrotují,
+- agentura potvrdí smazání pracovních kopií zákaznických dat,
+- tým zapíše, které kampaně běží dál a kdo odpovídá za jejich vypnutí.
+
+Výsledek: marketing neztratí kontinuitu, ale dodavatel už nemá přístup k datům, která pro novou fázi spolupráce nepotřebuje.
+
+## Checklist: offboarding dodavatele bez datových ocásků
+
+- Existuje karta dodavatele se seznamem systémů, účtů, rolí, klíčů a dat?
+- Je jasné, jestli odchází člověk, agentura, systém, nebo všechno najednou?
+- Jsou nejdřív řešené produkční, billingové, databázové a deploy přístupy?
+- Jsou zrušené nejen účty, ale i API klíče, webhooky, OAuth aplikace a SSH klíče?
+- Proběhla rotace tajemství, která dodavatel mohl vidět nebo používat?
+- Jsou pracovní exporty, testovací datasety a sdílené kopie vrácené, smazané nebo přiřazené ke konkrétní retenci?
+- Má interní tým převzatou dokumentaci, runbooky a vlastnické účty?
+- Je potvrzené, kdo po odchodu vlastní web, domény, repozitáře, analytiku, CRM a e-mailové nástroje?
+- Máš záznam o datu offboardingu, odpovědné osobě a výsledku kontroly?
+- Umíš zákazníkovi srozumitelně vysvětlit, že dodavatel po konci spolupráce nemá přístup k jeho datům?
+
+## Mini šablona offboarding karty
+
+```markdown
+# Offboarding karta dodavatele: [název]
+
+Typ ukončení:
+- osoba / agentura / systém / kombinace
+
+Interní vlastník:
+Datum ukončení spolupráce:
+Datum technického offboardingu:
+
+Systémy a přístupy:
+- [systém] — typ přístupu — vlastník — stav odebrání
+
+Data u dodavatele:
+- [typ dat] — účel — předat / smazat / ponechat do — důkaz
+
+Tajemství k rotaci:
+- [klíč / token / heslo] — vlastník — datum rotace — ověřeno
+
+Předané výstupy:
+- dokumentace:
+- zdrojové soubory:
+- runbooky:
+- otevřené úkoly:
+
+Potvrzení dodavatele:
+- datum:
+- forma:
+- poznámka:
+
+Kontrola po 30 dnech:
+- co zůstalo aktivní:
+- co odstranit:
+- kdo zavírá:
+```
+
+## Zdroje
+
+Tahle příloha nepřidává nová aktuální právní ani cenová tvrzení. Navazuje na předchozí části e-booku o datové mapě, integračním katalogu, retenčních pravidlech, release runbooku a administrátorských přístupech.
+
 # Pracovní log
 - 2026-10-09: Doplněna příloha „Admin dashboard bez interní reality show a datového přetlaku“ s návrhem scénářů, rolí, postupného detailu, serverového maskování, bezpečných admin akcí, auditních událostí, B2B příkladem, checklistem, dashboard kartou a ověřenými zdroji OWASP, Evropské komise a NIST.
 
@@ -59534,3 +59684,4 @@ Co odstranit při příští revizi:
 - 2026-09-22: Založena plnohodnotná struktura e-booku po zjištění, že soubor obsahoval jen placeholder; dopsána kapitola „Privacy-first analytika a experimenty“ včetně checklistu, šablony datové mapy a ověřených zdrojů.
 - 2026-10-07: Doplněna příloha „Status page a incident komunikace bez paniky a datového divadla“ s návrhem komponent podle zákaznického dopadu, rytmem aktualizací, šablonami incident zpráv, privacy-first pravidly, data breach eskalací, příkladem B2B SaaS, checklistem, vyplnitelnou status page kartou a ověřenými zdroji NIST, EUR-Lex a Atlassian Statuspage.
 - 2026-10-08: Doplněno krátké pravidlo k hodinové práci: každá mikro-změna má mít jednu srozumitelnou větu vysvětlující, komu a proč pomáhá.
+- 2026-10-09: Doplněna příloha „Offboarding dodavatelů bez zapomenutých účtů a datových ocásků“ s praktickým postupem rušení přístupů, předání dat, rotace tajemství, checklistem a vyplnitelnou kartou.
