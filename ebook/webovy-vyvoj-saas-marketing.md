@@ -61026,7 +61026,246 @@ Datum další revize:
 
 Support je jeden z nejlepších zdrojů produktové pravdy. Jen ho nesmíš zaměnit za nekonečný archiv osobních příběhů zákazníků. Když sbíráš méně, ale lépe strukturovaně, tým rychleji pomáhá, lépe prioritizuje a při incidentu nemusí vysvětlovat, proč má v helpdesku pět let staré přílohy s daty, která nikdy nepotřeboval.
 
+## Příloha: Chybové stavy a prázdné obrazovky bez paniky, mlhy a úniku dat
+
+Chybový stav je moment pravdy. Uživatel chtěl něco udělat, systém mu v tom zabránil a teď čeká, jestli dostane pomoc, nebo technickou hádanku. Prázdný stav je podobně důležitý: uživatel něco otevřel a místo hodnoty vidí ticho. Oba momenty rozhodují o důvěře víc než animovaný hero banner, protože se dějí ve chvíli, kdy člověk potřebuje orientaci.
+
+Privacy-first přístup tady neznamená jen „neukazuj stack trace“. Znamená navrhnout chybové a prázdné stavy tak, aby uživatel dostal jasný další krok, support dostal bezpečný diagnostický signál a aplikace při tom neprozradila cizí data, interní infrastrukturu ani víc osobních údajů, než je nutné. HTTP stavové kódy mají jasně rozlišovat úspěch, přesměrování, chybu klienta a chybu serveru ([MDN: HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status)). OWASP zároveň upozorňuje, že špatně ošetřené chyby mohou útočníkům prozradit frameworky, verze, vstupy nebo interní strukturu aplikace ([OWASP Error Handling Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html)).
+
+> Codyho komentář: Chybová hláška není místo, kde má backend vyprávět autobiografii. Uživatel nepotřebuje vědět, že `NullPointerException` potkal `InvoiceServiceImplV2`. Potřebuje vědět, co může udělat teď.
+
+### Rozděl stavy podle práce uživatele
+
+Nejdřív si napiš katalog stavů, které produkt opravdu má. Bez katalogu tým obvykle skončí u jedné univerzální hlášky „Něco se pokazilo“, která je sice pravdivá, ale asi jako říct v restauraci „jídlo je nějaké“.
+
+Praktická mapa:
+
+| Stav | Příklad | Co má uživatel pochopit | Co nemá uniknout |
+| --- | --- | --- | --- |
+| Prázdný stav | žádné faktury, žádné projekty, žádní členové týmu | co vytvořit jako první a proč | interní segmentace, skryté funkce, data jiných tenantů |
+| Validační chyba | špatný e-mail, chybějící DIČ, příliš velký soubor | které pole opravit a jak | validace odhalující existenci účtu nebo interní pravidla |
+| Nedostatečné oprávnění | uživatel nemůže otevřít report | koho požádat nebo jakou roli potřebuje | názvy cizích zdrojů, existence neveřejných objektů |
+| Nenalezeno | starý odkaz, smazaný dokument | kam pokračovat nebo jak hledat | potvrzení, že dokument existoval u jiného zákazníka |
+| Dočasný výpadek | API, platby, exporty | jestli má zkusit znovu, kdy a kde sledovat stav | stack trace, interní hostnames, tokeny, payloady |
+| Konflikt změn | dva lidé upravili stejný záznam | jak vybrat verzi nebo obnovit stránku | nepotřebné detaily o aktivitě kolegů |
+
+Každý stav má mít vlastní práci. Prázdný seznam faktur nemá říkat „žádná data“. Má říct: „Vystav první fakturu“, „Importuj existující faktury“ nebo „Přečti si, jak funguje číslování“. Chyba exportu nemá říkat „500“. Má říct: „Export se nepodařilo připravit. Zkusíme to znovu automaticky; pokud potřebuješ data hned, stáhni zjednodušený CSV export.“
+
+### Chybová zpráva má tři vrstvy
+
+Dobrá chybová zpráva není dlouhá. Je vrstvená.
+
+1. **Lidský nadpis:** co se stalo bez technického slangu.
+2. **Praktický další krok:** co může uživatel udělat teď.
+3. **Bezpečný diagnostický údaj:** krátké ID chyby, čas nebo odkaz na status page.
+
+Příklad pro uživatele:
+
+```text
+Export faktur se teď nepodařilo připravit.
+Zkusíme to znovu automaticky za pár minut. Pokud export potřebuješ hned, stáhni zjednodušený přehled bez příloh.
+Kód události: EXP-2026-10-09-1842
+```
+
+Příklad pro support interně:
+
+```text
+event_id: EXP-2026-10-09-1842
+tenant_id: t_7f3c
+operation: invoice_export
+status: failed_retry_scheduled
+error_class: storage_timeout
+contains_payload: false
+```
+
+Uživatel dostane uklidnění a cestu. Support dostane vodítko. Nikdo nedostane syrový stack trace, osobní data ani celý export v logu.
+
+### Prázdné stavy nejsou reklama na funkce
+
+Prázdná obrazovka má být most k hodnotě, ne katalog toho, co aplikace jednou možná umí. Když nový zákazník otevře sekci „Projekty“ a vidí jen tlačítko „Vytvořit“, chybí mu kontext. Když vidí pět promo karet, onboarding video, newsletter a tři upsell bannery, chybí mu kyslík.
+
+Lepší struktura prázdného stavu:
+
+- krátký nadpis podle práce: „Zatím tu nejsou žádné projekty“,
+- jedna věta hodnoty: „Projekt spojuje úkoly, soubory a komunikaci k jedné zakázce“,
+- primární akce: „Vytvořit první projekt“,
+- sekundární bezpečná alternativa: „Importovat ukázková data“ nebo „Přečíst návod“,
+- datová poznámka, pokud je relevantní: „Ukázková data jsou lokální pro tento workspace a můžete je kdykoliv smazat.“
+
+Privacy-first detail: ukázková data mají být syntetická, jasně označená a snadno odstranitelná. Neimportuj „demo zákazníky“ z reálných historických účtů a netvař se, že anonymizované jméno s reálnou fakturační strukturou je v pohodě. To není onboarding, to je datová archeologie v kostýmu tutorialu.
+
+### Validace má pomáhat, ne vyšetřovat
+
+WCAG u chyb ve formulářích zdůrazňuje, že pokud je chyba automaticky rozpoznaná, má být položka identifikovaná a chyba popsaná textem ([W3C WCAG: Error Identification](https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html)). Prakticky: ukaž chybu u pole, řekni co opravit a nenuť člověka hledat červenou tečku někde nahoře.
+
+Dobré validační hlášky:
+
+- „E-mail musí obsahovat znak `@`.“
+- „Soubor je větší než 10 MB. Nahraj menší soubor nebo použij ZIP export bez příloh.“
+- „Datum konce musí být pozdější než datum začátku.“
+- „Tahle akce vyžaduje roli Správce fakturace. Požádej vlastníka workspace.“
+
+Rizikové hlášky:
+
+- „Účet `jana@example.com` existuje, ale heslo je špatně.“
+- „Objednávka `INV-4812` patří tenantovi `acme-prod`.“
+- „SQL constraint `customer_email_unique_idx` failed.“
+- „Chyba v bucketu `eu-prod-invoices-backup-2`.“
+
+U přihlášení, resetu hesla, pozvánek a citlivých akcí používej neutrální formulace. Například: „Pokud u nás e-mail existuje, pošleme instrukce.“ Není to schválnost. Je to ochrana před user enumeration a zbytečným odhalováním účtů.
+
+### Dynamické změny musí být slyšet i bez očí
+
+Moderní SaaS často mění obsah bez reloadu: uloží formulář, přidá řádek, ukáže chybu, aktualizuje filtr. Pro vidícího uživatele je změna zjevná. Pro uživatele se čtečkou může být ticho. MDN vysvětluje, že `aria-live` pomáhá oznámit dynamické změny asistivním technologiím podle důležitosti aktualizace ([MDN: ARIA live regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions)).
+
+Praktická pravidla:
+
+- úspěšné uložení oznamuj klidně: „Nastavení uloženo“,
+- chyby formuláře oznamuj textově a navazuj je na konkrétní pole,
+- globální výpadek nezobrazuj jen barevným pruhem,
+- změnu výsledků po filtru oznam stručně: „Nalezeno 12 faktur“,
+- automatické aktualizace nedělej hlučné, pokud nejsou kritické.
+
+Přístupnost tady není bonus pro audit. Je to způsob, jak udělat produkt srozumitelnější pro všechny: lidi na mobilu, lidi ve stresu, lidi po třetí kávě i lidi, kteří aplikaci otevřeli poprvé.
+
+### Loguj příčinu bezpečně
+
+Veřejná chyba a interní log jsou dvě různé věci. Veřejná chyba má být stručná, bezpečná a akční. Interní log má pomoct týmu najít příčinu, ale nemá se stát skladem osobních údajů.
+
+Do interního logu typicky patří:
+
+- čas,
+- `request_id` nebo `event_id`,
+- tenant nebo workspace identifikátor,
+- typ operace,
+- kategorie chyby,
+- výsledek retry,
+- verze aplikace,
+- odkaz na bezpečně uložený incident nebo job.
+
+Do interního logu typicky nepatří:
+
+- hesla, tokeny a API klíče,
+- celé request/response body,
+- celé CSV, PDF nebo příloha,
+- platební údaje,
+- osobní poznámky supportu,
+- stack trace poslaný uživateli.
+
+Pokud potřebuješ detail pro ladění, ukládej ho krátkodobě, odděleně, s omezeným přístupem a jasným důvodem. Debug režim v produkci má být časově omezená operace, ne nenápadně zapnutý požární hydrant dat.
+
+### Praktický příklad: fakturační SaaS a rozbitý export
+
+Situace: zákazník spustí export faktur za kvartál. Job spadne na timeoutu úložiště.
+
+Špatný stav:
+
+```text
+Internal Server Error
+StorageTimeoutException at /var/app/exporter/invoices.ts:184
+```
+
+Problémy: uživatel neví, co dál, support nemá bezpečné ID, aplikace ukazuje interní cestu a typ chyby, incident se bude dohledávat podle screenshotu.
+
+Lepší stav:
+
+```text
+Export se nepodařilo dokončit.
+Zkusíme ho připravit znovu. Na této stránce uvidíš stav do několika minut.
+Pokud spěcháš, stáhni CSV bez příloh nebo nám pošli kód události EXP-1842.
+```
+
+Interně:
+
+```text
+event_id: EXP-1842
+tenant_id: t_7f3c
+operation: quarterly_invoice_export
+period: 2026-Q3
+failure_class: storage_timeout
+retry_policy: retry_3x_backoff
+payload_logged: false
+customer_visible: true
+```
+
+Produktově:
+
+- po třetím selhání vytvoř support signál bez obsahu faktur,
+- zákazníkovi nabídni alternativní export,
+- status exportu ukaž v UI i po refreshi,
+- staré neúspěšné exporty smaž podle retenčního pravidla,
+- do měsíční revize zapiš počet selhání podle kategorie, ne podle jmen lidí.
+
+Takhle chyba přestává být trapná obrazovka a stává se provozním workflow.
+
+### Checklist: chybové a prázdné stavy
+
+- Má každý důležitý prázdný stav jednu primární další akci?
+- Rozlišuje produkt validační chybu, oprávnění, nenalezený objekt a serverový výpadek?
+- Neprozrazuje chyba existenci cizího účtu, dokumentu nebo tenant objektu?
+- Dostane uživatel bezpečný kód události místo stack trace?
+- Umí support podle kódu najít log bez žádosti o screenshot plný dat?
+- Jsou formulářové chyby textové, u konkrétních polí a srozumitelné?
+- Oznamují se dynamické změny přístupně, například přes vhodné live regiony?
+- Mají neúspěšné joby retry, fallback nebo jasnou eskalaci?
+- Existuje retence pro dočasné exporty, přílohy a diagnostická data?
+- Testuje tým chybové stavy stejně poctivě jako šťastnou cestu?
+
+### Mini šablona stavové karty
+
+```text
+Název stavu:
+
+Kde se objeví:
+
+Typ:
+[ ] prázdný stav
+[ ] validační chyba
+[ ] oprávnění
+[ ] nenalezeno
+[ ] dočasný výpadek
+[ ] konflikt změn
+[ ] jiný:
+
+Co uživatel chtěl udělat:
+
+Lidský nadpis:
+
+Krátké vysvětlení:
+
+Primární další krok:
+
+Sekundární alternativa:
+
+Bezpečný diagnostický údaj:
+
+Co se nesmí ukázat uživateli:
+
+Co se smí uložit do logu:
+
+Co se nesmí uložit do logu:
+
+Retence diagnostických dat:
+
+Přístupnostní poznámka:
+
+Kdy eskalovat na support nebo incident:
+
+Datum posledního testu:
+```
+
+Chybové stavy nejsou okraj aplikace. Jsou to místa, kde produkt ukazuje charakter: jestli umí přiznat problém, dát uživateli další krok a zároveň držet data pod kontrolou. Když je navrhneš dopředu, tým nebude při incidentu improvizovat s hláškou „něco se pokazilo“ a zákazník nebude lovit odpovědi v mlze.
+
+## Zdroje
+
+- [MDN: HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status)
+- [OWASP Error Handling Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html)
+- [W3C WAI: Understanding Success Criterion 3.3.1 Error Identification](https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html)
+- [MDN: ARIA live regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions)
+
 # Pracovní log
+
+- 2026-10-09: Doplněna příloha „Chybové stavy a prázdné obrazovky bez paniky, mlhy a úniku dat“ s katalogem stavů podle práce uživatele, třívrstvou strukturou chybových zpráv, pravidly pro prázdné stavy, validaci, přístupná dynamická oznámení, bezpečné logování, příkladem rozbitého exportu, checklistem, stavovou kartou a ověřenými zdroji MDN, OWASP a W3C. Pomáhá SaaS týmům proměnit chyby z technické mlhy na bezpečné produktové workflow.
 
 - 2026-10-09: Doplněna příloha „Support tickety bez zákaznického deníčku a datového skladiště“ s rozdělením support front podle účelu, instrukcemi co zákazníky nežádat, pravidly pro interní poznámky, přístupovým modelem, retencí, privacy-first metrikami, příkladem bug reportu u fakturačního SaaS, checklistem, support data kartou a ověřenými zdroji GDPR a OWASP. Pomáhá týmům řešit zákaznické problémy bez zbytečného skladování citlivých údajů.
 
