@@ -59983,7 +59983,220 @@ Datum poslední kontroly:
 - OWASP Automated Threats to Web Applications: https://owasp.org/www-project-automated-threats-to-web-applications/
 
 
+# Příloha: Přihlášení a reset hesla bez bezpečnostního divadla
+
+Přihlášení je divné místo produktu: když funguje, nikdo ho nechválí; když zlobí, zákazník má pocit, že mu firma zamkla vlastní práci ve skříni a klíč hodila do rybníka. U SaaS produktu je auth zároveň bezpečnostní brána, zákaznická zkušenost, supportový magnet a privacy riziko. Proto se nevyplatí řešit ho jen jako „formulář s e-mailem a heslem“.
+
+Dobré přihlášení má tři cíle najednou: pustit oprávněného člověka rychle dovnitř, nepomáhat útočníkovi hádat účty a nevyrábět zbytečnou stopu osobních údajů. V praxi to znamená méně kreativních triků, víc konzistentních pravidel a klidně nudnější obrazovku. Nudná bezpečnost je často nejlepší bezpečnost — jen se hůř prodává na konferenci.
+
+> Codyho komentář: Login není místo pro growth hacking. Když někdo resetuje heslo, nechce „engagement journey“. Chce se dostat zpátky do práce a nemít pocit, že právě vyplňuje únikovou hru pro účetní oddělení.
+
+## Začni mapou cest, ne knihovnou
+
+Než vybereš auth knihovnu nebo identity provider, napiš si všechny cesty, které se účtu týkají. V malém SaaS typicky nejde jen o přihlášení, ale o celý životní cyklus identity:
+
+- registrace nového uživatele,
+- pozvánka do existujícího workspace,
+- první nastavení hesla,
+- běžné přihlášení,
+- odhlášení,
+- zapomenuté heslo,
+- změna hesla zevnitř účtu,
+- zapnutí nebo reset MFA,
+- změna e-mailu,
+- deaktivace uživatele,
+- převod vlastnictví workspace,
+- přístup supportu nebo administrátora.
+
+Ke každé cestě si napiš: kdo ji může spustit, jaký důkaz potřebuje, co se uloží, komu přijde notifikace a kdy se token nebo relace zneplatní. Tohle je malá tabulka, ale zabrání velkým trapasům typu „po resetu hesla zůstaly staré sessions aktivní navždy“.
+
+Privacy-first pravidlo je jednoduché: identity workflow nesmí sbírat údaje jen proto, že se někdy možná budou hodit. Pokud pro přihlášení stačí e-mail, heslo a tenant kontext, nepotřebuješ datum narození, telefon, firmu, pracovní pozici ani oblíbený druh kávy. Káva je důležitá, ale ne pro autentizaci.
+
+## Chybové hlášky nesmí prozrazovat účty
+
+Při přihlášení a resetu hesla se snadno vytvoří user enumeration chyba: aplikace útočníkovi nechtěně řekne, jestli daný e-mail existuje. OWASP Authentication Cheat Sheet doporučuje u přihlášení, obnovy hesla i recovery toků používat obecné odpovědi bez rozlišení, zda neexistuje účet, nesedí heslo nebo není aktivní uživatel.
+
+Špatně:
+
+```text
+Účet s tímto e-mailem neexistuje.
+```
+
+Lépe:
+
+```text
+Pokud u nás účet s tímto e-mailem existuje, poslali jsme další instrukce.
+```
+
+U loginu může být hláška podobně obecná:
+
+```text
+Přihlášení se nepovedlo. Zkontroluj e-mail, heslo nebo použij obnovu přístupu.
+```
+
+To neznamená, že má být UX nepřátelské. Uživatel potřebuje další krok: odkaz na reset hesla, kontakt na podporu a informaci, jestli může čekat e-mail. Jen nepotřebuješ veřejně potvrzovat existenci účtu každému, kdo napíše adresu do formuláře.
+
+Stejně důležité je časování odpovědi. Pokud neexistující e-mail odpoví za 20 ms a existující účet za 700 ms kvůli hashování hesla nebo dotazu na MFA, útočník může rozdíl měřit. Praktické minimum: vyhni se očividně odlišným cestám, limituj pokusy a loguj podezřelé vzory bez ukládání celých payloadů.
+
+## Reset hesla je citlivá operace, ne pomocný e-mail
+
+Reset hesla má být jednorázový, časově omezený a auditovatelný. OWASP Forgot Password Cheat Sheet doporučuje mimo jiné bezpečné reset tokeny, ochranu proti brute force, konzistentní odpovědi a opatrnost proti úniku tokenu přes referrer. V praxi to znamená:
+
+- reset token generuj náhodně a ukládej pouze jako hash,
+- nastav krátkou expiraci, typicky desítky minut, ne dny,
+- token použij jen jednou,
+- po úspěšné změně hesla token okamžitě zneplatni,
+- stránce resetu nastav `Referrer-Policy: no-referrer`,
+- po změně hesla nabídni odhlášení ostatních sessions nebo je rovnou zneplatni podle rizika,
+- pošli bezpečnostní notifikaci na původní kontaktní e-mail.
+
+E-mail s resetem piš klidně a bez paniky. Nemá v něm být původní heslo, interní ID účtu, tenant data ani zbytečný osobní profil. Stačí vysvětlení, že někdo požádal o obnovu přístupu, časová platnost odkazu a instrukce, co dělat, pokud požadavek uživatel nespustil.
+
+Příklad textu:
+
+```text
+Ahoj,
+
+někdo požádal o obnovu přístupu k účtu v [produkt]. Pokud jsi to byl/a ty, nastav nové heslo přes odkaz níže. Odkaz platí 30 minut a lze použít jen jednou.
+
+Pokud jsi o reset nežádal/a, e-mail ignoruj. Heslo se nezmění. Pro jistotu můžeš zkontrolovat aktivní relace v nastavení účtu.
+```
+
+> Codyho komentář: Bezpečnostní e-mail nemá znít jako právní oddělení po třech espressech. Má říct, co se stalo, co má člověk udělat a co se nestane.
+
+## Hesla: méně divadla, víc odolnosti
+
+Starý svět hesel miloval pravidla typu „minimálně jedno velké písmeno, jeden hieroglyf a krev jednorožce“. Modernější doporučení jde jinam: umožnit delší hesla, nebránit password managerům, kontrolovat slabá nebo kompromitovaná hesla a netrestat uživatele zbytečnou periodickou změnou bez důvodu.
+
+NIST SP 800-63B pracuje s pojmem „memorized secrets“ a zdůrazňuje, že tajemství mají být dostatečně obtížná k uhádnutí nebo zjištění. Prakticky z toho pro malý SaaS plyne:
+
+- dovol dlouhá hesla a passphrase,
+- neomezuj paste do polí pro heslo,
+- nepoužívej směšně krátký maximální limit,
+- kontroluj nové heslo proti seznamu běžných nebo kompromitovaných hesel,
+- nenut pravidelnou změnu hesla bez incidentu nebo konkrétního rizika,
+- ukládej hesla jen přes silný password hashing algoritmus a správně nastavené parametry,
+- nikdy neposílej heslo e-mailem ani ho neukazuj administrátorovi.
+
+U B2B SaaS přidej MFA pro administrátory a citlivé role. U běžných uživatelů ji nabídni nejdřív tam, kde chrání reálný dopad: fakturaci, exporty, API klíče, změny rolí, mazání dat a integrace. MFA nemá být trest za používání produktu; má být pojistka pro místa, kde jedno kliknutí může bolet.
+
+## Sessions a zařízení: ukaž kontrolu bez stalkingu
+
+Uživatel má mít možnost zjistit, kde je přihlášený, a ukončit relace, které nepoznává. Ale „aktivní sessions“ nejsou pozvánka ke sběru všeho, co prohlížeč prozradí.
+
+Rozumný přehled relací obsahuje:
+
+- přibližné zařízení nebo klienta,
+- čas poslední aktivity,
+- přibližnou lokalitu jen pokud ji opravdu potřebuješ,
+- informaci, jestli jde o aktuální relaci,
+- tlačítko pro ukončení vybrané nebo všech ostatních relací.
+
+Vyhoď přesné fingerprinty, celé user-agenty, trvalé identifikátory zařízení a surové IP adresy z běžného produktového UI. Pro bezpečnostní analýzu můžeš mít omezený auditní nebo bezpečnostní log, ale s jasnou retencí, přístupem jen pro oprávněné role a bez použití pro marketingové segmenty.
+
+Dobré mikrocopy:
+
+```text
+Vidíš relaci, kterou nepoznáváš? Ukonči ji a změň heslo. Pokud používáš sdílenou firemní síť nebo VPN, přibližná lokalita se může lišit.
+```
+
+Tahle věta je fér. Nehraje si na absolutní detektivní přesnost a pomáhá uživateli udělat další krok.
+
+## Loguj bezpečnostní signály, ne tajemství
+
+Auth logy jsou užitečné pro incident response, ale snadno se změní v druhý sklad citlivých dat. OWASP Logging Cheat Sheet připomíná, že logy mohou obsahovat osobní nebo citlivé informace a je potřeba je navrhovat jako bezpečnostní mechanismus, ne jako odpadní potrubí aplikace.
+
+Do bezpečnostního logu patří hlavně události:
+
+- úspěšné a neúspěšné přihlášení,
+- spuštění resetu hesla,
+- dokončení změny hesla,
+- změna MFA,
+- změna e-mailu,
+- změna role nebo oprávnění,
+- vytvoření nebo zrušení API klíče,
+- ukončení všech sessions,
+- podezřelý vzor pokusů.
+
+Do logu naopak nepatří hesla, reset tokeny, MFA kódy, celé session ID, celé request body, celé hlavičky, obsah e-mailu ani kompletní export osobních údajů. Když potřebuješ korelaci, používej interní ID události, tenant ID, hashovaný nebo pseudonymizovaný identifikátor a jasné důvody.
+
+Příklad bezpečnější události:
+
+```json
+{
+  "event": "password_reset_completed",
+  "tenant_id": "ten_123",
+  "actor_user_id": "usr_456",
+  "target_user_id": "usr_456",
+  "request_id": "req_789",
+  "risk_level": "medium",
+  "occurred_at": "2026-10-09T12:00:00Z"
+}
+```
+
+Chybí token, heslo, IP adresa v plném tvaru i text e-mailu. Pořád ale víš, co se stalo, komu se to týkalo a kde začít vyšetřování.
+
+## Praktický příklad: reset hesla v malém B2B SaaS
+
+Představ si SaaS pro správu faktur, kde účetní pracuje ve firmě s pěti uživateli. Zapomene heslo a spustí reset.
+
+Bezpečný tok:
+
+1. Formulář vždy zobrazí stejnou odpověď bez potvrzení existence účtu.
+2. Pokud účet existuje, systém vytvoří jednorázový reset token, uloží jen jeho hash a nastaví expiraci 30 minut.
+3. E-mail obsahuje jen reset odkaz, platnost a instrukce pro nevyžádaný reset.
+4. Reset stránka má `Referrer-Policy: no-referrer` a token neposílá do externích skriptů.
+5. Po změně hesla se zneplatní reset token a systém ukončí ostatní aktivní relace uživatele.
+6. Uživatel dostane notifikaci o změně hesla.
+7. Admin workspace vidí bezpečnostní událost „heslo změněno“, ale nevidí heslo, token ani detail e-mailu.
+8. Support má postup, jak řešit případ „tohle jsem nebyl já“ bez ručního opisování citlivých dat do chatu.
+
+Tohle není přehnané. Je to normální hygienický standard pro produkt, kde uživatelé spravují firemní data.
+
+## Checklist: auth bez bezpečnostního divadla
+
+- Máme sepsané všechny identity workflow, nejen login formulář.
+- Login a reset hesla neprozrazují, jestli účet existuje.
+- Reset token je jednorázový, časově omezený a uložený jen jako hash.
+- Reset stránka nepropouští token přes referrer nebo externí skripty.
+- Po změně hesla řešíme aktivní sessions a posíláme bezpečnostní notifikaci.
+- Hesla ukládáme jen přes silný hashing a nepoužíváme zbytečná kompoziční pravidla.
+- MFA chrání citlivé role a operace, nefunguje jako slepá překážka pro všechny.
+- Uživatel vidí aktivní relace a umí je ukončit.
+- Auth logy neobsahují hesla, tokeny, celé session ID ani celé request body.
+- Retence auth logů je definovaná podle účelu a rizika, ne podle „disk je levný“.
+
+## Mini šablona auth karty
+
+```text
+# Auth karta: [produkt / workspace]
+
+Primární identity provider / knihovna:
+Typy uživatelů a rolí:
+Citlivé operace chráněné MFA:
+Login chybová hláška:
+Reset chybová hláška:
+Expirace reset tokenu:
+Co se stane se sessions po změně hesla:
+Bezpečnostní notifikace:
+Události v auth logu:
+Data zakázaná v auth logu:
+Retence auth logů:
+Vlastník auth workflow:
+Datum posledního testu:
+```
+
+## Zdroje
+
+- [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html) — obecné odpovědi u autentizace a prevence prozrazování existence účtů.
+- [OWASP Forgot Password Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html) — doporučení pro reset tokeny, ochranu reset toku a `Referrer-Policy`.
+- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — bezpečnostní logování bez ukládání citlivých údajů.
+- [NIST SP 800-63B Digital Identity Guidelines](https://pages.nist.gov/800-63-3/sp800-63b.html) — doporučení pro „memorized secrets“ a odolnost hesel.
+- [GDPR, článek 5 na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/) — zásady minimalizace, omezení uložení a integrity/důvěrnosti osobních údajů.
+
 # Pracovní log
+
+- 2026-10-09: Doplněna příloha „Přihlášení a reset hesla bez bezpečnostního divadla“ s mapou identity workflow, obecnými hláškami proti user enumeration, pravidly pro jednorázové reset tokeny, doporučeními pro hesla, sessions, MFA, bezpečnostní logy, checklistem, vyplnitelnou auth kartou a ověřenými zdroji OWASP, NIST a GDPR. Pomáhá malým SaaS týmům zlepšit přístup k účtům bez sběru zbytečných dat a bez nepřátelského UX.
 - 2026-10-09: Doplněna příloha „Kontaktní formuláře bez leadového vysavače a CRM bahna“ s návrhem minimálních polí, rozlišením poptávky, marketingu a supportu, lidskou datovou poznámkou, bezpečným tokem do CRM, chybovými stavy, anti-spam pravidly, retencí, praktickým příkladem, checklistem, formulářovou kartou a ověřenými zdroji GDPR, Evropské komise, EDPB a OWASP. Pomáhá webům sbírat poptávky bez automatického přifukování datového dluhu.
 - 2026-10-09: Doplněna příloha „Webhooky bez datového ohňostroje a integračního chaosu“ s návrhem doménových eventů, minimalistickým payloadem, podpisem a rotací tajemství, idempotencí, retry pravidly, verzováním schématu, zákaznickým webhook panelem, bezpečným delivery logem, praktickým příkladem, checklistem, šablonou webhook karty a ověřenými zdroji OWASP, CloudEvents a Evropské komise. Pomáhá SaaS týmům posílat integrační signály bez zbytečného úniku dat a supportového chaosu.
 - 2026-10-09: Doplněna příloha „Zákaznické exporty dat bez privacy průšvihu a CSV divočiny“ s rozdělením typů exportů, kontrolou oprávnění podle obsahu, volbou formátů, minimalizací polí, retencí připravených souborů, B2B příkladem, checklistem, export kartou a ověřenými zdroji GDPR, EDPB a Evropské komise.
