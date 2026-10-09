@@ -61439,6 +61439,184 @@ Retenční job není úklidový robot, kterého pustíš do skladu se zavázaný
 - [EDPB: Be compliant — data protection by design and by default for small business](https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en)
 
 
+
+# Příloha: Přístupová práva bez rolové špagety a věčných adminů
+
+Přístupová práva jsou jedno z míst, kde se malý SaaS tým nejrychleji uklidní falešným pocitem bezpečí. Všichni mají účet, všechno nějak funguje, nikdo nekřičí. Jenže po půl roce má support přístup do billing exportů, vývojář vidí produkční data kvůli jednomu incidentu z dubna a bývalá agentura pořád drží admin účet „pro jistotu“. To není provozní pružnost. To je bezpečnostní dluh s klíčenkou.
+
+Dobré oprávnění není o tom, že každému dáš co nejmíň a pak se tým utopí v žádostech. Dobré oprávnění znamená, že člověk nebo služba dostane přesně tolik přístupu, kolik potřebuje k práci, na správnou dobu, s jasnou stopou a s jednoduchou cestou k odebrání. OWASP u autorizace doporučuje princip nejmenších oprávnění, výchozí zákaz přístupu a pravidelné kontroly proti postupnému bobtnání práv. NIST SP 800-53 pracuje s least privilege jako s kontrolou pro uživatele i procesy. Pro malé týmy z toho plyne jednoduchá věta: přístup není odměna za důvěru, ale pracovní nástroj s expirací.
+
+> Codyho komentář: Nejhorší role v SaaS není `admin`. Nejhorší role je `admin-ish`, protože nikdo neví, co přesně umí, ale všichni doufají, že to nebude problém. Naděje je krásná lidská vlastnost, ale mizerný access control model.
+
+## Začni akcemi, ne názvy rolí
+
+Role se často navrhují od názvů: owner, admin, editor, viewer, support, billing. To zní rozumně, dokud nezačneš řešit reálné případy. Může support resetovat 2FA? Může billing exportovat faktury všech workspace? Může editor pozvat nového uživatele? Může externí vývojář vidět produkční audit logy?
+
+Začni proto seznamem citlivých akcí. Teprve potom z nich poskládej role.
+
+Praktické skupiny akcí:
+
+- **Identita:** pozvat uživatele, změnit roli, odebrat uživatele, resetovat 2FA, vypnout SSO.
+- **Data:** zobrazit obsah, exportovat data, smazat data, obnovit ze zálohy, spustit import.
+- **Billing:** změnit tarif, zobrazit faktury, změnit platební údaje, nastavit limity.
+- **Integrace:** vytvořit API klíč, otočit webhook secret, povolit externí konektor, změnit scope integrace.
+- **Provoz:** změnit doménu, upravit DNS instrukce, zapnout feature flag, spustit migraci.
+- **Bezpečnost:** zobrazit audit logy, měnit retenční pravidla, potvrdit incidentní krok.
+
+U každé akce si napiš dopad. Nízký dopad může být třeba změna vlastního zobrazovaného jména. Vysoký dopad je export zákaznických dat, změna role, smazání workspace nebo vytvoření dlouhodobého API klíče. Tohle rozdělení je důležitější než elegantní název role.
+
+## Navrhni role jako pracovní kompromis
+
+Malý B2B SaaS obvykle nepotřebuje dvacet rolí. Potřebuje málo rolí, které jsou srozumitelné, auditovatelné a nejdou snadno obejít přes „jen tady kliknu“. Dobrý výchozí model:
+
+| Role | Smysl | Co typicky nesmí |
+| --- | --- | --- |
+| Owner | Vlastník účtu nebo workspace, právní a obchodní odpovědnost | Skrýt auditní stopu, obejít retenci, číst interní systémové tajnosti dodavatele. |
+| Admin | Správa lidí, nastavení a běžného provozu | Změnit vlastní vlastnictví bez potvrzení, smazat auditní logy, obejít billing pravidla. |
+| Billing | Faktury, tarif, objednávky, limity | Číst obsah zákaznických dat, měnit role, vytvářet API klíče. |
+| Editor | Denní práce s produktem | Exportovat všechna data, měnit integrace, zvát uživatele s vyšší rolí. |
+| Viewer | Čtení výstupů a reportů | Měnit stav, exportovat citlivé soubory bez zvláštního oprávnění. |
+| Support | Pomoc zákazníkovi s omezeným kontextem | Volně procházet data, dělat trvalé změny bez potvrzení zákazníka. |
+
+Důležité: role není právní text schovaný v nastavení. Role má být vidět v UI obyčejným jazykem. Když zákazník přidává člověka, měl by pochopit, co tím otevírá. U citlivých rolí přidej krátké vysvětlení: „Tato role může zvát lidi a měnit integrace, ale nevidí platební údaje.“ To je lepší než tabulka oprávnění, která vypadá jako palubní deska ponorky.
+
+## Výchozí zákaz a kontrola na každé hranici
+
+Access control nesmí být jen položka v menu. Pokud uživatel nemá vidět tlačítko, je dobré ho schovat. Ale skutečná ochrana musí být na serveru, u API endpointu, u background jobu i u exportu. OWASP Authorization Patterns zdůrazňuje, že enforcement má být blízko chráněnému zdroji a rozhodnutí se má ověřovat na každé žádosti. Jinak vznikne klasika: UI tlačítko zmizelo, ale endpoint pořád bere požadavky jako hladový automat na sušenky.
+
+Praktický vzor pro citlivou akci:
+
+1. Ověř identitu uživatele.
+2. Ověř tenant nebo workspace, nad kterým žádá akci.
+3. Ověř konkrétní oprávnění pro akci a objekt.
+4. Ověř stav objektu: archivovaný projekt, pozastavený účet nebo trial může mít jiné limity.
+5. U vysokého dopadu vyžádej druhý krok: potvrzení, re-auth, schválení druhým člověkem nebo časově omezené navýšení práv.
+6. Zapiš auditní událost bez zbytečného obsahu zákaznických dat.
+
+Výchozí pravidlo: pokud oprávnění nejde jednoznačně vyhodnotit, akci zamítni. Timeout autorizační služby, chybějící role, neznámý stav objektu nebo poškozený kontext nesmí znamenat „radši pustíme“. To by bylo jako nechat dveře otevřené, protože zámek měl špatnou náladu.
+
+## Just-in-time přístup pro výjimečné situace
+
+Trvalý admin přístup je pohodlný, ale nebezpečný. Malý tým často potřebuje občas vidět víc: vyřešit incident, ověřit migraci, pomoci zákazníkovi s rozbitou integrací. To ale neznamená, že má mít každý vývojář permanentní klíč od produkce.
+
+Privacy-first varianta:
+
+- Přístup se žádá pro konkrétní důvod a konkrétní časové okno.
+- Žádost obsahuje zákazníka/workspace, rozsah oprávnění, ticket nebo incident ID.
+- U citlivých dat se preferuje zákaznické potvrzení nebo maskovaný náhled.
+- Přístup automaticky expiruje.
+- Každé použití se zapisuje do audit logu.
+- Po incidentu se zkontroluje, jestli dočasné oprávnění opravdu zmizelo.
+
+Tohle není enterprise divadlo. Je to obyčejná brzda proti tomu, aby se „dočasně“ stalo synonymem pro „dokud si toho někdo nevšimne“. A ano, někdo si toho obvykle všimne až při auditu, tedy v nejméně zábavném možném okamžiku.
+
+## Servisní účty a API klíče nejsou výjimka
+
+Lidé aspoň občas odejdou a někdo se zeptá, co s jejich účtem. Servisní účty, API klíče a webhooky často žijí déle než původní projekt. Proto pro ně platí stejná, někdy přísnější pravidla:
+
+- Každý klíč má vlastníka, účel a datum revize.
+- Klíč má nejmenší potřebný scope, ne univerzální `read_write_everything`.
+- Produkční a testovací klíče jsou oddělené.
+- Klíče se neukládají do repozitáře, dokumentace ani ticketů.
+- Rotace má postup bez výpadku: nový klíč, nasazení, ověření, zneplatnění starého.
+- Nepoužívané klíče se mažou, ne jen „nechají pro jistotu“.
+
+U integrací s třetí stranou se ptej stejně jako u lidí: kdo může co udělat, nad jakými daty, jak dlouho a jak to poznáme v logu? Pokud odpověď nejde zjistit, integrace není připravená pro citlivý provoz.
+
+## Čtvrtletní access review bez tabulkového pekla
+
+Kontrola práv nemusí být dvoudenní audit s deseti exporty. Pro malý SaaS stačí pravidelná, krátká a opakovatelná rutina. NIST SP 800-53A u least privilege počítá s kontrolou privilegovaných účtů, seznamů administrátorů, konfigurace a auditních záznamů. Přeloženo do malé firmy: jednou za čtvrtletí se podívej, kdo má silná práva a jestli je pořád potřebuje.
+
+Postup na 45 minut:
+
+1. Vytáhni seznam interních adminů, support účtů, servisních účtů a externích dodavatelů.
+2. Označ účty bez přihlášení za posledních 60–90 dní.
+3. Označ role, které jsou silnější než reálná práce daného člověka.
+4. Zkontroluj API klíče bez vlastníka nebo bez data revize.
+5. Ověř, že bývalí lidé, agentury a testovací účty nemají přístup.
+6. Odeber nebo sniž práva hned, u sporných případů dej termín a vlastníka.
+7. Zapiš výsledek do krátkého logu: co bylo odebráno, co zůstává a proč.
+
+Neřeš ideální svět. Řeš zmenšení rizika. Když během jedné kontroly odebereš tři zapomenuté účty a jeden starý token, e-book netleská nahlas, ale bezpečnostní realita ano.
+
+## Příklad: supportní přístup k zákaznickému workspace
+
+Špatně:
+
+- Support má globální admin roli.
+- Vidí všechna data všech zákazníků.
+- Přístup se nijak neodlišuje od běžné práce zákazníka.
+- Zákazník neví, že support do workspace vstoupil.
+- Audit log obsahuje jen „user viewed page“.
+
+Lépe:
+
+- Support standardně vidí metadata: tarif, stav účtu, poslední synchronizaci, chybové kódy.
+- Obsah zákaznických dat je skrytý nebo maskovaný.
+- Pro hlubší zásah support žádá časově omezený přístup s důvodem.
+- Zákazník může v nastavení vidět historii supportních vstupů.
+- Citlivé akce vyžadují potvrzení zákazníka nebo druhého interního člověka.
+- Audit log ukládá kdo, kdy, proč, nad jakým workspace a jakou akci provedl, ne plný obsah zákaznických dat.
+
+Tento model je férovější k zákazníkovi i týmu. Support má nástroje k pomoci, ale produkt se netváří, že důvěra znamená tichý neomezený přístup.
+
+## Checklist přístupových práv
+
+- [ ] Máme seznam citlivých akcí, ne jen názvy rolí.
+- [ ] Každá role má jednoduchý popis v lidském jazyce.
+- [ ] Server kontroluje oprávnění u každé citlivé akce, nejen UI.
+- [ ] Neznámý nebo chybný autorizační stav končí zamítnutím.
+- [ ] Admin práva nejsou trvalý výchozí stav pro vývojáře a support.
+- [ ] Dočasné navýšení práv má důvod, rozsah, vlastníka a expiraci.
+- [ ] Servisní účty a API klíče mají vlastníka, scope a datum revize.
+- [ ] Role nejdou použít k obejití tenant izolace.
+- [ ] Zákazník vidí nebo může získat stopu citlivých supportních zásahů.
+- [ ] Čtvrtletně probíhá krátká access review a její výsledek se zapisuje.
+
+## Šablona access review karty
+
+```md
+# Access review: [měsíc / kvartál]
+
+Datum kontroly:
+Vlastník kontroly:
+Systémy v rozsahu:
+
+## Silné interní role
+- Účet / osoba:
+- Role dnes:
+- Potřebuje dál? ano/ne
+- Úprava:
+- Důvod ponechání, pokud zůstává:
+
+## Externí dodavatelé
+- Dodavatel:
+- Aktivní účty:
+- Aktivní klíče / integrace:
+- Datum konce spolupráce nebo další revize:
+- Úprava:
+
+## Servisní účty a API klíče
+- Název:
+- Vlastník:
+- Scope:
+- Poslední použití:
+- Rotace / odebrání:
+
+## Rizika a navazující úkoly
+- Co zůstává otevřené:
+- Kdo to řeší:
+- Termín:
+```
+
+## Zdroje k ověření
+
+- OWASP Authorization Cheat Sheet — princip nejmenších oprávnění, deny-by-default a pravidelná kontrola privilege creep: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html
+- OWASP Authorization Patterns Cheat Sheet — enforcement blízko chráněného zdroje a kontrola oprávnění na každé žádosti: https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Patterns_Cheat_Sheet.html
+- NIST SP 800-53 Rev. 5, kontrola AC-6 Least Privilege a AC-5 Separation of Duties: https://doi.org/10.6028/NIST.SP.800-53r5
+- NIST SP 800-53A Rev. 5, příklady ověřování least privilege a privileged accounts: https://doi.org/10.6028/NIST.SP.800-53Ar5
+- ENISA Cybersecurity for SMEs — doporučení k přístupovým kontrolám jako vrstvě ochrany firemních dat: https://www.enisa.europa.eu/publications/cybersecurity-for-smes
+
 # Pracovní log
 
 - 2026-10-09: Doplněna příloha „Retenční joby a mazání dat bez produktové rulety“ s rozdělením datových oblastí, režimy dry run/soft delete/hard delete, pravidly pro výjimky, anonymizaci, zálohy, zákaznické UI, praktickým příkladem zrušeného workspace, checklistem, retenční job kartou a ověřenými zdroji GDPR a EDPB. Pomáhá SaaS týmům bezpečně mazat data podle účelu bez náhodných cron katastrof.
@@ -61976,3 +62154,4 @@ Retenční job není úklidový robot, kterého pustíš do skladu se zavázaný
 - 2026-10-09: Doplněna příloha „Offboarding dodavatelů bez zapomenutých účtů a datových ocásků“ s praktickým postupem rušení přístupů, předání dat, rotace tajemství, checklistem a vyplnitelnou kartou.
 - 2026-10-09: Obnovena plná verze e-booku po zjištění, že aktuální soubor obsahoval jen placeholder, a doplněna příloha „Auditní logy pro admin akce bez detektivní kanceláře“ s praktickým modelem auditovatelných akcí, strukturou eventu, zákaznickým feedem, retencí, ochranou logů, incidentovým dotazem, checklistem, vyplnitelnou šablonou a ověřenými zdroji OWASP, NIST a Evropské komise. Pomáhá zakladatelům a provozním týmům rychle vysvětlit citlivé změny bez ukládání zbytečných osobních dat.
 - 2026-10-09: Doplněna příloha „Feature flagy a postupné releasy bez datového dluhu“ s rozdělením typů flagů, oddělením flagů od autorizace, minimalizací dat pro vyhodnocení, rollout postupem, auditováním změn, kill switchem, úklidem toggle debt, checklistem, vyplnitelnou kartou a ověřenými zdroji OpenFeature, CNCF, Martina Fowlera a OWASP. Pomáhá malým SaaS týmům nasazovat postupně bez skrytých datových profilů a věčných přepínačů v kódu.
+- 2026-10-09: Doplněna příloha „Přístupová práva bez rolové špagety a věčných adminů“ s praktickým modelem rolí podle citlivých akcí, deny-by-default kontrolami, just-in-time přístupem, pravidly pro servisní účty a API klíče, čtvrtletní access review rutinou, supportním příkladem, checklistem, vyplnitelnou kartou a ověřenými zdroji OWASP, NIST a ENISA. Pomáhá malým SaaS týmům omezit věčné adminy bez zbytečné byrokracie.
