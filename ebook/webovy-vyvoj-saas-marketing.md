@@ -61992,7 +61992,258 @@ Výsledek není jen opravený odkaz. Tým získá proces, který příště zach
 - OWASP Logging Cheat Sheet — doporučení, aby logy neobsahovaly citlivé hodnoty a bezpečnostní tajemství: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 
 
+# Příloha: Changelog a release poznámky bez marketingové mlhy
+
+Release poznámky jsou malý důkaz, že produkt žije organizovaně. Nejsou to jen „novinky“. Jsou to provozní záznamy pro zákazníky, support, obchod, vývojáře, partnery i budoucí já, které bude za tři měsíce hledat, kdy se změnilo exportní API a proč se najednou půlka zákazníků ptá na stejnou věc.
+
+Špatný changelog říká: „Vylepšili jsme výkon a opravili drobné chyby.“ To je textová mlha. Dobrý changelog říká: „Export faktur do CSV teď zachovává diakritiku v názvech zákazníků. Pokud máte vlastní importní skript, zkontrolujte, že očekává UTF-8.“ Jedna věta, ale support právě dostal o deset ticketů méně. Kouzlo? Ne. Jen méně firemního kouře.
+
+> Codyho komentář: Nejhorší release poznámka je „optimalizace“. Optimalizace čeho? Paměti? Marže? Trpělivosti zákazníka? Slovo bez kontextu je jen kancelářská mlha v tričku s logem.
+
+## Rozliš interní log, veřejný changelog a zákaznické oznámení
+
+Jedna změna může potřebovat tři různé texty. Když je smícháš, vznikne buď moc technický text pro zákazníky, nebo moc neurčitý záznam pro tým.
+
+- **Interní release log** — detailní technický záznam pro tým: commity, migrace, feature flagy, rizika, rollback, incidenty, změny konfigurace.
+- **Veřejný changelog** — přehled pro uživatele a partnery: co se změnilo, koho se to týká, jestli musí něco udělat.
+- **Zákaznické oznámení** — cílená zpráva pro konkrétní segment: admini, účetní, API integrátoři, enterprise zákazníci, partneři.
+
+Privacy-first pravidlo: veřejný changelog nemá prozrazovat interní architekturu, názvy zákazníků, konkrétní incidentové detaily, bezpečnostní slabiny před opravou ani osobní údaje. Má pomoci lidem pochopit dopad změny, ne sloužit jako inventář útoku.
+
+Praktický model:
+
+| Typ záznamu | Publikum | Detail | Příklad |
+| --- | --- | --- | --- |
+| Interní release log | vývoj, support, provoz | vysoký | „Migrace `invoice_items.tax_rate` z decimal na basis points, rollback přes migraci 2026_10_09_rollback“ |
+| Veřejný changelog | všichni uživatelé | střední | „Export faktur teď přesněji zachovává sazby DPH v zaokrouhlených řádcích“ |
+| Segmentové oznámení | dotčení zákazníci | praktický | „Pokud importujete CSV do účetního systému, ověřte mapování sloupce `tax_rate`“ |
+
+## Piš změny podle dopadu, ne podle komponent
+
+Uživatel neřeší, že jsi „refaktoroval service layer“. Řeší, jestli se mu rychleji načte dashboard, jestli mu funguje export, jestli se mění fakturace, jestli se musí znovu přihlásit a jestli jeho integrace nespadne.
+
+Místo komponentového zápisu:
+
+```text
+- Refaktor billing modulu.
+- Upraven CSV parser.
+- Přidána validace ve formuláři.
+```
+
+Piš dopadově:
+
+```text
+- Faktury s desetinnými množstvími se při exportu do CSV už nezaokrouhlují předčasně.
+- Import zákazníků teď odmítne řádky bez e-mailu dřív a ukáže číslo problematického řádku.
+- Formulář pro změnu fakturačních údajů nově upozorní na chybějící DIČ ještě před uložením.
+```
+
+Technický detail schovej do interního logu. Veřejný text má odpovědět na tři otázky:
+
+1. Co se změnilo?
+2. Koho se to týká?
+3. Musí uživatel něco udělat?
+
+Pokud odpověď na třetí otázku zní „ano“, dej akci do první třetiny textu. Ne až na konec za tři odstavce radosti z toho, jak je tým nadšený. Nadšený tým je pěkný. Rozbitý import je méně pěkný.
+
+## Používej kategorie, ale ne jako odpadkové koše
+
+Changelog se dobře čte, když má stabilní kategorie. Projekt Keep a Changelog doporučuje formát s kategoriemi jako `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed` a `Security` (https://keepachangelog.com/en/1.1.0/). Pro český e-book a český produkt je klidně přelož:
+
+- **Přidáno** — nová funkce nebo schopnost.
+- **Změněno** — existující chování se změnilo.
+- **Opraveno** — něco nefungovalo a už funguje.
+- **Ukončujeme** — funkce bude odstraněna nebo nahrazena.
+- **Odstraněno** — funkce už není dostupná.
+- **Bezpečnost** — opravy a změny se bezpečnostním dopadem.
+
+Nepřidávej kategorii, pokud v ní nic důležitého není. Prázdné nadpisy jsou jen dekorace. A „různé“ používej jen jako dočasnou karanténu, ne jako trvalý domov pro všechno, čemu se nikdo nechtěl věnovat.
+
+Pro SaaS doporučuji přidat ještě dvě praktické značky:
+
+- **Vyžaduje akci** — zákazník musí něco zkontrolovat, zapnout, přemapovat nebo komunikovat svému týmu.
+- **Pro administrátory** — změna se týká nastavení, rolí, fakturace, bezpečnosti, SSO, integrací nebo exportů.
+
+Tohle není estetika. Je to support filtr.
+
+## Verze nejsou dekorace, ale smlouva očekávání
+
+Pokud máš veřejné API, SDK, pluginy nebo zákaznické integrace, verze ber vážně. Semantic Versioning definuje model `MAJOR.MINOR.PATCH`, kde major verze znamená nekompatibilní změny, minor přidává funkcionalitu zpětně kompatibilně a patch opravuje chyby zpětně kompatibilně (https://semver.org/). Pro marketingový web to možná nepotřebuješ. Pro API skoro určitě ano.
+
+Jednoduché pravidlo:
+
+- **Patch** — oprava bez změny očekávaného chování veřejného rozhraní.
+- **Minor** — nová volitelná schopnost, která staré klienty nerozbije.
+- **Major** — změna, která může rozbít existující integraci, export, endpoint nebo workflow.
+
+U webového SaaS bez veřejného API můžeš místo plného semver používat datum release, například `2026-10-09`, ale dopad změn pořád označuj. Datum říká kdy. Neříká jak moc to může bolet.
+
+## Breaking changes oznamuj dřív než po deployi
+
+Breaking change není jen technická změna API. Pro zákazníka je breaking change i to, že změníš název exportovaného sloupce, odstraníš starý filtr, zpřísníš validaci fakturační adresy, vypneš přihlášení heslem bez dostatečného přechodu nebo změníš výchozí oprávnění role.
+
+Minimální postup pro breaking change:
+
+1. **Pojmenuj dopad** — co přesně se mění a koho se to týká.
+2. **Dej migrační cestu** — nový endpoint, nové pole, nový export, nové nastavení, nový termín.
+3. **Oznam termíny** — od kdy je nové chování dostupné, od kdy je výchozí, kdy staré zmizí.
+4. **Přidej detekci používání** — ale privacy-first: počítej použití endpointu nebo funkce, ne ukládání obsahu zákaznických dat.
+5. **Připrav support makro** — stejná odpověď pro všechny dotazy, bez improvizace.
+6. **Po dokončení ukliď dokumentaci** — starý stav označ jako archiv, ne jako pořád platnou pravdu.
+
+Krátká šablona:
+
+```text
+Od 2026-11-15 změníme strukturu CSV exportu objednávek: sloupec `customer_name` rozdělíme na `customer_first_name` a `customer_last_name`.
+
+Koho se to týká: zákazníků, kteří CSV export automaticky importují do účetního nebo skladového systému.
+
+Co udělat: do 2026-11-15 upravte mapování sloupců. Starý export zůstane do 2026-12-15 dostupný jako „CSV export v1“.
+
+Proč: změna snižuje ruční opravy u zákazníků s více kontaktními osobami.
+```
+
+## Bezpečnostní opravy piš opatrně a užitečně
+
+Bezpečnostní změny jsou zvláštní disciplína. Pokud napíšeš moc málo, zákazník neví, jestli má něco řešit. Pokud napíšeš moc, můžeš nechtěně pomoct někomu, kdo ještě nestihl aktualizovat nebo zkontrolovat nastavení.
+
+Pravidla:
+
+- Nezveřejňuj exploit kroky, interní názvy zranitelných komponent ani detaily, které usnadní zneužití.
+- Řekni dopad v lidské řeči: „mohlo dojít k neoprávněnému zobrazení názvu projektu“, ne „opraven edge case v resolveru“.
+- Řekni, jestli zákazník musí něco udělat: odhlásit sessions, vyměnit klíč, zkontrolovat log, aktualizovat integraci.
+- Odděl obecnou bezpečnostní opravu od incidentu s dopadem na data. Incident má vlastní komunikační proces.
+- Interně si nech detailní záznam: čas, rozsah, detekce, oprava, ověření, poučení.
+
+Privacy-first detail: pokud posíláš bezpečnostní oznámení e-mailem, neposílej v něm citlivé hodnoty, interní identifikátory nebo celé výpisy logů. Dej raději bezpečný odkaz do administrace, kde se člověk po přihlášení podívá na relevantní detail.
+
+## Changelog nemá být reklamní ohňostroj
+
+Marketingový tón patří na landing page. Changelog má být jasný, konkrétní a použitelný. To neznamená nudný. Znamená to, že nepředstírá, že každá oprava překlepu je historický milník digitální civilizace.
+
+Vyhýbej se slovům:
+
+- revoluční,
+- seamless,
+- robustní,
+- optimalizovaný,
+- intuitivní,
+- vylepšený,
+- drobné opravy.
+
+Nebo je aspoň doplň konkrétně:
+
+- „rychlejší“ → „dashboard s 500+ objednávkami se načítá bez blokování tabulky“,
+- „lepší validace“ → „formulář ukáže chybějící DIČ před odesláním“,
+- „drobné opravy“ → „opraveno řazení faktur podle data splatnosti v přehledu zákazníka“.
+
+Když změna nemá zákaznický dopad, nemusí být ve veřejném changelogu. Interní log ji unese. Veřejný changelog není skládka commitů.
+
+## Distribuce: RSS, přímý odkaz a cílená zpráva
+
+Privacy-first changelog má být dostupný bez sociálních sítí, sledovacích skriptů a newsletterového nátlaku. Ideální sada:
+
+- veřejná stránka `/changelog`,
+- RSS nebo Atom feed pro změny,
+- přímý odkaz v aplikaci,
+- cílené oznámení adminům u změn, které vyžadují akci,
+- odkaz v dokumentaci u funkcí, kterých se změna týká.
+
+Nepotřebuješ pixel na měření, kdo si release note otevřel. U důležitých změn měř raději stav dokončení akce: kolik zákazníků přešlo na novou verzi API, kolik workspace má zapnuté nové nastavení, kolik integrací ještě volá starý endpoint. To je užitečný signál. Otevření e-mailu je často jen obrázek načtený v klientovi, případně nic. Gratuluju, změřil jsi počasí v e-mailové aplikaci.
+
+## Praktický příklad: změna exportu faktur
+
+Situace: SaaS pro fakturaci mění CSV export faktur. Dřív exportoval `amount_total` v korunách jako text s čárkou, nově exportuje haléře jako celé číslo `amount_total_cents`, aby se předešlo chybám v importech.
+
+Špatná release poznámka:
+
+```text
+Vylepšili jsme CSV export faktur a opravili několik drobných chyb.
+```
+
+Lepší veřejný changelog:
+
+```text
+Změněno: CSV export faktur nově obsahuje sloupec `amount_total_cents`, který uvádí celkovou částku v haléřích jako celé číslo.
+
+Koho se to týká: zákazníků, kteří export automaticky importují do účetního systému.
+
+Co udělat: pokud používáte automatický import, přidejte mapování nového sloupce. Starý sloupec `amount_total` zůstane dostupný do 2026-12-31.
+
+Proč: nový formát snižuje riziko chyb při desetinných oddělovačích mezi různými locale.
+```
+
+Interní release log:
+
+```text
+Release: 2026-10-09-invoice-export-v2
+Owner: billing team
+Flag: invoice_csv_amount_cents
+Default: off pro existující workspace, on pro nové workspace od 2026-10-16
+Rollback: vypnout flag, zachovat starý serializer
+Support macro: macros/billing/csv-export-v2.md
+Privacy note: neměřit hodnoty faktur, pouze počítat použití exportní verze podle workspace ID hashované denním saltem
+```
+
+Tady je rozdíl mezi „něco jsme změnili“ a „zákazník ví, co má udělat“.
+
+## Checklist: changelog bez mlhy
+
+- [ ] Má každá položka jasně napsané, co se změnilo?
+- [ ] Je uvedeno, koho se změna týká?
+- [ ] Je u rizikových změn jasně napsáno, jestli musí zákazník něco udělat?
+- [ ] Jsou breaking changes oznámené předem s datem a migrační cestou?
+- [ ] Je veřejný changelog oddělený od interního release logu?
+- [ ] Neobsahuje changelog zákaznická data, interní identifikátory ani zbytečné bezpečnostní detaily?
+- [ ] Má changelog RSS nebo jiný přímý odběr bez trackerů?
+- [ ] Jsou změny v dokumentaci propojené s release poznámkami?
+- [ ] Má support připravené makro pro změny, které pravděpodobně vyvolají dotazy?
+- [ ] Uklízí tým staré deprecations, aby changelog nebyl hřbitov slibů?
+
+## Mini šablona release poznámky
+
+```markdown
+# Release poznámka: [název změny]
+
+## Shrnutí
+- Co se změnilo:
+- Proč se to mění:
+- Datum nasazení:
+
+## Dopad
+- Koho se to týká:
+- Koho se to netýká:
+- Co může přestat fungovat:
+
+## Akce pro zákazníka
+- Je potřeba akce: ano / ne
+- Co přesně udělat:
+- Termín:
+- Odkaz na dokumentaci:
+
+## Interní provoz
+- Vlastník změny:
+- Feature flag / rollout:
+- Rollback:
+- Support makro:
+- Měřený signál bez obsahu zákaznických dat:
+
+## Privacy-first kontrola
+- Neobsahuje text osobní údaje:
+- Neprozrazuje interní bezpečnostní detail:
+- Je dostupný přes přímý odkaz nebo RSS:
+```
+
+## Zdroje k ověření
+
+- Keep a Changelog — doporučená struktura changelogu a kategorie změn: https://keepachangelog.com/en/1.1.0/
+- Semantic Versioning 2.0.0 — pravidla `MAJOR.MINOR.PATCH` pro verzování veřejných rozhraní: https://semver.org/
+- W3C Feed Validation Service — praktická kontrola RSS/Atom feedů pro přímý odběr změn: https://validator.w3.org/feed/
+
+
 # Pracovní log
+
+- 2026-10-09: Doplněna příloha „Changelog a release poznámky bez marketingové mlhy“ s rozlišením interního release logu, veřejného changelogu a zákaznického oznámení, dopadovým psaním změn, kategoriemi podle Keep a Changelog, verzováním podle SemVer, postupem pro breaking changes, opatrnou bezpečnostní komunikací, privacy-first distribucí přes přímé odkazy a RSS, praktickým příkladem změny CSV exportu, checklistem, vyplnitelnou šablonou a ověřenými zdroji. Pomáhá malým SaaS týmům vysvětlovat změny tak, aby zákazníci věděli, co se jich týká a co mají udělat, bez trackerů a marketingové mlhy.
 
 - 2026-10-09: Doplněna příloha „Konfigurační drift bez ‚u mě to funguje‘ rituálů“ s rozdělením konfigurace na hodnotu, schéma a politiku, konfiguračním kontraktem, testovaným `.env.example`, pravidly pro staging bez produkčních dat, procesem změn, měsíční drift kontrolou, checklistem, vyplnitelnou kartou a ověřenými zdroji Twelve-Factor, NIST a OWASP. Pomáhá malým SaaS týmům nasazovat bez skrytých rozdílů mezi lokálem, stagingem, CI a produkcí.
 
