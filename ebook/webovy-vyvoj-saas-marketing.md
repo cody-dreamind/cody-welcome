@@ -60590,6 +60590,246 @@ Datum testu recovery:
 - [GDPR na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/) — zásady minimalizace, integrity, důvěrnosti a omezení uložení osobních údajů.
 
 
+# Příloha: Feature flagy a postupné releasy bez datového dluhu
+
+Feature flag je jednoduchá myšlenka s nebezpečně velkým dopadem: kód může být nasazený, ale funkce ještě nemusí být dostupná všem. Správně použité flagy zmenšují riziko releasu, umožní pustit změnu malé skupině zákazníků a dávají týmu rychlou brzdu, když se něco pokazí. Špatně použité flagy vytvoří druhý produkt skrytý v podmínkách, který nikdo neuklízí a který časem začne rozhodovat víc než roadmapa.
+
+OpenFeature popisuje feature flagging jako vendorově nezávislé API pro vyhodnocování flagů a projekt je podle CNCF v inkubačním stupni od 21. listopadu 2023. Martin Fowler ve svém textu o feature toggles zdůrazňuje rozdíl mezi typy toggle podle životnosti a dynamiky rozhodování. Pro malý evropský SaaS je praktická pointa jednoduchá: flag není jen `if`. Je to provozní závazek s vlastníkem, datovým dopadem, expiračním datem a rollbackem.
+
+> Codyho komentář: Feature flag bez data úklidu je jako lešení, které zůstalo přimontované k domu, protože „se jednou může hodit“. Po roce už nikdo neví, jestli drží fasádu, nebo jen stíní okno.
+
+## Nejdřív rozhodni, jaký typ flagu používáš
+
+Ne každý flag má stejný účel. Když je házíš do jedné krabice, začneš míchat release řízení, obchodní tarify, experimenty a nouzové vypínače. To je přesně ta chvíle, kdy produkt vypadá flexibilně, ale ve skutečnosti je křehký.
+
+Praktické typy:
+
+- **Release flag** — dočasně skrývá novou funkci, dokud není připravená pro širší rollout.
+- **Ops flag** — umožní vypnout drahou nebo rizikovou část systému při incidentu.
+- **Permission flag** — pouští funkci konkrétní roli, workspace nebo zákaznickému segmentu.
+- **Experiment flag** — ověřuje hypotézu na omezeném vzorku bez profilovacího cirkusu.
+- **Kill switch** — okamžitá brzda pro integraci, AI volání, webhook nebo novou automatizaci.
+
+Každý typ má jiné pravidlo úklidu. Release flag má zmizet po dokončení rollout fáze. Ops flag může zůstat dlouhodobě, ale musí být dokumentovaný a pravidelně testovaný. Experiment flag bez výsledku a termínu je jen měřící zombie.
+
+## Flag není autorizace
+
+Tohle pravidlo si napiš někam, kde ho uvidí produkt i vývoj: feature flag nesmí být jediná bezpečnostní kontrola. Pokud placená funkce, admin akce nebo export dat závisí jen na klientském flagu, máš problém. UI může skrýt tlačítko, ale server musí pořád ověřit oprávnění.
+
+Bezpečný model:
+
+- flag rozhoduje, jestli se funkce nabídne,
+- autorizace rozhoduje, jestli ji konkrétní uživatel smí použít,
+- auditní log zaznamená citlivou změnu,
+- tarifová logika zůstává oddělená od dočasného rollout řízení,
+- server ignoruje klientské „přání“, pokud neodpovídá právům.
+
+Příklad: nový export faktur může být zapnutý pro 10 % workspace účtů, ale samotný export pořád vyžaduje roli s oprávněním `invoice.export`. Flag bez oprávnění neznamená nic. Oprávnění bez flagu může znamenat, že funkce zatím není nabízena.
+
+## Minimalizuj data pro vyhodnocení
+
+Feature flagy často svádí k tomu, aby se z každého uživatele stal malý rozhodovací profil. To privacy-first SaaS nepotřebuje. Většinou stačí vyhodnocovat podle workspace, role, tarifu, prostředí nebo náhodného stabilního bucketu.
+
+Dobré atributy pro flag kontext:
+
+- anonymní nebo pseudonymní `workspace_id`,
+- role uživatele bez jména a e-mailu,
+- tarif nebo plán,
+- země provozní instance, pokud je relevantní,
+- prostředí (`production`, `staging`),
+- stabilní bucket pro postupný rollout.
+
+Rizikové atributy:
+
+- e-mail uživatele,
+- jméno firmy bez potřeby,
+- obsah dokumentů nebo transakcí,
+- zdravotní, finanční nebo jiné citlivé údaje,
+- marketingové segmenty importované z reklamních nástrojů,
+- session replay nebo detailní chování na stránce.
+
+Jestli flag potřebuje citlivý atribut, nejdřív se zeptej: jde stejný výsledek udělat hrubším pravidlem? Třeba podle workspace skupiny místo jednotlivce, podle role místo e-mailu, podle serverového regionu místo IP adresy.
+
+## Zaveď flag kartu před implementací
+
+Flag karta je malý dokument, který zabrání tomu, aby se z dočasného přepínače stal archeologický nález.
+
+Minimum:
+
+- název flagu,
+- typ flagu,
+- vlastník,
+- důvod zavedení,
+- koho ovlivňuje,
+- jaká data používá pro vyhodnocení,
+- výchozí hodnota,
+- plán rollout kroků,
+- rollback postup,
+- datum expirace,
+- podmínka odstranění z kódu.
+
+Příklad názvu:
+
+```text
+billing_export_v2_release
+```
+
+Špatné názvy:
+
+```text
+newThing
+beta
+ondrej-test-final2
+```
+
+Název flagu má přežít první týden po releasu. Pokud ho pochopí jen autor v pátek večer, v pondělí je to provozní past.
+
+## Rollout dělej po dopadu, ne podle ega
+
+Postupné zapínání nemá být divadlo s procenty. Má snižovat riziko tam, kde je riziko skutečné.
+
+Rozumný postup pro B2B SaaS:
+
+1. interní workspace,
+2. testovací workspace s anonymními daty,
+3. jeden dobrovolný zákazník s jasnou domluvou,
+4. malá skupina podobných zákazníků,
+5. všichni noví zákazníci,
+6. všichni zákazníci,
+7. odstranění staré větve a flagu.
+
+U každého kroku si napiš stop podmínku. Například: zvýšená chybovost exportu, nárůst ticketů, pomalejší odpověď API, chybné oprávnění, nebo zákaznická zmatenost v onboardingu. Stop podmínka musí být konkrétní předem, ne vymyšlená až po incidentu.
+
+## Loguj změny flagů jako provozní události
+
+Změna flagu může změnit chování produkce bez deploye. Proto patří do auditního nebo provozního logu, zvlášť u kritických funkcí.
+
+Loguj:
+
+- kdo flag změnil,
+- kdy ke změně došlo,
+- jaká byla původní a nová hodnota,
+- jaký segment nebo workspace byl ovlivněn,
+- proč se změna udělala,
+- odkaz na ticket, incident nebo rollout plán.
+
+Neloggovat:
+
+- celé uživatelské profily,
+- payloady zákaznických dokumentů,
+- secrets a API klíče,
+- volné poznámky se zákaznickými osobními údaji,
+- tokeny nebo podpisy webhooků.
+
+OWASP Logging Cheat Sheet doporučuje promýšlet účel logů, oddělovat bezpečnostní a jiné logy podle potřeby a chránit logy před únikem i manipulací. U flagů je to přesně ono: potřebuješ vědět, kdo změnil chování systému, ale nepotřebuješ kvůli tomu ukládat půlku zákaznického života.
+
+## Kill switch testuj dřív než ho potřebuješ
+
+Nouzový vypínač je k ničemu, pokud ho nikdo neumí použít nebo pokud se zjistí, že vypíná jen tlačítko v UI, zatímco backend dál posílá požadavky do hořící integrace.
+
+U kritických integrací otestuj:
+
+- vypnutí odchozích webhooků,
+- vypnutí AI zpracování,
+- vypnutí drahé synchronizace,
+- přepnutí na read-only režim,
+- degradaci funkce s lidskou hláškou,
+- návrat po obnovení služby.
+
+Dobrá hláška pro uživatele:
+
+```text
+Export je dočasně pozastavený kvůli provozní kontrole. Data zůstávají v účtu, nic nemusíš opakovat. Stav aktualizujeme na status stránce.
+```
+
+Špatná hláška:
+
+```text
+Unexpected error.
+```
+
+Kill switch není jen technická pojistka. Je to i komunikační produkt.
+
+## Úklid flagů dej do definice hotovo
+
+Feature flag má být odstraněn, jakmile splnil účel. Jinak vzniká toggle debt: víc větví, víc testovacích kombinací, víc nejasností a větší šance, že někdo opraví jen jednu cestu.
+
+Definition of Done pro release flag:
+
+- funkce je zapnutá pro cílovou skupinu,
+- stará větev je odstraněná,
+- testy nepokrývají mrtvou kombinaci,
+- dokumentace odpovídá novému stavu,
+- metriky se vyhodnotily,
+- flag karta je uzavřená,
+- zákaznická komunikace je hotová, pokud byla potřeba.
+
+Pokud flag nejde odstranit, změň jeho typ a vlastníka. Neschovávej dlouhodobé provozní pravidlo pod názvem dočasného releasu.
+
+## Praktický příklad: nový AI souhrn ticketů
+
+Malý helpdesk SaaS chce přidat AI souhrn dlouhých ticketů. Privacy-first rollout může vypadat takto:
+
+- flag `ticket_summary_ai_release` je defaultně vypnutý,
+- první test běží jen na interním workspace se syntetickými tickety,
+- kontext pro flag obsahuje jen `workspace_id`, roli a prostředí,
+- AI zpracování má samostatný kill switch,
+- zákazník musí funkci zapnout vědomě v nastavení,
+- UI vysvětluje, jaká data se zpracují a kde,
+- audit log zapíše zapnutí funkce správcem workspace,
+- obsah ticketů se neposílá do analytiky,
+- po dokončení rollout fáze se release flag odstraní,
+- dlouhodobě zůstane jen zákaznické nastavení a ops kill switch.
+
+Výsledek: tým může nasadit bezpečněji, zákazník má kontrolu a produkt nepřidává skrytou datovou trubku jen proto, že se nová funkce jmenuje „AI“ a marketing se začal usmívat nebezpečně široce.
+
+## Checklist: feature flag bez datového dluhu
+
+- [ ] Flag má jasný typ: release, ops, permission, experiment nebo kill switch.
+- [ ] Má vlastníka, důvod a datum expirace.
+- [ ] Vyhodnocení používá minimum atributů.
+- [ ] Citlivé údaje nejsou součástí flag kontextu.
+- [ ] Serverová autorizace je oddělená od flagu.
+- [ ] Rollout má kroky a stop podmínky.
+- [ ] Změny flagu jsou auditovatelné.
+- [ ] Kill switch je otestovaný end-to-end.
+- [ ] Uživatel dostane srozumitelnou hlášku při degradaci funkce.
+- [ ] Po dokončení rollout fáze se flag odstraní z kódu.
+- [ ] Dokumentace a support vědí, pro koho je funkce dostupná.
+- [ ] Externí flag nástroj prošel dodavatelským a datovým posouzením.
+
+## Mini šablona flag karty
+
+```text
+# Feature flag karta
+
+Název flagu:
+Typ flagu:
+Vlastník:
+Důvod zavedení:
+Dotčená funkce:
+Výchozí hodnota:
+Kdo může flag měnit:
+Použité atributy pro vyhodnocení:
+Dotčené osobní údaje:
+Rollout kroky:
+Stop podmínky:
+Rollback / kill switch postup:
+Audit log události:
+Dokumentace / support dopad:
+Datum expirace:
+Podmínka odstranění z kódu:
+```
+
+## Zdroje
+
+- OpenFeature: [Introduction](https://openfeature.dev/docs/reference/intro/)
+- OpenFeature: [Specification sections](https://openfeature.dev/specification/category/sections/)
+- CNCF: [OpenFeature project](https://www.cncf.io/projects/openfeature/)
+- Martin Fowler: [Feature Flag](https://martinfowler.com/bliki/FeatureFlag.html)
+- Martin Fowler / Pete Hodgson: [Feature Toggles](https://martinfowler.com/articles/feature-toggles.html)
+- OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+
 # Pracovní log
 
 - 2026-10-09: Doplněna příloha „Passkeys a MFA bez loginového pekla“ s rizikovým tříděním účtů, postupnou adopcí passkeys, recovery pravidly, UX texty, privacy-first logováním, příkladem B2B fakturačního SaaS, checklistem, auth policy kartou a ověřenými zdroji FIDO, MDN, OWASP, NIST a GDPR. Pomáhá SaaS týmům zvednout bezpečnost přihlašování bez toho, aby z loginu udělaly frustrující nebo datově hladový proces.
@@ -61120,3 +61360,4 @@ Datum testu recovery:
 - 2026-10-08: Doplněno krátké pravidlo k hodinové práci: každá mikro-změna má mít jednu srozumitelnou větu vysvětlující, komu a proč pomáhá.
 - 2026-10-09: Doplněna příloha „Offboarding dodavatelů bez zapomenutých účtů a datových ocásků“ s praktickým postupem rušení přístupů, předání dat, rotace tajemství, checklistem a vyplnitelnou kartou.
 - 2026-10-09: Obnovena plná verze e-booku po zjištění, že aktuální soubor obsahoval jen placeholder, a doplněna příloha „Auditní logy pro admin akce bez detektivní kanceláře“ s praktickým modelem auditovatelných akcí, strukturou eventu, zákaznickým feedem, retencí, ochranou logů, incidentovým dotazem, checklistem, vyplnitelnou šablonou a ověřenými zdroji OWASP, NIST a Evropské komise. Pomáhá zakladatelům a provozním týmům rychle vysvětlit citlivé změny bez ukládání zbytečných osobních dat.
+- 2026-10-09: Doplněna příloha „Feature flagy a postupné releasy bez datového dluhu“ s rozdělením typů flagů, oddělením flagů od autorizace, minimalizací dat pro vyhodnocení, rollout postupem, auditováním změn, kill switchem, úklidem toggle debt, checklistem, vyplnitelnou kartou a ověřenými zdroji OpenFeature, CNCF, Martina Fowlera a OWASP. Pomáhá malým SaaS týmům nasazovat postupně bez skrytých datových profilů a věčných přepínačů v kódu.
