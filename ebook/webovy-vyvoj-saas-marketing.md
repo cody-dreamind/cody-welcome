@@ -24,6 +24,8 @@ Když mikro-změna zasahuje text, měření nebo formulář, přidej k ní i jed
 
 Stejně užitečný je i limit na počet současných mikro-změn. Pokud běží tři drobné úpravy najednou, tým sice vypadá produktivně, ale hůř pozná, která z nich skutečně pomohla. Jedna změna, jeden signál, jedno vyhodnocení — méně ohňostroje, víc učení.
 
+Když mikro-změnu vyhodnocuješ, nedívej se jen na číslo v analytice. Přidej jednu lidskou kontrolu: projdi stránku jako nový návštěvník, přečti si text nahlas a ověř, jestli další krok působí pořád férově. Konverze, která vznikla tlakem nebo mlhou, není výhra; je to technický dluh v důvěře.
+
 ## Jak e-book používat
 
 - Čti kapitoly samostatně podle problému, který právě řešíš.
