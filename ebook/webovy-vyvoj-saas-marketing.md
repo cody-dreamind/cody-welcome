@@ -61808,7 +61808,193 @@ Bezpečnostní hlavičky jsou ideální hodinová práce: malý rozsah, jasný d
 - MDN: Permissions Policy guide — dědičnost pravidel a použití u iframe: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Permissions_Policy
 - OWASP Developer Guide: OSHP verification — nástroje a ověřování bezpečnostních hlaviček: https://devguide.owasp.org/en/06-verification/02-tools/05-secure-headers/
 
+
+# Příloha: Konfigurační drift bez „u mě to funguje“ rituálů
+
+Konfigurační drift je tichý zabiják malých SaaS týmů. Lokální vývoj má jednu sadu proměnných, staging druhou, produkce třetí, CI čtvrtou a dokumentace pátou — tedy tu nejvíc poetickou. Pak přijde release, který prošel testy, ale v produkci spadne, protože jedna proměnná má jiný název, jiný formát nebo existuje jen v notebooku člověka, který je zrovna na dovolené.
+
+Twelve-Factor App doporučuje ukládat konfiguraci, která se liší mezi deployi, mimo kód v prostředí. NIST SP 800-128 popisuje bezpečnostně zaměřenou správu konfigurace jako řízený proces, který zahrnuje identifikaci, kontrolu změn, monitoring a ověřování. Přeloženo do Codyho češtiny: nestačí mít `.env.example`. Potřebuješ vědět, že skutečná produkční konfigurace odpovídá tomu, co aplikace očekává.
+
+> Codyho komentář: „Na stagingu to fungovalo“ je věta, která vypadá jako omluva, ale často je to bug report na konfiguraci. Staging nemá být divadelní kulisa produkce. Má být její bezpečný trenažér.
+
+## Rozliš hodnotu, schéma a politiku
+
+Konfiguraci si rozděl na tři vrstvy. Pomůže ti to neplést dohromady tajemství, validační pravidla a provozní rozhodnutí.
+
+| Vrstva | Co obsahuje | Kde má žít |
+| --- | --- | --- |
+| Hodnota | Konkrétní URL, klíč, region, limit, e-mail odesílatele | V prostředí, secrets manageru nebo nastavení hostingu. |
+| Schéma | Název proměnné, typ, povinnost, výchozí hodnota, přípustný formát | V repozitáři jako validační kód nebo dokumentovaný kontrakt. |
+| Politika | Kdo smí hodnotu měnit, kdy se kontroluje, jaký má dopad | V provozním runbooku nebo kartě služby. |
+
+Nejčastější chyba je udržovat jen hodnoty. Pak aplikace sice něco načte, ale tým neví, jestli to je správně, úplně, bezpečně a v souladu s produkčním režimem.
+
+## Konfigurační kontrakt patří do kódu
+
+Aplikace má při startu jasně říct, co potřebuje. Pokud chybí povinná proměnná nebo má špatný formát, má spadnout brzy a srozumitelně — ne až při první platbě zákazníka.
+
+Kontrakt by měl u každé proměnné popsat:
+
+- název,
+- typ: text, číslo, boolean, URL, seznam, JSON,
+- zda je povinná,
+- bezpečnou výchozí hodnotu, pokud existuje,
+- prostředí, kde se používá,
+- zda je veřejná, interní nebo tajná,
+- krátký popis dopadu při změně.
+
+Praktický příklad:
+
+```text
+APP_BASE_URL
+- typ: URL
+- povinná: ano
+- prostředí: staging, produkce
+- citlivost: interní konfigurace
+- dopad změny: odkazy v e-mailech, callbacky, canonical URL
+
+PAYMENT_WEBHOOK_SECRET
+- typ: secret string
+- povinná: ano pro billing modul
+- prostředí: staging, produkce
+- citlivost: tajemství
+- dopad změny: ověřování příchozích platebních událostí
+```
+
+Tahle jednoduchá karta zabrání tomu, aby se proměnná přidala „jen do hostingu“ a nikdo další nevěděl, že bez ní nejde nasadit aplikaci.
+
+## `.env.example` není dokumentace, pokud není testovaná
+
+Soubor `.env.example` je užitečný, ale rychle zastará. Proto ho ber jako generovaný nebo kontrolovaný artefakt, ne jako ručně opečovávanou legendu.
+
+Dobrá pravidla:
+
+- všechny proměnné z validačního schématu jsou v `.env.example`,
+- `.env.example` neobsahuje skutečné hodnoty ani tajné vzory,
+- komentáře vysvětlují účel, ne interní tajemství,
+- test ověří, že ukázkový soubor obsahuje všechny povinné proměnné,
+- lokální vývoj má bezpečné defaulty, které neposílají data do produkčních služeb.
+
+Pokud tým mění konfiguraci často, přidej do CI jednoduchou kontrolu: aplikace se musí umět nastartovat s testovací konfigurací a jasně selhat při chybějící povinné proměnné. Neřeší to všechno, ale chytí to nejtrapnější incidenty. A trapné incidenty jsou pořád incidenty, jen mají horší estetiku.
+
+## Staging má být podobný produkci v riziku, ne v datech
+
+Staging nemusí obsahovat produkční data. V privacy-first provozu by je ideálně obsahovat neměl. Ale má se produkci podobat v těch věcech, které ovlivňují chování aplikace.
+
+Srovnávej hlavně:
+
+- zapnuté moduly a integrace,
+- formát URL a callbacků,
+- regiony a storage třídy,
+- limity velikostí a timeoutů,
+- bezpečnostní hlavičky,
+- e-mailový a webhook režim,
+- feature flagy,
+- plánované joby a fronty,
+- oprávnění servisních účtů.
+
+Rozdíl mezi stagingem a produkcí má být zapsaný a záměrný. „Nevíme, proč je to jinak“ není environment strategy. Je to budoucí pátrací hra.
+
+## Změna konfigurace je release
+
+Konfigurační změna umí shodit produkt stejně jako změna kódu. Proto má mít podobnou disciplínu.
+
+Před změnou si napiš:
+
+- co se mění,
+- proč se to mění,
+- koho to může ovlivnit,
+- jak ověříš úspěch,
+- jak změnu vrátíš zpět,
+- kdo o ní musí vědět.
+
+Pro malé týmy stačí krátký záznam v provozním logu nebo pull requestu s popisem změny. Důležité je, aby změna nezůstala jen kliknutím v administraci hostingu, o kterém ví jeden člověk a jeho prohlížečová historie.
+
+## Drift kontroluj pravidelně
+
+Konfigurační drift se neřeší jednorázovým úklidem. Vzniká postupně: testovací výjimka, urgentní hotfix, zapomenutý flag, nová proměnná pro externí integraci, ruční změna limitu po zákaznickém incidentu.
+
+Měsíční kontrola může být krátká:
+
+1. Porovnej očekávané schéma konfigurace s reálnými prostředími.
+2. Najdi proměnné, které existují jen v jednom prostředí.
+3. Zkontroluj, zda produkce neobsahuje dočasné nebo nepoužívané hodnoty.
+4. Ověř, že staging nemá produkční tajemství.
+5. Projdi změny za poslední měsíc a doplň chybějící důvody.
+6. Vyber jednu proměnnou nebo flag k odstranění.
+
+Nečekej, až bude inventář perfektní. Lepší je každý měsíc odstranit jeden kus konfigurační mlhy než jednou ročně plánovat velkou očistu, která se nikdy nestane.
+
+## Praktický příklad: rozbitý e-mailový callback
+
+B2B SaaS posílá e-mail s odkazem pro potvrzení pozvánky. Lokálně funguje všechno. Na stagingu taky. Po releasu do produkce ale odkazy vedou na starou doménu.
+
+Příčina: proměnná `APP_BASE_URL` byla změněna ve stagingu, ale produkce měla historickou hodnotu. `.env.example` ji obsahoval bez komentáře a aplikace při startu nekontrolovala, jestli odpovídá povoleným doménám.
+
+Lepší řešení:
+
+- `APP_BASE_URL` je povinná URL proměnná ve validačním schématu,
+- produkční hodnota se kontroluje proti očekávané doméně,
+- e-mailový smoke test běží po deployi,
+- změna domény má konfigurační kartu s rollbackem,
+- staging používá vlastní staging doménu, ne produkční data.
+
+Výsledek není jen opravený odkaz. Tým získá proces, který příště zachytí podobnou chybu dřív než zákazník.
+
+## Checklist: konfigurace bez driftu
+
+- [ ] Aplikace má validační schéma pro povinnou konfiguraci.
+- [ ] Každá proměnná má typ, účel, citlivost a prostředí.
+- [ ] `.env.example` odpovídá skutečnému schématu a neobsahuje tajemství.
+- [ ] CI umí ověřit start s testovací konfigurací.
+- [ ] Staging se produkci podobá chováním, ne zákaznickými daty.
+- [ ] Rozdíly mezi prostředími jsou záměrné a zapsané.
+- [ ] Konfigurační změny mají vlastníka, důvod, ověření a rollback.
+- [ ] Produkční změny v hostingu nebo secrets manageru se logují mimo hlavu jednoho člověka.
+- [ ] Měsíční kontrola hledá nepoužité, dočasné a osamocené proměnné.
+- [ ] Feature flagy a plánované joby jsou součástí stejné konfigurační kontroly.
+
+## Mini šablona konfigurační karty
+
+```md
+# Konfigurační karta: [název proměnné / skupiny]
+
+## Účel
+- Co řídí:
+- Který modul ji používá:
+- Prostředí: lokální / staging / produkce
+
+## Kontrakt
+- Typ:
+- Povinná: ano/ne
+- Bezpečný default:
+- Citlivost: veřejná / interní / tajná
+- Povolený formát nebo hodnoty:
+
+## Dopad změny
+- Co se může rozbít:
+- Jak ověřit úspěch:
+- Jak vrátit zpět:
+
+## Provoz
+- Vlastník:
+- Kde je hodnota nastavena:
+- Poslední změna:
+- Důvod poslední změny:
+- Další kontrola:
+```
+
+## Zdroje k ověření
+
+- The Twelve-Factor App: Config — konfigurace odlišná mezi deployi má být mimo kód a v prostředí: https://12factor.net/config
+- NIST SP 800-128 — Guide for Security-Focused Configuration Management of Information Systems: https://csrc.nist.gov/pubs/sp/800/128/final
+- OWASP CI/CD Security Cheat Sheet — doporučení k řízení tajemství, prostředí a oprávnění v pipeline: https://cheatsheetseries.owasp.org/cheatsheets/CI_CD_Security_Cheat_Sheet.html
+- OWASP Logging Cheat Sheet — doporučení, aby logy neobsahovaly citlivé hodnoty a bezpečnostní tajemství: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+
+
 # Pracovní log
+
+- 2026-10-09: Doplněna příloha „Konfigurační drift bez ‚u mě to funguje‘ rituálů“ s rozdělením konfigurace na hodnotu, schéma a politiku, konfiguračním kontraktem, testovaným `.env.example`, pravidly pro staging bez produkčních dat, procesem změn, měsíční drift kontrolou, checklistem, vyplnitelnou kartou a ověřenými zdroji Twelve-Factor, NIST a OWASP. Pomáhá malým SaaS týmům nasazovat bez skrytých rozdílů mezi lokálem, stagingem, CI a produkcí.
 
 - 2026-10-09: Doplněna příloha „Bezpečnostní HTTP hlavičky bez cargo cultu a rozbitého webu“ s inventářem zdrojů, praktickým baseline pro HSTS, CSP, Referrer-Policy a Permissions-Policy, report-only postupem, privacy-first logováním CSP reportů, příkladem konzultačního webu, checklistem, header kartou a ověřenými zdroji OWASP a MDN. Pomáhá webům přidat levnou bezpečnostní vrstvu bez kopírování náhodných hlaviček a bez rozbití produktu.
 
