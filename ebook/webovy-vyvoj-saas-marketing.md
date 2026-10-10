@@ -66793,7 +66793,185 @@ Datum poslední kontroly:
 - NIST SP 800-83r1: malware prevention and handling, včetně principu skenování souborů při stažení, otevření nebo spuštění — https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-83r1.pdf
 - GDPR, článek 5: zásady účelového omezení, minimalizace a omezení uložení osobních údajů — https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
 
+## Příloha: Obnova účtu a reset hesla bez support backdooru
+
+Obnova účtu je bezpečnostní funkce, která se tváří jako drobný UX detail. Ve skutečnosti rozhoduje o tom, jestli útočník obejde tvoje silné heslo, MFA, SSO i pečlivě napsané role jedním e-mailem na podporu. Reset hesla, výměna MFA zařízení, ztracený passkey nebo odchod posledního admina z workspace nejsou „uživatelská nepříjemnost“. Jsou to místa, kde se láme důvěra.
+
+Privacy-first obnova účtu má dvě pravidla: nepustit cizího člověka dovnitř a zároveň nezměnit podporu v improvizovanou identifikační kancelář. Malý SaaS nepotřebuje sbírat kopie občanek pro každý zapomenutý přístup. Potřebuje předem navržený postup, jasné důkazy kontroly, krátké tokeny, auditní stopu a lidskou komunikaci bez vyzrazení, jestli účet existuje.
+
+> Codyho komentář: Reset hesla je jako náhradní klíč pod rohožkou. Když ho schováš špatně, můžeš mít na dveřích zámek za milion a stejně bydlíš v průchoďáku.
+
+### Rozliš tři různé scénáře
+
+Ne každý recovery případ je stejný. Když všechno řeší jeden formulář „zapomněli jste heslo?“, tým časem začne dělat výjimky. A výjimka v obnově účtu je obvykle support backdoor s hezkým předmětem e-mailu.
+
+Rozděl procesy aspoň takto:
+
+| Scénář | Co uživatel ztratil | Typická cesta | Co nesmí jít obejít |
+| --- | --- | --- | --- |
+| Zapomenuté heslo | heslo, ale má kontrolu nad e-mailem | jednorázový odkaz nebo kód | existence účtu, MFA, aktivní sessions |
+| Ztracené MFA | druhý faktor, ale zná heslo nebo má SSO | recovery kódy, admin zákazníka, řízená podpora | samostatné potvrzení přes čerstvě změněný kanál |
+| Kompromitovaný účet | útočník mohl změnit údaje nebo sessions | incidentový recovery postup | důvěra v nově přidaný e-mail, telefon nebo MFA |
+
+OWASP u zapomenutého hesla doporučuje konzistentní odpověď pro existující i neexistující účty, jednotné chování času odpovědi, bezpečně generované jednorázové tokeny, expiraci, jednorázové použití a žádnou změnu účtu před ověřením tokenu. NIST SP 800-63B-4 řeší lifecycle autentizátorů a obnovu jako součást assurance modelu: obnova nesmí být slabší než běžné přihlášení tam, kde jde o citlivý přístup.
+
+### Reset hesla nesmí prozradit účet
+
+Formulář pro reset hesla nesmí být vyhledávač zákazníků. Vždy vrať stejnou větu:
+
+```text
+Pokud u nás účet s touto adresou existuje, poslali jsme instrukce pro obnovu přístupu.
+```
+
+Neříkej „e-mail neexistuje“, „účet je veden přes SSO“, „uživatel je zablokovaný“ ani „pozvánka expirovala“. To všechno jsou užitečné signály pro útočníka i pro automatizované hádání adres.
+
+Technický baseline:
+
+- odpověď formuláře je stejná pro všechny vstupy,
+- token je náhodný, dostatečně dlouhý, uložený bezpečně a jednorázový,
+- token má krátkou expiraci a je svázaný s konkrétním účtem a účelem,
+- reset URL používá pevně povolenou doménu, ne libovolný `Host` header,
+- reset stránka neposílá token v referreru třetím stranám,
+- formulář má rate limiting podle účtu, IP a rizikového vzoru,
+- po resetu se ruší staré reset tokeny a nabídne se nebo vynutí odhlášení existujících sessions.
+
+Privacy-first detail: do analytiky neposílej e-mailovou adresu, hash e-mailu ani celé reset URL. Stačí agregovaný event typu `password_reset_requested` a `password_reset_completed` bez identifikátoru uživatele, případně interní bezpečnostní log s omezeným přístupem a retenční lhůtou.
+
+### MFA recovery navrhni dřív, než ho někdo potřebuje
+
+MFA je silné jen do chvíle, než support umí faktor vypnout po přesvědčivém e-mailu. Pokud malý SaaS zavede MFA bez recovery plánu, první ztracený telefon vytvoří tlak na improvizaci.
+
+Dobré možnosti obnovy:
+
+- recovery kódy vygenerované při zapnutí MFA,
+- druhý registrovaný faktor nebo passkey,
+- potvrzení přes správce zákaznického workspace,
+- enterprise SSO pravidla řízená zákazníkovým IdP,
+- manuální recovery přes předem definované důkazy a dvoučlenné schválení týmu.
+
+Slabé možnosti:
+
+- bezpečnostní otázky jako samostatný důkaz,
+- SMS jako jediná záchrana pro citlivý B2B účet,
+- vypnutí MFA po screenshotu faktury,
+- potvrzení přes e-mail, který byl změněn před pěti minutami,
+- „znám Ondřeje, pusťte mě dovnitř“ jako identitní protokol. Hezké, lidské, bezpečnostně takové pěkné děravé pončo.
+
+U každé obnovy MFA loguj: kdo žádal, jaký účet nebo workspace, jaký typ důkazu byl použit, kdo schválil změnu, jaké faktory byly odebrány, kdy se uživatel znovu přihlásil a jaké sessions byly invalidovány. Neloguj kopie dokladů, celé odpovědi supportu ani zbytečný obsah komunikace.
+
+### Support nemá být tajná administrační brána
+
+Supportní tým potřebuje pomoci uživateli, ale nemá mít kouzelné tlačítko „převzít účet“. Pokud recovery vyžaduje člověka, udělej z toho řízený workflow.
+
+Minimální pravidla:
+
+- žádný jeden člověk nesmí obnovit citlivý admin účet bez druhého schválení,
+- support nikdy neposílá nové heslo,
+- support nevypíná MFA bez auditovaného důvodu,
+- změna recovery e-mailu má čekací dobu nebo dodatečné ověření,
+- vlastník workspace dostane notifikaci o citlivé recovery akci,
+- recovery akce má interní ticket s krátkým shrnutím, ne románem osobních údajů,
+- po dokončení se uživatel musí přihlásit běžnou cestou.
+
+Pro B2B SaaS je dobré oddělit osobní účet od workspace kontroly. Když běžný člen týmu ztratí přístup, může ho obnovit admin zákazníka. Když ztratí přístup jediný owner, jde o vyšší riziko: vyžaduje smluvní kontakt, fakturační kontrolu, čekací lhůtu nebo víc nezávislých důkazů.
+
+### Kompromitovaný účet není obyčejný reset
+
+Když existuje podezření, že účet převzal útočník, nestačí poslat reset hesla. Útočník může mít aktivní session, změněný e-mail, přidaný faktor, nové API klíče, pozvané členy, exporty nebo webhooky.
+
+Incidentový recovery postup:
+
+1. Označ účet nebo workspace jako rizikový.
+2. Zablokuj nebo omez citlivé akce: exporty, změny vlastníka, API klíče, fakturaci, integrace.
+3. Invaliduj sessions a aktivní reset tokeny.
+4. Zkontroluj nedávno změněné e-maily, MFA faktory, passkeys, recovery kódy a SSO nastavení.
+5. Zkontroluj API klíče, webhooky, pozvané uživatele a admin role.
+6. Obnov přístup přes dříve ověřený kanál, ne přes nově přidaný kontakt.
+7. Po obnově pošli bezpečnostní shrnutí vlastníkovi workspace a interně ulož minimální auditní stopu.
+
+Pokud incident znamená porušení zabezpečení osobních údajů, řeš i GDPR proces. GDPR článek 32 vyžaduje přiměřené zabezpečení zpracování a články 33 až 34 řeší hlášení porušení zabezpečení dozorovému úřadu a případné informování subjektů údajů. To neznamená paniku při každém resetu hesla. Znamená to umět rychle odlišit běžnou obnovu od incidentu s dopadem na data.
+
+### Komunikuj jasně, ale neprozrazuj víc, než musíš
+
+Recovery e-maily mají být krátké, konkrétní a bez marketingových kudrlinek.
+
+Dobrý reset e-mail:
+
+```text
+Někdo požádal o obnovu přístupu k účtu Cody SaaS.
+
+Pokud jste to byli vy, pokračujte přes tento odkaz. Odkaz platí 30 minut a lze ho použít jen jednou.
+
+Pokud jste o obnovu nežádali, e-mail ignorujte. Heslo ani přístup se bez použití odkazu nezmění.
+```
+
+Dobrý bezpečnostní e-mail po změně:
+
+```text
+Heslo k vašemu účtu bylo změněno.
+
+Pokud jste změnu provedli vy, není potřeba nic dělat. Pokud jste to nebyli vy, kontaktujte podporu přes bezpečnostní stránku a změňte přístup k e-mailové schránce.
+```
+
+Nepřidávej tracking pixely. Neposílej token do tlačítka přes zkracovač. Nepřipojuj diagnostická metadata do URL. Transakční bezpečnostní e-mail není místo pro kampaně, cross-sell ani kreativní experiment „co kdybychom změřili otevření“.
+
+### Praktický příklad: malý B2B SaaS
+
+Agenturní SaaS má workspaces, ownera, adminy, běžné členy, API klíče a fakturační kontakt.
+
+Pravidla obnovy:
+
+- běžný člen resetuje heslo přes e-mail a po resetu ztrácí aktivní sessions,
+- pokud má MFA, použije recovery kód nebo požádá admina workspace o reset faktoru,
+- admin workspace může resetovat MFA běžnému členovi, ale akce se zapisuje do audit logu a člen dostane notifikaci,
+- owner workspace nemůže být převeden jen přes support chat,
+- změna fakturačního kontaktu není důkaz identity pro převzetí owner účtu,
+- při podezření na kompromitaci se rotují API klíče a dočasně pozastaví webhooky,
+- support má runbook a nesmí ručně upravovat databázi mimo auditovaný nástroj.
+
+Výsledek: zákazník se dovnitř dostane, ale útočník nedostane dárek v podobě lidské zkratky kolem všech bezpečnostních vrstev.
+
+### Checklist: obnova účtu
+
+- [ ] Reset formulář vrací stejnou odpověď pro existující i neexistující účty.
+- [ ] Reset tokeny jsou náhodné, jednorázové, expirované a uložené bezpečně.
+- [ ] Reset URL nepoužívá nedůvěryhodný `Host` header a neposílá token třetím stranám přes referrer.
+- [ ] Po resetu se ruší staré tokeny a řeší se aktivní sessions.
+- [ ] MFA recovery má recovery kódy, druhý faktor nebo řízený supportní postup.
+- [ ] Support nemůže bez druhého schválení obnovit citlivý admin nebo owner účet.
+- [ ] Nově změněný e-mail, telefon nebo faktor není jediný důkaz při podezření na kompromitaci.
+- [ ] Citlivé recovery akce mají auditní log bez zbytečného obsahu komunikace.
+- [ ] Bezpečnostní e-maily nemají tracking pixely, marketingové skripty ani zkracovače.
+- [ ] Existuje incidentový postup pro kompromitovaný účet včetně API klíčů, webhooků a sessions.
+
+### Mini šablona recovery karty
+
+```markdown
+# Recovery karta
+
+Scénář: [zapomenuté heslo / ztracené MFA / kompromitovaný účet / ztracený owner]
+Riziko: [nízké / střední / vysoké]
+Kdo může požádat: [uživatel / admin workspace / smluvní kontakt]
+Ověřovací důkazy: [kanál, recovery kód, admin potvrzení, smluvní údaj]
+Co se mění: [heslo / MFA / owner / sessions / API klíče]
+Co se nemění bez dalšího schválení: [fakturace, owner, SSO, export]
+Notifikace: [komu a kdy]
+Auditní log: [událost, schvalovatel, request ID, čas]
+Retence podpůrných dat: [lhůta]
+Rollback / eskalace: [kontakt, incident runbook]
+```
+
+### Zdroje k ověření
+
+- [OWASP Forgot Password Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html) — doporučení pro konzistentní odpovědi, ochranu proti enumeraci účtů, tokeny, expiraci a obnovu po podezření na kompromitaci.
+- [OWASP Multifactor Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html) — praktický kontext pro recovery MFA, reset faktorů a rizika slabých záložních kanálů.
+- [NIST SP 800-63B-4 Digital Identity Guidelines: Authentication and Lifecycle Management](https://pages.nist.gov/800-63-4/sp800-63b.html) — aktuální technická doporučení pro autentizaci, lifecycle autentizátorů a account recovery.
+- [GDPR na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — články 32 až 34 k zabezpečení zpracování a hlášení porušení zabezpečení osobních údajů.
+- [EDPB Guidelines 01/2021 on examples regarding personal data breach notification](https://edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-012021-examples-regarding-personal-data-breach_en) — příklady posuzování incidentů a oznamování porušení zabezpečení osobních údajů.
+
 # Pracovní log
+
+- 2026-10-10: Doplněna příloha „Obnova účtu a reset hesla bez support backdooru“ s rozlišením zapomenutého hesla, ztraceného MFA a kompromitovaného účtu, bezpečným reset tokenem, pravidly pro supportní workflow, incidentovým recovery postupem, příkladem B2B SaaS, checklistem, vyplnitelnou recovery kartou a ověřenými zdroji OWASP, NIST, GDPR a EDPB. Pomáhá malým SaaS týmům obnovovat přístup bez enumerace účtů, marketingových trackerů a lidských zkratek kolem bezpečnosti.
 - 2026-10-10: Doplněna příloha „Uploady a přílohy bez malware tomboly a datového sklepa“ s praktickým návrhem bezpečného file uploadu, omezením účelu, allowlistem typů, kontrolou obsahu, karanténou, malware skenem, bezpečným stahováním, retencí příloh, supportním příkladem, checklistem, vyplnitelnou upload kartou a ověřenými zdroji OWASP, NIST a GDPR. Pomáhá malým webům a SaaS týmům přijímat soubory bez veřejných bucketů, věčných příloh a zbytečných osobních dat.
 
 - 2026-10-10: Doplněna příloha „Provozní retenční režim bez datového skladiště a právnické mlhy“ jako praktické navázání na starší retenční kapitolu: přidává životní cyklus dat, oddělení právní a provozní retence, automatizované mazání, produktové mikrocopy, správu výjimek, B2B SaaS příklad, checklist, vyplnitelnou retenční kartu a ověřené zdroje GDPR, Evropské komise, EDPS a OWASP. Pomáhá malým týmům převést retenční pravidla z dokumentu do skutečného úklidu dat.
