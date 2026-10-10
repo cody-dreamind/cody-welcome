@@ -63147,7 +63147,228 @@ Výsledek: tým má support chat, ale neudělal si z něj neřízený vysavač z
 - [EDPB Recommendations 01/2020 on supplementary measures for transfer tools](https://www.edpb.europa.eu/documents/recommendation/recommendations-012020-on-measures-that-supplement-transfer-tools-to_en) — doporučení k posuzování mezinárodních přenosů a doplňkovým technickým opatřením.
 - [Evropská komise — Standard Contractual Clauses for international transfers](https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en) — přehled standardních smluvních doložek pro přenos osobních údajů mimo EU/EEA.
 
+# Příloha: Doménový abuse monitoring bez paranoia dashboardu a brand police
+
+Doména není jen adresa webu. Je to důvěrový kotvící bod pro přihlášení, e-maily, faktury, podporu, dokumentaci a někdy i celé partnerství. Když někdo zaregistruje podobně vypadající doménu, pošle falešnou fakturu nebo postaví přihlašovací stránku s tvým logem, zákazník často neřeší nuance DNS. Vidí tvoji značku a průšvih. Gratuluju, reputační účet přišel na tvoji adresu.
+
+Privacy-first doménový monitoring nemá znamenat, že budeš sledovat uživatele, sbírat jejich chování nebo lovit každý překlep ve vesmíru. Má znamenat, že máš evidenci vlastních domén, víš, jak vypadá legitimní komunikace, umíš najít pravděpodobné zneužití a máš klidný postup pro nahlášení. Bez paniky, bez detektivní kanceláře a bez toho, aby si marketing koupil „AI brand protection suite“, která sama potřebuje DPIA, dvě modlitby a rozpočet na menší ponorku.
+
+> Codyho komentář: Nejlepší ochrana značky není paranoidní nákup všech možných domén. Nejlepší ochrana je kombinace dobré evidence, jasné zákaznické komunikace, e-mailové autentizace, rychlého abuse postupu a toho, že lidé poznají, kde se mají bezpečně přihlásit.
+
+## Nejdřív si ujasni chráněné povrchy
+
+Začni vlastním inventářem. Ne tím, co by šlo teoreticky napadnout, ale tím, co dnes zákazník opravdu používá nebo čemu by mohl uvěřit.
+
+Minimální mapa:
+
+- **Primární domény:** hlavní web, aplikace, dokumentace, status page, help centrum.
+- **E-mailové domény:** transakční e-maily, newsletter, fakturace, support, bezpečnostní kontakt.
+- **Přihlašovací cesty:** login, SSO callbacky, magic linky, reset hesla, pozvánky.
+- **Platební a fakturační komunikace:** faktury, platební odkazy, bankovní údaje, změny tarifu.
+- **Veřejné profily:** sociální sítě, katalogy, marketplace listingy, GitHub organizace, package registry.
+- **Domény, které nic neposílají:** staré projekty, přesměrování, rezervované domény, regionální varianty.
+
+U každé položky si napiš vlastníka, účel, registrátora, DNS poskytovatele, expiraci, MFA stav a komu chodí technické upozornění. Pokud nevíš, kdo vlastní přístup k doméně, nemáš doménu. Máš digitální talisman a naději.
+
+## Rozliš podobnost, zneužití a skutečný incident
+
+Ne každá podobná doména je incident. `example.cz` a `example.com` mohou patřit různým legitimním firmám. `examp1e-login.com` s kopií tvého přihlášení je jiná liga. Cílem není vést válku se všemi náhodnými podobnostmi, ale rychle odlišit šum od rizika.
+
+Praktické tři úrovně:
+
+| Úroveň | Příklad | Reakce |
+| --- | --- | --- |
+| Pozorování | podobná doména bez obsahu | zapsat, zkontrolovat DNS, vrátit se za týden |
+| Podezření | podobná doména s logem, formulářem nebo e-mailem | uložit důkazy, ověřit hosting/registrátora, připravit abuse report |
+| Incident | phishing, malware, falešná faktura, sběr hesel | eskalovat bezpečnostně, informovat dotčené zákazníky, hlásit registrátorovi/hostingu |
+
+ICANN řadí mezi DNS abuse mimo jiné phishing, malware, pharming, botnety a spam, pokud slouží jako nosič těchto škodlivých aktivit. Pro malý SaaS je z toho nejpraktičtější závěr: drž se konkrétního dopadu. Zneužívá doména tvoji značku ke krádeži přístupů, plateb nebo dat? Pak neřeš estetiku značky, ale bezpečnostní incident.
+
+## Monitoring nastav jako rutinu, ne jako šmírovací stroj
+
+Doménový monitoring může být jednoduchý. Nemusíš hned kupovat drahé brand protection řešení. Začni kombinací vlastních kontrol a pár veřejných signálů.
+
+Lehká rutina pro malý tým:
+
+1. Jednou měsíčně zkontroluj expirace vlastních domén a změny DNS.
+2. Sleduj Certificate Transparency logy pro domény, které vypadají jako tvoje značka nebo subdomény.
+3. Jednou týdně hledej podezřelé varianty značky ve vyhledávači a veřejných repozitářích.
+4. U e-mailu sleduj DMARC agregované reporty a nárůst spoofing pokusů.
+5. U kritických značek nastav upozornění na nové podobné domény přes registrátora nebo specializovaný nástroj.
+6. Udržuj zákaznickou stránku „jak poznat legitimní komunikaci“.
+
+Privacy-first pravidlo: pokud používáš externí monitoring, neposílej mu seznam zákazníků, e-mailové kampaně ani interní incident data, pokud to není nutné. Monitoruj domény a veřejné artefakty, ne chování lidí. Když nástroj vyžaduje nahrání CRM kontaktů, aby „chránil značku“, zastav se. To už není doménový monitoring, to je datová výměna v kostýmu bezpečnosti.
+
+## Důkazy sbírej tak, aby šly použít
+
+Když najdeš podezřelou doménu, neklikej zběsile po stránce a neposílej ji všem do chatu. Nejdřív zachyť důkazy bezpečně a opakovatelně.
+
+Ulož minimálně:
+
+- doménu a přesnou URL,
+- datum a čas v UTC,
+- screenshot stránky,
+- HTML nebo textový popis, pokud ho lze bezpečně získat,
+- DNS záznamy,
+- WHOIS/RDAP informace, pokud jsou dostupné,
+- certifikát a Certificate Transparency záznam,
+- hlavičky e-mailu, pokud šlo o phishingový e-mail,
+- dopad: sběr hesel, falešná platba, malware, impersonace supportu.
+
+Nikdy do podezřelé stránky nezadávej reálné přihlašovací údaje ani testovací údaje, které by šly spojit s produkcí. Pokud potřebuješ ověřit formulář, použij izolované prostředí a syntetická data. A ano, `test@test.cz` není bezpečnostní metodika, je to jen český lidový folklór.
+
+## Abuse report piš konkrétně
+
+Registrátor, hosting nebo platforma potřebují vědět, co přesně se děje. Obecné „tahle doména je podvod“ často nestačí. Napiš stručný report s důkazy a požadovanou akcí.
+
+Dobrá struktura:
+
+```text
+Předmět: Phishing / brand impersonation report for example-login.example
+
+Hello,
+
+We are reporting a domain used for phishing and impersonation of our service.
+
+Reported domain: example-login.example
+Observed URL: https://example-login.example/sign-in
+Observed at: 2026-10-10 15:30 UTC
+Abuse type: phishing / credential collection / brand impersonation
+Legitimate domain: https://example.com
+
+Evidence:
+- screenshot attached
+- DNS lookup attached
+- certificate transparency link attached
+- phishing email headers attached, if applicable
+
+Requested action:
+Please investigate and suspend or mitigate the abusive service according to your abuse policy.
+
+Security contact:
+security@example.com
+```
+
+U incidentu, který se dotýká zákazníků, si souběžně připrav zákaznickou komunikaci. Nečekej, až bude všechno dokonalé. Krátká zpráva „víme o falešné stránce, nikdy po vás nechceme heslo mimo tuto doménu, tady je bezpečný odkaz“ může zabránit větší škodě.
+
+## Zákazníkům ukaž bezpečnou cestu
+
+Nejlepší obrana proti phishingu je i produktová. Lidé musí vědět, kde je bezpečné se přihlásit, odkud chodí faktury a jak vypadá legitimní support.
+
+Na web přidej malou bezpečnostní stránku:
+
+- oficiální domény a subdomény,
+- oficiální e-mailové adresy nebo domény,
+- pravidlo, že nikdy nechceš heslo e-mailem,
+- jak ověřit fakturu nebo změnu platebních údajů,
+- kam přeposlat podezřelý e-mail,
+- co dělat, když uživatel zadal heslo na falešné stránce.
+
+Do fakturačních a bezpečnostních e-mailů dávej konzistentní text. Když jednou pošleš zákazníkovi platební odkaz z hlavní domény, podruhé z náhodné subdomény a potřetí přes zkracovač, trénuješ ho přesně na chování, které phishing potřebuje. Gratuluju, právě jsi útočníkovi napsal onboarding.
+
+## Obrana začíná u vlastních domén
+
+Doménový abuse monitoring nefunguje, pokud vlastní domény spravuješ chaoticky. Útočník nepotřebuje typosquatting, když ti vyprší stará subdoména, zůstane viset zapomenutý CNAME nebo někdo stále posílá e-mail z opuštěné domény.
+
+Základní hygienická sada:
+
+- MFA u registrátora a DNS poskytovatele,
+- role podle potřeby, ne sdílený admin účet,
+- záznam o změnách DNS,
+- včasné prodloužení domény s více kontakty,
+- SPF/DKIM/DMARC i pro domény, které e-mail neposílají,
+- CAA záznamy pro používané certifikační autority,
+- pravidelná kontrola CNAME na externí služby,
+- bezpečnostní kontakt typu `security@` nebo `/.well-known/security.txt`, pokud ho umíš obsloužit.
+
+CAA záznamy podle RFC 8659 umožňují říct, které certifikační autority smějí vydat certifikát pro doménu. Nezastaví phishing na cizí doméně, ale snižují riziko nechtěného vydání certifikátu pro tvoje vlastní domény. Je to malá pojistka, ne kouzelný štít.
+
+## Praktický příklad: falešná faktura
+
+B2B SaaS zjistí, že zákazník dostal e-mail z domény `exampIe-billing.com`, kde je velké `I` místo malého `l`. E-mail tvrdí, že se mění bankovní účet, a odkazuje na falešnou fakturační stránku.
+
+Špatná reakce:
+
+- někdo to přepošle do obecného Slack kanálu,
+- tři lidé stránku otevřou z pracovního prohlížeče,
+- nikdo neuloží hlavičky e-mailu,
+- zákazník dostane mlhavou zprávu „dejte si pozor na podvodníky“,
+- abuse report jde až druhý den bez důkazů.
+
+Lepší reakce:
+
+1. Support uloží původní e-mail včetně hlaviček a screenshot.
+2. Technik ověří DNS, hosting, certifikát a CT záznam.
+3. Bezpečnostní vlastník pošle abuse report registrátorovi a hostingu.
+4. Zákazníci dostanou krátké upozornění s oficiální fakturační doménou a pravidlem, že změny bankovního účtu potvrzuje pouze přihlášené fakturační centrum.
+5. Tým přidá do bezpečnostní stránky ukázku legitimní fakturační komunikace.
+6. Po incidentu se zkontroluje DMARC, fakturační šablony a preference pro zákaznická upozornění.
+
+Výsledek: tým nevyřeší celý phishingový internet, protože na to by potřeboval kouzelnou hůlku a rozpočet států G7. Ale sníží škodu, zrychlí reakci a naučí zákazníky bezpečnou cestu.
+
+## Checklist: doménový abuse monitoring
+
+- Máme inventář vlastních domén, subdomén, e-mailových domén a přihlašovacích cest?
+- Víme, kdo vlastní přístup k registrátorovi a DNS?
+- Máme MFA u registrátora, DNS a e-mailového providera?
+- Sledujeme expirace domén a kritické DNS změny?
+- Máme SPF, DKIM a DMARC pro aktivní i tiché domény?
+- Sledujeme DMARC reporty aspoň u hlavních domén?
+- Máme postup pro podezřelou podobnou doménu?
+- Umíme bezpečně uložit důkazy bez klikání z produkčního prostředí?
+- Máme šablonu abuse reportu pro registrátora/hosting/platformu?
+- Mají zákazníci veřejnou stránku s oficiálními doménami a bezpečnostním kontaktem?
+
+## Mini šablona abuse karty
+
+```markdown
+## Nález
+- Datum a čas UTC:
+- Podezřelá doména / URL:
+- Typ: pozorování / podezření / incident
+- Možný dopad:
+- Kdo nahlásil:
+
+## Důkazy
+- Screenshot:
+- DNS záznamy:
+- RDAP/WHOIS:
+- Certifikát / CT záznam:
+- E-mailové hlavičky:
+- Další artefakty:
+
+## Riziko
+- Sběr hesel:
+- Falešná platba:
+- Malware:
+- Impersonace supportu:
+- Dotčení zákazníci:
+
+## Reakce
+- Abuse kontakt registrátora:
+- Abuse kontakt hostingu/platformy:
+- Odeslaný report:
+- Zákaznická komunikace:
+- Interní vlastník:
+- Deadline další kontroly:
+
+## Poučení
+- Co upravit v komunikaci:
+- Co upravit v DNS/e-mailu:
+- Co přidat do bezpečnostní stránky:
+```
+
+## Zdroje k ověření
+
+- [ICANN — DNS Abuse Mitigation Program](https://www.icann.org/resources/pages/dns-security-threat-mitigation-2025-11-21-en) — aktuální přehled DNS abuse kategorií, včetně phishingu, malwaru, pharmingu, botnetů a spamu jako nosiče škodlivých aktivit.
+- [ICANN Contractual Compliance — DNS Abuse Mitigation Requirements](https://compliance-reports.icann.org/dnsabuse.html) — informace o vymáhání DNS abuse mitigation povinností od 5. dubna 2024.
+- [ENISA Threat Landscape 2024](https://www.enisa.europa.eu/publications/enisa-threat-landscape-2024) — evropský přehled hrozeb včetně sociálního inženýrství a phishingu.
+- [APWG Phishing Activity Trends Reports](https://apwg.org/trendreports) — průběžné reporty o phishingových útocích hlášených APWG.
+- [RFC 8659 — DNS Certification Authority Authorization (CAA) Resource Record](https://www.rfc-editor.org/rfc/rfc8659/) — standard pro CAA záznamy, které omezují certifikační autority oprávněné vydávat certifikáty pro doménu.
+
 # Pracovní log
+
+- 2026-10-10: Doplněna příloha „Doménový abuse monitoring bez paranoia dashboardu a brand police“ s inventářem chráněných doménových povrchů, rozlišením podobnosti, podezření a incidentu, privacy-first monitoringovou rutinou, sběrem důkazů, abuse report šablonou, zákaznickou bezpečnostní stránkou, hygienou vlastních domén, příkladem falešné faktury, checklistem, vyplnitelnou abuse kartou a ověřenými zdroji ICANN, ENISA, APWG a RFC 8659. Pomáhá malým SaaS a webovým týmům chránit zákazníky před phishingem a zneužitím značky bez plošného sledování uživatelů.
 
 - 2026-10-10: Doplněna příloha „DPA a subprocesoři bez smluvní mlhy a vendor romantiky“ s praktickým rozlišením rolí správce a zpracovatele, vendor kartou, provozním čtením DPA, pravidly pro subprocesory, evropský provoz, stručné transfer impact assessment, offboarding, příkladem support chatu, checklistem, vyplnitelnou šablonou a ověřenými zdroji GDPR, EDPB a Evropské komise. Pomáhá malým webovým a SaaS týmům vybírat dodavatele podle skutečných datových toků, regionů, retence a exit plánu místo podle hezkého onboardingového videa.
 
