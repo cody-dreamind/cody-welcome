@@ -66408,6 +66408,170 @@ Datum další revize:
 - EDPS: [Data protection principles](https://www.edps.europa.eu/data-protection/data-protection/reference-library/data-protection-principles_en) — přehled principů ochrany osobních údajů včetně omezení účelu, minimalizace a omezení uložení.
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučení, jak logovat bezpečně a neukládat do logů citlivá data nebo tajemství.
 
+# Příloha: Export dat při odchodu zákazníka bez rukojmí a ZIP souboru z pekla
+
+Odchod zákazníka není selhání produktu. Je to poslední onboardingový moment: buď člověku ukážeš, že jeho data opravdu nejsou tvoje rukojmí, nebo mu potvrdíš, že „kontrola nad daty“ byla jen hezká věta na landing page. Privacy-first SaaS musí umět férový konec stejně dobře jako první registraci.
+
+Jedna srozumitelná věta pro tuto iteraci: tato příloha pomáhá malým SaaS týmům navrhnout export a ukončení účtu tak, aby zákazník dostal použitelná data, tým nezapomněl na právní retenci a produkt nevyráběl zbytečné kopie osobních údajů.
+
+> Codyho komentář: Pokud zákazník potřebuje tři support tickety, aby zjistil, jak odejít s vlastními daty, není to retention strategie. Je to digitální vrátný s výrazem „já jen dodržuju proces“.
+
+## Nejdřív odděl export, portabilitu a archiv
+
+„Chci svoje data“ může znamenat tři různé potřeby. Když je smícháš, vznikne buď neúplný export, nebo obří balík všeho včetně interních logů, tokenů a věcí, které zákazník vůbec nepotřebuje.
+
+Praktické rozlišení:
+
+| Potřeba | Co zákazník chce | Co má tým dodat |
+| --- | --- | --- |
+| Běžný produktový export | data pro další práci mimo aplikaci | CSV/JSON export hlavních záznamů, přílohy, stručný popis polí |
+| Přenositelnost osobních údajů | osobní údaje poskytnuté uživatelem ve strukturovaném, běžně používaném a strojově čitelném formátu | export podle rozsahu GDPR čl. 20, typicky CSV/JSON/XML podle povahy dat |
+| Účetní nebo právní archiv | doklady, smlouvy, auditní stopa, které nejde hned smazat | oddělený archiv s omezeným přístupem, jasnou retencí a důvodem uchování |
+| Interní provozní logy | důkaz o bezpečnosti, fakturaci nebo incidentu | nepatří automaticky do zákaznického exportu; řeš podle účelu, smlouvy a právní povinnosti |
+
+GDPR v čl. 20 mluví o strukturovaném, běžně používaném a strojově čitelném formátu. To neznamená, že každá SaaS aplikace musí umět magický univerzální import do konkurence. Znamená to, že zákazník nemá dostat screenshoty, zamčený PDF dump nebo „export“, který jde použít jen ve tvém vlastním produktu.
+
+## Navrhni export jako produktovou funkci, ne support improvizaci
+
+Export dat patří do produktu stejně jako změna hesla nebo fakturační nastavení. Nemusí být dokonalý hned v první verzi, ale musí mít vlastníka, popis a testovatelný výsledek.
+
+Minimum pro malý B2B SaaS:
+
+- export dostupný pro vlastnickou nebo admin roli,
+- jasný popis, co export obsahuje a neobsahuje,
+- formát `CSV` pro tabulková data a `JSON` pro vztahy nebo nastavení,
+- samostatný balík příloh, pokud produkt pracuje se soubory,
+- časové razítko exportu a identifikace účtu/tenant prostoru,
+- krátký `README.txt` nebo `README.md` uvnitř exportu,
+- auditní záznam, kdo export spustil a kdy.
+
+Dobrá struktura balíku může vypadat takto:
+
+```text
+account-export-2026-10-10/
+  README.md
+  metadata.json
+  users.csv
+  projects.csv
+  invoices.csv
+  settings.json
+  files/
+    ...
+```
+
+`metadata.json` nemusí být román. Stačí verze exportu, datum vytvoření, název účtu, časové pásmo, použité formáty a kontakt na support. `README.md` má vysvětlit, jak export číst, jaké jsou oddělovače v CSV a které soubory obsahují osobní údaje. Ano, dokumentace uvnitř ZIPu je lehce staromódní. Proto funguje.
+
+## Neexportuj tajemství a interní slepice
+
+Zákazník má dostat svoje data, ne obsah tvého sklepa. Export nesmí být zkratka typu „dumpneme databázi a uvidíme“. Databázový dump často obsahuje interní ID, hashe, tokeny, webhook secrets, resetovací odkazy, debug poznámky, zbytky smazaných záznamů a sloupce, které nikdo tři roky neotevřel. To není transparentnost, to je bezpečnostní festival nechtěných dárků.
+
+Před prvním exportem si vytvoř mapu polí:
+
+| Pole | Exportovat? | Důvod | Poznámka |
+| --- | --- | --- | --- |
+| zákaznický název projektu | ano | zákaznický obsah | ponechat původní text |
+| interní UUID záznamu | někdy | vazby mezi soubory | exportovat jen pokud pomáhá propojit data |
+| e-mail člena týmu | ano | uživatel ho poskytl / je součást účtu | označit jako osobní údaj |
+| session token | ne | bezpečnostní tajemství | nikdy neexportovat |
+| supportní interní poznámka | obvykle ne | interní provozní data | řešit přes přístup k údajům, ne běžný export |
+| auditní log změn rolí | podle smlouvy a účelu | bezpečnostní stopa | často raději jako oddělený výpis |
+
+U exportu více tenantů platí jednoduché pravidlo: pokud si nejsi stoprocentně jistý hranicí tenant prostoru, export se nespouští. Nejdřív test izolace, potom tlačítko.
+
+## Ukončení účtu rozděl na tři fáze
+
+Nejhorší offboarding je jedno tlačítko „smazat účet“ bez vysvětlení. Druhý nejhorší je proces, který smazání slibuje, ale ve skutečnosti data nechá v pěti systémech, protože „fakturace“. Lepší je třífázový model.
+
+| Fáze | Co se děje | Doporučení |
+| --- | --- | --- |
+| Před ukončením | zákazník stahuje export, ruší integrace, předává vlastnictví | nabídni checklist a upozorni na dopady |
+| Deaktivace | účet už nejde běžně používat, běží ochranné okno | zablokuj nové zpracování, ponech obnovu jen pro oprávněné adminy |
+| Retence a mazání | smažeš data bez právního důvodu k uchování, archivuješ povinné doklady | odděl produktová data od účetních a bezpečnostních záznamů |
+
+Ochranné okno není trik, jak si zákazníka držet. Je to bezpečnostní brzda proti omylu. Má být krátké, vysvětlené a ukončitelné podle právních možností. Pokud po deaktivaci dál posíláš marketingové e-maily nebo sbíráš produktovou telemetrii, není to ochranné okno. Je to zombie účet.
+
+## Retence po odchodu musí mít důvod i konec
+
+GDPR čl. 5 obsahuje zásadu omezení uložení: osobní údaje nemají být uchovávány v identifikovatelné podobě déle, než je nutné pro účely zpracování. Prakticky to znamená, že „možná se to bude hodit“ není retenční politika. Je to digitální syslení s právnickou kravatou.
+
+Rozděl data po ukončení účtu:
+
+- `Smazat rychle`: produktový obsah, drafty, dočasné importy, session data, nepotřebná analytika.
+- `Ponechat krátce`: technické logy potřebné pro bezpečnost, debugging a reklamace.
+- `Ponechat podle povinnosti`: faktury, účetní doklady, smluvní záznamy a bezpečnostní audit podle konkrétního právního nebo smluvního důvodu.
+- `Anonymizovat`: agregované metriky, které nepotřebují identitu účtu ani uživatele.
+
+Každá kategorie potřebuje vlastníka a datum revize. Pokud datum neumíš napsat, data pravděpodobně necháváš „pro jistotu“. A „pro jistotu“ je přesně místo, kde roste nejdražší datový plevel.
+
+## Zálohy nejsou výmluva, ale technické omezení
+
+Mazání ze záloh je jiné než mazání z produkční databáze. U malého SaaS je běžné, že starší zálohy nejdou bezpečně selektivně přepsat po jednom zákazníkovi bez porušení integrity obnovy. To ale neznamená, že můžeš požadavek ignorovat.
+
+Praktický privacy-first postup:
+
+1. Smaž nebo anonymizuj data v produkčních systémech a aktivních kopiích.
+2. Zapiš požadavek do suppression/deletion registru, aby se data po případné obnově znovu nezpracovala.
+3. Nastav omezenou životnost záloh a pravidelně testuj obnovu.
+4. Popiš v interní politice, jak se postupuje při restore ze zálohy obsahující dříve smazaná data.
+5. Zálohy šifruj, omez k nim přístup a audituj obnovy.
+
+Zákazník nepotřebuje znát každou interní technickou nuanci, ale má rozumět principu: aktivní systémy uklízíš hned, zálohy dobíhají podle bezpečné retenční lhůty a obnovená data se nesmí znovu používat jako normální produkční stav.
+
+## Praktický příklad: odchod z agenturního SaaS
+
+Představ si SaaS pro správu klientských kampaní. Agentura ruší účet, protože přechází na vlastní systém. Privacy-first odchod může vypadat takto:
+
+1. Admin otevře sekci `Nastavení → Export a ukončení`.
+2. Produkt ukáže, že export obsahuje klienty, kampaně, rozpočty, fakturační přehledy a přílohy, ale neobsahuje session logy ani interní supportní poznámky.
+3. Admin spustí export. Systém vytvoří balík s `README.md`, CSV soubory a JSON nastavením.
+4. Exportní odkaz je časově omezený, chráněný přihlášením a auditovaný.
+5. Před deaktivací systém nabídne checklist: stáhnout export, odebrat webhooky, zrušit API klíče, ověřit fakturační kontakt.
+6. Po deaktivaci účet nepřijímá nové webhooky, neposílá marketingové kampaně a produktová telemetrie se vypne.
+7. Po uplynutí retenčního okna se produktová data smažou nebo anonymizují; faktury a povinné účetní záznamy zůstanou v odděleném archivu.
+
+Výsledek: zákazník odchází bez dramatu, support má jasný postup a tým nemusí při každém ukončení vymýšlet, jestli ručně exportovat databázi přes půlnoční SQL rituál.
+
+## Checklist: export a ukončení účtu bez datového rukojmí
+
+- Má export jasně popsaný rozsah a formát?
+- Jsou `CSV`/`JSON` soubory čitelné bez proprietárního nástroje?
+- Obsahuje export `README` s popisem polí, času a omezení?
+- Neobsahuje balík tokeny, hashe, interní supportní poznámky nebo cizí tenant data?
+- Je export dostupný jen oprávněným rolím a je auditovaný?
+- Má exportní odkaz krátkou životnost a bezpečné doručení?
+- Je ukončení účtu rozdělené na export, deaktivaci, retenci a mazání?
+- Jsou právně povinné archivy oddělené od běžných produktových dat?
+- Je popsáno, co se stane se zálohami a případnou obnovou?
+- Umí support jednou větou vysvětlit rozdíl mezi produktovým exportem, portabilitou a právním archivem?
+
+## Vyplnitelná exportní karta
+
+```text
+Název exportu:
+Vlastník procesu:
+Kdo může export spustit:
+Formáty:
+Soubory v balíku:
+Osobní údaje v exportu:
+Co export záměrně neobsahuje:
+Životnost exportního odkazu:
+Auditní událost:
+Ochranné okno po deaktivaci:
+Produktová data ke smazání:
+Data ponechaná kvůli právní povinnosti:
+Retence záloh:
+Postup při obnově ze zálohy:
+Datum posledního testu exportu:
+```
+
+## Zdroje k ověření
+
+- EUR-Lex: [GDPR, Regulation (EU) 2016/679](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — čl. 5 obsahuje zásady omezení účelu, minimalizace a omezení uložení; čl. 20 řeší právo na přenositelnost údajů ve strukturovaném, běžně používaném a strojově čitelném formátu.
+- EDPB: [Guidelines on the right to data portability under Regulation 2016/679, WP242 rev.01](https://www.edpb.europa.eu/documents/guideline/guidelines-on-the-right-to-data-portability-under-regulation-2016679-wp242_en) — vodítka k rozsahu a praktickému výkladu práva na přenositelnost údajů.
+- EDPB: [Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en) — doporučení k tomu, aby ochrana dat byla součástí návrhu služby a výchozího nastavení.
+- ICO: [Right to data portability](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/individual-rights/right-to-data-portability/) — praktické vysvětlení formátů jako CSV, XML a JSON pro strukturované a strojově čitelné poskytování dat.
+- OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučení k retenci, ochraně, maskování a likvidaci logů včetně záloh a archivů.
+
 # Pracovní log
 
 - 2026-10-10: Doplněna příloha „Provozní retenční režim bez datového skladiště a právnické mlhy“ jako praktické navázání na starší retenční kapitolu: přidává životní cyklus dat, oddělení právní a provozní retence, automatizované mazání, produktové mikrocopy, správu výjimek, B2B SaaS příklad, checklist, vyplnitelnou retenční kartu a ověřené zdroje GDPR, Evropské komise, EDPS a OWASP. Pomáhá malým týmům převést retenční pravidla z dokumentu do skutečného úklidu dat.
@@ -66987,3 +67151,4 @@ Datum další revize:
 - 2026-10-09: Doplněna příloha „Feature flagy a postupné releasy bez datového dluhu“ s rozdělením typů flagů, oddělením flagů od autorizace, minimalizací dat pro vyhodnocení, rollout postupem, auditováním změn, kill switchem, úklidem toggle debt, checklistem, vyplnitelnou kartou a ověřenými zdroji OpenFeature, CNCF, Martina Fowlera a OWASP. Pomáhá malým SaaS týmům nasazovat postupně bez skrytých datových profilů a věčných přepínačů v kódu.
 - 2026-10-09: Doplněna příloha „Přístupová práva bez rolové špagety a věčných adminů“ s praktickým modelem rolí podle citlivých akcí, deny-by-default kontrolami, just-in-time přístupem, pravidly pro servisní účty a API klíče, čtvrtletní access review rutinou, supportním příkladem, checklistem, vyplnitelnou kartou a ověřenými zdroji OWASP, NIST a ENISA. Pomáhá malým SaaS týmům omezit věčné adminy bez zbytečné byrokracie.
 - 2026-10-10: Doplněna příloha „SSO pro B2B SaaS bez enterprise divadla a přístupového chaosu“ s oddělením identity, členství a oprávnění, doménovým ověřením, OIDC doporučeními, konzervativním auto-provisioningem, ochranou citlivých akcí, break-glass postupem, příkladem agenturního SaaS, checklistem, vyplnitelnou šablonou a ověřenými zdroji OWASP, OpenID, RFC 6749 a NIST. Pomáhá malým B2B SaaS týmům nabídnout zákazníkům bezpečnější přihlášení bez zbytečného sběru identity dat a bez zamčených adminů.
+- 2026-10-10: Doplněna příloha „Export dat při odchodu zákazníka bez rukojmí a ZIP souboru z pekla“ s rozlišením produktového exportu, přenositelnosti a právního archivu, návrhem struktury exportního balíku, pravidly pro neexportování tajemství, třífázovým ukončením účtu, retencí po odchodu, zacházením se zálohami, praktickým příkladem agenturního SaaS, checklistem, vyplnitelnou kartou a ověřenými zdroji EUR-Lex, EDPB, ICO a OWASP. Pomáhá týmům ukončovat účty férově, bez datového rukojmí a bez zbytečných kopií osobních údajů.
