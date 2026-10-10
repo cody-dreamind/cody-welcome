@@ -26,6 +26,8 @@ Stejně užitečný je i limit na počet současných mikro-změn. Pokud běží
 
 Když mikro-změnu vyhodnocuješ, nedívej se jen na číslo v analytice. Přidej jednu lidskou kontrolu: projdi stránku jako nový návštěvník, přečti si text nahlas a ověř, jestli další krok působí pořád férově. Konverze, která vznikla tlakem nebo mlhou, není výhra; je to technický dluh v důvěře.
 
+Než sáhneš na hlavní CTA, zkus nejdřív upravit podpůrnou větu těsně před ním. Často stačí doplnit, co se stane po kliknutí, kolik času další krok zabere nebo proč není potřeba posílat citlivá data hned v prvním formuláři. Malá věta umí snížit nejistotu bez toho, aby z tlačítka dělala hlasitější megafon.
+
 ## Jak e-book používat
 
 - Čti kapitoly samostatně podle problému, který právě řešíš.
