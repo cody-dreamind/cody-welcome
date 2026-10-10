@@ -64708,7 +64708,152 @@ Může zákazník zvolit silnější metodu bez dalšího osobního údaje:
 - [W3C Web Authentication: An API for accessing Public Key Credentials](https://www.w3.org/TR/webauthn-3/) — specifikace WebAuthn pro práci s public-key credentials v prohlížeči.
 - [GDPR, čl. 5 na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — zásady minimalizace, účelového omezení a omezení uložení, relevantní i pro telefonní čísla, auditní logy a bezpečnostní metadata.
 
+## Příloha: Retenční politika bez digitální skládky a mazacího alibi
+
+Retence je nudné slovo pro velmi praktickou otázku: jak dlouho držíme data, proč přesně je ještě potřebujeme a kdo má odvahu je opravdu smazat. Malý web nebo SaaS často nezačne špatně tím, že by chtěl zákazníky šmírovat. Začne špatně tím, že nikdy nic nemaže, protože „co kdyby se to jednou hodilo“. Gratuluju, právě vznikla digitální půda plná starých exportů, debug logů, bývalých uživatelů a jedné tabulky `old_backup_final_2`.
+
+Privacy-first retence není mazání naslepo. Je to provozní dohoda mezi produktem, supportem, účetnictvím, bezpečností a zákazníkem. Dobrá retenční politika říká: tahle data držíme kvůli tomuto účelu, takhle dlouho, tady se mažou nebo anonymizují, takhle se to ověřuje a tady je výjimka, pokud běží spor, incident nebo zákonná povinnost. Když odpověď zní „navždy, protože databáze to unese“, není to politika. Je to datové křečkování v tričku s logem startupu.
+
+### Začni inventářem datových míst, ne právnickou básní
+
+První chyba je psát retenční dokument od stolu. Retence se má kreslit podle skutečných míst, kde data žijí. V malém SaaS to obvykle nejsou jen produkční tabulky. Jsou to i support tickety, CRM, e-mailový nástroj, analytika, serverové logy, auditní logy, exporty, zálohy, staging kopie, integrační fronty, chybové reporty, fakturační systém a sdílené složky s přílohami od zákazníků.
+
+U každého místa si napiš tři věty:
+
+- Jaký účel data plní dnes.
+- Kdo by si všiml, kdyby data zmizela.
+- Co špatného se stane, když data zůstanou déle, než je potřeba.
+
+Třetí věta bývá nejdůležitější. Staré údaje nejsou neutrální archivní dekorace. Mohou zvýšit škodu při incidentu, zkomplikovat žádost o výmaz, rozmazat analytiku, prodloužit migraci a zbytečně zatížit tým. Data, která už nepomáhají rozhodnutí ani povinnosti, často jen čekají na příležitost stát se problémem.
+
+### Rozděl data podle účelu a bolesti při smazání
+
+Retenční doby nedávej podle názvu tabulky, ale podle účelu. Jedna tabulka `users` může obsahovat aktivní účet, pozvaného člena týmu, bývalého člena, fakturační kontakt, bezpečnostní stopu i marketingový souhlas. Každý z těchto účelů může potřebovat jiný režim.
+
+Praktické rozdělení pro malý produkt:
+
+| Typ dat | Typický účel | Retenční otázka |
+| --- | --- | --- |
+| Účet a profil | Přihlášení, nastavení služby, týmová správa | Co se smaže při zrušení účtu a co musí zůstat kvůli fakturaci nebo auditu? |
+| Provozní obsah zákazníka | Projekty, dokumenty, úkoly, formuláře, nahrané soubory | Jak dlouho po ukončení služby má zákazník možnost exportu? |
+| Fakturační data | Účetnictví, daňové doklady, platby | Jaké zákonné nebo smluvní důvody brání okamžitému smazání? |
+| Support komunikace | Řešení problémů, reklamace, bezpečnostní dotazy | Kdy už ticket nepomáhá a má být anonymizovaný nebo smazaný? |
+| Bezpečnostní a auditní logy | Vyšetření incidentů, ochrana účtů, odpovědnost adminů | Jak dlouho jsou užitečné pro detekci a dokazování, a co nesmí obsahovat nikdy? |
+| Analytika produktu | Zlepšování UX a výkonu | Lze signál držet agregovaně bez identifikátoru uživatele? |
+| Exporty a dočasné soubory | Předání dat zákazníkovi, dávkové zpracování | Proč by připravený soubor měl přežít déle než pár dní? |
+| Zálohy | Obnova po chybě nebo incidentu | Jak dlouho se drží kopie a jak se řeší smazaná data při obnově? |
+
+U každé skupiny doplň i „mazací bolest“: co se musí stát před smazáním. Někde stačí cron job. Někde je potřeba upozornit admina zákazníka, nabídnout export, zablokovat přihlášení, počkat na konec fakturačního období nebo zachovat minimální auditní stopu bez obsahu.
+
+### Retence má být viditelná v produktu
+
+Pokud zákazník neví, co se stane po zrušení účtu, bude se bát zrušit účet. Pokud neví, jak dlouho držíš export, bude si ho preventivně stáhne do tří dalších míst. Pokud neví, zda support ticket smažeš, pošle ti raději méně informací nebo naopak všechno, protože neexistuje jasné vodítko.
+
+Dobrá produktová komunikace nemusí být právní román. Stačí lidská věta na správném místě:
+
+- „Po zrušení workspace zůstane export dostupný 14 dní, potom pracovní data smažeme z aktivních systémů.“
+- „Fakturační doklady uchováváme odděleně podle účetních povinností; produktový obsah v nich nedržíme.“
+- „Připravený CSV export automaticky smažeme po 72 hodinách.“
+- „Bezpečnostní logy neobsahují hesla, tokeny ani obsah zpráv.“
+
+Tohle není jen compliance. Je to UX důvěry. Uživatel se nemusí ptát supportu na věci, které měly být jasné už v rozhraní.
+
+### Mazání musí být workflow, ne ruční rituál
+
+Retenční politika bez automatizace je hezký dokument a špatný provoz. Pro každou datovou skupinu si vyber jeden konkrétní mechanizmus:
+
+- automatické smazání po datu expirace,
+- anonymizace identifikátorů při zachování agregované statistiky,
+- archivace s omezeným přístupem a jasným důvodem,
+- soft-delete s krátkou obnovovací lhůtou,
+- právní hold pro výjimečné situace,
+- ruční schválení tam, kde by automat mohl poškodit zákazníka.
+
+Největší past je soft-delete bez konce. Sloupec `deleted_at` není smazání, pokud nad ním neběží další krok. Je to jen poznámka databázi, že jednou možná uděláš pořádek. Soft-delete používej pro krátkou obnovovací lhůtu, zákaznické potvrzení nebo auditní přechod. Pak musí následovat skutečné smazání, anonymizace nebo přesun do jasně řízeného archivu.
+
+### Zálohy nejsou výmluva pro věčné držení dat
+
+Zálohy mají obnovit provoz, ne porazit retenční politiku. Nemusíš nutně mazat jednotlivý záznam ze všech historických backupů okamžitě, ale musíš vědět, jak dlouho backupy žijí, kdo k nim má přístup a co se stane, když obnovíš starší kopii obsahující už smazaná data.
+
+Praktické pravidlo: po obnově ze zálohy spusť „post-restore retenční úklid“. Ten znovu aplikuje expirace, zablokované účty, smazané exporty a požadavky na výmaz, které se staly po čase vytvoření zálohy. Bez toho může restore vrátit do života data, která už neměla existovat. Zombie data nejsou dobrý hororový subžánr pro B2B SaaS.
+
+### Logy drž krátce, strukturovaně a bez obsahu
+
+Logy jsou častý retenční průšvih, protože se tváří technicky, a proto „méně osobně“. Jenže IP adresa, user agent, user ID, e-mail v error message nebo celý request body mohou být osobní nebo citlivá data. Logování má být navržené stejně vědomě jako databázové schéma.
+
+Minimum pro logy:
+
+- odděl aplikační logy, bezpečnostní audit a infrastrukturu,
+- nikdy neloguj hesla, tokeny, session cookies, API klíče ani celé payloady s osobními daty,
+- používej request ID místo opakovaného opisování identity,
+- pro běžné debug logy nastav krátkou retenci,
+- pro bezpečnostní audit drž jen to, co pomůže vysvětlit akci,
+- přístup k logům dej jen lidem, kteří ho opravdu potřebují.
+
+### Praktický příklad: zrušení workspace v B2B SaaS
+
+Agentura používá SaaS pro správu klientských kampaní. Po roce končí a ruší workspace.
+
+Špatný postup: účet se označí jako „cancelled“, ale projekty, exporty, pozvánky, integrační tokeny, support přílohy a logy zůstanou v systému bez termínu. Nikdo neví, co přesně je pryč a co jen spí.
+
+Lepší privacy-first postup:
+
+1. Admin dostane jasnou informaci, co bude po zrušení smazáno a co zůstane kvůli fakturaci nebo bezpečnostnímu auditu.
+2. Produkt nabídne export pracovních dat s expirací odkazu například za 72 hodin.
+3. Po skončení obnovovací lhůty se deaktivují uživatelé, revokují API klíče, smažou aktivní projekty a nahrané soubory.
+4. Fakturační doklady zůstanou v odděleném systému bez projektového obsahu.
+5. Auditní log drží minimální stopu typu kdo zrušil workspace, kdy a jaký proces proběhl, ne celý obsah kampaní.
+6. Zálohy doběhnou podle své retenční doby a při případné obnově se znovu aplikuje seznam smazaných workspace.
+
+Výsledek: zákazník má kontrolu, tým má důkaz, systém nemá datový hřbitov.
+
+### Checklist: retenční politika bez digitální skládky
+
+- Máme seznam míst, kde se osobní nebo zákaznická data skutečně ukládají.
+- Každá datová skupina má účel, vlastníka a retenční dobu.
+- Umíme vysvětlit rozdíl mezi smazáním, anonymizací, archivací a soft-delete.
+- Dočasné exporty, importy a debug soubory mají krátkou automatickou expiraci.
+- Logy neobsahují tajemství, celé payloady ani zbytečné osobní údaje.
+- Zrušení účtu nebo workspace má konkrétní datový scénář, ne jen změnu statusu.
+- Zálohy mají vlastní retenci a post-restore úklid.
+- Výjimky typu právní hold jsou zdokumentované a časově kontrolované.
+- Zákazník vidí v produktu srozumitelně, co se s daty stane.
+- Retence se kontroluje aspoň čtvrtletně nebo při změně architektury.
+
+### Mini šablona retenční karty
+
+```text
+Datová skupina:
+Systém / umístění:
+Vlastník:
+
+Účel:
+Právní nebo smluvní důvod:
+Kdo data používá:
+
+Retenční doba:
+Spouštěč smazání / anonymizace:
+Technický mechanizmus:
+
+Co se nemaže hned a proč:
+Kde se drží minimální auditní stopa:
+Jak se řeší zálohy:
+
+Co zákazník vidí v produktu:
+Datum poslední kontroly:
+Další kontrola:
+```
+
+### Zdroje k ověření
+
+- [GDPR, čl. 5 na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — zásady účelového omezení, minimalizace, přesnosti, omezení uložení, integrity, důvěrnosti a odpovědnosti správce.
+- [EDPB: Basic principles](https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en) — přehled základních principů GDPR včetně storage limitation a data minimisation.
+- [EDPB: FAQ pro malé podniky](https://www.edpb.europa.eu/sme/find-practical-info/faq_en?page=1) — prakticky připomíná, že uchování osobních údajů má být časově omezené podle účelu zpracování a že organizace mají mít retenční pravidla.
+- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučuje, co logovat, co z logů vyloučit a proč se vyhnout tajemstvím, tokenům a citlivým osobním údajům v logovacích záznamech.
+- [OWASP Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html) — doplňuje doporučení, aby se citlivé session identifikátory nedostávaly do logů.
+
 # Pracovní log
+- 2026-10-10: Doplněna příloha „Retenční politika bez digitální skládky a mazacího alibi“ s inventářem datových míst, rozdělením dat podle účelu, viditelnou produktovou komunikací, automatizovaným mazacím workflow, pravidly pro zálohy, logy, praktickým příkladem zrušení B2B workspace, checklistem, retenční kartou a ověřenými zdroji GDPR, EDPB a OWASP. Pomáhá malým webovým a SaaS týmům mazat data řízeně místo hromadění starých exportů, logů a soft-delete zombie záznamů.
 - 2026-10-10: Doplněna příloha „MFA a passkeys bez SMS iluze a podpůrného pekla“ s rozdělením účtů podle dopadu, doporučením passkeys/WebAuthn, realistickým pohledem na SMS, recovery postupem, step-up ověřením pro citlivé akce, minimalizací bezpečnostních logů, rollout plánem pro B2B SaaS, checklistem, vyplnitelnou MFA kartou a ověřenými zdroji OWASP, NIST, FIDO, W3C a GDPR. Pomáhá malým SaaS týmům zvýšit bezpečnost účtů bez zbytečného sběru telefonních čísel a bez support chaosu při obnově přístupu.
 - 2026-10-10: Doplněna příloha „Lead formuláře bez datového apetitu a falešné kvalifikace“ s praktickým určením účelu formuláře, tříděním polí na nutná, užitečná a pohodlná pro firmu, mikro-vysvětleními, oddělením lead magnetu od newsletteru, progresivním profilováním, bezpečnou validací, kontrolou CRM integrací, příkladem konzultační landing page, checklistem, vyplnitelnou formulářovou kartou a ověřenými zdroji GDPR a EDPB. Pomáhá webům a SaaS týmům sbírat jen data potřebná pro férovou odpověď místo budování leadového datového skladu.
 - 2026-10-10: Doplněna příloha „Webhooky a integrace bez datového průvanu“ s praktickým oddělením příjmu, normalizace a business logiky, kontraktem eventů, ověřováním podpisů, replay ochranou, idempotencí, krátkou retencí raw payloadů, ochranou proti nákladům a SSRF, fakturačním příkladem, checklistem, vyplnitelnou integrační kartou a ověřenými zdroji OWASP, GitHub Docs a CNCF CloudEvents. Pomáhá malým SaaS týmům přijímat integrační eventy bezpečně, opakovatelně a bez zbytečného hromadění osobních dat.
