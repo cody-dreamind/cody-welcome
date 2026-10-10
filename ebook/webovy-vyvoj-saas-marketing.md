@@ -63549,7 +63549,171 @@ Ne každá chyba vyžaduje obnovu celé produkce. Často je bezpečnější obno
 - [OWASP Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html) — doporučení k ochraně dat v klidu, minimalizaci citlivých dat a správě klíčů.
 
 
+# Příloha: E-mailové preference bez odhlašovacího bludiště a marketingové pasti
+
+E-mail je pořád jeden z nejlepších vlastních kanálů. Jenže vlastní kanál neznamená vlastnit člověka. Pokud se uživatel nemůže snadno odhlásit, změnit frekvenci nebo pochopit, proč mu zpráva přišla, nemáš marketingový systém. Máš pomalý generátor stížností.
+
+Dobré preference centrum není jen stránka s checkboxy. Je to dohoda: „Tady je, co ti posíláme, proč, jak často a jak to můžeš změnit.“ V privacy-first SaaS je to stejně důležité jako dobrý onboarding, protože respekt k pozornosti zákazníka je součást produktu.
+
+> Codyho komentář: Když se člověk musí z newsletteru odhlásit přes tři obrazovky, captcha a emoční vydírání typu „opravdu nás opouštíte?“, není to retence. Je to digitální suchý zip na reputaci.
+
+## Nejdřív odděl typy e-mailů podle účelu
+
+Největší chaos vzniká, když tým hází všechny zprávy do jedné škatulky „e-mailing“. Produktový e-mail, faktura, bezpečnostní upozornění a marketingový newsletter ale nejsou stejná věc.
+
+Použij čtyři koše:
+
+| Typ zprávy | Příklad | Preferenční pravidlo |
+| --- | --- | --- |
+| Transakční | reset hesla, potvrzení platby, faktura | neposílat marketing, neodhlašovat kritické doručení |
+| Produktový provoz | změna SLA, plánovaná údržba, bezpečnostní incident | posílat relevantním rolím, držet věcný tón |
+| Vzdělávací obsah | tipy, návody, webináře, případové studie | jasný souhlas nebo legitimní očekávání, snadná změna frekvence |
+| Prodejní marketing | nabídky, kampaně, upsell | nejpřísnější kontrola souhlasu, námitky a odhlášení |
+
+Praktické pravidlo: pokud by zákazník byl oprávněně naštvaný, že zprávu nedostal, pravděpodobně nejde o marketing. Pokud by byl oprávněně naštvaný, že ji dostal, pravděpodobně preference řešíš špatně.
+
+## Preference centrum má odpovídat lidským rozhodnutím
+
+Checkbox „souhlasím s marketingovou komunikací“ je pohodlný pro databázi, ale ne pro člověka. Lepší je nabídnout volby podle toho, co příjemce opravdu řeší.
+
+Minimální struktura:
+
+- **Produktové novinky:** změny funkcí, release notes, nové možnosti účtu.
+- **Praktické tipy:** návody, checklisty, šablony a vzdělávací obsah.
+- **Obchodní nabídky:** akce, balíčky, konzultace, upsell.
+- **Frekvence:** okamžitě, týdenní souhrn, měsíční souhrn, vůbec.
+- **Role:** administrátor, fakturační kontakt, technický kontakt, marketingový kontakt.
+
+Role jsou důležité hlavně v B2B SaaS. Fakturační kontakt nepotřebuje každý produktový tip. Technický administrátor naopak potřebuje vědět o změně SSO, webhooků nebo API limitů. Když role neřešíš, buď lidi spamuješ, nebo jim schováš důležitou informaci pod hromadu marketingové vaty.
+
+## Odhlášení nesmí být trest za důvěru
+
+Každý marketingový e-mail má mít jasnou cestu k odhlášení. Ne „přihlaste se do účtu, najděte nastavení, vzpomeňte si na heslo a možná“. Jedno kliknutí na bezpečný odhlašovací odkaz a možnost potvrdit změnu bez zbytečného sběru dalších dat.
+
+Bezpečnější model:
+
+1. E-mail obsahuje podepsaný, časově rozumně omezený odkaz na preference.
+2. Stránka ukáže aktuální nastavení bez vyžadování hesla, ale nedovolí citlivé změny účtu.
+3. Uživatel může vypnout konkrétní kategorii, snížit frekvenci nebo vypnout všechen marketing.
+4. Systém změnu zapíše do consent/preference logu.
+5. Potvrzení je stručné a neobsahuje další reklamní nátlak.
+
+Pozor na falešné „odhlášení“. Pokud člověk vypne newsletter, ale dál dostává stejný obsah pod nálepkou „produktové novinky“, jen jsi přejmenoval problém. Kategorie musí odpovídat realitě obsahu, ne marketingové kreativitě.
+
+## Co ukládat a co naopak nesbírat
+
+Preference centrum potřebuje data, ale ne román o člověku.
+
+Ukládej:
+
+- e-mail nebo interní ID kontaktu,
+- zdroj preference nebo souhlasu,
+- kategorii komunikace,
+- stav preference,
+- čas změny,
+- právní základ nebo interní důvod,
+- minimální auditní stopu změny.
+
+Nesbírej zbytečně:
+
+- důvod odhlášení jako povinné pole,
+- detailní tracking každého otevření,
+- clickstream mimo vlastní web,
+- osobnostní segmenty bez jasného účelu,
+- data z externích reklamních pixelů.
+
+Pokud chceš zpětnou vazbu, dej nepovinnou otázku typu „Co můžeme zlepšit?“ a dovol ji přeskočit. Povinný důvod odhlášení je marketingový ekvivalent dveří, které se tváří jako otevřené, ale mají kliku jen z jedné strany.
+
+## Preference musí téct do všech systémů
+
+Nastavení je k ničemu, když ho respektuje jen hlavní aplikace a zapomene na CRM, mailing nástroj, support automatizaci nebo prodejní sekvence.
+
+Udělej si jednoduchou mapu:
+
+| Systém | Co posílá | Kde čte preference | Jak rychle se synchronizuje |
+| --- | --- | --- | --- |
+| Aplikace | transakční a produktové zprávy | interní preference tabulka | okamžitě |
+| Mailing nástroj | newsletter a tipy | export segmentu nebo API | do 24 hodin |
+| CRM | obchodní sekvence | suppression list | před každým odesláním |
+| Support | manuální odpovědi a follow-up | karta zákazníka | při otevření ticketu |
+
+Nejbezpečnější je mít jeden zdroj pravdy a ostatní systémy krmit suppression listem nebo API. Když má každý nástroj vlastní „pravdu“, odhlášení začne připomínat whack-a-mole: jednu hlavu zatlačíš, druhá pošle kampaň.
+
+## Praktický příklad: SaaS pro agentury
+
+SaaS posílá tři typy zpráv: měsíční produktové novinky, bezpečnostní oznámení a tipy k automatizaci reportingu. Původně měl jeden globální přepínač „newsletter“. Výsledek: administrátoři se odhlašovali kvůli obchodním nabídkám a pak jim unikaly důležité produktové změny.
+
+Lepší nastavení:
+
+- administrátor vždy dostává bezpečnostní a provozní oznámení k účtu,
+- produktové novinky může přepnout na měsíční souhrn,
+- vzdělávací tipy jsou samostatná volba,
+- obchodní nabídky mají oddělený souhlas a jasné odhlášení,
+- každý e-mail říká, proč přišel: „Dostáváte jako administrátor workspace Novák Agency.“
+
+Výsledek není jen právně čistší. Je i obchodně lepší, protože lidé nevypínají všechno kvůli jedné přestřelené kampani.
+
+## Checklist preference centra
+
+- Má každý marketingový e-mail jasný a funkční odhlašovací odkaz?
+- Umí člověk změnit konkrétní kategorii místo globálního „všechno nebo nic“?
+- Rozlišuje systém transakční, provozní, vzdělávací a prodejní komunikaci?
+- Je právní základ nebo důvod komunikace zapsaný u každé kategorie?
+- Propisují se preference do CRM, mailing nástroje i obchodních sekvencí?
+- Nepoužíváš otevření e-mailu jako hlavní metriku kvality obsahu?
+- Je důvod odhlášení nepovinný?
+- Existuje suppression list pro kontakty, které nesmí dostat marketing?
+- Umíš vysvětlit zákazníkovi, proč konkrétní e-mail dostal?
+- Testuje někdo před kampaní segment i odhlášení, ne jen hezký obrázek v hlavičce?
+
+## Šablona karty e-mailových preferencí
+
+```text
+# Karta e-mailových preferencí
+
+Kontakt / interní ID:
+Role kontaktu:
+Workspace / zákazník:
+
+## Kategorie
+- Transakční zprávy:
+- Provozní oznámení:
+- Produktové novinky:
+- Praktické tipy:
+- Obchodní nabídky:
+
+## Preference
+- Frekvence:
+- Jazyk:
+- Poslední změna:
+- Zdroj změny:
+- Právní základ / důvod:
+
+## Systémy
+- Zdroj pravdy:
+- Mailing nástroj:
+- CRM:
+- Support:
+- Synchronizace:
+
+## Kontrola
+- Funguje odhlašovací odkaz:
+- Je suppression list aktuální:
+- Je obsah správně zařazený:
+- Kdo schvaluje kampaně:
+```
+
+## Zdroje k ověření
+
+- [GDPR / Nařízení (EU) 2016/679](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng) — zejména pravidla pro souhlas, odvolání souhlasu a právo vznést námitku proti zpracování pro účely přímého marketingu.
+- [EDPB Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en) — vodítka k tomu, aby souhlas byl svobodný, konkrétní, informovaný a odvolatelný bez zbytečných překážek.
+- [European Commission — Data protection: rules for business and organisations](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations_en) — rozcestník Evropské komise k pravidlům GDPR pro organizace.
+- [RFC 8058 — Signaling One-Click Functionality for List Email Headers](https://www.rfc-editor.org/rfc/rfc8058) — technický standard pro jedno-klikové odhlášení v hlavičkách hromadných e-mailů.
+
+
 # Pracovní log
+
+- 2026-10-10: Doplněna příloha „E-mailové preference bez odhlašovacího bludiště a marketingové pasti“ s praktickým rozdělením e-mailů podle účelu, návrhem preference centra, bezpečným odhlášením, minimalizací ukládaných dat, synchronizací preferencí do CRM a mailing nástrojů, B2B SaaS příkladem, checklistem, vyplnitelnou kartou a ověřenými zdroji GDPR, EDPB, Evropské komise a RFC 8058. Pomáhá malým webovým a SaaS týmům držet e-mail jako vlastní kanál bez toho, aby z něj udělaly odhlašovací past nebo datový vysavač.
 
 - 2026-10-10: Doplněna příloha „Obnova ze záloh bez falešného klidu a datového guláše“ s praktickým rozdělením systémů podle obnovovací bolesti, RPO/RTO větami, restore testem, správou šifrovacích klíčů, retenčním vztahem záloh, runbookem obnovy, příkladem chybné migrace, checklistem, vyplnitelnou restore kartou a ověřenými zdroji NIST, GDPR a OWASP. Pomáhá malým webovým a SaaS týmům zjistit, jestli zálohy opravdu chrání provoz a data zákazníků, nebo jen hezky vypadají v checklistu.
 
