@@ -64089,7 +64089,192 @@ Owner organizace může stáhnout celý migrační balík. Projektový manažer 
 - OWASP CSV Injection — popis formula injection rizik v exportech do tabulek: https://community.owasp.org/attacks/CSV_Injection
 - OWASP File Upload Cheat Sheet — praktické principy bezpečné práce se soubory a nedůvěryhodnými metadaty: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
 
+## Příloha: Webhooky a integrace bez datového průvanu
+
+Webhook je malá věc s velkým dopadem: cizí systém ti pošle HTTP požadavek a tvůj produkt podle něj změní stav. Platba je zaplacená. Faktura je vystavená. Lead přišel z formuláře. Uživatel byl odebrán ze SSO skupiny. Krásné — dokud stejný endpoint nezačne přijímat neověřené požadavky, duplicitní eventy, obří payloady nebo osobní data, která v produktu nikdy neměla skončit.
+
+Privacy-first integrace není sběrná vana na všechno, co partner pošle. Je to přesně vymezený vstup: víš, kdo posílá, co posílá, proč to posílá, jak dlouho to držíš a co se stane, když doručení selže. Jinak z webhooku vznikne datový průvan — venku je hezky, ale v účtárně lítají papíry.
+
+### Nejdřív odděl událost od rozhodnutí
+
+Webhook by měl říkat „stalo se X“, ne automaticky „udělej všechno, co mě zrovna napadne“. V praxi se vyplatí rozdělit integraci do tří vrstev:
+
+- **Příjem**: ověř podpis, zkontroluj velikost, ulož minimální obálku a vrať rychlou odpověď.
+- **Normalizace**: převeď payload na interní event s verzí schématu, tenantem, zdrojem a korelačním ID.
+- **Business akce**: až potom změň stav objednávky, licence, role, faktury nebo kampaně.
+
+Tohle rozdělení chrání produkt před dvěma běžnými chybami: endpoint nedělá těžkou práci v requestu a zároveň nepouští cizí payload přímo do doménové logiky. Webhook není remote control pro tvůj SaaS. Je to hlášení, které musí projít recepcí.
+
+### Každý webhook má mít kontrakt
+
+U každé integrace napiš krátký kontrakt. Nemusí to být román, stačí pracovní karta:
+
+- zdroj systému a vlastník integrace,
+- seznam přijímaných event typů,
+- verze payload schématu,
+- povinné identifikátory: event ID, tenant ID, subject ID, timestamp,
+- pole s osobními údaji a jejich účel,
+- retenční pravidlo pro raw payload a normalizovaný event,
+- retry pravidla a idempotency klíč,
+- kontaktní postup při incidentu nebo změně schématu.
+
+Pokud dodavatel žádné stabilní event ID neposílá, vytvoř interní deduplikační klíč z kombinace zdroje, typu eventu, externího objektu a času změny. Není to tak dobré jako skutečné ID, ale pořád lepší než doufat, že internet posílá požadavky jednou a ve správném pořadí. Internet nedělá ani jedno, protože internet je kočka s klávesnicí.
+
+### Podpis ověř před parsováním a ukládáním
+
+Webhook endpoint musí před zpracováním ověřit, že požadavek opravdu poslal očekávaný zdroj a že payload nebyl změněn. Praktický základ:
+
+- používej unikátní secret pro každou integraci a prostředí,
+- ověřuj HMAC podpis nad přesným raw body, pokud to protokol vyžaduje,
+- používej konstantní porovnání podpisů, ne obyčejné `==`,
+- odmítej chybějící nebo slabší legacy podpisy, pokud máš bezpečnější variantu,
+- loguj jen výsledek ověření, identifikátory a chybu, ne celý payload.
+
+GitHub například doporučuje ověřovat `X-Hub-Signature-256` pomocí HMAC-SHA256 nad payloadem a tajemstvím webhooku. Důležitý detail: podpis se často počítá nad původním tělem requestu. Když framework payload nejdřív přepíše, přeparsuje nebo změní kódování, validace může selhat — a tým pak dvě hodiny obviňuje DNS, což je tradiční rituál vývoje.
+
+### Replay ochrana není bonus
+
+Validní podpis sám o sobě nemusí znamenat čerstvý požadavek. Útočník nebo chyba v infrastruktuře může zkusit doručit stejný payload znovu. Proto sleduj:
+
+- timestamp v podepsaném materiálu, pokud ho poskytovatel podporuje,
+- toleranční okno pro stáří požadavku,
+- unikátní event ID nebo delivery ID,
+- deduplikační tabulku s krátkou, ale dostatečnou retencí,
+- stav zpracování: přijato, zpracovává se, hotovo, selhalo, ignorováno jako duplicita.
+
+U plateb a billing eventů ber idempotenci jako povinnou bezpečnostní vlastnost. Stejný `payment_succeeded` event nesmí vystavit dvě faktury, prodloužit dvě licence nebo poslat zákazníkovi dva e-maily „hurá, zaplaceno“. Jedno hurá stačí. Dvě už zní jako účetní poltergeist.
+
+### Rychle potvrď příjem, práci dělej bokem
+
+Webhook endpoint by měl být rychlý a nudný. Přijme, ověří, uloží obálku, zařadí práci do fronty a odpoví. Těžká logika patří do workeru, kde máš retry, timeouty a lepší monitoring.
+
+Minimální provozní model:
+
+1. Endpoint přijme request přes HTTPS.
+2. Zkontroluje metodu, content type a limit velikosti.
+3. Ověří podpis a případnou čerstvost.
+4. Zapíše event ID, zdroj, typ, čas, hash payloadu a tenant.
+5. Pokud je event duplicita, bezpečně odpoví bez druhého zpracování.
+6. Pokud je nový, pošle interní job do fronty.
+7. Worker zpracuje business akci idempotentně.
+8. Výsledek se uloží do auditního nebo integračního logu.
+
+Tím chráníš sebe i dodavatele. Když endpoint čeká na externí API, databázovou migraci nebo generování PDF, snadno překročí timeout poskytovatele a ten začne retryovat. A najednou nemáš integraci, ale malý DDoS s logem platební brány.
+
+### Minimalizuj payload a raw data
+
+Raw webhook payload se hodí při ladění, ale nesmí se stát věčným archivem cizích dat. U každého eventu rozhodni:
+
+- potřebujeme ukládat celé tělo, nebo stačí hash a vybraná pole?
+- obsahuje payload osobní údaje, fakturační údaje nebo interní poznámky?
+- jak dlouho raw payload potřebujeme pro replay a diagnostiku?
+- kdo ho smí vidět v adminu nebo log vieweru?
+- dá se citlivá hodnota maskovat už při příjmu?
+
+Privacy-first výchozí nastavení: ukládej normalizovaný interní event a raw payload drž krátce jen pro diagnostiku. U citlivých integrací přidej maskování, šifrování na úložišti a oddělené oprávnění pro zobrazení payloadu. Support obvykle nepotřebuje vidět celé tělo platebního webhooku; potřebuje vědět, že event přišel, prošel validací a jaký stav změnil.
+
+### Endpoint chraň i před náklady
+
+Webhook je API endpoint, takže platí stejná rizika jako u API: slabá autentizace, chybějící autorizace, neomezená spotřeba zdrojů a unsafe consumption of APIs. Praktické brzdy:
+
+- limit velikosti requestu,
+- allowlist event typů,
+- rate limit podle zdroje nebo endpointu,
+- timeout pro zpracování,
+- žádné automatické volání interních URL z payloadu,
+- žádné stahování souborů bez samostatné validace,
+- bezpečné chyby bez detailů o interní architektuře.
+
+Pozor na SSRF: pokud payload obsahuje URL, neznamená to, že ji má backend poslušně navštívit. Nejdřív ověř doménu, schéma, velikost, MIME typ a účel. U malého SaaS je často bezpečnější stáhnout externí soubor až po ruční akci uživatele než automaticky při každém webhooku.
+
+### Praktický příklad: fakturační integrace
+
+Představ si B2B SaaS, který přijímá webhooky z fakturačního nástroje:
+
+- `invoice.created`,
+- `invoice.paid`,
+- `invoice.cancelled`,
+- `customer.updated`.
+
+Bezpečný návrh:
+
+- každý event má externí event ID a tenant mapping,
+- endpoint ověřuje podpis nad raw body,
+- raw payload se drží 7 dní pro diagnostiku a potom se smaže,
+- normalizovaný event obsahuje jen typ, externí ID faktury, částku, měnu, stav a čas,
+- `invoice.paid` je idempotentní podle externího ID faktury,
+- změna licence se provede jen tehdy, když faktura patří známému tenantovi,
+- support vidí stav doručení a výsledek, ne celý payload,
+- každé selhání jde do dead-letter fronty s důvodem a bezpečným retry postupem.
+
+Výsledek: zákazník dostane správnou licenci, tým má auditní stopu a produkt nemusí skladovat každou fakturační drobnost navždy jen proto, že přišla v JSONu.
+
+### Checklist: webhooky bez datového průvanu
+
+- [ ] Každá integrace má vlastníka, účel a seznam povolených eventů.
+- [ ] Endpoint ověřuje podpis před parsováním a zpracováním.
+- [ ] Secret je unikátní pro prostředí i integraci a neleží v repozitáři.
+- [ ] Existuje replay ochrana: timestamp, event ID nebo deduplikační klíč.
+- [ ] Business logika je idempotentní a zvládá duplicitní doručení.
+- [ ] Raw payload má krátkou retenci nebo se vůbec neukládá.
+- [ ] Citlivá pole jsou maskovaná v logu i supportním UI.
+- [ ] Endpoint má limit velikosti, timeout a rate limit.
+- [ ] Selhané eventy jdou do fronty nebo dead-letter přehledu.
+- [ ] Změna schématu má test a kontakt na dodavatele.
+
+### Mini šablona integrační karty
+
+```md
+## Integrace
+Název:
+Zdroj systému:
+Vlastník u nás:
+Vlastník u dodavatele:
+Účel:
+
+## Eventy
+Povolené typy:
+Verze schématu:
+Povinné identifikátory:
+Idempotency klíč:
+
+## Bezpečnost
+Podpis / autentizace:
+Replay ochrana:
+Secret uložen kde:
+Rotace secretu:
+Limit velikosti requestu:
+
+## Data
+Osobní údaje v payloadu:
+Raw payload ukládáme:
+Retence raw payloadu:
+Maskovaná pole:
+Kdo smí vidět detail:
+
+## Provoz
+Fronta / worker:
+Retry pravidla:
+Dead-letter postup:
+Alert při selhání:
+Testovací eventy:
+
+## Privacy-first kontrola
+Dá se posílat méně dat:
+Dá se raw payload neukládat:
+Dá se použít EU provoz nebo přímé API s menším rozsahem:
+```
+
+### Zdroje k ověření
+
+- [OWASP Webhook Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Webhook_Security_Cheat_Sheet.html) — praktická doporučení pro podpisy, replay ochranu, deduplikaci, rotaci secretů, SSRF rizika a bezpečné zpracování webhooků.
+- [GitHub Docs: Validating webhook deliveries](https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries) — příklad ověřování webhook podpisu přes HMAC-SHA256, bezpečné uložení secretu a konstantní porovnání podpisů.
+- [GitHub Docs: Best practices for using webhooks](https://docs.github.com/en/enterprise-cloud@latest/webhooks/using-webhooks/best-practices-for-using-webhooks) — doporučení pro HTTPS, rychlou odpověď endpointu, fronty, redelivery a provozní odolnost webhooků.
+- [OWASP API Security Top 10 2023](https://api-security.owasp.org/editions/2023/en/0x11-t10/) — rizika relevantní pro integrační endpointy, zejména autentizace, autorizace, spotřeba zdrojů, citlivé business flow a unsafe consumption of APIs.
+- [CNCF CloudEvents specification](https://github.com/cloudevents/spec) — vendor-neutral model pro popis event dat, užitečný jako inspirace pro interní normalizovaný event kontrakt.
+
 # Pracovní log
+- 2026-10-10: Doplněna příloha „Webhooky a integrace bez datového průvanu“ s praktickým oddělením příjmu, normalizace a business logiky, kontraktem eventů, ověřováním podpisů, replay ochranou, idempotencí, krátkou retencí raw payloadů, ochranou proti nákladům a SSRF, fakturačním příkladem, checklistem, vyplnitelnou integrační kartou a ověřenými zdroji OWASP, GitHub Docs a CNCF CloudEvents. Pomáhá malým SaaS týmům přijímat integrační eventy bezpečně, opakovatelně a bez zbytečného hromadění osobních dat.
 - 2026-10-10: Doplněna příloha „Zákaznické exporty bez CSV pasti a datového přestřelu“ s rozdělením exportů podle účelu, datovým kontraktem, minimalizací polí, oprávněními, asynchronním generováním, obranou proti CSV injection, retenčním modelem, praktickým příkladem, checklistem, exportní kartou a ověřenými zdroji GDPR, RFC 4180, W3C a OWASP. Pomáhá SaaS týmům dát zákazníkům kontrolu nad daty bez nechtěného úniku citlivých informací.
 
 
