@@ -62602,225 +62602,194 @@ Výsledek není největší možný export. Je to bezpečná odpověď, která r
 - EDPB Guidelines 01/2022 — právo na přístup a praktické výklady k žádostem: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
 
 
-# Příloha: Webhooky a integrace bez datové díry a tichých překvapení
+# Příloha: SSO pro B2B SaaS bez enterprise divadla a přístupového chaosu
 
-Webhook je malá věc s velkým egem. Vypadá jako obyčejný HTTP request, ale ve skutečnosti je to dohoda mezi dvěma systémy: „Když se u mě něco stane, pošlu ti zprávu a ty podle ní něco uděláš.“ To je skvělé pro SaaS, automatizaci i marketingové provozy. A taky je to krásná zkratka k průšvihu, pokud webhook posílá moc dat, nemá podpis, opakuje se bez idempotence nebo skončí v nástroji, který nikdo po třech měsících nehlídá.
+SSO často zní jako funkce pro obří firmy s právním oddělením, třemi procurement portály a chutí posílat Excel s požadavky v pátek večer. Jenže i malý B2B SaaS rychle narazí na stejnou otázku: kdo smí do firemního workspace, kdo už tam nemá být a jak se přístup ukončí, když člověk odejde z firmy?
 
-Tahle příloha pomáhá malým týmům navrhnout webhooky a integrace tak, aby byly užitečné, auditovatelné a datově střídmé. Nejde o akademickou čistotu. Jde o to, aby fakturační SaaS, CRM, e-mailový nástroj, support systém nebo interní automatizace nepřenesly osobní data tam, kde nemají co dělat.
+Tahle příloha je praktický návrh, jak začít se SSO, doménovým ověřením a řízením přístupů bez toho, aby se z produktu stala bezpečnostní katedrála. Cíl není mít nejvíc přepínačů. Cíl je, aby zákazník dokázal bezpečně přivést tým, odebrat bývalého kolegu a doložit, že přístup není postavený na věčných pozvánkách v e-mailu.
 
-*Codyho komentář:* Webhook bez datové mapy je jako dveře bez kliky, štítku a zámku. Možná funguje. Jen nikdo neví, kdo jimi chodí. Krásná architektura, dokud nezačne hořet.
+*Codyho komentář:* SSO není „enterprise paywall s kravatou“. Je to způsob, jak zákazníkovi nechat kontrolu nad vlastními lidmi. Paywall může být obchodní rozhodnutí. Bezpečnostní chaos je jen drahý koníček.
 
-## Začni integrační kartou, ne endpointem
+## Nejdřív odděl identitu, členství a oprávnění
 
-Než vznikne první `POST /webhooks`, napiš krátkou integrační kartu. U každé integrace musí být jasné:
+U B2B SaaS se často pletou tři vrstvy:
 
-- jaké rozhodnutí nebo proces integrace podporuje,
-- kdo je vlastníkem na straně produktu a kdo na straně provozu,
-- jaká data tečou ven a dovnitř,
-- jestli jde o osobní údaje, obchodní tajemství, provozní metadata nebo anonymní signál,
-- jak dlouho se data drží v cílovém systému,
-- jak integraci vypneš bez rozbití zákaznické práce.
+- **Identita** — kdo se přihlásil a jak byla ověřena jeho totožnost.
+- **Členství** — do kterého workspace, organizace nebo týmu patří.
+- **Oprávnění** — co smí v produktu dělat.
 
-GDPR čl. 25 vyžaduje ochranu údajů už při návrhu a ve výchozím nastavení, ne až jako závěrečnou dekoraci na release checklistu ([EUR-Lex: GDPR, článek 25](https://eur-lex.europa.eu/eli/reg/2016/679/oj)). EDPB k tomu prakticky zdůrazňuje, že systémy mají být navržené s minimalizací a ochranou práv subjektů údajů od začátku ([EDPB: Data protection by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)).
+SSO řeší hlavně identitu. Neřeší automaticky dobrý model rolí, bezpečné invite flow ani ukončení přístupů. Pokud už dnes v produktu není jasné, kdo je owner, admin, billing contact, support viewer nebo běžný člen, SSO jen rychleji přivede víc lidí do stejného chaosu.
 
-Praktické pravidlo: pokud nedokážeš jednou větou vysvětlit, proč konkrétní pole ve webhooku existuje, pole do payloadu nepatří.
+Praktické minimum před SSO:
 
-## Posílej událost, ne databázový šuplík
+- každý workspace má aspoň jednoho vlastníka,
+- role jsou navázané na citlivé akce, ne na kreativní názvy,
+- pozvánky mají expiraci,
+- změny rolí se auditují,
+- zrušení účtu nebo členství neodstraňuje auditní stopu,
+- support tým neumí obejít zákaznickou správu přístupů bez auditované výjimky.
 
-Špatný webhook vypadá takhle: „Pošleme celý objekt zákazníka, celou objednávku a celé nastavení účtu, protože se to možná bude hodit.“ To není integrace, to je datový výprodej v igelitce.
+OWASP Authentication Cheat Sheet doporučuje řešit autentizaci společně s bezpečným resetem, session managementem, MFA a ochranou proti útokům na přihlášení, ne jako izolované tlačítko „Login“ ([OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)).
 
-Dobrý webhook posílá minimální událost:
+## Doménové ověření není vlastnictví firmy
 
-```json
-{
-  "event_id": "evt_01H...",
-  "event_type": "invoice.paid",
-  "occurred_at": "2026-10-10T09:00:00Z",
-  "workspace_id": "wrk_123",
-  "invoice_id": "inv_456",
-  "amount_cents": 240000,
-  "currency": "CZK"
-}
-```
+Doménové ověření pomáhá prokázat, že zákazník kontroluje e-mailovou nebo DNS doménu. Typicky přes DNS TXT záznam nebo e-mailové ověření administrátora. To je užitečné pro automatické přiřazení uživatelů, nastavení SSO nebo omezení pozvánek. Ale není to totéž jako právní vlastnictví firmy.
 
-Do payloadu typicky nepatří celé jméno zákazníka, e-mail plátce, interní poznámky supportu, IP adresa, kompletní billing adresa nebo seznam uživatelů workspace. Pokud příjemce potřebuje detail, ať si ho vyžádá přes autorizované API podle svých oprávnění. OWASP API Security Top 10 2023 spojuje nadměrné vystavení polí a mass assignment pod problém Broken Object Property Level Authorization — jinými slovy: nebezpečí často není jen v endpointu, ale v tom, která pole dovolíš číst nebo měnit ([OWASP API Security Top 10 2023](https://api-security.owasp.org/editions/2023/en/0x11-t10/)).
+Pravidlo: doména je technický signál, ne právní kouzlo.
 
-Privacy-first varianta:
+Dobré použití doménového ověření:
 
-- payload obsahuje identifikátory a stav, ne celé profily,
-- citlivý detail se načítá až na vyžádání a jen pro oprávněný účel,
-- interní poznámky, support kontext a bezpečnostní signály se neposílají do marketingových ani automatizačních nástrojů,
-- každá nová verze payloadu má changelog a datum účinnosti.
+- povolit SSO pro `firma.cz`,
+- omezit nové pozvánky jen na firemní doménu,
+- zobrazit adminovi seznam uživatelů s odpovídající doménou,
+- upozornit na osobní e-maily v pracovním workspace,
+- umožnit bezpečnější claim workspace po ručním ověření.
 
-## Podepisuj zprávy a braň replay útokům
+Rizikové použití:
 
-Příjemce webhooku musí ověřit, že zprávu opravdu poslal očekávaný systém. Nestačí tajný URL token typu `/webhook/super-secret-please-dont-guess`. URL se kopíruje do logů, ticketů, dokumentace i monitoringu. Tajemství v URL je tajemství jen do první páteční migrace.
+- automaticky převzít všechny účty s danou e-mailovou doménou,
+- přesunout historické osobní účty do firemního workspace bez potvrzení,
+- ukázat adminovi kompletní seznam všech existujících účtů s doménou,
+- změnit billing nebo vlastnictví jen na základě DNS záznamu.
 
-OWASP Webhook Security Cheat Sheet doporučuje pro ověřování používat HMAC podpis, ideálně HMAC-SHA256, ověřovat podpis u každého doručení, používat náhodný signing secret pro každý webhook a zahrnout timestamp do podepsaného materiálu kvůli omezení replay útoků ([OWASP Webhook Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Webhook_Security_Cheat_Sheet.html)).
+Privacy-first varianta: po ověření domény zobrazuj agregované nebo omezené informace. Například „3 uživatelé používají firemní doménu mimo tento workspace“ je bezpečnější než rovnou ukázat jejich e-maily a aktivitu.
 
-Praktický model:
+## OIDC bývá lepší první krok než vlastní SAML peklo
 
-- každý webhook endpoint má vlastní signing secret,
-- publisher podepíše timestamp a raw body,
-- receiver odmítne zprávu se starým timestampem,
-- receiver drží krátkou replay cache podle `event_id` nebo podpisu,
-- rotace secretu má přechodné období, kdy platí starý i nový podpis,
-- chybné podpisy se logují jako bezpečnostní událost, ne jako běžná validační chyba.
+Pro moderní SaaS je často praktičtější začít s OpenID Connect než hned stavět plnou SAML konfiguraci pro každý zákaznický vesmír. OpenID Connect je identity vrstva nad OAuth 2.0 a definuje mimo jiné `id_token`, discovery a standardizované informace o přihlášeném uživateli ([OpenID Connect Core 1.0](https://openid.net/specs/openid-connect-core-1_0.html)). OAuth 2.0 je autorizační framework a RFC 6749 výslovně řeší delegovanou autorizaci mezi klientem, resource ownerem a serverem ([RFC 6749](https://www.rfc-editor.org/rfc/rfc6749)).
 
-Ukázka kontrolního algoritmu:
+Prakticky:
 
-1. přečti raw body bez přeformátování JSONu,
-2. přečti `X-Webhook-Timestamp` a `X-Webhook-Signature`,
-3. zkontroluj toleranci času, třeba pět minut podle rizika,
-4. spočítej HMAC nad `timestamp + "." + raw_body`,
-5. porovnej podpis konstantním časem,
-6. ověř, že `event_id` ještě nebylo zpracováno,
-7. až potom proveď business akci.
+- pro nové integrace preferuj OIDC, pokud zákaznický IdP umí rozumnou konfiguraci,
+- SAML podporuj až ve chvíli, kdy ho opravdu vyžaduje cílový segment,
+- nikdy nemíchej `id_token` jako univerzální API token,
+- validuj issuer, audience, expiraci a podpis tokenu,
+- mapování claimů drž explicitní a auditované,
+- změnu IdP konfigurace považuj za bezpečnostní změnu, ne běžné nastavení profilu.
 
-## Idempotence je levnější než omluvný e-mail
+Pokud stavíš SSO poprvé, nepiš vlastní kryptografii a vlastní token parser. Použij ověřenou knihovnu, drž se standardů a testuj selhání: špatný issuer, starý token, jiná audience, chybějící e-mail, neověřený e-mail, změna klíčů.
 
-Webhook se může doručit dvakrát. Nebo pětkrát. Nebo přesně ve chvíli, kdy tvoje databáze dělá údržbu a fronta se rozhodne být kreativní. Proto příjemce nesmí předpokládat, že každá zpráva je nová.
+## Auto-provisioning drž konzervativní
 
-Každá událost potřebuje stabilní `event_id`. Příjemce si uloží stav zpracování: přijato, zpracovává se, hotovo, selhalo, ignorováno. Když přijde stejná událost znovu, nesmí vytvořit druhou fakturu, druhý účetní zápis, druhý e-mail zákazníkovi nebo druhý interní ticket.
+Auto-provisioning je lákavý: uživatel se přihlásí přes firemní IdP a účet vznikne automaticky. Jenže automatické vytvoření účtu neznamená automatické právo vidět faktury, exporty, zákaznická data nebo nastavení workspace.
 
-Praktický vzor:
+Bezpečný start:
 
-- `event_id` je unikátní napříč zdrojovým systémem,
-- business operace používá vlastní idempotency key,
-- opakované doručení vrací `2xx`, pokud je původní zpracování hotové,
-- retry politika má exponenciální backoff a maximální dobu doručování,
-- ruční replay je auditovaná admin akce,
-- dead-letter fronta má vlastníka a pravidelný úklid.
+- první přihlášení přes SSO vytvoří účet ve stavu „čeká na schválení“ nebo s nejnižší rolí,
+- vyšší role přiděluje zákaznický admin,
+- auto-join funguje jen pro ověřenou doménu a konkrétní workspace,
+- osobní e-mail mimo doménu vyžaduje ruční pozvánku,
+- změna e-mailu neobchází kontrolu domény,
+- zrušený uživatel se při dalším SSO loginu neaktivuje potichu zpět.
 
-Tohle není jen technická elegance. Je to zákaznická důvěra. Nikdo nechce vysvětlovat, proč automatizace „jen jednou“ poslala pět pozvánek do produkčního workspace.
+SCIM může později pomoct s automatickým zakládáním a rušením uživatelů, ale pro malý SaaS je první hodnota často jednodušší: přihlášení přes zákaznický IdP, jasná role po prvním vstupu a auditovaný offboarding.
 
-## Odděl integrační oprávnění od uživatelských účtů
+## MFA nech zákazníkovi, ale citlivé akce chraň i u sebe
 
-Integrace nemá používat osobní účet zakladatele, admina nebo support agenta. Použij samostatný integrační token nebo servisní účet s minimálním oprávněním. Pokud integrace jen přijímá událost o zaplacené faktuře, nemá mít právo číst všechny uživatele, mazat projekty nebo exportovat zákaznická data.
+Když zákazník používá SSO, část odpovědnosti za autentizaci přechází na jeho identity provider. To neznamená, že produkt rezignuje na ochranu citlivých akcí.
 
-OWASP řadí chybné řízení přístupu a nadměrná oprávnění mezi klíčová API rizika; u integrací to bolí dvojnásob, protože token často žije déle než běžná session a pracuje bez lidského dohledu ([OWASP API Security Top 10 2023](https://api-security.owasp.org/editions/2023/en/0x11-t10/)).
+NIST SP 800-63B popisuje autentizační assurance levels a zdůrazňuje odolnost autentizátorů podle rizika; prakticky z toho plyne, že různé akce mohou vyžadovat různou sílu ověření ([NIST SP 800-63B](https://pages.nist.gov/800-63-3/sp800-63b.html)).
 
-Minimální sada pravidel:
+U citlivých akcí zvaž step-up kontrolu nebo aspoň bezpečnostní potvrzení:
 
-- token má jasný účel a vlastníka,
-- token má scope podle konkrétní integrace,
-- token má expiraci nebo pravidelnou review,
-- token nejde zobrazit znovu po vytvoření,
-- token se ukládá jen jako hash nebo v bezpečném secrets úložišti,
-- každé použití tokenu se loguje bez ukládání payloadu navíc.
+- změna billing údajů,
+- export všech dat workspace,
+- rotace API klíčů,
+- změna SSO konfigurace,
+- přidání nového admina,
+- vypnutí auditních nebo bezpečnostních notifikací,
+- mazání workspace.
 
-## Marketingové a no-code integrace drž na vodítku
+Privacy-first detail: step-up nemusí znamenat sběr biometrie nebo invazivní device fingerprinting. Často stačí znovu ověřit session, vyžádat potvrzení přes IdP, poslat bezpečnostní notifikaci adminům a zapsat auditní událost.
 
-No-code automatizace je užitečná. Umí zachránit týdny vývoje. Ale taky umí potichu poslat zákaznický e-mail, poznámku z CRM, obsah formuláře a interní tag do pěti nástrojů, které nikdo neviděl od Q2.
+## SSO konfigurace musí mít záchranný vchod
 
-Privacy-first pravidlo: každá automatizace má být čitelná pro člověka, který ji nepsal. U každého kroku musí být jasné, jaký signál bere, kam ho posílá a proč. Pokud nástroj běží mimo Evropu nebo nedává dobrou kontrolu nad subprocesory, zvaž evropskou alternativu, vlastní malý worker nebo obyčejný server-side job.
+Nejhorší SSO incident je ten, kdy si zákazník špatně nastaví IdP a zamkne ven celý tým včetně admina. Proto potřebuješ break-glass scénář. Ne jako tajný admin účet v poznámkách, ale jako řízený proces.
 
-Pro marketing stačí často méně:
+Pravidla:
 
-- místo posílání celého lead profilu pošli jen `lead_submitted` a interní ID,
-- místo externího enrichmentu se zeptej člověka ve formuláři na jednu relevantní věc,
-- místo sledovacího pixelu použij agregovanou analytiku a UTM ve vlastních logách,
-- místo automatické segmentace podle chování použij explicitní preference uživatele,
-- místo nekonečné synchronizace všech kontaktů posílej jen ty, kteří dali konkrétní souhlas nebo mají jasný B2B účel.
+- každý workspace má aspoň dva vlastníky nebo nouzový kontakt,
+- změna SSO konfigurace vyžaduje testovací login před vynucením,
+- vynucení SSO má odklad nebo potvrzení druhým adminem,
+- break-glass přístup je časově omezený,
+- použití break-glass přístupu se oznámí vlastníkům,
+- support nemění SSO bez ověření oprávněné osoby.
 
-## Verze webhooků neřeš až v den rozbití
+Tohle je přesně místo, kde jednoduchý runbook ušetří víc než další nastavení v UI.
 
-Webhook je rozhraní. A rozhraní potřebuje verze. Jakmile má příjemce postavenou automatizaci na určitém tvaru payloadu, náhlá změna názvu pole je produkční incident v převleku za „malý refaktor“.
+## Praktický příklad: projektový SaaS pro agentury
 
-Doporučený provozní rytmus:
+Agentura má 42 lidí a používá projektový SaaS. Chce, aby se zaměstnanci přihlašovali přes firemní IdP a aby po odchodu z firmy ztratili přístup i do SaaS.
 
-- přidávání nových volitelných polí je bezpečnější než přejmenování stávajících,
-- breaking change má novou verzi endpointu nebo event typu,
-- stará verze má oznámené datum ukončení,
-- zákazník vidí poslední úspěšné doručení a aktuální verzi,
-- dokumentace obsahuje příklad payloadu pro každý event,
-- testovací webhook jde poslat z administrace bez zásahu vývojáře.
+První dobrá iterace:
 
-Malý SaaS nemusí mít portál jako Stripe. Ale měl by mít aspoň stránku „Integrace“, kde zákazník vidí endpointy, stav podpisu, poslední doručení, chyby a tlačítko pro rotaci secretu.
+- agentura ověří doménu přes DNS TXT,
+- admin nastaví OIDC provider a provede test login,
+- nové účty z domény dostanou výchozí roli `member`,
+- role `admin` a `billing` se přidělují ručně,
+- vynucení SSO se zapne až po potvrzení druhého ownera,
+- osobní účty mimo doménu zůstanou jako externí spolupracovníci,
+- změny SSO a rolí se zapisují do audit logu,
+- při incidentu existuje časově omezený break-glass postup.
 
-## Praktický příklad: fakturační SaaS posílá zaplacenou fakturu do CRM
+Co se neposílá ani neukazuje zbytečně:
 
-Situace: B2B fakturační SaaS chce po zaplacení faktury poslat signál do CRM, aby obchodník viděl, že zákazník je aktivní a může řešit rozšíření účtu.
+- seznam všech účtů s danou doménou mimo workspace,
+- aktivita jednotlivých lidí napříč jinými workspaces,
+- detaily IdP logů, které produkt nepotřebuje,
+- interní support poznámky k ověření zákazníka.
 
-Špatná varianta:
+Výsledek: zákazník získá kontrolu nad přihlášením, produkt nezíská zbytečnou kopii identity světa a support má méně ručního hašení.
 
-- webhook posílá celé zákaznické konto,
-- payload obsahuje e-maily všech uživatelů workspace,
-- CRM dostane billing adresu, interní poznámku a historii plateb,
-- endpoint je chráněný jen náhodným URL,
-- opakované doručení vytvoří duplicitní aktivitu,
-- nikdo neví, kdo integraci vlastní.
+## Checklist: SSO bez přístupového chaosu
 
-Lepší varianta:
+- [ ] Má workspace jasné vlastníky, role a audit změn?
+- [ ] Je doménové ověření oddělené od právního vlastnictví firmy?
+- [ ] Nezobrazujeme adminovi zbytečné osobní údaje účtů mimo jeho workspace?
+- [ ] Validujeme issuer, audience, expiraci, podpis a klíče tokenu?
+- [ ] Má první SSO login bezpečnou výchozí roli?
+- [ ] Nejde se potichu reaktivovat po zrušení přístupu?
+- [ ] Má SSO konfigurace testovací login před vynucením?
+- [ ] Existuje break-glass postup s časovým omezením a auditní stopou?
+- [ ] Citlivé akce mají step-up kontrolu nebo bezpečnostní potvrzení?
+- [ ] Zákazník ví, co SSO řeší a co pořád zůstává v rolích produktu?
 
-- webhook `invoice.paid` posílá jen `event_id`, `workspace_id`, `invoice_id`, částku, měnu a čas,
-- CRM aktivita vznikne jednou podle idempotency key `invoice_paid:inv_456`,
-- detail zákazníka se v CRM doplní jen z polí, která už CRM oprávněně drží,
-- webhook je podepsaný HMAC podpisem a timestampem,
-- integrační token má scope `crm.activity.write`,
-- zákazník v administraci vidí, že integrace CRM přijímá platební signály,
-- při vypnutí integrace se zastaví nové události a zůstane auditní stopa.
-
-Výsledek: obchod dostane užitečný signál, ale CRM se nestane druhou neřízenou kopií fakturační databáze.
-
-## Checklist: webhook bez datové díry
-
-- [ ] Má integrace vlastníka, účel a datovou mapu?
-- [ ] Posílá payload jen minimální událost, ne celý interní objekt?
-- [ ] Jsou osobní údaje, interní poznámky a bezpečnostní signály explicitně vyloučené?
-- [ ] Ověřuje příjemce HMAC podpis nad raw body a timestampem?
-- [ ] Existuje ochrana proti replay útokům a duplicitnímu zpracování?
-- [ ] Má každá událost stabilní `event_id` a idempotency pravidlo?
-- [ ] Má integrační token minimální scope, vlastníka a rotaci?
-- [ ] Je retry politika omezená a pozorovatelná?
-- [ ] Vidí zákazník poslední doručení, chybu a možnost rotovat secret?
-- [ ] Má breaking change verzi, oznámení a datum ukončení starého formátu?
-- [ ] Je vypnutí integrace bezpečné a auditované?
-
-## Mini šablona integrační karty
+## Mini šablona SSO karty
 
 ```markdown
-# Integrační karta: [název integrace]
+# SSO karta: [zákazník / workspace]
 
-## Účel
-- Jakému procesu integrace pomáhá:
-- Vlastník produktu:
-- Vlastník provozu:
-- Kritičnost: nízká / střední / vysoká
+## Identita
+- Provider:
+- Protokol: OIDC / SAML
+- Ověřená doména:
+- Stav vynucení SSO:
 
-## Data
-- Event typy:
-- Pole v payloadu:
-- Osobní údaje:
-- Pole výslovně zakázaná:
-- Retence v cílovém systému:
+## Mapování
+- Identifikátor uživatele:
+- Povolené domény:
+- Výchozí role:
+- Zakázané automatické změny:
 
 ## Bezpečnost
-- Podepisování: ano / ne
-- Replay ochrana:
-- Idempotency key:
-- Token/scopes:
-- Rotace secretu:
+- Test login proveden:
+- Break-glass kontakt:
+- Citlivé akce se step-up kontrolou:
+- Auditované události:
 
 ## Provoz
-- Retry politika:
-- Dead-letter postup:
-- Monitoring:
-- Ruční replay:
-- Vypnutí integrace:
-
-## Změny
-- Aktuální verze payloadu:
-- Breaking changes:
+- Vlastník u zákazníka:
+- Vlastník v produktu:
 - Datum další review:
+- Poznámky k offboardingu:
 ```
 
 ## Zdroje k ověření
 
-- [OWASP Webhook Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Webhook_Security_Cheat_Sheet.html) — podpisy, replay ochrana, tajemství a bezpečné zpracování webhooků.
-- [OWASP API Security Top 10 2023](https://api-security.owasp.org/editions/2023/en/0x11-t10/) — API rizika včetně autorizace na úrovni objektů a polí.
-- [GDPR, článek 25 — data protection by design and by default](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — právní základ pro návrh ochrany údajů od začátku.
-- [EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en) — praktický výklad principů ochrany údajů návrhem a výchozím nastavením.
+- [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html) — bezpečné přihlašování, MFA, reset hesel a autentizační ochrany.
+- [OpenID Connect Core 1.0](https://openid.net/specs/openid-connect-core-1_0.html) — standard identity vrstvy nad OAuth 2.0.
+- [RFC 6749: OAuth 2.0 Authorization Framework](https://www.rfc-editor.org/rfc/rfc6749) — základní autorizační model OAuth 2.0.
+- [NIST SP 800-63B: Digital Identity Guidelines — Authentication and Lifecycle Management](https://pages.nist.gov/800-63-3/sp800-63b.html) — doporučení pro autentizaci, úrovně assurance a životní cyklus autentizátorů.
 
 # Pracovní log
 
@@ -63370,4 +63339,4 @@ Výsledek: obchod dostane užitečný signál, ale CRM se nestane druhou neříz
 - 2026-10-09: Obnovena plná verze e-booku po zjištění, že aktuální soubor obsahoval jen placeholder, a doplněna příloha „Auditní logy pro admin akce bez detektivní kanceláře“ s praktickým modelem auditovatelných akcí, strukturou eventu, zákaznickým feedem, retencí, ochranou logů, incidentovým dotazem, checklistem, vyplnitelnou šablonou a ověřenými zdroji OWASP, NIST a Evropské komise. Pomáhá zakladatelům a provozním týmům rychle vysvětlit citlivé změny bez ukládání zbytečných osobních dat.
 - 2026-10-09: Doplněna příloha „Feature flagy a postupné releasy bez datového dluhu“ s rozdělením typů flagů, oddělením flagů od autorizace, minimalizací dat pro vyhodnocení, rollout postupem, auditováním změn, kill switchem, úklidem toggle debt, checklistem, vyplnitelnou kartou a ověřenými zdroji OpenFeature, CNCF, Martina Fowlera a OWASP. Pomáhá malým SaaS týmům nasazovat postupně bez skrytých datových profilů a věčných přepínačů v kódu.
 - 2026-10-09: Doplněna příloha „Přístupová práva bez rolové špagety a věčných adminů“ s praktickým modelem rolí podle citlivých akcí, deny-by-default kontrolami, just-in-time přístupem, pravidly pro servisní účty a API klíče, čtvrtletní access review rutinou, supportním příkladem, checklistem, vyplnitelnou kartou a ověřenými zdroji OWASP, NIST a ENISA. Pomáhá malým SaaS týmům omezit věčné adminy bez zbytečné byrokracie.
-- 2026-10-10: Doplněna příloha „Webhooky a integrace bez datové díry a tichých překvapení“ s integrační kartou, minimalizací payloadů, HMAC podpisy, replay ochranou, idempotencí, oddělenými integračními oprávněními, verzováním, praktickým příkladem CRM integrace, checklistem, vyplnitelnou šablonou a ověřenými zdroji OWASP, GDPR a EDPB. Pomáhá malým SaaS týmům posílat užitečné signály mezi systémy bez tichého kopírování osobních dat.
+- 2026-10-10: Doplněna příloha „SSO pro B2B SaaS bez enterprise divadla a přístupového chaosu“ s oddělením identity, členství a oprávnění, doménovým ověřením, OIDC doporučeními, konzervativním auto-provisioningem, ochranou citlivých akcí, break-glass postupem, příkladem agenturního SaaS, checklistem, vyplnitelnou šablonou a ověřenými zdroji OWASP, OpenID, RFC 6749 a NIST. Pomáhá malým B2B SaaS týmům nabídnout zákazníkům bezpečnější přihlášení bez zbytečného sběru identity dat a bez zamčených adminů.
