@@ -66572,7 +66572,229 @@ Datum posledního testu exportu:
 - ICO: [Right to data portability](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/individual-rights/right-to-data-portability/) — praktické vysvětlení formátů jako CSV, XML a JSON pro strukturované a strojově čitelné poskytování dat.
 - OWASP Cheat Sheet Series: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučení k retenci, ochraně, maskování a likvidaci logů včetně záloh a archivů.
 
+
+# Příloha: Uploady a přílohy bez malware tomboly a datového sklepa
+
+Upload souboru vypadá jako drobná produktová funkce. „Přidejte možnost nahrát PDF, screenshot nebo CSV.“ Jenže tím právě pouštíš do systému cizí obsah, cizí názvy souborů, cizí velikosti, cizí MIME typy a občas i cizí kreativitu z oblasti bezpečnostních průšvihů. Gratuluju, otevřel jsi dveře. Teď potřebuješ předsíň, ne červený koberec.
+
+Privacy-first upload má dva cíle najednou: chránit systém před nebezpečnými soubory a chránit lidi před tím, aby jejich dokumenty skončily v produktu déle, šířeji nebo veřejněji, než čekali. Bezpečnost a soukromí tu nejsou dvě oddělené kolonky. Jsou to dvě brzdy na stejném kole.
+
+> Codyho komentář: File upload je jako recepce v kanceláři. Není paranoidní zkontrolovat, kdo přišel, s čím přišel a jestli má vůbec jít dál. Paranoidní je tvářit se, že příloha s názvem `invoice.pdf.exe` určitě přinesla jen dobrou náladu.
+
+## Nejdřív se zeptej, jestli upload opravdu potřebuješ
+
+Nejbezpečnější soubor je ten, který nemusíš přijmout. To neznamená zakázat všechny přílohy a vrátit se k faxu, neboj. Znamená to odlišit, kdy je soubor skutečná hodnota a kdy jen pohodlná zkratka pro sběr dat.
+
+Příklady rozumných uploadů:
+
+- účetní doklad k reklamaci nebo fakturačnímu procesu,
+- screenshot chyby v supportu,
+- CSV import produktových dat,
+- logo zákazníka v profilu workspace,
+- smluvní dokument u B2B onboardingu,
+- bezpečnostní report poslaný přes řízený kanál.
+
+Příklady podezřelých uploadů:
+
+- „nahrajte libovolné podklady“ bez vysvětlení účelu,
+- povinné CV pro jednoduchý kontaktní formulář,
+- celé exporty z cizího systému, když stačí pár polí,
+- diagnostický ZIP bez limitu velikosti a bez retence,
+- přílohy v produktovém feedbacku, které se nikdy nemažou.
+
+První produktová otázka zní: „Jaké rozhodnutí bez toho souboru neumíme udělat?“ Pokud odpověď není jasná, začni menším formulářem, textovým popisem nebo strukturovaným polem. Upload není univerzální díra na realitu.
+
+## Navrhni vstupní bránu: typ, velikost, počet a účel
+
+Bezpečný upload nezačíná antivirem. Začíná tím, že uživateli řekneš, co přesně má nahrát a co systém přijme. Ušetříš frustraci, support i riziko.
+
+Pro každý upload definuj:
+
+- povolené typy souborů podle skutečné potřeby,
+- maximální velikost jednoho souboru,
+- maximální počet souborů,
+- jestli soubor smí obsahovat osobní nebo citlivé údaje,
+- kdo soubor uvidí,
+- jak dlouho se soubor uchová,
+- co se stane po nahrání,
+- jak může uživatel soubor smazat nebo nahradit.
+
+Špatný text:
+
+```text
+Přiložte soubor.
+```
+
+Lepší text:
+
+```text
+Nahrajte PDF nebo PNG do 10 MB. Soubor použijeme jen k vyřízení tohoto ticketu, uvidí ho podpora a smažeme ho po 30 dnech od uzavření požadavku, pokud nebude potřeba kvůli bezpečnostnímu incidentu nebo smluvnímu sporu.
+```
+
+Tohle není právní román. Je to produktová laskavost. Člověk ví, co posílá, proč a na jak dlouho.
+
+## Nedůvěřuj názvu souboru ani hlavičce Content-Type
+
+Název souboru je uživatelský vstup. MIME typ je metadata, které může lhát. Přípona je nápověda, ne důkaz. OWASP u uploadů doporučuje povolený seznam přípon, kontrolu typu souboru, přejmenování souboru aplikací, limity velikosti, autorizaci uploadu a bezpečné uložení mimo webroot nebo přes řízený handler.
+
+Praktický postup:
+
+1. **Dekóduj a normalizuj název** — nepoužívej původní název jako cestu ani klíč v úložišti.
+2. **Použij allowlist** — povol jen typy, které produkt opravdu potřebuje.
+3. **Ověř obsah** — nekonči u `Content-Type`; kontroluj signaturu nebo parser podle typu.
+4. **Přejmenuj soubor** — interní název generuj aplikací, původní jméno drž jen jako zobrazitelná metadata.
+5. **Omez velikost a počet** — chráníš úložiště, skenery, fronty i účet za infrastrukturu.
+6. **Ukládej odděleně** — ideálně mimo hlavní aplikační doménu a mimo veřejný webroot.
+7. **Servíruj přes oprávnění** — veřejný odkaz má být výjimka s expirací, ne default.
+
+U SVG, HTML, Office dokumentů, ZIP archivů a PDF buď přísnější. Umí nést aktivní obsah, skripty, makra, velké vnořené objekty nebo metadata, která uživatel nečekal. Pokud je nepotřebuješ, nepovoluj je.
+
+## Skenování není kouzelný štít
+
+Antivirus, sandbox nebo CDR jsou užitečné, ale nejsou výmluva pro slabý návrh. Skenování má být jedna vrstva, ne jediná vrstva. Pokud povolíš libovolný soubor bez limitu a jen ho „něčím proskenuješ“, nevyrábíš bezpečnost. Vyrábíš drahou loterii.
+
+Rozumný tok pro citlivější upload:
+
+1. Soubor se uloží do karantény.
+2. Aplikace uloží metadata: kdo, kdy, účel, velikost, typ, stav kontroly.
+3. Skenovací job ověří malware, typ a případně CDR.
+4. Do produktu se soubor zpřístupní až po úspěšné kontrole.
+5. Při selhání se soubor zablokuje, uživatel dostane srozumitelnou zprávu a tým má auditní stopu.
+6. Karanténa má vlastní retenci a cleanup job.
+
+NIST v materiálech k malware prevenci popisuje princip skenování souborů při stažení, otevření nebo spuštění. Pro webový produkt z toho plyne praktické pravidlo: kontroluj soubory dřív, než se dostanou k lidem, parserům a interním systémům.
+
+## Metadata a náhledy jsou také data
+
+Upload není jen binární obsah. Kolem souboru vzniká hromada metadat: původní název, velikost, MIME typ, autor dokumentu, EXIF, datum vytvoření, interní ID, URL, thumbnail, text vytažený OCR, výsledek antiviru, ticket, workspace a uživatel, který soubor nahrál.
+
+Privacy-first pravidla:
+
+- nepoužívej původní název souboru v URL,
+- odstraň EXIF a zbytečná metadata u obrázků, pokud nejsou účelem,
+- negeneruj OCR text, pokud ho produkt nepotřebuje,
+- neukládej náhledy déle než originál,
+- neindexuj přílohy do interního vyhledávání bez jasného účelu,
+- neloguj celé názvy souborů, pokud mohou obsahovat osobní údaje,
+- u support příloh zvaž kratší retenci než u samotného ticketu.
+
+Typický fail: screenshot jménem `Novakova-vypoved-lekar.pdf.png` skončí v logu, analytice, chybovém reportu a interním vyhledávání. Soubor samotný možná smažeš, ale jeho datové stíny zůstanou všude. To je privacy-first horor v administrativním kabátku.
+
+## Stahování navrhni stejně pečlivě jako nahrávání
+
+Mnoho týmů řeší upload a zapomene na download. Přitom právě sdílení souborů často udělá největší škodu: veřejné URL bez expirace, hádatelné ID, příliš široká oprávnění, cache citlivých souborů nebo přílohy posílané e-mailem dál.
+
+Bezpečnější pravidla:
+
+- soubory vydávej přes aplikaci, která ověří oprávnění,
+- používej krátkodobé podepsané URL, pokud musíš jít přes objektové úložiště,
+- neumisťuj citlivé soubory na stejnou doménu, kde běží aplikace s cookies,
+- nastav správné `Content-Disposition`, aby se soubor neinterpretoval jako stránka,
+- nepovoluj inline zobrazení nebezpečných typů,
+- audituj stažení u citlivých dokumentů,
+- veřejné sdílení dělej explicitní volbou s expirací a možností zrušení.
+
+Pokud produkt potřebuje poslat soubor e-mailem, zvaž raději odkaz s expirací než trvalou přílohu. E-mail je skvělý pro upozornění, horší pro dlouhodobou kontrolu nad citlivým obsahem.
+
+## Retence uploadů musí být kratší než lenost týmu
+
+Nahrané soubory mají tendenci zůstat navždy, protože „co kdyby se hodily“. To je nejdražší věta v datové hygieně. Každý typ uploadu má mít retenci podle účelu.
+
+Příklad:
+
+| Typ uploadu | Účel | Doporučený režim |
+| --- | --- | --- |
+| Screenshot v supportu | Vyřešení konkrétní chyby | Smazat po uzavření + krátká ochranná lhůta. |
+| CSV import | Jednorázové zpracování dat | Po úspěšném importu smazat nebo držet krátký auditní záznam bez obsahu. |
+| Logo zákazníka | Zobrazení v produktu | Držet po dobu používání funkce, s možností odstranění. |
+| Bezpečnostní report | Řešení zranitelnosti | Omezený přístup, delší retence podle incident procesu. |
+| Smluvní dokument | Právní nebo obchodní důvod | Držet podle smluvní a právní potřeby, odděleně od běžných příloh. |
+
+Cleanup musí být automatický a auditovatelný. Ruční mazání „až si vzpomeneme“ je jen pomalý způsob, jak zapomenout.
+
+## Praktický příklad: support příloha v malém SaaS
+
+Zákazník nahraje screenshot chyby v administraci. Produkt chce pomoct supportu, ale nechce vytvářet trvalý archiv zákaznických obrazovek.
+
+Dobré řešení:
+
+```text
+Upload povolí PNG/JPG/WebP do 10 MB.
+Soubor se uloží do karantény a projde typovou kontrolou + malware skenem.
+Aplikace vygeneruje interní název, původní název drží jen jako omezené metadata.
+EXIF metadata se odstraní.
+Soubor vidí jen support role přiřazená k ticketu.
+Stahování jde přes autorizovaný endpoint, ne přes veřejný bucket.
+Po uzavření ticketu běží 30denní ochranná lhůta, pak se příloha smaže.
+V ticketu zůstane jen záznam: příloha existovala, typ, velikost, datum smazání.
+```
+
+Výsledek: support má důkaz, který potřebuje, ale produkt nevyrábí věčný sklad screenshotů. Zákazník navíc chápe, co se s přílohou stane. To je důvěra v praxi, ne v patičce.
+
+## Checklist: upload bez malware tomboly
+
+- [ ] Každý upload má jasný účel a vysvětlení pro uživatele.
+- [ ] Povolujeme jen konkrétní typy souborů podle potřeby, ne „všechno kromě katastrofy“.
+- [ ] Kontrolujeme velikost, počet souborů, příponu, MIME a reálný obsah.
+- [ ] Interní název souboru generuje aplikace; původní název není cesta ani veřejný identifikátor.
+- [ ] Soubory se ukládají mimo veřejný webroot a stahují přes autorizaci.
+- [ ] Citlivější uploady procházejí karanténou, malware skenem a případně CDR.
+- [ ] Metadata, náhledy a OCR výstupy mají vlastní minimalizaci a retenci.
+- [ ] Veřejné odkazy jsou explicitní, expirované a zrušitelné.
+- [ ] Cleanup job maže originály, náhledy, dočasné soubory i karanténu.
+- [ ] Incident runbook umí soubor zablokovat, dohledat stažení a hromadně odstranit rizikové přílohy.
+
+## Vyplnitelná karta uploadu
+
+```text
+# Upload karta: [název funkce]
+
+Účel uploadu:
+Kde se upload zobrazuje:
+Kdo smí nahrávat:
+Kdo smí zobrazit / stáhnout:
+
+Povolené typy:
+Maximální velikost:
+Maximální počet souborů:
+Zakázané typy:
+
+Validace názvu:
+Validace obsahu:
+Malware sken:
+CDR / sanitizace:
+Karanténa:
+
+Úložiště:
+Veřejný odkaz: ano / ne
+Expirace odkazu:
+Autorizace downloadu:
+
+Metadata, která ukládáme:
+Metadata, která mažeme:
+Náhledy / OCR:
+
+Retence originálu:
+Retence náhledů:
+Cleanup job:
+Audit stažení:
+
+Chybová hláška pro uživatele:
+Incident postup:
+Vlastník:
+Datum poslední kontroly:
+```
+
+## Zdroje k ověření
+
+- OWASP File Upload Cheat Sheet: doporučení pro allowlist přípon, kontrolu typu, přejmenování, limity velikosti, autorizaci, bezpečné uložení, antivirus a CDR — https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+- OWASP Unrestricted File Upload: přehled dopadů neomezeného uploadu včetně převzetí systému, zahlcení úložiště a útoků přes veřejně dostupné soubory — https://community.owasp.org/vulnerabilities/Unrestricted_File_Upload
+- OWASP Input Validation Cheat Sheet: validace vstupů včetně upozornění, že názvy souborů a `Content-Type` jsou nedůvěryhodná metadata — https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
+- NIST SP 800-83r1: malware prevention and handling, včetně principu skenování souborů při stažení, otevření nebo spuštění — https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-83r1.pdf
+- GDPR, článek 5: zásady účelového omezení, minimalizace a omezení uložení osobních údajů — https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679
+
 # Pracovní log
+- 2026-10-10: Doplněna příloha „Uploady a přílohy bez malware tomboly a datového sklepa“ s praktickým návrhem bezpečného file uploadu, omezením účelu, allowlistem typů, kontrolou obsahu, karanténou, malware skenem, bezpečným stahováním, retencí příloh, supportním příkladem, checklistem, vyplnitelnou upload kartou a ověřenými zdroji OWASP, NIST a GDPR. Pomáhá malým webům a SaaS týmům přijímat soubory bez veřejných bucketů, věčných příloh a zbytečných osobních dat.
 
 - 2026-10-10: Doplněna příloha „Provozní retenční režim bez datového skladiště a právnické mlhy“ jako praktické navázání na starší retenční kapitolu: přidává životní cyklus dat, oddělení právní a provozní retence, automatizované mazání, produktové mikrocopy, správu výjimek, B2B SaaS příklad, checklist, vyplnitelnou retenční kartu a ověřené zdroje GDPR, Evropské komise, EDPS a OWASP. Pomáhá malým týmům převést retenční pravidla z dokumentu do skutečného úklidu dat.
 
