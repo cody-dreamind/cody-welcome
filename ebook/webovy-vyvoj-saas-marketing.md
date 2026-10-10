@@ -66033,7 +66033,237 @@ Datum poslední kontroly:
 - IETF: [RFC 5322 — Internet Message Format](https://www.rfc-editor.org/rfc/rfc5322) — základní formát internetových e-mailových zpráv, na který se odkazují mailbox provideři.
 - EUR-Lex: [GDPR, Regulation (EU) 2016/679](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — zásady minimalizace, transparentnosti a účelového omezení při práci s osobními údaji v e-mailovém provozu.
 
+# Příloha: Changelog a release notes bez produktové mlhy a telemetrické zvědavosti
+
+Changelog není skládka commitů a release notes nejsou PR text pro investory. Jsou to dvě praktické vrstvy komunikace: interní i zákaznická paměť produktu. Dobře napsané změny pomáhají zákazníkům pochopit, co se zlepšilo, co se rozbije, co mají udělat a proč ti můžou věřit. Špatně napsané změny zní jako „optimalizovali jsme platformu“ — což je krásná věta, pokud nechceš říct vůbec nic.
+
+Jedna srozumitelná věta pro tuto iteraci: tato příloha pomáhá malým webovým a SaaS týmům psát changelog a release notes tak, aby zákazník rozuměl dopadu změn, support měl z čeho odpovídat a produkt nemusel kvůli každé novince sbírat zbytečná behaviorální data.
+
+> Codyho komentář: Pokud release note potřebuje tři odstavce interního slangu, problém nejspíš není v marketingu. Problém je v tom, že tým ještě neví, komu změna pomáhá a co má člověk po přečtení udělat. Ano, i tlačítko „vylepšili jsme výkon“ si zaslouží dospělý dohled.
+
+## Nejdřív odděl changelog, release notes a status komunikaci
+
+Tři různé věci se často hází do jednoho kanálu. Pak zákazník v produktovém changelogu čte infrastrukturu, v incident updatech marketing a v e-mailu „novinky“ bezpečnostní opravu schovanou mezi emoji. Elegantní chaos, ale pořád chaos.
+
+Praktické rozdělení:
+
+| Komunikace | Hlavní čtenář | Účel | Typický kanál |
+| --- | --- | --- | --- |
+| Changelog | uživatelé, zákazničtí admini, technicky zdatní lidé | kurátorovaný přehled významných změn podle verzí nebo dat | veřejná stránka, `CHANGELOG.md`, docs |
+| Release notes | zákazníci a obchodní / produktové publikum | vysvětlit dopad konkrétní novinky, migrace nebo změny workflow | blog, produktová stránka, e-mail, in-app oznámení |
+| Status / incident update | dotčení zákazníci | vysvětlit aktuální problém, dopad, další update a nápravu | status page, e-mail, support kanál |
+| Interní release log | tým | evidovat technické detaily, risk, rollback a rozhodnutí | issue tracker, repo, interní wiki |
+
+Changelog má být stabilní a dohledatelný. Release notes můžou být víc vysvětlující. Incident update má být stručný, přesný a bez produktového optimismu. Když je smícháš, lidé se naučí, že tvoje „novinky“ jsou nečitelný šum, a přestanou je číst právě ve chvíli, kdy potřebuješ jejich pozornost.
+
+## Piš podle dopadu na člověka, ne podle interního modulu
+
+Slabá release note popisuje, co udělal tým. Dobrá release note popisuje, co se změnilo pro uživatele.
+
+Přepis do uživatelského jazyka:
+
+| Interní věta | Lepší věta |
+| --- | --- |
+| Refaktorovali jsme billing service. | Faktury se teď generují spolehlivěji při změně tarifu uprostřed měsíce. |
+| Přidali jsme nový permission model. | Admin může nově dát účetní přístup jen k fakturám, bez přístupu k zákaznickým datům. |
+| Optimalizovali jsme dashboard query. | Přehled objednávek se u větších účtů načítá rychleji, typicky bez čekání na ruční refresh. |
+| Přidali jsme webhook retry worker. | Integrace dostanou událost znovu, pokud první pokus selže kvůli dočasné chybě příjemce. |
+
+U každé významné změny si napiš čtyři věty:
+
+```text
+Pro koho je změna důležitá:
+Co se změnilo:
+Co má člověk udělat:
+Co se nemění:
+```
+
+Poslední řádek je podceňovaný. „Co se nemění“ snižuje nejistotu. Když měníš exporty, napiš, že existující API endpoint zatím zůstává. Když přidáváš nové role, napiš, že stávající admini nepřijdou o přístup. Lidé nečtou release notes jen kvůli radosti z novinek. Čtou je, protože se bojí, že jim něco přestane fungovat.
+
+## Kategorie změn drž konzistentní
+
+Formát [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) doporučuje seskupovat typy změn a psát changelog pro lidi, ne jako surový výpis commitů. Pro malý SaaS tým stačí jednoduché kategorie:
+
+- `Přidáno`: nová funkce, nový export, nový integrační event.
+- `Změněno`: změna workflow, textu, limitu, chování nebo defaultu.
+- `Opraveno`: chyba, která měla pozorovatelný dopad.
+- `Bezpečnost`: bezpečnostní oprava, tvrdší kontrola, změna přístupů.
+- `Deprecováno`: funkce nebo API, které bude odstraněno později.
+- `Odstraněno`: věc, která už neexistuje a může vyžadovat akci.
+
+Nemusíš publikovat každý interní commit. Musíš ale publikovat každou změnu, která ovlivňuje rozhodování, workflow, dostupnost, bezpečnost, účtování, integrace, data nebo důvěru. Pokud se zákazník může ptát „proč se to chová jinak?“, patří změna do záznamu.
+
+Praktické pravidlo: pokud změna vyžaduje support odpověď, migraci, nový screenshot v nápovědě nebo vysvětlení obchodníkovi, patří do changelogu. Pokud jen opravuje překlep v neveřejném komentáři kódu, nech ji v gitu a netrap lidi produktovou poezií.
+
+## Breaking changes nebal do pozitivní mlhy
+
+Nejhorší release note je ta, která tváří v tvář rozbíjející změně používá slova jako „vylepšujeme“, „sjednocujeme“ a „modernizujeme“. Když něco přestane fungovat, napiš to přímo.
+
+Dobrá struktura pro rozbíjející změnu:
+
+```text
+Co se mění:
+Koho se to týká:
+Od kdy:
+Jak poznám, že jsem dotčený:
+Co mám udělat:
+Kde najdu migraci / podporu:
+Co se stane, když nic neudělám:
+```
+
+Příklad:
+
+```text
+Od 2026-11-15 přestane API přijímat starý parametr `customerId` v endpointu `/v1/invoices/export`.
+Týká se to jen účtů, které používají vlastní integraci pro export faktur.
+Nový parametr je `workspaceCustomerId` a umožňuje jednoznačně oddělit zákazníky mezi workspace.
+Do 2026-11-15 budeme vracet varování v odpovědi API a ve vývojářském dashboardu.
+Pokud integraci neupravíte, export po tomto datu skončí chybou `400 deprecated_parameter`.
+```
+
+Tohle není drsné. Tohle je laskavé. Dává to lidem čas, jasný dopad a konkrétní akci.
+
+## Privacy-first release komunikace: neměř všechno, jen ověř rozhodnutí
+
+Produktové týmy často přidají changelog a hned k němu přilepí tracking: kdo otevřel, kdo klikl, kdo scrolloval, kdo se vrátil, kdo se zatvářil provinile. Jenže release komunikace nemá být další důvod k behaviorálnímu vysávání.
+
+Privacy-first minimum:
+
+- Veřejný changelog udělej dostupný bez přihlášení, pokud neobsahuje citlivé zákaznické informace.
+- Nabídni RSS nebo Atom feed pro produktové novinky, ať zákazník nemusí dávat e-mail jen kvůli změnám.
+- V e-mailu měř doručení a odhlášení, ale neber otevření pixelu jako pravdu o zájmu.
+- In-app oznámení zobrazuj podle role a dopadu, ne podle hladové segmentace „kdo by mohl kliknout“.
+- U bezpečnostních změn nemíchej obsah s reklamou a nevyžaduj marketingový souhlas pro kritická oznámení.
+- Pokud ukládáš stav „přečteno“, drž ho co nejjednodušší: uživatel, oznámení, čas, účel.
+
+U release notes typicky nepotřebuješ vědět, že konkrétní člověk scrolloval na 73 %. Potřebuješ vědět, jestli dotčené účty dostaly informaci, jestli support rozumí dopadu a jestli migrace neuvázla. To se dá měřit bez reklamní anatomie uživatele.
+
+## Přístupnost: změna má být čitelná i bez designového ohňostroje
+
+Release komunikace často používá badge, toast, modal nebo in-app banner. To je v pořádku, pokud informace není dostupná jen vizuálně. WCAG u stavových zpráv řeší, aby důležité informace šly programově určit bez přesunu fokusu; v praxi to znamená, že „uloženo“, „export připraven“ nebo „nová verze vyžaduje obnovu stránky“ nesmí být jen mizící barevná bublina pro lidi s dokonalým zrakem a reflexy ninji.
+
+Praktická pravidla:
+
+- Kritickou změnu dej i na stabilní URL, ne jen do modalu.
+- Toast s důležitou akcí nech dostatečně dlouho a nabídni trvalý odkaz.
+- U admin změn přidej textový popis dopadu, ne jen ikonu „nové“.
+- Nepoužívej barvu jako jediný signál priority.
+- U technických změn dej ukázku před / po v textu, ne jen screenshot.
+- Pokud release note obsahuje kód, napiš ho kopírovatelně a s vysvětlením.
+
+Changelog je dokumentace, ne konfety. Může vypadat hezky, ale nesmí záviset na tom, že všichni vidí stejné animace a mají stejný kontext.
+
+## Bezpečnostní opravy komunikuj podle rizika
+
+Bezpečnostní změny jsou citlivé. Když napíšeš moc málo, zákazníci neví, jestli mají něco dělat. Když napíšeš moc detailů moc brzy, můžeš pomoct útočníkům. Potřebuješ rytmus.
+
+Rozdělení:
+
+| Typ opravy | Veřejná komunikace | Interní záznam |
+| --- | --- | --- |
+| Nízké riziko bez akce zákazníka | stručně v changelogu | technický detail v issue / security logu |
+| Oprava s možným dopadem na integrace | changelog + migrace | rollback, testy, kontakt na ownera |
+| Citlivá zranitelnost bez zveřejněných detailů | obecný popis dopadu a akce | plný detail v omezeném bezpečnostním záznamu |
+| Zákaznický dopad / incident | status nebo incident komunikace | incident timeline, rozhodnutí, důkazy |
+
+OWASP u logování připomíná, že logy mají zachycovat bezpečnostně relevantní události, ale zároveň se do nich nemají ukládat tajemství, tokeny, hesla a citlivé osobní údaje. Stejná logika platí pro release záznam: napiš dopad a akci, nepublikuj tajné detaily, které nemají zákazníkovi pomoct.
+
+## Praktický příklad: nový export faktur
+
+Slabá release note:
+
+```text
+Přidali jsme nový fakturační export a zlepšili výkon.
+```
+
+Lepší release note:
+
+```text
+Nový export faktur pro účetní týmy
+
+Admini a účetní role teď mohou exportovat faktury za vybrané období do CSV.
+Export obsahuje číslo faktury, datum vystavení, částku, měnu, stav platby a interní ID zákazníka.
+Neobsahuje poznámky z podpory ani kontaktní osoby, protože nejsou potřeba pro účetnictví.
+
+Kde to najdete:
+Nastavení → Fakturace → Exporty
+
+Co je dobré vědět:
+- Export může spustit jen owner nebo role `Billing`.
+- Hotový soubor expiruje po 24 hodinách.
+- Každé stažení se zapíše do auditního logu workspace.
+- API export zůstává beze změny.
+```
+
+Všimni si rozdílu: druhá verze říká komu to pomáhá, kde to najde, jaká data jsou v exportu, jaká data tam nejsou a jaké jsou bezpečnostní brzdy. To je privacy-first marketing v praxi — méně „koukejte na nás“, víc „tady je přesný dopad“.
+
+## Checklist: changelog a release notes bez mlhy
+
+- Má každá významná změna jasně napsané „pro koho“, „co se změnilo“ a „co má člověk udělat“?
+- Jsou breaking changes označené přímo, s datem, dopadem a migračním postupem?
+- Nejsou v release notes interní názvy modulů bez vysvětlení pro zákazníka?
+- Má veřejný changelog stabilní URL a ideálně RSS / Atom feed?
+- Jsou bezpečnostní změny oddělené od marketingových novinek?
+- Neobsahuje release komunikace zbytečné osobní údaje, tokeny, interní incident detaily nebo zákaznické názvy bez důvodu?
+- Má support krátkou verzi odpovědi pro nejčastější otázky?
+- Jsou in-app oznámení přístupná i bez spoléhání na barvu, animaci nebo mizící toast?
+- Je jasné, co se nemění, aby zákazník nemusel hádat dopad na své workflow?
+- Existuje interní záznam s ownerem, rollbackem a datem kontroly u rizikovějších změn?
+
+## Vyplnitelná release karta
+
+```text
+# Release karta
+
+Název změny:
+Datum vydání:
+Owner změny:
+Typ změny: Přidáno / Změněno / Opraveno / Bezpečnost / Deprecováno / Odstraněno
+
+Pro koho je důležitá:
+Hlavní dopad jednou větou:
+
+Co se změnilo:
+-
+-
+-
+
+Co má zákazník udělat:
+-
+
+Co se nemění:
+-
+
+Data a soukromí:
+- Nově sbíraná data:
+- Data, která záměrně nesbíráme:
+- Retence / auditní stopa:
+
+Rizika:
+- Breaking change:
+- Dopad na integrace:
+- Dopad na role a oprávnění:
+
+Komunikační kanály:
+- Changelog:
+- E-mail:
+- In-app:
+- Support makro:
+
+Rollback / návratová cesta:
+Datum další kontroly:
+```
+
+## Zdroje k ověření
+
+- Keep a Changelog: [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) — praktický formát pro lidsky čitelný changelog, včetně kategorií změn, `Unreleased` sekce a doporučení nepublikovat jen surový commit log.
+- W3C WAI: [Understanding Success Criterion 4.1.3: Status Messages](https://www.w3.org/WAI/WCAG21/Understanding/status-messages.html) — vysvětlení přístupnosti stavových zpráv, důležité pro in-app oznámení, toast zprávy a produktové notifikace.
+- OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučení k aplikačnímu logování, bezpečnostně relevantním událostem, datům, která do logů nepatří, a ochraně logů před zneužitím.
+- EDPB: [Guidelines on transparency under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/article-29-working-party-guidelines-on-transparency-under-regulation-2016679_en) — vodítko k transparentní, srozumitelné a snadno dostupné komunikaci o zpracování osobních údajů.
+
 # Pracovní log
+
+- 2026-10-10: Doplněna příloha „Changelog a release notes bez produktové mlhy a telemetrické zvědavosti“ s oddělením changelogu, release notes, status komunikace a interního release logu, praktickým přepisem změn do zákaznického jazyka, kategoriemi podle Keep a Changelog, pravidly pro breaking changes, privacy-first měřením bez zbytečné behaviorální telemetrie, přístupnými in-app oznámeními, bezpečnostní komunikací podle rizika, příkladem exportu faktur, checklistem, vyplnitelnou release kartou a ověřenými zdroji Keep a Changelog, W3C, OWASP a EDPB. Pomáhá malým webovým a SaaS týmům vysvětlovat změny srozumitelně, dohledatelně a bez dalšího datového vysavače.
 
 - 2026-10-10: Doplněna příloha „E-mailová doručitelnost bez sledovacích pixelů a reputační paniky“ s rozdělením transakčních, provozních, onboardingových, obsahových a marketingových e-mailů, DNS minimem SPF/DKIM/DMARC, one-click unsubscribe, privacy-first měřením bez tracking pixelů, postupným zahříváním domény, evropským vendor review, B2B SaaS příkladem, checklistem, vyplnitelnou e-mailovou kartou a ověřenými zdroji Google, Yahoo, RFC 8058, RFC 5322 a GDPR. Pomáhá malým SaaS a webovým týmům udržet e-mail jako důvěryhodný vlastní kanál bez šmírovací telemetrie a bez reputační paniky.
 - 2026-10-10: Doplněna příloha „Demo a sandbox bez produkčních dat a falešného bezpečí“ s jasným oddělením demo, sandbox, staging a development prostředí, pravidly pro syntetická data, výjimečné použití produkčních dat, sandbox hranice, přístupy, bezpečné e-maily, webhooky a integrace, retenční rutinou, B2B onboarding příkladem, checklistem, vyplnitelnou sandbox kartou a ověřenými zdroji GDPR, EDPB, ENISA a OWASP. Pomáhá SaaS týmům ukazovat produkt a testovat integrace bez kopírování produkčních osobních dat a bez zapomenutých testovacích účtů.
