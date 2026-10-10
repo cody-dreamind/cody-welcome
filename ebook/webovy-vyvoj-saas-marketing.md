@@ -63711,7 +63711,208 @@ Workspace / zákazník:
 - [RFC 8058 — Signaling One-Click Functionality for List Email Headers](https://www.rfc-editor.org/rfc/rfc8058) — technický standard pro jedno-klikové odhlášení v hlavičkách hromadných e-mailů.
 
 
+
+# Příloha: API klíče a tokeny bez tajného hřbitova v produkci
+
+API klíč je malá věc s velkým egem. Vypadá jako jeden řádek textu, ale často otevírá fakturaci, data zákazníků, e-mailing, AI účty, platební brány nebo interní administraci. Když ho tým bere jako obyčejnou konfigurační hodnotu, dřív nebo později skončí v repozitáři, screenshotu, logu, ticketu nebo starém notebooku dodavatele.
+
+Privacy-first provoz neznamená, že nikdy nepoužiješ tokeny. Znamená, že každý token má účel, vlastníka, rozsah, expiraci, auditní stopu a cestu ven. Tajemství bez životního cyklu je jen budoucí incident, který si ještě nenašel vhodný pátek odpoledne.
+
+> Codyho komentář: Nejhorší API klíč není ten dlouhý a ošklivý. Nejhorší je ten „dočasný“, který přežil tři redesigny, dva dodavatele a jednu firemní mikrovlnku.
+
+## Nejdřív rozděl tajemství podle škody
+
+Ne všechny klíče mají stejné riziko. Pokud je hodíš do jednoho koše „secrets“, skončíš buď s přehnanou byrokracií pro všechno, nebo s nebezpečným pohodlím pro kritické věci.
+
+Použij jednoduchou klasifikaci:
+
+| Typ tajemství | Příklad | Hlavní riziko | Výchozí pravidlo |
+| --- | --- | --- | --- |
+| Veřejně použitelné identifikátory | public analytics site ID, klientské ID bez oprávnění | záměna nebo zneužití konfigurace | může být v klientu, ale neplést se skutečným tajemstvím |
+| Nízkorizikové servisní tokeny | webhook pro interní notifikaci bez osobních dat | spam, falešné události | omezit zdroj, logovat, snadno rotovat |
+| Produkční API klíče | e-mailing, AI API, CRM, platební brána | náklady, únik dat, reputace | vault, minimální scope, alerty, rotace |
+| Admin a infrastruktura | cloud účet, databáze, deploy token | převzetí systému | nejpřísnější přístup, MFA/JIT, oddělené role |
+| Kryptografické klíče | podpis JWT, šifrování záloh, session signing | neplatná důvěra, masivní dopad | plán rotace, verze klíčů, dvojí kontrola |
+
+První praktický krok: vytvoř inventář tajemství a ke každému napiš větu „kdyby uniklo, co se stane do 24 hodin“. Tahle věta je lepší než abstraktní štítek „medium risk“, protože nutí tým představit si skutečný dopad.
+
+## Každý klíč musí mít vlastníka a účel
+
+Tajemství bez vlastníka se nerotuje. Tajemství bez účelu se nedá bezpečně odstranit. U každého produkčního klíče proto eviduj minimálně:
+
+- název a systém,
+- účel použití,
+- vlastníka v týmu,
+- prostředí: dev, staging, produkce,
+- rozsah oprávnění,
+- datum vytvoření,
+- datum poslední rotace,
+- plánovanou expiraci nebo důvod, proč expiraci nemá,
+- místo uložení,
+- postup revokace.
+
+Nejde o dokumentační poezii. Když dodavatel skončí, služba zdraží, log ukáže podezřelý provoz nebo unikne `.env`, tahle karta rozhoduje, jestli reaguješ za deset minut, nebo za dva dny s výrazem „kdo to sakra založil“.
+
+## Scope je brzda, ne dekorace
+
+API klíč má dostat nejmenší oprávnění, které stačí pro daný úkol. Pokud export faktur potřebuje jen číst fakturační položky, nepotřebuje právo měnit zákazníky, mazat projekty ani posílat kampaně.
+
+Dobré pravidlo pro SaaS:
+
+- jeden klíč pro jednu integraci,
+- jeden klíč pro jedno prostředí,
+- žádné sdílení produkčního klíče mezi aplikací, skriptem a ručním testováním,
+- samostatné tokeny pro read-only exporty,
+- samostatné tokeny pro zápisové operace,
+- žádný dlouhodobý osobní token jako produkční service account.
+
+Když nástroj neumí granularitu oprávnění, zapiš to do vendor karty jako riziko. Někdy je to akceptovatelné. Ale pokud klíč pro newsletter umí zároveň exportovat celou zákaznickou databázi, není to drobnost. Je to obchodní rozhodnutí převlečené za integraci.
+
+## Ukládání tajemství: méně `.env` archeologie
+
+Lokální `.env` je pohodlný pro vývoj, ale není strategie pro produkci. Produkční tajemství patří do spravovaného secret storu, vaultu, hostovací platformy nebo bezpečného CI/CD nastavení — ne do repozitáře, wiki, Google Docu ani připnuté zprávy v chatu.
+
+Minimum pro malý tým:
+
+- `.env.example` obsahuje názvy proměnných, nikdy reálné hodnoty,
+- `.gitignore` blokuje lokální soubory s tajemstvími,
+- CI/CD tajemství jsou oddělená podle prostředí,
+- produkční hodnoty vidí jen role, které je opravdu potřebují,
+- logy a error reporting maskují tokeny,
+- screenshoty z adminu neukazují celé klíče,
+- export konfigurace neobsahuje tajemství v plaintextu.
+
+Maskování v logu není volitelná kosmetika. Pokud API klient při chybě vypíše celý request včetně `Authorization` hlavičky, přesunul jsi tajemství ze secret storu do logovacího systému. Gratuluju, máš druhý vault, jen horší a s vyhledáváním.
+
+## Rotace musí být nacvičená před incidentem
+
+„Umíme rotovat klíče“ znamená, že to někdo nedávno udělal a služba přežila. Ne že existuje stránka v dokumentaci dodavatele.
+
+Bezpečný postup rotace:
+
+1. Vytvoř nový klíč se stejným nebo menším rozsahem.
+2. Nasaď ho do cílového prostředí bez odstranění starého.
+3. Ověř metriky, healthcheck a kritické akce.
+4. Přepni provoz a sleduj chyby.
+5. Zneplatni starý klíč.
+6. Zapiš datum, důvod rotace a případné dopady.
+
+U kryptografických klíčů přidej verze. Například podepisování JWT může používat nový klíč pro nové tokeny, ale ověřování musí po přechodnou dobu znát i starý veřejný klíč, dokud doběhnou existující tokeny. Bez verze klíče začne rotace připomínat vypínač světla v serverovně.
+
+## Expirace tokenů není trest, ale pojistka
+
+Krátká životnost access tokenů snižuje škodu při úniku. Refresh tokeny nebo dlouhodobé servisní tokeny ale potřebují přísnější režim: bezpečné uložení, rotaci, detekci opakovaného použití a možnost rychlé revokace.
+
+U OAuth/OIDC integrací se drž moderních pravidel:
+
+- nepoužívej implicit flow pro nové aplikace,
+- pro authorization code flow používej PKCE,
+- redirect URI porovnávej přesně,
+- refresh tokeny rotuj nebo jinak chraň proti replay útokům,
+- tokeny neposílej v URL,
+- scopes pojmenuj podle skutečných oprávnění,
+- revokaci a logout testuj, ne jen kresli do architektury.
+
+Pokud používáš vlastní API tokeny, nastav aspoň: prefix pro identifikaci typu klíče, hashované uložení serverové kopie, poslední použití, poslední IP nebo systémový zdroj tam, kde to dává smysl, a tlačítko pro okamžitou revokaci. Prefix typu `cw_live_...` nebo `cw_test_...` pomůže člověku i automatickému scanneru rychle poznat prostředí a typ tajemství.
+
+## Detekce úniku musí být praktická
+
+Prevence nestačí. Tajemství se občas dostane tam, kam nemá. Cílem není tvářit se, že tým nikdy neudělá chybu, ale zkrátit dobu mezi únikem a revokací.
+
+Praktická sada kontrol:
+
+- secret scanning v repozitářích,
+- kontrola pull requestů na nové `.env` a konfigurační soubory,
+- blokace commitů s podezřelými tokeny tam, kde to nástroj dovolí,
+- alert na neobvyklé použití produkčního klíče,
+- měsíční kontrola nepoužitých tokenů,
+- incident karta pro únik klíče,
+- zákaz posílání tajemství přes chat bez bezpečného kanálu.
+
+Privacy-first detail: alerty na použití klíče nemají být šmírovací profil lidí. Většinou stačí systém, čas, typ operace, rozsah a technický zdroj. U osobních údajů v logu platí stejné pravidlo jako jinde: sbírat jen to, co pomáhá rozhodnout a opravit problém.
+
+## Praktický příklad: AI API klíč v malém SaaS
+
+SaaS používá AI API pro sumarizaci support ticketů. Původně byl jeden produkční klíč uložený v `.env` na serveru, v CI a u dvou vývojářů lokálně. Klíč měl plný přístup k účtu, bez limitu a bez jasného vlastníka.
+
+Lepší nastavení:
+
+- produkční aplikace má samostatný klíč s billing limitem,
+- staging má jiný klíč a menší limit,
+- lokální vývoj používá testovací účet nebo mock,
+- klíč je uložený v secret storu hostingu,
+- v error reportingu se maskuje `Authorization` hlavička,
+- jednou měsíčně se kontroluje usage podle prostředí,
+- při offboardingu vývojáře se nerotuje „všechno naslepo“, ale jen klíče, ke kterým měl přístup.
+
+Výsledek: méně paniky při chybě, menší riziko účtového výbuchu a lepší odpověď na otázku zákazníka „kam se naše data posílají a kdo k tomu má přístup“.
+
+## Checklist: API klíče a tokeny bez tajného hřbitova
+
+- Má každý produkční klíč vlastníka, účel a systém?
+- Je každý klíč oddělený podle prostředí?
+- Má klíč minimální potřebný scope?
+- Je tajemství uložené mimo repozitář, wiki a chat?
+- Existuje `.env.example` bez reálných hodnot?
+- Maskují logy tokeny, hlavičky a citlivé parametry?
+- Umíš klíč rotovat bez výpadku?
+- Máš postup pro okamžitou revokaci?
+- Kontroluješ nepoužité nebo staré tokeny?
+- Je u klíčů jasné, kdo je viděl a kdy se mají zkontrolovat?
+- Mají dlouhodobé tokeny limit, expiraci nebo zdokumentovaný důvod výjimky?
+- Je únik klíče součást incidentového runbooku?
+
+## Mini šablona karty tajemství
+
+```text
+# Karta API klíče / tokenu
+
+## Základ
+- Název:
+- Systém:
+- Prostředí:
+- Vlastník:
+- Účel:
+
+## Oprávnění
+- Scope / role:
+- Čtení:
+- Zápis:
+- Finanční nebo datový limit:
+- Přístup k osobním údajům:
+
+## Uložení
+- Kde je uložený:
+- Kdo ho může zobrazit:
+- Kde se používá:
+- Je maskovaný v logu:
+
+## Životní cyklus
+- Datum vytvoření:
+- Poslední rotace:
+- Další kontrola:
+- Expirace:
+- Postup rotace:
+- Postup revokace:
+
+## Incident
+- Co se stane při úniku do 24 hodin:
+- Koho informovat:
+- Jak ověřit zneužití:
+- Jaké logy zkontrolovat:
+```
+
+## Zdroje k ověření
+
+- [OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html) — praktická doporučení pro centralizované ukládání, audit, rotaci a správu tajemství.
+- [OWASP Key Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Key_Management_Cheat_Sheet.html) — doporučení k životnímu cyklu kryptografických klíčů, oddělení rolí a bezpečnému ukládání.
+- [NIST SP 800-57 Part 1 Rev. 5](https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final) — obecný rámec pro správu kryptografických klíčů a jejich životní cyklus.
+- [RFC 9700 — Best Current Practice for OAuth 2.0 Security](https://www.rfc-editor.org/rfc/rfc9700.html) — aktuální bezpečnostní doporučení pro OAuth 2.0, včetně PKCE, přesného redirect URI matching a ochrany tokenů proti zneužití.
+
+
 # Pracovní log
+
+- 2026-10-10: Doplněna příloha „API klíče a tokeny bez tajného hřbitova v produkci“ s klasifikací tajemství podle dopadu, kartou vlastníka a účelu, pravidly pro minimální scope, ukládáním mimo repozitář a chat, nacvičenou rotací, expirací tokenů, detekcí úniku, příkladem AI API klíče, checklistem, vyplnitelnou kartou a ověřenými zdroji OWASP, NIST a RFC 9700. Pomáhá malým webovým a SaaS týmům snížit škodu při úniku klíče a udržet produkční tajemství pod kontrolou bez zbytečného bezpečnostního divadla.
 
 - 2026-10-10: Doplněna příloha „E-mailové preference bez odhlašovacího bludiště a marketingové pasti“ s praktickým rozdělením e-mailů podle účelu, návrhem preference centra, bezpečným odhlášením, minimalizací ukládaných dat, synchronizací preferencí do CRM a mailing nástrojů, B2B SaaS příkladem, checklistem, vyplnitelnou kartou a ověřenými zdroji GDPR, EDPB, Evropské komise a RFC 8058. Pomáhá malým webovým a SaaS týmům držet e-mail jako vlastní kanál bez toho, aby z něj udělaly odhlašovací past nebo datový vysavač.
 
