@@ -66261,9 +66261,9 @@ Datum další kontroly:
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučení k aplikačnímu logování, bezpečnostně relevantním událostem, datům, která do logů nepatří, a ochraně logů před zneužitím.
 - EDPB: [Guidelines on transparency under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/article-29-working-party-guidelines-on-transparency-under-regulation-2016679_en) — vodítko k transparentní, srozumitelné a snadno dostupné komunikaci o zpracování osobních údajů.
 
-# Příloha: Retenční politika bez datového skladiště a právnické mlhy
+# Příloha: Provozní retenční režim bez datového skladiště a právnické mlhy
 
-Retenční politika není PDF, které vznikne pro audit a pak tiše zestárne v nějaké složce „compliance-final-final-v7“. Je to provozní mapa: říká, proč data držíš, kde leží, kdy je smažeš, kdo výjimku schvaluje a jak poznáš, že se pravidlo opravdu provedlo.
+Základní retenční politika říká, jak dlouho data držet. Provozní retenční režim řeší nudnější, ale nebezpečnější část: jestli se pravidla opravdu provádějí, kdo schvaluje výjimky, kde vznikají zapomenuté exporty a jak uživateli lidsky vysvětlíš, kdy jeho data zmizí.
 
 GDPR mezi základními principy uvádí omezení uložení: osobní údaje mají být ve formě umožňující identifikaci subjektů údajů uloženy jen po dobu nezbytnou pro daný účel ([EUR-Lex: GDPR čl. 5](https://eur-lex.europa.eu/eli/reg/2016/679/oj)). Evropská komise zároveň prakticky vysvětluje, že data mají být přesná, bezpečná a uchovávaná jen tak dlouho, jak je nutné pro účel zpracování ([European Commission: Data protection rules for businesses](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations_en)).
 
@@ -66368,7 +66368,7 @@ Rozumný první retenční návrh:
 
 Tým si k tomu přidá měsíční kontrolu tří věcí: běžel cleanup job, nevznikl nový export bez expirace a nepřibyl nový datový typ bez retenčního pravidla.
 
-## Checklist: retenční politika bez sklepa starých dat
+## Checklist: provozní retence bez sklepa starých dat
 
 - Každý datový typ má účel, vlastníka a retenční pravidlo.
 - Fakturační, bezpečnostní, produktová a marketingová data nejsou slepená do jedné doby uchování.
@@ -66410,7 +66410,7 @@ Datum další revize:
 
 # Pracovní log
 
-- 2026-10-10: Doplněna příloha „Retenční politika bez datového skladiště a právnické mlhy“ s praktickým modelem účelu a životního cyklu dat, oddělením právní a provozní retence, automatizovaným mazáním, produktovým mikrocopy, výjimkami, B2B SaaS příkladem, checklistem, vyplnitelnou retenční kartou a ověřenými zdroji GDPR, Evropské komise, EDPS a OWASP. Pomáhá malým týmům odstranit stará data bez toho, aby si z retenční politiky udělaly digitální sklep.
+- 2026-10-10: Doplněna příloha „Provozní retenční režim bez datového skladiště a právnické mlhy“ jako praktické navázání na starší retenční kapitolu: přidává životní cyklus dat, oddělení právní a provozní retence, automatizované mazání, produktové mikrocopy, správu výjimek, B2B SaaS příklad, checklist, vyplnitelnou retenční kartu a ověřené zdroje GDPR, Evropské komise, EDPS a OWASP. Pomáhá malým týmům převést retenční pravidla z dokumentu do skutečného úklidu dat.
 
 - 2026-10-10: Doplněna příloha „Changelog a release notes bez produktové mlhy a telemetrické zvědavosti“ s oddělením changelogu, release notes, status komunikace a interního release logu, praktickým přepisem změn do zákaznického jazyka, kategoriemi podle Keep a Changelog, pravidly pro breaking changes, privacy-first měřením bez zbytečné behaviorální telemetrie, přístupnými in-app oznámeními, bezpečnostní komunikací podle rizika, příkladem exportu faktur, checklistem, vyplnitelnou release kartou a ověřenými zdroji Keep a Changelog, W3C, OWASP a EDPB. Pomáhá malým webovým a SaaS týmům vysvětlovat změny srozumitelně, dohledatelně a bez dalšího datového vysavače.
 
