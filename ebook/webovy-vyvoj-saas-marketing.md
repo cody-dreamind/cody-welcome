@@ -62953,7 +62953,203 @@ Výsledkem není méně užitečný report. Je to report, který zákazník mů�
 - [ENISA — Data Protection Engineering](https://www.enisa.europa.eu/publications/data-protection-engineering) — technické přístupy k minimalizaci, oddělení, abstrakci a řízení osobních údajů.
 - [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučení k bezpečnému logování bez zbytečných citlivých údajů.
 
+
+# Příloha: DPA a subprocesoři bez smluvní mlhy a vendor romantiky
+
+DPA není PDF, které podepíšeš, uložíš do složky `legal-final-final.pdf` a pak se tváříš, že data už magicky bydlí v bezpečném domečku. Pro malý web nebo SaaS je zpracovatelská smlouva hlavně provozní mapa: kdo zpracovává jaká data, proč, kde, jak dlouho, komu je posílá dál a co se stane, když spolupráce skončí.
+
+V privacy-first produktu je výběr dodavatelů součást návrhu architektury. Stejně jako nebereš náhodnou knihovnu z npm jen proto, že má hezký README badge, neměl bys brát náhodný nástroj na analytics, chat, billing nebo support jen proto, že má hezký onboarding a třpytivý graf. Pokud nástroj vidí osobní údaje zákazníků, je to část tvého produktu, ne externí dekorace.
+
+Codyho komentář: Nejlevnější vendor je často ten, kterého vůbec nepotřebuješ. Nejlepší DPA je občas smazaný skript.
+
+## Nejdřív rozhodni, kdo je správce a kdo zpracovatel
+
+Než začneš řešit šablonu smlouvy, pojmenuj role. GDPR rozlišuje správce, který určuje účely a prostředky zpracování, a zpracovatele, který zpracovává údaje pro správce. EDPB k tomu má samostatné vodítko, protože v praxi se to plete víc než `staging-final-v2` větev.
+
+Prakticky:
+
+- pokud provozuješ SaaS pro zákazníka a zpracováváš data jeho uživatelů podle jeho nastavení, často jsi zpracovatel,
+- pokud používáš vlastní webovou analytiku pro návštěvnost svého webu, typicky jsi správce,
+- pokud nástroj určuje vlastní účely, obohacuje data pro sebe nebo je používá pro vlastní produkt, nemusí být jen zpracovatel,
+- pokud dodavatel tvrdí „jsme processor“, ale smluvně si nechává široké vlastní použití dat, rozsvítí se červená kontrolka.
+
+Nejde o akademické slovíčkaření. Role rozhoduje, co musí být ve smlouvě, kdo odpovídá zákazníkovi, kdo řeší žádosti subjektů údajů a jak vysvětluješ tok dat v dokumentaci.
+
+## Vendor karta před podpisem
+
+Pro každý nástroj, který může vidět osobní údaje, si vyplň krátkou vendor kartu. Ne jako právní román, ale jako provozní inventář.
+
+Minimální otázky:
+
+- Jaký problém nástroj řeší a co by se stalo bez něj?
+- Jaká konkrétní data do něj posíláme?
+- Jsou data osobní, citlivá, zákaznická, interní nebo technická?
+- Kde se data ukládají a odkud k nim může být vzdálený přístup?
+- Kdo je správce, zpracovatel nebo samostatný správce?
+- Máme DPA nebo jiný právní dokument pokrývající zpracování?
+- Kdo jsou subprocesoři a jak se dozvíme o změně?
+- Jaká je retence a jak probíhá výmaz po ukončení služby?
+- Jak vypadá export dat a exit plán?
+
+Když neumíš kartu vyplnit, nástroj ještě není připravený do produkce. Není ostuda napsat vendorovi. Ostuda je zjistit při incidentu, že jediný člověk, který věděl, kam data tečou, odešel před půl rokem a zanechal po sobě jen Slack thread s palcem nahoru.
+
+## DPA má pokrývat provoz, ne jen uklidnit nákup
+
+GDPR článek 28 popisuje, co má smlouva mezi správcem a zpracovatelem řešit: předmět a dobu zpracování, povahu a účel, typ osobních údajů, kategorie subjektů údajů, povinnosti a práva správce, důvěrnost, bezpečnost, subprocesory, asistenci, výmaz nebo vrácení dat a doložení souladu.
+
+V praxi si z DPA vytáhni hlavně provozní body:
+
+1. **Instrukce** — zpracovatel smí dělat jen to, co odpovídá sjednanému účelu.
+2. **Subprocesoři** — další dodavatelé nejsou překvapení schovaná za sedmým odkazem v patičce.
+3. **Bezpečnost** — technická a organizační opatření nejsou marketingová věta „industry standard security“.
+4. **Incidenty** — smlouva říká, jak rychle a jak konkrétně vendor hlásí problém.
+5. **Výmaz a export** — víš, jak data dostaneš ven a jak se smažou po konci.
+6. **Auditovatelnost** — vendor umí doložit, co slíbil, alespoň rozumnou dokumentací, certifikací nebo bezpečnostním balíčkem.
+
+Nepotřebuješ si hrát na právní oddělení Fortune 500. Potřebuješ vědět, jestli vendor zapadá do tvého produktu, zákaznického slibu a evropského provozu.
+
+## Subprocesoři nejsou poznámka pod čarou
+
+Subprocesor je dodavatel tvého dodavatele. Typicky hosting, e-mailová infrastruktura, monitoring, support tooling, CDN, AI API, storage nebo anti-abuse služba. Pro zákazníka je ale rozdíl mezi „data jsou u nás v EU“ a „data vidí pět dalších služeb, z toho tři mimo EEA“ docela zásadní. Šokující, já vím.
+
+Pro každý důležitý nástroj si nastav pravidlo:
+
+- seznam subprocesorů musí být veřejný nebo dostupný zákazníkům,
+- změny subprocesorů musí mít oznámení předem nebo aspoň jasný changelog,
+- u kritických dat máš právo změnu odmítnout nebo ukončit službu,
+- nový subprocesor se promítne do datové mapy,
+- zákaznická dokumentace se aktualizuje dřív, než se změna stane problémem.
+
+Privacy-first varianta není „žádní subprocesoři nikdy“. To by často znamenalo provozovat všechno od DNS po vlastní diskárnu ve sklepě. Privacy-first varianta je vědět, kdo data vidí, proč je vidí a jak se z toho dá odejít.
+
+## Evropský provoz začíná architekturou, ne větou v patičce
+
+Pokud produkt slibuje evropský provoz, musí to být vidět v technickém návrhu. Nestačí napsat „EU-first“ a pak posílat formuláře do nástroje, který je zpracuje v libovolném regionu podle nálady cloudu.
+
+Praktický postup:
+
+1. Rozděl data podle citlivosti: veřejný obsah, kontaktní údaje, zákaznická data, fakturace, logy, auditní stopa, support přílohy.
+2. Pro každou kategorii urči preferovaný region a zakázané trasy.
+3. U externích nástrojů ověř, zda umí EU region pro uložení i běžný provozní přístup.
+4. Pokud dochází k přenosu mimo EU/EEA, zapiš transfer mechanismus a doplň technická opatření.
+5. Neposílej do třetích zemí data, která tam vůbec nemusí být.
+
+U jednoduchého marketingového webu to může znamenat lokální formulář, evropský hosting, privacy-first analytiku bez cross-site identifikátorů a e-mail přes EU-friendly poskytovatele. U B2B SaaS to znamená navíc oddělené tenanty, kontrolu logů, přístupové role, auditní záznamy a export dat.
+
+## Transfer impact assessment drž stručný, ale konkrétní
+
+Když data nebo přístup k nim míří mimo EU/EEA, nestačí říct „máme SCC“. EDPB doporučení ke transferům pracují s tím, že musíš posoudit konkrétní přenos, okolnosti, právní rámec země příjemce a doplňková opatření. Pro malý tým to nemusí být právní epos, ale musí to být víc než emoji ✅ v tabulce.
+
+Krátké TIA pro běžný vendor může mít pět bodů:
+
+- Jaká data se přenášejí nebo zpřístupňují?
+- Do jaké země a jakému typu příjemce?
+- Jaký právní mechanismus používáme?
+- Jaká technická opatření snižují riziko, například šifrování, pseudonymizace, minimalizace nebo oddělení klíčů?
+- Jaké je rozhodnutí: přijmout, omezit rozsah, najít EU alternativu, nebo nástroj odmítnout?
+
+Codyho komentář: Pokud TIA vychází „všechno dobrý“ pro každý nástroj bez ohledu na data, region a přístup, není to TIA. Je to compliance karaoke.
+
+## Vendor offboarding plánuj už při onboardingu
+
+Dodavatelé se nemění jen při skandálu. Mění se kvůli ceně, akvizici, regionům, horší podpoře, novým subprocesorům nebo prostě proto, že produkt vyrostl. Proto se už při výběru ptej:
+
+- Dá se exportovat kompletní sada dat ve čitelném formátu?
+- Co se stane s účtem po ukončení?
+- Jak dlouho vendor drží zálohy?
+- Umí potvrdit výmaz nebo aspoň popsat retenční cyklus?
+- Lze vypnout tracking, AI trénování, produktové telemetry nebo sdílení dat?
+- Kdo v týmu vlastní ukončení služby?
+
+V datové mapě drž pole „exit postup“. U kritických vendorů si jednou ročně udělej krátké cvičení: dokázali bychom tento nástroj vypnout za týden bez ztráty zákaznické důvěry?
+
+## Praktický příklad: nový support chat
+
+Tým chce přidat support chat na B2B SaaS. Nástroj vypadá skvěle, má automatické odpovědi, AI sumarizace a integraci do CRM.
+
+Privacy-first review řekne:
+
+- Chat může vidět e-mail, jméno, obsah zprávy, přílohy a někdy i citlivé údaje, které uživatel omylem vloží.
+- Widget na každé stránce může sbírat technické údaje i tam, kde support není potřeba.
+- AI sumarizace může posílat obsah konverzací dalšímu subprocesorovi.
+- CRM integrace může duplikovat data do dalšího systému.
+- Pokud vendor nemá EU region nebo jasný seznam subprocesorů, nejde o drobný detail.
+
+Lepší verze:
+
+1. Chat zobrazit jen v aplikaci nebo na stránkách, kde dává smysl.
+2. Před odesláním ukázat krátké upozornění: „Neposílejte hesla ani citlivé dokumenty.“
+3. AI sumarizace vypnout, dokud není jasný tok dat a subprocesoři.
+4. CRM integraci omezit na ticket ID, stav a firmu, ne celý obsah zprávy.
+5. Nastavit retenci konverzací a příloh.
+6. Vendor kartu přidat do datové mapy a zákaznické dokumentace.
+
+Výsledek: tým má support chat, ale neudělal si z něj neřízený vysavač zákaznických dat.
+
+## Checklist: DPA a subprocesoři bez mlhy
+
+- [ ] U každého nástroje je jasné, zda jde o správce, zpracovatele nebo samostatného správce.
+- [ ] Vendor karta popisuje účel, data, region, retenci, export a vlastníka.
+- [ ] DPA pokrývá instrukce, bezpečnost, incidenty, subprocesory, asistenci a výmaz.
+- [ ] Seznam subprocesorů je dostupný a změny mají jasný oznamovací mechanismus.
+- [ ] Datová mapa obsahuje dodavatele i subprocesory, ne jen hlavní aplikaci.
+- [ ] EU region je ověřený pro uložení dat i běžný provozní přístup, pokud je to součást slibu.
+- [ ] Přenosy mimo EU/EEA mají zapsaný mechanismus a stručné posouzení rizika.
+- [ ] Do externích nástrojů netečou data, která tam nejsou nutná.
+- [ ] Offboarding postup existuje už při zapnutí nástroje.
+- [ ] Zákaznická dokumentace odpovídá skutečnému toku dat.
+
+## Mini šablona vendor karty
+
+```markdown
+# Vendor karta: [název nástroje]
+
+## Účel
+- Proč nástroj používáme:
+- Jaké rozhodnutí nebo proces podporuje:
+- Co by se stalo bez něj:
+
+## Role a smlouvy
+- Správce / zpracovatel / samostatný správce:
+- DPA / smluvní dokument:
+- Vlastník v týmu:
+- Datum poslední kontroly:
+
+## Data
+- Kategorie dat:
+- Citlivá nebo zákaznická data:
+- Povinný rozsah:
+- Data, která neposíláme:
+
+## Provoz
+- Region uložení:
+- Vzdálený přístup mimo EU/EEA:
+- Subprocesoři:
+- Oznámení změn:
+
+## Bezpečnost a retence
+- Klíčová technická opatření:
+- Retence:
+- Incidentní oznámení:
+- Export:
+- Výmaz / offboarding:
+
+## Rozhodnutí
+- Schválit / omezit / odmítnout:
+- Nutné změny před zapnutím:
+- Datum další kontroly:
+```
+
+## Zdroje k ověření
+
+- [GDPR, článek 28 — Processor](https://eur-lex.europa.eu/eli/reg/2016/679) — požadavky na zpracovatelskou smlouvu, subprocesory, asistenci správci, bezpečnost a výmaz nebo vrácení dat.
+- [EDPB Guidelines 07/2020 on the concepts of controller and processor in the GDPR](https://www.edpb.europa.eu/documents/guideline/guidelines-072020-on-the-concepts-of-controller-and-processor-in-the-gdpr_en) — výklad rolí správce, společného správce a zpracovatele.
+- [EDPB Recommendations 01/2020 on supplementary measures for transfer tools](https://www.edpb.europa.eu/documents/recommendation/recommendations-012020-on-measures-that-supplement-transfer-tools-to_en) — doporučení k posuzování mezinárodních přenosů a doplňkovým technickým opatřením.
+- [Evropská komise — Standard Contractual Clauses for international transfers](https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en) — přehled standardních smluvních doložek pro přenos osobních údajů mimo EU/EEA.
+
 # Pracovní log
+
+- 2026-10-10: Doplněna příloha „DPA a subprocesoři bez smluvní mlhy a vendor romantiky“ s praktickým rozlišením rolí správce a zpracovatele, vendor kartou, provozním čtením DPA, pravidly pro subprocesory, evropský provoz, stručné transfer impact assessment, offboarding, příkladem support chatu, checklistem, vyplnitelnou šablonou a ověřenými zdroji GDPR, EDPB a Evropské komise. Pomáhá malým webovým a SaaS týmům vybírat dodavatele podle skutečných datových toků, regionů, retence a exit plánu místo podle hezkého onboardingového videa.
 
 - 2026-10-10: Doplněna příloha „Privacy review před releasem bez compliance divadla“ s praktickými spouštěči kontroly, pěti otázkami před releasem, privacy-by-design pravidly, postupem pro pull request, aktualizací datové mapy, příkladem marketingového reportu, checklistem, vyplnitelnou kartou a ověřenými zdroji GDPR, EDPB, ENISA a OWASP. Pomáhá malým webovým a SaaS týmům kontrolovat nové funkce podle účelu, rozsahu dat, retence, přístupů a evropského privacy-first provozu bez zbytečné byrokracie.
 
