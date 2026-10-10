@@ -64487,7 +64487,229 @@ Další kontrola:
 - [EDPB Guidelines 03/2022 on deceptive design patterns](https://www.edpb.europa.eu/documents/guideline/guidelines-032022-on-deceptive-design-patterns-in-social-media-platform_en) — přehled klamavých návrhových vzorců, které se dají použít i jako varování pro formuláře, preference a souhlasové obrazovky mimo sociální sítě.
 - [EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en) — připomínka, že ochrana dat má být součást návrhu systému a výchozí nastavení má chránit uživatele.
 
+# Příloha: MFA a passkeys bez SMS iluze a podpůrného pekla
+
+Vícefaktorové přihlášení bývá v malých SaaS týmech buď odložené na neurčito, nebo naopak nafouknuté do enterprise menu, kterému nerozumí ani administrátor. Obě varianty bolí. Bez MFA stačí slabé heslo, uniklý token nebo phishing. S přehnaně složitým MFA zase vzniknou zamčení zákazníci, ruční výjimky, support chaos a oblíbená věta „pošli mi kód do e-mailu, já to nějak obejdu“.
+
+Privacy-first přístup je jednodušší: nabídni silnější přihlášení tam, kde chrání reálné riziko, preferuj phishing-resistant metody, neukládej zbytečné bezpečnostní detaily a připrav obnovu účtu dřív, než první zákazník ztratí telefon. MFA není dekorace do security stránky. Je to produktová funkce, která má chránit účet bez toho, aby z bezpečnosti udělala bludiště.
+
+> Codyho komentář: SMS kód je lepší než žádný druhý faktor, ale tvářit se, že je to vrchol bezpečnosti, je jako zamykat trezor gumičkou od rohlíků. Funguje to hlavně dokud se nikdo nesnaží moc.
+
+## Nejdřív rozděl účty podle dopadu
+
+MFA nezaváděj plošně stejným způsobem pro všechny role hned první den. Začni dopadem kompromitace.
+
+**Vysoký dopad** mají účty, které mohou měnit fakturaci, exportovat data, přidávat administrátory, měnit SSO, mazat projekty, rotovat API klíče nebo vypínat auditní logy. Tady má být MFA povinné.
+
+**Střední dopad** mají účty, které pracují s běžnými zákaznickými daty, ale nemohou dělat destruktivní nebo organizační změny. Tady začni silným doporučením, viditelnými výzvami a možností vynutit MFA na úrovni organizace.
+
+**Nízký dopad** mají účty pro čtení veřejných dat, testovací workspace bez reálných osobních údajů nebo demo prostředí. Tady může být MFA volitelné, ale pořád dostupné.
+
+Praktická tabulka:
+
+| Role / akce | Dopad | Doporučení |
+| --- | --- | --- |
+| Owner organizace | vysoký | Povinné MFA, ideálně passkey nebo bezpečnostní klíč. |
+| Admin fakturace | vysoký | Povinné MFA před změnou platebních údajů a exportem faktur. |
+| Support agent | střední až vysoký | MFA povinné, protože vidí zákaznický kontext. |
+| Běžný člen týmu | střední | MFA doporučené, organizace ho může vynutit. |
+| Externí auditor pouze pro čtení | střední | Časově omezený přístup a MFA podle citlivosti dat. |
+| Demo uživatel bez dat | nízký | Volitelné MFA, žádné citlivé výjimky. |
+
+## Preferuj passkeys a bezpečnostní klíče
+
+Když dnes navrhuješ nové přihlášení, začni u passkeys / WebAuthn. Pro uživatele jsou pohodlné, pro produkt bezpečnější a pro privacy-first provoz elegantní: služba nemusí znát telefonní číslo, nemusí posílat SMS přes dalšího dodavatele a snižuje riziko phishingu.
+
+Rozumné pořadí metod pro nový SaaS:
+
+1. Passkeys / WebAuthn jako preferovaná metoda pro nové účty.
+2. Hardwarové bezpečnostní klíče pro adminy, interní tým a zákazníky s vyšším rizikem.
+3. TOTP aplikace jako široce podporovaný fallback.
+4. Recovery kódy jako nouzová obnova, ne jako běžné přihlašování.
+5. SMS nebo e-mail kód jen jako přechodná metoda, pokud ji opravdu potřebuješ pro adopci.
+
+Neprodávej uživateli metody jako rovnocenné, pokud rovnocenné nejsou. V UI můžeš napsat „doporučeno“ u passkeys a „pouze záložní možnost“ u slabších metod. Bez strašení, ale bez mlžení.
+
+## SMS ber jako migrační berličku, ne bezpečnostní strategii
+
+SMS má praktické problémy: číslo je osobní údaj, doručení závisí na operátorech a zahraničních bránách, existuje riziko SIM swapu a náklady rostou s objemem. Někdy ji potřebuješ, protože část zákazníků ještě nemá připravený lepší způsob. To je realita. Ale realita není důvod udělat z SMS výchozí budoucnost.
+
+Pokud SMS používáš:
+
+- ukládej jen číslo nutné pro doručení a ukaž, k čemu slouží,
+- nepoužívej stejné číslo automaticky pro marketing nebo sales bez samostatného účelu,
+- měj rate limit na odesílání kódů,
+- loguj pokusy bez ukládání samotných kódů,
+- nabídni migraci na passkey nebo TOTP,
+- měj plán, kdy SMS přestane být výchozí metodou.
+
+Privacy-first pointa: telefonní číslo není levný technický detail. Je to identifikátor, který se snadno rozlévá do podpory, CRM, fakturace a marketingu. Když ho nepotřebuješ, nesbírej ho.
+
+## Recovery navrhni dřív než první zamčený účet
+
+Největší bezpečnostní průšvih často nevznikne při běžném přihlášení, ale při obnově. Útočník nepotřebuje obejít MFA, když support přesvědčí, aby mu ho resetoval.
+
+Dobrá obnova účtu má tři pravidla:
+
+1. **Předem připravené recovery kódy** — zobraz je jednou, umožni regeneraci po přihlášení a doporuč bezpečné uložení mimo produkt.
+2. **Silnější ověření pro adminy** — reset MFA u ownera organizace nesmí stát jen na jednom e-mailu do podpory.
+3. **Auditovatelný postup** — každý reset MFA má mít důvod, čas, kdo ho schválil a koho se týkal.
+
+Příklad bezpečnějšího resetu owner účtu:
+
+- zákazník požádá o reset z firemní e-mailové domény,
+- support ověří existující administrátory a poslední známé fakturační nebo smluvní údaje,
+- pokud existuje další owner, reset potvrzuje on,
+- pokud neexistuje, reset má čekací dobu a interní schválení,
+- po resetu systém informuje všechny administrátory organizace,
+- staré session a recovery kódy se zneplatní.
+
+Ano, je to méně pohodlné než „klikni sem a hotovo“. Přesně o to jde. Obnova účtu je místo, kde se pohodlí musí potkat s rizikem.
+
+## MFA výzvy dávej tam, kde dávají smysl
+
+MFA nemusí znamenat, že uživatel bude každých deset minut lovit telefon. Dobrý produkt rozlišuje běžné přihlášení, nové zařízení, citlivou akci a změnu bezpečnostního nastavení.
+
+Silnější výzvu použij při:
+
+- prvním přihlášení z nového zařízení,
+- exportu většího objemu zákaznických dat,
+- změně fakturačních údajů,
+- přidání nebo odebrání administrátora,
+- vypnutí MFA nebo změně SSO,
+- vytvoření dlouhodobého API klíče,
+- změně e-mailu účtu.
+
+Naopak ji nepouštěj bezhlavě při každém kliknutí v aplikaci. Bezpečnost, která se tváří jako otravný popup, učí lidi hledat zkratky. A zkratky jsou oblíbený dietní plán každého útočníka.
+
+## Nezapisuj bezpečnostní detaily jako osobní deník
+
+MFA potřebuje audit, ale nepotřebuje voyeurismus. Zapisuj události nutné pro bezpečnost a podporu, ne zbytečné detaily o zařízení, poloze nebo chování.
+
+Minimum pro audit:
+
+- typ události: MFA zapnuto, vypnuto, challenge úspěšná, challenge selhala, recovery použit,
+- účet a organizace,
+- čas,
+- přibližný technický kontext: IP prefix nebo hashovaný identifikátor session podle rizika,
+- kdo akci schválil, pokud šlo o support reset,
+- výsledek a důvod, bez tajných hodnot.
+
+Co neukládat:
+
+- TOTP secret v čitelné podobě,
+- recovery kódy po zobrazení v plaintextu,
+- celé SMS kódy nebo e-mail kódy,
+- detailní otisky zařízení „pro jistotu“, pokud pro ně nemáš jasný účel,
+- polohovou historii uživatele jako náhradu bezpečnostního modelu.
+
+Méně dat neznamená méně bezpečnosti. Znamená to menší škodu, když se bezpečnostní logy jednou stanou předmětem incidentu, exportu nebo interního dotazu.
+
+## Praktický rollout pro malý B2B SaaS
+
+Tým provozuje SaaS pro agentury. Má owner účty, členy týmu, klientské hosty, API klíče a export projektových dat.
+
+Rozumný postup na čtyři týdny:
+
+**Týden 1: Inventura rizik**
+
+- označit citlivé akce: exporty, API klíče, fakturace, členové týmu, SSO,
+- zjistit, které role je mohou provádět,
+- připravit auditní eventy pro MFA změny.
+
+**Týden 2: Volitelné MFA a recovery**
+
+- přidat passkey a TOTP,
+- vygenerovat recovery kódy,
+- napsat support postup pro reset,
+- přidat bezpečnostní stránku v nastavení účtu.
+
+**Týden 3: Povinné MFA pro rizikové role**
+
+- vynutit MFA pro ownery a interní support,
+- přidat step-up challenge pro exporty a API klíče,
+- poslat adminům jasné oznámení bez paniky.
+
+**Týden 4: Organizace a zákaznická kontrola**
+
+- umožnit organizaci vynutit MFA pro všechny členy,
+- ukázat stav MFA v přehledu členů,
+- přidat export auditních událostí pro zákazníka,
+- vyhodnotit support tickety a upravit texty.
+
+Výsledek: admin účty jsou chráněné, zákazníci mají kontrolu a tým nemusí sbírat telefonní čísla jen proto, aby vypadal bezpečněji.
+
+## Checklist: MFA bez bezpečnostního divadla
+
+- [ ] Máme seznam rolí a akcí podle dopadu kompromitace.
+- [ ] MFA je povinné pro ownery, adminy a interní support.
+- [ ] Preferovaná metoda je passkey / WebAuthn nebo bezpečnostní klíč.
+- [ ] TOTP slouží jako praktický fallback.
+- [ ] SMS není výchozí dlouhodobá strategie.
+- [ ] Recovery kódy se zobrazují bezpečně a neukládají se v plaintextu.
+- [ ] Reset MFA má support postup, schválení a auditní stopu.
+- [ ] Citlivé akce používají step-up ověření.
+- [ ] Organizace může vynutit MFA pro členy.
+- [ ] Auditní log neobsahuje tajné hodnoty ani zbytečné behaviorální profily.
+- [ ] Všichni admini dostanou upozornění při vypnutí MFA nebo resetu recovery.
+- [ ] Texty v UI jasně vysvětlují, proč se druhý faktor používá.
+
+## Mini šablona MFA karty
+
+```text
+## Účel
+Produkt / workspace:
+Vlastník bezpečnostního nastavení:
+Datum poslední revize:
+
+## Rizikové role
+Owner:
+Admin:
+Support:
+Externí role:
+
+## Povinné metody
+Pro ownera:
+Pro interní tým:
+Pro běžné členy:
+Fallback:
+
+## Citlivé akce se step-up ověřením
+Exporty:
+API klíče:
+Fakturace:
+Členové týmu:
+SSO / bezpečnostní nastavení:
+
+## Recovery
+Recovery kódy:
+Support reset postup:
+Čekací doba / schválení:
+Notifikace adminům:
+
+## Logování a retence
+Auditní eventy:
+Co se neukládá:
+Retence bezpečnostních logů:
+Kdo má přístup:
+
+## Privacy-first kontrola
+Sbíráme telefonní čísla? Proč:
+Používáme externí SMS/e-mail provider? Kde jsou data:
+Může zákazník zvolit silnější metodu bez dalšího osobního údaje:
+```
+
+## Zdroje k ověření
+
+- [OWASP Multifactor Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html) — praktická doporučení pro typy MFA, recovery, reset faktorů, rizika SMS a implementační chyby.
+- [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html) — širší kontext pro autentizaci, ochranu účtů, session a obranu proti brute-force útokům.
+- [NIST SP 800-63B Digital Identity Guidelines: Authentication and Lifecycle Management](https://pages.nist.gov/800-63-3/sp800-63b.html) — technická doporučení pro autentizátory, obnovu, out-of-band metody a omezení některých kanálů.
+- [FIDO Alliance: Passkeys](https://fidoalliance.org/passkeys/) — vysvětlení passkeys jako phishing-resistant přihlášení založeného na standardech FIDO/WebAuthn.
+- [W3C Web Authentication: An API for accessing Public Key Credentials](https://www.w3.org/TR/webauthn-3/) — specifikace WebAuthn pro práci s public-key credentials v prohlížeči.
+- [GDPR, čl. 5 na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — zásady minimalizace, účelového omezení a omezení uložení, relevantní i pro telefonní čísla, auditní logy a bezpečnostní metadata.
+
 # Pracovní log
+- 2026-10-10: Doplněna příloha „MFA a passkeys bez SMS iluze a podpůrného pekla“ s rozdělením účtů podle dopadu, doporučením passkeys/WebAuthn, realistickým pohledem na SMS, recovery postupem, step-up ověřením pro citlivé akce, minimalizací bezpečnostních logů, rollout plánem pro B2B SaaS, checklistem, vyplnitelnou MFA kartou a ověřenými zdroji OWASP, NIST, FIDO, W3C a GDPR. Pomáhá malým SaaS týmům zvýšit bezpečnost účtů bez zbytečného sběru telefonních čísel a bez support chaosu při obnově přístupu.
 - 2026-10-10: Doplněna příloha „Lead formuláře bez datového apetitu a falešné kvalifikace“ s praktickým určením účelu formuláře, tříděním polí na nutná, užitečná a pohodlná pro firmu, mikro-vysvětleními, oddělením lead magnetu od newsletteru, progresivním profilováním, bezpečnou validací, kontrolou CRM integrací, příkladem konzultační landing page, checklistem, vyplnitelnou formulářovou kartou a ověřenými zdroji GDPR a EDPB. Pomáhá webům a SaaS týmům sbírat jen data potřebná pro férovou odpověď místo budování leadového datového skladu.
 - 2026-10-10: Doplněna příloha „Webhooky a integrace bez datového průvanu“ s praktickým oddělením příjmu, normalizace a business logiky, kontraktem eventů, ověřováním podpisů, replay ochranou, idempotencí, krátkou retencí raw payloadů, ochranou proti nákladům a SSRF, fakturačním příkladem, checklistem, vyplnitelnou integrační kartou a ověřenými zdroji OWASP, GitHub Docs a CNCF CloudEvents. Pomáhá malým SaaS týmům přijímat integrační eventy bezpečně, opakovatelně a bez zbytečného hromadění osobních dat.
 - 2026-10-10: Doplněna příloha „Zákaznické exporty bez CSV pasti a datového přestřelu“ s rozdělením exportů podle účelu, datovým kontraktem, minimalizací polí, oprávněními, asynchronním generováním, obranou proti CSV injection, retenčním modelem, praktickým příkladem, checklistem, exportní kartou a ověřenými zdroji GDPR, RFC 4180, W3C a OWASP. Pomáhá SaaS týmům dát zákazníkům kontrolu nad daty bez nechtěného úniku citlivých informací.
