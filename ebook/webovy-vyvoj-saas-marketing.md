@@ -62438,7 +62438,173 @@ Privacy-first nastavení:
 - W3C WAI Forms Tutorial — přístupné formuláře, popisky, instrukce a validace: https://www.w3.org/WAI/tutorials/forms/
 
 
+# Příloha: Žádosti subjektů údajů bez právního ping-pongu a datového lovu
+
+Žádost o přístup, výmaz nebo přenositelnost dat není „otravný GDPR ticket“. Je to moment, kdy zákazník testuje, jestli tvůj SaaS opravdu ví, co o lidech drží, proč to drží a jestli to umí vysvětlit bez posílání právního kouře. Když proces nemáš připravený, tým začne improvizovat: support hledá v databázi, vývojář exportuje CSV, právník dopisuje disclaimery a zákazník mezitím čeká. Elegantní? Asi jako deploy v pátek večer přes hotelovou Wi-Fi.
+
+Evropská komise shrnuje práva lidí pod GDPR jako přístup, opravu, výmaz, omezení zpracování, přenositelnost a námitku. U žádostí organizace typicky odpovídá bez zbytečného odkladu a v principu do jednoho měsíce; pokud je žádost složitá, má člověka informovat o prodloužení a důvodech. ÚOOÚ k tomu prakticky připomíná, že správce nemá obecně omezovat komunikační kanály pro přijímání žádostí a že zpracovatel má správci pomáhat. Přeloženo do řeči produktu: nestačí mít v patičce e-mail. Potřebuješ provozní postup.
+
+## Nejdřív rozliš typ žádosti
+
+Jedna fronta „GDPR“ svádí k chaosu. Rozděl žádosti podle výsledku, který má člověk dostat:
+
+- **Přístup**: chci vědět, jaká osobní data o mně zpracováváte.
+- **Oprava**: něco je nepřesné a chci to opravit.
+- **Výmaz**: chci odstranit data, která už nepotřebujete nebo zpracováváte bez důvodu.
+- **Omezení**: nechci, aby se s daty dál aktivně pracovalo, dokud se nevyřeší spor.
+- **Přenositelnost**: chci data, která jsem poskytl, ve strojově čitelném formátu.
+- **Námitka**: nechci konkrétní zpracování, typicky marketing nebo zpracování na oprávněný zájem.
+
+Každý typ má jiné riziko, jiný výstup a jinou kontrolu identity. Proto si u každého napiš: kdo vlastní odpověď, kde jsou data, jak ověřit žadatele, co se nesmí poslat a jak se zaznamená dokončení.
+
+## Udělej datovou mapu použitelnou pro support
+
+Datová mapa, kterou chápe jen právník a tabulka z roku 2021, nepomůže. Pro žádosti potřebuješ jednoduchý provozní seznam:
+
+| Oblast | Typická data | Kde jsou | Vlastník | Výstup |
+| --- | --- | --- | --- | --- |
+| Účet | jméno, e-mail, role | aplikace, auth provider | product/backend | export profilu |
+| Billing | fakturační údaje, objednávky | účetní systém | finance | účetní výpis nebo odůvodněné ponechání |
+| Support | tickety, přílohy | support nástroj | support lead | vybrané konverzace |
+| Analytika | agregované návštěvy, eventy | privacy-first analytika | marketing/product | většinou bez individuálního exportu |
+| Audit | admin akce, bezpečnostní události | log storage | security/ops | omezený výřez, ne interní tajemství |
+
+Když oblast nemá vlastníka, není to drobnost. Je to budoucí prodlení. Každá položka má mít i poznámku, jestli jde o data zákazníka jako firmy, osobní údaje konkrétního člověka, nebo interní provozní záznam.
+
+## Identitu ověřuj úměrně riziku
+
+Nejhorší varianta je poslat export osobních údajů člověku, který jen uhodl e-mail. Druhá nejhorší varianta je nutit každého žadatele posílat sken občanky, protože tým neumí rozlišit riziko. Privacy-first cesta je přiměřenost:
+
+- přihlášený uživatel může podat žádost z účtu,
+- u e-mailové žádosti potvrď kontrolu nad adresou,
+- u citlivých nebo billing dat použij dodatečný bezpečný krok,
+- nikdy nežádej doklad totožnosti jako výchozí reflex,
+- ověřovací data nemaž do support ticketu jako suvenýr.
+
+EDPB u práva na přístup zdůrazňuje, že člověk nemusí vysvětlovat, proč žádost podává. Tvoje otázky proto nemají znít „k čemu to potřebujete?“, ale „potřebujeme ověřit, že data předáme správné osobě“.
+
+## Neexportuj interní anatomii produktu
+
+Výstup má člověku pomoci porozumět zpracování, ne otevřít interní trezor. U přístupu odděl:
+
+- osobní údaje člověka,
+- účely zpracování,
+- kategorie příjemců nebo zpracovatelů,
+- dobu uložení nebo pravidla retence,
+- zdroj dat, pokud nepřišla přímo od člověka,
+- bezpečnostní a auditní záznamy, které lze sdílet bez ohrožení služby.
+
+Co do exportu obvykle nepatří:
+
+- interní komentáře supportu, pokud obsahují hodnocení nebo údaje třetích osob,
+- bezpečnostní signály, které by usnadnily útok,
+- údaje jiných uživatelů ve stejném workspace,
+- tajemství, tokeny, IP allowlisty a interní identifikátory bez vysvětlení,
+- debug logy plné technického šumu.
+
+Codyho komentář: Dobrá odpověď na žádost není „všechno, co jsme našli v databázi“. Dobrá odpověď je srozumitelný, přiměřený a bezpečný výstup. Datový bagr není transparentnost, jen hluk s právním rizikem.
+
+## Výmaz není jedno tlačítko „smazat člověka“
+
+U výmazu si předem rozděl data na tři skupiny:
+
+1. **Smazat hned**: marketingové preference, nepotřebné profilové údaje, nepovinné poznámky.
+2. **Anonymizovat nebo oddělit**: produktové události, které už nepotřebují identitu, ale pomáhají agregované statistice.
+3. **Ponechat s důvodem**: faktury, právní povinnosti, bezpečnostní audit, otevřené spory.
+
+Evropská komise uvádí, že právo na výmaz není absolutní a nemusí se uplatnit například tam, kde zpracování vyžaduje právní povinnost nebo právní nároky. Pro malý SaaS je důležité napsat to lidsky: „Tuto část nemůžeme smazat okamžitě, protože ji musíme držet kvůli účetní povinnosti; omezíme ji na tento účel a po skončení lhůty ji odstraníme.“
+
+## Nastav interní SLA a stopky
+
+Měsíční lhůta neznamená, že ticket může tři týdny ležet ve frontě. Praktická rutina:
+
+- Den 0: žádost přijata, založena karta, potvrzen příjem.
+- Den 1–3: ověření identity a typu žádosti.
+- Den 3–10: sběr dat z hlavních systémů.
+- Den 10–15: kontrola třetích osob, právních důvodů a výjimek.
+- Den 15–20: příprava odpovědi v lidském jazyce.
+- Den 20–25: odeslání nebo informování o prodloužení.
+
+U složité žádosti není ostuda prodloužit lhůtu, pokud to pravidla umožňují a člověka včas informuješ. Ostuda je mlčet a pak poslat ZIP s názvem `export_final_v3_REAL.zip`.
+
+## Praktický příklad: export dat u B2B SaaS
+
+Uživatel z firmy požádá o přístup k osobním údajům. Tým udělá toto:
+
+1. Potvrdí příjem a ověří, že žadatel kontroluje e-mail účtu.
+2. Zkontroluje roli ve workspace, aby neodeslal data jiných členů firmy.
+3. Připraví export profilu, rolí, posledních přihlášení, marketingových preferencí a vlastních support ticketů.
+4. Auditní logy o admin akcích omezí jen na události, které se vztahují k žadateli a neodhalují bezpečnostní interní logiku.
+5. Billing data předá jen tam, kde se vztahují k osobě; firemní účetní dokumenty řeší s oprávněným zástupcem zákazníka.
+6. Odpověď doplní o účely zpracování, retenční pravidla a kontakt pro další dotazy.
+
+Výsledek není největší možný export. Je to bezpečná odpověď, která respektuje práva člověka i hranice B2B účtu.
+
+## Checklist: žádost subjektu údajů bez paniky
+
+- [ ] Existuje jeden veřejně dohledatelný kontakt pro žádosti.
+- [ ] Support ví, jak žádost rozpoznat i bez slov „GDPR“.
+- [ ] Každá žádost má typ, vlastníka, deadline a stav.
+- [ ] Ověření identity odpovídá citlivosti dat.
+- [ ] Datová mapa ukazuje systémy, vlastníky a retenční pravidla.
+- [ ] Export odděluje osobní údaje žadatele od dat ostatních lidí.
+- [ ] Výmaz má pravidla pro smazání, anonymizaci a ponechání s důvodem.
+- [ ] Odpověď je srozumitelná, ne jen právní citace.
+- [ ] Každé prodloužení lhůty se komunikuje včas a s důvodem.
+- [ ] Interní log žádosti neukládá víc osobních údajů, než je nutné pro doložení vyřízení.
+
+## Mini šablona karty žádosti
+
+```markdown
+# Žádost subjektu údajů
+
+## Základ
+- Datum přijetí:
+- Kanál:
+- Typ žádosti:
+- Vlastník:
+- Deadline:
+- Stav:
+
+## Identita
+- Účet / e-mail:
+- Ověřovací krok:
+- Riziková úroveň:
+- Co neukládáme:
+
+## Systémy
+- Aplikace:
+- Auth:
+- Billing:
+- Support:
+- Analytika:
+- Audit/logy:
+
+## Rozhodnutí
+- Co posíláme:
+- Co neposíláme a proč:
+- Co mažeme:
+- Co ponecháváme a na jakém základě:
+- Kdo provedl kontrolu:
+
+## Odpověď
+- Datum odeslání:
+- Forma výstupu:
+- Další kontakt:
+- Poznámka pro budoucí zlepšení:
+```
+
+## Zdroje k ověření
+
+- European Commission — přehled práv jednotlivců podle GDPR: https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en
+- European Commission — postup pro organizace při vyřizování žádostí jednotlivců, včetně principu odpovědi do jednoho měsíce: https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en
+- ÚOOÚ — práva subjektu údajů, role správce a zpracovatele, lhůty a komunikační kanály: https://uoou.gov.cz/poradna/poradna-gdpr/prava-subjektu-udaju
+- EDPB Guidelines 01/2022 — právo na přístup a praktické výklady k žádostem: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
+
+
 # Pracovní log
+
+- 2026-10-10: Doplněna příloha „Žádosti subjektů údajů bez právního ping-pongu a datového lovu“ s rozdělením typů žádostí, provozní datovou mapou pro support, přiměřeným ověřením identity, pravidly pro bezpečný export, výmaz, interní SLA, B2B příkladem, checklistem, kartou žádosti a ověřenými zdroji Evropské komise, ÚOOÚ a EDPB. Pomáhá SaaS týmům vyřizovat přístup, výmaz nebo přenositelnost dat bez paniky, zbytečných exportů a porušení privacy-first principů.
 
 - 2026-10-09: Doplněna příloha „ROI kalkulačky bez leadového vydírání“ s návrhem kalkulaček podle jednoho rozhodnutí, krátkými vysvětlenými vstupy, otevřeným výpočtem, okamžitým výsledkem bez povinného e-mailu, lokálním zpracováním dat, opatrnou analytikou, příkladem kalkulačky úspory supportu, checklistem, vyplnitelnou šablonou a ověřenými zdroji Evropské komise, EDPB a W3C. Pomáhá marketingovým webům a SaaS týmům používat interaktivní kalkulačky jako férovou pomůcku, ne jako leadový vysavač.
 
