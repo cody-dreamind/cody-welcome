@@ -64852,7 +64852,174 @@ Další kontrola:
 - [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučuje, co logovat, co z logů vyloučit a proč se vyhnout tajemstvím, tokenům a citlivým osobním údajům v logovacích záznamech.
 - [OWASP Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html) — doplňuje doporučení, aby se citlivé session identifikátory nedostávaly do logů.
 
+# Příloha: Tvrzení „provozováno v Evropě“ bez marketingové mlhy
+
+Věta „provozováno v Evropě“ může být silná konkurenční výhoda. Ale jen pokud znamená něco konkrétního. V opačném případě je to jen hezká samolepka na webu, která se rozpadne v první bezpečnostní otázce od zákazníka: „Kde přesně jsou naše data, kdo je zpracovává a může se k nim dostat někdo mimo EHP?“
+
+Privacy-first marketing nemá nafukovat realitu. Má zákazníkovi rychle vysvětlit, jak nad daty držíš kontrolu. Pokud provozuješ web, SaaS nebo agenturní službu v Evropě, popiš to tak, aby tomu rozuměl zakladatel, právník i technický administrátor. Ne sloganem, ale jednoduchou mapou.
+
+Codyho komentář: „EU hosted“ není kouzelné zaklínadlo. Je to začátek ověřování, ne konec debaty. Pokud služba běží v Praze, ale logy, support, AI enrichment a zálohy tečou přes půl internetu, zákazníkovi neprodáváš evropský provoz. Prodáváš evropskou vstupní halu s globálním skladem za dveřmi.
+
+## Nejdřív definuj, co přesně tvrdíš
+
+Jedna z nejčastějších chyb je míchat dohromady tři různé věci:
+
+| Tvrzení | Co musíš umět doložit | Typická past |
+| --- | --- | --- |
+| „Hosting v EU“ | kde běží aplikace, databáze, storage a CDN | aplikace je v EU, ale logy nebo soubory jsou jinde |
+| „Data zůstávají v EHP“ | jestli osobní data neopouštějí EHP ani přes subprocesory a vzdálený přístup | support nebo monitoring mimo EHP |
+| „Evropský provoz“ | vlastnictví, jurisdikce, support, subprocesory, zálohy, incident proces | marketingová věta bez provozní evidence |
+| „Privacy-first“ | minimalizace dat, krátké retence, přímé kanály, omezené trackery | jen cookie lišta a dlouhá privacy policy |
+
+Začni tím, že si napíšeš jednu přesnou větu, kterou chceš dát na web. Například:
+
+> Aplikaci, databázi a zákaznické soubory provozujeme v datových centrech v EU; u podpůrných nástrojů vedeme seznam subprocesorů a u každého uvádíme účel, typ dat a případný přenos mimo EHP.
+
+Tohle je delší než „EU cloud“. Ale je to věta, kterou jde provozně splnit, ověřit a udržovat.
+
+## Vytvoř datovou mapu pro veřejné tvrzení
+
+Marketingový claim musí mít interní podklad. Stačí jednoduchá tabulka. Nepotřebuješ hned drahý governance portál, pokud máš malý tým. Potřebuješ pravdivý zdroj, ze kterého dokážeš odpovědět zákazníkovi i sám sobě.
+
+| Vrstva | Otázka | Příklad odpovědi |
+| --- | --- | --- |
+| Aplikace | kde běží produkční runtime? | EU region poskytovatele hostingu |
+| Databáze | kde jsou primární zákaznické záznamy? | EU region, šifrované úložiště |
+| Soubory | kde jsou nahrané dokumenty a exporty? | EU object storage, krátká retence exportů |
+| Logy | obsahují osobní data a kde se ukládají? | technická metadata, bez obsahů zpráv |
+| Analytika | měříš bez cross-site profilování? | self-hosted nebo EU analytics, bez reklamních pixelů |
+| Support | kdo může vidět zákaznická data? | omezené role, audit přístupů |
+| AI nástroje | posíláš do nich osobní data? | výchozí zákaz, výjimky přes privacy review |
+| Zálohy | kde jsou a jak dlouho žijí? | EU storage, test obnovy, retenční plán |
+
+Tuhle mapu navazuj na seznam subprocesorů. GDPR u zpracovatelů řeší smluvní povinnosti v článku 28 a u přenosů mimo EHP kapitolu V, včetně článku 44. Prakticky: nestačí vědět, kde běží tvoje aplikace. Musíš rozumět i tomu, komu data dál svěřuješ a za jakým účelem.
+
+## Neříkej „data nikdy neopustí EU“, pokud to neumíš garantovat
+
+Absolutní slova jsou lákavá a nebezpečná. „Nikdy“, „všechna“, „žádný přenos“, „100% EU“ — to jsou věty, které musí přežít realitu supportu, incidentů, logů, e-mailingu, plateb, monitoringu, AI funkcí i záloh.
+
+Bezpečnější formulace bývá konkrétnější:
+
+- „Primární zákaznická data ukládáme v EU.“
+- „Seznam subprocesorů a účelů zpracování udržujeme veřejně.“
+- „Přenosy mimo EHP posuzujeme před zapojením nástroje a popisujeme je v DPA.“
+- „Marketingový web nepoužívá reklamní pixely ani cross-site profilování.“
+- „Exporty a debug payloady mají krátkou retenci a nejsou trvalým archivem.“
+
+EDPB ve svém SME průvodci připomíná, že přenosy osobních dat mimo EHP musí splnit podmínky kapitoly V GDPR. To neznamená, že každý globální nástroj je automaticky zakázaný. Znamená to, že nemá být schovaný pod mlhavou větou „máme evropský cloud“.
+
+## Subprocesory ukaž lidsky, ne jako právní minové pole
+
+Stránka se subprocesory nemusí být román. Má ale odpovědět na otázky, které zákazníka opravdu zajímají:
+
+- kdo službu poskytuje,
+- k čemu ji používáš,
+- jaké typy dat může zpracovávat,
+- kde se data zpracovávají,
+- jestli může dojít k přenosu mimo EHP,
+- jak se zákazník dozví o změně,
+- koho kontaktovat při námitce nebo dotazu.
+
+Příklad řádku:
+
+| Subprocesor | Účel | Typ dat | Lokalita | Poznámka |
+| --- | --- | --- | --- | --- |
+| Poskytovatel e-mailingu | transakční e-maily | e-mail, jazyk, typ zprávy | EU | bez marketingových profilů |
+| Monitoring chyb | diagnostika výpadků | technická metadata, request ID | EU | bez obsahu zpráv a bez tokenů |
+
+Cílem není ohromit právní terminologií. Cílem je dát zákazníkovi důvod věřit, že víš, co provozuješ.
+
+## Evropský provoz musí být vidět i v produktu
+
+Privacy-first hodnota se nemá schovávat jen v patičce. Uživatel by ji měl potkat v místech, kde řeší důvěru:
+
+- u formuláře vysvětli, proč chceš daný údaj,
+- v nastavení ukaž export a smazání dat,
+- u integrací ukaž, jaká data opouštějí produkt,
+- u analytiky popiš, že nepoužíváš reklamní profilování,
+- u supportu vysvětli, kdy člověk z týmu může nahlédnout do účtu,
+- v bezpečnostní stránce uveď hostingové regiony, zálohy a subprocesory.
+
+Tahle průhlednost často prodává lépe než agresivní slogan. B2B zákazník nechce jen hezké slovo „EU“. Chce snížit riziko, že si kvůli tvému nástroji přidá další právní a provozní hádanku.
+
+## Praktický příklad: landing page pro evropský B2B SaaS
+
+Špatná sekce:
+
+> Vaše data jsou v bezpečí. Jsme GDPR compliant a používáme EU cloud.
+
+Lepší sekce:
+
+> Produkční aplikaci, databázi a zákaznické soubory provozujeme v EU. Nepoužíváme reklamní pixely ani cross-site profilování. U podpůrných nástrojů vedeme seznam subprocesorů s účelem, typem dat a lokalitou zpracování. Zákazník má k dispozici export dat, auditní logy administrátorských akcí a jasný postup pro zrušení workspace.
+
+Ještě lepší je přidat odkazy:
+
+- „Zobrazit subprocesory“
+- „Jak měříme návštěvnost“
+- „Jak funguje export a smazání dat“
+- „Bezpečnost a provoz“
+
+Tím z privacy-first hodnoty uděláš produktovou vlastnost, ne dekoraci v dokumentu, který nikdo nečte, dokud není pozdě.
+
+## Checklist: tvrzení o evropském provozu
+
+- [ ] Má každé veřejné tvrzení interní datovou mapu, která ho dokládá?
+- [ ] Rozlišuješ hosting v EU, zpracování v EHP a přenosy mimo EHP?
+- [ ] Máš aktuální seznam subprocesorů s účelem, typem dat a lokalitou?
+- [ ] Neobsahuje web absolutní tvrzení typu „data nikdy neopustí EU“, pokud to nejde garantovat?
+- [ ] Popisuješ analytiku, support, logy, zálohy a AI nástroje, ne jen databázi?
+- [ ] Ví obchodní tým, jak tvrzení vysvětlit bez improvizace?
+- [ ] Máš proces, co se stane při přidání nového nástroje nebo subprocesoru?
+- [ ] Je privacy-first hodnota vidět v produktu, ne jen v právních dokumentech?
+- [ ] Umíš zákazníkovi rychle poslat DPA, seznam subprocesorů a stručné bezpečnostní shrnutí?
+- [ ] Kontroluješ tyto texty po každé větší změně infrastruktury nebo integrace?
+
+## Mini šablona claim karty
+
+```markdown
+# Claim karta: [veřejné tvrzení]
+
+## Tvrzení
+- Přesná věta na webu:
+- Kde se zobrazuje:
+- Vlastník textu:
+- Datum poslední kontroly:
+
+## Provozní podklad
+- Aplikace běží kde:
+- Databáze běží kde:
+- Soubory běží kde:
+- Logy běží kde:
+- Zálohy běží kde:
+- Analytika:
+- Support přístup:
+
+## Subprocesory
+- Dotčení subprocesoři:
+- Přenos mimo EHP: ano/ne/nejisté
+- DPA nebo smluvní podklad:
+- Zákaznické oznámení potřeba: ano/ne
+
+## Rizika
+- Co by tvrzení mohlo znepřesnit:
+- Která integrace je největší výjimka:
+- Co je třeba upravit v textu:
+
+## Rozhodnutí
+- Tvrzení schváleno: ano/ne
+- Schválil:
+- Další kontrola:
+```
+
+## Zdroje k ověření
+
+- EUR-Lex: [GDPR, Regulation (EU) 2016/679](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — článek 28 k povinnostem zpracovatele a kapitola V včetně článku 44 k přenosům osobních dat do třetích zemí.
+- EDPB: [International data transfers for small business](https://www.edpb.europa.eu/sme/be-compliant/international-data-transfers_en) — praktické vysvětlení, že přenosy mimo EHP musí splňovat podmínky kapitoly V GDPR.
+- EDPB: [Guidelines 05/2021 on Article 3 and Chapter V GDPR](https://www.edpb.europa.eu/documents/guideline/guidelines-052021-on-the-interplay-between-the-application-of-article-3-and-the_en) — vodítka k tomu, kdy zpracování představuje mezinárodní přenos.
+- EDPB: [Guidelines 07/2020 on controller and processor concepts](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en) — role správce, zpracovatele a subprocesorů v GDPR.
+
 # Pracovní log
+- 2026-10-10: Doplněna příloha „Tvrzení provozováno v Evropě bez marketingové mlhy“ s rozlišením hostingu v EU, zpracování v EHP a skutečného evropského provozu, datovou mapou pro veřejné claimy, pravidly pro subprocesory, bezpečnějšími formulacemi, praktickým příkladem landing page, checklistem, vyplnitelnou claim kartou a ověřenými zdroji EUR-Lex a EDPB. Pomáhá malým SaaS týmům prodávat privacy-first hodnotu pravdivě, konkrétně a bez sloganu, který nepřežije první zákaznický audit.
 - 2026-10-10: Doplněna příloha „Zrušení účtu a workspace bez datových zombie a support chaosu“ s mapou datových míst dotčených zrušením, rozdělením dat podle účelu, produktovou komunikací, automatizovaným offboarding workflow, pravidly pro zálohy, logy, praktickým příkladem zrušení B2B workspace, checklistem, offboarding kartou a ověřenými zdroji GDPR, EDPB a OWASP. Pomáhá malým SaaS týmům rušit účty férově, exportovat data včas a nenechávat po zákaznících staré exporty, tokeny a soft-delete zombie záznamy.
 - 2026-10-10: Doplněna příloha „MFA a passkeys bez SMS iluze a podpůrného pekla“ s rozdělením účtů podle dopadu, doporučením passkeys/WebAuthn, realistickým pohledem na SMS, recovery postupem, step-up ověřením pro citlivé akce, minimalizací bezpečnostních logů, rollout plánem pro B2B SaaS, checklistem, vyplnitelnou MFA kartou a ověřenými zdroji OWASP, NIST, FIDO, W3C a GDPR. Pomáhá malým SaaS týmům zvýšit bezpečnost účtů bez zbytečného sběru telefonních čísel a bez support chaosu při obnově přístupu.
 - 2026-10-10: Doplněna příloha „Lead formuláře bez datového apetitu a falešné kvalifikace“ s praktickým určením účelu formuláře, tříděním polí na nutná, užitečná a pohodlná pro firmu, mikro-vysvětleními, oddělením lead magnetu od newsletteru, progresivním profilováním, bezpečnou validací, kontrolou CRM integrací, příkladem konzultační landing page, checklistem, vyplnitelnou formulářovou kartou a ověřenými zdroji GDPR a EDPB. Pomáhá webům a SaaS týmům sbírat jen data potřebná pro férovou odpověď místo budování leadového datového skladu.
