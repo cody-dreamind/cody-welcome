@@ -65851,7 +65851,191 @@ Výsledek: zákazník má prostor testovat, obchod má co ukázat, vývojáři n
 - OWASP: [Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/) — referenční bezpečnostní standard pro aplikace včetně práce s citlivými daty, autentizací a konfigurací prostředí.
 - OWASP: [Server Side Request Forgery Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html) — praktická pravidla pro ochranu webhooků a integračních URL před voláním interních nebo nečekaných cílů.
 
+# Příloha: E-mailová doručitelnost bez sledovacích pixelů a reputační paniky
+
+E-mail je pořád jeden z nejlepších vlastněných kanálů pro SaaS, obsah i zákaznickou péči. Jenže vlastněný kanál neznamená „můžu poslat cokoli komukoli a pak se divit, že to spadlo do spamu“. Doručitelnost je kombinace techniky, reputace, relevance, souhlasu a provozní disciplíny. A privacy-first přístup k ní nepřidává brzdu; přidává zdravý rozum.
+
+Jedna srozumitelná věta pro tuto iteraci: tato příloha pomáhá malým SaaS a webovým týmům nastavit e-mail jako důvěryhodný kanál bez sledovacích pixelů, nakoupených databází, odhlašovacích pastí a panického ladění DNS až ve chvíli, kdy kampaň shoří.
+
+> Codyho komentář: E-mailová reputace je jako dobrá pověst ve vesnici. Buduješ ji pomalu, ztratíš ji rychle a žádný „growth hack“ nezmění fakt, že lidi nemají rádi, když jim někdo leze do schránky v botách od bláta.
+
+## Nejdřív odděl typy e-mailů
+
+Nejčastější chyba malého SaaS je házet všechny zprávy do jednoho pytle: reset hesla, fakturu, onboarding, newsletter, promo akci, produktový changelog i reaktivační sérii. Pro uživatele, techniku i právo to nejsou stejné věci.
+
+Praktické rozdělení:
+
+| Typ e-mailu | Účel | Příklad | Odhlašování |
+| --- | --- | --- | --- |
+| Transakční | dokončit nebo potvrdit akci uživatele | reset hesla, faktura, potvrzení objednávky | typicky ne jako marketing, ale musí být věcný |
+| Produktový provozní | informovat o službě, účtu nebo bezpečnosti | incident, změna podmínek, security alert | podle účelu a dopadu; nebalit do něj promo |
+| Onboardingový | pomoct uživateli dosáhnout první hodnoty | první kroky, tip po registraci | respektovat preference a frekvenci |
+| Obsahový | budovat vztah a vzdělávat | newsletter, článek, checklist | jasné odhlášení |
+| Marketingový | nabídnout produkt, akci nebo upgrade | sleva, kampaň, reaktivace | jasné odhlášení a souhlas / oprávněný režim podle situace |
+
+Google ve svých sender guidelines výslovně doporučuje nemíchat různé typy obsahu v jedné zprávě, například nepřidávat promo do účtenky. Prakticky: faktura nemá být trojský kůň pro upsell a reset hesla nemá nést banner „kup si vyšší tarif“. Krátkodobě to možná zvedne impresi, dlouhodobě to učí lidi nedůvěřovat tvým servisním e-mailům.
+
+## DNS minimum: SPF, DKIM, DMARC a rozumné domény
+
+Doručitelnost nezačíná v editoru newsletteru, ale v DNS a v tom, kdo smí posílat za tvoji doménu.
+
+Minimum pro seriózní provoz:
+
+- `SPF`: seznam serverů a služeb, které mohou posílat e-maily za doménu.
+- `DKIM`: kryptografický podpis zprávy, aby příjemce ověřil, že ji poslal oprávněný systém.
+- `DMARC`: pravidlo, co dělat se zprávami, které neprojdou ověřením, a možnost reportů.
+- Reverzní DNS / PTR u vlastních SMTP serverů.
+- TLS při přenosu e-mailu.
+- Oddělené adresy nebo subdomény pro různé typy posílání.
+
+Google od roku 2024 požaduje u odesílatelů na osobní Gmail účty minimálně SPF nebo DKIM, u bulk senderů SPF, DKIM i DMARC. Yahoo ve svých sender best practices podobně uvádí SPF nebo DKIM jako minimum, DMARC politiku alespoň `p=none` a funkční `List-Unsubscribe` pro marketingové a subscribed zprávy.
+
+Praktický model pro malý SaaS:
+
+```text
+hello@example.com        běžná osobní komunikace
+support@example.com      zákaznická podpora
+billing@example.com      faktury a platby
+security@example.com     bezpečnostní oznámení
+news@example.com         newsletter / obsah
+product@example.com      produktové tipy a onboarding
+```
+
+Nemusíš mít šest nástrojů. Potřebuješ ale vědět, odkud která pošta odchází, jak je autentizovaná a kdo za ni odpovídá.
+
+## One-click unsubscribe není dekorace v patičce
+
+Marketingové a subscribed zprávy mají mít snadné odhlášení. Ne „přihlaste se, najděte preference, potvrďte heslo, vyřešte captcha, napište důvod a počkejte tři pracovní dny“. To není preference centrum, to je úniková místnost.
+
+Gmail u bulk senderů vyžaduje one-click unsubscribe pro marketingové a subscribed zprávy a uvádí hlavičky `List-Unsubscribe-Post: List-Unsubscribe=One-Click` a `List-Unsubscribe`. Google zároveň ve subscription guidelines uvádí, že odhlášení má být zpracováno do 48 hodin. RFC 8058 popisuje mechanismus one-click unsubscribe přes POST, aby poštovní klient mohl nabídnout bezpečné odhlášení přímo v rozhraní.
+
+Privacy-first pravidla:
+
+- Odhlášení nesmí vyžadovat přihlášení.
+- Odkaz v patičce musí být čitelný a funkční.
+- One-click odhlášení od konkrétního typu zprávy musí opravdu odhlásit, ne jen otevřít další funnel.
+- Preference centrum je doplněk, ne překážka.
+- Odhlášení nesmí sloužit jako sběr důvodů „pro jistotu“.
+- Transakční e-maily nesmí být maskovaný marketing.
+
+## Žádné sledovací pixely jako výchozí metrika
+
+Open rate je pohodlná metrika, ale není čistá pravda. Obrázkové proxy, blokování obrázků, bezpečnostní skenery a různé poštovní klienty ji zkreslují. A hlavně: sledovací pixel je další sběr chování člověka, který nemusíš nutně potřebovat.
+
+Privacy-first alternativa:
+
+- měř doručení, bounces, unsubscribes a spam complaints,
+- sleduj kliknutí jen u odkazů, kde to má jasný účel,
+- používej agregované kampaně místo individuálního profilování,
+- u produktových e-mailů měř raději dokončenou akci v produktu než otevření e-mailu,
+- u newsletteru sleduj odpovědi, přímé návštěvy, RSS odběry a kvalitativní signály,
+- krátce vysvětli v privacy textu, jak e-mailové metriky používáš.
+
+Když potřebuješ zjistit, jestli e-mail pomáhá, zeptej se: „Co má člověk po přečtení udělat?“ Pokud odpověď je „otevřít ho“, měříš obal, ne hodnotu.
+
+## Zahřívání domény bez growth výbuchu
+
+Nová doména nebo nový odesílací systém si reputaci nevyčaruje. Google doporučuje zvyšovat objem postupně, začít u zapojených příjemců a sledovat serverové odpovědi, spam rate a reputaci domény. Prakticky: nespouštěj první newsletter na celou historickou databázi kontaktů, kterou někdo kdysi exportoval z CRM a pojmenoval `final_final_leads.csv`. To není publikum, to je archeologický nález.
+
+Rozumný postup:
+
+1. Ověř DNS a autentizaci na malé skupině interních a dobrovolných adres.
+2. Pošli první vlnu lidem, kteří se nedávno přihlásili nebo aktivně používají produkt.
+3. Sleduj bounces, spam complaints, odpovědi a odhlášení.
+4. Neaktivní kontakty reaktivuj opatrně, ne silou.
+5. Po každé větší změně šablony, domény nebo poskytovatele zvyšuj objem postupně.
+6. Pokud přijdou bounces nebo rate limiting, zpomal a oprav příčinu místo dalšího posílání.
+
+## Evropský a privacy-first provoz e-mailu
+
+E-mailový nástroj není jen editor šablon. Je to dodavatel, který může zpracovávat e-mailové adresy, obsah zpráv, preference, bounce data, kliknutí, segmenty a někdy i CRM atributy. Proto se na něj dívej stejně jako na jiného subprocesora.
+
+Před výběrem nástroje si ověř:
+
+- kde jsou uložená data kontaktů,
+- kdo je správcem a kdo zpracovatelem,
+- jestli má nástroj DPA a seznam subprocesorů,
+- jestli umí vypnout nebo omezit tracking,
+- jak dlouho drží eventy, logy a suppression list,
+- jak se exportují a mažou kontakty,
+- jestli umí oddělit marketing, produktové tipy a transakční poštu.
+
+Evropský provoz neznamená automaticky dokonalý provoz. Ale pokud máš privacy-first značku, je fér preferovat nástroj, který ti dovolí držet data v EU, minimalizovat eventy a vysvětlit zákazníkům, co se s jejich adresou děje.
+
+## Praktický příklad: newsletter pro B2B SaaS
+
+Malý B2B SaaS chce posílat měsíční newsletter s produktovými tipy a články.
+
+Špatný postup:
+
+- importovat všechny kontakty z CRM bez kontroly původu,
+- poslat z osobní domény zakladatele přes náhodný nástroj,
+- neřešit SPF, DKIM a DMARC,
+- dát odhlášení drobným šedým textem,
+- měřit otevření po jednotlivcích a dělat z toho lead scoring,
+- do účtenek přidat promo blok „když už posíláme e-mail“.
+
+Lepší postup:
+
+- posílat jen lidem s jasným vztahem k odběru,
+- oddělit `news@` od fakturace a security zpráv,
+- nastavit SPF, DKIM, DMARC a `List-Unsubscribe`,
+- mít preference stránku pro newsletter, produktové tipy a pozvánky na webináře,
+- měřit agregovaně kliknutí na hlavní odkazy a odhlášení,
+- každý e-mail napsat tak, aby byl užitečný i bez šmírovací telemetrie.
+
+## Checklist doručitelnosti bez šmírování
+
+- [ ] Víme, jaké typy e-mailů posíláme a proč.
+- [ ] Transakční, provozní a marketingové zprávy nejsou smíchané v jedné kampani.
+- [ ] Odesílací domény mají SPF, DKIM a DMARC.
+- [ ] Víme, které nástroje smí posílat za naši doménu.
+- [ ] Marketingové a subscribed zprávy mají funkční odhlášení v těle e-mailu.
+- [ ] Bulk/subscribed zprávy podporují one-click unsubscribe podle aktuálních požadavků hlavních mailbox providerů.
+- [ ] Nepoužíváme nakoupené databáze kontaktů.
+- [ ] Umíme vysvětlit, jaké e-mailové metriky sbíráme a proč.
+- [ ] Tracking pixel není zapnutý automaticky bez účelu.
+- [ ] E-mailový nástroj má zkontrolované regiony, DPA, subprocesory a retenci.
+- [ ] Bounce, complaint a unsubscribe signály někdo pravidelně kontroluje.
+- [ ] Při změně poskytovatele nebo šablony zvyšujeme objem postupně.
+
+## Vyplnitelná e-mailová karta
+
+```text
+# E-mailová karta
+
+Typ zprávy:
+Účel:
+Odesílací adresa / subdoména:
+Nástroj:
+Vlastník:
+SPF nastaveno:
+DKIM nastaveno:
+DMARC politika:
+List-Unsubscribe:
+One-click unsubscribe:
+Preference centrum:
+Měříme:
+Neměříme:
+Retence eventů:
+Region uložení dat:
+DPA / subprocesoři ověřeni:
+Postup při bounce / complaint spike:
+Datum poslední kontroly:
+```
+
+## Zdroje k ověření
+
+- Google: [Email sender guidelines](https://support.google.com/mail/answer/81126) — aktuální požadavky a doporučení pro odesílatele e-mailů na Gmail včetně SPF/DKIM/DMARC, TLS, spam rate, postupného navyšování objemu a one-click unsubscribe pro bulk sendery.
+- Google: [Email subscription guidelines](https://support.google.com/mail/answer/15263077) — doporučení pro subscription zprávy včetně potvrzení odběru, oddělení subscription a non-subscription zpráv a zpracování odhlášení do 48 hodin.
+- Yahoo Sender Hub: [Sender Best Practices](https://senders.yahooinc.com/best-practices/) — best practices pro autentizaci, DMARC, list-unsubscribe, relevantní publikum a oddělení mail streamů podle funkce.
+- IETF: [RFC 8058 — Signaling One-Click Functionality for List Email Headers](https://www.rfc-editor.org/rfc/rfc8058) — technický standard pro one-click unsubscribe přes hlavičku `List-Unsubscribe-Post`.
+- IETF: [RFC 5322 — Internet Message Format](https://www.rfc-editor.org/rfc/rfc5322) — základní formát internetových e-mailových zpráv, na který se odkazují mailbox provideři.
+- EUR-Lex: [GDPR, Regulation (EU) 2016/679](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — zásady minimalizace, transparentnosti a účelového omezení při práci s osobními údaji v e-mailovém provozu.
+
 # Pracovní log
+
+- 2026-10-10: Doplněna příloha „E-mailová doručitelnost bez sledovacích pixelů a reputační paniky“ s rozdělením transakčních, provozních, onboardingových, obsahových a marketingových e-mailů, DNS minimem SPF/DKIM/DMARC, one-click unsubscribe, privacy-first měřením bez tracking pixelů, postupným zahříváním domény, evropským vendor review, B2B SaaS příkladem, checklistem, vyplnitelnou e-mailovou kartou a ověřenými zdroji Google, Yahoo, RFC 8058, RFC 5322 a GDPR. Pomáhá malým SaaS a webovým týmům udržet e-mail jako důvěryhodný vlastní kanál bez šmírovací telemetrie a bez reputační paniky.
 - 2026-10-10: Doplněna příloha „Demo a sandbox bez produkčních dat a falešného bezpečí“ s jasným oddělením demo, sandbox, staging a development prostředí, pravidly pro syntetická data, výjimečné použití produkčních dat, sandbox hranice, přístupy, bezpečné e-maily, webhooky a integrace, retenční rutinou, B2B onboarding příkladem, checklistem, vyplnitelnou sandbox kartou a ověřenými zdroji GDPR, EDPB, ENISA a OWASP. Pomáhá SaaS týmům ukazovat produkt a testovat integrace bez kopírování produkčních osobních dat a bez zapomenutých testovacích účtů.
 - 2026-10-10: Doplněna příloha „Cenové stránky, trialy a předplatné bez pasti na důvěru“ s praktickým modelem pricing slibu, férovým trialem, jasným automatickým prodloužením, zákazem falešné urgence, datovou minimalizací v checkoutu, návrhem zrušení, B2B SaaS příkladem, checklistem, vyplnitelnou pricing kartou a ověřenými zdroji Evropské komise, EUR-Lex a GDPR. Pomáhá SaaS týmům prodávat předplatné bez skrytých závazků, manipulačního UX a zbytečného sběru dat.
 - 2026-10-10: Doplněna příloha „Newsletter a vlastní publikum bez spamové pachuti“ s praktickým slibem newsletteru, odděleným přihlášením, double opt-in hygienou, minimalizací údajů, segmentací podle zájmu, agregovaným měřením, snadným odhlášením, podporou RSS a veřejného archivu, příkladem pro privacy-first SaaS studio, checklistem, vyplnitelnou newsletterovou kartou a ověřenými zdroji ÚOOÚ, EUR-Lex a EDPB. Pomáhá malým webům a SaaS týmům budovat vlastní publikum bez nakoupených kontaktů, skrytého profilování a inboxového obtěžování.
