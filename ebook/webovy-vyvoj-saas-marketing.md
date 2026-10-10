@@ -64273,7 +64273,222 @@ Dá se použít EU provoz nebo přímé API s menším rozsahem:
 - [OWASP API Security Top 10 2023](https://api-security.owasp.org/editions/2023/en/0x11-t10/) — rizika relevantní pro integrační endpointy, zejména autentizace, autorizace, spotřeba zdrojů, citlivé business flow a unsafe consumption of APIs.
 - [CNCF CloudEvents specification](https://github.com/cloudevents/spec) — vendor-neutral model pro popis event dat, užitečný jako inspirace pro interní normalizovaný event kontrakt.
 
+
+# Příloha: Lead formuláře bez datového apetitu a falešné kvalifikace
+
+Lead formulář je často první místo, kde se dobrý marketing potká s realitou. Text slibuje pomoc, tlačítko slibuje jednoduchý další krok — a pak formulář požádá o telefon, rozpočet, velikost firmy, roční obrat, počet zaměstnanců, jméno psa a možná i krevní skupinu. Gratuluji, právě jsi proměnil zájem v malý výslech.
+
+Privacy-first lead formulář má opačnou ambici: získat jen tolik informací, aby šlo férově navázat, odpovědět nebo poslat slíbený materiál. Nic víc. Kvalifikace leadu není omluva pro datový apetit; je to disciplína v tom, kdy se ptát, proč se ptát a co s odpovědí skutečně uděláš.
+
+> Codyho komentář: Nejlepší formulář není ten, který vyždímá maximum polí. Nejlepší formulář je ten, po kterém člověk nemá pocit, že právě podepsal nájemní smlouvu na vlastní inbox.
+
+## Nejdřív urči práci formuláře
+
+Každý formulář má mít jednu hlavní práci. Pokud ji neumíš napsat jednou větou, budeš do něj přidávat pole „pro jistotu“.
+
+Dobré pracovní věty:
+
+- Kontaktní formulář má umožnit domluvit úvodní konzultaci s dostatečným kontextem pro první odpověď.
+- Demo formulář má ověřit, jestli jde o správný typ zákazníka, a nabídnout relevantní termín.
+- Formulář pro checklist má doručit slíbený materiál a volitelně nabídnout další kontakt.
+- Support formulář má zachytit problém, dopad a bezpečný způsob odpovědi.
+- Partnerský formulář má zjistit typ spolupráce, web a jednu konkrétní nabídku.
+
+Slabé pracovní věty:
+
+- „Chceme víc leadů.“
+- „Potřebujeme data do CRM.“
+- „Obchod chce vědět všechno dopředu.“
+- „Konkurence se na to ptá taky.“
+- „Možná se to někdy bude hodit.“
+
+Formulář není CRM importní roura. Je to dohoda s návštěvníkem: ty nám dáš konkrétní informaci, my ji použijeme ke konkrétní věci.
+
+## Rozděl pole na nutná, užitečná a pohodlná pro firmu
+
+Nejrychlejší audit formuláře je tabulka tří kategorií.
+
+**Nutná pole** jsou taková, bez kterých nejde splnit slib formuláře. Když člověk chce odpověď e-mailem, e-mail je nutný. Když chce nacenění integrace, krátký popis systému může být nutný.
+
+**Užitečná pole** pomáhají zrychlit odpověď, ale nesmí blokovat odeslání. Typicky web firmy, velikost týmu, preferovaný termín nebo rozpočtový rámec. Užitečné pole je dobrý kandidát na volitelné pole s vysvětlením.
+
+**Pohodlná pro firmu** jsou pole, která zjednodušují segmentaci, reporting nebo práci obchodníka, ale návštěvníkovi hned nepomáhají. Tady buď brutálně upřímný. Pokud pole existuje jen proto, aby CRM vypadalo uklizeněji, nepatří do prvního kontaktu.
+
+Praktický příklad pro B2B konzultaci:
+
+| Pole | Kategorie | Doporučení |
+| --- | --- | --- |
+| Jméno | nutné nebo užitečné | Stačí jméno, ne celé jméno s titulem. |
+| E-mail | nutné | Vysvětli, že slouží pro odpověď. |
+| Firma / web | užitečné | Dej jako volitelné, pokud konzultace není výhradně firemní. |
+| Telefon | užitečné až pohodlné | Nepovinné; telefonát domluv až po prvním kontaktu. |
+| Rozpočet | záleží na nabídce | U dražších služeb může šetřit čas, ale vysvětli proč. |
+| Počet zaměstnanců | pohodlné | Ptej se až při obchodním rozhovoru, pokud není nutné pro routing. |
+| Souhlas s newsletterem | samostatný účel | Nesmí být podmínkou odpovědi na poptávku. |
+
+## Každé pole musí mít mikro-vysvětlení
+
+Když se ptáš na něco, co není zjevné, přidej krátké vysvětlení přímo u pole. Ne dlouhý právní odstavec. Jednu lidskou větu.
+
+Příklady:
+
+- „Web firmy pomůže rychleji pochopit kontext. Nepovinné.“
+- „Rozpočet používáme jen k doporučení vhodného rozsahu, ne k automatickému zdražení.“
+- „Telefon vyplň jen pokud chceš raději zavolat než psát.“
+- „Soubor nepřikládej, pokud obsahuje osobní nebo citlivá data. Stačí popsat problém.“
+- „Newsletter je volitelný. Materiál pošleme i bez něj.“
+
+Tahle mikro-vysvětlení dělají dvě věci najednou: zvyšují důvěru a nutí tým přemýšlet, jestli pole opravdu potřebuje. Pokud neumíš pole vysvětlit bez mlžení, pole je podezřelé.
+
+## Lead magnet nesmí být rukojmí pro newsletter
+
+Checklist, kalkulačka, e-book nebo šablona může být skvělý začátek vztahu. Problém začíná ve chvíli, kdy se z materiálu stane návnada pro souhlas, který člověk ve skutečnosti nedává svobodně.
+
+Praktické privacy-first řešení:
+
+- Materiál nabídni ke stažení přímo, bez povinného e-mailu, pokud to obchodní model dovolí.
+- Pokud e-mail potřebuješ kvůli doručení, napiš to jasně: „Pošleme odkaz ke stažení.“
+- Newsletter odděl samostatným nezaškrtnutým checkboxem.
+- Vysvětli, co bude chodit, jak často a jak se lze odhlásit.
+- Nepiš „získat checklist“ na tlačítko, pokud skutečná akce znamená „přihlásit se k marketingu“.
+
+Souhlas má být konkrétní, informovaný a svobodný. EDPB v pokynech k souhlasu pod GDPR zdůrazňuje, že souhlas není univerzální lepidlo na každý marketingový nápad a že podmínění služby souhlasem může být problém, pokud souhlas není opravdu volitelný. Přeloženo do normální řeči: nedělej z checkboxu drobný tisk s úsměvem.
+
+## Progresivní profilování používej jako službu, ne past
+
+Není nutné zjistit všechno v prvním formuláři. Často stačí začít krátce a ptát se později, až je jasný kontext.
+
+Příklad postupného sběru u SaaS:
+
+1. Registrace: e-mail, heslo nebo passkey, název workspace.
+2. První onboarding: role uživatele a hlavní cíl.
+3. Před integrací: konkrétní systém, rozsah oprávnění, technický kontakt.
+4. Před fakturací: fakturační údaje.
+5. Před enterprise funkcí: bezpečnostní požadavky a SSO kontakt.
+
+Důležité pravidlo: pozdější otázky musí odpovídat aktuální práci uživatele. Pokud se na fakturační údaje ptáš před tím, než člověk pochopí hodnotu produktu, není to progresivní profilování. Je to nedočkavost v obleku.
+
+## Validace má pomáhat, ne trestat
+
+Formulářová validace je drobný detail, dokud nezačne zbytečně blokovat odeslání. Pak je to konverzní i důvěrový problém.
+
+Praktická pravidla:
+
+- Chybovou zprávu napiš vedle konkrétního pole, ne jako tajemný červený nápis nahoře.
+- Nepiš „neplatný vstup“, napiš co opravit: „E-mail musí obsahovat doménu, třeba `firma.cz`.“
+- Telefonní číslo nevyžaduj v jednom magickém formátu, pokud přijímáš mezinárodní poptávky.
+- U dlouhého textu ulož rozepsaný obsah lokálně nebo varuj před odchodem.
+- Po odeslání řekni, co se stane dál a kdy může člověk čekat odpověď.
+- Pokud formulář spadne, neukazuj stack trace, request ID ani interní názvy služeb zákazníkovi.
+
+Privacy-first validace znamená i to, že na klientovi nevoláš externí služby pro každé pole bez důvodu. E-mail můžeš syntakticky ověřit lokálně. Telefon často není potřeba ověřovat vůbec, pokud není nutnou součástí služby.
+
+## CRM integrace nesmí přepsat slib formuláře
+
+Největší datový průvan často nevznikne ve formuláři, ale po odeslání. Data se pošlou do CRM, mailing nástroje, notifikačního chatu, tabulky, automatizace a ještě do „dočasného“ webhooku, který nikdo nevypnul od loňského launchu.
+
+Před napojením formuláře si napiš datovou cestu:
+
+```text
+Formulář → server endpoint → spam kontrola → CRM → notifikace týmu → odpověď zákazníkovi → retence / smazání
+```
+
+U každého kroku zkontroluj:
+
+- jaká pole tam odchází,
+- jestli systém běží v EU nebo má jasné smluvní a transferové nastavení,
+- kdo má přístup,
+- jak dlouho data zůstávají,
+- jestli se data kopírují do logů,
+- kdo je vlastník integrace.
+
+U interních notifikací do chatu neposílej celý obsah zprávy, pokud může obsahovat citlivé údaje. Často stačí: „Nová poptávka z webu, typ: konzultace, odkaz do CRM.“ Chat není datový trezor. Je to místo, kde se gif s kočkou potká s produkčním incidentem; podle toho s ním zacházej.
+
+## Praktický příklad: konzultační landing page
+
+Firma nabízí AI automatizace pro menší B2B týmy. Původní formulář měl 11 polí: jméno, příjmení, firma, pozice, e-mail, telefon, počet zaměstnanců, obrat, rozpočet, popis problému, souhlas s newsletterem. Výsledek: málo dokončených formulářů a hodně nejasných odpovědí.
+
+Privacy-first verze:
+
+- Jméno
+- E-mail
+- Web firmy nebo krátký kontext (volitelné)
+- Co chcete zjednodušit? (textové pole)
+- Preferovaný další krok: e-mail / krátký hovor / poslat příklad řešení
+- Volitelný checkbox pro newsletter s jasným popisem frekvence
+
+Po odeslání:
+
+```text
+Díky, zpráva dorazila. Odpovíme do 2 pracovních dnů. Údaje použijeme jen pro odpověď na poptávku, pokud ses samostatně nepřihlásil/a k newsletteru.
+```
+
+Tým získal méně polí, ale lepší signál. Místo obratů a pozic vidí konkrétní problém, preferovaný další krok a férově oddělený marketingový souhlas.
+
+## Checklist: lead formulář bez datového apetitu
+
+- Má formulář jednu jasnou pracovní větu?
+- Je každé povinné pole opravdu nutné pro splnění slibu?
+- Jsou užitečná pole volitelná a vysvětlená?
+- Je newsletter oddělený od hlavní akce formuláře?
+- Nejsou použité předzaškrtnuté marketingové souhlasy?
+- Ví uživatel po odeslání, co se stane dál?
+- Neodchází obsah formuláře do zbytečných systémů?
+- Jsou interní notifikace omezené na minimum dat?
+- Má každý příjemce dat jasného vlastníka a retenční pravidlo?
+- Lze formulář používat bez reklamních pixelů a externího sledování?
+- Je chybová validace srozumitelná, přístupná a bezpečná?
+- Existuje testovací scénář pro pád formuláře bez ztráty důvěry?
+
+## Mini šablona formulářové karty
+
+```text
+# Karta lead formuláře
+
+## Účel
+Stránka / kampaň:
+Hlavní slib formuláře:
+Co má uživatel dostat:
+Kdy očekává odpověď:
+
+## Pole
+Povinná pole a důvod:
+Volitelná pole a důvod:
+Pole odmítnutá jako zbytečná:
+
+## Souhlasy
+Hlavní právní základ pro odpověď:
+Newsletter / marketing odděleně:
+Text u checkboxu:
+Odhlášení:
+
+## Datová cesta
+Kam data odchází:
+Kdo má přístup:
+Retence:
+Logy a notifikace:
+EU provoz / smlouvy / transfery:
+
+## UX kontrola
+Text po odeslání:
+Chybové stavy:
+Mobilní použitelnost:
+Přístupnost:
+
+## Datum revize
+Vlastník:
+Další kontrola:
+```
+
+## Zdroje k ověření
+
+- [GDPR, čl. 5 na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — zásady zpracování osobních údajů včetně účelového omezení, minimalizace údajů, přesnosti a omezení uložení.
+- [EDPB Guidelines 05/2020 on consent](https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en) — praktický výklad souhlasu podle GDPR, užitečný hlavně pro oddělení lead magnetu, newsletteru a marketingového souhlasu.
+- [EDPB Guidelines 03/2022 on deceptive design patterns](https://www.edpb.europa.eu/documents/guideline/guidelines-032022-on-deceptive-design-patterns-in-social-media-platform_en) — přehled klamavých návrhových vzorců, které se dají použít i jako varování pro formuláře, preference a souhlasové obrazovky mimo sociální sítě.
+- [EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en) — připomínka, že ochrana dat má být součást návrhu systému a výchozí nastavení má chránit uživatele.
+
 # Pracovní log
+- 2026-10-10: Doplněna příloha „Lead formuláře bez datového apetitu a falešné kvalifikace“ s praktickým určením účelu formuláře, tříděním polí na nutná, užitečná a pohodlná pro firmu, mikro-vysvětleními, oddělením lead magnetu od newsletteru, progresivním profilováním, bezpečnou validací, kontrolou CRM integrací, příkladem konzultační landing page, checklistem, vyplnitelnou formulářovou kartou a ověřenými zdroji GDPR a EDPB. Pomáhá webům a SaaS týmům sbírat jen data potřebná pro férovou odpověď místo budování leadového datového skladu.
 - 2026-10-10: Doplněna příloha „Webhooky a integrace bez datového průvanu“ s praktickým oddělením příjmu, normalizace a business logiky, kontraktem eventů, ověřováním podpisů, replay ochranou, idempotencí, krátkou retencí raw payloadů, ochranou proti nákladům a SSRF, fakturačním příkladem, checklistem, vyplnitelnou integrační kartou a ověřenými zdroji OWASP, GitHub Docs a CNCF CloudEvents. Pomáhá malým SaaS týmům přijímat integrační eventy bezpečně, opakovatelně a bez zbytečného hromadění osobních dat.
 - 2026-10-10: Doplněna příloha „Zákaznické exporty bez CSV pasti a datového přestřelu“ s rozdělením exportů podle účelu, datovým kontraktem, minimalizací polí, oprávněními, asynchronním generováním, obranou proti CSV injection, retenčním modelem, praktickým příkladem, checklistem, exportní kartou a ověřenými zdroji GDPR, RFC 4180, W3C a OWASP. Pomáhá SaaS týmům dát zákazníkům kontrolu nad daty bez nechtěného úniku citlivých informací.
 
