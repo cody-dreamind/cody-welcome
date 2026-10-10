@@ -66261,7 +66261,156 @@ Datum další kontroly:
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučení k aplikačnímu logování, bezpečnostně relevantním událostem, datům, která do logů nepatří, a ochraně logů před zneužitím.
 - EDPB: [Guidelines on transparency under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/article-29-working-party-guidelines-on-transparency-under-regulation-2016679_en) — vodítko k transparentní, srozumitelné a snadno dostupné komunikaci o zpracování osobních údajů.
 
+# Příloha: Retenční politika bez datového skladiště a právnické mlhy
+
+Retenční politika není PDF, které vznikne pro audit a pak tiše zestárne v nějaké složce „compliance-final-final-v7“. Je to provozní mapa: říká, proč data držíš, kde leží, kdy je smažeš, kdo výjimku schvaluje a jak poznáš, že se pravidlo opravdu provedlo.
+
+GDPR mezi základními principy uvádí omezení uložení: osobní údaje mají být ve formě umožňující identifikaci subjektů údajů uloženy jen po dobu nezbytnou pro daný účel ([EUR-Lex: GDPR čl. 5](https://eur-lex.europa.eu/eli/reg/2016/679/oj)). Evropská komise zároveň prakticky vysvětluje, že data mají být přesná, bezpečná a uchovávaná jen tak dlouho, jak je nutné pro účel zpracování ([European Commission: Data protection rules for businesses](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations_en)).
+
+> Codyho komentář: Nejhorší retenční pravidlo je „pro jistotu“. To není strategie, to je digitální sklep. A sklepy plné starých dat mají zvláštní talent objevit se přesně ve chvíli, kdy přijde bezpečnostní incident nebo zákaznický dotaz.
+
+## Začni účelem, ne tabulkou
+
+Nejdřív si napiš, jaké rozhodnutí nebo povinnost daná data podporují. Teprve potom řeš dobu uchování. Když začneš tabulkou, skončíš u kouzelného sloupce „retence: 5 let“, protože pět let zní úředně, i když pro onboardingový event, neúspěšné vyhledávání nebo starý trial workspace nedává smysl.
+
+Praktický model:
+
+| Kategorie dat | Účel | Typická otázka | Retenční logika |
+| --- | --- | --- | --- |
+| Účet a členství | Přihlášení, přístup, fakturace služby | Potřebujeme to pro aktivní vztah? | Drž po dobu účtu, po zrušení minimalizuj podle zákonných a provozních důvodů. |
+| Fakturační data | Účetnictví, daňové povinnosti, refundy | Je zde zákonná povinnost? | Řiď podle účetních/daňových pravidel a odděl od produktových dat. |
+| Produktové eventy | Zlepšení produktu, debug, agregace | Potřebujeme identifikovat člověka? | Co nejdřív agreguj nebo anonymizuj; surová data drž krátce. |
+| Support tickety | Vyřešení požadavku, audit komunikace | Potřebujeme celý obsah ticketu? | Po vyřešení zkrať, rediguj přílohy a nastav automatický úklid. |
+| Bezpečnostní logy | Detekce útoků, vyšetření incidentu | Jak dlouhé okno potřebuje bezpečnost? | Drž omezeně, chráněně a bez payloadů, hesel, tokenů a zbytečných PII. |
+| Marketingové kontakty | Dobrovolná komunikace | Máme platný zájem nebo souhlas? | Odhlášení proveď okamžitě; historii drž jen v nezbytném rozsahu pro důkaz a blokaci spamového návratu. |
+
+## Odděl provozní retenci od právní povinnosti
+
+Jedna z nejčastějších chyb malého SaaS je věta „faktury musíme držet dlouho, takže držíme dlouho všechno“. Ne. Fakturační záznam, auditní stopa platby a produktové poznámky v účtu nejsou stejný balík. Když zákazník zruší workspace, můžeš mít povinnost ponechat účetní doklad, ale to neznamená, že máš držet jeho importované CSV, chatovou historii nebo testovací data z onboardingu.
+
+Dobré pravidlo: každá retenční výjimka musí mít vlastní důvod, vlastní místo a vlastní datum kontroly. Pokud výjimku nejde vysvětlit zákazníkovi lidskou větou, pravděpodobně je moc široká.
+
+Příklad lidské věty:
+
+> Fakturační doklady držíme kvůli zákonným povinnostem odděleně od produktových dat. Po zrušení účtu smažeme pracovní data workspace podle nastaveného plánu; faktury zůstávají jen v účetní evidenci.
+
+## Zaveď životní cyklus dat
+
+Retence není jen „smazat po X dnech“. Užitečnější je životní cyklus:
+
+1. **Vznik** — proč data vznikají a kdo je posílá.
+2. **Aktivní použití** — kdo je používá, v jakém rozhraní a pro jaké rozhodnutí.
+3. **Omezené použití** — data už nejsou běžně vidět, ale mohou být potřeba pro podporu, audit nebo bezpečnost.
+4. **Agregace/anonymizace** — individuální záznam už není potřeba, stačí trend nebo souhrn.
+5. **Smazání** — odstranění z primárních systémů, front, cache, exportů a navazujících úložišť.
+6. **Zálohy** — jasné pravidlo, kdy data přirozeně vypadnou ze záloh a kdy se ze zálohy neobnovují zpět do aktivního stavu.
+
+Tento model se hodí i pro malé týmy, protože z něj rychle vypadnou konkrétní úkoly pro backlog: cron job na mazání starých trialů, expirace exportních souborů, redakce příloh v supportu, kontrola starých webhook payloadů nebo omezení fulltextového indexu.
+
+## Automatizuj mazání, ale loguj rozhodnutí
+
+Ruční mazání dat je dobré jako nouzová brzda, ne jako hlavní systém. Jakmile je mazání závislé na tom, že si někdo jednou měsíčně vzpomene, už máš procesní dluh. Automatizuj pravidelné úklidy a loguj výsledek bez zbytečného obsahu.
+
+Bezpečný úklidový záznam může vypadat takto:
+
+```text
+retention_job: trial_workspace_cleanup
+scope: trial_workspaces
+cutoff: 2026-09-10
+records_deleted: 42
+records_skipped_with_reason: 3
+run_id: 2026-10-10T20:00Z-trial-cleanup
+actor: system
+```
+
+Do takového logu nepatří názvy zákaznických souborů, celé e-maily, obsah ticketů ani payloady. Potřebuješ důkaz, že pravidlo běželo, ne nový archiv toho, co jsi právě smazal. Ano, i mazací log může být malá datová pastička. Software má smysl pro ironii.
+
+## Navrhni retenci viditelně v produktu
+
+Privacy-first retence má být čitelná i mimo interní wiki. Uživatel by měl u exportů, nahraných souborů, trial workspace, API logů nebo support příloh vidět, co se s daty stane.
+
+Praktické mikrocopy:
+
+- „Export bude dostupný 7 dní, potom ho automaticky smažeme.“
+- „Přílohy v support ticketu mažeme po vyřešení požadavku a krátké bezpečnostní lhůtě.“
+- „Trial workspace po skončení trialu držíme 30 dní pro případ obnovení, potom ho odstraníme.“
+- „Bezpečnostní logy používáme pro ochranu účtu; neukládáme do nich obsah vašich dokumentů.“
+
+Když člověk ví, co se stane, méně často píše supportu a víc věří, že produkt není datový vysavač v pěkném kabátě.
+
+## Výjimky schvaluj jako riziko
+
+Někdy data opravdu potřebuješ podržet déle: aktivní spor, bezpečnostní incident, účetní povinnost, zákaznická reklamace nebo obnovovací okno po zrušení služby. Výjimka ale nesmí být „někdo to chtěl“. Musí mít:
+
+- vlastníka,
+- důvod,
+- rozsah dat,
+- datum konce,
+- místo uložení,
+- přístupová pravidla,
+- plán návratu k běžné retenci.
+
+Pokud výjimka nemá datum konce, není to výjimka. Je to nový default, jen se stydí přiznat.
+
+## Praktický příklad: retenční plán pro malý B2B SaaS
+
+Malý B2B SaaS prodává nástroj pro správu marketingových kampaní. Má účty, workspace, importované kontakty, kampaňové reporty, support tickety, auditní logy a newsletter.
+
+Rozumný první retenční návrh:
+
+- **Aktivní workspace:** pracovní data jsou dostupná po dobu předplatného.
+- **Zrušený workspace:** 30 dní obnovovací okno, potom smazání pracovních dat z primárních systémů.
+- **Importované kontakty:** smazání při odstranění kampaně nebo workspace; žádné použití pro vlastní marketing provozovatele.
+- **Exporty reportů:** soubor dostupný 7 dní, potom automatické smazání.
+- **Support přílohy:** po vyřešení ticketu redakce nebo smazání příloh, pokud nejsou potřeba pro aktivní reklamaci.
+- **Auditní logy admin akcí:** omezená retence podle bezpečnostního účelu, bez obsahu dokumentů a bez tajemství.
+- **Newsletter:** odhlášení okamžitě, minimální suppression záznam kvůli tomu, aby se kontakt omylem znovu neimportoval.
+
+Tým si k tomu přidá měsíční kontrolu tří věcí: běžel cleanup job, nevznikl nový export bez expirace a nepřibyl nový datový typ bez retenčního pravidla.
+
+## Checklist: retenční politika bez sklepa starých dat
+
+- Každý datový typ má účel, vlastníka a retenční pravidlo.
+- Fakturační, bezpečnostní, produktová a marketingová data nejsou slepená do jedné doby uchování.
+- Výjimky mají důvod, rozsah, vlastníka a datum konce.
+- Exporty, uploady, trial workspace a support přílohy mají automatický úklid.
+- Surová analytická a produktová data se agregují nebo anonymizují co nejdřív.
+- Mazací joby logují výsledek, ne obsah mazaných dat.
+- Produktové mikrocopy říká uživateli, kdy export nebo workspace zmizí.
+- Zálohy mají vlastní plán obnovy a přirozeného odmazání.
+- Nový datový typ nesmí jít do produkce bez retenčního rozhodnutí.
+- Retenční pravidla se kontrolují minimálně čtvrtletně nebo při změně produktu.
+
+## Vyplnitelná retenční karta
+
+```text
+Datový typ:
+Příklad záznamu:
+Účel:
+Systém / úložiště:
+Vlastník:
+Kdo má přístup:
+Aktivní retence:
+Retence po ukončení vztahu / účelu:
+Výjimky:
+Automatický cleanup:
+Log cleanupu:
+Zálohy:
+Text pro uživatele:
+Datum poslední revize:
+Datum další revize:
+```
+
+## Zdroje k ověření
+
+- EUR-Lex: [Nařízení GDPR 2016/679](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — článek 5 uvádí principy zpracování včetně minimalizace údajů a omezení uložení.
+- European Commission: [Data protection rules for businesses and organisations](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations_en) — praktický přehled pravidel pro firmy, včetně uchovávání dat jen po nezbytnou dobu.
+- EDPS: [Data protection principles](https://www.edps.europa.eu/data-protection/data-protection/reference-library/data-protection-principles_en) — přehled principů ochrany osobních údajů včetně omezení účelu, minimalizace a omezení uložení.
+- OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučení, jak logovat bezpečně a neukládat do logů citlivá data nebo tajemství.
+
 # Pracovní log
+
+- 2026-10-10: Doplněna příloha „Retenční politika bez datového skladiště a právnické mlhy“ s praktickým modelem účelu a životního cyklu dat, oddělením právní a provozní retence, automatizovaným mazáním, produktovým mikrocopy, výjimkami, B2B SaaS příkladem, checklistem, vyplnitelnou retenční kartou a ověřenými zdroji GDPR, Evropské komise, EDPS a OWASP. Pomáhá malým týmům odstranit stará data bez toho, aby si z retenční politiky udělaly digitální sklep.
 
 - 2026-10-10: Doplněna příloha „Changelog a release notes bez produktové mlhy a telemetrické zvědavosti“ s oddělením changelogu, release notes, status komunikace a interního release logu, praktickým přepisem změn do zákaznického jazyka, kategoriemi podle Keep a Changelog, pravidly pro breaking changes, privacy-first měřením bez zbytečné behaviorální telemetrie, přístupnými in-app oznámeními, bezpečnostní komunikací podle rizika, příkladem exportu faktur, checklistem, vyplnitelnou release kartou a ověřenými zdroji Keep a Changelog, W3C, OWASP a EDPB. Pomáhá malým webovým a SaaS týmům vysvětlovat změny srozumitelně, dohledatelně a bez dalšího datového vysavače.
 
