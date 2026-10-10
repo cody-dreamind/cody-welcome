@@ -62602,6 +62602,226 @@ Výsledek není největší možný export. Je to bezpečná odpověď, která r
 - EDPB Guidelines 01/2022 — právo na přístup a praktické výklady k žádostem: https://www.edpb.europa.eu/documents/guideline/guidelines-012022-on-data-subject-rights-right-of-access_en
 
 
+# Příloha: Webhooky a integrace bez datové díry a tichých překvapení
+
+Webhook je malá věc s velkým egem. Vypadá jako obyčejný HTTP request, ale ve skutečnosti je to dohoda mezi dvěma systémy: „Když se u mě něco stane, pošlu ti zprávu a ty podle ní něco uděláš.“ To je skvělé pro SaaS, automatizaci i marketingové provozy. A taky je to krásná zkratka k průšvihu, pokud webhook posílá moc dat, nemá podpis, opakuje se bez idempotence nebo skončí v nástroji, který nikdo po třech měsících nehlídá.
+
+Tahle příloha pomáhá malým týmům navrhnout webhooky a integrace tak, aby byly užitečné, auditovatelné a datově střídmé. Nejde o akademickou čistotu. Jde o to, aby fakturační SaaS, CRM, e-mailový nástroj, support systém nebo interní automatizace nepřenesly osobní data tam, kde nemají co dělat.
+
+*Codyho komentář:* Webhook bez datové mapy je jako dveře bez kliky, štítku a zámku. Možná funguje. Jen nikdo neví, kdo jimi chodí. Krásná architektura, dokud nezačne hořet.
+
+## Začni integrační kartou, ne endpointem
+
+Než vznikne první `POST /webhooks`, napiš krátkou integrační kartu. U každé integrace musí být jasné:
+
+- jaké rozhodnutí nebo proces integrace podporuje,
+- kdo je vlastníkem na straně produktu a kdo na straně provozu,
+- jaká data tečou ven a dovnitř,
+- jestli jde o osobní údaje, obchodní tajemství, provozní metadata nebo anonymní signál,
+- jak dlouho se data drží v cílovém systému,
+- jak integraci vypneš bez rozbití zákaznické práce.
+
+GDPR čl. 25 vyžaduje ochranu údajů už při návrhu a ve výchozím nastavení, ne až jako závěrečnou dekoraci na release checklistu ([EUR-Lex: GDPR, článek 25](https://eur-lex.europa.eu/eli/reg/2016/679/oj)). EDPB k tomu prakticky zdůrazňuje, že systémy mají být navržené s minimalizací a ochranou práv subjektů údajů od začátku ([EDPB: Data protection by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)).
+
+Praktické pravidlo: pokud nedokážeš jednou větou vysvětlit, proč konkrétní pole ve webhooku existuje, pole do payloadu nepatří.
+
+## Posílej událost, ne databázový šuplík
+
+Špatný webhook vypadá takhle: „Pošleme celý objekt zákazníka, celou objednávku a celé nastavení účtu, protože se to možná bude hodit.“ To není integrace, to je datový výprodej v igelitce.
+
+Dobrý webhook posílá minimální událost:
+
+```json
+{
+  "event_id": "evt_01H...",
+  "event_type": "invoice.paid",
+  "occurred_at": "2026-10-10T09:00:00Z",
+  "workspace_id": "wrk_123",
+  "invoice_id": "inv_456",
+  "amount_cents": 240000,
+  "currency": "CZK"
+}
+```
+
+Do payloadu typicky nepatří celé jméno zákazníka, e-mail plátce, interní poznámky supportu, IP adresa, kompletní billing adresa nebo seznam uživatelů workspace. Pokud příjemce potřebuje detail, ať si ho vyžádá přes autorizované API podle svých oprávnění. OWASP API Security Top 10 2023 spojuje nadměrné vystavení polí a mass assignment pod problém Broken Object Property Level Authorization — jinými slovy: nebezpečí často není jen v endpointu, ale v tom, která pole dovolíš číst nebo měnit ([OWASP API Security Top 10 2023](https://api-security.owasp.org/editions/2023/en/0x11-t10/)).
+
+Privacy-first varianta:
+
+- payload obsahuje identifikátory a stav, ne celé profily,
+- citlivý detail se načítá až na vyžádání a jen pro oprávněný účel,
+- interní poznámky, support kontext a bezpečnostní signály se neposílají do marketingových ani automatizačních nástrojů,
+- každá nová verze payloadu má changelog a datum účinnosti.
+
+## Podepisuj zprávy a braň replay útokům
+
+Příjemce webhooku musí ověřit, že zprávu opravdu poslal očekávaný systém. Nestačí tajný URL token typu `/webhook/super-secret-please-dont-guess`. URL se kopíruje do logů, ticketů, dokumentace i monitoringu. Tajemství v URL je tajemství jen do první páteční migrace.
+
+OWASP Webhook Security Cheat Sheet doporučuje pro ověřování používat HMAC podpis, ideálně HMAC-SHA256, ověřovat podpis u každého doručení, používat náhodný signing secret pro každý webhook a zahrnout timestamp do podepsaného materiálu kvůli omezení replay útoků ([OWASP Webhook Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Webhook_Security_Cheat_Sheet.html)).
+
+Praktický model:
+
+- každý webhook endpoint má vlastní signing secret,
+- publisher podepíše timestamp a raw body,
+- receiver odmítne zprávu se starým timestampem,
+- receiver drží krátkou replay cache podle `event_id` nebo podpisu,
+- rotace secretu má přechodné období, kdy platí starý i nový podpis,
+- chybné podpisy se logují jako bezpečnostní událost, ne jako běžná validační chyba.
+
+Ukázka kontrolního algoritmu:
+
+1. přečti raw body bez přeformátování JSONu,
+2. přečti `X-Webhook-Timestamp` a `X-Webhook-Signature`,
+3. zkontroluj toleranci času, třeba pět minut podle rizika,
+4. spočítej HMAC nad `timestamp + "." + raw_body`,
+5. porovnej podpis konstantním časem,
+6. ověř, že `event_id` ještě nebylo zpracováno,
+7. až potom proveď business akci.
+
+## Idempotence je levnější než omluvný e-mail
+
+Webhook se může doručit dvakrát. Nebo pětkrát. Nebo přesně ve chvíli, kdy tvoje databáze dělá údržbu a fronta se rozhodne být kreativní. Proto příjemce nesmí předpokládat, že každá zpráva je nová.
+
+Každá událost potřebuje stabilní `event_id`. Příjemce si uloží stav zpracování: přijato, zpracovává se, hotovo, selhalo, ignorováno. Když přijde stejná událost znovu, nesmí vytvořit druhou fakturu, druhý účetní zápis, druhý e-mail zákazníkovi nebo druhý interní ticket.
+
+Praktický vzor:
+
+- `event_id` je unikátní napříč zdrojovým systémem,
+- business operace používá vlastní idempotency key,
+- opakované doručení vrací `2xx`, pokud je původní zpracování hotové,
+- retry politika má exponenciální backoff a maximální dobu doručování,
+- ruční replay je auditovaná admin akce,
+- dead-letter fronta má vlastníka a pravidelný úklid.
+
+Tohle není jen technická elegance. Je to zákaznická důvěra. Nikdo nechce vysvětlovat, proč automatizace „jen jednou“ poslala pět pozvánek do produkčního workspace.
+
+## Odděl integrační oprávnění od uživatelských účtů
+
+Integrace nemá používat osobní účet zakladatele, admina nebo support agenta. Použij samostatný integrační token nebo servisní účet s minimálním oprávněním. Pokud integrace jen přijímá událost o zaplacené faktuře, nemá mít právo číst všechny uživatele, mazat projekty nebo exportovat zákaznická data.
+
+OWASP řadí chybné řízení přístupu a nadměrná oprávnění mezi klíčová API rizika; u integrací to bolí dvojnásob, protože token často žije déle než běžná session a pracuje bez lidského dohledu ([OWASP API Security Top 10 2023](https://api-security.owasp.org/editions/2023/en/0x11-t10/)).
+
+Minimální sada pravidel:
+
+- token má jasný účel a vlastníka,
+- token má scope podle konkrétní integrace,
+- token má expiraci nebo pravidelnou review,
+- token nejde zobrazit znovu po vytvoření,
+- token se ukládá jen jako hash nebo v bezpečném secrets úložišti,
+- každé použití tokenu se loguje bez ukládání payloadu navíc.
+
+## Marketingové a no-code integrace drž na vodítku
+
+No-code automatizace je užitečná. Umí zachránit týdny vývoje. Ale taky umí potichu poslat zákaznický e-mail, poznámku z CRM, obsah formuláře a interní tag do pěti nástrojů, které nikdo neviděl od Q2.
+
+Privacy-first pravidlo: každá automatizace má být čitelná pro člověka, který ji nepsal. U každého kroku musí být jasné, jaký signál bere, kam ho posílá a proč. Pokud nástroj běží mimo Evropu nebo nedává dobrou kontrolu nad subprocesory, zvaž evropskou alternativu, vlastní malý worker nebo obyčejný server-side job.
+
+Pro marketing stačí často méně:
+
+- místo posílání celého lead profilu pošli jen `lead_submitted` a interní ID,
+- místo externího enrichmentu se zeptej člověka ve formuláři na jednu relevantní věc,
+- místo sledovacího pixelu použij agregovanou analytiku a UTM ve vlastních logách,
+- místo automatické segmentace podle chování použij explicitní preference uživatele,
+- místo nekonečné synchronizace všech kontaktů posílej jen ty, kteří dali konkrétní souhlas nebo mají jasný B2B účel.
+
+## Verze webhooků neřeš až v den rozbití
+
+Webhook je rozhraní. A rozhraní potřebuje verze. Jakmile má příjemce postavenou automatizaci na určitém tvaru payloadu, náhlá změna názvu pole je produkční incident v převleku za „malý refaktor“.
+
+Doporučený provozní rytmus:
+
+- přidávání nových volitelných polí je bezpečnější než přejmenování stávajících,
+- breaking change má novou verzi endpointu nebo event typu,
+- stará verze má oznámené datum ukončení,
+- zákazník vidí poslední úspěšné doručení a aktuální verzi,
+- dokumentace obsahuje příklad payloadu pro každý event,
+- testovací webhook jde poslat z administrace bez zásahu vývojáře.
+
+Malý SaaS nemusí mít portál jako Stripe. Ale měl by mít aspoň stránku „Integrace“, kde zákazník vidí endpointy, stav podpisu, poslední doručení, chyby a tlačítko pro rotaci secretu.
+
+## Praktický příklad: fakturační SaaS posílá zaplacenou fakturu do CRM
+
+Situace: B2B fakturační SaaS chce po zaplacení faktury poslat signál do CRM, aby obchodník viděl, že zákazník je aktivní a může řešit rozšíření účtu.
+
+Špatná varianta:
+
+- webhook posílá celé zákaznické konto,
+- payload obsahuje e-maily všech uživatelů workspace,
+- CRM dostane billing adresu, interní poznámku a historii plateb,
+- endpoint je chráněný jen náhodným URL,
+- opakované doručení vytvoří duplicitní aktivitu,
+- nikdo neví, kdo integraci vlastní.
+
+Lepší varianta:
+
+- webhook `invoice.paid` posílá jen `event_id`, `workspace_id`, `invoice_id`, částku, měnu a čas,
+- CRM aktivita vznikne jednou podle idempotency key `invoice_paid:inv_456`,
+- detail zákazníka se v CRM doplní jen z polí, která už CRM oprávněně drží,
+- webhook je podepsaný HMAC podpisem a timestampem,
+- integrační token má scope `crm.activity.write`,
+- zákazník v administraci vidí, že integrace CRM přijímá platební signály,
+- při vypnutí integrace se zastaví nové události a zůstane auditní stopa.
+
+Výsledek: obchod dostane užitečný signál, ale CRM se nestane druhou neřízenou kopií fakturační databáze.
+
+## Checklist: webhook bez datové díry
+
+- [ ] Má integrace vlastníka, účel a datovou mapu?
+- [ ] Posílá payload jen minimální událost, ne celý interní objekt?
+- [ ] Jsou osobní údaje, interní poznámky a bezpečnostní signály explicitně vyloučené?
+- [ ] Ověřuje příjemce HMAC podpis nad raw body a timestampem?
+- [ ] Existuje ochrana proti replay útokům a duplicitnímu zpracování?
+- [ ] Má každá událost stabilní `event_id` a idempotency pravidlo?
+- [ ] Má integrační token minimální scope, vlastníka a rotaci?
+- [ ] Je retry politika omezená a pozorovatelná?
+- [ ] Vidí zákazník poslední doručení, chybu a možnost rotovat secret?
+- [ ] Má breaking change verzi, oznámení a datum ukončení starého formátu?
+- [ ] Je vypnutí integrace bezpečné a auditované?
+
+## Mini šablona integrační karty
+
+```markdown
+# Integrační karta: [název integrace]
+
+## Účel
+- Jakému procesu integrace pomáhá:
+- Vlastník produktu:
+- Vlastník provozu:
+- Kritičnost: nízká / střední / vysoká
+
+## Data
+- Event typy:
+- Pole v payloadu:
+- Osobní údaje:
+- Pole výslovně zakázaná:
+- Retence v cílovém systému:
+
+## Bezpečnost
+- Podepisování: ano / ne
+- Replay ochrana:
+- Idempotency key:
+- Token/scopes:
+- Rotace secretu:
+
+## Provoz
+- Retry politika:
+- Dead-letter postup:
+- Monitoring:
+- Ruční replay:
+- Vypnutí integrace:
+
+## Změny
+- Aktuální verze payloadu:
+- Breaking changes:
+- Datum další review:
+```
+
+## Zdroje k ověření
+
+- [OWASP Webhook Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Webhook_Security_Cheat_Sheet.html) — podpisy, replay ochrana, tajemství a bezpečné zpracování webhooků.
+- [OWASP API Security Top 10 2023](https://api-security.owasp.org/editions/2023/en/0x11-t10/) — API rizika včetně autorizace na úrovni objektů a polí.
+- [GDPR, článek 25 — data protection by design and by default](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — právní základ pro návrh ochrany údajů od začátku.
+- [EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en) — praktický výklad principů ochrany údajů návrhem a výchozím nastavením.
+
 # Pracovní log
 
 - 2026-10-10: Doplněna příloha „Žádosti subjektů údajů bez právního ping-pongu a datového lovu“ s rozdělením typů žádostí, provozní datovou mapou pro support, přiměřeným ověřením identity, pravidly pro bezpečný export, výmaz, interní SLA, B2B příkladem, checklistem, kartou žádosti a ověřenými zdroji Evropské komise, ÚOOÚ a EDPB. Pomáhá SaaS týmům vyřizovat přístup, výmaz nebo přenositelnost dat bez paniky, zbytečných exportů a porušení privacy-first principů.
@@ -63150,3 +63370,4 @@ Výsledek není největší možný export. Je to bezpečná odpověď, která r
 - 2026-10-09: Obnovena plná verze e-booku po zjištění, že aktuální soubor obsahoval jen placeholder, a doplněna příloha „Auditní logy pro admin akce bez detektivní kanceláře“ s praktickým modelem auditovatelných akcí, strukturou eventu, zákaznickým feedem, retencí, ochranou logů, incidentovým dotazem, checklistem, vyplnitelnou šablonou a ověřenými zdroji OWASP, NIST a Evropské komise. Pomáhá zakladatelům a provozním týmům rychle vysvětlit citlivé změny bez ukládání zbytečných osobních dat.
 - 2026-10-09: Doplněna příloha „Feature flagy a postupné releasy bez datového dluhu“ s rozdělením typů flagů, oddělením flagů od autorizace, minimalizací dat pro vyhodnocení, rollout postupem, auditováním změn, kill switchem, úklidem toggle debt, checklistem, vyplnitelnou kartou a ověřenými zdroji OpenFeature, CNCF, Martina Fowlera a OWASP. Pomáhá malým SaaS týmům nasazovat postupně bez skrytých datových profilů a věčných přepínačů v kódu.
 - 2026-10-09: Doplněna příloha „Přístupová práva bez rolové špagety a věčných adminů“ s praktickým modelem rolí podle citlivých akcí, deny-by-default kontrolami, just-in-time přístupem, pravidly pro servisní účty a API klíče, čtvrtletní access review rutinou, supportním příkladem, checklistem, vyplnitelnou kartou a ověřenými zdroji OWASP, NIST a ENISA. Pomáhá malým SaaS týmům omezit věčné adminy bez zbytečné byrokracie.
+- 2026-10-10: Doplněna příloha „Webhooky a integrace bez datové díry a tichých překvapení“ s integrační kartou, minimalizací payloadů, HMAC podpisy, replay ochranou, idempotencí, oddělenými integračními oprávněními, verzováním, praktickým příkladem CRM integrace, checklistem, vyplnitelnou šablonou a ověřenými zdroji OWASP, GDPR a EDPB. Pomáhá malým SaaS týmům posílat užitečné signály mezi systémy bez tichého kopírování osobních dat.
