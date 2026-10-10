@@ -65018,7 +65018,216 @@ Tím z privacy-first hodnoty uděláš produktovou vlastnost, ne dekoraci v doku
 - EDPB: [Guidelines 05/2021 on Article 3 and Chapter V GDPR](https://www.edpb.europa.eu/documents/guideline/guidelines-052021-on-the-interplay-between-the-application-of-article-3-and-the_en) — vodítka k tomu, kdy zpracování představuje mezinárodní přenos.
 - EDPB: [Guidelines 07/2020 on controller and processor concepts](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en) — role správce, zpracovatele a subprocesorů v GDPR.
 
+# Příloha: Kampaňová atribuce bez sledovacího labyrintu a consent stringů
+
+Marketing chce vědět, odkud přicházejí dobří zákazníci. To je legitimní. Problém začíná ve chvíli, kdy se z otázky „který kanál přinesl smysluplnou poptávku?“ stane automatické sledování lidí napříč weby, zařízeními a reklamními sítěmi.
+
+Privacy-first atribuce není slepota. Je to disciplína: měřit rozhodnutí, která opravdu ovlivní práci týmu, a nesbírat identifikátory jen proto, že je nástroj umí nasát. Malý web nebo SaaS nepotřebuje detektivní kancelář v prohlížeči zákazníka. Potřebuje vědět, které kampaně mají smysl dál podporovat.
+
+> Codyho komentář: Pokud k vyhodnocení kampaně potřebuješ osm skriptů, dva pixely, consent string a dashboard, kterému rozumí jen člověk po třetí kávě, možná nemáš analytický problém. Možná máš problém s rozhodnutím, které se bojíš zjednodušit.
+
+## Nejdřív napiš rozhodnutí, které má atribuce podpořit
+
+Před měřením si napiš jednu větu:
+
+```text
+Atribuci používáme k rozhodnutí, jestli [kanál/kampaň] dál financovat, změnit nebo zastavit podle [signálu hodnoty].
+```
+
+Dobré příklady:
+
+- „Atribuci používáme k rozhodnutí, jestli pokračovat v partnerských článcích podle počtu kvalifikovaných poptávek.“
+- „Atribuci používáme k rozhodnutí, jestli newsletter přivádí lidi k demo rezervaci.“
+- „Atribuci používáme k rozhodnutí, jestli placená kampaň přivádí registrace, které dokončí onboarding.“
+
+Slabé příklady:
+
+- „Chceme vědět všechno o cestě uživatele.“
+- „Nástroj to nabízí, tak to zapneme.“
+- „Marketing chce mít lepší data.“
+
+Když není jasné rozhodnutí, nástroj začne vyrábět data pro data. A data pro data jsou jen drahý digitální prach.
+
+## UTM parametry používej jako štítky, ne jako identitu
+
+UTM parametry jsou pořád užitečné, pokud je používáš jednoduše a konzistentně. Nejsou osobní identifikátor. Jsou štítek odkazu: odkud člověk přišel, z jaké kampaně a přes jaký typ obsahu.
+
+Praktický baseline:
+
+| Parametr | Použití | Příklad |
+| --- | --- | --- |
+| `utm_source` | konkrétní zdroj | `partner-blog`, `rss`, `linkedin` |
+| `utm_medium` | typ kanálu | `referral`, `email`, `social`, `cpc` |
+| `utm_campaign` | název kampaně | `ai-audit-2026-q4` |
+| `utm_content` | varianta odkazu | `cta-bottom`, `case-study-link` |
+
+Co nedávat do UTM:
+
+- e-mailovou adresu,
+- jméno firmy, pokud není veřejný segment kampaně,
+- interní ID kontaktu,
+- název dealu v CRM,
+- cokoli, co bys nechtěl vidět v serverových logách, historii prohlížeče nebo přeposlaném odkazu.
+
+UTM odkaz je veřejnější, než vypadá. Lidé ho kopírují, přeposílají a otevírají v různých kontextech. Když do něj dáš osobní údaj, nerozbil se marketing. Rozbila se disciplína.
+
+## Měř první návštěvu a konverzi, ne celý život člověka
+
+Pro většinu malých webů stačí jednoduchý model:
+
+1. uložit zdroj první relevantní návštěvy na krátkou dobu,
+2. uložit zdroj poslední relevantní návštěvy před konverzí,
+3. připojit k poptávce nebo registraci jen kampaňové štítky, ne celé chování,
+4. vyhodnocovat agregovaně podle kampaně, ne podle osoby.
+
+Příklad u konzultační landing page:
+
+- návštěvník přijde z partnerského článku s `utm_campaign=ai-audit-2026-q4`,
+- přečte si stránku,
+- odešle formulář,
+- CRM uloží `source=partner-blog`, `campaign=ai-audit-2026-q4`, `conversion=form_submit`,
+- neukládá kompletní historii scrollování, heatmapu ani seznam každé navštívené stránky.
+
+Tohle stačí pro otázku: „Má partnerský článek přivádět další podobné kampaně?“
+
+## Cookie a souhlas řeš podle účelu, ne podle pohodlí dashboardu
+
+Pokud měření vyžaduje ukládání nebo čtení informací v zařízení uživatele pro marketingové účely, dostáváš se do oblasti souhlasu podle evropských pravidel. GDPR také vyžaduje, aby souhlas šel odvolat stejně snadno, jako byl udělen. Prakticky: pokud má člověk jedno kliknutí na přijetí marketingového měření, neměl by potřebovat archeologii v patičce na odmítnutí.
+
+Privacy-first pravidla:
+
+- nezapínej reklamní pixely při prvním načtení stránky,
+- analytické a marketingové účely drž odděleně,
+- odmítnutí udělej stejně viditelné jako přijetí,
+- změnu preferencí nabídni trvale dostupnou cestou,
+- v consent logu ukládej minimum: verzi textu, čas, volbu a technický kontext nutný k doložení, ne marketingový profil.
+
+Pokud umíš rozhodnutí vyhodnotit z agregovaných serverových dat, formulářových štítků a vlastních kanálů, nepřidávej invazivnější vrstvu jen kvůli hezčím grafům.
+
+## Pozor na consent string jako datový produkt
+
+Některé reklamní ekosystémy pracují s řetězci souhlasů a sdílením signálů mezi mnoha účastníky. To může být pro malý evropský web nepřiměřeně složitá a riziková vrstva: musíš rozumět tomu, kdo dostává jaký signál, za jakým účelem, na základě čeho a jak dlouho ho používá.
+
+Praktická brzda před zapojením takového rámce:
+
+- Umíš vyjmenovat všechny kategorie příjemců signálu?
+- Víš, jestli je signál sám osobním údajem nebo se k osobním údajům váže?
+- Umíš zákazníkovi lidsky vysvětlit, co se stane po kliknutí na „Souhlasím“?
+- Máš proces pro odvolání souhlasu a propagaci změny do zapojených systémů?
+- Přináší to rozhodnutí, které nejde rozumně udělat jednodušším měřením?
+
+Když odpovědi nejsou jasné, drž se jednoduššího modelu. Méně integrací často znamená méně právní nejistoty, méně technického dluhu a méně nedůvěry u zákazníka.
+
+## Atribuci propojuj s kvalitou, ne jen s objemem
+
+Nejčastější chyba: tým optimalizuje na počet leadů a pak se diví, že obchod tráví týden filtrováním šumu. Lepší je přidat jednoduchý kvalitativní stav, který nevyžaduje sledovat člověka napříč internetem.
+
+Příklad stavů v CRM:
+
+| Stav | Význam | Kdo vyplní |
+| --- | --- | --- |
+| `new` | nová poptávka | formulář automaticky |
+| `qualified` | odpovídá cílovému segmentu | obchod / zakladatel |
+| `bad_fit` | mimo službu nebo rozpočet | obchod / zakladatel |
+| `won` | vznikla spolupráce | obchod / fakturace |
+| `lost` | neuzavřeno | obchod |
+
+Vyhodnocuj kampaně podle poměru kvalifikovaných poptávek, ne jen podle počtu odeslaných formulářů. Privacy-first atribuce má být méně šmírovací a zároveň obchodně ostřejší. Ano, jde to. Technologie se neurazí.
+
+## Vlastní kanály dávej před pronajaté publikum
+
+Atribuce je snazší, když nestojí celá distribuce na cizí reklamní infrastruktuře. Vlastní kanály jsou jednodušší na měření i vysvětlení:
+
+- RSS feed pro články a release notes,
+- přímé odkazy v dokumentaci,
+- partnerské odkazy s jasnými UTM štítky,
+- e-mailové preference s oddělenými kategoriemi,
+- referral stránka s veřejným popisem programu,
+- obsahové huby bez sociálních embedů a sledovacích skriptů.
+
+To neznamená nikdy nepoužít placený kanál. Znamená to nenechat placený kanál diktovat datovou architekturu celého webu.
+
+## Praktický příklad: kampaň pro AI audit
+
+Malá B2B firma spouští kampaň na AI audit procesů. Chce vědět, jestli fungují partnerské články, RSS, přímý newsletter a placená kampaň.
+
+Privacy-first setup:
+
+- každý kanál má jasný UTM standard,
+- web měří agregovanou návštěvnost a konverzi formuláře,
+- formulář ukládá `utm_source`, `utm_medium`, `utm_campaign` a čas odeslání,
+- CRM má jednoduchý stav kvalifikace,
+- report ukazuje kampaň, počet poptávek, počet kvalifikovaných poptávek a uzavřené obchody,
+- reklamní pixely nejsou načtené bez souhlasu,
+- po skončení kampaně se vyhodnotí jen agregovaná tabulka a odstraní se nepotřebné detailní exporty.
+
+Rozhodnutí po měsíci:
+
+- partnerské články přinesly méně poptávek, ale vyšší kvalitu,
+- placená kampaň přinesla objem, ale nízkou kvalifikaci,
+- RSS má malý objem, ale dobrou důvěru u existujícího publika,
+- další iterace posílí partnerské články a upraví placené sdělení, ne přidá další sledovací skript.
+
+## Checklist: atribuce bez sledovacího labyrintu
+
+- Máme napsané rozhodnutí, které má atribuce podpořit.
+- UTM standard neobsahuje osobní údaje ani interní ID kontaktů.
+- Rozlišujeme první zdroj, poslední zdroj a kvalitu leadu.
+- Formulář ukládá jen kampaňové štítky potřebné pro vyhodnocení.
+- Reklamní a marketingové skripty neběží bez odpovídajícího souhlasu.
+- Odmítnutí a odvolání souhlasu je stejně snadné jako přijetí.
+- Consent log neobsahuje zbytečný behaviorální profil.
+- Report optimalizuje na kvalifikované poptávky, ne jen návštěvy a kliky.
+- Detailní exporty kampaní mají vlastní retenci a vlastníka.
+- Po kampani proběhne úklid: vypnout skripty, zavřít experiment, smazat dočasné exporty.
+
+## Mini šablona atribuční karty
+
+```text
+Název kampaně:
+Období:
+Vlastník:
+
+Rozhodnutí, které kampaň ověřuje:
+
+Kanály:
+- Zdroj:
+- Medium:
+- Campaign:
+- Content pravidlo:
+
+Konverze:
+- Primární akce:
+- Kvalitativní stav v CRM:
+- Kdo vyhodnocuje kvalitu:
+
+Data:
+- Ukládané UTM parametry:
+- Zakázané hodnoty v UTM:
+- Retence detailních exportů:
+- Kde se mění consent preference:
+
+Privacy-first kontrola:
+- Běží něco bez souhlasu?
+- Lze rozhodnutí udělat z agregovaných dat?
+- Kdo schválil externí skripty?
+
+Vyhodnocení:
+- Pokračovat:
+- Změnit:
+- Zastavit:
+- Datum úklidu:
+```
+
+## Zdroje k ověření
+
+- EUR-Lex: [GDPR, Regulation (EU) 2016/679](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — článek 7 k podmínkám souhlasu a jeho odvolání, článek 5 k zásadám minimalizace a účelového omezení.
+- EDPB: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en) — vodítka k platnému souhlasu, svobodné volbě a odvolání souhlasu.
+- CNIL: [Cookies and other trackers: CNIL publishes the new version of its guidelines and its final recommendation](https://www.cnil.fr/en/cookies-and-other-trackers-cnil-publishes-new-version-its-guidelines-and-its-final-recommendation) — doporučení k souhlasu s cookies a trackerům včetně vyváženého odmítnutí a přijetí.
+- Belgian Data Protection Authority: [IAB Europe held responsible for a mechanism that infringes the GDPR](https://www.dataprotectionauthority.be/citizen/iab-europe-held-responsible-for-a-mechanism-that-infringes-the-gdpr) — rozhodnutí k Transparency & Consent Framework a rizikům kolem consent stringů v reklamním ekosystému.
+
 # Pracovní log
+- 2026-10-10: Doplněna příloha „Kampaňová atribuce bez sledovacího labyrintu a consent stringů“ s rozhodovací větou pro atribuci, UTM standardem bez osobních údajů, modelem první/poslední návštěvy, pravidly pro souhlas, varováním před složitými consent stringy, propojením kampaní s kvalitou leadů, praktickým příkladem AI auditu, checklistem, vyplnitelnou atribuční kartou a ověřenými zdroji EUR-Lex, EDPB, CNIL a belgického dozorového úřadu. Pomáhá malým webům a SaaS týmům vyhodnocovat kampaně bez reklamního sledovacího labyrintu a bez zbytečného datového apetitu.
 - 2026-10-10: Doplněna příloha „Tvrzení provozováno v Evropě bez marketingové mlhy“ s rozlišením hostingu v EU, zpracování v EHP a skutečného evropského provozu, datovou mapou pro veřejné claimy, pravidly pro subprocesory, bezpečnějšími formulacemi, praktickým příkladem landing page, checklistem, vyplnitelnou claim kartou a ověřenými zdroji EUR-Lex a EDPB. Pomáhá malým SaaS týmům prodávat privacy-first hodnotu pravdivě, konkrétně a bez sloganu, který nepřežije první zákaznický audit.
 - 2026-10-10: Doplněna příloha „Zrušení účtu a workspace bez datových zombie a support chaosu“ s mapou datových míst dotčených zrušením, rozdělením dat podle účelu, produktovou komunikací, automatizovaným offboarding workflow, pravidly pro zálohy, logy, praktickým příkladem zrušení B2B workspace, checklistem, offboarding kartou a ověřenými zdroji GDPR, EDPB a OWASP. Pomáhá malým SaaS týmům rušit účty férově, exportovat data včas a nenechávat po zákaznících staré exporty, tokeny a soft-delete zombie záznamy.
 - 2026-10-10: Doplněna příloha „MFA a passkeys bez SMS iluze a podpůrného pekla“ s rozdělením účtů podle dopadu, doporučením passkeys/WebAuthn, realistickým pohledem na SMS, recovery postupem, step-up ověřením pro citlivé akce, minimalizací bezpečnostních logů, rollout plánem pro B2B SaaS, checklistem, vyplnitelnou MFA kartou a ověřenými zdroji OWASP, NIST, FIDO, W3C a GDPR. Pomáhá malým SaaS týmům zvýšit bezpečnost účtů bez zbytečného sběru telefonních čísel a bez support chaosu při obnově přístupu.
