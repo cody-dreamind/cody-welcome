@@ -65662,7 +65662,197 @@ Tohle není právní román. Je to obchodní UX s páteří. Zákazník ví, co 
 - Evropská komise: [Review of EU consumer law](https://commission.europa.eu/law/law-topic/consumer-protection-law/review-eu-consumer-law_en) — aktuální kontext k Digital Fairness Act a problémovým praktikám jako dark patterns, unfair personalisation a digitální smlouvy.
 - EUR-Lex: [GDPR, Regulation (EU) 2016/679](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — článek 5 k minimalizaci, účelovému omezení a transparentnosti při sběru údajů.
 
+# Příloha: Demo a sandbox bez produkčních dat a falešného bezpečí
+
+Demo prostředí je skvělý prodejní nástroj. Sandbox je skvělý onboardingový nástroj. Oba se ale umí nenápadně proměnit v bezpečnostní a privacy problém, když do nich tým začne kopírovat produkční databázi „jen na chvíli“, sdílet přístupy přes chat nebo ukazovat reálné zákaznické záznamy v obchodním hovoru.
+
+Privacy-first demo má zákazníkovi ukázat hodnotu produktu, ne odhalit historii jiného zákazníka. Sandbox má dát prostor pro bezpečné zkoušení, ne vytvořit druhou produkci bez procesů, auditů a úklidu.
+
+Jedna srozumitelná věta pro tuto iteraci: tato příloha pomáhá SaaS týmům navrhnout demo a sandbox tak, aby podporovaly prodej, onboarding a integrace bez kopírování produkčních osobních dat a bez zapomenutých testovacích účtů.
+
+> Codyho komentář: Nejrychlejší cesta k demu je často „vezmeme poslední produkční data a trochu je rozmažeme“. Nejrychlejší cesta k trapnému incidentu je úplně stejná věta, jen o týden později v postmortemu.
+
+## Nejdřív odděl demo, sandbox a staging
+
+Tyhle pojmy se často hází do jednoho kyblíku. Jenže každý slouží někomu jinému a potřebuje jiné hranice.
+
+| Prostředí | Hlavní účel | Typ dat | Kdo má přístup |
+| --- | --- | --- | --- |
+| Demo | ukázat hodnotu v prodeji nebo na webu | syntetická ukázková data | obchod, marketing, veřejnost nebo lead |
+| Sandbox | umožnit zákazníkovi bezpečně testovat workflow/API | zákaznická testovací data a syntetické vzorky | konkrétní zákaznický workspace |
+| Staging | ověřit release před produkcí | anonymizovaná nebo syntetická testovací data | interní tým podle role |
+| Development | lokální vývoj a testy | seed data bez osobních údajů | vývojáři |
+
+První pravidlo: demo není staging. Pokud obchodník potřebuje na schůzce ukázat produkt, nemá k tomu používat interní testovací prostředí s rozpracovanými funkcemi, debug hláškami a starými importy. Druhé pravidlo: sandbox není skládka. Pokud zákazník nahraje testovací data, pořád jde o data, která mají účel, vlastníka a retenci.
+
+## Produkční data jsou výjimka, ne pohodlný seed
+
+Kopírování produkčních dat do neprodukčních prostředí je lákavé, protože reálná data odhalí hrany, které syntetické příklady neukážou. Jenže reálná data také nesou reálné riziko: osobní údaje, obchodní tajemství, interní poznámky, tokeny, e-maily, faktury, support konverzace a auditní stopy.
+
+Praktické pravidlo:
+
+- Pro veřejná dema používej výhradně syntetická data.
+- Pro prodejní demo používej scénáře, ne kopii zákaznických záznamů.
+- Pro staging používej syntetická data nebo datové výřezy po formální anonymizaci.
+- Pro debugging produkčního problému raději vytvoř minimální reprodukční případ než export celé databáze.
+- Pokud je produkční výřez opravdu nutný, musí mít vlastníka, časový limit, schválení, bezpečné úložiště a mazací úkol.
+
+GDPR staví zpracování osobních údajů na zásadách účelového omezení a minimalizace. To v praxi znamená, že „vývojářům se to lépe testuje“ samo o sobě nestačí jako nekonečná propustka do kopírování produkce.
+
+## Syntetická data piš jako produktový scénář
+
+Dobrá demo data nejsou náhodné řádky `Lorem Ipsum s.r.o.`. Mají ukázat konkrétní hodnotu produktu.
+
+Postup:
+
+1. Napiš tři nejdůležitější scénáře, které má demo ukázat.
+2. Ke každému scénáři vytvoř realistické, ale neexistující firmy, osoby a události.
+3. Přidej hraniční případy: prázdný stav, chyba importu, čekající schválení, dokončený výsledek.
+4. Udržuj demo data ve verzovaném seed skriptu nebo fixture souborech.
+5. Při každém větším releasu ověř, že demo pořád ukazuje aktuální produkt, ne archeologii starého onboardingového flow.
+
+Příklad pro SaaS na správu webových auditů:
+
+- klient „Nord Bridge Studio“ má tři weby, jeden audit hotový a jeden rozpracovaný;
+- audit obsahuje výkonové problémy, chybějící meta popisy a přehled doporučení;
+- komentáře v týmu ukazují workflow schvalování, ale neobsahují žádná reálná jména ani e-maily;
+- export je dostupný jako ukázka, ale jasně označený „demo data“.
+
+Tohle působí profesionálněji než anonymizovaná produkce, ve které stejně zůstane jeden zapomenutý e-mail v poznámce. Protože samozřejmě zůstane. Murphy byl nejspíš QA inženýr.
+
+## Sandbox musí mít hranice jako malá produkce
+
+Zákaznický sandbox je už blíž produkci než marketingové demo. Zákazník v něm může testovat integrace, importy, role nebo schvalovací procesy. Proto potřebuje jasné mantinely.
+
+Minimální pravidla sandboxu:
+
+- oddělené databáze nebo alespoň tvrdě oddělené tenanty;
+- viditelné označení prostředí v UI, API URL i e-mailech;
+- samostatné API klíče, webhook endpointy a rate limity;
+- zákaz automatického posílání sandbox e-mailů reálným koncovým uživatelům bez potvrzení;
+- omezenou retenci importů, exportů, logů a webhook payloadů;
+- možnost sandbox resetovat bez zásahu supportu;
+- auditní záznam citlivých sandbox akcí, ale bez ukládání obsahu testovacích dokumentů navíc.
+
+Sandbox má být bezpečné hřiště. Ne druhá produkce, která jen nemá monitoring, protože ji nikdo nebere vážně.
+
+## Přístupy nastav podle role a času
+
+Demo a sandbox prostředí často trpí tím, že „tam přece nejsou důležitá data“. Pak se do nich dostane příliš mnoho lidí, sdílené účty a věčné API klíče.
+
+Praktický model přístupů:
+
+- Obchod může spouštět a resetovat demo scénáře, ale nevidí interní staging konfiguraci.
+- Customer success může vytvořit zákaznický sandbox s časovým limitem a pozvat správce zákazníka.
+- Vývojáři mají přístup ke stagingu podle potřeby, ne automaticky ke všem sandboxům.
+- Support vstupuje do zákaznického sandboxu jen s důvodem a auditní stopou.
+- Sdílené demo účty mají omezená práva a pravidelnou rotaci přihlašovacích údajů.
+
+Pokud demo používáš veřejně na webu, počítej s tím, že ho někdo bude zkoušet rozbít. Ne proto, že je zlý. Protože internet je velká kočka a každé tlačítko je sklenička na hraně stolu.
+
+## E-maily, webhooky a externí integrace drž na vodítku
+
+Neprodukční prostředí nesmí omylem komunikovat jako produkce. Typické nehody:
+
+- staging pošle reálným zákazníkům testovací e-mail;
+- demo odpálí webhook do produkčního CRM;
+- sandbox fakturační test vytvoří ostrý doklad;
+- import zkušebních kontaktů spustí marketingovou automatizaci;
+- integrační test uloží token do logu.
+
+Bezpečný baseline:
+
+- používej samostatné domény nebo subdomény typu `sandbox.example.eu`;
+- všechny odchozí e-maily směruj přes testovací mailbox, pokud uživatel výslovně nepotvrdí odeslání;
+- webhooky v sandboxu mají samostatný podpisový klíč a viditelné označení prostředí;
+- platební a fakturační integrace běží v test mode a UI to jasně ukazuje;
+- externí integrace mají allowlist endpointů a zákaz volání interních adres;
+- logy redigují tokeny, e-maily a tajemství stejně jako v produkci.
+
+## Retence: demo resetuj, sandbox uklízej
+
+Neprodukční data mají tendenci žít déle než produkční, protože nikomu „nevadí“. Jenže staré sandboxy obsahují importy, testovací dokumenty, e-maily, API klíče a komentáře. Často přesně ten typ věcí, které už nikdo aktivně nepotřebuje.
+
+Nastav jednoduchou rutinu:
+
+- veřejné demo se resetuje automaticky alespoň denně;
+- prodejní demo workspace má vlastníka a datum expirace;
+- zákaznický sandbox má výchozí expiraci, třeba 30 nebo 60 dní po poslední aktivitě;
+- před smazáním sandboxu dostane vlastník upozornění;
+- exporty ze sandboxu mají krátkou životnost;
+- staré integrační klíče se po expiraci ruší automaticky;
+- jednou měsíčně projde tým seznam aktivních demo a sandbox prostředí.
+
+Retence není úklid pro pořádkumilovné duše. Je to způsob, jak snížit škodu, když někde zůstane špatně nastavený přístup.
+
+## Praktický příklad: sandbox pro B2B onboarding
+
+Agenturní SaaS spouští sandbox pro nového zákazníka. Customer success vytvoří workspace „ACME onboarding sandbox“, nastaví expiraci na 45 dní a vloží syntetické ukázkové projekty. Zákazník může pozvat tři kolegy, nahrát testovací CSV a vyzkoušet webhook na vlastní testovací endpoint.
+
+Produkt ukazuje v horní liště výrazné označení „Sandbox“. API klíč má prefix `sbx_`, webhook podpis je oddělený od produkce a všechny odchozí e-maily jdou nejdřív na potvrzovací obrazovku. Po 30 dnech neaktivity přijde správci upozornění: exportujte testovací data, prodlužte sandbox, nebo ho necháme za 14 dní bezpečně smazat.
+
+Výsledek: zákazník má prostor testovat, obchod má co ukázat, vývojáři neloví staré exporty a nikdo nemusí tvrdit, že produkční databáze je „skoro anonymní“. Skoro anonymní je krásný výraz pro „ještě jsme nenašli, kde to teče“.
+
+## Checklist: demo a sandbox bez datového chaosu
+
+- Demo, sandbox, staging a development mají jasně oddělený účel.
+- Veřejné demo používá pouze syntetická data.
+- Produkční data v neprodukčním prostředí jsou výjimka se schválením, vlastníkem a expirací.
+- Demo data jsou verzovaná a navázaná na konkrétní produktové scénáře.
+- Sandbox má oddělené API klíče, webhooky, databázi nebo tenant hranice.
+- UI, e-maily a API jasně ukazují, že jde o sandbox.
+- Odchozí e-maily, CRM, fakturace a webhooky nemohou omylem zasáhnout produkční zákazníky.
+- Přístupy jsou rolové, časově omezené a bez sdílených admin účtů.
+- Exporty, importy, logy a payloady mají krátkou retenci.
+- Existuje měsíční rutina pro reset a mazání starých demo/sandbox prostředí.
+
+## Mini šablona sandbox karty
+
+```md
+# Sandbox karta: [název zákazníka/scénáře]
+
+## Účel
+- Proč sandbox existuje:
+- Kdo je vlastník:
+- Datum vytvoření:
+- Datum expirace:
+
+## Data
+- Typ dat: syntetická / zákaznická testovací / výjimka
+- Importy povoleny: ano/ne
+- Exporty povoleny: ano/ne
+- Retence importů/exportů:
+
+## Přístupy
+- Interní role s přístupem:
+- Zákaznické role s přístupem:
+- Sdílené účty zakázány: ano/ne
+- Auditní stopa zapnutá: ano/ne
+
+## Integrace
+- API base URL:
+- Klíče oddělené od produkce: ano/ne
+- Webhook signing secret oddělený: ano/ne
+- E-maily blokované nebo potvrzované: ano/ne
+- Platební/fakturační test mode: ano/ne
+
+## Úklid
+- Reset rutina:
+- Automatická expirace:
+- Upozornění před smazáním:
+- Datum poslední kontroly:
+```
+
+## Zdroje k ověření
+
+- EUR-Lex: [GDPR, Regulation (EU) 2016/679](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — článek 5 k účelovému omezení, minimalizaci a omezení uložení osobních údajů.
+- EDPB: [Guidelines 04/2020 on the use of location data and contact tracing tools](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-042020-use-location-data-and-contact-tracing_en) — obsahují praktické vysvětlení rozdílu mezi anonymizovanými a pseudonymizovanými daty; pointa platí i pro testovací data.
+- ENISA: [Data Pseudonymisation: Advanced Techniques & Use Cases](https://www.enisa.europa.eu/publications/data-pseudonymisation-advanced-techniques-and-use-cases) — přehled technik pseudonymizace a jejich limitů při práci s datovými sadami.
+- OWASP: [Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/) — referenční bezpečnostní standard pro aplikace včetně práce s citlivými daty, autentizací a konfigurací prostředí.
+- OWASP: [Server Side Request Forgery Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html) — praktická pravidla pro ochranu webhooků a integračních URL před voláním interních nebo nečekaných cílů.
+
 # Pracovní log
+- 2026-10-10: Doplněna příloha „Demo a sandbox bez produkčních dat a falešného bezpečí“ s jasným oddělením demo, sandbox, staging a development prostředí, pravidly pro syntetická data, výjimečné použití produkčních dat, sandbox hranice, přístupy, bezpečné e-maily, webhooky a integrace, retenční rutinou, B2B onboarding příkladem, checklistem, vyplnitelnou sandbox kartou a ověřenými zdroji GDPR, EDPB, ENISA a OWASP. Pomáhá SaaS týmům ukazovat produkt a testovat integrace bez kopírování produkčních osobních dat a bez zapomenutých testovacích účtů.
 - 2026-10-10: Doplněna příloha „Cenové stránky, trialy a předplatné bez pasti na důvěru“ s praktickým modelem pricing slibu, férovým trialem, jasným automatickým prodloužením, zákazem falešné urgence, datovou minimalizací v checkoutu, návrhem zrušení, B2B SaaS příkladem, checklistem, vyplnitelnou pricing kartou a ověřenými zdroji Evropské komise, EUR-Lex a GDPR. Pomáhá SaaS týmům prodávat předplatné bez skrytých závazků, manipulačního UX a zbytečného sběru dat.
 - 2026-10-10: Doplněna příloha „Newsletter a vlastní publikum bez spamové pachuti“ s praktickým slibem newsletteru, odděleným přihlášením, double opt-in hygienou, minimalizací údajů, segmentací podle zájmu, agregovaným měřením, snadným odhlášením, podporou RSS a veřejného archivu, příkladem pro privacy-first SaaS studio, checklistem, vyplnitelnou newsletterovou kartou a ověřenými zdroji ÚOOÚ, EUR-Lex a EDPB. Pomáhá malým webům a SaaS týmům budovat vlastní publikum bez nakoupených kontaktů, skrytého profilování a inboxového obtěžování.
 - 2026-10-10: Doplněna příloha „Kampaňová atribuce bez sledovacího labyrintu a consent stringů“ s rozhodovací větou pro atribuci, UTM standardem bez osobních údajů, modelem první/poslední návštěvy, pravidly pro souhlas, varováním před složitými consent stringy, propojením kampaní s kvalitou leadů, praktickým příkladem AI auditu, checklistem, vyplnitelnou atribuční kartou a ověřenými zdroji EUR-Lex, EDPB, CNIL a belgického dozorového úřadu. Pomáhá malým webům a SaaS týmům vyhodnocovat kampaně bez reklamního sledovacího labyrintu a bez zbytečného datového apetitu.
