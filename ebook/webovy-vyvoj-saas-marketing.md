@@ -62791,7 +62791,171 @@ Výsledek: zákazník získá kontrolu nad přihlášením, produkt nezíská zb
 - [RFC 6749: OAuth 2.0 Authorization Framework](https://www.rfc-editor.org/rfc/rfc6749) — základní autorizační model OAuth 2.0.
 - [NIST SP 800-63B: Digital Identity Guidelines — Authentication and Lifecycle Management](https://pages.nist.gov/800-63-3/sp800-63b.html) — doporučení pro autentizaci, úrovně assurance a životní cyklus autentizátorů.
 
+## Příloha: Privacy review před releasem bez compliance divadla
+
+Privacy review není razítko od právníka, které se přilepí na hotovou funkci jako náplast na tank. Je to krátká produktová kontrola, která má odhalit, jestli nová změna zbytečně sbírá data, nejasně mění účel zpracování nebo vytváří bezpečnostní stopu, kterou nikdo nechce vlastnit.
+
+Pro malý web nebo SaaS stačí lehký proces. Ne každý nový formulář potřebuje třídenní workshop a tabulku s osmnácti barvami rizika. Každá změna, která sahá na osobní údaje, identitu, analytiku, oprávnění, exporty, integrace nebo zákaznickou komunikaci, ale má projít stejnou otázkou: „Co přesně se o člověku dozvíme nového a proč to opravdu potřebujeme?“
+
+Codyho komentář: Privacy review má být brzda proti hlouposti, ne ruční brzda proti dodávání produktu. Když ho tým nenávidí, většinou není problém v soukromí, ale v tom, že proces vypadá jako papírový formulář z roku 1998.
+
+### Kdy review spustit
+
+Privacy review nedělej podle velikosti pull requestu, ale podle typu dopadu. Malá změna v jednom formuláři může být citlivější než velký redesign katalogu.
+
+Spusť review, když změna:
+
+- přidává nové pole do formuláře nebo profilu,
+- mění účel existujících dat,
+- posílá data do nového nástroje nebo webhooku,
+- přidává analytickou událost, session tracking nebo experiment,
+- mění role, oprávnění, SSO, MFA nebo auditní logy,
+- zpřístupňuje export, report, dashboard nebo zákaznické API,
+- automatizuje rozhodnutí, scoring, segmentaci nebo AI zpracování,
+- mění retenční pravidla, zálohy nebo mazání.
+
+Nespouštěj velké review pro čistě vizuální změnu, která nemění data, chování formulářů ani měření. I tam ale udělej rychlý čuchací test: „Nepřidali jsme omylem nový externí skript, font, pixel nebo mapu?“
+
+### Pět otázek místo třicetistránkového dotazníku
+
+Pro běžný release stačí pět otázek. Důležité je, aby odpovědi byly konkrétní, ne uklidňující.
+
+1. **Jaký uživatelský problém řešíme?** Pokud odpověď zní „abychom měli víc dat“, není to problém uživatele, ale datový hlad.
+2. **Jaká data k tomu nutně potřebujeme?** Odděl povinné údaje od pohodlných údajů. Pohodlné údaje často patří do koše, ne do databáze.
+3. **Kdo data uvidí a kde poběží?** Zapiš interní role, dodavatele, region provozu a přenosy mimo EU/EEA, pokud existují.
+4. **Jak dlouho data držíme?** Každé nové pole, event nebo log musí mít retenční pravidlo. „Navždy“ není strategie, to je digitální sklep.
+5. **Co se stane, když se data ukážou špatnému člověku?** Tahle otázka rychle odhalí, jestli potřebuješ maskování, audit, schvalování nebo funkci vůbec nedělat.
+
+Výsledek review nemá být román. Stačí rozhodnutí: pokračujeme, upravíme rozsah, rozdělíme release, nebo zastavujeme.
+
+### Privacy-by-design znamená defaultně méně dat
+
+GDPR staví ochranu osobních údajů už do návrhu a výchozího nastavení služby. Prakticky to pro malý tým znamená:
+
+- formulář sbírá jen to, co je potřeba pro konkrétní krok,
+- volitelná pole jsou opravdu volitelná a vysvětlená,
+- analytika začíná agregací, ne identifikací,
+- interní dashboardy ukazují role a stav práce, ne zbytečné osobní detaily,
+- exporty a reporty mají scope podle oprávnění,
+- nové integrace nezačínají kopírováním celé zákaznické databáze,
+- výchozí nastavení je nejméně invazivní a zákazník musí aktivně zapnout citlivější režim.
+
+Když funkce potřebuje víc dat, než uživatel čeká, napiš to přímo do UI. Ne právnickou větou v patičce, ale v místě rozhodnutí: „E-mail použijeme jen k poslání exportu a po 7 dnech odkaz zneplatníme.“
+
+### Udělej z review součást pull requestu
+
+Nejlepší privacy review není samostatný dokument, na který se zapomene. Je to krátký blok v issue nebo pull requestu.
+
+Praktický postup:
+
+1. Autor změny vyplní mini kartu před review kódu.
+2. Product nebo founder zkontroluje účel a rozsah dat.
+3. Technický reviewer ověří logování, oprávnění, retenci a integrace.
+4. U citlivých změn se přidá právní nebo bezpečnostní kontrola.
+5. Rozhodnutí se uloží u změny, aby šlo později vysvětlit.
+
+Tahle stopa je užitečná i při incidentu nebo žádosti zákazníka. Tým pak nemusí hádat, proč se událost začala sbírat, kdo ji schválil a kdy měla zmizet.
+
+### Datová mapa se má měnit s produktem
+
+Privacy review je dobrý moment aktualizovat datovou mapu. Pokud nový release přidává pole `company_size`, event `trial_limit_hit` nebo nový billing webhook, datová mapa má znát:
+
+- název datového prvku,
+- účel,
+- systém,
+- vlastníka,
+- právní nebo smluvní důvod,
+- retenční pravidlo,
+- přístupové role,
+- dodavatele nebo subprocesora,
+- zákaznické vysvětlení v UI nebo dokumentaci.
+
+Není nutné mít enterprise katalog za milion. Stačí udržovaný Markdown, tabulka nebo interní stránka. Důležitá je pravdivost, ne dekorativní governance.
+
+### Příklad: nový marketingový report v B2B SaaS
+
+Tým chce přidat týdenní report pro zákazníky: počet návštěv landing page, počet odeslaných formulářů a nejčastější zdroje návštěv.
+
+Špatná verze:
+
+- ukládá celé URL s osobními parametry,
+- ukládá IP adresy bez jasného důvodu,
+- posílá data do nového externího nástroje,
+- ukazuje report každému členovi workspace,
+- nemá retenční pravidlo pro syrové eventy.
+
+Lepší verze:
+
+- ukládá agregované počty po dnech,
+- čistí query parametry před uložením,
+- zdroje normalizuje na obecné kategorie,
+- report vidí jen role s oprávněním k marketingovým metrikám,
+- syrové technické události drží krátce a dlouhodobě nechává jen agregaci,
+- zákazníkovi vysvětluje, co report měří a co záměrně neměří.
+
+Výsledkem není méně užitečný report. Je to report, který zákazník může používat bez pocitu, že si koupil mini sledovací průmysl v krabici.
+
+### Checklist: privacy review před release
+
+- [ ] Změna má jasný uživatelský nebo zákaznický účel.
+- [ ] Každé nové pole, event nebo log má důvod a vlastníka.
+- [ ] Povinné údaje nejdou nahradit méně citlivou alternativou.
+- [ ] UI vysvětluje sběr dat v místě rozhodnutí.
+- [ ] Přístupy odpovídají rolím, ne zvědavosti týmu.
+- [ ] Externí nástroje a subprocesoři jsou zapsaní v datové mapě.
+- [ ] Data běží v evropském provozu, pokud to produktový slib vyžaduje.
+- [ ] Retence je konkrétní pro syrová data, agregace, logy i zálohy.
+- [ ] Exporty a reporty neodhalují data jiných uživatelů nebo workspace.
+- [ ] Analytika začíná agregovaně a bez zbytečných identifikátorů.
+- [ ] Chybové a auditní logy neukládají tajemství ani citlivé hodnoty.
+- [ ] Rozhodnutí review je uložené u issue, PR nebo release poznámky.
+
+### Mini šablona privacy review karty
+
+```markdown
+# Privacy review: [název změny]
+
+## Účel
+- Jaký problém řešíme:
+- Pro koho:
+- Co se nestane, pokud změnu nevydáme:
+
+## Data
+- Nová data:
+- Existující data použitá novým způsobem:
+- Povinné vs. volitelné údaje:
+- Méně citlivá alternativa:
+
+## Provoz
+- Systémy:
+- Dodavatelé / subprocesoři:
+- Region provozu:
+- Přístupové role:
+
+## Retence a bezpečnost
+- Retence syrových dat:
+- Retence agregací:
+- Logování:
+- Exporty / reporty:
+- Nejhorší rozumný scénář zneužití:
+
+## Rozhodnutí
+- Pokračovat / upravit / zastavit:
+- Nutné změny před releasem:
+- Kdo schválil:
+- Datum další kontroly:
+```
+
+### Zdroje k ověření
+
+- [GDPR, článek 25 — Data protection by design and by default](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — právní základ pro ochranu údajů už v návrhu a výchozím nastavení.
+- [EDPB Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en) — praktický výklad principu privacy-by-design a privacy-by-default.
+- [ENISA — Data Protection Engineering](https://www.enisa.europa.eu/publications/data-protection-engineering) — technické přístupy k minimalizaci, oddělení, abstrakci a řízení osobních údajů.
+- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučení k bezpečnému logování bez zbytečných citlivých údajů.
+
 # Pracovní log
+
+- 2026-10-10: Doplněna příloha „Privacy review před releasem bez compliance divadla“ s praktickými spouštěči kontroly, pěti otázkami před releasem, privacy-by-design pravidly, postupem pro pull request, aktualizací datové mapy, příkladem marketingového reportu, checklistem, vyplnitelnou kartou a ověřenými zdroji GDPR, EDPB, ENISA a OWASP. Pomáhá malým webovým a SaaS týmům kontrolovat nové funkce podle účelu, rozsahu dat, retence, přístupů a evropského privacy-first provozu bez zbytečné byrokracie.
 
 - 2026-10-10: Doplněna příloha „Žádosti subjektů údajů bez právního ping-pongu a datového lovu“ s rozdělením typů žádostí, provozní datovou mapou pro support, přiměřeným ověřením identity, pravidly pro bezpečný export, výmaz, interní SLA, B2B příkladem, checklistem, kartou žádosti a ověřenými zdroji Evropské komise, ÚOOÚ a EDPB. Pomáhá SaaS týmům vyřizovat přístup, výmaz nebo přenositelnost dat bez paniky, zbytečných exportů a porušení privacy-first principů.
 
