@@ -65473,7 +65473,197 @@ Privacy-first kontrola:
 - EUR-Lex: [GDPR, Regulation (EU) 2016/679](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — článek 5 k minimalizaci a účelovému omezení, článek 7 k podmínkám souhlasu a jeho odvolání.
 - EDPB: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en) — vodítka k prokazatelnosti, svobodě a odvolání souhlasu.
 
+
+# Příloha: Cenové stránky, trialy a předplatné bez pasti na důvěru
+
+Cenová stránka není jen tabulka s balíčky. Je to místo, kde zákazník pozná, jestli produkt stojí na férové hodnotě, nebo na triku typu „klikni teď, podmínky najdeš v miniaturním šedém textu pod patičkou“. U SaaS je to ještě citlivější: zákazník často nevstupuje do jednorázového nákupu, ale do opakovaného vztahu. Pokud ten vztah začne nejasnou cenou, skrytým automatickým prodloužením nebo trialem, který se dá zrušit jen přes supportový rituál, produkt si sám vyrábí churn.
+
+Jedna srozumitelná věta pro tuto iteraci: tato příloha pomáhá zakladatelům a marketingovým týmům prodávat SaaS předplatné tak, aby zákazník rozuměl ceně, závazku, datům i cestě ven ještě před kliknutím na tlačítko.
+
+## Nejdřív pojmenuj, co zákazník opravdu kupuje
+
+Začni před cenovou tabulkou. Napiš si jednu větu:
+
+> Zákazník platí za [výsledek], v rozsahu [limit], s podporou [úroveň], za cenu [částka a období], bez závazku nebo se závazkem [délka].
+
+Když tu větu neumíš napsat bez poznámek pod čarou, cenová stránka bude mlžit. Ne proto, že by designér neuměl layout, ale proto, že produkt ještě nemá jasně oddělenou hodnotu od obchodního přání.
+
+Praktický postup:
+
+1. U každého plánu napiš hlavní práci, kterou zákazník zvládne.
+2. Odděl limity, které chrání provoz, od limitů, které jen tlačí na upgrade.
+3. Uveď cenu včetně období: měsíčně, ročně, za workspace, za uživatele, za objem nebo kombinaci.
+4. Pokud je sleva roční platby výrazná, ukaž i měsíční ekvivalent a co se stane při zrušení.
+5. Nepoužívej „od X Kč“, pokud většina zákazníků zaplatí úplně jinou částku.
+
+Codyho komentář: Cenotvorba má být nudně čitelná. Pokud zákazník potřebuje kalkulačku, právníka a šamana, aby pochopil cenu, není to pricing strategy. Je to escape room.
+
+## Trial má být test hodnoty, ne test pozornosti
+
+Trial funguje dobře, když dává zákazníkovi dost času a prostoru ověřit hodnotu. Funguje špatně, když je postavený na tom, že zákazník zapomene zrušit kartu. To je krátkodobě svůdné a dlouhodobě drahé: support řeší refundy, marketing řeší špatné recenze a produktový tým neví, jestli lidé platí za hodnotu, nebo za vlastní nepozornost.
+
+U privacy-first SaaS je dobré rozlišit tři typy trialu:
+
+- Demo bez účtu: vhodné pro jednoduché nástroje, kde stačí anonymní sandbox nebo veřejná ukázka.
+- Trial bez karty: vhodný pro B2B produkty, kde chceš měřit aktivaci a hodnotu, ne schopnost se nechat stáhnout z účtu.
+- Trial s kartou: používej jen tehdy, když je placený provoz nákladný nebo když bez fakturačních údajů nedává služba smysl; upozorni na obnovu jasně a včas.
+
+Pokud trial vyžaduje platební kartu, minimální férový standard je:
+
+- před zadáním karty říct, kdy přesně začne účtování;
+- poslat připomínku před koncem trialu;
+- ukázat cenu po trialu stejně výrazně jako tlačítko startu;
+- umožnit zrušení bez kontaktování obchodníka;
+- neukládat marketingový profil jen proto, že člověk testoval produkt.
+
+## Automatické prodloužení popiš lidsky
+
+Předplatné může být férové i s automatickým prodloužením. Problém není opakovaná platba sama o sobě. Problém je, když zákazník neví, že vzniká opakovaný závazek, neví kdy se obnoví, neví jak ho zrušit a po prvním pokusu o zrušení narazí na „napište nám důvod a my se vám ozveme“.
+
+Na cenové stránce a v checkoutu proto ukaž:
+
+- interval účtování: měsíčně, ročně, jiné období;
+- datum první platby po trialu;
+- částku další obnovy;
+- daň nebo informaci, že se dopočítá podle fakturačních údajů;
+- jak se zrušení projeví: okamžitě, na konci období, nebo podle smlouvy;
+- kde se dá stáhnout faktura a exportovat data.
+
+U B2B SaaS přidej i praktickou větu pro administrátory: „Zrušení může provést vlastník workspace v Nastavení → Fakturace. Data lze před zrušením exportovat ve formátu CSV/JSON.“ To je malá věc, ale šetří desítky support ticketů a stovky nervových buněk. Nervové buňky se neregenerují rychlostí React frameworků.
+
+## Nepoužívej falešnou urgenci a vizuální manipulaci
+
+Evropská komise dlouhodobě upozorňuje na manipulativní rozhraní a dark patterns, včetně falešných odpočtů, skrytých informací a vizuální hierarchie, která tlačí uživatele do volby, kterou by jinak neudělal. U SaaS cen se to typicky projevuje takto:
+
+- „Akce končí za 09:12“ a po reloadu zase začíná.
+- Nejdražší plán má obří tlačítko, levnější plán má slabý odkaz.
+- Měsíční cena je zvýrazněná, ale platba je roční předem.
+- Zrušení je schované pod několika obrazovkami retenčních otázek.
+- „Nechci ušetřit“ jako text odmítnutí nabídky.
+
+Privacy-first alternativa není „nudná stránka bez psychologie“. Je to férová stránka s dobrou informační architekturou:
+
+- doporučený plán označ podle konkrétního scénáře, ne podle marže;
+- ukaž srovnání funkcí podle práce, kterou zákazník řeší;
+- zvýrazni omezení, která mohou bolet;
+- neskrývej cenu za „kontaktujte pro nabídku“, pokud má být standardizovaná;
+- u enterprise plánu vysvětli, co se řeší individuálně: SSO, DPA, audit, objem, SLA, onboarding.
+
+## Data v checkoutu sbírej po vrstvách
+
+Platební cesta svádí k tomu zeptat se na všechno: jméno, firma, role, velikost týmu, telefon, marketingový souhlas, fakturační údaje, use case, krevní skupina zakladatele. Nedělej to. Checkout má dokončit nákup, ne otevřít datový důl.
+
+Rozděl data podle účelu:
+
+- Účet: e-mail, heslo nebo SSO/passkey, případně jméno pro zobrazení v aplikaci.
+- Fakturace: zákonné fakturační údaje, DIČ, adresa podle potřeby.
+- Platba: řeší platební poskytovatel; v produktu neukládej celé údaje o kartě.
+- Produktová aktivace: ptej se jen na to, co hned použiješ pro onboarding.
+- Marketing: samostatný dobrovolný souhlas nebo legitimní kanál podle pravidel, nikdy předzaškrtnutý bonus v checkoutu.
+
+Praktické pravidlo: pokud pole nepomůže dokončit nákup, vystavit doklad, zpřístupnit produkt nebo splnit jasnou právní povinnost, pravděpodobně nepatří do checkoutu. Patří později do onboardingu, nebo nikam. Nikam je často podceňovaná, ale velmi elegantní databázová tabulka.
+
+## Zrušení navrhni stejně pečlivě jako nákup
+
+Férové zrušení není chyba v obchodním modelu. Je to součást důvěry. Když zákazník ví, že může odejít bez pastí, snáz začne. Zrušení navíc vrací produktovému týmu cennější signál než nucená retence: proč hodnota nestačila, co chybělo a kde se zákazník zasekl.
+
+Dobré zrušení obsahuje:
+
+1. Jasné místo v nastavení účtu nebo workspace.
+2. Shrnutí dopadu: konec přístupu, datum, fakturace, export dat, členové týmu.
+3. Volitelný důvod odchodu, nikoli povinný výslech.
+4. Nabídku pauzy nebo downgrade jen tam, kde skutečně pomáhá.
+5. Potvrzení e-mailem s odkazem na export, faktury a kontakt supportu.
+6. Interní auditní záznam bez ukládání citlivého obsahu konverzace.
+
+Pokud máš sales-led enterprise smlouvy, může být zrušení vázané na smluvní období. I tak ale ukaž v aplikaci, kdo je vlastník smlouvy, kdy končí aktuální období a jak se žádá o neprodloužení. „Napište někomu, možná Pavlovi, ale Pavel odešel v roce 2024“ není proces.
+
+## Praktický příklad: cenová stránka pro B2B SaaS studio
+
+Představ si SaaS pro malé agentury, který spravuje klientské webové audity. Férová cenová stránka může mít tři plány:
+
+- Starter: jeden workspace, tři aktivní klienti, základní exporty, e-mailová podpora.
+- Team: více klientů, role členů týmu, auditní logy, vlastní šablony, měsíční fakturace.
+- Business: SSO, DPA review, SLA, onboarding, vyšší limity a individuální bezpečnostní dotazník.
+
+Pod tabulkou jsou čtyři krátké bloky:
+
+- „Jak funguje trial“ — 14 dní bez karty, žádné automatické účtování.
+- „Co se stane při zrušení“ — přístup běží do konce období, export dat je dostupný 30 dní.
+- „Kde běží data“ — EU hosting, seznam subprocesorů, žádné reklamní pixely.
+- „Jak měříme používání“ — agregovaná produktová telemetrie pro provoz a zlepšení, bez session replaye a bez reklamního profilování.
+
+Tohle není právní román. Je to obchodní UX s páteří. Zákazník ví, co kupuje, provoz ví, co slíbil, a support nemusí každý týden vysvětlovat stejný zmatek.
+
+## Checklist: pricing a trial bez pasti na důvěru
+
+- Každý plán má jednu větu hodnoty a jasný cílový scénář.
+- Cena ukazuje období, jednotku účtování a případnou roční platbu předem.
+- Trial říká, jestli vyžaduje kartu, kdy začne placení a jak přijde připomínka.
+- Automatické prodloužení je popsané před nákupem, ne až v obchodních podmínkách.
+- Checkout sbírá jen údaje nutné pro účet, fakturaci, platbu a okamžitou aktivaci.
+- Marketingové souhlasy nejsou předzaškrtnuté ani svázané s nákupem.
+- Doporučený plán je vysvětlen podle use casu, ne tlačen falešnou hierarchií.
+- Zrušení je dostupné samoobslužně nebo má jasný smluvní postup a viditelný kontakt.
+- Export dat a faktury jsou dostupné před odchodem i rozumnou dobu po něm.
+- Retenční otázky jsou volitelné a neblokují zrušení.
+
+## Mini šablona pricing karty
+
+
+```md
+# Pricing karta: [název produktu]
+
+## Hlavní slib
+- Zákazník platí za:
+- Pro koho je produkt:
+- Pro koho produkt není:
+
+## Plány
+- Starter: [cena, období, hlavní limit, ideální scénář]
+- Team: [cena, období, hlavní limit, ideální scénář]
+- Business/Enterprise: [co se řeší individuálně]
+
+## Trial
+- Délka:
+- Vyžaduje kartu: ano/ne
+- Datum první platby:
+- Připomínka před koncem trialu:
+- Co se stane po skončení bez platby:
+
+## Data a fakturace
+- Údaje v checkoutu:
+- Platební poskytovatel:
+- Fakturační údaje:
+- Marketingové souhlasy:
+- Produktová telemetrie:
+
+## Zrušení
+- Kde se ruší:
+- Kdo může zrušit:
+- Dopad na přístup:
+- Export dat:
+- Retence po zrušení:
+
+## Privacy-first kontrola
+- Žádné reklamní pixely v checkoutu:
+- Žádné předzaškrtnuté souhlasy:
+- Žádná falešná urgence:
+- Žádná povinná retenční anketa:
+- Datum revize:
+
+```
+
+## Zdroje k ověření
+
+- Evropská komise: [Consumer rights directive](https://commission.europa.eu/law/law-topic/consumer-protection-law/consumer-contract-law/consumer-rights-directive_en) — přehled informačních povinností u spotřebitelských smluv, práva na odstoupení a pravidel pro digitální obsah a služby.
+- EUR-Lex: [Directive 2011/83/EU on consumer rights](https://eur-lex.europa.eu/eli/dir/2011/83/oj/eng) — právní text směrnice včetně pravidel pro distanční smlouvy, digitální obsah a účinky odstoupení.
+- Evropská komise: [Sweeps — 2022 dark patterns](https://commission.europa.eu/topics/consumers/consumer-rights-and-complaints/enforcement-consumer-protection/sweeps_en) — koordinovaná kontrola webů a aplikací v EU zaměřená na falešné odpočty, skryté informace a vizuální manipulaci.
+- Evropská komise: [Review of EU consumer law](https://commission.europa.eu/law/law-topic/consumer-protection-law/review-eu-consumer-law_en) — aktuální kontext k Digital Fairness Act a problémovým praktikám jako dark patterns, unfair personalisation a digitální smlouvy.
+- EUR-Lex: [GDPR, Regulation (EU) 2016/679](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — článek 5 k minimalizaci, účelovému omezení a transparentnosti při sběru údajů.
+
 # Pracovní log
+- 2026-10-10: Doplněna příloha „Cenové stránky, trialy a předplatné bez pasti na důvěru“ s praktickým modelem pricing slibu, férovým trialem, jasným automatickým prodloužením, zákazem falešné urgence, datovou minimalizací v checkoutu, návrhem zrušení, B2B SaaS příkladem, checklistem, vyplnitelnou pricing kartou a ověřenými zdroji Evropské komise, EUR-Lex a GDPR. Pomáhá SaaS týmům prodávat předplatné bez skrytých závazků, manipulačního UX a zbytečného sběru dat.
 - 2026-10-10: Doplněna příloha „Newsletter a vlastní publikum bez spamové pachuti“ s praktickým slibem newsletteru, odděleným přihlášením, double opt-in hygienou, minimalizací údajů, segmentací podle zájmu, agregovaným měřením, snadným odhlášením, podporou RSS a veřejného archivu, příkladem pro privacy-first SaaS studio, checklistem, vyplnitelnou newsletterovou kartou a ověřenými zdroji ÚOOÚ, EUR-Lex a EDPB. Pomáhá malým webům a SaaS týmům budovat vlastní publikum bez nakoupených kontaktů, skrytého profilování a inboxového obtěžování.
 - 2026-10-10: Doplněna příloha „Kampaňová atribuce bez sledovacího labyrintu a consent stringů“ s rozhodovací větou pro atribuci, UTM standardem bez osobních údajů, modelem první/poslední návštěvy, pravidly pro souhlas, varováním před složitými consent stringy, propojením kampaní s kvalitou leadů, praktickým příkladem AI auditu, checklistem, vyplnitelnou atribuční kartou a ověřenými zdroji EUR-Lex, EDPB, CNIL a belgického dozorového úřadu. Pomáhá malým webům a SaaS týmům vyhodnocovat kampaně bez reklamního sledovacího labyrintu a bez zbytečného datového apetitu.
 - 2026-10-10: Doplněna příloha „Tvrzení provozováno v Evropě bez marketingové mlhy“ s rozlišením hostingu v EU, zpracování v EHP a skutečného evropského provozu, datovou mapou pro veřejné claimy, pravidly pro subprocesory, bezpečnějšími formulacemi, praktickým příkladem landing page, checklistem, vyplnitelnou claim kartou a ověřenými zdroji EUR-Lex a EDPB. Pomáhá malým SaaS týmům prodávat privacy-first hodnotu pravdivě, konkrétně a bez sloganu, který nepřežije první zákaznický audit.
