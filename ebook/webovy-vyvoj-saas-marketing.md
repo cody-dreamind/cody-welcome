@@ -64708,15 +64708,15 @@ Může zákazník zvolit silnější metodu bez dalšího osobního údaje:
 - [W3C Web Authentication: An API for accessing Public Key Credentials](https://www.w3.org/TR/webauthn-3/) — specifikace WebAuthn pro práci s public-key credentials v prohlížeči.
 - [GDPR, čl. 5 na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — zásady minimalizace, účelového omezení a omezení uložení, relevantní i pro telefonní čísla, auditní logy a bezpečnostní metadata.
 
-## Příloha: Retenční politika bez digitální skládky a mazacího alibi
+## Příloha: Zrušení účtu a workspace bez datových zombie a support chaosu
 
-Retence je nudné slovo pro velmi praktickou otázku: jak dlouho držíme data, proč přesně je ještě potřebujeme a kdo má odvahu je opravdu smazat. Malý web nebo SaaS často nezačne špatně tím, že by chtěl zákazníky šmírovat. Začne špatně tím, že nikdy nic nemaže, protože „co kdyby se to jednou hodilo“. Gratuluju, právě vznikla digitální půda plná starých exportů, debug logů, bývalých uživatelů a jedné tabulky `old_backup_final_2`.
+Zrušení účtu nebo celého workspace je okamžik pravdy. Uživatel už nechce další marketingové objímání, chce vědět, co přesně se stane s jeho daty, přístupy, exporty, fakturami, integracemi a support historií. Malý web nebo SaaS často nezačne špatně tím, že by chtěl zákazníky šmírovat. Začne špatně tím, že zrušení znamená jen změnu statusu na `cancelled` a zbytek dat dál bydlí v systému jako digitální spolubydlící, který nikdy neplatí nájem.
 
-Privacy-first retence není mazání naslepo. Je to provozní dohoda mezi produktem, supportem, účetnictvím, bezpečností a zákazníkem. Dobrá retenční politika říká: tahle data držíme kvůli tomuto účelu, takhle dlouho, tady se mažou nebo anonymizují, takhle se to ověřuje a tady je výjimka, pokud běží spor, incident nebo zákonná povinnost. Když odpověď zní „navždy, protože databáze to unese“, není to politika. Je to datové křečkování v tričku s logem startupu.
+Privacy-first offboarding není mazání naslepo. Je to provozní dohoda mezi produktem, supportem, účetnictvím, bezpečností a zákazníkem. Dobré zrušení říká: co si zákazník může exportovat, kdy ztratí přístup, co smažeme z aktivních systémů, co ponecháme kvůli fakturaci nebo bezpečnosti, jak dlouho běží obnovovací lhůta a jak se chováme k zálohám. Když odpověď zní „ono se to nějak deaktivuje“, není to proces. Je to support tiket v převleku za produktovou funkci.
 
-### Začni inventářem datových míst, ne právnickou básní
+### Začni mapou míst, kterých se zrušení dotkne
 
-První chyba je psát retenční dokument od stolu. Retence se má kreslit podle skutečných míst, kde data žijí. V malém SaaS to obvykle nejsou jen produkční tabulky. Jsou to i support tickety, CRM, e-mailový nástroj, analytika, serverové logy, auditní logy, exporty, zálohy, staging kopie, integrační fronty, chybové reporty, fakturační systém a sdílené složky s přílohami od zákazníků.
+První chyba je navrhnout zrušení jen podle hlavní tabulky účtů. Offboarding se má kreslit podle skutečných míst, kde data žijí. V malém SaaS to obvykle nejsou jen produkční tabulky. Jsou to i support tickety, CRM, e-mailový nástroj, analytika, serverové logy, auditní logy, exporty, zálohy, staging kopie, integrační fronty, chybové reporty, fakturační systém a sdílené složky s přílohami od zákazníků.
 
 U každého místa si napiš tři věty:
 
@@ -64726,7 +64726,7 @@ U každého místa si napiš tři věty:
 
 Třetí věta bývá nejdůležitější. Staré údaje nejsou neutrální archivní dekorace. Mohou zvýšit škodu při incidentu, zkomplikovat žádost o výmaz, rozmazat analytiku, prodloužit migraci a zbytečně zatížit tým. Data, která už nepomáhají rozhodnutí ani povinnosti, často jen čekají na příležitost stát se problémem.
 
-### Rozděl data podle účelu a bolesti při smazání
+### Rozděl zrušení podle účelu a bolesti při smazání
 
 Retenční doby nedávej podle názvu tabulky, ale podle účelu. Jedna tabulka `users` může obsahovat aktivní účet, pozvaného člena týmu, bývalého člena, fakturační kontakt, bezpečnostní stopu i marketingový souhlas. Každý z těchto účelů může potřebovat jiný režim.
 
@@ -64745,7 +64745,7 @@ Praktické rozdělení pro malý produkt:
 
 U každé skupiny doplň i „mazací bolest“: co se musí stát před smazáním. Někde stačí cron job. Někde je potřeba upozornit admina zákazníka, nabídnout export, zablokovat přihlášení, počkat na konec fakturačního období nebo zachovat minimální auditní stopu bez obsahu.
 
-### Retence má být viditelná v produktu
+### Zrušení má být viditelné v produktu
 
 Pokud zákazník neví, co se stane po zrušení účtu, bude se bát zrušit účet. Pokud neví, jak dlouho držíš export, bude si ho preventivně stáhne do tří dalších míst. Pokud neví, zda support ticket smažeš, pošle ti raději méně informací nebo naopak všechno, protože neexistuje jasné vodítko.
 
@@ -64758,9 +64758,9 @@ Dobrá produktová komunikace nemusí být právní román. Stačí lidská vět
 
 Tohle není jen compliance. Je to UX důvěry. Uživatel se nemusí ptát supportu na věci, které měly být jasné už v rozhraní.
 
-### Mazání musí být workflow, ne ruční rituál
+### Zrušení musí být workflow, ne ruční rituál
 
-Retenční politika bez automatizace je hezký dokument a špatný provoz. Pro každou datovou skupinu si vyber jeden konkrétní mechanizmus:
+Zrušení bez automatizace je hezký slib a špatný provoz. Pro každou datovou skupinu si vyber jeden konkrétní mechanizmus:
 
 - automatické smazání po datu expirace,
 - anonymizace identifikátorů při zachování agregované statistiky,
@@ -64807,7 +64807,7 @@ Lepší privacy-first postup:
 
 Výsledek: zákazník má kontrolu, tým má důkaz, systém nemá datový hřbitov.
 
-### Checklist: retenční politika bez digitální skládky
+### Checklist: zrušení účtu bez datových zombie
 
 - Máme seznam míst, kde se osobní nebo zákaznická data skutečně ukládají.
 - Každá datová skupina má účel, vlastníka a retenční dobu.
@@ -64818,14 +64818,14 @@ Výsledek: zákazník má kontrolu, tým má důkaz, systém nemá datový hřbi
 - Zálohy mají vlastní retenci a post-restore úklid.
 - Výjimky typu právní hold jsou zdokumentované a časově kontrolované.
 - Zákazník vidí v produktu srozumitelně, co se s daty stane.
-- Retence se kontroluje aspoň čtvrtletně nebo při změně architektury.
+- Scénář zrušení se kontroluje aspoň čtvrtletně nebo při změně architektury.
 
-### Mini šablona retenční karty
+### Mini šablona offboarding karty
 
 ```text
-Datová skupina:
+Rušený objekt: účet / workspace / tým / tenant
 Systém / umístění:
-Vlastník:
+Vlastník procesu:
 
 Účel:
 Právní nebo smluvní důvod:
@@ -64846,14 +64846,14 @@ Další kontrola:
 
 ### Zdroje k ověření
 
-- [GDPR, čl. 5 na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — zásady účelového omezení, minimalizace, přesnosti, omezení uložení, integrity, důvěrnosti a odpovědnosti správce.
+- [GDPR, čl. 5 na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — zásady účelového omezení, minimalizace, přesnosti, omezení uložení, integrity, důvěrnosti a odpovědnosti správce, které se promítají i do rušení účtů a workspace.
 - [EDPB: Basic principles](https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en) — přehled základních principů GDPR včetně storage limitation a data minimisation.
 - [EDPB: FAQ pro malé podniky](https://www.edpb.europa.eu/sme/find-practical-info/faq_en?page=1) — prakticky připomíná, že uchování osobních údajů má být časově omezené podle účelu zpracování a že organizace mají mít retenční pravidla.
 - [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html) — doporučuje, co logovat, co z logů vyloučit a proč se vyhnout tajemstvím, tokenům a citlivým osobním údajům v logovacích záznamech.
 - [OWASP Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html) — doplňuje doporučení, aby se citlivé session identifikátory nedostávaly do logů.
 
 # Pracovní log
-- 2026-10-10: Doplněna příloha „Retenční politika bez digitální skládky a mazacího alibi“ s inventářem datových míst, rozdělením dat podle účelu, viditelnou produktovou komunikací, automatizovaným mazacím workflow, pravidly pro zálohy, logy, praktickým příkladem zrušení B2B workspace, checklistem, retenční kartou a ověřenými zdroji GDPR, EDPB a OWASP. Pomáhá malým webovým a SaaS týmům mazat data řízeně místo hromadění starých exportů, logů a soft-delete zombie záznamů.
+- 2026-10-10: Doplněna příloha „Zrušení účtu a workspace bez datových zombie a support chaosu“ s mapou datových míst dotčených zrušením, rozdělením dat podle účelu, produktovou komunikací, automatizovaným offboarding workflow, pravidly pro zálohy, logy, praktickým příkladem zrušení B2B workspace, checklistem, offboarding kartou a ověřenými zdroji GDPR, EDPB a OWASP. Pomáhá malým SaaS týmům rušit účty férově, exportovat data včas a nenechávat po zákaznících staré exporty, tokeny a soft-delete zombie záznamy.
 - 2026-10-10: Doplněna příloha „MFA a passkeys bez SMS iluze a podpůrného pekla“ s rozdělením účtů podle dopadu, doporučením passkeys/WebAuthn, realistickým pohledem na SMS, recovery postupem, step-up ověřením pro citlivé akce, minimalizací bezpečnostních logů, rollout plánem pro B2B SaaS, checklistem, vyplnitelnou MFA kartou a ověřenými zdroji OWASP, NIST, FIDO, W3C a GDPR. Pomáhá malým SaaS týmům zvýšit bezpečnost účtů bez zbytečného sběru telefonních čísel a bez support chaosu při obnově přístupu.
 - 2026-10-10: Doplněna příloha „Lead formuláře bez datového apetitu a falešné kvalifikace“ s praktickým určením účelu formuláře, tříděním polí na nutná, užitečná a pohodlná pro firmu, mikro-vysvětleními, oddělením lead magnetu od newsletteru, progresivním profilováním, bezpečnou validací, kontrolou CRM integrací, příkladem konzultační landing page, checklistem, vyplnitelnou formulářovou kartou a ověřenými zdroji GDPR a EDPB. Pomáhá webům a SaaS týmům sbírat jen data potřebná pro férovou odpověď místo budování leadového datového skladu.
 - 2026-10-10: Doplněna příloha „Webhooky a integrace bez datového průvanu“ s praktickým oddělením příjmu, normalizace a business logiky, kontraktem eventů, ověřováním podpisů, replay ochranou, idempotencí, krátkou retencí raw payloadů, ochranou proti nákladům a SSRF, fakturačním příkladem, checklistem, vyplnitelnou integrační kartou a ověřenými zdroji OWASP, GitHub Docs a CNCF CloudEvents. Pomáhá malým SaaS týmům přijímat integrační eventy bezpečně, opakovatelně a bez zbytečného hromadění osobních dat.
