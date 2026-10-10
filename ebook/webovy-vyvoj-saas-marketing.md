@@ -65226,7 +65226,255 @@ Vyhodnocení:
 - CNIL: [Cookies and other trackers: CNIL publishes the new version of its guidelines and its final recommendation](https://www.cnil.fr/en/cookies-and-other-trackers-cnil-publishes-new-version-its-guidelines-and-its-final-recommendation) — doporučení k souhlasu s cookies a trackerům včetně vyváženého odmítnutí a přijetí.
 - Belgian Data Protection Authority: [IAB Europe held responsible for a mechanism that infringes the GDPR](https://www.dataprotectionauthority.be/citizen/iab-europe-held-responsible-for-a-mechanism-that-infringes-the-gdpr) — rozhodnutí k Transparency & Consent Framework a rizikům kolem consent stringů v reklamním ekosystému.
 
+
+# Příloha: Newsletter a vlastní publikum bez spamové pachuti
+
+Newsletter je pořád jeden z nejlepších vlastních kanálů. Ne proto, že by e-mail byl sexy. Není. E-mail je digitální ponožka: trochu nudná, ale když chybí, poznáš to rychle. Výhoda je jinde: přímý vztah, žádný algoritmický výpalník mezi tebou a čtenářem, možnost vysvětlovat složitější věci a dlouhodobě budovat důvěru.
+
+Privacy-first newsletter ale není „vezmeme všechny kontakty z CRM a pošleme jim novinky“. To je spíš marketingová verze toho, když někdo otevře okno v serverovně, protože „čerstvý vzduch je zdravý“. Newsletter musí mít jasný slib, čistý zdroj kontaktů, snadné odhlášení a rozumnou míru měření.
+
+> Codyho komentář: Seznam kontaktů není poklad jen proto, že je dlouhý. Poklad je seznam lidí, kteří rozumí, proč od tebe něco dostávají, a neklikají na odhlášení rychlostí myši prchající před kočkou.
+
+## Nejdřív napiš slib newsletteru
+
+Před výběrem nástroje napiš jednu větu:
+
+```text
+Newsletter pomáhá [komu] pravidelně získat [typ hodnoty], aby mohl [praktické rozhodnutí nebo akce].
+```
+
+Příklady:
+
+- „Newsletter pomáhá zakladatelům malých B2B SaaSů zlepšovat web, onboarding a provoz bez zbytečného sledování zákazníků.“
+- „Newsletter pomáhá majitelům menších firem pochopit praktické AI a automatizační kroky, které se dají nasadit během týdne.“
+- „Newsletter pomáhá marketingovým týmům stavět vlastní kanály místo závislosti na reklamních pixelech.“
+
+Slabé sliby:
+
+- „Budeme posílat novinky.“
+- „Přihlaste se k odběru.“
+- „Zůstaňte v obraze.“
+
+To nejsou sliby. To jsou tapety. Čtenář potřebuje vědět, co dostane, jak často a proč se mu vyplatí pustit tě do inboxu.
+
+## Přihlášení má být samostatné rozhodnutí
+
+Newsletter nepřibaluj jako tichý bonus k poptávkovému formuláři, registraci do produktu ani stažení materiálu. Pokud člověk žádá o cenovou nabídku, jeho práce není „stát se odběratelem“. Jeho práce je dostat odpověď.
+
+Praktická pravidla:
+
+- checkbox pro newsletter nech nezaškrtnutý,
+- vysvětli konkrétní obsah a frekvenci,
+- odděl souhlas s obchodním sdělením od souhlasu se zpracováním poptávky,
+- u lead magnetu nabídni stažení i bez dlouhodobého marketingového odběru, pokud to dává smysl,
+- u zákaznického opt-out režimu jasně nabídni odmítnutí už při sběru kontaktu a potom v každé zprávě.
+
+V Česku se u obchodních sdělení potkává GDPR s pravidly pro elektronickou komunikaci. Prakticky z toho pro malý tým plyne jednoduchá disciplína: pro nový newsletter sbírej prokazatelný souhlas, u existujících zákazníků používej opt-out jen pro vlastní obdobné produkty nebo služby a vždy umožni snadné odhlášení.
+
+## Double opt-in není byrokracie, ale hygiena seznamu
+
+Double opt-in znamená, že člověk zadá e-mail a teprve kliknutím v potvrzovací zprávě odběr dokončí. Není to povinné kouzelné zaklínadlo pro každý scénář, ale je to velmi dobrá praxe.
+
+Pomáhá řešit tři věci:
+
+- snižuje riziko, že někdo přihlásí cizí adresu,
+- zlepšuje doručitelnost, protože seznam nezačíná špinavými kontakty,
+- vytváří lepší důkazní stopu pro případ pozdějšího sporu.
+
+Co ukládat k přihlášení:
+
+| Údaj | Proč | Retence |
+| --- | --- | --- |
+| e-mail | doručení newsletteru | do odhlášení nebo konce účelu |
+| čas přihlášení | doložení vzniku odběru | po dobu odběru a krátkou obrannou dobu |
+| verze textu souhlasu | víš, s čím člověk souhlasil | stejně jako důkaz souhlasu |
+| zdroj formuláře | odlišení webu, eventu nebo produktu | agregovat, pokud detail nepotřebuješ |
+| čas potvrzení double opt-in | důkaz kontroly adresy | stejně jako důkaz souhlasu |
+
+Co neukládat zbytečně:
+
+- kompletní historii každého otevření,
+- přesný device fingerprint,
+- polohu odhadnutou z IP,
+- interní CRM poznámky bez vztahu k odběru,
+- staré důvody segmentace, které už nepoužíváš.
+
+## Segmentuj podle zájmu, ne podle šmírovací fantazie
+
+Segmentace může být užitečná. Problém je, když se ze segmentace stane tiché profilování lidí podle každého kliknutí, otevření a mikro-signálu.
+
+Privacy-first segmenty:
+
+- zájem deklarovaný při přihlášení: weby, SaaS, AI automatizace, privacy-first provoz,
+- typ obsahu, který si člověk vybral: technický návod, podnikatelský checklist, případová studie,
+- zákaznický vztah: odběratel, zákazník, partner,
+- jazyk nebo trh, pokud je pro obsah opravdu nutný.
+
+Rizikové segmenty:
+
+- „otevřel tři e-maily ve 22:00, asi má problém“,
+- „klikl na ceny, pošleme agresivní sérii“,
+- „neotevřel nic, ale budeme ho zahřívat 18 dalšími e-maily“,
+- „spojíme newsletter s reklamním publikem bez jasného souhlasu“.
+
+Dobré pravidlo: segment má pomáhat poslat relevantnější obsah, ne vytvořit psychologický spis. Pokud segment neumíš vysvětlit čtenáři jednou větou bez studu, nepoužívej ho.
+
+## Měření drž na úrovni rozhodnutí
+
+Newsletter nepotřebuje vědět, jestli si někdo otevřel e-mail v tramvaji, na telefonu s konkrétním rozlišením a po třetím doušku kávy. Potřebuješ vědět, jestli kanál pomáhá strategii.
+
+Rozumné metriky:
+
+- počet potvrzených odběrů,
+- počet odhlášení po konkrétním typu obsahu,
+- kliknutí na vlastní obsah nebo přímou nabídku,
+- odpovědi čtenářů,
+- kvalifikované poptávky, které samy uvedly newsletter jako zdroj,
+- dlouhodobý poměr aktivních a neaktivních odběratelů.
+
+Metriky, se kterými opatrně:
+
+- open rate, protože závisí na technice klientů a ochranných proxy,
+- individuální historie otevření,
+- automatické lead scoringy bez vysvětlení,
+- synchronizace publika do reklamních sítí,
+- heatmapy a pixelové triky v e-mailu.
+
+Pokud stačí agregovaný report, nevytvářej individuální stopu. A pokud individuální stopu opravdu potřebuješ, napiš proč, na jak dlouho a kdo k ní má přístup.
+
+## Odhlášení je součást důvěry, ne porážka
+
+Odhlášení nemá být úniková hra. Každý newsletter musí mít jasnou a funkční cestu, jak odběr ukončit. Bez přihlášení do účtu, bez „napište nám důvod“, bez potvrzovacího kolečka, které se tváří jako UX a voní jako zoufalství.
+
+Dobré odhlášení:
+
+- je v každé zprávě,
+- funguje jedním nebo dvěma zřejmými kroky,
+- potvrzuje, že odběr skončil,
+- nabídne volitelné snížení frekvence, ale netlačí na něj,
+- nevyžaduje další osobní údaje,
+- propíše se do všech rozesílacích seznamů, kterých se týká.
+
+Po odhlášení můžeš držet minimální suppression záznam, aby se adresa omylem znovu neimportovala. To není marketingový profil. To je bezpečnostní brzda proti vlastní nešikovnosti.
+
+## RSS a archiv dej vedle e-mailu
+
+Privacy-first vlastní publikum nemusí být jen newsletter. E-mail je silný, ale není jediná cesta. Nabídni i RSS feed, veřejný archiv a přímé odkazy na články.
+
+Proč:
+
+- někteří lidé nechtějí další e-mail,
+- RSS nevyžaduje účet ani tracking,
+- veřejný archiv zlepšuje SEO i důvěru,
+- přímé odkazy se dobře sdílejí bez platformového zámku,
+- obsah má delší životnost než jedna rozesílka.
+
+Praktický model:
+
+- každý newsletter má webovou verzi,
+- každý článek má trvalou URL,
+- web nabízí RSS feed pro články nebo novinky,
+- rozesílka odkazuje na veřejný obsah místo přikládání všeho do e-mailu,
+- newsletterové CTA není jediná cesta ke kontaktu.
+
+Tím dáváš čtenářům volbu. A volba je často lepší marketing než další automatizovaná sekvence.
+
+## Praktický příklad: newsletter pro privacy-first SaaS studio
+
+Studio chce posílat měsíční newsletter pro zakladatele B2B SaaSů.
+
+Nastavení:
+
+- slib: „Jednou měsíčně praktický checklist k webu, onboardingům, SaaS provozu a privacy-first marketingu.“
+- formulář: e-mail, volitelně jméno, volitelný výběr tématu,
+- potvrzení: double opt-in,
+- segmenty: `web`, `saas`, `marketing`, `privacy`, podle volby při přihlášení,
+- měření: agregovaná kliknutí na články, odpovědi, poptávky s vlastním polem „Jak jste nás našli?“,
+- retence: neaktivní odběratele po 12 měsících oslovit jedním re-permission e-mailem nebo vyřadit,
+- alternativy: RSS feed a veřejný archiv všech vydání.
+
+První tři vydání:
+
+1. „Jak poznat, že landing page sbírá moc dat“ — checklist polí ve formuláři.
+2. „Onboarding bez falešných aktivačních metrik“ — praktická šablona první hodnoty.
+3. „Evropský provoz bez marketingové mlhy“ — datová mapa a claim karta.
+
+Každé vydání má jednu hlavní akci: odpovědět na e-mail, stáhnout checklist, nebo si domluvit konzultaci. Ne sedm CTA, tři bannery a psychologický horor v patičce.
+
+## Checklist: newsletter bez spamové pachuti
+
+- Má newsletter jednu větu slibu, cílové publikum a frekvenci?
+- Je přihlášení oddělené od poptávky, registrace a lead magnetu?
+- Je checkbox pro odběr nezaškrtnutý a srozumitelný?
+- Ukládáš verzi souhlasu, čas přihlášení a potvrzení, ale ne zbytečné sledovací detaily?
+- Používáš double opt-in tam, kde sbíráš nové odběratele z webu?
+- Umí se člověk odhlásit z každé zprávy přímo a účinně?
+- Máš suppression list proti omylům při reimportu kontaktů?
+- Segmentuješ podle deklarovaného zájmu, ne podle skrytého behaviorálního profilu?
+- Vyhodnocuješ agregovaně to, co ovlivní rozhodnutí o obsahu a nabídce?
+- Nabízíš RSS, veřejný archiv nebo přímé odkazy jako alternativu k e-mailu?
+- Má někdo v týmu vlastníka seznamu, retence a pravidel importu?
+- Je jasně zakázaný nákup kontaktů a hromadný import bez doloženého původu?
+
+## Mini šablona newsletterové karty
+
+```markdown
+# Newsletter karta: [název]
+
+Slib:
+- Pro koho:
+- Jaká hodnota:
+- Frekvence:
+- Příklad obsahu:
+
+Přihlášení:
+- Kde se sbírá e-mail:
+- Text souhlasu / přihlášení:
+- Double opt-in: ano/ne
+- Povinná pole:
+- Volitelná pole:
+
+Data:
+- Ukládané údaje:
+- Zakázané údaje:
+- Retence důkazů souhlasu:
+- Retence neaktivních odběratelů:
+- Suppression list:
+
+Měření:
+- Agregované metriky:
+- Individuální metriky, pokud existují:
+- Důvod individuální stopy:
+- Kdo má přístup:
+
+Odhlášení:
+- Odkaz v každé zprávě:
+- Propis do všech seznamů:
+- Potvrzení odhlášení:
+- Testováno dne:
+
+Alternativy:
+- RSS URL:
+- Veřejný archiv:
+- Přímý kontakt:
+
+Privacy-first kontrola:
+- Neimportujeme koupené kontakty:
+- Newsletter není povinný pro lead magnet:
+- Reklamní synchronizace publik vypnutá nebo výslovně schválená:
+- Datum revize:
+```
+
+## Zdroje k ověření
+
+- ÚOOÚ: [Obchodní sdělení](https://uoou.gov.cz/index.php/profesional/qa-otazky-a-odpovedi/obchodni-sdeleni) — praktické otázky k obchodním sdělením, opt-out u zákazníků, double opt-in a označení obchodních sdělení.
+- ÚOOÚ: [GDPR a přímý elektronický marketing](https://uoou.gov.cz/novinky/obchodni-sdeleni/gdpr-a-primy-elektronicky-marketing) — vysvětlení vztahu GDPR, zákona č. 480/2004 Sb. a přímého elektronického marketingu.
+- EUR-Lex: [Directive 2002/58/EC on privacy and electronic communications](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32002L0058) — článek 13 k nevyžádaným sdělením a možnosti používat kontakt zákazníka pro vlastní obdobné produkty při splnění podmínek.
+- EUR-Lex: [GDPR, Regulation (EU) 2016/679](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — článek 5 k minimalizaci a účelovému omezení, článek 7 k podmínkám souhlasu a jeho odvolání.
+- EDPB: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en) — vodítka k prokazatelnosti, svobodě a odvolání souhlasu.
+
 # Pracovní log
+- 2026-10-10: Doplněna příloha „Newsletter a vlastní publikum bez spamové pachuti“ s praktickým slibem newsletteru, odděleným přihlášením, double opt-in hygienou, minimalizací údajů, segmentací podle zájmu, agregovaným měřením, snadným odhlášením, podporou RSS a veřejného archivu, příkladem pro privacy-first SaaS studio, checklistem, vyplnitelnou newsletterovou kartou a ověřenými zdroji ÚOOÚ, EUR-Lex a EDPB. Pomáhá malým webům a SaaS týmům budovat vlastní publikum bez nakoupených kontaktů, skrytého profilování a inboxového obtěžování.
 - 2026-10-10: Doplněna příloha „Kampaňová atribuce bez sledovacího labyrintu a consent stringů“ s rozhodovací větou pro atribuci, UTM standardem bez osobních údajů, modelem první/poslední návštěvy, pravidly pro souhlas, varováním před složitými consent stringy, propojením kampaní s kvalitou leadů, praktickým příkladem AI auditu, checklistem, vyplnitelnou atribuční kartou a ověřenými zdroji EUR-Lex, EDPB, CNIL a belgického dozorového úřadu. Pomáhá malým webům a SaaS týmům vyhodnocovat kampaně bez reklamního sledovacího labyrintu a bez zbytečného datového apetitu.
 - 2026-10-10: Doplněna příloha „Tvrzení provozováno v Evropě bez marketingové mlhy“ s rozlišením hostingu v EU, zpracování v EHP a skutečného evropského provozu, datovou mapou pro veřejné claimy, pravidly pro subprocesory, bezpečnějšími formulacemi, praktickým příkladem landing page, checklistem, vyplnitelnou claim kartou a ověřenými zdroji EUR-Lex a EDPB. Pomáhá malým SaaS týmům prodávat privacy-first hodnotu pravdivě, konkrétně a bez sloganu, který nepřežije první zákaznický audit.
 - 2026-10-10: Doplněna příloha „Zrušení účtu a workspace bez datových zombie a support chaosu“ s mapou datových míst dotčených zrušením, rozdělením dat podle účelu, produktovou komunikací, automatizovaným offboarding workflow, pravidly pro zálohy, logy, praktickým příkladem zrušení B2B workspace, checklistem, offboarding kartou a ověřenými zdroji GDPR, EDPB a OWASP. Pomáhá malým SaaS týmům rušit účty férově, exportovat data včas a nenechávat po zákaznících staré exporty, tokeny a soft-delete zombie záznamy.
