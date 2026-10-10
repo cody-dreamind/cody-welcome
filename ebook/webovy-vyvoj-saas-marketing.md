@@ -63910,7 +63910,188 @@ Výsledek: méně paniky při chybě, menší riziko účtového výbuchu a lep�
 - [RFC 9700 — Best Current Practice for OAuth 2.0 Security](https://www.rfc-editor.org/rfc/rfc9700.html) — aktuální bezpečnostní doporučení pro OAuth 2.0, včetně PKCE, přesného redirect URI matching a ochrany tokenů proti zneužití.
 
 
+## Příloha: Zákaznické exporty bez CSV pasti a datového přestřelu
+
+Export dat je jedna z těch funkcí, které vypadají nudně, dokud je zákazník nepotřebuje při auditu, migraci, reklamaci faktury nebo odchodu ke konkurenci. Pak se najednou ukáže, jestli produkt opravdu respektuje kontrolu nad daty, nebo jen drží zákazníka v aplikaci pomocí technické mlhy.
+
+Privacy-first export není „stáhni všechno, co databáze unese“. Je to jasně pojmenovaná, bezpečně doručená a účelově omezená kopie dat, kterou člověk dokáže použít bez podpory, bez hackování CSV v Excelu a bez toho, aby mu v souboru přistála citlivá data jiného týmu.
+
+### Nejdřív rozděl exporty podle účelu
+
+Jeden univerzální export skoro vždycky skončí jako datová skládka. Místo toho si v adminu i dokumentaci pojmenuj samostatné scénáře:
+
+- **Pracovní export**: tabulka úkolů, kontaktů, objednávek nebo metrik pro další práci v týmu.
+- **Auditní export**: omezený výpis změn, přístupů, faktur nebo rozhodnutí za konkrétní období.
+- **Portabilita účtu**: osobní data poskytnutá uživatelem, pokud se uplatní právo na přenositelnost podle GDPR.
+- **Migrace organizace**: strukturovaný balík dat pro přechod do jiného nástroje nebo interního systému.
+- **Supportní export**: malý výřez pro konkrétní ticket, ideálně s maskovanými citlivými poli.
+
+Každý typ má jiného příjemce, jiný rozsah a jinou retenční logiku. Když je smícháš, začneš řešit bezpečnost checkboxem „include everything“ — a to je produktový ekvivalent otevřeného okna v přízemí.
+
+### Export má mít datový kontrakt
+
+Stejně jako API potřebuje kontrakt i export. U každého souboru napiš:
+
+- název exportu a verzi schématu,
+- seznam sloupců nebo JSON polí,
+- význam každého pole,
+- časové pásmo a formát datumu,
+- zda pole může obsahovat osobní údaje,
+- retenční pravidlo pro vygenerovaný soubor,
+- kdo smí export spustit a kdo ho smí stáhnout.
+
+U CSV se drž běžných pravidel z RFC 4180: hlavička má odpovídat počtu polí, hodnoty s čárkami, uvozovkami nebo zalomením řádku mají být správně escapované a MIME typ má být `text/csv`. Zní to jako detail, ale špatně escapované CSV dokáže rozbít import, fakturaci i důvěru rychleji než junior s přístupem do produkční databáze.
+
+U složitějších dat dej přednost JSON nebo ZIP balíku s manifestem. Manifest by měl říkat, co balík obsahuje, kdy vznikl, pro jaký tenant, jakou má verzi schématu a jak ověřit integritu souborů.
+
+### Minimalizace platí i při exportu
+
+Export není omluva pro obejití datové minimalizace. Naopak: je to moment, kdy se skrytá datová lenost zviditelní zákazníkovi.
+
+Praktické pravidlo: výchozí export obsahuje jen pole potřebná pro zvolený účel. Rozšířená citlivá pole vyžadují samostatnou volbu, vysvětlení a oprávnění. Typicky odděl:
+
+- veřejné pracovní údaje,
+- interní poznámky,
+- fakturační údaje,
+- osobní údaje koncových uživatelů,
+- auditní a bezpečnostní stopy,
+- soubory a přílohy.
+
+Pokud exportuješ kontakty, výchozí CSV nemusí obsahovat interní poznámku „klient je problémový“. Pokud exportuješ úkoly, nemusí v něm být všechny komentáře s osobními údaji. A pokud exportuješ usage data pro billing, nepotřebuješ kompletní produktovou telemetrii.
+
+> Codyho komentář: Nejlepší export je ten, který zákazník dokáže použít a ty se za něj nestydíš před bezpečákem, právníkem ani budoucím já. Všichni tři jsou nepříjemní, ale budoucí já bývá nejpomstychtivější.
+
+### Oprávnění a schvalování nejsou nepřátelé UX
+
+Export je často citlivější než obrazovka v aplikaci, protože z dat udělá přenosný balík. Proto nestačí, že uživatel „něco vidí“. Ptej se:
+
+- Smí uživatel exportovat celý tenant, nebo jen vlastní projekty?
+- Je export omezený na časové období?
+- Potřebuje export citlivých polí druhé schválení?
+- Má být stažení chráněné krátkodobým odkazem?
+- Má se export zapsat do auditního logu?
+
+U malého B2B SaaS funguje jednoduchý model: běžné pracovní exporty může spustit editor, export celé organizace jen owner, export auditních logů jen admin s bezpečnostním oprávněním a export s osobními údaji vždy zanechá auditní stopu.
+
+### Generování odděl od stažení
+
+U větších exportů nepouštěj generování synchronně v requestu. Lepší model:
+
+1. Uživatel zadá rozsah a účel.
+2. Systém vytvoří export job s unikátním ID.
+3. Worker data připraví mimo hlavní request.
+4. Výsledek uloží šifrovaně mimo veřejný webroot.
+5. Uživatel dostane krátkodobý odkaz nebo notifikaci v aplikaci.
+6. Soubor se po definované době smaže.
+
+Tím získáš lepší kontrolu nad výkonem, retry logikou, limity a mazáním. Zároveň můžeš zákazníkovi ukázat stav: „čeká ve frontě“, „připravuje se“, „připraveno ke stažení“, „expirovalo“ nebo „selhalo“.
+
+### CSV injection ber vážně
+
+CSV může být textový soubor, ale spreadsheet aplikace ho často vyhodnocují aktivně. Hodnoty začínající znaky jako `=`, `+`, `-` nebo `@` mohou být interpretované jako formule. Pokud export obsahuje uživatelský vstup, ošetři ho tak, aby otevření v tabulkovém editoru nespustilo nečekanou akci nebo neukázalo falešný výpočet.
+
+Praktický postup:
+
+- pro CSV exporty dokumentuj, že obsahují neověřený uživatelský text,
+- před potenciálně nebezpečné hodnoty přidej bezpečný prefix podle zvolené strategie,
+- nabídni JSON export pro systémy, které nechtějí spreadsheet kompromisy,
+- testuj hodnoty s uvozovkami, novými řádky, emoji, dlouhým textem a vzorci,
+- exporty nikdy negeneruj ručním slepováním stringů bez knihovny.
+
+OWASP u práce se soubory opakovaně připomíná, že metadata a obsah souboru jsou nedůvěryhodné. U exportů to platí obráceně i pro data, která do souboru zapisuješ: pokud pochází od uživatele, pořád je to nedůvěryhodný vstup, jen tentokrát zabalený do hezkého tlačítka „Download“.
+
+### Retence exportů musí být kratší než pohodlí
+
+Vygenerovaný export je kopie dat mimo běžnou aplikační kontrolu. Proto má mít krátkou životnost.
+
+Rozumný základ:
+
+- pracovní export dostupný 24 hodin,
+- auditní export dostupný 7 dní,
+- velký migrační balík dostupný individuálně podle domluvy,
+- supportní export s citlivými daty mazat po vyřešení ticketu,
+- metadata o exportu držet déle než soubor samotný.
+
+Metadata můžeš držet kvůli auditu: kdo export spustil, kdy, pro jaký tenant, jaký typ exportu, počet záznamů, stav, expirace a ID souboru. Samotný obsah drž jen tak dlouho, jak dává smysl pro účel.
+
+### Praktický příklad: agenturní SaaS exportuje projekty
+
+Agenturní SaaS má klienty, projekty, úkoly, komentáře, přílohy a fakturační přehledy. První verze exportů může vypadat takto:
+
+- `projects.csv`: ID projektu, název, klient, stav, datum vytvoření, datum dokončení.
+- `tasks.csv`: ID úkolu, projekt, název, stav, odpovědná role, termín, priorita.
+- `comments.jsonl`: komentáře jen na vyžádání, s autorem jako ID uživatele, ne s e-mailem.
+- `attachments-manifest.csv`: seznam příloh bez obsahu, s velikostí, typem a původním názvem.
+- `billing-summary.csv`: měsíční souhrn položek bez produktové telemetrie.
+- `manifest.json`: verze exportu, tenant, čas vytvoření, čas expirace, počet záznamů a kontrolní součty.
+
+Owner organizace může stáhnout celý migrační balík. Projektový manažer může stáhnout jen projekty, ke kterým má přístup. Support vidí pouze metadata exportu, ne obsah stažených souborů.
+
+### Checklist: exporty bez datového přestřelu
+
+- [ ] Každý export má jasný účel a pojmenovaného příjemce.
+- [ ] Výchozí export obsahuje jen minimální potřebná pole.
+- [ ] Citlivá pole vyžadují samostatné oprávnění nebo potvrzení.
+- [ ] CSV je generované knihovnou a testované na uvozovky, čárky, nové řádky a vzorce.
+- [ ] Každý export má verzi schématu a dokumentovaný seznam polí.
+- [ ] Velké exporty běží přes job/frontu, ne v hlavním requestu.
+- [ ] Stažení používá krátkodobý odkaz nebo přihlášený přístup.
+- [ ] Soubor je šifrovaný v úložišti a není veřejně hádatelný.
+- [ ] Export má expiraci a automatické smazání obsahu.
+- [ ] Auditní log eviduje spuštění, stažení, selhání a expiraci exportu.
+- [ ] Dokumentace vysvětluje formát, omezení a význam polí.
+- [ ] Portabilita osobních údajů je řešená odděleně od interních admin exportů.
+
+### Mini šablona exportní karty
+
+## Základ
+
+- Název exportu:
+- Účel:
+- Příjemce:
+- Formát: CSV / JSON / JSONL / ZIP balík
+- Verze schématu:
+
+## Rozsah
+
+- Zahrnuté entity:
+- Vyloučená citlivá pole:
+- Časové období:
+- Počet očekávaných záznamů:
+
+## Oprávnění
+
+- Kdo smí spustit:
+- Kdo smí stáhnout:
+- Je potřeba schválení:
+- Auditní log události:
+
+## Provoz
+
+- Synchronní / asynchronní generování:
+- Expirace souboru:
+- Retence metadat:
+- Šifrování:
+- Limity velikosti:
+
+## Privacy-first kontrola
+
+- Proč je rozsah přiměřený:
+- Jak zákazník pozná obsah před stažením:
+- Jak se řeší portabilita osobních údajů:
+- Jak se smaže vygenerovaná kopie:
+
+### Zdroje k ověření
+
+- GDPR, článek 20 o právu na přenositelnost údajů: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+- RFC 4180: Common Format and MIME Type for CSV Files: https://datatracker.ietf.org/doc/html/rfc4180
+- W3C CSV on the Web — doporučení pro tabulární data a metadata: https://www.w3.org/TR/csv2json/
+- OWASP CSV Injection — popis formula injection rizik v exportech do tabulek: https://community.owasp.org/attacks/CSV_Injection
+- OWASP File Upload Cheat Sheet — praktické principy bezpečné práce se soubory a nedůvěryhodnými metadaty: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+
 # Pracovní log
+- 2026-10-10: Doplněna příloha „Zákaznické exporty bez CSV pasti a datového přestřelu“ s rozdělením exportů podle účelu, datovým kontraktem, minimalizací polí, oprávněními, asynchronním generováním, obranou proti CSV injection, retenčním modelem, praktickým příkladem, checklistem, exportní kartou a ověřenými zdroji GDPR, RFC 4180, W3C a OWASP. Pomáhá SaaS týmům dát zákazníkům kontrolu nad daty bez nechtěného úniku citlivých informací.
+
 
 - 2026-10-10: Doplněna příloha „API klíče a tokeny bez tajného hřbitova v produkci“ s klasifikací tajemství podle dopadu, kartou vlastníka a účelu, pravidly pro minimální scope, ukládáním mimo repozitář a chat, nacvičenou rotací, expirací tokenů, detekcí úniku, příkladem AI API klíče, checklistem, vyplnitelnou kartou a ověřenými zdroji OWASP, NIST a RFC 9700. Pomáhá malým webovým a SaaS týmům snížit škodu při úniku klíče a udržet produkční tajemství pod kontrolou bez zbytečného bezpečnostního divadla.
 
