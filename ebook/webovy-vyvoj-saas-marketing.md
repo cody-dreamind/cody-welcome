@@ -1989,6 +1989,135 @@ Po odeslání:
 - [ ] Staré poptávky mají retenční pravidlo: smazat, anonymizovat nebo ponechat s důvodem.
 
 
+---
+
+## Příloha J: Knowledge base a support, který pomáhá bez budování sledovacího bunkru
+
+Support není jen místo, kam padají problémy. Je to zpětná vazba v surovém stavu: zákazníci přesně říkají, kde nerozumí produktu, kde je onboarding slabý, kde text na webu slibuje víc než aplikace umí a kde tým opakuje stejnou odpověď podesáté. Malý SaaS tým by proto neměl support brát jako oddělený svět. Je to zdroj pro produkt, marketing i dokumentaci.
+
+Privacy-first support má ale jednu důležitou hranici: pomáhá rychle, aniž by z každého ticketu dělal profil člověka. Ne každý dotaz musí skončit ve třech nástrojích, v AI sumarizaci a v doživotním archivu. Někdy je ticket prostě ticket. Ne rodinná sága v CRM.
+
+### 1) Rozděl support na tři vrstvy
+
+Začni jednoduchou architekturou supportu:
+
+1. **Veřejná znalostní báze:** články, návody, časté otázky, troubleshooting a vysvětlení limitů produktu.
+2. **Soukromá komunikace:** e-mail, formulář nebo ticket systém pro konkrétní zákaznické situace.
+3. **Interní poznámky:** rozhodnutí týmu, workaroundy, incidenty, refundy a produktové signály.
+
+Tyto vrstvy se nemají míchat. Veřejná znalostní báze nemá obsahovat zákaznická jména, screenshoty z produkce ani interní komentáře. Soukromý ticket nemá automaticky vytvářet marketingový profil. Interní poznámky mají být přístupné jen lidem, kteří je potřebují pro práci.
+
+Praktické pravidlo: pokud se odpověď opakuje třikrát, napiš článek. Pokud článek potřebuje konkrétní zákaznická data, napiš ho znovu jako obecný scénář. Pokud problém nejde vysvětlit bez screenshotu účtu, anonymizuj ho nebo vytvoř demo data.
+
+### 2) Knowledge base piš podle úkolů, ne podle organizační struktury
+
+Zákazník nehledá „modul integrací“. Hledá „jak propojit fakturaci“, „proč mi nepřišel e-mail“, „jak pozvat kolegu“ nebo „jak zrušit účet“. Kategorie znalostní báze by měly vycházet z úkolů, které člověk řeší.
+
+Dobrá struktura pro malý SaaS:
+
+- **Začínáme:** první nastavení, pozvání týmu, základní pojmy.
+- **Účet a fakturace:** tarify, faktury, zrušení, export dat.
+- **Práce s produktem:** hlavní funkce podle úkolů uživatele.
+- **Integrace a importy:** co lze propojit, limity, běžné chyby.
+- **Bezpečnost a data:** kde data běží, kdo k nim má přístup, export a smazání.
+- **Řešení problémů:** známé chyby, stav systému, kontaktní cesta.
+
+Každý článek má mít jeden praktický výsledek. Ne „Vše o nastavení účtu“. Raději „Jak pozvat nového člena týmu“ nebo „Jak změnit fakturační e-mail“. Kratší články se lépe aktualizují a lépe odkazují ze support odpovědí.
+
+### 3) Šablona support článku
+
+Používej jednotnou šablonu, ať znalostní báze nepůsobí jako garáž plná náhodných krabic.
+
+```markdown
+# Jak [udělat konkrétní věc]
+
+Krátké shrnutí:
+Jednou větou řekni, kdy se tento návod hodí.
+
+## Než začneš
+- Potřebná role nebo oprávnění
+- Co musí být už nastavené
+- Na co si dát pozor
+
+## Postup
+1. Krok
+2. Krok
+3. Krok
+
+## Když to nefunguje
+- Nejčastější příčina
+- Jak ji ověřit
+- Co poslat supportu bez zbytečných osobních údajů
+
+## Související články
+- Odkaz na další krok
+```
+
+Do článků nedávej reálné osobní údaje ani zákaznické screenshoty. Používej demo e-maily typu `firma@example.cz`, fiktivní firmy a testovací projekt. Pokud článek popisuje bezpečnost, export nebo mazání dat, přidej datum poslední kontroly a vlastníka.
+
+### 4) Ticket systém: minimum polí, jasná odpovědnost
+
+Support formulář má sbírat méně dat než obchodní poptávka. Cílem není poznat zákazníka „do hloubky“, ale vyřešit problém.
+
+Minimum polí:
+
+| Pole | Povinné? | Poznámka |
+| --- | --- | --- |
+| E-mail | Ano | Nutný pro odpověď. |
+| Předmět | Ano | Pomáhá směrovat dotaz. |
+| Popis problému | Ano | Hlavní obsah ticketu. |
+| Část produktu | Volitelné | Pomůže kategorizaci, ale nesmí blokovat odeslání. |
+| Priorita | Volitelné | Uživatelé často nadhodnocují; ber jako signál, ne pravdu z kamene. |
+| Příloha | Volitelné | Upozorni, ať neposílají hesla, tokeny ani celé exporty dat. |
+
+Interně si hlídej tři odpovědnosti:
+
+- **Vlastník ticketu:** kdo odpovídá zákazníkovi.
+- **Vlastník tématu:** kdo opraví dokumentaci nebo produktovou chybu.
+- **Retence:** kdy se ticket smaže, anonymizuje nebo přesune do interní znalosti bez osobních údajů.
+
+### 5) Support metriky bez mikroskopu na člověka
+
+Support se dá zlepšovat i bez invazivního sledování jednotlivců. U malého týmu stačí agregované signály:
+
+- počet ticketů podle tématu,
+- první reakční čas,
+- čas do vyřešení,
+- počet opakovaných dotazů k jedné funkci,
+- články, které se nejčastěji posílají jako odpověď,
+- témata, která by měla skončit v onboarding checklistu nebo produktu.
+
+Není potřeba sledovat, kolikrát konkrétní člověk otevřel článek, jak dlouho na něm seděl a zda si při tom udělal kafe. Pro rozhodování stačí vědět, že článek řeší častý problém, nebo že ho naopak nikdo nepoužívá.
+
+Pokud zapojíš AI asistenta na shrnutí ticketů, drž se stejných zásad jako v příloze F: minimalizuj vstup, anonymizuj citlivá data, neposílej tajemství a výstup používej jako návrh, ne jako rozhodnutí. U supportu je riziko úniku vyšší, protože lidé do zpráv často vloží věci, které by vložit neměli.
+
+### 6) Měsíční support review na 45 minut
+
+Jednou měsíčně udělej krátké review. Ne proto, aby vznikla další tabulka, ale aby support opravdu zlepšoval produkt.
+
+Agenda:
+
+1. Vyber 5 nejčastějších témat za měsíc.
+2. U každého rozhodni: dokumentace, produkt, onboarding, nebo komunikace na webu?
+3. Najdi jeden článek, který chybí nebo je zastaralý.
+4. Najdi jednu produktovou úpravu, která sníží opakované dotazy.
+5. Zkontroluj, jestli staré tickety dodržují retenční pravidla.
+6. Zapiš dvě rozhodnutí do rozhodovacího logu.
+
+**Codyho komentář:** Nejlevnější support ticket je ten, který vůbec nevznikne, protože produkt, onboarding nebo článek odpověděl včas. Ale pozor: cílem není schovat kontakt na support jako poklad v adventuře. Cílem je dát lidem jasnou odpověď dřív, než musí psát.
+
+### Checklist pro privacy-first support a knowledge base
+
+- [ ] Znalostní báze je strukturovaná podle úkolů zákazníka, ne podle interních modulů.
+- [ ] Každý opakovaný dotaz má kandidáta na článek nebo produktové zlepšení.
+- [ ] Veřejné články neobsahují reálné osobní údaje, produkční screenshoty ani interní poznámky.
+- [ ] Support formulář sbírá jen data nutná k vyřešení problému.
+- [ ] Přílohy mají jasné varování: neposílat hesla, tokeny, tajné klíče ani celé exporty.
+- [ ] Ticket notifikace neposílají citlivý obsah do zbytečných kanálů.
+- [ ] Support metriky jsou agregované a používají se k rozhodování o dokumentaci, produktu a onboardingu.
+- [ ] Staré tickety mají retenční pravidlo a tým ho pravidelně kontroluje.
+
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -2027,6 +2156,7 @@ Po odeslání:
 
 ## Pracovní log
 
+- **2026-10-11:** Přidána příloha J o privacy-first supportu a knowledge base: vrstvy podpory, struktura článků, šablona návodu, minimální ticket formulář, agregované metriky a měsíční review.
 - **2026-10-11:** Přidána příloha I o privacy-first poptávkových formulářích: minimální pole, kvalifikace problému, potvrzení po odeslání, interní workflow, retenční pravidla a praktická šablona.
 - **2026-10-11:** Přidána příloha H o redakčním systému obsahu: obsahové pilíře podle rozhodnutí zákazníka, redakční karta, publikační rytmus, distribuce přes vlastní kanály a privacy-first měření.
 - **2026-10-11:** Přidána příloha G o changelogu a release notes: rozdíl mezi interním a zákaznickým zápisem, kanonická stránka, RSS, šablona položky, release rytmus a checklist pro privacy-first komunikaci změn.
