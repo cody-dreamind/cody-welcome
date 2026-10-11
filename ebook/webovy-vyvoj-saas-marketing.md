@@ -2118,6 +2118,189 @@ Agenda:
 - [ ] Staré tickety mají retenční pravidlo a tým ho pravidelně kontroluje.
 
 
+## Příloha K: Pricing stránka, která prodává bez nátlakového cirkusu
+
+Cenová stránka je místo, kde se marketing potká s realitou. Do té chvíle můžeš vyprávět krásný příběh o hodnotě, rychlosti a úsporách. Jakmile návštěvník otevře pricing, ptá se mnohem tvrději: „Kolik mě to bude stát, co přesně dostanu a co se stane, když to nebude fungovat?“
+
+Privacy-first pricing má ještě jeden úkol navíc: nesmí se opírat o manipulaci, skryté podmínky ani agresivní sledování nerozhodnutých lidí. Místo toho má dát zákazníkovi klid na rozumné rozhodnutí. Ano, je to méně „growth hack“. Taky je to méně „proč mám pocit, že mě sleduje kalkulačka s doktorátem z psychologie“.
+
+### 1) Nejdřív pojmenuj nákupní situaci
+
+Než začneš kreslit tři karty s tarify, napiš si, v jaké situaci zákazník pricing čte.
+
+Příklady:
+
+- Zakladatel malého SaaS řeší, jestli si může nástroj dovolit první měsíc.
+- Provozní manažer potřebuje vědět, zda tarif pokryje tým a základní workflow.
+- Technický člověk kontroluje limity, export dat, integrace a bezpečnost.
+- Majitel firmy nechce číst detailní specifikaci, chce pochopit, kdy se investice vrátí.
+
+Každá situace potřebuje trochu jiný důkaz. Zakladatel chce nízké riziko startu. Provozní člověk chce jistotu, že nenarazí po třech dnech. Technický člověk chce vědět, kde jsou data, jak funguje export a co se stane při ukončení služby.
+
+Praktická otázka před psaním pricingu:
+
+> „Jaké rozhodnutí má člověk udělat po přečtení této stránky?“
+
+Možné odpovědi:
+
+- začít trial,
+- objednat demo,
+- vybrat tarif,
+- poslat stránku kolegovi,
+- stáhnout bezpečnostní nebo privacy podklady,
+- napsat dotaz k limitům.
+
+Pokud pricing míří na všechny tyto akce najednou, pravděpodobně bude působit jako palubní deska vesmírné lodi. Zábavné na pohled, horší na rozhodování.
+
+### 2) Tarify stav podle hodnoty, ne podle interní tabulky funkcí
+
+Častá chyba je pricing, který vypadá jako export z produktového backlogu: 47 řádků, zelené fajfky, šedé pomlčky a jedna funkce schovaná v nejdražším tarifu, protože „nějak musíme tlačit upgrade“.
+
+Lepší přístup: každý tarif pojmenuj podle fáze zákazníka.
+
+Příklad pro B2B SaaS:
+
+- **Start** — pro první tým, který chce ověřit proces a spustit základní workflow.
+- **Growth** — pro firmu, která už má pravidelný provoz, více rolí a potřebuje reporting.
+- **Scale** — pro větší tým s požadavky na audit, pokročilá oprávnění a individuální podporu.
+
+Funkce pak nejsou nahodilý seznam, ale důvod, proč daný tarif existuje. U každé položky se ptej:
+
+> „Pomáhá tato funkce zákazníkovi v dané fázi, nebo ji sem dávám jen proto, že ji máme?“
+
+Když funkce neříká jasnou hodnotu, přepiš ji do výsledku.
+
+Slabě:
+
+> „Custom fields“
+
+Lépe:
+
+> „Vlastní pole pro procesy, které se nevejdou do výchozí šablony.“
+
+Slabě:
+
+> „Advanced permissions“
+
+Lépe:
+
+> „Odděl přístup obchodníků, supportu a administrátorů bez ruční kontroly každého záznamu.“
+
+### 3) Limity ukaž dřív, než se z nich stane support ticket
+
+Každý SaaS má limity. Počet uživatelů, projektů, integrací, exportů, úložiště, automatizací nebo support reakce. Schovávat limity je krátkodobě pohodlné a dlouhodobě drahé.
+
+U každého tarifu ukaž:
+
+- co je zahrnuté,
+- co je omezené,
+- co se stane při překročení limitu,
+- zda existuje upozornění před navýšením nákladů,
+- jak zákazník může data exportovat nebo tarif snížit.
+
+Privacy-first provoz přidává ještě jednu důležitou vrstvu: vysvětli, jak se liší data a přístupy mezi tarify. Ne stylem „Enterprise má bezpečnost, ostatní mají štěstí“. Základní ochrana dat musí být základní hygienou, ne prémiovou dekorací.
+
+Dobré rozdělení:
+
+- všechny tarify mají šifrovaný přenos, základní zálohy a export dat,
+- vyšší tarify mají detailnější auditní logy, pokročilé role, individuální retenční pravidla nebo smluvní podporu,
+- enterprise úroveň řeší specifické bezpečnostní a právní požadavky, ne elementární důvěru.
+
+**Codyho komentář:** Bezpečnost jako upsell je nebezpečná zkratka. Pokročilé řízení rizik může být v dražším tarifu, ale základní ochrana zákaznických dat má být samozřejmost. Jinak neprodáváš SaaS, ale loterii s administrátorským heslem.
+
+### 4) CTA rozděl podle připravenosti zákazníka
+
+Ne každý návštěvník pricingu je připraven platit hned. Někteří chtějí začít trial. Někteří potřebují demo. Někteří jen sbírají podklady pro tým.
+
+Pricing proto může mít tři vrstvy akcí:
+
+1. **Primární akce:** začít trial, objednat demo nebo koupit tarif.
+2. **Sekundární akce:** porovnat tarify, zeptat se na limit, stáhnout jednostránkové shrnutí.
+3. **Důvěrová akce:** otevřít privacy informace, bezpečnostní přehled, vzor DPA nebo exportní pravidla.
+
+Nedělej z každé akce stejně velké tlačítko. Primární CTA má být jasné. Sekundární odkazy mají pomáhat, ne křičet.
+
+Příklad textu pod tlačítkem:
+
+> „Trial bez platební karty. Po 14 dnech se účet automaticky nepřeklopí do placeného tarifu.“
+
+Nebo:
+
+> „Demo trvá 25 minut. Ukážeme konkrétní workflow, ne obecnou prezentaci se 78 slidy.“
+
+Tohle snižuje nejistotu. A nejistota je na pricingu často větší problém než samotná cena.
+
+### 5) Měř pricing bez sledovacího honu na jednotlivce
+
+Pricing stránka se dá zlepšovat i bez invazivního trackingu. Nepotřebuješ znát kompletní osobní historii každého návštěvníka. Potřebuješ vědět, kde se rozhodování zasekává.
+
+Sleduj agregovaně:
+
+- návštěvy pricingu podle zdroje kampaně,
+- kliknutí na primární CTA,
+- kliknutí na otázky k limitům nebo bezpečnosti,
+- počet odeslaných poptávek z pricingu,
+- nejčastější dotazy po návštěvě pricingu,
+- konverzi z trialu nebo dema na platící zákazníky.
+
+Kombinuj kvantitativní signály s kvalitativními:
+
+- proč lidé váhají,
+- které limity nechápou,
+- co jim chybí pro interní schválení,
+- zda cena neodpovídá tomu, jak popisuješ hodnotu.
+
+Jednou měsíčně projdi support, sales poznámky a agregovanou analytiku. Nehledej „trik“, který zvýší kliky o půl procenta. Hledej jednu věc, která sníží nejistotu pro správného zákazníka.
+
+### 6) Šablona pricing stránky
+
+Použij tuto strukturu jako jednoduchý start:
+
+```markdown
+# Vyber tarif podle fáze vašeho týmu
+
+Krátké vysvětlení, pro koho je produkt a jak se cena váže na hodnotu.
+
+## Start
+Pro malé týmy, které chtějí spustit první workflow.
+- Hlavní výsledek
+- Klíčové limity
+- Co je zahrnuté
+- Co není zahrnuté
+- CTA: Začít trial
+
+## Growth
+Pro týmy s pravidelným provozem a více rolemi.
+- Hlavní výsledek
+- Klíčové limity
+- Co je navíc proti Startu
+- CTA: Vyzkoušet Growth
+
+## Scale
+Pro firmy s auditními, bezpečnostními nebo integračními požadavky.
+- Hlavní výsledek
+- Co řeší individuálně
+- CTA: Domluvit demo
+
+## Časté otázky
+- Co se stane po trialu?
+- Dá se exportovat data?
+- Kde jsou data provozovaná?
+- Jak funguje zrušení účtu?
+- Jak řešíte role, přístupy a support?
+```
+
+### Checklist pro pricing stránku
+
+- [ ] Každý tarif má jasně popsanou fázi zákazníka, ne jen jiný počet funkcí.
+- [ ] Cena, limity a důležité podmínky nejsou schované za obchodní formulář bez důvodu.
+- [ ] Základní bezpečnost a export dat nejsou prezentované jako luxusní doplněk.
+- [ ] CTA odpovídá připravenosti zákazníka: trial, demo, dotaz nebo podklady pro tým.
+- [ ] FAQ řeší skutečné nákupní nejistoty: trial, zrušení, data, limity, fakturace a support.
+- [ ] Měření pricingu je agregované a nevyžaduje reklamní pixel ani osobní profilování.
+- [ ] Jednou měsíčně tým vybere jednu konkrétní úpravu pricingu podle dotazů a dat.
+
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -2156,6 +2339,7 @@ Agenda:
 
 ## Pracovní log
 
+- **2026-10-11:** Přidána příloha K o privacy-first pricing stránce: nákupní situace, hodnotové tarify, limity, CTA podle připravenosti zákazníka, agregované měření a praktická šablona.
 - **2026-10-11:** Přidána příloha J o privacy-first supportu a knowledge base: vrstvy podpory, struktura článků, šablona návodu, minimální ticket formulář, agregované metriky a měsíční review.
 - **2026-10-11:** Přidána příloha I o privacy-first poptávkových formulářích: minimální pole, kvalifikace problému, potvrzení po odeslání, interní workflow, retenční pravidla a praktická šablona.
 - **2026-10-11:** Přidána příloha H o redakčním systému obsahu: obsahové pilíře podle rozhodnutí zákazníka, redakční karta, publikační rytmus, distribuce přes vlastní kanály a privacy-first měření.
