@@ -1658,6 +1658,95 @@ Privacy-first volba nemusí vždy znamenat nejméně pohodlný nástroj. Znamen�
 
 ---
 
+## Příloha G: Changelog, release notes a komunikace změn bez zbytečného humbuku
+
+Malý SaaS často komunikuje změny dvěma extrémy: buď mlčí, nebo z každé drobnosti udělá ohňostroj s pěti vykřičníky. Ani jedno není ideální. Changelog a release notes mají být provozní nástroj důvěry: zákazník vidí, že produkt žije, tým má historii rozhodnutí a obchod má materiál pro konkrétní follow-up.
+
+Privacy-first varianta je jednoduchá: zveřejňuj změny na vlastním webu, přidej RSS feed, posílej jen nutné e-maily a nepoužívej sledovací pixely jen proto, aby se dashboard cítil důležitě. RSS 2.0 specifikace počítá s položkami, které mohou obsahovat `title`, `link`, `description`, `guid` a `pubDate`, takže se hodí i pro jednoduchý feed produktových novinek ([RSS Advisory Board: RSS 2.0 Specification](https://www.rssboard.org/rss-specification)). Pro strukturu changelogu se vyplatí inspirovat formátem Keep a Changelog, který rozlišuje typy změn jako přidané, změněné, opravené nebo odstraněné věci ([Keep a Changelog](https://keepachangelog.com/en/)). Pokud používáš veřejné API nebo balíčky, pomůže i verzování podle dopadu změn; Semantic Versioning definuje význam `MAJOR.MINOR.PATCH` pro nekompatibilní změny, nové kompatibilní funkce a kompatibilní opravy ([Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html)).
+
+### 1) Rozlišuj interní changelog a zákaznické release notes
+
+Interní changelog je pracovní paměť týmu. Může být technický, stručný a přesný. Zákaznické release notes jsou překlad do uživatelského dopadu.
+
+Příklad interního zápisu:
+
+> `Fixed`: Validace DIČ už nerozbije fakturační formulář při vložení mezery za prefix.
+
+Příklad zákaznického zápisu:
+
+> Opravili jsme fakturační formulář: DIČ nyní projde i tehdy, když ho zákazník vloží s mezerou navíc.
+
+To druhé je lepší pro klienta, protože říká, co se změnilo v jeho práci. Neříká „refaktorovali jsme parser“, protože klient obvykle nechce parser, chce vystavit fakturu bez malého rituálu vzteku.
+
+### 2) Každá položka má říct dopad, ne jen aktivitu
+
+Špatná release note:
+
+> Vylepšili jsme onboarding.
+
+Lepší release note:
+
+> V onboardingu jsme zkrátili první nastavení projektu ze šesti kroků na tři. Nový uživatel teď zadává jen název projektu, typ webu a preferovaný jazyk; zbytek může doplnit později.
+
+Použij jednoduchý vzorec:
+
+1. **Co se změnilo:** konkrétní funkce, oprava nebo úprava.
+2. **Pro koho:** všichni uživatelé, administrátoři, vývojáři, účetní, agenturní tým.
+3. **Jaký je dopad:** rychlejší práce, méně chyb, jasnější nastavení, bezpečnější provoz.
+4. **Co má uživatel udělat:** nic, zkontrolovat nastavení, aktualizovat integraci, přečíst migraci.
+
+### 3) Komunikační kanály drž pod kontrolou
+
+Pro malý evropský SaaS dává smysl mít jednu kanonickou stránku `/changelog` nebo `/novinky`. Z ní můžeš automaticky generovat RSS feed, odkazovat na konkrétní verze z aplikace a jednou měsíčně poslat souhrn zákazníkům, kteří o něj stojí.
+
+Praktický model:
+
+- **Web:** veřejný archiv změn s trvalými URL.
+- **RSS:** přímý odběr bez algoritmů, účtů a sledovacích skriptů.
+- **In-app oznámení:** jen pro změny, které uživatel opravdu potřebuje vidět v kontextu.
+- **E-mail:** bezpečnostní změny, fakturace, zásadní migrace a volitelný měsíční souhrn.
+- **Sociální sítě:** pouze jako distribuce odkazu, ne jako jediné místo, kde změna existuje.
+
+> **Codyho komentář:** Když jediná historie produktu žije v LinkedIn postech, není to komunikace produktu. Je to archeologie s komentářovou sekcí.
+
+### 4) Šablona jedné položky changelogu
+
+```markdown
+### 2026-10-11 — Rychlejší nastavení projektu
+
+**Typ:** Changed
+**Pro koho:** noví uživatelé a administrátoři
+**Dopad:** první projekt lze založit bez vyplňování nepovinných polí
+
+Zkrátili jsme první nastavení projektu ze šesti kroků na tři. Název projektu,
+typ webu a jazyk stačí pro první spuštění; fakturační údaje, týmové role
+a pokročilé integrace lze doplnit později.
+
+**Co udělat:** nic. Změna platí automaticky pro nové projekty.
+```
+
+Když jde o bezpečnostní opravu, nepřidávej zbytečné detaily, které by pomohly útoku. Řekni dopad, rozsah, stav opravy a doporučenou akci. Technické detaily zveřejni až tehdy, když je to bezpečné a uživatelům to pomůže.
+
+### 5) Release rytmus pro malý tým
+
+Nemusíš mít perfektní proces jako velká firma. Stačí rytmus, který se dá udržet.
+
+- Každý merge nebo nasazení označ interně jednou větou dopadu.
+- Jednou týdně projdi změny a vyber ty, které patří do veřejného changelogu.
+- Jednou měsíčně udělej souhrn pro zákazníky, obchod a support.
+- U breaking changes piš samostatný migrační návod a termín, do kdy je potřeba reagovat.
+- U privacy nebo bezpečnostních změn přidej informaci, zda se mění zpracování dat, dodavatel, region nebo retenční doba.
+
+### Checklist pro changelog a release komunikaci
+
+- [ ] Produkt má jednu veřejnou kanonickou stránku pro novinky nebo changelog.
+- [ ] Každá položka popisuje dopad na uživatele, ne jen interní aktivitu týmu.
+- [ ] Důležité změny mají trvalý odkaz, který lze poslat zákazníkovi nebo dát do dokumentace.
+- [ ] RSS feed obsahuje stabilní `guid`, `link` a `pubDate` pro každou položku.
+- [ ] Bezpečnostní a privacy změny jasně říkají, zda uživatel musí něco udělat.
+- [ ] E-mail se používá střídmě: jen pro zásadní změny, povinné informace nebo dobrovolný souhrn.
+- [ ] Sociální sítě pouze odkazují na vlastní zdroj, nejsou jediným archivem produktových změn.
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -1679,9 +1768,11 @@ Privacy-first volba nemusí vždy znamenat nejméně pohodlný nástroj. Znamen�
 - Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
 - Google Search Central: [Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
 - Google Search Central: [Using generative AI content on your website](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content)
+- Keep a Changelog: [Keep a Changelog](https://keepachangelog.com/en/)
 - OWASP: [Application Security Verification Standard](https://owasp.org/projects/asvs)
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - RSS Advisory Board: [RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
+- Semantic Versioning: [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html)
 - Umami: [Metric definitions](https://docs.umami.is/docs/metric-definitions)
 - Umami: [Platform](https://umami.is/platform)
 - Umami: [FAQ](https://docs.umami.is/docs/faq)
@@ -1693,6 +1784,7 @@ Privacy-first volba nemusí vždy znamenat nejméně pohodlný nástroj. Znamen�
 
 ## Pracovní log
 
+- **2026-10-11:** Přidána příloha G o changelogu a release notes: rozdíl mezi interním a zákaznickým zápisem, kanonická stránka, RSS, šablona položky, release rytmus a checklist pro privacy-first komunikaci změn.
 - **2026-10-11:** Přidána příloha F o bezpečném používání AI asistenta v malém týmu: klasifikace rizik, pravidla pro prompty, anonymizace, lidská kontrola a výběr nástroje podle privacy-first provozu.
 - **2026-10-11:** Přidána příloha E s exit plánem od dodavatelů: kritičnost služeb, exporty, fallbacky, omezení vendor lock-inu, krizový scénář a checklist.
 - **2026-10-11:** Přidána příloha D s onboarding auditem pro první týden v SaaS: první hodnotná akce, minimalizace polí, privacy-first měření, e-mailová sekvence a praktický checklist.
