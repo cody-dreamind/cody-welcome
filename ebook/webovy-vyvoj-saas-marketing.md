@@ -67687,7 +67687,173 @@ Vlastník:
 - EUR-Lex publikuje Regulation (EU) 2024/1689, tedy AI Act, jako právní rámec EU pro AI systémy a obecné modely: https://eur-lex.europa.eu/eli/reg/2024/1689
 - Evropská komise průběžně vydává informace a pokyny k povinnostem pro general-purpose AI modely podle AI Actu: https://digital-strategy.ec.europa.eu/en/factpages/general-purpose-ai-obligations-under-ai-act
 
+
+# Příloha: Webhooky bez duplicit, tichých výpadků a datového ohňostroje
+
+Webhook je elegantní věc: jedna služba pošle druhé zprávu, že se něco stalo. Platba prošla, faktura se změnila, dokument byl podepsán, lead přišel z formuláře, zákazník zrušil předplatné. Jenže v malém SaaS se webhook často tváří jako „jen endpoint“, dokud nepřijde první víkendová smršť duplicit, timeoutů, změněných payloadů a support dotazů typu „proč má zákazník třikrát stejnou fakturu?“
+
+Privacy-first webhook není jen technicky bezpečný. Je také úsporný: přijímá jen potřebné eventy, ukládá jen provozně nutné údaje, má jasnou retenci a umí se zotavit bez toho, aby někdo ručně exportoval půlku produkční databáze do CSV. Ano, přesně ten typ „rychlé opravy“, po které auditní stopa pláče do polštáře.
+
+> Codyho komentář: Webhook nikdy neber jako telefonát od důvěryhodného kamaráda. Ber ho jako pohlednici bez obálky, kterou musíš ověřit, zaevidovat a zpracovat tak, aby ti druhé doručení nezbouralo účetnictví.
+
+## Nejdřív si napiš mapu eventů
+
+Před implementací endpointu si sepiš, které události skutečně potřebuješ. Ne „všechno, co poskytovatel nabízí“. Jen eventy, které mění stav produktu, spouští zákaznickou akci nebo pomáhají obnovit konzistenci.
+
+Minimální mapa webhooku:
+
+- zdrojová služba a prostředí,
+- název eventu,
+- proč event přijímáš,
+- jaký interní stav mění,
+- jaké osobní nebo obchodně citlivé údaje obsahuje,
+- jak dlouho potřebuješ ukládat raw payload,
+- jak poznáš duplicitní doručení,
+- jak obnovíš stav po výpadku.
+
+Pokud nedokážeš u eventu vysvětlit dopad na produkt, endpoint ho nemá přijímat. Každý navíc přijatý event je malý budoucí závazek: logování, bezpečnost, retence, testování a občas i panika.
+
+## Podpis ověřuj nad raw tělem
+
+Webhook bez ověření podpisu je veřejný formulář s produkčním dopadem. Nestačí, že URL „nikdo nezná“. URL se dá najít v logu, e-mailu, historii shellu, chybové stránce nebo dokumentaci. Ověřuj podpis nebo jiný doporučený mechanismus poskytovatele a dělej to nad přesným raw tělem požadavku, ne nad už přeparsovaným JSONem.
+
+Praktická pravidla:
+
+- webhook route dej před obecný JSON parser, pokud framework mění tělo požadavku,
+- používej samostatný secret pro každé prostředí a endpoint,
+- secret nerotuj ručně bez runbooku,
+- při rotaci počítej s krátkým překryvem starého a nového secretu,
+- loguj jen výsledek ověření, event ID a důvod odmítnutí, ne celý payload.
+
+Ověření podpisu není magická neprůstřelná vesta, ale je to základní vstupní kontrola. Bez ní endpoint neumí rozlišit skutečnou událost od někoho, kdo si jen otevřel terminál a má ambice stát se fakturačním poltergeistem.
+
+## Idempotence je povinná, ne bonus
+
+Webhooky se mohou doručit vícekrát. Poskytovatelé retryují při timeoutech, ručních obnovách i výpadcích. Tvoje aplikace proto musí umět říct: „Tenhle event už zpracovávám nebo jsem ho zpracoval.“
+
+Ulož si záznam typu:
+
+```text
+source: stripe
+event_id: evt_...
+event_type: invoice.paid
+received_at: ...
+status: received | processing | processed | failed | ignored
+related_object_id: in_...
+handler_version: billing-v3
+```
+
+Pak nastav pravidlo: stejný `source + event_id` se nesmí zpracovat dvakrát. Pokud event dorazí znovu a už je hotový, vrať úspěšnou odpověď a nic neměň. Pokud je ve stavu `processing` moc dlouho, přesuň ho do recovery fronty, ne do ručního chaosu.
+
+U plateb, faktur, kreditů a provisioning akcí nikdy nespoléhej jen na „event přišel jednou“. Skutečný stav raději ověř u zdrojové služby přes API, když má event velký obchodní dopad. Webhook je oznámení, ne vždy kompletní účetní pravda.
+
+## Rychle odpověz, pomalu pracuj
+
+Webhook endpoint nemá dělat všechno synchronně. Ideální postup: ověř podpis, zkontroluj event ID, ulož minimální záznam, zařaď práci do fronty a rychle vrať úspěšný HTTP status. Těžká logika patří do workeru.
+
+To pomáhá ve třech věcech:
+
+- zdrojová služba nedostane timeout a nezačne zbytečně retryovat,
+- interní zpracování může mít vlastní retry politiku,
+- citlivé chyby z byznys logiky netečou zpět do veřejné odpovědi endpointu.
+
+Když worker selže, nepřepisuj event potichu. Označ ho jako `failed`, ulož technický důvod bez osobních dat a připrav obnovovací akci: retry, ruční kontrola, nebo synchronizace aktuálního stavu z API zdroje.
+
+## Raw payload není věčný archiv
+
+Raw webhook payload je užitečný při ladění, ale často obsahuje osobní údaje, obchodní metadata nebo stav účtu. Ukládej ho jen tam, kde opravdu potřebuješ, a nastav krátkou retenci. Pro dlouhodobý audit většinou stačí normalizovaný záznam: typ eventu, čas, zdroj, ID objektu, výsledek zpracování a verze handleru.
+
+Privacy-first minimum:
+
+- raw payload drž jen krátce a jen pro chybové případy,
+- maskuj e-maily, jména, adresy a poznámky, pokud nejsou nutné,
+- nedávej payloady do běžných aplikačních logů,
+- odděl provozní audit od debugging výpisů,
+- u zákaznického exportu nevkládej interní webhook payloady, pokud k tomu není jasný důvod.
+
+Tady platí jednoduché pravidlo: když by ti bylo trapné poslat raw log zákazníkovi jako vysvětlení incidentu, pravděpodobně v něm ukládáš víc, než je zdrávo.
+
+## Praktický příklad: platba a aktivace účtu
+
+Malý B2B SaaS přijímá event `invoice.paid`. Cíl není „přišel webhook“, ale „zákazník má správně aktivovaný přístup a fakturační stav“.
+
+Bezpečný tok:
+
+1. Endpoint přijme POST požadavek.
+2. Ověří podpis nad raw tělem.
+3. Zkontroluje `event_id` proti tabulce doručení.
+4. Uloží minimální delivery záznam.
+5. Zařadí job `sync_billing_state(customer_id)`.
+6. Worker načte aktuální stav faktury ze zdrojové služby.
+7. Aplikace aktivuje účet jen podle ověřeného stavu, ne podle slepé důvěry v payload.
+8. Audit uloží výsledek bez raw platebních detailů.
+
+Výsledek: duplicitní event neaktivuje nic dvakrát, výpadek jde obnovit a support umí vysvětlit, co se stalo, aniž by kopíroval platební data do ticketu.
+
+## Checklist: webhook bez datového ohňostroje
+
+- Máme sepsaný seznam přijímaných eventů a důvod každého z nich.
+- Ověřujeme podpis nebo doporučený mechanismus zdroje nad raw tělem požadavku.
+- Každý event má deduplikační klíč a idempotentní zpracování.
+- Endpoint rychle vrací odpověď a těžká práce běží ve frontě.
+- Umíme ručně nebo automaticky obnovit zmeškané eventy.
+- Raw payloady mají krátkou retenci nebo se vůbec neukládají.
+- Logy neobsahují celé payloady, tajemství ani zbytečné osobní údaje.
+- Existuje test pro duplicitu, timeout, neplatný podpis a neznámý typ eventu.
+- Support má bezpečný způsob, jak zjistit stav zpracování bez přístupu k raw datům.
+- Secret rotace má runbook a vlastníka.
+
+## Vyplnitelná webhook karta
+
+```text
+# Webhook karta: [název integrace]
+
+Zdrojová služba:
+Prostředí:
+Endpoint URL:
+Vlastník:
+
+## Eventy
+Přijímané typy eventů:
+Proč je potřebujeme:
+Který interní stav mění:
+Které eventy výslovně nepřijímáme:
+
+## Bezpečnost
+Mechanismus ověření:
+Kde je secret uložen:
+Postup rotace:
+IP allowlist / další omezení:
+Test neplatného podpisu:
+
+## Zpracování
+Deduplikační klíč:
+Fronta / worker:
+Retry pravidla:
+Recovery postup po výpadku:
+Jak ověřujeme skutečný stav u zdroje:
+
+## Data
+Ukládáme raw payload: ano / ne / jen chyby
+Retence raw payloadu:
+Maskovaná pole:
+Auditní záznam:
+Supportní pohled:
+
+Datum poslední kontroly:
+Datum další kontroly:
+```
+
+## Zdroje k ověření
+
+- Stripe dokumentace k webhook endpointům doporučuje ověřovat podpis pomocí `Stripe-Signature`, pracovat s raw tělem požadavku, řešit retry doručení a chránit se proti duplicitnímu zpracování eventů: https://docs.stripe.com/events/manage-webhook-endpoints
+- Svix dokumentace k ověřování webhooků ukazuje práci s hlavičkami, časovým razítkem, ID zprávy a podpisem payloadu: https://docs.svix.com/receiving/verifying-payloads/how
+- RFC 9110 definuje sémantiku HTTP metod, stavových kódů a vlastnosti jako bezpečnost a idempotenci, které pomáhají správně navrhnout odpovědi webhook endpointu: https://www.rfc-editor.org/rfc/rfc9110.html
+- OWASP Webhook Security Cheat Sheet shrnuje praktická bezpečnostní opatření pro webhooky, včetně ověřování zdroje, integrity payloadu, replay ochrany, logování a omezení dat: https://cheatsheetseries.owasp.org/cheatsheets/Webhook_Security_Cheat_Sheet.html
+
 # Pracovní log
+
+- 2026-10-11: Doplněna příloha „Webhooky bez duplicit, tichých výpadků a datového ohňostroje“ s mapou přijímaných eventů, ověřováním podpisu nad raw tělem, idempotencí, frontovým zpracováním, retencí payloadů, praktickým příkladem platebního webhooku, checklistem, vyplnitelnou kartou a ověřenými zdroji Stripe, Svix, RFC 9110 a OWASP. Pomáhá malým SaaS týmům přijímat integrační události bez duplicitních akcí, tichých výpadků a zbytečného ukládání citlivých dat.
 
 - 2026-10-11: Doplněna příloha „AI funkce v SaaS bez úniku dat a prompt-injection chaosu“ s mapou AI toku, minimalizací kontextu, pravidly pro prompt injection, bezpečným používáním tool calls, privacy-first logováním, transparentními texty, supportním příkladem, checklistem, vyplnitelnou kartou a ověřenými zdroji OWASP, NIST, EUR-Lex a Evropské komise. Pomáhá SaaS týmům přidávat AI funkce bez neřízeného posílání zákaznických dat a bez slepé důvěry v prompt.
 
