@@ -1064,6 +1064,124 @@ Na konci 30 dní si polož tři otázky:
 
 ---
 
+## Příloha B: Šablona privacy-first landing page
+
+Landing page je místo, kde se strategie, marketing, design a privacy potkají v jedné obrazovce. Dobrá stránka nemá návštěvníka ohromit počtem sekcí. Má mu pomoct rychle pochopit, jestli je na správném místě, proč má věřit nabídce a co se stane po odeslání formuláře.
+
+Privacy-first varianta má ještě jeden úkol navíc: nesmí potichu sbírat víc dat, než potřebuje. To neznamená sterilní stránku bez emocí. Znamená to férový obchod: člověk dostane jasnou hodnotu a tým sbírá jen data nutná pro domluvený další krok.
+
+### Struktura stránky
+
+Použij tuhle kostru pro službu, SaaS trial, audit, konzultaci nebo obsahovou nabídku typu e-book či checklist.
+
+```text
+1) Hero
+- Pro koho je nabídka
+- Jaký konkrétní výsledek slibuje
+- Hlavní CTA
+- Krátké ujištění o datech
+
+2) Problém
+- Jaká situace zákazníka bolí
+- Jak pozná, že se ho to týká
+- Co ho stojí odkládání
+
+3) Řešení
+- Co přesně dostane
+- Jak proces probíhá
+- Co se po něm bude chtít
+
+4) Důkazy
+- Reference, ukázka, mini case study, screenshot, číslo z vlastních dat nebo vysvětlení metodiky
+- Bez falešných log partnerů a metrik, které nejdou ověřit
+
+5) Privacy a důvěra
+- Jaká data formulář sbírá
+- Proč je potřebuješ
+- Kdo je zpracuje
+- Jak dlouho je držíš
+
+6) FAQ
+- Cena nebo další krok
+- Časová náročnost
+- Pro koho to není
+- Co se stane po odeslání
+
+7) Finální CTA
+- Jedna akce
+- Krátké zopakování hodnoty
+- Odkaz na privacy policy nebo stručnou datovou poznámku
+```
+
+### Příklad textu pro hero sekci
+
+Slabá verze:
+
+> Získejte moderní řešení pro růst vašeho byznysu.
+
+Lepší verze:
+
+> Do 30 minut vám ukážeme, kde váš B2B web ztrácí poptávky — bez reklamních pixelů, nahrávání návštěv a zbytečného sběru osobních dat.
+
+CTA:
+
+> Chci privacy-first audit homepage
+
+Mikrotext pod formulářem:
+
+> Pošleme vám návrh termínu a použijeme vaše údaje jen pro domluvu auditu. Žádný newsletter bez souhlasu, žádný remarketingový pixel, žádná kouzla z oddělení „tohle určitě nikdo nečte“.
+
+Tenhle mikrotext není právní dokument. Je to lidské vysvětlení přímo v místě rozhodnutí. Právní text má být dostupný v detailu, ale stránka nemá nutit návštěvníka číst právničtinu jen proto, aby pochopil, co se stane po kliknutí.
+
+### Formulář: minimum polí, maximum jasnosti
+
+U landing page bývá formulář největší pokušení. Marketing chce segmentaci, sales chce kvalifikaci, produkt chce kontext a někdo v rohu navrhne povinné telefonní číslo „pro jistotu“. Výsledek? Návštěvník uteče a tým má o jedno prázdné CRM pole víc.
+
+Začni minimem:
+
+- **E-mail:** kam odpovědět.
+- **Jméno:** jak člověka oslovit, pokud to dává smysl.
+- **Web nebo firma:** kontext pro audit, demo nebo nabídku.
+- **Krátká zpráva:** dobrovolné pole pro situaci zákazníka.
+
+Co často nepotřebuješ v prvním kroku:
+
+- telefon jako povinné pole,
+- velikost firmy v pěti segmentech,
+- rozpočet v přesném rozsahu,
+- obor, role, počet zaměstnanců a CRM klasifikaci,
+- souhlas s newsletterem schovaný pod odesláním poptávky.
+
+Pokud některé pole opravdu potřebuješ, napiš k němu důvod. Například: „Web používáme jen k přípravě auditu.“ Tím získáš lepší data než povinným polem bez kontextu. Lidé nejsou proti sdílení informací. Jsou proti pocitu, že je někdo vytěžuje jako formulářový důl.
+
+### Důvěra bez invazivních skriptů
+
+Důkaz důvěry nemusí být tracker. Nemusíš nasazovat heatmapu, session recording a pět reklamních pixelů, aby ses dozvěděl, jestli stránka funguje. Pro první verzi často stačí kombinace:
+
+- agregovaná návštěvnost stránky,
+- počet odeslaných formulářů,
+- zdroj kampaně podle rozumných UTM parametrů,
+- ruční vyhodnocení kvality poptávek,
+- 3–5 krátkých rozhovorů s lidmi, kteří stránku viděli.
+
+Když stránka nekonvertuje, nejdřív zkontroluj základní otázky: je slib jasný, je nabídka konkrétní, odpovídá CTA záměru návštěvníka, je formulář přiměřený a je zřejmé, co se stane potom? Teprve pak řeš jemné ladění designu.
+
+### Checklist před spuštěním landing page
+
+- [ ] Hero říká cílovku, výsledek a další krok bez prázdných frází.
+- [ ] Stránka má jednu primární akci a sekundární odkazy ji neruší.
+- [ ] Každé pole ve formuláři má jasný účel.
+- [ ] Návštěvník ví, co se stane po odeslání formuláře.
+- [ ] Mikrotext u formuláře vysvětluje použití dat lidským jazykem.
+- [ ] Newsletter, obchodní kontakt a hlavní poptávka nejsou smíchané do jednoho neurčitého souhlasu.
+- [ ] Měření funguje agregovaně a bez cross-site identifikátorů.
+- [ ] Stránka má title, meta description, kanonickou URL a rozumný interní odkaz.
+- [ ] Existuje plán vyhodnocení: kdy stránku zkontrolujeme, podle čeho a kdo rozhodne o úpravách.
+
+**Codyho komentář:** Landing page není past na leady. Je to slib v kompaktní podobě. Když slib potřebuje deset trackerů, pět modalů a formulář delší než daňové přiznání, problém není v konverzním poměru. Problém je v respektu k člověku na druhé straně.
+
+---
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -1096,6 +1214,7 @@ Na konci 30 dní si polož tři otázky:
 
 ## Pracovní log
 
+- **2026-10-11:** Přidána příloha B se šablonou privacy-first landing page, vzorem hero sekce, formulářovými pravidly a checklistem před spuštěním.
 - **2026-10-11:** Přidána příloha A s 30denním akčním plánem pro zavedení privacy-first webu nebo SaaS v malém týmu.
 - **2026-10-11:** Doplněna kapitola 8 s praktickými checklisty a šablonami pro audit webu, SaaS launch, privacy review, marketingový plán, měsíční provozní review a operační manuál.
 - **2026-10-11:** Doplněna kapitola 7 o evropském privacy-first provozu: výběr dodavatelů, provozní bezpečnost, NIS2, Data Act, incident playbook, exit plán a checklist pro malé SaaS týmy.
