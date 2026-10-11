@@ -67328,7 +67328,182 @@ Datum revize:
 - OpenSLO poskytuje otevřenou specifikaci pro zápis SLO jako strukturovaných konfiguračních souborů: https://openslo.com/docs/
 - Atlassian shrnuje rozdíl mezi SLA, SLO a SLI v incident management kontextu a zdůrazňuje, že SLA je závazek vůči zákazníkovi: https://www.atlassian.com/incident-management/kpis/sla-vs-slo-vs-sli
 
+# Příloha: CI/CD tajemství a env proměnné bez úniku v logu a hrdinského rotování ve tři ráno
+
+Tajemství v CI/CD nejsou jen „nějaké proměnné v GitHubu“. Jsou to klíče, které často umí deploynout produkci, číst databázi, posílat e-maily, fakturovat, volat AI API nebo měnit infrastrukturu. Když uniknou, malý tým najednou neřeší technickou drobnost, ale otázku: kdo co mohl udělat, odkdy, s jakými daty a jak rychle to umíme vypnout.
+
+První pravidlo zní nudně, proto je dobré: CI/CD tajemství musí mít vlastníka, účel, rozsah, místo použití, plán rotace a postup při úniku. Bez toho je to jen digitální klíč pod rohožkou, akorát rohožka má hezký název `PROD_SECRET`.
+
+> Codyho komentář: Nejhorší tajemství není to, které je dlouhé. Nejhorší je to, které nikdo neumí bezpečně vyměnit, protože „to tam kdysi nastavil někdo před námi“.
+
+## Rozliš konfigurační hodnoty, tajemství a klíče
+
+Ne každá env proměnná je tajemství. Ale každá env proměnná si zaslouží otázku, co se stane, když ji uvidí člověk mimo tým.
+
+Praktické rozdělení:
+
+- **Konfigurace bez tajemství:** například `APP_ENV`, `PUBLIC_BASE_URL`, `FEATURE_X_ENABLED`. Může být v repozitáři, pokud neobsahuje interní tokeny ani citlivé URL s přístupem.
+- **Provozní tajemství:** databázová hesla, API klíče, webhook signing secrets, SMTP hesla, S3 kompatibilní access keys. Patří do secrets manageru nebo CI/CD secret store, ne do kódu, chatu ani screenshotu.
+- **Kryptografické klíče:** privátní klíče pro podpis, šifrovací klíče, certifikáty a klíče pro zálohy. Potřebují přísnější správu, audit, rotaci a často oddělený key management.
+- **Dočasné přístupové údaje:** krátkodobé tokeny vydané pro jeden job, deploy nebo servisní operaci. To je ideál pro CI/CD, protože škoda po úniku má přirozený konec.
+
+Pokud si nejsi jistý, zacházej s hodnotou jako s tajemstvím. Falešný poplach stojí méně než uniklý produkční token.
+
+## Tajemství nedávej do repozitáře ani do build artefaktů
+
+Základní hranice: repozitář obsahuje instrukce, ne skutečné produkční klíče. Do repozitáře patří `.env.example`, dokumentace názvů proměnných a validační schéma. Ne skutečná `.env` s produkcí.
+
+Dobrá praxe:
+
+- `.env.example` ukazuje názvy a bezpečný dummy formát,
+- aplikace při startu ověří povinné proměnné a srozumitelně selže,
+- produkční hodnoty se vkládají až v runtime nebo přes bezpečný deploy mechanismus,
+- build artefakty neobsahují tajemství, pokud je nepotřebují přímo v runtime,
+- frontend nikdy nedostane serverový klíč jen proto, že se proměnná „nějak hodila“.
+
+U webů a SaaS produktů je častá past prefixů jako `PUBLIC_`, `NEXT_PUBLIC_` nebo `VITE_`. Tyto hodnoty se obvykle mohou dostat do klientského balíku. Pokud tam omylem vložíš interní API klíč, neunikl do budoucna. Unikl už při buildu.
+
+## CI/CD secret store není trezor bez rizika
+
+Uložit tajemství do CI/CD nástroje je lepší než ho commitnout, ale pořád to není kouzelný trezor. Každý, kdo může upravit workflow, přidat debug výpis nebo spustit job s dostatečným oprávněním, může často tajemství nepřímo získat.
+
+Minimum pro malý tým:
+
+- omez, kdo může měnit pipeline definice,
+- chraň produkční deploy přes review nebo chráněné prostředí,
+- nespouštěj produkční tajemství na pull requestech z forků,
+- odděl staging a produkční secrets,
+- zakaž nebo hlídej debug režimy, které vypisují env,
+- pravidelně projdi, kdo má právo číst, měnit nebo odvozovat tajemství z jobů.
+
+U privacy-first provozu navíc sleduj, kde CI/CD systém běží a kdo je jeho provozovatel. Pokud kvůli deployi posíláš produkční klíče mimo Evropu, máš nejen technické riziko, ale i datovou a smluvní otázku. Neznamená to automaticky zákaz, znamená to vědomé rozhodnutí, DPA, přenosy, subprocesory a exit plán.
+
+## Používej krátkodobé přístupy místo jednoho velkého klíče
+
+„Jeden deploy token pro všechno“ je pohodlný až do chvíle, kdy unikne. Lepší model je krátkodobý přístup s jasným scopem: pipeline se autentizuje, získá dočasné oprávnění pro konkrétní deploy a po jobu oprávnění vyprší.
+
+Prakticky to může znamenat:
+
+- OIDC federaci mezi CI/CD a cloudem místo dlouhodobého cloudového access key,
+- deploy token, který smí zapisovat jen do jedné služby nebo jednoho prostředí,
+- samostatný token pro migrace databáze a samostatný token pro deploy statických assetů,
+- časově omezené servisní účty pro ruční zásahy,
+- oddělený break-glass přístup, který se používá jen při incidentu a po použití se reviduje.
+
+Cílem není mít dokonalou enterprise architekturu. Cílem je, aby únik jednoho tajemství neznamenal přístup ke všemu.
+
+## Logy jsou nejčastější místo trapného úniku
+
+Tajemství často neuteče sofistikovaným útokem. Uteče přes `console.log`, shell `set -x`, výpis konfigurace, chybovou stránku, stack trace nebo screenshot z podpory. Proto má být maskování v logu poslední pojistka, ne hlavní bezpečnostní plán.
+
+Zaveď jednoduchá pravidla:
+
+- nikdy nevypisuj celé env proměnné,
+- v chybách ukazuj název chybějící proměnné, ne její hodnotu,
+- pro tokeny loguj jen bezpečný fingerprint, například poslední 4 znaky a typ,
+- před odesláním logů do externí služby odfiltruj známé patterny tajemství,
+- při incidentu ověř nejen repozitář, ale i CI logy, artefakty, cache a issue komentáře.
+
+Privacy-first poznámka: logy jsou data. Když do nich spadne token spolu s e-mailem zákazníka, vzniká kombinovaný problém bezpečnosti i osobních údajů. Retence logů proto nesmí být „navždy, protože místo je levné“.
+
+## Rotace musí být nacvičená, ne heroická
+
+Rotace tajemství není úkol pro pátek večer, kdy někdo zjistí, že token visel v issue. Každé důležité tajemství má mít mini runbook: kde se vytvoří nové, kde se nastaví, jak se otestuje, jak se staré zneplatní a jak poznáš, že nic nespadlo.
+
+Bezpečná rotace obvykle vypadá takto:
+
+1. Připrav nové tajemství s minimálním rozsahem.
+2. Nasaď aplikaci nebo konfiguraci tak, aby uměla dočasně přijmout staré i nové tajemství, pokud to protokol vyžaduje.
+3. Přesměruj provoz na nové tajemství.
+4. Ověř metriky, logy a zákaznicky důležité workflow.
+5. Zneplatni staré tajemství.
+6. Zapiš datum, důvod a dopad rotace.
+
+U některých klíčů to bude jednodušší, u jiných bolestivé. Právě bolest je signál: pokud se klíč nedá otočit bez paniky, je příliš důležitý na to, aby neměl runbook.
+
+## Incident úniku řeš jako provozní událost, ne jako ostudu
+
+Když tajemství unikne, první cíl není najít viníka. První cíl je omezit škodu.
+
+Krátký postup:
+
+- zneplatni nebo omez kompromitované tajemství,
+- najdi rozsah použití: repozitář, CI logy, artefakty, runtime, lokální kopie,
+- zkontroluj, zda došlo k přístupu k osobním nebo zákaznickým datům,
+- vyměň navazující tajemství, pokud mohla být odvozena nebo zneužita,
+- doplň detekci, aby se stejný typ úniku příště chytil dřív,
+- zapiš postmortem bez obviňování a s konkrétními změnami.
+
+Pokud mohlo dojít k porušení zabezpečení osobních údajů, nestačí technické „už jsme token otočili“. Musíš vyhodnotit dopad na práva lidí, interní záznam a případnou oznamovací povinnost. To je přesně chvíle, kdy se hodí mít datovou mapu a ne lovit produkční realitu baterkou v suterénu.
+
+## Praktický příklad: deploy malého B2B SaaS
+
+Malý SaaS tým má aplikaci, databázi, e-mailovou službu, objektové úložiště a AI API. V CI/CD původně drží jeden produkční token pro cloud a jeden `.env` dump z minulého roku. Funguje to, takže je to podezřelé.
+
+Lepší nastavení:
+
+- staging a produkce mají oddělené secret stores,
+- produkční deploy běží jen z chráněné větve a po review,
+- CI/CD nepoužívá dlouhodobý cloudový klíč, ale krátkodobé oprávnění pro deploy,
+- databázové migrace mají vlastní účet s omezeným oprávněním,
+- e-mailový klíč smí posílat jen z ověřené domény,
+- AI API klíč má budget limit a samostatný monitoring nákladů,
+- logy maskují tokeny a nemají delší retenci, než je provozně potřeba,
+- rotace klíčů je popsaná v jedné kartě a jednou za kvartál se zkusí na stagingu.
+
+Výsledek není neprůstřelný bunkr. Je to provoz, kde únik jednoho klíče neznamená automaticky katastrofu, zákaznický export do neznáma a noční Slack plný zpráv „kdo má přístup do konzole?“.
+
+## Checklist: CI/CD tajemství bez úniku v logu
+
+- Má každé produkční tajemství vlastníka, účel, scope a místo použití?
+- Je `.env.example` bezpečný a neobsahuje skutečné hodnoty?
+- Jsou staging a produkční tajemství oddělená?
+- Běží produkční tajemství jen v chráněných workflow a prostředích?
+- Nemohou pull requesty z forků číst nebo odvodit produkční secrets?
+- Nepíše pipeline env proměnné, tokeny ani connection stringy do logů?
+- Existuje postup rotace pro nejdůležitější klíče?
+- Umíš tajemství zneplatnit bez redeploye celé planety?
+- Mají tokeny minimální oprávnění a ideálně expiraci?
+- Je jasné, kde končí CI/CD data a kdo je jejich zpracovatel?
+- Kontrolují se CI logy, artefakty a cache při podezření na únik?
+- Je po rotaci zapsáno, co se změnilo a jaký byl dopad?
+
+## Vyplnitelná karta CI/CD tajemství
+
+```text
+# CI/CD secret karta
+
+Název tajemství:
+Typ: konfigurace / provozní tajemství / kryptografický klíč / dočasný token
+Účel:
+Prostředí: development / staging / production
+Vlastník:
+Kde je uloženo:
+Kde se používá:
+Scope oprávnění:
+Kdo ho může měnit:
+Kdo ho může nepřímo použít přes pipeline:
+Expirace / rotace:
+Postup rotace:
+Postup zneplatnění:
+Logovací rizika:
+Navazující služby:
+Datový dopad při úniku:
+Datum poslední kontroly:
+Datum další kontroly:
+```
+
+## Zdroje k ověření
+
+- OWASP Secrets Management Cheat Sheet popisuje centralizaci, metadata, rotaci, CI/CD rizika, detekci a životní cyklus tajemství: https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+- OWASP CI/CD Security Cheat Sheet shrnuje bezpečnost pipeline, identit, workflow a rizika kolem přístupů v CI/CD prostředí: https://cheatsheetseries.owasp.org/cheatsheets/CI_CD_Security_Cheat_Sheet.html
+- OWASP Cryptographic Storage Cheat Sheet upozorňuje, že citlivé informace je nejlepší neukládat vůbec, a doporučuje dedikované systémy pro správu klíčů tam, kde to dává smysl: https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html
+- NIST SP 800-57 Part 1 Rev. 5 poskytuje obecná doporučení pro správu kryptografických klíčů a jejich ochranu během životního cyklu: https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final
+- EDPB Guidelines 4/2019 vysvětlují princip data protection by design and by default podle článku 25 GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+
 # Pracovní log
+
+- 2026-10-11: Doplněna příloha „CI/CD tajemství a env proměnné bez úniku v logu a hrdinského rotování ve tři ráno“ s rozlišením konfigurace, provozních tajemství, kryptografických klíčů a dočasných tokenů, pravidly pro CI/CD secret store, krátkodobé přístupy, ochranu logů, nacvičenou rotaci, incidentový postup, B2B SaaS příklad, checklist, vyplnitelnou kartu a ověřené zdroje OWASP, NIST a EDPB. Pomáhá malým SaaS týmům deployovat bez produkčních klíčů v repozitáři, logu nebo heroickém nočním runbooku.
 
 - 2026-10-10: Doplněna příloha „Obnova účtu a reset hesla bez support backdooru“ s rozlišením zapomenutého hesla, ztraceného MFA a kompromitovaného účtu, bezpečným reset tokenem, pravidly pro supportní workflow, incidentovým recovery postupem, příkladem B2B SaaS, checklistem, vyplnitelnou recovery kartou a ověřenými zdroji OWASP, NIST, GDPR a EDPB. Pomáhá malým SaaS týmům obnovovat přístup bez enumerace účtů, marketingových trackerů a lidských zkratek kolem bezpečnosti.
 - 2026-10-10: Doplněna příloha „Uploady a přílohy bez malware tomboly a datového sklepa“ s praktickým návrhem bezpečného file uploadu, omezením účelu, allowlistem typů, kontrolou obsahu, karanténou, malware skenem, bezpečným stahováním, retencí příloh, supportním příkladem, checklistem, vyplnitelnou upload kartou a ověřenými zdroji OWASP, NIST a GDPR. Pomáhá malým webům a SaaS týmům přijímat soubory bez veřejných bucketů, věčných příloh a zbytečných osobních dat.
