@@ -492,6 +492,111 @@ Retence není trik. Je to důkaz, že produkt patří do pracovního rytmu záka
 
 ---
 
+## 5. Marketing bez invazivního trackingu
+
+### 5.1 Marketing začíná tím, že jdeš najít bez šmírování
+
+Privacy-first marketing není marketing bez dat. Je to marketing, který si nejdřív ujasní, jakou hodnotu dává publiku, a teprve potom řeší měření. Ne každé rozhodnutí potřebuje individuální profil návštěvníka, reklamní pixel a datovou mapu větší než samotný web.
+
+Pro malý evropský web je základ pořád překvapivě obyčejný:
+
+- jasná nabídka na homepage,
+- indexovatelné stránky pro služby, use casy a články,
+- rychlý web bez zbytečných skriptů,
+- srozumitelné titulky, meta popisy a interní odkazy,
+- RSS feed a přímé odkazy na obsah,
+- agregovaná analytika s jasným účelem.
+
+Google ve svých doporučeních opakovaně zdůrazňuje „people-first“ obsah: stránky mají být užitečné pro lidi, ne vytvořené primárně pro manipulaci vyhledávání ([Google Search Central: Helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)). To je dobrá zpráva pro malé týmy. Nemusíš vyhrát soutěž v počtu publikovaných textů. Musíš odpovědět lépe, konkrétněji a důvěryhodněji než anonymní generátor slovní vaty.
+
+Praktický příklad: článek „Jak vybrat evropskou analytiku pro B2B web“ je lepší než „Digitální marketing v roce 2026“. První téma má jasný problém, cílovku i rozhodovací kontext. Druhé zní jako konferenční panel, kde všichni říkají „AI změní všechno“ a pak jdou na chlebíček.
+
+### 5.2 SEO disciplína: technika, struktura, důvěra
+
+SEO pro privacy-first web nestojí na trikách. Stojí na tom, že vyhledávač i člověk rozumí, co stránka řeší. Google Search Central doporučuje mimo jiné používat popisné titulky, logickou strukturu nadpisů, srozumitelný obsah, interní odkazy a technické prvky jako sitemapu, robots.txt nebo kanonické URL podle potřeby ([Google Search Central: SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)).
+
+Minimální SEO sada pro každou důležitou stránku:
+
+- **Title:** konkrétní hlavní slib stránky, ne jen název firmy.
+- **Meta description:** lidské shrnutí, proč stránku otevřít.
+- **H1:** jedna jasná hlavní věta.
+- **Interní odkazy:** další krok pro čtenáře, ne náhodný seznam.
+- **Kanonická URL:** prevence duplicit, hlavně u variant a parametrů.
+- **Strukturovaná data:** tam, kde dávají smysl — článek, organizace, FAQ, produkt.
+- **Sitemap.xml:** seznam důležitých URL pro vyhledávače.
+- **Robots.txt:** jednoduchá pravidla, ne zamčený trezor plný překvapení.
+
+Privacy-first varianta SEO má ještě jednu výhodu: méně skriptů znamená méně třetích stran, menší riziko úniku dat a často rychlejší načítání. Výkon není jen technická metrika. Je to marketingová disciplína, protože pomalý web ztrácí důvěru dřív, než stihne ukázat případovou studii.
+
+### 5.3 Obsahový systém: piš pro rozhodnutí, ne pro kalendář
+
+Obsahový marketing často selže proto, že tým plní publikační kalendář místo zákaznických otázek. Jednou týdně vyjde článek, všichni si odškrtnou aktivitu a nikdo neví, komu to pomohlo.
+
+Lepší je stavět obsah kolem rozhodovacích momentů:
+
+1. **Problém:** zákazník si uvědomuje, že ho něco bolí.
+2. **Možnosti:** porovnává ruční řešení, agenturu, SaaS, interní vývoj nebo nicnedělání.
+3. **Důvěra:** chce vidět zkušenost, proces, bezpečnost a rizika.
+4. **Nákup:** potřebuje cenu, rozsah, termíny, smlouvy a další krok.
+5. **Používání:** hledá dokumentaci, návody, checklisty a inspiraci.
+
+Příklad obsahové mapy pro firmu, která staví privacy-first weby:
+
+- „Kdy firemní web potřebuje cookie lištu a kdy ne“ — problém a právní nejistota.
+- „Google Analytics alternativy pro evropské B2B weby“ — možnosti.
+- „Jak vypadá privacy-first redesign krok za krokem“ — důvěra.
+- „Kolik stojí nový B2B web a co má být v nabídce“ — nákup.
+- „Checklist před spuštěním webu bez marketingových cookies“ — používání.
+
+Každý kus obsahu má mít další krok: stáhnout checklist, otevřít related článek, objednat audit, poslat dotaz, přihlásit RSS. Přímý odkaz je často lepší než sociální widget. Widgety z cizích platforem přidávají tracking, zpomalují web a ještě se tváří, že bez nich internet neumí sdílet URL. Umí. Už dlouho.
+
+### 5.4 RSS a přímé kanály jako zdravá protiváha algoritmům
+
+RSS je staré, nenápadné a pořád užitečné. RSS 2.0 specifikace definuje feed jako XML kanál s položkami, odkazy a metadaty, který může čtečka pravidelně odebírat ([RSS Advisory Board: RSS 2.0 Specification](https://www.rssboard.org/rss-specification)). Z marketingového pohledu je to jednoduchý slib: kdo chce číst novinky, může je dostat bez reklamní platformy, bez profilování a bez toho, aby algoritmus rozhodl, že dnes radši ukáže tancující kočku.
+
+Privacy-first kanály pro malý web:
+
+- **RSS feed:** pro články, changelog, podcast nebo poznámky z vývoje.
+- **E-mail newsletter:** jen s jasným souhlasem, snadným odhlášením a minimem měření.
+- **Přímé odkazy:** sdílení URL bez social-share skriptů.
+- **Dokumentace a changelog:** veřejný důkaz, že produkt žije.
+- **Webmention nebo komentáře bez trackerů:** jen pokud je tým opravdu chce moderovat.
+
+RSS nepřinese tak hezký dashboard jako reklamní platforma. Přinese ale kontrolu nad distribucí. A kontrola je v Evropě dost dobrý luxus.
+
+**Codyho komentář:** Sociální sítě používej jako výkladní skříň, ne jako pronajatý byt bez smlouvy. Publikuj originál u sebe, na síť dej upoutávku a odkaz. Když algoritmus dostane náladu jako kocour u veterináře, pořád máš vlastní archiv.
+
+### 5.5 Měření: agregace, UTM disciplína a méně domněnek
+
+Marketing bez invazivního trackingu potřebuje disciplínu v měření. Když nesbíráš osobní profily, musíš mít pořádek v kampaních, cílech a interpretaci.
+
+Základní měřicí model:
+
+- **UTM parametry:** jednotné názvy kampaní, zdrojů a médií.
+- **Agregovaná analytika:** návštěvy, zdroje, stránky, konverze.
+- **Serverové signály:** odeslání formuláře, registrace, objednávka, trial.
+- **Kvalitativní zpětná vazba:** otázka „Jak jste se o nás dozvěděli?“ ve formuláři nebo obchodním procesu.
+- **Obsahový výkon:** články, které dlouhodobě přivádějí relevantní návštěvy a poptávky.
+
+Umami se prezentuje jako privacy-first analytika bez cookies a bez automatického sběru osobních údajů; pro evropský provoz dává smysl ověřit region, nastavení retence a zda data zůstávají pod kontrolou týmu ([Umami: Platform](https://umami.is/platform), [Umami: FAQ](https://docs.umami.is/docs/faq)). Pokud používáš jiný nástroj, neptej se jen „má hezký dashboard?“. Ptej se: ukládá IP adresy, používá cookies, posílá data třetím stranám, umí EU region, umí export a smazání?
+
+U AI obsahu platí stejná logika jako u analytiky: nástroj je pomocník, ne omluva. Google ve své dokumentaci k použití generativní AI doporučuje kontrolovat přesnost a užitečnost výstupů; důležité je, aby obsah pomáhal lidem a nebyl automatizací bez hodnoty ([Google Search Central: Using generative AI content on your website](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content)). Pro Codyho to znamená: AI klidně použij na osnovu, varianty titulků nebo kontrolu chyb. Finální odpovědnost má člověk nebo tým, který obsah publikuje.
+
+### Checklist pro privacy-first marketing
+
+- [ ] Každá důležitá stránka má jeden jasný účel a další krok.
+- [ ] Title, meta description, H1, interní odkazy a kanonická URL jsou vyplněné vědomě.
+- [ ] Sitemap.xml a robots.txt odpovídají skutečné struktuře webu.
+- [ ] Obsah mapuje rozhodovací momenty zákazníka, ne jen publikační kalendář.
+- [ ] Web nabízí RSS nebo jiný přímý kanál mimo algoritmické platformy.
+- [ ] Sdílení funguje přes normální URL, ne přes social-share trackery.
+- [ ] UTM názvy jsou jednotné a dokumentované.
+- [ ] Analytika je agregovaná, bez zbytečných osobních profilů a s jasnou retencí.
+- [ ] Newsletter má jasný souhlas, odhlášení a rozumnou frekvenci.
+- [ ] AI výstupy před publikací kontroluje člověk a obsah nese vlastní zkušenost.
+
+---
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -501,8 +606,14 @@ Retence není trik. Je to důkaz, že produkt patří do pracovního rytmu záka
 - European Data Protection Board: [Basic principles](https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en)
 - European Data Protection Board: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_de)
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
+- Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
+- Google Search Central: [Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
+- Google Search Central: [Using generative AI content on your website](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content)
 - OWASP: [Application Security Verification Standard](https://owasp.org/projects/asvs)
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- RSS Advisory Board: [RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
+- Umami: [Platform](https://umami.is/platform)
+- Umami: [FAQ](https://docs.umami.is/docs/faq)
 - Úřad pro ochranu osobních údajů: [Cookies — otázky a odpovědi](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies)
 - Úřad pro ochranu osobních údajů: [Cookies od začátku roku 2022 pouze se souhlasem](https://uoou.gov.cz/novinky/vse/cookies-od-zacatku-roku-2022-pouze-se-souhlasem)
 - Úřad pro ochranu osobních údajů: [Informace pro e-shopy](https://uoou.gov.cz/profesional/qa-otazky-a-odpovedi/informace-pro-e-shopy)
@@ -511,6 +622,7 @@ Retence není trik. Je to důkaz, že produkt patří do pracovního rytmu záka
 
 ## Pracovní log
 
+- **2026-10-11:** Doplněna kapitola 5 o marketingu bez invazivního trackingu: SEO disciplína, obsah podle rozhodovacích momentů, RSS, přímé kanály, UTM měření, privacy-friendly analytika a AI kontrola obsahu.
 - **2026-10-11:** Doplněna kapitola 4 o SaaS produktu od nápadu po první platící zákazníky: validace bez komplimentů, MVP, pricing, onboarding, retence a privacy-first checklist.
 - **2026-10-11:** Doplněna kapitola 3 o technickém stacku pro malé týmy: rozdělení vrstev, EU hosting, zálohy, monitoring, logy, deploy pipeline a praktický checklist se zdroji ENISA a OWASP.
 - **2026-10-11:** Doplněna kapitola 2 o privacy-first základech: mapa dat, cookies, souhlas, SaaS architektura, živá dokumentace a praktický checklist s ověřenými zdroji ÚOOÚ, EDPB a Evropské komise.
