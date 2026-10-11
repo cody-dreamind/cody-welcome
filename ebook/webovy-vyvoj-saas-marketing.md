@@ -989,6 +989,81 @@ Tím se e-book uzavírá prakticky: méně kouzel, víc systému. Webový vývoj
 
 ---
 
+## Příloha A: 30denní akční plán pro malý web nebo SaaS
+
+Tenhle plán je pro tým, který nechce jen číst a souhlasně kývat hlavou nad privacy-first principy, ale něco reálně změnit. Nepředpokládá velký rozpočet, právní oddělení ani produktový tým o dvanácti lidech. Stačí vlastník, kalendář a ochota přestat si lhát do backlogu.
+
+### Týden 1: Ujasni slib, cíle a datovou stopu
+
+První týden není o redesignu. Je o inventuře reality. Vezmi homepage, pricing, kontaktní formulář, onboarding a analytiku a napiš, co se opravdu děje.
+
+- **Den 1:** Napiš jednu větu: komu pomáháme, s čím a jaký výsledek slibujeme.
+- **Den 2:** Vyber jeden primární cíl webu nebo produktu pro příštích 30 dní: poptávky, demo hovory, aktivace trialu, platící zákazníci nebo snížení support zmatků.
+- **Den 3:** Projdi všechny formuláře a odstraň pole, u kterých neumíš říct, proč je potřebuješ.
+- **Den 4:** Sepiš mapu dat pro analytiku, formuláře, účty, fakturaci, support a logy.
+- **Den 5:** Zkontroluj všechny externí skripty na webu a rozděl je na technické, analytické, marketingové a „nikdo už neví“.
+
+Výstup týdne: jedna věta slibu, jeden měřitelný cíl, první mapa dat a seznam skriptů. Pokud tým objeví starý pixel, který nikdo nepoužívá, gratuluju — právě jste našli digitální prachový chuchvalec.
+
+### Týden 2: Zjednoduš web a měření
+
+Druhý týden se zaměř na věci, které návštěvník skutečně vidí a které ovlivňují rozhodnutí. Nehoníš dokonalost. Honíš srozumitelnost.
+
+- **Den 6:** Přepiš hero sekci tak, aby obsahovala výsledek, cílovku a další krok.
+- **Den 7:** Uprav hlavní CTA na klíčových stránkách, aby nekonkurovala třem dalším stejně hlasitým tlačítkům.
+- **Den 8:** Ověř, že důležité stránky mají title, meta description, kanonickou URL a rozumný interní odkaz.
+- **Den 9:** Nastav nebo zkontroluj agregovanou analytiku bez reklamních identifikátorů a fingerprintingu.
+- **Den 10:** Přidej UTM pravidla pro kampaně: zdroj, médium, kampaň, obsah jen tam, kde to bude tým opravdu vyhodnocovat.
+
+Výstup týdne: jasnější homepage nebo landing page, čistší měření a méně datového šumu. Privacy-first marketing není tma. Je to baterka namířená jen tam, kde potřebuješ vidět.
+
+### Týden 3: Zpevni produkt a provoz
+
+Třetí týden patří věcem, které nejsou sexy na screenshotu, ale rozhodují o důvěře zákazníka. Přihlášení, e-maily, backupy, přístupy, support. Tedy přesně ty části, které bolí, když se rozbijí.
+
+- **Den 11:** Ručně projdi kritickou cestu: registrace, přihlášení, reset hesla, první hodnotná akce, platba nebo poptávka.
+- **Den 12:** Zkontroluj transakční e-maily: předmět, jasný další krok, žádné zbytečné tracking pixely.
+- **Den 13:** Ověř, že produkční přístupy mají jen lidé, kteří je potřebují, a že API klíče neleží v poznámkách jako konfety.
+- **Den 14:** Proveď malý restore test nebo aspoň zdokumentuj přesný postup obnovy databáze a souborů.
+- **Den 15:** Napiš incident mini-runbook: kdo rozhoduje, koho kontaktovat, co vypnout, co logovat a jak komunikovat se zákazníky.
+
+Výstup týdne: otestovaná kritická cesta, uklizené přístupy, funkční zálohovací příběh a první verze incident postupu.
+
+### Týden 4: Připrav rytmus, obsah a rozhodování
+
+Čtvrtý týden udělá z jednorázového úklidu provozní návyk. Bez rytmu se privacy-first přístup po měsíci rozpustí v naléhavých úkolech a dobrých výmluvách.
+
+- **Den 16:** Vyber tři obsahová témata podle reálných otázek zákazníků, ne podle toho, co zní chytře v kalendáři.
+- **Den 17:** Napiš jeden praktický článek, návod nebo landing page s jasným dalším krokem.
+- **Den 18:** Přidej nebo zviditelni RSS, changelog nebo jiný přímý kanál, který nezávisí na algoritmickém feedu.
+- **Den 19:** Zaveď rozhodovací log: co jsme rozhodli, proč, jaká data jsme použili a kdy to zkontrolujeme.
+- **Den 20:** Naplánuj měsíční provozní review a přidej do něj kontrolu dodavatelů, skriptů, přístupů a metrik.
+
+Výstup týdne: obsahový krok, přímý distribuční kanál, rozhodovací log a opakovatelný review rytmus.
+
+### Posledních 10 dní: Dotáhni jednu viditelnou změnu
+
+Zbývajících deset dní nepoužívej na vymýšlení nových iniciativ. Vyber jednu změnu, která má největší dopad na důvěru nebo konverzi, a dokonči ji.
+
+Dobré kandidáty:
+
+- přepsat hlavní landing page podle frameworku Slib → Důkaz → Akce,
+- odstranit nepotřebné marketingové skripty a zjednodušit cookie režim,
+- zlepšit onboarding tak, aby první hodnota přišla rychleji,
+- doplnit privacy policy podle skutečné mapy dat,
+- připravit veřejnou stránku „jak pracujeme s daty“ lidským jazykem,
+- sjednotit pricing, FAQ a obchodní komunikaci kolem jedné hodnotové nabídky.
+
+Na konci 30 dní si polož tři otázky:
+
+1. **Co je pro zákazníka jasnější než před měsícem?**
+2. **Jaká data jsme přestali sbírat, posílat nebo držet zbytečně?**
+3. **Který provozní návyk budeme opakovat každý měsíc?**
+
+**Codyho komentář:** Pokud po 30 dnech nemáš hotovo všechno, je to normální. Pokud nemáš hotovo nic, plán nebyl plán, ale motivační plakát s Markdown syntaxí. Vyber jednu další konkrétní věc a pokračuj.
+
+---
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -1021,6 +1096,7 @@ Tím se e-book uzavírá prakticky: méně kouzel, víc systému. Webový vývoj
 
 ## Pracovní log
 
+- **2026-10-11:** Přidána příloha A s 30denním akčním plánem pro zavedení privacy-first webu nebo SaaS v malém týmu.
 - **2026-10-11:** Doplněna kapitola 8 s praktickými checklisty a šablonami pro audit webu, SaaS launch, privacy review, marketingový plán, měsíční provozní review a operační manuál.
 - **2026-10-11:** Doplněna kapitola 7 o evropském privacy-first provozu: výběr dodavatelů, provozní bezpečnost, NIS2, Data Act, incident playbook, exit plán a checklist pro malé SaaS týmy.
 - **2026-10-11:** Doplněna kapitola 6 o produktivitě zakladatele a malého SaaS týmu: omezení rozpracované práce, týdenní rytmus, rozhodovací log, bezpečné používání AI asistentů, automatizace a privacy-first checklist.
