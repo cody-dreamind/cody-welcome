@@ -597,6 +597,107 @@ U AI obsahu platí stejná logika jako u analytiky: nástroj je pomocník, ne om
 
 ---
 
+## 6. Produktivita zakladatele a týmu
+
+### 6.1 Produktivita není víc práce, ale méně rozpracovaného chaosu
+
+Malý tým často neprohrává proto, že by pracoval málo. Prohrává proto, že má najednou otevřených třicet směrů: redesign webu, nový pricing, dvě integrace, tři marketingové nápady, refaktor databáze a „rychlou“ automatizaci, která rychlá nebyla ani v první větě zadání.
+
+Produktivita v SaaS a webovém vývoji začíná omezením rozpracované práce. Každý aktivní projekt stojí pozornost, koordinaci, testování a návrat do kontextu. Když je rozpracovaného moc, tým sice vypadá vytíženě, ale hodnota se k zákazníkovi dostává pomalu.
+
+Praktické pravidlo pro malý tým:
+
+- jeden hlavní produktový cíl na týden,
+- jedna hlavní marketingová aktivita na týden,
+- jeden provozní dluh, který se vědomě opraví,
+- všechno ostatní jde do backlogu, ne do hlavy.
+
+> **Codyho komentář:** Backlog není hřbitov nápadů. Je to parkoviště. Jen tam občas musíš odtáhnout auta, která už nikdy nepojedou.
+
+### 6.2 Týdenní rytmus: rozhodnutí, práce, reflexe
+
+Zakladatel nepotřebuje jen seznam úkolů. Potřebuje rytmus, který brání tomu, aby každý den začínal od nuly. Jednoduchý týdenní systém může vypadat takhle:
+
+- **Pondělí:** vybrat cíle týdne, ověřit kapacitu, zrušit nejasné úkoly.
+- **Úterý až čtvrtek:** dělat hlubokou práci, vývoj, obsah, prodejní follow-upy a rozhodnutí, která posouvají produkt.
+- **Pátek:** zkontrolovat výsledky, poznatky od zákazníků, metriky, incidenty a dluhy.
+- **Průběžně:** urgentní věci řešit, ale nepřepisovat kvůli nim celý týden bez důvodu.
+
+Tento rytmus funguje i pro jednočlenný tým. Jen místo meetingu s kolegy vedeš meeting sám se sebou — což zní divně, ale pořád je to levnější než tři hodiny scrollování issue trackeru a pocit, že „něco určitě dělám“.
+
+### 6.3 Rozhodovací systém: zapisuj proč, ne jen co
+
+U webu i SaaS se spousta rozhodnutí vrací jako bumerang: proč jsme zvolili tento hosting, proč nemáme Facebook Pixel, proč jsme pricing nastavili takhle, proč zákazníkovi nenabídneme custom funkci hned?
+
+Proto se vyplatí jednoduchý rozhodovací log. Nemusí to být formální architektonický dokument. Stačí krátký zápis:
+
+- **Kontext:** jaký problém řešíme.
+- **Možnosti:** které varianty jsme zvažovali.
+- **Rozhodnutí:** co děláme teď.
+- **Důvod:** proč je to nejlepší volba pro současnou fázi.
+- **Kdy přehodnotit:** při jakém signálu se k tomu vrátíme.
+
+Příklad:
+
+> **Rozhodnutí:** Nepřidáváme reklamní remarketingový pixel.  
+> **Důvod:** V aktuální fázi nám víc pomůže kvalitní obsah, přímé poptávky a agregovaná analytika. Nechceme zvyšovat právní ani technickou složitost kvůli kampaním, které zatím nemají jasnou návratnost.  
+> **Přehodnotit:** Pokud budeme mít stabilní placenou akvizici, jasné souhlasy a konkrétní obchodní důvod.
+
+Takový zápis šetří čas při onboardingu, auditu i ve chvíli, kdy se po třech měsících někdo zeptá: „A proč jsme to vlastně neudělali jako všichni ostatní?“ Odpověď „protože Cody brblal o soukromí“ je sice poetická, ale log je lepší.
+
+### 6.4 AI asistenti jako druhý mozek, ne autopilot
+
+AI asistent může výrazně zrychlit práci, ale jen pokud má jasné mantinely. V produktivitě se hodí hlavně na:
+
+- rozpad velkého cíle na kroky,
+- návrh osnovy článku nebo landing page,
+- kontrolu konzistence textu,
+- shrnutí zpětné vazby od zákazníků,
+- přípravu checklistu pro launch,
+- návrh testovacích scénářů před releasem.
+
+Naopak špatný nápad je posílat do nástroje bez rozmyslu citlivé zákaznické údaje, obchodní tajemství nebo exporty produkční databáze. Privacy-first produktivita znamená, že i interní automatizace má datovou dietu: pošli minimum kontextu, anonymizuj příklady a u nástrojů řeš, kde data končí.
+
+Praktický prompt pro bezpečnější práci:
+
+> „Zde je anonymizovaný popis problému bez osobních údajů. Navrhni tři možné postupy, rizika každého z nich a checklist před implementací.“
+
+AI není právník, CTO ani obchodní ředitel. Je to velmi rychlý kolega, který občas sebevědomě přinese šroubovák na hasičský zásah. Používej ho, ale kontroluj výstupy.
+
+### 6.5 Automatizuj opakování, ne přemýšlení
+
+Automatizace má největší smysl tam, kde je postup jasný, opakovaný a dobře ověřitelný. Typické dobré kandidáty:
+
+- kontrola dostupnosti webu,
+- připomenutí expiring domén, certifikátů a faktur,
+- pravidelný export nebo test obnovy záloh,
+- vytvoření draftu reportu z agregovaných metrik,
+- kontrola rozbitých odkazů,
+- příprava release checklistu.
+
+Naopak neautomatizuj rozhodnutí, u kterých chybí kvalitní vstupy nebo odpovědnost. Pokud neumíš popsat, jak poznáš dobrý výsledek, automatizace jen rychleji vyrábí zmatek.
+
+Privacy-first otázky před automatizací:
+
+- Jaká data automatizace čte?
+- Kam data posílá?
+- Jak dlouho je drží?
+- Kdo má přístup k logům?
+- Co se stane, když automatizace udělá chybu?
+
+### Checklist pro produktivitu malého SaaS týmu
+
+- [ ] Tým má jeden hlavní týdenní produktový cíl a jeden hlavní marketingový cíl.
+- [ ] Rozpracovaná práce je omezená; nové nápady nejdřív jdou do backlogu.
+- [ ] Důležitá rozhodnutí mají krátký log s kontextem, důvodem a bodem přehodnocení.
+- [ ] Každý týden končí krátkou reflexí: co se dodalo, co se naučilo, co blokuje růst.
+- [ ] AI asistenti pracují s anonymizovaným nebo minimálním kontextem.
+- [ ] Automatizace řeší opakovatelné úkoly, ne nejasná strategická rozhodnutí.
+- [ ] Interní nástroje respektují stejnou privacy-first laťku jako produkt pro zákazníky.
+- [ ] Backlog se pravidelně čistí, aby nebyl skladem starého optimismu.
+
+---
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -622,6 +723,7 @@ U AI obsahu platí stejná logika jako u analytiky: nástroj je pomocník, ne om
 
 ## Pracovní log
 
+- **2026-10-11:** Doplněna kapitola 6 o produktivitě zakladatele a malého SaaS týmu: omezení rozpracované práce, týdenní rytmus, rozhodovací log, bezpečné používání AI asistentů, automatizace a privacy-first checklist.
 - **2026-10-11:** Doplněna kapitola 5 o marketingu bez invazivního trackingu: SEO disciplína, obsah podle rozhodovacích momentů, RSS, přímé kanály, UTM měření, privacy-friendly analytika a AI kontrola obsahu.
 - **2026-10-11:** Doplněna kapitola 4 o SaaS produktu od nápadu po první platící zákazníky: validace bez komplimentů, MVP, pricing, onboarding, retence a privacy-first checklist.
 - **2026-10-11:** Doplněna kapitola 3 o technickém stacku pro malé týmy: rozdělení vrstev, EU hosting, zálohy, monitoring, logy, deploy pipeline a praktický checklist se zdroji ENISA a OWASP.
