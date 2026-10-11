@@ -226,12 +226,155 @@ Privacy dokumentace nemá být PDF mumie, která se otevře jednou při auditu. 
 
 ---
 
+## 3. Technický stack pro malé týmy
+
+### 3.1 Stack není sbírka hraček, ale provozní závazek
+
+Technický stack se často vybírá podle toho, co je zrovna populární, co používá oblíbený startup na konferenci, nebo co má nejhezčí dokumentaci. To je pochopitelné. Zároveň je to past s neonovým nápisem „tady utratíš příštích šest měsíců“.
+
+Pro malý tým je dobrý stack ten, který umí odpovědět na praktické otázky:
+
+- zvládneme ho provozovat ve dvou lidech i v pátek večer,
+- víme, kde běží produkce, databáze, logy a zálohy,
+- umíme bezpečně nasadit změnu bez rituálního tance kolem terminálu,
+- umíme odejít k jinému dodavateli bez archeologické expedice,
+- máme jasné hranice mezi marketingovým webem, aplikací a interními nástroji.
+
+Technologie má podporovat obchodní model, ne naopak. Pokud prodáváš jednoduchý B2B SaaS, nepotřebuješ architekturu vhodnou pro streamovací platformu s miliardou uživatelů. Potřebuješ spolehlivé přihlášení, fakturaci, správu organizací, auditní stopu, zálohy, monitoring a web, který říká, proč by někdo měl platit.
+
+**Codyho komentář:** Nejlepší stack pro první verzi je často trochu nudný. Nuda v infrastruktuře je luxus. Adrenalin si nech na marketingovou kampaň, ne na obnovu databáze ve dvě ráno.
+
+### 3.2 Rozděl systém na tři vrstvy
+
+Malý evropský SaaS nebo firemní web může začít se třemi jasnými vrstvami:
+
+1. **Prezentační vrstva:** marketingový web, dokumentace, blog, landing pages, formuláře.
+2. **Aplikační vrstva:** přihlášení, účty, produktová logika, API, administrace.
+3. **Datová a provozní vrstva:** databáze, úložiště souborů, logy, monitoring, zálohy, analytika.
+
+Tahle jednoduchá mapa pomůže při rozhodování. Marketingový web má být rychlý, indexovatelný, snadno editovatelný a pokud možno bez invazivních skriptů třetích stran. Aplikace má být bezpečná, testovatelná a dobře nasaditelná. Datová vrstva má být konzervativní, zálohovaná a s jasnou odpovědností.
+
+Praktický příklad rozhodnutí:
+
+- Blog a dokumentace mohou být staticky generované, aby byly rychlé a snadno kešovatelné.
+- SaaS aplikace může běžet odděleně, protože má přihlášení, role a citlivější data.
+- Analytika webu může být agregovaná a privacy-friendly, zatímco produktové metriky se ukládají v aplikaci s vazbou na účet a jasným účelem.
+
+Tím se vyhneš situaci, kdy kvůli úpravě nadpisu na homepage musí vývojář sahat do stejného deploy pipeline jako pro změnu oprávnění administrátorů. Oddělení vrstev není enterprise fetiš. Je to pojistka proti tomu, aby se jednoduchá marketingová změna nestala produkčním incidentem.
+
+### 3.3 Hosting a region: ptej se „kde jsou data?“
+
+Privacy-first stack začíná u fyzické a právní reality: kde data běží, kdo je zpracovává a za jakých podmínek. Evropský provoz neznamená jen vlaječku EU na landing page dodavatele. Potřebuješ vědět, v jakém regionu běží aplikace, databáze, objektové úložiště, zálohy, logy a support exporty.
+
+Minimální otázky pro každého dodavatele:
+
+- Umí garantovat EU region pro produkční data?
+- Platí to i pro zálohy, logy a diagnostiku?
+- Kdo má administrátorský přístup a jak je auditovaný?
+- Existuje DPA nebo jiná zpracovatelská smlouva?
+- Jak rychle dokážeme exportovat data a odejít?
+- Co se stane při výpadku regionu nebo ukončení služby?
+
+ENISA ve svých materiálech pro malé a střední firmy zdůrazňuje, že cloud a online služby mají být vybírány s ohledem na bezpečnostní rizika, kontinuitu provozu a ochranu dat, ne jen podle pohodlí nebo ceny ([ENISA: Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes), [ENISA: Cloud Security Guide for SMEs](https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes)). Pro malý tým to není akademická poznámka. Jeden špatně zvolený dodavatel může znamenat, že data, logy i zálohy skončí mimo kontrolu týmu.
+
+Privacy-first preference v praxi:
+
+- evropský hosting pro aplikaci a databázi,
+- oddělený projekt nebo účet pro produkci,
+- minimální počet služeb, které vidí osobní údaje,
+- žádné marketingové pixely na produktových obrazovkách,
+- přímé odkazy a RSS tam, kde jiní dávají social-share skripty,
+- dokumentovaný exit plán pro klíčové dodavatele.
+
+### 3.4 Databáze, soubory a zálohy: dokud neobnovíš, nezálohuješ
+
+Záloha není hotová ve chvíli, kdy existuje soubor s hezkým názvem. Záloha je hotová až ve chvíli, kdy ji umíš obnovit a víš, kolik dat můžeš ztratit.
+
+U malého SaaS si napiš dvě čísla:
+
+- **RPO:** kolik dat maximálně ztratíme, když se něco pokazí?
+- **RTO:** za jak dlouho musíme službu obnovit?
+
+Pro interní nástroj může být přijatelné obnovit do druhého dne. Pro placený SaaS s denní prací zákazníků může být hodina moc. Neexistuje univerzální odpověď, ale musí existovat odpověď.
+
+ENISA v technickém doporučení ke kybernetickému risk managementu uvádí i klasické pravidlo 3-2-1: mít tři kopie dat, na dvou typech úložiště a jednu kopii mimo hlavní lokalitu; zároveň připomíná šifrování, integritu a ochranu záloh proti smazání nebo ransomware zásahu ([ENISA: Technical implementation guidance on cybersecurity risk management measures](https://www.enisa.europa.eu/publications/technical-implementation-guidance-on-cybersecurity-risk-management-measures)).
+
+Praktický minimální režim:
+
+1. **Denní databázová záloha:** automatická, šifrovaná, s retencí podle rizika.
+2. **Oddělený přístup:** aplikace nesmí mít právo mazat zálohy.
+3. **Obnova nanečisto:** pravidelně obnov zálohu do testovacího prostředí.
+4. **Dokumentovaný postup:** kdo obnovuje, odkud, jak dlouho to trvá a koho informuje.
+5. **Zálohy souborů:** faktury, uploady a exporty nejsou „někde v bucketu“, ale součást obnovy.
+
+Příklad: pokud uživatelé nahrávají přílohy, nestačí zálohovat jen SQL databázi. Databáze může obsahovat metadata, ale skutečné soubory jsou v objektovém úložišti. Po obnově bez souborů máš sice tabulky, ale produkt se tváří jako knihovna po povodni. Papírově existuje, prakticky je mokrá.
+
+### 3.5 Monitoring a logy bez datového smogu
+
+Monitoring má odpovědět na otázku: „Funguje služba a dokážeme rychle zjistit proč ne?“ Nemá se stát neomezeným skladem osobních údajů.
+
+OWASP připomíná, že aplikační logy jsou důležité pro bezpečnost i provoz, ale mají mít jasný účel, chráněný přístup a nemají zbytečně ukládat citlivé informace ([OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). OWASP ASVS zároveň používá požadavky na autentizaci, řízení přístupu, chybové stavy a logování jako součást ověřování bezpečnosti webových aplikací ([OWASP ASVS](https://owasp.org/projects/asvs)).
+
+Co logovat:
+
+- přihlášení, odhlášení a neúspěšné pokusy,
+- změny rolí a oprávnění,
+- administrátorské zásahy,
+- bezpečnostně relevantní chyby,
+- volání důležitých integračních endpointů,
+- ID požadavku, čas, prostředí a technický kontext.
+
+Co nelogovat, pokud k tomu není opravdu dobrý důvod:
+
+- hesla, tokeny, session identifikátory,
+- celé obsahy formulářů a zpráv,
+- platební údaje,
+- citlivé osobní údaje,
+- celé hlavičky požadavků bez filtrování.
+
+Dobrý pattern je logovat technický identifikátor a kontext, ne obsah. Místo „uživatel poslal celý text zprávy“ stačí „formulář contact odeslán, request_id, account_id nebo anonymní session, výsledek validace“. Když je potřeba řešit incident, máš stopu. Když někdo získá logy, nemá rovnou druhou databázi zákaznických příběhů.
+
+### 3.6 Deploy pipeline: malý tým potřebuje opakovatelnost
+
+Nasazení má být nudný proces, ne hrdinský výkon. Pokud produkci umí nasadit jen jeden člověk z konkrétního notebooku, nemáš deploy pipeline. Máš rituál.
+
+Minimální pipeline pro malý tým:
+
+- změna jde přes Git,
+- před nasazením proběhnou testy nebo aspoň build,
+- produkční tajemství nejsou v repozitáři,
+- migrace databáze mají rollback nebo jasný plán obnovy,
+- po deployi se ověří klíčová URL a základní akce,
+- existuje rychlý postup návratu na předchozí verzi.
+
+Pro marketingový web může stačit statický build a kontrola hlavních stránek. Pro SaaS aplikaci přidej smoke test přihlášení, vytvoření klíčového objektu a kontrolu napojení na e-mail, fakturaci nebo jinou kritickou integraci. Cílem není otestovat celý vesmír. Cílem je chytit chybu, která by zákazníkovi okamžitě rozbila práci.
+
+### Checklist pro technický stack malého SaaS
+
+- [ ] Umíme jednou větou vysvětlit, proč používáme hlavní technologie stacku.
+- [ ] Marketingový web, aplikace a datová vrstva mají jasné hranice.
+- [ ] Víme, kde běží aplikace, databáze, soubory, logy, zálohy a analytika.
+- [ ] Produkční data a zálohy jsou v EU regionu nebo máme zdokumentovaný důvod, proč ne.
+- [ ] Každý klíčový dodavatel má vlastníka, účel, DPA/smlouvu a exit plán.
+- [ ] Zálohy se pravidelně testují obnovou, nejen vytvářením.
+- [ ] Logy neobsahují hesla, tokeny ani celé citlivé formuláře.
+- [ ] Deploy běží opakovatelně přes Git a má minimální smoke test.
+- [ ] Tajemství jsou mimo repozitář a přístup k produkci je omezený.
+- [ ] Máme jednoduchý runbook pro výpadek, obnovu a rollback.
+
+---
+
 ## Zdroje
 
+- ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
+- ENISA: [Cloud Security Guide for SMEs](https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes)
+- ENISA: [Technical implementation guidance on cybersecurity risk management measures](https://www.enisa.europa.eu/publications/technical-implementation-guidance-on-cybersecurity-risk-management-measures)
 - European Data Protection Board: [Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)
 - European Data Protection Board: [Basic principles](https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en)
 - European Data Protection Board: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_de)
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
+- OWASP: [Application Security Verification Standard](https://owasp.org/projects/asvs)
+- OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - Úřad pro ochranu osobních údajů: [Cookies — otázky a odpovědi](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies)
 - Úřad pro ochranu osobních údajů: [Cookies od začátku roku 2022 pouze se souhlasem](https://uoou.gov.cz/novinky/vse/cookies-od-zacatku-roku-2022-pouze-se-souhlasem)
 - Úřad pro ochranu osobních údajů: [Informace pro e-shopy](https://uoou.gov.cz/profesional/qa-otazky-a-odpovedi/informace-pro-e-shopy)
@@ -240,5 +383,6 @@ Privacy dokumentace nemá být PDF mumie, která se otevře jednou při auditu. 
 
 ## Pracovní log
 
+- **2026-10-11:** Doplněna kapitola 3 o technickém stacku pro malé týmy: rozdělení vrstev, EU hosting, zálohy, monitoring, logy, deploy pipeline a praktický checklist se zdroji ENISA a OWASP.
 - **2026-10-11:** Doplněna kapitola 2 o privacy-first základech: mapa dat, cookies, souhlas, SaaS architektura, živá dokumentace a praktický checklist s ověřenými zdroji ÚOOÚ, EDPB a Evropské komise.
 - **2026-10-11:** Založena struktura e-booku, přidána osnova a dokončena kapitola 1.1–1.5 o strategii webu, metrikách a privacy-first přístupu včetně checklistu a ověřených zdrojů.
