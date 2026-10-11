@@ -698,6 +698,94 @@ Privacy-first otázky před automatizací:
 
 ---
 
+## 7. Provoz v Evropě
+
+### 7.1 Evropský provoz není jen region v dropdownu
+
+Když dodavatel napíše „EU region“, je to dobrý začátek, ne hotová odpověď. Provoz v Evropě znamená kombinaci techniky, smluv, procesů a schopnosti odejít, když se podmínky změní. Pokud stavíš web nebo SaaS pro evropské zákazníky, ptej se na čtyři vrstvy:
+
+1. **Kde fyzicky běží data?** Datacentrum, region, zálohy, logy, monitoring.
+2. **Kdo k nim má přístup?** Zaměstnanci dodavatele, subdodavatelé, support, externí procesory.
+3. **Podle jakých pravidel se data zpracovávají?** Smlouva, DPA, seznam subdodavatelů, účel zpracování.
+4. **Jak rychle dokážeš odejít?** Export dat, dokumentovaná migrace, obnovitelné zálohy, žádný proprietární chaos.
+
+Privacy-first provoz není romantická představa o serveru pod stolem. Je to schopnost vysvětlit zákazníkovi, auditorovi i sobě v pátek večer: „Víme, kde data jsou, proč tam jsou a jak je dostaneme pryč.“
+
+### 7.2 Dodavatelský checklist před podpisem
+
+U malého týmu je lákavé vybrat nástroj podle toho, co má hezký landing page a integraci na tři kliknutí. To je v pořádku pro poznámky z brainstormingu, ale ne pro produkční data zákazníků.
+
+Před podpisem nebo nasazením si u každého důležitého dodavatele napiš krátkou kartu:
+
+- **Účel:** co přesně pro nás dělá a jestli to nejde jednodušeji.
+- **Data:** jaké osobní, obchodní a technické údaje zpracovává.
+- **Region:** kde běží primární data, zálohy a logy.
+- **Role:** jestli je dodavatel zpracovatel, samostatný správce nebo kombinace podle konkrétní funkce.
+- **Smlouvy:** DPA, bezpečnostní přílohy, seznam subdodavatelů, pravidla pro incidenty.
+- **Exit:** formát exportu, retenční lhůty po ukončení a plán migrace.
+
+GDPR u zpracovatelů vyžaduje smluvní ujednání podle článku 28; EDPB k rolím správce a zpracovatele vydal samostatné pokyny, které se hodí číst hlavně ve chvíli, kdy dodavatel tvrdí „my nic nezpracováváme“, zatímco drží kompletní databázi zákazníků ([EDPB: Guidelines 07/2020 on controller and processor concepts](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en)).
+
+**Codyho komentář:** Pokud dodavatel neumí jednoduše vysvětlit, kde jsou data a jak se mažou, není to automaticky zlý dodavatel. Ale je to signál, že ho nemáš pustit k nejcitlivější části produktu jako prvního hosta na afterparty.
+
+### 7.3 Bezpečnostní minimum: nudné věci, které zachraňují víkend
+
+Bezpečnost malého SaaS týmu nemusí začít nákupem drahého enterprise nástroje. Často stačí důsledně dělat nudné věci:
+
+- MFA pro repozitáře, hosting, e-mail, domény a platební nástroje.
+- Oddělené produkční a vývojové přístupy.
+- Nejméně práv: člověk i služba má jen ta oprávnění, která opravdu potřebuje.
+- Správa tajemství mimo repozitář; žádné `.env` v Gitu a žádné klíče v chatu.
+- Pravidelné aktualizace závislostí a rychlé řešení kritických zranitelností.
+- Zálohy ověřené obnovou, ne jen zelenou ikonou v administraci.
+- Incident kontakty: kdo rozhoduje, kdo komunikuje, kdo vypíná problémovou integraci.
+
+ENISA ve svých doporučeních pro malé a střední podniky opakovaně zdůrazňuje řízení rizik, zálohy, kontrolu přístupů, školení lidí a připravenost na incidenty jako praktický základ kyberbezpečnosti ([ENISA: Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)). Smysl není mít bezpečnostní divadlo. Smysl je zmenšit počet situací, kdy jeden zapomenutý token položí firmu na lopatky.
+
+### 7.4 NIS2, Data Act a proč sledovat regulaci bez paniky
+
+Evropské regulace se mění a není fér tvářit se, že malý tým má každý týden číst úřední věstník místo vývoje produktu. Zároveň ale platí: pokud prodáváš B2B SaaS, provozuješ kritickou část workflow zákazníků nebo pracuješ s citlivějšími daty, regulace se tě může dotknout nepřímo přes požadavky zákazníků.
+
+NIS2 rozšiřuje evropský rámec kyberbezpečnosti a klade důraz mimo jiné na řízení rizik, zvládání incidentů, bezpečnost dodavatelského řetězce a odpovědnost vedení; česká i evropská implementace se může projevit v dotaznících, smlouvách a požadavcích větších zákazníků ([European Commission: NIS2 Directive](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive)).
+
+Data Act je další praktický příklad: jeho pravidla míří mimo jiné na přístup k datům a snazší změnu poskytovatele cloudových služeb, přičemž Evropská komise uvádí použitelnost hlavních pravidel od 12. září 2025 ([European Commission: Data Act](https://digital-strategy.ec.europa.eu/en/policies/data-act)). Pro SaaS zakladatele z toho plyne jednoduchá provozní lekce: stav produkt tak, aby data šla exportovat a vysvětlitelně přenést. I když tě konkrétní paragraf mine, zákazník tu schopnost ocení.
+
+Praktický rytmus bez paniky:
+
+- Jednou za čtvrtletí projdi regulatorní změny relevantní pro tvůj typ zákazníků.
+- Udržuj seznam dodavatelů a datových toků aktuální, ne jako archeologickou památku z launch weeku.
+- Připrav odpovědi na bezpečnostní dotazník dřív, než ho pošle první enterprise zákazník.
+- U větších kontraktů počítej s tím, že privacy a security jsou součást prodeje, ne brzdný padák.
+
+### 7.5 Incident není ostuda. Nepřipravený incident je ostuda.
+
+Incident nemusí být hned katastrofa s titulkem v novinách. Může to být uniklý API token, špatně nastavený bucket, rozbitá autentizace, omylem odeslaný export, výpadek plateb nebo chyba, která zákazníkům ukazuje cizí data. Rozdíl mezi profesionálním týmem a improvizačním kroužkem je v tom, jestli existuje postup.
+
+Minimální incident playbook:
+
+1. **Zastav škodu:** vypni klíč, rollbackni release, odpoj integraci, zablokuj přístup.
+2. **Zachovej stopy:** logy, časová osa, dotčené účty, verze aplikace, kdo co udělal.
+3. **Urči dopad:** jaká data, kolik uživatelů, jak dlouho, jestli šlo o osobní údaje.
+4. **Komunikuj:** interně hned, zákazníkům věcně, bez mlžení a bez právnického kouře.
+5. **Oprav příčinu:** nejen symptom, ale i proces, test nebo kontrolu, která měla problém zachytit.
+6. **Napiš postmortem:** co se stalo, proč, co měníme, kdo vlastní follow-up.
+
+Pro GDPR incidenty si hlídej zejména vyhodnocení, jestli jde o porušení zabezpečení osobních údajů a jaké oznamovací povinnosti vznikají. Tady už nehraje Cody na advokáta v mikině: konkrétní incident řeš s právníkem nebo pověřencem podle dopadu.
+
+### Checklist pro evropský privacy-first provoz
+
+- [ ] Každý klíčový dodavatel má kartu: účel, data, region, role, smlouvy, exit.
+- [ ] Produkční data, zálohy, logy a support přístupy mají popsané umístění a retenční lhůty.
+- [ ] Přístupy jsou chráněné MFA a funguje princip nejmenších oprávnění.
+- [ ] Tajemství nejsou v repozitáři, chatu ani dokumentaci; rotace klíčů má jasný postup.
+- [ ] Zálohy se pravidelně obnovují testem, ne jen vytvářejí.
+- [ ] Existuje jednoduchý incident playbook s rolemi, kontakty a komunikačním postupem.
+- [ ] Produkt umí exportovat zákaznická data ve srozumitelném formátu.
+- [ ] Tým čtvrtletně kontroluje relevantní regulatorní změny a požadavky zákazníků.
+- [ ] Pro enterprise prodej existuje připravený privacy/security balíček: DPA, subdodavatelé, hosting, bezpečnostní minimum.
+
+---
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -706,6 +794,9 @@ Privacy-first otázky před automatizací:
 - European Data Protection Board: [Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)
 - European Data Protection Board: [Basic principles](https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en)
 - European Data Protection Board: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_de)
+- European Data Protection Board: [Guidelines 07/2020 on the concepts of controller and processor in the GDPR](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en)
+- European Commission: [Data Act](https://digital-strategy.ec.europa.eu/en/policies/data-act)
+- European Commission: [NIS2 Directive](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive)
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
 - Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
 - Google Search Central: [Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
@@ -723,6 +814,7 @@ Privacy-first otázky před automatizací:
 
 ## Pracovní log
 
+- **2026-10-11:** Doplněna kapitola 7 o evropském privacy-first provozu: výběr dodavatelů, provozní bezpečnost, NIS2, Data Act, incident playbook, exit plán a checklist pro malé SaaS týmy.
 - **2026-10-11:** Doplněna kapitola 6 o produktivitě zakladatele a malého SaaS týmu: omezení rozpracované práce, týdenní rytmus, rozhodovací log, bezpečné používání AI asistentů, automatizace a privacy-first checklist.
 - **2026-10-11:** Doplněna kapitola 5 o marketingu bez invazivního trackingu: SEO disciplína, obsah podle rozhodovacích momentů, RSS, přímé kanály, UTM měření, privacy-friendly analytika a AI kontrola obsahu.
 - **2026-10-11:** Doplněna kapitola 4 o SaaS produktu od nápadu po první platící zákazníky: validace bez komplimentů, MVP, pricing, onboarding, retence a privacy-first checklist.
