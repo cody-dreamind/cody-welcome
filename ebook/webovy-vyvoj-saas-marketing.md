@@ -1868,6 +1868,127 @@ Když článek obsahuje právní, cenové nebo technické tvrzení, neber ho jak
 - [ ] Do URL, UTM parametrů ani příkladů v článcích nedáváme osobní údaje.
 - [ ] Každý článek má jasný další krok, ale nenutí člověka do zbytečného formuláře.
 
+---
+
+## Příloha I: Poptávkový formulář, který kvalifikuje leady bez datového bufetu
+
+Formulář je malé rozhraní s velkým dopadem. Umí přinést obchodní příležitost, ale taky umí člověka odradit, nasbírat zbytečná data a vytvořit týmovou iluzi, že víc polí znamená lepší kvalifikaci. Neznamená. Často to znamená jen delší frontu nevyřízených kontaktů a víc osobních údajů, které musíš chránit.
+
+Privacy-first formulář má jednoduchý cíl: získat dost informací pro první užitečnou odpověď, ale ne víc. Všechno ostatní patří do následné komunikace, nabídky nebo onboardingu.
+
+### 1) Nejdřív rozhodni, co má následovat po odeslání
+
+Než začneš přidávat pole, napiš si, co se stane po odeslání formuláře. Jiný formulář potřebuješ pro rychlý dotaz, jiný pro demo SaaS a jiný pro poptávku vývoje.
+
+Praktické varianty:
+
+- **Obecný kontakt:** cílem je odpovědět správnému člověku; stačí jméno, e-mail a zpráva.
+- **Poptávka služby:** cílem je odhadnout fit a další krok; přidej typ projektu, časový rámec a orientační prioritu.
+- **Demo SaaS:** cílem je připravit relevantní ukázku; přidej roli člověka, problém a velikost týmu v rozmezí.
+- **Support:** cílem je vyřešit problém; potřebuješ popis situace, dotčenou část produktu a možnost navázat komunikaci.
+
+Když nevíš, co s odpovědí uděláš, neptej se. Pole bez jasného použití je jen malý compliance dluh s placeholderem.
+
+### 2) Rozděl pole na nutná, užitečná a líná
+
+U každého pole si napiš jednu větu: „Toto pole potřebujeme, protože…“. Pokud věta nejde dokončit, pole smaž nebo ho nech volitelné.
+
+Příklad pro B2B poptávku:
+
+| Pole | Stav | Proč |
+| --- | --- | --- |
+| Jméno | Povinné | Aby odpověď nepůsobila jako automat z bankomatu. |
+| E-mail | Povinné | Bez něj nejde navázat komunikace. |
+| Firma | Volitelné | Pomůže s kontextem, ale první odpověď bez ní pořád jde. |
+| Web firmy | Volitelné | Hodí se pro přípravu, nesmí být bariéra. |
+| Rozpočet | Volitelné nebo rozsah | Pomáhá kvalifikaci, ale přesné číslo může odradit. |
+| Telefon | Volitelné | Ne každý chce hovor jako první krok. |
+| Počet zaměstnanců | Smazat nebo rozsah | Přesná hodnota je většinou zbytečná. |
+
+**Codyho komentář:** Povinný telefon na B2B formuláři je často obchodní verze cedule „budeme ti volat v nejhorší možnou chvíli“. Pokud hovor fakt potřebuješ, vysvětli proč a nech člověka vybrat čas.
+
+### 3) Kvalifikuj problém, ne člověka
+
+Formulář má pomoci pochopit situaci, ne vytvořit dossier. Ptej se na problém, očekávaný výsledek a naléhavost. Vyhýbej se otázkám, které jen uspokojují zvědavost týmu.
+
+Dobré otázky:
+
+- „Co se má po spolupráci změnit?“
+- „Kde dnes proces nejvíc drhne?“
+- „Kdy potřebujete mít první použitelný výsledek?“
+- „Jak poznáte, že se projekt povedl?“
+
+Slabé otázky:
+
+- „Jak jste se o nás dozvěděli?“ jako povinné pole s dvaceti možnostmi.
+- „Jaký je váš přesný roční obrat?“ u prvního kontaktu.
+- „Souhlasíte se zasíláním marketingových sdělení?“ předtím, než člověk vůbec ví, jestli umíš odpovědět.
+
+Marketingový souhlas nepatří do každého formuláře jako bonusové tlačítko. Pokud ho opravdu chceš, odděl ho od hlavního účelu a vysvětli, co člověk dostane.
+
+### 4) Děkuj konkrétně a nastav očekávání
+
+Stránka po odeslání není jen „Děkujeme“. Je to první miniaturní onboarding. Má říct, co se stane dál, kdy a kdo odpoví.
+
+Vzor potvrzení:
+
+> Díky, zpráva dorazila. Ozveme se nejpozději do dvou pracovních dnů. Pokud jde o výpadek nebo urgentní problém, napiš prosím přímo na support@example.cz s předmětem „Urgentní“. Údaje z formuláře používáme jen k vyřízení poptávky a neposíláme je do reklamních systémů.
+
+Tohle je krátké, lidské a snižuje nejistotu. Zároveň říká privacy hodnotu bez toho, aby stránka zněla jako právnický sklep.
+
+### 5) Napojení do týmu: méně kopií, jasný vlastník
+
+Nejhorší formulář není ten s málo poli. Nejhorší formulář je ten, který po odeslání pošle osobní údaje do pěti inboxů, dvou tabulek, CRM, Slacku a ještě do nástroje, který nikdo neumí smazat. Gratuluju, vyrobil sis datové konfety.
+
+Minimální workflow:
+
+1. Formulář uloží zprávu do jednoho určeného systému.
+2. Tým dostane notifikaci bez citlivého obsahu, ideálně jen s odkazem do systému.
+3. Jeden člověk nebo role má odpovědnost za první reakci.
+4. Po vyřízení se lead označí stavem: odpovězeno, čeká na klienta, kvalifikováno, nevhodný fit, archivovat.
+5. Staré poptávky se mažou nebo anonymizují podle retenčního pravidla.
+
+Retence nemusí být věda. Stačí jednoduché pravidlo: co nepotřebujeme pro smlouvu, podporu nebo oprávněný provozní důvod, to nemá v systému ležet navždy.
+
+### 6) Šablona jednoduchého privacy-first formuláře
+
+```markdown
+## Chci probrat projekt
+
+Pomůžeme ti zorientovat se v dalším kroku. Nechceme po tobě román ani rodný list.
+
+Povinné:
+- Jméno
+- E-mail
+- Co chceš vyřešit?
+
+Volitelné:
+- Web nebo produkt
+- Kdy to potřebuješ řešit?
+- Jaký typ pomoci hledáš? [Audit / nový web / SaaS vývoj / konzultace / nevím]
+- Orientační rozpočet jako rozsah
+
+Krátká poznámka k soukromí:
+Údaje použijeme jen k odpovědi na poptávku. Neposíláme je do reklamních systémů a neprodáváme je třetím stranám.
+
+Po odeslání:
+- Potvrzení na stránce
+- E-mail s kopií zprávy, pokud to dává smysl
+- Interní notifikace bez plného obsahu poptávky
+```
+
+### Checklist pro poptávkový formulář
+
+- [ ] Každé povinné pole má jasný účel pro první odpověď.
+- [ ] Telefon, firma, web a rozpočet jsou volitelné, pokud nejsou nezbytné.
+- [ ] Formulář se ptá hlavně na problém, výsledek a časový rámec.
+- [ ] Marketingový souhlas je oddělený od hlavního účelu formuláře.
+- [ ] Potvrzovací stránka říká, kdy a jak tým odpoví.
+- [ ] Interní notifikace neposílají plný obsah poptávky do zbytečných kanálů.
+- [ ] Existuje vlastník odpovědi a jednoduché stavy zpracování.
+- [ ] Staré poptávky mají retenční pravidlo: smazat, anonymizovat nebo ponechat s důvodem.
+
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -1906,6 +2027,7 @@ Když článek obsahuje právní, cenové nebo technické tvrzení, neber ho jak
 
 ## Pracovní log
 
+- **2026-10-11:** Přidána příloha I o privacy-first poptávkových formulářích: minimální pole, kvalifikace problému, potvrzení po odeslání, interní workflow, retenční pravidla a praktická šablona.
 - **2026-10-11:** Přidána příloha H o redakčním systému obsahu: obsahové pilíře podle rozhodnutí zákazníka, redakční karta, publikační rytmus, distribuce přes vlastní kanály a privacy-first měření.
 - **2026-10-11:** Přidána příloha G o changelogu a release notes: rozdíl mezi interním a zákaznickým zápisem, kanonická stránka, RSS, šablona položky, release rytmus a checklist pro privacy-first komunikaci změn.
 - **2026-10-11:** Přidána příloha F o bezpečném používání AI asistenta v malém týmu: klasifikace rizik, pravidla pro prompty, anonymizace, lidská kontrola a výběr nástroje podle privacy-first provozu.
