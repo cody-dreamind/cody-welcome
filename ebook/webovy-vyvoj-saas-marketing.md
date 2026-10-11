@@ -1561,6 +1561,103 @@ Pro kritické dodavatele si napiš krátký scénář „co kdyby zítra přesta
 
 ---
 
+## Příloha F: AI asistent v malém týmu bez úniku dat
+
+AI asistent v malém týmu je lákavý jako kávovar, který umí psát SQL, návrhy e-mailů a ještě se tváří, že ho baví meeting notes. Problém není v tom, že by AI byla špatně. Problém je, když do ní tým začne házet zákaznické exporty, obchodní smlouvy, interní incidenty a osobní údaje jen proto, že prompt box vypadá nevinně.
+
+Privacy-first přístup k AI znamená jednoduchou věc: nejdřív rozhodni, co asistent smí vědět, a teprve potom řeš, co všechno by mohl umět. Evropská komise u AI Actu zdůrazňuje risk-based přístup, transparentnost a odpovědné používání AI systémů. EDPB zároveň drží dlouhodobou linku privacy by design a by default. Přeloženo do provozu malého SaaS: AI workflow má mít hranice, auditovatelnost a lidské rozhodnutí tam, kde výstup ovlivňuje zákazníka, peníze nebo práva lidí.
+
+### 1) Rozděl AI použití podle citlivosti
+
+Ne každá AI úloha má stejné riziko. Překlad veřejného článku je něco jiného než analýza zákaznických tiketů s osobními údaji.
+
+Praktické rozdělení:
+
+- **Nízké riziko:** brainstorming veřejného obsahu, přepis vlastních poznámek bez osobních údajů, návrhy struktury článků, kontrola tónu textu.
+- **Střední riziko:** interní dokumentace, produktové specifikace, anonymizované zákaznické vzory, návrhy odpovědí supportu bez přímého odeslání.
+- **Vysoké riziko:** osobní údaje, zdravotní nebo finanční data, pracovní hodnocení, bezpečnostní incidenty, neveřejné smlouvy, přístupové údaje, produkční databáze.
+
+U nízkého rizika často stačí rozumná pravidla. U středního rizika už chceš schválené nástroje, jasné logování a anonymizaci. U vysokého rizika se ptej tvrdě: opravdu potřebujeme poslat tato data externímu modelu, nebo jde úlohu vyřešit lokálně, syntetickými daty, agregací, ruční revizí nebo menším nástrojem?
+
+### 2) Napiš AI pravidla na jednu stránku
+
+Dokument nemusí být právní beton. Má být srozumitelný člověku, který ve středu v 16:47 potřebuje vědět, jestli může vložit zákaznický ticket do asistenta.
+
+Šablona:
+
+| Oblast | Pravidlo | Příklad |
+| --- | --- | --- |
+| Veřejný obsah | Povoleno bez osobních údajů | Osnova článku, SEO titulky, kontrola čitelnosti |
+| Zákaznická komunikace | Jen anonymizovaně a s lidskou kontrolou | „Uživatel A se ptá na fakturaci“, ne celé jméno a e-mail |
+| Kód | Povoleno bez tajemství | Funkce, test, refaktor; nikdy `.env`, tokeny ani produkční dump |
+| Interní strategie | Jen schválené nástroje | Roadmapa, pricing, obchodní poznámky |
+| Citlivá data | Zakázáno bez výslovného posouzení | Osobní údaje, smlouvy, incidenty, přístupy |
+
+Důležité je, aby pravidla řešila i výstup. AI může navrhnout odpověď zákazníkovi, ale nemá ji automaticky odeslat bez kontroly. AI může shrnout incident, ale nemá rozhodnout, komu se má právně hlásit. AI může pomoct s pricingem, ale nemá sama měnit ceník. Ano, roboti zase nedostali klíče od produkce. Smutný den pro Skynet, dobrý den pro zákazníky.
+
+### 3) Minimalizuj vstup: prompt jako datový export
+
+Každý prompt ber jako malý datový export. Neřeš jen, co chceš dostat zpět. Řeš, co odchází ven.
+
+Před vložením dat do AI se zeptej:
+
+- Obsahuje prompt jméno, e-mail, telefon, IP adresu, adresu nebo zákaznické ID?
+- Obsahuje prompt smlouvu, fakturu, interní strategii nebo neveřejné obchodní podmínky?
+- Obsahuje prompt token, API klíč, cookie, privátní URL nebo konfiguraci produkce?
+- Stačí místo reálných dat syntetický příklad?
+- Stačí agregace: „12 zákazníků zmínilo problém s exportem“, ne celé tickety?
+- Je výstup určený pro člověka ke kontrole, nebo se má použít automaticky?
+
+Praktický vzor anonymizace:
+
+```text
+Špatně: Jan Novák z novak@example.cz má problém s fakturou 2026-1045 a píše: „...“
+Lépe: Zákazník z malého B2B účtu má problém s duplicitní fakturou. Kontext: platba proběhla, systém ukazuje nezaplaceno. Navrhni empatickou odpověď a interní checklist ověření.
+```
+
+### 4) Zaveď lidskou kontrolu podle dopadu
+
+Čím větší dopad na zákazníka, tím víc lidské kontroly. Ne kvůli nedůvěře k AI, ale kvůli odpovědnosti. Malý tým si nemůže dovolit reputační požár jen proto, že model sebevědomě vymyslel slevu, právní závazek nebo technickou nepravdu.
+
+Jednoduché pravidlo:
+
+- **Interní návrh:** AI může generovat, člověk čte podle potřeby.
+- **Zákaznická odpověď:** AI může navrhnout, člověk schvaluje.
+- **Automatizovaná akce:** AI pouze v omezeném sandboxu a s logem rozhodnutí.
+- **Bezpečnost, právo, finance:** AI pomáhá připravit podklady, finální rozhodnutí dělá odpovědný člověk.
+
+Do logu si ukládej aspoň: účel, typ dat, použitý nástroj, kdo výstup schválil a jestli se výstup použil navenek. Ne kvůli byrokracii. Kvůli tomu, že až se někdo zeptá „proč jsme to udělali?“, nechceš odpovídat „protože chatbot působil přesvědčivě“. To je argumentační úroveň mokrého ubrousku.
+
+### 5) Vyber nástroj podle provozu, ne podle hype
+
+Při výběru AI nástroje pro evropský privacy-first provoz neptej se jen „jak dobrý je model“. Ptej se:
+
+- Kde se zpracovávají data a jaký právní rámec dodavatel nabízí?
+- Používá dodavatel vstupy pro trénink, ladění nebo evaluaci?
+- Dá se vypnout ukládání historie nebo nastavit retence?
+- Má tým admin kontrolu, audit logy a možnost odebrat přístup?
+- Existuje export nebo smazání dat?
+- Umí nástroj pracovat s oddělenými pracovními prostory pro klienty nebo projekty?
+- Má dodavatel jasné podmínky pro subdodavatele?
+
+Privacy-first volba nemusí vždy znamenat nejméně pohodlný nástroj. Znamená ale, že pohodlí není omluva pro datový chaos. Nejlepší AI stack pro malý tým je takový, který lidé opravdu používají, ale který zároveň nedělá z každého promptu malý výlet osobních údajů po internetu.
+
+### Checklist pro AI asistenta v malém týmu
+
+- [ ] Máme jednu stránku pravidel: co se do AI smí a nesmí vkládat.
+- [ ] Tým rozlišuje nízké, střední a vysoké riziko použití.
+- [ ] Do promptů nedáváme tajemství, přístupy, produkční dumpy ani zbytečné osobní údaje.
+- [ ] Pro zákaznické tickety používáme anonymizaci nebo agregaci.
+- [ ] Výstupy směrem k zákazníkům kontroluje člověk.
+- [ ] Kritické oblasti jako právo, finance, bezpečnost a HR mají přísnější schvalování.
+- [ ] U schválených AI nástrojů známe region, retenci, tréninkové použití dat a subdodavatele.
+- [ ] Máme postup, jak odebrat přístup členovi týmu a exportovat nebo smazat data.
+- [ ] Každé čtvrtletí projdeme, jestli pravidla odpovídají reálnému používání.
+
+**Codyho komentář:** AI v malém týmu je nejlepší jako chytrý praktikant s turbo módem: umí hodně pomoct, ale nemá sedět sám u smluv, databáze a tlačítka „odeslat všem“. Dej mu jasné mantinely a bude z něj násobič výkonu. Nedávej mu mantinely a bude z něj generátor velmi rychlých problémů.
+
+---
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -1575,6 +1672,7 @@ Pro kritické dodavatele si napiš krátký scénář „co kdyby zítra přesta
 - European Data Protection Board: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_de)
 - European Data Protection Board: [Guidelines 07/2020 on the concepts of controller and processor in the GDPR](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en)
 - European Commission: [Data Act](https://digital-strategy.ec.europa.eu/en/policies/data-act)
+- European Commission: [AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
 - European Commission: [NIS2 Directive](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive)
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
 - Google Analytics Help: [URL builders — Collect campaign data with custom URLs](https://support.google.com/analytics/answer/10917952?hl=en-uk)
@@ -1595,6 +1693,7 @@ Pro kritické dodavatele si napiš krátký scénář „co kdyby zítra přesta
 
 ## Pracovní log
 
+- **2026-10-11:** Přidána příloha F o bezpečném používání AI asistenta v malém týmu: klasifikace rizik, pravidla pro prompty, anonymizace, lidská kontrola a výběr nástroje podle privacy-first provozu.
 - **2026-10-11:** Přidána příloha E s exit plánem od dodavatelů: kritičnost služeb, exporty, fallbacky, omezení vendor lock-inu, krizový scénář a checklist.
 - **2026-10-11:** Přidána příloha D s onboarding auditem pro první týden v SaaS: první hodnotná akce, minimalizace polí, privacy-first měření, e-mailová sekvence a praktický checklist.
 - **2026-10-11:** Přidána příloha C s měřicím plánem pro privacy-first kampaně, UTM slovníkem, šablonou vyhodnocení a checklistem bez osobních údajů v URL.
