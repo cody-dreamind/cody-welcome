@@ -1342,6 +1342,130 @@ Nesnaž se optimalizovat všechno najednou. Když změníš nadpis, CTA, cílovk
 
 ---
 
+## Příloha D: Onboarding audit pro první týden v SaaS
+
+Onboarding je první opravdový test produktu. Marketing může slíbit hodnotu, sales ji může vysvětlit a landing page ji může hezky zabalit. Ale první týden ukáže, jestli uživatel skutečně pochopí, co má udělat, proč se mu to vyplatí a jestli se chce vrátit.
+
+Privacy-first onboarding má navíc jednu výhodu: nutí tě vysvětlit hodnotu dřív, než začneš sbírat data. Pokud nevíš, proč se ptáš na firmu, telefon, velikost týmu, fakturační údaje nebo integrace, pravděpodobně se ptáš moc brzy.
+
+### 1) Definuj první hodnotnou akci
+
+První hodnotná akce není „uživatel dokončil registraci“. Registrace je vstupenka, ne výsledek. První hodnotná akce je moment, kdy uživatel poprvé pocítí, že produkt řeší jeho problém.
+
+Příklady:
+
+- účetní SaaS: uživatel vystaví první testovací fakturu,
+- rezervační nástroj: uživatel vytvoří první službu a získá veřejný rezervační odkaz,
+- analytický produkt: uživatel vloží měřicí kód a uvidí první návštěvu,
+- interní AI nástroj: uživatel nahraje dokument a dostane použitelnou odpověď,
+- CRM: uživatel importuje první kontakt a naplánuje další krok.
+
+Jakmile tuhle akci pojmenuješ, onboarding se přestane tvářit jako prohlídka všech funkcí. Stane se z něj nejkratší férová cesta k výsledku.
+
+**Codyho komentář:** Pokud onboarding ukazuje deset funkcí před první hodnotou, není to onboarding. Je to komentovaná prohlídka skladu. Sklad může být krásný, ale zákazník přišel pro hotový stůl.
+
+### 2) Odstraň pole, která nejsou potřeba teď
+
+Každé pole v registraci nebo prvním nastavení má svoji cenu. Nejen psychologickou, ale i provozní: musíš ho vysvětlit, zabezpečit, mazat, exportovat a udržovat v mapě dat.
+
+Praktické pravidlo:
+
+- **Nutné pro účet:** e-mail, heslo nebo bezpečný login, souhlas s podmínkami, případně název organizace.
+- **Nutné pro hodnotu:** jen data, bez kterých nejde dokončit první hodnotnou akci.
+- **Nutné později:** fakturační údaje, integrace, role, tým, detailní profil, marketingové preference.
+- **Podezřelé:** telefon, velikost firmy, rozpočet, pozice, zdroj návštěvy jako povinné pole, pokud nejsou nutné pro slíbený výsledek.
+
+Příklad: Pokud produkt pomáhá vytvořit veřejný rezervační odkaz, nepotřebuje hned fakturační adresu. Tu potřebuje až ve chvíli, kdy uživatel vybírá placený tarif. Pokud produkt potřebuje název firmy pro vytvoření pracovního prostoru, vysvětli to přímo u pole: „Použijeme jen pro název pracovního prostoru, později ho můžeš změnit.“
+
+### 3) Udělej onboarding jako sekvenci rozhodnutí
+
+Dobrý onboarding není dlouhý formulář. Je to sled malých kroků, kde každý krok má jasný důvod.
+
+Šablona sekvence:
+
+1. **Vítej a potvrď slib:** „Za 5 minut vytvoříš první rezervační stránku.“
+2. **Vyber minimální kontext:** typ podnikání, jazyk, měna nebo šablona — jen pokud to urychlí výsledek.
+3. **Doplň první obsah:** název služby, cena, délka, popis, první dokument nebo první kontakt.
+4. **Ukaž náhled výsledku:** veřejný odkaz, náhled faktury, odpověď AI, dashboard.
+5. **Nabídni další krok:** pozvat kolegu, propojit doménu, nastavit platby, přidat integraci.
+
+Každý krok by měl mít jednu hlavní akci a jednu únikovou cestu. Úniková cesta může být „přeskočit“, „vyplnit později“ nebo „ukázat demo data“. Pokud uživatel nemá data po ruce, nemá kvůli tomu skončit.
+
+### 4) Měř onboarding bez šmírování
+
+Onboarding se dá měřit i bez nahrávání obrazovky, heatmap třetích stran a osobních profilů plných detailů. Pro začátek stačí agregované události a jasná definice funnelu.
+
+Minimální události:
+
+- `signup_started`
+- `signup_completed`
+- `workspace_created`
+- `first_value_action_completed`
+- `invite_sent`
+- `trial_payment_step_started`
+- `support_requested`
+
+U každé události si napiš:
+
+- proč ji měříš,
+- jaké rozhodnutí podle ní uděláš,
+- zda je navázaná na účet nebo stačí agregace,
+- jak dlouho ji držíš,
+- kdo k ní má přístup.
+
+Příklad rozhodnutí: „Pokud méně než polovina nových účtů dokončí první hodnotnou akci do 24 hodin, zjednodušíme krok s importem dat nebo přidáme demo data.“ To je lepší než obecné „budeme sledovat engagement“, což zní sofistikovaně, ale často znamená „budeme sbírat všechno a doufat, že tabulka promluví“.
+
+### 5) Připrav první e-maily bez nátlaku
+
+E-mail v onboardingu má pomáhat, ne tlačit uživatele do paniky. Pokud uživatel nedokončil nastavení, neposílej mu „poslední šance!!!“ po dvou hodinách. Pošli mu konkrétní pomoc.
+
+Jednoduchá sekvence:
+
+1. **Ihned po registraci:** potvrzení účtu, odkaz zpět do produktu, jeden hlavní další krok.
+2. **Po 24 hodinách bez první hodnotné akce:** krátká pomoc s nejčastější překážkou a možnost odpovědět na e-mail.
+3. **Po dokončení první hodnotné akce:** gratulace, vysvětlení dalšího kroku a odkaz na krátký návod.
+4. **Před koncem trialu:** férové shrnutí hodnoty, co zůstane po přechodu na placený tarif a jak exportovat data, pokud uživatel nechce pokračovat.
+
+Privacy-first detail: do e-mailů nedávej citlivé údaje, interní ID, tokeny ani zbytečné tracking pixely. Pokud měříš proklik, vysvětli si proč. U transakčních zpráv často stačí vědět, že byly doručené, ne sledovat každé otevření jako detektiv v kabátu.
+
+### 6) Onboarding audit na 45 minut
+
+Vezmi nový testovací účet a projdi produkt jako člověk, který o něm ví jen to, co je na landing page. Ne jako zakladatel. Zakladatel zná všechny skryté chodby. Nový uživatel vidí jen dveře a nápisy.
+
+Postup:
+
+1. Otevři landing page a napiš jednou větou, jaký výsledek čekáš.
+2. Spusť registraci a stopuj čas do první hodnotné akce.
+3. Zapiš každé pole, které neumíš obhájit jednou větou.
+4. Zapiš každý moment, kdy nevíš, co bude dál.
+5. Zkontroluj první tři e-maily: jsou užitečné, krátké a bez nátlaku?
+6. Zkontroluj, jestli lze účet ukončit nebo data exportovat bez hledání pokladu.
+7. Vyber jednu překážku a oprav ji tento týden.
+
+Výstup auditu by neměl být pětistránkový dokument. Stačí tabulka:
+
+| Krok | Problém | Dopad | Oprava | Vlastník | Termín |
+|---|---|---:|---|---|---|
+| Registrace | Povinný telefon bez vysvětlení | vysoký | přesunout do volitelného kroku po aktivaci | produkt | pátek |
+| Import dat | Chybí demo data | střední | přidat ukázkový dataset | vývoj | příští sprint |
+| E-mail 2 | Příliš prodejní tón | nízký | přepsat na pomocný návod | marketing | středa |
+
+### Checklist pro onboarding prvního týdne
+
+- [ ] Máme jasně pojmenovanou první hodnotnou akci.
+- [ ] Registrace obsahuje jen pole nutná pro účet a první hodnotu.
+- [ ] Každý krok onboardingu má jeden hlavní úkol a jasný důvod.
+- [ ] Uživatel může přeskočit data, která nemá po ruce.
+- [ ] Měříme agregované události, které vedou ke konkrétním rozhodnutím.
+- [ ] E-maily pomáhají dokončit hodnotu, ne jen tlačí na upgrade.
+- [ ] Trial končí férově: uživatel ví, co se stane s účtem a daty.
+- [ ] Existuje jednoduchá cesta k exportu nebo ukončení účtu.
+- [ ] Každý měsíc opravíme aspoň jednu překážku z onboarding auditu.
+
+**Codyho komentář:** Onboarding je produkt v miniatuře. Když je zmatený, invazivní a netrpělivý, produkt bude působit stejně. Když je klidný, jasný a férový, uživatel má pocit, že někdo konečně přemýšlel i za něj. Luxusní pocit. Doporučuju prodávat.
+
+---
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -1376,6 +1500,7 @@ Nesnaž se optimalizovat všechno najednou. Když změníš nadpis, CTA, cílovk
 
 ## Pracovní log
 
+- **2026-10-11:** Přidána příloha D s onboarding auditem pro první týden v SaaS: první hodnotná akce, minimalizace polí, privacy-first měření, e-mailová sekvence a praktický checklist.
 - **2026-10-11:** Přidána příloha C s měřicím plánem pro privacy-first kampaně, UTM slovníkem, šablonou vyhodnocení a checklistem bez osobních údajů v URL.
 - **2026-10-11:** Přidána příloha B se šablonou privacy-first landing page, vzorem hero sekce, formulářovými pravidly a checklistem před spuštěním.
 - **2026-10-11:** Přidána příloha A s 30denním akčním plánem pro zavedení privacy-first webu nebo SaaS v malém týmu.
