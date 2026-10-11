@@ -21,6 +21,7 @@ Praktický český e-book od Codyho z Dreamindu pro malé firmy, zakladatele Saa
 6. **Produktivita zakladatele a týmu** — rozhodovací systémy, automatizace, AI asistenti a provozní rytmus.
 7. **Provoz v Evropě** — dodavatelé, smlouvy, incidenty, bezpečnost a exit plán.
 8. **Checklisty a šablony** — audit webu, launch checklist, privacy review, marketingový plán.
+9. **Přílohy** — praktické šablony pro kampaně, onboarding, dodavatele, AI, changelog a obsahový systém.
 
 ---
 
@@ -1747,6 +1748,126 @@ Nemusíš mít perfektní proces jako velká firma. Stačí rytmus, který se d�
 - [ ] E-mail se používá střídmě: jen pro zásadní změny, povinné informace nebo dobrovolný souhrn.
 - [ ] Sociální sítě pouze odkazují na vlastní zdroj, nejsou jediným archivem produktových změn.
 
+---
+
+## Příloha H: Redakční systém obsahu, který nevyhoří po třech týdnech
+
+Obsahový marketing často selže ne proto, že tým neumí psát, ale proto, že si vytvoří publikační fabriku bez jasného účelu. Malý SaaS tým nepotřebuje třicet článků měsíčně. Potřebuje pravidelně odpovídat na otázky, které zákazníci opravdu řeší před nákupem, během onboardingu a při rozhodování, jestli zůstat.
+
+Google ve svých doporučeních zdůrazňuje užitečný, spolehlivý obsah psaný pro lidi, ne primárně pro vyhledávač. To je dobrá zpráva pro privacy-first týmy: nemusíš budovat agresivní trackingový cirkus, abys psal obsah, který pomáhá rozhodování. Potřebuješ znalost zákazníků, čistou strukturu, přímé odkazy, RSS a měření na úrovni agregovaných trendů.
+
+### 1) Udělej obsahové pilíře podle rozhodnutí zákazníka
+
+Místo kategorií typu „Novinky“, „Tipy“ a „Blog“ si napiš rozhodovací situace. Každý pilíř má odpovídat na jednu obchodně důležitou otázku.
+
+Praktický příklad pro B2B SaaS:
+
+- **Pochopení problému:** „Proč nám ruční evidence zakázek přestává stačit?“
+- **Výběr řešení:** „Kdy stačí tabulka a kdy už dává smysl SaaS?“
+- **Důvěra a provoz:** „Kde běží data, kdo k nim má přístup a jak je zálohujeme?“
+- **Onboarding:** „Jak nastavit první proces za 30 minut?“
+- **Retence:** „Jak poznat, že nám nástroj reálně šetří čas?“
+
+Každý pilíř by měl mít jeden hlavní evergreen článek, několik praktických návodů a jednu stránku s odpověďmi na námitky. Evergreen není článek, který nikdy nezestárne. Je to článek, u kterého máš proces aktualizace.
+
+**Codyho komentář:** Když nevíš, kam článek patří v rozhodování zákazníka, pravděpodobně píšeš obsahovou vatu. Vata patří do polštáře, ne do marketingu.
+
+### 2) Zaveď redakční kartu před psaním
+
+Než někdo začne psát, vyplň jednu krátkou kartu. Ušetří to revize, hádky i články, které sice zní chytře, ale nikomu nepomůžou.
+
+Šablona redakční karty:
+
+```markdown
+## Název pracovně
+
+## Pro koho to je
+- Segment:
+- Úroveň znalostí:
+- Situace, ve které článek čte:
+
+## Rozhodnutí, ke kterému má pomoct
+
+## Primární dotaz nebo problém
+
+## Co musí čtenář po přečtení umět
+-
+-
+-
+
+## Důkaz a zdroje
+- Interní zkušenost:
+- Externí zdroje:
+- Co je názor a musí být označeno:
+
+## Privacy-first kontrola
+- Nepoužíváme osobní údaje v URL ani příkladech.
+- Nevkládáme externí embed, pokud stačí přímý odkaz.
+- Měření úspěchu je agregované.
+```
+
+Tahle karta je malá brzda. A přesně proto funguje. Nutí tým říct, komu pomáhá, jaký je důkaz a kde končí fakt a začíná názor.
+
+### 3) Publikační rytmus: méně frekvence, víc údržby
+
+Malý tým si často nastaví rytmus „každý týden článek“ a po měsíci zjistí, že publikuje pod tlakem. Lepší je jednoduchý cyklus:
+
+1. **Týden 1:** jeden nový praktický článek.
+2. **Týden 2:** aktualizace staršího článku podle nových dotazů, změn produktu nebo zdrojů.
+3. **Týden 3:** případová studie, checklist nebo šablona.
+4. **Týden 4:** redakční review: co přivedlo užitečnou návštěvnost, co zodpovědělo support dotazy a co je potřeba sloučit.
+
+Tím nevzniká jen blog. Vzniká znalostní báze, kterou může používat marketing, sales, support i produkt. Každý článek by měl mít vlastní kanonickou URL, aktualizované datum a jasný další krok: stáhnout checklist, přečíst související návod, otevřít dokumentaci nebo kontaktovat tým.
+
+### 4) Distribuce bez závislosti na algoritmech
+
+Privacy-first obsah by měl být snadno dostupný bez povinného přihlášení, sledovacích pixelů a sociálních skriptů. To neznamená ignorovat sociální sítě. Znamená to, že sociální sítě nejsou archiv ani primární infrastruktura.
+
+Doporučený distribuční mix:
+
+- **RSS feed:** stabilní kanál pro čtenáře, partnery i interní automatizace.
+- **Přímý newsletter:** pouze pro lidi, kteří ho chtějí; bez skrytých trackingových parametrů v každém odkazu.
+- **LinkedIn nebo Mastodon post:** krátký komentář a odkaz na vlastní kanonickou stránku.
+- **Produktová dokumentace:** odkazy na relevantní články v místech, kde zákazník řeší konkrétní problém.
+- **Sales a support šablony:** jeden interní seznam článků podle typických otázek.
+
+Když publikuješ jen na cizí platformě, půjčuješ si pozornost. Když publikuješ u sebe a cizí platformy používáš jako rozcestník, buduješ aktivum.
+
+### 5) Měření obsahu bez sledování lidí
+
+Obsah nepotřebuje znát identitu každého čtenáře. Ve většině malých týmů stačí odpovědět na pět otázek:
+
+- Které stránky získávají organickou návštěvnost?
+- Které články lidé čtou před konverzí?
+- Které články snižují opakované support dotazy?
+- Které články se pravidelně posílají zákazníkům ručně?
+- Které články jsou zastaralé a škodí důvěře?
+
+Měř agregovaně. Kombinuj privacy-friendly analytiku, Search Console data, interní poznámky ze sales/supportu a jednoduchý měsíční review dokument. UTM parametry používej pro kampaně, ne jako skládku osobních údajů. Do URL nikdy nedávej e-mail, jméno, firmu, telefon ani interní identifikátor zákazníka.
+
+### 6) Aktualizační protokol pro evergreen články
+
+Každý důležitý evergreen článek by měl mít malý provozní protokol:
+
+- **Vlastník:** kdo ručí za věcnou správnost.
+- **Interval review:** měsíčně, kvartálně nebo při změně produktu/regulace.
+- **Seznam zdrojů:** odkazy na dokumentaci, zákony, metodiky nebo interní rozhodnutí.
+- **Poslední kontrola:** datum a stručný popis změny.
+- **Rizikové části:** ceny, právní povinnosti, nástrojové funkce, benchmarky a integrace.
+
+Když článek obsahuje právní, cenové nebo technické tvrzení, neber ho jako hotový text. Ber ho jako závazek k údržbě. Zastaralý článek někdy škodí víc než žádný článek, protože působí důvěryhodně právě ve chvíli, kdy už pravdu nemá.
+
+### Checklist pro redakční systém malého SaaS týmu
+
+- [ ] Máme 3–5 obsahových pilířů podle rozhodnutí zákazníka, ne podle interních kategorií.
+- [ ] Každý nový článek má redakční kartu s cílovým čtenářem, rozhodnutím, zdroji a privacy kontrolou.
+- [ ] Evergreen články mají vlastníka, interval revize a datum poslední aktualizace.
+- [ ] RSS feed je dostupný a odkazovaný z webu.
+- [ ] Sociální sítě používáme jako distribuci, ne jako jediný archiv obsahu.
+- [ ] Úspěch měříme agregovaně: organická návštěvnost, konverzní asistence, support dopad a ruční sdílení.
+- [ ] Do URL, UTM parametrů ani příkladů v článcích nedáváme osobní údaje.
+- [ ] Každý článek má jasný další krok, ale nenutí člověka do zbytečného formuláře.
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -1766,6 +1887,7 @@ Nemusíš mít perfektní proces jako velká firma. Stačí rytmus, který se d�
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
 - Google Analytics Help: [URL builders — Collect campaign data with custom URLs](https://support.google.com/analytics/answer/10917952?hl=en-uk)
 - Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
+- Google Search Console Help: [Performance report](https://support.google.com/webmasters/answer/7576553)
 - Google Search Central: [Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
 - Google Search Central: [Using generative AI content on your website](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content)
 - Keep a Changelog: [Keep a Changelog](https://keepachangelog.com/en/)
@@ -1784,6 +1906,7 @@ Nemusíš mít perfektní proces jako velká firma. Stačí rytmus, který se d�
 
 ## Pracovní log
 
+- **2026-10-11:** Přidána příloha H o redakčním systému obsahu: obsahové pilíře podle rozhodnutí zákazníka, redakční karta, publikační rytmus, distribuce přes vlastní kanály a privacy-first měření.
 - **2026-10-11:** Přidána příloha G o changelogu a release notes: rozdíl mezi interním a zákaznickým zápisem, kanonická stránka, RSS, šablona položky, release rytmus a checklist pro privacy-first komunikaci změn.
 - **2026-10-11:** Přidána příloha F o bezpečném používání AI asistenta v malém týmu: klasifikace rizik, pravidla pro prompty, anonymizace, lidská kontrola a výběr nástroje podle privacy-first provozu.
 - **2026-10-11:** Přidána příloha E s exit plánem od dodavatelů: kritičnost služeb, exporty, fallbacky, omezení vendor lock-inu, krizový scénář a checklist.
