@@ -67136,6 +67136,198 @@ Výsledek je pořád rychlý. Jen už nestojí na kouzelném admin tlačítku a 
 - OWASP Logging Cheat Sheet — doporučení k událostem, ochraně logů a omezení citlivých dat v logování: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - EUR-Lex — GDPR, čl. 5 o principech zpracování osobních údajů včetně minimalizace, omezení účelu, omezení uložení a důvěrnosti: https://eur-lex.europa.eu/eli/reg/2016/679/oj
 
+
+
+## Příloha: SLI a SLO pro malý SaaS bez enterprise mlhy a falešných devítek
+
+Dostupnost se v malém SaaS často řeší dvěma extrémy. Buď nikdo neměří nic a provozní realita se pozná podle toho, že zákazník napíše naštvaný e-mail. Nebo tým slíbí „99,99 % uptime“, protože to vypadá hezky v ceníku, a teprve potom zjistí, že neví, co přesně tím měří, jaké výpadky se počítají a kdo ponese následky.
+
+SLI a SLO jsou způsob, jak z provozní mlhy udělat praktický jazyk. Nejsou jen pro obří SRE týmy. Malému SaaS pomáhají říct: které chování produktu je pro zákazníka kritické, jak ho měříme, jaký cíl je realistický a kdy zpomalíme vývoj novinek, protože stabilita právě dostala facku.
+
+> Codyho komentář: „Máme monitoring“ není odpověď. To je jako říct „máme kuchyň“, když se někdo ptá, jestli je večeře jedlá.
+
+### SLI, SLO a SLA lidsky
+
+SLI je indikátor. Metrika, která popisuje kvalitu služby z pohledu uživatele nebo zákazníka. Například procento úspěšných požadavků, latence načtení dashboardu, úspěšnost vytvoření faktury nebo čas doručení webhooku.
+
+SLO je cíl pro SLI. Například „99,5 % požadavků na API za 30 dní skončí úspěchem do 800 ms“ nebo „99 % transakčních e-mailů odešleme do 2 minut“. SLO je interní nebo veřejné očekávání, podle kterého řídíš práci.
+
+SLA je smluvní dohoda s důsledkem. Pokud ji nesplníš, může vzniknout kredit, sleva, právo na ukončení smlouvy nebo jiný závazek. SLA tedy nepiš z marketingové radosti. Je to obchodní a právní závazek, ne samolepka na landing page.
+
+Praktický rozdíl:
+
+```text
+SLI: Podíl úspěšných přihlášení.
+SLO: 99,5 % přihlášení za posledních 30 dní proběhne úspěšně do 2 sekund.
+SLA: Pokud měsíční dostupnost služby klesne pod smluvní hranici, zákazník má nárok na kredit podle smlouvy.
+```
+
+Pro malý SaaS je zdravé začít interními SLO a teprve později promyslet SLA. SLO ti pomáhá řídit kvalitu. SLA ti přidává závazek. Přeskakovat rovnou na SLA je jako podepsat maraton dřív, než víš, jestli máš boty.
+
+### Vyber jen několik signálů
+
+Nejčastější chyba je měřit všechno, co monitoring umí vyplivnout. CPU, RAM, počet requestů, velikost fronty, průměrná latence, p95, p99, chybovost, uptime, počet ticketů, délka deploye, počet káv ve sprintu. Výsledkem není lepší provoz, ale metrická mlha.
+
+Začni třemi až pěti SLI podle kritické cesty zákazníka.
+
+Pro B2B SaaS to může být:
+
+- přihlášení uživatele,
+- načtení hlavního dashboardu,
+- vytvoření klíčového objektu, například zakázky nebo kampaně,
+- doručení webhooku nebo transakčního e-mailu,
+- export dat zákazníka.
+
+Každé SLI má odpovědět na otázku: poznal by zákazník problém, kdyby se tato věc zhoršila? Pokud ne, je to možná užitečná technická metrika, ale ne SLI pro produktové rozhodování.
+
+### Příklad SLO pro malý B2B SaaS
+
+Příklad pro agenturní SaaS, kde zákazníci spravují projekty a reporty:
+
+```text
+Služba: Projektový dashboard
+Uživatelův úkol: Otevřít přehled aktivních projektů
+SLI: Podíl úspěšných načtení dashboardu bez serverové chyby do 1,5 sekundy
+SLO: 99 % načtení za 30denní okno splní SLI
+Měřicí bod: serverová odpověď pro endpoint /dashboard + aplikační kontrola prázdných chybných stavů
+Nezapočítáváme: požadavky z interního stagingu, známé boty, zrušené požadavky klientem
+Započítáváme: chyby 5xx, timeouty, prázdný dashboard způsobený backendem
+Akce při porušení: zastavit méně důležité feature releasy, opravit největší zdroj chyb a doplnit postmortem poznámku
+```
+
+Všimni si dvou detailů. Zaprvé, SLO není jen číslo. Obsahuje i měřicí bod, výjimky a reakci. Zadruhé, nejde o absolutní dokonalost. Cílem není nikdy nespadnout. Cílem je mít domluvenou hranici, za kterou už tým neříká „to se stává“, ale mění prioritu práce.
+
+### Error budget bez tabulkové magie
+
+Error budget je prostor pro chyby, který zůstává mezi realitou a cílem. Když máš SLO 99 % za 30 dní, dovoluješ si zhruba 1 % nesplněných požadavků v daném okně. Když budget mizí rychleji, než čekáš, produkt musí zpomalit rizikové změny.
+
+Jednoduché pravidlo pro malý tým:
+
+- budget zdravý: pokračujeme v plánovaných releasích,
+- budget napůl pryč: nové rizikové změny mají extra kontrolu,
+- budget téměř pryč: priorita je stabilita, ne nové fíčury,
+- budget vyčerpaný: freeze rizikových změn, oprava příčin, krátké postmortem.
+
+Není potřeba budovat velkou SRE ceremonii. Stačí týdenní kontrola: které SLO se zhoršuje, proč, co zastavíme a co opravíme. Důležité je, aby error budget ovlivňoval rozhodování. Pokud číslo nikdo nepoužije, je to jen dekorace v Grafaně.
+
+### Privacy-first měření SLI
+
+SLI se dá měřit bez toho, aby se z produktu stal sledovací vysavač. Pro provozní spolehlivost často nepotřebuješ jméno uživatele, e-mail, obsah zakázky ani celý request body.
+
+Privacy-first pravidla:
+
+- měř technický výsledek akce, ne osobní profil uživatele,
+- používej agregace a krátké retenční lhůty pro provozní metriky,
+- do metrik neposílej obsah zákaznických dat,
+- tenant identifikátor hashuj nebo nahraď interním technickým ID, pokud stačí agregovaný pohled,
+- odděl provozní metriky od marketingové analytiky,
+- zákazníkům vysvětli, že provozní měření slouží ke spolehlivosti a bezpečnosti služby.
+
+Příklad dobrého eventu:
+
+```text
+event: dashboard_load
+result: success | server_error | timeout
+latency_bucket: <500ms | 500-1500ms | 1500-3000ms | >3000ms
+tenant_plan: team | business | enterprise
+region: eu-central
+```
+
+Příklad špatného eventu:
+
+```text
+event: dashboard_load
+user_email: jana@example.com
+project_name: Akvizice klienta XY
+full_url_with_query: /dashboard?client=...
+request_body: {...}
+session_token: ...
+```
+
+První varianta pomáhá řídit spolehlivost. Druhá vyrábí zbytečné riziko, které ti při incidentu poděkuje velmi jedovatým způsobem.
+
+### Jak SLO zavést bez velkého týmu
+
+Začni jedním produktem a jednou kritickou cestou. Nepiš rovnou katalog všech služeb.
+
+První dvoutýdenní postup:
+
+1. Vyber jednu zákaznicky kritickou akci.
+2. Popiš dobrý a špatný výsledek z pohledu zákazníka.
+3. Najdi nejbližší měřicí bod, který už existuje.
+4. Nastav první pracovní SLO spíš realisticky než hrdinsky.
+5. Sleduj ho 30 dní bez smluvních slibů.
+6. Zapiš, jaké chyby do něj patří a jaké ne.
+7. Domluv reakci při porušení.
+8. Po měsíci uprav definici podle reality.
+
+Důležité: první SLO nemusí být dokonalé. Musí být použitelné. Horší než nedokonalé SLO je jen dokonalý dokument, který nikdo nikdy nepoužije.
+
+### Kdy SLO nepublikovat veřejně
+
+Ne každé interní SLO patří na web. Veřejné cíle dávají smysl, když jim rozumíš, umíš je vysvětlit a dokážeš je dlouhodobě měřit. Jinak si vyrábíš očekávání, které později bolí.
+
+Interně si nech:
+
+- experimentální SLO pro nové funkce,
+- metriky, které ještě nemají stabilní měření,
+- SLO navázané na interní architekturu,
+- cíle pro funkce v betě,
+- metriky, které by mohly prozradit zbytečně mnoho o infrastruktuře.
+
+Veřejně můžeš ukázat:
+
+- historickou dostupnost služby,
+- status page s incidenty,
+- obecný závazek k transparentní komunikaci,
+- vybraná SLA jen tam, kde jsou promyšlené obchodně i technicky.
+
+Privacy-first poznámka: status page nemá odhalovat interní názvy databází, přesné chyby bezpečnostních kontrol ani detaily tenantů. Zákazník potřebuje vědět dopad a stav řešení, ne mapu tvého backendu.
+
+### Checklist SLI/SLO
+
+- [ ] Máme vybranou kritickou zákaznickou cestu.
+- [ ] SLI měří chování, které zákazník opravdu pozná.
+- [ ] SLO obsahuje měřicí okno, cíl a výjimky.
+- [ ] Víme, co uděláme při porušení SLO.
+- [ ] Error budget ovlivňuje priority releasů.
+- [ ] Metriky neobsahují obsah zákaznických dat ani tajemství.
+- [ ] Provozní metriky mají jasnou retenci.
+- [ ] Interní SLO nemícháme bez rozmyslu se smluvním SLA.
+- [ ] Status komunikace popisuje dopad, ne interní chaos.
+- [ ] Definice SLO má vlastníka a datum další revize.
+
+### Vyplnitelná karta
+
+```text
+# SLI/SLO karta
+
+Služba nebo funkce:
+Kritická cesta zákazníka:
+Co uživatel považuje za úspěch:
+Co uživatel považuje za selhání:
+SLI:
+SLO:
+Měřicí okno:
+Měřicí bod:
+Započítáváme:
+Nezapočítáváme:
+Error budget pravidlo:
+Akce při porušení:
+Privacy rizika měření:
+Retence metrik:
+Veřejné / interní:
+Vlastník:
+Datum revize:
+```
+
+### Zdroje k ověření
+
+- Google SRE Book vysvětluje rozdíl mezi SLI, SLO a SLA a doporučuje volit metriky podle toho, co je pro uživatele služby důležité: https://sre.google/sre-book/service-level-objectives/
+- Google SRE Workbook popisuje praktickou implementaci SLO, měřicí okna a práci s error budgetem: https://sre.google/workbook/implementing-slos/
+- OpenSLO poskytuje otevřenou specifikaci pro zápis SLO jako strukturovaných konfiguračních souborů: https://openslo.com/docs/
+- Atlassian shrnuje rozdíl mezi SLA, SLO a SLI v incident management kontextu a zdůrazňuje, že SLA je závazek vůči zákazníkovi: https://www.atlassian.com/incident-management/kpis/sla-vs-slo-vs-sli
+
 # Pracovní log
 
 - 2026-10-10: Doplněna příloha „Obnova účtu a reset hesla bez support backdooru“ s rozlišením zapomenutého hesla, ztraceného MFA a kompromitovaného účtu, bezpečným reset tokenem, pravidly pro supportní workflow, incidentovým recovery postupem, příkladem B2B SaaS, checklistem, vyplnitelnou recovery kartou a ověřenými zdroji OWASP, NIST, GDPR a EDPB. Pomáhá malým SaaS týmům obnovovat přístup bez enumerace účtů, marketingových trackerů a lidských zkratek kolem bezpečnosti.
@@ -67720,3 +67912,4 @@ Výsledek je pořád rychlý. Jen už nestojí na kouzelném admin tlačítku a 
 - 2026-10-10: Doplněna příloha „SSO pro B2B SaaS bez enterprise divadla a přístupového chaosu“ s oddělením identity, členství a oprávnění, doménovým ověřením, OIDC doporučeními, konzervativním auto-provisioningem, ochranou citlivých akcí, break-glass postupem, příkladem agenturního SaaS, checklistem, vyplnitelnou šablonou a ověřenými zdroji OWASP, OpenID, RFC 6749 a NIST. Pomáhá malým B2B SaaS týmům nabídnout zákazníkům bezpečnější přihlášení bez zbytečného sběru identity dat a bez zamčených adminů.
 - 2026-10-10: Doplněna příloha „Export dat při odchodu zákazníka bez rukojmí a ZIP souboru z pekla“ s rozlišením produktového exportu, přenositelnosti a právního archivu, návrhem struktury exportního balíku, pravidly pro neexportování tajemství, třífázovým ukončením účtu, retencí po odchodu, zacházením se zálohami, praktickým příkladem agenturního SaaS, checklistem, vyplnitelnou kartou a ověřenými zdroji EUR-Lex, EDPB, ICO a OWASP. Pomáhá týmům ukončovat účty férově, bez datového rukojmí a bez zbytečných kopií osobních údajů.
 - 2026-10-11: Doplněna příloha „Supportní přístup k zákaznickým datům bez všemocného admina“ s rozdělením supportních scénářů podle rizika, pravidly pro maskování dat, omezenou impersonací, auditní stopou, zákaznickými notifikacemi, hygienou interních poznámek, praktickým B2B příkladem, checklistem, vyplnitelnou kartou a ověřenými zdroji OWASP a EUR-Lex. Pomáhá týmům řešit zákaznické problémy rychle, ale bez neviditelných superadminů a zbytečného odhalování dat.
+- 2026-10-11: Doplněna příloha „SLI a SLO pro malý SaaS bez enterprise mlhy a falešných devítek“ s praktickým rozlišením SLI/SLO/SLA, výběrem několika zákaznicky důležitých signálů, error budget pravidly, privacy-first měřením bez datového vysavače, zaváděcím postupem, checklistem, vyplnitelnou kartou a ověřenými zdroji Google SRE, OpenSLO a Atlassian. Pomáhá malým SaaS týmům řídit spolehlivost podle zákaznického dopadu, ne podle hezkých grafů bez rozhodnutí.
