@@ -786,11 +786,218 @@ Pro GDPR incidenty si hlídej zejména vyhodnocení, jestli jde o porušení zab
 
 ---
 
+## 8. Checklisty a šablony
+
+Checklist není dekorace do Notionu. Je to způsob, jak snížit počet věcí, které musí tým držet v hlavě, když hoří deadline, klient čeká na odpověď a produkce se tváří jako kočka, která právě shodila vázu a nechápe, proč se všichni dívají na ni.
+
+V privacy-first provozu checklist pomáhá hlavně ve třech situacích:
+
+- **před spuštěním** — abys nevypustil web se slepou analytikou, chybějícími texty nebo zbytečnými trackery,
+- **před změnou** — abys věděl, co nová integrace sbírá, kam data tečou a kdo za ni ručí,
+- **po incidentu** — abys neimprovizoval komunikaci, důkazy a opravu příčiny až ve chvíli, kdy už tikají hodiny.
+
+Níže jsou praktické šablony. Nejsou právní dokument na kopírování naslepo. Ber je jako provozní start, který si malý tým upraví podle produktu, zákazníků a rizika. GDPR stojí mimo jiné na odpovědnosti, minimalizaci dat a schopnosti doložit, co a proč děláš; Evropská komise tyto principy shrnuje v přehledu [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en) a EDPB má praktickou sekci [Data protection guide for small business](https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en) včetně [DPIA témat](https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/data-protection-impact-assessment_en).
+
+### 8.1 Audit webu před spuštěním
+
+Použij pro nový web, redesign, landing page nebo zásadní změnu homepage. Nejdřív projdi ručně stránku jako návštěvník. Až potom pouštěj nástroje. Automatický audit ti neřekne, že věta v hero sekci zní jako generátor firemních klišé po třetím espressu.
+
+#### Strategická jasnost
+
+- [ ] Nad ohybem stránky je jasné, co firma dělá, pro koho a jaký výsledek slibuje.
+- [ ] Primární CTA je jednoznačné a vede na další logický krok: kontakt, demo, objednávku, stažení nebo detail služby.
+- [ ] Každá důležitá stránka má jeden hlavní cíl a neschovává ho mezi pět stejně výrazných tlačítek.
+- [ ] Důkazy jsou konkrétní: reference, ukázky práce, čísla, proces, certifikace nebo veřejné case studies.
+- [ ] Text odpovídá reálné nabídce, ne roadmapě, která zatím existuje jen v optimismu zakladatele.
+
+#### Technika a dostupnost
+
+- [ ] Stránka má správný `<title>`, meta description, kanonickou URL a Open Graph metadata.
+- [ ] Navigace funguje bez JavaScriptových triků, které z obyčejného odkazu dělají tajnou stezku pro pavouky.
+- [ ] Obrázky mají rozumnou velikost, `alt` text tam, kde nese význam, a nejsou načítané z náhodných cizích CDN.
+- [ ] Formuláře mají popisky, validaci, srozumitelné chybové hlášky a potvrzení po odeslání.
+- [ ] Web jde používat na mobilu, klávesnici a při horším připojení.
+- [ ] `robots.txt`, `sitemap.xml` a interní odkazy podporují indexaci důležitých stránek.
+
+#### Privacy-first kontrola
+
+- [ ] Na stránce neběží marketingové pixely, fingerprinting ani cizí skripty bez jasného účelu.
+- [ ] Analytika měří agregovaně a sbírá jen data, která tým skutečně používá pro rozhodování.
+- [ ] Cookie lišta se zobrazuje jen tehdy, když je opravdu potřeba; technické cookies nejsou maskované jako marketing.
+- [ ] U každého formuláře je jasné, proč data sbíráš, kdo je dostane a jak dlouho je držíš.
+- [ ] Privacy policy odpovídá realitě implementace, ne přání z právní šablony.
+- [ ] Externí služby mají zkontrolovaný region zpracování, roli správce/zpracovatele a smluvní základ.
+
+**Codyho komentář:** Nejlepší cookie banner je ten, který nemusíš mít, protože web nedělá z návštěvníka datový vánoční stromeček. Pokud banner potřebuješ, aspoň ať je poctivý: žádné temné vzory, žádné „přijmout vše“ zeleně a „odmítnout“ jako lov na šedý pixel.
+
+### 8.2 Launch checklist pro SaaS
+
+Launch není jeden moment. Je to série kontrol, které rozhodnou, jestli první zákazníci narazí na produkt, nebo na sbírku omluv. Tenhle checklist drž malý tým u země.
+
+#### Produkt a onboarding
+
+- [ ] Nový uživatel chápe první hodnotnou akci do pěti minut od registrace.
+- [ ] Trial, demo nebo objednávka mají jasný další krok a potvrzení e-mailem.
+- [ ] Prázdné stavy vysvětlují, co udělat dál, ne jen oznamují „No data“.
+- [ ] Kritické cesty jsou ručně otestované: registrace, přihlášení, reset hesla, platba, faktura, export, zrušení.
+- [ ] Support kontakt je viditelný a někdo ho opravdu čte.
+- [ ] Roadmapa nepřehlušuje současnou hodnotu produktu.
+
+#### Provoz a bezpečnost
+
+- [ ] Produkční prostředí používá oddělené přístupy, tajemství a databáze od vývoje.
+- [ ] Backupy existují, mají retenci a minimálně jeden obnovovací test. ENISA pro malé firmy doporučuje praktickou zálohovací strategii včetně off-site kopie v reportu [Cybersecurity for SMEs — Challenges and Recommendations](https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes).
+- [ ] Logy neobsahují hesla, tokeny, celé platební údaje ani zbytečné osobní údaje.
+- [ ] Monitoring hlídá dostupnost, chyby aplikace a základní byznys signály, ne jen CPU graf, který vypadá důležitě na dashboardu.
+- [ ] Incident playbook má vlastníka, kontakty, rozhodovací práh a postup pro komunikaci.
+- [ ] Změny jdou nasadit opakovatelně a jde se vrátit k poslední funkční verzi.
+
+#### Obchod a komunikace
+
+- [ ] Pricing je srozumitelný a vysvětluje rozdíly mezi tarify podle hodnoty, ne podle interních názvů funkcí.
+- [ ] Fakturace, DPH, storno a obchodní podmínky odpovídají cílovému trhu.
+- [ ] E-mailové šablony mají lidský tón, jasný předmět a žádné agresivní tracking pixely.
+- [ ] Launch zpráva říká, komu produkt pomáhá, jaký problém řeší a co má člověk udělat dál.
+- [ ] Máš připravený seznam prvních lidí, kterým napíšeš přímo, místo spoléhání na algoritmickou loterii.
+
+### 8.3 Privacy review šablona pro novou funkci nebo nástroj
+
+Vyplň před přidáním nové integrace, analytiky, AI funkce, CRM, support nástroje nebo platební vrstvy. Cílem není všechno zakázat. Cílem je vědět, co se mění.
+
+```text
+Název změny:
+Vlastník:
+Datum review:
+
+1) Účel
+- Jaký problém řešíme?
+- Jak poznáme, že změna funguje?
+- Dá se účel splnit s menším množstvím dat?
+
+2) Data
+- Jaké osobní údaje se sbírají nebo posílají?
+- Jsou v datech citlivé údaje, obsah komunikace, platební údaje nebo identifikátory zařízení?
+- Jak dlouho data potřebujeme?
+
+3) Role a tok dat
+- Jsme správce, zpracovatel, společný správce nebo pouze používáme zpracovatele?
+- Kam data fyzicky a právně tečou?
+- Je zapojená země mimo EU/EHP?
+
+4) Právní základ a transparentnost
+- Jaký je právní základ zpracování?
+- Je potřeba souhlas, oprávněný zájem, smlouva nebo jiný základ?
+- Musíme upravit privacy policy, cookie informaci, DPA nebo seznam subdodavatelů?
+
+5) Rizika a opatření
+- Co se stane, když služba unikne, selže nebo změní podmínky?
+- Máme šifrování, omezení přístupů, audit log a mazání?
+- Je potřeba DPIA?
+
+Rozhodnutí:
+- Schválit / upravit / zamítnout
+- Podmínky schválení:
+- Datum další revize:
+```
+
+DPIA neboli posouzení vlivu na ochranu osobních údajů řeš zejména u zpracování, které pravděpodobně vytváří vysoké riziko pro práva a svobody lidí. EDPB k tomu poskytuje obecné vodítko k [Data protection impact assessment](https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/data-protection-impact-assessment_en) a zveřejnil také [template for Data Protection Impact Assessment](https://www.edpb.europa.eu/our-work-tools/documents/public-consultations/2026/edpb-dpia-template_en); pro český projekt si navíc ověř seznamy a výklad u ÚOOÚ nebo právníka podle konkrétního případu.
+
+### 8.4 Marketingový plán bez šmírovacího autopilota
+
+Marketingový plán nemusí být třicetistránkový dokument. U malého týmu stačí jedna tabulka, pokud nutí k rozhodnutí.
+
+```text
+Cíl kampaně:
+Primární publikum:
+Nabídka/slib:
+Hlavní kanál:
+Sekundární kanály:
+Měřená konverze:
+Jaká data sbíráme:
+Jaká data nesbíráme:
+Retence dat:
+Kdo vlastní vyhodnocení:
+Datum vyhodnocení:
+```
+
+#### Praktický příklad
+
+- **Cíl kampaně:** 15 kvalifikovaných poptávek na redesign B2B webu.
+- **Publikum:** české a slovenské SaaS firmy 10–80 lidí, které řeší expanzi v EU.
+- **Nabídka:** bezplatný 30min audit homepage a privacy měření.
+- **Kanály:** odborný článek, RSS, LinkedIn příspěvek bez pixelu, přímý e-mail existujícím kontaktům, partnerský newsletter.
+- **Konverze:** odeslání formuláře nebo přímý e-mail.
+- **Měření:** agregované návštěvy, zdroj podle UTM, počet poptávek, kvalita poptávek po ručním ohodnocení.
+- **Co nesbíráme:** cross-site identifikátory, fingerprinting, reklamní publika, heatmapy se záznamem chování jednotlivců.
+
+### 8.5 Měsíční provozní review
+
+Jednou měsíčně si dej 45 minut. Ne víc, protože pak se z review stane interní divadlo s krásnými grafy a nulovou změnou.
+
+- [ ] Projdi 3 nejnavštěvovanější stránky a ověř, jestli pořád vedou k jasnému dalšímu kroku.
+- [ ] Zkontroluj 3 nejčastější support dotazy a rozhodni, jestli patří do produktu, dokumentace nebo onboardingu.
+- [ ] Projdi nové skripty, integrace a subdodavatele od posledního review.
+- [ ] Ověř, že backup a restore test nejsou jen historická legenda v README.
+- [ ] Zkontroluj neaktivní účty, přístupy bývalých spolupracovníků a API klíče.
+- [ ] Vyber jednu věc, kterou příští měsíc odstraníš: tracker, formulářové pole, ruční krok, mrtvou stránku nebo zbytečnou metriku.
+- [ ] Zapiš rozhodnutí do logu: co měníme, proč, kdo to vlastní a do kdy.
+
+### 8.6 Jednostránkový operační manuál
+
+Každý malý SaaS by měl mít dokument, který přežije dovolenou zakladatele. Nemusí být krásný. Musí být použitelný.
+
+```text
+Produkt:
+Produkční URL:
+Repozitář:
+Hosting:
+Databáze:
+Analytika:
+Monitoring:
+Platební brána:
+E-mailing:
+Support:
+
+Kdo má produkční přístup:
+Kde jsou uložené tajné hodnoty:
+Jak se nasazuje:
+Jak se vrací rollback:
+Jak se obnovuje backup:
+Jak se vypíná problematická integrace:
+
+Incident kontakty:
+Právní/privacy kontakt:
+Zákaznická komunikace:
+Poslední test obnovy:
+Poslední privacy review:
+```
+
+**Codyho komentář:** Pokud operační manuál existuje jen v hlavě jednoho člověka, není to znalost. Je to single point of failure s kalendářem.
+
+### Finální checklist e-booku pro praxi
+
+- [ ] Umíš jednou větou říct, komu produkt pomáhá a jaký výsledek slibuje.
+- [ ] Víš, které metriky opravdu používáš pro rozhodování, a zbytek neměříš jen proto, že to nástroj umí.
+- [ ] Máš mapu dat, seznam subdodavatelů a jasné retenční lhůty.
+- [ ] Každá nová integrace projde privacy review před nasazením, ne po prvním dotazu zákazníka.
+- [ ] Web funguje bez invazivního trackingu a obsah jde sledovat přes RSS nebo přímé odkazy.
+- [ ] SaaS má otestované kritické cesty, zálohy, rollback a incident playbook.
+- [ ] Marketing má konkrétní nabídku, kanál, měření a datum vyhodnocení.
+- [ ] Tým každý měsíc jednu věc zjednoduší, odstraní nebo zpřesní.
+
+Tím se e-book uzavírá prakticky: méně kouzel, víc systému. Webový vývoj, SaaS a marketing nejsou oddělené disciplíny. Jsou to části jednoho provozního slibu: pomáhat zákazníkům, růst rozumně a zacházet s daty tak, aby se za to tým nemusel stydět ani před zákazníkem, ani před regulátorem, ani před vlastním budoucím já.
+
+---
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
+- ENISA: [Cybersecurity for SMEs — Challenges and Recommendations](https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes)
 - ENISA: [Cloud Security Guide for SMEs](https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes)
 - ENISA: [Technical implementation guidance on cybersecurity risk management measures](https://www.enisa.europa.eu/publications/technical-implementation-guidance-on-cybersecurity-risk-management-measures)
+- European Data Protection Board: [Be compliant — Data protection guide for small business](https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en)
+- European Data Protection Board: [Data protection impact assessment](https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/data-protection-impact-assessment_en)
+- European Data Protection Board: [Template for Data Protection Impact Assessment](https://www.edpb.europa.eu/our-work-tools/documents/public-consultations/2026/edpb-dpia-template_en)
 - European Data Protection Board: [Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)
 - European Data Protection Board: [Basic principles](https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en)
 - European Data Protection Board: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_de)
@@ -814,6 +1021,7 @@ Pro GDPR incidenty si hlídej zejména vyhodnocení, jestli jde o porušení zab
 
 ## Pracovní log
 
+- **2026-10-11:** Doplněna kapitola 8 s praktickými checklisty a šablonami pro audit webu, SaaS launch, privacy review, marketingový plán, měsíční provozní review a operační manuál.
 - **2026-10-11:** Doplněna kapitola 7 o evropském privacy-first provozu: výběr dodavatelů, provozní bezpečnost, NIS2, Data Act, incident playbook, exit plán a checklist pro malé SaaS týmy.
 - **2026-10-11:** Doplněna kapitola 6 o produktivitě zakladatele a malého SaaS týmu: omezení rozpracované práce, týdenní rytmus, rozhodovací log, bezpečné používání AI asistentů, automatizace a privacy-first checklist.
 - **2026-10-11:** Doplněna kapitola 5 o marketingu bez invazivního trackingu: SEO disciplína, obsah podle rozhodovacích momentů, RSS, přímé kanály, UTM měření, privacy-friendly analytika a AI kontrola obsahu.
