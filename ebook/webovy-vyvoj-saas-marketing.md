@@ -25762,7 +25762,7 @@ Každá akce má mít vlastní validační pravidla, text dopadu a návratovou z
 ## Zdroje
 
 - OWASP Application Security Verification Standard 5.0.0 — projektová stránka a aktuální stabilní verze: https://owasp.org/projects/asvs?tab=main
-- OWASP ASVS V16 Security Logging and Error Handling — požadavky na inventář logování, bezpečnostní události a ochranu citlivých dat v logách: https://github.com/OWASP/ASVS/blob/master/5.0/en/0x25-V16-Security-Logging-and-Error-Handling.md
+- OWASP ASVS V16 Security Logging and Error Handling — požadavky na inventář logování, bezpečnostní události a ochranu citlivých dat v logách: https://raw.githubusercontent.com/OWASP/ASVS/master/5.0/en/0x25-V16-Security-Logging-and-Error-Handling.md
 - OWASP ASVS V7 Session Management — dokumentování relací, timeoutů a koordinace session pravidel: https://github.com/OWASP/ASVS/blob/master/5.0/en/0x16-V7-Session-Management.md
 - EDPB: Data protection by design & by default — shrnutí praktického postupu pro článek 25 GDPR: https://www.edpb.europa.eu/system/files/2026-02/edpb-summary-gdpr-data-protection-design-default_en.pdf
 
@@ -48886,7 +48886,7 @@ Každá role má mít pracovní popis, ne legendu. Věta „může všechno, pro
 
 ## Least privilege napiš jako produktové pravidlo
 
-OWASP u autorizace i ASVS opakovaně staví na principu nejmenších potřebných oprávnění: uživatel má mít přístup jen k funkcím, datům a zdrojům, pro které má konkrétní autorizaci ([OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html), [OWASP ASVS Access Control](https://github.com/OWASP/ASVS/blob/master/4.0/en/0x12-V4-Access-Control.md)). Přeloženo do produktového jazyka: role nemá odpovídat pracovní senioritě, ale konkrétním úkolům.
+OWASP u autorizace i ASVS opakovaně staví na principu nejmenších potřebných oprávnění: uživatel má mít přístup jen k funkcím, datům a zdrojům, pro které má konkrétní autorizaci ([OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html), [OWASP ASVS Access Control](https://raw.githubusercontent.com/OWASP/ASVS/master/4.0/en/0x12-V4-Access-Control.md)). Přeloženo do produktového jazyka: role nemá odpovídat pracovní senioritě, ale konkrétním úkolům.
 
 Příklad slabého návrhu:
 
@@ -49060,7 +49060,7 @@ Rozdíl není v tom, že druhý postup je pomalejší. Rozdíl je v tom, že dru
 ## Zdroje
 
 - [OWASP Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html) — praktická doporučení pro server-side autorizaci, least privilege a pravidelnou kontrolu oprávnění.
-- [OWASP ASVS: V4 Access Control](https://github.com/OWASP/ASVS/blob/master/4.0/en/0x12-V4-Access-Control.md) — ověřovací požadavky pro role, přístupová pravidla a ochranu zdrojů.
+- [OWASP ASVS: V4 Access Control](https://raw.githubusercontent.com/OWASP/ASVS/master/4.0/en/0x12-V4-Access-Control.md) — ověřovací požadavky pro role, přístupová pravidla a ochranu zdrojů.
 - [NIST SP 800-63B](https://pages.nist.gov/800-63-4/sp800-63b.html) — guidelines pro autentizaci, session management a reautentizaci podle rizika.
 - [EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en) — rámec pro zabudování ochrany dat do návrhu a výchozího chování systémů.
 
@@ -66969,6 +66969,173 @@ Rollback / eskalace: [kontakt, incident runbook]
 - [GDPR na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/oj) — články 32 až 34 k zabezpečení zpracování a hlášení porušení zabezpečení osobních údajů.
 - [EDPB Guidelines 01/2021 on examples regarding personal data breach notification](https://edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-012021-examples-regarding-personal-data-breach_en) — příklady posuzování incidentů a oznamování porušení zabezpečení osobních údajů.
 
+# Příloha: Supportní přístup k zákaznickým datům bez všemocného admina
+
+Support je místo, kde se důvěra často nerozbije velkým hackem, ale malou pohodlností. Zákazník napíše „nevidím fakturu“, někdo v týmu otevře produkční účet, přepne se do administrace, klikne kolem sebe a problém najde. Všichni si oddychnou. Jenže pokud k tomu neexistuje důvod, časové omezení, auditní stopa a jasné hranice, nevznikl dobrý support. Vznikl tichý superadmin v mikině.
+
+Privacy-first support nezačíná tím, že tým lidem nevěří. Začíná tím, že dobrý systém nemá vyžadovat hrdinství ani slepou důvěru. Support má vidět právě tolik, kolik potřebuje k vyřešení konkrétního problému, a zákazník i provozní tým mají později umět říct, kdo se na co díval a proč.
+
+> Codyho komentář: „Máme malý tým, nepotřebujeme proces“ je věta, která zní roztomile jen do chvíle, než hledáš, kdo před třemi týdny změnil zákazníkovi fakturační e-mail. Pak už je to detektivka bez vraha, zato s auditním dluhem.
+
+## Nejdřív rozděl supportní scénáře podle citlivosti
+
+Ne každý supportní dotaz vyžaduje stejný přístup. Když někdo řeší překlep v názvu firmy na faktuře, je to jiné riziko než žádost o ruční změnu vlastníka účtu nebo kontrolu souboru nahraného zákazníkem. Než začneš stavět „support mode“, napiš si tři vrstvy scénářů:
+
+1. **Nízké riziko:** metadata účtu, stav objednávky, veřejně viditelné nastavení, datum poslední platby, technický stav integrace.
+2. **Střední riziko:** fakturační údaje, kontaktní e-maily, stav členství v týmu, historie supportních tiketů, omezený náhled chybových událostí.
+3. **Vysoké riziko:** obsah zákaznických dat, exporty, API klíče, změna vlastníka, reset MFA, impersonace uživatele, přístup k interním poznámkám.
+
+Pro každou vrstvu si napiš, kdo ji smí řešit, jaký důvod musí uvést, jestli je potřeba schválení a jak dlouho přístup trvá. Pokud nejde scénář zařadit, nedávej mu automaticky vyšší oprávnění. Dej mu vlastní rozhodnutí. „Nevíme“ není role.
+
+Praktické pravidlo: supportní nástroj by měl defaultně ukazovat agregované a maskované informace. Celé e-mailové adresy, tokeny, URL s citlivými parametry, obsah souborů nebo textové poznámky zobrazuj až po explicitním kroku s důvodem.
+
+## Support mode není impersonace jako výchozí tlačítko
+
+Impersonace je lákavá, protože umožní „vidět to jako zákazník“. Zároveň je to velmi silná funkce: support se na chvíli dostane do kontextu účtu, kde může omylem nebo úmyslně udělat věci, které vypadají jako akce zákazníka. Proto ji nenavrhuj jako univerzální řešení.
+
+Lepší pořadí je:
+
+1. **Diagnostický panel:** ukáže stav, chyby, konfiguraci a poslední relevantní události bez vstupu do účtu.
+2. **Read-only náhled:** dovolí zobrazit konkrétní obrazovku bez možnosti uložit změny nebo spustit akce.
+3. **Akce jménem supportu:** změna je jasně označená jako provedená supportem, ne zákazníkem.
+4. **Impersonace:** jen pro výjimečné scénáře, časově omezená, schválená a výrazně auditovaná.
+
+Když impersonaci opravdu potřebuješ, nastav tvrdé mantinely: žádné změny hesla, žádné generování API klíčů, žádné potvrzení platebních změn, žádné stahování exportů a žádné akce, které mění vlastnictví účtu. Pokud jde o citlivou akci, support ji má spustit jako supportní akci s vlastním logem, ne se převlékat za uživatele.
+
+## Každý přístup musí mít důvod, čas a stopu
+
+Supportní přístup bez důvodu je jen hezky pojmenované šmírování. Nechci tím říct, že každý klik má vyžadovat román. Stačí krátký, strukturovaný důvod: číslo tiketu, zákazník, typ problému a očekávaný rozsah.
+
+Minimální auditní událost pro supportní přístup:
+
+```text
+support_access.opened
+actor_id: support_user_123
+customer_id: customer_456
+ticket_id: TCK-2026-1042
+scope: billing.read
+reason: "Kontrola duplicitní faktury za říjen"
+approved_by: null
+started_at: 2026-10-11T09:20:00Z
+expires_at: 2026-10-11T09:50:00Z
+fields_revealed: ["invoice_email", "invoice_status"]
+```
+
+U vysokého rizika přidej schválení druhou osobou nebo alespoň dodatečnou kontrolu. U malého týmu to může být jednoduché: zakladatel, senior vývojář nebo provozní odpovědná osoba dostane notifikaci, že byl otevřen citlivý náhled. Ne proto, aby všichni žili ve strachu, ale aby přístup nebyl neviditelný.
+
+Auditní log chraň jako produkční data. Nemá být editovatelný supportem, nemá obsahovat zbytečné osobní údaje a má mít vlastní retenční pravidla. OWASP ASVS zdůrazňuje princip nejmenších oprávnění u přístupu k funkcím a datům a také evidenci bezpečnostně relevantních událostí; tohle je přesně ten typ místa, kde se teorie potká s realitou supportu.
+
+## Maskování dat navrhni podle úkolu, ne podle estetiky
+
+Maskování není hvězdičkový make-up. Má pomoct vyřešit problém bez zbytečného odhalení dat. Když support ověřuje, jestli faktura odešla na správnou doménu, často stačí `ja***@firma.cz`. Když řeší duplicitní účet, může stačit doména a poslední čtyři znaky interního ID. Když řeší webhook, nepotřebuje celý payload, ale čas, endpoint, status, korelační ID a bezpečně zkrácenou chybu.
+
+Příklady praktického maskování:
+
+- E-mail: zobraz doménu a pár znaků lokální části, celé znění až po kliknutí s důvodem.
+- Telefon: zobraz předvolbu a poslední dvě číslice, ne celé číslo jako výchozí stav.
+- API klíč: nikdy nezobrazuj celé tajemství; jen prefix, datum vytvoření, poslední použití a možnost rotace.
+- Soubor: zobraz název, typ, velikost, stav skenu a čas nahrání; obsah jen ve výjimečném režimu.
+- Log payload: rediguj tokeny, cookies, adresy, identifikátory relací a volný text, pokud není nezbytný.
+
+GDPR v čl. 5 pracuje mimo jiné s principy minimalizace údajů, omezení účelu, omezení uložení a integrity a důvěrnosti. V praxi supportu to znamená jednoduchou otázku: opravdu potřebujeme vidět celé datum narození, obsah zprávy nebo přílohu, abychom vyřešili tento konkrétní tiket? Pokud ne, systém by to neměl ukazovat jen proto, že databáze to umí.
+
+## Zákazník má vědět, kdy support zasáhl
+
+U citlivějších zásahů je dobré dát zákazníkovi viditelnou stopu. Ne každé interní diagnostické otevření musí spustit poplach, ale změna fakturačního e-mailu, ruční úprava členství, reset MFA, export nebo zásah do integrace by měly být viditelné v zákaznickém auditním feedu.
+
+Dobrá zákaznická zpráva je konkrétní, ale neprozrazuje interní detaily:
+
+```text
+Support Dreamind provedl změnu fakturačního e-mailu na základě tiketu TCK-2026-1042.
+Čas: 11. 10. 2026 09:34 UTC
+Provedl: support@dreamind.cz
+Rozsah: fakturace
+Pokud tuto změnu nepoznáváte, odpovězte na tiket nebo kontaktujte podporu.
+```
+
+U některých zákazníků může být vhodné nabídnout nastavení: „upozornit správce při každém supportním náhledu“, „upozornit jen při změně“, „vyžadovat schválení zákazníka pro citlivé zásahy“. U B2B SaaS to není zbytečný enterprise cirkus. Je to projev respektu k tomu, že zákazník má také vlastní odpovědnost vůči svým datům.
+
+## Supportní poznámky nejsou odpadkový koš na osobní údaje
+
+Interní poznámky v CRM nebo helpdesku často časem zmutují do datového sklepa: „paní Nováková je protivná“, „klient asi nemá peníze“, „posílal občanku v příloze“, „volat radši dopoledne, má nemocné dítě“. Něco může být užitečný kontext, ale hodně z toho je riziko bez přínosu.
+
+Nastav pravidla pro supportní poznámky:
+
+- Piš pozorovatelná fakta, ne osobní soudy.
+- Neopisuj citlivý obsah z příloh, když stačí odkaz na bezpečně uložený tiket.
+- Nepiš zdravotní, rodinné, politické nebo jiné citlivé detaily, pokud nejsou nezbytné a právně podložené.
+- Po vyřešení tiketu zvaž automatické zkrácení poznámek na výsledek a rozhodnutí.
+- Umožni smazání nebo redakci poznámky, pokud se do ní dostalo něco, co tam být nemá.
+
+Privacy-first support není jen o technických právech. Je i o disciplíně v textu. Volný text je nejlevnější způsob, jak si do systému přinést nejdražší problém.
+
+## Praktický příklad: chyba ve fakturaci u malého B2B SaaS
+
+Zákazník napíše, že mu nepřišla faktura. Starý způsob: support otevře zákaznický účet jako admin, projde fakturaci, zkopíruje e-mail, zkontroluje platební události a ručně odešle fakturu. Rychlé, ale neprůhledné.
+
+Lepší postup:
+
+1. Support otevře tiket a klikne na diagnostiku fakturace.
+2. Systém ukáže maskovaný fakturační e-mail, stav poslední faktury, čas odeslání, stav doručení a ID transakce.
+3. Pokud je potřeba zobrazit celý e-mail, support vyplní důvod „ověření doručovací adresy“.
+4. Systém otevře náhled na 15 minut a zaloguje pole, která byla odhalena.
+5. Pokud je potřeba změnit e-mail, support použije akci „navrhnout změnu“ nebo „změnit na základě tiketu“, která se propíše do zákaznického auditního feedu.
+6. Po vyřešení tiketu zůstane v supportu stručný výsledek: „Faktura znovu odeslána na potvrzený fakturační e-mail; zákazník informován.“
+
+Výsledek je pořád rychlý. Jen už nestojí na kouzelném admin tlačítku a paměti člověka, který dnes náhodou drží službu pohromadě.
+
+## Checklist: supportní přístup bez všemocného admina
+
+- Máme rozdělené supportní scénáře podle citlivosti a rizika.
+- Support defaultně vidí maskovaná nebo agregovaná data.
+- Impersonace není první volba a má jasné časové i funkční limity.
+- Každý citlivý přístup má důvod, tiket, rozsah, čas začátku a konec.
+- Vysoce rizikové akce vyžadují schválení, notifikaci nebo dodatečnou kontrolu.
+- Auditní log nelze upravit běžným supportním účtem.
+- Zákazník vidí citlivé supportní zásahy v auditním feedu nebo dostane notifikaci.
+- Interní poznámky mají pravidla pro minimalizaci osobních a citlivých údajů.
+- API klíče, tokeny, cookies a tajemství se nikdy nezobrazují celé.
+- Retence supportních náhledů, poznámek a auditních událostí má konkrétní důvod a konec.
+
+## Vyplnitelná karta supportního přístupu
+
+```text
+# Support access karta: [název scénáře]
+
+## Účel
+- Jaký zákaznický problém řešíme:
+- Proč nestačí běžná diagnostika:
+
+## Data
+- Výchozí zobrazení:
+- Maskovaná pole:
+- Pole odhalitelná po zdůvodnění:
+- Pole, která se nikdy nezobrazují:
+
+## Oprávnění
+- Role, které smí scénář řešit:
+- Je potřeba schválení? Kdy a od koho:
+- Maximální délka přístupu:
+
+## Audit
+- Povinný důvod:
+- Povinný ticket/customer reference:
+- Události zapisované do interního logu:
+- Události viditelné zákazníkovi:
+
+## Úklid
+- Retence supportních poznámek:
+- Retence auditních událostí:
+- Kdo kontroluje výjimky:
+```
+
+## Zdroje k ověření
+
+- OWASP ASVS 4.0 — V4 Access Control, zejména princip nejmenších oprávnění a kontrola přístupu k funkcím a datům: https://raw.githubusercontent.com/OWASP/ASVS/master/4.0/en/0x12-V4-Access-Control.md
+- OWASP ASVS 5.0 — V16 Security Logging and Error Handling, bezpečnostní logování a ochrana logů jako citlivého aktiva: https://raw.githubusercontent.com/OWASP/ASVS/master/5.0/en/0x25-V16-Security-Logging-and-Error-Handling.md
+- OWASP Logging Cheat Sheet — doporučení k událostem, ochraně logů a omezení citlivých dat v logování: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
+- EUR-Lex — GDPR, čl. 5 o principech zpracování osobních údajů včetně minimalizace, omezení účelu, omezení uložení a důvěrnosti: https://eur-lex.europa.eu/eli/reg/2016/679/oj
+
 # Pracovní log
 
 - 2026-10-10: Doplněna příloha „Obnova účtu a reset hesla bez support backdooru“ s rozlišením zapomenutého hesla, ztraceného MFA a kompromitovaného účtu, bezpečným reset tokenem, pravidly pro supportní workflow, incidentovým recovery postupem, příkladem B2B SaaS, checklistem, vyplnitelnou recovery kartou a ověřenými zdroji OWASP, NIST, GDPR a EDPB. Pomáhá malým SaaS týmům obnovovat přístup bez enumerace účtů, marketingových trackerů a lidských zkratek kolem bezpečnosti.
@@ -67552,3 +67719,4 @@ Rollback / eskalace: [kontakt, incident runbook]
 - 2026-10-09: Doplněna příloha „Přístupová práva bez rolové špagety a věčných adminů“ s praktickým modelem rolí podle citlivých akcí, deny-by-default kontrolami, just-in-time přístupem, pravidly pro servisní účty a API klíče, čtvrtletní access review rutinou, supportním příkladem, checklistem, vyplnitelnou kartou a ověřenými zdroji OWASP, NIST a ENISA. Pomáhá malým SaaS týmům omezit věčné adminy bez zbytečné byrokracie.
 - 2026-10-10: Doplněna příloha „SSO pro B2B SaaS bez enterprise divadla a přístupového chaosu“ s oddělením identity, členství a oprávnění, doménovým ověřením, OIDC doporučeními, konzervativním auto-provisioningem, ochranou citlivých akcí, break-glass postupem, příkladem agenturního SaaS, checklistem, vyplnitelnou šablonou a ověřenými zdroji OWASP, OpenID, RFC 6749 a NIST. Pomáhá malým B2B SaaS týmům nabídnout zákazníkům bezpečnější přihlášení bez zbytečného sběru identity dat a bez zamčených adminů.
 - 2026-10-10: Doplněna příloha „Export dat při odchodu zákazníka bez rukojmí a ZIP souboru z pekla“ s rozlišením produktového exportu, přenositelnosti a právního archivu, návrhem struktury exportního balíku, pravidly pro neexportování tajemství, třífázovým ukončením účtu, retencí po odchodu, zacházením se zálohami, praktickým příkladem agenturního SaaS, checklistem, vyplnitelnou kartou a ověřenými zdroji EUR-Lex, EDPB, ICO a OWASP. Pomáhá týmům ukončovat účty férově, bez datového rukojmí a bez zbytečných kopií osobních údajů.
+- 2026-10-11: Doplněna příloha „Supportní přístup k zákaznickým datům bez všemocného admina“ s rozdělením supportních scénářů podle rizika, pravidly pro maskování dat, omezenou impersonací, auditní stopou, zákaznickými notifikacemi, hygienou interních poznámek, praktickým B2B příkladem, checklistem, vyplnitelnou kartou a ověřenými zdroji OWASP a EUR-Lex. Pomáhá týmům řešit zákaznické problémy rychle, ale bez neviditelných superadminů a zbytečného odhalování dat.
