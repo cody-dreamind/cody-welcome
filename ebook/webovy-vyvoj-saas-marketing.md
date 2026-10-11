@@ -364,6 +364,134 @@ Pro marketingový web může stačit statický build a kontrola hlavních strán
 
 ---
 
+
+## 4. SaaS produkt od nápadu po první platící zákazníky
+
+### 4.1 Nevaliduj nápad komplimenty
+
+Nejrychlejší cesta k falešnému sebevědomí je zeptat se lidí: „Líbí se ti můj nápad?“ Většina slušných lidí odpoví mile, protože nechce rozšlapat tvé nadšení jako kelímek na festivalu. Jenže kompliment není signál trhu.
+
+Lepší validace se ptá na chování, bolest a ochotu něco změnit:
+
+- Kdy se ti ten problém stal naposledy?
+- Jak ho řešíš dnes?
+- Kolik času, peněz nebo nervů tě to stojí?
+- Co už jsi zkusil a proč to nefungovalo?
+- Kdo by musel schválit nákup?
+- Co by se muselo stát, aby sis řešení zaplatil tento měsíc?
+
+Pokud člověk problém neumí popsat konkrétně, pravděpodobně ho netrápí dost. Pokud ho řeší ručně v tabulce, interním skriptem nebo přes pět nástrojů slepených izolepou, zbystři. Tam často začíná dobrý B2B SaaS: ne jako „platforma pro všechno“, ale jako elegantní odstranění jedné drahé otravy.
+
+Praktický příklad:
+
+> „Chceme nástroj pro lepší týmovou produktivitu“ je mlha.
+>
+> „Každý pátek ručně skládáme report z fakturace, supportu a CRM, trvá to tři hodiny a stejně v něm bývají chyby“ je problém.
+
+### 4.2 První verze má prodávat výsledek, ne roadmapu
+
+MVP není nedodělek s omluvou. MVP je nejmenší verze produktu, která někomu doručí měřitelnou hodnotu a umožní ti zjistit, jestli za ni zaplatí.
+
+U SaaS pro malé týmy se vyplatí začít jedním úzkým use casem:
+
+1. vyber konkrétní cílovku,
+2. popiš jednu bolest,
+3. dodej jeden opakovatelný výsledek,
+4. ručně nebo poloautomaticky obsluž zbytek,
+5. automatizuj až to, co se opakuje a někdo za to platí.
+
+Příklad: místo „kompletní AI platforma pro obchodní týmy“ začni službou „každé ráno pošleme obchodníkovi tři nejdůležitější follow-upy z CRM a e-mailů“. Je to menší, srozumitelnější a lépe měřitelné. Když to funguje, můžeš přidat reporting, šablony, týmové workflow a integrace. Když to nefunguje, nezahodil jsi půl roku stavbou paláce bez obyvatel.
+
+**Codyho komentář:** Roadmapa je hypotéza, ne svatá tabulka. Pokud zákazníci opakovaně platí za něco jiného, než sis vysnil, není to zrada vize. Je to trh, který ti konečně přestal mumlat.
+
+### 4.3 Pricing: začni jednoduše a drž vazbu na hodnotu
+
+První pricing nemusí být dokonalý. Musí být pochopitelný, obhajitelný a dostatečně blízko hodnotě, kterou zákazník dostává.
+
+Časté modely:
+
+- **Za uživatele:** jednoduché pro týmové nástroje, ale může brzdit adopci, pokud zákazník platí za každého pasivního člena.
+- **Za organizaci nebo tým:** dobré pro menší B2B SaaS, kde se hodnota netočí jen kolem počtu sedadel.
+- **Podle objemu:** vhodné tam, kde náklady i hodnota rostou s počtem událostí, dokumentů, objednávek nebo zákazníků.
+- **Podle balíčků:** praktické pro marketing a prodej, pokud jsou rozdíly mezi tarify jasné.
+
+Začni raději se třemi jednoduchými tarify než s excelovým labyrintem. Každý tarif má mít jasný důvod existence:
+
+- **Start:** pro jednotlivce nebo malý tým, který chce problém vyřešit hned.
+- **Pro:** pro firmu, která potřebuje týmové funkce, integrace nebo vyšší limity.
+- **Business:** pro zákazníky s požadavky na SSO, audit, smlouvy, SLA, fakturaci a podporu.
+
+Neprodávej levně jen proto, že se bojíš odmítnutí. Nízká cena často přitáhne zákazníky, kteří chtějí nejvíc podpory a nejmíň platit. To je špatný obchodní model i psychologický horor v jednom.
+
+Praktická otázka pro pricing:
+
+> Když zákazník produkt přestane používat, co ho to bude stát za měsíc v čase, chybách, ztracených příležitostech nebo riziku?
+
+Cena nemusí kopírovat tuto hodnotu přesně, ale má s ní mít vztah. Pokud šetříš firmě deset hodin měsíčně a stojíš méně než jeden oběd pro tým, pravděpodobně nejsi „dostupný“. Jsi podceněný.
+
+### 4.4 Onboarding: první hodnota do patnácti minut
+
+Nový uživatel nepřichází obdivovat architekturu. Přichází zjistit, jestli mu produkt pomůže. Onboarding má co nejrychleji dovést člověka k první hodnotné akci.
+
+Dobré onboardingové otázky:
+
+- Co musí uživatel udělat, aby pochopil hodnotu produktu?
+- Co může produkt předvyplnit, odvodit nebo vysvětlit?
+- Který krok je nutný a který je jen naše interní zvědavost?
+- Jak uživatel pozná, že uspěl?
+- Kde potřebuje příklad místo prázdného stavu?
+
+Privacy-first onboarding má ještě jednu disciplínu: nesbírat data „pro jistotu“. Pokud pro první hodnotu nepotřebuješ telefon, velikost firmy nebo deset povinných polí, neptej se. Důvěra začíná tím, že se produkt nechová jako úřední formulář s ambicemi stát se sociální sítí.
+
+Příklad dobrého začátku:
+
+1. účet jen s e-mailem,
+2. jasná volba cíle,
+3. ukázková data nebo import jednoho malého vzorku,
+4. první výstup do pár minut,
+5. až potom doplnění týmu, fakturace nebo integrací.
+
+Prázdné stavy jsou pro SaaS kritické. Obrazovka bez dat nemá říkat „nic tu není“. Má říct: „Tady je další nejlepší krok.“ Přidej vzorový projekt, demo záznam nebo checklist. Uživatel si nesmí připadat jako v prázdném skladu, kam ho někdo pustil a zamkl vrata.
+
+### 4.5 Retence: sleduj opakovanou hodnotu
+
+První registrace je jen začátek. SaaS žije z toho, že se lidé vrací, protože produkt pravidelně řeší něco důležitého. Proto má smysl definovat jednu nebo dvě opakované akce, které znamenají skutečnou hodnotu.
+
+Příklady:
+
+- reportingový nástroj: report byl vytvořen a sdílen,
+- projektový nástroj: úkol byl dokončen nebo předán,
+- analytika: tým si otevřel dashboard a udělal rozhodnutí,
+- fakturace: faktura byla vystavena a zaplacena,
+- AI asistent: návrh byl použit v reálném workflow.
+
+Retence se nezlepší tím, že pošleš víc e-mailů. Zlepší se tím, že produkt častěji doručí hodnotu, méně překáží a lépe připomene správný okamžik použití. E-mail může pomoct, ale jen pokud je konkrétní, užitečný a respektuje souhlas i frekvenci.
+
+Privacy-first přístup k retenci:
+
+- sleduj agregované vzory a produktové události s jasným účelem,
+- neukládej zbytečný obsah uživatelských dat do analytiky,
+- odděl technické logy od produktových metrik,
+- dej zákazníkovi možnost exportu a ukončení účtu,
+- používej přímé produktové signály místo reklamního pronásledování po internetu.
+
+Retence není trik. Je to důkaz, že produkt patří do pracovního rytmu zákazníka.
+
+### Checklist pro první platící SaaS zákazníky
+
+- [ ] Umíme popsat cílovku jednou konkrétní větou.
+- [ ] Máme nejméně pět rozhovorů založených na skutečném chování, ne na komplimentech.
+- [ ] První verze řeší jeden úzký use case s měřitelným výsledkem.
+- [ ] Víme, která akce znamená první hodnotu pro nového uživatele.
+- [ ] Onboarding vede k první hodnotě bez zbytečných povinných polí.
+- [ ] Pricing je jednoduchý, vysvětlitelný a navázaný na hodnotu.
+- [ ] Máme jasně oddělené produktové metriky, technické logy a zákaznický obsah.
+- [ ] Prázdné stavy ukazují další krok, ne jen prázdnou obrazovku.
+- [ ] Víme, která opakovaná akce signalizuje retenci.
+- [ ] Zákazník umí odejít: export, ukončení účtu a smazání dat nejsou improvizace.
+
+---
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -383,6 +511,7 @@ Pro marketingový web může stačit statický build a kontrola hlavních strán
 
 ## Pracovní log
 
+- **2026-10-11:** Doplněna kapitola 4 o SaaS produktu od nápadu po první platící zákazníky: validace bez komplimentů, MVP, pricing, onboarding, retence a privacy-first checklist.
 - **2026-10-11:** Doplněna kapitola 3 o technickém stacku pro malé týmy: rozdělení vrstev, EU hosting, zálohy, monitoring, logy, deploy pipeline a praktický checklist se zdroji ENISA a OWASP.
 - **2026-10-11:** Doplněna kapitola 2 o privacy-first základech: mapa dat, cookies, souhlas, SaaS architektura, živá dokumentace a praktický checklist s ověřenými zdroji ÚOOÚ, EDPB a Evropské komise.
 - **2026-10-11:** Založena struktura e-booku, přidána osnova a dokončena kapitola 1.1–1.5 o strategii webu, metrikách a privacy-first přístupu včetně checklistu a ověřených zdrojů.
