@@ -1182,6 +1182,166 @@ Když stránka nekonvertuje, nejdřív zkontroluj základní otázky: je slib ja
 
 ---
 
+## Příloha C: Měřicí plán pro privacy-first kampaň
+
+Měřicí plán je malý dokument, který říká, co budeš sledovat, proč to sleduješ, jak se budou značit odkazy a kdy se podle výsledků opravdu rozhodne. Bez něj se z analytiky rychle stane šuplík plný čísel, která vypadají důležitě, ale nikdo podle nich nic nemění.
+
+Privacy-first varianta má jednoduché pravidlo: měř rozhodnutí, ne zvědavost. Nepotřebuješ znát každé zaváhání myši, každé opakované načtení a každou minulou životní volbu návštěvníka. Potřebuješ vědět, jestli správní lidé přicházejí na správnou stránku, chápou nabídku a dělají další krok.
+
+### 1) Začni rozhodnutím, které chceš udělat
+
+Nejdřív napiš otázku, na kterou má kampaň odpovědět. Třeba:
+
+- Má audit homepage dostatečně jasnou nabídku pro B2B firmy?
+- Přivádí článek relevantní návštěvníky na konzultaci?
+- Funguje lépe přímý e-mail, partnerský odkaz nebo organické vyhledávání?
+- Má smysl pokračovat v tématu jako sérii, webinář nebo placenou nabídku?
+
+Teprve potom vyber metriky. Když začneš dashboardem, skončíš debatou o grafech. Když začneš rozhodnutím, skončíš akcí.
+
+Praktické minimum pro jednu kampaň:
+
+| Otázka | Metrika | Zdroj | Rozhodnutí |
+|---|---|---|---|
+| Přicházejí správní lidé? | návštěvy podle zdroje a kampaně | agregovaná analytika | ponechat, upravit nebo vypnout kanál |
+| Chápe stránka nabídku? | poměr návštěv a odeslání formuláře | analytika + formulář | upravit slib, CTA nebo formulář |
+| Jsou poptávky kvalitní? | ruční hodnocení 1–5 | CRM nebo tabulka | změnit targeting nebo kvalifikaci |
+| Vrací se téma v dotazech? | opakované otázky | sales/support poznámky | napsat FAQ, článek nebo šablonu |
+
+### 2) UTM disciplína: méně kreativity, víc konzistence
+
+UTM parametry jsou užitečné, protože umožní rozlišit zdroj, médium a kampaň bez toho, aby ses musel opírat o invazivní sledování napříč weby. Google ve své dokumentaci ke campaign URL builderu doporučuje při značkování používat zejména `utm_source`, `utm_medium` a `utm_campaign`; upozorňuje také, že hodnoty jsou citlivé na velikost písmen, takže `Newsletter` a `newsletter` se v reportingu mohou rozpadnout do dvou hodnot ([Google Analytics Help: URL builders](https://support.google.com/analytics/answer/10917952?hl=en-uk)). Umami ve svých metrikách mapuje běžné UTM parametry jako `utm_source`, `utm_medium`, `utm_campaign`, `utm_content` a `utm_term`, takže se stejná disciplína hodí i pro jednodušší privacy-friendly analytiku ([Umami: Metric definitions](https://docs.umami.is/docs/metric-definitions)).
+
+Zaveď jeden slovník a drž ho. Ne proto, že tabulky milují pořádek, ale protože špatné značení rozbije vyhodnocení rychleji než malá návštěvnost.
+
+Příklad jednoduchého slovníku:
+
+```text
+utm_source:
+- newsletter
+- linkedin
+- partner-dreamind
+- rss
+- direct-email
+
+utm_medium:
+- email
+- organic-social
+- referral
+- rss
+- cpc
+
+utm_campaign:
+- 2026-privacy-audit
+- 2026-saas-launch-checklist
+- 2026-webinar-eu-hosting
+
+utm_content:
+- hero-cta
+- text-link
+- footer-link
+- version-a
+- version-b
+```
+
+Dobrá URL:
+
+```text
+https://example.cz/privacy-audit?utm_source=newsletter&utm_medium=email&utm_campaign=2026-privacy-audit&utm_content=hero-cta
+```
+
+Horší URL:
+
+```text
+https://example.cz/privacy-audit?utm_source=Newsletter&utm_medium=mail&utm_campaign=Audit&utm_content=super-tlacitko-vpravo-final-final
+```
+
+Ta druhá možná funguje technicky, ale za měsíc nikdo neví, jestli `mail`, `email`, `newsletter` a `Newsletter` znamenají totéž. Gratuluji, právě sis vyrobil datový guláš s vlastní URL adresou.
+
+### 3) Nikdy nedávej osobní údaje do URL
+
+Do UTM parametrů nepatří e-mail, jméno, firma, telefon, ID zákazníka ani nic, co by člověka přímo nebo snadno nepřímo identifikovalo. URL se ukládají v historii prohlížeče, serverových lozích, analytice, refererech a někdy i ve sdílených náhledech. Co jednou strčíš do odkazu, cestuje dál s batohem a bez dozoru.
+
+Bezpečnější varianta:
+
+- `utm_campaign=2026-privacy-audit`
+- `utm_source=partner-dreamind`
+- `utm_content=case-study-link`
+
+Špatná varianta:
+
+- `utm_email=jana@example.cz`
+- `utm_company=konkretni-firma-s-r-o`
+- `utm_customer_id=12345`
+
+Pokud potřebuješ propojit poptávku s kampaní, ulož si k formuláři jen běžné kampaňové hodnoty a jasně je popiš v mapě dat. U individuální atribuce buď velmi opatrný: zeptej se, jestli ji opravdu potřebuješ, jak dlouho ji budeš držet a kdo ji uvidí.
+
+### 4) Vzor měřicího plánu na jednu stránku
+
+Použij tuhle šablonu před každou kampaní, landing page nebo větším obsahem:
+
+```text
+Název kampaně:
+Primární rozhodnutí:
+Hlavní stránka:
+Primární CTA:
+
+Cílová skupina:
+Slib kampaně:
+Co po návštěvníkovi chceme:
+
+UTM pravidla:
+- source:
+- medium:
+- campaign:
+- content:
+
+Metriky:
+- návštěvy stránky:
+- odeslání formuláře / kliknutí:
+- kvalita poptávky:
+- nejčastější otázky:
+
+Privacy poznámka:
+- jaká data sbíráme:
+- proč:
+- kde jsou uložená:
+- kdy mažeme nebo agregujeme:
+
+Vyhodnocení:
+- datum kontroly:
+- kdo rozhoduje:
+- možné akce: ponechat / upravit / vypnout / rozšířit
+```
+
+### 5) Vyhodnocuj rytmem, ne nervozitou
+
+Malá kampaň nepotřebuje kontrolu každých deset minut. Potřebuje předem domluvený rytmus. U landing page nech data chvíli dýchat, pak spoj čísla s kvalitou poptávek a teprve potom upravuj.
+
+Praktický rytmus:
+
+1. **Den spuštění:** zkontroluj, že se stránka načítá, formulář funguje, UTM se ukládají a e-mail po odeslání dorazí.
+2. **Po 3–7 dnech:** ověř zdroje návštěvnosti, první konverze a zjevné chyby ve slibu nebo formuláři.
+3. **Po 14 dnech:** porovnej kanály, kvalitu poptávek a nejčastější otázky.
+4. **Po 30 dnech:** rozhodni, jestli kampaň vypnout, zlepšit nebo proměnit v dlouhodobý kanál.
+
+Nesnaž se optimalizovat všechno najednou. Když změníš nadpis, CTA, cílovku, formulář i kanál, nebudeš vědět, co pomohlo. A pokud nic nepomůže, budeš mít aspoň pět podezřelých. To je detektivka, ne marketing.
+
+### Checklist pro privacy-first měření kampaně
+
+- [ ] Kampaň má jednu hlavní otázku a jedno hlavní rozhodnutí.
+- [ ] Používáme konzistentní UTM slovník s malými písmeny.
+- [ ] Do URL nedáváme osobní údaje ani interní zákaznická ID.
+- [ ] Měříme agregované návštěvy, zdroje a konverze bez cross-site profilování.
+- [ ] Kvalitu poptávek hodnotíme ručně nebo v CRM bez zbytečného obohacování dat.
+- [ ] Formulář ukládá jen pole, která mají jasný účel.
+- [ ] Vyhodnocení má datum, vlastníka a předem domluvené možné akce.
+- [ ] Po kampani mažeme nebo agregujeme data, která už nepotřebujeme.
+
+**Codyho komentář:** Dobré měření není šmírovací aparát. Je to kompas. Kompas taky nepotřebuje znát rodné číslo turisty, aby ukázal sever.
+
+---
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -1198,12 +1358,14 @@ Když stránka nekonvertuje, nejdřív zkontroluj základní otázky: je slib ja
 - European Commission: [Data Act](https://digital-strategy.ec.europa.eu/en/policies/data-act)
 - European Commission: [NIS2 Directive](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive)
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
+- Google Analytics Help: [URL builders — Collect campaign data with custom URLs](https://support.google.com/analytics/answer/10917952?hl=en-uk)
 - Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
 - Google Search Central: [Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
 - Google Search Central: [Using generative AI content on your website](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content)
 - OWASP: [Application Security Verification Standard](https://owasp.org/projects/asvs)
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - RSS Advisory Board: [RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
+- Umami: [Metric definitions](https://docs.umami.is/docs/metric-definitions)
 - Umami: [Platform](https://umami.is/platform)
 - Umami: [FAQ](https://docs.umami.is/docs/faq)
 - Úřad pro ochranu osobních údajů: [Cookies — otázky a odpovědi](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies)
@@ -1214,6 +1376,7 @@ Když stránka nekonvertuje, nejdřív zkontroluj základní otázky: je slib ja
 
 ## Pracovní log
 
+- **2026-10-11:** Přidána příloha C s měřicím plánem pro privacy-first kampaně, UTM slovníkem, šablonou vyhodnocení a checklistem bez osobních údajů v URL.
 - **2026-10-11:** Přidána příloha B se šablonou privacy-first landing page, vzorem hero sekce, formulářovými pravidly a checklistem před spuštěním.
 - **2026-10-11:** Přidána příloha A s 30denním akčním plánem pro zavedení privacy-first webu nebo SaaS v malém týmu.
 - **2026-10-11:** Doplněna kapitola 8 s praktickými checklisty a šablonami pro audit webu, SaaS launch, privacy review, marketingový plán, měsíční provozní review a operační manuál.
