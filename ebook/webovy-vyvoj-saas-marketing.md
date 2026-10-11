@@ -1466,6 +1466,101 @@ Výstup auditu by neměl být pětistránkový dokument. Stačí tabulka:
 
 ---
 
+## Příloha E: Exit plán od dodavatele bez dramatu
+
+Privacy-first provoz není jen o tom, kde data běží dnes. Je také o tom, jestli dokážeš zítra odejít bez toho, aby ti produkt klekl na kolena a tým strávil tři týdny kopírováním CSV souborů do tabulky s názvem `final-final-opravdu-posledni.xlsx`.
+
+Exit plán je jednoduchý dokument pro každou službu, která je důležitá pro web, SaaS nebo marketing. Nepíše se proto, že dodavatel je špatný. Píše se proto, že dobrý provoz počítá se změnou: cen, podmínek, regionu, kvality podpory, vlastnictví firmy nebo tvých potřeb.
+
+### 1) Rozděl dodavatele podle kritičnosti
+
+Ne každý nástroj potřebuje stejnou úroveň přípravy. Ikonky na webu a interní nástroj pro kreslení diagramů nejsou stejný problém jako databáze, e-mailová služba nebo fakturační systém.
+
+Praktické rozdělení:
+
+- **Kritický provoz:** hosting, databáze, úložiště souborů, DNS, transakční e-mail, platby.
+- **Důležitý produkt:** helpdesk, produktová analytika, monitoring, error tracking, feature flags.
+- **Marketing a obsah:** CMS, newsletter, SEO nástroje, formuláře, plánovač příspěvků.
+- **Interní produktivita:** dokumentace, úkoly, chat, automatizace, AI nástroje.
+
+U kritického provozu chceš znát náhradní řešení předem. U marketingových nástrojů často stačí mít exporty, přístupová práva a jasný postup. U interních nástrojů je důležité hlavně to, aby know-how nezůstalo zamčené v jednom účtu bývalého kolegy. Ano, i tohle je architektura. Jen má méně Kubernetes a víc zdravého rozumu.
+
+### 2) U každého dodavatele si napiš pět odpovědí
+
+Exit plán nemusí být román. Pro většinu malých týmů stačí tabulka s pěti sloupci:
+
+1. **Co u dodavatele běží:** data, proces, integrace nebo zákaznický kontakt.
+2. **Jak data exportujeme:** formát, kdo to umí, kde je postup, jak často testujeme.
+3. **Kam bychom šli:** konkrétní alternativa nebo dočasný fallback.
+4. **Co se rozbije při odchodu:** web, login, e-maily, billing, reporting, onboarding.
+5. **Kolik času potřebujeme:** realistický odhad pro klidnou migraci i krizový režim.
+
+Příklad:
+
+| Dodavatel | Co drží | Export | Alternativa | Riziko | Čas odchodu |
+| --- | --- | --- | --- | --- | --- |
+| Newsletter nástroj | kontakty, segmenty, šablony | CSV kontaktů, HTML šablony | EU newsletter nebo vlastní RSS-first řešení | ztráta segmentů a historie kampaní | 1–3 dny |
+| Monitoring | incidenty, uptime, alerty | konfigurace alertů, seznam endpointů | jiný EU monitoring + interní runbook | slepota při výpadku | 0,5–1 den |
+| Databáze | zákaznická produktová data | dump, restore test, šifrovaná záloha | jiný EU region/provider | výpadek aplikace, integrita dat | 1–2 týdny |
+
+Tabulka není dokonalá pravda. Je to mapa stresu. Když víš, kde by odchod bolel, můžeš bolest zmenšit dřív, než se z ní stane páteční večerní sport.
+
+### 3) Testuj export, ne jen tlačítko „Exportovat“
+
+Tlačítko exportu je slib. Použitelný import je realita. Mezi nimi bývá propast, do které padají české znaky, časové zóny, přílohy, segmenty, ID zákazníků a nervy.
+
+Jednou za čtvrtletí si u kritických služeb ověř:
+
+- export jde spustit bez podpory dodavatele,
+- soubor obsahuje data, která opravdu potřebuješ,
+- formát je čitelný mimo původní nástroj,
+- export neobsahuje zbytečné osobní údaje navíc,
+- existuje bezpečné místo, kam export uložit při migraci,
+- někdo v týmu umí z exportu obnovit nebo znovu sestavit provoz.
+
+U databáze platí staré dobré pravidlo: záloha, kterou jsi nikdy neobnovil, je spíš uklidňující pohádka než záloha. U marketingových dat platí podobná verze: export kontaktů, který nejde spárovat se souhlasy a zdrojem, je spíš kreativní skládanka než použitelný asset.
+
+### 4) Sniž vendor lock-in už při návrhu
+
+Nejlepší exit plán je ten, který nepotřebuje hrdinský výkon. Když novou integraci navrhuješ, přidej pár jednoduchých pravidel:
+
+- Interně používej vlastní stabilní ID, ne ID dodavatele jako hlavní pravdu.
+- Důležité události posílej přes vlastní vrstvu nebo frontu, ne přímo z deseti míst v aplikaci.
+- Obsah drž v přenositelném formátu, pokud to dává smysl: Markdown, HTML, CSV, JSON.
+- Smluvní a provozní informace ukládej mimo nástroj, kterého se týkají.
+- Automatizace dokumentuj tak, aby je šlo znovu vytvořit i bez původního UI.
+- U kritických služeb měj jasně oddělený účet vlastníka a osobní účty členů týmu.
+
+Privacy-first detail: čím méně dat dodavateli posíláš, tím snazší je odejít. Minimalizace dat není jen právní nebo etická disciplína. Je to taky praktická migrační strategie. Menší datová stopa znamená méně exportů, méně mapování polí, méně rizik při přesunu a méně nepříjemných překvapení.
+
+### 5) Udělej si krizový scénář na jednu stránku
+
+Pro kritické dodavatele si napiš krátký scénář „co kdyby zítra přestal fungovat“. Ne kvůli katastrofickému myšlení, ale kvůli rychlosti rozhodování.
+
+Šablona:
+
+- **Signál problému:** jak poznáme, že dodavatel selhává?
+- **První rozhodnutí:** kdy čekáme, kdy přepínáme, kdy komunikujeme zákazníkům?
+- **Technický krok:** kdo mění DNS, deploy, konfiguraci, API klíče nebo frontu?
+- **Datový krok:** odkud bereme poslední bezpečnou kopii dat?
+- **Komunikační krok:** co řekneme zákazníkům, supportu a obchodníkům?
+- **Návrat k normálu:** kdy uděláme post-mortem a co zlepšíme?
+
+**Codyho komentář:** Exit plán je jako deštník. Když ho máš, většinou neprší. Když ho nemáš, prší přesně ve chvíli, kdy máš notebook na baterce, zákazník čeká demo a někdo v supportu se ptá, jestli „to nejde prostě restartovat“.
+
+### Checklist pro exit plán dodavatelů
+
+- [ ] Máme seznam kritických dodavatelů pro provoz, produkt, marketing a interní práci.
+- [ ] U každého kritického dodavatele víme, jaká data drží a proč.
+- [ ] Existuje popsaný exportní postup a vlastník, který ho umí spustit.
+- [ ] Export nebo záloha byly aspoň jednou otestované v praxi.
+- [ ] Máme předem vybranou alternativu nebo dočasný fallback.
+- [ ] Integrace používají vlastní stabilní ID tam, kde to snižuje lock-in.
+- [ ] Přístup vlastníka není navázaný jen na osobní účet jednoho člověka.
+- [ ] Krizový scénář obsahuje technický, datový i komunikační krok.
+
+---
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -1500,6 +1595,7 @@ Výstup auditu by neměl být pětistránkový dokument. Stačí tabulka:
 
 ## Pracovní log
 
+- **2026-10-11:** Přidána příloha E s exit plánem od dodavatelů: kritičnost služeb, exporty, fallbacky, omezení vendor lock-inu, krizový scénář a checklist.
 - **2026-10-11:** Přidána příloha D s onboarding auditem pro první týden v SaaS: první hodnotná akce, minimalizace polí, privacy-first měření, e-mailová sekvence a praktický checklist.
 - **2026-10-11:** Přidána příloha C s měřicím plánem pro privacy-first kampaně, UTM slovníkem, šablonou vyhodnocení a checklistem bez osobních údajů v URL.
 - **2026-10-11:** Přidána příloha B se šablonou privacy-first landing page, vzorem hero sekce, formulářovými pravidly a checklistem před spuštěním.
