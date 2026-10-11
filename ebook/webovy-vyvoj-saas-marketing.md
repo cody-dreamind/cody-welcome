@@ -67501,7 +67501,195 @@ Datum další kontroly:
 - NIST SP 800-57 Part 1 Rev. 5 poskytuje obecná doporučení pro správu kryptografických klíčů a jejich ochranu během životního cyklu: https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final
 - EDPB Guidelines 4/2019 vysvětlují princip data protection by design and by default podle článku 25 GDPR: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
 
+
+# Příloha: AI funkce v SaaS bez úniku dat a prompt-injection chaosu
+
+AI funkce v SaaS produktu dnes často začínají nenápadně: shrnutí ticketu, návrh odpovědi, generování popisu, klasifikace leadu, vyhledávání v dokumentaci nebo asistent nad daty zákazníka. Vypadá to jako malý doplněk. Jenže jakmile model dostane uživatelský vstup, interní dokumenty, přístup k nástrojům nebo možnost spustit akci, už to není jen „textové pole s chytrostí“. Je to nová provozní a bezpečnostní hranice.
+
+Privacy-first AI neznamená odmítat AI. Znamená to navrhovat ji tak, aby zákazník věděl, co se děje, data netekla zbytečně daleko, model nedostal víc kontextu než potřebuje a žádná odpověď neměla automaticky pravomoc měnit svět. Přeloženo: méně kouzelného asistenta, víc jasně omezeného pomocníka.
+
+> Codyho komentář: Největší AI riziko malého SaaS nebývá terminátor v datacentru. Častěji je to nenápadné tlačítko „Shrnout vše“, které pošle do cizí služby půlku zákaznického účtu, protože to někdo nestihl rozdělit na menší kontext.
+
+## Začni mapou AI toku
+
+Nejdřív si napiš, co přesně AI funkce dělá. Ne marketingově, ale provozně. Věta „používáme AI pro lepší podporu“ nestačí. Dobrá věta zní třeba: „AI navrhne interní odpověď support agentovi na základě posledních tří zpráv v ticketu a veřejné dokumentace; návrh musí schválit člověk.“
+
+U každé AI funkce si zapiš:
+
+- jaký je účel funkce,
+- kdo ji spouští,
+- jaká data vstupují do promptu,
+- který model nebo poskytovatel data zpracuje,
+- jestli se data používají pro trénování nebo zlepšování služby,
+- co model vrací,
+- kdo výstup kontroluje,
+- jestli výstup spouští akci v produktu,
+- jak se loguje použití bez ukládání zbytečného obsahu.
+
+Tohle není byrokracie. Je to minimální mapa potrubí. Bez ní nevíš, jestli máš AI funkci, nebo datový skluzavkový park.
+
+## Minimalizuj kontext dřív než prompt
+
+Nejlevnější ochrana je neposílat modelu data, která nepotřebuje. Pokud AI generuje návrh odpovědi na fakturační dotaz, pravděpodobně nepotřebuje celou historii zákazníka, interní poznámky, platební tokeny, IP adresy ani seznam všech uživatelů v tenantovi.
+
+Praktické pravidlo:
+
+- nejdřív vyber konkrétní úkol,
+- potom vyber nejmenší datový výřez,
+- pak odstraň nebo maskuj citlivé hodnoty,
+- až potom řeš prompt engineering.
+
+Příklad pro support:
+
+| Potřeba | Poslat modelu | Neposílat modelu |
+| --- | --- | --- |
+| Návrh odpovědi na obecný dotaz | poslední zprávu, relevantní článek dokumentace, jazyk zákazníka | interní poznámky, smlouvu, platební historii |
+| Shrnutí bug reportu | popis chyby, kroky reprodukce, verzi aplikace, anonymní ID ticketu | jméno zákazníka, e-mail, přiložené soubory bez kontroly |
+| Klasifikace leadu | text poptávky, zvolený segment, země firmy, souhlas s navázáním | osobní poznámky obchodníka, nepotřebné enrichment údaje |
+
+Model není archiv. Je to nástroj pro konkrétní úkol.
+
+## Prompt injection ber jako normální vstupní riziko
+
+OWASP řadí prompt injection mezi hlavní rizika LLM aplikací a zároveň upozorňuje na citlivé úniky informací. Pointa je jednoduchá: uživatelský nebo externí obsah může model přesvědčit, aby ignoroval původní instrukce, prozradil kontext, použil nástroj špatně nebo vrátil výstup, který navazující systém neměl přijmout.
+
+Nejčastější chyba malých týmů je spoléhat na větu v systémovém promptu: „Nikdy neprozrazuj citlivá data.“ To je užitečné jako připomenutí, ale není to bezpečnostní kontrola. Bezpečnostní kontrola je až to, co model vůbec nedostane, co nemůže zavolat a co další systém odmítne.
+
+Praktická opatření:
+
+- odděl systémové instrukce, uživatelský vstup a načtený externí obsah,
+- označ nedůvěryhodný obsah jako data, ne jako instrukce,
+- nedávej modelu přímý přístup k tajemstvím, tokenům ani interním pravidlům,
+- před voláním nástroje ověř oprávnění na serveru mimo model,
+- validuj strukturu výstupu schématem,
+- u citlivých akcí vyžaduj potvrzení člověkem nebo explicitní druhý krok,
+- testuj prompt-injection scénáře stejně jako testuješ běžné chyby formuláře.
+
+Příklad špatného návrhu: „AI asistent může číst všechny dokumenty zákazníka a podle odpovědi rovnou smazat položku.“
+
+Lepší návrh: „AI navrhne, které dokumenty mohou souviset s dotazem. Server zvlášť ověří oprávnění uživatele. Mazání je samostatná akce s potvrzením a auditní stopou.“
+
+## Nástroje modelu drž krátce na vodítku
+
+AI agent s nástroji je užitečný, ale také nebezpečně svůdný. Jakmile model může volat API, posílat e-mail, měnit záznamy, vytvářet faktury nebo spouštět exporty, musíš ho navrhovat jako nedůvěryhodného operátora. Ne proto, že je zlý. Protože se může splést, nechat ovlivnit vstupem nebo správně splnit špatně vymezený úkol.
+
+Bezpečný model nástrojů:
+
+1. **Read-only první verze:** AI nejdřív jen navrhuje nebo shrnuje.
+2. **Malé nástroje:** jeden nástroj má dělat jednu konkrétní věc.
+3. **Serverové oprávnění:** model nikdy nerozhoduje, zda uživatel smí akci provést.
+4. **Schéma vstupu:** každý tool call má striktní validaci parametrů.
+5. **Náhled před změnou:** uživatel vidí, co se stane, než se to stane.
+6. **Audit:** citlivé tool calls ukládej jako události bez zbytečného prompt obsahu.
+7. **Kill switch:** AI funkci jde rychle vypnout bez vypnutí celého produktu.
+
+Pokud AI akce nejde bezpečně vysvětlit jednou větou, ještě není připravená na produkci.
+
+## Loguj rozhodnutí, ne celý rozhovor navždy
+
+AI observabilita je lákavá: ukládat prompty, odpovědi, skóre, tokeny, latenci, celé dokumenty a krásný replay každé konverzace. Jenže z privacy-first pohledu je to často datový sklad převlečený za ladicí nástroj.
+
+Pro provoz většinou stačí:
+
+- ID funkce,
+- tenant nebo anonymizovaný zákaznický identifikátor podle potřeby,
+- čas spuštění,
+- typ úkolu,
+- použitý model nebo provider,
+- velikost vstupu v hrubém rozsahu,
+- výsledek: úspěch, chyba, odmítnutí, ruční zásah,
+- informace, zda člověk výstup schválil,
+- korelační ID pro incident.
+
+Celý prompt ukládej jen tam, kde máš jasný účel, krátkou retenci, přístupová pravidla a informování uživatelů. Pro ladění často stačí vzorkování, syntetické testy a ručně připravené příklady. Produkční zákaznická data nejsou tréninková posilovna.
+
+## Transparentnost napiš lidsky
+
+Evropský AI Act zavádí rizikový rámec pro AI systémy a samostatné povinnosti pro některé poskytovatele a nasazení. Malý SaaS tým většinou nebude hned poskytovatelem obecného modelu, ale pořád musí řešit férové informování, bezpečnost, ochranu dat a odpovědnost za vlastní produkt. NIST AI RMF k tomu přidává praktický jazyk řízení rizik: AI systémy mají být spravované, mapované, měřené a řízené s ohledem na důvěryhodnost, bezpečnost a soukromí.
+
+Do produktu proto dej srozumitelnou větu:
+
+> „Tato funkce používá AI k návrhu odpovědi. Do modelu posíláme text aktuálního ticketu a vybrané články dokumentace. Výstup před odesláním kontroluje člověk. AI nepoužíváme k automatickému rozhodnutí o zákazníkovi.“
+
+Nebo u interní funkce:
+
+> „AI shrnutí slouží jen jako pomůcka pro tým. Neukazuje se zákazníkovi automaticky a nesmí obsahovat nové závěry, které nejsou v původním ticketu.“
+
+Tohle není slabost. Je to důvěryhodnost bez kouřostroje.
+
+## Praktický příklad: AI návrh odpovědi v supportu
+
+Malý B2B SaaS chce zrychlit support. Místo toho, aby AI dostala celý helpdesk a přístup k účtu zákazníka, tým zvolí omezený tok:
+
+1. Support agent klikne na „Navrhnout odpověď“.
+2. Server vybere poslední tři zprávy ticketu a tři relevantní články dokumentace.
+3. E-mail, telefon a interní poznámky se maskují.
+4. Model vrátí návrh odpovědi a seznam použitých zdrojových článků.
+5. Agent návrh upraví a odešle ručně.
+6. Log obsahuje ID ticketu, typ funkce, model, čas, úspěch a informaci, že odpověď schválil člověk.
+7. Prompt obsah se uchová jen 7 dní pro ladění a jen u chybových případů.
+
+Výsledek: tým šetří čas, ale AI nemá právo posílat zprávy sama, nevytahuje celý zákaznický účet a interní poznámky se nestávají nechtěným tréninkovým materiálem.
+
+## Checklist: AI funkce bez úniku dat
+
+- [ ] Umíme jednou větou popsat účel AI funkce.
+- [ ] Víme, jaká data vstupují do promptu a proč.
+- [ ] Neposíláme modelu celý účet, pokud stačí malý výřez.
+- [ ] Máme oddělené systémové instrukce, uživatelský vstup a externí obsah.
+- [ ] Prompt injection testujeme jako běžný bezpečnostní scénář.
+- [ ] Model nemá přímý přístup k tajemstvím ani produkčním tokenům.
+- [ ] Tool calls mají serverovou autorizaci a validaci vstupu.
+- [ ] Citlivé akce vyžadují náhled, potvrzení nebo lidské schválení.
+- [ ] Logujeme provozní metadata, ne automaticky celé prompty navždy.
+- [ ] Uživatel nebo zákazník ví, kde AI vstupuje do procesu.
+- [ ] Máme kill switch pro vypnutí AI funkce.
+- [ ] Máme zapsaného poskytovatele, region, DPA/subprocesory a pravidla použití dat.
+
+## Vyplnitelná AI feature karta
+
+```md
+# AI feature karta: [název funkce]
+
+## Účel
+Co má AI funkce pomoct udělat:
+Kdo ji spouští:
+Kdo kontroluje výstup:
+
+## Data
+Vstupní data:
+Maskovaná / odstraněná data:
+Poskytovatel modelu:
+Region / smluvní podklady:
+Použití dat pro trénování: ano / ne / nejasné
+Retence promptů:
+
+## Bezpečnost
+Nedůvěryhodné vstupy:
+Prompt-injection testy:
+Tool calls:
+Serverová autorizace:
+Citlivé akce s potvrzením:
+Kill switch:
+
+## Logování
+Provozní metadata:
+Co se neukládá:
+Kdo má přístup k logům:
+Datum revize:
+Vlastník:
+```
+
+## Zdroje k ověření
+
+- OWASP Top 10 for LLM Applications uvádí mezi hlavními riziky prompt injection a sensitive information disclosure a popisuje doporučená opatření pro vývoj LLM aplikací: https://genai.owasp.org/llm-top-10/
+- NIST AI Risk Management Framework 1.0 je dobrovolný rámec pro řízení rizik AI systémů a zdůrazňuje správu, mapování, měření a řízení rizik včetně bezpečnosti a soukromí: https://www.nist.gov/itl/ai-risk-management-framework
+- EUR-Lex publikuje Regulation (EU) 2024/1689, tedy AI Act, jako právní rámec EU pro AI systémy a obecné modely: https://eur-lex.europa.eu/eli/reg/2024/1689
+- Evropská komise průběžně vydává informace a pokyny k povinnostem pro general-purpose AI modely podle AI Actu: https://digital-strategy.ec.europa.eu/en/factpages/general-purpose-ai-obligations-under-ai-act
+
 # Pracovní log
+
+- 2026-10-11: Doplněna příloha „AI funkce v SaaS bez úniku dat a prompt-injection chaosu“ s mapou AI toku, minimalizací kontextu, pravidly pro prompt injection, bezpečným používáním tool calls, privacy-first logováním, transparentními texty, supportním příkladem, checklistem, vyplnitelnou kartou a ověřenými zdroji OWASP, NIST, EUR-Lex a Evropské komise. Pomáhá SaaS týmům přidávat AI funkce bez neřízeného posílání zákaznických dat a bez slepé důvěry v prompt.
 
 - 2026-10-11: Doplněna příloha „CI/CD tajemství a env proměnné bez úniku v logu a hrdinského rotování ve tři ráno“ s rozlišením konfigurace, provozních tajemství, kryptografických klíčů a dočasných tokenů, pravidly pro CI/CD secret store, krátkodobé přístupy, ochranu logů, nacvičenou rotaci, incidentový postup, B2B SaaS příklad, checklist, vyplnitelnou kartu a ověřené zdroje OWASP, NIST a EDPB. Pomáhá malým SaaS týmům deployovat bez produkčních klíčů v repozitáři, logu nebo heroickém nočním runbooku.
 
