@@ -4789,6 +4789,145 @@ Stejně pomáhá při exit plánu. Pokud chceš odejít z nástroje, registr ti 
 - [ ] Registr pomáhá při incidentu, migraci i měsíčním privacy-first reportu.
 
 
+## Příloha AA: Přístupy, MFA a obnova účtu bez bezpečnostního divadla
+
+Přihlašování je jeden z těch nudných detailů, které nikoho nezajímají — dokud se někdo cizí nepřihlásí za zákazníka, admina nebo účetní. U malého SaaS nejde o to mít nejexotičtější identity architekturu na světě. Jde o to, aby běžné účty, administrace, reset hesla a ztracené MFA neotevíraly zadní dveře dokořán.
+
+OWASP v doporučeních k autentizaci, MFA a správě session zdůrazňuje kombinaci silné autentizace, ochrany proti útokům na přihlašovací formuláře, bezpečného resetu a správného zacházení se session tokeny ([OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html), [OWASP Multifactor Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html), [OWASP Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)). NCSC zase u správy hesel pro vlastníky systémů doporučuje modernější přístup než nekonečné rotace a pravidla typu „jedno velké písmeno, jeden hieroglyf a slza administrátora“ ([NCSC: Password administration for system owners](https://www.ncsc.gov.uk/collection/passwords)).
+
+### 1) Rozliš běžný účet, citlivou akci a administraci
+
+Ne každý krok v produktu potřebuje stejnou úroveň kontroly. Když uživatel otevře dashboard, chce rychlost. Když mění fakturační e-mail, exportuje data nebo přidává administrátora, chceš jistotu.
+
+Praktické rozdělení:
+
+- **Běžné přihlášení:** e-mail + heslo, passkey nebo SSO podle cílovky.
+- **Citlivé akce:** re-authentication, potvrzení přes MFA nebo potvrzovací e-mail.
+- **Administrace produktu:** povinné MFA, oddělené role a auditní stopa.
+- **Interní provozní účty:** žádné sdílené heslo v chatu, přístup přes jmenované účty a správce hesel.
+- **Break-glass účet:** existuje jen pro nouzi, má omezený počet lidí, silné MFA a pravidelný test.
+
+Příklad: pokud zákazník mění název workspace, nepotřebuješ z toho dělat checkpoint jako na letišti. Pokud mění vlastníka účtu, fakturační údaje nebo exportuje seznam uživatelů, už to checkpoint být má. Bezpečnost nemá otravovat všude; má stát přesně tam, kde špatné rozhodnutí bolí.
+
+### 2) MFA má pomáhat, ne trestat uživatele
+
+MFA je výborná ochrana proti převzetí účtu, ale špatně navržené MFA umí z produktu udělat únikovou hru. Malý SaaS by měl nabídnout jednoduché možnosti, jasné recovery a rozumné vynucení podle rizika.
+
+Doporučený postup:
+
+1. **Začni administrátory:** MFA povinně pro vlastníky workspace, týmové adminy a interní správce.
+2. **Nabídni MFA všem:** běžní uživatelé ho mohou zapnout dobrovolně, hlavně u účtů s citlivými daty.
+3. **Ulož recovery kódy:** po zapnutí MFA je ukaž jednou, umožni regeneraci po ověření a nikdy je neposílej v plaintext e-mailu.
+4. **Loguj změny MFA:** přidání, odebrání, regenerace recovery kódů a změna primární metody patří do auditní stopy.
+5. **Měj proces ztráty MFA:** support nesmí vypínat MFA jen proto, že někdo napsal „ahoj, jsem majitel“.
+
+Passkeys jsou dobrá cesta pro jednodušší a phishing-resistant přihlášení; FIDO Alliance je popisuje jako přihlašovací údaje založené na FIDO standardech, které umožňují přihlášení podobně jako odemčení zařízení ([FIDO Alliance: Passkeys](https://fidoalliance.org/passkeys/)). Pro B2B SaaS je ale důležité myslet i na správu zařízení, sdílené firemní procesy a recovery. Passkey není kouzelná pilulka. Je to dobrý zámek, ale pořád potřebuješ plán, kdo má klíče a co se stane při ztrátě telefonu.
+
+**Codyho komentář:** Nejhorší bezpečnostní nastavení je takové, které tým slavnostně zapne, ale nikdo mu nerozumí. Raději jednoduché MFA s dobrým recovery procesem než „enterprise-grade identity platformu“, kterou všichni obcházejí screenshotem QR kódu v interním vlákně. Ano, přesně takhle vznikají horory.
+
+### 3) Reset hesla je bezpečnostní tok, ne jen e-mail s odkazem
+
+Reset hesla bývá nejslabší místo přihlašování. Když útočník nemusí znát heslo, protože mu stačí zneužít recovery proces, celé heslo se stává dekorací.
+
+Bezpečný reset pro malý SaaS:
+
+- odpověď formuláře je stejná, ať e-mail existuje nebo ne,
+- reset token je náhodný, jednorázový a krátkodobý,
+- token se ukládá jen jako hash,
+- po resetu se uživatel nepřihlašuje automaticky, pokud to nedává jasný bezpečnostní smysl,
+- po změně hesla se nabídne nebo vynutí odhlášení ostatních sessions,
+- změna hesla i reset se zapíšou do auditní stopy,
+- uživatel dostane upozornění, že heslo bylo změněno.
+
+OWASP má k resetu hesla samostatný checklist a upozorňuje mimo jiné na jednotné odpovědi, bezpečné tokeny, časové omezení a další kroky po resetu ([OWASP Forgot Password Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html)).
+
+Praktický text do UI:
+
+> Pokud účet s tímto e-mailem existuje, poslali jsme instrukce pro obnovení přístupu. Odkaz má omezenou platnost.
+
+Tohle je nudné, přesné a bezpečnější než „E-mail jsme našli, gratulujeme, právě jsme útočníkovi potvrdili polovinu hádanky.“
+
+### 4) Session není jen cookie, ale dočasný klíč od účtu
+
+Po přihlášení už většinu práce nedělá heslo, ale session. Proto session token neber jako technický detail někde v frameworku. Je to dočasný klíč od účtu.
+
+Minimum pro session politiku:
+
+- používej secure, httpOnly a SameSite cookies podle typu aplikace,
+- po přihlášení a zvýšení oprávnění rotuj session identifikátor,
+- nastav rozumnou idle expiraci a absolutní expiraci,
+- citlivé akce ověřuj znovu,
+- umožni uživateli zobrazit a ukončit aktivní sessions,
+- při resetu hesla nebo podezřelé změně MFA zvaž odhlášení ostatních zařízení,
+- do logů nikdy nepiš session tokeny, reset odkazy ani celé Authorization headery.
+
+Privacy-first pohled: seznam aktivních sessions má být užitečný, ale ne slídivý. Uživatel obvykle potřebuje vědět „prohlížeč, přibližná lokalita, poslední aktivita“. Nepotřebuješ skladovat detailní geolokační historii, fingerprint zařízení a sbírku IP adres navždy. Bezpečnost není výmluva pro datové syslení.
+
+### 5) Role a oprávnění navrhuj podle práce, ne podle ega
+
+U malého SaaS se často začíná jednou rolí: admin. Pak přibude superadmin. Pak owner. Pak „admin, ale ne úplně“. A najednou máš oprávnění jako šuplík s kabely: něco tam určitě funguje, ale nikdo neví co.
+
+Lepší start:
+
+- **Owner:** správa fakturace, členů, kritických nastavení a zrušení účtu.
+- **Admin:** správa běžných nastavení a uživatelů bez destruktivních akcí.
+- **Member:** práce s produktem bez správy přístupů.
+- **Read-only:** audit, reporting, externí konzultant nebo účetní přístup.
+- **Support/internal:** časově omezený přístup se souhlasem nebo jasným provozním důvodem.
+
+Každá role má mít popis v produktu i v interní dokumentaci. Pokud roli neumíš vysvětlit jednou větou, pravděpodobně není role, ale historická nehoda.
+
+### 6) Šablona access review pro malý SaaS
+
+```markdown
+## Access review: [produkt / workspace / interní systém]
+
+### Kontext
+- Datum kontroly:
+- Vlastník kontroly:
+- Systém nebo workspace:
+- Důvod kontroly: měsíční / incident / změna týmu / audit
+
+### Role a účty
+| Účet | Role | Důvod přístupu | MFA | Poslední aktivita | Akce |
+|---|---|---|---|---|---|
+| | | | ano/ne | | ponechat / snížit / odebrat |
+
+### Citlivé přístupy
+- Owner účty:
+- Admin účty:
+- Interní support přístupy:
+- API tokeny a integrační účty:
+- Break-glass účet:
+
+### Nálezy
+- Přístupy k odebrání:
+- Role ke snížení:
+- Účty bez MFA:
+- Nejasné vlastnictví:
+- Tokeny k rotaci:
+
+### Rozhodnutí
+- Co měníme hned:
+- Co plánujeme:
+- Kdo je odpovědný:
+- Termín další kontroly:
+```
+
+### Checklist pro přihlašování a přístupy
+
+- [ ] Admini, owneři a interní správci mají povinné MFA.
+- [ ] Reset hesla používá jednorázové krátkodobé tokeny a neprozrazuje existenci účtu.
+- [ ] Po resetu hesla a změně MFA řešíme aktivní sessions.
+- [ ] Recovery MFA má jasný support postup a auditní stopu.
+- [ ] Citlivé akce vyžadují re-authentication nebo silnější potvrzení.
+- [ ] Session tokeny, reset odkazy a Authorization headery se nikdy neukládají do logů.
+- [ ] Role jsou popsané podle práce, ne podle historické náhody.
+- [ ] Sdílené účty jsou výjimka s vlastníkem, datem ukončení a dodatečnou kontrolou.
+- [ ] API tokeny mají vlastníka, rozsah oprávnění, expiraci nebo pravidelnou rotaci.
+- [ ] Access review probíhá pravidelně a končí konkrétní změnou, ne jen pocitem bezpečí.
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -4811,6 +4950,8 @@ Stejně pomáhá při exit plánu. Pokud chceš odejít z nástroje, registr ti 
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
 - EUR-Lex: [Regulation (EU) 2016/679 — General Data Protection Regulation](https://eur-lex.europa.eu/legal-content/ENG/ALL/?uri=celex%3A32016R0679)
 - EUR-Lex: [Directive 2002/58/EC on privacy and electronic communications](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02002L0058-20091219)
+- FIDO Alliance: [Passkeys](https://fidoalliance.org/passkeys/)
+- NCSC: [Password administration for system owners](https://www.ncsc.gov.uk/collection/passwords)
 - Google Analytics Help: [URL builders — Collect campaign data with custom URLs](https://support.google.com/analytics/answer/10917952?hl=en-uk)
 - Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
 - Google Search Console Help: [Performance report](https://support.google.com/webmasters/answer/7576553)
@@ -4822,6 +4963,10 @@ Stejně pomáhá při exit plánu. Pokud chceš odejít z nástroje, registr ti 
 - MDN: [Lazy loading](https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Lazy_loading)
 - MDN: [prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)
 - NCSC: [Offline backups in an online world](https://www.ncsc.gov.uk/guidance/offline-backups-in-an-online-world)
+- OWASP: [Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
+- OWASP: [Forgot Password Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html)
+- OWASP: [Multifactor Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html)
+- OWASP: [Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
 - OWASP: [Application Security Verification Standard](https://owasp.org/projects/asvs)
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - RSS Advisory Board: [RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
@@ -4840,6 +4985,8 @@ Stejně pomáhá při exit plánu. Pokud chceš odejít z nástroje, registr ti 
 ---
 
 ## Pracovní log
+
+- **2026-10-12:** Přidána příloha AA o přihlašování, MFA a obnově účtů: rozdělení rizikových akcí, reset hesla, session politika, role, access review a checklist pro malé privacy-first SaaS týmy.
 
 - **2026-10-12:** Přidána příloha Z o registru zpracování a subdodavatelích: karty zpracování, role správců a zpracovatelů, review nových nástrojů, incident/exit využití a praktický checklist.
 - **2026-10-12:** Přidána příloha Y o zálohách a obnově: RTO/RPO, oddělené a šifrované zálohy, restore testy, retenční rizika, runbook, monitoring, šablona testu a checklist.
