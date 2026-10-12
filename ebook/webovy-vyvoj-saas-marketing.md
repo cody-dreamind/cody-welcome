@@ -2464,6 +2464,177 @@ Použij tuto šablonu při auditu důvěryhodnosti:
 - [ ] Jednou za kvartál tým zkontroluje, které sliby na webu už neodpovídají realitě.
 
 
+## Příloha M: E-mailing a onboarding bez sledovacího lunaparku
+
+E-mail je pořád jeden z nejpraktičtějších kanálů pro SaaS, obsah i zákaznickou péči. Problém není e-mail samotný. Problém je, když se z něj stane sledovací kombajn: pixel na otevření, profilování každého kliknutí, automatizace bez kontextu a databáze kontaktů, u které nikdo neví, odkud se vzala.
+
+Privacy-first e-mailing stojí na jednoduché větě: posílej lidem zprávy, které očekávají, a měř jen tolik, kolik potřebuješ pro lepší rozhodnutí. Ano, zní to podezřele normálně. To je přesně pointa.
+
+### 1) Rozděl e-maily podle účelu
+
+Nejdřív si pojmenuj, jaký typ e-mailu posíláš. Každý typ má jiný účel, jinou míru očekávání a jiný rytmus.
+
+Základní rozdělení:
+
+- **Transakční e-maily:** potvrzení účtu, reset hesla, faktura, bezpečnostní upozornění, změna nastavení.
+- **Produktový onboarding:** série e-mailů, která pomáhá uživateli dokončit první hodnotnou akci.
+- **Obsahový newsletter:** novinky, návody, komentáře, checklisty a vzdělávací obsah.
+- **Obchodní sdělení:** nabídky, promo akce, upsell, cross-sell nebo návrat do placeného tarifu.
+- **Servisní komunikace:** změny podmínek, incidenty, výpadky, ukončení funkce nebo důležité provozní změny.
+
+Pro každý typ si napiš:
+
+- proč zpráva existuje,
+- komu se posílá,
+- co má čtenář po přečtení udělat,
+- jaký je právní a produktový důvod odeslání,
+- jak se člověk dostane z daného seznamu pryč.
+
+Tahle tabulka zní byrokraticky, ale ušetří hodně bolesti. Když nevíš, proč e-mail existuje, nepomůže mu ani lepší předmět, ani emoji v prvním odstavci. Jen bude otravnější s větší kreativitou.
+
+### 2) Sbírej méně kontaktů, ale s čistým kontextem
+
+Nejcennější e-mailová databáze není ta největší. Je to ta, u které víš, odkud kontakt přišel, co očekává a proč mu píšeš.
+
+U každého kontaktu drž minimum praktických informací:
+
+- e-mailovou adresu,
+- zdroj přihlášení nebo vztah k produktu,
+- čas přihlášení nebo vzniku vztahu,
+- očekávaný typ komunikace,
+- stav odhlášení,
+- interní poznámku k účelu, pokud je potřeba.
+
+Naopak se vyhni sběru věcí „pro jistotu“: telefon, role, velikost firmy, rozpočet, obor, osobní preference, sociální profily. Pokud je nepotřebuješ pro konkrétní další krok, do newsletter formuláře nepatří. Každé pole navíc je malý úvěr na budoucí chaos.
+
+Praktický formulář pro newsletter může mít jen:
+
+```markdown
+# Odebírat Codyho poznámky o webu, SaaS a privacy-first marketingu
+
+E-mail: [__________]
+
+[ ] Souhlasím se zasíláním praktických e-mailů od Dreamindu. Odběr můžu kdykoliv zrušit jedním kliknutím.
+
+[Odebírat]
+```
+
+Pokud chceš segmentaci, raději ji udělej podle zájmu, ne podle šmírování:
+
+- „Chci hlavně webový vývoj.“
+- „Chci hlavně SaaS a produkt.“
+- „Chci hlavně marketing a obsah.“
+- „Chci hlavně privacy-first provoz.“
+
+Člověk tak sám řekne, co chce. Není potřeba hádat z deseti návštěv blogu a jednoho podezřelého kliknutí v úterý večer.
+
+### 3) Odhlášení nesmí být úniková místnost
+
+ÚOOÚ u obchodních sdělení popisuje jako problém mimo jiné situace, kdy chybí možnost jednoduchého odmítnutí nebo odhlášení další komunikace. Evropská pravidla ePrivacy také pracují s principem, že nevyžádaná obchodní komunikace elektronickou poštou stojí na souhlasu, případně na úzké výjimce pro podobné produkty a služby u existujících zákazníků, pokud mají možnost takové použití odmítnout ([ÚOOÚ: obchodní sdělení](https://uoou.gov.cz/profesional/obchodni-sdeleni), [EUR-Lex: ePrivacy Directive 2002/58/EC](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02002L0058-20091219)).
+
+Prakticky to znamená:
+
+- odhlašovací odkaz dej do každého marketingového nebo newsletterového e-mailu,
+- nevyžaduj přihlášení do účtu jen kvůli odhlášení,
+- nebal odhlášení do tří kroků a potvrzovacích her,
+- nepiš „odhlášení může trvat 14 dní“, pokud to technicky umíš hned,
+- respektuj odhlášení napříč nástroji, ne jen v jedné kampani.
+
+Dobrý odhlašovací text:
+
+> „Nechcete další Codyho e-maily? Odběr zrušíte jedním kliknutím tady.“
+
+Špatný text:
+
+> „Kliknutím zde upravíte svoje komunikační preference v zákaznickém portálu po ověření heslem a bezpečnostním kódem.“
+
+Jestli je jednodušší zrušit bankovní účet než newsletter, někde se produktový tým ztratil v lese.
+
+### 4) Měř e-mail podle rozhodnutí, ne podle voyeurismu
+
+Open-rate zní lákavě, ale v praxi je čím dál méně spolehlivý a často vede k divným rozhodnutím. Některé e-mailové klienty načítají obrázky automaticky, jiné je blokují, některé chrání soukromí příjemce. Výsledek: číslo v dashboardu vypadá přesně, ale chová se jako horoskop v obleku.
+
+Privacy-first měření e-mailu proto stav na agregovaných signálech:
+
+- počet odeslaných e-mailů,
+- počet doručených nebo odmítnutých zpráv,
+- počet odhlášení,
+- počet odpovědí,
+- počet kliknutí na hlavní odkaz na agregované úrovni,
+- konverze na cílové stránce bez předávání osobních údajů v URL,
+- kvalitativní odpovědi od čtenářů.
+
+U UTM parametrů drž disciplínu z přílohy C: do URL nikdy nedávej e-mail, jméno, firmu ani jiné osobní údaje. Stačí zdroj, médium, kampaň a případně varianta obsahu. Pokud potřebuješ měřit konkrétní onboarding krok, měř událost v produktu tam, kde se stane, ne přes sledovací detektivku v e-mailu.
+
+**Codyho komentář:** Nejlepší metrika newsletteru je často odpověď od reálného člověka. „Tohle jsme podle vás upravili“ má větší hodnotu než graf, který se tváří vědecky, ale ve skutečnosti měří, kdo má zapnuté načítání obrázků.
+
+### 5) Onboarding e-maily piš jako doprovod, ne jako nátlak
+
+SaaS onboarding e-mail nemá uživatele zatlačit do produktu. Má mu pomoct udělat další smysluplný krok. Pokud e-mail začíná „Všimli jsme si, že jste ještě...“, zvaž, jestli to nezní jako produktový stalker s kalendářem.
+
+Lepší struktura onboarding série:
+
+1. **Den 0 — potvrzení a první krok:** „Tady je účet, začněte jednou konkrétní akcí.“
+2. **Den 1 — vysvětlení hodnoty:** „Jak poznáte, že produkt funguje.“
+3. **Den 3 — odstranění překážky:** „Tři nejčastější problémy při nastavení a jak je vyřešit.“
+4. **Den 7 — příklad použití:** „Jak podobný tým nastavil workflow.“
+5. **Den 14 — rozhodnutí:** „Co zkontrolovat před koncem trialu.“
+
+Každý e-mail by měl mít:
+
+- jeden hlavní úkol,
+- jednu primární výzvu k akci,
+- jasný důvod, proč příjemce zprávu dostal,
+- možnost změnit preference nebo se odhlásit, pokud nejde o čistě transakční zprávu,
+- žádné citlivé informace v předmětu ani náhledu.
+
+Příklad dobrého onboarding e-mailu:
+
+```markdown
+Předmět: První workflow nastavíte za 10 minut
+
+Ahoj,
+
+nejrychlejší cesta k hodnotě je nastavit první workflow pro jeden konkrétní případ.
+
+Doporučený postup:
+1. Vyber jeden týmový proces.
+2. Přidej pouze povinná pole.
+3. Pozvi jednoho kolegu na kontrolu.
+
+Návod: /docs/prvni-workflow
+
+Pokud řešíte citlivá data, začněte tady: /docs/privacy-nastaveni
+
+— Cody
+```
+
+### 6) Udělej měsíční hygienu seznamu
+
+E-mailing není „nastav a zapomeň“. Jednou měsíčně projdi seznamy a zkontroluj:
+
+- odhlášení a stížnosti,
+- nedoručitelné adresy,
+- segmenty, které už nikdo nepoužívá,
+- automatizace bez vlastníka,
+- staré lead magnety a formuláře,
+- texty souhlasů a očekávání,
+- odkazy na privacy informace.
+
+Pokud někdo rok nereaguje a nemá aktivní zákaznický vztah, zeptej se, jestli ho opravdu potřebuješ držet v marketingové databázi. Možná ne. Databáze, která je menší, čistší a očekávaná, často funguje líp než hromada kontaktů z dávné kampaně, kterou už nikdo nechce přiznat.
+
+### Checklist pro privacy-first e-mailing
+
+- [ ] Každý typ e-mailu má jasný účel, cílovou skupinu a vlastníka.
+- [ ] Newsletter formulář sbírá jen e-mail a nezbytné preference.
+- [ ] U kontaktů víme, odkud přišly a jaký typ komunikace očekávají.
+- [ ] Marketingové a newsletterové e-maily mají jednoduché odhlášení jedním kliknutím.
+- [ ] Do URL a UTM parametrů nedáváme osobní údaje.
+- [ ] Nepotřebujeme individuální sledovací profil pro rozhodnutí o obsahu.
+- [ ] Onboarding e-maily pomáhají dokončit konkrétní krok, nevyvolávají pocit sledování.
+- [ ] Jednou měsíčně čistíme seznamy, staré automatizace a nepoužívané segmenty.
+
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -2481,6 +2652,7 @@ Použij tuto šablonu při auditu důvěryhodnosti:
 - European Commission: [AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
 - European Commission: [NIS2 Directive](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive)
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
+- EUR-Lex: [Directive 2002/58/EC on privacy and electronic communications](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02002L0058-20091219)
 - Google Analytics Help: [URL builders — Collect campaign data with custom URLs](https://support.google.com/analytics/answer/10917952?hl=en-uk)
 - Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
 - Google Search Console Help: [Performance report](https://support.google.com/webmasters/answer/7576553)
@@ -2496,12 +2668,14 @@ Použij tuto šablonu při auditu důvěryhodnosti:
 - Umami: [FAQ](https://docs.umami.is/docs/faq)
 - Úřad pro ochranu osobních údajů: [Cookies — otázky a odpovědi](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies)
 - Úřad pro ochranu osobních údajů: [Cookies od začátku roku 2022 pouze se souhlasem](https://uoou.gov.cz/novinky/vse/cookies-od-zacatku-roku-2022-pouze-se-souhlasem)
+- Úřad pro ochranu osobních údajů: [Obchodní sdělení](https://uoou.gov.cz/profesional/obchodni-sdeleni)
 - Úřad pro ochranu osobních údajů: [Informace pro e-shopy](https://uoou.gov.cz/profesional/qa-otazky-a-odpovedi/informace-pro-e-shopy)
 
 ---
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha M o privacy-first e-mailingu a onboardingových e-mailech: typy zpráv, minimální sběr kontaktů, jednoduché odhlášení, agregované měření, onboarding série a měsíční hygiena seznamu.
 - **2026-10-12:** Přidána příloha L o důvěryhodnosti privacy-first webu: typy důkazů, case studies, reference, rozmístění důkazů, lidské vysvětlení bezpečnosti a checklist.
 - **2026-10-11:** Přidána příloha K o privacy-first pricing stránce: nákupní situace, hodnotové tarify, limity, CTA podle připravenosti zákazníka, agregované měření a praktická šablona.
 - **2026-10-11:** Přidána příloha J o privacy-first supportu a knowledge base: vrstvy podpory, struktura článků, šablona návodu, minimální ticket formulář, agregované metriky a měsíční review.
