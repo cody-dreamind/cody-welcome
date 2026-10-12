@@ -3332,6 +3332,165 @@ Použij ji jako pracovní dokument v repozitáři nebo interní wiki. Důležit�
 - [ ] Kontroluješ retenční politiku při každé nové integraci, kampani nebo změně onboardingu?
 
 
+## Příloha R: Incidentová komunikace a status page bez paniky a kouřové clony
+
+Incidenty nejsou otázka „jestli“, ale „kdy a jak moc to bude bolet“. U malého webu to může být výpadek formuláře, rozbitý deploy, chyba v DNS, nedoručené e-maily nebo zmatek v platbách. U SaaS produktu přibývá autentizace, role, integrace, data zákazníků, importy, exporty a všechno ostatní, co má talent rozbít se přesně v pátek odpoledne.
+
+ENISA v materiálech pro malé a střední firmy opakovaně zdůrazňuje připravenost na incidenty, řízení rizik, zálohy, kontrolu přístupů a kontinuitu provozu jako praktický základ kyberbezpečnosti ([ENISA: Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes), [ENISA: Cybersecurity for SMEs — Challenges and Recommendations](https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes)). Přeloženo do řeči malého týmu: nestačí mít monitoring. Musíš vědět, kdo vstává od kafe, kdo rozhoduje a kdo zákazníkům řekne pravdu bez mlžení.
+
+> **Codyho komentář:** Incidentová komunikace není PR divadlo. Je to provozní hygiena. Zákazník obvykle odpustí chybu. Hůř odpouští ticho, mlžení a e-mail ve stylu „u některých uživatelů mohlo dojít k částečné degradaci zážitku“.
+
+### 1) Nejdřív rozliš výpadek, degradaci a bezpečnostní podezření
+
+Ne každý problém potřebuje stejný režim. Když všechno nazveš incidentem, tým otupí. Když naopak všechno shodíš jako „jen menší glitch“, jednou přehlédneš průšvih.
+
+Praktické rozdělení:
+
+- **Výpadek:** služba nebo klíčová část nefunguje. Například nejde přihlášení, formulář neodesílá poptávky nebo API vrací chyby.
+- **Degradace:** služba běží, ale pomalu, nespolehlivě nebo s omezenou funkcí. Například se zpožďují e-maily, exporty čekají ve frontě nebo admin rozhraní padá u části účtů.
+- **Datová chyba:** systém zobrazuje, ukládá nebo posílá nesprávná data. Sem patří i špatně spárované faktury, chybné role a importy, které přepíšou uživatelská nastavení.
+- **Bezpečnostní podezření:** neobvyklý přístup, uniklý token, podezřelý export, kompromitovaný účet nebo chyba, která mohla zpřístupnit data.
+
+Každá kategorie má mít jiný práh komunikace. Výpadek veřejné služby patří na status page rychle. Datová chyba může nejdřív potřebovat izolaci dopadu. Bezpečnostní podezření vyžaduje opatrnost: neslibuj víc, než víš, a právní posouzení řeš s člověkem, který má k tématu kompetenci.
+
+### 2) Před incidentem si rozděl role
+
+V incidentu není čas zakládat komisi pro výběr komise. Stačí čtyři role. V malém týmu může jeden člověk držet víc rolí, ale role musí být pojmenované.
+
+| Role | Odpovědnost | Typická otázka |
+|---|---|---|
+| Velitel incidentu | drží prioritu, rozhoduje o dalším kroku | Co je teď nejdůležitější? |
+| Technický vlastník | diagnostikuje, opravuje, ověřuje | Kde je příčina a jak ji izolujeme? |
+| Komunikátor | píše status, odpovědi a interní shrnutí | Co ví zákazník a kdy dostane update? |
+| Evidence keeper | zapisuje časy, rozhodnutí, dopad a odkazy | Co se stalo a jak to později vyhodnotíme? |
+
+Pokud jste dva, nevadí. Jeden řeší techniku, druhý drží komunikaci a zápis. Pokud jste jeden, napiš si role jako checklist. Ano, mluvíš sám se sebou. Ne, není to divné. Divné je hledat po incidentu v historii chatu, kdy přesně se co stalo.
+
+### 3) Status page piš jako navigaci, ne jako sebeobranu
+
+Status page má zákazníkovi odpovědět na čtyři otázky:
+
+1. Co je rozbité?
+2. Koho se to týká?
+3. Co má zákazník dělat nebo nedělat?
+4. Kdy bude další update?
+
+Dobrá první zpráva:
+
+```text
+Vyšetřujeme problém s odesíláním kontaktních formulářů.
+
+Dopad: nové poptávky se mohou zpozdit nebo nemusí dorazit do e-mailu.
+Co dělat: pokud jde o urgentní zprávu, napište přímo na podpora@example.cz.
+Další update: do 30 minut nebo dříve, pokud budeme mít potvrzenou příčinu.
+```
+
+Slabá první zpráva:
+
+```text
+Někteří uživatelé mohou zaznamenat dočasné potíže.
+```
+
+Ta druhá věta neříká nic. Je to kouřová clona v kapesním balení. Uživatel pořád neví, jestli má čekat, opakovat akci, poslat e-mail, nebo si uvařit čaj a doufat.
+
+### 4) Komunikuj v rytmu, který snižuje support zátěž
+
+Ticho vyrábí support tickety. Když lidé nevidí update, ptají se individuálně. Tím týmu přidávají práci přesně ve chvíli, kdy potřebuje opravovat problém.
+
+Nastav si rytmus podle závažnosti:
+
+- **Kritický výpadek:** první status do 15 minut od potvrzení, další update každých 30 minut.
+- **Degradace:** první status po ověření dopadu, další update každých 60 minut nebo při změně stavu.
+- **Menší chyba bez širokého dopadu:** status jen pokud se týká viditelné části služby nebo opakovaně zasahuje zákazníky.
+- **Bezpečnostní podezření:** komunikuj potvrzená fakta, ne domněnky; interně drž podrobný časový záznam.
+
+U každého updatu napiš, jestli se něco změnilo. I věta „příčinu stále ověřujeme, další update v 15:30“ je lepší než prázdno. Prázdno má v B2B komunikaci zvuk padající důvěry.
+
+### 5) Interní zápis je stejně důležitý jako veřejná zpráva
+
+Veřejný status má být stručný. Interní zápis má být přesný. Po incidentu z něj vznikne postmortem, úkoly a zlepšení monitoringu. Pokud zápis neexistuje, tým se učí z pocitů. Pocity jsou fajn na playlist, horší na provoz SaaS.
+
+Minimální interní incident log:
+
+```text
+Incident: [název]
+Začátek dopadu: [čas]
+Detekce: [čas a zdroj]
+Kategorie: výpadek / degradace / datová chyba / bezpečnostní podezření
+Dopad: [koho a čeho se týká]
+Aktuální hypotéza: [co si myslíme]
+Ověřená fakta: [co víme]
+Rozhodnutí: [čas + kdo + co]
+Komunikace: [status page / e-mail / support makro]
+Oprava: [odkaz na commit, deploy, konfiguraci]
+Ověření: [jak víme, že je opraveno]
+Follow-up úkoly: [vlastník + termín]
+```
+
+U privacy-first provozu si hlídej, aby incident log sám nevytvářel další problém. Nevkládej do něj celé osobní údaje, tokeny, tajné klíče, surové exporty ani screenshoty s citlivými daty. Odkazuj na bezpečné úložiště a používej anonymizované příklady.
+
+### 6) Po incidentu udělej krátké postmortem bez hledání viníka
+
+Postmortem není soudní síň. Cílem není najít člověka, který „to rozbil“. Cílem je najít systémové zlepšení: lepší alert, test, fallback, dokumentaci, proces schvalování nebo omezení přístupu.
+
+Struktura na 30 minut:
+
+- **5 minut:** co se stalo a jaký byl dopad,
+- **10 minut:** časová osa od první příčiny po opravu,
+- **10 minut:** co pomohlo a co brzdilo,
+- **5 minut:** maximálně tři follow-up úkoly s vlastníkem a termínem.
+
+Dobré follow-up úkoly jsou konkrétní:
+
+- přidat alert na nárůst chyb formuláře,
+- doplnit integrační test pro odeslání poptávky,
+- zavést expiraci starých API tokenů,
+- přepsat support makro pro výpadek plateb,
+- aktualizovat runbook pro DNS změny.
+
+Špatné follow-up úkoly jsou mlha:
+
+- zlepšit monitoring,
+- být opatrnější,
+- dávat větší pozor,
+- lépe komunikovat.
+
+Ano, všechno zní hezky. Ne, nic z toho nejde zkontrolovat.
+
+### Šablona incidentové komunikace
+
+```text
+Název: [stručný popis problému]
+Stav: vyšetřujeme / identifikováno / opravujeme / monitorujeme / vyřešeno
+
+Co se děje:
+[Jedna až tři věty bez technického balastu.]
+
+Dopad:
+[Koho se problém týká, jak se projevuje a co nevíme.]
+
+Co děláme:
+[Aktuální krok týmu.]
+
+Co má udělat zákazník:
+[Nic / náhradní postup / kontakt / neopakovat akci.]
+
+Další update:
+[konkrétní čas nebo podmínka]
+```
+
+### Checklist pro incidentovou komunikaci
+
+- [ ] Máš pojmenované kategorie incidentů: výpadek, degradace, datová chyba, bezpečnostní podezření?
+- [ ] Existují role pro incident: velitel, technický vlastník, komunikátor a evidence keeper?
+- [ ] Umíš vydat první status bez hledání šablony v panice?
+- [ ] Obsahuje status dopad, doporučený krok pro zákazníka a čas dalšího updatu?
+- [ ] Vedeš interní časovou osu bez citlivých údajů, tokenů a zbytečných osobních dat?
+- [ ] Máš support makro pro nejčastější incidenty: formulář, platby, přihlášení, e-maily, importy?
+- [ ] Děláš po incidentu krátké postmortem s maximálně třemi konkrétními úkoly?
+- [ ] Kontroluješ po opravě nejen technický stav, ale i zákaznickou komunikaci a případné follow-upy?
+
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -3372,6 +3531,7 @@ Použij ji jako pracovní dokument v repozitáři nebo interní wiki. Důležit�
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha R o incidentové komunikaci a status page: kategorie incidentů, role týmu, první status, rytmus updatů, interní zápis, postmortem a checklist bez zbytečného sběru citlivých dat.
 - **2026-10-12:** Přidána příloha Q o retenci a mazání dat: inventura datových zásuvek, rozdělení důvodů uložení, režimy mazání, pravidla pro exporty, postup pro žádosti uživatelů a šablona retenční politiky.
 - **2026-10-12:** Přidána příloha P o měsíčním privacy-first reportu: otázky před grafy, jednostránkové shrnutí, oddělení signálu a interpretace, rozhodovací metriky, vlastník doporučení a šablona reportu.
 - **2026-10-12:** Přidána příloha O o privacy-first produktové roadmapě: témata místo seznamu funkcí, hypotézy, prioritizace podle hodnoty a důvěry, oddělení discovery/delivery/údržby, vyhodnocení dopadu a roadmapová karta.
