@@ -5493,6 +5493,159 @@ Tyhle metriky slouží k bezpečnosti a zlepšování produktu, ne k mikromanage
 - [ ] Metriky používání adminu slouží k bezpečnosti a zlepšení produktu, ne k internímu šmírování.
 
 
+## Příloha AE: Billing, fakturace a platby bez zbytečného úniku dat
+
+Fakturace v malém SaaS často začne jako „pošleme fakturu z účetního systému a hotovo“. Pak přibude platební brána, trial, kupony, dobropisy, ruční slevy, DPH režimy, export pro účetní a najednou je z billing vrstvy jedna z nejcitlivějších částí produktu. Ne proto, že by byla sexy. Spíš proto, že spojuje identitu zákazníka, smluvní vztah, peníze, daňové údaje a historii používání služby.
+
+Evropská komise připomíná, že fakturační pravidla pro DPH řeší mimo jiné náležitosti faktur a elektronickou fakturaci ([European Commission: VAT invoicing rules](https://taxation-customs.ec.europa.eu/taxation/vat/businesses/vat-invoicing-rules_en)). Česká finanční správa má samostatné informace k DPH a kontrolnímu hlášení, což je dobrý start pro ověření praktických povinností podle konkrétní situace ([Finanční správa: Daň z přidané hodnoty](https://financnisprava.gov.cz/cs/dane/dane/dan-z-pridane-hodnoty)). Privacy-first pointa je jednoduchá: daňové povinnosti plň přesně, ale nepoužívej je jako výmluvu pro sběr všeho, co se zrovna hodí.
+
+**Codyho komentář:** Billing je místo, kde se z „jen interní poznámky“ rychle stane právní dokument, export pro účetní a citlivý záznam v supportu. Jinými slovy: piš tam tak, jako by to jednou četl někdo s lupou a špatnou náladou.
+
+### 1) Odděl produktový účet od fakturační identity
+
+Produktový účet a fakturační identita nejsou totéž. Uživatel může být vývojář, který produkt nastavuje. Plátce může být firma. Fakturační kontakt může být účetní. Právní odběratel může být jiná entita ve skupině. Když to sliješ do jedné tabulky „user“, začne bolet každá změna e-mailu, vlastnictví nebo firmy.
+
+Lepší model pro B2B SaaS:
+
+- **Workspace / tenant:** prostor, kde se používá produkt.
+- **Uživatel:** člověk s rolí v produktu.
+- **Fakturační profil:** právní název, IČO/DIČ, adresa, země, režim DPH, fakturační e-mail.
+- **Předplatné:** tarif, období, stav, limity, sleva, datum obnovy.
+- **Platební metoda:** token nebo reference u platebního poskytovatele, ne číslo karty v tvé databázi.
+- **Daňový doklad:** neměnný záznam s číslem, položkami, částkami a zákonnou retencí.
+
+Praktické pravidlo: produkt může znát stav předplatného, ale nemusí znát všechny fakturační detaily. Support může vidět, že účet má problém s platbou, ale nemusí vidět celé daňové údaje, pokud je neřeší. Produktové metriky mohou vědět, že tarif je „Pro“, ale nepotřebují fakturační adresu ani DIČ.
+
+### 2) Platební data drž u specializovaného poskytovatele
+
+Pokud nejsi platební instituce, nesnaž se být platební instituce v přestrojení za startup. Čísla karet, ověřovací kódy a citlivá platební data patří k poskytovateli, který má na bezpečnost a compliance procesy. Tvoje aplikace má pracovat s referencí, stavem platby a webhookem.
+
+Privacy-first minimální návrh:
+
+1. Uživatel zadává kartu v bezpečném prvku poskytovatele, ne do tvého formuláře.
+2. Aplikace ukládá jen ID zákazníka, ID platební metody a stav předplatného.
+3. Webhooky validuješ podpisem a zpracováváš idempotentně.
+4. Do logů nikdy neposíláš celé payloady s osobními nebo platebními údaji.
+5. Do supportu posíláš jen bezpečný souhrn: stav, datum, částku, chybový typ, další krok.
+
+Příklad bezpečného support textu:
+
+> Platba za workspace „Acme“ ve výši 49 EUR selhala 2026-10-12 kvůli odmítnutí bankou. Uživatel má aktualizovat platební metodu v billing portálu.
+
+Špatný text:
+
+> Tady je celý webhook payload, poslední čtyři čísla karty, e-mail, adresa a interní poznámka obchodníka.
+
+První varianta řeší práci. Druhá vyrábí budoucí incident s příchutí „kdo to sakra poslal do Slacku“.
+
+### 3) Faktura má být neměnný doklad, ne živý dokument
+
+U faktur potřebuješ disciplínu. Jakmile je daňový doklad vystavený, nemá se potichu přepisovat, protože někdo našel překlep nebo změnil adresu. Opravy řeš dobropisem, opravným dokladem nebo postupem, který odpovídá účetní a daňové realitě. Konkrétní právní režim ověř s účetní nebo daňovým poradcem; e-book není účetní kancelář v klobouku.
+
+Technicky to znamená:
+
+- faktura má vlastní číselnou řadu,
+- vystavený doklad má uložený snapshot údajů v době vystavení,
+- změna fakturačního profilu ovlivní budoucí doklady, ne historické doklady,
+- storno nebo oprava má vlastní auditní stopu,
+- PDF faktury je generované z uložených dat, ne ručně upravované mimo systém,
+- export pro účetní má verzi, datum a rozsah.
+
+Užitečný detail: ukládej i důvod ruční slevy, dobropisu nebo prodloužení trialu. Ne kvůli mikromanagementu, ale kvůli tomu, aby za tři měsíce někdo pochopil, proč má zákazník jinou cenu než ceník. Důvod má být věcný, ne osobní román.
+
+### 4) Billing portál navrhni jako self-service, ale bezpečně
+
+Self-service billing šetří support a zvyšuje důvěru. Zákazník by měl umět najít faktury, změnit fakturační e-mail, aktualizovat platební metodu, stáhnout doklady a pochopit, kdy se obnoví předplatné. Zároveň nejde o veřejné hřiště: billing akce mění peníze a právní vztah.
+
+Rozumná pravidla:
+
+- přístup k billing portálu má role owner nebo billing admin,
+- citlivé změny vyžadují čerstvé přihlášení nebo MFA podle rizika,
+- změna fakturačního e-mailu pošle potvrzení starému i novému kontaktu,
+- změna tarifu jasně ukáže dopad na cenu, limity a datum účinnosti,
+- zrušení předplatného nevyžaduje prosbu na support, ale obsahuje jasné důsledky,
+- stažení faktur se loguje, ale bez ukládání obsahu faktury do analytiky.
+
+Privacy-first bonus: billing portál nemá být reklamní plocha s trackery. Člověk tam řeší peníze, smlouvu a doklady. Nepotřebuje remarketingový pixel, heatmapu ani „growth hack“ popup, který se snaží zachránit churn jako prodavač deštníků v poušti.
+
+### 5) Webhooky, exporty a účetní integrace jsou datové hranice
+
+Billing málokdy žije sám. Posílá data do účetnictví, CRM, e-mailingu, banky, platební brány nebo interního reportingu. Každé propojení je datová hranice a má mít vlastní kartu.
+
+U každé integrace napiš:
+
+- jaký systém data posílá,
+- jaký systém data přijímá,
+- jaký je účel,
+- jaké konkrétní pole se přenáší,
+- kdo má přístup na druhé straně,
+- jak dlouho se data drží,
+- jak integraci vypneš nebo nahradíš.
+
+Webhooky navrhuj jako provozní infrastrukturu, ne jako skládku JSONu. Ukládej minimální payload potřebný pro zpracování a diagnostiku. Citlivé části maskuj nebo neukládej vůbec. Pokud potřebuješ raw payload kvůli řešení incidentů, dej mu krátkou retenci, omezený přístup a jasný důvod.
+
+### 6) Revenue report není důvod znát všechno o každém
+
+Zakladatel potřebuje vědět, jestli SaaS roste. Nepotřebuje kvůli tomu exportovat osobní údaje všech zákazníků do pěti tabulek. Revenue reporting může být praktický a privacy-first zároveň.
+
+Stačí sledovat:
+
+- MRR podle tarifu a segmentu,
+- nové, rozšířené, zmenšené a zrušené předplatné,
+- churn podle důvodu odchodu,
+- neúspěšné platby podle typu chyby,
+- počet účtů v grace period,
+- agregovaný dopad slev a kuponů.
+
+Pozor na volné texty u důvodů odchodu. „Nemáme budget“ je užitečný signál. „Pan Novák psal, že šéf je naštvaný a firma propouští“ je zbytečné osobní drama v databázi. Pro reporting používej kategorie a volný text drž odděleně, s retencí a omezeným přístupem.
+
+### Šablona billing review
+
+```markdown
+## Billing review: [produkt / workspace]
+
+### Kontext
+- Kontrolované období:
+- Vlastník billing procesu:
+- Zapojené systémy:
+
+### Datový model
+- Fakturační profil oddělený od uživatele: ano/ne
+- Platební data uložená jen jako token/reference: ano/ne
+- Historické faktury neměnné: ano/ne
+
+### Přístupy
+- Role s přístupem k billing údajům:
+- Role s právem měnit tarif nebo rušit předplatné:
+- Poslední access review:
+
+### Integrace
+- Platební poskytovatel:
+- Účetnictví:
+- CRM/reporting:
+- Webhook retence:
+
+### Rizika a nálezy
+- Zbytečná osobní data:
+- Nejasné exporty:
+- Chybějící auditní stopa:
+- Doporučené změny:
+```
+
+### Checklist pro billing a fakturaci
+
+- [ ] Produktový účet, uživatel, fakturační profil, předplatné a doklad jsou oddělené entity.
+- [ ] Aplikace neukládá čísla karet ani citlivá platební data.
+- [ ] Webhooky se validují, zpracovávají idempotentně a nelogují zbytečné payloady.
+- [ ] Vystavené faktury jsou neměnné; opravy mají řízený účetní postup.
+- [ ] Billing portál je dostupný jen oprávněným rolím a citlivé změny mají auditní stopu.
+- [ ] Změny tarifu, slevy, dobropisy a ruční zásahy mají věcný důvod.
+- [ ] Exporty pro účetní a reporting mají jasný rozsah, vlastníka a retenci.
+- [ ] Revenue reporty používají agregace a kategorie místo osobních detailů.
+- [ ] Integrace plateb, účetnictví a CRM mají datovou kartu a exit postup.
+- [ ] Support vidí bezpečný billing souhrn, ne kompletní fakturační a platební historii bez důvodu.
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -5503,6 +5656,7 @@ Tyhle metriky slouží k bezpečnosti a zlepšování produktu, ne k mikromanage
 - ENISA: [Cloud Security Guide for SMEs](https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes)
 - ENISA: [Technical implementation guidance on cybersecurity risk management measures](https://www.enisa.europa.eu/publications/technical-implementation-guidance-on-cybersecurity-risk-management-measures)
 - European Commission: [European Accessibility Act](https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en)
+- European Commission: [VAT invoicing rules](https://taxation-customs.ec.europa.eu/taxation/vat/businesses/vat-invoicing-rules_en)
 - European Data Protection Board: [Be compliant — Data protection guide for small business](https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en)
 - European Data Protection Board: [Data controller or data processor](https://www.edpb.europa.eu/sme/learn-the-basics/data-controller-or-data-processor_en)
 - European Data Protection Board: [Data protection impact assessment](https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/data-protection-impact-assessment_en)
@@ -5518,6 +5672,7 @@ Tyhle metriky slouží k bezpečnosti a zlepšování produktu, ne k mikromanage
 - EUR-Lex: [Regulation (EU) 2016/679 — General Data Protection Regulation](https://eur-lex.europa.eu/legal-content/ENG/ALL/?uri=celex%3A32016R0679)
 - EUR-Lex: [Directive 2002/58/EC on privacy and electronic communications](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02002L0058-20091219)
 - FIDO Alliance: [Passkeys](https://fidoalliance.org/passkeys/)
+- Finanční správa: [Daň z přidané hodnoty](https://financnisprava.gov.cz/cs/dane/dane/dan-z-pridane-hodnoty)
 - NCSC: [Password administration for system owners](https://www.ncsc.gov.uk/collection/passwords)
 - Google Analytics Help: [URL builders — Collect campaign data with custom URLs](https://support.google.com/analytics/answer/10917952?hl=en-uk)
 - Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
@@ -5554,6 +5709,7 @@ Tyhle metriky slouží k bezpečnosti a zlepšování produktu, ne k mikromanage
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha AE o billing vrstvě, fakturaci a platbách: oddělení fakturační identity od účtu, bezpečné platební tokeny, neměnné doklady, billing portál, webhooky, exporty, revenue reporting, šablona review a checklist.
 - **2026-10-12:** Přidána příloha AD o interním adminu a backoffice: pracovní situace, role podle účelu, citlivé akce, impersonace, minimalizace dat, metriky používání, šablona access review a checklist.
 - **2026-10-12:** Přidána příloha AC o dokumentaci a knowledge base: rozdělení typů dokumentace, task-first návody, troubleshooting bez sběru citlivých dat, vlastnictví článků, privacy-first měření, lidské vysvětlení bezpečnosti a checklist.
 - **2026-10-12:** Přidána příloha AB o logování a auditní stopě: účel logů, minimalizace PII, sanitizace, auditní události, retence, přístupy, šablona logovací politiky a checklist.
