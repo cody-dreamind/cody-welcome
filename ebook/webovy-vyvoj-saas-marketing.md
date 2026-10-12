@@ -5110,9 +5110,228 @@ Když logy používáš i pro support, postav raději bezpečný interní panel:
 - [ ] Jednou měsíčně kontrolujeme, jestli se v logách neobjevují PII nebo tajné hodnoty.
 
 
+## Příloha AC: Dokumentace a knowledge base bez firemní archeologie
+
+Dokumentace není odkladiště textů, které nikdo nechce říkat nahlas. Je to provozní vrstva produktu. U malého webu nebo SaaS rozhoduje o tom, jestli zákazník zvládne první kroky bez podpory, jestli tým opakuje stejné vysvětlování pořád dokola a jestli nová funkce přežije déle než paměť člověka, který ji napsal.
+
+Privacy-first dokumentace má ještě jeden úkol: říkat pravdu bez zbytečného sběru dat. Nemá nahrazovat produkt, ale má snižovat nejistotu. Nemá nutit uživatele poslat ticket kvůli každé drobnosti. A hlavně nemá fungovat jen jako hezká fasáda, za kterou tým interně pořád hledá odpovědi v chatu, starých e-mailech a v hlavě kolegy, který je zrovna na dovolené.
+
+Diátaxis popisuje čtyři základní typy dokumentace: tutorials, how-to guides, reference a explanation ([Diátaxis](https://www.diataxis.fr/), [Diátaxis: Start here](https://www.diataxis.fr/start-here/)). The Good Docs Project nabízí praktické šablony pro typy dokumentů jako README, how-to, reference, troubleshooting nebo release notes ([The Good Docs Project: Templates](https://www.thegooddocsproject.dev/template)). Pro malý tým z toho plyne jednoduché pravidlo: nepiš jednu obří stránku „Nápověda“. Piš různé typy textu podle toho, co člověk právě potřebuje udělat.
+
+### 1) Rozděl dokumentaci podle situace uživatele
+
+Uživatelé nechodí do dokumentace proto, že milují dokumentaci. Chodí tam, protože se chtějí pohnout dál. Proto se ptej, v jaké situaci jsou:
+
+- **Začátečník:** chce první úspěch a potřebuje vedení krok za krokem.
+- **Praktik:** ví, co chce udělat, a hledá přesný postup.
+- **Operátor:** potřebuje jistotu v nastavení, limitech, parametrech a chybových stavech.
+- **Rozhodovatel:** chce pochopit důvody, rizika, privacy dopady a architekturu.
+- **Support nebo interní tým:** potřebuje rychle ověřit stav, historii a doporučený postup.
+
+Z toho vznikne mapa dokumentace:
+
+| Potřeba | Typ dokumentu | Příklad |
+|---|---|---|
+| Naučit se první použití | Tutorial | „Vytvoř první projekt za 10 minut“ |
+| Dokončit úkol | How-to | „Jak pozvat kolegu do workspace“ |
+| Ověřit přesné hodnoty | Reference | „Role a oprávnění“ |
+| Pochopit kontext | Explanation | „Proč nepoužíváme marketingové pixely“ |
+| Vyřešit problém | Troubleshooting | „E-mail s resetem hesla nepřišel“ |
+
+Když tyto typy smícháš, vznikne dokumentační guláš. Tutorial začne vysvětlovat historii autentizace, reference začne radit marketingovou strategii a troubleshooting skončí větou „zkuste to znovu“, což je dokumentační ekvivalent pokrčení ramen.
+
+### 2) Piš podle úkolu, ne podle obrazovky
+
+Špatná dokumentace kopíruje navigaci produktu: „Menu Nastavení“, „Sekce Uživatelé“, „Tlačítko Upravit“. Dobrá dokumentace kopíruje cíl člověka: „Jak přidat účetní do fakturace“, „Jak změnit vlastníka workspace“, „Jak exportovat data před ukončením služby“.
+
+Praktický vzor pro how-to článek:
+
+```markdown
+# Jak [udělat konkrétní úkol]
+
+## Kdy se to hodí
+[Jedna až dvě věty situace.]
+
+## Než začneš
+- Přístup nebo role:
+- Potřebná data:
+- Riziko / dopad:
+
+## Postup
+1. ...
+2. ...
+3. ...
+
+## Jak poznáš, že je hotovo
+- ...
+
+## Co dělat, když se to nepovede
+- ...
+
+## Privacy poznámka
+- Jaká data se při kroku používají:
+- Kde se projeví změna:
+```
+
+Privacy poznámka nemusí být v každém článku dlouhá. Často stačí jedna věta: „Export obsahuje e-maily členů týmu a fakturační historii, proto ho ukládej jen do kontrolovaného úložiště.“ To je mnohem užitečnější než obecné „dbáme na vaše soukromí“, které uživatel četl tolikrát, že mu z toho usnula myš.
+
+### 3) Knowledge base má snižovat support, ne schovávat support
+
+Knowledge base není náhrada za pomoc. Je to první vrstva pomoci. Pokud článek nevyřeší problém, má uživateli ukázat další bezpečný krok: kontakt, formulář, status page, diagnostické ID nebo přesný seznam informací, které má poslat.
+
+Dobrá struktura troubleshooting článku:
+
+1. **Symptom:** co člověk vidí.
+2. **Pravděpodobné příčiny:** bez obviňování uživatele.
+3. **Rychlá kontrola:** nejjednodušší kroky bez rizika.
+4. **Bezpečný postup:** co udělat dál.
+5. **Kdy kontaktovat podporu:** jasný práh.
+6. **Co neposílat:** hesla, tokeny, celé exporty, osobní údaje třetích osob.
+
+Příklad:
+
+```markdown
+# Reset hesla nepřišel
+
+## Co zkontrolovat
+1. Ověř, že zadáváš e-mail ke správnému účtu.
+2. Zkontroluj složku spam nebo firemní karanténu.
+3. Počkej 5 minut; některé firemní brány doručují bezpečnostní e-maily pomaleji.
+
+## Kdy napsat podpoře
+Napiš nám, pokud e-mail nepřijde ani po 10 minutách.
+
+## Co nám pošli
+- e-mail účtu,
+- přibližný čas pokusu,
+- název organizace nebo workspace.
+
+## Co neposílej
+- heslo,
+- reset token,
+- screenshot s citlivými údaji dalších lidí.
+```
+
+Tím chráníš uživatele i support. Support dostane kontext, ale ne neřízený balík dat. Uživatel ví, co je bezpečné poslat. Všichni vyhrávají a nikdo nemusí lovit token ze screenshotu, což je sport, který by měl zůstat neexistující.
+
+### 4) Dokumentace musí mít vlastníka a životní cyklus
+
+Neaktuální dokumentace je horší než žádná dokumentace, protože vytváří falešnou jistotu. Proto každý důležitý článek potřebuje minimální metadata:
+
+- vlastník,
+- datum poslední kontroly,
+- související funkce nebo repozitář,
+- úroveň rizika,
+- datum další revize,
+- vazba na support dotazy nebo incidenty.
+
+Praktický režim:
+
+- **Nová funkce:** release nejde ven bez minimální dokumentace nebo vědomého rozhodnutí, proč není potřeba.
+- **Změna chování:** update dokumentace je součást ticketu, ne dobrovolný bonus.
+- **Incident:** po postmortem zkontroluj, jestli dokumentace mohla incident zkrátit.
+- **Support trend:** když se stejný dotaz opakuje třikrát, vzniká článek nebo úprava produktu.
+- **Měsíční review:** projdi nejčtenější a nejčastěji eskalované články.
+
+**Codyho komentář:** „Dokumentaci dopíšeme později“ je věta, která zní rozumně přesně do chvíle, než později přijde s fakturou, incidentem a novým kolegou, který se ptá na totéž potřetí.
+
+### 5) Měř dokumentaci privacy-first způsobem
+
+Dokumentaci můžeš zlepšovat bez nahrávání chování jednotlivých lidí. Stačí kombinovat agregovaná data a support signály.
+
+Užitečné metriky:
+
+- počet zobrazení článků,
+- hledané výrazy v dokumentaci bez ukládání identit,
+- články, po kterých lidé často otevírají support,
+- opakované support otázky,
+- hodnocení „pomohlo / nepomohlo“ bez volného textu jako výchozího sběru,
+- čas od vydání funkce k prvnímu support dotazu.
+
+Pozor na falešné závěry. Článek s vysokou návštěvností může být skvělý, nebo naopak znamená, že produkt je matoucí. Článek s nízkou návštěvností může být zbytečný, nebo jen řeší vzácný, ale kritický problém. Proto vždy spoj čísla s kontextem.
+
+Privacy-first otázky před měřením dokumentace:
+
+- Potřebujeme znát konkrétního člověka, nebo stačí agregace?
+- Ukládáme vyhledávací dotazy, které mohou obsahovat osobní údaje?
+- Máme retenci pro feedback a interní poznámky?
+- Posíláme data z dokumentace do externích nástrojů?
+- Umíme vysvětlit, proč danou metriku sbíráme?
+
+### 6) Dokumentuj privacy a bezpečnost lidsky
+
+Privacy policy je právní dokument. Knowledge base je místo, kde můžeš vysvětlit dopady lidsky. Evropský privacy-first SaaS by měl mít kromě právních textů i praktické články typu:
+
+- kde běží data,
+- jak fungují role a oprávnění,
+- jak exportovat data,
+- jak požádat o smazání,
+- jak fungují zálohy a retence,
+- co se loguje a co se neloguje,
+- jak bezpečně pozvat externistu,
+- jak vypnout integraci.
+
+WCAG klade důraz mimo jiné na vnímatelnost, ovladatelnost, srozumitelnost a robustnost webového obsahu ([W3C: WCAG 2 Overview](https://www.w3.org/WAI/standards-guidelines/wcag/), [W3C: WCAG 2.2](https://www.w3.org/TR/WCAG22/)). Pro dokumentaci to prakticky znamená: krátké odstavce, jasné nadpisy, popsané odkazy, textové alternativy u obrázků, žádné vysvětlování jen barvou a žádné screenshoty jako jediný zdroj pravdy.
+
+Dokumentace o soukromí nemá znít jako právní kouřová clona. Lepší je konkrétní věta:
+
+> Produkční data běží v EU regionu. Support vidí jen údaje potřebné k řešení ticketu. Exporty mažeme podle retenční politiky a přístupy kontrolujeme každý měsíc.
+
+Tohle je čitelné. A když to není pravda, dokumentace splnila další funkci: odhalila provozní dluh.
+
+### Šablona dokumentační karty
+
+```markdown
+## Dokumentační karta: [název článku / sekce]
+
+### Účel
+- Jaký problém článek řeší:
+- Pro koho je určený:
+- Jak poznáme, že pomohl:
+
+### Typ obsahu
+- Tutorial / how-to / reference / explanation / troubleshooting:
+- Související produktová oblast:
+
+### Vlastnictví
+- Vlastník článku:
+- Technický reviewer:
+- Privacy/security reviewer, pokud je potřeba:
+- Poslední kontrola:
+- Další revize:
+
+### Data a privacy
+- Zmiňuje osobní údaje nebo bezpečnostní postupy:
+- Co uživatel nemá posílat do supportu:
+- Retence feedbacku nebo vyhledávacích dotazů:
+
+### Vazby
+- Související články:
+- Související support tagy:
+- Související release nebo changelog:
+```
+
+### Checklist pro dokumentaci a knowledge base
+
+- [ ] Dokumentace je rozdělená na tutorialy, how-to návody, reference, vysvětlení a troubleshooting.
+- [ ] Každý důležitý článek řeší konkrétní situaci uživatele, ne jen obrazovku produktu.
+- [ ] How-to návody mají předpoklady, postup, kontrolu výsledku a bezpečný další krok.
+- [ ] Troubleshooting říká, co poslat podpoře a co neposílat nikdy.
+- [ ] Články mají vlastníka, datum kontroly a vazbu na produktovou oblast.
+- [ ] Změna funkce zahrnuje i aktualizaci dokumentace.
+- [ ] Měření dokumentace je agregované a má retenci.
+- [ ] Vyhledávací dotazy a feedback neukládají zbytečné osobní údaje.
+- [ ] Privacy a bezpečnost jsou vysvětlené lidsky, nejen právním dokumentem.
+- [ ] Dokumentace je přístupná: jasné nadpisy, popsané odkazy, textové alternativy a čitelný jazyk.
+- [ ] Opakované support dotazy se mění na článek, úpravu produktu nebo lepší onboarding.
+- [ ] Jednou měsíčně proběhne kontrola nejčtenějších a nejvíc eskalovaných článků.
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
+- Diátaxis: [A systematic approach to technical documentation authoring](https://www.diataxis.fr/)
+- Diátaxis: [Start here — Diátaxis in five minutes](https://www.diataxis.fr/start-here/)
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
 - ENISA: [Cybersecurity for SMEs — Challenges and Recommendations](https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes)
 - ENISA: [Cloud Security Guide for SMEs](https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes)
@@ -5153,6 +5372,7 @@ Když logy používáš i pro support, postav raději bezpečný interní panel:
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - RSS Advisory Board: [RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
 - Semantic Versioning: [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html)
+- The Good Docs Project: [Templates](https://www.thegooddocsproject.dev/template)
 - Umami: [Track events](https://docs.umami.is/docs/track-events)
 - Umami: [Metric definitions](https://docs.umami.is/docs/metric-definitions)
 - Umami: [Platform](https://umami.is/platform)
@@ -5168,6 +5388,7 @@ Když logy používáš i pro support, postav raději bezpečný interní panel:
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha AC o dokumentaci a knowledge base: rozdělení typů dokumentace, task-first návody, troubleshooting bez sběru citlivých dat, vlastnictví článků, privacy-first měření, lidské vysvětlení bezpečnosti a checklist.
 - **2026-10-12:** Přidána příloha AB o logování a auditní stopě: účel logů, minimalizace PII, sanitizace, auditní události, retence, přístupy, šablona logovací politiky a checklist.
 - **2026-10-12:** Přidána příloha AA o přihlašování, MFA a obnově účtů: rozdělení rizikových akcí, reset hesla, session politika, role, access review a checklist pro malé privacy-first SaaS týmy.
 
