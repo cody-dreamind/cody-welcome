@@ -5646,6 +5646,185 @@ Pozor na volné texty u důvodů odchodu. „Nemáme budget“ je užitečný si
 - [ ] Support vidí bezpečný billing souhrn, ne kompletní fakturační a platební historii bez důvodu.
 
 
+## Příloha AF: Produktové e-maily a notifikace bez spamového kombajnu
+
+E-mail je pořád jeden z nejdůležitějších kanálů SaaS produktu. Posílá potvrzení registrace, reset hesla, faktury, upozornění na změny, pozvánky do workspace, onboardingové tipy i marketingové kampaně. Právě proto se z něj snadno stane provozní chaos: jeden nástroj pro transakční zprávy, druhý pro newsletter, třetí pro support, čtvrtý pro sales a pátý pro „rychle to pošleme ručně“. Gratuluju, právě vznikla distribuovaná databáze osobních údajů s poetickým názvem mailing.
+
+Privacy-first přístup neříká, že máš posílat méně užitečných zpráv. Říká, že máš posílat zprávy s jasným účelem, správným souhlasem nebo jiným právním důvodem, dobrou doručitelností a bez zbytečného sledování jednotlivců. Technicky k tomu patří autentizace odesílající domény: SPF, DKIM a DMARC. Aktuální DMARC specifikace RFC 9989 popisuje DMARC jako protokol, kterým vlastník domény publikuje politiku pro ověřování e-mailů přes DNS a může žádat reporty o používání domény ([RFC 9989: DMARC](https://www.rfc-editor.org/rfc/rfc9989)). SPF a DKIM jsou samostatné stavební kameny popsané v RFC 7208 a RFC 6376 ([RFC 7208: SPF](https://www.rfc-editor.org/rfc/rfc7208), [RFC 6376: DKIM](https://www.rfc-editor.org/rfc/rfc6376)).
+
+Gmail od února 2024 vyžaduje u odesílatelů nad 5 000 zpráv denně na Gmail účty mimo jiné SPF, DKIM, DMARC, TLS, nízkou míru spamu a u marketingových/subscribed zpráv one-click unsubscribe ([Gmail Help: Email sender guidelines](https://support.google.com/mail/answer/81126)). Yahoo ve svých doporučeních také uvádí autentizaci, nízké complaint rates, validní forward/reverse DNS a pro bulk sendery SPF + DKIM, DMARC a jednoduché odhlášení ([Yahoo Sender Hub: Sender Best Practices](https://senders.yahooinc.com/best-practices/)). I když jsi malý tým hluboko pod těmito limity, ber to jako baseline. Doručitelnost není místo, kde chceš být kreativní jako básník na hackathonu.
+
+**Codyho komentář:** Nejlepší e-mailová strategie je ta, kde uživatel nikdy nepřemýšlí „proč mi tohle chodí?“. Druhá nejlepší je ta, kde se může jedním klikem odhlásit, místo aby tě označil za spam a poslal reputaci domény na ozdravný pobyt do pekla.
+
+### 1) Rozděl transakční, produktové a marketingové zprávy
+
+Nejdřív si udělej mapu typů zpráv. Každý typ má jiný účel, jinou toleranci k chybě a jiný režim odhlášení.
+
+Praktické rozdělení:
+
+- **Transakční zprávy:** reset hesla, potvrzení e-mailu, bezpečnostní upozornění, faktura, pozvánka do účtu, změna tarifu.
+- **Produktové provozní zprávy:** upozornění na dokončený import, limit workspace, selhání integrace, plánovaná odstávka.
+- **Lifecycle zprávy:** onboardingové tipy, připomenutí nedokončeného nastavení, edukace po aktivaci.
+- **Marketingové zprávy:** newsletter, promo akce, novinky bez přímé vazby na konkrétní používání produktu.
+- **Obchodní follow-up:** domluvené shrnutí dema, nabídka, připomenutí dalšího kroku.
+
+Pro každý typ si napiš:
+
+1. proč zpráva existuje,
+2. kdo ji dostane,
+3. jaký je spouštěč,
+4. jaké osobní údaje se do ní vkládají,
+5. jestli má odhlášení nebo preference,
+6. jak dlouho držíš log o odeslání,
+7. kdo smí šablonu měnit.
+
+Častá chyba: firma označí všechno jako „transakční“, protože se bojí odhlášení. To je krátkodobě pohodlné a dlouhodobě hloupé. Když produktový tip, sleva nebo obsahový digest schováš jako transakční zprávu, neušetříš si compliance. Jen zhoršíš důvěru a reputaci domény.
+
+### 2) Autentizace domény je provozní základ, ne SEO magie
+
+SPF říká, které servery mohou posílat e-mail za doménu. DKIM podepisuje zprávu kryptograficky. DMARC dává příjemcům politiku, co dělat, když SPF/DKIM neprojdou a nejsou sladěné s viditelnou From doménou. DMARC agregované reporty podle RFC 9990 pak pomáhají najít legitimní zdroje, které nejsou správně nastavené, i pokusy o zneužití domény ([RFC 9990: DMARC Aggregate Reporting](https://www.rfc-editor.org/rfc/rfc9990)).
+
+Minimální postup pro malý SaaS:
+
+- používej vlastní odesílací doménu nebo subdoménu, například `mail.example.com`,
+- nastav SPF pro reálné odesílací služby a vyhni se nekonečnému řetězení include záznamů,
+- zapni DKIM pro každou službu, která posílá za tvou doménu,
+- začni s DMARC politikou `p=none`, sleduj reporty a oprav legitimní zdroje,
+- postupně přejdi na přísnější politiku, až víš, že si nestřelíš do vlastního mailboxu,
+- odděl marketingové a transakční posílání, aby jedna kampaň nespálila reputaci resetu hesla.
+
+Příklad rozumného rozdělení:
+
+- `app.example.com` — produkt,
+- `mail.example.com` — transakční e-maily,
+- `news.example.com` — newsletter a obsahové kampaně,
+- `support.example.com` — support komunikace.
+
+Není nutné mít pět dodavatelů. Je nutné vědět, kdo co posílá, z jaké domény, s jakým účelem a jak to vypneš při incidentu.
+
+### 3) Minimalizuj obsah zprávy i tracking
+
+Produktový e-mail má být užitečný, ne datově rozežraný. Pokud posíláš fakturu, nepotřebuješ do textu vkládat celý profil zákazníka. Pokud posíláš upozornění na dokončený import, nepotřebuješ vypisovat názvy všech importovaných kontaktů. Pokud posíláš bezpečnostní upozornění, nepotřebuješ přidávat reklamní blok na nový tarif.
+
+Privacy-first pravidla pro obsah:
+
+- Do předmětu nedávej citlivé údaje: jména klientů, částky, diagnózy problému, interní ID nebo tokeny.
+- Do URL nedávej e-mail, jméno, firmu ani osobní identifikátor.
+- Akční odkazy drž krátkodobé, jednorázové a s jasným účelem.
+- Tracking pixel vypni, pokud ho nepotřebuješ pro konkrétní rozhodnutí.
+- Kliknutí měř agregovaně přes vlastní redirect jen tam, kde máš jasný důvod a transparentní popis.
+- Logy o odeslání drž jen po dobu, kdy pomáhají řešit doručitelnost, podporu nebo audit.
+
+Místo „vidíme, že Jana otevřela e-mail třikrát v 8:12, 8:14 a 9:03“ si polož praktičtější otázku: „Pomáhá tahle onboardingová zpráva dokončit nastavení?“ To jde často měřit agregovaně přes produktovou aktivaci, bez mikroskopu na jednoho člověka.
+
+### 4) Preference centrum je lepší než magické odhlášení ze všeho
+
+Uživatel nemá řešit interní taxonomii tvého marketingového týmu. Má vědět, co může vypnout a co je nutné pro provoz účtu. Preference centrum nemusí být velký portál. Stačí jednoduchá stránka, kde člověk vidí typy zpráv a jejich význam.
+
+Příklad kategorií:
+
+- **Bezpečnost a účet:** nelze vypnout, protože chrání účet.
+- **Billing a smluvní zprávy:** nelze vypnout pro oprávněné fakturační kontakty.
+- **Produktové provozní notifikace:** lze omezit podle workspace nebo role.
+- **Onboardingové tipy:** lze vypnout.
+- **Newsletter a marketing:** lze vypnout jedním klikem.
+
+One-click unsubscribe podle RFC 8058 řeší automatizované odhlášení přes hlavičku `List-Unsubscribe-Post` a používají ho mailbox provideri jako součást požadavků na bulk odesílatele ([RFC 8058: One-Click Unsubscribe](https://www.rfc-editor.org/rfc/rfc8058)). I když ho implementuje tvůj e-mailingový nástroj, ověř, že je zapnutý pro správné typy zpráv a že odhlášení opravdu propíšeš do systému, který rozhoduje o budoucím posílání.
+
+Špatný pattern: odhlášení se zapíše jen do newsletter nástroje, ale obchodní automatizace posílá dál z CRM. To není omnichannel. To je multiplikátor otravy.
+
+### 5) Doručitelnost sleduj jako hygienu, ne jako růstový trik
+
+Doručitelnost není jen open rate. Otevření je čím dál méně spolehlivý signál, protože e-mailoví klienti mohou načítat obrázky automaticky, blokovat tracking nebo chránit soukromí uživatelů. Lepší je sledovat kombinaci provozních signálů.
+
+Praktický dashboard:
+
+- počet odeslaných zpráv podle typu,
+- bounce rate podle domény a provideru,
+- spam complaints u providerů, kde je máš k dispozici,
+- počet odhlášení podle kampaně,
+- selhání SPF/DKIM/DMARC podle reportů,
+- čas doručení transakčních zpráv,
+- support tickety typu „nepřišel e-mail“.
+
+U každého problému hledej provozní příčinu, ne jen kosmetiku šablony. Když lidé označují zprávu za spam, možná není problém barva tlačítka. Možná jsi jim slíbil produktový tip a poslal prodejní leták v převleku.
+
+### 6) Šablony e-mailů verzuj jako produkt
+
+E-mailová šablona je součást produktu. Měla by mít review, vlastníka a historii změn. Jinak se jednoho dne probudíš a zjistíš, že reset hesla obsahuje staré logo, neplatnou adresu podpory, tracking pixel z nástroje, který už nepoužíváš, a větu „klikněte zde“, která by měla jít do důchodu.
+
+U každé důležité šablony eviduj:
+
+- název a typ zprávy,
+- účel a spouštěč,
+- cílovou roli,
+- povinná data v šabloně,
+- zakázaná data,
+- odkaz na preference nebo odhlášení,
+- jazykové varianty,
+- poslední review,
+- vlastníka.
+
+Příklad review otázky:
+
+> Kdyby se tento e-mail dostal omylem k nesprávnému příjemci, jaké škody by způsobil?
+
+Pokud odpověď zní „ukázal by citlivé obchodní údaje, interní poznámky nebo osobní data třetích osob“, šablona potřebuje úpravu. E-mail není bezpečný archiv. Je to zpráva, která putuje přes infrastrukturu, kterou plně nekontroluješ.
+
+### Šablona e-mailové mapy
+
+## E-mailová mapa: [produkt / workspace]
+
+### Typy zpráv
+
+- Transakční:
+- Produktové provozní:
+- Lifecycle:
+- Marketingové:
+- Obchodní follow-up:
+
+### Domény a dodavatelé
+
+- Odesílací domény:
+- Dodavatelé:
+- SPF/DKIM/DMARC stav:
+- Vlastník DNS:
+
+### Data a tracking
+
+- Povolená data v šablonách:
+- Zakázaná data:
+- Tracking:
+- Retence logů:
+
+### Preference a odhlášení
+
+- Preference centrum:
+- One-click unsubscribe:
+- Propis odhlášení do systémů:
+- Výjimky:
+
+### Review
+
+- Vlastník:
+- Poslední kontrola:
+- Nálezy:
+- Další krok:
+
+### Checklist pro produktové e-maily
+
+- [ ] Každý typ e-mailu má účel, vlastníka a spouštěč.
+- [ ] Transakční, lifecycle a marketingové zprávy jsou oddělené.
+- [ ] SPF, DKIM a DMARC jsou nastavené pro všechny odesílací domény.
+- [ ] DMARC reporty někdo čte a převádí na opravy.
+- [ ] Marketingové a subscribed zprávy mají funkční odhlášení.
+- [ ] Preference centrum vysvětluje, co lze vypnout a co je provozně nutné.
+- [ ] Předměty, URL a šablony neobsahují zbytečné osobní nebo citlivé údaje.
+- [ ] Tracking pixel a klikací tracking jsou vypnuté, pokud nemají jasný účel.
+- [ ] Bounce, complaints a autentizační selhání se sledují pravidelně.
+- [ ] Šablony jsou verzované a procházejí review při změně produktu nebo dodavatele.
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -5675,6 +5854,7 @@ Pozor na volné texty u důvodů odchodu. „Nemáme budget“ je užitečný si
 - Finanční správa: [Daň z přidané hodnoty](https://financnisprava.gov.cz/cs/dane/dane/dan-z-pridane-hodnoty)
 - NCSC: [Password administration for system owners](https://www.ncsc.gov.uk/collection/passwords)
 - Google Analytics Help: [URL builders — Collect campaign data with custom URLs](https://support.google.com/analytics/answer/10917952?hl=en-uk)
+- Gmail Help: [Email sender guidelines](https://support.google.com/mail/answer/81126)
 - Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
 - Google Search Console Help: [Performance report](https://support.google.com/webmasters/answer/7576553)
 - Google Search Central: [Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
@@ -5691,6 +5871,11 @@ Pozor na volné texty u důvodů odchodu. „Nemáme budget“ je užitečný si
 - OWASP: [Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
 - OWASP: [Application Security Verification Standard](https://owasp.org/projects/asvs)
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- RFC Editor: [RFC 6376 — DomainKeys Identified Mail (DKIM) Signatures](https://www.rfc-editor.org/rfc/rfc6376)
+- RFC Editor: [RFC 7208 — Sender Policy Framework (SPF)](https://www.rfc-editor.org/rfc/rfc7208)
+- RFC Editor: [RFC 8058 — Signaling One-Click Functionality for List Email Headers](https://www.rfc-editor.org/rfc/rfc8058)
+- RFC Editor: [RFC 9989 — Domain-Based Message Authentication, Reporting, and Conformance (DMARC)](https://www.rfc-editor.org/rfc/rfc9989)
+- RFC Editor: [RFC 9990 — DMARC Aggregate Reporting](https://www.rfc-editor.org/rfc/rfc9990)
 - RSS Advisory Board: [RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
 - Semantic Versioning: [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html)
 - The Good Docs Project: [Templates](https://www.thegooddocsproject.dev/template)
@@ -5700,6 +5885,7 @@ Pozor na volné texty u důvodů odchodu. „Nemáme budget“ je užitečný si
 - Umami: [FAQ](https://docs.umami.is/docs/faq)
 - W3C: [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)
 - web.dev: [Web Vitals](https://web.dev/articles/vitals)
+- Yahoo Sender Hub: [Sender Best Practices](https://senders.yahooinc.com/best-practices/)
 - Úřad pro ochranu osobních údajů: [Cookies — otázky a odpovědi](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies)
 - Úřad pro ochranu osobních údajů: [Cookies od začátku roku 2022 pouze se souhlasem](https://uoou.gov.cz/novinky/vse/cookies-od-zacatku-roku-2022-pouze-se-souhlasem)
 - Úřad pro ochranu osobních údajů: [Obchodní sdělení](https://uoou.gov.cz/profesional/obchodni-sdeleni)
@@ -5709,6 +5895,7 @@ Pozor na volné texty u důvodů odchodu. „Nemáme budget“ je užitečný si
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha AF o produktových e-mailech a notifikacích: rozdělení typů zpráv, autentizace SPF/DKIM/DMARC, minimalizace obsahu a trackingu, preference centrum, doručitelnost, verzování šablon, e-mailová mapa a checklist.
 - **2026-10-12:** Přidána příloha AE o billing vrstvě, fakturaci a platbách: oddělení fakturační identity od účtu, bezpečné platební tokeny, neměnné doklady, billing portál, webhooky, exporty, revenue reporting, šablona review a checklist.
 - **2026-10-12:** Přidána příloha AD o interním adminu a backoffice: pracovní situace, role podle účelu, citlivé akce, impersonace, minimalizace dat, metriky používání, šablona access review a checklist.
 - **2026-10-12:** Přidána příloha AC o dokumentaci a knowledge base: rozdělení typů dokumentace, task-first návody, troubleshooting bez sběru citlivých dat, vlastnictví článků, privacy-first měření, lidské vysvětlení bezpečnosti a checklist.
