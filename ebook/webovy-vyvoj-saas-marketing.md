@@ -5992,6 +5992,155 @@ Měsíční rytmus:
 - [ ] Opakované customer success poznatky se vrací do produktu, dokumentace a onboardingu.
 
 
+## Příloha AH: Dashboardy a rozhodování bez metrikového divadla
+
+Dashboard je skvělý sluha a příšerný šéf. Když je navržený dobře, pomáhá týmu rychle poznat, jestli web, SaaS nebo marketingová aktivita plní svůj účel. Když je navržený špatně, stane se z něj barevná tapeta plná čísel, která vypadají důležitě, ale nikdo podle nich nic nedělá.
+
+Privacy-first dashboard má dvě pravidla: ukazuje jen metriky, které vedou k rozhodnutí, a nepotřebuje k tomu detailní profilování lidí. Pokud dashboard vyžaduje víc dat, než tým reálně používá, není to analytika. Je to sběratelství s grafy.
+
+### 1) Každý dashboard musí mít jedno rozhodnutí
+
+Nejdřív si napiš, k jakému rozhodnutí dashboard slouží. Ne „sledovat výkon“. To je mlha. Konkrétně:
+
+- Máme posílit obsahové téma, nebo ho ukončit?
+- Máme opravit onboarding, nebo přidat další akviziční kanál?
+- Máme spustit kampaň, nebo nejdřív vylepšit landing page?
+- Máme řešit technický problém, nebo jde jen o běžný provozní šum?
+- Máme kontaktovat zákazníka, nebo počkat na další signál?
+
+Když rozhodnutí neexistuje, dashboard nejspíš není potřeba. Maximálně má být reportem pro archiv, ne každodenním operačním panelem.
+
+Praktický test: otevři dashboard a zeptej se „co uděláme jinak, když číslo stoupne nebo klesne?“. Pokud odpověď zní „uvidíme“, dashboard ještě není hotový.
+
+### 2) Rozděl metriky podle rytmu práce
+
+Jedna obrazovka nemá sloužit všem rytmům najednou. Denní provoz, týdenní marketing a měsíční strategie potřebují jiné metriky i jiný detail.
+
+Příklad rozdělení:
+
+| Rytmus | Otázka | Metriky | Akce |
+| --- | --- | --- | --- |
+| Denně | Funguje web a produkt? | dostupnost, chyby, formuláře, objednávky | opravit incident nebo blokaci |
+| Týdně | Přichází správná poptávka? | návštěvy klíčových stránek, konverze, zdroje, kvalita leadů | upravit obsah, landing page nebo kampaně |
+| Měsíčně | Roste produkt zdravě? | aktivace, retence, MRR, churn, support témata | rozhodnout roadmapu a priority |
+| Kvartálně | Dává strategie smysl? | segmenty, kanály, náklady, dlouhodobé trendy | změnit positioning, pricing nebo investice |
+
+Denní dashboard má být krátký a nudný. Pokud v něm každý den dramaticky pulzuje dvacet grafů, tým se buď zblázní, nebo si na alarmy zvykne a začne je ignorovat. Obě varianty jsou drahé.
+
+### 3) Odděl provozní signál od marketingové interpretace
+
+Číslo samo o sobě není závěr. Když klesnou návštěvy, nemusí to znamenat špatný obsah. Může jít o sezónnost, technický problém, změnu kampaně, výpadek měření, méně botů nebo prostě konec jedné virální vlnky.
+
+Do dashboardu proto přidej tři vrstvy:
+
+1. **Metrika:** co se stalo.
+2. **Kontext:** proč to mohlo nastat.
+3. **Rozhodnutí:** co s tím uděláme.
+
+Příklad zápisu:
+
+> Organická návštěvnost článků o SaaS klesla o 18 %. Současně nebyl publikován nový obsah a dvě starší stránky mají horší pozice. Tento týden upravíme interní prolinkování a doplníme dva příklady do nejvýkonnějšího článku. Nezapínáme remarketing, protože problém není v chybějícím sledování lidí.
+
+Tím se z dashboardu stává pracovní nástroj, ne generátor paniky.
+
+### 4) Používej agregace jako výchozí stav
+
+Pro většinu rozhodnutí stačí agregovaná data. Firemní web nepotřebuje vědět, že konkrétní člověk z konkrétní firmy třikrát navštívil pricing. Potřebuje vědět, jestli pricing stránka plní roli: vysvětluje hodnotu, snižuje nejistotu a vede k dalšímu kroku.
+
+Privacy-first dashboard proto preferuje:
+
+- agregované návštěvy a konverze,
+- anonymizované nebo pseudonymizované produktové signály,
+- workspace nebo účet jako jednotku tam, kde je to nutné,
+- krátkou retenci detailních provozních dat,
+- ruční poznámky u významných rozhodnutí místo nekonečného sběru eventů.
+
+Detailní data si nech jen tam, kde mají jasný účel: bezpečnostní incident, technická chyba, zákaznická žádost nebo konkrétní debugging. A i tam nastav retenci. Debug data nejsou rodinné stříbro, i když se k nim vývojář umí citově připoutat.
+
+### 5) Dashboard musí ukazovat i kvalitu, ne jen objem
+
+Marketingové dashboardy často přeceňují objem: návštěvy, imprese, kliknutí, otevření. Jenže malý SaaS tým může mít lepší měsíc s menší návštěvností, pokud přišlo víc relevantních poptávek a méně šumu.
+
+Přidej proto kvalitativní signály:
+
+- kolik poptávek odpovídá ideálnímu zákaznickému profilu,
+- které otázky se opakují před nákupem,
+- jaké námitky blokují demo nebo trial,
+- které články přivádějí lidi s jasným problémem,
+- které support tickety ukazují na chybějící dokumentaci.
+
+Tyto signály nemusí být invazivní. Často stačí krátká klasifikace leadu, tag u support dotazu nebo měsíční poznámka z obchodních hovorů. Kvalita není výmluva pro šmírování; je to důvod, proč nesledovat zbytečnosti.
+
+### 6) Nastav prahy a vlastníky předem
+
+Dashboard bez prahů vytváří nekonečné dohady. Dashboard bez vlastníka vytváří hezké screenshoty ve Slacku a žádnou změnu.
+
+U každé hlavní metriky napiš:
+
+- **zelený stav:** všechno je v očekávaném rozmezí,
+- **žlutý stav:** stojí za kontrolu nebo drobnou úpravu,
+- **červený stav:** vyžaduje konkrétní akci,
+- **vlastník:** kdo rozhoduje, co se udělá,
+- **cadence:** kdy se metrika kontroluje,
+- **poznámka:** co se nesmí vyvozovat bez dalšího kontextu.
+
+Příklad:
+
+| Metrika | Žlutý stav | Červený stav | Vlastník | Akce |
+| --- | --- | --- | --- | --- |
+| Konverze kontaktní stránky | pokles 20 % týden/týden | pokles 40 % nebo technická chyba | marketing + vývoj | zkontrolovat formulář, CTA, zdroje návštěv |
+| Aktivace trialu | méně než plánovaný rozsah | dvě období po sobě pod prahem | produkt | projít onboarding a první hodnotnou akci |
+| Chybové odpovědi API | opakované výkyvy | dopad na zákazníky | vývoj | incident runbook a status update |
+
+Bez prahů bude každý graf interpretovat ten, kdo má zrovna nejsilnější názor. A to je horší než žádný dashboard, protože to vypadá datově.
+
+### Šablona dashboard karty
+
+```markdown
+## Dashboard karta: [název dashboardu]
+
+### Účel
+- Jaké rozhodnutí podporuje:
+- Kdo ho používá:
+- Jak často:
+
+### Metriky
+- Hlavní metrika:
+- Podpůrné metriky:
+- Guardrail metriky:
+- Co záměrně neměříme:
+
+### Data a privacy
+- Zdroj dat:
+- Úroveň detailu: agregace / workspace / uživatel / technický log
+- Retence:
+- Kdo má přístup:
+
+### Prahy a akce
+- Zelený stav:
+- Žlutý stav:
+- Červený stav:
+- Vlastník rozhodnutí:
+- Další krok při červeném stavu:
+
+### Review
+- Poslední revize:
+- Co se podle dashboardu změnilo:
+- Co odstranit, protože se nepoužívá:
+```
+
+### Checklist pro dashboardy bez metrikového divadla
+
+- [ ] Každý dashboard má jasné rozhodnutí, které podporuje.
+- [ ] Denní, týdenní, měsíční a kvartální metriky nejsou smíchané do jedné obrazovky.
+- [ ] U hlavních metrik máme prahy, vlastníka a očekávanou akci.
+- [ ] Dashboard obsahuje kontext a poznámky k interpretaci, ne jen čísla.
+- [ ] Agregovaná data jsou výchozí stav; detail používáme jen pro jasný účel.
+- [ ] Neměříme osobní produktivitu uživatelů zákazníka ani zbytečné behaviorální profily.
+- [ ] Kvalitativní signály z obchodu, supportu a onboardingu doplňují objemové metriky.
+- [ ] Jednou měsíčně mažeme nebo upravujeme metriky, podle kterých nikdo nerozhoduje.
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -6062,6 +6211,7 @@ Měsíční rytmus:
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha AH o dashboardech a rozhodování bez metrikového divadla: rozhodovací účel, rytmus metrik, interpretace, agregace, kvalita signálů, prahy, vlastníci, šablona dashboard karty a checklist.
 - **2026-10-12:** Přidána příloha AG o customer success bez sledovacího panoptika: definice zákaznického úspěchu, týmové health signály, vysvětlitelné stavy, oddělení péče/supportu/prodeje, bezpečné CRM poznámky, playbook a checklist.
 - **2026-10-12:** Přidána příloha AF o produktových e-mailech a notifikacích: rozdělení typů zpráv, autentizace SPF/DKIM/DMARC, minimalizace obsahu a trackingu, preference centrum, doručitelnost, verzování šablon, e-mailová mapa a checklist.
 - **2026-10-12:** Přidána příloha AE o billing vrstvě, fakturaci a platbách: oddělení fakturační identity od účtu, bezpečné platební tokeny, neměnné doklady, billing portál, webhooky, exporty, revenue reporting, šablona review a checklist.
