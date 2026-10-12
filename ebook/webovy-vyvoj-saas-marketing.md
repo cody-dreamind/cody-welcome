@@ -4017,6 +4017,184 @@ Kontrola před nasazením:
 - [ ] Probíhá měsíční úklid duplicitních, nepoužívaných nebo špatně pojmenovaných eventů?
 
 
+## Příloha V: Přístupnost a výkon bez sledovacího balastu
+
+Přístupnost, výkon a privacy-first provoz se často řeší jako tři oddělené disciplíny. Ve skutečnosti se krásně potkávají v jedné jednoduché otázce: dokáže člověk web rychle pochopit a použít bez toho, aby mu stránka naložila půl internetu do prohlížeče?
+
+W3C doporučuje používat aktuální WCAG 2.2 a popisuje čtyři hlavní principy přístupnosti: obsah má být vnímatelný, ovladatelný, srozumitelný a robustní ([W3C: WCAG 2.2](https://www.w3.org/TR/WCAG22/)). To není jen téma pro státní správu nebo velké korporace. Pro malý SaaS je přístupnost obchodní výhoda: méně ztracených lidí, méně support dotazů, lepší použitelnost na mobilu a čistší front-end.
+
+Evropský kontext navíc sílí. Evropská komise u European Accessibility Act uvádí, že cílem je zlepšit fungování vnitřního trhu pro přístupné produkty a služby a pravidla se dotýkají například e-commerce, bankovních služeb, počítačů, telefonů nebo e-knih ([European Commission: European Accessibility Act](https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en)). Ber to jako signál: přístupnost už není „až jednou“. Je to součást profesionálního produktu.
+
+**Codyho komentář:** Přístupný web není web bez emocí. Je to web, který nedělá z návštěvníka testovacího jezevčíka v bludišti. Když něco nejde ovládat klávesnicí, přečíst čtečkou nebo pochopit na pomalém mobilu, není to „prémiová interakce“. Je to bug v obleku.
+
+### 1) Začni základním HTML, ne knihovnou na všechno
+
+Nejlevnější přístupnost vzniká ještě před design systémem: správné nadpisy, odkazy, tlačítka, formulářové labely a čitelný text. Pokud používáš `div` s `onClick` jako tlačítko, právě sis koupil práci navíc. Pokud používáš nativní `button`, prohlížeč už řeší klávesnici, focus a část semantiky za tebe.
+
+Praktická pravidla:
+
+- jedna stránka má jeden jasný `h1`,
+- nadpisy tvoří logickou osnovu, ne vizuální dekoraci,
+- odkazy vedou na jinou adresu nebo část stránky,
+- tlačítka spouští akci,
+- formulářové pole má viditelný label,
+- chyba u formuláře říká, co opravit a kde,
+- focus stav je viditelný a nezmizí kvůli designové křehkosti.
+
+Příklad špatně:
+
+```html
+<div class="btn" onclick="submitForm()">Odeslat</div>
+```
+
+Příklad lépe:
+
+```html
+<button type="submit">Odeslat poptávku</button>
+```
+
+Tohle není purismus. Je to provozní úspora. Čím víc respektuješ platformu, tím méně vlastních hacků musíš udržovat.
+
+### 2) Výkon řeš jako součást důvěry
+
+Pomalý web neříká jen „máme hodně JavaScriptu“. Říká také „nezajímá nás čas návštěvníka“. Web Vitals popisují metriky pro uživatelskou zkušenost, mimo jiné rychlost načtení hlavního obsahu, odezvu na interakce a vizuální stabilitu stránky ([web.dev: Web Vitals](https://web.dev/articles/vitals)). Není nutné z toho udělat kult tabulek, ale je užitečné mít společný jazyk pro výkon.
+
+Pro privacy-first tým je výkon příjemně nemilosrdný filtr. Každý externí skript musí projít otázkou:
+
+- co přesně přináší,
+- kolik dat posílá mimo náš systém,
+- jestli běží před souhlasem,
+- jestli zpomaluje první načtení,
+- jestli existuje serverová nebo statická alternativa,
+- jestli ho umíme odstranit bez rozbití webu.
+
+Často zjistíš, že nejrychlejší skript je ten, který tam vůbec není. Ano, hluboká technologie, říká se tomu „smazat řádek“.
+
+### 3) Obrázky a média optimalizuj bez magie
+
+Obrázky jsou častý viník pomalých webů. MDN popisuje lazy loading jako postup, kdy se nekritické zdroje načítají až ve chvíli, kdy jsou potřeba ([MDN: Lazy loading](https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Lazy_loading)). Použij ho, ale ne jako výmluvu pro nahrávání obřích obrázků.
+
+Praktické minimum:
+
+- hero obrázek optimalizuj ručně a nepoužívej ho jako 6MB výkladní skříň zoufalství,
+- pod foldem používej `loading="lazy"`,
+- obrázkům nastav `width` a `height`, aby stránka neskákala,
+- dekorativní obrázky mají prázdné `alt=""`,
+- informační obrázky mají popis, který nahrazuje jejich význam,
+- video nespouštěj automaticky se zvukem,
+- animace a video nedávej jako jediný způsob vysvětlení produktu.
+
+U SaaS dashboardu si hlídej i exporty, grafy a náhledy souborů. Pokud se v obrázku objeví zákaznická data, nesmí skončit v marketingové knihovně, CDN cache nebo analytickém náhledu jen proto, že „to někdo potřeboval do prezentace“.
+
+### 4) Respektuj omezení pohybu a pozornosti
+
+Animace může pomoct orientaci. Taky může člověka otrávit, zpomalit, nebo fyzicky rozhodit. MDN dokumentuje `prefers-reduced-motion`, tedy uživatelskou preferenci omezení animací a pohybu ([MDN: prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)).
+
+Jednoduchý vzor:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+Tohle není zákaz animací. Je to respekt k lidem, kteří si v systému řekli, že méně pohybu je pro ně lepší. Stejně tak respektuj pozornost: neotvírej chat widget po třech vteřinách, neschovávej obsah za agresivní pop-up a nepoužívej blikající CTA jako diskotéku v účetním softwaru.
+
+### 5) Testuj ručně, ne jen zelenou ikonou v auditu
+
+Automatický audit je užitečný začátek, ale nechytí všechno. Neřekne ti, jestli text dává smysl člověku ve stresu, jestli pořadí focusu odpovídá layoutu, nebo jestli formulářová chyba skutečně pomáhá.
+
+Pětiminutový ruční test před vydáním stránky:
+
+1. Projdi stránku jen klávesnicí: `Tab`, `Shift+Tab`, `Enter`, `Space`, `Esc`.
+2. Zvětši stránku na 200 % a zkontroluj, že obsah neuteče.
+3. Vypni obrázky a ověř, že stránka pořád dává smysl.
+4. Pusť čtečku nebo alespoň strom přístupnosti v prohlížeči.
+5. Otevři stránku na pomalém mobilním připojení nebo v throttling režimu.
+6. Zkus odeslat formulář s chybou a přečti si hlášku nahlas.
+
+Pokud se u toho cítíš trapně, je to dobré znamení. Trapnost při interním testu je levnější než zákazník, který odejde a už ti nikdy neřekne proč.
+
+### 6) Udělej z přístupnosti a výkonu release bránu
+
+Malý tým nepotřebuje obří proces. Potřebuje pár pravidel, která nejdou obejít jen proto, že je pátek.
+
+Release brána pro marketingovou stránku:
+
+- stránka má unikátní title a meta description,
+- obsah má logickou strukturu nadpisů,
+- hlavní akce je dostupná klávesnicí,
+- formuláře mají labely, chybové stavy a potvrzení,
+- obrázky mají správné `alt`, rozměry a optimalizovanou velikost,
+- externí skripty jsou zdokumentované a mají vlastníka,
+- stránka funguje bez marketingových trackerů,
+- měření je agregované a neposílá osobní údaje v URL ani eventech.
+
+Release brána pro SaaS obrazovku:
+
+- kritické akce mají jasné názvy a potvrzení,
+- chyba vysvětluje další krok,
+- klávesnice se nezasekne v modalu,
+- tabulka má čitelné hlavičky a prázdné stavy,
+- loading stav neblokuje zbytečně celé rozhraní,
+- logy neobsahují osobní obsah formulářů,
+- screenshoty pro support neobsahují tajné hodnoty bez maskování.
+
+### Šablona accessibility-performance review
+
+```text
+Stránka / obrazovka:
+Vlastník:
+Datum:
+
+Primární úkol uživatele:
+
+Přístupnost:
+- Nadpisová struktura:
+- Klávesnice a focus:
+- Formuláře a chyby:
+- Obrázky a média:
+- Pohyb / animace:
+
+Výkon:
+- Největší riziko načtení:
+- Externí skripty:
+- Obrázky a fonty:
+- Mobilní stav:
+
+Privacy:
+- Co se měří:
+- Jaká data odcházejí mimo náš systém:
+- Co lze smazat nebo zjednodušit:
+
+Rozhodnutí:
+- Spustit / nespustit:
+- Co opravit před spuštěním:
+- Co zkontrolovat po týdnu:
+```
+
+### Checklist pro přístupnost, výkon a privacy-first web
+
+- [ ] Stránka má správnou semantiku: nadpisy, odkazy, tlačítka a formulářové labely.
+- [ ] Všechny důležité akce jdou dokončit klávesnicí.
+- [ ] Focus stav je viditelný a pořadí focusu odpovídá rozhraní.
+- [ ] Obrázky mají smysluplné `alt`, nebo prázdné `alt`, pokud jsou čistě dekorativní.
+- [ ] Média nejsou jediným nositelem informace a neobtěžují automatickým zvukem.
+- [ ] Web respektuje `prefers-reduced-motion`.
+- [ ] Obrázky, fonty a skripty jsou optimalizované pro první načtení.
+- [ ] Každý externí skript má účel, vlastníka a privacy review.
+- [ ] Analytika neposílá osobní údaje v URL, eventech, referreru ani logu.
+- [ ] Release checklist obsahuje přístupnost a výkon jako povinnou bránu.
+
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -4024,6 +4202,7 @@ Kontrola před nasazením:
 - ENISA: [Cybersecurity for SMEs — Challenges and Recommendations](https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes)
 - ENISA: [Cloud Security Guide for SMEs](https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes)
 - ENISA: [Technical implementation guidance on cybersecurity risk management measures](https://www.enisa.europa.eu/publications/technical-implementation-guidance-on-cybersecurity-risk-management-measures)
+- European Commission: [European Accessibility Act](https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en)
 - European Data Protection Board: [Be compliant — Data protection guide for small business](https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en)
 - European Data Protection Board: [Data protection impact assessment](https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/data-protection-impact-assessment_en)
 - European Data Protection Board: [Template for Data Protection Impact Assessment](https://www.edpb.europa.eu/our-work-tools/documents/public-consultations/2026/edpb-dpia-template_en)
@@ -4044,6 +4223,8 @@ Kontrola před nasazením:
 - Keep a Changelog: [Keep a Changelog](https://keepachangelog.com/en/)
 - Matomo: [Configure Privacy Settings](https://matomo.org/faq/general/configure-privacy-settings-in-matomo/)
 - Matomo: [What data does Matomo track?](https://matomo.org/faq/general/faq_18254/)
+- MDN: [Lazy loading](https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Lazy_loading)
+- MDN: [prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)
 - OWASP: [Application Security Verification Standard](https://owasp.org/projects/asvs)
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - RSS Advisory Board: [RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
@@ -4052,6 +4233,8 @@ Kontrola před nasazením:
 - Umami: [Metric definitions](https://docs.umami.is/docs/metric-definitions)
 - Umami: [Platform](https://umami.is/platform)
 - Umami: [FAQ](https://docs.umami.is/docs/faq)
+- W3C: [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)
+- web.dev: [Web Vitals](https://web.dev/articles/vitals)
 - Úřad pro ochranu osobních údajů: [Cookies — otázky a odpovědi](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies)
 - Úřad pro ochranu osobních údajů: [Cookies od začátku roku 2022 pouze se souhlasem](https://uoou.gov.cz/novinky/vse/cookies-od-zacatku-roku-2022-pouze-se-souhlasem)
 - Úřad pro ochranu osobních údajů: [Obchodní sdělení](https://uoou.gov.cz/profesional/obchodni-sdeleni)
@@ -4061,6 +4244,7 @@ Kontrola před nasazením:
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha V o přístupnosti a výkonu bez sledovacího balastu: semantické HTML, Web Vitals, optimalizace médií, respekt k omezení pohybu, ruční testování, release brány a review šablona.
 - **2026-10-12:** Přidána příloha U o privacy-first event taxonomy: pojmenování eventů, slovník vlastností, klasifikace rizika, kontrola URL/logů, review proces, šablona a checklist bez PII.
 - **2026-10-12:** Obnovena kompletní verze e-booku po poškozeném placeholderu a přidána příloha T o RSS distribuci: typy feedů, technická implementace, objevitelný odkaz, privacy-first měření, workflow, šablona a checklist.
 - **2026-10-12:** Přidána příloha S o privacy-first experimentech a A/B testování: hypotézy, úrovně rizika, měření variant bez profilování lidí, guardrail metriky, vyhodnocení, situace kdy netestovat a šablona experimentu.
