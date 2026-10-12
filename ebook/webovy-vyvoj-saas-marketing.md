@@ -5327,6 +5327,172 @@ Tohle je čitelné. A když to není pravda, dokumentace splnila další funkci:
 - [ ] Jednou měsíčně proběhne kontrola nejčtenějších a nejvíc eskalovaných článků.
 
 
+## Příloha AD: Interní admin bez superuživatelského adrenalinu
+
+Interní administrace je často nejnebezpečnější část malého SaaS. Ne proto, že by vypadala dramaticky. Právě naopak: bývá to nenápadná stránka s tabulkou zákazníků, pár filtry a tlačítkem „upravit“. Jenže když se tam nahází všechno, vznikne z ní dálkové ovládání celé firmy.
+
+Privacy-first admin má jednoduchý princip: člověk vidí a mění jen to, co potřebuje pro konkrétní práci. OWASP ASVS pracuje mimo jiné s ověřováním přístupových pravidel a bezpečnostních kontrol v aplikacích ([OWASP: Application Security Verification Standard](https://owasp.org/projects/asvs)). EDPB připomíná privacy by design a by default jako způsob, jak ochranu dat zabudovat do návrhu systému, ne lepit na konec projektu ([EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)). Admin je přesně místo, kde se to pozná.
+
+**Codyho komentář:** Pokud má každý v týmu roli „admin“, není to role. Je to společná modlitba, že se nikdo nepřeklikne.
+
+### 1) Admin není jedna obrazovka, ale sada pracovních situací
+
+Nezačínej otázkou „co všechno dáme do administrace“. Začni otázkou „jaké práce se v adminu opravdu dělají“.
+
+Typické situace:
+
+- support řeší konkrétní ticket,
+- účetní kontroluje fakturační stav,
+- obchodník doplňuje stav příležitosti,
+- produktový tým sleduje agregované signály,
+- technik řeší incident,
+- vlastník účtu žádá export nebo smazání dat.
+
+Každá situace má jiný rozsah dat, jinou dobu platnosti a jiné riziko. Support často nepotřebuje vidět fakturační historii. Obchodník nepotřebuje auditní log bezpečnostních akcí. Produktový tým často nepotřebuje osobní údaje vůbec, stačí agregace.
+
+Praktický postup:
+
+1. Sepiš hlavní pracovní situace v adminu.
+2. Ke každé napiš, kdo ji řeší a proč.
+3. Vyjmenuj minimální data potřebná pro dokončení práce.
+4. Označ citlivé akce, které vyžadují potvrzení, schválení nebo dodatečný audit.
+5. Všechno ostatní schovej, dokud neexistuje jasný důvod.
+
+### 2) Role navrhuj podle práce, ne podle firemní hierarchie
+
+Role typu „owner“, „admin“ a „user“ nestačí, pokud v adminu běží support, obchod, fakturace i technická správa. Pro malý SaaS je lepší kombinovat jednoduché role s konkrétními oprávněními.
+
+Příklad rozumného rozdělení:
+
+- **Support:** vidí základní profil účtu, stav produktu, poslední bezpečné události a historii ticketů.
+- **Billing:** vidí fakturační údaje, tarif, platby, dobropisy a daňové údaje.
+- **Product:** vidí agregované používání funkcí bez identifikace konkrétních lidí, pokud ji nepotřebuje.
+- **Security/ops:** vidí auditní události, session informace, integrace a bezpečnostní nastavení.
+- **Owner:** schvaluje citlivé změny, exporty, mazání a přidělení vyšších oprávnění.
+
+U každé role si polož tři otázky:
+
+- Co musí vidět každý den?
+- Co smí vidět jen při konkrétním ticketu nebo incidentu?
+- Co nemá vidět nikdy?
+
+Třetí otázka je nejdůležitější. Bez ní se role časem nafukují jako batoh na víkend, do kterého někdo přibalil tiskárnu.
+
+### 3) Citlivé akce odděl od běžného prohlížení
+
+Zobrazit informaci není totéž jako změnit stav účtu. Admin by měl rozlišovat minimálně tři úrovně akcí:
+
+1. **Čtení:** zobrazení minimálních dat potřebných pro práci.
+2. **Běžná změna:** úprava poznámky, stavu ticketu, interního štítku nebo nepodstatného nastavení.
+3. **Citlivá změna:** reset MFA, změna vlastníka účtu, export dat, smazání účtu, ruční úprava fakturace, impersonace uživatele, vypnutí bezpečnostního pravidla.
+
+Citlivé akce potřebují lepší UX než „jsi si jistý?“. Dobrá ochrana obsahuje:
+
+- vysvětlení dopadu před akcí,
+- opakované ověření identity u vysoce rizikové akce,
+- povinný důvod změny,
+- auditní záznam,
+- upozornění vlastníkovi účtu, pokud je to vhodné,
+- možnost rychlého rollbacku, pokud existuje bezpečný návrat.
+
+OWASP má samostatné doporučení pro logování bezpečnostně relevantních událostí ([OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). V adminu to neznamená logovat všechno navždy. Znamená to logovat správné události, bez citlivého obsahu navíc a s jasnou retencí.
+
+### 4) Impersonace je skalpel, ne pohodlný režim práce
+
+Možnost „přihlásit se jako uživatel“ je lákavá, protože support rychle vidí problém. Zároveň je to jedna z nejrizikovějších funkcí adminu. Pokud ji opravdu potřebuješ, udělej z ní řízený proces.
+
+Bezpečnější pravidla:
+
+- impersonace je vypnutá jako výchozí stav,
+- používá se jen pro konkrétní ticket nebo incident,
+- vyžaduje důvod a časové omezení,
+- nezobrazuje tajné údaje, tokeny, hesla ani celé osobní profily,
+- každá akce je jasně označená jako akce administrátora,
+- uživatel může dostat informaci, že k účtu proběhl support přístup, pokud to neohrozí řešení incidentu.
+
+Alternativa je často lepší: vytvoř „support snapshot“, který ukáže technický stav relevantní k problému bez plného vstupu do účtu. Například stav integrace, poslední chybový kód, čas poslední synchronizace, tarif, aktivní feature flags a anonymizované ID události.
+
+### 5) Admin musí mít vlastní datovou minimalizaci
+
+Častá chyba: aplikace minimalizuje data pro zákazníka, ale interní admin ukazuje všechno „pro jistotu“. Jenže interní zobrazení je také zpracování dat. Proto admin potřebuje vlastní pravidla.
+
+Praktické vzory:
+
+- e-mail zobrazuj celý jen tam, kde je potřeba; jinde stačí maskovaná verze,
+- telefon ukaž jen rolím, které opravdu volají zákazníkům,
+- adresu drž ve fakturační části, ne v support detailu,
+- poznámky v CRM odděl od produktových dat,
+- exporty generuj dočasně a maž je podle retenčního pravidla,
+- vyhledávání omez tak, aby nepodporovalo náhodné procházení lidí.
+
+Admin má také chránit před zvědavostí. Ne každé riziko je hacker v mikině. Někdy je to unavený člověk, který si otevře „jen tak“ účet známé firmy. Proto pomáhají access review, auditní logy a obrazovky navržené podle práce, ne podle maximalistické zvědavosti.
+
+### 6) Měř používání adminu, ale bez interního panoptika
+
+Je užitečné vědět, které části adminu se používají, kde vznikají chyby a jaké citlivé akce přibývají. Není nutné z toho dělat sledování zaměstnanců po minutách.
+
+Dobré metriky:
+
+- počet citlivých akcí podle typu,
+- počet zamítnutých nebo neúspěšných pokusů,
+- role s nejširším oprávněním,
+- účty bez MFA,
+- exporty vytvořené a smazané včas,
+- opakované support situace, které by měl řešit produkt.
+
+Tyhle metriky slouží k bezpečnosti a zlepšování produktu, ne k mikromanagementu. Pokud z nich děláš interní bič, tým si najde obchvaty. A obchvaty jsou přesně to, co privacy-first provoz nechce.
+
+### Šablona admin access review
+
+```markdown
+## Admin access review: [produkt / interní systém]
+
+### Kontext
+- Datum kontroly:
+- Vlastník systému:
+- Reviewer:
+- Důvod kontroly:
+
+### Role
+- Role v systému:
+- Účel role:
+- Počet lidí s rolí:
+- Je role stále potřeba:
+
+### Citlivé akce
+- Jaké citlivé akce role smí:
+- Které akce vyžadují důvod:
+- Které akce vyžadují dodatečné ověření:
+- Které akce posílají upozornění:
+
+### Data
+- Jaká osobní data role vidí:
+- Co je maskované:
+- Co role nemá vidět:
+- Retence exportů a snapshotů:
+
+### Nálezy
+- Příliš široká oprávnění:
+- Neaktivní účty:
+- Chybějící MFA:
+- Nejasný vlastník role:
+- Doporučené změny:
+```
+
+### Checklist pro interní admin a backoffice
+
+- [ ] Admin je rozdělený podle pracovních situací, ne podle jedné univerzální obrazovky.
+- [ ] Každá role má popsaný účel, minimální data a zakázané oblasti.
+- [ ] Citlivé akce mají vysvětlení dopadu, důvod, auditní záznam a podle rizika další ověření.
+- [ ] Impersonace je časově omezená, auditovaná a navázaná na konkrétní důvod.
+- [ ] Support má bezpečný snapshot místo plného přístupu, kde to stačí.
+- [ ] Osobní údaje jsou v adminu maskované všude, kde není potřeba plné zobrazení.
+- [ ] Exporty jsou dočasné, chráněné a mají retenční pravidlo.
+- [ ] Přístupy do adminu se pravidelně revidují.
+- [ ] Auditní logy neobsahují zbytečné PII ani tajné hodnoty.
+- [ ] Metriky používání adminu slouží k bezpečnosti a zlepšení produktu, ne k internímu šmírování.
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -5388,6 +5554,7 @@ Tohle je čitelné. A když to není pravda, dokumentace splnila další funkci:
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha AD o interním adminu a backoffice: pracovní situace, role podle účelu, citlivé akce, impersonace, minimalizace dat, metriky používání, šablona access review a checklist.
 - **2026-10-12:** Přidána příloha AC o dokumentaci a knowledge base: rozdělení typů dokumentace, task-first návody, troubleshooting bez sběru citlivých dat, vlastnictví článků, privacy-first měření, lidské vysvětlení bezpečnosti a checklist.
 - **2026-10-12:** Přidána příloha AB o logování a auditní stopě: účel logů, minimalizace PII, sanitizace, auditní události, retence, přístupy, šablona logovací politiky a checklist.
 - **2026-10-12:** Přidána příloha AA o přihlašování, MFA a obnově účtů: rozdělení rizikových akcí, reset hesla, session politika, role, access review a checklist pro malé privacy-first SaaS týmy.
