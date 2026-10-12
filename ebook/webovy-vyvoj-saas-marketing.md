@@ -3491,6 +3491,158 @@ Další update:
 - [ ] Kontroluješ po opravě nejen technický stav, ale i zákaznickou komunikaci a případné follow-upy?
 
 
+## Příloha S: Experimenty a A/B testy bez stalkovací laboratoře
+
+A/B testování má špatnou pověst hlavně proto, že se často zvrhne v nekonečné sledování lidí, mikrosegmenty, heatmapy s osobními záznamy a dashboardy, které vypadají chytřeji než rozhodnutí, která z nich vylezou. Přitom malý tým většinou nepotřebuje vědět, jak konkrétní člověk pohnul myší. Potřebuje zjistit, jestli nová formulace, struktura stránky nebo onboardingový krok pomáhá zákazníkovi udělat lepší rozhodnutí.
+
+Privacy-first experiment není zákaz experimentovat. Je to zákaz tvářit se, že každý klik je psychologický román, který musíme archivovat pro budoucí generace.
+
+> **Codyho komentář:** Nejlepší experiment je ten, který jde vysvětlit zákazníkovi jednou větou bez toho, aby ses u toho začal potit jako router v racku bez klimatizace.
+
+### 1) Začni hypotézou, ne nástrojem
+
+Špatný začátek:
+
+> „Nasadíme A/B testing nástroj a uvidíme, co se stane.“
+
+Lepší začátek:
+
+> „Myslíme si, že návštěvníci pricing stránky váhají, protože nerozumí rozdílu mezi tarify. Pokud přidáme srovnávací tabulku podle typických situací, zvýší se počet kliknutí na domluvení dema a sníží se počet support dotazů na výběr tarifu.“
+
+Hypotéza má mít čtyři části:
+
+- **Pro koho:** segment nebo situace, ne osobní profil.
+- **Problém:** co lidem brání v rozhodnutí.
+- **Změna:** co konkrétně upravíš.
+- **Signál:** jak poznáš, že to pomohlo.
+
+Místo „chceme víc konverzí“ napiš „chceme, aby návštěvník pricingu pochopil, který tarif odpovídá jeho fázi, a proto častěji zvolil relevantní další krok“. Je to delší, ale taky to není kouzelnická mlha.
+
+### 2) Vybírej experimenty podle rizika a vratnosti
+
+Ne každý experiment potřebuje stejný režim. Malý web nebo SaaS si vystačí se třemi úrovněmi:
+
+| Úroveň | Příklad | Jak testovat | Co neměřit |
+|---|---|---|---|
+| Nízké riziko | text CTA, pořadí bloků, FAQ | publikuj změnu a sleduj agregovaný trend | individuální záznamy návštěv |
+| Střední riziko | nový onboarding krok, jiný pricing layout | rozdělení návštěvnosti podle anonymní varianty | dlouhodobé profily uživatelů |
+| Vyšší riziko | změna trialu, paywall, povinná kvalifikace leadu | omezený rollout, ruční review, jasný rollback | skryté scoringy bez vysvětlení |
+
+Pokud je změna snadno vratná a nezasahuje do citlivých dat, často nepotřebuješ robustní A/B infrastrukturu. Stačí udělat změnu, označit datum, sledovat agregované metriky a po týdnu nebo měsíci vyhodnotit dopad. Ano, není to laboratorně dokonalé. Ale malý tým obvykle neumře na nedostatek statistické elegance. Umře na překomplikovaný proces, který nikdo nepoužívá.
+
+### 3) Měř variantu, ne člověka
+
+Privacy-first experiment může ukládat informaci o variantě bez toho, aby budoval osobní marketingový profil. Cílem je odpovědět na otázku „fungovala varianta B lépe než A?“, ne „co všechno víme o Frantovi z účetní firmy?“
+
+Praktické možnosti:
+
+- **Server-side přiřazení varianty:** server rozhodne, zda zobrazí variantu A nebo B, a do agregované analytiky pošle jen název varianty.
+- **Krátkodobá technická cookie:** pokud je potřeba konzistence mezi stránkami, drž variantu jen po dobu testu a nepoužívej ji pro marketingové spojování.
+- **UTM disciplína:** u kampaní testuj sdělení přes jasně pojmenované odkazy, ale do URL nikdy nedávej e-mail, jméno, firmu ani osobní identifikátor.
+- **Agregované eventy:** sleduj dokončení formuláře, kliknutí na demo nebo aktivaci funkce, ne osobní cestu každého návštěvníka.
+
+Princip minimalizace dat v GDPR říká, že osobní údaje mají být přiměřené, relevantní a omezené na to, co je nezbytné pro daný účel ([European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)). V experimentování to znamená jednoduchou otázku: jde rozhodnutí udělat z agregovaných dat? Pokud ano, nesbírej víc jen proto, že nástroj umí rozsvítit další graf.
+
+### 4) Guardrail metriky chrání důvěru
+
+Experiment může zvednout jednu metriku a současně poškodit produkt. Například agresivnější formulář může zvýšit počet vyplněných leadů, ale snížit kvalitu poptávek, zvýšit počet odhlášení nebo vyrobit víc supportu. Proto potřebuješ guardrail metriky — hranice, které nesmíš překročit.
+
+Příklady guardrailů:
+
+- počet support dotazů k dané změně se nesmí zvýšit o víc než domluvený limit,
+- odhlášení z onboardingových e-mailů nesmí růst rychleji než aktivace,
+- konverzní formulář nesmí přidat nové osobní pole bez privacy review,
+- page speed se nesmí zhoršit kvůli měřicím skriptům,
+- odmítnutí cookies nesmí rozbít základní funkčnost webu.
+
+Guardrail je užitečný hlavně proto, že brání lokálnímu vítězství a globální ostudě. Pokud experiment zvýší kliknutí na demo tím, že tlačítko nazve „získat audit zdarma“, ale reálně žádný audit zdarma neposkytuješ, není to výhra. Je to růst na dluh důvěry.
+
+### 5) Vyhodnocuj rozhodnutí, ne jen graf
+
+Každý experiment má skončit jedním z pěti výsledků:
+
+1. **Nasadit:** varianta pomohla a guardraily jsou v pořádku.
+2. **Vrátit:** varianta nepomohla nebo poškodila důvěru.
+3. **Upravit:** signál je slibný, ale provedení má problém.
+4. **Prodlužujeme:** dat je málo a změna stojí za další měření.
+5. **Zahazujeme otázku:** zjistili jsme, že hypotéza nebyla důležitá.
+
+Vyhodnocení napiš krátce. Ne jako závěrečnou práci z oboru „dashboardologie“, ale jako rozhodovací záznam:
+
+```text
+Experiment: Pricing FAQ podle nákupní situace
+Hypotéza: Návštěvníci nerozumí rozdílu mezi tarify.
+Varianta: Přidali jsme FAQ a příklady výběru tarifu.
+Období: 14 dní
+Primární signál: kliknutí na domluvení dema z pricing stránky
+Guardrail: počet dotazů „jaký tarif vybrat“ v supportu
+Výsledek: demo kliknutí mírně vzrostla, support dotazy klesly
+Rozhodnutí: ponechat změnu a za měsíc doplnit příklady pro agentury
+Co nemažeme z hlavy: žádná osobní data z testu neukládáme mimo agregované metriky
+```
+
+### 6) Kdy A/B test raději nedělat
+
+Experiment není kladivo na každou nejistotu. Někdy je lepší mluvit se zákazníky, projít support dotazy, zjednodušit text nebo opravit zjevnou chybu.
+
+A/B test přeskoč, když:
+
+- stránka má nízkou návštěvnost a výsledek by byl jen numerologie v hezkém kabátku,
+- změna je zjevné zlepšení s minimálním rizikem, například oprava nejasného textu,
+- potřebuješ pochopit motivaci, ne spočítat kliknutí,
+- experiment by vyžadoval invazivnější tracking než hodnota rozhodnutí,
+- nemáš kapacitu výsledek vyhodnotit a zavést.
+
+**Codyho komentář:** Testovat každou drobnost je často způsob, jak se vyhnout odpovědnosti za rozhodnutí. Data mají rozhodnutí zlepšit, ne nahradit odvahu říct „tohle je pro naše zákazníky jasnější“.
+
+### Šablona privacy-first experimentu
+
+```text
+Název experimentu:
+[krátký popis]
+
+Rozhodnutí, které chceme udělat:
+[nasadit / vrátit / upravit konkrétní změnu]
+
+Hypotéza:
+Věříme, že [pro koho] má problém [problém].
+Když uděláme [změna], očekáváme [měřitelný signál].
+
+Rozsah:
+Stránka / funkce:
+Začátek:
+Konec nebo kontrolní datum:
+Vlastník:
+
+Měření:
+Primární signál:
+Guardrail metriky:
+Co záměrně neměříme:
+
+Privacy poznámka:
+Sbíraná data:
+Retence:
+Dodavatelé:
+Rollback:
+
+Výsledek:
+Co se změnilo:
+Rozhodnutí:
+Follow-up:
+```
+
+### Checklist pro privacy-first experimenty
+
+- [ ] Má experiment jednu konkrétní hypotézu a jedno rozhodnutí, které má pomoct udělat?
+- [ ] Umíš výsledek vyhodnotit z agregovaných dat bez dlouhodobého profilování lidí?
+- [ ] Neobsahují URL parametry e-mail, jméno, firmu ani jiné osobní identifikátory?
+- [ ] Máš guardrail metriky pro důvěru, support, výkon stránky a privacy dopad?
+- [ ] Víš, jak variantu vypnout nebo vrátit bez nouzového deploy panikaření?
+- [ ] Je jasné, kdo experiment vyhodnotí a do kdy?
+- [ ] Zapíšeš výsledek jako rozhodnutí, ne jen screenshot grafu?
+- [ ] Smažeš nebo anonymizuješ pracovní exporty po vyhodnocení?
+
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -3531,6 +3683,7 @@ Další update:
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha S o privacy-first experimentech a A/B testování: hypotézy, úrovně rizika, měření variant bez profilování lidí, guardrail metriky, vyhodnocení, situace kdy netestovat a šablona experimentu.
 - **2026-10-12:** Přidána příloha R o incidentové komunikaci a status page: kategorie incidentů, role týmu, první status, rytmus updatů, interní zápis, postmortem a checklist bez zbytečného sběru citlivých dat.
 - **2026-10-12:** Přidána příloha Q o retenci a mazání dat: inventura datových zásuvek, rozdělení důvodů uložení, režimy mazání, pravidla pro exporty, postup pro žádosti uživatelů a šablona retenční politiky.
 - **2026-10-12:** Přidána příloha P o měsíčním privacy-first reportu: otázky před grafy, jednostránkové shrnutí, oddělení signálu a interpretace, rozhodovací metriky, vlastník doporučení a šablona reportu.
