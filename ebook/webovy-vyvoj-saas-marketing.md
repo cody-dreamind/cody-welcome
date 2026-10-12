@@ -4337,6 +4337,157 @@ Privacy kontrola:
 - [ ] Tým umí zákazníkovi lidsky vysvětlit, proč a jak ho kontaktuje.
 
 
+## Příloha X: Integrace a API bez datového průvanu
+
+Každý SaaS dřív nebo později narazí na větu: „To jen napojíme přes API.“ Zní to nevinně. Ve skutečnosti tím často vznikne nový tok dat, nový dodavatel, nový bezpečnostní povrch, nový proces mazání a nový bod, kde se může pokazit důvěra zákazníka. Integrace nejsou kabely za monitorem. Jsou to smlouvy mezi systémy, týmy a daty.
+
+Privacy-first integrace má jednoduchý cíl: předat jen to, co druhá strana opravdu potřebuje, na dobu, po kterou to potřebuje, způsobem, který umíš vysvětlit technicky i obchodně. Pokud to neumíš říct jednou větou, integrace ještě není připravená.
+
+### 1) Každou integraci popiš jako datovou smlouvu
+
+Nezačínej otázkou „jaký endpoint použijeme?“. Začni otázkou „jaký obchodní výsledek má napojení přinést a jaká data jsou k tomu nezbytná?“ Technické API dokumentace bývají štědré. To neznamená, že máš použít všechno, co se nabízí.
+
+Datová smlouva pro integraci má obsahovat:
+
+- účel integrace,
+- vlastníka v týmu,
+- směr toku dat,
+- seznam polí,
+- právní nebo smluvní důvod,
+- retenci a způsob mazání,
+- chování při chybě,
+- postup pro vypnutí integrace.
+
+Příklad špatného zadání:
+
+> „Pošli CRM všechno z formuláře, ať to tam máme.“
+
+Lepší zadání:
+
+> „Po odeslání poptávky vytvoř v CRM kontakt a obchodní příležitost. Posílej pouze e-mail, firmu, volitelný telefon, typ problému, preferovaný další krok a zdroj kampaně bez osobních údajů v URL. Poznámku z formuláře nemaž, ale nastav retenci 12 měsíců pro neuzavřené poptávky.“
+
+To druhé je méně sexy, ale dá se provozovat. První je jen rychlá cesta k tomu, aby se z CRM stala datová půda s pavouky.
+
+### 2) Omez rozsah oprávnění, ne jen počet polí
+
+Minimalizace dat není jen o tom, že neposíláš zbytečný sloupec. Je i o tom, jaké oprávnění integrace dostane. API token s plným administrátorským přístupem je jako klíč od kanceláře přilepený na dveřích. Praktické? Ano. Rozumné? Ani trochu.
+
+U každé integrace nastav:
+
+- samostatný účet nebo token pro konkrétní účel,
+- nejnižší potřebná oprávnění,
+- oddělené testovací a produkční přístupy,
+- expiraci nebo pravidelnou rotaci tajemství,
+- auditní stopu pro důležité změny,
+- jasného vlastníka, který ví, proč token existuje.
+
+Pokud služba neumí jemná oprávnění, zapiš to jako riziko. Někdy to neznamená integraci zakázat, ale znamená to přidat kompenzační opatření: méně dat, kratší retenci, ruční schvalování exportů nebo monitoring neobvyklých operací.
+
+**Codyho komentář:** „Máme jen jeden master token, ale nikdo ho nepoužívá špatně“ je bezpečnostní verze „u nás se nikdy nic nerozbije“. Hezká věta do pohádky. Do produkce méně.
+
+### 3) Navrhni integraci tak, aby šla vypnout
+
+Dobrá integrace má exit plán už při spuštění. Ne proto, že čekáš katastrofu, ale proto, že dobrý provoz počítá se změnou. Dodavatel zdraží, produkt změní strategii, API se rozbije, zákazník požádá o výmaz, nebo zjistíš, že integrace nepřináší hodnotu.
+
+U každého napojení si odpověz:
+
+- Co se stane, když dodavatel hodinu neodpovídá?
+- Co se stane, když neodpovídá den?
+- Umíme frontu zpráv znovu odeslat bez duplicit?
+- Umíme zákaznická data exportovat a smazat?
+- Máme přehled, která data už byla předána ven?
+- Umíme integraci vypnout bez pádu hlavní aplikace?
+
+Praktické pravidlo: kritické procesy navrhuj jako odolné vůči výpadku integrace. Pokud CRM spadne, webový formulář má poptávku bezpečně uložit a upozornit tým. Nemá návštěvníkovi říct „zkuste to zítra, náš vendor si dal espresso pauzu“.
+
+### 4) Neposílej osobní údaje v identifikátorech a URL
+
+API integrace často selžou na detailech, které vypadají nevinně. E-mail v URL parametru. Jméno zákazníka v názvu souboru. Interní poznámka v eventu. Token v logu. Chyba, která se odešle do monitoringu včetně celého payloadu. A najednou máš osobní údaje na místech, kde je nikdo nehledal.
+
+Bezpečnější návyky:
+
+- používej interní náhodné ID místo e-mailu v URL,
+- neposílej celé payloady do error monitoringu,
+- maskuj tokeny, e-maily a telefony v logu,
+- nepoužívej osobní údaje v názvech webhooků, souborů a segmentů,
+- ukládej mapping mezi systémy jen tam, kde je opravdu potřeba,
+- u testů používej syntetická data, ne export reálných zákazníků.
+
+Zvlášť pozor na webhooky. Jsou skvělé, protože umožňují rychlou automatizaci. Jsou nebezpečné, když bez filtru přeposílají všechno všude. Webhook není datový odpadní kanál. Je to dveřní zvonek mezi systémy — a i ten má mít kukátko.
+
+### 5) Rozliš synchronizaci, kopii a odvozený záznam
+
+Jedna z nejčastějších provozních bolestí: tým neví, který systém je zdroj pravdy. CRM má jiný e-mail než fakturace. Produkt má jiný stav účtu než support. Marketingová databáze si pamatuje člověka, kterého aplikace už smazala. A pak přijde žádost uživatele nebo zákazníka a všichni začnou hledat, co je vlastně realita.
+
+Před integrací určete typ vztahu:
+
+| Typ | Co znamená | Riziko | Dobré pravidlo |
+|---|---|---|---|
+| Synchronizace | dvě strany si pravidelně předávají změny | konflikty a nejasný zdroj pravdy | jeden systém je autoritativní pro každé pole |
+| Kopie | data se předají do dalšího systému | zapomenuté mazání a staré exporty | kopie má vlastní retenci a vlastníka |
+| Odvozený záznam | vzniká agregace, skóre nebo stav | neprůhledné rozhodování | ulož vysvětlení, ne tajnou magii |
+| Jednorázový export | data opustí běžný systém | ztráta kontroly | nastav expiraci, úložiště a mazání exportu |
+
+Pokud systém není zdroj pravdy, nemá svévolně přepisovat hodnoty. Pokud je zdroj pravdy, musí mít proces změny, audit a obnovu. Jinak se z integrace stane multiplayerový Excel s API.
+
+### 6) Šablona integrační karty
+
+Použij ji před spuštěním každého nového API napojení, webhooku, automatizace nebo pravidelného exportu.
+
+```markdown
+## Integrační karta: [název integrace]
+
+### Účel
+- Jaké rozhodnutí nebo proces integrace podporuje:
+- Co se stane, pokud integrace nebude existovat:
+
+### Vlastnictví
+- Business vlastník:
+- Technický vlastník:
+- Dodavatel / systém:
+- Prostředí: produkce / test / obojí
+
+### Data
+- Směr toku dat:
+- Předávaná pole:
+- Pole výslovně zakázaná:
+- Obsahuje osobní údaje: ano / ne
+- Obsahuje citlivá nebo zákaznická provozní data: ano / ne
+
+### Oprávnění a bezpečnost
+- Typ přístupu:
+- Rozsah oprávnění:
+- Kde je uložený token:
+- Rotace / expirace:
+- Auditní log:
+
+### Retence a vypnutí
+- Kde vzniká kopie:
+- Jak dlouho se drží:
+- Jak se maže:
+- Jak se integrace vypne:
+- Co se stane při výpadku:
+
+### Review
+- Datum poslední kontroly:
+- Rozhodnutí: spustit / upravit / nespouštět
+- Otevřená rizika:
+```
+
+### Checklist pro privacy-first integrace
+
+- [ ] Integrace má jasný obchodní účel a vlastníka.
+- [ ] Je popsaný směr toku dat a seznam předávaných polí.
+- [ ] Nepředáváme osobní údaje v URL, názvech souborů, logu ani analytických eventech.
+- [ ] Token nebo účet má nejnižší potřebná oprávnění.
+- [ ] Produkční a testovací prostředí nepoužívají stejná tajemství.
+- [ ] Víme, který systém je zdroj pravdy pro každé synchronizované pole.
+- [ ] Kopie dat má vlastní retenci a proces mazání.
+- [ ] Výpadek integrace neshodí hlavní produktový nebo obchodní proces.
+- [ ] Existuje postup pro vypnutí, export a úklid dat.
+- [ ] Integrace prošla technickým i privacy review před spuštěním.
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -4386,6 +4537,7 @@ Privacy kontrola:
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha X o privacy-first integracích a API: datová smlouva, minimální oprávnění, vypínatelnost, ochrana URL/logů, zdroj pravdy, integrační karta a checklist.
 - **2026-10-12:** Přidána příloha W o privacy-first lead scoringu: stavy připravenosti, kvalifikační otázky, expirace signálů, oddělení marketingového zájmu od obchodního oprávnění, šablona a checklist.
 - **2026-10-12:** Přidána příloha V o přístupnosti a výkonu bez sledovacího balastu: semantické HTML, Web Vitals, optimalizace médií, respekt k omezení pohybu, ruční testování, release brány a review šablona.
 - **2026-10-12:** Přidána příloha U o privacy-first event taxonomy: pojmenování eventů, slovník vlastností, klasifikace rizika, kontrola URL/logů, review proces, šablona a checklist bez PII.
