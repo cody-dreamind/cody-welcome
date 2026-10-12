@@ -2301,6 +2301,169 @@ Pro firmy s auditními, bezpečnostními nebo integračními požadavky.
 - [ ] Jednou měsíčně tým vybere jednu konkrétní úpravu pricingu podle dotazů a dat.
 
 
+## Příloha L: Důvěryhodnost webu bez logostěny z kartonu
+
+Důvěra na webu nevzniká tím, že do patičky nasypeš osm ikon, tři generické věty a logo klienta, se kterým jsi jednou měl společný call. Vzniká tím, že návštěvník vidí konkrétní důkazy: komu pomáháš, jaký problém řešíš, co se změnilo a proč tomu může věřit.
+
+Privacy-first web má v tomhle výhodu. Může říct: „Nepotřebujeme vás sledovat přes půl internetu, abychom vám ukázali relevantní důkaz.“ Místo behaviorálního cirkusu stačí dobrá informační architektura, poctivý obsah a důkazy umístěné přesně tam, kde lidé váhají.
+
+### 1) Rozlišuj typy důkazů podle míry rizika
+
+Ne každý návštěvník potřebuje stejný důkaz. Čím větší riziko rozhodnutí, tím konkrétnější důkaz musí web dodat.
+
+Pro jednoduchý firemní web často stačí:
+
+- jasné vysvětlení služby,
+- ukázky práce,
+- krátké reference,
+- fotka nebo jméno člověka, se kterým bude zákazník mluvit,
+- srozumitelný proces spolupráce.
+
+Pro B2B SaaS už je potřeba víc:
+
+- případová studie s výchozí situací a výsledkem,
+- bezpečnostní a privacy stránka,
+- vysvětlení exportu dat a ukončení účtu,
+- informace o hostingu, subdodavatelích a přístupech,
+- dokumentace pro interní schválení nákupu.
+
+Pro enterprise zákazníky se důvěra posouvá ještě dál:
+
+- vzor DPA nebo jasný postup k právním dokumentům,
+- role a oprávnění,
+- auditní logy,
+- incident proces,
+- kontaktní bod pro bezpečnostní dotazy,
+- možnost dodat technické podklady bez marketingové mlhy.
+
+**Codyho komentář:** Pokud prodáváš za pár stovek měsíčně, nepotřebuješ bezpečnostní portál jako banka. Pokud ale tvrdíš, že řešíš firemní data, nestačí „data bereme vážně“ napsané šedým textem pod formulářem. To je spíš modlitba než důkaz.
+
+### 2) Case study piš jako rozhodovací dokument
+
+Dobrá případová studie není oslavný článek o tom, jak jste „společně dosáhli skvělých výsledků“. To je firemní karaoke. Dobrá case study pomáhá podobnému zákazníkovi rozhodnout, jestli jste vhodná volba.
+
+Použij jednoduchou strukturu:
+
+1. **Kontext:** kdo je zákazník, v jaké fázi byl a co řešil.
+2. **Problém:** co nefungovalo, proč to bolelo a jaké byly praktické dopady.
+3. **Rozhodnutí:** proč se zvolilo konkrétní řešení a jaké alternativy byly na stole.
+4. **Implementace:** co se udělalo, v jakém pořadí a co bylo nejtěžší.
+5. **Výsledek:** co se změnilo, ideálně konkrétně a bez přehánění.
+6. **Poučení:** co by tým udělal příště stejně a co jinak.
+7. **Privacy-first poznámka:** jak se pracovalo s daty, souhlasy, dodavateli nebo měřením.
+
+Praktický příklad titulku:
+
+> „Jak B2B tým zkrátil ruční zpracování poptávek z 2 hodin na 20 minut bez předávání dat reklamním platformám“
+
+Tohle je konkrétní. Říká cílovku, změnu, provozní výsledek i privacy hodnotu. Není nutné přidávat ohňostroj superlativů.
+
+### 3) Reference sbírej tak, aby šly použít
+
+Špatná reference zní takhle:
+
+> „Spolupráce byla skvělá, doporučujeme.“
+
+To potěší ego, ale webu moc nepomůže. Lepší reference odpovídá na jednu z nákupních obav.
+
+Ptej se zákazníků konkrétně:
+
+- Co jste řešili před spoluprací?
+- Čeho jste se při rozhodování báli?
+- Co vám nejvíc pomohlo během implementace?
+- Jaký konkrétní výsledek dnes vidíte?
+- Co byste řekli firmě, která řeší podobný problém?
+- Můžeme uvést jméno, roli, firmu a kontext?
+
+Pokud zákazník nechce být jmenovaný, dá se použít anonymizovaná reference, ale označ ji férově:
+
+> „Marketingový ředitel, česká B2B firma do 50 lidí“
+
+Nepředstírej, že anonymní citace má stejnou váhu jako ověřitelná reference. Má menší důkazní sílu, ale pořád může pomoct, pokud je konkrétní.
+
+### 4) Důvěru rozmísti podle míst, kde lidé váhají
+
+Nejčastější chyba: všechny důkazy jsou na jedné stránce „Reference“ a zbytek webu vypadá, jako by vznikl v izolaci. Důkaz má být blízko rozhodnutí.
+
+Rozmístění podle stránek:
+
+- **Homepage:** krátký sociální důkaz, pro koho pracuješ, jeden silný výsledek, jasný proces.
+- **Služba nebo produkt:** konkrétní ukázka problému, podobný případ, vysvětlení postupu.
+- **Pricing:** reference k hodnotě, férovosti ceny, supportu, zrušení nebo přechodu mezi tarify.
+- **Formulář:** krátká věta o tom, co se stane po odeslání a jak dlouho data držíš.
+- **Privacy stránka:** provozní fakta, regiony, dodavatelé, retence, export a kontaktní bod.
+- **Blog:** odkazy na související zkušenosti, checklisty a praktické šablony.
+
+Příklad u formuláře:
+
+> „Ozveme se do dvou pracovních dnů. Údaje použijeme jen pro odpověď na poptávku a nepošleme je do reklamních systémů.“
+
+Tohle je malá věta, ale dělá velkou práci. Snižuje nejistotu a zároveň ukazuje hodnoty firmy.
+
+### 5) Privacy a bezpečnost vysvětli lidsky
+
+Stránka „Bezpečnost“ nebo „Soukromí“ často skončí jako skládka právních slov. Jenže kupující často není právník. Potřebuje rychle pochopit, zda produkt projde interním schválením a jestli tým nepřidává zbytečné riziko.
+
+Dobrá privacy-first stránka má odpovědět na otázky:
+
+- Kde běží aplikace a databáze?
+- Jaké kategorie dat zpracováváme?
+- Které subdodavatele používáme a proč?
+- Jak dlouho držíme účty, logy, poptávky a support komunikaci?
+- Jak funguje export dat?
+- Jak funguje smazání nebo ukončení účtu?
+- Kdo má v týmu přístup k zákaznickým datům?
+- Jak se hlásí bezpečnostní problém?
+
+Nemusí to být román. Stačí přehledná stránka, která odkazuje na právní dokumenty a technické detaily. Důležité je, aby nebyla jen marketingová. Když něco nevíš, napiš, kdo odpověď dodá. Když něco zatím neumíš, nebal to do mlhy.
+
+### 6) Šablona důkazní vrstvy webu
+
+Použij tuto šablonu při auditu důvěryhodnosti:
+
+```markdown
+# Důvěryhodnost webu
+
+## Primární nákupní obavy
+- Cena a návratnost
+- Čas implementace
+- Bezpečnost a data
+- Kvalita podpory
+- Možnost odejít
+
+## Důkazy k obavám
+- Cena: příklad hodnoty, pricing FAQ, case study
+- Implementace: proces spolupráce, timeline, ukázka onboarding plánu
+- Data: privacy stránka, dodavatelé, export, retence
+- Podpora: SLA nebo očekávání odpovědi, knowledge base, support reference
+- Odchod: exportní pravidla, zrušení účtu, exit plán
+
+## Umístění důkazů
+- Homepage
+- Produktová stránka
+- Pricing
+- Formulář
+- Privacy/security stránka
+- Dokumentace nebo knowledge base
+
+## Chybějící důkazy
+- Co dnes tvrdíme bez podpory?
+- Kde návštěvník musí věřit naslepo?
+- Který důkaz umíme doplnit tento měsíc?
+```
+
+### Checklist pro důvěryhodnost privacy-first webu
+
+- [ ] Hlavní stránky obsahují konkrétní důkazy, ne jen obecné sliby.
+- [ ] Case studies popisují kontext, problém, rozhodnutí, implementaci, výsledek a poučení.
+- [ ] Reference odpovídají na skutečné nákupní obavy.
+- [ ] Důkazy jsou umístěné u míst rozhodnutí: pricing, formulář, produkt, homepage a privacy stránka.
+- [ ] Privacy a bezpečnost jsou vysvětlené lidsky, ne jen právním dokumentem v patičce.
+- [ ] Web říká, co se stane po odeslání formuláře a jak se naloží s daty.
+- [ ] Anonymní reference jsou označené férově a nepředstírají vyšší váhu.
+- [ ] Jednou za kvartál tým zkontroluje, které sliby na webu už neodpovídají realitě.
+
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -2339,6 +2502,7 @@ Pro firmy s auditními, bezpečnostními nebo integračními požadavky.
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha L o důvěryhodnosti privacy-first webu: typy důkazů, case studies, reference, rozmístění důkazů, lidské vysvětlení bezpečnosti a checklist.
 - **2026-10-11:** Přidána příloha K o privacy-first pricing stránce: nákupní situace, hodnotové tarify, limity, CTA podle připravenosti zákazníka, agregované měření a praktická šablona.
 - **2026-10-11:** Přidána příloha J o privacy-first supportu a knowledge base: vrstvy podpory, struktura článků, šablona návodu, minimální ticket formulář, agregované metriky a měsíční review.
 - **2026-10-11:** Přidána příloha I o privacy-first poptávkových formulářích: minimální pole, kvalifikace problému, potvrzení po odeslání, interní workflow, retenční pravidla a praktická šablona.
