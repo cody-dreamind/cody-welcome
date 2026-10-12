@@ -2837,6 +2837,173 @@ Tým se pak učí z trhu, ale nestaví si databázi lidí, kteří kdysi možná
 - [ ] U leadů bez dalšího kroku se nepouští nekonečná automatizace připomínek.
 
 
+## Příloha O: Produktová roadmapa bez sledování každého kliknutí
+
+Roadmapa malého SaaS týmu nemá být galerie přání, politická mapa interních tlaků ani hřbitov nápadů, které zněly dobře po druhé kávě. Má být praktický nástroj pro rozhodování: co uděláme teď, proč to dává smysl a podle čeho poznáme, že to pomohlo.
+
+Privacy-first roadmapa navíc respektuje jednu důležitou hranici: nemusíš vědět všechno o každém uživateli, abys mohl stavět lepší produkt. Často stačí kombinovat agregovaná produktová data, support signály, obchodní rozhovory, dobrovolnou zpětnou vazbu a technické riziko.
+
+> **Codyho komentář:** Když tým tvrdí „potřebujeme session replay, jinak nevíme, co zlepšit“, většinou ve skutečnosti potřebuje lépe psát hypotézy, mluvit se zákazníky a uklidit support inbox. Session replay je někdy užitečný, ale není náhradou za přemýšlení. Bohužel, přemýšlení zatím nemá hezký dashboard.
+
+### 1) Roadmapa začíná produktovými tématy, ne seznamem funkcí
+
+Funkce je konkrétní řešení. Téma je problém nebo směr hodnoty. Malý tým by měl plánovat hlavně v tématech, protože konkrétní řešení se po rozhovorech často změní.
+
+Slabá roadmapa:
+
+- „Přidat export do PDF.“
+- „Přidat integraci s účetnictvím.“
+- „Předělat dashboard.“
+
+Lepší roadmapa:
+
+- „Zjednodušit předání výstupu klientovi.“
+- „Snížit ruční práci při fakturaci.“
+- „Zkrátit čas k prvnímu pochopení stavu projektu.“
+
+Téma nechává prostor pro lepší řešení. Export do PDF může být správná odpověď, ale může se ukázat, že zákazník ve skutečnosti potřebuje veřejný read-only odkaz, pravidelný e-mailový souhrn nebo jednodušší sdílení tabulky.
+
+### 2) Každý nápad zapiš jako hypotézu
+
+Nápad bez hypotézy je jen poznámka s ambicemi. Před zařazením do roadmapy ho přepiš do jednoduché struktury:
+
+```text
+Věříme, že [typ zákazníka]
+má problém s [situace / úkol],
+protože [signál, který jsme viděli].
+
+Když uděláme [změna / experiment],
+očekáváme [měřitelný nebo pozorovatelný výsledek].
+
+Poznáme to podle [metrika / rozhovor / support signál]
+bez toho, abychom museli sledovat jednotlivce napříč webem.
+```
+
+Příklad:
+
+```text
+Věříme, že menší agentury
+mají problém rychle vysvětlit klientovi stav projektu,
+protože se v supportu opakuje dotaz „kde to teď stojí?“.
+
+Když přidáme sdílený projektový přehled s jasným stavem,
+očekáváme méně ručních status e-mailů a rychlejší schvalování.
+
+Poznáme to podle počtu status dotazů v supportu,
+počtu vytvořených sdílených přehledů a kvalitativní zpětné vazby z pěti rozhovorů.
+```
+
+Všimni si, že k tomu nepotřebuješ sledovat konkrétní pohyb myši, osobní profil uživatele ani reklamní identifikátor. Potřebuješ rozumný signál, ne digitální mikroskop přilepený na čelo.
+
+### 3) Prioritizuj podle hodnoty, rizika a důvěry
+
+Klasické prioritizační frameworky se často zvrhnou v tabulku, kde vyhraje ten, kdo nejlépe odhadne čísla, která nikdo neověřil. Pro malý tým stačí jednodušší skóre od 1 do 5:
+
+| Kritérium | Otázka | Poznámka |
+| --- | --- | --- |
+| Hodnota pro zákazníka | Pomůže to řešit častý nebo drahý problém? | Dej vyšší skóre tomu, co zákazník aktivně pozná. |
+| Obchodní dopad | Pomůže to aktivaci, retenci, prodeji nebo snížení supportu? | Ne každá dobrá funkce je dobrý další krok. |
+| Důvěra v signál | Máme data, rozhovory nebo opakovaný support signál? | Nízká důvěra znamená experiment, ne velký projekt. |
+| Náročnost | Kolik práce, koordinace a rizika to přidá? | Tady nižší náročnost znamená vyšší prioritu. |
+| Privacy dopad | Přidává to sběr dat, integraci nebo nového dodavatele? | Vysoký dopad vyžaduje review před vývojem. |
+
+Praktické pravidlo: pokud má položka vysokou hodnotu, ale nízkou důvěru, nedávej ji rovnou do vývoje. Udělej nejdřív menší test: prototyp, rozhovor, ruční concierge řešení, landing page pro existující zákazníky nebo krátké vysvětlení v dokumentaci.
+
+### 4) Odděl discovery, delivery a údržbu
+
+Roadmapa se rozpadá, když všechno vypadá jako „feature“. Ve skutečnosti má produktová práce tři různé režimy:
+
+1. **Discovery** — ověřujeme problém, řešení a ochotu používat nebo platit.
+2. **Delivery** — stavíme ověřenou změnu do produktu.
+3. **Údržba** — zlepšujeme stabilitu, bezpečnost, dokumentaci, výkon a provozní dluh.
+
+Malý SaaS tým by měl mít v roadmapě všechny tři. Pokud děláš jen delivery, rychle stavíš věci, které možná nikdo nechce. Pokud děláš jen discovery, máš krásné poznámky a produkt stojí. Pokud ignoruješ údržbu, jednoho dne tě technický dluh pozdraví jako účtenka z restaurace, kde sis objednával poslepu.
+
+Jednoduchý měsíční poměr pro malý tým:
+
+- 50–60 % kapacity na delivery,
+- 20–30 % na discovery,
+- 15–25 % na údržbu a bezpečnost.
+
+Ber to jako výchozí rytmus, ne zákon vytesaný do backlogu. Pokud máš incident, údržba vyhrává. Pokud nemáš jasný problém, discovery vyhrává. Pokud máš ověřenou poptávku a zákazníci čekají, delivery vyhrává.
+
+### 5) Měř dopad roadmapy bez osobního profilování
+
+Každá větší položka by měla mít předem daný „definition of impact“ — co se má změnit po vydání. Nemusí jít vždy o tvrdou konverzi. Užitečné jsou i kombinované signály:
+
+- méně support dotazů na konkrétní téma,
+- kratší čas k první hodnotné akci,
+- více dokončených projektů nebo exportů na agregované úrovni,
+- více aktivních týmů v účtu, ne více sledovaných lidí,
+- lepší odpovědi v krátkém dobrovolném dotazníku,
+- méně manuální práce v interním procesu.
+
+Před vydáním si napiš:
+
+```text
+Po 30 dnech zkontrolujeme:
+- agregovanou metriku A,
+- support signál B,
+- zpětnou vazbu od zákazníků C,
+- technické dopady D.
+
+Pokud se nic nezmění, rozhodneme:
+- upravit,
+- stáhnout,
+- ponechat bez další investice,
+- nebo pokračovat druhou iterací.
+```
+
+Tím se vyhneš nekonečnému „ještě tomu dáme čas“. Čas je dobrý sluha, ale mizerný produktový manažer.
+
+### 6) Šablona roadmapové karty
+
+Používej jednu kartu pro větší změny. Krátkou, ale dost konkrétní na to, aby se k ní tým mohl vrátit za měsíc a neptal se: „Co tím básník chtěl říct?“
+
+```text
+## Název tématu
+
+### Pro koho to je
+[segment zákazníků / role / typ účtu]
+
+### Problém
+[konkrétní situace, která bolí]
+
+### Signály
+- [support dotaz / rozhovor / agregovaná metrika]
+- [obchodní nebo retenční signál]
+
+### Hypotéza
+Věříme, že když [změna], tak [výsledek], protože [důvod].
+
+### Možná řešení
+- Nejmenší test: [ruční řešení / prototyp / copy změna]
+- Produktová verze: [funkce nebo workflow]
+- Co teď neděláme: [hranice rozsahu]
+
+### Privacy review
+- Jaká nová data sbíráme?
+- Potřebujeme nového dodavatele?
+- Dá se dopad změřit agregovaně?
+- Jak dlouho data držíme?
+
+### Definition of impact
+- Primární signál: [metrika nebo kvalitativní výsledek]
+- Kontrola po: [14 / 30 / 60 dnech]
+- Rozhodnutí po kontrole: [pokračovat / upravit / ukončit]
+```
+
+### Checklist pro privacy-first roadmapu
+
+- [ ] Plánuješ podle problémových témat, ne jen podle seznamu funkcí?
+- [ ] Má každá větší položka hypotézu, signál a očekávaný dopad?
+- [ ] Rozlišuješ discovery, delivery a údržbu?
+- [ ] Ověřuješ nejisté věci malým testem před velkou implementací?
+- [ ] Má každá položka privacy review před vývojem, ne až před releasem?
+- [ ] Umíš dopad vyhodnotit agregovaně nebo dobrovolnou zpětnou vazbou?
+- [ ] Mažeš nebo archivuješ staré roadmapové nápady, které už nemají vlastníka ani důvod?
+
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -2877,6 +3044,7 @@ Tým se pak učí z trhu, ale nestaví si databázi lidí, kteří kdysi možná
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha O o privacy-first produktové roadmapě: témata místo seznamu funkcí, hypotézy, prioritizace podle hodnoty a důvěry, oddělení discovery/delivery/údržby, vyhodnocení dopadu a roadmapová karta.
 - **2026-10-12:** Přidána příloha N o privacy-first B2B demo hovorech a obchodním follow-upu: příprava dema, discovery otázky, CRM poznámky, follow-up e-mail, pipeline stavy a retenční checklist.
 - **2026-10-12:** Přidána příloha M o privacy-first e-mailingu a onboardingových e-mailech: typy zpráv, minimální sběr kontaktů, jednoduché odhlášení, agregované měření, onboarding série a měsíční hygiena seznamu.
 - **2026-10-12:** Přidána příloha L o důvěryhodnosti privacy-first webu: typy důkazů, case studies, reference, rozmístění důkazů, lidské vysvětlení bezpečnosti a checklist.
