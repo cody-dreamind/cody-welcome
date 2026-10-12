@@ -3192,6 +3192,146 @@ Připravil: [jméno]
 - [ ] Archivuješ reporty tak, aby šlo za čtvrtletí zkontrolovat, která rozhodnutí opravdu pomohla?
 
 
+## Příloha Q: Retence a mazání dat bez digitálního syslení
+
+Data retention zní jako něco, co se řeší až ve chvíli, kdy firma dospěje, má právní oddělení a někdo vlastní tabulku s názvem `final_final_v7.xlsx`. Jenže malý SaaS nebo firemní web si tím umí ušetřit hodně stresu už od prvního měsíce. Když víš, jak dlouho držíš poptávky, logy, analytiku, support tickety a exporty, nemusíš později uklízet datové skladiště lopatou.
+
+Princip je jednoduchý: osobní údaje se mají zpracovávat jen pro konkrétní účel, v přiměřeném rozsahu a ne déle, než je potřeba. Evropská komise to popisuje v principech GDPR jako omezení účelu, minimalizaci dat a omezení uložení ([European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)). Prakticky to neznamená mazat všechno hned. Znamená to umět vysvětlit, proč data držíš, kdo je používá a kdy zmizí.
+
+> **Codyho komentář:** Nejhorší retenční politika je „mažeme, až dojde místo“. To není strategie, to je datový ekvivalent nevynešeného sklepa.
+
+### 1) Začni seznamem datových zásuvek
+
+Nezačínej právním dokumentem. Začni obyčejným seznamem míst, kde se data hromadí. U malého projektu to často není databáze, ale směs formulářů, e-mailu, CRM, analytiky, logů, supportu, fakturace a exportů ve sdílené složce.
+
+První inventura může vypadat takto:
+
+| Místo | Typ dat | Účel | Vlastník | Retence | Mazání |
+|---|---|---|---|---|---|
+| Kontaktní formulář | jméno, e-mail, zpráva | vyřízení poptávky | obchod | 12 měsíců od poslední komunikace | ručně při měsíční kontrole |
+| Produktová databáze | účet, role, nastavení | provoz služby | produkt | po dobu účtu + 30 dní | automaticky po zrušení |
+| Aplikační logy | technické události, IP podle nastavení | bezpečnost a debugging | vývoj | 30–90 dní | automatická rotace |
+| Analytika webu | agregované návštěvy | měření výkonu obsahu | marketing | 24 měsíců agregovaně | nastavení v analytice |
+| Support | zprávy, přílohy | řešení požadavků | support | 24 měsíců od uzavření | periodická anonymizace |
+
+Tabulka nemusí být dokonalá. Musí být živá. Pokud tým přidá nový formulář, integraci nebo automatizaci, doplní řádek. Když se tabulka neaktualizuje, stane se z ní dekorace pro audit. Hezká, ale k ničemu.
+
+### 2) Rozliš provozní, obchodní a právní důvody
+
+Ne všechna data mají stejný rytmus mazání. Některá potřebuješ pro provoz služby, jiná pro obchodní návaznost a některá kvůli zákonným povinnostem. Problém vzniká, když se všechno hodí do jedné hromady „radši to necháme“.
+
+Rozděl si data do tří skupin:
+
+- **Provozní data:** účty, nastavení, oprávnění, technické logy a bezpečnostní události. Drž je tak dlouho, jak jsou potřeba pro službu a bezpečný provoz.
+- **Obchodní data:** poptávky, demo poznámky, follow-upy, kvalifikace leadů a preference zákazníka. Drž je jen po dobu, kdy existuje rozumný obchodní kontext.
+- **Právní a účetní data:** faktury, smlouvy, objednávky a povinné záznamy. U nich retenci neurčuje marketingový optimismus, ale právní a účetní požadavky.
+
+Když si nejsi jistý, napiš k řádku „ověřit s účetní / právníkem“ místo toho, aby sis vymyslel univerzální pravidlo. E-book má být praktický, ne věštecká koule s Markdownem.
+
+### 3) Mazání musí být proces, ne heroická ruční akce
+
+Ruční mazání funguje první měsíc. Pak někdo odjede na dovolenou, přijde launch, rozbije se formulář a najednou máš tři roky staré leady, které už nikdo nechce ani omylem pozdravit.
+
+U každé datové zásuvky určete jeden ze tří režimů:
+
+- **Automatická expirace:** nejlepší pro logy, session data, dočasné tokeny, exporty a technické cache.
+- **Periodická kontrola:** vhodná pro obchodní leady, support tickety a rozpracované poptávky, kde je potřeba lidský kontext.
+- **Událostní mazání:** spouští se při zrušení účtu, ukončení smlouvy, vyřízení žádosti nebo uzavření projektu.
+
+Praktický rytmus pro malý tým:
+
+- každý týden zkontroluj nové zdroje dat, které přibyly během vývoje nebo marketingu,
+- každý měsíc projdi leady, support a exporty,
+- každé čtvrtletí ověř, že automatická expirace opravdu běží,
+- jednou za půl roku udělej mini audit dodavatelů a retenčních nastavení.
+
+### 4) Exporty jsou tichý zabiják pořádku
+
+Největší nepořádek často nevzniká v aplikaci, ale kolem ní: CSV export z analytiky, spreadsheet s leady, stažené přílohy ze supportu, kopie databáze pro debugging, screenshoty s osobními údaji v issue trackeru.
+
+Zaveď jednoduché pravidlo: každý export má mít účel, vlastníka a datum smazání. Pokud to nejde napsat do názvu nebo poznámky, export pravděpodobně neměl vzniknout.
+
+Dobré názvy:
+
+```text
+2026-10-leads-konference-vyhodnoceni-smazat-2026-11-15.csv
+2026-10-support-anonymizovany-vzorky-pro-kb.md
+2026-10-incident-log-export-bez-osobnich-udaju.txt
+```
+
+Špatné názvy:
+
+```text
+export.csv
+ondrej_data_final.xlsx
+users_backup_new_new_REAL.csv
+```
+
+Jasně, druhá sada působí lidsky. Právě proto je nebezpečná.
+
+### 5) Žádosti uživatelů neřeš z paměti
+
+I malý SaaS by měl mít jednoduchý postup pro žádosti typu „smažte můj účet“, „pošlete mi moje data“ nebo „opravte e-mail“. Nemusíš hned stavět portál s deseti obrazovkami. Stačí interní checklist, který zabrání tomu, že každý požadavek vyřeší jinak.
+
+Minimální postup:
+
+1. Ověř identitu žadatele přiměřeně k riziku.
+2. Zapiš datum přijetí, typ žádosti a odpovědnou osobu.
+3. Najdi relevantní datové zásuvky podle inventury.
+4. Proveď akci: export, oprava, omezení zpracování, anonymizace nebo smazání.
+5. Zapiš, co bylo provedeno a kdy.
+6. Odpověz člověku lidsky, bez právničtiny na tři obrazovky.
+
+Interně si nech stopu o vyřízení žádosti, ale neukládej víc detailů, než potřebuješ. Cílem je prokazatelnost, ne muzeum osobních údajů.
+
+### 6) Šablona retenční politiky pro malý SaaS
+
+Použij ji jako pracovní dokument v repozitáři nebo interní wiki. Důležité je, aby ji někdo vlastnil a aktualizoval při změnách produktu.
+
+```markdown
+## Retenční politika: [produkt / web]
+
+### Vlastník dokumentu
+- Role: [např. produkt / CTO / operations]
+- Kontrola: [měsíčně / čtvrtletně]
+- Poslední aktualizace: [datum]
+
+### Datové zásuvky
+| Místo | Typ dat | Účel | Právní / provozní důvod | Retence | Mazání | Vlastník |
+|---|---|---|---|---|---|---|
+| [systém] | [data] | [účel] | [důvod] | [doba] | [automaticky / ručně] | [role] |
+
+### Exporty
+- Kde exporty vznikají: [místa]
+- Kdo je smí vytvářet: [role]
+- Maximální doba uložení: [doba]
+- Výjimky: [kdy a kdo je schvaluje]
+
+### Žádosti uživatelů
+- Kontaktní místo: [e-mail / formulář]
+- Odpovědná role: [role]
+- Evidujeme: datum, typ žádosti, stav, datum vyřízení
+- Neevidujeme: zbytečné kopie dokladů, citlivý obsah bez důvodu
+
+### Měsíční kontrola
+- [ ] Přibyly nové formuláře, integrace nebo exporty?
+- [ ] Proběhlo mazání podle plánu?
+- [ ] Zůstaly někde dočasné soubory nebo ruční exporty?
+- [ ] Jsou support a obchodní data stále relevantní?
+- [ ] Je potřeba upravit texty v privacy policy?
+```
+
+### Checklist pro retenci a mazání dat
+
+- [ ] Máš seznam hlavních míst, kde vznikají osobní nebo provozně citlivá data?
+- [ ] Je u každého místa jasný účel, vlastník a retenční doba?
+- [ ] Rozlišuješ provozní, obchodní a právní důvody uložení?
+- [ ] Mají logy, exporty a dočasné soubory automatickou expiraci nebo měsíční kontrolu?
+- [ ] Ví tým, jak postupovat při žádosti o smazání, export nebo opravu dat?
+- [ ] Jsou ruční exporty pojmenované tak, aby bylo jasné, kdy je smazat?
+- [ ] Kontroluješ retenční politiku při každé nové integraci, kampani nebo změně onboardingu?
+
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -3232,6 +3372,7 @@ Připravil: [jméno]
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha Q o retenci a mazání dat: inventura datových zásuvek, rozdělení důvodů uložení, režimy mazání, pravidla pro exporty, postup pro žádosti uživatelů a šablona retenční politiky.
 - **2026-10-12:** Přidána příloha P o měsíčním privacy-first reportu: otázky před grafy, jednostránkové shrnutí, oddělení signálu a interpretace, rozhodovací metriky, vlastník doporučení a šablona reportu.
 - **2026-10-12:** Přidána příloha O o privacy-first produktové roadmapě: témata místo seznamu funkcí, hypotézy, prioritizace podle hodnoty a důvěry, oddělení discovery/delivery/údržby, vyhodnocení dopadu a roadmapová karta.
 - **2026-10-12:** Přidána příloha N o privacy-first B2B demo hovorech a obchodním follow-upu: příprava dema, discovery otázky, CRM poznámky, follow-up e-mail, pipeline stavy a retenční checklist.
