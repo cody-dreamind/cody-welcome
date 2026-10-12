@@ -4195,6 +4195,148 @@ Rozhodnutí:
 
 
 
+
+## Příloha W: Lead scoring bez šmírovacího křišťálu
+
+Lead scoring je užitečný, když pomáhá obchodníkovi vybrat další rozumný krok. Je toxický, když se z něj stane tajné bodování lidí podle každého pohybu myši, otevřeného e-mailu a návštěvy pricingu ve 23:47. Privacy-first přístup neříká „nevyhodnocuj zájem“. Říká: vyhodnocuj ho podle signálů, které umíš vysvětlit zákazníkovi i sám sobě bez červenání.
+
+Cíl není vědět o člověku všechno. Cíl je poznat, jestli mu dokážeš pomoct, jestli má problém dostatečnou prioritu a jaký další krok dává smysl.
+
+### 1) Skóruj situaci firmy, ne osobnost návštěvníka
+
+Dobré skóre stojí na kontextu, který zákazník buď sám sdělil, nebo vyplývá z obchodního procesu. Špatné skóre stojí na detektivce: kolikrát někdo otevřel newsletter, jestli se vrátil z mobilu a jak dlouho koukal na hero sekci. Sherlock by možná zatleskal. ÚOOÚ méně nadšeně.
+
+Privacy-first signály:
+
+- zákazník popsal konkrétní problém,
+- uvedl časový rámec rozhodnutí,
+- má jasného vlastníka projektu,
+- zná dopad problému na tým nebo tržby,
+- rozumí rozpočtovému řádu,
+- souhlasí s dalším krokem.
+
+Slabé nebo rizikové signály:
+
+- počet pageview jednoho člověka,
+- otevření e-mailu jako důkaz zájmu,
+- návštěva stránky bez kontextu,
+- osobní profilování podle pracovní role z externích databází,
+- automatické obohacování kontaktu bez jasného účelu,
+- přenos dat do reklamních publik.
+
+**Codyho komentář:** Když lead potřebuje 87 bodů z 12 nástrojů, aby obchodník poznal, že se má ozvat, problém možná není v datech. Problém je v nabídce, kvalifikaci nebo odvaze napsat normální e-mail.
+
+### 2) Použij jednoduché stupně připravenosti
+
+Místo magického čísla používej několik jasných stavů. Tým pak ví, co dělat, a nemusí se hádat, jestli je lead s 63 body „skoro horký“ nebo jen analyticky opálený.
+
+| Stav | Co znamená | Typický signál | Další krok |
+|---|---|---|---|
+| Nízká shoda | Problém není jasný nebo nesedí cílovka | obecný dotaz, student, dodavatel | poslat veřejný zdroj nebo slušně uzavřít |
+| Průzkum | Firma mapuje možnosti | ptá se na přístup, proces, inspiraci | poslat článek, checklist nebo nabídnout krátkou konzultaci |
+| Aktivní problém | Existuje bolest a vlastník | konkrétní popis situace, termín, dopad | domluvit discovery call |
+| Nákupní záměr | Řeší se rozsah, cena, rizika | otázky na implementaci, migraci, smlouvu | připravit návrh nebo demo |
+| Zákazník nevhodný teď | Potřeba existuje, ale nesedí timing nebo rozsah | nízká priorita, chybí rozpočet, čeká na interní rozhodnutí | nastavit férový follow-up nebo předat zdroj |
+
+Důležité: stav má být viditelný a vysvětlitelný. Když se obchodník zeptá „proč je to nákupní záměr?“, odpověď nemá znít „protože algoritmus“. Má znít třeba: „Mají vlastníka, termín do konce kvartálu, migrují z konkrétního nástroje a ptali se na smluvní zpracování dat.“
+
+### 3) Definuj kvalifikační otázky, které nejsou výslech
+
+Kvalifikace má pomoct oběma stranám. Není to policejní protokol ani pokus vytáhnout rozpočet na první větě. Stačí pár otázek, které odhalí, jestli má smysl pokračovat.
+
+Dobré otázky pro B2B web nebo SaaS:
+
+1. „Co se má změnit, aby pro vás projekt dával smysl?“
+2. „Kdo bude výsledek používat nebo schvalovat?“
+3. „Co se stane, když to nevyřešíte v příštích třech měsících?“
+4. „Máte už existující řešení, které nahrazujeme nebo doplňujeme?“
+5. „Jsou u vás citlivá data, evropský provoz nebo interní bezpečnostní pravidla zásadní podmínka?“
+6. „Jaký další krok by vám reálně pomohl rozhodnout?“
+
+Odpovědi zapisuj jako rozhodovací poznámky, ne jako román o člověku. Nepiš „Petr je nejistý a asi nemá autoritu“. Napiš „není potvrzený rozhodovatel; domluveno ověřit schvalovací proces do pátku“. Malý rozdíl v textu, velký rozdíl v kultuře.
+
+### 4) Nech skóre stárnout a mazej mrtvé signály
+
+Lead scoring bez retence je jen CRM sklep. Signály mají expiraci, protože situace firmy se mění. To, že někdo před půl rokem stáhl checklist, dnes nemusí znamenat vůbec nic. Možná problém vyřešil. Možná odešel z firmy. Možná jen klikl omylem při svačině. Tragédie moderní analytiky, díl 42.
+
+Praktická pravidla:
+
+- explicitní poptávka je aktivní typicky týdny, ne roky,
+- discovery poznámky reviduj po každém zásadním hovoru,
+- neaktivní leady přesouvej do stavu „uzavřeno / později“,
+- newsletter odběr neznamená obchodní souhlas,
+- staré exporty z CRM maž podle retenční politiky,
+- důvod uzavření zapisuj stručně a bez osobních soudů.
+
+Pokud používáš automatizaci, nastav ji konzervativně: připomenout follow-up ano, tajně navyšovat skóre za každou návštěvu webu spíš ne. Automat má být připomínač práce, ne robotický věštec v obleku.
+
+### 5) Odděl marketingový zájem od obchodního oprávnění
+
+To, že člověk čte blog, neznamená, že chce obchodní kontakt. To, že si stáhl šablonu, neznamená, že souhlasí s nekonečným nurturingem. A to, že zadal e-mail do formuláře, neznamená automaticky, že ho můžeš obohatit v pěti nástrojích a poslat do reklamního publika.
+
+Rozumné rozdělení:
+
+- **Obsahový zájem:** odběr RSS, newsletter, stažení veřejné šablony.
+- **Produktový zájem:** registrace trialu, žádost o demo, dotaz na funkcionalitu.
+- **Obchodní záměr:** poptávka, schůzka, požadavek na nabídku, řešení smlouvy.
+- **Zákaznický vztah:** aktivní služba, support, fakturace, provozní komunikace.
+
+Každá vrstva má jiný účel, jinou komunikaci a jiné minimum dat. Neslévej je do jednoho pytle „lead“. Pytle jsou dobré na brambory, ne na osobní údaje.
+
+### 6) Šablona privacy-first lead scoringu
+
+```text
+Název segmentu / služby:
+Vlastník procesu:
+Datum kontroly:
+
+Stavy leadu:
+- Nízká shoda:
+- Průzkum:
+- Aktivní problém:
+- Nákupní záměr:
+- Nevhodný teď:
+
+Povolené signály:
+- Signál:
+  Účel:
+  Zdroj:
+  Retence:
+  Kdo vidí:
+
+Zakázané nebo rizikové signály:
+- Signál:
+  Proč ne:
+  Alternativa:
+
+Kvalifikační otázky:
+1.
+2.
+3.
+
+Follow-up pravidla:
+- Kdy se ozvat:
+- Kdy lead uzavřít:
+- Co nikdy neposílat automaticky:
+
+Privacy kontrola:
+- Posíláme data mimo EU nebo mimo hlavní systém?
+- Používáme obohacování kontaktů?
+- Umíme vysvětlit skóre člověku?
+- Má každý signál vlastníka a expiraci?
+```
+
+### Checklist pro lead scoring bez invazivního profilování
+
+- [ ] Skóre nebo stav vychází z obchodního kontextu, ne z tajného sledování jednotlivce.
+- [ ] Každý signál má jasný účel, zdroj, vlastníka a dobu platnosti.
+- [ ] Marketingový odběr, produktový zájem a obchodní poptávka jsou oddělené.
+- [ ] CRM poznámky popisují fakta a další kroky, ne osobní dojmy.
+- [ ] Automatizace připomíná práci, ale nerozesílá agresivní sekvence bez kontextu.
+- [ ] Staré leady, exporty a dočasné seznamy se pravidelně mažou.
+- [ ] Tým umí zákazníkovi lidsky vysvětlit, proč a jak ho kontaktuje.
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -4244,6 +4386,7 @@ Rozhodnutí:
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha W o privacy-first lead scoringu: stavy připravenosti, kvalifikační otázky, expirace signálů, oddělení marketingového zájmu od obchodního oprávnění, šablona a checklist.
 - **2026-10-12:** Přidána příloha V o přístupnosti a výkonu bez sledovacího balastu: semantické HTML, Web Vitals, optimalizace médií, respekt k omezení pohybu, ruční testování, release brány a review šablona.
 - **2026-10-12:** Přidána příloha U o privacy-first event taxonomy: pojmenování eventů, slovník vlastností, klasifikace rizika, kontrola URL/logů, review proces, šablona a checklist bez PII.
 - **2026-10-12:** Obnovena kompletní verze e-booku po poškozeném placeholderu a přidána příloha T o RSS distribuci: typy feedů, technická implementace, objevitelný odkaz, privacy-first měření, workflow, šablona a checklist.
