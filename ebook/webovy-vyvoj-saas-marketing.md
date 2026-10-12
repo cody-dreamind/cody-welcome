@@ -4641,6 +4641,154 @@ Alerty posílej tam, kde je někdo opravdu řeší. Pokud záloha tři dny nebě
 - [ ] Existuje lidsky čitelný runbook pro obnovu při incidentu.
 
 
+## Příloha Z: Registr zpracování a subdodavatelé bez právního divadla
+
+Registr zpracování osobních údajů zní jako dokument, který vzniká v tmavé místnosti mezi právníkem, tabulkou a konvicí studené kávy. Ve skutečnosti je to jeden z nejlepších provozních nástrojů pro malý SaaS tým: říká, jaká data máš, proč je máš, kdo se jich dotýká a co se s nimi stane, když vypneš dodavatele.
+
+GDPR v článku 30 řeší záznamy o činnostech zpracování a článek 28 vztah mezi správcem a zpracovatelem; oficiální text najdeš v [EUR-Lexu](https://eur-lex.europa.eu/legal-content/ENG/ALL/?uri=celex%3A32016R0679). EDPB pro malé firmy vysvětluje roli správce a zpracovatele prakticky: pokud dodavatel zpracovává osobní údaje podle tvých instrukcí, vztah má být upravený smlouvou a má být jasné, co přesně dělá ([EDPB: Data controller or data processor](https://www.edpb.europa.eu/sme/learn-the-basics/data-controller-or-data-processor_en)).
+
+> **Codyho komentář:** Registr není šanon pro kontrolu. Je to mapa úniku tepla. Když nevíš, kudy ti data proudí, nemůžeš poctivě tvrdit, že máš privacy-first provoz. To je jako říct „máme bezpečný sklad“ a nevědět, kolik má dveří.
+
+### 1) Začni činností, ne názvem nástroje
+
+Špatný registr začíná sloupcem „nástroj“ a končí katalogem služeb. Lepší registr začíná činností:
+
+- zpracování poptávek z webu,
+- registrace a přihlášení do SaaS,
+- fakturace a účetnictví,
+- zákaznická podpora,
+- produktová analytika,
+- posílání servisních e-mailů,
+- bezpečnostní logování,
+- marketingový obsah a RSS distribuce.
+
+Teprve potom doplň nástroje, které se na činnosti podílejí. Jeden nástroj může sloužit více účelům a jedna činnost může procházet více systémy. Když začneš nástrojem, často přehlédneš ruční exporty, interní tabulky a „dočasné“ kopie, které přežijí tři redesigny a dvě účetní období.
+
+Praktický příklad:
+
+| Činnost | Účel | Kategorie dat | Systémy | Vlastník |
+|---|---|---|---|---|
+| Poptávky z webu | Odpovědět na obchodní dotaz | jméno, e-mail, firma, zpráva | web, e-mail, CRM | obchod |
+| Produktová analytika | Zlepšit onboarding | agregované eventy, technické údaje | aplikace, analytika | produkt |
+| Fakturace | Vystavit a archivovat doklady | fakturační údaje, objednávky | billing, účetnictví | finance |
+
+### 2) U každé činnosti napiš minimální rozhodnutí
+
+Registr nemusí být román. Musí ale obsahovat rozhodnutí, která se dají zkontrolovat:
+
+- **účel:** proč data zpracováváme,
+- **rozsah:** jaké kategorie dat sbíráme,
+- **zdroj:** odkud data přicházejí,
+- **právní základ:** proč je smíme zpracovávat,
+- **příjemci:** komu data předáváme,
+- **retence:** jak dlouho data držíme,
+- **bezpečnost:** jak data chráníme,
+- **odpovědnost:** kdo činnost vlastní.
+
+U malého SaaS je největší chyba psát obecně: „data zákazníků zpracováváme za účelem poskytování služby“. To je sice hezká věta do dokumentu, ale špatná provozní pomůcka. Lepší je rozdělit službu na konkrétní proudy: účet, platby, support, logy, e-maily, analytika, zálohy.
+
+### 3) Subdodavatel není jen logo v patičce privacy policy
+
+Subdodavatel je každý, kdo se dostane k osobním údajům v rámci zpracování. Může to být hosting, e-mailová služba, helpdesk, monitoring, billing, CRM, cloudové úložiště nebo AI nástroj, do kterého tým kopíruje zákaznické texty.
+
+U každého dodavatele si veď jednoduchou kartu:
+
+- jakou činnost podporuje,
+- jaké kategorie dat vidí,
+- zda je správce, zpracovatel nebo samostatný správce,
+- kde data technicky běží,
+- jaké má subprocesory,
+- jaké exporty a mazání nabízí,
+- jak probíhá incidentová komunikace,
+- kdo v týmu schválil použití.
+
+Privacy-first pravidlo Dreamindu: evropský provoz preferuj jako výchozí volbu, ale neber „EU region“ jako kouzelné zaklínadlo. Ptej se dál: kdo provozuje mateřskou firmu, jaké má subprocesory, jak řeší support přístup, kam tečou logy a jestli jde udělat čistý export při odchodu.
+
+### 4) Změny dodavatelů dělej přes review, ne přes Slack nadšení
+
+Nový nástroj často přichází nevinně: „Jen to vyzkouším na pár zákaznických datech.“ Tady vzniká datový průvan. Zaveď pravidlo, že nový nástroj s osobními údaji potřebuje krátké review před použitím.
+
+Minimum review:
+
+1. Jaký problém řešíme a proč nestačí existující nástroj?
+2. Jaká data do nástroje půjdou?
+3. Je možné použít anonymizovaná nebo testovací data?
+4. Kde budou data uložená a kdo k nim má přístup?
+5. Jak data smažeme po testu?
+6. Kdo review schválil a kdy se znovu zkontroluje?
+
+Tohle není byrokracie. Je to pojistka proti tomu, aby se z týdenního experimentu stal tichý produkční systém bez vlastníka.
+
+### 5) Udělej registr užitečný pro incident i exit
+
+Registr má největší hodnotu ve chvíli, kdy se něco pokazí. Když dodavatel nahlásí incident, potřebuješ rychle vědět:
+
+- kterých činností se dotýká,
+- jaké kategorie dat mohly být zasažené,
+- kdo je interní vlastník,
+- zda existuje náhradní postup,
+- kde jsou exporty a zálohy,
+- jaké zákazníky nebo uživatele může být potřeba informovat.
+
+Stejně pomáhá při exit plánu. Pokud chceš odejít z nástroje, registr ti ukáže, jestli jde jen o export kontaktů, nebo o složitý řetězec web → formulář → e-mail → CRM → billing → support. Bez mapy je migrace loterie. A loterie je skvělá jen v případě, že nechceš řídit firmu.
+
+### 6) Šablona karty zpracování
+
+```markdown
+## Karta zpracování: [název činnosti]
+
+### Účel
+- Proč data zpracováváme:
+- Co by nešlo dělat bez této činnosti:
+- Co výslovně neděláme:
+
+### Data
+- Kategorie osobních údajů:
+- Zdroj dat:
+- Citlivé nebo vysoce rizikové prvky:
+- Data, která záměrně nesbíráme:
+
+### Systémy a dodavatelé
+- Interní systémy:
+- Externí dodavatelé:
+- Role dodavatelů: správce / zpracovatel / samostatný správce
+- Umístění provozu:
+- Známí subprocesoři:
+
+### Retence a mazání
+- Aktivní doba uložení:
+- Archivace:
+- Mazání nebo anonymizace:
+- Exporty a dočasné kopie:
+
+### Bezpečnost a provoz
+- Přístupová práva:
+- Logování přístupu:
+- Zálohy:
+- Incident kontakt:
+- Náhradní postup při výpadku:
+
+### Review
+- Vlastník:
+- Poslední kontrola:
+- Další kontrola:
+- Otevřené otázky:
+```
+
+### Checklist pro registr a subdodavatele
+
+- [ ] Každá hlavní činnost má vlastní kartu zpracování.
+- [ ] Registr začíná účelem a datovým tokem, ne seznamem nástrojů.
+- [ ] U každé činnosti je jasný vlastník v týmu.
+- [ ] Dodavatelé jsou rozdělení podle role: správce, zpracovatel, samostatný správce.
+- [ ] U zpracovatelů je jasné, jaká data zpracovávají a podle jakých instrukcí.
+- [ ] Nový nástroj s osobními údaji prochází krátkým privacy review před použitím.
+- [ ] Experimentální nástroje mají datum ukončení a plán smazání dat.
+- [ ] Registr obsahuje retenci, exporty, zálohy a dočasné kopie.
+- [ ] U klíčových dodavatelů znáš subprocesory a provozní regiony.
+- [ ] Registr pomáhá při incidentu, migraci i měsíčním privacy-first reportu.
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -4650,6 +4798,7 @@ Alerty posílej tam, kde je někdo opravdu řeší. Pokud záloha tři dny nebě
 - ENISA: [Technical implementation guidance on cybersecurity risk management measures](https://www.enisa.europa.eu/publications/technical-implementation-guidance-on-cybersecurity-risk-management-measures)
 - European Commission: [European Accessibility Act](https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en)
 - European Data Protection Board: [Be compliant — Data protection guide for small business](https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en)
+- European Data Protection Board: [Data controller or data processor](https://www.edpb.europa.eu/sme/learn-the-basics/data-controller-or-data-processor_en)
 - European Data Protection Board: [Data protection impact assessment](https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/data-protection-impact-assessment_en)
 - European Data Protection Board: [Template for Data Protection Impact Assessment](https://www.edpb.europa.eu/our-work-tools/documents/public-consultations/2026/edpb-dpia-template_en)
 - European Data Protection Board: [Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)
@@ -4660,6 +4809,7 @@ Alerty posílej tam, kde je někdo opravdu řeší. Pokud záloha tři dny nebě
 - European Commission: [AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
 - European Commission: [NIS2 Directive](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive)
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
+- EUR-Lex: [Regulation (EU) 2016/679 — General Data Protection Regulation](https://eur-lex.europa.eu/legal-content/ENG/ALL/?uri=celex%3A32016R0679)
 - EUR-Lex: [Directive 2002/58/EC on privacy and electronic communications](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02002L0058-20091219)
 - Google Analytics Help: [URL builders — Collect campaign data with custom URLs](https://support.google.com/analytics/answer/10917952?hl=en-uk)
 - Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
@@ -4691,6 +4841,7 @@ Alerty posílej tam, kde je někdo opravdu řeší. Pokud záloha tři dny nebě
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha Z o registru zpracování a subdodavatelích: karty zpracování, role správců a zpracovatelů, review nových nástrojů, incident/exit využití a praktický checklist.
 - **2026-10-12:** Přidána příloha Y o zálohách a obnově: RTO/RPO, oddělené a šifrované zálohy, restore testy, retenční rizika, runbook, monitoring, šablona testu a checklist.
 - **2026-10-12:** Přidána příloha X o privacy-first integracích a API: datová smlouva, minimální oprávnění, vypínatelnost, ochrana URL/logů, zdroj pravdy, integrační karta a checklist.
 - **2026-10-12:** Přidána příloha W o privacy-first lead scoringu: stavy připravenosti, kvalifikační otázky, expirace signálů, oddělení marketingového zájmu od obchodního oprávnění, šablona a checklist.
