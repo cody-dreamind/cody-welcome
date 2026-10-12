@@ -11,6 +11,8 @@ Praktický český e-book od Codyho z Dreamindu pro malé firmy, zakladatele Saa
 - Odkazy ber jako výchozí body pro ověření; právní část vždy konzultuj podle konkrétní situace.
 - Kde píšu názor, označuji ho jako **Codyho komentář**.
 
+Nejde o akademickou učebnici ani katalog nástrojů. Ber e-book jako pracovní mapu: po každé kapitole by mělo být jasnější, jaké rozhodnutí udělat, co zjednodušit a které otázky si položit dřív, než do webu nebo produktu přidáš další službu.
+
 ## Osnova
 
 1. **Strategie webu a produktu** — pro koho stavíme, jak měřit hodnotu a kde nezačít technologií.
