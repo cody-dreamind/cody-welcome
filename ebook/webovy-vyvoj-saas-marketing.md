@@ -23,7 +23,7 @@ Nejde o akademickou učebnici ani katalog nástrojů. Ber e-book jako pracovní 
 6. **Produktivita zakladatele a týmu** — rozhodovací systémy, automatizace, AI asistenti a provozní rytmus.
 7. **Provoz v Evropě** — dodavatelé, smlouvy, incidenty, bezpečnost a exit plán.
 8. **Checklisty a šablony** — audit webu, launch checklist, privacy review, marketingový plán.
-9. **Přílohy** — praktické šablony pro kampaně, onboarding, dodavatele, AI, changelog, obsahový systém a RSS distribuci.
+9. **Přílohy** — praktické šablony pro kampaně, onboarding, dodavatele, AI, changelog, obsahový systém, RSS distribuci a event taxonomy.
 
 ---
 
@@ -3802,8 +3802,224 @@ Kontrola před publikací:
 - [ ] Je kontrola feedu součástí publikačního checklistu?
 
 
+## Příloha U: Event taxonomy bez PII a analytického bordelu
+
+Analytika se v malých týmech často rozbije ne proto, že chybí nástroj, ale proto, že každý měří jinou věc jiným jménem. Jeden člověk pošle event `signup`, druhý `Sign Up`, třetí `trial_started`, čtvrtý klik na stejné tlačítko uloží jako `button_click`. Za měsíc pak tým sedí nad dashboardem, hádá se, co znamená „konverze“, a někde v rohu tiše pláče CSV export.
+
+Event taxonomy je jednoduchá dohoda: **jaké události měříme, proč je měříme, jak se jmenují a co u nich nikdy nesbíráme**. Privacy-first verze této dohody má navíc jednu zásadu: event nesmí být záminka pro sběr osobních údajů, které nepotřebujeme k rozhodnutí. GDPR princip minimalizace dat říká, že zpracování má být přiměřené, relevantní a omezené na nezbytný rozsah pro daný účel ([European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)). To je přesně filozofie dobré event taxonomy.
+
+**Codyho komentář:** Dobrý tracking plán je jako uklizená dílna. Nemusíš vlastnit každé nářadí na světě. Stačí vědět, kde je šroubovák, proč ho bereš do ruky a že s ním nebudeš otevírat jogurt.
+
+### 1) Začni rozhodnutím, ne eventem
+
+Před každým novým eventem napiš, jaké rozhodnutí má pomoct udělat. Pokud žádné rozhodnutí neexistuje, event je nejspíš jen digitální suvenýr. A suvenýry v databázi stárnou hůř než magnetky z dovolené.
+
+Dobré otázky před přidáním měření:
+
+- **Jaké rozhodnutí uděláme, když číslo poroste?** Například posílíme onboarding krok, který vede k aktivaci.
+- **Jaké rozhodnutí uděláme, když číslo klesne?** Například zjednodušíme formulář nebo upravíme nápovědu.
+- **Kdo event vyhodnocuje?** Pokud nikdo, event nemá vlastníka.
+- **Jak dlouho data potřebujeme?** Ne všechno musí žít věčně.
+- **Umíme odpovědět agregovaně?** Pokud ano, nesbírej identifikátor člověka.
+
+Slabé zadání:
+
+> „Chceme měřit všechno, ať něco máme.“
+
+Lepší zadání:
+
+> „Chceme vědět, kolik návštěvníků pricing stránky klikne na demo a kolik z nich dokončí poptávkový formulář, abychom rozhodli, jestli pricing lépe vysvětluje hodnotu tarifů.“
+
+To druhé zadání říká stránku, akci, výsledek i důvod. Nepotřebuje znát jméno návštěvníka, jeho e-mail, přesnou IP adresu ani to, co dělal minulý čtvrtek ve 22:14.
+
+### 2) Pojmenuj eventy jako produktový jazyk
+
+Eventy mají být čitelné i pro člověka, který nebyl u implementace. Doporučuji používat malá písmena, snake_case a názvy podle akce, ne podle CSS selektoru nebo interní komponenty.
+
+Praktický vzor:
+
+```text
+[objekt]_[akce]
+pricing_demo_clicked
+contact_form_submitted
+onboarding_step_completed
+rss_link_copied
+changelog_item_opened
+```
+
+Vyhni se názvům jako:
+
+```text
+click
+button_7
+cta_final_final
+homepageHeroBlueButtonPressed
+user_interaction
+```
+
+Název eventu má odpovědět na otázku „co se stalo?“ bez nutnosti otevírat kód. Detail patří do povolených vlastností, ne do nekonečně kreativního názvu.
+
+Dobrá vlastnost eventu:
+
+- `plan`: `start`, `growth`, `scale`,
+- `source_section`: `hero`, `pricing_faq`, `case_study`,
+- `step`: `workspace_created`, `first_project_created`, `invite_sent`,
+- `content_type`: `blog`, `changelog`, `template`.
+
+Špatná vlastnost eventu:
+
+- `email`: konkrétní e-mail návštěvníka,
+- `name`: jméno osoby,
+- `company`: firma z formuláře,
+- `phone`: telefon,
+- `message`: obsah poptávky,
+- `full_url`: URL včetně tokenů, e-mailů nebo interních parametrů.
+
+Nástroje jako Umami podporují vlastní eventy a vlastnosti eventů ([Umami: Track events](https://docs.umami.is/docs/track-events)). To je užitečné, ale právě proto potřebuješ pravidla. Technická možnost poslat vlastnost neznamená, že ji máš poslat. Lednička taky technicky pojme notebook, ale nedělejme z toho proces.
+
+### 3) Rozděl eventy podle rizika
+
+Ne každý event je stejně citlivý. Klik na veřejný RSS odkaz je jiné riziko než odeslání formuláře s obchodním problémem. Tracking plán by měl mít jednoduchou klasifikaci, aby tým věděl, kde stačí agregované měření a kde je potřeba privacy review.
+
+Praktické rozdělení:
+
+- **Nízké riziko:** anonymní interakce s veřejným obsahem, například klik na RSS, otevření changelogu, klik na veřejnou case study.
+- **Střední riziko:** produktové kroky bez osobních hodnot, například dokončení onboarding kroku nebo použití filtru v aplikaci.
+- **Vysoké riziko:** formuláře, support, billing, bezpečnostní akce, importy dat a všechno, co se může dotknout identit, smluv nebo citlivého obsahu.
+
+U nízkého rizika obvykle stačí: jasný účel, agregace, žádné identifikátory a kontrola URL. U středního rizika přidej vlastníka, retenční dobu a test, že vlastnosti neobsahují osobní údaje. U vysokého rizika měř raději stav procesu než obsah. Například `contact_form_submitted` ano, ale neukládej text zprávy jako event property.
+
+CNIL u analytiky zdůrazňuje, že měření návštěvnosti může být za určitých podmínek vyňaté ze souhlasu, ale typicky jen při omezeném účelu, omezené době uchování, bez křížového sledování a bez použití dat k jiným účelům ([CNIL: Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)). Neber to jako univerzální právní zkratku pro celou EU. Ber to jako dobrý návrhový kompas: čím víc tracking připomíná sledování konkrétních lidí napříč kontexty, tím víc opouštíš privacy-first území.
+
+### 4) Vlastnosti eventů drž jako uzavřený slovník
+
+Největší chaos nevzniká v názvech eventů, ale ve vlastnostech. Jednou je tarif `Start`, podruhé `start`, potřetí `basic`, počtvrté `tier_1`. Dashboard pak ukazuje čtyři produkty, přestože prodáváš jeden. Gratuluji, právě jsi vyrobil analytickou hydru.
+
+Pro každou vlastnost si napiš:
+
+- název,
+- povolené hodnoty,
+- příklad,
+- zakázané hodnoty,
+- důvod sběru,
+- retenční dobu,
+- vlastníka.
+
+Příklad:
+
+```text
+Vlastnost: plan
+Povolené hodnoty: start, growth, scale
+Zakázané hodnoty: název firmy, e-mail, vlastní text uživatele
+Použití: porovnání zájmu o tarify na pricing stránce
+Retence: agregované reporty měsíčně, raw eventy podle nastavení analytiky
+Vlastník: product / marketing
+```
+
+Pokud potřebuješ měřit textové pole, zastav se. Většinou nechceš měřit text, ale kategorii. Místo konkrétního obsahu poptávky stačí `project_type`: `website`, `saas`, `automation`, `consultation`. Místo názvu firmy stačí `company_size`: `solo`, `2_10`, `11_50`, `51_plus`. Když se ti hodnota nevejde do předem schváleného slovníku, nejspíš nepatří do analytiky.
+
+### 5) Udělej kontrolu URL a logů
+
+I když event sám osobní údaje neposílá, můžou se schovat v URL, referreru nebo serverových lozích. To je nudná, ale důležitá vrstva. Matomo ve své dokumentaci uvádí, že webová analytika může pracovat s údaji jako IP adresa, URL stránky, referrer nebo informace o zařízení, a doporučuje privacy nastavení typu anonymizace IP a omezení sběru identifikátorů ([Matomo: Configure Privacy Settings](https://matomo.org/faq/general/configure-privacy-settings-in-matomo/), [Matomo: What data does Matomo track?](https://matomo.org/faq/general/faq_18254/)). I když používáš jiný nástroj, princip platí pořád: data se často sbírají bokem, ne jen v eventu, který vidíš v kódu.
+
+Minimální kontrola před spuštěním měření:
+
+- formuláře nepřidávají e-mail, telefon ani jméno do query parametrů,
+- UTM parametry neobsahují osobní údaje ani názvy konkrétních zákazníků,
+- interní odkazy s tokeny se neposílají do analytiky jako plná URL,
+- referrer z citlivých částí aplikace se omezuje přes vhodnou `Referrer-Policy`,
+- serverové logy mají vlastní retenční pravidla a nejsou volně přístupné celému týmu,
+- debug logy z analytiky se po testu vypnou.
+
+OWASP Logging Cheat Sheet doporučuje u logování dávat pozor na citlivá data a nelogovat věci jako přístupové tokeny, hesla, citlivé osobní údaje nebo zbytečný obsah požadavků ([OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). Analytika není výjimka jen proto, že má hezčí grafy.
+
+### 6) Zaveď review před každým novým eventem
+
+Event taxonomy není dokument, který jednou napíšeš a pak ho pohřbíš v Notionu vedle „Q2 Growth Ideas FINAL v3“. Potřebuje lehký proces.
+
+Před přidáním eventu projdi pětiminutové review:
+
+1. Má event jasné rozhodnutí?
+2. Má vlastníka?
+3. Neposílá osobní údaje v názvu, vlastnostech, URL ani referreru?
+4. Má povolené hodnoty vlastností?
+5. Víme, kde se zobrazí v reportu?
+6. Víme, kdy ho smažeme nebo přestaneme používat?
+
+Jednou měsíčně pak udělej úklid:
+
+- slouč duplicitní eventy,
+- označ nepoužívané eventy jako deprecated,
+- zkontroluj, že nové kampaně nepřinesly osobní údaje v UTM parametrech,
+- porovnej eventy s rozhodnutími v roadmapě,
+- smaž pracovní exporty, které už nikdo nepotřebuje.
+
+Nejde o byrokracii. Jde o to, aby analytika zůstala malá, čitelná a obhajitelná. Malý tým nepotřebuje datový sklad velikosti menšího knížectví. Potřebuje pár čistých signálů, podle kterých umí jednat.
+
+### Šablona privacy-first event taxonomy
+
+```text
+Event:
+[např. pricing_demo_clicked]
+
+Účel:
+[jaké rozhodnutí event podporuje]
+
+Vlastník:
+[produkt / marketing / support / sales]
+
+Riziko:
+[nízké / střední / vysoké]
+
+Kde vzniká:
+[stránka, komponenta nebo produktový krok]
+
+Kdy se posílá:
+[konkrétní uživatelská akce nebo systémová událost]
+
+Povolené vlastnosti:
+- název:
+  povolené hodnoty:
+  zakázané hodnoty:
+  důvod:
+
+Zakázaná data:
+- e-mail
+- telefon
+- jméno
+- název firmy, pokud není nezbytný a právně ošetřený
+- volný text od uživatele
+- tokeny, session ID, interní identifikátory v URL
+
+Retence:
+[jak dlouho držíme raw eventy a jak dlouho agregace]
+
+Report:
+[kde se event vyhodnocuje a jak často]
+
+Kontrola před nasazením:
+- event má schválený název
+- vlastnosti odpovídají slovníku
+- testovací payload neobsahuje PII
+- URL neobsahuje osobní údaje ani tokeny
+- event je popsán v dokumentaci
+```
+
+### Checklist pro event taxonomy
+
+- [ ] Má každý event jasný účel a rozhodnutí, které podporuje?
+- [ ] Používáš jednotný formát názvů, například `object_action` ve `snake_case`?
+- [ ] Jsou vlastnosti eventů omezené na schválený slovník hodnot?
+- [ ] Je výslovně zakázané posílat e-mail, telefon, jméno, volný text a tokeny?
+- [ ] Kontroluješ URL, referrery a serverové logy, ne jen payload eventu?
+- [ ] Má každý středně a vysoce rizikový event vlastníka a retenční pravidlo?
+- [ ] Umí tým vysvětlit, proč daný event sbírá a kde se používá?
+- [ ] Probíhá měsíční úklid duplicitních, nepoužívaných nebo špatně pojmenovaných eventů?
+
+
 ## Zdroje
 
+- CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
 - ENISA: [Cybersecurity for SMEs — Challenges and Recommendations](https://www.enisa.europa.eu/publications/enisa-report-cybersecurity-for-smes)
 - ENISA: [Cloud Security Guide for SMEs](https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes)
@@ -3826,10 +4042,13 @@ Kontrola před publikací:
 - Google Search Central: [Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
 - Google Search Central: [Using generative AI content on your website](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content)
 - Keep a Changelog: [Keep a Changelog](https://keepachangelog.com/en/)
+- Matomo: [Configure Privacy Settings](https://matomo.org/faq/general/configure-privacy-settings-in-matomo/)
+- Matomo: [What data does Matomo track?](https://matomo.org/faq/general/faq_18254/)
 - OWASP: [Application Security Verification Standard](https://owasp.org/projects/asvs)
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - RSS Advisory Board: [RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
 - Semantic Versioning: [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html)
+- Umami: [Track events](https://docs.umami.is/docs/track-events)
 - Umami: [Metric definitions](https://docs.umami.is/docs/metric-definitions)
 - Umami: [Platform](https://umami.is/platform)
 - Umami: [FAQ](https://docs.umami.is/docs/faq)
@@ -3842,6 +4061,7 @@ Kontrola před publikací:
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha U o privacy-first event taxonomy: pojmenování eventů, slovník vlastností, klasifikace rizika, kontrola URL/logů, review proces, šablona a checklist bez PII.
 - **2026-10-12:** Obnovena kompletní verze e-booku po poškozeném placeholderu a přidána příloha T o RSS distribuci: typy feedů, technická implementace, objevitelný odkaz, privacy-first měření, workflow, šablona a checklist.
 - **2026-10-12:** Přidána příloha S o privacy-first experimentech a A/B testování: hypotézy, úrovně rizika, měření variant bez profilování lidí, guardrail metriky, vyhodnocení, situace kdy netestovat a šablona experimentu.
 - **2026-10-12:** Přidána příloha R o incidentové komunikaci a status page: kategorie incidentů, role týmu, první status, rytmus updatů, interní zápis, postmortem a checklist bez zbytečného sběru citlivých dat.
