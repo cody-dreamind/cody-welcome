@@ -4488,6 +4488,159 @@ Použij ji před spuštěním každého nového API napojení, webhooku, automat
 - [ ] Integrace prošla technickým i privacy review před spuštěním.
 
 
+## Příloha Y: Zálohy a obnova bez falešného pocitu bezpečí
+
+Záloha není soubor, který někde existuje. Záloha je schopnost obnovit službu v čase, který firma přežije, s daty, kterým může věřit. V malém SaaS týmu je tohle nepříjemně praktické téma: dokud všechno běží, zálohy vypadají jako nudný provozní detail. Když se rozbije databáze, smaže tabulka, selže migrace nebo přijde ransomware, stane se z nich rozdíl mezi „máme incident“ a „máme existenční problém“.
+
+Privacy-first přístup k zálohám znamená dvě věci najednou: data chránit proti ztrátě a zároveň z nich nedělat nekonečný archiv osobních údajů. Jinými slovy: záloha má být použitelná, šifrovaná, testovaná a omezená retencí. Ne digitální sklep, kam se hází všechno, protože „co kdyby“.
+
+### 1) Nejdřív urči, co se musí obnovit
+
+Začni seznamem systémů, ne nákupem další backup služby. U každé části produktu napiš, co by znamenal její výpadek, jak rychle ji potřebuješ obnovit a kolik dat si můžeš dovolit ztratit. Tím vzniknou dvě praktické hodnoty:
+
+- **RTO** — za jak dlouho má být služba znovu použitelná,
+- **RPO** — kolik posledních změn můžeš realisticky ztratit.
+
+Příklad pro malý B2B SaaS:
+
+| Oblast | Příklad | RTO | RPO | Poznámka |
+|---|---|---:|---:|---|
+| Produkční databáze | účty, projekty, nastavení | 4 hodiny | 15 minut | kritická data zákazníků |
+| Nahrané soubory | přílohy, exporty | 24 hodin | 1 hodina | záleží na zákaznickém procesu |
+| Konfigurace infrastruktury | IaC, env proměnné, DNS poznámky | 8 hodin | 1 den | bez tajemství v repozitáři |
+| Analytika | agregované návštěvy, eventy | 72 hodin | 1 den | nesmí blokovat hlavní produkt |
+| Marketingový web | statický build, CMS obsah | 24 hodin | 1 den | lze často obnovit z Gitu |
+
+Tahle tabulka je důležitější než hezký dashboard poskytovatele. Když nemáš RTO/RPO, nevíš, jestli je záloha dost častá, jestli restore trvá moc dlouho a jestli platíš za špatnou úroveň ochrany.
+
+### 2) Drž zálohy oddělené od produkčního účtu
+
+Záloha uložená ve stejném účtu, se stejným adminem a stejným heslem jako produkce je spíš optimistická kopie než ochrana. Pokud útočník nebo chybná automatizace získá dostatečný přístup, smaže produkt i zálohy jedním švihem. Britské NCSC ve své praktické příručce k offline zálohám zdůrazňuje, že zálohy mají být oddělené od běžně dostupného prostředí a pravidelně testované ([NCSC: Offline backups in an online world](https://www.ncsc.gov.uk/guidance/offline-backups-in-an-online-world)).
+
+Praktické minimum:
+
+- samostatný účet nebo projekt pro zálohy,
+- oddělené přístupové údaje,
+- šifrování na straně úložiště i při přenosu,
+- omezené oprávnění pro zápis záloh,
+- ochrana proti okamžitému smazání nebo přepsání,
+- pravidelné obnovení do izolovaného prostředí.
+
+U cloudových služeb hledej funkce typu objektový lock, versioning, retention policy nebo immutable backups. Názvy se liší, princip je stejný: produkční aplikace může zálohu vytvořit, ale nemá mít jednoduchou možnost smazat celou historii.
+
+**Codyho komentář:** Záloha, kterou umí smazat stejný token jako produkční data, je jako náhradní klíč schovaný pod rohožkou s cedulí „náhradní klíč“. Technicky existuje. Strategicky je to komedie.
+
+### 3) Test obnovy je součást zálohy, ne luxus
+
+Neotestovaná záloha je přání. Testovaná záloha je provozní schopnost. Jednou za měsíc vyber jednu kritickou datovou zásuvku a proveď obnovu do izolovaného prostředí. Ne do produkce, ne do sdíleného vývojového serveru, ne někam, kde se reálná zákaznická data začnou motat s testy.
+
+Restore test má ověřit:
+
+- zda jde záloha stáhnout,
+- zda je čitelná a nepoškozená,
+- zda tým zná dešifrovací postup,
+- zda aplikace nad obnovenými daty nastartuje,
+- zda obnova splní RTO a RPO,
+- zda se po testu data bezpečně smažou.
+
+Výsledek zapiš. Stačí krátce: datum, kdo test provedl, jaká záloha se obnovovala, kolik to trvalo, co selhalo, co se zlepší. Bez zápisu se z testu stane historka typu „myslím, že jsme to někdy zkoušeli“. To je věta, po které provozní realita obvykle vytáhne baseballku.
+
+### 4) Zálohy mají vlastní privacy riziko
+
+Záloha často obsahuje víc citlivých dat než běžný export, protože ukládá celý stav systému. Pokud v produkci smažeš zákazníka, ale v zálohách ho držíš navždy, retence je jen dekorace. Zálohy proto musí být součástí retenční politiky, ne výjimka napsaná malým písmem.
+
+U každého typu zálohy rozhodni:
+
+- jak dlouho se drží,
+- kdo k ní má přístup,
+- jestli obsahuje osobní údaje,
+- jak se šifruje,
+- kde fyzicky nebo smluvně leží,
+- jak se řeší žádosti o výmaz,
+- kdy se záloha definitivně odstraní.
+
+V praxi často dává smysl kombinovat krátkou detailní historii a delší agregovanou nebo méně častou historii. Například databázové point-in-time recovery držet kratší dobu, denní snapshoty několik týdnů a měsíční archiv jen pro zákonné nebo smluvně nutné případy. Konkrétní doby závisí na produktu, zákaznících a právním kontextu — nepiš je podle pocitu, ale podle účelu.
+
+### 5) Obnova musí mít runbook pro člověka ve stresu
+
+Když se něco rozbije, tým nebude mít náladu luštit poznámky v chatu z minulého kvartálu. Runbook má být tak jednoduchý, aby podle něj postupoval člověk ve stresu, v noci a s kávou, která už ztratila víru v lidstvo.
+
+Runbook pro obnovu má obsahovat:
+
+- kde jsou zálohy,
+- kdo může schválit obnovu,
+- jak ověřit správnou verzi zálohy,
+- jak připravit izolované prostředí,
+- jak obnovit databázi nebo soubory,
+- jak ověřit integritu dat,
+- kdy a jak přepnout provoz,
+- koho informovat po obnově,
+- jak uklidit dočasné kopie.
+
+Runbook neukládej jen do systému, který bude při incidentu nedostupný. Měj kopii v interním repozitáři, v dokumentaci provozu a u kritických týmů klidně i offline export. Samozřejmě bez tajemství. Postup ano, hesla ne.
+
+### 6) Zálohovací monitoring nesmí být jen zelená ikonka
+
+Monitoring záloh má hlídat víc než „job doběhl“. Úspěšný backup job může vytvořit prázdnou, nekompletní nebo nepoužitelnou zálohu. Sleduj proto aspoň:
+
+- čas poslední úspěšné zálohy,
+- velikost zálohy a výrazné odchylky,
+- chyby při uploadu nebo šifrování,
+- dostupnost úložiště,
+- výsledek posledního restore testu,
+- blížící se expiraci přístupových údajů,
+- počet dní od poslední kontroly runbooku.
+
+Alerty posílej tam, kde je někdo opravdu řeší. Pokud záloha tři dny neběží a jediný signál je e-mail ve schránce „noreply“, nemáš monitoring. Máš digitální papírování.
+
+### Šablona restore testu
+
+```md
+## Restore test: [systém / datová zásuvka]
+
+### Kontext
+- Datum testu:
+- Vlastník testu:
+- Testovaná záloha:
+- Cílové izolované prostředí:
+
+### Cíl
+- Ověřované RTO:
+- Ověřované RPO:
+- Co musí po obnově fungovat:
+
+### Postup
+1. Najít správnou zálohu.
+2. Ověřit přístup a dešifrování.
+3. Obnovit do izolovaného prostředí.
+4. Spustit základní aplikační kontroly.
+5. Ověřit vzorek dat.
+6. Zapsat výsledek.
+7. Smazat dočasné kopie.
+
+### Výsledek
+- Skutečný čas obnovy:
+- Splněno RTO: ano / ne
+- Splněno RPO: ano / ne
+- Nalezené problémy:
+- Opravy do příště:
+- Datum dalšího testu:
+```
+
+### Checklist pro zálohy a obnovu
+
+- [ ] Kritické systémy mají definované RTO a RPO.
+- [ ] Produkční databáze, soubory, konfigurace a obsah mají jasný plán zálohování.
+- [ ] Zálohy jsou uložené odděleně od produkčního účtu a chráněné proti rychlému smazání.
+- [ ] Přístup k zálohám má vlastní oprávnění, vlastníka a auditní stopu.
+- [ ] Zálohy jsou šifrované a dešifrovací postup je bezpečně dokumentovaný.
+- [ ] Retence záloh odpovídá účelu a není „navždy, protože místo je levné“.
+- [ ] Restore test probíhá pravidelně do izolovaného prostředí.
+- [ ] Výsledek restore testu se zapisuje včetně skutečného času obnovy.
+- [ ] Dočasné kopie z testů se po ověření mažou.
+- [ ] Existuje lidsky čitelný runbook pro obnovu při incidentu.
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -4518,6 +4671,7 @@ Použij ji před spuštěním každého nového API napojení, webhooku, automat
 - Matomo: [What data does Matomo track?](https://matomo.org/faq/general/faq_18254/)
 - MDN: [Lazy loading](https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Lazy_loading)
 - MDN: [prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)
+- NCSC: [Offline backups in an online world](https://www.ncsc.gov.uk/guidance/offline-backups-in-an-online-world)
 - OWASP: [Application Security Verification Standard](https://owasp.org/projects/asvs)
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - RSS Advisory Board: [RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
@@ -4537,6 +4691,7 @@ Použij ji před spuštěním každého nového API napojení, webhooku, automat
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha Y o zálohách a obnově: RTO/RPO, oddělené a šifrované zálohy, restore testy, retenční rizika, runbook, monitoring, šablona testu a checklist.
 - **2026-10-12:** Přidána příloha X o privacy-first integracích a API: datová smlouva, minimální oprávnění, vypínatelnost, ochrana URL/logů, zdroj pravdy, integrační karta a checklist.
 - **2026-10-12:** Přidána příloha W o privacy-first lead scoringu: stavy připravenosti, kvalifikační otázky, expirace signálů, oddělení marketingového zájmu od obchodního oprávnění, šablona a checklist.
 - **2026-10-12:** Přidána příloha V o přístupnosti a výkonu bez sledovacího balastu: semantické HTML, Web Vitals, optimalizace médií, respekt k omezení pohybu, ruční testování, release brány a review šablona.
