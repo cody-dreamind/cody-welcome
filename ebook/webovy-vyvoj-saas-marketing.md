@@ -3004,6 +3004,192 @@ Věříme, že když [změna], tak [výsledek], protože [důvod].
 - [ ] Mažeš nebo archivuješ staré roadmapové nápady, které už nemají vlastníka ani důvod?
 
 
+## Příloha P: Měsíční report, který vede k rozhodnutí místo dashboardové mlhy
+
+Měsíční report pro malý web nebo SaaS nemá být výstava grafů. Má být krátký dokument, který pomůže zakladateli, týmu nebo klientovi rozhodnout, co udělat dál. Pokud po přečtení reportu nikdo neví, jestli zlepšit onboarding, přepsat landing page, opravit formulář nebo nechat věci být, report selhal. Ale aspoň měl pěkné barvičky, takže marketingová galerie přežila.
+
+Privacy-first report pracuje hlavně s agregovanými daty, konkrétními pozorováními a jasným kontextem. Nepotřebuje sledovat jednotlivce napříč webem, nahrávat session replay každého návštěvníka ani spojovat marketingové kliknutí s osobním profilem. Potřebuje ukázat, kde vznikla hodnota, kde se ztratila pozornost a jaké rozhodnutí z toho plyne.
+
+> **Codyho komentář:** Dashboard je lednička. Je užitečný, když víš, co hledáš. Měsíční report je večeře: někdo z dostupných surovin udělá smysluplný závěr. Nepleť si ty dvě věci, jinak budeš každý měsíc jen otevírat ledničku a říkat „hm, zajímavé“.
+
+### 1) Začni otázkami, ne grafy
+
+Než otevřeš analytiku, napiš tři až pět otázek, na které má report odpovědět. Ušetříš tím spoustu času a omezíš pokušení hledat „něco zajímavého“ jen proto, že nástroj umí třicet filtrů.
+
+Dobré otázky pro firemní web:
+
+- Přivádí obsah relevantní návštěvy na stránky služeb?
+- Které stránky pomáhají lidem udělat další krok?
+- Kde návštěvník pravděpodobně nedostane dost informací?
+- Který kanál přinesl kvalitní poptávky, ne jen provoz?
+- Co se vyplatí příští měsíc upravit, rozšířit nebo ukončit?
+
+Dobré otázky pro SaaS:
+
+- Kolik nových účtů došlo k první hodnotné akci?
+- Kde v onboardingu vzniká tření?
+- Která změna z posledního měsíce měla pozorovatelný dopad?
+- Který typ zákazníků se vrací a který mizí?
+- Co brání retenci: produkt, očekávání, cena, support nebo špatná aktivace?
+
+Špatná otázka zní: „Co se stalo v datech?“ To je pozvánka do bažiny. Lepší otázka zní: „Jaké rozhodnutí potřebujeme udělat a která data nám s ním pomohou?“
+
+### 2) Použij jednu stránku pro vedení a přílohu pro detail
+
+Zakladatel nebo klient často nepotřebuje dvacet screenshotů. Potřebuje vědět, co se změnilo, proč to pravděpodobně nastalo a co doporučuješ. Měsíční report proto rozděl na dvě vrstvy:
+
+1. **Jednostránkové shrnutí** — závěry, doporučení a rizika.
+2. **Detailní příloha** — tabulky, grafy, poznámky, odkazy na kampaně a technické detaily.
+
+Jednostránkové shrnutí může mít tuto strukturu:
+
+```text
+## Měsíční report: [měsíc / projekt]
+
+### 1. Hlavní závěr
+[Jedna až tři věty: co se stalo a proč na tom záleží.]
+
+### 2. Co fungovalo
+- [signál + interpretace]
+- [signál + interpretace]
+
+### 3. Co brzdilo růst nebo důvěru
+- [problém + dopad]
+- [problém + dopad]
+
+### 4. Doporučené rozhodnutí
+[co udělat příští měsíc, vlastník, rozsah]
+
+### 5. Co neměříme a proč
+[hranice dat, privacy poznámka, nejistoty]
+```
+
+Sekce „Co neměříme a proč“ je malý detail s velkým dopadem. Ukazuje, že privacy-first přístup není lenost, ale záměr. Když zákazník ví, že nesleduješ jednotlivce napříč webem, ale přesto umíš dělat dobrá rozhodnutí, buduješ důvěru.
+
+### 3) Odděl signál, interpretaci a rozhodnutí
+
+Nejčastější chyba reportů je míchání tří věcí dohromady: dat, domněnek a doporučení. Pak vznikají věty typu „návštěvnost spadla, takže musíme víc postovat na LinkedIn“. Možná. Nebo skončila kampaň, vypadl tracking, změnila se sezóna, publikoval se slabší obsah, nebo se lidé konečně rozhodli dělat něco zdravějšího než číst B2B blogy v neděli večer.
+
+Piš report v této logice:
+
+```text
+Signál:
+Organická návštěvnost článků o onboarding checklistu meziměsíčně vzrostla.
+
+Interpretace:
+Téma pravděpodobně odpovídá reálné fázi rozhodování malých SaaS týmů.
+
+Doporučení:
+Přidat navazující článek o onboarding e-mailech a propojit ho s šablonou poptávky.
+
+Jistota:
+Střední — máme agregovaná data z webu a dvě podobné otázky v supportu.
+```
+
+Tím chráníš tým před falešnou přesností. Data sama nemluví. Maximálně tak šustí v exportu. Interpretaci dělá člověk a měl by u ní přiznat míru jistoty.
+
+### 4) Sleduj rozhodovací metriky, ne marnivost
+
+Metrika je užitečná, pokud mění rozhodnutí. Pokud ji jen sleduješ, protože vypadá dobře v grafu, je to dekorace.
+
+Pro web dává smysl sledovat:
+
+- návštěvy a unikátní návštěvníky na agregované úrovni,
+- top stránky podle role v cestě zákazníka,
+- zdroje návštěvnosti podle kanálů,
+- kliknutí na hlavní CTA, formuláře nebo přímé kontakty,
+- výkon evergreen obsahu v čase,
+- technické signály: rychlost, chyby, dostupnost, indexace.
+
+Pro SaaS přidej:
+
+- nové účty, aktivované účty a první hodnotnou akci,
+- trial-to-paid nebo demo-to-customer konverzi,
+- churn a důvody odchodu v agregované podobě,
+- support témata podle četnosti a dopadu,
+- využití klíčových funkcí bez osobního profilování,
+- dopad posledních releasů podle předem dané definice.
+
+Marnivé metriky nejsou zakázané, ale nesmí řídit tým. Počet impresí může být užitečný pro dosah značky. Sám o sobě ale neříká, jestli produkt někomu pomohl, jestli web prodává nebo jestli onboarding funguje.
+
+### 5) Každé doporučení musí mít vlastníka a limit
+
+Report bez následné akce je archivní sport. Každé doporučení proto přepiš do malé provozní karty:
+
+```text
+## Doporučení
+Přepsat hero sekci stránky /sluzby tak, aby jasněji slibovala výsledek pro B2B SaaS týmy.
+
+### Proč
+Stránka má návštěvnost z relevantních článků, ale nízké kliknutí na kontakt.
+
+### Rozsah
+Copy hero sekce, CTA, dvě důkazní věty, žádný redesign.
+
+### Vlastník
+[jméno / role]
+
+### Termín
+Do [datum]
+
+### Kontrola dopadu
+Po 30 dnech: kliknutí na CTA, kvalita poptávek, interní feedback obchodu.
+```
+
+Limit rozsahu je důležitý. Bez něj se z doporučení „přepsat hero“ stane redesign webu, výměna fontu, debata o logu a tři hodiny hledání ikonky, která „působí víc enterprise“. Tudy ne, přátelé.
+
+### 6) Vzor měsíčního privacy-first reportu
+
+```text
+## Měsíční privacy-first report
+
+Projekt: [název]
+Období: [měsíc]
+Připravil: [jméno]
+
+### Hlavní rozhodnutí pro tento měsíc
+[jedna věta]
+
+### Shrnutí
+- Co se zlepšilo: [signál]
+- Co se zhoršilo nebo stagnuje: [signál]
+- Největší příležitost: [oblast]
+- Největší riziko: [oblast]
+
+### Web / marketing
+- Top obsah: [stránky + interpretace]
+- Kanály: [agregované zdroje]
+- Konverze: [CTA / formuláře / kontakt]
+- Doporučení: [jedna až tři akce]
+
+### Produkt / SaaS
+- Aktivace: [první hodnotná akce]
+- Retence: [agregovaný signál]
+- Support: [nejčastější témata]
+- Doporučení: [jedna až tři akce]
+
+### Privacy poznámky
+- Nová data sbíraná tento měsíc: [ano/ne + co]
+- Noví dodavatelé nebo integrace: [ano/ne]
+- Data k odstranění nebo archivaci: [co a kdy]
+- Co záměrně neměříme: [hranice]
+
+### Rozhodnutí a follow-up
+- [akce] — vlastník: [role] — kontrola: [datum]
+- [akce] — vlastník: [role] — kontrola: [datum]
+```
+
+### Checklist pro měsíční report
+
+- [ ] Začíná report otázkami, na které má odpovědět?
+- [ ] Je hlavní shrnutí čitelné bez otevření analytiky?
+- [ ] Odděluješ signál, interpretaci, doporučení a míru jistoty?
+- [ ] Každá metrika pomáhá rozhodnutí, ne jen dekoraci grafu?
+- [ ] Obsahuje report privacy poznámku: nová data, dodavatelé, retence a hranice měření?
+- [ ] Má každé doporučení vlastníka, rozsah a datum kontroly?
+- [ ] Archivuješ reporty tak, aby šlo za čtvrtletí zkontrolovat, která rozhodnutí opravdu pomohla?
+
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -3044,6 +3230,7 @@ Věříme, že když [změna], tak [výsledek], protože [důvod].
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha P o měsíčním privacy-first reportu: otázky před grafy, jednostránkové shrnutí, oddělení signálu a interpretace, rozhodovací metriky, vlastník doporučení a šablona reportu.
 - **2026-10-12:** Přidána příloha O o privacy-first produktové roadmapě: témata místo seznamu funkcí, hypotézy, prioritizace podle hodnoty a důvěry, oddělení discovery/delivery/údržby, vyhodnocení dopadu a roadmapová karta.
 - **2026-10-12:** Přidána příloha N o privacy-first B2B demo hovorech a obchodním follow-upu: příprava dema, discovery otázky, CRM poznámky, follow-up e-mail, pipeline stavy a retenční checklist.
 - **2026-10-12:** Přidána příloha M o privacy-first e-mailingu a onboardingových e-mailech: typy zpráv, minimální sběr kontaktů, jednoduché odhlášení, agregované měření, onboarding série a měsíční hygiena seznamu.
