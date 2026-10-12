@@ -2635,6 +2635,208 @@ Pokud někdo rok nereaguje a nemá aktivní zákaznický vztah, zeptej se, jestl
 - [ ] Jednou měsíčně čistíme seznamy, staré automatizace a nepoužívané segmenty.
 
 
+## Příloha N: B2B demo a obchodní follow-up bez CRM detektivky
+
+B2B demo není divadelní představení, kde zakladatel ukáže všechny obrazovky, tři skryté funkce a ještě roadmapu do roku 2031. Dobré demo je řízený rozhovor: zjistíš, jestli má zákazník problém, ukážeš jen relevantní cestu k řešení a domluvíš další konkrétní krok.
+
+Privacy-first obchod neznamená, že si nesmíš dělat poznámky. Znamená, že poznámky mají jasný účel, nejsou sbírkou osobních detailů „kdyby se hodily“ a nezůstávají v CRM navždy jako fosilie z doby, kdy někdo jednou klikl na pricing.
+
+> **Codyho komentář:** Nejlepší obchodní systém pro malý SaaS často není „víc automatizace“. Je to méně polí, jasnější další krok a odvaha říct: tenhle lead se k nám nehodí. Ano, CRM pak vypadá méně jako vánoční stromeček. Přežijeme.
+
+### 1) Před demem si napiš hypotézu, ne scénář na autopilota
+
+Než začneš hovor, napiš si tři věci:
+
+- proč se člověk pravděpodobně ozval,
+- jaký problém chce vyřešit,
+- co musí po hovoru vědět, aby udělal další rozhodnutí.
+
+Tohle není profilování. Je to pracovní hypotéza. Rozdíl je v tom, že ji během hovoru ověřuješ a opravuješ, ne že ji používáš jako pravdu vytesanou do dashboardu.
+
+Praktická příprava na 10 minut:
+
+```markdown
+## Demo: [firma / projekt]
+
+Pravděpodobný problém:
+- ...
+
+Rozhodnutí, ke kterému má hovor pomoct:
+- ...
+
+Co ukázat:
+- ...
+
+Co neukazovat:
+- ...
+
+Otázky, které musíme položit:
+- ...
+
+Další krok po hovoru:
+- ...
+```
+
+Sekce „Co neukazovat“ je důležitější, než vypadá. Demo se často rozbije tím, že tým ukáže příliš mnoho funkcí. Zákazník pak neodchází s pocitem „tohle řeší můj problém“, ale „tohle je velké a někde tam možná je to, co potřebuji“.
+
+### 2) Ptej se na práci, ne na firemní drby
+
+Discovery část hovoru má zjistit kontext rozhodnutí. Ne sbírat biografii účastníků. Ptej se na proces, riziko, dopad a omezení.
+
+Dobré otázky:
+
+- „Co dnes děláte ručně a kolik času to bere týdně?“
+- „Kde se proces nejčastěji zasekne?“
+- „Co se stane, když se to další tři měsíce nezmění?“
+- „Kdo bude výsledek používat a kdo ho bude schvalovat?“
+- „Jak poznáte, že se investice vyplatila?“
+- „Jaká data do systému nesmí nebo nemají odcházet?“
+
+Slabé otázky:
+
+- „Jaký máte rozpočet?“ jako první věta po pozdravu.
+- „Kdo všechno rozhoduje?“ bez vysvětlení, proč to potřebuješ.
+- „Jaký nástroj používáte?“ bez navázání na problém.
+- „Co vás zaujalo na našem webu?“ když už máš formulář a analytiku.
+
+U privacy-first produktu se vyplatí přidat jednu přímou otázku:
+
+> „Máte interní pravidla, kde musí být data provozovaná, kdo k nim smí mít přístup a jak dlouho je můžeme držet?“
+
+Tahle otázka šetří čas oběma stranám. Pokud zákazník musí mít evropský provoz, datové zpracování pod kontrolou a export bez vendor lock-inu, chceš to vědět před návrhem řešení, ne po třetím kole nabídky.
+
+### 3) Demo stav jako cestu k výsledku
+
+Ukazuj produkt v pořadí, ve kterém zákazník řeší práci. Ne podle menu v aplikaci.
+
+Jednoduchý model:
+
+1. **Situace:** „Říkal jste, že dnes trávíte hodně času ručním vyhodnocením poptávek.“
+2. **Akce:** „Tady vidíte, jak se poptávka dostane do systému s minimem polí.“
+3. **Kontrola:** „Tady tým vidí stav, vlastníka a další krok.“
+4. **Výstup:** „Tady je report, který jednou týdně ukáže objem, kvalitu a důvody odmítnutí.“
+5. **Privacy:** „Tady nastavíte retenci, export a přístupová práva.“
+
+Tím se demo drží hodnoty. Pokud někdo chce detail, ukážeš ho. Pokud ne, nepřidáváš funkční ohňostroj jen proto, že ho máš připravený.
+
+Pravidlo pro malé týmy: jedna ukázka má mít maximálně tři hlavní obrazovky. Všechno ostatní patří do follow-upu, dokumentace nebo druhého technického hovoru.
+
+### 4) Poznámky z hovoru piš jako rozhodovací dokument
+
+CRM poznámka má pomoct týmu rozhodnout, co dál. Nemá být deníček obchodníka, ani skladiště osobních detailů.
+
+Do CRM patří:
+
+- problém a jeho dopad,
+- kdo je uživatel a kdo rozhoduje na úrovni role, ne zbytečných osobních detailů,
+- požadavky na data, bezpečnost a provoz,
+- námitky a nejasnosti,
+- domluvený další krok,
+- datum kontroly nebo uzavření příležitosti.
+
+Do CRM nepatří:
+
+- osobní poznámky nesouvisející s obchodem,
+- citlivé informace, které nepotřebuješ pro další krok,
+- kopie interních dokumentů zákazníka bez jasného důvodu,
+- přepisy hovoru uložené navždy jen proto, že to nástroj umí.
+
+Šablona poznámky:
+
+```markdown
+## Kontext
+- Firma řeší:
+- Dopad problému:
+- Současné řešení:
+
+## Kritéria rozhodnutí
+- Funkční:
+- Provozní a datová:
+- Ekonomická:
+
+## Ukázáno v demu
+- ...
+
+## Námitky a rizika
+- ...
+
+## Další krok
+- Co:
+- Kdo:
+- Do kdy:
+
+## Retence poznámky
+- Zkontrolovat / smazat / archivovat po:
+```
+
+Retence poznámky je drobný detail, který dělá velký rozdíl. Lead, který se po šesti měsících neozval a nedal souhlas k další komunikaci, nemusí navždy sedět v obchodním pipeline jako digitální duch.
+
+### 5) Follow-up má shrnout rozhodnutí, ne lovit odpověď za každou cenu
+
+Dobré follow-up e-maily jsou krátké, konkrétní a navazují na domluvený krok. Špatné follow-upy předstírají naléhavost, posílají „jen se připomínám“ v pěti variantách a po třech týdnech připomínají komára s LinkedIn účtem.
+
+Struktura follow-upu:
+
+- poděkování za čas,
+- shrnutí problému vlastními slovy,
+- připomenutí ukázaného řešení,
+- otevřené otázky nebo rizika,
+- jeden konkrétní další krok,
+- jasná možnost říct „teď ne“.
+
+Příklad:
+
+```markdown
+Předmět: Shrnutí dema k privacy-first poptávkám
+
+Dobrý den,
+
+díky za dnešní hovor. Zapsal jsem si, že hlavní problém je ruční třídění poptávek a nejasný přehled, kdo má další krok. Zároveň je pro vás důležité, aby data zůstávala v evropském provozu a šla jednoduše exportovat.
+
+V demu jsme prošli:
+- jednoduchý formulář bez zbytečných polí,
+- přiřazení vlastníka a stavu poptávky,
+- týdenní agregovaný report,
+- nastavení retence a přístupů.
+
+Navržený další krok: pošlu krátký návrh pilotu na 30 dní se dvěma variantami rozsahu. Pokud se vám změnily priority, napište mi klidně „teď ne“ a nebudu vás honit sérií robotických připomínek.
+
+Cody / Dreamind
+```
+
+### 6) Zaveď konec pipeline jako normální stav
+
+Každý lead nemusí skončit obchodem. A už vůbec nemusí zůstat v pipeline, aby se nikdo necítil provinile. Malý tým potřebuje čistý pohled na reálné příležitosti.
+
+Rozlišuj stavy:
+
+- **Aktivní:** existuje domluvený další krok s datem.
+- **Čekáme:** zákazník má jasně říct něco konkrétního do určitého data.
+- **Nurture:** člověk chce obsah, ale nechce obchodní tlak.
+- **Ne teď:** problém existuje, ale není priorita.
+- **Nevhodné:** nesedí rozpočet, provozní požadavky, velikost nebo očekávání.
+- **Uzavřeno:** vyhráno, prohráno nebo smazáno podle retenčních pravidel.
+
+U každého stavu si napiš, jak dlouho v něm může záznam zůstat a co se pak stane. Například:
+
+- „Čekáme“ po 30 dnech bez odpovědi přepnout na „Ne teď“.
+- „Ne teď“ po 90 dnech zkontrolovat, jestli existuje legitimní důvod kontakt držet.
+- „Nevhodné“ po vyhodnocení uzavřít a ponechat jen agregovaný důvod pro produktové učení.
+
+Tým se pak učí z trhu, ale nestaví si databázi lidí, kteří kdysi možná projevili zájem. To je rozdíl mezi obchodem a archeologií.
+
+### Checklist pro privacy-first B2B demo
+
+- [ ] Před hovorem existuje pracovní hypotéza problému, rozhodnutí a dalšího kroku.
+- [ ] Demo ukazuje cestu k výsledku, ne kompletní produktové menu.
+- [ ] Otázky míří na proces, dopad, riziko a datové požadavky.
+- [ ] CRM poznámky obsahují jen informace potřebné pro obchodní rozhodnutí.
+- [ ] Citlivé nebo osobní detaily se nezapisují „pro jistotu“.
+- [ ] Follow-up shrnuje problém, domluvu a jeden další krok.
+- [ ] Každý pipeline stav má pravidlo, kdy se záznam uzavře, smaže nebo archivuje.
+- [ ] U leadů bez dalšího kroku se nepouští nekonečná automatizace připomínek.
+
+
 ## Zdroje
 
 - ENISA: [Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)
@@ -2675,6 +2877,7 @@ Pokud někdo rok nereaguje a nemá aktivní zákaznický vztah, zeptej se, jestl
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha N o privacy-first B2B demo hovorech a obchodním follow-upu: příprava dema, discovery otázky, CRM poznámky, follow-up e-mail, pipeline stavy a retenční checklist.
 - **2026-10-12:** Přidána příloha M o privacy-first e-mailingu a onboardingových e-mailech: typy zpráv, minimální sběr kontaktů, jednoduché odhlášení, agregované měření, onboarding série a měsíční hygiena seznamu.
 - **2026-10-12:** Přidána příloha L o důvěryhodnosti privacy-first webu: typy důkazů, case studies, reference, rozmístění důkazů, lidské vysvětlení bezpečnosti a checklist.
 - **2026-10-11:** Přidána příloha K o privacy-first pricing stránce: nákupní situace, hodnotové tarify, limity, CTA podle připravenosti zákazníka, agregované měření a praktická šablona.
