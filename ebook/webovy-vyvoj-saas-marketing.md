@@ -4928,6 +4928,188 @@ Každá role má mít popis v produktu i v interní dokumentaci. Pokud roli neum
 - [ ] Access review probíhá pravidelně a končí konkrétní změnou, ne jen pocitem bezpečí.
 
 
+## Příloha AB: Logování a auditní stopa bez datového vysavače
+
+Logy jsou provozní černá skříňka. Když se něco rozbije, chceš vědět co, kdy, kde a proč. Zároveň jsou logy jedno z nejčastějších míst, kam nepozorovaně natečou osobní údaje, tokeny, celé URL s parametry, interní poznámky a občas i heslo, protože někdo „dočasně“ zalogoval celý request. Dočasně, samozřejmě. Jako lešení, které zůstane na domě tři roky.
+
+Privacy-first logování neznamená logovat málo naslepo. Znamená logovat záměrně: tak, aby tým dokázal řešit chyby, incidenty a auditní otázky, ale aby z logů nevznikla druhá databáze zákazníků bez pravidel. OWASP u logování doporučuje mimo jiné rozhodnout, které události logovat, chránit logy před manipulací, neukládat citlivá data jako hesla a tokeny a myslet na bezpečné zacházení s logy po celém životním cyklu ([OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). EDPB zase u privacy-by-design připomíná, že ochrana dat má být zabudovaná do návrhu systémů a výchozích nastavení, ne přilepená až po incidentu ([EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)).
+
+### 1) Nejdřív si napiš účel logů
+
+Každý typ logu by měl mít jasný důvod. Pokud ho neumíš vysvětlit jednou větou, pravděpodobně sbíráš šum nebo si vytváříš budoucí problém.
+
+Praktické typy logů:
+
+- **Aplikační logy:** chyby, varování, důležité provozní události.
+- **Auditní logy:** kdo změnil citlivé nastavení, přidal uživatele, exportoval data nebo změnil oprávnění.
+- **Bezpečnostní logy:** pokusy o přihlášení, blokované požadavky, změny MFA, podezřelé tokeny.
+- **Infrastrukturní logy:** deploye, restart služeb, stav databáze, fronty, zálohy.
+- **Analytické eventy:** agregované produktové signály, které nepatří do debug logů.
+
+Špatný logovací plán zní: „logujme všechno, ono se to někdy hodí.“ Dobrý plán zní: „pro incident potřebujeme čas, typ události, interní ID, stav a korelační ID; nepotřebujeme jméno zákazníka, e-mail ani celý obsah formuláře.“
+
+**Codyho komentář:** Logy nejsou odpadkový koš na data, která se nevešla do modelu. Jsou nástroj pro rozhodování pod tlakem. A pod tlakem fakt nechceš řešit, jestli můžeš otevřít soubor, ve kterém jsou cizí přístupové tokeny.
+
+### 2) PII do logů nepatří jako výchozí stav
+
+Osobní údaje se do logů někdy dostanou oprávněně, ale výchozí politika má být opačná: nejdřív minimalizace, potom výjimky. V malém SaaS obvykle stačí interní identifikátory a korelační ID.
+
+Co raději nelogovat:
+
+- hesla, reset tokeny, session tokeny, API klíče a Authorization headery,
+- celé request/response body u formulářů, onboardingu, fakturace a supportu,
+- celé URL, pokud mohou obsahovat e-mail, token, UTM s osobními údaji nebo vyhledávací dotaz,
+- IP adresy bez jasného účelu, retence a maskování,
+- obsah nahraných souborů, chatů, poznámek a e-mailů,
+- raw webhook payloady z cizích služeb bez filtru.
+
+Bezpečnější vzor:
+
+```text
+event=invoice_exported
+workspace_id=ws_12345
+actor_id=user_67890
+request_id=req_abc123
+result=success
+```
+
+Rizikový vzor:
+
+```text
+User ondrej@example.com exported invoice for Firma s.r.o. from /export?email=ondrej@example.com&token=...
+```
+
+První zápis pomůže při auditu. Druhý zápis je datová skládka s mašlí.
+
+### 3) Zaveď sanitizaci na vstupu i před uložením
+
+Nespoléhej na to, že si každý vývojář vzpomene a nebude logovat citlivé hodnoty. Sanitizace má být součást platformy: loggeru, middleware, error handleru a webhook přijímačů.
+
+Praktická pravidla:
+
+1. **Maskuj známé klíče:** `password`, `token`, `secret`, `authorization`, `cookie`, `api_key`, `reset_token`.
+2. **Zkracuj dlouhé hodnoty:** log nepotřebuje celý payload ani megabajtový stack s uživatelským obsahem.
+3. **Normalizuj URL:** ukládej cestu bez query stringu, nebo explicitně povolené parametry.
+4. **Odděl chybu a data:** stack trace ano, obsah formuláře jen výjimečně a po redakci.
+5. **Testuj sanitizaci:** přidej test, který ověří, že citlivé klíče v logu končí jako `[redacted]`.
+
+Příklad povoleného seznamu pro URL parametry:
+
+```text
+allowed_query_params = ["utm_source", "utm_medium", "utm_campaign", "page"]
+blocked_query_params = ["email", "token", "code", "session", "invite"]
+```
+
+U privacy-first provozu je lepší mít pár užitečných parametrů povolených explicitně než doufat, že se do URL nikdy nedostane nic citlivého. Dostane. Murphy byl pravděpodobně backend developer.
+
+### 4) Auditní stopu odděl od debug hluku
+
+Auditní log není stejný jako běžný aplikační log. Debug log můžeš zkracovat, filtrovat a po pár dnech zahodit. Auditní stopa má být konzistentní, čitelná a odolnější proti manipulaci.
+
+Auditní loguj hlavně:
+
+- změnu vlastníka účtu nebo workspace,
+- přidání, odebrání a změnu role uživatele,
+- zapnutí nebo vypnutí MFA,
+- změnu fakturačních údajů,
+- export dat,
+- změnu integračního tokenu nebo webhooku,
+- mazání dat a změnu retenčních pravidel,
+- zásah administrátora do zákaznického účtu.
+
+Každá auditní událost by měla mít:
+
+- čas v jednotném formátu,
+- typ události,
+- interní ID aktéra,
+- interní ID objektu,
+- výsledek,
+- korelační ID požadavku,
+- stručný důvod u interních zásahů.
+
+Neznamená to logovat víc osobních údajů. Znamená to lépe popsat změnu. Když zákazník za měsíc řekne „kdo přidal dalšího admina?“, odpověď nemá být archeologická expedice přes debug soubory.
+
+### 5) Retence logů musí být kratší než firemní paměť
+
+Logy mají vlastní životnost. Bez retence se z nich stane archiv všeho, co se kdy pokazilo — a někdy i všeho, co se nikdy nemělo uložit.
+
+Praktický start pro malý SaaS:
+
+- **Debug logy:** 7–14 dní podle provozní potřeby.
+- **Aplikační chyby:** 30–90 dní, pokud slouží k trendům a stabilitě.
+- **Bezpečnostní logy:** delší retence podle rizika a povinností, ale s přísnějším přístupem.
+- **Auditní logy:** podle smluv, právních důvodů a očekávání zákazníků.
+- **Raw webhook payloady:** ideálně neukládat vůbec, nebo krátkodobě a redigovaně.
+
+Retence není jen číslo v konfiguraci. Musíš vědět, kde logy leží: aplikační log store, infrastruktura, zálohy, exporty do monitoringu, lokální soubory z incidentu. Pokud smažeš log v hlavním nástroji, ale kopie zůstane v exportu na notebooku, privacy-first konfety se nekonají.
+
+### 6) Přístup k logům dej jen lidem, kteří ho opravdu potřebují
+
+Logy často obsahují provozní tajemství, interní identifikátory, bezpečnostní signály a občas i chyby sanitizace. Přístup k nim proto nemá být automatická výbava každého v týmu.
+
+Minimum pravidel:
+
+- produkční logy čtou jen lidé s provozní nebo bezpečnostní odpovědností,
+- support dostane raději auditní pohled v produktu než přímý přístup do log store,
+- přístup do logů má MFA a je součástí access review,
+- export logů má vlastní důvod, expiraci a místo uložení,
+- incidentové kopie se po uzavření incidentu smažou nebo přesunou do kontrolovaného úložiště,
+- interní tooling ukazuje jen nezbytné údaje pro konkrétní roli.
+
+Když logy používáš i pro support, postav raději bezpečný interní panel: ukáže stav požadavku, poslední chybu, korelační ID a auditní události. Ne celý payload. Support pak pomůže zákazníkovi a zároveň se nestane nechtěným správcem citlivých dat.
+
+### Šablona logovací politiky
+
+```markdown
+## Logovací politika: [produkt / služba]
+
+### Účel
+- Provozní diagnostika:
+- Bezpečnostní monitoring:
+- Auditní stopa:
+- Produktová analytika:
+
+### Co logujeme
+- Aplikační události:
+- Auditní události:
+- Bezpečnostní události:
+- Infrastrukturní události:
+
+### Co nelogujeme
+- Tajné hodnoty:
+- Osobní údaje:
+- Obsah zákaznických dat:
+- URL/query parametry:
+
+### Sanitizace
+- Maskované klíče:
+- Povolené query parametry:
+- Test sanitizace:
+- Odpovědný vlastník:
+
+### Přístup a retence
+- Kdo má přístup:
+- Retence podle typu logu:
+- Exporty a incidentové kopie:
+- Review interval:
+```
+
+### Checklist pro logování a auditní stopu
+
+- [ ] Každý typ logu má popsaný účel a vlastníka.
+- [ ] Logger automaticky maskuje tokeny, hesla, cookies a Authorization headery.
+- [ ] URL se ukládají bez citlivých query parametrů.
+- [ ] Request a response body se nelogují plošně.
+- [ ] Auditní události jsou oddělené od debug logů.
+- [ ] Citlivé akce mají auditní stopu s aktérem, objektem, výsledkem a časem.
+- [ ] Logy mají definovanou retenci podle typu.
+- [ ] Produkční logy nejsou dostupné celému týmu.
+- [ ] Exporty logů mají expiraci a místo uložení.
+- [ ] Incidentové kopie se po uzavření incidentu řeší v postmortem.
+- [ ] Sanitizace logů má automatický test.
+- [ ] Jednou měsíčně kontrolujeme, jestli se v logách neobjevují PII nebo tajné hodnoty.
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -4986,6 +5168,7 @@ Každá role má mít popis v produktu i v interní dokumentaci. Pokud roli neum
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha AB o logování a auditní stopě: účel logů, minimalizace PII, sanitizace, auditní události, retence, přístupy, šablona logovací politiky a checklist.
 - **2026-10-12:** Přidána příloha AA o přihlašování, MFA a obnově účtů: rozdělení rizikových akcí, reset hesla, session politika, role, access review a checklist pro malé privacy-first SaaS týmy.
 
 - **2026-10-12:** Přidána příloha Z o registru zpracování a subdodavatelích: karty zpracování, role správců a zpracovatelů, review nových nástrojů, incident/exit využití a praktický checklist.
