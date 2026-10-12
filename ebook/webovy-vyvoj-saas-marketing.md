@@ -5825,6 +5825,173 @@ Pokud odpověď zní „ukázal by citlivé obchodní údaje, interní poznámky
 - [ ] Šablony jsou verzované a procházejí review při změně produktu nebo dodavatele.
 
 
+---
+
+## Příloha AG: Customer success bez sledovacího panoptika
+
+Customer success se dá dělat dvěma způsoby. První je datový vysavač: měřit každý pohyb myší, ukládat každé kliknutí, počítat „health score“ z desítek signálů a doufat, že tabulka nahradí rozhovor. Druhý je užitečnější: vybrat několik signálů, které opravdu ukazují, jestli zákazník dostává hodnotu, a spojit je s lidskou péčí.
+
+Privacy-first zákaznický úspěch neznamená slepotu. Znamená disciplínu. Nepotřebuješ vědět, kdo si v pondělí v 10:37 třikrát otevřel nastavení profilu. Potřebuješ vědět, jestli tým zvládl udělat práci, kvůli které si produkt platí.
+
+### 1) Začni definicí úspěchu, ne skóre
+
+Než vymyslíš jakýkoliv dashboard, napiš jednu větu:
+
+> Zákazník je úspěšný, když [konkrétní role] dokáže [konkrétní výsledek] bez [hlavní překážka].
+
+Příklady:
+
+- Marketingový tým je úspěšný, když dokáže každý měsíc vyhodnotit kampaně bez exportu osobních údajů do reklamních nástrojů.
+- Provozní manažer je úspěšný, když vidí stav objednávek a výjimek bez ručního přepisování tabulek.
+- Zakladatel SaaS je úspěšný, když během týdne pozná, proč trial uživatel nedošel k první hodnotné akci.
+
+Teprve potom vybírej signály. Pokud definice úspěchu neexistuje, health score bude jen numerologie v lepším kabátě. A ano, grafy budou vypadat profesionálně. To je na nich nebezpečné.
+
+### 2) Měř týmovou hodnotu, ne osobní špehování
+
+U B2B SaaS často nepotřebuješ hodnotit jednotlivce. Zajímá tě stav workspace, firmy nebo projektu. Týmová agregace bývá praktičtější a bezpečnější než detailní profilování konkrétních uživatelů.
+
+Dobré signály:
+
+- workspace dokončil onboardingový checklist,
+- v posledních 30 dnech proběhla alespoň jedna klíčová akce,
+- zákazník přidal druhého relevantního člena týmu,
+- opakovaně používá funkci, která souvisí s jeho zakoupeným plánem,
+- support tickety se týkají pokročilého použití, ne základního zmatení.
+
+Rizikové signály:
+
+- detailní čas strávený konkrétní osobou na stránce,
+- individuální „produktivita“ zaměstnanců zákazníka,
+- nahrávání obrazovky bez jasného důvodu a souhlasu,
+- spojování produktového chování s marketingovým profilem,
+- ukládání obsahu, který zákazník zadává do produktu, jen proto, že se může hodit.
+
+**Codyho komentář:** Pokud health score vypadá jako nástroj pro manažerské dohlížení nad lidmi zákazníka, zastav se. Neprodáváš dalekohled do cizí kanceláře. Prodáváš produkt, který má pomoct.
+
+### 3) Udělej health score vysvětlitelné
+
+Skóre typu „73 ze 100“ je bez kontextu k ničemu. Customer success tým má vědět, proč skóre vzniklo a co má udělat dál.
+
+Lepší je používat jednoduché stavy:
+
+- **Nový:** zákazník je v onboardingu a čeká na první hodnotnou akci.
+- **Aktivovaný:** zákazník udělal klíčovou akci a má důvod se vracet.
+- **Stabilní:** produkt používá opakovaně a bez blokujících potíží.
+- **Ohrožený:** chybí klíčová akce, přibyly blokující tickety nebo se blíží obnova bez známky hodnoty.
+- **Rozvojový:** zákazník používá produkt zdravě a má jasný prostor pro rozšíření.
+
+Ke každému stavu přidej vysvětlení a doporučenou akci. Například:
+
+| Stav | Signál | Doporučená akce |
+| --- | --- | --- |
+| Nový | Onboarding nedokončen 7 dní | Poslat praktický návod podle role, ne obecný newsletter |
+| Ohrožený | 2 blokující tickety za měsíc | Nabídnout krátký technický hovor a shrnout překážky |
+| Rozvojový | Aktivní tým + opakované použití limitované funkce | Ukázat konkrétní upgrade scénář bez nátlaku |
+
+Takový systém je nudnější než magické AI skóre. Což je dobře. Nuda je v provozu často jen jiné slovo pro spolehlivost.
+
+### 4) Odděl péči, podporu a prodej
+
+Customer success často trpí tím, že má v jednom batohu tři různé práce: pomáhat zákazníkům, řešit problémy a prodávat rozšíření. To je v pořádku, pokud jsou pravidla jasná.
+
+Rozděl signály podle účelu:
+
+- **Péče:** onboarding, aktivace, pravidelná hodnota, vzdělávání.
+- **Podpora:** incidenty, bugy, blokující nejasnosti, reakční doba.
+- **Obchod:** obnova, rozšíření, změna tarifu, fakturační kontakt.
+
+Nepoužívej support frustraci jako automatický prodejní trigger. Když zákazník řeší problém, nechce slyšet „skvělá zpráva, vyšší tarif vám dá prioritní podporu“. To není sales, to je požár s ceníkem.
+
+Praktické pravidlo: obchodní doporučení smí vzniknout jen tam, kde je zřejmá hodnota pro zákazníka. Ne tam, kde produkt selhal.
+
+### 5) CRM poznámky piš jako budoucí důkaz, ne jako chat
+
+Poznámky v CRM nebo zákaznickém systému musí být stručné, věcné a bezpečné. Nejsou to osobní deníčky obchodníka.
+
+Piš:
+
+- rozhodnutí zákazníka,
+- dohodnuté další kroky,
+- technické překážky,
+- role účastníků bez zbytečných osobních detailů,
+- termíny obnovy a závazky.
+
+Nepiš:
+
+- subjektivní soudy o konkrétních lidech,
+- osobní informace nesouvisející s obchodním vztahem,
+- citlivé údaje z hovorů,
+- interní spekulace typu „asi nemají rozpočet, CFO vypadá nervózně“,
+- tajné poznámky, které bys zákazníkovi neuměl ukázat bez studu.
+
+Jednoduchý test: kdyby zákazník požádal o export nebo vysvětlení zpracování, obhájíš tu poznámku? Pokud ne, nepatří tam.
+
+### 6) Customer success playbook pro malé týmy
+
+Malý tým nepotřebuje enterprise proces se třiceti poli. Potřebuje rytmus.
+
+Týdenní rytmus:
+
+- projdi nové zákazníky bez první hodnotné akce,
+- projdi ohrožené zákazníky podle jasných signálů,
+- vyber maximálně tři zákazníky pro osobní kontakt,
+- zapiš překážky, které se opakují,
+- pošli produktu jeden konkrétní návrh z reálných problémů.
+
+Měsíční rytmus:
+
+- zkontroluj, jestli health signály pořád odpovídají realitě,
+- smaž nebo agreguj staré provozní poznámky bez dalšího účelu,
+- projdi zákazníky před obnovou,
+- vyhodnoť onboardingové materiály,
+- aktualizuj jednu šablonu e-mailu nebo knowledge base článek.
+
+### Šablona customer success karty
+
+```markdown
+## Customer success karta: [zákazník / workspace]
+
+### Kontext
+- Segment:
+- Zakoupený plán:
+- Hlavní role zákazníka:
+- Domluvený cíl:
+
+### Definice úspěchu
+- První hodnotná akce:
+- Opakovaná hodnota:
+- Signál stabilního používání:
+
+### Stav
+- Aktuální stav: Nový / Aktivovaný / Stabilní / Ohrožený / Rozvojový
+- Proč:
+- Doporučená další akce:
+
+### Překážky
+- Produktové:
+- Technické:
+- Procesní:
+- Edukační:
+
+### Privacy poznámka
+- Jaké signály používáme:
+- Jaké signály nepoužíváme:
+- Retence poznámek:
+```
+
+### Checklist pro customer success bez panoptika
+
+- [ ] Máme napsanou definici úspěchu zákazníka pro hlavní segmenty.
+- [ ] Health signály jsou vysvětlitelné a navázané na konkrétní další akci.
+- [ ] Primárně hodnotíme workspace, projekt nebo firmu, ne produktivitu jednotlivců.
+- [ ] Nepoužíváme session replay, detailní profilování ani obsah zákazníka bez jasného účelu.
+- [ ] CRM poznámky jsou věcné, obhajitelné a bez zbytečných osobních detailů.
+- [ ] Péče, support a obchod mají oddělené účely i pravidla.
+- [ ] Staré poznámky a provozní signály mají retenční pravidla.
+- [ ] Opakované customer success poznatky se vrací do produktu, dokumentace a onboardingu.
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -5895,6 +6062,7 @@ Pokud odpověď zní „ukázal by citlivé obchodní údaje, interní poznámky
 
 ## Pracovní log
 
+- **2026-10-12:** Přidána příloha AG o customer success bez sledovacího panoptika: definice zákaznického úspěchu, týmové health signály, vysvětlitelné stavy, oddělení péče/supportu/prodeje, bezpečné CRM poznámky, playbook a checklist.
 - **2026-10-12:** Přidána příloha AF o produktových e-mailech a notifikacích: rozdělení typů zpráv, autentizace SPF/DKIM/DMARC, minimalizace obsahu a trackingu, preference centrum, doručitelnost, verzování šablon, e-mailová mapa a checklist.
 - **2026-10-12:** Přidána příloha AE o billing vrstvě, fakturaci a platbách: oddělení fakturační identity od účtu, bezpečné platební tokeny, neměnné doklady, billing portál, webhooky, exporty, revenue reporting, šablona review a checklist.
 - **2026-10-12:** Přidána příloha AD o interním adminu a backoffice: pracovní situace, role podle účelu, citlivé akce, impersonace, minimalizace dat, metriky používání, šablona access review a checklist.
