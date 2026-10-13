@@ -9370,6 +9370,199 @@ U aktualizovaného článku napiš, co se změnilo. Ne kvůli robotům. Kvůli l
 
 ---
 
+## Příloha BB: CRM a lead pipeline bez datové skládky
+
+CRM má být pracovní mapa obchodního vztahu, ne digitální půda, kam se odkládá všechno, co někdo někdy zjistil o člověku. Pro malý SaaS tým nebo agenturu je největší riziko paradoxně jednoduché: v nadšení z prodeje začne ukládat příliš mnoho poznámek, kopírovat osobní údaje do pěti nástrojů a po roce nikdo neví, co je aktuální, co je nutné a co už mělo dávno zmizet.
+
+Privacy-first CRM nezačíná výběrem nástroje. Začíná otázkou: jaké minimum informací potřebujeme, abychom mohli férově navázat kontakt, kvalifikovat příležitost, dodat službu a později vztah udržovat?
+
+**Codyho komentář:** Nejlepší CRM není to, které má nejvíc polí. Nejlepší CRM je to, ve kterém obchodník za třicet sekund pozná další rozumný krok a právník u toho nemusí nervózně žvýkat monitor.
+
+### 1) Lead není osoba na lov. Je to kontext rozhodnutí
+
+Slovo „lead“ svádí k tomu, že člověka zredukuješ na záznam v pipeline. Prakticky je ale důležitější kontext: jaký problém řeší, proč teď, jak velká je potřeba, kdo rozhoduje a jaký další krok dává smysl.
+
+U B2B webu nebo SaaS typicky stačí začít těmito poli:
+
+- firma nebo organizace,
+- kontaktní osoba a pracovní e-mail,
+- problém nebo poptávka popsaná vlastními slovy,
+- zdroj kontaktu na agregované úrovni,
+- stav v pipeline,
+- další krok a jeho vlastník,
+- datum poslední smysluplné aktivity,
+- poznámka k oprávněnému důvodu další komunikace.
+
+Co do CRM nepatří jako výchozí stav: soukromé profily, zbytečné osobní poznámky, domněnky o osobnosti, citlivé údaje, interní drby, kompletní přepisy callů bez důvodu nebo automaticky stažené enrichment balíky jen proto, že šly technicky připojit.
+
+Příklad dobré poznámky:
+
+> „Řeší migraci z agenturního webu na vlastní privacy-first stack. Rozhodnutí do konce kvartálu. Další krok: poslat návrh rozsahu auditu do pátku.“
+
+Příklad špatné poznámky:
+
+> „Působí nerozhodně, asi nebude mít rozpočet, našel jsem jeho soukromý profil a bydlí v…“
+
+Jedna poznámka pomáhá vztahu. Druhá vytváří datový problém a ještě z tebe dělá divného člověka. Dvojitá výhra, jen opačným směrem.
+
+### 2) Pipeline stav má popisovat realitu, ne optimismus
+
+Malé týmy často trpí pipeline fantasy. Každý příjemný call je „hot deal“, každá odpověď na e-mail je „qualified“ a každý kontakt z konference je „almost closed“. Výsledkem je CRM, které vypadá jako motivační plakát, ale neumí řídit práci.
+
+Praktičtější pipeline:
+
+1. **Nový kontakt:** přišel formulář, e-mail, doporučení nebo přímý dotaz.
+2. **Zjišťujeme fit:** víme, že existuje problém, ale ještě nevíme, jestli ho máme řešit my.
+3. **Kvalifikovaná příležitost:** známe potřebu, rozhodovací proces, přibližný rozpočet nebo hodnotu a další krok.
+4. **Návrh / nabídka:** poslali jsme konkrétní návrh, rozsah nebo podmínky.
+5. **Vyjednávání / rozhodnutí:** řeší se úpravy, smlouva, termín nebo interní schválení.
+6. **Vyhráno:** vzniká zákazník, projekt nebo placený účet.
+7. **Prohráno / odloženo:** víme proč a kdy se případně vrátit.
+
+Každý stav by měl mít vstupní kritérium. „Kvalifikovaná příležitost“ není pocit. Je to záznam, kde víš minimálně problém, očekávaný výsledek, další krok, vlastníka a důvod, proč dává smysl pokračovat.
+
+### 3) Zdroj leadu měř bez osobních otisků
+
+Marketing chce vědět, co funguje. To je legitimní. Neznamená to ale, že každý kontakt musí nést batoh plný trackingových parametrů, fingerprintů a historie procházení.
+
+Privacy-first varianta:
+
+- ulož zdroj na úrovni kampaně nebo kanálu, ne osobní stopu návštěvníka,
+- nepřenášej do CRM celé URL s osobními údaji nebo interními parametry,
+- UTM hodnoty validuj a normalizuj,
+- u formulářů ukládej jen to, co člověk skutečně poslal a co potřebuješ pro odpověď,
+- propojení s analytikou dělej agregovaně, ne přes individuální profily.
+
+Příklad zdroje v CRM:
+
+> `source_channel: organic_search`, `source_campaign: privacy_first_audit`, `landing_page: /privacy-first-audit`
+
+Nevhodný zdroj:
+
+> kompletní referrer s osobním e-mailem, session ID, interními parametry a náhodným tokenem, který se pak kopíruje do exportů.
+
+Pokud kampaň nejde vyhodnotit bez invazivního sledování, zkus nejdřív lepší disciplínu v pojmenování kampaní, oddělené landing pages a jednoduché dotazování ve formuláři typu „Jak jste se o nás dozvěděli?“. Ano, je to méně magické. Ale taky méně strašidelné.
+
+### 4) Poznámky piš tak, aby přežily audit i dovolenou
+
+Obchodní poznámka má pomoct budoucímu člověku v týmu pochopit situaci. Nemá být psychologický profil zákazníka ani skládka všeho, co zaznělo na callu.
+
+Dobrá poznámka má strukturu:
+
+- **Situace:** co zákazník řeší a proč teď.
+- **Dopad:** co se stane, když problém nevyřeší.
+- **Rozhodování:** kdo je zapojený a jaký je proces.
+- **Rizika:** co může spolupráci zablokovat.
+- **Další krok:** konkrétní akce, vlastník, termín.
+
+U citlivějších informací používej zásadu „potřebujeme to pro práci?“. Pokud ne, neukládej. Pokud ano, napiš to věcně a v nejmenším rozsahu.
+
+Místo:
+
+> „Majitel je chaotik a účetní to asi sabotuje.“
+
+Napiš:
+
+> „Rozhodnutí závisí na schválení rozpočtu a kapacitě interní administrativy. Riziko: pomalé dodání podkladů.“
+
+Stejná informace pro práci, desetkrát menší ostuda při exportu dat.
+
+### 5) Retence leadů musí mít pravidla
+
+Ne každý kontakt má zůstat v CRM navždy. Pokud někdo poptal službu před třemi lety, nikdy nereagoval a není zákazníkem, potřebuješ mít důvod, proč ho pořád držíš v aktivní databázi.
+
+Jednoduchý retenční model:
+
+- **Nové a aktivní příležitosti:** drž po dobu komunikace a obchodního procesu.
+- **Odložené příležitosti:** nastav datum návratu a důvod, proč je legitimní se ozvat.
+- **Prohrané příležitosti:** uchovej stručný důvod a smaž nebo anonymizuj zbytečné detaily po stanovené době.
+- **Zákazníci:** přesuň relevantní informace do zákaznického provozního záznamu, neudržuj duplicitní historii všude.
+- **Neaktivní kontakty:** pravidelně čistit, slučovat duplicity a mazat záznamy bez účelu.
+
+Měsíční hygiena CRM je nudná, ale zachraňuje kvalitu dat. Jednou měsíčně projdi záznamy bez dalšího kroku, bez aktivity a bez vlastníka. Buď dostanou další krok, nebo jdou pryč. Pipeline není muzeum nenaplněných nadějí.
+
+### 6) Automatizace nesmí obchod převálcovat
+
+CRM automatizace umí pomoct: připomenout follow-up, založit úkol, poslat interní notifikaci, zařadit lead do správného stavu. Umí ale také nenápadně rozjet datovou lavinu.
+
+Před každou automatizací si polož otázky:
+
+- Jaký problém automatizace řeší?
+- Jaká data čte a kam je zapisuje?
+- Posílá něco mimo náš evropský provoz nebo mimo schválené dodavatele?
+- Umíme ji vypnout pro konkrétní kontakt nebo celý proces?
+- Pozná člověk, že komunikuje s automatizovanou zprávou?
+- Co se stane, když automatizace selže nebo se spustí dvakrát?
+
+Dobré pravidlo: automatizuj připomínky a administrativu, ale vztah nech člověku. U B2B obchodu často stačí lepší úkoly, čisté šablony e-mailů a jasné vlastnictví. Hyperpersonalizovaná sekvence o patnácti krocích může vypadat profesionálně v nástroji, ale pro příjemce působit jako robot v saku.
+
+### 7) CRM export ber jako test důvěry
+
+Představ si, že zákazník požádá o přístup k údajům nebo že nový kolega exportuje pipeline kvůli migraci. Co v exportu uvidí?
+
+Pokud jsou v CRM věcné poznámky, jasné stavy, minimální údaje a rozumná historie, export je nepříjemná administrativa. Pokud jsou tam osobní komentáře, enrichment bordel, staré tokeny v URL a interní dohady, export je malý horor v CSV.
+
+Jednou za čas udělej interní export test:
+
+1. Vezmi vzorek několika leadů v různých stavech.
+2. Zkontroluj, jestli každé pole má účel.
+3. Najdi poznámky, které bys nechtěl ukázat zákazníkovi.
+4. Zkontroluj URL, přílohy a kopie e-mailů.
+5. Oprav šablony, automatizace a povinná pole podle nálezů.
+
+Tohle není paranoia. To je provozní hygiena. Stejně jako zálohy se neověřují až ve chvíli, kdy server hoří, CRM se nečistí až ve chvíli, kdy někdo požádá o export.
+
+### Šablona CRM karty leadu
+
+## Lead / příležitost: [firma nebo projekt]
+
+### Kontext
+
+- Kontaktní osoba:
+- Firma / organizace:
+- Primární problém:
+- Požadovaný výsledek:
+- Zdroj kontaktu:
+
+### Pipeline
+
+- Stav:
+- Vstupní kritérium splněno:
+- Další krok:
+- Vlastník:
+- Termín:
+
+### Kvalifikace
+
+- Proč teď:
+- Rozhodovací proces:
+- Rozpočet / hodnota:
+- Rizika:
+- Privacy nebo bezpečnostní požadavky:
+
+### Data a retence
+
+- Povinná pole:
+- Volitelná pole:
+- Přílohy:
+- Dodavatelé / integrace:
+- Datum review:
+- Retenční rozhodnutí:
+
+### Checklist pro CRM a lead pipeline
+
+- [ ] Každé CRM pole má jasný obchodní účel.
+- [ ] Pipeline stavy mají vstupní kritéria, ne jen optimistické názvy.
+- [ ] Zdroj kontaktu se ukládá bez osobních údajů v URL a bez session identifikátorů.
+- [ ] Poznámky jsou věcné, pracovní a bezpečné pro budoucí export.
+- [ ] Neaktivní leady mají retenční pravidla a pravidelný review.
+- [ ] Automatizace má vlastníka, vypínač a popsaný datový tok.
+- [ ] CRM se nesynchronizuje s neschválenými nástroji „jen pro pohodlí“.
+- [ ] Jednou za čas proběhne export test a úklid zbytečných polí.
+
+
+---
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -9475,6 +9668,8 @@ U aktualizovaného článku napiš, co se změnilo. Ne kvůli robotům. Kvůli l
 ---
 
 ## Pracovní log
+
+- **2026-10-13:** Přidána příloha BB o CRM a lead pipeline bez datové skládky: minimální lead data, realistické pipeline stavy, zdroje kontaktů bez osobních identifikátorů, bezpečné poznámky, retenční hygiena, automatizace, export test, šablona CRM karty a checklist.
 
 - **2026-10-13:** Přidána příloha BA o obsahové distribuci přes RSS a přímé odkazy: kanonické URL, feedy, repurposing, UTM disciplína bez osobních údajů, lehký redakční workflow, privacy review embedů, aktualizace staršího obsahu, distribuční karta a checklist.
 
