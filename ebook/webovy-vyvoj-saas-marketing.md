@@ -9768,6 +9768,165 @@ Backlog položka má odkazovat na anonymizovaný insight, ne na kompletní nahr�
 - [ ] Každý silný insight má navazující akci v backlogu, obsahu, supportu nebo obchodu.
 - [ ] Slabé signály jsou označené jako hypotézy, ne jako pravda vytesaná do Notionu.
 
+## Příloha BD: Přístupy, role a offboarding bez bezpečnostního folklóru
+
+Přístupová práva jsou jedno z těch témat, která v malém týmu dlouho vypadají nudně. Pak někdo odejde, freelancer dokončí projekt, integrace se přestane používat, starý admin účet pořád existuje — a najednou je z nudného tématu provozní horor v pantoflích.
+
+Privacy-first provoz neznamená jen šifrovanou databázi a hezkou privacy policy. Znamená také vědět, kdo má k čemu přístup, proč ho má, kdy se kontroluje a jak rychle ho umíš odebrat. OWASP ASVS řeší řízení přístupu jako základní bezpečnostní vrstvu aplikace ([OWASP ASVS](https://owasp.org/projects/asvs)) a NCSC doporučuje správcům systémů přemýšlet o heslech, správcovských účtech a autentizaci provozně, ne jen jako o políčku v nastavení ([NCSC: Password administration for system owners](https://www.ncsc.gov.uk/collection/passwords)).
+
+### 1) Role pojmenuj podle práce, ne podle ega
+
+Špatné role:
+
+- `admin`, protože „někdo to musí mít“,
+- `superadmin`, protože první admin nestačil,
+- `owner`, protože to zní důležitě,
+- `all_access`, protože pátek odpoledne.
+
+Dobré role popisují práci:
+
+- **Billing manager:** vidí fakturaci, tarify a platby, ale neobsah support ticketů.
+- **Support agent:** vidí konverzace a stav účtu, ale nemění fakturační údaje ani bezpečnostní nastavení.
+- **Content editor:** upravuje web, blog a changelog, ale nevidí zákaznická data.
+- **Developer:** vidí technické logy a deploye, ale produkční data jen přes schválený nouzový postup.
+- **Security/admin owner:** spravuje role, auditní stopu a nouzové přístupy.
+
+Role má vždy odpovědět na dvě otázky: jakou práci člověk dělá a jaké minimum dat k tomu potřebuje. Pokud odpověď zní „pro jistotu všechno“, není to role. Je to rezignace s ikonou klíče.
+
+### 2) Přístupy rozděl podle citlivosti
+
+Ne všechny nástroje mají stejnou váhu. Přístup k nástroji pro plánování obsahu není totéž jako přístup k databázi, DNS zóně, platební bráně nebo e-mailové doméně.
+
+Praktické rozdělení:
+
+1. **Kritické přístupy:** domény, DNS, hosting, databáze, produkční tajemství, platební systém, e-mailová infrastruktura, správci identity.
+2. **Zákaznické přístupy:** CRM, support, analytics, produktová administrace, exporty zákaznických dat.
+3. **Marketingové přístupy:** CMS, newsletter, sociální profily, kampaně, designové nástroje.
+4. **Interní provoz:** dokumentace, projektové řízení, kalendáře, meeting poznámky.
+
+U kritických přístupů nastav přísnější pravidla: vícefaktorové ověření, minimální počet správců, oddělené osobní účty, nouzový účet uložený bezpečně a pravidelné review. Passkeys jsou dobrá cesta, pokud je nástroj podporuje, protože stojí na phishing-resistant autentizaci ([FIDO Alliance: Passkeys](https://fidoalliance.org/passkeys/)).
+
+### 3) Sdílené účty jsou dluh, ne zkratka
+
+Sdílený účet typu `marketing@firma.cz` vypadá prakticky, dokud nepotřebuješ zjistit, kdo co změnil, kdo má heslo v prohlížeči a jestli ho má ještě dodavatel, který pro tebe před půl rokem dělal jednu landing page.
+
+Pokud sdílený účet nejde odstranit hned, nastav mu alespoň karanténu:
+
+- napiš vlastníka účtu,
+- ulož důvod, proč účet ještě existuje,
+- zapni MFA, pokud to jde,
+- zakaž ukládání hesla do osobních prohlížečů,
+- naplánuj datum nahrazení osobními účty,
+- po každém odchodu člověka nebo dodavatele heslo změň.
+
+**Codyho komentář:** Sdílené účty jsou jako společný kartáček na zuby. Technicky to funguje, ale pokud musíš vysvětlovat proč, už jsi prohrál.
+
+### 4) Přístup se má udělovat přes žádost, ne přes chatový výkřik
+
+Malý tým nepotřebuje korporátní workflow s pěti komisemi. Potřebuje ale stopu rozhodnutí. Stačí jednoduchá žádost:
+
+- kdo přístup potřebuje,
+- k jakému nástroji,
+- na jakou práci,
+- na jak dlouho,
+- kdo to schválil,
+- kdy proběhne review.
+
+U dočasných dodavatelů nastav expiraci hned při udělení. Když někdo dostane přístup „jen na týden“, ale systém neumí expiraci, napiš si úkol na konkrétní datum. Kalendář není bezpečnostní nástroj, ale je pořád lepší než víra, že si na to někdo vzpomene mezi kávou a deployem.
+
+### 5) Produkční data chraň před zvědavostí i pohodlím
+
+Přístup k produkčním datům má být výjimka, ne běžný způsob debugování. Pro SaaS tým je lepší mít:
+
+- anonymizované nebo syntetické testovací prostředí,
+- bezpečný admin pohled jen na nutné informace,
+- auditní log pro zobrazení citlivých dat,
+- nouzový postup pro incidenty,
+- pravidlo, že export dat se nevyrábí „na plochu“.
+
+Když support potřebuje ověřit problém, často nepotřebuje celý účet zákazníka. Stačí ID organizace, stav plánu, poslední chyby a technická metadata. Pokud vývojář potřebuje řešit bug, často nepotřebuje jméno uživatele, e-mail, obsah zpráv ani fakturační údaje. Debugging není vstupenka do života zákazníka.
+
+### 6) Offboarding začíná už při onboardingu
+
+Nejlepší offboarding je ten, který si připravíš v den, kdy člověk nebo dodavatel začíná. U každé spolupráce si poznamenej:
+
+- které nástroje bude používat,
+- které role dostal,
+- jestli má přístup k zákaznickým nebo produkčním datům,
+- kde jsou uložené pracovní výstupy,
+- kdo převezme vlastnictví po konci spolupráce.
+
+Offboarding pak není detektivka. Je to checklist:
+
+1. Odebrat přístupy v identity provideru nebo ve všech nástrojích.
+2. Zrušit nebo převést API klíče a tokeny, které člověk spravoval.
+3. Převést vlastnictví dokumentů, repozitářů, domén, kampaní a automatizací.
+4. Zkontrolovat sdílené účty a změnit hesla, kde pořád existují.
+5. Zrušit přístup do produkčních logů, databází, billing nástrojů a supportu.
+6. Smazat lokální exporty a dočasné soubory podle retenčních pravidel.
+7. Zapsat datum dokončení a osobu, která offboarding ověřila.
+
+### 7) Access review dělej pravidelně a krátce
+
+Access review nemusí být auditní festival. Jednou měsíčně u kritických systémů a jednou za kvartál u méně citlivých nástrojů stačí projít:
+
+- kdo má admin práva,
+- kdo má přístup k zákaznickým datům,
+- které účty jsou neaktivní,
+- které integrace nebo tokeny se nepoužívají,
+- které role jsou širší, než práce vyžaduje,
+- kteří dodavatelé už nemají aktivní zadání.
+
+Výstupem nemá být dlouhý dokument. Výstupem mají být odebrané přístupy, zúžené role, zrušené tokeny a jasné rozhodnutí, co zůstává.
+
+### Šablona access review karty
+
+```markdown
+## Access review: [nástroj / oblast]
+
+### Kontext
+- Datum review:
+- Vlastník nástroje:
+- Kritičnost: kritická / zákaznická / marketingová / interní
+- Typ dat:
+
+### Účty a role
+- Admin účty:
+- Uživatelé se zákaznickými daty:
+- Dodavatelé:
+- Neaktivní účty:
+
+### Integrace a tokeny
+- API klíče:
+- Webhooky:
+- Servisní účty:
+- Nepoužívané integrace:
+
+### Rozhodnutí
+- Odebrat:
+- Zúžit roli:
+- Ponechat a proč:
+- Další review:
+
+### Offboarding kontrola
+- Poslední ukončené spolupráce zkontrolovány:
+- Sdílené účty změněny nebo zrušeny:
+- Exporty a lokální kopie smazány:
+- Ověřil:
+```
+
+### Checklist pro přístupy a offboarding
+
+- [ ] Každá role popisuje konkrétní práci, ne status člověka.
+- [ ] Kritické nástroje mají MFA nebo passkeys a minimální počet správců.
+- [ ] Sdílené účty mají vlastníka, důvod existence a plán zrušení.
+- [ ] Dočasné přístupy mají expiraci nebo konkrétní úkol na odebrání.
+- [ ] Produkční data nejsou běžný nástroj pro debugging.
+- [ ] Support a vývoj vidí jen data nutná pro svou práci.
+- [ ] Offboarding zahrnuje účty, API klíče, tokeny, dokumenty, repozitáře a exporty.
+- [ ] Access review u kritických systémů probíhá alespoň měsíčně.
+- [ ] Výsledkem review jsou konkrétní změny, ne jen tabulka pro dobrý pocit.
+
 
 ---
 
@@ -9876,6 +10035,8 @@ Backlog položka má odkazovat na anonymizovaný insight, ne na kompletní nahr�
 ---
 
 ## Pracovní log
+
+- **2026-10-13:** Přidána příloha BD o přístupech, rolích a offboardingu: role podle práce, rozdělení citlivosti nástrojů, omezení sdílených účtů, žádosti o přístup, ochrana produkčních dat, offboarding od onboardingu, pravidelné access review, šablona a checklist.
 
 - **2026-10-13:** Přidána příloha BC o zákaznických rozhovorech bez nahrávací horečky: rozhodnutí před výzkumem, výběr účastníků podle situace, nahrávky jako výjimka, otázky na minulou zkušenost, bezpečné poznámky, anonymizovaná syntéza, napojení insightů na backlog, šablona research karty a checklist.
 
