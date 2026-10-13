@@ -7991,6 +7991,235 @@ U kritických služeb si exit plán otestuj na malém vzorku. Nečekej na den, k
 - [ ] Nepoužívaní dodavatelé se ruší, data se exportují nebo mažou podle retenční politiky.
 - [ ] Nový nástroj nesmí obejít privacy review jen proto, že „je to jen na zkoušku“.
 
+
+## Příloha AT: Webhooky, API klíče a integrace bez neřízeného úniku dat
+
+Integrace jsou krásné, dokud se nechovají jako otevřené okno v přízemí. Malý SaaS tým často začne nevinně: pošli webhook do CRM, přidej platební event, napoj helpdesk, přidej automatizaci do chatu, vyrob export pro účetní. Za měsíc data tečou pěti směry a nikdo přesně neví, kdo co posílá, proč a jak dlouho to někde leží.
+
+Privacy-first integrace nejsou pomalejší. Jsou jen popsané. Každý webhook, API token a automatizace má mít vlastníka, účel, minimální payload, pravidla retence a způsob bezpečného vypnutí. OWASP u API bezpečnosti opakovaně zdůrazňuje řízení autorizace, omezení přístupu a ochranu citlivých dat; u webhooků je praktické řešit podpisy, opakování požadavků, idempotenci a omezení obsahu payloadu ([OWASP API Security Top 10](https://api-security.owasp.org/editions/2023/en/0x11-t10/), [OWASP Webhook Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Webhook_Security_Cheat_Sheet.html)).
+
+> **Codyho komentář:** Webhook je jako firemní kurýr. Když mu dáš celé CRM místo jedné zásilky, problém není v kurýrovi. Problém je v tom, že někdo v týmu zaměnil pohodlí za architekturu.
+
+### 1) Každá integrace musí mít obchodní důvod
+
+Nejdřív napiš, proč integrace existuje. Ne technicky, ale lidsky.
+
+Slabý důvod:
+
+> „Posíláme eventy do nástroje X, protože to umí automatizace.“
+
+Lepší důvod:
+
+> „Po úspěšné platbě vytvoříme v účetním systému podklad pro fakturaci, aby zákazník dostal doklad bez ruční práce.“
+
+Rozdíl je zásadní. První věta obhajuje nástroj. Druhá věta popisuje proces, hodnotu a hranici. Z takové věty jde odvodit, jaká data jsou potřeba: identifikátor zákazníka, částka, měna, tarif, daňové údaje, stav platby. Ne kompletní profil, historie kliknutí a poznámky ze supportu.
+
+U každé integrace si polož tři otázky:
+
+- Co se stane, když integrace neexistuje?
+- Jaký minimální údaj stačí k dokončení procesu?
+- Kdo pozná, že integrace posílá moc dat?
+
+Pokud na třetí otázku není odpověď, integrace nemá vlastníka. A integrace bez vlastníka je budoucí incident s hezkým logem.
+
+### 2) Payload navrhuj jako veřejnou pohlednici
+
+Webhook payload by měl být co nejmenší. Představ si ho jako pohlednici, ne trezor. Nemusí obsahovat všechno, co cílový systém možná jednou použije. Má obsahovat jen to, co konkrétní příjemce potřebuje pro konkrétní úkol.
+
+Praktické pravidlo pro payload:
+
+- posílej stabilní interní ID místo e-mailu, pokud cílový systém umí data dohledat bezpečně jinak,
+- neposílej poznámky ze supportu, pokud cílem je jen změna stavu objednávky,
+- neposílej celé objekty, když stačí změněné pole,
+- neposílej URL s osobními údaji v query parametrech,
+- neposílej tokeny, hesla, session ID ani jednorázové odkazy do běžných logů,
+- u událostí používej verzi schématu, aby změna payloadu nerozbila příjemce.
+
+Příklad rozumného eventu:
+
+```json
+{
+  "event": "subscription.activated",
+  "version": 1,
+  "event_id": "evt_123",
+  "occurred_at": "2026-10-13T10:30:00Z",
+  "customer_id": "cus_456",
+  "plan": "team",
+  "billing_country": "CZ"
+}
+```
+
+Příklad payloadu, který si říká o malér:
+
+```json
+{
+  "event": "subscription.activated",
+  "customer": {
+    "email": "jana@example.com",
+    "phone": "+420...",
+    "support_notes": "...",
+    "last_login_ip": "...",
+    "all_sessions": []
+  },
+  "debug": "full request dump"
+}
+```
+
+Technicky je druhý payload pohodlný. Provozně je to datový bufet. Privacy-first tým si pohodlí kupuje jen tam, kde ho umí vysvětlit.
+
+### 3) API klíče nejsou konfigurace, ale přístupová práva
+
+API klíč je účet bez obličeje. Chovej se k němu jako k přístupu do systému, ne jako k textu v `.env` souboru.
+
+Minimum pro API klíče:
+
+- každý klíč má název podle účelu, ne `test-key-final2`,
+- každý klíč má vlastníka,
+- klíč má nejnižší potřebná práva,
+- produkční a testovací klíče jsou oddělené,
+- klíče nejsou v repozitáři, dokumentaci, screenshotu ani ticketu,
+- rotace má postup, ne jen paniku,
+- staré klíče se ruší po migraci,
+- přístup ke klíčům je součástí access review.
+
+Když služba neumí omezit klíč podle scope, prostředí nebo IP rozsahu, napiš si to do vendor karty. Není to automatický zákaz, ale je to riziko. Hlavně u integrací, které umí číst zákaznická data nebo spouštět akce jménem uživatele.
+
+### 4) Příchozí webhook ověřuj dřív, než mu uvěříš
+
+Webhook zvenku není pravda. Je to tvrzení. A tvrzení se ověřuje.
+
+Příchozí webhook by měl mít:
+
+- podpis nebo jiný mechanismus ověření zdroje,
+- ochranu proti opakovanému přehrání starého požadavku,
+- idempotentní zpracování přes `event_id`,
+- rozumný timeout,
+- frontu nebo retry strategii pro pomalé následné kroky,
+- limit velikosti payloadu,
+- validaci schématu,
+- bezpečné logování bez celého obsahu požadavku.
+
+Důležité je pořadí. Nejdřív ověř podpis, čas a formát. Až potom měň stav v databázi. Pokud se změna stavu stane před ověřením, systém se nechová jako aplikace, ale jako velmi důvěřivý recepční.
+
+### 5) Odchozí integrace loguj tak, aby šly ladit bez šmírování
+
+Logy musí pomoct vyřešit problém, ale nemají být druhá databáze osobních údajů. OWASP u logování připomíná, že logy mají chránit před únikem citlivých dat a že je potřeba promyslet, co se loguje, kdo má přístup a jak dlouho se logy drží ([OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)).
+
+U každého volání integrace loguj hlavně provozní metadata:
+
+- název integrace,
+- typ eventu,
+- interní `event_id`,
+- stav doručení,
+- HTTP status,
+- počet pokusů,
+- čas zpracování,
+- bezpečný identifikátor zákazníka, pokud je opravdu potřeba,
+- odkaz na interní audit záznam, ne celý payload.
+
+Neloggovat bez dobrého důvodu:
+
+- celé requesty a response,
+- autorizační hlavičky,
+- e-maily, telefony a adresy,
+- obsah formulářů,
+- poznámky ze supportu,
+- platební údaje,
+- jednorázové odkazy a reset tokeny.
+
+Když potřebuješ dočasně zvýšit detail logování, dej tomu expiraci. Debug režim bez expirace je jako rozsvícené světlo ve sklepě: jednou se tam určitě najde něco, co tam nemělo být.
+
+### 6) Automatizace musí mít vypínač
+
+Každá integrace by měla jít bezpečně zastavit. Ne „smazat půlku kódu a modlit se“, ale vypnout jasným přepínačem nebo konfigurací.
+
+Vypínač potřebuješ pro situace:
+
+- cílová služba posílá chyby,
+- payload obsahuje špatná data,
+- dodavatel řeší incident,
+- integrace začala posílat duplicity,
+- došlo ke změně právního nebo smluvního stavu,
+- tým potřebuje krátkodobě zastavit export dat.
+
+Dobrý vypínač nedělá ticho po pěšině. Uloží stav, přestane posílat data, zapíše důvod a ukáže týmu, co čeká na zpracování. Po opětovném zapnutí musí být jasné, jestli se fronta dopošle, zahodí nebo ručně zkontroluje.
+
+### 7) Integrace reviduj jako živou mapu dat
+
+Jednou za měsíc projdi aktivní integrace. Ne kvůli byrokracii. Kvůli tomu, že integrace mají tendenci zůstat běžet dlouho poté, co přestaly dávat smysl.
+
+Měsíční review:
+
+- které integrace jsou aktivní,
+- které neposlaly žádný užitečný event za poslední období,
+- které často chybují,
+- které posílají moc velký payload,
+- které mají starý API klíč,
+- které nemají vlastníka,
+- které nemají popsaný exit nebo vypínač,
+- které může nahradit přímý export nebo RSS.
+
+Privacy-first provoz není proti automatizaci. Je proti automatizaci, která tajně vytváří datové potrubí do míst, o kterých tým přestal přemýšlet.
+
+### Šablona integrační karty
+
+```markdown
+## Integrace: [název]
+
+### Účel
+- Proces, který integrace řeší:
+- Vlastník:
+- Kritičnost: nízká / střední / vysoká
+
+### Datový tok
+- Směr: příchozí / odchozí / obousměrný
+- Zdroj:
+- Cíl:
+- Eventy nebo endpointy:
+- Kategorie dat:
+- Osobní údaje:
+- Minimální payload:
+
+### Bezpečnost
+- Autentizace:
+- Podpis webhooku:
+- Scope API klíče:
+- Oddělení test/production:
+- Rotace klíče:
+- Přístup k tajemstvím:
+
+### Provoz
+- Retry pravidla:
+- Idempotence:
+- Monitoring:
+- Logování:
+- Vypínač:
+- Fronta nebo backlog:
+
+### Retence a review
+- Jak dlouho držíme eventy:
+- Jak dlouho držíme logy:
+- Datum posledního review:
+- Datum dalšího review:
+- Exit postup:
+```
+
+### Checklist pro webhooky, API klíče a integrace
+
+- [ ] Každá integrace má jasný obchodní účel a vlastníka.
+- [ ] Payload obsahuje jen data potřebná pro konkrétní proces.
+- [ ] Eventy mají stabilní `event_id`, čas vzniku a verzi schématu.
+- [ ] Příchozí webhooky se ověřují před změnou stavu v databázi.
+- [ ] Zpracování webhooků je idempotentní a odolné proti duplicitám.
+- [ ] API klíče mají nejnižší potřebná práva a oddělené testovací a produkční hodnoty.
+- [ ] Tajemství nejsou v repozitáři, ticketech, dokumentaci ani běžných logách.
+- [ ] Logy obsahují provozní metadata, ne celé payloady nebo autorizační hlavičky.
+- [ ] Debug logování má expiraci a jasný důvod.
+- [ ] Každá kritická integrace má bezpečný vypínač.
+- [ ] Retry strategie nemůže nekonečně spamovat cílovou službu ani zákazníka.
+- [ ] Měsíční review odhaluje mrtvé integrace, staré klíče a příliš široké payloady.
+- [ ] Nová automatizace neobchází vendor review, privacy review ani retenční pravidla.
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -8076,6 +8305,8 @@ U kritických služeb si exit plán otestuj na malém vzorku. Nečekej na den, k
 ---
 
 ## Pracovní log
+
+- **2026-10-13:** Přidána příloha AT o webhook integracích, API klíčích a datových tocích: obchodní účel integrací, minimální payload, bezpečná práce s klíči, ověřování webhooků, logování bez úniku dat, vypínače, měsíční review, šablona a checklist.
 
 - **2026-10-13:** Přidána příloha AS o dodavatelích, DPA a subprocesorech: role správce/zpracovatele, vendor karta, kontrola DPA, subprocesory, evropský provoz, rizikové review, exit plán, šablona a checklist.
 
