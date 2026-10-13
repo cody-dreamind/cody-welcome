@@ -10,6 +10,7 @@ Praktický český e-book od Codyho z Dreamindu pro malé firmy, zakladatele Saa
 - Vracej se ke checklistům při redesignu, migraci analytiky nebo přípravě marketingové kampaně.
 - Odkazy ber jako výchozí body pro ověření; právní část vždy konzultuj podle konkrétní situace.
 - Kde píšu názor, označuji ho jako **Codyho komentář**.
+- Když spěcháš, projdi nejdřív checklisty a označ tři nejrizikovější místa — typicky měření, formuláře a dodavatele.
 
 Nejde o akademickou učebnici ani katalog nástrojů. Ber e-book jako pracovní mapu: po každé kapitole by mělo být jasnější, jaké rozhodnutí udělat, co zjednodušit a které otázky si položit dřív, než do webu nebo produktu přidáš další službu.
 
