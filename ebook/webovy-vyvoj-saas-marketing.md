@@ -8732,6 +8732,168 @@ U citlivého obsahu nespoléhej na „ono to za hodinu vyprší“. Když se omy
 - [ ] Existuje runbook pro invalidaci cache a incident se špatně cachovaným obsahem.
 
 
+## Příloha AX: Vícejazyčný web bez SEO a datového chaosu
+
+Evropský web dřív nebo později narazí na jazyk. Český produkt chce anglickou landing page pro investory, německou stránku pro partnery, slovenskou variantu pro blízký trh nebo polskou dokumentaci pro nový zákaznický segment. To je dobrá zpráva. Horší zpráva: vícejazyčnost není „přeložíme text a hotovo“. Je to obsahová, technická, právní i provozní disciplína.
+
+Privacy-first pohled přidává otázku, kterou marketing často přeskočí: co se změní v datových tocích, když začneme obsluhovat další jazyk nebo region? Jiný jazyk může znamenat jiný support proces, jinou fakturační komunikaci, jiné právní texty, překladatele, AI nástroje a další dodavatele. A taky víc URL, víc formulářů, víc metadat a víc šancí udělat chybu.
+
+### 1) Jazyk není region a region není právní režim
+
+Nejdřív si ujasni, co vlastně lokalizuješ:
+
+- **jazyk** — čeština, angličtina, němčina,
+- **region** — Německo, Rakousko, Švýcarsko,
+- **měna a obchodní podmínky** — EUR, CZK, DPH, fakturační požadavky,
+- **support** — kdo odpovídá, v jakém jazyce a s jakým SLA,
+- **právní texty** — privacy policy, obchodní podmínky, cookies, DPA,
+- **produktový obsah** — onboarding, nápověda, e-maily, changelog.
+
+Příklad: anglická stránka pro evropské B2B zákazníky nemusí znamenat americký pricing, americké právní texty ani americké datacentrum. Německá stránka nemusí znamenat samostatný produktový region, ale může vyžadovat jiný sales follow-up a přesnější vysvětlení zpracování dat.
+
+**Codyho komentář:** Nejhorší lokalizace je ta, která přeloží tlačítko „Start free trial“, ale zapomene, že německý zákazník se před trialem ptá na DPA, hosting a subprocesory. Překlad slov nestačí. Překládej důvěru.
+
+### 2) URL strukturu vyber podle údržby
+
+Pro malý tým jsou nejčastější tři možnosti:
+
+- `/cs/`, `/en/`, `/de/` — jednoduché, přehledné a dobře spravovatelné v jednom webu,
+- `cs.example.com`, `en.example.com` — jasné oddělení, ale složitější DNS, certifikáty a deploy,
+- různé domény — vhodné jen pokud máš silný obchodní důvod a kapacitu na správu.
+
+Pro většinu malých SaaS týmů bych začal adresáři. Mají nižší provozní náklady, jednodušší sitemapu, méně DNS magie a menší riziko, že jedna jazyková varianta zestárne v zapomenutém koutě infrastruktury.
+
+Pravidlo: pokud nemáš tým, který umí spravovat víc domén jako kritický majetek, nezačínej vícedoménovou architekturou jen proto, že vypadá „globálně“. Globální může být i chaos.
+
+### 3) `hreflang` je mapa variant, ne kouzelná hůlka
+
+Google doporučuje u stránek s jazykovými nebo regionálními variantami explicitně označit alternativní verze pomocí HTML tagů, HTTP hlaviček nebo sitemap; zároveň uvádí, že z pohledu vyhledávání není výhoda používat všechny metody najednou ([Google Search Central: Localized versions](https://developers.google.com/search/docs/specialty/international/localized-versions)).
+
+Prakticky:
+
+- každá jazyková verze odkazuje sama na sebe i na ostatní relevantní verze,
+- odkazy jsou obousměrné,
+- URL jsou plně kvalifikované,
+- regionální kód bez jazykového kódu nestačí,
+- pro obecný fallback může dávat smysl `x-default`,
+- `hreflang` nenahrazuje kvalitní překlad ani správnou kanonizaci.
+
+Pro malý web je často nejčistší držet `hreflang` v sitemapě nebo generovat tagy v šabloně stránky. Ruční udržování v každém souboru je pozvánka na chyby. Jakmile přidáš třetí jazyk, tabulka vzájemných odkazů začne být nudná — a přesně proto ji má generovat systém.
+
+Příklad jednoduchého páru:
+
+```html
+<link rel="alternate" hreflang="cs" href="https://example.com/cs/produkt/" />
+<link rel="alternate" hreflang="en" href="https://example.com/en/product/" />
+<link rel="alternate" hreflang="x-default" href="https://example.com/" />
+```
+
+### 4) `lang` pomáhá lidem, prohlížečům i asistivním technologiím
+
+HTML atribut `lang` není SEO dekorace. W3C Internationalization doporučuje deklarovat jazyk stránky přímo na elementu `html`, například `<html lang="cs">`, aby uživatelské agenty a asistivní technologie věděly, jak s obsahem pracovat ([W3C Internationalization: Declaring language in HTML](https://www.w3.org/International/questions/qa-html-language-declarations)). WCAG kritérium 3.1.1 řeší určení výchozího jazyka stránky a kritérium 3.1.2 jazyk částí obsahu, pokud se liší od okolního textu ([W3C WAI: Language of Page](https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html), [W3C WAI: Language of Parts](https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html)).
+
+Prakticky:
+
+- česká stránka má `<html lang="cs">`,
+- anglická stránka má `<html lang="en">`,
+- německá stránka má `<html lang="de">`,
+- delší anglická citace v českém článku může mít `lang="en"`,
+- automatický překlad nesmí zapomenout aktualizovat jazyk dokumentu.
+
+Tohle je malý detail s velkým dopadem. Screen reader, prohlížeč, kontrola pravopisu i překladové nástroje se podle něj orientují. Když český text označíš jako anglický, digitální asistent ho může číst jako turistu, který si objednává svíčkovou s přízvukem z letištního terminálu.
+
+### 5) Překlad není copy-paste. Je to produktový proces.
+
+U marketingového webu si pro každý jazyk udržuj jednoduchou obsahovou kartu:
+
+- kdo je cílový čtenář,
+- jaký problém stránka řeší,
+- jaký je primární CTA,
+- kdo obsah odborně kontroloval,
+- kdo kontroloval jazyk,
+- kdy se má stránka znovu ověřit.
+
+U SaaS produktu přidej překlad onboardingových e-mailů, stav dokumentace, chybové hlášky, jazyk supportu, odpovědnost za právní texty a kontrolu formulářů. AI překlad je dobrý pomocník pro první návrh, shrnutí nebo terminologický slovník. Není to právník, lokální marketér ani zákazník. U právních textů a slibů o bezpečnosti dělej odbornou kontrolu. „Přeložil to model“ není omluva, když zákazník pochopí podmínky jinak.
+
+### 6) Měř jazykové varianty bez profilování lidí
+
+Vícejazyčný web svádí k segmentaci návštěvníků podle jazyka, země, kampaně, zařízení a deseti dalších věcí. Pro první rozhodnutí to většinou nepotřebuješ.
+
+Stačí sledovat agregovaně:
+
+- návštěvnost podle jazykové sekce,
+- konverze hlavních CTA podle jazykové sekce,
+- vyhledávací dotazy a vstupní stránky,
+- support dotazy podle jazyka,
+- obsah, který zastarává nebo má vysoký bounce,
+- kampaně podle UTM, bez osobních údajů v URL.
+
+Privacy-first zásada: jazyková varianta je obsahový signál, ne důvod stavět detailní profil návštěvníka. Pokud chceš vědět, jestli anglická landing page funguje, nepotřebuješ vědět, že „uživatel 4837“ četl tři články a pak se vrátil z LinkedInu. Potřebuješ vědět, jestli stránka srozumitelně vysvětluje hodnotu a vede ke správnému dalšímu kroku.
+
+### 7) Jazykový fallback má být slušný, ne agresivní
+
+Nenuť člověka do jazyka jen podle IP adresy. IP region může být VPN, firemní síť, cestování nebo prostě špatný signál. Lepší je nabídnout jazykový přepínač a uložit preference jen tehdy, když to dává smysl a umíš vysvětlit proč.
+
+Dobrý fallback:
+
+- stránka je dostupná na přímé URL bez vynuceného redirectu,
+- jazykový přepínač je viditelný a funguje bez invazivních skriptů,
+- `x-default` vede na neutrální nebo výchozí stránku,
+- uživatel si může volbu změnit,
+- marketingové kampaně vedou na konkrétní jazykovou variantu,
+- chybové stránky respektují jazyk sekce, odkud člověk přišel.
+
+Špatný fallback: přesměrovat každého podle IP, schovat originální URL, rozbít indexaci a ještě si uložit dlouhodobý identifikátor, aby si web pamatoval rozhodnutí, o které nikdo nestál. To není lokalizace. To je pasová kontrola s JavaScriptem.
+
+### Šablona jazykové karty stránky
+
+```md
+## Jazyková varianta: [URL / jazyk / region]
+
+### Účel
+
+- Primární publikum:
+- Obchodní cíl:
+- Hlavní CTA:
+- Stav: návrh / kontrola / publikováno / zastaralé
+
+### Obsah
+
+- Zdrojová stránka:
+- Překladatel / AI workflow:
+- Odborná kontrola:
+- Jazyková kontrola:
+- Poslední review:
+
+### Technika
+
+- `html lang`:
+- `hreflang` varianty:
+- Kanonická URL:
+- Sitemap:
+- Přepínač jazyka:
+
+### Privacy
+
+- Formuláře a pole:
+- Dodavatelé zapojení do překladu:
+- Analytika:
+- Retence poptávek/supportu:
+```
+
+### Checklist pro vícejazyčný privacy-first web
+
+- [ ] Každá jazyková varianta má jasný účel, cílovku a vlastníka.
+- [ ] URL struktura odpovídá kapacitě týmu na údržbu.
+- [ ] `hreflang` je generovaný konzistentně a má obousměrné odkazy.
+- [ ] Každá stránka má správné `html lang`; cizojazyčné části jsou označené, pokud je to potřeba.
+- [ ] Překlady důležitých stránek prošly odbornou a jazykovou kontrolou.
+- [ ] Právní texty, formuláře a souhlasy nejsou jen automaticky přeložené bez review.
+- [ ] Jazykový fallback nevnucuje přesměrování podle IP a nerozbíjí přímé odkazy.
+- [ ] Analytika měří jazykové sekce agregovaně, bez profilování jednotlivých lidí.
+- [ ] Překladatelé a AI nástroje jsou v mapě dodavatelů, pokud vidí neveřejný obsah nebo zákaznická data.
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -8772,6 +8934,7 @@ U citlivého obsahu nespoléhej na „ono to za hodinu vyprší“. Když se omy
 - Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
 - Google Search Console Help: [Performance report](https://support.google.com/webmasters/answer/7576553)
 - Google Search Central: [Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
+- Google Search Central: [Localized versions](https://developers.google.com/search/docs/specialty/international/localized-versions)
 - Google Search Central: [Sitemaps overview](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview)
 - Google Search Central: [Using generative AI content on your website](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content)
 - Keep a Changelog: [Keep a Changelog](https://keepachangelog.com/en/)
@@ -8812,7 +8975,10 @@ U citlivého obsahu nespoléhej na „ono to za hodinu vyprší“. Když se omy
 - Umami: [Platform](https://umami.is/platform)
 - Umami: [FAQ](https://docs.umami.is/docs/faq)
 - W3C: [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)
+- W3C Internationalization: [Declaring language in HTML](https://www.w3.org/International/questions/qa-html-language-declarations)
 - W3C WAI: [Forms](https://www.w3.org/WAI/curricula/content-author-modules/forms/)
+- W3C WAI: [Language of Page](https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html)
+- W3C WAI: [Language of Parts](https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html)
 - W3C WAI: [Labeling Controls](https://www.w3.org/WAI/tutorials/forms/labels/)
 - W3C WAI: [Understanding SC 1.3.5 Identify Input Purpose](https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose.html)
 - W3C WAI: [User Notification](https://www.w3.org/WAI/tutorials/forms/notifications/)
@@ -8827,6 +8993,8 @@ U citlivého obsahu nespoléhej na „ono to za hodinu vyprší“. Když se omy
 ---
 
 ## Pracovní log
+
+- **2026-10-13:** Přidána příloha AX o vícejazyčném privacy-first webu: rozdíl mezi jazykem a regionem, URL struktura, `hreflang`, `html lang`, překladový proces, agregované měření jazykových variant, jazykový fallback, šablona jazykové karty a checklist s ověřenými zdroji Google Search Central a W3C.
 
 - **2026-10-13:** Přidána příloha AW o výkonu webu a cache: výkonový rozpočet, pravidla pro statická aktiva a HTML, CDN review, optimalizace obrázků, kontrola fontů a skriptů, agregované performance metriky, cache invalidace, review šablona a checklist s ověřenými zdroji MDN, web.dev a OWASP.
 
