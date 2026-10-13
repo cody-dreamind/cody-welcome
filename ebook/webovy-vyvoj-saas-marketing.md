@@ -9563,6 +9563,214 @@ Tohle není paranoia. To je provozní hygiena. Stejně jako zálohy se neověřu
 
 ---
 
+## Příloha BC: Zákaznické rozhovory bez nahrávací horečky
+
+Zákaznický rozhovor je jeden z nejlevnějších způsobů, jak přestat hádat. Jenže malé týmy ho často dělají dvěma extrémy: buď se neptají nikoho a staví podle pocitu, nebo nahrají hodinový call, nechají AI udělat přepis, nalijí ho do tří nástrojů a pak mají místo insightů novou datovou bažinu.
+
+Privacy-first výzkum má jednoduchý cíl: pochopit rozhodování zákazníka tak dobře, aby produkt, web i marketing mluvily k realitě — bez sběru zbytečných osobních detailů.
+
+**Codyho komentář:** Když potřebuješ vědět, proč zákazník nekoupil, nepotřebuješ znát jeho rodinnou historii, přesnou polohu a kompletní nahrávku každé pauzy. Potřebuješ dobré otázky, čisté poznámky a odvahu slyšet nepříjemnou pravdu.
+
+### 1) Nejdřív napiš rozhodnutí, které má rozhovor ovlivnit
+
+Rozhovor bez rozhodnutí se snadno změní v příjemné povídání. To může být lidsky fajn, ale produktově slabé. Před každým výzkumným kolem napiš jednu větu:
+
+> „Po těchto rozhovorech chceme rozhodnout, jestli upravíme onboarding pro malé B2B týmy, nebo raději nejdřív zjednodušíme pricing stránku.“
+
+Dobré rozhodnutí je konkrétní a blízké. Špatné zadání zní třeba:
+
+> „Chceme lépe pochopit zákazníky.“
+
+To je hezké, ale příliš široké. Lepší varianty:
+
+- Proč lidé po registraci nedokončí první hodnotnou akci?
+- Co zákazník potřebuje vidět na landing page, aby si řekl o demo?
+- Které části nabídky vyvolávají nejistotu před podpisem smlouvy?
+- Jakým jazykem zákazníci popisují problém, který my interně nazýváme jinak?
+
+Jedno výzkumné kolo má mít jedno hlavní rozhodnutí. Pokud z něj chceš vytáhnout produkt, pricing, positioning, onboarding i support najednou, rozhovor se nafoukne jako enterprise CRM prezentace a nikdo nebude šťastný.
+
+### 2) Účastníky vybírej podle situace, ne podle sympatií
+
+Nejjednodušší je mluvit s lidmi, kteří tě mají rádi. Dají milou zpětnou vazbu, pochválí design a všichni se cítí produktivně. Jenže pro rozhodování potřebuješ mix situací.
+
+Pro jedno malé kolo stačí pět až osm rozhovorů, pokud jsou dobře vybrané. Rozděl je podle kontextu:
+
+- zákazník, který koupil nedávno,
+- zákazník, který váhal a nakonec koupil,
+- člověk, který se ozval, ale nekoupil,
+- aktivní uživatel, který produkt používá pravidelně,
+- uživatel, který odpadl po prvním týdnu,
+- zákazník, který řešil podporu nebo migraci.
+
+Do pozvánky napiš jasně, proč se ptáš, jak dlouho to zabere a co se bude dít s poznámkami. Pokud plánuješ nahrávat, řekni to předem a nabídni variantu bez nahrávání. Souhlas s nahrávkou nemá být schovaný v kalendářové pozvánce jako ponožka za gaučem.
+
+### 3) Nahrávka není výchozí nastavení
+
+Nahrávání rozhovorů je pohodlné, ale zvyšuje odpovědnost. V nahrávce může být hlas, jména, interní problémy firmy, obchodní informace, citlivý kontext i osobní odbočky. Proto si před zapnutím nahrávání polož tři otázky:
+
+1. Potřebujeme nahrávku, nebo stačí strukturované poznámky?
+2. Kdo k ní bude mít přístup a jak dlouho?
+3. Co přesně z ní použijeme pro rozhodnutí?
+
+Privacy-first výchozí stav pro malý tým:
+
+- rozhovor vede jeden člověk,
+- druhý člověk zapisuje poznámky podle šablony,
+- citace se parafrázují, pokud není důvod držet přesné znění,
+- osobní a citlivé odbočky se do poznámek nepřenášejí,
+- nahrávka se používá jen u rozhovorů, kde je jasný důvod.
+
+Pokud nahrávku pořídíš, nastav retenční pravidlo. Například: původní nahrávku smazat po vytvoření anonymizovaného shrnutí a kontrole insightů, nejpozději do 30 dnů. Výjimky musí mít vlastníka a důvod.
+
+### 4) Otázky piš na minulost, ne na fantazii
+
+Lidé jsou špatní věštci vlastního budoucího chování. Když se zeptáš „Používali byste tuto funkci?“, často dostaneš milé „jo, to zní zajímavě“. Překlad: možná nikdy.
+
+Lepší otázky míří na konkrétní minulou situaci:
+
+- Kdy naposledy jste tento problém řešili?
+- Co vás k tomu donutilo právě tehdy?
+- Jak jste to řešili před naším produktem?
+- Kdo byl zapojený do rozhodnutí?
+- Co bylo nejtěžší vysvětlit interně?
+- Kde jste hledali informace?
+- Co vás skoro zastavilo?
+- Jak jste poznali, že řešení funguje?
+
+Vyhýbej se otázkám, které podsouvají odpověď:
+
+- „Líbí se vám, že jsme privacy-first?“
+- „Bylo by pro vás užitečné mít AI dashboard?“
+- „Je pro vás cena přijatelná?“
+
+Lepší verze:
+
+- „Kdy pro vás ochrana dat naposledy ovlivnila výběr dodavatele?“
+- „Jak dnes poznáte, že projekt běží správně?“
+- „Jak jste posuzovali cenu podobných služeb nebo nástrojů?“
+
+### 5) Poznámky ukládej jako insighty, ne jako přepis života
+
+U výzkumu je lákavé uložit všechno, protože „třeba se to bude hodit“. Jenže každé uložené všechno se časem promění v nepřehledné nic.
+
+Strukturovaná poznámka má obsahovat:
+
+- typ účastníka bez zbytečné identifikace,
+- relevantní kontext firmy nebo role,
+- konkrétní situaci nebo problém,
+- použitou alternativu,
+- spouštěč rozhodnutí,
+- bariéru nebo obavu,
+- citaci jen pokud je opravdu výstižná,
+- dopad na produkt, web, marketing nebo support,
+- míru jistoty: jedna zmínka, opakovaný vzor, nebo ověřený trend v datech.
+
+Příklad dobrého zápisu:
+
+> „B2B founder, 6 lidí v týmu. Před migrací webu řešil, jestli bude mít přístup k datům bez agentury. Bariéra: strach ze závislosti na dodavateli. Dopad: landing page má vysvětlit vlastnictví dat, exporty a exit plán hned u nabídky.“
+
+Nevhodný zápis:
+
+> „Pán byl nervózní, říkal hodně věcí o interních problémech, uložena celá nahrávka a přepis pro jistotu.“
+
+Insight má být použitelný bez toho, aby odhaloval víc člověka, než je nutné. Pokud tým neumí insight převést na rozhodnutí, pravděpodobně nejde o insight, ale o archivní suvenýr.
+
+### 6) Syntézu dělej veřejně pro tým, soukromě pro osoby
+
+Po rozhovorech nedělej jen složku „Research“. Udělej syntézu, která se dá použít při práci:
+
+- tři až pět opakovaných vzorů,
+- nejistoty, které zůstávají,
+- konkrétní rozhodnutí pro produkt nebo web,
+- co se nemění,
+- co ověřit kvantitativně,
+- co je jen Codyho nebo týmová hypotéza.
+
+Odděl interní citlivé poznámky od sdíleného výstupu. Týmový výstup má být anonymizovaný a zaměřený na rozhodování. Nemá obsahovat jména účastníků, osobní detaily, kompletní přepisy nebo interní informace zákazníků, které nejsou nutné pro práci.
+
+Praktický formát syntézy:
+
+1. **Rozhodnutí:** co jsme chtěli rozhodnout.
+2. **Vzory:** co se opakovalo napříč rozhovory.
+3. **Důkazy:** parafráze, bezpečné citace, doplňková data.
+4. **Dopad:** změny v produktu, webu, marketingu nebo supportu.
+5. **Rizika:** co jsme mohli špatně pochopit.
+6. **Další krok:** kdo co udělá a do kdy.
+
+### 7) Výzkum napoj na backlog, jinak zemře v dokumentu
+
+Největší škoda není špatný rozhovor. Největší škoda je dobrý rozhovor, který skončí v dokumentu, na který si nikdo za měsíc nevzpomene.
+
+Každý potvrzený vzor převeď na jednu z akcí:
+
+- úprava textu na webu,
+- nový článek nebo FAQ položka,
+- změna onboardingu,
+- produktová úprava,
+- support šablona,
+- pricing vysvětlení,
+- rozhodnutí nic neměnit, protože signál je slabý.
+
+Backlog položka má odkazovat na anonymizovaný insight, ne na kompletní nahrávku. Díky tomu může tým pracovat s důvodem rozhodnutí, aniž by se z produktového backlogu stal sklad osobních dat.
+
+### Šablona research karty
+
+```markdown
+## Research karta: [téma / rozhodnutí]
+
+### Rozhodnutí
+- Co chceme po kole rozhovorů rozhodnout:
+- Které možnosti zvažujeme:
+- Co se stane, když nerozhodneme:
+
+### Účastníci
+- Segmenty / situace:
+- Počet rozhovorů:
+- Kritéria výběru:
+- Nahrávání: ano/ne, důvod, retence:
+
+### Otázky
+- Situace v minulosti:
+- Použitá alternativa:
+- Bariéry:
+- Rozhodovací proces:
+- Jazyk zákazníka:
+
+### Insighty
+- Vzor 1:
+- Vzor 2:
+- Vzor 3:
+- Nejistoty:
+
+### Dopad
+- Produkt:
+- Web / marketing:
+- Support / obchod:
+- Co neměníme:
+
+### Privacy kontrola
+- Osobní údaje odstraněny:
+- Citace anonymizované:
+- Nahrávky smazat do:
+- Vlastník review:
+```
+
+### Checklist pro zákaznické rozhovory
+
+- [ ] Každé kolo rozhovorů má jedno jasné rozhodnutí.
+- [ ] Účastníci jsou vybraní podle situace, ne jen podle sympatií.
+- [ ] Pozvánka vysvětluje účel, délku, nahrávání a práci s poznámkami.
+- [ ] Nahrávání není výchozí stav; pokud existuje, má důvod, přístupová pravidla a retenci.
+- [ ] Otázky míří na konkrétní minulou zkušenost, ne na hypotetické sliby.
+- [ ] Poznámky neobsahují zbytečné osobní, citlivé nebo soukromé detaily.
+- [ ] Výstup pro tým je anonymizovaný a zaměřený na rozhodnutí.
+- [ ] Každý silný insight má navazující akci v backlogu, obsahu, supportu nebo obchodu.
+- [ ] Slabé signály jsou označené jako hypotézy, ne jako pravda vytesaná do Notionu.
+
+
+---
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -9668,6 +9876,8 @@ Tohle není paranoia. To je provozní hygiena. Stejně jako zálohy se neověřu
 ---
 
 ## Pracovní log
+
+- **2026-10-13:** Přidána příloha BC o zákaznických rozhovorech bez nahrávací horečky: rozhodnutí před výzkumem, výběr účastníků podle situace, nahrávky jako výjimka, otázky na minulou zkušenost, bezpečné poznámky, anonymizovaná syntéza, napojení insightů na backlog, šablona research karty a checklist.
 
 - **2026-10-13:** Přidána příloha BB o CRM a lead pipeline bez datové skládky: minimální lead data, realistické pipeline stavy, zdroje kontaktů bez osobních identifikátorů, bezpečné poznámky, retenční hygiena, automatizace, export test, šablona CRM karty a checklist.
 
