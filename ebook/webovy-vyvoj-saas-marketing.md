@@ -9212,6 +9212,164 @@ Stačí pravidelný crawl vlastního webu, agregovaná analytika a kontrola log�
 - [ ] Tým má měsíční crawl kontrolu pro `404`, redirecty, metadata a nechtěně veřejné stránky.
 
 
+## Příloha BA: Obsahová distribuce přes RSS a přímé odkazy
+
+Dobrý obsah není hotový publikováním. Hotový je až ve chvíli, kdy má stabilní URL, najde ho vyhledávač, přečte ho člověk a tým ho umí znovu použít bez toho, aby pokaždé vymýšlel nový mikrosystém sledování. Privacy-first distribuce proto staví na owned kanálech: web, RSS, dokumentace, changelog, e-mail posílaný jen lidem, kteří ho chtějí, a přímé odkazy bez sociálních skriptů.
+
+Cíl není ignorovat sociální sítě. Cíl je nebýt na nich závislý. Algoritmus může změnit dosah, reklamní účet může spadnout do kontroly a externí newsletter platforma může změnit podmínky. Vlastní URL a feed zůstávají. Není to sexy jako „growth hack“, ale funguje to i v pondělí ráno, což je podceňovaná vlastnost.
+
+### 1) Každý obsahový kus musí mít kanonickou domovskou adresu
+
+Nejdřív publikuj obsah na vlastním webu. Teprve potom ho zkracuj, shrnuj a posílej jinam. Kanonická adresa je místo, kam se mají vracet vyhledávače, čtenáři, interní odkazy i budoucí aktualizace.
+
+Praktická pravidla:
+
+- článek má stabilní slug, čitelné `<title>`, meta description a kanonickou URL,
+- changelog má vlastní položky s datem, verzí a odkazem na související dokumentaci,
+- případová studie má jednu hlavní stránku, ne pět kopií pro různé kampaně,
+- social post, newsletter i obchodní prezentace odkazují zpět na původní URL,
+- při aktualizaci obsahu se nemění URL, pokud k tomu není opravdu dobrý důvod.
+
+Když obsah začne žít na více místech, přidej do redakční karty pole „kanonický zdroj“. Tým pak ví, kam opravit překlep, odkud vzít aktuální verzi a co přesměrovat, když se něco sloučí.
+
+### 2) RSS není nostalgie, ale tichý distribuční protokol
+
+RSS nebo Atom feed dává lidem možnost sledovat novinky bez účtu, remarketingu a algoritmického prostředníka. Pro privacy-first web je to ideální doplněk blogu, changelogu, release notes i dokumentace. Feed můžeš odkazovat v HTML pomocí `rel="alternate"`; MDN popisuje `alternate` jako vztah pro alternativní reprezentace dokumentu, typicky včetně feedů ([MDN: rel="alternate"](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel)).
+
+Minimální feed pro malý web:
+
+- obsahuje název webu, popis a veřejnou URL,
+- každá položka má titulek, stabilní odkaz, datum publikace a stručný souhrn,
+- položky neobsahují trackingové parametry ani identifikátory odběratele,
+- feed se validuje po změnách šablony, například přes W3C Feed Validation Service ([W3C Feed Validation Service](https://validator.w3.org/feed/)),
+- odkaz na feed je viditelný v patičce, na blogu a v hlavičce HTML.
+
+**Codyho komentář:** RSS je jako normální poštovní schránka na webu. Nikdo netvrdí, že je nejmodernější. Ale nikdo ti ji přes noc nepřepne na „doporučené příspěvky“, kde se mezi tvůj článek a čtenáře vecpe video s tancujícím vysavačem.
+
+### 3) Repurposing dělej jako překlad kontextu, ne jako kopírování
+
+Jeden kvalitní článek může živit více formátů, ale každý formát má jiný úkol. Blog vysvětluje detail. Changelog oznamuje změnu. Newsletter připomíná, proč je to užitečné. Krátký post na síti má přivést pozornost zpět k plné verzi. Obchodní e-mail má otevřít konkrétní konverzaci.
+
+Z jedné kapitoly nebo článku může vzniknout:
+
+- krátký checklist pro interní audit,
+- vlákno nebo krátký post s jedním argumentem,
+- sekce do dokumentace nebo onboardingového e-mailu,
+- odpověď na častou otázku v obchodním procesu,
+- aktualizace šablony, kterou tým reálně používá.
+
+Důležité je neukládat do každého formátu jiná čísla, jiné sliby a jinou terminologii. Pokud se článek jmenuje „Privacy-first analytika pro B2B web“, neměl by se v newsletteru změnit na „Jak špehovat méně a vydělat víc“, i když by to mělo víc kliků. Krátkodobá zábava, dlouhodobá bolest.
+
+### 4) UTM disciplína stačí. Nepotřebuješ šmírovací cirkus
+
+Distribuci jde měřit i bez invazivního sledování. Pro většinu obsahového marketingu stačí čisté UTM parametry, agregovaná analytika a pravidelná redakční retrospektiva. Každá kampaň má mít pár předem dohodnutých hodnot, ne freestyle podle nálady člověka, který zrovna kopíruje odkaz.
+
+Jednoduchý systém:
+
+- `utm_source`: kanál, například `rss`, `newsletter`, `linkedin`, `partner`,
+- `utm_medium`: typ distribuce, například `owned`, `email`, `social`, `referral`,
+- `utm_campaign`: název kampaně ve formátu `YYYY-MM-tema`,
+- `utm_content`: volitelné rozlišení varianty odkazu, pokud testuješ text nebo umístění.
+
+UTM parametry nikdy nedávej do interních odkazů uvnitř webu. Nelep je ani do RSS feedu, pokud nechceš měřit feed jako jeden veřejný kanál. A hlavně do nich nedávej osobní údaje, e-maily, názvy zákazníků ani ID obchodních příležitostí. URL často končí v logu, chatu, CRM, screenshotu a občas i tam, kde bys ji nejraději neviděl.
+
+### 5) Redakční kalendář drž lehký a provozní
+
+Malý tým nepotřebuje složitý editorial board. Potřebuje rytmus, vlastnictví a jasné definice hotovo. Redakční kalendář proto nemusí být víc než tabulka nebo issue board s několika stavy:
+
+- **Nápad:** téma, cílovka, otázka, kterou článek zodpoví.
+- **Osnova:** hlavní body, zdroje, příklady, primární CTA.
+- **Draft:** text připravený k odborné a jazykové kontrole.
+- **Privacy review:** kontrola formulářů, embedů, měření, externích skriptů a odkazů.
+- **Publikováno:** URL, datum, autor, distribuční plán.
+- **Review:** termín aktualizace, důvod a vlastník.
+
+Každý obsahový kus by měl mít jeden další krok. Ne „někdy z toho něco uděláme“. Konkrétně: publikovat do RSS, přidat do dokumentace, poslat zákazníkům v onboardingové sekvenci, přepsat na checklist, nebo zahodit. Zahazování je legitimní. Ne každý nápad musí dostat vlastní landing page a malý pomníček v navigaci.
+
+### 6) Embedům a widgetům nastav přísnou laťku
+
+Distribuce často svádí k přidávání externích widgetů: social share tlačítka, vložené příspěvky, komentáře, heatmapy, chat bubliny a formuláře třetích stran. Každý takový prvek je mini dodavatel v cizím kabátě. Může načítat skripty, nastavovat cookies, volat externí domény a posílat referrery.
+
+Před vložením si polož otázky:
+
+- Jaký konkrétní obchodní nebo uživatelský účel widget plní?
+- Jaká data tečou ven už při načtení stránky?
+- Jde stejný výsledek udělat přímým odkazem, statickým obrázkem nebo vlastním formulářem?
+- Má widget evropské nastavení, DPA a vypnuté marketingové sledování?
+- Co se stane, když služba spadne, změní vzhled nebo začne načítat další skripty?
+
+Privacy-first výchozí volba je jednoduchá: přímý odkaz místo share skriptu, statický screenshot místo živého embeddu, vlastní formulář místo cizího iframe a RSS místo „sledujte nás všude, kde algoritmus dovolí“.
+
+### 7) Obsah aktualizuj podle rizika, ne podle výčitek
+
+Některý obsah stárne pomalu. Principy positioning, checklist pro homepage nebo vysvětlení datové minimalizace vydrží dlouho. Jiný obsah stárne rychle: právní povinnosti, ceny nástrojů, konkrétní konfigurace služeb, benchmarky, návody v rozhraní a seznamy doporučených dodavatelů.
+
+Nastav review frekvenci podle rizika:
+
+- právní a compliance obsah: kontrola při změně pravidel a minimálně pravidelný review,
+- technické návody: kontrola po větší změně produktu nebo závislosti,
+- nástrojové přehledy: kontrola před každým větším sdílením,
+- evergreen strategie: kontrola jednou za čas podle návštěvnosti a obchodní hodnoty,
+- staré kampaně: archivovat, přesměrovat nebo jasně označit jako historické.
+
+U aktualizovaného článku napiš, co se změnilo. Ne kvůli robotům. Kvůli lidem. Když někdo podle tvého checklistu upravuje produkční web, potřebuje vědět, jestli se změnila zásadní část, nebo jen formulace.
+
+### Šablona distribuční karty obsahu
+
+## Obsah: [název / URL]
+
+### Účel
+
+- Cílovka:
+- Otázka, kterou obsah zodpoví:
+- Primární CTA:
+- Kanonická URL:
+
+### Formáty
+
+- Plná verze:
+- Krátké shrnutí:
+- Checklist / šablona:
+- Newsletter / e-mail:
+- Interní použití:
+
+### Distribuce
+
+- RSS / feed:
+- Newsletter:
+- Přímé odkazy:
+- Partner / komunita:
+- Sociální síť bez externích widgetů:
+
+### Měření
+
+- UTM kampaň:
+- Agregované metriky:
+- Konverzní událost:
+- Review datum:
+
+### Privacy kontrola
+
+- Externí skripty:
+- Embedy:
+- Formuláře:
+- Osobní údaje v URL:
+- Retence dat:
+
+### Checklist pro RSS a obsahovou distribuci
+
+- [ ] Každý publikovaný obsah má stabilní kanonickou URL.
+- [ ] RSS nebo Atom feed je odkázaný v HTML i viditelný pro čtenáře.
+- [ ] Feed neobsahuje osobní identifikátory ani zbytečné trackingové parametry.
+- [ ] UTM pravidla jsou sjednocená a nepoužívají osobní údaje.
+- [ ] Interní odkazy zůstávají čisté, bez kampaní a session parametrů.
+- [ ] Repurposing vychází z jedné pravdivé verze, ne z pěti rozjetých kopií.
+- [ ] Externí embedy a widgety prošly privacy review.
+- [ ] Starší obsah má vlastníka, review datum a jasné rozhodnutí: aktualizovat, archivovat, přesměrovat nebo nechat být.
+
+
+---
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -9268,6 +9426,7 @@ Stačí pravidelný crawl vlastního webu, agregovaná analytika a kontrola log�
 - MDN: [Referrer-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy)
 - MDN: [X-Content-Type-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options)
 - MDN: [input type search](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/search)
+- MDN: [rel="alternate"](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/rel)
 - MDN: [HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status)
 - MDN: [prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)
 - NCSC: [Offline backups in an online world](https://www.ncsc.gov.uk/guidance/offline-backups-in-an-online-world)
@@ -9295,6 +9454,7 @@ Stačí pravidelný crawl vlastního webu, agregovaná analytika a kontrola log�
 - Umami: [Metric definitions](https://docs.umami.is/docs/metric-definitions)
 - Umami: [Platform](https://umami.is/platform)
 - Umami: [FAQ](https://docs.umami.is/docs/faq)
+- W3C: [Feed Validation Service](https://validator.w3.org/feed/)
 - W3C: [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)
 - W3C Internationalization: [Declaring language in HTML](https://www.w3.org/International/questions/qa-html-language-declarations)
 - W3C WAI: [Forms](https://www.w3.org/WAI/curricula/content-author-modules/forms/)
@@ -9315,6 +9475,8 @@ Stačí pravidelný crawl vlastního webu, agregovaná analytika a kontrola log�
 ---
 
 ## Pracovní log
+
+- **2026-10-13:** Přidána příloha BA o obsahové distribuci přes RSS a přímé odkazy: kanonické URL, feedy, repurposing, UTM disciplína bez osobních údajů, lehký redakční workflow, privacy review embedů, aktualizace staršího obsahu, distribuční karta a checklist.
 
 - **2026-10-13:** Přidána příloha AZ o indexaci, sitemap a robots: rozdělení veřejných URL, generování sitemap z kanonického zdroje, limity `robots.txt`, canonical URL, interní vyhledávání, redirect mapa, agregované měření indexace, šablona a checklist s ověřenými zdroji Google Search Central.
 
