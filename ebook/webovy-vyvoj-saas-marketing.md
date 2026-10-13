@@ -8220,6 +8220,196 @@ Privacy-first provoz není proti automatizaci. Je proti automatizaci, která taj
 - [ ] Měsíční review odhaluje mrtvé integrace, staré klíče a příliš široké payloady.
 - [ ] Nová automatizace neobchází vendor review, privacy review ani retenční pravidla.
 
+## Příloha AU: Export a smazání účtu bez paniky v databázi
+
+Export dat a smazání účtu často vypadají jako malá položka v backlogu. Ve skutečnosti jsou to zkoušky dospělosti SaaS produktu. Ukážou, jestli tým ví, kde data má, jak spolu souvisí, co musí uchovat kvůli zákonu a co může bezpečně odstranit. Pokud se při žádosti o smazání účtu rozjede ruční lov přes databázi, billing, support, analytiku a tři zapomenuté integrace, produkt není privacy-first. Je jen privacy-optimistický. Což je hezké slovo pro „snad to nepraskne“.
+
+GDPR dává lidem mimo jiné právo na výmaz a právo na přenositelnost údajů. EDPB ve svém průvodci pro malé podniky připomíná, že správce má být připravený na žádosti subjektů údajů a že zpracovatel má správci pomáhat. U přenositelnosti jde o strukturovaný, běžně používaný a strojově čitelný formát, pokud jsou splněné podmínky práva na portabilitu ([EDPB: Respect individuals’ rights](https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_en)). Evropská komise zároveň uvádí, že organizace má odpovědět bez zbytečného odkladu a zpravidla do jednoho měsíce od obdržení žádosti; při odmítnutí musí vysvětlit důvody a poučit člověka o možnosti stížnosti nebo právní obrany ([European Commission: Dealing with requests from individuals](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en)).
+
+Praktický závěr pro malý SaaS: export a smazání nesmí být „až bude enterprise zákazník“. Patří do návrhu účtu od začátku.
+
+### 1. Rozděl data podle toho, co se s nimi má stát
+
+Ne všechna data se při odchodu zákazníka chovají stejně. Nejčastější chyba je udělat jedno velké tlačítko „smazat vše“ a pak zjistit, že tím rozbiješ fakturaci, auditní stopu nebo oprávněné právní nároky. Druhá nejčastější chyba je nesmazat skoro nic, protože „co kdyby“. Obě varianty jsou špatně, jen každá jinak.
+
+Rozděl data minimálně do pěti skupin:
+
+1. **Účet a identita:** e-mail, jméno, role, organizace, přihlašovací metody, MFA.
+2. **Produktový obsah:** projekty, dokumenty, záznamy, soubory, konfigurace, zákaznická data.
+3. **Billing a smluvní data:** faktury, platby, DIČ, objednávky, tarif, účetní doklady.
+4. **Support a komunikace:** tickety, e-maily, poznámky, nahrávky, diagnostické exporty.
+5. **Provozní metadata:** logy, auditní stopa, bezpečnostní události, agregovaná analytika.
+
+U každé skupiny si napiš:
+
+- kdo je vlastník,
+- kde data fyzicky jsou,
+- zda se exportují,
+- zda se mažou okamžitě,
+- zda se anonymizují,
+- zda se drží kvůli právní povinnosti nebo bezpečnosti,
+- jak dlouho po ukončení účtu zůstávají.
+
+Tohle není právní poezie. Je to provozní mapa. Když nevíš, kam datová skupina patří, nebudeš vědět, co udělat při odchodu zákazníka.
+
+### 2. Export má být čitelný pro člověka i použitelný pro stroj
+
+Export není screenshot z administrace ani ZIP plný náhodných JSON souborů bez kontextu. Dobrý export pomáhá zákazníkovi odejít, archivovat si práci nebo přejít jinam. Ano, i to je součást důvěry. Když zákazník ví, že není zamčený, paradoxně má menší potřebu utíkat.
+
+Minimální exportní balíček:
+
+- `README.md` s vysvětlením struktury,
+- `account.json` se základními údaji účtu a organizace,
+- `projects/` nebo podobná složka s hlavním produktovým obsahem,
+- `files/` pro přílohy a uploady,
+- `metadata.json` s časem exportu, verzí schématu a kontaktem na podporu,
+- `checksums.txt` pro kontrolu integrity větších exportů.
+
+Formáty drž obyčejné: JSON, CSV, Markdown, PDF pro lidské dokumenty, původní formáty souborů pro uploady. Nevymýšlej vlastní binární formát, pokud k tomu nemáš velmi dobrý důvod. Export nemá dokazovat, že tým umí serializaci jako fantasy žánr.
+
+Příklad `metadata.json`:
+
+```json
+{
+  "export_version": "1.0",
+  "created_at": "2026-10-13T12:00:00Z",
+  "workspace_id": "ws_123",
+  "included_sections": ["account", "projects", "files"],
+  "excluded_sections": ["billing_documents", "security_logs"],
+  "support_contact": "support@example.eu"
+}
+```
+
+U vyloučených částí vysvětli proč. Například faktury mohou být dostupné zvlášť v billing portálu a bezpečnostní logy nemusí být součástí uživatelského exportu, protože obsahují interní provozní metadata.
+
+### 3. Smazání účtu navrhni jako workflow, ne jako SQL kouzlo
+
+Smazání účtu má mít stavový model. Jinak bude někdo jednou spouštět ruční skript, který fungoval naposledy na stagingu v roce, kdy všichni říkali „metaverse“ bez ironie.
+
+Praktické stavy:
+
+1. **Žádost přijata:** zaznamená se čas, identita žadatele a rozsah žádosti.
+2. **Ověření identity:** u citlivých účtů se ověří, že žádost podává oprávněná osoba.
+3. **Předběžná kontrola:** zjistí se právní povinnosti, aktivní fakturace, otevřené incidenty a vlastnictví workspace.
+4. **Export nabídnut:** pokud to dává smysl, uživatel dostane možnost stáhnout data před smazáním.
+5. **Deaktivace:** účet se uzamkne nebo označí k ukončení, aby nevznikala nová data.
+6. **Mazání/anonymizace:** produktový obsah se smaže nebo anonymizuje podle mapy dat.
+7. **Propagace do dodavatelů:** support, e-mailing, CRM, analytika a úložiště dostanou vlastní akce.
+8. **Potvrzení:** uživatel dostane stručnou zprávu, co bylo provedeno a co zůstává kvůli zákonným nebo bezpečnostním důvodům.
+
+Mazání musí být idempotentní. Když se job spustí dvakrát, nesmí podruhé poškodit související účet, billing záznam nebo auditní stopu. Pokud mazání selže v půlce, musí jít bezpečně pokračovat.
+
+### 4. Anonymizace není přejmenování na „smazaný uživatel“
+
+Anonymizace znamená, že osobu už nelze rozumně znovu identifikovat. Nestačí změnit e-mail na `deleted@example.com`, když ve vedlejší tabulce zůstává jméno, IP adresa, unikátní slug, URL s osobním údajem nebo export v support ticketu.
+
+U anonymizace kontroluj hlavně:
+
+- textová pole, kde lidé mohli napsat osobní údaje,
+- názvy projektů, workspace a souborů,
+- URL parametry a referrery,
+- interní poznámky obchodníků a supportu,
+- logy s e-mailem, IP adresou nebo user ID,
+- metadata uploadů,
+- cache, search index a background job queue.
+
+Někdy je lepší data smazat než anonymizovat. Anonymizace se hodí pro agregované statistiky, auditní vazby nebo historické reporty, kde produkt nepotřebuje původní identitu. Produktový obsah zákazníka ale často nemá proč zůstávat.
+
+**Codyho komentář:** Pokud anonymizace vyžaduje víc speciálních pravidel než samotná funkce, je to signál, že produkt ukládá moc identity na moc místech. Data architecture bingo, gratuluji, vyhráli jste migraci.
+
+### 5. Dodavatelé musí být součást procesu
+
+Žádost nekončí ve vlastní databázi. Pokud zákaznická data posíláš do e-mailingu, supportu, CRM, monitoringu nebo platební služby, potřebuješ vědět, co se tam má stát. EDPB připomíná, že pokud byly údaje předané dalším organizacím, správce má informovat příjemce o žádosti o výmaz, pokud to není nemožné nebo nepřiměřené ([EDPB: Respect individuals’ rights](https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_en)).
+
+Praktický vendor seznam pro offboarding:
+
+- název dodavatele,
+- typ dat,
+- zda má API pro výmaz/export,
+- zda výmaz dělá automaticky nebo ručně,
+- jak se potvrzuje dokončení,
+- kdo je interní vlastník,
+- jak dlouho dodavatel drží zálohy,
+- odkaz na DPA nebo dokumentaci.
+
+Pokud dodavatel neumí výmaz řešit rozumně, je to riziko při výběru nástroje. Ne až při incidentu. Při vendor review se ptej: „Jak smažeme zákazníka, když odejde?“ Pokud odpověď zní „napište nám na support a uvidíme“, zapiš riziko a připrav alternativu.
+
+### 6. Uživatelská komunikace má být klidná a konkrétní
+
+Smazání účtu není místo pro manipulativní texty typu „opravdu nás chcete opustit?“ ani pro deset tmavých vzorů. Můžeš nabídnout export, pauzu nebo kontakt na podporu. Ale nesmíš z toho udělat únikovou místnost.
+
+Dobrá potvrzovací obrazovka obsahuje:
+
+- co přesně se smaže,
+- co zůstane a proč,
+- kdy bude proces dokončen,
+- zda bude možné obnovit účet,
+- jak stáhnout export,
+- kontakt pro dotazy.
+
+Příklad textu:
+
+> Po potvrzení deaktivujeme váš účet a zahájíme mazání produktových dat. Fakturační doklady ponecháme po dobu vyžadovanou právními předpisy. Technické bezpečnostní logy držíme omezenou dobu podle retenční politiky. Před smazáním si můžete stáhnout export dat.
+
+Tohle je nudné. Výborně. U práv a dat má být nudné všechno kromě toho, jak rychle tým najde chybu.
+
+### Šablona offboarding runbooku
+
+```markdown
+## Offboarding: [produkt / workspace]
+
+### Kontext žádosti
+- Datum přijetí:
+- Kanál:
+- Žadatel:
+- Ověřená identita: ano / ne
+- Rozsah: export / smazání / omezení / oprava / jiné
+
+### Datové skupiny
+- Účet a identita:
+- Produktový obsah:
+- Uploady a exporty:
+- Billing a smluvní data:
+- Support a komunikace:
+- Logy a auditní stopa:
+- Analytika:
+
+### Akce
+- Export připraven:
+- Účet deaktivován:
+- Produktová data smazána:
+- Data anonymizována:
+- Dodavatelé informováni:
+- Výjimky a důvody:
+
+### Komunikace
+- Potvrzení přijetí odesláno:
+- Export odkaz odeslán:
+- Dokončení potvrzeno:
+- Interní poznámka:
+
+### Kontrola
+- Job doběhl bez chyby:
+- Search index/cache vyčištěny:
+- Fronty bez zbytkových jobů:
+- Support exporty odstraněny:
+- Další review datum:
+```
+
+### Checklist pro export a smazání účtu
+
+- [ ] Máme mapu dat podle účtu, produktového obsahu, billing dat, supportu, logů a analytiky.
+- [ ] Víme, která data se exportují, mažou, anonymizují nebo zůstávají kvůli zákonné povinnosti.
+- [ ] Export má čitelný popis, běžné formáty, verzi schématu a kontrolu integrity.
+- [ ] Smazání účtu má stavový workflow, ne ruční SQL improvizaci.
+- [ ] Mazací job je idempotentní a umí bezpečně pokračovat po chybě.
+- [ ] Před smazáním se kontroluje vlastnictví workspace, aktivní fakturace a otevřené incidenty.
+- [ ] Dodavatelé jsou součástí procesu výmazu nebo anonymizace.
+- [ ] Uživateli jasně říkáme, co se smaže, co zůstane a proč.
+- [ ] Search indexy, cache, fronty, support exporty a logy mají vlastní pravidla.
+- [ ] Offboarding proces se testuje na syntetickém účtu aspoň při větší změně datového modelu.
+- [ ] Retenční politika odpovídá tomu, co systém opravdu dělá.
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -8230,12 +8420,14 @@ Privacy-first provoz není proti automatizaci. Je proti automatizaci, která taj
 - ENISA: [Cloud Security Guide for SMEs](https://www.enisa.europa.eu/publications/cloud-security-guide-for-smes)
 - ENISA: [Technical implementation guidance on cybersecurity risk management measures](https://www.enisa.europa.eu/publications/technical-implementation-guidance-on-cybersecurity-risk-management-measures)
 - European Commission: [European Accessibility Act](https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en)
+- European Commission: [Dealing with requests from individuals](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en)
 - European Commission: [VAT invoicing rules](https://taxation-customs.ec.europa.eu/taxation/vat/businesses/vat-invoicing-rules_en)
 - European Data Protection Board: [Be compliant — Data protection guide for small business](https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en)
 - European Data Protection Board: [Data controller or data processor](https://www.edpb.europa.eu/sme/learn-the-basics/data-controller-or-data-processor_en)
 - European Data Protection Board: [Data protection impact assessment](https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/data-protection-impact-assessment_en)
 - European Data Protection Board: [Template for Data Protection Impact Assessment](https://www.edpb.europa.eu/our-work-tools/documents/public-consultations/2026/edpb-dpia-template_en)
 - European Data Protection Board: [Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)
+- European Data Protection Board: [Respect individuals’ rights](https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_en)
 - European Data Protection Board: [Basic principles](https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en)
 - European Data Protection Board: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_de)
 - European Data Protection Board: [Guidelines 07/2020 on the concepts of controller and processor in the GDPR](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en)
@@ -8305,6 +8497,8 @@ Privacy-first provoz není proti automatizaci. Je proti automatizaci, která taj
 ---
 
 ## Pracovní log
+
+- **2026-10-13:** Přidána příloha AU o exportu a smazání účtu: datové skupiny, strojově čitelný export, workflow výmazu, anonymizace, dodavatelé, komunikace se zákazníkem, offboarding runbook a checklist s ověřenými zdroji EDPB a Evropské komise.
 
 - **2026-10-13:** Přidána příloha AT o webhook integracích, API klíčích a datových tocích: obchodní účel integrací, minimální payload, bezpečná práce s klíči, ověřování webhooků, logování bez úniku dat, vypínače, měsíční review, šablona a checklist.
 
