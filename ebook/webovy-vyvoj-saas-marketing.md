@@ -10080,6 +10080,181 @@ Když někdo přidá nový typ logu, měl by projít stejnou otázkou jako nová
 - [ ] Přístup k logům se kontroluje podobně jako přístup k produkčním datům.
 
 
+## Příloha BF: B2B due diligence a data room bez úniku důvěry
+
+V malém SaaS týmu přijde zvláštní okamžik: konečně se ozve větší zákazník, který má rozpočet, problém i motivaci. A hned po dobrém demu pošle bezpečnostní dotazník, žádost o DPA, seznam subprocesorů, otázku na hosting, incidenty, zálohy, přístupy, export dat a někdy i Excel, který vypadá jako archeologický nález z enterprise nákupu.
+
+Tohle není trest za úspěch. Je to signál, že zákazník bere riziko vážně. Privacy-first firma by na něj neměla reagovat panikou, ale připraveným balíčkem důvěry: krátkým, pravdivým, aktualizovaným a sdíleným bezpečně. NIS2 posiluje důraz na řízení kybernetických rizik a dodavatelský řetězec, takže i menší SaaS často dostane otázky inspirované světem větších organizací ([European Commission: NIS2 Directive](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive)). EDPB zároveň připomíná, že u zpracování osobních údajů musí být jasné role správce a zpracovatele a organizace má umět doložit soulad, ne jen slíbit „GDPR máme“ ([EDPB: Data controller or data processor](https://www.edpb.europa.eu/sme/learn-the-basics/data-controller-or-data-processor_en), [EDPB: Be compliant](https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en)).
+
+> **Codyho komentář:** Data room není místo, kam naházíš všechna PDF, aby zákazník viděl, že se snažíš. Je to výloha důvěry. Když je v ní chaos, staré dokumenty a screenshoty z produkce, prodáváš nejistotu s přílohou.
+
+### 1) Připrav trust balíček dřív, než začne procurement hořet
+
+Větší zákazník nechce číst román. Chce rychle zjistit, jestli produkt splňuje jeho minimální bezpečnostní, právní a provozní očekávání. Proto si připrav balíček dokumentů, který odpoví na opakující se otázky.
+
+Praktické minimum:
+
+- **Stručný security overview:** kde služba běží, jak řešíš přístupy, šifrování, zálohy, logování a incidenty.
+- **Privacy overview:** jaké typy osobních údajů zpracováváš, proč, jak dlouho a v jaké roli.
+- **DPA / zpracovatelský postup:** buď vzor dokumentu, nebo jasný proces, kdo ho řeší.
+- **Subprocesory:** název služby, účel, region, typ dat a odkaz na dokumentaci.
+- **Export a smazání:** jak zákazník získá data zpět a co se děje při ukončení.
+- **Kontaktní cesta:** e-mail nebo formulář pro bezpečnostní a privacy dotazy.
+
+Dobré pravidlo: když stejnou odpověď posíláš potřetí ručně, patří do trust balíčku. Ne proto, aby zákazník dostal víc papíru, ale aby tým odpovídal konzistentně.
+
+### 2) Data room sdílej podle potřeby, ne jako veřejný sklad
+
+Ne každý dokument má být veřejný. Některé informace patří na web, některé do kontrolovaného odkazu a některé jen pod NDA nebo po ověření obchodního kontextu.
+
+Rozděl dokumenty do tří vrstev:
+
+1. **Veřejná trust stránka:** obecné informace o hostingu, soukromí, bezpečnosti, subprocesorech a kontaktu.
+2. **Kontrolovaný data room:** detailnější dokumenty pro aktivní obchodní jednání, například bezpečnostní dotazník, DPA návrh nebo architektura na vyšší úrovni.
+3. **Citlivé odpovědi na žádost:** interní postupy, výsledky penetračních testů, detailní incidentové scénáře nebo infrastruktura.
+
+Do data roomu nepatří:
+
+- produkční screenshoty se zákaznickými daty,
+- celé logy, exporty nebo ukázky databáze,
+- tajemství, tokeny, klíče, interní URL a neveřejné administrátorské odkazy,
+- dokumenty bez vlastníka a data poslední revize,
+- staré odpovědi, které už neplatí.
+
+Privacy-first přístup říká: sdílej dost na vyhodnocení rizika, ale ne tolik, aby se ze sales procesu stal nový bezpečnostní problém.
+
+### 3) Bezpečnostní dotazník drž jako produktový artefakt
+
+Security questionnaire není jednorázová otrava. Je to mapa toho, co trh považuje za důležité. Pokud se zákazníci opakovaně ptají na SSO, audit log, datové regiony, retenci nebo subprocesory, není to jen obchodní administrativa. Je to signál pro roadmapu.
+
+U každé odpovědi si hlídej:
+
+- **pravdivost:** neslibuj SOC 2, ISO certifikaci nebo nepřetržitý dohled, pokud to nemáš,
+- **konkrétnost:** „data jsou v EU regionu u [dodavatel]“ je lepší než „dbáme na bezpečí“,
+- **aktuálnost:** odpověď má datum revize a vlastníka,
+- **rozsah:** odpovídej na otázku, nepřidávej interní detaily jen proto, že působí technicky,
+- **návaznost:** když odpověď odhalí slabinu, vytvoř backlog položku.
+
+Příklad dobré odpovědi:
+
+> Produkční aplikační data běží v EU regionu. Přístupy k produkci jsou omezené na provozní roli, chráněné MFA a kontrolované v pravidelném access review. Detailní seznam subprocesorů sdílíme v trust balíčku a aktualizujeme při změně dodavatele.
+
+Příklad špatné odpovědi:
+
+> Ano, bezpečnost řešíme moderně a všechno je v cloudu.
+
+Druhá odpověď neříká nic. Jen má na sobě kravatu.
+
+### 4) DPA a subprocesory propojuj s reálným tokem dat
+
+Dokumenty musí odpovídat skutečnosti. Pokud privacy overview tvrdí, že data zůstávají v EU, ale support nástroj posílá přílohy mimo Evropu, problém není v dokumentu. Problém je v realitě.
+
+U každého subprocesoru udržuj minimálně:
+
+- název služby a dodavatele,
+- účel použití,
+- typ dat,
+- region zpracování a ukládání,
+- odkaz na DPA nebo právní podmínky,
+- postup při incidentu,
+- export a ukončení,
+- vlastníka v týmu.
+
+EDPB u malých firem zdůrazňuje odpovědnost a schopnost doložit soulad. Prakticky to znamená, že seznam subprocesorů není marketingová tabulka. Je to živý provozní dokument, který se mění s architekturou produktu ([EDPB: Be compliant](https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en)).
+
+### 5) Trust stránka má prodávat klid, ne compliance divadlo
+
+Veřejná trust stránka může zkrátit sales cyklus. Nemusí prozradit citlivé detaily. Má ukázat, že tým ví, co dělá.
+
+Dobrá trust stránka obsahuje:
+
+- kde služba běží a jak tým přemýšlí o evropském provozu,
+- jaké typy dat produkt zpracovává,
+- principy minimalizace, retence a exportu,
+- odkaz na privacy policy, podmínky a kontakt,
+- seznam hlavních subprocesorů nebo postup, jak ho získat,
+- přehled bezpečnostních opatření v lidském jazyce,
+- changelog důležitých změn v trust informacích.
+
+Nepoužívej trust stránku jako vitrínu buzzwordů. „Enterprise-grade military-grade AI-powered zero-trust cloud-native“ je věta, která by měla dostat vlastní cookie lištu a omluvu.
+
+### 6) Přístup do data roomu loguj a časově omezuj
+
+Data room je sám o sobě systém s rizikem. Pokud sdílíš neveřejné dokumenty, potřebuješ vědět komu, proč, na jak dlouho a jak přístup odebrat.
+
+Minimum:
+
+- sdílej odkazy konkrétním lidem, ne veřejným anonymním odkazem,
+- nastav expiraci přístupu,
+- nepovoluj automatické indexování ani veřejné náhledy,
+- loguj přístup na úrovni organizace nebo obchodní příležitosti,
+- po ukončení jednání přístup odeber,
+- dokumenty watermarkuj jen tam, kde to nepoškodí použitelnost a přístupnost.
+
+Pozor na přehnané sledování. Nepotřebuješ heatmapu čtení bezpečnostního dokumentu ani detailní profil nákupčího. Stačí vědět, že přístup byl poskytnut, komu, kdy a k jaké verzi dokumentu.
+
+### 7) Z dotazníků dělej roadmapu důvěry
+
+Jednou měsíčně projdi otázky, které přišly od zákazníků. Rozděl je do tří skupin:
+
+1. **Už umíme:** odpověď patří do trust balíčku.
+2. **Umíme částečně:** odpověď musí být přesná a slabina jde do backlogu.
+3. **Nechceme nebo neumíme:** odpověď má být férová, ne kreativně mlhavá.
+
+Když se pět zákazníků ptá na stejné riziko, není to pět otravných dotazů. Je to prioritizační signál. Možná potřebuješ lepší dokumentaci. Možná lepší produktovou funkci. Možná jen přestat používat nástroj, který každý dotazník rozsvítí červeně jako vánoční stromek v serverovně.
+
+### Šablona trust balíčku
+
+## Trust balíček: [produkt / verze]
+
+### Kontext
+- Produkt:
+- Cíloví zákazníci:
+- Typická data:
+- Provozní region:
+- Vlastník balíčku:
+- Datum poslední revize:
+
+### Veřejné odkazy
+- Privacy policy:
+- Obchodní podmínky:
+- Trust / security stránka:
+- Kontakt pro bezpečnostní dotazy:
+- Status page:
+
+### Dokumenty pro data room
+- Security overview:
+- Privacy overview:
+- DPA / smluvní postup:
+- Seznam subprocesorů:
+- Export a smazání dat:
+- Incident response summary:
+
+### Sdílení
+- Kdo smí schválit přístup:
+- Výchozí expirace přístupu:
+- Evidence sdílení:
+- Postup odebrání:
+
+### Backlog důvěry
+- Opakované otázky zákazníků:
+- Slabiny k doplnění:
+- Plánované změny:
+- Další review:
+
+### Checklist pro B2B due diligence a data room
+
+- [ ] Máme krátký trust balíček pro opakované privacy, security a procurement dotazy.
+- [ ] Každý dokument má vlastníka, datum revize a jasný rozsah použití.
+- [ ] Veřejná trust stránka neobsahuje citlivé interní detaily ani marketingové přehánění.
+- [ ] Data room je přístupný jen konkrétním lidem a přístupy mají expiraci.
+- [ ] Sdílené dokumenty neobsahují produkční osobní data, logy, tokeny ani interní URL.
+- [ ] Seznam subprocesorů odpovídá skutečným datovým tokům produktu.
+- [ ] Bezpečnostní dotazníky se ukládají jako znalostní báze, ne jako chaos v e-mailu.
+- [ ] Opakované zákaznické otázky se mění na backlog důvěry nebo lepší dokumentaci.
+- [ ] Když něco neumíme, odpovídáme pravdivě a popíšeme kompenzační opatření nebo plán.
+
+
 ---
 
 ## Zdroje
@@ -10187,6 +10362,8 @@ Když někdo přidá nový typ logu, měl by projít stejnou otázkou jako nová
 ---
 
 ## Pracovní log
+
+- **2026-10-13:** Přidána příloha BF o B2B due diligence a data roomu: trust balíček, vrstvy sdílení dokumentů, bezpečnostní dotazníky, DPA a subprocesory podle reálných datových toků, trust stránka, expirace přístupů, roadmapa důvěry, šablona a checklist.
 
 - **2026-10-13:** Přidána příloha BE o auditní stopě a logování bez datového skladiště: rozdělení technických logů, auditních logů a analytiky, bezpečný tvar auditních záznamů, zákaz logování tajemství, retence, přístupy k logům, korelační ID, logovací karta a checklist.
 
