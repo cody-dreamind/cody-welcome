@@ -6995,6 +6995,157 @@ Do monitoringu stagingu nedávej stejné alerty jako do produkce. Staging může
 - [ ] Staging má viditelný banner, aby se nepletl s produkcí.
 - [ ] Tým ví, co se do stagingu nesmí nahrávat, kopírovat ani screenshotovat.
 
+## Příloha AN: Zálohy a obnova bez falešného pocitu bezpečí
+
+Záloha není soubor někde v cloudu. Záloha je schopnost obnovit službu v rozumném čase, s přijatelnou ztrátou dat a bez toho, aby tým improvizoval podle starého Slack vlákna. Dokud obnovu nikdo nevyzkoušel, nemáš zálohu. Máš optimistickou víru v budoucnost, což je hezké v poezii, horší v produkci.
+
+NCSC ve svém doporučení k offline zálohám upozorňuje, že zálohy mají být chráněné i proti situaci, kdy je primární prostředí kompromitované; proto dává smysl držet kopie odděleně a pravidelně testovat obnovu ([NCSC: Offline backups in an online world](https://www.ncsc.gov.uk/guidance/offline-backups-in-an-online-world)). Pro privacy-first SaaS je to zároveň otázka důvěry: zákazník nepotřebuje slyšet „máme snapshoty“, ale „víme, co obnovíme, kdo to smí udělat a jak dlouho to potrvá“.
+
+### 1) Začni požadavkem na obnovu, ne typem zálohy
+
+Nejdřív si napiš dvě hodnoty:
+
+- **RPO:** kolik dat smíš maximálně ztratit,
+- **RTO:** jak dlouho smí trvat návrat služby.
+
+Pro marketingový web může být přijatelné obnovit v řádu hodin, pokud obsah existuje v repozitáři. Pro SaaS s placenými zákazníky může být ztráta několika hodin dat nepřijatelná. Pro faktury, auditní logy nebo zákaznické exporty budeš mít jiné požadavky než pro dočasné cache.
+
+Praktický příklad:
+
+- databáze aplikace: RPO 15 minut, RTO 2 hodiny,
+- soubory nahrané zákazníky: RPO 1 hodina, RTO 4 hodiny,
+- marketingový web: RPO 24 hodin, RTO 1 hodina,
+- analytika: RPO 24 hodin, RTO 1 pracovní den,
+- cache a build artefakty: bez zálohy, znovu se vytvoří.
+
+Tím se z abstraktní debaty „jak často backupovat“ stane produktové rozhodnutí. Když někdo požaduje kratší RPO, musí být jasné, kolik to stojí technicky, finančně i provozně.
+
+### 2) Zálohuj podle datových tříd
+
+Jedna globální politika záloh pro celý systém je jednoduchá na papíře a špatná v praxi. Rozděl data podle účelu a citlivosti.
+
+Typické třídy:
+
+- **konfigurační zdroj:** kód, infrastruktura, migrační skripty, šablony,
+- **produkční databáze:** účty, workspace, nastavení, produktová data,
+- **souborové úložiště:** uploady, exporty, přílohy, importní balíky,
+- **auditní a bezpečnostní záznamy:** přihlášení, administrátorské zásahy, změny práv,
+- **provozní logy:** chyby, requesty, metriky, technické události,
+- **externí systémy:** billing, e-mail, support, CRM, účetnictví.
+
+Každá třída má mít vlastní pravidlo: zálohovat/ne, frekvence, retence, šifrování, kdo smí obnovovat a kam se obnova smí provést. Zákaznický upload například nepotřebuje být ve stejném exportu jako aplikační secrets. Auditní log zase nechceš přepsat jen proto, že obnovuješ účet zákazníka po omylu.
+
+### 3) Obnova musí mít bezpečné místo přistání
+
+Nejhorší restore plán je „nahrajeme to do produkce a uvidíme“. Obnova potřebuje bezpečné místo, kde lze zkontrolovat integritu dat, migrace a vedlejší efekty.
+
+Doporučený tok:
+
+1. obnov zálohu do izolovaného restore prostředí,
+2. zakaž odchozí integrace, cron úlohy a webhooky,
+3. ověř verzi schématu databáze a migrace,
+4. zkontroluj počet klíčových záznamů a integritu vazeb,
+5. spusť aplikační smoke testy,
+6. rozhodni, jestli se obnovuje celý systém, tenant, tabulka nebo konkrétní záznam,
+7. proveď produkční zásah s auditním zápisem.
+
+Tohle zní pomalu, ale ve stresu šetří čas. Bez restore prostředí riskuješ, že dobrá záloha poškodí živý systém jen proto, že byla obnovena do špatného kontextu.
+
+### 4) Test obnovy je běžná údržba, ne sváteční rituál
+
+Zálohy se kazí potichu. Změní se bucket politika. Expirovaný klíč přestane číst archiv. Nová tabulka není v exportu. Šifrovací klíč zná jen člověk, který je zrovna na dovolené a pravděpodobně zaslouženě ignoruje telefon.
+
+Minimální rytmus pro malý tým:
+
+- měsíčně: obnov poslední databázovou zálohu do izolovaného prostředí,
+- kvartálně: proveď end-to-end restore cvičení pro kritický scénář,
+- po větší změně datového modelu: ověř, že se zálohuje nová část systému,
+- po změně dodavatele: zkontroluj export, retenci a přístupová práva,
+- po incidentu: doplň runbook o to, co chybělo.
+
+Test obnovy nemusí vždy znamenat celodenní požární cvičení. Stačí malý, opakovatelný scénář: vybrat zálohu, obnovit ji, ověřit integritu, zapsat čas a nálezy. Pokud to trvá moc dlouho, je to signál. Ne výmluva.
+
+### 5) Zálohy jsou osobní data také
+
+Privacy-first provoz často zapomíná, že záloha může obsahovat stejná osobní data jako produkce, jen v horším obalu. Bývá hůř prohledatelná, hůř mazatelná a déle žijící.
+
+Pravidla:
+
+- zálohy šifruj a odděl klíče od samotných archivů,
+- přístup k zálohám dej jen rolím, které obnovu skutečně řeší,
+- dokumentuj retenci podle datové třídy,
+- při žádosti o smazání vysvětli, jak se řeší data v zálohách,
+- zálohy nepoužívej jako pohodlný zdroj dat pro analytiku nebo vývoj,
+- restore do neprodukčního prostředí vždy anonymizuj nebo drž izolovaný.
+
+Pokud máš retenční politiku pro produkční data na 90 dní, ale zálohy držíš tři roky bez důvodu, máš neviditelný dluh. A ne, „možná se to někdy bude hodit“ není důvod. To je nostalgie se storage účtem.
+
+### 6) Připrav scénáře, ne jen technologii
+
+Dobrá obnova je scénář podle typu problému. Každý vyžaduje jiný postup.
+
+Příklady scénářů:
+
+- **omylem smazaný zákaznický workspace:** obnov konkrétní tenant nebo záznamy,
+- **špatná migrace:** zastav zápisy, vrať schéma nebo spusť opravnou migraci,
+- **kompromitovaný admin účet:** rotuj klíče, obnov bezpečný stav práv, zachovej auditní důkazy,
+- **poškozené souborové úložiště:** ověř checksumy, obnov konkrétní prefix, zákazníkům vysvětli dopad,
+- **výpadek regionu:** přepni na připravený fallback nebo obnov do náhradní lokality,
+- **ransomware nebo smazané prostředí:** použij oddělené offline/immutable kopie a obnov minimální provoz.
+
+Každý scénář má mít vlastníka, rozhodovací práh a komunikační poznámku. Technická obnova bez komunikace je poloviční incident response.
+
+### Šablona restore runbooku
+
+```markdown
+## Restore runbook: [systém / datová třída / scénář]
+
+### Cíl obnovy
+- Co obnovujeme:
+- Proč obnovujeme:
+- RPO:
+- RTO:
+- Kdo rozhoduje:
+
+### Zdroje záloh
+- Databáze:
+- Soubory:
+- Konfigurace:
+- Externí systémy:
+- Šifrovací klíče:
+
+### Bezpečné prostředí
+- Restore prostředí:
+- Zakázané integrace:
+- Smoke testy:
+- Kontrola integrity:
+
+### Produkční zásah
+- Typ zásahu:
+- Dopad na zákazníky:
+- Auditní zápis:
+- Komunikace:
+
+### Poučení
+- Co fungovalo:
+- Co chybělo:
+- Co automatizovat:
+- Datum dalšího testu:
+```
+
+### Checklist pro zálohy a obnovu
+
+- [ ] Každá datová třída má RPO, RTO, frekvenci záloh a retenci.
+- [ ] Zálohy jsou šifrované a klíče nejsou uložené vedle archivů.
+- [ ] Produkční databáze, soubory, auditní logy a konfigurace mají oddělené restore postupy.
+- [ ] Existuje izolované restore prostředí bez odchozích integrací.
+- [ ] Obnova se testuje pravidelně a výsledek se zapisuje.
+- [ ] Zálohy nejsou používány jako náhodný zdroj dat pro vývoj nebo reporting.
+- [ ] Přístup k zálohám je omezený, auditovaný a pravidelně revidovaný.
+- [ ] Retence záloh odpovídá účelu, právním povinnostem a zákaznickým slibům.
+- [ ] Runbook řeší i komunikaci se zákazníky a interní odpovědnosti.
+- [ ] Tým umí říct, kdy byla poslední úspěšná obnova, ne jen poslední záloha.
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -7076,6 +7227,7 @@ Do monitoringu stagingu nedávej stejné alerty jako do produkce. Staging může
 
 ## Pracovní log
 
+- **2026-10-13:** Přidána příloha AN o zálohách a obnově: RPO/RTO, datové třídy, bezpečné restore prostředí, pravidelné testy obnovy, privacy pravidla pro zálohy, scénáře incidentů, runbook a checklist.
 - **2026-10-13:** Přidána příloha AM o stagingu, preview deployích a testovacích datech: rozdělení prostředí, syntetická data, ochrana preview URL, sandbox integrace, oddělené secrets, provozní úklid a checklist.
 - **2026-10-13:** Přidána příloha AL o uploadu, přílohách a exportech: účel souborových toků, validace obsahu, oddělené úložiště, bezpečné exporty, metadata, retence, šablona karty a checklist.
 - **2026-10-13:** Přidána příloha AK o interním privacy-first vyhledávání: účel vyhledávání, oddělení indexů, bezpečné zpracování dotazů, autocomplete bez úniku dat, nulové výsledky jako backlog, šablona review a checklist.
