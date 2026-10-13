@@ -6845,6 +6845,155 @@ Tahle věta není právní dekorace. Snižuje riziko, že zákazník pošle něc
 - [ ] Metadata souborů jsou součástí mapy dat a nepoužívaná metadata se odstraňují.
 - [ ] Produkt jasně říká, co do příloh neposílat a kdy budou soubory smazané.
 
+## Příloha AM: Staging, preview deploye a testovací data bez produkčního průvanu
+
+Staging prostředí bývá největší paradox malého týmu. Produkce má hesla, role, monitoring, backupy a trochu posvátný respekt. Staging má často `staging.example.com`, jednoduché heslo, kopii databáze z pátku a pocit, že „to přece nikdo nenajde“. Spoiler: internet najde všechno, co má DNS záznam a trochu smůly.
+
+Privacy-first provoz neznamená testovat naslepo. Znamená testovat tak, aby vývoj, QA, obchodní demo ani preview pull requestu nepotřebovaly zbytečně tahat živá osobní data z produkce. Evropský malý SaaS tím získá dvě věci najednou: menší riziko incidentu a rychlejší vývoj, protože testovací prostředí není radioaktivní skládka reálných zákaznických údajů.
+
+EDPB mezi základními principy ochrany osobních údajů zdůrazňuje účelové omezení, minimalizaci dat, přesnost, omezení uložení, integritu a důvěrnost ([EDPB: Basic principles](https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en)). OWASP ASVS zase bere oddělení prostředí, správu tajemství, logování a kontrolu přístupů jako běžnou součást bezpečné aplikace ([OWASP ASVS](https://owasp.org/projects/asvs)). Přeloženo do lidské češtiny: staging není právně ani technicky magická zóna, kde pravidla přestanou platit, protože má v názvu „test“.
+
+### 1) Prostředí pojmenuj podle rizika, ne podle nálady
+
+V malém týmu často vzniknou tři až pět prostředí: lokální vývoj, preview pro každou větev, sdílený staging, demo prostředí a produkce. Každé má jiný účel a jiné riziko. Když je všechny bereš jako „něco mimo produkci“, skončíš s tím, že v preview deployi běží produkční analytics klíč, staging posílá opravdové e-maily a demo ukazuje reálné zákazníky.
+
+Praktické rozdělení:
+
+- `local`: osobní vývojářské prostředí bez veřejného přístupu,
+- `preview`: krátkodobý deploy konkrétní větve nebo pull requestu,
+- `staging`: sdílené prostředí pro ověření release kandidáta,
+- `demo`: řízené prostředí pro obchodní ukázky a školení,
+- `production`: skutečná služba pro zákazníky.
+
+Ke každému prostředí napiš jednoduchou kartu: účel, kdo má přístup, jaká data smí obsahovat, jak dlouho žije, jaké integrace smí volat a kdo ho uklízí. Ano, zní to trochu byrokraticky. Ale je to levnější než vysvětlovat zákazníkovi, proč se jeho e-mail objevil v screenshotu z interního dema.
+
+**Codyho komentář:** Pokud neumíš jednou větou říct, k čemu prostředí slouží, pravděpodobně slouží ke všemu. A „všechno“ je technický název pro budoucí incident s konfety.
+
+### 2) Testovací data tvoř jako produktovou součást
+
+Nejlepší staging data nejsou kopie produkce. Nejlepší staging data jsou záměrně navržená sada scénářů, která pokrývá běžné i hraniční případy: nový účet, účet po trialu, tým s více rolemi, fakturační problém, chybějící nastavení, prázdný stav, velký workspace, import s chybou.
+
+Dobrá testovací sada obsahuje:
+
+- několik realistických firem bez skutečných lidí,
+- uživatele s jasnými rolemi a falešnými kontakty,
+- příklady objednávek, faktur, ticketů nebo projektů podle produktu,
+- hraniční stavy jako expirovaný trial, pozastavený účet nebo nedokončený onboarding,
+- ukázková data pro marketingové weby, dashboardy a e-maily,
+- skript pro obnovu dat do známého stavu.
+
+Příklad: místo importu produkčních zákazníků vytvoř fiktivní firmy „Knihovna Borůvka“, „Studio Sever“ a „SaaS Kovárna“. Každá má jiný tarif, jinou roli uživatelů a jiný typ problému. Vývojář i obchodník pak vidí produkt v realistickém kontextu, ale nikdo nepracuje s reálným zákazníkem.
+
+Když už musíš použít produkční vzorek, ber to jako výjimku s vlastní kartou: proč je nutný, kdo ho schválil, jak byl anonymizován nebo pseudonymizován, kde leží, kdy se smaže a kdo ověřil, že se nepropíše do logů, screenshotů nebo e-mailů.
+
+### 3) Preview deploy není veřejná výloha
+
+Preview deploye jsou skvělý nástroj. Každý pull request dostane URL, designer i zakladatel si vše proklikají a merge není loterie. Jenže preview deploy je také veřejný web, pokud ho nijak nechráníš.
+
+Základní pravidla:
+
+- preview URL nemá indexovat vyhledávač,
+- preview má být chráněné přihlášením, allowlistem nebo krátkodobým přístupem,
+- preview nepoužívá produkční databázi,
+- preview nepoužívá produkční platební, e-mailové ani analytické klíče,
+- preview má viditelný banner s názvem větve a prostředí,
+- preview se automaticky maže po mergi nebo uzavření větve.
+
+Pro marketingový web přidej ještě jednu pojistku: canonical URL a sitemap patří produkci, ne každému preview. Jinak si vyrobíš SEO multivesmír, kde vyhledávač najde pět verzí stejné landing page a tvůj budoucí já bude nad Search Console dělat archeologii.
+
+### 4) Integrace v testu musí být tupé, nebo bezpečně oddělené
+
+Nejvíc škody ve stagingu často neudělá databáze, ale vedlejší efekt. Testovací objednávka odešle reálný e-mail. Preview formulář vytvoří lead v ostrém CRM. Cron ve stagingu spustí reálnou synchronizaci. Webhook z platební brány dorazí dvakrát a účetnictví začne zpívat smutnou píseň.
+
+Pro každou integraci nastav režim:
+
+- `off`: integrace je vypnutá,
+- `fake`: používá lokální stub nebo sandbox,
+- `sandbox`: volá oficiální testovací režim dodavatele,
+- `read-only`: čte, ale nemění vzdálený systém,
+- `production`: povoleno jen v produkci a výjimečně v řízeném demo režimu.
+
+E-maily ve stagingu neposílej skutečným adresátům. Použij odchytávací mailbox, interní testovací doménu nebo sandbox poskytovatele. Platební bránu nech v testovacím režimu. Webhooky podepisuj i v testu, ale odděl tajemství podle prostředí. Crony a plánované úlohy měj ve stagingu vypnuté, pokud zrovna netestuješ konkrétní scénář.
+
+### 5) Tajemství nesmí cestovat s databází
+
+Když někdo udělá kopii produkce do stagingu, často se nekopírují jen tabulky. Kopírují se tokeny, API klíče, refresh tokeny, session zbytky, webhook secrets a někdy i konfigurační hodnoty uložené v databázi. To je přesně ten moment, kdy „test“ začne mít produkční následky.
+
+Minimální obrana:
+
+- produkční secrets nikdy nepatří do repozitáře ani do exportu databáze,
+- prostředí má vlastní klíče s vlastním rozsahem,
+- testovací klíče mají nižší oprávnění a krátkou životnost,
+- při refreshi staging dat se citlivé tokeny mažou nebo nahrazují bezpečnými hodnotami,
+- session a reset tokeny se do testovacích prostředí nepřenášejí,
+- změna secrets se zapisuje jako auditovatelná provozní akce.
+
+Pokud produkt umožňuje zákaznické integrace, dej si pozor i na jejich klíče. Zákazník nedal souhlas, aby jeho produkční token do účetnictví nebo CRM skončil ve staging databázi jen proto, že vývojář potřeboval otestovat nový filtr.
+
+### 6) Staging uklízej stejně poctivě jako produkci
+
+Staging prostředí mívá jednu romantickou vlastnost: nikdo ho nevlastní, dokud něco neshoří. Pak ho vlastní všichni a nikdo zároveň. Dej mu proto běžný provozní rytmus.
+
+Doporučený rytmus:
+
+- denně: automatické mazání starých preview prostředí,
+- týdně: kontrola aktivních preview URL a testovacích účtů,
+- měsíčně: refresh testovací datové sady a review přístupů,
+- kvartálně: kontrola secrets, sandbox integrací a veřejné dostupnosti,
+- před releasem: ověření, že staging odpovídá produkční konfiguraci tam, kde má.
+
+Do monitoringu stagingu nedávej stejné alerty jako do produkce. Staging může padat během testování. Ale sleduj bezpečnostní signály: veřejně dostupný admin, chybějící autentizace, pokus o použití produkčního klíče, nečekané odchozí e-maily nebo dlouho žijící preview.
+
+### Šablona karty prostředí
+
+```markdown
+## Karta prostředí: [local / preview / staging / demo / production]
+
+### Účel
+- K čemu prostředí slouží:
+- Kdo ho používá:
+- Jak dlouho má žít:
+- Kdo je vlastník:
+
+### Data
+- Povolený typ dat:
+- Zakázaný typ dat:
+- Zdroj testovacích dat:
+- Retence a mazání:
+
+### Přístup
+- Kdo má přístup:
+- Jak je chráněné:
+- Veřejná URL:
+- Indexace vyhledávači:
+
+### Integrace
+- E-mail:
+- Platby:
+- Analytics:
+- CRM/support:
+- Crony a webhooky:
+
+### Bezpečnost
+- Secrets:
+- Logy:
+- Auditní události:
+- Automatický úklid:
+```
+
+### Checklist pro staging a testovací data
+
+- [ ] Každé prostředí má jasný účel, vlastníka a pravidlo životnosti.
+- [ ] Preview deploye nejsou indexované a nejsou volně dostupnou kopií produktu.
+- [ ] Staging nepoužívá produkční databázi jako výchozí stav.
+- [ ] Testovací data pokrývají reálné scénáře bez reálných osobních údajů.
+- [ ] Produkční vzorek dat je výjimka se schválením, anonymizací a datem smazání.
+- [ ] E-maily, platby, CRM, analytika a webhooky mají oddělený testovací režim.
+- [ ] Produkční secrets se nepřenášejí do stagingu, exportů ani seed skriptů.
+- [ ] Testovací účty a preview prostředí se pravidelně mažou.
+- [ ] Staging má viditelný banner, aby se nepletl s produkcí.
+- [ ] Tým ví, co se do stagingu nesmí nahrávat, kopírovat ani screenshotovat.
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -6926,6 +7075,7 @@ Tahle věta není právní dekorace. Snižuje riziko, že zákazník pošle něc
 
 ## Pracovní log
 
+- **2026-10-13:** Přidána příloha AM o stagingu, preview deployích a testovacích datech: rozdělení prostředí, syntetická data, ochrana preview URL, sandbox integrace, oddělené secrets, provozní úklid a checklist.
 - **2026-10-13:** Přidána příloha AL o uploadu, přílohách a exportech: účel souborových toků, validace obsahu, oddělené úložiště, bezpečné exporty, metadata, retence, šablona karty a checklist.
 - **2026-10-13:** Přidána příloha AK o interním privacy-first vyhledávání: účel vyhledávání, oddělení indexů, bezpečné zpracování dotazů, autocomplete bez úniku dat, nulové výsledky jako backlog, šablona review a checklist.
 - **2026-10-13:** Přidána příloha AJ o přístupných privacy-first formulářích: minimalizace polí, labely, validační chyby, vícekrokové toky, anti-spam bez invazivních skriptů, agregované měření, šablona review a checklist.
