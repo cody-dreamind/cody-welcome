@@ -6687,6 +6687,164 @@ Prázdný stav nemá říkat jen „nic nenalezeno“. Má pomoct:
 - [ ] Prázdný stav pomáhá pokračovat a připomíná, co neposílat do podpory.
 - [ ] Index má popsanou retenci, mazání a exit plán od dodavatele.
 
+## Příloha AL: Uploady, přílohy a exporty bez datových pastí
+
+Souborový upload vypadá jako obyčejné tlačítko „Přiložit“. Ve skutečnosti je to brána, kterou do systému pouštíš cizí obsah, cizí metadata, cizí názvy souborů a někdy i cizí malware. Export zase vypadá jako pohodlná funkce pro zákazníka. Ve skutečnosti může jedním kliknutím vytvořit balík osobních údajů, který pak žije mimo produkt, mimo audit a mimo retenční pravidla.
+
+Privacy-first přístup proto neznamená zakázat přílohy a exporty. Znamená navrhnout je jako kontrolované datové toky: kdo může nahrát, co může nahrát, kam se soubor uloží, kdo ho uvidí, jak dlouho tam bude a co se stane, když zákazník odejde.
+
+OWASP File Upload Cheat Sheet u uploadů doporučuje mimo jiné povolený seznam typů souborů, validaci přípony i obsahu, bezpečné názvy, omezení velikosti, ukládání mimo webroot, antivirovou kontrolu nebo sandbox podle rizika a ochranu před přepsáním souborů ([OWASP File Upload Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html)). Pro malý SaaS je to praktický návod, jak z tlačítka „nahrát PDF“ neudělat bezpečnostní adventní kalendář, kde je za každým okénkem incident.
+
+### 1) Každý upload musí mít účel a hranici
+
+Nejdřív si napiš, proč soubor potřebuješ. Bez toho se z uploadu rychle stane odkladiště všeho: smlouvy, screenshoty, logy, exporty z účetnictví, fotky občanek, interní poznámky a „ještě něco pro jistotu“.
+
+Dobré otázky před implementací:
+
+- Jaký problém soubor řeší?
+- Kdo ho nahrává a kdo ho čte?
+- Je soubor nutný, nebo stačí strukturované pole?
+- Jaké typy souborů jsou povolené?
+- Obsahuje soubor osobní, obchodní nebo bezpečnostně citlivá data?
+- Jak dlouho ho potřebujeme držet?
+- Má být soubor dostupný i po ukončení účtu?
+
+Příklad: u support ticketu často stačí screenshot chyby a krátký popis. Není potřeba motivovat zákazníka, aby posílal databázový dump, export uživatelů nebo celou fakturu, pokud řeší jen špatně zobrazené tlačítko.
+
+**Codyho komentář:** Upload je jako otevřené okno v kanceláři. Někdy je potřeba vyvětrat. Ale nechceš, aby ti tudy někdo hodil dovnitř cihlu, leták a tři šanony s osobními údaji.
+
+### 2) Validuj obsah, ne jen příponu
+
+Přípona souboru je uživatelský slib. A uživatelé — včetně těch hodných — občas slibují nesmysly, protože operační systém, prohlížeč nebo integrace něco přejmenuje.
+
+Minimální pravidla:
+
+- používej povolený seznam typů místo zakazování „nebezpečných“ přípon,
+- kontroluj MIME typ i skutečný obsah souboru,
+- omez velikost souboru a počet souborů na akci,
+- normalizuj názvy a nepoužívej původní jméno jako cestu v úložišti,
+- generuj vlastní interní identifikátor souboru,
+- odstraň nebo ignoruj metadata, která nepotřebuješ,
+- u rizikových typů zvaž antivirovou kontrolu, převod do bezpečnějšího formátu nebo manuální schválení.
+
+Příklad: pokud zákazník nahrává logo firmy, můžeš přijmout PNG, JPEG, WebP nebo SVG podle potřeby. SVG ale není „jen obrázek“ — může obsahovat aktivní prvky a odkazy. Pokud SVG nepotřebuješ jako editovatelný vektor, bezpečnější může být převod na rasterizovaný náhled.
+
+### 3) Úložiště odděl od aplikace
+
+Nahrané soubory nemají ležet vedle aplikačního kódu jako zapomenutá svačina v batohu. Odděl je do objektového úložiště nebo dedikovaného adresáře s jasnými pravidly přístupu.
+
+Praktický návrh:
+
+- soubory ukládej pod interním ID, ne pod původním názvem,
+- veřejné soubory a soukromé přílohy měj oddělené,
+- neveřejné soubory vydávej přes krátkodobé podepsané odkazy nebo aplikační autorizaci,
+- bucket/adresář nemá být globálně veřejný jen proto, že jeden typ souboru je veřejný,
+- loguj bezpečnostní události typu stažení citlivého exportu, smazání přílohy nebo změna oprávnění,
+- zálohuj metadata i soubory tak, aby šlo obnovit vazby.
+
+U B2B SaaS mysli i na workspace hranice. Uživatel z organizace A nesmí stáhnout přílohu z organizace B jen proto, že zná URL. Neveřejný odkaz není oprávnění. Je to jen adresa.
+
+### 4) Export je produktová funkce i bezpečnostní událost
+
+Export dat je důležitý pro důvěru a exit plán. Zákazník má mít rozumnou možnost odejít a vzít si svoje data. Zároveň export často obsahuje víc informací než běžná obrazovka produktu.
+
+Navrhni export podle rizika:
+
+- malý běžný export může být dostupný hned,
+- export celého workspace může vyžadovat potvrzení, MFA nebo administrátorskou roli,
+- citlivý export může běžet asynchronně a poslat jen oznámení, ne soubor e-mailem,
+- odkaz na export má mít krátkou životnost,
+- export má mít auditní stopu: kdo, kdy, co a proč,
+- staré exporty se mažou automaticky podle retenčního pravidla.
+
+Co neposílat e-mailem:
+
+- kompletní CSV zákazníků,
+- fakturační historii s osobními údaji,
+- API klíče nebo tokeny,
+- bezpečnostní logy,
+- export support konverzací.
+
+E-mail je skvělý na oznámení „export je připravený“. Není skvělý jako trezor s přílohou `all_customers_final_v7_REAL.csv`.
+
+### 5) Metadata jsou data taky
+
+Soubor není jen obsah. Má název, velikost, typ, autora, čas nahrání, náhled, EXIF metadata, interní cestu, vazbu na účet a někdy i historii verzí.
+
+U každého typu souboru rozhodni:
+
+- která metadata ukládáš,
+- která metadata ukazuješ uživatelům,
+- která metadata odstraňuješ,
+- která metadata loguješ,
+- jak metadata mažou nebo anonymizují retenční pravidla.
+
+Příklad: fotka z mobilu může obsahovat GPS polohu. Pokud produkt nepotřebuje lokalitu, nemá ji držet jen proto, že byla v EXIF datech. Stejně tak název souboru `smlouva_novak_rodne_cislo.pdf` může obsahovat osobní údaj, i když samotný dokument zůstane uložený bezpečně.
+
+### 6) Retence souborů musí být viditelná v produktu
+
+Retence není jen interní tabulka. Uživatel by měl chápat, co se se soubory stane.
+
+Dobré produktové texty:
+
+> Přílohy k ticketům mažeme po 180 dnech od uzavření ticketu. Pokud potřebuješ něco uložit dlouhodobě, stáhni si vlastní kopii.
+
+> Export bude dostupný 48 hodin. Potom ho automaticky smažeme a můžeš vytvořit nový.
+
+> Do příloh neposílej hesla, API klíče ani celé databázové exporty. Pro citlivý přenos použij bezpečný kanál domluvený s podporou.
+
+Tahle věta není právní dekorace. Snižuje riziko, že zákazník pošle něco, co produkt nemá umět bezpečně zpracovat.
+
+### Šablona karty pro upload nebo export
+
+```markdown
+## Karta souborového toku: [upload / export]
+
+### Účel
+- Proč soubor potřebujeme:
+- Kdo ho vytváří:
+- Kdo ho čte:
+- Primární rozhodnutí nebo práce po nahrání/exportu:
+
+### Povolený obsah
+- Povolené typy:
+- Maximální velikost:
+- Zakázaný obsah:
+- Sanitizace/metadatová pravidla:
+
+### Přístup
+- Role s právem nahrát:
+- Role s právem stáhnout:
+- Workspace hranice:
+- Veřejný/neveřejný režim:
+
+### Bezpečnost
+- Validace obsahu:
+- Skenování/sandbox:
+- Ukládání:
+- Podepsané odkazy:
+- Auditní události:
+
+### Retence
+- Doba uložení:
+- Automatické mazání:
+- Chování po zrušení účtu:
+- Obnova ze záloh:
+```
+
+### Checklist pro uploady, přílohy a exporty
+
+- [ ] Každý upload a export má popsaný účel, vlastníka a retenční pravidlo.
+- [ ] Povolené typy souborů jsou řešené allowlistem, ne nekonečným blacklistem.
+- [ ] Aplikace validuje skutečný obsah souboru, velikost a počet souborů.
+- [ ] Původní název souboru se nepoužívá jako interní cesta ani oprávnění.
+- [ ] Neveřejné soubory nejdou stáhnout jen znalostí URL.
+- [ ] Veřejné a soukromé soubory jsou oddělené na úrovni úložiště nebo oprávnění.
+- [ ] Exporty celého workspace mají odpovídající roli, potvrzení a auditní stopu.
+- [ ] Odkazy na exporty mají krátkou životnost a staré exporty se automaticky mažou.
+- [ ] Metadata souborů jsou součástí mapy dat a nepoužívaná metadata se odstraňují.
+- [ ] Produkt jasně říká, co do příloh neposílat a kdy budou soubory smazané.
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -6732,6 +6890,7 @@ Prázdný stav nemá říkat jen „nic nenalezeno“. Má pomoct:
 - NCSC: [Offline backups in an online world](https://www.ncsc.gov.uk/guidance/offline-backups-in-an-online-world)
 - OWASP: [API Security Top 10 2023](https://api-security.owasp.org/editions/2023/en/0x11-t10/)
 - OWASP: [Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
+- OWASP: [File Upload Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html)
 - OWASP: [Forgot Password Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html)
 - OWASP: [Multifactor Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html)
 - OWASP: [Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
@@ -6767,6 +6926,7 @@ Prázdný stav nemá říkat jen „nic nenalezeno“. Má pomoct:
 
 ## Pracovní log
 
+- **2026-10-13:** Přidána příloha AL o uploadu, přílohách a exportech: účel souborových toků, validace obsahu, oddělené úložiště, bezpečné exporty, metadata, retence, šablona karty a checklist.
 - **2026-10-13:** Přidána příloha AK o interním privacy-first vyhledávání: účel vyhledávání, oddělení indexů, bezpečné zpracování dotazů, autocomplete bez úniku dat, nulové výsledky jako backlog, šablona review a checklist.
 - **2026-10-13:** Přidána příloha AJ o přístupných privacy-first formulářích: minimalizace polí, labely, validační chyby, vícekrokové toky, anti-spam bez invazivních skriptů, agregované měření, šablona review a checklist.
 - **2026-10-13:** Přidána příloha AI o webhookových a API rozhraních: integrační smlouva, ověřování podpisů, idempotence, správa API klíčů, retry scénáře, inventura, šablona integrační karty a checklist.
