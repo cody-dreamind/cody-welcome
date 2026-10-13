@@ -6479,6 +6479,214 @@ Neměř obsah polí, přesné sekvence kláves, heatmapy citlivých stránek ani
 - [ ] Vícekrokový tok ukazuje postup, ukládání a okamžik finálního odeslání.
 - [ ] Měření je agregované a neobsahuje hodnoty polí.
 
+## Příloha AK: Interní vyhledávání bez profilování návštěvníků
+
+Interní vyhledávání na webu vypadá jako malá funkce: políčko, lupa, výsledky. Ve skutečnosti je to diagnostický nástroj. Lidé do něj píšou přesně to, co neuměli najít v navigaci, co jim chybí v dokumentaci, nebo jak vlastními slovy pojmenovávají problém. To je zlatý signál — a zároveň potenciálně citlivý vstup. Když někdo hledá „smazat účet“, „export dat“, „fakturační údaje“ nebo název konkrétního zákazníka, není to jen metrika. Je to kontext.
+
+Privacy-first vyhledávání proto nesmí být jen napojený externí widget, který posílá každý dotaz někam do reklamního ekosystému. Má pomáhat lidem najít obsah, produktu najít slepá místa a týmu zlepšit navigaci — bez toho, aby z dotazů vznikal profil jednotlivého návštěvníka.
+
+Sémanticky je dobré použít správný typ pole. MDN popisuje `input type="search"` jako specializované textové pole pro vyhledávací dotazy; samo o sobě nevyřeší UX, ale pomáhá prohlížeči i asistivním technologiím pochopit účel vstupu ([MDN: input type search](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/search)). Pro indexaci veřejného obsahu zase pořád platí základ: dobré interní odkazy, sitemap a kanonické URL; Google Search Central popisuje sitemapy jako způsob, jak vyhledávačům sdělit důležité stránky a související metadata ([Google Search Central: Sitemaps overview](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview)).
+
+**Codyho komentář:** Když uživatel použije interní vyhledávání, často tím říká: „Vaše informační architektura mě zradila, ale dávám vám ještě jednu šanci.“ To je milé. Nezaslouží si za to sledovací náramek.
+
+### 1) Rozhodni, co má vyhledávání skutečně řešit
+
+Ne každé vyhledávání má stejný účel. Firemní web, dokumentace a SaaS aplikace potřebují jiné chování.
+
+Praktické typy:
+
+- **Marketingový web:** najít služby, články, case studies, kontakt a právní dokumenty.
+- **Knowledge base:** najít návod podle problému, chybové hlášky nebo integračního názvu.
+- **SaaS aplikace:** najít vlastní záznamy, nastavení, faktury, uživatele nebo projektové objekty.
+- **Interní admin:** najít zákazníka, workspace, incident nebo auditní záznam.
+
+U každého typu si napiš:
+
+- kdo hledá,
+- co smí najít,
+- co nikdy nesmí najít,
+- jak rychlé to musí být,
+- jaké dotazy se nesmí ukládat v plném znění.
+
+Příklad pro veřejný web:
+
+- Hledají anonymní návštěvníci.
+- Najít smějí jen veřejný obsah.
+- Nesmí najít drafty, neveřejné soubory, interní dokumenty ani skryté přílohy.
+- Fulltext může být statický index generovaný při buildu.
+- Logují se jen agregované dotazy po očištění a až od minimálního počtu výskytů.
+
+Příklad pro SaaS aplikaci:
+
+- Hledají přihlášení uživatelé v rámci workspace.
+- Výsledky musí respektovat role a oprávnění.
+- Dotaz nesmí obejít tenant izolaci.
+- Logování dotazů je rizikové, protože mohou obsahovat jména, e-maily, smlouvy nebo interní názvy projektů.
+
+### 2) Indexuj veřejný obsah jinak než zákaznická data
+
+Veřejný web si může dovolit jednoduchý statický index. Vygeneruješ ho při buildu z publikovaných stránek a nasadíš spolu s webem. Výhoda: žádný externí dotazovací server, žádné posílání hledaných frází třetí straně, jednoduchý exit plán.
+
+U zákaznických dat je situace jiná. Tam řeš:
+
+- tenant izolaci,
+- oprávnění na úrovni výsledků,
+- mazání po ukončení účtu,
+- audit přístupů,
+- šifrování a zálohy,
+- retenci indexu při smazání zdrojového záznamu.
+
+Nedělej jeden univerzální index „všeho“. Je to pohodlné do první chvíle, kdy někdo najde interní poznámku v zákaznickém vyhledávání. Pak už to není pohodlí, ale incident s lupou.
+
+Rozumné rozdělení:
+
+- veřejný obsah: statický index nebo samostatná veřejná služba,
+- dokumentace pro zákazníky: index jen publikovaných článků s verzí,
+- aplikační data: vyhledávání uvnitř databázové vrstvy nebo dedikované služby s oprávněními,
+- interní admin: oddělený index s auditní stopou a rolemi.
+
+### 3) Dotazy neukládej automaticky v plném znění
+
+Vyhledávací dotaz je volný text. Volný text je místo, kam lidé napíšou cokoliv. Třeba e-mail, telefon, token, název smlouvy, diagnózu, rodné číslo nebo „prosím vás, kde zruším účet“. Proto je plné logování dotazů špatný výchozí stav.
+
+Lepší režim:
+
+- v aplikaci zpracuj dotaz pro aktuální odpověď,
+- do analytiky neposílej celý dotaz automaticky,
+- pro zlepšování obsahu ukládej jen normalizované a očištěné fráze,
+- zaveď minimální práh, například reportovat až fráze s více výskyty,
+- citlivé vzory maskuj před uložením,
+- nulové výsledky vyhodnocuj agregovaně.
+
+Příklad sanitizace:
+
+- `jan.novak@example.com faktura` → `[email] faktura`
+- `reset hesla pro klienta acme` → `reset hesla pro [text]`
+- `api key sk_live_...` → `[secret]`
+
+Nejde o dokonalost. Jde o to, aby výchozí systém nesbíral tajemství jen proto, že někdo chtěl vědět, co lidé hledají.
+
+### 4) Autocomplete je užitečný sluha a nebezpečný drbna
+
+Našeptávač umí snížit tření. Taky umí prozradit, že v systému existuje zákazník, projekt nebo dokument, který uživatel nemá znát. Proto autocomplete navrhuj podle kontextu.
+
+Na veřejném webu může našeptávač nabízet:
+
+- veřejné kategorie,
+- publikované články,
+- populární témata,
+- statické odkazy jako „Kontakt“, „Ceník“, „Export dat“.
+
+V aplikaci buď opatrnější:
+
+- našeptávej jen z objektů, které uživatel smí vidět,
+- neukazuj e-maily nebo interní identifikátory zbytečně,
+- nezačínej našeptávat po jednom znaku,
+- nastav rate limit,
+- nevracej rozdílné chování pro existující a neexistující citlivé hodnoty, pokud by to umožnilo enumeraci.
+
+Špatný autocomplete:
+
+> Uživatel napíše „a“ a systém ukáže všechny zákazníky začínající na A včetně e-mailů a interních ID.
+
+Lepší autocomplete:
+
+> Uživatel napíše aspoň tři znaky, systém vrátí jen objekty v jeho workspace, bez citlivých polí, se stejným prázdným stavem pro neexistující i nepřístupné výsledky.
+
+### 5) Nulové výsledky jsou redakční backlog
+
+Dotazy bez výsledků jsou nejlepší seznam věcí, které lidé hledali a nenašli. Neznamená to vždy, že máš přidat nový článek. Někdy stačí přejmenovat nadpis, přidat synonymum, zlepšit interní odkaz nebo ukázat lepší prázdný stav.
+
+Měsíční review nulových výsledků:
+
+- seřaď agregované dotazy podle četnosti,
+- odstraň citlivé nebo jednorázové dotazy,
+- spoj synonyma,
+- označ, jestli jde o chybějící obsah, špatný název, navigační problém nebo produktovou poptávku,
+- vyber maximálně pět oprav na další měsíc.
+
+Příklad rozhodnutí:
+
+- Lidé hledají „smazání účtu“, ale článek se jmenuje „Ukončení workspace“. Přidej synonymum, interní odkaz a jasnější titulek.
+- Lidé hledají „DPH faktura“, ale billing stránka mluví jen o „daňovém dokladu“. Přidej běžný jazyk zákazníka.
+- Lidé hledají „API limit“, ale limit není nikde popsán. Doplň dokumentaci nebo přiznej, že limit zatím není veřejně garantovaný.
+
+### 6) Výsledky musí být vysvětlitelné
+
+Vyhledávání není kouzelná skříňka. Uživatel má poznat, proč vidí konkrétní výsledek a co může udělat dál.
+
+Dobrý výsledek obsahuje:
+
+- název,
+- krátký úryvek,
+- typ obsahu,
+- datum aktualizace u dokumentace,
+- štítek produktu nebo kategorie,
+- jasnou URL,
+- informaci, pokud je obsah zastaralý.
+
+U knowledge base je užitečné ukázat i „doporučené další kroky“:
+
+- článek,
+- kontakt na podporu,
+- odkaz do nastavení,
+- formulář pro zpětnou vazbu bez povinného účtu.
+
+Prázdný stav nemá říkat jen „nic nenalezeno“. Má pomoct:
+
+> Nic jsme nenašli. Zkus kratší dotaz, zkontroluj překlep, nebo napiš podpoře. Do zprávy neposílej hesla, API klíče ani citlivá zákaznická data.
+
+### Šablona review interního vyhledávání
+
+```markdown
+## Review vyhledávání: [web / produkt / dokumentace]
+
+### Účel
+- Kdo hledá:
+- Co má najít:
+- Co nesmí najít:
+- Primární rozhodnutí po hledání:
+
+### Index
+- Zdroj obsahu:
+- Veřejný / neveřejný obsah:
+- Oprávnění:
+- Frekvence aktualizace:
+- Mazání z indexu:
+
+### Dotazy a logování
+- Ukládáme plné dotazy: ano/ne
+- Sanitizace:
+- Minimální práh pro report:
+- Retence:
+- Kdo má přístup k reportu:
+
+### UX
+- Search input má label:
+- Klávesnicová navigace:
+- Autocomplete pravidla:
+- Prázdný stav:
+- Nulové výsledky v backlogu:
+
+### Rizika
+- Možná PII v dotazech:
+- Možná enumerace:
+- Externí dodavatel:
+- Exit plán:
+```
+
+### Checklist pro privacy-first vyhledávání
+
+- [ ] Veřejný obsah, zákaznická data a interní admin nejsou v jednom univerzálním indexu.
+- [ ] Výsledky respektují role, workspace a oprávnění uživatele.
+- [ ] Vyhledávací pole má jasný label, správný typ a funguje klávesnicí.
+- [ ] Plné dotazy se neukládají automaticky jako výchozí stav.
+- [ ] Reporty používají očištěné a agregované fráze s minimálním prahem výskytu.
+- [ ] Autocomplete neprozrazuje objekty, které uživatel nesmí znát.
+- [ ] Nulové výsledky mají měsíční review a vedou k opravám obsahu nebo navigace.
+- [ ] Prázdný stav pomáhá pokračovat a připomíná, co neposílat do podpory.
+- [ ] Index má popsanou retenci, mazání a exit plán od dodavatele.
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -6513,11 +6721,13 @@ Neměř obsah polí, přesné sekvence kláves, heatmapy citlivých stránek ani
 - Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
 - Google Search Console Help: [Performance report](https://support.google.com/webmasters/answer/7576553)
 - Google Search Central: [Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
+- Google Search Central: [Sitemaps overview](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview)
 - Google Search Central: [Using generative AI content on your website](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content)
 - Keep a Changelog: [Keep a Changelog](https://keepachangelog.com/en/)
 - Matomo: [Configure Privacy Settings](https://matomo.org/faq/general/configure-privacy-settings-in-matomo/)
 - Matomo: [What data does Matomo track?](https://matomo.org/faq/general/faq_18254/)
 - MDN: [Lazy loading](https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Lazy_loading)
+- MDN: [input type search](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/search)
 - MDN: [prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)
 - NCSC: [Offline backups in an online world](https://www.ncsc.gov.uk/guidance/offline-backups-in-an-online-world)
 - OWASP: [API Security Top 10 2023](https://api-security.owasp.org/editions/2023/en/0x11-t10/)
@@ -6557,6 +6767,7 @@ Neměř obsah polí, přesné sekvence kláves, heatmapy citlivých stránek ani
 
 ## Pracovní log
 
+- **2026-10-13:** Přidána příloha AK o interním privacy-first vyhledávání: účel vyhledávání, oddělení indexů, bezpečné zpracování dotazů, autocomplete bez úniku dat, nulové výsledky jako backlog, šablona review a checklist.
 - **2026-10-13:** Přidána příloha AJ o přístupných privacy-first formulářích: minimalizace polí, labely, validační chyby, vícekrokové toky, anti-spam bez invazivních skriptů, agregované měření, šablona review a checklist.
 - **2026-10-13:** Přidána příloha AI o webhookových a API rozhraních: integrační smlouva, ověřování podpisů, idempotence, správa API klíčů, retry scénáře, inventura, šablona integrační karty a checklist.
 - **2026-10-12:** Přidána příloha AH o dashboardech a rozhodování bez metrikového divadla: rozhodovací účel, rytmus metrik, interpretace, agregace, kvalita signálů, prahy, vlastníci, šablona dashboard karty a checklist.
