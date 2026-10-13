@@ -6291,6 +6291,194 @@ Jednou měsíčně projdi nové integrace a jednou kvartálně staré. Hledej hl
 - [ ] Logy ukládají stav zpracování, ne celé citlivé payloady jako výchozí stav.
 - [ ] Nepoužívané endpointy, klíče a webhooks se pravidelně ruší.
 
+
+## Příloha AJ: Přístupné formuláře bez konverzního mučení
+
+Formulář je místo, kde se potkává obchod, UX, technika, přístupnost, bezpečnost a privacy. Proto se na něm tak často pokazí úplně všechno najednou. Marketing chce víc polí, obchod chce kvalifikaci, produkt chce registraci, právník chce souhlas, vývojář chce validaci a uživatel chce hlavně odejít bez toho, aby mu web řekl „neplatný vstup“ jako rozbitý úředník.
+
+Privacy-first formulář není jen kratší formulář. Je to formulář, který sbírá jen potřebná data, vysvětluje proč, funguje s klávesnicí a asistivními technologiemi, neukládá citlivé údaje do URL, nepoužívá trackery v každém kroku a po chybě člověku pomůže, ne ho potrestá. W3C WAI u formulářů zdůrazňuje jasné popisky, instrukce a srozumitelné chybové zprávy, protože právě ty rozhodují, jestli lidé formulář vůbec dokážou dokončit ([W3C WAI: Forms](https://www.w3.org/WAI/curricula/content-author-modules/forms/), [W3C WAI: Labeling Controls](https://www.w3.org/WAI/tutorials/forms/labels/)).
+
+Od 28. června 2025 se v EU začal uplatňovat European Accessibility Act pro vybrané produkty a služby včetně e-commerce; Evropská komise mezi pokryté oblasti uvádí mimo jiné e-commerce a digitální služby ([European Commission: European Accessibility Act](https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en), [Your Europe: Digital accessibility](https://europa.eu/youreurope/business/selling-in-eu/selling-goods-services/accessibility/index_en.htm)). Tohle není výzva k panice. Je to připomenutí, že přístupnost už není „až bude čas“, protože čas se mezitím odstěhoval.
+
+**Codyho komentář:** Přístupnost a privacy mají společný kořen: respekt k člověku. Když formulář nejde vyplnit bez myši, nutí opisovat zbytečnosti, schovává chyby a ještě posílá data pěti skriptům, není to růstový hack. Je to digitální překážková dráha s firemním logem.
+
+### 1) Každé pole musí obhájit existenci
+
+Než řešíš layout, napiš inventuru polí. U každého pole odpověz na čtyři otázky:
+
+- proč ho potřebujeme právě teď,
+- kdo s datem pracuje,
+- jak dlouho ho držíme,
+- co se stane, když ho nevyplníme.
+
+Pokud odpověď zní „hodí se obchodníkům“, pole ještě neprošlo. Hodit se může i vysavač na střechu auta, ale neznamená to, že ho tam namontuješ.
+
+Praktický příklad u poptávkového formuláře:
+
+- **E-mail:** nutný pro odpověď, retence podle obchodního workflow.
+- **Popis problému:** nutný pro kvalifikaci, může obsahovat citlivé údaje, proto u něj zobraz pokyn, co neposílat.
+- **Telefon:** volitelný; sbírej jen pokud nabízíš telefonický follow-up.
+- **Rozpočet:** volitelný nebo rozsahový; nevyžaduj přesnou částku, pokud ji nepotřebuješ pro první odpověď.
+- **Počet zaměstnanců:** často zbytečné u prvního kontaktu; pokud segmentuješ, použij širší kategorii.
+
+U registrace do SaaS je dobré začít ještě úžeji: e-mail, heslo nebo magic link, název workspace a souhlas s podmínkami jen tam, kde opravdu patří. Všechno ostatní může přijít později v onboardingu, až má uživatel důvod odpovídat.
+
+### 2) Label není placeholder v kostýmu
+
+Placeholder mizí, jakmile člověk začne psát. Proto nemá suplovat label. W3C WAI doporučuje u formulářových prvků jasně přiřazené popisky; label pomáhá lidem pochopit účel pole a zároveň asistivním technologiím správně oznámit, co se má vyplnit ([W3C WAI: Labeling Controls](https://www.w3.org/WAI/tutorials/forms/labels/)).
+
+Dobré pravidlo:
+
+- label vždy viditelný nebo programově dostupný,
+- `for` v labelu odpovídá `id` inputu,
+- povinné pole je označené textem, ne jen barvou nebo hvězdičkou,
+- nápověda je vedle pole a je propojená přes `aria-describedby`,
+- placeholder používáš maximálně jako příklad formátu, ne jako název pole.
+
+Slabý formulář:
+
+```html
+<input placeholder="E-mail">
+```
+
+Lepší formulář:
+
+```html
+<label for="email">Pracovní e-mail</label>
+<p id="email-help">Pošleme na něj potvrzení a další kroky. Nepoužijeme ho pro newsletter bez souhlasu.</p>
+<input id="email" name="email" type="email" autocomplete="email" aria-describedby="email-help" required>
+```
+
+Tady zároveň pomáhá `autocomplete`. WCAG 2.2 u kritéria 1.3.5 řeší programově zjistitelný účel běžných polí, aby prohlížeče a asistivní technologie mohly uživatelům vyplňování zjednodušit ([W3C: Understanding SC 1.3.5 Identify Input Purpose](https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose.html)).
+
+### 3) Validace má být navigace, ne facka
+
+Chybová hláška „neplatný vstup“ je informační hodnota přibližně jako „něco se stalo“. Uživatel potřebuje vědět:
+
+- které pole je špatně,
+- co je špatně,
+- jak to opravit,
+- jestli se ostatní vyplněná data zachovala,
+- kam se má vrátit.
+
+W3C WAI u notifikací doporučuje, aby chybové zprávy byly srozumitelné, odkazovaly na příslušné pole a nabízely jednoduché instrukce k opravě ([W3C WAI: User Notification](https://www.w3.org/WAI/tutorials/forms/notifications/)). V praxi to znamená:
+
+- zobraz souhrn chyb nad formulářem,
+- každou chybu ukaž i u konkrétního pole,
+- po odeslání s chybou přesuň fokus na souhrn nebo první chybu,
+- používej text, ikonu i stav pole, ne jen červenou barvu,
+- nikdy nemaž už vyplněná pole bez bezpečnostního důvodu,
+- u citlivých polí vysvětli bezpečně, ne příliš konkrétně.
+
+Slabá hláška:
+
+> Chyba formuláře.
+
+Lepší hláška:
+
+> E-mail nemá platný formát. Zkontroluj, že obsahuje `@` a doménu, například `jmeno@firma.cz`.
+
+U hesel pozor: nápověda má pomoct, ale nemá vyzrazovat příliš detailní bezpečnostní logiku. Místo „chybí velké písmeno, číslice a speciální znak“ je často lepší ukázat pravidla předem a po chybě říct, které veřejné pravidlo není splněné.
+
+### 4) Vícekrokový formulář potřebuje mapu
+
+Vícekrokové formuláře jsou užitečné, když snižují kognitivní zátěž. Jsou peklo, když jen rozsekají jeden nepřehledný formulář na šest nepřehledných kroků.
+
+U každého vícekrokového toku ukaž:
+
+- název aktuálního kroku,
+- počet kroků nebo přibližnou délku,
+- možnost vrátit se zpět bez ztráty dat,
+- co se uloží při přerušení,
+- kdy dojde k odeslání a kdo data uvidí.
+
+Příklad onboardingového toku:
+
+1. **Účet:** e-mail, heslo nebo magic link.
+2. **Workspace:** název týmu a region provozu.
+3. **První úkol:** import, ruční založení nebo prázdný start.
+4. **Pozvánky:** volitelné, s jasným vysvětlením, že pozvaným lidem přijde e-mail.
+
+Privacy-first detail: neukládej průběžně citlivé odpovědi, pokud to není nutné. Pokud autosave používáš, řekni to. Uživatel má vědět, jestli rozepsaný formulář existuje jen v prohlížeči, nebo už sedí na serveru jako malý duch compliance budoucnosti.
+
+### 5) Anti-spam nesmí trestat lidi
+
+CAPTCHA, která brání robotům i zákazníkům, je zvláštní forma sebeobrany. U privacy-first webu je navíc problém, když kvůli jednomu formuláři přidáš invazivní cizí skript, který sleduje návštěvníky napříč webem.
+
+Preferuj vrstvy, které jsou méně rušivé:
+
+- honeypot pole skryté pro lidi, ale viditelné pro jednoduché boty,
+- rate limiting podle IP nebo anonymizovaného klíče,
+- serverovou validaci a blokování známých spam vzorů,
+- jednorázové tokeny formuláře,
+- potvrzovací e-mail jen tam, kde dává smysl,
+- ruční review u drahých nebo citlivých akcí.
+
+Pokud musíš použít CAPTCHA nebo externí ochranu, udělej privacy review: jaká data odcházejí, kam, na jak dlouho, pod jakým právním základem a co se stane s lidmi, kteří nástroj nedokážou použít. „Všichni to tak dělají“ není architektonický argument. Je to kolektivní výmluva s logem.
+
+### 6) Měř dokončení formuláře agregovaně
+
+Formuláře je potřeba zlepšovat, ale ne za cenu sledování každého pohybu myši. Pro většinu malých týmů stačí agregované metriky:
+
+- zobrazení formuláře,
+- zahájení vyplňování,
+- úspěšné odeslání,
+- technická chyba odeslání,
+- anonymizovaný typ validační chyby,
+- zdroj návštěvy na úrovni UTM kampaně bez osobních údajů.
+
+Neměř obsah polí, přesné sekvence kláves, heatmapy citlivých stránek ani session replay na formulářích s osobními údaji. Pokud chceš zjistit, proč lidé odpadají, často je bezpečnější udělat pět krátkých uživatelských rozhovorů než nasadit další šmírovací mikroskop.
+
+### Šablona review formuláře
+
+```markdown
+## Review formuláře: [název / URL]
+
+### Účel
+- Primární akce:
+- Kdo formulář vyplňuje:
+- Kdo zpracovává výsledek:
+
+### Pole
+- Povinná pole:
+- Volitelná pole:
+- Pole k odstranění nebo přesunutí do pozdějšího kroku:
+
+### Přístupnost
+- Všechna pole mají label:
+- Instrukce jsou viditelné a propojené s polem:
+- Chyby jsou čitelné, konkrétní a dostupné klávesnicí:
+- Tok funguje bez myši:
+
+### Privacy
+- Data v URL:
+- Data v logu:
+- Retence:
+- Externí skripty:
+
+### Měření
+- Agregované eventy:
+- Chybové metriky:
+- Zakázaná měření:
+
+### Rozhodnutí
+- Spouštíme:
+- Upravujeme před spuštěním:
+- Vlastník dalšího review:
+```
+
+### Checklist pro přístupné privacy-first formuláře
+
+- [ ] Každé pole má jasný účel, vlastníka a retenční pravidlo.
+- [ ] Povinná pole jsou opravdu nezbytná pro daný krok.
+- [ ] Každý input má label; placeholder není jediný popisek.
+- [ ] Instrukce a nápovědy jsou viditelné a programově propojené s polem.
+- [ ] Chybové zprávy říkají, co opravit, a zachovávají vyplněná data.
+- [ ] Formulář jde dokončit klávesnicí a bez invazivních anti-spam prvků.
+- [ ] Citlivé hodnoty nejdou do URL, analytiky, logů ani session replay nástrojů.
+- [ ] Vícekrokový tok ukazuje postup, ukládání a okamžik finálního odeslání.
+- [ ] Měření je agregované a neobsahuje hodnoty polí.
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -6314,6 +6502,7 @@ Jednou měsíčně projdi nové integrace a jednou kvartálně staré. Hledej hl
 - European Commission: [AI Act](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
 - European Commission: [NIS2 Directive](https://digital-strategy.ec.europa.eu/en/policies/nis2-directive)
 - European Commission: [Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)
+- European Union / Your Europe: [Digital accessibility](https://europa.eu/youreurope/business/selling-in-eu/selling-goods-services/accessibility/index_en.htm)
 - EUR-Lex: [Regulation (EU) 2016/679 — General Data Protection Regulation](https://eur-lex.europa.eu/legal-content/ENG/ALL/?uri=celex%3A32016R0679)
 - EUR-Lex: [Directive 2002/58/EC on privacy and electronic communications](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02002L0058-20091219)
 - FIDO Alliance: [Passkeys](https://fidoalliance.org/passkeys/)
@@ -6353,6 +6542,10 @@ Jednou měsíčně projdi nové integrace a jednou kvartálně staré. Hledej hl
 - Umami: [Platform](https://umami.is/platform)
 - Umami: [FAQ](https://docs.umami.is/docs/faq)
 - W3C: [Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/WCAG22/)
+- W3C WAI: [Forms](https://www.w3.org/WAI/curricula/content-author-modules/forms/)
+- W3C WAI: [Labeling Controls](https://www.w3.org/WAI/tutorials/forms/labels/)
+- W3C WAI: [Understanding SC 1.3.5 Identify Input Purpose](https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose.html)
+- W3C WAI: [User Notification](https://www.w3.org/WAI/tutorials/forms/notifications/)
 - web.dev: [Web Vitals](https://web.dev/articles/vitals)
 - Yahoo Sender Hub: [Sender Best Practices](https://senders.yahooinc.com/best-practices/)
 - Úřad pro ochranu osobních údajů: [Cookies — otázky a odpovědi](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies)
@@ -6364,6 +6557,7 @@ Jednou měsíčně projdi nové integrace a jednou kvartálně staré. Hledej hl
 
 ## Pracovní log
 
+- **2026-10-13:** Přidána příloha AJ o přístupných privacy-first formulářích: minimalizace polí, labely, validační chyby, vícekrokové toky, anti-spam bez invazivních skriptů, agregované měření, šablona review a checklist.
 - **2026-10-13:** Přidána příloha AI o webhookových a API rozhraních: integrační smlouva, ověřování podpisů, idempotence, správa API klíčů, retry scénáře, inventura, šablona integrační karty a checklist.
 - **2026-10-12:** Přidána příloha AH o dashboardech a rozhodování bez metrikového divadla: rozhodovací účel, rytmus metrik, interpretace, agregace, kvalita signálů, prahy, vlastníci, šablona dashboard karty a checklist.
 - **2026-10-12:** Přidána příloha AG o customer success bez sledovacího panoptika: definice zákaznického úspěchu, týmové health signály, vysvětlitelné stavy, oddělení péče/supportu/prodeje, bezpečné CRM poznámky, playbook a checklist.
