@@ -9928,6 +9928,158 @@ Výstupem nemá být dlouhý dokument. Výstupem mají být odebrané přístupy
 - [ ] Výsledkem review jsou konkrétní změny, ne jen tabulka pro dobrý pocit.
 
 
+
+---
+
+## Příloha BE: Auditní stopa a logování bez datového skladiště
+
+Logy jsou provozní paměť produktu. Pomáhají zjistit, co se stalo, kdy se to stalo, koho se to týkalo a jestli je potřeba něco opravit. Jenže stejná věc, která pomůže při incidentu, se může snadno změnit v nenápadnou databázi osobních údajů. A ta obvykle vznikne úplně nevinně: někdo zaloguje celý request, někdo přidá e-mail do URL, někdo pošle payload webhooku do monitoringu. Gratuluju, právě jste vynalezli datový sklad, akorát bez plánu, retence a radosti.
+
+Privacy-first logování stojí na jednoduchém pravidle: log má vysvětlit technickou nebo bezpečnostní událost, ne archivovat život zákazníka. OWASP doporučuje u logování přemýšlet o účelu, konzistenci, ochraně citlivých dat a integritě logů ([OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). GDPR zároveň stojí na principech jako minimalizace dat, omezení účelu a integrita důvěrnosti ([European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en)).
+
+### 1) Rozlišuj technický log, auditní log a analytiku
+
+Tři různé potřeby, tři různé režimy:
+
+- **Technický log:** chyby, latence, deploye, joby, retry, stav integrací. Slouží vývojářům a provozu.
+- **Auditní log:** změny práv, fakturace, bezpečnostních nastavení, exportů, výmazů a citlivých akcí. Slouží bezpečnosti, podpoře a zákazníkům.
+- **Analytika:** agregované chování návštěvníků nebo uživatelů. Slouží rozhodování o produktu a marketingu.
+
+Nemíchej je do jedné univerzální tabulky. Technický log nepotřebuje marketingový zdroj návštěvy. Analytika nepotřebuje stack trace. Auditní log nepotřebuje celý obsah formuláře. Když všechno teče do jednoho místa, skončíš s logovacím gulášem, který nikdo nechce mazat, protože „co kdyby se to někdy hodilo“.
+
+### 2) Auditní log má popisovat akci, ne člověka víc než nutně musí
+
+Dobrý auditní záznam odpoví na otázky:
+
+- kdo nebo co akci spustilo,
+- jaký typ akce proběhl,
+- kterého objektu se týkala,
+- kdy se stala,
+- odkud přišla v provozně rozumné míře,
+- jaký byl výsledek.
+
+Příklad bezpečného záznamu:
+
+```text
+2026-10-13T20:14:22Z actor=user_123 action=billing_plan_changed org=org_456 target=plan result=success request_id=req_789
+```
+
+Příklad zbytečně rizikového záznamu:
+
+```text
+2026-10-13T20:14:22Z jan.novak@example.com změnil tarif firmy Novák Consulting s.r.o., IP 198.51.100.24, user-agent..., fakturační poznámka..., kompletní payload...
+```
+
+První varianta je použitelná pro audit i debugging. Druhá varianta je výletní autobus plný osobních údajů, který se omylem vydává za technický záznam.
+
+### 3) Nikdy neloguj tajemství a celé payloady jako výchozí stav
+
+Do logů nepatří:
+
+- hesla, session tokeny, API klíče, refresh tokeny,
+- platební údaje a celé fakturační údaje,
+- obsah soukromých zpráv, poznámek a dokumentů,
+- celé requesty a response z formulářů,
+- URL s e-mailem, telefonem, jménem nebo interní poznámkou,
+- hlavičky obsahující autorizaci nebo cookies.
+
+Pokud potřebuješ ladit integraci, vytvoř dočasný debug režim s krátkou expirací, omezeným přístupem, maskováním hodnot a jasným vlastníkem. Debug log bez expirace je jen budoucí incident, který si zatím dává kafe.
+
+### 4) Retence logů má být podle rizika, ne podle velikosti disku
+
+Logy nemaž proto, že došlo místo. Maž je proto, že už neslouží legitimnímu účelu. Praktické rozdělení pro malý SaaS:
+
+- **Aplikační debug logy:** krátká retence, typicky dny až týdny podle provozu.
+- **Bezpečnostní a auditní logy:** delší retence podle rizika, smluv a povinností.
+- **Agregované metriky:** delší životnost, pokud neobsahují identifikátory lidí.
+- **Dočasné debug logy:** explicitní datum smazání už při zapnutí.
+
+Retenci napiš do provozní dokumentace a nastav automatické mazání. Ruční mazání „až bude čas“ je krásný plán, pokud máš jako hobby sbírání neviditelných povinností.
+
+### 5) Přístup k logům je přístup k produkční realitě
+
+Logy často obsahují víc, než si tým myslí. Proto k nim přistupuj podobně jako k produkčním datům:
+
+- odděl role pro čtení technických logů, auditních logů a zákaznických incidentů,
+- zapni MFA pro logovací a monitoring nástroje,
+- loguj přístupy k auditním logům, pokud obsahují citlivější akce,
+- exporty logů omez na nutné případy,
+- neposílej výřezy logů do veřejných issue trackerů ani chatů bez redakce.
+
+Praktické pravidlo: pokud by ti bylo trapné poslat konkrétní log zákazníkovi jako důkaz transparentnosti, pravděpodobně do něj dáváš moc dat nebo málo kontextu.
+
+### 6) Request ID je lepší než osobní detektivka
+
+Každý request, job a webhook by měl mít korelační identifikátor. Díky němu spojíš logy napříč aplikací bez toho, abys do každého záznamu cpal e-mail uživatele nebo název firmy.
+
+Minimální sada:
+
+- `request_id` pro HTTP požadavky,
+- `job_id` pro background úlohy,
+- `event_id` pro webhooky,
+- `actor_id` místo e-mailu,
+- `organization_id` místo názvu firmy,
+- `target_id` pro objekt změny.
+
+Support pak může zákazníkovi říct: „Pošlete nám čas chyby nebo ID požadavku.“ Vývojář nemusí hledat podle osobních údajů. A bezpečnostní review ti neudělá zvuk padajícího nádobí.
+
+### 7) Logovací schéma dokumentuj jako API
+
+Logy nejsou odpadní potrubí aplikace. Jsou interní rozhraní pro provoz, bezpečnost a podporu. Proto si udržuj malý slovník:
+
+- povolené typy událostí,
+- povolené vlastnosti,
+- zakázané hodnoty,
+- retenční kategorii,
+- vlastníka,
+- příklad dobrého záznamu.
+
+Když někdo přidá nový typ logu, měl by projít stejnou otázkou jako nová event taxonomy: proč to sbíráme, kdo to použije, jak dlouho to držíme a jaké riziko vzniká, když se hodnota dostane mimo určené místo. EDPB privacy-by-design přístup je přesně o tom, že ochranu dat řešíš už při návrhu, ne až po incidentu ([EDPB: Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)).
+
+### Šablona logovací karty
+
+## Logovací oblast: [aplikace / služba / integrace]
+
+### Účel
+
+- Jaké rozhodnutí nebo provozní reakci má log umožnit:
+- Kdo log používá:
+- Co se stane, když log nebude existovat:
+
+### Události
+
+- Povolené typy eventů:
+- Povolené vlastnosti:
+- Zakázané hodnoty:
+- Korelační identifikátory:
+
+### Přístup a retence
+
+- Kdo smí číst:
+- Kdo smí exportovat:
+- Retence:
+- Automatické mazání:
+
+### Privacy kontrola
+
+- Obsahuje log osobní údaje?
+- Obsahuje log tajemství?
+- Jde hodnota nahradit interním ID?
+- Je debug režim dočasný?
+
+### Checklist pro auditní stopu a logování
+
+- [ ] Technické logy, auditní logy a analytika mají oddělený účel.
+- [ ] Auditní log popisuje akci, výsledek a objekt změny bez zbytečných osobních detailů.
+- [ ] Logy nikdy neobsahují hesla, tokeny, cookies, API klíče ani celé formulářové payloady.
+- [ ] URL, referrery a query parametry jsou očištěné od e-mailů, telefonů a interních poznámek.
+- [ ] Každý request, job a webhook má korelační ID.
+- [ ] Debug logování má vlastníka, omezený přístup a datum vypnutí.
+- [ ] Retence logů je zdokumentovaná a automatizovaná.
+- [ ] Exporty logů jsou výjimka, ne běžný supportní postup.
+- [ ] Přístup k logům se kontroluje podobně jako přístup k produkčním datům.
+
+
 ---
 
 ## Zdroje
@@ -10035,6 +10187,8 @@ Výstupem nemá být dlouhý dokument. Výstupem mají být odebrané přístupy
 ---
 
 ## Pracovní log
+
+- **2026-10-13:** Přidána příloha BE o auditní stopě a logování bez datového skladiště: rozdělení technických logů, auditních logů a analytiky, bezpečný tvar auditních záznamů, zákaz logování tajemství, retence, přístupy k logům, korelační ID, logovací karta a checklist.
 
 - **2026-10-13:** Přidána příloha BD o přístupech, rolích a offboardingu: role podle práce, rozdělení citlivosti nástrojů, omezení sdílených účtů, žádosti o přístup, ochrana produkčních dat, offboarding od onboardingu, pravidelné access review, šablona a checklist.
 
