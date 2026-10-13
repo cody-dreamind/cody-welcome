@@ -8410,6 +8410,148 @@ Tohle je nudné. Výborně. U práv a dat má být nudné všechno kromě toho, 
 - [ ] Offboarding proces se testuje na syntetickém účtu aspoň při větší změně datového modelu.
 - [ ] Retenční politika odpovídá tomu, co systém opravdu dělá.
 
+## Příloha AV: Domény, DNS a TLS jako základ důvěry
+
+Doména je pro web a SaaS trochu jako hlavní vchod do kanceláře. Můžeš mít krásný interiér, skvělé procesy a privacy-first zásady, ale když dveře vedou přes rezavý zámek, špatnou ceduli a náhradní klíč pod rohožkou, důvěra se rozpadne ještě před prvním kliknutím. DNS, TLS a doménová hygiena proto nejsou jen technické detaily pro „toho člověka, co kdysi nastavoval e-mail“. Jsou součást produktu, bezpečnosti i marketingu.
+
+Evropská agentura ENISA ve svých materiálech k DNSSEC popisuje DNS jako kritickou internetovou infrastrukturu a zdůrazňuje, že ochrana integrity DNS odpovědí pomáhá bránit podvrženým záznamům a útokům na směrování uživatelů ([ENISA: DNSSEC](https://www.enisa.europa.eu/topics/incident-response/glossary/dnssec)). Let's Encrypt připomíná, že automatizované vydávání a obnova certifikátů je praktický základ pro běžné HTTPS bez ručního kalendářového šamanismu ([Let's Encrypt: Getting Started](https://letsencrypt.org/getting-started/)). Pro malý tým z toho plyne jednoduché pravidlo: domény a certifikáty musí být spravované jako provozní aktivum, ne jako poznámka v hlavě zakladatele.
+
+### 1) Domény kupuj a spravuj jako kritický majetek
+
+Doména není jednorázový nákup. Je to identita firmy, vstup do produktu, reputace e-mailu a často i kořen všech integrací. Když o ni přijdeš, problém není jen web. Přestane fungovat přihlášení, e-mail, callback URL, webhooky, OAuth aplikace, fakturační odkazy i dokumentace.
+
+Minimální pravidla:
+
+- používej registrátora s MFA a jasnou správou rolí,
+- nastav auto-renew a hlídej expiraci nezávislým monitoringem,
+- u kritických domén zapni registry lock, pokud ho registrátor a TLD podporují,
+- drž oddělený vlastnický účet od běžných provozních účtů,
+- eviduj, kdo může měnit nameservery, DNS záznamy a kontaktní údaje,
+- jednou za kvartál udělej kontrolu domén, subdomén a expirací.
+
+Praktický příklad: produkční doména `example.eu`, marketingová subdoména `www.example.eu`, aplikace `app.example.eu`, API `api.example.eu`, status page `status.example.eu` a dokumentace `docs.example.eu` mají mít jasného vlastníka a popsaný účel. Pokud najdeš `old-campaign-2024.example.eu`, které nikdo nezná, není to nostalgie. Je to potenciální díra.
+
+### 2) DNS zóny drž čitelné, komentované a verzované
+
+DNS zóna často připomíná archeologické naleziště: každý záznam je stopa po dávném incidentu, kampani nebo integraci, kterou nikdo nechce smazat, protože „co kdyby“. Privacy-first provoz vyžaduje opak: vědět, kam návštěvník nebo data tečou.
+
+U každého záznamu si eviduj:
+
+- účel záznamu,
+- vlastníka,
+- službu nebo dodavatele,
+- datum poslední kontroly,
+- riziko při výpadku,
+- zda záznam souvisí s osobními údaji nebo zákaznickým provozem.
+
+Zvláštní pozornost patří wildcard záznamům. `*.example.eu` je pohodlné, ale může maskovat chyby a ztížit detekci zapomenutých subdomén. Pokud wildcard používáš, napiš proč, kde končí jeho rozsah a jak hlídáš neočekávané hostname.
+
+**Codyho komentář:** DNS bez inventáře je jako kabeláž pod stolem v agentuře. Dokud se nic neděje, všichni tvrdí, že tomu rozumí. Pak někdo kopne do prodlužky a najednou je z toho firemní archeologie s incident reportem.
+
+### 3) DNSSEC zapínej tam, kde ho umíš provozně udržet
+
+DNSSEC pomáhá ověřit, že DNS odpověď nebyla cestou podvržena. U evropských domén a seriózního SaaS je to rozumný bezpečnostní signál, ale není to kouzelné tlačítko. Špatně spravované klíče nebo rozbitá delegace mohou způsobit, že doména přestane resolvovat pro validující resolvery.
+
+Před zapnutím DNSSEC ověř:
+
+- registrátor podporuje DNSSEC pro danou TLD,
+- DNS provider umí automatickou rotaci klíčů nebo má jasný postup,
+- tým ví, jak ověřit DS záznam v registru,
+- monitoring hlídá validaci DNSSEC, ne jen HTTP odpověď webu,
+- existuje rollback postup při chybné delegaci.
+
+EURid u `.eu` domén popisuje DNSSEC jako mechanismus pro ověření pravosti DNS odpovědí a ochranu před manipulací s doménovými záznamy ([EURid: DNSSEC](https://eurid.eu/en/register-a-eu-domain/dnssec/)). Prakticky: pokud provozuješ evropskou značku na `.eu`, DNSSEC stojí za zvážení, ale nejdřív si připrav runbook. Bez něj jen přesuneš riziko z „někdo podvrhne DNS“ na „někdo z nás rozbije DNS“. Výborná výměna, pokud sbíráš adrenalinové zážitky, horší pro SaaS.
+
+### 4) TLS certifikáty musí být automatizované a monitorované
+
+HTTPS je dnes samozřejmost. Selhání certifikátu ale pořád umí vypnout prodej, onboarding i důvěru během jedné minuty. Ruční obnova certifikátu přes kalendářovou upomínku je provozní hazard. Automatizace není luxus, ale minimum.
+
+Praktická pravidla:
+
+- certifikáty vydávej automatizovaně přes ACME, pokud to infrastruktura dovolí,
+- sleduj expiraci certifikátů zvenku, nejen stav v administračním panelu,
+- měj alert minimálně 14 dní a 3 dny před expirací,
+- testuj obnovu po změně DNS, load balanceru nebo proxy,
+- dokumentuj, kdo vlastní wildcard certifikáty a kde jsou použité,
+- privátní klíče drž mimo repozitář, ticket systém a chat.
+
+Wildcard certifikáty jsou praktické, ale zvyšují dopad úniku privátního klíče. Pokud je používáš, zkrať přístupy, hlídej obnovu a udržuj seznam služeb, které na nich závisí.
+
+### 5) Doménová reputace patří k marketingu i bezpečnosti
+
+Doména není jen webová adresa. Je to reputační kontejner. Pokud na stejné doméně běží produkt, e-mailing, experimentální landing pages a zapomenuté trackingové skripty, jeden špatný kus může poškodit celek.
+
+Rozumné oddělení:
+
+- hlavní web: `example.eu`, `www.example.eu`,
+- aplikace: `app.example.eu`,
+- API: `api.example.eu`,
+- dokumentace: `docs.example.eu`,
+- status: `status.example.eu`,
+- marketingové kampaně: raději jasně omezené subdomény než náhodné externí domény,
+- e-mail: vlastní sada SPF, DKIM a DMARC pravidel pro odesílací domény.
+
+M3AAWG dlouhodobě doporučuje používat autentizační mechanismy jako SPF, DKIM a DMARC pro omezení podvržených zpráv a zlepšení důvěryhodnosti e-mailového ekosystému ([M3AAWG: Email Authentication Recommended Best Practices](https://www.m3aawg.org/documents/en/email-authentication-recommended-best-practices)). Pro privacy-first tým to má ještě jeden rozměr: méně falešných zpráv znamená méně incidentů, méně ručního ověřování a méně citlivých dat poslaných špatnému „supportu“.
+
+### 6) Přímé odkazy jsou lepší než doménové zkratky bez kontroly
+
+Marketing miluje zkracovače. Privacy-first provoz je miluje méně. Zkrácené odkazy přidávají dalšího dodavatele, další logy, další možnost výpadku a často i horší čitelnost pro uživatele. Pokud zkratky potřebuješ, provozuj je pod vlastní doménou, s jasnou retencí logů a bez profilování lidí.
+
+Dobrá praxe:
+
+- používej čitelné kanonické URL,
+- pro kampaně používej UTM parametry bez osobních údajů,
+- zkratky používej jen tam, kde opravdu pomáhají,
+- staré zkratky pravidelně reviduj,
+- nikdy neposílej citlivé tokeny v URL, která projde přes externí zkracovač.
+
+### Šablona doménové karty
+
+```markdown
+## Doména / subdoména: [název]
+
+### Účel
+- Primární účel:
+- Vlastník:
+- Kritičnost: nízká / střední / vysoká
+
+### DNS
+- Registrátor:
+- DNS provider:
+- Nameservery:
+- DNSSEC: ano / ne / plán
+- Klíčové záznamy:
+
+### TLS
+- Certifikační autorita:
+- Obnova: automatická / ruční
+- Monitoring expirace:
+- Použití wildcard certifikátu:
+
+### Data a dodavatelé
+- Služby napojené na doménu:
+- Osobní údaje v provozu:
+- Logy a retence:
+- Externí zkratky nebo redirecty:
+
+### Review
+- Poslední kontrola:
+- Další kontrola:
+- Rizika:
+- Rozhodnutí:
+```
+
+### Checklist pro domény, DNS a TLS
+
+- [ ] Kritické domény mají MFA, auto-renew, vlastníka a nezávislý monitoring expirace.
+- [ ] DNS záznamy mají účel, vlastníka a datum poslední kontroly.
+- [ ] Zapomenuté subdomény, wildcard záznamy a staré kampaně se pravidelně mažou nebo dokumentují.
+- [ ] DNSSEC je zapnutý jen tam, kde máme ověřený provozní postup a monitoring validace.
+- [ ] TLS certifikáty se obnovují automaticky a expirace je hlídaná zvenku.
+- [ ] SPF, DKIM a DMARC jsou součástí doménové hygieny, ne až hašení phishingu.
+- [ ] Zkracovače a redirecty nepřenášejí osobní údaje a mají jasnou retenci logů.
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -8443,6 +8585,10 @@ Tohle je nudné. Výborně. U práv a dat má být nudné všechno kromě toho, 
 - NCSC: [Password administration for system owners](https://www.ncsc.gov.uk/collection/passwords)
 - Google Analytics Help: [URL builders — Collect campaign data with custom URLs](https://support.google.com/analytics/answer/10917952?hl=en-uk)
 - Gmail Help: [Email sender guidelines](https://support.google.com/mail/answer/81126)
+- ENISA: [DNSSEC](https://www.enisa.europa.eu/topics/incident-response/glossary/dnssec)
+- EURid: [DNSSEC](https://eurid.eu/en/register-a-eu-domain/dnssec/)
+- Let's Encrypt: [Getting Started](https://letsencrypt.org/getting-started/)
+- M3AAWG: [Email Authentication Recommended Best Practices](https://www.m3aawg.org/documents/en/email-authentication-recommended-best-practices)
 - Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
 - Google Search Console Help: [Performance report](https://support.google.com/webmasters/answer/7576553)
 - Google Search Central: [Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
@@ -8497,6 +8643,8 @@ Tohle je nudné. Výborně. U práv a dat má být nudné všechno kromě toho, 
 ---
 
 ## Pracovní log
+
+- **2026-10-13:** Přidána příloha AV o doménách, DNS a TLS: správa kritických domén, čitelné DNS zóny, DNSSEC, automatizované certifikáty, doménová reputace, bezpečné redirecty, doménová karta a checklist s ověřenými zdroji ENISA, EURid, Let's Encrypt a M3AAWG.
 
 - **2026-10-13:** Přidána příloha AU o exportu a smazání účtu: datové skupiny, strojově čitelný export, workflow výmazu, anonymizace, dodavatelé, komunikace se zákazníkem, offboarding runbook a checklist s ověřenými zdroji EDPB a Evropské komise.
 
