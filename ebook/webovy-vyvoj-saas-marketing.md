@@ -7656,6 +7656,168 @@ Měsíční úklid:
 - [ ] Po plném zapnutí se odstraní stará větev kódu i dočasné eventy.
 - [ ] Měsíční úklid flagů je součástí provozního review.
 
+## Příloha AR: Přihlášení a správa účtů bez bezpečnostního divadla
+
+Přihlášení je jedna z těch částí SaaS produktu, která vypadá jednoduše, dokud ji nezačneš provozovat. Pak přijdou zapomenutá hesla, sdílené účty, pozvánky do organizací, změny rolí, odchody zaměstnanců, fakturační kontakty, auditní stopa a otázka, kdo vlastně smí smazat produkční data. Romantika jako z pohlednice, jen místo západu slunce koukáš na support ticket „nejde mi login“.
+
+Privacy-first přístup k účtům není o tom, že uživatelům přidáš co nejvíc překážek. Je o tom, že přístupová pravidla jsou srozumitelná, minimální, ověřitelná a dají se vysvětlit zákazníkovi. OWASP v autentizačních a session doporučeních opakovaně zdůrazňuje bezpečnou správu hesel, ochranu session a omezení útoků na účty; FIDO Alliance u passkeys ukazuje cestu k přihlašování bez klasických hesel; NCSC doporučuje mimo jiné nepřehánět pravidla, která lidi nutí k horšímu chování, třeba k recyklaci hesel ([OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html), [OWASP Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html), [FIDO Alliance: Passkeys](https://fidoalliance.org/passkeys/), [NCSC Password administration for system owners](https://www.ncsc.gov.uk/collection/passwords)).
+
+### 1) Účet není jen e-mail a heslo
+
+U B2B SaaS je účet obvykle kombinace několika vrstev:
+
+- **Uživatel:** konkrétní člověk s identitou, e-mailem a bezpečnostními nastaveními.
+- **Organizace nebo workspace:** firma, tým, škola, obec nebo projekt, kde uživatel pracuje.
+- **Role:** co smí dělat v daném kontextu.
+- **Billing vztah:** kdo platí, kdo vidí faktury a kdo může změnit tarif.
+- **Auditní stopa:** kdo udělal citlivou změnu a kdy.
+
+Když tyhle vrstvy smícháš, vznikají nepříjemné zkratky. Typický problém: první registrovaný člověk je navždy superadmin, protože „tak to bylo nejrychlejší“. Pak odejde z firmy, e-mail už neexistuje a zákazník potřebuje změnit fakturační údaje. Pokud produkt nemá proces převzetí organizace, support začne improvizovat. A improvizace u přístupů je pěkný způsob, jak si vyrobit incident s lidskou tváří.
+
+Praktické pravidlo: už při návrhu účtu napiš, co se stane, když:
+
+- zakladatel organizace odejde,
+- zákazník změní doménu,
+- uživatel ztratí přístup k e-mailu,
+- firma chce převést vlastnictví,
+- admin omylem odebere sám sobě práva,
+- někdo žádá export nebo smazání dat.
+
+### 2) Role dělej podle práce, ne podle titulů
+
+Role mají popisovat odpovědnost v produktu, ne firemní hierarchii zákazníka. „CEO“ není role v aplikaci. „Vlastník organizace“, „billing správce“, „editor obsahu“ nebo „čtenář reportů“ už ano.
+
+Začni malým modelem:
+
+- **Owner:** spravuje organizaci, role, kritická nastavení a ukončení účtu.
+- **Admin:** spravuje běžné nastavení a uživatele, ale ne vždy billing nebo mazání organizace.
+- **Member:** pracuje s hlavní produktovou funkcí.
+- **Viewer:** vidí výstupy, ale nemění data.
+- **Billing:** vidí faktury, platby a tarif, ale nemusí vidět produktový obsah.
+
+Ne každá aplikace potřebuje všechny role. Menší produkt může začít se třemi. Důležité je, aby citlivé akce nebyly schované pod neurčitým „admin může všechno“. U každé role napiš povolené akce a zakázané akce. Pokud se u role objeví dvacet výjimek, role je pravděpodobně moc široká nebo produkt nemá jasný model vlastnictví.
+
+**Codyho komentář:** Role jsou jako klíče. Když dáš každému univerzální klíč „protože je to jednodušší“, opravdu je to jednodušší — hlavně pro útočníka, omyl a pondělní chaos.
+
+### 3) Pozvánky jsou bezpečnostní tok, ne jen e-mail
+
+Pozvánka do SaaS produktu je změna přístupu. Měla by mít pravidla:
+
+- kdo smí pozvat nového člověka,
+- na jakou roli ho smí pozvat,
+- jak dlouho pozvánka platí,
+- jestli je vázaná na konkrétní e-mail,
+- co se stane po vypršení,
+- jak se pozvánka zruší,
+- jak se změna objeví v auditní stopě.
+
+Privacy-first detail: do pozvánkového e-mailu nepatří interní data organizace, seznam uživatelů, tokeny v čitelném textu ani zbytečné sledovací pixely. Stačí jasně říct, kdo zve, do jaké organizace, jaká role čeká a kam bezpečně pokračovat. Pokud e-mail unikne přeposláním, neměl by sám o sobě prozradit víc, než je nutné.
+
+U B2B produktů zvaž jednoduchou doménovou ochranu: pokud organizace používá firemní doménu, můžeš varovat před pozváním na soukromý e-mail. Nezakazuj to slepě — konzultanti, externisté a malé týmy existují — ale udělej riziko viditelné.
+
+### 4) Hesla, passkeys a MFA: bezpečnost bez trestání lidí
+
+Pokud používáš hesla, dělej je moderně a bez starých rituálů:
+
+- povol dlouhé fráze,
+- nevyžaduj pravidelné nucené změny bez důvodu,
+- kontroluj slabá a kompromitovaná hesla,
+- ukládej hesla jen bezpečně hashovaná,
+- rate-limituj pokusy o přihlášení,
+- u resetu hesla neprozrazuj, jestli e-mail existuje.
+
+Passkeys jsou pro mnoho produktů lepší směr než nekonečné ladění heslových pravidel. Ne každý zákazník je bude umět používat hned, ale můžeš je nabídnout jako pohodlnější a bezpečnější možnost. U citlivých rolí přidej MFA, ale nedělej z něj trest. Vysvětli, proč ho vyžaduješ, nabídni obnovovací kódy a popiš proces ztraceného druhého faktoru.
+
+Pro evropský privacy-first provoz je důležité i to, jaké autentizační služby používáš. U externí identity řeš region, smlouvy, logy, metadata, export a fallback. Přihlášení není jen technická brána. Je to místo, kde se často potkávají osobní údaje, bezpečnostní logy a provozní závislost na dodavateli.
+
+### 5) Session spravuj jako živý přístup
+
+Session není dekorace v cookies. Je to dočasný klíč. Proto potřebuje pravidla:
+
+- bezpečné cookies s `HttpOnly`, `Secure` a rozumným `SameSite`,
+- oddělení session pro administraci a běžnou práci, pokud produkt dělá citlivé akce,
+- možnost odhlásit ostatní zařízení,
+- zneplatnění session po změně hesla nebo MFA,
+- omezení životnosti podle rizika,
+- jasné chování při neaktivitě.
+
+Uživatel má rozumět tomu, kde je přihlášený. Nemusíš mu ukazovat detailní fingerprint zařízení, který sám sbíráš jako malou špionážní laboratoř. Stačí město nebo země přibližně, typ zařízení, čas poslední aktivity a tlačítko „odhlásit“. Přesnost má sloužit bezpečnosti, ne zvědavosti.
+
+### 6) Audit log má chránit, ne šmírovat
+
+Audit log u účtů je užitečný, protože pomáhá vysvětlit citlivé změny. Nemá ale být tajný produktový deník každého pohybu myší.
+
+Loguj hlavně:
+
+- přihlášení a neúspěšné pokusy v bezpečnostně rozumné podobě,
+- změnu role,
+- pozvání a odebrání uživatele,
+- změnu billing údajů,
+- změnu MFA nebo passkey nastavení,
+- export, smazání nebo převod vlastnictví,
+- změny integračních klíčů a webhooků.
+
+Neloguji zbytečně:
+
+- obsah polí, která uživatel upravoval,
+- celé URL s tokeny nebo osobními parametry,
+- hesla, reset tokeny, MFA kódy,
+- interní poznámky supportu bez účelu,
+- citlivý zákaznický obsah jen proto, že „se to může hodit“.
+
+Audit log má mít retenční pravidlo. U některých bezpečnostních událostí bude retence delší než u běžných aplikačních logů, ale pořád musí být vysvětlitelná. A pokud audit log ukazuje zákazníkovi jeho vlastní administrátorské akce, piš je lidsky: „Petra změnila roli Jana z Editor na Admin“ je lepší než `ACL_ROLE_MUTATION_SUCCESS`.
+
+### Šablona access review karty
+
+```markdown
+## Access review: [organizace / produkt / modul]
+
+### Kontext
+- Kdo produkt používá:
+- Jaká data jsou dostupná:
+- Nejcitlivější akce:
+- Vlastník přístupového modelu:
+
+### Role
+- Role a jejich účel:
+- Citlivé akce podle role:
+- Kdo může měnit role:
+- Kdo může převést vlastnictví:
+
+### Přihlášení
+- Podporované metody:
+- MFA / passkeys:
+- Reset hesla:
+- Obnova ztraceného faktoru:
+
+### Session a audit
+- Doba platnosti session:
+- Odhlášení ostatních zařízení:
+- Auditované události:
+- Retence audit logu:
+
+### Rizika
+- Sdílené účty:
+- Odchod admina:
+- Pozvánky mimo doménu:
+- Nouzový support zásah:
+```
+
+### Checklist pro přihlášení a správu účtů
+
+- [ ] Produkt rozlišuje uživatele, organizaci, roli, billing vztah a vlastnictví.
+- [ ] Existuje proces pro odchod vlastníka organizace a převod účtu.
+- [ ] Role jsou popsané podle produktových akcí, ne podle pracovních titulů.
+- [ ] Citlivé akce nejsou automaticky dostupné každému adminovi.
+- [ ] Pozvánky mají expiraci, konkrétní roli, zrušení a auditní stopu.
+- [ ] Heslová pravidla podporují dlouhé fráze a netrestají uživatele starými rituály.
+- [ ] Passkeys nebo MFA jsou připravené hlavně pro citlivé role.
+- [ ] Reset hesla neprozrazuje existenci účtu a zneplatní rizikové session.
+- [ ] Session cookies používají bezpečné atributy a lze odhlásit ostatní zařízení.
+- [ ] Audit log zachycuje citlivé změny, ale neukládá obsah, tokeny ani zbytečné osobní údaje.
+- [ ] Retence bezpečnostních logů je popsaná v mapě dat.
+- [ ] Externí identity a auth služby mají ověřený region, smlouvy, export a fallback.
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -7741,6 +7903,8 @@ Měsíční úklid:
 ---
 
 ## Pracovní log
+
+- **2026-10-13:** Přidána příloha AR o přihlášení a správě účtů: vrstvy účtu, role podle práce, bezpečné pozvánky, hesla/passkeys/MFA, session pravidla, audit log, šablona access review a checklist.
 
 - **2026-10-13:** Přidána příloha AQ o feature flazích a privacy-first rolloutu: typy flagů, vlastnictví, postupné zapínání podle rizika, agregované měření, kill switch, úklid starých flagů, šablona a checklist.
 
