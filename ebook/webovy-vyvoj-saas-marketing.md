@@ -7493,6 +7493,169 @@ Do CI můžeš přidat jednoduchý smoke test, který ověří, že produkční 
 - [ ] Nový widget nebo dodavatel vyžaduje aktualizaci review karty, ne jen úpravu CSP.
 - [ ] Release kontrola umí odhalit chybějící nebo oslabené bezpečnostní hlavičky.
 
+## Příloha AQ: Feature flagy a rollout bez datového cirkusu
+
+Feature flag je krásná věc: umožní zapnout novou funkci malé skupině lidí, rychle ji vypnout při problému a oddělit nasazení kódu od uvedení funkce. Jenže když se flagy dělají bez disciplíny, vznikne z nich druhý produkt uvnitř produktu. Nikdo neví, co je zapnuté, proč je to zapnuté, kdo to vlastní a jestli stará větev kódu ještě někdy zmizí. To není agilita. To je skříň plná kabátů, které už nikdo nenosí, ale všechny mají produkční dopad.
+
+Privacy-first rollout má jednoduchý cíl: bezpečně omezit riziko změny, aniž by tým začal profilovat uživatele víc, než je nutné. Ne každá funkce potřebuje experiment po jednotlivých lidech. Často stačí interní zapnutí, testovací organizace, ručně vybraný pilotní zákazník, procentuální rollout bez ukládání detailních profilů nebo obyčejný kill switch.
+
+### 1) Rozlišuj typy flagů
+
+Ne každý flag má stejný účel. Když je házíš do jedné hromady, skončíš s názvy typu `new_new_dashboard_final_2`, což je digitální archeologie a lehké volání o pomoc.
+
+Praktické typy:
+
+- **Release flag:** odděluje deploy od veřejného spuštění funkce.
+- **Experiment flag:** porovnává varianty, ale musí mít hypotézu a konec.
+- **Permission flag:** zpřístupňuje funkci podle tarifu, role nebo smlouvy.
+- **Ops flag:** vypíná náročnou nebo rizikovou část systému při incidentu.
+- **Migration flag:** pomáhá přechodu mezi starou a novou implementací.
+
+Každý typ má jiné retenční pravidlo. Release a migration flagy mají zmizet rychle. Permission flagy mohou zůstat dlouhodobě, ale patří do produktového modelu, ne do zapomenutého konfiguračního kouta. Ops flagy musí být jednoduché, zdokumentované a dostupné i ve stresu.
+
+### 2) Flag musí mít vlastníka a datum smrti
+
+Každý flag potřebuje minimálně:
+
+- název,
+- účel,
+- vlastníka,
+- výchozí stav,
+- koho ovlivňuje,
+- jak se pozná úspěch,
+- jak se pozná problém,
+- datum kontroly nebo odstranění.
+
+Bez data kontroly se z flagu stává permanentní výjimka. A permanentní výjimky jsou v malém SaaS skoro vždycky horší než jedna dobře naplánovaná migrace. Když flag přežije déle než funkce, kterou měl bezpečně zavést, něco je špatně.
+
+Dobré názvy jsou nudné a čitelné:
+
+- `billing_invoice_pdf_v2`
+- `onboarding_checklist_v1`
+- `support_export_rate_limit`
+- `dashboard_new_chart_renderer`
+
+Špatné názvy jsou tajenka:
+
+- `test_flag`
+- `new_ui`
+- `ondra_fix`
+- `temporary_please_do_not_delete`
+
+Poslední název je mimochodem technický ekvivalent cedule „tady straší“.
+
+### 3) Rollout dělej po riziku, ne podle ega
+
+Novou funkci nemusíš pustit všem jen proto, že už je hotová. Hotová znamená „připravená ke kontrolovanému nasazení“, ne „hoďme ji přes plot a uvidíme v supportu“.
+
+Rozumné pořadí:
+
+1. **Lokálně:** vývojář ověří hlavní scénář a chybové stavy.
+2. **Interně:** tým funkci používá na testovacích datech.
+3. **Pilot:** jeden nebo několik zákazníků s jasným očekáváním.
+4. **Postupné rozšíření:** procento účtů, organizací nebo tarifů.
+5. **Plné zapnutí:** až po splnění kritérií.
+6. **Úklid:** odstranění staré větve a dočasných měření.
+
+Privacy-first pravidlo: pokud nepotřebuješ rozhodovat na úrovni člověka, nerozhoduj na úrovni člověka. U B2B SaaS často stačí zapnutí podle organizace, workspace, tarifu nebo ručně zvoleného pilotního zákazníka. Je to čitelnější, lépe vysvětlitelné a méně invazivní než tiché profilování jednotlivých uživatelů.
+
+### 4) Měření rolloutů drž agregované a účelové
+
+Rollout bez měření je hazard. Rollout s přehnaným měřením je datový hlad. Cílem je vědět, jestli změna funguje a neškodí, ne vytvořit detailní deník každého kliknutí.
+
+Pro většinu funkcí stačí:
+
+- aktivace funkce na úrovni účtu nebo organizace,
+- počet dokončených klíčových akcí,
+- chybovost a latence relevantních endpointů,
+- počet support dotazů k dané funkci,
+- odchod z klíčového kroku v agregované podobě,
+- ruční zpětná vazba od pilotních zákazníků.
+
+Neukládej do eventů volný text, e-maily, názvy zákaznických projektů, tokeny ani celé URL s citlivými parametry. Pokud funkce pracuje s citlivými daty, měř raději stav procesu než obsah. Například „export dokončen“, „export selhal“ a „export zrušen“ stačí. Není potřeba posílat do analytiky názvy exportovaných souborů, názvy zákazníků nebo obsah filtrů.
+
+### 5) Kill switch musí být nudný a ověřený
+
+Kill switch je flag, který vypne rizikovou část systému rychleji než deploy rollback. Aby fungoval, musí být jednoduchý a předem vyzkoušený.
+
+Dobré použití:
+
+- vypnout nový editor, když ukládání začne selhávat,
+- vypnout náročné generování reportů při přetížení,
+- vrátit starou platební obrazovku při problému s checkoutem,
+- zastavit automatické e-maily, když integrace posílá špatný obsah.
+
+Kill switch nesmí být schovaný jen v hlavě jednoho člověka. V runbooku napiš:
+
+- kde se přepíná,
+- kdo ho smí přepnout,
+- jak rychle se projeví,
+- jaké části produktu ovlivní,
+- jak se ověří návrat do bezpečného stavu,
+- koho informovat po přepnutí.
+
+Jednou za čas kill switch vyzkoušej v bezpečném prostředí. Flag, který nikdo nikdy netestoval, je spíš amulet než provozní nástroj.
+
+### 6) Staré flagy maž bez nostalgie
+
+Největší problém feature flagů není jejich zavedení. Je to úklid. Starý flag znamená starý kód, staré větvení, staré testovací scénáře a staré otázky při každém refaktoru.
+
+Měsíční úklid:
+
+- vypiš flagy bez nedávné změny,
+- zkontroluj flagy po datu kontroly,
+- odstraň release flagy po plném zapnutí,
+- smaž staré větve kódu,
+- aktualizuj dokumentaci a testy,
+- ověř, že monitoring už nečeká na staré eventy.
+
+**Codyho komentář:** Feature flag je jako lešení. Skvělé, když stavíš. Nebezpečně trapné, když ho necháš stát dva roky u hotového domu a začneš tvrdit, že je to architektonický prvek.
+
+### Šablona feature flag karty
+
+```markdown
+## Feature flag: [název]
+
+### Účel
+- Typ flagu: release / experiment / permission / ops / migration
+- Jakou změnu řídí:
+- Proč není zapnutá všem najednou:
+- Vlastník:
+
+### Rollout
+- Výchozí stav:
+- Interní test:
+- Pilotní zákazníci / organizace:
+- Kritéria pro rozšíření:
+- Kritéria pro zastavení:
+
+### Měření
+- Primární signál:
+- Guardrail metriky:
+- Jaká data se nesmí ukládat:
+- Retence rollout dat:
+
+### Provoz
+- Kill switch:
+- Runbook:
+- Komu hlásit problém:
+- Datum review:
+- Plán odstranění flagu:
+```
+
+### Checklist pro feature flagy a rollout
+
+- [ ] Každý flag má typ, vlastníka, účel a datum review.
+- [ ] Release a migration flagy mají plán odstranění.
+- [ ] Rollout začíná interně nebo pilotem, ne automaticky všem.
+- [ ] Segmentace používá nejméně invazivní úroveň, typicky organizaci nebo tarif místo osoby.
+- [ ] Měření rolloutů je agregované a neobsahuje volný text, e-maily, tokeny ani citlivé URL.
+- [ ] Kritéria úspěchu i zastavení jsou napsaná před zapnutím.
+- [ ] Kill switch je zdokumentovaný, dostupný a otestovaný.
+- [ ] Support ví, kdo funkci vidí a jak poznat související problém.
+- [ ] Po plném zapnutí se odstraní stará větev kódu i dočasné eventy.
+- [ ] Měsíční úklid flagů je součástí provozního review.
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -7578,6 +7741,8 @@ Do CI můžeš přidat jednoduchý smoke test, který ověří, že produkční 
 ---
 
 ## Pracovní log
+
+- **2026-10-13:** Přidána příloha AQ o feature flazích a privacy-first rolloutu: typy flagů, vlastnictví, postupné zapínání podle rizika, agregované měření, kill switch, úklid starých flagů, šablona a checklist.
 
 - **2026-10-13:** Přidána příloha AP o bezpečnostních hlavičkách a CSP: inventura zdrojů, postupné zavedení policy, HSTS, Referrer-Policy, MIME sniffing, iframe ochrana, release kontrola, review šablona a checklist.
 - **2026-10-13:** Přidána příloha AO o privacy-first monitoringu a alertingu: kritické toky, alert priority, bezpečný payload, SLO, syntetické kontroly, monitoring nákladů, alert runbook a checklist.
