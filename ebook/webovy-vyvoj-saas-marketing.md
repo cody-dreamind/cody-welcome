@@ -8552,6 +8552,186 @@ Dobrá praxe:
 - [ ] Zkracovače a redirecty nepřenášejí osobní údaje a mají jasnou retenci logů.
 
 
+## Příloha AW: Výkon webu a cache bez externího datového průvanu
+
+Rychlý web není jen technická paráda pro lidi, kteří si rádi měří milisekundy a pak o tom mluví u kafe. Výkon přímo ovlivňuje důvěru, konverze, podporu i náklady. Privacy-first pohled k tomu přidává jednu důležitou otázku: zrychlujeme web tak, že uživatelům opravdu pomáháme, nebo jen posíláme jejich provoz přes další vrstvu cizích služeb?
+
+Cílem není odmítat cache, CDN ani optimalizaci. Cílem je vědět, co přesně se cachuje, kde se ukládají logy, kdo vidí požadavky a jak dlouho zůstávají identifikátory v provozních datech. Rychlost bez kontroly nad daty je jako sportovní auto bez brzd — chvíli působí skvěle, pak přijde zatáčka.
+
+### 1) Začni rozpočtem výkonu, ne náhodným minifikováním
+
+Malý tým často začne tím, že zapne kompresi, přidá lazy loading a doufá, že to nějak dopadne. Lepší je nejdřív nastavit jednoduchý výkonový rozpočet.
+
+Praktický rozpočet pro firemní web:
+
+- homepage se musí načíst použitelně i na slabším mobilním připojení,
+- kritická CSS a fonty nesmí blokovat první pochopení stránky,
+- hero sekce nesmí stát na obřím obrázku bez rozumných rozměrů,
+- třetí strany musí mít jasný důvod a vlastníka,
+- základní měření výkonu musí fungovat bez identifikace konkrétní osoby.
+
+U SaaS aplikace přidej produktové rozpočty:
+
+- login a první obrazovka po přihlášení,
+- nejčastější akce uživatele,
+- export dat,
+- interní vyhledávání,
+- administrace fakturace nebo workspace.
+
+**Codyho komentář:** Nejlepší optimalizace je často odebrání věci, kterou nikdo nepotřeboval. JavaScript je skvělý sluha, ale jako šéf frontendu občas připomíná hyperaktivního stážistu s přístupem do produkce.
+
+### 2) Statická aktiva cachuj agresivně, HTML opatrně
+
+Cache není jedna věc. Jinak se chová obrázek loga, jinak CSS s hashem v názvu, jinak HTML stránky s cenami a úplně jinak stránka po přihlášení.
+
+Rozumné rozdělení:
+
+- **Verzovaná statická aktiva** — CSS, JS, fonty a obrázky s hashem v názvu můžeš cachovat dlouho, protože změna vytvoří nový soubor.
+- **Veřejné HTML** — cachuj krátce nebo s revalidací, protože obsah, ceny nebo dostupnost služeb se mohou změnit.
+- **Personalizovaný obsah** — neukládej do sdílené cache; používej soukromou cache jen tam, kde přesně víš, co děláš.
+- **API odpovědi** — cachuj podle účelu, ne podle pohodlí. Veřejný katalog ano, osobní dashboard velmi opatrně.
+- **Exporty a soubory** — používej krátkou platnost odkazů, jasnou expiraci a logování bez obsahu exportu.
+
+Pravidlo pro malé týmy: co je veřejné a verzované, cachuj směle. Co je osobní, pracovní nebo obchodně citlivé, cachuj jen po review.
+
+### 3) CDN vybírej podle datového toku, ne podle marketingové mapy světa
+
+CDN může výrazně pomoct s rychlostí, dostupností a ochranou proti provozním špičkám. Z privacy-first pohledu je ale CDN také dodavatel, který může vidět IP adresy, URL, hlavičky, user-agenty a někdy i části aplikačního provozu.
+
+Před nasazením se ptej:
+
+- jaké požadavky přes CDN potečou,
+- jestli se přes CDN posílají URL s tokeny nebo osobními údaji,
+- kde se ukládají logy a jak dlouho,
+- jestli lze vypnout zbytečné analytické a fingerprintingové funkce,
+- kdo má přístup k pravidlům, certifikátům a logům,
+- jak rychle umíš CDN obejít při incidentu.
+
+Privacy-first varianta často vypadá takto: veřejné statické assety přes dobře zdokumentovanou distribuční vrstvu, aplikační dashboard přímo přes evropský hosting, citlivé exporty mimo CDN a s krátkou expirací.
+
+### 4) Obrázky optimalizuj bez sledovacích kompromisů
+
+Obrázky bývají největší kus stránky. Optimalizace ale nemusí znamenat, že každý obrázek pošleš přes cizí obrázkovou službu s nekonečným logováním.
+
+Praktický postup:
+
+- udržuj originály odděleně od publikovaných variant,
+- generuj běžné velikosti při buildu nebo uploadu,
+- používej moderní formáty tam, kde máš fallback,
+- nastav šířky podle reálných layoutů, ne podle nálady grafika,
+- nepřenášej EXIF metadata, pokud pro uživatele nemají hodnotu,
+- u citlivých zákaznických obrázků zvaž oddělené úložiště a přístupová pravidla.
+
+U marketingového webu obvykle stačí několik variant obrázku. U SaaS produktu s uživatelským obsahem je potřeba karta datového toku: kdo nahrává, kdo vidí, kde se transformuje, co se loguje a kdy se mažou odvozené soubory.
+
+### 5) Fonty a externí skripty drž pod kontrolou
+
+Fonty vypadají nevinně, ale každá externí žádost je další dotaz: kam odchází IP adresa, hlavičky a referer? Privacy-first výchozí stav je jednoduchý: hostuj kritická aktiva sám, verzuj je a dokumentuj licenci.
+
+Dobrá praxe:
+
+- používej systémové fonty, pokud nepotřebuješ vlastní brandový font,
+- vlastní fonty hostuj z vlastní domény,
+- načítej jen řezy, které opravdu používáš,
+- externí skripty drž v allowlistu s vlastníkem,
+- marketingové experimenty nenasazuj přes náhodný tag manager,
+- každý nový skript musí projít otázkou: „Jaká data uvidí a proč?“
+
+Třetí strany nejsou zakázané. Jen nesmí být anonymní obyvatelé webu, o kterých nikdo neví, proč tam bydlí.
+
+### 6) Performance monitoring dělej agregovaně
+
+Měření výkonu může snadno sklouznout k detailnímu sledování jednotlivých uživatelů. Pro většinu malých webů a SaaS týmů stačí agregované metriky podle stránky, typu zařízení, prohlížeče a verze release.
+
+Bezpečné signály:
+
+- median a horší percentily načítání klíčových stránek,
+- počet chybových odpovědí podle endpointu,
+- velikost assetů v release,
+- počet požadavků na stránku,
+- dostupnost syntetickým testem,
+- dopad konkrétního release na výkon.
+
+Rizikové signály:
+
+- ukládání kompletních URL s e-maily, tokeny nebo interními identifikátory,
+- dlouhá retence raw access logů bez důvodu,
+- session replay jako výchozí nástroj podpory,
+- spojování výkonových dat s CRM profilem bez jasného účelu,
+- automatické posílání chyb s obsahem formulářů.
+
+Výkon má pomoct rozhodovat, ne vytvořit druhý CRM systém v převleku za observabilitu.
+
+### 7) Cache invalidace potřebuje runbook
+
+Největší problém cache není zapnutí. Největší problém je chvíle, kdy potřebuješ rychle dostat ven opravený obsah, nové ceny, bezpečnostní úpravu nebo stažení souboru.
+
+Runbook by měl odpovědět:
+
+- kdo smí invalidovat cache,
+- jak se invaliduje jedna URL a jak celý prefix,
+- jak dlouho trvá propagace,
+- jak ověřit, že uživatel vidí novou verzi,
+- jak postupovat při špatně nacachovaném osobním obsahu,
+- jak zapsat incident a poučení.
+
+U citlivého obsahu nespoléhej na „ono to za hodinu vyprší“. Když se omylem nacachuje osobní nebo obchodně citlivý obsah, je to incident, ne drobná provozní nepříjemnost.
+
+### Šablona performance a cache review
+
+```markdown
+## Performance a cache review: [web / aplikace / část produktu]
+
+### Kontext
+- Vlastník:
+- Kritické stránky nebo toky:
+- Cílová zařízení a připojení:
+- Datum kontroly:
+
+### Aktiva
+- HTML:
+- CSS/JS:
+- Obrázky:
+- Fonty:
+- Exporty a soubory:
+
+### Cache pravidla
+- Veřejná cache:
+- Soukromá cache:
+- CDN pravidla:
+- Invalidace:
+- Výjimky:
+
+### Data a logy
+- Jaké požadavky vidí dodavatelé:
+- Retence logů:
+- Osobní údaje v URL:
+- Přístup k logům:
+
+### Měření
+- Metriky:
+- Agregace:
+- Alerty:
+- Poslední problém:
+
+### Rozhodnutí
+- Co zrychlit:
+- Co odstranit:
+- Co přestat posílat třetí straně:
+- Další review:
+```
+
+### Checklist pro výkon, cache a CDN
+
+- [ ] Kritické stránky mají výkonový rozpočet a vlastníka.
+- [ ] Verzovaná statická aktiva mají dlouhou cache, HTML a osobní obsah mají opatrná pravidla.
+- [ ] CDN nepřenáší tokeny, osobní údaje ani citlivé exporty v URL.
+- [ ] Externí skripty a fonty mají zdokumentovaný účel, vlastníka a datový tok.
+- [ ] Obrázky se optimalizují bez zbytečných metadat a bez neřízeného předávání třetím stranám.
+- [ ] Performance data jsou agregovaná a neslouží k profilování jednotlivců.
+- [ ] Existuje runbook pro invalidaci cache a incident se špatně cachovaným obsahem.
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -8598,6 +8778,8 @@ Dobrá praxe:
 - Matomo: [Configure Privacy Settings](https://matomo.org/faq/general/configure-privacy-settings-in-matomo/)
 - Matomo: [What data does Matomo track?](https://matomo.org/faq/general/faq_18254/)
 - MDN: [Lazy loading](https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Lazy_loading)
+- MDN: [HTTP caching](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Caching)
+- MDN: [Cache-Control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control)
 - MDN: [Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy)
 - MDN: [Strict-Transport-Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security)
 - MDN: [Referrer-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy)
@@ -8615,6 +8797,7 @@ Dobrá praxe:
 - OWASP: [Secure Headers Project](https://owasp.org/www-project-secure-headers/)
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - OWASP: [REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html)
+- OWASP: [Web Cache Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Web_Cache_Security_Cheat_Sheet.html)
 - OWASP: [Webhook Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Webhook_Security_Cheat_Sheet.html)
 - RFC Editor: [RFC 6376 — DomainKeys Identified Mail (DKIM) Signatures](https://www.rfc-editor.org/rfc/rfc6376)
 - RFC Editor: [RFC 7208 — Sender Policy Framework (SPF)](https://www.rfc-editor.org/rfc/rfc7208)
@@ -8633,6 +8816,7 @@ Dobrá praxe:
 - W3C WAI: [Labeling Controls](https://www.w3.org/WAI/tutorials/forms/labels/)
 - W3C WAI: [Understanding SC 1.3.5 Identify Input Purpose](https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose.html)
 - W3C WAI: [User Notification](https://www.w3.org/WAI/tutorials/forms/notifications/)
+- web.dev: [Optimize Largest Contentful Paint](https://web.dev/articles/optimize-lcp)
 - web.dev: [Web Vitals](https://web.dev/articles/vitals)
 - Yahoo Sender Hub: [Sender Best Practices](https://senders.yahooinc.com/best-practices/)
 - Úřad pro ochranu osobních údajů: [Cookies — otázky a odpovědi](https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies)
@@ -8643,6 +8827,8 @@ Dobrá praxe:
 ---
 
 ## Pracovní log
+
+- **2026-10-13:** Přidána příloha AW o výkonu webu a cache: výkonový rozpočet, pravidla pro statická aktiva a HTML, CDN review, optimalizace obrázků, kontrola fontů a skriptů, agregované performance metriky, cache invalidace, review šablona a checklist s ověřenými zdroji MDN, web.dev a OWASP.
 
 - **2026-10-13:** Přidána příloha AV o doménách, DNS a TLS: správa kritických domén, čitelné DNS zóny, DNSSEC, automatizované certifikáty, doménová reputace, bezpečné redirecty, doménová karta a checklist s ověřenými zdroji ENISA, EURid, Let's Encrypt a M3AAWG.
 
