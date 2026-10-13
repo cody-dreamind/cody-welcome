@@ -7818,6 +7818,179 @@ Audit log má mít retenční pravidlo. U některých bezpečnostních událost�
 - [ ] Retence bezpečnostních logů je popsaná v mapě dat.
 - [ ] Externí identity a auth služby mají ověřený region, smlouvy, export a fallback.
 
+## Příloha AS: Dodavatelé, DPA a subprocesory bez právnické mlhy
+
+Malý SaaS tým často řeší dodavatele pozdě: nejdřív se připojí analytika, e-mailing, CRM, chat widget, platební brána a monitoring, a až pak někdo otevře otázku „kdo vlastně zpracovává data našich zákazníků?“. To je drahý způsob, jak zjistit, že technický stack není architektura, ale archeologické naleziště.
+
+Privacy-first přístup dělá z výběru dodavatelů běžnou produktovou disciplínu. Ne proto, aby každá integrace trvala tři měsíce, ale aby tým věděl, kde data končí, kdo k nim má přístup, jak se dají exportovat a co se stane při incidentu nebo ukončení služby.
+
+EDPB pro malé firmy jasně rozlišuje roli správce, který určuje účely a prostředky zpracování, a zpracovatele, který jedná podle pokynů správce; vztah správce–zpracovatel má být upraven smlouvou, která popisuje zpracování a povinnosti stran ([EDPB: Data controller or data processor](https://www.edpb.europa.eu/sme/learn-the-basics/data-controller-or-data-processor_en)). Stejný praktický průvodce připomíná, že organizace má umět doložit soulad, vést záznamy o zpracování a uvažovat privacy by design už při návrhu ([EDPB: Be compliant](https://www.edpb.europa.eu/sme/be-compliant/be-compliant_en)).
+
+> **Codyho komentář:** DPA není magická imunita. Je to provozní smlouva. Pokud tým neví, jaká data dodavateli posílá, právník může dodat krásný dokument, ale realita pořád smrdí jako tracker po dešti.
+
+### 1) Nejprve urči roli, až potom řeš smlouvu
+
+U každého dodavatele si napiš, v jaké roli vystupuje. Bez toho bude DPA jen PDF v šuplíku.
+
+Typické situace:
+
+- **Hosting aplikace:** dodavatel obvykle zpracovává data podle tvých pokynů, protože provozuje infrastrukturu pro tvou službu.
+- **E-mailing transakčních zpráv:** dodavatel doručuje zprávy podle tvých pokynů, ale může mít vlastní bezpečnostní a doručovací logy.
+- **Platební brána:** často má vlastní právní povinnosti a část zpracování může dělat jako samostatný správce.
+- **Externí support nástroj:** zpracovává obsah ticketů a metadata zákaznické komunikace; riziko roste s tím, co do ticketů uživatelé píšou.
+- **Marketingová analytika:** pozor na to, zda dodavatel jen zpracovává agregované měření, nebo vytváří profily napříč weby.
+
+Praktické pravidlo: pokud dodavatel rozhoduje, proč a jak data použije pro vlastní účely, není to jen „technická krabička“. Zapiš to do vendor karty a neschovávej se za marketingovou větu „GDPR compliant“.
+
+### 2) Vendor karta patří před nákup, ne po něm
+
+Než tým zaplatí nový nástroj, vyplň krátkou kartu. Nemusí to být právní román. Stačí odpovědět na otázky, které rozhodují o riziku.
+
+Minimum vendor karty:
+
+- jaký problém nástroj řeší,
+- jaká data do něj potečou,
+- zda jde o osobní údaje, citlivý obsah, metadata nebo anonymní agregaci,
+- v jakém regionu se data ukládají a zpracovávají,
+- kdo má přístup na straně dodavatele,
+- zda existuje DPA nebo jiné smluvní ujednání,
+- jaké subprocesory dodavatel používá,
+- jak funguje export a smazání dat,
+- co se stane při ukončení služby,
+- kdo v týmu je vlastník dodavatele.
+
+Tahle karta pomáhá hlavně malým týmům. Když za půl roku někdo otevře otázku „proč platíme tři nástroje na formuláře?“, odpověď nebude v paměti jednoho zakladatele, který je zrovna na dovolené a mentálně v režimu airplane.
+
+### 3) DPA kontroluj podle provozních scénářů
+
+U DPA se nenech ukolébat tím, že dokument existuje. Ptej se, zda odpovídá tomu, jak službu opravdu používáš.
+
+Kontrolní otázky:
+
+- Jsou popsané kategorie dat, které do služby skutečně posíláme?
+- Jsou popsané účely zpracování dost konkrétně?
+- Má dodavatel povinnost zpracovávat data jen podle našich pokynů?
+- Je jasné, jak dodavatel hlásí bezpečnostní incident?
+- Umíme získat seznam subprocesorů a změny v něm?
+- Máme možnost vznést námitku proti novému subprocesoru?
+- Je popsané vrácení nebo smazání dat po ukončení služby?
+- Jsou jasná pravidla pro mezinárodní přenosy dat?
+- Dává smlouva smysl pro naši velikost a riziko, nebo jen přeposílá odpovědnost do mlhy?
+
+Pokud dodavatel tvrdí, že „smlouvy řeší enterprise tým až od vyššího tarifu“, je to signál. Ne vždy konečný stop sign, ale minimálně důvod zvednout obočí tak vysoko, že začne fungovat jako monitoring.
+
+### 4) Subprocesory nejsou poznámka pod čarou
+
+Subprocesor je další článek řetězu. U privacy-first provozu musíš vědět, jestli dodavatel data posílá dál — například na hosting, podporu, e-mailovou infrastrukturu, monitoring nebo AI službu.
+
+U každého kritického dodavatele sleduj:
+
+- veřejný seznam subprocesorů,
+- možnost odběru změn e-mailem nebo RSS, pokud existuje,
+- regiony subprocesorů,
+- typ služby, kterou subprocesor poskytuje,
+- dopad na data zákazníků,
+- termín, do kdy můžeš změnu připomínkovat nebo odmítnout.
+
+Praktický postup: jednou měsíčně projdi změny u kritických dodavatelů. Nemusíš dělat audit všech faviconů internetu. Stačí top služby, které drží zákaznická data, autentizaci, billing, support, produkční logy nebo zálohy.
+
+### 5) Evropský provoz preferuj jako výchozí stav
+
+Privacy-first hodnota Dreamindu není „všechno musí být lokální za každou cenu“. Je to rozumná preference: když existuje kvalitní evropská varianta s jasným zpracováním dat, dej jí přednost.
+
+Při výběru porovnávej:
+
+- zda dodavatel nabízí EU region,
+- zda má podporu evropských smluvních požadavků bez enterprise tanečků,
+- zda umí export dat bez prosby na support,
+- zda se obejde bez invazivního klientského trackingu,
+- zda má transparentní bezpečnostní dokumentaci,
+- zda lze službu nahradit bez přepisu půlky produktu.
+
+Evropský provoz neznamená automaticky bezpečí. Znamená lepší startovní pozici pro kontrolu nad daty, smlouvy, incidenty a komunikaci se zákazníky. Pořád platí: ověřuj konkrétní službu, ne vlaječku v patičce.
+
+### 6) Vendor review dělej podle rizika
+
+Ne každý nástroj potřebuje stejnou kontrolu. Ikonková knihovna a billing systém nejsou stejný svět, i když oba mají pěkné landing page.
+
+Rozděl dodavatele na tři úrovně:
+
+- **Nízké riziko:** žádná osobní data, žádný přístup do produkce, snadná náhrada.
+- **Střední riziko:** omezená osobní data, provozní metadata, integrace s produktem, ale bez citlivého obsahu.
+- **Vysoké riziko:** zákaznická data, autentizace, billing, support obsah, produkční logy, zálohy, administrátorský přístup nebo AI zpracování uživatelského obsahu.
+
+Pro nízké riziko stačí krátký záznam. Pro střední riziko přidej DPA a export. Pro vysoké riziko udělej plné review: datový tok, bezpečnost, subprocesory, incidenty, retenci, exit plán a vlastníka v týmu.
+
+### 7) Exit plán je součást smlouvy
+
+Dodavatel není jen otázka zavedení. Je to i otázka odchodu. Pokud neumíš data získat ven, nejsi zákazník, jsi nájemník bez kliky zevnitř.
+
+Před nasazením si ověř:
+
+- jak stáhnout všechna data,
+- v jakém formátu export přijde,
+- zda export obsahuje i metadata, přílohy a historii změn,
+- jak dlouho dodavatel drží data po ukončení,
+- jak potvrzuje smazání,
+- co se stane s účty bývalých zaměstnanců,
+- zda existuje API pro průběžnou zálohu nebo migraci.
+
+U kritických služeb si exit plán otestuj na malém vzorku. Nečekej na den, kdy se služba zdraží, spadne nebo ji koupí firma s apetitem na data větším než firemní lednice po sprint review.
+
+### Šablona vendor review karty
+
+```markdown
+## Vendor review: [název dodavatele]
+
+### Účel
+- Problém, který řeší:
+- Alternativy:
+- Vlastník v týmu:
+
+### Role a data
+- Role dodavatele: správce / zpracovatel / společný správce / nejasné
+- Kategorie dat:
+- Osobní údaje:
+- Citlivý obsah:
+- Datové toky:
+
+### Smlouvy a subprocesory
+- DPA / smluvní dokument:
+- Seznam subprocesorů:
+- Změny subprocesorů:
+- Regiony zpracování:
+- Přenosy mimo EHP:
+
+### Provoz
+- Přístupy:
+- Incident notification:
+- Export:
+- Smazání:
+- Retence:
+- Exit plán:
+
+### Rozhodnutí
+- Riziko: nízké / střední / vysoké
+- Schváleno k použití: ano / ne / podmíněně
+- Podmínky:
+- Datum dalšího review:
+```
+
+### Checklist pro dodavatele a DPA
+
+- [ ] Každý aktivní dodavatel má vlastníka v týmu.
+- [ ] U každého dodavatele je určená role: správce, zpracovatel, společný správce nebo nejasné.
+- [ ] Nejasné role jsou vyřešené před produkčním nasazením.
+- [ ] Vendor karta popisuje účel, datové kategorie, region, přístupy, export a retenci.
+- [ ] Kritičtí dodavatelé mají uložené DPA nebo odpovídající smluvní dokumenty.
+- [ ] Subprocesory jsou dohledatelné a změny se pravidelně kontrolují.
+- [ ] U vysokého rizika existuje exit plán a alespoň základní test exportu.
+- [ ] Dodavatelé s klientskými skripty jsou posouzení i z pohledu webového výkonu a trackingu.
+- [ ] EU region nebo evropská alternativa je preferovaná, pokud dává technický a provozní smysl.
+- [ ] Přístupy zaměstnanců k dodavatelským účtům jsou součástí access review.
+- [ ] Nepoužívaní dodavatelé se ruší, data se exportují nebo mažou podle retenční politiky.
+- [ ] Nový nástroj nesmí obejít privacy review jen proto, že „je to jen na zkoušku“.
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -7903,6 +8076,8 @@ Audit log má mít retenční pravidlo. U některých bezpečnostních událost�
 ---
 
 ## Pracovní log
+
+- **2026-10-13:** Přidána příloha AS o dodavatelích, DPA a subprocesorech: role správce/zpracovatele, vendor karta, kontrola DPA, subprocesory, evropský provoz, rizikové review, exit plán, šablona a checklist.
 
 - **2026-10-13:** Přidána příloha AR o přihlášení a správě účtů: vrstvy účtu, role podle práce, bezpečné pozvánky, hesla/passkeys/MFA, session pravidla, audit log, šablona access review a checklist.
 
