@@ -9058,6 +9058,160 @@ Jednou za čtvrtletí projdi screenshoty těchto stavů. Zkontroluj jazyk, odkaz
 - [ ] Tým má čtvrtletní review chybových stavů, odkazů, metrik a vlastníků.
 
 
+## Příloha AZ: Indexace, sitemap a robots bez SEO chaosu
+
+Technické SEO je často nudné. To je dobře. Nuda znamená, že vyhledávač najde správné stránky, neindexuje interní odpad, respektuje kanonické URL a tým nemusí jednou za čtvrt roku řešit, proč se ve výsledcích objevuje stará landing page z kampaně, preview deploy a testovací verze ceníku.
+
+Privacy-first pohled přidává ještě jednu vrstvu: indexace nemá být záminka k posílání návštěvníků přes cizí přesměrovávače, šmírovací shortlinky nebo externí skripty. Veřejný obsah má být dostupný přes čisté URL, srozumitelnou navigaci, RSS a přímé odkazy. Vyhledávače nepotřebují tvůj interní admin, staging, exporty ani výsledky vyhledávání s osobními dotazy v URL.
+
+### 1) Nejdřív rozhodni, co je veřejná hodnota
+
+Sitemap není skládka všech URL, které aplikace umí vyrobit. Je to seznam stránek, které chceš aktivně nabídnout k procházení a indexaci. Google Search Central popisuje sitemap jako způsob, jak vyhledávačům sdělit důležité stránky a metadata jako datum poslední změny ([Google Search Central: Sitemaps overview](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview)).
+
+Pro malý web si rozděl URL do čtyř skupin:
+
+- **Indexovat:** homepage, služby, produktové stránky, články, dokumentace, veřejný changelog, pricing.
+- **Procházet, ale nezdůrazňovat:** starší články, archiv, tagy, paginace a podpůrné stránky, pokud dávají smysl.
+- **Neindexovat:** interní vyhledávání, filtrovací kombinace bez unikátní hodnoty, děkovací stránky, preview kampaně.
+- **Nikdy veřejně nevystavovat:** admin, exporty, faktury, privátní soubory, zákaznické dashboardy, logy a staging s reálnými daty.
+
+Rozhodnutí si napiš do redakčního nebo provozního manuálu. Když vznikne nová sekce webu, tým nemá hádat, jestli má jít do sitemap. Má jen doplnit kartu stránky a projít checklist.
+
+### 2) Sitemap generuj z kanonického zdroje
+
+Sitemap by měla vznikat ze stejného zdroje pravdy jako veřejné routy. Pokud má web CMS, generuj ji z publikovaných položek. Pokud jde o statický web, generuj ji při buildu. Ručně psaná sitemap funguje jen do chvíle, než někdo přejmenuje slug a zapomene na XML. Což je přibližně okamžik, kdy tým poprvé spěchá.
+
+Praktická pravidla:
+
+- do sitemap dávej jen produkční, kanonické a veřejné URL,
+- nepřidávej URL s UTM parametry, session ID, tokeny nebo vyhledávacími dotazy,
+- datum `lastmod` měň podle skutečné změny obsahu, ne při každém buildu,
+- drž oddělené sitemap soubory pro články, statické stránky a dokumentaci, pokud web roste,
+- sitemap odkazuj z `robots.txt` a případně ji odevzdej ve vyhledávacích nástrojích.
+
+**Codyho komentář:** Sitemap s tisíci parametrických URL je jako poslat kurýrovi mapu města, kde jsou zvýrazněné všechny kanály, sklepní okénka a jeden rozbitý výtah. Technicky je to mapa. Prakticky je to sabotáž.
+
+### 3) `robots.txt` není bezpečnostní zámek
+
+Soubor `robots.txt` říká crawlerům, kam nemají chodit. Není to autentizace, firewall ani ochrana tajných dat. Google ve své dokumentaci k `robots.txt` výslovně připomíná, že pravidla se používají pro řízení crawlingu, ne jako metoda pro skrývání citlivého obsahu ([Google Search Central: Introduction to robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/intro)).
+
+To znamená:
+
+- admin a zákaznická data chraň přihlášením a oprávněními, ne řádkem `Disallow`,
+- staging chraň heslem, VPN, allowlistem nebo jinou reálnou bariérou,
+- exporty generuj jako krátkodobé odkazy s oprávněním, ne jako veřejné soubory,
+- citlivé soubory nedávej do web rootu jen proto, že „je nikdo nezná“,
+- `robots.txt` používej hlavně na crawl budget, duplicitní cesty a technický nepořádek.
+
+Privacy-first nastavení pro menší web může být velmi jednoduché: povolit veřejný obsah, zakázat technické cesty a uvést sitemap. Hlavní práce se ale děje jinde — v tom, že neveřejné věci nejsou veřejné.
+
+### 4) Kanonická URL chrání před duplicitami
+
+Stejný obsah se často objeví na více adresách: s lomítkem i bez, s parametry, ve více kategoriích, v preview cestě nebo přes starý slug. Kanonická URL říká, která adresa je hlavní. Google Search Central popisuje kanonizaci jako proces výběru reprezentativní URL pro duplicitní nebo velmi podobné stránky ([Google Search Central: How to specify a canonical URL](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls)).
+
+Pravidla pro malý tým:
+
+- každá indexovatelná stránka má jednu stabilní kanonickou URL,
+- interní odkazy vedou na kanonické URL, ne na přesměrované varianty,
+- staré slugs mají jasné `301` přesměrování na nejbližší relevantní stránku,
+- UTM parametry se používají pro kampaně, ale kanonická URL zůstává čistá,
+- preview deploye mají `noindex` nebo nejsou veřejně dostupné.
+
+Kanonické URL jsou i provozní disciplína. Když si tým zvykne sdílet čisté odkazy, méně dat teče do logů, CRM a chatů. UTM patří do kampaní, ne do každého interního odkazu, který někdo pošle kolegovi.
+
+### 5) Interní vyhledávání a filtry drž mimo index
+
+Interní výsledky vyhledávání, nekonečné kombinace filtrů a stránkování umí vyrobit obří množství URL s minimální hodnotou. Horší varianta: URL obsahuje hledaný dotaz člověka. Pokud se taková URL dostane do logů, analytiky, referrerů nebo indexu, zbytečně vytváříš privacy problém.
+
+Bezpečnější přístup:
+
+- výsledky interního vyhledávání nastav jako `noindex`, pokud nemají ručně kurátorovanou hodnotu,
+- citlivé dotazy neposílej do URL, pokud to není nutné pro sdílení,
+- autocomplete navrhuj bez odesílání každého znaku do externích služeb,
+- agregovaně sleduj témata hledání, ne jednotlivé uživatele,
+- populární nulové výsledky převáděj do backlogu obsahu nebo produktu.
+
+U e-shopu nebo katalogu může dávat smysl indexovat vybrané filtrovací landing pages. Ale musí být ručně navržené, mít unikátní obsah a jasný účel. Automatické indexování všech kombinací je SEO verze otevřené šuplíkové skříně.
+
+### 6) Redirecty udržuj jako produktovou mapu
+
+Redirect není jen technický detail. Je to slib, že starý odkaz nezemře bez vysvětlení. To je důležité pro SEO, kampaně, RSS čtečky, dokumentaci, partnerské odkazy i zákaznické e-maily.
+
+Redirect mapu aktualizuj při každé změně URL:
+
+- starý článek → nový článek nebo relevantní archiv,
+- stará služba → aktuální služba nebo vysvětlení změny,
+- stará kampaň → evergreen landing page,
+- zrušená funkce → changelog nebo migrační návod,
+- rozbitý externí odkaz → lidská `404`, pokud neexistuje férový nástupce.
+
+Nedělej všechno na homepage. Hromadné přesměrování na úvodní stránku sice vypadá jako úklid, ale pro člověka je to ztráta kontextu. Lepší je pár promyšlených redirectů než automatická centrifuga všech starých URL.
+
+### 7) Měření indexace dělej bez invazivního trackingu
+
+Technické SEO nepotřebuje profilovat návštěvníky. Stačí sledovat provozní signály:
+
+- kolik URL je v sitemap a kolik je skutečně indexovatelných,
+- kolik produkčních stránek vrací `200`, `301`, `404` a `5xx`,
+- které staré URL mají stále návštěvnost nebo zpětné odkazy,
+- které stránky mají chybějící titulky, meta popisy, canonical nebo `lang`,
+- jestli preview a staging nejsou indexované,
+- jestli RSS feed a sitemap odkazují na stejné kanonické články.
+
+Stačí pravidelný crawl vlastního webu, agregovaná analytika a kontrola logů bez ukládání citlivých parametrů. Cílem není vědět, kdo přesně přišel z jakého dotazu. Cílem je vědět, jestli veřejný obsah jde najít, načíst a pochopit.
+
+### Šablona indexační karty stránky
+
+```markdown
+## Indexační karta: [URL / typ stránky]
+
+### Účel
+
+- Primární publikum:
+- Hlavní dotaz nebo potřeba:
+- Navazující akce:
+- Vlastník obsahu:
+
+### Indexace
+
+- Indexovat: ano / ne
+- Kanonická URL:
+- Sitemap: ano / ne
+- Interní odkazy odkud:
+- Redirecty z historických URL:
+
+### Technika
+
+- HTTP status:
+- `title`:
+- Meta description:
+- `lang`:
+- Open Graph:
+- RSS / feed odkaz:
+
+### Privacy
+
+- Parametry v URL:
+- Data v logu:
+- Externí skripty:
+- Měření konverze:
+- Retence signálů:
+```
+
+### Checklist pro sitemap, robots a indexaci
+
+- [ ] Sitemap obsahuje jen produkční, veřejné a kanonické URL.
+- [ ] `robots.txt` odkazuje na sitemap a neobsahuje falešné „zabezpečení“ citlivých cest.
+- [ ] Admin, zákaznické dashboardy, exporty a staging jsou chráněné reálným oprávněním.
+- [ ] Každá indexovatelná stránka má stabilní canonical, správný status a interní odkazy.
+- [ ] Staré důležité URL mají konkrétní redirect, ne automatický přesun na homepage.
+- [ ] UTM, session ID, tokeny a osobní údaje se nedostávají do sitemap ani canonical URL.
+- [ ] Interní vyhledávání a nekonečné filtrovací kombinace nejsou indexované bez záměru.
+- [ ] Preview deploye a testovací prostředí nejsou veřejně indexovatelná.
+- [ ] RSS feed, sitemap a interní odkazy ukazují na stejné kanonické články.
+- [ ] Tým má měsíční crawl kontrolu pro `404`, redirecty, metadata a nechtěně veřejné stránky.
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -9096,6 +9250,8 @@ Jednou za čtvrtletí projdi screenshoty těchto stavů. Zkontroluj jazyk, odkaz
 - Let's Encrypt: [Getting Started](https://letsencrypt.org/getting-started/)
 - M3AAWG: [Email Authentication Recommended Best Practices](https://www.m3aawg.org/documents/en/email-authentication-recommended-best-practices)
 - Google Search Central: [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
+- Google Search Central: [How to specify a canonical URL](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls)
+- Google Search Central: [Introduction to robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/intro)
 - Google Search Console Help: [Performance report](https://support.google.com/webmasters/answer/7576553)
 - Google Search Central: [Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
 - Google Search Central: [Localized versions](https://developers.google.com/search/docs/specialty/international/localized-versions)
@@ -9159,6 +9315,8 @@ Jednou za čtvrtletí projdi screenshoty těchto stavů. Zkontroluj jazyk, odkaz
 ---
 
 ## Pracovní log
+
+- **2026-10-13:** Přidána příloha AZ o indexaci, sitemap a robots: rozdělení veřejných URL, generování sitemap z kanonického zdroje, limity `robots.txt`, canonical URL, interní vyhledávání, redirect mapa, agregované měření indexace, šablona a checklist s ověřenými zdroji Google Search Central.
 
 - **2026-10-13:** Přidána příloha AY o prázdných stavech a chybových stránkách: typy chyb podle uživatelského záměru, `404`, prázdné dashboardy, přístupné validační chyby, bezpečné `500`, nulové výsledky vyhledávání, vlastnictví review, šablona a checklist s ověřenými zdroji MDN a W3C.
 
