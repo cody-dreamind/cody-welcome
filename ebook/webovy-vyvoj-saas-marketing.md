@@ -7146,6 +7146,171 @@ Každý scénář má mít vlastníka, rozhodovací práh a komunikační pozná
 - [ ] Runbook řeší i komunikaci se zákazníky a interní odpovědnosti.
 - [ ] Tým umí říct, kdy byla poslední úspěšná obnova, ne jen poslední záloha.
 
+
+## Příloha AO: Monitoring a alerting bez sledovacího velína
+
+Monitoring má malému SaaS týmu pomoct zjistit, že produkt nefunguje, dřív než to zjistí zákazník ve tři ráno a napíše e-mail s předmětem „URGENT“. Nemá z produktu udělat sledovací velín, kde se sbírá každý pohyb uživatele jen proto, že by se jednou mohl hodit do grafu.
+
+Privacy-first monitoring stojí na jednoduché větě: sleduj zdraví systému, ne lidi. Potřebuješ vědět, jestli služba odpovídá, jestli roste chybovost, jestli fronta zpráv nezůstala viset a jestli platební webhooky nepadaly posledních dvacet minut. Nepotřebuješ kvůli tomu ukládat celé request body, e-mail zákazníka do každého logu a session replay z administrace. OWASP u logování doporučuje rozlišovat bezpečnostně a provozně relevantní události, chránit logy před manipulací a nelogovat citlivá data jako hesla, tokeny nebo zbytečný osobní obsah ([OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)). ENISA u malých firem opakovaně zdůrazňuje připravenost, kontinuitu provozu a řízení rizik jako praktickou disciplínu, ne jako dekoraci na audit ([ENISA: Cybersecurity guide for SMEs](https://www.enisa.europa.eu/publications/cybersecurity-guide-for-smes)).
+
+### 1) Začni uživatelskou zkušeností, ne grafem CPU
+
+CPU, RAM a disk jsou důležité, ale samy o sobě neříkají, jestli produkt plní slib. Uživatel neříká „dnes jsem měl špatnou p95 latenci databázového poolu“. Říká „nejde mi vytvořit faktura“, „nepřišel e-mail“, „dashboard se nenačetl“ nebo „nejde zaplatit“.
+
+Proto monitoring rozděl na vrstvy:
+
+- **dostupnost:** web, aplikace, API, status page, DNS, certifikát,
+- **kritické toky:** registrace, přihlášení, vytvoření projektu, platba, export, odeslání e-mailu,
+- **technické zdraví:** chybovost, latence, fronty, databáze, storage, cron úlohy,
+- **bezpečnostní signály:** opakované neúspěšné přihlášení, změny rolí, neobvyklé admin akce,
+- **business provoz:** počet dokončených objednávek, doručené onboarding e-maily, nevyřízené support tickety.
+
+Pro každý kritický tok napiš jednu větu: „Když toto nefunguje, zákazník nemůže udělat X.“ Tím oddělíš monitoring, který chrání hodnotu produktu, od monitoringu, který jen krmí dashboard.
+
+**Codyho komentář:** Graf, na který se nikdo nedívá a podle kterého se nikdy nerozhoduje, není observabilita. Je to digitální akvárium. Hezky bublá, ale ryby ti stejně umřou.
+
+### 2) Alert není notifikace. Alert je závazek někoho probudit.
+
+Nejčastější chyba malých týmů je udělat alert ze všeho. Výsledek? Slack kanál s 800 zprávami týdně, všichni ho ztlumí a jediný skutečný incident tiše projde kolem jako zloděj v ponožkách.
+
+Alert má vzniknout jen tehdy, když splňuje tři podmínky:
+
+1. problém má dopad na zákazníka, bezpečnost, peníze nebo data,
+2. někdo ví, co má udělat,
+3. reakce teď je lepší než reakce zítra.
+
+Praktické úrovně:
+
+- **P0:** produkt je nedostupný, běží únik dat, platby masově padají, zásadní bezpečnostní problém,
+- **P1:** kritický tok je rozbitý pro část zákazníků, fronta roste, e-maily nebo webhooky selhávají,
+- **P2:** degradace výkonu, zvýšená chybovost, problém má workaround,
+- **P3:** trend k vyšetření v pracovní době, technický dluh, pomalý růst nákladů.
+
+P0 a P1 patří do alertingu. P2 možná. P3 patří do reportu, issue trackeru nebo týdenního review. Pokud každá drobnost pípá stejně jako produkční výpadek, tým se naučí ignorovat všechno. Mozek je skvělý spam filtr, jen ho nechceš trénovat na incidenty.
+
+### 3) Alert payload drž krátký a bezpečný
+
+Alert má odpovědět na otázky: co se stalo, jaký je dopad, odkdy to trvá, kde se podívat a kdo je vlastník. Nemá posílat celé requesty, osobní údaje zákazníků nebo tokeny do chatovacího nástroje.
+
+Dobrá alert zpráva obsahuje:
+
+- název služby a prostředí,
+- prioritu a typ problému,
+- čas začátku a délku trvání,
+- agregovaný dopad: počet chyb, procento selhání, počet tenantů nebo dotčených požadavků,
+- odkaz na dashboard nebo runbook,
+- poslední deploy nebo změnu konfigurace,
+- vlastníka služby nebo rotaci.
+
+Špatná alert zpráva obsahuje:
+
+- e-mail konkrétního zákazníka bez nutnosti,
+- obsah formuláře, zprávy, souboru nebo faktury,
+- plný access token, API klíč nebo session ID,
+- celé URL s osobními parametry,
+- stack trace s citlivými hodnotami,
+- screenshot z adminu se zákaznickými daty.
+
+Když potřebuješ pro řešení incidentu konkrétní identifikátor, používej interní ID a přístup přes oprávněný admin nástroj. Chat není databáze incidentů. A rozhodně není trezor.
+
+### 4) SLO pomáhá říct, co je opravdu důležité
+
+Service Level Objective nemusí být korporátní magie. Pro malý SaaS stačí pár praktických cílů, které pomáhají rozhodnout, kdy opravovat, kdy investovat do infrastruktury a kdy přestat honit nuly za desetinnou čárkou.
+
+Příklad jednoduchých SLO:
+
+- veřejný web odpoví úspěšně v 99,5 % kontrol za měsíc,
+- přihlášení má p95 latenci pod 1,5 sekundy,
+- transakční e-mail je předán poskytovateli do 60 sekund,
+- platební webhook je zpracován do 2 minut,
+- export dat se dokončí do 10 minut nebo zobrazí srozumitelný stav.
+
+Ke každému SLO přidej error budget: kolik selhání je ještě přijatelné, než se tým zastaví a řeší spolehlivost. Když se budget pálí rychle, není čas přidávat další efektní feature s konfety. Je čas opravit základ.
+
+SLO zároveň chrání tým před perfekcionismem. Ne každá interní stránka potřebuje stejnou dostupnost jako přihlášení nebo platby. Privacy-first provoz je i o tom, že neinstaluješ tři další nástroje jen proto, abys měřil mikroskopem něco, co zákazník nikdy neuvidí.
+
+### 5) Syntetické kontroly jsou často čistší než sledování lidí
+
+Když chceš vědět, jestli registrační tok funguje, nemusíš čekat, až skutečný uživatel selže a jeho data skončí v logu. Můžeš pravidelně spustit syntetický test s technickým účtem a falešnými daty.
+
+Typické syntetické kontroly:
+
+- homepage vrací 200 a obsahuje klíčový text,
+- přihlašovací stránka se načte a certifikát je platný,
+- API health endpoint ověří databázi a frontu,
+- testovací registrace projde v sandbox prostředí,
+- transakční e-mail se odešle na interní testovací schránku,
+- cron úloha zapíše heartbeat po dokončení.
+
+Syntetické testy mají jednu velkou výhodu: kontroluješ funkčnost bez profilování návštěvníků. Měříš systém kontrolovaným vstupem. U produktových toků je jen potřeba pečlivě oddělit testovací účty, aby se nedostaly do reportingu, fakturace nebo obchodního follow-upu. Robot zákazníkem není. I když někdy vyplní formulář slušněji než člověk.
+
+### 6) Monitoring nákladů je také privacy-first disciplína
+
+Náklady nejsou jen finance. Náhlý růst účtu za logy, storage, e-maily nebo AI volání často znamená technický problém: nekonečný retry loop, rozbitý import, špatnou cache, spam útok nebo příliš upovídané logování.
+
+Sleduj minimálně:
+
+- objem logů podle služby a prostředí,
+- počet odeslaných e-mailů a bounce rate,
+- růst databáze a souborového úložiště,
+- počet API volání na drahé externí služby,
+- neúspěšné retry pokusy,
+- počet vytvořených exportů a jejich velikost.
+
+Privacy-first otázka zní: „Roste objem dat proto, že produkt vytváří hodnotu, nebo proto, že sbíráme bordel?“ Pokud logy vyrostou desetkrát po release, nemusí to být známka úspěchu. Může to být debug výpis, který omylem zapisuje každý payload. Gratuluji, vyrobil sis drahou časovanou bombu se search boxem.
+
+### 7) Každý alert musí mít runbook
+
+Alert bez runbooku je jen úzkost s timestampem. Runbook nemusí být dlouhý, ale musí říct, jak ověřit dopad, jaké první kroky udělat, kdy eskalovat a co nezkoušet.
+
+Minimální runbook:
+
+```markdown
+## Alert karta: [název alertu]
+
+### Co znamená
+- Služba / tok:
+- Priorita:
+- Dopad na zákazníka:
+- Typický falešný poplach:
+
+### První kontrola
+- Dashboard:
+- Log query bez PII:
+- Poslední deploy / změna:
+- Syntetický test:
+
+### První kroky
+- Krok 1:
+- Krok 2:
+- Krok 3:
+
+### Eskalace
+- Kdy volat vlastníka:
+- Kdy otevřít incident:
+- Kdy informovat zákazníky:
+
+### Privacy pravidla
+- Co se nesmí kopírovat do chatu:
+- Jaký identifikátor použít místo osobních údajů:
+- Retence souvisejících logů:
+```
+
+Runbook pravidelně upravuj podle skutečných incidentů. Pokud člověk při incidentu musel improvizovat, zapiš to. Pokud alert pětkrát za měsíc planě křičel, změň práh nebo ho zruš. Monitoring není posvátný chrám. Je to pracovní nástroj, a pracovní nástroje mají být ostré, ne hlučné.
+
+### Checklist pro privacy-first monitoring a alerting
+
+- [ ] Každý monitoring signál má jasný účel: dostupnost, kritický tok, bezpečnost, výkon, náklady nebo business provoz.
+- [ ] Kritické toky mají syntetické kontroly nebo jiné měření bez profilování reálných uživatelů.
+- [ ] Alert vzniká jen tehdy, když má dopad, vlastníka a očekávanou reakci.
+- [ ] Alert payload neobsahuje hesla, tokeny, celé request body, osobní údaje ani citlivé URL parametry.
+- [ ] P0/P1 alerty mají runbook, eskalační pravidla a vlastníka služby.
+- [ ] P2/P3 signály končí v review nebo issue trackeru, ne v nočním budíku.
+- [ ] SLO existují pro klíčové uživatelské toky, ne jen pro infrastrukturu.
+- [ ] Monitoring nákladů sleduje logy, e-maily, storage, externí API a retry smyčky.
+- [ ] Testovací účty a syntetické kontroly jsou oddělené od obchodních reportů.
+- [ ] Každý incident nebo falešný poplach vede k úpravě alertu, runbooku nebo prahu.
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -7227,6 +7392,7 @@ Každý scénář má mít vlastníka, rozhodovací práh a komunikační pozná
 
 ## Pracovní log
 
+- **2026-10-13:** Přidána příloha AO o privacy-first monitoringu a alertingu: kritické toky, alert priority, bezpečný payload, SLO, syntetické kontroly, monitoring nákladů, alert runbook a checklist.
 - **2026-10-13:** Přidána příloha AN o zálohách a obnově: RPO/RTO, datové třídy, bezpečné restore prostředí, pravidelné testy obnovy, privacy pravidla pro zálohy, scénáře incidentů, runbook a checklist.
 - **2026-10-13:** Přidána příloha AM o stagingu, preview deployích a testovacích datech: rozdělení prostředí, syntetická data, ochrana preview URL, sandbox integrace, oddělené secrets, provozní úklid a checklist.
 - **2026-10-13:** Přidána příloha AL o uploadu, přílohách a exportech: účel souborových toků, validace obsahu, oddělené úložiště, bezpečné exporty, metadata, retence, šablona karty a checklist.
