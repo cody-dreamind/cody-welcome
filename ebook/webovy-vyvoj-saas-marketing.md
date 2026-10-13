@@ -6141,6 +6141,156 @@ Bez prahů bude každý graf interpretovat ten, kdo má zrovna nejsilnější n�
 - [ ] Jednou měsíčně mažeme nebo upravujeme metriky, podle kterých nikdo nerozhoduje.
 
 
+## Příloha AI: Webhooky a API rozhraní bez integračního chaosu
+
+API a webhooky jsou skvělé, dokud se z nich nestane potrubní systém bez mapy. Malý SaaS tým často začne jednoduše: platební brána pošle webhook, CRM si stáhne leady, účetnictví dostane fakturu a interní automatizace pošle notifikaci do chatu. Pak se přidá druhý pricing model, nový zákaznický segment, pár výjimek pro enterprise klienta — a najednou nikdo přesně neví, který systém je zdroj pravdy.
+
+Privacy-first přístup tady neznamená brzdit integrace. Znamená dělat je tak, aby každé propojení mělo jasný účel, minimální rozsah dat, bezpečné ověření a plán na vypnutí. OWASP API Security Top 10 mezi riziky API uvádí mimo jiné rozbitou objektovou autorizaci, rozbitou autentizaci, neomezenou spotřebu zdrojů, špatnou inventuru API a nebezpečné používání cizích API ([OWASP API Security Top 10 2023](https://api-security.owasp.org/editions/2023/en/0x11-t10/)). To je hezký bezpečnostní způsob, jak říct: „integrace nejsou jen URL a token v env proměnné“.
+
+**Codyho komentář:** Webhook, který „rychle jen něco přepošle“, je budoucí incident v kapuci. Ne proto, že by byl webhook zlý. Ale protože rychlé integrace mají tendenci přežít autora, původní kontext i první tři pricing experimenty.
+
+### 1) Každé rozhraní musí mít smlouvu
+
+Než API endpoint nebo webhook pustíš do světa, napiš integrační smlouvu. Nemusí to být právní novela o dvanácti přílohách. Stačí dokument, který odpoví na praktické otázky:
+
+- kdo rozhraní volá a kdo ho vlastní,
+- jaký obchodní nebo produktový účel plní,
+- jaká data tečou tam a zpět,
+- co je zdroj pravdy,
+- jak se ověřuje požadavek,
+- jak se řeší chyby, retry a duplicity,
+- jak dlouho se drží logy a payloady,
+- jak se integrace vypne bez rozbití zákazníka.
+
+Příklad: platební webhook nemá „aktualizovat zákazníka“. Má zpracovat konkrétní událost typu `invoice.paid`, ověřit podpis, uložit idempotentní záznam o zpracování, změnit stav předplatného a případně zařadit transakční e-mail do fronty. To je rozdíl mezi procesem a kouzelnou dírou ve zdi.
+
+### 2) Endpoint není důkaz oprávnění
+
+Tajná URL není bezpečnostní model. Pokud webhook endpoint umí změnit stav objednávky, účtu nebo fakturace, musí ověřit, že požadavek opravdu pochází od správného odesílatele a nebyl změněn po cestě. OWASP Webhook Security Cheat Sheet doporučuje mimo jiné HTTPS, ověřování podpisu, správu podpisových tajemství, ochranu proti replay útokům, idempotenci a limity proti zahlcení ([OWASP Webhook Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Webhook_Security_Cheat_Sheet.html)).
+
+Praktické minimum pro příjem webhooků:
+
+- přijímej jen `POST` a jen očekávaný `Content-Type`,
+- ověř podpis nad raw tělem požadavku podle dokumentace poskytovatele,
+- kontroluj timestamp nebo nonce, pokud je protokol podporuje,
+- ukládej ID události a nedělej stejný vedlejší efekt dvakrát,
+- odpovídej rychle a zpracování pošli do fronty,
+- neloguj celé payloady, pokud obsahují osobní nebo obchodně citlivá data,
+- měj oddělené tajemství pro každou integraci a postup rotace.
+
+Pokud poskytovatel podpisy nepodporuje, zvaž další vrstvu: statický bearer token, mTLS, allowlist IP adres jako doplněk, nebo aspoň oddělený endpoint s nízkými oprávněními. IP allowlist sám o sobě není identita. Je to spíš dveřní kukátko: užitečné, ale zloděje nezastaví, pokud má klíč.
+
+### 3) Idempotence je levnější než omluvný e-mail
+
+Webhooky se opakují. Síť vypadne, poskytovatel zkusí doručení znovu, tvoje služba vrátí chybu po úspěšném zápisu, nebo někdo omylem klikne na „resend“. Pokud handler není idempotentní, můžeš zákazníkovi poslat dvě faktury, dvakrát prodloužit trial, dvakrát vytvořit účet nebo dvakrát odeslat e-mail.
+
+Základní pravidlo: každá událost musí mít jednoznačný identifikátor a tabulku zpracování.
+
+Příklad pracovního postupu:
+
+1. Přijmi webhook a ověř podpis.
+2. Z validovaného payloadu přečti `event_id`.
+3. V transakci zkontroluj, jestli už `event_id` existuje.
+4. Pokud ano, vrať úspěch bez opakování vedlejších efektů.
+5. Pokud ne, ulož `event_id`, zpracuj změnu a zapiš výsledek.
+6. Pro složitější operace pošli úkol do fronty s deduplikačním klíčem.
+
+Idempotence není jen technická elegance. Je to zákaznická důvěra. Lidé odpustí výpadek snáz než chaos v penězích, účtech nebo datech.
+
+### 4) API klíče musí mít rozsah a životnost
+
+API klíč bez rozsahu je generální klíč od domu. API klíč bez expirace je generální klíč zakopaný pod rohožkou od roku 2019. Pro malé týmy je lákavé vytvořit jeden dlouhodobý token a používat ho všude, protože „zatím to stačí“. Zatím skoro vždycky končí v logu, starém skriptu, bývalém notebooku nebo zapomenuté CI proměnné.
+
+Dobrá praxe pro API klíče:
+
+- vytvářej samostatný klíč pro každou integraci,
+- přiřaď mu minimální oprávnění,
+- pojmenuj ho podle účelu a vlastníka,
+- nastav expiraci nebo pravidelnou rotaci,
+- ukládej ho v secrets manageru, ne v repozitáři,
+- zobrazuj ho uživateli jen jednou,
+- loguj vytvoření, rotaci a zrušení, ale ne hodnotu klíče,
+- umožni rychlé odvolání bez zásahu do databáze ručně v pátek v 22:41.
+
+OWASP REST Security Cheat Sheet u REST API zdůrazňuje mimo jiné HTTPS, přístupovou kontrolu na endpointech, validaci tokenů, omezení HTTP metod, validaci vstupů a opatrnost u citlivých informací v požadavcích ([OWASP REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html)). Pro privacy-first SaaS je důležité přidat ještě jednu otázku: „Musí tento klíč vidět právě tato data?“
+
+### 5) Chyby a retry musí být navržené, ne vymodlené
+
+Integrace se kazí normálně. Dodavatel má výpadek, payload změní strukturu, zákazník smaže propojení, token expiruje, endpoint vrátí `500`, DNS si vezme volno a fronta se naplní jako kavárna v dešti. Rozdíl mezi stabilním produktem a nervózním produktem je v tom, jestli se s chybami počítá.
+
+Pro každou integraci si napiš:
+
+- které chyby se mají retryovat,
+- kolikrát a s jakým backoffem,
+- kdy se integrace označí jako degradovaná,
+- kdo dostane alert,
+- co uvidí zákazník,
+- jestli se dá akce spustit ručně znovu,
+- co se stane, když událost dorazí pozdě nebo mimo pořadí.
+
+Nespoléhej na pořadí webhooků, pokud ho poskytovatel výslovně negarantuje. U důležitých stavů raději po přijetí události dotáhni aktuální stav z API poskytovatele. Událost je signál, ne vždy kompletní realita.
+
+### 6) Integrační inventura je součást provozu
+
+API a webhooky potřebují inventuru stejně jako dodavatelé, databáze a domény. Bez ní se časem objeví endpointy, které nikdo nezná, ale všichni se bojí je vypnout. To je technický ekvivalent tajemného vypínače ve sklepě.
+
+Minimální inventura:
+
+| Položka | Co zapsat |
+| --- | --- |
+| Název integrace | Například „Stripe billing webhook“ nebo „CRM lead export“ |
+| Vlastník | Člověk nebo tým odpovědný za provoz |
+| Účel | Jaké rozhodnutí nebo proces integrace podporuje |
+| Směr dat | Příjem, odesílání, obousměrně |
+| Kategorie dat | technická, zákaznická, fakturační, support, marketing |
+| Oprávnění | scope, role, endpointy, limity |
+| Tajemství | kde je uložené, kdo ho může rotovat |
+| Retence | jak dlouho držíme payloady, chyby a auditní záznamy |
+| Vypnutí | dopad, fallback, postup, test |
+
+Jednou měsíčně projdi nové integrace a jednou kvartálně staré. Hledej hlavně nepoužívané klíče, endpointy bez vlastníka, payloady s nadbytečnými daty a automatizace, které dělají víc, než bylo původně domluveno.
+
+### Šablona integrační karty
+
+```markdown
+## Integrační karta: [název integrace]
+
+### Účel
+- Jaký proces integrace podporuje:
+- Co se stane, když integrace nefunguje:
+- Vlastník:
+
+### Datový tok
+- Směr dat:
+- Typy událostí / endpointy:
+- Kategorie dat:
+- Co výslovně neposíláme:
+
+### Bezpečnost
+- Autentizace / podpis:
+- Oprávnění / scope:
+- Rotace tajemství:
+- Idempotence:
+- Rate limit / retry:
+
+### Privacy a provoz
+- Retence payloadů a logů:
+- Místo zpracování / dodavatel:
+- Zákaznické vysvětlení:
+- Postup vypnutí:
+```
+
+### Checklist pro webhooky a API rozhraní
+
+- [ ] Každé API nebo webhook má vlastníka, účel a integrační kartu.
+- [ ] Příchozí webhooky ověřují podpis nebo jiný silný důkaz původu.
+- [ ] Handler je idempotentní a umí bezpečně zpracovat duplicity.
+- [ ] API klíče jsou oddělené podle integrace, mají minimální oprávnění a plán rotace.
+- [ ] Payloady a URL neobsahují zbytečné osobní údaje ani tajemství.
+- [ ] Chyby, retry, backoff a ruční znovuspuštění jsou popsané předem.
+- [ ] Logy ukládají stav zpracování, ne celé citlivé payloady jako výchozí stav.
+- [ ] Nepoužívané endpointy, klíče a webhooks se pravidelně ruší.
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -6181,12 +6331,15 @@ Bez prahů bude každý graf interpretovat ten, kdo má zrovna nejsilnější n�
 - MDN: [Lazy loading](https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Lazy_loading)
 - MDN: [prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)
 - NCSC: [Offline backups in an online world](https://www.ncsc.gov.uk/guidance/offline-backups-in-an-online-world)
+- OWASP: [API Security Top 10 2023](https://api-security.owasp.org/editions/2023/en/0x11-t10/)
 - OWASP: [Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
 - OWASP: [Forgot Password Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html)
 - OWASP: [Multifactor Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html)
 - OWASP: [Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
 - OWASP: [Application Security Verification Standard](https://owasp.org/projects/asvs)
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- OWASP: [REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html)
+- OWASP: [Webhook Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Webhook_Security_Cheat_Sheet.html)
 - RFC Editor: [RFC 6376 — DomainKeys Identified Mail (DKIM) Signatures](https://www.rfc-editor.org/rfc/rfc6376)
 - RFC Editor: [RFC 7208 — Sender Policy Framework (SPF)](https://www.rfc-editor.org/rfc/rfc7208)
 - RFC Editor: [RFC 8058 — Signaling One-Click Functionality for List Email Headers](https://www.rfc-editor.org/rfc/rfc8058)
@@ -6211,6 +6364,7 @@ Bez prahů bude každý graf interpretovat ten, kdo má zrovna nejsilnější n�
 
 ## Pracovní log
 
+- **2026-10-13:** Přidána příloha AI o webhookových a API rozhraních: integrační smlouva, ověřování podpisů, idempotence, správa API klíčů, retry scénáře, inventura, šablona integrační karty a checklist.
 - **2026-10-12:** Přidána příloha AH o dashboardech a rozhodování bez metrikového divadla: rozhodovací účel, rytmus metrik, interpretace, agregace, kvalita signálů, prahy, vlastníci, šablona dashboard karty a checklist.
 - **2026-10-12:** Přidána příloha AG o customer success bez sledovacího panoptika: definice zákaznického úspěchu, týmové health signály, vysvětlitelné stavy, oddělení péče/supportu/prodeje, bezpečné CRM poznámky, playbook a checklist.
 - **2026-10-12:** Přidána příloha AF o produktových e-mailech a notifikacích: rozdělení typů zpráv, autentizace SPF/DKIM/DMARC, minimalizace obsahu a trackingu, preference centrum, doručitelnost, verzování šablon, e-mailová mapa a checklist.
