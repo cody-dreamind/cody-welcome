@@ -12903,6 +12903,160 @@ Tým pak neřeší „vývojáři chtějí čistší kód“, ale „produkt bud
 - [ ] Údržba se komunikuje obchodním jazykem, ne jen technickým vkusem.
 
 
+## Příloha BU: Staging a testovací data bez kopírování produkčního nepořádku
+
+Testovací prostředí má týmu pomoct dělat změny bezpečněji. Nemá být tajným druhým skladem produkčních osobních údajů, kam se jednou měsíčně vysype databáze „protože se to tak vždycky dělalo“. To je pohodlné jen do chvíle, než někdo pošle testovací e-mail reálnému zákazníkovi, nechá dump na notebooku, nebo omylem spustí integrační job proti živým datům. Gratuluju, právě vznikl incident s bonusem v podobě trapného vysvětlování.
+
+Privacy-first staging stojí na jednoduchém pravidle: produkční data patří do produkce. Pokud je opravdu potřebuješ mimo ni, musí existovat jasný účel, krátká doba života, omezený přístup a technická ochrana. Ve většině běžné práce ale stačí syntetická data, malé anonymizované vzorky nebo ručně vytvořené scénáře.
+
+### 1) Rozliš lokální vývoj, staging, demo a sandbox
+
+Jedno neprodukční prostředí nestačí popsat slovem „test“. Každé prostředí má jiný účel a jiné riziko:
+
+- **Lokální vývoj:** rychlé ověření změn na stroji vývojáře, ideálně se syntetickými daty a lokálními službami.
+- **Staging:** prostředí podobné produkci pro ověření deploye, migrací, integrací a kritických uživatelských cest.
+- **Demo:** prostředí pro obchod, onboarding nebo školení, kde data vypadají realisticky, ale nejsou skutečná.
+- **Sandbox zákazníka:** oddělený prostor, kde si zákazník zkouší nastavení bez dopadu na ostrý účet.
+
+Když se tyhle role smíchají, vzniká chaos. Obchod chce hezká demo data, vývojář potřebuje rozbít migraci, support chce reprodukovat ticket a někdo omylem připojí platební bránu v ostrém režimu. Prostředí musí mít vlastníka, účel a jasné hranice.
+
+### 2) Testovací data navrhni jako produktovou pomůcku
+
+Dobrá testovací data nejsou náhodná jména, tři firmy a uživatel „Test Test“. Mají pokrývat reálné scénáře:
+
+- nový účet bez dat,
+- účet po prvním úspěšném kroku,
+- účet s chybějícím nastavením,
+- účet s více rolemi a oprávněními,
+- účet na limitu tarifu,
+- účet s neúspěšnou platbou,
+- účet před exportem nebo zrušením,
+- účet s dlouhým názvem, diakritikou a nečekanými vstupy.
+
+Syntetická data mají být dost realistická, aby odhalila chyby v rozhraní a procesech, ale nesmí napodobovat konkrétního zákazníka tak přesně, že se z nich stane osobní údaj v převleku. Fiktivní firma „Acme s.r.o.“ je v pohodě. Kopie skutečného klienta s přejmenovaným e-mailem a ponechanými fakturami už je šedá zóna s blikající cedulí „proč si to děláme“.
+
+### 3) Produkční dump není defaultní workflow
+
+Kopírování produkční databáze do stagingu je lákavé, protože rychle odhalí chyby, které syntetická data nemají. Zároveň je to jedna z nejrychlejších cest k privacy dluhu. Pokud tým dump opravdu potřebuje, musí předem odpovědět:
+
+- Jaký konkrétní problém bez produkčního vzorku nevyřešíme?
+- Které tabulky a sloupce jsou nezbytné?
+- Jak se data anonymizují nebo pseudonymizují?
+- Kdo k nim bude mít přístup?
+- Kdy se dump automaticky smaže?
+- Jak zabráníme odesílání e-mailů, webhooků, SMS a platebních akcí?
+
+Výchozí režim má být opačný: nejdřív syntetická data, potom minimální anonymizovaný vzorek, a až nakonec krátkodobý kontrolovaný export. Produkční dump není vývojářský multivitamín. Bere se jen, když je důvod.
+
+### 4) Anonymizace musí být opakovatelná, ne ruční magie
+
+Ruční mazání sloupců v databázovém editoru není anonymizační proces. Je to loterie s hezkým UI. Pokud se data převádějí do neprodukčního prostředí, anonymizace má být skriptovaná, verzovaná a kontrolovatelná.
+
+Praktická pravidla:
+
+- e-maily nahraď doménou, která nemůže doručovat skutečným lidem, například interně blokovaným testovacím vzorem,
+- telefonní čísla, adresy, poznámky a volná textová pole ber jako riziková,
+- tokeny, API klíče, session ID a refresh tokeny vždy zahoď nebo nahraď,
+- platební identifikátory a fakturační údaje drž mimo běžný staging,
+- zachovej jen ty vazby, které potřebuješ pro test scénáře,
+- po anonymizaci spusť kontrolu, která hledá e-maily, domény, telefony, klíče a podezřelé identifikátory.
+
+**Codyho komentář:** Pokud anonymizaci neumíš zopakovat jedním příkazem, nemáš anonymizaci. Máš vzpomínku na to, že někdo kdysi něco promazal a snad to dopadlo dobře. To není proces, to je folklór.
+
+### 5) Neprodukční prostředí nesmí mluvit se světem jako produkce
+
+Staging často selže ne kvůli datům, ale kvůli integracím. Testovací prostředí pošle reálný e-mail, vytvoří reálnou fakturu, zavolá ostrý webhook nebo zapíše do produkční analytiky. Proto musí mít staging bezpečnostní zábrany:
+
+- transakční e-maily směruj do testovací schránky nebo e-mailového sinku,
+- webhooky posílej jen na testovací endpointy,
+- platební bránu používej výhradně v testovacím režimu,
+- analytiku odděl od produkčního webu a označ prostředí,
+- indexaci zakaž přes hlavičky, robots pravidla a přístupové omezení,
+- externí API klíče odděl podle prostředí a práv,
+- destruktivní joby vyžadují explicitní potvrzení a bezpečný allowlist.
+
+Z pohledu zákazníka je úplně jedno, že problém vznikl „jen na stagingu“. Pokud dostane testovací e-mail s divným obsahem, důvěra klesá v produkci. Uživatelé nerozlišují naše interní výmluvy. A mají pravdu.
+
+### 6) Přístupy drž užší než v produkci
+
+Je paradoxní, jak často má staging slabší ochranu než produkce, i když obsahuje kopie dat a méně monitoringu. Neprodukční prostředí má mít minimálně stejnou disciplínu přístupů:
+
+- samostatné účty, ne sdílené heslo v chatu,
+- MFA pro administrátorské přístupy,
+- role podle potřeby, ne univerzální admin pro každého,
+- logování přístupu k datům a exportům,
+- automatické mazání starých dumpů,
+- zákaz ukládání exportů do osobních cloudů a lokálních složek bez šifrování.
+
+Pro malé týmy je praktické zavést jednoduché pravidlo: kdo si vytvoří export nebo testovací dataset, je zodpovědný i za jeho smazání. Automatika je lepší, ale vlastník je pořád potřeba.
+
+### 7) Testovací scénáře patří do repozitáře
+
+Nejlepší dlouhodobé řešení je posunout know-how z anonymních dumpů do verzovaných testovacích scénářů. Repozitář může obsahovat seed skripty, fixture data, factory funkce, ukázkové organizace, demo účty a kontrolní checklisty. Výhoda je obrovská: každý ví, jaké situace systém umí simulovat, a scénáře se vyvíjejí spolu s produktem.
+
+Začni malým katalogem:
+
+- `trial_empty`: nový trial bez dokončeného nastavení,
+- `trial_activated`: účet po první hodnotné akci,
+- `team_roles`: organizace s vlastníkem, adminem a běžným členem,
+- `billing_failed`: účet s problémem platby,
+- `export_ready`: účet vhodný pro test exportu dat,
+- `cancellation_pending`: účet v procesu zrušení,
+- `large_workspace`: větší dataset pro výkon a UX limitů.
+
+Tahle data nemusí být dokonalá. Musí být užitečná, udržovatelná a bezpečná. Perfektní testovací svět neexistuje. Ale svět bez reálných zákaznických e-mailů ve stagingu? Ten existovat může.
+
+### Šablona karty testovacích dat
+
+## Testovací dataset: [název]
+
+### Účel
+
+- Jaký scénář ověřuje:
+- Kdo dataset používá:
+- Kde běží:
+
+### Data
+
+- Typ dat: syntetická / anonymizovaný vzorek / zákaznický sandbox
+- Obsahuje osobní údaje: ne / omezeně / ano s odůvodněním
+- Riziková pole:
+
+### Integrace
+
+- E-maily:
+- Webhooky:
+- Platby:
+- Analytika:
+- Externí API:
+
+### Přístup a retence
+
+- Vlastník:
+- Kdo má přístup:
+- Datum automatického smazání nebo review:
+- Kde je skript nebo postup obnovy:
+
+### Kontrola
+
+- Jak ověříme, že dataset neobsahuje reálné e-maily, tokeny nebo citlivá pole:
+- Jak ověříme, že staging neodesílá akce do produkčních služeb:
+
+### Checklist pro staging a testovací data
+
+- [ ] Každé neprodukční prostředí má účel, vlastníka a oddělené konfigurace.
+- [ ] Výchozí testovací data jsou syntetická, ne kopie produkční databáze.
+- [ ] Produkční vzorky mají jasný důvod, minimální rozsah, anonymizaci a datum smazání.
+- [ ] Anonymizace je skriptovaná, verzovaná a kontrolovaná automatickou detekcí rizikových polí.
+- [ ] E-maily, webhooky, platby, analytika a externí API jsou ve stagingu bezpečně oddělené.
+- [ ] Přístupy do stagingu mají role, MFA a žádné sdílené účty.
+- [ ] Exporty, dumpy a lokální kopie mají vlastníka a krátkou retenci.
+- [ ] Klíčové scénáře jsou popsány jako seed data nebo fixture v repozitáři.
+- [ ] Demo prostředí obsahuje realistická, ale fiktivní data.
+- [ ] Před každým větším importem proběhne kontrola, že se neaktivují produkční integrace.
+
+
+
 ## Zdroje
 
 - Atlassian: [SLA vs. SLO vs. SLI](https://www.atlassian.com/incident-management/kpis/sla-vs-slo-vs-sli)
@@ -13015,6 +13169,7 @@ Tým pak neřeší „vývojáři chtějí čistší kód“, ale „produkt bud
 
 ## Pracovní log
 
+- **2026-10-14:** Přidána příloha BU o stagingu a testovacích datech: oddělení prostředí, syntetická data, opatrné zacházení s produkčními dumpy, skriptovaná anonymizace, bezpečné integrace, přístupy, seed scénáře a checklist.
 - **2026-10-14:** Přidána příloha BT o technickém dluhu a údržbě bez hrdinského divadla: kategorizace dluhu podle dopadu, provozní/produktový/bezpečnostní/privacy/týmový dluh, vlastnictví, navázání refaktoru na hodnotu, údržbový rozpočet, měření tření, obchodní komunikace, šablona karty a checklist.
 - **2026-10-14:** Přidána příloha BS o žádostech subjektů údajů bez paniky: vstupní kanál, triáž práv, datová mapa, bezpečný export, praktický výmaz, evidence odpovědí, pravidelné testování, šablona karty žádosti a checklist s ověřenými zdroji Evropské komise a EDPB.
 - **2026-10-14:** Přidána příloha BR o klientském portálu a sdílení souborů bez datového blešího trhu: účel portálu, opakovatelná struktura, role a přístupy, schvalovací stavy, bezpečné předávání přístupů, retenční pravidla, agregované měření používání, šablona portálu a praktický checklist.
