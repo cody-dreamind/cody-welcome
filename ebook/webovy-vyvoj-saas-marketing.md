@@ -10257,6 +10257,177 @@ Když se pět zákazníků ptá na stejné riziko, není to pět otravných dota
 
 ---
 
+
+## Příloha BG: Nákladová disciplína SaaS bez cloudového překvapení
+
+Růst SaaS produktu se často řeší přes akvizici, onboarding a retenci. Náklady se nechají „na potom“, protože přece nejdřív musíme růst. Jenže potom přijde faktura za infrastrukturu, e-maily, monitoring, AI API, úložiště, podporu a tři nástroje, které nikdo neumí vypnout. Gratuluju, právě se narodil malý finanční horor s hezkým dashboardem.
+
+Privacy-first provoz má v nákladech jednu výhodu: když sbíráš méně dat, méně jich ukládáš, indexuješ, posíláš dodavatelům, zálohuješ a vysvětluješ. Disciplína v datech je zároveň disciplína v rozpočtu.
+
+### 1) Náklady mapuj podle zákaznické hodnoty
+
+Nezačínej tabulkou všech faktur. Začni otázkou: které náklady přímo pomáhají zákazníkovi dostat slíbenou hodnotu?
+
+Praktické rozdělení:
+
+- **Produktové jádro:** hosting aplikace, databáze, úložiště, transakční e-maily, monitoring, zálohy.
+- **Růst a komunikace:** web, obsah, analytika, CRM, support, onboardingové e-maily.
+- **Interní provoz:** týmové nástroje, dokumentace, projektové řízení, účetnictví.
+- **Experimenty:** AI funkce, nové integrace, prototypy, marketingové testy.
+- **Riziková mlha:** nástroje bez vlastníka, duplicity, historické účty, „to možná ještě používáme“.
+
+U každé položky napiš jednu větu: „Platíme za to, protože…“ Pokud věta nejde napsat bez trapného kašlání do rukávu, položka patří do review.
+
+### 2) Jednotkové náklady sleduj jednoduše
+
+Zakladatel malého SaaS nepotřebuje hned korporátní FinOps oddělení. Potřebuje vědět, jestli každý nový zákazník zlepšuje ekonomiku produktu, nebo jen přidává další provozní batoh.
+
+Začni třemi jednoduchými pohledy:
+
+1. **Náklad na aktivního zákazníka:** měsíční provozní náklady dělené počtem aktivních zákazníků.
+2. **Náklad na workspace nebo účet:** užitečné u týmového SaaS, kde jeden zákazník může mít desítky uživatelů.
+3. **Náklad na klíčovou akci:** například zpracovaný dokument, odeslaná kampaň, vygenerovaný report nebo uložený projekt.
+
+Nejde o účetní dokonalost. Jde o trend. Když náklad na klíčovou akci roste rychleji než hodnota pro zákazníka, je čas řešit architekturu, limity nebo pricing.
+
+**Codyho komentář:** Nejhorší metrika je „cloud stojí nějak moc“. To není metrika, to je výkřik z kuchyně. Lepší je: „zpracování jednoho reportu stojí průměrně X a u velkých účtů roste kvůli ukládání příloh“. S tím už se dá něco dělat.
+
+### 3) Limity nastav jako produktovou vlastnost, ne trest
+
+Limity nejsou nepřátelé růstu. Jsou to mantinely, díky kterým produkt zůstane rychlý, bezpečný a finančně předvídatelný.
+
+Dobré limity jsou:
+
+- srozumitelné před nákupem,
+- navázané na hodnotu zákazníka,
+- technicky vynutitelné,
+- měřené bez zbytečného profilování,
+- doplněné férovou cestou k vyššímu tarifu nebo individuální domluvě.
+
+Příklady:
+
+- počet projektů podle tarifu,
+- objem úložiště podle workspace,
+- počet odeslaných transakčních nebo onboardingových e-mailů,
+- počet AI akcí nebo exportů za měsíc,
+- retenční délka auditních logů podle plánu.
+
+Špatný limit je ten, který zákazník objeví až ve chvíli, kdy mu rozbije práci. Dobrý limit se chová jako dopravní značka: možná není sexy, ale zabrání tomu, aby všichni skončili v příkopu.
+
+### 4) AI a automatizace měř podle účelu
+
+AI funkce umí náklady rozkolísat rychleji než šéf marketingu rozpočet na „brand awareness“. Proto potřebují vlastní pravidla.
+
+U každé AI nebo automatizační funkce si napiš:
+
+- jaký problém řeší,
+- kdo ji může spustit,
+- jaký vstup posílá mimo vlastní systém,
+- jaký je maximální rozumný rozsah jedné akce,
+- jak se pozná zneužití nebo chyba,
+- jak se funkce vypne bez pádu produktu.
+
+Privacy-first minimum: neposílej do externí AI služby osobní data, obchodní tajemství ani zákaznický obsah jen proto, že je to pohodlné. Když to opravdu potřebuješ, udělej z toho vědomé produktové rozhodnutí, popiš datový tok, nastav limity a dej zákazníkovi jasnou informaci.
+
+### 5) Rozpočtové alarmy mají být provozní, ne panické
+
+Alarm na náklady nemá jen vystrašit zakladatele v neděli večer. Má spustit konkrétní postup.
+
+Dobrý alarm říká:
+
+- která oblast překročila očekávání,
+- proti jakému období nebo limitu,
+- kdo je vlastník,
+- jaké první tři kontroly se mají udělat,
+- kdy se má rozhodnout o zásahu.
+
+Příklad reakce na náhlý růst nákladů za úložiště:
+
+1. Zkontroluj, zda nepřibyl nový typ přílohy nebo exportu.
+2. Ověř, zda se nemaže dočasný obsah podle retenčních pravidel.
+3. Najdi největší účty podle objemu, ale nečti jejich obsah.
+4. Rozhodni, jestli jde o bug, legitimní růst, nebo chybějící limit.
+5. Zapiš změnu do nákladového logu.
+
+### 6) Nástroje ruš pravidelně, ne až v krizi
+
+Jednou měsíčně projdi SaaS nástroje, integrace a účty. Ne jako hon na čarodějnice, ale jako hygienu.
+
+Ptej se:
+
+- Kdo je vlastník nástroje?
+- Kdy byl naposledy použit pro zákaznickou nebo provozní hodnotu?
+- Jaká data v něm jsou?
+- Umíme data exportovat a smazat?
+- Máme alternativu nebo fallback?
+- Je cena pořád přiměřená hodnotě?
+
+Zrušení nástroje není selhání. Selhání je platit za něj další rok, protože se nikomu nechce zjistit, jestli v něm náhodou neleží jeden starý CSV export z doby bronzové.
+
+### 7) Náklady propojuj s roadmapou
+
+Každé větší roadmapové téma by mělo mít nákladovou otázku. Ne proto, aby se zabily dobré nápady, ale aby se nápady navrhovaly dospěle.
+
+Před implementací se zeptej:
+
+- Přidává funkce nové ukládání dat?
+- Zvyšuje objem logů, e-mailů, exportů nebo AI volání?
+- Potřebuje nového dodavatele?
+- Mění nároky na support?
+- Má jasný tarifní nebo hodnotový model?
+- Dá se funkce vypnout, omezit nebo migrovat?
+
+Když odpovědi neznáš, funkce může jít do discovery, ne rovnou do produkce. Roadmapa bez nákladové reality je přáníčko. Hezké, barevné, ale fakturu nezaplatí.
+
+### Šablona nákladové karty služby
+
+## Nákladová karta: [služba / funkce / oblast]
+
+### Kontext
+- Vlastník:
+- Účel:
+- Zákaznická hodnota:
+- Napojené produktové funkce:
+- Dodavatel / interní systém:
+
+### Nákladový model
+- Fixní měsíční náklad:
+- Proměnný náklad:
+- Jednotka spotřeby:
+- Očekávaný měsíční rozsah:
+- Hranice pro alarm:
+
+### Data a privacy
+- Jaká data služba zpracovává:
+- Kde jsou data uložena:
+- Retence:
+- Přístupové role:
+- Export / smazání:
+
+### Rizika
+- Co se stane při růstu spotřeby:
+- Co se stane při výpadku:
+- Jak službu vypneme nebo omezíme:
+- Jak poznáme zneužití:
+
+### Rozhodnutí
+- Zachovat / omezit / nahradit / zrušit:
+- Další krok:
+- Datum dalšího review:
+
+### Checklist pro nákladovou disciplínu SaaS
+
+- [ ] Každý placený nástroj má vlastníka, účel a datum posledního review.
+- [ ] Rozlišujeme produktové jádro, růst, interní provoz, experimenty a rizikovou mlhu.
+- [ ] Sledujeme alespoň jeden jednoduchý jednotkový náklad podle zákaznické hodnoty.
+- [ ] Limity jsou popsané v produktu nebo tarifech, ne schované jako překvapení.
+- [ ] AI a automatizační funkce mají rozpočtový i privacy guardrail.
+- [ ] Rozpočtové alarmy spouštějí konkrétní postup, ne jen paniku.
+- [ ] Dočasná data, exporty a přílohy mají retenční pravidla.
+- [ ] Měsíčně rušíme nebo omezujeme nástroje bez jasné hodnoty.
+- [ ] Roadmapové položky obsahují otázku na provozní náklady a nový datový tok.
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -10363,6 +10534,7 @@ Když se pět zákazníků ptá na stejné riziko, není to pět otravných dota
 
 ## Pracovní log
 
+- **2026-10-14:** Přidána příloha BG o nákladové disciplíně SaaS: mapování nákladů podle hodnoty, jednotkové náklady, limity, AI guardraily, rozpočtové alarmy, rušení nástrojů a šablona nákladové karty.
 - **2026-10-13:** Přidána příloha BF o B2B due diligence a data roomu: trust balíček, vrstvy sdílení dokumentů, bezpečnostní dotazníky, DPA a subprocesory podle reálných datových toků, trust stránka, expirace přístupů, roadmapa důvěry, šablona a checklist.
 
 - **2026-10-13:** Přidána příloha BE o auditní stopě a logování bez datového skladiště: rozdělení technických logů, auditních logů a analytiky, bezpečný tvar auditních záznamů, zákaz logování tajemství, retence, přístupy k logům, korelační ID, logovací karta a checklist.
