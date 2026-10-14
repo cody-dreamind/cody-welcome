@@ -10428,6 +10428,190 @@ Když odpovědi neznáš, funkce může jít do discovery, ne rovnou do produkce
 - [ ] Roadmapové položky obsahují otázku na provozní náklady a nový datový tok.
 
 
+## Příloha BH: Zálohy a restore cvičení bez falešného klidu
+
+Záloha není bezpečnostní opatření, dokud ji někdo neobnovil. Do té doby je to jen optimistický soubor někde v rohu infrastruktury, který možná obsahuje data, možná obsahuje chybu a určitě obsahuje budoucí překvapení.
+
+Pro malý SaaS tým je největší riziko jednoduché: všichni věří, že „zálohy máme“, ale nikdo neumí odpovědět, jak dlouho potrvá návrat služby po incidentu, která data se ztratí a kdo smí obnovu spustit. Privacy-first provoz k tomu přidává další vrstvu: zálohy nesmí být tajná skládka osobních údajů, exportů, tokenů a historických omylů, které produkce už dávno smazala.
+
+### 1) Začni scénářem, ne nástrojem
+
+První otázka není „kam budeme zálohovat?“. První otázka je „co se stalo a co musí fungovat jako první?“.
+
+Typické scénáře:
+
+- vývojář omylem smaže tabulku nebo část dat,
+- chyba migrace poškodí produkční databázi,
+- poskytovatel má výpadek regionu,
+- ransomware zašifruje server nebo sdílený disk,
+- zákazník požádá o obnovu vlastního exportu,
+- audit nebo právní spor vyžaduje doložit stav dat k určitému datu.
+
+Každý scénář má jinou obnovu. Obnova jedné tabulky není totéž jako obnova celé aplikace v jiném regionu. Obnova po chybě migrace je časově citlivá, protože tým často potřebuje rychle rozhodnout, jestli rollbackne kód, data, nebo obojí. A obnova po kompromitaci nesmí bez kontroly vrátit do provozu stejný zranitelný stav.
+
+**Codyho komentář:** Když někdo řekne „máme daily backup“, ptej se „daily backup čeho, kam, jak dlouho, kdo to obnoví a kdy jsme to naposled zkusili?“. Je to nepříjemné asi jako otázka na účtenku po obědě, ale šetří to mnohem víc peněz.
+
+### 2) Rozděl data podle obnovitelnosti
+
+Ne všechna data mají stejnou hodnotu a stejný režim. Privacy-first zálohování začíná inventářem, který rozlišuje aspoň pět vrstev:
+
+1. **Konfigurace infrastruktury** — IaC, DNS, proměnné prostředí, nastavení queue, cronů a storage.
+2. **Aplikační data** — účty, projekty, objednávky, fakturační stavy, produktové objekty.
+3. **Uživatelský obsah** — nahrané soubory, dokumenty, obrázky, exporty.
+4. **Provozní data** — logy, auditní stopa, metriky, support tickety.
+5. **Tajemství** — klíče, tokeny, hesla, certifikáty a recovery kódy.
+
+Tajemství obvykle nepatří do běžných aplikačních záloh v čitelné podobě. Mají mít vlastní správu, rotaci a emergency postup. Logy zase nemají automaticky stejnou retenci jako účetní nebo smluvní data. A uživatelský obsah může být objemný, takže vyžaduje jiný restore postup než relační databáze.
+
+Praktický minimální model:
+
+- databáze: časté snapshoty + logická záloha pro selektivní obnovu,
+- soubory: verzovaný objektový storage nebo periodický snapshot,
+- konfigurace: Git + dokumentovaný bootstrap,
+- tajemství: správce tajemství + oddělený recovery proces,
+- logy: krátká retence podle účelu a rizika.
+
+### 3) RPO a RTO přelož do lidské řeči
+
+RPO říká, kolik dat si můžeš dovolit ztratit. RTO říká, jak dlouho může být služba mimo provoz. Pro byznys jsou ale tyhle zkratky užitečné jen tehdy, když se přeloží do konkrétní situace.
+
+Místo „RPO 24 h“ napiš:
+
+> Při vážném incidentu můžeme přijít až o změny za posledních 24 hodin. U placených objednávek a fakturačních stavů chceme cíl 1 hodina.
+
+Místo „RTO 4 h“ napiš:
+
+> Do 4 hodin chceme obnovit přihlášení, čtení projektů a kontaktní formulář. Hromadné exporty a historické reporty mohou počkat do dalšího dne.
+
+Tohle je důležité pro malé týmy, protože ne všechno musí běžet najednou. Když spadne SaaS, první hodina obnovy má vrátit hodnotu zákazníkům, ne ladit hezký administrátorský graf, který nikdo kromě týmu neuvidí.
+
+### 4) Zálohu chraň před stejným incidentem jako produkci
+
+Záloha uložená ve stejném účtu, se stejnými přístupy a bez odděleného oprávnění je méně záloha a víc dekorace. Pokud útočník, chyba nebo automatizace smaže produkci i zálohy jedním tokenem, plán selhal.
+
+Základní pravidla:
+
+- používej oddělený účet, bucket nebo projekt pro zálohy,
+- omez mazání a přepis záloh pomocí verzování nebo immutable režimu, pokud ho poskytovatel nabízí,
+- přístup k obnově dej jen lidem, kteří ho opravdu potřebují,
+- odděl právo zálohu číst od práva zálohu mazat,
+- zálohy šifruj a dokumentuj, kde jsou klíče,
+- testuj obnovu do izolovaného prostředí, ne rovnou přes produkci.
+
+U evropského privacy-first provozu si hlídej i lokalitu úložiště. Pokud produkt slibuje evropské zpracování dat, zálohy nemají potichu cestovat mimo dohodnutý region jen proto, že výchozí bucket byl „global“. Totéž platí pro subdodavatele backup služby: pokud se v zálohách objevují osobní údaje, patří do mapy zpracování, smluv a subprocesorů.
+
+### 5) Restore cvičení dělej malé, ale pravidelné
+
+Velké disaster recovery cvičení jednou za dva roky zní dospěle. V malém týmu je užitečnější krátký restore drill každý měsíc nebo kvartál podle kritičnosti produktu.
+
+Příklad měsíčního cvičení:
+
+1. Vyber jednu kritickou datovou oblast — třeba zákaznický projekt s přílohami.
+2. Připrav izolované prostředí bez přístupu veřejnosti.
+3. Obnov poslední zálohu databáze a souborů.
+4. Ověř přihlášení testovacího účtu, konzistenci dat a dostupnost příloh.
+5. Zapiš čas obnovy, chybějící kroky a ruční zásahy.
+6. Smaž testovací prostředí a ověř, že nezůstaly dočasné exporty.
+
+Výstupem není hrdinská historka, ale krátká karta: co se obnovovalo, jak dlouho to trvalo, co nešlo podle plánu a co se mění v runbooku. ENISA v materiálech pro malé a střední firmy opakovaně zdůrazňuje praktickou kybernetickou hygienu včetně obnovitelnosti, takže restore cvičení ber jako provozní hygienu, ne jako luxus pro korporát.
+
+### 6) Runbook musí přežít člověka na dovolené
+
+Runbook pro obnovu piš tak, aby ho zvládl člověk, který systém zná, ale není autor každého skriptu. Pokud restore umí jen jeden vývojář z hlavy, nemáš proces. Máš single point of failure v mikině.
+
+Runbook má obsahovat:
+
+- kdy obnovu spustit a kdo ji schvaluje,
+- odkud se berou zálohy,
+- jak ověřit integritu zálohy,
+- kam se obnovuje testovací prostředí,
+- jak se řeší tajemství a přístupové klíče,
+- jak se ověří aplikace po obnově,
+- jak se komunikuje zákazníkům a interně,
+- jak se bezpečně uklidí dočasné kopie.
+
+Do runbooku nepatří plaintext hesla ani tajné tokeny. Patří tam odkaz na správce tajemství a role, které mají přístup. Pokud musíš dočasně vytvořit export produkčních dat, napiš i jeho expiraci a vlastníka smazání.
+
+### 7) Obnova je součást produktu, ne jen infrastruktury
+
+U SaaS produktu se zálohy často tváří jako technický problém, ale zákazník řeší dopad. Proto do plánu patří i produktová rozhodnutí:
+
+- které funkce poběží v read-only režimu,
+- jestli zákazník uvidí banner o degradovaném provozu,
+- jak se označí data vytvořená těsně před incidentem,
+- co se stane s webhooky a e-mailovými notifikacemi po obnově,
+- jak se zabrání duplicitní fakturaci nebo opakovanému odeslání zpráv,
+- jestli existuje zákaznický export, který může sloužit jako nouzová kopie.
+
+Nejhorší restore je ten, který technicky proběhne, ale produktově vytvoří chaos: zákazník vidí starý stav, integrace dostanou duplicitní eventy, support neví, co říct, a tým ručně opravuje následky do noci. Obnova musí mít technický i zákaznický scénář.
+
+### Šablona restore karty
+
+## Restore karta: [systém / datová oblast]
+
+### Kontext
+
+- Produkt nebo služba:
+- Kritická datová oblast:
+- Hlavní zákaznický dopad při ztrátě:
+- Vlastník obnovy:
+
+### Cíle obnovy
+
+- Cílové RPO:
+- Cílové RTO:
+- Priorita funkcí po obnově:
+- Co může počkat:
+
+### Zálohy
+
+- Zdroj zálohy:
+- Frekvence:
+- Retence:
+- Lokalita dat:
+- Šifrování a klíče:
+- Kdo smí číst:
+- Kdo smí mazat:
+
+### Restore postup
+
+- Izolované prostředí:
+- Kroky obnovy databáze:
+- Kroky obnovy souborů:
+- Kroky obnovy konfigurace:
+- Ověření integrity:
+- Aplikační smoke test:
+- Komunikační krok:
+
+### Privacy kontrola
+
+- Obsahuje záloha osobní údaje?
+- Jsou dočasné exporty časově omezené?
+- Jsou zálohy v dohodnutém regionu?
+- Jsou zálohy zahrnuté v mapě zpracování?
+- Jak se projeví právo na výmaz v zálohách?
+
+### Výsledek posledního cvičení
+
+- Datum:
+- Obnovovaný rozsah:
+- Skutečné RPO:
+- Skutečné RTO:
+- Co selhalo:
+- Co měníme do příště:
+
+### Checklist pro zálohy a restore
+
+- [ ] Máme seznam kritických datových oblastí a vlastníka obnovy.
+- [ ] Pro každou oblast známe realistické RPO a RTO.
+- [ ] Zálohy jsou oddělené od produkčních přístupů.
+- [ ] Umíme obnovit databázi i soubory do izolovaného prostředí.
+- [ ] Runbook neobsahuje tajemství v plaintextu.
+- [ ] Obnova řeší i webhooky, notifikace, fakturaci a zákaznickou komunikaci.
+- [ ] Dočasné exporty po cvičení mažeme a zapisujeme vlastníka smazání.
+- [ ] Aspoň jednou za kvartál proběhne restore cvičení pro kritickou část produktu.
+- [ ] Výsledek cvičení končí konkrétní úpravou runbooku nebo backlogu.
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -10459,6 +10643,7 @@ Když odpovědi neznáš, funkce může jít do discovery, ne rovnou do produkce
 - FIDO Alliance: [Passkeys](https://fidoalliance.org/passkeys/)
 - Finanční správa: [Daň z přidané hodnoty](https://financnisprava.gov.cz/cs/dane/dane/dan-z-pridane-hodnoty)
 - NCSC: [Password administration for system owners](https://www.ncsc.gov.uk/collection/passwords)
+- NIST: [SP 800-34 Rev. 1 — Contingency Planning Guide for Federal Information Systems](https://csrc.nist.gov/pubs/sp/800/34/r1/final)
 - Google Analytics Help: [URL builders — Collect campaign data with custom URLs](https://support.google.com/analytics/answer/10917952?hl=en-uk)
 - Gmail Help: [Email sender guidelines](https://support.google.com/mail/answer/81126)
 - ENISA: [DNSSEC](https://www.enisa.europa.eu/topics/incident-response/glossary/dnssec)
@@ -10534,6 +10719,7 @@ Když odpovědi neznáš, funkce může jít do discovery, ne rovnou do produkce
 
 ## Pracovní log
 
+- **2026-10-14:** Přidána příloha BH o zálohách a restore cvičení: scénáře obnovy, rozdělení dat, RPO/RTO v lidské řeči, oddělené zálohy, pravidelný restore drill, runbook, produktový dopad obnovy, restore karta a checklist.
 - **2026-10-14:** Přidána příloha BG o nákladové disciplíně SaaS: mapování nákladů podle hodnoty, jednotkové náklady, limity, AI guardraily, rozpočtové alarmy, rušení nástrojů a šablona nákladové karty.
 - **2026-10-13:** Přidána příloha BF o B2B due diligence a data roomu: trust balíček, vrstvy sdílení dokumentů, bezpečnostní dotazníky, DPA a subprocesory podle reálných datových toků, trust stránka, expirace přístupů, roadmapa důvěry, šablona a checklist.
 
