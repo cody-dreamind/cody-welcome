@@ -11912,6 +11912,179 @@ Výsledek nemá být dvacetistránkový report. Stačí jedna stránka: tři nej
 - [ ] Měsíční SLO review končí konkrétní akcí v roadmapě nebo vědomým rozhodnutím nic neměnit.
 
 
+## Příloha BO: Rozhodovací log a produktová paměť bez interní archeologie
+
+Malý tým si často myslí, že rozhodnutí nepotřebuje zapisovat, protože „všichni byli u toho“. Jenže za tři měsíce už nikdo přesně neví, proč se zvolil konkrétní pricing, proč se nepřidala integrace, proč se data drží jen 90 dnů nebo proč se odmítl pohodlný, ale datově hladový nástroj. Pak se stejné debaty vrací jako špatně optimalizovaný cron job.
+
+Rozhodovací log není korporátní kronika. Je to lehká produktová paměť: co jsme řešili, jaké možnosti byly na stole, co jsme vybrali, proč, jaké riziko přijímáme a kdy se k tomu vrátíme. Privacy-first provoz tím získá velkou výhodu, protože hodnoty nezůstávají jen v prezentaci. Jsou vidět v konkrétních volbách.
+
+> **Codyho komentář:** Když rozhodnutí není zapsané, tým ho časem začne přepisovat podle nálady, paměti a toho, kdo mluví nejhlasitěji. Rozhodovací log je levná pojistka proti „to jsme přece nikdy neřekli“.
+
+### 1) Zapisuj jen rozhodnutí, která mění směr nebo riziko
+
+Neloguj každou drobnost. Pokud se rozhoduje barva ikonky, stačí issue nebo komentář v návrhu. Rozhodovací log používej pro věci, které mají dopad na produkt, data, zákazníky, provoz nebo peníze.
+
+Typické kandidáty:
+
+- výběr hostingu, databáze, analytiky, CRM nebo platební brány,
+- změna pricingu, tarifů, limitů nebo fakturačního modelu,
+- zavedení nové integrace a předávání dat třetí straně,
+- změna retenční doby, exportu nebo mazání dat,
+- rozhodnutí nepřidat funkci, i když ji chce hlasitý zákazník,
+- veřejný slib v marketingu, SLA, security stránce nebo obchodní nabídce,
+- kompromis mezi rychlostí dodání a technickým nebo privacy rizikem.
+
+Dobré pravidlo: pokud by se za půl roku někdo mohl rozumně zeptat „proč jsme to udělali takhle?“, patří to do logu.
+
+### 2) Každý zápis musí mít kontext, varianty a důvod
+
+Slabý zápis:
+
+> „Vybrali jsme nástroj X.“
+
+Užitečný zápis:
+
+> „Vybrali jsme nástroj X pro agregovanou webovou analytiku, protože běží v EU regionu, umožňuje vypnout invazivní identifikaci, pokrývá naše tři metriky a má jednoduchý export. Odmítli jsme nástroj Y kvůli zbytečnému cross-site trackingu a nástroj Z kvůli chybějící DPA.“
+
+Zápis nemusí být dlouhý, ale musí zachytit:
+
+- jaký problém nebo rozhodnutí tým řešil,
+- jaké varianty byly reálně zvažované,
+- podle čeho se rozhodovalo,
+- co bylo vybráno,
+- jaký trade-off tým vědomě přijímá,
+- kdy se rozhodnutí znovu otevře.
+
+Nejde o to vyhrát debatu zpětně. Jde o to, aby budoucí tým neřešil stejnou věc od nuly.
+
+### 3) Privacy rozhodnutí piš blízko produktové volby
+
+Privacy review často skončí jako oddělený dokument, který nikdo nečte při návrhu funkce. Lepší je zapisovat privacy dopady přímo do rozhodnutí.
+
+Příklad:
+
+- **Rozhodnutí:** u onboardingového checklistu budeme měřit dokončení kroků jen agregovaně po tarifu a týdnu registrace.
+- **Důvod:** potřebujeme vědět, kde onboarding selhává, ale nepotřebujeme sledovat individuální klikací historii.
+- **Trade-off:** nepoznáme přesnou cestu konkrétního uživatele bez podpory nebo souhlasu, ale snížíme riziko profilování.
+- **Review:** po 60 dnech ověříme, zda agregovaná data stačí pro produktové rozhodnutí.
+
+Takový zápis je použitelnější než obecné „jsme privacy-first“. Ukazuje, co to znamená v praxi.
+
+### 4) Rozhodnutí verzuj, nepřepisuj minulost
+
+Když se rozhodnutí změní, nepřepisuj starý zápis tak, aby vypadal jako chyba archeologů. Přidej nový záznam nebo jasnou sekci „revize“.
+
+Používej tři stavy:
+
+- **Aktivní:** rozhodnutí platí a tým se jím řídí.
+- **Revidované:** rozhodnutí bylo změněno novějším zápisem.
+- **Archivované:** rozhodnutí už není relevantní, protože produkt, zákaznický segment nebo technologie zanikly.
+
+U revidovaného rozhodnutí vždy odkaž na nový zápis. Díky tomu vznikne časová osa myšlení, ne jen hromada dokumentů. To je důležité hlavně u bezpečnosti, dodavatelů a právních témat, kde se okolnosti mění.
+
+### 5) Rozhodovací log propoj s backlogem a dokumentací
+
+Log nemá být izolovaný hřbitov dobrých úmyslů. Každý záznam by měl odkazovat na související práci:
+
+- issue, epic nebo roadmapovou kartu,
+- návrh obrazovky, technický dokument nebo pull request,
+- vendor kartu, DPA nebo subprocesorový seznam,
+- metriky, které ukážou, zda rozhodnutí funguje,
+- úkol na review nebo datum, kdy se rozhodnutí znovu otevře.
+
+Když se rozhodne o nové integraci, log má odkazovat na integrační kartu. Když se rozhodne o kratší retenci, log má odkazovat na retenční politiku. Když se změní pricing, log má odkazovat na pricing stránku, billing a supportní makra. Jinak rozhodnutí existuje jen na papíře a realita si dělá vlastní večírek.
+
+### 6) Udržuj zápisy krátké, ale auditovatelné
+
+Rozhodovací log má být čitelný i pro člověka, který nebyl na meetingu. Zároveň do něj nepatří citlivé detaily, které by z něj udělaly další datové riziko.
+
+Piš takto:
+
+- používej názvy rolí a týmů, ne zbytečně jména lidí,
+- u zákaznických příkladů anonymizuj firmu nebo segment, pokud identita není nutná,
+- nelep do logu celé smlouvy, exporty, screenshoty s daty ani interní tajemství,
+- odkazuj na chráněné dokumenty místo kopírování jejich obsahu,
+- odděl veřejně sdělitelný důvod od interních citlivých poznámek.
+
+Rozhodovací log má pomoct s důvěrou, ne vytvořit další místo, kam se tajně ukládá všechno.
+
+### 7) Review dělej v rytmu produktu
+
+Rozhodnutí bez review data snadno zkamení. U každého většího rozhodnutí nastav okamžik, kdy se vrátí na stůl. Nemusí to být složité.
+
+Doporučený rytmus:
+
+- **po 30 dnech** u experimentů, onboardingových změn a kampaní,
+- **po 90 dnech** u pricingu, metrik, supportních priorit a automatizací,
+- **jednou za půl roku** u dodavatelů, integrací, retence a bezpečnostních pravidel,
+- **po incidentu** u rozhodnutí, které incident ovlivnilo nebo zkomplikovalo.
+
+Na review se neptej jen „funguje to?“. Ptej se:
+
+- Změnila se zákaznická situace?
+- Změnila se rizika nebo právní okolnosti?
+- Máme nové důkazy?
+- Přijali jsme trade-off, který už nedává smysl?
+- Je potřeba upravit dokumentaci, web, support nebo produkt?
+
+### Šablona rozhodovací karty
+
+## Rozhodnutí: [název]
+
+### Kontext
+
+- Jaký problém řešíme:
+- Pro koho je rozhodnutí důležité:
+- Co se stane, když nerozhodneme:
+
+### Varianty
+
+- Varianta A:
+- Varianta B:
+- Varianta C / nedělat nic:
+
+### Kritéria
+
+- Hodnota pro zákazníka:
+- Dopad na provoz:
+- Dopad na data a privacy:
+- Náklady:
+- Rizika:
+
+### Rozhodnutí
+
+- Vybraná varianta:
+- Proč:
+- Přijatý trade-off:
+- Co výslovně neděláme:
+
+### Návaznosti
+
+- Backlog / issue:
+- Dokumentace:
+- Metriky:
+- Dodavatelé / data flow:
+
+### Review
+
+- Vlastník:
+- Datum review:
+- Signály pro dřívější revizi:
+
+### Checklist pro rozhodovací log
+
+- [ ] Zápis řeší rozhodnutí, které má dopad na produkt, zákazníky, data, provoz nebo peníze.
+- [ ] Je jasné, jaký problém se řešil a proč rozhodnutí vzniklo.
+- [ ] Jsou uvedené reálně zvažované varianty, nejen vítěz.
+- [ ] Zápis obsahuje důvod, trade-off a věci, které tým vědomě nedělá.
+- [ ] Privacy dopady jsou popsané přímo u rozhodnutí, ne schované v jiném dokumentu.
+- [ ] Nejsou v něm zbytečná osobní data, tajemství, celé smlouvy ani necenzurované screenshoty.
+- [ ] Rozhodnutí má vlastníka a datum review.
+- [ ] Zápis odkazuje na backlog, dokumentaci, metriky nebo vendor kartu, kde to dává smysl.
+- [ ] Změna rozhodnutí se řeší novým záznamem nebo jasnou revizí, ne tichým přepsáním historie.
+- [ ] Tým jednou měsíčně projde otevřená review data a zruší rozhodnutí, která už neplatí.
+
+
 ## Zdroje
 
 - Atlassian: [SLA vs. SLO vs. SLI](https://www.atlassian.com/incident-management/kpis/sla-vs-slo-vs-sli)
@@ -12022,6 +12195,7 @@ Výsledek nemá být dvacetistránkový report. Stačí jedna stránka: tři nej
 
 ## Pracovní log
 
+- **2026-10-14:** Přidána příloha BO o rozhodovacím logu a produktové paměti: kdy zapisovat rozhodnutí, jak zachytit varianty a trade-offy, privacy dopady, verzování rozhodnutí, propojení s backlogem, review rytmus, šablona a checklist.
 - **2026-10-14:** Přidána příloha BN o SLA, SLO a supportních prioritách: rozdíl mezi SLI/SLO/SLA, prioritizace podle dopadu, měření zákaznických cest, privacy-first pravidla pro důkazy, status page, měsíční review a praktická šablona.
 - **2026-10-14:** Přidána příloha BM o zrušení, downgrade a win-backu bez retenčních pastí: rozlišení pauzy/downgrade/zrušení, dobrovolný odchodový feedback, férová retenční nabídka, dopady před potvrzením, export a mazání, win-back bez pronásledování, šablona odchodové karty a checklist s ověřeným zdrojem EDPB k deceptive design patterns.
 - **2026-10-14:** Přidána příloha BL o onboardingové cestě k první hodnotné akci: krátká registrace, odložený sběr dat, bezpečná ukázková data, integrace podle okamžiku potřeby, užitečný checklist, agregované měření, první e-mail, šablona onboardingové karty a checklist.
