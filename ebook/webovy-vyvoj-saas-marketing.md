@@ -12586,6 +12586,170 @@ Když klient opakovaně píše „kde najdu poslední verzi“, není to chyba k
 - [ ] Po skončení spolupráce proběhne předání, archivace a odebrání přístupů.
 
 
+---
+
+## Příloha BS: Žádosti o data bez paniky a ručního detektivního maratonu
+
+Každý SaaS, e-shop, komunitní web nebo klientský portál by měl počítat s tím, že se někdo zeptá: „Jaká moje data máte?“, „Opravíte mi e-mail?“, „Smažete můj účet?“ nebo „Pošlete mi export?“ GDPR dává lidem sadu práv a Evropská komise i EDPB připomínají, že organizace mají na žádosti reagovat bez zbytečného odkladu, v principu do jednoho měsíce, a že proces má být srozumitelný, zdokumentovaný a prakticky použitelný ([European Commission: Dealing with requests from individuals](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en), [European Data Protection Board: Respect individuals’ rights](https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_en)).
+
+Tohle není jen právní cvičení. Je to test, jestli víš, kde máš data, proč je držíš a kdo je umí bezpečně najít. Pokud odpověď zní „něco bude v databázi, něco v e-mailu, něco v exportu a něco v hlavě kolegy“, žádost subjektu údajů se rychle změní v interní únikovou hru. Jen bez zábavy a s horší dokumentací.
+
+**Codyho komentář:** Nejlepší privacy proces není ten, který má nejdelší PDF. Je to ten, který zvládne unavený tým v pátek odpoledne bez toho, aby omylem poslal cizí fakturu nebo smazal auditní záznam, který má zůstat kvůli účetnictví.
+
+### 1) Vstupní kanál udělej jednoduchý, ale ne anonymně chaotický
+
+Lidé musí vědět, kam žádost poslat. Stačí jasný kontakt v privacy policy, případně jednoduchý formulář v účtu. Nedělej z toho bludiště přes pět oddělení a nepodmiňuj žádost přihlášením, pokud člověk účet už nemá nebo se do něj nedostane.
+
+Praktický minimum:
+
+- e-mail nebo formulář pro privacy žádosti,
+- krátké vysvětlení, jaké typy žádostí lze poslat,
+- potvrzení přijetí s datem,
+- informace, že před předáním dat může být potřeba ověřit identitu,
+- interní vlastník, který žádost převezme.
+
+Ověření identity musí být přiměřené. Když někdo žádá o opravu překlepu v newsletterovém e-mailu, nepotřebuješ kopii občanky. Když žádá o export účtu s fakturami, projekty a soukromými poznámkami, ověření musí být silnější. Cílem není sbírat další citlivé údaje, ale neposlat data špatnému člověku.
+
+### 2) Rozliš typ žádosti hned na začátku
+
+Nevyřizuj všechny žádosti stejným procesem. Přístup, oprava, výmaz, omezení zpracování, námitka proti marketingu a přenositelnost dat mají jiný praktický dopad. Evropská komise uvádí například právo na přístup, opravu, výmaz, omezení, námitku a přenositelnost; EDPB pro malé firmy doporučuje mít postupy, proškolené lidi, aktuální přehled datových toků a evidenci odpovědí ([European Data Protection Board: Respect individuals’ rights](https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_en)).
+
+Jednoduchá triáž:
+
+- **Přístup:** člověk chce vědět, co o něm zpracováváš.
+- **Oprava:** některý údaj je nepřesný nebo neúplný.
+- **Výmaz:** data už nemají být držena, pokud neexistuje důvod je ponechat.
+- **Omezení:** data se mají dočasně nepoužívat, typicky při sporu o přesnost nebo důvod zpracování.
+- **Námitka:** člověk odmítá zpracování, často marketing nebo oprávněný zájem.
+- **Přenositelnost:** člověk chce strojově čitelný export údajů, které poskytl a které se zpracovávají automatizovaně na základě souhlasu nebo smlouvy.
+
+První odpověď nemá slibovat výsledek, který ještě neznáš. Má potvrdit přijetí, říct další krok a nastavit očekávání.
+
+### 3) Připrav datovou mapu pro vyhledání, ne jen pro audit
+
+Datová mapa není dekorace do compliance složky. U žádostí má pomoct rychle najít, kde data reálně jsou. Pro každý systém si poznamenej:
+
+- jaký identifikátor se používá: e-mail, user ID, customer ID, invoice ID,
+- jaké kategorie dat systém drží,
+- kdo má právo číst nebo exportovat data,
+- jestli data obsahují údaje třetích osob,
+- jaká je retence a právní důvod uložení,
+- jak se data mažou nebo anonymizují,
+- jestli existují zálohy, logy nebo exporty mimo hlavní systém.
+
+Typický SaaS má data minimálně v aplikaci, databázi, fakturačním systému, supportu, e-mailingu, analytice, logování, zálohách a někdy i v tabulkách, které vznikly „jen na chvíli“. Právě ty „jen na chvíli“ soubory bývají největší průšvih, protože nemají vlastníka ani retenční pravidla.
+
+### 4) Export dělej uživatelsky čitelný a technicky bezpečný
+
+Export nemá být dump databáze s interními názvy sloupců, pokud tomu člověk nemůže rozumět. Zároveň nemá obsahovat data jiných lidí, interní poznámky mimo rozsah nebo tajemství systému. V praxi se hodí kombinace strojově čitelného formátu a krátkého vysvětlení.
+
+Bezpečný exportní balíček může obsahovat:
+
+- `profile.json` se základním profilem a nastavením,
+- `projects.csv` nebo `projects.json` s objekty, které uživatel vytvořil,
+- `billing.csv` s přehledem fakturačních záznamů, pokud je relevantní,
+- `activity-summary.json` s agregovaným nebo filtrovaným přehledem aktivity,
+- `README.txt` s vysvětlením polí a kontaktem pro dotazy.
+
+U B2B účtů pozor na hranici mezi osobními údaji uživatele a daty firmy. Člověk může mít právo na své osobní údaje, ale to neznamená, že má automaticky dostat celý firemní workspace, interní poznámky ostatních členů nebo obchodní tajemství zákazníka. Tenhle rozdíl napiš do runbooku dřív, než přijde první komplikovaná žádost.
+
+### 5) Výmaz není jedno tlačítko „smaž všechno“
+
+Výmaz musí respektovat účel a právní důvod držení dat. Některá data může být potřeba smazat, jiná anonymizovat a jiná ponechat po zákonnou dobu, například kvůli účetnictví nebo obraně právních nároků. Evropská komise u práva na výmaz uvádí i výjimky, kdy data není nutné nebo možné odstranit, například při právní povinnosti uchování nebo uplatnění právních nároků ([European Commission: Dealing with requests from individuals](https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/dealing-requests-individuals_en)).
+
+Praktické vrstvy výmazu:
+
+- **Produktová data:** projekty, nastavení, obsah vytvořený uživatelem.
+- **Identifikátory:** e-mail, jméno, telefon, IP vazby, interní user ID v exportech.
+- **Marketing:** newsletter, lead scoring, kampaně, remarketingové seznamy — privacy-first ideálně bez nich.
+- **Support:** tickety, přílohy, diagnostické soubory, screenshoty.
+- **Fakturace:** účetní doklady a platby podle zákonných povinností.
+- **Logy a zálohy:** postupné vypršení podle retenčních pravidel, pokud nejde o aktivní obnovu.
+
+Do odpovědi člověku napiš, co bylo smazáno, co bylo anonymizováno, co zůstává a proč. Ne právnickou mlhu. Lidskou řeč.
+
+### 6) Odpovědi verzuj a drž důkaz o postupu
+
+EDPB doporučuje sledovat žádosti, odpovědi i důvody, proč organizace žádosti nevyhověla nebo nemohla vyhovět ([European Data Protection Board: Respect individuals’ rights](https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_en)). Evidence ale nesmí být další datová skládka. Potřebuješ procesní stopu, ne deník osobního života uživatele.
+
+Evidence žádosti:
+
+- datum přijetí,
+- typ žádosti,
+- ověřený identifikátor subjektu,
+- zapojené systémy,
+- rozhodnutí a důvod,
+- datum odpovědi,
+- kdo provedl kontrolu,
+- odkaz na interní ticket nebo rozhodovací log.
+
+Do evidence nedávej samotný export, kopie dokladů ani víc osobních dat, než je nutné pro prokázání postupu. Pokud používáš ticketing, nastav retenční dobu i pro tyto privacy tickety.
+
+### 7) Trénuj proces na fiktivním uživateli
+
+Jednou za čtvrtletí vezmi testovací účet a projdi celý proces: přístup, export, oprava, výmaz, kontrola marketingových seznamů, supportu a záloh. Nejde o divadlo pro audit. Jde o to zjistit, že export nejde vygenerovat, protože ho umí jen kolega na dovolené, nebo že mazací skript nechává e-mail ve starém e-mailingovém seznamu.
+
+Testovací scénář:
+
+1. Vytvoř fiktivního uživatele s běžnými daty.
+2. Projdi produkt, fakturaci, support a e-mailing.
+3. Pošli interní žádost o přístup a export.
+4. Zkontroluj, že export neobsahuje cizí data.
+5. Proveď výmaz nebo anonymizaci podle pravidel.
+6. Ověř, co zůstalo v logách a zálohách.
+7. Zapiš zjištění do backlogu a rozhodovacího logu.
+
+Pokud proces nejde projít bez improvizace, není hotový. Improvizace je skvělá v jazzu, horší v privacy operativě.
+
+### Šablona karty žádosti subjektu údajů
+
+## Žádost subjektu údajů: [ID / datum]
+
+### Kontext
+
+- Kontakt žadatele:
+- Ověřený identifikátor:
+- Typ žádosti:
+- Datum přijetí:
+- Termín odpovědi:
+
+### Systémy ke kontrole
+
+- Aplikace:
+- Fakturace:
+- Support:
+- E-mailing:
+- Analytika:
+- Logy a zálohy:
+
+### Rozhodnutí
+
+- Vyhověno / částečně vyhověno / odmítnuto:
+- Důvod:
+- Co bylo předáno, opraveno, smazáno nebo omezeno:
+- Co zůstává a proč:
+
+### Odpověď
+
+- Datum odpovědi:
+- Kanál:
+- Odeslal:
+- Interní odkaz na ticket:
+
+### Checklist pro žádosti o data
+
+- [ ] Privacy policy obsahuje jasný kontakt nebo formulář pro žádosti.
+- [ ] Tým ví, kdo žádost přebírá a kdo kontroluje odpověď.
+- [ ] Identita se ověřuje přiměřeně podle rizika žádosti.
+- [ ] Datová mapa obsahuje identifikátory, vlastníky systémů a retenční pravidla.
+- [ ] Export je čitelný, bezpečný a neobsahuje data jiných lidí.
+- [ ] Výmaz rozlišuje produktová data, fakturaci, support, logy a zálohy.
+- [ ] Odpověď lidsky vysvětluje, co se stalo a co případně zůstává.
+- [ ] Evidence žádosti obsahuje postup a důvody, ne zbytečné kopie osobních dat.
+- [ ] Proces se pravidelně testuje na fiktivním účtu.
+- [ ] Zjištěné mezery končí v backlogu, ne v poznámce „někdy opravit“.
+
+
 ## Zdroje
 
 - Atlassian: [SLA vs. SLO vs. SLI](https://www.atlassian.com/incident-management/kpis/sla-vs-slo-vs-sli)
@@ -12698,6 +12862,7 @@ Když klient opakovaně píše „kde najdu poslední verzi“, není to chyba k
 
 ## Pracovní log
 
+- **2026-10-14:** Přidána příloha BS o žádostech subjektů údajů bez paniky: vstupní kanál, triáž práv, datová mapa, bezpečný export, praktický výmaz, evidence odpovědí, pravidelné testování, šablona karty žádosti a checklist s ověřenými zdroji Evropské komise a EDPB.
 - **2026-10-14:** Přidána příloha BR o klientském portálu a sdílení souborů bez datového blešího trhu: účel portálu, opakovatelná struktura, role a přístupy, schvalovací stavy, bezpečné předávání přístupů, retenční pravidla, agregované měření používání, šablona portálu a praktický checklist.
 - **2026-10-14:** Přidána příloha BQ o tajemstvích, API klíčích a rotaci bez paniky: inventář tajemství, oddělení prostředí, zákaz tajemství v Gitu/chatu/ticketech, role a přístupy, bezpečný postup rotace, incidentový mini playbook, lokální vývojový setup, šablona karty tajemství a checklist s ověřeným zdrojem OWASP.
 - **2026-10-14:** Přidána příloha BP o partnerském marketingu a doporučeních bez sledovací mafie: typy vztahů, privacy-first atribuce, bezpečné referral odkazy, označování placených odkazů, pravidla pro partnery, měření kvality, ukončení partnerství, šablona partnerské karty a checklist.
