@@ -10612,6 +10612,190 @@ Nejhorší restore je ten, který technicky proběhne, ale produktově vytvoří
 - [ ] Aspoň jednou za kvartál proběhne restore cvičení pro kritickou část produktu.
 - [ ] Výsledek cvičení končí konkrétní úpravou runbooku nebo backlogu.
 
+
+## Příloha BI: Zastupitelnost a provozní handover bez hrdinů
+
+Malý tým často běží na znalostech několika konkrétních lidí. To je rychlé, dokud jsou všichni zdraví, dostupní a mají chuť odpovídat na otázky v pátek večer. Jakmile jeden člověk odjede na dovolenou, změní práci nebo prostě vypne notifikace, ukáže se, jestli firma má proces — nebo jen šikovného člověka s dobrou pamětí.
+
+Privacy-first provoz potřebuje zastupitelnost víc než běžný web. Ne proto, že by měl být těžkopádný, ale protože pracuje s důvěrou: s přístupy, daty, subprocesory, incidenty, zákaznickou komunikací a rozhodnutími, která musí být dohledatelná. Handover není byrokracie. Je to způsob, jak zabránit tomu, aby kritická znalost bydlela jen v hlavě člověka, který zrovna sedí ve vlaku bez signálu.
+
+### 1) Mapuj znalosti podle rizika, ne podle organizačního diagramu
+
+Nezačínej seznamem lidí. Začni seznamem oblastí, kde by nepřítomnost jednoho člověka zpomalila provoz, bezpečnost nebo zákaznickou důvěru.
+
+Typické oblasti:
+
+- deploy produkce a rollback,
+- DNS, domény, certifikáty a e-mailová doručitelnost,
+- databáze, zálohy a restore,
+- fakturace, platby a účetní exporty,
+- support eskalace a reklamace,
+- bezpečnostní incidenty a přístupové tokeny,
+- právní dokumenty, DPA, subprocesory a privacy požadavky,
+- marketingové kanály, RSS, web a obsahový kalendář.
+
+Ke každé oblasti si napiš: kdo je primární vlastník, kdo je zástupce, kde je dokumentace, jak často se postup mění a co se stane, když vlastník není dostupný 48 hodin. Pokud odpověď zní „napíšeme mu“, není to zastupitelnost. To je modlitba s klávesnicí.
+
+### 2) Handover má být průběžný, ne poslední den
+
+Nejhorší handover je dokument napsaný večer před odchodem člověka z týmu. Bývá dlouhý, chaotický a plný vět typu „tohle je trochu zvláštní, zavolej mi“. Provozní znalost se má předávat průběžně, protože pak se dá ověřit v praxi.
+
+Praktický rytmus:
+
+- po každé větší změně uprav runbook nebo rozhodovací log,
+- jednou měsíčně nech zástupce provést malý provozní úkol podle dokumentace,
+- u kritických oblastí dělej krátké shadowing sezení: vlastník ukazuje, zástupce se ptá,
+- další měsíc role otoč: zástupce provádí, vlastník sleduje,
+- chybějící kroky zapisuj hned, ne do „někdy doplníme“ pekla.
+
+Dokumentace podle přístupu Diátaxis rozlišuje návody, vysvětlení, reference a tutoriály. Pro handover je užitečné hlavně nemíchat vše do jednoho guláše: runbook má vést krok za krokem, reference má popsat nastavení a vysvětlení má říct proč to tak je. Když se z toho stane román, nikdo ho při incidentu číst nebude.
+
+### 3) Každá kritická oblast potřebuje druhého člověka
+
+Zastupitelnost neznamená, že každý umí všechno. Znamená, že žádná kritická oblast nemá jediného člověka jako bod selhání.
+
+Minimální model pro malý tým:
+
+- **Vlastník** drží kvalitu oblasti a rozhoduje o změnách.
+- **Zástupce** umí provést běžné úkony a nouzový postup.
+- **Reviewer** jednou za čas zkontroluje, že dokumentace dává smysl i někomu mimo oblast.
+
+U opravdu malých týmů může být reviewer externí partner nebo druhý technický člověk z jiné oblasti. Důležité je, aby kontrola nebyla jen „vlastník si přečetl vlastní text a byl spokojen“. Vlastní text má autor vždycky rád. Je to jeho malé dokumentační miminko.
+
+### 4) Přístupy předávej přes role, ne přes osobní chaos
+
+Handover často selže na přístupech. Zástupce ví, co má udělat, ale nemá práva. Nebo má práva moc široká, protože někdo ve spěchu klikl na admina. Privacy-first přístup je jednoduchý: předávej práci přes role a minimální oprávnění, ne přes sdílené účty.
+
+Dobrá praxe:
+
+- každá kritická služba má popsané role a jejich účel,
+- zástupce má předem připravený přístup, který odpovídá jeho práci,
+- dočasné zvýšení oprávnění má expiraci a důvod,
+- sdílené účty mají plán zrušení nebo přísné omezení,
+- přístupové změny se logují a kontrolují v access review,
+- handover obsahuje i seznam tokenů a integrací, ale bez jejich hodnot.
+
+Tohle chrání nejen firmu, ale i lidi. Když jsou role jasné, nikdo nemusí hádat, jestli smí exportovat zákaznická data, restartovat produkci nebo měnit DNS. Nejasnost je bezpečnostní riziko s přátelskou maskou.
+
+### 5) Provozní kalendář drž mimo jednu hlavu
+
+Některé věci nejsou incidenty, ale pravidelné provozní povinnosti. Když na ně zapomeneš, nestane se katastrofa hned. Jen se pomalu hromadí dluh: expiruje certifikát, nezkontroluje se backup, neproběhne access review, zůstane starý subprocesor, obsah nemá aktualizaci a billing export se řeší ve stresu.
+
+Provozní kalendář má obsahovat:
+
+- datum a frekvenci úkolu,
+- vlastníka a zástupce,
+- vstupy a výstupy,
+- odkaz na runbook,
+- co se stane při přeskočení,
+- poslední provedení a další termín.
+
+Příklady opakovaných položek:
+
+- měsíční kontrola nákladů a nevyužitých nástrojů,
+- kvartální access review,
+- restore cvičení kritické datové oblasti,
+- review subprocesorů a DPA,
+- kontrola DNS, domén, certifikátů a e-mailové autentizace,
+- aktualizace trust stránky a bezpečnostních odpovědí,
+- redakční review staršího obsahu a odkazů.
+
+### 6) Handover testuj jako smoke test
+
+Handover není hotový, když dokument existuje. Je hotový, když podle něj někdo jiný zvládne udělat práci bez soukromého výkladu autora.
+
+Jednoduchý test:
+
+1. Vyber jeden běžný provozní úkol.
+2. Dej zástupci jen dokumentaci a přístup podle role.
+3. Nech ho postupovat nahlas nebo zapisovat blokery.
+4. Sleduj, kde chybí kontext, příkaz, screenshot nebo rozhodovací pravidlo.
+5. Uprav dokumentaci hned po testu.
+6. Zapiš datum testu a další kontrolu.
+
+Test nemusí být velký. Stačí třeba „vytvoř staging export bez osobních údajů“, „ověř stav záloh“, „připrav release note“, „zkontroluj nový subprocesor“ nebo „najdi, kdo smí restartovat službu“. Malé testy odhalí velké mezery dřív, než se z nich stane večerní požár.
+
+### 7) Odchod člověka nesmí být bezpečnostní incident
+
+Offboarding není jen odebrání účtu. Je to kontrola, jestli s člověkem neodchází i nezdokumentovaná znalost, nepojmenované integrace a soukromé zkratky.
+
+Před odchodem zkontroluj:
+
+- které oblasti člověk vlastnil,
+- kdo přebírá vlastnictví a kdo je zástupce,
+- které runbooky a rozhodovací logy je potřeba aktualizovat,
+- jaké osobní tokeny, API klíče a automatizace používal,
+- jestli existují účty nebo integrace navázané na jeho e-mail,
+- které zákaznické nebo dodavatelské vztahy vyžadují předání,
+- jestli v soukromých poznámkách nejsou provozní informace, které patří do týmové dokumentace.
+
+**Codyho komentář:** Kultura „zeptáme se Franty“ je fajn do chvíle, než je Franta na horách, v jiné firmě nebo prostě nechce být živý helpdesk. Dobrá dokumentace není nedůvěra v lidi. Je to respekt k jejich času.
+
+### Šablona handover karty
+
+## Handover karta: [oblast / služba / proces]
+
+### Kontext
+
+- Oblast:
+- Proč je kritická:
+- Primární vlastník:
+- Zástupce:
+- Reviewer:
+
+### Provozní úkoly
+
+- Běžné úkony:
+- Nouzové úkony:
+- Opakované kontroly:
+- Kde je runbook:
+- Kde je rozhodovací log:
+
+### Přístupy
+
+- Potřebné role:
+- Kdo schvaluje přístup:
+- Jak se řeší dočasné zvýšení oprávnění:
+- Které tokeny nebo integrace existují:
+- Co se nesmí sdílet:
+
+### Znalosti a rizika
+
+- Co ví jen vlastník:
+- Co je potřeba zdokumentovat:
+- Největší provozní riziko při absenci vlastníka:
+- Zákaznický dopad:
+- Privacy dopad:
+
+### Test zastupitelnosti
+
+- Datum posledního testu:
+- Testovaný úkol:
+- Kdo testoval:
+- Co chybělo:
+- Co se upravilo:
+- Další test:
+
+### Offboarding kontrola
+
+- Nový vlastník potvrzen:
+- Přístupy předané nebo odebrané:
+- Osobní tokeny nahrazené:
+- Dokumentace aktualizovaná:
+- Zákaznické a dodavatelské kontakty předané:
+
+### Checklist pro zastupitelnost a handover
+
+- [ ] Každá kritická oblast má vlastníka a zástupce.
+- [ ] Zástupce umí provést alespoň nouzový postup podle dokumentace.
+- [ ] Runbooky neobsahují tajemství ani osobní zkratky.
+- [ ] Přístupy jsou řešené přes role a minimální oprávnění.
+- [ ] Dočasná oprávnění mají expiraci a důvod.
+- [ ] Provozní kalendář obsahuje vlastníka, zástupce a další termín.
+- [ ] Handover se testuje praktickým úkolem, ne jen čtením dokumentu.
+- [ ] Offboarding kontroluje i tokeny, integrace a znalostní dluh.
+- [ ] Změny po testu končí v dokumentaci nebo backlogu, ne v chatu.
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -10719,6 +10903,7 @@ Nejhorší restore je ten, který technicky proběhne, ale produktově vytvoří
 
 ## Pracovní log
 
+- **2026-10-14:** Přidána příloha BI o zastupitelnosti a provozním handoveru: mapa kritických znalostí, průběžné předávání, role vlastníka a zástupce, přístupy přes role, provozní kalendář, praktický handover test, offboarding, šablona a checklist.
 - **2026-10-14:** Přidána příloha BH o zálohách a restore cvičení: scénáře obnovy, rozdělení dat, RPO/RTO v lidské řeči, oddělené zálohy, pravidelný restore drill, runbook, produktový dopad obnovy, restore karta a checklist.
 - **2026-10-14:** Přidána příloha BG o nákladové disciplíně SaaS: mapování nákladů podle hodnoty, jednotkové náklady, limity, AI guardraily, rozpočtové alarmy, rušení nástrojů a šablona nákladové karty.
 - **2026-10-13:** Přidána příloha BF o B2B due diligence a data roomu: trust balíček, vrstvy sdílení dokumentů, bezpečnostní dotazníky, DPA a subprocesory podle reálných datových toků, trust stránka, expirace přístupů, roadmapa důvěry, šablona a checklist.
