@@ -12420,6 +12420,172 @@ Lepší lokální setup:
 - [ ] Dokumentace říká, kde tajemství spravovat, ale nikdy neobsahuje jejich hodnoty.
 
 
+## Příloha BR: Klientský portál a sdílení souborů bez datového blešího trhu
+
+Klientský portál vypadá jako administrativní detail. Ve skutečnosti je to často místo, kde se rozhodne, jestli spolupráce působí profesionálně, bezpečně a klidně — nebo jestli každý týden vznikne nové vlákno „posílám ještě jednou finální finální verzi“. Pro webové studio, SaaS firmu nebo konzultanta je portál jednoduchý způsob, jak udržet zakázku, dokumenty, rozhodnutí a přístupy na jednom místě.
+
+Privacy-first portál ale není skládka souborů s logem nahoře. Má jasná pravidla: kdo co vidí, proč to tam je, jak dlouho to zůstane a co se stane po skončení spolupráce.
+
+**Codyho komentář:** Sdílený disk bez pravidel je jako kuchyňka ve firmě. Všichni tvrdí, že ji používají zodpovědně, ale někdo tam stejně nechá krabičku z roku 2022. Jen tady ta krabička může obsahovat smlouvu, export zákazníků nebo produkční přístup.
+
+### 1) Nejdřív urči, k čemu portál slouží
+
+Portál nemá nahradit celý život firmy. Má pokrýt konkrétní spolupráci. Před výběrem nástroje si napiš tři věty:
+
+- jaký typ klienta portál používá,
+- jaký typ práce v něm probíhá,
+- jaká rozhodnutí nebo dokumenty se v něm nesmí ztratit.
+
+Jiný portál potřebuje agentura při tvorbě webu, jiný SaaS tým pro enterprise onboarding a jiný konzultant pro měsíční reporting. Když tohle přeskočíš, skončíš u nástroje, který umí všechno, jen ne to, co klient opravdu potřebuje.
+
+Praktické rozdělení:
+
+- **Projektový portál:** brief, harmonogram, úkoly, schválení, výstupy.
+- **Support portál:** tickety, znalostní báze, stav požadavků, historie řešení.
+- **Onboarding portál:** úvodní kroky, dokumenty, přístupy, školení, první úspěch.
+- **Trust portál:** bezpečnostní dokumenty, DPA, seznam subprocesorů, certifikace, changelog.
+- **Reporting portál:** měsíční výsledky, rozhodnutí, doporučení, otevřené otázky.
+
+### 2) Sdílej strukturu, ne jen odkaz
+
+Nejhorší portál je složka „Klient“ a v ní chaos. Klient pak neví, kde hledat poslední verzi, co má schválit a co už je archiv. Struktura má být nudná a opakovatelná.
+
+Minimální struktura pro projektový portál:
+
+- `01-start`: smlouva, brief, kontakty, role, pravidla komunikace,
+- `02-rozhodnuti`: schválené směry, změny rozsahu, důležité trade-offy,
+- `03-vystupy`: návrhy, exporty, dokumentace, předávací materiály,
+- `04-pristupy`: odkazy na bezpečné předání přístupů, nikdy hesla v souboru,
+- `05-reporty`: týdenní nebo měsíční shrnutí,
+- `99-archiv`: starší verze a uzavřené části.
+
+U SaaS onboardingu může být struktura jiná, ale princip zůstává: klient má během minuty poznat, kam sáhnout. Pokud potřebuje interní archeologii, portál neplní účel.
+
+### 3) Přístupy nastavuj podle role klienta
+
+Ne každý člověk u klienta má vidět všechno. Majitel firmy, marketing, účetní, vývojář a právník často potřebují jiné dokumenty. Jedna sdílená pozvánka „pro všechny“ je pohodlná jen do chvíle, než se v portálu objeví rozpočet, osobní údaje, bezpečnostní dotazník nebo interní poznámka.
+
+Role drž jednoduché:
+
+- **Vlastník spolupráce:** vidí vše, schvaluje změny, může přidávat lidi.
+- **Projektový účastník:** vidí úkoly, výstupy a komentáře ke své části.
+- **Finance/právo:** vidí smlouvy, fakturaci a právní dokumenty.
+- **Technický kontakt:** vidí technickou dokumentaci, integrace a předávací materiály.
+- **Externí pozorovatel:** vidí jen vybrané finální dokumenty.
+
+Každá role má mít vlastní důvod. Pokud důvod neumíš napsat jednou větou, přístup pravděpodobně nepotřebuješ.
+
+### 4) Soubor není proces schválení
+
+Poslat klientovi odkaz na návrh není totéž jako získat schválení. Portál musí jasně ukazovat, co je draft, co čeká na komentář, co je schválené a co je archiv.
+
+Používej jednoduché stavy:
+
+- **Draft:** interní nebo pracovní verze, klient ji nemá používat jako finální.
+- **K připomínkám:** klient má reagovat do konkrétního data.
+- **Ke schválení:** rozhodnutí blokuje další práci.
+- **Schváleno:** verze je závazná pro další kroky.
+- **Nahrazeno:** starší verze zůstává dohledatelná, ale není aktuální.
+
+Praktický trik: u důležitých dokumentů piš stav přímo do názvu nebo hlavičky dokumentu. Ne kvůli estetice, ale kvůli tomu, že lidé si soubory stahují, přeposílají a otevírají mimo portál.
+
+### 5) Přístupové údaje nepředávej jako přílohu
+
+Portál často svádí k tomu, aby se do něj nahrál soubor „přístupy.xlsx“. Nedělej to. Přístupy předávej přes správce hesel nebo bezpečný jednorázový kanál. V portálu má být maximálně odkaz na postup a seznam systémů, ne samotná tajemství.
+
+Bezpečný záznam v portálu může vypadat takto:
+
+- nástroj: produkční CMS,
+- vlastník: technický kontakt klienta,
+- způsob předání: sdílená položka ve správci hesel,
+- datum vytvoření nebo předání,
+- kdo má přístup,
+- kdy proběhne review,
+- co se má zneplatnit po dokončení projektu.
+
+Tím udržíš přehled bez toho, aby se portál stal druhým trezorem bez pravidel.
+
+### 6) Retence patří do portálu od začátku
+
+Už při založení portálu napiš, co se stane po skončení spolupráce. Které dokumenty zůstávají, co se archivuje, co se smaže a co si klient může exportovat. Když to řešíš až po roce, portál už bývá plný starých návrhů, exportů, screenshotů, nahrávek a „dočasných“ souborů, které dočasně přežily tři redesigny.
+
+Jednoduché retenční pravidlo:
+
+- pracovní drafty se mažou po uzavření fáze,
+- finální výstupy zůstávají po dobu smluvní nebo servisní potřeby,
+- přístupové seznamy se kontrolují po každém předání,
+- osobní nebo citlivé exporty mají krátkou expiraci,
+- archiv má vlastníka a datum dalšího review.
+
+Privacy-first portál nemá být věčný sklad. Má být řízená paměť spolupráce.
+
+### 7) Měř používání portálu bez šmírování lidí
+
+U portálu se vyplatí vědět, jestli funguje. Nepotřebuješ ale sledovat každý pohyb uživatele, heatmapu kliků ani individuální profil čtení dokumentů. Pro provozní zlepšení často stačí agregované signály:
+
+- kolik klientů portál aktivně používá,
+- které typy dokumentů se nejčastěji hledají nebo otevírají,
+- kolik schválení čeká déle než dohodnutý limit,
+- kolik souborů je ve stavu draft po skončení fáze,
+- kolik přístupů čeká na review,
+- kolik dotazů v e-mailu by šlo vyřešit lepší strukturou portálu.
+
+Když klient opakovaně píše „kde najdu poslední verzi“, není to chyba klienta. Je to feedback k informační architektuře. Trochu bolestivý, ale levnější než další nástroj.
+
+### Šablona klientského portálu
+
+## Klientský portál: [klient / projekt / služba]
+
+### Účel
+
+- Typ portálu:
+- Primární uživatelé:
+- Jaké rozhodnutí nebo práci má portál zrychlit:
+- Co do portálu nepatří:
+
+### Struktura
+
+- Hlavní složky nebo sekce:
+- Kde jsou finální výstupy:
+- Kde jsou rozhodnutí:
+- Kde jsou reporty:
+- Kde je archiv:
+
+### Role a přístupy
+
+- Vlastník na naší straně:
+- Vlastník u klienta:
+- Role klienta:
+- Kdo může přidávat další lidi:
+- Kdy probíhá access review:
+
+### Schvalování
+
+- Jak se značí draft:
+- Jak se značí verze k připomínkám:
+- Jak se potvrzuje schválení:
+- Kde je historie rozhodnutí:
+
+### Retence a ukončení
+
+- Co se smaže po fázi:
+- Co se archivuje:
+- Co dostane klient při předání:
+- Kdy se ruší přístupy:
+
+### Checklist pro klientský portál
+
+- [ ] Portál má jasný účel a nepokrývá zbytečně celou firmu.
+- [ ] Struktura složek nebo sekcí je opakovatelná a pochopitelná bez vysvětlování.
+- [ ] Každý přístup odpovídá roli a konkrétní potřebě.
+- [ ] Finální verze, drafty, schválení a archiv jsou jasně odlišené.
+- [ ] Přístupové údaje nejsou uložené v souborech, chatu ani komentářích.
+- [ ] Důležité dokumenty mají vlastníka, stav a datum dalšího review.
+- [ ] Retence a export jsou popsané už při založení portálu.
+- [ ] Používání portálu se měří agregovaně, ne profilováním jednotlivých klientů.
+- [ ] Po skončení spolupráce proběhne předání, archivace a odebrání přístupů.
+
+
 ## Zdroje
 
 - Atlassian: [SLA vs. SLO vs. SLI](https://www.atlassian.com/incident-management/kpis/sla-vs-slo-vs-sli)
@@ -12532,6 +12698,7 @@ Lepší lokální setup:
 
 ## Pracovní log
 
+- **2026-10-14:** Přidána příloha BR o klientském portálu a sdílení souborů bez datového blešího trhu: účel portálu, opakovatelná struktura, role a přístupy, schvalovací stavy, bezpečné předávání přístupů, retenční pravidla, agregované měření používání, šablona portálu a praktický checklist.
 - **2026-10-14:** Přidána příloha BQ o tajemstvích, API klíčích a rotaci bez paniky: inventář tajemství, oddělení prostředí, zákaz tajemství v Gitu/chatu/ticketech, role a přístupy, bezpečný postup rotace, incidentový mini playbook, lokální vývojový setup, šablona karty tajemství a checklist s ověřeným zdrojem OWASP.
 - **2026-10-14:** Přidána příloha BP o partnerském marketingu a doporučeních bez sledovací mafie: typy vztahů, privacy-first atribuce, bezpečné referral odkazy, označování placených odkazů, pravidla pro partnery, měření kvality, ukončení partnerství, šablona partnerské karty a checklist.
 - **2026-10-14:** Přidána příloha BO o rozhodovacím logu a produktové paměti: kdy zapisovat rozhodnutí, jak zachytit varianty a trade-offy, privacy dopady, verzování rozhodnutí, propojení s backlogem, review rytmus, šablona a checklist.
