@@ -11514,6 +11514,223 @@ Privacy-first detail: pokud e-mail obsahuje odkazy s měřením, nedávej do URL
 - [ ] Onboarding review probíhá při každé větší změně pricingu, registrace nebo hlavního workflow.
 
 
+## Příloha BM: Zrušení, downgrade a win-back bez retenčních pastí
+
+Zrušení účtu není produktová prohra, kterou je potřeba schovat za tři modaly, malý šedý odkaz a otázku „Opravdu opravdu opravdu?“. Je to důležitý okamžik důvěry. Uživatel právě testuje, jestli firma myslí férovost vážně i ve chvíli, kdy už neplatí.
+
+Privacy-first SaaS bere odchod zákazníka jako součást životního cyklu produktu. Cílem není lidi uvěznit. Cílem je pochopit důvod, nabídnout férové alternativy a nechat člověka odejít bez pocitu, že se proklikal retenčním únikovým pokojem.
+
+**Codyho komentář:** Nejlepší retenční strategie není schovat tlačítko „zrušit“. Nejlepší retenční strategie je produkt, který dává hodnotu, a odchodový proces, po kterém se člověk nestydí vrátit. Manipulativní zrušení možná zachrání jednu fakturu, ale spálí důvěru. To je drahá sleva.
+
+### 1) Rozlišuj pauzu, downgrade a úplné zrušení
+
+Ne každý odchod znamená, že produkt selhal. Malý tým může mít sezónnost, zakladatel může škrtat náklady, firma může končit projekt nebo zákazník jen dorostl do jiného řešení.
+
+Proto je dobré nabídnout tři jasné cesty:
+
+1. **Pauza:** zákazník teď produkt nepotřebuje, ale nechce mazat data.
+2. **Downgrade:** zákazník potřebuje menší rozsah, méně sedadel nebo levnější tarif.
+3. **Zrušení:** zákazník chce ukončit placení a mít jasno, co se stane s účtem a daty.
+
+Každá cesta má mít vlastní vysvětlení. „Pauza“ nesmí být skrytý způsob, jak dál účtovat. „Downgrade“ nesmí potichu vypnout kritické funkce bez varování. „Zrušení“ nesmí být trest za to, že člověk nechce pokračovat.
+
+Praktická mikrokopie:
+
+> „Můžeš účet pozastavit na 60 dní, přejít na menší tarif, nebo zrušit předplatné. Před potvrzením ukážeme, co se stane s fakturací, přístupy a daty.“
+
+Horší varianta:
+
+> „Je nám líto, že odcházíte. Kontaktujte podporu.“
+
+Kontakt na podporu může být užitečný, ale nemá být povinná brána. Pokud uživatel zvládl koupit produkt online, měl by zvládnout online i ukončit placení. Ano, obchodní tým teď možná syčí. Přežije to.
+
+### 2) Odchodový dotazník drž krátký a dobrovolný
+
+Feedback při zrušení je cenný, ale nesmí být výkupné za odchod. Uživatel nemá povinnost napsat esej o vztahu k tvému produktu, aby mohl přestat platit.
+
+Dobrá struktura:
+
+- jedna volitelná otázka s důvodem,
+- možnost „nechci uvést“,
+- volitelné textové pole,
+- žádné povinné telefonní číslo,
+- žádné osobní údaje navíc,
+- jasné oddělení feedbacku od potvrzení zrušení.
+
+Příklad důvodů:
+
+- produkt je moc drahý,
+- chybí konkrétní funkce,
+- nepoužíváme ho dost často,
+- přešli jsme na jiné řešení,
+- projekt skončil,
+- technický problém,
+- nechci uvést.
+
+U SaaS týmu stačí důvody vyhodnocovat agregovaně. Není nutné profilovat každého odcházejícího zákazníka jako detektivka o posledním kliknutí.
+
+Privacy-first pravidlo: feedback ze zrušení ukládej odděleně od citlivých zákaznických dat a nastav mu vlastní retenci. Pokud textové pole může obsahovat osobní údaje nebo obchodní tajemství, počítej s tím už v návrhu formuláře.
+
+### 3) Retenční nabídka má pomoci, ne zdržovat
+
+Nabídnout alternativu je v pořádku. Manipulovat není.
+
+Férové retenční nabídky:
+
+- jednorázová sleva s jasným koncem,
+- doporučení menšího tarifu,
+- pauza místo zrušení,
+- export dat před odchodem,
+- nabídka krátké konzultace u komplexního B2B produktu.
+
+Neférové retenční vzory:
+
+- několik po sobě jdoucích potvrzovacích obrazovek,
+- tlačítko pro pokračování výrazné a tlačítko pro zrušení schované,
+- nejasné formulace typu „ztratíte vše navždy“ bez kontextu,
+- odklad zrušení přes podporu bez dobrého důvodu,
+- automatické prodloužení po „pauze“, které nebylo jasně vysvětlené.
+
+EDPB ve svých pokynech k deceptive design patterns popisuje mimo jiné vzory, které uživatele přetěžují, zdržují nebo vedou proti jeho původnímu záměru. I když se dokument zaměřuje na sociální platformy, princip je pro SaaS užitečný: rozhraní nemá uživateli bránit v informovaném rozhodnutí.
+
+Praktická zásada: retenční nabídka může být jedna obrazovka. Ne labyrint. Ne boss fight. Jedna férová možnost a jasné tlačítko „pokračovat ve zrušení“.
+
+### 4) Ukaž dopady před potvrzením
+
+Před definitivním krokem má uživatel vidět konkrétní dopady. Ne obecné strašení.
+
+Ukázat bys měl:
+
+- datum, kdy skončí placený přístup,
+- jestli zůstane přístup do konce zaplaceného období,
+- co se stane s uživateli v týmu,
+- které funkce se vypnou hned a které později,
+- jak dlouho zůstanou data dostupná,
+- kde lze stáhnout export,
+- kdo dostane potvrzovací e-mail,
+- jak zrušení ovlivní faktury a doklady.
+
+Dobrá věta:
+
+> „Předplatné skončí 31. října 2026. Do té doby zůstane workspace aktivní. Data bude možné exportovat ještě 30 dní po konci období.“
+
+Špatná věta:
+
+> „Zrušením můžete přijít o přístup k některým funkcím.“
+
+To druhé je mlha. A mlha je super na horách, ne ve fakturaci.
+
+### 5) Export a mazání nelep na poslední chvíli
+
+Odchodový proces se často pokazí proto, že export dat a smazání účtu nejsou navržené jako normální produktové funkce. Jsou to nouzové dveře nakreslené fixou.
+
+Před zrušením nabídni:
+
+- export hlavních dat ve strojově použitelném formátu,
+- vysvětlení, co export neobsahuje a proč,
+- samostatnou žádost o smazání účtu nebo organizace,
+- informaci o retenčních lhůtách pro faktury, auditní logy a bezpečnostní záznamy,
+- kontakt pro situace, kdy je účet v organizaci a zrušení má dopad na další lidi.
+
+Nemíchej tři různé věci do jednoho tlačítka:
+
+1. zrušení předplatného,
+2. smazání uživatelského účtu,
+3. smazání dat celé organizace.
+
+Každá akce má jiný dopad a často jiného oprávněného člověka. Zakladatel účtu může zrušit placení, ale nemusí mít právo smazat historické účetní doklady nebo data celé firmy bez další kontroly.
+
+### 6) Win-back dělej jako službu, ne jako pronásledování
+
+Win-back e-mail po zrušení může být užitečný, pokud přináší konkrétní hodnotu. Nesmí to být deset zpráv ve stylu „chybíš nám“ a „poslední šance“.
+
+Férový win-back:
+
+- respektuje odhlášení z marketingu,
+- vychází z dobrovolně uvedeného důvodu,
+- nepoužívá sledovací pixely jako výchozí stav,
+- nabízí jeden relevantní další krok,
+- má jasné ukončení sekvence.
+
+Příklad:
+
+> „Psal/a jste, že chyběl export reportů. Přidali jsme CSV export pro měsíční přehledy. Pokud se chcete podívat, účet lze obnovit zde. Pokud ne, žádná akce není potřeba.“
+
+To je služba. Ne nahánění s digitální síťkou.
+
+### 7) Důvody odchodů vrať do produktu
+
+Odchodová data mají smysl jen tehdy, když se promítnou do rozhodování. Jinak tým jen sbírá smutek do tabulky.
+
+Měsíční review může mít jednoduchou strukturu:
+
+- počet zrušení podle tarifu,
+- nejčastější dobrovolné důvody,
+- počet downgrade a pauz,
+- top tři produktové blokery,
+- odhad dopadu na MRR,
+- rozhodnutí: co opravíme, co neřešíme, co ověříme rozhovory.
+
+Důležité: nehledej jen „jak zastavit odchod“. Hledej i „koho jsme neměli získat“. Někdy zákazníci odcházejí proto, že marketing sliboval víc, než produkt uměl. To není problém cancel flow. To je problém slibu.
+
+### Šablona odchodové karty
+
+```markdown
+## Odchodová karta: [tarif / segment / produkt]
+
+### Cesty
+- Pauza:
+- Downgrade:
+- Zrušení:
+- Export:
+- Smazání účtu/dat:
+
+### Dopady pro uživatele
+- Konec placeného období:
+- Přístup do workspace:
+- Týmoví členové:
+- Faktury a doklady:
+- Retence dat:
+
+### Feedback
+- Dobrovolné důvody:
+- Textové pole:
+- Retence feedbacku:
+- Kdo má přístup:
+
+### Retenční nabídka
+- Nabídka:
+- Kdy se zobrazí:
+- Jak pokračovat ve zrušení:
+- Co nesmí být manipulativní:
+
+### Win-back
+- Kdo dostane zprávu:
+- Podle jakého důvodu:
+- Po jaké době:
+- Kdy sekvence končí:
+
+### Produktové rozhodnutí
+- Co jsme se naučili:
+- Co upravíme:
+- Co nebudeme řešit:
+- Kdo je vlastník:
+```
+
+### Checklist pro zrušení, downgrade a win-back
+
+- [ ] Zákazník může samostatně zrušit placení bez povinného kontaktu s podporou, pokud tomu nebrání konkrétní B2B smluvní režim.
+- [ ] Pauza, downgrade a zrušení jsou jasně oddělené a srozumitelně vysvětlené.
+- [ ] Odchodový dotazník je dobrovolný, krátký a obsahuje možnost „nechci uvést“.
+- [ ] Retenční nabídka je maximálně jednoduchá a nebrání pokračovat ve zrušení.
+- [ ] Před potvrzením jsou vidět dopady na přístup, tým, fakturaci, data a export.
+- [ ] Export a smazání účtu/dat jsou oddělené akce s vlastním vysvětlením.
+- [ ] Texty nepoužívají falešnou urgenci, stud ani zavádějící vizuální hierarchii.
+- [ ] Feedback ze zrušení má vlastní retenci a nepoužívá se k neomezenému profilování lidí.
+- [ ] Win-back respektuje marketingové preference a má jasný konec.
+- [ ] Důvody odchodů se měsíčně promítají do produktu, pricingu a marketingových slibů.
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -11532,6 +11749,7 @@ Privacy-first detail: pokud e-mail obsahuje odkazy s měřením, nedávej do URL
 - European Data Protection Board: [Template for Data Protection Impact Assessment](https://www.edpb.europa.eu/our-work-tools/documents/public-consultations/2026/edpb-dpia-template_en)
 - European Data Protection Board: [Privacy by design and by default](https://www.edpb.europa.eu/topics/ai-and-technology/privacy-by-design-and-by-default_en)
 - European Data Protection Board: [Respect individuals’ rights](https://www.edpb.europa.eu/sme/be-compliant/respect-individuals-rights_en)
+- European Data Protection Board: [Guidelines 03/2022 on deceptive design patterns in social media platform interfaces](https://www.edpb.europa.eu/documents/guideline/guidelines-032022-on-deceptive-design-patterns-in-social-media-platform_en)
 - European Data Protection Board: [Basic principles](https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en)
 - European Data Protection Board: [Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_de)
 - European Data Protection Board: [Guidelines 07/2020 on the concepts of controller and processor in the GDPR](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-072020-concepts-controller-and-processor-gdpr_en)
@@ -11621,6 +11839,7 @@ Privacy-first detail: pokud e-mail obsahuje odkazy s měřením, nedávej do URL
 
 ## Pracovní log
 
+- **2026-10-14:** Přidána příloha BM o zrušení, downgrade a win-backu bez retenčních pastí: rozlišení pauzy/downgrade/zrušení, dobrovolný odchodový feedback, férová retenční nabídka, dopady před potvrzením, export a mazání, win-back bez pronásledování, šablona odchodové karty a checklist s ověřeným zdrojem EDPB k deceptive design patterns.
 - **2026-10-14:** Přidána příloha BL o onboardingové cestě k první hodnotné akci: krátká registrace, odložený sběr dat, bezpečná ukázková data, integrace podle okamžiku potřeby, užitečný checklist, agregované měření, první e-mail, šablona onboardingové karty a checklist.
 - **2026-10-14:** Doplněn krátký bod do přílohy BK o konzistentním tónu produktového textu napříč uživatelskou cestou a checklist copy review.
 - **2026-10-14:** Přidána příloha BK o produktovém copywritingu bez manipulace a mlhy: psaní podle situace zákazníka, konkrétní sliby, jasná CTA, mikrokopie u formulářů a dat, chybové hlášky, prázdné stavy, lidské privacy texty, šablona copy review a checklist.
