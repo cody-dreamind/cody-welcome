@@ -11202,6 +11202,12 @@ Export bude dostupný 24 hodin. Po stažení ho ulož bezpečně; soubor může 
 
 Lidský privacy text nemá maskovat právní realitu. Má ji přeložit do rozhodnutí: co se stane, jaká data se použijí, jak dlouho, kdo k nim má přístup a jak to může uživatel změnit.
 
+### 8) Drž jeden tón napříč celou cestou
+
+Produktový text se často rozpadne ve chvíli, kdy homepage píše marketing, formulář designér a potvrzovací e-mail někdo z podpory pět minut před releasem. Výsledek působí, jako by uživatel prošel třemi firmami za sebou. Před nasazením proto projdi jednu reálnou cestu od první stránky přes formulář až po e-mail a zkontroluj, jestli text pořád mluví stejným hlasem: konkrétně, klidně, bez falešného tlaku a bez náhlého přepnutí do právnické mlhy.
+
+Jednoduchý test: kdyby uživatel četl jen nadpisy, CTA a potvrzovací zprávy, pořád by věděl, co se stane dál a proč po něm produkt něco chce? Pokud ne, neupravuj jen jednotlivé věty. Oprav celý tok.
+
 ### Šablona copy review karty
 
 ```markdown
@@ -11254,6 +11260,7 @@ Lidský privacy text nemá maskovat právní realitu. Má ji přeložit do rozho
 - [ ] Chybové hlášky pomáhají opravit problém a neobviňují uživatele.
 - [ ] Prázdné stavy vedou k jednomu dalšímu bezpečnému kroku.
 - [ ] Privacy vysvětlení je přímo u rozhodnutí, ne jen v právním dokumentu.
+- [ ] Tón textu je konzistentní od první stránky přes formulář až po potvrzovací e-mail.
 - [ ] Text nepoužívá dark patterns, falešnou urgenci ani skryté důsledky.
 - [ ] Copy review je součástí release checklistu, ne kosmetická úprava na konci.
 
@@ -11365,6 +11372,7 @@ Lidský privacy text nemá maskovat právní realitu. Má ji přeložit do rozho
 
 ## Pracovní log
 
+- **2026-10-14:** Doplněn krátký bod do přílohy BK o konzistentním tónu produktového textu napříč uživatelskou cestou a checklist copy review.
 - **2026-10-14:** Přidána příloha BK o produktovém copywritingu bez manipulace a mlhy: psaní podle situace zákazníka, konkrétní sliby, jasná CTA, mikrokopie u formulářů a dat, chybové hlášky, prázdné stavy, lidské privacy texty, šablona copy review a checklist.
 - **2026-10-14:** Přidána příloha BJ o produktové analytice bez behaviorálního labyrintu: rozhodovací eventy, oddělení analytiky od logů a supportu, event katalog, hodnotový funnel, bezpečná segmentace, akční dashboardy, retence dat, šablona a checklist.
 - **2026-10-14:** Přidána příloha BI o zastupitelnosti a provozním handoveru: mapa kritických znalostí, průběžné předávání, role vlastníka a zástupce, přístupy přes role, provozní kalendář, praktický handover test, offboarding, šablona a checklist.
