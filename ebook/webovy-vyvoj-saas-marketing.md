@@ -11265,6 +11265,255 @@ Jednoduchý test: kdyby uživatel četl jen nadpisy, CTA a potvrzovací zprávy,
 - [ ] Copy review je součástí release checklistu, ne kosmetická úprava na konci.
 
 
+## Příloha BL: Onboarding a první hodnotná akce bez registračního bludiště
+
+Onboarding není tour přes sedm tooltipů, které uživatel odkliká rychleji než cookie lištu na podezřelém magazínu. Onboarding je cesta k prvnímu momentu, kdy si člověk řekne: „Aha, tohle mi šetří práci.“
+
+U SaaS produktu se tomu často říká první hodnotná akce. Není to registrace. Není to potvrzení e-mailu. Není to vyplnění profilu na 100 %. Je to první konkrétní výsledek, který odpovídá slibu produktu.
+
+Příklady:
+
+- Nástroj pro fakturaci: první vystavená nebo připravená faktura.
+- CRM: první importovaný kontakt s naplánovaným dalším krokem.
+- Analytika: první dashboard s reálnou návštěvností.
+- Projektový nástroj: první úkol přiřazený člověku s termínem.
+- AI asistent: první bezpečně dokončený pracovní výstup, který člověk může použít.
+
+**Codyho komentář:** Když onboarding měří jen „dokončenou registraci“, produkt se tváří úspěšně i ve chvíli, kdy uživatel reálně nic nezískal. To je jako gratulovat si, že někdo přišel do restaurace, i když nedostal jídlo. Optimismus pěkný, byznysově slabší.
+
+### 1) Začni definicí hodnoty, ne seznamem obrazovek
+
+První otázka není „kolik kroků má mít wizard“. První otázka je:
+
+> Jaký nejmenší užitečný výsledek může nový uživatel získat během prvního sezení?
+
+Dobrá definice první hodnotné akce má tři vlastnosti:
+
+1. **Je pozorovatelná:** víš, že nastala.
+2. **Je užitečná pro uživatele:** není to interní technický milník.
+3. **Je dosažitelná bez zbytečného sběru dat:** nevyžaduje deset polí, tři integrace a podpis krví.
+
+Slabá definice:
+
+> „Uživatel dokončí onboarding.“
+
+Lepší definice:
+
+> „Uživatel vytvoří první projekt, přidá jeden reálný úkol a pozve jednoho kolegu nebo uloží další krok.“
+
+Ještě lepší privacy-first varianta:
+
+> „Uživatel vytvoří první projekt s ukázkovým nebo vlastním úkolem; pozvání kolegy je volitelné a vysvětlené až ve chvíli, kdy dává smysl.“
+
+Tím se produkt vyhne klasické chybě: chce kontakty, týmové údaje a integrace dřív, než prokáže hodnotu. Uživatel pak nemá onboarding, ale malý výslech v pastelových barvách.
+
+### 2) Registrační formulář drž krátký a odložitelný
+
+Při prvním vstupu sbírej jen to, co je nezbytné pro bezpečné založení účtu a doručení slíbené služby. Všechno ostatní rozděl do pozdějších momentů podle kontextu.
+
+Typické pořadí:
+
+1. **E-mail a ověření:** pokud produkt vyžaduje účet.
+2. **Heslo nebo bezpečnější přihlášení:** podle rizika služby.
+3. **Název pracovního prostoru:** pokud bez něj nejde vytvořit první výstup.
+4. **Volitelný kontext:** role, velikost firmy, cíl — až když z toho uživatel hned něco získá.
+
+Co často počká:
+
+- telefon,
+- fakturační údaje před placeným krokem,
+- velikost týmu,
+- marketingový zdroj,
+- adresa firmy,
+- povinné pozvání kolegů,
+- napojení všech integrací.
+
+Praktické pravidlo: pokud pole neumíš vysvětlit jednou větou přímo u formuláře, pole pravděpodobně nemá být povinné.
+
+Příklad mikrokopie:
+
+> „Název firmy používáme jen pro pojmenování pracovního prostoru. Můžeš ho později změnit.“
+
+Horší varianta:
+
+> „Vyplňte údaje pro lepší personalizaci.“
+
+„Personalizace“ je často jen hezčí slovo pro „ještě přesně nevíme, proč to chceme“. Au. Ale přesné.
+
+### 3) Ukázková data používej jako rampu, ne jako divadlo
+
+Ukázková data pomáhají, když nový uživatel ještě nemá vlastní obsah. Bez nich může aplikace působit prázdně a člověk neví, co má udělat dál.
+
+Dobrá ukázková data:
+
+- jsou jasně označená jako ukázková,
+- dají se jedním kliknutím odstranit,
+- odpovídají běžnému použití produktu,
+- neobsahují reálná osobní data,
+- ukazují doporučený pracovní postup.
+
+Špatná ukázková data:
+
+- předstírají aktivitu, která neexistuje,
+- míchají se s reálnými daty bez označení,
+- vytvářejí metriky, které vypadají jako skutečný úspěch,
+- nutí uživatele uklízet cizí nepořádek.
+
+Příklad pro analytický nástroj: místo prázdného dashboardu ukaž vzorový dashboard s jasným štítkem „Ukázková data“ a tlačítkem „Připojit vlastní web“. Po prvním reálném měření ukázku automaticky schovej nebo nabídni její odstranění.
+
+### 4) Integrace nabízej podle okamžiku potřeby
+
+Integrace jsou lákavé. Vypadají jako produktová dospělost. Jenže v onboardingu mohou působit jako seznam domácích úkolů.
+
+Privacy-first onboarding se ptá:
+
+- Potřebuje uživatel integraci hned k první hodnotě?
+- Jaká data integrace získá?
+- Umíme nabídnout omezený rozsah oprávnění?
+- Je jasné, jak integraci odpojit?
+- Má uživatel alternativu bez integrace?
+
+Příklad: u nástroje pro projektové řízení nemusí nový uživatel hned připojovat kalendář, e-mail, Slack, účetní systém a CRM. Stačí vytvořit první projekt a teprve u termínu nabídnout kalendář:
+
+> „Chceš termíny posílat do kalendáře? Připojení je volitelné a můžeš ho kdykoliv vypnout.“
+
+To je férovější než obrazovka „Připojte 12 služeb pro nejlepší zážitek“, která v překladu znamená „otevřete nám všechny dveře, prosím“.
+
+### 5) Checklist průchodu má být pro uživatele, ne pro interní KPI
+
+Onboarding checklist může být skvělý, pokud pomáhá dokončit smysluplné kroky. Může být i manipulační, pokud tlačí na aktivitu, která slouží hlavně produktu.
+
+Dobré položky:
+
+- Vytvoř první projekt.
+- Přidej první položku.
+- Zkontroluj nastavení viditelnosti.
+- Pozvi kolegu, pokud chceš spolupracovat.
+- Nastav upozornění, která opravdu potřebuješ.
+
+Podezřelé položky:
+
+- Vyplň celý profil.
+- Nahraj fotku.
+- Pozvi pět lidí.
+- Propoj všechny účty.
+- Sleduj nás na sociálních sítích.
+
+Checklist by měl mít možnost přeskočit nepodstatné kroky. Pokud krok není povinný pro bezpečnost nebo funkčnost, netvař se, že bez něj produkt shoří. Drama patří do filmu, ne do nastavení SaaS.
+
+### 6) Měř onboarding agregovaně a podle rozhodnutí
+
+Onboarding se dá měřit bez behaviorálního labyrintu. Nepotřebuješ sledovat každý pohyb myši, nahrávat relace ani stavět detailní psychologický profil.
+
+Stačí praktické otázky:
+
+- Kolik nových účtů dosáhne první hodnotné akce?
+- Ve kterém kroku nejčastěji odpadávají?
+- Kolik lidí přeskočí volitelné integrace?
+- Jak často se vrací k onboarding checklistu?
+- Kolik lidí potřebuje support během prvního dne?
+
+Eventy drž věcné a bez osobních údajů:
+
+- `workspace_created`
+- `sample_data_removed`
+- `first_project_created`
+- `first_value_reached`
+- `integration_prompt_skipped`
+- `onboarding_checklist_completed`
+
+Do eventů nepatří e-mail, jméno firmy, text úkolu, obsah promptu, poznámky zákazníka ani celé URL s parametry. Pokud potřebuješ segmentaci, drž ji hrubou: tarif, typ účtu, jazyk rozhraní, zdroj kampaně bez osobního identifikátoru.
+
+### 7) Potvrzovací e-mail má pomoci pokračovat, ne přidat hluk
+
+První e-mail po registraci často rozhodne, jestli se člověk vrátí. Nemusí být dlouhý. Nemusí obsahovat hero obrázek, pět bannerů a tři sociální ikony. Má říct:
+
+- co se právě stalo,
+- jak pokračovat,
+- kde najít pomoc,
+- jak spravovat účet nebo komunikaci.
+
+Krátká šablona:
+
+```md
+Předmět: Vítej v [produkt] — další krok je [konkrétní akce]
+
+Ahoj,
+
+účet je připravený. Nejrychlejší cesta k prvnímu výsledku je:
+
+1. Otevři [konkrétní místo v aplikaci].
+2. Vytvoř [první užitečný objekt].
+3. Pokud chceš, použij ukázková data nebo je smaž.
+
+Nepotřebuješ zatím nic propojovat. Integrace můžeš přidat později v nastavení.
+
+Nápověda: [odkaz]
+Nastavení e-mailů: [odkaz]
+
+— Tým [produkt]
+```
+
+Privacy-first detail: pokud e-mail obsahuje odkazy s měřením, nedávej do URL osobní identifikátory. U onboardingových e-mailů často stačí měřit agregovaně doručení, základní kliknutí a odpovědi, ne stavět mikroskop na každého nového uživatele.
+
+### Šablona onboardingové karty
+
+```md
+## Onboarding karta: [produkt / segment / cesta]
+
+### První hodnota
+- První hodnotná akce:
+- Proč je hodnotná pro uživatele:
+- Nejkratší cesta k ní:
+- Co může počkat:
+
+### Kroky
+- Krok 1:
+- Krok 2:
+- Krok 3:
+- Volitelné kroky:
+- Přeskočitelné kroky:
+
+### Data
+- Povinná pole:
+- Proč jsou nutná:
+- Volitelná pole:
+- Kdy se ptáme později:
+
+### Integrace
+- Integrace potřebné hned:
+- Integrace nabídnuté později:
+- Rozsah oprávnění:
+- Jak se odpojují:
+
+### Měření
+- Eventy:
+- Segmenty:
+- Dashboard:
+- Retence analytiky:
+
+### Support
+- Nejčastější otázky:
+- Odkaz na nápovědu:
+- Eskalace:
+- Co zlepšit v produktu:
+```
+
+### Checklist pro onboarding a první hodnotnou akci
+
+- [ ] Máme jasně definovanou první hodnotnou akci z pohledu uživatele.
+- [ ] Registrační formulář sbírá jen nezbytná data pro účet a první výsledek.
+- [ ] Každé povinné pole má srozumitelné vysvětlení účelu.
+- [ ] Ukázková data jsou označená, bezpečná a snadno odstranitelná.
+- [ ] Integrace nejsou povinné, pokud nejsou nutné k první hodnotě.
+- [ ] Onboarding checklist obsahuje užitečné kroky, ne interní vanity cíle.
+- [ ] Nepodstatné kroky lze přeskočit bez trestu a falešné viny.
+- [ ] Eventy v onboardingu neobsahují osobní údaje ani obsah uživatele.
+- [ ] První e-mail vede k jednomu dalšímu kroku a nesbírá zbytečné identifikátory v URL.
+- [ ] Support otázky z prvního týdne se pravidelně promítají do zlepšení produktu.
+- [ ] Onboarding review probíhá při každé větší změně pricingu, registrace nebo hlavního workflow.
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -11372,6 +11621,7 @@ Jednoduchý test: kdyby uživatel četl jen nadpisy, CTA a potvrzovací zprávy,
 
 ## Pracovní log
 
+- **2026-10-14:** Přidána příloha BL o onboardingové cestě k první hodnotné akci: krátká registrace, odložený sběr dat, bezpečná ukázková data, integrace podle okamžiku potřeby, užitečný checklist, agregované měření, první e-mail, šablona onboardingové karty a checklist.
 - **2026-10-14:** Doplněn krátký bod do přílohy BK o konzistentním tónu produktového textu napříč uživatelskou cestou a checklist copy review.
 - **2026-10-14:** Přidána příloha BK o produktovém copywritingu bez manipulace a mlhy: psaní podle situace zákazníka, konkrétní sliby, jasná CTA, mikrokopie u formulářů a dat, chybové hlášky, prázdné stavy, lidské privacy texty, šablona copy review a checklist.
 - **2026-10-14:** Přidána příloha BJ o produktové analytice bez behaviorálního labyrintu: rozhodovací eventy, oddělení analytiky od logů a supportu, event katalog, hodnotový funnel, bezpečná segmentace, akční dashboardy, retence dat, šablona a checklist.
