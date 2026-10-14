@@ -12256,6 +12256,170 @@ Privacy-first ukončení znamená hlavně úklid přístupů, exportů a starýc
 - [ ] Existuje postup pro ukončení partnerství, vypnutí kódů a úklid dat.
 
 
+
+## Příloha BQ: Tajemství, API klíče a rotace bez paniky
+
+Každý SaaS má tajemství. Databázové heslo, API klíč platební brány, webhook secret, privátní SSH klíč, token do e-mailové služby, podpisový klíč pro session, přístup k objektovému úložišti. Problém není, že tajemství existují. Problém je, když leží v `.env` souboru na notebooku, v historii Gitu, ve screenshotu v ticketu, v chatu a ještě v poznámce „dočasně, smažu později“. Později je samozřejmě mytologická země, kam se nikdo nikdy nedostal.
+
+OWASP Secrets Management Cheat Sheet doporučuje centralizovat ukládání, provisioning, audit, rotaci a správu tajemství, omezovat přístup podle nejmenších oprávnění a ideálně automatizovat rotaci i životní cyklus tajemství ([OWASP: Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)). Privacy-first provoz k tomu přidává ještě jednu otázku: když tajemství unikne, kolik zákaznických dat se tím reálně otevře?
+
+### 1) Nejdřív udělej inventář tajemství
+
+Bez inventáře se tajemství řídí podle pocitu. A pocit je špatný správce infrastruktury, hlavně po půlnoci.
+
+Do inventáře patří:
+
+- **Název tajemství:** například `PROD_DATABASE_URL`, `STRIPE_WEBHOOK_SECRET`, `SMTP_PASSWORD`.
+- **Účel:** co přesně tajemství umožňuje.
+- **Prostředí:** lokální vývoj, staging, produkce, CI, externí integrace.
+- **Vlastník:** člověk nebo tým, který rozumí dopadu rotace.
+- **Kde je uložené:** secrets manager, CI proměnné, hostingové env proměnné, lokální vývojářské prostředí.
+- **Kdo má přístup:** role, ne seznam historických kamarádů z onboardingového chaosu.
+- **Dopad úniku:** nízký, střední, vysoký, kritický.
+- **Rotace a revokace:** jak rychle umíš tajemství vyměnit nebo zneplatnit.
+
+U malého týmu stačí tabulka v interní dokumentaci. Důležité je, aby neobsahovala hodnoty tajemství. Dokumentace má říct, kde a proč tajemství existuje, ne tajemství rovnou vyzradit. To je jako psát „trezor je za obrazem“ přímo na obraz.
+
+### 2) Odděl prostředí tvrději než jen názvem proměnné
+
+Produkce, staging a lokální vývoj nesmí sdílet stejné klíče. Když vývojář omylem spustí test proti produkční službě, nechceš, aby z toho vznikl incident, faktura nebo e-mail zákazníkům. Ideální pravidlo: každé prostředí má vlastní databázi, vlastní účty, vlastní API klíče a vlastní limity.
+
+Praktické příklady:
+
+- lokální vývoj používá lokální databázi nebo anonymizovaný dump,
+- staging má testovací účty u plateb, e-mailu a integrací,
+- produkční klíče nejsou dostupné v běžných vývojářských shellech,
+- CI má jen oprávnění potřebná pro konkrétní job,
+- preview prostředí nedostane automaticky všechna produkční tajemství.
+
+Toto pravidlo je obzvlášť důležité u evropského privacy-first provozu. Pokud preview deploy pro každou větev automaticky dostane produkční přístup k zákaznickým datům, není to preview. Je to velmi sebevědomý incident waiting room.
+
+### 3) Tajemství nepatří do Gitu, chatu ani ticketu
+
+Základní pravidlo: tajemství má být v systému určeném pro tajemství. Ne v repozitáři, ne v komentáři k pull requestu, ne v issue, ne ve screenshotu, ne v exportu logů.
+
+Do týmu zaveď jednoduchou rutinu:
+
+- pre-commit nebo CI kontrola hledá běžné formáty klíčů,
+- review checklist obsahuje otázku „nepřibylo tajemství nebo citlivá konfigurace?“;
+- screenshoty z administrace se před vložením do ticketu začerňují,
+- support a vývoj nepřeposílají celé `.env` soubory,
+- lokální `.env` je v `.gitignore` a jeho šablona se jmenuje třeba `.env.example` bez hodnot.
+
+Když tajemství přesto skončí v Gitu, nestačí ho z posledního commitu smazat. Počítej s tím, že bylo odhaleno: zneplatni ho, vytvoř nové a zkontroluj použití. Přepis historie může být součást úklidu, ale rotace je ta část, která skutečně snižuje riziko.
+
+### 4) Přístup dávej přes role a účel
+
+Ne každý vývojář potřebuje číst produkční tajemství. Ne každý administrátor potřebuje právo tajemství měnit. A skoro nikdo nepotřebuje „všechno, pro jistotu“. To je bezpečnostní ekvivalent univerzálního klíče pod rohožkou.
+
+Rozumné role:
+
+- **Čtení lokálních/dev tajemství:** běžní vývojáři pro práci na aplikaci.
+- **Čtení staging tajemství:** lidé, kteří řeší integrace a QA.
+- **Čtení produkčních tajemství:** minimum lidí a ideálně přes auditovaný nástroj.
+- **Změna produkčních tajemství:** provozní vlastník nebo dvojice lidí u kritických služeb.
+- **Revokace při incidentu:** jasně určená role, která nemusí čekat na „až se někdo přihlásí“.
+
+U externistů a agentur nastav expiraci přístupu hned při vytvoření. Pokud někdo potřebuje přístup na tři týdny, účet bez expirace je jen budoucí archeologický nález.
+
+### 5) Rotaci plánuj jako deploy, ne jako rituální tanec
+
+Rotace tajemství nemá být dobrodružství. Má mít postup, test a rollback. U každého důležitého tajemství si napiš, co se stane při výměně.
+
+Bezpečný vzor rotace:
+
+1. Vytvoř nové tajemství s minimálními oprávněními.
+2. Přidej ho do cílového prostředí vedle starého, pokud služba podporuje překryvné období.
+3. Nasadíš aplikaci nebo konfiguraci, která používá nové tajemství.
+4. Ověříš konkrétní funkci: přihlášení, platbu, webhook, export, e-mail.
+5. Zneplatníš staré tajemství.
+6. Zkontroluješ logy chyb a neúspěšných pokusů o použití starého tajemství.
+7. Zapíšeš datum rotace a případné poznámky do inventáře.
+
+Ne všechno jde rotovat stejně. Webhook secret má jiný režim než databázové heslo. Šifrovací klíč má jiný dopad než token pro newsletter. Proto má inventář obsahovat i poznámku „jak se rotuje“, ne jen „rotovat kvartálně a tvářit se důležitě“.
+
+### 6) Incident s tajemstvím řeš rychle a věcně
+
+Když tajemství unikne, první otázka není „kdo za to může“. První otázka je „co tím šlo udělat a jak to zablokujeme“. Obviňování nech na retro; containment má přednost.
+
+Mini postup:
+
+- zastav další šíření: smaž veřejný gist, zavři issue, odeber screenshot,
+- zneplatni nebo rotuj dotčené tajemství,
+- zkontroluj auditní logy a použití tajemství,
+- zjisti rozsah dopadu na zákaznická data,
+- oprav proces, který únik umožnil,
+- u významného dopadu zapoj incidentovou komunikaci, právní povinnosti a DPA procesy podle povahy dat.
+
+Privacy-first tým si nehraje na to, že únik tajemství je jen technický bug. Je to potenciální datový incident. Rozsah se určí podle toho, co tajemství chránilo a zda existují známky zneužití.
+
+### 7) Lokální vývoj udělej pohodlný, jinak si lidé najdou zkratky
+
+Bezpečnost, která nejde používat, se obchází. Vývojáři potřebují rychle rozběhnout projekt, testovat integrace a ladit chyby. Pokud je jediný návod „napiš Ondřejovi o produkční `.env`“, systém si o průšvih přímo říká.
+
+Lepší lokální setup:
+
+- `.env.example` s názvy proměnných a komentářem, ne s hodnotami,
+- skript `setup` nebo dokumentace pro získání dev tajemství,
+- testovací účty a sandbox integrace,
+- anonymizovaná nebo generovaná testovací data,
+- jasné pravidlo, kdy se smí použít produkční read-only přístup a kdo ho schvaluje,
+- rychlý způsob, jak nahlásit chybějící tajemství bez lovu v chatu.
+
+**Codyho komentář:** Nejlepší secrets management není ten nejdražší. Je to ten, který tým opravdu používá a který nezmění každý deploy v únikovou hru. Malý SaaS nepotřebuje hned chrám s laserovou ochrankou. Potřebuje inventář, role, oddělená prostředí, rotaci a disciplínu. Lasery můžeme přidat později, až bude budget a dramatická hudba.
+
+### Šablona karty tajemství
+
+## Tajemství: [název]
+
+### Účel
+
+- K čemu tajemství slouží:
+- Která služba ho používá:
+- Jaký zákaznický proces by výpadek ovlivnil:
+
+### Prostředí a uložení
+
+- Prostředí: lokální / staging / produkce / CI / integrace
+- Kde je uložené:
+- Kdo má čtení:
+- Kdo má právo změny:
+
+### Riziko
+
+- Dopad úniku:
+- Typ dat nebo operací, ke kterým tajemství otevírá cestu:
+- Závislé služby:
+
+### Rotace
+
+- Jak vytvořit nové tajemství:
+- Jak nasadit změnu:
+- Jak ověřit funkčnost:
+- Jak zneplatnit staré tajemství:
+- Poslední rotace:
+- Další review:
+
+### Incident
+
+- Koho kontaktovat:
+- Kde najít auditní logy:
+- Jak poznat zneužití:
+- Jaké kroky udělat do 30 minut:
+
+### Checklist pro tajemství a API klíče
+
+- [ ] Všechna důležitá tajemství mají inventář bez skutečných hodnot.
+- [ ] Produkce, staging, lokální vývoj a CI nepoužívají stejná tajemství.
+- [ ] Produkční tajemství nejsou v Gitu, chatu, ticketech, screenshotech ani logách.
+- [ ] Přístupy jsou nastavené podle role a účelu, ne podle historické náhody.
+- [ ] Kritická tajemství mají popsaný postup rotace a revokace.
+- [ ] Při úniku se tajemství rotuje nebo zneplatní, nestačí ho jen smazat z viditelného místa.
+- [ ] Lokální vývoj má bezpečný a rychlý setup bez produkčních `.env` souborů.
+- [ ] Offboarding a access review zahrnují i přístup k secrets manageru a CI proměnným.
+- [ ] Dokumentace říká, kde tajemství spravovat, ale nikdy neobsahuje jejich hodnoty.
+
+
 ## Zdroje
 
 - Atlassian: [SLA vs. SLO vs. SLI](https://www.atlassian.com/incident-management/kpis/sla-vs-slo-vs-sli)
@@ -12331,6 +12495,7 @@ Privacy-first ukončení znamená hlavně úklid přístupů, exportů a starýc
 - OWASP: [Secure Headers Project](https://owasp.org/www-project-secure-headers/)
 - OWASP: [Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
 - OWASP: [REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html)
+- OWASP: [Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)
 - OWASP: [Web Cache Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Web_Cache_Security_Cheat_Sheet.html)
 - OWASP: [Webhook Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Webhook_Security_Cheat_Sheet.html)
 - RFC Editor: [RFC 6376 — DomainKeys Identified Mail (DKIM) Signatures](https://www.rfc-editor.org/rfc/rfc6376)
@@ -12367,6 +12532,7 @@ Privacy-first ukončení znamená hlavně úklid přístupů, exportů a starýc
 
 ## Pracovní log
 
+- **2026-10-14:** Přidána příloha BQ o tajemstvích, API klíčích a rotaci bez paniky: inventář tajemství, oddělení prostředí, zákaz tajemství v Gitu/chatu/ticketech, role a přístupy, bezpečný postup rotace, incidentový mini playbook, lokální vývojový setup, šablona karty tajemství a checklist s ověřeným zdrojem OWASP.
 - **2026-10-14:** Přidána příloha BP o partnerském marketingu a doporučeních bez sledovací mafie: typy vztahů, privacy-first atribuce, bezpečné referral odkazy, označování placených odkazů, pravidla pro partnery, měření kvality, ukončení partnerství, šablona partnerské karty a checklist.
 - **2026-10-14:** Přidána příloha BO o rozhodovacím logu a produktové paměti: kdy zapisovat rozhodnutí, jak zachytit varianty a trade-offy, privacy dopady, verzování rozhodnutí, propojení s backlogem, review rytmus, šablona a checklist.
 - **2026-10-14:** Přidána příloha BN o SLA, SLO a supportních prioritách: rozdíl mezi SLI/SLO/SLA, prioritizace podle dopadu, měření zákaznických cest, privacy-first pravidla pro důkazy, status page, měsíční review a praktická šablona.
