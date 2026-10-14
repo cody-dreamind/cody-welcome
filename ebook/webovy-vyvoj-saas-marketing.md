@@ -11731,8 +11731,190 @@ Důležité: nehledej jen „jak zastavit odchod“. Hledej i „koho jsme nemě
 - [ ] Důvody odchodů se měsíčně promítají do produktu, pricingu a marketingových slibů.
 
 
+## Příloha BN: SLA, SLO a supportní priority bez falešných slibů
+
+Malý SaaS tým často udělá jednu ze dvou chyb. Buď neslíbí nic, takže zákazník neví, co čekat, nebo slíbí „enterprise dostupnost“ bez týmu, infrastruktury a procesu, který by takový slib unesl. Obojí bolí. První varianta snižuje důvěru, druhá vyrábí právní a provozní dluh.
+
+Privacy-first provoz k tomu přidává ještě jednu vrstvu: incident, výpadek nebo pomalá podpora nesmí automaticky znamenat, že se začnou kopírovat celé databáze, posílat screenshoty s osobními údaji do chatu a sdílet logy s každým, kdo se zrovna tváří technicky. Dobré SLA a SLO nejsou jen tabulka procent. Jsou to pravidla, jak se tým rozhoduje pod tlakem.
+
+Google SRE popisuje SLO jako cíle kvality služby měřené přes konkrétní indikátory, ne jako dekoraci v dokumentaci ([Google SRE: Service Level Objectives](https://sre.google/resources/book-update/slos/)). Atlassian podobně rozlišuje SLA, SLO a SLI: dohoda se zákazníkem, interní cíl a měřený ukazatel ([Atlassian: SLA vs. SLO vs. SLI](https://www.atlassian.com/incident-management/kpis/sla-vs-slo-vs-sli)). Pro malé týmy je praktická pointa jednoduchá: veřejně slibuj méně, interně měř víc a nikdy neslibuj něco, co neumíš obnovit o víkendu v jedenáct večer.
+
+> **Codyho komentář:** SLA není marketingový parfém na chaos. Je to účtenka za provozní rozhodnutí. Když slíbíš 99,9 %, právě sis koupil povinnost vědět, co se stane při deployi, výpadku databáze, rozbité platební bráně a dovolené jediného člověka, který „ví, kde se to restartuje“.
+
+### 1) Nejdřív odděl SLA, SLO a SLI
+
+Používej tři vrstvy:
+
+- **SLI** je měřený ukazatel: dostupnost aplikace, úspěšnost přihlášení, latence API, doručení e-mailu, čas první odpovědi podpory.
+- **SLO** je interní cíl: například 99,5 % úspěšných přihlášení za 30 dnů nebo první odpověď na kritický ticket do 4 pracovních hodin.
+- **SLA** je zákaznický závazek: smluvní nebo obchodní slib, často s kompenzací, eskalací nebo konkrétním režimem podpory.
+
+Pro začínající B2B SaaS je dobrý postup tento:
+
+1. Nejdřív definuj SLI pro klíčové uživatelské cesty.
+2. Tři měsíce sbírej interní SLO bez veřejného slibu.
+3. Teprve potom zvaž SLA pro placené tarify nebo enterprise smlouvy.
+
+Tím se vyhneš situaci, kdy právník, obchod a zákazník pracují s hezkým číslem, ale monitoring měří úplně jinou realitu.
+
+### 2) Prioritu určuj podle dopadu na zákazníka, ne podle hlasitosti
+
+Supportní priorita nemá být soutěž v Caps Locku. Definuj ji podle dopadu:
+
+- **P1 — kritický dopad:** většina zákazníků se nedostane k hlavní funkci, dochází k bezpečnostnímu incidentu, platby nebo přihlášení jsou nefunkční.
+- **P2 — vysoký dopad:** omezená skupina zákazníků nemůže dokončit důležitý workflow, existuje workaround, ale je bolestivý.
+- **P3 — střední dopad:** chyba zhoršuje práci, ale neblokuje hodnotu produktu.
+- **P4 — nízký dopad:** kosmetika, dotaz, návrh zlepšení nebo nízkoriziková nekonzistence.
+
+Ke každé prioritě napiš: kdo rozhoduje, jak rychle odpovídáš, jak často aktualizuješ zákazníka a kdy se incident eskaluje. Neřeš jen „čas do vyřešení“. Ten je u složitých incidentů často nejistý. Férovější je slíbit čas do potvrzení problému, první diagnostiky a dalšího update.
+
+### 3) Měř zákaznické cesty, ne jen uptime serveru
+
+Server může odpovídat 200 OK a produkt může být pro zákazníka prakticky rozbitý. Typický příklad: homepage běží, ale nejde se přihlásit; API odpovídá, ale fakturace neodesílá doklady; administrace funguje, ale import dat končí timeoutem.
+
+Vyber 3–7 kritických cest:
+
+- registrace nebo pozvánka do týmu,
+- přihlášení,
+- vytvoření hlavního objektu v produktu,
+- dokončení platby nebo změna tarifu,
+- export dat,
+- odeslání formuláře nebo objednávky,
+- klíčová integrace, pokud je produkt na integracích postavený.
+
+Pro každou cestu měř dostupnost, chybovost a rozumnou latenci. Nepotřebuješ behaviorální šmírování konkrétních lidí. Potřebuješ vědět, že cesta jako celek funguje. To jde měřit syntetickými testy, agregovanými technickými metrikami a anonymizovanými počty úspěchů/chyb.
+
+### 4) Privacy-first support má pravidla pro důkazy
+
+Při řešení incidentu často potřebuješ důkazy: URL, čas, request ID, prohlížeč, tarif, typ účtu, případně screenshot. Bez pravidel ale support rychle začne sbírat víc dat, než je potřeba.
+
+Nastav jednoduchý standard:
+
+- zákazník nikdy neposílá heslo, tokeny, celé exporty ani osobní data třetích osob,
+- screenshoty se před uložením ořezávají nebo rozmazávají,
+- request ID má přednost před celým payloadem,
+- produkční logy se nesdílí do běžného chatu,
+- citlivé přílohy mají omezený přístup a retenční dobu,
+- supportní ticket má samostatnou retenci podle účelu.
+
+Praktický text do formuláře:
+
+> „Popište, co jste chtěli udělat, kdy se problém stal a přidejte request ID, pokud ho vidíte. Neposílejte hesla, tokeny ani osobní údaje vašich zákazníků. Pokud přikládáte screenshot, skryjte citlivá data.“
+
+Tohle není paranoia. To je provozní hygiena s menším množstvím budoucího trapna.
+
+### 5) SLA nesmí motivovat k horšímu chování
+
+Špatně nastavené SLA tlačí tým k tomu, aby rychle zavíral tickety, ne aby řešil problém. Typické anti-patterny:
+
+- „odpovězeno“ znamená automatická zpráva bez hodnoty,
+- support mění prioritu dolů, aby se vešel do SLA,
+- zákazník musí založit nový ticket, aby se restartoval čas,
+- incident se neoznačí jako incident, protože by kazil report,
+- tým řeší edge case ručně místo toho, aby opravil systémovou příčinu.
+
+Lepší je kombinovat SLA s kvalitativní kontrolou:
+
+- první odpověď musí obsahovat další krok nebo žádost o konkrétní informaci,
+- změna priority musí mít důvod v ticketu,
+- opakované podobné tickety se slučují do produktového problému,
+- incident má postmortem i tehdy, když se „vlezl do SLA“.
+
+### 6) Status page drž jako veřejnou paměť, ne PR kulisu
+
+Status page má být stručná, pravdivá a užitečná. Nemusí odhalovat interní architekturu ani citlivé detaily, ale má říct:
+
+- co je ovlivněno,
+- koho se to pravděpodobně týká,
+- kdy začal problém,
+- co tým dělá,
+- kdy bude další update,
+- co má zákazník udělat, pokud potřebuje pomoc.
+
+Privacy-first detail: nepoužívej na status page reklamní měření ani zbytečné skripty. Když někdo kontroluje incident, nepotřebuje být zároveň zařazen do marketingového publika. Status page má fungovat i při problému hlavní aplikace, ideálně na oddělené infrastruktuře nebo aspoň s jednoduchým fallbackem.
+
+### 7) SLO review dělej měsíčně, ne až při požáru
+
+Jednou měsíčně projdi:
+
+- které SLO bylo porušeno,
+- zda porušení pocítil zákazník,
+- co byla technická a produktová příčina,
+- zda alert přišel včas,
+- zda dokumentace pomohla,
+- jaká práce se přesune do roadmapy,
+- jestli veřejné SLA pořád odpovídá realitě.
+
+Výsledek nemá být dvacetistránkový report. Stačí jedna stránka: tři největší provozní rizika, jeden konkrétní závazek na příští měsíc a rozhodnutí, jestli se některé SLO upraví. SLO není náboženský text. Je to pracovní pomůcka.
+
+### Šablona SLA/SLO karty
+
+## SLA/SLO karta: [služba / zákaznická cesta]
+
+### Kontext
+
+- Zákaznická cesta:
+- Pro koho je kritická:
+- Tarif nebo smluvní režim:
+- Vlastník:
+
+### SLI
+
+- Měřený ukazatel:
+- Zdroj dat:
+- Co se počítá jako úspěch:
+- Co se nepočítá:
+- Jak se chrání osobní údaje:
+
+### SLO
+
+- Interní cíl:
+- Vyhodnocovací období:
+- Alertovací hranice:
+- Kdo reaguje:
+- Co se stane při porušení:
+
+### SLA
+
+- Veřejný nebo smluvní slib:
+- Čas první odpovědi:
+- Čas dalšího update:
+- Kompenzace nebo eskalace:
+- Výjimky:
+
+### Supportní proces
+
+- Priorita:
+- První diagnostika:
+- Potřebné důkazy:
+- Zakázané důkazy:
+- Retence ticketu a příloh:
+
+### Review
+
+- Poslední porušení:
+- Dopad na zákazníky:
+- Kořenová příčina:
+- Akce do roadmapy:
+- Datum další kontroly:
+
+### Checklist pro SLA, SLO a supportní priority
+
+- [ ] Každé SLA má odpovídající interní SLO a měřitelný SLI.
+- [ ] Veřejné sliby jsou konzervativnější než interní provozní cíle.
+- [ ] Priority supportu jsou definované podle zákaznického dopadu, ne podle hlasitosti požadavku.
+- [ ] První odpověď obsahuje další krok, ne jen automatické potvrzení.
+- [ ] Kritické zákaznické cesty jsou měřené agregovaně bez behaviorálního profilování.
+- [ ] Supportní formulář vysvětluje, jaké důkazy poslat a jaká data neposílat nikdy.
+- [ ] Screenshoty, logy a přílohy mají omezený přístup a jasnou retenci.
+- [ ] Status page nepoužívá reklamní trackery a funguje mimo hlavní aplikaci, pokud je to realistické.
+- [ ] Porušení SLO vede k postmortem nebo provoznímu záznamu, ne k zametení pod koberec.
+- [ ] Měsíční SLO review končí konkrétní akcí v roadmapě nebo vědomým rozhodnutím nic neměnit.
+
+
 ## Zdroje
 
+- Atlassian: [SLA vs. SLO vs. SLI](https://www.atlassian.com/incident-management/kpis/sla-vs-slo-vs-sli)
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
 - Diátaxis: [A systematic approach to technical documentation authoring](https://www.diataxis.fr/)
 - Diátaxis: [Start here — Diátaxis in five minutes](https://www.diataxis.fr/start-here/)
@@ -11762,6 +11944,7 @@ Důležité: nehledej jen „jak zastavit odchod“. Hledej i „koho jsme nemě
 - EUR-Lex: [Directive 2002/58/EC on privacy and electronic communications](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02002L0058-20091219)
 - FIDO Alliance: [Passkeys](https://fidoalliance.org/passkeys/)
 - Finanční správa: [Daň z přidané hodnoty](https://financnisprava.gov.cz/cs/dane/dane/dan-z-pridane-hodnoty)
+- Google SRE: [Service Level Objectives](https://sre.google/resources/book-update/slos/)
 - NCSC: [Password administration for system owners](https://www.ncsc.gov.uk/collection/passwords)
 - NIST: [SP 800-34 Rev. 1 — Contingency Planning Guide for Federal Information Systems](https://csrc.nist.gov/pubs/sp/800/34/r1/final)
 - Google Analytics Help: [URL builders — Collect campaign data with custom URLs](https://support.google.com/analytics/answer/10917952?hl=en-uk)
@@ -11839,6 +12022,7 @@ Důležité: nehledej jen „jak zastavit odchod“. Hledej i „koho jsme nemě
 
 ## Pracovní log
 
+- **2026-10-14:** Přidána příloha BN o SLA, SLO a supportních prioritách: rozdíl mezi SLI/SLO/SLA, prioritizace podle dopadu, měření zákaznických cest, privacy-first pravidla pro důkazy, status page, měsíční review a praktická šablona.
 - **2026-10-14:** Přidána příloha BM o zrušení, downgrade a win-backu bez retenčních pastí: rozlišení pauzy/downgrade/zrušení, dobrovolný odchodový feedback, férová retenční nabídka, dopady před potvrzením, export a mazání, win-back bez pronásledování, šablona odchodové karty a checklist s ověřeným zdrojem EDPB k deceptive design patterns.
 - **2026-10-14:** Přidána příloha BL o onboardingové cestě k první hodnotné akci: krátká registrace, odložený sběr dat, bezpečná ukázková data, integrace podle okamžiku potřeby, užitečný checklist, agregované měření, první e-mail, šablona onboardingové karty a checklist.
 - **2026-10-14:** Doplněn krátký bod do přílohy BK o konzistentním tónu produktového textu napříč uživatelskou cestou a checklist copy review.
