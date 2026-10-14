@@ -11020,6 +11020,243 @@ Pokud někdo chce prodloužit retenci, musí říct proč. „Možná se to bude
 - [ ] Exporty analytických dat mají vlastníka, expiraci a bezpečné uložení.
 - [ ] Měsíční review kontroluje, které eventy zrušit, sloučit nebo přepsat.
 
+## Příloha BK: Produktový copywriting bez manipulace a mlhy
+
+Produktový copywriting není ozdobný lak na hotovou funkci. Je to součást produktu. Text rozhoduje, jestli člověk chápe, co se stane po kliknutí, jaké údaje po něm chceš, proč je chceš a jestli ti může věřit. U privacy-first SaaS je copy ještě důležitější: když nechceš růst přes šmírování, dark patterns a psychologické páky, musíš být přesnější v tom, co slibuješ.
+
+Dobré produktové texty snižují nejistotu. Špatné ji schovávají za fráze jako „rychle a jednoduše“, „bez starostí“, „chytré řešení“ nebo „vše na jednom místě“. Tyhle věty nejsou vždy lživé, ale často jsou gumové. Dá se pod ně nacpat všechno — a tím pádem neříkají skoro nic.
+
+> **Codyho komentář:** Copywriting není soutěž v nejhlasitějším tlačítku. Je to navigace. Když uživatel neví, kam jede, nepomůže mu, že cedule bliká gradientem a křičí „Začni zdarma!!!“.
+
+### 1) Piš podle situace, ne podle interního slovníku
+
+Zákazník nepřichází na web proto, aby obdivoval, jak máš pojmenované moduly. Přichází s problémem. Text proto začínej jeho situací, ne názvem funkce.
+
+Slabé:
+
+```text
+Automatizovaný onboardingový modul
+```
+
+Lepší:
+
+```text
+Nový zákazník dostane první kroky automaticky — bez ručního posílání e-mailů.
+```
+
+Ještě konkrétnější:
+
+```text
+Po zaplacení tarifu pošleme zákazníkovi přístup, první úkoly a odkaz na nápovědu. Ty jen vidíš, kdo se zasekl.
+```
+
+Interní názvy si nech do dokumentace. Ve veřejném textu a v produktu používej jazyk práce, kterou člověk dělá: poslat nabídku, pozvat kolegu, schválit fakturu, exportovat report, obnovit heslo, zrušit účet. Když musíš použít odborný pojem, vysvětli ho v jedné větě a ukaž dopad.
+
+### 2) Slibuj výsledek, ne magii
+
+Marketingový text má ukázat hodnotu, ale nesmí dělat kouzelnické sliby. Zvlášť u AI, automatizace a analytiky je lákavé psát „ušetří vám hodiny práce“ nebo „najde nejlepší zákazníky“. Jenže pokud to neumíš doložit pro konkrétní situaci, je lepší být přesný.
+
+Místo:
+
+```text
+AI za vás vyřeší zákaznickou podporu.
+```
+
+Piš:
+
+```text
+AI navrhne odpověď podle vaší knowledge base. Člověk ji před odesláním zkontroluje.
+```
+
+Místo:
+
+```text
+Získejte dokonalý přehled o chování uživatelů.
+```
+
+Piš:
+
+```text
+Uvidíte, kolik týmů dokončí onboarding a kde se nejčastěji zaseknou — bez ukládání obsahu jejich práce.
+```
+
+Takový text je méně bombastický, ale prodává důvěru. A důvěra je v B2B často lepší konverzní nástroj než přehřátý slogan s pěti vykřičníky.
+
+### 3) CTA má říct, co se stane dál
+
+Tlačítko není místo pro hádanku. „Odeslat“, „Pokračovat“ a „Začít“ někdy stačí, ale u důležitých kroků je lepší být konkrétní.
+
+Příklady jasných CTA:
+
+- **Domluvit 30min demo** — uživatel ví, že jde o schůzku a jak dlouho potrvá.
+- **Vytvořit pracovní prostor** — ne „Začít“, ale konkrétní akce v produktu.
+- **Stáhnout CSV export** — jasný výsledek kliknutí.
+- **Pozvat kolegu e-mailem** — uživatel chápe, že odejde pozvánka.
+- **Zrušit obnovování tarifu** — přesnější a férovější než mlhavé „Spravovat předplatné“.
+
+U citlivých akcí přidej mikrokopii před kliknutím nebo po něm:
+
+```text
+Zrušením obnovování nepřijdeš o aktuální placené období. Přístup zůstane aktivní do 31. října.
+```
+
+Privacy-first produkt by měl zvlášť jasně popsat akce kolem dat: export, smazání, pozvánka, změna role, připojení integrace, zapnutí analytiky nebo sdílení reportu. Pokud akce odešle e-mail, změní oprávnění nebo zpřístupní data třetí straně, napiš to předem. Překvapení patří do detektivky, ne do administrace SaaS.
+
+### 4) Formuláře vysvětluj u pole, ne až v právním dokumentu
+
+Každé pole ve formuláři má projít testem: **ví uživatel, proč to chci?** Pokud ne, přidej krátkou nápovědu nebo pole smaž.
+
+Příklad poptávkového formuláře:
+
+```text
+E-mail
+Pošleme na něj odpověď k poptávce. Nepřidáme tě do newsletteru.
+
+Web firmy
+Pomůže nám připravit konkrétnější doporučení. Pokud web ještě nemáš, pole nech prázdné.
+
+Rozpočet
+Volitelné. Pomáhá určit, jestli doporučit rychlý audit, redesign nebo postupnou spolupráci.
+```
+
+Tahle mikrokopie dělá dvě věci najednou: zvyšuje šanci na vyplnění a snižuje pocit, že firma sbírá data „pro jistotu“. Zároveň pomáhá týmu držet disciplínu. Když nedokážeš napsat férové vysvětlení pole, pravděpodobně ho nepotřebuješ.
+
+### 5) Chybové hlášky mají opravovat, ne obviňovat
+
+Chybová hláška není trest. Je to navigace z problému ven. Dobrá hláška říká:
+
+1. co se stalo,
+2. proč to možná nastalo,
+3. co má uživatel udělat dál,
+4. jestli se data uložila nebo ne.
+
+Slabé:
+
+```text
+Neplatný vstup.
+```
+
+Lepší:
+
+```text
+E-mail nemá platný formát. Zkontroluj prosím překlep před zavináčem nebo za doménou.
+```
+
+U provozních chyb buď upřímný, ale neprozrazuj technické detaily:
+
+```text
+Report se teď nepodařilo vygenerovat. Zadání jsme uložili, takže ho nemusíš vyplňovat znovu. Zkus to prosím za pár minut.
+```
+
+U bezpečnostních a privacy akcí nikdy nepiš víc, než je potřeba. Například při přihlášení často stačí neutrální text, který neprozradí, jestli účet existuje:
+
+```text
+Pokud k tomuto e-mailu existuje účet, poslali jsme odkaz pro přihlášení.
+```
+
+### 6) Prázdné stavy jsou onboarding, ne šedá poušť
+
+Prázdný dashboard, seznam bez položek nebo nově vytvořený účet je výborné místo pro krátký text. Ne pro román, ale pro další krok.
+
+Špatný prázdný stav:
+
+```text
+Zatím zde nic není.
+```
+
+Lepší:
+
+```text
+Zatím nemáš žádný projekt. Vytvoř první projekt a nahraj do něj data, ze kterých chceš připravit report.
+```
+
+Ještě lepší privacy-first verze:
+
+```text
+Zatím nemáš žádný projekt. Pro první test můžeš použít ukázková data, aby ses nemusel dotýkat reálných zákaznických údajů.
+```
+
+Prázdné stavy mohou připomínat bezpečnou práci s daty: použij demo data, nastav role před pozváním kolegů, zkontroluj integraci v testovacím režimu, stáhni export před smazáním. Tohle je malý text s velkým provozním dopadem.
+
+### 7) Privacy text piš lidsky a blízko rozhodnutí
+
+Zásady zpracování osobních údajů jsou nutné, ale nejsou náhradou za jasný text v produktu. Když uživatel připojuje integraci, zve kolegu nebo zapíná měření, potřebuje krátké vysvětlení přímo na místě.
+
+Příklad u analytiky:
+
+```text
+Měříme jen agregované použití funkcí: dokončení onboardingu, vytvoření reportu a chyby importu. Neukládáme obsah reportů, texty polí ani osobní poznámky.
+```
+
+Příklad u integrace:
+
+```text
+Integrace získá přístup jen k fakturám a kontaktům, které vybereš. Přístup můžeš kdykoliv odebrat v nastavení integrací.
+```
+
+Příklad u exportu:
+
+```text
+Export bude dostupný 24 hodin. Po stažení ho ulož bezpečně; soubor může obsahovat zákaznická data.
+```
+
+Lidský privacy text nemá maskovat právní realitu. Má ji přeložit do rozhodnutí: co se stane, jaká data se použijí, jak dlouho, kdo k nim má přístup a jak to může uživatel změnit.
+
+### Šablona copy review karty
+
+```markdown
+## Copy review: [stránka / obrazovka / workflow]
+
+### Kontext
+- Kdo text čte:
+- V jaké situaci:
+- Jaké rozhodnutí má udělat:
+- Co se stane po hlavní akci:
+
+### Primární slib
+- Současný text:
+- Konkrétní výsledek pro zákazníka:
+- Co nesmíme slibovat:
+- Důkaz nebo příklad:
+
+### CTA a mikrokopie
+- Hlavní CTA:
+- Vedlejší CTA:
+- Co musí být vysvětlené před kliknutím:
+- Potvrzení po akci:
+
+### Formuláře a data
+- Jaká data žádáme:
+- Proč je potřebujeme:
+- Která pole jsou volitelná:
+- Co můžeme smazat nebo přesunout později:
+
+### Chyby a prázdné stavy
+- Nejčastější chyba:
+- Text, který pomůže opravit problém:
+- Prázdný stav:
+- Další bezpečný krok:
+
+### Privacy kontrola
+- Je jasné, co se děje s daty?
+- Neobsahuje text manipulativní tlak?
+- Neschováváme důležitou informaci do patičky?
+- Dokáže uživatel akci odmítnout nebo změnit?
+```
+
+### Checklist pro produktový copywriting
+
+- [ ] Hlavní slib popisuje konkrétní výsledek, ne interní název funkce.
+- [ ] Text nepoužívá vágní fráze bez příkladu, důkazu nebo dopadu.
+- [ ] CTA říká, co se po kliknutí opravdu stane.
+- [ ] Citlivé akce kolem dat, rolí, exportů a integrací mají jasnou mikrokopii.
+- [ ] Formulářová pole mají vysvětlený účel, nebo jsou odstraněná.
+- [ ] Chybové hlášky pomáhají opravit problém a neobviňují uživatele.
+- [ ] Prázdné stavy vedou k jednomu dalšímu bezpečnému kroku.
+- [ ] Privacy vysvětlení je přímo u rozhodnutí, ne jen v právním dokumentu.
+- [ ] Text nepoužívá dark patterns, falešnou urgenci ani skryté důsledky.
+- [ ] Copy review je součástí release checklistu, ne kosmetická úprava na konci.
+
 
 ## Zdroje
 
@@ -11128,6 +11365,7 @@ Pokud někdo chce prodloužit retenci, musí říct proč. „Možná se to bude
 
 ## Pracovní log
 
+- **2026-10-14:** Přidána příloha BK o produktovém copywritingu bez manipulace a mlhy: psaní podle situace zákazníka, konkrétní sliby, jasná CTA, mikrokopie u formulářů a dat, chybové hlášky, prázdné stavy, lidské privacy texty, šablona copy review a checklist.
 - **2026-10-14:** Přidána příloha BJ o produktové analytice bez behaviorálního labyrintu: rozhodovací eventy, oddělení analytiky od logů a supportu, event katalog, hodnotový funnel, bezpečná segmentace, akční dashboardy, retence dat, šablona a checklist.
 - **2026-10-14:** Přidána příloha BI o zastupitelnosti a provozním handoveru: mapa kritických znalostí, průběžné předávání, role vlastníka a zástupce, přístupy přes role, provozní kalendář, praktický handover test, offboarding, šablona a checklist.
 - **2026-10-14:** Přidána příloha BH o zálohách a restore cvičení: scénáře obnovy, rozdělení dat, RPO/RTO v lidské řeči, oddělené zálohy, pravidelný restore drill, runbook, produktový dopad obnovy, restore karta a checklist.
