@@ -12750,6 +12750,159 @@ Pokud proces nejde projít bez improvizace, není hotový. Improvizace je skvěl
 - [ ] Zjištěné mezery končí v backlogu, ne v poznámce „někdy opravit“.
 
 
+---
+
+## Příloha BT: Technický dluh a údržba bez hrdinského divadla
+
+Technický dluh není automaticky ostuda. Ostuda je tvářit se, že neexistuje, dokud nezačne blokovat vývoj, zhoršovat bezpečnost nebo dělat z každého deploye malou detektivku. Malý SaaS tým nepotřebuje dokonalý kód. Potřebuje systém, který rozlišuje mezi „ošklivé, ale bezpečné“, „nepohodlné, ale zvládnutelné“ a „tady nám hoří budoucí incident“.
+
+Technický dluh vzniká pokaždé, když tým vědomě zvolí rychlejší řešení, odloží refaktor, obejde chybějící proces nebo přidá integraci bez pořádného vlastnictví. To je někdy správná volba. Problém není kompromis. Problém je kompromis bez zápisu, bez návratového plánu a bez někoho, kdo ho za měsíc znovu otevře.
+
+**Codyho komentář:** Hrdinský refaktor po nocích zní na poradě romanticky asi tři minuty. Pak přijde realita: nikdo neví, proč se to přepisuje, zákazník stále čeká na opravu a nový kód má stejné slepé místo jako starý. Údržba má být rytmus, ne záchranná mise s pizzou ve dvě ráno.
+
+### 1) Dluh pojmenuj podle dopadu, ne podle estetického odporu
+
+„Ten kód je hnusný“ není dobrý záznam. Neříká, co hrozí, koho to bolí ani proč to má mít prioritu. Lepší je popsat dopad:
+
+- zpomaluje změny v checkoutu,
+- komplikuje mazání uživatelských dat,
+- zvyšuje riziko chyby při fakturaci,
+- schovává logiku oprávnění na třech místech,
+- blokuje upgrade knihovny,
+- nutí support ručně opravovat stav účtu.
+
+Každý záznam technického dluhu by měl odpovědět na otázku: „Co konkrétně se stane, když to necháme být?“ Pokud odpověď neexistuje, možná nejde o dluh, ale o osobní alergii na cizí styl kódu. I ta se dá řešit, ale nemá se tvářit jako strategické riziko.
+
+### 2) Rozděl dluh na provozní, produktový, bezpečnostní a privacy dluh
+
+Jeden velký seznam „tech debt“ rychle zhnije, protože míchá různé typy rizik. Rozděl ho podle toho, jaký problém vytváří.
+
+Praktické kategorie:
+
+- **Provozní dluh:** křehký deploy, nejasné alerty, ruční zásahy, chybějící runbook.
+- **Produktový dluh:** staré flow, které nejde jednoduše upravit, protože je svázané s interní výjimkou.
+- **Bezpečnostní dluh:** staré závislosti, slabé role, tajemství v nevhodném místě, příliš široké přístupy.
+- **Privacy dluh:** zbytečná data, nejasná retence, osobní údaje v logu, obtížný export nebo výmaz.
+- **Týmový dluh:** znalost jen v hlavě jednoho člověka, chybějící rozhodovací kontext, nepopsaný proces.
+
+Privacy dluh neodkládej jen proto, že „zatím nic nebouchlo“. Když se později objeví žádost o data, incident nebo audit dodavatele, ruční dohledávání bývá dražší než průběžná hygiena.
+
+### 3) Každému dluhu dej vlastníka a datum dalšího rozhodnutí
+
+Technický dluh bez vlastníka je jen stížnost v hezčím formátu. Vlastník nemusí všechno opravit osobně, ale musí držet kontext a vědět, kdy se položka znovu vyhodnotí.
+
+U každé položky si zapiš:
+
+- kdo ji vlastní,
+- jaký má dopad,
+- jak poznáš, že se zhoršuje,
+- co je minimální bezpečné řešení,
+- kdy se k ní tým vrátí,
+- jaká produktová práce s ní souvisí.
+
+Datum review je důležité hlavně u věcí, které se rozhodneš neřešit hned. „Ne teď“ je legitimní rozhodnutí. „Nikdy se k tomu nevrátíme, protože to zapadlo v backlogu pod štítek `later`“ je jen pomalý pád do archeologie.
+
+### 4) Neplánuj refaktor jako samostatnou víru. Navaž ho na změny hodnoty
+
+Velké samostatné refaktory jsou lákavé, protože vypadají čistě: teď zastavíme svět, přepíšeme modul a pak bude všechno krásné. V malém SaaS týmu to často nevyjde. Lepší je navazovat údržbu na konkrétní produktovou nebo provozní změnu.
+
+Příklady:
+
+- Upravuješ onboarding? Zjednoduš část kódu, která rozhoduje o prvních krocích uživatele.
+- Řešíš export dat? Vyčisti datové modely a názvy polí, které export používá.
+- Přidáváš nový tarif? Odděl pricing pravidla od UI textů a ručních výjimek.
+- Měníš supportní proces? Sjednoť stavové přechody účtu a auditní záznamy.
+- Připravuješ enterprise zákazníka? Zkontroluj role, logování, DPA dopady a přístupové vrstvy.
+
+Takhle se údržba neprodává jako „měsíc bez viditelného výstupu“, ale jako snížení rizika u práce, kterou tým stejně potřebuje udělat.
+
+### 5) Drž malý pravidelný údržbový rozpočet
+
+Pokud údržba nemá kapacitu, prohraje s každou funkcí, která má demo. Nastav jednoduché pravidlo: část kapacity každého týdne nebo sprintu patří hygieně. Nemusí to být přesné procento vytesané do kamene. Stačí opakovatelný závazek.
+
+Praktické varianty:
+
+- jedna údržbová položka v každém sprintu,
+- půlden týdně na provozní hygienu,
+- měsíční „risk cleanup“ pro bezpečnost a privacy,
+- jedna položka technického dluhu navázaná na každou větší produktovou změnu,
+- pravidlo, že incident vytvoří nejen opravu, ale i preventivní položku.
+
+Důležité je nepoužívat údržbu jako nekonečný koberec, pod který se zametou všechny nepříjemné práce. Údržbový rozpočet má mít viditelný výsledek: méně ruční práce, nižší riziko, rychlejší změny, jednodušší support nebo čistší data.
+
+### 6) Měř dluh nepřímo podle tření
+
+Technický dluh se špatně měří jedním číslem. Místo falešné přesnosti sleduj praktické signály tření:
+
+- kolik deployů vyžaduje ruční zásah,
+- kolik bugů se vrací do stejné části produktu,
+- jak dlouho trvá změnit text, tarif nebo oprávnění,
+- kolik support ticketů vzniká kvůli známé interní složitosti,
+- kolik incidentů souvisí se starou závislostí nebo ručním procesem,
+- kolik žádostí o data vyžaduje ad hoc vyhledávání.
+
+Privacy-first tým si hlídá i to, jestli technický dluh nevytváří nové datové stopy. Když kvůli debugování zapneš podrobnější logy, musí být jasné, co se loguje, na jak dlouho a kdo k tomu má přístup.
+
+### 7) Údržbu komunikuj jako obchodní ochranu, ne jako technickou náladu
+
+Zakladatel, obchodník nebo klient nemusí rozumět detailům architektury. Potřebuje rozumět dopadu. Proto překlápěj údržbu do obchodního jazyka:
+
+- „Zkrátíme čas úpravy tarifu ze tří dnů na půl dne.“
+- „Snížíme riziko, že support omylem uvidí data mimo svou roli.“
+- „Připravíme export dat tak, aby žádost zákazníka nebyla ruční maraton.“
+- „Odebereme ruční krok v deployi, který už dvakrát způsobil chybu.“
+- „Zjednodušíme onboardingovou logiku, aby šla bezpečně přidat nová cesta.“
+
+Tým pak neřeší „vývojáři chtějí čistší kód“, ale „produkt bude rychlejší, bezpečnější a méně závislý na hrdinech“.
+
+### Šablona karty technického dluhu
+
+## Technický dluh: [název]
+
+### Kontext
+
+- Kde problém vzniká:
+- Kdo ho dnes nejvíc cítí:
+- Jak dlouho o něm víme:
+
+### Kategorie
+
+- [ ] Provozní
+- [ ] Produktový
+- [ ] Bezpečnostní
+- [ ] Privacy
+- [ ] Týmový
+
+### Dopad
+
+- Co se stane, když to necháme být:
+- Jak poznáme, že se riziko zhoršuje:
+- Jaký zákaznický nebo obchodní proces to ovlivňuje:
+
+### Minimální bezpečné řešení
+
+- Nejmenší užitečný krok:
+- Co záměrně neřešíme teď:
+- Jak ověříme, že změna pomohla:
+
+### Vlastnictví a review
+
+- Vlastník:
+- Navázané produktové práce:
+- Datum dalšího rozhodnutí:
+
+### Checklist pro technický dluh a údržbu
+
+- [ ] Dluh je popsaný podle dopadu, ne podle dojmu z kódu.
+- [ ] Položka má kategorii: provozní, produktovou, bezpečnostní, privacy nebo týmovou.
+- [ ] Každá riziková položka má vlastníka a datum dalšího review.
+- [ ] Refaktor je navázaný na konkrétní produktovou, provozní nebo bezpečnostní hodnotu.
+- [ ] Tým má pravidelný údržbový rozpočet a viditelný výsledek.
+- [ ] Privacy dluh zahrnuje logy, retenci, exporty, výmazy a zbytečná data.
+- [ ] Měří se praktické tření: ruční zásahy, vracející se chyby, support zátěž a incidenty.
+- [ ] Údržba se komunikuje obchodním jazykem, ne jen technickým vkusem.
+
+
 ## Zdroje
 
 - Atlassian: [SLA vs. SLO vs. SLI](https://www.atlassian.com/incident-management/kpis/sla-vs-slo-vs-sli)
@@ -12862,6 +13015,7 @@ Pokud proces nejde projít bez improvizace, není hotový. Improvizace je skvěl
 
 ## Pracovní log
 
+- **2026-10-14:** Přidána příloha BT o technickém dluhu a údržbě bez hrdinského divadla: kategorizace dluhu podle dopadu, provozní/produktový/bezpečnostní/privacy/týmový dluh, vlastnictví, navázání refaktoru na hodnotu, údržbový rozpočet, měření tření, obchodní komunikace, šablona karty a checklist.
 - **2026-10-14:** Přidána příloha BS o žádostech subjektů údajů bez paniky: vstupní kanál, triáž práv, datová mapa, bezpečný export, praktický výmaz, evidence odpovědí, pravidelné testování, šablona karty žádosti a checklist s ověřenými zdroji Evropské komise a EDPB.
 - **2026-10-14:** Přidána příloha BR o klientském portálu a sdílení souborů bez datového blešího trhu: účel portálu, opakovatelná struktura, role a přístupy, schvalovací stavy, bezpečné předávání přístupů, retenční pravidla, agregované měření používání, šablona portálu a praktický checklist.
 - **2026-10-14:** Přidána příloha BQ o tajemstvích, API klíčích a rotaci bez paniky: inventář tajemství, oddělení prostředí, zákaz tajemství v Gitu/chatu/ticketech, role a přístupy, bezpečný postup rotace, incidentový mini playbook, lokální vývojový setup, šablona karty tajemství a checklist s ověřeným zdrojem OWASP.
