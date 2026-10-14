@@ -12085,6 +12085,177 @@ Na review se neptej jen „funguje to?“. Ptej se:
 - [ ] Tým jednou měsíčně projde otevřená review data a zruší rozhodnutí, která už neplatí.
 
 
+## Příloha BP: Partnerský marketing a doporučení bez sledovací mafie
+
+Partnerský marketing je lákavý, protože slibuje růst bez velkého reklamního rozpočtu. Doporučení od spokojeného zákazníka, integrátora, konzultanta nebo komunity může být silnější než kampaň, která pálí budget do publika, které o produkt nestojí. Jenže affiliate a referral systémy se často navrhují jako malá sledovací infrastruktura: osobní referral kódy v každém odkazu, cross-site cookies, profilování zdrojů, dlouhé retenční okno a dashboard, ve kterém se z obchodního vztahu stane podezřele přesný deník chování lidí.
+
+Privacy-first varianta nezačíná otázkou „jak poznáme každého návštěvníka“. Začíná otázkou „jak férově odměníme partnera a zároveň nebudeme sledovat víc, než je nutné“. To je rozdíl mezi udržitelným růstem a marketingovým křečkem v kolečku. Křeček je roztomilý, ale právní dokumentaci za tebe neudělá.
+
+### 1) Rozliš doporučení, partnerství a placenou propagaci
+
+Nejdřív pojmenuj vztah. Jiná pravidla potřebuje prosté doporučení od zákazníka, jiná partnerská integrace a jiná placený článek nebo affiliate odkaz.
+
+Praktické rozdělení:
+
+- **Zákaznické doporučení:** zákazník doporučí produkt známému, typicky bez veřejné kampaně.
+- **Referral program:** existuje odměna za přivedeného zákazníka, ale komunikace je stále osobní a omezená.
+- **Partnerská síť:** konzultanti, agentury nebo integrátoři doporučují produkt jako součást své práce.
+- **Affiliate obsah:** někdo veřejně publikuje obsah s odměnou za konverzi.
+- **Sponzorovaný obsah:** značka platí za prostor, článek, zmínku, video nebo newsletter.
+
+Tohle rozlišení není slovíčkaření. Ovlivňuje text odkazu, evidenci odměny, typ měření, disclosure pro návštěvníka i interní kontrolu kvality. Pokud všechno hodíš do jedné tabulky „partners“, skončíš s pravidly, která jsou příliš přísná pro běžné doporučení a příliš volná pro placenou propagaci.
+
+### 2) Odměňuj obchodní výsledek, ne špehování cesty
+
+Partnera většinou nepotřebuješ odměňovat za každou návštěvu. Potřebuješ vědět, jestli z doporučení vznikl kvalifikovaný lead, trial, objednávka nebo platící zákazník. Mezi kliknutím a nákupem není nutné stavět detektivní seriál na šest sezón.
+
+Privacy-first referral může fungovat takto:
+
+1. Partner má veřejný profil nebo jednoduchý kód, například `partner=agentura-novak`.
+2. Landing page si zdroj uloží jen do dočasného, účelového kontextu nebo jej předvyplní do formuláře.
+3. Uživatel při odeslání poptávky vidí, že poptávka bude přiřazená partnerovi.
+4. Interní systém eviduje zdroj u leadu nebo objednávky, ne kompletní historii prohlížení.
+5. Po vyúčtování se nepotřebné pomocné údaje mažou podle retenčního pravidla.
+
+Když potřebuješ atribuci delší než jedna návštěva, zdůvodni ji v mapě dat. Nestačí „marketing chce vědět všechno“. To není účel, to je nálada.
+
+### 3) Používej čitelné odkazy místo osobních stop
+
+Referral odkaz nemá obsahovat e-mail, telefon, jméno konkrétního zákazníka ani interní ID obchodníka. Dobrá URL je čitelná, krátká a neprozrazuje zbytečné osobní údaje.
+
+Lepší příklady:
+
+- `https://example.cz/?partner=agenturax`
+- `https://example.cz/demo?ref=konference-brno-2026`
+- `https://example.cz/partneri/agenturax`
+
+Horší příklady:
+
+- `?ref=jan.novak@example.cz`
+- `?customer_id=483920`
+- `?sales_rep=petra&company=klient-s-rizikovym-projektem`
+- dlouhý tracking parametr z reklamní sítě, který nikdo neumí vysvětlit.
+
+U kampaní drž stejnou disciplínu jako u UTM: parametr je pro agregované vyhodnocení, ne pro pašování osobních údajů v URL. URL se ukládají v logách, historii prohlížeče, analytice, support screenshotech a občas i v e-mailových přeposílkách. Jinými slovy: když do URL napíšeš tajemství, právě jsi ho nalepil na billboard. Gratuluju, marketing má venku outdoor.
+
+### 4) Placené odkazy označ technicky i lidsky
+
+Pokud je odkaz placený, sponzorovaný nebo vznikl jako součást odměny, nestačí, aby o tom věděl jen obchodník v CRM. Návštěvník má rozumět vztahu mezi autorem obsahu a značkou. U webových odkazů navíc Google Search Central doporučuje kvalifikovat placené odkazy atributem `rel="sponsored"`; `nofollow` zůstává použitelný, ale `sponsored` je pro tento účel vhodnější ([Google Search Central: Qualify your outbound links](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links)).
+
+Prakticky:
+
+- sponzorovaný článek označ viditelně v úvodu,
+- affiliate odkaz označ u odkazu nebo v krátké poznámce u sekce,
+- placené odkazy v HTML označ `rel="sponsored"`, případně kombinuj s `nofollow`, pokud to dává smysl pro tvůj CMS,
+- partnerům dej jednoduchý text disclosure, který mohou použít,
+- nepředstírej nezávislou recenzi, pokud autor dostává odměnu.
+
+**Codyho komentář:** Transparentní disclosure nesnižuje důvěru. Snižuje počet lidí, kteří se později cítí podvedení. To je dobrý obchod. A taky méně e-mailů začínajících „můžete mi vysvětlit…“, což je metrika, kterou by měl někdo konečně dát do dashboardu štěstí.
+
+### 5) Partnerům dej pravidla pro data, ne jen provizní tabulku
+
+Partner není jen zdroj leadů. Je to člověk nebo firma, která může pracovat s tvou značkou, argumenty, cenami a někdy i osobními údaji zákazníků. Proto potřebuje jasná pravidla.
+
+Minimální partnerský balíček:
+
+- co smí partner slibovat a co nesmí,
+- jak má označovat placený nebo odměňovaný vztah,
+- jaké údaje smí sbírat před předáním leadu,
+- kam má lead bezpečně předat,
+- jak dlouho smí držet poznámky a exporty,
+- co dělat, když zákazník chce smazání nebo opravu údajů,
+- koho kontaktovat při incidentu nebo špatně odeslaném e-mailu.
+
+U menšího programu stačí jedna stránka pravidel. U větší partnerské sítě přidej krátkou smlouvu, DPA tam, kde partner zpracovává osobní údaje za tebe, a pravidelné review aktivních partnerů. Nejde o byrokracii pro radost z razítek. Jde o to, aby růstový kanál nebyl zároveň bezpečnostní díra s provizí.
+
+### 6) Vyhodnocuj kvalitu, ne jen objem
+
+Affiliate programy svádí k žebříčkům podle počtu kliků nebo leadů. To je krátkozraké. Malý SaaS potřebuje měřit, jestli partner přivádí správné zákazníky, ne jen provoz.
+
+Sleduj agregovaně:
+
+- počet kvalifikovaných leadů podle partnera,
+- konverzi lead → demo → zákazník,
+- průměrnou velikost účtu nebo tarif,
+- churn po prvních 30/90 dnech,
+- počet supportních dotazů po onboardingu,
+- počet reklamací nebo nekvalitních očekávání.
+
+Když partner přivádí hodně leadů, kteří nechápou produkt, není to úspěch. Je to drahý onboardingový problém převlečený za marketing. Lepší je mít pět doporučení od partnera, který rozumí tvému ideálnímu zákazníkovi, než padesát kontaktů z článku, který slibuje kouzelnou automatizaci bez práce.
+
+### 7) Ukončení partnerství navrhni předem
+
+Každý program potřebuje exit pravidla. Partner odejde, změní zaměření, prodá firmu, začne propagovat konkurenci, nebo prostě přestane dodržovat pravidla. To není drama. Drama je, když po dvou letech nikdo neví, kde všude běží staré odkazy, jak dlouho platí provize a kdo má přístup do partnerského portálu.
+
+Předem si napiš:
+
+- kdy partnerství končí automaticky,
+- jak se vypínají kódy a odkazy,
+- jak dlouho se doplácí rozpracované provize,
+- kdo maže přístupy do portálu a sdílených složek,
+- co se děje s leady v otevřené pipeline,
+- jak se archivuje smlouva a vyúčtování.
+
+Privacy-first ukončení znamená hlavně úklid přístupů, exportů a starých dat. Bez toho se partnerský program mění v muzeum zapomenutých účtů. Hezké pro archeology, horší pro bezpečnost.
+
+### Šablona partnerské karty
+
+## Partner: [název / osoba / firma]
+
+### Typ vztahu
+
+- Kategorie: zákaznické doporučení / referral / partner / affiliate / sponzorovaný obsah
+- Odměna: žádná / fixní / procento / kredit / individuální dohoda
+- Vlastník vztahu:
+- Datum začátku:
+- Datum review:
+
+### Veřejná komunikace
+
+- Povolený popis produktu:
+- Zakázané sliby:
+- Disclosure text:
+- Povolené materiály:
+- Odkazy a parametry:
+
+### Data
+
+- Jaká data partner sbírá:
+- Jak data předává:
+- Kdo je správce/zpracovatel:
+- Retence pomocných dat:
+- Incidentní kontakt:
+
+### Měření
+
+- Primární metrika:
+- Kvalifikační kritéria leadu:
+- Vyúčtovací pravidlo:
+- Guardrail metriky:
+- Kontrola kvality:
+
+### Ukončení
+
+- Podmínky ukončení:
+- Vypnutí kódů/odkazů:
+- Doplacení provizí:
+- Odebrání přístupů:
+- Archivace dokumentů:
+
+### Checklist pro partnerský marketing
+
+- [ ] Víme, zda jde o doporučení, referral, partnerství, affiliate nebo sponzorovaný obsah.
+- [ ] Referral URL neobsahuje e-mail, jméno, zákaznické ID ani jiné osobní údaje.
+- [ ] Uživatel rozumí tomu, že poptávka nebo nákup může být přiřazen partnerovi.
+- [ ] Placené a sponzorované odkazy jsou označené lidsky i technicky.
+- [ ] Partner má jednoduchá pravidla pro sliby, disclosure, sběr dat a předání leadů.
+- [ ] Měření hodnotí kvalitu zákazníků, ne jen počet kliků nebo formulářů.
+- [ ] Provize se vyúčtovávají z obchodního výsledku, který umíme obhájit.
+- [ ] Pomocná tracking data mají retenční pravidlo a vlastníka.
+- [ ] Přístupy do partnerských nástrojů se pravidelně kontrolují.
+- [ ] Existuje postup pro ukončení partnerství, vypnutí kódů a úklid dat.
+
+
 ## Zdroje
 
 - Atlassian: [SLA vs. SLO vs. SLI](https://www.atlassian.com/incident-management/kpis/sla-vs-slo-vs-sli)
@@ -12117,6 +12288,7 @@ Na review se neptej jen „funguje to?“. Ptej se:
 - EUR-Lex: [Directive 2002/58/EC on privacy and electronic communications](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02002L0058-20091219)
 - FIDO Alliance: [Passkeys](https://fidoalliance.org/passkeys/)
 - Finanční správa: [Daň z přidané hodnoty](https://financnisprava.gov.cz/cs/dane/dane/dan-z-pridane-hodnoty)
+- Google Search Central: [Qualify your outbound links](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links)
 - Google SRE: [Service Level Objectives](https://sre.google/resources/book-update/slos/)
 - NCSC: [Password administration for system owners](https://www.ncsc.gov.uk/collection/passwords)
 - NIST: [SP 800-34 Rev. 1 — Contingency Planning Guide for Federal Information Systems](https://csrc.nist.gov/pubs/sp/800/34/r1/final)
@@ -12195,6 +12367,7 @@ Na review se neptej jen „funguje to?“. Ptej se:
 
 ## Pracovní log
 
+- **2026-10-14:** Přidána příloha BP o partnerském marketingu a doporučeních bez sledovací mafie: typy vztahů, privacy-first atribuce, bezpečné referral odkazy, označování placených odkazů, pravidla pro partnery, měření kvality, ukončení partnerství, šablona partnerské karty a checklist.
 - **2026-10-14:** Přidána příloha BO o rozhodovacím logu a produktové paměti: kdy zapisovat rozhodnutí, jak zachytit varianty a trade-offy, privacy dopady, verzování rozhodnutí, propojení s backlogem, review rytmus, šablona a checklist.
 - **2026-10-14:** Přidána příloha BN o SLA, SLO a supportních prioritách: rozdíl mezi SLI/SLO/SLA, prioritizace podle dopadu, měření zákaznických cest, privacy-first pravidla pro důkazy, status page, měsíční review a praktická šablona.
 - **2026-10-14:** Přidána příloha BM o zrušení, downgrade a win-backu bez retenčních pastí: rozlišení pauzy/downgrade/zrušení, dobrovolný odchodový feedback, férová retenční nabídka, dopady před potvrzením, export a mazání, win-back bez pronásledování, šablona odchodové karty a checklist s ověřeným zdrojem EDPB k deceptive design patterns.
