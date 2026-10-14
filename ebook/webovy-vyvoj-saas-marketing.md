@@ -10796,6 +10796,231 @@ Před odchodem zkontroluj:
 - [ ] Offboarding kontroluje i tokeny, integrace a znalostní dluh.
 - [ ] Změny po testu končí v dokumentaci nebo backlogu, ne v chatu.
 
+## Příloha BJ: Produktová analytika bez behaviorálního labyrintu
+
+Produktová analytika má pomáhat týmu pochopit, jestli produkt doručuje hodnotu. Nemá z aplikace dělat detektivní seriál, kde každý klik dostane vlastní složku, razítko a podezřelý profil. U malého SaaS týmu je největší riziko často opačné než „máme málo dat“: tým sbírá hodně událostí, ale neumí podle nich udělat žádné rozhodnutí.
+
+Privacy-first produktová analytika začíná jednoduchou otázkou: **jaké rozhodnutí bude lepší díky této metrice?** Pokud odpověď neexistuje, event do produktu nepatří. GDPR staví zpracování na principech jako účelové omezení, minimalizace dat a omezení uložení; EDPB je shrnuje v přehledu základních principů ([EDPB: Basic principles](https://www.edpb.europa.eu/topics/key-gdpr-concepts/basic-principles_en)). CNIL u analytiky webů a aplikací prakticky připomíná, že i měření návštěvnosti má být omezené, srozumitelné a nastavené tak, aby zbytečně nesledovalo osoby napříč kontexty ([CNIL: Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)).
+
+> **Codyho komentář:** Dobrá produktová analytika je jako palubní deska auta. Ukazuje rychlost, teplotu a palivo. Nečte řidiči deník, neposílá jeho trasu třiceti dodavatelům a netvrdí, že bez toho nejde řídit.
+
+### 1) Měř rozhodnutí, ne zvědavost
+
+Každý event musí mít vlastníka a rozhodovací otázku. Ne „chceme vědět, co lidi dělají“, ale konkrétně:
+
+- Pomáhá nový onboarding lidem dokončit první hodnotnou akci?
+- Používají zákazníci funkci, kvůli které jsme zvedli tarif?
+- Kde se lidé zaseknou před pozváním kolegy?
+- Má nový import méně chyb než starý postup?
+- Vrací se placené účty k reportu, který slibujeme v prodejním materiálu?
+
+Slabý event:
+
+```text
+button_clicked
+```
+
+Lepší event:
+
+```text
+project_invite_started
+project_invite_completed
+project_invite_failed
+```
+
+Ještě lepší je přidat rozhodovací kontext bez osobních údajů:
+
+```text
+project_invite_failed
+- source: onboarding_checklist
+- error_type: invalid_role
+- plan_tier: team
+```
+
+Nevkládej do eventů e-mail, jméno firmy, celé URL s query parametry, texty z formulářů ani volné poznámky. Pokud potřebuješ spojit události do produktové analýzy, používej interní pseudonymní identifikátor a nastav jasnou retenci. Pokud stačí agregace po účtu, tarifu, verzi nebo kanálu, nepřidávej user-level stopu jen proto, že to knihovna umí jedním řádkem.
+
+### 2) Odděl produktovou analytiku od auditních logů a supportu
+
+Jedna častá chyba: tým chce jedním systémem řešit produktové metriky, bezpečnostní audit, support debugging i marketingovou atribuci. Výsledek je datová polévka. Každý typ záznamu má jiný účel, retenci a přístup.
+
+Praktické rozdělení:
+
+- **Produktová analytika:** agregované používání funkcí, aktivace, retence, experimenty.
+- **Auditní log:** kdo provedl bezpečnostně důležitou akci, například změnu role nebo export dat.
+- **Technický log:** chyby, request ID, výkon, stav integrací.
+- **Support kontext:** informace nutné k vyřešení konkrétního ticketu.
+- **Marketingová analytika:** zdroj návštěvy, kampaň, landing page a konverzní akce.
+
+Produktový analytik nepotřebuje vidět obsah support ticketů. Marketer nepotřebuje auditní záznamy změn rolí. Vývojář při ladění chyby nepotřebuje export všech eventů daného uživatele za rok. Oddělení účelů snižuje riziko, zjednodušuje přístupy a dělá reporty čitelnější.
+
+### 3) Udělej event katalog jako produktový artefakt
+
+Eventy nejsou vedlejší efekt kódu. Jsou veřejná smlouva mezi produktem, vývojem a reportingem. Bez katalogu se názvy časem rozjedou:
+
+```text
+signup_done
+sign_up_completed
+registration_success
+account_created
+```
+
+Pak tým stráví půl dne debatou, jestli „registrace“ znamená vytvořený účet, ověřený e-mail, první login nebo první platbu. Tedy analytika krásně splní svůj účel: zvýší počet meetingů. Bravo.
+
+Event katalog má pro každý event obsahovat:
+
+- název eventu,
+- účel a rozhodovací otázku,
+- vlastníka,
+- místo v produktu,
+- povolené vlastnosti,
+- zakázané vlastnosti,
+- retenční pravidlo,
+- rizikovou úroveň,
+- odkaz na dashboard nebo report,
+- datum posledního review.
+
+Názvy drž ve tvaru `podstatne_jmeno_sloveso` nebo `objekt_akce_stav`, ale hlavně konzistentně. Například:
+
+```text
+workspace_created
+report_export_started
+report_export_completed
+report_export_failed
+billing_plan_changed
+integration_connected
+integration_disconnected
+```
+
+Vlastnosti pojmenovávej jako stabilní slovník, ne jako kopii UI textů. `plan_tier: team` přežije redesign pricingu lépe než `button_label: Chci týmový tarif`.
+
+### 4) Funnel navrhni podle hodnoty, ne podle obrazovek
+
+Funnel podle obrazovek často vypadá elegantně, ale neodpovídá tomu, co zákazník považuje za pokrok. Produktový funnel má sledovat posun k hodnotě.
+
+Příklad pro B2B SaaS:
+
+1. účet vytvořen,
+2. workspace založen,
+3. první projekt vytvořen,
+4. data importována,
+5. první report vygenerován,
+6. kolega pozván,
+7. report sdílen se stakeholderem,
+8. účet přešel na placený tarif.
+
+Tohle je lepší než měřit „navštívil dashboard“, „klikl na menu“ a „otevřel modal“. Obrazovkové eventy mají smysl při UX diagnostice, ale jako hlavní metrika aktivace jsou slabé. Člověk může otevřít dashboard desetkrát a pořád nedostat žádnou hodnotu. Naopak jeden dokončený import může znamenat, že produkt právě získal šanci přežít první týden.
+
+U každého kroku si napiš:
+
+- proč tento krok znamená hodnotu,
+- jaké alternativní cesty existují,
+- jak dlouho má typicky trvat,
+- co je zdravý výsledek pro nový účet,
+- jaký signál znamená problém.
+
+### 5) Segmentace stačí hrubá a produktová
+
+Segmentace je užitečná, když vysvětluje rozdíl v chování. Není užitečná, když z lidí dělá sbírku nálepek. V malém SaaS obvykle stačí několik bezpečných segmentů:
+
+- tarif nebo plán,
+- typ účtu: trial, placený, interní testovací,
+- velikost workspace v hrubých kategoriích,
+- zdroj aktivace: demo, self-serve, migrace,
+- jazyková varianta,
+- verze produktu nebo rollout skupina,
+- typ integrace bez identifikace konkrétního zákazníka.
+
+Vyhýbej se segmentům podle citlivých vlastností, individuálního chování mimo produkt, přesné lokace nebo profilování napříč weby. Pokud neumíš vysvětlit, proč segment pomáhá konkrétnímu produktovému rozhodnutí, smaž ho. Segmentace má odpovídat účelu, ne touze mít dashboard jako kosmická loď.
+
+### 6) Dashboard musí vést k akci
+
+Dashboard bez rozhodovacího rytmu je akvárium s grafy. Hezky se na něj kouká, ale firma podle něj nežije. Každý dashboard rozděl na tři vrstvy:
+
+- **Zdraví produktu:** aktivace, retence, placené účty, chybovost klíčových cest.
+- **Aktuální práce:** metriky k rozpracované změně, launchi nebo experimentu.
+- **Diagnostika:** detailnější řezy, které tým otevře až při hledání příčiny.
+
+Na úvodní obrazovce reportu nemá být dvacet grafů. Stačí čtyři až šest metrik, u kterých tým ví:
+
+- kdo je sleduje,
+- jak často se kontrolují,
+- jaký práh spouští akci,
+- jaké rozhodnutí se podle nich dělá,
+- kdy se metrika vyřadí nebo upraví.
+
+Příklad provozního rytmu:
+
+- pondělí: kontrola aktivace a chyb prvního týdne,
+- středa: review aktuálního rolloutu,
+- pátek: krátké vyhodnocení support signálů a produktových metrik,
+- měsíčně: revize event katalogu, dashboardů a retence dat.
+
+### 7) Retence analytických dat má být kratší než ambice týmu
+
+Analytická data často stárnou rychleji, než si tým připouští. Eventy z verze produktu před dvěma lety mohou být pro dnešní rozhodování zavádějící. Nastav proto retenční vrstvy:
+
+- **Raw eventy:** krátká retence pro ladění a ověření měření, například týdny až několik měsíců podle rizika.
+- **Agregace:** delší retence pro trendy, například měsíční aktivace nebo retenční kohorty.
+- **Reporty:** uchovávej závěry a rozhodnutí, ne nekonečné detaily.
+- **Exporty:** časově omezené, šifrované a s vlastníkem.
+
+Pokud někdo chce prodloužit retenci, musí říct proč. „Možná se to bude hodit“ není důvod. To je datový ekvivalent šuplíku s kabely, kde je někde možná nabíječka k telefonu z roku 2014.
+
+### Šablona produktové analytické karty
+
+```markdown
+## Produktová analytika: [oblast / funkce / rozhodnutí]
+
+### Rozhodnutí
+- Jaké rozhodnutí má analytika podpořit:
+- Kdo rozhodnutí dělá:
+- Jak často se vyhodnocuje:
+
+### Eventy
+- Primární eventy:
+- Pomocné eventy:
+- Zakázané vlastnosti:
+- Pseudonymní identifikátory:
+
+### Segmenty
+- Povolené segmenty:
+- Nepovolené segmenty:
+- Důvod segmentace:
+
+### Dashboard
+- Hlavní metriky:
+- Akční prahy:
+- Vlastník dashboardu:
+- Datum posledního review:
+
+### Retence a přístup
+- Raw eventy:
+- Agregace:
+- Exporty:
+- Kdo má přístup:
+- Kdy se data mažou nebo agregují:
+
+### Privacy kontrola
+- Obsahují eventy osobní údaje?
+- Obsahují URL citlivé parametry?
+- Je účel vysvětlený v dokumentaci?
+- Existuje méně invazivní varianta měření?
+```
+
+### Checklist pro produktovou analytiku
+
+- [ ] Každý event má rozhodovací otázku a vlastníka.
+- [ ] Eventy neobsahují e-maily, jména, volné texty, celé payloady ani citlivé URL parametry.
+- [ ] Produktová analytika je oddělená od auditních logů, technických logů a support dat.
+- [ ] Existuje event katalog se schválenými názvy a vlastnostmi.
+- [ ] Funnel sleduje cestu k hodnotě, ne jen návštěvy obrazovek.
+- [ ] Segmenty jsou hrubé, produktové a obhajitelné účelem.
+- [ ] Dashboard má akční prahy a pravidelný review rytmus.
+- [ ] Raw eventy mají omezenou retenci a agregace mají jasný účel.
+- [ ] Exporty analytických dat mají vlastníka, expiraci a bezpečné uložení.
+- [ ] Měsíční review kontroluje, které eventy zrušit, sloučit nebo přepsat.
+
+
 ## Zdroje
 
 - CNIL: [Use analytics on your websites and applications](https://www.cnil.fr/en/sheet-ndeg16-use-analytics-your-websites-and-applications)
@@ -10903,6 +11128,7 @@ Před odchodem zkontroluj:
 
 ## Pracovní log
 
+- **2026-10-14:** Přidána příloha BJ o produktové analytice bez behaviorálního labyrintu: rozhodovací eventy, oddělení analytiky od logů a supportu, event katalog, hodnotový funnel, bezpečná segmentace, akční dashboardy, retence dat, šablona a checklist.
 - **2026-10-14:** Přidána příloha BI o zastupitelnosti a provozním handoveru: mapa kritických znalostí, průběžné předávání, role vlastníka a zástupce, přístupy přes role, provozní kalendář, praktický handover test, offboarding, šablona a checklist.
 - **2026-10-14:** Přidána příloha BH o zálohách a restore cvičení: scénáře obnovy, rozdělení dat, RPO/RTO v lidské řeči, oddělené zálohy, pravidelný restore drill, runbook, produktový dopad obnovy, restore karta a checklist.
 - **2026-10-14:** Přidána příloha BG o nákladové disciplíně SaaS: mapování nákladů podle hodnoty, jednotkové náklady, limity, AI guardraily, rozpočtové alarmy, rušení nástrojů a šablona nákladové karty.
